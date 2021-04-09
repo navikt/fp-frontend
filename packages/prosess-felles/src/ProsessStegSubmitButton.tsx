@@ -2,9 +2,11 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
-import { ariaCheck, isRequiredMessage } from '@fpsak-frontend/utils';
+import { ariaCheck, isRequiredMessage, createIntl } from '@fpsak-frontend/utils';
 
-import getPackageIntl from '../i18n/getPackageIntl';
+import messages from '../i18n/nb_NO.json';
+
+const intl = createIntl(messages);
 
 const isDisabled = (isDirty: boolean, isSubmitting: boolean, isSubmittable: boolean, hasEmptyRequiredFields: boolean): boolean => {
   if ((!isDirty && !isSubmittable) || isSubmitting) {
@@ -52,7 +54,7 @@ export const ProsessStegSubmitButton: FunctionComponent<PureOwnProps & MappedOwn
         disabled={isDisabled(isDirty, isSubmitting, isSubmittable, hasEmptyRequiredFields)}
         onClick={ariaCheck}
       >
-        {text || getPackageIntl().formatMessage({ id: 'SubmitButton.ConfirmInformation' })}
+        {text || intl.formatMessage({ id: 'SubmitButton.ConfirmInformation' })}
       </Hovedknapp>
     )}
   </>

@@ -4,6 +4,7 @@ import sinon from 'sinon';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import {
   CheckboxField, DecimalField, PeriodpickerField, SelectField, TextAreaField,
 } from '@fpsak-frontend/form';
@@ -11,7 +12,7 @@ import { FaktaArbeidsforhold, Personoversikt } from '@fpsak-frontend/types';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 
 import { NyPeriode, UttakNyPeriode } from './UttakNyPeriode';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-uttak';
+import messages from '../../i18n/nb_NO.json';
 
 const periodeTyper = [{ kode: 'FELLESPERIODE', navn: 'Fellesperioden', kodeverk: 'UTTAK_PERIODE_TYPE' },
   { kode: 'MØDREKVOTE', navn: 'Mødrekvoten', kodeverk: 'UTTAK_PERIODE_TYPE' },
@@ -94,7 +95,7 @@ describe('<UttakNyPeriode>', () => {
       behandlingVersjon={2}
       personoversikt={{} as Personoversikt}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
 
     const title = wrapper.find(FormattedMessage).first();
     expect(title.prop('id')).toBe('UttakInfoPanel.NyPeriode');
@@ -147,7 +148,7 @@ describe('<UttakNyPeriode>', () => {
       behandlingVersjon={2}
       personoversikt={{} as Personoversikt}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
 
     const weeksAndDays = wrapper.find(FormattedMessage).at(1);
     expect(weeksAndDays.prop('id')).toEqual('UttakInfoPanel.AntallFlereDagerOgFlereUker');
@@ -178,7 +179,7 @@ describe('<UttakNyPeriode>', () => {
       behandlingVersjon={2}
       personoversikt={{} as Personoversikt}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
     wrapper.setProps({
       // @ts-ignore Fiks
       nyPeriode: {
@@ -210,7 +211,7 @@ describe('<UttakNyPeriode>', () => {
       behandlingVersjon={2}
       personoversikt={{} as Personoversikt}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
     wrapper.setProps({
       // @ts-ignore Fiks
       nyPeriode: {
@@ -242,7 +243,7 @@ describe('<UttakNyPeriode>', () => {
       behandlingVersjon={2}
       personoversikt={{} as Personoversikt}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
     wrapper.setProps({
       // @ts-ignore Fiks
       nyPeriode: {
@@ -274,7 +275,7 @@ describe('<UttakNyPeriode>', () => {
       behandlingVersjon={2}
       personoversikt={{} as Personoversikt}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
     wrapper.setProps({
       // @ts-ignore Fiks
       nyPeriode: {
@@ -306,7 +307,7 @@ describe('<UttakNyPeriode>', () => {
       behandlingVersjon={2}
       personoversikt={{} as Personoversikt}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
     wrapper.setProps({
       // @ts-ignore Fiks
       nyPeriode: {

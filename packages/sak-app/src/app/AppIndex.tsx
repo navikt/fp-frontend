@@ -11,13 +11,11 @@ import { useRestApiError } from '@fpsak-frontend/rest-api-hooks';
 import EventType from '@fpsak-frontend/rest-api/src/requestApi/eventType';
 import { ForbiddenPage, UnauthorizedPage } from '@fpsak-frontend/sak-infosider';
 import { parseQueryString } from '@fpsak-frontend/utils';
-import { NavAnsatt } from '@fpsak-frontend/types';
 
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 import ErrorBoundary from './ErrorBoundary';
 import { redirectToLogin } from './paths';
 import AppConfigResolver from './AppConfigResolver';
-import LanguageProvider from './LanguageProvider';
 import Home from './components/Home';
 import Dekorator from './components/Dekorator';
 
@@ -43,7 +41,7 @@ const AppIndex: FunctionComponent<OwnProps> = ({
   const [headerHeight, setHeaderHeight] = useState(0);
   const [crashMessage, setCrashMessage] = useState<string>();
 
-  const navAnsatt = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
+  const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
 
   useEffect(() => {
     // todo sjekke om dette er beste stedet å sette dette for sentry
@@ -90,7 +88,7 @@ const AppIndex: FunctionComponent<OwnProps> = ({
   return (
     <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} doNotShowErrorPage>
       <AppConfigResolver>
-        <LanguageProvider>
+        <>
           <Dekorator
             hideErrorMessages={hasForbiddenOrUnauthorizedErrors}
             queryStrings={queryStrings}
@@ -100,7 +98,7 @@ const AppIndex: FunctionComponent<OwnProps> = ({
           {shouldRenderHome && (<Home headerHeight={headerHeight} />)}
           {forbiddenErrors.length > 0 && (<ForbiddenPage />)}
           {unauthorizedErrors.length > 0 && (redirectToLogin() || <UnauthorizedPage />)}
-        </LanguageProvider>
+        </>
       </AppConfigResolver>
     </ErrorBoundary>
   );

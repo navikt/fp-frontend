@@ -1,48 +1,27 @@
-import React, {
-  FunctionComponent, useEffect, useState, useCallback,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
-  Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
+  BehandlingContainer, StandardBehandlingProps, StandardPropsProvider, BehandlingPaVent, ReduxFormStateCleaner,
+  useInitRequestApi, useLagreAksjonspunkt, useBehandling, useInitBehandlingHandlinger,
 } from '@fpsak-frontend/behandling-felles';
-import {
-  Fagsak, Behandling, Kodeverk, KodeverkMedNavn,
-} from '@fpsak-frontend/types';
-import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
+import { Kodeverk } from '@fpsak-frontend/types';
 
-import AnkePaneler from './components/AnkePaneler';
-import FetchedData from './types/fetchedDataTsType';
-import { restApiAnkeHooks, requestAnkeApi, AnkeBehandlingApiKeys } from './data/ankeBehandlingApi';
-
-const ankeData = [
-  { key: AnkeBehandlingApiKeys.AKSJONSPUNKTER },
-  { key: AnkeBehandlingApiKeys.VILKAR },
-  { key: AnkeBehandlingApiKeys.ANKE_VURDERING },
-];
+import { requestAnkeApi, AnkeBehandlingApiKeys } from './data/ankeBehandlingApi';
+import AnkeBehandlingProsessStegInitPanel from './prosessPaneler/AnkeBehandlingProsessStegInitPanel';
+import AnkeResultatProsessStegInitPanel from './prosessPaneler/AnkeResultatProsessStegInitPanel';
+import AnkeTrygderettsbehandlingProsessStegInitPanel from './prosessPaneler/AnkeTrygderettsbehandlingProsessStegInitPanel';
 
 interface OwnProps {
-  behandlingId: number;
-  fagsak: Fagsak;
-  rettigheter: Rettigheter;
-  kodeverk: {[key: string]: KodeverkMedNavn[]};
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
-  valgtProsessSteg?: string;
-  oppdaterBehandlingVersjon: (versjon: number) => void;
-  behandlingEventHandler: {
-    setHandler: (events: {[key: string]: (params: any) => Promise<any> }) => void;
-    clear: () => void;
-  };
-  opneSokeside: () => void;
   alleBehandlinger: {
     id: number;
     type: Kodeverk;
     avsluttet?: string;
   }[];
-  setRequestPendingMessage: (message: string) => void;
 }
 
-const BehandlingAnkeIndex: FunctionComponent<OwnProps> = ({
+const BehandlingAnkeIndex: FunctionComponent<OwnProps & StandardBehandlingProps> = ({
   behandlingEventHandler,
   behandlingId,
   oppdaterBehandlingVersjon,
@@ -51,58 +30,26 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps> = ({
   rettigheter,
   oppdaterProsessStegOgFaktaPanelIUrl,
   valgtProsessSteg,
+  valgtFaktaSteg,
   opneSokeside,
   alleBehandlinger,
   setRequestPendingMessage,
 }) => {
-  const [nyOgForrigeBehandling, setBehandlinger] = useState<{ current?: Behandling; previous?: Behandling }>({ current: undefined, previous: undefined });
-  const behandling = nyOgForrigeBehandling.current;
-  const forrigeBehandling = nyOgForrigeBehandling.previous;
+  useInitRequestApi(requestAnkeApi, setRequestPendingMessage);
 
-  const setBehandling = useCallback((nyBehandling) => {
-    requestAnkeApi.resetCache();
-    requestAnkeApi.setLinks(nyBehandling.links);
-    setBehandlinger((prevState) => ({ current: nyBehandling, previous: prevState.current }));
-  }, []);
+  const {
+    behandling, behandlingState, hentBehandling, setBehandling,
+  } = useBehandling(
+    requestAnkeApi, AnkeBehandlingApiKeys.BEHANDLING_ANKE, behandlingId,
+  );
 
-  const { startRequest: hentBehandling, data: behandlingRes } = restApiAnkeHooks
-    .useRestApiRunner<Behandling>(AnkeBehandlingApiKeys.BEHANDLING_ANKE);
-  useSetBehandlingVedEndring(behandlingRes, setBehandling);
+  const { lagreAksjonspunkter } = useLagreAksjonspunkt(
+    requestAnkeApi, setBehandling, AnkeBehandlingApiKeys.SAVE_AKSJONSPUNKT,
+  );
 
-  const { addErrorMessage } = useRestApiErrorDispatcher();
+  useInitBehandlingHandlinger(requestAnkeApi, AnkeBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);
 
-  const { startRequest: nyBehandlendeEnhet } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET);
-  const { startRequest: settBehandlingPaVent } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeys.BEHANDLING_ON_HOLD);
-  const { startRequest: taBehandlingAvVent } = restApiAnkeHooks.useRestApiRunner<Behandling>(AnkeBehandlingApiKeys.RESUME_BEHANDLING);
-  const { startRequest: henleggBehandling } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeys.HENLEGG_BEHANDLING);
-  const { startRequest: settPaVent } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeys.UPDATE_ON_HOLD);
-
-  useEffect(() => {
-    behandlingEventHandler.setHandler({
-      endreBehandlendeEnhet: (params) => nyBehandlendeEnhet(params)
-        .then(() => hentBehandling({ behandlingId }, true)),
-      settBehandlingPaVent: (params) => settBehandlingPaVent(params)
-        .then(() => hentBehandling({ behandlingId }, true)),
-      taBehandlingAvVent: (params) => taBehandlingAvVent(params)
-        .then((behandlingResTaAvVent) => setBehandling(behandlingResTaAvVent)),
-      henleggBehandling: (params) => henleggBehandling(params),
-    });
-
-    requestAnkeApi.setRequestPendingHandler(setRequestPendingMessage);
-    requestAnkeApi.setAddErrorMessageHandler(addErrorMessage);
-
-    hentBehandling({ behandlingId }, false);
-
-    return () => {
-      behandlingEventHandler.clear();
-    };
-  }, []);
-
-  const { data, state } = restApiAnkeHooks.useMultipleRestApi<FetchedData>(ankeData,
-    { keepData: true, updateTriggers: [behandling?.versjon], suspendRequest: !behandling });
-
-  const hasNotFinished = state === RestApiState.LOADING || state === RestApiState.NOT_STARTED;
-  if (!behandling || (hasNotFinished && data === undefined)) {
+  if (!behandling) {
     return <LoadingPanel />;
   }
 
@@ -110,23 +57,51 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps> = ({
     <>
       <ReduxFormStateCleaner
         behandlingId={behandling.id}
-        behandlingVersjon={hasNotFinished ? forrigeBehandling.versjon : behandling.versjon}
+        behandlingVersjon={behandling.versjon}
       />
-      <AnkePaneler
-        behandling={hasNotFinished ? forrigeBehandling : behandling}
-        fetchedData={data}
+      <BehandlingPaVent
+        behandling={behandling}
+        hentBehandling={hentBehandling}
+        kodeverk={kodeverk}
+        requestApi={requestAnkeApi}
+        oppdaterPaVentKey={AnkeBehandlingApiKeys.UPDATE_ON_HOLD}
+        aksjonspunktKey={AnkeBehandlingApiKeys.AKSJONSPUNKTER}
+      />
+      <StandardPropsProvider
+        behandling={behandling}
         fagsak={fagsak}
         rettigheter={rettigheter}
+        hasFetchError={behandlingState === RestApiState.ERROR}
         alleKodeverk={kodeverk}
-        valgtProsessSteg={valgtProsessSteg}
+        lagreAksjonspunkter={lagreAksjonspunkter}
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-        oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
-        settPaVent={settPaVent}
-        hentBehandling={hentBehandling}
-        opneSokeside={opneSokeside}
-        alleBehandlinger={alleBehandlinger}
-        setBehandling={setBehandling}
-      />
+      >
+        <BehandlingContainer
+          behandling={behandling}
+          valgtProsessSteg={valgtProsessSteg}
+          valgtFaktaSteg={valgtFaktaSteg}
+          oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+          oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
+          hentProsessPaneler={(props, ekstraProps) => (
+            <>
+              <AnkeBehandlingProsessStegInitPanel {...props} fagsak={fagsak} alleBehandlinger={alleBehandlinger} />
+              <AnkeResultatProsessStegInitPanel
+                {...props}
+                fagsak={fagsak}
+                opneSokeside={opneSokeside}
+                toggleSkalOppdatereFagsakContext={ekstraProps.toggleOppdatereFagsakContext}
+              />
+              <AnkeTrygderettsbehandlingProsessStegInitPanel
+                {...props}
+                fagsak={fagsak}
+                opneSokeside={opneSokeside}
+                toggleSkalOppdatereFagsakContext={ekstraProps.toggleOppdatereFagsakContext}
+                oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+              />
+            </>
+          )}
+        />
+      </StandardPropsProvider>
     </>
   );
 };

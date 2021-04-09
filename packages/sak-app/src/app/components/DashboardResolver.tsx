@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import axios from 'axios';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
@@ -15,9 +14,7 @@ const isDevelopment = () => process.env.NODE_ENV === 'development' || process.en
  *
  * Komponent som redirecter til Fplos eller går til fremsiden til Fpsak. Går alltid til Fpsak på utviklingsmiljø eller når Fplos ikke kan nåes
  */
-export const DashboardResolver: FunctionComponent<WrappedComponentProps> = ({
-  intl,
-}) => {
+export const DashboardResolver: FunctionComponent = () => {
   const [isLoading, setLoading] = useState(true);
 
   const { addErrorMessage } = useRestApiErrorDispatcher();
@@ -34,7 +31,7 @@ export const DashboardResolver: FunctionComponent<WrappedComponentProps> = ({
         window.location.assign(url);
       } catch (e) {
         setLoading(false);
-        addErrorMessage(intl.formatMessage({ id: 'DashboardResolver.FpLosErNede' }));
+        addErrorMessage('Forsiden har nedetid');
       }
     };
     gotoLosOrSetErrorMsg();
@@ -43,4 +40,4 @@ export const DashboardResolver: FunctionComponent<WrappedComponentProps> = ({
   return !isDevelopment() && isLoading ? <LoadingPanel /> : <FagsakSearchIndex />;
 };
 
-export default injectIntl(DashboardResolver);
+export default DashboardResolver;

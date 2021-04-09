@@ -1,9 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { Undertekst } from 'nav-frontend-typografi';
 
 import { Label } from './Label';
+
+const intlMock = getIntlMock({});
 
 const FORMATTED_MESSAGE = 'En formatert melding';
 const intl = { ...intlMock, formatMessage: () => FORMATTED_MESSAGE };

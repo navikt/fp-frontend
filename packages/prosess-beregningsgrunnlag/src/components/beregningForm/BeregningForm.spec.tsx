@@ -9,7 +9,7 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
-import shallowWithIntl from '@fpsak-frontend/prosess-vedtak/i18n/intl-enzyme-test-helper-prosess-vedtak';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import {
   Beregningsgrunnlag as BeregningsgrunnlagProp,
   SammenligningsgrunlagProp,
@@ -21,6 +21,7 @@ import SkjeringspunktOgStatusPanel2 from '../fellesPaneler/SkjeringspunktOgStatu
 import AksjonspunktBehandler from '../fellesPaneler/AksjonspunktBehandler';
 import Beregningsgrunnlag from '../beregningsgrunnlagPanel/Beregningsgrunnlag';
 import BeregningsresultatTable from '../beregningsresultatPanel/BeregningsresultatTable';
+import messages from '../../../i18n/nb_NO.json';
 
 const apVurderDekningsgrad = {
   definisjon: {
@@ -331,7 +332,7 @@ describe('<BeregningForm>', () => {
       vilkaarBG={getBGVilkar(mockVilkar)}
       arbeidsgiverOpplysningerPerId={{}}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
     const avvikspanel = wrapper.find('AvviksopplysningerPanel');
     expect(avvikspanel).toHaveLength(1);
     const aksjonPunktPanel = wrapper.find(AksjonspunktBehandler);

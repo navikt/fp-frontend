@@ -11,8 +11,7 @@ import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbake
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import FeilutbetalingFaktaIndex from '@fpsak-frontend/fakta-feilutbetaling';
-import { Behandling, FeilutbetalingFakta } from '@fpsak-frontend/types';
-import FeilutbetalingAarsak from '@fpsak-frontend/fakta-feilutbetaling/src/types/feilutbetalingAarsakTsType';
+import { Behandling, FeilutbetalingFakta, FeilutbetalingAarsak } from '@fpsak-frontend/types';
 
 import withReduxProvider from '../../../decorators/withRedux';
 

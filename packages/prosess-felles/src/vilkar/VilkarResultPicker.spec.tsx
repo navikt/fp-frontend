@@ -11,10 +11,11 @@ import VilkarResultPicker from './VilkarResultPicker';
 
 jest.mock('react-intl', () => {
   const reactIntl = jest.requireActual('react-intl');
-  const mockIntl = jest.requireMock('../../i18n/intl-enzyme-test-helper-prosess-felles');
+  const meldinger = jest.requireActual('../../i18n/nb_NO.json');
+  const intlTestHelper = jest.requireActual('@fpsak-frontend/utils-test/src/intl-enzyme-test-helper');
   return {
     ...reactIntl,
-    useIntl: () => mockIntl.intlMock,
+    useIntl: () => intlTestHelper.getIntlMock(meldinger),
   };
 });
 

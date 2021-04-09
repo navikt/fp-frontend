@@ -5,9 +5,10 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import { RadioGroupField } from '@fpsak-frontend/form';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
 import { FamilieHendelse } from '@fpsak-frontend/types';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { SykdomOgSkadePeriode } from './SykdomOgSkadePeriode';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-uttak';
+import messages from '../../../i18n/nb_NO.json';
 
 const dokumentertePerioder = [];
 const periode = {
@@ -38,7 +39,7 @@ describe('<SykdomOgSkadePeriode>', () => {
       vilkarForSykdomExists
       onSubmit={() => undefined}
       validate={() => undefined}
-    />);
+    />, messages);
 
     const undertekst = wrapper.find('Undertekst');
     const radioGroupField = wrapper.find('RadioGroupField');
@@ -69,7 +70,7 @@ describe('<SykdomOgSkadePeriode>', () => {
       vilkarForSykdomExists
       onSubmit={() => undefined}
       validate={() => undefined}
-    />);
+    />, messages);
     const textAreaField = wrapper.find('TextAreaField');
     expect(textAreaField).toHaveLength(1);
   });

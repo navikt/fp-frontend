@@ -1,19 +1,15 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 import moment from 'moment';
 
 import { StandardFaktaPanelProps, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { createIntl } from '@fpsak-frontend/utils';
 
 import AktivitetskravFaktaForm from './components/AktivitetskravFaktaForm';
 import messages from '../i18n/nb_NO.json';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 interface OwnProps {
   harApneAksjonspunkter: boolean;

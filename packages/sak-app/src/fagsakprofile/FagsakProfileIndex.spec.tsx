@@ -59,10 +59,10 @@ describe('<FagsakProfileIndex>', () => {
   };
 
   it('skal rendre komponent og vise alle behandlinger når ingen behandling er valgt', () => {
-    requestApi.mock(FpsakApiKeys.KODEVERK, alleKodeverk);
-    requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE, {});
-    requestApi.mock(FpsakApiKeys.RISIKO_AKSJONSPUNKT, {});
-    requestApi.mock(FpsakApiKeys.KONTROLLRESULTAT, {});
+    requestApi.mock(FpsakApiKeys.KODEVERK.name, alleKodeverk);
+    requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE.name, {});
+    requestApi.mock(FpsakApiKeys.RISIKO_AKSJONSPUNKT.name, {});
+    requestApi.mock(FpsakApiKeys.KONTROLLRESULTAT.name, {});
 
     const wrapper = shallow(<FagsakProfileIndex
       fagsak={fagsak as Fagsak}
@@ -81,10 +81,10 @@ describe('<FagsakProfileIndex>', () => {
   });
 
   it('skal ikke vise alle behandlinger når behandling er valgt', () => {
-    requestApi.mock(FpsakApiKeys.KODEVERK, alleKodeverk);
-    requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE, {});
-    requestApi.mock(FpsakApiKeys.RISIKO_AKSJONSPUNKT, {});
-    requestApi.mock(FpsakApiKeys.KONTROLLRESULTAT, {});
+    requestApi.mock(FpsakApiKeys.KODEVERK.name, alleKodeverk);
+    requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE.name, {});
+    requestApi.mock(FpsakApiKeys.RISIKO_AKSJONSPUNKT.name, {});
+    requestApi.mock(FpsakApiKeys.KONTROLLRESULTAT.name, {});
 
     const wrapper = shallow(<FagsakProfileIndex
       fagsak={fagsak as Fagsak}

@@ -1,9 +1,11 @@
 import React from 'react';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import klageVurdering from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { KlageVurderingRadioOptionsNfp } from './KlageVurderingRadioOptionsNfp';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-klagevurdering';
+import messages from '../../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<KlageVurderingRadioOptionsNfp>', () => {
   const medholdReasons = [
@@ -19,7 +21,7 @@ describe('<KlageVurderingRadioOptionsNfp>', () => {
       medholdReasons={medholdReasons}
       klageVurdering={{ kode: klageVurdering.STADFESTE_YTELSESVEDTAK, kodeverk: '' }}
       intl={intlMock}
-    />);
+    />, messages);
     const radios = wrapper.find('RadioOption');
     expect(radios).toHaveLength(2);
     // @ts-ignore
@@ -34,7 +36,7 @@ describe('<KlageVurderingRadioOptionsNfp>', () => {
       klageVurdering={{ kode: klageVurdering.MEDHOLD_I_KLAGE, kodeverk: '' }}
       medholdReasons={medholdReasons}
       intl={intlMock}
-    />);
+    />, messages);
     const radios = wrapper.find('RadioOption');
     expect(radios).toHaveLength(5);
     // @ts-ignore

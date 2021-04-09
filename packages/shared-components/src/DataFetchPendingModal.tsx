@@ -4,9 +4,13 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import { Element } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
 
-import getPackageIntl from '../i18n/getPackageIntl';
+import { createIntl } from '@fpsak-frontend/utils';
+
+import messages from '../i18n/nb_NO.json';
 
 import styles from './dataFetchPendingModal.less';
+
+const intl = createIntl(messages);
 
 // Skal ikke være mulig å lukke modal
 const doNothing = () => undefined;
@@ -54,8 +58,6 @@ export class DataFetchPendingModal extends Component<OwnProps, OwnState> {
     if (!displayMessage) {
       return null;
     }
-
-    const intl = getPackageIntl();
 
     const { pendingMessage } = this.props;
 

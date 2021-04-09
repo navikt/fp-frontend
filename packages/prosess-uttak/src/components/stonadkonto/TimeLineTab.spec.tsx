@@ -3,9 +3,10 @@ import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 
 import { Stonadskonto } from '@fpsak-frontend/types';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import TimeLineTab from './TimeLineTab';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-proses-uttak';
+import messages from '../../../i18n/nb_NO.json';
 
 const stonadskonto = {
   kontonavn: 'FORELDREPENGER_FØR_FØDSEL',
@@ -20,7 +21,7 @@ describe('<TimeLineTab>', () => {
     const wrapper = shallowWithIntl(<TimeLineTab
       onClickCallback={sinon.spy()}
       stonadskonto={stonadskonto}
-    />);
+    />, messages);
 
     const formattedMessage = wrapper.find(FormattedMessage);
     expect(formattedMessage.at(0).props().id).toBe('TimeLineTab.Stonadinfo.ForeldrepengerFF');

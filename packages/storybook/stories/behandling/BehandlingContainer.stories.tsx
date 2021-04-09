@@ -4,7 +4,7 @@ import { useState } from '@storybook/addons';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { Behandling } from '@fpsak-frontend/types';
-import { BehandlingContainer, FaktaPanelInitProps, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles-ny';
+import { BehandlingContainer, FaktaPanelInitProps, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 
 const FaktaPanelTest1: FunctionComponent<FaktaPanelInitProps> = ({
   registrerFaktaPanel,

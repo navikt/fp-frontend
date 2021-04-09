@@ -7,9 +7,12 @@ import { AnkeVurdering } from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { RadioGroupField, SelectField } from '@fpsak-frontend/form';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { TrygderettsbehandlingForm } from './TrygderettsbehandlingForm';
-import { intlMock } from '../../i18n/intl-enzyme-test-helper-prosess-anke-trygderettsbehandling';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<TrygderettsbehandlingForm>', () => {
   const sprakkode = {

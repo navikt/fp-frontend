@@ -2,7 +2,7 @@ import {
   useState, useEffect, useContext, DependencyList,
 } from 'react';
 
-import { AbstractRequestApi } from '@fpsak-frontend/rest-api';
+import { AbstractRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 
 import { RestApiDispatchContext } from './RestApiContext';
 import RestApiState from '../RestApiState';
@@ -26,22 +26,22 @@ const defaultOptions = {
 /**
  * For mocking i unit-test
  */
-export const getUseGlobalStateRestApiMock = (requestApi: AbstractRequestApi) => function useGlobalStateRestApi<T>(
-  key: string, params?: any,
+export const getUseGlobalStateRestApiMock = (requestApi: AbstractRequestApi) => function useGlobalStateRestApi<T, P>(
+  key: RestKey<T, P>, params?: P,
 ):RestApiData<T> {
   return {
     state: RestApiState.SUCCESS,
     error: undefined,
     // @ts-ignore
-    data: requestApi.startRequest<T>(key, params),
+    data: requestApi.startRequest<T, P>(key.name, params),
   };
 };
 
 /**
  * Hook som henter data fra backend og deretter lagrer i @see RestApiContext
  */
-const getUseGlobalStateRestApi = (requestApi: AbstractRequestApi) => function useGlobalStateRestApi<T>(
-  key: string, params?: any, options: Options = defaultOptions,
+const getUseGlobalStateRestApi = (requestApi: AbstractRequestApi) => function useGlobalStateRestApi<T, P>(
+  key: RestKey<T, P>, params?: P, options: Options = defaultOptions,
 ):RestApiData<T> {
   const [data, setData] = useState({
     state: RestApiState.NOT_STARTED,
@@ -52,8 +52,8 @@ const getUseGlobalStateRestApi = (requestApi: AbstractRequestApi) => function us
   const dispatch = useContext(RestApiDispatchContext);
 
   useEffect(() => {
-    if (requestApi.hasPath(key) && !options.suspendRequest) {
-      dispatch({ type: 'remove', key });
+    if (requestApi.hasPath(key.name) && !options.suspendRequest) {
+      dispatch({ type: 'remove', key: key.name });
 
       setData({
         state: RestApiState.LOADING,
@@ -61,9 +61,9 @@ const getUseGlobalStateRestApi = (requestApi: AbstractRequestApi) => function us
         data: undefined,
       });
 
-      requestApi.startRequest<T>(key, params)
+      requestApi.startRequest<T, P>(key.name, params)
         .then((dataRes) => {
-          dispatch({ type: 'success', key, data: dataRes.payload });
+          dispatch({ type: 'success', key: key.name, data: dataRes.payload });
           setData({
             state: RestApiState.SUCCESS,
             data: dataRes.payload,

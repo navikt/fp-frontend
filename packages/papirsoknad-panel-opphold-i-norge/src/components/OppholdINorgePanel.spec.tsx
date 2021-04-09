@@ -18,10 +18,11 @@ import OppholdINorgePanel, { OppholdINorgePanelImpl } from './OppholdINorgePanel
 
 jest.mock('react-intl', () => {
   const reactIntl = jest.requireActual('react-intl');
-  const mockIntl = jest.requireActual('../../i18n/intl-enzyme-test-helper-papirsoknad-opphold-i-norge');
+  const intlTestHelper = jest.requireActual('@fpsak-frontend/utils-test/src/intl-enzyme-test-helper');
+  const intlMessages = jest.requireActual('../../i18n/nb_NO.json');
   return {
     ...reactIntl,
-    useIntl: () => mockIntl.intlMock,
+    useIntl: () => intlTestHelper.getIntlMock(intlMessages),
   };
 });
 

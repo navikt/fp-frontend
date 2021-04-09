@@ -4,12 +4,15 @@ import sinon from 'sinon';
 
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { FlexColumn } from '@fpsak-frontend/shared-components';
+
 import TilbakekrevingEditerVedtaksbrevPanel from './brev/TilbakekrevingEditerVedtaksbrevPanel';
 import { TilbakekrevingVedtakFormImpl as TilbakekrevingVedtakForm } from './TilbakekrevingVedtakForm';
 import underavsnittType from '../kodeverk/avsnittType';
-import { intlMock } from '../../i18n/intl-enzyme-test-helper-prosess-vedtak-tilbakekreving';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<TilbakekrevingVedtakForm>', () => {
   it('skal vise tekstfelt for begrunnelse og godkjenningsknapp', () => {

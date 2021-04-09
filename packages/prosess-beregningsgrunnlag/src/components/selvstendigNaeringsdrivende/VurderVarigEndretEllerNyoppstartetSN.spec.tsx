@@ -2,17 +2,19 @@ import React from 'react';
 
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-prosess-beregningsgrunnlag';
+import messages from '../../../i18n/nb_NO.json';
 import {
   VurderVarigEndretEllerNyoppstartetSNImpl as UnwrappedForm,
   begrunnelseFieldname,
   fastsettInntektFieldname,
   varigEndringRadioname,
 } from './VurderVarigEndretEllerNyoppstartetSN';
+
+const intlMock = getIntlMock(messages);
 
 const {
   VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
@@ -48,7 +50,7 @@ describe('<VurderVarigEndretEllerNyoppstartetSN>', () => {
       erVarigEndretNaering={false}
       endretTekst="tekst"
       intl={intlMock}
-    />);
+    />, messages);
 
     const rows = wrapper.find('Row');
     expect(rows.length).toBe(2);

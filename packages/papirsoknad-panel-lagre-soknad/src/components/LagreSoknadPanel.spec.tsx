@@ -1,13 +1,14 @@
 import React from 'react';
+import { shallow } from 'enzyme';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { TextAreaField } from '@fpsak-frontend/form';
 
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-papirsoknad-lagre-soknad';
+import messages from '../../i18n/nb_NO.json';
 import { LagreSoknadPanel } from './LagreSoknadPanel';
 
 const mockProps = {
-  intl: intlMock,
+  intl: getIntlMock(messages),
   pristine: true,
   reset: () => undefined,
   onSubmitUfullstendigsoknad: () => undefined,
@@ -17,7 +18,7 @@ const mockProps = {
 
 describe('<LagreSoknadPanel>', () => {
   it('skal vise komponent som default', () => {
-    const wrapper = shallowWithIntl(<LagreSoknadPanel {...mockProps} />);
+    const wrapper = shallow(<LagreSoknadPanel {...mockProps} />);
     const infoTextArea = wrapper.find(TextAreaField);
     expect(infoTextArea).toHaveLength(1);
   });

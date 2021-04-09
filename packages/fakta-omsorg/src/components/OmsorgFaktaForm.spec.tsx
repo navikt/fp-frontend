@@ -3,16 +3,18 @@ import { FormattedMessage } from 'react-intl';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Soknad, Ytelsefordeling } from '@fpsak-frontend/types';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import OmsorgFaktaForm from './OmsorgFaktaForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-omsorg';
+import messages from '../../i18n/nb_NO.json';
 
 jest.mock('react-intl', () => {
   const reactIntl = jest.requireActual('react-intl');
-  const mockIntl = jest.requireMock('../../i18n/intl-enzyme-test-helper-fakta-omsorg');
+  const tekster = jest.requireActual('../../i18n/nb_NO.json');
+  const intlTestHelper = jest.requireActual('@fpsak-frontend/utils-test/src/intl-enzyme-test-helper');
   return {
     ...reactIntl,
-    useIntl: () => mockIntl.intlMock,
+    useIntl: () => intlTestHelper.getIntlMock(tekster),
   };
 });
 
@@ -59,7 +61,7 @@ describe('<OmsorgFaktaForm>', () => {
       alleMerknaderFraBeslutter={{}}
       ytelsefordeling={{} as Ytelsefordeling}
       soknad={{} as Soknad}
-    />);
+    />, messages);
 
     const formattedMessage = wrapper.find(FormattedMessage);
     expect(formattedMessage).toHaveLength(1);
@@ -77,7 +79,7 @@ describe('<OmsorgFaktaForm>', () => {
       alleMerknaderFraBeslutter={{}}
       ytelsefordeling={{} as Ytelsefordeling}
       soknad={{} as Soknad}
-    />);
+    />, messages);
 
     const formattedMessage = wrapper.find(FormattedMessage);
     expect(formattedMessage).toHaveLength(1);
@@ -95,7 +97,7 @@ describe('<OmsorgFaktaForm>', () => {
       alleMerknaderFraBeslutter={{}}
       ytelsefordeling={{} as Ytelsefordeling}
       soknad={{} as Soknad}
-    />);
+    />, messages);
 
     const radioGroup = wrapper.find('RadioGroupField');
     expect(radioGroup).toHaveLength(2);
@@ -133,7 +135,7 @@ describe('<OmsorgFaktaForm>', () => {
       alleMerknaderFraBeslutter={{}}
       ytelsefordeling={{} as Ytelsefordeling}
       soknad={{} as Soknad}
-    />);
+    />, messages);
     expect(wrapper.find('RadioGroupField')).toHaveLength(2);
     expect(wrapper.find('FieldArray')).toHaveLength(0);
   });

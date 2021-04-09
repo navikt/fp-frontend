@@ -2,13 +2,15 @@ import React, { FunctionComponent } from 'react';
 
 import { TextAreaField } from '@fpsak-frontend/form';
 import {
-  decodeHtmlEntity, hasValidText, maxLength, minLength, requiredIfNotPristine,
+  decodeHtmlEntity, hasValidText, maxLength, minLength, requiredIfNotPristine, createIntl,
 } from '@fpsak-frontend/utils';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 
-import getPackageIntl from '../i18n/getPackageIntl';
+import messages from '../i18n/nb_NO.json';
 
 import styles from './prosessStegBegrunnelseTextField.less';
+
+const intl = createIntl(messages);
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -43,22 +45,19 @@ const ProsessStegBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunct
   readOnly,
   text,
   useAllWidth = false,
-}) => {
-  const intl = getPackageIntl();
-  return (
-    <div className={!useAllWidth ? styles.begrunnelseTextField : ''}>
-      <TextAreaField
-        name="begrunnelse"
-        label={text || intl.formatMessage({ id: getBegrunnelseTextCode(readOnly) })}
-        validate={[requiredIfNotPristine, minLength3, maxLength1500, hasValidText]}
-        textareaClass={styles.explanationTextarea}
-        maxLength={1500}
-        readOnly={readOnly}
-        placeholder={intl.formatMessage({ id: 'ProsessStegBegrunnelseTextField.BegrunnVurdering' })}
-      />
-    </div>
-  );
-};
+}) => (
+  <div className={!useAllWidth ? styles.begrunnelseTextField : ''}>
+    <TextAreaField
+      name="begrunnelse"
+      label={text || intl.formatMessage({ id: getBegrunnelseTextCode(readOnly) })}
+      validate={[requiredIfNotPristine, minLength3, maxLength1500, hasValidText]}
+      textareaClass={styles.explanationTextarea}
+      maxLength={1500}
+      readOnly={readOnly}
+      placeholder={intl.formatMessage({ id: 'ProsessStegBegrunnelseTextField.BegrunnVurdering' })}
+    />
+  </div>
+);
 
 const getBegrunnelse = (aksjonspunkter: Aksjonspunkt[]): string => (aksjonspunkter.length > 0 && aksjonspunkter[0].begrunnelse
   ? aksjonspunkter[0].begrunnelse

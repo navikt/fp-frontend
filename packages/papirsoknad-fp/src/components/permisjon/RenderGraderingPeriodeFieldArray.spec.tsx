@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
 import {
   CheckboxField, DatepickerField, DecimalField, InputField, SelectField,
 } from '@fpsak-frontend/form';
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import shallowWithIntl, { intlMock } from '../../../i18n/intl-enzyme-test-helper-papirsoknad-fp';
+import messages from '../../../i18n/nb_NO.json';
 import { RenderGraderingPeriodeFieldArray } from './RenderGraderingPeriodeFieldArray';
 
 const graderingKvoter = [{ navn: 'Mødrekvote', kode: 'MODREKVOTE', kodeverk: '' }];
 const arbeidskategoriTyper = [{ navn: 'Arbeidstaker', kode: 'ARBEIDSTAKER', kodeverk: '' }];
 
 const fields = new MockFields('perioder', 1);
+
+const intlMock = getIntlMock(messages);
 
 const getRemoveButton = () => <button id="avslutt" type="button" />;
 
@@ -31,14 +34,14 @@ describe('<RenderGraderingPeriodeFieldArray>', () => {
       namePrefix="test"
       graderingPrefix="test"
       form="test"
-    />);
+    />, messages);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
     expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
-    const comp = fn('fieldId1', 0, getRemoveButton);
-    const innerWrapper = shallowWithIntl(comp);
+    const comp = fn('fieldId1', 0, getRemoveButton) as ReactElement;
+    const innerWrapper = shallowWithIntl(comp, messages);
 
     expect(innerWrapper.find(DatepickerField)).toHaveLength(2);
     expect(innerWrapper.find(SelectField)).toHaveLength(2);
@@ -62,14 +65,14 @@ describe('<RenderGraderingPeriodeFieldArray>', () => {
       namePrefix="test"
       graderingPrefix="test"
       form="test"
-    />);
+    />, messages);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
     expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
-    const comp = fn('fieldId1', 0, getRemoveButton);
-    const innerWrapper = shallowWithIntl(comp);
+    const comp = fn('fieldId1', 0, getRemoveButton) as ReactElement;
+    const innerWrapper = shallowWithIntl(comp, messages);
 
     expect(innerWrapper.find(DatepickerField)).toHaveLength(2);
     expect(innerWrapper.find(SelectField)).toHaveLength(2);

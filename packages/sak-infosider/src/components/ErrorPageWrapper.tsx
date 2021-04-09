@@ -1,18 +1,13 @@
 import React, { FunctionComponent, ReactNode } from 'react';
-import {
-  createIntl, createIntlCache, FormattedMessage, RawIntlProvider,
-} from 'react-intl';
-
+import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { Innholdstittel } from 'nav-frontend-typografi';
+
+import { createIntl } from '@fpsak-frontend/utils';
+
 import styles from './errorPageWrapper.less';
 import messages from '../../i18n/nb_NO.json';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 interface OwnProps {
   children: ReactNode | ReactNode[];

@@ -7,10 +7,11 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt, FamilieHendelse, Personoversikt, Soknad,
 } from '@fpsak-frontend/types';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { TilkjentYtelsePanelImpl } from './TilkjentYtelsePanel';
 import Tilbaketrekkpanel from './tilbaketrekk/Tilbaketrekkpanel';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-tilkjent-ytelse';
+import messages from '../../i18n/nb_NO.json';
 
 const tilbaketrekkAP = {
   definisjon: {
@@ -51,7 +52,7 @@ describe('<TilkjentYtelsePanelImpl>', () => {
       fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
       aksjonspunkter={[]}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     expect(wrapper.find(Undertittel)).toHaveLength(1);
     // @ts-ignore
     expect(wrapper.find(Undertittel).props().children.props.id).toBe('TilkjentYtelse.Title');
@@ -79,7 +80,7 @@ describe('<TilkjentYtelsePanelImpl>', () => {
       fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
       aksjonspunkter={[]}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     expect(wrapper.find(Tilbaketrekkpanel)).toHaveLength(1);
   });
 });

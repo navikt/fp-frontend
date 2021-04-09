@@ -1,12 +1,14 @@
 import React from 'react';
 import Modal from 'nav-frontend-modal';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import { Behandlingsresultat } from '@fpsak-frontend/types';
 
 import { VedtakFritekstbrevModal } from './VedtakFritekstbrevModal';
-import shallowWithIntl from '../../../../i18n/intl-enzyme-test-helper-prosess-vedtak';
+import messages from '../../../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<VedtakFritekstbrevModal>', () => {
   it('skal vise modal når behandlingsresultat er AVSLATT', () => {
@@ -19,7 +21,7 @@ describe('<VedtakFritekstbrevModal>', () => {
           kodeverk: '',
         },
       } as Behandlingsresultat}
-    />);
+    />, messages);
     const modal = wrapper.find(Modal);
     const isOpen = modal.prop('isOpen');
     expect(modal).toHaveLength(1);
@@ -36,7 +38,7 @@ describe('<VedtakFritekstbrevModal>', () => {
           kodeverk: '',
         },
       } as Behandlingsresultat}
-    />);
+    />, messages);
     const modal = wrapper.find(Modal);
     const isOpen = modal.prop('isOpen');
     expect(modal).toHaveLength(1);
@@ -53,7 +55,7 @@ describe('<VedtakFritekstbrevModal>', () => {
           kodeverk: '',
         },
       } as Behandlingsresultat}
-    />);
+    />, messages);
     const modal = wrapper.find(Modal);
     expect(modal).toHaveLength(0);
   });
@@ -68,7 +70,7 @@ describe('<VedtakFritekstbrevModal>', () => {
           kodeverk: '',
         },
       } as Behandlingsresultat}
-    />);
+    />, messages);
     const modal = wrapper.find(Modal);
     expect(modal).toHaveLength(0);
   });

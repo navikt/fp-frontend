@@ -1,13 +1,15 @@
 import React from 'react';
 import { InjectedFormProps } from 'redux-form';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import { FormkravKlageForm } from './FormkravKlageForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-formkrav';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<FormkravKlageForm>', () => {
   const behandlinger = [{
@@ -61,7 +63,7 @@ describe('<FormkravKlageForm>', () => {
           kodeverk: 'BEHANDLING_TYPE',
         }],
       }}
-    />);
+    />, messages);
     const vedtakSelect = wrapper.find('SelectField');
     expect(vedtakSelect).toHaveLength(1);
     expect(vedtakSelect.prop('selectValues')).toHaveLength(4);

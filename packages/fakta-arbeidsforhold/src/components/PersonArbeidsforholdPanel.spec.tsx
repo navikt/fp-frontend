@@ -1,6 +1,7 @@
 import React from 'react';
 import sinon from 'sinon';
 
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { Arbeidsforhold } from '@fpsak-frontend/types';
 import AktivtArbeidsforholdHandling from '../kodeverk/aktivtArbeidsforholdHandling';
 import ArbeidsforholdHandling from '../kodeverk/arbeidsforholdHandling';
@@ -11,7 +12,9 @@ import PersonArbeidsforholdPanel, {
   PersonArbeidsforholdPanelImpl,
   getSortArbeidsforholdFn,
 } from './PersonArbeidsforholdPanel';
-import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-arbeidsforhold';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<PersonArbeidsforholdPanel>', () => {
   const arbeidsforhold = {
@@ -66,7 +69,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     expect(wrapper.find(PersonArbeidsforholdTable)).toHaveLength(1);
     expect(wrapper.find(PersonArbeidsforholdDetailForm)).toHaveLength(1);
   });
@@ -93,7 +96,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     const table = wrapper.find(PersonArbeidsforholdTable);
     expect(table.prop('alleArbeidsforhold')).toEqual([arbeidsforhold]);
@@ -116,7 +119,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     wrapper.setState({ selectedArbeidsforhold: undefined });
 
@@ -140,7 +143,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     expect(wrapper.find(PersonArbeidsforholdDetailForm)).toHaveLength(1);
   });
@@ -166,7 +169,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     expect(wrapper.find(PersonArbeidsforholdDetailForm)).toHaveLength(0);
   });
@@ -191,7 +194,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     expect(wrapper.find(PersonArbeidsforholdDetailForm)).toHaveLength(0);
   });
@@ -213,7 +216,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     // @ts-ignore
     expect(wrapper.state().selectedArbeidsforhold).toEqual(arbeidsforhold);
@@ -250,7 +253,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     const editedArbeidsforhold = {
       ...newArbeidsforhold,
       arbeidsforholdHandlingField: ArbeidsforholdHandling.FJERN_ARBEIDSFORHOLD,
@@ -308,7 +311,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     const editedArbeidsforhold = {
       ...newArbeidsforhold,
@@ -510,7 +513,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     const editedArbeidsforhold = {
       ...arbeidsforhold,
@@ -558,7 +561,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     const editedArbeidsforhold = {
       ...arbeidsforhold,
@@ -606,7 +609,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     const editedArbeidsforhold = {
       ...arbeidsforhold,
@@ -654,7 +657,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     const editedArbeidsforhold = {
       ...arbeidsforhold,
@@ -702,7 +705,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     const instance = wrapper.instance();
     // @ts-ignore
     const valgtArbeidsforholdForLagtTil = wrapper.state().selectedArbeidsforhold as Arbeidsforhold;
@@ -755,7 +758,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     const btn = wrapper.find('button');
     expect(btn).toHaveLength(1);
     // @ts-ignore
@@ -781,7 +784,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     const btn = wrapper.find('button');
     expect(btn).toHaveLength(0);
     // @ts-ignore
@@ -806,7 +809,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     const editedArbeidsforhold = {
       ...arbeidsforhold,
@@ -857,7 +860,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     const editedArbeidsforhold = {
       ...arbeidsforhold,
@@ -914,7 +917,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
 
     const editedArbeidsforhold = {
       ...arbeidsforhold,

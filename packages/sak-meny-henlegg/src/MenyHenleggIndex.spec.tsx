@@ -1,13 +1,14 @@
 import React from 'react';
 import sinon from 'sinon';
 
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 
 import HenleggBehandlingModal from './components/HenleggBehandlingModal';
 import HenlagtBehandlingModal from './components/HenlagtBehandlingModal';
-import shallowWithIntl from '../i18n/intl-enzyme-test-helper-sak-meny';
 import MenyHenleggIndex from './MenyHenleggIndex';
+import messages from '../i18n/nb_NO.json';
 
 describe('<MenyHenleggIndex>', () => {
   it('skal vise modal og så henlegge behandling', () => {
@@ -31,7 +32,7 @@ describe('<MenyHenleggIndex>', () => {
       behandlingResultatTyper={[]}
       gaaTilSokeside={sinon.spy()}
       lukkModal={lukkModalCallback}
-    />);
+    />, messages);
 
     const modal = wrapper.find(HenleggBehandlingModal);
     expect(modal).toHaveLength(1);

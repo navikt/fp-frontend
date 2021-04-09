@@ -18,7 +18,10 @@ import {
 import { omit } from '@fpsak-frontend/utils';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import tilbakekrevingKodeverkTyper from '@fpsak-frontend/kodeverk/src/tilbakekrevingKodeverkTyper';
-import { FeilutbetalingPerioderWrapper, KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  FeilutbetalingPerioderWrapper, KodeverkMedNavn, VilkarsVurdertePerioderWrapper, VilkarsVurdertPeriode,
+  DetaljerteFeilutbetalingsperioder, DetaljertFeilutbetalingPeriode,
+} from '@fpsak-frontend/types';
 
 import TilbakekrevingTimelinePanel from './timeline/TilbakekrevingTimelinePanel';
 import TilbakekrevingPeriodeForm, {
@@ -26,8 +29,6 @@ import TilbakekrevingPeriodeForm, {
   periodeFormTransformValues, periodeFormBuildInitialValues, CustomVilkarsVurdertePeriode,
 } from './TilbakekrevingPeriodeForm';
 import TilbakekrevingTidslinjeHjelpetekster from './TilbakekrevingTidslinjeHjelpetekster';
-import VilkarsVurdertePerioderWrapper, { VilkarsVurdertPeriode } from '../types/vilkarsVurdertePerioderTsType';
-import DetaljerteFeilutbetalingsperioder, { DetaljertFeilutbetalingPeriode } from '../types/detaljerteFeilutbetalingsperioderTsType';
 import TidslinjePeriode from '../types/tidslinjePeriodeTsType';
 import DataForPeriode from '../types/dataForPeriodeTsType';
 

@@ -1,18 +1,14 @@
 import React, { FunctionComponent } from 'react';
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 
 import { AnkeVurdering, StandardProsessPanelProps } from '@fpsak-frontend/types';
+import { createIntl } from '@fpsak-frontend/utils';
 
 import BehandleResultatForm from './components/BehandleResultatForm';
 import { BrevData } from './components/PreviewAnkeLink';
 import messages from '../i18n/nb_NO.json';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 interface OwnProps {
   ankeVurdering: AnkeVurdering;

@@ -5,9 +5,9 @@ import moment from 'moment';
 import { TableColumn, TableRow } from '@fpsak-frontend/shared-components';
 import { DDMMYYYY_DATE_FORMAT, required } from '@fpsak-frontend/utils';
 import { SelectField, behandlingFormValueSelector } from '@fpsak-frontend/form';
+import { FeilutbetalingAarsak } from '@fpsak-frontend/types';
 
 import styles from './feilutbetalingPerioderTable.less';
-import FeilutbetalingAarsak from '../types/feilutbetalingAarsakTsType';
 
 const getHendelseUndertyper = (årsakNavn: string, årsaker: FeilutbetalingAarsak['hendelseTyper']): { kode: string; navn: string}[] | null => {
   const årsak = årsaker.find((a) => a.hendelseType.kode === årsakNavn);

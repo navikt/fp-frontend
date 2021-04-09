@@ -2,10 +2,12 @@ import React from 'react';
 import sinon from 'sinon';
 import { Undertekst } from 'nav-frontend-typografi';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import ErrorMessageDetailsModal from './ErrorMessageDetailsModal';
 import { ErrorMessagePanel } from './ErrorMessagePanel';
-import shallowWithIntl from '../i18n/intl-enzyme-test-helper-sak-dekorator';
+import messages from '../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<ErrorMessagePanel>', () => {
   it('skal vise feilmelding med ikke lenke for å vise detaljert info', () => {
@@ -16,7 +18,7 @@ describe('<ErrorMessagePanel>', () => {
         additionalInfo: undefined,
       }]}
       removeErrorMessage={() => undefined}
-    />);
+    />, messages);
 
     const div = wrapper.find(Undertekst);
     expect(div).toHaveLength(1);
@@ -33,7 +35,7 @@ describe('<ErrorMessagePanel>', () => {
         additionalInfo: undefined,
       }]}
       removeErrorMessage={() => undefined}
-    />);
+    />, messages);
 
     const div = wrapper.find(Undertekst);
     expect(div).toHaveLength(1);
@@ -51,7 +53,7 @@ describe('<ErrorMessagePanel>', () => {
         },
       }]}
       removeErrorMessage={() => undefined}
-    />);
+    />, messages);
 
     expect(wrapper.find('a')).toHaveLength(1);
     expect(wrapper.find(ErrorMessageDetailsModal)).toHaveLength(0);
@@ -68,7 +70,7 @@ describe('<ErrorMessagePanel>', () => {
         },
       }]}
       removeErrorMessage={() => undefined}
-    />);
+    />, messages);
 
     const link = wrapper.find('a');
     link.simulate('click', { preventDefault: sinon.spy() });

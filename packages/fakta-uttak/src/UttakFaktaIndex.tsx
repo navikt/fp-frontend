@@ -1,20 +1,16 @@
 import React, { FunctionComponent } from 'react';
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 
 import {
   ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, FaktaArbeidsforhold, FamilieHendelseSamling,
   Personoversikt, UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
 } from '@fpsak-frontend/types';
+import { createIntl } from '@fpsak-frontend/utils';
 
 import UttakInfoPanel from './components/UttakInfoPanel';
 import messages from '../i18n/nb_NO.json';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 interface OwnProps {
   ytelsefordeling: Ytelsefordeling;

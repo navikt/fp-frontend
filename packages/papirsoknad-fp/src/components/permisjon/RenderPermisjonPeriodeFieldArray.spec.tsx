@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import moment from 'moment';
 
 import { DatepickerField, SelectField } from '@fpsak-frontend/form';
@@ -6,8 +6,9 @@ import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-
 import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
 import { dateRangesOverlappingMessage, invalidDateMessage, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-papirsoknad-fp';
+import messages from '../../../i18n/nb_NO.json';
 import RenderPermisjonPeriodeFieldArray, { RenderPermisjonPeriodeFieldArray as RenderPermisjonPeriodeFieldArrayImpl } from './RenderPermisjonPeriodeFieldArray';
 
 const periodeTyper = [{ navn: 'FELLESPERIODE', kode: uttakPeriodeType.FELLESPERIODE, kodeverk: '' },
@@ -31,14 +32,14 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
       namePrefix="test"
       periodePrefix="test"
       alleKodeverk={{}}
-    />);
+    />, messages);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
     expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
-    const comp = fn('fieldId1', 0);
-    const innerWrapper = shallowWithIntl(comp);
+    const comp = fn('fieldId1', 0) as ReactElement;
+    const innerWrapper = shallowWithIntl(comp, messages);
 
     const dateFields = innerWrapper.find(DatepickerField);
     expect(dateFields).toHaveLength(2);
@@ -62,14 +63,14 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
       namePrefix="test"
       periodePrefix="test"
       alleKodeverk={{}}
-    />);
+    />, messages);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
     expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
-    const comp = fn('fieldId1', 0);
-    const innerWrapper = shallowWithIntl(comp);
+    const comp = fn('fieldId1', 0) as ReactElement;
+    const innerWrapper = shallowWithIntl(comp, messages);
 
     expect(innerWrapper.find(DatepickerField)).toHaveLength(2);
 
@@ -88,14 +89,14 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
       namePrefix="test"
       periodePrefix="test"
       alleKodeverk={{}}
-    />);
+    />, messages);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
     expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
-    const comp = fn('fieldId1', 0);
-    const innerWrapper = shallowWithIntl(comp);
+    const comp = fn('fieldId1', 0) as ReactElement;
+    const innerWrapper = shallowWithIntl(comp, messages);
 
     expect(innerWrapper.find(DatepickerField)).toHaveLength(2);
 
@@ -117,14 +118,14 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
       namePrefix="test"
       periodePrefix="test"
       alleKodeverk={{}}
-    />);
+    />, messages);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
     expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
-    const comp = fn('fieldId1', 0);
-    const innerWrapper = shallowWithIntl(comp);
+    const comp = fn('fieldId1', 0) as ReactElement;
+    const innerWrapper = shallowWithIntl(comp, messages);
 
     expect(innerWrapper.find(DatepickerField)).toHaveLength(2);
 
@@ -146,14 +147,14 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
       namePrefix="test"
       periodePrefix="test"
       alleKodeverk={{}}
-    />);
+    />, messages);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
     expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
-    const comp = fn('fieldId1', 0);
-    const innerWrapper = shallowWithIntl(comp);
+    const comp = fn('fieldId1', 0) as ReactElement;
+    const innerWrapper = shallowWithIntl(comp, messages);
 
     expect(innerWrapper.find(DatepickerField)).toHaveLength(2);
 
@@ -175,14 +176,14 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
       namePrefix="test"
       periodePrefix="test"
       alleKodeverk={{}}
-    />);
+    />, messages);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
     expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
-    const comp = fn('fieldId1', 0);
-    const innerWrapper = shallowWithIntl(comp);
+    const comp = fn('fieldId1', 0) as ReactElement;
+    const innerWrapper = shallowWithIntl(comp, messages);
 
     expect(innerWrapper.find(DatepickerField)).toHaveLength(2);
 

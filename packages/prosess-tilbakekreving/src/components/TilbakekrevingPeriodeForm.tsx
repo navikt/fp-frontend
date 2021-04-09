@@ -20,7 +20,9 @@ import {
   AdvarselModal, FlexColumn, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import tilbakekrevingKodeverkTyper from '@fpsak-frontend/kodeverk/src/tilbakekrevingKodeverkTyper';
-import { FeilutbetalingPerioderWrapper, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  FeilutbetalingPerioderWrapper, Kodeverk, KodeverkMedNavn, DetaljertFeilutbetalingPeriode,
+} from '@fpsak-frontend/types';
 
 import sarligGrunn from '../kodeverk/sarligGrunn';
 import Aktsomhet, { AKTSOMHET_REKKEFØLGE } from '../kodeverk/aktsomhet';
@@ -30,7 +32,6 @@ import ForeldetFormPanel from './tilbakekrevingPeriodePaneler/ForeldetFormPanel'
 import BelopetMottattIGodTroFormPanel, { InitialValuesGodTroForm } from './tilbakekrevingPeriodePaneler/godTro/BelopetMottattIGodTroFormPanel';
 import AktsomhetFormPanel, { InitialValuesAktsomhetForm } from './tilbakekrevingPeriodePaneler/aktsomhet/AktsomhetFormPanel';
 import TilbakekrevingTimelineData from './splittePerioder/TilbakekrevingTimelineData';
-import { DetaljertFeilutbetalingPeriode } from '../types/detaljerteFeilutbetalingsperioderTsType';
 import DataForPeriode from '../types/dataForPeriodeTsType';
 
 import styles from './tilbakekrevingPeriodeForm.less';

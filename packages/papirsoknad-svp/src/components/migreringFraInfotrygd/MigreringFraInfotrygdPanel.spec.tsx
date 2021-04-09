@@ -1,15 +1,16 @@
 import React from 'react';
+import { shallow } from 'enzyme';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { RadioGroupField } from '@fpsak-frontend/form';
 
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-papirsoknad-svp';
+import messages from '../../../i18n/nb_NO.json';
 import MigreringFraInfotrygdPanel from './MigreringFraInfotrygdPanel';
 
 describe('<MigreringFraInfotrygdPanel>', () => {
   it('skal rendre komponent korrekt', () => {
-    const wrapper = shallowWithIntl(<MigreringFraInfotrygdPanel.WrappedComponent
-      intl={intlMock}
+    const wrapper = shallow(<MigreringFraInfotrygdPanel.WrappedComponent
+      intl={getIntlMock(messages)}
       readOnly={false}
     />);
 

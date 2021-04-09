@@ -5,11 +5,12 @@ import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { Arbeidsforhold, Behandling, InntektArbeidYtelse } from '@fpsak-frontend/types';
+import {
+  ArbeidsforholdFodselOgTilrettelegging, Arbeidsforhold, Behandling, InntektArbeidYtelse,
+} from '@fpsak-frontend/types';
 import FodselOgTilretteleggingFaktaIndex from '@fpsak-frontend/fakta-fodsel-og-tilrettelegging';
-import ArbeidsforholdFodselOgTilrettelegging from '@fpsak-frontend/fakta-fodsel-og-tilrettelegging/src/types/arbeidsforholdFodselOgTilretteleggingTsType';
-import { tilrettelegging as tilretteleggingPermisjon, inntektArbeidYtelse as iayPermisjon } from './scenario/tilretteleggningMedPermisjon';
 
+import { tilrettelegging as tilretteleggingPermisjon, inntektArbeidYtelse as iayPermisjon } from './scenario/tilretteleggningMedPermisjon';
 import withReduxProvider from '../../../decorators/withRedux';
 
 import alleKodeverk from '../../mocks/alleKodeverk.json';

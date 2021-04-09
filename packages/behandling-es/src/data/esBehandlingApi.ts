@@ -1,38 +1,43 @@
-import { RestApiConfigBuilder, createRequestApi } from '@fpsak-frontend/rest-api';
+import { RestApiConfigBuilder, createRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
+import {
+  Aksjonspunkt, ArbeidsgiverOpplysningerWrapper, Behandling, BeregningsresultatEs, FamilieHendelse, FamilieHendelseSamling, InntektArbeidYtelse,
+  Kodeverk, Medlemskap, Personoversikt, SimuleringResultat, Soknad, TilbakekrevingValg, Verge, Vilkar,
+} from '@fpsak-frontend/types';
+import { NyBehandlendeEnhetParams, SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
-export enum EsBehandlingApiKeys {
-  BEHANDLING_ES = 'BEHANDLING_ES',
-  UPDATE_ON_HOLD = 'UPDATE_ON_HOLD',
-  SAVE_AKSJONSPUNKT = 'SAVE_AKSJONSPUNKT',
-  SAVE_OVERSTYRT_AKSJONSPUNKT = 'SAVE_OVERSTYRT_AKSJONSPUNKT',
-  PREVIEW_MESSAGE = 'PREVIEW_MESSAGE',
-  PREVIEW_TILBAKEKREVING_MESSAGE = 'PREVIEW_TILBAKEKREVING_MESSAGE',
-  AKSJONSPUNKTER = 'AKSJONSPUNKTER',
-  VILKAR = 'VILKAR',
-  SIMULERING_RESULTAT = 'SIMULERING_RESULTAT',
-  TILBAKEKREVINGVALG = 'TILBAKEKREVINGVALG',
-  BEREGNINGRESULTAT_ENGANGSSTONAD = 'BEREGNINGRESULTAT_ENGANGSSTONAD',
-  FAMILIEHENDELSE = 'FAMILIEHENDELSE',
-  SOKNAD = 'SOKNAD',
-  SOKNAD_ORIGINAL_BEHANDLING = 'SOKNAD_ORIGINAL_BEHANDLING',
-  FAMILIEHENDELSE_ORIGINAL_BEHANDLING = 'FAMILIEHENDELSE_ORIGINAL_BEHANDLING',
-  BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING = 'BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING',
-  MEDLEMSKAP = 'MEDLEMSKAP',
-  INNTEKT_ARBEID_YTELSE = 'INNTEKT_ARBEID_YTELSE',
-  VERGE = 'VERGE',
-  SEND_VARSEL_OM_REVURDERING = 'SEND_VARSEL_OM_REVURDERING',
-  BEHANDLING_NY_BEHANDLENDE_ENHET = 'BEHANDLING_NY_BEHANDLENDE_ENHET',
-  HENLEGG_BEHANDLING = 'HENLEGG_BEHANDLING',
-  RESUME_BEHANDLING = 'RESUME_BEHANDLING',
-  BEHANDLING_ON_HOLD = 'BEHANDLING_ON_HOLD',
-  OPEN_BEHANDLING_FOR_CHANGES = 'OPEN_BEHANDLING_FOR_CHANGES',
-  VERGE_OPPRETT = 'VERGE_OPPRETT',
-  VERGE_FJERN = 'VERGE_FJERN',
-  UTLAND_DOK_STATUS = 'UTLAND_DOK_STATUS',
-  ARBEIDSGIVERE_OVERSIKT = 'ARBEIDSGIVERE_OVERSIKT',
-  BEHANDLING_PERSONOVERSIKT = 'BEHANDLING_PERSONOVERSIKT',
-}
+export const EsBehandlingApiKeys = {
+  BEHANDLING_ES: new RestKey<Behandling, { behandlingId: number }>('BEHANDLING_ES'),
+  UPDATE_ON_HOLD: new RestKey<void, SettPaVentParams>('UPDATE_ON_HOLD'),
+  SAVE_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_AKSJONSPUNKT'),
+  SAVE_OVERSTYRT_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_OVERSTYRT_AKSJONSPUNKT'),
+  PREVIEW_MESSAGE: new RestKey<any, any>('PREVIEW_MESSAGE'),
+  PREVIEW_TILBAKEKREVING_MESSAGE: new RestKey<Behandling, any>('PREVIEW_TILBAKEKREVING_MESSAGE'),
+  AKSJONSPUNKTER: new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER'),
+  VILKAR: new RestKey<Vilkar[], void>('VILKAR'),
+  SIMULERING_RESULTAT: new RestKey<SimuleringResultat, void>('SIMULERING_RESULTAT'),
+  TILBAKEKREVINGVALG: new RestKey<TilbakekrevingValg, void>('TILBAKEKREVINGVALG'),
+  BEREGNINGRESULTAT_ENGANGSSTONAD: new RestKey<BeregningsresultatEs, void>('BEREGNINGRESULTAT_ENGANGSSTONAD'),
+  FAMILIEHENDELSE: new RestKey<FamilieHendelseSamling, void>('FAMILIEHENDELSE'),
+  SOKNAD: new RestKey<Soknad, void>('SOKNAD'),
+  SOKNAD_ORIGINAL_BEHANDLING: new RestKey<Soknad, void>('SOKNAD_ORIGINAL_BEHANDLING'),
+  FAMILIEHENDELSE_ORIGINAL_BEHANDLING: new RestKey<FamilieHendelse, void>('FAMILIEHENDELSE_ORIGINAL_BEHANDLING'),
+  BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING: new RestKey<{'beregningsresultat-engangsstonad'?: BeregningsresultatEs; },
+    void>('BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING'),
+  MEDLEMSKAP: new RestKey<Medlemskap, void>('MEDLEMSKAP'),
+  INNTEKT_ARBEID_YTELSE: new RestKey<InntektArbeidYtelse, void>('INNTEKT_ARBEID_YTELSE'),
+  VERGE: new RestKey<Verge, void>('VERGE'),
+  BEHANDLING_NY_BEHANDLENDE_ENHET: new RestKey<void, NyBehandlendeEnhetParams>('BEHANDLING_NY_BEHANDLENDE_ENHET'),
+  HENLEGG_BEHANDLING: new RestKey<void, { behandlingId: number, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>('HENLEGG_BEHANDLING'),
+  RESUME_BEHANDLING: new RestKey<Behandling, { behandlingId: number, behandlingVersjon: number }>('RESUME_BEHANDLING'),
+  BEHANDLING_ON_HOLD: new RestKey<void, { behandlingId: number, behandlingVersjon: number, frist: string, ventearsak: Kodeverk }>('BEHANDLING_ON_HOLD'),
+  OPEN_BEHANDLING_FOR_CHANGES: new RestKey<Behandling, { behandlingId: number, behandlingVersjon: number }>('OPEN_BEHANDLING_FOR_CHANGES'),
+  VERGE_OPPRETT: new RestKey<Behandling, any>('VERGE_OPPRETT'),
+  VERGE_FJERN: new RestKey<Behandling, any>('VERGE_FJERN'),
+  UTLAND_DOK_STATUS: new RestKey<{ dokStatus: string }, void>('UTLAND_DOK_STATUS'),
+  ARBEIDSGIVERE_OVERSIKT: new RestKey<ArbeidsgiverOpplysningerWrapper, void>('ARBEIDSGIVERE_OVERSIKT'),
+  BEHANDLING_PERSONOVERSIKT: new RestKey<Personoversikt, void>('BEHANDLING_PERSONOVERSIKT'),
+};
 
 const endpoints = new RestApiConfigBuilder()
   .withAsyncPost('/fpsak/api/behandlinger', EsBehandlingApiKeys.BEHANDLING_ES)
@@ -51,7 +56,6 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('soeker-medlemskap-v2', EsBehandlingApiKeys.MEDLEMSKAP)
   .withRel('inntekt-arbeid-ytelse', EsBehandlingApiKeys.INNTEKT_ARBEID_YTELSE)
   .withRel('soeker-verge', EsBehandlingApiKeys.VERGE)
-  .withRel('sendt-varsel-om-revurdering', EsBehandlingApiKeys.SEND_VARSEL_OM_REVURDERING)
   .withRel('utland-dok-status', EsBehandlingApiKeys.UTLAND_DOK_STATUS)
   .withRel('arbeidsgivere-oversikt', EsBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT)
   .withRel('behandling-personoversikt', EsBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT)

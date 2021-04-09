@@ -1,57 +1,47 @@
-import React, {
-  FunctionComponent, useEffect, useState, useCallback,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 
-import {
-  Rettigheter, ReduxFormStateCleaner, useSetBehandlingVedEndring,
-} from '@fpsak-frontend/behandling-felles';
-import {
-  ArbeidsgiverOpplysningerWrapper, Behandling, Fagsak, KodeverkMedNavn, Personoversikt,
-} from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerWrapper, Personoversikt } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
-import { RestApiState, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import {
+  BehandlingContainer, StandardBehandlingProps, StandardPropsProvider, BehandlingPaVent, ReduxFormStateCleaner,
+  useInitRequestApi, useLagreAksjonspunkt, useBehandling, useInitBehandlingHandlinger,
+} from '@fpsak-frontend/behandling-felles';
 
-import ForeldrepengerPaneler from './components/ForeldrepengerPaneler';
-import FetchedData from './types/fetchedDataTsType';
 import { restApiFpHooks, requestFpApi, FpBehandlingApiKeys } from './data/fpBehandlingApi';
-
-const foreldrepengerData = [
-  { key: FpBehandlingApiKeys.AKSJONSPUNKTER },
-  { key: FpBehandlingApiKeys.VILKAR },
-  { key: FpBehandlingApiKeys.YTELSEFORDELING },
-  { key: FpBehandlingApiKeys.SOKNAD },
-  { key: FpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE },
-  { key: FpBehandlingApiKeys.BEREGNINGRESULTAT_FORELDREPENGER },
-  { key: FpBehandlingApiKeys.BEREGNINGSGRUNNLAG },
-  { key: FpBehandlingApiKeys.UTTAK_STONADSKONTOER },
-  { key: FpBehandlingApiKeys.UTTAKSRESULTAT_PERIODER },
-  { key: FpBehandlingApiKeys.SIMULERING_RESULTAT },
-  { key: FpBehandlingApiKeys.UTTAK_KONTROLLER_AKTIVITETSKRAV },
-];
+import SakenFaktaInitPanel from './faktaPaneler/SakenFaktaInitPanel';
+import ArbeidsforholdFaktaInitPanel from './faktaPaneler/ArbeidsforholdFaktaInitPanel';
+import YtelserFaktaInitPanel from './faktaPaneler/YtelserFaktaInitPanel';
+import VergeFaktaInitPanel from './faktaPaneler/VergeFaktaInitPanel';
+import TilleggsopplysningerFaktaInitPanel from './faktaPaneler/TilleggsopplysningerFaktaInitPanel';
+import OmsorgvilkaretFaktaInitPanel from './faktaPaneler/OmsorgvilkaretFaktaInitPanel';
+import FordelingFaktaInitPanel from './faktaPaneler/FordelingFaktaInitPanel';
+import FodselvilkaretFaktaInitPanel from './faktaPaneler/FodselvilkaretFaktaInitPanel';
+import BesteberegningFaktaInitPanel from './faktaPaneler/BesteberegningFaktaInitPanel';
+import AdopsjonsvilkaretFaktaInitPanel from './faktaPaneler/AdopsjonsvilkaretFaktaInitPanel';
+import MedlemskapsvilkaretFaktaInitPanel from './faktaPaneler/MedlemskapsvilkaretFaktaInitPanel';
+import OpptjeningsvilkaretFaktaInitPanel from './faktaPaneler/OpptjeningsvilkaretFaktaInitPanel';
+import BeregningFaktaInitPanel from './faktaPaneler/BeregningFaktaInitPanel';
+import OmsorgFaktaInitPanel from './faktaPaneler/OmsorgFaktaInitPanel';
+import UttakFaktaInitPanel from './faktaPaneler/UttakFaktaInitPanel';
+import AktivitetskravFaktaInitPanel from './faktaPaneler/AktivitetskravFaktaInitPanel';
+import VarselProsessStegInitPanel from './prosessPaneler/VarselProsessStegInitPanel';
+import OpplysningspliktProsessStegInitPanel from './prosessPaneler/OpplysningspliktProsessStegInitPanel';
+import InngangsvilkarProsessStegInitPanel from './prosessPaneler/InngangsvilkarProsessStegInitPanel';
+import FortsattMedlemskapProsessStegInitPanel from './prosessPaneler/FortsattMedlemskapProsessStegInitPanel';
+import BeregningsgrunnlagProsessStegInitPanel from './prosessPaneler/BeregningsgrunnlagProsessStegInitPanel';
+import UttakProsessStegInitPanel from './prosessPaneler/UttakProsessStegInitPanel';
+import TilkjentYtelseProsessStegInitPanel from './prosessPaneler/TilkjentYtelseProsessStegInitPanel';
+import SimuleringProsessStegInitPanel from './prosessPaneler/SimuleringProsessStegInitPanel';
+import VedtakProsessStegInitPanel from './prosessPaneler/VedtakProsessStegInitPanel';
+import SoknadsfristProsessStegInitPanel from './prosessPaneler/SoknadsfristProsessStegInitPanel';
 
 const endepunkterSomSkalHentesEnGang = [
   { key: FpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT },
   { key: FpBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT },
 ];
 
-interface OwnProps {
-  behandlingId: number;
-  fagsak: Fagsak;
-  rettigheter: Rettigheter;
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
-  valgtProsessSteg?: string;
-  valgtFaktaSteg?: string;
-  oppdaterBehandlingVersjon: (versjon: number) => void;
-  behandlingEventHandler: {
-    setHandler: (events: {[key: string]: (params: any) => Promise<any> }) => void;
-    clear: () => void;
-  };
-  opneSokeside: () => void;
-  setRequestPendingMessage: (message: string) => void;
-  kodeverk?: {[key: string]: KodeverkMedNavn[]};
-}
-
-const BehandlingForeldrepengerIndex: FunctionComponent<OwnProps> = ({
+const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> = ({
   behandlingEventHandler,
   behandlingId,
   oppdaterBehandlingVersjon,
@@ -64,102 +54,133 @@ const BehandlingForeldrepengerIndex: FunctionComponent<OwnProps> = ({
   opneSokeside,
   setRequestPendingMessage,
 }) => {
-  const [nyOgForrigeBehandling, setBehandlinger] = useState<{ current?: Behandling; previous?: Behandling }>({ current: undefined, previous: undefined });
-  const behandling = nyOgForrigeBehandling.current;
-  const forrigeBehandling = nyOgForrigeBehandling.previous;
+  useInitRequestApi(requestFpApi, setRequestPendingMessage);
 
-  const setBehandling = useCallback((nyBehandling) => {
-    requestFpApi.resetCache();
-    requestFpApi.setLinks(nyBehandling.links);
-    setBehandlinger((prevState) => ({ current: nyBehandling, previous: prevState.current }));
-  }, []);
+  const {
+    behandling, behandlingState, hentBehandling, setBehandling,
+  } = useBehandling(
+    requestFpApi, FpBehandlingApiKeys.BEHANDLING_FP, behandlingId,
+  );
 
-  const { startRequest: hentBehandling, data: behandlingRes, state: behandlingState } = restApiFpHooks
-    .useRestApiRunner<Behandling>(FpBehandlingApiKeys.BEHANDLING_FP);
-  useSetBehandlingVedEndring(behandlingRes, setBehandling);
+  const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter } = useLagreAksjonspunkt(
+    requestFpApi, setBehandling, FpBehandlingApiKeys.SAVE_AKSJONSPUNKT, FpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT,
+  );
 
-  const { addErrorMessage } = useRestApiErrorDispatcher();
-
-  const { startRequest: nyBehandlendeEnhet } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET);
-  const { startRequest: settBehandlingPaVent } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.BEHANDLING_ON_HOLD);
-  const { startRequest: taBehandlingAvVent } = restApiFpHooks.useRestApiRunner<Behandling>(FpBehandlingApiKeys.RESUME_BEHANDLING);
-  const { startRequest: henleggBehandling } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.HENLEGG_BEHANDLING);
-  const { startRequest: settPaVent } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.UPDATE_ON_HOLD);
-  const { startRequest: opneBehandlingForEndringer } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.OPEN_BEHANDLING_FOR_CHANGES);
-  const { startRequest: opprettVerge } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.VERGE_OPPRETT);
-  const { startRequest: fjernVerge } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.VERGE_FJERN);
-  const { startRequest: lagreRisikoklassifiseringAksjonspunkt } = restApiFpHooks.useRestApiRunner(FpBehandlingApiKeys.SAVE_AKSJONSPUNKT);
-
-  useEffect(() => {
-    behandlingEventHandler.setHandler({
-      endreBehandlendeEnhet: (params) => nyBehandlendeEnhet(params)
-        .then(() => hentBehandling({ behandlingId }, true)),
-      settBehandlingPaVent: (params) => settBehandlingPaVent(params)
-        .then(() => hentBehandling({ behandlingId }, true)),
-      taBehandlingAvVent: (params) => taBehandlingAvVent(params)
-        .then((behandlingResTaAvVent) => setBehandling(behandlingResTaAvVent)),
-      henleggBehandling: (params) => henleggBehandling(params),
-      opneBehandlingForEndringer: (params) => opneBehandlingForEndringer(params)
-        .then((behandlingResOpneForEndring) => setBehandling(behandlingResOpneForEndring)),
-      opprettVerge: (params) => opprettVerge(params)
-        .then((behandlingResOpprettVerge) => setBehandling(behandlingResOpprettVerge)),
-      fjernVerge: (params) => fjernVerge(params)
-        .then((behandlingResFjernVerge) => setBehandling(behandlingResFjernVerge)),
-      lagreRisikoklassifiseringAksjonspunkt: (params) => lagreRisikoklassifiseringAksjonspunkt(params)
-        .then((behandlingEtterRisikoAp) => setBehandling(behandlingEtterRisikoAp)),
-    });
-
-    requestFpApi.setRequestPendingHandler(setRequestPendingMessage);
-    requestFpApi.setAddErrorMessageHandler(addErrorMessage);
-
-    hentBehandling({ behandlingId }, false);
-
-    return () => {
-      behandlingEventHandler.clear();
-    };
-  }, []);
-
-  const { data, state } = restApiFpHooks.useMultipleRestApi<FetchedData>(foreldrepengerData,
-    { keepData: true, updateTriggers: [behandling?.versjon], suspendRequest: !behandling });
+  useInitBehandlingHandlinger(requestFpApi, FpBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);
 
   const { data: opplysningsdata, state: opplysningsdataState } = restApiFpHooks.useMultipleRestApi<{
     arbeidsgivereOversikt: ArbeidsgiverOpplysningerWrapper,
     behandlingPersonoversikt: Personoversikt,
-  }>(endepunkterSomSkalHentesEnGang, {
+  }, void>(endepunkterSomSkalHentesEnGang, {
     updateTriggers: [!behandling],
     suspendRequest: !behandling,
   });
 
-  const harIkkeHentetBehandlingsdata = state === RestApiState.LOADING || state === RestApiState.NOT_STARTED;
   const harIkkeHentetArbeidsgiverOpplysninger = opplysningsdataState === RestApiState.LOADING || opplysningsdataState === RestApiState.NOT_STARTED;
-  if (!behandling || harIkkeHentetArbeidsgiverOpplysninger || (harIkkeHentetBehandlingsdata && data === undefined)) {
+
+  if (!behandling || harIkkeHentetArbeidsgiverOpplysninger) {
     return <LoadingPanel />;
   }
+
+  const { arbeidsgivereOversikt: { arbeidsgivere }, behandlingPersonoversikt: personoversikt } = opplysningsdata;
 
   return (
     <>
       <ReduxFormStateCleaner
         behandlingId={behandling.id}
-        behandlingVersjon={harIkkeHentetBehandlingsdata ? forrigeBehandling.versjon : behandling.versjon}
+        behandlingVersjon={behandling.versjon}
       />
-      <ForeldrepengerPaneler
-        behandling={harIkkeHentetBehandlingsdata ? forrigeBehandling : behandling}
-        fetchedData={data}
-        fagsak={fagsak}
-        alleKodeverk={kodeverk}
-        rettigheter={rettigheter}
-        valgtProsessSteg={valgtProsessSteg}
-        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-        valgtFaktaSteg={valgtFaktaSteg}
-        oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
-        settPaVent={settPaVent}
+      <BehandlingPaVent
+        behandling={behandling}
         hentBehandling={hentBehandling}
-        opneSokeside={opneSokeside}
-        hasFetchError={behandlingState === RestApiState.ERROR}
-        setBehandling={setBehandling}
-        arbeidsgiverOpplysningerPerId={opplysningsdata.arbeidsgivereOversikt.arbeidsgivere}
-        personoversikt={opplysningsdata.behandlingPersonoversikt}
+        kodeverk={kodeverk}
+        requestApi={requestFpApi}
+        oppdaterPaVentKey={FpBehandlingApiKeys.UPDATE_ON_HOLD}
+        aksjonspunktKey={FpBehandlingApiKeys.AKSJONSPUNKTER}
       />
+      <StandardPropsProvider
+        behandling={behandling}
+        fagsak={fagsak}
+        rettigheter={rettigheter}
+        hasFetchError={behandlingState === RestApiState.ERROR}
+        alleKodeverk={kodeverk}
+        lagreAksjonspunkter={lagreAksjonspunkter}
+        lagreOverstyrteAksjonspunkter={lagreOverstyrteAksjonspunkter}
+        oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+      >
+        <BehandlingContainer
+          behandling={behandling}
+          valgtProsessSteg={valgtProsessSteg}
+          valgtFaktaSteg={valgtFaktaSteg}
+          oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+          oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
+          hentFaktaPaneler={(props) => (
+            <>
+              <SakenFaktaInitPanel {...props} />
+              <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+              <YtelserFaktaInitPanel {...props} />
+              <VergeFaktaInitPanel {...props} />
+              <TilleggsopplysningerFaktaInitPanel {...props} />
+              <OmsorgvilkaretFaktaInitPanel {...props} personoversikt={personoversikt} />
+              <AdopsjonsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
+              <FodselvilkaretFaktaInitPanel {...props} />
+              <MedlemskapsvilkaretFaktaInitPanel
+                {...props}
+                rettigheter={rettigheter}
+                hasFetchError={behandlingState === RestApiState.ERROR}
+                arbeidsgiverOpplysningerPerId={arbeidsgivere}
+              />
+              <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+              <BeregningFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+              <BesteberegningFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+              <FordelingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+              <OmsorgFaktaInitPanel {...props} personoversikt={personoversikt} />
+              <UttakFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} personoversikt={personoversikt} />
+              <AktivitetskravFaktaInitPanel {...props} />
+            </>
+          )}
+          hentProsessPaneler={(props, ekstraProps) => (
+            <>
+              <VarselProsessStegInitPanel
+                {...props}
+                fagsak={fagsak}
+                opneSokeside={opneSokeside}
+                toggleSkalOppdatereFagsakContext={ekstraProps.toggleOppdatereFagsakContext}
+              />
+              <OpplysningspliktProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+              <InngangsvilkarProsessStegInitPanel
+                {...props}
+                rettigheter={rettigheter}
+                oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+                apentFaktaPanelInfo={ekstraProps.apentFaktaPanelInfo}
+              />
+              <BeregningsgrunnlagProsessStegInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+              <SoknadsfristProsessStegInitPanel {...props} />
+              <FortsattMedlemskapProsessStegInitPanel {...props} rettigheter={rettigheter} />
+              <UttakProsessStegInitPanel
+                {...props}
+                fagsak={fagsak}
+                arbeidsgiverOpplysningerPerId={arbeidsgivere}
+                personoversikt={personoversikt}
+                rettigheter={rettigheter}
+              />
+              <TilkjentYtelseProsessStegInitPanel
+                {...props}
+                fagsak={fagsak}
+                arbeidsgiverOpplysningerPerId={arbeidsgivere}
+                personoversikt={personoversikt}
+              />
+              <SimuleringProsessStegInitPanel {...props} fagsak={fagsak} menyData={ekstraProps.allMenyData} />
+              <VedtakProsessStegInitPanel
+                {...props}
+                fagsak={fagsak}
+                opneSokeside={opneSokeside}
+                toggleOppdatereFagsakContext={ekstraProps.toggleOppdatereFagsakContext}
+              />
+            </>
+          )}
+        />
+      </StandardPropsProvider>
     </>
   );
 };

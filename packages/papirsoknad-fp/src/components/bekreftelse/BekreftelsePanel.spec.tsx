@@ -1,15 +1,16 @@
 import React from 'react';
+import { shallow } from 'enzyme';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-papirsoknad-fp';
+import messages from '../../../i18n/nb_NO.json';
 import { BekreftelsePanel } from './BekreftelsePanel';
 
 describe('<BekreftelsePanel>', () => {
   describe('Foreldrepenger-søknad', () => {
     it('skal vise radioknapper for om annen foreldre er kjent med perioder det er søkt om', () => {
-      const wrapper = shallowWithIntl(<BekreftelsePanel
-        intl={intlMock}
+      const wrapper = shallow(<BekreftelsePanel
+        intl={getIntlMock(messages)}
         readOnly={false}
         annenForelderInformertRequired
       />);

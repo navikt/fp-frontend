@@ -7,8 +7,7 @@ import { DDMMYYYY_DATE_FORMAT, required } from '@fpsak-frontend/utils';
 import { RadioGroupField, RadioOption, behandlingFormValueSelector } from '@fpsak-frontend/form';
 
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-
-import Permisjon from '../../types/permisjonTsType';
+import { Permisjon } from '@fpsak-frontend/types';
 
 import styles from './tilretteleggingArbeidsforholdSection.less';
 

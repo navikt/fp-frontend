@@ -4,13 +4,14 @@ import { AlertStripeFeil, AlertStripeInfo } from 'nav-frontend-alertstriper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { DatepickerField, TextAreaField } from '@fpsak-frontend/form';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
-import { Arbeidsforhold as IayArbeidsforhold } from '@fpsak-frontend/types';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { Arbeidsforhold as IayArbeidsforhold, FodselOgTilrettelegging, ArbeidsforholdFodselOgTilrettelegging } from '@fpsak-frontend/types';
 
 import { FodselOgTilretteleggingFaktaForm, validateForm } from './FodselOgTilretteleggingFaktaForm';
 import TilretteleggingArbeidsforholdSection from './tilrettelegging/TilretteleggingArbeidsforholdSection';
-import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-fodsel-og-tilrettelegging';
-import FodselOgTilrettelegging from '../types/fodselOgTilretteleggingTsType';
-import ArbeidsforholdFodselOgTilrettelegging from '../types/arbeidsforholdFodselOgTilretteleggingTsType';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 const arbeidsgiverOpplysningerPerId = {
   910909088: {
@@ -77,7 +78,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       onSubmit={() => undefined}
       uttakArbeidTyper={uttakArbeidTyper}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
 
     const tilretteleggingArbeidsforholdSection = wrapper.find(TilretteleggingArbeidsforholdSection);
     expect(tilretteleggingArbeidsforholdSection).toHaveLength(2);
@@ -111,7 +112,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       onSubmit={() => undefined}
       uttakArbeidTyper={uttakArbeidTyper}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
 
     const tilretteleggingArbeidsforholdSection = wrapper.find(TilretteleggingArbeidsforholdSection);
     expect(tilretteleggingArbeidsforholdSection).toHaveLength(2);
@@ -146,7 +147,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       uttakArbeidTyper={uttakArbeidTyper}
       {...reduxFormPropsMock}
       {...formProps}
-    />);
+    />, messages);
 
     const tilretteleggingArbeidsforholdSection = wrapper.find(TilretteleggingArbeidsforholdSection);
     expect(tilretteleggingArbeidsforholdSection).toHaveLength(2);
@@ -343,7 +344,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       onSubmit={() => undefined}
       uttakArbeidTyper={uttakArbeidTyper}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
 
     expect(wrapper.find(AlertStripeInfo)).toHaveLength(1);
   });
@@ -392,7 +393,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       onSubmit={() => undefined}
       uttakArbeidTyper={uttakArbeidTyper}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
 
     expect(wrapper.find(AlertStripeInfo)).toHaveLength(1);
   });
@@ -441,7 +442,7 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
       onSubmit={() => undefined}
       uttakArbeidTyper={uttakArbeidTyper}
       {...reduxFormPropsMock}
-    />);
+    />, messages);
 
     expect(wrapper.find(AlertStripeInfo)).toHaveLength(0);
   });

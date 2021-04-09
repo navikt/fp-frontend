@@ -2,7 +2,7 @@ import React from 'react';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
@@ -13,8 +13,10 @@ import {
 
 import { buildInitialValues, transformValues, UttakPanelImpl as UttakPanel } from './UttakPanel';
 import Uttak, { UttaksresultatActivity } from './Uttak';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-proses-uttak';
+import messages from '../../i18n/nb_NO.json';
 import { AktivitetFieldArray } from './RenderUttakTable';
+
+const intlMock = getIntlMock(messages);
 
 describe('<UttakPanel>', () => {
   const soknad = {
@@ -162,7 +164,7 @@ describe('<UttakPanel>', () => {
       readOnlySubmitButton={false}
       apCodes={[]}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     const uttak = wrapper.find(Uttak);
     expect(uttak).toHaveLength(1);
     const formattedMessage = wrapper.find(FormattedMessage);
@@ -216,7 +218,7 @@ describe('<UttakPanel>', () => {
       readOnlySubmitButton={false}
       apCodes={[]}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     const uttak = wrapper.find(Uttak);
     expect(uttak).toHaveLength(1);
     const formattedMessage = wrapper.find(FormattedMessage);

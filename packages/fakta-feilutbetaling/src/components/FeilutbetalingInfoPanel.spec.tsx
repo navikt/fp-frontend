@@ -10,10 +10,10 @@ import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+import { FeilutbetalingAarsak } from '@fpsak-frontend/types';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 
 import { FeilutbetalingInfoPanelImpl } from './FeilutbetalingInfoPanel';
-import FeilutbetalingAarsak from '../types/feilutbetalingAarsakTsType';
 
 const BEHANDLING_AARSAK_KODEVERK = 'BEHANDLING_AARSAK';
 const TILBAKEKR_VIDERE_BEH_KODEVERK = 'TILBAKEKR_VIDERE_BEH';

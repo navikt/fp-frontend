@@ -3,9 +3,10 @@ import sinon from 'sinon';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { Behandling, TotrinnskontrollSkjermlenkeContext } from '@fpsak-frontend/types';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { TotrinnskontrollBeslutterForm } from './TotrinnskontrollBeslutterForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-totrinnskontroll';
+import messages from '../../i18n/nb_NO.json';
 
 const location = {
   pathname: '', search: '', state: {}, hash: '',
@@ -46,7 +47,7 @@ describe('<TotrinnskontrollBeslutterForm>', () => {
       skjemalenkeTyper={[]}
       aksjonspunktGodkjenning={[]}
       faktaOmBeregningTilfeller={[]}
-    />);
+    />, messages);
 
     const form = wrapper.find('form');
     expect(form).toHaveLength(1);

@@ -3,9 +3,11 @@ import { FormattedMessage } from 'react-intl';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
+
 import { BeregningsgrunnlagAndel, SammenligningsgrunlagProp } from '@fpsak-frontend/types';
 import AvviksopplysningerSN from './AvvikopplysningerSN';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
+import messages from '../../../i18n/nb_NO.json';
 
 const sammenligningsgrunnlag = (kode) => ({
   sammenligningsgrunnlagFom: '2018-09-01',
@@ -41,7 +43,7 @@ describe('<AvviksopplysningerSN>', () => {
       sammenligningsgrunnlagPrStatus={[sammenligningsgrunnlagPrStatus]}
       alleAndelerIForstePeriode={[andel as BeregningsgrunnlagAndel]}
       relevanteStatuser={{ isKombinasjonsstatus: false } as RelevanteStatuserProp}
-    />);
+    />, messages);
     const rows = wrapper.find('FlexRow');
     expect(rows).toHaveLength(1);
     const omregnetAarsinntektText = rows.first().find(FormattedMessage);
@@ -56,7 +58,7 @@ describe('<AvviksopplysningerSN>', () => {
       sammenligningsgrunnlagPrStatus={[sammenligningsgrunnlagPrStatus]}
       alleAndelerIForstePeriode={[andel as BeregningsgrunnlagAndel]}
       relevanteStatuser={{ isKombinasjonsstatus: false } as RelevanteStatuserProp}
-    />);
+    />, messages);
     const rows = wrapper.find('FlexRow');
     expect(rows).toHaveLength(1);
     const omregnetAarsinntektText = rows.first().find(FormattedMessage);
@@ -70,7 +72,7 @@ describe('<AvviksopplysningerSN>', () => {
       sammenligningsgrunnlagPrStatus={[sammenligningsgrunnlagPrStatus]}
       alleAndelerIForstePeriode={[andel as BeregningsgrunnlagAndel]}
       relevanteStatuser={{ isKombinasjonsstatus: false } as RelevanteStatuserProp}
-    />);
+    />, messages);
     const avviksTabell = wrapper.find('AvvikopplysningerATFLSN');
     expect(avviksTabell).toHaveLength(1);
   });

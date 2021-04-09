@@ -1,16 +1,26 @@
-import { RestApiConfigBuilder, createRequestApi } from '@fpsak-frontend/rest-api';
+import { RestApiConfigBuilder, createRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
+import { Aksjonspunkt, Behandling, Kodeverk } from '@fpsak-frontend/types';
+import { SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
-export enum PapirsoknadApiKeys {
-  BEHANDLING_PAPIRSOKNAD = 'BEHANDLING_PAPIRSOKNAD',
-  AKSJONSPUNKTER = 'AKSJONSPUNKTER',
-  BEHANDLING_NY_BEHANDLENDE_ENHET = 'BEHANDLING_NY_BEHANDLENDE_ENHET',
-  HENLEGG_BEHANDLING = 'HENLEGG_BEHANDLING',
-  RESUME_BEHANDLING = 'RESUME_BEHANDLING',
-  BEHANDLING_ON_HOLD = 'BEHANDLING_ON_HOLD',
-  UPDATE_ON_HOLD = 'UPDATE_ON_HOLD',
-  SAVE_AKSJONSPUNKT = 'SAVE_AKSJONSPUNKT',
+type NyBehandlendeEnhet = {
+  behandlingId: number,
+  enhetNavn: string,
+  enhetId: string,
+  begrunnelse: string,
+  behandlingVersjon: string,
 }
+
+export const PapirsoknadApiKeys = {
+  BEHANDLING_PAPIRSOKNAD: new RestKey<Behandling, { behandlingId: number }>('BEHANDLING_PAPIRSOKNAD'),
+  AKSJONSPUNKTER: new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER'),
+  BEHANDLING_NY_BEHANDLENDE_ENHET: new RestKey<void, NyBehandlendeEnhet>('BEHANDLING_NY_BEHANDLENDE_ENHET'),
+  HENLEGG_BEHANDLING: new RestKey<void, { behandlingId: number, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>('HENLEGG_BEHANDLING'),
+  RESUME_BEHANDLING: new RestKey<Behandling, { behandlingId: number, behandlingVersjon: number }>('RESUME_BEHANDLING'),
+  BEHANDLING_ON_HOLD: new RestKey<void, { behandlingId: number, behandlingVersjon: number, frist: string, ventearsak: Kodeverk }>('BEHANDLING_ON_HOLD'),
+  UPDATE_ON_HOLD: new RestKey<void, SettPaVentParams>('UPDATE_ON_HOLD'),
+  SAVE_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_AKSJONSPUNKT'),
+};
 
 const endpoints = new RestApiConfigBuilder()
   .withAsyncPost('/fpsak/api/behandlinger', PapirsoknadApiKeys.BEHANDLING_PAPIRSOKNAD)

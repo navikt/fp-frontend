@@ -4,16 +4,18 @@ import { FormattedMessage } from 'react-intl';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { Aksjonspunkt, Medlemskap, Soknad } from '@fpsak-frontend/types';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import PerioderMedMedlemskapFaktaPanel, { PerioderMedMedlemskapFaktaPanelImpl as UndecoratedForm, PeriodeMedId } from './PerioderMedMedlemskapFaktaPanel';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-medlemskap';
+import messages from '../../../i18n/nb_NO.json';
 
 jest.mock('react-intl', () => {
   const reactIntl = jest.requireActual('react-intl');
-  const mockIntl = jest.requireMock('../../../i18n/intl-enzyme-test-helper-fakta-medlemskap');
+  const meldinger = jest.requireActual('../../../i18n/nb_NO.json');
+  const intlTestHelper = jest.requireActual('@fpsak-frontend/utils-test/src/intl-enzyme-test-helper');
   return {
     ...reactIntl,
-    useIntl: () => mockIntl.intlMock,
+    useIntl: () => intlTestHelper.getIntlMock(meldinger),
   };
 });
 
@@ -47,7 +49,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       vurderingTypes={manuelleVurderingstyper}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
-    />);
+    />, messages);
 
     const table = wrapper.find('Table');
     expect(table).toHaveLength(1);
@@ -87,7 +89,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       vurderingTypes={[]}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
-    />);
+    />, messages);
 
     const message = wrapper.find(FormattedMessage);
     expect(message).toHaveLength(1);
@@ -116,7 +118,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       vurderingTypes={[]}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
-    />);
+    />, messages);
 
     const message = wrapper.find(FormattedMessage);
     expect(message).toHaveLength(1);
@@ -145,7 +147,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       vurderingTypes={[]}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
-    />);
+    />, messages);
 
     const message = wrapper.find(FormattedMessage);
     expect(message).toHaveLength(1);
@@ -173,7 +175,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       vurderingTypes={[]}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
-    />);
+    />, messages);
 
     const table = wrapper.find('Table');
     expect(table).toHaveLength(1);
@@ -194,7 +196,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       vurderingTypes={[]}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
-    />);
+    />, messages);
 
     const table = wrapper.find('Table');
     expect(table).toHaveLength(0);

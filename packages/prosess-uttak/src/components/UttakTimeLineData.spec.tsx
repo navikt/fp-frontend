@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Column } from 'nav-frontend-grid';
 
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
 import {
   AktivitetIdentifikator, AktivitetSaldo, UttakStonadskontoer, Stonadskonto,
@@ -13,8 +13,10 @@ import {
 import { kalkulerTrekkdager, UttakTimeLineData } from './UttakTimeLineData';
 import DelOppPeriodeModal from './DelOppPeriodeModal';
 import UttakActivity from './UttakActivity';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-proses-uttak';
+import messages from '../../i18n/nb_NO.json';
 import { PeriodeMedClassName } from './Uttak';
+
+const intlMock = getIntlMock(messages);
 
 describe('<UttakTimeLineData>', () => {
   const selectedItem = {
@@ -150,7 +152,7 @@ describe('<UttakTimeLineData>', () => {
       behandlingVersjon={1}
       behandlingId={1}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     wrapper.setState({ showDelPeriodeModal: false });
     const modal = wrapper.find(DelOppPeriodeModal);
     expect(modal).toHaveLength(0);
@@ -184,7 +186,7 @@ describe('<UttakTimeLineData>', () => {
       behandlingVersjon={1}
       behandlingId={1}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     wrapper.setState({ showDelPeriodeModal: true });
     expect(wrapper.state('showDelPeriodeModal')).toBe(true);
     const modal = wrapper.find(DelOppPeriodeModal);
@@ -217,7 +219,7 @@ describe('<UttakTimeLineData>', () => {
       behandlingVersjon={1}
       behandlingId={1}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     wrapper.setState({ showDelPeriodeModal: false });
     const modal = wrapper.find(DelOppPeriodeModal);
     expect(modal).toHaveLength(0);
@@ -252,7 +254,7 @@ describe('<UttakTimeLineData>', () => {
       behandlingVersjon={1}
       behandlingId={1}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     const buttons = wrapper.find(TimeLineButton);
     expect(buttons).toHaveLength(2);
     expect(buttons.at(0).prop('callback')).toEqual(callbackBackward);
@@ -284,7 +286,7 @@ describe('<UttakTimeLineData>', () => {
       behandlingVersjon={1}
       behandlingId={1}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     const uttakActivity = wrapper.find(UttakActivity);
     expect(uttakActivity).toHaveLength(1);
     expect(uttakActivity.first().prop('cancelSelectedActivity')).toEqual(callbackCancelSelectedActivity);
@@ -317,7 +319,7 @@ describe('<UttakTimeLineData>', () => {
       behandlingVersjon={1}
       behandlingId={1}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     const uttak = wrapper.find(AksjonspunktHelpTextTemp);
     expect(uttak).toHaveLength(1);
     const formattedMessage = uttak.find(FormattedMessage);
@@ -350,7 +352,7 @@ describe('<UttakTimeLineData>', () => {
       behandlingVersjon={1}
       behandlingId={1}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     const uttak = wrapper.find(AksjonspunktHelpTextTemp);
     expect(uttak).toHaveLength(1);
     const formattedMessage = uttak.find(FormattedMessage);

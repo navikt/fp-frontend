@@ -1,8 +1,9 @@
 import React from 'react';
 
 import { TextAreaField } from '@fpsak-frontend/form';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-felles';
+import messages from '../../i18n/nb_NO.json';
 import FaktaBegrunnelseTextField from './FaktaBegrunnelseTextField';
 
 describe('<FaktaBegrunnelseTextField>', () => {
@@ -11,7 +12,7 @@ describe('<FaktaBegrunnelseTextField>', () => {
       isReadOnly={false}
       isSubmittable={false}
       hasBegrunnelse={false}
-    />);
+    />, messages);
 
     expect(wrapper.find(TextAreaField)).toHaveLength(0);
   });
@@ -21,7 +22,7 @@ describe('<FaktaBegrunnelseTextField>', () => {
       isReadOnly={false}
       isSubmittable
       hasBegrunnelse={false}
-    />);
+    />, messages);
 
     expect(wrapper.find(TextAreaField)).toHaveLength(1);
   });
@@ -31,7 +32,7 @@ describe('<FaktaBegrunnelseTextField>', () => {
       isReadOnly
       isSubmittable
       hasBegrunnelse={false}
-    />);
+    />, messages);
 
     const textField = wrapper.find(TextAreaField);
     expect(textField).toHaveLength(1);
@@ -43,7 +44,7 @@ describe('<FaktaBegrunnelseTextField>', () => {
       isReadOnly={false}
       isSubmittable
       hasBegrunnelse={false}
-    />);
+    />, messages);
 
     const textField = wrapper.find(TextAreaField);
     expect(textField).toHaveLength(1);
@@ -56,7 +57,7 @@ describe('<FaktaBegrunnelseTextField>', () => {
       isSubmittable
       hasBegrunnelse={false}
       hasVurderingText
-    />);
+    />, messages);
 
     const textField = wrapper.find(TextAreaField);
     expect(textField).toHaveLength(1);
@@ -69,7 +70,7 @@ describe('<FaktaBegrunnelseTextField>', () => {
       isSubmittable
       hasBegrunnelse={false}
       label="Test"
-    />);
+    />, messages);
 
     const textField = wrapper.find(TextAreaField);
     expect(textField).toHaveLength(1);

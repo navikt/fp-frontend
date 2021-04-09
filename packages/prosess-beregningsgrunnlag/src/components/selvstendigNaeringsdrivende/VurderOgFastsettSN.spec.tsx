@@ -8,6 +8,7 @@ import VurderVarigEndretEllerNyoppstartetSN2,
 }
   from './VurderVarigEndretEllerNyoppstartetSN';
 import FastsettSN2, { begrunnelseFieldname as fastsettingBegrunnelse, fastsettInntektFieldname } from './FastsettSN';
+import messages from '../../../i18n/nb_NO.json';
 
 const {
   VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
@@ -38,7 +39,7 @@ describe('<VurderOgFastsettSN>', () => {
       erVarigEndring
       erNyoppstartet={false}
       gjeldendeAksjonspunkter={[mockAksjonspunktMedKodeOgStatus(FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET, undefined, 'OPPR')]}
-    />);
+    />, messages);
     expect(wrapper.find(FastsettSN2)).toHaveLength(1);
     expect(wrapper.find(VurderVarigEndretEllerNyoppstartetSN2)).toHaveLength(0);
   });
@@ -53,7 +54,7 @@ describe('<VurderOgFastsettSN>', () => {
       erNyArbLivet={false}
       erVarigEndring
       erNyoppstartet={false}
-    />);
+    />, messages);
     expect(wrapper.find(FastsettSN2)).toHaveLength(0);
     expect(wrapper.find(VurderVarigEndretEllerNyoppstartetSN2)).toHaveLength(1);
   });
@@ -68,7 +69,7 @@ describe('<VurderOgFastsettSN>', () => {
       gjeldendeAksjonspunkter={[vurderEndring]}
       erVarigEndring
       erNyoppstartet={false}
-    />);
+    />, messages);
     expect(wrapper.find(FastsettSN2)).toHaveLength(0);
     expect(wrapper.find(VurderVarigEndretEllerNyoppstartetSN2)).toHaveLength(1);
   });
@@ -83,7 +84,7 @@ describe('<VurderOgFastsettSN>', () => {
       gjeldendeAksjonspunkter={[vurderEndring]}
       erVarigEndring
       erNyoppstartet={false}
-    />);
+    />, messages);
     expect(wrapper.find(FastsettSN2)).toHaveLength(1);
     expect(wrapper.find(VurderVarigEndretEllerNyoppstartetSN2)).toHaveLength(1);
   });

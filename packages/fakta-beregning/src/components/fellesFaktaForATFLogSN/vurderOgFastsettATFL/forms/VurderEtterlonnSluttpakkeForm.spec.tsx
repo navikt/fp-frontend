@@ -1,7 +1,9 @@
 import React from 'react';
 
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
 import VurderEtterlonnSluttpakkeForm from './VurderEtterlonnSluttpakkeForm';
-import shallowWithIntl from '../../../../../i18n/intl-enzyme-test-helper-fakta-beregning';
+import messages from '../../../../../i18n/nb_NO.json';
 
 describe('<VurderEtterlonnSluttpakkeForm>', () => {
   it('Skal teste at komponenten vises korrekt', () => {
@@ -10,7 +12,7 @@ describe('<VurderEtterlonnSluttpakkeForm>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       isAksjonspunktClosed={false}
-    />);
+    />, messages);
     const radios = wrapper.find('RadioOption');
     expect(radios).toHaveLength(2);
   });

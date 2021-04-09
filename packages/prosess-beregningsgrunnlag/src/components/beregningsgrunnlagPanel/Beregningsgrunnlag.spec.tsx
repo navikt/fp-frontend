@@ -13,6 +13,7 @@ import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 import TilstotendeYtelser from '../tilstotendeYtelser/TilstotendeYtelser';
 import YtelserFraInfotrygd from '../tilstotendeYtelser/YtelserFraInfotrygd';
 import MilitaerPanel from '../militar/MilitaerPanel';
+import messages from '../../../i18n/nb_NO.json';
 
 const arbeidstakerAndel = {
   aktivitetStatus: {
@@ -167,7 +168,7 @@ describe('<Beregningsgrunnlag>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
     const atPanel = wrapper.find(GrunnlagForAarsinntektPanelAT);
     expect(atPanel).toHaveLength(1);
     expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(0);
@@ -185,7 +186,7 @@ describe('<Beregningsgrunnlag>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
     const flPanel = wrapper.find(GrunnlagForAarsinntektPanelFL);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(0);
     expect(flPanel).toHaveLength(1);
@@ -203,7 +204,7 @@ describe('<Beregningsgrunnlag>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
     const snPanel = wrapper.find(GrunnlagForAarsinntektPanelSN);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(0);
@@ -222,7 +223,7 @@ describe('<Beregningsgrunnlag>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
     const snPanel = wrapper.find(GrunnlagForAarsinntektPanelSN);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(0);
@@ -242,7 +243,7 @@ describe('<Beregningsgrunnlag>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
     expect(wrapper.find(MilitaerPanel)).toHaveLength(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(1);
     expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(0);
@@ -263,7 +264,7 @@ describe('<Beregningsgrunnlag>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
     expect(wrapper.find(MilitaerPanel)).toHaveLength(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(1);
@@ -285,7 +286,7 @@ describe('<Beregningsgrunnlag>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
     expect(wrapper.find(MilitaerPanel)).toHaveLength(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(1);
     expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(1);
@@ -308,7 +309,7 @@ describe('<Beregningsgrunnlag>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
     expect(wrapper.find(MilitaerPanel)).toHaveLength(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(1);
     expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(1);
@@ -325,7 +326,7 @@ describe('<Beregningsgrunnlag>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).toHaveLength(0);
@@ -346,7 +347,7 @@ describe('<Beregningsgrunnlag>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).toHaveLength(0);
@@ -365,7 +366,7 @@ describe('<Beregningsgrunnlag>', () => {
       behandlingId={1}
       behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelFL)).toHaveLength(0);
     expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).toHaveLength(0);

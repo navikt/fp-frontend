@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import opptjeningAktivitetType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
@@ -9,7 +9,7 @@ import { AksjonspunktHelpTextTemp, OverstyringKnapp } from '@fpsak-frontend/shar
 
 import sinon from 'sinon';
 import { lagStateMedAksjonspunkterOgBeregningsgrunnlag } from '../beregning-test-helper';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-beregning';
+import messages from '../../../i18n/nb_NO.json';
 import {
   AvklareAktiviteterPanelImpl,
   BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME,
@@ -20,6 +20,8 @@ import {
 } from './AvklareAktiviteterPanel';
 import VurderAktiviteterPanel from './VurderAktiviteterPanel';
 import { formNameAvklarAktiviteter } from '../BeregningFormUtils';
+
+const intlMock = getIntlMock(messages);
 
 const {
   AVKLAR_AKTIVITETER,
@@ -168,7 +170,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       {...behandlingProps}
-    />);
+    />, messages);
     const vurderAktivitetPanel = wrapper.find(VurderAktiviteterPanel);
     expect(vurderAktivitetPanel).toHaveLength(1);
   });
@@ -201,7 +203,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       reduxFormInitialize={() => {}}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       {...behandlingProps}
-    />);
+    />, messages);
     const radio = wrapper.find(VurderAktiviteterPanel);
     expect(radio).toHaveLength(0);
   });
@@ -239,7 +241,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       reduxFormInitialize={() => {}}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       {...behandlingProps}
-    />);
+    />, messages);
     expect(wrapper.find(OverstyringKnapp)).toHaveLength(1);
   });
 
@@ -276,7 +278,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       reduxFormInitialize={() => {}}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       {...behandlingProps}
-    />);
+    />, messages);
     const helptext = wrapper.find(AksjonspunktHelpTextTemp);
     expect(helptext).toHaveLength(0);
   });

@@ -3,11 +3,13 @@ import sinon from 'sinon';
 import Modal from 'nav-frontend-modal';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { DelOppPeriodeModal } from './DelOppPeriodeModal';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-proses-uttak';
+import messages from '../../i18n/nb_NO.json';
 import { PeriodeMedClassName } from './Uttak';
+
+const intlMock = getIntlMock(messages);
 
 describe('<DelOppPeriodeModal>', () => {
   const periodeData = {
@@ -28,7 +30,7 @@ describe('<DelOppPeriodeModal>', () => {
       splitPeriod={sinon.spy()}
       validate={sinon.spy()}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
     const modal = wrapper.find(Modal);
     expect(modal).toHaveLength(1);
     expect(modal.prop('isOpen')).toBe(true);
@@ -50,7 +52,7 @@ describe('<DelOppPeriodeModal>', () => {
       splitPeriod={sinon.spy()}
       validate={sinon.spy()}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
     const modal = wrapper.find(Modal);
     expect(modal.prop('isOpen')).toBe(false);
   });
@@ -67,7 +69,7 @@ describe('<DelOppPeriodeModal>', () => {
       splitPeriod={sinon.spy()}
       validate={sinon.spy()}
       onSubmit={sinon.spy()}
-    />);
+    />, messages);
     wrapper.find('Knapp').simulate('click');
     expect(cancelEvent).toHaveProperty('callCount', 1);
   });

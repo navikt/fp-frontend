@@ -1,5 +1,5 @@
 import React from 'react';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { MockFieldsWithContent } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -11,7 +11,9 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { lagStateMedAksjonspunkterOgBeregningsgrunnlag } from '../beregning-test-helper';
 import { AndelRowImpl, mapStateToProps } from './InntektFieldArrayRow';
 import { formNameVurderFaktaBeregning } from '../BeregningFormUtils';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-beregning';
+import messages from '../../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 const aksjonspunkter = [
   {
@@ -93,7 +95,7 @@ it('skal vise komponent med arbeidsperiode og refusjonskrav', () => {
     index={0}
     {...ownProps}
     {...props}
-  />);
+  />, messages);
   const rows = wrapper.find(TableRow);
   expect(rows.length).toEqual(1);
   const columns = rows.first().find(TableColumn);
@@ -138,7 +140,7 @@ it('skal vise komponent uten arbeidsperiode og refusjonskrav', () => {
     isAksjonspunktClosed={false}
     skalRedigereInntektskategori={false}
     {...ownProps}
-  />);
+  />, messages);
   const row = wrapper.find(TableRow);
   expect(row.length).toEqual(1);
   const columns = row.first().find(TableColumn);
@@ -183,8 +185,7 @@ it('skal vise komponent med readOnly beløp', () => {
     isAksjonspunktClosed={false}
     skalRedigereInntektskategori={false}
     {...ownProps}
-
-  />);
+  />, messages);
   const row = wrapper.find(TableRow);
   expect(row.length).toEqual(1);
   const columns = row.first().find(TableColumn);
@@ -226,7 +227,7 @@ it('skal vise komponent med sletteknapp', () => {
     index={0}
     {...ownProps}
     {...props}
-  />);
+  />, messages);
   const row = wrapper.find(TableRow);
   expect(row.length).toEqual(1);
   const columns = row.first().find(TableColumn);

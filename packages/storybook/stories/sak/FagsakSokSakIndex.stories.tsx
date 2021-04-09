@@ -51,7 +51,7 @@ export const visMeldingerPanel = () => {
   return (
     <FagsakSokSakIndex
       fagsaker={visResultat ? object('fagsaker', fagsaker as Fagsak[]) : []}
-      searchFagsakCallback={() => toggleResultat(true)}
+      searchFagsakCallback={() => toggleResultat(true) as any}
       searchResultReceived={boolean('searchResultReceived', false)}
       selectFagsakCallback={action('button-click')}
       searchStarted={boolean('searchStarted', false)}
@@ -63,7 +63,7 @@ export const visMeldingerPanel = () => {
 export const visSøkDerEnIkkeHarAdgang = () => (
   <FagsakSokSakIndex
     fagsaker={[]}
-    searchFagsakCallback={action('button-click')}
+    searchFagsakCallback={action('button-click') as any}
     searchResultReceived={boolean('searchResultReceived', false)}
     selectFagsakCallback={action('button-click')}
     searchStarted={boolean('searchStarted', false)}

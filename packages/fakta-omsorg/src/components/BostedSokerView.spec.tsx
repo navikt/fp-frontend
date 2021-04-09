@@ -2,14 +2,16 @@ import React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 import EtikettBase from 'nav-frontend-etiketter';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { Tooltip } from '@fpsak-frontend/shared-components';
 import sivilstandType from '@fpsak-frontend/kodeverk/src/sivilstandType';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
 import { PersonopplysningerBasis } from '@fpsak-frontend/types';
 
 import { BostedSokerView } from './BostedSokerView';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-omsorg';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<BostedsokerView>', () => {
   const soker = {
@@ -46,7 +48,7 @@ describe('<BostedsokerView>', () => {
       personopplysninger={soker}
       sivilstandTypes={sivilstandTypes}
       sokerTypeText="Søker"
-    />);
+    />, messages);
 
     expect(wrapper.find('Element').childAt(0).text()).toEqual('Espen Utvikler');
   });
@@ -57,7 +59,7 @@ describe('<BostedsokerView>', () => {
       personopplysninger={soker}
       sivilstandTypes={sivilstandTypes}
       sokerTypeText="Søker"
-    />);
+    />, messages);
     const adr = wrapper.find(Normaltekst);
     expect(adr).toHaveLength(2);
     expect(adr.first().childAt(0).text()).toEqual('Vei 1, 1000 Oslo');
@@ -70,7 +72,7 @@ describe('<BostedsokerView>', () => {
       personopplysninger={soker}
       sivilstandTypes={sivilstandTypes}
       sokerTypeText="Søker"
-    />);
+    />, messages);
 
     const tooltips = wrapper.find(Tooltip);
     expect(tooltips).toHaveLength(1);

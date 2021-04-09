@@ -1,8 +1,10 @@
 import React from 'react';
 
 import { FaktaOmBeregning } from '@fpsak-frontend/types';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
 import VurderMilitaer, { vurderMilitaerField } from './VurderMilitaer';
-import shallowWithIntl from '../../../../i18n/intl-enzyme-test-helper-fakta-beregning';
+import messages from '../../../../i18n/nb_NO.json';
 
 const mockBGMedStatus = (mili) => ({
   vurderMilitaer: {
@@ -15,7 +17,7 @@ describe('<VurderMilitaer>', () => {
     const wrapper = shallowWithIntl(<VurderMilitaer
       readOnly={false}
       isAksjonspunktClosed={false}
-    />);
+    />, messages);
     const radios = wrapper.find('RadioOption');
     expect(radios).toHaveLength(2);
   });

@@ -1,42 +1,48 @@
-import { RestApiConfigBuilder, createRequestApi } from '@fpsak-frontend/rest-api';
+import { RestApiConfigBuilder, createRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
+import {
+  Aksjonspunkt, ArbeidsgiverOpplysningerWrapper, Behandling, Beregningsgrunnlag, BeregningsresultatFp, FamilieHendelseSamling,
+  Feriepengegrunnlag, FodselOgTilrettelegging, InntektArbeidYtelse, Kodeverk, Medlemskap, Opptjening, Personoversikt,
+  SimuleringResultat, Soknad, TilbakekrevingValg, UttakPeriodeGrense, Verge, Vilkar, Ytelsefordeling,
+} from '@fpsak-frontend/types';
+import { NyBehandlendeEnhetParams, SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
-export enum SvpBehandlingApiKeys {
-  BEHANDLING_SVP = 'BEHANDLING_SVP',
-  UPDATE_ON_HOLD = 'UPDATE_ON_HOLD',
-  SAVE_AKSJONSPUNKT = 'SAVE_AKSJONSPUNKT',
-  SAVE_OVERSTYRT_AKSJONSPUNKT = 'SAVE_OVERSTYRT_AKSJONSPUNKT',
-  PREVIEW_MESSAGE = 'PREVIEW_MESSAGE',
-  PREVIEW_TILBAKEKREVING_MESSAGE = 'PREVIEW_TILBAKEKREVING_MESSAGE',
-  AKSJONSPUNKTER = 'AKSJONSPUNKTER',
-  VILKAR = 'VILKAR',
-  SIMULERING_RESULTAT = 'SIMULERING_RESULTAT',
-  TILBAKEKREVINGVALG = 'TILBAKEKREVINGVALG',
-  BEREGNINGRESULTAT_FORELDREPENGER = 'BEREGNINGRESULTAT_FORELDREPENGER',
-  BEREGNINGSGRUNNLAG = 'BEREGNINGSGRUNNLAG',
-  FERIEPENGEGRUNNLAG = 'FERIEPENGEGRUNNLAG',
-  FAMILIEHENDELSE = 'FAMILIEHENDELSE',
-  SOKNAD = 'SOKNAD',
-  BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING = 'BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING',
-  MEDLEMSKAP = 'MEDLEMSKAP',
-  UTTAK_PERIODE_GRENSE = 'UTTAK_PERIODE_GRENSE',
-  INNTEKT_ARBEID_YTELSE = 'INNTEKT_ARBEID_YTELSE',
-  VERGE = 'VERGE',
-  YTELSEFORDELING = 'YTELSEFORDELING',
-  OPPTJENING = 'OPPTJENING',
-  SEND_VARSEL_OM_REVURDERING = 'SEND_VARSEL_OM_REVURDERING',
-  SVANGERSKAPSPENGER_TILRETTELEGGING = 'SVANGERSKAPSPENGER_TILRETTELEGGING',
-  BEHANDLING_NY_BEHANDLENDE_ENHET = 'BEHANDLING_NY_BEHANDLENDE_ENHET',
-  HENLEGG_BEHANDLING = 'HENLEGG_BEHANDLING',
-  RESUME_BEHANDLING = 'RESUME_BEHANDLING',
-  BEHANDLING_ON_HOLD = 'BEHANDLING_ON_HOLD',
-  OPEN_BEHANDLING_FOR_CHANGES = 'OPEN_BEHANDLING_FOR_CHANGES',
-  VERGE_OPPRETT = 'VERGE_OPPRETT',
-  VERGE_FJERN = 'VERGE_FJERN',
-  UTLAND_DOK_STATUS = 'UTLAND_DOK_STATUS',
-  ARBEIDSGIVERE_OVERSIKT = 'ARBEIDSGIVERE_OVERSIKT',
-  BEHANDLING_PERSONOVERSIKT = 'BEHANDLING_PERSONOVERSIKT',
-}
+export const SvpBehandlingApiKeys = {
+  BEHANDLING_SVP: new RestKey<Behandling, { behandlingId: number }>('BEHANDLING_SVP'),
+  UPDATE_ON_HOLD: new RestKey<void, SettPaVentParams>('UPDATE_ON_HOLD'),
+  SAVE_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_AKSJONSPUNKT'),
+  SAVE_OVERSTYRT_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_OVERSTYRT_AKSJONSPUNKT'),
+  PREVIEW_MESSAGE: new RestKey<any, any>('PREVIEW_MESSAGE'),
+  PREVIEW_TILBAKEKREVING_MESSAGE: new RestKey<Behandling, any>('PREVIEW_TILBAKEKREVING_MESSAGE'),
+  AKSJONSPUNKTER: new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER'),
+  VILKAR: new RestKey<Vilkar[], void>('VILKAR'),
+  SIMULERING_RESULTAT: new RestKey<SimuleringResultat, void>('SIMULERING_RESULTAT'),
+  TILBAKEKREVINGVALG: new RestKey<TilbakekrevingValg, void>('TILBAKEKREVINGVALG'),
+  BEREGNINGRESULTAT_FORELDREPENGER: new RestKey<{ 'beregningsresultat-foreldrepenger'?: BeregningsresultatFp; }, void>('BEREGNINGRESULTAT_FORELDREPENGER'),
+  BEREGNINGSGRUNNLAG: new RestKey<Beregningsgrunnlag, void>('BEREGNINGSGRUNNLAG'),
+  FERIEPENGEGRUNNLAG: new RestKey<Feriepengegrunnlag, void>('FERIEPENGEGRUNNLAG'),
+  FAMILIEHENDELSE: new RestKey<FamilieHendelseSamling, void>('FAMILIEHENDELSE'),
+  SOKNAD: new RestKey<Soknad, void>('SOKNAD'),
+  BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING: new RestKey<{'beregningsresultat-foreldrepenger'?: BeregningsresultatFp; },
+    void>('BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING'),
+  MEDLEMSKAP: new RestKey<Medlemskap, void>('MEDLEMSKAP'),
+  UTTAK_PERIODE_GRENSE: new RestKey<UttakPeriodeGrense, void>('UTTAK_PERIODE_GRENSE'),
+  INNTEKT_ARBEID_YTELSE: new RestKey<InntektArbeidYtelse, void>('INNTEKT_ARBEID_YTELSE'),
+  VERGE: new RestKey<Verge, void>('VERGE'),
+  YTELSEFORDELING: new RestKey<Ytelsefordeling, void>('YTELSEFORDELING'),
+  OPPTJENING: new RestKey<Opptjening, void>('OPPTJENING'),
+  SVANGERSKAPSPENGER_TILRETTELEGGING: new RestKey<FodselOgTilrettelegging, void>('SVANGERSKAPSPENGER_TILRETTELEGGING'),
+  BEHANDLING_NY_BEHANDLENDE_ENHET: new RestKey<void, NyBehandlendeEnhetParams>('BEHANDLING_NY_BEHANDLENDE_ENHET'),
+  HENLEGG_BEHANDLING: new RestKey<void, { behandlingId: number, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>('HENLEGG_BEHANDLING'),
+  RESUME_BEHANDLING: new RestKey<Behandling, { behandlingId: number, behandlingVersjon: number }>('RESUME_BEHANDLING'),
+  BEHANDLING_ON_HOLD: new RestKey<void, { behandlingId: number, behandlingVersjon: number, frist: string, ventearsak: Kodeverk }>('BEHANDLING_ON_HOLD'),
+  OPEN_BEHANDLING_FOR_CHANGES: new RestKey<Behandling, { behandlingId: number, behandlingVersjon: number }>('OPEN_BEHANDLING_FOR_CHANGES'),
+  VERGE_OPPRETT: new RestKey<Behandling, any>('VERGE_OPPRETT'),
+  VERGE_FJERN: new RestKey<Behandling, any>('VERGE_FJERN'),
+  UTLAND_DOK_STATUS: new RestKey<{ dokStatus: string }, void>('UTLAND_DOK_STATUS'),
+  ARBEIDSGIVERE_OVERSIKT: new RestKey<ArbeidsgiverOpplysningerWrapper, void>('ARBEIDSGIVERE_OVERSIKT'),
+  BEHANDLING_PERSONOVERSIKT: new RestKey<Personoversikt, void>('BEHANDLING_PERSONOVERSIKT'),
+};
 
 const endpoints = new RestApiConfigBuilder()
   .withAsyncPost('/fpsak/api/behandlinger', SvpBehandlingApiKeys.BEHANDLING_SVP)
@@ -58,7 +64,6 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('soeker-verge', SvpBehandlingApiKeys.VERGE)
   .withRel('ytelsefordeling', SvpBehandlingApiKeys.YTELSEFORDELING)
   .withRel('opptjening', SvpBehandlingApiKeys.OPPTJENING)
-  .withRel('sendt-varsel-om-revurdering', SvpBehandlingApiKeys.SEND_VARSEL_OM_REVURDERING)
   .withRel('svangerskapspenger-tilrettelegging', SvpBehandlingApiKeys.SVANGERSKAPSPENGER_TILRETTELEGGING)
   .withRel('utland-dok-status', SvpBehandlingApiKeys.UTLAND_DOK_STATUS)
   .withRel('arbeidsgivere-oversikt', SvpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT)

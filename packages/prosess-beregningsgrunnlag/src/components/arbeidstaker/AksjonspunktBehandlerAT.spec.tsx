@@ -4,6 +4,7 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 import AksjonspunktBehandlerAT from './AksjonspunktBehandlerAT';
+import messages from '../../../i18n/nb_NO.json';
 
 const mockAndel = (arbeidsgiverIdent, overstyrtPrAar, beregnetPrAar, skalFastsetteGrunnlag) => ({
   aktivitetStatus: {
@@ -43,7 +44,7 @@ describe('<AksjonspunktBehandlerAT>', () => {
       alleAndelerIForstePeriode={andeler}
       alleKodeverk={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     const rows = wrapper.find('Row');
     expect(rows).toHaveLength(andeler.length);
     andeler.forEach((andel, index) => {
@@ -65,7 +66,7 @@ describe('<AksjonspunktBehandlerAT>', () => {
       alleAndelerIForstePeriode={andeler}
       alleKodeverk={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />);
+    />, messages);
     const rows = wrapper.find('Row');
     expect(rows).toHaveLength(andeler.length);
     andeler.forEach((andel, index) => {

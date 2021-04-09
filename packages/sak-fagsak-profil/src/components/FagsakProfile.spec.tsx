@@ -1,13 +1,16 @@
 import React from 'react';
 import sinon from 'sinon';
+import { shallow } from 'enzyme';
 import { Systemtittel, Normaltekst } from 'nav-frontend-typografi';
 import { EtikettInfo } from 'nav-frontend-etiketter';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { Tooltip } from '@fpsak-frontend/shared-components';
 
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-fagsak-profil';
+import messages from '../../i18n/nb_NO.json';
 import { FagsakProfile } from './FagsakProfile';
+
+const intlMock = getIntlMock(messages);
 
 describe('<FagsakProfile>', () => {
   it('skal vise en fagsak med tilhørende informasjon', () => {
@@ -21,7 +24,7 @@ describe('<FagsakProfile>', () => {
       kodeverk: 'FAGSAK_STATUS',
       navn: 'Opprettet',
     };
-    const wrapper = shallowWithIntl(<FagsakProfile
+    const wrapper = shallow(<FagsakProfile
       saksnummer="12345"
       fagsakYtelseType={fagsakYtelseType}
       fagsakStatus={status}
@@ -51,7 +54,7 @@ describe('<FagsakProfile>', () => {
       kodeverk: 'FAGSAK_STATUS',
       navn: 'Opprettet',
     };
-    const wrapper = shallowWithIntl(<FagsakProfile
+    const wrapper = shallow(<FagsakProfile
       saksnummer="12345"
       fagsakYtelseType={fagsakYtelseType}
       fagsakStatus={status}
@@ -86,7 +89,7 @@ describe('<FagsakProfile>', () => {
       kodeverk: 'FAGSAK_STATUS',
       navn: 'Opprettet',
     };
-    const wrapper = shallowWithIntl(<FagsakProfile
+    const wrapper = shallow(<FagsakProfile
       saksnummer="12345"
       fagsakYtelseType={fagsakYtelseType}
       fagsakStatus={status}
@@ -118,7 +121,7 @@ describe('<FagsakProfile>', () => {
       kodeverk: 'FAGSAK_STATUS',
       navn: 'Opprettet',
     };
-    const wrapper = shallowWithIntl(<FagsakProfile
+    const wrapper = shallow(<FagsakProfile
       saksnummer="12345"
       fagsakYtelseType={fagsakYtelseType}
       fagsakStatus={status}

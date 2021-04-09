@@ -1,8 +1,9 @@
 import React, { FunctionComponent, useCallback } from 'react';
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { createIntl } from '@fpsak-frontend/utils';
 
 import NyBehandlingModal, { BehandlingOppretting, FormValues } from './components/NyBehandlingModal';
 
@@ -10,12 +11,7 @@ import messages from '../i18n/nb_NO.json';
 
 const TILBAKEKREVING_BEHANDLINGSTYPER = [BehandlingType.TILBAKEKREVING, BehandlingType.TILBAKEKREVING_REVURDERING];
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyNyBehandlingIndex.NyForstegangsbehandling' });
 

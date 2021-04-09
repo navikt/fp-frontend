@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { FieldArrayMetaProps } from 'redux-form';
 
 import { MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { DatepickerField } from '@fpsak-frontend/form';
 import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import IkkeOmsorgPeriodeField from './IkkeOmsorgPeriodeField';
-import shallowWithIntl, { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-omsorg';
+import messages from '../../i18n/nb_NO.json';
 
 const getRemoveButton = () => <button id="avslutt" type="button" />;
 
@@ -15,18 +16,18 @@ describe('<IkkeOmsorgPeriodeField>', () => {
     const fields = new MockFields('ikkeOmsorgPerioder', 1);
 
     const wrapper = shallowWithIntl(<IkkeOmsorgPeriodeField.WrappedComponent
-      intl={intlMock}
+      intl={getIntlMock(messages)}
       readOnly={false}
       fields={fields}
       meta={{} as FieldArrayMetaProps}
-    />);
+    />, messages);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
     expect(fieldArray).toHaveLength(1);
 
     const fn = fieldArray.prop('children');
-    const comp = fn('fieldId1', 0, getRemoveButton);
-    const innerWrapper = shallowWithIntl(comp);
+    const comp = fn('fieldId1', 0, getRemoveButton) as ReactElement;
+    const innerWrapper = shallowWithIntl(comp, messages);
 
     const dateFields = innerWrapper.find(DatepickerField);
     expect(dateFields).toHaveLength(2);

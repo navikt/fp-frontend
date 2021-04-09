@@ -3,11 +3,13 @@ import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 
 import { Image } from '@fpsak-frontend/shared-components';
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { Kodeverk } from '@fpsak-frontend/types';
 
 import { UttakPeriodeType } from './UttakPeriodeType';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-uttak';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<UttakPeriodeType>', () => {
   const tilDato = '2018-01-10';
@@ -46,7 +48,7 @@ describe('<UttakPeriodeType>', () => {
       utsettelseArsak={utsettelseArsak}
       uttakPeriodeType={uttakPeriodeType}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
 
     const image = wrapper.find(Image);
     expect(image).toHaveLength(2);
@@ -72,7 +74,7 @@ describe('<UttakPeriodeType>', () => {
       utsettelseArsak={utsettelseArsak}
       uttakPeriodeType={uttakPeriodeType}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
 
     const image = wrapper.find(Image);
     expect(image).toHaveLength(0);
@@ -101,7 +103,7 @@ describe('<UttakPeriodeType>', () => {
       utsettelseArsak={utsettelseArsak}
       uttakPeriodeType={uttakPeriodeType}
       arbeidsgiverOpplysningerPerId={{}}
-    />);
+    />, messages);
 
     expect(wrapper.find(FormattedMessage).last().prop('id')).toEqual('UttakInfoPanel.Frilans');
   });

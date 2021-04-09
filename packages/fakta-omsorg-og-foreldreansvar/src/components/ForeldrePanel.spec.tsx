@@ -1,11 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-
 import { Undertittel } from 'nav-frontend-typografi';
+
 import { KjønnkodeEnum } from '@fpsak-frontend/types';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import ForeldrePanel from './ForeldrePanel';
-import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-omsorg-og-foreldreansvar';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<ForeldrePanel>', () => {
   it('skal vise søker', () => {

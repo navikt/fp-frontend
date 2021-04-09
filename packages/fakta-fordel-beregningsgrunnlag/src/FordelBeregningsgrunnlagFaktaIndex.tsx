@@ -1,19 +1,15 @@
 import React, { FunctionComponent } from 'react';
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 
 import {
   ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, Beregningsgrunnlag,
 } from '@fpsak-frontend/types';
+import { createIntl } from '@fpsak-frontend/utils';
 
 import FordelBeregningsgrunnlagPanel from './components/FordelBeregningsgrunnlagPanel';
 import messages from '../i18n/nb_NO.json';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 type OwnProps = {
   beregningsgrunnlag: Beregningsgrunnlag;

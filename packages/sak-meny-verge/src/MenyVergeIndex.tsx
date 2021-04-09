@@ -1,16 +1,12 @@
 import React, { FunctionComponent, useCallback } from 'react';
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 
 import { OkAvbrytModal } from '@fpsak-frontend/shared-components';
+import { createIntl } from '@fpsak-frontend/utils';
 
 import messages from '../i18n/nb_NO.json';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 export const getMenytekst = (erOpprettVerge: boolean): string => intl.formatMessage({
   id: erOpprettVerge ? 'MenyVergeIndex.OpprettVerge' : 'MenyVergeIndex.FjernVerge',

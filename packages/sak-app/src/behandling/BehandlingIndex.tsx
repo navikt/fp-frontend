@@ -10,9 +10,7 @@ import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { replaceNorwegianCharacters, parseQueryString } from '@fpsak-frontend/utils';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import {
-  KodeverkMedNavn, NavAnsatt, Fagsak, BehandlingAppKontekst, FagsakPersoner,
-} from '@fpsak-frontend/types';
+import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
 
 import useTrackRouteParam from '../app/useTrackRouteParam';
 import getAccessRights from '../app/util/access';
@@ -26,7 +24,7 @@ import behandlingEventHandler from './BehandlingEventHandler';
 import ErrorBoundary from '../app/ErrorBoundary';
 
 const BehandlingEngangsstonadIndex = React.lazy(() => import('@fpsak-frontend/behandling-es'));
-const BehandlingForeldrepengerIndex = React.lazy(() => import('@fpsak-frontend/behandling-fp-ny'));
+const BehandlingForeldrepengerIndex = React.lazy(() => import('@fpsak-frontend/behandling-fp'));
 const BehandlingSvangerskapspengerIndex = React.lazy(() => import('@fpsak-frontend/behandling-svp'));
 const BehandlingInnsynIndex = React.lazy(() => import('@fpsak-frontend/behandling-innsyn'));
 const BehandlingKlageIndex = React.lazy(() => import('@fpsak-frontend/behandling-klage'));
@@ -101,11 +99,11 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
 
   const oppdaterBehandlingVersjon = useCallback((versjon) => setBehandlingIdOgVersjon(behandlingId, versjon), [behandlingId]);
 
-  const kodeverk = restApiHooks.useGlobalStateRestApiData<{[key: string]: [KodeverkMedNavn]}>(FpsakApiKeys.KODEVERK);
+  const kodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
 
-  const fagsakPersoner = restApiHooks.useGlobalStateRestApiData<FagsakPersoner>(FpsakApiKeys.SAK_PERSONER);
+  const fagsakPersoner = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.SAK_PERSONER);
 
-  const navAnsatt = restApiHooks.useGlobalStateRestApiData<NavAnsatt>(FpsakApiKeys.NAV_ANSATT);
+  const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
   const rettigheter = useMemo(() => getAccessRights(navAnsatt, fagsak.status, behandling?.status, behandling?.type),
     [fagsak.status, behandlingId, behandling?.status, behandling?.type]);
 
@@ -126,6 +124,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     rettigheter,
     opneSokeside,
     setRequestPendingMessage,
+    oppdaterProsessStegOgFaktaPanelIUrl,
     valgtProsessSteg: query.punkt,
   };
   const behandlingTypeKode = behandling?.type ? behandling.type.kode : undefined;
@@ -162,10 +161,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     return (
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
-          <BehandlingInnsynIndex
-            oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-            {...defaultProps}
-          />
+          <BehandlingInnsynIndex {...defaultProps} />
         </ErrorBoundary>
       </Suspense>
     );
@@ -176,7 +172,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingKlageIndex
-            oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             alleBehandlinger={fagsakBehandlingerInfo}
             {...defaultProps}
           />
@@ -190,7 +185,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingAnkeIndex
-            oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             alleBehandlinger={fagsakBehandlingerInfo}
             {...defaultProps}
           />
@@ -204,7 +198,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingTilbakekrevingIndex
-            oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             harApenRevurdering={fagsakBehandlingerInfo
               .some((b) => b.type.kode === BehandlingType.REVURDERING && b.status.kode !== BehandlingStatus.AVSLUTTET)}
             valgtFaktaSteg={query.fakta}
@@ -221,7 +214,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingEngangsstonadIndex
-            oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             valgtFaktaSteg={query.fakta}
             {...defaultProps}
           />
@@ -235,7 +227,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingForeldrepengerIndex
-            oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             valgtFaktaSteg={query.fakta}
             {...defaultProps}
           />
@@ -249,7 +240,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingSvangerskapspengerIndex
-            oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
             valgtFaktaSteg={query.fakta}
             {...defaultProps}
           />

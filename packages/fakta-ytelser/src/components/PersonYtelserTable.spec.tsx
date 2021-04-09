@@ -1,10 +1,13 @@
 import React from 'react';
+import { shallow } from 'enzyme';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { PersonYtelserTable } from './PersonYtelserTable';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-ytelser';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<PersonYtelserTable>', () => {
   const ytelser = [{
@@ -51,7 +54,7 @@ describe('<PersonYtelserTable>', () => {
   ];
 
   it('skal sjekke at viser alle ytelser', () => {
-    const wrapper = shallowWithIntl(<PersonYtelserTable
+    const wrapper = shallow(<PersonYtelserTable
       intl={intlMock}
       ytelser={ytelser}
       relatertYtelseTyper={relatertYtelseTypes}
@@ -62,7 +65,7 @@ describe('<PersonYtelserTable>', () => {
   });
 
   it('skal sjekke visning av ikke eksisterende ytelse', () => {
-    const wrapper = shallowWithIntl(<PersonYtelserTable
+    const wrapper = shallow(<PersonYtelserTable
       intl={intlMock}
       ytelser={ytelser}
       relatertYtelseTyper={relatertYtelseTypes}
@@ -74,7 +77,7 @@ describe('<PersonYtelserTable>', () => {
   });
 
   it('skal sjekke at viser ytelse informasjon', () => {
-    const wrapper = shallowWithIntl(<PersonYtelserTable
+    const wrapper = shallow(<PersonYtelserTable
       intl={intlMock}
       ytelser={ytelser}
       relatertYtelseTyper={relatertYtelseTypes}
@@ -93,7 +96,7 @@ describe('<PersonYtelserTable>', () => {
   });
 
   it('skal sjekke at ytelse navn ikke vises hvis det ligger mer enn en ytelse av samme type', () => {
-    const wrapper = shallowWithIntl(<PersonYtelserTable
+    const wrapper = shallow(<PersonYtelserTable
       intl={intlMock}
       ytelser={ytelser}
       relatertYtelseTyper={relatertYtelseTypes}

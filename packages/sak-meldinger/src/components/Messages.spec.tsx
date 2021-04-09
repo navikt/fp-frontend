@@ -1,14 +1,15 @@
 import React from 'react';
 import sinon from 'sinon';
+import { shallow } from 'enzyme';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import ugunstAarsakTyper from '@fpsak-frontend/kodeverk/src/ugunstAarsakTyper';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
 import { MessagesImpl as Messages } from './Messages';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-meldinger';
+import messages from '../../i18n/nb_NO.json';
 
 const mockProps = {
   setRecipient: () => undefined,
@@ -18,7 +19,7 @@ const mockProps = {
   submitCallback: () => undefined,
   validateModel: () => undefined,
   isSubmitting: false,
-  intl: intlMock,
+  intl: getIntlMock(messages),
   ...reduxFormPropsMock,
 };
 
@@ -51,7 +52,7 @@ describe('<Messages>', () => {
   }];
 
   it('skal vise to select-bokser', () => {
-    const wrapper = shallowWithIntl(<Messages
+    const wrapper = shallow(<Messages
       {...mockProps}
       recipients={recipients}
       templates={templates}
@@ -81,7 +82,7 @@ describe('<Messages>', () => {
 
   it('skal vise forhåndvisningslenke når fritekst er gyldig', () => {
     const previewEventCallback = sinon.spy();
-    const wrapper = shallowWithIntl(<Messages
+    const wrapper = shallow(<Messages
       {...mockProps}
       recipients={recipients}
       templates={templates}
@@ -109,7 +110,7 @@ describe('<Messages>', () => {
 
   it('skal vise tre select-bokser når varsel om revurdering', () => {
     const previewEventCallback = sinon.spy();
-    const wrapper = shallowWithIntl(<Messages
+    const wrapper = shallow(<Messages
       {...mockProps}
       recipients={recipients}
       templates={templates}
@@ -141,7 +142,7 @@ describe('<Messages>', () => {
   });
 
   it('skal vise alle revuderingsvarslingsårsaker for fagsakYtelseType foreldeprenger', () => {
-    const wrapper = shallowWithIntl(<Messages
+    const wrapper = shallow(<Messages
       {...mockProps}
       recipients={recipients}
       templates={templates}
@@ -163,7 +164,7 @@ describe('<Messages>', () => {
   });
 
   it('skal vise alle revuderingsvarslingsårsaker utenom Barn ikke registrert for fagsakYtelseType svangerskapspenger', () => {
-    const wrapper = shallowWithIntl(<Messages
+    const wrapper = shallow(<Messages
       {...mockProps}
       recipients={recipients}
       templates={templates}
@@ -188,7 +189,7 @@ describe('<Messages>', () => {
   });
 
   it('skal vise revuderingsvarslingsårsaker (Annet og Barn ikke registrert) for fagsakYtelseType engangsstønad', () => {
-    const wrapper = shallowWithIntl(<Messages
+    const wrapper = shallow(<Messages
       {...mockProps}
       recipients={recipients}
       templates={templates}

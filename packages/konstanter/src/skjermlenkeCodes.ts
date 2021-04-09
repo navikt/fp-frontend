@@ -79,7 +79,6 @@ const skjermlenkeCodes = {
   },
   KLAGE_BEH_NK: {
     kode: 'KLAGE_BEH_NK',
-    skjermlenkeId: 'Skjermlenke.Klage.ResolveKlage.Title',
     faktaNavn: faktaPanelCodes.DEFAULT,
     punktNavn: prosessStegCodes.KLAGE_NAV_KLAGEINSTANS,
   },

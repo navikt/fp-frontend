@@ -2,9 +2,12 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { TableColumn, TableRow } from '@fpsak-frontend/shared-components';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import AktivitetskravFaktaTabell from './AktivitetskravFaktaTabell';
-import { intlMock } from '../../i18n/intl-enzyme-test-helper-fakta-aktivitetskrav';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<AktivitetskravFaktaTabell>', () => {
   const aktivitetskravAvklaringer = [{

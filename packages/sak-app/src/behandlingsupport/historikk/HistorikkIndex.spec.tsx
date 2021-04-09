@@ -18,10 +18,10 @@ jest.mock('react-router-dom', () => ({
 
 describe('<HistorikkIndex>', () => {
   it('skal slå sammen og sortere historikk for fpsak og fptilbake', () => {
-    requestApi.mock(FpsakApiKeys.INIT_FETCH_FPTILBAKE, {});
-    requestApi.mock(FpsakApiKeys.KODEVERK, {});
-    requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE, {});
-    requestApi.mock(FpsakApiKeys.HISTORY_FPSAK, [{
+    requestApi.mock(FpsakApiKeys.INIT_FETCH_FPTILBAKE.name, {});
+    requestApi.mock(FpsakApiKeys.KODEVERK.name, {});
+    requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE.name, {});
+    requestApi.mock(FpsakApiKeys.HISTORY_FPSAK.name, [{
       opprettetTidspunkt: '2019-01-01',
       historikkinnslagDeler: [],
       type: {
@@ -34,7 +34,7 @@ describe('<HistorikkIndex>', () => {
         kode: 'Test fpsak 2',
       },
     }]);
-    requestApi.mock(FpsakApiKeys.HISTORY_FPTILBAKE, [{
+    requestApi.mock(FpsakApiKeys.HISTORY_FPTILBAKE.name, [{
       opprettetTidspunkt: '2019-01-04',
       historikkinnslagDeler: [],
       type: {

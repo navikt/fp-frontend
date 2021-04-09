@@ -1,23 +1,17 @@
 import React, { FunctionComponent } from 'react';
-import {
-  createIntl, createIntlCache, RawIntlProvider, FormattedMessage,
-} from 'react-intl';
+import { RawIntlProvider, FormattedMessage } from 'react-intl';
 import {
   EtikettAdvarsel, EtikettFokus, EtikettInfo, EtikettSuksess,
 } from 'nav-frontend-etiketter';
 
+import { createIntl } from '@fpsak-frontend/utils';
 import diskresjonskodeType from '@fpsak-frontend/kodeverk/src/diskresjonskodeType';
 import { Tooltip } from '@fpsak-frontend/shared-components';
 
 import styles from './merkepanel.less';
 import messages from '../../i18n/nb_NO.json';
 
-const cache = createIntlCache();
-
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages,
-}, cache);
+const intl = createIntl(messages);
 
 interface OwnProps {
   erDod?: boolean;

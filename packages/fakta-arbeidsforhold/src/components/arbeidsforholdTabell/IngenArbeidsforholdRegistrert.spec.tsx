@@ -1,8 +1,11 @@
 import React from 'react';
-import TableColumn from '@fpsak-frontend/shared-components/src/table/TableColumn';
 import { FormattedMessage } from 'react-intl';
+
+import TableColumn from '@fpsak-frontend/shared-components/src/table/TableColumn';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
 import IngenArbeidsforholdRegistrert from './IngenArbeidsforholdRegistrert';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-arbeidsforhold';
+import messages from '../../../i18n/nb_NO.json';
 
 describe('<IngenArbeidsforholdRegistrert>', () => {
   const headerColumnContent = [
@@ -17,7 +20,7 @@ describe('<IngenArbeidsforholdRegistrert>', () => {
     const wrapper = shallowWithIntl(
       <IngenArbeidsforholdRegistrert
         headerColumnContent={headerColumnContent}
-      />,
+      />, messages,
     );
     expect(wrapper.find(TableColumn)).toHaveLength(6);
     // @ts-ignore

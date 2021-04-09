@@ -26,7 +26,7 @@ describe('<BeslutterModalIndex>', () => {
   } as Behandling;
 
   it('skal vise modal når beslutter godkjenner', () => {
-    requestApi.mock(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT, {
+    requestApi.mock(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT.name, {
       harRevurderingSammeResultat: true,
     });
 
@@ -43,10 +43,10 @@ describe('<BeslutterModalIndex>', () => {
   });
 
   it('skal vise modal men ikke hente data når en ikke har url', () => {
-    requestApi.mock(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT, {
+    requestApi.mock(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT.name, {
       harRevurderingSammeResultat: true,
     });
-    requestApi.setMissingPath(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT);
+    requestApi.setMissingPath(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT.name);
 
     const wrapper = shallow(<BeslutterModalIndex
       behandling={behandling}

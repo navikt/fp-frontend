@@ -7,9 +7,7 @@ import { Location } from 'history';
 import { LoadingPanel, requireProps } from '@fpsak-frontend/shared-components';
 import BehandlingVelgerSakIndex from '@fpsak-frontend/sak-behandling-velger';
 import FagsakProfilSakIndex from '@fpsak-frontend/sak-fagsak-profil';
-import {
-  KodeverkMedNavn, Fagsak, Aksjonspunkt, Risikoklassifisering, BehandlingAppKontekst,
-} from '@fpsak-frontend/types';
+import { KodeverkMedNavn, Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
 
 import {
   getLocationWithDefaultProsessStegAndFakta,
@@ -64,13 +62,13 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   const fagsakStatusMedNavn = useFpSakKodeverkMedNavn<KodeverkMedNavn>(fagsak.status);
   const fagsakYtelseTypeMedNavn = useFpSakKodeverkMedNavn<KodeverkMedNavn>(fagsak.fagsakYtelseType);
 
-  const { data: risikoAksjonspunkt } = restApiHooks.useRestApi<Aksjonspunkt>(FpsakApiKeys.RISIKO_AKSJONSPUNKT, undefined, {
+  const { data: risikoAksjonspunkt } = restApiHooks.useRestApi(FpsakApiKeys.RISIKO_AKSJONSPUNKT, undefined, {
     updateTriggers: [behandlingId, behandlingVersjon],
-    suspendRequest: !requestApi.hasPath(FpsakApiKeys.RISIKO_AKSJONSPUNKT),
+    suspendRequest: !requestApi.hasPath(FpsakApiKeys.RISIKO_AKSJONSPUNKT.name),
   });
-  const { data: kontrollresultat } = restApiHooks.useRestApi<Risikoklassifisering>(FpsakApiKeys.KONTROLLRESULTAT, undefined, {
+  const { data: kontrollresultat } = restApiHooks.useRestApi(FpsakApiKeys.KONTROLLRESULTAT, undefined, {
     updateTriggers: [behandlingId, behandlingVersjon],
-    suspendRequest: !requestApi.hasPath(FpsakApiKeys.KONTROLLRESULTAT),
+    suspendRequest: !requestApi.hasPath(FpsakApiKeys.KONTROLLRESULTAT.name),
   });
 
   useEffect(() => {

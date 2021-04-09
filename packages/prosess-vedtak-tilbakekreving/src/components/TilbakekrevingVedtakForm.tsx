@@ -18,10 +18,10 @@ import {
   getBehandlingFormValues,
 } from '@fpsak-frontend/form';
 import advarselIcon from '@fpsak-frontend/assets/images/advarsel_ny.svg';
+import { VedtaksbrevAvsnitt } from '@fpsak-frontend/types';
 
 import underavsnittType from '../kodeverk/avsnittType';
 import TilbakekrevingEditerVedtaksbrevPanel, { FormValues } from './brev/TilbakekrevingEditerVedtaksbrevPanel';
-import VedtaksbrevAvsnitt from '../types/vedtaksbrevAvsnittTsType';
 
 import styles from './tilbakekrevingVedtakForm.less';
 

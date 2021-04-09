@@ -1,15 +1,14 @@
 import React from 'react';
 import { withKnobs } from '@storybook/addon-knobs';
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 
-import { BehandlingHenlagtPanel } from '@fpsak-frontend/behandling-felles-ny';
+import { createIntl } from '@fpsak-frontend/utils';
+import { BehandlingHenlagtPanel } from '@fpsak-frontend/behandling-felles';
 
-const intl = createIntl({
-  locale: 'nb-NO',
-  messages: {
-    'BehandlingHenlagtPanel.Henlagt': 'Behandling er henlagt',
-  },
-}, createIntlCache());
+const messages = {
+  'BehandlingHenlagtPanel.Henlagt': 'Behandling er henlagt',
+};
+const intl = createIntl(messages);
 
 export default {
   title: 'behandling/prosess/BehandlingHenlagtPanel',

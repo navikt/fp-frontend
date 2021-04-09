@@ -1,9 +1,9 @@
 import React from 'react';
 import sinon from 'sinon';
+import { shallow } from 'enzyme';
 
 import { OkAvbrytModal } from '@fpsak-frontend/shared-components';
 
-import shallowWithIntl from '../i18n/intl-enzyme-test-helper-sak-meny';
 import MenyVergeIndex from './MenyVergeIndex';
 
 describe('<MenyVergeIndex>', () => {
@@ -11,7 +11,7 @@ describe('<MenyVergeIndex>', () => {
     const opprettVergeCallback = sinon.spy();
     const lukkModalCallback = sinon.spy();
 
-    const wrapper = shallowWithIntl(<MenyVergeIndex
+    const wrapper = shallow(<MenyVergeIndex
       opprettVerge={opprettVergeCallback}
       lukkModal={lukkModalCallback}
     />);
@@ -33,7 +33,7 @@ describe('<MenyVergeIndex>', () => {
     const fjernVergeCallback = sinon.spy();
     const lukkModalCallback = sinon.spy();
 
-    const wrapper = shallowWithIntl(<MenyVergeIndex
+    const wrapper = shallow(<MenyVergeIndex
       fjernVerge={fjernVergeCallback}
       lukkModal={lukkModalCallback}
     />);

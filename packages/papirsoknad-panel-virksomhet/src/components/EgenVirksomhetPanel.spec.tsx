@@ -1,13 +1,16 @@
 import React from 'react';
+import { shallow } from 'enzyme';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-papirsoknad-virksomhet';
+import messages from '../../i18n/nb_NO.json';
 import { EgenVirksomhetPanel } from './EgenVirksomhetPanel';
+
+const intlMock = getIntlMock(messages);
 
 describe('<EgenVirksomhetPanel>', () => {
   it('skal rendre korrekt ved default props', () => {
-    const wrapper = shallowWithIntl(<EgenVirksomhetPanel
+    const wrapper = shallow(<EgenVirksomhetPanel
       intl={intlMock}
       form="form"
       alleKodeverk={{}}
@@ -21,7 +24,7 @@ describe('<EgenVirksomhetPanel>', () => {
   });
 
   it('skal rendre korrekt når har arbeidet i egen virksomhet', () => {
-    const wrapper = shallowWithIntl(<EgenVirksomhetPanel
+    const wrapper = shallow(<EgenVirksomhetPanel
       harArbeidetIEgenVirksomhet
       intl={intlMock}
       form="form"

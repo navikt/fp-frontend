@@ -1,16 +1,14 @@
 import React from 'react';
-import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 
 import { DateLabel } from '@fpsak-frontend/shared-components';
+import { createIntl } from '@fpsak-frontend/utils';
 
 const intl = createIntl({
-  locale: 'nb-NO',
-  messages: {
-    'OkAvbrytModal.Ok': 'Ok',
-    'OkAvbrytModal.Avbryt': 'Avbryt',
-    'Test.Test': 'Dette er ein test',
-  },
-}, createIntlCache());
+  'OkAvbrytModal.Ok': 'Ok',
+  'OkAvbrytModal.Avbryt': 'Avbryt',
+  'Test.Test': 'Dette er ein test',
+});
 
 export default {
   title: 'sharedComponents/DateLabel',

@@ -1,0 +1,23 @@
+{
+  "SakenFaktaPanel.Title": "Saken",
+  "ArbeidsforholdInfoPanel.Title": "Arbeidsforhold",
+  "YtelserFaktaIndex.Ytelser": "Ytelser",
+  "RegistrereVergeInfoPanel.Info": "Verge/fullmektig",
+  "TilleggsopplysningerInfoPanel.Tilleggsopplysninger": "Tilleggsopplysninger",
+  "MedlemskapInfoPanel.Medlemskap": "Medlemskap",
+  "OpptjeningInfoPanel.KontrollerFaktaForOpptjening": "Opptjening",
+  "BeregningInfoPanel.Title": "Beregning",
+  "FordelBeregningsgrunnlag.Title": "Fordeling",
+  "FodselOgTilretteleggingInfoPanel.FaktaFodselOgTilrettelegging": "Fødsel og tilrettelegging",
+  
+  "Behandlingspunkt.Opplysningsplikt": "Opplysningsplikt",
+  "Behandlingspunkt.Beregning": "Beregning",
+  "Behandlingspunkt.Soknadsfristvilkaret": "Søknadsfrist",
+  "Behandlingspunkt.FortsattMedlemskap": "Fortsatt medlem",
+  "Behandlingspunkt.TilkjentYtelse": "Tilkjent ytelse",
+  "Behandlingspunkt.Avregning": "Simulering",
+  "Behandlingspunkt.Vedtak": "Vedtak",
+
+  "SvangerskapVilkarForm.FyllerVilkår": "Kontroller at søker fyller vilkårene i § 14-4 første eller andre ledd og tredje ledd, første punktum",
+  "FatterVedtakStatusModal.SendtBeslutter": "Forslag til vedtak er sendt til beslutter"
+}

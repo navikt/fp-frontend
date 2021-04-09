@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import { reducer as formReducer, reduxForm } from 'redux-form';
 import { mount } from 'enzyme';
-import { messages } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import SelectField from './SelectField';
 
 const selectValues = [
@@ -15,7 +14,7 @@ const selectValues = [
 const MockForm = reduxForm({ form: 'mock' })(({ handleSubmit, children }) => <form onSubmit={handleSubmit}>{children}</form>);
 const mountFieldInForm = (field, initialValues?: any) => mount(
   <Provider store={createStore(combineReducers({ form: formReducer }))}>
-    <IntlProvider locale="nb-NO" messages={messages}>
+    <IntlProvider locale="nb-NO" messages={{}}>
       <MockForm initialValues={initialValues}>
         {field}
       </MockForm>

@@ -8,13 +8,14 @@ import { metaMock, MockFieldsWithContent } from '@fpsak-frontend/utils-test/src/
 import { Table } from '@fpsak-frontend/shared-components';
 import { FaktaOmBeregning } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { lagStateMedAksjonspunkterOgBeregningsgrunnlag } from '../beregning-test-helper';
 import { besteberegningField } from './besteberegningFodendeKvinne/VurderBesteberegningForm';
 import { AndelRow } from './InntektFieldArrayRow';
 import SummaryRow from './SummaryRow';
 import { InntektFieldArray, leggTilDagpengerOmBesteberegning, mapStateToProps } from './InntektFieldArray';
 import { formNameVurderFaktaBeregning } from '../BeregningFormUtils';
-import shallowWithIntl from '../../../i18n/intl-enzyme-test-helper-fakta-beregning';
+import messages from '../../../i18n/nb_NO.json';
 
 const aksjonspunkter = [
   {
@@ -140,7 +141,7 @@ describe('<InntektFieldArray>', () => {
       beregningsgrunnlag={bg}
       {...ownProps}
       {...props}
-    />);
+    />, messages);
     const table = wrapper.find(Table);
     expect(table.length).toEqual(1);
     const andelRows = table.find(AndelRow);
@@ -166,7 +167,7 @@ describe('<InntektFieldArray>', () => {
       beregningsgrunnlag={bg}
       {...ownProps}
       {...props}
-    />);
+    />, messages);
     const table = wrapper.find(Table);
     expect(table.length).toEqual(1);
     const andelRows = table.find(AndelRow);
@@ -192,7 +193,7 @@ describe('<InntektFieldArray>', () => {
       beregningsgrunnlag={bg}
       {...props}
       {...ownProps}
-    />);
+    />, messages);
     const table = wrapper.find(Table);
     expect(table.length).toEqual(1);
     const andelRows = table.find(AndelRow);
@@ -217,7 +218,7 @@ describe('<InntektFieldArray>', () => {
       beregningsgrunnlag={newbg}
       {...ownProps}
       {...newprops}
-    />);
+    />, messages);
     const table = wrapper.find(Table);
     expect(table.length).toEqual(1);
     const andelRows = table.find(AndelRow);

@@ -3,11 +3,12 @@ import { EtikettInfo } from 'nav-frontend-etiketter';
 
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { Soknad } from '@fpsak-frontend/types';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import FodselSammenligningPanel from './FodselSammenligningPanel';
 import FodselSammenligningOtherPanel from './FodselSammenligningOtherPanel';
 import FodselSammenligningRevurderingPanel from './FodselSammenligningRevurderingPanel';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-prosess-fakta-fodsel-sammenligning';
+import messages from '../../i18n/nb_NO.json';
 
 describe('<FodselSammenligningPanel>', () => {
   const soknad = {
@@ -25,7 +26,7 @@ describe('<FodselSammenligningPanel>', () => {
       soknad={soknad}
       vedtaksDatoSomSvangerskapsuke={43}
       termindato="2019-01-01"
-    />);
+    />, messages);
 
     expect(wrapper.find(FodselSammenligningOtherPanel)).toHaveLength(1);
     expect(wrapper.find(FodselSammenligningRevurderingPanel)).toHaveLength(0);
@@ -39,7 +40,7 @@ describe('<FodselSammenligningPanel>', () => {
       soknad={soknad}
       vedtaksDatoSomSvangerskapsuke={43}
       termindato="2019-01-01"
-    />);
+    />, messages);
 
     expect(wrapper.find(FodselSammenligningOtherPanel)).toHaveLength(0);
     expect(wrapper.find(FodselSammenligningRevurderingPanel)).toHaveLength(1);
@@ -53,7 +54,7 @@ describe('<FodselSammenligningPanel>', () => {
       soknad={soknad}
       vedtaksDatoSomSvangerskapsuke={43}
       termindato="2019-01-01"
-    />);
+    />, messages);
 
     expect(wrapper.find('Normaltekst').at(2).children().text()).toBe('15.05.2017');
   });
@@ -66,7 +67,7 @@ describe('<FodselSammenligningPanel>', () => {
       soknad={soknad}
       vedtaksDatoSomSvangerskapsuke={43}
       termindato="2019-01-01"
-    />);
+    />, messages);
 
     expect(wrapper.find('Normaltekst')).toHaveLength(3);
   });
@@ -79,7 +80,7 @@ describe('<FodselSammenligningPanel>', () => {
       soknad={soknad}
       vedtaksDatoSomSvangerskapsuke={43}
       termindato="2019-01-01"
-    />);
+    />, messages);
 
     expect(wrapper.find(EtikettInfo)).toHaveLength(1);
   });
@@ -92,7 +93,7 @@ describe('<FodselSammenligningPanel>', () => {
       soknad={soknad}
       vedtaksDatoSomSvangerskapsuke={43}
       termindato="2019-01-01"
-    />);
+    />, messages);
 
     expect(wrapper.find(EtikettInfo)).toHaveLength(0);
   });

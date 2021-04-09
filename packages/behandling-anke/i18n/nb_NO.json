@@ -1,0 +1,12 @@
+{
+  "Behandlingspunkt.AnkeResultat": "Resultat",
+  "Behandlingspunkt.AnkeMerknader": "Trygderetten",
+  "Behandlingspunkt.Ankebehandling": "Ankebehandling",
+
+  "AnkeVurderingModal.VedtakOversendt": "Behandlingen er sendt.",
+  "AnkeVurderingModal.Ferdigbehandlet": "Anken er ferdigbehandlet.",
+  "AnkeVurderingModal.SettVent": "Behandlingen er satt på vent.",
+  "AnkeVurderingModal.ModalDescription": "Vedtaket er stadfestet. Du kommer nå til forsiden",
+  "AnkeVurderingModal.GoToSearchPage": "Du kommer nå til forsiden.",
+  "AnkeVurderingModal.Ok": "OK"
+}

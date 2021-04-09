@@ -1,9 +1,12 @@
-import sinon from 'sinon';
-import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import React from 'react';
+import sinon from 'sinon';
+
+import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
 import BeregningsgrunnlagProsessIndex from './BeregningsgrunnlagProsessIndex';
-import shallowWithIntl from '../i18n/intl-enzyme-test-helper-prosess-beregningsgrunnlag';
+import messages from '../i18n/nb_NO.json';
 
 const behandling = {
   id: 1,
@@ -29,7 +32,7 @@ describe('<BeregningsgrunnlagProsessIndex>', () => {
       alleKodeverk={{}}
       arbeidsgiverOpplysningerPerId={{}}
       alleMerknaderFraBeslutter={{}}
-    />);
+    />, messages);
     const beregningFp = wrapper.find('BeregningFP');
     expect(beregningFp.length).toBe(1);
   });

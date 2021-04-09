@@ -2,18 +2,18 @@ import React from 'react';
 import sinon from 'sinon';
 import Modal from 'nav-frontend-modal';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import HenlagtBehandlingModal from './HenlagtBehandlingModal';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-sak-meny';
+import messages from '../../i18n/nb_NO.json';
 
 describe('<HenlagtBehandlingModal>', () => {
   it('skal rendre åpen modal', () => {
     const wrapper = shallowWithIntl(<HenlagtBehandlingModal.WrappedComponent
       showModal
       closeEvent={sinon.spy()}
-      intl={intlMock}
-    />);
+      intl={getIntlMock(messages)}
+    />, messages);
 
     const modal = wrapper.find(Modal);
     expect(modal).toHaveLength(1);
@@ -31,8 +31,8 @@ describe('<HenlagtBehandlingModal>', () => {
     const wrapper = shallowWithIntl(<HenlagtBehandlingModal.WrappedComponent
       showModal={false}
       closeEvent={sinon.spy()}
-      intl={intlMock}
-    />);
+      intl={getIntlMock(messages)}
+    />, messages);
 
     const modal = wrapper.find(Modal);
     expect(modal).toHaveLength(1);

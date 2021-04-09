@@ -1,13 +1,14 @@
 import React from 'react';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   FamilieHendelseSamling, Kodeverk, Personoversikt, UttakKontrollerFaktaPerioder, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
 import { transformValues, UttakFaktaForm } from './UttakFaktaForm';
-import shallowWithIntl from '../../i18n/intl-enzyme-test-helper-fakta-uttak';
+import messages from '../../i18n/nb_NO.json';
 
 const ap5070 = {
   aksjonspunktType: {
@@ -120,7 +121,7 @@ describe('<UttakFaktaForm>', () => {
         arbeidsgiverOpplysningerPerId={{}}
         submittable
         {...formProps}
-      />,
+      />, messages,
     );
 
     const span = wrapper.find('span');

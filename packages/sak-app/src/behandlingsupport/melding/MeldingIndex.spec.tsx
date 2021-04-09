@@ -57,10 +57,10 @@ describe('<MeldingIndex>', () => {
   });
 
   it('skal vise messages når mottakere og brevmaler har blitt hentet fra server', () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT, { navn: 'Peder' });
-    requestApi.mock(FpsakApiKeys.KODEVERK, kodeverk);
-    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, true);
-    requestApi.mock(FpsakApiKeys.BREVMALER, templates);
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, { navn: 'Peder' });
+    requestApi.mock(FpsakApiKeys.KODEVERK.name, kodeverk);
+    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, true);
+    requestApi.mock(FpsakApiKeys.BREVMALER.name, templates);
 
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
@@ -75,11 +75,11 @@ describe('<MeldingIndex>', () => {
   });
 
   it('skal sette default tom streng ved forhåndsvisning dersom fritekst ikke er fylt ut', () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT, { navn: 'Peder' });
-    requestApi.mock(FpsakApiKeys.KODEVERK, kodeverk);
-    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, true);
-    requestApi.mock(FpsakApiKeys.BREVMALER, templates);
-    requestApi.mock(FpsakApiKeys.PREVIEW_MESSAGE_FORMIDLING, {});
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, { navn: 'Peder' });
+    requestApi.mock(FpsakApiKeys.KODEVERK.name, kodeverk);
+    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, true);
+    requestApi.mock(FpsakApiKeys.BREVMALER.name, templates);
+    requestApi.mock(FpsakApiKeys.PREVIEW_MESSAGE_FORMIDLING.name, {});
 
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
@@ -92,17 +92,17 @@ describe('<MeldingIndex>', () => {
     const previewCallback = index.prop('previewCallback') as (params: any) => void;
     previewCallback({ mottaker: 'Søker', brevmalkode: 'Mal1' });
 
-    const reqData = requestApi.getRequestMockData(FpsakApiKeys.PREVIEW_MESSAGE_FORMIDLING);
+    const reqData = requestApi.getRequestMockData(FpsakApiKeys.PREVIEW_MESSAGE_FORMIDLING.name);
     expect(reqData).toHaveLength(1);
     expect(reqData[0].params.fritekst).toBe(' ');
   });
 
   it('skal lukke av modal', async () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT, { navn: 'Peder' });
-    requestApi.mock(FpsakApiKeys.KODEVERK, kodeverk);
-    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, true);
-    requestApi.mock(FpsakApiKeys.BREVMALER, templates);
-    requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE);
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, { navn: 'Peder' });
+    requestApi.mock(FpsakApiKeys.KODEVERK.name, kodeverk);
+    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, true);
+    requestApi.mock(FpsakApiKeys.BREVMALER.name, templates);
+    requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE.name);
 
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
@@ -135,11 +135,11 @@ describe('<MeldingIndex>', () => {
   });
 
   it('skal sende melding', async () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT, { navn: 'Peder' });
-    requestApi.mock(FpsakApiKeys.KODEVERK, kodeverk);
-    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, true);
-    requestApi.mock(FpsakApiKeys.BREVMALER, templates);
-    requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE);
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, { navn: 'Peder' });
+    requestApi.mock(FpsakApiKeys.KODEVERK.name, kodeverk);
+    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, true);
+    requestApi.mock(FpsakApiKeys.BREVMALER.name, templates);
+    requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE.name);
 
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
@@ -159,7 +159,7 @@ describe('<MeldingIndex>', () => {
     const submitCallback = index.prop('submitCallback') as (params: any) => void;
     await submitCallback(message);
 
-    const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE);
+    const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE.name);
     expect(reqData).toHaveLength(1);
     expect(reqData[0].params).toEqual({
       behandlingId: 1,
@@ -171,11 +171,11 @@ describe('<MeldingIndex>', () => {
   });
 
   it('skal sende melding og ikke sette saken på vent hvis ikke Innhent eller forlenget', async () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT, { navn: 'Peder' });
-    requestApi.mock(FpsakApiKeys.KODEVERK, kodeverk);
-    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, true);
-    requestApi.mock(FpsakApiKeys.BREVMALER, templates);
-    requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE);
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, { navn: 'Peder' });
+    requestApi.mock(FpsakApiKeys.KODEVERK.name, kodeverk);
+    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, true);
+    requestApi.mock(FpsakApiKeys.BREVMALER.name, templates);
+    requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE.name);
 
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
@@ -202,7 +202,7 @@ describe('<MeldingIndex>', () => {
     expect(wrapper.find(MessagesModalSakIndex)).toHaveLength(1);
     expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(0);
 
-    const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE);
+    const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE.name);
     expect(reqData).toHaveLength(1);
     expect(reqData[0].params).toEqual({
       behandlingId: 1,
@@ -214,11 +214,11 @@ describe('<MeldingIndex>', () => {
   });
 
   it('skal sende melding og sette saken på vent hvis INNHENT_DOK', async () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT, { navn: 'Peder' });
-    requestApi.mock(FpsakApiKeys.KODEVERK, kodeverk);
-    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, true);
-    requestApi.mock(FpsakApiKeys.BREVMALER, templates);
-    requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE);
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, { navn: 'Peder' });
+    requestApi.mock(FpsakApiKeys.KODEVERK.name, kodeverk);
+    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, true);
+    requestApi.mock(FpsakApiKeys.BREVMALER.name, templates);
+    requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE.name);
 
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
@@ -245,7 +245,7 @@ describe('<MeldingIndex>', () => {
     expect(wrapper.find(MessagesModalSakIndex)).toHaveLength(0);
     expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(1);
 
-    const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE);
+    const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE.name);
     expect(reqData).toHaveLength(1);
     expect(reqData[0].params).toEqual({
       behandlingId: 1,
@@ -257,11 +257,11 @@ describe('<MeldingIndex>', () => {
   });
 
   it('skal sende melding og sette saken på vent hvis FORLEN', async () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT, { navn: 'Peder' });
-    requestApi.mock(FpsakApiKeys.KODEVERK, kodeverk);
-    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, true);
-    requestApi.mock(FpsakApiKeys.BREVMALER, templates);
-    requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE);
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, { navn: 'Peder' });
+    requestApi.mock(FpsakApiKeys.KODEVERK.name, kodeverk);
+    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, true);
+    requestApi.mock(FpsakApiKeys.BREVMALER.name, templates);
+    requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE.name);
 
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
@@ -288,7 +288,7 @@ describe('<MeldingIndex>', () => {
     expect(wrapper.find(MessagesModalSakIndex)).toHaveLength(0);
     expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(1);
 
-    const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE);
+    const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE.name);
     expect(reqData).toHaveLength(1);
     expect(reqData[0].params).toEqual({
       behandlingId: 1,
@@ -300,11 +300,11 @@ describe('<MeldingIndex>', () => {
   });
 
   it('skal håndtere melding fra modal', async () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT, { navn: 'Peder' });
-    requestApi.mock(FpsakApiKeys.KODEVERK, kodeverk);
-    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, true);
-    requestApi.mock(FpsakApiKeys.BREVMALER, templates);
-    requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE);
+    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, { navn: 'Peder' });
+    requestApi.mock(FpsakApiKeys.KODEVERK.name, kodeverk);
+    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, true);
+    requestApi.mock(FpsakApiKeys.BREVMALER.name, templates);
+    requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE.name);
 
     const setBehandlingOnHoldCallback = sinon.spy();
     behandlingEventHandler.setHandler({

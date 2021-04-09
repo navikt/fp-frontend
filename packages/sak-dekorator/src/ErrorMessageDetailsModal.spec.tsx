@@ -1,10 +1,12 @@
 import React from 'react';
 import sinon from 'sinon';
 
-import { intlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import ErrorMessageDetailsModal from './ErrorMessageDetailsModal';
-import shallowWithIntl from '../i18n/intl-enzyme-test-helper-sak-dekorator';
+import messages from '../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<ErrorMessageDetailsModal>', () => {
   it('skal vise feildetaljer', () => {
@@ -17,7 +19,7 @@ describe('<ErrorMessageDetailsModal>', () => {
       showModal={false}
       closeModalFn={sinon.spy()}
       errorDetails={errorDetails}
-    />);
+    />, messages);
 
     const undertekst = wrapper.find(Undertekst);
     expect(undertekst).toHaveLength(2);

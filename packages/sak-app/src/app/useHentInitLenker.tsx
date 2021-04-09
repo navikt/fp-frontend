@@ -1,19 +1,12 @@
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { Link } from '@fpsak-frontend/rest-api';
 
 import {
   FpsakApiKeys, restApiHooks, requestApi, LinkCategory,
 } from '../data/fpsakApi';
 
-type InitLinks = {
-  links: Link[];
-  toggleLinks: Link[];
-  sakLinks: Link[];
-};
-
 const useHentInitLenker = (): boolean[] => {
-  const { data: initFetchLinksFpSak, state: initFetchStateFpSak } = restApiHooks.useGlobalStateRestApi<InitLinks>(FpsakApiKeys.INIT_FETCH);
-  const { data: initFetchLinksFpTilbake, state: initFetchStateFpTilbake } = restApiHooks.useGlobalStateRestApi<InitLinks>(FpsakApiKeys.INIT_FETCH_FPTILBAKE);
+  const { data: initFetchLinksFpSak, state: initFetchStateFpSak } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.INIT_FETCH);
+  const { data: initFetchLinksFpTilbake, state: initFetchStateFpTilbake } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.INIT_FETCH_FPTILBAKE);
 
   const harFpsakInitKallFeilet = initFetchStateFpSak === RestApiState.ERROR;
   const harHentetFerdigInitLenker = initFetchStateFpSak === RestApiState.SUCCESS

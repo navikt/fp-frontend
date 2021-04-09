@@ -6,6 +6,7 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 
 import GrunnlagForAarsinntektPanelFL from './GrunnlagForAarsinntektPanelFL';
+import messages from '../../../i18n/nb_NO.json';
 
 const andel = {
   aktivitetStatus: {
@@ -25,7 +26,7 @@ describe('<GrunnlagForAarsinntektPanelFL>', () => {
   it('Skal teste tabellen får korrekt antall rader UTEN arbeidsforhold startdato', () => {
     const wrapper = shallowWithIntl(<GrunnlagForAarsinntektPanelFL
       alleAndeler={[andel]}
-    />);
+    />, messages);
     const rows = wrapper.find('Row');
 
     expect(rows).toHaveLength(2);
@@ -41,7 +42,7 @@ describe('<GrunnlagForAarsinntektPanelFL>', () => {
     andel.arbeidsforhold.startdato = '2011-12-12';
     const wrapper = shallowWithIntl(<GrunnlagForAarsinntektPanelFL
       alleAndeler={[andel]}
-    />);
+    />, messages);
     const rows = wrapper.find('Row');
     const ledeTextStart = rows.at(0).find(FormattedMessage);
     const ledeTextStartDato = rows.at(0).find('DateLabel');

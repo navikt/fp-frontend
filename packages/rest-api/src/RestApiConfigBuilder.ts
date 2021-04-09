@@ -1,5 +1,6 @@
 import RequestAdditionalConfig from './RequestAdditionalConfigTsType';
 import RequestConfig from './RequestConfig';
+import RestKey from './RestKey';
 
 /**
  * RestApiConfigBuilder
@@ -9,38 +10,38 @@ import RequestConfig from './RequestConfig';
 class RestApiConfigBuilder {
   endpoints: RequestConfig[] = [];
 
-  withGet(path: string, name: string, config?: RequestAdditionalConfig): this {
-    this.endpoints.push(new RequestConfig(name, path, config).withGetMethod());
+  withGet(path: string, key: RestKey<any, any>, config?: RequestAdditionalConfig): this {
+    this.endpoints.push(new RequestConfig(key.name, path, config).withGetMethod());
     return this;
   }
 
-  withAsyncGet(path: string, name: string, config?: RequestAdditionalConfig): this {
-    this.endpoints.push(new RequestConfig(name, path, config).withGetAsyncMethod());
+  withAsyncGet(path: string, key: RestKey<any, any>, config?: RequestAdditionalConfig): this {
+    this.endpoints.push(new RequestConfig(key.name, path, config).withGetAsyncMethod());
     return this;
   }
 
-  withPost(path: string, name: string, config?: RequestAdditionalConfig): this {
-    this.endpoints.push(new RequestConfig(name, path, config).withPostMethod());
+  withPost(path: string, key: RestKey<any, any>, config?: RequestAdditionalConfig): this {
+    this.endpoints.push(new RequestConfig(key.name, path, config).withPostMethod());
     return this;
   }
 
-  withAsyncPost(path: string, name: string, config?: RequestAdditionalConfig): this {
-    this.endpoints.push(new RequestConfig(name, path, config).withPostAsyncMethod());
+  withAsyncPost(path: string, key: RestKey<any, any>, config?: RequestAdditionalConfig): this {
+    this.endpoints.push(new RequestConfig(key.name, path, config).withPostAsyncMethod());
     return this;
   }
 
-  withPut(path: string, name: string, config?: RequestAdditionalConfig): this {
-    this.endpoints.push(new RequestConfig(name, path, config).withPutMethod());
+  withPut(path: string, key: RestKey<any, any>, config?: RequestAdditionalConfig): this {
+    this.endpoints.push(new RequestConfig(key.name, path, config).withPutMethod());
     return this;
   }
 
-  withAsyncPut(path: string, name: string, config?: RequestAdditionalConfig): this {
-    this.endpoints.push(new RequestConfig(name, path, config).withPutAsyncMethod());
+  withAsyncPut(path: string, key: RestKey<any, any>, config?: RequestAdditionalConfig): this {
+    this.endpoints.push(new RequestConfig(key.name, path, config).withPutAsyncMethod());
     return this;
   }
 
-  withRel(rel: string, name: string, config?: RequestAdditionalConfig): this {
-    this.endpoints.push(new RequestConfig(name, undefined, config).withRel(rel));
+  withRel(rel: string, key: RestKey<any, any>, config?: RequestAdditionalConfig): this {
+    this.endpoints.push(new RequestConfig(key.name, undefined, config).withRel(rel));
     return this;
   }
 
