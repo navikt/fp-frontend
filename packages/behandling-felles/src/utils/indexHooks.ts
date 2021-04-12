@@ -81,11 +81,7 @@ export const useLagreAksjonspunkt = (
   setBehandling: (behandling: Behandling) => void,
   lagreAksjonspunktKey: RestKey<Behandling, any>,
   lagreOverstyrtyAksjonspunktKey?: RestKey<Behandling, any>,
-): {
-  lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,
-  lagreOverstyrteAksjonspunkter: (params: any, keepData?: boolean
-) => Promise<any>,
-} => {
+) => {
   const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
 
   const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = useRestApiRunner(lagreAksjonspunktKey);

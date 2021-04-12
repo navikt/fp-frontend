@@ -5,14 +5,17 @@ import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { InjectedFormProps } from 'redux-form';
 
-import { dateFormat, guid, getKodeverknavnFn } from '@fpsak-frontend/utils';
+import {
+  dateFormat, guid, getKodeverknavnFn, omitMany,
+} from '@fpsak-frontend/utils';
 import { behandlingForm, getBehandlingFormPrefix } from '@fpsak-frontend/form';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelseSamling, Kodeverk,
   KodeverkMedNavn, Personoversikt, UttakKontrollerFaktaPerioder, Ytelsefordeling,
 } from '@fpsak-frontend/types';
+import { FaktaUttakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import UttakPerioder from './UttakPerioder';
 import {
@@ -37,7 +40,7 @@ interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];
   behandlingId: number;
   behandlingVersjon: number;
-  submitCallback: (...args: any[]) => any;
+  submitCallback: (data: FaktaUttakAp[]) => Promise<void>;
   readOnly: boolean;
   hasOpenAksjonspunkter: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -220,37 +223,44 @@ const getOriginalPeriodeId = (origPeriode: CustomUttakKontrollerFaktaPerioder): 
 };
 
 const manueltEllerOverstyring = (manuellOverstyring: boolean, erManuellOverstyrApErOpprettet: boolean): string => (
-  manuellOverstyring || erManuellOverstyrApErOpprettet ? aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK : aksjonspunktCodes.MANUELL_AVKLAR_FAKTA_UTTAK
+  manuellOverstyring || erManuellOverstyrApErOpprettet ? AksjonspunktCode.OVERSTYR_AVKLAR_FAKTA_UTTAK : AksjonspunktCode.MANUELL_AVKLAR_FAKTA_UTTAK
 );
 
-export const transformValues = (values: FormValues, initialValues: FormValues, aksjonspunkter: Aksjonspunkt[]): any => { // NOSONAR
-  const overstyringAp = [aksjonspunktCodes.MANUELL_AVKLAR_FAKTA_UTTAK, aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK];
+const lagBekreftedePerioder = (
+  perioder: CustomUttakKontrollerFaktaPerioder[],
+  initPerioder: CustomUttakKontrollerFaktaPerioder[],
+  // @ts-ignore Fiksar ikkje denne fordi dette skal snart refaktorerast
+): FaktaUttakAp['bekreftedePerioder'] => (
+  perioder.map((periode) => {
+    const {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      id, openForm, updated, isFromSøknad, ...bekreftetPeriode // NOSONAR
+    } = periode;
+    const origPeriode = initPerioder.filter((p) => p.id === id);
+    return {
+      bekreftetPeriode: omitMany(bekreftetPeriode, ['bekreftet']),
+      orginalFom: origPeriode[0] ? origPeriode[0].fom : null,
+      orginalTom: origPeriode[0] ? origPeriode[0].tom : null,
+      originalArbeidstidsprosent: origPeriode[0] ? origPeriode[0].arbeidstidsprosent : null,
+      originalBegrunnelse: origPeriode[0] ? origPeriode[0].begrunnelse : null,
+      originalResultat: origPeriode[0] ? origPeriode[0].resultat : null,
+    };
+  })
+);
+
+export const transformValues = (values: FormValues, initialValues: FormValues, aksjonspunkter: Aksjonspunkt[]): FaktaUttakAp[] => { // NOSONAR
   const erManuellOverstyrApErOpprettet = aksjonspunkter
-    .some((ap) => ap.definisjon.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK);
-  const aksjonspunktUtenOverstyr = aksjonspunkter.filter((ap) => !overstyringAp.includes(ap.definisjon.kode));
+    .some((ap) => ap.definisjon.kode === AksjonspunktCode.OVERSTYR_AVKLAR_FAKTA_UTTAK);
+  const aksjonspunktUtenOverstyr = aksjonspunkter.filter((ap) => ap.definisjon.kode !== AksjonspunktCode.MANUELL_AVKLAR_FAKTA_UTTAK
+    && ap.definisjon.kode !== AksjonspunktCode.OVERSTYR_AVKLAR_FAKTA_UTTAK);
 
   const apCodes = aksjonspunktUtenOverstyr.length
     ? aksjonspunktUtenOverstyr.map((ap) => ap.definisjon.kode)
     : [manueltEllerOverstyring(values.faktaUttakManuellOverstyring, erManuellOverstyrApErOpprettet)];
   return apCodes.map((ap) => ({
-    kode: ap,
-
-    bekreftedePerioder: values.perioder.map((periode) => {
-      const {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        id, openForm, updated, isFromSøknad, ...bekreftetPeriode // NOSONAR
-      } = periode;
-      const origPeriode = initialValues.perioder.filter((p) => p.id === id);
-      return {
-        bekreftetPeriode,
-        orginalFom: origPeriode[0] ? origPeriode[0].fom : null,
-        orginalTom: origPeriode[0] ? origPeriode[0].tom : null,
-        originalArbeidstidsprosent: origPeriode[0] ? origPeriode[0].arbeidstidsprosent : null,
-        originalBegrunnelse: origPeriode[0] ? origPeriode[0].begrunnelse : null,
-        originalResultat: origPeriode[0] ? origPeriode[0].resultat : null,
-      };
-    }),
-
+    kode: ap as any,
+    begrunnelse: '',
+    bekreftedePerioder: lagBekreftedePerioder(values.perioder, initialValues.perioder),
     slettedePerioder: values.slettedePerioder
       ? values.slettedePerioder.map((periode) => {
         const { id, begrunnelse, ...slettetPeriode } = periode;
@@ -262,8 +272,6 @@ export const transformValues = (values: FormValues, initialValues: FormValues, a
         };
       })
       : [],
-
-    begrunnelse: '',
   }));
 };
 
@@ -282,7 +290,7 @@ const mapStateToPropsFactory = (_initialState: any, props: PureOwnProps) => {
 
   return (_state, ownProps: PureOwnProps): MappedOwnProps => {
     const behandlingFormPrefix = getBehandlingFormPrefix(behandlingId, behandlingVersjon);
-    const hasRevurderingOvertyringAp = props.aksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktCodes.MANUELL_AVKLAR_FAKTA_UTTAK);
+    const hasRevurderingOvertyringAp = props.aksjonspunkter.some((ap) => ap.definisjon.kode === AksjonspunktCode.MANUELL_AVKLAR_FAKTA_UTTAK);
     return {
       initialValues,
       behandlingFormPrefix,

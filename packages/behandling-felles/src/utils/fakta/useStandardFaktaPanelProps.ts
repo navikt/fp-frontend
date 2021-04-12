@@ -4,6 +4,7 @@ import {
   Aksjonspunkt, Behandling, Fagsak, StandardFaktaPanelProps, Vilkar,
 } from '@fpsak-frontend/types';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import { erReadOnly } from '../readOnlyPanelUtils';
 import getAlleMerknaderFraBeslutter from '../getAlleMerknaderFraBeslutter';
@@ -16,11 +17,12 @@ const getBekreftAksjonspunktFaktaCallback = (
   fagsak: Fagsak,
   behandling: Behandling,
   oppdaterProsessStegOgFaktaPanelIUrl: (prosessPanel?: string, faktanavn?: string) => void,
-  lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,
-  lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<any>,
+  lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<Behandling>,
+  lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<Behandling>,
   overstyringApCodes?: string[],
-) => (aksjonspunkter) => {
-  const model = aksjonspunkter.map((ap) => ({
+) => (aksjonspunkter: FaktaAksjonspunkt | FaktaAksjonspunkt[]): Promise<void> => {
+  const apListe = Array.isArray(aksjonspunkter) ? aksjonspunkter : [aksjonspunkter];
+  const model = apListe.map((ap) => ({
     '@type': ap.kode,
     ...ap,
   }));

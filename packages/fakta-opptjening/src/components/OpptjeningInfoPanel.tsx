@@ -5,11 +5,12 @@ import moment from 'moment';
 import { InjectedFormProps } from 'redux-form';
 
 import { behandlingForm } from '@fpsak-frontend/form';
-import { addDaysToDate, omit } from '@fpsak-frontend/utils';
+import { addDaysToDate, omitMany } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FastsattOpptjening, KodeverkMedNavn, Opptjening, OpptjeningAktivitet,
 } from '@fpsak-frontend/types';
+import { AvklarAktivitetsPerioderAp, OpptjeningAktivitetAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import OpptjeningFaktaForm from './OpptjeningFaktaForm';
 import CustomOpptjeningAktivitet from '../CustomOpptjeningAktivitet';
@@ -33,7 +34,7 @@ interface PureOwnProps {
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   opptjeningAktiviteter: OpptjeningAktivitet[];
   aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (data: any) => void;
+  submitCallback: (data: AvklarAktivitetsPerioderAp) => Promise<void>;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
@@ -127,7 +128,11 @@ export const buildInitialValues = createSelector(
     }),
 );
 
-const transformPeriod = (activity: CustomOpptjeningAktivitet, opptjeningsperiodeFom: string, opptjeningsperiodeTom: string): CustomOpptjeningAktivitet => {
+const transformPeriod = (
+  activity: CustomOpptjeningAktivitet,
+  opptjeningsperiodeFom: string,
+  opptjeningsperiodeTom: string,
+): OpptjeningAktivitetAp => {
   let fomDate = activity.opptjeningFom;
   if (activity.originalFom && moment(activity.originalFom).isBefore(opptjeningsperiodeFom)) {
     fomDate = fomDate === opptjeningsperiodeFom ? activity.originalFom : fomDate;
@@ -137,23 +142,24 @@ const transformPeriod = (activity: CustomOpptjeningAktivitet, opptjeningsperiode
     tomDate = tomDate === opptjeningsperiodeTom ? activity.originalTom : tomDate;
   }
 
+  const aktivitet = omitMany(activity, ['id', 'erPeriodeEndret']);
+
   return {
-    ...activity,
+    ...aktivitet,
     opptjeningFom: fomDate,
     opptjeningTom: tomDate,
   };
 };
 
-const transformValues = (values: FormValues): any => ({
+const transformValues = (values: FormValues): AvklarAktivitetsPerioderAp => ({
   opptjeningAktivitetList: values.opptjeningActivities
-    .map((oa) => transformPeriod(oa, addDay(values.fastsattOpptjening.opptjeningFom), addDay(values.fastsattOpptjening.opptjeningTom)))
-    .map((oa) => omit(oa, 'id')),
-  kode: values.aksjonspunkt[0].definisjon.kode,
+    .map((oa) => transformPeriod(oa, addDay(values.fastsattOpptjening.opptjeningFom), addDay(values.fastsattOpptjening.opptjeningTom))),
+  kode: aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING,
 });
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback],
-(submitCallback) => (values: FormValues) => submitCallback([transformValues(values)]));
+(submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const mapStateToPropsFactory = (_state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   aksjonspunkt: ownProps.aksjonspunkter[0],

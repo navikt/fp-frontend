@@ -32,7 +32,8 @@ const FAKTA_UTTAK_AP = [
 ];
 
 const getStatusFromUttakresultat = (uttaksresultat: UttaksresultatPeriode, aksjonspunkter: Aksjonspunkt[]): string => {
-  if (!uttaksresultat || aksjonspunkter.some((ap) => FAKTA_UTTAK_AP.includes(ap.definisjon.kode) && ap.status.kode === aksjonspunktStatus.OPPRETTET)) {
+  if (!uttaksresultat || aksjonspunkter.some((ap) => FAKTA_UTTAK_AP
+    .some((kode) => kode === ap.definisjon.kode) && ap.status.kode === aksjonspunktStatus.OPPRETTET)) {
     return vilkarUtfallType.IKKE_VURDERT;
   }
   if (uttaksresultat.perioderSøker && uttaksresultat.perioderSøker.length > 0) {

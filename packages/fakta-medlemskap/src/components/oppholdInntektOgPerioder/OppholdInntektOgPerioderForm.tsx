@@ -11,11 +11,15 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { guid, omit } from '@fpsak-frontend/utils';
+import { guid, omitMany } from '@fpsak-frontend/utils';
 import { getBehandlingFormPrefix, behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import {
   Aksjonspunkt, Kodeverk, KodeverkMedNavn, Medlemskap, MedlemPeriode, Soknad, MedlemskapPeriode,
 } from '@fpsak-frontend/types';
+import {
+  AvklarFortsattMedlemskapAp,
+  BekreftBosattVurderingAp, BekreftErMedlemVurderingAp, BekreftLovligOppholdVurderingAp, BekreftOppholdsrettVurderingAp,
+} from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import OppholdInntektOgPeriodeForm, { FormValues as OppholdFormValues } from './OppholdInntektOgPeriodeForm';
 import MedlemskapEndringerTabell from './MedlemskapEndringerTabell';
@@ -71,6 +75,12 @@ export type FormValues = {
   perioder: PeriodeMedId[];
 }
 
+type AksjonspunktData = Array<BekreftBosattVurderingAp
+  | BekreftErMedlemVurderingAp
+  | BekreftOppholdsrettVurderingAp
+  | BekreftLovligOppholdVurderingAp
+  | AvklarFortsattMedlemskapAp>;
+
 interface PureOwnProps {
   soknad: Soknad;
   medlemskap: Medlemskap;
@@ -78,7 +88,7 @@ interface PureOwnProps {
   behandlingType: Kodeverk;
   behandlingId: number;
   behandlingVersjon: number;
-  submitCallback: (...args: any[]) => any;
+  submitCallback: (data: AksjonspunktData) => Promise<void>;
   submittable: boolean;
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
@@ -260,35 +270,39 @@ const medlemAksjonspunkter = [
   AVKLAR_FORTSATT_MEDLEMSKAP,
 ];
 
-export const transformValues = (perioder: OppholdFormValues[], aksjonspunkter: Aksjonspunkt[]): any => {
-  const aktiveMedlemAksjonspunkter = aksjonspunkter
-    .filter((ap: Aksjonspunkt) => medlemAksjonspunkter.includes(ap.definisjon.kode))
-    .filter((ap: Aksjonspunkt) => ap.erAktivt)
-    .filter((ap: Aksjonspunkt) => ap.definisjon.kode !== aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN);
+const mapOgFiltrerPerioder = (ap: Aksjonspunkt, perioder: OppholdFormValues[]) => {
+  const perioderTilLagring = perioder.map((periode) => {
+    const bekreftetPeriode = omitMany(periode, [
+      'id',
+      'fixedMedlemskapPerioder',
+      'foreldre',
+      'hasBosattAksjonspunkt',
+      'hasPeriodeAksjonspunkt',
+      'isBosattAksjonspunktClosed',
+      'isPeriodAksjonspunktClosed',
+      'opphold',
+      'termindato',
+      'årsaker',
+    ]);
 
-  return aktiveMedlemAksjonspunkter.map((ap: Aksjonspunkt) => ({
+    return bekreftetPeriode;
+  });
+
+  return perioderTilLagring.filter((periode: PeriodeMedId) => periode.aksjonspunkter.includes(ap.definisjon.kode)
+    || (periode.aksjonspunkter.length > 0 && ap.definisjon.kode === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP));
+};
+
+export const transformValues = (perioder: OppholdFormValues[], aksjonspunkter: Aksjonspunkt[]): AksjonspunktData => {
+  const aktiveMedlemAksjonspunkter = aksjonspunkter
+    .filter((ap) => medlemAksjonspunkter.some((kode) => kode === ap.definisjon.kode))
+    .filter((ap) => ap.erAktivt)
+    .filter((ap) => ap.definisjon.kode !== aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN);
+
+  // @ts-ignore Fiks
+  return aktiveMedlemAksjonspunkter.map((ap) => ({
     kode: ap.definisjon.kode,
     begrunnelse: '',
-
-    bekreftedePerioder: perioder.map((periode) => {
-      const bekreftetPeriode = omit(periode,
-        'id',
-        'fixedMedlemskapPerioder',
-        'foreldre',
-        'manuellVurderingType',
-        'hasBosattAksjonspunkt',
-        'hasPeriodeAksjonspunkt',
-        'isBosattAksjonspunktClosed',
-        'isPeriodAksjonspunktClosed',
-        'opphold',
-        'personopplysninger',
-        'fom',
-        'termindato',
-        'årsaker');
-
-      return bekreftetPeriode;
-    }).filter((periode: PeriodeMedId) => periode.aksjonspunkter.includes(ap.definisjon.kode)
-      || (periode.aksjonspunkter.length > 0 && ap.definisjon.kode === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP)),
+    bekreftedePerioder: mapOgFiltrerPerioder(ap, perioder),
   }));
 };
 

@@ -107,7 +107,7 @@ const getLagringSideeffekter = (
 
   // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
   return () => {
-    if (FATTER_VEDTAK_AKSJONSPUNKT_KODER.includes(aksjonspunktModels[0].kode)) {
+    if (FATTER_VEDTAK_AKSJONSPUNKT_KODER.some((kode) => kode === aksjonspunktModels[0].kode)) {
       toggleFatterVedtakModal(true);
     } else {
       toggleIverksetterVedtakModal(true);

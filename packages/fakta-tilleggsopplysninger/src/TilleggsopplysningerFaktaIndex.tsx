@@ -16,7 +16,6 @@ interface OwnProps {
 const TilleggsopplysningerFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
   behandling,
   soknad,
-  aksjonspunkter,
   harApneAksjonspunkter,
   submitCallback,
   readOnly,
@@ -26,7 +25,6 @@ const TilleggsopplysningerFaktaIndex: FunctionComponent<OwnProps & StandardFakta
       behandlingId={behandling.id}
       behandlingVersjon={behandling.versjon}
       tilleggsopplysninger={soknad.tilleggsopplysninger}
-      aksjonspunkter={aksjonspunkter}
       hasOpenAksjonspunkter={harApneAksjonspunkter}
       submitCallback={submitCallback}
       readOnly={readOnly}

@@ -22,6 +22,7 @@ import {
   ArbeidsforholdFodselOgTilrettelegging, ArbeidsforholdTilretteleggingDato,
 } from '@fpsak-frontend/types';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel_ny.svg';
+import { BekreftSvangerskapspengerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import TilretteleggingArbeidsforholdSection from './tilrettelegging/TilretteleggingArbeidsforholdSection';
 import { finnPermisjonFieldName, skalTaHensynTilPermisjon } from './tilrettelegging/VelferdspermisjonSection';
@@ -78,10 +79,10 @@ const finnArbeidsforhold = (alleIafAf: IayArbeidsforhold[], internArbeidsforhold
 };
 
 type FormValues = {
-  termindato?: string;
-  fødselsdato?: string;
-  begrunnelse?: string;
-} & Record<string, any>;
+  termindato: string;
+  fødselsdato: string;
+  begrunnelse: string;
+};
 
 interface PureOwnProps {
   behandlingId: number;
@@ -94,14 +95,14 @@ interface PureOwnProps {
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
   iayArbeidsforhold: IayArbeidsforhold[];
   aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (values: any) => void;
+  submitCallback: (data: BekreftSvangerskapspengerAp) => Promise<void>;
   uttakArbeidTyper: KodeverkMedNavn[],
   intl: IntlShape;
 }
 interface MappedOwnProps {
   fødselsdato?: string;
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[];
-  initialValues: FormValues;
+  initialValues: Partial<FormValues>;
   validate: Validator;
   onSubmit: (formValues: FormValues) => void;
 }
@@ -290,7 +291,7 @@ const transformValues = (
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   uttakArbeidTyper: KodeverkMedNavn[],
-) => ([{
+): BekreftSvangerskapspengerAp => ({
   kode: aksjonspunktCodes.FODSELTILRETTELEGGING,
   ...values,
   bekreftetSvpArbeidsforholdList: arbeidsforhold.map((a) => {
@@ -317,7 +318,7 @@ const transformValues = (
       })),
     };
   }),
-}]);
+});
 
 const finnAntallDatoerMappedByDato = (datoer: string[]): Record<string, number> => datoer.reduce((acc, dato) => ({
   ...acc,
@@ -325,7 +326,7 @@ const finnAntallDatoerMappedByDato = (datoer: string[]): Record<string, number> 
 }), {});
 
 export const validateForm = (
-  values: FormValues,
+  values: Partial<FormValues>,
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   uttakArbeidTyper: KodeverkMedNavn[],

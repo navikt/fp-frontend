@@ -5,6 +5,7 @@ import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared
 import {
   Aksjonspunkt, Arbeidsforhold, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, FodselOgTilrettelegging,
 } from '@fpsak-frontend/types';
+import { BekreftSvangerskapspengerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import FodselOgTilretteleggingFaktaForm from './FodselOgTilretteleggingFaktaForm';
 
@@ -16,7 +17,7 @@ interface OwnProps {
   iayArbeidsforhold: Arbeidsforhold[];
   readOnly: boolean;
   hasOpenAksjonspunkter: boolean;
-  submitCallback?: (aksjonspunktData: { kode: string }) => Promise<any>
+  submitCallback: (aksjonspunktData: BekreftSvangerskapspengerAp) => Promise<void>
   submittable: boolean;
   erOverstyrer: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;

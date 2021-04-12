@@ -7,6 +7,10 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse, Kodeverk, KodeverkMedNavn, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
+import {
+  AvklarFortsattMedlemskapAp, AvklarStartdatoForPeriodenAp, BekreftBosattVurderingAp, BekreftErMedlemVurderingAp, BekreftLovligOppholdVurderingAp,
+  BekreftOppholdsrettVurderingAp, OverstyringAvklarStartdatoForPeriodenAp,
+} from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import StartdatoForForeldrepengerperiodenForm from './startdatoForPeriode/StartdatoForForeldrepengerperiodenForm';
 import OppholdInntektOgPerioderForm from './oppholdInntektOgPerioder/OppholdInntektOgPerioderForm';
@@ -14,8 +18,6 @@ import OppholdInntektOgPerioderForm from './oppholdInntektOgPerioder/OppholdInnt
 const {
   AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN, OVERSTYR_AVKLAR_STARTDATO,
 } = aksjonspunktCodes;
-
-const avklarStartdatoAp = [AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN, OVERSTYR_AVKLAR_STARTDATO];
 
 const hasOpen = (aksjonspunkt: Aksjonspunkt): boolean => aksjonspunkt && isAksjonspunktOpen(aksjonspunkt.status.kode);
 
@@ -36,12 +38,20 @@ const skalViseAvklarStartdatoPanel = (
 ): boolean => (harAksjonspunkterForAvklarStartdato(aksjonspunkter)
   || skalKunneLoseUtenAksjonpunkter(aksjonspunkterMinusAvklarStartDato, hasOpenAksjonspunkter, isForeldrepenger));
 
+type AksjonspunktData = Array<BekreftBosattVurderingAp
+  | BekreftErMedlemVurderingAp
+  | BekreftOppholdsrettVurderingAp
+  | BekreftLovligOppholdVurderingAp
+  | AvklarFortsattMedlemskapAp>;
+
 interface OwnProps {
   hasOpenAksjonspunkter: boolean;
   submittable: boolean;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
-  submitCallback: (...args: any[]) => any;
+  submitCallback: (data: AvklarStartdatoForPeriodenAp
+    | OverstyringAvklarStartdatoForPeriodenAp
+    | AksjonspunktData) => Promise<void>;
   isForeldrepenger?: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   behandlingId: number;
@@ -86,7 +96,8 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps & WrappedComponentProps> =
   const avklarStartdatoAksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN);
   const avklarStartdatoOverstyring = aksjonspunkter.find((ap) => ap.definisjon.kode === OVERSTYR_AVKLAR_STARTDATO);
   const aksjonspunkterMinusAvklarStartDato = useMemo(() => aksjonspunkter
-    .filter((ap) => !avklarStartdatoAp.includes(ap.definisjon.kode)), [aksjonspunkter]);
+    .filter((ap) => ap.definisjon.kode !== AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN
+      && ap.definisjon.kode !== OVERSTYR_AVKLAR_STARTDATO), [aksjonspunkter]);
 
   return (
     <>

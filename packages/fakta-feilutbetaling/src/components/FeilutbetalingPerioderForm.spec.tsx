@@ -45,10 +45,12 @@ describe('<FeilutbetalingPerioderFormImpl>', () => {
       hendelseType: {
         kode: 'MEDLEMSKAP_VILKAARET_TYPE',
         navn: '',
+        kodeverk: '',
       },
       hendelseUndertyper: [{
         kode: 'MEDLEMSKAP_VILKAAR',
         navn: '',
+        kodeverk: '',
       }],
     }];
     const props = {

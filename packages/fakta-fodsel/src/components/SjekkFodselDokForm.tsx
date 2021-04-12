@@ -18,6 +18,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt, FamilieHendelse, Kodeverk, Soknad, AvklartBarn,
 } from '@fpsak-frontend/types';
+import { SjekkManglendeFodselAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import avklartBarnFieldArray from './AvklartBarnFieldArray';
 
@@ -62,7 +63,7 @@ interface PureOwnProps {
   aksjonspunkt: Aksjonspunkt;
   soknad: Soknad;
   avklartBarn: AvklartBarn[];
-  submitHandler: (values: FormValues) => any;
+  submitHandler: (data: SjekkManglendeFodselAp) => Promise<void>;
   readOnly: boolean;
   submittable: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
@@ -160,7 +161,7 @@ const addIsBarnDodt = (avklarteBarn: AvklartBarn[]): CustomAvklartBarn[] => {
   return avklarteBarnMedDodFlagg;
 };
 
-const allaBarn = (avklarteBarn: CustomAvklartBarn[]): AvklartBarn[] => {
+const hentAlleBarn = (avklarteBarn: CustomAvklartBarn[]): AvklartBarn[] => {
   const komplettBarn: AvklartBarn[] = [];
   avklarteBarn.forEach((barn, index) => {
     komplettBarn.push(barn);
@@ -194,22 +195,11 @@ const getEditedStatus = createSelector(
   ),
 );
 
-const getAntallBarn = (brukAntallBarnITps: boolean, antallBarnLagret: number, antallBarnFraSoknad: number, antallBarnFraTps: number): number => {
-  if (antallBarnFraTps === 0) {
-    return antallBarnLagret;
-  }
-  return brukAntallBarnITps ? antallBarnFraTps : antallBarnFraSoknad;
-};
-
-const transformValues = (values: FormValues, antallBarnFraSoknad: number, antallBarnFraTps: number, fodselInfo: AvklartBarn[]): any => ({
+const transformValues = (values: FormValues, fodselInfo: AvklartBarn[]): SjekkManglendeFodselAp => ({
   kode: aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL,
-  fodselsdato: values.fodselsdato,
-  antallBarnFodt: values.dokumentasjonForeligger
-    ? getAntallBarn(values.brukAntallBarnITps, values.antallBarnFodt, antallBarnFraSoknad, antallBarnFraTps) : undefined,
   dokumentasjonForeligger: values.dokumentasjonForeligger,
-  uidentifiserteBarn: allaBarn(values.avklartBarn),
+  uidentifiserteBarn: hentAlleBarn(values.avklartBarn),
   brukAntallBarnITps: fodselInfo && !!fodselInfo.length ? values.brukAntallBarnITps : false,
-  // @ts-ignore Fiks
   ...FaktaBegrunnelseTextField.transformValues(values),
 });
 
@@ -217,12 +207,10 @@ export const sjekkFodselDokForm = 'SjekkFodselDokForm';
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitHandler,
-  (ownProps: PureOwnProps) => ownProps.avklartBarn,
-  (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse,
-  (ownProps: PureOwnProps) => ownProps.soknad],
-(submitCallback, avklartBarn, gjeldendeFamiliehendelse, soknad) => (
+  (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse],
+(submitCallback, gjeldendeFamiliehendelse) => (
   values: FormValues,
-) => submitCallback(transformValues(values, soknad.antallBarn, avklartBarn.length, gjeldendeFamiliehendelse.avklartBarn)));
+) => submitCallback(transformValues(values, gjeldendeFamiliehendelse.avklartBarn)));
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
   const {

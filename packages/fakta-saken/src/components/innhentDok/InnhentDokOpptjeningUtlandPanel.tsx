@@ -13,6 +13,7 @@ import { AksjonspunktBox, VerticalSpacer } from '@fpsak-frontend/shared-componen
 import { required } from '@fpsak-frontend/utils';
 import { RadioGroupField, RadioOption, behandlingForm } from '@fpsak-frontend/form';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
+import { MerkOpptjeningUtlandAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import styles from './innhentDokOpptjeningUtlandPanel.less';
 
@@ -32,7 +33,7 @@ interface PureOwnProps {
   readOnly: boolean;
   harApneAksjonspunkter: boolean;
   submittable: boolean;
-  submitCallback: (data: any) => void;
+  submitCallback: (data: MerkOpptjeningUtlandAp) => Promise<void>;
   aksjonspunkt: Aksjonspunkt;
   dokStatus?: string;
 }
@@ -99,14 +100,14 @@ export const InnhentDokOpptjeningUtlandPanel: FunctionComponent<PureOwnProps & M
   </form>
 );
 
-const transformValues = (values: FormValues): any => ({
+const transformValues = (values: FormValues): MerkOpptjeningUtlandAp => ({
   kode: aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
   ...values,
 });
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback],
-(submitCallback) => (values: FormValues) => submitCallback([transformValues(values)]));
+(submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
   onSubmit: lagSubmitFn(ownProps),

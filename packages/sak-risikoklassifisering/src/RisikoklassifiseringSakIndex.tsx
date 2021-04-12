@@ -4,12 +4,12 @@ import { RawIntlProvider } from 'react-intl';
 import { Risikoklassifisering, Aksjonspunkt, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { VurderFaresignalerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import kontrollresultatKode from './kodeverk/kontrollresultatKode';
 import ManglendeKlassifiseringPanel from './components/ManglendeKlassifiseringPanel';
 import IngenRisikoPanel from './components/IngenRisikoPanel';
 import HoyRisikoTittel from './components/HoyRisikoTittel';
-import { VuderFaresignalerAp } from './components/AvklarFaresignalerForm';
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
@@ -28,7 +28,7 @@ interface OwnProps {
   risikoklassifisering?: Risikoklassifisering;
   isPanelOpen: boolean;
   readOnly: boolean;
-  submitAksjonspunkt: (verdier: VuderFaresignalerAp) => Promise<any>;
+  submitAksjonspunkt: (data: VurderFaresignalerAp) => Promise<void>;
   toggleRiskPanel: () => void;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }

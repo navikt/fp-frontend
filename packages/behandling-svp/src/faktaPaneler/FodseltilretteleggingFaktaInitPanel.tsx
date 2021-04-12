@@ -53,7 +53,7 @@ const FodseltilretteleggingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPan
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={faktaPanelCodes.FODSELTILRETTELEGGING}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'FodselOgTilretteleggingInfoPanel.FaktaFodselOgTilrettelegging' })}
-    skalPanelVisesIMeny={(initData) => !!initData?.aksjonspunkter.some((ap) => AKSJONSPUNKT_KODER.includes(ap.definisjon.kode))}
+    skalPanelVisesIMeny={(initData) => !!initData?.aksjonspunkter.some((ap) => AKSJONSPUNKT_KODER.some((kode) => kode === ap.definisjon.kode))}
     renderPanel={(data) => (
       <FodselOgTilretteleggingFaktaIndex
         erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
