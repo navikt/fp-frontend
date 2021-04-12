@@ -12,12 +12,12 @@ import {
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatFp,
   BeregningsresultatPeriode,
-  FamilieHendelse,
   Feriepengegrunnlag,
   KodeverkMedNavn,
   Personoversikt,
   Soknad,
   Kjønnkode,
+  FamilieHendelseSamling,
 } from '@fpsak-frontend/types';
 
 import Tilbaketrekkpanel from './tilbaketrekk/Tilbaketrekkpanel';
@@ -35,15 +35,16 @@ const groups = [{ id: 1, content: '' }, { id: 2, content: '' }];
 
 const parseDateString = (dateString: string): Date => moment(dateString, ISO_DATE_FORMAT).toDate();
 
-const getFamilieHendelseDato = (gjeldendeFamiliehendelse: FamilieHendelse): Date => {
-  if (gjeldendeFamiliehendelse.soknadType.kode === soknadType.FODSEL) {
-    if (gjeldendeFamiliehendelse.avklartBarn && gjeldendeFamiliehendelse.avklartBarn.length > 0) {
-      return parseDateString(gjeldendeFamiliehendelse.avklartBarn[0].fodselsdato);
+const getFamilieHendelseDato = (familieHendelseSamling: FamilieHendelseSamling): Date => {
+  const familieHendelse = familieHendelseSamling.gjeldende || familieHendelseSamling.oppgitt;
+  if (familieHendelse.soknadType.kode === soknadType.FODSEL) {
+    if (familieHendelse.avklartBarn && familieHendelse.avklartBarn.length > 0) {
+      return parseDateString(familieHendelse.avklartBarn[0].fodselsdato);
     }
-    return parseDateString(gjeldendeFamiliehendelse.termindato);
+    return parseDateString(familieHendelse.termindato);
   }
 
-  return parseDateString(gjeldendeFamiliehendelse.omsorgsovertakelseDato || gjeldendeFamiliehendelse.adopsjonFodelsedatoer[0]);
+  return parseDateString(familieHendelse.omsorgsovertakelseDato || familieHendelse.adopsjonFodelsedatoer[0]);
 };
 
 const finnTilbaketrekkAksjonspunkt = (alleAksjonspunkter: Aksjonspunkt[]): Aksjonspunkt | undefined => (alleAksjonspunkter
@@ -54,7 +55,7 @@ interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
   beregningresultat: BeregningsresultatFp;
-  gjeldendeFamiliehendelse: FamilieHendelse;
+  familieHendelseSamling: FamilieHendelseSamling;
   personoversikt: Personoversikt;
   soknad: Soknad;
   fagsakYtelseTypeKode: string;
@@ -77,13 +78,13 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
   behandlingVersjon,
   arbeidsgiverOpplysningerPerId,
   feriepengegrunnlag,
-  gjeldendeFamiliehendelse,
+  familieHendelseSamling,
   fagsakYtelseTypeKode,
   personoversikt,
   soknad,
   aksjonspunkter,
 }) => {
-  const familiehendelseDato = useMemo(() => getFamilieHendelseDato(gjeldendeFamiliehendelse), [gjeldendeFamiliehendelse]);
+  const familiehendelseDato = useMemo(() => getFamilieHendelseDato(familieHendelseSamling), [familieHendelseSamling]);
   const vurderTilbaketrekkAP = useMemo(() => finnTilbaketrekkAksjonspunkt(aksjonspunkter), [aksjonspunkter]);
   return (
     <>

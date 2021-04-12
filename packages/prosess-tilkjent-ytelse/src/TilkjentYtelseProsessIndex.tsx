@@ -48,7 +48,7 @@ const TilkjentYtelseProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
       behandlingId={behandling.id}
       behandlingVersjon={behandling.versjon}
       beregningresultat={beregningresultat}
-      gjeldendeFamiliehendelse={familiehendelse.gjeldende}
+      familieHendelseSamling={familiehendelse}
       personoversikt={personoversikt}
       soknad={soknad}
       fagsakYtelseTypeKode={fagsak.fagsakYtelseType.kode}

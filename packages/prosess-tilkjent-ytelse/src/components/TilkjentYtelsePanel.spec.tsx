@@ -7,7 +7,7 @@ import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Aksjonspunkt, BeregningsresultatFp, FamilieHendelse, Personoversikt, Soknad,
+  Aksjonspunkt, BeregningsresultatFp, FamilieHendelseSamling, Personoversikt, Soknad,
 } from '@fpsak-frontend/types';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
@@ -40,16 +40,18 @@ const beregningsresultat = {
 
 describe('<TilkjentYtelsePanel>', () => {
   it('skal bruke fødselsdato når dette finnes og søknadstype er fødsel', () => {
-    const gjeldendeFamiliehendelse = {
-      soknadType: {
-        kode: soknadType.FODSEL,
-        kodeverk: '',
+    const familiehendelse = {
+      gjeldende: {
+        soknadType: {
+          kode: soknadType.FODSEL,
+          kodeverk: '',
+        },
+        avklartBarn: [{
+          fodselsdato: '2021-01-05',
+        }],
+        termindato: '2021-01-01',
       },
-      avklartBarn: [{
-        fodselsdato: '2021-01-05',
-      }],
-      termindato: '2021-01-01',
-    } as FamilieHendelse;
+    } as FamilieHendelseSamling;
 
     const wrapper = shallowWithIntl(<TilkjentYtelsePanel
       readOnly
@@ -59,7 +61,7 @@ describe('<TilkjentYtelsePanel>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
-      gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
+      familieHendelseSamling={familiehendelse}
       personoversikt={{} as Personoversikt}
       soknad={{} as Soknad}
       fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
@@ -73,13 +75,15 @@ describe('<TilkjentYtelsePanel>', () => {
   });
 
   it('skal bruke termindato når ikke fødselsdato finnes og søknadstype er fødsel', () => {
-    const gjeldendeFamiliehendelse = {
-      soknadType: {
-        kode: soknadType.FODSEL,
-        kodeverk: '',
+    const familiehendelse = {
+      gjeldende: {
+        soknadType: {
+          kode: soknadType.FODSEL,
+          kodeverk: '',
+        },
+        termindato: '2021-01-01',
       },
-      termindato: '2021-01-01',
-    } as FamilieHendelse;
+    } as FamilieHendelseSamling;
 
     const wrapper = shallowWithIntl(<TilkjentYtelsePanel
       readOnly
@@ -89,7 +93,7 @@ describe('<TilkjentYtelsePanel>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
-      gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
+      familieHendelseSamling={familiehendelse}
       personoversikt={{} as Personoversikt}
       soknad={{} as Soknad}
       fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
@@ -103,13 +107,15 @@ describe('<TilkjentYtelsePanel>', () => {
   });
 
   it('skal bruke omsorgsovertakelsedato når denne finnes og søknadstype er adopsjon', () => {
-    const gjeldendeFamiliehendelse = {
-      soknadType: {
-        kode: soknadType.ADOPSJON,
-        kodeverk: '',
+    const familiehendelse = {
+      gjeldende: {
+        soknadType: {
+          kode: soknadType.ADOPSJON,
+          kodeverk: '',
+        },
+        omsorgsovertakelseDato: '2021-01-01',
       },
-      omsorgsovertakelseDato: '2021-01-01',
-    } as FamilieHendelse;
+    } as FamilieHendelseSamling;
 
     const wrapper = shallowWithIntl(<TilkjentYtelsePanel
       readOnly
@@ -119,7 +125,7 @@ describe('<TilkjentYtelsePanel>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
-      gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
+      familieHendelseSamling={familiehendelse}
       personoversikt={{} as Personoversikt}
       soknad={{} as Soknad}
       fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
@@ -133,13 +139,22 @@ describe('<TilkjentYtelsePanel>', () => {
   });
 
   it('skal bruke adopsjonsdato når det ikke finnes omsorgsovertakelsedato og søknadstype er adopsjon', () => {
-    const gjeldendeFamiliehendelse = {
-      soknadType: {
-        kode: soknadType.ADOPSJON,
-        kodeverk: '',
+    const familiehendelse = {
+      gjeldende: {
+        soknadType: {
+          kode: soknadType.ADOPSJON,
+          kodeverk: '',
+        },
+        adopsjonFodelsedatoer: { 0: '2021-01-01' } as Record<string, string>,
       },
-      adopsjonFodelsedatoer: { 0: '2021-01-01' } as Record<string, string>,
-    } as FamilieHendelse;
+      oppgitt: {
+        soknadType: {
+          kode: soknadType.ADOPSJON,
+          kodeverk: '',
+        },
+        adopsjonFodelsedatoer: { 0: '2021-02-01' } as Record<string, string>,
+      },
+    } as FamilieHendelseSamling;
 
     const wrapper = shallowWithIntl(<TilkjentYtelsePanel
       readOnly
@@ -149,7 +164,7 @@ describe('<TilkjentYtelsePanel>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
-      gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
+      familieHendelseSamling={familiehendelse}
       personoversikt={{} as Personoversikt}
       soknad={{} as Soknad}
       fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
@@ -163,13 +178,15 @@ describe('<TilkjentYtelsePanel>', () => {
   });
 
   it('Skal vise tilbaketrekkpanel når en har tilbaketrekkaksjonspunkt', () => {
-    const gjeldendeFamiliehendelse = {
-      soknadType: {
-        kode: soknadType.FODSEL,
-        kodeverk: '',
+    const familiehendelse = {
+      gjeldende: {
+        soknadType: {
+          kode: soknadType.FODSEL,
+          kodeverk: '',
+        },
+        termindato: '2021-01-01',
       },
-      termindato: '2021-01-01',
-    } as FamilieHendelse;
+    } as FamilieHendelseSamling;
 
     const wrapper = shallowWithIntl(<TilkjentYtelsePanel
       readOnly
@@ -179,7 +196,7 @@ describe('<TilkjentYtelsePanel>', () => {
       alleKodeverk={{}}
       behandlingId={1}
       behandlingVersjon={1}
-      gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
+      familieHendelseSamling={familiehendelse}
       personoversikt={{} as Personoversikt}
       soknad={{} as Soknad}
       fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
@@ -187,5 +204,37 @@ describe('<TilkjentYtelsePanel>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
     expect(wrapper.find(Tilbaketrekkpanel)).toHaveLength(1);
+  });
+
+  it('Skal bruke oppgitt data når det ikke finnes gjeldende', () => {
+    const familiehendelse = {
+      oppgitt: {
+        soknadType: {
+          kode: soknadType.ADOPSJON,
+          kodeverk: '',
+        },
+        adopsjonFodelsedatoer: { 0: '2021-02-01' } as Record<string, string>,
+      },
+    } as FamilieHendelseSamling;
+
+    const wrapper = shallowWithIntl(<TilkjentYtelsePanel
+      readOnly
+      beregningresultat={beregningsresultat}
+      submitCallback={sinon.spy()}
+      readOnlySubmitButton
+      alleKodeverk={{}}
+      behandlingId={1}
+      behandlingVersjon={1}
+      familieHendelseSamling={familiehendelse}
+      personoversikt={{} as Personoversikt}
+      soknad={{} as Soknad}
+      fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
+      aksjonspunkter={[]}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+    />, messages);
+
+    const ytelsePanel = wrapper.find(TilkjentYtelse);
+    expect(ytelsePanel).toHaveLength(1);
+    expect(moment(ytelsePanel.props().familiehendelseDate).format(DDMMYYYY_DATE_FORMAT)).toEqual('01.02.2021');
   });
 });
