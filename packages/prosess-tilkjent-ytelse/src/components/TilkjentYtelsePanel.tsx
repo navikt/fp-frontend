@@ -1,7 +1,5 @@
-import React, { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
+import React, { FunctionComponent, useMemo } from 'react';
 import moment from 'moment/moment';
-import { createSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 
@@ -14,12 +12,12 @@ import {
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatFp,
   BeregningsresultatPeriode,
-  FamilieHendelse,
   Feriepengegrunnlag,
   KodeverkMedNavn,
   Personoversikt,
   Soknad,
   Kjønnkode,
+  FamilieHendelseSamling,
 } from '@fpsak-frontend/types';
 
 import Tilbaketrekkpanel from './tilbaketrekk/Tilbaketrekkpanel';
@@ -35,11 +33,29 @@ const formatPerioder = (perioder: BeregningsresultatPeriode[]): PeriodeMedId[] =
 
 const groups = [{ id: 1, content: '' }, { id: 2, content: '' }];
 
+const parseDateString = (dateString: string): Date => moment(dateString, ISO_DATE_FORMAT).toDate();
+
+const getFamilieHendelseDato = (familieHendelseSamling: FamilieHendelseSamling): Date => {
+  const familieHendelse = familieHendelseSamling.gjeldende || familieHendelseSamling.oppgitt;
+  if (familieHendelse.soknadType.kode === soknadType.FODSEL) {
+    if (familieHendelse.avklartBarn && familieHendelse.avklartBarn.length > 0) {
+      return parseDateString(familieHendelse.avklartBarn[0].fodselsdato);
+    }
+    return parseDateString(familieHendelse.termindato);
+  }
+
+  return parseDateString(familieHendelse.omsorgsovertakelseDato || familieHendelse.adopsjonFodelsedatoer[0]);
+};
+
+const finnTilbaketrekkAksjonspunkt = (alleAksjonspunkter: Aksjonspunkt[]): Aksjonspunkt | undefined => (alleAksjonspunkter
+  ? alleAksjonspunkter.find((ap) => ap.definisjon?.kode === aksjonspunktCodes.VURDER_TILBAKETREKK)
+  : undefined);
+
 interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
   beregningresultat: BeregningsresultatFp;
-  gjeldendeFamiliehendelse: FamilieHendelse;
+  familieHendelseSamling: FamilieHendelseSamling;
   personoversikt: Personoversikt;
   soknad: Soknad;
   fagsakYtelseTypeKode: string;
@@ -52,120 +68,61 @@ interface PureOwnProps {
   feriepengegrunnlag?: Feriepengegrunnlag;
 }
 
-interface MappedOwnProps {
-  hovedsokerKjonn?: Kjønnkode;
-  soknadDato: string;
-  familiehendelseDato: Date;
-  vurderTilbaketrekkAP?: Aksjonspunkt;
-  isSoknadSvangerskapspenger: boolean;
-}
-
-export const TilkjentYtelsePanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps> = ({
+const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
   beregningresultat,
-  hovedsokerKjonn,
-  soknadDato,
-  familiehendelseDato,
-  vurderTilbaketrekkAP,
   readOnly,
   submitCallback,
   readOnlySubmitButton,
-  isSoknadSvangerskapspenger,
   alleKodeverk,
   behandlingId,
   behandlingVersjon,
   arbeidsgiverOpplysningerPerId,
   feriepengegrunnlag,
-}) => (
-  <>
-    <Undertittel>
-      <FormattedMessage id="TilkjentYtelse.Title" />
-    </Undertittel>
-    {beregningresultat
-      && (
-      <TilkjentYtelse
-        items={formatPerioder(beregningresultat.perioder)}
-        groups={groups}
-        soknadDate={soknadDato}
-        familiehendelseDate={familiehendelseDato}
-        hovedsokerKjonnKode={hovedsokerKjonn}
-        isSoknadSvangerskapspenger={isSoknadSvangerskapspenger}
-        alleKodeverk={alleKodeverk}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      />
+  familieHendelseSamling,
+  fagsakYtelseTypeKode,
+  personoversikt,
+  soknad,
+  aksjonspunkter,
+}) => {
+  const familiehendelseDato = useMemo(() => getFamilieHendelseDato(familieHendelseSamling), [familieHendelseSamling]);
+  const vurderTilbaketrekkAP = useMemo(() => finnTilbaketrekkAksjonspunkt(aksjonspunkter), [aksjonspunkter]);
+  return (
+    <>
+      <Undertittel>
+        <FormattedMessage id="TilkjentYtelse.Title" />
+      </Undertittel>
+      {beregningresultat && (
+        <TilkjentYtelse
+          items={formatPerioder(beregningresultat.perioder)}
+          groups={groups}
+          soknadDate={soknad.mottattDato}
+          familiehendelseDate={familiehendelseDato}
+          hovedsokerKjonnKode={personoversikt?.bruker ? personoversikt.bruker.kjønn.kode as Kjønnkode : undefined}
+          isSoknadSvangerskapspenger={fagsakYtelseTypeKode === fagsakYtelseType.SVANGERSKAPSPENGER}
+          alleKodeverk={alleKodeverk}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        />
       )}
-    { feriepengegrunnlag
-    && (
-      <FeriepengerIndex feriepengegrunnlag={feriepengegrunnlag} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} alleKodeverk={alleKodeverk} />
-    )}
-    { vurderTilbaketrekkAP
-    && (
-    <Tilbaketrekkpanel
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
-      readOnly={readOnly}
-      vurderTilbaketrekkAP={vurderTilbaketrekkAP}
-      submitCallback={submitCallback}
-      readOnlySubmitButton={readOnlySubmitButton}
-      beregningsresultat={beregningresultat}
-    />
-    )}
-  </>
-);
-
-const parseDateString = (dateString: string): Date => moment(dateString, ISO_DATE_FORMAT).toDate();
-
-const getFamiliehendelsedatoFraSoknad = (soknad: Soknad): string => {
-  if (soknad.fodselsdatoer && Object.keys(soknad.fodselsdatoer).length > 0) {
-    return Object.values(soknad.fodselsdatoer)[0];
-  }
-  if (soknad.termindato) {
-    return soknad.termindato;
-  }
-  if (soknad.adopsjonFodelsedatoer && Object.keys(soknad.adopsjonFodelsedatoer).length > 0) {
-    return Object.values(soknad.adopsjonFodelsedatoer)[0];
-  }
-  return undefined;
+      {feriepengegrunnlag && (
+        <FeriepengerIndex
+          feriepengegrunnlag={feriepengegrunnlag}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          alleKodeverk={alleKodeverk}
+        />
+      )}
+      {vurderTilbaketrekkAP && (
+        <Tilbaketrekkpanel
+          behandlingId={behandlingId}
+          behandlingVersjon={behandlingVersjon}
+          readOnly={readOnly}
+          vurderTilbaketrekkAP={vurderTilbaketrekkAP}
+          submitCallback={submitCallback}
+          readOnlySubmitButton={readOnlySubmitButton}
+          beregningsresultat={beregningresultat}
+        />
+      )}
+    </>
+  );
 };
 
-const getCurrentFamiliehendelseDato = (
-  soknadsType: string,
-  omsorgsOvertagelseDato: string,
-  familiehendelsedatoFraSoknad?: string,
-  endredFodselsDato?: string,
-  endredomsorgsOvertagelseDato?: string,
-): Date => {
-  if (soknadsType === soknadType.FODSEL) {
-    return endredFodselsDato ? parseDateString(endredFodselsDato) : parseDateString(familiehendelsedatoFraSoknad);
-  }
-  return endredomsorgsOvertagelseDato ? parseDateString(endredomsorgsOvertagelseDato) : parseDateString(omsorgsOvertagelseDato);
-};
-
-const finnTilbaketrekkAksjonspunkt = createSelector([
-  (_state, ownProps: PureOwnProps) => ownProps.aksjonspunkter], (alleAksjonspunkter): Aksjonspunkt | undefined => {
-  if (alleAksjonspunkter) {
-    return alleAksjonspunkter.find((ap) => ap.definisjon && ap.definisjon.kode === aksjonspunktCodes.VURDER_TILBAKETREKK);
-  }
-  return undefined;
-});
-
-const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
-  const person = ownProps.personoversikt;
-  const familiehendelse = ownProps.gjeldendeFamiliehendelse;
-  const { soknad } = ownProps;
-  const isSVP = ownProps.fagsakYtelseTypeKode === fagsakYtelseType.SVANGERSKAPSPENGER;
-  return {
-    hovedsokerKjonn: person?.bruker ? person.bruker.kjønn.kode as Kjønnkode : undefined, // nosonar
-    soknadDato: soknad.mottattDato,
-    isSoknadSvangerskapspenger: isSVP,
-    familiehendelseDato: getCurrentFamiliehendelseDato(
-      soknad.soknadType.kode,
-      soknad.omsorgsovertakelseDato,
-      getFamiliehendelsedatoFraSoknad(soknad),
-      familiehendelse.avklartBarn && familiehendelse.avklartBarn.length > 0 ? familiehendelse.avklartBarn[0].fodselsdato : undefined,
-      familiehendelse.omsorgsovertakelseDato,
-    ),
-    vurderTilbaketrekkAP: finnTilbaketrekkAksjonspunkt(state, ownProps),
-  };
-};
-
-export default connect(mapStateToProps)(TilkjentYtelsePanelImpl);
+export default TilkjentYtelsePanel;
