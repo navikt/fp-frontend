@@ -3,10 +3,10 @@ import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 
 import risikoIkon from '@fpsak-frontend/assets/images/avslaatt_hover.svg';
 import { Risikoklassifisering, Aksjonspunkt, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { VurderFaresignalerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import HoyRisikoPanel from './HoyRisikoPanel';
 import TittelMedDivider from './TittelMedDivider';
-import { VuderFaresignalerAp } from './AvklarFaresignalerForm';
 
 import styles from './hoyRisikoTittel.less';
 
@@ -14,7 +14,7 @@ interface OwnProps {
   risikoklassifisering?: Risikoklassifisering;
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
-  submitCallback: (verdier: VuderFaresignalerAp) => Promise<any>;
+  submitCallback: (data: VurderFaresignalerAp) => Promise<void>;
   isRiskPanelOpen: boolean;
   toggleRiskPanel: () => void;
   behandlingId: number;

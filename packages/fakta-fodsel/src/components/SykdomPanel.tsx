@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
+import { InjectedFormProps } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
@@ -12,7 +13,7 @@ import {
 } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
-import { InjectedFormProps } from 'redux-form';
+import { VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
@@ -22,16 +23,10 @@ type FormValues = {
   erMorForSykVedFodsel?: boolean;
 }
 
-export type TransformedValues = {
-  kode: string;
-  begrunnelse: string;
-  erMorForSykVedFodsel: boolean;
-}
-
 interface PureOwnProps {
   aksjonspunkt: Aksjonspunkt;
   morForSykVedFodsel: boolean;
-  submitHandler: (values: FormValues) => any;
+  submitHandler: (data: VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp) => Promise<void>;
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
 }
@@ -83,7 +78,7 @@ const buildInitialValues = (aksjonspunkt: Aksjonspunkt, morForSykVedFodsel: bool
   erMorForSykVedFodsel: morForSykVedFodsel,
 });
 
-const transformValues = (values: FormValues): TransformedValues => ({
+const transformValues = (values: FormValues): VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp => ({
   kode: aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
   begrunnelse: values.begrunnelseSykdom,
   erMorForSykVedFodsel: values.erMorForSykVedFodsel,

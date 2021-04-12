@@ -11,6 +11,7 @@ import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/for
 import {
   Aksjonspunkt, KodeverkMedNavn, Personoversikt, Soknad, Ytelsefordeling,
 } from '@fpsak-frontend/types';
+import { BekreftAleneomsorgVurderingAp, BekreftOmsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import OmsorgFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgFaktaForm';
 import BostedFaktaView from './BostedFaktaView';
@@ -30,6 +31,8 @@ const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   return helpTexts;
 };
 
+type AksjonspunktData = Array<BekreftAleneomsorgVurderingAp | BekreftOmsorgVurderingAp>;
+
 type FormValues = OmsorgFormValues & {
   begrunnelse?: string;
 }
@@ -46,7 +49,7 @@ interface PureOwnProps {
   personoversikt: Personoversikt;
   ytelsefordeling: Ytelsefordeling;
   soknad: Soknad;
-  submitCallback: (...args: any[]) => any;
+  submitCallback: (data: AksjonspunktData) => Promise<void>;
 }
 
 interface MappedOwnProps {
@@ -112,8 +115,11 @@ const buildInitialValues = createSelector([
   };
 });
 
-const transformValues = (values: FormValues, submitCallback: (...args: any[]) => any, aksjonspunkter: Aksjonspunkt[]): any => {
-  const aksjonspunkterArray = [];
+const transformValues = (
+  values: FormValues,
+  aksjonspunkter: Aksjonspunkt[],
+): AksjonspunktData => {
+  const aksjonspunkterArray = [] as AksjonspunktData;
   if (hasAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG, aksjonspunkter)) {
     aksjonspunkterArray.push(OmsorgFaktaForm.transformAleneomsorgValues(values));
   }
@@ -125,12 +131,12 @@ const transformValues = (values: FormValues, submitCallback: (...args: any[]) =>
     ...{ begrunnelse: values.begrunnelse },
   }));
 
-  return submitCallback(aksjonspunkterMedBegrunnelse);
+  return aksjonspunkterMedBegrunnelse;
 };
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(submitCallback, aksjonspunkter) => (values: FormValues) => transformValues(values, submitCallback, aksjonspunkter));
+(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback(transformValues(values, aksjonspunkter)));
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: buildInitialValues(ownProps),

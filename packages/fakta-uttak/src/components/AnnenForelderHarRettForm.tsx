@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { createSelector } from 'reselect';
 import { InjectedFormProps } from 'redux-form';
 
+import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
@@ -13,6 +14,7 @@ import {
 } from '@fpsak-frontend/form';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { Aksjonspunkt, Ytelsefordeling } from '@fpsak-frontend/types';
+import { AvklarAnnenforelderHarRettAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import styles from './annenForelderHarRettForm.less';
 
@@ -26,8 +28,8 @@ type FormValues = {
 
 interface PureOwnProps {
   ytelsefordeling: Ytelsefordeling;
-  aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (...args: any[]) => any;
+  aksjonspunkt: Aksjonspunkt;
+  submitCallback: (data: AvklarAnnenforelderHarRettAp) => Promise<any>;
   readOnly: boolean;
   hasOpenAksjonspunkter: boolean;
   hasOpenUttakAksjonspunkter: boolean;
@@ -43,7 +45,7 @@ interface MappedOwnProps {
 export const AnnenForelderHarRettForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   hasOpenAksjonspunkter,
   hasOpenUttakAksjonspunkter,
-  aksjonspunkter,
+  aksjonspunkt,
   behandlingId,
   behandlingVersjon,
   readOnly,
@@ -52,14 +54,12 @@ export const AnnenForelderHarRettForm: FunctionComponent<PureOwnProps & MappedOw
   <div className={hasOpenAksjonspunkter || !hasOpenUttakAksjonspunkter ? styles.solvedAksjonspunkt : styles.inactiveAksjonspunkt}>
     <form onSubmit={formProps.handleSubmit}>
       {!readOnly && (
-      <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
-        {aksjonspunkter.map((ap) => (
-          <FormattedMessage
-            key={`UttakInfoPanel.Aksjonspunkt.${ap.definisjon.kode}`}
-            id={`UttakInfoPanel.Aksjonspunkt.${ap.definisjon.kode}`}
-          />
-        ))}
-      </AksjonspunktHelpTextTemp>
+        <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
+          {[<FormattedMessage
+            key={`UttakInfoPanel.Aksjonspunkt.${aksjonspunkt.definisjon.kode}`}
+            id={`UttakInfoPanel.Aksjonspunkt.${aksjonspunkt.definisjon.kode}`}
+          />]}
+        </AksjonspunktHelpTextTemp>
       )}
       <VerticalSpacer twentyPx />
       <div className={styles.fauxColumn}>
@@ -97,11 +97,11 @@ export const AnnenForelderHarRettForm: FunctionComponent<PureOwnProps & MappedOw
   </div>
 );
 
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): any => aksjonspunkter.map((ap) => ({
-  kode: ap.definisjon.kode,
+const transformValues = (values: FormValues): AvklarAnnenforelderHarRettAp => ({
+  kode: aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT,
   begrunnelse: values.begrunnelse,
   annenforelderHarRett: values.annenForelderHarRett,
-}));
+});
 
 const buildInitialValues = createSelector([(props: PureOwnProps) => props.ytelsefordeling], (ytelseFordeling): FormValues => {
   const annenForelderHarRett = ytelseFordeling && ytelseFordeling.annenforelderHarRettDto;
@@ -115,9 +115,8 @@ const buildInitialValues = createSelector([(props: PureOwnProps) => props.ytelse
   return undefined;
 });
 
-const lagSubmitFn = createSelector([
-  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback(transformValues(values, aksjonspunkter)));
+const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
+  (submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const mapStateToProps = (_state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: buildInitialValues(ownProps),

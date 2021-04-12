@@ -70,6 +70,7 @@ describe('<AktivitetskravFaktaForm>', () => {
       submittable
       behandlingFormPrefix="test"
       formChange={() => undefined}
+      submitCallback={() => undefined}
     />, messages);
 
     const hjelpetekst = wrapper.find(AksjonspunktHelpTextHTML);
@@ -122,6 +123,7 @@ describe('<AktivitetskravFaktaForm>', () => {
       submittable
       behandlingFormPrefix="test"
       formChange={formChange}
+      submitCallback={() => undefined}
     />, messages);
 
     expect(wrapper.find(AktivitetskravFaktaDetailForm)).toHaveLength(0);

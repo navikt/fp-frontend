@@ -9,6 +9,7 @@ import { required, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { FamilieHendelse, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { BekreftMannAdoptererAksjonspunktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import styles from './mannAdoptererAleneFaktaForm.less';
 
@@ -24,14 +25,9 @@ export type FormValues = {
   mannAdoptererAlene?: boolean,
 }
 
-export type TransformedValues = {
-  kode: string,
-  mannAdoptererAlene: boolean,
-}
-
 interface StaticFunctions {
   buildInitialValues: (familiehendelse: FamilieHendelse) => FormValues;
-  transformValues: (mannAdoptererAlene: boolean) => TransformedValues;
+  transformValues: (mannAdoptererAlene: boolean) => BekreftMannAdoptererAksjonspunktAp;
 }
 
 /**
@@ -72,7 +68,7 @@ MannAdoptererAleneFaktaForm.buildInitialValues = (familiehendelse: FamilieHendel
   mannAdoptererAlene: familiehendelse ? familiehendelse.mannAdoptererAlene : undefined,
 });
 
-MannAdoptererAleneFaktaForm.transformValues = (mannAdoptererAlene: boolean): TransformedValues => ({
+MannAdoptererAleneFaktaForm.transformValues = (mannAdoptererAlene: boolean): BekreftMannAdoptererAksjonspunktAp => ({
   kode: aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
   mannAdoptererAlene,
 });

@@ -51,6 +51,8 @@ export {
   isEqual,
   isObject,
   omit,
+  omitOne,
+  omitMany,
 } from './src/objectUtils';
 export { default as getAddresses } from './src/getAddresses';
 export type { Adresser } from './src/getAddresses';

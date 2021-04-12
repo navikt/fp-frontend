@@ -5,6 +5,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import { VerticalSpacer, AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
+import { OverstyringUtenlandssakMarkeringAp, MerkOpptjeningUtlandAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import UtlandPanel from './utland/UtlandPanel';
 import InnhentDokOpptjeningUtlandPanel from './innhentDok/InnhentDokOpptjeningUtlandPanel';
@@ -15,7 +16,7 @@ interface OwnProps {
   aksjonspunkter: Aksjonspunkt[];
   dokStatus?: string;
   harApneAksjonspunkter: boolean;
-  submitCallback: (data: any) => void;
+  submitCallback: (data: OverstyringUtenlandssakMarkeringAp | MerkOpptjeningUtlandAp) => Promise<void>;
   readOnly: boolean;
   submittable: boolean;
 }

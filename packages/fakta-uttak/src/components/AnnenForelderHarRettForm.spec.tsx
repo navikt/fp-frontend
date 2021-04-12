@@ -7,7 +7,7 @@ import { Ytelsefordeling } from '@fpsak-frontend/types';
 
 import { AnnenForelderHarRettForm } from './AnnenForelderHarRettForm';
 
-const avklarAnnenforelderHarRettAp = [{
+const avklarAnnenforelderHarRettAp = {
   aksjonspunktType: {
     kode: 'MANU',
     kodeverk: 'AKSJONSPUNKT_TYPE',
@@ -31,7 +31,7 @@ const avklarAnnenforelderHarRettAp = [{
   toTrinnsBehandlingGodkjent: null,
   vilkarType: null,
   vurderPaNyttArsaker: null,
-}];
+};
 
 describe('<AnnenForelderHarRettForm>', () => {
   it('skal vise AnnenForelderHarRettForm', () => {
@@ -40,7 +40,7 @@ describe('<AnnenForelderHarRettForm>', () => {
       readOnly={false}
       hasOpenAksjonspunkter
       hasOpenUttakAksjonspunkter
-      aksjonspunkter={avklarAnnenforelderHarRettAp}
+      aksjonspunkt={avklarAnnenforelderHarRettAp}
       behandlingVersjon={1}
       behandlingId={1}
       ytelsefordeling={{} as Ytelsefordeling}

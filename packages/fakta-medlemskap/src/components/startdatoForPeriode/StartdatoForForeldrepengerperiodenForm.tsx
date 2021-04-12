@@ -18,6 +18,7 @@ import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse, Kodeverk, Soknad,
 } from '@fpsak-frontend/types';
+import { AvklarStartdatoForPeriodenAp, OverstyringAvklarStartdatoForPeriodenAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import ArbeidsgiverInfo from './ArbeidsgiverInfo';
 
@@ -33,20 +34,13 @@ type FormValues = {
   begrunnelse?: string;
 }
 
-type TransformedValues = {
-  kode: string;
-  opprinneligDato: string;
-  startdatoFraSoknad: string;
-  begrunnelse: string;
-}
-
 interface PureOwnProps {
   intl: IntlShape;
   aksjonspunkter: Aksjonspunkt[];
   aksjonspunkt: Aksjonspunkt;
   soknad: Soknad;
   inntektArbeidYtelse: InntektArbeidYtelse;
-  submitCallback: (values: TransformedValues[]) => any;
+  submitCallback: (data: AvklarStartdatoForPeriodenAp | OverstyringAvklarStartdatoForPeriodenAp) => Promise<void>;
   readOnlyForStartdatoForForeldrepenger: boolean;
   behandlingStatus: Kodeverk;
   hasOpenMedlemskapAksjonspunkter: boolean;
@@ -154,7 +148,7 @@ const buildInitialValues = createSelector(
   },
 );
 
-const transformValues = (values: FormValues, isOverstyring: boolean): TransformedValues => ({
+const transformValues = (values: FormValues, isOverstyring: boolean): AvklarStartdatoForPeriodenAp | OverstyringAvklarStartdatoForPeriodenAp => ({
   kode: isOverstyring ? aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO : aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN,
   opprinneligDato: values.opprinneligDato,
   startdatoFraSoknad: values.startdatoFraSoknad,
@@ -166,7 +160,7 @@ const lagSubmitFn = createSelector([
 (submitCallback, aksjonspunkt) => {
   const hasAksjonspunkt = aksjonspunkt !== undefined;
   const isOverstyring = !hasAksjonspunkt || aksjonspunkt.definisjon.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO;
-  return (values: FormValues) => submitCallback([transformValues(values, isOverstyring)]);
+  return (values: FormValues) => submitCallback(transformValues(values, isOverstyring));
 });
 
 const isBefore2019 = (startdato: string): boolean => moment(startdato).isBefore(moment('2019-01-01'));

@@ -38,9 +38,7 @@ import styles from './avregningPanel.less';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
-const simuleringAksjonspunkter = [
-  aksjonspunktCodes.VURDER_FEILUTBETALING,
-];
+const simuleringAksjonspunkt = aksjonspunktCodes.VURDER_FEILUTBETALING;
 const formName = 'AvregnigForm';
 const IKKE_SEND = 'IKKE_SEND';
 
@@ -339,7 +337,7 @@ const buildInitialValues = createSelector(
     (_state, ownProps: PureOwnProps) => ownProps.aksjonspunkter], (
     tilbakekrevingvalg, aksjonspunkter,
   ): FormValues => {
-    const aksjonspunkt = aksjonspunkter.find((ap) => simuleringAksjonspunkter.includes(ap.definisjon.kode));
+    const aksjonspunkt = aksjonspunkter.find((ap) => simuleringAksjonspunkt === ap.definisjon.kode);
     if (!aksjonspunkt || !tilbakekrevingvalg) {
       return undefined;
     }

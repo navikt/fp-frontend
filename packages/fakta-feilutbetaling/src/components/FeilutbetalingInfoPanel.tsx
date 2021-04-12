@@ -25,6 +25,7 @@ import {
 import {
   Aksjonspunkt, FeilutbetalingFakta, KodeverkMedNavn, FeilutbetalingAarsak,
 } from '@fpsak-frontend/types';
+import { AvklartFaktaFeilutbetalingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import FeilutbetalingPerioderTable from './FeilutbetalingPerioderTable';
 
@@ -33,9 +34,6 @@ import styles from './feilutbetalingInfoPanel.less';
 const formName = 'FaktaFeilutbetalingForm';
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
-const feilutbetalingAksjonspunkter = [
-  aksjonspunktCodesTilbakekreving.AVKLAR_FAKTA_FOR_FEILUTBETALING,
-];
 
 type FormValues = {
   begrunnelse?: string;
@@ -50,7 +48,7 @@ interface PureOwnProps {
   feilutbetalingFakta: FeilutbetalingFakta;
   feilutbetalingAarsak: FeilutbetalingAarsak;
   aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (aksjonspunktData: any) => Promise<any>;
+  submitCallback: (aksjonspunktData: AvklartFaktaFeilutbetalingAp) => Promise<void>;
   hasOpenAksjonspunkter: boolean;
   readOnly: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -379,13 +377,11 @@ const getSortedFeilutbetalingArsaker = createSelector([
   });
 });
 
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[], årsaker: FeilutbetalingAarsak['hendelseTyper']): any => {
-  const apCode = aksjonspunkter.find((ap) => ap.definisjon.kode === feilutbetalingAksjonspunkter[0]);
-
+const transformValues = (values: FormValues, årsaker: FeilutbetalingAarsak['hendelseTyper']): AvklartFaktaFeilutbetalingAp => {
   const feilutbetalingFakta = values.perioder.map((periode) => {
     const feilutbetalingÅrsak = årsaker.find((el) => el.hendelseType.kode === periode.årsak);
     const findUnderÅrsakObjekt = (underÅrsak) => feilutbetalingÅrsak.hendelseUndertyper.find((el) => el.kode === underÅrsak);
-    const feilutbetalingUnderÅrsak = periode[periode.årsak] ? findUnderÅrsakObjekt(periode[periode.årsak].underÅrsak) : false;
+    const feilutbetalingUnderÅrsak = findUnderÅrsakObjekt(periode[periode.årsak].underÅrsak);
 
     return {
       fom: periode.fom,
@@ -397,18 +393,17 @@ const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[], år
     };
   });
 
-  return [{
-    kode: apCode.definisjon.kode,
+  return {
+    kode: aksjonspunktCodesTilbakekreving.AVKLAR_FAKTA_FOR_FEILUTBETALING,
     begrunnelse: values.begrunnelse,
     feilutbetalingFakta,
-  }];
+  };
 };
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback,
-  getSortedFeilutbetalingArsaker,
-  (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(submitCallback, årsaker, aksjonspunkter) => (values: FormValues) => submitCallback(transformValues(values, aksjonspunkter, årsaker)));
+  getSortedFeilutbetalingArsaker],
+(submitCallback, årsaker) => (values: FormValues) => submitCallback(transformValues(values, årsaker)));
 
 const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   årsaker: getSortedFeilutbetalingArsaker(ownProps),

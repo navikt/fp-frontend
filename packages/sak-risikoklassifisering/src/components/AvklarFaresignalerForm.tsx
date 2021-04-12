@@ -21,6 +21,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   Risikoklassifisering, Aksjonspunkt, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
+import { VurderFaresignalerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import faresignalVurdering from '../kodeverk/faresignalVurdering';
 
@@ -34,12 +35,6 @@ export const begrunnelseFieldName = 'begrunnelse';
 export const vurderingerHovedkategori = 'vurderingerHovedkategori';
 export const ikkeReelleVurderingerUnderkategori = 'ikkeReelleVurderingerUnderkategori';
 
-export type VuderFaresignalerAp = {
-  kode: string;
-  faresignalVurdering: string;
-  begrunnelse: string;
-}
-
 type Values = {
   [begrunnelseFieldName]?: string;
   [vurderingerHovedkategori]?: string;
@@ -52,7 +47,7 @@ interface PureOwnProps {
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
   risikoklassifisering?: Risikoklassifisering;
-  submitCallback: (verdier: VuderFaresignalerAp) => Promise<any>;
+  submitCallback: (data: VurderFaresignalerAp) => Promise<void>;
   faresignalVurderinger: KodeverkMedNavn[];
 }
 
@@ -175,7 +170,7 @@ export const buildInitialValues = createSelector([
 const utledFaresignalVurderingVerdi = (vurderingHovedkategori: string, vurderingUnderkategori: string): string => (
   vurderingHovedkategori === faresignalVurdering.INGEN_INNVIRKNING ? faresignalVurdering.INGEN_INNVIRKNING : vurderingUnderkategori);
 
-const transformValues = (values: Values): VuderFaresignalerAp => ({
+const transformValues = (values: Values): VurderFaresignalerAp => ({
   kode: aksjonspunktCodes.VURDER_FARESIGNALER,
   faresignalVurdering: utledFaresignalVurderingVerdi(values[vurderingerHovedkategori], values[ikkeReelleVurderingerUnderkategori]),
   begrunnelse: values[begrunnelseFieldName],

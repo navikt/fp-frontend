@@ -24,7 +24,7 @@ type OwnProps = {
 };
 
 export type FormValues = {
-  [key: string]: string;
+  [key: string]: any;
 };
 
 type TransformedValues = {
@@ -84,7 +84,7 @@ FaktaBegrunnelseTextField.buildInitialValues = (aksjonspunkt: Aksjonspunkt[] | A
 });
 
 FaktaBegrunnelseTextField.transformValues = (values: FormValues, name = 'begrunnelse'): TransformedValues => ({
-  begrunnelse: values[name],
+  begrunnelse: values[name] as string,
 });
 
 export default FaktaBegrunnelseTextField;

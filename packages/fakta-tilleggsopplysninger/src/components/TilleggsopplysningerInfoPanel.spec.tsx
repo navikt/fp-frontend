@@ -14,6 +14,7 @@ describe('<TilleggsopplysningerInfoPanel>', () => {
       readOnly={false}
       behandlingId={1}
       behandlingVersjon={1}
+      submitCallback={() => undefined}
     />);
 
     const form = wrapper.find(TilleggsopplysningerFaktaForm);
@@ -29,6 +30,7 @@ describe('<TilleggsopplysningerInfoPanel>', () => {
       readOnly={false}
       behandlingId={1}
       behandlingVersjon={1}
+      submitCallback={() => undefined}
     />);
 
     const form = wrapper.find(TilleggsopplysningerFaktaForm);
@@ -42,6 +44,7 @@ describe('<TilleggsopplysningerInfoPanel>', () => {
       readOnly
       behandlingId={1}
       behandlingVersjon={1}
+      submitCallback={() => undefined}
     />);
 
     const form = wrapper.find(TilleggsopplysningerFaktaForm);

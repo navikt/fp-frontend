@@ -22,6 +22,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt, FamilieHendelse, Soknad,
 } from '@fpsak-frontend/types';
+import { BekreftTerminbekreftelseAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import styles from './termindatoFaktaForm.less';
 
@@ -35,21 +36,13 @@ type FormValues = {
   begrunnelse?: string;
 };
 
-export type TransformedValues = {
-  kode: string;
-  begrunnelse: string;
-  utstedtdato: string;
-  termindato: string;
-  antallBarn: number;
-}
-
 interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
   aksjonspunkt: Aksjonspunkt;
-  submitHandler: (values: FormValues) => any;
+  submitHandler: (data: BekreftTerminbekreftelseAp) => Promise<void>;
   readOnly: boolean;
   submittable: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
@@ -186,12 +179,11 @@ const erTerminbekreftelseUtstedtForTidlig = (utstedtdato?: string, termindato?: 
   && termindato !== undefined
   && !moment(utstedtdato).isAfter(moment(termindato).subtract(18, 'weeks').subtract(3, 'days'));
 
-const transformValues = (values: FormValues): TransformedValues => ({
+const transformValues = (values: FormValues): BekreftTerminbekreftelseAp => ({
   kode: aksjonspunktCodes.TERMINBEKREFTELSE,
   utstedtdato: values.utstedtdato,
   termindato: values.termindato,
   antallBarn: values.antallBarn,
-  // @ts-ignore Fiks
   ...FaktaBegrunnelseTextField.transformValues(values),
 });
 

@@ -6,10 +6,11 @@ import { createSelector } from 'reselect';
 import { behandlingForm } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
-import { omit } from '@fpsak-frontend/utils';
+import { omitMany } from '@fpsak-frontend/utils';
 import {
   Aksjonspunkt, Arbeidsforhold, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
+import { AvklarArbeidsforholdAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import { InjectedFormProps } from 'redux-form';
 import BekreftOgForsettKnapp from './BekreftOgForsettKnapp';
@@ -26,7 +27,7 @@ const formName = 'ArbeidsforholdInfoPanel';
 // METHODS
 // ----------------------------------------------------------------------------
 
-export const fjernIdFraArbeidsforholdLagtTilAvSaksbehandler = (arbeidsforhold: Arbeidsforhold[]): Arbeidsforhold[] => arbeidsforhold
+export const fjernIdFraArbeidsforholdLagtTilAvSaksbehandler = (arbeidsforhold: CustomArbeidsforhold[]): CustomArbeidsforhold[] => arbeidsforhold
   .map((a: Arbeidsforhold) => {
     if (a.lagtTilAvSaksbehandler === true) {
       return {
@@ -45,7 +46,7 @@ interface PureOwnProps {
   behandlingVersjon: number;
   aksjonspunkter: Aksjonspunkt[];
   arbeidsforhold: Arbeidsforhold[];
-  submitCallback: (...args: any[]) => any;
+  submitCallback: (data: AvklarArbeidsforholdAp) => Promise<void>;
   readOnly: boolean;
   hasOpenAksjonspunkter: boolean;
   skalKunneLeggeTilNyeArbeidsforhold: boolean;
@@ -118,22 +119,22 @@ const buildInitialValues = createSelector(
   }),
 );
 
-const transformValues = (values: FormValues): any => {
+const transformValues = (values: FormValues): AvklarArbeidsforholdAp => {
   const arbeidsforhold = fjernIdFraArbeidsforholdLagtTilAvSaksbehandler(values.arbeidsforhold);
   return {
-    arbeidsforhold: arbeidsforhold.map((a) => omit(a,
+    arbeidsforhold: arbeidsforhold.map((a) => omitMany(a, [
       'erEndret',
       'replaceOptions',
       'originalFomDato',
       'arbeidsforholdHandlingField',
-      'aktivtArbeidsforholdHandlingField')),
+      'aktivtArbeidsforholdHandlingField'])),
     kode: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
   };
 };
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback],
-(submitCallback) => (values: FormValues) => submitCallback([transformValues(values)]));
+(submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const mapStateToProps = (_state, ownProps: PureOwnProps) => ({
   initialValues: buildInitialValues(ownProps),
