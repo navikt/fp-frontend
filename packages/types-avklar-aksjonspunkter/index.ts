@@ -8,6 +8,15 @@ export { default as BekreftEktefelleAksjonspunktAp } from './src/fakta/BekreftEk
 export { default as BekreftDokumentertDatoAksjonspunktAp } from './src/fakta/BekreftDokumentertDatoAksjonspunktAp';
 export { default as BekreftSvangerskapspengerAp } from './src/fakta/BekreftSvangerskapspengerAp';
 export { default as BekreftMannAdoptererAksjonspunktAp } from './src/fakta/BekreftMannAdoptererAksjonspunktAp';
+export { default as BekreftAleneomsorgVurderingAp } from './src/fakta/BekreftAleneomsorgVurderingAp';
+export { default as BekreftOmsorgVurderingAp } from './src/fakta/BekreftOmsorgVurderingAp';
+export { default as AvklarStartdatoForPeriodenAp } from './src/fakta/AvklarStartdatoForPeriodenAp';
+export { default as BekreftBosattVurderingAp } from './src/fakta/BekreftBosattVurderingAp';
+export { default as BekreftErMedlemVurderingAp } from './src/fakta/BekreftErMedlemVurderingAp';
+export { default as BekreftOppholdsrettVurderingAp } from './src/fakta/BekreftOppholdsrettVurderingAp';
+export { default as BekreftLovligOppholdVurderingAp } from './src/fakta/BekreftLovligOppholdVurderingAp';
+export { default as AvklarFortsattMedlemskapAp } from './src/fakta/AvklarFortsattMedlemskapAp';
+export { default as OverstyringAvklarStartdatoForPeriodenAp } from './src/fakta/OverstyringAvklarStartdatoForPeriodenAp';
 export { default as AvklarFaktaForForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForForeldreansvarAksjonspunktAp';
 export { default as AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp';
 export { default as AvklarAktivitetsPerioderAp, OpptjeningAktivitetAp } from './src/fakta/AvklarAktivitetsPerioderAp';

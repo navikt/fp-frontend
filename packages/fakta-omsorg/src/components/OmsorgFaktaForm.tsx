@@ -18,6 +18,7 @@ import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktSta
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ArrowBox, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { Aksjonspunkt, Soknad, Ytelsefordeling } from '@fpsak-frontend/types';
+import { BekreftAleneomsorgVurderingAp, BekreftOmsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import IkkeOmsorgPeriodeField from './IkkeOmsorgPeriodeField';
 
@@ -53,15 +54,8 @@ interface MappedOwnProps {
 
 interface StaticFunctions {
   buildInitialValues?: (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]) => FormValues;
-  transformAleneomsorgValues?: (values: FormValues) => {
-    kode: string;
-    aleneomsorg: boolean;
-  };
-  transformOmsorgValues?: (values: FormValues) => {
-    kode: string;
-    omsorg: boolean;
-    ikkeOmsorgPerioder: Ytelsefordeling['ikkeOmsorgPerioder'];
-  };
+  transformAleneomsorgValues?: (values: FormValues) => BekreftAleneomsorgVurderingAp;
+  transformOmsorgValues?: (values: FormValues) => BekreftOmsorgVurderingAp;
   validate?: (values: FormValues) => any;
 }
 
@@ -198,12 +192,12 @@ OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonsp
   };
 };
 
-OmsorgFaktaForm.transformAleneomsorgValues = (values: FormValues): any => ({
+OmsorgFaktaForm.transformAleneomsorgValues = (values: FormValues): BekreftAleneomsorgVurderingAp => ({
   kode: MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
   aleneomsorg: values.aleneomsorg,
 });
 
-OmsorgFaktaForm.transformOmsorgValues = (values: FormValues): any => ({
+OmsorgFaktaForm.transformOmsorgValues = (values: FormValues): BekreftOmsorgVurderingAp => ({
   kode: MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
   omsorg: values.omsorg,
   ikkeOmsorgPerioder: values.ikkeOmsorgPerioder && values.ikkeOmsorgPerioder.length > 0 ? values.ikkeOmsorgPerioder : null,

@@ -7,6 +7,10 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse, Kodeverk, KodeverkMedNavn, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
+import {
+  AvklarFortsattMedlemskapAp, AvklarStartdatoForPeriodenAp, BekreftBosattVurderingAp, BekreftErMedlemVurderingAp, BekreftLovligOppholdVurderingAp,
+  BekreftOppholdsrettVurderingAp, OverstyringAvklarStartdatoForPeriodenAp,
+} from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import StartdatoForForeldrepengerperiodenForm from './startdatoForPeriode/StartdatoForForeldrepengerperiodenForm';
 import OppholdInntektOgPerioderForm from './oppholdInntektOgPerioder/OppholdInntektOgPerioderForm';
@@ -34,12 +38,20 @@ const skalViseAvklarStartdatoPanel = (
 ): boolean => (harAksjonspunkterForAvklarStartdato(aksjonspunkter)
   || skalKunneLoseUtenAksjonpunkter(aksjonspunkterMinusAvklarStartDato, hasOpenAksjonspunkter, isForeldrepenger));
 
+type AksjonspunktData = Array<BekreftBosattVurderingAp
+  | BekreftErMedlemVurderingAp
+  | BekreftOppholdsrettVurderingAp
+  | BekreftLovligOppholdVurderingAp
+  | AvklarFortsattMedlemskapAp>;
+
 interface OwnProps {
   hasOpenAksjonspunkter: boolean;
   submittable: boolean;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
-  submitCallback: (...args: any[]) => any;
+  submitCallback: (data: AvklarStartdatoForPeriodenAp
+    | OverstyringAvklarStartdatoForPeriodenAp
+    | AksjonspunktData) => Promise<void>;
   isForeldrepenger?: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   behandlingId: number;

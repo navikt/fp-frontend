@@ -2,7 +2,7 @@ import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
-export type BekreftMannAdoptererAksjonspunktAp = {
+type BekreftMannAdoptererAksjonspunktAp = {
   mannAdoptererAlene: boolean;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE>;
 

@@ -3,7 +3,7 @@ import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
-export type AvklarVergeAp = {
+type AvklarVergeAp = {
   navn: string;
   fnr: string;
   gyldigFom: string;

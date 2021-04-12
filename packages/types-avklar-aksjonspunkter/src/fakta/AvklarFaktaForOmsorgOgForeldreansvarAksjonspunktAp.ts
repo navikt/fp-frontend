@@ -3,7 +3,7 @@ import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
-export type AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp = {
+type AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp = {
   omsorgsovertakelseDato: string;
   vilkarType: Kodeverk | string;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.OMSORGSOVERTAKELSE>;
