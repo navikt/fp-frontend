@@ -11,6 +11,7 @@ import {
   Personoversikt,
   UttakKontrollerFaktaPerioder, Ytelsefordeling,
 } from '@fpsak-frontend/types';
+import { AvklarAnnenforelderHarRettAp, FaktaUttakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import AnnenForelderHarRettForm from './AnnenForelderHarRettForm';
 import UttakFaktaForm from './UttakFaktaForm';
@@ -33,7 +34,7 @@ const getErArsakTypeHendelseFodsel = (behandlingArsakTyper: Kodeverk[] = []): bo
 const sortUttaksperioder = (p1: UttakKontrollerFaktaPerioder, p2: UttakKontrollerFaktaPerioder): number => moment(p1.tom).diff(moment(p2.tom));
 
 interface OwnProps {
-  submitCallback: (...args: any[]) => any;
+  submitCallback: (data: AvklarAnnenforelderHarRettAp | FaktaUttakAp[]) => Promise<void>;
   readOnly: boolean;
   aksjonspunkter: Aksjonspunkt[];
   behandlingType: Kodeverk;
@@ -94,7 +95,7 @@ const UttakInfoPanel: FunctionComponent<OwnProps> = ({
             hasOpenAksjonspunkter={isAksjonspunktOpen(avklarAnnenForelderRettAp.status.kode)}
             hasOpenUttakAksjonspunkter={uttakApOpen}
             readOnly={readOnly}
-            aksjonspunkter={[avklarAnnenForelderRettAp]}
+            aksjonspunkt={avklarAnnenForelderRettAp}
             submitCallback={submitCallback}
             behandlingId={behandlingId}
             behandlingVersjon={behandlingVersjon}

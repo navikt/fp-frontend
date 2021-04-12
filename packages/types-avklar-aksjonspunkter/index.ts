@@ -16,7 +16,16 @@ export { default as BekreftErMedlemVurderingAp } from './src/fakta/BekreftErMedl
 export { default as BekreftOppholdsrettVurderingAp } from './src/fakta/BekreftOppholdsrettVurderingAp';
 export { default as BekreftLovligOppholdVurderingAp } from './src/fakta/BekreftLovligOppholdVurderingAp';
 export { default as AvklarFortsattMedlemskapAp } from './src/fakta/AvklarFortsattMedlemskapAp';
+export { default as BekreftTerminbekreftelseAp } from './src/fakta/BekreftTerminbekreftelseAp';
+export { default as SjekkManglendeFodselAp } from './src/fakta/SjekkManglendeFodselAp';
+export { default as AvklarArbeidsforholdAp } from './src/fakta/AvklarArbeidsforholdAp';
+export { default as AvklartFaktaFeilutbetalingAp } from './src/fakta/AvklartFaktaFeilutbetalingAp';
+export { default as AvklarAnnenforelderHarRettAp } from './src/fakta/AvklarAnnenforelderHarRettAp';
+export { default as FaktaUttakAp } from './src/fakta/FaktaUttakAp';
 export { default as OverstyringAvklarStartdatoForPeriodenAp } from './src/fakta/OverstyringAvklarStartdatoForPeriodenAp';
+export { default as VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp } from './src/fakta/VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp';
 export { default as AvklarFaktaForForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForForeldreansvarAksjonspunktAp';
 export { default as AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp';
 export { default as AvklarAktivitetsPerioderAp, OpptjeningAktivitetAp } from './src/fakta/AvklarAktivitetsPerioderAp';
+
+export { default as VurderFaresignalerAp } from './src/risiko/VurderFaresignalerAp';

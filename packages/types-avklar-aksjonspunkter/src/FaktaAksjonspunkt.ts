@@ -16,6 +16,13 @@ import BekreftBosattVurderingAp from './fakta/BekreftBosattVurderingAp';
 import BekreftErMedlemVurderingAp from './fakta/BekreftErMedlemVurderingAp';
 import BekreftLovligOppholdVurderingAp from './fakta/BekreftLovligOppholdVurderingAp';
 import AvklarFortsattMedlemskapAp from './fakta/AvklarFortsattMedlemskapAp';
+import BekreftTerminbekreftelseAp from './fakta/BekreftTerminbekreftelseAp';
+import SjekkManglendeFodselAp from './fakta/SjekkManglendeFodselAp';
+import AvklartFaktaFeilutbetalingAp from './fakta/AvklartFaktaFeilutbetalingAp';
+import AvklarArbeidsforholdAp from './fakta/AvklarArbeidsforholdAp';
+import FaktaUttakAp from './fakta/FaktaUttakAp';
+import AvklarAnnenforelderHarRettAp from './fakta/AvklarAnnenforelderHarRettAp';
+import VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp from './fakta/VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp';
 import BekreftOppholdsrettVurderingAp from './fakta/BekreftOppholdsrettVurderingAp';
 import AvklarStartdatoForPeriodenAp from './fakta/AvklarStartdatoForPeriodenAp';
 import OverstyringAvklarStartdatoForPeriodenAp from './fakta/OverstyringAvklarStartdatoForPeriodenAp';
@@ -38,6 +45,13 @@ export type FaktaAksjonspunkt = AvklarTilleggsopplysningerAp
   | BekreftOppholdsrettVurderingAp
   | BekreftLovligOppholdVurderingAp
   | AvklarFortsattMedlemskapAp
+  | BekreftTerminbekreftelseAp
+  | SjekkManglendeFodselAp
+  | AvklarArbeidsforholdAp
+  | AvklartFaktaFeilutbetalingAp
+  | AvklarAnnenforelderHarRettAp
+  | FaktaUttakAp
+  | VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp
   | OverstyringAvklarStartdatoForPeriodenAp
   | AvklarFaktaForForeldreansvarAksjonspunktAp
   | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp;

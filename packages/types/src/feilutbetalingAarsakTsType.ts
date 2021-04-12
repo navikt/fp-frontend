@@ -1,15 +1,10 @@
-import { Kodeverk } from '@fpsak-frontend/types';
+import KodeverkMedNavn from './kodeverkMedNavnTsType';
+import Kodeverk from './kodeverkTsType';
 
 type FeilutbetalingAarsak = {
   hendelseTyper: {
-    hendelseType?: {
-      kode: string;
-      navn: string;
-    };
-    hendelseUndertyper?: {
-      kode: string;
-      navn: string;
-    }[];
+    hendelseType?: KodeverkMedNavn;
+    hendelseUndertyper?: KodeverkMedNavn[];
   }[];
   ytelseType: Kodeverk;
 };

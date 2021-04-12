@@ -68,7 +68,7 @@ export const FpsakApiKeys = {
   HISTORY_FPSAK: new RestKey<Historikkinnslag[], { saksnummer: string }>('HISTORY_FPSAK'),
   HISTORY_FPTILBAKE: new RestKey<Historikkinnslag[], { saksnummer: string }>('HISTORY_FPTILBAKE'),
   KONTROLLRESULTAT: new RestKey<Risikoklassifisering, void>('KONTROLLRESULTAT'),
-  RISIKO_AKSJONSPUNKT: new RestKey<Aksjonspunkt, any>('RISIKO_AKSJONSPUNKT'),
+  RISIKO_AKSJONSPUNKT: new RestKey<Aksjonspunkt, void>('RISIKO_AKSJONSPUNKT'),
   TOTRINNS_KLAGE_VURDERING: new RestKey<KlageVurdering, void>('TOTRINNS_KLAGE_VURDERING'),
   TOTRINNSAKSJONSPUNKT_ARSAKER: new RestKey<TotrinnskontrollSkjermlenkeContext[], void>('TOTRINNSAKSJONSPUNKT_ARSAKER'),
   TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY: new RestKey<TotrinnskontrollSkjermlenkeContext[], void>('TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY'),

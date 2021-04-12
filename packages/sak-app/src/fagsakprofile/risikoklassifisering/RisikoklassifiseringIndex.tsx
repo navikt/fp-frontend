@@ -8,6 +8,7 @@ import {
 } from '@fpsak-frontend/types';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import RisikoklassifiseringSakIndex from '@fpsak-frontend/sak-risikoklassifisering';
+import { VurderFaresignalerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import useTrackRouteParam from '../../app/useTrackRouteParam';
@@ -82,7 +83,7 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
     }
   }, [harRisikoAksjonspunkt, behandlingId, behandlingVersjon]);
 
-  const submitAksjonspunkt = useCallback((aksjonspunkt) => {
+  const submitAksjonspunkt = useCallback((aksjonspunkt: VurderFaresignalerAp) => {
     const params = {
       behandlingId,
       saksnummer: fagsak.saksnummer,

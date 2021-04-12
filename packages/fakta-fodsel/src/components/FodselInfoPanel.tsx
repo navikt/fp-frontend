@@ -2,6 +2,7 @@ import React, { Component, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { submit as reduxSubmit } from 'redux-form';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
@@ -11,11 +12,13 @@ import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-samme
 import {
   Aksjonspunkt, FamilieHendelseSamling, FamilieHendelse, Kodeverk, Soknad,
 } from '@fpsak-frontend/types';
+import {
+  BekreftTerminbekreftelseAp, SjekkManglendeFodselAp, VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp,
+} from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
-import { Dispatch } from 'redux';
-import TermindatoFaktaForm, { termindatoFaktaFormName, TransformedValues as TermindatoTransformedValues } from './TermindatoFaktaForm';
+import TermindatoFaktaForm, { termindatoFaktaFormName } from './TermindatoFaktaForm';
 import SjekkFodselDokForm, { sjekkFodselDokForm } from './SjekkFodselDokForm';
-import SykdomPanel, { sykdomPanelName, TransformedValues as SykdomTransformedValues } from './SykdomPanel';
+import SykdomPanel, { sykdomPanelName } from './SykdomPanel';
 
 const {
   TERMINBEKREFTELSE, SJEKK_MANGLENDE_FODSEL, VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
@@ -37,6 +40,8 @@ const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
 
 const formNames = [sykdomPanelName, termindatoFaktaFormName, sjekkFodselDokForm];
 
+type AksjonspunktData = Array<BekreftTerminbekreftelseAp | VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp | SjekkManglendeFodselAp>;
+
 interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
@@ -45,7 +50,7 @@ interface PureOwnProps {
   hasOpenAksjonspunkter: boolean;
   submittable: boolean;
   readOnly: boolean;
-  submitCallback: (...args: any[]) => any;
+  submitCallback: (data: AksjonspunktData) => Promise<void>;
   soknad: Soknad;
   soknadOriginalBehandling?: Soknad;
   familiehendelseOriginalBehandling?: FamilieHendelse;
@@ -71,7 +76,7 @@ interface DispatchProps {
  * Presentasjonskomponent. Har ansvar for å sette opp Redux Formen for faktapenelet til Fødselsvilkåret.
  */
 export class FodselInfoPanelImpl extends Component<PureOwnProps & MappedOwnProps & DispatchProps> {
-  submittedAksjonspunkter?: Record<string, Partial<SykdomTransformedValues> | Partial<TermindatoTransformedValues>>;
+  submittedAksjonspunkter?: Record<string, BekreftTerminbekreftelseAp | VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp | SjekkManglendeFodselAp>;
 
   constructor(props: PureOwnProps & MappedOwnProps & DispatchProps) {
     super(props);
@@ -90,10 +95,10 @@ export class FodselInfoPanelImpl extends Component<PureOwnProps & MappedOwnProps
     };
   }
 
-  submitHandler(values: Partial<SykdomTransformedValues> | Partial<TermindatoTransformedValues>) {
+  submitHandler(data: BekreftTerminbekreftelseAp | VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp | SjekkManglendeFodselAp) {
     this.submittedAksjonspunkter = {
       ...this.submittedAksjonspunkter,
-      [values.kode]: values,
+      [data.kode]: data,
     };
     const { aksjonspunkter, submitCallback } = this.props;
 

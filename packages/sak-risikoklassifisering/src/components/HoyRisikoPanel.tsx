@@ -5,9 +5,10 @@ import Panel from 'nav-frontend-paneler';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { Risikoklassifisering, Aksjonspunkt, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { VurderFaresignalerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import Faresignaler from './Faresignaler';
-import AvklarFaresignalerForm, { VuderFaresignalerAp } from './AvklarFaresignalerForm';
+import AvklarFaresignalerForm from './AvklarFaresignalerForm';
 
 interface OwnProps {
   behandlingId: number;
@@ -15,7 +16,7 @@ interface OwnProps {
   risikoklassifisering?: Risikoklassifisering;
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
-  submitCallback: (verdier: VuderFaresignalerAp) => Promise<any>;
+  submitCallback: (data: VurderFaresignalerAp) => Promise<void>;
   faresignalVurderinger: KodeverkMedNavn[];
 }
 

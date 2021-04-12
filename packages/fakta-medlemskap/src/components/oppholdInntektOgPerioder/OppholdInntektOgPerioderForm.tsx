@@ -298,6 +298,7 @@ export const transformValues = (perioder: OppholdFormValues[], aksjonspunkter: A
     .filter((ap) => ap.erAktivt)
     .filter((ap) => ap.definisjon.kode !== aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN);
 
+  // @ts-ignore Fiks
   return aktiveMedlemAksjonspunkter.map((ap) => ({
     kode: ap.definisjon.kode,
     begrunnelse: '',
