@@ -62,7 +62,8 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
     ...standardPanelProps,
   };
 
-  const skalMarkeresSomAktiv = hentSkalMarkeresSomAktiv && hentSkalMarkeresSomAktiv(initData, standardPanelProps) ? true : undefined;
+  const skalMarkeresSomAktiv = hentSkalMarkeresSomAktiv && hentSkalMarkeresSomAktiv(initData, standardPanelProps);
+  const harApentAksjonspunkt = erOverstyrt || standardPanelProps.isAksjonspunktOpen;
 
   const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
@@ -71,9 +72,9 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
     prosessPanelMenyTekst,
     valgtProsessSteg,
     skalPanelVisesIMeny(data, initState),
-    erOverstyrt || standardPanelProps.isAksjonspunktOpen,
+    harApentAksjonspunkt,
     status,
-    skalMarkeresSomAktiv,
+    skalMarkeresSomAktiv || harApentAksjonspunkt,
   );
 
   const formatertePanelEndepunkter = panelEndepunkter.map((e) => (e instanceof RestKey ? ({ key: e }) : e));

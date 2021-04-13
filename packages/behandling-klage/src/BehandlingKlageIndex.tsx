@@ -48,8 +48,8 @@ const BehandlingKlageIndex: FunctionComponent<OwnProps & StandardBehandlingProps
     requestKlageApi, KlageBehandlingApiKeys.BEHANDLING_KLAGE, behandlingId,
   );
 
-  const { lagreAksjonspunkter } = useLagreAksjonspunkt(
-    requestKlageApi, setBehandling, KlageBehandlingApiKeys.SAVE_AKSJONSPUNKT,
+  const { lagreAksjonspunkter, toggleOppdateringAvFagsakOgBehandling } = useLagreAksjonspunkt(
+    requestKlageApi, setBehandling, KlageBehandlingApiKeys.SAVE_AKSJONSPUNKT, oppdaterBehandlingVersjon,
   );
 
   useInitBehandlingHandlinger(requestKlageApi, KlageBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);
@@ -86,15 +86,14 @@ const BehandlingKlageIndex: FunctionComponent<OwnProps & StandardBehandlingProps
           valgtProsessSteg={valgtProsessSteg}
           valgtFaktaSteg={valgtFaktaSteg}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-          oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
-          hentProsessPaneler={(props, ekstraProps) => (
+          hentProsessPaneler={(props) => (
             <>
               <FormKravFamOgPensjonProsessStegInitPanel {...props} alleBehandlinger={alleBehandlinger} />
               <VurderingFamOgPensjonProsessStegInitPanel
                 {...props}
                 fagsak={fagsak}
                 opneSokeside={opneSokeside}
-                toggleOppdatereFagsakContext={ekstraProps.toggleOppdatereFagsakContext}
+                toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
                 oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
               />
               <FormKravKlageInstansProsessStegInitPanel {...props} alleBehandlinger={alleBehandlinger} />
@@ -103,7 +102,7 @@ const BehandlingKlageIndex: FunctionComponent<OwnProps & StandardBehandlingProps
                 {...props}
                 fagsak={fagsak}
                 opneSokeside={opneSokeside}
-                toggleOppdatereFagsakContext={ekstraProps.toggleOppdatereFagsakContext}
+                toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
               />
             </>
           )}

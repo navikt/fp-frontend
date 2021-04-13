@@ -2,7 +2,6 @@ import React, {
   FunctionComponent, useCallback, useState,
 } from 'react';
 
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { isAvslag } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -193,7 +192,7 @@ const VedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
             behandlingsresultat={data.behandling.behandlingsresultat}
           />
           <FatterVedtakStatusModal
-            visModal={visFatterVedtakModal && data.behandling.status.kode === behandlingStatus.FATTER_VEDTAK}
+            visModal={visFatterVedtakModal}
             lukkModal={lukkFatterModal}
             tekst={intl.formatMessage({ id: 'FatterVedtakStatusModal.SendtBeslutter' })}
           />

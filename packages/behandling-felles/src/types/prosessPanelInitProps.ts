@@ -2,7 +2,6 @@ import ProsessPanelMenyData from './prosessPanelMenyData';
 
 export type ProsessPanelExtraInitProps = {
   apentFaktaPanelInfo?: {urlCode: string, text: string };
-  toggleOppdatereFagsakContext: (skalOppdatereFagsak: boolean) => void;
   allMenyData: ProsessPanelMenyData[];
 }
 

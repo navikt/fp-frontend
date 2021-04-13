@@ -35,6 +35,7 @@ describe('useProsessMenyRegistrerer', () => {
       true,
       true,
       vilkarUtfallType.IKKE_VURDERT,
+      true,
     )}
     />);
 
@@ -69,6 +70,7 @@ describe('useProsessMenyRegistrerer', () => {
       true,
       false,
       vilkarUtfallType.IKKE_VURDERT,
+      false,
     )}
     />);
 
@@ -113,6 +115,7 @@ describe('useProsessMenyRegistrerer', () => {
       true,
       true,
       vilkarUtfallType.IKKE_VURDERT,
+      true,
     )}
     />);
 

@@ -27,7 +27,6 @@ interface OwnProps {
   valgtProsessSteg?: string;
   valgtFaktaSteg?: string;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
-  oppdaterBehandlingVersjon: (versjon: number) => void;
 }
 
 const BehandlingContainer: FunctionComponent<OwnProps> = ({
@@ -37,7 +36,6 @@ const BehandlingContainer: FunctionComponent<OwnProps> = ({
   valgtProsessSteg,
   valgtFaktaSteg,
   oppdaterProsessStegOgFaktaPanelIUrl,
-  oppdaterBehandlingVersjon,
 }) => {
   const [apentFaktaPanelInfo, setApentFaktaPanel] = useState<FaktaPanelInfo>();
 
@@ -50,7 +48,6 @@ const BehandlingContainer: FunctionComponent<OwnProps> = ({
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         behandling={behandling}
         apentFaktaPanelInfo={apentFaktaPanelInfo}
-        oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
       />
       <FaktaContainer
         hentPaneler={hentFaktaPaneler}
