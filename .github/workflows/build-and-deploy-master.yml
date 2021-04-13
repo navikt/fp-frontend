@@ -9,10 +9,9 @@ on:
     branches:
       - master
 env:
-
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   GITHUB_USERNAME: x-access-token
-  IMAGE_BASE: docker.pkg.github.com/${{ github.repository }}/fp-frontend
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  IMAGE_BASE: ghcr.io/${{ github.repository }}
 
 jobs:
   build:
@@ -62,14 +61,13 @@ jobs:
           echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV
           yarn build
 
+      - name: Log into ghcr registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
       - name: Bygg, tag og push Docker image
         run: |
-          ## docker -v
-          ## docker pull nginx:1.17.8-alpine
-          docker build --pull --tag ${IMAGE} --tag ${IMAGE_BASE}:latest .
-          echo  ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_USERNAME} --password-stdin
-          docker push ${IMAGE}
-          docker push ${IMAGE_BASE}:latest
+          docker build --pull --tag ${IMAGE_BASE}:${TAG} --tag ${IMAGE_BASE}:latest .
+          docker push ${IMAGE_BASE} --all-tags
 
       - name: Lukk deployment-issues
         if: success()
@@ -112,21 +110,3 @@ jobs:
                             title: 'Deploy av ${{ env.TAG }}',
                             body: '/promote dev-fss'})
                });
-
-  sonarCloudTrigger:
-    needs: build
-    name: SonarCloud Trigger
-    runs-on: ubuntu-latest
-    steps:
-      - name: Clone Repository
-        uses: actions/checkout@v2
-      - name: Download code coverage results
-        uses: actions/download-artifact@v2.0.8
-        with:
-          name: code-coverage-report
-          path: coverage
-      - name: Analyze with SonarCloud
-        uses: SonarSource/sonarcloud-github-action@v1.5
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
