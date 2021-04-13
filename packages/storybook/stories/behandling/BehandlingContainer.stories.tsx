@@ -126,7 +126,6 @@ export const visKunFaktaPaneler = () => {
           <FaktaPanelTest2 {...props} />
         </>
       )}
-      oppdaterBehandlingVersjon={() => undefined}
     />
   );
 };
@@ -144,7 +143,6 @@ export const visKunProsessPaneler = () => {
           <ProsessPanelTest2 {...props} />
         </>
       )}
-      oppdaterBehandlingVersjon={() => undefined}
     />
   );
 };

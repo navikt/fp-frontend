@@ -31,9 +31,10 @@ export const useInitRequestApi = (
 const useSetBehandlingVedEndring = (
   behandling: Behandling,
   setBehandling: (behandling: Behandling) => void,
+  skalOppdatereBehandling = true,
 ): void => {
   useEffect(() => {
-    if (behandling) {
+    if (behandling && skalOppdatereBehandling) {
       setBehandling(behandling);
     }
   }, [behandling]);
@@ -76,23 +77,42 @@ export const useBehandling = (
   };
 };
 
+const useOppdaterFagsak = (
+  behandling: Behandling,
+  skalOppdatereFagsak: boolean,
+  oppdaterBehandlingVersjon?: (versjon: number) => void,
+) => {
+  useEffect(() => {
+    if (behandling && skalOppdatereFagsak && oppdaterBehandlingVersjon) {
+      oppdaterBehandlingVersjon(behandling.versjon);
+    }
+  }, [behandling?.versjon]);
+};
+
 export const useLagreAksjonspunkt = (
   requestApi: AbstractRequestApi,
   setBehandling: (behandling: Behandling) => void,
   lagreAksjonspunktKey: RestKey<Behandling, any>,
+  oppdaterBehandlingVersjon?: (versjon: number) => void,
   lagreOverstyrtyAksjonspunktKey?: RestKey<Behandling, any>,
 ) => {
   const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
 
+  const [skalOppdatereFagsakOgBehandling, toggleOppdateringAvFagsakOgBehandling] = useState(true);
+
   const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = useRestApiRunner(lagreAksjonspunktKey);
-  useSetBehandlingVedEndring(apBehandlingRes, setBehandling);
+  useSetBehandlingVedEndring(apBehandlingRes, setBehandling, skalOppdatereFagsakOgBehandling);
 
   const { startRequest: lagreOverstyrteAksjonspunkter, data: apOverstyrtBehandlingRes } = useRestApiRunner(lagreOverstyrtyAksjonspunktKey);
-  useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling);
+  useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling, skalOppdatereFagsakOgBehandling);
+
+  useOppdaterFagsak(apBehandlingRes, skalOppdatereFagsakOgBehandling, oppdaterBehandlingVersjon);
+  useOppdaterFagsak(apOverstyrtBehandlingRes, skalOppdatereFagsakOgBehandling, oppdaterBehandlingVersjon);
 
   return {
     lagreAksjonspunkter,
     lagreOverstyrteAksjonspunkter,
+    toggleOppdateringAvFagsakOgBehandling,
   };
 };
 

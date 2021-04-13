@@ -43,8 +43,8 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehand
     requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys.BEHANDLING_TILBAKE, behandlingId,
   );
 
-  const { lagreAksjonspunkter } = useLagreAksjonspunkt(
-    requestTilbakekrevingApi, setBehandling, TilbakekrevingBehandlingApiKeys.SAVE_AKSJONSPUNKT,
+  const { lagreAksjonspunkter, toggleOppdateringAvFagsakOgBehandling } = useLagreAksjonspunkt(
+    requestTilbakekrevingApi, setBehandling, TilbakekrevingBehandlingApiKeys.SAVE_AKSJONSPUNKT, oppdaterBehandlingVersjon,
   );
 
   useInitBehandlingHandlinger(requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);
@@ -83,14 +83,13 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehand
           valgtProsessSteg={valgtProsessSteg}
           valgtFaktaSteg={valgtFaktaSteg}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-          oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
           hentFaktaPaneler={(props) => (
             <>
               <FeilutbetalingFaktaInitPanel {...props} fpsakKodeverk={fpsakKodeverk} fagsak={fagsak} />
               <VergeFaktaInitPanel {...props} />
             </>
           )}
-          hentProsessPaneler={(props, ekstraProps) => (
+          hentProsessPaneler={(props) => (
             <>
               <ForeldelseProsessStegInitPanel {...props} fagsakKjønn={fagsakKjønn} />
               <TilbakekrevingProsessStegInitPanel {...props} fagsakKjønn={fagsakKjønn} />
@@ -98,7 +97,7 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehand
                 {...props}
                 harApenRevurdering={harApenRevurdering}
                 opneSokeside={opneSokeside}
-                toggleOppdatereFagsakContext={ekstraProps.toggleOppdatereFagsakContext}
+                toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
               />
             </>
           )}
