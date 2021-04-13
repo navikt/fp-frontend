@@ -112,6 +112,7 @@ export const TilbakekrevingVedtakFormImpl: FunctionComponent<PureOwnProps & Mapp
   <form onSubmit={formProps.handleSubmit}>
     <VerticalSpacer twentyPx />
     <TilbakekrevingEditerVedtaksbrevPanel
+      intl={intl}
       vedtaksbrevAvsnitt={vedtaksbrevAvsnitt}
       formName={formName}
       readOnly={readOnly}

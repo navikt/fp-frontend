@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, IntlShape } from 'react-intl';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 
@@ -15,6 +15,7 @@ import styles from './tilbakekrevingEditerVedtaksbrevPanel.less';
 export type FormValues = Record<string, Record<string, string> | string>
 
 interface OwnProps {
+  intl: IntlShape;
   vedtaksbrevAvsnitt: VedtaksbrevAvsnitt[];
   formName: string;
   readOnly: boolean;
@@ -29,7 +30,8 @@ interface StaticFunctions {
   buildInitialValues?: (vedtaksbrevAvsnitt: VedtaksbrevAvsnitt[]) => FormValues,
 }
 
-const TilbakekrevingEditerVedtaksbrevPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
+export const TilbakekrevingEditerVedtaksbrevPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
+  intl,
   vedtaksbrevAvsnitt,
   formName,
   readOnly,
@@ -54,7 +56,8 @@ const TilbakekrevingEditerVedtaksbrevPanel: FunctionComponent<OwnProps> & Static
         <React.Fragment key={avsnitt.avsnittstype + avsnitt.fom}>
           <Ekspanderbartpanel
             className={harPeriodeSomManglerObligatoriskVerdi || visApen ? styles.panelMedGulmarkering : styles.panel}
-            tittel={avsnitt.overskrift ? avsnitt.overskrift : ''}
+            tittel={avsnitt.overskrift
+              ? avsnitt.overskrift : intl.formatMessage({ id: 'TilbakekrevingEditerVedtaksbrevPanel.LovhjemlerOgKlagerettOverskrift' })}
             apen={harPeriodeSomManglerObligatoriskVerdi || visApen}
           >
             {underavsnitter.map((underavsnitt) => (
