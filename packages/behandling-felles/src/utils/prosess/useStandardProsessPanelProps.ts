@@ -7,6 +7,7 @@ import {
 import aksjonspunktStatus, { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktType from '@fpsak-frontend/kodeverk/src/aksjonspunktType';
+import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import { erReadOnly } from '../readOnlyPanelUtils';
 import getAlleMerknaderFraBeslutter from '../getAlleMerknaderFraBeslutter';
@@ -22,8 +23,9 @@ const getBekreftAksjonspunktProsessCallback = (
   aksjonspunkter: Aksjonspunkt[],
   lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<any>,
   lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<any>,
-) => (aksjonspunktModels:{ kode: string }[]) => {
-  const models = aksjonspunktModels.map((ap) => ({
+) => (aksjonspunkterSomSkalLagres: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => {
+  const apListe = Array.isArray(aksjonspunkterSomSkalLagres) ? aksjonspunkterSomSkalLagres : [aksjonspunkterSomSkalLagres];
+  const models = apListe.map((ap) => ({
     '@type': ap.kode,
     ...ap,
   }));
@@ -34,10 +36,10 @@ const getBekreftAksjonspunktProsessCallback = (
     behandlingVersjon: behandling.versjon,
   };
 
-  const etterLagringCallback = lagringSideEffectsCallback(aksjonspunktModels);
+  const etterLagringCallback = lagringSideEffectsCallback(apListe);
 
   if (lagreOverstyrteAksjonspunkter) {
-    const aksjonspunkterTilLagring = aksjonspunkter.filter((ap) => aksjonspunktModels.some((apModel) => apModel.kode === ap.definisjon.kode));
+    const aksjonspunkterTilLagring = aksjonspunkter.filter((ap) => apListe.some((apModel) => apModel.kode === ap.definisjon.kode));
     const erOverstyringsaksjonspunkter = aksjonspunkterTilLagring
       .some((ap) => ap.aksjonspunktType.kode === aksjonspunktType.OVERSTYRING || ap.aksjonspunktType.kode === aksjonspunktType.SAKSBEHANDLEROVERSTYRING);
 

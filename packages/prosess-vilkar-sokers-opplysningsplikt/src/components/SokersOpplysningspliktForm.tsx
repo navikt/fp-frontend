@@ -30,6 +30,7 @@ import { InjectedFormProps } from 'redux-form';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, Kodeverk, KodeverkMedNavn, ManglendeVedleggSoknad, Soknad, ArbeidsgiverOpplysninger,
 } from '@fpsak-frontend/types';
+import { BekreftSokersOpplysningspliktManuAp, OverstyringSokersOpplysingspliktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 const formName = 'SokersOpplysningspliktForm';
 
@@ -81,7 +82,6 @@ const formatArbeidsgiver = (arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysnin
 type FormValues = {
   erVilkarOk?: boolean;
   begrunnelse?: string;
-  aksjonspunktKode?: string;
   inntektsmeldingerSomIkkeKommer?: { [key: string]: boolean };
   hasAksjonspunkt?: boolean;
 }
@@ -93,7 +93,7 @@ interface PureOwnProps {
   soknad: Soknad;
   aksjonspunkter: Aksjonspunkt[];
   status: string;
-  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+  submitCallback: (aksjonspunktData: BekreftSokersOpplysningspliktManuAp | OverstyringSokersOpplysingspliktAp) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -246,7 +246,6 @@ export const buildInitialValues = createSelector(
     return {
       inntektsmeldingerSomIkkeKommer,
       erVilkarOk: isOpenAksjonspunkt && soknadExists ? undefined : isVilkarGodkjent,
-      aksjonspunktKode: aksjonspunkt ? aksjonspunkt.definisjon.kode : aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_OVST,
       hasAksjonspunkt: aksjonspunkt !== undefined,
       ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
     };
@@ -257,13 +256,19 @@ const transformValues = (
   values: FormValues,
   manglendeVedlegg: ManglendeVedleggSoknad[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-): any => {
+  aksjonspunkter: Aksjonspunkt[],
+): BekreftSokersOpplysningspliktManuAp | OverstyringSokersOpplysingspliktAp => {
   const arbeidsgiverReferanser = manglendeVedlegg
     .filter((mv) => mv.dokumentType.kode === dokumentTypeId.INNTEKTSMELDING)
     .map((mv) => mv.arbeidsgiverReferanse);
 
+  const aksjonspunkt = aksjonspunkter.length > 0 ? aksjonspunkter[0] : undefined;
+  const kode = aksjonspunkt && aksjonspunkt.definisjon.kode === aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU
+    ? aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU
+    : aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_OVST;
+
   return {
-    kode: values.aksjonspunktKode,
+    kode,
     erVilkarOk: values.erVilkarOk,
     inntektsmeldingerSomIkkeKommer: arbeidsgiverReferanser.map((agRef) => {
       const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[agRef];
@@ -281,10 +286,11 @@ const transformValues = (
 const submitSelector = createSelector(
   [getSortedManglendeVedlegg,
     (props: PureOwnProps) => props.submitCallback,
+    (ownProps: PureOwnProps) => ownProps.aksjonspunkter,
     (props: PureOwnProps) => props.arbeidsgiverOpplysningerPerId],
-  (manglendeVedlegg, submitCallback, arbeidsgiverOpplysningerPerId) => (
+  (manglendeVedlegg, submitCallback, aksjonspunkter, arbeidsgiverOpplysningerPerId) => (
     values: FormValues,
-  ) => submitCallback([transformValues(values, manglendeVedlegg, arbeidsgiverOpplysningerPerId)]),
+  ) => submitCallback(transformValues(values, manglendeVedlegg, arbeidsgiverOpplysningerPerId, aksjonspunkter)),
 );
 
 const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
