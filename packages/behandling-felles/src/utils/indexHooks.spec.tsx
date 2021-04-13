@@ -64,9 +64,13 @@ describe('indexHooks', () => {
     requestMock.mock(LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY.name);
 
     const setBehandling = sinon.spy();
+    const oppdaterBehandlingVersjon = sinon.spy();
 
     const wrapper = shallow(
-      <HookWrapper hook={() => useLagreAksjonspunkt(requestMock, setBehandling, LAGRE_AKSJONSPUNKT_KEY, LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY)} />,
+      <HookWrapper hook={() => useLagreAksjonspunkt(
+        requestMock, setBehandling, LAGRE_AKSJONSPUNKT_KEY, oppdaterBehandlingVersjon, LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY,
+      )}
+      />,
     );
 
     // @ts-ignore
@@ -95,9 +99,13 @@ describe('indexHooks', () => {
     requestMock.mock(LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY.name, behandlingSomHentes);
 
     const setBehandling = sinon.spy();
+    const oppdaterBehandlingVersjon = sinon.spy();
 
     const wrapper = shallow(
-      <HookWrapper hook={() => useLagreAksjonspunkt(requestMock, setBehandling, LAGRE_AKSJONSPUNKT_KEY, LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY)} />,
+      <HookWrapper hook={() => useLagreAksjonspunkt(
+        requestMock, setBehandling, LAGRE_AKSJONSPUNKT_KEY, oppdaterBehandlingVersjon, LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY,
+      )}
+      />,
     );
 
     // @ts-ignore

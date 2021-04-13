@@ -54,8 +54,8 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<StandardBehandlingPro
     requestSvpApi, SvpBehandlingApiKeys.BEHANDLING_SVP, behandlingId,
   );
 
-  const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter } = useLagreAksjonspunkt(
-    requestSvpApi, setBehandling, SvpBehandlingApiKeys.SAVE_AKSJONSPUNKT, SvpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT,
+  const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter, toggleOppdateringAvFagsakOgBehandling } = useLagreAksjonspunkt(
+    requestSvpApi, setBehandling, SvpBehandlingApiKeys.SAVE_AKSJONSPUNKT, oppdaterBehandlingVersjon, SvpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT,
   );
 
   useInitBehandlingHandlinger(requestSvpApi, SvpBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);
@@ -105,7 +105,6 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<StandardBehandlingPro
           valgtProsessSteg={valgtProsessSteg}
           valgtFaktaSteg={valgtFaktaSteg}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-          oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
           hentFaktaPaneler={(props) => (
             <>
               <SakenFaktaInitPanel {...props} />
@@ -147,7 +146,7 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<StandardBehandlingPro
                 {...props}
                 fagsak={fagsak}
                 opneSokeside={opneSokeside}
-                toggleOppdatereFagsakContext={ekstraProps.toggleOppdatereFagsakContext}
+                toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
               />
             </>
           )}

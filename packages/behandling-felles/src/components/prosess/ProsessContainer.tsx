@@ -19,7 +19,6 @@ interface OwnProps {
   valgtFaktaSteg?: string;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   apentFaktaPanelInfo?: {urlCode: string, text: string };
-  oppdaterBehandlingVersjon: (versjon: number) => void;
 }
 
 const ProsessContainer: FunctionComponent<OwnProps> = ({
@@ -29,7 +28,6 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
   valgtFaktaSteg,
   oppdaterProsessStegOgFaktaPanelIUrl,
   apentFaktaPanelInfo,
-  oppdaterBehandlingVersjon,
 }) => {
   const [menyData, setMenyData] = useState<ProsessPanelMenyData[]>([]);
 
@@ -65,13 +63,6 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
     oppdaterProsessStegOgFaktaPanelIUrl(nyvalgtProsessSteg, valgtFaktaSteg);
   }, [currentData, valgtFaktaSteg]);
 
-  const [skalOppdatereFagsakKontekst, toggleOppdatereFagsakContext] = useState(true);
-  useEffect(() => {
-    if (skalOppdatereFagsakKontekst) {
-      oppdaterBehandlingVersjon(behandling.versjon);
-    }
-  }, [behandling.versjon]);
-
   if (!hentPaneler) {
     return null;
   }
@@ -92,7 +83,6 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
         registrerProsessPanel,
       }, {
         apentFaktaPanelInfo,
-        toggleOppdatereFagsakContext,
         allMenyData: currentData,
       })}
       {behandling.behandlingHenlagt && (

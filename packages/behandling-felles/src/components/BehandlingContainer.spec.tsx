@@ -16,7 +16,6 @@ describe('<BehandlingContainer>', () => {
     const wrapper = shallow(<BehandlingContainer
       behandling={behandling}
       oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
-      oppdaterBehandlingVersjon={() => {}}
     />);
 
     expect(wrapper.find(FaktaContainer)).toHaveLength(1);

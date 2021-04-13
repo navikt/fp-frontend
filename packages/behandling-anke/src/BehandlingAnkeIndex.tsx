@@ -43,8 +43,8 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & StandardBehandlingProps>
     requestAnkeApi, AnkeBehandlingApiKeys.BEHANDLING_ANKE, behandlingId,
   );
 
-  const { lagreAksjonspunkter } = useLagreAksjonspunkt(
-    requestAnkeApi, setBehandling, AnkeBehandlingApiKeys.SAVE_AKSJONSPUNKT,
+  const { lagreAksjonspunkter, toggleOppdateringAvFagsakOgBehandling } = useLagreAksjonspunkt(
+    requestAnkeApi, setBehandling, AnkeBehandlingApiKeys.SAVE_AKSJONSPUNKT, oppdaterBehandlingVersjon,
   );
 
   useInitBehandlingHandlinger(requestAnkeApi, AnkeBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);
@@ -81,21 +81,20 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & StandardBehandlingProps>
           valgtProsessSteg={valgtProsessSteg}
           valgtFaktaSteg={valgtFaktaSteg}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-          oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
-          hentProsessPaneler={(props, ekstraProps) => (
+          hentProsessPaneler={(props) => (
             <>
               <AnkeBehandlingProsessStegInitPanel {...props} fagsak={fagsak} alleBehandlinger={alleBehandlinger} />
               <AnkeResultatProsessStegInitPanel
                 {...props}
                 fagsak={fagsak}
                 opneSokeside={opneSokeside}
-                toggleSkalOppdatereFagsakContext={ekstraProps.toggleOppdatereFagsakContext}
+                toggleSkalOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
               />
               <AnkeTrygderettsbehandlingProsessStegInitPanel
                 {...props}
                 fagsak={fagsak}
                 opneSokeside={opneSokeside}
-                toggleSkalOppdatereFagsakContext={ekstraProps.toggleOppdatereFagsakContext}
+                toggleSkalOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
                 oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
               />
             </>

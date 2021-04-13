@@ -32,8 +32,8 @@ const BehandlingInnsynIndex: FunctionComponent<StandardBehandlingProps> = ({
     requestInnsynApi, InnsynBehandlingApiKeys.BEHANDLING_INNSYN, behandlingId,
   );
 
-  const { lagreAksjonspunkter } = useLagreAksjonspunkt(
-    requestInnsynApi, setBehandling, InnsynBehandlingApiKeys.SAVE_AKSJONSPUNKT,
+  const { lagreAksjonspunkter, toggleOppdateringAvFagsakOgBehandling } = useLagreAksjonspunkt(
+    requestInnsynApi, setBehandling, InnsynBehandlingApiKeys.SAVE_AKSJONSPUNKT, oppdaterBehandlingVersjon,
   );
 
   useInitBehandlingHandlinger(requestInnsynApi, InnsynBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);
@@ -70,15 +70,14 @@ const BehandlingInnsynIndex: FunctionComponent<StandardBehandlingProps> = ({
           valgtProsessSteg={valgtProsessSteg}
           valgtFaktaSteg={valgtFaktaSteg}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-          oppdaterBehandlingVersjon={oppdaterBehandlingVersjon}
-          hentProsessPaneler={(props, ekstraProps) => (
+          hentProsessPaneler={(props) => (
             <>
               <BehandleInnsynProsessStegInitPanel {...props} fagsak={fagsak} />
               <InnsynVedtakProsessStegInitPanel
                 {...props}
                 fagsak={fagsak}
                 opneSokeside={opneSokeside}
-                toggleOppdatereFagsakContext={ekstraProps.toggleOppdatereFagsakContext}
+                toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
               />
             </>
           )}
