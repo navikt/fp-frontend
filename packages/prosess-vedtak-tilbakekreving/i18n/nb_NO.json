@@ -14,6 +14,8 @@
   "TilbakekrevingVedtakPeriodeTabell.ForSkatt": "Beløp før skatt",
   "TilbakekrevingVedtakPeriodeTabell.BelopSomTilbakekreves": "Beløp etter skatt",
   "TilbakekrevingVedtakPeriodeTabell.Sum": "Sum",
+  
+  "TilbakekrevingEditerVedtaksbrevPanel.LovhjemlerOgKlagerettOverskrift": "Lovhjemler og klagerett",
 
   "TilbakekrevingVedtakForm.TilGodkjenning": "Til godkjenning",
   "TilbakekrevingVedtakForm.ForhandvisBrev": "Forhåndsvis brev",

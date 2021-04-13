@@ -2,7 +2,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+
 import TilbakekrevingEditerVedtaksbrevPanel from './TilbakekrevingEditerVedtaksbrevPanel';
+
+import messages from '../../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<TilbakekrevingEditerVedtaksbrevPanel>', () => {
   const vedtaksbrevAvsnitt = [{
@@ -57,6 +63,7 @@ describe('<TilbakekrevingEditerVedtaksbrevPanel>', () => {
 
   it('skal vise tekstfelt for begrunnelse og godkjenningsknapp', () => {
     const wrapper = shallow(<TilbakekrevingEditerVedtaksbrevPanel
+      intl={intlMock}
       vedtaksbrevAvsnitt={vedtaksbrevAvsnitt}
       formName="testForm"
       readOnly={false}
@@ -78,6 +85,7 @@ describe('<TilbakekrevingEditerVedtaksbrevPanel>', () => {
 
   it('skal automatisk åpne panel som ikke har obligatorisk verdi utfylt', () => {
     const wrapper = shallow(<TilbakekrevingEditerVedtaksbrevPanel
+      intl={intlMock}
       vedtaksbrevAvsnitt={vedtaksbrevAvsnitt}
       formName="testForm"
       readOnly={false}
