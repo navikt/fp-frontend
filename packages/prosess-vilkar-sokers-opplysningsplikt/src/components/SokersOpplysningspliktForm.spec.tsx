@@ -4,7 +4,6 @@ import sinon from 'sinon';
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import dokumentTypeId from '@fpsak-frontend/kodeverk/src/dokumentTypeId';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { Table, TableRow } from '@fpsak-frontend/shared-components';
 import {
@@ -166,7 +165,6 @@ describe('<SokersOpplysningspliktForm>', () => {
       const intitialValues = buildInitialValues.resultFunc(manglendeVedlegg, true, vilkarUtfallType.OPPFYLT, aksjonspunkter, arbeidsgiverOpplysningerPerId);
 
       expect(intitialValues).toEqual({
-        aksjonspunktKode: aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_OVST,
         begrunnelse: '',
         erVilkarOk: true,
         hasAksjonspunkt: false,

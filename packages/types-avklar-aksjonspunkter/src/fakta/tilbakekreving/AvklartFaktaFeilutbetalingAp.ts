@@ -1,7 +1,7 @@
 import { Kodeverk } from '@fpsak-frontend/types';
 import AksjonspunktKodeTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 
-import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
+import AksjonspunktTilBekreftelse from '../../AksjonspunktTilBekreftelse';
 
 type AvklartFaktaFeilutbetalingAp = {
   feilutbetalingFakta: {

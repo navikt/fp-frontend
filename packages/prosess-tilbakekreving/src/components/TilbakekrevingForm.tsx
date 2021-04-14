@@ -22,6 +22,7 @@ import {
   FeilutbetalingPerioderWrapper, KodeverkMedNavn, VilkarsVurdertePerioderWrapper, VilkarsVurdertPeriode,
   DetaljerteFeilutbetalingsperioder, DetaljertFeilutbetalingPeriode,
 } from '@fpsak-frontend/types';
+import { VilkarsVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import TilbakekrevingTimelinePanel from './timeline/TilbakekrevingTimelinePanel';
 import TilbakekrevingPeriodeForm, {
@@ -303,12 +304,15 @@ export class TilbakekrevingFormImpl extends Component<OwnProps & DispatchProps &
   }
 }
 
-export const transformValues = (values: { vilkarsVurdertePerioder: CustomVilkarsVurdertePeriode[] }, sarligGrunnTyper: KodeverkMedNavn[]) => [{
+export const transformValues = (
+  values: { vilkarsVurdertePerioder: CustomVilkarsVurdertePeriode[] },
+  sarligGrunnTyper: KodeverkMedNavn[],
+): VilkarsVurderingAp => ({
   kode: aksjonspunktCodesTilbakekreving.VURDER_TILBAKEKREVING,
   vilkarsVurdertePerioder: values.vilkarsVurdertePerioder
     .filter((p: CustomVilkarsVurdertePeriode) => !p.erForeldet)
     .map((p: CustomVilkarsVurdertePeriode) => periodeFormTransformValues(p, sarligGrunnTyper)),
-}];
+});
 
 const finnOriginalPeriode = (lagretPeriode: CustomVilkarsVurdertePeriode | VilkarsVurdertPeriode,
   perioder: DetaljertFeilutbetalingPeriode[] | CustomPeriode[]) => perioder
@@ -326,7 +330,7 @@ interface PureOwnProps {
   behandlingVersjon: number;
   perioderForeldelse: FeilutbetalingPerioderWrapper;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+  submitCallback: (aksjonspunktData: VilkarsVurderingAp) => Promise<void>;
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   perioder: DetaljertFeilutbetalingPeriode[];

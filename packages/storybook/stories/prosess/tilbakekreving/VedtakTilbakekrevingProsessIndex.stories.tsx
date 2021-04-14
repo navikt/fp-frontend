@@ -4,7 +4,6 @@ import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vedtakResultatType from '@fpsak-frontend/kodeverk/src/vedtakResultatType';
-import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import VedtakTilbakekrevingProsessIndex from '@fpsak-frontend/prosess-vedtak-tilbakekreving';
 import aktsomhet from '@fpsak-frontend/prosess-tilbakekreving/src/kodeverk/aktsomhet';
 import { Behandling, BeregningsresultatTilbakekreving } from '@fpsak-frontend/types';
@@ -192,7 +191,6 @@ export const visVedtakspanel = () => (
     beregningsresultat={beregningsresultat}
     vedtaksbrev={vedtaksbrev}
     fetchPreviewVedtaksbrev={action('button-click') as () => Promise<any>}
-    aksjonspunktKodeForeslaVedtak={aksjonspunktCodesTilbakekreving.FORESLA_VEDTAK}
     {...standardProsessProps}
   />
 );

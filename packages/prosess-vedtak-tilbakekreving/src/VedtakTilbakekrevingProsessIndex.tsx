@@ -24,7 +24,6 @@ interface OwnProps {
   beregningsresultat: BeregningsresultatTilbakekreving;
   vedtaksbrev: Vedtaksbrev ;
   fetchPreviewVedtaksbrev: (data: ForhandsvisData) => Promise<any>;
-  aksjonspunktKodeForeslaVedtak: string;
 }
 
 const VedtakTilbakekrevingProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
@@ -35,7 +34,6 @@ const VedtakTilbakekrevingProsessIndex: FunctionComponent<OwnProps & StandardPro
   isReadOnly,
   alleKodeverk,
   fetchPreviewVedtaksbrev,
-  aksjonspunktKodeForeslaVedtak,
 }) => {
   const erRevurderingTilbakekrevingKlage = behandling.førsteÅrsak && erTilbakekrevingÅrsakKlage(behandling.førsteÅrsak.behandlingArsakType);
   const erRevurderingTilbakekrevingFeilBeløpBortfalt = behandling.førsteÅrsak
@@ -53,7 +51,6 @@ const VedtakTilbakekrevingProsessIndex: FunctionComponent<OwnProps & StandardPro
         readOnly={isReadOnly}
         alleKodeverk={alleKodeverk}
         fetchPreviewVedtaksbrev={fetchPreviewVedtaksbrev}
-        aksjonspunktKodeForeslaVedtak={aksjonspunktKodeForeslaVedtak}
         erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage}
         erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt}
       />

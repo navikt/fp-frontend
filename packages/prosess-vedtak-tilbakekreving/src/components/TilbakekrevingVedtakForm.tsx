@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { createSelector } from 'reselect';
 import { InjectedFormProps } from 'redux-form';
 
+import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import { omit } from '@fpsak-frontend/utils';
 import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
@@ -19,6 +20,7 @@ import {
 } from '@fpsak-frontend/form';
 import advarselIcon from '@fpsak-frontend/assets/images/advarsel_ny.svg';
 import { VedtaksbrevAvsnitt } from '@fpsak-frontend/types';
+import { ForeslaVedtakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import underavsnittType from '../kodeverk/avsnittType';
 import TilbakekrevingEditerVedtaksbrevPanel, { FormValues } from './brev/TilbakekrevingEditerVedtaksbrevPanel';
@@ -28,7 +30,7 @@ import styles from './tilbakekrevingVedtakForm.less';
 const formName = 'TilbakekrevingVedtakForm';
 
 type VedtakData = {
-  oppsummeringstekst: Record<string, string> | string;
+  oppsummeringstekst: string;
   perioderMedTekst: {
     fom: string;
     tom: string;
@@ -43,7 +45,7 @@ type VedtakData = {
 const formatVedtakData = (values: FormValues): VedtakData => {
   const perioder = omit(values, underavsnittType.OPPSUMMERING);
   return {
-    oppsummeringstekst: values[underavsnittType.OPPSUMMERING],
+    oppsummeringstekst: values[underavsnittType.OPPSUMMERING] as string,
     perioderMedTekst: Object.keys(perioder).map((key) => ({
       fom: key.split('_')[0],
       tom: key.split('_')[1],
@@ -75,8 +77,7 @@ const fetchPreview = (
 interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
-  aksjonspunktKodeForeslaVedtak: string;
-  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+  submitCallback: (aksjonspunktData: ForeslaVedtakAp) => Promise<void>;
   avsnittsliste: VedtaksbrevAvsnitt[];
   readOnly: boolean;
   fetchPreviewVedtaksbrev: (data: ForhandsvisData) => Promise<any>;
@@ -169,10 +170,10 @@ export const TilbakekrevingVedtakFormImpl: FunctionComponent<PureOwnProps & Mapp
   </form>
 );
 
-const transformValues = (values: FormValues, apKode: string): any => [{
-  kode: apKode,
+const transformValues = (values: FormValues): ForeslaVedtakAp => ({
+  kode: aksjonspunktCodesTilbakekreving.FORESLA_VEDTAK,
   ...formatVedtakData(values),
-}];
+});
 
 const finnPerioderSomIkkeHarVerdiForObligatoriskFelt = createSelector([
   (ownProps: { vedtaksbrevAvsnitt: VedtaksbrevAvsnitt[] }) => ownProps.vedtaksbrevAvsnitt,
@@ -199,8 +200,8 @@ const harFritekstOppsummeringPakrevdMenIkkeUtfylt = (vedtaksbrevAvsnitt: Vedtaks
   .some((avsnitt) => avsnitt.underavsnittsliste.some((underAvsnitt) => underAvsnitt.fritekstPåkrevet && !underAvsnitt.fritekst));
 
 const lagSubmitFn = createSelector([
-  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunktKodeForeslaVedtak],
-(submitCallback, aksjonspunktKodeForeslaVedtak) => (values: FormValues) => submitCallback(transformValues(values, aksjonspunktKodeForeslaVedtak)));
+  (ownProps: PureOwnProps) => ownProps.submitCallback],
+(submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
   const vedtaksbrevAvsnitt = ownProps.avsnittsliste;

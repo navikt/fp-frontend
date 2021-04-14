@@ -112,7 +112,6 @@ const VedtakTilbakekrevingProsessStegInitPanel: FunctionComponent<OwnProps & Pro
             tekst={intl.formatMessage({ id: 'FatterTilbakekrevingVedtakStatusModal.Sendt' })}
           />
           <VedtakTilbakekrevingProsessIndex
-            aksjonspunktKodeForeslaVedtak={aksjonspunktCodesTilbakekreving.FORESLA_VEDTAK}
             fetchPreviewVedtaksbrev={fetchPreviewVedtaksbrev}
             {...data}
           />

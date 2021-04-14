@@ -19,7 +19,7 @@ export { default as AvklarFortsattMedlemskapAp } from './src/fakta/AvklarFortsat
 export { default as BekreftTerminbekreftelseAp } from './src/fakta/BekreftTerminbekreftelseAp';
 export { default as SjekkManglendeFodselAp } from './src/fakta/SjekkManglendeFodselAp';
 export { default as AvklarArbeidsforholdAp } from './src/fakta/AvklarArbeidsforholdAp';
-export { default as AvklartFaktaFeilutbetalingAp } from './src/fakta/AvklartFaktaFeilutbetalingAp';
+export { default as AvklartFaktaFeilutbetalingAp } from './src/fakta/tilbakekreving/AvklartFaktaFeilutbetalingAp';
 export { default as AvklarAnnenforelderHarRettAp } from './src/fakta/AvklarAnnenforelderHarRettAp';
 export { default as FaktaUttakAp } from './src/fakta/FaktaUttakAp';
 export { default as OverstyringAvklarStartdatoForPeriodenAp } from './src/fakta/OverstyringAvklarStartdatoForPeriodenAp';
@@ -39,5 +39,8 @@ export { default as VurdereYtelseSammeBarnSokerAp } from './src/prosess/VurdereY
 export { default as VurdereYtelseSammeBarnAnnenForelderAp } from './src/prosess/VurdereYtelseSammeBarnAnnenForelderAp';
 export { default as Foreldreansvarsvilkar1Ap } from './src/prosess/Foreldreansvarsvilkar1Ap';
 export { default as Foreldreansvarsvilkar2Ap } from './src/prosess/Foreldreansvarsvilkar2Ap';
+export { default as ForeslaVedtakAp } from './src/prosess/tilbakekreving/ForeslaVedtakAp';
+export { default as VilkarsVurderingAp } from './src/prosess/tilbakekreving/VilkarsVurderingAp';
+export { default as VurderForeldelseAp } from './src/prosess/tilbakekreving/VurderForeldelseAp';
 
 export { default as VurderFaresignalerAp } from './src/risiko/VurderFaresignalerAp';

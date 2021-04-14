@@ -9,6 +9,9 @@ import VurdereYtelseSammeBarnSokerAp from './prosess/VurdereYtelseSammeBarnSoker
 import VurdereYtelseSammeBarnAnnenForelderAp from './prosess/VurdereYtelseSammeBarnAnnenForelderAp';
 import Foreldreansvarsvilkar1Ap from './prosess/Foreldreansvarsvilkar1Ap';
 import Foreldreansvarsvilkar2Ap from './prosess/Foreldreansvarsvilkar2Ap';
+import ForeslaVedtakAp from './prosess/tilbakekreving/ForeslaVedtakAp';
+import VilkarsVurderingAp from './prosess/tilbakekreving/VilkarsVurderingAp';
+import VurderForeldelseAp from './prosess/tilbakekreving/VurderForeldelseAp';
 
 export type ProsessAksjonspunkt = AnkeVurderingResultatAp
   | BekreftSvangerskapspengervilkarAp
@@ -20,6 +23,9 @@ export type ProsessAksjonspunkt = AnkeVurderingResultatAp
   | VurdereYtelseSammeBarnSokerAp
   | VurdereYtelseSammeBarnAnnenForelderAp
   | Foreldreansvarsvilkar1Ap
-  | Foreldreansvarsvilkar2Ap;
+  | Foreldreansvarsvilkar2Ap
+  | ForeslaVedtakAp
+  | VilkarsVurderingAp
+  | VurderForeldelseAp;
 
 export default ProsessAksjonspunkt;

@@ -8,15 +8,17 @@ import { Element } from 'nav-frontend-typografi';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
-  ProsessStegBegrunnelseTextField, VilkarResultPicker, ProsessPanelTemplate,
+  ProsessStegBegrunnelseTextField, VilkarResultPicker, ProsessPanelTemplate, validerApKodeOgHentApEnum,
 } from '@fpsak-frontend/prosess-felles';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
+import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt, Behandling, KodeverkMedNavn, Vilkar,
 } from '@fpsak-frontend/types';
+import { VurdereYtelseSammeBarnAnnenForelderAp, VurdereYtelseSammeBarnSokerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 const avslagsarsakerES = ['1002', '1003', '1032'];
 
@@ -35,7 +37,7 @@ interface PureOwnProps {
   status: string;
   vilkar: Vilkar[];
   ytelseTypeKode: string
-  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+  submitCallback: (aksjonspunktData: VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
   isApOpen: boolean;
@@ -109,10 +111,12 @@ export const buildInitialValues = createSelector(
   }),
 );
 
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): any => ({
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextField.transformValues(values),
-  ...{ kode: aksjonspunkter[0].definisjon.kode },
+  kode: validerApKodeOgHentApEnum(aksjonspunkter[0].definisjon.kode,
+    AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+    AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN),
 });
 
 const formName = 'FodselVilkarForm';
@@ -123,7 +127,7 @@ export const getFodselVilkarAvslagsarsaker = (isFpFagsak: boolean, fodselsvilkar
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunkter)]));
+(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback(transformValues(values, aksjonspunkter)));
 
 const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const {
