@@ -38,13 +38,13 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehand
   useInitRequestApi(requestTilbakekrevingApi, setRequestPendingMessage);
 
   const {
-    behandling, behandlingState, hentBehandling, setBehandling,
+    behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
   } = useBehandling(
-    requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys.BEHANDLING_TILBAKE, behandlingId,
+    requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys.BEHANDLING_TILBAKE, behandlingId, oppdaterBehandlingVersjon,
   );
 
-  const { lagreAksjonspunkter, toggleOppdateringAvFagsakOgBehandling } = useLagreAksjonspunkt(
-    requestTilbakekrevingApi, setBehandling, TilbakekrevingBehandlingApiKeys.SAVE_AKSJONSPUNKT, oppdaterBehandlingVersjon,
+  const { lagreAksjonspunkter } = useLagreAksjonspunkt(
+    requestTilbakekrevingApi, setBehandling, TilbakekrevingBehandlingApiKeys.SAVE_AKSJONSPUNKT,
   );
 
   useInitBehandlingHandlinger(requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);

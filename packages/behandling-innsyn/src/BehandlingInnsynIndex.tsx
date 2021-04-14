@@ -27,13 +27,13 @@ const BehandlingInnsynIndex: FunctionComponent<StandardBehandlingProps> = ({
   useInitRequestApi(requestInnsynApi, setRequestPendingMessage);
 
   const {
-    behandling, behandlingState, hentBehandling, setBehandling,
+    behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
   } = useBehandling(
-    requestInnsynApi, InnsynBehandlingApiKeys.BEHANDLING_INNSYN, behandlingId,
+    requestInnsynApi, InnsynBehandlingApiKeys.BEHANDLING_INNSYN, behandlingId, oppdaterBehandlingVersjon,
   );
 
-  const { lagreAksjonspunkter, toggleOppdateringAvFagsakOgBehandling } = useLagreAksjonspunkt(
-    requestInnsynApi, setBehandling, InnsynBehandlingApiKeys.SAVE_AKSJONSPUNKT, oppdaterBehandlingVersjon,
+  const { lagreAksjonspunkter } = useLagreAksjonspunkt(
+    requestInnsynApi, setBehandling, InnsynBehandlingApiKeys.SAVE_AKSJONSPUNKT,
   );
 
   useInitBehandlingHandlinger(requestInnsynApi, InnsynBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);
