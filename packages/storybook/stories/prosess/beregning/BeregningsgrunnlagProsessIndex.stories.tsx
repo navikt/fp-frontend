@@ -7,7 +7,6 @@ import BeregningsgrunnlagProsessIndex from '@fpsak-frontend/prosess-beregningsgr
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
-import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import sammenligningType from '@fpsak-frontend/kodeverk/src/sammenligningType';
 
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
@@ -26,7 +25,6 @@ const standardTom = undefined;
 const behandling = {
   id: 1,
   versjon: 1,
-  venteArsakKode: venteArsakType.VENT_GRADERING_UTEN_BEREGNINGSGRUNNLAG,
 } as Behandling;
 const lagPGIVerdier = () => ([
   {

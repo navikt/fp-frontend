@@ -1,7 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
 
-import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
@@ -11,7 +10,6 @@ import messages from '../i18n/nb_NO.json';
 const behandling = {
   id: 1,
   versjon: 1,
-  venteArsakKode: venteArsakType.VENT_GRADERING_UTEN_BEREGNINGSGRUNNLAG,
   sprakkode: {
     kode: '-',
     kodeverk: 'SPRAAK_KODE',
