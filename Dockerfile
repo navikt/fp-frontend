@@ -8,6 +8,6 @@ ENV APP_DIR="/app" \
 	APP_URL_FPSAK="http://fpsak"
 #FPSAK spesifkk
 COPY dist /app/fpsak/
-COPY nais/proxy.nginx /nginx/proxy.nginx
+COPY .deploy/proxy.nginx /nginx/proxy.nginx
 
 EXPOSE 9000 443
