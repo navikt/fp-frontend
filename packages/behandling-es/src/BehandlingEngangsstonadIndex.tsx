@@ -47,13 +47,13 @@ const BehandlingEngangsstonadIndex: FunctionComponent<StandardBehandlingProps> =
   useInitRequestApi(requestEsApi, setRequestPendingMessage);
 
   const {
-    behandling, behandlingState, hentBehandling, setBehandling,
+    behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
   } = useBehandling(
-    requestEsApi, EsBehandlingApiKeys.BEHANDLING_ES, behandlingId,
+    requestEsApi, EsBehandlingApiKeys.BEHANDLING_ES, behandlingId, oppdaterBehandlingVersjon,
   );
 
-  const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter, toggleOppdateringAvFagsakOgBehandling } = useLagreAksjonspunkt(
-    requestEsApi, setBehandling, EsBehandlingApiKeys.SAVE_AKSJONSPUNKT, oppdaterBehandlingVersjon, EsBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT,
+  const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter } = useLagreAksjonspunkt(
+    requestEsApi, setBehandling, EsBehandlingApiKeys.SAVE_AKSJONSPUNKT, EsBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT,
   );
 
   useInitBehandlingHandlinger(requestEsApi, EsBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);

@@ -49,13 +49,13 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<StandardBehandlingPro
   useInitRequestApi(requestSvpApi, setRequestPendingMessage);
 
   const {
-    behandling, behandlingState, hentBehandling, setBehandling,
+    behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
   } = useBehandling(
-    requestSvpApi, SvpBehandlingApiKeys.BEHANDLING_SVP, behandlingId,
+    requestSvpApi, SvpBehandlingApiKeys.BEHANDLING_SVP, behandlingId, oppdaterBehandlingVersjon,
   );
 
-  const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter, toggleOppdateringAvFagsakOgBehandling } = useLagreAksjonspunkt(
-    requestSvpApi, setBehandling, SvpBehandlingApiKeys.SAVE_AKSJONSPUNKT, oppdaterBehandlingVersjon, SvpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT,
+  const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter } = useLagreAksjonspunkt(
+    requestSvpApi, setBehandling, SvpBehandlingApiKeys.SAVE_AKSJONSPUNKT, SvpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT,
   );
 
   useInitBehandlingHandlinger(requestSvpApi, SvpBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);

@@ -43,13 +43,13 @@ const BehandlingKlageIndex: FunctionComponent<OwnProps & StandardBehandlingProps
   useInitRequestApi(requestKlageApi, setRequestPendingMessage);
 
   const {
-    behandling, behandlingState, hentBehandling, setBehandling,
+    behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
   } = useBehandling(
-    requestKlageApi, KlageBehandlingApiKeys.BEHANDLING_KLAGE, behandlingId,
+    requestKlageApi, KlageBehandlingApiKeys.BEHANDLING_KLAGE, behandlingId, oppdaterBehandlingVersjon,
   );
 
-  const { lagreAksjonspunkter, toggleOppdateringAvFagsakOgBehandling } = useLagreAksjonspunkt(
-    requestKlageApi, setBehandling, KlageBehandlingApiKeys.SAVE_AKSJONSPUNKT, oppdaterBehandlingVersjon,
+  const { lagreAksjonspunkter } = useLagreAksjonspunkt(
+    requestKlageApi, setBehandling, KlageBehandlingApiKeys.SAVE_AKSJONSPUNKT,
   );
 
   useInitBehandlingHandlinger(requestKlageApi, KlageBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);
