@@ -3,8 +3,9 @@ import {
 } from 'react';
 
 import { Behandling, Kodeverk } from '@fpsak-frontend/types';
-import { RestApiHooks, useRestApiErrorDispatcher, RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiHooks, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import { AbstractRequestApi, RestKey } from '@fpsak-frontend/rest-api';
+import { usePrevious } from '@fpsak-frontend/shared-components';
 
 import { BehandlingEventHandler } from '../types/standardBehandlingProps';
 
@@ -31,33 +32,43 @@ export const useInitRequestApi = (
 const useSetBehandlingVedEndring = (
   behandling: Behandling,
   setBehandling: (behandling: Behandling) => void,
-  skalOppdatereBehandling = true,
 ): void => {
   useEffect(() => {
-    if (behandling && skalOppdatereBehandling) {
+    if (behandling) {
       setBehandling(behandling);
     }
   }, [behandling]);
+};
+
+const useOppdaterFagsak = (
+  behandling: Behandling,
+  oppdaterBehandlingVersjon?: (versjon: number) => void,
+): void => {
+  const previousBehandling = usePrevious(behandling);
+  useEffect(() => {
+    if (oppdaterBehandlingVersjon
+        && behandling && previousBehandling && behandling.versjon !== previousBehandling?.versjon) {
+      oppdaterBehandlingVersjon(behandling.versjon);
+    }
+  }, [behandling?.versjon]);
 };
 
 export const useBehandling = (
   requestApi: AbstractRequestApi,
   behandlingKey: RestKey<Behandling, { behandlingId: number }>,
   behandlingId: number,
-): {
-  behandling: Behandling;
-  behandlingState: RestApiState;
-  setBehandling: (behandling: Behandling) => void;
-  hentBehandling: (keepData: boolean
-) => Promise<Behandling>;
-} => {
+  oppdaterBehandlingVersjon?: (versjon: number) => void,
+) => {
   const [behandling, setNyBehandling] = useState<Behandling>();
+  const [skalOppdatereFagsakOgBehandling, toggleOppdateringAvFagsakOgBehandling] = useState(true);
 
   const setBehandling = useCallback((nyBehandling) => {
-    requestApi.resetCache();
-    requestApi.setLinks(nyBehandling.links);
-    setNyBehandling(nyBehandling);
-  }, []);
+    if (skalOppdatereFagsakOgBehandling) {
+      requestApi.resetCache();
+      requestApi.setLinks(nyBehandling.links);
+      setNyBehandling(nyBehandling);
+    }
+  }, [skalOppdatereFagsakOgBehandling]);
 
   const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
   const { startRequest: hentBehandling, data: behandlingRes, state: behandlingState } = useRestApiRunner(behandlingKey);
@@ -69,50 +80,34 @@ export const useBehandling = (
     hentBehandlingInklId(false);
   }, []);
 
+  useOppdaterFagsak(behandling, oppdaterBehandlingVersjon);
+
   return {
     behandling,
     behandlingState,
     setBehandling,
     hentBehandling: hentBehandlingInklId,
+    toggleOppdateringAvFagsakOgBehandling,
   };
-};
-
-const useOppdaterFagsak = (
-  behandling: Behandling,
-  skalOppdatereFagsak: boolean,
-  oppdaterBehandlingVersjon?: (versjon: number) => void,
-) => {
-  useEffect(() => {
-    if (behandling && skalOppdatereFagsak && oppdaterBehandlingVersjon) {
-      oppdaterBehandlingVersjon(behandling.versjon);
-    }
-  }, [behandling?.versjon]);
 };
 
 export const useLagreAksjonspunkt = (
   requestApi: AbstractRequestApi,
   setBehandling: (behandling: Behandling) => void,
   lagreAksjonspunktKey: RestKey<Behandling, any>,
-  oppdaterBehandlingVersjon?: (versjon: number) => void,
   lagreOverstyrtyAksjonspunktKey?: RestKey<Behandling, any>,
 ) => {
   const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
 
-  const [skalOppdatereFagsakOgBehandling, toggleOppdateringAvFagsakOgBehandling] = useState(true);
-
   const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = useRestApiRunner(lagreAksjonspunktKey);
-  useSetBehandlingVedEndring(apBehandlingRes, setBehandling, skalOppdatereFagsakOgBehandling);
+  useSetBehandlingVedEndring(apBehandlingRes, setBehandling);
 
   const { startRequest: lagreOverstyrteAksjonspunkter, data: apOverstyrtBehandlingRes } = useRestApiRunner(lagreOverstyrtyAksjonspunktKey);
-  useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling, skalOppdatereFagsakOgBehandling);
-
-  useOppdaterFagsak(apBehandlingRes, skalOppdatereFagsakOgBehandling, oppdaterBehandlingVersjon);
-  useOppdaterFagsak(apOverstyrtBehandlingRes, skalOppdatereFagsakOgBehandling, oppdaterBehandlingVersjon);
+  useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling);
 
   return {
     lagreAksjonspunkter,
     lagreOverstyrteAksjonspunkter,
-    toggleOppdateringAvFagsakOgBehandling,
   };
 };
 

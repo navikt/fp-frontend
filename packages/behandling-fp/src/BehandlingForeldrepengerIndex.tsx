@@ -57,13 +57,13 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
   useInitRequestApi(requestFpApi, setRequestPendingMessage);
 
   const {
-    behandling, behandlingState, hentBehandling, setBehandling,
+    behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
   } = useBehandling(
-    requestFpApi, FpBehandlingApiKeys.BEHANDLING_FP, behandlingId,
+    requestFpApi, FpBehandlingApiKeys.BEHANDLING_FP, behandlingId, oppdaterBehandlingVersjon,
   );
 
-  const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter, toggleOppdateringAvFagsakOgBehandling } = useLagreAksjonspunkt(
-    requestFpApi, setBehandling, FpBehandlingApiKeys.SAVE_AKSJONSPUNKT, oppdaterBehandlingVersjon, FpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT,
+  const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter } = useLagreAksjonspunkt(
+    requestFpApi, setBehandling, FpBehandlingApiKeys.SAVE_AKSJONSPUNKT, FpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT,
   );
 
   useInitBehandlingHandlinger(requestFpApi, FpBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);

@@ -38,13 +38,13 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & StandardBehandlingProps>
   useInitRequestApi(requestAnkeApi, setRequestPendingMessage);
 
   const {
-    behandling, behandlingState, hentBehandling, setBehandling,
+    behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
   } = useBehandling(
-    requestAnkeApi, AnkeBehandlingApiKeys.BEHANDLING_ANKE, behandlingId,
+    requestAnkeApi, AnkeBehandlingApiKeys.BEHANDLING_ANKE, behandlingId, oppdaterBehandlingVersjon,
   );
 
-  const { lagreAksjonspunkter, toggleOppdateringAvFagsakOgBehandling } = useLagreAksjonspunkt(
-    requestAnkeApi, setBehandling, AnkeBehandlingApiKeys.SAVE_AKSJONSPUNKT, oppdaterBehandlingVersjon,
+  const { lagreAksjonspunkter } = useLagreAksjonspunkt(
+    requestAnkeApi, setBehandling, AnkeBehandlingApiKeys.SAVE_AKSJONSPUNKT,
   );
 
   useInitBehandlingHandlinger(requestAnkeApi, AnkeBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);
