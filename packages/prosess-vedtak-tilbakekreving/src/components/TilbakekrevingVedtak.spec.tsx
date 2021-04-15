@@ -43,7 +43,6 @@ describe('<TilbakekrevingVedtak>', () => {
       alleKodeverk={{}}
       avsnittsliste={[]}
       fetchPreviewVedtaksbrev={sinon.spy()}
-      aksjonspunktKodeForeslaVedtak="1234"
     />);
 
     expect(wrapper.find(TilbakekrevingVedtakPeriodeTabell)).toHaveLength(1);

@@ -21,6 +21,7 @@ import {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 import { Aksjonspunkt, BeregningsresultatFp } from '@fpsak-frontend/types';
+import { VurderTilbaketrekkAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import styles from './tilbaketrekkpanel.less';
 
@@ -41,7 +42,7 @@ interface PureOwnProps {
   behandlingVersjon: number;
   readOnly: boolean;
   vurderTilbaketrekkAP?: Aksjonspunkt;
-  submitCallback: (data: any) => Promise<any>;
+  submitCallback: (data: VurderTilbaketrekkAp) => Promise<void>;
   readOnlySubmitButton: boolean;
   beregningsresultat?: BeregningsresultatFp;
 }
@@ -137,7 +138,7 @@ export const Tilbaketrekkpanel: FunctionComponent<PureOwnProps & WrappedComponen
 
 );
 
-export const transformValues = (values: FormValues): any => {
+export const transformValues = (values: FormValues): VurderTilbaketrekkAp => {
   const hindreTilbaketrekk = values[radioFieldName];
   const begrunnelse = values[begrunnelseFieldName];
   return {
@@ -161,7 +162,7 @@ export const buildInitialValues = createSelector([
 });
 
 const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
-  (submitCallback) => (values: FormValues) => submitCallback([transformValues(values)]));
+  (submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   onSubmit: lagSubmitFn(ownProps),

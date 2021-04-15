@@ -6,6 +6,7 @@ import { InjectedFormProps } from 'redux-form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { behandlingForm } from '@fpsak-frontend/form';
 import { KlageVurdering, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { KlageFormkravAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import FormkravKlageForm, { getPaKlagdVedtak, IKKE_PA_KLAGD_VEDTAK } from './FormkravKlageForm';
 import { erTilbakekreving, påklagdTilbakekrevingInfo } from './FormkravKlageFormNfp';
@@ -24,7 +25,7 @@ interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
   klageVurdering: KlageVurdering;
-  submitCallback: (data: any) => Promise<any>;
+  submitCallback: (data: KlageFormkravAp) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -69,14 +70,14 @@ FormkravKlageFormKa.defaultProps = {
   readOnlySubmitButton: true,
 };
 
-export const transformValues = (values: FormValues, avsluttedeBehandlinger: AvsluttetBehandling[]): any => ({
+export const transformValues = (values: FormValues, avsluttedeBehandlinger: AvsluttetBehandling[]): KlageFormkravAp => ({
   erKlagerPart: values.erKlagerPart,
   erFristOverholdt: values.erFristOverholdt,
   erKonkret: values.erKonkret,
   erSignert: values.erSignert,
   begrunnelse: values.begrunnelse,
   kode: aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_KA,
-  vedtak: values.vedtak === IKKE_PA_KLAGD_VEDTAK ? null : values.vedtak,
+  vedtak: values.vedtak === IKKE_PA_KLAGD_VEDTAK ? null : Number.parseInt(values.vedtak, 10),
   erTilbakekreving: erTilbakekreving(avsluttedeBehandlinger, values.vedtak),
   tilbakekrevingInfo: påklagdTilbakekrevingInfo(avsluttedeBehandlinger, values.vedtak),
 });
@@ -97,7 +98,7 @@ const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.avsluttedeBehandlinger],
-(submitCallback, avsluttedeBehandlinger) => (values: FormValues) => submitCallback([transformValues(values, avsluttedeBehandlinger)]));
+(submitCallback, avsluttedeBehandlinger) => (values: FormValues) => submitCallback(transformValues(values, avsluttedeBehandlinger)));
 
 const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: buildInitialValues(ownProps),

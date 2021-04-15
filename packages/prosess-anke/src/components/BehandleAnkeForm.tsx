@@ -20,12 +20,14 @@ import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
+import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import ankeOmgjorArsak from '@fpsak-frontend/kodeverk/src/ankeOmgjorArsak';
 import {
   Aksjonspunkt, AnkeVurdering, Kodeverk, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
+import { AnkeVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import PreviewAnkeLink, { BrevData } from './PreviewAnkeLink';
 import FritekstBrevTextField from './FritekstAnkeBrevTextField';
@@ -58,7 +60,6 @@ type FormValuesUtrekk = {
 };
 
 type FormValues = {
-  erMerknaderMottatt?: boolean;
   erGodkjentAvMedunderskriver?: boolean;
   erAnkerIkkePart?: boolean;
   erIkkeKonkret: boolean;
@@ -140,7 +141,7 @@ interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
   aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (...args: any[]) => any;
+  submitCallback: (data: AnkeVurderingResultatAp) => Promise<void>;
   ankeVurderingResultat: AnkeVurdering['ankeVurderingResultat'];
   previewCallback: (data: BrevData) => Promise<any>;
   saveAnke: (data: AnkeData) => Promise<any>;
@@ -368,11 +369,10 @@ export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ow
   ankeVurderingOmgjoer: resultat ? resultat.ankeVurderingOmgjoer : null,
 }));
 
-export const transformValues = (values: FormValues, aksjonspunktCode: string): any => ({
-  vedtak: values.vedtak === '0' ? null : values.vedtak,
+export const transformValues = (values: FormValues): AnkeVurderingResultatAp => ({
+  vedtak: values.vedtak === '0' || !values.vedtak ? null : parseInt(values.vedtak, 10),
   ankeVurdering: values.ankeVurdering,
   begrunnelse: values.begrunnelse,
-  erMerknaderMottatt: values.erMerknaderMottatt,
   fritekstTilBrev: values.fritekstTilBrev,
   erGodkjentAvMedunderskriver: values.erGodkjentAvMedunderskriver,
   erAnkerIkkePart: values.erAnkerIkkePart,
@@ -382,15 +382,13 @@ export const transformValues = (values: FormValues, aksjonspunktCode: string): a
   erSubsidiartRealitetsbehandles: values.erSubsidiartRealitetsbehandles,
   ankeOmgjoerArsak: lagreOmgjoerAarsak(values),
   ankeVurderingOmgjoer: lagreVurderingOmgjoer(values),
-  gjelderVedtak: values.vedtak !== '0',
-  kode: aksjonspunktCode,
+  kode: AksjonspunktKode.MANUELL_VURDERING_AV_ANKE,
 });
 
 const formName = 'BehandleAnkeForm';
 
-const lagSubmitFn = createSelector([
-  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunkter[0].definisjon.kode)]));
+const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
+  (submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   aksjonspunktCode: ownProps.aksjonspunkter[0].definisjon.kode,

@@ -1,19 +1,21 @@
 import React, { FunctionComponent } from 'react';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
+import { InjectedFormProps } from 'redux-form';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  VilkarResultPicker, ProsessStegBegrunnelseTextField, ProsessPanelTemplate,
+  VilkarResultPicker, ProsessStegBegrunnelseTextField, ProsessPanelTemplate, validerApKodeOgHentApEnum,
 } from '@fpsak-frontend/prosess-felles';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { Aksjonspunkt, Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
-import { InjectedFormProps } from 'redux-form';
+import { OmsorgsvilkarAp, VurdereYtelseSammeBarnAnnenForelderAp, VurdereYtelseSammeBarnSokerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 type FormValues = {
   erVilkarOk: boolean;
@@ -22,13 +24,15 @@ type FormValues = {
   begrunnelse?: string;
 }
 
+type AksjonspunktData = Array<OmsorgsvilkarAp | VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp>;
+
 interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   aksjonspunkter: Aksjonspunkt[];
   status: string;
-  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+  submitCallback: (aksjonspunktData: AksjonspunktData) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -96,10 +100,12 @@ export const buildInitialValues = createSelector(
   }),
 );
 
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): any => aksjonspunkter.map((ap) => ({
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): AksjonspunktData => aksjonspunkter.map((ap) => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextField.transformValues(values),
-  ...{ kode: ap.definisjon.kode },
+  kode: validerApKodeOgHentApEnum(ap.definisjon.kode, AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
+    AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+    AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN),
 }));
 
 const formName = 'ErOmsorgVilkaarOppfyltForm';

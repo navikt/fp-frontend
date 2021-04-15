@@ -5,10 +5,10 @@ import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl'
 import { createSelector } from 'reselect';
 import { Undertittel } from 'nav-frontend-typografi';
 
-import { omit } from '@fpsak-frontend/utils';
+import { omitOne } from '@fpsak-frontend/utils';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
@@ -16,6 +16,9 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, Fagsak, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn,
   Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling, Stonadskonto, Personoversikt,
 } from '@fpsak-frontend/types';
+import { UttakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
+import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
 import Uttak, { UttaksresultatActivity } from './Uttak';
 import styles from './uttakPanel.less';
@@ -23,8 +26,8 @@ import styles from './uttakPanel.less';
 const formName = 'UttakForm';
 
 const hentApTekst = (uttaksresultat: UttaksresultatPeriode, isApOpen: boolean, aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
-  const helptTextAksjonspunkter = aksjonspunkter.filter((ap) => ap.definisjon.kode !== aksjonspunktCodes.FASTSETT_UTTAKPERIODER
-    && ap.definisjon.kode !== aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER);
+  const helptTextAksjonspunkter = aksjonspunkter.filter((ap) => ap.definisjon.kode !== AksjonspunktCode.FASTSETT_UTTAKPERIODER
+    && ap.definisjon.kode !== AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER);
 
   const uttakPanelAksjonsPunktKoder = {
     5072: 'UttakPanel.Aksjonspunkt.5072',
@@ -42,11 +45,11 @@ const hentApTekst = (uttaksresultat: UttaksresultatPeriode, isApOpen: boolean, a
   const helpText = uttaksresultat.perioderSøker.find((p) => p.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING);
 
   const overstyrApHelpTextOpen = aksjonspunkter.length === 1
-    && aksjonspunkter[0].definisjon.kode === aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER
+    && aksjonspunkter[0].definisjon.kode === AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER
     && aksjonspunkter[0].status.kode !== 'UTFO';
 
   const overstyrApHelpTextUtfort = aksjonspunkter.length === 1
-    && aksjonspunkter[0].definisjon.kode === aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER
+    && aksjonspunkter[0].definisjon.kode === AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER
     && aksjonspunkter[0].status.kode === 'UTFO';
 
   helptTextAksjonspunkter.forEach((ap) => {
@@ -104,7 +107,7 @@ interface PureOwnProps {
     };
     perioder: any;
   }) => Promise<any>;
-  submitCallback: (...args: any[]) => any;
+  submitCallback: (data: UttakAp[]) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
   apCodes: string[];
@@ -354,13 +357,14 @@ export const buildInitialValues = createSelector(
   }),
 );
 
-export const transformValues = (values: FormValues, apCodes: string[], aksjonspunkter: Aksjonspunkt[]): any => {
-  const overstyrErOpprettet = aksjonspunkter.filter((ap) => ap.status.kode === 'OPPR' && ap.definisjon.kode === '6008');
-  const removeOverstyrApCode = apCodes.filter((a) => a !== '6008');
+export const transformValues = (values: FormValues, apCodes: string[], aksjonspunkter: Aksjonspunkt[]): UttakAp[] => {
+  const overstyrErOpprettet = aksjonspunkter
+    .filter((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET && ap.definisjon.kode === AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER);
+  const removeOverstyrApCode = apCodes.filter((a) => a !== AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER);
   let aksjonspunkt = removeOverstyrApCode;
 
   const transformedResultat = values.uttaksresultatActivity.map((aktivitet: UttaksresultatActivity) => {
-    const uta = omit(aktivitet, 'tilknyttetStortinget') as UttaksresultatActivity;
+    const uta = omitOne(aktivitet, 'tilknyttetStortinget');
     if (uta.oppholdÅrsak.kode !== '-') {
       return {
         ...uta,
@@ -388,11 +392,18 @@ export const transformValues = (values: FormValues, apCodes: string[], aksjonspu
   });
 
   if (values.manuellOverstyring || (aksjonspunkter.length === 1 && overstyrErOpprettet.length > 0)) {
-    aksjonspunkt = [aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER];
+    aksjonspunkt = [AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER];
   }
 
   return aksjonspunkt.map((ap) => ({
-    kode: ap,
+    kode: validerApKodeOgHentApEnum(ap, AksjonspunktCode.FASTSETT_UTTAKPERIODER,
+      AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER,
+      AksjonspunktCode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE,
+      AksjonspunktCode.KONTROLLER_OPPLYSNINGER_OM_FORDELING_AV_STØNADSPERIODEN,
+      AksjonspunktCode.KONTROLLER_OPPLYSNINGER_OM_DØD,
+      AksjonspunktCode.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST,
+      AksjonspunktCode.KONTROLLER_TILSTØTENDE_YTELSER_INNVILGET,
+      AksjonspunktCode.KONTROLLER_TILSTØTENDE_YTELSER_OPPHØRT),
     perioder: transformedResultat,
   }));
 };

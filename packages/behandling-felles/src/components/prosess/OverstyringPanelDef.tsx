@@ -9,6 +9,7 @@ import {
   Aksjonspunkt, Behandling, Medlemskap, Vilkar,
 } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { OverstyringAksjonspunkter } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import skalViseProsessPanel from '../../utils/prosess/skalViseProsessPanel';
 import useStandardProsessPanelProps from '../../utils/prosess/useStandardProsessPanelProps';
@@ -22,7 +23,7 @@ const filtrerAvslagsarsaker = (avslagsarsaker, vilkarTypeKode) => (vilkarTypeKod
 interface OwnProps {
   behandling: Behandling;
   aksjonspunkter: Aksjonspunkt[];
-  aksjonspunktKoder: string[];
+  aksjonspunktKoder: OverstyringAksjonspunkter[];
   vilkar: Vilkar[];
   vilkarKoder: string[];
   erMedlemskapsPanel: boolean;

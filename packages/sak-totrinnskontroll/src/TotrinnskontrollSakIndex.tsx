@@ -15,6 +15,7 @@ import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjon
 import {
   BehandlingAppKontekst, Kodeverk, KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
+import { FatterVedtakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import TotrinnskontrollBeslutterForm, { FormValues } from './components/TotrinnskontrollBeslutterForm';
 import { AksjonspunktGodkjenningData } from './components/AksjonspunktGodkjenningFieldArray';
@@ -55,7 +56,12 @@ interface OwnProps {
   behandlingKlageVurdering?: KlageVurdering;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   readOnly: boolean;
-  onSubmit: (...args: any[]) => any;
+  onSubmit: (data: {
+    fatterVedtakAksjonspunktDto: {
+      '@type': aksjonspunktCodes.FATTER_VEDTAK | aksjonspunktCodesTilbakekreving.FATTER_VEDTAK;
+    } & FatterVedtakAp;
+    erAlleAksjonspunktGodkjent: boolean;
+  }) => Promise<void>;
   forhandsvisVedtaksbrev: () => void;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;
 }
@@ -83,13 +89,15 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
         arsaker: getArsaker(apData),
       }));
 
+    const kode = erTilbakekreving ? aksjonspunktCodesTilbakekreving.FATTER_VEDTAK : aksjonspunktCodes.FATTER_VEDTAK;
     const fatterVedtakAksjonspunktDto = {
-      '@type': erTilbakekreving ? aksjonspunktCodesTilbakekreving.FATTER_VEDTAK : aksjonspunktCodes.FATTER_VEDTAK,
+      '@type': kode,
       begrunnelse: null,
       aksjonspunktGodkjenningDtos,
     };
 
     return onSubmit({
+      // @ts-ignore Fiks denne!
       fatterVedtakAksjonspunktDto,
       erAlleAksjonspunktGodkjent: values.aksjonspunktGodkjenning.every((ap) => ap.totrinnskontrollGodkjent && ap.totrinnskontrollGodkjent === true),
     });

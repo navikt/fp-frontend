@@ -170,7 +170,7 @@ describe('<AvregningPanelImpl>', () => {
     };
     const apCode = '5084';
 
-    const transformedValues = transformValues(values, apCode);
+    const transformedValues = transformValues(values);
     expect(transformedValues.kode).toEqual(apCode);
     expect(transformedValues.videreBehandling).toEqual(tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD);
   });
@@ -182,10 +182,10 @@ describe('<AvregningPanelImpl>', () => {
     };
     const apCode = '5084';
 
-    const transformedValuesInfotrygd = transformValues({ ...values, videreBehandling: tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD }, apCode);
+    const transformedValuesInfotrygd = transformValues({ ...values, videreBehandling: tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD });
     expect(transformedValuesInfotrygd.kode).toEqual(apCode);
     expect(transformedValuesInfotrygd.videreBehandling).toEqual(tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD);
-    const transformedValuesIgnorer = transformValues({ ...values, videreBehandling: tilbakekrevingVidereBehandling.TILBAKEKR_IGNORER }, apCode);
+    const transformedValuesIgnorer = transformValues({ ...values, videreBehandling: tilbakekrevingVidereBehandling.TILBAKEKR_IGNORER });
     expect(transformedValuesIgnorer.videreBehandling).toEqual(tilbakekrevingVidereBehandling.TILBAKEKR_IGNORER);
   });
 });

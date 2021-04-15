@@ -19,6 +19,7 @@ import {
   Kjønnkode,
   FamilieHendelseSamling,
 } from '@fpsak-frontend/types';
+import { VurderTilbaketrekkAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import Tilbaketrekkpanel from './tilbaketrekk/Tilbaketrekkpanel';
 import FeriepengerIndex from './feriepenger/FeriepengerIndex';
@@ -62,7 +63,7 @@ interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   readOnly: boolean;
-  submitCallback: (data: any) => Promise<any>;
+  submitCallback: (data: VurderTilbaketrekkAp) => Promise<void>;
   readOnlySubmitButton: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   feriepengegrunnlag?: Feriepengegrunnlag;

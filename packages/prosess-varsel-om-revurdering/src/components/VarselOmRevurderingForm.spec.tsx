@@ -5,8 +5,9 @@ import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-samme
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { FamilieHendelse, Soknad, FamilieHendelseSamling } from '@fpsak-frontend/types';
-
+import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+
 import { VarselOmRevurderingFormImpl as UnwrappedForm } from './VarselOmRevurderingForm';
 import messages from '../../i18n/nb_NO.json';
 
@@ -69,6 +70,9 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       alleKodeverk={{}}
       kode=""
       ventearsaker={[]}
+      initialValues={{
+        kode: AksjonspunktCode.VARSEL_REVURDERING_ETTERKONTROLL,
+      }}
     />, messages);
     const fodselPanel = wrapper.find(FodselSammenligningIndex);
     expect(fodselPanel).toHaveLength(1);
@@ -107,6 +111,9 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       alleKodeverk={{}}
       kode=""
       ventearsaker={[]}
+      initialValues={{
+        kode: AksjonspunktCode.VARSEL_REVURDERING_ETTERKONTROLL,
+      }}
     />, messages);
     const fodselPanel = wrapper.find(FodselSammenligningIndex);
     expect(fodselPanel).toHaveLength(0);
@@ -150,6 +157,9 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       alleKodeverk={{}}
       kode=""
       ventearsaker={[]}
+      initialValues={{
+        kode: AksjonspunktCode.VARSEL_REVURDERING_ETTERKONTROLL,
+      }}
     />, messages);
 
     const textarea = wrapper.find('TextAreaField');
@@ -192,6 +202,9 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       alleKodeverk={{}}
       kode=""
       ventearsaker={[]}
+      initialValues={{
+        kode: AksjonspunktCode.VARSEL_REVURDERING_ETTERKONTROLL,
+      }}
     />, messages);
 
     expect(wrapper.find('Undertekst')).toHaveLength(1);

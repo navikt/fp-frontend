@@ -13,6 +13,8 @@ import {
 } from '@fpsak-frontend/prosess-felles';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import { Aksjonspunkt, Behandling, FastsattOpptjening } from '@fpsak-frontend/types';
+import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { AvklarOpptjeningsvilkaretAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import OpptjeningVilkarView from './OpptjeningVilkarView';
 
@@ -28,7 +30,7 @@ interface PureOwnProps {
   readOnlySubmitButton: boolean;
   behandlingId: number;
   behandlingVersjon: number;
-  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+  submitCallback: (aksjonspunktData: AvklarOpptjeningsvilkaretAp) => Promise<void>;
   lovReferanse?: string;
 }
 
@@ -109,15 +111,14 @@ interface FormValues {
   begrunnelse: string;
 }
 
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]) => ({
+const transformValues = (values: FormValues): AvklarOpptjeningsvilkaretAp => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextField.transformValues(values),
-  ...{ kode: aksjonspunkter[0].definisjon.kode },
+  kode: AksjonspunktKode.VURDER_OPPTJENINGSVILKARET,
 });
 
-const lagSubmitFn = createSelector([
-  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunkter)]));
+const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
+  (submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const isOpenAksjonspunkt = initialOwnProps.aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));

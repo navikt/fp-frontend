@@ -15,6 +15,7 @@ import {
   behandlingForm, behandlingFormValueSelector, hasBehandlingFormErrorsOfType, isBehandlingFormDirty, isBehandlingFormSubmitting,
 } from '@fpsak-frontend/form';
 import { KlageVurdering, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { KlageVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import KlageVurderingRadioOptionsNfp from './KlageVurderingRadioOptionsNfp';
 import FritekstBrevTextField from '../felles/FritekstKlageBrevTextField';
@@ -23,7 +24,7 @@ import TempsaveKlageButton, { TransformedValues } from '../felles/TempsaveKlageB
 
 import styles from './behandleKlageFormNfp.less';
 
-export const transformValues = (values: FormValues): any => ({
+export const transformValues = (values: FormValues): KlageVurderingResultatAp => ({
   klageMedholdArsak: (values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE
     || values.klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? values.klageMedholdArsak : null,
   klageVurderingOmgjoer: values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
@@ -51,7 +52,7 @@ interface PureOwnProps {
   sprakkode: Kodeverk;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   klageVurdering: KlageVurdering;
-  submitCallback: (data: any) => Promise<any>;
+  submitCallback: (data: KlageVurderingResultatAp) => Promise<void>;
 }
 
 interface MappedOwnProps {
@@ -79,7 +80,7 @@ export const BehandleKlageFormNfpImpl: FunctionComponent<PureOwnProps & MappedOw
   submitCallback,
   ...formProps
 }) => (
-  <Form onSubmit={handleSubmit((values: FormValues) => submitCallback([transformValues(values)]))}>
+  <Form onSubmit={handleSubmit((values: FormValues) => submitCallback(transformValues(values)))}>
     <Undertittel>{intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}</Undertittel>
     <VerticalSpacer fourPx />
     <AksjonspunktHelpTextTemp isAksjonspunktOpen={!readOnlySubmitButton}>

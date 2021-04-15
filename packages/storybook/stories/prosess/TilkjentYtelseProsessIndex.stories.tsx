@@ -38,6 +38,10 @@ const familiehendelse = {
       fodselsdato: '2019-01-01',
     }],
     omsorgsovertakelseDato: '2019-01-01',
+    soknadType: {
+      kode: soknadType.FODSEL,
+      kodeverk: '',
+    },
   } as FamilieHendelse,
 } as FamilieHendelseSamling;
 

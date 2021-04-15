@@ -28,6 +28,9 @@ import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import {
   Aksjonspunkt, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, Soknad, AvklartBarn, FamilieHendelse,
 } from '@fpsak-frontend/types';
+import { VarselRevurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
 
 import styles from './varselOmRevurderingForm.less';
 
@@ -40,7 +43,7 @@ export type ForhandsvisData = {
 }
 
 type FormValues = {
-  kode?: string;
+  kode: AksjonspunktCode.VARSEL_REVURDERING_ETTERKONTROLL | AksjonspunktCode.VARSEL_REVURDERING_MANUELL;
   begrunnelse?: string;
 }
 
@@ -55,7 +58,7 @@ interface PureOwnProps {
   soknadOriginalBehandling: Soknad;
   familiehendelseOriginalBehandling: FamilieHendelse;
   aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (...args: any[]) => any;
+  submitCallback: (data: VarselRevurderingAp) => Promise<void>;
   previewCallback: (data: ForhandsvisData) => Promise<any>;
   readOnly: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -106,13 +109,13 @@ export class VarselOmRevurderingFormImpl extends React.Component<Props, OwnState
     const {
       valid, submitCallback, begrunnelse, kode, fritekst, sendVarsel = false,
     } = this.props;
-    submitCallback([{
+    submitCallback({
       kode,
       begrunnelse,
       fritekst,
       sendVarsel,
       ...values,
-    }]);
+    });
     if (valid) {
       this.hideSettPaVentModal();
     }
@@ -269,7 +272,8 @@ export class VarselOmRevurderingFormImpl extends React.Component<Props, OwnState
 }
 
 export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.aksjonspunkter], (aksjonspunkter): FormValues => ({
-  kode: aksjonspunkter[0].definisjon.kode,
+  kode: validerApKodeOgHentApEnum(aksjonspunkter[0].definisjon.kode,
+    AksjonspunktCode.VARSEL_REVURDERING_ETTERKONTROLL, AksjonspunktCode.VARSEL_REVURDERING_MANUELL),
   begrunnelse: aksjonspunkter[0].begrunnelse,
 }));
 
@@ -278,7 +282,7 @@ const formName = 'VarselOmRevurderingForm';
 const nullSafe = (value: FamilieHendelse): FamilieHendelse => value || {} as FamilieHendelse;
 
 const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
-  (submitCallback) => (values: FormValues) => submitCallback([values]));
+  (submitCallback) => (values: FormValues) => submitCallback(values));
 
 const EMPTY_ARRAY = [];
 

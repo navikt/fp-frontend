@@ -21,6 +21,7 @@ import innsynResultatType from '@fpsak-frontend/kodeverk/src/innsynResultatType'
 import {
   Aksjonspunkt, Dokument, InnsynDokument, Kodeverk,
 } from '@fpsak-frontend/types';
+import { ForeslaVedtakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import DocumentListVedtakInnsyn from './DocumentListVedtakInnsyn';
 
@@ -85,7 +86,7 @@ interface PureOwnProps {
   alleDokumenter: Dokument[];
   saksNr: string;
   aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (data: any) => Promise<any>;
+  submitCallback: (data: ForeslaVedtakAp) => Promise<void>;
   previewCallback: (data: ForhandsvisData) => Promise<any>;
   readOnly: boolean;
 }
@@ -192,7 +193,7 @@ const buildInitialValues = (innsynMottattDato: string, aksjonspunkter: Aksjonspu
   begrunnelse: aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.FORESLA_VEDTAK).begrunnelse,
 });
 
-const transformValues = (values: FormValues): any => ({
+const transformValues = (values: FormValues): ForeslaVedtakAp => ({
   kode: aksjonspunktCodes.FORESLA_VEDTAK,
   ...values,
 });
@@ -216,7 +217,7 @@ const getDocumenterMedFikkInnsynVerdi = createSelector(
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback],
-(submitCallback) => (values: FormValues) => submitCallback([transformValues(values)]));
+(submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const formName = 'InnsynVedtakForm';
 

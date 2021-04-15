@@ -94,7 +94,7 @@ export const visTotrinnskontrollForBeslutter = () => (
       totrinnskontrollSkjermlenkeContext={data}
       location={location}
       readOnly={boolean('readOnly', false)}
-      onSubmit={action('button-click')}
+      onSubmit={action('button-click') as any}
       forhandsvisVedtaksbrev={action('button-click')}
       fagsakYtelseType={{
         kode: fagsakYtelseType.FORELDREPENGER,
@@ -130,7 +130,7 @@ export const visTotrinnskontrollForSaksbehandler = () => (
       totrinnskontrollSkjermlenkeContext={dataReadOnly}
       location={location}
       readOnly
-      onSubmit={action('button-click')}
+      onSubmit={action('button-click') as any}
       forhandsvisVedtaksbrev={action('button-click')}
       fagsakYtelseType={{
         kode: fagsakYtelseType.FORELDREPENGER,

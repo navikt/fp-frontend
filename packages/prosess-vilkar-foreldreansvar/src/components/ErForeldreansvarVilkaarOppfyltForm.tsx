@@ -2,18 +2,22 @@ import React, { FunctionComponent } from 'react';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { InjectedFormProps } from 'redux-form';
 import { Element } from 'nav-frontend-typografi';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
-  ProsessStegBegrunnelseTextField, VilkarResultPicker, ProsessPanelTemplate,
+  ProsessStegBegrunnelseTextField, VilkarResultPicker, ProsessPanelTemplate, validerApKodeOgHentApEnum,
 } from '@fpsak-frontend/prosess-felles';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import { InjectedFormProps } from 'redux-form';
 import { Aksjonspunkt, Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
+import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import {
+  Foreldreansvarsvilkar1Ap, Foreldreansvarsvilkar2Ap, VurdereYtelseSammeBarnAnnenForelderAp, VurdereYtelseSammeBarnSokerAp,
+} from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 type FormValues = {
   erVilkarOk: boolean;
@@ -21,6 +25,11 @@ type FormValues = {
   avslagDato?: string;
   begrunnelse?: string;
 }
+
+type AksjonspunktData = Array<Foreldreansvarsvilkar1Ap
+  | Foreldreansvarsvilkar2Ap
+  | VurdereYtelseSammeBarnSokerAp
+  | VurdereYtelseSammeBarnAnnenForelderAp>;
 
 interface PureOwnProps {
   behandlingId: number;
@@ -30,7 +39,7 @@ interface PureOwnProps {
   isEngangsstonad: boolean;
   aksjonspunkter: Aksjonspunkt[];
   status: string;
-  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+  submitCallback: (aksjonspunktData: AksjonspunktData) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -105,10 +114,14 @@ export const buildInitialValues = createSelector(
   }),
 );
 
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): any => aksjonspunkter.map((ap) => ({
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): AksjonspunktData => aksjonspunkter.map((ap) => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextField.transformValues(values),
-  ...{ kode: ap.definisjon.kode },
+  kode: validerApKodeOgHentApEnum(ap.definisjon.kode,
+    AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+    AksjonspunktCode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
+    AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+    AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN),
 }));
 
 const formName = 'ErForeldreansvarVilkaarOppfyltForm';

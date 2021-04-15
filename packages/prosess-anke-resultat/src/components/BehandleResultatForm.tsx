@@ -9,9 +9,9 @@ import { Column, Row } from 'nav-frontend-grid';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
+import { ProsessStegSubmitButton, validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
 import {
   behandlingForm, hasBehandlingFormErrorsOfType, isBehandlingFormDirty, isBehandlingFormSubmitting,
 } from '@fpsak-frontend/form';
@@ -20,12 +20,13 @@ import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgj
 import {
   Aksjonspunkt, AnkeVurdering, Kodeverk, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
+import { BekreftVedtakUtenTotrinnskontrollAp, ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import PreviewAnkeLink, { BrevData } from './PreviewAnkeLink';
 
-const isVedtakUtenToTrinn = (apCodes: string): boolean => apCodes.includes(aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL); // 5018
-const isMedUnderskriver = (apCodes: string): boolean => apCodes.includes(aksjonspunktCodes.FORESLA_VEDTAK); // 5015
-const isFatterVedtak = (apCodes: string): boolean => apCodes.includes(aksjonspunktCodes.FATTER_VEDTAK); // 5016
+const isVedtakUtenToTrinn = (apCodes: string): boolean => apCodes.includes(AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL); // 5018
+const isMedUnderskriver = (apCodes: string): boolean => apCodes.includes(AksjonspunktCode.FORESLA_VEDTAK); // 5015
+const isFatterVedtak = (apCodes: string): boolean => apCodes.includes(AksjonspunktCode.FATTER_VEDTAK); // 5016
 const skalViseForhaandlenke = (avr: Kodeverk): boolean => avr.kode === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE
   || avr.kode === ankeVurdering.ANKE_OMGJOER || avr.kode === ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV;
 
@@ -152,7 +153,7 @@ type FormValues = {
 interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
-  submitCallback: (data: any) => Promise<any>;
+  submitCallback: (data: ForeslaVedtakAp | ForeslaVedtakManueltAp | BekreftVedtakUtenTotrinnskontrollAp) => Promise<void>;
   behandlingId: number;
   behandlingVersjon: number;
   ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
@@ -234,9 +235,11 @@ const AnkeResultatForm: FunctionComponent<PureOwnProps & MappedOwnProps & Inject
   </form>
 );
 
-const transformValues = (values: FormValues, aksjonspunktCode: string): any => ({
+const transformValues = (values: FormValues, aksjonspunktCode: string): ForeslaVedtakAp | ForeslaVedtakManueltAp | BekreftVedtakUtenTotrinnskontrollAp => ({
   begrunnelse: values.begrunnelse,
-  kode: aksjonspunktCode,
+  kode: validerApKodeOgHentApEnum(aksjonspunktCode, AksjonspunktCode.FORESLA_VEDTAK,
+    AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
+    AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL),
 });
 
 const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.ankeVurderingResultat], (resultat): FormValues => ({
@@ -251,12 +254,12 @@ const finnAksjonspunktKode = createSelector([
   const vedtaksaksjonspunkt = aksjonspunkter
     .filter((ap: Aksjonspunkt) => readOnly || ap.status.kode === aksjonspunktStatus.OPPRETTET)
     .filter((ap: Aksjonspunkt) => isVedtakUtenToTrinn(ap.definisjon.kode) || isMedUnderskriver(ap.definisjon.kode) || isFatterVedtak(ap.definisjon.kode));
-  return !vedtaksaksjonspunkt || vedtaksaksjonspunkt.length === 0 ? aksjonspunktCodes.FATTER_VEDTAK : vedtaksaksjonspunkt[0].definisjon.kode;
+  return !vedtaksaksjonspunkt || vedtaksaksjonspunkt.length === 0 ? AksjonspunktCode.FATTER_VEDTAK : vedtaksaksjonspunkt[0].definisjon.kode;
 });
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, finnAksjonspunktKode],
-(submitCallback, aksjonspunktCode) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunktCode)]));
+(submitCallback, aksjonspunktCode) => (values: FormValues) => submitCallback(transformValues(values, aksjonspunktCode)));
 
 const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
   aksjonspunktCode: finnAksjonspunktKode(ownProps),
