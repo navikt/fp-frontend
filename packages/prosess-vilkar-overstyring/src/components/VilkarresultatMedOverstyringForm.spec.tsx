@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { VilkarResultPicker } from '@fpsak-frontend/prosess-felles';
+import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import { VilkarresultatMedOverstyringForm } from './VilkarresultatMedOverstyringForm';
 
@@ -14,7 +15,7 @@ describe('<VilkarresultatMedOverstyringForm>', () => {
     const wrapper = shallow(<VilkarresultatMedOverstyringForm
       {...reduxFormPropsMock}
       erVilkarOk
-      overstyringApKode="5011"
+      overstyringApKode={AksjonspunktCode.OVERSTYRING_AV_OPPTJENINGSVILKARET}
       avslagsarsaker={[{ kode: 'test1', navn: 'test', kodeverk: '' }, { kode: 'test2', navn: 'test', kodeverk: '' }]}
       lovReferanse="§23"
       hasAksjonspunkt

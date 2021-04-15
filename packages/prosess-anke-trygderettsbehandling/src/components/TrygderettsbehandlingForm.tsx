@@ -23,6 +23,7 @@ import {
 } from '@fpsak-frontend/types';
 import CheckboxField from '@fpsak-frontend/form/src/CheckboxField';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { AnkeMerknaderResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import FritekstAnkeMerknaderTextField from './FritekstAnkeMerknaderTextField';
 import { BrevData } from './PreviewAnkeLink';
@@ -48,7 +49,7 @@ type FormValues = {
 interface PureOwnProps {
   ankeVurderingResultat: AnkeVurdering['ankeVurderingResultat'];
   aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (data: any) => Promise<any>;
+  submitCallback: (data: AnkeMerknaderResultatAp) => Promise<void>;
   behandlingId: number;
   behandlingVersjon: number;
   previewCallback: (data: BrevData) => Promise<any>;
@@ -207,14 +208,14 @@ const lagreOmgjoerAarsak = (values: FormValues): Kodeverk | string => (ankeVurde
 const lagreVurderingOmgjoer = (values: FormValues): Kodeverk | string => (ankeVurderingType.ANKE_OMGJOER === values.trygderettVurdering?.kode
   ? values.trygderettVurderingOmgjoer : '-');
 
-const transformValues = (values: FormValues, aksjonspunktCode: string): any => ({
+const transformValues = (values: FormValues): AnkeMerknaderResultatAp => ({
   erMerknaderMottatt: values.erMerknaderMottatt,
   merknadKommentar: values.merknadKommentar,
   avsluttBehandling: values.avsluttBehandling,
   trygderettVurdering: values.trygderettVurdering,
   trygderettOmgjoerArsak: lagreOmgjoerAarsak(values),
   trygderettVurderingOmgjoer: lagreVurderingOmgjoer(values),
-  kode: aksjonspunktCode,
+  kode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER,
 });
 
 const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.ankeVurderingResultat], (resultat): FormValues => ({
@@ -227,7 +228,7 @@ const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.
 }));
 
 const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
-  (submitCallback) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER)]));
+  (submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => ({
   aksjonspunktCode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER,

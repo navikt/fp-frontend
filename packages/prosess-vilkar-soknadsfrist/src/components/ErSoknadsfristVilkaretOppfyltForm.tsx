@@ -26,6 +26,8 @@ import {
 import {
   Aksjonspunkt, Behandling, FamilieHendelse, Kodeverk, KodeverkMedNavn, Soknad, Vilkar, Behandlingsresultat,
 } from '@fpsak-frontend/types';
+import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import SoknadsfristAp from '@fpsak-frontend/types-avklar-aksjonspunkter/src/prosess/SoknadsfristAp';
 
 import styles from './erSoknadsfristVilkaretOppfyltForm.less';
 
@@ -55,7 +57,7 @@ interface PureOwnProps {
   gjeldendeFamiliehendelse: FamilieHendelse;
   aksjonspunkter: Aksjonspunkt[];
   status: string;
-  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+  submitCallback: (aksjonspunktData: SoknadsfristAp) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -219,9 +221,9 @@ export const buildInitialValues = createSelector([
   ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
 }));
 
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): any => ({
+const transformValues = (values: FormValues): SoknadsfristAp => ({
   erVilkarOk: values.erVilkarOk,
-  kode: aksjonspunkter[0].definisjon.kode,
+  kode: AksjonspunktKode.SOKNADSFRISTVILKARET,
   ...ProsessStegBegrunnelseTextField.transformValues(values),
 });
 
@@ -250,9 +252,8 @@ const findTextCode = createSelector([
 
 const formName = 'ErSoknadsfristVilkaretOppfyltForm';
 
-const lagSubmitFn = createSelector([
-  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunkter)]));
+const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
+  (submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const {

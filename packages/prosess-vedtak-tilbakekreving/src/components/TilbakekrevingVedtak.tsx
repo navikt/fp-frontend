@@ -8,12 +8,13 @@ import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import {
   BeregningResultatPeriode, Kodeverk, KodeverkMedNavn, VedtaksbrevAvsnitt,
 } from '@fpsak-frontend/types';
+import { ForeslaVedtakTilbakekrevingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import TilbakekrevingVedtakPeriodeTabell from './TilbakekrevingVedtakPeriodeTabell';
 import TilbakekrevingVedtakForm, { ForhandsvisData } from './TilbakekrevingVedtakForm';
 
 interface OwnProps {
-  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+  submitCallback: (aksjonspunktData: ForeslaVedtakTilbakekrevingAp) => Promise<void>;
   readOnly: boolean;
   resultat: Kodeverk;
   perioder: BeregningResultatPeriode[];
@@ -23,7 +24,6 @@ interface OwnProps {
   behandlingVersjon: number;
   avsnittsliste: VedtaksbrevAvsnitt[];
   fetchPreviewVedtaksbrev: (data: ForhandsvisData) => Promise<any>;
-  aksjonspunktKodeForeslaVedtak: string;
   erRevurderingTilbakekrevingKlage?: boolean;
   erRevurderingTilbakekrevingFeilBeløpBortfalt?: boolean;
 }
@@ -39,7 +39,6 @@ const TilbakekrevingVedtak: FunctionComponent<OwnProps> = ({
   behandlingVersjon,
   avsnittsliste,
   fetchPreviewVedtaksbrev,
-  aksjonspunktKodeForeslaVedtak,
   erRevurderingTilbakekrevingKlage,
   erRevurderingTilbakekrevingFeilBeløpBortfalt,
 }) => {
@@ -67,7 +66,6 @@ const TilbakekrevingVedtak: FunctionComponent<OwnProps> = ({
         behandlingVersjon={behandlingVersjon}
         avsnittsliste={avsnittsliste}
         fetchPreviewVedtaksbrev={fetchPreviewVedtaksbrev}
-        aksjonspunktKodeForeslaVedtak={aksjonspunktKodeForeslaVedtak}
         erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage}
         erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt}
       />

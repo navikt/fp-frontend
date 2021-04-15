@@ -19,7 +19,7 @@ import {
 import {
   getLanguageFromSprakkode, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -28,6 +28,7 @@ import questionHoverUrl from '@fpsak-frontend/assets/images/question_hover.svg';
 import {
   Aksjonspunkt, DetaljertSimuleringResultat, Fagsak, Kodeverk, SimuleringResultat, TilbakekrevingValg,
 } from '@fpsak-frontend/types';
+import { VurderFeilutbetalingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import AvregningSummary from './AvregningSummary';
 import AvregningTable from './AvregningTable';
@@ -38,7 +39,7 @@ import styles from './avregningPanel.less';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
-const simuleringAksjonspunkt = aksjonspunktCodes.VURDER_FEILUTBETALING;
+const simuleringAksjonspunkt = AksjonspunktCode.VURDER_FEILUTBETALING;
 const formName = 'AvregnigForm';
 const IKKE_SEND = 'IKKE_SEND';
 
@@ -67,7 +68,7 @@ interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];
   simuleringResultat?: SimuleringResultat;
   tilbakekrevingvalg?: TilbakekrevingValg;
-  submitCallback: (data: any) => Promise<any>;
+  submitCallback: (data: VurderFeilutbetalingAp) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
   apCodes: string[];
@@ -225,7 +226,7 @@ export class AvregningPanelImpl extends Component<Props, OwnState> {
                         readOnly={readOnly}
                       />
                     </Column>
-                    { apCodes[0] === aksjonspunktCodes.VURDER_FEILUTBETALING && (
+                    { apCodes[0] === AksjonspunktCode.VURDER_FEILUTBETALING && (
                       <Column sm="6">
                         <Undertekst><FormattedMessage id="Avregning.videreBehandling" /></Undertekst>
                         <VerticalSpacer eightPx />
@@ -313,23 +314,22 @@ export class AvregningPanelImpl extends Component<Props, OwnState> {
   }
 }
 
-export const transformValues = (values: FormValues, ap: string): any => {
+export const transformValues = (values: FormValues): VurderFeilutbetalingAp => {
   const { videreBehandling, varseltekst, begrunnelse } = values;
-  const info = {
-    kode: ap,
+  if (videreBehandling.endsWith(IKKE_SEND)) {
+    return {
+      kode: AksjonspunktCode.VURDER_FEILUTBETALING,
+      begrunnelse,
+      videreBehandling: tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD,
+    };
+  }
+
+  return {
+    kode: AksjonspunktCode.VURDER_FEILUTBETALING,
     begrunnelse,
     videreBehandling,
+    varseltekst,
   };
-
-  return videreBehandling.endsWith(IKKE_SEND)
-    ? {
-      ...info,
-      videreBehandling: tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD,
-    }
-    : {
-      ...info,
-      varseltekst,
-    };
 };
 
 const buildInitialValues = createSelector(
@@ -354,8 +354,8 @@ const buildInitialValues = createSelector(
 );
 
 const lagSubmitFn = createSelector([
-  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.apCodes],
-(submitCallback, apCodes) => (values: FormValues) => submitCallback([transformValues(values, apCodes[0])]));
+  (ownProps: PureOwnProps) => ownProps.submitCallback],
+(submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
   const {

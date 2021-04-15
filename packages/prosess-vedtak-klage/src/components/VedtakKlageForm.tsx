@@ -14,6 +14,9 @@ import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import {
   Aksjonspunkt, Behandling, KlageVurdering, KlageVurderingResultat, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
+import { BekreftVedtakUtenTotrinnskontrollAp, ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
+import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import VedtakKlageSubmitPanel from './VedtakKlageSubmitPanel';
 import VedtakKlageKaSubmitPanel from './VedtakKlageKaSubmitPanel';
@@ -40,7 +43,7 @@ interface PureOwnProps {
   behandlingPaaVent: boolean;
   klageVurdering: KlageVurdering;
   aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (data: any) => Promise<any>;
+  submitCallback: (data: ForeslaVedtakAp | ForeslaVedtakManueltAp | BekreftVedtakUtenTotrinnskontrollAp) => Promise<void>;
   previewVedtakCallback: (data: ForhandsvisData) => Promise<any>;
   readOnly: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -135,8 +138,10 @@ export const VedtakKlageForm: FunctionComponent<PureOwnProps & MappedOwnProps & 
 };
 
 const transformValues = (values: FormValues): any => values.aksjonspunktKoder.map((apCode) => ({
-  kode: apCode,
   begrunnelse: values.fritekstTilBrev,
+  kode: validerApKodeOgHentApEnum(apCode, AksjonspunktCode.FORESLA_VEDTAK,
+    AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
+    AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL),
 }));
 
 export const getAvvisningsAarsaker = createSelector([

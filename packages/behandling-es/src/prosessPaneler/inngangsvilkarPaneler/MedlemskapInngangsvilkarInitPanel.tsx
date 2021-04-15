@@ -14,7 +14,7 @@ import {
 
 import { EsBehandlingApiKeys, requestEsApi } from '../../data/esBehandlingApi';
 
-const AKSJONSPUNKT_KODER = [aksjonspunktCodes.OVERSTYR_MEDLEMSKAPSVILKAR];
+const AKSJONSPUNKT_KODE = aksjonspunktCodes.OVERSTYR_MEDLEMSKAPSVILKAR;
 
 const VILKAR_KODER = [vilkarType.MEDLEMSKAPSVILKARET];
 
@@ -45,7 +45,7 @@ const MedlemskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvi
     requestApi={requestEsApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-    aksjonspunktKoder={AKSJONSPUNKT_KODER}
+    aksjonspunktKoder={[AKSJONSPUNKT_KODE]}
     vilkarKoder={VILKAR_KODER}
     inngangsvilkarPanelKode="MEDLEMSKAP"
     hentInngangsvilkarPanelTekst={() => ''}
@@ -54,7 +54,7 @@ const MedlemskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvi
         <OverstyringPanelDef
           behandling={data.behandling}
           aksjonspunkter={data.aksjonspunkter}
-          aksjonspunktKoder={AKSJONSPUNKT_KODER}
+          aksjonspunktKoder={[AKSJONSPUNKT_KODE]}
           vilkar={data.vilkar}
           vilkarKoder={VILKAR_KODER}
           panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"

@@ -7,6 +7,7 @@ import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
 import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';
+import { FatterVedtakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
 import { createLocationForSkjermlenke } from '../../app/paths';
@@ -17,8 +18,10 @@ import {
 import BeslutterModalIndex from './BeslutterModalIndex';
 
 type Values = {
-  fatterVedtakAksjonspunktDto: any;
-  erAlleAksjonspunktGodkjent: boolean
+  fatterVedtakAksjonspunktDto: {
+    '@type': string;
+  } & FatterVedtakAp;
+  erAlleAksjonspunktGodkjent: boolean;
 };
 
 const getLagreFunksjon = (

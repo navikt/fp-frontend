@@ -19,6 +19,12 @@ import {
 } from '@fpsak-frontend/types';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { behandlingForm, behandlingFormValueSelector, getBehandlingFormPrefix } from '@fpsak-frontend/form';
+import {
+  BekreftVedtakUtenTotrinnskontrollAp, ForeslaVedtakAp, ForeslaVedtakManueltAp, KontrollAvManueltOpprettetRevurderingsbehandlingAp,
+  KontrollerRevurderingsBehandlingAp, VurdereAnnenYtelseForVedtakAp, VurdereDokumentForVedtakAp,
+} from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
+import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import vedtakResultType from '../../kodeverk/vedtakResultType';
 import VedtakInnvilgetRevurderingPanel from './VedtakInnvilgetRevurderingPanel';
@@ -27,6 +33,14 @@ import VedtakOpphorRevurderingPanel from './VedtakOpphorRevurderingPanel';
 import VedtakFellesPanel from '../felles/VedtakFellesPanel';
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
 import VedtakFritekstbrevModal from '../felles/svp/VedtakFritekstbrevModal';
+
+type RevurderingVedtakAksjonspunkter = ForeslaVedtakAp
+  | ForeslaVedtakManueltAp
+  | BekreftVedtakUtenTotrinnskontrollAp
+  | VurdereAnnenYtelseForVedtakAp
+  | VurdereDokumentForVedtakAp
+  | KontrollerRevurderingsBehandlingAp
+  | KontrollAvManueltOpprettetRevurderingsbehandlingAp;
 
 type ForhandsvisData = {
   fritekst: string;
@@ -234,7 +248,7 @@ interface PureOwnProps {
   resultatstrukturOriginalBehandling?: BeregningsresultatFp | BeregningsresultatEs;
   behandlingId: number;
   behandlingVersjon: number;
-  submitCallback: (data: any) => void;
+  submitCallback: (data: RevurderingVedtakAksjonspunkter[]) => Promise<void>;
 }
 
 interface MappedOwnProps {
@@ -364,8 +378,14 @@ export const buildInitialValues = createSelector(
   }),
 );
 
-const transformValues = (values: FormValues): any => values.aksjonspunktKoder.map((apCode) => ({
-  kode: apCode,
+const transformValues = (values: FormValues): RevurderingVedtakAksjonspunkter[] => values.aksjonspunktKoder.map((apCode) => ({
+  kode: validerApKodeOgHentApEnum(apCode, AksjonspunktCode.FORESLA_VEDTAK,
+    AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
+    AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL,
+    AksjonspunktCode.VURDERE_ANNEN_YTELSE,
+    AksjonspunktCode.VURDERE_DOKUMENT,
+    AksjonspunktCode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
+    AksjonspunktCode.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING),
   begrunnelse: values.begrunnelse,
   fritekstBrev: values.brødtekst,
   skalBrukeOverstyrendeFritekstBrev: !!values.brødtekst,

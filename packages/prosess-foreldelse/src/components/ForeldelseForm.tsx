@@ -20,6 +20,7 @@ import {
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
 import { KodeverkMedNavn, FeilutbetalingPeriode, FeilutbetalingPerioderWrapper } from '@fpsak-frontend/types';
+import { VurderForeldelseAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import ForeldelsePeriodeForm, { FORELDELSE_PERIODE_FORM_NAME, FormValues as PeriodeFormValues } from './ForeldelsePeriodeForm';
 import TilbakekrevingTimelinePanel from './timeline/TilbakekrevingTimelinePanel';
@@ -58,7 +59,7 @@ interface PureOwnProps {
   apCodes: string[];
   perioderForeldelse: FeilutbetalingPerioderWrapper;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+  submitCallback: (aksjonspunktData: VurderForeldelseAp) => Promise<void>;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   navBrukerKjonn: string;
   readOnly: boolean;
@@ -285,7 +286,7 @@ export class ForeldelseForm extends Component<PureOwnProps & MappedOwnProps & Di
   }
 }
 
-export const transformValues = (values: FormValues, apCode: string): any => {
+export const transformValues = (values: FormValues): VurderForeldelseAp => {
   const foreldelsePerioder = values.foreldelsesresultatActivity.map((period) => ({
     fraDato: period.fom,
     tilDato: period.tom,
@@ -294,10 +295,10 @@ export const transformValues = (values: FormValues, apCode: string): any => {
     foreldelsesfrist: period.foreldelsesfrist,
     oppdagelsesDato: period.oppdagelsesDato,
   }));
-  return [{
+  return {
     foreldelsePerioder,
-    kode: apCode,
-  }];
+    kode: aksjonspunktCodesTilbakekreving.VURDER_FORELDELSE,
+  };
 };
 export const buildInitialValues = (foreldelsePerioder: FeilutbetalingPeriode[]): FormValues => ({
   foreldelsesresultatActivity: foreldelsePerioder.map((p) => ({
@@ -309,8 +310,8 @@ export const buildInitialValues = (foreldelsePerioder: FeilutbetalingPeriode[]):
 });
 
 const lagSubmitFn = createSelector([
-  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.apCodes],
-(submitCallback, apCodes) => (values: FormValues) => submitCallback(transformValues(values, apCodes[0])));
+  (ownProps: PureOwnProps) => ownProps.submitCallback],
+(submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: buildInitialValues(ownProps.perioderForeldelse.perioder),

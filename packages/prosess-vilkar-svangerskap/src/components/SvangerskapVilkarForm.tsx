@@ -6,6 +6,7 @@ import { InjectedFormProps } from 'redux-form';
 import { Element } from 'nav-frontend-typografi';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
   ProsessStegBegrunnelseTextField, VilkarResultPicker, ProsessPanelTemplate,
@@ -16,6 +17,7 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import {
   Aksjonspunkt, Behandling, KodeverkMedNavn, Vilkar,
 } from '@fpsak-frontend/types';
+import { BekreftSvangerskapspengervilkarAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 type FormValues = {
   erVilkarOk: boolean;
@@ -31,7 +33,7 @@ interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];
   status: string;
   vilkar: Vilkar[];
-  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+  submitCallback: (aksjonspunktData: BekreftSvangerskapspengervilkarAp) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
   isApOpen: boolean;
@@ -102,17 +104,17 @@ export const buildInitialValues = createSelector(
   }),
 );
 
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): any => ({
+const transformValues = (values: FormValues): BekreftSvangerskapspengervilkarAp => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextField.transformValues(values),
-  ...{ kode: aksjonspunkter[0].definisjon.kode },
+  kode: AksjonspunktKode.SVANGERSKAPSVILKARET,
 });
 
 const formName = 'SvangerskapVilkarForm';
 
 const lagSubmitFn = createSelector([
-  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunkter)]));
+  (ownProps: PureOwnProps) => ownProps.submitCallback],
+(submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
   const {

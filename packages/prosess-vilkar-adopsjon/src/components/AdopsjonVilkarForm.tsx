@@ -11,11 +11,13 @@ import {
   Aksjonspunkt, Behandling, KodeverkMedNavn, Vilkar,
 } from '@fpsak-frontend/types';
 import {
-  ProsessStegBegrunnelseTextField, VilkarResultPicker, ProsessPanelTemplate,
+  ProsessStegBegrunnelseTextField, VilkarResultPicker, ProsessPanelTemplate, validerApKodeOgHentApEnum,
 } from '@fpsak-frontend/prosess-felles';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
+import { VurdereYtelseSammeBarnAnnenForelderAp, VurdereYtelseSammeBarnSokerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 type FormValues = {
   erVilkarOk: boolean;
@@ -31,7 +33,7 @@ interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];
   status: string;
   vilkar: Vilkar[];
-  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+  submitCallback: (aksjonspunktData: VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
   isApOpen: boolean;
@@ -104,15 +106,17 @@ export const buildInitialValues = createSelector(
   }),
 );
 
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): any => ({
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextField.transformValues(values),
-  ...{ kode: aksjonspunkter[0].definisjon.kode },
+  kode: validerApKodeOgHentApEnum(aksjonspunkter[0].definisjon.kode,
+    AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+    AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN),
 });
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunkter)]));
+(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback(transformValues(values, aksjonspunkter)));
 
 const formName = 'AdopsjonVilkarForm';
 

@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 
 import { Aksjonspunkt, Behandling, FastsattOpptjening } from '@fpsak-frontend/types';
+import { AvklarOpptjeningsvilkaretAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import OpptjeningVilkarView from './OpptjeningVilkarView';
 import OpptjeningVilkarAksjonspunktPanel from './OpptjeningVilkarAksjonspunktPanel';
@@ -16,7 +17,7 @@ interface OwnProps {
   isAksjonspunktOpen: boolean;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
-  submitCallback: (aksjonspunktData: { kode: string }[]) => Promise<any>;
+  submitCallback: (aksjonspunktData: AvklarOpptjeningsvilkaretAp) => Promise<void>;
 }
 
 /**

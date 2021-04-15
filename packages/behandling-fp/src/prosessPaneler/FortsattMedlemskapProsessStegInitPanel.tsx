@@ -16,7 +16,7 @@ import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
 const intl = createIntl(messages);
 
-const AKSJONSPUNKT_KODER = [aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR];
+const AKSJONSPUNKT_KODE = aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR;
 
 const VILKAR_KODER = [vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE];
 
@@ -46,7 +46,7 @@ const FortsattMedlemskapProsessStegInitPanel: FunctionComponent<OwnProps & Prose
       {...props}
       requestApi={requestFpApi}
       initEndepunkter={ENDEPUNKTER_INIT_DATA}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      aksjonspunktKoder={[AKSJONSPUNKT_KODE]}
       vilkarKoder={VILKAR_KODER}
       prosessPanelKode={prosessStegCodes.FORTSATTMEDLEMSKAP}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.FortsattMedlemskap' })}
@@ -56,7 +56,7 @@ const FortsattMedlemskapProsessStegInitPanel: FunctionComponent<OwnProps & Prose
         <OverstyringPanelDef
           behandling={data.behandling}
           aksjonspunkter={data?.aksjonspunkter}
-          aksjonspunktKoder={AKSJONSPUNKT_KODER}
+          aksjonspunktKoder={[AKSJONSPUNKT_KODE]}
           vilkar={data.vilkar}
           vilkarKoder={VILKAR_KODER}
           panelTekstKode="Behandlingspunkt.FortsattMedlemskap"

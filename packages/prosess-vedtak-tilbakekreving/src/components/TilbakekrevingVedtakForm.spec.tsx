@@ -35,7 +35,6 @@ describe('<TilbakekrevingVedtakForm>', () => {
       behandlingUuid="uuid"
       behandlingVersjon={1}
       perioderSomIkkeHarUtfyltObligatoriskVerdi={[]}
-      aksjonspunktKodeForeslaVedtak=""
       avsnittsliste={[]}
     />);
 
@@ -76,7 +75,6 @@ describe('<TilbakekrevingVedtakForm>', () => {
       behandlingUuid="uuid"
       behandlingVersjon={1}
       perioderSomIkkeHarUtfyltObligatoriskVerdi={[]}
-      aksjonspunktKodeForeslaVedtak=""
       avsnittsliste={[]}
     />);
 
@@ -119,7 +117,6 @@ describe('<TilbakekrevingVedtakForm>', () => {
       behandlingUuid="uuid"
       behandlingVersjon={1}
       perioderSomIkkeHarUtfyltObligatoriskVerdi={['2019-01-01_2019-02-02']}
-      aksjonspunktKodeForeslaVedtak=""
       avsnittsliste={[]}
     />);
 
@@ -157,7 +154,6 @@ describe('<TilbakekrevingVedtakForm>', () => {
       perioderSomIkkeHarUtfyltObligatoriskVerdi={[]}
       erRevurderingTilbakekrevingKlage
       fritekstOppsummeringPakrevdMenIkkeUtfylt
-      aksjonspunktKodeForeslaVedtak=""
       avsnittsliste={[]}
     />);
 

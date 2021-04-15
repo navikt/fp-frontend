@@ -19,11 +19,13 @@ import {
 import { OverstyringPanel, VilkarResultPicker } from '@fpsak-frontend/prosess-felles';
 import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import { OverstyringAksjonspunkter } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { DDMMYYYY_DATE_FORMAT, decodeHtmlEntity } from '@fpsak-frontend/utils';
 import avslattImage from '@fpsak-frontend/assets/images/avslaatt_hover.svg';
 import innvilgetImage from '@fpsak-frontend/assets/images/innvilget_hover.svg';
 import keyImage from '@fpsak-frontend/assets/images/key-1-rotert.svg';
 import keyUtgraetImage from '@fpsak-frontend/assets/images/key-1-rotert-utgraet.svg';
+import { OverstyringAp, OverstyringMedlemskapsvilkaretLopendeAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import styles from './vilkarresultatMedOverstyringForm.less';
 
@@ -49,7 +51,7 @@ interface PureOwnProps {
   behandlingsresultat?: Behandling['behandlingsresultat']
   medlemskapFom: string;
   aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (data: any) => void;
+  submitCallback: (data: OverstyringAp | OverstyringMedlemskapsvilkaretLopendeAp) => Promise<void>;
   overrideReadOnly: boolean;
   kanOverstyreAccess: {
     isEnabled: boolean;
@@ -59,7 +61,7 @@ interface PureOwnProps {
   status: string;
   erOverstyrt?: boolean;
   panelTittelKode: string;
-  overstyringApKode: string;
+  overstyringApKode: OverstyringAksjonspunkter;
   lovReferanse?: string;
   erMedlemskapsPanel: boolean;
 }
@@ -251,7 +253,7 @@ const getCustomVilkarTextForIkkeOppfylt = createSelector(
   (medlemskapFom, behandlingType): TextValues | undefined => getCustomVilkarText(medlemskapFom, behandlingType, false),
 );
 
-const transformValues = (values: FormValues, overstyringApKode: string): any => ({
+const transformValues = (values: FormValues, overstyringApKode: OverstyringAksjonspunkter): OverstyringAp | OverstyringMedlemskapsvilkaretLopendeAp => ({
   kode: overstyringApKode,
   begrunnelse: values.begrunnelse,
   ...VilkarResultPicker.transformValues(values),
@@ -261,7 +263,7 @@ const validate = (values: FormValues): any => VilkarResultPicker.validate(values
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.overstyringApKode],
-(submitCallback, overstyringApKode) => (values: FormValues) => submitCallback([transformValues(values, overstyringApKode)]));
+(submitCallback, overstyringApKode) => (values: FormValues) => submitCallback(transformValues(values, overstyringApKode)));
 
 const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const { overstyringApKode } = initialOwnProps;
