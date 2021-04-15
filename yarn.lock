@@ -13601,10 +13601,10 @@ nav-frontend-lenker@1.0.60:
   resolved "https://registry.yarnpkg.com/nav-frontend-lenker/-/nav-frontend-lenker-1.0.60.tgz#ab32a842c4dd2ed842479ae1e9c742df8f05499e"
   integrity sha512-Bv7McvpXRARaNsQCYCt/JW1iZYetlYc+kAPxPKaBDSGiZYp5u3ZOM4sorTIiCXMXOe/y3cahO4i3oF2q78/mNA==
 
-nav-frontend-lesmerpanel-style@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/nav-frontend-lesmerpanel-style/-/nav-frontend-lesmerpanel-style-1.0.2.tgz#f00cb758d520a9eb5b63ad46775e614d7491dbf5"
-  integrity sha512-ea4vgZjrkZR2ahYhKt/z+OFpt2rRdztStF2K2vJBXJraDN2/WuUT0bJ7oX5gvDxgfcmyGQtqPKWPTDIFshMjHA==
+nav-frontend-lesmerpanel-style@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/nav-frontend-lesmerpanel-style/-/nav-frontend-lesmerpanel-style-1.1.1.tgz#3a4025b7ddecc78d501e0cd26e46f4445dabb011"
+  integrity sha512-rXiAvHxuU2oxzoT07d6kVbYkokBN88ZdFDWXtD00tzYZSex9YcoKcCnVGZDzxhcoHgcUbDJUKEkDmdK1GDCBAg==
 
 nav-frontend-lesmerpanel@1.0.2:
   version "1.0.2"
