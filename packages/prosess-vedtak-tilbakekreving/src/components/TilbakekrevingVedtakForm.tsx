@@ -20,7 +20,7 @@ import {
 } from '@fpsak-frontend/form';
 import advarselIcon from '@fpsak-frontend/assets/images/advarsel_ny.svg';
 import { VedtaksbrevAvsnitt } from '@fpsak-frontend/types';
-import { ForeslaVedtakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import { ForeslaVedtakTilbakekrevingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import underavsnittType from '../kodeverk/avsnittType';
 import TilbakekrevingEditerVedtaksbrevPanel, { FormValues } from './brev/TilbakekrevingEditerVedtaksbrevPanel';
@@ -77,7 +77,7 @@ const fetchPreview = (
 interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
-  submitCallback: (aksjonspunktData: ForeslaVedtakAp) => Promise<void>;
+  submitCallback: (aksjonspunktData: ForeslaVedtakTilbakekrevingAp) => Promise<void>;
   avsnittsliste: VedtaksbrevAvsnitt[];
   readOnly: boolean;
   fetchPreviewVedtaksbrev: (data: ForhandsvisData) => Promise<any>;
@@ -170,7 +170,7 @@ export const TilbakekrevingVedtakFormImpl: FunctionComponent<PureOwnProps & Mapp
   </form>
 );
 
-const transformValues = (values: FormValues): ForeslaVedtakAp => ({
+const transformValues = (values: FormValues): ForeslaVedtakTilbakekrevingAp => ({
   kode: aksjonspunktCodesTilbakekreving.FORESLA_VEDTAK,
   ...formatVedtakData(values),
 });

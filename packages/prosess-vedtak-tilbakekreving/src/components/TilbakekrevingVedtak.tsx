@@ -8,13 +8,13 @@ import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import {
   BeregningResultatPeriode, Kodeverk, KodeverkMedNavn, VedtaksbrevAvsnitt,
 } from '@fpsak-frontend/types';
-import { ForeslaVedtakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import { ForeslaVedtakTilbakekrevingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import TilbakekrevingVedtakPeriodeTabell from './TilbakekrevingVedtakPeriodeTabell';
 import TilbakekrevingVedtakForm, { ForhandsvisData } from './TilbakekrevingVedtakForm';
 
 interface OwnProps {
-  submitCallback: (aksjonspunktData: ForeslaVedtakAp) => Promise<void>;
+  submitCallback: (aksjonspunktData: ForeslaVedtakTilbakekrevingAp) => Promise<void>;
   readOnly: boolean;
   resultat: Kodeverk;
   perioder: BeregningResultatPeriode[];

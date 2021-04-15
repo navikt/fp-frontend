@@ -14,6 +14,11 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 import behandlingResultatType, { isAvslag, isInnvilget } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import { behandlingForm, behandlingFormValueSelector, getBehandlingFormPrefix } from '@fpsak-frontend/form';
+import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
+import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import {
+  BekreftVedtakUtenTotrinnskontrollAp, ForeslaVedtakAp, ForeslaVedtakManueltAp, VurdereAnnenYtelseForVedtakAp, VurdereDokumentForVedtakAp,
+} from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
 import VedtakInnvilgetPanel from './VedtakInnvilgetPanel';
@@ -113,6 +118,12 @@ const finnVedtakstatusTekst = (behandlingsresultat: Behandling['behandlingsresul
   return '';
 };
 
+type VedtakAksjonspunkter = ForeslaVedtakAp
+  | ForeslaVedtakManueltAp
+  | BekreftVedtakUtenTotrinnskontrollAp
+  | VurdereAnnenYtelseForVedtakAp
+  | VurdereDokumentForVedtakAp;
+
 type FormValues = {
   beregningErManueltFastsatt?: boolean;
   aksjonspunktKoder?: string[];
@@ -135,7 +146,7 @@ interface PureOwnProps {
   beregningErManueltFastsatt: boolean;
   behandlingId: number;
   behandlingVersjon: number;
-  submitCallback: (data: any) => void;
+  submitCallback: (data: VedtakAksjonspunkter[]) => Promise<void>;
 }
 
 interface MappedOwnProps {
@@ -247,8 +258,12 @@ export const buildInitialValues = createSelector(
   }),
 );
 
-const transformValues = (values: FormValues): any => values.aksjonspunktKoder.map((apCode) => ({
-  kode: apCode,
+const transformValues = (values: FormValues): VedtakAksjonspunkter[] => values.aksjonspunktKoder.map((apCode) => ({
+  kode: validerApKodeOgHentApEnum(apCode, AksjonspunktCode.FORESLA_VEDTAK,
+    AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
+    AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL,
+    AksjonspunktCode.VURDERE_ANNEN_YTELSE,
+    AksjonspunktCode.VURDERE_DOKUMENT),
   begrunnelse: values.begrunnelse,
   fritekstBrev: values.brødtekst,
   skalBrukeOverstyrendeFritekstBrev: !!values.brødtekst,

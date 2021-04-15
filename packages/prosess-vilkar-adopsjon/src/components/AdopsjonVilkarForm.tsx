@@ -33,7 +33,7 @@ interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];
   status: string;
   vilkar: Vilkar[];
-  submitCallback: (aksjonspunktData: VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp) => Promise<any>;
+  submitCallback: (aksjonspunktData: VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
   isApOpen: boolean;

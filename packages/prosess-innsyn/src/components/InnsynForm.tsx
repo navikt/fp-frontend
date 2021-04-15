@@ -24,13 +24,14 @@ import innsynResultatTyperKV from '@fpsak-frontend/kodeverk/src/innsynResultatTy
 import {
   Aksjonspunkt, Dokument, InnsynDokument, InnsynVedtaksdokument, Kodeverk, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
+import { VurderInnsynAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import DocumentListInnsyn from './DocumentListInnsyn';
 import VedtakDocuments from './VedtakDocuments';
 
 type FormValues = {
-  mottattDato?: string;
-  innsynResultatType?: string;
+  mottattDato: string;
+  innsynResultatType: string;
   fristDato?: string;
   sattPaVent?: boolean;
 }
@@ -47,7 +48,7 @@ interface PureOwnProps {
   alleDokumenter: Dokument[];
   aksjonspunkter: Aksjonspunkt[];
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  submitCallback: (data: any) => Promise<any>;
+  submitCallback: (data: VurderInnsynAp) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
 }
@@ -201,10 +202,10 @@ const getFilteredValues = (values: FormValues) => Object.keys(values)
     [valueKey]: values[valueKey],
   }), {});
 
-const transformValues = (values: FormValues, documents: Dokument[]): any => ({
+const transformValues = (values: FormValues, documents: Dokument[]): VurderInnsynAp => ({
   kode: aksjonspunktCodes.VURDER_INNSYN,
   innsynDokumenter: getDocumentsStatus(values, documents),
-  ...getFilteredValues(values),
+  ...getFilteredValues(values) as FormValues,
 });
 
 // Samme dokument kan ligge på flere behandlinger under samme fagsak.
@@ -216,7 +217,7 @@ const getFilteredReceivedDocuments = createSelector([(ownProps: PureOwnProps) =>
 
 const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.alleDokumenter],
-(submitCallback, alleDokumenter) => (values: FormValues) => submitCallback([transformValues(values, alleDokumenter)]));
+(submitCallback, alleDokumenter) => (values: FormValues) => submitCallback(transformValues(values, alleDokumenter)));
 
 const formName = 'InnsynForm';
 

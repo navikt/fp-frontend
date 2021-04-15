@@ -1,5 +1,14 @@
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 
+export type OverstyringAksjonspunkter = AksjonspunktCode.OVERSTYR_SOKNADSFRISTVILKAR
+  | AksjonspunktCode.OVERSTYR_ADOPSJONSVILKAR
+  | AksjonspunktCode.OVERSTYR_FODSELSVILKAR
+  | AksjonspunktCode.OVERSTYR_MEDLEMSKAPSVILKAR
+  | AksjonspunktCode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR
+  | AksjonspunktCode.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP
+  | AksjonspunktCode.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR
+  | AksjonspunktCode.OVERSTYRING_AV_OPPTJENINGSVILKARET;
+
 enum AksjonspunktCode {
   TERMINBEKREFTELSE = '5001',
   ADOPSJONSDOKUMENTAJON = '5004',

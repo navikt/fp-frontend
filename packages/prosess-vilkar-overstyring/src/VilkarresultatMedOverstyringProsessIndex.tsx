@@ -3,6 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { Medlemskap, KodeverkMedNavn, StandardProsessPanelProps } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import { OverstyringAksjonspunkter } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import VilkarresultatMedOverstyringForm from './components/VilkarresultatMedOverstyringForm';
 import messages from '../i18n/nb_NO.json';
@@ -19,7 +20,7 @@ interface OwnProps {
   avslagsarsaker: KodeverkMedNavn[];
   erOverstyrt: boolean;
   panelTittelKode: string;
-  overstyringApKode: string;
+  overstyringApKode: OverstyringAksjonspunkter;
   lovReferanse?: string;
   erMedlemskapsPanel: boolean;
 }

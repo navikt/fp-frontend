@@ -2,7 +2,7 @@ import AksjonspunktCodeTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjons
 
 import AksjonspunktTilBekreftelse from '../../AksjonspunktTilBekreftelse';
 
-type ForeslaVedtakAp = {
+type ForeslaVedtakTilbakekrevingAp = {
   perioderMedTekst: {
     fom: string;
     tom: string;
@@ -14,4 +14,4 @@ type ForeslaVedtakAp = {
   oppsummeringstekst?: string;
 } & AksjonspunktTilBekreftelse<AksjonspunktCodeTilbakekreving.FORESLA_VEDTAK>;
 
-export default ForeslaVedtakAp;
+export default ForeslaVedtakTilbakekrevingAp;

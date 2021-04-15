@@ -18,6 +18,7 @@ import {
 import { InputField, behandlingForm } from '@fpsak-frontend/form';
 import aksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { OverstyringPanel } from '@fpsak-frontend/prosess-felles';
+import { OverstyringBeregningAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import styles from './beregningsresultatEngangsstonadForm.less';
 
@@ -35,7 +36,7 @@ interface PureOwnProps {
   toggleOverstyring: (fn: (oldArray: []) => void) => void;
   behandlingResultatstruktur?: BeregningsresultatEs;
   aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (data: any) => void;
+  submitCallback: (data: OverstyringBeregningAp) => Promise<void>;
 }
 
 interface MappedOwnProps {
@@ -180,14 +181,14 @@ const buildInitialValues = createSelector([
   };
 });
 
-const transformValues = (values: FormValues): any => ({
+const transformValues = (values: FormValues): OverstyringBeregningAp => ({
   kode: aksjonspunktCode.OVERSTYR_BEREGNING,
   beregnetTilkjentYtelse: values.beregnetTilkjentYtelse,
   begrunnelse: values.begrunnelse,
 });
 
 const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
-  (submitCallback) => (values: FormValues) => submitCallback([transformValues(values)]));
+  (submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const formName = 'BeregningsresultatEngangsstonadForm';
 

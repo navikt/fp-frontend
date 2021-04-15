@@ -25,6 +25,8 @@ import {
   ProsessStegBegrunnelseTextField, ProsessStegSubmitButton,
 } from '@fpsak-frontend/prosess-felles';
 import { Aksjonspunkt, UttakPeriodeGrense } from '@fpsak-frontend/types';
+import { VurderSoknadsfristAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import styles from './vurderSoknadsfristForeldrepengerForm.less';
 
@@ -42,7 +44,7 @@ interface PureOwnProps {
   uttakPeriodeGrense?: UttakPeriodeGrense;
   mottattDato: string;
   aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (data: any) => any;
+  submitCallback: (data: VurderSoknadsfristAp) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
   isApOpen: boolean;
@@ -180,16 +182,16 @@ export const buildInitialValues = createSelector(
   },
 );
 
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): any => ({
+const transformValues = (values: FormValues): VurderSoknadsfristAp => ({
   harGyldigGrunn: values.gyldigSenFremsetting,
   ansesMottattDato: values.ansesMottatt,
-  kode: aksjonspunkter[0].definisjon.kode,
+  kode: AksjonspunktCode.VURDER_SOKNADSFRIST_FORELDREPENGER,
   ...ProsessStegBegrunnelseTextField.transformValues(values),
 });
 
 const lagSubmitFn = createSelector([
-  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback([transformValues(values, aksjonspunkter)]));
+  (ownProps: PureOwnProps) => ownProps.submitCallback],
+(submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const formName = 'VurderSoknadsfristForeldrepengerForm';
 
