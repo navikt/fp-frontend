@@ -13641,10 +13641,10 @@ nav-frontend-paneler@2.0.32:
   resolved "https://registry.yarnpkg.com/nav-frontend-paneler/-/nav-frontend-paneler-2.0.32.tgz#b6c24db76819acb9708648a42ed08e22c937d21b"
   integrity sha512-VQcBD2ZtecqS/n+DFLlJoWqY4rbP5zBUrKNQixmp3eDTaHSF5OBawydIV/8U07bwq5+0w6T0f5AZjYaqhDULRQ==
 
-nav-frontend-skjema-style@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/nav-frontend-skjema-style/-/nav-frontend-skjema-style-2.1.0.tgz#f6e4f36714cefbd1524109b6881f95431d8805c2"
-  integrity sha512-RZ5RLC+5SDW6O2sqbra5bcXkhwMWNhQex0+wpzwOugOVzoffKA0wPzoA7wEQT6zSD8pomtPkRMAHE9Jz0MswZQ==
+nav-frontend-skjema-style@2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/nav-frontend-skjema-style/-/nav-frontend-skjema-style-2.2.1.tgz#5537e6ec1e89a670065d33fc15b93291d0cd7458"
+  integrity sha512-V8M9IeSWHVpQjKnbDJewdmAcPluNcpJX1zgAJ9e66cwGhRe3bEygsYIHhn9W8Bjl/oAvByxPuklT+TEn2UFwEw==
 
 nav-frontend-skjema@3.1.0:
   version "3.1.0"
