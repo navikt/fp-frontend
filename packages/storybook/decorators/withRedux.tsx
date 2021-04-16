@@ -1,15 +1,11 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 
-import configureStore from '@fpsak-frontend/sak-app/src/configureStore';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
-const withReduxProvider = (Story) => {
-  const store = configureStore();
-  return (
-    <Provider store={store}>
-      <Story />
-    </Provider>
-  );
-};
+const withReduxProvider = (Story) => (
+  <ReduxWrapper formData={{}} setFormData={() => undefined}>
+    <Story />
+  </ReduxWrapper>
+);
 
 export default withReduxProvider;

@@ -138,7 +138,8 @@ export const VedtakKlageForm: FunctionComponent<PureOwnProps & MappedOwnProps & 
   );
 };
 
-const transformValues = (values: FormValues): any => values.aksjonspunktKoder.map((apCode) => ({
+const transformValues = (values: FormValues): ForeslaVedtakAp
+  | ForeslaVedtakManueltAp | BekreftVedtakUtenTotrinnskontrollAp => values.aksjonspunktKoder.map((apCode) => ({
   begrunnelse: values.fritekstTilBrev,
   kode: validerApKodeOgHentApEnum(apCode, AksjonspunktCode.FORESLA_VEDTAK,
     AksjonspunktCode.FORESLA_VEDTAK_MANUELT,

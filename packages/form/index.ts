@@ -8,6 +8,7 @@ export { default as RadioOption } from './src/RadioOption';
 export { default as SelectField } from './src/SelectField';
 export { default as TextAreaField } from './src/TextAreaField';
 export { default as PeriodpickerField } from './src/PeriodpickerField';
+export { default as ReduxWrapper } from './src/ReduxWrapper';
 
 export {
   behandlingForm, behandlingFormValueSelector, hasBehandlingFormErrorsOfType, isBehandlingFormDirty, getBehandlingFormName,

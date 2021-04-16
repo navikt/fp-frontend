@@ -4,6 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { AnkeVurdering, StandardProsessPanelProps } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import BehandleAnkeForm, { BehandlingInfo } from './components/BehandleAnkeForm';
 import { AnkeData } from './components/TempsaveAnkeButton';
@@ -30,22 +31,26 @@ const AnkeProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> 
   saveAnke,
   previewCallback,
   alleKodeverk,
+  formData,
+  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <BehandleAnkeForm
-      behandlingId={behandling.id}
-      behandlingVersjon={behandling.versjon}
-      sprakkode={behandling.sprakkode}
-      ankeVurderingResultat={ankeVurdering ? ankeVurdering.ankeVurderingResultat : undefined}
-      behandlinger={behandlinger}
-      aksjonspunkter={aksjonspunkter}
-      submitCallback={submitCallback}
-      readOnly={isReadOnly}
-      readOnlySubmitButton={readOnlySubmitButton}
-      saveAnke={saveAnke}
-      previewCallback={previewCallback}
-      ankeOmgorArsaker={alleKodeverk[kodeverkTyper.ANKE_OMGJOER_AARSAK]}
-    />
+    <ReduxWrapper formData={formData} setFormData={setFormData}>
+      <BehandleAnkeForm
+        behandlingId={behandling.id}
+        behandlingVersjon={behandling.versjon}
+        sprakkode={behandling.sprakkode}
+        ankeVurderingResultat={ankeVurdering ? ankeVurdering.ankeVurderingResultat : undefined}
+        behandlinger={behandlinger}
+        aksjonspunkter={aksjonspunkter}
+        submitCallback={submitCallback}
+        readOnly={isReadOnly}
+        readOnlySubmitButton={readOnlySubmitButton}
+        saveAnke={saveAnke}
+        previewCallback={previewCallback}
+        ankeOmgorArsaker={alleKodeverk[kodeverkTyper.ANKE_OMGJOER_AARSAK]}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

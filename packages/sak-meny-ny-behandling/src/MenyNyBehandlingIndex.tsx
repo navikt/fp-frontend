@@ -4,6 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import NyBehandlingModal, { BehandlingOppretting, FormValues } from './components/NyBehandlingModal';
 
@@ -77,24 +78,26 @@ const MenyNyBehandlingIndex: FunctionComponent<OwnProps> = ({
   }, [behandlingId, behandlingVersjon]);
   return (
     <RawIntlProvider value={intl}>
-      <NyBehandlingModal
-        ytelseType={ytelseType}
-        saksnummer={saksnummer}
-        cancelEvent={lukkModal}
-        submitCallback={submit}
-        behandlingOppretting={behandlingOppretting}
-        behandlingstyper={behandlingstyper}
-        tilbakekrevingRevurderingArsaker={tilbakekrevingRevurderingArsaker}
-        revurderingArsaker={revurderingArsaker}
-        kanTilbakekrevingOpprettes={kanTilbakekrevingOpprettes}
-        behandlingType={behandlingType}
-        behandlingId={behandlingId}
-        behandlingUuid={behandlingUuid}
-        uuidForSistLukkede={uuidForSistLukkede}
-        erTilbakekrevingAktivert={erTilbakekrevingAktivert}
-        sjekkOmTilbakekrevingKanOpprettes={sjekkOmTilbakekrevingKanOpprettes}
-        sjekkOmTilbakekrevingRevurderingKanOpprettes={sjekkOmTilbakekrevingRevurderingKanOpprettes}
-      />
+      <ReduxWrapper>
+        <NyBehandlingModal
+          ytelseType={ytelseType}
+          saksnummer={saksnummer}
+          cancelEvent={lukkModal}
+          submitCallback={submit}
+          behandlingOppretting={behandlingOppretting}
+          behandlingstyper={behandlingstyper}
+          tilbakekrevingRevurderingArsaker={tilbakekrevingRevurderingArsaker}
+          revurderingArsaker={revurderingArsaker}
+          kanTilbakekrevingOpprettes={kanTilbakekrevingOpprettes}
+          behandlingType={behandlingType}
+          behandlingId={behandlingId}
+          behandlingUuid={behandlingUuid}
+          uuidForSistLukkede={uuidForSistLukkede}
+          erTilbakekrevingAktivert={erTilbakekrevingAktivert}
+          sjekkOmTilbakekrevingKanOpprettes={sjekkOmTilbakekrevingKanOpprettes}
+          sjekkOmTilbakekrevingRevurderingKanOpprettes={sjekkOmTilbakekrevingRevurderingKanOpprettes}
+        />
+      </ReduxWrapper>
     </RawIntlProvider>
   );
 };

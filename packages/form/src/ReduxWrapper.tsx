@@ -1,3 +1,5 @@
+import React, { FunctionComponent, useEffect, useMemo } from 'react';
+import { Provider } from 'react-redux';
 import {
   applyMiddleware, combineReducers, compose, createStore,
 } from 'redux';
@@ -7,7 +9,7 @@ import { reducer as formReducer } from 'redux-form';
 const isDevelopment = process.env.NODE_ENV === 'development';
 const logger = isDevelopment ? require('redux-logger') : null;
 
-const configureStore = () => {
+const configureStore = (formData: any) => {
   const middleware = [thunkMiddleware];
   let enhancer;
   if (isDevelopment) {
@@ -24,9 +26,35 @@ const configureStore = () => {
     form: formReducer,
   });
 
-  const initialState = {};
+  const initialState = {
+    form: formData,
+  };
 
   return createStore(allReducers, initialState, enhancer);
 };
 
-export default configureStore;
+interface OwnProps {
+  children: any;
+  formData: any;
+  setFormData: (data: any) => void;
+}
+
+const ReduxWrapper: FunctionComponent<OwnProps> = ({
+  children,
+  formData,
+  setFormData,
+}) => {
+  const store = useMemo(() => configureStore(formData), []);
+
+  useEffect(() => () => {
+    setFormData(store.getState().form);
+  }, []);
+
+  return (
+    <Provider store={store}>
+      {children}
+    </Provider>
+  );
+};
+
+export default ReduxWrapper;
