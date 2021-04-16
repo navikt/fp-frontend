@@ -17,6 +17,7 @@ import {
 import { BekreftVedtakUtenTotrinnskontrollAp, ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
 import VedtakKlageSubmitPanel from './VedtakKlageSubmitPanel';
 import VedtakKlageKaSubmitPanel from './VedtakKlageKaSubmitPanel';
@@ -233,7 +234,9 @@ export const getFritekstTilBrev = createSelector(
 );
 
 export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.aksjonspunkter], (aksjonspunkter): FormValues => {
-  const behandlingAksjonspunktCodes = aksjonspunkter.map((ap) => ap.definisjon.kode);
+  const behandlingAksjonspunktCodes = aksjonspunkter
+    .filter((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET)
+    .map((ap) => ap.definisjon.kode);
   return {
     aksjonspunktKoder: behandlingAksjonspunktCodes,
   };
