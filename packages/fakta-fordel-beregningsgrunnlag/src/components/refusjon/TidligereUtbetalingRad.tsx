@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { TableColumn, TableRow } from '@fpsak-frontend/shared-components';
@@ -9,7 +9,7 @@ import { ArbeidsgiverOpplysningerPerId, RefusjonTilVurderingAndel, TidligereUtbe
 import styles from './tidligereUtbetalinger.less';
 import { createVisningsnavnForAktivitetRefusjon } from '../util/visningsnavnHelper';
 
-const utbetalingTil = (utbetalinger: TidligereUtbetalinger[], andelsnavn: string): React.ReactNode[] => utbetalinger.map((utbetaling) => (
+const utbetalingTil = (utbetalinger: TidligereUtbetalinger[], andelsnavn: string): ReactElement[] => utbetalinger.map((utbetaling) => (
   <Row className={styles.correctPadding} key={`${andelsnavn}_(${utbetaling.fom}_(${utbetaling.erTildeltRefusjon})`}>
     <Column>
       {utbetaling && utbetaling.erTildeltRefusjon
@@ -19,7 +19,7 @@ const utbetalingTil = (utbetalinger: TidligereUtbetalinger[], andelsnavn: string
   </Row>
 ));
 
-const lagPeriode = (utbetaling: TidligereUtbetalinger): React.ReactNode | undefined => {
+const lagPeriode = (utbetaling: TidligereUtbetalinger): ReactElement | undefined => {
   if (!utbetaling) {
     return undefined;
   }
@@ -32,7 +32,7 @@ const lagPeriode = (utbetaling: TidligereUtbetalinger): React.ReactNode | undefi
   );
 };
 
-const perioder = (utbetalinger: TidligereUtbetalinger[]): React.ReactNode[] => utbetalinger.map((utbetaling) => (
+const perioder = (utbetalinger: TidligereUtbetalinger[]): ReactElement[] => utbetalinger.map((utbetaling) => (
   <Row className={styles.correctPadding} key={`${utbetaling.fom}_(${utbetaling.erTildeltRefusjon})`}>
     <Column>
       {lagPeriode(utbetaling)}
