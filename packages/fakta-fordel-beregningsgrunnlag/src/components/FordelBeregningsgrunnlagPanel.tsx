@@ -15,11 +15,12 @@ const {
   VURDER_REFUSJON_BERGRUNN,
 } = aksjonspunktCodes;
 
-const harFordelInfo = (bg) => (bg && bg.faktaOmFordeling ? bg.faktaOmFordeling.fordelBeregningsgrunnlag : false);
+const harFordelInfo = (bg: Beregningsgrunnlag): boolean => (bg && bg.faktaOmFordeling ? !!bg.faktaOmFordeling.fordelBeregningsgrunnlag : false);
 
-const harRefusjonInfo = (bg) => bg && bg.refusjonTilVurdering;
+const harRefusjonInfo = (bg: Beregningsgrunnlag): boolean => !!(bg && bg.refusjonTilVurdering);
 
-const getAksjonspunkt = (aksjonspunkter, def) => (aksjonspunkter && def ? aksjonspunkter.find((ap) => ap.definisjon.kode === def) : undefined);
+const getAksjonspunkt = (aksjonspunkter: Aksjonspunkt[],
+  def: string): Aksjonspunkt | undefined => (aksjonspunkter && def ? aksjonspunkter.find((ap) => ap.definisjon.kode === def) : undefined);
 
 interface OwnProps {
   readOnly: boolean;

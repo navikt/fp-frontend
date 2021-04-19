@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import moment from 'moment';
 import { FieldArray } from 'redux-form';
 import { FormattedMessage, IntlShape } from 'react-intl';
@@ -19,16 +19,19 @@ import {
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import RenderFordelBGFieldArray, { RenderFordelBGFieldArrayImpl } from './RenderFordelBGFieldArray';
 import {
-  settAndelIArbeid, setGenerellAndelsinfo, setArbeidsforholdInitialValues, settFastsattBelop, starterPaaEllerEtterStp, finnFastsattPrAar,
+  settAndelIArbeid, setGenerellAndelsinfo, setArbeidsforholdInitialValues, settFastsattBelop, finnFastsattPrAar,
 } from '../BgFordelingUtils';
 
 import styles from './fordelBeregningsgrunnlagPeriodePanel.less';
+import {
+  FordelBeregningsgrunnlagAndelValues, PeriodeTsType,
+} from '../../types/FordelingTsType';
 
 const classNames = classnames.bind(styles);
 
-const formatDate = (date) => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
+const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
-const renderDateHeading = (fom, tom) => {
+const renderDateHeading = (fom: string, tom: string): ReactElement => {
   if (!tom) {
     return (
       <Element>
@@ -66,14 +69,11 @@ type OwnProps = {
 
 interface StaticFunctions {
   validate: (intl: IntlShape,
-             values: any,
+             values: FordelBeregningsgrunnlagAndelValues[],
              sumIPeriode: number,
              getKodeverknavn: (kodeverk: Kodeverk) => string,
              grunnbeløp: number,
-             periodeDato: {
-              fom: string;
-              tom: string;
-             },
+             periodeDato: PeriodeTsType,
              skalValidereRefusjon: boolean,
              arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => any;
 
@@ -82,7 +82,7 @@ interface StaticFunctions {
                        skjaeringstidspunktBeregning: string,
                        harKunYtelse: boolean,
                        getKodeverknavn: (kodeverk: Kodeverk) => string,
-                       arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => any;
+                       arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => FordelBeregningsgrunnlagAndelValues[];
 }
 
 /**
@@ -131,12 +131,16 @@ FordelBeregningsgrunnlagPeriodePanel.defaultProps = {
 };
 
 FordelBeregningsgrunnlagPeriodePanel.validate = (intl, values, sumIPeriode,
-  getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon, arbeidsgiverOpplysningerPerId) => RenderFordelBGFieldArrayImpl
-  .validate(intl, values, sumIPeriode, getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon, arbeidsgiverOpplysningerPerId);
+  getKodeverknavn, grunnbeløp, periode, skalValidereRefusjon, arbeidsgiverOpplysningerPerId) => RenderFordelBGFieldArrayImpl
+  .validate(intl, values, sumIPeriode, getKodeverknavn, grunnbeløp, periode, skalValidereRefusjon, arbeidsgiverOpplysningerPerId);
 
 const finnRiktigAndel = (andel: FordelBeregningsgrunnlagAndel,
   bgPeriode: BeregningsgrunnlagPeriodeProp): BeregningsgrunnlagAndel => bgPeriode.beregningsgrunnlagPrStatusOgAndel
   .find((a) => a.andelsnr === andel.andelsnr);
+
+const starterPaaEllerEtterStp = (bgAndel: BeregningsgrunnlagAndel,
+  skjaeringstidspunktBeregning: string): boolean => (bgAndel && bgAndel.arbeidsforhold
+  && bgAndel.arbeidsforhold.startdato && !moment(bgAndel.arbeidsforhold.startdato).isBefore(moment(skjaeringstidspunktBeregning)));
 
 const finnBeregningsgrunnlagPrAar = (bgAndel: BeregningsgrunnlagAndel): string | undefined => {
   if (!bgAndel) {
@@ -153,14 +157,14 @@ const finnBeregningsgrunnlagPrAar = (bgAndel: BeregningsgrunnlagAndel): string |
   return null;
 };
 
-FordelBeregningsgrunnlagPeriodePanel.buildInitialValues = (periode,
-  bgPeriode,
-  skjaeringstidspunktBeregning,
-  harKunYtelse,
-  getKodeverknavn,
-  arbeidsgiverOpplysningerPerId) => {
+FordelBeregningsgrunnlagPeriodePanel.buildInitialValues = (periode: FordelBeregningsgrunnlagPeriode,
+  bgPeriode: BeregningsgrunnlagPeriodeProp,
+  skjaeringstidspunktBeregning: string,
+  harKunYtelse: boolean,
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): FordelBeregningsgrunnlagAndelValues[] => {
   if (!periode || !periode.fordelBeregningsgrunnlagAndeler) {
-    return {};
+    return [];
   }
   return (
     periode.fordelBeregningsgrunnlagAndeler

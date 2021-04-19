@@ -9,6 +9,7 @@ import {
 import { ArbeidsgiverOpplysningerPerId, Kodeverk } from '@fpsak-frontend/types';
 import { GRADERING_RANGE_DENOMINATOR, mapToBelop } from './BgFordelingUtils';
 import { createVisningsnavnForAktivitetFordeling } from './util/visningsnavnHelper';
+import { FordelBeregningsgrunnlagAndelValues, FordelingFieldError, PeriodeTsType } from '../types/FordelingTsType';
 
 const convertToNumber = (n) => (n == null || undefined ? null : Number(removeSpacesFromNumber(n)));
 
@@ -153,8 +154,8 @@ export const validateRefusjonsbelop = (refusjonskrav, skalKunneEndreRefusjon): s
   return refusjonskravError;
 };
 
-const validateFordelingForGradertAndel = (intl: IntlShape, andel, periodeDato): string | null => {
-  const arbeidsforholdIkkeOpphørt = !andel.arbeidsperiodeTom || dateIsAfter(andel.arbeidsperiodeTom, periodeDato.fom);
+const validateFordelingForGradertAndel = (intl: IntlShape, andel: FordelBeregningsgrunnlagAndelValues, periode: PeriodeTsType): string | null => {
+  const arbeidsforholdIkkeOpphørt = !andel.arbeidsperiodeTom || dateIsAfter(andel.arbeidsperiodeTom, periode.fom);
   if (!andel.andelIArbeid || !arbeidsforholdIkkeOpphørt) {
     return null;
   }
@@ -165,17 +166,17 @@ const validateFordelingForGradertAndel = (intl: IntlShape, andel, periodeDato): 
     }
   }
   const arbeidsprosenter = andel.andelIArbeid.split(GRADERING_RANGE_DENOMINATOR);
-  const arbeidsprosenterOverNull = arbeidsprosenter.filter((val) => val > 0);
+  const arbeidsprosenterOverNull = arbeidsprosenter.filter((val) => Number(val) > 0);
   if (arbeidsprosenterOverNull.length > 0 && Number(andel.fastsattBelop) === 0) {
     return kanIkkjeHaNullBeregningsgrunnlagError(intl);
   }
   return null;
 };
 
-export const validateFastsattBelop = (intl: IntlShape, andelFieldValues, periodeDato): string | null => {
+export const validateFastsattBelop = (intl: IntlShape, andelFieldValues: FordelBeregningsgrunnlagAndelValues, periode: PeriodeTsType): string | null => {
   let fastsattBelopError = required(andelFieldValues.fastsattBelop);
   if (!fastsattBelopError) {
-    fastsattBelopError = validateFordelingForGradertAndel(intl, andelFieldValues, periodeDato);
+    fastsattBelopError = validateFordelingForGradertAndel(intl, andelFieldValues, periode);
   }
   return fastsattBelopError;
 };
@@ -183,7 +184,9 @@ export const validateFastsattBelop = (intl: IntlShape, andelFieldValues, periode
 export const hasFieldErrors = (fieldErrors) => (fieldErrors.refusjonskrav || fieldErrors.andel
   || fieldErrors.fastsattBelop || fieldErrors.inntektskategori);
 
-export const validateAndelFields = (intl: IntlShape, andelFieldValues, periodeDato) => {
+export const validateAndelFields = (intl: IntlShape,
+  andelFieldValues: FordelBeregningsgrunnlagAndelValues,
+  periode: PeriodeTsType): null | FordelingFieldError => {
   const {
     refusjonskrav, skalKunneEndreRefusjon,
     andel, inntektskategori,
@@ -195,13 +198,13 @@ export const validateAndelFields = (intl: IntlShape, andelFieldValues, periodeDa
     inntektskategori: undefined,
   };
   fieldErrors.refusjonskrav = validateRefusjonsbelop(refusjonskrav, skalKunneEndreRefusjon);
-  fieldErrors.fastsattBelop = validateFastsattBelop(intl, andelFieldValues, periodeDato);
+  fieldErrors.fastsattBelop = validateFastsattBelop(intl, andelFieldValues, periode);
   fieldErrors.andel = required(andel);
   fieldErrors.inntektskategori = required(inntektskategori);
   return hasFieldErrors(fieldErrors) ? fieldErrors : null;
 };
 
-export const validateAndeler = (intl: IntlShape, values, periodeDato) => {
+export const validateAndeler = (intl: IntlShape, values: FordelBeregningsgrunnlagAndelValues[], periode: PeriodeTsType) => {
   if (!values) {
     return null;
   }
@@ -209,7 +212,7 @@ export const validateAndeler = (intl: IntlShape, values, periodeDato) => {
     if (!andelFieldValues.skalRedigereInntekt) {
       return null;
     }
-    return validateAndelFields(intl, andelFieldValues, periodeDato);
+    return validateAndelFields(intl, andelFieldValues, periode);
   });
   if (arrayErrors.some((errors) => errors !== null)) {
     return arrayErrors;

@@ -12,6 +12,11 @@ import {
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 
 import FordelBeregningsgrunnlagForm from './FordelBeregningsgrunnlagForm';
+import {
+  FordelBeregningsgrunnlagMedAksjonspunktValues,
+  FordelBeregningsgrunnlagPerioderTransformedValues,
+  FordelBeregningsgrunnlagValues,
+} from '../../types/FordelingTsType';
 
 type OwnProps = {
     readOnly: boolean;
@@ -28,10 +33,12 @@ interface StaticFunctions {
   buildInitialValues: (fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
                        bg: Beregningsgrunnlag,
                        getKodeverknavn: (kodeverk: Kodeverk) => string,
-                       arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => any;
-  transformValues: (values: any, fordelBGPerioder: FordelBeregningsgrunnlagPeriode[], bgPerioder: BeregningsgrunnlagPeriodeProp[]) => any;
+                       arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => FordelBeregningsgrunnlagValues;
+  transformValues: (values: FordelBeregningsgrunnlagMedAksjonspunktValues,
+                    fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
+                    bgPerioder: BeregningsgrunnlagPeriodeProp[]) => FordelBeregningsgrunnlagPerioderTransformedValues;
   validate: (intl: IntlShape,
-             values: any,
+             values: FordelBeregningsgrunnlagMedAksjonspunktValues,
              fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
              beregningsgrunnlag: Beregningsgrunnlag,
              getKodeverknavn: (kodeverk: Kodeverk) => string,
@@ -59,21 +66,23 @@ export const FastsettFordeltBeregningsgrunnlagImpl: FunctionComponent<OwnProps> 
   />
 );
 
-FastsettFordeltBeregningsgrunnlagImpl.buildInitialValues = (fordelBGPerioder,
-  bg,
-  getKodeverknavn,
-  arbeidsgiverOpplysningerPerId) => (FordelBeregningsgrunnlagForm
+FastsettFordeltBeregningsgrunnlagImpl.buildInitialValues = (fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
+  bg: Beregningsgrunnlag,
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): FordelBeregningsgrunnlagValues => (FordelBeregningsgrunnlagForm
   .buildInitialValues(fordelBGPerioder, bg, getKodeverknavn, arbeidsgiverOpplysningerPerId));
 
-FastsettFordeltBeregningsgrunnlagImpl.transformValues = (values, fordelBGPerioder, bgPerioder) => FordelBeregningsgrunnlagForm.transformValues(values,
+FastsettFordeltBeregningsgrunnlagImpl.transformValues = (values: FordelBeregningsgrunnlagMedAksjonspunktValues,
+  fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
+  bgPerioder: BeregningsgrunnlagPeriodeProp[]): FordelBeregningsgrunnlagPerioderTransformedValues => FordelBeregningsgrunnlagForm.transformValues(values,
   fordelBGPerioder, bgPerioder);
 
-FastsettFordeltBeregningsgrunnlagImpl.validate = (intl,
-  values,
-  fordelBGPerioder,
-  beregningsgrunnlag,
-  getKodeverknavn,
-  arbeidsgiverOpplysningerPerId) => (
+FastsettFordeltBeregningsgrunnlagImpl.validate = (intl: IntlShape,
+  values: FordelBeregningsgrunnlagMedAksjonspunktValues,
+  fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
+  beregningsgrunnlag: Beregningsgrunnlag,
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => (
   FordelBeregningsgrunnlagForm
     .validate(intl, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn, arbeidsgiverOpplysningerPerId));
 
