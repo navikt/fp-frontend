@@ -3,6 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { FeilutbetalingPerioderWrapper, StandardProsessPanelProps } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import ForeldelseForm from './components/ForeldelseForm';
 import { PeriodeMedBelop } from './components/splittePerioder/PeriodeController';
@@ -29,21 +30,25 @@ const ForeldelseProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelP
   isReadOnly,
   readOnlySubmitButton,
   aksjonspunkter,
+  formData,
+  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <ForeldelseForm
-      behandlingId={behandling.id}
-      behandlingVersjon={behandling.versjon}
-      perioderForeldelse={perioderForeldelse}
-      submitCallback={submitCallback}
-      readOnly={isReadOnly}
-      apCodes={aksjonspunkter.map((a) => a.definisjon.kode)}
-      readOnlySubmitButton={readOnlySubmitButton}
-      navBrukerKjonn={navBrukerKjonn}
-      alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-      alleKodeverk={alleKodeverk}
-      beregnBelop={beregnBelop}
-    />
+    <ReduxWrapper formName="ForeldelseProsessIndex" formData={formData} setFormData={setFormData}>
+      <ForeldelseForm
+        behandlingId={behandling.id}
+        behandlingVersjon={behandling.versjon}
+        perioderForeldelse={perioderForeldelse}
+        submitCallback={submitCallback}
+        readOnly={isReadOnly}
+        apCodes={aksjonspunkter.map((a) => a.definisjon.kode)}
+        readOnlySubmitButton={readOnlySubmitButton}
+        navBrukerKjonn={navBrukerKjonn}
+        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+        alleKodeverk={alleKodeverk}
+        beregnBelop={beregnBelop}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

@@ -5,6 +5,7 @@ import {
   Fagsak, SimuleringResultat, TilbakekrevingValg, StandardProsessPanelProps,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import AvregningPanel from './components/AvregningPanel';
 import messages from '../i18n/nb_NO.json';
@@ -29,23 +30,27 @@ const AvregningProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPr
   readOnlySubmitButton,
   isAksjonspunktOpen,
   previewFptilbakeCallback,
+  formData,
+  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <AvregningPanel
-      fagsak={fagsak}
-      behandlingId={behandling.id}
-      behandlingVersjon={behandling.versjon}
-      sprakkode={behandling.sprakkode}
-      aksjonspunkter={aksjonspunkter}
-      simuleringResultat={simuleringResultat}
-      tilbakekrevingvalg={tilbakekrevingvalg}
-      submitCallback={submitCallback}
-      readOnly={isReadOnly}
-      readOnlySubmitButton={readOnlySubmitButton}
-      apCodes={aksjonspunkter.map((a) => a.definisjon.kode)}
-      isApOpen={isAksjonspunktOpen}
-      previewCallback={previewFptilbakeCallback}
-    />
+    <ReduxWrapper formName="AvregningProsessIndex" formData={formData} setFormData={setFormData}>
+      <AvregningPanel
+        fagsak={fagsak}
+        behandlingId={behandling.id}
+        behandlingVersjon={behandling.versjon}
+        sprakkode={behandling.sprakkode}
+        aksjonspunkter={aksjonspunkter}
+        simuleringResultat={simuleringResultat}
+        tilbakekrevingvalg={tilbakekrevingvalg}
+        submitCallback={submitCallback}
+        readOnly={isReadOnly}
+        readOnlySubmitButton={readOnlySubmitButton}
+        apCodes={aksjonspunkter.map((a) => a.definisjon.kode)}
+        isApOpen={isAksjonspunktOpen}
+        previewCallback={previewFptilbakeCallback}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

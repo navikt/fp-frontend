@@ -5,6 +5,7 @@ import {
   StandardFaktaPanelProps, Personoversikt, Soknad, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import OmsorgInfoPanel from './components/OmsorgInfoPanel';
 import messages from '../i18n/nb_NO.json';
@@ -29,22 +30,26 @@ const OmsorgFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = 
   readOnly,
   harApneAksjonspunkter,
   submittable,
+  formData,
+  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <OmsorgInfoPanel
-      behandlingId={behandling.id}
-      behandlingVersjon={behandling.versjon}
-      aksjonspunkter={aksjonspunkter}
-      ytelsefordeling={ytelsefordeling}
-      personoversikt={personoversikt}
-      soknad={soknad}
-      alleKodeverk={alleKodeverk}
-      alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-      submitCallback={submitCallback}
-      readOnly={readOnly}
-      hasOpenAksjonspunkter={harApneAksjonspunkter}
-      submittable={submittable}
-    />
+    <ReduxWrapper formName="OmsorgFaktaIndex" formData={formData} setFormData={setFormData}>
+      <OmsorgInfoPanel
+        behandlingId={behandling.id}
+        behandlingVersjon={behandling.versjon}
+        aksjonspunkter={aksjonspunkter}
+        ytelsefordeling={ytelsefordeling}
+        personoversikt={personoversikt}
+        soknad={soknad}
+        alleKodeverk={alleKodeverk}
+        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+        submitCallback={submitCallback}
+        readOnly={readOnly}
+        hasOpenAksjonspunkter={harApneAksjonspunkter}
+        submittable={submittable}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

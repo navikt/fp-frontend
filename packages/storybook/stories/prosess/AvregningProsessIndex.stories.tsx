@@ -14,7 +14,6 @@ import {
 } from '@fpsak-frontend/types';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
-import withReduxProvider from '../../decorators/withRedux';
 
 const fagsak = {
   saksnummer: '123',
@@ -120,12 +119,13 @@ const standardProsessProps = {
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
+  setFormData: () => undefined,
 };
 
 export default {
   title: 'prosess/prosess-avregning',
   component: AvregningProsessIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visAksjonspunktVurderFeilutbetaling = () => (

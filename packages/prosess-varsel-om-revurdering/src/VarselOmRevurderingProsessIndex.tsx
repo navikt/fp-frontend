@@ -5,6 +5,7 @@ import {
   FamilieHendelse, FamilieHendelseSamling, Soknad, StandardProsessPanelProps,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import VarselOmRevurderingForm, { ForhandsvisData } from './components/VarselOmRevurderingForm';
 import messages from '../i18n/nb_NO.json';
@@ -30,24 +31,28 @@ const VarselOmRevurderingProsessIndex: FunctionComponent<OwnProps & StandardPros
   previewCallback,
   isReadOnly,
   alleKodeverk,
+  formData,
+  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <VarselOmRevurderingForm
-      behandlingId={behandling.id}
-      behandlingVersjon={behandling.versjon}
-      behandlingArsaker={behandling.behandlingÅrsaker}
-      sprakkode={behandling.sprakkode}
-      behandlingType={behandling.type}
-      familiehendelse={familiehendelse}
-      soknad={soknad}
-      soknadOriginalBehandling={soknadOriginalBehandling}
-      familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
-      aksjonspunkter={aksjonspunkter}
-      submitCallback={submitCallback}
-      previewCallback={previewCallback}
-      readOnly={isReadOnly}
-      alleKodeverk={alleKodeverk}
-    />
+    <ReduxWrapper formName="VarselOmRevurderingProsessIndex" formData={formData} setFormData={setFormData}>
+      <VarselOmRevurderingForm
+        behandlingId={behandling.id}
+        behandlingVersjon={behandling.versjon}
+        behandlingArsaker={behandling.behandlingÅrsaker}
+        sprakkode={behandling.sprakkode}
+        behandlingType={behandling.type}
+        familiehendelse={familiehendelse}
+        soknad={soknad}
+        soknadOriginalBehandling={soknadOriginalBehandling}
+        familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
+        aksjonspunkter={aksjonspunkter}
+        submitCallback={submitCallback}
+        previewCallback={previewCallback}
+        readOnly={isReadOnly}
+        alleKodeverk={alleKodeverk}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

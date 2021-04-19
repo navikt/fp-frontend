@@ -13,6 +13,8 @@ type StandardFaktaPanelProps = Readonly<{
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  formData?: any,
+  setFormData: (data: any) => void,
 }>
 
 export default StandardFaktaPanelProps;

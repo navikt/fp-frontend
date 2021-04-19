@@ -3,6 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import HenleggBehandlingModal from './components/HenleggBehandlingModal';
 import HenlagtBehandlingModal from './components/HenlagtBehandlingModal';
@@ -61,6 +62,7 @@ const MenyHenleggIndex: FunctionComponent<OwnProps> = ({
   return (
     <RawIntlProvider value={intl}>
       {!erHenlagt && (
+      <ReduxWrapper formName="MenyHenleggIndex">
         <HenleggBehandlingModal
           // @ts-ignore Fiks denne
           onSubmit={submit}
@@ -72,6 +74,7 @@ const MenyHenleggIndex: FunctionComponent<OwnProps> = ({
           behandlingUuid={behandlingUuid}
           behandlingResultatTyper={behandlingResultatTyper}
         />
+      </ReduxWrapper>
       )}
       {erHenlagt && (
         <HenlagtBehandlingModal

@@ -14,8 +14,6 @@ import alleKodeverkMock from '../../mocks/alleKodeverk.json';
 
 import { beregningsgrunnlag as bgMedArbeidOgDagpenger, aksjonspunkt as aksjonspunktArbeidOgDagpenger } from './scenario/ArbeidMedDagpengerIOpptjeningsperioden';
 
-import withReduxProvider from '../../../decorators/withRedux';
-
 const behandling = {
   id: 1,
   versjon: 1,
@@ -190,7 +188,7 @@ const merknaderFraBeslutter = {
 export default {
   title: 'fakta/fakta-beregning',
   component: BeregningFaktaIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 const agOpplysninger = {
@@ -236,6 +234,7 @@ export const ArbeidOgDagpenger = () => (
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
     submittable={boolean('submittable', true)}
     arbeidsgiverOpplysningerPerId={agOpplysninger}
+    setFormData={() => undefined}
   />
 );
 
@@ -283,6 +282,7 @@ export const AvklarAktiviteterFullAAPOgAndreAktiviteter = () => {
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      setFormData={() => undefined}
     />
   );
 };
@@ -381,6 +381,7 @@ export const AvklartAktiviteterMedAksjonspunktIFaktaAvklaring = () => {
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      setFormData={() => undefined}
     />
   );
 };
@@ -446,6 +447,7 @@ export const FrilansOgArbeidsforholdMedLønnendringOgNyoppstartet = () => {
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      setFormData={() => undefined}
     />
   );
 };
@@ -513,6 +515,7 @@ export const DagpengerOgArbeidstakerMedVurderingAvBesteberegning = () => {
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      setFormData={() => undefined}
     />
   );
 };
@@ -573,6 +576,7 @@ export const KunArbeidstakerMedVurderingAvBesteberegning = () => {
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      setFormData={() => undefined}
     />
   );
 };
@@ -636,6 +640,7 @@ export const KunArbeidstakerMedVurderingSentRefusjonskrav = () => {
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      setFormData={() => undefined}
     />
   );
 };
@@ -701,6 +706,7 @@ export const FrilansOgArbeidsforholdISammeOrganisasjon = () => {
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      setFormData={() => undefined}
     />
   );
 };
@@ -749,6 +755,7 @@ export const VurderingAvMilitær = () => {
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      setFormData={() => undefined}
     />
   );
 };
@@ -815,6 +822,7 @@ export const FrilansOgTidsbegrensetArbeidsforholdISammeOrganisasjon = () => {
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      setFormData={() => undefined}
     />
   );
 };
@@ -865,6 +873,7 @@ export const KunTidsbegrensetArbeidsforhold = () => {
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      setFormData={() => undefined}
     />
   );
 };
@@ -914,6 +923,7 @@ export const VurderingAvEtterlønnSluttpakke = () => {
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      setFormData={() => undefined}
     />
   );
 };
@@ -967,6 +977,7 @@ export const FastsettingAvBeregningsgrunnlagForKunYtelse = () => {
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1015,6 +1026,7 @@ export const SelvstendigNæringNyIArbeidslivet = () => {
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1219,6 +1231,7 @@ export const KombinasjonstestForFaktapanel = () => {
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1300,6 +1313,7 @@ export const OverstyringAvInntekt = () => {
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1353,6 +1367,7 @@ export const VurderKunYtelseBesteberegning = () => {
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      setFormData={() => undefined}
     />
   );
 };

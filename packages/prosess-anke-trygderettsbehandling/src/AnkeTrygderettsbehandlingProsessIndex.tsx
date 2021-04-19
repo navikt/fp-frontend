@@ -30,7 +30,7 @@ const AnkeTrygderettsbehandlingProsessIndex: FunctionComponent<OwnProps & Standa
   setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <ReduxWrapper formData={formData} setFormData={setFormData}>
+    <ReduxWrapper formName="AnkeTrygderettsbehandlingProsessIndex" formData={formData} setFormData={setFormData}>
       <TrygderettsbehandlingForm
         behandlingId={behandling.id}
         behandlingVersjon={behandling.versjon}

@@ -8,7 +8,6 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import BeregningsresultatProsessIndex from '@fpsak-frontend/prosess-beregningsresultat';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
-import withReduxProvider from '../../decorators/withRedux';
 
 const behandling = {
   id: 1,
@@ -39,12 +38,13 @@ const standardProsessProps = {
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
+  setFormData: () => undefined,
 };
 
 export default {
   title: 'prosess/prosess-beregningsresultat',
   component: BeregningsresultatProsessIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const saksbehandlerKanIkkeOverstyre = () => (

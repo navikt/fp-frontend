@@ -11,6 +11,7 @@ import ForeldrepengerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-fp';
 import SvangerskapspengerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-svp';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import { Fagsak, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import SoknadTypePickerForm from './SoknadTypePickerForm';
 
@@ -49,12 +50,14 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
         )}
         <VerticalSpacer sixteenPx />
         <VerticalSpacer sixteenPx />
-        <SoknadTypePickerForm
-          setSoknadData={setSoknadData}
-          soknadData={soknadData}
-          fagsakYtelseType={fagsak.fagsakYtelseType}
-          alleKodeverk={kodeverk}
-        />
+        <ReduxWrapper formName="RegistrerPapirsoknadPanel">
+          <SoknadTypePickerForm
+            setSoknadData={setSoknadData}
+            soknadData={soknadData}
+            fagsakYtelseType={fagsak.fagsakYtelseType}
+            alleKodeverk={kodeverk}
+          />
+        </ReduxWrapper>
         {soknadData && soknadData.getFagsakYtelseType() === fagsakYtelseType.ENGANGSSTONAD && (
           <EngangsstonadPapirsoknadIndex
             onSubmitUfullstendigsoknad={lagreUfullstendig}

@@ -5,6 +5,7 @@ import {
   FeilutbetalingPerioderWrapper, StandardProsessPanelProps, VilkarsVurdertePerioderWrapper, DetaljerteFeilutbetalingsperioder,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import TilbakekrevingForm from './components/TilbakekrevingForm';
 
@@ -34,24 +35,28 @@ const TilbakekrevingProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
   alleKodeverk,
   beregnBelop,
   aksjonspunkter,
+  formData,
+  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <TilbakekrevingForm
-      behandlingId={behandling.id}
-      behandlingVersjon={behandling.versjon}
-      perioderForeldelse={perioderForeldelse}
-      perioder={vilkarvurderingsperioder.perioder}
-      rettsgebyr={vilkarvurderingsperioder.rettsgebyr}
-      vilkarvurdering={vilkarvurdering}
-      submitCallback={submitCallback}
-      readOnly={isReadOnly}
-      apCodes={aksjonspunkter.map((a) => a.definisjon.kode)}
-      readOnlySubmitButton={readOnlySubmitButton}
-      navBrukerKjonn={navBrukerKjonn}
-      alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-      alleKodeverk={alleKodeverk}
-      beregnBelop={beregnBelop}
-    />
+    <ReduxWrapper formName="TilbakekrevingProsessIndex" formData={formData} setFormData={setFormData}>
+      <TilbakekrevingForm
+        behandlingId={behandling.id}
+        behandlingVersjon={behandling.versjon}
+        perioderForeldelse={perioderForeldelse}
+        perioder={vilkarvurderingsperioder.perioder}
+        rettsgebyr={vilkarvurderingsperioder.rettsgebyr}
+        vilkarvurdering={vilkarvurdering}
+        submitCallback={submitCallback}
+        readOnly={isReadOnly}
+        apCodes={aksjonspunkter.map((a) => a.definisjon.kode)}
+        readOnlySubmitButton={readOnlySubmitButton}
+        navBrukerKjonn={navBrukerKjonn}
+        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+        alleKodeverk={alleKodeverk}
+        beregnBelop={beregnBelop}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

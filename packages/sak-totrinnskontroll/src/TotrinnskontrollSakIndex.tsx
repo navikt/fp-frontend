@@ -128,7 +128,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   return (
     <RawIntlProvider value={intl}>
       {erStatusFatterVedtak && (
-        <ReduxWrapper>
+        <ReduxWrapper formName="TotrinnskontrollSakIndex">
           <TotrinnskontrollBeslutterForm
             behandling={behandling}
             behandlingId={behandling.id}

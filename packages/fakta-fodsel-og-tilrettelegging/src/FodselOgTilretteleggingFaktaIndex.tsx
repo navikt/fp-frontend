@@ -6,6 +6,7 @@ import {
 } from '@fpsak-frontend/types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import FodselOgTilretteleggingInfoPanel from './components/FodselOgTilretteleggingInfoPanel';
 
@@ -32,23 +33,27 @@ const FodselOgTilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFa
   erOverstyrer,
   arbeidsgiverOpplysningerPerId,
   alleKodeverk,
+  formData,
+  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <FodselOgTilretteleggingInfoPanel
-      behandlingId={behandling.id}
-      behandlingVersjon={behandling.versjon}
-      svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
-      iayArbeidsforhold={inntektArbeidYtelse.arbeidsforhold}
-      aksjonspunkter={aksjonspunkter}
-      submitCallback={submitCallback}
-      readOnly={readOnly}
-      hasOpenAksjonspunkter={harApneAksjonspunkter}
-      submittable={submittable}
-      erOverstyrer={erOverstyrer}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      uttakArbeidTyper={alleKodeverk[kodeverkTyper.UTTAK_ARBEID_TYPE]}
-      intl={intl}
-    />
+    <ReduxWrapper formName="FodselOgTilretteleggingFaktaIndex" formData={formData} setFormData={setFormData}>
+      <FodselOgTilretteleggingInfoPanel
+        behandlingId={behandling.id}
+        behandlingVersjon={behandling.versjon}
+        svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
+        iayArbeidsforhold={inntektArbeidYtelse.arbeidsforhold}
+        aksjonspunkter={aksjonspunkter}
+        submitCallback={submitCallback}
+        readOnly={readOnly}
+        hasOpenAksjonspunkter={harApneAksjonspunkter}
+        submittable={submittable}
+        erOverstyrer={erOverstyrer}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        uttakArbeidTyper={alleKodeverk[kodeverkTyper.UTTAK_ARBEID_TYPE]}
+        intl={intl}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

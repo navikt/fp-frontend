@@ -11,8 +11,6 @@ import {
   Aksjonspunkt, Behandling, KlageVurdering, KlageVurderingResultat,
 } from '@fpsak-frontend/types';
 
-import withReduxProvider from '../../../decorators/withRedux';
-
 const alleKodeverk = require('../../mocks/alleKodeverk.json'); // eslint-disable-line
 
 const behandling = {
@@ -47,12 +45,13 @@ const standardProsessProps = {
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
+  setFormData: () => undefined,
 };
 
 export default {
   title: 'prosess/klage/prosess-vedtak-klage',
   component: VedtakKlageProsessIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visVedtakspanelDerKlageErVurdertAvNk = () => (

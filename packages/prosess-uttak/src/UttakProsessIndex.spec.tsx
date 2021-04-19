@@ -151,6 +151,7 @@ describe('<UttakProsessIndex>', () => {
       vilkar={[]}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />);
     expect(wrapper.find(UttakPanel)).toHaveLength(1);
   });

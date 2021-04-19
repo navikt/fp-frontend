@@ -9,8 +9,6 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import InnsynProsessIndex from '@fpsak-frontend/prosess-innsyn';
 import { Aksjonspunkt, Behandling, Innsyn } from '@fpsak-frontend/types';
 
-import withReduxProvider from '../../../decorators/withRedux';
-
 import alleKodeverk from '../../mocks/alleKodeverk.json';
 
 const behandling = {
@@ -42,12 +40,13 @@ const standardProsessProps = {
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
+  setFormData: () => undefined,
 };
 
 export default {
   title: 'prosess/innsyn/prosess-innsyn',
   component: InnsynProsessIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visPanelForVurderingAvInnsyn = () => (

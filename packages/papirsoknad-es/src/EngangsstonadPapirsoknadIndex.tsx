@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import EngangsstonadForm from './components/EngangsstonadForm';
 
@@ -22,14 +23,16 @@ const EngangsstonadPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   fagsakPersonnummer,
 }) => (
-  <EngangsstonadForm
-    onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
-    onSubmit={onSubmit}
-    readOnly={readOnly}
-    soknadData={soknadData}
-    alleKodeverk={alleKodeverk}
-    fagsakPersonnummer={fagsakPersonnummer}
-  />
+  <ReduxWrapper formName="EngangsstonadPapirsoknadIndex">
+    <EngangsstonadForm
+      onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
+      onSubmit={onSubmit}
+      readOnly={readOnly}
+      soknadData={soknadData}
+      alleKodeverk={alleKodeverk}
+      fagsakPersonnummer={fagsakPersonnummer}
+    />
+  </ReduxWrapper>
 );
 
 export default EngangsstonadPapirsoknadIndex;

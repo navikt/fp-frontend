@@ -78,7 +78,7 @@ const MenyNyBehandlingIndex: FunctionComponent<OwnProps> = ({
   }, [behandlingId, behandlingVersjon]);
   return (
     <RawIntlProvider value={intl}>
-      <ReduxWrapper>
+      <ReduxWrapper formName="MenyNyBehandlingIndex">
         <NyBehandlingModal
           ytelseType={ytelseType}
           saksnummer={saksnummer}

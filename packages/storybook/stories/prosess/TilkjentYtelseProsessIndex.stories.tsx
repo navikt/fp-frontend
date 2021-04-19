@@ -17,8 +17,6 @@ import {
   Behandling, BeregningsresultatFp, Fagsak, FamilieHendelse, FamilieHendelseSamling, Personoversikt, Soknad,
 } from '@fpsak-frontend/types';
 
-import withReduxProvider from '../../decorators/withRedux';
-
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
 const fagsak = {
@@ -108,12 +106,13 @@ const standardProsessProps = {
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
+  setFormData: () => undefined,
 };
 
 export default {
   title: 'prosess/prosess-tilkjent-ytelse',
   component: TilkjentYtelseProsessIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visUtenAksjonspunkt = () => (

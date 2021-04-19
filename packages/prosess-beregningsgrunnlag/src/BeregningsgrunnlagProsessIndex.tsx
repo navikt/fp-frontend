@@ -3,6 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@fpsak-frontend/utils';
 import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, StandardProsessPanelProps } from '@fpsak-frontend/types';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import BeregningFP from './components/BeregningFP';
 import messages from '../i18n/nb_NO.json';
@@ -24,19 +25,23 @@ const BeregningsgrunnlagProsessIndex: FunctionComponent<OwnProps & StandardProse
   vilkar,
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
+  formData,
+  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <BeregningFP
-      behandling={behandling}
-      beregningsgrunnlag={beregningsgrunnlag}
-      aksjonspunkter={aksjonspunkter}
-      submitCallback={submitCallback}
-      readOnly={isReadOnly}
-      readOnlySubmitButton={readOnlySubmitButton}
-      vilkar={vilkar}
-      alleKodeverk={alleKodeverk}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />
+    <ReduxWrapper formName="BeregningsgrunnlagProsessIndex" formData={formData} setFormData={setFormData}>
+      <BeregningFP
+        behandling={behandling}
+        beregningsgrunnlag={beregningsgrunnlag}
+        aksjonspunkter={aksjonspunkter}
+        submitCallback={submitCallback}
+        readOnly={isReadOnly}
+        readOnlySubmitButton={readOnlySubmitButton}
+        vilkar={vilkar}
+        alleKodeverk={alleKodeverk}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

@@ -5,8 +5,6 @@ import { withKnobs, object } from '@storybook/addon-knobs';
 import DokumenterSakIndex from '@fpsak-frontend/sak-dokumenter';
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
 
-import withReduxProvider from '../../decorators/withRedux';
-
 const behandlingId = 1;
 
 const dokumenter = [{
@@ -38,7 +36,7 @@ const dokumenter = [{
 export default {
   title: 'sak/sak-dokumenter',
   component: DokumenterSakIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visMeldingerPanel = () => (

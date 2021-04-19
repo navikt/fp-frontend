@@ -7,8 +7,6 @@ import ugunstAarsakTyper from '@fpsak-frontend/kodeverk/src/ugunstAarsakTyper';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 
-import withReduxProvider from '../../decorators/withRedux';
-
 const recipients = ['Søker'];
 const templates = [{
   kode: dokumentMalType.INNHENT_DOK,
@@ -28,7 +26,7 @@ const sprakKode = {
 export default {
   title: 'sak/sak-meldinger',
   component: MeldingerSakIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visMeldingerPanel = () => (

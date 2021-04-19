@@ -3,6 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { Dokument, Innsyn, StandardProsessPanelProps } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import InnsynVedtakForm, { ForhandsvisData } from './components/InnsynVedtakForm';
 import messages from '../i18n/nb_NO.json';
@@ -25,22 +26,26 @@ const VedtakInnsynProsessIndex: FunctionComponent<OwnProps & StandardProsessPane
   submitCallback,
   previewCallback,
   isReadOnly,
+  formData,
+  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <InnsynVedtakForm
-      behandlingId={behandling.id}
-      behandlingVersjon={behandling.versjon}
-      sprakkode={behandling.sprakkode}
-      innsynDokumenter={innsyn.dokumenter}
-      innsynMottattDato={innsyn.innsynMottattDato}
-      innsynResultatType={innsyn.innsynResultatType}
-      alleDokumenter={alleDokumenter}
-      saksNr={saksnummer}
-      aksjonspunkter={aksjonspunkter}
-      submitCallback={submitCallback}
-      previewCallback={previewCallback}
-      readOnly={isReadOnly}
-    />
+    <ReduxWrapper formName="VedtakInnsynProsessIndex" formData={formData} setFormData={setFormData}>
+      <InnsynVedtakForm
+        behandlingId={behandling.id}
+        behandlingVersjon={behandling.versjon}
+        sprakkode={behandling.sprakkode}
+        innsynDokumenter={innsyn.dokumenter}
+        innsynMottattDato={innsyn.innsynMottattDato}
+        innsynResultatType={innsyn.innsynResultatType}
+        alleDokumenter={alleDokumenter}
+        saksNr={saksnummer}
+        aksjonspunkter={aksjonspunkter}
+        submitCallback={submitCallback}
+        previewCallback={previewCallback}
+        readOnly={isReadOnly}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

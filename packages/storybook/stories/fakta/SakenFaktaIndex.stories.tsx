@@ -10,7 +10,6 @@ import { Behandling } from '@fpsak-frontend/types';
 import SakenFaktaIndex from '@fpsak-frontend/fakta-saken';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
-import withReduxProvider from '../../decorators/withRedux';
 
 const behandling = {
   id: 1,
@@ -36,12 +35,13 @@ const standardFaktaProps = {
   submittable: boolean('submittable', true),
   alleMerknaderFraBeslutter: {},
   alleKodeverk: alleKodeverk as any,
+  setFormData: () => undefined,
 };
 
 export default {
   title: 'fakta/fakta-saken',
   component: SakenFaktaIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visEndringAvUtland = () => (

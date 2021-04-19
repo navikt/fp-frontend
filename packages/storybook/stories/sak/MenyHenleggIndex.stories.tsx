@@ -7,12 +7,10 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import MenyHenleggIndex from '@fpsak-frontend/sak-meny-henlegg';
 
-import withReduxProvider from '../../decorators/withRedux';
-
 export default {
   title: 'sak/sak-meny-henlegg',
   component: MenyHenleggIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 interface HenleggParams {

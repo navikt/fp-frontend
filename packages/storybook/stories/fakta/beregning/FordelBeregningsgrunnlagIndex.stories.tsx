@@ -9,7 +9,6 @@ import FordelBeregningsgrunnlagFaktaIndex from '@fpsak-frontend/fakta-fordel-ber
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
-import withReduxProvider from '../../../decorators/withRedux';
 
 import alleKodeverk from '../../mocks/alleKodeverk.json';
 
@@ -24,7 +23,7 @@ import {
 export default {
   title: 'fakta/fakta-fordel-beregningsgrunnlag',
   component: FordelBeregningsgrunnlagFaktaIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 const behandling = {
@@ -276,6 +275,7 @@ export const arbeidOgGradertNæringUtenBeregningsgrunnlag = () => (
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
     submittable={boolean('submittable', true)}
     arbeidsgiverOpplysningerPerId={agOpplysninger}
+    setFormData={() => undefined}
   />
 );
 
@@ -293,6 +293,7 @@ export const tilkommetArbeidMedFlyttingAvNaturalytelse = () => (
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
     submittable={boolean('submittable', true)}
     arbeidsgiverOpplysningerPerId={agOpplysninger}
+    setFormData={() => undefined}
   />
 );
 
@@ -326,6 +327,7 @@ export const aapOgRefusjon = () => {
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      setFormData={() => undefined}
     />
   );
 };
@@ -360,6 +362,7 @@ export const kanEndreRefusjonskrav = () => {
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      setFormData={() => undefined}
     />
   );
 };
@@ -413,6 +416,7 @@ export const skalSlåSammenNaturalytelseperioder = () => {
       harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
       submittable={boolean('submittable', true)}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      setFormData={() => undefined}
     />
   );
 };
@@ -431,6 +435,7 @@ export const viseVurderTilkommetRefusjonskrav = () => (
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
     submittable={boolean('submittable', true)}
     arbeidsgiverOpplysningerPerId={agOpplysninger}
+    setFormData={() => undefined}
   />
 );
 
@@ -448,5 +453,6 @@ export const skalVurdereTilkommetØktRefusjonPåTidligereInnvilgetDelvisRefusjon
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
     submittable={boolean('submittable', true)}
     arbeidsgiverOpplysningerPerId={agOpplysninger}
+    setFormData={() => undefined}
   />
 );

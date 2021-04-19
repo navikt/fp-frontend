@@ -12,6 +12,7 @@ import {
   Soknad,
   StandardProsessPanelProps,
 } from '@fpsak-frontend/types';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import TilkjentYtelsePanel from './components/TilkjentYtelsePanel';
 import messages from '../i18n/nb_NO.json';
@@ -42,24 +43,28 @@ const TilkjentYtelseProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
   readOnlySubmitButton,
   arbeidsgiverOpplysningerPerId,
   feriepengegrunnlag,
+  formData,
+  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <TilkjentYtelsePanel
-      behandlingId={behandling.id}
-      behandlingVersjon={behandling.versjon}
-      beregningresultat={beregningresultat}
-      familieHendelseSamling={familiehendelse}
-      personoversikt={personoversikt}
-      soknad={soknad}
-      fagsakYtelseTypeKode={fagsak.fagsakYtelseType.kode}
-      aksjonspunkter={aksjonspunkter}
-      alleKodeverk={alleKodeverk}
-      readOnly={isReadOnly}
-      submitCallback={submitCallback}
-      readOnlySubmitButton={readOnlySubmitButton}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      feriepengegrunnlag={feriepengegrunnlag}
-    />
+    <ReduxWrapper formName="TilkjentYtelseProsessIndex" formData={formData} setFormData={setFormData}>
+      <TilkjentYtelsePanel
+        behandlingId={behandling.id}
+        behandlingVersjon={behandling.versjon}
+        beregningresultat={beregningresultat}
+        familieHendelseSamling={familiehendelse}
+        personoversikt={personoversikt}
+        soknad={soknad}
+        fagsakYtelseTypeKode={fagsak.fagsakYtelseType.kode}
+        aksjonspunkter={aksjonspunkter}
+        alleKodeverk={alleKodeverk}
+        readOnly={isReadOnly}
+        submitCallback={submitCallback}
+        readOnlySubmitButton={readOnlySubmitButton}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        feriepengegrunnlag={feriepengegrunnlag}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

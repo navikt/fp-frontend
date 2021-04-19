@@ -32,6 +32,8 @@ const getPreviewVedtakCallback = (previewVedtakCallback: (data: ForhandsvisData)
   gjelderVedtak: true,
 });
 
+type AksjonspunktData = Array<ForeslaVedtakAp | ForeslaVedtakManueltAp | BekreftVedtakUtenTotrinnskontrollAp>;
+
 type FormValues = {
   aksjonspunktKoder?: string[];
   fritekstTilBrev?: string;
@@ -44,7 +46,7 @@ interface PureOwnProps {
   behandlingPaaVent: boolean;
   klageVurdering: KlageVurdering;
   aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (data: ForeslaVedtakAp | ForeslaVedtakManueltAp | BekreftVedtakUtenTotrinnskontrollAp) => Promise<void>;
+  submitCallback: (data: AksjonspunktData) => Promise<void>;
   previewVedtakCallback: (data: ForhandsvisData) => Promise<any>;
   readOnly: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -138,8 +140,7 @@ export const VedtakKlageForm: FunctionComponent<PureOwnProps & MappedOwnProps & 
   );
 };
 
-const transformValues = (values: FormValues): ForeslaVedtakAp
-  | ForeslaVedtakManueltAp | BekreftVedtakUtenTotrinnskontrollAp => values.aksjonspunktKoder.map((apCode) => ({
+const transformValues = (values: FormValues): AksjonspunktData => values.aksjonspunktKoder.map((apCode) => ({
   begrunnelse: values.fritekstTilBrev,
   kode: validerApKodeOgHentApEnum(apCode, AksjonspunktCode.FORESLA_VEDTAK,
     AksjonspunktCode.FORESLA_VEDTAK_MANUELT,

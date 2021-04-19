@@ -13,8 +13,6 @@ import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus'
 import FeilutbetalingFaktaIndex from '@fpsak-frontend/fakta-feilutbetaling';
 import { Behandling, FeilutbetalingFakta, FeilutbetalingAarsak } from '@fpsak-frontend/types';
 
-import withReduxProvider from '../../../decorators/withRedux';
-
 const BEHANDLING_AARSAK_KODEVERK = 'BEHANDLING_AARSAK';
 const TILBAKEKR_VIDERE_BEH_KODEVERK = 'TILBAKEKR_VIDERE_BEH';
 const BEHANDLING_RESULTAT_TYPE_KODEVERK = 'BEHANDLING_RESULTAT_TYPE';
@@ -138,12 +136,13 @@ const standardFaktaProps = {
   harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
   submittable: boolean('submittable', true),
   alleMerknaderFraBeslutter: {},
+  setFormData: () => undefined,
 };
 
 export default {
   title: 'fakta/tilbakekreving/fakta-feilutbetaling',
   component: FeilutbetalingFaktaIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visAksjonspunktForFeilutbetaling = () => (

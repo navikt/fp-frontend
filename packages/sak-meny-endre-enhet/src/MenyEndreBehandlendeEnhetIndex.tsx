@@ -2,6 +2,7 @@ import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import EndreBehandlendeEnhetModal from './components/EndreBehandlendeEnhetModal';
 
@@ -57,14 +58,16 @@ const MenyEndreBehandlendeEnhetIndex: FunctionComponent<OwnProps> = ({
   }, [behandlingId, behandlingVersjon, nyBehandlendeEnhet]);
   return (
     <RawIntlProvider value={intl}>
-      <EndreBehandlendeEnhetModal
+      <ReduxWrapper formName="MenyEndreBehandlendeEnhetIndex">
+        <EndreBehandlendeEnhetModal
         // @ts-ignore Fiks denne
-        lukkModal={lukkModal}
-        behandlendeEnheter={filtrerteBehandlendeEnheter}
-        gjeldendeBehandlendeEnhetId={behandlendeEnhetId}
-        gjeldendeBehandlendeEnhetNavn={behandlendeEnhetNavn}
-        onSubmit={submit}
-      />
+          lukkModal={lukkModal}
+          behandlendeEnheter={filtrerteBehandlendeEnheter}
+          gjeldendeBehandlendeEnhetId={behandlendeEnhetId}
+          gjeldendeBehandlendeEnhetNavn={behandlendeEnhetNavn}
+          onSubmit={submit}
+        />
+      </ReduxWrapper>
     </RawIntlProvider>
   );
 };

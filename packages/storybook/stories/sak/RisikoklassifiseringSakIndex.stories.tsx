@@ -8,7 +8,6 @@ import RisikoklassifiseringSakIndex from '@fpsak-frontend/sak-risikoklassifiseri
 import kontrollresultatKode from '@fpsak-frontend/sak-risikoklassifisering/src/kodeverk/kontrollresultatKode';
 
 import { Aksjonspunkt } from '@fpsak-frontend/types';
-import withReduxProvider from '../../decorators/withRedux';
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
 const withWidthProvider = (story) => (
@@ -20,7 +19,7 @@ const withWidthProvider = (story) => (
 export default {
   title: 'sak/sak-risikoklassifisering',
   component: RisikoklassifiseringSakIndex,
-  decorators: [withKnobs, withReduxProvider, withWidthProvider],
+  decorators: [withKnobs, withWidthProvider],
 };
 
 export const visPanelUtenInformasjon = () => (

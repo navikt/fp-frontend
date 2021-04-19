@@ -29,5 +29,6 @@ export const besteberegningMedDagpengerOgArbeid = () => (
     beregningsgrunnlag={beregningsgrunnlag}
     alleKodeverk={alleKodeverk as any}
     arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
+    setFormData={() => undefined}
   />
 );

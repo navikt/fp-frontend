@@ -3,7 +3,7 @@ import React from 'react';
 import { ReduxWrapper } from '@fpsak-frontend/form';
 
 const withReduxProvider = (Story) => (
-  <ReduxWrapper formData={{}} setFormData={() => undefined}>
+  <ReduxWrapper formName="Redux" formData={{}} setFormData={() => undefined}>
     <Story />
   </ReduxWrapper>
 );

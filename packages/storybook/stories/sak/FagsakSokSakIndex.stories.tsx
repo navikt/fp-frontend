@@ -7,7 +7,6 @@ import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import FagsakSokSakIndex from '@fpsak-frontend/sak-sok';
 
 import { Fagsak } from '@fpsak-frontend/types';
-import withReduxProvider from '../../decorators/withRedux';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
@@ -43,7 +42,7 @@ const fagsaker = [{
 export default {
   title: 'sak/sak-sok',
   component: FagsakSokSakIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visMeldingerPanel = () => {

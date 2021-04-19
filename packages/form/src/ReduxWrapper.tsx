@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useMemo } from 'react';
 import { Provider } from 'react-redux';
 import {
-  applyMiddleware, combineReducers, compose, createStore,
+  applyMiddleware, combineReducers, compose, createStore, PreloadedState,
 } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form';
@@ -9,11 +9,18 @@ import { reducer as formReducer } from 'redux-form';
 const isDevelopment = process.env.NODE_ENV === 'development';
 const logger = isDevelopment ? require('redux-logger') : null;
 
-const configureStore = (formData: any) => {
+const getTitleFormatter = (formName: string) => (
+  formattedAction: any,
+  formattedTime: string,
+) => `action: ${formName} - ${formattedAction.type} - ${formattedTime}`;
+
+const configureStore = (formName: string, formData?: PreloadedState<any>) => {
   const middleware = [thunkMiddleware];
   let enhancer;
   if (isDevelopment) {
-    middleware.push(logger.createLogger());
+    middleware.push(logger.createLogger({
+      titleFormatter: getTitleFormatter(formName),
+    }));
 
     /* eslint-disable-next-line no-underscore-dangle */
     const composeEnhancers = (window && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
@@ -26,28 +33,32 @@ const configureStore = (formData: any) => {
     form: formReducer,
   });
 
-  const initialState = {
+  const initialState = formData ? {
     form: formData,
-  };
+  } : {};
 
   return createStore(allReducers, initialState, enhancer);
 };
 
 interface OwnProps {
   children: any;
-  formData: any;
-  setFormData: (data: any) => void;
+  formName: string;
+  formData?: PreloadedState<any>;
+  setFormData?: (data: PreloadedState<any>) => void;
 }
 
 const ReduxWrapper: FunctionComponent<OwnProps> = ({
   children,
+  formName,
   formData,
   setFormData,
 }) => {
-  const store = useMemo(() => configureStore(formData), []);
+  const store = useMemo(() => configureStore(formName, formData), []);
 
   useEffect(() => () => {
-    setFormData(store.getState().form);
+    if (setFormData) {
+      setFormData(store.getState().form);
+    }
   }, []);
 
   return (

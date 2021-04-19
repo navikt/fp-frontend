@@ -5,6 +5,7 @@ import {
   ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, InntektArbeidYtelse,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import ArbeidsforholdInfoPanel from './components/ArbeidsforholdInfoPanel';
 import messages from '../i18n/nb_NO.json';
@@ -26,21 +27,25 @@ const ArbeidsforholdFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelP
   submitCallback,
   readOnly,
   arbeidsgiverOpplysningerPerId,
+  formData,
+  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <ArbeidsforholdInfoPanel
-      behandlingId={behandling.id}
-      behandlingVersjon={behandling.versjon}
-      arbeidsforhold={inntektArbeidYtelse.arbeidsforhold}
-      skalKunneLeggeTilNyeArbeidsforhold={inntektArbeidYtelse.skalKunneLeggeTilNyeArbeidsforhold}
-      alleKodeverk={alleKodeverk}
-      alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-      aksjonspunkter={aksjonspunkter}
-      hasOpenAksjonspunkter={harApneAksjonspunkter}
-      submitCallback={submitCallback}
-      readOnly={readOnly}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />
+    <ReduxWrapper formName="ArbeidsforholdFaktaIndex" formData={formData} setFormData={setFormData}>
+      <ArbeidsforholdInfoPanel
+        behandlingId={behandling.id}
+        behandlingVersjon={behandling.versjon}
+        arbeidsforhold={inntektArbeidYtelse.arbeidsforhold}
+        skalKunneLeggeTilNyeArbeidsforhold={inntektArbeidYtelse.skalKunneLeggeTilNyeArbeidsforhold}
+        alleKodeverk={alleKodeverk}
+        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+        aksjonspunkter={aksjonspunkter}
+        hasOpenAksjonspunkter={harApneAksjonspunkter}
+        submitCallback={submitCallback}
+        readOnly={readOnly}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

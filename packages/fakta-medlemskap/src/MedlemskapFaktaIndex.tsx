@@ -5,6 +5,7 @@ import {
   StandardFaktaPanelProps, InntektArbeidYtelse, Soknad, Medlemskap, ArbeidsgiverOpplysningerPerId,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import MedlemskapInfoPanel from './components/MedlemskapInfoPanel';
 import messages from '../i18n/nb_NO.json';
@@ -35,28 +36,32 @@ const MedlemskapFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps
   readOnly,
   readOnlyForStartdatoForForeldrepenger,
   arbeidsgiverOpplysningerPerId,
+  formData,
+  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <MedlemskapInfoPanel
-      behandlingId={behandling.id}
-      behandlingVersjon={behandling.versjon}
-      behandlingType={behandling.type}
-      behandlingStatus={behandling.status}
-      behandlingPaaVent={behandling.behandlingPaaVent}
-      soknad={soknad}
-      inntektArbeidYtelse={inntektArbeidYtelse}
-      medlemskap={medlemskap}
-      aksjonspunkter={aksjonspunkter}
-      hasOpenAksjonspunkter={harApneAksjonspunkter}
-      submittable={submittable}
-      isForeldrepenger={isForeldrepengerFagsak}
-      alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-      alleKodeverk={alleKodeverk}
-      submitCallback={submitCallback}
-      readOnly={readOnly}
-      readOnlyForStartdatoForForeldrepenger={readOnlyForStartdatoForForeldrepenger}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />
+    <ReduxWrapper formName="MedlemskapFaktaIndex" formData={formData} setFormData={setFormData}>
+      <MedlemskapInfoPanel
+        behandlingId={behandling.id}
+        behandlingVersjon={behandling.versjon}
+        behandlingType={behandling.type}
+        behandlingStatus={behandling.status}
+        behandlingPaaVent={behandling.behandlingPaaVent}
+        soknad={soknad}
+        inntektArbeidYtelse={inntektArbeidYtelse}
+        medlemskap={medlemskap}
+        aksjonspunkter={aksjonspunkter}
+        hasOpenAksjonspunkter={harApneAksjonspunkter}
+        submittable={submittable}
+        isForeldrepenger={isForeldrepengerFagsak}
+        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+        alleKodeverk={alleKodeverk}
+        submitCallback={submitCallback}
+        readOnly={readOnly}
+        readOnlyForStartdatoForForeldrepenger={readOnlyForStartdatoForForeldrepenger}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

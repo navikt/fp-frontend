@@ -39,7 +39,7 @@ const FagsakSearch: FunctionComponent<OwnProps> = ({
   alleKodeverk,
 }) => (
   <div className={styles.container}>
-    <ReduxWrapper>
+    <ReduxWrapper formName="FagsakSearch">
       <SearchForm
         onSubmit={searchFagsakCallback}
       // @ts-ignore Fiks denne!

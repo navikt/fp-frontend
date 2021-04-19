@@ -6,6 +6,7 @@ import {
   Personoversikt, UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import UttakInfoPanel from './components/UttakInfoPanel';
 import messages from '../i18n/nb_NO.json';
@@ -36,28 +37,32 @@ const UttakFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = (
   kanOverstyre,
   arbeidsgiverOpplysningerPerId,
   submittable,
+  formData,
+  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <UttakInfoPanel
-      behandlingId={behandling.id}
-      behandlingVersjon={behandling.versjon}
-      behandlingType={behandling.type}
-      behandlingArsaker={behandling.behandlingÅrsaker}
-      behandlingStatus={behandling.status}
-      behandlingPaaVent={behandling.behandlingPaaVent}
-      ytelsefordeling={ytelsefordeling}
-      uttakPerioder={uttakKontrollerFaktaPerioder.perioder}
-      alleKodeverk={alleKodeverk}
-      faktaArbeidsforhold={faktaArbeidsforhold}
-      aksjonspunkter={aksjonspunkter}
-      submitCallback={submitCallback}
-      readOnly={readOnly}
-      kanOverstyre={kanOverstyre}
-      personoversikt={personoversikt}
-      familiehendelse={familiehendelse}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      submittable={submittable}
-    />
+    <ReduxWrapper formName="UttakFaktaIndex" formData={formData} setFormData={setFormData}>
+      <UttakInfoPanel
+        behandlingId={behandling.id}
+        behandlingVersjon={behandling.versjon}
+        behandlingType={behandling.type}
+        behandlingArsaker={behandling.behandlingÅrsaker}
+        behandlingStatus={behandling.status}
+        behandlingPaaVent={behandling.behandlingPaaVent}
+        ytelsefordeling={ytelsefordeling}
+        uttakPerioder={uttakKontrollerFaktaPerioder.perioder}
+        alleKodeverk={alleKodeverk}
+        faktaArbeidsforhold={faktaArbeidsforhold}
+        aksjonspunkter={aksjonspunkter}
+        submitCallback={submitCallback}
+        readOnly={readOnly}
+        kanOverstyre={kanOverstyre}
+        personoversikt={personoversikt}
+        familiehendelse={familiehendelse}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        submittable={submittable}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

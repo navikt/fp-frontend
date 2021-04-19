@@ -8,8 +8,6 @@ import VedtakTilbakekrevingProsessIndex from '@fpsak-frontend/prosess-vedtak-til
 import aktsomhet from '@fpsak-frontend/prosess-tilbakekreving/src/kodeverk/aktsomhet';
 import { Behandling, BeregningsresultatTilbakekreving } from '@fpsak-frontend/types';
 
-import withReduxProvider from '../../../decorators/withRedux';
-
 const vedtaksbrev = {
   avsnittsliste: [{
     overskrift: 'Du må betale tilbake foreldrepenger',
@@ -178,12 +176,13 @@ const standardProsessProps = {
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
+  setFormData: () => undefined,
 };
 
 export default {
   title: 'prosess/tilbakekreving/prosess-vedtak-tilbakekreving',
   component: VedtakTilbakekrevingProsessIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visVedtakspanel = () => (

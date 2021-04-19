@@ -7,8 +7,6 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import KlagevurderingProsessIndex from '@fpsak-frontend/prosess-klagevurdering';
 import { Aksjonspunkt, Behandling, KlageVurdering } from '@fpsak-frontend/types';
 
-import withReduxProvider from '../../../decorators/withRedux';
-
 import alleKodeverk from '../../mocks/alleKodeverk.json';
 
 const behandling = {
@@ -30,12 +28,13 @@ const standardProsessProps = {
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
+  setFormData: () => undefined,
 };
 
 export default {
   title: 'prosess/klage/prosess-klagevurdering',
   component: KlagevurderingProsessIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visPanelForKlagevurderingMedAksjonspunktNk = () => (
