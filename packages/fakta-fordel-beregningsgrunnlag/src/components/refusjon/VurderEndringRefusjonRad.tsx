@@ -19,6 +19,7 @@ import { ArbeidsgiverOpplysningerPerId, RefusjonTilVurderingAndel } from '@fpsak
 import { connect } from 'react-redux';
 import styles from './vurderEndringRefusjonRad.less';
 import { createVisningsnavnForAktivitetRefusjon } from '../util/visningsnavnHelper';
+import { VurderRefusjonAndelTransformedValues, VurderRefusjonValues } from '../../types/VurderRefusjonTsType';
 
 const FIELD_KEY_REFUSJONSTART = 'REFUSJON_ENDRING_DATO';
 const FIELD_KEY_DELVIS_REF = 'DELVIS_REFUSJON_FØR_START_BELØP';
@@ -44,21 +45,13 @@ type OwnProps = {
     formName: string;
 };
 
-type TransformedValues = {
-  arbeidsgiverOrgnr?: string;
-  arbeidsgiverAktoerId?: string;
-  internArbeidsforholdRef?: string;
-  fastsattRefusjonFom: string;
-  delvisRefusjonPrMndFørStart?: number;
-}
-
 type MappedOwnProps = {
   valgtDatoErLikSTP?: boolean;
 }
 
 interface StaticFunctions {
-  buildInitialValues: (andel: RefusjonTilVurderingAndel) => any;
-  transformValues: (values: any, andel: RefusjonTilVurderingAndel, skjæringstidspunkt: string) => TransformedValues;
+  buildInitialValues: (andel: RefusjonTilVurderingAndel) => VurderRefusjonValues;
+  transformValues: (values: VurderRefusjonValues, andel: RefusjonTilVurderingAndel, skjæringstidspunkt: string) => VurderRefusjonAndelTransformedValues;
 }
 
 export const VurderEndringRefusjonRadImpl: FunctionComponent<OwnProps & MappedOwnProps> & StaticFunctions = ({
@@ -131,14 +124,16 @@ export const VurderEndringRefusjonRadImpl: FunctionComponent<OwnProps & MappedOw
   );
 };
 
-VurderEndringRefusjonRadImpl.buildInitialValues = (refusjonAndel: RefusjonTilVurderingAndel) => {
+VurderEndringRefusjonRadImpl.buildInitialValues = (refusjonAndel: RefusjonTilVurderingAndel): VurderRefusjonValues => {
   const initialValues = {};
   initialValues[lagNøkkelRefusjonsstart(refusjonAndel)] = refusjonAndel.fastsattNyttRefusjonskravFom;
   initialValues[lagNøkkelDelvisRefusjon(refusjonAndel)] = formatCurrencyNoKr(refusjonAndel.fastsattDelvisRefusjonPrMnd);
   return initialValues;
 };
 
-VurderEndringRefusjonRadImpl.transformValues = (values, andel: RefusjonTilVurderingAndel, skjæringstidspunkt: string) => {
+VurderEndringRefusjonRadImpl.transformValues = (values: VurderRefusjonValues,
+  andel: RefusjonTilVurderingAndel,
+  skjæringstidspunkt: string): VurderRefusjonAndelTransformedValues => {
   const datoNøkkel = lagNøkkelRefusjonsstart(andel);
   const fastsattDato = values[datoNøkkel];
   let delvisRefusjonPrMnd = null;
