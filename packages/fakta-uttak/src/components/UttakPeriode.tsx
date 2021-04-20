@@ -75,8 +75,6 @@ interface OwnProps {
   isNyPeriodeFormOpen: boolean;
   vilkarForSykdomExists: boolean;
   getKodeverknavn: (...args: any[]) => any;
-  behandlingVersjon: number;
-  behandlingId: number;
   behandlingStatus: Kodeverk;
   familiehendelse: FamilieHendelseSamling;
   sisteUttakdatoFørsteSeksUker: moment.Moment;
@@ -99,8 +97,6 @@ const UttakPeriode: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   openSlettPeriodeModalCallback,
   perioder,
   getKodeverknavn,
-  behandlingId,
-  behandlingVersjon,
   behandlingStatus,
   familiehendelse,
   vilkarForSykdomExists,
@@ -160,8 +156,6 @@ const UttakPeriode: FunctionComponent<OwnProps & WrappedComponentProps> = ({
                     updatePeriode={updatePeriode}
                     cancelEditPeriode={cancelEditPeriode}
                     readOnly={readOnly}
-                    behandlingId={behandlingId}
-                    behandlingVersjon={behandlingVersjon}
                     behandlingStatusKode={behandlingStatus.kode}
                     farSøkerFør6Uker={farSøkerFør6Uker}
                     sisteUttakdatoFørsteSeksUker={sisteUttakdatoFørsteSeksUker}

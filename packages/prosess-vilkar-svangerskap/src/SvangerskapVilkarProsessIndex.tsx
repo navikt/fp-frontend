@@ -26,8 +26,6 @@ const SvangerskapVilkarProsessIndex: FunctionComponent<StandardProsessPanelProps
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="SvangerskapVilkarProsessIndex" formData={formData} setFormData={setFormData}>
       <SvangerskapVilkarForm
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         behandlingsresultat={behandling.behandlingsresultat}
         aksjonspunkter={aksjonspunkter}
         status={status}

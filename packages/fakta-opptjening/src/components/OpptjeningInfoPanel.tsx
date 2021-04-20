@@ -2,9 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 
-import { behandlingForm } from '@fpsak-frontend/form';
 import { addDaysToDate, omitMany } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
@@ -24,8 +23,6 @@ type FormValues = {
 }
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   hasOpenAksjonspunkter: boolean;
   readOnly: boolean;
   fastsattOpptjening?: Opptjening['fastsattOpptjening'];
@@ -53,8 +50,6 @@ export const OpptjeningInfoPanel: FunctionComponent<PureOwnProps & MappedOwnProp
   hasOpenAksjonspunkter,
   readOnly,
   aksjonspunkt,
-  behandlingId,
-  behandlingVersjon,
   fastsattOpptjening,
   dokStatus,
   alleMerknaderFraBeslutter,
@@ -64,8 +59,6 @@ export const OpptjeningInfoPanel: FunctionComponent<PureOwnProps & MappedOwnProp
 }) => (
   <form onSubmit={formProps.handleSubmit}>
     <OpptjeningFaktaForm
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       opptjeningFomDato={fastsattOpptjening ? fastsattOpptjening.opptjeningFom : undefined}
       opptjeningTomDato={fastsattOpptjening ? fastsattOpptjening.opptjeningTom : undefined}
       dokStatus={dokStatus}
@@ -167,6 +160,8 @@ const mapStateToPropsFactory = (_state: any, ownProps: PureOwnProps): MappedOwnP
   onSubmit: lagSubmitFn(ownProps),
 });
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToPropsFactory)(reduxForm({
   form: formName,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(OpptjeningInfoPanel));

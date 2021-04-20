@@ -1,15 +1,17 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { FormattedMessage, injectIntl } from 'react-intl';
-import { FieldArray, InjectedFormProps } from 'redux-form';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import {
+  FieldArray, formValueSelector, InjectedFormProps, reduxForm,
+} from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Undertekst } from 'nav-frontend-typografi';
 
 import {
-  RadioGroupField, RadioOption, SelectField, TextAreaField, behandlingFormValueSelector, behandlingForm,
+  RadioGroupField, RadioOption, SelectField, TextAreaField,
 } from '@fpsak-frontend/form';
 import {
   merEn100ProsentMessage,
@@ -130,8 +132,6 @@ interface PureOwnProps {
   readOnly: boolean;
   harSoktOmFlerbarnsdager: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  behandlingId: number;
-  behandlingVersjon: number;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
@@ -158,7 +158,7 @@ interface MappedOwnProps {
   initialValues: FormValues;
 }
 
-export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
   periodeTyper,
   oppholdArsakTyper,
   readOnly,
@@ -627,9 +627,7 @@ const buildInitialValues = createSelector(
 );
 
 const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
-  const {
-    behandlingVersjon, behandlingId, behandlingsresultat, alleKodeverk,
-  } = initialOwnProps;
+  const { behandlingsresultat, alleKodeverk } = initialOwnProps;
   const avslagAarsaker = alleKodeverk[kodeverkTyper.UTTAK_AVSLAG_ARSAK] as ArsakKodeverk[];
   const innvilgelseAarsaker = alleKodeverk[kodeverkTyper.INNVILGET_AARSAK] as ArsakKodeverk[];
   const graderingAvslagAarsakKoder = alleKodeverk[kodeverkTyper.GRADERING_AVSLAG_AARSAK] as ArsakKodeverk[];
@@ -647,10 +645,10 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
   ));
 
   return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
-    const erOppfylt = behandlingFormValueSelector(uttakActivityForm, behandlingId, behandlingVersjon)(state, 'erOppfylt');
-    const begrunnelse = behandlingFormValueSelector(uttakActivityForm, behandlingId, behandlingVersjon)(state, 'begrunnelse');
-    const arsak = behandlingFormValueSelector(uttakActivityForm, behandlingId, behandlingVersjon)(state, erOppfylt ? 'innvilgelseAarsak' : 'avslagAarsak');
-    const uttakFieldArray = behandlingFormValueSelector(uttakActivityForm, behandlingId, behandlingVersjon)(state, 'UttakFieldArray');
+    const erOppfylt = formValueSelector(uttakActivityForm)(state, 'erOppfylt');
+    const begrunnelse = formValueSelector(uttakActivityForm)(state, 'begrunnelse');
+    const arsak = formValueSelector(uttakActivityForm)(state, erOppfylt ? 'innvilgelseAarsak' : 'avslagAarsak');
+    const uttakFieldArray = formValueSelector(uttakActivityForm)(state, 'UttakFieldArray');
     const hasValidationError = erOppfylt === undefined || !begrunnelse || !arsak;
     const currentlySelectedActivity = uttakFieldArray && uttakFieldArray.length > 0 ? uttakFieldArray[0] : undefined;
     const currentlySelectedStønadskonto = currentlySelectedActivity ? currentlySelectedActivity.stønadskontoType : undefined;
@@ -671,15 +669,17 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
       initialValues: buildInitialValues(ownProps),
       avslagAarsakKoder: avslagAarsaker,
       innvilgelseAarsakKoder: innvilgelseAarsaker,
-      graderingInnvilget: behandlingFormValueSelector(uttakActivityForm, behandlingId, behandlingVersjon)(state, 'graderingInnvilget'),
-      erSamtidigUttak: behandlingFormValueSelector(uttakActivityForm, behandlingId, behandlingVersjon)(state, 'samtidigUttak'),
-      samtidigUttaksprosent: behandlingFormValueSelector(uttakActivityForm, behandlingId, behandlingVersjon)(state, 'samtidigUttaksprosent'),
+      graderingInnvilget: formValueSelector(uttakActivityForm)(state, 'graderingInnvilget'),
+      erSamtidigUttak: formValueSelector(uttakActivityForm)(state, 'samtidigUttak'),
+      samtidigUttaksprosent: formValueSelector(uttakActivityForm)(state, 'samtidigUttaksprosent'),
       starttidspunktForeldrepenger: behandlingsresultat.skjæringstidspunkt ? behandlingsresultat.skjæringstidspunkt.dato : undefined,
     };
   };
 };
 
-export default connect(mapStateToPropsFactory)(injectIntl(behandlingForm({
+export default connect(mapStateToPropsFactory)(reduxForm({
   form: uttakActivityForm,
   enableReinitialize: true,
-})(UttakActivity)));
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
+})(injectIntl(UttakActivity)));

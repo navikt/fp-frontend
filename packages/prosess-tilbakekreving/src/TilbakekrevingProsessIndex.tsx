@@ -34,7 +34,6 @@ const TilbakekrevingProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
   alleMerknaderFraBeslutter,
   alleKodeverk,
   beregnBelop,
-  aksjonspunkter,
   formData,
   setFormData,
 }) => (
@@ -49,7 +48,6 @@ const TilbakekrevingProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
         vilkarvurdering={vilkarvurdering}
         submitCallback={submitCallback}
         readOnly={isReadOnly}
-        apCodes={aksjonspunkter.map((a) => a.definisjon.kode)}
         readOnlySubmitButton={readOnlySubmitButton}
         navBrukerKjonn={navBrukerKjonn}
         alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}

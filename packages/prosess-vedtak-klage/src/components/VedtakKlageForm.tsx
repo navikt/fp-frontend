@@ -2,13 +2,12 @@ import React, { FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
 
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import {
@@ -40,8 +39,6 @@ type FormValues = {
 }
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   behandlingsresultat: Behandling['behandlingsresultat'];
   behandlingPaaVent: boolean;
   klageVurdering: KlageVurdering;
@@ -259,13 +256,15 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
   fritekstTilBrev: getFritekstTilBrev(ownProps),
   behandlingsResultatTekst: getResultatText(ownProps),
   klageVurderingResultat: getKlageResultat(ownProps),
-  ...behandlingFormValueSelector(VEDTAK_KLAGE_FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon)(
+  ...formValueSelector(VEDTAK_KLAGE_FORM_NAME)(
     state,
     'begrunnelse',
     'aksjonspunktKoder',
   ),
 });
 
-export default connect(mapStateToProps)(behandlingForm({
+export default connect(mapStateToProps)(reduxForm({
   form: VEDTAK_KLAGE_FORM_NAME,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(injectIntl(VedtakKlageForm)));

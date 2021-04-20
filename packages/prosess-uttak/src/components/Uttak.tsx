@@ -2,7 +2,7 @@ import React, { Component, MouseEvent, ReactElement } from 'react';
 import moment from 'moment';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { change as reduxFormChange, initialize as reduxFormInitialize } from 'redux-form';
+import { change as reduxFormChange, formValueSelector, initialize as reduxFormInitialize } from 'redux-form';
 import { bindActionCreators, Dispatch } from 'redux';
 import { FormattedMessage, IntlShape, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
@@ -20,7 +20,7 @@ import {
 import {
   ISO_DATE_FORMAT, getKodeverknavnFn, calcDays, calcDaysAndWeeks, DDMMYY_DATE_FORMAT,
 } from '@fpsak-frontend/utils';
-import { CheckboxField, getBehandlingFormPrefix, behandlingFormValueSelector } from '@fpsak-frontend/form';
+import { CheckboxField } from '@fpsak-frontend/form';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
@@ -126,7 +126,6 @@ interface PureOwnProps {
   uttakPeriodeGrense: UttakPeriodeGrense;
   ytelsefordeling: Ytelsefordeling;
   behandlingId: number;
-  behandlingVersjon: number;
   behandlingType: Kodeverk;
   behandlingStatus: Kodeverk;
   fagsak: Fagsak;
@@ -155,7 +154,6 @@ interface PureOwnProps {
 interface MappedOwnProps {
   annenForelderSoktOmFlerbarnsdager: boolean;
   barnFraTps: AvklartBarn[];
-  behandlingFormPrefix: string;
   endredFodselsDato?: string;
   endringsdato?: string;
   familiehendelseDate?: string;
@@ -254,15 +252,14 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
   }
 
   setFormField(fieldName: string, fieldValue: PeriodeMedClassName[]): void {
-    const { reduxFormChange: formChange, behandlingFormPrefix, formName } = this.props;
-    formChange(`${behandlingFormPrefix}.${formName}`, fieldName, fieldValue);
+    const { reduxFormChange: formChange, formName } = this.props;
+    formChange(formName, fieldName, fieldValue);
   }
 
   updateStonadskontoer(perioder: PeriodeMedClassName[]): void {
     const {
       tempUpdateStonadskontoer: updateKontoer,
       reduxFormChange: formChange,
-      behandlingFormPrefix,
       formName,
       behandlingId,
       saksnummer,
@@ -300,13 +297,13 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     this.setState((oldState) => ({ ...oldState, isButtonDisabled: true }));
     updateKontoer(params).then((response: UttakStonadskontoer) => {
       this.setState((oldState) => ({ ...oldState, stonadskonto: response, isButtonDisabled: false }));
-      formChange(`${behandlingFormPrefix}.${formName}`, STONADSKONTOER_TEMP, response);
+      formChange(formName, STONADSKONTOER_TEMP, response);
     });
   }
 
   initializeActivityForm(uttakActivity: PeriodeMedClassName): void {
-    const { reduxFormInitialize: formInitialize, behandlingFormPrefix } = this.props;
-    formInitialize(`${behandlingFormPrefix}.${ACTIVITY_PANEL_NAME}`, uttakActivity);
+    const { reduxFormInitialize: formInitialize } = this.props;
+    formInitialize(ACTIVITY_PANEL_NAME, uttakActivity);
   }
 
   updateActivity(values: PeriodeMedClassName): void {
@@ -456,14 +453,11 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
       aksjonspunkter,
       annenForelderSoktOmFlerbarnsdager,
       barnFraTps,
-      behandlingFormPrefix,
       endredFodselsDato,
       endringsdato,
       familiehendelse,
       familiehendelseDate,
       formName,
-      behandlingId,
-      behandlingVersjon,
       harSoktOmFlerbarnsdager,
       hovedsokerKjonnKode,
       isApOpen,
@@ -545,7 +539,6 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
                     && (
                       <UttakTimeLineData
                         activityPanelName={ACTIVITY_PANEL_NAME}
-                        behandlingFormPrefix={behandlingFormPrefix}
                         callbackBackward={this.prevPeriod}
                         callbackCancelSelectedActivity={this.cancelSelectedActivity}
                         callbackForward={this.nextPeriod}
@@ -560,8 +553,6 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
                         stonadskonto={stonadskonto}
                         uttaksresultatActivity={uttaksresultatActivity}
                         alleKodeverk={alleKodeverk}
-                        behandlingId={behandlingId}
-                        behandlingVersjon={behandlingVersjon}
                         behandlingsresultat={behandlingsresultat}
                         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
                       />
@@ -577,8 +568,6 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
                         callbackCancelSelectedActivity={this.cancelSelectedActivity}
                         harSoktOmFlerbarnsdager={annenForelderSoktOmFlerbarnsdager}
                         alleKodeverk={alleKodeverk}
-                        behandlingId={behandlingId}
-                        behandlingVersjon={behandlingVersjon}
                         behandlingsresultat={behandlingsresultat}
                         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
                       />
@@ -642,7 +631,7 @@ const getFodselTerminDato = createSelector(
 );
 
 const lagUttakMedOpphold = createSelector(
-  [(state: any, props: PureOwnProps) => behandlingFormValueSelector(props.formName, props.behandlingId, props.behandlingVersjon)(state, ACTIVITY_PANEL_NAME)],
+  [(state: any, props: PureOwnProps) => formValueSelector(props.formName)(state, ACTIVITY_PANEL_NAME)],
   (uttaksresultatActivity: UttaksresultatActivity[]): UttaksresultatActivity[] => uttaksresultatActivity.map((uttak): UttaksresultatActivity => {
     const { ...uttakPerioder } = uttak;
 
@@ -803,8 +792,6 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
     uttaksresultat,
     uttakPeriodeGrense,
     ytelsefordeling,
-    behandlingId,
-    behandlingVersjon,
     fagsak,
   } = props;
   const periodeGrenseMottatDato = uttakPeriodeGrense.mottattDato;
@@ -835,7 +822,6 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
   return {
     annenForelderSoktOmFlerbarnsdager: annenForelderPerioder.filter((p) => p.flerbarnsdager === true).length > 0,
     barnFraTps: getBarnFraTpsRelatertTilSoknad(props),
-    behandlingFormPrefix: getBehandlingFormPrefix(behandlingId, behandlingVersjon),
     endredFodselsDato: gjeldende && gjeldende.avklartBarn && gjeldende.avklartBarn.length > 0 ? gjeldende.avklartBarn[0].fodselsdato : undefined,
     endringsdato: ytelsefordeling.endringsdato ? ytelsefordeling.endringsdato : undefined,
     familiehendelse,
@@ -847,7 +833,7 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
     person,
     saksnummer: fagsak.saksnummer,
     soknadDate: determineMottatDato(periodeGrenseMottatDato, mottattDato),
-    stonadskonto: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'stonadskonto'),
+    stonadskonto: formValueSelector(formName)(state, 'stonadskonto'),
     uttaksresultatActivity: lagUttaksresultatActivity(state, props),
     uttakPerioder,
   };

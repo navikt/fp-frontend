@@ -44,8 +44,6 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
         antallBarnOmsorgOgForeldreansvar: false,
         vilkarType: false,
       }}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
@@ -73,8 +71,6 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
         antallBarnOmsorgOgForeldreansvar: false,
         vilkarType: false,
       }}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
@@ -102,8 +98,6 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
         antallBarnOmsorgOgForeldreansvar: false,
         vilkarType: false,
       }}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
@@ -131,8 +125,6 @@ describe('<OmsorgOgForeldreansvarFaktaForm>', () => {
         antallBarnOmsorgOgForeldreansvar: false,
         vilkarType: false,
       }}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}

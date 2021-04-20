@@ -3,12 +3,17 @@ import { FormattedMessage } from 'react-intl';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import { lagAktiviteter, UttakActivity } from './UttakActivity';
 import { PeriodeMedClassName } from './Uttak';
 import { AktivitetFieldArray } from './RenderUttakTable';
+
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<UttakActivity>', () => {
   const selectedItem = {
@@ -45,6 +50,7 @@ describe('<UttakActivity>', () => {
   it('skal rendre uttakactivity med oppfylt periode', () => {
     const wrapper = shallow(<UttakActivity
       {...reduxFormPropsMock}
+      intl={intlMock}
       erOppfylt
       selectedItemData={selectedItem}
       readOnly={false}
@@ -62,8 +68,6 @@ describe('<UttakActivity>', () => {
       hasValidationError={false}
       alleKodeverk={{}}
       updateActivity={() => undefined}
-      behandlingId={1}
-      behandlingVersjon={2}
       kontoIkkeSatt={false}
       utsettelseAarsak={{} as KodeverkMedNavn[]}
       uttakFieldArray="test"
@@ -91,6 +95,7 @@ describe('<UttakActivity>', () => {
   it('skal rendre rows and columns', () => {
     const wrapper = shallow(<UttakActivity
       {...reduxFormPropsMock}
+      intl={intlMock}
       erOppfylt
       selectedItemData={selectedItem}
       readOnly={false}
@@ -108,8 +113,6 @@ describe('<UttakActivity>', () => {
       hasValidationError={false}
       alleKodeverk={{}}
       updateActivity={() => undefined}
-      behandlingId={1}
-      behandlingVersjon={2}
       kontoIkkeSatt={false}
       utsettelseAarsak={{} as KodeverkMedNavn[]}
       uttakFieldArray="test"
@@ -131,6 +134,7 @@ describe('<UttakActivity>', () => {
   it('skal rendre uttakactivity med ikke oppfylt', () => {
     const wrapper = shallow(<UttakActivity
       {...reduxFormPropsMock}
+      intl={intlMock}
       erOppfylt={false}
       readOnly={false}
       selectedItemData={selectedItem}
@@ -148,8 +152,6 @@ describe('<UttakActivity>', () => {
       hasValidationError={false}
       alleKodeverk={{}}
       updateActivity={() => undefined}
-      behandlingId={1}
-      behandlingVersjon={2}
       kontoIkkeSatt={false}
       utsettelseAarsak={{} as KodeverkMedNavn[]}
       uttakFieldArray="test"
@@ -177,6 +179,7 @@ describe('<UttakActivity>', () => {
   it('skal rendre uttakactivity med aksjonspunkt', () => {
     const wrapper = shallow(<UttakActivity
       {...reduxFormPropsMock}
+      intl={intlMock}
       erOppfylt
       readOnly={false}
       selectedItemData={selectedItem}
@@ -194,8 +197,6 @@ describe('<UttakActivity>', () => {
       hasValidationError={false}
       alleKodeverk={{}}
       updateActivity={() => undefined}
-      behandlingId={1}
-      behandlingVersjon={2}
       kontoIkkeSatt={false}
       utsettelseAarsak={{} as KodeverkMedNavn[]}
       uttakFieldArray="test"
@@ -223,6 +224,7 @@ describe('<UttakActivity>', () => {
   it('skal rendre uttakactivity readonly', () => {
     const wrapper = shallow(<UttakActivity
       {...reduxFormPropsMock}
+      intl={intlMock}
       erOppfylt
       selectedItemData={selectedItem}
       readOnly
@@ -240,8 +242,6 @@ describe('<UttakActivity>', () => {
       hasValidationError={false}
       alleKodeverk={{}}
       updateActivity={() => undefined}
-      behandlingId={1}
-      behandlingVersjon={2}
       kontoIkkeSatt={false}
       utsettelseAarsak={{} as KodeverkMedNavn[]}
       uttakFieldArray="test"

@@ -17,7 +17,6 @@ interface OwnProps {
 }
 
 const AnkeResultatProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
-  behandling,
   ankeVurdering,
   aksjonspunkter,
   submitCallback,
@@ -31,8 +30,6 @@ const AnkeResultatProsessIndex: FunctionComponent<OwnProps & StandardProsessPane
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="AnkeResultatProsessIndex" formData={formData} setFormData={setFormData}>
       <BehandleResultatForm
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         ankeVurderingResultat={ankeVurdering.ankeVurderingResultat}
         aksjonspunkter={aksjonspunkter}
         submitCallback={submitCallback}

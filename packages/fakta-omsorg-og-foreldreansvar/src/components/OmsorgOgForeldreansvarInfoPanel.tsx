@@ -2,9 +2,8 @@ import React, { FunctionComponent } from 'react';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { IntlShape } from 'react-intl';
-import { InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 
-import { behandlingForm } from '@fpsak-frontend/form';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
@@ -30,8 +29,6 @@ interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   submitCallback: (data: AvklarFaktaForForeldreansvarAksjonspunktAp | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp) => Promise<void>;
-  behandlingId: number;
-  behandlingVersjon: number;
   hasOpenAksjonspunkter: boolean;
   submittable: boolean;
   readOnly: boolean;
@@ -53,8 +50,6 @@ interface MappedOwnProps {
  */
 export const OmsorgOgForeldreansvarInfoPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   intl,
-  behandlingId,
-  behandlingVersjon,
   erAksjonspunktForeldreansvar,
   hasOpenAksjonspunkter,
   submittable,
@@ -76,8 +71,6 @@ export const OmsorgOgForeldreansvarInfoPanelImpl: FunctionComponent<PureOwnProps
       vilkarTypes={vilkarTypes}
       relatertYtelseTypes={relatertYtelseTypes}
       hasOpenAksjonspunkter={hasOpenAksjonspunkter}
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
       soknad={soknad}
       gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
@@ -96,8 +89,6 @@ export const OmsorgOgForeldreansvarInfoPanelImpl: FunctionComponent<PureOwnProps
     <VerticalSpacer twentyPx />
     <FaktaSubmitButton
       formName={formProps.form}
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       isSubmittable={submittable}
       isReadOnly={readOnly}
       hasOpenAksjonspunkter={hasOpenAksjonspunkter}
@@ -149,6 +140,8 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
   });
 };
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToPropsFactory)(reduxForm({
   form: 'OmsorgOgForeldreansvarInfoPanel',
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(OmsorgOgForeldreansvarInfoPanelImpl));

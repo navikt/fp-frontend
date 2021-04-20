@@ -43,8 +43,6 @@ const UttakFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = (
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="UttakFaktaIndex" formData={formData} setFormData={setFormData}>
       <UttakInfoPanel
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         behandlingType={behandling.type}
         behandlingArsaker={behandling.behandlingÅrsaker}
         behandlingStatus={behandling.status}

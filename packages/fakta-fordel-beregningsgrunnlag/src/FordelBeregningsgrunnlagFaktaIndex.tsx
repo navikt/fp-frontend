@@ -21,7 +21,6 @@ const FordelBeregningsgrunnlagFaktaIndex:FunctionComponent<OwnProps & StandardFa
   behandling,
   beregningsgrunnlag,
   alleKodeverk,
-  alleMerknaderFraBeslutter,
   aksjonspunkter,
   submitCallback,
   readOnly,
@@ -33,11 +32,8 @@ const FordelBeregningsgrunnlagFaktaIndex:FunctionComponent<OwnProps & StandardFa
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="FordelBeregningsgrunnlagFaktaIndex" formData={formData} setFormData={setFormData}>
       <FordelBeregningsgrunnlagPanel
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         behandlingType={behandling.type}
         alleKodeverk={alleKodeverk}
-        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
         aksjonspunkter={aksjonspunkter}
         submitCallback={submitCallback}
         readOnly={readOnly}

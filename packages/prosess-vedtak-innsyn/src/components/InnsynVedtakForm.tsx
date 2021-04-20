@@ -4,16 +4,13 @@ import { createSelector } from 'reselect';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import {
-  TextAreaField, behandlingForm, behandlingFormValueSelector, hasBehandlingFormErrorsOfType,
-  isBehandlingFormDirty, isBehandlingFormSubmitting,
-} from '@fpsak-frontend/form';
+import { TextAreaField } from '@fpsak-frontend/form';
 import {
   decodeHtmlEntity, getLanguageFromSprakkode, hasValidText, maxLength, minLength, requiredIfNotPristine,
 } from '@fpsak-frontend/utils';
@@ -77,8 +74,6 @@ type FormValues = {
 }
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   sprakkode: Kodeverk;
   innsynDokumenter: InnsynDokument[];
   innsynMottattDato: string;
@@ -115,8 +110,6 @@ export const InnsynVedtakFormImpl: FunctionComponent<PureOwnProps & MappedOwnPro
   apBegrunnelse,
   begrunnelse,
   resultat,
-  behandlingId,
-  behandlingVersjon,
   ...formProps
 }) => {
   const previewBrev = getPreviewCallback(formProps, begrunnelse, previewCallback);
@@ -159,14 +152,9 @@ export const InnsynVedtakFormImpl: FunctionComponent<PureOwnProps & MappedOwnPro
         {!readOnly && (
         <Column xs="3">
           <ProsessStegSubmitButton
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             formName={formProps.form}
             isReadOnly={readOnly}
             isSubmittable
-            isBehandlingFormSubmitting={isBehandlingFormSubmitting}
-            isBehandlingFormDirty={isBehandlingFormDirty}
-            hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
           />
         </Column>
         )}
@@ -225,13 +213,15 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
   documents: getDocumenterMedFikkInnsynVerdi(ownProps),
   initialValues: buildInitialValues(ownProps.innsynMottattDato, ownProps.aksjonspunkter),
   apBegrunnelse: ownProps.aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.VURDER_INNSYN).begrunnelse,
-  begrunnelse: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'begrunnelse'),
+  begrunnelse: formValueSelector(formName)(state, 'begrunnelse'),
   resultat: ownProps.innsynResultatType.kode,
   onSubmit: lagSubmitFn(ownProps),
 });
 
-const InnsynVedtakForm = connect(mapStateToProps)(injectIntl(behandlingForm({
+const InnsynVedtakForm = connect(mapStateToProps)(reduxForm({
   form: formName,
-})(InnsynVedtakFormImpl)));
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
+})(injectIntl(InnsynVedtakFormImpl)));
 
 export default InnsynVedtakForm;

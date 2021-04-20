@@ -24,8 +24,6 @@ const OmsorgVilkarProsessIndex: FunctionComponent<StandardProsessPanelProps> = (
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="OmsorgVilkarProsessIndex" formData={formData} setFormData={setFormData}>
       <ErOmsorgVilkaarOppfyltForm
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         behandlingsresultat={behandling.behandlingsresultat}
         aksjonspunkter={aksjonspunkter}
         status={status}

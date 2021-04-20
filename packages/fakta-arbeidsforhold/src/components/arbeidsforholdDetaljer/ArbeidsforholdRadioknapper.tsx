@@ -60,8 +60,6 @@ const utledRadioOptionForArbeidsforholdSomIkkeErAktive = (
   hasReceivedInntektsmelding: boolean,
   formName: string,
   readOnly: boolean,
-  behandlingId: number,
-  behandlingVersjon: number,
   arbeidsforholdHandlingVerdi?: string,
 ) => {
   if (arbeidsforhold.permisjoner && arbeidsforhold.permisjoner.length > 0) {
@@ -81,7 +79,7 @@ const utledRadioOptionForArbeidsforholdSomIkkeErAktive = (
         disabled={skalDisableOverstyrTom(arbeidsforhold)}
         manualHideChildren
       >
-        <BehandlingFormFieldCleaner formName={formName} fieldNames={['overstyrtTom']} behandlingId={behandlingId} behandlingVersjon={behandlingVersjon}>
+        <BehandlingFormFieldCleaner formName={formName} fieldNames={['overstyrtTom']}>
           { arbeidsforholdHandlingVerdi === arbeidsforholdHandling.OVERSTYR_TOM && (
             <ArrowBox>
               <DatepickerField
@@ -138,8 +136,6 @@ interface OwnProps {
   arbeidsforhold: CustomArbeidsforhold;
   aktivtArbeidsforholdTillatUtenIM: boolean;
   arbeidsforholdHandlingVerdi?: string;
-  behandlingId: number;
-  behandlingVersjon: number;
 }
 
 /**
@@ -154,8 +150,6 @@ const ArbeidsforholdRadioknapper: FunctionComponent<OwnProps & WrappedComponentP
   arbeidsforhold,
   aktivtArbeidsforholdTillatUtenIM,
   arbeidsforholdHandlingVerdi,
-  behandlingId,
-  behandlingVersjon,
   intl,
 }) => (
   <RadioGroupField
@@ -170,8 +164,6 @@ const ArbeidsforholdRadioknapper: FunctionComponent<OwnProps & WrappedComponentP
       manualHideChildren
     >
       <BehandlingFormFieldCleaner
-        behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
         formName={formName}
         fieldNames={['aktivtArbeidsforholdHandlingField']}
       >
@@ -214,8 +206,6 @@ const ArbeidsforholdRadioknapper: FunctionComponent<OwnProps & WrappedComponentP
       hasReceivedInntektsmelding,
       formName,
       readOnly,
-      behandlingId,
-      behandlingVersjon,
       arbeidsforholdHandlingVerdi,
     )}
   </RadioGroupField>

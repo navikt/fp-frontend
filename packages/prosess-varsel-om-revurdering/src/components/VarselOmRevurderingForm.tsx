@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { InjectedFormProps, setSubmitFailed } from 'redux-form';
+import {
+  formValueSelector, InjectedFormProps, reduxForm, setSubmitFailed,
+} from 'redux-form';
 import { createSelector } from 'reselect';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { bindActionCreators, Dispatch } from 'redux';
@@ -11,9 +13,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import {
-  RadioGroupField, RadioOption, TextAreaField, behandlingForm, behandlingFormValueSelector,
-} from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
 import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
@@ -48,8 +48,6 @@ type FormValues = {
 }
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   behandlingArsaker: Behandling['behandlingÅrsaker'];
   sprakkode: Kodeverk;
   behandlingType: Kodeverk;
@@ -288,7 +286,7 @@ const EMPTY_ARRAY = [];
 
 const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const {
-    behandlingId, behandlingVersjon, behandlingArsaker, aksjonspunkter, sprakkode, familiehendelse,
+    behandlingArsaker, aksjonspunkter, sprakkode, familiehendelse,
   } = initialOwnProps;
   const erAutomatiskRevurdering = behandlingArsaker.reduce((result, current) => (result || current.erAutomatiskRevurdering), false);
   const aksjonspunkt = aksjonspunkter[0];
@@ -298,7 +296,7 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
   return (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
     initialValues: buildInitialValues(ownProps),
     aksjonspunktStatus: aksjonspunkt.status.kode,
-    ...behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'sendVarsel', 'fritekst', 'begrunnelse', 'kode'),
+    ...formValueSelector(formName)(state, 'sendVarsel', 'fritekst', 'begrunnelse', 'kode'),
     avklartBarn: nullSafe(familiehendelse.register).avklartBarn,
     termindato: nullSafe(familiehendelse.gjeldende).termindato,
     vedtaksDatoSomSvangerskapsuke: nullSafe(familiehendelse.gjeldende).vedtaksDatoSomSvangerskapsuke,
@@ -315,9 +313,11 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   }, dispatch),
 });
 
-const VarselOmRevurderingForm = connect(mapStateToPropsFactory, mapDispatchToProps)(injectIntl(behandlingForm({
+const VarselOmRevurderingForm = connect(mapStateToPropsFactory, mapDispatchToProps)(reduxForm({
   form: formName,
   enableReinitialize: true,
-})(VarselOmRevurderingFormImpl)));
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
+})(injectIntl(VarselOmRevurderingFormImpl)));
 
 export default VarselOmRevurderingForm;

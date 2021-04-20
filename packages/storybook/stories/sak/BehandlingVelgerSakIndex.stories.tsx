@@ -9,7 +9,7 @@ import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import BehandlingVelgerSakIndex from '@fpsak-frontend/sak-behandling-velger';
 import { Behandling, Kodeverk } from '@fpsak-frontend/types';
 
-import withReduxAndRouterProvider from '../../decorators/withReduxAndRouter';
+import withRouterProvider from '../../decorators/withRouter';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
@@ -166,7 +166,7 @@ const getKodeverkFn = (kodeverk: Kodeverk) => {
 export default {
   title: 'sak/sak-behandling-velger',
   component: BehandlingVelgerSakIndex,
-  decorators: [withKnobs, withReduxAndRouterProvider],
+  decorators: [withKnobs, withRouterProvider],
 };
 
 export const visPanelForValgAvBehandlinger = () => {

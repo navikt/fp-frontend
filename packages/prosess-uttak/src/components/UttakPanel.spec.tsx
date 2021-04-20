@@ -153,7 +153,6 @@ describe('<UttakPanel>', () => {
       behandlingType={{} as Kodeverk}
       alleKodeverk={kodeverk}
       behandlingId={1}
-      behandlingVersjon={1}
       behandlingStatus={{} as Kodeverk}
       employeeHasAccess
       fagsak={{} as Fagsak}
@@ -207,7 +206,6 @@ describe('<UttakPanel>', () => {
       behandlingType={{} as Kodeverk}
       alleKodeverk={kodeverk}
       behandlingId={1}
-      behandlingVersjon={1}
       behandlingStatus={{} as Kodeverk}
       employeeHasAccess
       fagsak={{} as Fagsak}

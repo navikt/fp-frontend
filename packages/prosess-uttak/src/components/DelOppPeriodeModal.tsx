@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
 import moment from 'moment/moment';
@@ -11,7 +11,7 @@ import {
   calcDaysAndWeeks, dateAfterOrEqual, dateBeforeOrEqual, DDMMYYYY_DATE_FORMAT, hasValidDate, required,
 } from '@fpsak-frontend/utils';
 import { FlexColumn, FlexContainer, FlexRow } from '@fpsak-frontend/shared-components';
-import { DatepickerField, behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
+import { DatepickerField } from '@fpsak-frontend/form';
 
 import styles from './delOppPeriodeModal.less';
 import { PeriodeMedClassName } from './Uttak';
@@ -39,8 +39,6 @@ interface PureOwnProps {
   periodeData: PeriodeMedClassName;
   cancelEvent: () => void;
   showModal: boolean;
-  behandlingId: number;
-  behandlingVersjon: number;
   splitPeriod: (data: DeltPeriodeData) => void;
 }
 
@@ -171,16 +169,17 @@ const transformValues = (values: FormValues, periodeData: PeriodeMedClassName): 
 };
 
 const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {
-  const { behandlingId, behandlingVersjon } = ownProps;
   const validate = (values: FormValues) => validateForm(values, ownProps.periodeData);
   const onSubmit = (values: FormValues) => ownProps.splitPeriod(transformValues(values, ownProps.periodeData));
   return (state: any): MappedOwnProps => ({
-    førstePeriodeTom: behandlingFormValueSelector('DelOppPeriode', behandlingId, behandlingVersjon)(state, 'ForstePeriodeTomDato'),
+    førstePeriodeTom: formValueSelector('DelOppPeriode')(state, 'ForstePeriodeTomDato'),
     validate,
     onSubmit,
   });
 };
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToPropsFactory)(reduxForm({
   form: 'DelOppPeriode',
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(injectIntl(DelOppPeriodeModal)));

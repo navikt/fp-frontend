@@ -2,13 +2,11 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import { connect } from 'react-redux';
 import { Column, Row } from 'nav-frontend-grid';
 import { injectIntl, FormattedMessage, WrappedComponentProps } from 'react-intl';
-import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
+import { FieldArrayFieldsProps, FieldArrayMetaProps, formValueSelector } from 'redux-form';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Element } from 'nav-frontend-typografi';
 
-import {
-  DatepickerField, SelectField, DecimalField, behandlingFormValueSelector,
-} from '@fpsak-frontend/form';
+import { DatepickerField, SelectField, DecimalField } from '@fpsak-frontend/form';
 import {
   FlexColumn, FlexContainer, FlexRow, PeriodFieldArray, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
@@ -50,8 +48,6 @@ interface PureOwnProps {
   changeField: (field: string, value: string) => void;
   stillingsprosentArbeidsforhold: number;
   setOverstyrtUtbetalingsgrad: (erOverstyrt: boolean) => void;
-  behandlingId: number;
-  behandlingVersjon: number;
   formName: string;
   velferdspermisjoner: Permisjon[];
 }
@@ -78,8 +74,6 @@ export const TilretteleggingFieldArray: FunctionComponent<PureOwnProps & MappedO
   stillingsprosentArbeidsforhold,
   setOverstyrtUtbetalingsgrad,
   velferdspermisjonprosent,
-  behandlingId,
-  behandlingVersjon,
   formName,
 }) => (
   <PeriodFieldArray
@@ -185,8 +179,6 @@ export const TilretteleggingFieldArray: FunctionComponent<PureOwnProps & MappedO
                 {((data && data.stillingsprosent && tilretteleggingKode === tilretteleggingType.DELVIS_TILRETTELEGGING)
                     || tilretteleggingKode === tilretteleggingType.INGEN_TILRETTELEGGING) && (
                     <TilretteleggingUtbetalingsgrad
-                      behandlingId={behandlingId}
-                      behandlingVersjon={behandlingVersjon}
                       fieldId={fieldId}
                       erOverstyrer={erOverstyrer}
                       tilretteleggingKode={tilretteleggingKode}
@@ -211,22 +203,17 @@ export const TilretteleggingFieldArray: FunctionComponent<PureOwnProps & MappedO
 );
 
 const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => {
-  const {
-    behandlingId, behandlingVersjon, formSectionName, velferdspermisjoner, formName,
-  } = ownProps;
+  const { formSectionName, velferdspermisjoner, formName } = ownProps;
   const velferdspermisjonprosent = velferdspermisjoner.filter((p) => skalTaHensynTilPermisjon(
-    behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, `${formSectionName}.tilretteleggingBehovFom`),
+    formValueSelector(formName)(state, `${formSectionName}.tilretteleggingBehovFom`),
     p,
   ))
-    .filter((p) => behandlingFormValueSelector(formName,
-      behandlingId,
-      behandlingVersjon)(state, `${formSectionName}.${finnPermisjonFieldName(p)}`))
+    .filter((p) => formValueSelector(formName)(state, `${formSectionName}.${finnPermisjonFieldName(p)}`))
     .map((p) => p.permisjonsprosent)
     .reduce((sum, prosent) => sum + prosent, 0);
   return {
     velferdspermisjonprosent,
-    tilretteleggingDatoer: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state,
-      `${formSectionName}.tilretteleggingDatoer`),
+    tilretteleggingDatoer: formValueSelector(formName)(state, `${formSectionName}.tilretteleggingDatoer`),
   };
 };
 

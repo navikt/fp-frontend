@@ -1,7 +1,7 @@
 import React, { Component, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import {
-  change as reduxFormChange, FormAction, initialize as reduxFormInitialize, InitializeOptions, InjectedFormProps,
+  change as reduxFormChange, FormAction, formValueSelector, initialize as reduxFormInitialize, InitializeOptions, InjectedFormProps, reduxForm,
 } from 'redux-form';
 import { bindActionCreators, Dispatch } from 'redux';
 import moment from 'moment';
@@ -14,9 +14,6 @@ import {
   AksjonspunktHelpTextTemp, FlexColumn, FlexRow, VerticalSpacer, FaktaGruppe,
 } from '@fpsak-frontend/shared-components';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
-import {
-  getBehandlingFormPrefix, behandlingForm, behandlingFormValueSelector, hasBehandlingFormErrorsOfType, isBehandlingFormDirty, isBehandlingFormSubmitting,
-} from '@fpsak-frontend/form';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
 import { KodeverkMedNavn, FeilutbetalingPeriode, FeilutbetalingPerioderWrapper } from '@fpsak-frontend/types';
@@ -55,7 +52,6 @@ const formaterPerioderForTidslinje = (perioder: ForeldelsesresultatActivity[] = 
 
 interface PureOwnProps {
   behandlingId: number;
-  behandlingVersjon: number;
   apCodes: string[];
   perioderForeldelse: FeilutbetalingPerioderWrapper;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
@@ -72,7 +68,6 @@ type FormValues = {
 };
 interface MappedOwnProps {
   foreldelsesresultatActivity?: ForeldelsesresultatActivity[];
-  behandlingFormPrefix: string;
   merknaderFraBeslutter?: { notAccepted?: boolean };
   initialValues: FormValues;
   onSubmit: (formValues: FormValues) => void;
@@ -145,13 +140,13 @@ export class ForeldelseForm extends Component<PureOwnProps & MappedOwnProps & Di
 
   oppdaterPeriode = (values: PeriodeFormValues): void => {
     const {
-      foreldelsesresultatActivity, reduxFormChange: formChange, behandlingFormPrefix,
+      foreldelsesresultatActivity, reduxFormChange: formChange,
     } = this.props;
     const { ...verdier } = omit(values, 'erSplittet') as ForeldelsesresultatActivity;
 
     const otherThanUpdated = foreldelsesresultatActivity.filter((o: ForeldelsesresultatActivity) => o.fom !== verdier.fom && o.tom !== verdier.tom);
     const sortedActivities = otherThanUpdated.concat(verdier).sort(sortPeriods);
-    formChange(`${behandlingFormPrefix}.${FORELDELSE_FORM_NAME}`, 'foreldelsesresultatActivity', sortedActivities);
+    formChange(FORELDELSE_FORM_NAME, 'foreldelsesresultatActivity', sortedActivities);
     this.togglePeriode();
 
     const periodeMedApenAksjonspunkt = sortedActivities.find(harApentAksjonspunkt);
@@ -161,13 +156,13 @@ export class ForeldelseForm extends Component<PureOwnProps & MappedOwnProps & Di
   }
 
   initializeValgtPeriodeForm = (valgtPeriode: ForeldelsesresultatActivity): void => {
-    const { reduxFormInitialize: formInitialize, behandlingFormPrefix } = this.props;
-    formInitialize(`${behandlingFormPrefix}.${FORELDELSE_PERIODE_FORM_NAME}`, valgtPeriode);
+    const { reduxFormInitialize: formInitialize } = this.props;
+    formInitialize(FORELDELSE_PERIODE_FORM_NAME, valgtPeriode);
   }
 
   oppdaterSplittedePerioder = (perioder: ForeldelsesresultatActivity[]): void => {
     const {
-      foreldelsesresultatActivity, reduxFormChange: formChange, behandlingFormPrefix,
+      foreldelsesresultatActivity, reduxFormChange: formChange,
     } = this.props;
     const { valgtPeriode } = this.state;
 
@@ -182,14 +177,13 @@ export class ForeldelseForm extends Component<PureOwnProps & MappedOwnProps & Di
     const sortedActivities = otherThanUpdated.concat(nyePerioder).sort(sortPeriods);
 
     this.togglePeriode();
-    formChange(`${behandlingFormPrefix}.${FORELDELSE_FORM_NAME}`, 'foreldelsesresultatActivity', sortedActivities);
+    formChange(FORELDELSE_FORM_NAME, 'foreldelsesresultatActivity', sortedActivities);
     this.setPeriode(nyePerioder[0]);
   }
 
   render() {
     const {
       foreldelsesresultatActivity,
-      behandlingFormPrefix,
       navBrukerKjonn,
       apCodes = [],
       readOnlySubmitButton,
@@ -198,7 +192,6 @@ export class ForeldelseForm extends Component<PureOwnProps & MappedOwnProps & Di
       alleKodeverk,
       beregnBelop,
       behandlingId,
-      behandlingVersjon,
       ...formProps
     } = this.props;
     const {
@@ -253,7 +246,6 @@ export class ForeldelseForm extends Component<PureOwnProps & MappedOwnProps & Di
                 {valgtPeriode && (
                   <ForeldelsePeriodeForm
                     periode={valgtPeriode}
-                    behandlingFormPrefix={behandlingFormPrefix}
                     setNestePeriode={this.setNestePeriode}
                     setForrigePeriode={this.setForrigePeriode}
                     oppdaterPeriode={this.oppdaterPeriode}
@@ -261,7 +253,6 @@ export class ForeldelseForm extends Component<PureOwnProps & MappedOwnProps & Di
                     skjulPeriode={this.togglePeriode}
                     readOnly={readOnly}
                     behandlingId={behandlingId}
-                    behandlingVersjon={behandlingVersjon}
                     alleKodeverk={alleKodeverk}
                     beregnBelop={beregnBelop}
                   />
@@ -269,14 +260,9 @@ export class ForeldelseForm extends Component<PureOwnProps & MappedOwnProps & Di
               <VerticalSpacer twentyPx />
               <ProsessStegSubmitButton
                 formName={FORELDELSE_FORM_NAME}
-                behandlingId={behandlingId}
-                behandlingVersjon={behandlingVersjon}
                 isReadOnly={readOnly}
                 isDirty={(isApOpen && valgtPeriode) || formProps.error ? false : undefined}
                 isSubmittable={!isApOpen && !valgtPeriode && !readOnlySubmitButton && !formProps.error}
-                isBehandlingFormSubmitting={isBehandlingFormSubmitting}
-                isBehandlingFormDirty={isBehandlingFormDirty}
-                hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
               />
             </>
           )}
@@ -315,9 +301,7 @@ const lagSubmitFn = createSelector([
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: buildInitialValues(ownProps.perioderForeldelse.perioder),
-  foreldelsesresultatActivity: behandlingFormValueSelector(FORELDELSE_FORM_NAME,
-    ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'foreldelsesresultatActivity'),
-  behandlingFormPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
+  foreldelsesresultatActivity: formValueSelector(FORELDELSE_FORM_NAME)(state, 'foreldelsesresultatActivity'),
   merknaderFraBeslutter: ownProps.alleMerknaderFraBeslutter[aksjonspunktCodesTilbakekreving.VURDER_FORELDELSE],
   onSubmit: lagSubmitFn(ownProps),
 });
@@ -329,6 +313,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   }, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(behandlingForm({
+export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
   form: FORELDELSE_FORM_NAME,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(ForeldelseForm));

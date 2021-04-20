@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { Form, InjectedFormProps } from 'redux-form';
+import {
+  Form, formValueSelector, InjectedFormProps, reduxForm,
+} from 'redux-form';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { Column, Row } from 'nav-frontend-grid';
@@ -11,9 +13,6 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { ProsessStegBegrunnelseTextField, ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
-import {
-  behandlingForm, behandlingFormValueSelector, hasBehandlingFormErrorsOfType, isBehandlingFormDirty, isBehandlingFormSubmitting,
-} from '@fpsak-frontend/form';
 import { KlageVurdering, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { KlageVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -43,8 +42,6 @@ type FormValues = {
 };
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   previewCallback: (data: BrevData) => Promise<any>;
   saveKlage: (data: TransformedValues) => Promise<any>;
   readOnly?: boolean;
@@ -66,8 +63,6 @@ interface MappedOwnProps {
  * Presentasjonskomponent. Setter opp aksjonspunktet for behandling av klage (NFP).
  */
 export const BehandleKlageFormNfpImpl: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
-  behandlingId,
-  behandlingVersjon,
   readOnly,
   handleSubmit,
   previewCallback,
@@ -107,13 +102,8 @@ export const BehandleKlageFormNfpImpl: FunctionComponent<PureOwnProps & MappedOw
         <Column xs="8">
           <ProsessStegSubmitButton
             formName={formProps.form}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             isReadOnly={readOnly}
             isSubmittable={!readOnlySubmitButton}
-            isBehandlingFormSubmitting={isBehandlingFormSubmitting}
-            isBehandlingFormDirty={isBehandlingFormDirty}
-            hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
           />
           {!readOnly && formValues.klageVurdering && formValues.fritekstTilBrev && (formValues.fritekstTilBrev.length > 2)
             && (
@@ -156,10 +146,12 @@ const formName = 'BehandleKlageNfpForm';
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: buildInitialValues(ownProps),
-  formValues: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state,
+  formValues: formValueSelector(formName)(state,
     'klageVurdering', 'begrunnelse', 'fritekstTilBrev', 'klageMedholdArsak', 'klageVurderingOmgjoer') || {},
 });
 
-export default connect(mapStateToProps)(behandlingForm({
+export default connect(mapStateToProps)(reduxForm({
   form: formName,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(injectIntl(BehandleKlageFormNfpImpl)));

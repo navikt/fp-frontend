@@ -56,16 +56,11 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
-      hasAksjonspunkter
-      hasOpenAksjonspunkter
       arbeidsforhold={[arbeidsforhold]}
-      behandlingFormPrefix="panel"
       reduxFormChange={sinon.spy()}
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -83,16 +78,11 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
-      hasAksjonspunkter
-      hasOpenAksjonspunkter
       arbeidsforhold={[arbeidsforhold, arbeidsforhold2]}
-      behandlingFormPrefix="panel"
       reduxFormChange={sinon.spy()}
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -106,16 +96,11 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
-      hasAksjonspunkter
-      hasOpenAksjonspunkter
       arbeidsforhold={[arbeidsforhold]}
-      behandlingFormPrefix="panel"
       reduxFormChange={sinon.spy()}
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -130,16 +115,11 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
-      hasAksjonspunkter
-      hasOpenAksjonspunkter
       arbeidsforhold={[arbeidsforhold]}
-      behandlingFormPrefix="panel"
       reduxFormChange={sinon.spy()}
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -152,20 +132,15 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
-      hasAksjonspunkter
-      hasOpenAksjonspunkter
       arbeidsforhold={[{
         ...arbeidsforhold,
         tilVurdering: true,
         erEndret: true,
       }]}
-      behandlingFormPrefix="panel"
       reduxFormChange={sinon.spy()}
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -178,19 +153,14 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
-      hasAksjonspunkter
-      hasOpenAksjonspunkter
       arbeidsforhold={[{
         ...arbeidsforhold,
         tilVurdering: false,
       }]}
-      behandlingFormPrefix="panel"
       reduxFormChange={sinon.spy()}
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -203,16 +173,11 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
-      hasAksjonspunkter
-      hasOpenAksjonspunkter
       arbeidsforhold={[arbeidsforhold]}
-      behandlingFormPrefix="panel"
       reduxFormChange={sinon.spy()}
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -240,16 +205,11 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
-      hasAksjonspunkter
-      hasOpenAksjonspunkter
       arbeidsforhold={[newArbeidsforhold]}
-      behandlingFormPrefix="panel"
       reduxFormChange={formChangeCallback}
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -264,7 +224,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     expect(calls).toHaveLength(1);
     const { args } = calls[0];
     expect(args).toHaveLength(3);
-    expect(args[0]).toEqual('panel.ArbeidsforholdInfoPanel');
+    expect(args[0]).toEqual('ArbeidsforholdInfoPanel');
     expect(args[1]).toEqual('arbeidsforhold');
     expect(args[2]).toEqual([{
       ...editedArbeidsforhold,
@@ -298,16 +258,11 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
-      hasAksjonspunkter
-      hasOpenAksjonspunkter
       arbeidsforhold={[newArbeidsforhold, oldArbeidsforhold]}
-      behandlingFormPrefix="panel"
       reduxFormChange={formChangeCallback}
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -326,7 +281,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     expect(calls).toHaveLength(1);
     const { args } = calls[0];
     expect(args).toHaveLength(3);
-    expect(args[0]).toEqual('panel.ArbeidsforholdInfoPanel');
+    expect(args[0]).toEqual('ArbeidsforholdInfoPanel');
     expect(args[1]).toEqual('arbeidsforhold');
 
     // FIXME (TOR) fomDato skal ikkje vera undefined her
@@ -500,16 +455,11 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
-      hasAksjonspunkter
-      hasOpenAksjonspunkter
       arbeidsforhold={[arbeidsforhold]}
-      behandlingFormPrefix="panel"
       reduxFormChange={formChangeCallback}
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -527,7 +477,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     expect(calls).toHaveLength(1);
     const { args } = calls[0];
     expect(args).toHaveLength(3);
-    expect(args[0]).toEqual('panel.ArbeidsforholdInfoPanel');
+    expect(args[0]).toEqual('ArbeidsforholdInfoPanel');
     expect(args[1]).toEqual('arbeidsforhold');
     expect(args[2]).toEqual([{
       ...editedArbeidsforhold,
@@ -548,16 +498,11 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
-      hasAksjonspunkter
-      hasOpenAksjonspunkter
       arbeidsforhold={[arbeidsforhold]}
-      behandlingFormPrefix="panel"
       reduxFormChange={formChangeCallback}
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -576,7 +521,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     expect(calls).toHaveLength(1);
     const { args } = calls[0];
     expect(args).toHaveLength(3);
-    expect(args[0]).toEqual('panel.ArbeidsforholdInfoPanel');
+    expect(args[0]).toEqual('ArbeidsforholdInfoPanel');
     expect(args[1]).toEqual('arbeidsforhold');
     expect(args[2]).toEqual([{
       ...editedArbeidsforhold,
@@ -596,16 +541,11 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
-      hasAksjonspunkter
-      hasOpenAksjonspunkter
       arbeidsforhold={[arbeidsforhold]}
-      behandlingFormPrefix="panel"
       reduxFormChange={formChangeCallback}
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -624,7 +564,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     expect(calls).toHaveLength(1);
     const { args } = calls[0];
     expect(args).toHaveLength(3);
-    expect(args[0]).toEqual('panel.ArbeidsforholdInfoPanel');
+    expect(args[0]).toEqual('ArbeidsforholdInfoPanel');
     expect(args[1]).toEqual('arbeidsforhold');
     expect(args[2]).toEqual([{
       ...editedArbeidsforhold,
@@ -644,16 +584,11 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
-      hasAksjonspunkter
-      hasOpenAksjonspunkter
       arbeidsforhold={[arbeidsforhold]}
-      behandlingFormPrefix="panel"
       reduxFormChange={formChangeCallback}
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -673,7 +608,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     expect(calls).toHaveLength(1);
     const { args } = calls[0];
     expect(args).toHaveLength(3);
-    expect(args[0]).toEqual('panel.ArbeidsforholdInfoPanel');
+    expect(args[0]).toEqual('ArbeidsforholdInfoPanel');
     expect(args[1]).toEqual('arbeidsforhold');
     expect(args[2]).toEqual([{
       ...editedArbeidsforhold,
@@ -692,16 +627,11 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
-      hasAksjonspunkter
-      hasOpenAksjonspunkter
       arbeidsforhold={[]}
-      behandlingFormPrefix="panel"
       reduxFormChange={sinon.spy()}
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -745,16 +675,11 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
-      hasAksjonspunkter
-      hasOpenAksjonspunkter
       arbeidsforhold={[]}
-      behandlingFormPrefix="panel"
       reduxFormChange={sinon.spy()}
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -771,16 +696,11 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly
-      hasAksjonspunkter
-      hasOpenAksjonspunkter
       arbeidsforhold={[]}
-      behandlingFormPrefix="panel"
       reduxFormChange={sinon.spy()}
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -796,16 +716,11 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
-      hasAksjonspunkter
-      hasOpenAksjonspunkter
       arbeidsforhold={[arbeidsforhold]}
-      behandlingFormPrefix="panel"
       reduxFormChange={formChangeCallback}
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -829,7 +744,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     expect(calls).toHaveLength(1);
     const { args } = calls[0];
     expect(args).toHaveLength(3);
-    expect(args[0]).toEqual('panel.ArbeidsforholdInfoPanel');
+    expect(args[0]).toEqual('ArbeidsforholdInfoPanel');
     expect(args[1]).toEqual('arbeidsforhold');
     expect(args[2]).toEqual([{
       ...editedArbeidsforhold,
@@ -847,16 +762,11 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
-      hasAksjonspunkter
-      hasOpenAksjonspunkter
       arbeidsforhold={[arbeidsforhold]}
-      behandlingFormPrefix="panel"
       reduxFormChange={formChangeCallback}
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -886,7 +796,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     expect(calls).toHaveLength(1);
     const { args } = calls[0];
     expect(args).toHaveLength(3);
-    expect(args[0]).toEqual('panel.ArbeidsforholdInfoPanel');
+    expect(args[0]).toEqual('ArbeidsforholdInfoPanel');
     expect(args[1]).toEqual('arbeidsforhold');
     expect(args[2]).toEqual([{
       ...editedArbeidsforhold,
@@ -904,16 +814,11 @@ describe('<PersonArbeidsforholdPanel>', () => {
     const wrapper = shallowWithIntl(<PersonArbeidsforholdPanelImpl
       intl={intlMock}
       readOnly={false}
-      hasAksjonspunkter
-      hasOpenAksjonspunkter
       arbeidsforhold={[arbeidsforhold]}
-      behandlingFormPrefix="panel"
       reduxFormChange={formChangeCallback}
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -930,7 +835,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
     expect(calls).toHaveLength(1);
     const { args } = calls[0];
     expect(args).toHaveLength(3);
-    expect(args[0]).toEqual('panel.ArbeidsforholdInfoPanel');
+    expect(args[0]).toEqual('ArbeidsforholdInfoPanel');
     expect(args[1]).toEqual('arbeidsforhold');
     expect(args[2]).toEqual([{
       ...editedArbeidsforhold,

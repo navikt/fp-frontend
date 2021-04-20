@@ -47,15 +47,12 @@ describe('<FodselInfoPanel>', () => {
       hasOpenAksjonspunkter
       submittable
       readOnly={false}
-      formPrefix="test"
       submitCallback={sinon.spy()}
       dispatch={sinon.spy}
       behandlingType={{ kode: behandlingType.FORSTEGANGSSOKNAD, kodeverk: '' }}
       soknad={soknad as Soknad}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
       familiehendelse={familiehendelse as FamilieHendelseSamling}
-      behandlingId={1}
-      behandlingVersjon={1}
     />, messages);
 
     expect(wrapper.find(SjekkFodselDokForm)).toHaveLength(1);
@@ -83,15 +80,12 @@ describe('<FodselInfoPanel>', () => {
       hasOpenAksjonspunkter
       submittable
       readOnly={false}
-      formPrefix="test"
       submitCallback={sinon.spy()}
       dispatch={sinon.spy}
       behandlingType={{ kode: behandlingType.FORSTEGANGSSOKNAD, kodeverk: '' }}
       soknad={soknad as Soknad}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
       familiehendelse={familiehendelse as FamilieHendelseSamling}
-      behandlingId={1}
-      behandlingVersjon={1}
     />, messages);
 
     expect(wrapper.find(TermindatoFaktaForm)).toHaveLength(1);
@@ -103,15 +97,12 @@ describe('<FodselInfoPanel>', () => {
       hasOpenAksjonspunkter
       submittable
       readOnly={false}
-      formPrefix="test"
       submitCallback={sinon.spy()}
       dispatch={sinon.spy}
       behandlingType={{ kode: behandlingType.FORSTEGANGSSOKNAD, kodeverk: '' }}
       soknad={soknad as Soknad}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
       familiehendelse={familiehendelse as FamilieHendelseSamling}
-      behandlingId={1}
-      behandlingVersjon={1}
     />, messages);
 
     expect(wrapper.find(FodselSammenligningIndex)).toHaveLength(1);

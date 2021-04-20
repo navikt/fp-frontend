@@ -2,11 +2,10 @@ import React, { FunctionComponent } from 'react';
 import { IntlShape } from 'react-intl';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
-import { behandlingForm } from '@fpsak-frontend/form';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -35,8 +34,6 @@ interface PureOwnProps {
   readOnly: boolean;
   submittable: boolean;
   submitEnabled: boolean;
-  behandlingId: number;
-  behandlingVersjon: number;
   beregningsgrunnlag: Beregningsgrunnlag;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   behandlingType: Kodeverk;
@@ -64,8 +61,6 @@ const FordelingFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Injec
   isAksjonspunktClosed,
   hasBegrunnelse,
   submitEnabled,
-  behandlingId,
-  behandlingVersjon,
   beregningsgrunnlag,
   alleKodeverk,
   behandlingType,
@@ -104,8 +99,6 @@ const FordelingFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Injec
         isSubmittable={submittable && submitEnabled}
         isReadOnly={readOnly}
         hasOpenAksjonspunkter={!isAksjonspunktClosed}
-        behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
       />
     </>
   </form>
@@ -190,6 +183,10 @@ const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => {
   };
 };
 
-const FordelingForm = connect(mapStateToProps)(behandlingForm({ form: FORM_NAME_FORDEL_BEREGNING })(FordelingFormImpl));
+const FordelingForm = connect(mapStateToProps)(reduxForm({
+  form: FORM_NAME_FORDEL_BEREGNING,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
+})(FordelingFormImpl));
 
 export default FordelingForm;

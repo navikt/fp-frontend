@@ -159,12 +159,9 @@ describe('<AvklareAktiviteterPanel>', () => {
       kanOverstyre={false}
       aksjonspunkter={aksjonspunkter}
       erOverstyrt={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       submitCallback={sinon.spy()}
       onSubmit={() => undefined}
       erBgOverstyrt={false}
-      behandlingFormPrefix="test"
       alleKodeverk={alleKodeverk}
       reduxFormInitialize={() => {}}
       beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
@@ -193,10 +190,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       aksjonspunkter={aksjonspunkter}
       erOverstyrt={false}
       erBgOverstyrt={false}
-      behandlingFormPrefix="test"
       alleKodeverk={alleKodeverk}
-      behandlingId={1}
-      behandlingVersjon={1}
       submitCallback={sinon.spy()}
       onSubmit={() => undefined}
       beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
@@ -231,10 +225,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       aksjonspunkter={aksjonspunkter}
       erOverstyrt={false}
       erBgOverstyrt={false}
-      behandlingFormPrefix="test"
       alleKodeverk={alleKodeverk}
-      behandlingId={1}
-      behandlingVersjon={1}
       submitCallback={sinon.spy()}
       onSubmit={() => undefined}
       beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
@@ -266,14 +257,11 @@ describe('<AvklareAktiviteterPanel>', () => {
       helpText={[]}
       harAndreAksjonspunkterIPanel={false}
       kanOverstyre
-      behandlingId={1}
-      behandlingVersjon={1}
       submitCallback={sinon.spy()}
       onSubmit={() => undefined}
       aksjonspunkter={aksjonspunkter}
       erOverstyrt
       erBgOverstyrt={false}
-      behandlingFormPrefix="test"
       alleKodeverk={alleKodeverk}
       reduxFormInitialize={() => {}}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
@@ -296,8 +284,6 @@ describe('<AvklareAktiviteterPanel>', () => {
       aksjonspunkter: apsAvklarAktiviteter,
       readOnly: false,
       submittable: true,
-      behandlingId: 1,
-      behandlingVersjon: 1,
       harAndreAksjonspunkterIPanel: false,
       submitCallback: null,
       reduxFormInitialize: null,
@@ -320,8 +306,6 @@ describe('<AvklareAktiviteterPanel>', () => {
       aksjonspunkter: aps,
       readOnly: false,
       submittable: true,
-      behandlingId: 1,
-      behandlingVersjon: 1,
       harAndreAksjonspunkterIPanel: false,
       submitCallback: null,
       reduxFormInitialize: null,
@@ -346,8 +330,6 @@ describe('<AvklareAktiviteterPanel>', () => {
       aksjonspunkter: aps,
       readOnly: false,
       submittable: true,
-      behandlingId: 1,
-      behandlingVersjon: 1,
       harAndreAksjonspunkterIPanel: false,
       submitCallback: null,
       reduxFormInitialize: null,

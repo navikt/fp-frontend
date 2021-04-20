@@ -17,7 +17,6 @@ type OwnProps = {
 };
 
 const BeregningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
-  behandling,
   beregningsgrunnlag,
   alleKodeverk,
   aksjonspunkter,
@@ -33,8 +32,6 @@ const BeregningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps>
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="BeregningFaktaIndex" formData={formData} setFormData={setFormData}>
       <BeregningInfoPanel
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         beregningsgrunnlag={beregningsgrunnlag}
         alleKodeverk={alleKodeverk}
         aksjonspunkter={aksjonspunkter}

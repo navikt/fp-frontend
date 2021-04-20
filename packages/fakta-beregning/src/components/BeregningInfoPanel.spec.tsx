@@ -20,9 +20,6 @@ const {
 
 const alleKodeverk = {};
 
-const behandlingId = 1;
-const behandlingVersjon = 1;
-
 const beregningsgrunnlag = {
   faktaOmBeregning: {
     faktaOmBeregningTilfeller: [],
@@ -54,8 +51,6 @@ describe('<BeregningInfoPanel>', () => {
       submittable
       readOnly
       alleKodeverk={alleKodeverk}
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       submitCallback={sinon.spy()}
       beregningsgrunnlag={beregningsgrunnlag as Beregningsgrunnlag}
       erOverstyrer={false}
@@ -88,8 +83,6 @@ describe('<BeregningInfoPanel>', () => {
       readOnly={false}
       submitCallback={sinon.spy()}
       alleKodeverk={alleKodeverk}
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       beregningsgrunnlag={beregningsgrunnlag as Beregningsgrunnlag}
       erOverstyrer={false}
       arbeidsgiverOpplysningerPerId={{}}
@@ -122,8 +115,6 @@ describe('<BeregningInfoPanel>', () => {
       readOnly={false}
       submitCallback={sinon.spy()}
       alleKodeverk={alleKodeverk}
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       beregningsgrunnlag={beregningsgrunnlag as Beregningsgrunnlag}
       erOverstyrer={false}
       arbeidsgiverOpplysningerPerId={{}}
@@ -156,8 +147,6 @@ describe('<BeregningInfoPanel>', () => {
       readOnly
       submitCallback={sinon.spy()}
       alleKodeverk={alleKodeverk}
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       beregningsgrunnlag={beregningsgrunnlag as Beregningsgrunnlag}
       erOverstyrer={false}
       arbeidsgiverOpplysningerPerId={{}}

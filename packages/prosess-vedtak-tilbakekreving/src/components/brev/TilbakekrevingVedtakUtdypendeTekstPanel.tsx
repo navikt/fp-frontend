@@ -1,13 +1,14 @@
 import React, { FunctionComponent, useState } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { formValueSelector } from 'redux-form';
 import { Undertekst } from 'nav-frontend-typografi';
 
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import {
   required, hasValidText, maxLength, minLength,
 } from '@fpsak-frontend/utils';
-import { TextAreaField, behandlingFormValueSelector } from '@fpsak-frontend/form';
+import { TextAreaField } from '@fpsak-frontend/form';
 import { Image, VerticalSpacer } from '@fpsak-frontend/shared-components';
 
 import styles from './tilbakekrevingVedtakUtdypendeTekstPanel.less';
@@ -24,8 +25,6 @@ interface PureOwnProps {
   fritekstPakrevet: boolean;
   maximumLength?: number;
   formName: string;
-  behandlingId: number;
-  behandlingVersjon: number;
 }
 
 interface MappedOwnProps {
@@ -83,7 +82,7 @@ export const TilbakekrevingVedtakUtdypendeTekstPanel: FunctionComponent<PureOwnP
 };
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  isEmpty: behandlingFormValueSelector(ownProps.formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, ownProps.type) === undefined,
+  isEmpty: formValueSelector(ownProps.formName)(state, ownProps.type) === undefined,
 });
 
 export default connect(mapStateToProps)(injectIntl(TilbakekrevingVedtakUtdypendeTekstPanel));

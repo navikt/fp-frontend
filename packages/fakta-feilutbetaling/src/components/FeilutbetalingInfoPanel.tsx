@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import {
-  clearFields, change, getFormValues, InjectedFormProps,
+  clearFields, change, getFormValues, InjectedFormProps, reduxForm, formValueSelector,
 } from 'redux-form';
 import moment from 'moment';
 import { Column, Row } from 'nav-frontend-grid';
@@ -15,9 +15,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
-import {
-  TextAreaField, behandlingForm, getBehandlingFormPrefix, CheckboxField, behandlingFormValueSelector, getBehandlingFormName,
-} from '@fpsak-frontend/form';
+import { TextAreaField, CheckboxField } from '@fpsak-frontend/form';
 import { VerticalSpacer, AksjonspunktHelpTextTemp, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import {
   DDMMYYYY_DATE_FORMAT, hasValidText, maxLength, minLength, required, getKodeverknavnFn, decodeHtmlEntity,
@@ -54,13 +52,10 @@ interface PureOwnProps {
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   fpsakKodeverk: {[key: string]: KodeverkMedNavn[]};
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  behandlingId: number;
-  behandlingVersjon: number;
 }
 
 interface MappedOwnProps {
   årsaker: FeilutbetalingAarsak['hendelseTyper'];
-  behandlingFormPrefix: string;
   behandlePerioderSamlet: boolean;
   formValues: FormValues;
   initialValues: FormValues;
@@ -68,7 +63,7 @@ interface MappedOwnProps {
 }
 
 interface DispatchProps {
-  clearFields: (form: string, keepTouched: boolean, persistentSubmitErrors: boolean, fields?: string) => void;
+  clearFields: any;
 }
 
 export class FeilutbetalingInfoPanelImpl extends Component<PureOwnProps & MappedOwnProps & DispatchProps & InjectedFormProps> {
@@ -80,7 +75,7 @@ export class FeilutbetalingInfoPanelImpl extends Component<PureOwnProps & Mapped
 
   onChangeÅrsak(event: ReactNode, elementId: number, årsak: string): void {
     const {
-      behandlingFormPrefix, clearFields: clearFormFields, change: changeValue, formValues, behandlePerioderSamlet,
+      clearFields: clearFormFields, change: changeValue, formValues, behandlePerioderSamlet,
     } = this.props;
 
     if (behandlePerioderSamlet) {
@@ -92,14 +87,14 @@ export class FeilutbetalingInfoPanelImpl extends Component<PureOwnProps & Mapped
         if (i !== elementId) {
           const { årsak: periodeÅrsak } = perioder[i];
           const fields = [`perioder.${i}.${periodeÅrsak}`];
-          clearFormFields(`${behandlingFormPrefix}.${formName}`, false, false, ...fields);
+          clearFormFields(formName, false, false, ...fields);
           changeValue(`perioder.${i}.årsak`, nyÅrsak);
         }
       }
     }
 
     const fields = [`perioder.${elementId}.${årsak}`];
-    clearFormFields(`${behandlingFormPrefix}.${formName}`, false, false, ...fields);
+    clearFormFields(formName, false, false, ...fields);
   }
 
   onChangeUnderÅrsak(event: ReactNode, elementId: number, årsak: string): void {
@@ -132,8 +127,6 @@ export class FeilutbetalingInfoPanelImpl extends Component<PureOwnProps & Mapped
       årsaker,
       readOnly,
       alleMerknaderFraBeslutter,
-      behandlingId,
-      behandlingVersjon,
       alleKodeverk,
       fpsakKodeverk,
       ...formProps
@@ -217,8 +210,6 @@ export class FeilutbetalingInfoPanelImpl extends Component<PureOwnProps & Mapped
                     withoutBorder
                   >
                     <FeilutbetalingPerioderTable
-                      behandlingId={behandlingId}
-                      behandlingVersjon={behandlingVersjon}
                       perioder={feilutbetaling.perioder}
                       formName={formName}
                       årsaker={årsaker}
@@ -408,9 +399,8 @@ const lagSubmitFn = createSelector([
 const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   årsaker: getSortedFeilutbetalingArsaker(ownProps),
   initialValues: buildInitialValues(ownProps),
-  behandlingFormPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
-  behandlePerioderSamlet: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'behandlePerioderSamlet'),
-  formValues: getFormValues(getBehandlingFormName(ownProps.behandlingId, ownProps.behandlingVersjon, formName))(state) || {},
+  behandlePerioderSamlet: formValueSelector(formName)(state, 'behandlePerioderSamlet'),
+  formValues: getFormValues(formName)(state) || {},
   onSubmit: lagSubmitFn(ownProps),
 });
 
@@ -421,7 +411,9 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   }, dispatch),
 });
 
-const FeilutbetalingForm = behandlingForm({
+const FeilutbetalingForm = reduxForm({
   form: formName,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(FeilutbetalingInfoPanelImpl);
 export default connect(mapStateToPropsFactory, mapDispatchToProps)(FeilutbetalingForm);

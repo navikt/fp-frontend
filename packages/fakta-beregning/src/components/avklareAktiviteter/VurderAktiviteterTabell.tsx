@@ -4,12 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import { createSelector } from 'reselect';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import {
-  getBehandlingFormName,
-  RadioGroupField, RadioOption, DatepickerField,
-} from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption, DatepickerField } from '@fpsak-frontend/form';
 import { required, getKodeverknavnFn, DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import opptjeningAktivitetTyper from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
@@ -262,12 +258,6 @@ type OwnProps = {
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
-type InitialProps = {
-  formNameAvklarAktiviteter: string;
-  behandlingId: number;
-  behandlingVersjon: number;
-}
-
 type MappedOwnProps = {
   behandlingFormName: string;
 }
@@ -385,15 +375,8 @@ export class VurderAktiviteterTabell extends Component<OwnProps & MappedOwnProps
   }
 }
 
-const getCompleteFormName = createSelector(
-  [(ownProps: InitialProps) => ownProps.formNameAvklarAktiviteter,
-    (ownProps: InitialProps) => ownProps.behandlingId,
-    (ownProps: InitialProps) => ownProps.behandlingVersjon],
-  (formNameAvklarAktiviteter, behandlingId, versjon) => getBehandlingFormName(behandlingId, versjon, formNameAvklarAktiviteter),
-);
-
 const mapStateToProps = (state, ownProps) => ({
-  behandlingFormName: getCompleteFormName(ownProps),
+  behandlingFormName: ownProps.formNameAvklarAktiviteter,
 });
 
 const mapDispatchToProps = (dispatch) => ({

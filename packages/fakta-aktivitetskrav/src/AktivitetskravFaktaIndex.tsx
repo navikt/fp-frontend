@@ -18,7 +18,6 @@ interface OwnProps {
 }
 
 const AktivitetskravFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
-  behandling,
   harApneAksjonspunkter,
   uttakKontrollerAktivitetskrav,
   submitCallback,
@@ -36,8 +35,6 @@ const AktivitetskravFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelP
     <RawIntlProvider value={intl}>
       <ReduxWrapper formName="AktivitetskravFaktaIndex" formData={formData} setFormData={setFormData}>
         <AktivitetskravFaktaForm
-          behandlingId={behandling.id}
-          behandlingVersjon={behandling.versjon}
           harApneAksjonspunkter={harApneAksjonspunkter}
           sorterteAktivitetskrav={sorterteAktivitetskrav}
           submitCallback={submitCallback}

@@ -17,8 +17,6 @@ interface OwnProps {
   submitCallback: (data: VurderFaresignalerAp) => Promise<void>;
   isRiskPanelOpen: boolean;
   toggleRiskPanel: () => void;
-  behandlingId: number;
-  behandlingVersjon: number;
   faresignalVurderinger: KodeverkMedNavn[];
 }
 
@@ -34,8 +32,6 @@ const HoyRisikoTittel: FunctionComponent<OwnProps> = ({
   submitCallback,
   isRiskPanelOpen,
   toggleRiskPanel,
-  behandlingId,
-  behandlingVersjon,
   faresignalVurderinger,
 }) => (
   <EkspanderbartpanelBase
@@ -55,8 +51,6 @@ const HoyRisikoTittel: FunctionComponent<OwnProps> = ({
       aksjonspunkt={aksjonspunkt}
       readOnly={readOnly}
       submitCallback={submitCallback}
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       faresignalVurderinger={faresignalVurderinger}
     />
   </EkspanderbartpanelBase>

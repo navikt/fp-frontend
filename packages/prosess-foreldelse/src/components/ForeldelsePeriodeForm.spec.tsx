@@ -15,7 +15,6 @@ describe('<ForeldelsePeriodeForm>', () => {
     const wrapper = shallow(
       <ForeldelsePeriodeFormImpl
         periode={periode}
-        behandlingFormPrefix="form"
         skjulPeriode={sinon.spy()}
         readOnly={false}
         foreldelseVurderingTyper={[{
@@ -39,7 +38,6 @@ describe('<ForeldelsePeriodeForm>', () => {
         setForrigePeriode={sinon.spy()}
         oppdaterSplittedePerioder={sinon.spy()}
         behandlingId={1}
-        behandlingVersjon={2}
         beregnBelop={sinon.spy()}
         alleKodeverk={{}}
         oppdaterPeriode={sinon.spy()}

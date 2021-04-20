@@ -10,11 +10,6 @@ const fellesAksjonspunkt = { definisjon: { kode: VURDER_FAKTA_FOR_ATFL_SN } };
 const avklarAktiviteterAksjonspunkt = { definisjon: { kode: AVKLAR_AKTIVITETER } };
 const aksjonspunkter = [fellesAksjonspunkt, avklarAktiviteterAksjonspunkt];
 
-const behandlingProps = {
-  behandlingId: 1000051,
-  behandlingVersjon: 1,
-};
-
 describe('<BeregningFormUtils>', () => {
   it('skal returnere udefinert om values er udefinert', () => {
     const formValues = getFormValuesForBeregning.resultFunc(undefined);
@@ -26,7 +21,8 @@ describe('<BeregningFormUtils>', () => {
       test: 'test',
     };
     const state = lagStateMedAksjonspunkterOgBeregningsgrunnlag(aksjonspunkter, {}, formNameVurderFaktaBeregning, values);
-    const formValues = getFormValuesForBeregning(state, behandlingProps);
+    const formValues = getFormValuesForBeregning(state);
+    // @ts-ignore
     expect(formValues.test).toBe('test');
   });
 
@@ -35,7 +31,8 @@ describe('<BeregningFormUtils>', () => {
       test: 'test',
     };
     const state = lagStateMedAksjonspunkterOgBeregningsgrunnlag(aksjonspunkter, {}, formNameVurderFaktaBeregning, {}, values);
-    const formValues = getFormInitialValuesForBeregning(state, behandlingProps);
+    const formValues = getFormInitialValuesForBeregning(state);
+    // @ts-ignore
     expect(formValues.test).toBe('test');
   });
 });

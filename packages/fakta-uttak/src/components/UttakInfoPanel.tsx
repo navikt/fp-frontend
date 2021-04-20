@@ -40,8 +40,6 @@ interface OwnProps {
   behandlingType: Kodeverk;
   behandlingArsaker: Behandling['behandlingÅrsaker'];
   behandlingStatus: Kodeverk;
-  behandlingId: number;
-  behandlingVersjon: number;
   ytelsefordeling: Ytelsefordeling;
   uttakPerioder: UttakKontrollerFaktaPerioder[];
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -61,8 +59,6 @@ const UttakInfoPanel: FunctionComponent<OwnProps> = ({
   behandlingType,
   behandlingArsaker,
   behandlingStatus,
-  behandlingId,
-  behandlingVersjon,
   ytelsefordeling,
   uttakPerioder,
   alleKodeverk,
@@ -97,8 +93,6 @@ const UttakInfoPanel: FunctionComponent<OwnProps> = ({
             readOnly={readOnly}
             aksjonspunkt={avklarAnnenForelderRettAp}
             submitCallback={submitCallback}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             ytelsefordeling={ytelsefordeling}
           />
           <VerticalSpacer twentyPx />
@@ -111,8 +105,6 @@ const UttakInfoPanel: FunctionComponent<OwnProps> = ({
           readOnly={(overrideReadOnly && (!isRevurdering || !behandlingUtredes || behandlingPaaVent)) || !ytelsefordeling.endringsdato}
           aksjonspunkter={uttakAp}
           submitCallback={submitCallback}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
           behandlingStatus={behandlingStatus}
           ytelsefordeling={ytelsefordeling}
           uttakPerioder={sortedUttakPerioder}

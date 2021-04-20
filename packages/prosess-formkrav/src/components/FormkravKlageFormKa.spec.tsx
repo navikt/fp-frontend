@@ -14,8 +14,6 @@ describe('<FormkravKlageFormKa>', () => {
       {...reduxFormPropsMock}
       readOnly={false}
       readOnlySubmitButton
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       avsluttedeBehandlinger={[]}
       klageVurdering={{} as KlageVurdering}

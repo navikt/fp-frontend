@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { createSelector } from 'reselect';
-import { clearFields, FormAction, InjectedFormProps } from 'redux-form';
+import {
+  clearFields, FormAction, formValueSelector, InjectedFormProps, reduxForm,
+} from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 import {
   Element, Normaltekst, Undertekst, Undertittel,
 } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
-import {
-  RadioGroupField, RadioOption, TextAreaField, getBehandlingFormPrefix, behandlingForm, behandlingFormValueSelector,
-} from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
 import {
   AksjonspunktHelpTextTemp, ArrowBox, Image, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
@@ -62,8 +62,6 @@ type FormValues = {
 
 interface PureOwnProps {
   fagsak: Fagsak;
-  behandlingId: number;
-  behandlingVersjon: number;
   sprakkode: Kodeverk;
   aksjonspunkter: Aksjonspunkt[];
   simuleringResultat?: SimuleringResultat;
@@ -79,7 +77,6 @@ interface PureOwnProps {
 interface MappedOwnProps {
   hasOpenTilbakekrevingsbehandling: boolean;
   isForeldrepenger: boolean;
-  behandlingFormPrefix: string;
   varseltekst?: string;
   initialValues: FormValues;
   onSubmit: (formValues: FormValues) => any;
@@ -99,7 +96,7 @@ interface OwnState {
   feilutbetaling?: number;
 }
 
-type Props = PureOwnProps & MappedOwnProps & DispatchProps & WrappedComponentProps & InjectedFormProps
+type Props = PureOwnProps & MappedOwnProps & DispatchProps & WrappedComponentProps & InjectedFormProps;
 
 export class AvregningPanelImpl extends Component<Props, OwnState> {
   static defaultProps = {
@@ -144,9 +141,9 @@ export class AvregningPanelImpl extends Component<Props, OwnState> {
   }
 
   resetFields(): void {
-    const { behandlingFormPrefix, clearFields: clearFormFields } = this.props;
+    const { clearFields: clearFormFields } = this.props;
     const fields = ['videreBehandling'];
-    clearFormFields(`${behandlingFormPrefix}.${formName}`, false, false, ...fields);
+    clearFormFields(formName, false, false, ...fields);
   }
 
   previewMessage(e: React.MouseEvent): void {
@@ -358,15 +355,12 @@ const lagSubmitFn = createSelector([
 (submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
-  const {
-    behandlingId, behandlingVersjon, tilbakekrevingvalg, fagsak,
-  } = ownProps;
+  const { tilbakekrevingvalg, fagsak } = ownProps;
   const hasOpenTilbakekrevingsbehandling = tilbakekrevingvalg !== undefined
     && tilbakekrevingvalg.videreBehandling.kode === tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER;
   return {
-    varseltekst: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'varseltekst'),
+    varseltekst: formValueSelector(formName)(state, 'varseltekst'),
     initialValues: buildInitialValues(state, ownProps),
-    behandlingFormPrefix: getBehandlingFormPrefix(behandlingId, behandlingVersjon),
     isForeldrepenger: fagsak.fagsakYtelseType.kode === fagsakYtelseType.FORELDREPENGER,
     hasOpenTilbakekrevingsbehandling,
     onSubmit: lagSubmitFn(ownProps),
@@ -379,7 +373,10 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   }, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(behandlingForm({
+// @ts-ignore Fiks
+export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
   form: formName,
   enableReinitialize: true,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(injectIntl(AvregningPanelImpl)));

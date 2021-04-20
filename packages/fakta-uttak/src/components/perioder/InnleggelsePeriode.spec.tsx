@@ -28,8 +28,6 @@ describe('<InnleggelsePeriode>', () => {
       bekreftet
       {...reduxFormPropsMock}
       readOnly={false}
-      behandlingId={1}
-      behandlingVersjon={2}
       onSubmit={sinon.spy()}
     />, messages);
 
@@ -55,8 +53,6 @@ describe('<InnleggelsePeriode>', () => {
       bekreftet
       {...reduxFormPropsMock}
       readOnly={false}
-      behandlingId={1}
-      behandlingVersjon={2}
       onSubmit={sinon.spy()}
     />, messages);
 

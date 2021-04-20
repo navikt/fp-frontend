@@ -18,7 +18,6 @@ interface OwnProps {
 }
 
 const ArbeidsforholdFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
-  behandling,
   inntektArbeidYtelse,
   alleKodeverk,
   alleMerknaderFraBeslutter,
@@ -33,8 +32,6 @@ const ArbeidsforholdFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelP
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="ArbeidsforholdFaktaIndex" formData={formData} setFormData={setFormData}>
       <ArbeidsforholdInfoPanel
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         arbeidsforhold={inntektArbeidYtelse.arbeidsforhold}
         skalKunneLeggeTilNyeArbeidsforhold={inntektArbeidYtelse.skalKunneLeggeTilNyeArbeidsforhold}
         alleKodeverk={alleKodeverk}

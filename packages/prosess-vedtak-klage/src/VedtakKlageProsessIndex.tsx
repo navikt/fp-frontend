@@ -29,8 +29,6 @@ const VedtakKlageProsessIndex: FunctionComponent<OwnProps & StandardProsessPanel
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="VedtakKlageProsessIndex" formData={formData} setFormData={setFormData}>
       <VedtakKlageForm
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         behandlingsresultat={behandling.behandlingsresultat}
         behandlingPaaVent={behandling.behandlingPaaVent}
         klageVurdering={klageVurdering}

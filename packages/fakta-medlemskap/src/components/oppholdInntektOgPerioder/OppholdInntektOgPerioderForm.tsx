@@ -2,7 +2,7 @@ import React, { Component, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import {
-  change as reduxFormChange, FormAction, InjectedFormProps, reset as reduxFormReset,
+  change as reduxFormChange, FormAction, formValueSelector, InjectedFormProps, reduxForm, reset as reduxFormReset,
 } from 'redux-form';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { bindActionCreators, Dispatch } from 'redux';
@@ -12,7 +12,6 @@ import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { guid, omitMany } from '@fpsak-frontend/utils';
-import { getBehandlingFormPrefix, behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import {
   Aksjonspunkt, Kodeverk, KodeverkMedNavn, Medlemskap, MedlemPeriode, Soknad, MedlemskapPeriode,
 } from '@fpsak-frontend/types';
@@ -86,8 +85,6 @@ interface PureOwnProps {
   medlemskap: Medlemskap;
   aksjonspunkter: Aksjonspunkt[];
   behandlingType: Kodeverk;
-  behandlingId: number;
-  behandlingVersjon: number;
   submitCallback: (data: AksjonspunktData) => Promise<void>;
   submittable: boolean;
   readOnly: boolean;
@@ -96,7 +93,6 @@ interface PureOwnProps {
 }
 
 interface MappedOwnProps {
-  behandlingFormPrefix: string;
   hasOpenAksjonspunkter: boolean;
   onSubmit: (values: any) => any;
   initialValues: FormValues;
@@ -150,10 +146,10 @@ export class OppholdInntektOgPerioderForm extends Component<Props, OwnState> {
   }
 
   periodeResetCallback(): void {
-    const { behandlingFormPrefix, reduxFormReset: formReset } = this.props;
+    const { reduxFormReset: formReset } = this.props;
     const { valgtPeriode } = this.state;
     if (valgtPeriode) {
-      formReset(`${behandlingFormPrefix}.OppholdInntektOgPeriodeForm-${valgtPeriode.id}`);
+      formReset(`OppholdInntektOgPeriodeForm-${valgtPeriode.id}`);
     }
   }
 
@@ -167,7 +163,7 @@ export class OppholdInntektOgPerioderForm extends Component<Props, OwnState> {
 
   updateOppholdInntektPeriode(values: OppholdFormValues): void {
     const {
-      behandlingFormPrefix, perioder, reduxFormChange: formChange,
+      perioder, reduxFormChange: formChange,
     } = this.props;
 
     const updatedPeriode = perioder.find((p) => p.id === values.id);
@@ -179,7 +175,7 @@ export class OppholdInntektOgPerioderForm extends Component<Props, OwnState> {
 
     const newPerioder = createNewPerioder(perioder, values.id, newPeriodeObject);
 
-    formChange(`${behandlingFormPrefix}.OppholdInntektOgPerioderForm`, 'perioder', newPerioder);
+    formChange('OppholdInntektOgPerioderForm', 'perioder', newPerioder);
   }
 
   isConfirmButtonDisabled(): boolean {
@@ -208,8 +204,6 @@ export class OppholdInntektOgPerioderForm extends Component<Props, OwnState> {
       submittable,
       aksjonspunkter,
       readOnly,
-      behandlingId,
-      behandlingVersjon,
       alleKodeverk,
       alleMerknaderFraBeslutter,
       medlemskap,
@@ -228,8 +222,6 @@ export class OppholdInntektOgPerioderForm extends Component<Props, OwnState> {
         <MedlemskapEndringerTabell
           selectedId={valgtPeriode ? valgtPeriode.id : undefined}
           velgPeriodeCallback={this.velgPeriodeCallback}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
         />
         )}
         {valgtPeriode && (
@@ -240,8 +232,6 @@ export class OppholdInntektOgPerioderForm extends Component<Props, OwnState> {
           submittable={submittable}
           updateOppholdInntektPeriode={this.updateOppholdInntektPeriode}
           periodeResetCallback={this.periodeResetCallback}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
           alleKodeverk={alleKodeverk}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           medlemskap={medlemskap}
@@ -326,14 +316,11 @@ const lagSubmitFn = createSelector([
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
   const hasOpenAksjonspunkter = ownProps.aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
-  const { behandlingId, behandlingVersjon } = ownProps;
-  const behandlingFormPrefix = getBehandlingFormPrefix(behandlingId, behandlingVersjon);
   return {
-    behandlingFormPrefix,
     hasOpenAksjonspunkter,
     onSubmit: lagSubmitFn(ownProps),
     initialValues: buildInitalValues(ownProps),
-    perioder: behandlingFormValueSelector('OppholdInntektOgPerioderForm', behandlingId, behandlingVersjon)(state, 'perioder') || EMPTY_ARRAY,
+    perioder: formValueSelector('OppholdInntektOgPerioderForm')(state, 'perioder') || EMPTY_ARRAY,
   };
 };
 
@@ -344,6 +331,8 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   }, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(behandlingForm({
+export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
   form: 'OppholdInntektOgPerioderForm',
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(injectIntl(OppholdInntektOgPerioderForm)));

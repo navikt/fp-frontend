@@ -32,8 +32,6 @@ describe('<AksjonspunktsbehandlerSN>', () => {
     const wrapper = shallowWithIntl(<AksjonspunktBehandlerSN
       readOnly={false}
       aksjonspunkter={[snNyIArb]}
-      behandlingId={1}
-      behandlingVersjon={1}
     />, messages);
     const compVurderOgFastsettSN2 = wrapper.find(VurderOgFastsettSN);
     expect(compVurderOgFastsettSN2).toHaveLength(1);
@@ -44,8 +42,6 @@ describe('<AksjonspunktsbehandlerSN>', () => {
     const wrapper = shallowWithIntl(<AksjonspunktBehandlerSN
       readOnly={false}
       aksjonspunkter={[snNyIArb]}
-      behandlingId={1}
-      behandlingVersjon={1}
     />, messages);
     const compVurderOgFastsettSN2 = wrapper.find(VurderOgFastsettSN);
     expect(compVurderOgFastsettSN2).toHaveLength(0);

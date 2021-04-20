@@ -31,8 +31,6 @@ const SokersOpplysningspliktVilkarProsessIndex: FunctionComponent<OwnProps & Sta
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="SokersOpplysningspliktVilkarProsessIndex" formData={formData} setFormData={setFormData}>
       <SokersOpplysningspliktForm
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         behandlingsresultat={behandling.behandlingsresultat}
         soknad={soknad}
         aksjonspunkter={aksjonspunkter}

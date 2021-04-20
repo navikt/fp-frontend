@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 
-import { behandlingForm } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { omitMany } from '@fpsak-frontend/utils';
@@ -12,7 +12,6 @@ import {
 } from '@fpsak-frontend/types';
 import { AvklarArbeidsforholdAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
-import { InjectedFormProps } from 'redux-form';
 import BekreftOgForsettKnapp from './BekreftOgForsettKnapp';
 import PersonArbeidsforholdPanel from './PersonArbeidsforholdPanel';
 import CustomArbeidsforhold from '../typer/CustomArbeidsforholdTsType';
@@ -42,8 +41,6 @@ const harAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: Aksjonspunkt[
   .some((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCode);
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   aksjonspunkter: Aksjonspunkt[];
   arbeidsforhold: Arbeidsforhold[];
   submitCallback: (data: AvklarArbeidsforholdAp) => Promise<void>;
@@ -68,8 +65,6 @@ export const ArbeidsforholdInfoPanelImpl: FunctionComponent<PureOwnProps & Injec
   skalKunneLeggeTilNyeArbeidsforhold,
   alleMerknaderFraBeslutter,
   alleKodeverk,
-  behandlingId,
-  behandlingVersjon,
   arbeidsgiverOpplysningerPerId,
   ...formProps
 }) => (
@@ -86,21 +81,15 @@ export const ArbeidsforholdInfoPanelImpl: FunctionComponent<PureOwnProps & Injec
       <PersonArbeidsforholdPanel
         intl={intl}
         readOnly={readOnly}
-        hasAksjonspunkter={aksjonspunkter.length > 0}
-        hasOpenAksjonspunkter={hasOpenAksjonspunkter}
         skalKunneLeggeTilNyeArbeidsforhold={skalKunneLeggeTilNyeArbeidsforhold}
         alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
         alleKodeverk={alleKodeverk}
-        behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
       { harAksjonspunkt(aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD, aksjonspunkter) && (
       <BekreftOgForsettKnapp
         readOnly={readOnly || (!hasOpenAksjonspunkter && formProps.pristine)}
         isSubmitting={formProps.submitting}
-        behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
       />
       )}
     </form>
@@ -141,4 +130,8 @@ const mapStateToProps = (_state, ownProps: PureOwnProps) => ({
   onSubmit: lagSubmitFn(ownProps),
 });
 
-export default connect(mapStateToProps)(behandlingForm({ form: formName })(injectIntl(ArbeidsforholdInfoPanelImpl)));
+export default connect(mapStateToProps)(reduxForm({
+  form: formName,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
+})(injectIntl(ArbeidsforholdInfoPanelImpl)));

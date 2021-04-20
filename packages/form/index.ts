@@ -10,7 +10,4 @@ export { default as TextAreaField } from './src/TextAreaField';
 export { default as PeriodpickerField } from './src/PeriodpickerField';
 export { default as ReduxWrapper } from './src/ReduxWrapper';
 
-export {
-  behandlingForm, behandlingFormValueSelector, hasBehandlingFormErrorsOfType, isBehandlingFormDirty, getBehandlingFormName,
-  isBehandlingFormSubmitting, getBehandlingFormValues, getBehandlingFormInitialValues, getBehandlingFormSyncErrors, getBehandlingFormPrefix,
-} from './src/behandlingForm';
+export { default as hasBehandlingFormErrorsOfType } from './src/hasBehandlingFormErrorsOfType';

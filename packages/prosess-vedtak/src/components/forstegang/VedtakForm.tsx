@@ -1,6 +1,8 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { connect } from 'react-redux';
-import { change, InjectedFormProps } from 'redux-form';
+import {
+  change, formValueSelector, InjectedFormProps, reduxForm,
+} from 'redux-form';
 import { createSelector } from 'reselect';
 import { bindActionCreators } from 'redux';
 import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
@@ -13,7 +15,6 @@ import klageBehandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArs
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 import behandlingResultatType, { isAvslag, isInnvilget } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
-import { behandlingForm, behandlingFormValueSelector, getBehandlingFormPrefix } from '@fpsak-frontend/form';
 import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
@@ -144,8 +145,6 @@ interface PureOwnProps {
   simuleringResultat?: SimuleringResultat;
   vilkar?: Vilkar[];
   beregningErManueltFastsatt: boolean;
-  behandlingId: number;
-  behandlingVersjon: number;
   submitCallback: (data: VedtakAksjonspunkter[]) => Promise<void>;
 }
 
@@ -278,7 +277,7 @@ const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitC
 const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => ({
   onSubmit: lagSubmitFn(ownProps),
   initialValues: buildInitialValues(ownProps),
-  ...behandlingFormValueSelector(formName, ownProps.behandling.id, ownProps.behandling.versjon)(
+  ...formValueSelector(formName)(
     state,
     'aksjonspunktKoder',
     'begrunnelse',
@@ -287,14 +286,14 @@ const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => ({
   ),
 });
 
-const mapDispatchToProps = (dispatch, ownProps: PureOwnProps): DispatchProps => ({
+const mapDispatchToProps = (dispatch): DispatchProps => ({
   ...bindActionCreators({
-    clearFormField: (fieldId) => change(`${getBehandlingFormPrefix(
-      ownProps.behandlingId, ownProps.behandlingVersjon,
-    )}.${formName}`, fieldId, null),
+    clearFormField: (fieldId) => change(formName, fieldId, null),
   }, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(behandlingForm({
+export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
   form: formName,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(injectIntl(VedtakForm)));

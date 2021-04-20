@@ -40,8 +40,6 @@ describe('<UttakPeriodeInnhold>', () => {
       farSøkerFør6Uker={false}
       familiehendelse={{} as FamilieHendelseSamling}
       vilkarForSykdomExists={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       getKodeverknavn={sinon.spy()}
       sisteUttakdatoFørsteSeksUker={{} as moment.Moment}
     />);

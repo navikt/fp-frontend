@@ -41,8 +41,6 @@ describe('<AktivitetskravFaktaDetailForm>', () => {
 
     const wrapper = shallow(<AktivitetskravFaktaDetailForm
       {...reduxFormPropsMock}
-      behandlingId={1}
-      behandlingVersjon={2}
       oppdaterAktivitetskrav={() => undefined}
       valgtAktivitetskrav={valgtAktivitetskrav}
       readOnly={false}

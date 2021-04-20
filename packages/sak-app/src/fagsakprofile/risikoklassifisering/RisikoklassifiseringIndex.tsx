@@ -99,8 +99,6 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
 
   return (
     <RisikoklassifiseringSakIndex
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       aksjonspunkt={risikoAksjonspunkt}
       risikoklassifisering={kontrollresultat}
       isPanelOpen={isRiskPanelOpen}

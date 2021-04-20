@@ -6,10 +6,6 @@ import {
 import {
   VerticalSpacer, FlexContainer, FlexRow, FlexColumn, AksjonspunktBox, Image,
 } from '@fpsak-frontend/shared-components';
-import {
-  hasBehandlingFormErrorsOfType, isBehandlingFormDirty,
-  isBehandlingFormSubmitting,
-} from '@fpsak-frontend/form';
 import { createIntl } from '@fpsak-frontend/utils';
 import avslattImage from '@fpsak-frontend/assets/images/avslaatt_hover.svg';
 import innvilgetImage from '@fpsak-frontend/assets/images/innvilget_hover.svg';
@@ -23,8 +19,6 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   title: string;
-  behandlingId: number;
-  behandlingVersjon: number;
   lovReferanse?: string;
   isAksjonspunktOpen: boolean;
   handleSubmit: (data: any) => any;
@@ -43,8 +37,6 @@ interface OwnProps {
  * Presentasjonskomponent.
  */
 const ProsessPanelTemplate: FunctionComponent<OwnProps> = ({
-  behandlingId,
-  behandlingVersjon,
   lovReferanse,
   title,
   originalErVilkarOk,
@@ -105,14 +97,9 @@ const ProsessPanelTemplate: FunctionComponent<OwnProps> = ({
         {!readOnly && <VerticalSpacer sixteenPx />}
         <ProsessStegSubmitButton
           formName={formName}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
           isReadOnly={readOnly}
           isSubmittable={!readOnlySubmitButton}
           isDirty={isDirty}
-          isBehandlingFormSubmitting={isBehandlingFormSubmitting}
-          isBehandlingFormDirty={isBehandlingFormDirty}
-          hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
         />
 
       </AksjonspunktBox>

@@ -19,7 +19,6 @@ interface OwnProps {
 }
 
 const AdopsjonFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
-  behandling,
   soknad,
   familiehendelse,
   aksjonspunkter,
@@ -36,8 +35,6 @@ const AdopsjonFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> 
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="AdopsjonFaktaIndex" formData={formData} setFormData={setFormData}>
       <AdopsjonInfoPanel
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         soknad={soknad}
         gjeldendeFamiliehendelse={familiehendelse.gjeldende}
         aksjonspunkter={aksjonspunkter}

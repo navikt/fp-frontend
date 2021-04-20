@@ -19,8 +19,6 @@ interface OwnProps {
   vedtaksbrevAvsnitt: VedtaksbrevAvsnitt[];
   formName: string;
   readOnly: boolean;
-  behandlingId: number;
-  behandlingVersjon: number;
   perioderSomIkkeHarUtfyltObligatoriskVerdi: string[];
   fritekstOppsummeringPakrevdMenIkkeUtfylt?: boolean;
   erRevurderingTilbakekrevingFeilBeløpBortfalt?: boolean;
@@ -35,8 +33,6 @@ export const TilbakekrevingEditerVedtaksbrevPanel: FunctionComponent<OwnProps> &
   vedtaksbrevAvsnitt,
   formName,
   readOnly,
-  behandlingId,
-  behandlingVersjon,
   perioderSomIkkeHarUtfyltObligatoriskVerdi,
   fritekstOppsummeringPakrevdMenIkkeUtfylt = false,
   erRevurderingTilbakekrevingFeilBeløpBortfalt,
@@ -79,8 +75,6 @@ export const TilbakekrevingEditerVedtaksbrevPanel: FunctionComponent<OwnProps> &
                       type={underavsnitt.underavsnittstype ? `${periode}.${underavsnitt.underavsnittstype}` : avsnitt.avsnittstype}
                       formName={formName}
                       readOnly={readOnly}
-                      behandlingId={behandlingId}
-                      behandlingVersjon={behandlingVersjon}
                       fritekstPakrevet={underavsnitt.fritekstPåkrevet}
                       maximumLength={erRevurderingTilbakekrevingFeilBeløpBortfalt ? 10000 : null}
                     />

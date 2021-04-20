@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { initialize as reduxFormInitialize, InjectedFormProps } from 'redux-form';
+import { initialize as reduxFormInitialize, InjectedFormProps, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 import { bindActionCreators, Dispatch } from 'redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
@@ -14,7 +14,6 @@ import {
 } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { getBehandlingFormPrefix, behandlingForm } from '@fpsak-frontend/form';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import {
   ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, AvklarBeregningAktiviteterMap, KodeverkMedNavn,
@@ -60,6 +59,7 @@ export const erAvklartAktivitetEndret = createSelector(
       harEndring = VurderAktiviteterPanel.hasValueChangedFromInitial(avklarAktiviteter.aktiviteterTomDatoMapping,
         values,
         initialValues,
+        // @ts-ignore Fiks! Skal ein eigentleg bruka erOverstyrt som er input til denne funksjonen?
         initialValues.erOverstyrt);
     }
     if (values && !harEndring) {
@@ -109,8 +109,6 @@ type OwnProps = {
     harAndreAksjonspunkterIPanel: boolean;
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
     reduxFormInitialize: (...args: any[]) => any;
-    behandlingId: number;
-    behandlingVersjon: number;
     beregningsgrunnlag: Beregningsgrunnlag;
     aksjonspunkter: Aksjonspunkt[];
     formValues?: any;
@@ -123,7 +121,6 @@ type MappedOwnProps = {
   onSubmit: (formValues: any) => void;
   kanOverstyre: boolean;
   helpText: React.ReactNode[];
-  behandlingFormPrefix: string;
   isAksjonspunktClosed: boolean;
   avklarAktiviteter?: AvklarBeregningAktiviteterMap;
   hasBegrunnelse: boolean;
@@ -166,7 +163,7 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
 
   initializeAktiviteter() {
     const {
-      reduxFormInitialize: formInitialize, behandlingFormPrefix,
+      reduxFormInitialize: formInitialize,
       avklarAktiviteter, aksjonspunkter, alleKodeverk, arbeidsgiverOpplysningerPerId,
     } = this.props;
     const { erOverstyrtKnappTrykket } = this.state;
@@ -174,7 +171,7 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
       ...state,
       erOverstyrtKnappTrykket: !erOverstyrtKnappTrykket,
     }));
-    formInitialize(`${behandlingFormPrefix}.${formNameAvklarAktiviteter}`, buildInitialValues(aksjonspunkter, avklarAktiviteter,
+    formInitialize(formNameAvklarAktiviteter, buildInitialValues(aksjonspunkter, avklarAktiviteter,
       alleKodeverk, arbeidsgiverOpplysningerPerId, !erOverstyrtKnappTrykket));
   }
 
@@ -193,8 +190,6 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
         kanOverstyre,
         erBgOverstyrt,
         alleKodeverk,
-        behandlingId,
-        behandlingVersjon,
         formValues,
         arbeidsgiverOpplysningerPerId,
         ...formProps
@@ -260,8 +255,6 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
               values={formValues}
               harAksjonspunkt={hasAksjonspunkt(AVKLAR_AKTIVITETER, aksjonspunkter)}
               formNameAvklarAktiviteter={formNameAvklarAktiviteter}
-              behandlingId={behandlingId}
-              behandlingVersjon={behandlingVersjon}
               arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             />
             )}
@@ -286,8 +279,6 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
                         isSubmittable={submittable && submitEnabled && !formProps.error}
                         isReadOnly={readOnly}
                         hasOpenAksjonspunkter={!isAksjonspunktClosed}
-                        behandlingId={behandlingId}
-                        behandlingVersjon={behandlingVersjon}
                       />
                     </FlexColumn>
                     {kanOverstyre && !hasAksjonspunkt(OVERSTYRING_AV_BEREGNINGSAKTIVITETER, aksjonspunkter) && (
@@ -318,8 +309,6 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
                 isSubmittable={submittable && submitEnabled && !formProps.error}
                 isReadOnly={readOnly}
                 hasOpenAksjonspunkter={!isAksjonspunktClosed}
-                behandlingId={behandlingId}
-                behandlingVersjon={behandlingVersjon}
               />
             </>
             )}
@@ -378,7 +367,7 @@ const lagSubmitFn = createSelector([
 (submitCallback) => (values) => submitCallback(transformValues(values)));
 
 const mapStateToProps = (state, ownProps) => {
-  const values = getFormValuesForAvklarAktiviteter(state, ownProps);
+  const values = getFormValuesForAvklarAktiviteter(state);
   const initialValues = buildInitialValuesAvklarAktiviteter(ownProps);
   return ({
     initialValues,
@@ -387,7 +376,6 @@ const mapStateToProps = (state, ownProps) => {
     onSubmit: lagSubmitFn(ownProps),
     kanOverstyre: skalKunneOverstyre(ownProps.erOverstyrer, ownProps.aksjonspunkter),
     helpText: getHelpTextsAvklarAktiviteter(ownProps),
-    behandlingFormPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
     isAksjonspunktClosed: getIsAksjonspunktClosed(ownProps),
     avklarAktiviteter: getAvklarAktiviteter(ownProps),
     hasBegrunnelse: initialValues && !!initialValues[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME],
@@ -402,6 +390,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   }, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(behandlingForm({
+export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
   form: formNameAvklarAktiviteter,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(injectIntl(AvklareAktiviteterPanelImpl)));

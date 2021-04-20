@@ -16,7 +16,6 @@ type OwnProps = {
 };
 
 const BeregningsgrunnlagProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
-  behandling,
   beregningsgrunnlag,
   aksjonspunkter,
   submitCallback,
@@ -31,7 +30,6 @@ const BeregningsgrunnlagProsessIndex: FunctionComponent<OwnProps & StandardProse
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="BeregningsgrunnlagProsessIndex" formData={formData} setFormData={setFormData}>
       <BeregningFP
-        behandling={behandling}
         beregningsgrunnlag={beregningsgrunnlag}
         aksjonspunkter={aksjonspunkter}
         submitCallback={submitCallback}

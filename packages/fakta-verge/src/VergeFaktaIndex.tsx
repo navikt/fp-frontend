@@ -15,7 +15,6 @@ type OwnProps = {
 };
 
 const VergeFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
-  behandling,
   verge,
   aksjonspunkter,
   alleMerknaderFraBeslutter,
@@ -30,8 +29,6 @@ const VergeFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = (
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="VergeFaktaIndex" formData={formData} setFormData={setFormData}>
       <RegistrereVergeInfoPanel
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         verge={verge}
         aksjonspunkter={aksjonspunkter}
         alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}

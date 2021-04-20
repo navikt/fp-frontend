@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import { InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import {
   dateFormat, guid, getKodeverknavnFn, omitMany,
 } from '@fpsak-frontend/utils';
-import { behandlingForm, getBehandlingFormPrefix } from '@fpsak-frontend/form';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
@@ -38,8 +37,6 @@ interface PureOwnProps {
   uttakPerioder: UttakKontrollerFaktaPerioder[];
   ytelsefordeling: Ytelsefordeling;
   aksjonspunkter: Aksjonspunkt[];
-  behandlingId: number;
-  behandlingVersjon: number;
   submitCallback: (data: FaktaUttakAp[]) => Promise<void>;
   readOnly: boolean;
   hasOpenAksjonspunkter: boolean;
@@ -56,7 +53,6 @@ interface PureOwnProps {
 
 interface MappedOwnProps {
   initialValues: FormValues;
-  behandlingFormPrefix: string;
   hasRevurderingOvertyringAp: boolean;
   validate: (values: FormValues) => any;
   warn: (values: FormValues) => any;
@@ -68,8 +64,6 @@ export const UttakFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps & I
   hasOpenAksjonspunkter,
   aksjonspunkter,
   hasRevurderingOvertyringAp,
-  behandlingId,
-  behandlingVersjon,
   kanOverstyre,
   faktaArbeidsforhold,
   alleKodeverk,
@@ -97,8 +91,6 @@ export const UttakFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps & I
         aksjonspunkter={aksjonspunkter}
         submitting={formProps.submitting}
         hasRevurderingOvertyringAp={hasRevurderingOvertyringAp}
-        behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
         alleKodeverk={alleKodeverk}
         kanOverstyre={kanOverstyre}
         getKodeverknavn={getKodeverknavn}
@@ -282,18 +274,15 @@ const lagSubmitFn = createSelector([
 (submitCallback, initialValues, aksjonspunkter) => (values: FormValues) => submitCallback(transformValues(values, initialValues, aksjonspunkter)));
 
 const mapStateToPropsFactory = (_initialState: any, props: PureOwnProps) => {
-  const { behandlingId, behandlingVersjon } = props;
   const initialValues = buildInitialValues(props);
 
   const validate = (values: FormValues) => validateUttakForm(values, props.aksjonspunkter);
   const warn = (values: FormValues) => warningsUttakForm(values);
 
   return (_state, ownProps: PureOwnProps): MappedOwnProps => {
-    const behandlingFormPrefix = getBehandlingFormPrefix(behandlingId, behandlingVersjon);
     const hasRevurderingOvertyringAp = props.aksjonspunkter.some((ap) => ap.definisjon.kode === AksjonspunktCode.MANUELL_AVKLAR_FAKTA_UTTAK);
     return {
       initialValues,
-      behandlingFormPrefix,
       hasRevurderingOvertyringAp,
       validate,
       warn,
@@ -302,7 +291,9 @@ const mapStateToPropsFactory = (_initialState: any, props: PureOwnProps) => {
   };
 };
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToPropsFactory)(reduxForm({
   form: 'UttakFaktaForm',
   enableReinitialize: true,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(UttakFaktaForm));

@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { connect } from 'react-redux';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import classNames from 'classnames';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -11,9 +11,7 @@ import {
   ariaCheck, getLanguageFromSprakkode, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
 import ugunstAarsakTyper from '@fpsak-frontend/kodeverk/src/ugunstAarsakTyper';
-import {
-  SelectField, TextAreaField, behandlingForm, behandlingFormValueSelector,
-} from '@fpsak-frontend/form';
+import { SelectField, TextAreaField } from '@fpsak-frontend/form';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 
@@ -60,8 +58,6 @@ const getfiltrerteRevurderingVarslingArsaker = (revurderingVarslingArsaker: Kode
 
 interface PureOwnProps {
   submitCallback: (values: FormValues) => void;
-  behandlingId: number;
-  behandlingVersjon: number;
   previewCallback: (mottaker: string, brevmalkode: string, fritekst: string, arsakskode: string) => void;
   recipients: string[];
   templates: Template[];
@@ -212,14 +208,16 @@ const formName = 'Messages';
 const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const onSubmit = (values: FormValues) => initialOwnProps.submitCallback(transformValues(values));
   return (state, ownProps: PureOwnProps) => ({
-    ...behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'mottaker', 'brevmalkode', 'fritekst', 'arsakskode'),
+    ...formValueSelector(formName)(state, 'mottaker', 'brevmalkode', 'fritekst', 'arsakskode'),
     initialValues: buildInitalValues(ownProps.recipients, ownProps.templates, ownProps.isKontrollerRevurderingApOpen),
     onSubmit,
   });
 };
 
-const Messages = connect(mapStateToPropsFactory)(injectIntl(behandlingForm({
+const Messages = connect(mapStateToPropsFactory)(reduxForm({
   form: formName,
-})(MessagesImpl)));
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
+})(injectIntl(MessagesImpl)));
 
 export default Messages;

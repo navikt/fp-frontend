@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import {
   DateLabel, Table, TableColumn, TableRow,
 } from '@fpsak-frontend/shared-components';
-import { behandlingFormValueSelector } from '@fpsak-frontend/form';
 import { MedlemPeriode } from '@fpsak-frontend/types';
+import { formValueSelector } from 'redux-form';
 
 const headerTextCodes = [
   'MedlemskapEndringerTabell.GjeldeneFom',
@@ -15,8 +15,6 @@ const headerTextCodes = [
 type PeriodeMedId = MedlemPeriode & { id: string; }
 
 interface PureOwnProps {
-  behandlingId: number,
-  behandlingVersjon: number,
   selectedId?: string;
   velgPeriodeCallback: (_p, id: string, periode: MedlemPeriode) => void;
 }
@@ -56,9 +54,8 @@ MedlemskapEndringerTabell.defaultProps = {
   perioder: [],
 };
 
-const mapStateToPropsFactory = (initialState: any, initialOwnProps: PureOwnProps) => {
-  const { behandlingId, behandlingVersjon } = initialOwnProps;
-  const perioder = (behandlingFormValueSelector('OppholdInntektOgPerioderForm', behandlingId, behandlingVersjon)(initialState, 'perioder') || [])
+const mapStateToPropsFactory = (initialState: any) => {
+  const perioder = (formValueSelector('OppholdInntektOgPerioderForm')(initialState, 'perioder') || [])
     .sort((a: PeriodeMedId, b: PeriodeMedId) => a.vurderingsdato.localeCompare(b.vurderingsdato));
   return (): MappedOwnProps => ({
     perioder,

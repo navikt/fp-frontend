@@ -37,8 +37,6 @@ const AnkeProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> 
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="AnkeProsessIndex" formData={formData} setFormData={setFormData}>
       <BehandleAnkeForm
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         sprakkode={behandling.sprakkode}
         ankeVurderingResultat={ankeVurdering ? ankeVurdering.ankeVurderingResultat : undefined}
         behandlinger={behandlinger}

@@ -1,21 +1,18 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import {
-  ArrowBox,
-  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+  ArrowBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import {
   ariaCheck, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
-import {
-  RadioGroupField, RadioOption, TextAreaField, behandlingForm, behandlingFormValueSelector,
-} from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
@@ -42,8 +39,6 @@ type Values = {
 }
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
   risikoklassifisering?: Risikoklassifisering;
@@ -182,9 +177,12 @@ const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {
   return (state: any): MappedOwnProps => ({
     initialValues,
     onSubmit,
-    harValgtReelle: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, vurderingerHovedkategori)
-      === faresignalVurdering.INNVIRKNING,
+    harValgtReelle: formValueSelector(formName)(state, vurderingerHovedkategori) === faresignalVurdering.INNVIRKNING,
   });
 };
 
-export default connect(mapStateToPropsFactory)(behandlingForm({ form: formName })(AvklarFaresignalerForm));
+export default connect(mapStateToPropsFactory)(reduxForm({
+  form: formName,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
+})(AvklarFaresignalerForm));

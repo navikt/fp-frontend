@@ -12,8 +12,6 @@ import Faresignaler from './Faresignaler';
 import AvklarFaresignalerForm from './AvklarFaresignalerForm';
 
 interface OwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   risikoklassifisering?: Risikoklassifisering;
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
@@ -27,8 +25,6 @@ interface OwnProps {
  * Presentasjonskomponent. Statisk visning av panel som tilsier ingen faresignaler funnet i behandlingen.
  */
 const HoyRisikoPanel: FunctionComponent<OwnProps> = ({
-  behandlingId,
-  behandlingVersjon,
   risikoklassifisering,
   aksjonspunkt,
   readOnly,
@@ -49,8 +45,6 @@ const HoyRisikoPanel: FunctionComponent<OwnProps> = ({
       && (
         <ReduxWrapper formName="HoyRisikoPanel">
           <AvklarFaresignalerForm
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             aksjonspunkt={aksjonspunkt}
             readOnly={readOnly}
             submitCallback={submitCallback}

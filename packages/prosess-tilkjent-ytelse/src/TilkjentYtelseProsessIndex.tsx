@@ -30,7 +30,6 @@ interface OwnProps {
 }
 
 const TilkjentYtelseProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
-  behandling,
   beregningresultat,
   familiehendelse,
   personoversikt,
@@ -49,8 +48,6 @@ const TilkjentYtelseProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="TilkjentYtelseProsessIndex" formData={formData} setFormData={setFormData}>
       <TilkjentYtelsePanel
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         beregningresultat={beregningresultat}
         familieHendelseSamling={familiehendelse}
         personoversikt={personoversikt}

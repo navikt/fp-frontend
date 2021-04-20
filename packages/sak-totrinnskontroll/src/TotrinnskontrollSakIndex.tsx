@@ -131,8 +131,6 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
         <ReduxWrapper formName="TotrinnskontrollSakIndex">
           <TotrinnskontrollBeslutterForm
             behandling={behandling}
-            behandlingId={behandling.id}
-            behandlingVersjon={behandling.versjon}
             totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}
             readOnly={readOnly}
             onSubmit={submitHandler}

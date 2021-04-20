@@ -37,8 +37,6 @@ const KlagevurderingProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
     <ReduxWrapper formName="KlagevurderingProsessIndex" formData={formData} setFormData={setFormData}>
       {aksjonspunkter.some((a) => a.definisjon.kode === aksjonspunktCodes.BEHANDLE_KLAGE_NK) && (
         <BehandleKlageFormKa
-          behandlingId={behandling.id}
-          behandlingVersjon={behandling.versjon}
           sprakkode={behandling.sprakkode}
           klageVurdering={klageVurdering}
           saveKlage={saveKlage}
@@ -51,8 +49,6 @@ const KlagevurderingProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
       )}
       {aksjonspunkter.some((a) => a.definisjon.kode === aksjonspunktCodes.BEHANDLE_KLAGE_NFP) && (
         <BehandleKlageFormNfp
-          behandlingId={behandling.id}
-          behandlingVersjon={behandling.versjon}
           sprakkode={behandling.sprakkode}
           klageVurdering={klageVurdering}
           saveKlage={saveKlage}

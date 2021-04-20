@@ -32,8 +32,6 @@ const SoknadsfristVilkarProsessIndex: FunctionComponent<OwnProps & StandardProse
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="SoknadsfristVilkarProsessIndex" formData={formData} setFormData={setFormData}>
       <ErSoknadsfristVilkaretOppfyltForm
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         behandlingsresultat={behandling.behandlingsresultat}
         vilkar={vilkar}
         soknad={soknad}

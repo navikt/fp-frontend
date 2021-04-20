@@ -19,7 +19,6 @@ interface OwnProps {
 }
 
 const FormkravProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
-  behandling,
   klageVurdering,
   avsluttedeBehandlinger,
   aksjonspunkter,
@@ -34,8 +33,6 @@ const FormkravProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPro
     <ReduxWrapper formName="FormkravProsessIndex" formData={formData} setFormData={setFormData}>
       {aksjonspunkter.some((a) => a.definisjon.kode === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP) && (
         <FormkravKlageFormNfp
-          behandlingId={behandling.id}
-          behandlingVersjon={behandling.versjon}
           klageVurdering={klageVurdering}
           submitCallback={submitCallback}
           readOnly={isReadOnly}
@@ -46,8 +43,6 @@ const FormkravProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPro
       )}
       {aksjonspunkter.some((a) => a.definisjon.kode === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_KA) && (
         <FormkravKlageFormKa
-          behandlingId={behandling.id}
-          behandlingVersjon={behandling.versjon}
           klageVurdering={klageVurdering}
           submitCallback={submitCallback}
           readOnly={isReadOnly}

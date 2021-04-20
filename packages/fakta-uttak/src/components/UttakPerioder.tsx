@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {
-  change as reduxFormChange, FieldArray, getFormInitialValues, reset as reduxFormReset,
+  change as reduxFormChange, FieldArray, formValueSelector, getFormInitialValues, reset as reduxFormReset,
 } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { bindActionCreators, Dispatch } from 'redux';
@@ -13,7 +13,7 @@ import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelse, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, Personoversikt,
 } from '@fpsak-frontend/types';
-import { getBehandlingFormPrefix, behandlingFormValueSelector, CheckboxField } from '@fpsak-frontend/form';
+import { CheckboxField } from '@fpsak-frontend/form';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
 import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -57,8 +57,6 @@ export const findFamiliehendelseDato = (gjeldendeFamiliehendelse: FamilieHendels
 };
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   readOnly: boolean;
   hasOpenAksjonspunkter: boolean;
@@ -77,7 +75,6 @@ interface PureOwnProps {
 }
 
 interface MappedOwnProps {
-  behandlingFormPrefix: string;
   openForms: boolean;
   isManuellOverstyring?: boolean;
   førsteUttaksdato?: string;
@@ -136,21 +133,21 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
   };
 
   newPeriodeResetCallback(): void {
-    const { behandlingFormPrefix, reduxFormReset: formReset } = this.props;
+    const { reduxFormReset: formReset } = this.props;
     const { isNyPeriodeFormOpen } = this.state;
-    formReset(`${behandlingFormPrefix}.nyPeriodeForm`);
+    formReset('nyPeriodeForm');
     this.setState({ isNyPeriodeFormOpen: !isNyPeriodeFormOpen });
   }
 
   newPeriodeCallback(nyPeriode: CustomUttakKontrollerFaktaPerioder): void {
     const {
-      behandlingFormPrefix, perioder, reduxFormChange: formChange,
+      perioder, reduxFormChange: formChange,
     } = this.props;
     const { isNyPeriodeFormOpen } = this.state;
 
     const newPerioder = perioder.concat(nyPeriode).sort((a, b) => a.fom.localeCompare(b.fom));
 
-    formChange(`${behandlingFormPrefix}.UttakFaktaForm`, 'perioder', newPerioder);
+    formChange('UttakFaktaForm', 'perioder', newPerioder);
 
     this.setState({
       isNyPeriodeFormOpen: !isNyPeriodeFormOpen,
@@ -168,13 +165,12 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
   }
 
   manuellOverstyringResetCallback(): void {
-    const { behandlingFormPrefix, reduxFormReset: formReset } = this.props;
-    formReset(`${behandlingFormPrefix}.UttakFaktaForm`);
+    const { reduxFormReset: formReset } = this.props;
+    formReset('UttakFaktaForm');
   }
 
   removePeriode(values: any) {
     const {
-      behandlingFormPrefix,
       perioder,
       slettedePerioder,
       initialValues,
@@ -186,7 +182,7 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
 
     if (hasOriginalPeriode) {
       formChange(
-        `${behandlingFormPrefix}.UttakFaktaForm`,
+        'UttakFaktaForm',
         'slettedePerioder',
         slettedePerioder.concat([
           {
@@ -199,7 +195,7 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
 
     const newPerioder = perioder.filter((periode) => periode.id !== periodeSlett.id);
 
-    formChange(`${behandlingFormPrefix}.UttakFaktaForm`, 'perioder', newPerioder);
+    formChange('UttakFaktaForm', 'perioder', newPerioder);
 
     this.hideModal();
   }
@@ -211,10 +207,10 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
   }
 
   cleaningUpForm(id: string): void {
-    const { behandlingFormPrefix, perioder, reduxFormChange: formChange } = this.props;
+    const { perioder, reduxFormChange: formChange } = this.props;
 
     formChange(
-      `${behandlingFormPrefix}.UttakFaktaForm`,
+      'UttakFaktaForm',
       'perioder',
       perioder
         .map((periode) => {
@@ -232,24 +228,23 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
   }
 
   editPeriode(id: string): void {
-    const { perioder, behandlingFormPrefix, reduxFormChange: formChange } = this.props;
+    const { perioder, reduxFormChange: formChange } = this.props;
 
     const newPerioder = createNewPerioder(perioder, id, { openForm: true });
 
-    formChange(`${behandlingFormPrefix}.UttakFaktaForm`, 'perioder', newPerioder);
+    formChange('UttakFaktaForm', 'perioder', newPerioder);
   }
 
   cancelEditPeriode(id: string): void {
-    const { perioder, behandlingFormPrefix, reduxFormChange: formChange } = this.props;
+    const { perioder, reduxFormChange: formChange } = this.props;
 
     const newPerioder = createNewPerioder(perioder, id, { openForm: false });
 
-    formChange(`${behandlingFormPrefix}.UttakFaktaForm`, 'perioder', newPerioder);
+    formChange('UttakFaktaForm', 'perioder', newPerioder);
   }
 
   async updatePeriode(values: any) {
     const {
-      behandlingFormPrefix,
       perioder,
       uttakPeriodeVurderingTyper,
       reduxFormChange: formChange,
@@ -309,7 +304,7 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
     const newPerioder = await createNewPerioder(perioder, id, newPeriodeObject);
 
     await formChange(
-      `${behandlingFormPrefix}.UttakFaktaForm`,
+      'UttakFaktaForm',
       'perioder',
       newPerioder.sort((a, b) => a.fom.localeCompare(b.fom)),
     );
@@ -347,8 +342,6 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
       uttakPeriodeVurderingTyper,
       getKodeverknavn,
       faktaArbeidsforhold,
-      behandlingId,
-      behandlingVersjon,
       behandlingStatus,
       personoversikt,
       familiehendelse,
@@ -427,8 +420,6 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
           endringsdato={endringsdato}
           farSøkerFør6Uker={farSøkerFør6Uker}
           getKodeverknavn={getKodeverknavn}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
           alleKodeverk={alleKodeverk}
           behandlingStatus={behandlingStatus}
           familiehendelse={familiehendelse}
@@ -441,8 +432,6 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
           <FlexRow>
             <FlexColumn>
               <FaktaSubmitButton
-                behandlingId={behandlingId}
-                behandlingVersjon={behandlingVersjon}
                 formName="UttakFaktaForm"
                 isSubmittable={submittable}
                 isReadOnly={this.disableButtons()}
@@ -466,8 +455,6 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
             uttakPeriodeVurderingTyper={uttakPeriodeVurderingTyper}
             getKodeverknavn={getKodeverknavn}
             faktaArbeidsforhold={faktaArbeidsforhold}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             personoversikt={personoversikt}
             alleKodeverk={alleKodeverk}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -479,8 +466,6 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
             periode={periodeSlett}
             cancelEvent={this.hideModal}
             closeEvent={this.removePeriode}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             getKodeverknavn={getKodeverknavn}
           />
         )}
@@ -489,39 +474,26 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
   }
 }
 
-const getFørsteUttaksdato = (state: any, behandlingId: number, behandlingVersjon: number) => behandlingFormValueSelector(
-  'UttakFaktaForm', behandlingId, behandlingVersjon,
-)(state, 'førsteUttaksdato') || undefined;
-const getEndringsdato = (state: any, behandlingId: number, behandlingVersjon: number) => behandlingFormValueSelector(
-  'UttakFaktaForm', behandlingId, behandlingVersjon,
-)(state, 'endringsdato') || undefined;
-const slettedePerioder = (state: any, behandlingId: number, behandlingVersjon: number) => behandlingFormValueSelector(
-  'UttakFaktaForm', behandlingId, behandlingVersjon,
-)(state, 'slettedePerioder');
-const perioder = (state: any, behandlingId: number, behandlingVersjon: number) => behandlingFormValueSelector('UttakFaktaForm',
-  behandlingId, behandlingVersjon)(state, 'perioder');
-const manuellOverstyring = (state: any, behandlingId: number, behandlingVersjon: number) => behandlingFormValueSelector(
-  'UttakFaktaForm',
-  behandlingId,
-  behandlingVersjon,
-)(state, 'faktaUttakManuellOverstyring') || false;
+const getFørsteUttaksdato = (state: any) => formValueSelector('UttakFaktaForm')(state, 'førsteUttaksdato') || undefined;
+const getEndringsdato = (state: any) => formValueSelector('UttakFaktaForm')(state, 'endringsdato') || undefined;
+const slettedePerioder = (state: any) => formValueSelector('UttakFaktaForm')(state, 'slettedePerioder');
+const perioder = (state: any) => formValueSelector('UttakFaktaForm')(state, 'perioder');
+const manuellOverstyring = (state: any) => formValueSelector('UttakFaktaForm')(state, 'faktaUttakManuellOverstyring') || false;
 
 const EMPTY_ARRAY = [];
 
 const mapStateToProps = (state: any, props: PureOwnProps): MappedOwnProps => {
-  const { behandlingId, behandlingVersjon, alleKodeverk } = props;
-  const behandlingFormPrefix = getBehandlingFormPrefix(behandlingId, behandlingVersjon);
+  const { alleKodeverk } = props;
 
   return {
-    behandlingFormPrefix,
-    isManuellOverstyring: manuellOverstyring(state, behandlingId, behandlingVersjon) || false,
-    openForms: !!perioder(state, behandlingId, behandlingVersjon).find((periode: CustomUttakKontrollerFaktaPerioder) => periode.openForm === true),
-    førsteUttaksdato: getFørsteUttaksdato(state, behandlingId, behandlingVersjon),
-    endringsdato: getEndringsdato(state, behandlingId, behandlingVersjon),
+    isManuellOverstyring: manuellOverstyring(state) || false,
+    openForms: !!perioder(state).find((periode: CustomUttakKontrollerFaktaPerioder) => periode.openForm === true),
+    førsteUttaksdato: getFørsteUttaksdato(state),
+    endringsdato: getEndringsdato(state),
     uttakPeriodeVurderingTyper: alleKodeverk[kodeverkTyper.UTTAK_PERIODE_VURDERING_TYPE],
-    initialValues: getFormInitialValues(`${behandlingFormPrefix}.UttakFaktaForm`)(state),
-    slettedePerioder: slettedePerioder(state, behandlingId, behandlingVersjon) || EMPTY_ARRAY,
-    perioder: perioder(state, behandlingId, behandlingVersjon) || EMPTY_ARRAY,
+    initialValues: getFormInitialValues('UttakFaktaForm')(state),
+    slettedePerioder: slettedePerioder(state) || EMPTY_ARRAY,
+    perioder: perioder(state) || EMPTY_ARRAY,
   };
 };
 

@@ -60,7 +60,6 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
       <UttakPanel
         fagsak={fagsak}
         behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         behandlingType={behandling.type}
         behandlingsresultat={behandling.behandlingsresultat}
         behandlingStatus={behandling.status}

@@ -91,8 +91,6 @@ describe('<UttakNyPeriode>', () => {
       onSubmit={() => undefined}
       uttakPeriodeVurderingTyper={[]}
       faktaArbeidsforhold={{} as FaktaArbeidsforhold[]}
-      behandlingId={1}
-      behandlingVersjon={2}
       personoversikt={{} as Personoversikt}
       {...reduxFormPropsMock}
     />, messages);
@@ -144,8 +142,6 @@ describe('<UttakNyPeriode>', () => {
       onSubmit={() => undefined}
       uttakPeriodeVurderingTyper={[]}
       faktaArbeidsforhold={{} as FaktaArbeidsforhold[]}
-      behandlingId={1}
-      behandlingVersjon={2}
       personoversikt={{} as Personoversikt}
       {...reduxFormPropsMock}
     />, messages);
@@ -175,8 +171,6 @@ describe('<UttakNyPeriode>', () => {
       onSubmit={() => undefined}
       uttakPeriodeVurderingTyper={[]}
       faktaArbeidsforhold={{} as FaktaArbeidsforhold[]}
-      behandlingId={1}
-      behandlingVersjon={2}
       personoversikt={{} as Personoversikt}
       {...reduxFormPropsMock}
     />, messages);
@@ -207,8 +201,6 @@ describe('<UttakNyPeriode>', () => {
       onSubmit={() => undefined}
       uttakPeriodeVurderingTyper={[]}
       faktaArbeidsforhold={{} as FaktaArbeidsforhold[]}
-      behandlingId={1}
-      behandlingVersjon={2}
       personoversikt={{} as Personoversikt}
       {...reduxFormPropsMock}
     />, messages);
@@ -239,8 +231,6 @@ describe('<UttakNyPeriode>', () => {
       onSubmit={() => undefined}
       uttakPeriodeVurderingTyper={[]}
       faktaArbeidsforhold={{} as FaktaArbeidsforhold[]}
-      behandlingId={1}
-      behandlingVersjon={2}
       personoversikt={{} as Personoversikt}
       {...reduxFormPropsMock}
     />, messages);
@@ -271,8 +261,6 @@ describe('<UttakNyPeriode>', () => {
       onSubmit={() => undefined}
       uttakPeriodeVurderingTyper={[]}
       faktaArbeidsforhold={{} as FaktaArbeidsforhold[]}
-      behandlingId={1}
-      behandlingVersjon={2}
       personoversikt={{} as Personoversikt}
       {...reduxFormPropsMock}
     />, messages);
@@ -303,8 +291,6 @@ describe('<UttakNyPeriode>', () => {
       onSubmit={() => undefined}
       uttakPeriodeVurderingTyper={[]}
       faktaArbeidsforhold={{} as FaktaArbeidsforhold[]}
-      behandlingId={1}
-      behandlingVersjon={2}
       personoversikt={{} as Personoversikt}
       {...reduxFormPropsMock}
     />, messages);

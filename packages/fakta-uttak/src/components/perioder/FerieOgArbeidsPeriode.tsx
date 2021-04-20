@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { createSelector } from 'reselect';
 import { Undertekst } from 'nav-frontend-typografi';
@@ -11,9 +11,7 @@ import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurd
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
-import {
-  RadioGroupField, RadioOption, TextAreaField, behandlingForm, behandlingFormValueSelector,
-} from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
 import {
   hasValidPeriod, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
@@ -40,8 +38,6 @@ type FormValues = {
 
 interface PureOwnProps {
   id: string,
-  behandlingId: number;
-  behandlingVersjon: number;
   fieldId: string;
   tilDato: string;
   fraDato: string;
@@ -185,26 +181,10 @@ const validateForm = (values: FormValues): any => {
 };
 
 const buildInitialValues = createSelector([
-  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
-    'UttakFaktaForm',
-    ownProps.behandlingId,
-    ownProps.behandlingVersjon,
-  )(state, `${ownProps.fieldId}.begrunnelse`),
-  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
-    'UttakFaktaForm',
-    ownProps.behandlingId,
-    ownProps.behandlingVersjon,
-  )(state, `${ownProps.fieldId}.saksebehandlersBegrunnelse`),
-  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
-    'UttakFaktaForm',
-    ownProps.behandlingId,
-    ownProps.behandlingVersjon,
-  )(state, `${ownProps.fieldId}.oppholdÅrsak`),
-  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
-    'UttakFaktaForm',
-    ownProps.behandlingId,
-    ownProps.behandlingVersjon,
-  )(state, `${ownProps.fieldId}.resultat`),
+  (state: any, ownProps: PureOwnProps) => formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.begrunnelse`),
+  (state: any, ownProps: PureOwnProps) => formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.saksebehandlersBegrunnelse`),
+  (state: any, ownProps: PureOwnProps) => formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.oppholdÅrsak`),
+  (state: any, ownProps: PureOwnProps) => formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.resultat`),
   (_state: any, ownProps: PureOwnProps) => ownProps],
 (begrunnelse, saksebehandlersBegrunnelse, oppholdArsak, initialResultat, ownProps): FormValues => {
   let initialResultatValue = initialResultat ? initialResultat.kode : undefined;
@@ -224,20 +204,15 @@ const buildInitialValues = createSelector([
 });
 
 const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
-  const { behandlingId, behandlingVersjon } = initialOwnProps;
   const formName = `arbeidOgFerieForm-${initialOwnProps.id}`;
   const onSubmit = (values: FormValues) => initialOwnProps.updatePeriode(values);
 
   return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
-    const resultat = behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'resultat');
-    const førsteUttaksdato = behandlingFormValueSelector('UttakFaktaForm', behandlingId, behandlingVersjon)(state, 'førsteUttaksdato');
-    const originalResultat = behandlingFormValueSelector(
-      'UttakFaktaForm',
-      behandlingId,
-      behandlingVersjon,
-    )(state, `${ownProps.fieldId}.originalResultat`) || {};
-    const begrunnelse = behandlingFormValueSelector('UttakFaktaForm', behandlingId, behandlingVersjon)(state, `${ownProps.fieldId}.begrunnelse`);
-    const oppholdArsak = behandlingFormValueSelector('UttakFaktaForm', behandlingId, behandlingVersjon)(state, `${ownProps.fieldId}.oppholdÅrsak`);
+    const resultat = formValueSelector(formName)(state, 'resultat');
+    const førsteUttaksdato = formValueSelector('UttakFaktaForm')(state, 'førsteUttaksdato');
+    const originalResultat = formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.originalResultat`) || {};
+    const begrunnelse = formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.begrunnelse`);
+    const oppholdArsak = formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.oppholdÅrsak`);
 
     const skalViseResultat = !(ownProps.readOnly && oppholdArsak && oppholdArsak.kode !== oppholdArsakType.UDEFINERT && !begrunnelse);
 
@@ -249,14 +224,16 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
       førsteUttaksdato,
       originalResultat,
       initialValues: buildInitialValues(state, ownProps),
-      updated: behandlingFormValueSelector('UttakFaktaForm', behandlingId, behandlingVersjon)(state, `${ownProps.fieldId}.updated`),
+      updated: formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.updated`),
       form: formName,
     };
   };
 };
 
 // @ts-ignore Dynamisk navn på form
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToPropsFactory)(reduxForm({
   enableReinitialize: true,
   validate: validateForm,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(FerieOgArbeidsPeriode));

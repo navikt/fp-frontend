@@ -21,14 +21,12 @@ interface OwnProps {
 }
 
 const OpptjeningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
-  behandling,
   opptjening,
   aksjonspunkter,
   utlandDokStatus,
   alleMerknaderFraBeslutter,
   alleKodeverk,
   harApneAksjonspunkter,
-  submittable,
   submitCallback,
   readOnly,
   arbeidsgiverOpplysningerPerId,
@@ -38,8 +36,6 @@ const OpptjeningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="OpptjeningFaktaIndex" formData={formData} setFormData={setFormData}>
       <OpptjeningInfoPanel
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         fastsattOpptjening={opptjening ? opptjening.fastsattOpptjening : undefined}
         opptjeningAktiviteter={opptjening ? opptjening.opptjeningAktivitetList : undefined}
         dokStatus={utlandDokStatus ? utlandDokStatus.dokStatus : undefined}
@@ -49,7 +45,6 @@ const OpptjeningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps
         alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
         alleKodeverk={alleKodeverk}
         hasOpenAksjonspunkter={harApneAksjonspunkter}
-        submittable={submittable}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
     </ReduxWrapper>

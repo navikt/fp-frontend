@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { Element, Undertekst } from 'nav-frontend-typografi';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
@@ -14,8 +14,6 @@ import {
   RadioOption,
   SelectField,
   TextAreaField,
-  behandlingForm,
-  behandlingFormValueSelector,
 } from '@fpsak-frontend/form';
 import {
   calcDaysAndWeeks,
@@ -165,8 +163,6 @@ interface PureOwnProps {
   uttakPeriodeVurderingTyper: KodeverkMedNavn[];
   getKodeverknavn: (kodeverk: Kodeverk) => string;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
-  behandlingId: number;
-  behandlingVersjon: number;
   personoversikt: Personoversikt;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   newPeriodeResetCallback: (...args: any[]) => any;
@@ -501,8 +497,6 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
     uttakPeriodeVurderingTyper,
     getKodeverknavn,
     faktaArbeidsforhold,
-    behandlingId,
-    behandlingVersjon,
     personoversikt,
     alleKodeverk,
   } = ownProps;
@@ -540,7 +534,7 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
       samtidigUttakNyPeriode: false,
       samtidigUttaksprosentNyPeriode: null,
     },
-    nyPeriode: behandlingFormValueSelector('nyPeriodeForm', behandlingId, behandlingVersjon)(
+    nyPeriode: formValueSelector('nyPeriodeForm')(
       state,
       'fom',
       'tom',
@@ -557,9 +551,11 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
 };
 
 export default connect(mapStateToPropsFactory)(
-  behandlingForm({
+  reduxForm({
     form: 'nyPeriodeForm',
     validate: (values: FormValues) => validateNyPeriodeForm(values),
     enableReinitialize: true,
+    destroyOnUnmount: false,
+    keepDirtyOnReinitialize: true,
   })(UttakNyPeriode),
 );

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
@@ -27,7 +27,7 @@ import {
   requiredIfCustomFunctionIsTrue,
 } from '@fpsak-frontend/utils';
 import {
-  PeriodpickerField, RadioGroupField, RadioOption, SelectField, TextAreaField, behandlingForm, behandlingFormValueSelector,
+  PeriodpickerField, RadioGroupField, RadioOption, SelectField, TextAreaField,
 } from '@fpsak-frontend/form';
 import { TimeLineButton } from '@fpsak-frontend/tidslinje';
 import { ArbeidsgiverOpplysningerPerId, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
@@ -97,8 +97,6 @@ type FormValues = {
 }
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   updateActivity: (values: any) => void
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   activity: CustomOpptjeningAktivitet | NyOpptjeningAktivitet;
@@ -265,18 +263,15 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
   const arbeidTyper = alleKodeverk[kodeverkTyper.ARBEID_TYPE];
   const filtrerteOpptjeningAktivitetTypes = filterActivityType(opptjeningAktivitetTypes, activity.erManueltOpprettet, arbeidTyper);
 
-  return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
-    const { behandlingId, behandlingVersjon } = ownProps;
-    return {
-      onSubmit,
-      filtrerteOpptjeningAktivitetTypes,
-      initialValues: ownProps.activity,
-      selectedActivityType: behandlingFormValueSelector(activityPanelName, behandlingId, behandlingVersjon)(state, 'aktivitetType'),
-      opptjeningFom: behandlingFormValueSelector(activityPanelName, behandlingId, behandlingVersjon)(state, 'opptjeningFom'),
-      opptjeningTom: behandlingFormValueSelector(activityPanelName, behandlingId, behandlingVersjon)(state, 'opptjeningTom'),
-      activityId: behandlingFormValueSelector(activityPanelName, behandlingId, behandlingVersjon)(state, 'id'),
-    };
-  };
+  return (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
+    onSubmit,
+    filtrerteOpptjeningAktivitetTypes,
+    initialValues: ownProps.activity,
+    selectedActivityType: formValueSelector(activityPanelName)(state, 'aktivitetType'),
+    opptjeningFom: formValueSelector(activityPanelName)(state, 'opptjeningFom'),
+    opptjeningTom: formValueSelector(activityPanelName)(state, 'opptjeningTom'),
+    activityId: formValueSelector(activityPanelName)(state, 'id'),
+  });
 };
 
 const validateForm = (values: FormValues, props: PureOwnProps & MappedOwnProps) => {
@@ -300,8 +295,11 @@ const validateForm = (values: FormValues, props: PureOwnProps & MappedOwnProps) 
   return errors;
 };
 
-export default connect(mapStateToPropsFactory)(injectIntl(behandlingForm({
+export default connect(mapStateToPropsFactory)(reduxForm({
   form: activityPanelName,
   validate: validateForm,
   enableReinitialize: true,
-})(ActivityPanel)));
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
+  // @ts-ignore Fiks
+})(injectIntl(ActivityPanel)));

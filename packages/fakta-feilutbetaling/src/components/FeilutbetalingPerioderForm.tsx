@@ -4,9 +4,10 @@ import moment from 'moment';
 
 import { TableColumn, TableRow } from '@fpsak-frontend/shared-components';
 import { DDMMYYYY_DATE_FORMAT, required } from '@fpsak-frontend/utils';
-import { SelectField, behandlingFormValueSelector } from '@fpsak-frontend/form';
+import { SelectField } from '@fpsak-frontend/form';
 import { FeilutbetalingAarsak } from '@fpsak-frontend/types';
 
+import { formValueSelector } from 'redux-form';
 import styles from './feilutbetalingPerioderTable.less';
 
 const getHendelseUndertyper = (årsakNavn: string, årsaker: FeilutbetalingAarsak['hendelseTyper']): { kode: string; navn: string}[] | null => {
@@ -16,8 +17,6 @@ const getHendelseUndertyper = (årsakNavn: string, årsaker: FeilutbetalingAarsa
 
 interface PureOwnProps {
   formName: string;
-  behandlingId: number;
-  behandlingVersjon: number;
   periode: {
     fom: string;
     tom: string;
@@ -78,12 +77,8 @@ export const FeilutbetalingPerioderFormImpl: FunctionComponent<PureOwnProps & Ma
   );
 };
 
-FeilutbetalingPerioderFormImpl.defaultProps = {
-  årsak: null,
-};
-
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  årsak: behandlingFormValueSelector(ownProps.formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, `perioder.${ownProps.elementId}.årsak`),
+  årsak: formValueSelector(ownProps.formName)(state, `perioder.${ownProps.elementId}.årsak`),
 });
 
 const FeilutbetalingPerioderForm = connect(mapStateToProps)(FeilutbetalingPerioderFormImpl);

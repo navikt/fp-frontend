@@ -6,22 +6,16 @@ import { createSelector } from 'reselect';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 import AlertStripe from 'nav-frontend-alertstriper';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 
-import {
-  DateLabel, VerticalSpacer, FaktaGruppe,
-} from '@fpsak-frontend/shared-components';
-import {
-  DatepickerField, InputField, behandlingForm, behandlingFormValueSelector,
-} from '@fpsak-frontend/form';
+import { DateLabel, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
+import { DatepickerField, InputField } from '@fpsak-frontend/form';
 import {
   hasValidDate, hasValidInteger, maxValue, minValue, required,
 } from '@fpsak-frontend/utils';
 import { FaktaBegrunnelseTextField, isFieldEdited, FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import {
-  Aksjonspunkt, FamilieHendelse, Soknad,
-} from '@fpsak-frontend/types';
+import { Aksjonspunkt, FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 import { BekreftTerminbekreftelseAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import styles from './termindatoFaktaForm.less';
@@ -37,8 +31,6 @@ type FormValues = {
 };
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
   aksjonspunkt: Aksjonspunkt;
@@ -202,9 +194,9 @@ const lagSubmitFn = createSelector([
 (submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
-  const { behandlingId, behandlingVersjon, gjeldendeFamiliehendelse } = ownProps;
-  const termindato = behandlingFormValueSelector(termindatoFaktaFormName, behandlingId, behandlingVersjon)(state, 'termindato');
-  const utstedtdato = behandlingFormValueSelector(termindatoFaktaFormName, behandlingId, behandlingVersjon)(state, 'utstedtdato');
+  const { gjeldendeFamiliehendelse } = ownProps;
+  const termindato = formValueSelector(termindatoFaktaFormName)(state, 'termindato');
+  const utstedtdato = formValueSelector(termindatoFaktaFormName)(state, 'utstedtdato');
   const editedStatus = getEditedStatus(ownProps);
   const { avklartBarn } = gjeldendeFamiliehendelse;
   return {
@@ -220,6 +212,8 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
   };
 };
 
-export default connect(mapStateToProps)(behandlingForm({
+export default connect(mapStateToProps)(reduxForm({
   form: termindatoFaktaFormName,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(injectIntl(TermindatoFaktaForm)));

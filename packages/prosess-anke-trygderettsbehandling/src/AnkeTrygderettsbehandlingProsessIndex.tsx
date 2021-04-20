@@ -32,8 +32,6 @@ const AnkeTrygderettsbehandlingProsessIndex: FunctionComponent<OwnProps & Standa
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="AnkeTrygderettsbehandlingProsessIndex" formData={formData} setFormData={setFormData}>
       <TrygderettsbehandlingForm
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         ankeVurderingResultat={ankeVurdering.ankeVurderingResultat}
         aksjonspunkter={aksjonspunkter}
         submitCallback={submitCallback}

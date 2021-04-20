@@ -37,7 +37,6 @@ const ForeldelseProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelP
     <ReduxWrapper formName="ForeldelseProsessIndex" formData={formData} setFormData={setFormData}>
       <ForeldelseForm
         behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         perioderForeldelse={perioderForeldelse}
         submitCallback={submitCallback}
         readOnly={isReadOnly}

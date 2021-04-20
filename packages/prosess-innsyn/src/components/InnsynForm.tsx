@@ -2,17 +2,14 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { FormattedMessage, WrappedComponentProps, injectIntl } from 'react-intl';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import moment from 'moment';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Row } from 'nav-frontend-grid';
 
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import {
-  DatepickerField, RadioGroupField, RadioOption, behandlingForm, behandlingFormValueSelector,
-  isBehandlingFormDirty, isBehandlingFormSubmitting, hasBehandlingFormErrorsOfType,
-} from '@fpsak-frontend/form';
+import { DatepickerField, RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
@@ -38,8 +35,6 @@ type FormValues = {
 
 interface PureOwnProps {
   saksNr: string;
-  behandlingId: number;
-  behandlingVersjon: number;
   behandlingPaaVent: boolean;
   innsynMottattDato: string;
   innsynDokumenter: InnsynDokument[];
@@ -82,8 +77,6 @@ export const InnsynFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & I
   documents,
   vedtaksdokumenter,
   isApOpen,
-  behandlingId,
-  behandlingVersjon,
   ...formProps
 }) => (
   <form onSubmit={formProps.handleSubmit}>
@@ -148,14 +141,9 @@ export const InnsynFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & I
     <VerticalSpacer sixteenPx />
     <ProsessStegSubmitButton
       formName={formProps.form}
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       text={sattPaVent ? intl.formatMessage({ id: 'SubmitButton.SettPåVent' }) : undefined}
       isReadOnly={readOnly}
       isSubmittable={!readOnlySubmitButton}
-      isBehandlingFormSubmitting={isBehandlingFormSubmitting}
-      isBehandlingFormDirty={isBehandlingFormDirty}
-      hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
     />
   </form>
 );
@@ -227,14 +215,16 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
   innsynResultatTyper: ownProps.alleKodeverk[kodeverkTyper.INNSYN_RESULTAT_TYPE],
   behandlingTypes: ownProps.alleKodeverk[kodeverkTyper.BEHANDLING_TYPE],
   isApOpen: isAksjonspunktOpen(ownProps.aksjonspunkter[0].status.kode),
-  innsynResultatTypeKode: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'innsynResultatType'),
-  sattPaVent: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'sattPaVent'),
+  innsynResultatTypeKode: formValueSelector(formName)(state, 'innsynResultatType'),
+  sattPaVent: formValueSelector(formName)(state, 'sattPaVent'),
   initialValues: buildInitialValues(ownProps),
   onSubmit: lagSubmitFn(ownProps),
 });
 
-const InnsynForm = connect(mapStateToProps)(behandlingForm({
+const InnsynForm = connect(mapStateToProps)(reduxForm({
   form: formName,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(injectIntl(InnsynFormImpl)));
 
 export default InnsynForm;

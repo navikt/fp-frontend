@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
+import { formValueSelector, isDirty as reduxIsDirty } from 'redux-form';
 
 import {
   minLength, maxLength, required, hasValidText,
 } from '@fpsak-frontend/utils';
-import { TextAreaField, behandlingFormValueSelector, isBehandlingFormDirty } from '@fpsak-frontend/form';
+import { TextAreaField } from '@fpsak-frontend/form';
 
 import BehandlingFormFieldCleaner from '../../util/BehandlingFormFieldCleaner';
 import AktivtArbeidsforholdHandling from '../../kodeverk/aktivtArbeidsforholdHandling';
@@ -12,8 +13,6 @@ import AktivtArbeidsforholdHandling from '../../kodeverk/aktivtArbeidsforholdHan
 interface PureOwnProps {
   readOnly: boolean;
   formName: string;
-  behandlingId: number;
-  behandlingVersjon: number;
 }
 
 interface MappedOwnProps {
@@ -31,10 +30,8 @@ export const ArbeidsforholdBegrunnelse: FunctionComponent<PureOwnProps & MappedO
   isDirty,
   harBegrunnelse,
   skalAvslaaYtelse,
-  behandlingId,
-  behandlingVersjon,
 }) => (
-  <BehandlingFormFieldCleaner formName={formName} fieldNames={['begrunnelse']} behandlingId={behandlingId} behandlingVersjon={behandlingVersjon}>
+  <BehandlingFormFieldCleaner formName={formName} fieldNames={['begrunnelse']}>
     { (isDirty || harBegrunnelse) && !skalAvslaaYtelse && (
       <TextAreaField
         name="begrunnelse"
@@ -48,11 +45,11 @@ export const ArbeidsforholdBegrunnelse: FunctionComponent<PureOwnProps & MappedO
 );
 
 const mapStateToProps = (state: any, initialProps: PureOwnProps): MappedOwnProps => {
-  const { formName, behandlingId, behandlingVersjon } = initialProps;
-  const aktivtArbeidsforholdHandlingValue = behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'aktivtArbeidsforholdHandlingField');
+  const { formName } = initialProps;
+  const aktivtArbeidsforholdHandlingValue = formValueSelector(formName)(state, 'aktivtArbeidsforholdHandlingField');
   return {
-    isDirty: isBehandlingFormDirty(formName, behandlingId, behandlingVersjon)(state),
-    harBegrunnelse: !!behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'begrunnelse'),
+    isDirty: reduxIsDirty(formName)(state),
+    harBegrunnelse: !!formValueSelector(formName)(state, 'begrunnelse'),
     skalAvslaaYtelse: aktivtArbeidsforholdHandlingValue === AktivtArbeidsforholdHandling.AVSLA_YTELSE,
   };
 };

@@ -31,8 +31,6 @@ const OpptjeningVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsess
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="OpptjeningVilkarProsessIndex" formData={formData} setFormData={setFormData}>
       <OpptjeningVilkarForm
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         behandlingsresultat={behandling.behandlingsresultat}
         fastsattOpptjening={opptjening.fastsattOpptjening}
         status={status}

@@ -21,9 +21,6 @@ const {
   FASTSETT_MAANEDSLONN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING,
 } = faktaOmBeregningTilfelle;
 
-const behandlingId = 1;
-const behandlingVersjon = 1;
-
 const lagBeregningsgrunnlag = (andeler) => ({
   beregningsgrunnlagPeriode: [
     {
@@ -161,8 +158,6 @@ describe('<VurderOgFastsettATFL>', () => {
       skalHaBesteberegning={false}
       harKunstigArbeid={false}
       manglerInntektsmelding
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       alleKodeverk={{}}
       aksjonspunkter={[]}
       erOverstyrer={false}

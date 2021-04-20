@@ -28,8 +28,6 @@ describe('<VilkarresultatMedOverstyringForm>', () => {
       erMedlemskapsPanel={false}
       panelTittelKode="Fødsel"
       erOverstyrt
-      behandlingId={1}
-      behandlingVersjon={2}
       behandlingType={{
         kode: behandlingType.FORSTEGANGSSOKNAD,
         kodeverk: '',

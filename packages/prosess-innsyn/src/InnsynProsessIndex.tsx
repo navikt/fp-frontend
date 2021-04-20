@@ -33,8 +33,6 @@ const InnsynProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
     <ReduxWrapper formName="InnsynProsessIndex" formData={formData} setFormData={setFormData}>
       <InnsynForm
         saksNr={saksnummer}
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         behandlingPaaVent={behandling.behandlingPaaVent}
         innsynMottattDato={innsyn?.innsynMottattDato}
         innsynDokumenter={innsyn?.dokumenter}

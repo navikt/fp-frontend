@@ -24,8 +24,6 @@ export default {
 
 export const visPanelUtenInformasjon = () => (
   <RisikoklassifiseringSakIndex
-    behandlingId={1}
-    behandlingVersjon={1}
     isPanelOpen={boolean('isPanelOpen', false)}
     readOnly={boolean('readOnly', false)}
     submitAksjonspunkt={action('button-click') as () => Promise<any>}
@@ -36,8 +34,6 @@ export const visPanelUtenInformasjon = () => (
 
 export const visPanelForLavRisikoklassifisering = () => (
   <RisikoklassifiseringSakIndex
-    behandlingId={1}
-    behandlingVersjon={1}
     risikoklassifisering={{
       kontrollresultat: {
         kode: kontrollresultatKode.IKKE_HOY,
@@ -54,8 +50,6 @@ export const visPanelForLavRisikoklassifisering = () => (
 
 export const visPanelForHøyRisikoklassifisering = () => (
   <RisikoklassifiseringSakIndex
-    behandlingId={1}
-    behandlingVersjon={1}
     aksjonspunkt={{
       definisjon: {
         kode: aksjonspunktCodes.VURDER_FARESIGNALER,

@@ -43,8 +43,6 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
       } as ArbeidsforholdFodselOgTilrettelegging}
       formSectionName="ARB_NAVN"
       visTilrettelegginger
-      behandlingId={1}
-      behandlingVersjon={1}
       erOverstyrer
       changeField={() => undefined}
       stillingsprosentArbeidsforhold={40}
@@ -78,8 +76,6 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
       } as ArbeidsforholdFodselOgTilrettelegging}
       formSectionName="ARB_NAVN"
       visTilrettelegginger={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       erOverstyrer
       changeField={() => undefined}
       stillingsprosentArbeidsforhold={40}
@@ -112,8 +108,6 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
       } as ArbeidsforholdFodselOgTilrettelegging}
       formSectionName="ARB_NAVN"
       visTilrettelegginger={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       erOverstyrer
       changeField={() => undefined}
       stillingsprosentArbeidsforhold={40}

@@ -37,8 +37,6 @@ const FodselFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = 
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="FodselFaktaIndex" formData={formData} setFormData={setFormData}>
       <FodselInfoPanel
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         behandlingType={behandling.type}
         soknad={soknad}
         familiehendelse={familiehendelse}

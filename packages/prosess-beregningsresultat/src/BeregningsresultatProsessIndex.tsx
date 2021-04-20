@@ -20,7 +20,6 @@ interface OwnProps {
 }
 
 const BeregningsresultatProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
-  behandling,
   beregningresultatEngangsstonad,
   aksjonspunkter,
   overrideReadOnly,
@@ -33,8 +32,6 @@ const BeregningsresultatProsessIndex: FunctionComponent<OwnProps & StandardProse
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="BeregningsresultatProsessIndex" formData={formData} setFormData={setFormData}>
       <BeregningsresultatEngangsstonadForm
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         behandlingResultatstruktur={beregningresultatEngangsstonad}
         aksjonspunkter={aksjonspunkter}
         overrideReadOnly={overrideReadOnly}

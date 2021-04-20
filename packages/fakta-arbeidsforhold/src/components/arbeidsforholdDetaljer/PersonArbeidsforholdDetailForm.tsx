@@ -1,14 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import {
-  FormattedMessage, IntlShape, WrappedComponentProps,
-} from 'react-intl';
-import { InjectedFormProps } from 'redux-form';
+import { FormattedMessage, IntlShape } from 'react-intl';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
-import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
@@ -48,11 +45,10 @@ interface PureOwnProps {
   aktivtArbeidsforholdTillatUtenIM: boolean;
   arbeidsforhold: CustomArbeidsforhold;
   skalKunneLeggeTilNyeArbeidsforhold: boolean;
-  behandlingId: number;
-  behandlingVersjon: number;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   updateArbeidsforhold: (values: FormValues) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  intl: IntlShape;
 }
 
 interface MappedOwnProps {
@@ -67,7 +63,7 @@ interface MappedOwnProps {
   validate: (formValues: FormValues, props: any) => void;
 }
 
-type Props = PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps;
+type Props = PureOwnProps & MappedOwnProps & InjectedFormProps;
 
 // ----------------------------------------------------------------------------------
 // Component: PersonArbeidsforholdDetailForm
@@ -83,8 +79,6 @@ export const PersonArbeidsforholdDetailForm: FunctionComponent<Props> = ({
   arbeidsforhold,
   arbeidsforholdHandlingVerdi,
   skalKunneLeggeTilNyeArbeidsforhold,
-  behandlingId,
-  behandlingVersjon,
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
   ...formProps
@@ -98,16 +92,12 @@ export const PersonArbeidsforholdDetailForm: FunctionComponent<Props> = ({
       <LeggTilArbeidsforholdFelter
         readOnly={readOnly}
         formName={PERSON_ARBEIDSFORHOLD_DETAIL_FORM}
-        behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
       />
     )}
     { (arbeidsforhold.kanOppretteNyttArbforFraIM) && (
       <LeggTilArbeidsforholdFelter
         readOnly={readOnly}
         formName={PERSON_ARBEIDSFORHOLD_DETAIL_FORM}
-        behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
       />
     )}
     <Row>
@@ -120,15 +110,11 @@ export const PersonArbeidsforholdDetailForm: FunctionComponent<Props> = ({
           arbeidsforhold={arbeidsforhold}
           aktivtArbeidsforholdTillatUtenIM={aktivtArbeidsforholdTillatUtenIM}
           arbeidsforholdHandlingVerdi={arbeidsforholdHandlingVerdi}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
         />
         <VerticalSpacer twentyPx />
         <ArbeidsforholdBegrunnelse
           readOnly={readOnly}
           formName={PERSON_ARBEIDSFORHOLD_DETAIL_FORM}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
         />
         <VerticalSpacer sixteenPx />
         { (formProps.initialValues.tilVurdering || formProps.initialValues.erEndret) && (
@@ -155,8 +141,6 @@ export const PersonArbeidsforholdDetailForm: FunctionComponent<Props> = ({
             isErstattArbeidsforhold={isErstattArbeidsforhold}
             arbeidsforholdList={formProps.initialValues.replaceOptions}
             formName={PERSON_ARBEIDSFORHOLD_DETAIL_FORM}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           />
         )}
@@ -183,34 +167,24 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
   const onSubmit = (values: FormValues) => initialOwnProps.updateArbeidsforhold(values);
   const validate = (values: FormValues, props: Props) => validateForm(values, props.intl);
   return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
-    const {
-      arbeidsforhold, readOnly, behandlingId, behandlingVersjon,
-    } = ownProps;
+    const { arbeidsforhold, readOnly } = ownProps;
     return {
       initialValues: arbeidsforhold,
       readOnly: readOnly || (!arbeidsforhold.tilVurdering && !arbeidsforhold.erEndret),
-      hasReceivedInntektsmelding: !!behandlingFormValueSelector(
-        PERSON_ARBEIDSFORHOLD_DETAIL_FORM, behandlingId, behandlingVersjon,
-      )(state, 'mottattDatoInntektsmelding'),
-      vurderOmSkalErstattes: !!behandlingFormValueSelector(
-        PERSON_ARBEIDSFORHOLD_DETAIL_FORM, behandlingId, behandlingVersjon,
-      )(state, 'vurderOmSkalErstattes'),
-      harErstattetEttEllerFlere: behandlingFormValueSelector(
-        PERSON_ARBEIDSFORHOLD_DETAIL_FORM, behandlingId, behandlingVersjon,
-      )(state, 'harErstattetEttEllerFlere'),
-      isErstattArbeidsforhold: behandlingFormValueSelector(
-        PERSON_ARBEIDSFORHOLD_DETAIL_FORM, behandlingId, behandlingVersjon,
-      )(state, 'erNyttArbeidsforhold') === false,
-      arbeidsforholdHandlingVerdi: behandlingFormValueSelector(
-        PERSON_ARBEIDSFORHOLD_DETAIL_FORM, behandlingId, behandlingVersjon,
-      )(state, 'arbeidsforholdHandlingField'),
+      hasReceivedInntektsmelding: !!formValueSelector(PERSON_ARBEIDSFORHOLD_DETAIL_FORM)(state, 'mottattDatoInntektsmelding'),
+      vurderOmSkalErstattes: !!formValueSelector(PERSON_ARBEIDSFORHOLD_DETAIL_FORM)(state, 'vurderOmSkalErstattes'),
+      harErstattetEttEllerFlere: formValueSelector(PERSON_ARBEIDSFORHOLD_DETAIL_FORM)(state, 'harErstattetEttEllerFlere'),
+      isErstattArbeidsforhold: formValueSelector(PERSON_ARBEIDSFORHOLD_DETAIL_FORM)(state, 'erNyttArbeidsforhold') === false,
+      arbeidsforholdHandlingVerdi: formValueSelector(PERSON_ARBEIDSFORHOLD_DETAIL_FORM)(state, 'arbeidsforholdHandlingField'),
       onSubmit,
       validate,
     };
   };
 };
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToPropsFactory)(reduxForm({
   form: PERSON_ARBEIDSFORHOLD_DETAIL_FORM,
   enableReinitialize: true,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(PersonArbeidsforholdDetailForm));

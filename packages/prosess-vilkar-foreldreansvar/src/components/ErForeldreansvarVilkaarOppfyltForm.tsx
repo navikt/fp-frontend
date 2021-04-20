@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { Element } from 'nav-frontend-typografi';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
@@ -10,7 +10,6 @@ import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktSta
 import {
   ProsessStegBegrunnelseTextField, VilkarResultPicker, ProsessPanelTemplate, validerApKodeOgHentApEnum,
 } from '@fpsak-frontend/prosess-felles';
-import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { Aksjonspunkt, Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
@@ -32,8 +31,6 @@ type AksjonspunktData = Array<Foreldreansvarsvilkar1Ap
   | VurdereYtelseSammeBarnAnnenForelderAp>;
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   isForeldreansvar2Ledd: boolean;
   isEngangsstonad: boolean;
@@ -58,15 +55,13 @@ interface MappedOwnProps {
  *
  * Presentasjonskomponent. Setter opp aksjonspunkter for avklaring av foreldreansvarvilkåret 2 eller 4 ledd.
  */
-export const ErForeldreansvarVilkaarOppfyltForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
+export const ErForeldreansvarVilkaarOppfyltForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps<FormValues> & WrappedComponentProps> = ({
   intl,
   avslagsarsaker,
   readOnly,
   readOnlySubmitButton,
   erVilkarOk,
   originalErVilkarOk,
-  behandlingId,
-  behandlingVersjon,
   isEngangsstonad,
   ...formProps
 }) => (
@@ -77,8 +72,6 @@ export const ErForeldreansvarVilkaarOppfyltForm: FunctionComponent<PureOwnProps 
     handleSubmit={formProps.handleSubmit}
     readOnlySubmitButton={readOnlySubmitButton}
     readOnly={readOnly}
-    behandlingId={behandlingId}
-    behandlingVersjon={behandlingVersjon}
     originalErVilkarOk={originalErVilkarOk}
   >
     <Element><FormattedMessage id="ErForeldreansvarVilkaarOppfyltForm.RettTilStonad" /></Element>
@@ -140,19 +133,18 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
   const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
   const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
 
-  return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
-    const { behandlingId, behandlingVersjon } = ownProps;
-    return {
-      initialValues: buildInitialValues(ownProps),
-      erVilkarOk: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'erVilkarOk'),
-      originalErVilkarOk: erVilkarOk,
-      onSubmit: lagSubmitFn(ownProps),
-      avslagsarsaker,
-    };
-  };
+  return (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
+    initialValues: buildInitialValues(ownProps),
+    erVilkarOk: formValueSelector(formName)(state, 'erVilkarOk'),
+    originalErVilkarOk: erVilkarOk,
+    onSubmit: lagSubmitFn(ownProps),
+    avslagsarsaker,
+  });
 };
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToPropsFactory)(reduxForm({
   form: formName,
   validate,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(injectIntl(ErForeldreansvarVilkaarOppfyltForm)));

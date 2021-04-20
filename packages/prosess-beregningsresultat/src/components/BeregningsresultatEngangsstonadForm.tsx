@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import {
@@ -15,7 +15,7 @@ import {
 import {
   formatCurrencyWithKr, hasValidInteger, maxValue, minValue, required, decodeHtmlEntity,
 } from '@fpsak-frontend/utils';
-import { InputField, behandlingForm } from '@fpsak-frontend/form';
+import { InputField } from '@fpsak-frontend/form';
 import aksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { OverstyringPanel } from '@fpsak-frontend/prosess-felles';
 import { OverstyringBeregningAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -198,6 +198,8 @@ const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: buildInitialValues(ownProps),
 });
 
-export default connect(mapStateToProps)(behandlingForm({
+export default connect(mapStateToProps)(reduxForm({
   form: formName,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(BeregningsresultatEngangsstonadFormImpl));

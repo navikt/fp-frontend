@@ -17,7 +17,6 @@ interface OwnProps {
 const intl = createIntl(messages);
 
 const SakenFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
-  behandling,
   aksjonspunkter,
   utlandDokStatus,
   submitCallback,
@@ -30,8 +29,6 @@ const SakenFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = (
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="SakenFaktaIndex" formData={formData} setFormData={setFormData}>
       <SakenFaktaPanel
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         aksjonspunkter={aksjonspunkter}
         dokStatus={utlandDokStatus ? utlandDokStatus.dokStatus : undefined}
         harApneAksjonspunkter={harApneAksjonspunkter}

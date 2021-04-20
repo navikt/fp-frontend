@@ -16,7 +16,6 @@ interface OwnProps {
 }
 
 const VurderSoknadsfristForeldrepengerIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
-  behandling,
   uttakPeriodeGrense,
   soknad,
   aksjonspunkter,
@@ -30,8 +29,6 @@ const VurderSoknadsfristForeldrepengerIndex: FunctionComponent<OwnProps & Standa
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="VurderSoknadsfristForeldrepengerIndex" formData={formData} setFormData={setFormData}>
       <VurderSoknadsfristForeldrepengerForm
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         uttakPeriodeGrense={uttakPeriodeGrense}
         mottattDato={soknad.mottattDato}
         aksjonspunkter={aksjonspunkter}

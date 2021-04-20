@@ -2,12 +2,12 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import moment from 'moment';
-import { InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
 
-import { TextAreaField, behandlingForm } from '@fpsak-frontend/form';
+import { TextAreaField } from '@fpsak-frontend/form';
 import {
   DDMMYYYY_DATE_FORMAT, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
@@ -129,8 +129,10 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
 };
 
 // @ts-ignore Dynamisk navn på form
-const UttakSlettPeriodeModal = connect(mapStateToPropsFactory)(behandlingForm({
+const UttakSlettPeriodeModal = connect(mapStateToPropsFactory)(reduxForm({
   enableReinitialize: true,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(injectIntl(UttakSlettPeriodeModalImpl)));
 
 export default UttakSlettPeriodeModal;

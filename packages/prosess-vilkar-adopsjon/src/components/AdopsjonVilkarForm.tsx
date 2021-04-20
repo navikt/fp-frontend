@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
@@ -13,7 +13,6 @@ import {
 import {
   ProsessStegBegrunnelseTextField, VilkarResultPicker, ProsessPanelTemplate, validerApKodeOgHentApEnum,
 } from '@fpsak-frontend/prosess-felles';
-import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { VurdereYtelseSammeBarnAnnenForelderAp, VurdereYtelseSammeBarnSokerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -27,8 +26,6 @@ type FormValues = {
 }
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   aksjonspunkter: Aksjonspunkt[];
   status: string;
@@ -54,7 +51,7 @@ interface MappedOwnProps {
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for avklaring av Adopsjonsvilkåret.
  */
-export const AdopsjonVilkarFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
+export const AdopsjonVilkarFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps<FormValues> & WrappedComponentProps> = ({
   intl,
   avslagsarsaker,
   lovReferanse,
@@ -63,8 +60,6 @@ export const AdopsjonVilkarFormImpl: FunctionComponent<PureOwnProps & MappedOwnP
   erVilkarOk,
   originalErVilkarOk,
   isApOpen,
-  behandlingId,
-  behandlingVersjon,
   ...formProps
 }) => (
   <ProsessPanelTemplate
@@ -75,8 +70,6 @@ export const AdopsjonVilkarFormImpl: FunctionComponent<PureOwnProps & MappedOwnP
     readOnlySubmitButton={readOnlySubmitButton}
     readOnly={readOnly}
     lovReferanse={lovReferanse}
-    behandlingId={behandlingId}
-    behandlingVersjon={behandlingVersjon}
     originalErVilkarOk={originalErVilkarOk}
   >
     <Element><FormattedMessage id="AdopsjonVilkarForm.TidligereUtbetaltStonad" /></Element>
@@ -128,11 +121,11 @@ const mapStateToPropsFactory = (_initialState, staticOwnProps: PureOwnProps) => 
   const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
 
   return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
-    const { behandlingId, behandlingVersjon, vilkar } = ownProps;
+    const { vilkar } = ownProps;
     return {
       originalErVilkarOk: erVilkarOk,
       initialValues: buildInitialValues(ownProps),
-      erVilkarOk: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'erVilkarOk'),
+      erVilkarOk: formValueSelector(formName)(state, 'erVilkarOk'),
       lovReferanse: vilkar[0].lovReferanse,
       avslagsarsaker,
       onSubmit: lagSubmitFn(ownProps),
@@ -140,7 +133,9 @@ const mapStateToPropsFactory = (_initialState, staticOwnProps: PureOwnProps) => 
   };
 };
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToPropsFactory)(reduxForm({
   form: formName,
   validate,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(injectIntl(AdopsjonVilkarFormImpl)));

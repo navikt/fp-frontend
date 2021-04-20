@@ -20,7 +20,6 @@ interface OwnProps {
 }
 
 const FeilutbetalingFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
-  behandling,
   feilutbetalingFakta,
   feilutbetalingAarsak,
   fagsakYtelseTypeKode,
@@ -37,8 +36,6 @@ const FeilutbetalingFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelP
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="FeilutbetalingFaktaIndex" formData={formData} setFormData={setFormData}>
       <FeilutbetalingInfoPanel
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         feilutbetalingFakta={feilutbetalingFakta}
         feilutbetalingAarsak={feilutbetalingAarsak.find((a) => a.ytelseType.kode === fagsakYtelseTypeKode)}
         aksjonspunkter={aksjonspunkter}

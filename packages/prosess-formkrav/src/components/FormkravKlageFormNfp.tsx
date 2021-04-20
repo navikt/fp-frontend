@@ -1,10 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { behandlingForm } from '@fpsak-frontend/form';
 import { KlageVurdering, KodeverkMedNavn } from '@fpsak-frontend/types';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { KlageFormkravAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -22,8 +21,6 @@ type FormValues = {
 }
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   klageVurdering: KlageVurdering;
   submitCallback: (data: KlageFormkravAp) => Promise<void>;
   readOnlySubmitButton?: boolean;
@@ -43,8 +40,6 @@ interface MappedOwnProps {
  * Presentasjonskomponent. Setter opp aksjonspunktet for formkrav klage (NFP).
  */
 export const FormkravKlageFormNfpImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
-  behandlingId,
-  behandlingVersjon,
   readOnly,
   readOnlySubmitButton,
   alleKodeverk,
@@ -53,8 +48,6 @@ export const FormkravKlageFormNfpImpl: FunctionComponent<PureOwnProps & MappedOw
 }) => (
   <form onSubmit={formProps.handleSubmit}>
     <FormkravKlageForm
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       readOnly={readOnly}
       readOnlySubmitButton={readOnlySubmitButton}
       aksjonspunktCode={aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP}
@@ -130,8 +123,10 @@ const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
   onSubmit: lagSubmitFn(ownProps),
 });
 
-const FormkravKlageFormNfp = connect(mapStateToProps)(behandlingForm({
+const FormkravKlageFormNfp = connect(mapStateToProps)(reduxForm({
   form: formName,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(FormkravKlageFormNfpImpl));
 
 export default FormkravKlageFormNfp;

@@ -11,8 +11,6 @@ import SakenFaktaPanel from './SakenFaktaPanel';
 describe('<SakenFaktaPanel>', () => {
   it('skal vise aksjonspunkt-hjelpetekst og innhent-panel når en har åpent aksjonspunkt for markering av utenlandssak', () => {
     const wrapper = shallow(<SakenFaktaPanel
-      behandlingId={1}
-      behandlingVersjon={1}
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
@@ -36,8 +34,6 @@ describe('<SakenFaktaPanel>', () => {
 
   it('skal vise ikke vise aksjonspunkt-hjelpetekst når en har lukket aksjonspunkt for markering av utenlandssak', () => {
     const wrapper = shallow(<SakenFaktaPanel
-      behandlingId={1}
-      behandlingVersjon={1}
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
@@ -61,8 +57,6 @@ describe('<SakenFaktaPanel>', () => {
 
   it('skal ikke vise aksjonspunkt-hjelpetekst eller innhent-panel når en ikke har aksjonspunkt for markering av utenlandssak', () => {
     const wrapper = shallow(<SakenFaktaPanel
-      behandlingId={1}
-      behandlingVersjon={1}
       aksjonspunkter={[]}
       harApneAksjonspunkter={false}
       submitCallback={() => undefined}

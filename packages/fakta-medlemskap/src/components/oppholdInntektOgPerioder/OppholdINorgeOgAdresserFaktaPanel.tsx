@@ -1,11 +1,12 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
+import { formValueSelector } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { RadioGroupField, RadioOption, behandlingFormValueSelector } from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { required } from '@fpsak-frontend/utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -83,8 +84,6 @@ type TransformedValues = {
 
 interface PureOwnProps {
   id: string;
-  behandlingId: number;
-  behandlingVersjon: number;
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -199,13 +198,12 @@ const OppholdINorgeOgAdresserFaktaPanelImpl: FunctionComponent<PureOwnProps & Ma
 };
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
-  const { behandlingId, behandlingVersjon } = ownProps;
   const formName = `OppholdInntektOgPeriodeForm-${ownProps.id}`;
   return {
-    opphold: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'opphold'),
-    foreldre: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'foreldre'),
-    hasBosattAksjonspunkt: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'hasBosattAksjonspunkt'),
-    isBosattAksjonspunktClosed: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'isBosattAksjonspunktClosed'),
+    opphold: formValueSelector(formName)(state, 'opphold'),
+    foreldre: formValueSelector(formName)(state, 'foreldre'),
+    hasBosattAksjonspunkt: formValueSelector(formName)(state, 'hasBosattAksjonspunkt'),
+    isBosattAksjonspunktClosed: formValueSelector(formName)(state, 'isBosattAksjonspunktClosed'),
   };
 };
 

@@ -47,8 +47,6 @@ const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & Sta
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="VilkarresultatMedOverstyringProsessIndex" formData={formData} setFormData={setFormData}>
       <VilkarresultatMedOverstyringForm
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         behandlingType={behandling.type}
         behandlingsresultat={behandling.behandlingsresultat}
         medlemskapFom={medlemskap.fom}

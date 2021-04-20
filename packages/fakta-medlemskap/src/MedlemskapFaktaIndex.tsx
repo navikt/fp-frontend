@@ -42,11 +42,8 @@ const MedlemskapFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="MedlemskapFaktaIndex" formData={formData} setFormData={setFormData}>
       <MedlemskapInfoPanel
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         behandlingType={behandling.type}
         behandlingStatus={behandling.status}
-        behandlingPaaVent={behandling.behandlingPaaVent}
         soknad={soknad}
         inntektArbeidYtelse={inntektArbeidYtelse}
         medlemskap={medlemskap}

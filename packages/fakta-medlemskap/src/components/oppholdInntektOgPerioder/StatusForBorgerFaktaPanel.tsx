@@ -6,9 +6,10 @@ import { Undertekst } from 'nav-frontend-typografi';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { ArrowBox, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { RadioGroupField, RadioOption, behandlingFormValueSelector } from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
 import { Aksjonspunkt, MedlemPeriode } from '@fpsak-frontend/types';
+import { formValueSelector } from 'redux-form';
 
 export type PeriodeMedId = MedlemPeriode & { id: string; }
 
@@ -29,8 +30,6 @@ type TransformedValues = {
 
 interface PureOwnProps {
   id: string;
-  behandlingId: number;
-  behandlingVersjon: number;
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
 }
@@ -132,8 +131,7 @@ const StatusForBorgerFaktaPanelImpl: FunctionComponent<PureOwnProps & MappedOwnP
 };
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  ...behandlingFormValueSelector(`OppholdInntektOgPeriodeForm-${ownProps.id}`, ownProps.behandlingId, ownProps.behandlingVersjon)(state,
-    'erEosBorger', 'isBorgerAksjonspunktClosed', 'apKode'),
+  ...formValueSelector(`OppholdInntektOgPeriodeForm-${ownProps.id}`)(state, 'erEosBorger', 'isBorgerAksjonspunktClosed', 'apKode'),
 });
 
 const StatusForBorgerFaktaPanel = connect(mapStateToProps)(StatusForBorgerFaktaPanelImpl);

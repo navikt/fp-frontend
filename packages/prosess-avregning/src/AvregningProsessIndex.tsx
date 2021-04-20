@@ -37,8 +37,6 @@ const AvregningProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPr
     <ReduxWrapper formName="AvregningProsessIndex" formData={formData} setFormData={setFormData}>
       <AvregningPanel
         fagsak={fagsak}
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         sprakkode={behandling.sprakkode}
         aksjonspunkter={aksjonspunkter}
         simuleringResultat={simuleringResultat}

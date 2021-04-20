@@ -45,9 +45,7 @@ const VedtakTilbakekrevingProsessIndex: FunctionComponent<OwnProps & StandardPro
     <RawIntlProvider value={intl}>
       <ReduxWrapper formName="VedtakTilbakekrevingProsessIndex" formData={formData} setFormData={setFormData}>
         <TilbakekrevingVedtak
-          behandlingId={behandling.id}
           behandlingUuid={behandling.uuid}
-          behandlingVersjon={behandling.versjon}
           perioder={beregningsresultat.beregningResultatPerioder}
           resultat={beregningsresultat.vedtakResultatType}
           avsnittsliste={vedtaksbrev.avsnittsliste}

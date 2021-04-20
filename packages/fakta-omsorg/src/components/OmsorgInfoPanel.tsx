@@ -2,12 +2,11 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
-import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import {
   Aksjonspunkt, KodeverkMedNavn, Personoversikt, Soknad, Ytelsefordeling,
 } from '@fpsak-frontend/types';
@@ -44,8 +43,6 @@ interface PureOwnProps {
   submittable: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  behandlingId: number;
-  behandlingVersjon: number;
   personoversikt: Personoversikt;
   ytelsefordeling: Ytelsefordeling;
   soknad: Soknad;
@@ -66,8 +63,6 @@ export const OmsorgInfoPanel: FunctionComponent<PureOwnProps & MappedOwnProps & 
   aksjonspunkter,
   omsorg,
   alleKodeverk,
-  behandlingId,
-  behandlingVersjon,
   ytelsefordeling,
   soknad,
   alleMerknaderFraBeslutter,
@@ -92,8 +87,6 @@ export const OmsorgInfoPanel: FunctionComponent<PureOwnProps & MappedOwnProps & 
       />
       <FaktaSubmitButton
         formName={formProps.form}
-        behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
         isSubmittable={submittable}
         isReadOnly={readOnly}
         hasOpenAksjonspunkter={hasOpenAksjonspunkter}
@@ -140,11 +133,13 @@ const lagSubmitFn = createSelector([
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: buildInitialValues(ownProps),
-  omsorg: behandlingFormValueSelector('OmsorgInfoPanel', ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'omsorg'),
+  omsorg: formValueSelector('OmsorgInfoPanel')(state, 'omsorg'),
   onSubmit: lagSubmitFn(ownProps),
 });
 
-export default connect(mapStateToProps)(behandlingForm({
+export default connect(mapStateToProps)(reduxForm({
   form: 'OmsorgInfoPanel',
   validate: OmsorgFaktaForm.validate,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(OmsorgInfoPanel));

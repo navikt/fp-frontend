@@ -80,8 +80,6 @@ const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
         {behandling.type.kode !== behandlingType.REVURDERING && (
           <VedtakForm
             behandling={behandling}
-            behandlingId={behandling.id}
-            behandlingVersjon={behandling.versjon}
             submitCallback={submitCallback}
             readOnly={isReadOnly}
             previewCallback={previewCallback}
@@ -98,8 +96,6 @@ const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
         {behandling.type.kode === behandlingType.REVURDERING && (
           <VedtakRevurderingForm
             behandling={behandling}
-            behandlingId={behandling.id}
-            behandlingVersjon={behandling.versjon}
             submitCallback={submitCallback}
             readOnly={isReadOnly}
             previewCallback={previewCallback}

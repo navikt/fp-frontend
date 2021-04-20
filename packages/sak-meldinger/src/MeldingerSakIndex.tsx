@@ -16,8 +16,6 @@ interface OwnProps {
   templates?: Template[];
   sprakKode: Kodeverk;
   previewCallback: (mottaker: string, brevmalkode: string, fritekst: string, arsakskode: string) => void;
-  behandlingId: number;
-  behandlingVersjon: number;
   isKontrollerRevurderingApOpen?: boolean;
   revurderingVarslingArsak: KodeverkMedNavn[];
   fagsakYtelseType: Kodeverk;
@@ -30,8 +28,6 @@ const MeldingerSakIndex: FunctionComponent<OwnProps> = ({
   templates = [],
   sprakKode,
   previewCallback,
-  behandlingId,
-  behandlingVersjon,
   isKontrollerRevurderingApOpen = false,
   revurderingVarslingArsak,
   fagsakYtelseType,
@@ -45,8 +41,6 @@ const MeldingerSakIndex: FunctionComponent<OwnProps> = ({
         templates={templates}
         sprakKode={sprakKode}
         previewCallback={previewCallback}
-        behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
         isKontrollerRevurderingApOpen={isKontrollerRevurderingApOpen}
         revurderingVarslingArsak={revurderingVarslingArsak}
         fagsakYtelseType={fagsakYtelseType}

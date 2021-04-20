@@ -32,8 +32,6 @@ const VedtakInnsynProsessIndex: FunctionComponent<OwnProps & StandardProsessPane
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="VedtakInnsynProsessIndex" formData={formData} setFormData={setFormData}>
       <InnsynVedtakForm
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         sprakkode={behandling.sprakkode}
         innsynDokumenter={innsyn.dokumenter}
         innsynMottattDato={innsyn.innsynMottattDato}

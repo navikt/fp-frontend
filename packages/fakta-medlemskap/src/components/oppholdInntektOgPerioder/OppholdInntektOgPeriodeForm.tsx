@@ -1,11 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { createSelector } from 'reselect';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
-import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { FaktaBegrunnelseTextField } from '@fpsak-frontend/fakta-felles';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
@@ -40,8 +39,6 @@ type TransformedValues = {
 }
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   valgtPeriode: PeriodeMedId;
   aksjonspunkter: Aksjonspunkt[];
   medlemskap: Medlemskap;
@@ -68,8 +65,6 @@ export const OppholdInntektOgPeriodeForm: FunctionComponent<PureOwnProps & Mappe
   periodeResetCallback,
   alleKodeverk,
   alleMerknaderFraBeslutter,
-  behandlingId,
-  behandlingVersjon,
   medlemskap,
   ...formProps
 }) => (
@@ -78,8 +73,6 @@ export const OppholdInntektOgPeriodeForm: FunctionComponent<PureOwnProps & Mappe
       readOnly={readOnly}
       id={valgtPeriode.id}
       alleKodeverk={alleKodeverk}
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
     />
     <VerticalSpacer twentyPx />
@@ -92,15 +85,11 @@ export const OppholdInntektOgPeriodeForm: FunctionComponent<PureOwnProps & Mappe
     <PerioderMedMedlemskapFaktaPanel
       readOnly={readOnly}
       id={valgtPeriode.id}
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
       alleKodeverk={alleKodeverk}
     />
     { (hasAksjonspunkt(AVKLAR_OPPHOLDSRETT, valgtPeriode.aksjonspunkter) || hasAksjonspunkt(AVKLAR_LOVLIG_OPPHOLD, valgtPeriode.aksjonspunkter)) && (
       <StatusForBorgerFaktaPanel
-        behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
         readOnly={readOnly}
         id={valgtPeriode.id}
         alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
@@ -150,10 +139,8 @@ const transformValues = (values: FormValues): TransformedValues => ({
 const buildInitialValues = createSelector([
   (_state, ownProps: PureOwnProps) => ownProps.valgtPeriode,
   (_state, ownProps: PureOwnProps) => ownProps.aksjonspunkter,
-  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector('OppholdInntektOgPerioderForm',
-    ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'soknad'),
-  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector('OppholdInntektOgPerioderForm',
-    ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'medlemskapPerioder'),
+  (state: any) => formValueSelector('OppholdInntektOgPerioderForm')(state, 'soknad'),
+  (state: any) => formValueSelector('OppholdInntektOgPerioderForm')(state, 'medlemskapPerioder'),
   (_state, ownProps: PureOwnProps) => ownProps.alleKodeverk,
 ],
 (valgtPeriode, alleAksjonspunkter, soknad, medlemskapPerioder, alleKodeverk): FormValues => {
@@ -194,6 +181,8 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
 };
 
 // @ts-ignore Dynamisk form-navn
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToPropsFactory)(reduxForm({
   enableReinitialize: true,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(OppholdInntektOgPeriodeForm));

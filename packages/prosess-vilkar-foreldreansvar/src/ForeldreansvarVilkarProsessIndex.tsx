@@ -31,8 +31,6 @@ const ForeldreansvarVilkarProsessIndex: FunctionComponent<OwnProps & StandardPro
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="ForeldreansvarVilkarProsessIndex" formData={formData} setFormData={setFormData}>
       <ErForeldreansvarVilkaarOppfyltForm
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         behandlingsresultat={behandling.behandlingsresultat}
         isForeldreansvar2Ledd={isForeldreansvar2Ledd}
         isEngangsstonad={isEngangsstonad}

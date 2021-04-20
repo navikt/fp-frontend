@@ -37,8 +37,6 @@ const VarselOmRevurderingProsessIndex: FunctionComponent<OwnProps & StandardPros
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="VarselOmRevurderingProsessIndex" formData={formData} setFormData={setFormData}>
       <VarselOmRevurderingForm
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         behandlingArsaker={behandling.behandlingÅrsaker}
         sprakkode={behandling.sprakkode}
         behandlingType={behandling.type}

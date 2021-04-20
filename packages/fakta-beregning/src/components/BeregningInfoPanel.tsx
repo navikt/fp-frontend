@@ -25,8 +25,6 @@ type OwnProps = {
   erOverstyrer: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   beregningsgrunnlag?: Beregningsgrunnlag;
-  behandlingId: number;
-  behandlingVersjon: number;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
@@ -43,8 +41,6 @@ const BeregningInfoPanel: FunctionComponent<OwnProps> = ({
   beregningsgrunnlag,
   erOverstyrer,
   alleKodeverk,
-  behandlingId,
-  behandlingVersjon,
   arbeidsgiverOpplysningerPerId,
 }) => (
   <div>
@@ -56,8 +52,6 @@ const BeregningInfoPanel: FunctionComponent<OwnProps> = ({
       erOverstyrer={erOverstyrer}
       aksjonspunkter={aksjonspunkter}
       alleKodeverk={alleKodeverk}
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       beregningsgrunnlag={beregningsgrunnlag}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
@@ -68,8 +62,6 @@ const BeregningInfoPanel: FunctionComponent<OwnProps> = ({
       submittable={submittable}
       aksjonspunkter={aksjonspunkter}
       alleKodeverk={alleKodeverk}
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       beregningsgrunnlag={beregningsgrunnlag}
       erOverstyrer={erOverstyrer}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

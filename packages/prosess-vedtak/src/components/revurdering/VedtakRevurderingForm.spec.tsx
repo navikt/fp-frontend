@@ -92,8 +92,6 @@ describe('<VedtakRevurderingForm>', () => {
       resultatstruktur={resultatstruktur}
       beregningErManueltFastsatt={false}
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
       submitCallback={() => undefined}
       clearFormField={() => undefined}
       onSubmit={() => undefined}
@@ -142,8 +140,6 @@ describe('<VedtakRevurderingForm>', () => {
       resultatstruktur={resultatstruktur}
       beregningErManueltFastsatt={false}
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
       submitCallback={() => undefined}
       clearFormField={() => undefined}
       onSubmit={() => undefined}
@@ -170,8 +166,6 @@ describe('<VedtakRevurderingForm>', () => {
       resultatstruktur={resultatstruktur}
       beregningErManueltFastsatt={false}
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
       submitCallback={() => undefined}
       clearFormField={() => undefined}
       onSubmit={() => undefined}

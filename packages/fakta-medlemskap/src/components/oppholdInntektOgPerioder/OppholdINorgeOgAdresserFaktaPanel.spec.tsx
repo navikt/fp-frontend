@@ -60,8 +60,6 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
   it('skal vise info om opphold', () => {
     const wrapper = shallowWithIntl(<OppholdINorgeOgAdresserFaktaPanel.WrappedComponent
       id="1"
-      behandlingId={2}
-      behandlingVersjon={3}
       readOnly={false}
       hasBosattAksjonspunkt={false}
       isBosattAksjonspunktClosed={false}
@@ -81,8 +79,6 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
   it('skal rendre form som viser bosatt informasjon', () => {
     const wrapper = shallowWithIntl(<OppholdINorgeOgAdresserFaktaPanel.WrappedComponent
       id="1"
-      behandlingId={2}
-      behandlingVersjon={3}
       readOnly={false}
       hasBosattAksjonspunkt={false}
       isBosattAksjonspunktClosed={false}
@@ -120,8 +116,6 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
 
     const wrapper = shallowWithIntl(<OppholdINorgeOgAdresserFaktaPanel.WrappedComponent
       id="1"
-      behandlingId={2}
-      behandlingVersjon={3}
       readOnly={false}
       hasBosattAksjonspunkt
       isBosattAksjonspunktClosed={false}

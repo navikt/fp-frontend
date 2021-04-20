@@ -61,7 +61,6 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
   it('skal vise faktaform med begrunnelsefelt og fodseldato', () => {
     const wrapper = shallowWithIntl(<FodselOgTilretteleggingFaktaForm
       intl={intlMock}
-      behandlingId={1}
       behandlingVersjon={1}
       hasOpenAksjonspunkter={false}
       readOnly
@@ -95,7 +94,6 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
   it('skal vise faktaform med fødelsedato', () => {
     const wrapper = shallowWithIntl(<FodselOgTilretteleggingFaktaForm
       intl={intlMock}
-      behandlingId={1}
       behandlingVersjon={1}
       hasOpenAksjonspunkter={false}
       readOnly
@@ -129,7 +127,6 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
   it('skal vise AlertStripe når formprops.error er satt', () => {
     const wrapper = shallowWithIntl(<FodselOgTilretteleggingFaktaForm
       intl={intlMock}
-      behandlingId={1}
       behandlingVersjon={1}
       hasOpenAksjonspunkter={false}
       readOnly
@@ -327,7 +324,6 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
 
     const wrapper = shallowWithIntl(<FodselOgTilretteleggingFaktaForm
       intl={intlMock}
-      behandlingId={1}
       behandlingVersjon={1}
       hasOpenAksjonspunkter={false}
       readOnly
@@ -376,7 +372,6 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
 
     const wrapper = shallowWithIntl(<FodselOgTilretteleggingFaktaForm
       intl={intlMock}
-      behandlingId={1}
       behandlingVersjon={1}
       hasOpenAksjonspunkter={false}
       readOnly
@@ -425,7 +420,6 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
 
     const wrapper = shallowWithIntl(<FodselOgTilretteleggingFaktaForm
       intl={intlMock}
-      behandlingId={1}
       behandlingVersjon={1}
       hasOpenAksjonspunkter={false}
       readOnly

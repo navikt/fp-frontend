@@ -12,7 +12,6 @@ interface PureOwnProps {
   callbackBackward: (event: React.KeyboardEvent | React.MouseEvent) => void;
   readOnly: boolean;
   behandlingId: number;
-  behandlingVersjon: number;
   beregnBelop: (data: { behandlingId: number; perioder: PeriodeMedBelop[]}) => Promise<any>;
 }
 
@@ -23,7 +22,6 @@ export const TilbakekrevingTimelineData: FunctionComponent<PureOwnProps> = ({
   readOnly,
   oppdaterSplittedePerioder,
   behandlingId,
-  behandlingVersjon,
   beregnBelop,
 }) => (
   <Row>
@@ -35,7 +33,6 @@ export const TilbakekrevingTimelineData: FunctionComponent<PureOwnProps> = ({
         readOnly={readOnly}
         oppdaterSplittedePerioder={oppdaterSplittedePerioder}
         behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
         beregnBelop={beregnBelop}
       />
       <PeriodeInformasjon

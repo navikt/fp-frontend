@@ -40,8 +40,6 @@ export const visMeldingerPanel = () => (
       templates={object('templates', templates)}
       sprakKode={object('sprakKode', sprakKode)}
       previewCallback={action('button-click')}
-      behandlingId={1}
-      behandlingVersjon={1}
       isKontrollerRevurderingApOpen={false}
       kanVeilede={false}
       fagsakYtelseType={{

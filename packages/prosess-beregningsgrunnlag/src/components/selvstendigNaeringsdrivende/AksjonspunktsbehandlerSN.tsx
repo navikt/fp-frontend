@@ -16,8 +16,6 @@ const skalFastsetteSN = (aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunk
 type OwnProps = {
     readOnly: boolean;
     aksjonspunkter: Aksjonspunkt[];
-    behandlingId: number;
-    behandlingVersjon: number;
     erNyArbLivet?: boolean;
     erVarigEndring?: boolean;
     erNyoppstartet?: boolean;
@@ -27,8 +25,6 @@ type OwnProps = {
 const AksjonspunktsbehandlerSN: FunctionComponent<OwnProps> = ({
   readOnly,
   aksjonspunkter,
-  behandlingId,
-  behandlingVersjon,
   erNyArbLivet,
   erVarigEndring,
   erNyoppstartet,
@@ -40,8 +36,6 @@ const AksjonspunktsbehandlerSN: FunctionComponent<OwnProps> = ({
         <VurderOgFastsettSN
           gjeldendeAksjonspunkter={aksjonspunkter}
           readOnly={readOnly}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
           erNyArbLivet={erNyArbLivet}
           erVarigEndring={erVarigEndring}
           erNyoppstartet={erNyoppstartet}

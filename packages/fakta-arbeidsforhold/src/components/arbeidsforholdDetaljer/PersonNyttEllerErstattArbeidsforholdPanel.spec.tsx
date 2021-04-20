@@ -30,8 +30,6 @@ describe('<PersonNyttEllerErstattArbeidsforholdPanel>', () => {
         fomDato: '2019-10-10',
       }] as Arbeidsforhold[]}
       formName="form"
-      behandlingId={1}
-      behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
 
@@ -52,8 +50,6 @@ describe('<PersonNyttEllerErstattArbeidsforholdPanel>', () => {
         fomDato: '2019-10-10',
       }] as Arbeidsforhold[]}
       formName="form"
-      behandlingId={1}
-      behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
     expect(wrapper.find(SelectField)).toHaveLength(0);

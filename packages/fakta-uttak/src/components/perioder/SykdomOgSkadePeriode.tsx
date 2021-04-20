@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { FieldArray, InjectedFormProps } from 'redux-form';
+import {
+  FieldArray, formValueSelector, getFormSyncErrors, InjectedFormProps, reduxForm,
+} from 'redux-form';
 import { createSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
@@ -11,9 +13,7 @@ import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurd
 import {
   ArrowBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
-import {
-  RadioGroupField, RadioOption, TextAreaField, behandlingForm, behandlingFormValueSelector, getBehandlingFormSyncErrors,
-} from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
 import {
   hasValidPeriod, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
@@ -50,8 +50,6 @@ type FormValues = {
 
 interface PureOwnProps {
   id: string;
-  behandlingId: number;
-  behandlingVersjon: number;
   fieldId: string;
   gjeldendeFamiliehendelse: FamilieHendelse;
   vilkarForSykdomExists: boolean;
@@ -71,7 +69,7 @@ interface PureOwnProps {
 }
 
 interface MappedOwnProps {
-  formSyncErrors?: { dokumentertePerioder: any[] };
+  formSyncErrors?: any;
   dokumentertePerioder?: { fom: string; tom: string }[];
   resultat?: string;
   bekreftet: boolean;
@@ -238,21 +236,9 @@ const validateSykdomOgSkadeForm = (
 };
 
 const buildInitialValues = createSelector([
-  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
-    'UttakFaktaForm',
-    ownProps.behandlingId,
-    ownProps.behandlingVersjon,
-  )(state, `${ownProps.fieldId}.begrunnelse`),
-  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
-    'UttakFaktaForm',
-    ownProps.behandlingId,
-    ownProps.behandlingVersjon,
-  )(state, `${ownProps.fieldId}.resultat`),
-  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
-    'UttakFaktaForm',
-    ownProps.behandlingId,
-    ownProps.behandlingVersjon,
-  )(state, `${ownProps.fieldId}.dokumentertePerioder`),
+  (state: any, ownProps: PureOwnProps) => formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.begrunnelse`),
+  (state: any, ownProps: PureOwnProps) => formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.resultat`),
+  (state: any, ownProps: PureOwnProps) => formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.dokumentertePerioder`),
   (_state: any, ownProps: PureOwnProps) => ownProps.id],
 (begrunnelse, initialResultat, initialDokumentertePerioder, id): FormValues => ({
   begrunnelse,
@@ -262,12 +248,7 @@ const buildInitialValues = createSelector([
 }));
 
 const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
-  const {
-    behandlingId,
-    behandlingVersjon,
-    gjeldendeFamiliehendelse,
-    vilkarForSykdomExists,
-  } = initialOwnProps;
+  const { gjeldendeFamiliehendelse, vilkarForSykdomExists } = initialOwnProps;
   const formName = `sykdomOgSkadeForm-${initialOwnProps.id}`;
   const familiehendelse = gjeldendeFamiliehendelse;
   const validate = (values: FormValues) => validateSykdomOgSkadeForm(values, familiehendelse, initialOwnProps.overforingArsak, vilkarForSykdomExists);
@@ -276,17 +257,19 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
   return (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
     onSubmit,
     validate,
-    formSyncErrors: getBehandlingFormSyncErrors(formName, behandlingId, behandlingVersjon)(state),
-    dokumentertePerioder: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'dokumentertePerioder'),
-    resultat: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'resultat'),
+    formSyncErrors: getFormSyncErrors(formName)(state),
+    dokumentertePerioder: formValueSelector(formName)(state, 'dokumentertePerioder'),
+    resultat: formValueSelector(formName)(state, 'resultat'),
     initialValues: buildInitialValues(state, ownProps),
-    updated: behandlingFormValueSelector('UttakFaktaForm', behandlingId, behandlingVersjon)(state, `${ownProps.fieldId}.updated`),
-    bekreftet: behandlingFormValueSelector('UttakFaktaForm', behandlingId, behandlingVersjon)(state, `${ownProps.fieldId}.bekreftet`),
+    updated: formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.updated`),
+    bekreftet: formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.bekreftet`),
     form: formName,
   });
 };
 
 // @ts-ignore Dynamisk navn på form
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToPropsFactory)(reduxForm({
   enableReinitialize: true,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(SykdomOgSkadePeriode));

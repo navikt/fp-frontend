@@ -1,8 +1,10 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { connect } from 'react-redux';
+import {
+  FieldArray, formValueSelector, InjectedFormProps, reduxForm,
+} from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { createSelector } from 'reselect';
-import { InjectedFormProps, FieldArray } from 'redux-form';
 import { Location } from 'history';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
@@ -11,7 +13,6 @@ import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import konsekvensForYtelsen from '@fpsak-frontend/kodeverk/src/konsekvensForYtelsen';
 import { ariaCheck, isRequiredMessage, decodeHtmlEntity } from '@fpsak-frontend/utils';
 import { VerticalSpacer, AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
-import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import {
   Behandling, Kodeverk, KodeverkMedNavn, KlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
@@ -37,6 +38,10 @@ const harIkkeKonsekvenserForYtelsen = (konsekvenserForYtelsenKoder: string[], be
   return !konsekvenserForYtelsenKoder.some((kode) => kode === konsekvenserForYtelsen[0].kode);
 };
 
+export type FormValues = {
+  aksjonspunktGodkjenning: AksjonspunktGodkjenningData[];
+};
+
 interface PureOwnProps {
   behandling: Behandling;
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
@@ -53,6 +58,7 @@ interface PureOwnProps {
 }
 
 interface MappedOwnProps {
+  initialValues: FormValues;
   aksjonspunktGodkjenning: TotrinnskontrollAksjonspunkt[];
 }
 
@@ -61,7 +67,7 @@ interface MappedOwnProps {
   *
   * Presentasjonskomponent. Holds the form of the totrinnkontroll
   */
-export const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+export const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps<FormValues>> = ({
   behandling,
   handleSubmit,
   forhandsvisVedtaksbrev,
@@ -146,10 +152,6 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & Map
   );
 };
 
-export type FormValues = {
-  aksjonspunktGodkjenning: AksjonspunktGodkjenningData[];
-};
-
 const validate = (values: FormValues) => {
   const errors = {};
   if (!values.aksjonspunktGodkjenning) {
@@ -200,9 +202,14 @@ const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.
 
 const formName = 'toTrinnForm';
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps) => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: buildInitialValues(ownProps),
-  aksjonspunktGodkjenning: behandlingFormValueSelector(formName, ownProps.behandling.id, ownProps.behandling.versjon)(state, 'aksjonspunktGodkjenning'),
+  aksjonspunktGodkjenning: formValueSelector(formName)(state, 'aksjonspunktGodkjenning'),
 });
 
-export default connect(mapStateToProps)(behandlingForm({ form: formName, validate })(TotrinnskontrollBeslutterForm));
+export default connect(mapStateToProps)(reduxForm<FormValues>({
+  form: formName,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
+  validate,
+})(TotrinnskontrollBeslutterForm));

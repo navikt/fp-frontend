@@ -58,8 +58,6 @@ describe('<FaktaForATFLOgSNPanel>', () => {
       beregningsgrunnlag={{}}
       alleKodeverk={{}}
       aksjonspunkter={aksjonspunkter}
-      behandlingVersjon={1}
-      behandlingId={1}
       erOverstyrer={false}
       arbeidsgiverOpplysningerPerId={{}}
     />);
@@ -77,8 +75,6 @@ describe('<FaktaForATFLOgSNPanel>', () => {
       beregningsgrunnlag={{}}
       alleKodeverk={{}}
       aksjonspunkter={aksjonspunkter}
-      behandlingVersjon={1}
-      behandlingId={1}
       erOverstyrer={false}
       arbeidsgiverOpplysningerPerId={{}}
     />);
@@ -96,8 +92,6 @@ describe('<FaktaForATFLOgSNPanel>', () => {
       beregningsgrunnlag={{}}
       alleKodeverk={{}}
       aksjonspunkter={aksjonspunkter}
-      behandlingVersjon={1}
-      behandlingId={1}
       erOverstyrer={false}
       arbeidsgiverOpplysningerPerId={{}}
     />);

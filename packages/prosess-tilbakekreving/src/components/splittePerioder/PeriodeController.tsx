@@ -17,7 +17,6 @@ const isEdited = false;
 
 interface OwnProps {
   behandlingId: number;
-  behandlingVersjon: number;
   beregnBelop: (data: any) => Promise<any>;
   oppdaterSplittedePerioder: (...args: any[]) => any;
   callbackForward: (...args: any[]) => any;
@@ -122,8 +121,6 @@ export class PeriodeController extends Component<OwnProps & WrappedComponentProp
       callbackBackward,
       periode,
       readOnly,
-      behandlingId,
-      behandlingVersjon,
     } = this.props;
 
     const { showDelPeriodeModal, finnesBelopMed0Verdi } = this.state;
@@ -155,8 +152,7 @@ export class PeriodeController extends Component<OwnProps & WrappedComponentProp
           {showDelPeriodeModal
           && (
             <DelOppPeriodeModal
-              behandlingId={behandlingId}
-              behandlingVersjon={behandlingVersjon}
+              // @ts-ignore Fiks
               cancelEvent={this.hideModal}
               showModal={showDelPeriodeModal}
               periodeData={periode}

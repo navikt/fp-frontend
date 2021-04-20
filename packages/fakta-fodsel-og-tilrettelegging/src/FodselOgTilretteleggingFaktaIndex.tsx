@@ -39,7 +39,6 @@ const FodselOgTilretteleggingFaktaIndex: FunctionComponent<OwnProps & StandardFa
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="FodselOgTilretteleggingFaktaIndex" formData={formData} setFormData={setFormData}>
       <FodselOgTilretteleggingInfoPanel
-        behandlingId={behandling.id}
         behandlingVersjon={behandling.versjon}
         svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
         iayArbeidsforhold={inntektArbeidYtelse.arbeidsforhold}

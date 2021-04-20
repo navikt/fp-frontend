@@ -31,8 +31,6 @@ const FodselVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsessPane
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="FodselVilkarProsessIndex" formData={formData} setFormData={setFormData}>
       <FodselVilkarForm
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         behandlingsresultat={behandling.behandlingsresultat}
         aksjonspunkter={aksjonspunkter}
         status={status}

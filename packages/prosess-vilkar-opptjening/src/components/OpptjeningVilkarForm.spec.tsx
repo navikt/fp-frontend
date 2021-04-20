@@ -34,8 +34,6 @@ describe('<OpptjeningVilkarForm>', () => {
       readOnly
       isAksjonspunktOpen
       submitCallback={sinon.spy()}
-      behandlingId={1}
-      behandlingVersjon={2}
       behandlingsresultat={{} as Behandling['behandlingsresultat']}
       aksjonspunkter={[{
         definisjon: {
@@ -61,8 +59,6 @@ describe('<OpptjeningVilkarForm>', () => {
       readOnly
       isAksjonspunktOpen={false}
       submitCallback={sinon.spy()}
-      behandlingId={1}
-      behandlingVersjon={2}
       behandlingsresultat={{} as Behandling['behandlingsresultat']}
       aksjonspunkter={[]}
       status="test"

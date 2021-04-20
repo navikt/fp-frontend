@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import classNames from 'classnames';
 import { createSelector } from 'reselect';
-import { InjectedFormProps } from 'redux-form';
+import { getFormValues, InjectedFormProps, reduxForm } from 'redux-form';
 
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import { omit } from '@fpsak-frontend/utils';
@@ -11,13 +11,6 @@ import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
-import {
-  behandlingForm,
-  isBehandlingFormSubmitting,
-  isBehandlingFormDirty,
-  hasBehandlingFormErrorsOfType,
-  getBehandlingFormValues,
-} from '@fpsak-frontend/form';
 import advarselIcon from '@fpsak-frontend/assets/images/advarsel_ny.svg';
 import { VedtaksbrevAvsnitt } from '@fpsak-frontend/types';
 import { ForeslaVedtakTilbakekrevingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -75,8 +68,6 @@ const fetchPreview = (
 };
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   submitCallback: (aksjonspunktData: ForeslaVedtakTilbakekrevingAp) => Promise<void>;
   avsnittsliste: VedtaksbrevAvsnitt[];
   readOnly: boolean;
@@ -101,9 +92,7 @@ export const TilbakekrevingVedtakFormImpl: FunctionComponent<PureOwnProps & Mapp
   fetchPreviewVedtaksbrev,
   vedtaksbrevAvsnitt,
   formVerdier,
-  behandlingId,
   behandlingUuid,
-  behandlingVersjon,
   perioderSomIkkeHarUtfyltObligatoriskVerdi,
   erRevurderingTilbakekrevingKlage,
   erRevurderingTilbakekrevingFeilBeløpBortfalt,
@@ -117,8 +106,6 @@ export const TilbakekrevingVedtakFormImpl: FunctionComponent<PureOwnProps & Mapp
       vedtaksbrevAvsnitt={vedtaksbrevAvsnitt}
       formName={formName}
       readOnly={readOnly}
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       perioderSomIkkeHarUtfyltObligatoriskVerdi={perioderSomIkkeHarUtfyltObligatoriskVerdi}
       fritekstOppsummeringPakrevdMenIkkeUtfylt={fritekstOppsummeringPakrevdMenIkkeUtfylt}
       erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt}
@@ -130,13 +117,8 @@ export const TilbakekrevingVedtakFormImpl: FunctionComponent<PureOwnProps & Mapp
           <ProsessStegSubmitButton
             text={intl.formatMessage({ id: 'TilbakekrevingVedtakForm.TilGodkjenning' })}
             formName={formName}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             isReadOnly={readOnly}
             isSubmittable={perioderSomIkkeHarUtfyltObligatoriskVerdi.length === 0 && !fritekstOppsummeringPakrevdMenIkkeUtfylt}
-            isBehandlingFormSubmitting={isBehandlingFormSubmitting}
-            isBehandlingFormDirty={isBehandlingFormDirty}
-            hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
           />
         </FlexColumn>
         {perioderSomIkkeHarUtfyltObligatoriskVerdi.length === 0 && (
@@ -206,7 +188,7 @@ const lagSubmitFn = createSelector([
 const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
   const vedtaksbrevAvsnitt = ownProps.avsnittsliste;
   const initialValues = TilbakekrevingEditerVedtaksbrevPanel.buildInitialValues(vedtaksbrevAvsnitt);
-  const formVerdier = getBehandlingFormValues(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state) || {};
+  const formVerdier = getFormValues(formName)(state) || {};
   const fritekstOppsummeringPakrevdMenIkkeUtfylt = harFritekstOppsummeringPakrevdMenIkkeUtfylt(vedtaksbrevAvsnitt);
   return {
     initialValues,
@@ -218,8 +200,10 @@ const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps): MappedOwnPr
   };
 };
 
-const TilbakekrevingVedtakForm = connect(mapStateToPropsFactory)(behandlingForm({
+const TilbakekrevingVedtakForm = connect(mapStateToPropsFactory)(reduxForm({
   form: formName,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(injectIntl(TilbakekrevingVedtakFormImpl)));
 
 export default TilbakekrevingVedtakForm;

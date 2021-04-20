@@ -33,8 +33,6 @@ describe('<SykdomOgSkadePeriode>', () => {
       {...reduxFormPropsMock}
       readOnly={false}
       behandlingStatusKode={behandlingStatusKode}
-      behandlingId={1}
-      behandlingVersjon={2}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       vilkarForSykdomExists
       onSubmit={() => undefined}
@@ -64,8 +62,6 @@ describe('<SykdomOgSkadePeriode>', () => {
       behandlingStatusKode={behandlingStatusKode}
       {...reduxFormPropsMock}
       readOnly={false}
-      behandlingId={1}
-      behandlingVersjon={2}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       vilkarForSykdomExists
       onSubmit={() => undefined}

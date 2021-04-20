@@ -110,8 +110,6 @@ type OwnProps = {
     aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[];
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
     formNameAvklarAktiviteter: string;
-    behandlingId: number;
-    behandlingVersjon: number;
     values: any;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
@@ -141,8 +139,6 @@ export const VurderAktiviteterPanel:FunctionComponent<OwnProps> & StaticFunction
   harAksjonspunkt,
   alleKodeverk,
   formNameAvklarAktiviteter,
-  behandlingId,
-  behandlingVersjon,
   arbeidsgiverOpplysningerPerId,
 }) => {
   const listeSomSkalVurderes = finnListerSomSkalVurderes(aktiviteterTomDatoMapping, values, erOverstyrt);
@@ -161,8 +157,6 @@ export const VurderAktiviteterPanel:FunctionComponent<OwnProps> & StaticFunction
           valgtSkjæringstidspunkt={gjeldendeSkjæringstidspunkt}
           ingenAktiviterErBrukt={gjeldendeSkjæringstidspunkt === undefined}
           formNameAvklarAktiviteter={formNameAvklarAktiviteter}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           key={aktivitetMap.tom}
         />

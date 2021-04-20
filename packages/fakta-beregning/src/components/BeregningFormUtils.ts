@@ -1,26 +1,26 @@
 import { createSelector } from 'reselect';
-import { isBehandlingFormDirty, getBehandlingFormInitialValues, getBehandlingFormValues } from '@fpsak-frontend/form';
+import { getFormInitialValues, getFormValues, isDirty } from 'redux-form';
 
 export const formNameAvklarAktiviteter = 'avklarAktiviteterForm';
 
 export const formNameVurderFaktaBeregning = 'vurderFaktaBeregningForm';
 
 export const getFormValuesForAvklarAktiviteter = createSelector([
-  (state, ownProps) => getBehandlingFormValues(formNameAvklarAktiviteter, ownProps.behandlingId, ownProps.behandlingVersjon)(state)],
+  (state) => getFormValues(formNameAvklarAktiviteter)(state)],
 (values) => values);
 
 export const getFormInitialValuesForAvklarAktiviteter = createSelector([
-  (state, ownProps) => getBehandlingFormInitialValues(formNameAvklarAktiviteter, ownProps.behandlingId, ownProps.behandlingVersjon)(state)],
+  (state) => getFormInitialValues(formNameAvklarAktiviteter)(state)],
 (values) => values);
 
 export const getFormValuesForBeregning = createSelector([
-  (state, ownProps) => getBehandlingFormValues(formNameVurderFaktaBeregning, ownProps.behandlingId, ownProps.behandlingVersjon)(state)],
+  (state) => getFormValues(formNameVurderFaktaBeregning)(state)],
 (values) => values);
 
 export const getFormInitialValuesForBeregning = createSelector([
-  (state, ownProps) => getBehandlingFormInitialValues(formNameVurderFaktaBeregning, ownProps.behandlingId, ownProps.behandlingVersjon)(state)],
+  (state) => getFormInitialValues(formNameVurderFaktaBeregning)(state)],
 (values) => values);
 
 export const isBeregningFormDirty = createSelector([
-  (state, ownProps) => isBehandlingFormDirty(formNameVurderFaktaBeregning, ownProps.behandlingId, ownProps.behandlingVersjon)(state)],
+  (state) => isDirty(formNameVurderFaktaBeregning)(state)],
 (values) => values);
