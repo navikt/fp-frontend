@@ -6,14 +6,13 @@ import { BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import {
   ArbeidsgiverOpplysningerPerId,
-  BeregningsgrunnlagPeriodeProp, FordelBeregningsgrunnlagAndel,
+  BeregningsgrunnlagPeriodeProp,
   FordelBeregningsgrunnlagPeriode,
   KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 import { IntlShape } from 'react-intl';
-import HenleggBehandlingModal from '@fpsak-frontend/sak-meny-henlegg/src/components/HenleggBehandlingModal';
 import FordelBeregningsgrunnlagPeriodePanel from './FordelBeregningsgrunnlagPeriodePanel';
 
 import styles from './fordelBeregningsgrunnlagForm.less';

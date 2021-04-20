@@ -62,6 +62,7 @@ export type FordelBeregningsgrunnlagArbeidAndelValues = {
   arbeidsforholdId?: string;
   arbeidsperiodeFom?: string;
   arbeidsperiodeTom?: string;
+  eksternArbeidsforholdId?: string;
   arbeidsforholdType?: Kodeverk;
 }
 
@@ -106,6 +107,12 @@ export type FordelBeregningsgrunnlagAndelValues = FordelBeregningsgrunnlagGenere
 export type AksjonspunktValues = {
   begrunnelseFordeling?: string;
 }
+
+export type FordelErrorMessageLabel = {
+  id: string;
+}
+
+export type FordelErrorMessage = FordelErrorMessageLabel | any;
 
 export type FordelBeregningsgrunnlagValues = {
   [key: string]: FordelBeregningsgrunnlagAndelValues[];

@@ -227,7 +227,12 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       skalPreutfyllesMedBeregningsgrunnlag: false,
     }];
     const bgPerioder = [{
-      beregningsgrunnlagPeriodeFom: '01-01-2019', beregningsgrunnlagPeriodeTom: null, periodeAarsaker: [periodeAarsak.ENDRING_I_REFUSJONSKRAV],
+      beregningsgrunnlagPeriodeFom: '01-01-2019',
+      beregningsgrunnlagPeriodeTom: null,
+      periodeAarsaker: [{
+        kode: periodeAarsak.ENDRING_I_REFUSJONSKRAV,
+        kodeverk: 'test',
+      }],
     }];
     const nyePerioder = slaaSammenPerioder(perioder, bgPerioder);
     expect(nyePerioder.length).toBe(1);
@@ -253,12 +258,18 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
     const bgPerioder = [{
       beregningsgrunnlagPeriodeFom: '01-01-2019',
       beregningsgrunnlagPeriodeTom: '01-02-2019',
-      periodeAarsaker: [{ kode: periodeAarsak.ENDRING_I_REFUSJONSKRAV }],
+      periodeAarsaker: [{
+        kode: periodeAarsak.ENDRING_I_REFUSJONSKRAV,
+        kodeverk: 'test',
+      }],
     },
     {
       beregningsgrunnlagPeriodeFom: '02-02-2019',
       beregningsgrunnlagPeriodeTom: null,
-      periodeAarsaker: [{ kode: periodeAarsak.NATURALYTELSE_TILKOMMER }],
+      periodeAarsaker: [{
+        kode: periodeAarsak.NATURALYTELSE_TILKOMMER,
+        kodeverk: 'test',
+      }],
     }];
     const nyePerioder = slaaSammenPerioder(perioder, bgPerioder);
     expect(nyePerioder.length).toBe(1);
@@ -284,12 +295,18 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
     const bgPerioder = [{
       beregningsgrunnlagPeriodeFom: '01-01-2019',
       beregningsgrunnlagPeriodeTom: '01-02-2019',
-      periodeAarsaker: [{ kode: periodeAarsak.ENDRING_I_REFUSJONSKRAV }],
+      periodeAarsaker: [{
+        kode: periodeAarsak.ENDRING_I_REFUSJONSKRAV,
+        kodeverk: 'test',
+      }],
     },
     {
       beregningsgrunnlagPeriodeFom: '02-02-2019',
       beregningsgrunnlagPeriodeTom: null,
-      periodeAarsaker: [{ kode: periodeAarsak.NATURALYTELSE_BORTFALT }],
+      periodeAarsaker: [{
+        kode: periodeAarsak.NATURALYTELSE_BORTFALT,
+        kodeverk: 'test',
+      }],
     }];
     const nyePerioder = slaaSammenPerioder(perioder, bgPerioder);
     expect(nyePerioder.length).toBe(1);
@@ -316,13 +333,19 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       beregningsgrunnlagPeriodeFom: '01-01-2019',
       beregningsgrunnlagPeriodeTom: '01-02-2019',
       bruttoPrAar: 120000,
-      periodeAarsaker: [{ kode: periodeAarsak.ENDRING_I_REFUSJONSKRAV }],
+      periodeAarsaker: [{
+        kode: periodeAarsak.ENDRING_I_REFUSJONSKRAV,
+        kodeverk: 'test',
+      }],
     },
     {
       beregningsgrunnlagPeriodeFom: '02-02-2019',
       beregningsgrunnlagPeriodeTom: null,
       bruttoPrAar: 120000,
-      periodeAarsaker: [{ kode: periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET }],
+      periodeAarsaker: [{
+        kode: periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET,
+        kodeverk: 'test',
+      }],
     }];
     const nyePerioder = slaaSammenPerioder(perioder, bgPerioder);
     expect(nyePerioder.length).toBe(1);
@@ -349,13 +372,19 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       beregningsgrunnlagPeriodeFom: '01-01-2019',
       beregningsgrunnlagPeriodeTom: '01-02-2019',
       bruttoPrAar: 120000,
-      periodeAarsaker: [{ kode: periodeAarsak.ENDRING_I_REFUSJONSKRAV }],
+      periodeAarsaker: [{
+        kode: periodeAarsak.ENDRING_I_REFUSJONSKRAV,
+        kodeverk: 'test',
+      }],
     },
     {
       beregningsgrunnlagPeriodeFom: '02-02-2019',
       beregningsgrunnlagPeriodeTom: null,
       bruttoPrAar: 130000,
-      periodeAarsaker: [{ kode: periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET }],
+      periodeAarsaker: [{
+        kode: periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET,
+        kodeverk: 'test',
+      }],
     }];
     const nyePerioder = slaaSammenPerioder(perioder, bgPerioder);
     expect(nyePerioder.length).toBe(2);
@@ -384,13 +413,19 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       beregningsgrunnlagPeriodeFom: '01-01-2019',
       beregningsgrunnlagPeriodeTom: '01-02-2019',
       bruttoPrAar: 120000,
-      periodeAarsaker: [{ kode: periodeAarsak.ENDRING_I_REFUSJONSKRAV }],
+      periodeAarsaker: [{
+        kode: periodeAarsak.ENDRING_I_REFUSJONSKRAV,
+        kodeverk: 'test',
+      }],
     },
     {
       beregningsgrunnlagPeriodeFom: '02-02-2019',
       beregningsgrunnlagPeriodeTom: null,
       bruttoPrAar: 120000,
-      periodeAarsaker: [{ kode: periodeAarsak.GRADERING_OPPHOERER }],
+      periodeAarsaker: [{
+        kode: periodeAarsak.GRADERING_OPPHOERER,
+        kodeverk: 'test',
+      }],
     }];
     const nyePerioder = slaaSammenPerioder(perioder, bgPerioder);
     expect(nyePerioder.length).toBe(2);
@@ -419,13 +454,19 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       beregningsgrunnlagPeriodeFom: '01-01-2019',
       beregningsgrunnlagPeriodeTom: '01-02-2019',
       bruttoPrAar: 120000,
-      periodeAarsaker: [{ kode: periodeAarsak.ENDRING_I_REFUSJONSKRAV }],
+      periodeAarsaker: [{
+        kode: periodeAarsak.ENDRING_I_REFUSJONSKRAV,
+        kodeverk: 'test',
+      }],
     },
     {
       beregningsgrunnlagPeriodeFom: '02-02-2019',
       beregningsgrunnlagPeriodeTom: null,
       bruttoPrAar: 120000,
-      periodeAarsaker: [{ kode: periodeAarsak.REFUSJON_OPPHOERER }],
+      periodeAarsaker: [{
+        kode: periodeAarsak.REFUSJON_OPPHOERER,
+        kodeverk: 'test',
+      }],
     }];
     const nyePerioder = slaaSammenPerioder(perioder, bgPerioder);
     expect(nyePerioder.length).toBe(2);
@@ -460,7 +501,10 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       beregningsgrunnlagPeriodeFom: '02-02-2019',
       beregningsgrunnlagPeriodeTom: null,
       bruttoPrAar: 120000,
-      periodeAarsaker: [{ kode: periodeAarsak.ENDRING_I_REFUSJONSKRAV }],
+      periodeAarsaker: [{
+        kode: periodeAarsak.ENDRING_I_REFUSJONSKRAV,
+        kodeverk: 'test',
+      }],
     }];
     const nyePerioder = slaaSammenPerioder(perioder, bgPerioder);
     expect(nyePerioder.length).toBe(2);
@@ -495,7 +539,10 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       beregningsgrunnlagPeriodeFom: '02-02-2019',
       beregningsgrunnlagPeriodeTom: null,
       bruttoPrAar: 120000,
-      periodeAarsaker: [{ kode: periodeAarsak.GRADERING }],
+      periodeAarsaker: [{
+        kode: periodeAarsak.GRADERING,
+        kodeverk: 'test',
+      }],
     }];
     const nyePerioder = slaaSammenPerioder(perioder, bgPerioder);
     expect(nyePerioder.length).toBe(2);
@@ -587,7 +634,10 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
     {
       beregningsgrunnlagPeriodeFom: '2018-06-02',
       beregningsgrunnlagPeriodeTom: null,
-      periodeAarsaker: [{ kode: periodeAarsak.ENDRING_I_REFUSJONSKRAV }],
+      periodeAarsaker: [{
+        kode: periodeAarsak.ENDRING_I_REFUSJONSKRAV,
+        kodeverk: 'test',
+      }],
     }];
     const fordelBGPerioder = [
       {

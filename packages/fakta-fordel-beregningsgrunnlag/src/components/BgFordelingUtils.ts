@@ -12,6 +12,7 @@ import {
 } from '@fpsak-frontend/types';
 import { createVisningsnavnForAktivitetFordeling } from './util/visningsnavnHelper';
 import {
+  FordelBeregningsgrunnlagAndelValues,
   FordelBeregningsgrunnlagArbeidAndelValues,
   FordelBeregningsgrunnlagGenerellAndelValues,
 } from '../types/FordelingTsType';
@@ -69,6 +70,7 @@ export const settFastsattBelop = (fordeltPrAar: number, bruttoPrAar: number,
 export const setArbeidsforholdInitialValues = (andel: FordelBeregningsgrunnlagAndel): FordelBeregningsgrunnlagArbeidAndelValues => ({
   arbeidsgiverNavn: andel.arbeidsforhold && andel.arbeidsforhold.arbeidsgiverNavn ? andel.arbeidsforhold.arbeidsgiverNavn : '',
   arbeidsgiverId: andel.arbeidsforhold && andel.arbeidsforhold.arbeidsgiverIdent ? andel.arbeidsforhold.arbeidsgiverIdent : '',
+  eksternArbeidsforholdId: andel.arbeidsforhold && andel.arbeidsforhold.eksternArbeidsforholdId ? andel.arbeidsforhold.eksternArbeidsforholdId : '',
   arbeidsforholdId: andel.arbeidsforhold && andel.arbeidsforhold.arbeidsforholdId ? andel.arbeidsforhold.arbeidsforholdId : '',
   arbeidsperiodeFom: andel.arbeidsforhold ? andel.arbeidsforhold.startdato : '',
   arbeidsperiodeTom: andel.arbeidsforhold && andel.arbeidsforhold.opphoersdato !== null
@@ -90,7 +92,7 @@ export const setGenerellAndelsinfo = (andel: FordelBeregningsgrunnlagAndel,
   forrigeInntektskategori: !andel.inntektskategori || andel.inntektskategori.kode === inntektskategorier.UDEFINERT ? null : andel.inntektskategori.kode,
 });
 
-export const mapToBelop = (andel) => {
+export const mapToBelop = (andel: FordelBeregningsgrunnlagAndelValues): number => {
   const { fastsattBelop, readOnlyBelop } = andel;
   if (andel.skalRedigereInntekt) {
     return fastsattBelop ? removeSpacesFromNumber(fastsattBelop) : 0;

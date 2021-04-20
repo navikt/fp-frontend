@@ -28,7 +28,7 @@ type RefusjonTilVurdering = Readonly<{
   andeler: RefusjonTilVurderingAndel[];
 }>
 
-type PerioderMedGraderingEllerRefusjon = Readonly<{
+export type PerioderMedGraderingEllerRefusjon = Readonly<{
   erRefusjon?: boolean;
   erGradering?: boolean;
   erSøktYtelse?: boolean;
