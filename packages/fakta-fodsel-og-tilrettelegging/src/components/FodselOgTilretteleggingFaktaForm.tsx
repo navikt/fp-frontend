@@ -518,5 +518,4 @@ export default connect(mapStateToProps)(reduxForm({
   form: FODSEL_TILRETTELEGGING_FORM,
   shouldValidate,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(FodselOgTilretteleggingFaktaForm));

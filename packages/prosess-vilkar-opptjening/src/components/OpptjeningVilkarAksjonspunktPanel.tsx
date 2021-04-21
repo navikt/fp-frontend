@@ -128,7 +128,6 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
 const OpptjeningVilkarAksjonspunktPanel = connect(mapStateToPropsFactory)(reduxForm({
   form: FORM_NAME,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(OpptjeningVilkarAksjonspunktPanelImpl)));
 
 export default OpptjeningVilkarAksjonspunktPanel;

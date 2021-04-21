@@ -378,5 +378,4 @@ export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
   form: formName,
   enableReinitialize: true,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(AvregningPanelImpl)));

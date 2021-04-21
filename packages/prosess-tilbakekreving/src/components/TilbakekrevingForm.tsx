@@ -465,7 +465,6 @@ const TilbakekrevingForm = connect(mapStateToProps, mapDispatchToProps)(reduxFor
   form: TILBAKEKREVING_FORM_NAME,
   validate: validateForm,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
   // @ts-ignore FIks
 })(TilbakekrevingFormImpl));
 

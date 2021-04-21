@@ -184,5 +184,4 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
 export default connect(mapStateToPropsFactory)(reduxForm({
   enableReinitialize: true,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(OppholdInntektOgPeriodeForm));

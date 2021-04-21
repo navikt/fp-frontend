@@ -119,5 +119,4 @@ export default connect(mapStateToProps)(reduxForm({
   form: 'AnnenForelderHarRettForm',
   enableReinitialize: true,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(AnnenForelderHarRettForm));

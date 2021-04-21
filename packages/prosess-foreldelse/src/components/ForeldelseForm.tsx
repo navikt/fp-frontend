@@ -316,5 +316,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
   form: FORELDELSE_FORM_NAME,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(ForeldelseForm));

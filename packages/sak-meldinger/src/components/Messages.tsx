@@ -217,7 +217,6 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
 const Messages = connect(mapStateToPropsFactory)(reduxForm({
   form: formName,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(MessagesImpl)));
 
 export default Messages;

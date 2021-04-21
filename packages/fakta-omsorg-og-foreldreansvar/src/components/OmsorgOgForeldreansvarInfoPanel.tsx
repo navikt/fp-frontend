@@ -143,5 +143,4 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
 export default connect(mapStateToPropsFactory)(reduxForm({
   form: 'OmsorgOgForeldreansvarInfoPanel',
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(OmsorgOgForeldreansvarInfoPanelImpl));

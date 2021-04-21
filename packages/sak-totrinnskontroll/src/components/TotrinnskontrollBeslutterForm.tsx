@@ -210,6 +210,5 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
 export default connect(mapStateToProps)(reduxForm<FormValues>({
   form: formName,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
   validate,
 })(TotrinnskontrollBeslutterForm));

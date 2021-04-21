@@ -184,5 +184,4 @@ const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {
 export default connect(mapStateToPropsFactory)(reduxForm({
   form: formName,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(AvklarFaresignalerForm));

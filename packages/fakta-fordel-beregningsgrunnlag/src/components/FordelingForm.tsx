@@ -186,7 +186,6 @@ const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => {
 const FordelingForm = connect(mapStateToProps)(reduxForm({
   form: FORM_NAME_FORDEL_BEREGNING,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(FordelingFormImpl));
 
 export default FordelingForm;

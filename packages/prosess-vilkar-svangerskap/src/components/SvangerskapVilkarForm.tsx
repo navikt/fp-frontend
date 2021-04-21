@@ -126,5 +126,4 @@ export default connect(mapStateToProps)(reduxForm({
   form: formName,
   validate,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(SvangerskapVilkarFormImpl)));

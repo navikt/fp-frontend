@@ -267,5 +267,4 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
 export default connect(mapStateToPropsFactory)(reduxForm({
   form: formName,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(ErSoknadsfristVilkaretOppfyltFormImpl)));

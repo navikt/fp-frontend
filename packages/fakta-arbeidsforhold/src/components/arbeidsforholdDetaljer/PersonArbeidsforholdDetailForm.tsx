@@ -186,5 +186,4 @@ export default connect(mapStateToPropsFactory)(reduxForm({
   form: PERSON_ARBEIDSFORHOLD_DETAIL_FORM,
   enableReinitialize: true,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(PersonArbeidsforholdDetailForm));

@@ -486,7 +486,6 @@ const TilbakekrevingPeriodeForm = connect(mapStateToPropsFactory, mapDispatchToP
   form: TILBAKEKREVING_PERIODE_FORM_NAME,
   enableReinitialize: true,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(TilbakekrevingPeriodeFormImpl)));
 
 // TODO Fiks typen til periode

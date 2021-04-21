@@ -132,7 +132,6 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
 const UttakSlettPeriodeModal = connect(mapStateToPropsFactory)(reduxForm({
   enableReinitialize: true,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(UttakSlettPeriodeModalImpl)));
 
 export default UttakSlettPeriodeModal;

@@ -57,7 +57,10 @@ const ReduxWrapper: FunctionComponent<OwnProps> = ({
 
   useEffect(() => () => {
     if (setFormData) {
-      setFormData(store.getState().form);
+      const currentFormData = store.getState().form;
+      // @ts-ignore
+      const allSuccedded = Object.keys(currentFormData).every((key) => currentFormData[key].submitSucceeded);
+      setFormData(allSuccedded ? {} : store.getState().form);
     }
   }, []);
 

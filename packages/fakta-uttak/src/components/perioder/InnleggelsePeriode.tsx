@@ -234,7 +234,6 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
 export default connect(mapStateToPropsFactory)(reduxForm({
   enableReinitialize: true,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
   // @ts-ignore Fiks
   validate: (values: FormValues) => validateInnleggelseForm(values),
 })(InnleggelsePeriode));

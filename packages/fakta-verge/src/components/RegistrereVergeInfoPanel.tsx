@@ -117,5 +117,4 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
 export default connect(mapStateToProps)(reduxForm({
   form: FORM_NAVN,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(RegistrereVergeInfoPanelImpl)));

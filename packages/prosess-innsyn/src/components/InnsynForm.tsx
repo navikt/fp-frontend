@@ -224,7 +224,6 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
 const InnsynForm = connect(mapStateToProps)(reduxForm({
   form: formName,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(InnsynFormImpl)));
 
 export default InnsynForm;

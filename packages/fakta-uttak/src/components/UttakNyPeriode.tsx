@@ -556,6 +556,5 @@ export default connect(mapStateToPropsFactory)(
     validate: (values: FormValues) => validateNyPeriodeForm(values),
     enableReinitialize: true,
     destroyOnUnmount: false,
-    keepDirtyOnReinitialize: true,
   })(UttakNyPeriode),
 );

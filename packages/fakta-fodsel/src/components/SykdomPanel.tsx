@@ -96,5 +96,4 @@ export const sykdomPanelName = 'SykdomPanel';
 export default connect(mapStateToProps)(reduxForm({
   form: sykdomPanelName,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(SykdomPanel)));

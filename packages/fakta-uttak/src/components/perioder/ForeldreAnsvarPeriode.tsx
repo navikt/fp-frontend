@@ -235,5 +235,4 @@ export default connect(mapStateToPropsFactory)(reduxForm({
   enableReinitialize: true,
   validate: (values: FormValues) => validateForeldreAnsvarForm(values),
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(ForeldreAnsvarPeriode));

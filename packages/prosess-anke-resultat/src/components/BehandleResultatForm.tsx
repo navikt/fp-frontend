@@ -255,7 +255,6 @@ const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
 const BehandleResultatForm = connect(mapStateToProps)(reduxForm({
   form: formName,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(AnkeResultatForm)));
 
 export default BehandleResultatForm;

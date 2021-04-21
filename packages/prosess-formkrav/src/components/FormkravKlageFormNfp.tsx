@@ -126,7 +126,6 @@ const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
 const FormkravKlageFormNfp = connect(mapStateToProps)(reduxForm({
   form: formName,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(FormkravKlageFormNfpImpl));
 
 export default FormkravKlageFormNfp;

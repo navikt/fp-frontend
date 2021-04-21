@@ -429,7 +429,6 @@ const UttakPanel = connect(mapStateToPropsFactory)(reduxForm({
   form: formName,
   enableReinitialize: false,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(UttakPanelImpl)));
 
 export default UttakPanel;

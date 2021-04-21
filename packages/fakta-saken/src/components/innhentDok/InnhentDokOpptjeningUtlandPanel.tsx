@@ -114,5 +114,4 @@ const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
 export default connect(mapStateToProps)(reduxForm({
   form: 'InnhentDokOpptjeningUtlandPanel',
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(InnhentDokOpptjeningUtlandPanel)));

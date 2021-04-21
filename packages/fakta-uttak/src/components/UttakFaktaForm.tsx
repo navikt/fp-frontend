@@ -295,5 +295,4 @@ export default connect(mapStateToPropsFactory)(reduxForm({
   form: 'UttakFaktaForm',
   enableReinitialize: true,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(UttakFaktaForm));

@@ -220,5 +220,4 @@ export default connect(mapStateToPropsFactory)(reduxForm({
   form: formNameVurderFaktaBeregning,
   enableReinitialize: true,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(VurderFaktaBeregningPanelImpl));

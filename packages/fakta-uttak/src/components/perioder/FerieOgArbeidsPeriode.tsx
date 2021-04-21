@@ -235,5 +235,4 @@ export default connect(mapStateToPropsFactory)(reduxForm({
   enableReinitialize: true,
   validate: validateForm,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(FerieOgArbeidsPeriode));

@@ -226,5 +226,4 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
 export default connect(mapStateToProps)(reduxForm({
   form: sjekkFodselDokForm,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(SjekkFodselDokForm)));

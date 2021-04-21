@@ -414,6 +414,5 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 const FeilutbetalingForm = reduxForm({
   form: formName,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(FeilutbetalingInfoPanelImpl);
 export default connect(mapStateToPropsFactory, mapDispatchToProps)(FeilutbetalingForm);

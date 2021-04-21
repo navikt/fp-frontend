@@ -129,5 +129,4 @@ export default connect(mapStateToPropsFactory)(reduxForm({
   form: formName,
   validate,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(ErOmsorgVilkaarOppfyltFormImpl)));

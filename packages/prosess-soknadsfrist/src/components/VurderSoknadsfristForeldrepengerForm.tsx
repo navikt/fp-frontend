@@ -201,5 +201,4 @@ const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps): MappedOwnPr
 export default connect(mapStateToPropsFactory)(reduxForm({
   form: formName,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(VurderSoknadsfristForeldrepengerFormImpl));

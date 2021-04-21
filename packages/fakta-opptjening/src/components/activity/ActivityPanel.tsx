@@ -300,6 +300,5 @@ export default connect(mapStateToPropsFactory)(reduxForm({
   validate: validateForm,
   enableReinitialize: true,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
   // @ts-ignore Fiks
 })(injectIntl(ActivityPanel)));

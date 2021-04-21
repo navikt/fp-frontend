@@ -334,5 +334,4 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
   form: 'OppholdInntektOgPerioderForm',
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(OppholdInntektOgPerioderForm)));

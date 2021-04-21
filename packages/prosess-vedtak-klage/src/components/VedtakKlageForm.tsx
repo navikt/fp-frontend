@@ -266,5 +266,4 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
 export default connect(mapStateToProps)(reduxForm({
   form: VEDTAK_KLAGE_FORM_NAME,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(VedtakKlageForm)));

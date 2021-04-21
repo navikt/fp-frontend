@@ -206,5 +206,4 @@ const mapStateToPropsFactory = (_state: any, ownProps: PureOwnProps): MappedOwnP
 export default connect(mapStateToPropsFactory)(reduxForm({
   form: 'AdopsjonInfoPanel',
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(AdopsjonInfoPanelImpl));

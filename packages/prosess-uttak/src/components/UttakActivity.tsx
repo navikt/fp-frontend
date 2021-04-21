@@ -681,5 +681,4 @@ export default connect(mapStateToPropsFactory)(reduxForm({
   form: uttakActivityForm,
   enableReinitialize: true,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(UttakActivity)));

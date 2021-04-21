@@ -295,5 +295,4 @@ const mapDispatchToProps = (dispatch): DispatchProps => ({
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
   form: formName,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(VedtakForm)));

@@ -417,5 +417,4 @@ const mapDispatchToProps = (dispatch): DispatchProps => ({
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
   form: VEDTAK_REVURDERING_FORM_NAME,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(VedtakRevurderingForm)));

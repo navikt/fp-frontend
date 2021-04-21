@@ -139,5 +139,4 @@ export default connect(mapStateToProps)(reduxForm({
   form: FORM_NAME,
   enableReinitialize: true,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(VurderEndringRefusjonFormImpl));

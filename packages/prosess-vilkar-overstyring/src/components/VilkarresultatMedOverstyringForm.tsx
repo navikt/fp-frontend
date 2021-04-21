@@ -300,6 +300,5 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
 const form = reduxForm({
   enableReinitialize: true,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(VilkarresultatMedOverstyringForm);
 export default connect(mapStateToPropsFactory)(form);

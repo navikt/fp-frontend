@@ -317,7 +317,6 @@ const VarselOmRevurderingForm = connect(mapStateToPropsFactory, mapDispatchToPro
   form: formName,
   enableReinitialize: true,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(VarselOmRevurderingFormImpl)));
 
 export default VarselOmRevurderingForm;

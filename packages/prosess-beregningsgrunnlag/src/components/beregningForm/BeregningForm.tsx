@@ -377,7 +377,6 @@ const mapStateToProps = (state, ownProps) => ({
 const BeregningForm = connect(mapStateToProps)(reduxForm({
   form: formName,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(BeregningFormImpl));
 
 export default BeregningForm;

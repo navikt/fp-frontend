@@ -141,5 +141,4 @@ export const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps): a
 export default connect(mapStateToPropsFactory)(reduxForm({
   form: 'DelOppPeriode',
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(DelOppPeriodeModalImpl)));

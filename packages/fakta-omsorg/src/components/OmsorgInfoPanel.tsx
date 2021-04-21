@@ -141,5 +141,4 @@ export default connect(mapStateToProps)(reduxForm({
   form: 'OmsorgInfoPanel',
   validate: OmsorgFaktaForm.validate,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(OmsorgInfoPanel));

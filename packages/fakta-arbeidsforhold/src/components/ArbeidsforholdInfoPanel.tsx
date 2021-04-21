@@ -133,5 +133,4 @@ const mapStateToProps = (_state, ownProps: PureOwnProps) => ({
 export default connect(mapStateToProps)(reduxForm({
   form: formName,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(injectIntl(ArbeidsforholdInfoPanelImpl)));

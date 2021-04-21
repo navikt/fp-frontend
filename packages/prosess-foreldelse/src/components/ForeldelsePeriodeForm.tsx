@@ -184,7 +184,6 @@ const ForeldelsePeriodeForm = connect(mapStateToPropsFactory)(reduxForm({
   form: FORELDELSE_PERIODE_FORM_NAME,
   enableReinitialize: true,
   destroyOnUnmount: false,
-  keepDirtyOnReinitialize: true,
 })(ForeldelsePeriodeFormImpl));
 
 export default ForeldelsePeriodeForm;
