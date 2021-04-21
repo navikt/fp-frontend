@@ -9,9 +9,7 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { ProsessStegBegrunnelseTextField, ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
-import {
-  RadioGroupField, RadioOption, SelectField, hasBehandlingFormErrorsOfType, isBehandlingFormDirty, isBehandlingFormSubmitting,
-} from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { DATE_TIME_FORMAT, required, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -44,8 +42,6 @@ const getLovHjemmeler = (aksjonspunktCode: string): string => (aksjonspunktCode 
   ? 'Klage.LovhjemmelNFP' : 'Klage.LovhjemmelKA');
 
 interface OwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   avsluttedeBehandlinger: AvsluttetBehandling[];
   formProps: InjectedFormProps;
   aksjonspunktCode: string;
@@ -60,8 +56,6 @@ interface OwnProps {
  * Presentasjonskomponent. Setter opp aksjonspunktet for formkrav klage (NFP og KA).
  */
 export const FormkravKlageForm: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  behandlingId,
-  behandlingVersjon,
   readOnly,
   readOnlySubmitButton,
   aksjonspunktCode,
@@ -149,13 +143,8 @@ export const FormkravKlageForm: FunctionComponent<OwnProps & WrappedComponentPro
       <div className={styles.confirmVilkarForm}>
         <ProsessStegSubmitButton
           formName={formProps.form}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
           isReadOnly={readOnly}
           isSubmittable={!readOnlySubmitButton}
-          isBehandlingFormSubmitting={isBehandlingFormSubmitting}
-          isBehandlingFormDirty={isBehandlingFormDirty}
-          hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
         />
       </div>
 

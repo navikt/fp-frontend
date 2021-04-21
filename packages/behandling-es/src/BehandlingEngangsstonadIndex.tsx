@@ -4,7 +4,7 @@ import { ArbeidsgiverOpplysningerWrapper, Personoversikt } from '@fpsak-frontend
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
-  BehandlingContainer, StandardBehandlingProps, StandardPropsProvider, BehandlingPaVent, ReduxFormStateCleaner,
+  BehandlingContainer, StandardBehandlingProps, StandardPropsProvider, BehandlingPaVent,
   useInitRequestApi, useLagreAksjonspunkt, useBehandling, useInitBehandlingHandlinger,
 } from '@fpsak-frontend/behandling-felles';
 
@@ -76,10 +76,6 @@ const BehandlingEngangsstonadIndex: FunctionComponent<StandardBehandlingProps> =
 
   return (
     <>
-      <ReduxFormStateCleaner
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
-      />
       <BehandlingPaVent
         behandling={behandling}
         hentBehandling={hentBehandling}

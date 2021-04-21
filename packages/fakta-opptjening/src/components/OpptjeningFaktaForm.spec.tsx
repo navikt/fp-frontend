@@ -58,14 +58,11 @@ describe('<OpptjeningFaktaForm>', () => {
       opptjeningActivities={opptjeningActivities}
       opptjeningAktivitetTypes={opptjeningAktivitetTypes}
       formName="test"
-      behandlingFormPrefix="test"
       reduxFormChange={sinon.spy()}
       reduxFormInitialize={sinon.spy()}
       hasOpenAksjonspunkter
       submitting={false}
       isDirty={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
       arbeidsgiverOpplysningerPerId={{}}
@@ -98,14 +95,11 @@ describe('<OpptjeningFaktaForm>', () => {
       opptjeningActivities={opptjeningActivities}
       opptjeningAktivitetTypes={opptjeningAktivitetTypes}
       formName="test"
-      behandlingFormPrefix="test"
       reduxFormChange={sinon.spy()}
       reduxFormInitialize={sinon.spy()}
       hasOpenAksjonspunkter
       submitting={false}
       isDirty={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
       arbeidsgiverOpplysningerPerId={{}}
@@ -127,14 +121,11 @@ describe('<OpptjeningFaktaForm>', () => {
       opptjeningActivities={opptjeningActivities}
       opptjeningAktivitetTypes={opptjeningAktivitetTypes}
       formName="test"
-      behandlingFormPrefix="test"
       reduxFormChange={sinon.spy()}
       reduxFormInitialize={sinon.spy()}
       hasOpenAksjonspunkter
       submitting={false}
       isDirty={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
       arbeidsgiverOpplysningerPerId={{}}
@@ -159,14 +150,11 @@ describe('<OpptjeningFaktaForm>', () => {
       opptjeningActivities={activities}
       opptjeningAktivitetTypes={opptjeningAktivitetTypes}
       formName="test"
-      behandlingFormPrefix="test"
       reduxFormChange={sinon.spy()}
       reduxFormInitialize={sinon.spy()}
       hasOpenAksjonspunkter
       submitting={false}
       isDirty={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
       arbeidsgiverOpplysningerPerId={{}}
@@ -192,15 +180,12 @@ describe('<OpptjeningFaktaForm>', () => {
       readOnly={false}
       opptjeningActivities={opptjeningActivities}
       opptjeningAktivitetTypes={opptjeningAktivitetTypes}
-      behandlingFormPrefix="Behandling_123"
       formName="OpptjeningFaktaForm"
       reduxFormChange={formChangeCallback}
       reduxFormInitialize={formInitCallback}
       hasOpenAksjonspunkter
       submitting={false}
       isDirty={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
       arbeidsgiverOpplysningerPerId={{}}
@@ -223,15 +208,12 @@ describe('<OpptjeningFaktaForm>', () => {
       readOnly={false}
       opptjeningActivities={opptjeningActivities}
       opptjeningAktivitetTypes={opptjeningAktivitetTypes}
-      behandlingFormPrefix="Behandling_123"
       formName="OpptjeningFaktaForm"
       reduxFormChange={formChangeCallback}
       reduxFormInitialize={formInitCallback}
       hasOpenAksjonspunkter
       submitting={false}
       isDirty={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
       arbeidsgiverOpplysningerPerId={{}}
@@ -251,7 +233,7 @@ describe('<OpptjeningFaktaForm>', () => {
     expect(calls).toHaveLength(1);
     const { args } = calls[0];
     expect(args).toHaveLength(3);
-    expect(args[0]).toEqual('Behandling_123.OpptjeningFaktaForm');
+    expect(args[0]).toEqual('OpptjeningFaktaForm');
     expect(args[1]).toEqual('opptjeningActivities');
     expect(args[2]).toEqual([opptjeningActivities[0], editedActivity]);
 
@@ -271,15 +253,12 @@ describe('<OpptjeningFaktaForm>', () => {
       readOnly={false}
       opptjeningActivities={opptjeningActivities}
       opptjeningAktivitetTypes={opptjeningAktivitetTypes}
-      behandlingFormPrefix="Behandling_123"
       formName="OpptjeningFaktaForm"
       reduxFormChange={formChangeCallback}
       reduxFormInitialize={sinon.spy()}
       hasOpenAksjonspunkter
       submitting={false}
       isDirty={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
       arbeidsgiverOpplysningerPerId={{}}
@@ -306,15 +285,12 @@ describe('<OpptjeningFaktaForm>', () => {
       readOnly={false}
       opptjeningActivities={opptjeningActivities}
       opptjeningAktivitetTypes={opptjeningAktivitetTypes}
-      behandlingFormPrefix="Behandling_123"
       formName="OpptjeningFaktaForm"
       reduxFormChange={formChangeCallback}
       reduxFormInitialize={formInitCallback}
       hasOpenAksjonspunkter
       submitting={false}
       isDirty={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
       arbeidsgiverOpplysningerPerId={{}}
@@ -326,7 +302,7 @@ describe('<OpptjeningFaktaForm>', () => {
     const initCalls = formInitCallback.getCalls();
     expect(initCalls).toHaveLength(1);
     expect(initCalls[0].args).toHaveLength(2);
-    expect(initCalls[0].args[0]).toEqual('Behandling_123.ActivityPanel');
+    expect(initCalls[0].args[0]).toEqual('ActivityPanel');
     expect(initCalls[0].args[1]).toEqual({});
 
     // @ts-ignore Fiks

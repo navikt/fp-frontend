@@ -40,8 +40,6 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
 
     const wrapper = shallowWithIntl(<UndecoratedForm
       id="1"
-      behandlingId={2}
-      behandlingVersjon={3}
       hasPeriodeAksjonspunkt
       isPeriodAksjonspunktClosed={false}
       fixedMedlemskapPerioder={periods}
@@ -79,8 +77,6 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
 
     const wrapper = shallowWithIntl(<UndecoratedForm
       id="1"
-      behandlingId={2}
-      behandlingVersjon={3}
       hasPeriodeAksjonspunkt
       isPeriodAksjonspunktClosed={false}
       fixedMedlemskapPerioder={periods}
@@ -108,8 +104,6 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
 
     const wrapper = shallowWithIntl(<UndecoratedForm
       id="1"
-      behandlingId={2}
-      behandlingVersjon={3}
       hasPeriodeAksjonspunkt
       isPeriodAksjonspunktClosed={false}
       fixedMedlemskapPerioder={periods}
@@ -137,8 +131,6 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
 
     const wrapper = shallowWithIntl(<UndecoratedForm
       id="1"
-      behandlingId={2}
-      behandlingVersjon={3}
       hasPeriodeAksjonspunkt
       isPeriodAksjonspunktClosed={false}
       fixedMedlemskapPerioder={periods}
@@ -166,8 +158,6 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
 
     const wrapper = shallowWithIntl(<UndecoratedForm
       id="1"
-      behandlingId={2}
-      behandlingVersjon={3}
       hasPeriodeAksjonspunkt
       isPeriodAksjonspunktClosed={false}
       readOnly={false}
@@ -187,8 +177,6 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
 
     const wrapper = shallowWithIntl(<UndecoratedForm
       id="1"
-      behandlingId={2}
-      behandlingVersjon={3}
       hasPeriodeAksjonspunkt
       isPeriodAksjonspunktClosed={false}
       fixedMedlemskapPerioder={medlemskapPerioder}

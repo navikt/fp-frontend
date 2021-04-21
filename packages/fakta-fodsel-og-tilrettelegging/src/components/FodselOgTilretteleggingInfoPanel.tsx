@@ -10,7 +10,6 @@ import { BekreftSvangerskapspengerAp } from '@fpsak-frontend/types-avklar-aksjon
 import FodselOgTilretteleggingFaktaForm from './FodselOgTilretteleggingFaktaForm';
 
 interface OwnProps {
-  behandlingId: number;
   behandlingVersjon: number;
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
   aksjonspunkter: Aksjonspunkt[];
@@ -30,7 +29,6 @@ interface OwnProps {
  * Fakta om Fødsel og tilrettelegging
  */
 const FodselOgTilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
-  behandlingId,
   behandlingVersjon,
   svangerskapspengerTilrettelegging,
   aksjonspunkter,
@@ -50,7 +48,6 @@ const FodselOgTilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
     </AksjonspunktHelpTextTemp>
     <VerticalSpacer eightPx />
     <FodselOgTilretteleggingFaktaForm
-      behandlingId={behandlingId}
       behandlingVersjon={behandlingVersjon}
       svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
       aksjonspunkter={aksjonspunkter}

@@ -8,7 +8,6 @@ import VurderSoknadsfristForeldrepengerIndex from '@fpsak-frontend/prosess-sokna
 import { Aksjonspunkt, Behandling, Soknad } from '@fpsak-frontend/types';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
-import withReduxProvider from '../../decorators/withRedux';
 
 const behandling = {
   id: 1,
@@ -38,12 +37,13 @@ const standardProsessProps = {
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
+  setFormData: () => undefined,
 };
 
 export default {
   title: 'prosess/prosess-soknadsfrist',
   component: VurderSoknadsfristForeldrepengerIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 export const visPanelForSoknadsfrist = () => (
   <VurderSoknadsfristForeldrepengerIndex

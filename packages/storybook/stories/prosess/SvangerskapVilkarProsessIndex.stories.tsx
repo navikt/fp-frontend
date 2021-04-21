@@ -9,8 +9,6 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SvangerskapVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-svangerskap';
 import { Aksjonspunkt, Behandling, Vilkar } from '@fpsak-frontend/types';
 
-import withReduxProvider from '../../decorators/withRedux';
-
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
 const standardProsessProps = {
@@ -22,12 +20,13 @@ const standardProsessProps = {
   readOnlySubmitButton: boolean('readOnly', false),
   status: '',
   alleMerknaderFraBeslutter: {},
+  setFormData: () => undefined,
 };
 
 export default {
   title: 'prosess/prosess-vilkar-svangerskap',
   component: SvangerskapVilkarProsessIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visÅpentAksjonspunkt = () => (

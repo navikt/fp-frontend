@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { FieldArray, FormSection } from 'redux-form';
+import { FieldArray, FormSection, formValueSelector } from 'redux-form';
 import { Normaltekst, Element } from 'nav-frontend-typografi';
 
-import { DatepickerField, CheckboxField, behandlingFormValueSelector } from '@fpsak-frontend/form';
+import { DatepickerField, CheckboxField } from '@fpsak-frontend/form';
 import { hasValidDate, required } from '@fpsak-frontend/utils';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
@@ -45,8 +45,6 @@ interface PureOwnProps {
   readOnly: boolean;
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
   formSectionName: string;
-  behandlingId: number;
-  behandlingVersjon: number;
   erOverstyrer: boolean;
   changeField: (field: string, value: any) => void;
   stillingsprosentArbeidsforhold?: number;
@@ -65,8 +63,6 @@ export const TilretteleggingArbeidsforholdSection: FunctionComponent<PureOwnProp
   arbeidsforhold,
   formSectionName,
   visTilrettelegginger,
-  behandlingId,
-  behandlingVersjon,
   erOverstyrer,
   changeField,
   stillingsprosentArbeidsforhold,
@@ -119,8 +115,6 @@ export const TilretteleggingArbeidsforholdSection: FunctionComponent<PureOwnProp
               component={TilrettteleggingFieldArray}
               readOnly={readOnly}
               formSectionName={formSectionName}
-              behandlingId={behandlingId}
-              behandlingVersjon={behandlingVersjon}
               erOverstyrer={erOverstyrer}
               changeField={changeField}
               velferdspermisjoner={arbeidsforhold.velferdspermisjoner}
@@ -136,8 +130,6 @@ export const TilretteleggingArbeidsforholdSection: FunctionComponent<PureOwnProp
       <VelferdspermisjonSection
         permisjon={permisjon}
         readOnly={readOnly}
-        behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
         formSectionName={formSectionName}
         formName={formName}
       />
@@ -147,8 +139,7 @@ export const TilretteleggingArbeidsforholdSection: FunctionComponent<PureOwnProp
 );
 
 const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => ({
-  visTilrettelegginger: behandlingFormValueSelector(ownProps.formName,
-    ownProps.behandlingId, ownProps.behandlingVersjon)(state, `${ownProps.formSectionName}.skalBrukes`),
+  visTilrettelegginger: formValueSelector(ownProps.formName)(state, `${ownProps.formSectionName}.skalBrukes`),
 });
 
 export default connect(mapStateToProps)(TilretteleggingArbeidsforholdSection);

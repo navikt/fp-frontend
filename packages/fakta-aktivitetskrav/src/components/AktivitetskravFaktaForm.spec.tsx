@@ -56,8 +56,6 @@ describe('<AktivitetskravFaktaForm>', () => {
     const wrapper = shallowWithIntl(<AktivitetskravFaktaForm
       {...reduxFormPropsMock}
       intl={intlMock}
-      behandlingId={1}
-      behandlingVersjon={2}
       sorterteAktivitetskrav={sorterteAktivitetskrav}
       aktivitetskrav={sorterteAktivitetskrav}
       readOnly={false}
@@ -68,7 +66,6 @@ describe('<AktivitetskravFaktaForm>', () => {
       harApneAksjonspunkter
       alleMerknaderFraBeslutter={{}}
       submittable
-      behandlingFormPrefix="test"
       formChange={() => undefined}
       submitCallback={() => undefined}
     />, messages);
@@ -109,8 +106,6 @@ describe('<AktivitetskravFaktaForm>', () => {
     const wrapper = shallowWithIntl(<AktivitetskravFaktaForm
       {...reduxFormPropsMock}
       intl={intlMock}
-      behandlingId={1}
-      behandlingVersjon={2}
       sorterteAktivitetskrav={sorterteAktivitetskrav}
       aktivitetskrav={sorterteAktivitetskrav}
       readOnly={false}
@@ -121,7 +116,6 @@ describe('<AktivitetskravFaktaForm>', () => {
       harApneAksjonspunkter
       alleMerknaderFraBeslutter={{}}
       submittable
-      behandlingFormPrefix="test"
       formChange={formChange}
       submitCallback={() => undefined}
     />, messages);

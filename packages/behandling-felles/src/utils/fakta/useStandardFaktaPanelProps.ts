@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react';
+import { useContext, useMemo, useState } from 'react';
 
 import {
   Aksjonspunkt, Behandling, Fagsak, StandardFaktaPanelProps, Vilkar,
@@ -56,6 +56,7 @@ const useStandardFaktaPanelProps = (
   aksjonspunktKoder?: string[],
   overstyringApCodes: string[] = [],
 ): StandardFaktaPanelProps => {
+  const [formData, setFormData] = useState();
   const value = useContext(StandardPropsStateContext);
 
   const aksjonspunkterForSteg = useMemo(() => (data?.aksjonspunkter && aksjonspunktKoder
@@ -84,6 +85,8 @@ const useStandardFaktaPanelProps = (
     readOnly,
     alleMerknaderFraBeslutter,
     submitCallback,
+    formData,
+    setFormData,
   };
 };
 

@@ -110,7 +110,6 @@ export const kalkulerTrekkdager = (aktivitet: AktivitetFieldArray, virkedager: n
 
 interface OwnProps {
   activityPanelName: string;
-  behandlingFormPrefix: string;
   callbackBackward: (event: MouseEvent) => void;
   callbackCancelSelectedActivity: () => void;
   callbackForward: (event: MouseEvent) => void;
@@ -125,8 +124,6 @@ interface OwnProps {
   stonadskonto?: UttakStonadskontoer;
   uttaksresultatActivity: UttaksresultatActivity[];
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  behandlingVersjon: number;
-  behandlingId: number;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
@@ -148,8 +145,8 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
   }
 
   setFormField(fieldName: string, fieldValue: UttaksresultatActivity[]): void {
-    const { behandlingFormPrefix, formName, reduxFormChange: formChange } = this.props;
-    formChange(`${behandlingFormPrefix}.${formName}`, fieldName, fieldValue);
+    const { formName, reduxFormChange: formChange } = this.props;
+    formChange(formName, fieldName, fieldValue);
   }
 
   showModal(event: MouseEvent | KeyboardEvent): void {
@@ -157,8 +154,8 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
     this.setState({
       showDelPeriodeModal: true,
     });
-    const { behandlingFormPrefix, reduxFormChange: formChange } = this.props;
-    formChange(`${behandlingFormPrefix}.${'DelOppPeriode'}`, 'ForstePeriodeTomDato', null);
+    const { reduxFormChange: formChange } = this.props;
+    formChange('DelOppPeriode', 'ForstePeriodeTomDato', null);
   }
 
   hideModal(): void {
@@ -234,8 +231,6 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
       callbackUpdateActivity,
       harSoktOmFlerbarnsdager,
       alleKodeverk,
-      behandlingId,
-      behandlingVersjon,
       behandlingsresultat,
       intl,
       isApOpen = false,
@@ -280,8 +275,6 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
                     showModal={showDelPeriodeModal}
                     periodeData={selectedItemData}
                     splitPeriod={this.splitPeriod}
-                    behandlingId={behandlingId}
-                    behandlingVersjon={behandlingVersjon}
                   />
                 )}
           </Column>
@@ -310,8 +303,6 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
           readOnly={readOnly}
           harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
           alleKodeverk={alleKodeverk}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
           behandlingsresultat={behandlingsresultat}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         />

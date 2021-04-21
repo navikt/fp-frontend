@@ -30,7 +30,6 @@ export type PeriodeMedFeilutbetaling = {
 
 interface PureOwnProps {
   behandlingId: number;
-  behandlingVersjon: number;
   beregnBelop: (data: { behandlingId: number; perioder: PeriodeMedBelop[]}) => Promise<any>;
   oppdaterSplittedePerioder: (data: PeriodeMedFeilutbetaling[]) => void;
   callbackForward: (event: React.KeyboardEvent | React.MouseEvent) => void;
@@ -135,8 +134,6 @@ export class PeriodeController extends Component<PureOwnProps & WrappedComponent
       callbackBackward,
       periode,
       readOnly,
-      behandlingId,
-      behandlingVersjon,
     } = this.props;
 
     const { showDelPeriodeModal, finnesBelopMed0Verdi } = this.state;
@@ -166,8 +163,6 @@ export class PeriodeController extends Component<PureOwnProps & WrappedComponent
           )}
           {showDelPeriodeModal && (
             <DelOppPeriodeModal
-              behandlingId={behandlingId}
-              behandlingVersjon={behandlingVersjon}
               cancelEvent={this.hideModal}
               showModal={showDelPeriodeModal}
               periodeData={periode}

@@ -12,8 +12,6 @@ describe('<TilleggsopplysningerInfoPanel>', () => {
       {...reduxFormPropsMock}
       hasOpenAksjonspunkter
       readOnly={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       submitCallback={() => undefined}
     />);
 
@@ -28,8 +26,6 @@ describe('<TilleggsopplysningerInfoPanel>', () => {
       {...reduxFormPropsMock}
       hasOpenAksjonspunkter={false}
       readOnly={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       submitCallback={() => undefined}
     />);
 
@@ -42,8 +38,6 @@ describe('<TilleggsopplysningerInfoPanel>', () => {
       {...reduxFormPropsMock}
       hasOpenAksjonspunkter
       readOnly
-      behandlingId={1}
-      behandlingVersjon={1}
       submitCallback={() => undefined}
     />);
 

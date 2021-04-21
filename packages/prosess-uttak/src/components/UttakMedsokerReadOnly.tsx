@@ -20,8 +20,6 @@ interface OwnProps {
   harSoktOmFlerbarnsdager: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   behandlingsresultat?: Behandling['behandlingsresultat'];
-  behandlingId: number;
-  behandlingVersjon: number;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
@@ -34,8 +32,6 @@ const UttakMedsokerReadOnly: FunctionComponent<OwnProps> = ({
   callbackCancelSelectedActivity,
   harSoktOmFlerbarnsdager,
   alleKodeverk,
-  behandlingId,
-  behandlingVersjon,
   behandlingsresultat,
   arbeidsgiverOpplysningerPerId,
 }) => {
@@ -63,8 +59,6 @@ const UttakMedsokerReadOnly: FunctionComponent<OwnProps> = ({
         readOnly={readOnly}
         harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
         alleKodeverk={alleKodeverk}
-        behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
         behandlingsresultat={behandlingsresultat}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />

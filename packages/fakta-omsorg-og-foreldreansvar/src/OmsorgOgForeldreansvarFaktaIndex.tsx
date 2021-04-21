@@ -5,6 +5,7 @@ import {
   StandardFaktaPanelProps, FamilieHendelseSamling, InntektArbeidYtelse, Personoversikt, Soknad,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import OmsorgOgForeldreansvarInfoPanel from './components/OmsorgOgForeldreansvarInfoPanel';
 import messages from '../i18n/nb_NO.json';
@@ -19,7 +20,6 @@ interface OwnProps {
 }
 
 const OmsorgOgForeldreansvarFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
-  behandling,
   familiehendelse,
   soknad,
   personoversikt,
@@ -31,24 +31,26 @@ const OmsorgOgForeldreansvarFaktaIndex: FunctionComponent<OwnProps & StandardFak
   alleKodeverk,
   harApneAksjonspunkter,
   submittable,
+  formData,
+  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <OmsorgOgForeldreansvarInfoPanel
-      intl={intl}
-      behandlingId={behandling.id}
-      behandlingVersjon={behandling.versjon}
-      gjeldendeFamiliehendelse={familiehendelse.gjeldende}
-      soknad={soknad}
-      personoversikt={personoversikt}
-      aksjonspunkter={aksjonspunkter}
-      innvilgetRelatertTilgrensendeYtelserForAnnenForelder={inntektArbeidYtelse.innvilgetRelatertTilgrensendeYtelserForAnnenForelder}
-      alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-      submitCallback={submitCallback}
-      readOnly={readOnly}
-      alleKodeverk={alleKodeverk}
-      hasOpenAksjonspunkter={harApneAksjonspunkter}
-      submittable={submittable}
-    />
+    <ReduxWrapper formName="OmsorgOgForeldreansvarFaktaIndex" formData={formData} setFormData={setFormData}>
+      <OmsorgOgForeldreansvarInfoPanel
+        intl={intl}
+        gjeldendeFamiliehendelse={familiehendelse.gjeldende}
+        soknad={soknad}
+        personoversikt={personoversikt}
+        aksjonspunkter={aksjonspunkter}
+        innvilgetRelatertTilgrensendeYtelserForAnnenForelder={inntektArbeidYtelse.innvilgetRelatertTilgrensendeYtelserForAnnenForelder}
+        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+        submitCallback={submitCallback}
+        readOnly={readOnly}
+        alleKodeverk={alleKodeverk}
+        hasOpenAksjonspunkter={harApneAksjonspunkter}
+        submittable={submittable}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

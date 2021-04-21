@@ -2,13 +2,13 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { FaktaBegrunnelseTextField } from '@fpsak-frontend/fakta-felles';
-import { behandlingForm, RadioGroupField, RadioOption } from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import {
   FlexColumn, FlexContainer, FlexRow, PeriodLabel, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
@@ -18,8 +18,6 @@ import { required } from '@fpsak-frontend/utils';
 type FormValues = UttakKontrollerAktivitetskrav;
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   valgtAktivitetskrav: UttakKontrollerAktivitetskrav;
   readOnly: boolean;
   aktivitetskravAvklaringer: KodeverkMedNavn[];
@@ -127,8 +125,9 @@ const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
   onSubmit: lagSubmitFn(ownProps),
 });
 
-export default connect(mapStateToProps)(behandlingForm({
+export default connect(mapStateToProps)(reduxForm({
   form: FORM_NAME,
   keepDirtyOnReinitialize: false,
   enableReinitialize: true,
+  destroyOnUnmount: false,
 })(AktivitetskravFaktaDetailForm));

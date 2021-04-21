@@ -8,8 +8,6 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import PersonArbeidsforholdPanel from './PersonArbeidsforholdPanel';
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   readOnly: boolean;
   isSubmitting: boolean;
 }
@@ -39,8 +37,8 @@ export const BekreftOgForsettKnapp: FunctionComponent<PureOwnProps & MappedOwnPr
   </>
 );
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  isBekreftButtonReadOnly: PersonArbeidsforholdPanel.isReadOnly(state, ownProps.behandlingId, ownProps.behandlingVersjon),
+const mapStateToProps = (state: any): MappedOwnProps => ({
+  isBekreftButtonReadOnly: PersonArbeidsforholdPanel.isReadOnly(state),
 });
 
 export default connect(mapStateToProps)(BekreftOgForsettKnapp);

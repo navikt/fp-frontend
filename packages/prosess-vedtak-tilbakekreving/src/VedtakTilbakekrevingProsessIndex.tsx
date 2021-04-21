@@ -6,6 +6,7 @@ import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakTyp
 import {
   BeregningsresultatTilbakekreving, Kodeverk, StandardProsessPanelProps, Vedtaksbrev,
 } from '@fpsak-frontend/types';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import { ForhandsvisData } from './components/TilbakekrevingVedtakForm';
 import TilbakekrevingVedtak from './components/TilbakekrevingVedtak';
@@ -34,26 +35,28 @@ const VedtakTilbakekrevingProsessIndex: FunctionComponent<OwnProps & StandardPro
   isReadOnly,
   alleKodeverk,
   fetchPreviewVedtaksbrev,
+  formData,
+  setFormData,
 }) => {
   const erRevurderingTilbakekrevingKlage = behandling.førsteÅrsak && erTilbakekrevingÅrsakKlage(behandling.førsteÅrsak.behandlingArsakType);
   const erRevurderingTilbakekrevingFeilBeløpBortfalt = behandling.førsteÅrsak
     && behandlingArsakType.RE_FEILUTBETALT_BELØP_REDUSERT === behandling.førsteÅrsak.behandlingArsakType.kode;
   return (
     <RawIntlProvider value={intl}>
-      <TilbakekrevingVedtak
-        behandlingId={behandling.id}
-        behandlingUuid={behandling.uuid}
-        behandlingVersjon={behandling.versjon}
-        perioder={beregningsresultat.beregningResultatPerioder}
-        resultat={beregningsresultat.vedtakResultatType}
-        avsnittsliste={vedtaksbrev.avsnittsliste}
-        submitCallback={submitCallback}
-        readOnly={isReadOnly}
-        alleKodeverk={alleKodeverk}
-        fetchPreviewVedtaksbrev={fetchPreviewVedtaksbrev}
-        erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage}
-        erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt}
-      />
+      <ReduxWrapper formName="VedtakTilbakekrevingProsessIndex" formData={formData} setFormData={setFormData}>
+        <TilbakekrevingVedtak
+          behandlingUuid={behandling.uuid}
+          perioder={beregningsresultat.beregningResultatPerioder}
+          resultat={beregningsresultat.vedtakResultatType}
+          avsnittsliste={vedtaksbrev.avsnittsliste}
+          submitCallback={submitCallback}
+          readOnly={isReadOnly}
+          alleKodeverk={alleKodeverk}
+          fetchPreviewVedtaksbrev={fetchPreviewVedtaksbrev}
+          erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage}
+          erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt}
+        />
+      </ReduxWrapper>
     </RawIntlProvider>
   );
 };

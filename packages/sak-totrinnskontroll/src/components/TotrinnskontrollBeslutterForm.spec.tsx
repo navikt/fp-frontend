@@ -46,6 +46,9 @@ describe('<TotrinnskontrollBeslutterForm>', () => {
       arbeidsforholdHandlingTyper={[]}
       skjemalenkeTyper={[]}
       aksjonspunktGodkjenning={[]}
+      initialValues={{
+        aksjonspunktGodkjenning: [],
+      }}
       faktaOmBeregningTilfeller={[]}
     />, messages);
 

@@ -41,7 +41,6 @@ describe('<UttakPerioder>', () => {
       <UttakPerioder
         readOnly
         hasOpenAksjonspunkter
-        behandlingFormPrefix="UttakFaktaForm"
         perioder={[]}
         openForms={false}
         reduxFormChange={reduxFormChange}
@@ -55,8 +54,6 @@ describe('<UttakPerioder>', () => {
         kanOverstyre={false}
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
-        behandlingId={1}
-        behandlingVersjon={1}
         behandlingStatus={{} as Kodeverk}
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
@@ -87,7 +84,6 @@ describe('<UttakPerioder>', () => {
       <UttakPerioder
         readOnly
         hasOpenAksjonspunkter
-        behandlingFormPrefix="UttakFaktaForm"
         perioder={[]}
         openForms={false}
         reduxFormChange={reduxFormChange}
@@ -101,8 +97,6 @@ describe('<UttakPerioder>', () => {
         kanOverstyre={false}
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
-        behandlingId={1}
-        behandlingVersjon={1}
         behandlingStatus={{} as Kodeverk}
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
@@ -132,7 +126,6 @@ describe('<UttakPerioder>', () => {
       <UttakPerioder
         readOnly
         hasOpenAksjonspunkter
-        behandlingFormPrefix="UttakFaktaForm"
         perioder={[]}
         openForms={false}
         reduxFormChange={reduxFormChange}
@@ -146,8 +139,6 @@ describe('<UttakPerioder>', () => {
         kanOverstyre={false}
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
-        behandlingId={1}
-        behandlingVersjon={1}
         behandlingStatus={{} as Kodeverk}
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
@@ -173,7 +164,6 @@ describe('<UttakPerioder>', () => {
       <UttakPerioder
         readOnly
         hasOpenAksjonspunkter
-        behandlingFormPrefix="UttakFaktaForm"
         perioder={[]}
         openForms={false}
         reduxFormChange={reduxFormChange}
@@ -187,8 +177,6 @@ describe('<UttakPerioder>', () => {
         kanOverstyre={false}
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
-        behandlingId={1}
-        behandlingVersjon={1}
         behandlingStatus={{} as Kodeverk}
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
@@ -209,7 +197,6 @@ describe('<UttakPerioder>', () => {
       <UttakPerioder
         readOnly
         hasOpenAksjonspunkter
-        behandlingFormPrefix="UttakFaktaForm"
         perioder={[]}
         openForms={false}
         reduxFormChange={reduxFormChange}
@@ -223,8 +210,6 @@ describe('<UttakPerioder>', () => {
         kanOverstyre={false}
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
-        behandlingId={1}
-        behandlingVersjon={1}
         behandlingStatus={{} as Kodeverk}
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
@@ -245,7 +230,6 @@ describe('<UttakPerioder>', () => {
       <UttakPerioder
         readOnly={false}
         hasOpenAksjonspunkter
-        behandlingFormPrefix="UttakFaktaForm"
         perioder={[]}
         openForms={false}
         reduxFormChange={reduxFormChange}
@@ -259,8 +243,6 @@ describe('<UttakPerioder>', () => {
         kanOverstyre={false}
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
-        behandlingId={1}
-        behandlingVersjon={1}
         behandlingStatus={{} as Kodeverk}
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
@@ -281,7 +263,6 @@ describe('<UttakPerioder>', () => {
       <UttakPerioder
         readOnly={false}
         hasOpenAksjonspunkter
-        behandlingFormPrefix="UttakFaktaForm"
         perioder={[]}
         openForms={false}
         reduxFormChange={reduxFormChange}
@@ -318,8 +299,6 @@ describe('<UttakPerioder>', () => {
         kanOverstyre={false}
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
-        behandlingId={1}
-        behandlingVersjon={1}
         behandlingStatus={{} as Kodeverk}
         alleKodeverk={{}}
         familiehendelse={familiehendelse}
@@ -341,7 +320,6 @@ describe('<UttakPerioder>', () => {
       <UttakPerioder
         readOnly={false}
         hasOpenAksjonspunkter
-        behandlingFormPrefix="UttakFaktaForm"
         perioder={[]}
         openForms={false}
         reduxFormChange={reduxFormChange}
@@ -355,8 +333,6 @@ describe('<UttakPerioder>', () => {
         kanOverstyre={false}
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
-        behandlingId={1}
-        behandlingVersjon={1}
         behandlingStatus={{} as Kodeverk}
         alleKodeverk={{}}
         familiehendelse={familiehendelse}

@@ -7,7 +7,6 @@ import {
 } from '@fpsak-frontend/types';
 import UttakFaktaIndex from '@fpsak-frontend/fakta-uttak';
 
-import withReduxProvider from '../../decorators/withRedux';
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
 import aksjonspunkterVurderAnnenPartHarRett from './mocks/uttak/vurder-annen-part-har-rett/aksjonspunkter.json';
@@ -49,12 +48,13 @@ const standardFaktaProps = {
   harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
   submittable: boolean('submittable', true),
   alleMerknaderFraBeslutter: {},
+  setFormData: () => undefined,
 };
 
 export default {
   title: 'fakta/fakta-uttak',
   component: UttakFaktaIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const vurderOmAnnenPartHarRett = () => {

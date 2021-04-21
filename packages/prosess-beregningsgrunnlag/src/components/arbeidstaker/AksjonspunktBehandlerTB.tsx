@@ -1,5 +1,6 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
@@ -7,7 +8,7 @@ import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import {
   dateFormat, formatCurrencyNoKr, parseCurrencyInput, removeSpacesFromNumber, required, getKodeverknavnFn,
 } from '@fpsak-frontend/utils';
-import { InputField, behandlingFormValueSelector } from '@fpsak-frontend/form';
+import { InputField } from '@fpsak-frontend/form';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -275,8 +276,6 @@ type BruttoPrPeriode = {
 type OwnProps = {
     readOnly: boolean;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-    behandlingId: number;
-    behandlingVersjon: number;
     formName: string;
     aksjonspunkter: Aksjonspunkt[];
     allePerioder: BeregningsgrunnlagPeriodeProp[];
@@ -316,10 +315,7 @@ export const getIsAksjonspunktClosed = createSelector(
 );
 
 const mapStateToProps = (state: any, ownProps: OwnProps): MappedOwnProps => {
-  const {
-    allePerioder, behandlingId,
-    behandlingVersjon, formName,
-  } = ownProps;
+  const { allePerioder, formName } = ownProps;
   const bruttoPrPeriodeList = [];
   const relevantePerioder = finnPerioderMedAvsluttetArbeidsforhold(allePerioder);
   const forstePeriodeATInntekt = relevantePerioder[0].beregningsgrunnlagPrStatusOgAndel
@@ -335,9 +331,7 @@ const mapStateToProps = (state: any, ownProps: OwnProps): MappedOwnProps => {
       .filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER);
     const bruttoPrAndelForPeriode = arbeidstakerAndeler.map((andel) => {
       const inputFieldKey = createInputFieldKey(andel, periode);
-      const fastsattInntekt = behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(
-        state, [inputFieldKey],
-      );
+      const fastsattInntekt = formValueSelector(formName)(state, inputFieldKey);
       return (fastsattInntekt === undefined || fastsattInntekt === '') ? 0 : removeSpacesFromNumber(fastsattInntekt);
     });
     const samletBruttoForPeriode = bruttoPrAndelForPeriode.reduce((a, b) => a + b);

@@ -31,9 +31,7 @@ describe('<TilbakekrevingVedtakForm>', () => {
           fritekstTillatt: false,
         }],
       }]}
-      behandlingId={1}
       behandlingUuid="uuid"
-      behandlingVersjon={1}
       perioderSomIkkeHarUtfyltObligatoriskVerdi={[]}
       avsnittsliste={[]}
     />);
@@ -71,9 +69,7 @@ describe('<TilbakekrevingVedtakForm>', () => {
           fritekstTillatt: false,
         }],
       }]}
-      behandlingId={2}
       behandlingUuid="uuid"
-      behandlingVersjon={1}
       perioderSomIkkeHarUtfyltObligatoriskVerdi={[]}
       avsnittsliste={[]}
     />);
@@ -113,9 +109,7 @@ describe('<TilbakekrevingVedtakForm>', () => {
           fritekstTillatt: false,
         }],
       }]}
-      behandlingId={1}
       behandlingUuid="uuid"
-      behandlingVersjon={1}
       perioderSomIkkeHarUtfyltObligatoriskVerdi={['2019-01-01_2019-02-02']}
       avsnittsliste={[]}
     />);
@@ -148,9 +142,7 @@ describe('<TilbakekrevingVedtakForm>', () => {
           fritekstTillatt: false,
         }],
       }]}
-      behandlingId={1}
       behandlingUuid="uuid"
-      behandlingVersjon={1}
       perioderSomIkkeHarUtfyltObligatoriskVerdi={[]}
       erRevurderingTilbakekrevingKlage
       fritekstOppsummeringPakrevdMenIkkeUtfylt

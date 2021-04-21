@@ -15,8 +15,6 @@ describe('<InnhentDokOpptjeningUtlandPanel>', () => {
     const wrapper = shallowWithIntl(<InnhentDokOpptjeningUtlandPanel
       {...reduxFormPropsMock}
       intl={intlMock}
-      behandlingId={1}
-      behandlingVersjon={1}
       harApneAksjonspunkter
       handleSubmit={() => undefined}
       readOnly={false}

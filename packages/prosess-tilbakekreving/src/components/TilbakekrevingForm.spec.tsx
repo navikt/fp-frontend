@@ -27,7 +27,6 @@ describe('<TilbakekrevingForm>', () => {
       {...reduxFormPropsMock}
       vilkarsVurdertePerioder={perioder}
       dataForDetailForm={perioderDetail}
-      behandlingFormPrefix="behandling_V1"
       navBrukerKjonn={navBrukerKjonn.KVINNE}
       readOnly={false}
       readOnlySubmitButton={false}
@@ -42,6 +41,14 @@ describe('<TilbakekrevingForm>', () => {
       behandlingVersjon={2}
       alleKodeverk={{}}
       beregnBelop={() => undefined}
+      perioderForeldelse={{} as any}
+      submitCallback={() => undefined}
+      alleMerknaderFraBeslutter={{}}
+      perioder={[]}
+      vilkarvurdering={{} as any}
+      rettsgebyr={{} as any}
+      onSubmit={() => undefined}
+      initialValues={{} as any}
     />);
 
     wrapper.setState({ valgtPeriode: perioder[0] });
@@ -56,7 +63,6 @@ describe('<TilbakekrevingForm>', () => {
       {...reduxFormPropsMock}
       vilkarsVurdertePerioder={perioder}
       dataForDetailForm={perioder}
-      behandlingFormPrefix="behandling_V1"
       navBrukerKjonn={navBrukerKjonn.KVINNE}
       readOnly={false}
       readOnlySubmitButton={false}
@@ -71,6 +77,14 @@ describe('<TilbakekrevingForm>', () => {
       behandlingVersjon={2}
       alleKodeverk={{}}
       beregnBelop={() => undefined}
+      perioderForeldelse={{} as any}
+      submitCallback={() => undefined}
+      alleMerknaderFraBeslutter={{}}
+      perioder={[]}
+      vilkarvurdering={{} as any}
+      rettsgebyr={{} as any}
+      onSubmit={() => undefined}
+      initialValues={{} as any}
     />);
 
     expect(wrapper.find(TilbakekrevingPeriodeForm)).toHaveLength(0);
@@ -84,7 +98,6 @@ describe('<TilbakekrevingForm>', () => {
       {...reduxFormPropsMock}
       vilkarsVurdertePerioder={perioder}
       dataForDetailForm={perioder}
-      behandlingFormPrefix="behandling_V1"
       navBrukerKjonn={navBrukerKjonn.KVINNE}
       readOnly={false}
       readOnlySubmitButton={false}
@@ -100,6 +113,14 @@ describe('<TilbakekrevingForm>', () => {
       alleKodeverk={{}}
       beregnBelop={() => undefined}
       error="TilbakekrevingPeriodeForm.TotalbelopetUnder4Rettsgebyr"
+      perioderForeldelse={{} as any}
+      submitCallback={() => undefined}
+      alleMerknaderFraBeslutter={{}}
+      perioder={[]}
+      vilkarvurdering={{} as any}
+      rettsgebyr={{} as any}
+      onSubmit={() => undefined}
+      initialValues={{} as any}
     />);
 
     expect(wrapper.find(AlertStripe)).toHaveLength(1);

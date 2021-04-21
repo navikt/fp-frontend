@@ -9,8 +9,6 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AdopsjonVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-adopsjon';
 import { Aksjonspunkt, Behandling, Vilkar } from '@fpsak-frontend/types';
 
-import withReduxProvider from '../../decorators/withRedux';
-
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
 const behandling = {
@@ -29,12 +27,13 @@ const standardProsessProps = {
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
+  setFormData: () => undefined,
 };
 
 export default {
   title: 'prosess/prosess-vilkar-adopsjon',
   component: AdopsjonVilkarProsessIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visÅpentAksjonspunkt = () => (

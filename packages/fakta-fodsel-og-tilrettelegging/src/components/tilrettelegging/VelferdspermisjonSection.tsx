@@ -4,17 +4,16 @@ import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import moment from 'moment';
 import { DDMMYYYY_DATE_FORMAT, required } from '@fpsak-frontend/utils';
-import { RadioGroupField, RadioOption, behandlingFormValueSelector } from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { Permisjon } from '@fpsak-frontend/types';
 
+import { formValueSelector } from 'redux-form';
 import styles from './tilretteleggingArbeidsforholdSection.less';
 
 interface PureOwnProps {
   formName: string;
-  behandlingId: number;
-  behandlingVersjon: number;
   readOnly: boolean;
   permisjon: Permisjon;
   formSectionName: string;
@@ -75,8 +74,8 @@ export const skalTaHensynTilPermisjon = (tilretteleggingBehovFom: string, permis
   .isAfter(tilretteleggingBehovFom) && (permisjon.permisjonTom == null || !moment(permisjon.permisjonTom).isBefore(tilretteleggingBehovFom));
 
 const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => ({
-  skalTaHensynTilPermisjon: skalTaHensynTilPermisjon(behandlingFormValueSelector(ownProps.formName,
-    ownProps.behandlingId, ownProps.behandlingVersjon)(state, `${ownProps.formSectionName}.tilretteleggingBehovFom`), ownProps.permisjon),
+  skalTaHensynTilPermisjon: skalTaHensynTilPermisjon(formValueSelector(ownProps.formName)(state,
+    `${ownProps.formSectionName}.tilretteleggingBehovFom`), ownProps.permisjon),
 });
 
 export default connect(mapStateToProps)(VelferdspermisjonSection);

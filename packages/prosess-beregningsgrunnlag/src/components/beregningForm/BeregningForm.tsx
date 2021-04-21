@@ -1,14 +1,13 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import { createSelector } from 'reselect';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextHTML, AvsnittSkiller, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { Column, Row } from 'nav-frontend-grid';
-import { behandlingForm } from '@fpsak-frontend/form';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
@@ -221,8 +220,6 @@ type OwnProps = {
     relevanteStatuser: RelevanteStatuserProp;
     submitCallback: (...args: any[]) => any;
     readOnlySubmitButton: boolean;
-    behandlingId: number;
-    behandlingVersjon: number;
     beregningsgrunnlag: BeregningsgrunnlagProp;
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
     vilkaarBG: Vilkar;
@@ -246,8 +243,6 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
   gjeldendeAksjonspunkter,
   relevanteStatuser,
   readOnlySubmitButton,
-  behandlingId,
-  behandlingVersjon,
   alleKodeverk,
   vilkaarBG,
   arbeidsgiverOpplysningerPerId,
@@ -292,12 +287,8 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
             <>
               <Beregningsgrunnlag
                 relevanteStatuser={relevanteStatuser}
-                readOnly={readOnly}
-                gjeldendeAksjonspunkter={gjeldendeAksjonspunkter}
                 allePerioder={beregningsgrunnlagPeriode}
                 gjelderBesteberegning={gjelderBesteberegning}
-                behandlingId={behandlingId}
-                behandlingVersjon={behandlingVersjon}
                 alleKodeverk={alleKodeverk}
                 skjeringstidspunktDato={skjaeringstidspunktBeregning}
                 arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -338,8 +329,6 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
                 readOnlySubmitButton={readOnlySubmitButton}
                 formName={formName}
                 allePerioder={beregningsgrunnlagPeriode}
-                behandlingId={behandlingId}
-                behandlingVersjon={behandlingVersjon}
                 alleKodeverk={alleKodeverk}
                 aksjonspunkter={gjeldendeAksjonspunkter}
                 relevanteStatuser={relevanteStatuser}
@@ -385,8 +374,9 @@ const mapStateToProps = (state, ownProps) => ({
   initialValues: buildInitialValues(ownProps),
 });
 
-const BeregningForm = connect(mapStateToProps)(behandlingForm({
+const BeregningForm = connect(mapStateToProps)(reduxForm({
   form: formName,
+  destroyOnUnmount: false,
 })(BeregningFormImpl));
 
 export default BeregningForm;

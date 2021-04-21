@@ -11,7 +11,6 @@ import VedtakInnsynProsessIndex from '@fpsak-frontend/prosess-vedtak-innsyn';
 import { Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
 
 import alleKodeverk from '../../mocks/alleKodeverk.json';
-import withReduxProvider from '../../../decorators/withRedux';
 
 const behandling = {
   id: 1,
@@ -54,12 +53,13 @@ const standardProsessProps = {
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
+  setFormData: () => undefined,
 };
 
 export default {
   title: 'prosess/innsyn/prosess-vedtak-innsyn',
   component: VedtakInnsynProsessIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visPanelForInnvilgetVedtak = () => (

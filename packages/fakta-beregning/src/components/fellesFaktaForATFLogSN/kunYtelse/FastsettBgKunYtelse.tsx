@@ -15,8 +15,6 @@ export const setFaktaPanelForKunYtelse = (faktaPanels,
   readOnly,
   isAksjonspunktClosed,
   faktaOmBeregning,
-  behandlingId,
-  behandlingVersjon,
   alleKodeverk) => {
   if (tilfeller.includes(FASTSETT_BG_KUN_YTELSE)) {
     faktaPanels.push(
@@ -26,8 +24,6 @@ export const setFaktaPanelForKunYtelse = (faktaPanels,
           isAksjonspunktClosed={isAksjonspunktClosed}
           faktaOmBeregning={faktaOmBeregning}
           alleKodeverk={alleKodeverk}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
         />
       </React.Fragment>,
     );

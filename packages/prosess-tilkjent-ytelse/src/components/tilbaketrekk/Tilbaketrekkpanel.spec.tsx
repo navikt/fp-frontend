@@ -34,8 +34,6 @@ describe('<Tilbaketrekkpanel>', () => {
       submitCallback={sinon.spy()}
       readOnlySubmitButton={false}
       vurderTilbaketrekkAP={lagAksjonspunktTilbaketrekk()}
-      behandlingId={1}
-      behandlingVersjon={1}
       {...reduxFormPropsMock}
     />, messages);
 

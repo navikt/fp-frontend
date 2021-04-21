@@ -18,8 +18,6 @@ describe('<TilbakekrevingVedtakUtdypendeTekstPanel>', () => {
       readOnly={false}
       fritekstPakrevet={false}
       formName="test"
-      behandlingId={2}
-      behandlingVersjon={3}
     />, messages);
 
     expect(wrapper.find(Image)).toHaveLength(1);
@@ -34,8 +32,6 @@ describe('<TilbakekrevingVedtakUtdypendeTekstPanel>', () => {
       readOnly={false}
       fritekstPakrevet={false}
       formName="test"
-      behandlingId={2}
-      behandlingVersjon={3}
     />, messages);
 
     expect(wrapper.find(Image)).toHaveLength(0);
@@ -50,8 +46,6 @@ describe('<TilbakekrevingVedtakUtdypendeTekstPanel>', () => {
       readOnly={false}
       fritekstPakrevet
       formName="test"
-      behandlingId={2}
-      behandlingVersjon={3}
     />, messages);
 
     expect(wrapper.find(Image)).toHaveLength(0);
@@ -66,8 +60,6 @@ describe('<TilbakekrevingVedtakUtdypendeTekstPanel>', () => {
       readOnly
       fritekstPakrevet={false}
       formName="test"
-      behandlingId={2}
-      behandlingVersjon={3}
     />, messages);
 
     expect(wrapper.find(Image)).toHaveLength(0);

@@ -7,8 +7,6 @@ import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus'
 import AktivitetskravFaktaIndex from '@fpsak-frontend/fakta-aktivitetskrav';
 import { Behandling } from '@fpsak-frontend/types';
 
-import withReduxProvider from '../../decorators/withRedux';
-
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
 const behandling = {
@@ -55,7 +53,7 @@ const merknaderFraBeslutter = {
 export default {
   title: 'fakta/fakta-aktivitetskrav',
   component: AktivitetskravFaktaIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visAksjonspunktMedToUavklartePerioder = () => (
@@ -81,6 +79,7 @@ export const visAksjonspunktMedToUavklartePerioder = () => (
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
     submittable={boolean('submittable', true)}
     alleMerknaderFraBeslutter={{}}
+    setFormData={() => undefined}
   />
 );
 
@@ -107,6 +106,7 @@ export const visAksjonspunktSomErBekreftet = () => (
     harApneAksjonspunkter={boolean('harApneAksjonspunkter', false)}
     submittable={boolean('submittable', false)}
     alleMerknaderFraBeslutter={{}}
+    setFormData={() => undefined}
   />
 );
 
@@ -135,5 +135,6 @@ export const visAksjonspunktSomErReåpnetAvBeslutter = () => (
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
+    setFormData={() => undefined}
   />
 );

@@ -14,7 +14,6 @@ interface OwnProps {
 }
 
 const TilleggsopplysningerFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
-  behandling,
   soknad,
   harApneAksjonspunkter,
   submitCallback,
@@ -22,8 +21,6 @@ const TilleggsopplysningerFaktaIndex: FunctionComponent<OwnProps & StandardFakta
 }) => (
   <RawIntlProvider value={intl}>
     <TilleggsopplysningerInfoPanel
-      behandlingId={behandling.id}
-      behandlingVersjon={behandling.versjon}
       tilleggsopplysninger={soknad.tilleggsopplysninger}
       hasOpenAksjonspunkter={harApneAksjonspunkter}
       submitCallback={submitCallback}

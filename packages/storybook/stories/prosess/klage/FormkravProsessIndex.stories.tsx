@@ -8,8 +8,6 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import FormkravProsessIndex from '@fpsak-frontend/prosess-formkrav';
 import { Aksjonspunkt, Behandling, KlageVurdering } from '@fpsak-frontend/types';
 
-import withReduxProvider from '../../../decorators/withRedux';
-
 import alleKodeverk from '../../mocks/alleKodeverk.json';
 
 const behandling = {
@@ -32,7 +30,7 @@ const avsluttedeBehandlinger = [{
 export default {
   title: 'prosess/klage/prosess-formkrav',
   component: FormkravProsessIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visFormkravPanelForAksjonspunktNfp = () => (
@@ -65,6 +63,7 @@ export const visFormkravPanelForAksjonspunktNfp = () => (
     status=""
     vilkar={[]}
     isAksjonspunktOpen={false}
+    setFormData={() => undefined}
   />
 );
 
@@ -98,5 +97,6 @@ export const visFormkravPanelForAksjonspunktKa = () => (
     status=""
     vilkar={[]}
     isAksjonspunktOpen={false}
+    setFormData={() => undefined}
   />
 );

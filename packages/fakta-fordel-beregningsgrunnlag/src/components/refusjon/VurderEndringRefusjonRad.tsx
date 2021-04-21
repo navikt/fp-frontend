@@ -11,12 +11,13 @@ import {
   formatCurrencyNoKr,
 } from '@fpsak-frontend/utils';
 import { Column, Row } from 'nav-frontend-grid';
-import { behandlingFormValueSelector, DatepickerField, InputField } from '@fpsak-frontend/form';
+import { DatepickerField, InputField } from '@fpsak-frontend/form';
 import { FormattedMessage } from 'react-intl';
 
 import { Normaltekst } from 'nav-frontend-typografi';
 import { ArbeidsgiverOpplysningerPerId, RefusjonTilVurderingAndel } from '@fpsak-frontend/types';
 import { connect } from 'react-redux';
+import { formValueSelector } from 'redux-form';
 import styles from './vurderEndringRefusjonRad.less';
 import { createVisningsnavnForAktivitetRefusjon } from '../util/visningsnavnHelper';
 import { VurderRefusjonAndelTransformedValues, VurderRefusjonValues } from '../../types/VurderRefusjonTsType';
@@ -39,8 +40,6 @@ type OwnProps = {
     readOnly: boolean;
     erAksjonspunktÅpent: boolean;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-    behandlingId: number;
-    behandlingVersjon: number;
     skjæringstidspunkt: string;
     formName: string;
 };
@@ -159,7 +158,7 @@ const erValgtDatoLikSTP = (stp: string, verdiFraForm?: string): boolean => {
 
 const mapStateToProps = (state: any, ownProps: OwnProps): MappedOwnProps => ({
   valgtDatoErLikSTP: (erValgtDatoLikSTP(ownProps.skjæringstidspunkt,
-    behandlingFormValueSelector(ownProps.formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, lagNøkkelRefusjonsstart(ownProps.refusjonAndel)))),
+    formValueSelector(ownProps.formName)(state, lagNøkkelRefusjonsstart(ownProps.refusjonAndel)))),
 });
 
 const VurderEndringRefusjonRad = connect(mapStateToProps)(VurderEndringRefusjonRadImpl);

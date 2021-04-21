@@ -21,8 +21,6 @@ type OwnProps = {
     skalSjekkeBesteberegning: boolean;
     skalViseInntektstabell?: boolean;
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-    behandlingId: number;
-    behandlingVersjon: number;
 };
 
 interface StaticFunctions {
@@ -46,8 +44,6 @@ const KunYtelsePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   skalSjekkeBesteberegning,
   isAksjonspunktClosed,
   skalViseInntektstabell,
-  behandlingVersjon,
-  behandlingId,
   alleKodeverk,
 }) => (
   <div>
@@ -59,8 +55,6 @@ const KunYtelsePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
         brukersAndelFieldArrayName={brukersAndelFieldArrayName}
         skalViseInntektstabell={skalViseInntektstabell}
         alleKodeverk={alleKodeverk}
-        behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
       />
     )}
     {!skalSjekkeBesteberegning && skalViseInntektstabell
@@ -70,8 +64,6 @@ const KunYtelsePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
         brukersAndelFieldArrayName={brukersAndelFieldArrayName}
         isAksjonspunktClosed={isAksjonspunktClosed}
         alleKodeverk={alleKodeverk}
-        behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
       />
     )}
   </div>

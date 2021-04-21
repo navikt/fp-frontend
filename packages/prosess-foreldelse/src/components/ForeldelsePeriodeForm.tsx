@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { Undertekst } from 'nav-frontend-typografi';
@@ -8,7 +8,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
 import {
-  RadioGroupField, RadioOption, TextAreaField, behandlingForm, DatepickerField, behandlingFormValueSelector,
+  RadioGroupField, RadioOption, TextAreaField, DatepickerField,
 } from '@fpsak-frontend/form';
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
 import {
@@ -35,9 +35,6 @@ export type FormValues = {
 } & ForeldelsesresultatActivity;
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
-  behandlingFormPrefix: string;
   periode: ForeldelsesresultatActivity;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   oppdaterPeriode: (values: FormValues) => void;
@@ -47,6 +44,7 @@ interface PureOwnProps {
   oppdaterSplittedePerioder: (data: PeriodeMedFeilutbetaling[]) => void;
   readOnly: boolean;
   beregnBelop: (data: { behandlingId: number; perioder: PeriodeMedBelop[]}) => Promise<any>;
+  behandlingId: number;
 }
 
 interface MappedOwnProps {
@@ -69,11 +67,10 @@ export const ForeldelsePeriodeFormImpl: FunctionComponent<PureOwnProps & MappedO
   setNestePeriode,
   setForrigePeriode,
   oppdaterSplittedePerioder,
-  behandlingId,
-  behandlingVersjon,
   beregnBelop,
   erForeldet,
   erMedTilleggsfrist,
+  behandlingId,
   ...formProps
 }) => (
   <div className={styles.container}>
@@ -84,7 +81,6 @@ export const ForeldelsePeriodeFormImpl: FunctionComponent<PureOwnProps & MappedO
       oppdaterSplittedePerioder={oppdaterSplittedePerioder}
       readOnly={readOnly}
       behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       beregnBelop={beregnBelop}
     />
     <VerticalSpacer twentyPx />
@@ -171,9 +167,8 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
   const onSubmit = (values: FormValues) => ownProps.oppdaterPeriode(values);
   const foreldelseVurderingTyper = ownProps.alleKodeverk[tilbakekrevingKodeverkTyper.FORELDELSE_VURDERING]
     .filter((fv) => fv.kode !== foreldelseVurderingType.IKKE_VURDERT);
-  return (state: any, oProps: PureOwnProps): MappedOwnProps => {
-    const { behandlingId, behandlingVersjon } = oProps;
-    const sel = behandlingFormValueSelector(FORELDELSE_PERIODE_FORM_NAME, behandlingId, behandlingVersjon);
+  return (state: any): MappedOwnProps => {
+    const sel = formValueSelector(FORELDELSE_PERIODE_FORM_NAME);
     const foreldet = sel(state, 'foreldet');
     return {
       initialValues,
@@ -185,9 +180,10 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
   };
 };
 
-const ForeldelsePeriodeForm = connect(mapStateToPropsFactory)(behandlingForm({
+const ForeldelsePeriodeForm = connect(mapStateToPropsFactory)(reduxForm({
   form: FORELDELSE_PERIODE_FORM_NAME,
   enableReinitialize: true,
+  destroyOnUnmount: false,
 })(ForeldelsePeriodeFormImpl));
 
 export default ForeldelsePeriodeForm;

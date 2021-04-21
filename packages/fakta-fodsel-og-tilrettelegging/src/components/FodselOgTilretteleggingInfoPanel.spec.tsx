@@ -46,7 +46,6 @@ describe('<FodselOgTilretteleggingInfoPanel>', () => {
   it('skal vise panel', () => {
     const wrapper = shallow(<FodselOgTilretteleggingInfoPanel
       intl={intlMock}
-      behandlingId={1}
       behandlingVersjon={1}
       svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging as FodselOgTilrettelegging}
       aksjonspunkter={[]}

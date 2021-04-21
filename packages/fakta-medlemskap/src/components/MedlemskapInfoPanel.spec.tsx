@@ -50,8 +50,6 @@ describe('<MedlemskapInfoPanel>', () => {
       readOnly
       submitCallback={sinon.spy()}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       behandlingType={{
         kode: 'TEst',
         kodeverk: '',
@@ -64,7 +62,6 @@ describe('<MedlemskapInfoPanel>', () => {
       inntektArbeidYtelse={{} as InntektArbeidYtelse}
       alleKodeverk={{}}
       medlemskap={{} as Medlemskap}
-      behandlingPaaVent={false}
       readOnlyForStartdatoForForeldrepenger={false}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
@@ -98,8 +95,6 @@ describe('<MedlemskapInfoPanel>', () => {
       readOnly
       submitCallback={sinon.spy()}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       behandlingType={{
         kode: 'TEst',
         kodeverk: '',
@@ -112,7 +107,6 @@ describe('<MedlemskapInfoPanel>', () => {
       inntektArbeidYtelse={{} as InntektArbeidYtelse}
       alleKodeverk={{}}
       medlemskap={{} as Medlemskap}
-      behandlingPaaVent={false}
       readOnlyForStartdatoForForeldrepenger={false}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
@@ -146,8 +140,6 @@ describe('<MedlemskapInfoPanel>', () => {
       readOnly
       submitCallback={sinon.spy()}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       behandlingType={{
         kode: 'TEst',
         kodeverk: '',
@@ -160,7 +152,6 @@ describe('<MedlemskapInfoPanel>', () => {
       inntektArbeidYtelse={{} as InntektArbeidYtelse}
       alleKodeverk={{}}
       medlemskap={{} as Medlemskap}
-      behandlingPaaVent={false}
       readOnlyForStartdatoForForeldrepenger={false}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
@@ -178,8 +169,6 @@ describe('<MedlemskapInfoPanel>', () => {
       readOnly
       submitCallback={sinon.spy()}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       behandlingType={{
         kode: 'TEst',
         kodeverk: '',
@@ -192,7 +181,6 @@ describe('<MedlemskapInfoPanel>', () => {
       inntektArbeidYtelse={{} as InntektArbeidYtelse}
       alleKodeverk={{}}
       medlemskap={{} as Medlemskap}
-      behandlingPaaVent={false}
       readOnlyForStartdatoForForeldrepenger={false}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);

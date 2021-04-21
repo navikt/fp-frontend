@@ -8,14 +8,12 @@ import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import SvangerskapspengerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-svp';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 
-import withReduxProvider from '../../decorators/withRedux';
-
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
 export default {
   title: 'papirsoknad/papirsoknad-svp',
   component: SvangerskapspengerPapirsoknadIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visPapirsoknadForMorVedFødsel = () => (

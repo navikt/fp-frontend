@@ -1,12 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { Column, Container, Row } from 'nav-frontend-grid';
+import { formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import moment from 'moment';
 
 import { FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
-import { DatepickerField, behandlingFormValueSelector } from '@fpsak-frontend/form';
+import { DatepickerField } from '@fpsak-frontend/form';
 import { hasValidDate, required } from '@fpsak-frontend/utils';
 import { Image, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -37,8 +38,6 @@ const isAgeAbove15 = (fodselsdatoer: Record<number, string>, omsorgsovertakelseD
       .subtract(15, 'years'));
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   readOnly: boolean;
   erForeldrepengerFagsak: boolean;
   hasEktefellesBarnAksjonspunkt: boolean;
@@ -148,8 +147,8 @@ DokumentasjonFaktaFormImpl.defaultProps = {
 
 const FORM_NAME = 'AdopsjonInfoPanel';
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  ...behandlingFormValueSelector(FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon)(
+const mapStateToProps = (state: any): MappedOwnProps => ({
+  ...formValueSelector(FORM_NAME)(
     state, 'fodselsdatoer', 'omsorgsovertakelseDato', 'barnetsAnkomstTilNorgeDato',
   ),
 });

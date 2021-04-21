@@ -66,6 +66,7 @@ describe('<UttakFaktaIndex>', () => {
       alleKodeverk={{}}
       ytelsefordeling={{} as Ytelsefordeling}
       arbeidsgiverOpplysningerPerId={{}}
+      setFormData={() => undefined}
     />);
     expect(wrapper.find(UttakInfoPanel)).toHaveLength(1);
   });

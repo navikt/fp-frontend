@@ -20,8 +20,6 @@ interface OwnProps {
   isErstattArbeidsforhold: boolean;
   arbeidsforholdList: Arbeidsforhold[];
   formName: string;
-  behandlingId: number;
-  behandlingVersjon: number;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
@@ -31,15 +29,11 @@ const PersonNyttEllerErstattArbeidsforholdPanel: FunctionComponent<OwnProps & Wr
   isErstattArbeidsforhold,
   arbeidsforholdList,
   formName,
-  behandlingId,
-  behandlingVersjon,
   arbeidsgiverOpplysningerPerId,
 }) => (
   <BehandlingFormFieldCleaner
     formName={formName}
     fieldNames={['erNyttArbeidsforhold', 'erstatterArbeidsforholdId']}
-    behandlingId={behandlingId}
-    behandlingVersjon={behandlingVersjon}
   >
     <VerticalSpacer sixteenPx />
     <ArrowBox alignLeft alignOffset={50}>

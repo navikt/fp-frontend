@@ -197,8 +197,6 @@ describe('<BeregningForm>', () => {
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       submitCallback={sinon.spy}
       readOnlySubmitButton
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       vilkaarBG={getBGVilkar(mockVilkar)}
       arbeidsgiverOpplysningerPerId={{}}
@@ -217,8 +215,6 @@ describe('<BeregningForm>', () => {
       readOnly={false}
       gjeldendeAksjonspunkter={apEttLukketOgEttApent}
       beregningsgrunnlag={lagBeregningsgrunnlag(0, 120000, 100000, 100)}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       submitCallback={sinon.spy}
@@ -235,8 +231,6 @@ describe('<BeregningForm>', () => {
       readOnly={false}
       gjeldendeAksjonspunkter={apEttLukketOgEttApent}
       beregningsgrunnlag={lagBeregningsgrunnlag(0, 120000, 100000, 100)}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       submitCallback={sinon.spy}
@@ -254,8 +248,6 @@ describe('<BeregningForm>', () => {
       readOnly={false}
       gjeldendeAksjonspunkter={apEttLukketOgEttApent}
       beregningsgrunnlag={lagBeregningsgrunnlag(0, 120000, 100000, 100)}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       submitCallback={sinon.spy}
@@ -278,8 +270,6 @@ describe('<BeregningForm>', () => {
       readOnly={false}
       gjeldendeAksjonspunkter={apEttLukketOgEttApent}
       beregningsgrunnlag={lagBeregningsgrunnlag(0, 100000, 100000, 100)}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       submitCallback={sinon.spy}
@@ -290,8 +280,6 @@ describe('<BeregningForm>', () => {
     />);
     const beregningsgrunnlag = wrapper.find(Beregningsgrunnlag);
     expect(beregningsgrunnlag.props().relevanteStatuser).toBe(relevanteStatuser);
-    expect(beregningsgrunnlag.props().readOnly).toBe(false);
-    expect(beregningsgrunnlag.props().gjeldendeAksjonspunkter).toBe(apEttLukketOgEttApent);
     const expectedPerioder = lagPeriode();
     expect(beregningsgrunnlag.props().allePerioder[0]).toEqual(expectedPerioder);
   });
@@ -302,8 +290,6 @@ describe('<BeregningForm>', () => {
       readOnly={false}
       gjeldendeAksjonspunkter={apEttLukketOgEttApent}
       beregningsgrunnlag={lagBeregningsgrunnlag(0, 100000, 100000, 100)}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       submitCallback={sinon.spy}
@@ -323,8 +309,6 @@ describe('<BeregningForm>', () => {
       readOnly={false}
       gjeldendeAksjonspunkter={apEttLukketOgEttApent}
       beregningsgrunnlag={bg as BeregningsgrunnlagProp}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       submitCallback={sinon.spy}

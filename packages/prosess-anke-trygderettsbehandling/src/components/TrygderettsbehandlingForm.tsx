@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 
@@ -11,10 +11,7 @@ import ankeVurderingType from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import {
   AksjonspunktHelpTextTemp, VerticalSpacer, ArrowBox,
 } from '@fpsak-frontend/shared-components';
-import {
-  RadioGroupField, RadioOption, behandlingForm, SelectField, behandlingFormValueSelector,
-  hasBehandlingFormErrorsOfType, isBehandlingFormDirty, isBehandlingFormSubmitting,
-} from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
 import ankeOmgjorArsak from '@fpsak-frontend/kodeverk/src/ankeOmgjorArsak';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
@@ -50,8 +47,6 @@ interface PureOwnProps {
   ankeVurderingResultat: AnkeVurdering['ankeVurderingResultat'];
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: AnkeMerknaderResultatAp) => Promise<void>;
-  behandlingId: number;
-  behandlingVersjon: number;
   previewCallback: (data: BrevData) => Promise<any>;
   readOnly?: boolean;
   readOnlySubmitButton?: boolean;
@@ -72,8 +67,6 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
   handleSubmit,
   readOnlySubmitButton,
   aksjonspunktCode,
-  behandlingId,
-  behandlingVersjon,
   sprakkode,
   valgtTrygderettVurdering,
   ankeOmgorArsaker,
@@ -175,13 +168,8 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
       <Column xs="8">
         <ProsessStegSubmitButton
           formName={formProps.form}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
           isReadOnly={readOnly}
           isSubmittable={!readOnly}
-          isBehandlingFormSubmitting={isBehandlingFormSubmitting}
-          isBehandlingFormDirty={isBehandlingFormDirty}
-          hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
           text={intl.formatMessage({ id: 'Ankebehandling.Merknad.Merknader.LagreKommentarer' })}
         />
       </Column>
@@ -234,9 +222,10 @@ const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => ({
   aksjonspunktCode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER,
   initialValues: buildInitialValues(ownProps),
   onSubmit: lagSubmitFn(ownProps),
-  valgtTrygderettVurdering: behandlingFormValueSelector(ankeMerknaderFormName, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'trygderettVurdering'),
+  valgtTrygderettVurdering: formValueSelector(ankeMerknaderFormName)(state, 'trygderettVurdering'),
 });
 
-export default connect(mapStateToProps)(behandlingForm({
+export default connect(mapStateToProps)(reduxForm({
   form: ankeMerknaderFormName,
+  destroyOnUnmount: false,
 })(injectIntl(TrygderettsbehandlingForm)));

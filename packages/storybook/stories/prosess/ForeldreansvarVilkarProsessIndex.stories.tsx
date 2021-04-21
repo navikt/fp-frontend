@@ -9,8 +9,6 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import ForeldreansvarVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-foreldreansvar';
 import { Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
 
-import withReduxProvider from '../../decorators/withRedux';
-
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
 const standardProsessProps = {
@@ -22,12 +20,13 @@ const standardProsessProps = {
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
+  setFormData: () => undefined,
 };
 
 export default {
   title: 'prosess/prosess-vilkar-foreldreansvar',
   component: ForeldreansvarVilkarProsessIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visÅpentAksjonspunkt2Ledd = () => (

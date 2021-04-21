@@ -7,8 +7,6 @@ import ugunstAarsakTyper from '@fpsak-frontend/kodeverk/src/ugunstAarsakTyper';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 
-import withReduxProvider from '../../decorators/withRedux';
-
 const recipients = ['Søker'];
 const templates = [{
   kode: dokumentMalType.INNHENT_DOK,
@@ -28,7 +26,7 @@ const sprakKode = {
 export default {
   title: 'sak/sak-meldinger',
   component: MeldingerSakIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visMeldingerPanel = () => (
@@ -42,8 +40,6 @@ export const visMeldingerPanel = () => (
       templates={object('templates', templates)}
       sprakKode={object('sprakKode', sprakKode)}
       previewCallback={action('button-click')}
-      behandlingId={1}
-      behandlingVersjon={1}
       isKontrollerRevurderingApOpen={false}
       kanVeilede={false}
       fagsakYtelseType={{

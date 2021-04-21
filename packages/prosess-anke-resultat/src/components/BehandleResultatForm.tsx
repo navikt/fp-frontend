@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -12,9 +12,6 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { ProsessStegSubmitButton, validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
-import {
-  behandlingForm, hasBehandlingFormErrorsOfType, isBehandlingFormDirty, isBehandlingFormSubmitting,
-} from '@fpsak-frontend/form';
 import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
 import {
@@ -154,8 +151,6 @@ interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
   submitCallback: (data: ForeslaVedtakAp | ForeslaVedtakManueltAp | BekreftVedtakUtenTotrinnskontrollAp) => Promise<void>;
-  behandlingId: number;
-  behandlingVersjon: number;
   ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
   previewCallback: (data: BrevData) => Promise<any>;
   readOnlySubmitButton?: boolean;
@@ -179,8 +174,6 @@ const AnkeResultatForm: FunctionComponent<PureOwnProps & MappedOwnProps & Inject
   fritekstTilBrev,
   ankeVurderingResultat,
   readOnly = true,
-  behandlingId,
-  behandlingVersjon,
   alleKodeverk,
   ...formProps
 }) => (
@@ -198,25 +191,15 @@ const AnkeResultatForm: FunctionComponent<PureOwnProps & MappedOwnProps & Inject
       <Column xs="12">
         <ProsessStegSubmitButton
           formName={formProps.form}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
           isReadOnly={readOnly}
           isSubmittable={!readOnly && isMedUnderskriver(aksjonspunktCode) && !isFatterVedtak(aksjonspunktCode)}
-          isBehandlingFormSubmitting={isBehandlingFormSubmitting}
-          isBehandlingFormDirty={isBehandlingFormDirty}
-          hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
           text={intl.formatMessage({ id: 'Ankebehandling.Resultat.SendTilMedunderskriver' })}
         />
         <span>&nbsp;</span>
         <ProsessStegSubmitButton
           formName={formProps.form}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
           isReadOnly={readOnly}
           isSubmittable={!readOnly && isVedtakUtenToTrinn(aksjonspunktCode) && !isFatterVedtak(aksjonspunktCode)}
-          isBehandlingFormSubmitting={isBehandlingFormSubmitting}
-          isBehandlingFormDirty={isBehandlingFormDirty}
-          hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
           text={skalViseForhaandlenke(ankeVurderingVerdi)
             ? intl.formatMessage({ id: 'Ankebehandling.Resultat.FerdigstillAnke' })
             : intl.formatMessage({ id: 'Ankebehandling.Resultat.VentMerknader' })}
@@ -269,8 +252,9 @@ const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
   onSubmit: lagSubmitFn(ownProps),
 });
 
-const BehandleResultatForm = connect(mapStateToProps)(behandlingForm({
+const BehandleResultatForm = connect(mapStateToProps)(reduxForm({
   form: formName,
+  destroyOnUnmount: false,
 })(injectIntl(AnkeResultatForm)));
 
 export default BehandleResultatForm;

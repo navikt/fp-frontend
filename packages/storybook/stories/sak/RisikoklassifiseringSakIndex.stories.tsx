@@ -8,7 +8,6 @@ import RisikoklassifiseringSakIndex from '@fpsak-frontend/sak-risikoklassifiseri
 import kontrollresultatKode from '@fpsak-frontend/sak-risikoklassifisering/src/kodeverk/kontrollresultatKode';
 
 import { Aksjonspunkt } from '@fpsak-frontend/types';
-import withReduxProvider from '../../decorators/withRedux';
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
 const withWidthProvider = (story) => (
@@ -20,13 +19,11 @@ const withWidthProvider = (story) => (
 export default {
   title: 'sak/sak-risikoklassifisering',
   component: RisikoklassifiseringSakIndex,
-  decorators: [withKnobs, withReduxProvider, withWidthProvider],
+  decorators: [withKnobs, withWidthProvider],
 };
 
 export const visPanelUtenInformasjon = () => (
   <RisikoklassifiseringSakIndex
-    behandlingId={1}
-    behandlingVersjon={1}
     isPanelOpen={boolean('isPanelOpen', false)}
     readOnly={boolean('readOnly', false)}
     submitAksjonspunkt={action('button-click') as () => Promise<any>}
@@ -37,8 +34,6 @@ export const visPanelUtenInformasjon = () => (
 
 export const visPanelForLavRisikoklassifisering = () => (
   <RisikoklassifiseringSakIndex
-    behandlingId={1}
-    behandlingVersjon={1}
     risikoklassifisering={{
       kontrollresultat: {
         kode: kontrollresultatKode.IKKE_HOY,
@@ -55,8 +50,6 @@ export const visPanelForLavRisikoklassifisering = () => (
 
 export const visPanelForHøyRisikoklassifisering = () => (
   <RisikoklassifiseringSakIndex
-    behandlingId={1}
-    behandlingVersjon={1}
     aksjonspunkt={{
       definisjon: {
         kode: aksjonspunktCodes.VURDER_FARESIGNALER,

@@ -113,8 +113,8 @@ KunYtelseBesteberegningImpl.validate = (values) => {
 
 KunYtelseBesteberegningImpl.transformValues = (values) => (values[besteberegningField]);
 
-const mapStateToProps = (state, ownProps) => ({
-  erBesteberegning: getFormValuesForBeregning(state, ownProps)[besteberegningField],
+const mapStateToProps = (state) => ({
+  erBesteberegning: getFormValuesForBeregning(state)[besteberegningField],
 });
 
 export default connect(mapStateToProps)(KunYtelseBesteberegningImpl);

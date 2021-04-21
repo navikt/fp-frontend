@@ -26,8 +26,6 @@ export const harEtterlonnSluttpakkeField = 'vurderEtterlønnSluttpakke';
 type OwnProps = {
     readOnly: boolean;
     isAksjonspunktClosed: boolean;
-    behandlingId: number;
-    behandlingVersjon: number;
 };
 
 interface StaticFunctions {
@@ -120,8 +118,8 @@ VurderEtterlonnSluttpakkeForm.transformValues = (values, inntektPrMnd, faktaOmBe
   };
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  harEtterlonnSluttpakke: getFormValuesForBeregning(state, ownProps)[harEtterlonnSluttpakkeField],
+const mapStateToProps = (state) => ({
+  harEtterlonnSluttpakke: getFormValuesForBeregning(state)[harEtterlonnSluttpakkeField],
 });
 
 export default connect(mapStateToProps)(VurderEtterlonnSluttpakkeForm);

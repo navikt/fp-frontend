@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import { Normaltekst } from 'nav-frontend-typografi';
 
@@ -9,7 +10,6 @@ import { DateLabel, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-c
 import {
   Kodeverk, KodeverkMedNavn, RelatertTilgrensedYtelse, Soknad,
 } from '@fpsak-frontend/types';
-import { behandlingFormValueSelector } from '@fpsak-frontend/form';
 
 import styles from './rettighetFaktaPanel.less';
 
@@ -24,8 +24,6 @@ export type FormValues = {
 interface PureOwnProps {
   relatertYtelseTypes: KodeverkMedNavn[];
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  behandlingId: number;
-  behandlingVersjon: number;
 }
 
 interface MappedOwnProps {
@@ -75,8 +73,8 @@ const RettighetFaktaPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps> 
 
 const FORM_NAME = 'OmsorgOgForeldreansvarInfoPanel';
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  ...behandlingFormValueSelector(FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'farSokerType', 'ytelser'),
+const mapStateToProps = (state: any): MappedOwnProps => ({
+  ...formValueSelector(FORM_NAME)(state, 'farSokerType', 'ytelser'),
 });
 
 const RettighetFaktaPanel = connect(mapStateToProps)(RettighetFaktaPanelImpl);

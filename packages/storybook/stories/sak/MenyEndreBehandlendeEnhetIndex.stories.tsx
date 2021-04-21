@@ -4,12 +4,10 @@ import { withKnobs } from '@storybook/addon-knobs';
 
 import MenyEndreBehandlendeEnhetIndex from '@fpsak-frontend/sak-meny-endre-enhet';
 
-import withReduxProvider from '../../decorators/withRedux';
-
 export default {
   title: 'sak/sak-meny-endre-enhet',
   component: MenyEndreBehandlendeEnhetIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visMenyForÅEndreBehandlendeEnhet = () => (

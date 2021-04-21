@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { createSelector } from 'reselect';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import {
   Normaltekst, Element, Undertittel,
 } from 'nav-frontend-typografi';
@@ -10,9 +10,7 @@ import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
 import editUtlandIcon from '@fpsak-frontend/assets/images/endre.svg';
 import editUtlandDisabledIcon from '@fpsak-frontend/assets/images/endre_disablet.svg';
-import {
-  RadioGroupField, RadioOption, behandlingForm, behandlingFormValueSelector,
-} from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
 import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
@@ -57,8 +55,6 @@ type FormValues = {
 }
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
   submitCallback: (data: OverstyringUtenlandssakMarkeringAp) => Promise<void>;
@@ -182,8 +178,11 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
     utlandSakstype: getUtlandSakstype(ownProps.aksjonspunkter),
     gammelVerdi: getUtlandSakstype(ownProps.aksjonspunkter),
   },
-  utlandSakstype: behandlingFormValueSelector('UtlandPanel', ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'utlandSakstype'),
+  utlandSakstype: formValueSelector('UtlandPanel')(state, 'utlandSakstype'),
   onSubmit: lagSubmitFn(ownProps),
 });
 
-export default connect(mapStateToProps)(behandlingForm({ form: 'UtlandPanel' })(injectIntl(UtlandPanelImpl)));
+export default connect(mapStateToProps)(reduxForm({
+  form: 'UtlandPanel',
+  destroyOnUnmount: false,
+})(injectIntl(UtlandPanelImpl)));

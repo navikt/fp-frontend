@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
+import { formValueSelector } from 'redux-form';
 
-import { behandlingFormValueSelector } from '@fpsak-frontend/form';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
@@ -97,10 +97,8 @@ VurderOgFastsettSNImpl.defaultProps = {
 
 const mapStateToPropsFactory = (initialState, ownPropsStatic) => {
   const aksjonspunkt = finnSnAksjonspunkt(ownPropsStatic.gjeldendeAksjonspunkter);
-  return (state, ownProps) => ({
-    erVarigEndretNaering: behandlingFormValueSelector(FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon)(
-      state, 'erVarigEndretNaering',
-    ),
+  return (state) => ({
+    erVarigEndretNaering: formValueSelector(FORM_NAME)(state, 'erVarigEndretNaering'),
     isAksjonspunktClosed: !isAksjonspunktOpen(aksjonspunkt.status.kode),
   });
 };

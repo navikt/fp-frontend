@@ -15,8 +15,6 @@ describe('<LeggTilArbeidsforholdFelter>', () => {
       <LeggTilArbeidsforholdFelter
         readOnly={false}
         formName=""
-        behandlingId={1}
-        behandlingVersjon={1}
       />,
     );
     expect(wrapper.find('[name=\'navn\']')).toHaveLength(1);

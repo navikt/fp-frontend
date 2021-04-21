@@ -9,7 +9,6 @@ import OpptjeningVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-opptjen
 import opptjeningAktivitetKlassifisering from '@fpsak-frontend/prosess-vilkar-opptjening/src/kodeverk/opptjeningAktivitetKlassifisering';
 import { Aksjonspunkt, Behandling, Opptjening } from '@fpsak-frontend/types';
 
-import withReduxProvider from '../../decorators/withRedux';
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
 const behandling = {
@@ -47,12 +46,13 @@ const standardProsessProps = {
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
+  setFormData: () => undefined,
 };
 
 export default {
   title: 'prosess/prosess-vilkar-opptjening',
   component: OpptjeningVilkarProsessIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visPanelForÅpentAksjonspunkt = () => (

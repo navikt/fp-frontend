@@ -3,6 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { KlageVurdering, StandardProsessPanelProps } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import VedtakKlageForm, { ForhandsvisData } from './components/VedtakKlageForm';
 import messages from '../i18n/nb_NO.json';
@@ -22,20 +23,22 @@ const VedtakKlageProsessIndex: FunctionComponent<OwnProps & StandardProsessPanel
   previewVedtakCallback,
   isReadOnly,
   alleKodeverk,
+  formData,
+  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <VedtakKlageForm
-      behandlingId={behandling.id}
-      behandlingVersjon={behandling.versjon}
-      behandlingsresultat={behandling.behandlingsresultat}
-      behandlingPaaVent={behandling.behandlingPaaVent}
-      klageVurdering={klageVurdering}
-      aksjonspunkter={aksjonspunkter}
-      submitCallback={submitCallback}
-      previewVedtakCallback={previewVedtakCallback}
-      readOnly={isReadOnly}
-      alleKodeverk={alleKodeverk}
-    />
+    <ReduxWrapper formName="VedtakKlageProsessIndex" formData={formData} setFormData={setFormData}>
+      <VedtakKlageForm
+        behandlingsresultat={behandling.behandlingsresultat}
+        behandlingPaaVent={behandling.behandlingPaaVent}
+        klageVurdering={klageVurdering}
+        aksjonspunkter={aksjonspunkter}
+        submitCallback={submitCallback}
+        previewVedtakCallback={previewVedtakCallback}
+        readOnly={isReadOnly}
+        alleKodeverk={alleKodeverk}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

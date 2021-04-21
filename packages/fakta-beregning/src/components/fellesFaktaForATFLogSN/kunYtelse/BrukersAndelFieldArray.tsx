@@ -234,7 +234,7 @@ const getInntektskategorierAlfabetiskSortert = createSelector(
 );
 
 const mapStateToProps = (state, ownProps) => {
-  const isBeregningFormDirty = isFormDirty(state, ownProps);
+  const isBeregningFormDirty = isFormDirty(state);
   const aktivitetStatuser = ownProps.alleKodeverk[kodeverkTyper.AKTIVITET_STATUS];
   return {
     isBeregningFormDirty,

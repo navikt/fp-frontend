@@ -7,8 +7,6 @@ import OpptjeningVilkarView from './OpptjeningVilkarView';
 import OpptjeningVilkarAksjonspunktPanel from './OpptjeningVilkarAksjonspunktPanel';
 
 interface OwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   fastsattOpptjening?: FastsattOpptjening;
   aksjonspunkter: Aksjonspunkt[];
@@ -26,8 +24,6 @@ interface OwnProps {
  * Presentasjonskomponent. Viser resultatet av opptjeningsvilkåret.
  */
 const OpptjeningVilkarForm: FunctionComponent<OwnProps> = ({
-  behandlingId,
-  behandlingVersjon,
   behandlingsresultat,
   fastsattOpptjening,
   isAksjonspunktOpen,
@@ -45,8 +41,6 @@ const OpptjeningVilkarForm: FunctionComponent<OwnProps> = ({
         isApOpen={isAksjonspunktOpen}
         readOnly={readOnly}
         readOnlySubmitButton={readOnlySubmitButton}
-        behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
         behandlingsresultat={behandlingsresultat}
         aksjonspunkter={aksjonspunkter}
         status={status}

@@ -6,6 +6,7 @@ import {
   Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import UttakPanel from './components/UttakPanel';
 import messages from '../i18n/nb_NO.json';
@@ -51,34 +52,37 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
   tempUpdateStonadskontoer,
   isAksjonspunktOpen,
   arbeidsgiverOpplysningerPerId,
+  formData,
+  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <UttakPanel
-      fagsak={fagsak}
-      behandlingId={behandling.id}
-      behandlingVersjon={behandling.versjon}
-      behandlingType={behandling.type}
-      behandlingsresultat={behandling.behandlingsresultat}
-      behandlingStatus={behandling.status}
-      sprakkode={behandling.sprakkode}
-      uttaksresultat={uttaksresultatPerioder}
-      stonadskonto={uttakStonadskontoer}
-      aksjonspunkter={aksjonspunkter}
-      employeeHasAccess={employeeHasAccess}
-      soknad={soknad}
-      person={personoversikt}
-      familiehendelse={familiehendelse}
-      uttakPeriodeGrense={uttakPeriodeGrense}
-      alleKodeverk={alleKodeverk}
-      ytelsefordeling={ytelsefordeling}
-      tempUpdateStonadskontoer={tempUpdateStonadskontoer}
-      submitCallback={submitCallback}
-      readOnly={isReadOnly}
-      readOnlySubmitButton={readOnlySubmitButton}
-      apCodes={aksjonspunkter.map((a) => a.definisjon.kode)}
-      isApOpen={isAksjonspunktOpen}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />
+    <ReduxWrapper formName="UttakProsessIndex" formData={formData} setFormData={setFormData}>
+      <UttakPanel
+        fagsak={fagsak}
+        behandlingId={behandling.id}
+        behandlingType={behandling.type}
+        behandlingsresultat={behandling.behandlingsresultat}
+        behandlingStatus={behandling.status}
+        sprakkode={behandling.sprakkode}
+        uttaksresultat={uttaksresultatPerioder}
+        stonadskonto={uttakStonadskontoer}
+        aksjonspunkter={aksjonspunkter}
+        employeeHasAccess={employeeHasAccess}
+        soknad={soknad}
+        person={personoversikt}
+        familiehendelse={familiehendelse}
+        uttakPeriodeGrense={uttakPeriodeGrense}
+        alleKodeverk={alleKodeverk}
+        ytelsefordeling={ytelsefordeling}
+        tempUpdateStonadskontoer={tempUpdateStonadskontoer}
+        submitCallback={submitCallback}
+        readOnly={isReadOnly}
+        readOnlySubmitButton={readOnlySubmitButton}
+        apCodes={aksjonspunkter.map((a) => a.definisjon.kode)}
+        isApOpen={isAksjonspunktOpen}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

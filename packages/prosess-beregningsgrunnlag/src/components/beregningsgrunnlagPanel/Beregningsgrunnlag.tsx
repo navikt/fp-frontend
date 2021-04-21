@@ -54,13 +54,9 @@ const finnAlleAndelerIFørstePeriode = (allePerioder: BeregningsgrunnlagPeriodeP
 };
 
 const createRelevantePaneler = (alleAndelerIForstePeriode : BeregningsgrunnlagAndel[],
-  gjeldendeAksjonspunkter: Aksjonspunkt[],
   relevanteStatuser: RelevanteStatuserProp,
   allePerioder: BeregningsgrunnlagPeriodeProp[],
-  readOnly: boolean,
   gjelderBesteberegning: boolean,
-  behandlingId: number,
-  behandlingVersjon: number,
   alleKodeverk: {[key: string]: KodeverkMedNavn[]},
   sammenligningsGrunnlagInntekter: Inntektsgrunnlag,
   skjeringstidspunktDato: string,
@@ -148,13 +144,9 @@ interface StaticFunctions {
 }
 
 type OwnProps = {
-    readOnly: boolean;
-    gjeldendeAksjonspunkter: Aksjonspunkt[];
     relevanteStatuser: RelevanteStatuserProp;
     allePerioder?: BeregningsgrunnlagPeriodeProp[];
     gjelderBesteberegning: boolean;
-    behandlingId: number;
-    behandlingVersjon: number;
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
     sammenligningsGrunnlagInntekter?: Inntektsgrunnlag;
     skjeringstidspunktDato?: string;
@@ -171,13 +163,9 @@ type OwnProps = {
  * statusene og viser disse samlet i en faktagruppe.
  */
 const Beregningsgrunnlag: FunctionComponent<OwnProps> & StaticFunctions = ({
-  readOnly,
   relevanteStatuser,
-  gjeldendeAksjonspunkter,
   allePerioder,
   gjelderBesteberegning,
-  behandlingId,
-  behandlingVersjon,
   alleKodeverk,
   sammenligningsGrunnlagInntekter,
   skjeringstidspunktDato,
@@ -187,13 +175,9 @@ const Beregningsgrunnlag: FunctionComponent<OwnProps> & StaticFunctions = ({
   return (
     createRelevantePaneler(
       alleAndelerIForstePeriode,
-      gjeldendeAksjonspunkter,
       relevanteStatuser,
       allePerioder,
-      readOnly,
       gjelderBesteberegning,
-      behandlingId,
-      behandlingVersjon,
       alleKodeverk,
       sammenligningsGrunnlagInntekter,
       skjeringstidspunktDato,

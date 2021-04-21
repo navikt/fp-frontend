@@ -17,7 +17,6 @@ import { Vilkar } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import inntektAktivitetType from '@fpsak-frontend/kodeverk/src/inntektAktivitetType';
 import alleKodeverk from '../../mocks/alleKodeverk.json';
-import withReduxProvider from '../../../decorators/withRedux';
 
 const standardFom = '2019-09-16';
 const standardTom = undefined;
@@ -295,7 +294,7 @@ const lagBG = (perioder, statuser, sammenligningsgrunnlagPrStatus) => {
 export default {
   title: 'prosess/prosess-beregningsgrunnlag',
   component: BeregningsgrunnlagProsessIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const arbeidstakerUtenAvvik = () => {
@@ -319,6 +318,7 @@ export const arbeidstakerUtenAvvik = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -352,6 +352,7 @@ export const brukersAndelUtenAvvik = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -381,6 +382,7 @@ export const arbeidstakerMedAvvik = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -412,6 +414,7 @@ export const arbeidstakerFrilansMedAvvikMedGradering = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -437,6 +440,7 @@ export const militær = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -501,6 +505,7 @@ export const selvstendigNæringsdrivende = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -544,6 +549,7 @@ export const tidsbegrensetArbeidsforholdMedAvvik = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -576,6 +582,7 @@ export const arbeidstakerFrilanserOgSelvstendigNæringsdrivende = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -657,6 +664,7 @@ export const naturalYtelse = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -688,6 +696,7 @@ export const arbeidstakerDagpengerOgSelvstendigNæringsdrivende = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -722,6 +731,7 @@ export const graderingPåBeregningsgrunnlagUtenPenger = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -774,6 +784,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeUtenAkjsonspunkt = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -831,6 +842,7 @@ export const arbeidstakerOgFrilansOgSelvstendigNæringsdrivendeMedAksjonspunktBe
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -885,6 +897,7 @@ export const arbeidstakerDagpengerOgSelvstendigNæringsdrivendeUtenAksjonspunkt 
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -925,6 +938,7 @@ export const arbeidstakerMed3Arbeidsforhold2ISammeOrganisasjonSide3 = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -962,6 +976,7 @@ export const arbeidstakerAvslagHalvGSide4 = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -996,6 +1011,7 @@ export const arbeidstakerMedAksjonspunktSide5 = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1031,6 +1047,7 @@ export const arbeidstakerMedAksjonspunktBehandletSide6 = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1074,6 +1091,7 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktkSide7 = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1137,6 +1155,7 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktBehandletSide7 = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1164,6 +1183,7 @@ export const FrilansSide8 = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1192,6 +1212,7 @@ export const FrilansMedAksjonspunktSide9 = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1222,6 +1243,7 @@ export const arbeidstakerFrilansMedAksjonspunktSide10 = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1259,6 +1281,7 @@ export const arbeidstakerFrilansMedAksjonspunktBehandletSide11 = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1312,6 +1335,7 @@ export const SelvstendigNæringsdrivendeUtenVarigEndringIkkeNyoppstartetSide12 =
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1382,6 +1406,7 @@ export const SelvstendigNæringsdrivendeMedVarigEndringSide13 = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1437,6 +1462,7 @@ export const SelvstendigNæringsdrivendeMedVarigEndringMedAksjonspunktSide14 = (
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1495,6 +1521,7 @@ export const SelvstendigNæringsdrivendeMedVarigEndringMedAksjonspunktUtførtSid
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1550,6 +1577,7 @@ export const SelvstendigNæringsdrivendeNyoppstartetMedAksjonspunktSide16 = () =
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1606,6 +1634,7 @@ export const SelvstendigNæringsdrivendeNyINæringslivetMedAksjonspunktSide17 = 
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1659,6 +1688,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeSnStorreEnnAtOgStorreEnn6g
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1713,6 +1743,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeSnMindreEnnAtOgStorreEnn6g
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1767,6 +1798,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeMedAPVarigEndringSide20 = 
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1826,6 +1858,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeMedVarigEndringApBehandlet
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1885,6 +1918,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeAtStorreEnnSNSide22 = () =
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -1939,6 +1973,7 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedApOgVarigEndring
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -2004,6 +2039,7 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedApOgVarigEndring
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -2069,6 +2105,7 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedAPVarigEndringSn
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -2096,6 +2133,7 @@ export const YtelseFraNavSide26 = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -2124,6 +2162,7 @@ export const arbeidstakerOgAAPMedAksjonspunktSide27 = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -2163,6 +2202,7 @@ export const arbeidstakerOgAAPMedAksjonspunktOppfyltSide27 = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -2197,6 +2237,7 @@ export const arbeidstakerDagpengerMedBesteberegningSide28 = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -2231,6 +2272,7 @@ export const frilansDagpengerOgSelvstendigNæringsdrivendeSide29 = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -2265,6 +2307,7 @@ export const frilansDagpengerOgSelvstendigNæringsdrivendeFnOgDpOverstigerSNSide
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -2299,6 +2342,7 @@ export const ArbeidstagerDagpengerOgSelvstendigNæringsdrivendeATOgDpOverstigerS
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -2353,6 +2397,7 @@ export const frilansDagpengerOgSelvstendigNæringsdrivendeMedAksjonspunktSide31 
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };
@@ -2382,6 +2427,7 @@ export const militærOgSiviltjenesteSide33 = () => {
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />
   );
 };

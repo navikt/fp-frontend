@@ -18,8 +18,6 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
       soknadsperiodeSlutt="2017-11-01"
       soknadsfristdato="2017-09-30"
       isApOpen
-      behandlingId={1}
-      behandlingVersjon={1}
       aksjonspunkter={[]}
       submitCallback={() => undefined}
       hasAksjonspunkt={false}
@@ -42,8 +40,6 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
       soknadsperiodeSlutt="2017-11-01"
       soknadsfristdato="2017-09-30"
       isApOpen
-      behandlingId={1}
-      behandlingVersjon={1}
       aksjonspunkter={[]}
       submitCallback={() => undefined}
       hasAksjonspunkt={false}
@@ -70,8 +66,6 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
       soknadsperiodeSlutt="2017-11-01"
       soknadsfristdato="2017-09-30"
       isApOpen
-      behandlingId={1}
-      behandlingVersjon={1}
       aksjonspunkter={[]}
       submitCallback={() => undefined}
       hasAksjonspunkt={false}
@@ -96,8 +90,6 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
       soknadsperiodeSlutt="2017-11-01"
       soknadsfristdato="2017-09-30"
       isApOpen
-      behandlingId={1}
-      behandlingVersjon={1}
       aksjonspunkter={[]}
       submitCallback={() => undefined}
       hasAksjonspunkt={false}
@@ -119,8 +111,6 @@ describe('<VurderSoknadsfristForeldrepengerForm>', () => {
       soknadsperiodeSlutt="2017-11-01"
       soknadsfristdato="2017-09-30"
       isApOpen
-      behandlingId={1}
-      behandlingVersjon={1}
       aksjonspunkter={[]}
       submitCallback={() => undefined}
       hasAksjonspunkt={false}

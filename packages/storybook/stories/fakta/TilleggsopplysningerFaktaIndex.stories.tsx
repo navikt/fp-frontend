@@ -8,7 +8,6 @@ import TilleggsopplysningerFaktaIndex from '@fpsak-frontend/fakta-tilleggsopplys
 import { Behandling, Soknad } from '@fpsak-frontend/types';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
-import withReduxProvider from '../../decorators/withRedux';
 
 const behandling = {
   id: 1,
@@ -39,12 +38,13 @@ const standardFaktaProps = {
   harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
   submittable: boolean('submittable', true),
   alleMerknaderFraBeslutter: {},
+  setFormData: () => undefined,
 };
 
 export default {
   title: 'fakta/fakta-tilleggsopplysninger',
   component: TilleggsopplysningerFaktaIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visAksjonspunktForTilleggsopplysninger = () => (

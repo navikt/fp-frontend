@@ -11,8 +11,6 @@ type OwnProps = {
     readOnly: boolean;
     brukersAndelFieldArrayName: string;
     isAksjonspunktClosed: boolean;
-    behandlingId: number;
-    behandlingVersjon: number;
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 };
 
@@ -27,7 +25,6 @@ const KunYtelseUtenBesteberegningPanel: FunctionComponent<OwnProps> = ({
   readOnly,
   brukersAndelFieldArrayName,
   alleKodeverk,
-  behandlingVersjon, behandlingId,
   isAksjonspunktClosed,
 }) => (
   <BorderBox>
@@ -43,8 +40,6 @@ const KunYtelseUtenBesteberegningPanel: FunctionComponent<OwnProps> = ({
       component={BrukersAndelFieldArray}
       readOnly={readOnly}
       isAksjonspunktClosed={isAksjonspunktClosed}
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       alleKodeverk={alleKodeverk}
     />
   </BorderBox>

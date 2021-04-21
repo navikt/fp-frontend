@@ -46,8 +46,6 @@ describe('<ArbeidsforholdInfoPanel>', () => {
         readOnly={false}
         hasOpenAksjonspunkter
         skalKunneLeggeTilNyeArbeidsforhold={false}
-        behandlingId={1}
-        behandlingVersjon={1}
         alleKodeverk={{}}
         alleMerknaderFraBeslutter={{}}
         arbeidsforhold={[]}
@@ -70,8 +68,6 @@ describe('<ArbeidsforholdInfoPanel>', () => {
         readOnly={false}
         hasOpenAksjonspunkter
         skalKunneLeggeTilNyeArbeidsforhold
-        behandlingId={1}
-        behandlingVersjon={1}
         alleKodeverk={{}}
         alleMerknaderFraBeslutter={{}}
         arbeidsforhold={[]}
@@ -94,8 +90,6 @@ describe('<ArbeidsforholdInfoPanel>', () => {
         readOnly={false}
         hasOpenAksjonspunkter={false}
         skalKunneLeggeTilNyeArbeidsforhold
-        behandlingId={1}
-        behandlingVersjon={1}
         alleKodeverk={{}}
         alleMerknaderFraBeslutter={{}}
         arbeidsforhold={[]}

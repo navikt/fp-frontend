@@ -8,14 +8,12 @@ import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import EngangsstonadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-es';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 
-import withReduxProvider from '../../decorators/withRedux';
-
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
 export default {
   title: 'papirsoknad/papirsoknad-es',
   component: EngangsstonadPapirsoknadIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visPapirsoknadForMorVedFødsel = () => (

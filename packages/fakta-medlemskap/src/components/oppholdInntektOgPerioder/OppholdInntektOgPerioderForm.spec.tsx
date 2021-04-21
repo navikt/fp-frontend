@@ -28,10 +28,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       perioder={perioder}
       readOnly
       alleMerknaderFraBeslutter={{}}
-      behandlingId={2}
-      behandlingVersjon={1}
       alleKodeverk={{}}
-      behandlingFormPrefix=""
       reduxFormReset={() => undefined}
       reduxFormChange={() => undefined}
       soknad={{} as Soknad}
@@ -75,10 +72,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       submittable
       readOnly={false}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={2}
-      behandlingVersjon={1}
       alleKodeverk={{}}
-      behandlingFormPrefix=""
       reduxFormReset={() => undefined}
       reduxFormChange={() => undefined}
       soknad={{} as Soknad}
@@ -125,10 +119,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       submittable
       readOnly={false}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={2}
-      behandlingVersjon={1}
       alleKodeverk={{}}
-      behandlingFormPrefix=""
       reduxFormReset={() => undefined}
       reduxFormChange={() => undefined}
       soknad={{} as Soknad}
@@ -172,10 +163,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       submittable
       readOnly={false}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={2}
-      behandlingVersjon={1}
       alleKodeverk={{}}
-      behandlingFormPrefix=""
       reduxFormReset={() => undefined}
       reduxFormChange={() => undefined}
       soknad={{} as Soknad}
@@ -219,10 +207,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       submittable
       readOnly={false}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={2}
-      behandlingVersjon={1}
       alleKodeverk={{}}
-      behandlingFormPrefix=""
       reduxFormReset={() => undefined}
       reduxFormChange={() => undefined}
       soknad={{} as Soknad}
@@ -266,10 +251,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       submittable
       readOnly={false}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={2}
-      behandlingVersjon={1}
       alleKodeverk={{}}
-      behandlingFormPrefix=""
       reduxFormReset={() => undefined}
       reduxFormChange={() => undefined}
       soknad={{} as Soknad}

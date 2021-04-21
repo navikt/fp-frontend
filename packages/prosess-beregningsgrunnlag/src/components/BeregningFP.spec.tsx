@@ -5,7 +5,7 @@ import { shallow } from 'enzyme/build';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import {
-  Beregningsgrunnlag, Vilkar, Behandling, Aksjonspunkt,
+  Beregningsgrunnlag, Vilkar, Aksjonspunkt,
 } from '@fpsak-frontend/types';
 import BeregningFP from './BeregningFP';
 import BeregningForm from './beregningForm/BeregningForm';
@@ -74,16 +74,6 @@ const gjeldendeAksjonspunkter = [{
   definisjon: { kode: '5038' }, status: { kode: 'OPPR' }, erAktivt: true, toTrinnsBehandling: false,
 } as Aksjonspunkt];
 
-const behandling = {
-  id: 1,
-  versjon: 1,
-  venteArsakKode: '-',
-  sprakkode: {
-    kode: 'NB',
-    kodeverk: 'Språkode',
-  },
-};
-
 describe('<BeregningFP>', () => {
   it('skal teste at BeregningForm får korrekte props fra BeregningFP med beregnetAvvikPromille lik NULL', () => {
     const wrapper = shallow(<BeregningFP
@@ -91,7 +81,6 @@ describe('<BeregningFP>', () => {
       submitCallback={sinon.spy}
       beregningsgrunnlag={lagBeregningsgrunnlag(true, 100000, 100000, null, null)}
       vilkar={vilkar as Vilkar[]}
-      behandling={behandling as Behandling}
       alleKodeverk={{}}
       aksjonspunkter={gjeldendeAksjonspunkter}
       readOnlySubmitButton
@@ -112,7 +101,6 @@ describe('<BeregningFP>', () => {
       submitCallback={sinon.spy}
       beregningsgrunnlag={null}
       vilkar={vilkar as Vilkar[]}
-      behandling={behandling as Behandling}
       alleKodeverk={{}}
       aksjonspunkter={gjeldendeAksjonspunkter}
       readOnlySubmitButton
@@ -133,7 +121,6 @@ describe('<BeregningFP>', () => {
       alleKodeverk={{}}
       beregningsgrunnlag={lagBeregningsgrunnlag(true, 250000, 250000, undefined, null) as Beregningsgrunnlag}
       vilkar={vilkar as Vilkar[]}
-      behandling={behandling as Behandling}
       aksjonspunkter={gjeldendeAksjonspunkter}
       readOnlySubmitButton
       arbeidsgiverOpplysningerPerId={{}}
@@ -149,7 +136,6 @@ describe('<BeregningFP>', () => {
       submitCallback={sinon.spy}
       beregningsgrunnlag={lagBeregningsgrunnlag(true, 250000, 250000, undefined, [{ test: 'test' }]) as Beregningsgrunnlag}
       vilkar={vilkar as Vilkar[]}
-      behandling={behandling as Behandling}
       aksjonspunkter={graderingAP}
       alleKodeverk={{}}
       readOnlySubmitButton
@@ -164,7 +150,6 @@ describe('<BeregningFP>', () => {
       submitCallback={sinon.spy}
       beregningsgrunnlag={lagBeregningsgrunnlag(true, 250000, 250000, undefined, null) as Beregningsgrunnlag}
       vilkar={vilkar as Vilkar[]}
-      behandling={behandling as Behandling}
       aksjonspunkter={gjeldendeAksjonspunkter}
       alleKodeverk={{}}
       readOnlySubmitButton

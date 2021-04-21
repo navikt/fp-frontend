@@ -25,8 +25,6 @@ describe('<SvangerskapVilkarForm>', () => {
       erVilkarOk={undefined}
       status={vilkarUtfallType.OPPFYLT}
       isApOpen
-      behandlingId={1}
-      behandlingVersjon={1}
       aksjonspunkter={[]}
       vilkar={[]}
       submitCallback={() => undefined}

@@ -2,16 +2,14 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createSelector } from 'reselect';
-import { InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
-import {
-  RadioGroupField, RadioOption, TextAreaField, behandlingForm,
-} from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { Aksjonspunkt, Ytelsefordeling } from '@fpsak-frontend/types';
 import { AvklarAnnenforelderHarRettAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -33,8 +31,6 @@ interface PureOwnProps {
   readOnly: boolean;
   hasOpenAksjonspunkter: boolean;
   hasOpenUttakAksjonspunkter: boolean;
-  behandlingVersjon: number;
-  behandlingId: number;
 }
 
 interface MappedOwnProps {
@@ -46,8 +42,6 @@ export const AnnenForelderHarRettForm: FunctionComponent<PureOwnProps & MappedOw
   hasOpenAksjonspunkter,
   hasOpenUttakAksjonspunkter,
   aksjonspunkt,
-  behandlingId,
-  behandlingVersjon,
   readOnly,
   ...formProps
 }) => (
@@ -83,8 +77,6 @@ export const AnnenForelderHarRettForm: FunctionComponent<PureOwnProps & MappedOw
           isSubmittable={!readOnly}
           isReadOnly={readOnly}
           hasOpenAksjonspunkter={hasOpenAksjonspunkter}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
         />
       </div>
       {formProps.error
@@ -123,7 +115,8 @@ const mapStateToProps = (_state: any, ownProps: PureOwnProps): MappedOwnProps =>
   onSubmit: lagSubmitFn(ownProps),
 });
 
-export default connect(mapStateToProps)(behandlingForm({
+export default connect(mapStateToProps)(reduxForm({
   form: 'AnnenForelderHarRettForm',
   enableReinitialize: true,
+  destroyOnUnmount: false,
 })(AnnenForelderHarRettForm));

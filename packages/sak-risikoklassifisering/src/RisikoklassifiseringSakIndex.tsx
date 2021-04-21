@@ -22,8 +22,6 @@ const harResultatkode = (resultatkode: string, risikoklassifisering?: Risikoklas
 };
 
 interface OwnProps {
-  behandlingId?: number;
-  behandlingVersjon?: number;
   aksjonspunkt?: Aksjonspunkt;
   risikoklassifisering?: Risikoklassifisering;
   isPanelOpen: boolean;
@@ -41,8 +39,6 @@ interface OwnProps {
  * om klassifisering er utført og ingen faresignaler er funnet og om klassifisering er utført og faresignaler er funnet
  */
 const RisikoklassifiseringSakIndex: FunctionComponent<OwnProps> = ({
-  behandlingId,
-  behandlingVersjon,
   aksjonspunkt,
   risikoklassifisering,
   isPanelOpen,
@@ -62,8 +58,6 @@ const RisikoklassifiseringSakIndex: FunctionComponent<OwnProps> = ({
       )}
       { harHoyRisikoklassifisering && (
         <HoyRisikoTittel
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
           risikoklassifisering={risikoklassifisering}
           aksjonspunkt={aksjonspunkt}
           readOnly={readOnly}

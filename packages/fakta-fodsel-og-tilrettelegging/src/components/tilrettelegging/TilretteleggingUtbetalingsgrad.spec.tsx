@@ -20,8 +20,6 @@ describe('<TilretteleggingUtbetalingsgrad>', () => {
       changeField={() => undefined}
       index={0}
       overstyrtUtbetalingsgrad="0"
-      behandlingId={1}
-      behandlingVersjon={2}
       formName="test"
     />, messages);
 

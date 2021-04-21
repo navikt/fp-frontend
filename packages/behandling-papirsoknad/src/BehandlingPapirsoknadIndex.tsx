@@ -4,7 +4,6 @@ import React, {
 import { RawIntlProvider } from 'react-intl';
 
 import {
-  ReduxFormStateCleaner,
   StandardBehandlingProps, useBehandling, useInitBehandlingHandlinger, useInitRequestApi, useLagreAksjonspunkt,
 } from '@fpsak-frontend/behandling-felles';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
@@ -49,10 +48,6 @@ const BehandlingPapirsoknadIndex: FunctionComponent<OwnProps & StandardBehandlin
 
   return (
     <>
-      <ReduxFormStateCleaner
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
-      />
       <RawIntlProvider value={intl}>
         <RegistrerPapirsoknad
           behandling={behandling}

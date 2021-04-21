@@ -11,7 +11,6 @@ import AnkeProsessIndex from '@fpsak-frontend/prosess-anke';
 import { Aksjonspunkt, AnkeVurdering, Behandling } from '@fpsak-frontend/types';
 
 import alleKodeverk from '../../mocks/alleKodeverk.json';
-import withReduxProvider from '../../../decorators/withRedux';
 
 const behandling = {
   id: 1,
@@ -41,12 +40,14 @@ const standardProsessProps = {
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
+  formData: {},
+  setFormData: () => undefined,
 };
 
 export default {
   title: 'prosess/anke/prosess-anke',
   component: AnkeProsessIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visPanelForResultatVedStadfestYtelsesvedtak = () => (

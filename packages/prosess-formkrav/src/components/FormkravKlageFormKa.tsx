@@ -1,10 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { behandlingForm } from '@fpsak-frontend/form';
 import { KlageVurdering, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { KlageFormkravAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -22,8 +21,6 @@ type FormValues = {
 }
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   klageVurdering: KlageVurdering;
   submitCallback: (data: KlageFormkravAp) => Promise<void>;
   readOnly: boolean;
@@ -43,8 +40,6 @@ interface MappedOwnProps {
  * Presentasjonskomponent. Setter opp aksjonspunktet for formkrav klage (KA).
  */
 export const FormkravKlageFormKa: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
-  behandlingId,
-  behandlingVersjon,
   readOnly,
   readOnlySubmitButton,
   alleKodeverk,
@@ -53,8 +48,6 @@ export const FormkravKlageFormKa: FunctionComponent<PureOwnProps & MappedOwnProp
 }) => (
   <form onSubmit={formProps.handleSubmit}>
     <FormkravKlageForm
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       readOnly={readOnly}
       readOnlySubmitButton={readOnlySubmitButton}
       aksjonspunktCode={aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_KA}
@@ -105,6 +98,7 @@ const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
   onSubmit: lagSubmitFn(ownProps),
 });
 
-export default connect(mapStateToProps)(behandlingForm({
+export default connect(mapStateToProps)(reduxForm({
   form: formName,
+  destroyOnUnmount: false,
 })(FormkravKlageFormKa));

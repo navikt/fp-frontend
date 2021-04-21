@@ -4,10 +4,11 @@ import React, {
 import { WrappedComponentProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { change as reduxFormChange, FormAction, InjectedFormProps } from 'redux-form';
+import {
+  change as reduxFormChange, FormAction, formValueSelector, InjectedFormProps, reduxForm,
+} from 'redux-form';
 
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
-import { behandlingFormValueSelector, getBehandlingFormPrefix, behandlingForm } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextHTML, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { KodeverkMedNavn, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
@@ -28,8 +29,6 @@ type FormValuesAllRequired = {
 };
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   harApneAksjonspunkter: boolean;
   sorterteAktivitetskrav: UttakKontrollerAktivitetskrav[];
   submitCallback: (aksjonspunkter: KontrollerAktivitetskravAp) => Promise<void>;
@@ -44,7 +43,6 @@ interface MappedOwnProps {
   initialValues: FormValues;
   onSubmit: (formValues: FormValuesAllRequired) => any;
   aktivitetskrav: UttakKontrollerAktivitetskrav[];
-  behandlingFormPrefix: string;
 }
 
 interface DispatchProps {
@@ -53,8 +51,6 @@ interface DispatchProps {
 
 export const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps & DispatchProps & InjectedFormProps & WrappedComponentProps> = ({
   intl,
-  behandlingId,
-  behandlingVersjon,
   harApneAksjonspunkter,
   aktivitetskrav,
   aktivitetskravAvklaringer,
@@ -63,7 +59,6 @@ export const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps & MappedOwn
   readOnly,
   submittable,
   formChange,
-  behandlingFormPrefix,
   ...formProps
 }) => {
   const [valgtAktivitetskrav, setAktivitetskrav] = useState<UttakKontrollerAktivitetskrav>();
@@ -81,7 +76,7 @@ export const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps & MappedOwn
       .concat([oppdatertKrav])
       .sort((a1, a2) => a1.fom.localeCompare(a2.fom));
 
-    formChange(`${behandlingFormPrefix}.${FORM_NAME}`, 'aktivitetskrav', oppdaterteAktivitetskrav);
+    formChange(FORM_NAME, 'aktivitetskrav', oppdaterteAktivitetskrav);
     setAktivitetskrav(oppdaterteAktivitetskrav.find((oa) => !oa.avklaring));
   }, [aktivitetskrav]);
 
@@ -118,8 +113,6 @@ export const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps & MappedOwn
           {valgtAktivitetskrav && (
             <AktivitetskravFaktaDetailForm
               key={valgtAktivitetskrav.fom}
-              behandlingId={behandlingId}
-              behandlingVersjon={behandlingVersjon}
               valgtAktivitetskrav={valgtAktivitetskrav}
               readOnly={readOnly}
               aktivitetskravAvklaringer={aktivitetskravAvklaringer}
@@ -132,8 +125,6 @@ export const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps & MappedOwn
         <VerticalSpacer twentyPx />
         <FaktaSubmitButton
           formName={formProps.form}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
           isSubmittable={isSubmittable}
           isReadOnly={readOnly}
           hasOpenAksjonspunkter={harApneAksjonspunkter}
@@ -160,10 +151,9 @@ const lagSubmitFn = createSelector([
 (submitCallback) => (values: FormValuesAllRequired) => submitCallback(transformValues(values)));
 
 const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => ({
-  behandlingFormPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
   initialValues: buildInitialValues(ownProps),
   onSubmit: lagSubmitFn(ownProps),
-  aktivitetskrav: behandlingFormValueSelector(FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'aktivitetskrav'),
+  aktivitetskrav: formValueSelector(FORM_NAME)(state, 'aktivitetskrav'),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
@@ -172,4 +162,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   }, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(behandlingForm({ form: FORM_NAME })(injectIntl(AktivitetskravFaktaForm)));
+export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
+  form: FORM_NAME,
+  destroyOnUnmount: false,
+})(injectIntl(AktivitetskravFaktaForm)));

@@ -54,15 +54,12 @@ interface OwnProps {
     | AksjonspunktData) => Promise<void>;
   isForeldrepenger?: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  behandlingId: number;
-  behandlingVersjon: number;
   behandlingType: Kodeverk;
   behandlingStatus: Kodeverk;
   soknad: Soknad;
   inntektArbeidYtelse: InntektArbeidYtelse;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   medlemskap: Medlemskap;
-  behandlingPaaVent: boolean;
   readOnlyForStartdatoForForeldrepenger: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
@@ -81,15 +78,12 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps & WrappedComponentProps> =
   submitCallback,
   isForeldrepenger,
   alleMerknaderFraBeslutter,
-  behandlingId,
-  behandlingVersjon,
   behandlingType,
   behandlingStatus,
   soknad,
   inntektArbeidYtelse,
   alleKodeverk,
   medlemskap,
-  behandlingPaaVent,
   readOnlyForStartdatoForForeldrepenger,
   arbeidsgiverOpplysningerPerId,
 }) => {
@@ -105,16 +99,12 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps & WrappedComponentProps> =
         <>
           <StartdatoForForeldrepengerperiodenForm
             intl={intl}
-            readOnly={readOnly}
             aksjonspunkt={avklarStartdatoAksjonspunkt || avklarStartdatoOverstyring}
             submitCallback={submitCallback}
             submittable={submittable}
             hasOpenMedlemskapAksjonspunkter={hasOpenAksjonspunkter}
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             behandlingStatus={behandlingStatus}
-            behandlingPaaVent={behandlingPaaVent}
             aksjonspunkter={aksjonspunkter}
             soknad={soknad}
             inntektArbeidYtelse={inntektArbeidYtelse}
@@ -132,8 +122,6 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps & WrappedComponentProps> =
           submittable={submittable}
           aksjonspunkter={aksjonspunkterMinusAvklarStartDato}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
           behandlingType={behandlingType}
           alleKodeverk={alleKodeverk}
           medlemskap={medlemskap}

@@ -7,8 +7,6 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
 import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 
-import withReduxProvider from '../../decorators/withRedux';
-
 const avklartBarn = [{
   fodselsdato: '2019-01-10',
   dodsdato: '2019-01-10',
@@ -33,7 +31,7 @@ const familiehendelse = {
 export default {
   title: 'prosessOgFakta/prosess-fakta-fodsel-sammenligning',
   component: FodselSammenligningIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visPanelForNårBehandlingstypeErRevurdering = () => (

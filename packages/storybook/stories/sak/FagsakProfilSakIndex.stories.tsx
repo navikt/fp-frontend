@@ -6,12 +6,12 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import FagsakProfilSakIndex from '@fpsak-frontend/sak-fagsak-profil';
 
-import withReduxAndRouterProvider from '../../decorators/withReduxAndRouter';
+import withRouterProvider from '../../decorators/withRouter';
 
 export default {
   title: 'sak/sak-fagsak-profil',
   component: FagsakProfilSakIndex,
-  decorators: [withKnobs, withReduxAndRouterProvider],
+  decorators: [withKnobs, withRouterProvider],
 };
 
 const FAGSAK_STATUS_KODEVERK = 'FAGSAK_STATUS';

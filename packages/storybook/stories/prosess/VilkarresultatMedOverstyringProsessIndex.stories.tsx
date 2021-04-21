@@ -10,7 +10,6 @@ import { Aksjonspunkt, Behandling, Medlemskap } from '@fpsak-frontend/types';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
-import withReduxProvider from '../../decorators/withRedux';
 
 const avslagsarsaker = [{
   kode: 'AVSLAG_TEST_1',
@@ -32,12 +31,13 @@ const standardProsessProps = {
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
+  setFormData: () => undefined,
 };
 
 export default {
   title: 'prosess/prosess-vilkar-overstyring',
   component: VilkarresultatMedOverstyringProsessIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visOverstyringspanelForFødsel = () => {

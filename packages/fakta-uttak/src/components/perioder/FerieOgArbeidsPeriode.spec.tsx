@@ -33,8 +33,6 @@ describe('<FerieOgArbeidsPeriode>', () => {
       readOnly={false}
       behandlingStatusKode={behandlingStatusKode}
       skalViseResultat
-      behandlingId={1}
-      behandlingVersjon={2}
       arbeidstidprosent={10}
       onSubmit={sinon.spy()}
       {...reduxFormPropsMock}

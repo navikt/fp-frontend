@@ -9,7 +9,6 @@ import arbeidsforholdKilder from '@fpsak-frontend/fakta-arbeidsforhold/src/kodev
 import { Behandling, InntektArbeidYtelse } from '@fpsak-frontend/types';
 
 import { iay as flereArbfor, ap as apFlereArbfor } from './scenario/FlereArbforMedAksjonspunkt';
-import withReduxProvider from '../../../decorators/withRedux';
 
 import alleKodeverk from '../../mocks/alleKodeverk.json';
 
@@ -64,12 +63,13 @@ const standardFaktaProps = {
   harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
   submittable: boolean('submittable', true),
   alleMerknaderFraBeslutter: {},
+  setFormData: () => undefined,
 };
 
 export default {
   title: 'fakta/fakta-arbeidsforhold',
   component: ArbeidsforholdFaktaIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visAksjonspunktForAvklaringAvArbeidsforhold = () => (

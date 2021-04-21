@@ -7,12 +7,10 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import MenyNyBehandlingIndex from '@fpsak-frontend/sak-meny-ny-behandling';
 
-import withReduxProvider from '../../decorators/withRedux';
-
 export default {
   title: 'sak/sak-meny-ny-behandling',
   component: MenyNyBehandlingIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 const behandlingstyper = [{

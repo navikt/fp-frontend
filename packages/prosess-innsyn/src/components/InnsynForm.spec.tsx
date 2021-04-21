@@ -23,8 +23,6 @@ describe('<InnsynForm>', () => {
       documents={[]}
       vedtaksdokumenter={[]}
       isApOpen
-      behandlingId={1}
-      behandlingVersjon={2}
       behandlingPaaVent={false}
       innsynMottattDato=""
       innsynDokumenter={[]}
@@ -61,8 +59,6 @@ describe('<InnsynForm>', () => {
       documents={[]}
       vedtaksdokumenter={[]}
       isApOpen
-      behandlingId={1}
-      behandlingVersjon={2}
       behandlingPaaVent={false}
       innsynMottattDato=""
       innsynDokumenter={[]}

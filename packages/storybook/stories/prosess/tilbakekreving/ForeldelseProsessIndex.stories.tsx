@@ -10,8 +10,6 @@ import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjon
 import ForeldelseProsessIndex from '@fpsak-frontend/prosess-foreldelse';
 import { Behandling, FeilutbetalingPerioderWrapper } from '@fpsak-frontend/types';
 
-import withReduxProvider from '../../../decorators/withRedux';
-
 const perioderForeldelse = {
   perioder: [{
     fom: '2019-01-01',
@@ -92,12 +90,13 @@ const standardProsessProps = {
   readOnlySubmitButton: false,
   status: '',
   vilkar: [],
+  setFormData: () => undefined,
 };
 
 export default {
   title: 'prosess/tilbakekreving/prosess-foreldelse',
   component: ForeldelseProsessIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 const beregnBelop = (params) => {

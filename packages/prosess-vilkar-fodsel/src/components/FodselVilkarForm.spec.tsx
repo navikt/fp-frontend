@@ -32,8 +32,6 @@ describe('<FodselVilkarForm>', () => {
       erVilkarOk={false}
       status={vilkarUtfallType.OPPFYLT}
       isApOpen
-      behandlingId={1}
-      behandlingVersjon={1}
       aksjonspunkter={[]}
       vilkar={[]}
       ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
@@ -66,8 +64,6 @@ describe('<FodselVilkarForm>', () => {
       erVilkarOk={undefined}
       status={vilkarUtfallType.OPPFYLT}
       isApOpen
-      behandlingId={1}
-      behandlingVersjon={1}
       aksjonspunkter={[]}
       vilkar={[]}
       ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
@@ -104,8 +100,6 @@ describe('<FodselVilkarForm>', () => {
       erVilkarOk
       status={vilkarUtfallType.OPPFYLT}
       isApOpen
-      behandlingId={1}
-      behandlingVersjon={1}
       aksjonspunkter={[]}
       vilkar={[]}
       ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}

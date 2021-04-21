@@ -1,10 +1,7 @@
 import React, { Component, ReactElement, ReactNode } from 'react';
-import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { change as reduxChange } from 'redux-form';
-
-import { getBehandlingFormName } from '@fpsak-frontend/form';
 
 const findAllNames = (children: any): any[] => (children ? React.Children
   .map(children, (child) => {
@@ -20,8 +17,6 @@ const findAllNames = (children: any): any[] => (children ? React.Children
 
 interface PureOwnProps {
   formName: string;
-  behandlingId: number;
-  behandlingVersjon: number;
   fieldNames: string[];
   children: ReactNode | ReactElement;
 }
@@ -83,15 +78,8 @@ export class BehandlingFormFieldCleaner extends Component<PureOwnProps & MappedO
   }
 }
 
-const getCompleteFormName = createSelector(
-  [(ownProps: PureOwnProps) => ownProps.formName,
-    (ownProps: PureOwnProps) => ownProps.behandlingId,
-    (ownProps: PureOwnProps) => ownProps.behandlingVersjon],
-  (formName, behandlingId, versjon): string => getBehandlingFormName(behandlingId, versjon, formName),
-);
-
 const mapStateToProps = (_state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  behandlingFormName: getCompleteFormName(ownProps),
+  behandlingFormName: ownProps.formName,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

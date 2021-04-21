@@ -8,12 +8,10 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { FatterVedtakTotrinnskontrollModalSakIndex } from '@fpsak-frontend/sak-totrinnskontroll';
 import { Behandling } from '@fpsak-frontend/types';
 
-import withReduxProvider from '../../decorators/withRedux';
-
 export default {
   title: 'sak/sak-totrinnskontroll-fatter-vedtak-modal',
   component: FatterVedtakTotrinnskontrollModalSakIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 export const visModalEtterGodkjenning = () => (

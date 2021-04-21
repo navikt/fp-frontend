@@ -28,8 +28,6 @@ describe('<TermindatoFaktaForm>', () => {
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.TERMINBEKREFTELSE]: {},
       }}
-      behandlingId={1}
-      behandlingVersjon={2}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       aksjonspunkt={{} as Aksjonspunkt}
       soknad={{} as Soknad}
@@ -55,8 +53,6 @@ describe('<TermindatoFaktaForm>', () => {
       alleMerknaderFraBeslutter={{
         [aksjonspunktCodes.TERMINBEKREFTELSE]: {},
       }}
-      behandlingId={1}
-      behandlingVersjon={2}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       aksjonspunkt={{} as Aksjonspunkt}
       soknad={{} as Soknad}

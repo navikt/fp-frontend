@@ -8,7 +8,7 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';
 import { Behandling, KlageVurdering } from '@fpsak-frontend/types';
 
-import withReduxAndRouterProvider from '../../decorators/withReduxAndRouter';
+import withRouterProvider from '../../decorators/withRouter';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
@@ -81,7 +81,7 @@ const behandling = {
 export default {
   title: 'sak/sak-totrinnskontroll',
   component: TotrinnskontrollSakIndex,
-  decorators: [withKnobs, withReduxAndRouterProvider],
+  decorators: [withKnobs, withRouterProvider],
 };
 
 export const visTotrinnskontrollForBeslutter = () => (

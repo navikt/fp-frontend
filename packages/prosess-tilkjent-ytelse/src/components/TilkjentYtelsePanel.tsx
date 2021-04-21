@@ -53,8 +53,6 @@ const finnTilbaketrekkAksjonspunkt = (alleAksjonspunkter: Aksjonspunkt[]): Aksjo
   : undefined);
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   beregningresultat: BeregningsresultatFp;
   familieHendelseSamling: FamilieHendelseSamling;
   personoversikt: Personoversikt;
@@ -75,8 +73,6 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
   submitCallback,
   readOnlySubmitButton,
   alleKodeverk,
-  behandlingId,
-  behandlingVersjon,
   arbeidsgiverOpplysningerPerId,
   feriepengegrunnlag,
   familieHendelseSamling,
@@ -113,8 +109,6 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
       )}
       {vurderTilbaketrekkAP && (
         <Tilbaketrekkpanel
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
           readOnly={readOnly}
           vurderTilbaketrekkAP={vurderTilbaketrekkAP}
           submitCallback={submitCallback}

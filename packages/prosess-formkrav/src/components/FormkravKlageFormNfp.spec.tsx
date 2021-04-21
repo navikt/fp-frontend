@@ -13,8 +13,6 @@ describe('<FormkravKlageFormNfp>', () => {
     const wrapper = shallowWithIntl(<FormkravKlageFormNfpImpl
       readOnly={false}
       readOnlySubmitButton
-      behandlingId={1}
-      behandlingVersjon={2}
       alleKodeverk={{}}
       avsluttedeBehandlinger={[]}
       klageVurdering={{} as KlageVurdering}

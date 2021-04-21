@@ -32,6 +32,7 @@ describe('<AktivitetskravFaktaIndex>', () => {
       readOnly={false}
       submittable
       aksjonspunkter={[]}
+      setFormData={() => undefined}
     />);
 
     expect(wrapper.find(AktivitetskravFaktaForm).prop('sorterteAktivitetskrav')).toEqual([{

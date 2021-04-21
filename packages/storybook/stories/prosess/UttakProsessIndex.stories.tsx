@@ -7,14 +7,12 @@ import {
   Behandling, Fagsak, FamilieHendelseSamling, Personoversikt, Soknad, UttakStonadskontoer,
 } from '@fpsak-frontend/types';
 
-import withReduxProvider from '../../decorators/withRedux';
-
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
 export default {
   title: 'prosess/prosess-uttak',
   component: UttakProsessIndex,
-  decorators: [withKnobs, withReduxProvider],
+  decorators: [withKnobs],
 };
 
 const aksjonspunkter = [
@@ -527,5 +525,6 @@ export const visProsessUttak = () => (
     vilkar={[]}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     alleMerknaderFraBeslutter={{}}
+    setFormData={() => undefined}
   />
 );

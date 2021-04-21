@@ -82,8 +82,6 @@ const createAndelerTableRows = (
   fields,
   readOnly,
   beregningsgrunnlag,
-  behandlingId,
-  behandlingVersjon,
   isAksjonspunktClosed,
   alleKodeverk,
 ) => fields.map((andelElementFieldId, index) => (
@@ -97,15 +95,13 @@ const createAndelerTableRows = (
     readOnly={readOnly}
     removeAndel={removeAndel(fields, index)}
     index={index}
-    behandlingId={behandlingId}
     beregningsgrunnlag={beregningsgrunnlag}
-    behandlingVersjon={behandlingVersjon}
     isAksjonspunktClosed={isAksjonspunktClosed}
     alleKodeverk={alleKodeverk}
   />
 ));
 
-const createBruttoBGSummaryRow = (fields, readOnly, beregningsgrunnlag, behandlingId, behandlingVersjon) => (
+const createBruttoBGSummaryRow = (fields, readOnly, beregningsgrunnlag) => (
   <SummaryRow
     readOnly={readOnly}
     key="summaryRow"
@@ -113,8 +109,6 @@ const createBruttoBGSummaryRow = (fields, readOnly, beregningsgrunnlag, behandli
     skalViseRefusjon={skalViseRefusjon(fields)}
     fields={fields}
     beregningsgrunnlag={beregningsgrunnlag}
-    behandlingId={behandlingId}
-    behandlingVersjon={behandlingVersjon}
   />
 );
 
@@ -184,8 +178,6 @@ type OwnProps = {
     skalKunneLeggeTilDagpengerManuelt: boolean;
     skalHaBesteberegning: boolean;
     skalHaMilitær?: boolean,
-    behandlingId: number;
-    behandlingVersjon: number;
     beregningsgrunnlag: Beregningsgrunnlag;
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
     isAksjonspunktClosed: boolean;
@@ -213,8 +205,6 @@ export const InntektFieldArray: FunctionComponent<OwnProps> & StaticFunctions = 
   readOnly,
   isBeregningFormDirty,
   skalKunneLeggeTilDagpengerManuelt,
-  behandlingId,
-  behandlingVersjon,
   beregningsgrunnlag,
   isAksjonspunktClosed,
   alleKodeverk,
@@ -223,8 +213,6 @@ export const InntektFieldArray: FunctionComponent<OwnProps> & StaticFunctions = 
     fields,
     readOnly,
     beregningsgrunnlag,
-    behandlingId,
-    behandlingVersjon,
     isAksjonspunktClosed,
     alleKodeverk,
   );
@@ -245,7 +233,7 @@ export const InntektFieldArray: FunctionComponent<OwnProps> & StaticFunctions = 
     }
     return null;
   }
-  tablerows.push(createBruttoBGSummaryRow(fields, readOnly, beregningsgrunnlag, behandlingId, behandlingVersjon));
+  tablerows.push(createBruttoBGSummaryRow(fields, readOnly, beregningsgrunnlag));
   return (
     <NavFieldGroup errorMessage={getErrorMessage(meta, isBeregningFormDirty)}>
       <Table headerTextCodes={getHeaderTextCodes(skalVisePeriode(fields), skalViseRefusjon(fields))} noHover classNameTable={styles.inntektTable}>
@@ -324,10 +312,10 @@ InntektFieldArray.buildInitialValues = (andeler: AndelForFaktaOmBeregning[],
 };
 
 export const mapStateToProps = (state, ownProps) => {
-  const isBeregningFormDirty = isFormDirty(state, ownProps);
+  const isBeregningFormDirty = isFormDirty(state);
   const aktivitetStatuser = ownProps.alleKodeverk[kodeverkTyper.AKTIVITET_STATUS];
-  const skalHaBesteberegning = skalHaBesteberegningSelector(state, ownProps) === true;
-  const skalHaMilitær = getFormValuesForBeregning(state, ownProps)[vurderMilitaerField];
+  const skalHaBesteberegning = skalHaBesteberegningSelector(state) === true;
+  const skalHaMilitær = getFormValuesForBeregning(state)[vurderMilitaerField];
   const tilfeller = ownProps.beregningsgrunnlag.faktaOmBeregning.faktaOmBeregningTilfeller
     ? ownProps.beregningsgrunnlag.faktaOmBeregning.faktaOmBeregningTilfeller.map(({ kode }) => kode) : [];
   fjernEllerLeggTilMilitær(ownProps.fields, skalHaMilitær, aktivitetStatuser);

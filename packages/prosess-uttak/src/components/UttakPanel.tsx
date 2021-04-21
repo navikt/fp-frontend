@@ -1,12 +1,11 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { createSelector } from 'reselect';
 import { Undertittel } from 'nav-frontend-typografi';
 
 import { omitOne } from '@fpsak-frontend/utils';
-import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AlertStripe from 'nav-frontend-alertstriper';
@@ -85,7 +84,6 @@ interface FormValues {
 interface PureOwnProps {
   fagsak: Fagsak;
   behandlingId: number;
-  behandlingVersjon: number;
   behandlingType: Kodeverk;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   behandlingStatus: Kodeverk;
@@ -134,7 +132,6 @@ export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & W
   behandlingType,
   behandlingStatus,
   alleKodeverk,
-  behandlingVersjon,
   employeeHasAccess,
   behandlingsresultat,
   tempUpdateStonadskontoer,
@@ -173,7 +170,6 @@ export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & W
           ytelsefordeling={ytelsefordeling}
           behandlingId={behandlingId}
           behandlingType={behandlingType}
-          behandlingVersjon={behandlingVersjon}
           behandlingStatus={behandlingStatus}
           fagsak={fagsak}
           alleKodeverk={alleKodeverk}
@@ -414,8 +410,7 @@ const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
 (submitCallback, apCodes, aksjonspunkter) => (values: FormValues) => submitCallback(transformValues(values, apCodes, aksjonspunkter)));
 
-const mapStateToPropsFactory = (_initialState, initOwnProps: PureOwnProps) => {
-  const { behandlingId, behandlingVersjon } = initOwnProps;
+const mapStateToPropsFactory = () => {
   const validate = (values: FormValues) => validateUttakPanelForm(values);
 
   return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
@@ -425,14 +420,15 @@ const mapStateToPropsFactory = (_initialState, initOwnProps: PureOwnProps) => {
       validate,
       initialValues,
       onSubmit: lagSubmitFn(ownProps),
-      manuellOverstyring: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'manuellOverstyring'),
+      manuellOverstyring: formValueSelector(formName)(state, 'manuellOverstyring'),
     };
   };
 };
 
-const UttakPanel = connect(mapStateToPropsFactory)(injectIntl(behandlingForm({
+const UttakPanel = connect(mapStateToPropsFactory)(reduxForm({
   form: formName,
   enableReinitialize: false,
-})(UttakPanelImpl)));
+  destroyOnUnmount: false,
+})(injectIntl(UttakPanelImpl)));
 
 export default UttakPanel;

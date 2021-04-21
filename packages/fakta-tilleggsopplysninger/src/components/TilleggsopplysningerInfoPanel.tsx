@@ -8,8 +8,6 @@ import TilleggsopplysningerFaktaForm from './TilleggsopplysningerFaktaForm';
 interface PureOwnProps {
   hasOpenAksjonspunkter: boolean;
   readOnly: boolean;
-  behandlingId: number;
-  behandlingVersjon: number;
   tilleggsopplysninger?: string;
   submitCallback: (data: AvklarTilleggsopplysningerAp) => Promise<void>;
 }

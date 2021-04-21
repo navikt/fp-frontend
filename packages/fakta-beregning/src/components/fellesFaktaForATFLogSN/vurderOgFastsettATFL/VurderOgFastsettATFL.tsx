@@ -74,16 +74,13 @@ export const findInstruksjonForFastsetting = (skalHaBesteberegning, skalFastsett
   return ' ';
 };
 
-const finnInntektstabell = (readOnly, behandlingId,
-  behandlingVersjon, beregningsgrunnlag,
+const finnInntektstabell = (readOnly, beregningsgrunnlag,
   isAksjonspunktClosed, alleKodeverk, erOverstyrt, arbeidsgiverOpplysningerPerId) => (
     <FieldArray
       name={INNTEKT_FIELD_ARRAY_NAME}
       component={InntektFieldArray}
       readOnly={readOnly}
       skalKunneLeggeTilDagpengerManuelt={erOverstyrt}
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       beregningsgrunnlag={beregningsgrunnlag}
       alleKodeverk={alleKodeverk}
       isAksjonspunktClosed={isAksjonspunktClosed}
@@ -101,8 +98,6 @@ type OwnProps = {
     skalHaBesteberegning: boolean;
     harKunstigArbeid: boolean;
     skalViseTabell: boolean;
-    behandlingId: number;
-    behandlingVersjon: number;
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
     erOverstyrer: boolean;
     aksjonspunkter: Aksjonspunkt[];
@@ -141,8 +136,6 @@ const VurderOgFastsettATFL: FunctionComponent<OwnProps> & StaticFunctions = ({
   skalHaBesteberegning,
   harKunstigArbeid,
   skalViseTabell,
-  behandlingId,
-  behandlingVersjon,
   aksjonspunkter,
   alleKodeverk,
   erOverstyrer,
@@ -153,8 +146,6 @@ const VurderOgFastsettATFL: FunctionComponent<OwnProps> & StaticFunctions = ({
     <InntektstabellPanel
       key="inntektstabell"
       tabell={finnInntektstabell(readOnly,
-        behandlingId,
-        behandlingVersjon,
         beregningsgrunnlag,
         isAksjonspunktClosed,
         alleKodeverk,
@@ -165,8 +156,6 @@ const VurderOgFastsettATFL: FunctionComponent<OwnProps> & StaticFunctions = ({
       readOnly={readOnly}
       erOverstyrer={erOverstyrer}
       aksjonspunkter={aksjonspunkter}
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
     >
       <ATFLSammeOrgTekst
         beregningsgrunnlag={beregningsgrunnlag}
@@ -184,8 +173,6 @@ const VurderOgFastsettATFL: FunctionComponent<OwnProps> & StaticFunctions = ({
         <VurderEtterlonnSluttpakkeForm
           readOnly={readOnly}
           isAksjonspunktClosed={isAksjonspunktClosed}
-          behandlingVersjon={behandlingVersjon}
-          behandlingId={behandlingId}
         />
       )}
       {tilfeller.includes(faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL)
@@ -212,8 +199,6 @@ const VurderOgFastsettATFL: FunctionComponent<OwnProps> & StaticFunctions = ({
           readOnly={readOnly}
           isAksjonspunktClosed={isAksjonspunktClosed}
           erOverstyrt={erOverstyrt}
-          behandlingVersjon={behandlingVersjon}
-          behandlingId={behandlingId}
         />
       )}
     </InntektstabellPanel>
@@ -363,7 +348,7 @@ const mapStateToProps = (state, ownProps) => ({
   erOverstyrt: erOverstyringAvBeregningsgrunnlag(state, ownProps),
   skalFastsetteAT: skalFastsettInntektForArbeidstaker(state, ownProps),
   skalFastsetteFL: skalFastsettInntektForFrilans(state, ownProps),
-  skalHaBesteberegning: getFormValuesForBeregning(state, ownProps)[besteberegningField] === true,
+  skalHaBesteberegning: getFormValuesForBeregning(state)[besteberegningField] === true,
   manglerInntektsmelding: getManglerInntektsmelding(ownProps),
   skalViseTabell: getSkalViseTabell(state, ownProps),
   harKunstigArbeid: harKunstigArbeidsforhold(ownProps.tilfeller, ownProps.beregningsgrunnlag),

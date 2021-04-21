@@ -5,13 +5,12 @@ import {
 } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 
 import {
-  CheckboxField, RadioGroupField, RadioOption, SelectField, TextAreaField, behandlingForm, behandlingFormValueSelector,
-  hasBehandlingFormErrorsOfType, isBehandlingFormDirty, isBehandlingFormSubmitting,
+  CheckboxField, RadioGroupField, RadioOption, SelectField, TextAreaField,
 } from '@fpsak-frontend/form';
 import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
@@ -138,8 +137,6 @@ const SKAL_REALITETSBEHANDLES = {
 const filtrerKlage = (behandlinger: BehandlingInfo[] = []): BehandlingInfo[] => behandlinger.filter((b) => b.type.kode === behandlingType.KLAGE);
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: AnkeVurderingResultatAp) => Promise<void>;
   ankeVurderingResultat: AnkeVurdering['ankeVurderingResultat'];
@@ -163,8 +160,6 @@ interface MappedOwnProps {
  * Presentasjonskomponent. Setter opp aksjonspunktet for behandling.
  */
 const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
-  behandlingId,
-  behandlingVersjon,
   readOnly,
   handleSubmit,
   saveAnke,
@@ -311,13 +306,8 @@ const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps & Wrappe
         <Column xs="8">
           <ProsessStegSubmitButton
             formName={formProps.form}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             isReadOnly={readOnly}
             isSubmittable={!readOnly && !readOnlySubmitButton}
-            isBehandlingFormSubmitting={isBehandlingFormSubmitting}
-            isBehandlingFormDirty={isBehandlingFormDirty}
-            hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
           />
           {skalViseForhaandlenke(formValues.ankeVurdering)
           && (
@@ -393,7 +383,7 @@ const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitC
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   aksjonspunktCode: ownProps.aksjonspunkter[0].definisjon.kode,
   initialValues: buildInitialValues(ownProps),
-  formValues: behandlingFormValueSelector(formName, ownProps.behandlingId, ownProps.behandlingVersjon)(state,
+  formValues: formValueSelector(formName)(state,
     'vedtak',
     'ankeVurdering',
     'begrunnelse',
@@ -404,6 +394,7 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
   onSubmit: lagSubmitFn(ownProps),
 });
 
-export default connect(mapStateToProps)(behandlingForm({
+export default connect(mapStateToProps)(reduxForm({
   form: formName,
+  destroyOnUnmount: false,
 })(injectIntl(BehandleAnkeForm)));

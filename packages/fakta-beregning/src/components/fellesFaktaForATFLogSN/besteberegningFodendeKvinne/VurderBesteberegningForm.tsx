@@ -26,8 +26,6 @@ type OwnProps = {
     readOnly: boolean;
     isAksjonspunktClosed: boolean;
     erOverstyrt: boolean;
-    behandlingId: number;
-    behandlingVersjon: number;
 };
 
 interface StaticFunctions {
@@ -158,8 +156,8 @@ export const vurderBesteberegningTransform = (faktaOmBeregning) => (values, innt
   });
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  erBesteberegning: getFormValuesForBeregning(state, ownProps)[besteberegningField],
+const mapStateToProps = (state) => ({
+  erBesteberegning: getFormValuesForBeregning(state)[besteberegningField],
 });
 
 export default connect(mapStateToProps)(VurderBesteberegningPanelImpl);

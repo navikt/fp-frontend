@@ -10,6 +10,7 @@ import {
 } from '@fpsak-frontend/types';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import VedtakForm, { ForhandsvisData } from './components/forstegang/VedtakForm';
 import VedtakRevurderingForm from './components/revurdering/VedtakRevurderingForm';
@@ -60,6 +61,8 @@ const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
   submitCallback,
   ytelseTypeKode,
   alleKodeverk,
+  formData,
+  setFormData,
 }) => {
   const beregningErManueltFastsatt = skalSkriveFritekstGrunnetFastsettingAvBeregning(aksjonspunkter, beregningsgrunnlag);
   const resultatstruktur = ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD
@@ -73,44 +76,42 @@ const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
 
   return (
     <RawIntlProvider value={intl}>
-      {behandling.type.kode !== behandlingType.REVURDERING && (
-        <VedtakForm
-          behandling={behandling}
-          behandlingId={behandling.id}
-          behandlingVersjon={behandling.versjon}
-          submitCallback={submitCallback}
-          readOnly={isReadOnly}
-          previewCallback={previewCallback}
-          tilbakekrevingvalg={tilbakekrevingvalg}
-          simuleringResultat={simuleringResultat}
-          resultatstruktur={resultatstruktur}
-          aksjonspunkter={aksjonspunkter}
-          ytelseTypeKode={ytelseTypeKode}
-          alleKodeverk={alleKodeverk}
-          vilkar={vilkar}
-          beregningErManueltFastsatt={beregningErManueltFastsatt}
-        />
-      )}
-      {behandling.type.kode === behandlingType.REVURDERING && (
-        <VedtakRevurderingForm
-          behandling={behandling}
-          behandlingId={behandling.id}
-          behandlingVersjon={behandling.versjon}
-          submitCallback={submitCallback}
-          readOnly={isReadOnly}
-          previewCallback={previewCallback}
-          tilbakekrevingvalg={tilbakekrevingvalg}
-          simuleringResultat={simuleringResultat}
-          resultatstruktur={resultatstruktur}
-          aksjonspunkter={aksjonspunkter}
-          ytelseTypeKode={ytelseTypeKode}
-          alleKodeverk={alleKodeverk}
-          vilkar={vilkar}
-          beregningErManueltFastsatt={beregningErManueltFastsatt}
-          resultatstrukturOriginalBehandling={originaltBeregningsresultat}
-          medlemskapFom={medlemskap ? medlemskap.fom : undefined}
-        />
-      )}
+      <ReduxWrapper formName="VedtakProsessIndex" formData={formData} setFormData={setFormData}>
+        {behandling.type.kode !== behandlingType.REVURDERING && (
+          <VedtakForm
+            behandling={behandling}
+            submitCallback={submitCallback}
+            readOnly={isReadOnly}
+            previewCallback={previewCallback}
+            tilbakekrevingvalg={tilbakekrevingvalg}
+            simuleringResultat={simuleringResultat}
+            resultatstruktur={resultatstruktur}
+            aksjonspunkter={aksjonspunkter}
+            ytelseTypeKode={ytelseTypeKode}
+            alleKodeverk={alleKodeverk}
+            vilkar={vilkar}
+            beregningErManueltFastsatt={beregningErManueltFastsatt}
+          />
+        )}
+        {behandling.type.kode === behandlingType.REVURDERING && (
+          <VedtakRevurderingForm
+            behandling={behandling}
+            submitCallback={submitCallback}
+            readOnly={isReadOnly}
+            previewCallback={previewCallback}
+            tilbakekrevingvalg={tilbakekrevingvalg}
+            simuleringResultat={simuleringResultat}
+            resultatstruktur={resultatstruktur}
+            aksjonspunkter={aksjonspunkter}
+            ytelseTypeKode={ytelseTypeKode}
+            alleKodeverk={alleKodeverk}
+            vilkar={vilkar}
+            beregningErManueltFastsatt={beregningErManueltFastsatt}
+            resultatstrukturOriginalBehandling={originaltBeregningsresultat}
+            medlemskapFom={medlemskap ? medlemskap.fom : undefined}
+          />
+        )}
+      </ReduxWrapper>
     </RawIntlProvider>
   );
 };

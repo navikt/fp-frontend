@@ -31,8 +31,6 @@ describe('<VurderEndringRefusjonRad>', () => {
     const andel = lagAndel(true, '999999999', undefined, '2020-01-01') as RefusjonTilVurderingAndel;
     const stp = '2020-01-01';
     const wrapper = shallow(<VurderEndringRefusjonRadImpl
-      behandlingVersjon={0}
-      behandlingId={0}
       erAksjonspunktÅpent
       readOnly={false}
       refusjonAndel={andel}
@@ -52,8 +50,6 @@ describe('<VurderEndringRefusjonRad>', () => {
     const andel = lagAndel(true, '999999999', undefined, '2020-01-01') as RefusjonTilVurderingAndel;
     const stp = '2020-01-01';
     const wrapper = shallow(<VurderEndringRefusjonRadImpl
-      behandlingVersjon={0}
-      behandlingId={0}
       erAksjonspunktÅpent
       readOnly={false}
       refusjonAndel={andel}

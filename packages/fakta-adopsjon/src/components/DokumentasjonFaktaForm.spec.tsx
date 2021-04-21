@@ -33,8 +33,6 @@ describe('<DokumentasjonFaktaForm>', () => {
       hasEktefellesBarnAksjonspunkt={false}
       editedStatus={editedStatus}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
     />, messages);
     const datepickers = wrapper.find('DatepickerField');
     expect(datepickers).toHaveLength(3);
@@ -62,8 +60,6 @@ describe('<DokumentasjonFaktaForm>', () => {
       hasEktefellesBarnAksjonspunkt={false}
       editedStatus={editedStatus}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
     />, messages);
 
     const antallBarnUnder15Ar = wrapper.find('Normaltekst');
@@ -80,8 +76,6 @@ describe('<DokumentasjonFaktaForm>', () => {
       hasEktefellesBarnAksjonspunkt={false}
       editedStatus={editedStatus}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
     />, messages);
 
     const antallBarnUnder15Ar = wrapper.find('Normaltekst');
@@ -98,8 +92,6 @@ describe('<DokumentasjonFaktaForm>', () => {
       hasEktefellesBarnAksjonspunkt={false}
       editedStatus={editedStatus}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
     />, messages);
 
     const antallBarnUnder15Ar = wrapper.find('Normaltekst');
@@ -131,8 +123,6 @@ describe('<DokumentasjonFaktaForm>', () => {
       hasEktefellesBarnAksjonspunkt={false}
       editedStatus={editedStatus}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
     />, messages);
 
     const dateField = wrapper.find('[name="barnetsAnkomstTilNorgeDato"]');
@@ -148,8 +138,6 @@ describe('<DokumentasjonFaktaForm>', () => {
       hasEktefellesBarnAksjonspunkt={false}
       editedStatus={editedStatus}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
     />, messages);
 
     const dateField = wrapper.find('[name="barnetsAnkomstTilNorgeDato"]');
@@ -165,8 +153,6 @@ describe('<DokumentasjonFaktaForm>', () => {
       hasEktefellesBarnAksjonspunkt
       editedStatus={editedStatus}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
     />, messages);
 
     const dateField = wrapper.find('[name="omsorgsovertakelseDato"]');
@@ -182,8 +168,6 @@ describe('<DokumentasjonFaktaForm>', () => {
       hasEktefellesBarnAksjonspunkt
       editedStatus={editedStatus}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
     />, messages);
 
     const dateField = wrapper.find('[name="omsorgsovertakelseDato"]');
@@ -199,8 +183,6 @@ describe('<DokumentasjonFaktaForm>', () => {
       hasEktefellesBarnAksjonspunkt={false}
       editedStatus={editedStatus}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
     />, messages);
 
     const dateField = wrapper.find('[name="omsorgsovertakelseDato"]');

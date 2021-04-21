@@ -108,13 +108,10 @@ describe('<FeilutbetalingInfoPanel>', () => {
           notAccepted: false,
         },
       }}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={alleKodeverk}
       fpsakKodeverk={fpsakKodeverk}
       feilutbetalingAarsak={{} as FeilutbetalingAarsak}
       aksjonspunkter={[]}
-      behandlingFormPrefix="test"
       behandlePerioderSamlet
       formValues={{
         perioder: [],

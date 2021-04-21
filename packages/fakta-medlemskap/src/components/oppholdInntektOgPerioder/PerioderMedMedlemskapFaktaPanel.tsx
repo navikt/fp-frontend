@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Normaltekst } from 'nav-frontend-typografi';
 import moment from 'moment';
 
-import { RadioGroupField, RadioOption, behandlingFormValueSelector } from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import {
   DateLabel, FlexColumn, FlexContainer, FlexRow, PeriodLabel, Table, TableColumn, TableRow, VerticalSpacer, FaktaGruppe,
 } from '@fpsak-frontend/shared-components';
@@ -15,6 +15,7 @@ import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktSta
 import {
   Aksjonspunkt, Kodeverk, KodeverkMedNavn, MedlemPeriode, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
+import { formValueSelector } from 'redux-form';
 
 const headerTextCodes = [
   'PerioderMedMedlemskapFaktaPanel.Period',
@@ -50,8 +51,6 @@ type TransformedValues = {
 
 interface PureOwnProps {
   id: string;
-  behandlingId: number;
-  behandlingVersjon: number;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
@@ -171,7 +170,7 @@ PerioderMedMedlemskapFaktaPanelImpl.defaultProps = {
 };
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  ...behandlingFormValueSelector(`OppholdInntektOgPeriodeForm-${ownProps.id}`, ownProps.behandlingId, ownProps.behandlingVersjon)(
+  ...formValueSelector(`OppholdInntektOgPeriodeForm-${ownProps.id}`)(
     state, 'fixedMedlemskapPerioder', 'fodselsdato', 'termindato',
     'omsorgsovertakelseDato', 'hasPeriodeAksjonspunkt', 'isPeriodAksjonspunktClosed',
   ),

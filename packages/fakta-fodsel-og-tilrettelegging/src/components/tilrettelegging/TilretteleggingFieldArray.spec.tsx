@@ -27,8 +27,6 @@ describe('<TilretteleggingFieldArray>', () => {
       stillingsprosentArbeidsforhold={50}
       setOverstyrtUtbetalingsgrad={() => undefined}
       velferdspermisjonprosent={0}
-      behandlingId={1}
-      behandlingVersjon={1}
       formName="FORM_NAME"
       velferdspermisjoner={[]}
     />, messages);
@@ -66,8 +64,6 @@ describe('<TilretteleggingFieldArray>', () => {
       stillingsprosentArbeidsforhold={50}
       setOverstyrtUtbetalingsgrad={() => undefined}
       velferdspermisjonprosent={0}
-      behandlingId={1}
-      behandlingVersjon={1}
       formName="FORM_NAME"
       velferdspermisjoner={[]}
     />, messages);
@@ -108,8 +104,6 @@ describe('<TilretteleggingFieldArray>', () => {
       stillingsprosentArbeidsforhold={50}
       setOverstyrtUtbetalingsgrad={() => undefined}
       velferdspermisjonprosent={0}
-      behandlingId={1}
-      behandlingVersjon={1}
       formName="FORM_NAME"
       velferdspermisjoner={[]}
     />, messages);

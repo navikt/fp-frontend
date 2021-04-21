@@ -26,13 +26,8 @@ interface OwnProps {
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (...args: any[]) => any;
   submittable: boolean;
-  behandlingId: number;
-  behandlingVersjon: number;
   beregningsgrunnlag: Beregningsgrunnlag;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  alleMerknaderFraBeslutter: {
-      notAccepted?: boolean;
-  };
   behandlingType: Kodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
@@ -71,10 +66,7 @@ export class FordelBeregningsgrunnlagPanel extends Component<OwnProps & WrappedC
         aksjonspunkter,
         submitCallback,
         beregningsgrunnlag,
-        behandlingId,
-        behandlingVersjon,
         alleKodeverk,
-        alleMerknaderFraBeslutter,
         behandlingType,
         submittable,
         arbeidsgiverOpplysningerPerId,
@@ -96,8 +88,6 @@ export class FordelBeregningsgrunnlagPanel extends Component<OwnProps & WrappedC
         submittable={submittable}
         readOnly={readOnly}
         submitCallback={submitCallback}
-        behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
         beregningsgrunnlag={beregningsgrunnlag}
         aksjonspunkter={aksjonspunkter}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -110,10 +100,7 @@ export class FordelBeregningsgrunnlagPanel extends Component<OwnProps & WrappedC
             submittable={submittable}
             readOnly={readOnly}
             submitCallback={submitCallback}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             alleKodeverk={alleKodeverk}
-            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
             beregningsgrunnlag={beregningsgrunnlag}
             behandlingType={behandlingType}
             aksjonspunkter={aksjonspunkter}
