@@ -22,6 +22,14 @@ const aksjonspunkter = [
   },
 ];
 
+jest.mock('redux-form', () => {
+  const reduxForm = jest.requireActual('redux-form');
+  return {
+    ...reduxForm,
+    getFormValues: () => () => ({ vurderbesteberegningField: {} }),
+  };
+});
+
 const alleKodeverk = {
   [kodeverkTyper.INNTEKTSKATEGORI]: [{
     kode: inntektskategorier.ARBEIDSTAKER,
