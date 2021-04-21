@@ -1,6 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { BeregningsgrunnlagPeriodeProp, Månedsgrunnlag } from '@fpsak-frontend/types';
+import {
+  BeregningsgrunnlagAndel,
+  BeregningsgrunnlagPeriodeProp,
+  Månedsgrunnlag,
+} from '@fpsak-frontend/types';
 import { Normaltekst, Element } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
@@ -14,16 +18,18 @@ interface OwnProps {
   besteMåneder: Månedsgrunnlag[];
 }
 
-const erBeløpSatt = (beløp) => beløp || beløp === 0;
+const erBeløpSatt = (beløp: number): boolean => !!beløp || beløp === 0;
 
-const finnKap8Beregning = (periode: BeregningsgrunnlagPeriodeProp) => (erBeløpSatt(periode.overstyrtPrAar)
-  ? periode.overstyrtPrAar : periode.beregnetPrAar);
+const finnGjeldendeBeløp = (andel: BeregningsgrunnlagAndel): number => (erBeløpSatt(andel.overstyrtPrAar) ? andel.overstyrtPrAar : andel.beregnetPrAar);
 
-const finnBesteberegnet = (besteMåneder : Månedsgrunnlag[]) => (
+const finnKap8Beregning = (periode: BeregningsgrunnlagPeriodeProp): number => periode.beregningsgrunnlagPrStatusOgAndel
+  .map((andel) => finnGjeldendeBeløp(andel)).reduce((i1, i2) => i1 + i2, 0);
+
+const finnBesteberegnet = (besteMåneder : Månedsgrunnlag[]): number => (
   besteMåneder.flatMap((måned) => måned.inntekter).map(({ inntekt }) => inntekt).reduce((i1, i2) => i1 + i2, 0) * 2
 );
 
-const girKap8Besteberegning = (kap8Beregning: number, kap1473Beregning: number) => (kap8Beregning > kap1473Beregning);
+const girKap8Besteberegning = (kap8Beregning: number, kap1473Beregning: number): boolean => (kap8Beregning > kap1473Beregning);
 
 const headerColumnContent = [
   // For å lage tom kolonne først
@@ -49,9 +55,11 @@ const BesteberegningResultatGrunnlagPanel: FunctionComponent<OwnProps> = ({
   periode,
   besteMåneder,
 }) => {
-  if (girKap8Besteberegning(finnKap8Beregning(periode), finnBesteberegnet(besteMåneder))) {
+  if (!besteMåneder || besteMåneder.length < 1) {
     return null;
   }
+  const kap8Beregning = finnKap8Beregning(periode);
+  const besteberegnet = finnBesteberegnet(besteMåneder);
   return (
     <div>
       <Row>
@@ -71,12 +79,12 @@ const BesteberegningResultatGrunnlagPanel: FunctionComponent<OwnProps> = ({
               </TableColumn>
               <TableColumn>
                 <Normaltekst>
-                  {formatCurrencyNoKr(finnKap8Beregning(periode))}
+                  {formatCurrencyNoKr(kap8Beregning)}
                 </Normaltekst>
               </TableColumn>
               <TableColumn>
                 <Normaltekst>
-                  {formatCurrencyNoKr(finnBesteberegnet(besteMåneder))}
+                  {formatCurrencyNoKr(besteberegnet)}
                 </Normaltekst>
               </TableColumn>
             </TableRow>
@@ -86,7 +94,12 @@ const BesteberegningResultatGrunnlagPanel: FunctionComponent<OwnProps> = ({
       <Row>
         <Column>
           <Normaltekst>
-            <FormattedMessage id="Besteberegning.ResultatGrunnlag.Kap1473GirBesteBeregning" />
+            {girKap8Besteberegning(kap8Beregning, besteberegnet) && (
+              <FormattedMessage id="Besteberegning.ResultatGrunnlag.Kap1471GirBesteBeregning" />
+            )}
+            {!girKap8Besteberegning(kap8Beregning, besteberegnet) && (
+              <FormattedMessage id="Besteberegning.ResultatGrunnlag.Kap1473GirBesteBeregning" />
+            )}
           </Normaltekst>
         </Column>
       </Row>
