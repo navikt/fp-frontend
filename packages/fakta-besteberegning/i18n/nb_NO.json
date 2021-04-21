@@ -10,7 +10,9 @@
   "ResultatGrunnlag.BeregningEtterKap8": "Beregning etter §14-7, 1. ledd",
   "ResultatGrunnlag.Overskrift": "Sammenligning av besteberegning og beregning etter §14-7, 1. ledd",
   "ResultatGrunnlag.Kap8GirBesteBeregning": "Beregning etter §14-7, 1. ledd gir beste beregning.",
-  "ResultatGrunnlag.Kap1473GirBesteBeregning": "Beregning etter §14-7, 3. ledd gir beste beregning."
+  "ResultatGrunnlag.Kap1473GirBesteBeregning": "Beregning etter §14-7, 3. ledd gir beste beregning.",
 
-
+  "BesteberegningProsessPanel.Aksjonspunkt.HelpText": "Saken er automatisk besteberegnet, vennligst kontroller beregningen",
+  "BesteberegningProsessPanel.Aksjonspunkt.ErKorrekt": "Saken er riktig beregnet, gå videre",
+  "BesteberegningProsessPanel.Aksjonspunkt.ErFeil": "Saken er ikke riktig beregnet, sett saken på vent"
 }
