@@ -21,12 +21,10 @@ import {
 } from '@fpsak-frontend/utils';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import {
-  behandlingForm, behandlingFormValueSelector, RadioGroupField, RadioOption,
-} from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import dokumentTypeId from '@fpsak-frontend/kodeverk/src/dokumentTypeId';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, Kodeverk, KodeverkMedNavn, ManglendeVedleggSoknad, Soknad, ArbeidsgiverOpplysninger,
 } from '@fpsak-frontend/types';
@@ -87,8 +85,6 @@ type FormValues = {
 }
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   soknad: Soknad;
   aksjonspunkter: Aksjonspunkt[];
@@ -128,8 +124,6 @@ export const SokersOpplysningspliktFormImpl: FunctionComponent<PureOwnProps & Ma
   manglendeVedlegg,
   dokumentTypeIds,
   getKodeverknavn,
-  behandlingId,
-  behandlingVersjon,
   arbeidsgiverOpplysningerPerId,
   ...formProps
 }) => (
@@ -141,8 +135,6 @@ export const SokersOpplysningspliktFormImpl: FunctionComponent<PureOwnProps & Ma
     isDirty={hasAksjonspunkt ? formProps.dirty : erVilkarOk !== formProps.initialValues.erVilkarOk}
     readOnlySubmitButton={hasSoknad ? readOnlySubmitButton : !formProps.dirty || readOnlySubmitButton}
     readOnly={readOnly}
-    behandlingId={behandlingId}
-    behandlingVersjon={behandlingVersjon}
     originalErVilkarOk={originalErVilkarOk}
   >
     {manglendeVedlegg.length > 0 && (
@@ -299,7 +291,7 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
   const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === initialOwnProps.status;
 
   return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
-    const { behandlingId, behandlingVersjon, alleKodeverk } = ownProps;
+    const { alleKodeverk } = ownProps;
     return {
       getKodeverknavn,
       onSubmit: submitSelector(ownProps),
@@ -308,11 +300,12 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
       dokumentTypeIds: alleKodeverk[kodeverkTyper.DOKUMENT_TYPE_ID],
       manglendeVedlegg: getSortedManglendeVedlegg(ownProps),
       initialValues: buildInitialValues(ownProps),
-      ...behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'hasAksjonspunkt', 'erVilkarOk'),
+      ...formValueSelector(formName)(state, 'hasAksjonspunkt', 'erVilkarOk'),
     };
   };
 };
 
-export default connect(mapStateToPropsFactory)(injectIntl(behandlingForm({
+export default connect(mapStateToPropsFactory)(reduxForm({
   form: formName,
-})(SokersOpplysningspliktFormImpl)));
+  destroyOnUnmount: false,
+})(injectIntl(SokersOpplysningspliktFormImpl)));

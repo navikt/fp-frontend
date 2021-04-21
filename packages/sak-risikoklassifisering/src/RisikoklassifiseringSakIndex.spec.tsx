@@ -20,8 +20,6 @@ const lagRisikoklassifisering = (kode) => ({
 describe('<RisikoklassifiseringSakIndex>', () => {
   it('skal rendere korrekt komponent når det mangler klassifisering', () => {
     const wrapper = shallow(<RisikoklassifiseringSakIndex
-      behandlingId={1}
-      behandlingVersjon={1}
       risikoklassifisering={undefined}
       isPanelOpen={false}
       readOnly={false}
@@ -36,8 +34,6 @@ describe('<RisikoklassifiseringSakIndex>', () => {
 
   it('skal rendere korrekt komponent når det ikke er utfør klassifisering', () => {
     const wrapper = shallow(<RisikoklassifiseringSakIndex
-      behandlingId={1}
-      behandlingVersjon={1}
       risikoklassifisering={lagRisikoklassifisering(kontrollresultatKode.IKKE_KLASSIFISERT)}
       isPanelOpen={false}
       readOnly={false}
@@ -52,8 +48,6 @@ describe('<RisikoklassifiseringSakIndex>', () => {
 
   it('skal rendere korrekt komponent når det er ikke_hoy resultat', () => {
     const wrapper = shallow(<RisikoklassifiseringSakIndex
-      behandlingId={1}
-      behandlingVersjon={1}
       risikoklassifisering={lagRisikoklassifisering(kontrollresultatKode.IKKE_HOY)}
       isPanelOpen={false}
       readOnly={false}
@@ -68,8 +62,6 @@ describe('<RisikoklassifiseringSakIndex>', () => {
 
   it('skal rendere korrekt komponent når det er hoy resultat', () => {
     const wrapper = shallow(<RisikoklassifiseringSakIndex
-      behandlingId={1}
-      behandlingVersjon={1}
       risikoklassifisering={lagRisikoklassifisering(kontrollresultatKode.HOY)}
       isPanelOpen={false}
       readOnly={false}

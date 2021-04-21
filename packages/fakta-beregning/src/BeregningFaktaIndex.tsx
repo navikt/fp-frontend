@@ -3,6 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@fpsak-frontend/utils';
 import { ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, Beregningsgrunnlag } from '@fpsak-frontend/types';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import BeregningInfoPanel from './components/BeregningInfoPanel';
 import messages from '../i18n/nb_NO.json';
@@ -16,7 +17,6 @@ type OwnProps = {
 };
 
 const BeregningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
-  behandling,
   beregningsgrunnlag,
   alleKodeverk,
   aksjonspunkter,
@@ -26,21 +26,23 @@ const BeregningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps>
   submittable,
   erOverstyrer,
   arbeidsgiverOpplysningerPerId,
+  formData,
+  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <BeregningInfoPanel
-      behandlingId={behandling.id}
-      behandlingVersjon={behandling.versjon}
-      beregningsgrunnlag={beregningsgrunnlag}
-      alleKodeverk={alleKodeverk}
-      aksjonspunkter={aksjonspunkter}
-      submitCallback={submitCallback}
-      readOnly={readOnly}
-      hasOpenAksjonspunkter={harApneAksjonspunkter}
-      submittable={submittable}
-      erOverstyrer={erOverstyrer}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />
+    <ReduxWrapper formName="BeregningFaktaIndex" formData={formData} setFormData={setFormData}>
+      <BeregningInfoPanel
+        beregningsgrunnlag={beregningsgrunnlag}
+        alleKodeverk={alleKodeverk}
+        aksjonspunkter={aksjonspunkter}
+        submitCallback={submitCallback}
+        readOnly={readOnly}
+        hasOpenAksjonspunkter={harApneAksjonspunkter}
+        submittable={submittable}
+        erOverstyrer={erOverstyrer}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

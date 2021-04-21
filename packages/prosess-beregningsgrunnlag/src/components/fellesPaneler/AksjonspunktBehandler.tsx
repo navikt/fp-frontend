@@ -10,9 +10,7 @@ import {
 } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
-import {
-  hasBehandlingFormErrorsOfType, isBehandlingFormDirty, isBehandlingFormSubmitting, TextAreaField,
-} from '@fpsak-frontend/form';
+import { TextAreaField } from '@fpsak-frontend/form';
 
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -80,8 +78,6 @@ type OwnProps = {
     readOnly: boolean;
     aksjonspunkter: Aksjonspunkt[];
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-    behandlingId: number;
-    behandlingVersjon: number;
     formName: string;
     readOnlySubmitButton: boolean;
     tidsBegrensetInntekt: boolean;
@@ -95,8 +91,6 @@ export const AksjonspunktBehandlerImpl: FunctionComponent<OwnProps & WrappedComp
   readOnly,
   aksjonspunkter,
   formName,
-  behandlingId,
-  behandlingVersjon,
   readOnlySubmitButton,
   allePerioder,
   alleKodeverk,
@@ -150,8 +144,6 @@ export const AksjonspunktBehandlerImpl: FunctionComponent<OwnProps & WrappedComp
             readOnly={readOnly}
             formName={formName}
             allePerioder={allePerioder}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             alleKodeverk={alleKodeverk}
             aksjonspunkter={aksjonspunkter}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -191,13 +183,8 @@ export const AksjonspunktBehandlerImpl: FunctionComponent<OwnProps & WrappedComp
             <Column xs="12">
               <ProsessStegSubmitButton
                 formName={formName}
-                behandlingId={behandlingId}
-                behandlingVersjon={behandlingVersjon}
                 isReadOnly={readOnly}
                 isSubmittable={!readOnlySubmitButton}
-                isBehandlingFormSubmitting={isBehandlingFormSubmitting}
-                isBehandlingFormDirty={isBehandlingFormDirty}
-                hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
               />
             </Column>
           </Row>
@@ -232,8 +219,6 @@ export const AksjonspunktBehandlerImpl: FunctionComponent<OwnProps & WrappedComp
           <AksjonspunktBehandlerSN
             readOnly={readOnly}
             aksjonspunkter={aksjonspunkter}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             erNyArbLivet={erNyArbLivet}
             erVarigEndring={erVarigEndring}
             erNyoppstartet={erNyoppstartet}
@@ -244,13 +229,8 @@ export const AksjonspunktBehandlerImpl: FunctionComponent<OwnProps & WrappedComp
             <Column xs="12">
               <ProsessStegSubmitButton
                 formName={formName}
-                behandlingId={behandlingId}
-                behandlingVersjon={behandlingVersjon}
                 isReadOnly={readOnly}
                 isSubmittable={!readOnlySubmitButton}
-                isBehandlingFormSubmitting={isBehandlingFormSubmitting}
-                isBehandlingFormDirty={isBehandlingFormDirty}
-                hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
               />
             </Column>
           </Row>

@@ -63,8 +63,6 @@ describe('<UnwrappedForm>', () => {
       readOnly={readOnly}
       aksjonspunkter={aksjonspunkter}
       formName={formName}
-      behandlingId={1}
-      behandlingVersjon={1}
       readOnlySubmitButton
       allePerioder={allePerioder}
       alleKodeverk={alleKodeverk}
@@ -96,8 +94,6 @@ describe('<UnwrappedForm>', () => {
       readOnly={readOnly}
       aksjonspunkter={aksjonspunkter}
       formName={formName}
-      behandlingId={1}
-      behandlingVersjon={1}
       readOnlySubmitButton
       allePerioder={allePerioder}
       alleKodeverk={alleKodeverk}
@@ -131,8 +127,6 @@ describe('<UnwrappedForm>', () => {
       readOnly={readOnly}
       aksjonspunkter={aksjonspunkter}
       formName={formName}
-      behandlingId={1}
-      behandlingVersjon={1}
       readOnlySubmitButton
       allePerioder={allePerioder}
       alleKodeverk={alleKodeverk}
@@ -166,8 +160,6 @@ describe('<UnwrappedForm>', () => {
       readOnly={readOnly}
       aksjonspunkter={aksjonspunkter}
       formName={formName}
-      behandlingId={1}
-      behandlingVersjon={1}
       readOnlySubmitButton
       allePerioder={allePerioder}
       alleKodeverk={alleKodeverk}
@@ -218,8 +210,6 @@ describe('<UnwrappedForm>', () => {
       readOnly={readOnly}
       aksjonspunkter={aksjonspunkter}
       formName={formName}
-      behandlingId={1}
-      behandlingVersjon={1}
       readOnlySubmitButton
       allePerioder={perioderMedSNAndel}
       alleKodeverk={alleKodeverk}

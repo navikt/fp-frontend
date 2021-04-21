@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { behandlingForm } from '@fpsak-frontend/form';
 
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
@@ -68,8 +67,6 @@ type OwnProps = {
     submittable: boolean;
     verdiForAvklarAktivitetErEndret: boolean;
     erOverstyrt: boolean;
-    behandlingId: number;
-    behandlingVersjon: number;
     beregningsgrunnlag: Beregningsgrunnlag;
     aksjonspunkter: Aksjonspunkt[];
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -114,8 +111,6 @@ export class VurderFaktaBeregningPanelImpl extends Component<OwnProps & Injected
         hasBegrunnelse,
         aksjonspunkter,
         erOverstyrt,
-        behandlingId,
-        behandlingVersjon,
         alleKodeverk,
         erOverstyrer,
         arbeidsgiverOpplysningerPerId,
@@ -139,8 +134,6 @@ export class VurderFaktaBeregningPanelImpl extends Component<OwnProps & Injected
             readOnly={readOnly}
             isAksjonspunktClosed={isAksjonspunktClosed(aksjonspunkter)}
             aksjonspunkter={aksjonspunkter}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             beregningsgrunnlag={beregningsgrunnlag}
             alleKodeverk={alleKodeverk}
             erOverstyrer={erOverstyrer}
@@ -161,8 +154,6 @@ export class VurderFaktaBeregningPanelImpl extends Component<OwnProps & Injected
                 isSubmittable={submittable && submitEnabled && harIkkeEndringerIAvklarMedFlereAksjonspunkter(verdiForAvklarAktivitetErEndret, aksjonspunkter)}
                 isReadOnly={readOnly}
                 hasOpenAksjonspunkter={!isAksjonspunktClosed(aksjonspunkter)}
-                behandlingId={behandlingId}
-                behandlingVersjon={behandlingVersjon}
               />
             </>
           )}
@@ -225,7 +216,9 @@ const mapStateToPropsFactory = () => {
   };
 };
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToPropsFactory)(reduxForm({
   form: formNameVurderFaktaBeregning,
   enableReinitialize: true,
+  destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(VurderFaktaBeregningPanelImpl));

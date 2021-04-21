@@ -2,13 +2,12 @@ import React, { FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
 
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import {
@@ -32,19 +31,19 @@ const getPreviewVedtakCallback = (previewVedtakCallback: (data: ForhandsvisData)
   gjelderVedtak: true,
 });
 
+type AksjonspunktData = Array<ForeslaVedtakAp | ForeslaVedtakManueltAp | BekreftVedtakUtenTotrinnskontrollAp>;
+
 type FormValues = {
   aksjonspunktKoder?: string[];
   fritekstTilBrev?: string;
 }
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   behandlingsresultat: Behandling['behandlingsresultat'];
   behandlingPaaVent: boolean;
   klageVurdering: KlageVurdering;
   aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (data: ForeslaVedtakAp | ForeslaVedtakManueltAp | BekreftVedtakUtenTotrinnskontrollAp) => Promise<void>;
+  submitCallback: (data: AksjonspunktData) => Promise<void>;
   previewVedtakCallback: (data: ForhandsvisData) => Promise<any>;
   readOnly: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -138,7 +137,7 @@ export const VedtakKlageForm: FunctionComponent<PureOwnProps & MappedOwnProps & 
   );
 };
 
-const transformValues = (values: FormValues): any => values.aksjonspunktKoder.map((apCode) => ({
+const transformValues = (values: FormValues): AksjonspunktData => values.aksjonspunktKoder.map((apCode) => ({
   begrunnelse: values.fritekstTilBrev,
   kode: validerApKodeOgHentApEnum(apCode, AksjonspunktCode.FORESLA_VEDTAK,
     AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
@@ -257,13 +256,14 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
   fritekstTilBrev: getFritekstTilBrev(ownProps),
   behandlingsResultatTekst: getResultatText(ownProps),
   klageVurderingResultat: getKlageResultat(ownProps),
-  ...behandlingFormValueSelector(VEDTAK_KLAGE_FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon)(
+  ...formValueSelector(VEDTAK_KLAGE_FORM_NAME)(
     state,
     'begrunnelse',
     'aksjonspunktKoder',
   ),
 });
 
-export default connect(mapStateToProps)(behandlingForm({
+export default connect(mapStateToProps)(reduxForm({
   form: VEDTAK_KLAGE_FORM_NAME,
+  destroyOnUnmount: false,
 })(injectIntl(VedtakKlageForm)));

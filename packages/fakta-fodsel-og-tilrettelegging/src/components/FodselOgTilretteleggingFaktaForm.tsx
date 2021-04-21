@@ -1,6 +1,6 @@
 import React, { useMemo, useState, FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { InjectedFormProps, Validator } from 'redux-form';
+import { InjectedFormProps, reduxForm, Validator } from 'redux-form';
 import moment from 'moment';
 import { FormattedMessage, IntlShape } from 'react-intl';
 import { createSelector } from 'reselect';
@@ -11,7 +11,7 @@ import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingTyp
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer, AvsnittSkiller, Image,
 } from '@fpsak-frontend/shared-components';
-import { DatepickerField, TextAreaField, behandlingForm } from '@fpsak-frontend/form';
+import { DatepickerField, TextAreaField } from '@fpsak-frontend/form';
 import {
   hasValidDate, hasValidText, maxLength, required, requiredIfNotPristine,
 } from '@fpsak-frontend/utils';
@@ -85,7 +85,6 @@ type FormValues = {
 };
 
 interface PureOwnProps {
-  behandlingId: number;
   behandlingVersjon: number;
   readOnly: boolean;
   hasOpenAksjonspunkter: boolean;
@@ -112,7 +111,6 @@ interface MappedOwnProps {
  * Presentasjonskomponent - viser tillrettlegging før svangerskapspenger
  */
 export const FodselOgTilretteleggingFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
-  behandlingId,
   behandlingVersjon,
   readOnly,
   hasOpenAksjonspunkter,
@@ -193,8 +191,6 @@ export const FodselOgTilretteleggingFaktaForm: FunctionComponent<PureOwnProps & 
                   <VerticalSpacer twentyPx />
                   <TilretteleggingArbeidsforholdSection
                     key={formSectionName}
-                    behandlingId={behandlingId}
-                    behandlingVersjon={behandlingVersjon}
                     readOnly={readOnly}
                     arbeidsforhold={a}
                     formSectionName={formSectionName}
@@ -242,8 +238,6 @@ export const FodselOgTilretteleggingFaktaForm: FunctionComponent<PureOwnProps & 
         <FlexRow>
           <FlexColumn>
             <FaktaSubmitButton
-              behandlingId={behandlingId}
-              behandlingVersjon={behandlingVersjon}
               formName={FODSEL_TILRETTELEGGING_FORM}
               isSubmittable={submittable && !formProps.error}
               isReadOnly={readOnly}
@@ -520,7 +514,8 @@ const shouldValidate = ({
   );
 };
 
-export default connect(mapStateToProps)(behandlingForm({
+export default connect(mapStateToProps)(reduxForm({
   form: FODSEL_TILRETTELEGGING_FORM,
   shouldValidate,
+  destroyOnUnmount: false,
 })(FodselOgTilretteleggingFaktaForm));

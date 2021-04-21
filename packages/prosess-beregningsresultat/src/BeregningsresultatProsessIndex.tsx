@@ -3,6 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { BeregningsresultatEs, StandardProsessPanelProps } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import BeregningsresultatEngangsstonadForm from './components/BeregningsresultatEngangsstonadForm';
 import messages from '../i18n/nb_NO.json';
@@ -19,27 +20,26 @@ interface OwnProps {
 }
 
 const BeregningsresultatProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
-  behandling,
   beregningresultatEngangsstonad,
   aksjonspunkter,
   overrideReadOnly,
   submitCallback,
   kanOverstyreAccess,
   toggleOverstyring,
-  ...rest
+  formData,
+  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <BeregningsresultatEngangsstonadForm
-      behandlingId={behandling.id}
-      behandlingVersjon={behandling.versjon}
-      behandlingResultatstruktur={beregningresultatEngangsstonad}
-      aksjonspunkter={aksjonspunkter}
-      overrideReadOnly={overrideReadOnly}
-      submitCallback={submitCallback}
-      kanOverstyre={kanOverstyreAccess.isEnabled}
-      toggleOverstyring={toggleOverstyring}
-      test={rest}
-    />
+    <ReduxWrapper formName="BeregningsresultatProsessIndex" formData={formData} setFormData={setFormData}>
+      <BeregningsresultatEngangsstonadForm
+        behandlingResultatstruktur={beregningresultatEngangsstonad}
+        aksjonspunkter={aksjonspunkter}
+        overrideReadOnly={overrideReadOnly}
+        submitCallback={submitCallback}
+        kanOverstyre={kanOverstyreAccess.isEnabled}
+        toggleOverstyring={toggleOverstyring}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

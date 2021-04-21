@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import {
-  clearFields, FormSection, change, InjectedFormProps,
+  clearFields, FormSection, change, InjectedFormProps, formValueSelector, reduxForm,
 } from 'redux-form';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import moment from 'moment';
@@ -11,7 +11,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
 import {
-  RadioGroupField, RadioOption, TextAreaField, behandlingForm, behandlingFormValueSelector, SelectField,
+  RadioGroupField, RadioOption, TextAreaField, SelectField,
 } from '@fpsak-frontend/form';
 import {
   formatCurrencyNoKr, hasValidText, maxLength, minLength, required, DDMMYYYY_DATE_FORMAT, decodeHtmlEntity,
@@ -78,7 +78,6 @@ export type CustomVilkarsVurdertePeriode = {
 interface OwnProps {
   data: DataForPeriode;
   periode?: CustomVilkarsVurdertePeriode;
-  behandlingFormPrefix: string;
   skjulPeriode: (...args: any[]) => any;
   setNestePeriode: (...args: any[]) => any;
   setForrigePeriode: (...args: any[]) => any;
@@ -97,7 +96,6 @@ interface OwnProps {
     belop: number;
   }[];
   behandlingId: number;
-  behandlingVersjon: number;
   beregnBelop: (...args: any[]) => any;
   vilkarsVurdertePerioder: CustomVilkarsVurdertePeriode[];
   valgtVilkarResultatType?: string;
@@ -126,19 +124,19 @@ export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & Dispatch
 
   resetFields = () => {
     const {
-      behandlingFormPrefix, clearFields: clearFormFields, valgtVilkarResultatType,
+      clearFields: clearFormFields, valgtVilkarResultatType,
     } = this.props;
     const fields = [valgtVilkarResultatType];
-    clearFormFields(`${behandlingFormPrefix}.${TILBAKEKREVING_PERIODE_FORM_NAME}`, false, false, ...fields);
+    clearFormFields(TILBAKEKREVING_PERIODE_FORM_NAME, false, false, ...fields);
   };
 
   resetAnnetTextField = () => {
     const {
-      behandlingFormPrefix, clearFields: clearFormFields, valgtVilkarResultatType, handletUaktsomhetGrad, erSerligGrunnAnnetValgt,
+      clearFields: clearFormFields, valgtVilkarResultatType, handletUaktsomhetGrad, erSerligGrunnAnnetValgt,
     } = this.props;
     if (!erSerligGrunnAnnetValgt) {
       const fields = [`${valgtVilkarResultatType}.${handletUaktsomhetGrad}.annetBegrunnelse`];
-      clearFormFields(`${behandlingFormPrefix}.${TILBAKEKREVING_PERIODE_FORM_NAME}`, false, false, ...fields);
+      clearFormFields(TILBAKEKREVING_PERIODE_FORM_NAME, false, false, ...fields);
     }
   };
 
@@ -221,7 +219,6 @@ export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & Dispatch
       data,
       andelSomTilbakekreves,
       behandlingId,
-      behandlingVersjon,
       beregnBelop,
       intl,
       vilkarsVurdertePerioder,
@@ -238,7 +235,6 @@ export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & Dispatch
           oppdaterSplittedePerioder={oppdaterSplittedePerioder}
           readOnly={readOnly}
           behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
           beregnBelop={beregnBelop}
         />
         <VerticalSpacer twentyPx />
@@ -447,7 +443,6 @@ const validate = (values: any, sarligGrunnTyper: KodeverkMedNavn[], data: DataFo
 
 interface PureOwnProps {
   behandlingId: number;
-  behandlingVersjon: number;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   oppdaterPeriode: (values: any) => any;
   data: DataForPeriode;
@@ -464,8 +459,7 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
   const validateForm = (values: any) => validate(values, sarligGrunnTyper, ownProps.data);
 
   return (state: any, oProps: PureOwnProps) => {
-    const { behandlingId, behandlingVersjon } = oProps;
-    const sel = behandlingFormValueSelector(TILBAKEKREVING_PERIODE_FORM_NAME, behandlingId, behandlingVersjon);
+    const sel = formValueSelector(TILBAKEKREVING_PERIODE_FORM_NAME);
     const valgtVilkarResultatType = sel(state, 'valgtVilkarResultatType');
     const handletUaktsomhetGrad = sel(state, `${valgtVilkarResultatType}.handletUaktsomhetGrad`);
     return {
@@ -487,9 +481,11 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
   };
 };
 
-const TilbakekrevingPeriodeForm = connect(mapStateToPropsFactory, mapDispatchToProps)(behandlingForm({
+// @ts-ignore Fiks!
+const TilbakekrevingPeriodeForm = connect(mapStateToPropsFactory, mapDispatchToProps)(reduxForm({
   form: TILBAKEKREVING_PERIODE_FORM_NAME,
   enableReinitialize: true,
+  destroyOnUnmount: false,
 })(injectIntl(TilbakekrevingPeriodeFormImpl)));
 
 // TODO Fiks typen til periode

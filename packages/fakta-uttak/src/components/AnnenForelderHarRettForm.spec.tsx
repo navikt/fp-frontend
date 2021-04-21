@@ -41,8 +41,6 @@ describe('<AnnenForelderHarRettForm>', () => {
       hasOpenAksjonspunkter
       hasOpenUttakAksjonspunkter
       aksjonspunkt={avklarAnnenforelderHarRettAp}
-      behandlingVersjon={1}
-      behandlingId={1}
       ytelsefordeling={{} as Ytelsefordeling}
       submitCallback={() => undefined}
       onSubmit={() => undefined}

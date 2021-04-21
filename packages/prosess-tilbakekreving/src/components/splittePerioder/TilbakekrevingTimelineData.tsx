@@ -12,7 +12,6 @@ type OwnProps = {
   oppdaterSplittedePerioder: (...args: any[]) => any;
   readOnly: boolean;
   behandlingId: number;
-  behandlingVersjon: number;
   beregnBelop: (data: any) => Promise<any>;
 };
 
@@ -23,7 +22,6 @@ export const TilbakekrevingTimelineData: FunctionComponent<OwnProps> = ({
   readOnly,
   oppdaterSplittedePerioder,
   behandlingId,
-  behandlingVersjon,
   beregnBelop,
 }) => (
   <Row>
@@ -35,7 +33,6 @@ export const TilbakekrevingTimelineData: FunctionComponent<OwnProps> = ({
         readOnly={readOnly}
         oppdaterSplittedePerioder={oppdaterSplittedePerioder}
         behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
         beregnBelop={beregnBelop}
       />
       <PeriodeInformasjon

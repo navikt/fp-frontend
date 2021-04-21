@@ -86,8 +86,6 @@ describe('<UttakPeriode>', () => {
       vilkarForSykdomExists={false}
       endringsdato={endringsdato}
       getKodeverknavn={sinon.spy()}
-      behandlingVersjon={1}
-      behandlingId={1}
       behandlingStatus={{
         kode: '1',
         kodeverk: '1',
@@ -118,8 +116,6 @@ describe('<UttakPeriode>', () => {
       vilkarForSykdomExists={false}
       endringsdato={endringsdato}
       getKodeverknavn={sinon.spy()}
-      behandlingVersjon={1}
-      behandlingId={1}
       behandlingStatus={{
         kode: '1',
         kodeverk: '1',
@@ -149,8 +145,6 @@ describe('<UttakPeriode>', () => {
       vilkarForSykdomExists={false}
       endringsdato={endringsdato}
       getKodeverknavn={sinon.spy()}
-      behandlingVersjon={1}
-      behandlingId={1}
       behandlingStatus={{
         kode: '1',
         kodeverk: '1',
@@ -184,8 +178,6 @@ describe('<UttakPeriode>', () => {
       vilkarForSykdomExists={false}
       endringsdato={endringsdato}
       getKodeverknavn={sinon.spy()}
-      behandlingVersjon={1}
-      behandlingId={1}
       behandlingStatus={{
         kode: '1',
         kodeverk: '1',

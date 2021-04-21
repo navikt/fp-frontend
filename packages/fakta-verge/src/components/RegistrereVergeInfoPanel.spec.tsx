@@ -19,8 +19,6 @@ describe('<RegistrereVergeInfoPanel>', () => {
       hasOpenAksjonspunkter
       readOnly={false}
       vergetyper={[]}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleMerknaderFraBeslutter={{}}
       submitCallback={() => undefined}
       onSubmit={() => undefined}

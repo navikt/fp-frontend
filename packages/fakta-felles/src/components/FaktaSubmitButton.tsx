@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider, FormattedMessage } from 'react-intl';
+import { isDirty as reduxIsDirty, isSubmitting as reduxIsSubmitting } from 'redux-form';
 import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import { createIntl, ariaCheck, isRequiredMessage } from '@fpsak-frontend/utils';
-import { isBehandlingFormDirty, isBehandlingFormSubmitting, hasBehandlingFormErrorsOfType } from '@fpsak-frontend/form';
+import { hasBehandlingFormErrorsOfType } from '@fpsak-frontend/form';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -28,8 +29,6 @@ const isDisabled = (
 };
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   formNames?: string[];
   formName?: string;
   doNotCheckForRequiredFields?: boolean;
@@ -76,14 +75,13 @@ export const FaktaSubmitButton: FunctionComponent<PureOwnProps & MappedOwnProps>
 );
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
-  const { behandlingId, behandlingVersjon } = ownProps;
   const fNames = ownProps.formNames ? ownProps.formNames : [ownProps.formName];
   const formNames = fNames.map((f) => (f.includes('.') ? f.substr(f.lastIndexOf('.') + 1) : f));
   return {
-    isSubmitting: formNames.some((formName) => isBehandlingFormSubmitting(formName, behandlingId, behandlingVersjon)(state)),
-    isDirty: formNames.some((formName) => isBehandlingFormDirty(formName, behandlingId, behandlingVersjon)(state)),
+    isSubmitting: formNames.some((formName) => reduxIsSubmitting(formName)(state)),
+    isDirty: formNames.some((formName) => reduxIsDirty(formName)(state)),
     hasEmptyRequiredFields: ownProps.doNotCheckForRequiredFields
-      ? false : formNames.some((formName) => hasBehandlingFormErrorsOfType(formName, behandlingId, behandlingVersjon, isRequiredMessage())(state)),
+      ? false : formNames.some((formName) => hasBehandlingFormErrorsOfType(formName, isRequiredMessage())(state)),
   };
 };
 

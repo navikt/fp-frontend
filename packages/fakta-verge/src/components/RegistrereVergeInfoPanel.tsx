@@ -1,13 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { Aksjonspunkt, KodeverkMedNavn, Verge } from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
-import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { AvklarVergeAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -20,8 +19,6 @@ type FormValues = RegistrereFormValues & {
 
 interface PureOwnProps {
   submitCallback: (aksjonspunktData: AvklarVergeAp) => Promise<void>;
-  behandlingId: number;
-  behandlingVersjon: number;
   aksjonspunkter: Aksjonspunkt[];
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   verge: Verge;
@@ -50,8 +47,6 @@ export const RegistrereVergeInfoPanelImpl: FunctionComponent<PureOwnProps & Mapp
   readOnly,
   initialValues,
   vergetyper,
-  behandlingId,
-  behandlingVersjon,
   alleMerknaderFraBeslutter,
   aksjonspunkter,
   valgtVergeType,
@@ -78,8 +73,6 @@ export const RegistrereVergeInfoPanelImpl: FunctionComponent<PureOwnProps & Mapp
         <VerticalSpacer twentyPx />
         <FaktaSubmitButton
           formName={formProps.form}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
           isSubmittable={submittable && !!valgtVergeType}
           isReadOnly={readOnly}
           hasOpenAksjonspunkter={hasOpenAksjonspunkter}
@@ -115,12 +108,13 @@ const lagSubmitFn = createSelector([
 (submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  valgtVergeType: behandlingFormValueSelector(FORM_NAVN, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'vergeType'),
+  valgtVergeType: formValueSelector(FORM_NAVN)(state, 'vergeType'),
   initialValues: buildInitialValues(ownProps),
   vergetyper: ownProps.alleKodeverk[kodeverkTyper.VERGE_TYPE],
   onSubmit: lagSubmitFn(ownProps),
 });
 
-export default connect(mapStateToProps)(behandlingForm({
+export default connect(mapStateToProps)(reduxForm({
   form: FORM_NAVN,
+  destroyOnUnmount: false,
 })(injectIntl(RegistrereVergeInfoPanelImpl)));

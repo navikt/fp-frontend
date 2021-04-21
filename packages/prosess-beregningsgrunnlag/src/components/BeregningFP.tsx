@@ -18,7 +18,6 @@ import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Vilkar from '@fpsak-frontend/types/src/vilkarTsType';
-import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
 import GraderingUtenBGReadOnly from './gradering/GraderingUtenBGReadOnly';
 import BeregningForm from './beregningForm/BeregningForm';
 import RelevanteStatuserProp from '../types/RelevanteStatuserTsType';
@@ -75,7 +74,6 @@ type OwnProps = {
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
     beregningsgrunnlag: Beregningsgrunnlag;
     vilkar: Vilkar[];
-    behandling: Behandling;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
@@ -86,7 +84,6 @@ type OwnProps = {
  * Finner det gjeldende aksjonspunktet hvis vi har et.
  */
 const BeregningFP: FunctionComponent<OwnProps> = ({
-  behandling,
   beregningsgrunnlag,
   aksjonspunkter,
   submitCallback,
@@ -113,8 +110,6 @@ const BeregningFP: FunctionComponent<OwnProps> = ({
         submitCallback={submitCallback}
         readOnlySubmitButton={readOnlySubmitButton}
         alleKodeverk={alleKodeverk}
-        behandlingId={behandling.id}
-        behandlingVersjon={behandling.versjon}
         vilkaarBG={vilkaarBG}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />

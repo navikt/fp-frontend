@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import {
   Undertittel, Element, Undertekst, Normaltekst,
 } from 'nav-frontend-typografi';
@@ -17,7 +17,6 @@ import {
   FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import { OverstyringPanel, VilkarResultPicker } from '@fpsak-frontend/prosess-felles';
-import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { OverstyringAksjonspunkter } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { DDMMYYYY_DATE_FORMAT, decodeHtmlEntity } from '@fpsak-frontend/utils';
@@ -45,8 +44,6 @@ type FormValues = {
 }
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   behandlingType: Kodeverk;
   behandlingsresultat?: Behandling['behandlingsresultat']
   medlemskapFom: string;
@@ -272,9 +269,7 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
   const formName = `VilkarresultatForm_${overstyringApKode}`;
 
   return (state, ownProps: PureOwnProps): MappedOwnProps => {
-    const {
-      behandlingId, behandlingVersjon, aksjonspunkter, erOverstyrt,
-    } = ownProps;
+    const { aksjonspunkter, erOverstyrt } = ownProps;
 
     const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === overstyringApKode);
     const isSolvable = aksjonspunkt !== undefined
@@ -296,11 +291,14 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
       validate: validateFn,
       form: formName,
       originalErVilkarOk: erVilkarOk,
-      erVilkarOk: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'erVilkarOk'),
+      erVilkarOk: formValueSelector(formName)(state, 'erVilkarOk'),
     };
   };
 };
 
 // @ts-ignore Kan ikkje senda med formnavn her sidan det er dynamisk. Må fikse på ein annan måte
-const form = behandlingForm({ enableReinitialize: true })(VilkarresultatMedOverstyringForm);
+const form = reduxForm({
+  enableReinitialize: true,
+  destroyOnUnmount: false,
+})(VilkarresultatMedOverstyringForm);
 export default connect(mapStateToPropsFactory)(form);

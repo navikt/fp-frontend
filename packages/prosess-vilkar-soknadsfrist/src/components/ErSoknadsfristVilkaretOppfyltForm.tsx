@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { createSelector } from 'reselect';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import moment from 'moment';
 import Panel from 'nav-frontend-paneler';
 import { Column, Row } from 'nav-frontend-grid';
@@ -13,10 +13,7 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { ISO_DATE_FORMAT, required, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import { DateLabel, VerticalSpacer } from '@fpsak-frontend/shared-components';
-import {
-  RadioGroupField, RadioOption, behandlingForm, behandlingFormValueSelector, hasBehandlingFormErrorsOfType, isBehandlingFormDirty,
-  isBehandlingFormSubmitting,
-} from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
@@ -49,8 +46,6 @@ type FormValues = {
 }
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   vilkar: Vilkar[];
   soknad: Soknad;
@@ -91,8 +86,6 @@ export const ErSoknadsfristVilkaretOppfyltFormImpl: FunctionComponent<PureOwnPro
   behandlingsresultat,
   hasAksjonspunkt,
   getKodeverknavn,
-  behandlingId,
-  behandlingVersjon,
   ...formProps
 }) => (
   <form onSubmit={formProps.handleSubmit}>
@@ -203,13 +196,8 @@ export const ErSoknadsfristVilkaretOppfyltFormImpl: FunctionComponent<PureOwnPro
     <VerticalSpacer sixteenPx />
     <ProsessStegSubmitButton
       formName={formProps.form}
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
       isReadOnly={readOnly}
       isSubmittable={!readOnlySubmitButton}
-      isBehandlingFormSubmitting={isBehandlingFormSubmitting}
-      isBehandlingFormDirty={isBehandlingFormDirty}
-      hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
     />
   </form>
 );
@@ -264,21 +252,19 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
     .find((v) => vilkarCodes.includes(v.vilkarType.kode)).merknadParametere.antallDagerSoeknadLevertForSent;
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
 
-  return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
-    const { behandlingId, behandlingVersjon } = ownProps;
-    return {
-      getKodeverknavn,
-      antallDagerSoknadLevertForSent,
-      onSubmit: lagSubmitFn(ownProps),
-      initialValues: buildInitialValues(ownProps),
-      dato: findDate(ownProps),
-      textCode: findTextCode(ownProps),
-      hasAksjonspunkt: aksjonspunkter.length > 0,
-      ...behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'textCode', 'dato', 'erVilkarOk'),
-    };
-  };
+  return (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
+    getKodeverknavn,
+    antallDagerSoknadLevertForSent,
+    onSubmit: lagSubmitFn(ownProps),
+    initialValues: buildInitialValues(ownProps),
+    dato: findDate(ownProps),
+    textCode: findTextCode(ownProps),
+    hasAksjonspunkt: aksjonspunkter.length > 0,
+    ...formValueSelector(formName)(state, 'textCode', 'dato', 'erVilkarOk'),
+  });
 };
 
-export default connect(mapStateToPropsFactory)(injectIntl(behandlingForm({
+export default connect(mapStateToPropsFactory)(reduxForm({
   form: formName,
-})(ErSoknadsfristVilkaretOppfyltFormImpl)));
+  destroyOnUnmount: false,
+})(injectIntl(ErSoknadsfristVilkaretOppfyltFormImpl)));

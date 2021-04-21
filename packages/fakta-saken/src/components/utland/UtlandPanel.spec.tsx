@@ -17,8 +17,6 @@ describe('<UtlandPanel>', () => {
       <UtlandPanel
         {...reduxFormPropsMock}
         intl={intlMock}
-        behandlingId={1}
-        behandlingVersjon={2}
         aksjonspunkter={[]}
         submitCallback={() => undefined}
         onSubmit={() => undefined}

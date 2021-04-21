@@ -67,8 +67,6 @@ describe('<TilbakekrevingEditerVedtaksbrevPanel>', () => {
       vedtaksbrevAvsnitt={vedtaksbrevAvsnitt}
       formName="testForm"
       readOnly={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       perioderSomIkkeHarUtfyltObligatoriskVerdi={[]}
       fritekstOppsummeringPakrevdMenIkkeUtfylt={false}
     />);
@@ -89,8 +87,6 @@ describe('<TilbakekrevingEditerVedtaksbrevPanel>', () => {
       vedtaksbrevAvsnitt={vedtaksbrevAvsnitt}
       formName="testForm"
       readOnly={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       perioderSomIkkeHarUtfyltObligatoriskVerdi={['2019-10-10_2019-11-10']}
       fritekstOppsummeringPakrevdMenIkkeUtfylt
     />);

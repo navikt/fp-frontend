@@ -30,8 +30,6 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       readOnly
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       onSubmit={sinon.spy()}
       medlemskap={{
         opphold: [],
@@ -77,8 +75,6 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       valgtPeriode={valgtPeriodeMedBosattAksjonspunkt}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       onSubmit={sinon.spy()}
       medlemskap={{
         opphold: [],
@@ -122,8 +118,6 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       valgtPeriode={valgtPeriodeMedAksjonspunkt}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       onSubmit={sinon.spy()}
       medlemskap={{
         opphold: [],
@@ -168,8 +162,6 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       valgtPeriode={valgtPeriodeMedOppholdsrettAksjonspunkt}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       onSubmit={sinon.spy()}
       medlemskap={{
         opphold: [],
@@ -214,8 +206,6 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       valgtPeriode={valgtPeriodeMedLovligoppholdAksjonspunkt}
       alleKodeverk={{}}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       onSubmit={sinon.spy()}
       medlemskap={{
         opphold: [],

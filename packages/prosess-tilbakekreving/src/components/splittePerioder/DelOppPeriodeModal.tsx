@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
 import moment from 'moment/moment';
-import { InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
 import { Column, Row } from 'nav-frontend-grid';
@@ -12,7 +12,7 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import {
   dateAfterOrEqual, dateBeforeOrEqual, DDMMYYYY_DATE_FORMAT, hasValidDate, ISO_DATE_FORMAT, required,
 } from '@fpsak-frontend/utils';
-import { DatepickerField, behandlingForm } from '@fpsak-frontend/form';
+import { DatepickerField } from '@fpsak-frontend/form';
 
 import styles from './delOppPeriodeModal.less';
 
@@ -133,6 +133,7 @@ export const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) =>
   });
 };
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToPropsFactory)(reduxForm({
   form: 'DelOppPeriode',
+  destroyOnUnmount: false,
 })(injectIntl(DelOppPeriodeModalImpl)));

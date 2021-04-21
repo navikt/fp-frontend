@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { FieldArray, InjectedFormProps } from 'redux-form';
+import {
+  FieldArray, formValueSelector, getFormSyncErrors, InjectedFormProps, reduxForm,
+} from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 
@@ -10,9 +12,7 @@ import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurd
 import {
   ArrowBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
-import {
-  RadioGroupField, RadioOption, TextAreaField, behandlingForm, getBehandlingFormSyncErrors, behandlingFormValueSelector,
-} from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
 import {
   hasValidPeriod, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
@@ -44,12 +44,10 @@ interface PureOwnProps {
   fraDato: string;
   tilDato: string;
   behandlingStatusKode?: string;
-  behandlingId: number;
-  behandlingVersjon: number;
 }
 
 interface MappedOwnProps {
-  formSyncErrors?: { dokumentertePerioder: any[] };
+  formSyncErrors?: any;
   dokumentertePerioder?: { fom: string; tom: string }[];
   resultat?: string;
   updated: boolean;
@@ -202,21 +200,9 @@ const validateInnleggelseForm = (values: FormValues) => {
 };
 
 const buildInitialValues = createSelector([
-  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
-    'UttakFaktaForm',
-    ownProps.behandlingId,
-    ownProps.behandlingVersjon,
-  )(state, `${ownProps.fieldId}.begrunnelse`),
-  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
-    'UttakFaktaForm',
-    ownProps.behandlingId,
-    ownProps.behandlingVersjon,
-  )(state, `${ownProps.fieldId}.resultat`),
-  (state: any, ownProps: PureOwnProps) => behandlingFormValueSelector(
-    'UttakFaktaForm',
-    ownProps.behandlingId,
-    ownProps.behandlingVersjon,
-  )(state, `${ownProps.fieldId}.dokumentertePerioder`),
+  (state: any, ownProps: PureOwnProps) => formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.begrunnelse`),
+  (state: any, ownProps: PureOwnProps) => formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.resultat`),
+  (state: any, ownProps: PureOwnProps) => formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.dokumentertePerioder`),
   (_state: any, ownProps: PureOwnProps) => ownProps.id],
 (begrunnelse, initialResultat, initialDokumentertePerioder, id): FormValues => ({
   begrunnelse,
@@ -229,24 +215,25 @@ const buildInitialValues = createSelector([
 }));
 
 const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
-  const { behandlingId, behandlingVersjon } = initialOwnProps;
   const formName = `innleggelseForm-${initialOwnProps.id}`;
   const onSubmit = (values: FormValues) => initialOwnProps.updatePeriode(values);
 
   return (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-    formSyncErrors: getBehandlingFormSyncErrors(formName, behandlingId, behandlingVersjon)(state),
-    dokumentertePerioder: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'dokumentertePerioder'),
-    resultat: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'resultat'),
+    formSyncErrors: getFormSyncErrors(formName)(state),
+    dokumentertePerioder: formValueSelector(formName)(state, 'dokumentertePerioder'),
+    resultat: formValueSelector(formName)(state, 'resultat'),
     initialValues: buildInitialValues(state, ownProps),
-    updated: behandlingFormValueSelector('UttakFaktaForm', behandlingId, behandlingVersjon)(state, `${ownProps.fieldId}.updated`),
-    bekreftet: behandlingFormValueSelector('UttakFaktaForm', behandlingId, behandlingVersjon)(state, `${ownProps.fieldId}.bekreftet`),
+    updated: formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.updated`),
+    bekreftet: formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.bekreftet`),
     form: formName,
     onSubmit,
   });
 };
 
 // @ts-ignore Dynamisk navn på form
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToPropsFactory)(reduxForm({
   enableReinitialize: true,
+  destroyOnUnmount: false,
+  // @ts-ignore Fiks
   validate: (values: FormValues) => validateInnleggelseForm(values),
 })(InnleggelsePeriode));

@@ -25,8 +25,6 @@ type OwnProps = {
   readOnly: boolean;
   onChangeÅrsak: (event: ReactNode, elementId: number, årsak: string) => void;
   onChangeUnderÅrsak: (event: ReactNode, elementId: number, årsak: string) => void;
-  behandlingId: number;
-  behandlingVersjon: number;
 };
 
 const FeilutbetalingPerioderTable: FunctionComponent<OwnProps> = ({
@@ -36,8 +34,6 @@ const FeilutbetalingPerioderTable: FunctionComponent<OwnProps> = ({
   readOnly,
   onChangeÅrsak,
   onChangeUnderÅrsak,
-  behandlingId,
-  behandlingVersjon,
 }) => (
   <div className={styles.feilutbetalingTable}>
     <Table
@@ -46,8 +42,6 @@ const FeilutbetalingPerioderTable: FunctionComponent<OwnProps> = ({
     >
       { perioder.sort((a, b) => moment(a.fom).diff(moment(b.fom))).map((periode, index) => (
         <FeilutbetalingPerioderForm
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
           periode={periode}
           elementId={index}
           formName={formName}

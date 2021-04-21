@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { change as reduxFormChange, initialize as reduxFormInitialize } from 'redux-form';
+import { change as reduxFormChange, formValueSelector, initialize as reduxFormInitialize } from 'redux-form';
 import { bindActionCreators, Dispatch } from 'redux';
 import moment from 'moment';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
@@ -10,7 +10,6 @@ import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
-import { behandlingFormValueSelector, getBehandlingFormPrefix } from '@fpsak-frontend/form';
 import {
   AksjonspunktHelpTextTemp, DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
@@ -55,8 +54,6 @@ interface PureOwnProps {
   formName: string;
   submitting: boolean;
   isDirty: boolean;
-  behandlingId: number;
-  behandlingVersjon: number;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -64,7 +61,6 @@ interface PureOwnProps {
 
 interface MappedOwnProps {
   opptjeningAktivitetTypes: KodeverkMedNavn[];
-  behandlingFormPrefix: string;
   opptjeningActivities: CustomOpptjeningAktivitet[];
 }
 
@@ -122,13 +118,13 @@ export class OpptjeningFaktaFormImpl extends Component<PureOwnProps & MappedOwnP
   }
 
   setFormField(fieldName: string, fieldValue: CustomOpptjeningAktivitet[]): void {
-    const { behandlingFormPrefix, formName, reduxFormChange: formChange } = this.props;
-    formChange(`${behandlingFormPrefix}.${formName}`, fieldName, fieldValue);
+    const { formName, reduxFormChange: formChange } = this.props;
+    formChange(formName, fieldName, fieldValue);
   }
 
   initializeActivityForm(opptjeningActivity: NyOpptjeningAktivitet): void {
-    const { behandlingFormPrefix, reduxFormInitialize: formInitialize } = this.props;
-    formInitialize(`${behandlingFormPrefix}.${activityPanelName}`, opptjeningActivity);
+    const { reduxFormInitialize: formInitialize } = this.props;
+    formInitialize(activityPanelName, opptjeningActivity);
   }
 
   cancelSelectedOpptjeningActivity(): void {
@@ -226,7 +222,7 @@ export class OpptjeningFaktaFormImpl extends Component<PureOwnProps & MappedOwnP
   render() {
     const {
       hasAksjonspunkt, hasOpenAksjonspunkter, opptjeningActivities, opptjeningAktivitetTypes, opptjeningFomDato, dokStatus,
-      opptjeningTomDato, readOnly, submitting, behandlingId, behandlingVersjon, alleMerknaderFraBeslutter, alleKodeverk,
+      opptjeningTomDato, readOnly, submitting, alleMerknaderFraBeslutter, alleKodeverk,
       arbeidsgiverOpplysningerPerId,
     } = this.props;
     const { selectedOpptjeningActivity } = this.state;
@@ -273,8 +269,6 @@ export class OpptjeningFaktaFormImpl extends Component<PureOwnProps & MappedOwnP
             <>
               <ActivityPanel
                 key={selectedOpptjeningActivity.id}
-                behandlingId={behandlingId}
-                behandlingVersjon={behandlingVersjon}
                 activity={selectedOpptjeningActivity}
                 readOnly={readOnly}
                 opptjeningAktivitetTypes={opptjeningAktivitetTypes}
@@ -325,9 +319,7 @@ export class OpptjeningFaktaFormImpl extends Component<PureOwnProps & MappedOwnP
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   opptjeningAktivitetTypes: ownProps.alleKodeverk[kodeverkTyper.OPPTJENING_AKTIVITET_TYPE],
-  behandlingFormPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
-  opptjeningActivities: sortByFomDate(behandlingFormValueSelector(ownProps.formName, ownProps.behandlingId,
-    ownProps.behandlingVersjon)(state, 'opptjeningActivities')),
+  opptjeningActivities: sortByFomDate(formValueSelector(ownProps.formName)(state, 'opptjeningActivities')),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

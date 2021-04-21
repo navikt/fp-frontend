@@ -27,8 +27,6 @@ const formatDate = (dato: string): string => moment(dato).format(DDMMYYYY_DATE_F
 interface OwnProps {
   readOnly: boolean;
   formName: string;
-  behandlingId: number;
-  behandlingVersjon: number;
 }
 
 interface StaticFunctions {
@@ -44,14 +42,10 @@ interface StaticFunctions {
 const LeggTilArbeidsforholdFelter: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   formName,
-  behandlingId,
-  behandlingVersjon,
 }) => (
   <BehandlingFormFieldCleaner
     formName={formName}
     fieldNames={['arbeidsgiverNavn', 'startdato', 'sluttdato', 'stillingsprosent']}
-    behandlingId={behandlingId}
-    behandlingVersjon={behandlingVersjon}
   >
     <FlexContainer>
       <FlexRow wrap>

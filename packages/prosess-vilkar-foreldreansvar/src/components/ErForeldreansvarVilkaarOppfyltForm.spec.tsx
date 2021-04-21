@@ -48,8 +48,6 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
       readOnly
       readOnlySubmitButton
       erVilkarOk={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       isForeldreansvar2Ledd
       status=""
       submitCallback={() => undefined}
@@ -80,8 +78,6 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
       readOnly={false}
       readOnlySubmitButton
       erVilkarOk={undefined}
-      behandlingId={1}
-      behandlingVersjon={1}
       isForeldreansvar2Ledd
       status=""
       submitCallback={() => undefined}
@@ -135,8 +131,6 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
       readOnly
       readOnlySubmitButton
       erVilkarOk
-      behandlingId={1}
-      behandlingVersjon={1}
       isForeldreansvar2Ledd
       status=""
       submitCallback={() => undefined}

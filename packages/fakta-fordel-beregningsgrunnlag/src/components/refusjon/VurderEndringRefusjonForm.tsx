@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
@@ -7,7 +7,6 @@ import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
-import { behandlingForm } from '@fpsak-frontend/form';
 import { RefusjonTilVurderingAndel, Beregningsgrunnlag, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import TidligereUtbetalinger from './TidligereUtbetalinger';
@@ -41,8 +40,6 @@ type OwnProps = {
     readOnly: boolean;
     submittable: boolean;
     submitEnabled: boolean;
-    behandlingId: number;
-    behandlingVersjon: number;
     beregningsgrunnlag?: Beregningsgrunnlag;
     aksjonspunkter: Aksjonspunkt[];
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -52,8 +49,6 @@ export const VurderEndringRefusjonFormImpl: FunctionComponent<OwnProps & MappedO
   submitEnabled,
   submittable,
   readOnly,
-  behandlingId,
-  behandlingVersjon,
   beregningsgrunnlag,
   aksjonspunkter,
   arbeidsgiverOpplysningerPerId,
@@ -79,8 +74,6 @@ export const VurderEndringRefusjonFormImpl: FunctionComponent<OwnProps & MappedO
             erAksjonspunktÅpent={erAksjonspunktÅpent}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             key={lagRadNøkkel(andel)}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             skjæringstidspunkt={beregningsgrunnlag.skjaeringstidspunktBeregning}
             formName={FORM_NAME}
           />
@@ -100,8 +93,6 @@ export const VurderEndringRefusjonFormImpl: FunctionComponent<OwnProps & MappedO
             isSubmittable={submittable && submitEnabled}
             isReadOnly={readOnly}
             hasOpenAksjonspunkter={erAksjonspunktÅpent}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
           />
         </>
         <VerticalSpacer sixteenPx />
@@ -145,7 +136,8 @@ const mapStateToProps = (initialState: any, initialProps: OwnProps) => {
   };
 };
 
-export default connect(mapStateToProps)(behandlingForm({
+export default connect(mapStateToProps)(reduxForm({
   form: FORM_NAME,
   enableReinitialize: true,
+  destroyOnUnmount: false,
 })(VurderEndringRefusjonFormImpl));

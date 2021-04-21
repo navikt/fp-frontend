@@ -99,8 +99,6 @@ const getFaktaPanels = (
   isAksjonspunktClosed,
   faktaOmBeregning,
   beregningsgrunnlag,
-  behandlingId,
-  behandlingVersjon,
   alleKodeverk,
   aksjonspunkter,
   erOverstyrer,
@@ -158,7 +156,7 @@ const getFaktaPanels = (
       );
     }
   });
-  setFaktaPanelForKunYtelse(faktaPanels, tilfeller, readOnly, isAksjonspunktClosed, faktaOmBeregning, behandlingId, behandlingVersjon, alleKodeverk);
+  setFaktaPanelForKunYtelse(faktaPanels, tilfeller, readOnly, isAksjonspunktClosed, faktaOmBeregning, alleKodeverk);
   faktaPanels.push(
     <React.Fragment key="VurderOgFastsettATFL">
       {spacer(true)}
@@ -166,8 +164,6 @@ const getFaktaPanels = (
         readOnly={readOnly}
         isAksjonspunktClosed={isAksjonspunktClosed}
         tilfeller={tilfeller}
-        behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
         faktaOmBeregning={faktaOmBeregning}
         beregningsgrunnlag={beregningsgrunnlag}
         alleKodeverk={alleKodeverk}
@@ -186,8 +182,6 @@ type OwnProps = {
     faktaOmBeregning: FaktaOmBeregning;
     isAksjonspunktClosed: boolean;
     beregningsgrunnlag: Beregningsgrunnlag;
-    behandlingId: number;
-    behandlingVersjon: number;
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
     aksjonspunkter: Aksjonspunkt[];
     erOverstyrer: boolean;
@@ -209,8 +203,6 @@ export const FaktaForATFLOgSNPanelImpl: FunctionComponent<OwnProps & MappedOwnPr
   aktivePaneler,
   isAksjonspunktClosed,
   faktaOmBeregning,
-  behandlingId,
-  behandlingVersjon,
   beregningsgrunnlag,
   alleKodeverk,
   aksjonspunkter,
@@ -224,8 +216,6 @@ export const FaktaForATFLOgSNPanelImpl: FunctionComponent<OwnProps & MappedOwnPr
       isAksjonspunktClosed,
       faktaOmBeregning,
       beregningsgrunnlag,
-      behandlingId,
-      behandlingVersjon,
       alleKodeverk,
       aksjonspunkter,
       erOverstyrer,

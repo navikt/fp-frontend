@@ -10,7 +10,6 @@ import { Element } from 'nav-frontend-typografi';
 import {
   VerticalSpacer, OverstyringKnapp, FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
-import { getBehandlingFormPrefix } from '@fpsak-frontend/form';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -33,10 +32,7 @@ type OwnProps = {
     kanOverstyre: boolean;
     readOnly: boolean;
     aksjonspunkter: Aksjonspunkt[];
-    behandlingFormPrefix: string;
     erOverstyrer: boolean;
-    behandlingId: number;
-    behandlingVersjon: number;
 };
 
 interface DispatchProps {
@@ -60,12 +56,11 @@ export const InntektstabellPanelImpl: FunctionComponent<OwnProps & DispatchProps
   readOnly,
   aksjonspunkter,
   reduxFormChange,
-  behandlingFormPrefix,
 }) => {
   const [erOverstyrt, setOverstyring] = useState(false);
   const toggleOverstyring = useCallback(() => {
     setOverstyring(!erOverstyrt);
-    reduxFormChange(`${behandlingFormPrefix}.vurderFaktaBeregningForm`, MANUELL_OVERSTYRING_BEREGNINGSGRUNNLAG_FIELD, !erOverstyrt);
+    reduxFormChange('vurderFaktaBeregningForm', MANUELL_OVERSTYRING_BEREGNINGSGRUNNLAG_FIELD, !erOverstyrt);
   }, [erOverstyrt]);
   return (
     <>
@@ -131,7 +126,6 @@ const getSkalKunneOverstyre = createSelector([(ownProps: OwnProps) => ownProps.e
 
 const mapStateToProps = (state, ownProps) => ({
   kanOverstyre: getSkalKunneOverstyre(ownProps),
-  behandlingFormPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
 });
 
 const mapDispatchToProps = (dispatch) => ({

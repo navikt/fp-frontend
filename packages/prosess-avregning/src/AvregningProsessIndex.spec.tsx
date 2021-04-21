@@ -47,6 +47,7 @@ describe('<AvregningProsessIndex>', () => {
       status=""
       vilkar={[]}
       alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
     />);
     expect(wrapper.find(AvregningPanel)).toHaveLength(1);
   });

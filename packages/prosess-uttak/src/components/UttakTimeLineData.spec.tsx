@@ -144,13 +144,10 @@ describe('<UttakTimeLineData>', () => {
       callbackCancelSelectedActivity={sinon.spy()}
       uttaksresultatActivity={[]}
       reduxFormChange={sinon.spy}
-      behandlingFormPrefix=""
       formName=""
       activityPanelName=""
       harSoktOmFlerbarnsdager={false}
       alleKodeverk={kodeverk}
-      behandlingVersjon={1}
-      behandlingId={1}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
     wrapper.setState({ showDelPeriodeModal: false });
@@ -178,13 +175,10 @@ describe('<UttakTimeLineData>', () => {
       callbackCancelSelectedActivity={sinon.spy()}
       reduxFormChange={sinon.spy}
       uttaksresultatActivity={[]}
-      behandlingFormPrefix=""
       formName=""
       activityPanelName=""
       harSoktOmFlerbarnsdager={false}
       alleKodeverk={kodeverk}
-      behandlingVersjon={1}
-      behandlingId={1}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
     wrapper.setState({ showDelPeriodeModal: true });
@@ -211,13 +205,10 @@ describe('<UttakTimeLineData>', () => {
       callbackCancelSelectedActivity={sinon.spy()}
       reduxFormChange={sinon.spy}
       uttaksresultatActivity={[]}
-      behandlingFormPrefix=""
       formName=""
       activityPanelName=""
       harSoktOmFlerbarnsdager={false}
       alleKodeverk={kodeverk}
-      behandlingVersjon={1}
-      behandlingId={1}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
     wrapper.setState({ showDelPeriodeModal: false });
@@ -246,13 +237,10 @@ describe('<UttakTimeLineData>', () => {
       callbackCancelSelectedActivity={sinon.spy()}
       uttaksresultatActivity={[]}
       reduxFormChange={sinon.spy}
-      behandlingFormPrefix=""
       formName=""
       activityPanelName=""
       harSoktOmFlerbarnsdager={false}
       alleKodeverk={kodeverk}
-      behandlingVersjon={1}
-      behandlingId={1}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
     const buttons = wrapper.find(TimeLineButton);
@@ -278,13 +266,10 @@ describe('<UttakTimeLineData>', () => {
       callbackCancelSelectedActivity={callbackCancelSelectedActivity}
       uttaksresultatActivity={[]}
       reduxFormChange={sinon.spy}
-      behandlingFormPrefix=""
       formName=""
       activityPanelName=""
       harSoktOmFlerbarnsdager={false}
       alleKodeverk={kodeverk}
-      behandlingVersjon={1}
-      behandlingId={1}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
     const uttakActivity = wrapper.find(UttakActivity);
@@ -310,14 +295,11 @@ describe('<UttakTimeLineData>', () => {
       callbackCancelSelectedActivity={callbackCancelSelectedActivity}
       uttaksresultatActivity={[]}
       reduxFormChange={sinon.spy}
-      behandlingFormPrefix=""
       formName=""
       activityPanelName=""
       harSoktOmFlerbarnsdager={false}
       stonadskonto={stonadskonto}
       alleKodeverk={kodeverk}
-      behandlingVersjon={1}
-      behandlingId={1}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
     const uttak = wrapper.find(AksjonspunktHelpTextTemp);
@@ -343,14 +325,11 @@ describe('<UttakTimeLineData>', () => {
       callbackCancelSelectedActivity={callbackCancelSelectedActivity}
       uttaksresultatActivity={[]}
       reduxFormChange={sinon.spy}
-      behandlingFormPrefix=""
       formName=""
       activityPanelName=""
       harSoktOmFlerbarnsdager={false}
       stonadskonto={stonadskontoFlerGarTom}
       alleKodeverk={kodeverk}
-      behandlingVersjon={1}
-      behandlingId={1}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
     const uttak = wrapper.find(AksjonspunktHelpTextTemp);

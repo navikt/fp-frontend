@@ -29,8 +29,6 @@ describe('<DelOppPeriodeModal>', () => {
       cancelEvent={cancelEvent}
       finnesBelopMed0Verdi={false}
       splitPeriod={() => undefined}
-      behandlingId={1}
-      behandlingVersjon={2}
     />, messages);
 
     const modal = wrapper.find(Modal);
@@ -55,8 +53,6 @@ describe('<DelOppPeriodeModal>', () => {
       cancelEvent={cancelEvent}
       finnesBelopMed0Verdi={false}
       splitPeriod={() => undefined}
-      behandlingId={1}
-      behandlingVersjon={2}
     />, messages);
     wrapper.find(Knapp).simulate('click');
     expect(cancelEvent).toHaveProperty('callCount', 1);

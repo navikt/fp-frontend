@@ -35,8 +35,6 @@ describe('<BehandleKlageFormKaImpl>', () => {
       intl={intlMock}
       sprakkode={sprakkode}
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
       submitCallback={sinon.spy()}
       klageVurdering={{} as KlageVurdering}
       {...reduxFormPropsMock}
@@ -57,8 +55,6 @@ describe('<BehandleKlageFormKaImpl>', () => {
       intl={intlMock}
       sprakkode={sprakkode}
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
       submitCallback={sinon.spy()}
       klageVurdering={{} as KlageVurdering}
       {...reduxFormPropsMock}
@@ -83,8 +79,6 @@ describe('<BehandleKlageFormKaImpl>', () => {
       intl={intlMock}
       sprakkode={sprakkode}
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
       submitCallback={sinon.spy()}
       klageVurdering={{} as KlageVurdering}
       {...reduxFormPropsMock}

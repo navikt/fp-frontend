@@ -4,6 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import ForeldrepengerForm from './components/ForeldrepengerForm';
 import messages from '../i18n/nb_NO.json';
@@ -28,14 +29,16 @@ const ForeldrepengerPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   fagsakPersonnummer,
 }) => (
   <RawIntlProvider value={intl}>
-    <ForeldrepengerForm
-      onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
-      onSubmit={onSubmit}
-      readOnly={readOnly}
-      soknadData={soknadData}
-      alleKodeverk={alleKodeverk}
-      fagsakPersonnummer={fagsakPersonnummer}
-    />
+    <ReduxWrapper formName="ForeldrepengerPapirsoknadIndex">
+      <ForeldrepengerForm
+        onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
+        onSubmit={onSubmit}
+        readOnly={readOnly}
+        soknadData={soknadData}
+        alleKodeverk={alleKodeverk}
+        fagsakPersonnummer={fagsakPersonnummer}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

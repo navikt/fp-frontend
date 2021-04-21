@@ -3,6 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import Messages, { FormValues, Template } from './components/Messages';
 import messages from '../i18n/nb_NO.json';
@@ -15,8 +16,6 @@ interface OwnProps {
   templates?: Template[];
   sprakKode: Kodeverk;
   previewCallback: (mottaker: string, brevmalkode: string, fritekst: string, arsakskode: string) => void;
-  behandlingId: number;
-  behandlingVersjon: number;
   isKontrollerRevurderingApOpen?: boolean;
   revurderingVarslingArsak: KodeverkMedNavn[];
   fagsakYtelseType: Kodeverk;
@@ -29,27 +28,25 @@ const MeldingerSakIndex: FunctionComponent<OwnProps> = ({
   templates = [],
   sprakKode,
   previewCallback,
-  behandlingId,
-  behandlingVersjon,
   isKontrollerRevurderingApOpen = false,
   revurderingVarslingArsak,
   fagsakYtelseType,
   kanVeilede,
 }) => (
   <RawIntlProvider value={intl}>
-    <Messages
-      submitCallback={submitCallback}
-      recipients={recipients}
-      templates={templates}
-      sprakKode={sprakKode}
-      previewCallback={previewCallback}
-      behandlingId={behandlingId}
-      behandlingVersjon={behandlingVersjon}
-      isKontrollerRevurderingApOpen={isKontrollerRevurderingApOpen}
-      revurderingVarslingArsak={revurderingVarslingArsak}
-      fagsakYtelseType={fagsakYtelseType}
-      kanVeilede={kanVeilede}
-    />
+    <ReduxWrapper formName="MeldingerSakIndex">
+      <Messages
+        submitCallback={submitCallback}
+        recipients={recipients}
+        templates={templates}
+        sprakKode={sprakKode}
+        previewCallback={previewCallback}
+        isKontrollerRevurderingApOpen={isKontrollerRevurderingApOpen}
+        revurderingVarslingArsak={revurderingVarslingArsak}
+        fagsakYtelseType={fagsakYtelseType}
+        kanVeilede={kanVeilede}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

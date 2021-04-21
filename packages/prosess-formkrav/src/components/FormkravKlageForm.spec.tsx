@@ -40,8 +40,6 @@ describe('<FormkravKlageForm>', () => {
 
   it('skal vise tre options når to mulige klagbare vedtak', () => {
     const wrapper = shallowWithIntl(<FormkravKlageForm
-      behandlingId={1}
-      behandlingVersjon={1}
       readOnly={false}
       readOnlySubmitButton
       aksjonspunktCode={aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP}

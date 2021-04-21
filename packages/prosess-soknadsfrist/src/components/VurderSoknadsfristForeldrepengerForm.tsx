@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createSelector } from 'reselect';
 import moment from 'moment';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { Column, Row } from 'nav-frontend-grid';
 import {
@@ -13,10 +13,7 @@ import Panel from 'nav-frontend-paneler';
 import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
-import {
-  DatepickerField, RadioGroupField, RadioOption, behandlingForm, behandlingFormValueSelector, hasBehandlingFormErrorsOfType, isBehandlingFormDirty,
-  isBehandlingFormSubmitting,
-} from '@fpsak-frontend/form';
+import { DatepickerField, RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import {
   dateBeforeOrEqualToToday, DDMMYYYY_DATE_FORMAT, hasValidDate, required,
 } from '@fpsak-frontend/utils';
@@ -39,8 +36,6 @@ type FormValues = {
 }
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   uttakPeriodeGrense?: UttakPeriodeGrense;
   mottattDato: string;
   aksjonspunkter: Aksjonspunkt[];
@@ -76,8 +71,6 @@ export const VurderSoknadsfristForeldrepengerFormImpl: FunctionComponent<PureOwn
   soknadsperiodeStart,
   soknadsperiodeSlutt,
   soknadsfristdato,
-  behandlingId,
-  behandlingVersjon,
   isApOpen,
   ...formProps
 }) => (
@@ -151,13 +144,8 @@ export const VurderSoknadsfristForeldrepengerFormImpl: FunctionComponent<PureOwn
         <VerticalSpacer twentyPx />
         <ProsessStegSubmitButton
           formName={formProps.form}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
           isReadOnly={readOnly}
           isSubmittable={!readOnlySubmitButton}
-          isBehandlingFormSubmitting={isBehandlingFormSubmitting}
-          isBehandlingFormDirty={isBehandlingFormDirty}
-          hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
         />
       </div>
     </form>
@@ -197,11 +185,11 @@ const formName = 'VurderSoknadsfristForeldrepengerForm';
 
 const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
   const uttaksperiodegrense = ownProps.uttakPeriodeGrense;
-  const { behandlingId, behandlingVersjon, aksjonspunkter } = ownProps;
+  const { aksjonspunkter } = ownProps;
   return {
     onSubmit: lagSubmitFn(ownProps),
     initialValues: buildInitialValues(ownProps),
-    gyldigSenFremsetting: behandlingFormValueSelector(formName, behandlingId, behandlingVersjon)(state, 'gyldigSenFremsetting'),
+    gyldigSenFremsetting: formValueSelector(formName)(state, 'gyldigSenFremsetting'),
     antallDagerSoknadLevertForSent: uttaksperiodegrense ? uttaksperiodegrense.antallDagerLevertForSent : undefined,
     soknadsperiodeStart: uttaksperiodegrense ? uttaksperiodegrense.soknadsperiodeStart : undefined,
     soknadsperiodeSlutt: uttaksperiodegrense ? uttaksperiodegrense.soknadsperiodeSlutt : undefined,
@@ -210,6 +198,7 @@ const mapStateToPropsFactory = (state: any, ownProps: PureOwnProps): MappedOwnPr
   };
 };
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToPropsFactory)(reduxForm({
   form: formName,
+  destroyOnUnmount: false,
 })(VurderSoknadsfristForeldrepengerFormImpl));

@@ -9,7 +9,7 @@ import {
   AksjonspunktHelpTextTemp, EditedIcon, VerticalSpacer, FaktaGruppe,
 } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { SelectField, behandlingFormValueSelector } from '@fpsak-frontend/form';
+import { SelectField } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
 import VilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { isFieldEdited, FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
@@ -18,6 +18,7 @@ import {
 } from '@fpsak-frontend/types';
 import { AvklarFaktaForForeldreansvarAksjonspunktAp, AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
+import { formValueSelector } from 'redux-form';
 import OmsorgsovertakelseFaktaPanel, { FormValues as OmsorgFormValues } from './OmsorgsovertakelseFaktaPanel';
 import RettighetFaktaPanel, { FormValues as RettighetFormValues } from './RettighetFaktaPanel';
 import BarnPanel from './BarnPanel';
@@ -48,8 +49,6 @@ export type FormValues = OmsorgFormValues & RettighetFormValues & {
 }
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
   readOnly: boolean;
@@ -92,8 +91,6 @@ const OmsorgOgForeldreansvarFaktaFormImpl: FunctionComponent<PureOwnProps & Mapp
   relatertYtelseTypes,
   editedStatus,
   erAksjonspunktForeldreansvar,
-  behandlingId,
-  behandlingVersjon,
   alleMerknaderFraBeslutter,
   personoversikt,
   gjeldendeFamiliehendelse,
@@ -117,8 +114,6 @@ const OmsorgOgForeldreansvarFaktaFormImpl: FunctionComponent<PureOwnProps & Mapp
         <Column xs="6">
           <RettighetFaktaPanel
             relatertYtelseTypes={relatertYtelseTypes}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           />
         </Column>
@@ -185,7 +180,7 @@ const getEditedStatus = createSelector(
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   editedStatus: getEditedStatus(ownProps),
-  vilkarType: behandlingFormValueSelector('OmsorgOgForeldreansvarInfoPanel', ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'vilkarType'),
+  vilkarType: formValueSelector('OmsorgOgForeldreansvarInfoPanel')(state, 'vilkarType'),
 });
 
 const OmsorgOgForeldreansvarFaktaForm = connect(mapStateToProps)(OmsorgOgForeldreansvarFaktaFormImpl);

@@ -3,6 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { StandardProsessPanelProps } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import ErForeldreansvarVilkaarOppfyltForm from './components/ErForeldreansvarVilkaarOppfyltForm';
 import messages from '../i18n/nb_NO.json';
@@ -24,21 +25,23 @@ const ForeldreansvarVilkarProsessIndex: FunctionComponent<OwnProps & StandardPro
   isReadOnly,
   readOnlySubmitButton,
   alleKodeverk,
+  formData,
+  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <ErForeldreansvarVilkaarOppfyltForm
-      behandlingId={behandling.id}
-      behandlingVersjon={behandling.versjon}
-      behandlingsresultat={behandling.behandlingsresultat}
-      isForeldreansvar2Ledd={isForeldreansvar2Ledd}
-      isEngangsstonad={isEngangsstonad}
-      aksjonspunkter={aksjonspunkter}
-      status={status}
-      submitCallback={submitCallback}
-      readOnly={isReadOnly}
-      readOnlySubmitButton={readOnlySubmitButton}
-      alleKodeverk={alleKodeverk}
-    />
+    <ReduxWrapper formName="ForeldreansvarVilkarProsessIndex" formData={formData} setFormData={setFormData}>
+      <ErForeldreansvarVilkaarOppfyltForm
+        behandlingsresultat={behandling.behandlingsresultat}
+        isForeldreansvar2Ledd={isForeldreansvar2Ledd}
+        isEngangsstonad={isEngangsstonad}
+        aksjonspunkter={aksjonspunkter}
+        status={status}
+        submitCallback={submitCallback}
+        readOnly={isReadOnly}
+        readOnlySubmitButton={readOnlySubmitButton}
+        alleKodeverk={alleKodeverk}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

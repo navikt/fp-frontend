@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import {
   FormattedMessage, injectIntl, WrappedComponentProps,
 } from 'react-intl';
-import { InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { Undertittel, Element } from 'nav-frontend-typografi';
@@ -11,7 +11,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { AksjonspunktBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { required } from '@fpsak-frontend/utils';
-import { RadioGroupField, RadioOption, behandlingForm } from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import { MerkOpptjeningUtlandAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -28,8 +28,6 @@ type FormValues = {
 }
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   readOnly: boolean;
   harApneAksjonspunkter: boolean;
   submittable: boolean;
@@ -45,8 +43,6 @@ interface MappedOwnProps {
 
 export const InnhentDokOpptjeningUtlandPanel: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
   intl,
-  behandlingId,
-  behandlingVersjon,
   readOnly,
   harApneAksjonspunkter,
   submittable,
@@ -93,8 +89,6 @@ export const InnhentDokOpptjeningUtlandPanel: FunctionComponent<PureOwnProps & M
         isSubmittable={submittable}
         isReadOnly={readOnly}
         hasOpenAksjonspunkter={harApneAksjonspunkter}
-        behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
       />
     </AksjonspunktBox>
   </form>
@@ -117,4 +111,7 @@ const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
   },
 });
 
-export default connect(mapStateToProps)(behandlingForm({ form: 'InnhentDokOpptjeningUtlandPanel' })(injectIntl(InnhentDokOpptjeningUtlandPanel)));
+export default connect(mapStateToProps)(reduxForm({
+  form: 'InnhentDokOpptjeningUtlandPanel',
+  destroyOnUnmount: false,
+})(injectIntl(InnhentDokOpptjeningUtlandPanel)));

@@ -46,8 +46,6 @@ describe('<VedtakKlageForm>', () => {
           kode: 'KLAGER_IKKE_PART', navn: 'Klager er ikke part', kodeverk: 'KLAGE_AVVIST_AARSAK',
         }],
       }}
-      behandlingId={1}
-      behandlingVersjon={2}
       klageVurdering={{} as KlageVurdering}
       aksjonspunkter={[]}
       submitCallback={() => undefined}

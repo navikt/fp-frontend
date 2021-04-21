@@ -2,10 +2,9 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 
-import { behandlingForm } from '@fpsak-frontend/form';
 import {
   FaktaBegrunnelseTextField, FaktaSubmitButton, isFieldEdited, FieldEditedInfo, FaktaBegrunnelseFormValues,
 } from '@fpsak-frontend/fakta-felles';
@@ -49,8 +48,6 @@ interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];
   submittable: boolean;
   readOnly: boolean;
-  behandlingId: number;
-  behandlingVersjon: number;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   hasOpenAksjonspunkter: boolean;
@@ -82,8 +79,6 @@ export const AdopsjonInfoPanelImpl: FunctionComponent<PureOwnProps & MappedOwnPr
   alleMerknaderFraBeslutter,
   alleKodeverk,
   isForeldrepengerFagsak,
-  behandlingId,
-  behandlingVersjon,
   farSokerType,
   ...formProps
 }) => (
@@ -96,8 +91,6 @@ export const AdopsjonInfoPanelImpl: FunctionComponent<PureOwnProps & MappedOwnPr
       <Row>
         <Column xs="6">
           <DokumentasjonFaktaForm
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             readOnly={readOnly}
             editedStatus={editedStatus}
             erForeldrepengerFagsak={isForeldrepengerFagsak}
@@ -138,8 +131,6 @@ export const AdopsjonInfoPanelImpl: FunctionComponent<PureOwnProps & MappedOwnPr
           <VerticalSpacer twentyPx />
           <FaktaSubmitButton
             formName={formProps.form}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             isSubmittable={submittable}
             isReadOnly={readOnly}
             hasOpenAksjonspunkter={hasOpenAksjonspunkter}
@@ -212,6 +203,7 @@ const mapStateToPropsFactory = (_state: any, ownProps: PureOwnProps): MappedOwnP
   onSubmit: lagSubmitFn(ownProps),
 });
 
-export default connect(mapStateToPropsFactory)(behandlingForm({
+export default connect(mapStateToPropsFactory)(reduxForm({
   form: 'AdopsjonInfoPanel',
+  destroyOnUnmount: false,
 })(AdopsjonInfoPanelImpl));

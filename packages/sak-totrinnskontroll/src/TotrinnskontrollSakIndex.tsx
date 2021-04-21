@@ -12,6 +12,7 @@ import klageBehandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArs
 import vurderPaNyttArsakType from '@fpsak-frontend/kodeverk/src/vurderPaNyttArsakType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 import {
   BehandlingAppKontekst, Kodeverk, KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
@@ -127,23 +128,23 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   return (
     <RawIntlProvider value={intl}>
       {erStatusFatterVedtak && (
-        <TotrinnskontrollBeslutterForm
-          behandling={behandling}
-          behandlingId={behandling.id}
-          behandlingVersjon={behandling.versjon}
-          totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}
-          readOnly={readOnly}
-          onSubmit={submitHandler}
-          forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
-          erForeldrepengerFagsak={fagsakYtelseType.kode === FagsakYtelseType.FORELDREPENGER}
-          behandlingKlageVurdering={behandlingKlageVurdering}
-          arbeidsforholdHandlingTyper={arbeidsforholdHandlingTyper}
-          skjemalenkeTyper={skjemalenkeTyper}
-          erBehandlingEtterKlage={erBehandlingEtterKlage}
-          faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
-          erTilbakekreving={erTilbakekreving}
-          lagLenke={lagLenke}
-        />
+        <ReduxWrapper formName="TotrinnskontrollSakIndex">
+          <TotrinnskontrollBeslutterForm
+            behandling={behandling}
+            totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}
+            readOnly={readOnly}
+            onSubmit={submitHandler}
+            forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
+            erForeldrepengerFagsak={fagsakYtelseType.kode === FagsakYtelseType.FORELDREPENGER}
+            behandlingKlageVurdering={behandlingKlageVurdering}
+            arbeidsforholdHandlingTyper={arbeidsforholdHandlingTyper}
+            skjemalenkeTyper={skjemalenkeTyper}
+            erBehandlingEtterKlage={erBehandlingEtterKlage}
+            faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
+            erTilbakekreving={erTilbakekreving}
+            lagLenke={lagLenke}
+          />
+        </ReduxWrapper>
       )}
       {!erStatusFatterVedtak && (
         <TotrinnskontrollSaksbehandlerPanel

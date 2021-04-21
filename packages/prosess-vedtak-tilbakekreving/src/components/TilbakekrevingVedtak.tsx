@@ -19,9 +19,7 @@ interface OwnProps {
   resultat: Kodeverk;
   perioder: BeregningResultatPeriode[];
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  behandlingId: number;
   behandlingUuid: string;
-  behandlingVersjon: number;
   avsnittsliste: VedtaksbrevAvsnitt[];
   fetchPreviewVedtaksbrev: (data: ForhandsvisData) => Promise<any>;
   erRevurderingTilbakekrevingKlage?: boolean;
@@ -34,9 +32,7 @@ const TilbakekrevingVedtak: FunctionComponent<OwnProps> = ({
   resultat,
   perioder,
   alleKodeverk,
-  behandlingId,
   behandlingUuid,
-  behandlingVersjon,
   avsnittsliste,
   fetchPreviewVedtaksbrev,
   erRevurderingTilbakekrevingKlage,
@@ -61,9 +57,7 @@ const TilbakekrevingVedtak: FunctionComponent<OwnProps> = ({
       <TilbakekrevingVedtakForm
         submitCallback={submitCallback}
         readOnly={readOnly}
-        behandlingId={behandlingId}
         behandlingUuid={behandlingUuid}
-        behandlingVersjon={behandlingVersjon}
         avsnittsliste={avsnittsliste}
         fetchPreviewVedtaksbrev={fetchPreviewVedtaksbrev}
         erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage}

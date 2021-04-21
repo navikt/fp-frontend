@@ -45,7 +45,6 @@ describe('<TilbakekrevingPeriodeForm>', () => {
     } as DataForPeriode;
     const wrapper = shallowWithIntl(<TilbakekrevingPeriodeFormImpl
       data={periode}
-      behandlingFormPrefix="behandling_V1"
       skjulPeriode={() => undefined}
       readOnly={false}
       erBelopetIBehold
@@ -60,7 +59,6 @@ describe('<TilbakekrevingPeriodeForm>', () => {
       sarligGrunnTyper={sarligGrunnTyper}
       reduserteBelop={[]}
       behandlingId={1}
-      behandlingVersjon={1}
       beregnBelop={() => undefined}
       intl={intlMock}
       vilkarsVurdertePerioder={[]}
@@ -118,7 +116,6 @@ describe('<TilbakekrevingPeriodeForm>', () => {
     const changeValue = sinon.spy();
     const wrapper = shallowWithIntl(<TilbakekrevingPeriodeFormImpl
       data={periode}
-      behandlingFormPrefix="behandling_V1"
       skjulPeriode={() => undefined}
       readOnly={false}
       erBelopetIBehold
@@ -133,7 +130,6 @@ describe('<TilbakekrevingPeriodeForm>', () => {
       sarligGrunnTyper={sarligGrunnTyper}
       reduserteBelop={[]}
       behandlingId={1}
-      behandlingVersjon={1}
       beregnBelop={() => undefined}
       intl={intlMock}
       vilkarsVurdertePerioder={vilkårsPerioder}

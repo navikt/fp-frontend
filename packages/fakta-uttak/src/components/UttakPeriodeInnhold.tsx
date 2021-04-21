@@ -27,8 +27,6 @@ export const renderPeriode = (
   uttakPeriodeType: Kodeverk,
   behandlingStatusKode: string,
   farSøkerFør6Uker: boolean,
-  behandlingId: number,
-  behandlingVersjon: number,
   gjeldendeFamiliehendelse: FamilieHendelse,
   vilkarForSykdomExists: boolean,
   getKodeverknavn: (kodeverk: Kodeverk) => string,
@@ -54,9 +52,6 @@ export const renderPeriode = (
           bekreftet={bekreftet}
           uttakPeriodeType={uttakPeriodeType}
           behandlingStatusKode={behandlingStatusKode}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
-          getKodeverknavn={getKodeverknavn}
         />
       );
     case utsettelseArsakCodes.SYKDOM:
@@ -72,11 +67,8 @@ export const renderPeriode = (
           fraDato={fraDato}
           tilDato={tilDato}
           overforingArsak={overforingArsak}
-          utsettelseArsak={utsettelseArsak}
           bekreftet={bekreftet}
           behandlingStatusKode={behandlingStatusKode}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
           gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
           vilkarForSykdomExists={vilkarForSykdomExists}
           erHeimevern={utsettelseSwitch === utsettelseArsakCodes.HV_OVELSE}
@@ -91,14 +83,10 @@ export const renderPeriode = (
           id={id}
           updatePeriode={updatePeriode}
           cancelEditPeriode={cancelEditPeriode}
-          overforingArsak={overforingArsak}
           readOnly={readOnly}
           fraDato={fraDato}
           tilDato={tilDato}
-          bekreftet={bekreftet}
           behandlingStatusKode={behandlingStatusKode}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
         />
       );
     case utsettelseArsakCodes.UDEFINERT:
@@ -112,12 +100,9 @@ export const renderPeriode = (
             readOnly={readOnly}
             fraDato={fraDato}
             tilDato={tilDato}
-            utsettelseArsak={utsettelseArsak}
             overforingArsak={overforingArsak}
             bekreftet={bekreftet}
             behandlingStatusKode={behandlingStatusKode}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
             vilkarForSykdomExists={vilkarForSykdomExists}
           />
@@ -132,14 +117,10 @@ export const renderPeriode = (
             id={id}
             updatePeriode={updatePeriode}
             cancelEditPeriode={cancelEditPeriode}
-            overforingArsak={overforingArsak}
             readOnly={readOnly}
             fraDato={fraDato}
             tilDato={tilDato}
-            bekreftet={bekreftet}
             behandlingStatusKode={behandlingStatusKode}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
           />
         );
       }
@@ -151,14 +132,10 @@ export const renderPeriode = (
             id={id}
             updatePeriode={updatePeriode}
             cancelEditPeriode={cancelEditPeriode}
-            overforingArsak={overforingArsak}
             readOnly={readOnly}
             fraDato={fraDato}
             tilDato={tilDato}
-            bekreftet={bekreftet}
             behandlingStatusKode={behandlingStatusKode}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
           />
         );
       }
@@ -176,9 +153,6 @@ export const renderPeriode = (
           bekreftet={bekreftet}
           uttakPeriodeType={uttakPeriodeType}
           behandlingStatusKode={behandlingStatusKode}
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
-          getKodeverknavn={getKodeverknavn}
         />
       );
     default:
@@ -203,8 +177,6 @@ interface OwnProps {
   farSøkerFør6Uker: boolean;
   familiehendelse: FamilieHendelseSamling;
   vilkarForSykdomExists: boolean;
-  behandlingId: number;
-  behandlingVersjon: number;
   arbeidstidprosent?: number;
   getKodeverknavn: (kodeverk: Kodeverk) => string;
   sisteUttakdatoFørsteSeksUker: moment.Moment;
@@ -226,8 +198,6 @@ export const UttakPeriodeInnhold: FunctionComponent<OwnProps> = ({
   uttakPeriodeType,
   behandlingStatusKode,
   farSøkerFør6Uker,
-  behandlingId,
-  behandlingVersjon,
   familiehendelse,
   vilkarForSykdomExists,
   getKodeverknavn,
@@ -253,8 +223,6 @@ export const UttakPeriodeInnhold: FunctionComponent<OwnProps> = ({
         uttakPeriodeType,
         behandlingStatusKode,
         farSøkerFør6Uker,
-        behandlingId,
-        behandlingVersjon,
         familiehendelse.gjeldende,
         vilkarForSykdomExists,
         getKodeverknavn,

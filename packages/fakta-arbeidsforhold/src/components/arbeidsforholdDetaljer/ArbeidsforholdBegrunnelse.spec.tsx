@@ -11,8 +11,6 @@ describe('<ArbeidsforholdBegrunnelse>', () => {
       isDirty={false}
       harBegrunnelse={false}
       skalAvslaaYtelse={false}
-      behandlingId={1}
-      behandlingVersjon={1}
     />);
     expect(wrapper.find(TextAreaField)).toHaveLength(0);
   });
@@ -23,8 +21,6 @@ describe('<ArbeidsforholdBegrunnelse>', () => {
       isDirty={false}
       harBegrunnelse={false}
       skalAvslaaYtelse
-      behandlingId={1}
-      behandlingVersjon={1}
     />);
     expect(wrapper.find(TextAreaField)).toHaveLength(0);
   });
@@ -35,8 +31,6 @@ describe('<ArbeidsforholdBegrunnelse>', () => {
       isDirty
       harBegrunnelse={false}
       skalAvslaaYtelse
-      behandlingId={1}
-      behandlingVersjon={1}
     />);
     expect(wrapper.find(TextAreaField)).toHaveLength(0);
   });
@@ -47,8 +41,6 @@ describe('<ArbeidsforholdBegrunnelse>', () => {
       isDirty
       harBegrunnelse
       skalAvslaaYtelse
-      behandlingId={1}
-      behandlingVersjon={1}
     />);
     expect(wrapper.find(TextAreaField)).toHaveLength(0);
   });
@@ -59,8 +51,6 @@ describe('<ArbeidsforholdBegrunnelse>', () => {
       isDirty
       harBegrunnelse
       skalAvslaaYtelse={false}
-      behandlingId={1}
-      behandlingVersjon={1}
     />);
     expect(wrapper.find(TextAreaField)).toHaveLength(1);
   });
@@ -71,8 +61,6 @@ describe('<ArbeidsforholdBegrunnelse>', () => {
       isDirty
       harBegrunnelse={false}
       skalAvslaaYtelse={false}
-      behandlingId={1}
-      behandlingVersjon={1}
     />);
     expect(wrapper.find(TextAreaField)).toHaveLength(1);
   });
@@ -83,8 +71,6 @@ describe('<ArbeidsforholdBegrunnelse>', () => {
       isDirty={false}
       harBegrunnelse
       skalAvslaaYtelse={false}
-      behandlingId={1}
-      behandlingVersjon={1}
     />);
     expect(wrapper.find(TextAreaField)).toHaveLength(1);
   });

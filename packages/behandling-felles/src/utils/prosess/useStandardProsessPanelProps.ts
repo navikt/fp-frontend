@@ -1,4 +1,6 @@
-import { useCallback, useContext, useMemo } from 'react';
+import {
+  useCallback, useContext, useMemo, useState,
+} from 'react';
 
 import {
   Aksjonspunkt, Behandling, Fagsak, StandardProsessPanelProps, Vilkar,
@@ -83,6 +85,7 @@ const useStandardProsessPanelProps = (
   vilkarKoder?: string[],
   lagringSideEffekter?: (aksjonspunktModeller: any) => () => void,
 ): StandardProsessPanelProps => {
+  const [formData, setFormData] = useState();
   const value = useContext(StandardPropsStateContext);
 
   const aksjonspunkterForSteg = useMemo(() => (data && aksjonspunktKoder
@@ -128,6 +131,8 @@ const useStandardProsessPanelProps = (
     readOnlySubmitButton,
     submitCallback,
     status,
+    formData,
+    setFormData,
   };
 };
 

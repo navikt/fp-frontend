@@ -29,8 +29,6 @@ describe('<InnsynVedtakForm>', () => {
         kodeverk: '',
       }}
       documents={[]}
-      behandlingId={1}
-      behandlingVersjon={2}
       innsynDokumenter={[]}
       innsynMottattDato="10.10.2020"
       innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
@@ -57,8 +55,6 @@ describe('<InnsynVedtakForm>', () => {
       }}
       saksNr="123"
       documents={[]}
-      behandlingId={1}
-      behandlingVersjon={2}
       innsynDokumenter={[]}
       innsynMottattDato="10.10.2020"
       innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
@@ -86,8 +82,6 @@ describe('<InnsynVedtakForm>', () => {
         kodeverk: '',
       }}
       documents={[]}
-      behandlingId={1}
-      behandlingVersjon={2}
       innsynDokumenter={[]}
       innsynMottattDato="10.10.2020"
       innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
@@ -114,8 +108,6 @@ describe('<InnsynVedtakForm>', () => {
       }}
       saksNr="123"
       documents={[]}
-      behandlingId={1}
-      behandlingVersjon={2}
       innsynDokumenter={[]}
       innsynMottattDato="10.10.2020"
       innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
@@ -143,8 +135,6 @@ describe('<InnsynVedtakForm>', () => {
         kodeverk: '',
       }}
       documents={[]}
-      behandlingId={1}
-      behandlingVersjon={2}
       innsynDokumenter={[]}
       innsynMottattDato="10.10.2020"
       innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
@@ -171,8 +161,6 @@ describe('<InnsynVedtakForm>', () => {
         kodeverk: '',
       }}
       documents={[]}
-      behandlingId={1}
-      behandlingVersjon={2}
       innsynDokumenter={[]}
       innsynMottattDato="10.10.2020"
       innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
@@ -199,8 +187,6 @@ describe('<InnsynVedtakForm>', () => {
       }}
       saksNr="123"
       documents={[]}
-      behandlingId={1}
-      behandlingVersjon={2}
       innsynDokumenter={[]}
       innsynMottattDato="10.10.2020"
       innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
@@ -228,8 +214,6 @@ describe('<InnsynVedtakForm>', () => {
       }}
       saksNr="123"
       documents={[]}
-      behandlingId={1}
-      behandlingVersjon={2}
       innsynDokumenter={[]}
       innsynMottattDato="10.10.2020"
       innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
@@ -256,8 +240,6 @@ describe('<InnsynVedtakForm>', () => {
       }}
       saksNr="123"
       documents={[]}
-      behandlingId={1}
-      behandlingVersjon={2}
       innsynDokumenter={[]}
       innsynMottattDato="10.10.2020"
       innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
@@ -284,8 +266,6 @@ describe('<InnsynVedtakForm>', () => {
       }}
       saksNr="123"
       documents={[]}
-      behandlingId={1}
-      behandlingVersjon={2}
       innsynDokumenter={[]}
       innsynMottattDato="10.10.2020"
       innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
@@ -313,8 +293,6 @@ describe('<InnsynVedtakForm>', () => {
       }}
       saksNr="123"
       documents={[]}
-      behandlingId={1}
-      behandlingVersjon={2}
       innsynDokumenter={[]}
       innsynMottattDato="10.10.2020"
       innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
@@ -341,8 +319,6 @@ describe('<InnsynVedtakForm>', () => {
       }}
       saksNr="123"
       documents={[]}
-      behandlingId={1}
-      behandlingVersjon={2}
       innsynDokumenter={[]}
       innsynMottattDato="10.10.2020"
       innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}
@@ -369,8 +345,6 @@ describe('<InnsynVedtakForm>', () => {
       }}
       saksNr="123"
       documents={[]}
-      behandlingId={1}
-      behandlingVersjon={2}
       innsynDokumenter={[]}
       innsynMottattDato="10.10.2020"
       innsynResultatType={{ kode: 'kodeTest', kodeverk: '' }}

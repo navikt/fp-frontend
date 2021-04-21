@@ -60,8 +60,6 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         tilVurdering: true,
         replaceOptions: [],
       } as CustomArbeidsforhold}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
@@ -89,8 +87,6 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         tilVurdering: true,
         replaceOptions: [{ id: '2' } as Arbeidsforhold],
       } as CustomArbeidsforhold}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
@@ -119,8 +115,6 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         tilVurdering: true,
         replaceOptions: [{ id: '2' } as Arbeidsforhold],
       } as CustomArbeidsforhold}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
@@ -149,8 +143,6 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         tilVurdering: true,
         replaceOptions: [],
       } as CustomArbeidsforhold}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
@@ -179,8 +171,6 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         tilVurdering: true,
         replaceOptions: [],
       } as CustomArbeidsforhold}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
@@ -209,8 +199,6 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         tilVurdering: true,
         replaceOptions: [],
       } as CustomArbeidsforhold}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
@@ -239,8 +227,6 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         tilVurdering: true,
         replaceOptions: [],
       } as CustomArbeidsforhold}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
@@ -268,8 +254,6 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         tilVurdering: true,
         replaceOptions: [],
       } as CustomArbeidsforhold}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
@@ -298,8 +282,6 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         tilVurdering: true,
         replaceOptions: [],
       } as CustomArbeidsforhold}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
@@ -328,8 +310,6 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         tilVurdering: true,
         replaceOptions: [],
       } as CustomArbeidsforhold}
-      behandlingId={1}
-      behandlingVersjon={1}
       alleKodeverk={{}}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}

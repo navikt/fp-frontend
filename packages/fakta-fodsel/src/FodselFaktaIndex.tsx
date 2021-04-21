@@ -5,6 +5,7 @@ import {
   StandardFaktaPanelProps, FamilieHendelse, FamilieHendelseSamling, Soknad,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import FodselInfoPanel from './components/FodselInfoPanel';
 import messages from '../i18n/nb_NO.json';
@@ -30,23 +31,25 @@ const FodselFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = 
   alleMerknaderFraBeslutter,
   submitCallback,
   readOnly,
+  formData,
+  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <FodselInfoPanel
-      behandlingId={behandling.id}
-      behandlingVersjon={behandling.versjon}
-      behandlingType={behandling.type}
-      soknad={soknad}
-      familiehendelse={familiehendelse}
-      soknadOriginalBehandling={soknadOriginalBehandling}
-      familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
-      alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-      aksjonspunkter={aksjonspunkter}
-      hasOpenAksjonspunkter={harApneAksjonspunkter}
-      submittable={submittable}
-      submitCallback={submitCallback}
-      readOnly={readOnly}
-    />
+    <ReduxWrapper formName="FodselFaktaIndex" formData={formData} setFormData={setFormData}>
+      <FodselInfoPanel
+        behandlingType={behandling.type}
+        soknad={soknad}
+        familiehendelse={familiehendelse}
+        soknadOriginalBehandling={soknadOriginalBehandling}
+        familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
+        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+        aksjonspunkter={aksjonspunkter}
+        hasOpenAksjonspunkter={harApneAksjonspunkter}
+        submittable={submittable}
+        submitCallback={submitCallback}
+        readOnly={readOnly}
+      />
+    </ReduxWrapper>
   </RawIntlProvider>
 );
 

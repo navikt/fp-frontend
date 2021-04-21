@@ -25,8 +25,6 @@ describe('<DelOppPeriodeModal>', () => {
       showModal
       intl={intlMock}
       cancelEvent={cancelEvent}
-      behandlingId={1}
-      behandlingVersjon={2}
       splitPeriod={sinon.spy()}
       validate={sinon.spy()}
       onSubmit={sinon.spy()}
@@ -47,8 +45,6 @@ describe('<DelOppPeriodeModal>', () => {
       showModal={false}
       intl={intlMock}
       cancelEvent={cancelEvent}
-      behandlingId={1}
-      behandlingVersjon={2}
       splitPeriod={sinon.spy()}
       validate={sinon.spy()}
       onSubmit={sinon.spy()}
@@ -64,8 +60,6 @@ describe('<DelOppPeriodeModal>', () => {
       showModal
       intl={intlMock}
       cancelEvent={cancelEvent}
-      behandlingId={1}
-      behandlingVersjon={2}
       splitPeriod={sinon.spy()}
       validate={sinon.spy()}
       onSubmit={sinon.spy()}

@@ -3,7 +3,6 @@ import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import Beregningsgrunnlag, { TEKSTFELTNAVN_BEGRUNN_DEKNINGSGRAD_ENDRING } from './Beregningsgrunnlag';
 import GrunnlagForAarsinntektPanelAT from '../arbeidstaker/GrunnlagForAarsinntektPanelAT';
 import GrunnlagForAarsinntektPanelFL from '../frilanser/GrunnlagForAarsinntektPanelFL';
@@ -107,38 +106,6 @@ const atflAksjonspunkt = {
   vilkarType: null,
   kanLoses: true,
 };
-const selvstendigAksjonspunkt = {
-  id: 55,
-  erAktivt: true,
-  definisjon: {
-    kode: aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
-    kodeverk: 'Fastsett varig brutto beregning SN',
-  },
-  toTrinnsBehandling: false,
-  status: {
-    kode: 'OPPR',
-    kodeverk: 'Opprettet',
-  },
-  begrunnelse: 'begrunnelse selvstendig',
-  vilkarType: null,
-  kanLoses: true,
-};
-const selvstendigNyIArbAksjonspunkt = {
-  id: 55,
-  erAktivt: true,
-  definisjon: {
-    kode: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
-    kodeverk: 'Fastsett varig brutto beregning SN',
-  },
-  toTrinnsBehandling: false,
-  status: {
-    kode: 'OPPR',
-    kodeverk: 'Opprettet',
-  },
-  begrunnelse: 'begrunnelse selvstendig',
-  vilkarType: null,
-  kanLoses: true,
-};
 const vurderAksjonspunktDekningsgrad = {
   id: 56,
   erAktivt: true,
@@ -159,14 +126,10 @@ const vurderAksjonspunktDekningsgrad = {
 describe('<Beregningsgrunnlag>', () => {
   it('Skal teste at korrekte komponenter vises for arbeidstaker uten aksjonspunkt', () => {
     const wrapper = shallowWithIntl(<Beregningsgrunnlag
-      readOnly
       allePerioder={lagPerioderMedAndeler([arbeidstakerAndel])}
       relevanteStatuser={{ isArbeidstaker: true, isKombinasjonsstatus: true } as RelevanteStatuserProp}
-      gjeldendeAksjonspunkter={[]}
       gjelderBesteberegning={false}
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     const atPanel = wrapper.find(GrunnlagForAarsinntektPanelAT);
@@ -177,14 +140,10 @@ describe('<Beregningsgrunnlag>', () => {
   });
   it('Skal teste at korrekte komponenter vises for frilanser uten aksjonspunkt', () => {
     const wrapper = shallowWithIntl(<Beregningsgrunnlag
-      readOnly
       allePerioder={lagPerioderMedAndeler([frilanserAndel])}
       relevanteStatuser={{ isFrilanser: true, isKombinasjonsstatus: true } as RelevanteStatuserProp}
-      gjeldendeAksjonspunkter={[]}
       gjelderBesteberegning={false}
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     const flPanel = wrapper.find(GrunnlagForAarsinntektPanelFL);
@@ -195,14 +154,10 @@ describe('<Beregningsgrunnlag>', () => {
   });
   it('Skal teste at korrekte komponenter vises for selvstendig næringsdrivende uten aksjonspunkt', () => {
     const wrapper = shallowWithIntl(<Beregningsgrunnlag
-      readOnly
       allePerioder={lagPerioderMedAndeler([selvstedigNaeringsdrivendeAndel])}
       relevanteStatuser={{ isSelvstendigNaeringsdrivende: true } as RelevanteStatuserProp}
-      gjeldendeAksjonspunkter={[]}
       gjelderBesteberegning={false}
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     const snPanel = wrapper.find(GrunnlagForAarsinntektPanelSN);
@@ -212,16 +167,11 @@ describe('<Beregningsgrunnlag>', () => {
     expect(snPanel.props().alleAndeler[0]).toBe(selvstedigNaeringsdrivendeAndel);
   });
   it('Skal teste at korrekte komponenter vises for selvstendig næringsdrivende med NyIArbeidslivet aksjonspunkt', () => {
-    const ap = [selvstendigNyIArbAksjonspunkt as Aksjonspunkt];
     const wrapper = shallowWithIntl(<Beregningsgrunnlag
-      readOnly
       allePerioder={lagPerioderMedAndeler([selvstedigNaeringsdrivendeAndel])}
-      gjeldendeAksjonspunkter={ap}
       relevanteStatuser={{ isSelvstendigNaeringsdrivende: true } as RelevanteStatuserProp}
       gjelderBesteberegning={false}
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     const snPanel = wrapper.find(GrunnlagForAarsinntektPanelSN);
@@ -232,16 +182,11 @@ describe('<Beregningsgrunnlag>', () => {
     expect(snPanel.props().alleAndeler[0]).toBe(selvstedigNaeringsdrivendeAndel);
   });
   it('Skal teste at korrekte komponenter vises for selvstendig næringsdrivende / arbeidstaker med aksjonspunkt', () => {
-    const ap = [selvstendigAksjonspunkt as Aksjonspunkt];
     const wrapper = shallowWithIntl(<Beregningsgrunnlag
-      readOnly
-      gjeldendeAksjonspunkter={ap}
       allePerioder={lagPerioderMedAndeler([selvstedigNaeringsdrivendeAndel, arbeidstakerAndel])}
       relevanteStatuser={{ isArbeidstaker: true, isSelvstendigNaeringsdrivende: true, isKombinasjonsstatus: true } as RelevanteStatuserProp}
       gjelderBesteberegning={false}
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     expect(wrapper.find(MilitaerPanel)).toHaveLength(0);
@@ -251,18 +196,14 @@ describe('<Beregningsgrunnlag>', () => {
   });
   it('Skal teste at korrekte komponenter vises for selvstendig næringsdrivende / frilanser uten aksjonspunkt', () => {
     const wrapper = shallowWithIntl(<Beregningsgrunnlag
-      readOnly
       allePerioder={lagPerioderMedAndeler([selvstedigNaeringsdrivendeAndel, frilanserAndel])}
       relevanteStatuser={{
         isFrilanser: true,
         isSelvstendigNaeringsdrivende: true,
         isKombinasjonsstatus: true,
       } as RelevanteStatuserProp}
-      gjeldendeAksjonspunkter={[]}
       gjelderBesteberegning={false}
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     expect(wrapper.find(MilitaerPanel)).toHaveLength(0);
@@ -271,11 +212,8 @@ describe('<Beregningsgrunnlag>', () => {
     expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).toHaveLength(1);
   });
   it('Skal teste at korrekte komponenter vises for arbeidstaker / frilanser med aksjonspunkt', () => {
-    const ap = [atflAksjonspunkt as Aksjonspunkt];
     const wrapper = shallowWithIntl(<Beregningsgrunnlag
-      readOnly
       allePerioder={lagPerioderMedAndeler([selvstedigNaeringsdrivendeAndel, frilanserAndel])}
-      gjeldendeAksjonspunkter={ap}
       relevanteStatuser={{
         isArbeidstaker: true,
         isFrilanser: true,
@@ -283,8 +221,6 @@ describe('<Beregningsgrunnlag>', () => {
       } as RelevanteStatuserProp}
       gjelderBesteberegning={false}
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     expect(wrapper.find(MilitaerPanel)).toHaveLength(0);
@@ -293,11 +229,8 @@ describe('<Beregningsgrunnlag>', () => {
     expect(wrapper.find(GrunnlagForAarsinntektPanelSN)).toHaveLength(0);
   });
   it('Skal teste at korrekte komponenter vises for arbeidstaker / frilanser / selvstendig næringsdrivende med aksjonspunkt', () => {
-    const ap = [selvstendigAksjonspunkt];
     const wrapper = shallowWithIntl(<Beregningsgrunnlag
-      readOnly
       allePerioder={lagPerioderMedAndeler([selvstedigNaeringsdrivendeAndel, frilanserAndel, arbeidstakerAndel])}
-      gjeldendeAksjonspunkter={ap}
       relevanteStatuser={{
         isArbeidstaker: true,
         isFrilanser: true,
@@ -306,8 +239,6 @@ describe('<Beregningsgrunnlag>', () => {
       } as RelevanteStatuserProp}
       gjelderBesteberegning={false}
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     expect(wrapper.find(MilitaerPanel)).toHaveLength(0);
@@ -317,14 +248,10 @@ describe('<Beregningsgrunnlag>', () => {
   });
   it('Skal teste at korrekte komponenter vises for dagpenger / aap uten aksjonspunkt', () => {
     const wrapper = shallowWithIntl(<Beregningsgrunnlag
-      readOnly
       allePerioder={lagPerioderMedAndeler([aapAndel, dagpengerAndel])}
-      gjeldendeAksjonspunkter={[]}
       relevanteStatuser={{ harDagpengerEllerAAP: true, isKombinasjonsstatus: false, isSelvstendigNaeringsdrivende: false } as RelevanteStatuserProp}
       gjelderBesteberegning={false}
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(0);
@@ -338,14 +265,10 @@ describe('<Beregningsgrunnlag>', () => {
   });
   it('Skal teste at korrekte komponenter vises for andre tilstøtende ytelser uten aksjonspunkt', () => {
     const wrapper = shallowWithIntl(<Beregningsgrunnlag
-      readOnly
       allePerioder={lagPerioderMedAndeler([tyAndel])}
       relevanteStatuser={{ harDagpengerEllerAAP: false, isKombinasjonsstatus: false, harAndreTilstotendeYtelser: true } as RelevanteStatuserProp}
-      gjeldendeAksjonspunkter={[]}
       gjelderBesteberegning={false}
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(0);
@@ -357,14 +280,10 @@ describe('<Beregningsgrunnlag>', () => {
   });
   it('Skal teste at korrekte komponenter vises for militær uten aksjonspunkt', () => {
     const wrapper = shallowWithIntl(<Beregningsgrunnlag
-      readOnly
       allePerioder={lagPerioderMedAndeler([militaerAndel])}
       relevanteStatuser={{ isMilitaer: true } as RelevanteStatuserProp}
-      gjeldendeAksjonspunkter={[]}
       gjelderBesteberegning={false}
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(0);

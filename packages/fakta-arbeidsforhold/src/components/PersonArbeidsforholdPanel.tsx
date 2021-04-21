@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { FormattedMessage, WrappedComponentProps } from 'react-intl';
-import { change as reduxFormChange, FormAction, initialize as reduxFormInitialize } from 'redux-form';
+import {
+  change as reduxFormChange, FormAction, formValueSelector, initialize as reduxFormInitialize,
+} from 'redux-form';
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
 import { ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
-import { getBehandlingFormPrefix, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Arbeidsforhold, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
@@ -180,11 +181,7 @@ const leggTilValuesForRendering = (
   });
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   readOnly: boolean;
-  hasAksjonspunkter: boolean;
-  hasOpenAksjonspunkter: boolean;
   skalKunneLeggeTilNyeArbeidsforhold: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
@@ -193,7 +190,6 @@ interface PureOwnProps {
 
 interface MappedOwnProps {
   arbeidsforhold: CustomArbeidsforhold[];
-  behandlingFormPrefix: string;
   aktivtArbeidsforholdTillatUtenIM: boolean;
 }
 
@@ -210,7 +206,7 @@ interface StaticFunctions {
   buildInitialValues?: (arbeidsforhold: Arbeidsforhold[], arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => {
     arbeidsforhold: CustomArbeidsforhold[];
   },
-  isReadOnly?: (state: any, behandlingId: number, behandlingVersjon: number) => boolean,
+  isReadOnly?: (state: any) => boolean,
 }
 
 type Props = PureOwnProps & MappedOwnProps & DispatchProps & StaticFunctions & WrappedComponentProps;
@@ -227,12 +223,12 @@ export class PersonArbeidsforholdPanelImpl extends Component<Props, OwnState> {
     arbeidsforhold: leggTilValuesForRendering(addReplaceableArbeidsforhold(arbeidsforhold), arbeidsgiverOpplysningerPerId),
   });
 
-  static isReadOnly = (state: any, behandlingId: number, behandlingVersjon: number): boolean => {
-    const isDetailFormOpen = !!behandlingFormValueSelector(PERSON_ARBEIDSFORHOLD_DETAIL_FORM, behandlingId, behandlingVersjon)(state, 'navn');
+  static isReadOnly = (state: any): boolean => {
+    const isDetailFormOpen = !!formValueSelector(PERSON_ARBEIDSFORHOLD_DETAIL_FORM)(state, 'navn');
     if (isDetailFormOpen) {
       return true;
     }
-    const arbeidsforhold = behandlingFormValueSelector('ArbeidsforholdInfoPanel', behandlingId, behandlingVersjon)(state, 'arbeidsforhold');
+    const arbeidsforhold = formValueSelector('ArbeidsforholdInfoPanel')(state, 'arbeidsforhold');
     return !arbeidsforhold || !!getUnresolvedArbeidsforhold(arbeidsforhold);
   };
 
@@ -261,15 +257,15 @@ export class PersonArbeidsforholdPanelImpl extends Component<Props, OwnState> {
   }
 
   setFormField(fieldName: string, fieldValue: any): void {
-    const { behandlingFormPrefix, reduxFormChange: formChange } = this.props;
-    formChange(`${behandlingFormPrefix}.${'ArbeidsforholdInfoPanel'}`, fieldName, fieldValue);
+    const { reduxFormChange: formChange } = this.props;
+    formChange('ArbeidsforholdInfoPanel', fieldName, fieldValue);
   }
 
   initializeActivityForm(arbeidsforhold: CustomArbeidsforhold): void {
     const { selectedArbeidsforhold } = this.state;
     if (selectedArbeidsforhold !== arbeidsforhold) {
-      const { behandlingFormPrefix, reduxFormInitialize: formInitialize } = this.props;
-      formInitialize(`${behandlingFormPrefix}.${PERSON_ARBEIDSFORHOLD_DETAIL_FORM}`, arbeidsforhold);
+      const { reduxFormInitialize: formInitialize } = this.props;
+      formInitialize(PERSON_ARBEIDSFORHOLD_DETAIL_FORM, arbeidsforhold);
     }
   }
 
@@ -375,14 +371,10 @@ export class PersonArbeidsforholdPanelImpl extends Component<Props, OwnState> {
   render() {
     const {
       readOnly,
-      hasAksjonspunkter,
-      hasOpenAksjonspunkter,
       arbeidsforhold,
       aktivtArbeidsforholdTillatUtenIM,
       skalKunneLeggeTilNyeArbeidsforhold,
       alleMerknaderFraBeslutter,
-      behandlingId,
-      behandlingVersjon,
       alleKodeverk,
       arbeidsgiverOpplysningerPerId,
       intl,
@@ -420,14 +412,10 @@ export class PersonArbeidsforholdPanelImpl extends Component<Props, OwnState> {
               intl={intl}
               arbeidsforhold={selectedArbeidsforhold}
               readOnly={readOnly}
-              hasAksjonspunkter={hasAksjonspunkter}
-              hasOpenAksjonspunkter={hasOpenAksjonspunkter}
               updateArbeidsforhold={this.updateArbeidsforhold}
               cancelArbeidsforhold={this.cancelArbeidsforhold}
               aktivtArbeidsforholdTillatUtenIM={aktivtArbeidsforholdTillatUtenIM}
               skalKunneLeggeTilNyeArbeidsforhold={skalKunneLeggeTilNyeArbeidsforhold}
-              behandlingId={behandlingId}
-              behandlingVersjon={behandlingVersjon}
               alleKodeverk={alleKodeverk}
               arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             />
@@ -442,13 +430,11 @@ export class PersonArbeidsforholdPanelImpl extends Component<Props, OwnState> {
 const FORM_NAVN = 'ArbeidsforholdInfoPanel';
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
-  const arbeidsforhold = behandlingFormValueSelector(FORM_NAVN, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'arbeidsforhold');
+  const arbeidsforhold = formValueSelector(FORM_NAVN)(state, 'arbeidsforhold');
   const sorterteArbeidsforhold = arbeidsforhold.sort(getSortArbeidsforholdFn(ownProps.arbeidsgiverOpplysningerPerId));
-  const arbeidsgiverIdentifikator = behandlingFormValueSelector(PERSON_ARBEIDSFORHOLD_DETAIL_FORM, ownProps.behandlingId,
-    ownProps.behandlingVersjon)(state, 'arbeidsgiverIdentifikator');
+  const arbeidsgiverIdentifikator = formValueSelector(PERSON_ARBEIDSFORHOLD_DETAIL_FORM)(state, 'arbeidsgiverIdentifikator');
   return {
     arbeidsforhold: sorterteArbeidsforhold,
-    behandlingFormPrefix: getBehandlingFormPrefix(ownProps.behandlingId, ownProps.behandlingVersjon),
     aktivtArbeidsforholdTillatUtenIM: erDetTillattMedFortsettingAvAktivtArbeidsforholdUtenIM(sorterteArbeidsforhold, arbeidsgiverIdentifikator),
   };
 };

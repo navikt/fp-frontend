@@ -64,8 +64,6 @@ describe('<AdopsjonInfoPanel>', () => {
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
       isForeldrepengerFagsak
-      behandlingId={1}
-      behandlingVersjon={1}
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       submitCallback={() => undefined}
@@ -112,8 +110,6 @@ describe('<AdopsjonInfoPanel>', () => {
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
       isForeldrepengerFagsak
-      behandlingId={1}
-      behandlingVersjon={1}
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       submitCallback={() => undefined}
@@ -146,8 +142,6 @@ describe('<AdopsjonInfoPanel>', () => {
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
       isForeldrepengerFagsak
-      behandlingId={1}
-      behandlingVersjon={1}
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       submitCallback={() => undefined}

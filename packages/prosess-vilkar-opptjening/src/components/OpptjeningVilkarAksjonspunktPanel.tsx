@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { InjectedFormProps } from 'redux-form';
+import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 
@@ -11,7 +11,6 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import {
   VilkarResultPicker, ProsessStegBegrunnelseTextField, ProsessPanelTemplate,
 } from '@fpsak-frontend/prosess-felles';
-import { behandlingForm, behandlingFormValueSelector } from '@fpsak-frontend/form';
 import { Aksjonspunkt, Behandling, FastsattOpptjening } from '@fpsak-frontend/types';
 import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AvklarOpptjeningsvilkaretAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -28,8 +27,6 @@ interface PureOwnProps {
   isApOpen: boolean;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
-  behandlingId: number;
-  behandlingVersjon: number;
   submitCallback: (aksjonspunktData: AvklarOpptjeningsvilkaretAp) => Promise<void>;
   lovReferanse?: string;
 }
@@ -52,8 +49,6 @@ export const OpptjeningVilkarAksjonspunktPanelImpl: FunctionComponent<PureOwnPro
   readOnlySubmitButton,
   readOnly,
   lovReferanse,
-  behandlingId,
-  behandlingVersjon,
   fastsattOpptjening,
   ...formProps
 }) => (
@@ -66,8 +61,6 @@ export const OpptjeningVilkarAksjonspunktPanelImpl: FunctionComponent<PureOwnPro
     readOnlySubmitButton={readOnlySubmitButton}
     readOnly={readOnly}
     lovReferanse={lovReferanse}
-    behandlingId={behandlingId}
-    behandlingVersjon={behandlingVersjon}
     originalErVilkarOk={originalErVilkarOk}
     rendreFakta={() => (
       <>
@@ -128,12 +121,13 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
     onSubmit: lagSubmitFn(ownProps),
     initialValues: buildInitialValues(ownProps),
     originalErVilkarOk: erVilkarOk,
-    erVilkarOk: behandlingFormValueSelector(FORM_NAME, ownProps.behandlingId, ownProps.behandlingVersjon)(state, 'erVilkarOk'),
+    erVilkarOk: formValueSelector(FORM_NAME)(state, 'erVilkarOk'),
   });
 };
 
-const OpptjeningVilkarAksjonspunktPanel = connect(mapStateToPropsFactory)(behandlingForm({
+const OpptjeningVilkarAksjonspunktPanel = connect(mapStateToPropsFactory)(reduxForm({
   form: FORM_NAME,
+  destroyOnUnmount: false,
 })(injectIntl(OpptjeningVilkarAksjonspunktPanelImpl)));
 
 export default OpptjeningVilkarAksjonspunktPanel;

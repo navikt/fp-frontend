@@ -14,8 +14,10 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   beregningsgrunnlag: Beregningsgrunnlag;
-  arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]}
+  arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId;
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  formData?: any;
+  setFormData: (data: any) => void;
 }
 
 const BesteberegningFaktaIndex: FunctionComponent<OwnProps> = ({

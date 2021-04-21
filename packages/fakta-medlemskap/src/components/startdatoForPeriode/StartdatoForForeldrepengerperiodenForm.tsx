@@ -4,14 +4,14 @@ import { FormattedMessage, IntlShape } from 'react-intl';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { Column, Row } from 'nav-frontend-grid';
-import { FieldArray, InjectedFormProps } from 'redux-form';
+import { FieldArray, InjectedFormProps, reduxForm } from 'redux-form';
 
 import { AksjonspunktHelpTextTemp, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
   hasValidDate, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
-import { DatepickerField, TextAreaField, behandlingForm } from '@fpsak-frontend/form';
+import { DatepickerField, TextAreaField } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -46,8 +46,6 @@ interface PureOwnProps {
   hasOpenMedlemskapAksjonspunkter: boolean;
   submittable: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  behandlingId: number;
-  behandlingVersjon: number;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
@@ -73,8 +71,6 @@ export const StartdatoForForeldrepengerperiodenForm: FunctionComponent<PureOwnPr
   submittable,
   overstyringDisabled,
   alleMerknaderFraBeslutter,
-  behandlingId,
-  behandlingVersjon,
   arbeidsgiverOpplysningerPerId,
   ...formProps
 }) => (
@@ -122,8 +118,6 @@ export const StartdatoForForeldrepengerperiodenForm: FunctionComponent<PureOwnPr
       <FaktaSubmitButton
         buttonText={!hasOpenAksjonspunkt ? intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.Oppdater' }) : undefined}
         formName={formProps.form}
-        behandlingId={behandlingId}
-        behandlingVersjon={behandlingVersjon}
         isSubmittable={submittable}
         isReadOnly={overstyringDisabled}
         hasOpenAksjonspunkter={hasOpenAksjonspunkt}
@@ -206,6 +200,7 @@ const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => {
   };
 };
 
-export default connect(mapStateToProps)(behandlingForm({
+export default connect(mapStateToProps)(reduxForm({
   form: 'StartdatoForForeldrepengerperiodenForm',
+  destroyOnUnmount: false,
 })(StartdatoForForeldrepengerperiodenForm));

@@ -98,13 +98,10 @@ describe('<UttakFaktaForm>', () => {
         {...reduxFormPropsMock}
         readOnly={false}
         hasOpenAksjonspunkter
-        behandlingFormPrefix="UttakFaktaForm"
         submitting={false}
         initialValues={{}}
         aksjonspunkter={[]}
         hasRevurderingOvertyringAp={false}
-        behandlingId={1}
-        behandlingVersjon={1}
         alleKodeverk={{}}
         kanOverstyre={false}
         faktaArbeidsforhold={[]}

@@ -2,16 +2,15 @@ import React, { useState, useEffect, FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
 
-import { DecimalField, behandlingFormValueSelector } from '@fpsak-frontend/form';
+import { DecimalField } from '@fpsak-frontend/form';
 
-import {
-  FlexColumn, Image,
-} from '@fpsak-frontend/shared-components';
+import { FlexColumn, Image } from '@fpsak-frontend/shared-components';
 import {
   hasValidDecimal, maxValue, minValue, required,
 } from '@fpsak-frontend/utils';
 import endreImage from '@fpsak-frontend/assets/images/endre.svg';
 import endreDisabletImage from '@fpsak-frontend/assets/images/endre_disablet.svg';
+import { formValueSelector } from 'redux-form';
 import styles from './tilretteleggingFieldArray.less';
 
 const maxValue100 = maxValue(100);
@@ -21,8 +20,6 @@ export const OVERSTYRT_UTBETALINGSGRAD_FIELDNAME = 'overstyrtUtbetalingsgrad';
 
 interface PureOwnProps {
   formName: string;
-  behandlingId: number;
-  behandlingVersjon: number;
   readOnly: boolean;
   erOverstyrer: boolean;
   fieldId: string;
@@ -95,8 +92,7 @@ const TilretteleggingUtbetalingsgrad: FunctionComponent<PureOwnProps & MappedOwn
 };
 
 const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => ({
-  overstyrtUtbetalingsgrad: behandlingFormValueSelector(ownProps.formName,
-    ownProps.behandlingId, ownProps.behandlingVersjon)(state,
+  overstyrtUtbetalingsgrad: formValueSelector(ownProps.formName)(state,
     `${ownProps.formSectionName}.${ownProps.fieldId}.${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`),
 });
 

@@ -23,8 +23,6 @@ describe('<OpptjeningInfoPanel>', () => {
       }}
       alleMerknaderFraBeslutter={{}}
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
       opptjeningAktiviteter={[]}
       aksjonspunkter={[]}
       submitCallback={() => undefined}

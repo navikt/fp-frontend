@@ -8,8 +8,6 @@ describe('<BekreftOgForsettKnapp>', () => {
   it('Skal vise en enablet hovedknapp hvis readOnly, isBekreftButtonReadOnly, og isSubmitting er false', () => {
     const wrapper = shallow(
       <BekreftOgForsettKnapp
-        behandlingId={1}
-        behandlingVersjon={2}
         readOnly={false}
         isBekreftButtonReadOnly={false}
         isSubmitting={false}
@@ -22,8 +20,6 @@ describe('<BekreftOgForsettKnapp>', () => {
   it('Skal vise en disablet hovedknapp hvis readOnly er true', () => {
     const wrapper = shallow(
       <BekreftOgForsettKnapp
-        behandlingId={1}
-        behandlingVersjon={2}
         readOnly
         isBekreftButtonReadOnly={false}
         isSubmitting={false}
@@ -36,8 +32,6 @@ describe('<BekreftOgForsettKnapp>', () => {
   it('Skal vise en disablet hovedknapp hvis isBekreftButtonReadOnly er true', () => {
     const wrapper = shallow(
       <BekreftOgForsettKnapp
-        behandlingId={1}
-        behandlingVersjon={2}
         readOnly={false}
         isBekreftButtonReadOnly
         isSubmitting={false}
@@ -50,8 +44,6 @@ describe('<BekreftOgForsettKnapp>', () => {
   it('Skal vise en disablet hovedknapp hvis isSubmitting er true', () => {
     const wrapper = shallow(
       <BekreftOgForsettKnapp
-        behandlingId={1}
-        behandlingVersjon={2}
         readOnly={false}
         isBekreftButtonReadOnly={false}
         isSubmitting

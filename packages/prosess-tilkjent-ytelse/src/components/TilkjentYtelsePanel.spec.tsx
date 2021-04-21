@@ -59,8 +59,6 @@ describe('<TilkjentYtelsePanel>', () => {
       submitCallback={sinon.spy()}
       readOnlySubmitButton
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       familieHendelseSamling={familiehendelse}
       personoversikt={{} as Personoversikt}
       soknad={{} as Soknad}
@@ -91,8 +89,6 @@ describe('<TilkjentYtelsePanel>', () => {
       submitCallback={sinon.spy()}
       readOnlySubmitButton
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       familieHendelseSamling={familiehendelse}
       personoversikt={{} as Personoversikt}
       soknad={{} as Soknad}
@@ -123,8 +119,6 @@ describe('<TilkjentYtelsePanel>', () => {
       submitCallback={sinon.spy()}
       readOnlySubmitButton
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       familieHendelseSamling={familiehendelse}
       personoversikt={{} as Personoversikt}
       soknad={{} as Soknad}
@@ -162,8 +156,6 @@ describe('<TilkjentYtelsePanel>', () => {
       submitCallback={sinon.spy()}
       readOnlySubmitButton
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       familieHendelseSamling={familiehendelse}
       personoversikt={{} as Personoversikt}
       soknad={{} as Soknad}
@@ -194,8 +186,6 @@ describe('<TilkjentYtelsePanel>', () => {
       submitCallback={sinon.spy()}
       readOnlySubmitButton
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       familieHendelseSamling={familiehendelse}
       personoversikt={{} as Personoversikt}
       soknad={{} as Soknad}
@@ -223,8 +213,6 @@ describe('<TilkjentYtelsePanel>', () => {
       submitCallback={sinon.spy()}
       readOnlySubmitButton
       alleKodeverk={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       familieHendelseSamling={familiehendelse}
       personoversikt={{} as Personoversikt}
       soknad={{} as Soknad}

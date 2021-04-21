@@ -34,8 +34,6 @@ describe('<StartdatoForForeldrepengerperiodenForm>', () => {
       submittable
       overstyringDisabled={false}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={1}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       aksjonspunkter={[]}
       aksjonspunkt={{} as Aksjonspunkt}

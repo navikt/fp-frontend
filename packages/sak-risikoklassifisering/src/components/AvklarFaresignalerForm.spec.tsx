@@ -59,8 +59,6 @@ describe('<AvklarFaresignalerForm>', () => {
       aksjonspunkt={mockAksjonspunkt('UTFO', undefined)}
       submitCallback={() => undefined}
       risikoklassifisering={{} as Risikoklassifisering}
-      behandlingId={1}
-      behandlingVersjon={2}
       faresignalVurderinger={faresignalVurderinger}
       onSubmit={() => undefined}
       harValgtReelle={false}
@@ -77,8 +75,6 @@ describe('<AvklarFaresignalerForm>', () => {
       aksjonspunkt={mockAksjonspunkt('UTFO', undefined)}
       submitCallback={() => undefined}
       risikoklassifisering={{} as Risikoklassifisering}
-      behandlingId={1}
-      behandlingVersjon={2}
       faresignalVurderinger={faresignalVurderinger}
       onSubmit={() => undefined}
       harValgtReelle={false}
@@ -99,8 +95,6 @@ describe('<AvklarFaresignalerForm>', () => {
       aksjonspunkt={mockAksjonspunkt('UTFO', undefined)}
       submitCallback={() => undefined}
       risikoklassifisering={{} as Risikoklassifisering}
-      behandlingId={1}
-      behandlingVersjon={2}
       faresignalVurderinger={faresignalVurderinger}
       onSubmit={() => undefined}
       harValgtReelle

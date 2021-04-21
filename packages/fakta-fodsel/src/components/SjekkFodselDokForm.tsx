@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { FieldArray, InjectedFormProps } from 'redux-form';
+import {
+  FieldArray, formValueSelector, InjectedFormProps, reduxForm,
+} from 'redux-form';
 import { createSelector } from 'reselect';
 import { Column } from 'nav-frontend-grid';
 
@@ -10,9 +12,7 @@ import {
   ArrowBox, VerticalSpacer, FaktaGruppe,
 } from '@fpsak-frontend/shared-components';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
-import {
-  RadioGroupField, RadioOption, behandlingForm, behandlingFormValueSelector,
-} from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
@@ -57,8 +57,6 @@ type FormValues = {
 }
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   gjeldendeFamiliehendelse: FamilieHendelse;
   aksjonspunkt: Aksjonspunkt;
   soknad: Soknad;
@@ -213,20 +211,19 @@ const lagSubmitFn = createSelector([
 ) => submitCallback(transformValues(values, gjeldendeFamiliehendelse.avklartBarn)));
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
-  const {
-    behandlingId, behandlingVersjon, gjeldendeFamiliehendelse,
-  } = ownProps;
+  const { gjeldendeFamiliehendelse } = ownProps;
   return {
     onSubmit: lagSubmitFn(ownProps),
     initialValues: buildInitialValues(ownProps),
-    avklartBarn: behandlingFormValueSelector(sjekkFodselDokForm, behandlingId, behandlingVersjon)(state, 'avklartBarn'),
+    avklartBarn: formValueSelector(sjekkFodselDokForm)(state, 'avklartBarn'),
     dokumentasjonForeliggerIsEdited: getEditedStatus(ownProps).dokumentasjonForeligger,
-    dokumentasjonForeligger: behandlingFormValueSelector(sjekkFodselDokForm, behandlingId, behandlingVersjon)(state, 'dokumentasjonForeligger'),
+    dokumentasjonForeligger: formValueSelector(sjekkFodselDokForm)(state, 'dokumentasjonForeligger'),
     termindato: gjeldendeFamiliehendelse.termindato,
     vedtaksDatoSomSvangerskapsuke: gjeldendeFamiliehendelse.vedtaksDatoSomSvangerskapsuke,
   };
 };
 
-export default connect(mapStateToProps)(behandlingForm({
+export default connect(mapStateToProps)(reduxForm({
   form: sjekkFodselDokForm,
+  destroyOnUnmount: false,
 })(injectIntl(SjekkFodselDokForm)));

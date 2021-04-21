@@ -1,6 +1,5 @@
 import React from 'react';
 import { Router } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import { render } from 'react-dom';
 import { init, Integrations } from '@sentry/browser';
@@ -8,7 +7,6 @@ import { init, Integrations } from '@sentry/browser';
 import { RestApiErrorProvider, RestApiProvider } from '@fpsak-frontend/rest-api-hooks';
 
 import AppIndex from './app/AppIndex';
-import configureStore from './configureStore';
 
 const app = document.getElementById('app');
 if (app === null) {
@@ -54,17 +52,14 @@ init({
 const history = createBrowserHistory({
   basename: '/fpsak/',
 });
-const store = configureStore();
 
 render(
-  <Provider store={store}>
-    <Router history={history}>
-      <RestApiProvider>
-        <RestApiErrorProvider>
-          <AppIndex />
-        </RestApiErrorProvider>
-      </RestApiProvider>
-    </Router>
-  </Provider>,
+  <Router history={history}>
+    <RestApiProvider>
+      <RestApiErrorProvider>
+        <AppIndex />
+      </RestApiErrorProvider>
+    </RestApiProvider>
+  </Router>,
   app,
 );

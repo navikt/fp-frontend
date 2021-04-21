@@ -1,13 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
-import { InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
-import {
-  RadioGroupField, RadioOption, TextAreaField, behandlingForm,
-} from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
 import {
   hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
@@ -95,6 +93,7 @@ const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
 
 export const sykdomPanelName = 'SykdomPanel';
 
-export default connect(mapStateToProps)(behandlingForm({
+export default connect(mapStateToProps)(reduxForm({
   form: sykdomPanelName,
+  destroyOnUnmount: false,
 })(injectIntl(SykdomPanel)));

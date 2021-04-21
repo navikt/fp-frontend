@@ -33,8 +33,6 @@ describe('<AdopsjonVilkarForm>', () => {
       erVilkarOk={false}
       status={vilkarUtfallType.OPPFYLT}
       isApOpen
-      behandlingId={1}
-      behandlingVersjon={1}
       aksjonspunkter={[]}
       vilkar={[]}
       submitCallback={() => undefined}
@@ -66,8 +64,6 @@ describe('<AdopsjonVilkarForm>', () => {
       erVilkarOk={undefined}
       status={vilkarUtfallType.OPPFYLT}
       isApOpen
-      behandlingId={1}
-      behandlingVersjon={1}
       aksjonspunkter={[]}
       vilkar={[]}
       submitCallback={() => undefined}
@@ -103,8 +99,6 @@ describe('<AdopsjonVilkarForm>', () => {
       erVilkarOk
       status={vilkarUtfallType.OPPFYLT}
       isApOpen
-      behandlingId={1}
-      behandlingVersjon={1}
       aksjonspunkter={[]}
       vilkar={[]}
       submitCallback={() => undefined}

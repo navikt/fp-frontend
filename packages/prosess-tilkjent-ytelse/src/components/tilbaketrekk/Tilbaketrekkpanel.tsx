@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { InjectedFormProps } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 import { Element } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -14,10 +14,7 @@ import {
   hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import {
-  RadioGroupField, RadioOption, TextAreaField, behandlingForm, hasBehandlingFormErrorsOfType, isBehandlingFormDirty,
-  isBehandlingFormSubmitting,
-} from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 import { Aksjonspunkt, BeregningsresultatFp } from '@fpsak-frontend/types';
@@ -38,8 +35,6 @@ type FormValues = {
 }
 
 interface PureOwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   readOnly: boolean;
   vurderTilbaketrekkAP?: Aksjonspunkt;
   submitCallback: (data: VurderTilbaketrekkAp) => Promise<void>;
@@ -57,8 +52,6 @@ export const Tilbaketrekkpanel: FunctionComponent<PureOwnProps & WrappedComponen
   readOnly,
   vurderTilbaketrekkAP,
   readOnlySubmitButton,
-  behandlingId,
-  behandlingVersjon,
   ...formProps
 }) => (
   <div>
@@ -123,13 +116,8 @@ export const Tilbaketrekkpanel: FunctionComponent<PureOwnProps & WrappedComponen
           <VerticalSpacer eightPx />
           <ProsessStegSubmitButton
             formName={formProps.form}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             isReadOnly={readOnly}
             isSubmittable={!readOnlySubmitButton}
-            isBehandlingFormSubmitting={isBehandlingFormSubmitting}
-            isBehandlingFormDirty={isBehandlingFormDirty}
-            hasBehandlingFormErrorsOfType={hasBehandlingFormErrorsOfType}
           />
         </Column>
       </Row>
@@ -169,4 +157,7 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
   initialValues: buildInitialValues(state, ownProps),
 });
 
-export default connect(mapStateToProps)(behandlingForm({ form: formName })(injectIntl(Tilbaketrekkpanel)));
+export default connect(mapStateToProps)(reduxForm({
+  form: formName,
+  destroyOnUnmount: false,
+})(injectIntl(Tilbaketrekkpanel)));

@@ -11,8 +11,6 @@ import UtlandPanel from './utland/UtlandPanel';
 import InnhentDokOpptjeningUtlandPanel from './innhentDok/InnhentDokOpptjeningUtlandPanel';
 
 interface OwnProps {
-  behandlingId: number;
-  behandlingVersjon: number;
   aksjonspunkter: Aksjonspunkt[];
   dokStatus?: string;
   harApneAksjonspunkter: boolean;
@@ -25,8 +23,6 @@ const personAksjonspunkter = [aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLAND
 const erMarkertUtenlandssak = (aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter.some((ap) => ap.definisjon.kode === personAksjonspunkter[0]);
 
 const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
-  behandlingId,
-  behandlingVersjon,
   aksjonspunkter,
   dokStatus,
   harApneAksjonspunkter,
@@ -46,8 +42,6 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
     <Row className="">
       <Column xs="6">
         <UtlandPanel
-          behandlingId={behandlingId}
-          behandlingVersjon={behandlingVersjon}
           aksjonspunkter={aksjonspunkter}
           submitCallback={submitCallback}
           readOnly={readOnly}
@@ -56,8 +50,6 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
       {erMarkertUtenlandssak(aksjonspunkter) && (
         <Column xs="6">
           <InnhentDokOpptjeningUtlandPanel
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
             dokStatus={dokStatus}
             readOnly={readOnly}
             harApneAksjonspunkter={harApneAksjonspunkter}

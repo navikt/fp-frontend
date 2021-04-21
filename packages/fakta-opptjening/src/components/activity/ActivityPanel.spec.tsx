@@ -46,8 +46,6 @@ describe('<ActivityPanel>', () => {
       hasAksjonspunkt
       activityId={1}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
       updateActivity={() => undefined}
       alleKodeverk={{}}
       activity={activity}
@@ -83,8 +81,6 @@ describe('<ActivityPanel>', () => {
       hasAksjonspunkt
       activityId={1}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
       updateActivity={() => undefined}
       alleKodeverk={{}}
       activity={activity}
@@ -120,8 +116,6 @@ describe('<ActivityPanel>', () => {
       hasAksjonspunkt
       activityId={1}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
       updateActivity={() => undefined}
       alleKodeverk={{}}
       activity={activity}
@@ -157,8 +151,6 @@ describe('<ActivityPanel>', () => {
       hasAksjonspunkt={false}
       activityId={1}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
       updateActivity={() => undefined}
       alleKodeverk={{}}
       activity={activity}
@@ -194,8 +186,6 @@ describe('<ActivityPanel>', () => {
       hasAksjonspunkt={false}
       activityId={1}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
       updateActivity={() => undefined}
       alleKodeverk={{}}
       activity={activity}
@@ -234,8 +224,6 @@ describe('<ActivityPanel>', () => {
       hasAksjonspunkt
       activityId={1}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
       updateActivity={() => undefined}
       alleKodeverk={{}}
       activity={activity}
@@ -272,8 +260,6 @@ describe('<ActivityPanel>', () => {
       hasAksjonspunkt
       activityId={1}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
       updateActivity={() => undefined}
       alleKodeverk={{}}
       activity={activity}
@@ -309,8 +295,6 @@ describe('<ActivityPanel>', () => {
       hasAksjonspunkt
       activityId={1}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
       updateActivity={() => undefined}
       alleKodeverk={{}}
       activity={activity}
@@ -345,8 +329,6 @@ describe('<ActivityPanel>', () => {
       hasAksjonspunkt={false}
       activityId={1}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
       updateActivity={() => undefined}
       alleKodeverk={{}}
       activity={activity}
@@ -380,8 +362,6 @@ describe('<ActivityPanel>', () => {
       hasAksjonspunkt
       activityId={1}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
       updateActivity={() => undefined}
       alleKodeverk={{}}
       activity={activity}
@@ -417,8 +397,6 @@ describe('<ActivityPanel>', () => {
       hasAksjonspunkt
       activityId={1}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
       updateActivity={() => undefined}
       alleKodeverk={{}}
       activity={activity}
@@ -456,8 +434,6 @@ describe('<ActivityPanel>', () => {
       hasAksjonspunkt
       activityId={1}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
       updateActivity={() => undefined}
       alleKodeverk={{}}
       activity={activity}
@@ -495,8 +471,6 @@ describe('<ActivityPanel>', () => {
       hasAksjonspunkt
       activityId={1}
       alleMerknaderFraBeslutter={{}}
-      behandlingId={1}
-      behandlingVersjon={2}
       updateActivity={() => undefined}
       alleKodeverk={{}}
       activity={activity}

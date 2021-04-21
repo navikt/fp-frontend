@@ -21,7 +21,6 @@ describe('<TilbakekrevingTimelineData>', () => {
       readOnly={false}
       oppdaterSplittedePerioder={sinon.spy()}
       behandlingId={1}
-      behandlingVersjon={1}
       beregnBelop={() => undefined}
     />);
 

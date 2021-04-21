@@ -8,7 +8,6 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import { AksjonspunktHelpTextTemp, OverstyringKnapp } from '@fpsak-frontend/shared-components';
 
 import sinon from 'sinon';
-import { lagStateMedAksjonspunkterOgBeregningsgrunnlag } from '../beregning-test-helper';
 import messages from '../../../i18n/nb_NO.json';
 import {
   AvklareAktiviteterPanelImpl,
@@ -19,7 +18,6 @@ import {
   transformValues,
 } from './AvklareAktiviteterPanel';
 import VurderAktiviteterPanel from './VurderAktiviteterPanel';
-import { formNameAvklarAktiviteter } from '../BeregningFormUtils';
 
 const intlMock = getIntlMock(messages);
 
@@ -27,11 +25,6 @@ const {
   AVKLAR_AKTIVITETER,
   OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
 } = aksjonspunktCodes;
-
-const behandlingProps = {
-  behandlingId: 1000051,
-  behandlingVersjon: 1,
-};
 
 const alleKodeverk = {
   [kodeverkTyper.OPPTJENING_AKTIVITET_TYPE]: [{
@@ -56,13 +49,6 @@ const alleKodeverk = {
 const apsAvklarAktiviteter = [{
   definisjon: { kode: AVKLAR_AKTIVITETER, kodeverk: 'test' }, status: { kode: 'OPPR', kodeverk: 'test' }, erAktivt: true, kanLoses: true,
 }];
-
-const lagStateMedAvklarAktitiveter = (avklarAktiviteter, values = {}, initial = {}, aksjonspunkter = apsAvklarAktiviteter) => {
-  const faktaOmBeregning = {
-    avklarAktiviteter,
-  };
-  return lagStateMedAksjonspunkterOgBeregningsgrunnlag(aksjonspunkter, { faktaOmBeregning }, formNameAvklarAktiviteter, values, initial);
-};
 
 const aktivitet1 = {
   arbeidsgiverNavn: 'Arbeidsgiveren',
@@ -159,17 +145,13 @@ describe('<AvklareAktiviteterPanel>', () => {
       kanOverstyre={false}
       aksjonspunkter={aksjonspunkter}
       erOverstyrt={false}
-      behandlingId={1}
-      behandlingVersjon={1}
       submitCallback={sinon.spy()}
       onSubmit={() => undefined}
       erBgOverstyrt={false}
-      behandlingFormPrefix="test"
       alleKodeverk={alleKodeverk}
       reduxFormInitialize={() => {}}
       beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
-      {...behandlingProps}
     />, messages);
     const vurderAktivitetPanel = wrapper.find(VurderAktiviteterPanel);
     expect(vurderAktivitetPanel).toHaveLength(1);
@@ -193,16 +175,12 @@ describe('<AvklareAktiviteterPanel>', () => {
       aksjonspunkter={aksjonspunkter}
       erOverstyrt={false}
       erBgOverstyrt={false}
-      behandlingFormPrefix="test"
       alleKodeverk={alleKodeverk}
-      behandlingId={1}
-      behandlingVersjon={1}
       submitCallback={sinon.spy()}
       onSubmit={() => undefined}
       beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
       reduxFormInitialize={() => {}}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
-      {...behandlingProps}
     />, messages);
     const radio = wrapper.find(VurderAktiviteterPanel);
     expect(radio).toHaveLength(0);
@@ -231,16 +209,12 @@ describe('<AvklareAktiviteterPanel>', () => {
       aksjonspunkter={aksjonspunkter}
       erOverstyrt={false}
       erBgOverstyrt={false}
-      behandlingFormPrefix="test"
       alleKodeverk={alleKodeverk}
-      behandlingId={1}
-      behandlingVersjon={1}
       submitCallback={sinon.spy()}
       onSubmit={() => undefined}
       beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
       reduxFormInitialize={() => {}}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
-      {...behandlingProps}
     />, messages);
     expect(wrapper.find(OverstyringKnapp)).toHaveLength(1);
   });
@@ -266,18 +240,14 @@ describe('<AvklareAktiviteterPanel>', () => {
       helpText={[]}
       harAndreAksjonspunkterIPanel={false}
       kanOverstyre
-      behandlingId={1}
-      behandlingVersjon={1}
       submitCallback={sinon.spy()}
       onSubmit={() => undefined}
       aksjonspunkter={aksjonspunkter}
       erOverstyrt
       erBgOverstyrt={false}
-      behandlingFormPrefix="test"
       alleKodeverk={alleKodeverk}
       reduxFormInitialize={() => {}}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
-      {...behandlingProps}
     />, messages);
     const helptext = wrapper.find(AksjonspunktHelpTextTemp);
     expect(helptext).toHaveLength(0);
@@ -296,8 +266,6 @@ describe('<AvklareAktiviteterPanel>', () => {
       aksjonspunkter: apsAvklarAktiviteter,
       readOnly: false,
       submittable: true,
-      behandlingId: 1,
-      behandlingVersjon: 1,
       harAndreAksjonspunkterIPanel: false,
       submitCallback: null,
       reduxFormInitialize: null,
@@ -320,8 +288,6 @@ describe('<AvklareAktiviteterPanel>', () => {
       aksjonspunkter: aps,
       readOnly: false,
       submittable: true,
-      behandlingId: 1,
-      behandlingVersjon: 1,
       harAndreAksjonspunkterIPanel: false,
       submitCallback: null,
       reduxFormInitialize: null,
@@ -346,8 +312,6 @@ describe('<AvklareAktiviteterPanel>', () => {
       aksjonspunkter: aps,
       readOnly: false,
       submittable: true,
-      behandlingId: 1,
-      behandlingVersjon: 1,
       harAndreAksjonspunkterIPanel: false,
       submitCallback: null,
       reduxFormInitialize: null,
@@ -425,12 +389,13 @@ describe('<AvklareAktiviteterPanel>', () => {
     initial[idAAP] = { skalBrukes: null };
     initial[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME] = '53451221412412';
     initial.avklarAktiviteter = avklarAktiviteter;
-    const state = lagStateMedAvklarAktitiveter(avklarAktiviteter, values, initial);
-    const erAvklartOgIkkeEndret = erAvklartAktivitetEndret(state, {
-      ...behandlingProps,
-      aksjonspunkter: apsAvklarAktiviteter,
-      beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter } },
-    });
+    const erAvklartOgIkkeEndret = erAvklartAktivitetEndret.resultFunc(
+      apsAvklarAktiviteter,
+      false,
+      avklarAktiviteter,
+      values,
+      initial,
+    );
     expect(erAvklartOgIkkeEndret).toBe(true);
   });
 
@@ -459,12 +424,13 @@ describe('<AvklareAktiviteterPanel>', () => {
     initial[idAAP] = { skalBrukes: null };
     initial[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME] = 'sefiojsiejfise';
     initial.avklarAktiviteter = avklarAktiviteter;
-    const state = lagStateMedAvklarAktitiveter(avklarAktiviteter, values, initial);
-    const erAvklartOgIkkeEndret = erAvklartAktivitetEndret(state, {
-      ...behandlingProps,
-      aksjonspunkter: apsAvklarAktiviteter,
-      beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter } },
-    });
+    const erAvklartOgIkkeEndret = erAvklartAktivitetEndret.resultFunc(
+      apsAvklarAktiviteter,
+      false,
+      avklarAktiviteter,
+      values,
+      initial,
+    );
     expect(erAvklartOgIkkeEndret).toBe(true);
   });
 
@@ -493,12 +459,13 @@ describe('<AvklareAktiviteterPanel>', () => {
     initial[idAAP] = { skalBrukes: null };
     initial[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME] = '345346123112';
     initial.avklarAktiviteter = avklarAktiviteter;
-    const state = lagStateMedAvklarAktitiveter(avklarAktiviteter, values, initial);
-    const erAvklartOgIkkeEndret = erAvklartAktivitetEndret(state, {
-      ...behandlingProps,
-      aksjonspunkter: apsAvklarAktiviteter,
-      beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter } },
-    });
+    const erAvklartOgIkkeEndret = erAvklartAktivitetEndret.resultFunc(
+      apsAvklarAktiviteter,
+      false,
+      avklarAktiviteter,
+      values,
+      initial,
+    );
     expect(erAvklartOgIkkeEndret).toBe(true);
   });
 
@@ -517,12 +484,13 @@ describe('<AvklareAktiviteterPanel>', () => {
     values[idAAP] = { skalBrukes: null };
     values[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME] = 'sefiojsiejfise';
     values.avklarAktiviteter = avklarAktiviteter;
-    const state = lagStateMedAvklarAktitiveter(avklarAktiviteter, values, values);
-    const erAvklartOgIkkeEndret = erAvklartAktivitetEndret(state, {
-      ...behandlingProps,
-      aksjonspunkter: apsAvklarAktiviteter,
-      beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter } },
-    });
+    const erAvklartOgIkkeEndret = erAvklartAktivitetEndret.resultFunc(
+      apsAvklarAktiviteter,
+      false,
+      avklarAktiviteter,
+      values,
+      values,
+    );
     expect(erAvklartOgIkkeEndret).toBe(false);
   });
 });
