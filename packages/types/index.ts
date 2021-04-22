@@ -1,7 +1,7 @@
 export { default as Aksjonspunkt } from './src/aksjonspunktTsType';
 export { default as Arbeidsforhold, ArbeidsforholdPermisjon } from './src/arbeidsforholdTsType';
 export { default as Behandling } from './src/behandlingTsType';
-export { default as BehandlingAppKontekst } from './src/behandlingAppKontekstTsType';
+export { default as BehandlingAppKontekst, BehandlingÅrsak } from './src/behandlingAppKontekstTsType';
 export { default as Behandlingsresultat } from './src/behandlingsresultatTsType';
 export {
   default as Beregningsgrunnlag,

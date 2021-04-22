@@ -25,19 +25,13 @@ const aksjonspunkter = [
       kode: 'OPPR',
       kodeverk: 'AKSJONSPUNKT_STATUS',
     },
-    begrunnelse: null,
-    vilkarType: null,
     toTrinnsBehandling: true,
-    toTrinnsBehandlingGodkjent: null,
-    vurderPaNyttArsaker: null,
-    besluttersBegrunnelse: null,
     aksjonspunktType: {
       kode: 'MANU',
       kodeverk: 'AKSJONSPUNKT_TYPE',
     },
     kanLoses: true,
     erAktivt: true,
-    fristTid: null,
   },
 ];
 
@@ -51,16 +45,8 @@ const familiehendelse = {
     avklartBarn: [
       {
         fodselsdato: '2019-11-04',
-        dodsdato: null,
       },
     ],
-    brukAntallBarnFraTps: null,
-    dokumentasjonForeligger: null,
-    termindato: null,
-    antallBarnTermin: null,
-    utstedtdato: null,
-    morForSykVedFodsel: null,
-    vedtaksDatoSomSvangerskapsuke: null,
   },
 } as FamilieHendelseSamling;
 
@@ -87,7 +73,6 @@ const behandling = {
 } as Behandling;
 
 const uttakStonadskontoer = {
-  maksDatoUttak: null,
   tapteDagerFpff: 1,
   stonadskontoer: {
     FEDREKVOTE: {
@@ -102,13 +87,11 @@ const uttakStonadskontoer = {
               kodeverk: 'UTTAK_ARBEID_TYPE',
             },
             arbeidsgiverReferanse: '910909088',
-            arbeidsforholdId: null,
           },
           saldo: 50,
         },
       ],
       gyldigForbruk: true,
-      kontoUtvidelser: null,
     },
     MØDREKVOTE: {
       stonadskontotype: 'MØDREKVOTE',
@@ -122,13 +105,11 @@ const uttakStonadskontoer = {
               kodeverk: 'UTTAK_ARBEID_TYPE',
             },
             arbeidsgiverReferanse: '910909088',
-            arbeidsforholdId: null,
           },
           saldo: 35,
         },
       ],
       gyldigForbruk: true,
-      kontoUtvidelser: null,
     },
     FELLESPERIODE: {
       stonadskontotype: 'FELLESPERIODE',
@@ -142,13 +123,11 @@ const uttakStonadskontoer = {
               kodeverk: 'UTTAK_ARBEID_TYPE',
             },
             arbeidsgiverReferanse: '910909088',
-            arbeidsforholdId: null,
           },
           saldo: 80,
         },
       ],
       gyldigForbruk: true,
-      kontoUtvidelser: null,
     },
     FORELDREPENGER_FØR_FØDSEL: {
       stonadskontotype: 'FORELDREPENGER_FØR_FØDSEL',
@@ -162,13 +141,11 @@ const uttakStonadskontoer = {
               kodeverk: 'UTTAK_ARBEID_TYPE',
             },
             arbeidsgiverReferanse: '910909088',
-            arbeidsforholdId: null,
           },
           saldo: 0,
         },
       ],
       gyldigForbruk: true,
-      kontoUtvidelser: null,
     },
   },
 } as UttakStonadskontoer;
@@ -185,8 +162,6 @@ const uttaksresultatPerioder = {
             kodeverk: 'STOENADSKONTOTYPE',
           },
           prosentArbeid: 0,
-          arbeidsforholdId: null,
-          eksternArbeidsforholdId: null,
           arbeidsgiverReferanse: '910909088',
           utbetalingsgrad: 100,
           uttakArbeidType: {
@@ -195,14 +170,12 @@ const uttaksresultatPerioder = {
           },
           gradering: false,
           trekkdagerDesimaler: 15,
-          trekkdager: null,
         },
       ],
       periodeResultatType: {
         kode: 'INNVILGET',
         kodeverk: 'PERIODE_RESULTAT_TYPE',
       },
-      begrunnelse: null,
       periodeResultatÅrsak: {
         kode: '2006',
         navn: '§14-10: Innvilget foreldrepenger før fødsel',
@@ -223,7 +196,6 @@ const uttaksresultatPerioder = {
       },
       flerbarnsdager: false,
       samtidigUttak: false,
-      samtidigUttaksprosent: null,
       graderingInnvilget: false,
       periodeType: {
         kode: 'FORELDREPENGER_FØR_FØDSEL',
@@ -237,8 +209,6 @@ const uttaksresultatPerioder = {
         kode: '-',
         kodeverk: 'OPPHOLD_AARSAK_TYPE',
       },
-      graderingsAvslagÅrsakLovhjemmel: null,
-      gradertAktivitet: null,
       periodeResultatÅrsakLovhjemmel: '{"fagsakYtelseType": {"FP": {"lovreferanse": "14-10"}}}',
     },
     {
@@ -251,8 +221,6 @@ const uttaksresultatPerioder = {
             kodeverk: 'STOENADSKONTOTYPE',
           },
           prosentArbeid: 0,
-          arbeidsforholdId: null,
-          eksternArbeidsforholdId: null,
           arbeidsgiverReferanse: '910909088',
           utbetalingsgrad: 100,
           uttakArbeidType: {
@@ -261,14 +229,12 @@ const uttaksresultatPerioder = {
           },
           gradering: false,
           trekkdagerDesimaler: 30,
-          trekkdager: null,
         },
       ],
       periodeResultatType: {
         kode: 'INNVILGET',
         kodeverk: 'PERIODE_RESULTAT_TYPE',
       },
-      begrunnelse: null,
       periodeResultatÅrsak: {
         kode: '2003',
         navn: '§14-12: Innvilget uttak av kvote',
@@ -289,7 +255,6 @@ const uttaksresultatPerioder = {
       },
       flerbarnsdager: false,
       samtidigUttak: false,
-      samtidigUttaksprosent: null,
       graderingInnvilget: false,
       periodeType: {
         kode: 'MØDREKVOTE',
@@ -303,8 +268,6 @@ const uttaksresultatPerioder = {
         kode: '-',
         kodeverk: 'OPPHOLD_AARSAK_TYPE',
       },
-      graderingsAvslagÅrsakLovhjemmel: null,
-      gradertAktivitet: null,
       periodeResultatÅrsakLovhjemmel: '{"fagsakYtelseType": {"FP": {"lovreferanse": "14-12"}}}',
     },
     {
@@ -317,8 +280,6 @@ const uttaksresultatPerioder = {
             kodeverk: 'STOENADSKONTOTYPE',
           },
           prosentArbeid: 0,
-          arbeidsforholdId: null,
-          eksternArbeidsforholdId: null,
           arbeidsgiverReferanse: '910909088',
           utbetalingsgrad: 100,
           uttakArbeidType: {
@@ -327,14 +288,12 @@ const uttaksresultatPerioder = {
           },
           gradering: false,
           trekkdagerDesimaler: 10,
-          trekkdager: null,
         },
       ],
       periodeResultatType: {
         kode: 'INNVILGET',
         kodeverk: 'PERIODE_RESULTAT_TYPE',
       },
-      begrunnelse: null,
       periodeResultatÅrsak: {
         kode: '2003',
         navn: '§14-12: Innvilget uttak av kvote',
@@ -355,7 +314,6 @@ const uttaksresultatPerioder = {
       },
       flerbarnsdager: false,
       samtidigUttak: false,
-      samtidigUttaksprosent: null,
       graderingInnvilget: false,
       periodeType: {
         kode: 'MØDREKVOTE',
@@ -369,8 +327,6 @@ const uttaksresultatPerioder = {
         kode: '-',
         kodeverk: 'OPPHOLD_AARSAK_TYPE',
       },
-      graderingsAvslagÅrsakLovhjemmel: null,
-      gradertAktivitet: null,
       periodeResultatÅrsakLovhjemmel: '{"fagsakYtelseType": {"FP": {"lovreferanse": "14-12"}}}',
     },
     {
@@ -384,24 +340,19 @@ const uttaksresultatPerioder = {
             navn: 'Fedrekvote',
           },
           prosentArbeid: 0,
-          arbeidsforholdId: null,
-          eksternArbeidsforholdId: null,
           arbeidsgiverReferanse: '910909088',
-          utbetalingsgrad: null,
           uttakArbeidType: {
             kode: 'ORDINÆRT_ARBEID',
             kodeverk: 'UTTAK_ARBEID_TYPE',
           },
           gradering: false,
           trekkdagerDesimaler: 25,
-          trekkdager: null,
         },
       ],
       periodeResultatType: {
         kode: 'MANUELL_BEHANDLING',
         kodeverk: 'PERIODE_RESULTAT_TYPE',
       },
-      begrunnelse: null,
       periodeResultatÅrsak: {
         kode: '4007',
         navn: '§14-12 tredje ledd: Den andre part syk/skadet ikke oppfylt',
@@ -422,7 +373,6 @@ const uttaksresultatPerioder = {
       },
       flerbarnsdager: false,
       samtidigUttak: false,
-      samtidigUttaksprosent: null,
       graderingInnvilget: false,
       periodeType: {
         kode: 'FEDREKVOTE',
@@ -436,8 +386,6 @@ const uttaksresultatPerioder = {
         kode: '-',
         kodeverk: 'OPPHOLD_AARSAK_TYPE',
       },
-      graderingsAvslagÅrsakLovhjemmel: null,
-      gradertAktivitet: null,
       periodeResultatÅrsakLovhjemmel: '{"fagsakYtelseType": {"FP": {"lovreferanse": "14-12"}}}',
     },
   ],
@@ -460,7 +408,6 @@ const soknad = {
   },
   mottattDato: '2019-11-18',
   dekningsgrad: 100,
-  termindato: null,
   fodselsdatoer: {
     1: '2019-11-04',
   } as {[key: number]: string},
@@ -476,12 +423,7 @@ const personoversikt = {
 } as Personoversikt;
 
 const ytelsefordeling = {
-  ikkeOmsorgPerioder: null,
-  aleneOmsorgPerioder: null,
   annenforelderHarRettDto: {
-    annenforelderHarRett: null,
-    begrunnelse: null,
-    annenforelderHarRettPerioder: null,
   },
   endringsdato: '2019-10-14',
   gjeldendeDekningsgrad: 100,

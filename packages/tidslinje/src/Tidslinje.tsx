@@ -1,4 +1,4 @@
-import React, { Component, MouseEvent } from 'react';
+import React, { Component, MouseEvent, KeyboardEvent } from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
 import Timeline from 'react-visjs-timeline';
@@ -34,7 +34,7 @@ interface TidslinjeProps {
   customTimes: TidslinjeTimes;
   hovedsokerKjonnKode: Kjønnkode;
   medsokerKjonnKode?: Kjønnkode;
-  openPeriodInfo: (event: MouseEvent) => void;
+  openPeriodInfo: (event: MouseEvent | KeyboardEvent) => void;
   selectedPeriod?: Periode;
   selectPeriodCallback: (eventProps: EventProps) => void;
   uttakPerioder: Periode[];

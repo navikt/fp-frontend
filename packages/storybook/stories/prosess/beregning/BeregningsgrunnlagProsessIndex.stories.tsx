@@ -13,7 +13,7 @@ import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregn
 import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
 
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
-import { Vilkar } from '@fpsak-frontend/types';
+import { Kodeverk, Vilkar } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import inntektAktivitetType from '@fpsak-frontend/kodeverk/src/inntektAktivitetType';
 import alleKodeverk from '../../mocks/alleKodeverk.json';
@@ -39,7 +39,7 @@ const lagPGIVerdier = () => ([
     årstall: 2015,
   },
 ]);
-const lagAPMedKode = (kode) => ({
+const lagAPMedKode = (kode: string) => ({
   definisjon: {
     kode,
     kodeverk: 'test',
@@ -55,7 +55,7 @@ const lagAPMedKode = (kode) => ({
   endretTidspunkt: '2020-01-20',
 });
 
-const vilkarMedUtfall = (kode) => [{
+const vilkarMedUtfall = (kode: string) => [{
   vilkarType: {
     kode: vilkarType.BEREGNINGSGRUNNLAGVILKARET,
     kodeverk: 'vilkarType',
@@ -74,15 +74,14 @@ const arbeidsgiverOpplysninger = {
   },
 };
 
-const lagAG = (arbeidsgiverNavn, arbeidsgiverIdent, erPrivatPerson = false) => {
-  arbeidsgiverOpplysninger[arbeidsgiverIdent] = {
-    identifikator: arbeidsgiverIdent,
-    navn: arbeidsgiverNavn,
-    erPrivatPerson,
-  };
-};
-
-const lagArbeidsforhold = (arbeidsgiverIdent, arbeidsforholdId, eksternArbeidsforholdId, opphoersdato, navn, prosent) => ({
+const lagArbeidsforhold = (
+  arbeidsgiverIdent: string,
+  arbeidsforholdId: string,
+  eksternArbeidsforholdId: string,
+  opphoersdato: string,
+  navn: string,
+  prosent: string,
+) => ({
   arbeidsgiverIdent,
   startdato: '2018-10-09',
   opphoersdato,
@@ -105,7 +104,13 @@ const lagArbeidsforhold = (arbeidsgiverIdent, arbeidsforholdId, eksternArbeidsfo
   stillingsNavn: navn,
 });
 
-const lagAndel = (aktivitetstatuskode, beregnetPrAar, overstyrtPrAar, erTidsbegrensetArbeidsforhold, skalFastsetteGrunnlag = false) => ({
+const lagAndel = (
+  aktivitetstatuskode: string,
+  beregnetPrAar: number,
+  overstyrtPrAar: number,
+  erTidsbegrensetArbeidsforhold: boolean,
+  skalFastsetteGrunnlag = false,
+) => ({
   beregningsgrunnlagTom: '2019-08-31',
   beregningsgrunnlagFom: '2019-06-01',
   aktivitetStatus: {
@@ -162,7 +167,13 @@ const lagAndel = (aktivitetstatuskode, beregnetPrAar, overstyrtPrAar, erTidsbegr
   næringer: null,
 });
 
-const lagPeriode = (andelsliste, dagsats, fom, tom, periodeAarsaker) => ({
+const lagPeriode = (
+  andelsliste: any,
+  dagsats: number,
+  fom: string,
+  tom: string,
+  periodeAarsaker: Kodeverk[],
+) => ({
   beregningsgrunnlagPeriodeFom: fom,
   beregningsgrunnlagPeriodeTom: tom,
   beregnetPrAar: 360000,
@@ -176,7 +187,12 @@ const lagPeriode = (andelsliste, dagsats, fom, tom, periodeAarsaker) => ({
   andelerLagtTilManueltIForrige: [],
 });
 
-const lagSammenligningsGrunnlag = (kode, rapportertPrAar, avvikProsent, differanse) => ({
+const lagSammenligningsGrunnlag = (
+  kode: string,
+  rapportertPrAar: number,
+  avvikProsent: number,
+  differanse: number,
+) => ({
   sammenligningsgrunnlagFom: '2018-09-01',
   sammenligningsgrunnlagTom: '2019-10-31',
   rapportertPrAar,
@@ -189,22 +205,37 @@ const lagSammenligningsGrunnlag = (kode, rapportertPrAar, avvikProsent, differan
   differanseBeregnet: differanse,
 });
 
-const lagPeriodeMedDagsats = (andelsliste, dagsats) => lagPeriode(andelsliste, dagsats, standardFom, standardTom, []);
+const lagPeriodeMedDagsats = (andelsliste, dagsats: number) => lagPeriode(andelsliste, dagsats, standardFom, standardTom, []);
 
 const lagStandardPeriode = (andelsliste) => lagPeriode(andelsliste, null, standardFom, standardTom, []);
 
-const lagTidsbegrensetPeriode = (andelsliste, fom, tom) => lagPeriode(andelsliste, null, fom, tom, [{ kode: periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET }]);
+const lagTidsbegrensetPeriode = (
+  andelsliste,
+  fom: string,
+  tom: string,
+) => lagPeriode(andelsliste, null, fom, tom, [{ kode: periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET, kodeverk: '' }]);
 
-const lagStatus = (kode) => ({
+const lagStatus = (kode: string): Kodeverk => ({
   kode,
   kodeverk: 'AKTIVITET_STATUS',
 });
 
+type Inntekt = {
+  inntektAktivitetType: Kodeverk,
+  beløp: number;
+}
+
+type InntektOgPeriode = {
+  fom: string;
+  tom: string;
+  inntekter: Inntekt[];
+}
+
 const inntektsgrunnlag = {
-  måneder: [],
+  måneder: [] as InntektOgPeriode[],
 };
 
-const lagATInntektsgrunnlag = (inntekt) => ({
+const lagATInntektsgrunnlag = (inntekt: number): Inntekt => ({
   inntektAktivitetType: {
     kode: inntektAktivitetType.ARBEID,
     kodeverk: 'INNTEKT_AKTIVITET_TYPE',
@@ -212,7 +243,7 @@ const lagATInntektsgrunnlag = (inntekt) => ({
   beløp: inntekt,
 });
 
-const lagYtelseInntektsgrunnlag = (inntekt) => ({
+const lagYtelseInntektsgrunnlag = (inntekt: number): Inntekt => ({
   inntektAktivitetType: {
     kode: inntektAktivitetType.YTELSE,
     kodeverk: 'INNTEKT_AKTIVITET_TYPE',
@@ -220,7 +251,7 @@ const lagYtelseInntektsgrunnlag = (inntekt) => ({
   beløp: inntekt,
 });
 
-const lagFLInntektsgrunnlag = (inntekt) => ({
+const lagFLInntektsgrunnlag = (inntekt: number): Inntekt => ({
   inntektAktivitetType: {
     kode: inntektAktivitetType.FRILANS,
     kodeverk: 'INNTEKT_AKTIVITET_TYPE',
@@ -228,7 +259,7 @@ const lagFLInntektsgrunnlag = (inntekt) => ({
   beløp: inntekt,
 });
 
-const lagMånedInntekt = (fom, tom, inntekter) => {
+const lagMånedInntekt = (fom: string, tom: string, inntekter: Inntekt[]) => {
   const obj = {
     fom,
     tom,
@@ -516,9 +547,24 @@ export const tidsbegrensetArbeidsforholdMedAvvik = () => {
     lagAndel('AT', 132250, undefined, true, true),
     lagAndel('AT', 140250, undefined, true, true),
     lagAndel('FL', 133250, undefined, undefined)];
-  lagAG('Andeby bank', '987654321', false);
-  lagAG('Gardslien transport og Gardiner AS', '9478541223', false);
-  lagAG('Svaneby sykehjem', '93178545', false);
+  const nyArbeidsgiverOpplysningerPerId = {
+    ...arbeidsgiverOpplysninger,
+    987654321: {
+      identifikator: '987654321',
+      navn: 'Andeby bank',
+      erPrivatPerson: false,
+    },
+    9478541223: {
+      identifikator: '9478541223',
+      navn: 'Gardslien transport og Gardiner AS',
+      erPrivatPerson: false,
+    },
+    93178545: {
+      identifikator: '93178545',
+      navn: 'Svaneby sykehjem',
+      erPrivatPerson: false,
+    },
+  };
 
   andeler[0].arbeidsforhold = lagArbeidsforhold('987654321', 'sdefsef-swdefsdf-sdf-sdfdsf-ddsdf', '100', null, null, null);
   andeler[1].arbeidsforhold = lagArbeidsforhold('9478541223', 'sdefsef-swdefsdf-sdf-sdfdsf-98das',
@@ -529,7 +575,7 @@ export const tidsbegrensetArbeidsforholdMedAvvik = () => {
   andeler[2].arbeidsforhold = lagArbeidsforhold('93178545', 'sdefsef-swdefsdf-sdf-sdfdsf-dfaf845', '300', null, null, null);
   const perioder = [lagPeriode(andeler, undefined, '2019-09-16', '2019-09-29', []),
     lagTidsbegrensetPeriode(andeler, '2019-09-30', '2019-10-15'),
-    lagPeriode(andeler, undefined, '2019-10-15', null, [{ kode: periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET }])];
+    lagPeriode(andeler, undefined, '2019-10-15', null, [{ kode: periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET, kodeverk: '' }])];
   const statuser = [lagStatus('AT_FL')];
   const sammenligningsgrunnlagPrStatus = [
     lagSammenligningsGrunnlag(sammenligningType.ATFLSN, 474257, 26.2, 77059)];
@@ -547,7 +593,7 @@ export const tidsbegrensetArbeidsforholdMedAvvik = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
       alleKodeverk={alleKodeverk as any}
       status=""
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      arbeidsgiverOpplysningerPerId={nyArbeidsgiverOpplysningerPerId}
       alleMerknaderFraBeslutter={{}}
       setFormData={() => undefined}
     />
@@ -594,9 +640,24 @@ export const naturalYtelse = () => {
   const andel2MedFrafall = lagAndel('AT', 740000, 744000, undefined, false);
   const andel3UtenFrafall = lagAndel('AT', 750000, 755000, undefined, false);
   const andel3MedFrafall = lagAndel('AT', 750000, 755000, undefined, false);
-  lagAG('BEDRIFT AS 1', '9109090881', false);
-  lagAG('BEDRIFT AS 2', '9109090882', false);
-  lagAG('BEDRIFT AS 3', '9109090883', false);
+  const nyArbeidsgiverOpplysningerPerId = {
+    ...arbeidsgiverOpplysninger,
+    987654321: {
+      identifikator: '9109090881',
+      navn: 'BEDRIFT AS 1',
+      erPrivatPerson: false,
+    },
+    9478541223: {
+      identifikator: '9109090882',
+      navn: 'BEDRIFT AS 2',
+      erPrivatPerson: false,
+    },
+    93178545: {
+      identifikator: '9109090883',
+      navn: 'BEDRIFT AS 3',
+      erPrivatPerson: false,
+    },
+  };
 
   andel1MedFrafall.arbeidsforhold.arbeidsgiverIdent = '9109090881';
   andel1MedFrafall.arbeidsforhold.naturalytelseBortfaltPrÅr = 1231;
@@ -618,22 +679,22 @@ export const naturalYtelse = () => {
     4432,
     '2019-03-21',
     '2019-05-31',
-    [{ kode: periodeAarsak.NATURALYTELSE_BORTFALT }]);
+    [{ kode: periodeAarsak.NATURALYTELSE_BORTFALT, kodeverk: '' }]);
   const periode2 = lagPeriode([{ ...andel1MedFrafall }, { ...andel2MedFrafall }, { ...andel3UtenFrafall }],
     2432,
     '2019-06-01',
     '2019-07-30',
-    [{ kode: periodeAarsak.NATURALYTELSE_BORTFALT }]);
+    [{ kode: periodeAarsak.NATURALYTELSE_BORTFALT, kodeverk: '' }]);
   const periode3 = lagPeriode([{ ...andel1MedFrafall }, { ...andel2MedFrafall }, { ...andel3MedFrafall }],
     3432,
     '2019-08-01',
     '2019-09-30',
-    [{ kode: periodeAarsak.NATURALYTELSE_BORTFALT }]);
+    [{ kode: periodeAarsak.NATURALYTELSE_BORTFALT, kodeverk: '' }]);
   const periode4 = lagPeriode([{ ...andel1MedMerFrafall }, { ...andel2MedFrafall }, { ...andel3MedFrafall }],
     3432,
     '2019-10-01',
     '9999-12-31',
-    [{ kode: periodeAarsak.NATURALYTELSE_BORTFALT }]);
+    [{ kode: periodeAarsak.NATURALYTELSE_BORTFALT, kodeverk: '' }]);
 
   const perioder = [
     periode1,
@@ -662,7 +723,7 @@ export const naturalYtelse = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      arbeidsgiverOpplysningerPerId={nyArbeidsgiverOpplysningerPerId}
       alleMerknaderFraBeslutter={{}}
       setFormData={() => undefined}
     />
@@ -908,8 +969,19 @@ export const arbeidstakerMed3Arbeidsforhold2ISammeOrganisasjonSide3 = () => {
     lagAndel('AT', 78000, undefined, false, false),
     lagAndel('AT', 88084, undefined, false, false),
   ];
-  lagAG('Garslien transport og Gardiner', '9478541223', false);
-  lagAG('Aldersheimen Omsorg', '9478541255', false);
+  const nyArbeidsgiverOpplysningerPerId = {
+    ...arbeidsgiverOpplysninger,
+    9478541223: {
+      identifikator: '9478541223',
+      navn: 'Gardslien transport og Gardiner',
+      erPrivatPerson: false,
+    },
+    9478541255: {
+      identifikator: '9478541255',
+      navn: 'Aldersheimen Omsorg',
+      erPrivatPerson: false,
+    },
+  };
   andeler[0].arbeidsforhold = lagArbeidsforhold('9478541223', 'sdefsef-swdefsdf-sdf-sdfdsf-98das', null, null, null, null);
   andeler[1].arbeidsforhold = lagArbeidsforhold('9478541255', 'sdefsef-swdefsdf-sdf-sdfdsf-98das', '100', null, 'Assistent', '30');
   andeler[2].arbeidsforhold = lagArbeidsforhold('9478541255',
@@ -936,7 +1008,7 @@ export const arbeidstakerMed3Arbeidsforhold2ISammeOrganisasjonSide3 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      arbeidsgiverOpplysningerPerId={nyArbeidsgiverOpplysningerPerId}
       alleMerknaderFraBeslutter={{}}
       setFormData={() => undefined}
     />
@@ -947,7 +1019,14 @@ export const arbeidstakerAvslagHalvGSide4 = () => {
   const andeler = [
     lagAndel('AT', 32232, undefined, false, false),
   ];
-  lagAG('Gardslien transport og Gardiner', '123456789', false);
+  const nyArbeidsgiverOpplysningerPerId = {
+    ...arbeidsgiverOpplysninger,
+    123456789: {
+      identifikator: '123456789',
+      navn: 'Gardslien transport og Gardiner',
+      erPrivatPerson: false,
+    },
+  };
   andeler[0].arbeidsforhold = lagArbeidsforhold('123456789',
     'sdefsef-swdefsdf-sdf-sdfdsf-98das',
     '324243533',
@@ -974,7 +1053,7 @@ export const arbeidstakerAvslagHalvGSide4 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      arbeidsgiverOpplysningerPerId={nyArbeidsgiverOpplysningerPerId}
       alleMerknaderFraBeslutter={{}}
       setFormData={() => undefined}
     />
@@ -988,8 +1067,15 @@ export const arbeidstakerMedAksjonspunktSide5 = () => {
     null,
     null,
     'Fabrikkmedarbeider',
-    75);
-  lagAG('Bedriften & Sønn AS', '123456789', false);
+    '75');
+  const nyArbeidsgiverOpplysningerPerId = {
+    ...arbeidsgiverOpplysninger,
+    123456789: {
+      identifikator: '123456789',
+      navn: 'Bedriften & Sønn AS',
+      erPrivatPerson: false,
+    },
+  };
   const perioder = [lagStandardPeriode(andeler)];
   const statuser = [lagStatus('AT')];
   const sammenligningsgrunnlagPrStatus = [
@@ -1009,7 +1095,7 @@ export const arbeidstakerMedAksjonspunktSide5 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
       alleKodeverk={alleKodeverk as any}
       status=""
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      arbeidsgiverOpplysningerPerId={nyArbeidsgiverOpplysningerPerId}
       alleMerknaderFraBeslutter={{}}
       setFormData={() => undefined}
     />
@@ -1056,8 +1142,19 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktkSide7 = () => {
     lagAndel('AT', 395232, undefined, false, true),
     lagAndel('AT', 156084, undefined, true, true),
   ];
-  lagAG('Gardslien transport og Gardiner AS', '9478541223', false);
-  lagAG('Aldersheimen Omsorg', '93178545', false);
+  const nyArbeidsgiverOpplysningerPerId = {
+    ...arbeidsgiverOpplysninger,
+    9478541223: {
+      identifikator: '9478541223',
+      navn: 'Gardslien transport og Gardiner AS',
+      erPrivatPerson: false,
+    },
+    93178545: {
+      identifikator: '93178545',
+      navn: 'Aldersheimen Omsorg',
+      erPrivatPerson: false,
+    },
+  };
   andeler[0].arbeidsforhold = lagArbeidsforhold('9478541223', 'sdefsef-swdefsdf-sdf-sdfdsf-98das',
     '100',
     null,
@@ -1089,7 +1186,7 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktkSide7 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
       alleKodeverk={alleKodeverk as any}
       status=""
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      arbeidsgiverOpplysningerPerId={nyArbeidsgiverOpplysningerPerId}
       alleMerknaderFraBeslutter={{}}
       setFormData={() => undefined}
     />
@@ -1100,8 +1197,19 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktBehandletSide7 = () => {
     lagAndel('AT', 395232, undefined, false, true),
     lagAndel('AT', 156084, undefined, true, true),
   ];
-  lagAG('Gardslien transport og Gardiner AS', '9478541223', false);
-  lagAG('Aldersheimen Omsorg', '93178545', false);
+  const nyArbeidsgiverOpplysningerPerId = {
+    ...arbeidsgiverOpplysninger,
+    9478541223: {
+      identifikator: '9478541223',
+      navn: 'Gardslien transport og Gardiner AS',
+      erPrivatPerson: false,
+    },
+    93178545: {
+      identifikator: '93178545',
+      navn: 'Aldersheimen Omsorg',
+      erPrivatPerson: false,
+    },
+  };
   andeler[0].arbeidsforhold = lagArbeidsforhold('9478541223', 'sdefsef-swdefsdf-sdf-sdfdsf-98das',
     '100',
     null,
@@ -1153,7 +1261,7 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktBehandletSide7 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      arbeidsgiverOpplysningerPerId={nyArbeidsgiverOpplysningerPerId}
       alleMerknaderFraBeslutter={{}}
       setFormData={() => undefined}
     />
@@ -2171,7 +2279,14 @@ export const arbeidstakerOgAAPMedAksjonspunktOppfyltSide27 = () => {
     lagAndel('AT', 107232, undefined, false, true),
     lagAndel('AAP', 272304, undefined, false)];
   andeler[0].overstyrtPrAar = 167000;
-  lagAG('Garslinen transport og Gardiner AS', '987654321', false);
+  const nyArbeidsgiverOpplysningerPerId = {
+    ...arbeidsgiverOpplysninger,
+    987654321: {
+      identifikator: '987654321',
+      navn: 'Gardslien transport og Gardiner',
+      erPrivatPerson: false,
+    },
+  };
   andeler[0].arbeidsforhold = lagArbeidsforhold('987654321', 'sdefsef-swdefsdf-sdf-sdfdsf-ddsdf',
     null,
     null,
@@ -2200,7 +2315,7 @@ export const arbeidstakerOgAAPMedAksjonspunktOppfyltSide27 = () => {
       vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
       alleKodeverk={alleKodeverk as any}
       status=""
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      arbeidsgiverOpplysningerPerId={nyArbeidsgiverOpplysningerPerId}
       alleMerknaderFraBeslutter={{}}
       setFormData={() => undefined}
     />

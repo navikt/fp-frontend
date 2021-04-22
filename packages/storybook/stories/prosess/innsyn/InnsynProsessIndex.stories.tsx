@@ -7,7 +7,9 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import InnsynProsessIndex from '@fpsak-frontend/prosess-innsyn';
-import { Aksjonspunkt, Behandling, Innsyn } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, Behandling, Innsyn, InnsynDokument,
+} from '@fpsak-frontend/types';
 
 import alleKodeverk from '../../mocks/alleKodeverk.json';
 
@@ -53,7 +55,7 @@ export const visPanelForVurderingAvInnsyn = () => (
   <InnsynProsessIndex
     {...standardProsessProps}
     innsyn={object('innsyn', {
-      dokumenter: [],
+      dokumenter: [] as InnsynDokument[],
       vedtaksdokumentasjon: [{
         dokumentId: '1',
         tittel: behandlingType.FORSTEGANGSSOKNAD,

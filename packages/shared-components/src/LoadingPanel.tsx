@@ -9,7 +9,9 @@ import styles from './loadingPanel.less';
  * Presentasjonskomponent. Viser lasteikon.
  */
 const LoadingPanel = () => (
-  <NavFrontendSpinner type="XL" className={styles.container} />
+  <div className={styles.container}>
+    <NavFrontendSpinner type="XL" />
+  </div>
 );
 
 export default LoadingPanel;
