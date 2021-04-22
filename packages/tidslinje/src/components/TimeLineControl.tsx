@@ -1,4 +1,6 @@
-import React, { FunctionComponent, ReactNode, MouseEvent } from 'react';
+import React, {
+  FunctionComponent, ReactNode, MouseEvent, KeyboardEvent,
+} from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Row } from 'nav-frontend-grid';
 
@@ -16,12 +18,12 @@ interface Periode {
 
 interface TimeLineControlProps {
   children?: ReactNode;
-  goBackwardCallback: (event: MouseEvent) => void;
-  goForwardCallback: (event: MouseEvent) => void;
-  openPeriodInfo: (event: MouseEvent) => void;
+  goBackwardCallback: (event: MouseEvent | KeyboardEvent) => void;
+  goForwardCallback: (event: MouseEvent | KeyboardEvent) => void;
+  openPeriodInfo: (event: MouseEvent | KeyboardEvent) => void;
   selectedPeriod?: Periode;
-  zoomInCallback: (event: MouseEvent) => void;
-  zoomOutCallback: (event: MouseEvent) => void;
+  zoomInCallback: (event: MouseEvent | KeyboardEvent) => void;
+  zoomOutCallback: (event: MouseEvent | KeyboardEvent) => void;
 }
 
 /*

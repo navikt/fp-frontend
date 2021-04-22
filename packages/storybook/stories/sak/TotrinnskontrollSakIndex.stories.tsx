@@ -6,7 +6,7 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';
-import { Behandling, KlageVurdering } from '@fpsak-frontend/types';
+import { Behandling, BehandlingÅrsak, KlageVurdering } from '@fpsak-frontend/types';
 
 import withRouterProvider from '../../decorators/withRouter';
 
@@ -74,7 +74,7 @@ const behandling = {
     kode: behandlingType.FORSTEGANGSSOKNAD,
     kodeverk: '',
   },
-  behandlingÅrsaker: [],
+  behandlingÅrsaker: [] as BehandlingÅrsak[],
   toTrinnsBehandling: true,
 } as Behandling;
 

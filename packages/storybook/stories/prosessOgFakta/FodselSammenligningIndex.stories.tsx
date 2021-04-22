@@ -5,7 +5,7 @@ import {
 
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
-import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
+import { AvklartBarn, FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 
 const avklartBarn = [{
   fodselsdato: '2019-01-10',
@@ -62,7 +62,7 @@ export const visPanelForMedVisningAvSvangerskapsuke = () => (
     vedtaksDatoSomSvangerskapsuke={43}
     soknad={object('soknad', soknad)}
     familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', {
-      avklartBarn: [],
+      avklartBarn: [] as AvklartBarn[],
       termindato: '2019-01-01',
       antallBarnTermin: 1,
     } as FamilieHendelse)}

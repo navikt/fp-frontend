@@ -76,7 +76,7 @@ describe('<FagsakList>', () => {
     const wrapper = shallow(<FagsakList
       fagsaker={[fagsak, fagsak2]}
       selectFagsakCallback={clickFunction}
-      alleKodeverk={alleKodeverk as {[key: string]: [KodeverkMedNavn]}}
+      alleKodeverk={alleKodeverk as {[key: string]: KodeverkMedNavn[]}}
     />);
 
     const table = wrapper.find(Table);

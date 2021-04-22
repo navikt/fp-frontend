@@ -35,12 +35,12 @@ const todayAsISO = today.format(ISO_DATE_FORMAT);
 describe('Validators', () => {
   describe('required', () => {
     it('skal gi feilmelding når verdi er lik null', () => {
-      const result = required(null);
+      const result = required(null as unknown as string);
       expect(result).toEqual('Feltet må fylles ut');
     });
 
     it('skal gi feilmelding når verdi er lik undefined', () => {
-      const result = required(undefined);
+      const result = required(undefined as unknown as string);
       expect(result).toEqual('Feltet må fylles ut');
     });
 
@@ -73,7 +73,7 @@ describe('Validators', () => {
   });
 
   describe('requiredIfCustomFunctionIsTrue', () => {
-    const isRequiredFunc = (allValues, props) => !props.pristine;
+    const isRequiredFunc = (_allValues: unknown, props: { pristine: boolean }) => !props.pristine;
 
     it('skal ikke gi feilmelding når ingen formverdier er endret', () => {
       const result = requiredIfCustomFunctionIsTrue(isRequiredFunc)(null, null, { pristine: true });
@@ -208,7 +208,8 @@ describe('Validators', () => {
     });
 
     it('skal ikke feile når dato er tom', () => {
-      const result = hasValidDate(undefined);
+      // @ts-ignore Fiks
+      const result = hasValidDate();
       expect(result).toBeNull();
     });
   });
@@ -230,7 +231,7 @@ describe('Validators', () => {
     });
 
     it('skal ikke feile når dato er tom', () => {
-      const result = dateBeforeOrEqual(today)(undefined);
+      const result = dateBeforeOrEqual(today)();
       expect(result).toBeNull();
     });
   });
@@ -252,7 +253,7 @@ describe('Validators', () => {
     });
 
     it('skal ikke feile når dato er tom', () => {
-      const result = dateAfterOrEqual(today.add(1, 'days'))(undefined);
+      const result = dateAfterOrEqual(today.add(1, 'days'))();
       expect(result).toBeNull();
     });
   });
@@ -285,7 +286,7 @@ describe('Validators', () => {
     });
 
     it('skal ikke feile når dato er tom', () => {
-      const result = dateBeforeToday(undefined);
+      const result = dateBeforeToday();
       expect(result).toBeNull();
     });
   });
@@ -307,7 +308,7 @@ describe('Validators', () => {
     });
 
     it('skal ikke feile når dato er tom', () => {
-      const result = dateBeforeOrEqualToToday(undefined);
+      const result = dateBeforeOrEqualToToday();
       expect(result).toBeNull();
     });
   });
@@ -326,7 +327,7 @@ describe('Validators', () => {
     });
 
     it('skal ikke feile når dato er tom', () => {
-      const result = dateAfterToday(undefined);
+      const result = dateAfterToday();
       expect(result).toBeNull();
     });
   });
@@ -343,7 +344,7 @@ describe('Validators', () => {
     });
 
     it('skal ikke feile når dato er tom', () => {
-      const result = dateAfterOrEqualToToday(undefined);
+      const result = dateAfterOrEqualToToday();
       expect(result).toBeNull();
     });
   });

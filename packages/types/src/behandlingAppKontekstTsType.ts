@@ -1,5 +1,11 @@
 import { Kodeverk, Behandlingsresultat } from '@fpsak-frontend/types';
 
+export type BehandlingÅrsak = {
+  behandlingArsakType: Kodeverk;
+  manueltOpprettet: boolean;
+  erAutomatiskRevurdering: boolean;
+};
+
 type BehandlingAppKontekst = Readonly<{
   id: number;
   versjon: number;
@@ -26,11 +32,7 @@ type BehandlingAppKontekst = Readonly<{
   behandlendeEnhetNavn: string;
   behandlingKoet: boolean;
   toTrinnsBehandling: boolean;
-  behandlingÅrsaker: {
-    behandlingArsakType: Kodeverk;
-    manueltOpprettet: boolean;
-    erAutomatiskRevurdering: boolean;
-  }[];
+  behandlingÅrsaker: BehandlingÅrsak[];
   ansvarligSaksbehandler?: string;
   kanHenleggeBehandling?: boolean;
   harVerge?: boolean;

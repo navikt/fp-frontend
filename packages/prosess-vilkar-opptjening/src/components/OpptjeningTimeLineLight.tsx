@@ -119,7 +119,7 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount(): void {
     const { opptjeningPeriods, opptjeningFomDate, opptjeningTomDate } = this.props;
-    const unsortedItems = opptjeningPeriods.sort((a, b) => moment(a.fom).diff(moment(b.fom)));
+    const unsortedItems = [...opptjeningPeriods].sort((a, b) => moment(a.fom).diff(moment(b.fom)));
     const items = createItems(unsortedItems, opptjeningFomDate, opptjeningTomDate);
     this.setState({ items });
   }
@@ -129,6 +129,7 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
     // eslint-disable-next-line react/no-find-dom-node
     const node = ReactDOM.findDOMNode(this.timelineRef.current);
     if (node) {
+      // @ts-ignore
       node.children[0].style.visibility = 'visible';
     }
   }

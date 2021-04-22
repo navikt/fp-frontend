@@ -3,7 +3,7 @@ import {
   withKnobs, object, number, boolean,
 } from '@storybook/addon-knobs';
 
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import BehandlingVelgerSakIndex from '@fpsak-frontend/sak-behandling-velger';
@@ -158,9 +158,10 @@ const locationMock = {
 };
 
 const getKodeverkFn = (kodeverk: Kodeverk) => {
-  const kodeverkType = kodeverkTyper[kodeverk.kodeverk];
+  const kodeverkType = KodeverkType[kodeverk.kodeverk as keyof typeof KodeverkType];
+  // @ts-ignore
   const kodeverkForType = alleKodeverk[kodeverkType];
-  return kodeverkForType.find((k) => k.kode === kodeverk.kode);
+  return kodeverkForType.find((k: Kodeverk) => k.kode === kodeverk.kode);
 };
 
 export default {

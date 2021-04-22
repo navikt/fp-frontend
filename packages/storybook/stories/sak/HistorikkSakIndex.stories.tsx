@@ -27,23 +27,12 @@ const history = [{
         kode: 'SAKSBEH_START_PA_NYTT',
         kodeverk: 'HISTORIKK_BEGRUNNELSE_TYPE',
       },
-      begrunnelseFritekst: null,
       hendelse: {
         navn: {
           kode: 'NYE_REGOPPLYSNINGER',
           kodeverk: 'HISTORIKKINNSLAG_TYPE',
         },
-        verdi: null,
       },
-      opplysninger: null,
-      soeknadsperiode: null,
-      skjermlenke: null,
-      aarsak: null,
-      tema: null,
-      gjeldendeFra: null,
-      resultat: null,
-      endredeFelter: null,
-      aksjonspunkter: null,
     },
   ],
 },
@@ -66,24 +55,13 @@ const history = [{
   dokumentLinks: [],
   historikkinnslagDeler: [
     {
-      begrunnelse: null,
       begrunnelseFritekst: 'Krav om innsyn mottatt 18.09.2019',
       hendelse: {
         navn: {
           kode: 'INNSYN_OPPR',
           kodeverk: 'HISTORIKKINNSLAG_TYPE',
         },
-        verdi: null,
       },
-      opplysninger: null,
-      soeknadsperiode: null,
-      skjermlenke: null,
-      aarsak: null,
-      tema: null,
-      gjeldendeFra: null,
-      resultat: null,
-      endredeFelter: null,
-      aksjonspunkter: null,
     },
   ],
 },
@@ -114,24 +92,12 @@ const history = [{
   ],
   historikkinnslagDeler: [
     {
-      begrunnelse: null,
-      begrunnelseFritekst: null,
       hendelse: {
         navn: {
           kode: 'BEH_STARTET',
           kodeverk: 'HISTORIKKINNSLAG_TYPE',
         },
-        verdi: null,
       },
-      opplysninger: null,
-      soeknadsperiode: null,
-      skjermlenke: null,
-      aarsak: null,
-      tema: null,
-      gjeldendeFra: null,
-      resultat: null,
-      endredeFelter: null,
-      aksjonspunkter: null,
     },
   ],
 }];
