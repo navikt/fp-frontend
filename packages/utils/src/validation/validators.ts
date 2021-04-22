@@ -51,6 +51,8 @@ import {
   yesterday,
 } from './validatorsHelper';
 
+type DateType = moment.Moment | Date | string;
+
 type InputValue = string | number | boolean;
 
 type FormValidationResult = string | null | undefined;
@@ -97,16 +99,16 @@ export const hasValidSaksnummerOrFodselsnummerFormat = (text: string): FormValid
   ? null : invalidSaksnummerOrFodselsnummerFormatMessage());
 
 export const hasValidDate = (text: string): FormValidationResult => (isEmpty(text) || isoDateRegex.test(text) ? null : invalidDateMessage());
-export const dateBeforeOrEqual = (latest: moment.Moment | Date | string) => (text: moment.Moment | string): FormValidationResult => (
+export const dateBeforeOrEqual = (latest: DateType) => (text: moment.Moment | string): FormValidationResult => (
   (isEmpty(text) || moment(text).isSameOrBefore(moment(latest).startOf('day')))
     ? null
     : dateNotBeforeOrEqualMessage(moment(latest).format(DDMMYYYY_DATE_FORMAT))
 );
-const getErrorMessage = (earliest: moment.Moment | Date | string, customErrorMessage?: (date: string) => FormValidationResult): FormValidationResult => {
+const getErrorMessage = (earliest: DateType, customErrorMessage?: (date: string) => FormValidationResult): FormValidationResult => {
   const date = moment(earliest).format(DDMMYYYY_DATE_FORMAT);
   return customErrorMessage ? customErrorMessage(date) : dateNotAfterOrEqualMessage(date);
 };
-export const dateAfterOrEqual = (earliest: moment.Moment | Date | string, customErrorMessageFunction?: (date: string) => FormValidationResult) => (
+export const dateAfterOrEqual = (earliest: DateType, customErrorMessageFunction?: (date: string) => FormValidationResult) => (
   text: moment.Moment | string,
 ): FormValidationResult => (
   (isEmpty(text) || moment(text).isSameOrAfter(moment(earliest).startOf('day')))

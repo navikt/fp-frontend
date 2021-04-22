@@ -69,6 +69,8 @@ const shouldDisableSelect = (selectedPeriodeTyper: string[], index: number): boo
 
 const getLabel = (erForsteRad: boolean, id: string): { id: string } | string => (erForsteRad ? { id } : '');
 
+const erPeriodeFormFør01012019 = (periodeFom: any) => periodeFom && moment(periodeFom).isBefore(moment('2019-01-01'));
+
 interface PureOwnProps {
   fields: FieldArrayFieldsProps<any>;
   meta: FieldArrayMetaProps;
@@ -123,7 +125,8 @@ export const RenderPermisjonPeriodeFieldArray: FunctionComponent<PureOwnProps & 
       {(periodeElementFieldId, index) => {
         const erForsteRad = (index === 0);
         const { periodeFom, harSamtidigUttak } = fields.get(index);
-        const periodeFomForTidlig = periodeFom && moment(periodeFom).isBefore(moment('2019-01-01'));
+        const periodeFomForTidlig = erPeriodeFormFør01012019(periodeFom);
+        const visEllerSkulOverskriftStyle = erForsteRad ? styles.visOverskrift : styles.skjulOverskrift;
         return (
           <div key={periodeElementFieldId}>
             <Row>
@@ -168,7 +171,7 @@ export const RenderPermisjonPeriodeFieldArray: FunctionComponent<PureOwnProps & 
                     </FlexColumn>
                     )}
                     <FlexColumn className={styles.smalHeader}>
-                      <Undertekst className={erForsteRad ? styles.visOverskrift : styles.skjulOverskrift}>
+                      <Undertekst className={visEllerSkulOverskriftStyle}>
                         <FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />
                       </Undertekst>
                       <CheckboxField
@@ -178,7 +181,7 @@ export const RenderPermisjonPeriodeFieldArray: FunctionComponent<PureOwnProps & 
                       />
                     </FlexColumn>
                     <FlexColumn className={styles.smalHeader}>
-                      <Undertekst className={erForsteRad ? styles.visOverskrift : styles.skjulOverskrift}>
+                      <Undertekst className={visEllerSkulOverskriftStyle}>
                         <FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />
                       </Undertekst>
                       <CheckboxField

@@ -169,21 +169,23 @@ AktsomhetFormPanel.transformValues = (info: { handletUaktsomhetGrad: string }, s
   };
 };
 
+const lagAktsomhetData = (aktsomhetInfo: AktsomhetInfo, andelSomTilbakekreves: string): InitialValuesAktsomhetForm => ({
+  andelSomTilbakekreves: andelSomTilbakekreves === undefined || ANDELER.includes(andelSomTilbakekreves) ? andelSomTilbakekreves : EGENDEFINERT,
+  andelSomTilbakekrevesManuell: !ANDELER.includes(andelSomTilbakekreves) ? aktsomhetInfo.andelTilbakekreves : undefined,
+  harGrunnerTilReduksjon: aktsomhetInfo.harGrunnerTilReduksjon,
+  skalDetTilleggesRenter: aktsomhetInfo.ileggRenter,
+  belopSomSkalTilbakekreves: aktsomhetInfo.tilbakekrevesBelop,
+  annetBegrunnelse: aktsomhetInfo.annetBegrunnelse,
+  sarligGrunnerBegrunnelse: decodeHtmlEntity(aktsomhetInfo.sarligGrunnerBegrunnelse),
+  tilbakekrevSelvOmBeloepErUnder4Rettsgebyr: aktsomhetInfo.tilbakekrevSelvOmBeloepErUnder4Rettsgebyr,
+  ...(aktsomhetInfo.sarligGrunner ? aktsomhetInfo.sarligGrunner.reduce((acc: any, sg: any) => ({ ...acc, [(sg.kode ? sg.kode : sg)]: true }), {}) : {}),
+});
+
 AktsomhetFormPanel.buildInitalValues = (vilkarResultatInfo: { aktsomhet: Kodeverk | any; aktsomhetInfo?: AktsomhetInfo }): InitialValuesAktsomhetForm => {
   const { aktsomhet, aktsomhetInfo } = vilkarResultatInfo;
   const andelSomTilbakekreves = aktsomhetInfo && aktsomhetInfo.andelTilbakekreves !== undefined ? `${aktsomhetInfo.andelTilbakekreves}` : undefined;
   const aktsomhetData = aktsomhetInfo ? {
-    [(aktsomhet.kode && 'kode' in aktsomhet ? aktsomhet.kode : aktsomhet)]: {
-      andelSomTilbakekreves: andelSomTilbakekreves === undefined || ANDELER.includes(andelSomTilbakekreves) ? andelSomTilbakekreves : EGENDEFINERT,
-      andelSomTilbakekrevesManuell: !ANDELER.includes(andelSomTilbakekreves) ? aktsomhetInfo.andelTilbakekreves : undefined,
-      harGrunnerTilReduksjon: aktsomhetInfo.harGrunnerTilReduksjon,
-      skalDetTilleggesRenter: aktsomhetInfo.ileggRenter,
-      belopSomSkalTilbakekreves: aktsomhetInfo.tilbakekrevesBelop,
-      annetBegrunnelse: aktsomhetInfo.annetBegrunnelse,
-      sarligGrunnerBegrunnelse: decodeHtmlEntity(aktsomhetInfo.sarligGrunnerBegrunnelse),
-      tilbakekrevSelvOmBeloepErUnder4Rettsgebyr: aktsomhetInfo.tilbakekrevSelvOmBeloepErUnder4Rettsgebyr,
-      ...(aktsomhetInfo.sarligGrunner ? aktsomhetInfo.sarligGrunner.reduce((acc: any, sg: any) => ({ ...acc, [(sg.kode ? sg.kode : sg)]: true }), {}) : {}),
-    },
+    [(aktsomhet.kode && 'kode' in aktsomhet ? aktsomhet.kode : aktsomhet)]: lagAktsomhetData(aktsomhetInfo, andelSomTilbakekreves),
   } : {};
 
   return {

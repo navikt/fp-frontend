@@ -32,12 +32,11 @@ export type BrevData = {
 
 const getBrevData = (klageVurdering: Kodeverk, aksjonspunktCode: string, fritekstTilBrev?: string): BrevData => {
   const klageVurdertAv = aksjonspunktCode === aksjonspunktCodes.BEHANDLE_KLAGE_NK ? 'NK' : 'NFP';
-  const data = {
+  return {
     fritekst: fritekstTilBrev || '',
     dokumentMal: getBrevKode(klageVurdering, klageVurdertAv === 'NK'),
     erOpphevetKlage: klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK,
   };
-  return data;
 };
 
 interface OwnProps {

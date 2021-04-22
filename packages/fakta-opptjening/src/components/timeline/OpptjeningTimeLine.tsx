@@ -13,36 +13,33 @@ import CustomOpptjeningAktivitet, { NyOpptjeningAktivitet } from '../../CustomOp
 import styles from './opptjeningTimeLine.less';
 
 // Desse må alltid vare med for rett skala av tidslinjen då den alltid skall vare 10 månader fra skjæringstidpunkten
-const standardItems = (opptjeningFomDato: string, opptjeningTomDato: string) => {
-  const items = [
-    {
-      id: 1000,
-      start: moment(opptjeningFomDato)
-        .subtract(1, 'months')
-        .startOf('month'),
-      end: moment(opptjeningFomDato)
-        .subtract(1, 'months')
-        .startOf('month'),
-      group: 1,
-      className: styles.hiddenpast,
-      content: '',
-      data: undefined,
-    }, {
-      id: 1001,
-      start: moment(opptjeningTomDato)
-        .add(1, 'months')
-        .endOf('month'),
-      end: moment(opptjeningTomDato)
-        .add(1, 'months')
-        .endOf('month'),
-      group: 1,
-      className: styles.hiddenpast,
-      content: '',
-      data: undefined,
-    },
-  ];
-  return items;
-};
+const standardItems = (opptjeningFomDato: string, opptjeningTomDato: string) => [
+  {
+    id: 1000,
+    start: moment(opptjeningFomDato)
+      .subtract(1, 'months')
+      .startOf('month'),
+    end: moment(opptjeningFomDato)
+      .subtract(1, 'months')
+      .startOf('month'),
+    group: 1,
+    className: styles.hiddenpast,
+    content: '',
+    data: undefined,
+  }, {
+    id: 1001,
+    start: moment(opptjeningTomDato)
+      .add(1, 'months')
+      .endOf('month'),
+    end: moment(opptjeningTomDato)
+      .add(1, 'months')
+      .endOf('month'),
+    group: 1,
+    className: styles.hiddenpast,
+    content: '',
+    data: undefined,
+  },
+];
 
 const classNameGenerator = (ap: CustomOpptjeningAktivitet): string => {
   if (ap.erGodkjent === false) {

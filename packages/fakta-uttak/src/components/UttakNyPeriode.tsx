@@ -66,26 +66,9 @@ const gyldigeOverføringÅrsaker = [
   overforingArsak.ALENEOMSORG,
 ];
 
-const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] => typer.filter(({
-  kode,
-}) => gyldigeUttakperioder.includes(kode))
-  .map(({
-    kode,
-    navn,
-  }) => (
-    <option value={kode} key={kode}>
-      {navn}
-    </option>
-  ));
-
-const mapOverføringÅrsaker = (typer: KodeverkMedNavn[]): ReactElement[] => typer
-  .filter(({
-    kode,
-  }) => gyldigeOverføringÅrsaker.includes(kode))
-  .map(({
-    kode,
-    navn,
-  }) => (
+const lagOptions = (typer: KodeverkMedNavn[], kodeverkVerdier: string[]): ReactElement[] => typer
+  .filter(({ kode }) => kodeverkVerdier.includes(kode))
+  .map(({ kode, navn }) => (
     <option value={kode} key={kode}>
       {navn}
     </option>
@@ -242,7 +225,7 @@ export const UttakNyPeriode: FunctionComponent<PureOwnProps & MappedOwnProps & I
                         bredde="m"
                         name="periodeType"
                         validate={nyPeriode.typeUttak !== 'utsettelse' ? [required] : []}
-                        selectValues={mapPeriodeTyper(periodeTyper)}
+                        selectValues={lagOptions(periodeTyper, gyldigeUttakperioder)}
                       />
                     </FlexRow>
                   </FlexColumn>
@@ -284,7 +267,7 @@ export const UttakNyPeriode: FunctionComponent<PureOwnProps & MappedOwnProps & I
                       label={{ id: 'UttakInfoPanel.AngiArsakforOverforing' }}
                       bredde="m"
                       name="periodeOverforingArsak"
-                      selectValues={mapOverføringÅrsaker(overføringÅrsaker)}
+                      selectValues={lagOptions(overføringÅrsaker, gyldigeOverføringÅrsaker)}
                       validate={[required]}
                     />
                   </FlexRow>
@@ -392,6 +375,16 @@ const getPeriodeData = (periode: string, periodeArray: KodeverkMedNavn[]): Kodev
   kode,
 }) => kode === periode);
 
+const lagArbeidsgiver = (arbeidsForhold: string[]) => (arbeidsForhold
+  && (arbeidsForhold[0] !== '-' || arbeidsForhold[2] !== '-')
+  ? {
+    identifikator: arbeidsForhold[0] !== '-' && arbeidsForhold[3] !== '-' ? arbeidsForhold[0] : undefined,
+    navn: arbeidsForhold[1] ? arbeidsForhold[1] : undefined,
+    aktørId: arbeidsForhold[2] !== '-' && arbeidsForhold[3] === '-' ? arbeidsForhold[2] : undefined,
+    virksomhet: arbeidsForhold[3] !== '-',
+    arbeidType: arbeidsForhold[4],
+  } : null);
+
 const transformValues = (
   values: FormValues,
   utsettelseÅrsaker: KodeverkMedNavn[],
@@ -422,15 +415,7 @@ const transformValues = (
   const resultat = uttakPeriodeVurderingTyper.find((type: any) => type.kode === uttakPeriodeVurdering.PERIODE_OK);
   const arbeidsForhold = values.arbeidsForhold ? values.arbeidsForhold.split('|') : null;
 
-  const arbeidsgiver = arbeidsForhold && (arbeidsForhold[0] !== '-' || arbeidsForhold[2] !== '-')
-    ? {
-      identifikator: arbeidsForhold[0] !== '-' && arbeidsForhold[3] !== '-' ? arbeidsForhold[0] : undefined,
-      navn: arbeidsForhold[1] ? arbeidsForhold[1] : undefined,
-      aktørId: arbeidsForhold[2] !== '-' && arbeidsForhold[3] === '-' ? arbeidsForhold[2] : undefined,
-      virksomhet: arbeidsForhold[3] !== '-',
-      arbeidType: arbeidsForhold[4],
-    }
-    : null;
+  const arbeidsgiver = lagArbeidsgiver(arbeidsForhold);
 
   const dokumentertePerioder = values.periodeArsak === utsettelseArsakCodes.ARBEID || values.periodeArsak === utsettelseArsakCodes.LOVBESTEMT_FERIE ? null : [
     {

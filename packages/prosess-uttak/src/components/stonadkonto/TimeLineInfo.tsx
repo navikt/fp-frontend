@@ -13,7 +13,7 @@ import {
   AktivitetIdentifikator, AktivitetSaldo, ArbeidsgiverOpplysningerPerId, UttakStonadskontoer,
 } from '@fpsak-frontend/types';
 
-import lagVisningsNavn from '../../utils/uttakVisningsnavnHelper';
+import lagVisningsNavn from '../../utils/lagVisningsNavn';
 import TimeLineTab, { CustomStonadskonto } from './TimeLineTab';
 
 import styles from './timeLineInfo.less';

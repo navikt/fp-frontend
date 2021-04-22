@@ -64,6 +64,13 @@ const automatiskeVentearsakerForTilbakekreving = [
 const inkluderVentearsak = (ventearsak: KodeverkMedNavn, valgtVentearsak?: string): boolean => (automatiskeVentearsakerForTilbakekreving
   .includes(ventearsak.kode) ? ventearsak.kode === valgtVentearsak : true);
 
+const skalViseFristenTekst = (erTilbakekreving: boolean, frist?: string, originalFrist?: string, ventearsak?: string): boolean => {
+  const erFristenUtløpt = erTilbakekreving && ((frist !== undefined && dateBeforeToday(frist) === null)
+    || (originalFrist !== undefined && dateBeforeToday(originalFrist) === null));
+  const erVenterPaKravgrunnlag = ventearsak === venteArsakType.VENT_PÅ_TILBAKEKREVINGSGRUNNLAG;
+  return erTilbakekreving && erFristenUtløpt && erVenterPaKravgrunnlag;
+};
+
 type FormValues = {
   frist?: string;
   ventearsak?: string;
@@ -106,10 +113,7 @@ export const SettPaVentModal: FunctionComponent<PureOwnProps & MappedOwnProps & 
   const fristHasChanged = !(originalFrist === frist || (!frist && !originalFrist));
 
   const showAvbryt = !(originalFrist === frist && !venteArsakHasChanged);
-  const erFristenUtløpt = erTilbakekreving && ((frist !== undefined && dateBeforeToday(frist) === null)
-    || (originalFrist !== undefined && dateBeforeToday(originalFrist) === null));
-  const erVenterPaKravgrunnlag = ventearsak === venteArsakType.VENT_PÅ_TILBAKEKREVINGSGRUNNLAG;
-  const showFristenTekst = erTilbakekreving && erFristenUtløpt && erVenterPaKravgrunnlag;
+  const showFristenTekst = skalViseFristenTekst(erTilbakekreving, frist, originalFrist, ventearsak);
 
   return (
     <Modal

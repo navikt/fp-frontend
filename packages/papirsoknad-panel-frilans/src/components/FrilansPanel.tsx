@@ -94,13 +94,12 @@ FrilansPanel.validate = (values: FormValues) => {
   if (!values[FRILANS_FORM_NAME_PREFIX]) {
     return null;
   }
-  const errors = {
+  return {
     [FRILANS_FORM_NAME_PREFIX]: {
       ...FrilansOppdragForFamiliePanel.validate(values[FRILANS_FORM_NAME_PREFIX]),
       perioder: FrilansPerioderFieldArray.validate(values[FRILANS_FORM_NAME_PREFIX].perioder),
     },
   };
-  return errors;
 };
 
 export default FrilansPanel;

@@ -32,13 +32,13 @@ interface OwnProps {
 }
 
 /**
- * AnkeVurderingModal
+ * AnkeBehandlingModal
  *
  * Presentasjonskomponent. Denne komponenten vises ved en ankevurdering hvor saksbehandler
  * i aksjonspunkt '' velger at ytelsesvedtaket skal stadfestes. Ved å trykke på knapp blir saksbehandler
  * tatt tilbake til sokesiden.
  */
-const AnkeVurderingModal: FunctionComponent<OwnProps> = ({
+const AnkeBehandlingModal: FunctionComponent<OwnProps> = ({
   visModal = false,
   lukkModal,
   erFerdigbehandlet,
@@ -75,4 +75,4 @@ const AnkeVurderingModal: FunctionComponent<OwnProps> = ({
   </Modal>
 );
 
-export default AnkeVurderingModal;
+export default AnkeBehandlingModal;

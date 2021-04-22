@@ -68,11 +68,11 @@ class PeriodCalendarOverlay extends Component<OwnProps> {
     let isSelectable = true;
     const { disabledDays, onDayChange } = this.props;
     if (disabledDays) {
-      const { before: intervalStart } = disabledDays as BeforeModifier;
+      const { before: intervalStart } = disabledDays as BeforeModifier; // NOSONAR
       if (intervalStart) {
         isSelectable = moment(selectedDate).isSameOrAfter(moment(intervalStart).startOf('day'));
       }
-      const { after: intervalEnd } = disabledDays as AfterModifier;
+      const { after: intervalEnd } = disabledDays as AfterModifier; // NOSONAR
       if (isSelectable && intervalEnd) {
         isSelectable = moment(selectedDate).isSameOrBefore(moment(intervalEnd).endOf('day'));
       }

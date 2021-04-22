@@ -1,4 +1,4 @@
-import stringEnum from './tsUtils';
+import stringEnum from './stringEnum';
 
 export const KjønnkodeEnum = stringEnum({
   KVINNE: 'K',

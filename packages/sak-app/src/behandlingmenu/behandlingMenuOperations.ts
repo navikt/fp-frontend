@@ -13,18 +13,17 @@ export const nyBehandlendeEnhet = (params: any) => behandlingEventHandler.endreB
 
 export const openBehandlingForChanges = (params: any) => behandlingEventHandler.opneBehandlingForEndringer(params);
 
+const setLocation = (location: Location, push, saksnummer: string, behandlingId: number) => push(getLocationWithDefaultProsessStegAndFakta({
+  ...location,
+  pathname: pathToBehandling(saksnummer, behandlingId),
+}));
+
 export const opprettVerge = (location: Location, push, saksnummer: string, behandlingId: number, versjon: number) => () => behandlingEventHandler.opprettVerge({
   behandlingId,
   behandlingVersjon: versjon,
-}).then(() => push(getLocationWithDefaultProsessStegAndFakta({
-  ...location,
-  pathname: pathToBehandling(saksnummer, behandlingId),
-})));
+}).then(() => setLocation(location, push, saksnummer, behandlingId));
 
 export const fjernVerge = (location: Location, push, saksnummer: string, behandlingId: number, versjon: number) => () => behandlingEventHandler.fjernVerge({
   behandlingId,
   behandlingVersjon: versjon,
-}).then(() => push(getLocationWithDefaultProsessStegAndFakta({
-  ...location,
-  pathname: pathToBehandling(saksnummer, behandlingId),
-})));
+}).then(() => setLocation(location, push, saksnummer, behandlingId));

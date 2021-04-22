@@ -180,6 +180,30 @@ const leggTilValuesForRendering = (
     };
   });
 
+const skalFortsetteBehandling = (values: CustomArbeidsforhold): boolean | undefined => {
+  if (values.mottattDatoInntektsmelding === undefined || values.mottattDatoInntektsmelding === null) {
+    return (values.arbeidsforholdHandlingField === ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD
+      && values.aktivtArbeidsforholdHandlingField !== AktivtArbeidsforholdHandling.AVSLA_YTELSE)
+      || values.arbeidsforholdHandlingField === ArbeidsforholdHandling.OVERSTYR_TOM
+      || values.arbeidsforholdHandlingField === ArbeidsforholdHandling.SOKER_ER_I_PERMISJON;
+  }
+  return undefined;
+};
+
+const erstattArbeidsforhold = (
+  oldState: CustomArbeidsforhold,
+  other: CustomArbeidsforhold[],
+  cleanedValues: CustomArbeidsforhold,
+): CustomArbeidsforhold[] => {
+  if (oldState.erstatterArbeidsforholdId) {
+    return other.map((o) => (o.id === oldState.erstatterArbeidsforholdId ? { ...o, erSlettet: false } : o));
+  }
+  if (cleanedValues.erstatterArbeidsforholdId) {
+    return other.map((o) => (o.id === cleanedValues.erstatterArbeidsforholdId ? { ...o, erSlettet: true } : o));
+  }
+  return other;
+};
+
 interface PureOwnProps {
   readOnly: boolean;
   skalKunneLeggeTilNyeArbeidsforhold: boolean;
@@ -277,13 +301,7 @@ export class PersonArbeidsforholdPanelImpl extends Component<Props, OwnState> {
 
     const brukArbeidsforholdet = values.arbeidsforholdHandlingField !== ArbeidsforholdHandling.FJERN_ARBEIDSFORHOLD;
 
-    let fortsettBehandlingUtenInntektsmelding;
-    if (values.mottattDatoInntektsmelding === undefined || values.mottattDatoInntektsmelding === null) {
-      fortsettBehandlingUtenInntektsmelding = (values.arbeidsforholdHandlingField === ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD
-        && values.aktivtArbeidsforholdHandlingField !== AktivtArbeidsforholdHandling.AVSLA_YTELSE)
-        || values.arbeidsforholdHandlingField === ArbeidsforholdHandling.OVERSTYR_TOM
-        || values.arbeidsforholdHandlingField === ArbeidsforholdHandling.SOKER_ER_I_PERMISJON;
-    }
+    const fortsettBehandlingUtenInntektsmelding = skalFortsetteBehandling(values);
 
     const brukPermisjon = values.permisjoner && values.permisjoner.length > 0
       ? values.arbeidsforholdHandlingField === ArbeidsforholdHandling.SOKER_ER_I_PERMISJON
@@ -309,12 +327,7 @@ export class PersonArbeidsforholdPanelImpl extends Component<Props, OwnState> {
     const oldState = arbeidsforhold.find((a) => a.id === cleanedValues.id);
     let { fomDato } = cleanedValues;
     if (oldState !== undefined && oldState !== null && cleanedValues.erstatterArbeidsforholdId !== oldState.erstatterArbeidsforholdId) {
-      if (oldState.erstatterArbeidsforholdId) {
-        other = other.map((o) => (o.id === oldState.erstatterArbeidsforholdId ? { ...o, erSlettet: false } : o));
-      }
-      if (cleanedValues.erstatterArbeidsforholdId) {
-        other = other.map((o) => (o.id === cleanedValues.erstatterArbeidsforholdId ? { ...o, erSlettet: true } : o));
-      }
+      other = erstattArbeidsforhold(oldState, other, cleanedValues);
       fomDato = findFomDato(cleanedValues, arbeidsforhold.find((a) => a.id === cleanedValues.erstatterArbeidsforholdId));
     }
 

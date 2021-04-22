@@ -70,8 +70,7 @@ export class ForeldrepengerForm extends React.Component<PureOwnProps & MappedOwn
     const changedPropsList = Object.entries(this.props)
       .filter(([key, val]) => nextProps[key] !== val)
       .map(([key]) => key);
-    const test = changedPropsList.some((changedProp) => !notRerenderIfChangedProps.includes(changedProp));
-    return test;
+    return changedPropsList.some((changedProp) => !notRerenderIfChangedProps.includes(changedProp));
   }
 
   render() {

@@ -50,7 +50,7 @@ const checkDays = (weeks?: number, days?: number): WeekAndDay => {
 export const calcDays = (fraDatoPeriode: string, tilDatoPeriode: string, notWeekends = true): number => {
   if (tilDatoPeriode === TIDENES_ENDE) {
     // @ts-ignore Kva er dette?
-    return checkDays(undefined, undefined);
+    return checkDays();
   }
 
   const fraDato = moment(fraDatoPeriode, ISO_DATE_FORMAT);
