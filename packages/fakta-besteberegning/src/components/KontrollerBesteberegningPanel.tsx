@@ -84,7 +84,7 @@ const KontrollerBesteberegningPanel: FunctionComponent<OwnProps & InjectedFormPr
   );
 };
 
-const buildInitialValues = createSelector([
+export const buildInitialValues = createSelector([
   (ownProps: OwnProps) => ownProps.venteårsak,
   (ownProps: OwnProps) => ownProps.aksjonspunkt], (
   venteårsak, aksjonspunkt,
@@ -99,7 +99,7 @@ const buildInitialValues = createSelector([
   };
 });
 
-const transformValues = (values: FormValues): KontrollerBesteberegningAP => ({
+export const transformValues = (values: FormValues): KontrollerBesteberegningAP => ({
   kode: aksjonspunktCodes.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
   begrunnelse: values.begrunnelse,
   besteberegningErKorrekt: values.besteberegningErKorrektValg,

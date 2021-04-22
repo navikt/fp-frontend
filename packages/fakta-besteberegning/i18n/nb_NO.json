@@ -13,6 +13,6 @@
   "ResultatGrunnlag.Kap1473GirBesteBeregning": "Beregning etter §14-7, 3. ledd gir beste beregning.",
 
   "BesteberegningProsessPanel.Aksjonspunkt.HelpText": "Saken er automatisk besteberegnet, vennligst kontroller beregningen",
-  "BesteberegningProsessPanel.Aksjonspunkt.ErKorrekt": "Saken er riktig beregnet, gå videre",
+  "BesteberegningProsessPanel.Aksjonspunkt.ErKorrekt": "Saken er riktig beregnet, fortsett behandlingen",
   "BesteberegningProsessPanel.Aksjonspunkt.ErFeil": "Saken er ikke riktig beregnet, sett saken på vent"
 }
