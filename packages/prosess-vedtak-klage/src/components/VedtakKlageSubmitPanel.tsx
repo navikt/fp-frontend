@@ -54,7 +54,7 @@ export const VedtakKlageSubmitPanelImpl: FunctionComponent<OwnProps & WrappedCom
         <a
           href=""
           onClick={previewBrev}
-          onKeyDown={(e) => (e.keyCode === 13 ? previewBrev(e) : null)}
+          onKeyDown={(e) => (e.key === 'Enter' ? previewBrev(e) : null)}
           className={classNames('lenke lenke--frittstaende')}
         >
           <FormattedMessage id="VedtakKlageForm.ForhandvisBrev" />

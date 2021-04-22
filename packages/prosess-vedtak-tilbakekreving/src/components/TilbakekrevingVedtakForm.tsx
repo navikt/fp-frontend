@@ -127,7 +127,7 @@ export const TilbakekrevingVedtakFormImpl: FunctionComponent<PureOwnProps & Mapp
               <a
                 href=""
                 onClick={fetchPreview(fetchPreviewVedtaksbrev, behandlingUuid, formVerdier)}
-                onKeyDown={(e) => (e.keyCode === 13 ? fetchPreview(fetchPreviewVedtaksbrev, behandlingUuid, formVerdier)(e) : null)}
+                onKeyDown={(e) => (e.key === 'Enter' ? fetchPreview(fetchPreviewVedtaksbrev, behandlingUuid, formVerdier)(e) : null)}
                 className={classNames(styles.buttonLink, 'lenke lenke--frittstaende')}
               >
                 <FormattedMessage id="TilbakekrevingVedtakForm.ForhandvisBrev" />

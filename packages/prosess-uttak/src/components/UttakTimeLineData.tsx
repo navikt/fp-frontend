@@ -263,7 +263,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
                       srcHover={splitPeriodImageHoverUrl}
                       alt={intl.formatMessage({ id: 'UttakTimeLineData.PeriodeData.DelOppPerioden' })}
                       onMouseDown={this.showModal}
-                      onKeyDown={(e) => (e.keyCode === 13 ? this.showModal(e) : null)}
+                      onKeyDown={(e) => (e.key === 'Enter' ? this.showModal(e) : null)}
                     />
                     <FormattedMessage id="UttakTimeLineData.PeriodeData.DelOppPerioden" />
                   </span>

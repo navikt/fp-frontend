@@ -169,7 +169,7 @@ export const MessagesImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Wra
         <a
           href=""
           onClick={previewMessage}
-          onKeyDown={(e) => (e.keyCode === 13 ? previewMessage(e) : null)}
+          onKeyDown={(e) => (e.key === 'Enter' ? previewMessage(e) : null)}
           className={classNames(styles.previewLink, 'lenke lenke--frittstaende')}
         >
           {intl.formatMessage({ id: 'Messages.Preview' })}

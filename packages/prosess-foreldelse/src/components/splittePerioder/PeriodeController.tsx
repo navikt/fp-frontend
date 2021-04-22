@@ -156,7 +156,7 @@ export class PeriodeController extends Component<PureOwnProps & WrappedComponent
                 srcHover={splitPeriodImageHoverUrl}
                 alt={intl.formatMessage({ id: 'PeriodeController.DelOppPerioden' })}
                 onMouseDown={this.showModal}
-                onKeyDown={(e) => (e.keyCode === 13 ? this.showModal(e) : null)}
+                onKeyDown={(e) => (e.key === 'Enter' ? this.showModal(e) : null)}
               />
               <FormattedMessage id="PeriodeController.DelOppPerioden" />
             </span>
