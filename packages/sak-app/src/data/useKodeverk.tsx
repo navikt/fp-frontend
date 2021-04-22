@@ -53,8 +53,7 @@ export function useFpSakKodeverkMedNavn<T = KodeverkMedNavn>(kodeverkOjekt: Kode
   }
 
   // @ts-ignore Fiks dette
-  const kodeverk = kodeverkForType.find((k) => k.kode === kodeverkOjekt.kode);
-  return kodeverk;
+  return kodeverkForType.find((k) => k.kode === kodeverkOjekt.kode);
 }
 
 /**
@@ -72,7 +71,6 @@ export function useGetKodeverkFn() {
     if (!kodeverkForType || kodeverkForType.length === 0) {
       throw Error(`Det finnes ingen kodeverk for type ${kodeverkType} med kode ${kodeverkOjekt.kode}`);
     }
-    const kodeverk = kodeverkForType.find((k) => k.kode === kodeverkOjekt.kode);
-    return kodeverk;
+    return kodeverkForType.find((k) => k.kode === kodeverkOjekt.kode);
   };
 }

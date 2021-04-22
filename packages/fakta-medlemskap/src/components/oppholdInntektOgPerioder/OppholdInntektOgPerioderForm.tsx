@@ -261,22 +261,17 @@ const medlemAksjonspunkter = [
 ];
 
 const mapOgFiltrerPerioder = (ap: Aksjonspunkt, perioder: OppholdFormValues[]) => {
-  const perioderTilLagring = perioder.map((periode) => {
-    const bekreftetPeriode = omitMany(periode, [
-      'id',
-      'fixedMedlemskapPerioder',
-      'foreldre',
-      'hasBosattAksjonspunkt',
-      'hasPeriodeAksjonspunkt',
-      'isBosattAksjonspunktClosed',
-      'isPeriodAksjonspunktClosed',
-      'opphold',
-      'termindato',
-      'årsaker',
-    ]);
-
-    return bekreftetPeriode;
-  });
+  const perioderTilLagring = perioder.map((periode) => omitMany(periode, [
+    'id',
+    'fixedMedlemskapPerioder',
+    'foreldre',
+    'hasBosattAksjonspunkt',
+    'hasPeriodeAksjonspunkt',
+    'isBosattAksjonspunktClosed',
+    'isPeriodAksjonspunktClosed',
+    'opphold',
+    'termindato',
+    'årsaker']));
 
   return perioderTilLagring.filter((periode: PeriodeMedId) => periode.aksjonspunkter.includes(ap.definisjon.kode)
     || (periode.aksjonspunkter.length > 0 && ap.definisjon.kode === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP));

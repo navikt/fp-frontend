@@ -24,32 +24,29 @@ type Item = {
 }
 
 // Desse må alltid vare med for rett skala av tidslinjen
-const standardItems = (opptjeningFomDate: string, opptjeningTomDate: string): Item[] => {
-  const items = [
-    {
-      id: 1000,
-      start: moment(opptjeningFomDate)
-        .startOf('month'),
-      end: moment(opptjeningFomDate)
-        .startOf('month'),
-      content: '',
-      group: 1,
-      className: styles.hiddenpast,
+const standardItems = (opptjeningFomDate: string, opptjeningTomDate: string): Item[] => [
+  {
+    id: 1000,
+    start: moment(opptjeningFomDate)
+      .startOf('month'),
+    end: moment(opptjeningFomDate)
+      .startOf('month'),
+    content: '',
+    group: 1,
+    className: styles.hiddenpast,
 
-    }, {
-      id: 1001,
-      start: moment(opptjeningTomDate)
-        .endOf('month'),
-      end: moment(opptjeningTomDate)
-        .endOf('month'),
-      content: '',
-      group: 1,
-      className: styles.hiddenpast,
+  }, {
+    id: 1001,
+    start: moment(opptjeningTomDate)
+      .endOf('month'),
+    end: moment(opptjeningTomDate)
+      .endOf('month'),
+    content: '',
+    group: 1,
+    className: styles.hiddenpast,
 
-    },
-  ];
-  return items;
-};
+  },
+];
 
 const classNameGenerator = (klasseKode: string): string => {
   if (klasseKode === opptjeningAktivitetKlassifisering.BEKREFTET_AVVIST || klasseKode === opptjeningAktivitetKlassifisering.ANTATT_AVVIST) {

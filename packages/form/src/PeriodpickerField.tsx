@@ -92,7 +92,7 @@ const isoToDdMmYyyy = (string: string): string => {
 };
 
 const acceptedFormatToIso = (value: string, name: string, names: string[]): string => {
-  const dates = value.split('-').map((date) => date.trim());
+  const dates = value.split('-').map((d) => d.trim());
   const date = dates[names.indexOf(name)];
 
   const validDate = ACCEPTED_DATE_INPUT_FORMATS

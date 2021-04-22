@@ -28,13 +28,21 @@ class RequestApiMock extends AbstractRequestApi {
 
   public hasPath = (endpointName: string): boolean => !this.missingPaths.some((p) => p === endpointName);
 
-  public setLinks = () => {}
+  public setLinks = () => {
+    // This is intentional
+  }
 
-  public setRequestPendingHandler = () => {}
+  public setRequestPendingHandler = () => {
+    // This is intentional
+  }
 
-  public setAddErrorMessageHandler = () => {};
+  public setAddErrorMessageHandler = () => {
+    // This is intentional
+  };
 
-  public resetCache = () => {}
+  public resetCache = () => {
+    // This is intentional
+  }
 
   public isMock = () => true;
 

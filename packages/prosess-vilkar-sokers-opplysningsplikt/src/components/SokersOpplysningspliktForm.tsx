@@ -206,7 +206,7 @@ export const getSortedManglendeVedlegg = createSelector([
   ? soknad.manglendeVedlegg.slice().sort((mv1) => (mv1.dokumentType.kode === dokumentTypeId.DOKUMENTASJON_AV_TERMIN_ELLER_FØDSEL ? 1 : -1))
   : []));
 
-const hasSoknad = createSelector([(ownProps: PureOwnProps) => ownProps.soknad], (soknad): boolean => soknad !== null && isObject(soknad));
+const harSoknad = createSelector([(ownProps: PureOwnProps) => ownProps.soknad], (soknad): boolean => soknad !== null && isObject(soknad));
 
 const lagArbeidsgiverKey = (arbeidsgiverOpplysninger: ArbeidsgiverOpplysninger): string => {
   if (arbeidsgiverOpplysninger.erPrivatPerson) {
@@ -217,7 +217,7 @@ const lagArbeidsgiverKey = (arbeidsgiverOpplysninger: ArbeidsgiverOpplysninger):
 
 export const buildInitialValues = createSelector(
   [getSortedManglendeVedlegg,
-    hasSoknad,
+    harSoknad,
     (ownProps: PureOwnProps) => ownProps.status,
     (ownProps: PureOwnProps) => ownProps.aksjonspunkter,
     (ownProps: PureOwnProps) => ownProps.arbeidsgiverOpplysningerPerId],
@@ -295,7 +295,7 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
     return {
       getKodeverknavn,
       onSubmit: submitSelector(ownProps),
-      hasSoknad: hasSoknad(ownProps),
+      hasSoknad: harSoknad(ownProps),
       originalErVilkarOk: erVilkarOk,
       dokumentTypeIds: alleKodeverk[kodeverkTyper.DOKUMENT_TYPE_ID],
       manglendeVedlegg: getSortedManglendeVedlegg(ownProps),

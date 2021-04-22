@@ -37,7 +37,7 @@ const Table: FunctionComponent<OwnProps> = ({
         {headerTextCodes.map((headerElement) => (typeof headerElement === 'string' && headerElement.startsWith(EMPTY_STRING)
           ? <TableColumn key={headerElement}>&nbsp;</TableColumn>
           : (
-            <TableColumn key={headerElement.key ? headerElement.key : headerElement}>
+            <TableColumn key={headerElement.key || headerElement}>
               <FormattedMessage id={headerElement} />
             </TableColumn>
           )))}

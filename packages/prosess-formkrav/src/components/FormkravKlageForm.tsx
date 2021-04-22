@@ -29,7 +29,7 @@ const getKlagBareVedtak = (
   getKodeverknavn: (kodeverk: Kodeverk) => string,
 ): ReactElement[] => {
   const klagBareVedtak = [<option key="formkrav" value={IKKE_PA_KLAGD_VEDTAK}>{intl.formatMessage({ id: 'Klage.Formkrav.IkkePåklagdVedtak' })}</option>];
-  return klagBareVedtak.concat(avsluttedeBehandlinger
+  return klagBareVedtak.concat([...avsluttedeBehandlinger]
     .sort((b1, b2) => moment(b1.avsluttet).diff(moment(b2.avsluttet)))
     .map((behandling) => (
       <option key={behandling.id} value={`${behandling.id}`}>

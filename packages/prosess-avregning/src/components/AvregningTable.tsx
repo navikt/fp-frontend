@@ -52,7 +52,9 @@ const getHeaderCodes = (
   ];
 };
 
-const showCollapseButton = (mottakerResultatPerFag: SimuleringResultatPerFagområde[]): boolean => mottakerResultatPerFag.some((fag) => fag.rader.length > 1);
+const skalViseCollapseButton = (
+  mottakerResultatPerFag: SimuleringResultatPerFagområde[],
+): boolean => mottakerResultatPerFag.some((fag) => fag.rader.length > 1);
 
 const rowToggable = (fagOmråde: SimuleringResultatPerFagområde, rowIsFeilUtbetalt: boolean): boolean => {
   const fagFeilUtbetalt = fagOmråde.rader.find((rad) => rad.feltnavn === avregningCodes.DIFFERANSE);
@@ -142,7 +144,7 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
           { tableTitle(mottaker) }
           <Table
             headerColumnContent={getHeaderCodes(
-              showCollapseButton(mottaker.resultatPerFagområde),
+              skalViseCollapseButton(mottaker.resultatPerFagområde),
               { toggleDetails, showDetails: (visDetaljer ? visDetaljer.show : false), mottakerIndex },
               rangeOfMonths,
               nesteMåned,

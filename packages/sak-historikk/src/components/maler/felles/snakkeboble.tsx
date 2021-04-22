@@ -44,13 +44,17 @@ const snakkeboblePanelCls = (aktoer: Kodeverk): string => cx('snakkeboble__panel
 const utledIkon = (aktoer: Kodeverk, kjoenn: Kodeverk) => {
   if (aktoer.kode === HistorikkAktor.SAKSBEHANDLER) {
     return navAnsattHistorikkImg;
-  } if (aktoer.kode === HistorikkAktor.SOKER && kjoenn?.kode === navBrukerKjonn.MANN) {
+  }
+  if (aktoer.kode === HistorikkAktor.SOKER && kjoenn?.kode === navBrukerKjonn.MANN) {
     return mannImg;
-  } if (aktoer.kode === HistorikkAktor.SOKER && kjoenn?.kode === navBrukerKjonn.KVINNE) {
+  }
+  if (aktoer.kode === HistorikkAktor.SOKER && kjoenn?.kode === navBrukerKjonn.KVINNE) {
     return kvinneImg;
-  } if (aktoer.kode === HistorikkAktor.BESLUTTER) {
+  }
+  if (aktoer.kode === HistorikkAktor.BESLUTTER) {
     return beslutterImg;
-  } if (aktoer.kode === HistorikkAktor.VEDTAKSLOSNINGEN) {
+  }
+  if (aktoer.kode === HistorikkAktor.VEDTAKSLOSNINGEN) {
     return maskinImg;
   }
   return arbeidsgiverImg;

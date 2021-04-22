@@ -4,11 +4,51 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
+import { HistorikkinnslagEndretFelt, Kodeverk } from '@fpsak-frontend/types';
 
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
 import historikkEndretFeltType from '../../kodeverk/historikkEndretFeltType';
 import HistorikkMal from '../HistorikkMalTsType';
 import Skjermlenke from './felles/Skjermlenke';
+
+const lagBegrunnelseKomponent = (
+  felt: HistorikkinnslagEndretFelt,
+  begrunnelseFritekst: string,
+  index: number,
+  endredeFelter,
+  sarligGrunnerBegrunnelse: string,
+  begrunnelse: string,
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+) => {
+  const { endretFeltNavn, fraVerdi, tilVerdi } = felt;
+
+  const visProsentverdi = historikkEndretFeltType.ANDEL_TILBAKEKREVES === endretFeltNavn.kode;
+  const visBegrunnelse = historikkEndretFeltType.ER_VILKARENE_TILBAKEKREVING_OPPFYLT === endretFeltNavn.kode;
+  const formatertFraVerdi = visProsentverdi && fraVerdi ? `${fraVerdi}%` : fraVerdi;
+  const formatertTilVerdi = visProsentverdi && tilVerdi ? `${tilVerdi}%` : tilVerdi;
+  const visAktsomhetBegrunnelse = begrunnelseFritekst && index === endredeFelter.length - 1;
+  const visSarligGrunnerBegrunnelse = sarligGrunnerBegrunnelse && index === endredeFelter.length - 1;
+
+  return (
+    <React.Fragment key={endretFeltNavn.kode}>
+      {visBegrunnelse && begrunnelse}
+      {visBegrunnelse && <VerticalSpacer eightPx />}
+      {visAktsomhetBegrunnelse && decodeHtmlEntity(begrunnelseFritekst)}
+      {visAktsomhetBegrunnelse && <VerticalSpacer eightPx />}
+      <Normaltekst>
+        <FormattedMessage
+          id={felt.fraVerdi ? 'Historikk.Template.Tilbakekreving.ChangedFromTo' : 'Historikk.Template.Tilbakekreving.FieldSetTo'}
+          values={{
+            navn: getKodeverknavn(endretFeltNavn), fraVerdi: formatertFraVerdi, tilVerdi: formatertTilVerdi, b: (chunks) => <b>{chunks}</b>,
+          }}
+        />
+      </Normaltekst>
+      <VerticalSpacer eightPx />
+      {visSarligGrunnerBegrunnelse && sarligGrunnerBegrunnelse}
+      {visSarligGrunnerBegrunnelse && <VerticalSpacer eightPx />}
+    </React.Fragment>
+  );
+};
 
 const HistorikkMalTypeTilbakekreving: FunctionComponent<HistorikkMal> = ({
   historikkinnslag,
@@ -50,7 +90,7 @@ const HistorikkMalTypeTilbakekreving: FunctionComponent<HistorikkMal> = ({
             </Normaltekst>
             <VerticalSpacer eightPx />
             {endredeFelter && endredeFelter.map((felt, index) => {
-              const { endretFeltNavn, fraVerdi, tilVerdi } = felt;
+              const { endretFeltNavn, tilVerdi } = felt;
 
               const visBelopTilbakekreves = historikkEndretFeltType.BELOEP_TILBAKEKREVES === endretFeltNavn.kode;
               const visProsentverdi = historikkEndretFeltType.ANDEL_TILBAKEKREVES === endretFeltNavn.kode;
@@ -59,31 +99,7 @@ const HistorikkMalTypeTilbakekreving: FunctionComponent<HistorikkMal> = ({
                 return null;
               }
 
-              const visBegrunnelse = historikkEndretFeltType.ER_VILKARENE_TILBAKEKREVING_OPPFYLT === endretFeltNavn.kode;
-              const formatertFraVerdi = visProsentverdi && fraVerdi ? `${fraVerdi}%` : fraVerdi;
-              const formatertTilVerdi = visProsentverdi && tilVerdi ? `${tilVerdi}%` : tilVerdi;
-              const visAktsomhetBegrunnelse = begrunnelseFritekst && index === endredeFelter.length - 1;
-              const visSarligGrunnerBegrunnelse = sarligGrunnerBegrunnelse && index === endredeFelter.length - 1;
-
-              return (
-                <React.Fragment key={endretFeltNavn.kode}>
-                  {visBegrunnelse && begrunnelse}
-                  {visBegrunnelse && <VerticalSpacer eightPx />}
-                  {visAktsomhetBegrunnelse && decodeHtmlEntity(begrunnelseFritekst)}
-                  {visAktsomhetBegrunnelse && <VerticalSpacer eightPx />}
-                  <Normaltekst>
-                    <FormattedMessage
-                      id={felt.fraVerdi ? 'Historikk.Template.Tilbakekreving.ChangedFromTo' : 'Historikk.Template.Tilbakekreving.FieldSetTo'}
-                      values={{
-                        navn: getKodeverknavn(endretFeltNavn), fraVerdi: formatertFraVerdi, tilVerdi: formatertTilVerdi, b: (chunks) => <b>{chunks}</b>,
-                      }}
-                    />
-                  </Normaltekst>
-                  <VerticalSpacer eightPx />
-                  {visSarligGrunnerBegrunnelse && sarligGrunnerBegrunnelse}
-                  {visSarligGrunnerBegrunnelse && <VerticalSpacer eightPx />}
-                </React.Fragment>
-              );
+              return lagBegrunnelseKomponent(felt, begrunnelseFritekst, index, endredeFelter, sarligGrunnerBegrunnelse, begrunnelse, getKodeverknavn);
             })}
             <Normaltekst>
               {(!endredeFelter && begrunnelseFritekst) && begrunnelseFritekst}

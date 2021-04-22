@@ -103,10 +103,10 @@ const getValidation = (andreYtelser: KodeverkMedNavn[]) => (values: FormValues):
   ...OppholdINorgePapirsoknadIndex.validate(values),
 });
 
-const transformRootValues = (state: any, registeredFieldNames: string[]): any => {
-  const values = formValueSelector(SVANGERSKAPSPENGER_FORM_NAME)(state, ...registeredFieldNames);
-  return values;
-};
+const transformRootValues = (
+  state: any,
+  registeredFieldNames: string[],
+): any => formValueSelector(SVANGERSKAPSPENGER_FORM_NAME)(state, ...registeredFieldNames);
 
 const buildInitialValues = createSelector([(ownProps: { andreYtelser: KodeverkMedNavn[] }) => ownProps], (ownProps): FormValues => ({
   ...FrilansPapirsoknadIndex.buildInitialValues(),

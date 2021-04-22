@@ -119,12 +119,10 @@ const transformValues = (
   if (hasAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG, aksjonspunkter)) {
     aksjonspunkterArray.push(OmsorgFaktaForm.transformOmsorgValues(values));
   }
-  const aksjonspunkterMedBegrunnelse = aksjonspunkterArray.map((ap) => ({
+  return aksjonspunkterArray.map((ap) => ({
     ...ap,
     ...{ begrunnelse: values.begrunnelse },
   }));
-
-  return aksjonspunkterMedBegrunnelse;
 };
 
 const lagSubmitFn = createSelector([

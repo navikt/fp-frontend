@@ -27,14 +27,11 @@ export type BrevData = {
   dokumentMal?: string;
 }
 
-const getBrevData = (ankeVurdering: Kodeverk, fritekstTilBrev?: string): BrevData => {
-  const data = {
-    fritekst: fritekstTilBrev || '',
-    mottaker: '',
-    dokumentMal: getBrevKode(ankeVurdering),
-  };
-  return data;
-};
+const getBrevData = (ankeVurdering: Kodeverk, fritekstTilBrev?: string): BrevData => ({
+  fritekst: fritekstTilBrev || '',
+  mottaker: '',
+  dokumentMal: getBrevKode(ankeVurdering),
+});
 
 interface OwnProps {
   previewCallback: (data: BrevData) => Promise<any>;
