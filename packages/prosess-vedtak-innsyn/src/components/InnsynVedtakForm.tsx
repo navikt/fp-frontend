@@ -161,7 +161,7 @@ export const InnsynVedtakFormImpl: FunctionComponent<PureOwnProps & MappedOwnPro
         <Column xs="4">
           <a
             onClick={previewBrev}
-            onKeyDown={(e) => (e.keyCode === 13 ? previewBrev(e) : null)}
+            onKeyDown={(e) => (e.key === 'Enter' ? previewBrev(e) : null)}
             className="lenke lenke--frittstaende"
             target="_blank"
             rel="noopener noreferrer"

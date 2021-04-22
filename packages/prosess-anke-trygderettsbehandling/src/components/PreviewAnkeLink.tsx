@@ -67,7 +67,7 @@ const PreviewAnkeLink: FunctionComponent<OwnProps> = ({
     <a
       href=""
       onClick={(e) => { previewMessage(e); }}
-      onKeyDown={(e) => (e.keyCode === 13 ? previewMessage(e) : null)}
+      onKeyDown={(e) => (e.key === 'Enter' ? previewMessage(e) : null)}
       className={classNames(styles.previewLink, 'lenke lenke--frittstaende')}
     >
       <FormattedMessage id="PreviewAnkeLink.ForhandvisBrev" />
