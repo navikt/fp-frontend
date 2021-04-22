@@ -2,7 +2,7 @@ const throwError = (message: string) => {
   throw new Error(message);
 };
 
-export const notNull = (value: string) => (value === undefined || value === null ? throwError(`Value is ${value}`) : value);
+export const notNull = (value?: string | null) => (value === undefined || value === null ? throwError(`Value is ${value}`) : value);
 
 export const isObjectEmpty = (object: Record<string, any>): boolean => Object.keys(object).length === 0;
 
@@ -31,10 +31,10 @@ export const omitMany = <T, K extends keyof T>(object: T, keysToOmit: K[]): Omit
 
 type DiffInput = Array<any> | Record<string, any> | (() => any) | string | number | boolean;
 
-const isNullOrUndefined = (obj: DiffInput): boolean => obj === null || typeof obj === 'undefined';
-const isNotNullAndObject = (obj: DiffInput): boolean => obj !== null && typeof obj === 'object' && !!obj.constructor;
+const isNullOrUndefined = (obj?: DiffInput | null): boolean => obj === null || typeof obj === 'undefined';
+const isNotNullAndObject = (obj?: DiffInput | null): boolean => obj !== null && typeof obj === 'object' && !!obj.constructor;
 
-const redefineIfUndefined = (inputA: DiffInput, inputB: DiffInput): DiffInput => {
+const redefineIfUndefined = (inputA?: DiffInput | null, inputB?: DiffInput | null): DiffInput | null | undefined => {
   if (isNullOrUndefined(inputA) && isNotNullAndObject(inputB)) {
     try {
       // @ts-ignore Fiks
@@ -46,7 +46,7 @@ const redefineIfUndefined = (inputA: DiffInput, inputB: DiffInput): DiffInput =>
   return inputA;
 };
 
-export const diff = (a: DiffInput, b: DiffInput): boolean | Record<string, boolean> => {
+export const diff = (a?: DiffInput | null, b?: DiffInput | null): boolean | Record<string, boolean> => {
   const thing1 = redefineIfUndefined(a, b);
   const thing2 = redefineIfUndefined(b, a);
   if (typeof thing1 !== typeof thing2) {
@@ -64,7 +64,8 @@ export const diff = (a: DiffInput, b: DiffInput): boolean | Record<string, boole
       }
       return true;
     }
-    return [...new Set([...Object.keys(thing1), ...Object.keys(thing2)])]
+    return [...new Set([...Object.keys(thing1 as DiffInput), ...Object.keys(thing2 as DiffInput)])]
+      // @ts-ignore Fiks
       .reduce((diffs, key) => ({ ...diffs, [key]: diff(thing1[key], thing2[key]) }), {});
   };
 

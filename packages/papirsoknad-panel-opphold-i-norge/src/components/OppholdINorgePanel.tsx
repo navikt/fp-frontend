@@ -166,8 +166,8 @@ OppholdINorgePanel.validate = (values: FormValues) => {
 };
 
 OppholdINorgePanel.buildInitialValues = (): FormValues => ({
-  tidligereOppholdUtenlands: [{}],
-  fremtidigeOppholdUtenlands: [{}],
+  tidligereOppholdUtenlands: [{ periodeFom: undefined, periodeTom: undefined }],
+  fremtidigeOppholdUtenlands: [{ periodeFom: undefined, periodeTom: undefined }],
 });
 
 export default OppholdINorgePanel;

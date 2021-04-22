@@ -129,6 +129,7 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
     // eslint-disable-next-line react/no-find-dom-node
     const node = ReactDOM.findDOMNode(this.timelineRef.current);
     if (node) {
+      // @ts-ignore
       node.children[0].style.visibility = 'visible';
     }
   }

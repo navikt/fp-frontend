@@ -44,8 +44,8 @@ export const visSakerOpprettetPaAktor = () => (
     valgtAktorId="123"
     aktorInfo={{
       fagsaker: [fagsak, {
-        saksnummer: '123',
         ...fagsak,
+        saksnummer: '123',
       }],
       person: {
         navn: 'Espen Utvikler',

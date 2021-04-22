@@ -186,8 +186,10 @@ const decodeHtmlEntity = (str?: string): string | undefined => {
         Omega: 937,
         omega: 969,
       };
-      if (chars[dec] !== undefined) {
-        return String.fromCharCode(chars[dec]);
+      // @ts-ignore Fiks
+      const charCode = chars[dec];
+      if (charCode !== undefined) {
+        return String.fromCharCode(charCode);
       }
       return match;
     }

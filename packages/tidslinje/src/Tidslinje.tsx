@@ -20,7 +20,7 @@ interface Periode {
   id: string | number;
   className?: string;
   hoverText?: string;
-  tomMoment?: moment.Moment;
+  tomMoment: moment.Moment;
 }
 
 export type TidslinjeTimes = {
@@ -73,15 +73,20 @@ const sortByDate = (a: Periode, b: Periode): number => {
   return 0;
 };
 
-const parseDates = (item: Periode) => ({
+type PeriodeMedStartOgSlutt = {
+ start: Date;
+ end: Date;
+} & Periode
+
+const parseDates = (item: Periode): PeriodeMedStartOgSlutt => ({
   ...item,
   start: parseDateString(item.fom),
   end: parseDateString(item.tomMoment),
 });
 
-const formatItems = (periodItems: Periode[] = []) => {
+const formatItems = (periodItems: Periode[] = []): PeriodeMedStartOgSlutt[] => {
   const itemsWithDates = periodItems.map(parseDates);
-  const formattedItemsArray = [];
+  const formattedItemsArray: PeriodeMedStartOgSlutt[] = [];
   formattedItemsArray.length = 0;
   itemsWithDates.forEach((item) => {
     formattedItemsArray.push(item);
@@ -90,13 +95,14 @@ const formatItems = (periodItems: Periode[] = []) => {
 };
 
 const formatGroups = (periodItems: Periode[] = []) => {
-  const duplicatesRemoved = periodItems.reduce((accPeriods, period) => {
+  const duplicatesRemoved = periodItems.reduce<Periode[]>((accPeriods, period) => {
     // @ts-ignore Fiks
     const hasPeriod = accPeriods.some((p) => p.group === period.group);
     if (!hasPeriod) accPeriods.push(period);
     return accPeriods;
   }, []);
   return duplicatesRemoved.map((activity) => ({
+    // @ts-ignore Fiks
     id: activity.group,
     content: '',
   }));
@@ -126,6 +132,7 @@ class Tidslinje extends Component<TidslinjeProps> {
     // eslint-disable-next-line react/no-find-dom-node
     const node = ReactDOM.findDOMNode(this.timelineRef.current);
     if (node) {
+      // @ts-ignore
       node.children[0].style.visibility = 'visible';
     }
   }
