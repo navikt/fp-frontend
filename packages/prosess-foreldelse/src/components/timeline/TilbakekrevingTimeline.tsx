@@ -202,7 +202,7 @@ class TilbakekrevingTimeline extends Component<PureOwnProps & WrappedComponentPr
               <div className="uttakTimeline">
                 <Timeline
                   ref={this.timelineRef}
-                  options={getOptions(newPerioder.sort(sortByDate))}
+                  options={getOptions([...newPerioder].sort(sortByDate))}
                   items={items}
                   groups={groups}
                   selectHandler={selectPeriodCallback}

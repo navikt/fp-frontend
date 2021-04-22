@@ -64,7 +64,7 @@ export const diff = (a?: DiffInput | null, b?: DiffInput | null): boolean | Reco
       }
       return true;
     }
-    return [...new Set([...Object.keys(thing1 as DiffInput), ...Object.keys(thing2 as DiffInput)])]
+    return [...new Set([...Object.keys(thing1), ...Object.keys(thing2)])]
       // @ts-ignore Fiks
       .reduce((diffs, key) => ({ ...diffs, [key]: diff(thing1[key], thing2[key]) }), {});
   };

@@ -204,7 +204,7 @@ class Tidslinje extends Component<TidslinjeProps> {
               <div className="uttakTimeline">
                 <Timeline
                   ref={this.timelineRef}
-                  options={getOptions(customTimes, uttakPerioder.sort(sortByDate))}
+                  options={getOptions(customTimes, [...uttakPerioder].sort(sortByDate))}
                   items={items}
                   groups={groups}
                   customTimes={customTimes}
