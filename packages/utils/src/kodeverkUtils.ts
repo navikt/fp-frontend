@@ -11,6 +11,7 @@ export const getKodeverknavnFraKode = (
     return '';
   }
   if (undertype) {
+    // @ts-ignore Må endra kodeverket-typen til å støtta undertype
     kodeverkForType = kodeverkForType[undertype];
   }
 

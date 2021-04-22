@@ -62,6 +62,7 @@ describe('<RestApiContext>', () => {
   it('skal utføre restkall og så hente data inn i komponent', async () => {
     const setValue = sinon.spy();
 
+    // @ts-ignore Kva er feil her?
     await act(async () => mount(
       <RestApiProvider>
         <RestApiErrorProvider>

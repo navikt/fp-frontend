@@ -36,7 +36,7 @@ export const metaMock = {
   warning: null,
 };
 
-export function mountFieldComponent(node, input = {}, meta = {}, label = 'field') {
+export function mountFieldComponent(node: any, input = {}, meta = {}, label = 'field') {
   return mountWithIntl(React.cloneElement(node, {
     input: { ...inputMock, ...input },
     meta: { ...metaMock, ...meta },
@@ -90,11 +90,11 @@ export class MockFields implements FieldArrayFieldsProps<any> {
 
   pop: () => any;
 
-  map: () => any[];
+  map: (callback: any) => any[];
 
   forEach: () => undefined;
 
-  getAll: () => undefined;
+  getAll: () => any[];
 
   removeAll: () => undefined;
 
@@ -117,7 +117,7 @@ export class MockFields implements FieldArrayFieldsProps<any> {
   remove: (index: any) => any[];
 
   constructor(name?: string, len?: number) {
-    const formatName = (index) => `${name}[${index}]`;
+    const formatName = (index: number) => `${name}[${index}]`;
     const array = [...new Array(len).keys()].map(formatName); // NOSONAR
 
     this.array = array;
@@ -147,7 +147,7 @@ export class MockFields implements FieldArrayFieldsProps<any> {
 }
 
 export class MockFieldsWithContent implements FieldArrayFieldsProps<any> {
-  fields: [];
+  fields: any[];
 
   array: any[];
 
@@ -155,11 +155,11 @@ export class MockFieldsWithContent implements FieldArrayFieldsProps<any> {
 
   pop: () => any;
 
-  map: () => any[];
+  map: (callback: any) => any[];
 
-  forEach: () => undefined;
+  forEach: (callbackfn: any) => any;
 
-  getAll: () => undefined;
+  getAll: () => any[];
 
   removeAll: () => undefined;
 
@@ -181,8 +181,8 @@ export class MockFieldsWithContent implements FieldArrayFieldsProps<any> {
 
   remove: (index: any) => any[];
 
-  constructor(name, array) {
-    const formatName = (index) => `${name}[${index}]`;
+  constructor(name: string, array: any[]) {
+    const formatName = (index: any) => `${name}[${index}]`;
     this.fields = array;
     this.array = [array].map(formatName); // NOSONAR;
     this.push = () => array.push(formatName(array.length));

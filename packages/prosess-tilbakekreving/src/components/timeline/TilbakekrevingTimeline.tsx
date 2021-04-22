@@ -125,6 +125,7 @@ class TilbakekrevingTimeline extends Component<OwnProps & WrappedComponentProps>
     // eslint-disable-next-line react/no-find-dom-node
     const node = ReactDOM.findDOMNode(this.timelineRef.current);
     if (node) {
+      // @ts-ignore
       node.children[0].style.visibility = 'visible';
     }
   }
@@ -201,7 +202,7 @@ class TilbakekrevingTimeline extends Component<OwnProps & WrappedComponentProps>
               <div className="uttakTimeline">
                 <Timeline
                   ref={this.timelineRef}
-                  options={getOptions(newPerioder.sort(sortByDate))}
+                  options={getOptions([...newPerioder].sort(sortByDate))}
                   items={items}
                   groups={groups}
                   selectHandler={selectPeriodCallback}

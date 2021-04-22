@@ -26,7 +26,12 @@ const resolveParam = (params: Record<string, any>) => (segment: string): string 
   if (!paramSegmentPattern.test(segment)) {
     return segment;
   }
-  const [paramName, paramPattern, optional] = paramSegmentPattern.exec(segment).slice(1, 4);
+
+  const value = paramSegmentPattern.exec(segment);
+  if (!value) {
+    return '';
+  }
+  const [paramName, paramPattern, optional] = value.slice(1, 4);
   const paramMatch = new RegExp(paramPattern || '(.+)').exec(params[paramName]);
   const paramValue = paramMatch ? paramMatch[1].replace(/^undefined$/, '') : '';
   return paramValue || (optional ? '' : segment);
