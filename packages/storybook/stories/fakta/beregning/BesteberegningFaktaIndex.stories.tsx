@@ -1,6 +1,8 @@
 import React from 'react';
 import { withKnobs } from '@storybook/addon-knobs';
 import BesteberegningFaktaIndex from '@fpsak-frontend/fakta-besteberegning';
+import { action } from '@storybook/addon-actions';
+import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
 import alleKodeverk from '../../mocks/alleKodeverk.json';
 import { beregningsgrunnlag } from './scenario/BesteberegningScenario';
 
@@ -24,11 +26,27 @@ export default {
   decorators: [withKnobs],
 };
 
+const behandling = {
+  id: 1,
+  versjon: 1,
+  type: {
+    kode: 'BT-003',
+    kodeverk: 'test',
+  },
+} as Behandling;
+
 export const besteberegningMedDagpengerOgArbeid = () => (
   <BesteberegningFaktaIndex
     beregningsgrunnlag={beregningsgrunnlag}
     alleKodeverk={alleKodeverk as any}
     arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
     setFormData={() => undefined}
+    aksjonspunkter={[]}
+    readOnly={false}
+    submittable={false}
+    submitCallback={action('button-click') as (data: any) => Promise<any>}
+    harApneAksjonspunkter={false}
+    alleMerknaderFraBeslutter={{}}
+    behandling={behandling}
   />
 );
