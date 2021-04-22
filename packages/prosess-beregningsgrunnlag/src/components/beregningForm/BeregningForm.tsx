@@ -143,7 +143,7 @@ export const buildInitialValues = createSelector(
     const arbeidstakerAndeler = alleAndelerIForstePeriode.filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER);
     const frilanserAndeler = alleAndelerIForstePeriode.filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.FRILANSER);
     const selvstendigNaeringAndeler = alleAndelerIForstePeriode.filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
-    const initialValues = {
+    return {
       ...Beregningsgrunnlag.buildInitialValues(gjeldendeAksjonspunkter),
       ...AksjonspunktBehandlerTidsbegrensetImpl.buildInitialValues(allePerioder),
       ...AksjonspunktBehandlerFL.buildInitialValues((frilanserAndeler)),
@@ -151,7 +151,6 @@ export const buildInitialValues = createSelector(
       ...GrunnlagForAarsinntektPanelATImpl.buildInitialValues(arbeidstakerAndeler),
       ...SkjeringspunktOgStatusPanel.buildInitialValues(gjeldendeDekningsgrad, gjeldendeAksjonspunkter),
     };
-    return initialValues;
   },
 );
 

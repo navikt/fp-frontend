@@ -121,13 +121,12 @@ const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] => typer
     kode,
   }) => <option value={kode} key={kode}>{oppholdArsakKontoNavn[kode]}</option>);
 
-const visGraderingIkkeInnvilget = (selectedItem: PeriodeMedClassName, readOnly: boolean, graderingInnvilget?: boolean): boolean => {
-  const visGradering = selectedItem.periodeResultatType.kode === periodeResultatType.INNVILGET
+const visGraderingIkkeInnvilget = (selectedItem: PeriodeMedClassName, readOnly: boolean, graderingInnvilget?: boolean): boolean => (
+  selectedItem.periodeResultatType.kode === periodeResultatType.INNVILGET
     && selectedItem.gradertAktivitet
     && graderingInnvilget === false
-    && readOnly;
-  return visGradering;
-};
+    && readOnly
+);
 
 interface OwnProps {
   oppholdArsakTyper: KodeverkMedNavn[];

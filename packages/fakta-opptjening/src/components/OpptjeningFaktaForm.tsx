@@ -39,7 +39,7 @@ const getAksjonspunktHelpTexts = (activities: CustomOpptjeningAktivitet[]): stri
 
 const findSkjaringstidspunkt = (date: string): string => moment(date).add(1, 'days').format(ISO_DATE_FORMAT);
 
-const sortByFomDate = (opptjeningPeriods: CustomOpptjeningAktivitet[]): CustomOpptjeningAktivitet[] => opptjeningPeriods
+const sortByFomDate = (opptjeningPeriods: CustomOpptjeningAktivitet[]): CustomOpptjeningAktivitet[] => [...opptjeningPeriods]
   .sort((o1, o2) => moment(o1.opptjeningFom).diff(moment(o2.opptjeningFom)));
 
 const DOKUMENTASJON_VIL_BLI_INNHENTET = 'DOKUMENTASJON_VIL_BLI_INNHENTET';

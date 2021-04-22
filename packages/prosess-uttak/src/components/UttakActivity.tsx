@@ -367,6 +367,40 @@ const isutbetalingPlusArbeidsprosentMerEn100 = (utbetalingsgrad: number, prosent
 
 const getSum = (total: number, num: number): number => total + num;
 
+const lagFeilmeldinger = (values: FormValues, rowArray: number[], invalidArbeidsProsentVidUsettelse: string) => {
+  values.UttakFieldArray.forEach((aktivitet, index: number) => {
+    // @ts-ignore Fiks
+    const utbetalingsgrad = Number.isNaN(aktivitet.utbetalingsgrad) ? aktivitet.utbetalingsgrad : parseFloat(aktivitet.utbetalingsgrad);
+    // @ts-ignore Fiks
+    const utbetalingPlusArbeidsprosentMerEn100 = isutbetalingPlusArbeidsprosentMerEn100(utbetalingsgrad, aktivitet.prosentArbeid);
+    if (utbetalingPlusArbeidsprosentMerEn100) {
+      rowArray.push(index);
+    }
+  });
+  if (rowArray.length > 0) {
+    const aktiviteter = document.querySelectorAll('[class^=renderUttakTable] tr');
+    if (aktiviteter.length > 0) {
+      rowArray.forEach((item) => {
+        aktiviteter[item + 1].classList.add('tableRowHighlight');
+      });
+    }
+    if (invalidArbeidsProsentVidUsettelse && values.utsettelseType.kode === utsettelseArsakCodes.ARBEID) {
+      return (
+        <AlertStripe type="advarsel" className={styles.advarsel}>
+          <FormattedMessage id="UttakActivity.MerEn100ProsentOgOgyldigUtsettlse" />
+        </AlertStripe>
+      );
+    }
+    return (
+      <AlertStripe type="advarsel" className={styles.advarsel}>
+        <FormattedMessage id="UttakActivity.MerEn100Prosent" />
+      </AlertStripe>
+    );
+  }
+
+  return undefined;
+};
+
 const isArbeidsProsentVidUtsettelse100 = (
   values: FormValues,
   aktivitetArray: AktivitetFieldArray[],
@@ -402,48 +436,17 @@ const warningUttakActivity = (values: FormValues): any => {
   }
 
   if (touchedaktiviteter) {
-    for (let i = 0; i < touchedaktiviteter.length; i += 1) {
+    for (let i = 0; i < touchedaktiviteter.length; i += 1) { // NOSONAR
       touchedaktiviteter[i].classList.remove('tableRowHighlight');
     }
   }
   if (values.UttakFieldArray) {
-    values.UttakFieldArray.forEach((aktivitet, index: number) => {
-      // @ts-ignore Fiks
-      const utbetalingsgrad = Number.isNaN(aktivitet.utbetalingsgrad) ? aktivitet.utbetalingsgrad : parseFloat(aktivitet.utbetalingsgrad);
-      // @ts-ignore Fiks
-      const utbetalingPlusArbeidsprosentMerEn100 = isutbetalingPlusArbeidsprosentMerEn100(utbetalingsgrad, aktivitet.prosentArbeid);
-      if (utbetalingPlusArbeidsprosentMerEn100) {
-        rowArray.push(index);
-      }
-    });
-    if (rowArray.length > 0) {
-      const aktiviteter = document.querySelectorAll('[class^=renderUttakTable] tr');
-      if (aktiviteter.length > 0) {
-        rowArray.forEach((item) => {
-          aktiviteter[item + 1].classList.add('tableRowHighlight');
-        });
-      }
-      if (invalidArbeidsProsentVidUsettelse && values.utsettelseType.kode === utsettelseArsakCodes.ARBEID) {
-        warnings = {
-          ...warnings,
-          _warning:
-  <AlertStripe type="advarsel" className={styles.advarsel}>
-    <FormattedMessage
-      id="UttakActivity.MerEn100ProsentOgOgyldigUtsettlse"
-    />
-  </AlertStripe>,
-        };
-      } else {
-        warnings = {
-          ...warnings,
-          _warning:
-  <AlertStripe type="advarsel" className={styles.advarsel}>
-    <FormattedMessage
-      id="UttakActivity.MerEn100Prosent"
-    />
-  </AlertStripe>,
-        };
-      }
+    const feilmelding = lagFeilmeldinger(values, rowArray, invalidArbeidsProsentVidUsettelse);
+    if (feilmelding) {
+      return {
+        ...warnings,
+        _warning: feilmelding,
+      };
     }
   }
   return warnings;

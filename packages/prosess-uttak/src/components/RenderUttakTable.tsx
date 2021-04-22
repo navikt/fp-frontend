@@ -19,7 +19,7 @@ import {
 } from '@fpsak-frontend/types';
 
 import { FormValues } from './UttakActivity';
-import lagVisningsNavn from '../utils/uttakVisningsnavnHelper';
+import lagVisningsNavn from '../utils/lagVisningsNavn';
 import styles from './renderUttakTable.less';
 
 type Overwrite<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;

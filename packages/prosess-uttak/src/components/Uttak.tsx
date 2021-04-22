@@ -105,7 +105,7 @@ const getCustomTimes = (
   };
 
   dodeBarn.forEach((barn, index: number) => {
-    Object.defineProperty(customTimesBuilder, `${`barndod${index}`}`, {
+    Object.defineProperty(customTimesBuilder, `barndod${index}`, {
       value: parseDateString(barn.dodsdato), enumerable: true,
     });
   });
@@ -383,7 +383,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
         && aksjonspunkter[0].definisjon.kode === aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER
         && aksjonspunkter[0].status.kode === 'OPPR';
     if (kunOverStyrAp && kanOverstyre) {
-      return !kunOverStyrAp;
+      return false;
     }
 
     const activeUttakAp = aksjonspunkter.filter((ap) => ap.definisjon.kode !== aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER);

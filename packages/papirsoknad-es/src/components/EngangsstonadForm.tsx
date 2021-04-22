@@ -42,21 +42,23 @@ interface MappedOwnProps {
   validate: (formValues: FormValues) => any;
 }
 
+type Props = PureOwnProps & MappedOwnProps & InjectedFormProps;
+
 /**
  * EngangsstonadForm
  *
  * Redux-form-komponent for registrering av papirsøknad for engangsstønad.
  */
-export class EngangsstonadForm extends Component<PureOwnProps & MappedOwnProps & InjectedFormProps> {
+export class EngangsstonadForm extends Component<Props> {
   // eslint-disable-next-line camelcase
-  UNSAFE_componentWillReceiveProps(nextProps: PureOwnProps & MappedOwnProps & InjectedFormProps): void {
+  UNSAFE_componentWillReceiveProps(nextProps: Props): void {
     const { soknadData } = this.props;
     if (!isEqual(soknadData, nextProps.soknadData)) {
       nextProps.initialize(buildInitialValues(nextProps.soknadData));
     }
   }
 
-  shouldComponentUpdate(nextProps: PureOwnProps & MappedOwnProps & InjectedFormProps): boolean {
+  shouldComponentUpdate(nextProps: Props): boolean {
     // Dette er gjort for å hindra rerender for testetrykk på alle underformene
     const notRerenderIfChangedProps = ['array', 'blur', 'change', 'clearSubmit', 'destroy', 'dirty', 'initialize', 'error', 'pristine', 'reset',
       'resetSection', 'touch', 'untouch', 'valuesForRegisteredFieldsOnly', 'autofill', 'clearFields', 'clearSubmitErrors', 'clearAsyncError', 'submit'];

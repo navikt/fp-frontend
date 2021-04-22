@@ -6,6 +6,31 @@ import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 import { FlexColumn, FlexContainer, FlexRow } from '@fpsak-frontend/shared-components';
 import { Risikoklassifisering } from '@fpsak-frontend/types';
 
+export const FarePanel: FunctionComponent<{
+  risikoFaresignaler: {
+    faresignaler: string[];
+  },
+  labelId: string,
+}> = ({
+  risikoFaresignaler,
+  labelId,
+}) => (
+  <div>
+    <FlexRow>
+      <FlexColumn>
+        <Element><FormattedMessage id={labelId} /></Element>
+        <ul>
+          {risikoFaresignaler.faresignaler.map((faresignal) => (
+            <li key={faresignal}>
+              <Normaltekst>{decodeHtmlEntity(faresignal)}</Normaltekst>
+            </li>
+          ))}
+        </ul>
+      </FlexColumn>
+    </FlexRow>
+  </div>
+);
+
 interface OwnProps {
   risikoklassifisering: Risikoklassifisering;
 }
@@ -19,40 +44,18 @@ const Faresignaler: FunctionComponent<OwnProps> = ({
   risikoklassifisering,
 }) => (
   <FlexContainer>
-    {risikoklassifisering.medlFaresignaler && risikoklassifisering.medlFaresignaler.faresignaler
-          && (
-          <div>
-            <FlexRow>
-              <FlexColumn>
-                <Element><FormattedMessage id="Risikopanel.Panel.Medlemskap" /></Element>
-                <ul>
-                  {risikoklassifisering.medlFaresignaler.faresignaler.map((faresignal) => (
-                    <li key={faresignal}>
-                      <Normaltekst>{decodeHtmlEntity(faresignal)}</Normaltekst>
-                    </li>
-                  ))}
-                </ul>
-              </FlexColumn>
-            </FlexRow>
-          </div>
-          )}
-    {risikoklassifisering.iayFaresignaler && risikoklassifisering.iayFaresignaler.faresignaler
-          && (
-          <div>
-            <FlexRow>
-              <FlexColumn>
-                <Element><FormattedMessage id="Risikopanel.Panel.ArbeidsforholdInntekt" /></Element>
-                <ul>
-                  {risikoklassifisering.iayFaresignaler.faresignaler.map((faresignal) => (
-                    <li key={faresignal}>
-                      <Normaltekst>{decodeHtmlEntity(faresignal)}</Normaltekst>
-                    </li>
-                  ))}
-                </ul>
-              </FlexColumn>
-            </FlexRow>
-          </div>
-          )}
+    {risikoklassifisering.medlFaresignaler && risikoklassifisering.medlFaresignaler.faresignaler && (
+      <FarePanel
+        risikoFaresignaler={risikoklassifisering.medlFaresignaler}
+        labelId="Risikopanel.Panel.Medlemskap"
+      />
+    )}
+    {risikoklassifisering.iayFaresignaler && risikoklassifisering.iayFaresignaler.faresignaler && (
+      <FarePanel
+        risikoFaresignaler={risikoklassifisering.iayFaresignaler}
+        labelId="Risikopanel.Panel.ArbeidsforholdInntekt"
+      />
+    )}
   </FlexContainer>
 );
 
