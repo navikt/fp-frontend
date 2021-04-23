@@ -51,7 +51,7 @@ export const DokumentIndex: FunctionComponent<OwnProps> = ({
     keepData: true,
   });
 
-  const sorterteDokumenter = useMemo(() => alleDokumenter.sort(sorterDokumenter), [alleDokumenter]);
+  const sorterteDokumenter = useMemo(() => [...alleDokumenter].sort(sorterDokumenter), [alleDokumenter]);
 
   if (state === RestApiState.LOADING) {
     return <LoadingPanel />;

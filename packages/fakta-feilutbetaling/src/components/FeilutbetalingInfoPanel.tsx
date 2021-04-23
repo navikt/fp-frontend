@@ -325,7 +325,7 @@ const buildInitialValues = createSelector([
   const { perioder, begrunnelse } = behandlingFakta;
   return {
     begrunnelse: decodeHtmlEntity(begrunnelse),
-    perioder: perioder.sort((a, b) => moment(a.fom).diff(moment(b.fom)))
+    perioder: [...perioder].sort((a, b) => moment(a.fom).diff(moment(b.fom)))
       .map((p) => {
         const {
           fom, tom, feilutbetalingÅrsakDto,
