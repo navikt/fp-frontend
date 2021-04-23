@@ -22,7 +22,7 @@ import KontrollerBesteberegningAP
 
 type OwnProps = {
   aksjonspunkt: Aksjonspunkt;
-  submitCallback: (data: KontrollerBesteberegningAP[]) => Promise<void>;
+  submitCallback: (data: KontrollerBesteberegningAP) => Promise<void>;
   venteårsak: string;
   readOnly: boolean;
   submittable: boolean;
@@ -106,7 +106,7 @@ export const transformValues = (values: FormValues): KontrollerBesteberegningAP 
 });
 
 const mapStateToPropsFactory = (initialState: any, initialProps: OwnProps) => {
-  const onSubmit = (values) => initialProps.submitCallback([transformValues(values)]);
+  const onSubmit = (values) => initialProps.submitCallback(transformValues(values));
   return (state: any, ownProps: OwnProps): MappedOwnProps => {
     const initialValues = buildInitialValues(ownProps);
     return ({

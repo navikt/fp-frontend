@@ -5,7 +5,8 @@ import {
 import { BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
-import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import KontrollerBesteberegningAP
+  from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/KontrollerBesteberegningAP';
 import BesteMånederVisningPanel from './BesteMånederVisningPanel';
 import BesteberegningResultatGrunnlagPanel from './BesteberegningResultatGrunnlagPanel';
 import KontrollerBesteberegningPanel from './KontrollerBesteberegningPanel';
@@ -17,7 +18,7 @@ interface OwnProps {
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
   behandling: Behandling;
-  submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
+  submitCallback: (aksjonspunktData: KontrollerBesteberegningAP) => Promise<void>;
   submittable: boolean;
 }
 
