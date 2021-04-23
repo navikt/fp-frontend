@@ -91,8 +91,6 @@ export const InnleggelsePeriode: FunctionComponent<PureOwnProps & MappedOwnProps
     && readOnly
     && behandlingStatusKode === behandlingStatus.FATTER_VEDTAK;
 
-  // const periodeOkDisabled = !bekreftet;
-
   const inlineheight = dokumentertePerioder
     && resultat === uttakPeriodeVurdering.PERIODE_OK
     && !readOnly

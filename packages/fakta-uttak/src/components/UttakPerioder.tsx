@@ -301,12 +301,12 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
       };
     }
 
-    const newPerioder = await createNewPerioder(perioder, id, newPeriodeObject);
+    const newPerioder = createNewPerioder(perioder, id, newPeriodeObject);
 
     await formChange(
       'UttakFaktaForm',
       'perioder',
-      newPerioder.sort((a, b) => a.fom.localeCompare(b.fom)),
+      [...newPerioder].sort((a, b) => a.fom.localeCompare(b.fom)),
     );
   }
 
@@ -476,8 +476,8 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
 
 const getFørsteUttaksdato = (state: any) => formValueSelector('UttakFaktaForm')(state, 'førsteUttaksdato') || undefined;
 const getEndringsdato = (state: any) => formValueSelector('UttakFaktaForm')(state, 'endringsdato') || undefined;
-const slettedePerioder = (state: any) => formValueSelector('UttakFaktaForm')(state, 'slettedePerioder');
-const perioder = (state: any) => formValueSelector('UttakFaktaForm')(state, 'perioder');
+const getSlettedePerioder = (state: any) => formValueSelector('UttakFaktaForm')(state, 'slettedePerioder');
+const getPerioder = (state: any) => formValueSelector('UttakFaktaForm')(state, 'perioder');
 const manuellOverstyring = (state: any) => formValueSelector('UttakFaktaForm')(state, 'faktaUttakManuellOverstyring') || false;
 
 const EMPTY_ARRAY = [];
@@ -487,13 +487,13 @@ const mapStateToProps = (state: any, props: PureOwnProps): MappedOwnProps => {
 
   return {
     isManuellOverstyring: manuellOverstyring(state) || false,
-    openForms: !!perioder(state).find((periode: CustomUttakKontrollerFaktaPerioder) => periode.openForm === true),
+    openForms: !!getPerioder(state).find((periode: CustomUttakKontrollerFaktaPerioder) => periode.openForm === true),
     førsteUttaksdato: getFørsteUttaksdato(state),
     endringsdato: getEndringsdato(state),
     uttakPeriodeVurderingTyper: alleKodeverk[kodeverkTyper.UTTAK_PERIODE_VURDERING_TYPE],
     initialValues: getFormInitialValues('UttakFaktaForm')(state),
-    slettedePerioder: slettedePerioder(state) || EMPTY_ARRAY,
-    perioder: perioder(state) || EMPTY_ARRAY,
+    slettedePerioder: getSlettedePerioder(state) || EMPTY_ARRAY,
+    perioder: getPerioder(state) || EMPTY_ARRAY,
   };
 };
 

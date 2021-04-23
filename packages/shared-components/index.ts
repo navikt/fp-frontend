@@ -28,6 +28,5 @@ export { default as Tooltip } from './src/Tooltip';
 export { default as VerticalSpacer } from './src/VerticalSpacer';
 export { default as DataFetchPendingModal } from './src/DataFetchPendingModal';
 export { default as FaktaGruppe } from './src/FaktaGruppe';
-export { default as requireProps } from './src/requireProps';
 export { default as AvsnittSkiller } from './src/AvsnittSkiller';
 export { default as usePrevious } from './src/hooks/usePrevious';

@@ -93,8 +93,8 @@ export class FeilutbetalingInfoPanelImpl extends Component<PureOwnProps & Mapped
       }
     }
 
-    const fields = [`perioder.${elementId}.${årsak}`];
-    clearFormFields(formName, false, false, ...fields);
+    const fieldArray = [`perioder.${elementId}.${årsak}`];
+    clearFormFields(formName, false, false, ...fieldArray);
   }
 
   onChangeUnderÅrsak(event: ReactNode, elementId: number, årsak: string): void {
@@ -325,7 +325,7 @@ const buildInitialValues = createSelector([
   const { perioder, begrunnelse } = behandlingFakta;
   return {
     begrunnelse: decodeHtmlEntity(begrunnelse),
-    perioder: perioder.sort((a, b) => moment(a.fom).diff(moment(b.fom)))
+    perioder: [...perioder].sort((a, b) => moment(a.fom).diff(moment(b.fom)))
       .map((p) => {
         const {
           fom, tom, feilutbetalingÅrsakDto,

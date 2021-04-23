@@ -1,8 +1,9 @@
 import React, { FunctionComponent, useMemo } from 'react';
 
-import { LoadingPanel, requireProps, usePrevious } from '@fpsak-frontend/shared-components';
+import { LoadingPanel, usePrevious } from '@fpsak-frontend/shared-components';
 import DokumenterSakIndex from '@fpsak-frontend/sak-dokumenter';
 import { Dokument } from '@fpsak-frontend/types';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import useBehandlingEndret from '../../behandling/useBehandlingEndret';
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
@@ -44,13 +45,17 @@ export const DokumentIndex: FunctionComponent<OwnProps> = ({
 }) => {
   const forrigeSaksnummer = usePrevious(saksnummer);
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
-  const { data: alleDokumenter = EMPTY_ARRAY } = restApiHooks.useRestApi(FpsakApiKeys.ALL_DOCUMENTS, { saksnummer }, {
+  const { data: alleDokumenter = EMPTY_ARRAY, state } = restApiHooks.useRestApi(FpsakApiKeys.ALL_DOCUMENTS, { saksnummer }, {
     updateTriggers: [behandlingId, behandlingVersjon],
     suspendRequest: forrigeSaksnummer && erBehandlingEndretFraUndefined,
     keepData: true,
   });
 
-  const sorterteDokumenter = useMemo(() => alleDokumenter.sort(sorterDokumenter), [alleDokumenter]);
+  const sorterteDokumenter = useMemo(() => [...alleDokumenter].sort(sorterDokumenter), [alleDokumenter]);
+
+  if (state === RestApiState.LOADING) {
+    return <LoadingPanel />;
+  }
 
   return (
     <DokumenterSakIndex
@@ -61,4 +66,4 @@ export const DokumentIndex: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default requireProps(['saksnummer'], <LoadingPanel />)(DokumentIndex);
+export default DokumentIndex;

@@ -125,16 +125,21 @@ const FagsakIndex: FunctionComponent = () => {
           />
         )}
         profileAndNavigationContent={(
-          <FagsakProfileIndex
-            fagsak={fagsak}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
-            alleBehandlinger={alleBehandlinger}
-            harHentetBehandlinger={harFerdighentetAlleBehandlinger}
-            oppfriskBehandlinger={oppfriskBehandlinger}
-            fagsakRettigheter={fagsakRettigheter}
-            behandlingRettigheter={behandlingRettigheter}
-          />
+          <>
+            {!fagsak && <LoadingPanel />}
+            {fagsak && (
+              <FagsakProfileIndex
+                fagsak={fagsak}
+                behandlingId={behandlingId}
+                behandlingVersjon={behandlingVersjon}
+                alleBehandlinger={alleBehandlinger}
+                harHentetBehandlinger={harFerdighentetAlleBehandlinger}
+                oppfriskBehandlinger={oppfriskBehandlinger}
+                fagsakRettigheter={fagsakRettigheter}
+                behandlingRettigheter={behandlingRettigheter}
+              />
+            )}
+          </>
         )}
         supportContent={(
           <BehandlingSupportIndex

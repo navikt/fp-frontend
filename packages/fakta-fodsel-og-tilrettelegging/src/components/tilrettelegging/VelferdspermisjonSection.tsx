@@ -70,11 +70,11 @@ const VelferdspermisjonSection: FunctionComponent<PureOwnProps & MappedOwnProps>
   );
 };
 
-export const skalTaHensynTilPermisjon = (tilretteleggingBehovFom: string, permisjon: Permisjon): boolean => !moment(permisjon.permisjonFom)
+export const finnSkalTaHensynTilPermisjon = (tilretteleggingBehovFom: string, permisjon: Permisjon): boolean => !moment(permisjon.permisjonFom)
   .isAfter(tilretteleggingBehovFom) && (permisjon.permisjonTom == null || !moment(permisjon.permisjonTom).isBefore(tilretteleggingBehovFom));
 
 const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => ({
-  skalTaHensynTilPermisjon: skalTaHensynTilPermisjon(formValueSelector(ownProps.formName)(state,
+  skalTaHensynTilPermisjon: finnSkalTaHensynTilPermisjon(formValueSelector(ownProps.formName)(state,
     `${ownProps.formSectionName}.tilretteleggingBehovFom`), ownProps.permisjon),
 });
 
