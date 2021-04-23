@@ -729,7 +729,7 @@ const addClassNameGroupIdToPerioder = (
   bStatus: Kodeverk,
   alleKodeverk: {[key: string]: KodeverkMedNavn[]},
   hovedsoker: boolean,
-): PeriodeMedClassName[] => {
+): PeriodeMedClassName[] => { // NOSONAR Blir fiksa ved refaktorering av Uttak
   const behandlingStatusKode = bStatus.kode;
   const annenForelderPerioder = uttakResultatPerioder.perioderAnnenpart;
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);

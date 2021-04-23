@@ -12,8 +12,8 @@ export const REQUEST_POLLING_CANCELLED = 'INTERNAL_CANCELLATION';
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const hasLocationAndStatusDelayedOrHalted = (responseData): boolean => responseData.location && (responseData.status === AsyncPollingStatus.DELAYED
-  || responseData.status === AsyncPollingStatus.HALTED);
+const hasLocationAndStatusDelayedOrHalted = (responseData): boolean => responseData?.location
+  && (responseData.status === AsyncPollingStatus.DELAYED || responseData.status === AsyncPollingStatus.HALTED);
 
 type Notify = (eventType: keyof typeof EventType, data?: any, isPolling?: boolean) => void
 type NotificationEmitter = (eventType: keyof typeof EventType, data?: any) => void
@@ -91,7 +91,7 @@ class RequestRunner {
         response = await this.execLongPolling(response.headers.location);
       } catch (error) {
         const responseData = error.response ? error.response.data : undefined;
-        if (responseData && hasLocationAndStatusDelayedOrHalted(responseData)) {
+        if (hasLocationAndStatusDelayedOrHalted(responseData)) {
           response = await this.httpClientApi.get(responseData.location);
           if ('data' in response) {
             this.notify(EventType.POLLING_HALTED_OR_DELAYED, response.data.taskStatus);

@@ -71,6 +71,9 @@ const skalViseFristenTekst = (erTilbakekreving: boolean, frist?: string, origina
   return erTilbakekreving && erFristenUtløpt && erVenterPaKravgrunnlag;
 };
 
+const harEndretVenteårsak = (originalVentearsak?: string, ventearsak?: string) => !(originalVentearsak === ventearsak || (!ventearsak && !originalVentearsak));
+const harEndretFrist = (originalFrist?: string, frist?: string) => !(originalFrist === frist || (!frist && !originalFrist));
+
 type FormValues = {
   frist?: string;
   ventearsak?: string;
@@ -109,8 +112,8 @@ export const SettPaVentModal: FunctionComponent<PureOwnProps & MappedOwnProps & 
   visBrevErBestilt = false,
   hasManualPaVent,
 }) => {
-  const venteArsakHasChanged = !(originalVentearsak === ventearsak || (!ventearsak && !originalVentearsak));
-  const fristHasChanged = !(originalFrist === frist || (!frist && !originalFrist));
+  const venteArsakHasChanged = harEndretVenteårsak(originalVentearsak, ventearsak);
+  const fristHasChanged = harEndretFrist(originalFrist, frist);
 
   const showAvbryt = !(originalFrist === frist && !venteArsakHasChanged);
   const showFristenTekst = skalViseFristenTekst(erTilbakekreving, frist, originalFrist, ventearsak);

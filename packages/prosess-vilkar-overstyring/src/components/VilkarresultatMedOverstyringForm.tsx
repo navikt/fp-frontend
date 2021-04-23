@@ -35,6 +35,11 @@ const isHidden = (
   aksjonspunktCode: string,
 ): boolean => !isOverridden(aksjonspunktCodes, aksjonspunktCode) && !kanOverstyre;
 
+const hentErOppfyltTekstkode = (customVilkarOppfyltText?: TextValues) => (customVilkarOppfyltText
+  ? customVilkarOppfyltText.id : 'VilkarresultatMedOverstyringForm.ErOppfylt');
+const hentErIkkeOppfyltTekstkode = (customVilkarIkkeOppfyltText?: TextValues) => (customVilkarIkkeOppfyltText
+  ? customVilkarIkkeOppfyltText.id : 'VilkarresultatMedOverstyringForm.VilkarIkkeOppfylt');
+
 type FormValues = {
   erVilkarOk: boolean;
   avslagCode?: string;
@@ -189,7 +194,7 @@ export const VilkarresultatMedOverstyringForm: FunctionComponent<PureOwnProps & 
             avslagsarsaker={avslagsarsaker}
             customVilkarOppfyltText={(
               <FormattedMessage
-                id={customVilkarOppfyltText ? customVilkarOppfyltText.id : 'VilkarresultatMedOverstyringForm.ErOppfylt'}
+                id={hentErOppfyltTekstkode(customVilkarOppfyltText)}
                 values={customVilkarOppfyltText ? {
                   b: (chunks) => <b>{chunks}</b>,
                   ...customVilkarIkkeOppfyltText.values,
@@ -198,7 +203,7 @@ export const VilkarresultatMedOverstyringForm: FunctionComponent<PureOwnProps & 
             )}
             customVilkarIkkeOppfyltText={(
               <FormattedMessage
-                id={customVilkarIkkeOppfyltText ? customVilkarOppfyltText.id : 'VilkarresultatMedOverstyringForm.VilkarIkkeOppfylt'}
+                id={hentErIkkeOppfyltTekstkode(customVilkarIkkeOppfyltText)}
                 values={customVilkarIkkeOppfyltText ? {
                   b: (chunks) => <b>{chunks}</b>,
                   ...customVilkarIkkeOppfyltText.values,
