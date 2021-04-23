@@ -16,16 +16,16 @@ interface OwnProps {
   besteMåneder: Månedsgrunnlag[];
 }
 
-const erBeløpSatt = (beløp) => beløp || beløp === 0;
+const erBeløpSatt = (beløp: number): boolean => !!beløp || beløp === 0;
 
-const finnKap8Beregning = (periode: BeregningsgrunnlagPeriodeProp) => (erBeløpSatt(periode.overstyrtPrAar)
+const finnKap8Beregning = (periode: BeregningsgrunnlagPeriodeProp): number => (erBeløpSatt(periode.overstyrtPrAar)
   ? periode.overstyrtPrAar : periode.beregnetPrAar);
 
-const finnBesteberegnet = (besteMåneder : Månedsgrunnlag[]) => (
+const finnBesteberegnet = (besteMåneder : Månedsgrunnlag[]): number => (
   besteMåneder.flatMap((måned) => måned.inntekter).map(({ inntekt }) => inntekt).reduce((i1, i2) => i1 + i2, 0) * 2
 );
 
-const girKap8Besteberegning = (kap8Beregning: number, kap1473Beregning: number) => (kap8Beregning > kap1473Beregning);
+const girKap8Besteberegning = (kap8Beregning: number, kap1473Beregning: number): boolean => (kap8Beregning > kap1473Beregning);
 
 const headerColumnContent = [
   // For å lage tom kolonne først

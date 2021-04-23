@@ -469,6 +469,10 @@ const historikkEndretFeltTypeCodes = {
     kode: 'DELVIS_REFUSJON_FØR_STARTDATO',
     feltId: 'HistorikkEndretFelt.DelvisRefusjonFørStardato',
   },
+  KONTROLL_AV_BESTEBEREGNING: {
+    kode: 'KONTROLL_AV_BESTEBEREGNING',
+    feltId: 'HistorikkEndretFelt.Kontroll.Besteberegning',
+  },
 };
 
 export default historikkEndretFeltTypeCodes;

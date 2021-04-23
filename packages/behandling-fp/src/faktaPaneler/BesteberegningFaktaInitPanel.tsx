@@ -8,12 +8,13 @@ import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@fpsak-fronte
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@fpsak-frontend/utils';
 
+import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import messages from '../../i18n/nb_NO.json';
 import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
 const intl = createIntl(messages);
 
-const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.BEREGNINGSGRUNNLAG];
+const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktInitData = {
   beregningsgrunnlag: Beregningsgrunnlag;
 }
@@ -32,6 +33,7 @@ const BesteberegningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
   <FaktaDefaultInitPanel<EndepunktInitData>
     {...props}
     requestApi={requestFpApi}
+    aksjonspunktKoder={[aksjonspunktCodes.KONTROLLER_AUTOMATISK_BESTEBEREGNING]}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     faktaPanelKode={faktaPanelCodes.BESTEBEREGNING}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'BesteberegningInfoPanel.Title' })}
