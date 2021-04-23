@@ -68,9 +68,9 @@ describe('<FagsakIndex>', () => {
     const grid = wrapper.find(FagsakGrid);
     expect(grid).toHaveLength(1);
 
-    const fagsakProfileIndex = grid.prop('profileAndNavigationContent');
+    const behandlingSupportIndex = grid.prop('supportContent');
 
     // @ts-ignore
-    expect(fagsakProfileIndex.props.alleBehandlinger).toEqual([behandling, behandling2]);
+    expect(behandlingSupportIndex.props.alleBehandlinger).toEqual([behandling, behandling2]);
   });
 });

@@ -17,7 +17,7 @@ import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingTyp
 import { Kodeverk, Permisjon } from '@fpsak-frontend/types';
 
 import TilretteleggingUtbetalingsgrad, { OVERSTYRT_UTBETALINGSGRAD_FIELDNAME } from './TilretteleggingUtbetalingsgrad';
-import { skalTaHensynTilPermisjon, finnPermisjonFieldName } from './VelferdspermisjonSection';
+import { finnSkalTaHensynTilPermisjon, finnPermisjonFieldName } from './VelferdspermisjonSection';
 
 import styles from './tilretteleggingFieldArray.less';
 
@@ -204,7 +204,7 @@ export const TilretteleggingFieldArray: FunctionComponent<PureOwnProps & MappedO
 
 const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => {
   const { formSectionName, velferdspermisjoner, formName } = ownProps;
-  const velferdspermisjonprosent = velferdspermisjoner.filter((p) => skalTaHensynTilPermisjon(
+  const velferdspermisjonprosent = velferdspermisjoner.filter((p) => finnSkalTaHensynTilPermisjon(
     formValueSelector(formName)(state, `${formSectionName}.tilretteleggingBehovFom`),
     p,
   ))

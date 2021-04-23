@@ -93,8 +93,8 @@ export class FeilutbetalingInfoPanelImpl extends Component<PureOwnProps & Mapped
       }
     }
 
-    const fields = [`perioder.${elementId}.${årsak}`];
-    clearFormFields(formName, false, false, ...fields);
+    const fieldArray = [`perioder.${elementId}.${årsak}`];
+    clearFormFields(formName, false, false, ...fieldArray);
   }
 
   onChangeUnderÅrsak(event: ReactNode, elementId: number, årsak: string): void {
