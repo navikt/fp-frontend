@@ -26,6 +26,7 @@ import VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp from './fakta/
 import BekreftOppholdsrettVurderingAp from './fakta/BekreftOppholdsrettVurderingAp';
 import AvklarStartdatoForPeriodenAp from './fakta/AvklarStartdatoForPeriodenAp';
 import OverstyringAvklarStartdatoForPeriodenAp from './fakta/OverstyringAvklarStartdatoForPeriodenAp';
+import KontrollerBesteberegningAP from './fakta/KontrollerBesteberegningAP';
 
 export type FaktaAksjonspunkt = AvklarTilleggsopplysningerAp
   | AvklarVergeAp
@@ -54,6 +55,7 @@ export type FaktaAksjonspunkt = AvklarTilleggsopplysningerAp
   | VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp
   | OverstyringAvklarStartdatoForPeriodenAp
   | AvklarFaktaForForeldreansvarAksjonspunktAp
+  | KontrollerBesteberegningAP
   | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp;
 
 export default FaktaAksjonspunkt;

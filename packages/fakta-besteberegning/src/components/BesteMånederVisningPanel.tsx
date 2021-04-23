@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import {
@@ -36,7 +36,7 @@ const lagMånedVisning = (dato: moment.Moment): string => {
   return `${månedsnavn[måned]} - ${år}`;
 };
 
-const formatDate = (date: string) => (date ? lagMånedVisning(moment(date, ISO_DATE_FORMAT)) : '-');
+const formatDate = (date: string): string => (date ? lagMånedVisning(moment(date, ISO_DATE_FORMAT)) : '-');
 
 interface BesteMånederProps {
   besteMåneder: Månedsgrunnlag[];
@@ -63,7 +63,7 @@ interface InntekttabellProps {
     getKodeverkNavn: (kodeverk: Kodeverk) => string;
 }
 
-const createKey = (inntekt: BesteberegningInntekt) => {
+const createKey = (inntekt: BesteberegningInntekt): string => {
   const { opptjeningAktivitetType, arbeidsgiverId, arbeidsforholdId } = inntekt;
   if (arbeidsgiverId != null) {
     return `${arbeidsgiverId} ${arbeidsforholdId}`;
@@ -72,7 +72,7 @@ const createKey = (inntekt: BesteberegningInntekt) => {
 };
 
 const lagVisningsNavn = (inntekt: BesteberegningInntekt, arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId,
-  getKodeverkNavn: (kodeverk: Kodeverk) => string) => {
+  getKodeverkNavn: (kodeverk: Kodeverk) => string): string => {
   const agOpplysning = arbeidsgiverOpplysninger[inntekt.arbeidsgiverId];
   if (!agOpplysning) {
     return getKodeverkNavn(inntekt.opptjeningAktivitetType);
@@ -86,7 +86,7 @@ const lagVisningsNavn = (inntekt: BesteberegningInntekt, arbeidsgiverOpplysninge
 };
 
 const lagInntektRader = (inntekter: BesteberegningInntekt[], arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId,
-  getKodeverkNavn: (kodeverk: Kodeverk) => string) => (
+  getKodeverkNavn: (kodeverk: Kodeverk) => string): ReactElement[] => (
   inntekter.map((inntekt: BesteberegningInntekt) => (
     <TableRow key={createKey(inntekt)}>
       <TableColumn>
@@ -103,7 +103,7 @@ const lagInntektRader = (inntekter: BesteberegningInntekt[], arbeidsgiverOpplysn
   ))
 );
 
-const lagSummeringsRad = (inntekter: BesteberegningInntekt[], labelId: string) => (inntekter.length === 0 ? <></> : (
+const lagSummeringsRad = (inntekter: BesteberegningInntekt[], labelId: string): ReactElement => (inntekter.length === 0 ? <></> : (
   <TableRow key="sum">
     <TableColumn>
       <Element>
@@ -137,7 +137,7 @@ const Inntekttabell: FunctionComponent<InntekttabellProps> = ({
 
 const lagRadMedMåneder = (måneder: Månedsgrunnlag[],
   arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId,
-  getKodeverkNavn: (kodeverk: Kodeverk) => string) => (
+  getKodeverkNavn: (kodeverk: Kodeverk) => string): ReactElement => (
     <Row>
       {måneder.map((månedsgrunnlag: Månedsgrunnlag) => {
         const key = månedsgrunnlag.fom;
@@ -157,9 +157,10 @@ const lagRadMedMåneder = (måneder: Månedsgrunnlag[],
     </Row>
 );
 
-const finnGjennomsnittligMånedsinntekt = (besteMåneder : Månedsgrunnlag[]) => (
-  besteMåneder.flatMap((måned) => måned.inntekter).map(({ inntekt }) => inntekt).reduce((i1, i2) => i1 + i2, 0) / 6
-);
+const finnÅrsinntekt = (besteMåneder : Månedsgrunnlag[]): number => {
+  const snittPrMnd = besteMåneder.flatMap((måned) => måned.inntekter).map(({ inntekt }) => inntekt).reduce((i1, i2) => i1 + i2, 0) / 6;
+  return snittPrMnd * 12;
+};
 
 const sorterEtterMåned = (besteMåneder : Månedsgrunnlag[]) => [...besteMåneder].sort((a, b) => moment(a.fom).diff(moment(b.fom)));
 
@@ -196,24 +197,12 @@ const BesteMånederVisningPanel: FunctionComponent<BesteMånederProps> = ({
           <TableRow>
             <TableColumn>
               <Normaltekst>
-                <FormattedMessage id="Inntekttabell.GjennomsnittligMånedsinntekt" />
-              </Normaltekst>
-            </TableColumn>
-            <TableColumn>
-              <Normaltekst>
-                {formatCurrencyNoKr(finnGjennomsnittligMånedsinntekt(besteMåneder))}
-              </Normaltekst>
-            </TableColumn>
-          </TableRow>
-          <TableRow>
-            <TableColumn>
-              <Normaltekst>
                 <FormattedMessage id="Inntekttabell.BeregnetÅrsinntekt" />
               </Normaltekst>
             </TableColumn>
             <TableColumn>
               <Normaltekst>
-                {formatCurrencyNoKr(finnGjennomsnittligMånedsinntekt(besteMåneder) * 12)}
+                {formatCurrencyNoKr(finnÅrsinntekt(besteMåneder))}
               </Normaltekst>
             </TableColumn>
           </TableRow>

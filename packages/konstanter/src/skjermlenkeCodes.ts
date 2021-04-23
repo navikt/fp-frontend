@@ -12,6 +12,11 @@ const skjermlenkeCodes = {
     faktaNavn: faktaPanelCodes.DEFAULT,
     punktNavn: prosessStegCodes.BEREGNINGSGRUNNLAG,
   },
+  BESTEBEREGNING: {
+    kode: 'BESTEBEREGNING',
+    faktaNavn: faktaPanelCodes.BESTEBEREGNING,
+    punktNavn: prosessStegCodes.DEFAULT,
+  },
   FAKTA_OM_ADOPSJON: {
     kode: 'FAKTA_OM_ADOPSJON',
     faktaNavn: faktaPanelCodes.ADOPSJONSVILKARET,
