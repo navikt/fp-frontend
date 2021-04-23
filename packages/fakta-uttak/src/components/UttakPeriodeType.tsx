@@ -60,6 +60,13 @@ const getUttakPeriode = (getKodeverknavn: (kodeverk: Kodeverk) => string, uttakP
   return getKodeverknavn(uttakPeriodeType);
 };
 
+const harArbeidsgiverOpplysninger = (
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+  arbeidsgiverReferanse?: string,
+): boolean => !!arbeidsgiverReferanse && !!arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
+
+const erGradering = (arbeidstidprosent: number): boolean => arbeidstidprosent !== null && arbeidstidprosent !== undefined;
+
 interface OwnProps {
   arbeidsgiverReferanse?: string;
   arbeidstidprosent?: number;
@@ -112,7 +119,6 @@ export const UttakPeriodeType: FunctionComponent<OwnProps & WrappedComponentProp
 }) => {
   const isAnyFormOrNyPeriodeOpen = isAnyFormOpen() || isNyPeriodeFormOpen;
   const numberOfDaysAndWeeks = calcDaysAndWeeks(fraDato, tilDato);
-  const isGradering = arbeidstidprosent !== null && arbeidstidprosent !== undefined;
   return (
     <div className={styles.periodeType}>
       <div className={styles.headerWrapper}>
@@ -170,7 +176,7 @@ export const UttakPeriodeType: FunctionComponent<OwnProps & WrappedComponentProp
           <Normaltekst>{formatProsent(arbeidstidprosent)}</Normaltekst>
         </div>
       )}
-      {isGradering && (
+      {erGradering(arbeidstidprosent) && (
         <>
           {erFrilanser && (
             <div className={styles.textWrapper}>
@@ -182,7 +188,7 @@ export const UttakPeriodeType: FunctionComponent<OwnProps & WrappedComponentProp
               <Element><FormattedMessage id="UttakInfoPanel.Selvstendignæringsdrivende" /></Element>
             </div>
           )}
-          {arbeidsgiverReferanse && arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse] && (
+          {harArbeidsgiverOpplysninger(arbeidsgiverOpplysningerPerId, arbeidsgiverReferanse) && (
             <div className={styles.textWrapper}>
               <Element>{lagVisningsNavn(arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse])}</Element>
             </div>

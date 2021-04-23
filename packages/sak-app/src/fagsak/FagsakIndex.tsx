@@ -30,6 +30,8 @@ const finnLenkeTilAnnenPart = (annenPartBehandling: AnnenPartBehandling): string
 const erTilbakekreving = (behandlingType?: Kodeverk): boolean => behandlingType && (BehandlingType.TILBAKEKREVING === behandlingType.kode
   || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType.kode);
 
+const henterData = (state) => state === RestApiState.NOT_STARTED || state === RestApiState.LOADING;
+
 /**
  * FagsakIndex
  *
@@ -91,20 +93,18 @@ const FagsakIndex: FunctionComponent = () => {
   });
 
   if (!fagsak) {
-    if (fagsakState === RestApiState.NOT_STARTED || fagsakState === RestApiState.LOADING) {
+    if (henterData(fagsakState)) {
       return <LoadingPanel />;
     }
     return <Redirect to={pathToMissingPage()} />;
   }
-  if (fagsakPersonerState === RestApiState.NOT_STARTED || fagsakPersonerState === RestApiState.LOADING || !harFerdighentetfagsakRettigheter) {
+  if (henterData(fagsakPersonerState) || !harFerdighentetfagsakRettigheter) {
     return <LoadingPanel />;
   }
 
   if (fagsak.saksnummer !== selectedSaksnummer) {
     return <Redirect to={pathToMissingPage()} />;
   }
-
-  const harVerge = behandling ? behandling.harVerge : false;
 
   return (
     <>
@@ -160,7 +160,7 @@ const FagsakIndex: FunctionComponent = () => {
               lenkeTilAnnenPart={annenPartBehandling ? finnLenkeTilAnnenPart(annenPartBehandling) : undefined}
               fagsak={fagsak}
               fagsakPersoner={fagsakPersoner}
-              harVerge={harVerge}
+              harVerge={behandling?.harVerge}
               erTilbakekreving={erTilbakekreving(behandling?.type)}
             />
           );
