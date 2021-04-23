@@ -12,7 +12,7 @@ import { isAvslag, isInnvilget, isOpphor } from '@fpsak-frontend/kodeverk/src/be
 import popOutPilSvg from '@fpsak-frontend/assets/images/pop-out-pil.svg';
 import endreSvg from '@fpsak-frontend/assets/images/endre.svg';
 import endreDisabletSvg from '@fpsak-frontend/assets/images/endre_disablet.svg';
-import { Behandling, Aksjonspunkt } from '@fpsak-frontend/types';
+import { Behandling, Aksjonspunkt, Behandlingsresultat } from '@fpsak-frontend/types';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow, OkAvbrytModal, Image,
 } from '@fpsak-frontend/shared-components';
@@ -37,6 +37,9 @@ const finnKnappetekstkode = (aksjonspunkter: Aksjonspunkt[]): string => {
 
   return 'VedtakForm.FattVedtak';
 };
+
+const finnSkalViseLink = (behandlingsresultat: Behandlingsresultat): boolean => !behandlingsresultat.avslagsarsak
+  || (behandlingsresultat.avslagsarsak && behandlingsresultat.avslagsarsak.kode !== avslagsarsakCodes.INGEN_BEREGNINGSREGLER);
 
 const harIkkeKonsekvenserForYtelsen = (konsekvenserForYtelsenKoder: string[], behandlingResultat?: Behandling['behandlingsresultat']): boolean => {
   if (!behandlingResultat) {
@@ -99,8 +102,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps & WrappedComponentProps> = (
   const erAvslatt = isAvslag(behandlingsresultat.type.kode);
   const erOpphor = isOpphor(behandlingsresultat.type.kode);
 
-  const skalViseLink = !behandlingsresultat.avslagsarsak
-    || (behandlingsresultat.avslagsarsak && behandlingsresultat.avslagsarsak.kode !== avslagsarsakCodes.INGEN_BEREGNINGSREGLER);
+  const skalViseLink = finnSkalViseLink(behandlingsresultat);
 
   const harIkkeKonsekvensForYtelse = useMemo(() => harIkkeKonsekvenserForYtelsen([
     konsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, konsekvensForYtelsen.INGEN_ENDRING,

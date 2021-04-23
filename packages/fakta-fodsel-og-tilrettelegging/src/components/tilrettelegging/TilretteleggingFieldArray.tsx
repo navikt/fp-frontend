@@ -84,7 +84,7 @@ export const TilretteleggingFieldArray: FunctionComponent<PureOwnProps & MappedO
   >
     {(fieldId: string, index, getRemoveButton: () => ReactNode) => {
       const data = tilretteleggingDatoer[index];
-      const tilretteleggingKode = data && data.type ? data.type.kode : undefined;
+      const tilretteleggingKode = data?.type?.kode;
       return (
         <Row key={fieldId} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
           <Column xs="12">
