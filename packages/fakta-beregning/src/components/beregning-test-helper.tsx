@@ -27,19 +27,7 @@ kodeverk[kodeverkTyper.INNTEKTSKATEGORI] = [
 ];
 
 export const lagStateMedAksjonspunkterOgBeregningsgrunnlag = (aksjonspunkter, beregningsgrunnlag, formName = 'test', values = {}, initial = {}) => {
-  /* const data = {
-    id: 1000051,
-    versjon: 1,
-    beregningsgrunnlag,
-    aksjonspunkter,
-  };
-  /\const params = {}; */
   const dataState = {};
-  /* new ApiStateBuilder()
-    .withData('NAV_ANSATT', params, navAnsatt)
-    .withData('FETCH_FAGSAK', params, fagsak)
-    .withData('BEHANDLING', params, data, 'dataContextForstegangOgRevurderingBehandling')
-    .build(); */
 
   const state = {
     default: {

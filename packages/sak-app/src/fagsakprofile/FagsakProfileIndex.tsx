@@ -4,7 +4,7 @@ import React, {
 import { Redirect, useLocation, useRouteMatch } from 'react-router-dom';
 import { Location } from 'history';
 
-import { LoadingPanel, requireProps } from '@fpsak-frontend/shared-components';
+import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import BehandlingVelgerSakIndex from '@fpsak-frontend/sak-behandling-velger';
 import FagsakProfilSakIndex from '@fpsak-frontend/sak-fagsak-profil';
 import { KodeverkMedNavn, Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
@@ -139,4 +139,4 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default requireProps(['fagsak'], <LoadingPanel />)(FagsakProfileIndex);
+export default FagsakProfileIndex;

@@ -89,8 +89,6 @@ export const ForeldreAnsvarPeriode: FunctionComponent<PureOwnProps & MappedOwnPr
     && readOnly
     && behandlingStatusKode === behandlingStatus.FATTER_VEDTAK;
 
-  // const periodeOkDisabled = !bekreftet;
-
   const inlineheight = dokumentertePerioder
     && resultat === uttakPeriodeVurdering.PERIODE_OK
     && !readOnly

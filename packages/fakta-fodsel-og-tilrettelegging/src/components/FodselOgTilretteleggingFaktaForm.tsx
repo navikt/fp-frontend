@@ -25,7 +25,7 @@ import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel_ny.svg';
 import { BekreftSvangerskapspengerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import TilretteleggingArbeidsforholdSection from './tilrettelegging/TilretteleggingArbeidsforholdSection';
-import { finnPermisjonFieldName, skalTaHensynTilPermisjon } from './tilrettelegging/VelferdspermisjonSection';
+import { finnPermisjonFieldName, finnSkalTaHensynTilPermisjon } from './tilrettelegging/VelferdspermisjonSection';
 import { finnUtbetalingsgradForTilrettelegging } from './tilrettelegging/TilretteleggingFieldArray';
 
 import styles from './fodselOgTilretteleggingFaktaForm.less';
@@ -293,7 +293,7 @@ const transformValues = (
     const alleIafAf = iayArbeidsforhold.filter((iaya) => iaya.arbeidsgiverReferanse === a.arbeidsgiverReferanse);
     const af = finnArbeidsforhold(alleIafAf, a.internArbeidsforholdReferanse);
     const stillingsprosentArbeidsforhold = af ? af.stillingsprosent : 100;
-    const velferdspermisjonprosent = a.velferdspermisjoner.filter((p) => skalTaHensynTilPermisjon(value.tilretteleggingBehovFom, p))
+    const velferdspermisjonprosent = a.velferdspermisjoner.filter((p) => finnSkalTaHensynTilPermisjon(value.tilretteleggingBehovFom, p))
       .filter((p) => value[finnPermisjonFieldName(p)])
       .map((p) => p.permisjonsprosent)
       .reduce((sum, prosent) => sum + prosent, 0);
@@ -306,7 +306,7 @@ const transformValues = (
         overstyrtUtbetalingsgrad: finnOverstyrtUtbetalingsgrad(t.type, t.stillingsprosent, stillingsprosentArbeidsforhold,
           t.overstyrtUtbetalingsgrad, t.oldOverstyrtUtbetalingsgrad, velferdspermisjonprosent),
       })),
-      velferdspermisjoner: a.velferdspermisjoner.filter((p) => skalTaHensynTilPermisjon(value.tilretteleggingBehovFom, p)).map((p) => ({
+      velferdspermisjoner: a.velferdspermisjoner.filter((p) => finnSkalTaHensynTilPermisjon(value.tilretteleggingBehovFom, p)).map((p) => ({
         ...p,
         erGyldig: value[finnPermisjonFieldName(p)],
       })),

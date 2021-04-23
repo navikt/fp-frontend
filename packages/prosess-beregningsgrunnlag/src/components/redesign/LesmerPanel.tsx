@@ -31,8 +31,12 @@ const lesMerPanelCls = (props: OwnProps): string => classNames(styles.lesMerPane
 class Lesmerpanel extends Component<OwnProps, StateProps> {
 static defaultProps = {
   defaultApen: false,
-  onClose: () => { },
-  onOpen: () => { },
+  onClose: () => {
+    // This is intentional
+  },
+  onOpen: () => {
+    // This is intentional
+  },
 };
 
 constructor(props) {
