@@ -15,8 +15,8 @@
     "nav-frontend-alertstriper-style": "2.1.1",
     "nav-frontend-grid": "1.1.1",
     "nav-frontend-grid-style": "1.0.2",
-    "nav-frontend-knapper": "2.1.1",
-    "nav-frontend-knapper-style": "1.1.1",
+    "nav-frontend-knapper": "2.1.2",
+    "nav-frontend-knapper-style": "1.1.2",
     "nav-frontend-modal": "1.1.2",
     "nav-frontend-modal-style": "1.1.1",
     "nav-frontend-paneler": "2.1.1",
@@ -24,7 +24,7 @@
     "nav-frontend-typografi": "3.1.1",
     "nav-frontend-typografi-style": "1.1.1",
     "react": "^17.0.2",
-    "react-intl": "^5.15.8",
+    "react-intl": "^5.16.0",
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
