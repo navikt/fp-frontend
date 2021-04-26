@@ -63,43 +63,24 @@ const ACTIVITY_PANEL_NAME = 'uttaksresultatActivity';
 const STONADSKONTOER_TEMP = 'stonadskonto';
 const parseDateString = (dateString: string): Date => moment(dateString, ISO_DATE_FORMAT).toDate();
 
-const fodselsdato = (
+const getFodselsdato = (
   soknadsType: string,
   omsorgsOvertagelseDato: string,
   endredFodselsDato?: string,
   familiehendelseDate?: string,
-): string => {
-  if (soknadsType === soknadType.FODSEL) {
-    return (endredFodselsDato || familiehendelseDate);
-  }
-  return omsorgsOvertagelseDato;
-};
+): string => (soknadsType === soknadType.FODSEL ? (endredFodselsDato || familiehendelseDate) : omsorgsOvertagelseDato);
 
 const getCustomTimes = (
-  barnFraTps: AvklartBarn[],
-  familiehendelse: FamilieHendelseSamling,
+  dodeBarn: AvklartBarn[],
   isRevurdering: boolean,
   person: Personoversikt,
   soknadDate: string,
-  soknadsType: string,
-  endredFodselsDato?: string,
+  fødselsdato: string,
   endringsdato?: string,
-  familiehendelseDate?: string,
-  omsorgsOvertagelseDato?: string,
 ): TidslinjeTimes => {
-  // TODO: trumfa tps med avklartebarn fra lösningen - blir TPS-barn en del av dem?
-
-  const gjeldendeFamiliehendelse = familiehendelse?.gjeldende;
-
-  const dodeBarn = gjeldendeFamiliehendelse
-    && !gjeldendeFamiliehendelse.brukAntallBarnFraTps
-    && gjeldendeFamiliehendelse.avklartBarn
-    && gjeldendeFamiliehendelse.avklartBarn.length > 0
-    ? gjeldendeFamiliehendelse.avklartBarn.filter((barn) => barn.dodsdato) : barnFraTps.filter((barn) => barn.dodsdato);
-
   const customTimesBuilder = {
     soknad: soknadDate,
-    fodsel: fodselsdato(soknadsType, omsorgsOvertagelseDato, endredFodselsDato, familiehendelseDate),
+    fodsel: fødselsdato,
     revurdering: isRevurdering ? endringsdato : '1950-01-01',
     dodSoker: person?.bruker?.dødsdato ? person.bruker.dødsdato : '1950-01-01',
   };
@@ -478,18 +459,17 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
       arbeidsgiverOpplysningerPerId,
     } = this.props;
     const { selectedItem, stonadskonto, isButtonDisabled } = this.state;
-    const customTimes = getCustomTimes(
-      barnFraTps,
-      familiehendelse,
-      isRevurdering,
-      person,
-      soknadDate,
-      soknadsType,
-      endredFodselsDato,
-      endringsdato,
-      familiehendelseDate,
-      omsorgsovertakelseDato,
-    );
+
+    const gjeldendeFamiliehendelse = familiehendelse?.gjeldende;
+
+    const dodeBarn = gjeldendeFamiliehendelse
+      && !gjeldendeFamiliehendelse.brukAntallBarnFraTps
+      && gjeldendeFamiliehendelse.avklartBarn
+      && gjeldendeFamiliehendelse.avklartBarn.length > 0
+      ? gjeldendeFamiliehendelse.avklartBarn.filter((barn) => barn.dodsdato) : barnFraTps.filter((barn) => barn.dodsdato);
+
+    const fødselsdato = getFodselsdato(soknadsType, omsorgsovertakelseDato, endredFodselsDato, familiehendelseDate);
+    const customTimes = getCustomTimes(dodeBarn, isRevurdering, person, soknadDate, fødselsdato, endringsdato);
     return (
       <div>
         <Row>
