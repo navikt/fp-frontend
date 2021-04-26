@@ -18,7 +18,6 @@ import {
   InntektsgrunnlagMåned,
 } from '@fpsak-frontend/types';
 import inntektAktivitetType from '@fpsak-frontend/kodeverk/src/inntektAktivitetType';
-import LinkTilEksterntSystem from '../redesign/LinkTilEksterntSystem';
 import styles from './sammenligningsgrunnlagAOrdningen.less';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import Lesmerpanel from '../redesign/LesmerPanel';
@@ -221,16 +220,13 @@ const lagRader = (andeler: InntektsgrunnlagMåned[], relevanteStatuser: Inntekts
   return rows;
 };
 
-const lagOverskrift = (userIdent?: string): ReactElement => (
+const lagOverskrift = (): ReactElement => (
   <>
     <FlexRow key="SamenenligningsGrunnlagOverskrift">
       <FlexColumn>
         <Element className={beregningStyles.avsnittOverskrift}>
           <FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Tittel" />
         </Element>
-      </FlexColumn>
-      <FlexColumn>
-        <LinkTilEksterntSystem linkText="AI" userIdent={userIdent} type="AI" />
       </FlexColumn>
     </FlexRow>
     <VerticalSpacer eightPx />
@@ -268,14 +264,12 @@ export const SammenligningsgrunnlagAOrdningenImpl: FunctionComponent<OwnProps & 
     harArbeidsinntekt: useMemo(() => finnesInntektAvType(måneder, inntektAktivitetType.ARBEID), [måneder]),
     harYtelseinntekt: useMemo(() => finnesInntektAvType(måneder, inntektAktivitetType.YTELSE), [måneder]),
   } as Inntektstyper;
-
-  const userIdent = null; // TODO denne må hentes fra brukerID enten fra brukerObjectet eller på beregningsgrunnlag må avklares
   return (
     <>
       <AvsnittSkiller spaceAbove spaceUnder />
       <Lesmerpanel
         className={styles.lesMer}
-        intro={lagOverskrift(userIdent)}
+        intro={lagOverskrift()}
         lukkTekst={intl.formatMessage({ id: 'Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.SkjulMaaneder' })}
         apneTekst={intl.formatMessage({ id: 'Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.VisMaaneder' })}
         defaultApen

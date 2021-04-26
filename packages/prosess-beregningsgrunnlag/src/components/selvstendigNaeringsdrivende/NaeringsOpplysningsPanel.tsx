@@ -15,7 +15,6 @@ import { ArbeidsgiverOpplysningerPerId, BeregningsgrunnlagAndel, Næring } from 
 import Lesmerpanel from '../redesign/LesmerPanel';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import styles from './naeringsOpplysningsPanel.less';
-import LinkTilEksterntSystem from '../redesign/LinkTilEksterntSystem';
 
 const finnvirksomhetsTypeKode = (næring: Næring): string => {
   const kode = næring?.virksomhetType?.kode;
@@ -97,7 +96,6 @@ export const NaeringsopplysningsPanel: FunctionComponent<OwnProps & WrappedCompo
   intl,
 }) => {
   const snAndel = alleAndelerIForstePeriode.find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
-  const userIdent = null; // TODO denne må hentes fra brukerID enten fra brukerObjectet eller på beregningsgrunnlag må avklares
   if (!snAndel.næringer) {
     return null;
   }
@@ -110,11 +108,6 @@ export const NaeringsopplysningsPanel: FunctionComponent<OwnProps & WrappedCompo
           <Element className={beregningStyles.avsnittOverskrift}>
             <FormattedMessage id="Beregningsgrunnlag.NaeringsOpplysningsPanel.Overskrift" />
           </Element>
-        </FlexColumn>
-        <FlexColumn>
-          {userIdent && (
-            <LinkTilEksterntSystem linkText="SØ" userIdent={userIdent} type="SØ" />
-          )}
         </FlexColumn>
       </FlexRow>
       <VerticalSpacer eightPx />

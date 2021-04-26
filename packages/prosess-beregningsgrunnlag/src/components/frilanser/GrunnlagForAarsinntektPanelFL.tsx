@@ -7,7 +7,6 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { dateFormat, formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
-import LinkTilEksterntSystem from '../redesign/LinkTilEksterntSystem';
 
 type OwnProps = {
     alleAndeler: BeregningsgrunnlagAndel[];
@@ -24,7 +23,6 @@ const GrunnlagForAarsinntektPanelFL: FunctionComponent<OwnProps> = ({ alleAndele
   const relevanteAndeler = alleAndeler.filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.FRILANSER);
   const beregnetAarsinntekt = relevanteAndeler[0].beregnetPrAar;
   const startDato = relevanteAndeler[0].arbeidsforhold.startdato;
-  const userIdent = null; // TODO denne må hentes fra brukerID enten fra brukerObjectet eller på beregningsgrunnlag må avklares
   return (
     <>
       <>
@@ -72,11 +70,6 @@ const GrunnlagForAarsinntektPanelFL: FunctionComponent<OwnProps> = ({ alleAndele
         </Column>
         <Column xs="2" className={beregningStyles.colAarText}>
           <Element>{formatCurrencyNoKr(beregnetAarsinntekt)}</Element>
-        </Column>
-        <Column xs="1" className={beregningStyles.colLink}>
-          {userIdent && (
-            <LinkTilEksterntSystem linkText="AI" userIdent={userIdent} type="AI" />
-          )}
         </Column>
       </Row>
     </>

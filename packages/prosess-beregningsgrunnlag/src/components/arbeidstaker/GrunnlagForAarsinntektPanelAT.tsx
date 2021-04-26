@@ -23,7 +23,6 @@ import {
 import createVisningsnavnForAktivitet from '../../util/visningsnavnHelper';
 import NaturalytelsePanel from './NaturalytelsePanel';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
-import LinkTilEksterntSystem from '../redesign/LinkTilEksterntSystem';
 import { ArbeidstakerInntektValues } from '../../types/ATFLAksjonspunktTsType';
 
 export const andelErIkkeTilkommetEllerLagtTilAvSBH = (andel: BeregningsgrunnlagAndel): boolean => {
@@ -85,7 +84,6 @@ const lagVisningForAndel = (andel: BeregningsgrunnlagAndel,
 
 const createArbeidsIntektRows = (relevanteAndeler: BeregningsgrunnlagAndel[],
   getKodeverknavn: (kodeverk: Kodeverk) => string,
-  userIdent: string | undefined,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement[] => {
   const beregnetAarsinntekt = relevanteAndeler.reduce((acc, andel) => acc + andel.beregnetPrAar, 0);
   const beregnetMaanedsinntekt = beregnetAarsinntekt ? beregnetAarsinntekt / 12 : 0;
@@ -110,11 +108,6 @@ const createArbeidsIntektRows = (relevanteAndeler: BeregningsgrunnlagAndel[],
           <Normaltekst key={`ColBrgAarTxt${andel.arbeidsforhold.arbeidsgiverIdent}`} className={!harFlereArbeidsforhold ? beregningStyles.semiBoldText : ''}>
             {formatCurrencyNoKr(andel.beregnetPrAar)}
           </Normaltekst>
-        </Column>
-        <Column xs="1" key={`ColLink${andel.arbeidsforhold.arbeidsgiverIdent}`} className={beregningStyles.colLink}>
-          {userIdent && (
-          <LinkTilEksterntSystem linkText="IM" userIdent={userIdent} type="IM" />
-          )}
         </Column>
       </Row>
       <FlexRow key={`indexD${andel.arbeidsforhold.arbeidsgiverIdent}`}>
@@ -208,7 +201,6 @@ export const GrunnlagForAarsinntektPanelATImpl: FunctionComponent<OwnProps & Map
 }) => {
   const relevanteAndeler = finnAndelerSomSkalVises(alleAndelerIFørstePeriode);
   if (!relevanteAndeler || relevanteAndeler.length === 0) return null;
-  const userIdent = null; // TODO denne må hentes fra brukerID enten fra brukerObjectet eller på beregningsgrunnlag må avklares
   return (
     <>
       <AvsnittSkiller spaceAbove spaceUnder />
@@ -217,11 +209,6 @@ export const GrunnlagForAarsinntektPanelATImpl: FunctionComponent<OwnProps & Map
           <Element className={beregningStyles.avsnittOverskrift}>
             <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.Arbeidsinntekt" />
           </Element>
-        </FlexColumn>
-        <FlexColumn>
-          {userIdent && (
-            <LinkTilEksterntSystem linkText="Aa" userIdent={userIdent} type="Aa" />
-          )}
         </FlexColumn>
       </FlexRow>
       <VerticalSpacer eightPx />
@@ -239,7 +226,7 @@ export const GrunnlagForAarsinntektPanelATImpl: FunctionComponent<OwnProps & Map
         </Column>
         <Column className={beregningStyles.colLink} xs="1" />
       </Row>
-      {createArbeidsIntektRows(relevanteAndeler, getKodeverknavn, userIdent, arbeidsgiverOpplysningerPerId)}
+      {createArbeidsIntektRows(relevanteAndeler, getKodeverknavn, arbeidsgiverOpplysningerPerId)}
       <NaturalytelsePanel
         allePerioder={allePerioder}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
