@@ -199,33 +199,6 @@ const getOpphorsdato = (
     ? behandlingsresultat.skjæringstidspunkt.dato : '';
 };
 
-const finnVedtakstatusTekst = (
-  intl: IntlShape,
-  ytelseTypeKode: string,
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
-  tilbakekrevingtekst: string,
-  behandlingsresultat?: Behandling['behandlingsresultat'],
-  resultatstruktur?: BeregningsresultatFp | BeregningsresultatEs,
-  resultatstrukturOriginalBehandling?: BeregningsresultatFp | BeregningsresultatEs,
-  medlemskapFom?: string,
-): string => {
-  const konsekvenserForYtelsen = behandlingsresultat !== undefined ? behandlingsresultat.konsekvenserForYtelsen : undefined;
-  if (isInnvilget(behandlingsresultat.type.kode)) {
-    return finnInvilgetRevurderingTekst(intl, ytelseTypeKode, getKodeverknavn, tilbakekrevingtekst,
-      konsekvenserForYtelsen, resultatstruktur, resultatstrukturOriginalBehandling);
-  }
-  if (isAvslag(behandlingsresultat.type.kode)) {
-    return intl.formatMessage({ id: resultText(false, resultatstruktur, resultatstrukturOriginalBehandling) });
-  }
-  if (isOpphor(behandlingsresultat.type.kode)) {
-    return intl.formatMessage({
-      id: ytelseTypeKode === fagsakYtelseType.SVANGERSKAPSPENGER
-        ? 'VedtakForm.RevurderingSVP.SvangerskapspengerOpphoerer' : 'VedtakForm.RevurderingFP.ForeldrepengerOpphoerer',
-    }, { dato: moment(getOpphorsdato(resultatstruktur, medlemskapFom, behandlingsresultat)).format(DDMMYYYY_DATE_FORMAT) });
-  }
-  return '';
-};
-
 interface FormValues {
   aksjonspunktKoder?: string[];
   begrunnelse?: string;
@@ -293,10 +266,21 @@ export const VedtakRevurderingForm: FunctionComponent<PureOwnProps & MappedOwnPr
   const tilbakekrevingtekst = useMemo(() => getTilbakekrevingText(alleKodeverk, simuleringResultat, tilbakekrevingvalg), [
     simuleringResultat, tilbakekrevingvalg]);
 
-  // TODO (TOR) Kan ein forenkle dette? Frykteleg mykje kode for utleding av ein enkel tekst
-  const vedtakstatusTekst = useMemo(() => finnVedtakstatusTekst(intl, ytelseTypeKode, getKodeverknavnFn(alleKodeverk, kodeverkTyper),
-    tilbakekrevingtekst, behandlingsresultat, resultatstruktur, resultatstrukturOriginalBehandling, medlemskapFom), [
-    behandlingsresultat, tilbakekrevingtekst, resultatstruktur, medlemskapFom]);
+  let vedtakstatusTekst = '';
+  const konsekvenserForYtelsen = behandlingsresultat !== undefined ? behandlingsresultat.konsekvenserForYtelsen : undefined;
+  if (isInnvilget(behandlingsresultat.type.kode)) {
+    vedtakstatusTekst = finnInvilgetRevurderingTekst(intl, ytelseTypeKode, getKodeverknavnFn(alleKodeverk, kodeverkTyper), tilbakekrevingtekst,
+      konsekvenserForYtelsen, resultatstruktur, resultatstrukturOriginalBehandling);
+  }
+  if (isAvslag(behandlingsresultat.type.kode)) {
+    vedtakstatusTekst = intl.formatMessage({ id: resultText(false, resultatstruktur, resultatstrukturOriginalBehandling) });
+  }
+  if (isOpphor(behandlingsresultat.type.kode)) {
+    vedtakstatusTekst = intl.formatMessage({
+      id: ytelseTypeKode === fagsakYtelseType.SVANGERSKAPSPENGER
+        ? 'VedtakForm.RevurderingSVP.SvangerskapspengerOpphoerer' : 'VedtakForm.RevurderingFP.ForeldrepengerOpphoerer',
+    }, { dato: moment(getOpphorsdato(resultatstruktur, medlemskapFom, behandlingsresultat)).format(DDMMYYYY_DATE_FORMAT) });
+  }
 
   const previewOverstyrtBrev = getPreviewManueltBrevCallback(formProps, begrunnelse, brødtekst, overskrift, true, previewCallback);
   const previewDefaultBrev = getPreviewManueltBrevCallback(formProps, begrunnelse, brødtekst, overskrift, false, previewCallback);
