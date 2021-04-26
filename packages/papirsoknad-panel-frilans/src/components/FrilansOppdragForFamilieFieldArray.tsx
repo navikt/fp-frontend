@@ -94,14 +94,18 @@ export const FrilansOppdragForFamilieFieldArray: FunctionComponent<OwnProps> & S
   </PeriodFieldArray>
 );
 
+const sortFomDates = (perioder: { periodeFom: string; periodeTom?: string; }[]) => perioder
+  .map((p) => p.periodeFom)
+  .filter((p) => p && p !== '')
+  .sort((periodeFom1, periodeFom2) => moment(periodeFom1, ISO_DATE_FORMAT).diff(moment(periodeFom2, ISO_DATE_FORMAT)));
+
 FrilansOppdragForFamilieFieldArray.validate = (values: FormValues): any => {
   if (!values) {
     return null;
   }
   const { oppdragPerioder = [], perioder = [] } = values;
 
-  const sortedFomDates = perioder.map((p) => p.periodeFom).filter((p) => p && p !== '')
-    .sort((periodeFom1, periodeFom2) => moment(periodeFom1, ISO_DATE_FORMAT).diff(moment(periodeFom2, ISO_DATE_FORMAT)));
+  const sortedFomDates = sortFomDates(perioder);
 
   const arrayErrors = oppdragPerioder.map(({
     fomDato,

@@ -31,7 +31,7 @@ export const renderPeriode = (
   vilkarForSykdomExists: boolean,
   getKodeverknavn: (kodeverk: Kodeverk) => string,
   sisteUttakdatoFørsteSeksUker: moment.Moment,
-) => {
+) => { // NOSONAR Det er planlagt å laga nye uttakskomponentar
   const utsettelseSwitch = utsettelseArsak ? utsettelseArsak.kode : utsettelseArsakCodes.UDEFINERT;
   const overforingSwitch = overforingArsak ? overforingArsak.kode : overforingArsakCodes.UDEFINERT;
   const farHarSøktFørsteSeksUkerOgPeriodeFomErInnenfor = farSøkerFør6Uker && moment(fraDato).isBefore(sisteUttakdatoFørsteSeksUker);

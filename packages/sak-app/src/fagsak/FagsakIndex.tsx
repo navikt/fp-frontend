@@ -2,6 +2,7 @@ import React, {
   FunctionComponent, useState, useCallback,
 } from 'react';
 import { Route, Redirect, useLocation } from 'react-router-dom';
+import { Location } from 'history';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import VisittkortSakIndex from '@fpsak-frontend/sak-visittkort';
@@ -31,6 +32,12 @@ const erTilbakekreving = (behandlingType?: Kodeverk): boolean => behandlingType 
   || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType.kode);
 
 const henterData = (state) => state === RestApiState.NOT_STARTED || state === RestApiState.LOADING;
+
+const finnSkalIkkeHenteData = (
+  location: Location,
+  selectedSaksnummer?: string,
+  behandlingId?: string,
+) => !selectedSaksnummer || erUrlUnderBehandling(location) || (erBehandlingValgt(location) && !behandlingId);
 
 /**
  * FagsakIndex
@@ -82,7 +89,7 @@ const FagsakIndex: FunctionComponent = () => {
   );
 
   const location = useLocation();
-  const skalIkkeHenteData = !selectedSaksnummer || erUrlUnderBehandling(location) || (erBehandlingValgt(location) && !behandlingId);
+  const skalIkkeHenteData = finnSkalIkkeHenteData(location, selectedSaksnummer, behandlingId);
 
   const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
 

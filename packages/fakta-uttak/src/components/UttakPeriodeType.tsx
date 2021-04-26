@@ -60,6 +60,8 @@ const getUttakPeriode = (getKodeverknavn: (kodeverk: Kodeverk) => string, uttakP
   return getKodeverknavn(uttakPeriodeType);
 };
 
+const finnesArbeidstidsprosent = (arbeidstidprosent?: number) => arbeidstidprosent === 0 || arbeidstidprosent;
+
 const harArbeidsgiverOpplysninger = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   arbeidsgiverReferanse?: string,
@@ -170,7 +172,7 @@ export const UttakPeriodeType: FunctionComponent<OwnProps & WrappedComponentProp
           <Undertekst><FormattedMessage id="UttakInfoPanel.Flerbarnsdager" /></Undertekst>
         </div>
       )}
-      {(arbeidstidprosent === 0 || arbeidstidprosent) && (
+      {finnesArbeidstidsprosent(arbeidstidprosent) && (
         <div className={styles.textWrapper}>
           <Undertekst><FormattedMessage id="UttakInfoPanel.AndelIArbeid" /></Undertekst>
           <Normaltekst>{formatProsent(arbeidstidprosent)}</Normaltekst>
