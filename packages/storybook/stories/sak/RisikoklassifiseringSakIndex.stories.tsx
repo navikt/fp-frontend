@@ -67,10 +67,10 @@ export const visPanelForHøyRisikoklassifisering = () => (
         kodeverk: '',
       },
       medlFaresignaler: {
-        faresignaler: ['Søker bor hos foreldre'],
+        faresignaler: ['Faresignal 1'],
       },
       iayFaresignaler: {
-        faresignaler: ['Søkers lønn har runde tall', 'Det er nær relasjon mellom søker og sentral rolle hos Statoil', 'Statoil er nyoppstartet'],
+        faresignaler: ['Faresignal 2', 'Faresignal 3', 'Faresignal 4'],
       },
     }}
     readOnly={boolean('readOnly', false)}
