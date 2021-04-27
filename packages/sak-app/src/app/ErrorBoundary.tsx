@@ -33,6 +33,7 @@ export class ErrorBoundary extends Component<OwnProps, State> {
 
     withScope((scope) => {
       Object.keys(info).forEach((key) => {
+        // @ts-ignore Fiks
         scope.setExtra(key, info[key]);
         captureException(error);
       });

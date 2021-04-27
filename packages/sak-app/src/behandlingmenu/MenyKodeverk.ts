@@ -4,9 +4,9 @@ import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 class MenyKodeverk {
   $$behandlingType: Kodeverk;
 
-  $$fpSakKodeverk: {[key: string]: KodeverkMedNavn[]};
+  $$fpSakKodeverk: {[key: string]: KodeverkMedNavn[]} = {};
 
-  $$fpTilbakeKodeverk: {[key: string]: KodeverkMedNavn[]};
+  $$fpTilbakeKodeverk: {[key: string]: KodeverkMedNavn[]} = {};
 
   constructor(behandlingType: Kodeverk) {
     this.$$behandlingType = behandlingType;
@@ -34,9 +34,13 @@ class MenyKodeverk {
   }
 
   getKodeverkForBehandlingstyper(behandlingTypeKoder: string[], kodeverkType: string): KodeverkMedNavn[] {
-    return behandlingTypeKoder.reduce((acc, btk) => {
+    return behandlingTypeKoder.reduce<KodeverkMedNavn[]>((acc, btk) => {
       const alleKodeverkForKodeverkType = this.getKodeverkForBehandlingstype(btk, kodeverkType);
-      return alleKodeverkForKodeverkType ? acc.concat([alleKodeverkForKodeverkType.find((k) => k.kode === btk)]) : acc;
+      if (alleKodeverkForKodeverkType) {
+        const kodeverk = alleKodeverkForKodeverkType.find((k) => k.kode === btk);
+        return kodeverk ? acc.concat([kodeverk]) : acc;
+      }
+      return acc;
     }, []);
   }
 }

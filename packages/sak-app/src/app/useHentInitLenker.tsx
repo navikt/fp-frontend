@@ -12,7 +12,7 @@ const useHentInitLenker = (): boolean[] => {
   const harHentetFerdigInitLenker = initFetchStateFpSak === RestApiState.SUCCESS
     && (initFetchStateFpTilbake === RestApiState.SUCCESS || initFetchStateFpTilbake === RestApiState.ERROR);
 
-  if (harHentetFerdigInitLenker) {
+  if (harHentetFerdigInitLenker && initFetchLinksFpSak) {
     if (initFetchLinksFpTilbake) {
       requestApi.setLinks(initFetchLinksFpSak.links.concat(initFetchLinksFpTilbake.links), LinkCategory.INIT_DATA);
       requestApi.setLinks(initFetchLinksFpSak.sakLinks.concat(initFetchLinksFpTilbake.sakLinks), LinkCategory.FAGSAK);

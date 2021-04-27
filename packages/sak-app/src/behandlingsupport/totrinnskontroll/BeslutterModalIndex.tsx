@@ -13,7 +13,7 @@ interface OwnProps {
   behandling: BehandlingAppKontekst;
   pushLocation: (location: string) => void;
   allAksjonspunktApproved: boolean,
-  erKlageWithKA: boolean,
+  erKlageWithKA?: boolean,
 }
 
 const BeslutterModalIndex: FunctionComponent<OwnProps> = ({

@@ -21,7 +21,7 @@ import Dekorator from './components/Dekorator';
 
 import '@fpsak-frontend/assets/styles/global.less';
 
-const EMPTY_ARRAY = [];
+const EMPTY_ARRAY = [] as any[];
 
 interface OwnProps {
   location: Location;
@@ -69,7 +69,7 @@ const AppIndex: FunctionComponent<OwnProps> = ({
     setHeaderHeight(newHeaderHeight);
   }, []);
 
-  const addErrorMessageAndSetAsCrashed = (error) => {
+  const addErrorMessageAndSetAsCrashed = (error: string) => {
     setCrashMessage(error);
   };
 

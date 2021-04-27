@@ -4,7 +4,7 @@ import React, {
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import FodselOgTilretteleggingFaktaIndex from '@fpsak-frontend/fakta-fodsel-og-tilrettelegging';
-import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
+import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import {
   AksessRettigheter, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FodselOgTilrettelegging, InntektArbeidYtelse,
 } from '@fpsak-frontend/types';
@@ -51,7 +51,7 @@ const FodseltilretteleggingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPan
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     overstyringApKoder={OVERSTYRING_AP_CODES}
-    faktaPanelKode={faktaPanelCodes.FODSELTILRETTELEGGING}
+    faktaPanelKode={FaktaPanelCode.FODSELTILRETTELEGGING}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'FodselOgTilretteleggingInfoPanel.FaktaFodselOgTilrettelegging' })}
     skalPanelVisesIMeny={(initData) => !!initData?.aksjonspunkter.some((ap) => AKSJONSPUNKT_KODER.some((kode) => kode === ap.definisjon.kode))}
     renderPanel={(data) => (

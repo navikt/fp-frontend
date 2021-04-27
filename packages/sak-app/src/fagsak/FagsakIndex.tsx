@@ -28,10 +28,10 @@ const finnLenkeTilAnnenPart = (annenPartBehandling: AnnenPartBehandling): string
   annenPartBehandling.saksnr.verdi, annenPartBehandling.behandlingId,
 );
 
-const erTilbakekreving = (behandlingType?: Kodeverk): boolean => behandlingType && (BehandlingType.TILBAKEKREVING === behandlingType.kode
-  || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType.kode);
+const erTilbakekreving = (behandlingType?: Kodeverk): boolean => !!behandlingType
+  && (BehandlingType.TILBAKEKREVING === behandlingType.kode || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType.kode);
 
-const henterData = (state) => state === RestApiState.NOT_STARTED || state === RestApiState.LOADING;
+const henterData = (state: RestApiState): boolean => state === RestApiState.NOT_STARTED || state === RestApiState.LOADING;
 
 const finnSkalIkkeHenteData = (
   location: Location,
@@ -80,12 +80,12 @@ const FagsakIndex: FunctionComponent = () => {
     keepData: true,
   });
 
-  const [fagsakRettigheter, harFerdighentetfagsakRettigheter] = useHentFagsakRettigheter(
+  const [harFerdighentetfagsakRettigheter, fagsakRettigheter] = useHentFagsakRettigheter(
     selectedSaksnummer, behandlingId, behandlingVersjon,
   );
 
   const [alleBehandlinger, harFerdighentetAlleBehandlinger] = useHentAlleBehandlinger(
-    selectedSaksnummer, behandlingId, behandlingVersjon, behandlingerTeller,
+    selectedSaksnummer, behandlingerTeller, behandlingId, behandlingVersjon,
   );
 
   const location = useLocation();
@@ -105,7 +105,7 @@ const FagsakIndex: FunctionComponent = () => {
     }
     return <Redirect to={pathToMissingPage()} />;
   }
-  if (henterData(fagsakPersonerState) || !harFerdighentetfagsakRettigheter) {
+  if (henterData(fagsakPersonerState) || !harFerdighentetfagsakRettigheter || !fagsakRettigheter) {
     return <LoadingPanel />;
   }
 
@@ -158,7 +158,7 @@ const FagsakIndex: FunctionComponent = () => {
           />
         )}
         visittkortContent={() => {
-          if (skalIkkeHenteData) {
+          if (skalIkkeHenteData || !fagsakPersoner) {
             return null;
           }
 

@@ -4,7 +4,7 @@ import React, {
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import FodselFaktaIndex from '@fpsak-frontend/fakta-fodsel';
-import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
+import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import { fodselsvilkarene } from '@fpsak-frontend/kodeverk/src/vilkarType';
 import {
   Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad, Vilkar,
@@ -52,7 +52,7 @@ const FodselvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (pr
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    faktaPanelKode={faktaPanelCodes.FODSELSVILKARET}
+    faktaPanelKode={FaktaPanelCode.FODSELSVILKARET}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'FodselInfoPanel.Fodsel' })}
     skalPanelVisesIMeny={(initData) => initData && initData.vilkar.some((v) => fodselsvilkarene.includes(v.vilkarType.kode))}
     renderPanel={(data) => <FodselFaktaIndex {...data} />}

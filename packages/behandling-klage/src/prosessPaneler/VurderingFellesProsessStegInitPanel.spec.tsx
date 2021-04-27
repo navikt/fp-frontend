@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import KlagevurderingProsessIndex from '@fpsak-frontend/prosess-klagevurdering';
 import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
 import { Aksjonspunkt, Fagsak, StandardProsessPanelProps } from '@fpsak-frontend/types';
@@ -51,7 +52,7 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       fagsak={fagsak}
       opneSokeside={() => {}}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
-      prosessPanelKode="test"
+      prosessPanelKode={ProsessStegCode.AVREGNING}
       prosessPanelMenyTekst="Dette er en test"
     />);
 
@@ -74,7 +75,7 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       fagsak={fagsak}
       opneSokeside={() => {}}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
-      prosessPanelKode="test"
+      prosessPanelKode={ProsessStegCode.AVREGNING}
       prosessPanelMenyTekst="Dette er en test"
     />);
 
@@ -106,7 +107,7 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       fagsak={fagsak}
       opneSokeside={() => {}}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
-      prosessPanelKode="test"
+      prosessPanelKode={ProsessStegCode.AVREGNING}
       prosessPanelMenyTekst="Dette er en test"
     />);
 
@@ -147,7 +148,7 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       fagsak={fagsak}
       opneSokeside={() => {}}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
-      prosessPanelKode="test"
+      prosessPanelKode={ProsessStegCode.AVREGNING}
       prosessPanelMenyTekst="Dette er en test"
     />);
 

@@ -8,6 +8,7 @@ import {
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 
 import ProsessPanelWrapper from './ProsessPanelWrapper';
 import ProsessDefaultInitPanel from './ProsessDefaultInitPanel';
@@ -67,7 +68,7 @@ describe('<ProsessDefaultInitPanel>', () => {
       skalPanelVisesIMeny={() => true}
       // @ts-ignore
       renderPanel={(props) => <div {...props} />}
-      prosessPanelKode="test"
+      prosessPanelKode={ProsessStegCode.AVREGNING}
       prosessPanelMenyTekst="Dette er en tekst"
     />);
 

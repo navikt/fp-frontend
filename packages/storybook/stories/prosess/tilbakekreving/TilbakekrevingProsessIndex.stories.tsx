@@ -151,7 +151,7 @@ export default {
   decorators: [withKnobs],
 };
 
-const beregnBelop = (params) => {
+const beregnBelop = (params: { perioder: any[]}) => {
   const { perioder } = params;
   return Promise.resolve({
     perioder,

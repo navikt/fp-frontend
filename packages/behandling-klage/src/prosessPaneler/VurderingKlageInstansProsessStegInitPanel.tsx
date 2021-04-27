@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { prosessStegCodes } from '@fpsak-frontend/konstanter';
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { Fagsak } from '@fpsak-frontend/types';
 import { ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@fpsak-frontend/utils';
@@ -27,7 +27,7 @@ const VurderingKlageInstansProsessStegInitPanel: FunctionComponent<OwnProps & Pr
     {...props}
     fagsak={fagsak}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    prosessPanelKode={prosessStegCodes.KLAGE_NAV_KLAGEINSTANS}
+    prosessPanelKode={ProsessStegCode.KLAGE_NAV_KLAGEINSTANS}
     prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.CheckKlageNK' })}
   />
 );

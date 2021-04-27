@@ -4,7 +4,7 @@ import React, {
 
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import FeilutbetalingFaktaIndex from '@fpsak-frontend/fakta-feilutbetaling';
-import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
+import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import { createIntl } from '@fpsak-frontend/utils';
 import {
   Aksjonspunkt, Fagsak, FeilutbetalingAarsak, FeilutbetalingFakta, KodeverkMedNavn,
@@ -48,7 +48,7 @@ const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    faktaPanelKode={faktaPanelCodes.FEILUTBETALING}
+    faktaPanelKode={FaktaPanelCode.FEILUTBETALING}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'TilbakekrevingFakta.FaktaFeilutbetaling' })}
     skalPanelVisesIMeny={(initData) => !!initData?.feilutbetalingFakta}
     renderPanel={(data) => (

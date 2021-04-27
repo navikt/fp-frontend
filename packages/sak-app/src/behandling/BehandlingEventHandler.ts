@@ -12,21 +12,54 @@ class BehandlingEventHandler {
       this.handler = undefined;
     }
 
-    endreBehandlendeEnhet = (params) => this.handler.endreBehandlendeEnhet(params);
+    endreBehandlendeEnhet = (params: {
+      behandlingVersjon: number;
+      behandlingId: number;
+      enhetNavn: string;
+      enhetId: string;
+      begrunnelse: string;
+    }) => (this.handler ? this.handler.endreBehandlendeEnhet(params) : Promise.reject());
 
-    settBehandlingPaVent = (params) => this.handler.settBehandlingPaVent(params);
+    settBehandlingPaVent = (params: {
+      behandlingVersjon: number;
+      behandlingId: number;
+      frist: string;
+      ventearsak: string;
+    }) => (this.handler ? this.handler.settBehandlingPaVent(params) : Promise.reject());
 
-    taBehandlingAvVent = (params) => this.handler.taBehandlingAvVent(params);
+    taBehandlingAvVent = (params: {
+      behandlingId: number;
+      behandlingVersjon: number;
+    }) => (this.handler ? this.handler.taBehandlingAvVent(params) : Promise.reject());
 
-    henleggBehandling = (params) => this.handler.henleggBehandling(params);
+    henleggBehandling = (params: {
+      behandlingVersjon: number;
+      behandlingId: number;
+      årsakKode: string;
+      begrunnelse: string;
+    }) => (this.handler ? this.handler.henleggBehandling(params) : Promise.reject());
 
-    opneBehandlingForEndringer = (params) => this.handler.opneBehandlingForEndringer(params);
+    opneBehandlingForEndringer = (params: {
+      behandlingId: number;
+      behandlingVersjon: number;
+    }) => (this.handler ? this.handler.opneBehandlingForEndringer(params) : Promise.reject());
 
-    opprettVerge = (params) => this.handler.opprettVerge(params);
+    opprettVerge = (params: {
+      behandlingId: number;
+      behandlingVersjon: number;
+    }) => (this.handler ? this.handler.opprettVerge(params) : Promise.reject());
 
-    fjernVerge = (params) => this.handler.fjernVerge(params);
+    fjernVerge = (params: {
+      behandlingId: number;
+      behandlingVersjon: number;
+    }) => (this.handler ? this.handler.fjernVerge(params) : Promise.reject());
 
-    lagreRisikoklassifiseringAksjonspunkt = (params) => this.handler.lagreRisikoklassifiseringAksjonspunkt(params);
+    lagreRisikoklassifiseringAksjonspunkt = (params: {
+      saksnummer: string;
+      behandlingId: number;
+      behandlingVersjon: number;
+      bekreftedeAksjonspunktDtoer: any[];
+    }) => (this.handler ? this.handler.lagreRisikoklassifiseringAksjonspunkt(params) : Promise.reject());
 }
 
 export default new BehandlingEventHandler();

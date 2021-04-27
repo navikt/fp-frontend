@@ -5,7 +5,7 @@ import { parseQueryString } from '@fpsak-frontend/utils';
 
 const defaultConfig = {
   paramName: '',
-  parse: (a) => a,
+  parse: (a: any) => a,
   isQueryParam: false,
 };
 

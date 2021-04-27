@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 
 import YtelserFaktaIndex from '@fpsak-frontend/fakta-ytelser';
-import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
+import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import { InntektArbeidYtelse } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@fpsak-frontend/utils';
@@ -26,7 +26,7 @@ const YtelserFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) =>
     {...props}
     requestApi={requestEsApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
-    faktaPanelKode={faktaPanelCodes.YTELSER}
+    faktaPanelKode={FaktaPanelCode.YTELSER}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'YtelserFaktaIndex.Ytelser' })}
     skalPanelVisesIMeny={(initData) => !!initData?.inntektArbeidYtelse?.relatertTilgrensendeYtelserForSoker
       && initData.inntektArbeidYtelse.relatertTilgrensendeYtelserForSoker.length > 0}

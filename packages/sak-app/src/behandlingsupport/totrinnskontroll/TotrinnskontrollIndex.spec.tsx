@@ -34,7 +34,7 @@ describe('<TotrinnskontrollIndex>', () => {
     },
   };
 
-  const alleBehandlinger = [{
+  const valgtBehandling = {
     id: 1234,
     versjon: 123,
     type: {
@@ -49,7 +49,7 @@ describe('<TotrinnskontrollIndex>', () => {
     toTrinnsBehandling: true,
     ansvarligSaksbehandler: 'Espen Utvikler',
     behandlingÅrsaker: [],
-  }];
+  };
 
   const kodeverk = {
     [kodeverkTyper.SKJERMLENKE_TYPE]: [],
@@ -115,9 +115,7 @@ describe('<TotrinnskontrollIndex>', () => {
 
     const wrapper = shallow(<TotrinnskontrollIndex
       fagsak={fagsak as Fagsak}
-      alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      behandlingId={alleBehandlinger[0].id}
-      behandlingVersjon={alleBehandlinger[0].versjon}
+      valgtBehandling={valgtBehandling as BehandlingAppKontekst}
     />);
 
     const index = wrapper.find(TotrinnskontrollSakIndex);

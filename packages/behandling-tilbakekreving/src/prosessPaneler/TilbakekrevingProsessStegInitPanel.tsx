@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 
 import TilbakekrevingProsessIndex from '@fpsak-frontend/prosess-tilbakekreving';
-import { prosessStegCodes } from '@fpsak-frontend/konstanter';
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import {
   Aksjonspunkt, DetaljerteFeilutbetalingsperioder, FeilutbetalingPerioderWrapper, Kodeverk, VilkarsVurdertePerioderWrapper,
@@ -51,7 +51,7 @@ const TilbakekrevingProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
       initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
-      prosessPanelKode={prosessStegCodes.TILBAKEKREVING}
+      prosessPanelKode={ProsessStegCode.TILBAKEKREVING}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Tilbakekreving' })}
       skalPanelVisesIMeny={() => true}
       renderPanel={(data) => (

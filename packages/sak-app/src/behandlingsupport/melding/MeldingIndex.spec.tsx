@@ -28,14 +28,15 @@ describe('<MeldingIndex>', () => {
     saksnummer: '123456',
   };
 
-  const alleBehandlinger = [{
+  const valgtBehandling = {
     id: 1,
     uuid: '1212',
+    versjon: 123,
     type: {
       kode: BehandlingType.FORSTEGANGSSOKNAD,
       kodeverk: '',
     },
-  }];
+  };
 
   const kodeverk = {
     [kodeverkTyper.VENT_AARSAK]: [],
@@ -48,6 +49,7 @@ describe('<MeldingIndex>', () => {
   ];
 
   const assignMock = jest.fn();
+  // @ts-ignore
   delete window.location;
   // @ts-ignore Dette er kun for å unngå warnings med window.location.reload(). (Denne blir brukt som en temp-fiks, så dette skal derfor fjernes)
   window.location = { reload: assignMock };
@@ -64,9 +66,7 @@ describe('<MeldingIndex>', () => {
 
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
-      alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      behandlingId={1}
-      behandlingVersjon={123}
+      valgtBehandling={valgtBehandling as BehandlingAppKontekst}
     />);
 
     const index = wrapper.find(MeldingerSakIndex);
@@ -83,9 +83,7 @@ describe('<MeldingIndex>', () => {
 
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
-      alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      behandlingId={1}
-      behandlingVersjon={123}
+      valgtBehandling={valgtBehandling as BehandlingAppKontekst}
     />);
 
     const index = wrapper.find(MeldingerSakIndex);
@@ -106,9 +104,7 @@ describe('<MeldingIndex>', () => {
 
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
-      alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      behandlingId={1}
-      behandlingVersjon={123}
+      valgtBehandling={valgtBehandling as BehandlingAppKontekst}
     />);
 
     const message = {
@@ -143,9 +139,7 @@ describe('<MeldingIndex>', () => {
 
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
-      alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      behandlingId={1}
-      behandlingVersjon={123}
+      valgtBehandling={valgtBehandling as BehandlingAppKontekst}
     />);
 
     const message = {
@@ -179,9 +173,7 @@ describe('<MeldingIndex>', () => {
 
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
-      alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      behandlingId={1}
-      behandlingVersjon={123}
+      valgtBehandling={valgtBehandling as BehandlingAppKontekst}
     />);
 
     const message = {
@@ -222,9 +214,7 @@ describe('<MeldingIndex>', () => {
 
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
-      alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      behandlingId={1}
-      behandlingVersjon={123}
+      valgtBehandling={valgtBehandling as BehandlingAppKontekst}
     />);
 
     const message = {
@@ -265,9 +255,7 @@ describe('<MeldingIndex>', () => {
 
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
-      alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      behandlingId={1}
-      behandlingVersjon={123}
+      valgtBehandling={valgtBehandling as BehandlingAppKontekst}
     />);
 
     const message = {
@@ -313,9 +301,7 @@ describe('<MeldingIndex>', () => {
 
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
-      alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      behandlingId={1}
-      behandlingVersjon={123}
+      valgtBehandling={valgtBehandling as BehandlingAppKontekst}
     />);
 
     const message = {

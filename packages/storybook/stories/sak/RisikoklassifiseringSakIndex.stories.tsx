@@ -10,7 +10,7 @@ import kontrollresultatKode from '@fpsak-frontend/sak-risikoklassifisering/src/k
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
-const withWidthProvider = (story) => (
+const withWidthProvider = (story: any) => (
   <div style={{ width: '600px' }}>
     { story() }
   </div>

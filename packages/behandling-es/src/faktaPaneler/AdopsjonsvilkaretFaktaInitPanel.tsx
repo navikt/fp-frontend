@@ -4,7 +4,7 @@ import React, {
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AdopsjonFaktaIndex from '@fpsak-frontend/fakta-adopsjon';
-import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
+import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import { adopsjonsvilkarene } from '@fpsak-frontend/kodeverk/src/vilkarType';
 import {
   Aksjonspunkt, FamilieHendelseSamling, Soknad, Vilkar,
@@ -48,7 +48,7 @@ const AdopsjonsvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = 
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    faktaPanelKode={faktaPanelCodes.ADOPSJONSVILKARET}
+    faktaPanelKode={FaktaPanelCode.ADOPSJONSVILKARET}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'AdopsjonInfoPanel.Adopsjon' })}
     skalPanelVisesIMeny={(initData) => initData && initData.vilkar.some((v) => adopsjonsvilkarene.includes(v.vilkarType.kode))}
     renderPanel={(data) => (

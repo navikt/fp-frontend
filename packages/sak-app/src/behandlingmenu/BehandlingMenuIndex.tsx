@@ -45,7 +45,7 @@ const findNewBehandlingId = (alleBehandlinger: BehandlingAppKontekst[]): number 
   return alleBehandlinger[0].id;
 };
 
-const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKontekst[] = []): string => {
+const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKontekst[] = []): string | undefined => {
   const behandling = behandlinger.find((b) => b.gjeldendeVedtak && b.status.kode === BehandlingStatus.AVSLUTTET
     && (b.type.kode === BehandlingType.FORSTEGANGSSOKNAD || b.type.kode === BehandlingType.REVURDERING));
   return behandling ? behandling.uuid : undefined;
@@ -58,7 +58,7 @@ interface OwnProps {
   alleBehandlinger: BehandlingAppKontekst[];
   behandlingId?: number;
   behandlingVersjon?: number;
-  behandlingRettigheter: BehandlingRettigheter;
+  behandlingRettigheter?: BehandlingRettigheter;
   sakRettigheter: SakRettigheter;
   oppfriskBehandlinger: () => void;
 }
@@ -80,7 +80,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   const ref = useRef<number>();
   useEffect(() => {
     // Når antallet har endret seg er det laget en ny behandling og denne må da velges
-    if (ref.current > 0) {
+    if (ref.current && ref.current > 0) {
       const pathname = pathToBehandling(fagsak.saksnummer, findNewBehandlingId(alleBehandlinger));
       pushLocation(getLocationWithDefaultProsessStegAndFakta({ ...location, pathname }));
     }

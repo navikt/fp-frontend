@@ -5,6 +5,7 @@ import React, {
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import StandardFaktaPanelProps from '@fpsak-frontend/types/src/standardFaktaPanelPropsTsType';
 import { AbstractRequestApi, RestKey } from '@fpsak-frontend/rest-api';
+import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 
 import FaktaPanelInitProps from '../../types/faktaPanelInitProps';
 import useStandardFaktaPanelProps from '../../utils/fakta/useStandardFaktaPanelProps';
@@ -19,7 +20,7 @@ export type OwnProps<INIT_DATA, PANEL_DATA> = {
   overstyringApKoder?: string[];
   skalPanelVisesIMeny: (data: Partial<INIT_DATA>) => boolean;
   renderPanel: (data: INIT_DATA & PANEL_DATA & StandardFaktaPanelProps) => ReactElement;
-  faktaPanelKode: string;
+  faktaPanelKode: FaktaPanelCode;
   faktaPanelMenyTekst: string;
 }
 
