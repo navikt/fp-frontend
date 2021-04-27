@@ -51,6 +51,13 @@ const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKont
   return behandling ? behandling.uuid : undefined;
 };
 
+const skalLageVergeFn = (
+  vergeType: VergeBehandlingmenyValg,
+  vergeMenyvalg?: VergeBehandlingmenyValg,
+  behandlingId?: number,
+  behandlingVersjon?: number,
+): boolean => vergeMenyvalg === vergeType && !!behandlingId && !!behandlingVersjon;
+
 const EMPTY_ARRAY = [] as BehandlingAppKontekst[];
 
 interface OwnProps {
@@ -126,9 +133,9 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   const behandlingTypeKode = behandling ? behandling.type.kode : undefined;
 
   const vergeMenyvalg = behandlingRettigheter?.vergeBehandlingsmeny;
-  const fjernVergeFn = vergeMenyvalg === VergeBehandlingmenyValg.FJERN && behandlingId && behandlingVersjon
+  const fjernVergeFn = skalLageVergeFn(VergeBehandlingmenyValg.FJERN, vergeMenyvalg, behandlingId, behandlingVersjon)
     ? fjernVerge(location, pushLocation, fagsak.saksnummer, behandlingId, behandlingVersjon) : undefined;
-  const opprettVergeFn = vergeMenyvalg === VergeBehandlingmenyValg.OPPRETT && behandlingId && behandlingVersjon
+  const opprettVergeFn = skalLageVergeFn(VergeBehandlingmenyValg.OPPRETT, vergeMenyvalg, behandlingId, behandlingVersjon)
     ? opprettVerge(location, pushLocation, fagsak.saksnummer, behandlingId, behandlingVersjon) : undefined;
   return (
     <MenySakIndex
