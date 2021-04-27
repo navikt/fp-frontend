@@ -53,8 +53,8 @@ const getErrorMessage = (meta, intl, isBeregningFormDirty) => (meta.error && isD
 function skalViseSletteknapp(index, fields, readOnly) {
   return (fields.get(index).nyAndel || fields.get(index).lagtTilAvSaksbehandler) && !readOnly;
 }
-const onKeyDown = (fields, aktivitetStatuser, alleKodeverk) => ({ keyCode }) => {
-  if (keyCode === 13) {
+const onKeyDown = (fields, aktivitetStatuser, alleKodeverk) => ({ key }) => {
+  if (key === 'Enter') {
     fields.push(defaultBGFordeling(aktivitetStatuser, alleKodeverk));
   }
 };

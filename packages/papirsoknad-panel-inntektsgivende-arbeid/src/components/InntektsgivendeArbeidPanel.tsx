@@ -9,9 +9,6 @@ import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import RenderInntektsgivendeArbeidFieldArray from './RenderInntektsgivendeArbeidFieldArray';
 import RenderInntektsgivendeArbeidAmbassadeFieldArray, { FormValues as IAFormValues } from './RenderInntektsgivendeArbeidAmbassadeFieldArray';
 
-// TODO: (aa) Ambassadepersonell - den här hamnade på backburner men jobben var reden gjort - ta bort raden nedan og tillsvarande kode
-// för att få tilbake FE för ambassadpersonell
-
 const localFeature = false;
 
 const INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME = 'arbeidsforhold';

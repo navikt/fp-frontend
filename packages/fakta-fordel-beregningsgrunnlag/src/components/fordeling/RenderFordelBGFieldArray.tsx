@@ -34,8 +34,6 @@ import {
 import styles from './renderFordelBGFieldArray.less';
 import { createVisningsnavnForAktivitetFordeling } from '../util/visningsnavnHelper';
 
-const ENTER_KEY_CODE = 13;
-
 const defaultBGFordeling = (periodeUtenAarsak) => ({
   nyAndel: true,
   kilde: 'SAKSBEHANDLER_FORDELING',
@@ -143,8 +141,8 @@ const renderMessage = (intl, error) => (error[0] && error[0].id ? intl.formatMes
 const getErrorMessage = (meta, intl) => (meta.error
 && meta.submitFailed ? renderMessage(intl, meta.error) : null);
 
-const onKeyDown = (fields, periodeUtenAarsak) => ({ keyCode }) => {
-  if (keyCode === ENTER_KEY_CODE) {
+const onKeyDown = (fields, periodeUtenAarsak) => ({ key }) => {
+  if (key === 'Enter') {
     fields.push(defaultBGFordeling(periodeUtenAarsak));
   }
 };

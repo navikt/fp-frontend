@@ -6,9 +6,11 @@ import { FieldArrayFieldsProps, FieldArrayMetaProps, formValueSelector } from 'r
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Element } from 'nav-frontend-typografi';
 
-import { DatepickerField, SelectField, DecimalField } from '@fpsak-frontend/form';
 import {
-  FlexColumn, FlexContainer, FlexRow, PeriodFieldArray, VerticalSpacer,
+  DatepickerField, SelectField, DecimalField, PeriodFieldArray,
+} from '@fpsak-frontend/form';
+import {
+  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import {
   hasValidDecimal, maxValue, minValue, required, hasValidDate,
@@ -161,7 +163,7 @@ export const TilretteleggingFieldArray: FunctionComponent<PureOwnProps & MappedO
                         name={`${fieldId}.stillingsprosent`}
                         label={intl.formatMessage({ id: 'TilretteleggingFieldArray.Stillingsprosent' })}
                         validate={[required, minValue0, maxValue100, hasValidDecimal]}
-                        // @ts-ignore TODO Fiks denne!
+                        // @ts-ignore Fiks denne!
                         normalizeOnBlur={(value) => (new RegExp(/^-?\d+\.?\d*$/).test(value) ? parseFloat(value).toFixed(2) : value)}
                         alignRightCenterOnReadOnly={readOnly}
                         onChange={(_elmt, value) => {

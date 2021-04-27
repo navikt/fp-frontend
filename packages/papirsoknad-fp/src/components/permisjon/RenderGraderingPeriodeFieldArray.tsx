@@ -8,11 +8,11 @@ import { Column, Row } from 'nav-frontend-grid';
 import AlertStripe from 'nav-frontend-alertstriper';
 
 import {
-  FlexColumn, FlexContainer, FlexRow, PeriodFieldArray, VerticalSpacer,
+  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import { hasValidDecimal, maxValue, required } from '@fpsak-frontend/utils';
 import {
-  CheckboxField, DatepickerField, DecimalField, InputField, SelectField,
+  CheckboxField, DatepickerField, DecimalField, InputField, SelectField, PeriodFieldArray,
 } from '@fpsak-frontend/form';
 import arbeidskategori from '@fpsak-frontend/kodeverk/src/arbeidskategori';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';

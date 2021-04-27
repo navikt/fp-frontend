@@ -18,7 +18,6 @@ export { default as FloatRight } from './src/FloatRight';
 export { default as Image } from './src/Image';
 export { default as LoadingPanel } from './src/LoadingPanel';
 export { default as OkAvbrytModal } from './src/OkAvbrytModal';
-export { default as PeriodFieldArray } from './src/PeriodFieldArray';
 export { default as PeriodLabel } from './src/PeriodLabel';
 export { default as Periodpicker } from './src/periodpicker/Periodpicker';
 export { default as Table } from './src/table/Table';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import Image from './Image';
+import { Image } from '@fpsak-frontend/shared-components';
 import PeriodFieldArray from './PeriodFieldArray';
 import messages from '../i18n/nb_NO.json';
 

@@ -5,9 +5,9 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import { hasValidDate, required, dateBeforeOrEqualToToday } from '@fpsak-frontend/utils';
 import {
-  FlexColumn, FlexContainer, FlexRow, PeriodFieldArray,
+  FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
-import { CheckboxField, DatepickerField } from '@fpsak-frontend/form';
+import { CheckboxField, DatepickerField, PeriodFieldArray } from '@fpsak-frontend/form';
 import { FamilieHendelse } from '@fpsak-frontend/types';
 
 import styles from './avklartBarnFieldArray.less';

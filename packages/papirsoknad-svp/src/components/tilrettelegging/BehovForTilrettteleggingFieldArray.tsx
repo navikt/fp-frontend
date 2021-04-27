@@ -4,10 +4,10 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { required, maxValue } from '@fpsak-frontend/utils';
+import { FlexColumn, FlexContainer, FlexRow } from '@fpsak-frontend/shared-components';
 import {
-  FlexColumn, FlexContainer, FlexRow, PeriodFieldArray,
-} from '@fpsak-frontend/shared-components';
-import { DatepickerField, InputField, SelectField } from '@fpsak-frontend/form';
+  DatepickerField, InputField, SelectField, PeriodFieldArray,
+} from '@fpsak-frontend/form';
 import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
 
 import styles from './behovForTilrettteleggingFieldArray.less';

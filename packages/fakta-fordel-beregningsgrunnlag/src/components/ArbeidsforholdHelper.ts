@@ -68,9 +68,10 @@ const finnAndelerFraFordelingperioder = (fordelPerioder: FordelBeregningsgrunnla
 const finnAndelerFraBgperioder = (bgPerioder: BeregningsgrunnlagPeriodeProp[]): BeregningsgrunnlagAndel[] => (bgPerioder.length > 0
   ? bgPerioder.flatMap((p) => p.beregningsgrunnlagPrStatusOgAndel) : emptyList);
 
-// TODO Fjern export og rename fil
-export const getUniqueListOfArbeidsforholdFromPerioder = (fordelPerioder: FordelBeregningsgrunnlagPeriode[],
-  bgPerioder: BeregningsgrunnlagPeriodeProp[]): Arbeidsforhold[] => getUniqueListOfArbeidsforholdFromAndeler(
+const getUniqueListOfArbeidsforholdFromPerioder = (
+  fordelPerioder: FordelBeregningsgrunnlagPeriode[],
+  bgPerioder: BeregningsgrunnlagPeriodeProp[],
+): Arbeidsforhold[] => getUniqueListOfArbeidsforholdFromAndeler(
   finnAndelerFraFordelingperioder(fordelPerioder),
   finnAndelerFraBgperioder(bgPerioder),
 );

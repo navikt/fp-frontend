@@ -137,7 +137,6 @@ const parseFloatAndelSomTilbakekreves = (andelSomTilbakekreves: string, harGrunn
   return !harGrunnerTilReduksjon || Number.isNaN(parsedValue) ? {} : { andelTilbakekreves: parsedValue };
 };
 
-// TODO Fiks typen til aktsomhet
 const formatAktsomhetData = (aktsomhet: any, sarligGrunnTyper: KodeverkMedNavn[]) => {
   const sarligeGrunner = sarligGrunnTyper.reduce((acc: string[], type: KodeverkMedNavn) => (aktsomhet[type.kode] ? acc.concat(type.kode) : acc), []);
 

@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 
-import { PeriodpickerField } from '@fpsak-frontend/form';
-import { FlexColumn, FlexRow, PeriodFieldArray } from '@fpsak-frontend/shared-components';
+import { PeriodpickerField, PeriodFieldArray } from '@fpsak-frontend/form';
+import { FlexColumn, FlexRow } from '@fpsak-frontend/shared-components';
 import {
   dateRangesNotOverlapping, hasValidDate, required,
 } from '@fpsak-frontend/utils';

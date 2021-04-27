@@ -5,13 +5,9 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
 import { Dokument } from '@fpsak-frontend/types';
+import { hentDokumentLenke } from '@fpsak-frontend/konstanter';
 
 import styles from './documentListVedtakInnsyn.less';
-
-// TODO (TOR) Flytt url ut av komponent
-const DOCUMENT_SERVER_URL = '/fpsak/api/dokument/hent-dokument';
-const getLink = (document: Dokument, saksNr: string) => `${DOCUMENT_SERVER_URL}?saksnummer=${saksNr}&journalpostId=${document
-  .journalpostId}&dokumentId=${document.dokumentId}`;
 
 const headerTextCodes = [
   'DocumentListVedtakInnsyn.Dokument',
@@ -49,7 +45,14 @@ const DocumentListVedtakInnsyn: FunctionComponent<OwnProps> = ({
               return (
                 <TableRow key={dokId} id={dokId}>
                   <TableColumn className={styles.linkCol}>
-                    <a href={getLink(document, saksNr)} className="lenke lenke--frittstaende" target="_blank" rel="noopener noreferrer">{document.tittel}</a>
+                    <a
+                      href={hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId)}
+                      className="lenke lenke--frittstaende"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {document.tittel}
+                    </a>
                   </TableColumn>
                 </TableRow>
               );

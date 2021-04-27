@@ -3,8 +3,7 @@ import { FieldArray, FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-fo
 import classnames from 'classnames/bind';
 import { Column, Row } from 'nav-frontend-grid';
 
-import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
-import { DatepickerField, SelectField } from '@fpsak-frontend/form';
+import { DatepickerField, SelectField, PeriodFieldArray } from '@fpsak-frontend/form';
 import {
   hasValidPeriodIncludingOtherErrors, hasValidValue, isRequiredMessage, required, Options,
 } from '@fpsak-frontend/utils';

@@ -1,4 +1,4 @@
-// @TODO Hent tekstane fra kodeverk i db
+// kodeverk_i_frontend - Fiks når ein refaktorerar historikk
 const historikkResultatTypeCodes = {
   AVSLAG: {
     kode: 'AVSLAG',

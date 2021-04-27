@@ -25,7 +25,7 @@ const createNormalizeOnBlurField = (WrappedNavFieldComponent) => {
         // @ts-ignore Fiks
         <Comp
           {...props}
-          // @ts-ignore TODO Fiks
+          // @ts-ignore Fiks
           input={{
             ...input,
             onBlur: (event) => {
@@ -89,7 +89,7 @@ const DecimalField: FunctionComponent<BaseFieldProps & DecimalFieldProps> = ({
     <NormalizeOnBlurField
       name={name}
       validate={validate}
-      // @ts-ignore TODO Fiks
+      // @ts-ignore Fiks
       component={readOnly ? ReadOnlyField : renderNavInput}
       type={type}
       label={label}
