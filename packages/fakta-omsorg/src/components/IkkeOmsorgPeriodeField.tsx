@@ -3,8 +3,7 @@ import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl'
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 
-import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
-import { DatepickerField } from '@fpsak-frontend/form';
+import { DatepickerField, PeriodFieldArray } from '@fpsak-frontend/form';
 import {
   hasValidDate,
   required,

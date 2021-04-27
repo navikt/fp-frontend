@@ -57,8 +57,6 @@ interface MappedOwnProps {
   onSubmit: (values: FormValues) => any;
 }
 
-// TODO slå sammen ForeldreAnsvarPeriode, SykdomOgSkadePeriode og InnleggelsePeriode
-
 export const InnleggelsePeriode: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   fraDato,
   tilDato,

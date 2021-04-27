@@ -21,7 +21,6 @@ import {
 import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
 import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import ankeOmgjorArsak from '@fpsak-frontend/kodeverk/src/ankeOmgjorArsak';
 import {
   Aksjonspunkt, AnkeVurdering, Kodeverk, KodeverkMedNavn,
@@ -69,38 +68,17 @@ type FormValues = {
 const skalViseForhaandlenke = (avr: Kodeverk): boolean => avr?.kode === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE
   || avr?.kode === ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV || avr?.kode === ankeVurdering.ANKE_OMGJOER;
 
-// TODO (TOR) Dette skal ikkje hardkodast!!! Hent fra kodeverk
-const formatBehandlingType = (kode: string): string | null => {
-  switch (kode) {
-    case behandlingType.FORSTEGANGSSOKNAD: return 'Førstegangssøknad';
-    case behandlingType.KLAGE: return 'Klage';
-    case behandlingType.ANKE: return 'Anke';
-    case behandlingType.REVURDERING: return 'Revurdering';
-    case behandlingType.DOKUMENTINNSYN: return 'Dokumentinnsyn';
-    case behandlingType.TILBAKEKREVING: return 'Tilbakekreving';
-    default: return null;
-  }
-};
-
-// TODO (TOR) Dette skal ikkje hardkodast!!! Hent fra kodeverk
-const formatBehandlingStatus = (status: string): string | null => {
-  switch (status) {
-    case behandlingStatus.OPPRETTET: return 'Opprettet';
-    case behandlingStatus.BEHANDLING_UTREDES: return 'Behandling utredes';
-    case behandlingStatus.AVSLUTTET: return 'Avsluttet';
-    case behandlingStatus.IVERKSETTER_VEDTAK: return 'Iverksetter vedtak';
-    case behandlingStatus.FATTER_VEDTAK: return 'Fatter vedtak';
-    default: return null;
-  }
-};
-
 const IKKE_PAA_ANKET_BEHANDLING_ID = 0;
 
 const canPreview = (begrunnelse: string, fritekstTilBrev: string): boolean => (begrunnelse && begrunnelse.length > 0)
   && (fritekstTilBrev && fritekstTilBrev.length > 0);
 const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
-const formatBehandling = (b: BehandlingInfo): string => `${formatDate(b.opprettet)} - ${formatBehandlingType(b.type.kode)} `
-  + `- ${formatBehandlingStatus(b.status.kode)}`;
+const formatBehandling = (
+  b: BehandlingInfo,
+  behandlingTyper: KodeverkMedNavn[],
+  behandlingStatuser: KodeverkMedNavn[],
+): string => `${formatDate(b.opprettet)} - ${behandlingTyper.find((bt) => bt.kode === b.type.kode)?.navn} `
+  + `- ${behandlingStatuser.find((bs) => bs.kode === b.status.kode)?.navn}`;
 const formatId = (id?: number): string => {
   if (id === null) {
     return `${IKKE_PAA_ANKET_BEHANDLING_ID}`;
@@ -121,12 +99,17 @@ const leggTilUkjent = (behandlinger: BehandlingInfo[] = []): BehandlingInfo[] =>
   return arr;
 };
 
-const buildOption = (b: BehandlingInfo, intl: IntlShape): ReactElement => {
+const buildOption = (
+  b: BehandlingInfo,
+  intl: IntlShape,
+  behandlingTyper: KodeverkMedNavn[],
+  behandlingStatuser: KodeverkMedNavn[],
+): ReactElement => {
   const formattedId = formatId(b.id);
   if (b.id === IKKE_PAA_ANKET_BEHANDLING_ID) {
     return (<option key={formattedId} value={formattedId}>{intl.formatMessage({ id: 'Ankebehandling.Resultat.IkkePaaAnketVedtak' })}</option>);
   }
-  return (<option key={formattedId} value={formattedId}>{formatBehandling(b)}</option>);
+  return (<option key={formattedId} value={formattedId}>{formatBehandling(b, behandlingTyper, behandlingStatuser)}</option>);
 };
 
 const SKAL_REALITETSBEHANDLES = {
@@ -147,6 +130,8 @@ interface PureOwnProps {
   sprakkode: Kodeverk;
   behandlinger: BehandlingInfo[];
   ankeOmgorArsaker: KodeverkMedNavn[];
+  behandlingTyper: KodeverkMedNavn[],
+  behandlingStatuser: KodeverkMedNavn[],
 }
 
 interface MappedOwnProps {
@@ -171,6 +156,8 @@ const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps & Wrappe
   behandlinger,
   intl,
   ankeOmgorArsaker,
+  behandlingTyper,
+  behandlingStatuser,
   ...formProps
 }) => (
   <form onSubmit={handleSubmit}>
@@ -185,7 +172,7 @@ const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps & Wrappe
         <SelectField
           readOnly={readOnly}
           name="vedtak"
-          selectValues={leggTilUkjent(filtrerKlage(behandlinger)).map((b) => buildOption(b, intl))}
+          selectValues={leggTilUkjent(filtrerKlage(behandlinger)).map((b) => buildOption(b, intl, behandlingTyper, behandlingStatuser))}
           className={readOnly ? styles.selectReadOnly : null}
           label={intl.formatMessage({ id: 'Ankebehandling.Resultat.Vedtak' })}
           validate={[required]}

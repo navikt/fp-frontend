@@ -10,11 +10,11 @@ import {
 } from '@fpsak-frontend/utils';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
-import uttakArbeidTypeTekstCodes from '@fpsak-frontend/kodeverk/src/uttakArbeidTypeCodes';
 import oppholdArsakType, { oppholdArsakKontoNavn } from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { ArbeidsgiverOpplysningerPerId, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
+import uttakArbeidTypeTekstCodes from '../utils/uttakArbeidTypeCodes';
 import { PeriodeMedClassName } from './Uttak';
 import styles from './uttakActivity.less';
 

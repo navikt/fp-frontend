@@ -7,9 +7,9 @@ import {
   dateAfterOrEqual, hasValidDate, ISO_DATE_FORMAT, required,
 } from '@fpsak-frontend/utils';
 import {
-  FlexColumn, FlexContainer, FlexRow, PeriodFieldArray,
+  FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
-import { DatepickerField } from '@fpsak-frontend/form';
+import { DatepickerField, PeriodFieldArray } from '@fpsak-frontend/form';
 
 import styles from './frilansPerioderFieldArray.less';
 

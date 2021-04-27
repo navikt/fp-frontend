@@ -3,9 +3,9 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 
 import {
-  FlexColumn, FlexContainer, FlexRow, PeriodFieldArray,
+  FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
-import { DatepickerField, SelectField } from '@fpsak-frontend/form';
+import { DatepickerField, SelectField, PeriodFieldArray } from '@fpsak-frontend/form';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 

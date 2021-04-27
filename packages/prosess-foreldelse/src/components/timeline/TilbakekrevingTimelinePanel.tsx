@@ -16,8 +16,6 @@ interface StateProps {
   valgtPeriode?: TidslinjePeriode;
 }
 
-// TODO (TOR) Slå saman med TilbakekrevingTimeline.jsx
-
 class TilbakekrevingTimelinePanel extends Component<PureOwnProps, StateProps> {
   constructor(props: PureOwnProps) {
     super(props);

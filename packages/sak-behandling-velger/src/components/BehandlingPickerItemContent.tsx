@@ -17,7 +17,6 @@ import { BehandlingAppKontekst, Kodeverk } from '@fpsak-frontend/types';
 import styles from './behandlingPickerItemContent.less';
 
 // TODO (TOR) Kva er dette for noko? Desse tekstane burde vel komma fra kodeverket? Ein skal uansett ikkje hardkoda kodane her!
-// TODO hente de forksjellige kodeverkene man trenger
 const getÅrsak = (årsak: BehandlingAppKontekst['førsteÅrsak']) => {
   switch (årsak.behandlingArsakType.kode) {
     case 'RE-MF':

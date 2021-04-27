@@ -45,7 +45,7 @@ export const RadioOption: FunctionComponent<RadioOptionProps> = ({
         name={name}
         className={className}
         label={<Label input={label} typographyElement={Normaltekst} />}
-        // @ts-ignore TODO Fjern denne. Må fjerna bruken av bolske verdiar som value
+        // @ts-ignore Fjern denne. Må fjerna bruken av bolske verdiar som value
         value={value}
         checked={checked}
         disabled={disabled || groupDisabled}

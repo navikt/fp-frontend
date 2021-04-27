@@ -308,7 +308,6 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
   }
 
   cancelSelectedActivity(): void {
-    // TODO Bør heller senda med undefined?
     this.initializeActivityForm({} as PeriodeMedClassName);
     this.setState({ selectedItem: undefined });
   }
@@ -784,13 +783,6 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
   const hovedsokerPerioder = addClassNameGroupIdToPerioderHovedsoker(state, props);
   const annenForelderPerioder = addClassNameGroupIdToPerioderAnnenForelder(state, props);
 
-  /*
-  @TODO clean up interface
-  const personer = [person];
-  if (viseUttakMedsoker && person && person.annenPart) {
-    personer.push(person.annenPart.navBrukerKjonn);
-  }
-  */
   const { gjeldende } = familiehendelse;
   const uttakPerioder = slaSammenHovedsokerOgAnnenForelder(state, props).sort((pers1, pers2) => {
     if (pers1.group === pers2.group) {

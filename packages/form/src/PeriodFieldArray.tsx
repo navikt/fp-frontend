@@ -6,14 +6,10 @@ import { Column, Row } from 'nav-frontend-grid';
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import NavFieldGroup from '@fpsak-frontend/form/src/NavFieldGroup';
 import { createIntl } from '@fpsak-frontend/utils';
-
-import Image from './Image';
-import VerticalSpacer from './VerticalSpacer';
+import { Image, VerticalSpacer } from '@fpsak-frontend/shared-components';
 
 import messages from '../i18n/nb_NO.json';
 import styles from './periodFieldArray.less';
-
-// TODO Denne komponenten bør flyttast ut av shared-components da den drar inn avhengighet til redux og redux-form
 
 const intl = createIntl(messages);
 

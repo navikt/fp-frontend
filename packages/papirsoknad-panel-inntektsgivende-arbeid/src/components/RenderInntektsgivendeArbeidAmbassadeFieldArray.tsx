@@ -7,9 +7,9 @@ import {
   dateAfterOrEqual, hasValidDate, isArrayEmpty, ISO_DATE_FORMAT, maxLength, required,
 } from '@fpsak-frontend/utils';
 import {
-  FlexColumn, FlexContainer, FlexRow, PeriodFieldArray,
+  FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
-import { DatepickerField, InputField } from '@fpsak-frontend/form';
+import { DatepickerField, InputField, PeriodFieldArray } from '@fpsak-frontend/form';
 
 import { useIntl } from 'react-intl';
 import styles from './renderInntektsgivendeArbeidFieldArray.less';

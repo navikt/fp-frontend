@@ -6,9 +6,11 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import landkoder from '@fpsak-frontend/kodeverk/src/landkoder';
 import { maxLength } from '@fpsak-frontend/utils';
 import {
-  FlexColumn, FlexContainer, FlexRow, PeriodFieldArray,
+  FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
-import { DatepickerField, InputField, SelectField } from '@fpsak-frontend/form';
+import {
+  DatepickerField, InputField, SelectField, PeriodFieldArray,
+} from '@fpsak-frontend/form';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import { injectIntl, WrappedComponentProps } from 'react-intl';

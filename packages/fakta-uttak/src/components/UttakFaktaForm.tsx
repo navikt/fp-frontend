@@ -169,7 +169,6 @@ const validateUttakForm = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): 
       }
       return {};
     });
-    // todo, denne skal bort
     if (sjekkEndretFørsteUttaksdato(nyStartDato, førsteUttaksdato)) {
       return {
         perioder: {

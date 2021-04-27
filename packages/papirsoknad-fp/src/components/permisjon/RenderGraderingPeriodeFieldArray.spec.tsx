@@ -1,8 +1,7 @@
 import React, { ReactElement } from 'react';
 
-import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
 import {
-  CheckboxField, DatepickerField, DecimalField, InputField, SelectField,
+  PeriodFieldArray, CheckboxField, DatepickerField, DecimalField, InputField, SelectField,
 } from '@fpsak-frontend/form';
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';

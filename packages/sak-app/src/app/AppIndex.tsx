@@ -44,7 +44,6 @@ const AppIndex: FunctionComponent<OwnProps> = ({
   const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
 
   useEffect(() => {
-    // todo sjekke om dette er beste stedet å sette dette for sentry
     configureScope((scope) => {
       scope.setUser({ username: navAnsatt?.navn });
     });

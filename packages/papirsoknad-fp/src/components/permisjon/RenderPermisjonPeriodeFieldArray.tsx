@@ -8,7 +8,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import AlertStripe from 'nav-frontend-alertstriper';
 
 import {
-  FlexColumn, FlexContainer, FlexRow, PeriodFieldArray, VerticalSpacer,
+  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import {
   dateAfterOrEqual,
@@ -24,7 +24,7 @@ import {
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import {
-  CheckboxField, DatepickerField, DecimalField, SelectField,
+  CheckboxField, DatepickerField, DecimalField, SelectField, PeriodFieldArray,
 } from '@fpsak-frontend/form';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 

@@ -2,14 +2,6 @@ import OpplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdress
 import landkoder from '@fpsak-frontend/kodeverk/src/landkoder';
 import { Personadresse } from '@fpsak-frontend/types';
 
-// TODO (TOR) Flytt ut av util-folder
-
-/**
- * personUtils
- *
- * Diverse støttefunksjoner til person komponentene
- */
-
 const emptyIfnull = (text?: string): string => (text == null ? '' : text);
 
 const constructAddress = (

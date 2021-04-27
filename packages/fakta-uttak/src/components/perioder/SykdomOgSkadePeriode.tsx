@@ -80,8 +80,6 @@ interface MappedOwnProps {
   form: string;
 }
 
-// TODO slå sammen ForeldreAnsvarPeriode, SykdomOgSkadePeriode og InnleggelsePeriode
-
 export const SykdomOgSkadePeriode: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   resultat,
   fraDato,

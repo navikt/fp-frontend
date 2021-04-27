@@ -47,6 +47,8 @@ const AnkeProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> 
         saveAnke={saveAnke}
         previewCallback={previewCallback}
         ankeOmgorArsaker={alleKodeverk[kodeverkTyper.ANKE_OMGJOER_AARSAK]}
+        behandlingTyper={alleKodeverk[kodeverkTyper.BEHANDLING_TYPE]}
+        behandlingStatuser={alleKodeverk[kodeverkTyper.BEHANDLING_STATUS]}
       />
     </ReduxWrapper>
   </RawIntlProvider>

@@ -279,7 +279,6 @@ const validateForm = (values: FormValues, props: PureOwnProps & MappedOwnProps) 
     return {};
   }
   const { opptjeningFom, opptjeningTom } = values;
-  // TODO (TOR) Denne valideringa bør ligga i PeriodpickerField
   const errors = {
     opptjeningFom: required(opptjeningFom) || hasValidPeriod(opptjeningFom, opptjeningTom),
     opptjeningTom: required(opptjeningTom) || hasValidPeriod(opptjeningFom, opptjeningTom),

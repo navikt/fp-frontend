@@ -1,4 +1,4 @@
-// @TODO kodeverk_i_frontend
+// kodeverk_i_frontend - Fiks når ein refaktorerar historikk
 const historikkEndretFeltTypeHeadingCodes = {
   FORDELING_FOR_NY_ANDEL: {
     kode: 'FORDELING_FOR_NY_ANDEL',
