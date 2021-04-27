@@ -2,6 +2,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs } from '@storybook/addon-knobs';
 
+import { BehandlingAppKontekst } from '@fpsak-frontend/types';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -20,21 +21,25 @@ interface HenleggParams {
   begrunnelse: string;
 }
 
+const valgtBehandling = {
+  id: 1,
+  versjon: 2,
+  uuid: '23r2323',
+  type: {
+    kode: behandlingType.FORSTEGANGSSOKNAD,
+    kodeverk: 'BEHANDLING_TYPE',
+  },
+} as BehandlingAppKontekst;
+
 export const visMenyForÅHenleggeEnBehandling = () => (
   <MenyHenleggIndex
-    behandlingId={1}
-    behandlingVersjon={2}
+    valgtBehandling={valgtBehandling}
     henleggBehandling={action('button-click') as (params: HenleggParams) => Promise<any>}
     forhandsvisHenleggBehandling={action('button-click')}
     ytelseType={{
       kode: fagsakYtelseType.FORELDREPENGER,
       kodeverk: 'YTELSE_TYPE',
     }}
-    behandlingType={{
-      kode: behandlingType.FORSTEGANGSSOKNAD,
-      kodeverk: 'BEHANDLING_TYPE',
-    }}
-    behandlingUuid="23r2323"
     behandlingResultatTyper={[{
       kode: behandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
       kodeverk: 'RESULTAT_TYPE',

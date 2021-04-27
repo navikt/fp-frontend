@@ -43,7 +43,7 @@ import {
   FaktaArbeidsforhold, Kodeverk, KodeverkMedNavn, Personoversikt,
 } from '@fpsak-frontend/types';
 
-import lagVisningsNavn from './utils/uttakVisningsnavnHelper';
+import lagVisningsNavn from './utils/lagVisningsNavn';
 
 import styles from './uttakNyPeriode.less';
 

@@ -4,7 +4,7 @@ import React, {
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SakenFaktaIndex from '@fpsak-frontend/fakta-saken';
-import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
+import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@fpsak-frontend/utils';
@@ -46,7 +46,7 @@ const SakenFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => (
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     overstyringApKoder={OVERSTYRING_AP_CODES}
-    faktaPanelKode={faktaPanelCodes.SAKEN}
+    faktaPanelKode={FaktaPanelCode.SAKEN}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'SakenFaktaPanel.Title' })}
     skalPanelVisesIMeny={() => true}
     renderPanel={(data) => <SakenFaktaIndex {...data} />}

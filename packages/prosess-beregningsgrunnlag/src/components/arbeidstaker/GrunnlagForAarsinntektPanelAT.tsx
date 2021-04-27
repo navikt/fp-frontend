@@ -20,7 +20,7 @@ import {
   BeregningsgrunnlagAndel, BeregningsgrunnlagArbeidsforhold,
   BeregningsgrunnlagPeriodeProp, Kodeverk, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
-import createVisningsnavnForAktivitet from '../../util/visningsnavnHelper';
+import createVisningsnavnForAktivitet from '../../util/createVisningsnavnForAktivitet';
 import NaturalytelsePanel from './NaturalytelsePanel';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import { ArbeidstakerInntektValues } from '../../types/ATFLAksjonspunktTsType';

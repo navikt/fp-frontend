@@ -7,8 +7,8 @@ import useBehandlingEndret from '../behandling/useBehandlingEndret';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 import SakRettigheter from './sakRettigheterTsType';
 
-const useHentFagsakRettigheter = (saksnummer: string, behandlingId: number, behandlingVersjon: number):
-[ rettigheter: SakRettigheter, harHentet: boolean ] => {
+const useHentFagsakRettigheter = (saksnummer: string, behandlingId?: number, behandlingVersjon?: number):
+[ harHentet: boolean, rettigheter?: SakRettigheter ] => {
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
   const enabledApplicationContexts = useGetEnabledApplikasjonContext();
   const skalHenteFraFpTilbake = enabledApplicationContexts.includes(ApplicationContextPath.FPTILBAKE);
@@ -43,7 +43,7 @@ const useHentFagsakRettigheter = (saksnummer: string, behandlingId: number, beha
     return sakRettigheterFpSak;
   }, [sakRettigheterFpSak, sakRettigheterFpTilbake]);
 
-  return [sakRettigheter, harHentetFpSak && harHentetFpTilbake];
+  return [harHentetFpSak && harHentetFpTilbake, sakRettigheter];
 };
 
 export default useHentFagsakRettigheter;

@@ -5,7 +5,7 @@ import React, {
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import VedtakResultatType from '@fpsak-frontend/kodeverk/src/vedtakResultatType';
 import VedtakTilbakekrevingProsessIndex from '@fpsak-frontend/prosess-vedtak-tilbakekreving';
-import { prosessStegCodes } from '@fpsak-frontend/konstanter';
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import {
   Aksjonspunkt, BeregningsresultatTilbakekreving, Vedtaksbrev,
@@ -19,7 +19,7 @@ import { restApiTilbakekrevingHooks, requestTilbakekrevingApi, TilbakekrevingBeh
 
 const intl = createIntl(messages);
 
-const forhandsvis = (data) => {
+const forhandsvis = (data: any) => {
   if (window.navigator.msSaveOrOpenBlob) {
     window.navigator.msSaveOrOpenBlob(data);
   } else if (URL.createObjectURL) {
@@ -90,7 +90,7 @@ const VedtakTilbakekrevingProsessStegInitPanel: FunctionComponent<OwnProps & Pro
       initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
-      prosessPanelKode={prosessStegCodes.VEDTAK}
+      prosessPanelKode={ProsessStegCode.VEDTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny={() => true}
       hentOverstyrtStatus={(initData) => getOverstyrtStatus(initData?.beregningsresultat)}

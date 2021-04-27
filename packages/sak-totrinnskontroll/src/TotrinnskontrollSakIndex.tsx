@@ -64,7 +64,7 @@ interface OwnProps {
     erAlleAksjonspunktGodkjent: boolean;
   }) => Promise<void>;
   forhandsvisVedtaksbrev: () => void;
-  createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;
+  createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
 }
 
 const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({

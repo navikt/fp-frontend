@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
+import sinon, { SinonStub } from 'sinon';
 
 import RisikoklassifiseringSakIndex from '@fpsak-frontend/sak-risikoklassifisering';
 import kontrollresultatKode from '@fpsak-frontend/sak-risikoklassifisering/src/kodeverk/kontrollresultatKode';
@@ -10,7 +10,7 @@ import * as useTrackRouteParam from '../../app/useTrackRouteParam';
 import RisikoklassifiseringIndex from './RisikoklassifiseringIndex';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 
-const lagRisikoklassifisering = (kode) => ({
+const lagRisikoklassifisering = (kode: string) => ({
   kontrollresultat: {
     kode,
     kodeverk: 'Kontrollresultat',
@@ -50,7 +50,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('<RisikoklassifiseringIndex>', () => {
-  let contextStub;
+  let contextStub: SinonStub;
 
   beforeEach(() => {
     contextStub = sinon.stub(useTrackRouteParam, 'default').callsFake(() => ({

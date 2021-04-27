@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import { prosessStegCodes } from '@fpsak-frontend/konstanter';
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import AvregningProsessIndex from '@fpsak-frontend/prosess-avregning';
 import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
 import { Fagsak, SimuleringResultat, StandardProsessPanelProps } from '@fpsak-frontend/types';
@@ -35,7 +35,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
       valgtProsessSteg="default"
       registrerProsessPanel={() => {}}
       menyData={[{
-        id: prosessStegCodes.VEDTAK,
+        id: ProsessStegCode.VEDTAK,
         harApentAksjonspunkt: false,
         status: vilkarUtfallType.IKKE_VURDERT,
         harHentetInitData: true,
@@ -57,7 +57,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
       valgtProsessSteg="default"
       registrerProsessPanel={() => {}}
       menyData={[{
-        id: prosessStegCodes.VEDTAK,
+        id: ProsessStegCode.VEDTAK,
         harApentAksjonspunkt: true,
         status: vilkarUtfallType.IKKE_VURDERT,
         harHentetInitData: true,
@@ -79,7 +79,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
       valgtProsessSteg="default"
       registrerProsessPanel={() => {}}
       menyData={[{
-        id: prosessStegCodes.VEDTAK,
+        id: ProsessStegCode.VEDTAK,
         harApentAksjonspunkt: true,
         status: vilkarUtfallType.IKKE_VURDERT,
         harHentetInitData: true,

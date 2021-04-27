@@ -6,7 +6,7 @@ const history = createBrowserHistory({
   basename: '/fpsak/',
 });
 
-const withRouterProvider = (Story) => (
+const withRouterProvider = (Story: any) => (
   <Router history={history}>
     <Story />
   </Router>

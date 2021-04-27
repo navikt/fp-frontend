@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
+import sinon, { SinonStub } from 'sinon';
 
 import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -45,7 +45,7 @@ describe('<BehandlingSupportIndex>', () => {
     pathname: '', search: '', state: {}, hash: '',
   };
 
-  let contextStub;
+  let contextStub: SinonStub;
   beforeEach(() => {
     contextStub = sinon.stub(useTrackRouteParam, 'default').callsFake(() => ({
       selected: 123456,

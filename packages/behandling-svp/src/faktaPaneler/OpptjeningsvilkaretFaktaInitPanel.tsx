@@ -6,7 +6,7 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import OpptjeningFaktaIndex from '@fpsak-frontend/fakta-opptjening';
-import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
+import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Opptjening, Vilkar,
 } from '@fpsak-frontend/types';
@@ -51,7 +51,7 @@ const OpptjeningsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanel
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    faktaPanelKode={faktaPanelCodes.OPPTJENINGSVILKARET}
+    faktaPanelKode={FaktaPanelCode.OPPTJENINGSVILKARET}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'OpptjeningInfoPanel.KontrollerFaktaForOpptjening' })}
     skalPanelVisesIMeny={(initData) => initData
       && initData.vilkar.some((v) => v.vilkarType.kode === vilkarType.OPPTJENINGSVILKARET)

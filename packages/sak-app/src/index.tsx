@@ -2,7 +2,9 @@ import React from 'react';
 import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { render } from 'react-dom';
-import { init, Integrations } from '@sentry/browser';
+import {
+  Event, EventHint, init, Integrations,
+} from '@sentry/browser';
 
 import { RestApiErrorProvider, RestApiProvider } from '@fpsak-frontend/rest-api-hooks';
 
@@ -24,7 +26,7 @@ init({
   release,
   environment,
   integrations: [new Integrations.Breadcrumbs({ console: false })],
-  beforeSend: (event, hint) => {
+  beforeSend: (event: Event, hint: EventHint) => {
     const exception = hint.originalException;
     // @ts-ignore
     if (exception.isAxiosError) {

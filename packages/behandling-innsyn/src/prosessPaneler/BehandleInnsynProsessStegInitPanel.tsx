@@ -4,7 +4,7 @@ import React, {
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import InnsynProsessIndex from '@fpsak-frontend/prosess-innsyn';
-import { prosessStegCodes } from '@fpsak-frontend/konstanter';
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { createIntl } from '@fpsak-frontend/utils';
 import {
   Aksjonspunkt, Dokument, Fagsak, Innsyn,
@@ -45,7 +45,7 @@ const BehandleInnsynProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={getEndepunkterPanelData(fagsak.saksnummer)}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    prosessPanelKode={prosessStegCodes.BEHANDLE_INNSYN}
+    prosessPanelKode={ProsessStegCode.BEHANDLE_INNSYN}
     prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Innsyn' })}
     skalPanelVisesIMeny={() => true}
     renderPanel={(data) => (

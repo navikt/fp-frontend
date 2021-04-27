@@ -6,7 +6,7 @@ import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatTyp
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import UttakProsessIndex from '@fpsak-frontend/prosess-uttak';
-import { prosessStegCodes } from '@fpsak-frontend/konstanter';
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   AksessRettigheter, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Fagsak, FamilieHendelseSamling,
@@ -107,7 +107,7 @@ const UttakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitPr
       initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
-      prosessPanelKode={prosessStegCodes.UTTAK}
+      prosessPanelKode={ProsessStegCode.UTTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Uttak' })}
       skalPanelVisesIMeny={(_data, initState) => initState === RestApiState.SUCCESS}
       hentOverstyrtStatus={(initData) => getStatusFromUttakresultat(initData?.uttaksresultatPerioder, initData?.aksjonspunkter)}

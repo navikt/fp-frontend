@@ -93,12 +93,10 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
         />
       </div>
       <div className={(aktivtSupportPanel === SupportTabs.HISTORIKK ? styles.containerHistorikk : styles.container)}>
-        {(aktivtSupportPanel === SupportTabs.TIL_BESLUTTER || aktivtSupportPanel === SupportTabs.FRA_BESLUTTER) && (
+        {behandling && (aktivtSupportPanel === SupportTabs.TIL_BESLUTTER || aktivtSupportPanel === SupportTabs.FRA_BESLUTTER) && (
           <TotrinnskontrollIndex
             fagsak={fagsak}
-            alleBehandlinger={alleBehandlinger}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
+            valgtBehandling={behandling}
           />
         )}
         {aktivtSupportPanel === SupportTabs.HISTORIKK && (
@@ -108,12 +106,10 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
             behandlingVersjon={behandlingVersjon}
           />
         )}
-        {aktivtSupportPanel === SupportTabs.MELDINGER && (
+        {behandling && aktivtSupportPanel === SupportTabs.MELDINGER && (
           <MeldingIndex
             fagsak={fagsak}
-            alleBehandlinger={alleBehandlinger}
-            behandlingId={behandlingId}
-            behandlingVersjon={behandlingVersjon}
+            valgtBehandling={behandling}
           />
         )}
         {aktivtSupportPanel === SupportTabs.DOKUMENTER && (

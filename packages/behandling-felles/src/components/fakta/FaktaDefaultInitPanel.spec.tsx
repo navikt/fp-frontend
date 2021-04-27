@@ -7,6 +7,7 @@ import {
 } from '@fpsak-frontend/types';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 
 import FaktaPanelWrapper from './FaktaPanelWrapper';
 import FaktaDefaultInitPanel from './FaktaDefaultInitPanel';
@@ -66,7 +67,7 @@ describe('<FaktaDefaultInitPanel>', () => {
       skalPanelVisesIMeny={() => true}
       // @ts-ignore
       renderPanel={(props) => <div {...props} />}
-      faktaPanelKode="test"
+      faktaPanelKode={FaktaPanelCode.AKTIVITETSKRAV}
       faktaPanelMenyTekst="Dette er en tekst"
     />);
 

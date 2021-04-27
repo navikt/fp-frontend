@@ -15,8 +15,8 @@ export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyEndreBeh
 interface OwnProps {
   behandlingId?: number;
   behandlingVersjon?: number;
-  behandlendeEnhetId: string;
-  behandlendeEnhetNavn: string;
+  behandlendeEnhetId?: string;
+  behandlendeEnhetNavn?: string;
   nyBehandlendeEnhet: (params: {
     behandlingVersjon: number;
     behandlingId: number;

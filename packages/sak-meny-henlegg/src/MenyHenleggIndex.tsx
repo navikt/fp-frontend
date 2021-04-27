@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 import { ReduxWrapper } from '@fpsak-frontend/form';
 
@@ -15,8 +15,7 @@ const intl = createIntl(messages);
 export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyHenleggIndex.HenleggBehandling' });
 
 interface OwnProps {
-  behandlingId?: number;
-  behandlingVersjon?: number;
+  valgtBehandling: BehandlingAppKontekst;
   henleggBehandling: (params: {
     behandlingVersjon: number;
     behandlingId: number;
@@ -25,21 +24,16 @@ interface OwnProps {
   }) => Promise<any>;
   forhandsvisHenleggBehandling: (erHenleggelse: boolean, data: any) => void;
   ytelseType: Kodeverk;
-  behandlingType: Kodeverk;
-  behandlingUuid: string;
   behandlingResultatTyper: KodeverkMedNavn[];
   gaaTilSokeside: () => void;
   lukkModal: () => void;
 }
 
 const MenyHenleggIndex: FunctionComponent<OwnProps> = ({
-  behandlingId,
-  behandlingVersjon,
+  valgtBehandling,
   henleggBehandling,
   forhandsvisHenleggBehandling,
   ytelseType,
-  behandlingType,
-  behandlingUuid,
   behandlingResultatTyper,
   gaaTilSokeside,
   lukkModal,
@@ -48,8 +42,8 @@ const MenyHenleggIndex: FunctionComponent<OwnProps> = ({
 
   const submit = useCallback((formValues) => {
     const henleggBehandlingDto = {
-      behandlingVersjon,
-      behandlingId,
+      behandlingVersjon: valgtBehandling.versjon,
+      behandlingId: valgtBehandling.id,
       årsakKode: formValues.årsakKode,
       begrunnelse: formValues.begrunnelse,
       fritekst: formValues.fritekst,
@@ -57,7 +51,7 @@ const MenyHenleggIndex: FunctionComponent<OwnProps> = ({
     henleggBehandling(henleggBehandlingDto).then(() => {
       setHenlagt(true);
     });
-  }, [behandlingId, behandlingVersjon]);
+  }, [valgtBehandling]);
 
   return (
     <RawIntlProvider value={intl}>
@@ -68,10 +62,10 @@ const MenyHenleggIndex: FunctionComponent<OwnProps> = ({
           onSubmit={submit}
           cancelEvent={lukkModal}
           previewHenleggBehandling={forhandsvisHenleggBehandling}
-          behandlingId={behandlingId}
+          behandlingId={valgtBehandling.id}
           ytelseType={ytelseType}
-          behandlingType={behandlingType}
-          behandlingUuid={behandlingUuid}
+          behandlingType={valgtBehandling.type}
+          behandlingUuid={valgtBehandling.uuid}
           behandlingResultatTyper={behandlingResultatTyper}
         />
       </ReduxWrapper>

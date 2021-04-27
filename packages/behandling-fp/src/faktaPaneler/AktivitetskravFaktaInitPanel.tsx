@@ -7,7 +7,7 @@ import AktivitetskravFaktaIndex from '@fpsak-frontend/fakta-aktivitetskrav';
 import { Aksjonspunkt, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
 
-import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
+import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import { createIntl } from '@fpsak-frontend/utils';
 
 import messages from '../../i18n/nb_NO.json';
@@ -32,7 +32,7 @@ const AktivitetskravFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (pr
     requestApi={requestFpApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    faktaPanelKode={faktaPanelCodes.AKTIVITETSKRAV}
+    faktaPanelKode={FaktaPanelCode.AKTIVITETSKRAV}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'AktivitetskravInfoPanel.FaktaAktivitetskrav' })}
     skalPanelVisesIMeny={(initData) => !!initData?.uttakKontrollerAktivitetskrav}
     renderPanel={(data) => <AktivitetskravFaktaIndex {...data} />}

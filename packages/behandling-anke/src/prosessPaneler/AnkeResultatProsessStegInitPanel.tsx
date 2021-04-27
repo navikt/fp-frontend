@@ -4,7 +4,7 @@ import React, {
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AnkeResultatProsessIndex, { AnkeResultatBrevData } from '@fpsak-frontend/prosess-anke-resultat';
-import { prosessStegCodes } from '@fpsak-frontend/konstanter';
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import {
   Aksjonspunkt, AnkeVurdering, Behandling, Fagsak,
 } from '@fpsak-frontend/types';
@@ -97,7 +97,7 @@ const AnkeResultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
       initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
-      prosessPanelKode={prosessStegCodes.ANKE_RESULTAT}
+      prosessPanelKode={ProsessStegCode.ANKE_RESULTAT}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.AnkeResultat' })}
       skalPanelVisesIMeny={() => true}
       lagringSideEffekter={lagringSideeffekterCallback}

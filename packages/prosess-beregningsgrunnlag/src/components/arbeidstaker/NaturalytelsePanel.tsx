@@ -17,7 +17,7 @@ import NaturalytelseTabellData, {
   NaturalytelseEndring,
   NaturalytelseTabellRad,
 } from '../../types/NaturalytelseTableTsType';
-import createVisningsnavnForAktivitet from '../../util/visningsnavnHelper';
+import createVisningsnavnForAktivitet from '../../util/createVisningsnavnForAktivitet';
 
 type OwnProps = {
     allePerioder: BeregningsgrunnlagPeriodeProp[];

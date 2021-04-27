@@ -28,7 +28,7 @@ const renderListItems = (
   getBehandlingLocation: (behandlingId: number) => Location,
   showAll: boolean,
   toggleShowAll: () => void,
-  getKodeverkFn: (kodeverk: Kodeverk, behandlingType?: Kodeverk) => KodeverkMedNavn,
+  getKodeverkFn: (kodeverk: Kodeverk, behandlingType: Kodeverk) => KodeverkMedNavn | undefined,
   behandlingId?: number,
 ): ReactElement[] => (
   sortBehandlinger(behandlinger)
@@ -55,7 +55,7 @@ interface OwnProps {
   behandlingId?: number;
   showAll: boolean;
   toggleShowAll: () => void;
-  getKodeverkFn: (kodeverk: Kodeverk, behandlingType?: Kodeverk) => KodeverkMedNavn;
+  getKodeverkFn: (kodeverk: Kodeverk, behandlingType: Kodeverk) => KodeverkMedNavn | undefined;
 }
 
 /**

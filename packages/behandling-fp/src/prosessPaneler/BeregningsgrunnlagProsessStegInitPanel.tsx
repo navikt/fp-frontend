@@ -5,7 +5,7 @@ import React, {
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import BeregningsgrunnlagProsessIndex from '@fpsak-frontend/prosess-beregningsgrunnlag';
-import { prosessStegCodes } from '@fpsak-frontend/konstanter';
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar,
@@ -56,7 +56,7 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     vilkarKoder={VILKAR_KODER}
-    prosessPanelKode={prosessStegCodes.BEREGNINGSGRUNNLAG}
+    prosessPanelKode={ProsessStegCode.BEREGNINGSGRUNNLAG}
     prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Beregning' })}
     skalPanelVisesIMeny={(_initData, initState) => initState === RestApiState.SUCCESS}
     renderPanel={(data) => (

@@ -7,7 +7,7 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import {
   VerticalSpacer, AksjonspunktHelpTextHTML,
 } from '@fpsak-frontend/shared-components';
-import { prosessStegCodes } from '@fpsak-frontend/konstanter';
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { createIntl } from '@fpsak-frontend/utils';
 
@@ -87,7 +87,7 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
   const erPanelValgt = useProsessMenyRegistrerer(
     registrerProsessPanel,
     RestApiState.SUCCESS,
-    prosessStegCodes.INNGANGSVILKAR,
+    ProsessStegCode.INNGANGSVILKAR,
     intl.formatMessage({ id: 'Behandlingspunkt.Inngangsvilkar' }),
     valgtProsessSteg,
     skalVises,

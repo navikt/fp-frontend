@@ -11,25 +11,25 @@ import styles from './behandlingPickerItem.less';
 
 const getContentProps = (
   behandling: BehandlingAppKontekst,
-  getKodeverkFn: (kodeverk: Kodeverk, behandlingType?: Kodeverk) => KodeverkMedNavn,
+  getKodeverkFn: (kodeverk: Kodeverk, behandlingType: Kodeverk) => KodeverkMedNavn | undefined,
 ) => ({
   behandlingId: behandling.id,
-  behandlingTypeNavn: getKodeverkFn(behandling.type, behandling.type).navn,
+  behandlingTypeNavn: getKodeverkFn(behandling.type, behandling.type)?.navn,
   behandlingTypeKode: behandling.type.kode,
   førsteÅrsak: behandling.førsteÅrsak,
   behandlendeEnhetId: behandling.behandlendeEnhetId,
   behandlendeEnhetNavn: behandling.behandlendeEnhetNavn,
   opprettetDato: behandling.opprettet,
   avsluttetDato: behandling.avsluttet,
-  behandlingsstatus: getKodeverkFn(behandling.status, { kode: BehandlingType.FORSTEGANGSSOKNAD, kodeverk: '' }).navn,
+  behandlingsstatus: getKodeverkFn(behandling.status, { kode: BehandlingType.FORSTEGANGSSOKNAD, kodeverk: '' })?.navn,
   erGjeldendeVedtak: behandling.gjeldendeVedtak,
-  behandlingsresultatTypeNavn: behandling.behandlingsresultat ? getKodeverkFn(behandling.behandlingsresultat.type, behandling.type).navn : undefined,
+  behandlingsresultatTypeNavn: behandling.behandlingsresultat ? getKodeverkFn(behandling.behandlingsresultat.type, behandling.type)?.navn : undefined,
   behandlingsresultatTypeKode: behandling.behandlingsresultat ? behandling.behandlingsresultat.type.kode : undefined,
 });
 
 const renderItemContent = (
   behandling: BehandlingAppKontekst,
-  getKodeverkFn: (kodeverk: Kodeverk, behandlingType?: Kodeverk) => KodeverkMedNavn,
+  getKodeverkFn: (kodeverk: Kodeverk, behandlingType: Kodeverk) => KodeverkMedNavn | undefined,
   withChevronDown = false,
   withChevronUp = false,
 ): ReactElement => (
@@ -44,7 +44,7 @@ const renderToggleShowAllButton = (
   toggleShowAll: () => void,
   behandling: BehandlingAppKontekst,
   showAll: boolean,
-  getKodeverkFn: (kodeverk: Kodeverk, behandlingType?: Kodeverk) => KodeverkMedNavn,
+  getKodeverkFn: (kodeverk: Kodeverk, behandlingType: Kodeverk) => KodeverkMedNavn | undefined,
 ): ReactElement => (
   <button type="button" className={styles.toggleShowAllButton} onClick={toggleShowAll}>
     {renderItemContent(behandling, getKodeverkFn, !showAll, showAll)}
@@ -57,7 +57,7 @@ const renderLinkToBehandling = (
   isActive: boolean,
   toggleShowAll: () => void,
   showAll: boolean,
-  getKodeverkFn: (kodeverk: Kodeverk, behandlingType?: Kodeverk) => KodeverkMedNavn,
+  getKodeverkFn: (kodeverk: Kodeverk, behandlingType: Kodeverk) => KodeverkMedNavn | undefined,
 ): ReactElement => (
   <NavLink
     className={styles.linkToBehandling}
@@ -75,7 +75,7 @@ interface OwnProps {
   isActive: boolean;
   showAll: boolean;
   toggleShowAll: () => void;
-  getKodeverkFn: (kodeverk: Kodeverk, behandlingType?: Kodeverk) => KodeverkMedNavn;
+  getKodeverkFn: (kodeverk: Kodeverk, behandlingType: Kodeverk) => KodeverkMedNavn | undefined;
 }
 
 const BehandlingPickerItem: FunctionComponent<OwnProps> = ({
