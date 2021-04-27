@@ -27,7 +27,7 @@ import {
   ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Kodeverk, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import LabelType from '@fpsak-frontend/form/src/LabelType';
-import getUniqueListOfArbeidsforhold from '../ArbeidsforholdHelper';
+import finnUnikeArbeidsforhold from '../FinnUnikeArbeidsforhold';
 import {
   validateAndeler, validateSumFastsattBelop, validateTotalRefusjonPrArbeidsforhold, validateUlikeAndeler,
   validateSumRefusjon, validateSumFastsattForUgraderteAktiviteter,
@@ -536,7 +536,7 @@ const mapStateToPropsFactory = (initialState: any, initialOwnProps: OwnProps) =>
     erRevurdering,
     inntektskategoriKoder,
     getKodeverknavn,
-    arbeidsforholdList: getUniqueListOfArbeidsforhold(ownProps),
+    arbeidsforholdList: finnUnikeArbeidsforhold(ownProps),
     harKunYtelse: initialOwnProps.beregningsgrunnlag.aktivitetStatus
       .some((status) => status.kode === aktivitetStatuser.KUN_YTELSE),
   });

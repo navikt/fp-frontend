@@ -84,24 +84,12 @@ const harPeriodeSomKanKombineresMedForrige = (periode: BeregningsgrunnlagPeriode
   return true;
 };
 
-const oppdaterTomDatoForSistePeriode = (liste, periode) => {
+const oppdaterTomDatoForSistePeriode = (liste: FordelBeregningsgrunnlagPeriode[], periode: FordelBeregningsgrunnlagPeriode) => {
   const forrigePeriode = liste.pop();
+  // @ts-ignore Fiks denne
   forrigePeriode.tom = periode.tom;
   liste.push(forrigePeriode);
 };
-
-// const oppdaterTomDatoForSistePeriode = (liste: FordelBeregningsgrunnlagPeriode[], periode: FordelBeregningsgrunnlagPeriode): void => {
-//   liste.pop(); // Fjerner siste element
-//   const nyPeriode = {
-//     fom: periode.fom,
-//     fordelBeregningsgrunnlagAndeler: periode.fordelBeregningsgrunnlagAndeler,
-//     skalRedigereInntekt: periode.skalRedigereInntekt,
-//     skalPreutfyllesMedBeregningsgrunnlag: periode.skalPreutfyllesMedBeregningsgrunnlag,
-//     skalKunneEndreRefusjon: periode.skalKunneEndreRefusjon,
-//     tom: periode.tom,
-//   };
-//   liste.push(nyPeriode);
-// };
 
 const sjekkOmPeriodeSkalLeggesTil = (bgPerioder: BeregningsgrunnlagPeriodeProp[]) => (aggregatedPeriodList: FordelBeregningsgrunnlagPeriode[],
   periode: FordelBeregningsgrunnlagPeriode): FordelBeregningsgrunnlagPeriode[] => {

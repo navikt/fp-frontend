@@ -59,7 +59,7 @@ type SelectorProps = {
   beregningsgrunnlag: Beregningsgrunnlag;
 }
 
-const getUniqueListOfArbeidsforhold = createSelector(
+const finnUnikeArbeidsforhold = createSelector(
   [(props: SelectorProps) => props.beregningsgrunnlag],
   (beregningsgrunnlag): BGFordelArbeidsforhold[] => {
     const fordelBGPerioder = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag.fordelBeregningsgrunnlagPerioder;
@@ -68,4 +68,4 @@ const getUniqueListOfArbeidsforhold = createSelector(
   },
 );
 
-export default getUniqueListOfArbeidsforhold;
+export default finnUnikeArbeidsforhold;
