@@ -10,7 +10,6 @@ import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
 import { DecimalField, InputField, SelectField } from '@fpsak-frontend/form';
 import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
-import uttakArbeidTypeTekstCodes from '@fpsak-frontend/kodeverk/src/uttakArbeidTypeCodes';
 import {
   hasValidDecimal, hasValidInteger, maxLength, maxValue, minValue, notDash, required,
 } from '@fpsak-frontend/utils';
@@ -18,6 +17,7 @@ import {
   ArbeidsgiverOpplysningerPerId, Kodeverk, KodeverkMedNavn, PeriodeSokerAktivitet,
 } from '@fpsak-frontend/types';
 
+import uttakArbeidTypeTekstCodes from '../utils/uttakArbeidTypeCodes';
 import { FormValues } from './UttakActivity';
 import lagVisningsNavn from '../utils/lagVisningsNavn';
 import styles from './renderUttakTable.less';

@@ -2,8 +2,7 @@ import React, { ReactElement } from 'react';
 import { FieldArrayMetaProps } from 'redux-form';
 
 import { MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { DatepickerField } from '@fpsak-frontend/form';
-import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
+import { PeriodFieldArray, DatepickerField } from '@fpsak-frontend/form';
 import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import IkkeOmsorgPeriodeField from './IkkeOmsorgPeriodeField';

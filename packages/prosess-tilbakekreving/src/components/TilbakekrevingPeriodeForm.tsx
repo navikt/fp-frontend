@@ -488,7 +488,6 @@ const TilbakekrevingPeriodeForm = connect(mapStateToPropsFactory, mapDispatchToP
   destroyOnUnmount: false,
 })(injectIntl(TilbakekrevingPeriodeFormImpl)));
 
-// TODO Fiks typen til periode
 export const periodeFormBuildInitialValues = (periode: any, foreldelsePerioder: FeilutbetalingPerioderWrapper): InitialValuesDetailForm => {
   const { vilkarResultat, begrunnelse, vilkarResultatInfo } = periode;
 

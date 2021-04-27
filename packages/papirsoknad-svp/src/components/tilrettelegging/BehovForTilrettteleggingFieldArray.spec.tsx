@@ -3,9 +3,8 @@ import { shallow } from 'enzyme';
 import { FieldArrayMetaProps } from 'redux-form';
 
 import { MockFieldsWithContent } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { SelectField } from '@fpsak-frontend/form';
+import { PeriodFieldArray, SelectField } from '@fpsak-frontend/form';
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
 
 import messages from '../../../i18n/nb_NO.json';
 import BehovForTilrettteleggingFieldArray from './BehovForTilrettteleggingFieldArray';

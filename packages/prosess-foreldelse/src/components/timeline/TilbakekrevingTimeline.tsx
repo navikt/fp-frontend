@@ -121,7 +121,7 @@ class TilbakekrevingTimeline extends Component<PureOwnProps & WrappedComponentPr
   }
 
   componentDidMount(): void {
-    // TODO Fjern når denne er retta: https://github.com/Lighthouse-io/react-visjs-timeline/issues/40
+    // Fjern når denne er retta: https://github.com/Lighthouse-io/react-visjs-timeline/issues/40
     // eslint-disable-next-line react/no-find-dom-node
     const node = ReactDOM.findDOMNode(this.timelineRef.current);
     if (node) {

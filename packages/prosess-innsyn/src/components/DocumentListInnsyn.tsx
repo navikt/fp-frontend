@@ -14,13 +14,9 @@ import { Dokument } from '@fpsak-frontend/types';
 import sendDokumentImageUrl from '@fpsak-frontend/assets/images/send_dokument.svg';
 import mottaDokumentImageUrl from '@fpsak-frontend/assets/images/motta_dokument.svg';
 import internDokumentImageUrl from '@fpsak-frontend/assets/images/intern_dokument.svg';
+import { hentDokumentLenke } from '@fpsak-frontend/konstanter';
 
 import styles from './documentListInnsyn.less';
-
-// TODO (TOR) Flytt url ut av komponent
-const DOCUMENT_SERVER_URL = '/fpsak/api/dokument/hent-dokument';
-const getLink = (document: Dokument, saksNr: string): string => (`${DOCUMENT_SERVER_URL}?saksnummer=${saksNr}&journalpostId=${document
-  .journalpostId}&dokumentId=${document.dokumentId}`);
 
 const getDirectionImage = (document: Dokument, intl: IntlShape): ReactElement => {
   if (document.kommunikasjonsretning === kommunikasjonsretning.INN) {
@@ -104,7 +100,14 @@ const DocumentListInnsyn: FunctionComponent<OwnProps & WrappedComponentProps> = 
                     {img}
                   </TableColumn>
                   <TableColumn className={styles.linkCol}>
-                    <a href={getLink(document, saksNr)} className="lenke lenke--frittstaende" target="_blank" rel="noopener noreferrer">{document.tittel}</a>
+                    <a
+                      href={hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId)}
+                      className="lenke lenke--frittstaende"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {document.tittel}
+                    </a>
                   </TableColumn>
                   <TableColumn hidden={readOnly}>
                     {document.tidspunkt

@@ -2,8 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { DatepickerField } from '@fpsak-frontend/form';
-import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
+import { DatepickerField, PeriodFieldArray } from '@fpsak-frontend/form';
 
 import FrilansPerioderFieldArray from './FrilansPerioderFieldArray';
 

@@ -4,14 +4,14 @@ import { LoadingPanel, usePrevious } from '@fpsak-frontend/shared-components';
 import DokumenterSakIndex from '@fpsak-frontend/sak-dokumenter';
 import { Dokument } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { hentDokumentLenke } from '@fpsak-frontend/konstanter';
 
 import useBehandlingEndret from '../../behandling/useBehandlingEndret';
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 
 // TODO (hb) lag linker, ikke callback
-// TODO (hb) Kan implementeres med spesialisert selector som genererer hrefs til bruk i mapStateToProps
 const selectDocument = (saksNr: string) => (_e: React.SyntheticEvent, _id: number, document: Dokument): void => {
-  window.open(`/fpsak/api/dokument/hent-dokument?saksnummer=${saksNr}&journalpostId=${document.journalpostId}&dokumentId=${document.dokumentId}`, '_blank');
+  window.open(hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId), '_blank');
 };
 
 const sorterDokumenter = ((dok1: Dokument, dok2: Dokument): number => {

@@ -6,13 +6,13 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
 import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
-import uttakArbeidTypeTekstCodes from '@fpsak-frontend/kodeverk/src/uttakArbeidTypeCodes';
 import stonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
 import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
 import {
   AktivitetIdentifikator, AktivitetSaldo, ArbeidsgiverOpplysningerPerId, UttakStonadskontoer,
 } from '@fpsak-frontend/types';
 
+import uttakArbeidTypeTekstCodes from '../../utils/uttakArbeidTypeCodes';
 import lagVisningsNavn from '../../utils/lagVisningsNavn';
 import TimeLineTab, { CustomStonadskonto } from './TimeLineTab';
 

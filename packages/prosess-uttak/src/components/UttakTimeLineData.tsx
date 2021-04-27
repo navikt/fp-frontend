@@ -61,7 +61,7 @@ const hentApTekst = (
 ): ReactElement[] => {
   const texts = [];
 
-  // TODO: Fix - ta bort 5001 med verdi fra kodeverk
+  // Fix - ta bort 5001 med verdi fra kodeverk
   if (manuellBehandlingÅrsak.kode === '5001') {
     const arbeidsForhold = getCorrectEmptyArbeidsForhold(getKodeverknavn, arbeidsgiverOpplysningerPerId, periodeTypeKode, stonadskonto);
     const arbeidsForholdMedNullDagerIgjen = arbeidsForhold.join();

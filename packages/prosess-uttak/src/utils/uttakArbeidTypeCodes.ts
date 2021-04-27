@@ -1,4 +1,4 @@
-// @TODO kodeverk_i_frontend
+// Burde bruka tekstar fra kodeverket. Fiks dette når prosess uttak blir refaktorert
 const uttakArbeidTypeCodes = {
   ORDINÆRT_ARBEID: 'RenderUttakTable.ArbeidType.ORDINÆRT_ARBEID',
   FRILANS: 'RenderUttakTable.ArbeidType.FRILANS',

@@ -2,9 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { FieldArrayMetaProps } from 'redux-form';
 
-import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
 import { MockFieldsWithContent } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { PeriodpickerField } from '@fpsak-frontend/form';
+import { PeriodFieldArray, PeriodpickerField } from '@fpsak-frontend/form';
 import DokumentertePerioderPeriodePicker from './DokumentertePerioderPeriodePicker';
 
 const periode = {

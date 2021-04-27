@@ -6,10 +6,7 @@ import Lenke from 'nav-frontend-lenker';
 
 import { DateLabel, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { InnsynVedtaksdokument, KodeverkMedNavn } from '@fpsak-frontend/types';
-
-/* TODO Ta i bruk fpsakApi - Flytt url ut av komponent */
-const DOCUMENT_SERVER_URL = '/fpsak/api/vedtak/hent-vedtaksdokument';
-const getLink = (document: InnsynVedtaksdokument): string => `${DOCUMENT_SERVER_URL}?behandlingId=${document.dokumentId}`;
+import { hentVedtakDokumentLenke } from '@fpsak-frontend/konstanter';
 
 interface OwnProps {
   behandlingTypes: KodeverkMedNavn[];
@@ -50,7 +47,7 @@ const VedtakDocuments: FunctionComponent<OwnProps> = ({
                 <DateLabel dateString={document.opprettetDato} />
               </Column>
               <Column xs="10">
-                <Lenke href={getLink(document)} target="_blank">
+                <Lenke href={hentVedtakDokumentLenke(document.dokumentId)} target="_blank">
                   {behandlingTypes.find((bt) => bt.kode === document.tittel).navn}
                 </Lenke>
               </Column>

@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 
-import overforingArsakCodes, { overforingArsakTexts } from '@fpsak-frontend/kodeverk/src/overforingArsakCodes';
+import overforingArsakCodes from '@fpsak-frontend/kodeverk/src/overforingArsakCodes';
 import utsettelseArsakCodes from '@fpsak-frontend/kodeverk/src/utsettelseArsakCodes';
 import oppholdArsakType from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
 import { Image } from '@fpsak-frontend/shared-components';
@@ -18,6 +18,15 @@ import lagVisningsNavn from './utils/lagVisningsNavn';
 import styles from './uttakPeriodeType.less';
 
 const formatProsent = (prosent: string | number): string => `${prosent}%`;
+
+// Dette burde ikkje vera hardkoda, men la dette ligga til heile fakta uttak blir refaktorert
+export const overforingArsakTexts = {
+  [overforingArsakCodes.INSTITUSJONSOPPHOLD_ANNEN_FORELDER]: 'Innlagt i helseinstitusjon',
+  [overforingArsakCodes.SYKDOM_ANNEN_FORELDER]: 'Avhengig av hjelp grunnet sykdom',
+  [overforingArsakCodes.IKKE_RETT_ANNEN_FORELDER]: 'Den andre foreldren har ikke rett',
+  [overforingArsakCodes.ALENEOMSORG]: 'Søker har aleneomsorg',
+  [overforingArsakCodes.UDEFINERT]: '-',
+};
 
 const getUttakTypeTitle = (getKodeverknavn: (kodeverk: Kodeverk) => string, utsettelseArsak?: Kodeverk, overforingArsak?: Kodeverk,
   arbeidstidprosent?: number, oppholdArsak?: Kodeverk): ReactElement => {

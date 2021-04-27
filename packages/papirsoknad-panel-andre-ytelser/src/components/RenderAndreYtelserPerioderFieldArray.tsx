@@ -4,9 +4,9 @@ import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 
 import {
-  FlexColumn, FlexContainer, FlexRow, PeriodFieldArray,
+  FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
-import { DatepickerField } from '@fpsak-frontend/form';
+import { DatepickerField, PeriodFieldArray } from '@fpsak-frontend/form';
 import {
   dateAfterOrEqual, hasValidDate, ISO_DATE_FORMAT, isRequiredMessage, required,
 } from '@fpsak-frontend/utils';

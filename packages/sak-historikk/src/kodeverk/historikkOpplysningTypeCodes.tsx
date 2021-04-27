@@ -1,4 +1,4 @@
-// @TODO kodeverk_i_frontend
+// kodeverk_i_frontend - Fiks når ein refaktorerar historikk
 const historikkOpplysningTypeCodes = {
   ANTALL_BARN: {
     kode: 'ANTALL_BARN',

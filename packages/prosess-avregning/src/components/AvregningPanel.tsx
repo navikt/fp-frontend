@@ -35,8 +35,6 @@ import AvregningTable from './AvregningTable';
 
 import styles from './avregningPanel.less';
 
-// TODO Denne komponenten må refaktorerast! Er frykteleg stor
-
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 const simuleringAksjonspunkt = AksjonspunktCode.VURDER_FEILUTBETALING;

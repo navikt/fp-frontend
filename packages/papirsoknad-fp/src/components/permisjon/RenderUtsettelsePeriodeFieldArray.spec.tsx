@@ -1,8 +1,7 @@
 import React, { ReactElement } from 'react';
 
 import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { PeriodFieldArray } from '@fpsak-frontend/shared-components';
-import { DatepickerField, SelectField } from '@fpsak-frontend/form';
+import { PeriodFieldArray, DatepickerField, SelectField } from '@fpsak-frontend/form';
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 
 import messages from '../../../i18n/nb_NO.json';
