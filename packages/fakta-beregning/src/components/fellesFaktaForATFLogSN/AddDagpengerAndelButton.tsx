@@ -22,8 +22,8 @@ const dagpenger = (aktivitetStatuser: KodeverkMedNavn[]) => ({
   lagtTilAvSaksbehandler: true,
 });
 
-const onKeyDown = (fields, aktivitetStatuser) => ({ keyCode }) => {
-  if (keyCode === 13) {
+const onKeyDown = (fields, aktivitetStatuser) => ({ key }) => {
+  if (key === 'Enter') {
     fields.push(dagpenger(aktivitetStatuser));
   }
 };

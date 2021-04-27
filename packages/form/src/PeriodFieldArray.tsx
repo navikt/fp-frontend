@@ -17,8 +17,8 @@ const onClick = (fields: FieldArrayFieldsProps<any>, emptyPeriodTemplate?: any) 
   fields.push(emptyPeriodTemplate);
 };
 
-const onKeyDown = (fields: FieldArrayFieldsProps<any>, emptyPeriodTemplate?: any) => ({ keyCode }: React.KeyboardEvent): void => {
-  if (keyCode === 13) {
+const onKeyDown = (fields: FieldArrayFieldsProps<any>, emptyPeriodTemplate?: any) => ({ key }: React.KeyboardEvent): void => {
+  if (key === 'Enter') {
     fields.push(emptyPeriodTemplate);
   }
 };
