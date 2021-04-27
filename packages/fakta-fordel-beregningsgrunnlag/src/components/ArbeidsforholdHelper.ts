@@ -3,9 +3,9 @@ import Beregningsgrunnlag, {
   BeregningsgrunnlagAndel,
   BeregningsgrunnlagPeriodeProp,
 } from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
-import { FordelBeregningsgrunnlagAndel, FordelBeregningsgrunnlagPeriode, Kodeverk } from '@fpsak-frontend/types';
+import { FordelBeregningsgrunnlagAndel, FordelBeregningsgrunnlagPeriode } from '@fpsak-frontend/types';
 import BeregningsgrunnlagArbeidsforhold from '@fpsak-frontend/types/src/beregningsgrunnlagArbeidsforholdTsType';
-import {BGFordelArbeidsforhold} from "../types/FordelingTsType";
+import { BGFordelArbeidsforhold } from '../types/FordelingTsType';
 
 const arbeidsforholdEksistererIListen = (arbeidsforhold: BeregningsgrunnlagArbeidsforhold, arbeidsgiverList: BGFordelArbeidsforhold[]): boolean => {
   if (arbeidsforhold.arbeidsforholdId === null) {
@@ -49,8 +49,7 @@ const finnAndelerFraFordelingperioder = (fordelPerioder: FordelBeregningsgrunnla
 const finnAndelerFraBgperioder = (bgPerioder: BeregningsgrunnlagPeriodeProp[]): BeregningsgrunnlagAndel[] => (bgPerioder.length > 0
   ? bgPerioder.flatMap((p) => p.beregningsgrunnlagPrStatusOgAndel) : emptyList);
 
-// TODO Fjern export og rename fil
-export const getUniqueListOfArbeidsforholdFromPerioder = (fordelPerioder: FordelBeregningsgrunnlagPeriode[],
+const getUniqueListOfArbeidsforholdFromPerioder = (fordelPerioder: FordelBeregningsgrunnlagPeriode[],
   bgPerioder: BeregningsgrunnlagPeriodeProp[]): BGFordelArbeidsforhold[] => getUniqueListOfArbeidsforholdFromAndeler(
   finnAndelerFraFordelingperioder(fordelPerioder),
   finnAndelerFraBgperioder(bgPerioder),

@@ -30,13 +30,13 @@ export const settAndelIArbeid = (andelerIArbeid: number[]): string => {
   return `${minAndel}${GRADERING_RANGE_DENOMINATOR}${maxAndel}`;
 };
 
-const finnnInntektskategorikode = (andel) => (andel.inntektskategori
+const finnnInntektskategorikode = (andel: FordelBeregningsgrunnlagAndel): string => (andel.inntektskategori
 && andel.inntektskategori.kode !== inntektskategorier.UDEFINERT ? andel.inntektskategori.kode : '');
 
 const createAndelnavn = (andel: FordelBeregningsgrunnlagAndel,
   harKunYtelse: boolean,
   getKodeverknavn: (kodeverk: Kodeverk) => string,
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => {
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
   if (!andel.aktivitetStatus || andel.aktivitetStatus.kode === aktivitetStatus.UDEFINERT) {
     return '';
   }
