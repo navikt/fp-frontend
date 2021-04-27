@@ -8,7 +8,7 @@ const cancellable = (axiosInstance: AxiosInstance, config: AxiosRequestConfig): 
   });
   // @ts-ignore Fiks
   request.cancel = cancel;
-  return request.catch((error) => (axios.isCancel(error) ? Promise.reject(new Error(null)) : Promise.reject(error)));
+  return request.catch((error) => (axios.isCancel(error) ? Promise.reject(new Error()) : Promise.reject(error)));
 };
 
 const defaultHeaders = {

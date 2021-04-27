@@ -126,9 +126,9 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   const behandlingTypeKode = behandling ? behandling.type.kode : undefined;
 
   const vergeMenyvalg = behandlingRettigheter?.vergeBehandlingsmeny;
-  const fjernVergeFn = vergeMenyvalg === VergeBehandlingmenyValg.FJERN
+  const fjernVergeFn = vergeMenyvalg === VergeBehandlingmenyValg.FJERN && behandlingId && behandlingVersjon
     ? fjernVerge(location, pushLocation, fagsak.saksnummer, behandlingId, behandlingVersjon) : undefined;
-  const opprettVergeFn = vergeMenyvalg === VergeBehandlingmenyValg.OPPRETT
+  const opprettVergeFn = vergeMenyvalg === VergeBehandlingmenyValg.OPPRETT && behandlingId && behandlingVersjon
     ? opprettVerge(location, pushLocation, fagsak.saksnummer, behandlingId, behandlingVersjon) : undefined;
   return (
     <MenySakIndex
@@ -155,18 +155,19 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
           )),
         new MenyData(behandlingRettigheter?.behandlingKanHenlegges, getHenleggMenytekst())
           .medModal((lukkModal) => (
-            <MenyHenleggIndex
-              behandlingId={behandlingId}
-              behandlingVersjon={behandlingVersjon}
-              forhandsvisHenleggBehandling={previewHenleggBehandling}
-              henleggBehandling={shelveBehandling}
-              ytelseType={fagsak.fagsakYtelseType}
-              behandlingType={behandling?.type}
-              behandlingUuid={behandling?.uuid}
-              behandlingResultatTyper={menyKodeverk.getKodeverkForValgtBehandling(kodeverkTyper.BEHANDLING_RESULTAT_TYPE)}
-              lukkModal={lukkModal}
-              gaaTilSokeside={gaaTilSokeside}
-            />
+            <>
+              {behandling && (
+                <MenyHenleggIndex
+                  valgtBehandling={behandling}
+                  forhandsvisHenleggBehandling={previewHenleggBehandling}
+                  henleggBehandling={shelveBehandling}
+                  ytelseType={fagsak.fagsakYtelseType}
+                  behandlingResultatTyper={menyKodeverk.getKodeverkForValgtBehandling(kodeverkTyper.BEHANDLING_RESULTAT_TYPE)}
+                  lukkModal={lukkModal}
+                  gaaTilSokeside={gaaTilSokeside}
+                />
+              )}
+            </>
           )),
         new MenyData(behandlingRettigheter?.behandlingKanBytteEnhet, getMenytekst())
           .medModal((lukkModal) => (

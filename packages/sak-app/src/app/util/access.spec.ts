@@ -8,12 +8,12 @@ import {
   writeAccess,
 } from './access';
 
-const forEachFagsakAndBehandlingStatus = (callback) => (
+const forEachFagsakAndBehandlingStatus = (callback: (fagsakStatus: string, behandlingStatus: string) => void) => (
   Object.values(fagsakStatusCode).forEach((fagsakStatus) => Object.values(behandlingStatusCode)
     .forEach((behandlingStatus) => callback(fagsakStatus, behandlingStatus)))
 );
 
-const getTestName = (accessName, expected, fagsakStatus, behandlingStatus): string => (
+const getTestName = (accessName: string, expected: boolean, fagsakStatus: string, behandlingStatus: string): string => (
   `skal${expected ? '' : ' ikke'} ha ${accessName} når fagsakStatus er '${fagsakStatus}' og behandlingStatus er '${behandlingStatus}'`
 );
 
@@ -43,7 +43,7 @@ describe('access', () => {
       expect(accessForVeileder).toHaveProperty('isEnabled', false);
     });
 
-    forEachFagsakAndBehandlingStatus((fagsakStatus, behandlingStatus) => {
+    forEachFagsakAndBehandlingStatus((fagsakStatus: string, behandlingStatus: string) => {
       const expected = validFagsakStatuser.includes(fagsakStatus) && validBehandlingStatuser.includes(behandlingStatus);
       it(`${getTestName('skrivetilgang', expected, fagsakStatus, behandlingStatus)}`, () => {
         const access = writeAccess(saksbehandlerAnsatt, { kode: fagsakStatus, kodeverk: '' }, { kode: behandlingStatus, kodeverk: '' },

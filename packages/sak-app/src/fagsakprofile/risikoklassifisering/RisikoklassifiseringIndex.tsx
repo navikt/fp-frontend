@@ -83,6 +83,9 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
   }, [!!risikoAksjonspunkt, behandlingId, behandlingVersjon]);
 
   const submitAksjonspunkt = useCallback((aksjonspunkt: VurderFaresignalerAp) => {
+    if (!behandlingId || !behandlingVersjon) {
+      return Promise.reject();
+    }
     const params = {
       behandlingId,
       saksnummer: fagsak.saksnummer,

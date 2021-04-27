@@ -17,7 +17,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('<FagsakSearchIndex>', () => {
-  const fagsak: Partial<Fagsak> = {
+  const fagsak = {
     saksnummer: '12345',
     fagsakYtelseType: {
       kode: 'ES',

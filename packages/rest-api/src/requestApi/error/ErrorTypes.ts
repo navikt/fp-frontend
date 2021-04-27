@@ -13,12 +13,12 @@ export enum ErrorTypes {
 
 export const handledErrorTypes = [ErrorTypes.MANGLER_TILGANG_FEIL];
 
-export const getErrorResponseData = (error: ErrorType): any => (error
+export const getErrorResponseData = (error?: ErrorType): any => (error
   && error.response && error.response.data ? error.response.data : error);
 
-export const errorOfType = (error: ErrorType, errorType: string): boolean => error && (getErrorResponseData(error).type === errorType);
+export const errorOfType = (errorType: string, error?: ErrorType): boolean => !!error && (getErrorResponseData(error).type === errorType);
 
-export const isHandledError = (errorType?: string): boolean => errorType && handledErrorTypes.some((het) => het === errorType);
+export const isHandledError = (errorType?: string): boolean => !!errorType && handledErrorTypes.some((het) => het === errorType);
 
 const hasStatusCode = (statusCode: number) => (errorStatus?: number): boolean => errorStatus === statusCode;
 

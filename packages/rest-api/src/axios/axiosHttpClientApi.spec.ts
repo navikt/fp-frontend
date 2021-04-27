@@ -4,7 +4,7 @@ import getAxiosHttpClientApi from './getAxiosHttpClientApi';
 
 describe('axiosHttpClientApi', () => {
   const httpClientApi = getAxiosHttpClientApi();
-  let mockAxios;
+  let mockAxios: MockAdapter;
 
   beforeAll(() => {
     mockAxios = new MockAdapter(httpClientApi.axiosInstance);
