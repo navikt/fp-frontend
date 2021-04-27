@@ -18,7 +18,7 @@ import FordelBeregningsgrunnlagPeriodePanel from './FordelBeregningsgrunnlagPeri
 import styles from './fordelBeregningsgrunnlagForm.less';
 import {
   FordelBeregningsgrunnlagAndelTransformedValues,
-  FordelBeregningsgrunnlagAndelValues,
+  FordelBeregningsgrunnlagAndelValues, FordelBeregningsgrunnlagFastsatteVerdierTransformedValues,
   FordelBeregningsgrunnlagMedAksjonspunktValues,
   FordelBeregningsgrunnlagPerioderTransformedValues,
   FordelBeregningsgrunnlagPeriodeTransformedValues,
@@ -29,18 +29,16 @@ const fordelBGFieldArrayNamePrefix = 'fordelBGPeriode';
 
 export const getFieldNameKey = (index: number): string => (fordelBGFieldArrayNamePrefix + index);
 
-export const mapTilFastsatteVerdier = (aktivitet, skalHaBesteberegning) => ({
+export const mapTilFastsatteVerdier = (aktivitet: FordelBeregningsgrunnlagAndelValues): FordelBeregningsgrunnlagFastsatteVerdierTransformedValues => ({
   refusjonPrÅr: aktivitet.skalKunneEndreRefusjon ? removeSpacesFromNumber(aktivitet.refusjonskrav) : null,
-  fastsattÅrsbeløp: removeSpacesFromNumber(aktivitet.fastsattBelop),
   fastsattÅrsbeløpInklNaturalytelse: removeSpacesFromNumber(aktivitet.fastsattBelop),
   inntektskategori: aktivitet.inntektskategori,
-  skalHaBesteberegning,
 });
 
 const finnRiktigBgPeriode = (periode: FordelBeregningsgrunnlagPeriode,
   bgPerioder: BeregningsgrunnlagPeriodeProp[]): BeregningsgrunnlagPeriodeProp => bgPerioder.find((p) => p.beregningsgrunnlagPeriodeFom === periode.fom);
 
-const getAndelsnr = (aktivitet) => {
+const getAndelsnr = (aktivitet: FordelBeregningsgrunnlagAndelValues): number | string => {
   if (aktivitet.nyAndel === true) {
     return aktivitet.andel;
   }
@@ -61,7 +59,6 @@ export const mapAndel = (aktivitet: FordelBeregningsgrunnlagAndelValues): Fordel
   forrigeArbeidsinntektPrÅr: aktivitet.forrigeArbeidsinntektPrAar,
   forrigeRefusjonPrÅr: aktivitet.forrigeRefusjonPrAar,
   forrigeInntektskategori: aktivitet.forrigeInntektskategori,
-  // @ts-ignore FIXME: Denne forventer også skalHaBesteberegning, hvorfor er denne blitt borte?
   fastsatteVerdier: mapTilFastsatteVerdier(aktivitet),
 });
 
@@ -87,18 +84,24 @@ const harPeriodeSomKanKombineresMedForrige = (periode: BeregningsgrunnlagPeriode
   return true;
 };
 
-const oppdaterTomDatoForSistePeriode = (liste: FordelBeregningsgrunnlagPeriode[], periode: FordelBeregningsgrunnlagPeriode): void => {
-  liste.pop(); // Fjerner siste element
-  const nyPeriode = {
-    fom: periode.fom,
-    fordelBeregningsgrunnlagAndeler: periode.fordelBeregningsgrunnlagAndeler,
-    skalRedigereInntekt: periode.skalRedigereInntekt,
-    skalPreutfyllesMedBeregningsgrunnlag: periode.skalPreutfyllesMedBeregningsgrunnlag,
-    skalKunneEndreRefusjon: periode.skalKunneEndreRefusjon,
-    tom: periode.tom,
-  };
-  liste.push(nyPeriode);
+const oppdaterTomDatoForSistePeriode = (liste, periode) => {
+  const forrigePeriode = liste.pop();
+  forrigePeriode.tom = periode.tom;
+  liste.push(forrigePeriode);
 };
+
+// const oppdaterTomDatoForSistePeriode = (liste: FordelBeregningsgrunnlagPeriode[], periode: FordelBeregningsgrunnlagPeriode): void => {
+//   liste.pop(); // Fjerner siste element
+//   const nyPeriode = {
+//     fom: periode.fom,
+//     fordelBeregningsgrunnlagAndeler: periode.fordelBeregningsgrunnlagAndeler,
+//     skalRedigereInntekt: periode.skalRedigereInntekt,
+//     skalPreutfyllesMedBeregningsgrunnlag: periode.skalPreutfyllesMedBeregningsgrunnlag,
+//     skalKunneEndreRefusjon: periode.skalKunneEndreRefusjon,
+//     tom: periode.tom,
+//   };
+//   liste.push(nyPeriode);
+// };
 
 const sjekkOmPeriodeSkalLeggesTil = (bgPerioder: BeregningsgrunnlagPeriodeProp[]) => (aggregatedPeriodList: FordelBeregningsgrunnlagPeriode[],
   periode: FordelBeregningsgrunnlagPeriode): FordelBeregningsgrunnlagPeriode[] => {

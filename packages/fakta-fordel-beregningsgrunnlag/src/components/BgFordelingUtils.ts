@@ -1,12 +1,8 @@
-import moment from 'moment';
 import inntektskategorier from '@fpsak-frontend/kodeverk/src/inntektskategorier';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-
 import { formatCurrencyNoKr, removeSpacesFromNumber } from '@fpsak-frontend/utils';
-
 import {
   ArbeidsgiverOpplysningerPerId,
-  BeregningsgrunnlagAndel,
   FordelBeregningsgrunnlagAndel,
   Kodeverk,
 } from '@fpsak-frontend/types';
@@ -17,16 +13,17 @@ import {
   FordelBeregningsgrunnlagGenerellAndelValues,
 } from '../types/FordelingTsType';
 
-const nullOrUndefined = (value) => value === null || value === undefined;
-
 export const GRADERING_RANGE_DENOMINATOR = ' - ';
+
+const nullOrUndefined = (value: number): boolean => value === null || value === undefined;
 
 export const settAndelIArbeid = (andelerIArbeid: number[]): string => {
   if (andelerIArbeid.length === 0) {
     return '';
   }
   if (andelerIArbeid.length === 1) {
-    return `${parseFloat(andelerIArbeid[0].toFixed(2))}`;
+    // @ts-ignore fiks
+    return `${parseFloat(andelerIArbeid[0]).toFixed(2)}`;
   }
   const minAndel = Math.min(...andelerIArbeid);
   const maxAndel = Math.max(...andelerIArbeid);

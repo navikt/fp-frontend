@@ -12,7 +12,7 @@ export type PeriodeTsType = {
 };
 
 export type FordelBeregningsgrunnlagAndelTransformedValues = {
-  andelsnr: number;
+  andelsnr: number | string;
   aktivitetStatus: string;
   arbeidsgiverId: string;
   arbeidsforholdId: string;

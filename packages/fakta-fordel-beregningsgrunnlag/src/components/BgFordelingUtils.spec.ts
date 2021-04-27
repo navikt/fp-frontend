@@ -7,6 +7,7 @@ import {
   settAndelIArbeid,
   settFastsattBelop,
 } from './BgFordelingUtils';
+import { FordelBeregningsgrunnlagAndelValues } from '../types/FordelingTsType';
 
 const arbeidsgiver = {
   arbeidsgiverIdent: '3284788923',
@@ -145,7 +146,7 @@ describe('<BgFordelingUtils>', () => {
       fastsattBelop: '10 000',
       readOnlyBelop: '20 000',
     };
-    const belop = mapToBelop(andel);
+    const belop = mapToBelop(andel as FordelBeregningsgrunnlagAndelValues);
     expect(belop).toBe(10000);
   });
 
@@ -155,7 +156,7 @@ describe('<BgFordelingUtils>', () => {
       fastsattBelop: '10 000',
       readOnlyBelop: '20 000',
     };
-    const belop = mapToBelop(andel);
+    const belop = mapToBelop(andel as FordelBeregningsgrunnlagAndelValues);
     expect(belop).toBe(20000);
   });
 });
