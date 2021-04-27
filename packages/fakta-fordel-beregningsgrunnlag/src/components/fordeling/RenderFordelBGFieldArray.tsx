@@ -1,4 +1,4 @@
-import React, { FunctionComponent, KeyboardEventHandler, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import {
   FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
@@ -21,8 +21,6 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import beregningsgrunnlagAndeltyper from '@fpsak-frontend/kodeverk/src/beregningsgrunnlagAndeltyper';
 import inntektskategorier, { isSelvstendigNæringsdrivende } from '@fpsak-frontend/kodeverk/src/inntektskategorier';
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
-
-import 'core-js/features/array/flat-map';
 
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import {
@@ -403,7 +401,7 @@ type MappedOwnProps = {
 type OwnProps = {
     readOnly: boolean;
     fields: FieldArrayFieldsProps<FordelBeregningsgrunnlagAndelValues>;
-    meta?: FieldArrayMetaProps;
+    meta: FieldArrayMetaProps;
     isAksjonspunktClosed: boolean;
     periodeUtenAarsak: boolean;
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
