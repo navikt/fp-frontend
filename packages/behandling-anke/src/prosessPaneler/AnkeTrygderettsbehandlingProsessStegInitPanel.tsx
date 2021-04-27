@@ -5,7 +5,7 @@ import React, {
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AnkeTrygderettsbehandlingProsessIndex, { AnkeTrygderettBrevData } from '@fpsak-frontend/prosess-anke-trygderettsbehandling';
-import { prosessStegCodes } from '@fpsak-frontend/konstanter';
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import {
   Aksjonspunkt, AnkeVurdering, Behandling, Fagsak,
 } from '@fpsak-frontend/types';
@@ -108,7 +108,7 @@ const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<OwnProps 
       initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
-      prosessPanelKode={prosessStegCodes.ANKE_MERKNADER}
+      prosessPanelKode={ProsessStegCode.ANKE_MERKNADER}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.AnkeMerknader' })}
       skalPanelVisesIMeny={() => true}
       lagringSideEffekter={lagringSideeffekterCallback}

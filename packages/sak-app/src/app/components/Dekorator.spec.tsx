@@ -1,5 +1,5 @@
 import React from 'react';
-import sinon from 'sinon';
+import sinon, { SinonStub } from 'sinon';
 import { shallow } from 'enzyme';
 
 import HeaderWithErrorPanel from '@fpsak-frontend/sak-dekorator';
@@ -21,7 +21,7 @@ const navAnsatt = {
   navn: 'Test',
 };
 
-let contextStubHistory;
+let contextStubHistory: SinonStub;
 afterEach(() => {
   if (contextStubHistory) {
     contextStubHistory.restore();

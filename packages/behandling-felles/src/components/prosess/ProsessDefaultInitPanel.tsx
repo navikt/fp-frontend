@@ -5,6 +5,7 @@ import React, {
 import { RestApiHooks, RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { AbstractRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import StandardProsessPanelProps from '@fpsak-frontend/types/src/standardProsessPanelPropsTsType';
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 
 import ProsessPanelInitProps from '../../types/prosessPanelInitProps';
 import useStandardProsessPanelProps from '../../utils/prosess/useStandardProsessPanelProps';
@@ -20,7 +21,7 @@ export type OwnProps<INIT_DATA, PANEL_DATA> = {
   skalPanelVisesIMeny: (data: Partial<INIT_DATA> & StandardProsessPanelProps, state: RestApiState) => boolean;
   hentOverstyrtStatus?: (initData: Partial<INIT_DATA>, standardData: StandardProsessPanelProps) => string;
   renderPanel: (data: INIT_DATA & PANEL_DATA & StandardProsessPanelProps, initData?: Partial<INIT_DATA>) => ReactElement;
-  prosessPanelKode: string;
+  prosessPanelKode: ProsessStegCode;
   prosessPanelMenyTekst: string;
   lagringSideEffekter?: (aksjonspunktModeller: any) => () => void,
   erOverstyrt?: boolean;

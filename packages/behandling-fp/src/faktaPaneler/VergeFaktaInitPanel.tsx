@@ -4,7 +4,7 @@ import React, {
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VergeFaktaIndex from '@fpsak-frontend/fakta-verge';
-import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
+import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import { Aksjonspunkt, Verge } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@fpsak-frontend/utils';
@@ -36,7 +36,7 @@ const VergeFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => (
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    faktaPanelKode={faktaPanelCodes.VERGE}
+    faktaPanelKode={FaktaPanelCode.VERGE}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'RegistrereVergeInfoPanel.Info' })}
     skalPanelVisesIMeny={(initData) => !!initData?.aksjonspunkter?.some((ap) => ap.definisjon.kode === AKSJONSPUNKT_KODER[0])}
     renderPanel={(data) => <VergeFaktaIndex {...data} />}

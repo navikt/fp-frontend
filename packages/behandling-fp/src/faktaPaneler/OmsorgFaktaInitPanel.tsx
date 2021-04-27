@@ -4,7 +4,7 @@ import React, {
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import OmsorgFaktaIndex from '@fpsak-frontend/fakta-omsorg';
-import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
+import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import {
   Aksjonspunkt, Personoversikt, Soknad, Ytelsefordeling,
 } from '@fpsak-frontend/types';
@@ -49,7 +49,7 @@ const OmsorgFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = 
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    faktaPanelKode={faktaPanelCodes.OMSORG}
+    faktaPanelKode={FaktaPanelCode.OMSORG}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'OmsorgInfoPanel.Omsorg' })}
     skalPanelVisesIMeny={(initData) => !!initData?.aksjonspunkter?.some((ap) => AKSJONSPUNKT_KODER.some((kode) => kode === ap.definisjon.kode))}
     renderPanel={(data) => <OmsorgFaktaIndex personoversikt={personoversikt} {...data} />}

@@ -8,7 +8,7 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import MeldingerSakIndex, { MessagesModalSakIndex, FormValues } from '@fpsak-frontend/sak-meldinger';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
-  BehandlingAppKontekst, Fagsak, Kodeverk,
+  BehandlingAppKontekst, Fagsak, Kodeverk, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 
@@ -88,12 +88,10 @@ const getPreviewCallback = (
 
 interface OwnProps {
   fagsak: Fagsak;
-  alleBehandlinger: BehandlingAppKontekst[];
-  behandlingId: number;
-  behandlingVersjon?: number;
+  valgtBehandling: BehandlingAppKontekst;
 }
 
-const EMPTY_ARRAY = [];
+const EMPTY_ARRAY = [] as KodeverkMedNavn[];
 const RECIPIENTS = ['Søker'];
 
 /**
@@ -103,15 +101,11 @@ const RECIPIENTS = ['Søker'];
  */
 const MeldingIndex: FunctionComponent<OwnProps> = ({
   fagsak,
-  alleBehandlinger,
-  behandlingId,
-  behandlingVersjon,
+  valgtBehandling,
 }) => {
   const [showSettPaVentModal, setShowSettPaVentModal] = useState(false);
   const [showMessagesModal, setShowMessageModal] = useState(false);
   const [submitCounter, setSubmitCounter] = useState(0);
-
-  const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
 
   const history = useHistory();
 
@@ -122,14 +116,16 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
 
   const { startRequest: submitMessage, state: submitState } = restApiHooks.useRestApiRunner(FpsakApiKeys.SUBMIT_MESSAGE);
 
+  const { id, versjon, type } = valgtBehandling;
+
   const resetMessage = () => {
     // FIXME temp fiks for å unngå prod-feil (her skjer det ein oppdatering av behandling, så må oppdatera)
     window.location.reload();
   };
 
-  const submitCallback = useCallback(getSubmitCallback(setShowMessageModal, behandling.type.kode, behandlingId, behandling.uuid, submitMessage,
+  const submitCallback = useCallback(getSubmitCallback(setShowMessageModal, type.kode, id, valgtBehandling.uuid, submitMessage,
     resetMessage, setShowSettPaVentModal, setSubmitCounter),
-  [behandlingId, behandlingVersjon]);
+  [id, versjon]);
 
   const hideSettPaVentModal = useCallback(() => {
     setShowSettPaVentModal(false);
@@ -137,20 +133,20 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
 
   const handleSubmitFromModal = useCallback((formValues) => {
     const values = {
-      behandlingId,
-      behandlingVersjon,
+      behandlingId: id,
+      behandlingVersjon: versjon,
       frist: formValues.frist,
       ventearsak: formValues.ventearsak,
     };
     setBehandlingOnHold(values);
     hideSettPaVentModal();
     history.push('/');
-  }, [behandlingId, behandlingVersjon]);
+  }, [id, versjon]);
 
-  const fetchPreview = useVisForhandsvisningAvMelding(behandling.type);
+  const fetchPreview = useVisForhandsvisningAvMelding(type);
 
-  const previewCallback = useCallback(getPreviewCallback(behandling.type.kode, behandling.uuid, fagsak.fagsakYtelseType, fetchPreview),
-    [behandlingId, behandlingVersjon]);
+  const previewCallback = useCallback(getPreviewCallback(type.kode, valgtBehandling.uuid, fagsak.fagsakYtelseType, fetchPreview),
+    [id, versjon]);
 
   const afterSubmit = useCallback(() => {
     setShowMessageModal(false);
@@ -159,13 +155,13 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
 
   const skalHenteRevAp = requestApi.hasPath(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name);
   const { data: harApentKontrollerRevAp } = restApiHooks.useRestApi(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, undefined, {
-    updateTriggers: [behandlingId, behandlingVersjon, submitCounter],
+    updateTriggers: [id, versjon, submitCounter],
     suspendRequest: !skalHenteRevAp,
     keepData: true,
   });
 
   const { data: brevmaler } = restApiHooks.useRestApi(FpsakApiKeys.BREVMALER, undefined, {
-    updateTriggers: [behandlingId, behandlingVersjon, submitCounter],
+    updateTriggers: [id, versjon, submitCounter],
     keepData: true,
   });
 
@@ -179,7 +175,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
       <MeldingerSakIndex
         submitCallback={submitCallback}
         recipients={RECIPIENTS}
-        sprakKode={behandling?.sprakkode}
+        sprakKode={valgtBehandling.sprakkode}
         previewCallback={previewCallback}
         revurderingVarslingArsak={revurderingVarslingArsak}
         templates={brevmaler}
@@ -196,7 +192,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
           ventearsak={venteArsakType.AVV_DOK}
           ventearsaker={ventearsaker}
           hasManualPaVent={false}
-          erTilbakekreving={behandling.type.kode === BehandlingType.TILBAKEKREVING || behandling.type.kode === BehandlingType.TILBAKEKREVING_REVURDERING}
+          erTilbakekreving={type.kode === BehandlingType.TILBAKEKREVING || type.kode === BehandlingType.TILBAKEKREVING_REVURDERING}
         />
       )}
     </>

@@ -27,10 +27,10 @@ const getReadOnly = (navAnsatt: NavAnsatt, rettigheter: AksessRettigheter, erPaa
 interface OwnProps {
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
+  behandlingId?: number;
   behandlingVersjon?: number;
   kontrollresultat?: Risikoklassifisering;
   risikoAksjonspunkt?: Aksjonspunkt;
-  behandlingId: number;
 }
 
 /**
@@ -73,17 +73,19 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
     history.push(getRiskPanelLocationCreator(location)(!isRiskPanelOpen));
   }, [location, isRiskPanelOpen]);
 
-  const harRisikoAksjonspunkt = !!risikoAksjonspunkt;
   useEffect(() => {
-    if (harRisikoAksjonspunkt && risikoAksjonspunkt.status.kode === aksjonspunktStatus.OPPRETTET && !isRiskPanelOpen) {
+    if (!!risikoAksjonspunkt && risikoAksjonspunkt.status.kode === aksjonspunktStatus.OPPRETTET && !isRiskPanelOpen) {
       history.push(getRiskPanelLocationCreator(location)(true));
     }
-    if (harRisikoAksjonspunkt && risikoAksjonspunkt.status.kode === aksjonspunktStatus.UTFORT) {
+    if (!!risikoAksjonspunkt && risikoAksjonspunkt.status.kode === aksjonspunktStatus.UTFORT) {
       history.push(getRiskPanelLocationCreator(location)(false));
     }
-  }, [harRisikoAksjonspunkt, behandlingId, behandlingVersjon]);
+  }, [!!risikoAksjonspunkt, behandlingId, behandlingVersjon]);
 
   const submitAksjonspunkt = useCallback((aksjonspunkt: VurderFaresignalerAp) => {
+    if (!behandlingId || !behandlingVersjon) {
+      return Promise.reject();
+    }
     const params = {
       behandlingId,
       saksnummer: fagsak.saksnummer,

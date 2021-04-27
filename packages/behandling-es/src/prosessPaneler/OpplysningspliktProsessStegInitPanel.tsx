@@ -5,7 +5,7 @@ import React, {
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SokersOpplysningspliktVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-sokers-opplysningsplikt';
-import { prosessStegCodes } from '@fpsak-frontend/konstanter';
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
@@ -50,7 +50,7 @@ const OpplysningspliktProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     vilkarKoder={VILKAR_KODER}
-    prosessPanelKode={prosessStegCodes.OPPLYSNINGSPLIKT}
+    prosessPanelKode={ProsessStegCode.OPPLYSNINGSPLIKT}
     prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' })}
     skalPanelVisesIMeny={(data) => data.vilkar.length > 0}
     renderPanel={(data) => (

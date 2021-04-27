@@ -47,9 +47,7 @@ const getLagreFunksjon = (
 
 interface OwnProps {
   fagsak: Fagsak;
-  alleBehandlinger: BehandlingAppKontekst[];
-  behandlingId: number;
-  behandlingVersjon: number;
+  valgtBehandling: BehandlingAppKontekst;
 }
 
 /**
@@ -59,71 +57,72 @@ interface OwnProps {
  */
 const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
   fagsak,
-  alleBehandlinger,
-  behandlingId,
-  behandlingVersjon,
+  valgtBehandling,
 }) => {
   const [visBeslutterModal, setVisBeslutterModal] = useState(false);
   const [erAlleAksjonspunktGodkjent, setAlleAksjonspunktTilGodkjent] = useState(false);
-
-  const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
 
   const location = useLocation();
   const history = useHistory();
 
   const { brukernavn, kanVeilede } = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
 
-  const alleKodeverk = useKodeverk(behandling.type);
+  const alleKodeverk = useKodeverk(valgtBehandling.type);
 
-  const erInnsynBehandling = behandling.type.kode === BehandlingType.DOKUMENTINNSYN;
+  const {
+    id, uuid, versjon, type, status,
+  } = valgtBehandling;
+
+  const erInnsynBehandling = type.kode === BehandlingType.DOKUMENTINNSYN;
 
   const { data: totrinnArsaker } = restApiHooks.useRestApi(
     FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER, undefined, {
-      updateTriggers: [behandlingId, behandling.status.kode],
-      suspendRequest: !!erInnsynBehandling || behandling.status.kode !== BehandlingStatus.FATTER_VEDTAK,
+      updateTriggers: [id, status.kode],
+      suspendRequest: !!erInnsynBehandling || status.kode !== BehandlingStatus.FATTER_VEDTAK,
     },
   );
   const { data: totrinnArsakerReadOnly } = restApiHooks.useRestApi(
     FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY, undefined, {
-      updateTriggers: [behandlingId, behandling.status.kode],
-      suspendRequest: !!erInnsynBehandling || behandling.status.kode !== BehandlingStatus.BEHANDLING_UTREDES,
+      updateTriggers: [id, status.kode],
+      suspendRequest: !!erInnsynBehandling || status.kode !== BehandlingStatus.BEHANDLING_UTREDES,
     },
   );
 
   const { data: totrinnsKlageVurdering } = restApiHooks.useRestApi(
     FpsakApiKeys.TOTRINNS_KLAGE_VURDERING, undefined, {
       keepData: true,
-      updateTriggers: [behandlingId, behandlingVersjon],
+      updateTriggers: [id, versjon],
       suspendRequest: !requestApi.hasPath(FpsakApiKeys.TOTRINNS_KLAGE_VURDERING.name),
     },
   );
 
   const { startRequest: godkjennTotrinnsaksjonspunkter } = restApiHooks.useRestApiRunner(FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT);
 
-  const forhandsvisMelding = useVisForhandsvisningAvMelding(behandling.type);
+  const forhandsvisMelding = useVisForhandsvisningAvMelding(type);
 
   const forhandsvisVedtaksbrev = useCallback(() => {
     forhandsvisMelding(false, {
-      behandlingUuid: behandling.uuid,
+      behandlingUuid: uuid,
       ytelseType: fagsak.fagsakYtelseType,
       gjelderVedtak: true,
     });
   }, []);
-  const onSubmit = useCallback(getLagreFunksjon(fagsak.saksnummer, behandlingId, behandlingVersjon,
+  const onSubmit = useCallback(getLagreFunksjon(fagsak.saksnummer, id, versjon,
     setAlleAksjonspunktTilGodkjent, setVisBeslutterModal, godkjennTotrinnsaksjonspunkter),
-  [behandlingId, behandlingVersjon]);
+  [id, versjon]);
 
-  if (!totrinnArsaker && !totrinnArsakerReadOnly) {
+  const totrinnskontrollSkjermlenkeContext = totrinnArsaker || totrinnArsakerReadOnly;
+  if (!totrinnskontrollSkjermlenkeContext) {
     return null;
   }
 
   return (
     <>
       <TotrinnskontrollSakIndex
-        behandling={behandling}
-        totrinnskontrollSkjermlenkeContext={totrinnArsaker || totrinnArsakerReadOnly}
+        behandling={valgtBehandling}
+        totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
         location={location}
-        readOnly={brukernavn === behandling.ansvarligSaksbehandler || kanVeilede}
+        readOnly={brukernavn === valgtBehandling.ansvarligSaksbehandler || kanVeilede}
         onSubmit={onSubmit}
         forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
         fagsakYtelseType={fagsak.fagsakYtelseType}
@@ -133,7 +132,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
       />
       {visBeslutterModal && (
         <BeslutterModalIndex
-          behandling={behandling}
+          behandling={valgtBehandling}
           pushLocation={history.push}
           allAksjonspunktApproved={erAlleAksjonspunktGodkjent}
           erKlageWithKA={totrinnsKlageVurdering ? !!totrinnsKlageVurdering.klageVurderingResultatNK : undefined}

@@ -4,7 +4,7 @@ import React, {
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import UttakFaktaIndex from '@fpsak-frontend/fakta-uttak';
-import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
+import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import {
   AksessRettigheter, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelseSamling,
   Personoversikt,
@@ -73,7 +73,7 @@ const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = (
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     overstyringApKoder={OVERSTYRING_AP_CODES}
-    faktaPanelKode={faktaPanelCodes.UTTAK}
+    faktaPanelKode={FaktaPanelCode.UTTAK}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'UttakInfoPanel.FaktaUttak' })}
     skalPanelVisesIMeny={(initData) => initData && initData.ytelsefordeling && initData.ytelsefordeling.endringsdato !== undefined}
     renderPanel={(data) => (

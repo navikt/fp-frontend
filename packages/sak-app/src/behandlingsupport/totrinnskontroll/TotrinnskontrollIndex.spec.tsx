@@ -6,7 +6,9 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import { Fagsak, TotrinnskontrollAksjonspunkt, BehandlingAppKontekst } from '@fpsak-frontend/types';
+import {
+  Fagsak, TotrinnskontrollAksjonspunkt, BehandlingAppKontekst, BehandlingÅrsak,
+} from '@fpsak-frontend/types';
 
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import TotrinnskontrollIndex from './TotrinnskontrollIndex';
@@ -34,7 +36,7 @@ describe('<TotrinnskontrollIndex>', () => {
     },
   };
 
-  const alleBehandlinger = [{
+  const valgtBehandling = {
     id: 1234,
     versjon: 123,
     type: {
@@ -48,20 +50,17 @@ describe('<TotrinnskontrollIndex>', () => {
     },
     toTrinnsBehandling: true,
     ansvarligSaksbehandler: 'Espen Utvikler',
-    behandlingÅrsaker: [],
-  }];
+    behandlingÅrsaker: [] as BehandlingÅrsak[],
+  } as BehandlingAppKontekst;
 
   const kodeverk = {
     [kodeverkTyper.SKJERMLENKE_TYPE]: [],
   };
 
-  const createAksjonspunkt = (aksjonspunktKode) => (
+  const createAksjonspunkt = (aksjonspunktKode: string) => (
     {
       aksjonspunktKode,
-      beregningDto: null,
-      besluttersBegrunnelse: null,
       opptjeningAktiviteter: [],
-      totrinnskontrollGodkjent: null,
       vurderPaNyttArsaker: [],
     } as TotrinnskontrollAksjonspunkt
   );
@@ -115,9 +114,7 @@ describe('<TotrinnskontrollIndex>', () => {
 
     const wrapper = shallow(<TotrinnskontrollIndex
       fagsak={fagsak as Fagsak}
-      alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      behandlingId={alleBehandlinger[0].id}
-      behandlingVersjon={alleBehandlinger[0].versjon}
+      valgtBehandling={valgtBehandling}
     />);
 
     const index = wrapper.find(TotrinnskontrollSakIndex);

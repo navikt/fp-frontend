@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
+import sinon, { SinonStub } from 'sinon';
 
 import FagsakGrid from './components/FagsakGrid';
 import * as useTrackRouteParam from '../app/useTrackRouteParam';
@@ -30,7 +30,7 @@ describe('<FagsakIndex>', () => {
     id: 2,
   };
 
-  let contextStub;
+  let contextStub: SinonStub;
   beforeEach(() => {
     contextStub = sinon.stub(useTrackRouteParam, 'default').callsFake(() => ({
       selected: '123456',

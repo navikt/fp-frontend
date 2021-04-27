@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { prosessStegCodes } from '@fpsak-frontend/konstanter';
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { Fagsak } from '@fpsak-frontend/types';
 import { ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@fpsak-frontend/utils';
@@ -36,7 +36,7 @@ const VurderingFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & Pr
     opneSokeside={opneSokeside}
     oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    prosessPanelKode={prosessStegCodes.KLAGE_NAV_FAMILIE_OG_PENSJON}
+    prosessPanelKode={ProsessStegCode.KLAGE_NAV_FAMILIE_OG_PENSJON}
     prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.CheckKlageNFP' })}
   />
 );

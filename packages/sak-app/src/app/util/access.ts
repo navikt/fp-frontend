@@ -8,7 +8,7 @@ import {
 const kanVeilede = (navAnsatt: NavAnsatt): boolean => navAnsatt && navAnsatt.kanVeilede;
 const kanSaksbehandle = (navAnsatt: NavAnsatt): boolean => navAnsatt && navAnsatt.kanSaksbehandle;
 const kanOverstyre = (navAnsatt: NavAnsatt): boolean => kanSaksbehandle(navAnsatt) && navAnsatt.kanOverstyre;
-const isBehandlingAvTilbakekreving = (type: Kodeverk): boolean => (type
+const isBehandlingAvTilbakekreving = (type?: Kodeverk): boolean => (type
   ? (type.kode === BehandlingType.TILBAKEKREVING || type.kode === BehandlingType.TILBAKEKREVING_REVURDERING) : false);
 
 const accessibleFor = (validNavAnsattPredicates: ((navAnsatt: NavAnsatt) => boolean)[]) => (
@@ -17,18 +17,18 @@ const accessibleFor = (validNavAnsattPredicates: ((navAnsatt: NavAnsatt) => bool
 
 const enabledFor = (validFagsakStauses: string[], validBehandlingStatuses: string[]) => (
   fagsakStatus: Kodeverk,
-  behandlingStatus: Kodeverk,
   isTilbakekrevingBehandling: boolean,
+  behandlingStatus?: Kodeverk,
 ): boolean => (
   (isTilbakekrevingBehandling || (fagsakStatus && validFagsakStauses.includes(fagsakStatus.kode)))
-  && (behandlingStatus && validBehandlingStatuses.includes(behandlingStatus.kode))
+  && (!!behandlingStatus && validBehandlingStatuses.includes(behandlingStatus.kode))
 );
 
 const accessSelector = (validNavAnsattPredicates: ((navAnsatt: NavAnsatt) => boolean)[], validFagsakStatuses: string[], validBehandlingStatuses: string[]) => (
   navAnsatt: NavAnsatt,
   fagsakStatus: Kodeverk,
-  behandlingStatus: Kodeverk,
-  behandlingType: Kodeverk,
+  behandlingStatus?: Kodeverk,
+  behandlingType?: Kodeverk,
 ): Aksess => {
   if (kanVeilede(navAnsatt)) {
     return {
@@ -38,7 +38,7 @@ const accessSelector = (validNavAnsattPredicates: ((navAnsatt: NavAnsatt) => boo
   }
   const employeeHasAccess = accessibleFor(validNavAnsattPredicates)(navAnsatt);
   const isEnabled = employeeHasAccess
-    && (enabledFor(validFagsakStatuses, validBehandlingStatuses)(fagsakStatus, behandlingStatus, isBehandlingAvTilbakekreving(behandlingType)));
+    && (enabledFor(validFagsakStatuses, validBehandlingStatuses)(fagsakStatus, isBehandlingAvTilbakekreving(behandlingType), behandlingStatus));
   return { employeeHasAccess, isEnabled };
 };
 
@@ -57,8 +57,8 @@ export const kanOverstyreAccess = accessSelector(
 const getAccessRights = (
   navAnsatt: NavAnsatt,
   fagsakStatus: Kodeverk,
-  behandlingStatus: Kodeverk,
-  behandlingType: Kodeverk,
+  behandlingStatus?: Kodeverk,
+  behandlingType?: Kodeverk,
 ): AksessRettigheter => ({
   writeAccess: writeAccess(navAnsatt, fagsakStatus, behandlingStatus, behandlingType),
   kanOverstyreAccess: kanOverstyreAccess(navAnsatt, fagsakStatus, behandlingStatus, behandlingType),

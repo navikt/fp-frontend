@@ -4,7 +4,7 @@ import React, {
 
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { prosessStegCodes } from '@fpsak-frontend/konstanter';
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { AksessRettigheter, Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
 import {
   skalViseProsessPanel, ProsessDefaultInitPanel, ProsessPanelInitProps, OverstyringPanelDef,
@@ -48,7 +48,7 @@ const FortsattMedlemskapProsessStegInitPanel: FunctionComponent<OwnProps & Prose
       initEndepunkter={ENDEPUNKTER_INIT_DATA}
       aksjonspunktKoder={[AKSJONSPUNKT_KODE]}
       vilkarKoder={VILKAR_KODER}
-      prosessPanelKode={prosessStegCodes.FORTSATTMEDLEMSKAP}
+      prosessPanelKode={ProsessStegCode.FORTSATTMEDLEMSKAP}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.FortsattMedlemskap' })}
       skalPanelVisesIMeny={(initData) => skalViseProsessPanel(initData.aksjonspunkter, VILKAR_KODER, initData.vilkar)}
       erOverstyrt={erOverstyrt}

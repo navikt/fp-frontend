@@ -5,7 +5,7 @@ import React, {
 import SoknadsfristVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-soknadsfrist';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { prosessStegCodes } from '@fpsak-frontend/konstanter';
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import {
   AksessRettigheter, Aksjonspunkt, FamilieHendelseSamling, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
@@ -57,7 +57,7 @@ const SoknadsfristProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       vilkarKoder={VILKAR_KODER}
-      prosessPanelKode={prosessStegCodes.SOEKNADSFRIST}
+      prosessPanelKode={ProsessStegCode.SOEKNADSFRIST}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Soknadsfristvilkaret' })}
       skalPanelVisesIMeny={(data) => skalViseProsessPanel(data?.aksjonspunkter, VILKAR_KODER, data?.vilkar)}
       erOverstyrt={erOverstyrt}

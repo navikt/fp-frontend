@@ -219,7 +219,7 @@ interface OwnProps {
   alleKodeverkFpSak: {[key: string]: KodeverkMedNavn[]};
   saksnummer?: string;
   getBehandlingLocation: (behandlingId: number) => Location;
-  createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location;
+  createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
   valgtBehandlingId?: number;
 }
 

@@ -6,7 +6,7 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { dateFormat, formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 
-import createVisningsnavnForAktivitet from '../../util/visningsnavnHelper';
+import createVisningsnavnForAktivitet from '../../util/createVisningsnavnForAktivitet';
 import messages from '../../../i18n/nb_NO.json';
 import { GrunnlagForAarsinntektPanelATImpl as UnwrappedForm } from './GrunnlagForAarsinntektPanelAT';
 

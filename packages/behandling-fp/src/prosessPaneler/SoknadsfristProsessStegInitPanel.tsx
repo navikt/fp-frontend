@@ -4,7 +4,7 @@ import React, {
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VurderSoknadsfristForeldrepengerIndex from '@fpsak-frontend/prosess-soknadsfrist';
-import { prosessStegCodes } from '@fpsak-frontend/konstanter';
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { Aksjonspunkt, Soknad, UttakPeriodeGrense } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps, skalViseProsessPanel } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@fpsak-frontend/utils';
@@ -34,7 +34,7 @@ const SoknadsfristProsessStegInitPanel: FunctionComponent<ProsessPanelInitProps>
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    prosessPanelKode={prosessStegCodes.SOEKNADSFRIST}
+    prosessPanelKode={ProsessStegCode.SOEKNADSFRIST}
     prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Soknadsfristvilkaret' })}
     skalPanelVisesIMeny={(data) => skalViseProsessPanel(data.aksjonspunkter)}
     renderPanel={(data) => (

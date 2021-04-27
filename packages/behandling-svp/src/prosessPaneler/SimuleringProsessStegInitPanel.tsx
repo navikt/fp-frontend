@@ -4,7 +4,7 @@ import React, {
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AvregningProsessIndex from '@fpsak-frontend/prosess-avregning';
-import { prosessStegCodes } from '@fpsak-frontend/konstanter';
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   Aksjonspunkt, Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg,
@@ -83,10 +83,10 @@ const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
       initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
-      prosessPanelKode={prosessStegCodes.AVREGNING}
+      prosessPanelKode={ProsessStegCode.AVREGNING}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Avregning' })}
       skalPanelVisesIMeny={(data, initState) => {
-        const harVedtakspanel = menyData.some((d) => d.id === prosessStegCodes.VEDTAK
+        const harVedtakspanel = menyData.some((d) => d.id === ProsessStegCode.VEDTAK
         && (d.status !== vilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt));
         return !!data?.simuleringResultat || (initState === RestApiState.SUCCESS && !harVedtakspanel);
       }}

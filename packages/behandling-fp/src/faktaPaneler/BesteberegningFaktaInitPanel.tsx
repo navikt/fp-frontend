@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 
 import BesteberegningFaktaIndex from '@fpsak-frontend/fakta-besteberegning';
-import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
+import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@fpsak-frontend/utils';
@@ -35,7 +35,7 @@ const BesteberegningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
     requestApi={requestFpApi}
     aksjonspunktKoder={[aksjonspunktCodes.KONTROLLER_AUTOMATISK_BESTEBEREGNING]}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
-    faktaPanelKode={faktaPanelCodes.BESTEBEREGNING}
+    faktaPanelKode={FaktaPanelCode.BESTEBEREGNING}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'BesteberegningInfoPanel.Title' })}
     skalPanelVisesIMeny={(initData) => !!initData?.beregningsgrunnlag?.ytelsesspesifiktGrunnlag?.besteberegninggrunnlag}
     renderPanel={(data) => <BesteberegningFaktaIndex arbeidsgiverOpplysninger={arbeidsgiverOpplysningerPerId} {...data} />}

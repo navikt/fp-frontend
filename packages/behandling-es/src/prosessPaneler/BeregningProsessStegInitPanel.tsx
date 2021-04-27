@@ -5,7 +5,7 @@ import React, {
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import BeregningsresultatProsessIndex from '@fpsak-frontend/prosess-beregningsresultat';
-import { prosessStegCodes } from '@fpsak-frontend/konstanter';
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import {
   AksessRettigheter,
   Aksjonspunkt, BeregningsresultatEs, Vilkar,
@@ -44,7 +44,7 @@ const BeregningProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelIn
       requestApi={requestEsApi}
       initEndepunkter={ENDEPUNKTER_INIT_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
-      prosessPanelKode={prosessStegCodes.BEREGNING}
+      prosessPanelKode={ProsessStegCode.BEREGNING}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Beregning' })}
       skalPanelVisesIMeny={() => true}
       hentOverstyrtStatus={(initData) => (initData?.beregningresultatEngangsstonad ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT)}

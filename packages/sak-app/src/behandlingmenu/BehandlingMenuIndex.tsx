@@ -45,11 +45,18 @@ const findNewBehandlingId = (alleBehandlinger: BehandlingAppKontekst[]): number 
   return alleBehandlinger[0].id;
 };
 
-const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKontekst[] = []): string => {
+const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKontekst[] = []): string | undefined => {
   const behandling = behandlinger.find((b) => b.gjeldendeVedtak && b.status.kode === BehandlingStatus.AVSLUTTET
     && (b.type.kode === BehandlingType.FORSTEGANGSSOKNAD || b.type.kode === BehandlingType.REVURDERING));
   return behandling ? behandling.uuid : undefined;
 };
+
+const skalLageVergeFn = (
+  vergeType: VergeBehandlingmenyValg,
+  vergeMenyvalg?: VergeBehandlingmenyValg,
+  behandlingId?: number,
+  behandlingVersjon?: number,
+): boolean => vergeMenyvalg === vergeType && !!behandlingId && !!behandlingVersjon;
 
 const EMPTY_ARRAY = [] as BehandlingAppKontekst[];
 
@@ -58,7 +65,7 @@ interface OwnProps {
   alleBehandlinger: BehandlingAppKontekst[];
   behandlingId?: number;
   behandlingVersjon?: number;
-  behandlingRettigheter: BehandlingRettigheter;
+  behandlingRettigheter?: BehandlingRettigheter;
   sakRettigheter: SakRettigheter;
   oppfriskBehandlinger: () => void;
 }
@@ -80,7 +87,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   const ref = useRef<number>();
   useEffect(() => {
     // Når antallet har endret seg er det laget en ny behandling og denne må da velges
-    if (ref.current > 0) {
+    if (ref.current && ref.current > 0) {
       const pathname = pathToBehandling(fagsak.saksnummer, findNewBehandlingId(alleBehandlinger));
       pushLocation(getLocationWithDefaultProsessStegAndFakta({ ...location, pathname }));
     }
@@ -126,9 +133,9 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   const behandlingTypeKode = behandling ? behandling.type.kode : undefined;
 
   const vergeMenyvalg = behandlingRettigheter?.vergeBehandlingsmeny;
-  const fjernVergeFn = vergeMenyvalg === VergeBehandlingmenyValg.FJERN
+  const fjernVergeFn = skalLageVergeFn(VergeBehandlingmenyValg.FJERN, vergeMenyvalg, behandlingId, behandlingVersjon)
     ? fjernVerge(location, pushLocation, fagsak.saksnummer, behandlingId, behandlingVersjon) : undefined;
-  const opprettVergeFn = vergeMenyvalg === VergeBehandlingmenyValg.OPPRETT
+  const opprettVergeFn = skalLageVergeFn(VergeBehandlingmenyValg.OPPRETT, vergeMenyvalg, behandlingId, behandlingVersjon)
     ? opprettVerge(location, pushLocation, fagsak.saksnummer, behandlingId, behandlingVersjon) : undefined;
   return (
     <MenySakIndex
@@ -155,18 +162,19 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
           )),
         new MenyData(behandlingRettigheter?.behandlingKanHenlegges, getHenleggMenytekst())
           .medModal((lukkModal) => (
-            <MenyHenleggIndex
-              behandlingId={behandlingId}
-              behandlingVersjon={behandlingVersjon}
-              forhandsvisHenleggBehandling={previewHenleggBehandling}
-              henleggBehandling={shelveBehandling}
-              ytelseType={fagsak.fagsakYtelseType}
-              behandlingType={behandling?.type}
-              behandlingUuid={behandling?.uuid}
-              behandlingResultatTyper={menyKodeverk.getKodeverkForValgtBehandling(kodeverkTyper.BEHANDLING_RESULTAT_TYPE)}
-              lukkModal={lukkModal}
-              gaaTilSokeside={gaaTilSokeside}
-            />
+            <>
+              {behandling && (
+                <MenyHenleggIndex
+                  valgtBehandling={behandling}
+                  forhandsvisHenleggBehandling={previewHenleggBehandling}
+                  henleggBehandling={shelveBehandling}
+                  ytelseType={fagsak.fagsakYtelseType}
+                  behandlingResultatTyper={menyKodeverk.getKodeverkForValgtBehandling(kodeverkTyper.BEHANDLING_RESULTAT_TYPE)}
+                  lukkModal={lukkModal}
+                  gaaTilSokeside={gaaTilSokeside}
+                />
+              )}
+            </>
           )),
         new MenyData(behandlingRettigheter?.behandlingKanBytteEnhet, getMenytekst())
           .medModal((lukkModal) => (

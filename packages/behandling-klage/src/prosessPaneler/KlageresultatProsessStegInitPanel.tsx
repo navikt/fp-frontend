@@ -4,7 +4,7 @@ import React, {
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VedtakKlageProsessIndex, { VedtakKlageBrevData } from '@fpsak-frontend/prosess-vedtak-klage';
-import { prosessStegCodes } from '@fpsak-frontend/konstanter';
+import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import {
   Aksjonspunkt, Behandling, Behandlingsresultat, Fagsak, KlageVurdering,
 } from '@fpsak-frontend/types';
@@ -115,7 +115,7 @@ const KlageresultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPan
       initEndepunkter={ENDEPUNKTER_INIT_DATA}
       panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
-      prosessPanelKode={prosessStegCodes.KLAGE_RESULTAT}
+      prosessPanelKode={ProsessStegCode.KLAGE_RESULTAT}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.ResultatKlage' })}
       skalPanelVisesIMeny={() => true}
       hentOverstyrtStatus={(initData, standardData) => getVedtakStatus(initData?.aksjonspunkter, standardData.behandling.behandlingsresultat)}

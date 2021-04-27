@@ -45,7 +45,7 @@ const HistorikkIndex: FunctionComponent<OwnProps> = ({
   const skalBrukeFpTilbakeHistorikk = enabledApplicationContexts.includes(ApplicationContextPath.FPTILBAKE);
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
   const forrigeSaksnummer = usePrevious(saksnummer);
-  const erBehandlingEndret = forrigeSaksnummer && erBehandlingEndretFraUndefined;
+  const erBehandlingEndret = !!forrigeSaksnummer && erBehandlingEndretFraUndefined;
 
   const { data: historikkFpSak = EMPTY_ARRAY } = restApiHooks.useRestApi(FpsakApiKeys.HISTORY_FPSAK, { saksnummer }, {
     updateTriggers: [behandlingId, behandlingVersjon],

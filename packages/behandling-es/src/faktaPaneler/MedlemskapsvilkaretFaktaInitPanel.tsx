@@ -4,7 +4,7 @@ import React, {
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import MedlemskapFaktaIndex from '@fpsak-frontend/fakta-medlemskap';
-import { faktaPanelCodes } from '@fpsak-frontend/konstanter';
+import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import {
   AksessRettigheter,
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse, Medlemskap, Soknad,
@@ -63,7 +63,7 @@ const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanel
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     overstyringApKoder={OVERSTYRING_AP_CODES}
-    faktaPanelKode={faktaPanelCodes.MEDLEMSKAPSVILKARET}
+    faktaPanelKode={FaktaPanelCode.MEDLEMSKAPSVILKARET}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'MedlemskapInfoPanel.Medlemskap' })}
     skalPanelVisesIMeny={(initData) => !!initData?.soknad}
     renderPanel={(data) => (

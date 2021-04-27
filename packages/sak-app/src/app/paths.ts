@@ -49,10 +49,10 @@ export const getLocationWithQueryParams = (location: Location, queryParams: Quer
 export const getSupportPanelLocationCreator = (location: Location) => (
   supportPanel: string,
 ): Location => getLocationWithQueryParams(location, { stotte: supportPanel });
-export const getProsessStegLocation = (location: Location) => (prosessSteg: string): Location => getLocationWithQueryParams(location, { punkt: prosessSteg });
-export const getFaktaLocation = (location: Location) => (fakta: string): Location => getLocationWithQueryParams(location, { fakta });
+export const getProsessStegLocation = (location: Location) => (prosessSteg?: string): Location => getLocationWithQueryParams(location, { punkt: prosessSteg });
+export const getFaktaLocation = (location: Location) => (fakta?: string): Location => getLocationWithQueryParams(location, { fakta });
 export const getRiskPanelLocationCreator = (location: Location) => (
-  isRiskPanelOpen,
+  isRiskPanelOpen: boolean,
 ): Location => getLocationWithQueryParams(location, { risiko: isRiskPanelOpen });
 
 export const getLocationWithDefaultProsessStegAndFakta = (location: Location): Location => (
@@ -64,7 +64,7 @@ export const getPathToFplos = (href: string): string => {
   return hostAndContextPath.replace(new RegExp(FPSAK, 'g'), FPLOS);
 };
 
-export const createLocationForSkjermlenke = (behandlingLocation: Location, skjermlenkeCode: string): Location => {
+export const createLocationForSkjermlenke = (behandlingLocation: Location, skjermlenkeCode: string): Location | undefined => {
   const skjermlenke = skjermlenkeCodes[skjermlenkeCode];
   if (!skjermlenke) {
     return undefined;

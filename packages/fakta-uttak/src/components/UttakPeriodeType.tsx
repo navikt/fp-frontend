@@ -13,7 +13,7 @@ import removePeriod from '@fpsak-frontend/assets/images/remove.svg';
 import removePeriodDisabled from '@fpsak-frontend/assets/images/remove_disabled.svg';
 import { ArbeidsgiverOpplysningerPerId, Kodeverk } from '@fpsak-frontend/types';
 
-import lagVisningsNavn from './utils/uttakVisningsnavnHelper';
+import lagVisningsNavn from './utils/lagVisningsNavn';
 
 import styles from './uttakPeriodeType.less';
 

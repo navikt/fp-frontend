@@ -32,12 +32,12 @@ const BehandlingTilbakekrevingIndex = React.lazy(() => import('@fpsak-frontend/b
 const BehandlingAnkeIndex = React.lazy(() => import('@fpsak-frontend/behandling-anke'));
 const BehandlingPapirsoknadIndex = React.lazy(() => import('@fpsak-frontend/behandling-papirsoknad'));
 
-const erTilbakekreving = (behandlingTypeKode:string): boolean => behandlingTypeKode === BehandlingType.TILBAKEKREVING
+const erTilbakekreving = (behandlingTypeKode?:string): boolean => behandlingTypeKode === BehandlingType.TILBAKEKREVING
   || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING;
 
 const formatName = (bpName = ''): string => replaceNorwegianCharacters(bpName.toLowerCase());
 
-const getOppdaterProsessStegOgFaktaPanelIUrl = (history: History) => (prosessStegId: string, faktaPanelId: string): void => {
+const getOppdaterProsessStegOgFaktaPanelIUrl = (history: History) => (prosessStegId?: string, faktaPanelId?: string): void => {
   let newLocation;
   const { location } = history;
   if (prosessStegId === 'default') {
@@ -45,7 +45,7 @@ const getOppdaterProsessStegOgFaktaPanelIUrl = (history: History) => (prosessSte
   } else if (prosessStegId) {
     newLocation = getProsessStegLocation(location)(formatName(prosessStegId));
   } else {
-    newLocation = getProsessStegLocation(location)(null);
+    newLocation = getProsessStegLocation(location)();
   }
 
   if (faktaPanelId === 'default') {
@@ -53,7 +53,7 @@ const getOppdaterProsessStegOgFaktaPanelIUrl = (history: History) => (prosessSte
   } else if (faktaPanelId) {
     newLocation = getFaktaLocation(newLocation)(formatName(faktaPanelId));
   } else {
-    newLocation = getFaktaLocation(newLocation)(null);
+    newLocation = getFaktaLocation(newLocation)();
   }
 
   history.push(newLocation);
@@ -83,15 +83,12 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     parse: (behandlingFromUrl) => Number.parseInt(behandlingFromUrl, 10),
   });
 
-  const behandlingVersjon = alleBehandlinger.some((b) => b.id === behandlingId)
-    ? alleBehandlinger.find((b) => b.id === behandlingId).versjon : undefined;
-
   const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
 
   useEffect(() => {
     if (behandling) {
       requestApi.setLinks(behandling.links, LinkCategory.BEHANDLING);
-      setBehandlingIdOgVersjon(behandlingId, behandlingVersjon);
+      setBehandlingIdOgVersjon(behandlingId, behandling.versjon);
     }
   }, [behandling]);
 
@@ -127,7 +124,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     oppdaterProsessStegOgFaktaPanelIUrl,
     valgtProsessSteg: query.punkt,
   };
-  const behandlingTypeKode = behandling?.type ? behandling.type.kode : undefined;
+  const behandlingTypeKode = behandling?.type?.kode;
 
   const fagsakBehandlingerInfo = useMemo(() => alleBehandlinger
     .filter((b) => !b.behandlingHenlagt)
