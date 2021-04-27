@@ -88,7 +88,7 @@ export const createFordelArbeidsforholdString = (listOfArbeidsforhold: Arbeidsfo
       return visningsnavn + lagPeriodeStreng(arbeidsforhold.perioderMedGraderingEllerRefusjon.filter(({ erSøktYtelse }) => erSøktYtelse));
     }
     if (mTextCase === textCase.PERMISJON) {
-      return visningsnavn.concat(` f.o.m. ${formatDate(arbeidsforhold.permisjon.permisjonTom)}`);
+      return visningsnavn.concat(` f.o.m ${formatDate(arbeidsforhold.permisjon.permisjonTom)}`);
     }
     return null;
   });
