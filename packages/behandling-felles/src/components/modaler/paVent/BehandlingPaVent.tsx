@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 
 import { AbstractRequestApi, RestKey } from '@fpsak-frontend/rest-api';
-import { RestApiHooks, RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -43,7 +43,7 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
   const [skalViseModal, setVisModal] = useState(behandling.behandlingPaaVent);
   const skjulModal = useCallback(() => setVisModal(false), []);
 
-  const { data: aksjonspunkter = EMPTY_ARRAY, state: aksjonspunkterState } = restApiHooks.useRestApi(aksjonspunktKey, undefined, {
+  const { data: aksjonspunkter = EMPTY_ARRAY } = restApiHooks.useRestApi(aksjonspunktKey, undefined, {
     updateTriggers: [skalViseModal],
     suspendRequest: !skalViseModal,
   });
@@ -61,10 +61,6 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
   const erManueltSattPaVent = useMemo(() => aksjonspunkter.filter((ap) => isAksjonspunktOpen(ap.status.kode))
     .some((ap) => ap.definisjon.kode === aksjonspunktCodes.AUTO_MANUELT_SATT_PÅ_VENT), [aksjonspunkter]);
 
-  if (!skalViseModal || aksjonspunkterState !== RestApiState.SUCCESS) {
-    return null;
-  }
-
   return (
     <SettPaVentModalIndex
       submitCallback={oppdaterPaVentData}
@@ -74,7 +70,7 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
       hasManualPaVent={erManueltSattPaVent}
       ventearsaker={kodeverk[kodeverkTyper.VENT_AARSAK]}
       erTilbakekreving={erTilbakekreving}
-      showModal
+      showModal={skalViseModal}
     />
   );
 };
