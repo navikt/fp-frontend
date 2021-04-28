@@ -134,7 +134,7 @@ const createGraderingOrRefusjonString = (
   if (endringYtelse.length > 0) {
     const arbeidsforholdString = createFordelArbeidsforholdString(endringYtelse, textCase.ENDRING_YTELSE, arbeidsgiverOpplysningerPerId, getKodeverknavn);
     text.push(<FormattedMessage
-      key="EndringBeregningsgrunnlagRefusjon"
+      key="EndringBeregningsgrunnlagEndringYtelse"
       id="BeregningInfoPanel.AksjonspunktHelpText.FaktaOmBeregning.EndringBeregningsgrunnlag.EndringYtelse"
       values={{ arbeidsforhold: arbeidsforholdString }}
     />);
@@ -173,11 +173,11 @@ const lagHelpTextsFordelBG = (endredeArbeidsforhold: ArbeidsforholdTilFordeling[
     arbeidsgiverOpplysningerPerId);
   if (helpTexts.length === 2) {
     return [
-      <>
+      <div key="HjelpeTextDiv">
         {helpTexts[0]}
-        <VerticalSpacer eightPx />
+        <VerticalSpacer key="fordelingSpacer" eightPx />
         {helpTexts[1]}
-      </>];
+      </div>];
   }
   return helpTexts;
 };
