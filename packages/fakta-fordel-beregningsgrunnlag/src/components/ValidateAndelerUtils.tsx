@@ -16,7 +16,7 @@ import {
   PeriodeTsType,
 } from '../types/FordelingTsType';
 
-const convertToNumber = (n: string): number => (n == null || undefined ? null : Number(removeSpacesFromNumber(n)));
+const convertToNumber = (n: string): number => (n === null || n === undefined ? null : Number(removeSpacesFromNumber(n)));
 
 type SortertAndelInfo = {
   andelsinfo: string;
