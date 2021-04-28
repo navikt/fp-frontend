@@ -56,7 +56,8 @@ describe('<BehandlingPaVent>', () => {
       hentBehandling={sinon.spy()}
     />);
 
-    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(0);
+    const modal = wrapper.find(SettPaVentModalIndex);
+    expect(modal.props().showModal).toBe(false);
   });
 
   it('skal vise modal når behandling er på vent', () => {
@@ -76,7 +77,8 @@ describe('<BehandlingPaVent>', () => {
 
     const modal = wrapper.find(SettPaVentModalIndex);
     expect(modal).toHaveLength(1);
-    expect(modal.prop('hasManualPaVent')).toBe(false);
+    expect(modal.props().showModal).toBe(true);
+    expect(modal.props().hasManualPaVent).toBe(false);
   });
 
   it('skal vise modal og så skjule den ved trykk på knapp', () => {
@@ -99,7 +101,8 @@ describe('<BehandlingPaVent>', () => {
 
     modal.prop('cancelEvent')();
 
-    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(0);
+    const modalNew = wrapper.find(SettPaVentModalIndex);
+    expect(modalNew.props().showModal).toBe(false);
   });
 
   it('skal markeres som automatisk satt på vent når en har åpent aksjonspunkt for auto-manuelt satt på vent', () => {
