@@ -12,7 +12,7 @@ import {
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 
 import { FordelBeregningsgrunnlagPerioderTransformedValues }
-  from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/tilbakekreving/FordelBeregningsgrunnlagAP';
+  from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/FordelBeregningsgrunnlagAP';
 import FordelBeregningsgrunnlagForm from './FordelBeregningsgrunnlagForm';
 
 import FordelBeregningsgrunnlagMedAksjonspunktValues, { FordelBeregningsgrunnlagValues } from '../../types/FordelingTsType';

@@ -7,6 +7,8 @@ import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsTy
 import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 
+import FordelBeregningsgrunnlagAP
+  from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/FordelBeregningsgrunnlagAP';
 import VurderEndringRefusjonForm from './refusjon/VurderEndringRefusjonForm';
 import FordelingForm from './FordelingForm';
 
@@ -25,7 +27,7 @@ const getAksjonspunkt = (aksjonspunkter: Aksjonspunkt[],
 interface OwnProps {
   readOnly: boolean;
   aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (aksjonspunktData: FordelBeregningsgrunnlagPanel) => Promise<void>;
+  submitCallback: (aksjonspunktData: FordelBeregningsgrunnlagAP) => Promise<void>;
   submittable: boolean;
   beregningsgrunnlag: Beregningsgrunnlag;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};

@@ -13,12 +13,13 @@ import {
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 import { IntlShape } from 'react-intl';
-import { FordelBeregningsgrunnlagPerioderTransformedValues,
+import {
+  FordelBeregningsgrunnlagPerioderTransformedValues,
   FordelBeregningsgrunnlagAndelTransformedValues,
   FordelBeregningsgrunnlagFastsatteVerdierTransformedValues,
   FordelBeregningsgrunnlagPeriodeTransformedValues,
 }
-  from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/tilbakekreving/FordelBeregningsgrunnlagAP';
+  from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/FordelBeregningsgrunnlagAP';
 import FordelBeregningsgrunnlagPeriodePanel from './FordelBeregningsgrunnlagPeriodePanel';
 
 import styles from './fordelBeregningsgrunnlagForm.less';

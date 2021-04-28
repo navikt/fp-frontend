@@ -1,6 +1,6 @@
 import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Kodeverk } from '@fpsak-frontend/types';
-import AksjonspunktTilBekreftelse from '../../AksjonspunktTilBekreftelse';
+import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
 export type FordelBeregningsgrunnlagFastsatteVerdierTransformedValues = {
   refusjonPrÅr: number;
