@@ -14026,10 +14026,10 @@ nav-frontend-paneler@2.1.1:
   resolved "https://registry.yarnpkg.com/nav-frontend-paneler/-/nav-frontend-paneler-2.1.1.tgz#3fdf2bef1a4c3416d053051691de8329baf5f1bd"
   integrity sha512-o0RJnmNAnzoVluEAmA8b2wl9EQ03zjJI1HjsPJD3hqFj5upRS4MrW/fpB9u5PDK+CSc6y2ICM4um9kHrHG0low==
 
-nav-frontend-skjema-style@2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/nav-frontend-skjema-style/-/nav-frontend-skjema-style-2.2.1.tgz#5537e6ec1e89a670065d33fc15b93291d0cd7458"
-  integrity sha512-V8M9IeSWHVpQjKnbDJewdmAcPluNcpJX1zgAJ9e66cwGhRe3bEygsYIHhn9W8Bjl/oAvByxPuklT+TEn2UFwEw==
+nav-frontend-skjema-style@2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/nav-frontend-skjema-style/-/nav-frontend-skjema-style-2.2.2.tgz#6468e0dd16c5d5448997e1a071812ccddd415f93"
+  integrity sha512-9rOQfmsGnMPm4bzhV8Nkl6NcG8d6elCsDo9oHyfxrohWA3uMD9EpDpBPNN2+CdOAaygq83i1ETS6nz1BeuyXzw==
 
 nav-frontend-skjema@3.2.1:
   version "3.2.1"
