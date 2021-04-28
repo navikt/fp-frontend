@@ -1,5 +1,6 @@
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 class MenyKodeverk {
   $$behandlingType?: Kodeverk;
@@ -22,18 +23,18 @@ class MenyKodeverk {
     return this;
   }
 
-  getKodeverkForBehandlingstype(kodeverkType: string, behandlingTypeKode?: string): KodeverkMedNavn[] {
+  getKodeverkForBehandlingstype(kodeverkType: KodeverkType, behandlingTypeKode?: string): KodeverkMedNavn[] {
     if (behandlingTypeKode === BehandlingType.TILBAKEKREVING || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING) {
       return this.$$fpTilbakeKodeverk[kodeverkType];
     }
     return this.$$fpSakKodeverk[kodeverkType];
   }
 
-  getKodeverkForValgtBehandling(kodeverkType: string): KodeverkMedNavn[] {
+  getKodeverkForValgtBehandling(kodeverkType: KodeverkType): KodeverkMedNavn[] {
     return this.getKodeverkForBehandlingstype(kodeverkType, this.$$behandlingType?.kode);
   }
 
-  getKodeverkForBehandlingstyper(behandlingTypeKoder: string[], kodeverkType: string): KodeverkMedNavn[] {
+  getKodeverkForBehandlingstyper(behandlingTypeKoder: string[], kodeverkType: KodeverkType): KodeverkMedNavn[] {
     return behandlingTypeKoder.reduce<KodeverkMedNavn[]>((acc, btk) => {
       const alleKodeverkForKodeverkType = this.getKodeverkForBehandlingstype(kodeverkType, btk);
       if (alleKodeverkForKodeverkType) {

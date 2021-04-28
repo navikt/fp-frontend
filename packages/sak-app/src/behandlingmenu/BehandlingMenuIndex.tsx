@@ -214,9 +214,9 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
               erTilbakekrevingAktivert={erTilbakekrevingAktivert}
               behandlingstyper={menyKodeverk
                 .getKodeverkForBehandlingstyper(BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES, kodeverkTyper.BEHANDLING_TYPE)}
-              tilbakekrevingRevurderingArsaker={menyKodeverk.getKodeverkForBehandlingstype(BehandlingType
-                .TILBAKEKREVING_REVURDERING, kodeverkTyper.BEHANDLING_AARSAK)}
-              revurderingArsaker={menyKodeverk.getKodeverkForBehandlingstype(BehandlingType.REVURDERING, kodeverkTyper.BEHANDLING_AARSAK)}
+              tilbakekrevingRevurderingArsaker={menyKodeverk.getKodeverkForBehandlingstype(kodeverkTyper.BEHANDLING_AARSAK,
+                BehandlingType.TILBAKEKREVING_REVURDERING)}
+              revurderingArsaker={menyKodeverk.getKodeverkForBehandlingstype(kodeverkTyper.BEHANDLING_AARSAK, BehandlingType.REVURDERING)}
               ytelseType={fagsak.fagsakYtelseType}
               lagNyBehandling={lagNyBehandling}
               sjekkOmTilbakekrevingKanOpprettes={sjekkTilbakeKanOpprettes}
