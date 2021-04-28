@@ -33,7 +33,7 @@ const findAksjonspunktMedBegrunnelse = (aksjonspunkter: Aksjonspunkt[]): Aksjons
 export const BEGRUNNELSE_FORDELING_NAME = 'begrunnelseFordeling';
 
 interface PureOwnProps {
-  submitCallback: (...args: any[]) => any;
+  submitCallback: (aksjonspunktData: FordelBeregningsgrunnlagAP) => Promise<void>;
   readOnly: boolean;
   submittable: boolean;
   submitEnabled: boolean;
@@ -111,18 +111,18 @@ export const transformValuesFordelBeregning = createSelector(
   [(ownProps: PureOwnProps) => ownProps.beregningsgrunnlag,
     (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
   (beregningsgrunnlag: Beregningsgrunnlag,
-    aksjonspunkter: Aksjonspunkt[]) => (values: FordelBeregningsgrunnlagMedAksjonspunktValues): FordelBeregningsgrunnlagAP[] => {
+    aksjonspunkter: Aksjonspunkt[]) => (values: FordelBeregningsgrunnlagMedAksjonspunktValues): FordelBeregningsgrunnlagAP => {
     const bgPerioder = beregningsgrunnlag.beregningsgrunnlagPeriode;
     const fordelBGPerioder = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag.fordelBeregningsgrunnlagPerioder;
     if (hasAksjonspunkt(FORDEL_BEREGNINGSGRUNNLAG, aksjonspunkter)) {
       const begrunnelse = values[BEGRUNNELSE_FORDELING_NAME];
-      return [{
+      return {
         kode: FORDEL_BEREGNINGSGRUNNLAG,
         begrunnelse: begrunnelse as string,
         ...FastsettFordeltBeregningsgrunnlagImpl.transformValues(values, fordelBGPerioder, bgPerioder),
-      }];
+      };
     }
-    return [];
+    return null;
   },
 );
 

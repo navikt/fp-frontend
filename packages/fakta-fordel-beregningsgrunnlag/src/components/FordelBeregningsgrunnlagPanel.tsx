@@ -9,6 +9,8 @@ import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 
 import FordelBeregningsgrunnlagAP
   from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/FordelBeregningsgrunnlagAP';
+import VurderRefusjonBeregningsgrunnlagAP
+  from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/VurderRefusjonBeregningsgrunnlagAP';
 import VurderEndringRefusjonForm from './refusjon/VurderEndringRefusjonForm';
 import FordelingForm from './FordelingForm';
 
@@ -27,7 +29,7 @@ const getAksjonspunkt = (aksjonspunkter: Aksjonspunkt[],
 interface OwnProps {
   readOnly: boolean;
   aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (aksjonspunktData: FordelBeregningsgrunnlagAP) => Promise<void>;
+  submitCallback: (aksjonspunktData: FordelBeregningsgrunnlagAP | VurderRefusjonBeregningsgrunnlagAP) => Promise<void>;
   submittable: boolean;
   beregningsgrunnlag: Beregningsgrunnlag;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
