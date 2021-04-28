@@ -206,7 +206,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     );
   }
 
-  if (fagsak.fagsakYtelseType.kode === FagsakYtelseType.ENGANGSSTONAD) {
+  if (!!behandling && fagsak.fagsakYtelseType.kode === FagsakYtelseType.ENGANGSSTONAD) {
     return (
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
@@ -219,7 +219,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     );
   }
 
-  if (fagsak.fagsakYtelseType.kode === FagsakYtelseType.FORELDREPENGER) {
+  if (!!behandling && fagsak.fagsakYtelseType.kode === FagsakYtelseType.FORELDREPENGER) {
     return (
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
@@ -232,7 +232,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     );
   }
 
-  if (fagsak.fagsakYtelseType.kode === FagsakYtelseType.SVANGERSKAPSPENGER) {
+  if (!!behandling && fagsak.fagsakYtelseType.kode === FagsakYtelseType.SVANGERSKAPSPENGER) {
     return (
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
