@@ -15,12 +15,11 @@ import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 
+import FordelBeregningsgrunnlagAP
+  from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/tilbakekreving/FordelBeregningsgrunnlagAP';
 import FordelingHelpText from './FordelingHelpText';
 import FastsettFordeltBeregningsgrunnlag, { FastsettFordeltBeregningsgrunnlagImpl } from './fordeling/FastsettFordeltBeregningsgrunnlag';
-import {
-  FordelBeregningsgrunnlagTransformedValues,
-  FordelBeregningsgrunnlagMedAksjonspunktValues,
-} from '../types/FordelingTsType';
+import FordelBeregningsgrunnlagMedAksjonspunktValues from '../types/FordelingTsType';
 
 const {
   FORDEL_BEREGNINGSGRUNNLAG,
@@ -112,7 +111,7 @@ export const transformValuesFordelBeregning = createSelector(
   [(ownProps: PureOwnProps) => ownProps.beregningsgrunnlag,
     (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
   (beregningsgrunnlag: Beregningsgrunnlag,
-    aksjonspunkter: Aksjonspunkt[]) => (values: FordelBeregningsgrunnlagMedAksjonspunktValues): FordelBeregningsgrunnlagTransformedValues[] => {
+    aksjonspunkter: Aksjonspunkt[]) => (values: FordelBeregningsgrunnlagMedAksjonspunktValues): FordelBeregningsgrunnlagAP[] => {
     const bgPerioder = beregningsgrunnlag.beregningsgrunnlagPeriode;
     const fordelBGPerioder = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag.fordelBeregningsgrunnlagPerioder;
     if (hasAksjonspunkt(FORDEL_BEREGNINGSGRUNNLAG, aksjonspunkter)) {

@@ -25,7 +25,7 @@ const getAksjonspunkt = (aksjonspunkter: Aksjonspunkt[],
 interface OwnProps {
   readOnly: boolean;
   aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (...args: any[]) => any;
+  submitCallback: (aksjonspunktData: FordelBeregningsgrunnlagPanel) => Promise<void>;
   submittable: boolean;
   beregningsgrunnlag: Beregningsgrunnlag;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};

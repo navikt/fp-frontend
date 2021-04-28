@@ -11,12 +11,11 @@ import {
 } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 
+import { FordelBeregningsgrunnlagPerioderTransformedValues }
+  from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/tilbakekreving/FordelBeregningsgrunnlagAP';
 import FordelBeregningsgrunnlagForm from './FordelBeregningsgrunnlagForm';
-import {
-  FordelBeregningsgrunnlagMedAksjonspunktValues,
-  FordelBeregningsgrunnlagPerioderTransformedValues,
-  FordelBeregningsgrunnlagValues,
-} from '../../types/FordelingTsType';
+
+import FordelBeregningsgrunnlagMedAksjonspunktValues, { FordelBeregningsgrunnlagValues } from '../../types/FordelingTsType';
 
 type OwnProps = {
     readOnly: boolean;

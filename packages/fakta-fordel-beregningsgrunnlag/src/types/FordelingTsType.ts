@@ -1,48 +1,5 @@
 import { Kodeverk } from '@fpsak-frontend/types';
 
-export type FordelBeregningsgrunnlagFastsatteVerdierTransformedValues = {
-  refusjonPrÅr: number;
-  fastsattÅrsbeløpInklNaturalytelse: number;
-  inntektskategori: string;
-}
-
-export type PeriodeTsType = {
-  fom: string;
-  tom: string;
-};
-
-export type FordelBeregningsgrunnlagAndelTransformedValues = {
-  andelsnr: number | string;
-  aktivitetStatus: string;
-  arbeidsgiverId: string;
-  arbeidsforholdId: string;
-  nyAndel: boolean;
-  kilde: string;
-  lagtTilAvSaksbehandler: boolean;
-  arbeidsforholdType: Kodeverk;
-  beregningsperiodeTom: string;
-  beregningsperiodeFom: string;
-  forrigeArbeidsinntektPrÅr: number;
-  forrigeRefusjonPrÅr: number;
-  forrigeInntektskategori: string;
-  fastsatteVerdier: FordelBeregningsgrunnlagFastsatteVerdierTransformedValues;
-}
-
-export type FordelBeregningsgrunnlagPeriodeTransformedValues = {
-  fom: string;
-  tom: string;
-  andeler: FordelBeregningsgrunnlagAndelTransformedValues[];
-}
-
-export type FordelBeregningsgrunnlagPerioderTransformedValues = {
-  endretBeregningsgrunnlagPerioder: FordelBeregningsgrunnlagPeriodeTransformedValues[];
-}
-
-export type FordelBeregningsgrunnlagTransformedValues = FordelBeregningsgrunnlagPerioderTransformedValues | {
-  kode: string;
-  begrunnelse: string;
-};
-
 export type FordelBeregningsgrunnlagGenerellAndelValues = {
   andel?: string;
   aktivitetStatus?: string;
@@ -118,7 +75,12 @@ export type FordelBeregningsgrunnlagValues = {
   [key: string]: FordelBeregningsgrunnlagAndelValues[];
 }
 
-export type FordelBeregningsgrunnlagMedAksjonspunktValues = AksjonspunktValues | FordelBeregningsgrunnlagValues;
+type FordelBeregningsgrunnlagMedAksjonspunktValues = AksjonspunktValues | FordelBeregningsgrunnlagValues;
+
+export type PeriodeTsType = {
+  fom: string;
+  tom: string;
+};
 
 export type FordelingFieldError = {
   refusjonskrav?: string;
@@ -127,4 +89,4 @@ export type FordelingFieldError = {
   inntektskategori?: string;
 };
 
-export default FordelBeregningsgrunnlagTransformedValues;
+export default FordelBeregningsgrunnlagMedAksjonspunktValues;
