@@ -58,7 +58,7 @@ const OpptjeningInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvi
           <OverstyringPanelDef
             behandling={data.behandling}
             aksjonspunkter={data.aksjonspunkter}
-            aksjonspunktKoder={[aksjonspunktCodes.OVERSTYRING_AV_OPPTJENINGSVILKARET]}
+            aksjonspunktKode={aksjonspunktCodes.OVERSTYRING_AV_OPPTJENINGSVILKARET}
             vilkar={data.vilkar}
             vilkarKoder={VILKAR_KODER}
             panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret"
