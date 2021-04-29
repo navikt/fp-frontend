@@ -27,8 +27,8 @@ import BekreftOppholdsrettVurderingAp from './fakta/BekreftOppholdsrettVurdering
 import AvklarStartdatoForPeriodenAp from './fakta/AvklarStartdatoForPeriodenAp';
 import OverstyringAvklarStartdatoForPeriodenAp from './fakta/OverstyringAvklarStartdatoForPeriodenAp';
 import KontrollerBesteberegningAP from './fakta/KontrollerBesteberegningAP';
-import FordelBeregningsgrunnlagAP from "./fakta/FordelBeregningsgrunnlagAP";
-import VurderRefusjonBeregningsgrunnlagAP from "./fakta/VurderRefusjonBeregningsgrunnlagAP";
+import FordelBeregningsgrunnlagAP from './fakta/FordelBeregningsgrunnlagAP';
+import VurderRefusjonBeregningsgrunnlagAP from './fakta/VurderRefusjonBeregningsgrunnlagAP';
 
 export type FaktaAksjonspunkt = AvklarTilleggsopplysningerAp
   | AvklarVergeAp
