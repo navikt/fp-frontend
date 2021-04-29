@@ -13,33 +13,42 @@ import {
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 import { IntlShape } from 'react-intl';
+import {
+  FordelBeregningsgrunnlagPerioderTransformedValues,
+  FordelBeregningsgrunnlagAndelTransformedValues,
+  FordelBeregningsgrunnlagFastsatteVerdierTransformedValues,
+  FordelBeregningsgrunnlagPeriodeTransformedValues,
+}
+  from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/FordelBeregningsgrunnlagAP';
 import FordelBeregningsgrunnlagPeriodePanel from './FordelBeregningsgrunnlagPeriodePanel';
 
 import styles from './fordelBeregningsgrunnlagForm.less';
+import FordelBeregningsgrunnlagMedAksjonspunktValues, {
+  FordelBeregningsgrunnlagAndelValues,
+  FordelBeregningsgrunnlagValues,
+} from '../../types/FordelingTsType';
 
 const fordelBGFieldArrayNamePrefix = 'fordelBGPeriode';
 
-export const getFieldNameKey = (index) => (fordelBGFieldArrayNamePrefix + index);
+export const getFieldNameKey = (index: number): string => (fordelBGFieldArrayNamePrefix + index);
 
-export const mapTilFastsatteVerdier = (aktivitet, skalHaBesteberegning) => ({
+export const mapTilFastsatteVerdier = (aktivitet: FordelBeregningsgrunnlagAndelValues): FordelBeregningsgrunnlagFastsatteVerdierTransformedValues => ({
   refusjonPrÅr: aktivitet.skalKunneEndreRefusjon ? removeSpacesFromNumber(aktivitet.refusjonskrav) : null,
-  fastsattÅrsbeløp: removeSpacesFromNumber(aktivitet.fastsattBelop),
   fastsattÅrsbeløpInklNaturalytelse: removeSpacesFromNumber(aktivitet.fastsattBelop),
   inntektskategori: aktivitet.inntektskategori,
-  skalHaBesteberegning,
 });
 
-const finnRiktigBgPeriode = (periode, bgPerioder) => bgPerioder.find((p) => p.beregningsgrunnlagPeriodeFom === periode.fom);
+const finnRiktigBgPeriode = (periode: FordelBeregningsgrunnlagPeriode,
+  bgPerioder: BeregningsgrunnlagPeriodeProp[]): BeregningsgrunnlagPeriodeProp => bgPerioder.find((p) => p.beregningsgrunnlagPeriodeFom === periode.fom);
 
-const getAndelsnr = (aktivitet) => {
+const getAndelsnr = (aktivitet: FordelBeregningsgrunnlagAndelValues): number | string => {
   if (aktivitet.nyAndel === true) {
     return aktivitet.andel;
   }
   return aktivitet.andelsnr;
 };
 
-export const mapAndel = (aktivitet) => ({
-  andel: aktivitet.andel,
+export const mapAndel = (aktivitet: FordelBeregningsgrunnlagAndelValues): FordelBeregningsgrunnlagAndelTransformedValues => ({
   andelsnr: getAndelsnr(aktivitet),
   aktivitetStatus: aktivitet.aktivitetStatus,
   arbeidsgiverId: aktivitet.arbeidsgiverId !== '' ? aktivitet.arbeidsgiverId : null,
@@ -53,11 +62,13 @@ export const mapAndel = (aktivitet) => ({
   forrigeArbeidsinntektPrÅr: aktivitet.forrigeArbeidsinntektPrAar,
   forrigeRefusjonPrÅr: aktivitet.forrigeRefusjonPrAar,
   forrigeInntektskategori: aktivitet.forrigeInntektskategori,
-  // @ts-ignore FIXME: Denne forventer også skalHaBesteberegning, hvorfor er denne blitt borte?
   fastsatteVerdier: mapTilFastsatteVerdier(aktivitet),
 });
 
-const harPeriodeSomKanKombineresMedForrige = (periode, bgPerioder, fordelPeriode, periodeList) => {
+const harPeriodeSomKanKombineresMedForrige = (periode: BeregningsgrunnlagPeriodeProp,
+  bgPerioder: BeregningsgrunnlagPeriodeProp[],
+  fordelPeriode: FordelBeregningsgrunnlagPeriode,
+  periodeList: FordelBeregningsgrunnlagPeriode[]): boolean => {
   const forrigeEndringPeriode = periodeList[periodeList.length - 1];
   if (fordelPeriode.skalRedigereInntekt !== forrigeEndringPeriode.skalRedigereInntekt) {
     return false;
@@ -76,13 +87,15 @@ const harPeriodeSomKanKombineresMedForrige = (periode, bgPerioder, fordelPeriode
   return true;
 };
 
-const oppdaterTomDatoForSistePeriode = (liste, periode) => {
+const oppdaterTomDatoForSistePeriode = (liste: FordelBeregningsgrunnlagPeriode[], periode: FordelBeregningsgrunnlagPeriode) => {
   const forrigePeriode = liste.pop();
+  // @ts-ignore Fiks denne
   forrigePeriode.tom = periode.tom;
   liste.push(forrigePeriode);
 };
 
-const sjekkOmPeriodeSkalLeggesTil = (bgPerioder) => (aggregatedPeriodList, periode) => {
+const sjekkOmPeriodeSkalLeggesTil = (bgPerioder: BeregningsgrunnlagPeriodeProp[]) => (aggregatedPeriodList: FordelBeregningsgrunnlagPeriode[],
+  periode: FordelBeregningsgrunnlagPeriode): FordelBeregningsgrunnlagPeriode[] => {
   if (aggregatedPeriodList.length === 0) {
     aggregatedPeriodList.push({ ...periode });
     return aggregatedPeriodList;
@@ -98,32 +111,39 @@ const sjekkOmPeriodeSkalLeggesTil = (bgPerioder) => (aggregatedPeriodList, perio
   return aggregatedPeriodList;
 };
 
-const inkludererPeriode = (periode) => (p) => moment(p.fom).isSameOrAfter(moment(periode.fom))
+const inkludererPeriode = (periode: FordelBeregningsgrunnlagPeriode) => (p: FordelBeregningsgrunnlagPeriode): boolean => moment(p.fom)
+  .isSameOrAfter(moment(periode.fom))
     && (periode.tom === null || moment(p.tom).isSameOrBefore(moment(periode.tom)));
 
-export const lagPerioderForSubmit = (values, index, kombinertPeriode, fordelBGPerioder) => fordelBGPerioder
+export const lagPerioderForSubmit = (values: FordelBeregningsgrunnlagMedAksjonspunktValues,
+  index: number,
+  kombinertPeriode: FordelBeregningsgrunnlagPeriode,
+  fordelBGPerioder: FordelBeregningsgrunnlagPeriode[]): FordelBeregningsgrunnlagPeriodeTransformedValues[] => fordelBGPerioder
   .filter(inkludererPeriode(kombinertPeriode))
-  .map((p) => ({
+  .map((p: FordelBeregningsgrunnlagPeriode) => ({
     andeler: values[getFieldNameKey(index)].map(mapAndel),
     fom: p.fom,
     tom: p.tom,
   }));
 
-export const finnSumIPeriode = (bgPerioder, fom) => {
+export const finnSumIPeriode = (bgPerioder: BeregningsgrunnlagPeriodeProp[], fom: string): number => {
   const periode = bgPerioder.find((p) => p.beregningsgrunnlagPeriodeFom === fom);
   return periode.bruttoInkludertBortfaltNaturalytelsePrAar;
 };
 
-export const slaaSammenPerioder = (perioder, bgPerioder) => perioder.reduce(sjekkOmPeriodeSkalLeggesTil(bgPerioder), []);
+export const slaaSammenPerioder = (perioder: FordelBeregningsgrunnlagPeriode[],
+  bgPerioder: BeregningsgrunnlagPeriodeProp[]): FordelBeregningsgrunnlagPeriode[] => perioder.reduce(sjekkOmPeriodeSkalLeggesTil(bgPerioder), []);
 
-export const transformPerioder = (fordelBGPerioder, values, bgPerioder) => {
+export const transformPerioder = (fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
+  values: FordelBeregningsgrunnlagMedAksjonspunktValues,
+  bgPerioder: BeregningsgrunnlagPeriodeProp[]): FordelBeregningsgrunnlagPeriodeTransformedValues[] => {
   const fordelBeregningsgrunnlagPerioder = [];
   const kombinertePerioder = slaaSammenPerioder(fordelBGPerioder, bgPerioder);
   for (let index = 0; index < kombinertePerioder.length; index += 1) {
     const { skalRedigereInntekt } = kombinertePerioder[index];
     if (skalRedigereInntekt) {
       lagPerioderForSubmit(values, index, kombinertePerioder[index], fordelBGPerioder)
-        .forEach((p) => fordelBeregningsgrunnlagPerioder.push(p));
+        .forEach((p: FordelBeregningsgrunnlagPeriodeTransformedValues) => fordelBeregningsgrunnlagPerioder.push(p));
     }
   }
   return fordelBeregningsgrunnlagPerioder;
@@ -153,7 +173,7 @@ interface OwnState {
 export class FordelBeregningsgrunnlagForm extends Component<OwnProps, OwnState> {
   static validate = (
     intl: IntlShape,
-    values: any,
+    values: FordelBeregningsgrunnlagMedAksjonspunktValues,
     fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
     beregningsgrunnlag: Beregningsgrunnlag,
     getKodeverknavn: (kodeverk: Kodeverk) => string,
@@ -176,17 +196,17 @@ export class FordelBeregningsgrunnlagForm extends Component<OwnProps, OwnState> 
     return errors;
   };
 
-  static transformValues = (values: any,
+  static transformValues = (values: FordelBeregningsgrunnlagMedAksjonspunktValues,
     fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
-    bgPerioder: BeregningsgrunnlagPeriodeProp[]) => ({
+    bgPerioder: BeregningsgrunnlagPeriodeProp[]): FordelBeregningsgrunnlagPerioderTransformedValues => ({
     endretBeregningsgrunnlagPerioder: transformPerioder(fordelBGPerioder, values, bgPerioder),
   });
 
   static buildInitialValues = (fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
     bg: Beregningsgrunnlag,
     getKodeverknavn: (kodeverk: Kodeverk) => string,
-    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => {
-    const initialValues = {};
+    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): FordelBeregningsgrunnlagValues => {
+    const initialValues = {} as FordelBeregningsgrunnlagValues;
     if (!fordelBGPerioder) {
       return initialValues;
     }
@@ -208,7 +228,7 @@ export class FordelBeregningsgrunnlagForm extends Component<OwnProps, OwnState> 
     this.showPanel = this.showPanel.bind(this);
   }
 
-  showPanel(fom) {
+  showPanel(fom: string): void {
     const { openPanels } = this.state;
     if (openPanels.includes(fom)) {
       this.setState({ openPanels: openPanels.filter((panel) => panel !== fom) });

@@ -18,9 +18,10 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { ArbeidsgiverOpplysningerPerId, RefusjonTilVurderingAndel } from '@fpsak-frontend/types';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
+import { VurderRefusjonAndelTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/VurderRefusjonBeregningsgrunnlagAP';
 import styles from './vurderEndringRefusjonRad.less';
 import { createVisningsnavnForAktivitetRefusjon } from '../util/visningsnavnHelper';
-import { VurderRefusjonAndelTransformedValues, VurderRefusjonValues } from '../../types/VurderRefusjonTsType';
+import VurderRefusjonValues from '../../types/VurderRefusjonTsType';
 
 const FIELD_KEY_REFUSJONSTART = 'REFUSJON_ENDRING_DATO';
 const FIELD_KEY_DELVIS_REF = 'DELVIS_REFUSJON_FØR_START_BELØP';

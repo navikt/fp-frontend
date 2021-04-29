@@ -44,9 +44,9 @@ const agOpplysninger = {
 describe('<FordelingHelpText>', () => {
   it('skal lage endret arbeidsforhold for permisjon', () => {
     const string = createFordelArbeidsforholdString(arbeidsforholdListe, textCase.PERMISJON, agOpplysninger, fn);
-    expect(string.navnOgOrgnr).toEqual('Sopra Steria (123456789)...6789');
-    expect(string.dato).toEqual('01.10.2018');
+    expect(string).toEqual('Sopra Steria (123456789)...6789 f.o.m 01.10.2018');
   });
+
   it('skal lage endret arbeidsforhold for permisjon når permisjonTom er undefined', () => {
     const string = createFordelArbeidsforholdString(
       [{
@@ -59,8 +59,7 @@ describe('<FordelingHelpText>', () => {
       agOpplysninger,
       fn,
     );
-    expect(string.navnOgOrgnr).toEqual('Sopra Steria (123456789)...6789');
-    expect(string.dato).toEqual('-');
+    expect(string).toEqual('Sopra Steria (123456789)...6789 f.o.m -');
   });
   it('skal lage endret arbeidsforhold for gradering', () => {
     const string = createFordelArbeidsforholdString(arbeidsforholdListe, textCase.GRADERING, agOpplysninger, fn);

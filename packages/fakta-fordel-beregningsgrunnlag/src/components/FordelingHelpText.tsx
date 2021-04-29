@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createSelector } from 'reselect';
 import moment from 'moment';
@@ -13,7 +13,7 @@ import {
   ArbeidsforholdTilFordeling,
   ArbeidsgiverOpplysningerPerId,
   Kodeverk,
-  KodeverkMedNavn,
+  KodeverkMedNavn, PerioderMedGraderingEllerRefusjon,
 } from '@fpsak-frontend/types';
 import { createVisningsnavnForAktivitetFordeling } from './util/visningsnavnHelper';
 
@@ -28,9 +28,9 @@ export const textCase = {
   ENDRING_YTELSE: 'ENDRING_YTELSE',
 };
 
-const formatDate = (date) => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
+const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
-export const byggListeSomStreng = (listeMedStrenger) => {
+const byggListeSomStreng = (listeMedStrenger: string[]): string => {
   if (listeMedStrenger.length === 0) {
     return '';
   }
@@ -46,10 +46,10 @@ export const byggListeSomStreng = (listeMedStrenger) => {
   return '';
 };
 
-const lagPeriodeStreng = (perioder) => {
+const lagPeriodeStreng = (perioder: PerioderMedGraderingEllerRefusjon[]): string => {
   const listeMedPeriodeStrenger = perioder.map((periode) => {
     let periodeStreng = ` f.o.m. ${formatDate(periode.fom)}`;
-    if (periode.tom && periode.tom !== null) {
+    if (periode.tom) {
       periodeStreng = periodeStreng.concat(` - t.o.m. ${formatDate(periode.tom)}`);
     }
     return periodeStreng;
@@ -57,18 +57,27 @@ const lagPeriodeStreng = (perioder) => {
   return byggListeSomStreng(listeMedPeriodeStrenger);
 };
 
+type ArbeidsforholdInfo = {
+  navnOgOrgnr: string;
+  dato: string;
+}
+
+const finnVisningsnavn = (arbeidsforhold: ArbeidsforholdTilFordeling,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+  getKodeverknavn: (kodeverk: Kodeverk) => string): string => {
+  const agOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
+  if (!agOpplysninger) {
+    return arbeidsforhold.arbeidsforholdType ? getKodeverknavn(arbeidsforhold.arbeidsforholdType) : '';
+  }
+  return createVisningsnavnForAktivitetFordeling(agOpplysninger, arbeidsforhold.eksternArbeidsforholdId);
+};
+
 export const createFordelArbeidsforholdString = (listOfArbeidsforhold: ArbeidsforholdTilFordeling[],
   mTextCase: string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  getKodeverknavn: (kodeverk: Kodeverk) => string) => {
+  getKodeverknavn: (kodeverk: Kodeverk) => string): string | ArbeidsforholdInfo => {
   const listOfStrings = listOfArbeidsforhold.map((arbeidsforhold) => {
-    const agOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
-    let visningsnavn;
-    if (!agOpplysninger) {
-      visningsnavn = arbeidsforhold.arbeidsforholdType ? getKodeverknavn(arbeidsforhold.arbeidsforholdType) : '';
-    } else {
-      visningsnavn = createVisningsnavnForAktivitetFordeling(agOpplysninger, arbeidsforhold.eksternArbeidsforholdId);
-    }
+    const visningsnavn = finnVisningsnavn(arbeidsforhold, arbeidsgiverOpplysningerPerId, getKodeverknavn);
     if (mTextCase === textCase.GRADERING) {
       return visningsnavn + lagPeriodeStreng(arbeidsforhold.perioderMedGraderingEllerRefusjon.filter(({ erGradering }) => erGradering));
     }
@@ -79,10 +88,7 @@ export const createFordelArbeidsforholdString = (listOfArbeidsforhold: Arbeidsfo
       return visningsnavn + lagPeriodeStreng(arbeidsforhold.perioderMedGraderingEllerRefusjon.filter(({ erSøktYtelse }) => erSøktYtelse));
     }
     if (mTextCase === textCase.PERMISJON) {
-      return {
-        navnOgOrgnr: visningsnavn,
-        dato: formatDate(arbeidsforhold.permisjon.permisjonTom),
-      };
+      return visningsnavn.concat(` f.o.m ${formatDate(arbeidsforhold.permisjon.permisjonTom)}`);
     }
     return null;
   });
@@ -96,7 +102,7 @@ const createGraderingOrRefusjonString = (
   endringYtelse: ArbeidsforholdTilFordeling[],
   getKodeverknavn: (kodeverk: Kodeverk) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-): React.ReactNode[] => {
+): ReactElement[] => {
   const text = [];
   if (permisjonMedGraderingEllerRefusjon.length > 0) {
     const arbeidsforholdString = createFordelArbeidsforholdString(permisjonMedGraderingEllerRefusjon,
@@ -105,8 +111,7 @@ const createGraderingOrRefusjonString = (
       key="EndringBeregningsgrunnlagPermisjon"
       id="BeregningInfoPanel.AksjonspunktHelpText.FaktaOmBeregning.EndringBeregningsgrunnlag.Permisjon"
       values={{
-        arbeidsforhold: arbeidsforholdString.navnOgOrgnr,
-        dato: arbeidsforholdString.dato,
+        arbeidsforhold: arbeidsforholdString,
       }}
     />);
   }
@@ -129,7 +134,7 @@ const createGraderingOrRefusjonString = (
   if (endringYtelse.length > 0) {
     const arbeidsforholdString = createFordelArbeidsforholdString(endringYtelse, textCase.ENDRING_YTELSE, arbeidsgiverOpplysningerPerId, getKodeverknavn);
     text.push(<FormattedMessage
-      key="EndringBeregningsgrunnlagRefusjon"
+      key="EndringBeregningsgrunnlagEndringYtelse"
       id="BeregningInfoPanel.AksjonspunktHelpText.FaktaOmBeregning.EndringBeregningsgrunnlag.EndringYtelse"
       values={{ arbeidsforhold: arbeidsforholdString }}
     />);
@@ -144,12 +149,13 @@ const createGraderingOrRefusjonString = (
   return text;
 };
 
-const harGraderingEllerRefusjon = (perioderMedGraderingEllerRefusjon) => perioderMedGraderingEllerRefusjon.map(({ erRefusjon }) => erRefusjon).includes(true)
+const harGraderingEllerRefusjon = (perioderMedGraderingEllerRefusjon: PerioderMedGraderingEllerRefusjon[]):
+  boolean => perioderMedGraderingEllerRefusjon.map(({ erRefusjon }) => erRefusjon).includes(true)
     || perioderMedGraderingEllerRefusjon.map(({ erGradering }) => erGradering).includes(true);
 
 const lagHelpTextsFordelBG = (endredeArbeidsforhold: ArbeidsforholdTilFordeling[],
   getKodeverknavn: (kodeverk: Kodeverk) => string,
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): React.ReactNode[] => {
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement[] => {
   const gradering = endredeArbeidsforhold
     .filter(({ perioderMedGraderingEllerRefusjon }) => perioderMedGraderingEllerRefusjon.map(({ erGradering }) => erGradering).includes(true));
   const refusjon = endredeArbeidsforhold
@@ -167,11 +173,11 @@ const lagHelpTextsFordelBG = (endredeArbeidsforhold: ArbeidsforholdTilFordeling[
     arbeidsgiverOpplysningerPerId);
   if (helpTexts.length === 2) {
     return [
-      <>
+      <div key="HjelpeTextDiv">
         {helpTexts[0]}
-        <VerticalSpacer eightPx />
+        <VerticalSpacer key="fordelingSpacer" eightPx />
         {helpTexts[1]}
-      </>];
+      </div>];
   }
   return helpTexts;
 };
@@ -200,7 +206,10 @@ export const getHelpTextsFordelBG = createSelector(
     (ownProps: OwnInitialProps) => ownProps.alleKodeverk,
     (ownProps: OwnInitialProps) => ownProps.arbeidsgiverOpplysningerPerId,
     (ownProps: OwnInitialProps) => ownProps.aksjonspunkter],
-  (beregningsgrunnlag, alleKodeverk, arbeidsgiverOpplysningerPerId, aksjonspunkter) => {
+  (beregningsgrunnlag,
+    alleKodeverk,
+    arbeidsgiverOpplysningerPerId,
+    aksjonspunkter): ReactElement[] => {
     const fordelBG = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag;
     const endredeArbeidsforhold = fordelBG ? fordelBG.arbeidsforholdTilFordeling : [];
     return hasAksjonspunkt(FORDEL_BEREGNINGSGRUNNLAG, aksjonspunkter)
@@ -209,7 +218,7 @@ export const getHelpTextsFordelBG = createSelector(
   },
 );
 
-const mapStateToProps = (state, ownProps: OwnInitialProps) => ({
+const mapStateToProps = (state: any, ownProps: OwnInitialProps): MappedOwnProps => ({
   helpText: getHelpTextsFordelBG(ownProps),
 });
 

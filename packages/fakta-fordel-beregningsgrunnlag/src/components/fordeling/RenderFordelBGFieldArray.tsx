@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import {
   FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
@@ -22,22 +22,24 @@ import beregningsgrunnlagAndeltyper from '@fpsak-frontend/kodeverk/src/beregning
 import inntektskategorier, { isSelvstendigNæringsdrivende } from '@fpsak-frontend/kodeverk/src/inntektskategorier';
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 
-import 'core-js/features/array/flat-map';
-
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
-import { ArbeidsgiverOpplysningerPerId, Kodeverk } from '@fpsak-frontend/types';
-import getUniqueListOfArbeidsforhold, { Arbeidsforhold } from '../ArbeidsforholdHelper';
+import {
+  ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Kodeverk, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
+import LabelType from '@fpsak-frontend/form/src/LabelType';
+import finnUnikeArbeidsforhold from '../FinnUnikeArbeidsforhold';
 import {
   validateAndeler, validateSumFastsattBelop, validateTotalRefusjonPrArbeidsforhold, validateUlikeAndeler,
   validateSumRefusjon, validateSumFastsattForUgraderteAktiviteter,
 } from '../ValidateAndelerUtils';
 import styles from './renderFordelBGFieldArray.less';
 import { createVisningsnavnForAktivitetFordeling } from '../util/visningsnavnHelper';
+import { BGFordelArbeidsforhold, FordelBeregningsgrunnlagAndelValues, PeriodeTsType } from '../../types/FordelingTsType';
 
-const defaultBGFordeling = (periodeUtenAarsak) => ({
+const defaultBGFordeling = (periodeUtenAarsak: boolean): FordelBeregningsgrunnlagAndelValues => ({
   nyAndel: true,
   kilde: 'SAKSBEHANDLER_FORDELING',
-  fordelingForrigeBehandling: 0,
+  fordelingForrigeBehandling: '0',
   fastsattBelop: formatCurrencyNoKr(0),
   lagtTilAvSaksbehandler: true,
   refusjonskravFraInntektsmelding: 0,
@@ -45,14 +47,14 @@ const defaultBGFordeling = (periodeUtenAarsak) => ({
   skalRedigereInntekt: !periodeUtenAarsak,
 });
 
-const fieldLabel = (index, labelId) => {
+const fieldLabel = (index: number, labelId: string): LabelType => {
   if (index === 0) {
     return { id: labelId };
   }
   return '';
 };
 
-const lagVisningsnavn = (arbeidsforhold: Arbeidsforhold,
+const lagVisningsnavn = (arbeidsforhold: BGFordelArbeidsforhold,
   getKodeverknavn: (kodeverk: Kodeverk) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
   const agOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverId];
@@ -62,19 +64,19 @@ const lagVisningsnavn = (arbeidsforhold: Arbeidsforhold,
   return createVisningsnavnForAktivitetFordeling(agOpplysninger, arbeidsforhold.eksternArbeidsforholdId);
 };
 
-const arbeidsgiverSelectValues = (arbeidsforholdList: Arbeidsforhold[],
+const arbeidsgiverSelectValues = (arbeidsforholdList: BGFordelArbeidsforhold[],
   getKodeverknavn: (kodeverk: Kodeverk) => string,
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): React.ReactNode[] => (arbeidsforholdList
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement[] => (arbeidsforholdList
   .map((arbeidsforhold) => (
     <option value={arbeidsforhold.andelsnr.toString()} key={arbeidsforhold.andelsnr}>
       {lagVisningsnavn(arbeidsforhold, getKodeverknavn, arbeidsgiverOpplysningerPerId)}
     </option>
   )));
 
-const arbeidsgiverSelectValuesForKunYtelse = (arbeidsforholdList: Arbeidsforhold[],
+const arbeidsgiverSelectValuesForKunYtelse = (arbeidsforholdList: BGFordelArbeidsforhold[],
   intl: IntlShape,
   getKodeverknavn: (kodeverk: Kodeverk) => string,
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): React.ReactNode[] => {
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement[] => {
   const nedtrekksvalgListe = arbeidsforholdList
     .map((arbeidsforhold) => (
       <option value={arbeidsforhold.andelsnr.toString()} key={arbeidsforhold.andelsnr}>
@@ -89,13 +91,13 @@ const arbeidsgiverSelectValuesForKunYtelse = (arbeidsforholdList: Arbeidsforhold
   return nedtrekksvalgListe;
 };
 
-const inntektskategoriSelectValues = (kategorier) => kategorier.map((ik) => (
+const inntektskategoriSelectValues = (kategorier: KodeverkMedNavn[]): ReactElement[] => kategorier.map((ik) => (
   <option value={ik.kode} key={ik.kode}>
     {ik.navn}
   </option>
 ));
 
-const summerFordelingForrigeBehandlingFraFields = (fields) => {
+const summerFordelingForrigeBehandlingFraFields = (fields: FieldArrayFieldsProps<FordelBeregningsgrunnlagAndelValues>): string => {
   let sum = 0;
   let index = 0;
   for (index; index < fields.length; index += 1) {
@@ -107,7 +109,7 @@ const summerFordelingForrigeBehandlingFraFields = (fields) => {
   return sum > 0 ? formatCurrencyNoKr(sum) : '';
 };
 
-const summerFordeling = (fields) => {
+const summerFordeling = (fields: FieldArrayFieldsProps<FordelBeregningsgrunnlagAndelValues>): string => {
   let sum = 0;
   let index = 0;
   for (index; index < fields.length; index += 1) {
@@ -121,7 +123,7 @@ const summerFordeling = (fields) => {
   return sum > 0 ? formatCurrencyNoKr(sum) : '';
 };
 
-const summerBeregningsgrunnlagPrAar = (fields) => {
+const summerBeregningsgrunnlagPrAar = (fields: FieldArrayFieldsProps<FordelBeregningsgrunnlagAndelValues>): string => {
   let sum = 0;
   let index = 0;
   for (index; index < fields.length; index += 1) {
@@ -133,26 +135,28 @@ const summerBeregningsgrunnlagPrAar = (fields) => {
   return sum > 0 ? formatCurrencyNoKr(sum) : '';
 };
 
-const isSelvstendigOrFrilanser = (fieldVal) => (isSelvstendigNæringsdrivende(fieldVal.inntektskategori)
+const isSelvstendigOrFrilanser = (fieldVal: FordelBeregningsgrunnlagAndelValues): boolean => (isSelvstendigNæringsdrivende(fieldVal.inntektskategori)
   || inntektskategorier.FRILANSER === fieldVal.inntektskategori);
 
-const renderMessage = (intl, error) => (error[0] && error[0].id ? intl.formatMessage(...error) : error);
+// @ts-ignore Sender inn FieldArrayMetaProps.error, som har en any shape, så slipper ikke unna any her
+const renderMessage = (intl: IntlShape, error: any): string => (error[0] && error[0].id ? intl.formatMessage(...error) : error);
 
-const getErrorMessage = (meta, intl) => (meta.error
+const getErrorMessage = (meta: FieldArrayMetaProps, intl: IntlShape): string => (meta.error
 && meta.submitFailed ? renderMessage(intl, meta.error) : null);
 
-const onKeyDown = (fields, periodeUtenAarsak) => ({ key }) => {
+const onKeyDown = (fields: FieldArrayFieldsProps<FordelBeregningsgrunnlagAndelValues>,
+  periodeUtenAarsak: boolean): (arg: React.KeyboardEvent) => void => ({ key }) => {
   if (key === 'Enter') {
     fields.push(defaultBGFordeling(periodeUtenAarsak));
   }
 };
 
-const finnArbeidsforholdForAndel = (arbeidsforholdListe, val) => {
+const finnArbeidsforholdForAndel = (arbeidsforholdListe: BGFordelArbeidsforhold[], val: string): BGFordelArbeidsforhold => {
   const andelsnr = Number(val);
   return arbeidsforholdListe.find((arbeidsforhold) => arbeidsforhold.andelsnr === andelsnr);
 };
 
-const finnAktivitetStatus = (fields, val) => {
+const finnAktivitetStatus = (fields: FieldArrayFieldsProps<FordelBeregningsgrunnlagAndelValues>, val: string): string => {
   const andelsnr = Number(val);
   for (let index = 0; index < fields.length; index += 1) {
     if (fields.get(index).andelsnr === andelsnr) {
@@ -162,7 +166,10 @@ const finnAktivitetStatus = (fields, val) => {
   return null;
 };
 
-const setArbeidsforholdInfo = (fields, index, arbeidsforholdList, val) => {
+const setArbeidsforholdInfo = (fields: FieldArrayFieldsProps<FordelBeregningsgrunnlagAndelValues>,
+  index: number,
+  arbeidsforholdList: BGFordelArbeidsforhold[],
+  val: string): void => {
   const field = fields.get(index);
   const arbeidsforhold = finnArbeidsforholdForAndel(arbeidsforholdList, val);
   if (arbeidsforhold) {
@@ -180,9 +187,14 @@ const setArbeidsforholdInfo = (fields, index, arbeidsforholdList, val) => {
   }
 };
 
-const arbeidsforholdReadOnlyOrSelect = (fields, index, elementFieldId, selectVals, isReadOnly, arbeidsforholdList) => (
-  <>
-    {(!fields.get(index).nyAndel)
+const arbeidsforholdReadOnlyOrSelect = (fields: FieldArrayFieldsProps<FordelBeregningsgrunnlagAndelValues>,
+  index: number,
+  elementFieldId: string,
+  selectVals: ReactElement[],
+  isReadOnly: boolean,
+  arbeidsforholdList: BGFordelArbeidsforhold[]): ReactElement => (
+    <>
+      {(!fields.get(index).nyAndel)
       && (
       <InputField
         name={`${elementFieldId}.andel`}
@@ -190,7 +202,7 @@ const arbeidsforholdReadOnlyOrSelect = (fields, index, elementFieldId, selectVal
         readOnly
       />
       )}
-    {fields.get(index).nyAndel
+      {fields.get(index).nyAndel
       && (
       <SelectField
         name={`${elementFieldId}.andel`}
@@ -201,10 +213,13 @@ const arbeidsforholdReadOnlyOrSelect = (fields, index, elementFieldId, selectVal
         onChange={(event) => setArbeidsforholdInfo(fields, index, arbeidsforholdList, event.target.value)}
       />
       )}
-  </>
+    </>
 );
 
-export const lagBelopKolonne = (andelElementFieldId, readOnly, periodeUtenAarsak, isAksjonspunktClosed) => {
+export const lagBelopKolonne = (andelElementFieldId: string,
+  readOnly: boolean,
+  periodeUtenAarsak: boolean,
+  isAksjonspunktClosed: boolean): ReactElement => {
   if (!readOnly && periodeUtenAarsak) {
     return (
       <TableColumn>
@@ -231,11 +246,19 @@ export const lagBelopKolonne = (andelElementFieldId, readOnly, periodeUtenAarsak
   );
 };
 
-const skalViseSletteknapp = (index, fields, readOnly) => ((fields.get(index).nyAndel
+const skalViseSletteknapp = (index: number,
+  fields: FieldArrayFieldsProps<FordelBeregningsgrunnlagAndelValues>,
+  readOnly: boolean): boolean => ((fields.get(index).nyAndel
 || fields.get(index).lagtTilAvSaksbehandler) && !readOnly);
 
-const createAndelerTableRows = (fields, isAksjonspunktClosed, readOnly,
-  inntektskategoriKoder, periodeUtenAarsak, arbeidsforholdList, selectVals, erRevurdering) => (
+const createAndelerTableRows = (fields: FieldArrayFieldsProps<FordelBeregningsgrunnlagAndelValues>,
+  isAksjonspunktClosed: boolean,
+  readOnly: boolean,
+  inntektskategoriKoder: KodeverkMedNavn[],
+  periodeUtenAarsak: boolean,
+  arbeidsforholdList: BGFordelArbeidsforhold[],
+  selectVals: ReactElement[],
+  erRevurdering: boolean): ReactElement[] => (
   fields.map((andelElementFieldId, index) => (
     <TableRow key={andelElementFieldId}>
       <TableColumn>
@@ -319,12 +342,16 @@ const createAndelerTableRows = (fields, isAksjonspunktClosed, readOnly,
     </TableRow>
   ))
 );
-const createBruttoBGSummaryRow = (sumFordelingForrigeBehandling, sumFordeling, sumBeregningsgrunnlagPrAar, erRevurdering) => (
-  <TableRow key="bruttoBGSummaryRow">
-    <TableColumn>
-      <FormattedMessage id="BeregningInfoPanel.FordelBG.Sum" />
-    </TableColumn>
-    {erRevurdering
+
+const createBruttoBGSummaryRow = (sumFordelingForrigeBehandling: string,
+  sumFordeling: string,
+  sumBeregningsgrunnlagPrAar: string,
+  erRevurdering: boolean): ReactElement => (
+    <TableRow key="bruttoBGSummaryRow">
+      <TableColumn>
+        <FormattedMessage id="BeregningInfoPanel.FordelBG.Sum" />
+      </TableColumn>
+      {erRevurdering
     && (
     <TableColumn>
       <Element>
@@ -332,24 +359,24 @@ const createBruttoBGSummaryRow = (sumFordelingForrigeBehandling, sumFordeling, s
       </Element>
     </TableColumn>
     )}
-    <TableColumn />
-    <TableColumn />
-    <TableColumn>
-      <Element>
-        {sumBeregningsgrunnlagPrAar}
-      </Element>
-    </TableColumn>
-    <TableColumn>
-      <Element>
-        {sumFordeling}
-      </Element>
-    </TableColumn>
-    <TableColumn />
-    <TableColumn />
-  </TableRow>
+      <TableColumn />
+      <TableColumn />
+      <TableColumn>
+        <Element>
+          {sumBeregningsgrunnlagPrAar}
+        </Element>
+      </TableColumn>
+      <TableColumn>
+        <Element>
+          {sumFordeling}
+        </Element>
+      </TableColumn>
+      <TableColumn />
+      <TableColumn />
+    </TableRow>
 );
 
-const getHeaderTextCodes = (erRevurdering) => {
+const getHeaderTextCodes = (erRevurdering: boolean): string[] => {
   const headerCodes = [];
   headerCodes.push('BeregningInfoPanel.FordelBG.Andel');
   if (erRevurdering) {
@@ -365,31 +392,31 @@ const getHeaderTextCodes = (erRevurdering) => {
 
 type MappedOwnProps = {
   erRevurdering: boolean;
-  inntektskategoriKoder: Kodeverk[];
+  inntektskategoriKoder: KodeverkMedNavn[];
   getKodeverknavn: (kodeverk: Kodeverk) => string;
-  arbeidsforholdList: Arbeidsforhold[];
+  arbeidsforholdList: BGFordelArbeidsforhold[];
   harKunYtelse: boolean;
 }
 
 type OwnProps = {
     readOnly: boolean;
-    fields: FieldArrayFieldsProps<any>;
-    meta?: FieldArrayMetaProps;
+    fields: FieldArrayFieldsProps<FordelBeregningsgrunnlagAndelValues>;
+    meta: FieldArrayMetaProps;
     isAksjonspunktClosed: boolean;
     periodeUtenAarsak: boolean;
+    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    behandlingType: Kodeverk;
+    beregningsgrunnlag: Beregningsgrunnlag;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 };
 
 interface StaticFunctions {
   validate: (intl: IntlShape,
-             values: any,
+             values: FordelBeregningsgrunnlagAndelValues[],
              sumIPeriode: number,
              getKodeverknavn: (kodeverk: Kodeverk) => string,
              grunnbeløp: number,
-             periodeDato: {
-              fom: string;
-              tom: string;
-             },
+             periode: PeriodeTsType,
              skalValidereRefusjon: boolean,
              arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => any;
 }
@@ -500,16 +527,16 @@ RenderFordelBGFieldArrayImpl.validate = (intl, values, sumIPeriode, getKodeverkn
   return null;
 };
 
-const mapStateToPropsFactory = (initialState, initialOwnProps) => {
+const mapStateToPropsFactory = (initialState: any, initialOwnProps: OwnProps) => {
   const { behandlingType } = initialOwnProps;
   const erRevurdering = behandlingType ? behandlingType.kode === bt.REVURDERING : false;
   const inntektskategoriKoder = initialOwnProps.alleKodeverk[kodeverkTyper.INNTEKTSKATEGORI];
   const getKodeverknavn = getKodeverknavnFn(initialOwnProps.alleKodeverk, kodeverkTyper);
-  return (state, ownProps): MappedOwnProps => ({
+  return (state: any, ownProps: OwnProps): MappedOwnProps => ({
     erRevurdering,
     inntektskategoriKoder,
     getKodeverknavn,
-    arbeidsforholdList: getUniqueListOfArbeidsforhold(ownProps),
+    arbeidsforholdList: finnUnikeArbeidsforhold(ownProps),
     harKunYtelse: initialOwnProps.beregningsgrunnlag.aktivitetStatus
       .some((status) => status.kode === aktivitetStatuser.KUN_YTELSE),
   });
