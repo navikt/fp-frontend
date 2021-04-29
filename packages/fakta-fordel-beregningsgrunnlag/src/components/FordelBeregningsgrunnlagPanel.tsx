@@ -7,6 +7,10 @@ import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsTy
 import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 
+import FordelBeregningsgrunnlagAP
+  from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/FordelBeregningsgrunnlagAP';
+import VurderRefusjonBeregningsgrunnlagAP
+  from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/VurderRefusjonBeregningsgrunnlagAP';
 import VurderEndringRefusjonForm from './refusjon/VurderEndringRefusjonForm';
 import FordelingForm from './FordelingForm';
 
@@ -15,16 +19,17 @@ const {
   VURDER_REFUSJON_BERGRUNN,
 } = aksjonspunktCodes;
 
-const harFordelInfo = (bg) => (bg && bg.faktaOmFordeling ? bg.faktaOmFordeling.fordelBeregningsgrunnlag : false);
+const harFordelInfo = (bg: Beregningsgrunnlag): boolean => (bg && bg.faktaOmFordeling ? !!bg.faktaOmFordeling.fordelBeregningsgrunnlag : false);
 
-const harRefusjonInfo = (bg) => bg && bg.refusjonTilVurdering;
+const harRefusjonInfo = (bg: Beregningsgrunnlag): boolean => !!(bg && bg.refusjonTilVurdering);
 
-const getAksjonspunkt = (aksjonspunkter, def) => (aksjonspunkter && def ? aksjonspunkter.find((ap) => ap.definisjon.kode === def) : undefined);
+const getAksjonspunkt = (aksjonspunkter: Aksjonspunkt[],
+  def: string): Aksjonspunkt | undefined => (aksjonspunkter && def ? aksjonspunkter.find((ap) => ap.definisjon.kode === def) : undefined);
 
 interface OwnProps {
   readOnly: boolean;
   aksjonspunkter: Aksjonspunkt[];
-  submitCallback: (...args: any[]) => any;
+  submitCallback: (aksjonspunktData: FordelBeregningsgrunnlagAP | VurderRefusjonBeregningsgrunnlagAP) => Promise<void>;
   submittable: boolean;
   beregningsgrunnlag: Beregningsgrunnlag;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};

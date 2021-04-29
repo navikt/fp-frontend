@@ -9,9 +9,11 @@ import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktSta
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { RefusjonTilVurderingAndel, Beregningsgrunnlag, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
+import VurderRefusjonBeregningsgrunnlagAP
+  from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/VurderRefusjonBeregningsgrunnlagAP';
 import TidligereUtbetalinger from './TidligereUtbetalinger';
 import VurderEndringRefusjonRad from './VurderEndringRefusjonRad';
-import VurderRefusjonTransformedValues, { VurderRefusjonValues } from '../../types/VurderRefusjonTsType';
+import VurderRefusjonValues from '../../types/VurderRefusjonTsType';
 
 const BEGRUNNELSE_FIELD = 'VURDER_REFUSJON_BERGRUNN_BEGRUNNELSE';
 const FORM_NAME = 'VURDER_REFUSJON_BERGRUNN_FORM';
@@ -36,7 +38,7 @@ interface MappedOwnProps {
 }
 
 type OwnProps = {
-    submitCallback: (...args: any[]) => any;
+    submitCallback: (aksjonspunktData: VurderRefusjonBeregningsgrunnlagAP) => Promise<void>;
     readOnly: boolean;
     submittable: boolean;
     submitEnabled: boolean;
@@ -115,7 +117,7 @@ export const buildInitialValues = (bg: Beregningsgrunnlag, aksjonspunkter: Aksjo
   return initialValues;
 };
 
-export const transformValues = (values: VurderRefusjonValues, bg: Beregningsgrunnlag): VurderRefusjonTransformedValues => {
+export const transformValues = (values: VurderRefusjonValues, bg: Beregningsgrunnlag): VurderRefusjonBeregningsgrunnlagAP => {
   const { andeler } = bg.refusjonTilVurdering;
   const transformedAndeler = andeler.map((andel) => VurderEndringRefusjonRad.transformValues(values, andel, bg.skjaeringstidspunktBeregning));
   return {
@@ -126,7 +128,7 @@ export const transformValues = (values: VurderRefusjonValues, bg: Beregningsgrun
 };
 
 const mapStateToProps = (initialState: any, initialProps: OwnProps) => {
-  const onSubmit = (values) => initialProps.submitCallback([transformValues(values, initialProps.beregningsgrunnlag)]);
+  const onSubmit = (values) => initialProps.submitCallback(transformValues(values, initialProps.beregningsgrunnlag));
   return (state: any, ownProps: OwnProps): MappedOwnProps => {
     const initialValues = buildInitialValues(ownProps.beregningsgrunnlag, ownProps.aksjonspunkter);
     return ({

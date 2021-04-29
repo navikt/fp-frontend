@@ -3,10 +3,11 @@ import Beregningsgrunnlag, {
   BeregningsgrunnlagAndel,
   BeregningsgrunnlagPeriodeProp,
 } from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
-import { FordelBeregningsgrunnlagAndel, FordelBeregningsgrunnlagPeriode, Kodeverk } from '@fpsak-frontend/types';
+import { FordelBeregningsgrunnlagAndel, FordelBeregningsgrunnlagPeriode } from '@fpsak-frontend/types';
 import BeregningsgrunnlagArbeidsforhold from '@fpsak-frontend/types/src/beregningsgrunnlagArbeidsforholdTsType';
+import { BGFordelArbeidsforhold } from '../types/FordelingTsType';
 
-const arbeidsforholdEksistererIListen = (arbeidsforhold: BeregningsgrunnlagArbeidsforhold, arbeidsgiverList: Arbeidsforhold[]): boolean => {
+const arbeidsforholdEksistererIListen = (arbeidsforhold: BeregningsgrunnlagArbeidsforhold, arbeidsgiverList: BGFordelArbeidsforhold[]): boolean => {
   if (arbeidsforhold.arbeidsforholdId === null) {
     return arbeidsgiverList.map(({ arbeidsgiverId }) => (arbeidsgiverId)).includes(arbeidsforhold.arbeidsgiverIdent);
   }
@@ -18,28 +19,8 @@ const finnBgAndelMedSammeArbeidsforhold = (bgAndeler: BeregningsgrunnlagAndel[],
 && arbeidsforhold.arbeidsgiverIdent === andel.arbeidsforhold.arbeidsgiverIdent
 && arbeidsforhold.arbeidsforholdId === andel.arbeidsforhold.arbeidsforholdId);
 
-export type Arbeidsforhold = {
-  andelsnr: number;
-  nyttArbeidsforhold: boolean;
-  beregningsperiodeTom: string;
-  beregningsperiodeFom: string;
-  arbeidsgiverNavn?: string;
-  arbeidsgiverId?: string;
-  arbeidsgiverIdVisning?: string;
-  eksternArbeidsforholdId?: string;
-  refusjonPrAar?: number;
-  belopFraInntektsmeldingPrMnd?: number;
-  organisasjonstype?: Kodeverk;
-  naturalytelseBortfaltPrÅr?: number;
-  naturalytelseTilkommetPrÅr?: number;
-  startdato?: string;
-  opphoersdato?: string;
-  arbeidsforholdId?: string;
-  arbeidsforholdType?: Kodeverk;
-}
-
 const getUniqueListOfArbeidsforholdFromAndeler = (andeler: FordelBeregningsgrunnlagAndel[],
-  bgAndeler: BeregningsgrunnlagAndel[]): Arbeidsforhold[] => {
+  bgAndeler: BeregningsgrunnlagAndel[]): BGFordelArbeidsforhold[] => {
   const arbeidsgiverList = [];
   if (andeler === undefined) {
     return arbeidsgiverList;
@@ -68,10 +49,8 @@ const finnAndelerFraFordelingperioder = (fordelPerioder: FordelBeregningsgrunnla
 const finnAndelerFraBgperioder = (bgPerioder: BeregningsgrunnlagPeriodeProp[]): BeregningsgrunnlagAndel[] => (bgPerioder.length > 0
   ? bgPerioder.flatMap((p) => p.beregningsgrunnlagPrStatusOgAndel) : emptyList);
 
-const getUniqueListOfArbeidsforholdFromPerioder = (
-  fordelPerioder: FordelBeregningsgrunnlagPeriode[],
-  bgPerioder: BeregningsgrunnlagPeriodeProp[],
-): Arbeidsforhold[] => getUniqueListOfArbeidsforholdFromAndeler(
+const getUniqueListOfArbeidsforholdFromPerioder = (fordelPerioder: FordelBeregningsgrunnlagPeriode[],
+  bgPerioder: BeregningsgrunnlagPeriodeProp[]): BGFordelArbeidsforhold[] => getUniqueListOfArbeidsforholdFromAndeler(
   finnAndelerFraFordelingperioder(fordelPerioder),
   finnAndelerFraBgperioder(bgPerioder),
 );
@@ -80,13 +59,13 @@ type SelectorProps = {
   beregningsgrunnlag: Beregningsgrunnlag;
 }
 
-const getUniqueListOfArbeidsforhold = createSelector(
+const finnUnikeArbeidsforhold = createSelector(
   [(props: SelectorProps) => props.beregningsgrunnlag],
-  (beregningsgrunnlag): Arbeidsforhold[] => {
+  (beregningsgrunnlag): BGFordelArbeidsforhold[] => {
     const fordelBGPerioder = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag.fordelBeregningsgrunnlagPerioder;
     const bgPerioder = beregningsgrunnlag.beregningsgrunnlagPeriode;
     return getUniqueListOfArbeidsforholdFromPerioder(fordelBGPerioder, bgPerioder);
   },
 );
 
-export default getUniqueListOfArbeidsforhold;
+export default finnUnikeArbeidsforhold;

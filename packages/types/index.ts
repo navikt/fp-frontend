@@ -36,6 +36,7 @@ export {
   FordelBeregningsgrunnlagPeriode,
   ArbeidsforholdTilFordeling,
   FordelBeregningsgrunnlagAndel,
+  PerioderMedGraderingEllerRefusjon,
 } from './src/beregningsgrunnlagFordelingTsType';
 export { default as Feriepengegrunnlag, FeriepengegrunnlagAndel } from './src/feriepengegrunnlagTsType';
 export { default as BeregningsresultatEs } from './src/beregningsresultatEsTsType';

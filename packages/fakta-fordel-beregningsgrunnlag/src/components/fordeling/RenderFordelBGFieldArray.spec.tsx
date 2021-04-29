@@ -83,6 +83,9 @@ describe('<RenderFordelBGFieldArray>', () => {
       erRevurdering={false}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={agOplysninger}
+      alleKodeverk={{}}
+      behandlingType={null}
+      beregningsgrunnlag={{}}
     />, messages);
 
     const selectFields = wrapper.find(SelectField);
@@ -109,6 +112,9 @@ describe('<RenderFordelBGFieldArray>', () => {
       erRevurdering={false}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={agOplysninger}
+      alleKodeverk={{}}
+      behandlingType={null}
+      beregningsgrunnlag={{}}
     />, messages);
 
     const selectFields = wrapper.find(SelectField);
@@ -156,6 +162,9 @@ describe('<RenderFordelBGFieldArray>', () => {
       erRevurdering={false}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={agOplysninger}
+      alleKodeverk={{}}
+      behandlingType={null}
+      beregningsgrunnlag={{}}
     />, messages);
 
     const rows = wrapper.find(TableRow);
@@ -200,6 +209,9 @@ describe('<RenderFordelBGFieldArray>', () => {
       erRevurdering={false}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={agOplysninger}
+      alleKodeverk={{}}
+      behandlingType={null}
+      beregningsgrunnlag={{}}
     />, messages);
 
     const rows = wrapper.find(TableRow);
@@ -258,6 +270,9 @@ describe('<RenderFordelBGFieldArray>', () => {
       erRevurdering={false}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={agOplysninger}
+      alleKodeverk={{}}
+      behandlingType={null}
+      beregningsgrunnlag={{}}
     />, messages);
 
     const rows = wrapper.find(TableRow);

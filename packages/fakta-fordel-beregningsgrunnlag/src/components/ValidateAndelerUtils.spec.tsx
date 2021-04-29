@@ -13,6 +13,7 @@ import {
   validateUlikeAndeler,
 } from './ValidateAndelerUtils';
 import messages from '../../i18n/nb_NO.json';
+import { FordelBeregningsgrunnlagAndelValues } from '../types/FordelingTsType';
 
 const intlMock = getIntlMock(messages);
 
@@ -64,7 +65,7 @@ describe('<ValidateAndelerUtils>', () => {
       arbeidsforholdId: '', refusjonskrav: null, refusjonskravFraInntektsmelding: 0,
     },
     ];
-    const error = validateTotalRefusjonPrArbeidsforhold(andeler, getKodeverknavn, arbeidsgiverOppysninger);
+    const error = validateTotalRefusjonPrArbeidsforhold(andeler as FordelBeregningsgrunnlagAndelValues[], getKodeverknavn, arbeidsgiverOppysninger);
     expect(error).toBe(null);
   });
 
@@ -95,7 +96,7 @@ describe('<ValidateAndelerUtils>', () => {
       arbeidsforholdId: '', refusjonskrav: null, refusjonskravFraInntektsmelding: 0,
     },
     ];
-    const error = validateTotalRefusjonPrArbeidsforhold(andeler, getKodeverknavn, arbeidsgiverOppysninger);
+    const error = validateTotalRefusjonPrArbeidsforhold(andeler as FordelBeregningsgrunnlagAndelValues[], getKodeverknavn, arbeidsgiverOppysninger);
     expect(error).toBe(null);
   });
 
@@ -126,7 +127,7 @@ describe('<ValidateAndelerUtils>', () => {
       arbeidsforholdId: '', refusjonskrav: null, refusjonskravFraInntektsmelding: 0,
     },
     ];
-    const error = validateTotalRefusjonPrArbeidsforhold(andeler, getKodeverknavn, arbeidsgiverOppysninger);
+    const error = validateTotalRefusjonPrArbeidsforhold(andeler as FordelBeregningsgrunnlagAndelValues[], getKodeverknavn, arbeidsgiverOppysninger);
     expect(error).toBe(null);
   });
 
@@ -159,7 +160,7 @@ describe('<ValidateAndelerUtils>', () => {
     ];
 
     const arbeidsgiverString = 'Andersen flyttebyrå (36363463463) ...f923';
-    const error = validateTotalRefusjonPrArbeidsforhold(andeler, getKodeverknavn, arbeidsgiverOppysninger);
+    const error = validateTotalRefusjonPrArbeidsforhold(andeler as FordelBeregningsgrunnlagAndelValues[], getKodeverknavn, arbeidsgiverOppysninger);
     const expected = skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding(arbeidsgiverString);
     // @ts-ignore TODO fiks denne
     expect(error.id).toBe(expected.id);
@@ -280,7 +281,7 @@ describe('<ValidateAndelerUtils>', () => {
       arbeidsforholdId: 'egg4g232',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
     expect(ulikeAndelerError).toBe(null);
   });
 
@@ -307,7 +308,7 @@ describe('<ValidateAndelerUtils>', () => {
       andelsnr: null, andel: '2', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER_SJØMANN', arbeidsforholdId: '34r343f',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
     expect(ulikeAndelerError).toBe(null);
   });
 
@@ -334,7 +335,7 @@ describe('<ValidateAndelerUtils>', () => {
       andelsnr: null, andel: '2', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER', arbeidsforholdId: '433f34',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
     expect(ulikeAndelerError).toHaveLength(1);
     expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
   });
@@ -359,7 +360,7 @@ describe('<ValidateAndelerUtils>', () => {
       arbeidsforholdId: '433f34',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
     expect(ulikeAndelerError).toBe(null);
   });
 
@@ -392,7 +393,7 @@ describe('<ValidateAndelerUtils>', () => {
       andelsnr: null, andel: '1', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'SJØMANN',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
     expect(ulikeAndelerError).toHaveLength(1);
     expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
   });
@@ -421,7 +422,7 @@ describe('<ValidateAndelerUtils>', () => {
       andelsnr: null, andel: 'BRUKERS_ANDEL', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'FRILANSER',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
     expect(ulikeAndelerError).toBe(null);
   });
 
@@ -449,7 +450,7 @@ describe('<ValidateAndelerUtils>', () => {
       andelsnr: null, andel: 'BRUKERS_ANDEL', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
     expect(ulikeAndelerError).toHaveLength(1);
     expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
   });
@@ -478,7 +479,7 @@ describe('<ValidateAndelerUtils>', () => {
       andelsnr: 4, andel: 'Brukers andel', nyAndel: false, aktivitetStatus: 'BA', lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
     expect(ulikeAndelerError).toHaveLength(1);
     expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
   });
@@ -516,7 +517,7 @@ describe('<ValidateAndelerUtils>', () => {
       inntektskategori: 'ARBEIDSTAKER',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
     expect(ulikeAndelerError).toHaveLength(1);
     expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
   });
@@ -535,7 +536,7 @@ describe('<ValidateAndelerUtils>', () => {
       andelsnr: 4, andel: 'EGEN_NÆRING', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
     expect(ulikeAndelerError).toHaveLength(1);
     expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
   });
@@ -554,7 +555,7 @@ describe('<ValidateAndelerUtils>', () => {
       andelsnr: 4, andel: 'EGEN_NÆRING', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
     expect(ulikeAndelerError).toHaveLength(1);
     expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
   });
@@ -573,9 +574,9 @@ describe('<ValidateAndelerUtils>', () => {
       fastsattBelop: '10 000',
     },
     ];
-    const fastsattError = validateSumFastsattBelop(values, 40000);
+    const fastsattError = validateSumFastsattBelop(values as FordelBeregningsgrunnlagAndelValues[], 40000);
     expect(fastsattError).toHaveLength(2);
-    expect(fastsattError[0].id).toBe(skalVereLikFordelingMessage(40000)[0].id);
+    expect(fastsattError[0].id).toBe(skalVereLikFordelingMessage('40000')[0].id);
     expect(fastsattError[1].fordeling).toBe('40 000');
   });
 
@@ -597,7 +598,7 @@ describe('<ValidateAndelerUtils>', () => {
       fastsattBelop: '10 000',
     },
     ];
-    const fastsattError = validateSumFastsattBelop(values, 50000);
+    const fastsattError = validateSumFastsattBelop(values as FordelBeregningsgrunnlagAndelValues[], 50000);
     expect(fastsattError).toBe(null);
   });
 
@@ -627,7 +628,7 @@ describe('<ValidateAndelerUtils>', () => {
       readOnlyBelop: '10 000',
     },
     ];
-    const fastsattError = validateSumFastsattBelop(values, 50000);
+    const fastsattError = validateSumFastsattBelop(values as FordelBeregningsgrunnlagAndelValues[], 50000);
     expect(fastsattError).toBe(null);
   });
 
@@ -653,9 +654,9 @@ describe('<ValidateAndelerUtils>', () => {
       readOnlyBelop: '15 000',
     },
     ];
-    const fastsattError = validateSumFastsattBelop(values, 50000);
+    const fastsattError = validateSumFastsattBelop(values as FordelBeregningsgrunnlagAndelValues[], 50000);
     expect(fastsattError).toHaveLength(2);
-    expect(fastsattError[0].id).toBe(skalVereLikFordelingMessage(50000)[0].id);
+    expect(fastsattError[0].id).toBe(skalVereLikFordelingMessage('50000')[0].id);
     expect(fastsattError[1].fordeling).toBe('50 000');
   });
 
@@ -671,7 +672,7 @@ describe('<ValidateAndelerUtils>', () => {
       fom: '2020-01-01',
       tom: null,
     };
-    const fastsattError = validateFastsattBelop(intlMock, andelValue, periodeDato);
+    const fastsattError = validateFastsattBelop(intlMock, andelValue as FordelBeregningsgrunnlagAndelValues, periodeDato);
     expect(fastsattError).toBe(isRequiredMessage());
   });
 
@@ -686,7 +687,7 @@ describe('<ValidateAndelerUtils>', () => {
       fom: '2020-01-01',
       tom: null,
     };
-    const fastsattError = validateFastsattBelop(intlMock, andelValue, periodeDato);
+    const fastsattError = validateFastsattBelop(intlMock, andelValue as FordelBeregningsgrunnlagAndelValues, periodeDato);
     expect(fastsattError).toBe(kanIkkjeHaNullBeregningsgrunnlagError(intlMock));
   });
 
@@ -701,7 +702,7 @@ describe('<ValidateAndelerUtils>', () => {
       fom: '2020-01-01',
       tom: null,
     };
-    const fastsattError = validateFastsattBelop(intlMock, andelValue, periodeDato);
+    const fastsattError = validateFastsattBelop(intlMock, andelValue as FordelBeregningsgrunnlagAndelValues, periodeDato);
     expect(fastsattError).toBe(kanIkkjeHaNullBeregningsgrunnlagError(intlMock));
   });
 
@@ -716,7 +717,7 @@ describe('<ValidateAndelerUtils>', () => {
       fom: '2015-01-01',
       tom: null,
     };
-    const fastsattError = validateFastsattBelop(intlMock, andelValue, periodeDato);
+    const fastsattError = validateFastsattBelop(intlMock, andelValue as FordelBeregningsgrunnlagAndelValues, periodeDato);
     expect(fastsattError).toBe(null);
   });
 
@@ -726,7 +727,7 @@ describe('<ValidateAndelerUtils>', () => {
       fastsattBelop: '0',
       andelIArbeid: '',
     };
-    const fastsattError = validateFastsattBelop(intlMock, andelValue, null);
+    const fastsattError = validateFastsattBelop(intlMock, andelValue as FordelBeregningsgrunnlagAndelValues, null);
     expect(fastsattError).toBe(null);
   });
 
@@ -741,7 +742,7 @@ describe('<ValidateAndelerUtils>', () => {
       fom: '2020-01-01',
       tom: null,
     };
-    const fastsattError = validateFastsattBelop(intlMock, andelValue, periodeDato);
+    const fastsattError = validateFastsattBelop(intlMock, andelValue as FordelBeregningsgrunnlagAndelValues, periodeDato);
     expect(fastsattError).toBe(null);
   });
 });
