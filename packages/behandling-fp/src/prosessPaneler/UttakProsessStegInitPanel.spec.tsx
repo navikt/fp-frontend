@@ -62,49 +62,6 @@ describe('<UttakProsessStegInitPanel>', () => {
     expect(panel.props().hentOverstyrtStatus({}, {} as StandardProsessPanelProps)).toBe(vilkarUtfallType.IKKE_VURDERT);
   });
 
-  it('skal vise at panelet ikke er vurdert når det finnes uttaktsresultatperioder men ap for fakta uttak ikke er løst', () => {
-    const wrapper = shallow(<UttakProsessStegInitPanel
-      valgtProsessSteg="default"
-      registrerProsessPanel={() => {}}
-      arbeidsgiverOpplysningerPerId={{}}
-      fagsak={{} as Fagsak}
-      personoversikt={{} as Personoversikt}
-      rettigheter={{
-        kanOverstyreAccess: {
-          isEnabled: true,
-        },
-      } as AksessRettigheter}
-    />);
-
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
-
-    const uttaksresultatPerioder = {
-      perioderSøker: [{
-        periodeResultatType: {
-          kode: periodeResultatType.GYLDIG_UTSETTELSE,
-          kodeverk: '',
-        },
-      }],
-    } as UttaksresultatPeriode;
-
-    const aksjonspunkter = [{
-      definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_UTTAK,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
-    }] as Aksjonspunkt[];
-
-    expect(panel.props().hentOverstyrtStatus({
-      aksjonspunkter,
-      uttaksresultatPerioder,
-    }, {
-    } as INIT_DATA & StandardProsessPanelProps)).toBe(vilkarUtfallType.IKKE_VURDERT);
-  });
-
   it('skal vise at panelet er vurdert når det finnes uttaktsresultatperioder og ap for fakta uttak er løst', () => {
     const wrapper = shallow(<UttakProsessStegInitPanel
       valgtProsessSteg="default"

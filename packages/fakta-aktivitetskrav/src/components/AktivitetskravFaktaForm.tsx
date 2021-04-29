@@ -165,4 +165,5 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
   form: FORM_NAME,
   destroyOnUnmount: false,
+  enableReinitialize: true,
 })(injectIntl(AktivitetskravFaktaForm)));

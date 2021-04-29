@@ -13,7 +13,6 @@ import {
   Personoversikt, Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Vilkar, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { createIntl } from '@fpsak-frontend/utils';
 
 import messages from '../../i18n/nb_NO.json';
@@ -21,19 +20,8 @@ import { requestFpApi, restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBeh
 
 const intl = createIntl(messages);
 
-// TODO Er dette mogleg å fjerna?
-const FAKTA_UTTAK_AP = [
-  aksjonspunktCodes.AVKLAR_UTTAK,
-  aksjonspunktCodes.ANNEN_FORELDER_IKKE_RETT_OG_LØPENDE_VEDTAK,
-  aksjonspunktCodes.AVKLAR_FØRSTE_UTTAKSDATO,
-  aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT,
-  aksjonspunktCodes.MANUELL_AVKLAR_FAKTA_UTTAK,
-  aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK,
-];
-
-const getStatusFromUttakresultat = (uttaksresultat: UttaksresultatPeriode, aksjonspunkter: Aksjonspunkt[]): string => {
-  if (!uttaksresultat || aksjonspunkter.some((ap) => FAKTA_UTTAK_AP
-    .some((kode) => kode === ap.definisjon.kode) && ap.status.kode === aksjonspunktStatus.OPPRETTET)) {
+const getStatusFromUttakresultat = (uttaksresultat: UttaksresultatPeriode): string => {
+  if (!uttaksresultat) {
     return vilkarUtfallType.IKKE_VURDERT;
   }
   if (uttaksresultat.perioderSøker && uttaksresultat.perioderSøker.length > 0) {
@@ -110,7 +98,7 @@ const UttakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitPr
       prosessPanelKode={ProsessStegCode.UTTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Uttak' })}
       skalPanelVisesIMeny={(_data, initState) => initState === RestApiState.SUCCESS}
-      hentOverstyrtStatus={(initData) => getStatusFromUttakresultat(initData?.uttaksresultatPerioder, initData?.aksjonspunkter)}
+      hentOverstyrtStatus={(initData) => getStatusFromUttakresultat(initData?.uttaksresultatPerioder)}
       renderPanel={(data) => (
         <UttakProsessIndex
           fagsak={fagsak}
