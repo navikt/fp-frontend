@@ -56,7 +56,7 @@ const FortsattMedlemskapProsessStegInitPanel: FunctionComponent<OwnProps & Prose
         <OverstyringPanelDef
           behandling={data.behandling}
           aksjonspunkter={data?.aksjonspunkter}
-          aksjonspunktKoder={[AKSJONSPUNKT_KODE]}
+          aksjonspunktKode={AKSJONSPUNKT_KODE}
           vilkar={data.vilkar}
           vilkarKoder={VILKAR_KODER}
           panelTekstKode="Behandlingspunkt.FortsattMedlemskap"

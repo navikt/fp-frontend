@@ -26,7 +26,7 @@ const filtrerAvslagsarsaker = (
 interface OwnProps {
   behandling: Behandling;
   aksjonspunkter: Aksjonspunkt[];
-  aksjonspunktKoder: OverstyringAksjonspunkter[];
+  aksjonspunktKode: OverstyringAksjonspunkter;
   vilkar: Vilkar[];
   vilkarKoder: string[];
   erMedlemskapsPanel: boolean;
@@ -41,7 +41,7 @@ interface OwnProps {
 const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
   behandling,
   aksjonspunkter,
-  aksjonspunktKoder,
+  aksjonspunktKode,
   vilkar,
   vilkarKoder,
   panelTekstKode,
@@ -52,13 +52,13 @@ const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
   kanOverstyreAccess,
   overrideReadOnly,
 }) => {
-  const overstyrteAksjonspunkter = useMemo(() => aksjonspunkter.filter((ap) => aksjonspunktKoder.some((kode) => kode === ap.definisjon.kode)),
+  const overstyrteAksjonspunkter = useMemo(() => aksjonspunkter.filter((ap) => aksjonspunktKode === ap.definisjon.kode),
     [aksjonspunkter]);
 
   const standardProps = useStandardProsessPanelProps({
     aksjonspunkter: overstyrteAksjonspunkter,
     vilkar,
-  }, aksjonspunktKoder, vilkarKoder);
+  }, [aksjonspunktKode], vilkarKoder);
 
   const skalVises = skalViseProsessPanel(overstyrteAksjonspunkter, vilkarKoder, vilkar);
 
@@ -80,8 +80,7 @@ const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
         avslagsarsaker={avslagsarsaker}
         erOverstyrt={erOverstyrt}
         panelTittelKode={panelTekstKode}
-      // TODO (TOR) Dette må vera feil. Send inn fleire koder
-        overstyringApKode={aksjonspunktKoder[0]}
+        overstyringApKode={aksjonspunktKode}
         lovReferanse={vilkar.length > 0 ? vilkar[0].lovReferanse : undefined}
         erMedlemskapsPanel={erMedlemskapsPanel}
         {...standardProps}

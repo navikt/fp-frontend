@@ -69,7 +69,7 @@ const SoknadsfristProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
               <OverstyringPanelDef
                 behandling={data.behandling}
                 aksjonspunkter={data?.aksjonspunkter}
-                aksjonspunktKoder={[aksjonspunktCodes.OVERSTYR_SOKNADSFRISTVILKAR]}
+                aksjonspunktKode={aksjonspunktCodes.OVERSTYR_SOKNADSFRISTVILKAR}
                 vilkar={data.vilkar}
                 vilkarKoder={VILKAR_KODER}
                 panelTekstKode="Behandlingspunkt.Soknadsfristvilkaret"
