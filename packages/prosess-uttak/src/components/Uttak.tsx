@@ -702,7 +702,6 @@ const getCorrectPeriodName = (item: UttaksresultatActivity | PeriodeSoker, getKo
 };
 
 const addClassNameGroupIdToPerioder = (
-  hovedsokerPerioder: UttaksresultatActivity[],
   uttakResultatPerioder: UttaksresultatPeriode,
   intl: IntlShape,
   bStatus: Kodeverk,
@@ -713,7 +712,7 @@ const addClassNameGroupIdToPerioder = (
   const annenForelderPerioder = uttakResultatPerioder.perioderAnnenpart;
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
   const perioderMedClassName: PeriodeMedClassName[] = [];
-  const perioder = hovedsoker ? hovedsokerPerioder : annenForelderPerioder;
+  const perioder = hovedsoker ? uttakResultatPerioder.perioderSøker : annenForelderPerioder;
 
   perioder.forEach((item: UttaksresultatActivity | PeriodeSoker, index: number) => {
     const stonadskontoType = getCorrectPeriodName(item, getKodeverknavn);
@@ -724,7 +723,7 @@ const addClassNameGroupIdToPerioder = (
     const isEndret = item.begrunnelse
       && behandlingStatusKode === behandlingStatus.FATTER_VEDTAK ? endretClassnavn : '';
     const oppholdStatus = status === 'undefined' ? 'opphold-manuell' : 'opphold';
-    copyOfItem.id = index + 1 + (hovedsoker ? 0 : hovedsokerPerioder.length);
+    copyOfItem.id = index + 1 + (hovedsoker ? 0 : uttakResultatPerioder.perioderSøker.length);
     copyOfItem.tomMoment = moment(item.tom).add(1, 'days');
     copyOfItem.className = opphold ? oppholdStatus : `${status} ${isEndret} ${gradert}`;
     copyOfItem.hovedsoker = hovedsoker;
@@ -736,30 +735,23 @@ const addClassNameGroupIdToPerioder = (
 };
 
 const addClassNameGroupIdToPerioderHovedsoker = createSelector(
-  [lagUttakMedOpphold,
-    (_state, props: PureOwnProps) => props.uttaksresultat,
+  [(_state, props: PureOwnProps) => props.uttaksresultat,
     (_state, props: PureOwnProps) => props.intl,
     (_state, props: PureOwnProps) => props.behandlingStatus,
     (_state, props: PureOwnProps) => props.alleKodeverk],
-  (hovedsokerPerioder, uttakResultatPerioder, intl, bStatus, alleKodeverk): PeriodeMedClassName[] => addClassNameGroupIdToPerioder(
-    hovedsokerPerioder, uttakResultatPerioder, intl, bStatus, alleKodeverk, true,
+  (uttakResultatPerioder, intl, bStatus, alleKodeverk): PeriodeMedClassName[] => addClassNameGroupIdToPerioder(
+    uttakResultatPerioder, intl, bStatus, alleKodeverk, true,
   ),
 );
 
 const addClassNameGroupIdToPerioderAnnenForelder = createSelector(
-  [lagUttakMedOpphold,
-    (_state, props: PureOwnProps) => props.uttaksresultat,
+  [(_state, props: PureOwnProps) => props.uttaksresultat,
     (_state, props: PureOwnProps) => props.intl,
     (_state, props: PureOwnProps) => props.behandlingStatus,
     (_state, props: PureOwnProps) => props.alleKodeverk],
-  (hovedsokerPerioder, uttakResultatPerioder, intl, bStatus, alleKodeverk): PeriodeMedClassName[] => addClassNameGroupIdToPerioder(
-    hovedsokerPerioder, uttakResultatPerioder, intl, bStatus, alleKodeverk, false,
+  (uttakResultatPerioder, intl, bStatus, alleKodeverk): PeriodeMedClassName[] => addClassNameGroupIdToPerioder(
+    uttakResultatPerioder, intl, bStatus, alleKodeverk, false,
   ),
-);
-
-const slaSammenHovedsokerOgAnnenForelder = createSelector(
-  [addClassNameGroupIdToPerioderHovedsoker, addClassNameGroupIdToPerioderAnnenForelder],
-  (hovedsokerPerioder, annenForelderPerioder): PeriodeMedClassName[] => hovedsokerPerioder.concat(annenForelderPerioder),
 );
 
 const mapStateToProps = (state: any, props: PureOwnProps) => {
@@ -780,11 +772,11 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
   const getMedsokerKjonnKode = (viseUttakMedsoker && person && person.annenPart) ? person.annenPart.kjønn.kode : undefined;
   // hvis ukjent annenpart og annenpart uttak, vis ukjent ikon
   const medsokerKjonnKode = viseUttakMedsoker && getMedsokerKjonnKode === undefined ? navBrukerKjonn.UDEFINERT : getMedsokerKjonnKode;
-  const hovedsokerPerioder = addClassNameGroupIdToPerioderHovedsoker(state, props);
-  const annenForelderPerioder = addClassNameGroupIdToPerioderAnnenForelder(state, props);
 
   const { gjeldende } = familiehendelse;
-  const uttakPerioder = slaSammenHovedsokerOgAnnenForelder(state, props).sort((pers1, pers2) => {
+  const hovedsokerPerioder = addClassNameGroupIdToPerioderHovedsoker(state, props);
+  const annenForelderPerioder = addClassNameGroupIdToPerioderAnnenForelder(state, props);
+  const uttakPerioder = hovedsokerPerioder.concat(annenForelderPerioder).sort((pers1, pers2) => {
     if (pers1.group === pers2.group) {
       return 0;
     }
