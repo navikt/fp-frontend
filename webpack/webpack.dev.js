@@ -11,7 +11,6 @@ const config = {
   mode: 'development',
   devtool: 'eval-cheap-source-map',
   entry: [
-    '@babel/polyfill',
     'webpack-dev-server/client?http://localhost:9000',
     'webpack/hot/only-dev-server',
     APP_DIR + '/index.tsx',
