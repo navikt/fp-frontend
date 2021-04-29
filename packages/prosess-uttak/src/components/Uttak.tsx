@@ -702,6 +702,7 @@ const getCorrectPeriodName = (item: UttaksresultatActivity | PeriodeSoker, getKo
 };
 
 const addClassNameGroupIdToPerioder = (
+  hovedsokerPerioder: UttaksresultatActivity[],
   uttakResultatPerioder: UttaksresultatPeriode,
   intl: IntlShape,
   bStatus: Kodeverk,
@@ -712,7 +713,7 @@ const addClassNameGroupIdToPerioder = (
   const annenForelderPerioder = uttakResultatPerioder.perioderAnnenpart;
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
   const perioderMedClassName: PeriodeMedClassName[] = [];
-  const perioder = hovedsoker ? uttakResultatPerioder.perioderSøker : annenForelderPerioder;
+  const perioder = hovedsoker ? hovedsokerPerioder : annenForelderPerioder;
 
   perioder.forEach((item: UttaksresultatActivity | PeriodeSoker, index: number) => {
     const stonadskontoType = getCorrectPeriodName(item, getKodeverknavn);
@@ -723,7 +724,7 @@ const addClassNameGroupIdToPerioder = (
     const isEndret = item.begrunnelse
       && behandlingStatusKode === behandlingStatus.FATTER_VEDTAK ? endretClassnavn : '';
     const oppholdStatus = status === 'undefined' ? 'opphold-manuell' : 'opphold';
-    copyOfItem.id = index + 1 + (hovedsoker ? 0 : uttakResultatPerioder.perioderSøker.length);
+    copyOfItem.id = index + 1 + (hovedsoker ? 0 : hovedsokerPerioder.length);
     copyOfItem.tomMoment = moment(item.tom).add(1, 'days');
     copyOfItem.className = opphold ? oppholdStatus : `${status} ${isEndret} ${gradert}`;
     copyOfItem.hovedsoker = hovedsoker;
@@ -735,22 +736,24 @@ const addClassNameGroupIdToPerioder = (
 };
 
 const addClassNameGroupIdToPerioderHovedsoker = createSelector(
-  [(_state, props: PureOwnProps) => props.uttaksresultat,
+  [lagUttakMedOpphold,
+    (_state, props: PureOwnProps) => props.uttaksresultat,
     (_state, props: PureOwnProps) => props.intl,
     (_state, props: PureOwnProps) => props.behandlingStatus,
     (_state, props: PureOwnProps) => props.alleKodeverk],
-  (uttakResultatPerioder, intl, bStatus, alleKodeverk): PeriodeMedClassName[] => addClassNameGroupIdToPerioder(
-    uttakResultatPerioder, intl, bStatus, alleKodeverk, true,
+  (hovedsokerPerioder, uttakResultatPerioder, intl, bStatus, alleKodeverk): PeriodeMedClassName[] => addClassNameGroupIdToPerioder(
+    hovedsokerPerioder, uttakResultatPerioder, intl, bStatus, alleKodeverk, true,
   ),
 );
 
 const addClassNameGroupIdToPerioderAnnenForelder = createSelector(
-  [(_state, props: PureOwnProps) => props.uttaksresultat,
+  [lagUttakMedOpphold,
+    (_state, props: PureOwnProps) => props.uttaksresultat,
     (_state, props: PureOwnProps) => props.intl,
     (_state, props: PureOwnProps) => props.behandlingStatus,
     (_state, props: PureOwnProps) => props.alleKodeverk],
-  (uttakResultatPerioder, intl, bStatus, alleKodeverk): PeriodeMedClassName[] => addClassNameGroupIdToPerioder(
-    uttakResultatPerioder, intl, bStatus, alleKodeverk, false,
+  (hovedsokerPerioder, uttakResultatPerioder, intl, bStatus, alleKodeverk): PeriodeMedClassName[] => addClassNameGroupIdToPerioder(
+    hovedsokerPerioder, uttakResultatPerioder, intl, bStatus, alleKodeverk, false,
   ),
 );
 
