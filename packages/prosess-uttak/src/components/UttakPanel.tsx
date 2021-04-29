@@ -427,7 +427,7 @@ const mapStateToPropsFactory = () => {
 
 const UttakPanel = connect(mapStateToPropsFactory)(reduxForm({
   form: formName,
-  enableReinitialize: false,
+  enableReinitialize: true,
   destroyOnUnmount: false,
 })(injectIntl(UttakPanelImpl)));
 

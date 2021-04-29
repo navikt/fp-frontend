@@ -757,11 +757,6 @@ const addClassNameGroupIdToPerioderAnnenForelder = createSelector(
   ),
 );
 
-const slaSammenHovedsokerOgAnnenForelder = createSelector(
-  [addClassNameGroupIdToPerioderHovedsoker, addClassNameGroupIdToPerioderAnnenForelder],
-  (hovedsokerPerioder, annenForelderPerioder): PeriodeMedClassName[] => hovedsokerPerioder.concat(annenForelderPerioder),
-);
-
 const mapStateToProps = (state: any, props: PureOwnProps) => {
   const {
     person,
@@ -780,11 +775,11 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
   const getMedsokerKjonnKode = (viseUttakMedsoker && person && person.annenPart) ? person.annenPart.kjønn.kode : undefined;
   // hvis ukjent annenpart og annenpart uttak, vis ukjent ikon
   const medsokerKjonnKode = viseUttakMedsoker && getMedsokerKjonnKode === undefined ? navBrukerKjonn.UDEFINERT : getMedsokerKjonnKode;
-  const hovedsokerPerioder = addClassNameGroupIdToPerioderHovedsoker(state, props);
-  const annenForelderPerioder = addClassNameGroupIdToPerioderAnnenForelder(state, props);
 
   const { gjeldende } = familiehendelse;
-  const uttakPerioder = slaSammenHovedsokerOgAnnenForelder(state, props).sort((pers1, pers2) => {
+  const hovedsokerPerioder = addClassNameGroupIdToPerioderHovedsoker(state, props);
+  const annenForelderPerioder = addClassNameGroupIdToPerioderAnnenForelder(state, props);
+  const uttakPerioder = hovedsokerPerioder.concat(annenForelderPerioder).sort((pers1, pers2) => {
     if (pers1.group === pers2.group) {
       return 0;
     }
