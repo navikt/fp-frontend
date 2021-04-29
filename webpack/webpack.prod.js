@@ -14,7 +14,6 @@ const config = {
   performance: { hints: false },
 
   entry: [
-    '@babel/polyfill',
     APP_DIR + '/index.tsx',
   ],
   output: {
