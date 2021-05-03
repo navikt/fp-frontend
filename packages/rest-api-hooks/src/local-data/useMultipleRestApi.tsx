@@ -6,7 +6,8 @@ import { AbstractRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 
 import RestApiState from '../RestApiState';
 
-const notEqual = (array1, array2) => !(array1.length === array2.length && array1.every((value, index) => value === array2[index]));
+const notEqual = (array1: DependencyList, array2: DependencyList) => !(array1.length === array2.length
+  && array1.every((value, index) => value === array2[index]));
 const format = (name: string): string => name.toLowerCase().replace(/_([a-z])/g, (m) => m.toUpperCase()).replace(/_/g, '');
 
 export interface RestApiData<T> {

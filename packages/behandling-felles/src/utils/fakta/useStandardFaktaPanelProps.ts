@@ -1,4 +1,6 @@
-import { useContext, useMemo, useState } from 'react';
+import {
+  useContext, useEffect, useMemo, useState,
+} from 'react';
 
 import {
   Aksjonspunkt, Behandling, Fagsak, StandardFaktaPanelProps, Vilkar,
@@ -58,6 +60,12 @@ const useStandardFaktaPanelProps = (
 ): StandardFaktaPanelProps => {
   const [formData, setFormData] = useState();
   const value = useContext(StandardPropsStateContext);
+
+  useEffect(() => {
+    if (formData) {
+      setFormData(undefined);
+    }
+  }, [value.behandling.versjon]);
 
   const aksjonspunkterForSteg = useMemo(() => (data?.aksjonspunkter && aksjonspunktKoder
     ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : []),
