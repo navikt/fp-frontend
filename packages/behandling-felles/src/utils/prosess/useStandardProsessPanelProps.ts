@@ -1,5 +1,5 @@
 import {
-  useCallback, useContext, useMemo, useState,
+  useCallback, useContext, useEffect, useMemo, useState,
 } from 'react';
 
 import {
@@ -87,6 +87,12 @@ const useStandardProsessPanelProps = (
 ): StandardProsessPanelProps => {
   const [formData, setFormData] = useState();
   const value = useContext(StandardPropsStateContext);
+
+  useEffect(() => {
+    if (formData) {
+      setFormData(undefined);
+    }
+  }, [value.behandling.versjon]);
 
   const aksjonspunkterForSteg = useMemo(() => (data && aksjonspunktKoder
     ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : []),
