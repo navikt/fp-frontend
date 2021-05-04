@@ -473,7 +473,7 @@ export const selvstendigNæringsdrivende = () => {
       orgnr: '910909088',
       regnskapsførerNavn: 'Regnskapsfører Regn S. Fører',
       regnskapsførerTlf: '99999999',
-      utenlandskvirksomhetsnavn: null,
+      utenlandskvirksomhetsnavn: undefined,
       virksomhetType: { kode: 'ANNEN', kodeverk: 'VIRKSOMHET_TYPE' },
     },
     {
@@ -482,11 +482,11 @@ export const selvstendigNæringsdrivende = () => {
       erNyoppstartet: false,
       erVarigEndret: false,
       kanRegnskapsførerKontaktes: false,
-      oppgittInntekt: null,
+      oppgittInntekt: undefined,
       oppstartsdato: '2015-11-01',
       opphoersdato: '201-03-01',
       orgnr: '910909077',
-      utenlandskvirksomhetsnavn: null,
+      utenlandskvirksomhetsnavn: undefined,
       virksomhetType: { kode: 'JORDBRUK_SKOGBRUK', kodeverk: 'VIRKSOMHET_TYPE' },
       virksomhetNavn: 'Berit Jensen',
     },
@@ -634,21 +634,24 @@ export const naturalYtelse = () => {
     },
   };
 
-  andel1MedFrafall.arbeidsforhold.arbeidsgiverIdent = '9109090881';
-  andel1MedFrafall.arbeidsforhold.naturalytelseBortfaltPrÅr = 1231;
-  andel1MedMerFrafall.arbeidsforhold.arbeidsgiverIdent = '9109090881';
-  andel1MedMerFrafall.arbeidsforhold.naturalytelseBortfaltPrÅr = 5000;
-
-  andel2UtenFrafall.arbeidsforhold.arbeidsgiverIdent = '9109090882';
-  andel2UtenFrafall.arbeidsforhold.naturalytelseBortfaltPrÅr = null;
-  andel2MedFrafall.arbeidsforhold.arbeidsgiverIdent = '9109090882';
-  andel2MedFrafall.arbeidsforhold.naturalytelseBortfaltPrÅr = 2321;
-
-  andel3UtenFrafall.arbeidsforhold.arbeidsgiverIdent = '9109090883';
-  andel3UtenFrafall.arbeidsforhold.naturalytelseBortfaltPrÅr = null;
-  andel3MedFrafall.arbeidsforhold.arbeidsgiverIdent = '9109090883';
-  andel3MedFrafall.arbeidsforhold.naturalytelseBortfaltPrÅr = 3231;
-
+  if (andel1MedFrafall.arbeidsforhold && andel1MedMerFrafall.arbeidsforhold) {
+    andel1MedFrafall.arbeidsforhold.arbeidsgiverIdent = '9109090881';
+    andel1MedFrafall.arbeidsforhold.naturalytelseBortfaltPrÅr = 1231;
+    andel1MedMerFrafall.arbeidsforhold.arbeidsgiverIdent = '9109090881';
+    andel1MedMerFrafall.arbeidsforhold.naturalytelseBortfaltPrÅr = 5000;
+  }
+  if (andel2UtenFrafall.arbeidsforhold && andel2MedFrafall.arbeidsforhold) {
+    andel2UtenFrafall.arbeidsforhold.arbeidsgiverIdent = '9109090882';
+    andel2UtenFrafall.arbeidsforhold.naturalytelseBortfaltPrÅr = undefined;
+    andel2MedFrafall.arbeidsforhold.arbeidsgiverIdent = '9109090882';
+    andel2MedFrafall.arbeidsforhold.naturalytelseBortfaltPrÅr = 2321;
+  }
+  if (andel3UtenFrafall.arbeidsforhold && andel3MedFrafall.arbeidsforhold) {
+    andel3UtenFrafall.arbeidsforhold.arbeidsgiverIdent = '9109090883';
+    andel3UtenFrafall.arbeidsforhold.naturalytelseBortfaltPrÅr = undefined;
+    andel3MedFrafall.arbeidsforhold.arbeidsgiverIdent = '9109090883';
+    andel3MedFrafall.arbeidsforhold.naturalytelseBortfaltPrÅr = 3231;
+  }
   const statuser = [lagStatus('AT')];
   const periode1 = lagPeriode([{ ...andel1MedFrafall }, { ...andel2UtenFrafall }, { ...andel3UtenFrafall }],
     [{ kode: periodeAarsak.NATURALYTELSE_BORTFALT, kodeverk: '' }],
@@ -792,11 +795,11 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeUtenAkjsonspunkt = () => {
     erVarigEndret: false,
     kanRegnskapsførerKontaktes: false,
     oppgittInntekt: 1500000,
-    oppstartsdato: null,
+    oppstartsdato: undefined,
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    utenlandskvirksomhetsnavn: null,
+    utenlandskvirksomhetsnavn: undefined,
     virksomhetType: { kode: 'ANNEN', kodeverk: 'VIRKSOMHET_TYPE' },
     kode: 'ANNEN',
     kodeverk: 'VIRKSOMHET_TYPE',
@@ -849,11 +852,11 @@ export const arbeidstakerOgFrilansOgSelvstendigNæringsdrivendeMedAksjonspunktBe
     erVarigEndret: true,
     kanRegnskapsførerKontaktes: false,
     oppgittInntekt: 1500000,
-    oppstartsdato: null,
+    oppstartsdato: undefined,
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    utenlandskvirksomhetsnavn: null,
+    utenlandskvirksomhetsnavn: undefined,
     virksomhetType: { kode: 'ANNEN', kodeverk: 'VIRKSOMHET_TYPE' },
     kode: 'ANNEN',
     kodeverk: 'VIRKSOMHET_TYPE',
@@ -905,11 +908,11 @@ export const arbeidstakerDagpengerOgSelvstendigNæringsdrivendeUtenAksjonspunkt 
     erVarigEndret: true,
     kanRegnskapsførerKontaktes: false,
     oppgittInntekt: 1500000,
-    oppstartsdato: null,
+    oppstartsdato: undefined,
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    utenlandskvirksomhetsnavn: null,
+    utenlandskvirksomhetsnavn: undefined,
     virksomhetType: { kode: 'DAGMAMMA', kodeverk: 'VIRKSOMHET_TYPE' },
     kode: 'ANNEN',
     kodeverk: 'VIRKSOMHET_TYPE',
@@ -1208,12 +1211,14 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktBehandletSide7 = () => {
   perioder[1].bruttoPrAar = 395232;
   perioder[1].redusertPrAar = 316187;
 
-  perioder[0].beregningsgrunnlagPrStatusOgAndel[0].overstyrtPrAar = 395232;
-  perioder[0].beregningsgrunnlagPrStatusOgAndel[1].overstyrtPrAar = 156084;
-  perioder[1].beregningsgrunnlagPrStatusOgAndel[0].overstyrtPrAar = 395232;
-  perioder[1].beregningsgrunnlagPrStatusOgAndel[0].bruttoPrAar = 395232;
-  perioder[1].beregningsgrunnlagPrStatusOgAndel[1].overstyrtPrAar = 0;
-  perioder[1].beregningsgrunnlagPrStatusOgAndel[1].bruttoPrAar = 0;
+  if (perioder[0].beregningsgrunnlagPrStatusOgAndel && perioder[1].beregningsgrunnlagPrStatusOgAndel) {
+    perioder[0].beregningsgrunnlagPrStatusOgAndel[0].overstyrtPrAar = 395232;
+    perioder[0].beregningsgrunnlagPrStatusOgAndel[1].overstyrtPrAar = 156084;
+    perioder[1].beregningsgrunnlagPrStatusOgAndel[0].overstyrtPrAar = 395232;
+    perioder[1].beregningsgrunnlagPrStatusOgAndel[0].bruttoPrAar = 395232;
+    perioder[1].beregningsgrunnlagPrStatusOgAndel[1].overstyrtPrAar = 0;
+    perioder[1].beregningsgrunnlagPrStatusOgAndel[1].bruttoPrAar = 0;
+  }
 
   const statuser = [lagStatus('AT')];
   const sammenligningsgrunnlagPrStatus = [
@@ -1390,11 +1395,11 @@ export const SelvstendigNæringsdrivendeUtenVarigEndringIkkeNyoppstartetSide12 =
     erVarigEndret: false,
     kanRegnskapsførerKontaktes: false,
     oppgittInntekt: 1500000,
-    oppstartsdato: null,
+    oppstartsdato: undefined,
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    utenlandskvirksomhetsnavn: null,
+    utenlandskvirksomhetsnavn: undefined,
     virksomhetType: { kode: 'ANNEN', kodeverk: 'VIRKSOMHET_TYPE' },
     kode: 'ANNEN',
     kodeverk: 'VIRKSOMHET_TYPE',
@@ -1445,11 +1450,11 @@ export const SelvstendigNæringsdrivendeMedVarigEndringSide13 = () => {
     erVarigEndret: true,
     kanRegnskapsførerKontaktes: false,
     oppgittInntekt: 755000,
-    oppstartsdato: null,
+    oppstartsdato: undefined,
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    utenlandskvirksomhetsnavn: null,
+    utenlandskvirksomhetsnavn: undefined,
     virksomhetType: { kode: 'ANNEN', kodeverk: 'VIRKSOMHET_TYPE' },
     virksomhetNavn: 'Jensen frisør og hudpleie',
     kode: 'ANNEN',
@@ -1461,11 +1466,11 @@ export const SelvstendigNæringsdrivendeMedVarigEndringSide13 = () => {
     erNyoppstartet: false,
     erVarigEndret: false,
     kanRegnskapsførerKontaktes: false,
-    oppgittInntekt: null,
+    oppgittInntekt: undefined,
     oppstartsdato: '2015-11-01',
     opphoersdato: '2010-03-01',
     orgnr: '910909077',
-    utenlandskvirksomhetsnavn: null,
+    utenlandskvirksomhetsnavn: undefined,
     virksomhetType: { kode: 'JORDBRUK_SKOGBRUK', kodeverk: 'VIRKSOMHET_TYPE' },
     virksomhetNavn: 'Berit Jensen',
   },
@@ -1516,11 +1521,11 @@ export const SelvstendigNæringsdrivendeMedVarigEndringMedAksjonspunktSide14 = (
     erVarigEndret: true,
     kanRegnskapsførerKontaktes: false,
     oppgittInntekt: 900000,
-    oppstartsdato: null,
+    oppstartsdato: undefined,
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    utenlandskvirksomhetsnavn: null,
+    utenlandskvirksomhetsnavn: undefined,
     virksomhetType: { kode: 'ANNEN', kodeverk: 'VIRKSOMHET_TYPE' },
     kode: 'ANNEN',
     kodeverk: 'VIRKSOMHET_TYPE',
@@ -1572,11 +1577,11 @@ export const SelvstendigNæringsdrivendeMedVarigEndringMedAksjonspunktUtførtSid
     erVarigEndret: true,
     kanRegnskapsførerKontaktes: false,
     oppgittInntekt: 900000,
-    oppstartsdato: null,
+    oppstartsdato: undefined,
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    utenlandskvirksomhetsnavn: null,
+    utenlandskvirksomhetsnavn: undefined,
     virksomhetType: { kode: 'ANNEN', kodeverk: 'VIRKSOMHET_TYPE' },
     kode: 'ANNEN',
     kodeverk: 'VIRKSOMHET_TYPE',
@@ -1634,7 +1639,7 @@ export const SelvstendigNæringsdrivendeNyoppstartetMedAksjonspunktSide16 = () =
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    utenlandskvirksomhetsnavn: null,
+    utenlandskvirksomhetsnavn: undefined,
     virksomhetType: { kode: 'ANNEN', kodeverk: 'VIRKSOMHET_TYPE' },
     kode: 'ANNEN',
     kodeverk: 'VIRKSOMHET_TYPE',
@@ -1691,7 +1696,7 @@ export const SelvstendigNæringsdrivendeNyINæringslivetMedAksjonspunktSide17 = 
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    utenlandskvirksomhetsnavn: null,
+    utenlandskvirksomhetsnavn: undefined,
     virksomhetType: { kode: 'ANNEN', kodeverk: 'VIRKSOMHET_TYPE' },
     kode: 'ANNEN',
     kodeverk: 'VIRKSOMHET_TYPE',
@@ -1742,12 +1747,12 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeSnStorreEnnAtOgStorreEnn6g
     erNyoppstartet: false,
     erVarigEndret: false,
     kanRegnskapsførerKontaktes: false,
-    oppgittInntekt: null,
-    oppstartsdato: null,
+    oppgittInntekt: undefined,
+    oppstartsdato: undefined,
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    utenlandskvirksomhetsnavn: null,
+    utenlandskvirksomhetsnavn: undefined,
     virksomhetType: { kode: 'ANNEN', kodeverk: 'VIRKSOMHET_TYPE' },
     kode: 'ANNEN',
     kodeverk: 'VIRKSOMHET_TYPE',
@@ -1798,11 +1803,11 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeSnMindreEnnAtOgStorreEnn6g
     erVarigEndret: false,
     kanRegnskapsførerKontaktes: false,
     oppgittInntekt: 1500000,
-    oppstartsdato: null,
+    oppstartsdato: undefined,
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    utenlandskvirksomhetsnavn: null,
+    utenlandskvirksomhetsnavn: undefined,
     virksomhetType: { kode: 'ANNEN', kodeverk: 'VIRKSOMHET_TYPE' },
     kode: 'ANNEN',
     kodeverk: 'VIRKSOMHET_TYPE',
@@ -1852,11 +1857,11 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeMedAPVarigEndringSide20 = 
     erVarigEndret: true,
     kanRegnskapsførerKontaktes: false,
     oppgittInntekt: 900000,
-    oppstartsdato: null,
+    oppstartsdato: undefined,
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    utenlandskvirksomhetsnavn: null,
+    utenlandskvirksomhetsnavn: undefined,
     virksomhetType: { kode: 'ANNEN', kodeverk: 'VIRKSOMHET_TYPE' },
     kode: 'ANNEN',
     kodeverk: 'VIRKSOMHET_TYPE',
@@ -1910,11 +1915,11 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeMedVarigEndringApBehandlet
     erVarigEndret: true,
     kanRegnskapsførerKontaktes: false,
     oppgittInntekt: 900000,
-    oppstartsdato: null,
+    oppstartsdato: undefined,
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    utenlandskvirksomhetsnavn: null,
+    utenlandskvirksomhetsnavn: undefined,
     virksomhetType: { kode: 'ANNEN', kodeverk: 'VIRKSOMHET_TYPE' },
     kode: 'ANNEN',
     kodeverk: 'VIRKSOMHET_TYPE',
@@ -1970,11 +1975,11 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeAtStorreEnnSNSide22 = () =
     erVarigEndret: true,
     kanRegnskapsførerKontaktes: false,
     oppgittInntekt: 900000,
-    oppstartsdato: null,
+    oppstartsdato: undefined,
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    utenlandskvirksomhetsnavn: null,
+    utenlandskvirksomhetsnavn: undefined,
     virksomhetType: { kode: 'ANNEN', kodeverk: 'VIRKSOMHET_TYPE' },
     kode: 'ANNEN',
     kodeverk: 'VIRKSOMHET_TYPE',
@@ -2027,11 +2032,11 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedApOgVarigEndring
     erVarigEndret: true,
     kanRegnskapsførerKontaktes: false,
     oppgittInntekt: 900000,
-    oppstartsdato: null,
+    oppstartsdato: undefined,
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    utenlandskvirksomhetsnavn: null,
+    utenlandskvirksomhetsnavn: undefined,
     virksomhetType: { kode: 'ANNEN', kodeverk: 'VIRKSOMHET_TYPE' },
     kode: 'ANNEN',
     kodeverk: 'VIRKSOMHET_TYPE',
@@ -2089,11 +2094,11 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedApOgVarigEndring
     erVarigEndret: true,
     kanRegnskapsførerKontaktes: false,
     oppgittInntekt: 900000,
-    oppstartsdato: null,
+    oppstartsdato: undefined,
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    utenlandskvirksomhetsnavn: null,
+    utenlandskvirksomhetsnavn: undefined,
     virksomhetNavn: 'Jensen frisør og hudpleie',
     virksomhetType: { kode: 'ANNEN', kodeverk: 'VIRKSOMHET_TYPE' },
     kode: 'ANNEN',
@@ -2155,11 +2160,11 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedAPVarigEndringSn
     erVarigEndret: true,
     kanRegnskapsførerKontaktes: false,
     oppgittInntekt: 900000,
-    oppstartsdato: null,
+    oppstartsdato: undefined,
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    utenlandskvirksomhetsnavn: null,
+    utenlandskvirksomhetsnavn: undefined,
     virksomhetNavn: 'Jensen frisør og hudpleie',
     virksomhetType: { kode: 'ANNEN', kodeverk: 'VIRKSOMHET_TYPE' },
     kode: 'ANNEN',
@@ -2307,7 +2312,9 @@ export const arbeidstakerDagpengerMedBesteberegningSide28 = () => {
     lagSammenligningsGrunnlag(sammenligningType.ATFLSN, 474257, 26.2, -77059)];
 
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
-  bg.faktaOmBeregning.faktaOmBeregningTilfeller = [{ kode: faktaOmBeregningTilfelle.FASTSETT_BESTEBEREGNING_FODENDE_KVINNE, kodeverk: '' }];
+  if (bg.faktaOmBeregning) {
+    bg.faktaOmBeregning.faktaOmBeregningTilfeller = [{ kode: faktaOmBeregningTilfelle.FASTSETT_BESTEBEREGNING_FODENDE_KVINNE, kodeverk: '' }];
+  }
   bg.dekningsgrad = 100;
   return (
     <BeregningsgrunnlagProsessIndex
@@ -2449,11 +2456,11 @@ export const frilansDagpengerOgSelvstendigNæringsdrivendeMedAksjonspunktSide31 
     erVarigEndret: true,
     kanRegnskapsførerKontaktes: false,
     oppgittInntekt: 57000,
-    oppstartsdato: null,
+    oppstartsdato: undefined,
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    utenlandskvirksomhetsnavn: null,
+    utenlandskvirksomhetsnavn: undefined,
     virksomhetType: { kode: 'ANNEN', kodeverk: 'VIRKSOMHET_TYPE' },
     kode: 'ANNEN',
     kodeverk: 'VIRKSOMHET_TYPE',

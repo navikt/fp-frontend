@@ -24,7 +24,6 @@ const behandling = {
   },
   behandlingPaaVent: false,
   behandlingHenlagt: false,
-  links: [],
 };
 
 const standardFaktaProps = {

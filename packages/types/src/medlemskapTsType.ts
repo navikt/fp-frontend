@@ -7,7 +7,7 @@ export type MedlemskapPeriode = Readonly<{
   medlemskapType: Kodeverk;
   dekningType: Kodeverk;
   kildeType: Kodeverk;
-  beslutningsdato: string;
+  beslutningsdato?: string;
 }>
 
 export type PersonopplysningMedlem = Readonly<{

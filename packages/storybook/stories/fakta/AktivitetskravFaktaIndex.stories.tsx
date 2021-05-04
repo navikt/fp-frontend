@@ -5,7 +5,7 @@ import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import AktivitetskravFaktaIndex from '@fpsak-frontend/fakta-aktivitetskrav';
-import { Behandling } from '@fpsak-frontend/types';
+import { Behandling, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
@@ -44,7 +44,7 @@ const uttakKontrollerAktivitetskrav = [{
     kodeverk: 'MORS_AKTIVITET',
   },
   endret: false,
-}];
+}] as UttakKontrollerAktivitetskrav[];
 
 const merknaderFraBeslutter = {
   notAccepted: true,

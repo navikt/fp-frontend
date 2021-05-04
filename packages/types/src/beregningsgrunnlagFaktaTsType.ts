@@ -83,7 +83,7 @@ export type VurderMottarYtelse = Readonly<{
 }>
 
 export interface ATFLSammeOrgAndel extends FaktaOmBeregningAndel {
-  inntektPrMnd: number;
+  inntektPrMnd?: number;
 }
 
 export type FaktaOmBeregning = Readonly<{

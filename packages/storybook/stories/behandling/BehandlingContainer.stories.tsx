@@ -114,12 +114,12 @@ export default {
 };
 
 export const visKunFaktaPaneler = () => {
-  const [valgtFaktaPanel, setValgtFaktaPanel] = useState('default');
+  const [valgtFaktaPanel, setValgtFaktaPanel] = useState<string | undefined>('default');
   return (
     <BehandlingContainer
       behandling={{} as Behandling}
       valgtFaktaSteg={valgtFaktaPanel}
-      oppdaterProsessStegOgFaktaPanelIUrl={(_prosessPanel, faktaPanel) => setValgtFaktaPanel(faktaPanel)}
+      oppdaterProsessStegOgFaktaPanelIUrl={(_prosessPanel?: string, faktaPanel?: string) => setValgtFaktaPanel(faktaPanel)}
       hentFaktaPaneler={(props) => (
         <>
           <FaktaPanelTest1 {...props} />
@@ -131,12 +131,12 @@ export const visKunFaktaPaneler = () => {
 };
 
 export const visKunProsessPaneler = () => {
-  const [valgtProsessPanel, setValgtProsessPanel] = useState('default');
+  const [valgtProsessPanel, setValgtProsessPanel] = useState<string | undefined>('default');
   return (
     <BehandlingContainer
       behandling={{} as Behandling}
       valgtProsessSteg={valgtProsessPanel}
-      oppdaterProsessStegOgFaktaPanelIUrl={(prosessPanel) => setValgtProsessPanel(prosessPanel)}
+      oppdaterProsessStegOgFaktaPanelIUrl={(prosessPanel?: string) => setValgtProsessPanel(prosessPanel)}
       hentProsessPaneler={(props) => (
         <>
           <ProsessPanelTest1 {...props} />

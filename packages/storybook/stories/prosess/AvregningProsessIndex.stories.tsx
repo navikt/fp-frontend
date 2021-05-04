@@ -10,7 +10,7 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AvregningProsessIndex from '@fpsak-frontend/prosess-avregning';
 import {
-  Aksjonspunkt, Behandling, Fagsak, TilbakekrevingValg,
+  Aksjonspunkt, Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg,
 } from '@fpsak-frontend/types';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
@@ -49,7 +49,6 @@ const simuleringResultat = {
       resultatPerFagområde: [{
         fagOmrådeKode: {
           kode: 'FP',
-          navn: 'Foreldrepenger',
           kodeverk: 'FAG_OMRAADE_KODE',
         },
         rader: [{
@@ -104,9 +103,8 @@ const simuleringResultat = {
       nestUtbPeriodeTom: '2019-10-31',
     }],
   },
-  simuleringResultatUtenInntrekk: null,
   slåttAvInntrekk: false,
-};
+} as SimuleringResultat;
 
 const standardProsessProps = {
   behandling,

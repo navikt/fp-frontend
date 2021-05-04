@@ -4,9 +4,10 @@ import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import sivilstandType from '@fpsak-frontend/kodeverk/src/sivilstandType';
 import OmsorgFaktaIndex from '@fpsak-frontend/fakta-omsorg';
 import {
-  Behandling, Personoversikt, Soknad, Ytelsefordeling,
+  Behandling, KjønnkodeEnum, Personoversikt, Soknad, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
@@ -26,16 +27,46 @@ const soknad = {
 const personoversikt = {
   bruker: {
     navn: 'Espen Utvikler',
+    aktoerId: '1',
+    kjønn: {
+      kode: KjønnkodeEnum.MANN,
+      kodeverk: '',
+    },
+    sivilstand: {
+      kode: sivilstandType.SAMBOER,
+      kodeverk: '',
+    },
+    fødselsdato: '1989-01-01',
+    adresser: [],
   },
   annenPart: {
     navn: 'Petra Utvikler',
     adresser: [],
+    aktoerId: '2',
+    kjønn: {
+      kode: KjønnkodeEnum.KVINNE,
+      kodeverk: '',
+    },
+    sivilstand: {
+      kode: sivilstandType.SAMBOER,
+      kodeverk: '',
+    },
+    fødselsdato: '1989-01-01',
   },
   barn: [{
     navn: 'Tutta Utvikler',
     dødsdato: '2019-01-01',
     fødselsdato: '2018-01-01',
     adresser: [],
+    aktoerId: '3',
+    kjønn: {
+      kode: KjønnkodeEnum.KVINNE,
+      kodeverk: '',
+    },
+    sivilstand: {
+      kode: sivilstandType.UGIFT,
+      kodeverk: '',
+    },
   }],
 } as Personoversikt;
 

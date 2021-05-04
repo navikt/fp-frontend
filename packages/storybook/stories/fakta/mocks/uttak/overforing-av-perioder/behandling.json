@@ -12,7 +12,6 @@
   },
   "fagsakId": 1000604,
   "opprettet": "2019-12-04T15:04:05",
-  "avsluttet": null,
   "endret": "2019-12-04T15:04:10.378",
   "endretAvBrukernavn": "im-just-a-fake-code",
   "behandlendeEnhetId": "0300",
@@ -29,7 +28,6 @@
   "behandlingsfristTid": "2020-01-15",
   "gjeldendeVedtak": false,
   "erPaaVent": false,
-  "originalVedtaksDato": null,
   "behandlingKøet": false,
   "behandlingsresultat": {
     "id": 1000554,
@@ -37,8 +35,6 @@
       "kode": "IKKE_FASTSATT",
       "kodeverk": "BEHANDLING_RESULTAT_TYPE"
     },
-    "avslagsarsak": null,
-    "avslagsarsakFritekst": null,
     "rettenTil": {
       "kode": "-",
       "kodeverk": "RETTEN_TIL"
@@ -48,8 +44,6 @@
       "kode": "-",
       "kodeverk": "VEDTAKSBREV"
     },
-    "overskrift": null,
-    "fritekstbrev": null,
     "erRevurderingMedUendretUtfall": false,
     "skjaeringstidspunktForeldrepenger": "2019-11-27",
     "skjæringstidspunkt": {
@@ -163,13 +157,10 @@
     }
   ],
   "behandlingPaaVent": false,
-  "fristBehandlingPaaVent": null,
-  "venteArsakKode": null,
   "sprakkode": {
     "kode": "-",
     "kodeverk": "SPRAAK_KODE"
   },
-  "ansvarligSaksbehandler": null,
   "toTrinnsBehandling": false,
   "behandlingÅrsaker": [
     {
@@ -181,8 +172,6 @@
       "manueltOpprettet": false
     }
   ],
-  "ansvarligBeslutter": null,
   "behandlingHenlagt": false,
-  "taskStatus": null,
   "behandlingKoet": false
 }

@@ -6,7 +6,7 @@ export type RelatertTilgrensedYtelse = Readonly<{
     periodeTilDato: string;
     periodeFraDato: string;
     status: string;
-    saksNummer: string;
+    saksNummer?: string;
   }[];
 }>
 

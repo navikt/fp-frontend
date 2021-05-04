@@ -1,11 +1,5 @@
 {
-    "ikkeOmsorgPerioder": null,
-    "aleneOmsorgPerioder": null,
-    "annenforelderHarRettDto": {
-        "annenforelderHarRett": null,
-        "begrunnelse": null,
-        "annenforelderHarRettPerioder": null
-    },
+    "annenforelderHarRettDto": {},
     "endringsdato": "2019-11-27",
     "gjeldendeDekningsgrad": 100,
     "førsteUttaksdato": "2019-11-27"

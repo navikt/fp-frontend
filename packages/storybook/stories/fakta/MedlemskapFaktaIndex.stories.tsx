@@ -8,7 +8,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import MedlemskapFaktaIndex from '@fpsak-frontend/fakta-medlemskap';
 import {
-  Behandling, InntektArbeidYtelse, Soknad,
+  Behandling, InntektArbeidYtelse, Medlemskap, Soknad, MedlemPeriode, PersonopplysningMedlem,
 } from '@fpsak-frontend/types';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
@@ -89,35 +89,14 @@ const medlemskap = {
       kode: 'FS22',
       kodeverk: 'MEDLEMSKAP_KILDE',
     },
-    beslutningsdato: null,
   }],
   perioder: [{
     vurderingsdato: '2019-11-07',
     personopplysningBruker: {
-      fnr: null,
-      aktoerId: '1615078487209',
-      diskresjonskode: null,
-      navBrukerKjonn: {
-        kode: 'K',
-        kodeverk: 'BRUKER_KJOENN',
-      },
-      avklartPersonstatus: {
-        orginalPersonstatus: {
-          kode: 'BOSA',
-          kodeverk: 'PERSONSTATUS_TYPE',
-        },
-        overstyrtPersonstatus: {
-          kode: 'BOSA',
-          kodeverk: 'PERSONSTATUS_TYPE',
-        },
-      },
       personstatus: {
         kode: 'BOSA',
         kodeverk: 'PERSONSTATUS_TYPE',
       },
-      navn: 'Mygg Robust',
-      dodsdato: null,
-      fodselsdato: '1966-08-02',
       adresser: [{
         adresseType: {
           kode: 'BOSTEDSADRESSE',
@@ -125,8 +104,6 @@ const medlemskap = {
         },
         mottakerNavn: 'Mygg Robust',
         adresselinje1: 'Skogvegen 3',
-        adresselinje2: null,
-        adresselinje3: null,
         postNummer: '4353',
         poststed: 'Klepp Stasjon',
         land: 'NOR',
@@ -135,66 +112,35 @@ const medlemskap = {
         kode: 'NORDEN',
         kodeverk: 'REGION',
       },
-    },
+    } as PersonopplysningMedlem,
     aksjonspunkter: [
       '5021',
     ],
     årsaker: [
       'SKJÆRINGSTIDSPUNKT',
     ],
-    oppholdsrettVurdering: null,
-    erEosBorger: null,
-    lovligOppholdVurdering: null,
-    bosattVurdering: null,
-    medlemskapManuellVurderingType: null,
-    begrunnelse: null,
   }, {
     vurderingsdato: '2018-11-07',
     personopplysningBruker: {
-      fnr: null,
-      aktoerId: '1615078487209',
-      diskresjonskode: null,
-      navBrukerKjonn: {
-        kode: 'K',
-        kodeverk: 'BRUKER_KJOENN',
-      },
-      avklartPersonstatus: {
-        orginalPersonstatus: {
-          kode: 'BOSA',
-          kodeverk: 'PERSONSTATUS_TYPE',
-        },
-        overstyrtPersonstatus: {
-          kode: 'BOSA',
-          kodeverk: 'PERSONSTATUS_TYPE',
-        },
-      },
       personstatus: {
         kode: 'BOSA',
         kodeverk: 'PERSONSTATUS_TYPE',
       },
       navn: 'Mygg Robust',
-      dodsdato: null,
-      fodselsdato: '1966-08-02',
       adresser: [],
       region: {
         kode: 'NORDEN',
         kodeverk: 'REGION',
       },
-    },
+    } as PersonopplysningMedlem,
     aksjonspunkter: [
       '5021',
     ],
     årsaker: [
       'SKJÆRINGSTIDSPUNKT',
     ],
-    oppholdsrettVurdering: null,
-    erEosBorger: null,
-    lovligOppholdVurdering: null,
-    bosattVurdering: null,
-    medlemskapManuellVurderingType: null,
-    begrunnelse: null,
-  }],
-};
+  }] as MedlemPeriode[],
+} as Medlemskap;
 
 const merknaderFraBeslutter = {
   notAccepted: false,

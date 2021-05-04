@@ -7,11 +7,13 @@ import inntektskategorier from '@fpsak-frontend/kodeverk/src/inntektskategorier'
 import opptjeningAktivitetType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import BeregningFaktaIndex from '@fpsak-frontend/fakta-beregning';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
-import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
-import alleKodeverkMock from '../../mocks/alleKodeverk.json';
+import BeregningFaktaIndex from '@fpsak-frontend/fakta-beregning';
+import {
+  Kodeverk, Behandling, Beregningsgrunnlag, BeregningAktivitet, FaktaOmBeregning, AndelForFaktaOmBeregning,
+} from '@fpsak-frontend/types';
 
+import alleKodeverkMock from '../../mocks/alleKodeverk.json';
 import { beregningsgrunnlag as bgMedArbeidOgDagpenger, aksjonspunkt as aksjonspunktArbeidOgDagpenger } from './scenario/ArbeidMedDagpengerIOpptjeningsperioden';
 
 const behandling = {
@@ -34,8 +36,8 @@ const {
 } = faktaOmBeregningTilfelle;
 
 const lagBeregningsgrunnlagAvklarAktiviteter = (
-  aktiviteter,
-) => ({
+  aktiviteter: BeregningAktivitet[],
+): Beregningsgrunnlag => ({
   faktaOmBeregning: {
     avklarAktiviteter: {
       aktiviteterTomDatoMapping: [
@@ -51,7 +53,7 @@ const lagBeregningsgrunnlagAvklarAktiviteter = (
 
 const lagBeregningsgrunnlag = (
   andeler,
-  faktaOmBeregning,
+  faktaOmBeregning: FaktaOmBeregning,
 ) => ({
   beregningsgrunnlagPeriode: [
     {
@@ -68,9 +70,9 @@ const lagBeregningsgrunnlag = (
   faktaOmBeregning,
 });
 
-const mapTilKodeliste = (arrayOfCodes) => arrayOfCodes.map((kode) => ({ kode }));
+const mapTilKodeliste = (arrayOfCodes: string[]): Kodeverk[] => arrayOfCodes.map((kode) => ({ kode, kodeverk: '' }));
 
-const lagAndel = (andelsnr, aktivitetStatus, inntektskategori) => (
+const lagAndel = (andelsnr: number, aktivitetStatus: string, inntektskategori: string) => (
   {
     andelsnr,
     aktivitetStatus: {
@@ -93,9 +95,7 @@ const standardFaktaArbeidstakerAndel = {
     arbeidsgiverNavn: 'Bedriften',
     arbeidsgiverId: '12345678',
     arbeidsgiverIdent: '12345678',
-    arbeidsforholdId: null,
     startdato: '01.01.2019',
-    opphoersdato: null,
     arbeidsforholdType: { kode: opptjeningAktivitetType.ARBEID, kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
   },
 };
@@ -108,7 +108,6 @@ const standardFaktaArbeidstakerAndel2 = {
     arbeidsgiverNavn: 'Bedriften2',
     arbeidsgiverId: '12345679',
     arbeidsgiverIdent: '12345679',
-    arbeidsforholdId: null,
     startdato: '01.01.2019',
     opphoersdato: '01.01.2020',
     arbeidsforholdType: { kode: opptjeningAktivitetType.ARBEID, kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
@@ -123,7 +122,6 @@ const tidsbegrensetFaktaArbeidstakerAndel = {
     arbeidsgiverNavn: 'Bedriften3',
     arbeidsgiverId: '12345671',
     arbeidsgiverIdent: '12345671',
-    arbeidsforholdId: null,
     startdato: '01.09.2019',
     opphoersdato: '01.01.2020',
     arbeidsforholdType: { kode: opptjeningAktivitetType.ARBEID, kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
@@ -138,9 +136,7 @@ const etterlønnSluttpakkeFaktaArbeidstakerAndel = {
     arbeidsgiverNavn: 'Bedriften4',
     arbeidsgiverId: '795349533',
     arbeidsgiverIdent: '795349533',
-    arbeidsforholdId: null,
     startdato: '01.09.2019',
-    opphoersdato: null,
     arbeidsforholdType: { kode: opptjeningAktivitetType.ETTERLONN_SLUTTPAKKE, kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
   },
 };
@@ -408,7 +404,6 @@ export const FrilansOgArbeidsforholdMedLønnendringOgNyoppstartet = () => {
   ];
   const vurderMottarYtelse = {
     erFrilans: true,
-    frilansMottarYtelse: null,
     frilansInntektPrMnd: 20000,
     arbeidstakerAndelerUtenIM: [],
   };
@@ -417,7 +412,7 @@ export const FrilansOgArbeidsforholdMedLønnendringOgNyoppstartet = () => {
     arbeidsforholdMedLønnsendringUtenIM: [arbeidstakerBeregningsgrunnlagAndel],
     vurderMottarYtelse,
     andelerForFaktaOmBeregning,
-  };
+  } as FaktaOmBeregning;
   const beregningsgrunnlag = lagBeregningsgrunnlag(andeler, faktaOmBeregning);
 
   return (
@@ -478,14 +473,13 @@ export const DagpengerOgArbeidstakerMedVurderingAvBesteberegning = () => {
     standardFaktaDagpengerAndel,
   ];
   const vurderBesteberegning = {
-    skalHaBesteberegning: null,
     andeler: [standardFaktaDagpengerAndel, standardFaktaArbeidstakerAndel],
   };
   const faktaOmBeregning = {
     faktaOmBeregningTilfeller: mapTilKodeliste([VURDER_BESTEBEREGNING]),
     vurderBesteberegning,
     andelerForFaktaOmBeregning,
-  };
+  } as FaktaOmBeregning;
   const beregningsgrunnlag = lagBeregningsgrunnlag(andeler, faktaOmBeregning);
 
   return (
@@ -540,14 +534,13 @@ export const KunArbeidstakerMedVurderingAvBesteberegning = () => {
     standardFaktaArbeidstakerAndel2,
   ];
   const vurderBesteberegning = {
-    skalHaBesteberegning: null,
     andeler: [standardFaktaArbeidstakerAndel2, standardFaktaArbeidstakerAndel],
   };
   const faktaOmBeregning = {
     faktaOmBeregningTilfeller: mapTilKodeliste([VURDER_BESTEBEREGNING]),
     vurderBesteberegning,
     andelerForFaktaOmBeregning,
-  };
+  } as FaktaOmBeregning;
   const beregningsgrunnlag = lagBeregningsgrunnlag(andeler, faktaOmBeregning);
   return (
     <BeregningFaktaIndex
@@ -610,7 +603,7 @@ export const KunArbeidstakerMedVurderingSentRefusjonskrav = () => {
     faktaOmBeregningTilfeller: mapTilKodeliste([VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT]),
     refusjonskravSomKommerForSentListe,
     andelerForFaktaOmBeregning,
-  };
+  } as FaktaOmBeregning;
   const beregningsgrunnlag = lagBeregningsgrunnlag(andeler, faktaOmBeregning);
 
   return (
@@ -668,7 +661,6 @@ export const FrilansOgArbeidsforholdISammeOrganisasjon = () => {
   ];
   const vurderMottarYtelse = {
     erFrilans: true,
-    frilansMottarYtelse: null,
     frilansInntektPrMnd: 30000,
     arbeidstakerAndelerUtenIM: [],
   };
@@ -677,7 +669,7 @@ export const FrilansOgArbeidsforholdISammeOrganisasjon = () => {
     arbeidstakerOgFrilanserISammeOrganisasjonListe: [arbeidstakerBeregningsgrunnlagAndel],
     vurderMottarYtelse,
     andelerForFaktaOmBeregning,
-  };
+  } as FaktaOmBeregning;
   const beregningsgrunnlag = lagBeregningsgrunnlag(andeler, faktaOmBeregning);
   return (
     <BeregningFaktaIndex
@@ -766,12 +758,11 @@ export const FrilansOgTidsbegrensetArbeidsforholdISammeOrganisasjon = () => {
     aktivitetStatus: tidsbegrensetFaktaArbeidstakerAndel.aktivitetStatus,
     inntektskategori: tidsbegrensetFaktaArbeidstakerAndel.inntektskategori,
     arbeidsforhold: tidsbegrensetFaktaArbeidstakerAndel.arbeidsforhold,
-  };
+  } as AndelForFaktaOmBeregning;
   const frilansBeregningsgrunnlagAndel = {
     andelsnr: standardFaktaFrilansAndel.andelsnr,
     aktivitetStatus: standardFaktaFrilansAndel.aktivitetStatus,
     inntektskategori: standardFaktaFrilansAndel.inntektskategori,
-    erNyoppstartet: null,
   };
   const andeler = [
     arbeidstakerBeregningsgrunnlagAndel,
@@ -783,7 +774,6 @@ export const FrilansOgTidsbegrensetArbeidsforholdISammeOrganisasjon = () => {
   ];
   const vurderMottarYtelse = {
     erFrilans: true,
-    frilansMottarYtelse: null,
     frilansInntektPrMnd: 30000,
     arbeidstakerAndelerUtenIM: [],
   };
@@ -793,7 +783,7 @@ export const FrilansOgTidsbegrensetArbeidsforholdISammeOrganisasjon = () => {
     kortvarigeArbeidsforhold: [arbeidstakerBeregningsgrunnlagAndel],
     vurderMottarYtelse,
     andelerForFaktaOmBeregning,
-  };
+  } as FaktaOmBeregning;
   const beregningsgrunnlag = lagBeregningsgrunnlag(andeler, faktaOmBeregning);
   return (
     <BeregningFaktaIndex
@@ -844,7 +834,7 @@ export const KunTidsbegrensetArbeidsforhold = () => {
     faktaOmBeregningTilfeller: mapTilKodeliste([VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD]),
     kortvarigeArbeidsforhold: [arbeidstakerBeregningsgrunnlagAndel],
     andelerForFaktaOmBeregning,
-  };
+  } as FaktaOmBeregning;
   const beregningsgrunnlag = lagBeregningsgrunnlag(andeler, faktaOmBeregning);
   return (
     <BeregningFaktaIndex
@@ -948,7 +938,7 @@ export const FastsettingAvBeregningsgrunnlagForKunYtelse = () => {
     faktaOmBeregningTilfeller: mapTilKodeliste([FASTSETT_BG_KUN_YTELSE]),
     andelerForFaktaOmBeregning,
     kunYtelse,
-  };
+  } as FaktaOmBeregning;
   const beregningsgrunnlag = lagBeregningsgrunnlag(andeler, faktaOmBeregning);
   return (
     <BeregningFaktaIndex
@@ -1162,12 +1152,10 @@ export const KombinasjonstestForFaktapanel = () => {
   ];
   const vurderMottarYtelse = {
     erFrilans: true,
-    frilansMottarYtelse: null,
     frilansInntektPrMnd: 30000,
     arbeidstakerAndelerUtenIM: [standardFaktaArbeidstakerAndel2],
   };
   const vurderBesteberegning = {
-    skalHaBesteberegning: null,
     andeler: andelerForFaktaOmBeregning,
   };
 
@@ -1189,7 +1177,7 @@ export const KombinasjonstestForFaktapanel = () => {
         },
       ],
     },
-  };
+  } as FaktaOmBeregning;
   const beregningsgrunnlag = lagBeregningsgrunnlag(andeler, faktaOmBeregning);
   return (
     <BeregningFaktaIndex
@@ -1338,7 +1326,7 @@ export const VurderKunYtelseBesteberegning = () => {
     faktaOmBeregningTilfeller: mapTilKodeliste([FASTSETT_BG_KUN_YTELSE]),
     andelerForFaktaOmBeregning,
     kunYtelse,
-  };
+  } as FaktaOmBeregning;
   const beregningsgrunnlag = lagBeregningsgrunnlag(andeler, faktaOmBeregning);
   return (
     <BeregningFaktaIndex
