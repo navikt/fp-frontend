@@ -115,6 +115,7 @@ describe('<TotrinnskontrollIndex>', () => {
     const wrapper = shallow(<TotrinnskontrollIndex
       fagsak={fagsak as Fagsak}
       valgtBehandling={valgtBehandling}
+      setBeslutterForData={() => undefined}
     />);
 
     const index = wrapper.find(TotrinnskontrollSakIndex);
