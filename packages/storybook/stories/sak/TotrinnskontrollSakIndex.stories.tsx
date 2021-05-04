@@ -110,6 +110,7 @@ export const visTotrinnskontrollForBeslutter = () => (
       } as KlageVurdering}
       alleKodeverk={alleKodeverk as any}
       createLocationForSkjermlenke={() => location}
+      setBeslutterForData={() => undefined}
     />
   </div>
 );
@@ -146,6 +147,7 @@ export const visTotrinnskontrollForSaksbehandler = () => (
       } as KlageVurdering}
       alleKodeverk={alleKodeverk as any}
       createLocationForSkjermlenke={() => location}
+      setBeslutterForData={() => undefined}
     />
   </div>
 );

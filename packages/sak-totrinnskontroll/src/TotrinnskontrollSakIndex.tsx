@@ -65,6 +65,8 @@ interface OwnProps {
   }) => Promise<void>;
   forhandsvisVedtaksbrev: () => void;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
+  beslutterFormData?: any;
+  setBeslutterForData: (data?: any) => void;
 }
 
 const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
@@ -78,6 +80,8 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   behandlingKlageVurdering,
   alleKodeverk,
   createLocationForSkjermlenke,
+  beslutterFormData,
+  setBeslutterForData,
 }) => {
   const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandling.type.kode || BehandlingType.TILBAKEKREVING_REVURDERING === behandling.type.kode;
 
@@ -128,7 +132,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   return (
     <RawIntlProvider value={intl}>
       {erStatusFatterVedtak && (
-        <ReduxWrapper formName="TotrinnskontrollSakIndex">
+        <ReduxWrapper formName="TotrinnskontrollSakIndex" formData={beslutterFormData} setFormData={setBeslutterForData}>
           <TotrinnskontrollBeslutterForm
             behandling={behandling}
             totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}

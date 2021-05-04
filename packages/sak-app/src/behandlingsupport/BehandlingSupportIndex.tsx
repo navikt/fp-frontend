@@ -1,4 +1,6 @@
-import React, { FunctionComponent, useCallback, useMemo } from 'react';
+import React, {
+  FunctionComponent, useCallback, useMemo, useState,
+} from 'react';
 import { useHistory } from 'react-router-dom';
 
 import SupportMenySakIndex, { SupportTabs } from '@fpsak-frontend/sak-support-meny';
@@ -61,6 +63,9 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
     isQueryParam: true,
   });
 
+  const [meldingFormData, setMeldingForData] = useState();
+  const [beslutterFormData, setBeslutterForData] = useState();
+
   const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
 
   const history = useHistory();
@@ -97,6 +102,8 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
           <TotrinnskontrollIndex
             fagsak={fagsak}
             valgtBehandling={behandling}
+            beslutterFormData={beslutterFormData}
+            setBeslutterForData={setBeslutterForData}
           />
         )}
         {aktivtSupportPanel === SupportTabs.HISTORIKK && (
@@ -110,6 +117,8 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
           <MeldingIndex
             fagsak={fagsak}
             valgtBehandling={behandling}
+            meldingFormData={meldingFormData}
+            setMeldingForData={setMeldingForData}
           />
         )}
         {aktivtSupportPanel === SupportTabs.DOKUMENTER && (

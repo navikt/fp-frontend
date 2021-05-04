@@ -55,6 +55,7 @@ export const visMeldingerPanel = () => (
         navn: 'Annet',
         kodeverk: 'UGUNST',
       }]}
+      setMeldingForData={() => undefined}
     />
   </div>
 );
