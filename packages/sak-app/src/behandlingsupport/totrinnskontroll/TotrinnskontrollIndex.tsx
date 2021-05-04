@@ -48,6 +48,8 @@ const getLagreFunksjon = (
 interface OwnProps {
   fagsak: Fagsak;
   valgtBehandling: BehandlingAppKontekst;
+  beslutterFormData?: any;
+  setBeslutterForData: (data?: any) => void;
 }
 
 /**
@@ -58,6 +60,8 @@ interface OwnProps {
 const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
   fagsak,
   valgtBehandling,
+  beslutterFormData,
+  setBeslutterForData,
 }) => {
   const [visBeslutterModal, setVisBeslutterModal] = useState(false);
   const [erAlleAksjonspunktGodkjent, setAlleAksjonspunktTilGodkjent] = useState(false);
@@ -129,6 +133,8 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
         alleKodeverk={alleKodeverk}
         behandlingKlageVurdering={totrinnsKlageVurdering}
         createLocationForSkjermlenke={createLocationForSkjermlenke}
+        beslutterFormData={beslutterFormData}
+        setBeslutterForData={setBeslutterForData}
       />
       {visBeslutterModal && (
         <BeslutterModalIndex

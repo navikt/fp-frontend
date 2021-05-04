@@ -67,6 +67,7 @@ describe('<MeldingIndex>', () => {
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
       valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+      setMeldingForData={() => undefined}
     />);
 
     const index = wrapper.find(MeldingerSakIndex);
@@ -84,6 +85,7 @@ describe('<MeldingIndex>', () => {
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
       valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+      setMeldingForData={() => undefined}
     />);
 
     const index = wrapper.find(MeldingerSakIndex);
@@ -105,6 +107,7 @@ describe('<MeldingIndex>', () => {
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
       valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+      setMeldingForData={() => undefined}
     />);
 
     const message = {
@@ -140,6 +143,7 @@ describe('<MeldingIndex>', () => {
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
       valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+      setMeldingForData={() => undefined}
     />);
 
     const message = {
@@ -174,6 +178,7 @@ describe('<MeldingIndex>', () => {
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
       valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+      setMeldingForData={() => undefined}
     />);
 
     const message = {
@@ -215,6 +220,7 @@ describe('<MeldingIndex>', () => {
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
       valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+      setMeldingForData={() => undefined}
     />);
 
     const message = {
@@ -256,6 +262,7 @@ describe('<MeldingIndex>', () => {
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
       valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+      setMeldingForData={() => undefined}
     />);
 
     const message = {
@@ -302,6 +309,7 @@ describe('<MeldingIndex>', () => {
     const wrapper = shallow(<MeldingIndex
       fagsak={fagsak as Fagsak}
       valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+      setMeldingForData={() => undefined}
     />);
 
     const message = {

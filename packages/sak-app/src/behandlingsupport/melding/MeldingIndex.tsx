@@ -29,6 +29,7 @@ const getSubmitCallback = (
   resetMessage: () => void,
   setShowSettPaVentModal: (erInnhentetEllerForlenget: boolean) => void,
   setSubmitCounter: (fn: (prevValue: number) => number) => void,
+  setMeldingForData: (data?: any) => void,
 ) => (values: FormValues) => {
   const isInnhentEllerForlenget = values.brevmalkode === dokumentMalType.INNHENT_DOK
     || values.brevmalkode === dokumentMalType.INNOPP
@@ -54,6 +55,7 @@ const getSubmitCallback = (
   return submitMessage(data)
     .then(() => resetMessage())
     .then(() => {
+      setMeldingForData();
       setShowSettPaVentModal(isInnhentEllerForlenget);
       setSubmitCounter((prevValue) => prevValue + 1);
     });
@@ -89,6 +91,8 @@ const getPreviewCallback = (
 interface OwnProps {
   fagsak: Fagsak;
   valgtBehandling: BehandlingAppKontekst;
+  meldingFormData?: any,
+  setMeldingForData: (data?: any) => void,
 }
 
 const EMPTY_ARRAY = [] as KodeverkMedNavn[];
@@ -102,6 +106,8 @@ const RECIPIENTS = ['Søker'];
 const MeldingIndex: FunctionComponent<OwnProps> = ({
   fagsak,
   valgtBehandling,
+  meldingFormData,
+  setMeldingForData,
 }) => {
   const [showSettPaVentModal, setShowSettPaVentModal] = useState(false);
   const [showMessagesModal, setShowMessageModal] = useState(false);
@@ -124,7 +130,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   };
 
   const submitCallback = useCallback(getSubmitCallback(setShowMessageModal, type.kode, id, valgtBehandling.uuid, submitMessage,
-    resetMessage, setShowSettPaVentModal, setSubmitCounter),
+    resetMessage, setShowSettPaVentModal, setSubmitCounter, setMeldingForData),
   [id, versjon]);
 
   const hideSettPaVentModal = useCallback(() => {
@@ -182,6 +188,8 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
         isKontrollerRevurderingApOpen={harApentKontrollerRevAp}
         fagsakYtelseType={fagsak.fagsakYtelseType}
         kanVeilede={navAnsatt.kanVeilede}
+        meldingFormData={meldingFormData}
+        setMeldingForData={setMeldingForData}
       />
 
       {submitFinished && showSettPaVentModal && (

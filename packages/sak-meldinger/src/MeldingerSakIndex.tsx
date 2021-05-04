@@ -20,6 +20,8 @@ interface OwnProps {
   revurderingVarslingArsak: KodeverkMedNavn[];
   fagsakYtelseType: Kodeverk;
   kanVeilede: boolean;
+  meldingFormData?: any,
+  setMeldingForData: (data?: any) => void,
 }
 
 const MeldingerSakIndex: FunctionComponent<OwnProps> = ({
@@ -32,9 +34,11 @@ const MeldingerSakIndex: FunctionComponent<OwnProps> = ({
   revurderingVarslingArsak,
   fagsakYtelseType,
   kanVeilede,
+  meldingFormData,
+  setMeldingForData,
 }) => (
   <RawIntlProvider value={intl}>
-    <ReduxWrapper formName="MeldingerSakIndex">
+    <ReduxWrapper formName="MeldingerSakIndex" formData={meldingFormData} setFormData={setMeldingForData}>
       <Messages
         submitCallback={submitCallback}
         recipients={recipients}
