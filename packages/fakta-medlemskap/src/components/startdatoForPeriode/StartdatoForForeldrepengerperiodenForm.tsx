@@ -203,4 +203,5 @@ const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => {
 export default connect(mapStateToProps)(reduxForm({
   form: 'StartdatoForForeldrepengerperiodenForm',
   destroyOnUnmount: false,
+  keepDirtyOnReinitialize: true,
 })(StartdatoForForeldrepengerperiodenForm));
