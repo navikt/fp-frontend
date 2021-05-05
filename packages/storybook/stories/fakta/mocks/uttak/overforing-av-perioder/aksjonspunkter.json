@@ -8,19 +8,13 @@
       "kode": "OPPR",
       "kodeverk": "AKSJONSPUNKT_STATUS"
     },
-    "begrunnelse": null,
-    "vilkarType": null,
     "toTrinnsBehandling": false,
-    "toTrinnsBehandlingGodkjent": null,
-    "vurderPaNyttArsaker": null,
-    "besluttersBegrunnelse": null,
     "aksjonspunktType": {
       "kode": "MANU",
       "kodeverk": "AKSJONSPUNKT_TYPE"
     },
     "kanLoses": true,
-    "erAktivt": true,
-    "fristTid": null
+    "erAktivt": true
   },
   {
     "definisjon": {
@@ -31,12 +25,7 @@
       "kode": "UTFO",
       "kodeverk": "AKSJONSPUNKT_STATUS"
     },
-    "begrunnelse": null,
-    "vilkarType": null,
     "toTrinnsBehandling": false,
-    "toTrinnsBehandlingGodkjent": null,
-    "vurderPaNyttArsaker": null,
-    "besluttersBegrunnelse": null,
     "aksjonspunktType": {
       "kode": "AUTO",
       "kodeverk": "AKSJONSPUNKT_TYPE"

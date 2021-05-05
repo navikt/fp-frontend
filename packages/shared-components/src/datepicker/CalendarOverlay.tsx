@@ -10,7 +10,7 @@ import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-const getRelatedTarget = (e: React.FocusEvent) => {
+const getRelatedTarget = (e: React.FocusEvent): Promise<any> => {
   if (isIE11()) {
     return getRelatedTargetIE11();
   }
@@ -31,7 +31,7 @@ interface OwnProps {
 }
 
 class CalendarOverlay extends Component<OwnProps> {
-  calendarRootRef: HTMLDivElement
+  calendarRootRef: HTMLDivElement | undefined;
 
   static defaultProps = {
     value: '',
@@ -56,14 +56,18 @@ class CalendarOverlay extends Component<OwnProps> {
         if (targetIsCalendarOrCalendarButton(relatedTarget)) {
           return;
         }
-        onClose();
+        if (onClose) {
+          onClose();
+        }
       });
   }
 
-  onKeyDown({ keyCode }: React.KeyboardEvent): void {
-    if (keyCode === 27) {
+  onKeyDown({ key }: React.KeyboardEvent): void {
+    if (key === 'Escape') {
       const { onClose } = this.props;
-      onClose();
+      if (onClose) {
+        onClose();
+      }
     }
   }
 
@@ -74,13 +78,13 @@ class CalendarOverlay extends Component<OwnProps> {
     }
   }
 
-  parseDateValue(): Date {
+  parseDateValue(): Date | undefined {
     const { value } = this.props;
     const parsedValue = moment(value, DDMMYYYY_DATE_FORMAT, true);
     if (parsedValue.isValid()) {
       return parsedValue.toDate();
     }
-    return null;
+    return undefined;
   }
 
   targetIsCalendarOrCalendarButton(target: HTMLDivElement): boolean {

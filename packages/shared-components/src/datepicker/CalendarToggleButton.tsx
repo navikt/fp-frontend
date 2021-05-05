@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const generateStyleObject = (inputTop: number, inputWidth: number, buttonWidth = 0) => ({
+const generateStyleObject = (inputTop = 0, inputWidth = 0, buttonWidth = 0) => ({
   top: inputTop,
   left: inputWidth - buttonWidth,
 });
@@ -37,7 +37,9 @@ class CalendarToggleButton extends Component<OwnProps, StateProps> {
     if (buttonRef) {
       this.setState({ buttonWidth: buttonRef.offsetWidth });
       const { buttonRef: buttonRefFn } = this.props;
-      buttonRefFn(buttonRef);
+      if (buttonRefFn) {
+        buttonRefFn(buttonRef);
+      }
     }
   }
 

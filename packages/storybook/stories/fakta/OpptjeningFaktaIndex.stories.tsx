@@ -30,26 +30,19 @@ const opptjeningNårEnHarAksjonspunkt = {
       kode: opptjeningAktivitetType.NARING,
       kodeverk: '',
     },
-    originalFom: null,
-    originalTom: null,
     opptjeningFom: '1995-09-14',
     opptjeningTom: '9999-12-31',
     arbeidsgiverReferanse: '1',
-    arbeidsforholdRef: null,
     stillingsandel: 100,
     naringRegistreringsdato: '1995-09-14',
     erManueltOpprettet: false,
-    erGodkjent: null,
     erEndret: false,
-    begrunnelse: null,
     erPeriodeEndret: false,
   }, {
     aktivitetType: {
       kode: opptjeningAktivitetType.ARBEID,
       kodeverk: '',
     },
-    originalFom: null,
-    originalTom: null,
     opptjeningFom: '2018-01-01',
     opptjeningTom: '2018-11-01',
     arbeidsgiverReferanse: '1',
@@ -59,10 +52,9 @@ const opptjeningNårEnHarAksjonspunkt = {
     erManueltOpprettet: false,
     erGodkjent: true,
     erEndret: false,
-    begrunnelse: null,
     erPeriodeEndret: false,
   }],
-};
+} as Opptjening;
 
 const opptjeningUtenAksjonspunkt = {
   fastsattOpptjening: {

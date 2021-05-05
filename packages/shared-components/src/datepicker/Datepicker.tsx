@@ -21,7 +21,7 @@ interface OwnProps {
   onBlur: () => void;
   value?: string;
   initialMonth?: Date;
-  numberOfMonths?: number;
+  numberOfMonths: number;
   disabledDays?: Date | Date[];
 }
 
@@ -32,9 +32,9 @@ interface StateProps {
 }
 
 class Datepicker extends Component<OwnProps, StateProps> {
-  buttonRef: HTMLButtonElement;
+  buttonRef: HTMLButtonElement | undefined;
 
-  inputRef: HTMLDivElement;
+  inputRef: HTMLDivElement | undefined;
 
   static defaultProps = {
     label: '',
@@ -66,7 +66,7 @@ class Datepicker extends Component<OwnProps, StateProps> {
     }
   }
 
-  handleInputRef(inputRef: HTMLDivElement): void {
+  handleInputRef(inputRef: HTMLInputElement | null): void {
     if (inputRef) {
       this.inputRef = inputRef;
       this.handleUpdatedRefs();
@@ -93,7 +93,9 @@ class Datepicker extends Component<OwnProps, StateProps> {
         const { onChange } = this.props;
         onChange(parsed.format(DDMMYYYY_DATE_FORMAT));
         this.setState({ showCalendar: false });
-        this.inputRef.focus();
+        if (this.inputRef) {
+          this.inputRef.focus();
+        }
       }
     }
   }

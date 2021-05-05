@@ -4,17 +4,9 @@
         "skjaringstidspunkt": "2019-10-09",
         "avklartBarn": [
             {
-                "fodselsdato": "2019-10-09",
-                "dodsdato": null
+                "fodselsdato": "2019-10-09"
             }
         ],
-        "brukAntallBarnFraTps": null,
-        "dokumentasjonForeligger": null,
-        "termindato": null,
-        "antallBarnTermin": null,
-        "utstedtdato": null,
-        "morForSykVedFodsel": null,
-        "vedtaksDatoSomSvangerskapsuke": null,
         "soknadType": {
             "kode": "ST-001",
             "kodeverk": "SOKNAD_TYPE"
@@ -25,17 +17,9 @@
         "skjaringstidspunkt": "2019-10-09",
         "avklartBarn": [
             {
-                "fodselsdato": "2019-10-09",
-                "dodsdato": null
+                "fodselsdato": "2019-10-09"
             }
         ],
-        "brukAntallBarnFraTps": null,
-        "dokumentasjonForeligger": null,
-        "termindato": null,
-        "antallBarnTermin": null,
-        "utstedtdato": null,
-        "morForSykVedFodsel": null,
-        "vedtaksDatoSomSvangerskapsuke": null,
         "soknadType": {
             "kode": "ST-001",
             "kodeverk": "SOKNAD_TYPE"
@@ -46,17 +30,9 @@
         "skjaringstidspunkt": "2019-10-09",
         "avklartBarn": [
             {
-                "fodselsdato": "2019-10-09",
-                "dodsdato": null
+                "fodselsdato": "2019-10-09"
             }
         ],
-        "brukAntallBarnFraTps": null,
-        "dokumentasjonForeligger": null,
-        "termindato": null,
-        "antallBarnTermin": null,
-        "utstedtdato": null,
-        "morForSykVedFodsel": null,
-        "vedtaksDatoSomSvangerskapsuke": null,
         "soknadType": {
             "kode": "ST-001",
             "kodeverk": "SOKNAD_TYPE"

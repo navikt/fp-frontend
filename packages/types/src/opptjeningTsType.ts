@@ -2,8 +2,8 @@ import Kodeverk from './kodeverkTsType';
 
 export type OpptjeningAktivitet = {
   aktivitetType: Kodeverk;
-  originalFom: string;
-  originalTom: string;
+  originalFom?: string;
+  originalTom?: string;
   opptjeningFom: string;
   opptjeningTom: string;
   arbeidsgiverReferanse: string;

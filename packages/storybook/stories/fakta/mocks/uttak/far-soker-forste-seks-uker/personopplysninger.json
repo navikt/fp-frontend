@@ -43,8 +43,6 @@
                 },
                 "mottakerNavn": "Tiur Turid",
                 "adresselinje1": "Fjordlandet 10 B",
-                "adresselinje2": null,
-                "adresselinje3": null,
                 "postNummer": "2500",
                 "poststed": "Tynset",
                 "land": "NOR"
@@ -75,13 +73,7 @@
                         "kode": "UKJENT_ADRESSE",
                         "kodeverk": "ADRESSE_TYPE"
                     },
-                    "mottakerNavn": "Duck Dole",
-                    "adresselinje1": null,
-                    "adresselinje2": null,
-                    "adresselinje3": null,
-                    "postNummer": null,
-                    "poststed": null,
-                    "land": null
+                    "mottakerNavn": "Duck Dole"
                 }
             ]
         }

@@ -99,7 +99,7 @@ export const calcDaysAndWeeksWithWeekends = (fraDatoPeriode: string, tilDatoPeri
   return checkDays(weeks, days);
 };
 
-export const dateFormat = (date: Date | string): string => moment(date).format(DDMMYYYY_DATE_FORMAT);
+export const dateFormat = (date?: Date | string): string => moment(date).format(DDMMYYYY_DATE_FORMAT);
 
 export const timeFormat = (date: string): string => moment(date).format(HHMM_TIME_FORMAT);
 

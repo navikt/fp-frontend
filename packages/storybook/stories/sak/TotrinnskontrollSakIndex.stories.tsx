@@ -6,7 +6,9 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';
-import { Behandling, BehandlingÅrsak, KlageVurdering } from '@fpsak-frontend/types';
+import {
+  Behandling, BehandlingÅrsak, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
+} from '@fpsak-frontend/types';
 
 import withRouterProvider from '../../decorators/withRouter';
 
@@ -14,22 +16,21 @@ import alleKodeverk from '../mocks/alleKodeverk.json';
 
 const data = [{
   skjermlenkeType: 'FORMKRAV_KLAGE_NFP',
-  totrinnskontrollAksjonspunkter: [
-    {
-      aksjonspunktKode: '5082',
-      opptjeningAktiviteter: [],
-      beregningDto: {
-        fastsattVarigEndringNaering: false,
-        faktaOmBeregningTilfeller: null,
-      },
-      besluttersBegrunnelse: null,
-      totrinnskontrollGodkjent: null,
-      vurderPaNyttArsaker: [],
-      uttakPerioder: [],
-      arbeidforholdDtos: [],
+  totrinnskontrollAksjonspunkter: [{
+    aksjonspunktKode: '5082',
+    opptjeningAktiviteter: [],
+    beregningDto: {
+      fastsattVarigEndringNaering: false,
+      faktaOmBeregningTilfeller: [{
+        kode: '',
+        kodeverk: '',
+      }],
     },
-  ],
-}];
+    vurderPaNyttArsaker: [],
+    uttakPerioder: [],
+    arbeidforholdDtos: [],
+  }],
+}] as TotrinnskontrollSkjermlenkeContext[];
 
 const dataReadOnly = [{
   skjermlenkeType: 'FORMKRAV_KLAGE_NFP',
@@ -39,7 +40,10 @@ const dataReadOnly = [{
       opptjeningAktiviteter: [],
       beregningDto: {
         fastsattVarigEndringNaering: false,
-        faktaOmBeregningTilfeller: [null],
+        faktaOmBeregningTilfeller: [{
+          kode: '',
+          kodeverk: '',
+        }],
       },
       besluttersBegrunnelse: 'asdfa',
       totrinnskontrollGodkjent: false,
@@ -57,7 +61,7 @@ const dataReadOnly = [{
       arbeidforholdDtos: [],
     },
   ],
-}];
+}] as TotrinnskontrollSkjermlenkeContext[];
 
 const location = {
   pathname: '', search: '', state: {}, hash: '',

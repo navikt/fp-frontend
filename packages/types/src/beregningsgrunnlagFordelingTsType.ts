@@ -47,7 +47,7 @@ export type ArbeidsforholdTilFordeling = Readonly<{
   eksternArbeidsforholdId?: string;
   naturalytelseBortfaltPrÅr?: number;
   naturalytelseTilkommetPrÅr?: number;
-  opphoersdato?: number;
+  opphoersdato?: string;
   organisasjonstype?: Kodeverk;
   perioderMedGraderingEllerRefusjon?: PerioderMedGraderingEllerRefusjon[];
   permisjon?: {

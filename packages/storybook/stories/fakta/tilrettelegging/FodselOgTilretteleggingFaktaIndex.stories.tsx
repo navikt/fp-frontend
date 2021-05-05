@@ -29,6 +29,7 @@ const svangerskapspengerTilretteleggingForArbeidsgiver = {
       fom: '2019-09-16',
       type: {
         kode: tilretteleggingType.DELVIS_TILRETTELEGGING,
+        kodeverk: '',
       },
       stillingsprosent: 30,
     }],
@@ -55,6 +56,7 @@ const svangerskapspengerTilretteleggingForArbeidsgiver = {
       fom: '2019-09-16',
       type: {
         kode: tilretteleggingType.INGEN_TILRETTELEGGING,
+        kodeverk: '',
       },
     }],
     velferdspermisjoner: [],
@@ -79,6 +81,7 @@ const svangerskapspengerTilretteleggingForFrilanser = {
       fom: '2019-10-01',
       type: {
         kode: tilretteleggingType.INGEN_TILRETTELEGGING,
+        kodeverk: '',
       },
     }],
     arbeidsgiverReferanse: '1',
@@ -91,6 +94,7 @@ const svangerskapspengerTilretteleggingForFrilanser = {
       fom: '2019-10-01',
       type: {
         kode: tilretteleggingType.INGEN_TILRETTELEGGING,
+        kodeverk: '',
       },
     }],
     arbeidsgiverReferanse: '2',
@@ -252,7 +256,7 @@ export const visAksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigN
 export const visInfoDialogForVarIkkeAnsattDaBehovetForTilretteleggingOppstod = () => {
   const inntektArbeidYtelseForAnnenArbeidsgiver = {
     arbeidsforhold: [{
-      ...inntektArbeidYtelse.arbeidsforhold[0],
+      ...(inntektArbeidYtelse.arbeidsforhold ? inntektArbeidYtelse.arbeidsforhold[0] : {}),
       id: '1111111-null',
       arbeidsgiverReferanse: '1111111',
     }] as Arbeidsforhold[],

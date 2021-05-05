@@ -56,7 +56,7 @@ describe('<CalendarOverlay>', () => {
     />, messages);
 
     const daypicker = wrapper.find(DayPicker);
-    expect(daypicker.prop('selectedDays')).toBeNull();
+    expect(daypicker.prop('selectedDays')).toBeUndefined();
   });
 
   it('skal kjøre callback når overlay blir lukket og target er noe annet enn kalender eller kalenderknapp', () => {
@@ -74,6 +74,7 @@ describe('<CalendarOverlay>', () => {
       onClose={onCloseCallback}
     />, messages);
 
+    // @ts-ignore
     wrapper.find('div').prop('onBlur')({} as React.FocusEvent);
   });
 
@@ -89,7 +90,8 @@ describe('<CalendarOverlay>', () => {
       onClose={onCloseCallback}
     />, messages);
 
-    wrapper.find('div').prop('onKeyDown')({ keyCode: 27 } as React.KeyboardEvent<any>);
+    // @ts-ignore
+    wrapper.find('div').prop('onKeyDown')({ key: 'Escape' } as React.KeyboardEvent<any>);
 
     expect(onCloseCallback.called).toBe(true);
   });
@@ -106,6 +108,7 @@ describe('<CalendarOverlay>', () => {
       onClose={onCloseCallback}
     />, messages);
 
+    // @ts-ignore
     wrapper.find('div').prop('onKeyDown')({ keyCode: 20 } as React.KeyboardEvent<any>);
 
     expect(onCloseCallback.called).toBe(false);
