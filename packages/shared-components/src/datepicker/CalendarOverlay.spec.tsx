@@ -91,7 +91,7 @@ describe('<CalendarOverlay>', () => {
     />, messages);
 
     // @ts-ignore
-    wrapper.find('div').prop('onKeyDown')({ keyCode: 27 } as React.KeyboardEvent<any>);
+    wrapper.find('div').prop('onKeyDown')({ key: 'Escape' } as React.KeyboardEvent<any>);
 
     expect(onCloseCallback.called).toBe(true);
   });
