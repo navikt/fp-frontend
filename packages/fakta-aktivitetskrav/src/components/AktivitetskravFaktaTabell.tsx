@@ -20,7 +20,7 @@ const HEADER_TEXT_CODES = [
 interface PureOwnProps {
   aktivitetskrav: UttakKontrollerAktivitetskrav[];
   valgtAktivitetskravFom?: string;
-  velgAktivitetskrav: (_event: React.MouseEvent | React.KeyboardEvent, _id: string, model: UttakKontrollerAktivitetskrav) => void;
+  velgAktivitetskrav: (event: React.MouseEvent | React.KeyboardEvent, id?: number | string, model?: UttakKontrollerAktivitetskrav) => void;
   aktivitetskravAvklaringer: KodeverkMedNavn[];
   morsAktiviteter: KodeverkMedNavn[];
 }
@@ -44,8 +44,8 @@ const AktivitetskravFaktaTabell: FunctionComponent<PureOwnProps & WrappedCompone
         onKeyDown={velgAktivitetskrav}
       >
         <TableColumn>{`${dateFormat(krav.fom)} - ${dateFormat(krav.tom)}`}</TableColumn>
-        <TableColumn>{krav.morsAktivitet ? morsAktiviteter.find((aktivtet) => aktivtet.kode === krav.morsAktivitet.kode)?.navn : ''}</TableColumn>
-        <TableColumn>{krav.avklaring ? aktivitetskravAvklaringer.find((avklaring) => avklaring.kode === krav.avklaring.kode)?.navn : ''}</TableColumn>
+        <TableColumn>{krav.morsAktivitet ? morsAktiviteter.find((aktivtet) => aktivtet.kode === krav.morsAktivitet?.kode)?.navn : ''}</TableColumn>
+        <TableColumn>{krav.avklaring ? aktivitetskravAvklaringer.find((avklaring) => avklaring.kode === krav.avklaring?.kode)?.navn : ''}</TableColumn>
         <TableColumn>
           {krav.endret && (
             <Image

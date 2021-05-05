@@ -17,6 +17,7 @@ export {
 } from './src/beregningsgrunnlagTsType';
 export {
   default as FaktaOmBeregning,
+  FaktaOmBeregningAndel,
   AvklarBeregningAktiviteterMap,
   AvklarBeregningAktiviteter,
   BeregningAktivitet,
@@ -37,6 +38,7 @@ export {
   ArbeidsforholdTilFordeling,
   FordelBeregningsgrunnlagAndel,
   PerioderMedGraderingEllerRefusjon,
+  FaktaOmFordeling,
 } from './src/beregningsgrunnlagFordelingTsType';
 export { default as Feriepengegrunnlag, FeriepengegrunnlagAndel } from './src/feriepengegrunnlagTsType';
 export { default as BeregningsresultatEs } from './src/beregningsresultatEsTsType';

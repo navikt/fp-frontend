@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { Dispatch } from 'redux';
 
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
@@ -8,7 +9,7 @@ import EngangsstonadForm from './components/EngangsstonadForm';
 
 interface OwnProps {
   onSubmitUfullstendigsoknad: () => Promise<any>;
-  onSubmit: (_formValues, _dispatch, values: any) => Promise<any>;
+  onSubmit: (_formValues: any, _dispatch: Dispatch, values: any) => Promise<any>;
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};

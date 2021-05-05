@@ -1,7 +1,7 @@
 import Kodeverk from './kodeverkTsType';
 import BeregningsgrunnlagArbeidsforhold from './beregningsgrunnlagArbeidsforholdTsType';
 
-type FaktaOmBeregningAndel = Readonly<{
+export type FaktaOmBeregningAndel = Readonly<{
   arbeidsforhold?: BeregningsgrunnlagArbeidsforhold;
   andelsnr?: number;
   inntektskategori?: Kodeverk;
@@ -83,7 +83,7 @@ export type VurderMottarYtelse = Readonly<{
 }>
 
 export interface ATFLSammeOrgAndel extends FaktaOmBeregningAndel {
-  inntektPrMnd: number;
+  inntektPrMnd?: number;
 }
 
 export type FaktaOmBeregning = Readonly<{

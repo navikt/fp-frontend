@@ -28,13 +28,13 @@ interface StateProps {
 const getStartDateInput = (props: OwnProps) => haystack(props, props.names[0]).input;
 const getEndDateInput = (props: OwnProps) => haystack(props, props.names[1]).input;
 const isValidDate = (date: Date): boolean => moment(date, DDMMYYYY_DATE_FORMAT, true).isValid();
-const createPeriod = (startDay: Date, endDay: Date): string => `${moment(startDay)
+const createPeriod = (startDay?: Date | null, endDay?: Date | null): string => `${moment(startDay)
   .format(DDMMYYYY_DATE_FORMAT)} - ${moment(endDay).format(DDMMYYYY_DATE_FORMAT)}`;
 
 class Periodpicker extends Component<OwnProps, StateProps> {
-  buttonRef: HTMLButtonElement;
+  buttonRef: HTMLButtonElement | undefined;
 
-  inputRef: HTMLDivElement;
+  inputRef: HTMLDivElement | undefined;
 
   static defaultProps = {
     label: '',
@@ -76,7 +76,7 @@ class Periodpicker extends Component<OwnProps, StateProps> {
     }
   }
 
-  handleInputRef(inputRef: HTMLDivElement): void {
+  handleInputRef(inputRef: HTMLInputElement | null): void {
     if (inputRef) {
       this.inputRef = inputRef;
       this.handleUpdatedRefs();
@@ -118,14 +118,16 @@ class Periodpicker extends Component<OwnProps, StateProps> {
 
       if (newRange.from === selectedDay) {
         startInput.onChange(period);
-        if (isValidDate(currentEndDate)) {
+        if (this.inputRef && isValidDate(currentEndDate)) {
           this.setState({ showCalendar: false });
           this.inputRef.focus();
         }
       } else {
         endInput.onChange(period);
         this.setState({ showCalendar: false });
-        this.inputRef.focus();
+        if (this.inputRef) {
+          this.inputRef.focus();
+        }
       }
     } else {
       const period = createPeriod(selectedDay, selectedDay);
@@ -147,7 +149,7 @@ class Periodpicker extends Component<OwnProps, StateProps> {
     getEndDateInput(this.props).onBlur(e);
   }
 
-  parseToDate(name: string): Date {
+  parseToDate(name: string): Date | null {
     const nameFromProps = haystack(this.props, name);
     const day = nameFromProps.input.value;
     return isValidDate(day) ? moment(day, DDMMYYYY_DATE_FORMAT).toDate() : null;

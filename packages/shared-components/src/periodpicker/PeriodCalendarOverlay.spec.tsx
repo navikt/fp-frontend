@@ -63,6 +63,7 @@ describe('<PeriodCalendarOverlay>', () => {
       onClose={onCloseCallback}
     />, messenger);
 
+    // @ts-ignore
     wrapper.find('div').prop('onBlur')({} as React.FocusEvent);
   });
 
@@ -78,7 +79,8 @@ describe('<PeriodCalendarOverlay>', () => {
       onClose={onCloseCallback}
     />, messenger);
 
-    wrapper.find('div').prop('onKeyDown')({ keyCode: 27 } as React.KeyboardEvent);
+    // @ts-ignore
+    wrapper.find('div').prop('onKeyDown')({ key: 'Escape' } as React.KeyboardEvent);
 
     expect(onCloseCallback.called).toBe(true);
   });
@@ -95,6 +97,7 @@ describe('<PeriodCalendarOverlay>', () => {
       onClose={onCloseCallback}
     />, messenger);
 
+    // @ts-ignore
     wrapper.find('div').prop('onKeyDown')({ keyCode: 20 } as React.KeyboardEvent);
 
     expect(onCloseCallback.called).toBe(false);

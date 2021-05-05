@@ -64,8 +64,10 @@ export const diff = (a?: DiffInput | null, b?: DiffInput | null): boolean | Reco
       }
       return true;
     }
+
+    // @ts-ignore
     return [...new Set([...Object.keys(thing1), ...Object.keys(thing2)])]
-      // @ts-ignore Fiks
+      // @ts-ignore
       .reduce((diffs, key) => ({ ...diffs, [key]: diff(thing1[key], thing2[key]) }), {});
   };
 

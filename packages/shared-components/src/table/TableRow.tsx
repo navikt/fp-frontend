@@ -6,7 +6,7 @@ import styles from './tableRow.less';
 const classNames = classnames.bind(styles);
 
 const createMouseDownHandler = (
-  onMouseDown: (e: React.MouseEvent, id: number | string, model: any) => void,
+  onMouseDown?: (e: React.MouseEvent, id?: number | string, model?: any) => void,
   id?: number | string,
   model?: any,
 ) => (e: React.MouseEvent): void => onMouseDown && onMouseDown(e, id, model);
@@ -26,7 +26,7 @@ const setFocus = (e: React.KeyboardEvent, isNext: boolean): void => {
 };
 
 const createKeyHandler = (
-  onKeyDown: (e: React.KeyboardEvent, id: number | string, model: any) => void,
+  onKeyDown?: (e: React.KeyboardEvent, id?: number | string, model?: any) => void,
   id?: number | string,
   model?: any,
 ) => (e: React.KeyboardEvent): void => {
@@ -45,8 +45,8 @@ interface OwnProps {
   id?: number | string;
   model?: any;
   isHeader?: boolean;
-  onMouseDown?: (e: React.MouseEvent, id: number | string, model: any) => void;
-  onKeyDown?: (e: React.KeyboardEvent, id: number | string, model: any) => void;
+  onMouseDown?: (e: React.MouseEvent, id?: number | string, model?: any) => void;
+  onKeyDown?: (e: React.KeyboardEvent, id?: number | string, model?: any) => void;
   children: ReactNode | ReactNode[];
   noHover?: boolean;
   isSelected?: boolean;

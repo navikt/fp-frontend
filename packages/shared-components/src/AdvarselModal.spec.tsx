@@ -25,7 +25,7 @@ describe('<AdvarselModal>', () => {
 
     const image = wrapper.find(Image);
     expect(image).toHaveLength(1);
-    expect(image.prop('alt').length).toBeGreaterThan(3);
+    expect(image.prop('alt')).toEqual('Åpne behandling');
 
     const knapp = wrapper.find(Hovedknapp);
     expect(knapp).toHaveLength(1);
