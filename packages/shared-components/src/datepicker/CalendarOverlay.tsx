@@ -62,8 +62,8 @@ class CalendarOverlay extends Component<OwnProps> {
       });
   }
 
-  onKeyDown({ keyCode }: React.KeyboardEvent): void {
-    if (keyCode === 27) {
+  onKeyDown({ key }: React.KeyboardEvent): void {
+    if (key === 'Escape') {
       const { onClose } = this.props;
       if (onClose) {
         onClose();
