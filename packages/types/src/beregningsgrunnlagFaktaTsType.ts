@@ -1,7 +1,7 @@
 import Kodeverk from './kodeverkTsType';
 import BeregningsgrunnlagArbeidsforhold from './beregningsgrunnlagArbeidsforholdTsType';
 
-type FaktaOmBeregningAndel = Readonly<{
+export type FaktaOmBeregningAndel = Readonly<{
   arbeidsforhold?: BeregningsgrunnlagArbeidsforhold;
   andelsnr?: number;
   inntektskategori?: Kodeverk;

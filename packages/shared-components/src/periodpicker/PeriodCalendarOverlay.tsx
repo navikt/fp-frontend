@@ -8,7 +8,7 @@ import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-const getRelatedTarget = (e: React.FocusEvent) => {
+const getRelatedTarget = (e: React.FocusEvent): Promise<any> => {
   if (isIE11()) {
     return getRelatedTargetIE11();
   }
@@ -20,15 +20,15 @@ interface OwnProps {
   className: string;
   dayPickerClassName: string;
   elementIsCalendarButton: (target: EventTarget) => boolean;
-  startDate?: Date;
-  endDate?: Date;
+  startDate: Date | null;
+  endDate: Date | null;
   disabled?: boolean;
   onClose?: () => void;
   disabledDays?: Modifier | Modifier[];
 }
 
 class PeriodCalendarOverlay extends Component<OwnProps> {
-  calendarRootRef: HTMLDivElement
+  calendarRootRef: HTMLDivElement | undefined;
 
   static defaultProps = {
     startDate: null,
@@ -53,14 +53,18 @@ class PeriodCalendarOverlay extends Component<OwnProps> {
         if (targetIsCalendarOrCalendarButton(relatedTarget)) {
           return;
         }
-        onClose();
+        if (onClose) {
+          onClose();
+        }
       });
   }
 
   onKeyDown({ keyCode }: React.KeyboardEvent): void {
     if (keyCode === 27) {
       const { onClose } = this.props;
-      onClose();
+      if (onClose) {
+        onClose();
+      }
     }
   }
 

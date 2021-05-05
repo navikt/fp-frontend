@@ -10,7 +10,7 @@ import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus'
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import BeregningFaktaIndex from '@fpsak-frontend/fakta-beregning';
 import {
-  Kodeverk, Behandling, Beregningsgrunnlag, BeregningAktivitet, FaktaOmBeregning, AndelForFaktaOmBeregning,
+  Kodeverk, Behandling, Beregningsgrunnlag, BeregningAktivitet, FaktaOmBeregning, AndelForFaktaOmBeregning, FaktaOmBeregningAndel,
 } from '@fpsak-frontend/types';
 
 import alleKodeverkMock from '../../mocks/alleKodeverk.json';
@@ -52,7 +52,7 @@ const lagBeregningsgrunnlagAvklarAktiviteter = (
 });
 
 const lagBeregningsgrunnlag = (
-  andeler,
+  andeler: FaktaOmBeregningAndel[],
   faktaOmBeregning: FaktaOmBeregning,
 ) => ({
   beregningsgrunnlagPeriode: [
@@ -62,7 +62,6 @@ const lagBeregningsgrunnlag = (
           andelsnr: andel.andelsnr,
           aktivitetStatus: andel.aktivitetStatus,
           inntektskategori: andel.inntektskategori,
-          erNyoppstartet: andel.erNyoppstartet,
         }
       )),
     },
@@ -72,7 +71,7 @@ const lagBeregningsgrunnlag = (
 
 const mapTilKodeliste = (arrayOfCodes: string[]): Kodeverk[] => arrayOfCodes.map((kode) => ({ kode, kodeverk: '' }));
 
-const lagAndel = (andelsnr: number, aktivitetStatus: string, inntektskategori: string) => (
+const lagAndel = (andelsnr: number, aktivitetStatus: string, inntektskategori: string): FaktaOmBeregningAndel => (
   {
     andelsnr,
     aktivitetStatus: {
@@ -303,12 +302,12 @@ export const AvklartAktiviteterMedAksjonspunktIFaktaAvklaring = () => {
     andelsnr: standardFaktaArbeidstakerAndel.andelsnr,
     aktivitetStatus: standardFaktaArbeidstakerAndel.aktivitetStatus,
     inntektskategori: standardFaktaArbeidstakerAndel.inntektskategori,
-  };
+  } as FaktaOmBeregningAndel;
   const aapBeregningsgrunnlagAndel = {
     andelsnr: standardFaktaAAPAndel.andelsnr,
     aktivitetStatus: standardFaktaAAPAndel.aktivitetStatus,
     inntektskategori: standardFaktaAAPAndel.inntektskategori,
-  };
+  } as FaktaOmBeregningAndel;
   const andeler = [
     arbeidstakerBeregningsgrunnlagAndel,
     aapBeregningsgrunnlagAndel,
@@ -456,11 +455,11 @@ export const DagpengerOgArbeidstakerMedVurderingAvBesteberegning = () => {
   const dagpengerBeregningsgrunnlagAndel = {
     andelsnr: standardFaktaDagpengerAndel.andelsnr,
     aktivitetStatus: {
-      kode: standardFaktaDagpengerAndel.aktivitetStatus,
+      kode: standardFaktaDagpengerAndel.aktivitetStatus ? standardFaktaDagpengerAndel.aktivitetStatus.kode : '',
       kodeverk: 'AKTIVITET_STATUS',
     },
     inntektskategori: {
-      kode: standardFaktaDagpengerAndel.inntektskategori,
+      kode: standardFaktaDagpengerAndel.inntektskategori ? standardFaktaDagpengerAndel.inntektskategori.kode : '',
       kodeverk: 'INNTEKTSKATEGORI',
     },
   };
@@ -1096,6 +1095,7 @@ export const KombinasjonstestForFaktapanel = () => {
     aktivitetStatus: tidsbegrensetFaktaArbeidstakerAndel.aktivitetStatus,
     inntektskategori: tidsbegrensetFaktaArbeidstakerAndel.inntektskategori,
     arbeidsforhold: tidsbegrensetFaktaArbeidstakerAndel.arbeidsforhold,
+    lagtTilAvSaksbehandler: false,
   };
   const beregningsgrunnlagNæringAndel = {
     andelsnr: standardFaktaNæringAndel.andelsnr,

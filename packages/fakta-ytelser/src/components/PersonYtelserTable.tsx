@@ -5,20 +5,12 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { KodeverkMedNavn, RelatertTilgrensedYtelse } from '@fpsak-frontend/types';
 
 import styles from './personYtelserTable.less';
 
 interface OwnProps {
-  ytelser: {
-    relatertYtelseType: string;
-    tilgrensendeYtelserListe?: {
-      periodeTilDato: string;
-      periodeFraDato: string;
-      status: string;
-      saksNummer: string;
-    }[];
-  }[];
+  ytelser?: RelatertTilgrensedYtelse[];
   relatertYtelseTyper: KodeverkMedNavn[];
   relatertYtelseStatus: KodeverkMedNavn[];
 }

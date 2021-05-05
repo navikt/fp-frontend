@@ -17,6 +17,7 @@ export {
 } from './src/beregningsgrunnlagTsType';
 export {
   default as FaktaOmBeregning,
+  FaktaOmBeregningAndel,
   AvklarBeregningAktiviteterMap,
   AvklarBeregningAktiviteter,
   BeregningAktivitet,
