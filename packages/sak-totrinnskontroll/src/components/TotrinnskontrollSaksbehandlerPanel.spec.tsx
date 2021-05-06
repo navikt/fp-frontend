@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+import { TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext } from '@fpsak-frontend/types';
 
 import TotrinnskontrollSaksbehandlerPanel from './TotrinnskontrollSaksbehandlerPanel';
 
@@ -9,71 +10,50 @@ const getTotrinnsaksjonspunkterFødsel = () => (
   [
     {
       aksjonspunktKode: '5027',
-      beregningDto: null,
-      besluttersBegrunnelse: null,
       opptjeningAktiviteter: [],
-      totrinnskontrollGodkjent: null,
       vurderPaNyttArsaker: [],
     },
     {
       aksjonspunktKode: '5001',
-      beregningDto: null,
-      besluttersBegrunnelse: null,
       opptjeningAktiviteter: [],
-      totrinnskontrollGodkjent: null,
       vurderPaNyttArsaker: [],
     },
     {
       aksjonspunktKode: '7002',
-      beregningDto: null,
-      besluttersBegrunnelse: null,
       opptjeningAktiviteter: [],
-      totrinnskontrollGodkjent: null,
       vurderPaNyttArsaker: [],
     },
-  ]
+  ] as TotrinnskontrollAksjonspunkt[]
 );
 
 const getTotrinnsaksjonspunkterOmsorg = () => (
   [
     {
       aksjonspunktKode: '5008',
-      beregningDto: null,
-      besluttersBegrunnelse: null,
       opptjeningAktiviteter: [],
-      totrinnskontrollGodkjent: null,
       vurderPaNyttArsaker: [],
     },
     {
       aksjonspunktKode: '5011',
-      beregningDto: null,
-      besluttersBegrunnelse: null,
       opptjeningAktiviteter: [],
-      totrinnskontrollGodkjent: null,
       vurderPaNyttArsaker: [],
     },
-  ]
+  ] as TotrinnskontrollAksjonspunkt[]
 );
 
 const getTotrinnsaksjonspunkterForeldreansvar = () => (
   [
     {
       aksjonspunktKode: '5014',
-      beregningDto: null,
-      besluttersBegrunnelse: null,
       opptjeningAktiviteter: [],
-      totrinnskontrollGodkjent: null,
       vurderPaNyttArsaker: [],
     },
     {
       aksjonspunktKode: '5013',
-      beregningDto: null,
-      besluttersBegrunnelse: null,
       opptjeningAktiviteter: [],
-      totrinnskontrollGodkjent: null,
       vurderPaNyttArsaker: [],
     },
-  ]
+  ] as TotrinnskontrollAksjonspunkt[]
 );
 
 const totrinnskontrollSkjermlenkeContext = [{
@@ -85,7 +65,7 @@ const totrinnskontrollSkjermlenkeContext = [{
 }, {
   skjermlenkeType: 'FORELDREANSVAR',
   totrinnskontrollAksjonspunkter: getTotrinnsaksjonspunkterForeldreansvar(),
-}];
+}] as TotrinnskontrollSkjermlenkeContext[];
 
 const location = {
   pathname: '', search: '', state: {}, hash: '',

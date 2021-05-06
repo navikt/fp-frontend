@@ -18,7 +18,7 @@ const lagOpptjeningAktivitetArbeidMedNavn = (resultat: string): OpptjeningAktivi
 const lagOpptjeningAktivitetArbeidUtenNavn = (resultat: string): OpptjeningAktiviteter => ({
   erEndring: resultat === 'ENDRING',
   aktivitetType: 'Arbeid',
-  arbeidsgiverNavn: null,
+  arbeidsgiverNavn: undefined,
   orgnr: '1234567890',
   godkjent: resultat === 'GODKJENT',
 });
@@ -26,8 +26,8 @@ const lagOpptjeningAktivitetArbeidUtenNavn = (resultat: string): OpptjeningAktiv
 const lagOpptjeningAktivitet = (resultat: string): OpptjeningAktiviteter => ({
   erEndring: resultat === 'ENDRING',
   aktivitetType: 'Aktivitet',
-  arbeidsgiverNavn: null,
-  orgnr: null,
+  arbeidsgiverNavn: undefined,
+  orgnr: undefined,
   godkjent: resultat === 'GODKJENT',
 });
 

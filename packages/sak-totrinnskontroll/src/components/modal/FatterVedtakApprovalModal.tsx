@@ -17,9 +17,9 @@ import styles from './fatterVedtakApprovalModal.less';
 const getInfoTextCode = (
   behandlingtypeKode: string,
   behandlingsresultat: Behandling['behandlingsresultat'],
-  harSammeResultatSomOriginalBehandling: boolean,
-  erKlageWithKA: boolean,
   isOpphor: boolean,
+  harSammeResultatSomOriginalBehandling?: boolean,
+  erKlageWithKA?: boolean,
 ) => {
   if (behandlingtypeKode === BehandlingType.TILBAKEKREVING) {
     return 'FatterVedtakApprovalModal.Tilbakekreving';
@@ -50,8 +50,8 @@ const getInfoTextCode = (
 
 const getModalDescriptionTextCode = (
   isOpphor: boolean,
-  erKlageWithKA: boolean,
   behandlingTypeKode: string,
+  erKlageWithKA?: boolean,
 ) => {
   if (behandlingTypeKode === BehandlingType.KLAGE) {
     if (erKlageWithKA) {
@@ -75,14 +75,14 @@ const utledInfoTextCode = (
   behandlingStatusKode: string,
   behandlingTypeKode: string,
   behandlingsresultat: Behandling['behandlingsresultat'],
-  harSammeResultatSomOriginalBehandling: boolean,
-  erKlageWithKA: boolean,
   isBehandlingsresultatOpphor: boolean,
-) => {
+  erKlageWithKA?: boolean,
+  harSammeResultatSomOriginalBehandling?: boolean,
+): string => {
   if (allAksjonspunktApproved) {
     return isStatusFatterVedtak(behandlingStatusKode)
-      ? getInfoTextCode(behandlingTypeKode, behandlingsresultat, harSammeResultatSomOriginalBehandling,
-        erKlageWithKA, isBehandlingsresultatOpphor)
+      ? getInfoTextCode(behandlingTypeKode, behandlingsresultat, isBehandlingsresultatOpphor, harSammeResultatSomOriginalBehandling,
+        erKlageWithKA)
       : '';
   }
   return 'FatterVedtakApprovalModal.VedtakReturneresTilSaksbehandler';
@@ -94,11 +94,11 @@ const utledAltImgTextCode = (
 
 const utledModalDescriptionTextCode = (
   behandlingStatusKode: string,
-  erKlageWithKA: boolean,
   behandlingTypeKode: string,
   isBehandlingsresultatOpphor: boolean,
+  erKlageWithKA?: boolean,
 ) => (isStatusFatterVedtak(behandlingStatusKode)
-  ? getModalDescriptionTextCode(isBehandlingsresultatOpphor, erKlageWithKA, behandlingTypeKode)
+  ? getModalDescriptionTextCode(isBehandlingsresultatOpphor, behandlingTypeKode, erKlageWithKA)
   : 'FatterVedtakApprovalModal.ModalDescription');
 
 interface OwnProps {
@@ -128,13 +128,13 @@ const FatterVedtakApprovalModal: FunctionComponent<OwnProps & WrappedComponentPr
   harSammeResultatSomOriginalBehandling,
   erKlageWithKA,
 }) => {
-  const isBehandlingsresultatOpphor = behandlingsresultat && behandlingsresultat.type.kode === behandlingResultatType.OPPHOR;
+  const isBehandlingsresultatOpphor = !!behandlingsresultat && behandlingsresultat.type.kode === behandlingResultatType.OPPHOR;
   const infoTextCode = utledInfoTextCode(allAksjonspunktApproved, behandlingStatusKode, behandlingTypeKode, behandlingsresultat,
-    harSammeResultatSomOriginalBehandling, erKlageWithKA, isBehandlingsresultatOpphor);
+    isBehandlingsresultatOpphor, erKlageWithKA, harSammeResultatSomOriginalBehandling);
 
   const altImgTextCode = utledAltImgTextCode(behandlingStatusKode);
 
-  const modalDescriptionTextCode = utledModalDescriptionTextCode(behandlingStatusKode, erKlageWithKA, behandlingTypeKode, isBehandlingsresultatOpphor);
+  const modalDescriptionTextCode = utledModalDescriptionTextCode(behandlingStatusKode, behandlingTypeKode, isBehandlingsresultatOpphor, erKlageWithKA);
 
   return (
     <Modal

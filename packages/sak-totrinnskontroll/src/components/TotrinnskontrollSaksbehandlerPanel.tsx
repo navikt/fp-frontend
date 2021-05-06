@@ -26,7 +26,7 @@ interface OwnProps {
   skjemalenkeTyper: KodeverkMedNavn[];
   vurderArsaker: KodeverkMedNavn[];
   faktaOmBeregningTilfeller: KodeverkMedNavn[];
-  lagLenke: (skjermlenkeCode: string) => Location;
+  lagLenke: (skjermlenkeCode: string) => Location | undefined;
 }
 
 const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
@@ -55,14 +55,17 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
       const skjermlenkeTypeKodeverk = skjemalenkeTyper.find((skjemalenkeType) => skjemalenkeType.kode === context.skjermlenkeType);
 
       if (aksjonspunkter.length > 0) {
+        const lenke = lagLenke(context.skjermlenkeType);
         return (
           <React.Fragment key={context.skjermlenkeType}>
-            <NavLink to={lagLenke(context.skjermlenkeType)} onClick={() => window.scroll(0, 0)} className={styles.lenke}>
-              {skjermlenkeTypeKodeverk.navn}
-            </NavLink>
+            {lenke && skjermlenkeTypeKodeverk && (
+              <NavLink to={lenke} onClick={() => window.scroll(0, 0)} className={styles.lenke}>
+                {skjermlenkeTypeKodeverk.navn}
+              </NavLink>
+            )}
             {aksjonspunkter.map((aksjonspunkt) => {
-              const aksjonspunktTexts = getAksjonspunkttekst(erForeldrepengerFagsak, behandlingKlageVurdering, behandlingStatus,
-                arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
+              const aksjonspunktTexts = getAksjonspunkttekst(erForeldrepengerFagsak, behandlingStatus,
+                arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt, behandlingKlageVurdering);
 
               return (
                 <div key={aksjonspunkt.aksjonspunktKode} className={styles.approvalItemContainer}>
@@ -88,7 +91,7 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
                       </div>
                     ) : (
                       <div className={styles.approvalItem}>
-                        {aksjonspunkt.vurderPaNyttArsaker.map((item) => (
+                        {aksjonspunkt.vurderPaNyttArsaker && aksjonspunkt.vurderPaNyttArsaker.map((item) => (
                           <div key={`${item.kode}${aksjonspunkt.aksjonspunktKode}`}>
                             <span>
                               <Image
@@ -96,7 +99,7 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
                                 className={styles.image}
                               />
                             </span>
-                            <span>{vurderArsaker.find((arsak) => item.kode === arsak.kode).navn}</span>
+                            <span>{vurderArsaker.find((arsak) => item.kode === arsak.kode)?.navn}</span>
                           </div>
                         ))}
                       </div>

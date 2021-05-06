@@ -116,12 +116,14 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
 
   const sorterteTotrinnskontrollSkjermlenkeContext = useMemo(() => (erTilbakekreving
     ? sorterteSkjermlenkeCodesForTilbakekreving
-      .map((s) => totrinnskontrollSkjermlenkeContext.find((el) => el.skjermlenkeType === s.kode))
-      .filter((s) => s)
+      .flatMap((s) => {
+        const context = totrinnskontrollSkjermlenkeContext.find((el) => el.skjermlenkeType === s.kode);
+        return context ? [context] : [];
+      })
     : totrinnskontrollSkjermlenkeContext),
   [erTilbakekreving, totrinnskontrollSkjermlenkeContext]);
 
-  const lagLenke = useCallback((skjermlenkeCode: string): Location => createLocationForSkjermlenke(location, skjermlenkeCode), [location]);
+  const lagLenke = useCallback((skjermlenkeCode: string): Location | undefined => createLocationForSkjermlenke(location, skjermlenkeCode), [location]);
 
   const erStatusFatterVedtak = behandling.status.kode === BehandlingStatus.FATTER_VEDTAK;
   const skjemalenkeTyper = alleKodeverk[kodeverkTyper.SKJERMLENKE_TYPE];

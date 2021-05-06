@@ -50,6 +50,7 @@ describe('<TotrinnskontrollBeslutterForm>', () => {
         aksjonspunktGodkjenning: [],
       }}
       faktaOmBeregningTilfeller={[]}
+      onSubmit={() => undefined}
     />, messages);
 
     const form = wrapper.find('form');

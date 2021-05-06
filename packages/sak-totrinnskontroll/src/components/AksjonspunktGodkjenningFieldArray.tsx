@@ -49,7 +49,7 @@ interface OwnProps {
   erTilbakekreving: boolean,
   skjemalenkeTyper: KodeverkMedNavn[];
   faktaOmBeregningTilfeller: KodeverkMedNavn[];
-  lagLenke: (skjermlenkeCode: string) => Location;
+  lagLenke: (skjermlenkeCode: string) => Location | undefined;
 }
 
 export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
@@ -72,24 +72,32 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
       const { aksjonspunktKode, totrinnskontrollGodkjent } = fields.get(index);
       const context = totrinnskontrollSkjermlenkeContext.find((c) => c.totrinnskontrollAksjonspunkter
         .some((ta) => ta.aksjonspunktKode === aksjonspunktKode));
-      const totrinnskontrollAksjonspunkt = context.totrinnskontrollAksjonspunkter
+      const totrinnskontrollAksjonspunkt = context?.totrinnskontrollAksjonspunkter
         .find((c) => c.aksjonspunktKode === aksjonspunktKode);
+
+      if (!context || !totrinnskontrollAksjonspunkt) {
+        return null;
+      }
 
       const erKlageKA = klageKA && totrinnskontrollGodkjent;
       const erAnke = aksjonspunktKode === aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE && totrinnskontrollGodkjent === true;
       const visKunBegrunnelse = erAnke || erKlageKA ? totrinnskontrollGodkjent : showBegrunnelse;
       const visArsaker = erAnke || erKlageKA || totrinnskontrollGodkjent === false;
 
-      const aksjonspunktText = getAksjonspunkttekst(erForeldrepengerFagsak, klagebehandlingVurdering, behandlingStatus,
-        arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, totrinnskontrollAksjonspunkt);
+      const aksjonspunktText = getAksjonspunkttekst(erForeldrepengerFagsak, behandlingStatus,
+        arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, totrinnskontrollAksjonspunkt, klagebehandlingVurdering);
 
       const skjermlenkeTypeKodeverk = skjemalenkeTyper.find((skjemalenkeType) => skjemalenkeType.kode === context.skjermlenkeType);
 
+      const lenke = lagLenke(context.skjermlenkeType);
+
       return (
         <>
-          <NavLink to={lagLenke(context.skjermlenkeType)} onClick={() => window.scroll(0, 0)} className={styles.lenke}>
-            {skjermlenkeTypeKodeverk.navn}
-          </NavLink>
+          {lenke && skjermlenkeTypeKodeverk && (
+            <NavLink to={lenke} onClick={() => window.scroll(0, 0)} className={styles.lenke}>
+              {skjermlenkeTypeKodeverk.navn}
+            </NavLink>
+          )}
           <div className={styles.approvalItemContainer}>
             {aksjonspunktText.map((formattedMessage, i) => (
               <div key={aksjonspunktKode.concat('_'.concat(i.toString()))} className={styles.aksjonspunktTextContainer}>
