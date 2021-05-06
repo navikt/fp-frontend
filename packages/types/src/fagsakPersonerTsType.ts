@@ -4,7 +4,7 @@ export type FagsakPerson = Readonly<{
   navn: string;
   fødselsnummer: string;
   kjønn: Kodeverk;
-  diskresjonskode?: Kodeverk;
+  diskresjonskode?: string;
   fødselsdato: string;
   dodsdato?: string;
   aktørId?: string;

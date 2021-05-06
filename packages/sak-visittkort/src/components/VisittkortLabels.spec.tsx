@@ -52,10 +52,7 @@ describe('<VisittkortLabels>', () => {
       intl={intlMock}
       fagsakPerson={{
         ...fagsakPerson,
-        diskresjonskode: {
-          kode: diskresjonskodeType.KODE6,
-          kodeverk: '',
-        },
+        diskresjonskode: diskresjonskodeType.KODE6,
       }}
       harVerge={false}
     />, messages);
@@ -71,10 +68,7 @@ describe('<VisittkortLabels>', () => {
       intl={intlMock}
       fagsakPerson={{
         ...fagsakPerson,
-        diskresjonskode: {
-          kode: diskresjonskodeType.KODE7,
-          kodeverk: '',
-        },
+        diskresjonskode: diskresjonskodeType.KODE7,
       }}
       harVerge={false}
     />, messages);
