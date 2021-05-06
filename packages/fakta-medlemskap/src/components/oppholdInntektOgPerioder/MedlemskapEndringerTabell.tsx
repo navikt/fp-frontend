@@ -30,7 +30,7 @@ const MedlemskapEndringerTabell: FunctionComponent<PureOwnProps & MappedOwnProps
 }) => (
   <Table headerTextCodes={headerTextCodes}>
     {perioder.map((periode) => (
-      <TableRow
+      <TableRow<string, PeriodeMedId>
         key={periode.id}
         id={periode.id}
         onMouseDown={velgPeriodeCallback}

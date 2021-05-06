@@ -275,7 +275,7 @@ export class PersonArbeidsforholdPanelImpl extends Component<Props, OwnState> {
     this.setSelectedArbeidsforhold(undefined, undefined, selected);
   }
 
-  setSelectedArbeidsforhold(_p: React.MouseEvent | React.KeyboardEvent, _id: string, selectedArbeidsforhold: CustomArbeidsforhold): void {
+  setSelectedArbeidsforhold(_p: React.MouseEvent | React.KeyboardEvent, _id: void, selectedArbeidsforhold: CustomArbeidsforhold): void {
     this.setState({ selectedArbeidsforhold });
     this.initializeActivityForm(selectedArbeidsforhold);
   }

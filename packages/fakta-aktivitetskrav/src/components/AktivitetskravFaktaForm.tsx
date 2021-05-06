@@ -66,7 +66,7 @@ export const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps & MappedOwn
 
   const velgAktivitetskrav = useCallback((
     _event: React.MouseEvent | React.KeyboardEvent,
-    _id: string,
+    _id: void,
     model: UttakKontrollerAktivitetskrav,
   ) => setAktivitetskrav(model), []);
 

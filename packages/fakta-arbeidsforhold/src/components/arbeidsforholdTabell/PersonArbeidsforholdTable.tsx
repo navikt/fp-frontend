@@ -47,7 +47,7 @@ export const utledNøkkel = (arbeidsforhold: CustomArbeidsforhold, arbeidsgiverO
 interface OwnProps {
   alleArbeidsforhold: CustomArbeidsforhold[];
   selectedId?: string;
-  selectArbeidsforholdCallback: (event: React.MouseEvent | React.KeyboardEvent, id: string, model: CustomArbeidsforhold) => void;
+  selectArbeidsforholdCallback: (event: React.MouseEvent | React.KeyboardEvent, id: void, model: CustomArbeidsforhold) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
@@ -71,7 +71,7 @@ const PersonArbeidsforholdTable: FunctionComponent<OwnProps> = ({
         const stillingsprosent = a.stillingsprosent !== undefined && a.stillingsprosent !== null ? `${a.stillingsprosent.toFixed(2)} %` : '';
         const navn = utledNavn(a, arbeidsgiverOpplysningerPerId);
         return (
-          <TableRow
+          <TableRow<void, CustomArbeidsforhold>
             key={utledNøkkel(a, arbeidsgiverOpplysningerPerId)}
             model={a}
             onMouseDown={selectArbeidsforholdCallback}

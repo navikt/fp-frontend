@@ -1,4 +1,6 @@
-import React, { FunctionComponent } from 'react';
+import React, {
+  FunctionComponent, useState, useCallback, useEffect,
+} from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
@@ -43,11 +45,34 @@ const getDirectionText = (document: Dokument): string => {
   return 'DocumentList.Intern';
 };
 
+const markerSomValgtEllerÅpneDokumenter = (
+  event: React.SyntheticEvent,
+  setValgteDokumentIder: (ider: any) => void,
+  erIMarkeringsmodus: boolean,
+  id: string,
+  valgteDokumentIder: string[],
+  selectDocumentCallback: (e: React.SyntheticEvent, id?: number | string, dokument?: Dokument) => void,
+  documents: Dokument[],
+): void => {
+  setValgteDokumentIder((ider: string[]) => {
+    if (erIMarkeringsmodus) {
+      return ider.includes(id) ? ider.filter((i) => i !== id) : ider.concat([id]);
+    }
+    return ider.includes(id) ? ider : [id];
+  });
+  if (!erIMarkeringsmodus) {
+    const dokumentIderSomSkalÅpnes = valgteDokumentIder.includes(id) ? valgteDokumentIder : [id];
+    dokumentIderSomSkalÅpnes.forEach((dId) => selectDocumentCallback(event, dId, documents.find((d) => d.dokumentId === dId)));
+  }
+};
+
 interface OwnProps {
   documents: Dokument[];
   behandlingId?: number;
   selectDocumentCallback: (e: React.SyntheticEvent, id?: number | string, dokument?: Dokument) => void;
 }
+
+type Timeout = ReturnType<typeof setTimeout>;
 
 /**
  * DocumentList
@@ -62,6 +87,36 @@ const DocumentList: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   behandlingId,
   selectDocumentCallback,
 }) => {
+  const [isShiftPressed, setShiftPressed] = useState(false);
+  const [valgteDokumentIder, setValgteDokumentIder] = useState<string[]>([]);
+  const timeoutMapRef = React.useRef<Record<string, Timeout>>({});
+
+  useEffect(() => () => Object.values(timeoutMapRef).forEach((timeout?: Timeout) => (timeout && clearTimeout(timeout))), [timeoutMapRef]);
+
+  const dokumentKeyHandler = useCallback((event: React.KeyboardEvent, id: string) => {
+    const isShiftKey = event.key === 'Shift';
+    if (isShiftKey) {
+      setShiftPressed(event.type === 'keydown');
+    }
+
+    if (!isShiftKey) {
+      markerSomValgtEllerÅpneDokumenter(event, setValgteDokumentIder, isShiftPressed, id, valgteDokumentIder, selectDocumentCallback, documents);
+    }
+  }, [valgteDokumentIder, isShiftPressed]);
+
+  const dokumentMouseHandler = useCallback((event: React.MouseEvent, id: string) => {
+    if (timeoutMapRef.current[id]) {
+      clearTimeout(timeoutMapRef.current[id]);
+      timeoutMapRef.current = { [id]: undefined };
+      markerSomValgtEllerÅpneDokumenter(event, setValgteDokumentIder, false, id, valgteDokumentIder, selectDocumentCallback, documents);
+    } else {
+      const callback = () => {
+        markerSomValgtEllerÅpneDokumenter(event, setValgteDokumentIder, true, id, valgteDokumentIder, selectDocumentCallback, documents);
+      };
+      timeoutMapRef.current = { [id]: setTimeout(callback, 200) };
+    }
+  }, [valgteDokumentIder]);
+
   if (documents.length === 0) {
     return <Normaltekst className={styles.noDocuments}><FormattedMessage id="DocumentList.NoDocuments" /></Normaltekst>;
   }
@@ -71,12 +126,13 @@ const DocumentList: FunctionComponent<OwnProps & WrappedComponentProps> = ({
         const directionImage = getDirectionImage(document);
         const directionTextCode = getDirectionText(document);
         return (
-          <TableRow
+          <TableRow<string>
             key={document.dokumentId}
             id={document.dokumentId}
-            model={document}
-            onMouseDown={selectDocumentCallback}
-            onKeyDown={selectDocumentCallback}
+            onMouseDown={dokumentMouseHandler}
+            onKeyDown={dokumentKeyHandler}
+            isSelected={valgteDokumentIder.some((dokId) => dokId === document.dokumentId)}
+            useMultiselect
           >
             <TableColumn>
               <Image
