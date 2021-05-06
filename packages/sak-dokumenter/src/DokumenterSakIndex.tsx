@@ -11,7 +11,7 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   documents: Dokument[];
-  selectDocumentCallback: (e: React.SyntheticEvent, id: number, dokument: Dokument) => void;
+  selectDocumentCallback: (e: React.SyntheticEvent, id?: number | string, dokument?: Dokument) => void;
   behandlingId?: number;
 }
 

@@ -17,7 +17,7 @@ import OpptjeningTotrinnText from './OpptjeningTotrinnText';
 
 const formatDate = (date?: string) => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
-const buildVarigEndringBeregningText = (beregningDto: TotrinnskontrollAksjonspunkt['beregningDto']) => (beregningDto.fastsattVarigEndringNaering ? (
+const buildVarigEndringBeregningText = (beregningDto?: TotrinnskontrollAksjonspunkt['beregningDto']) => (beregningDto?.fastsattVarigEndringNaering ? (
   <FormattedMessage
     id="ToTrinnsForm.Beregning.VarigEndring"
   />
@@ -88,8 +88,8 @@ const buildArbeidsforholdText = (
   });
 };
 
-const buildUttakText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactNode[] => aksjonspunkt
-  .uttakPerioder.map((uttakperiode): ReactNode => {
+const buildUttakText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactNode[] => (aksjonspunkt.uttakPerioder
+  ? aksjonspunkt.uttakPerioder.map((uttakperiode): ReactNode => {
     const fom = formatDate(uttakperiode.fom);
     const tom = formatDate(uttakperiode.tom);
     let id;
@@ -118,14 +118,15 @@ const buildUttakText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactNode[]
         values={{ a: fom, b: tom }}
       />
     );
-  });
+  }) : []);
 
-const buildOpptjeningText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactNode[] => aksjonspunkt
-  .opptjeningAktiviteter.map((aktivitet) => (
+const buildOpptjeningText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactNode[] => (aksjonspunkt.opptjeningAktiviteter
+  ? aksjonspunkt.opptjeningAktiviteter.map((aktivitet) => (
     <OpptjeningTotrinnText
       aktivitet={aktivitet}
     />
-  ));
+  ))
+  : []);
 
 const getTextFromAksjonspunktkode = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactNode => {
   const aksjonspunktTextId = totrinnskontrollaksjonspunktTextCodes[aksjonspunkt.aksjonspunktKode];
@@ -152,8 +153,11 @@ const getTextForForeldreansvarsvilkåretAndreLedd = (isForeldrepenger: boolean) 
   return [<FormattedMessage id={aksjonspunktTextId} />];
 };
 
-const getFaktaOmBeregningText = (beregningDto: TotrinnskontrollAksjonspunkt['beregningDto'], faktaOmBeregningTilfeller: KodeverkMedNavn[]) => {
-  if (!beregningDto.faktaOmBeregningTilfeller) {
+const getFaktaOmBeregningText = (
+  faktaOmBeregningTilfeller: KodeverkMedNavn[],
+  beregningDto?: TotrinnskontrollAksjonspunkt['beregningDto'],
+): null | Array<string | undefined> => {
+  if (!beregningDto || !beregningDto.faktaOmBeregningTilfeller) {
     return null;
   }
 
@@ -166,11 +170,11 @@ const omgjoerTekstMap = {
   DELVIS_MEDHOLD_I_KLAGE: 'ToTrinnsForm.Klage.DelvisOmgjortTilGunst',
   GUNST_MEDHOLD_I_KLAGE: 'ToTrinnsForm.Klage.OmgjortTilGunst',
   UGUNST_MEDHOLD_I_KLAGE: 'ToTrinnsForm.Klage.OmgjortTilUgunst',
-};
+} as Record<string, string>;
 
 const getTextForKlageHelper = (klageVurderingResultat: KlageVurdering['klageVurderingResultatNK'] | KlageVurdering['klageVurderingResultatNFP']) => {
   let aksjonspunktTextId = '';
-  switch (klageVurderingResultat.klageVurdering.kode) {
+  switch (klageVurderingResultat?.klageVurdering?.kode) {
     case klageVurderingCodes.STADFESTE_YTELSESVEDTAK:
       aksjonspunktTextId = 'ToTrinnsForm.Klage.StadfesteYtelsesVedtak';
       break;
@@ -197,7 +201,7 @@ const getTextForKlageHelper = (klageVurderingResultat: KlageVurdering['klageVurd
   return <FormattedMessage id={aksjonspunktTextId} />;
 };
 
-const getTextForKlage = (klagebehandlingVurdering: KlageVurdering, behandlingStaus: Kodeverk) => {
+const getTextForKlage = (behandlingStaus: Kodeverk, klagebehandlingVurdering?: KlageVurdering) => {
   if (behandlingStaus.kode === behandlingStatusCode.FATTER_VEDTAK) {
     if (klagebehandlingVurdering?.klageVurderingResultatNK) {
       return getTextForKlageHelper(klagebehandlingVurdering.klageVurderingResultatNK);
@@ -219,12 +223,12 @@ const erKlageAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt) => aksj
 
 const getAksjonspunkttekst = (
   isForeldrepenger: boolean,
-  klagebehandlingVurdering: KlageVurdering,
   behandlingStatus: Kodeverk,
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
   faktaOmBeregningTilfeller: KodeverkMedNavn[],
   erTilbakekreving: boolean,
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
+  klagebehandlingVurdering?: KlageVurdering,
 ): ReactNode[] => {
   if (aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING) {
     return buildOpptjeningText(aksjonspunkt);
@@ -233,7 +237,7 @@ const getAksjonspunkttekst = (
     return [buildVarigEndringBeregningText(aksjonspunkt.beregningDto)];
   }
   if (aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN) {
-    return getFaktaOmBeregningText(aksjonspunkt.beregningDto, faktaOmBeregningTilfeller);
+    return getFaktaOmBeregningText(faktaOmBeregningTilfeller, aksjonspunkt.beregningDto);
   }
   if (isUttakAksjonspunkt(aksjonspunkt.aksjonspunktKode) && aksjonspunkt.uttakPerioder && aksjonspunkt.uttakPerioder.length > 0) {
     return buildUttakText(aksjonspunkt);
@@ -246,7 +250,7 @@ const getAksjonspunkttekst = (
     return getTextForForeldreansvarsvilkåretAndreLedd(isForeldrepenger);
   }
   if (erKlageAksjonspunkt(aksjonspunkt)) {
-    return [getTextForKlage(klagebehandlingVurdering, behandlingStatus)];
+    return [getTextForKlage(behandlingStatus, klagebehandlingVurdering)];
   }
   if (aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD) {
     return buildArbeidsforholdText(aksjonspunkt, arbeidsforholdHandlingTyper);

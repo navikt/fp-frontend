@@ -17,7 +17,7 @@ const capitalizeFirstLetters = (key: string): string => key.charAt(0).toUpperCas
 interface OwnProps {
   showModal: boolean;
   closeModalFn: () => void;
-  errorDetails: Feilmelding['additionalInfo'];
+  errorDetails?: Feilmelding['additionalInfo'];
 }
 
 /**
@@ -52,7 +52,7 @@ const ErrorMessageDetailsModal: FunctionComponent<OwnProps & WrappedComponentPro
     <Row>
       <Column xs="1" />
       <Column xs="11">
-        {Object.keys(errorDetails).map((edKey) => (
+        {errorDetails && Object.keys(errorDetails).map((edKey) => (
           <React.Fragment key={edKey}>
             <Undertekst>{`${capitalizeFirstLetters(edKey)}:`}</Undertekst>
             <div className={styles.detail}>

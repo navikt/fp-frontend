@@ -54,7 +54,8 @@ interface PureOwnProps {
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
   skjemalenkeTyper: KodeverkMedNavn[];
   faktaOmBeregningTilfeller: KodeverkMedNavn[];
-  lagLenke: (skjermlenkeCode: string) => Location;
+  lagLenke: (skjermlenkeCode: string) => Location | undefined;
+  onSubmit: (data: FormValues) => void;
 }
 
 interface MappedOwnProps {
@@ -113,7 +114,7 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & Map
         erTilbakekreving={erTilbakekreving}
         arbeidsforholdHandlingTyper={arbeidsforholdHandlingTyper}
         readOnly={readOnly}
-        klageKA={!!behandlingKlageVurdering?.klageVurderingResultatNK}
+        klageKA={behandlingKlageVurdering ? !!behandlingKlageVurdering.klageVurderingResultatNK : undefined}
         totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
         skjemalenkeTyper={skjemalenkeTyper}
         faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
@@ -196,7 +197,7 @@ const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.
         aksjonspunktKode: ap.aksjonspunktKode,
         totrinnskontrollGodkjent: ap.totrinnskontrollGodkjent,
         besluttersBegrunnelse: decodeHtmlEntity(ap.besluttersBegrunnelse),
-        ...finnArsaker(ap.vurderPaNyttArsaker),
+        ...finnArsaker(ap.vurderPaNyttArsaker ? ap.vurderPaNyttArsaker : []),
       })),
   }));
 
@@ -207,7 +208,7 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
   aksjonspunktGodkjenning: formValueSelector(formName)(state, 'aksjonspunktGodkjenning'),
 });
 
-export default connect(mapStateToProps)(reduxForm<FormValues>({
+export default connect(mapStateToProps)(reduxForm({
   form: formName,
   destroyOnUnmount: false,
   validate,

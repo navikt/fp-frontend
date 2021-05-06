@@ -21,7 +21,7 @@ const headerTextCodes = [
   'DocumentList.DateTime',
 ];
 
-const isTextMoreThan25char = (text: string): boolean => text && text.length > 25;
+const isTextMoreThan25char = (text: string): boolean => !!text && text.length > 25;
 const trimText = (text: string): string => `${text.substring(0, 24)}...`;
 
 const getDirectionImage = (document: Dokument): string => {
@@ -46,7 +46,7 @@ const getDirectionText = (document: Dokument): string => {
 interface OwnProps {
   documents: Dokument[];
   behandlingId?: number;
-  selectDocumentCallback: (e: React.SyntheticEvent, id: number, dokument: Dokument) => void;
+  selectDocumentCallback: (e: React.SyntheticEvent, id?: number | string, dokument?: Dokument) => void;
 }
 
 /**
@@ -88,24 +88,21 @@ const DocumentList: FunctionComponent<OwnProps & WrappedComponentProps> = ({
             </TableColumn>
             <TableColumn>
               {document.tittel}
-              {document.behandlinger && document.behandlinger.includes(behandlingId)
-              && (
-              <Image
-                className={styles.image}
-                src={erIBrukImageUrl}
-                tooltip={<FormattedMessage id="DocumentList.IBruk" />}
-              />
+              {document.behandlinger && behandlingId && document.behandlinger.includes(behandlingId) && (
+                <Image
+                  className={styles.image}
+                  src={erIBrukImageUrl}
+                  tooltip={<FormattedMessage id="DocumentList.IBruk" />}
+                />
               )}
             </TableColumn>
             <TableColumn>
-              {isTextMoreThan25char(document.gjelderFor)
-              && (
+              {document.gjelderFor && isTextMoreThan25char(document.gjelderFor) && (
                 <Tooltip content={<Normaltekst>{document.gjelderFor}</Normaltekst>} alignLeft>
                   {trimText(document.gjelderFor)}
                 </Tooltip>
               )}
-              {!isTextMoreThan25char(document.gjelderFor)
-            && document.gjelderFor}
+              {document.gjelderFor && !isTextMoreThan25char(document.gjelderFor) && document.gjelderFor}
             </TableColumn>
             <TableColumn>
               {document.tidspunkt
