@@ -65,9 +65,10 @@ const lagFeilmeldinger = (errorMessages: ErrorMessage[], queryStrings: QueryStri
       additionalInfo: undefined,
     };
     if (message.params && message.params.errorDetails) {
+      const decodedDetails = decodeHtmlEntity(message.params.errorDetails);
       msg = {
         ...msg,
-        additionalInfo: JSON.parse(decodeHtmlEntity(message.params.errorDetails)),
+        additionalInfo: decodedDetails ? JSON.parse(decodedDetails) : undefined,
       };
     }
     resolvedErrorMessages.push(msg);
@@ -75,7 +76,7 @@ const lagFeilmeldinger = (errorMessages: ErrorMessage[], queryStrings: QueryStri
   return resolvedErrorMessages;
 };
 
-const EMPTY_ARRAY = [];
+const EMPTY_ARRAY = [] as Feilmelding[];
 
 interface OwnProps {
   navAnsattName?: string;

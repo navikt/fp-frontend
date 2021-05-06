@@ -73,8 +73,8 @@ const totrinnskontrollaksjonspunktTextCodes = {
 
   [aksjonspunktCodes.VURDER_REFUSJON_BERGRUNN]: 'ToTrinnsForm.Beregningsgrunnlag.Refusjonsstart',
 
-};
+} as Record<string, string>;
 
-export const totrinnsTilbakekrevingkontrollaksjonspunktTextCodes = {};
+export const totrinnsTilbakekrevingkontrollaksjonspunktTextCodes = {} as Record<string, string>;
 
 export default totrinnskontrollaksjonspunktTextCodes;

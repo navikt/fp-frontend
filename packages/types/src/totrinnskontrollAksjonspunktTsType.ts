@@ -18,8 +18,8 @@ export type TotrinnskontrollArbeidsforhold = Readonly<{
 export type OpptjeningAktiviteter = Readonly<{
   aktivitetType: string;
   erEndring: boolean;
-  arbeidsgiverNavn: string;
-  orgnr: string;
+  arbeidsgiverNavn?: string;
+  orgnr?: string;
   godkjent: boolean;
   privatpersonFødselsdato?: string;
 }>
