@@ -20,7 +20,7 @@ const HEADER_TEXT_CODES = [
 interface PureOwnProps {
   aktivitetskrav: UttakKontrollerAktivitetskrav[];
   valgtAktivitetskravFom?: string;
-  velgAktivitetskrav: (event: React.MouseEvent | React.KeyboardEvent, id?: number | string, model?: UttakKontrollerAktivitetskrav) => void;
+  velgAktivitetskrav: (event: React.MouseEvent | React.KeyboardEvent, id?: void, model?: UttakKontrollerAktivitetskrav) => void;
   aktivitetskravAvklaringer: KodeverkMedNavn[];
   morsAktiviteter: KodeverkMedNavn[];
 }
@@ -35,7 +35,7 @@ const AktivitetskravFaktaTabell: FunctionComponent<PureOwnProps & WrappedCompone
 }) => (
   <Table headerTextCodes={HEADER_TEXT_CODES}>
     {aktivitetskrav.map((krav) => (
-      <TableRow
+      <TableRow<void, UttakKontrollerAktivitetskrav>
         key={krav.fom + krav.tom}
         model={krav}
         isSelected={valgtAktivitetskravFom === krav.fom}

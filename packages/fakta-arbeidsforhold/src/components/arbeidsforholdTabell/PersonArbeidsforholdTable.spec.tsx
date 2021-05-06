@@ -172,6 +172,7 @@ describe('<PersonArbeidsforholdTable>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
     const tableRow = wrapper.find(TableRow).at(1);
+    // @ts-ignore Fiks
     expect(tableRow.props().model.stillingsprosent).toEqual(0);
   });
 

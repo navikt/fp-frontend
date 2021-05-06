@@ -34,10 +34,9 @@ const FagsakList: FunctionComponent<OwnProps> = ({
   return (
     <Table headerTextCodes={headerTextCodes} classNameTable={styles.table}>
       {fagsaker.map((fagsak) => (
-        <TableRow
+        <TableRow<string>
           key={fagsak.saksnummer}
           id={fagsak.saksnummer}
-          model={document}
           onMouseDown={selectFagsakCallback}
           onKeyDown={selectFagsakCallback}
         >
