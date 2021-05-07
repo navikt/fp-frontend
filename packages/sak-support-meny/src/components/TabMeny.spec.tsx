@@ -4,17 +4,20 @@ import sinon from 'sinon';
 
 import { FlexColumn } from '@fpsak-frontend/shared-components';
 
-import TabMeny from './TabMeny';
+import TabMeny, { SvgProps } from './TabMeny';
+
+// @ts-ignore
+const getDiv = (isActive: boolean, isDisabled: boolean, props: SvgProps) => <div isActive={isActive} isDisabled={isDisabled} {...props} />;
 
 describe('<TabMeny>', () => {
   it('skal vise tabs der Historikk er valgt og Send melding ikke er valgbar', () => {
     const tabs = [{
-      getSvg: (isActive, isDisabled, props) => <div isActive={isActive} isDisabled={isDisabled} {...props} />,
+      getSvg: (isActive: boolean, isDisabled: boolean, props: SvgProps) => getDiv(isActive, isDisabled, props),
       tooltip: 'Historikk',
       isActive: true,
       isDisabled: false,
     }, {
-      getSvg: (isActive, isDisabled, props) => <div isActive={isActive} isDisabled={isDisabled} {...props} />,
+      getSvg: (isActive: boolean, isDisabled: boolean, props: SvgProps) => getDiv(isActive, isDisabled, props),
       tooltip: 'Send melding',
       isActive: false,
       isDisabled: true,
@@ -51,12 +54,12 @@ describe('<TabMeny>', () => {
 
   it('skal velge Send melding ved trykk på knapp', () => {
     const tabs = [{
-      getSvg: (isActive, isDisabled, props) => <div isActive={isActive} isDisabled={isDisabled} {...props} />,
+      getSvg: (isActive: boolean, isDisabled: boolean, props: SvgProps) => getDiv(isActive, isDisabled, props),
       tooltip: 'Historikk',
       isActive: false,
       isDisabled: false,
     }, {
-      getSvg: (isActive, isDisabled, props) => <div isActive={isActive} isDisabled={isDisabled} {...props} />,
+      getSvg: (isActive: boolean, isDisabled: boolean, props: SvgProps) => getDiv(isActive, isDisabled, props),
       tooltip: 'Send melding',
       isActive: false,
       isDisabled: false,

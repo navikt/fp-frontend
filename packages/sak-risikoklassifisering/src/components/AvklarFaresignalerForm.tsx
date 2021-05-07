@@ -39,7 +39,7 @@ type Values = {
 }
 
 interface PureOwnProps {
-  aksjonspunkt?: Aksjonspunkt;
+  aksjonspunkt: Aksjonspunkt;
   readOnly: boolean;
   risikoklassifisering?: Risikoklassifisering;
   submitCallback: (data: VurderFaresignalerAp) => Promise<void>;
@@ -47,7 +47,7 @@ interface PureOwnProps {
 }
 
 interface MappedOwnProps {
-  initialValues: Values;
+  initialValues: Values | undefined;
   onSubmit: (values: Values) => void;
   harValgtReelle: boolean;
 }
@@ -150,7 +150,7 @@ export const AvklarFaresignalerForm: FunctionComponent<PureOwnProps & MappedOwnP
 
 export const buildInitialValues = createSelector([
   (ownProps: PureOwnProps) => ownProps.risikoklassifisering,
-  (ownProps: PureOwnProps) => ownProps.aksjonspunkt], (risikoklassifisering, aksjonspunkt): Values => {
+  (ownProps: PureOwnProps) => ownProps.aksjonspunkt], (risikoklassifisering, aksjonspunkt): Values | undefined => {
   if (aksjonspunkt && aksjonspunkt.begrunnelse && risikoklassifisering && risikoklassifisering.faresignalVurdering) {
     const { kode } = risikoklassifisering.faresignalVurdering;
     return {
@@ -171,8 +171,8 @@ const transformValues = (values: Values): VurderFaresignalerAp => ({
   begrunnelse: values[begrunnelseFieldName],
 });
 
-const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {
-  const onSubmit = (values) => ownProps.submitCallback(transformValues(values));
+const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
+  const onSubmit = (values: Values) => ownProps.submitCallback(transformValues(values));
   const initialValues = buildInitialValues(ownProps);
   return (state: any): MappedOwnProps => ({
     initialValues,

@@ -7,10 +7,10 @@ import { scrollUp } from './historikkUtils';
 
 interface SkjermlenkeProps {
   skjermlenke?: Kodeverk;
-  behandlingLocation?: Location;
-  getKodeverknavn?: (kodeverkObjekt: Kodeverk, undertype?: string) => string;
+  behandlingLocation: Location;
+  getKodeverknavn: (kodeverkObjekt: Kodeverk, undertype?: string) => string;
   scrollUpOnClick?: boolean;
-  createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeKode: string) => Location;
+  createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeKode: string) => Location | undefined;
 }
 
 const Skjermlenke: React.FunctionComponent<SkjermlenkeProps> = ({
@@ -33,7 +33,7 @@ const Skjermlenke: React.FunctionComponent<SkjermlenkeProps> = ({
     <Element>
       <NavLink
         to={location}
-        onClick={scrollUpOnClick && scrollUp}
+        onClick={scrollUpOnClick ? scrollUp : undefined}
       >
         {getKodeverknavn(skjermlenke)}
       </NavLink>

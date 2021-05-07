@@ -56,7 +56,7 @@ const RisikoklassifiseringSakIndex: FunctionComponent<OwnProps> = ({
       { harIkkeHoyRisikoklassifisering && (
         <IngenRisikoPanel />
       )}
-      { harHoyRisikoklassifisering && (
+      { risikoklassifisering && harHoyRisikoklassifisering && (
         <HoyRisikoTittel
           risikoklassifisering={risikoklassifisering}
           aksjonspunkt={aksjonspunkt}

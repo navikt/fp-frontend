@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
-import { Risikoklassifisering } from '@fpsak-frontend/types';
+import { Aksjonspunkt, Risikoklassifisering } from '@fpsak-frontend/types';
 
 import faresignalVurdering from '../kodeverk/faresignalVurdering';
 
@@ -11,7 +11,7 @@ import {
   AvklarFaresignalerForm, begrunnelseFieldName, buildInitialValues, vurderingerHovedkategori, ikkeReelleVurderingerUnderkategori,
 } from './AvklarFaresignalerForm';
 
-const mockAksjonspunkt = (status, begrunnelse) => ({
+const mockAksjonspunkt = (status: string, begrunnelse?: string): Aksjonspunkt => ({
   definisjon: {
     kode: '5095',
     kodeverk: '',
@@ -25,7 +25,7 @@ const mockAksjonspunkt = (status, begrunnelse) => ({
   erAktivt: true,
 });
 
-const mockRisikoklassifisering = (kode) => ({
+const mockRisikoklassifisering = (kode: string): Risikoklassifisering => ({
   kontrollresultat: {
     kode: 'HOY',
     kodeverk: 'Kontrollresultat',
@@ -57,7 +57,7 @@ describe('<AvklarFaresignalerForm>', () => {
     const wrapper = shallow(<AvklarFaresignalerForm
       readOnly
       aksjonspunkt={mockAksjonspunkt('UTFO', undefined)}
-      submitCallback={() => undefined}
+      submitCallback={() => Promise.resolve(undefined)}
       risikoklassifisering={{} as Risikoklassifisering}
       faresignalVurderinger={faresignalVurderinger}
       onSubmit={() => undefined}
@@ -73,7 +73,7 @@ describe('<AvklarFaresignalerForm>', () => {
     const wrapper = shallow(<AvklarFaresignalerForm
       readOnly
       aksjonspunkt={mockAksjonspunkt('UTFO', undefined)}
-      submitCallback={() => undefined}
+      submitCallback={() => Promise.resolve(undefined)}
       risikoklassifisering={{} as Risikoklassifisering}
       faresignalVurderinger={faresignalVurderinger}
       onSubmit={() => undefined}
@@ -93,7 +93,7 @@ describe('<AvklarFaresignalerForm>', () => {
     const wrapper = shallow(<AvklarFaresignalerForm
       readOnly
       aksjonspunkt={mockAksjonspunkt('UTFO', undefined)}
-      submitCallback={() => undefined}
+      submitCallback={() => Promise.resolve(undefined)}
       risikoklassifisering={{} as Risikoklassifisering}
       faresignalVurderinger={faresignalVurderinger}
       onSubmit={() => undefined}

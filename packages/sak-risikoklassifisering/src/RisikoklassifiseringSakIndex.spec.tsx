@@ -2,13 +2,15 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
+import { Risikoklassifisering } from '@fpsak-frontend/types';
+
 import kontrollresultatKode from './kodeverk/kontrollresultatKode';
 import RisikoklassifiseringSakIndex from './RisikoklassifiseringSakIndex';
 import ManglendeKlassifiseringPanel from './components/ManglendeKlassifiseringPanel';
 import IngenRisikoPanel from './components/IngenRisikoPanel';
 import HoyRisikoTittel from './components/HoyRisikoTittel';
 
-const lagRisikoklassifisering = (kode) => ({
+const lagRisikoklassifisering = (kode: string): Risikoklassifisering => ({
   kontrollresultat: {
     kode,
     kodeverk: 'Kontrollresultat',

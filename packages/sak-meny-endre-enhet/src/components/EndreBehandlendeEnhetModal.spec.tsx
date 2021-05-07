@@ -57,7 +57,7 @@ describe('<ChangeBehandlendeEnhetModal>', () => {
     const selectField = wrapper.find('SelectField');
     expect(selectField).toHaveLength(1);
     expect(selectField.prop('placeholder')).toEqual('002 Oslo');
-    const values = selectField.prop('selectValues');
+    const values = selectField.prop('selectValues') as { props: { value: string }}[];
     expect(values[0].props.value).toEqual('0');
   });
 

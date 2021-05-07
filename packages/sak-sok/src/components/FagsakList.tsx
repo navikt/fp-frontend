@@ -15,7 +15,7 @@ const headerTextCodes = [
 
 interface OwnProps {
   fagsaker: Fagsak[];
-  selectFagsakCallback: (e: React.SyntheticEvent, saksnummer: string) => void;
+  selectFagsakCallback: (e: React.SyntheticEvent, saksnummer?: string) => void;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
 }
 

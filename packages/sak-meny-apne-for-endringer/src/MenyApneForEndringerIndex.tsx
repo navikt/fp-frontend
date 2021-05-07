@@ -27,11 +27,13 @@ const MenyApneForEndringerIndex: FunctionComponent<OwnProps> = ({
   lukkModal,
 }) => {
   const submit = useCallback(() => {
-    const params = {
-      behandlingId,
-      behandlingVersjon,
-    };
-    apneBehandlingForEndringer(params);
+    if (behandlingId && behandlingVersjon) {
+      const params = {
+        behandlingId,
+        behandlingVersjon,
+      };
+      apneBehandlingForEndringer(params);
+    }
 
     lukkModal();
   }, [behandlingId, behandlingVersjon]);

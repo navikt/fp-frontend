@@ -41,7 +41,7 @@ const snakkeboblePanelCls = (aktoer: Kodeverk): string => cx('snakkeboble__panel
   'snakkeboble__snakkebole-panel--ekstern': aktoer.kode === HistorikkAktor.ARBEIDSGIVER,
 });
 
-const utledIkon = (aktoer: Kodeverk, kjoenn: Kodeverk) => {
+const utledIkon = (aktoer: Kodeverk, kjoenn?: Kodeverk) => {
   if (aktoer.kode === HistorikkAktor.SAKSBEHANDLER) {
     return navAnsattHistorikkImg;
   }

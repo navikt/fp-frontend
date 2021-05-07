@@ -15,7 +15,7 @@ interface OwnProps {
   fagsaker: Fagsak[];
   searchFagsakCallback: (params?: { searchString: string }) => Promise<Fagsak[]>;
   searchResultReceived: boolean;
-  selectFagsakCallback: (e: React.SyntheticEvent, saksnummer: string) => void;
+  selectFagsakCallback: (e: React.SyntheticEvent, saksnummer?: string) => void;
   searchStarted: boolean;
   searchResultAccessDenied?: {
     feilmelding: string;

@@ -126,7 +126,7 @@ export const EndreBehandlendeEnhetModal: FunctionComponent<PureOwnProps & Mapped
   );
 };
 
-const mapStateToProps = (state): MappedOwnProps => ({
+const mapStateToProps = (state: any): MappedOwnProps => ({
   nyEnhet: formValueSelector('ChangeBehandlendeEnhetModal')(state, 'nyEnhet'),
   begrunnelse: formValueSelector('ChangeBehandlendeEnhetModal')(state, 'begrunnelse'),
 });

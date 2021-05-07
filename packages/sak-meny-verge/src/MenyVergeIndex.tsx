@@ -13,8 +13,8 @@ export const getMenytekst = (erOpprettVerge: boolean): string => intl.formatMess
 });
 
 interface OwnProps {
-  fjernVerge?: () => void;
-  opprettVerge?: () => void;
+  fjernVerge?: () => Promise<void>;
+  opprettVerge?: () => Promise<void>;
   lukkModal: () => void;
 }
 
@@ -26,7 +26,10 @@ const MenyVergeIndex: FunctionComponent<OwnProps> = ({
   const submit = useCallback(() => {
     lukkModal();
     const operasjon = opprettVerge || fjernVerge;
-    return operasjon();
+    if (operasjon) {
+      return operasjon();
+    }
+    throw Error('Skal alltid ha enten opprettVerge eller fjernVerge');
   }, [opprettVerge, fjernVerge]);
 
   return (

@@ -13,12 +13,12 @@ import Skjermlenke from './felles/Skjermlenke';
 
 const lagBegrunnelseKomponent = (
   felt: HistorikkinnslagEndretFelt,
-  begrunnelseFritekst: string,
   index: number,
-  endredeFelter,
-  sarligGrunnerBegrunnelse: string,
-  begrunnelse: string,
+  endredeFelter: HistorikkinnslagEndretFelt[],
   getKodeverknavn: (kodeverk: Kodeverk) => string,
+  begrunnelse?: string,
+  sarligGrunnerBegrunnelse?: string,
+  begrunnelseFritekst?: string,
 ) => {
   const { endretFeltNavn, fraVerdi, tilVerdi } = felt;
 
@@ -39,7 +39,7 @@ const lagBegrunnelseKomponent = (
         <FormattedMessage
           id={felt.fraVerdi ? 'Historikk.Template.Tilbakekreving.ChangedFromTo' : 'Historikk.Template.Tilbakekreving.FieldSetTo'}
           values={{
-            navn: getKodeverknavn(endretFeltNavn), fraVerdi: formatertFraVerdi, tilVerdi: formatertTilVerdi, b: (chunks) => <b>{chunks}</b>,
+            navn: getKodeverknavn(endretFeltNavn), fraVerdi: formatertFraVerdi, tilVerdi: formatertTilVerdi, b: (chunks: any) => <b>{chunks}</b>,
           }}
         />
       </Normaltekst>
@@ -71,10 +71,10 @@ const HistorikkMalTypeTilbakekreving: FunctionComponent<HistorikkMal> = ({
       />
       {historikkinnslagDeler.map((historikkinnslagDel) => {
         const { opplysninger, endredeFelter, begrunnelseFritekst } = historikkinnslagDel;
-        const periodeFom = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.PERIODE_FOM.kode).tilVerdi;
-        const periodeTom = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.PERIODE_TOM.kode).tilVerdi;
+        const periodeFom = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.PERIODE_FOM.kode)?.tilVerdi;
+        const periodeTom = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.PERIODE_TOM.kode)?.tilVerdi;
         const begrunnelse = decodeHtmlEntity(opplysninger
-          .find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.TILBAKEKREVING_OPPFYLT_BEGRUNNELSE.kode).tilVerdi);
+          .find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.TILBAKEKREVING_OPPFYLT_BEGRUNNELSE.kode)?.tilVerdi);
         const sarligGrunnerBegrunnelseFelt = opplysninger
           .find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.SÆRLIG_GRUNNER_BEGRUNNELSE.kode);
         const sarligGrunnerBegrunnelse = sarligGrunnerBegrunnelseFelt !== undefined
@@ -85,7 +85,7 @@ const HistorikkMalTypeTilbakekreving: FunctionComponent<HistorikkMal> = ({
             <Normaltekst>
               <FormattedMessage
                 id="Historikk.Template.Tilbakekreving.VurderingAvPerioden"
-                values={{ periodeFom, periodeTom, b: (chunks) => <b>{chunks}</b> }}
+                values={{ periodeFom, periodeTom, b: (chunks: any) => <b>{chunks}</b> }}
               />
             </Normaltekst>
             <VerticalSpacer eightPx />
@@ -99,7 +99,7 @@ const HistorikkMalTypeTilbakekreving: FunctionComponent<HistorikkMal> = ({
                 return null;
               }
 
-              return lagBegrunnelseKomponent(felt, begrunnelseFritekst, index, endredeFelter, sarligGrunnerBegrunnelse, begrunnelse, getKodeverknavn);
+              return lagBegrunnelseKomponent(felt, index, endredeFelter, getKodeverknavn, begrunnelse, sarligGrunnerBegrunnelse, begrunnelseFritekst);
             })}
             <Normaltekst>
               {(!endredeFelter && begrunnelseFritekst) && begrunnelseFritekst}

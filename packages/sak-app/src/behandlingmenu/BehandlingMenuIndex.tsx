@@ -142,12 +142,16 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
       data={[
         new MenyData(behandlingRettigheter?.behandlingKanGjenopptas, getTaAvVentMenytekst())
           .medModal((lukkModal) => (
-            <MenyTaAvVentIndex
-              behandlingId={behandlingId}
-              behandlingVersjon={behandlingVersjon}
-              taBehandlingAvVent={resumeBehandling}
-              lukkModal={lukkModal}
-            />
+            <>
+              {behandling && (
+                <MenyTaAvVentIndex
+                  behandlingId={behandling.id}
+                  behandlingVersjon={behandling.versjon}
+                  taBehandlingAvVent={resumeBehandling}
+                  lukkModal={lukkModal}
+                />
+              )}
+            </>
           )),
         new MenyData(behandlingRettigheter?.behandlingKanSettesPaVent, getSettPaVentMenytekst())
           .medModal((lukkModal) => (

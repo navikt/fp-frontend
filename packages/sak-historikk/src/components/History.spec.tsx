@@ -111,6 +111,7 @@ describe('<History>', () => {
       valgtBehandlingId={999951}
     />);
 
+    // @ts-ignore
     wrapper.find(Checkbox).props().onChange({} as React.ChangeEvent<any>);
 
     expect(wrapper.find(Snakkeboble)).toHaveLength(1);

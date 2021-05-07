@@ -172,7 +172,7 @@ describe('<Messages>', () => {
 
     const form = wrapper.find('form');
     const selectField = form.find('SelectField').last();
-    const options = selectField.prop('selectValues');
+    const options = selectField.prop('selectValues') as { props: { value: string }}[];
     expect(options).toHaveLength(2);
     expect(options[0].props.value).toEqual(ugunstAarsakTyper.ANNET);
     expect(options[1].props.value).toEqual('TEST');
@@ -195,7 +195,7 @@ describe('<Messages>', () => {
 
     const form = wrapper.find('form');
     const selectField = form.find('SelectField').last();
-    const options = selectField.prop('selectValues');
+    const options = selectField.prop('selectValues') as { props: { value: string }}[];
     expect(options).toHaveLength(2);
     expect(options[0].props.value).toEqual(ugunstAarsakTyper.BARN_IKKE_REGISTRERT_FOLKEREGISTER);
     expect(options[1].props.value).toEqual(ugunstAarsakTyper.ANNET);

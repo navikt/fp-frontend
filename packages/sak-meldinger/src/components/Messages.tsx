@@ -21,9 +21,9 @@ const maxLength4000 = maxLength(4000);
 const minLength3 = minLength(3);
 
 export type FormValues = {
-  mottaker: string;
-  brevmalkode: string;
-  fritekst: string;
+  mottaker?: string;
+  brevmalkode?: string;
+  fritekst?: string;
   arsakskode?: string;
 }
 
@@ -58,7 +58,7 @@ const getfiltrerteRevurderingVarslingArsaker = (revurderingVarslingArsaker: Kode
 
 interface PureOwnProps {
   submitCallback: (values: FormValues) => void;
-  previewCallback: (mottaker: string, brevmalkode: string, fritekst: string, arsakskode: string) => void;
+  previewCallback: (mottaker?: string, brevmalkode?: string, fritekst?: string, arsakskode?: string) => void;
   recipients: string[];
   templates: Template[];
   sprakKode?: Kodeverk;
@@ -101,7 +101,7 @@ export const MessagesImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Wra
     return null;
   }
 
-  const previewMessage = (e) => {
+  const previewMessage = (e: React.MouseEvent | React.KeyboardEvent) => {
     if (formProps.valid || formProps.pristine) {
       previewCallback(mottaker, brevmalkode, fritekst, arsakskode);
     } else {
@@ -181,8 +181,8 @@ export const MessagesImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Wra
 
 const buildInitalValues = (recipients: string[], templates: Template[], isKontrollerRevurderingApOpen?: boolean): FormValues => {
   const initialValues = {
-    mottaker: recipients[0] ? recipients[0] : null,
-    brevmalkode: templates && templates[0] ? templates[0].kode : null,
+    mottaker: recipients[0] ? recipients[0] : undefined,
+    brevmalkode: templates && templates[0] ? templates[0].kode : undefined,
     fritekst: '',
   };
 
@@ -205,9 +205,9 @@ const transformValues = (values: FormValues) => {
 
 const formName = 'Messages';
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
+const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
   const onSubmit = (values: FormValues) => initialOwnProps.submitCallback(transformValues(values));
-  return (state, ownProps: PureOwnProps) => ({
+  return (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
     ...formValueSelector(formName)(state, 'mottaker', 'brevmalkode', 'fritekst', 'arsakskode'),
     initialValues: buildInitalValues(ownProps.recipients, ownProps.templates, ownProps.isKontrollerRevurderingApOpen),
     onSubmit,

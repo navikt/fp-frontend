@@ -11,8 +11,8 @@ const intl = createIntl(messages);
 export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyTaAvVentIndex.ResumeBehandling' });
 
 interface OwnProps {
-  behandlingId?: number;
-  behandlingVersjon?: number;
+  behandlingId: number;
+  behandlingVersjon: number;
   taBehandlingAvVent: (params: {
     behandlingId: number;
     behandlingVersjon: number;

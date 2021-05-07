@@ -23,7 +23,7 @@ export const metaMock = {
   autofilled: false,
   dirty: false,
   dispatch: noop,
-  error: null,
+  error: '',
   form: 'mockForm',
   initial: {},
   invalid: false,

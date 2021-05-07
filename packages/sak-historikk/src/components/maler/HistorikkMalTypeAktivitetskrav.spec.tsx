@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 
 import { omit } from '@fpsak-frontend/utils';
-import { Historikkinnslag, HistorikkinnslagDel } from '@fpsak-frontend/types';
+import { Historikkinnslag, HistorikkinnslagDel, Kodeverk } from '@fpsak-frontend/types';
 
 import { skjermlenkeCodes } from '@fpsak-frontend/konstanter';
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
@@ -42,7 +42,7 @@ describe('HistorikkMalTypeAktivitetskrav', () => {
       }],
     }] as HistorikkinnslagDel[];
 
-    const getKodeverknavn = (kodeverk) => {
+    const getKodeverknavn = (kodeverk: Kodeverk) => {
       if (kodeverk.kode === 'I_AKTIVITET') {
         return 'Mor er i aktivitet';
       }
