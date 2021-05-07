@@ -37,7 +37,7 @@ export type BehandlingOppretting = Readonly<{
 }>
 
 export type FormValues = {
-  behandlingType: string;
+  behandlingType?: string;
   nyBehandlingEtterKlage?: string;
   behandlingArsakType?: string;
 }
@@ -79,6 +79,7 @@ interface MappedOwnProps {
   behandlingArsakTyper: KodeverkMedNavn[];
   valgtBehandlingTypeKode: string;
   erTilbakekreving: boolean;
+  onSubmit: (values: FormValues) => void;
 }
 
 /**
@@ -108,7 +109,7 @@ export const NyBehandlingModal: FunctionComponent<PureOwnProps & MappedOwnProps 
       if (uuid !== undefined) {
         sjekkOmTilbakekrevingKanOpprettes({ saksnummer, uuid });
       }
-      if (erTilbakekreving) {
+      if (erTilbakekreving && behandlingUuid) {
         sjekkOmTilbakekrevingRevurderingKanOpprettes({ uuid: behandlingUuid });
       }
     }
@@ -229,15 +230,17 @@ const tilbakekrevingRevurderingArsaker = [
 ];
 
 export const getBehandlingAarsaker = createSelector([
-  (_state, ownProps: PureOwnProps) => ownProps.ytelseType,
-  (_state, ownProps: PureOwnProps) => ownProps.revurderingArsaker,
-  (_state, ownProps: PureOwnProps) => ownProps.tilbakekrevingRevurderingArsaker,
-  (state) => formValueSelector(formName)(state, 'behandlingType')],
-(ytelseType, alleRevurderingArsaker, alleTilbakekrevingRevurderingArsaker, valgtBehandlingType: string) => {
+  (_state: any, ownProps: PureOwnProps) => ownProps.ytelseType,
+  (_state: any, ownProps: PureOwnProps) => ownProps.revurderingArsaker,
+  (_state: any, ownProps: PureOwnProps) => ownProps.tilbakekrevingRevurderingArsaker,
+  (state: any) => formValueSelector(formName)(state, 'behandlingType')],
+(ytelseType, alleRevurderingArsaker, alleTilbakekrevingRevurderingArsaker, valgtBehandlingType: string): KodeverkMedNavn[] => {
   if (valgtBehandlingType === bType.TILBAKEKREVING_REVURDERING) {
     return tilbakekrevingRevurderingArsaker
-      .map((ar) => alleTilbakekrevingRevurderingArsaker.find((el) => el.kode === ar))
-      .filter((ar) => ar);
+      .flatMap((ar) => {
+        const arsak = alleTilbakekrevingRevurderingArsaker.find((el) => el.kode === ar);
+        return arsak ? [arsak] : [];
+      });
   }
 
   if (valgtBehandlingType === bType.REVURDERING) {
@@ -274,13 +277,13 @@ export const getEnabledBehandlingstyper = createSelector([
   .filter((b) => (b.kode === bType.FORSTEGANGSSOKNAD ? kanOppretteBehandlingstype(behandlingOppretting, bType.FORSTEGANGSSOKNAD) : true))
   .filter((b) => (b.kode === bType.REVURDERING ? kanOppretteBehandlingstype(behandlingOppretting, bType.REVURDERING) : true)));
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
+const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
   const onSubmit = (values: FormValues) => initialOwnProps.submitCallback({
     ...values,
     eksternUuid: initialOwnProps.uuidForSistLukkede,
     fagsakYtelseType: initialOwnProps.ytelseType,
   });
-  return (state, ownProps: PureOwnProps) => ({
+  return (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
     onSubmit,
     behandlingTyper: getBehandlingTyper(ownProps),
     enabledBehandlingstyper: getEnabledBehandlingstyper(ownProps),

@@ -9,9 +9,15 @@ import styles from './tabMeny.less';
 
 const classNames = classnames.bind(styles);
 
+export type SvgProps = {
+  className: any;
+  tabIndex: string;
+  alt: string;
+}
+
 interface OwnProps {
   tabs: {
-    getSvg: (isActive: boolean, isDisabled: boolean, props: any) => React.ReactNode;
+    getSvg: (isActive: boolean, isDisabled: boolean, props: SvgProps) => React.ReactNode;
     tooltip: string;
     isActive: boolean;
     isDisabled: boolean;
@@ -23,10 +29,12 @@ const TabMeny: FunctionComponent<OwnProps> = ({
   tabs,
   onClick,
 }) => {
-  const tabRef = useRef([]);
+  const tabRef = useRef<HTMLButtonElement[] | null>([]);
 
   useEffect(() => {
-    tabRef.current = tabRef.current.slice(0, tabs.length);
+    if (tabRef.current) {
+      tabRef.current = tabRef.current.slice(0, tabs.length);
+    }
   }, [tabs]);
 
   return (
@@ -38,14 +46,18 @@ const TabMeny: FunctionComponent<OwnProps> = ({
               className={classNames(styles.button, { active: tab.isActive })}
               type="button"
               onClick={() => {
-                if (tabRef.current[index]) {
+                if (tabRef.current && tabRef.current[index]) {
                   tabRef.current[index].focus();
                 }
                 onClick(index);
               }}
               data-tooltip={tab.tooltip}
               disabled={tab.isDisabled}
-              ref={(el) => { tabRef.current[index] = el; }}
+              ref={(el) => {
+                if (tabRef.current && el) {
+                  tabRef.current[index] = el;
+                }
+              }}
             >
               {tab.getSvg(tab.isActive, tab.isDisabled, {
                 className: styles.tabImage,

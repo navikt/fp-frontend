@@ -25,7 +25,10 @@ describe('<MenySakIndex>', () => {
 
     const knapp = wrapper2.find(Knapp);
     expect(knapp).toHaveLength(1);
-    knapp.prop('onClick')({} as React.MouseEvent<any>);
+    const { onClick } = knapp.props();
+    if (onClick) {
+      onClick({} as React.MouseEvent<any>);
+    }
 
     expect(wrapper.find(Popover).prop('popperIsVisible')).toBe(true);
   });
@@ -43,12 +46,18 @@ describe('<MenySakIndex>', () => {
 
     const button = wrapper2.find('button');
     expect(button).toHaveLength(1);
-    button.prop('onClick')({} as React.MouseEvent<any>);
+    const onClickButton = button.props().onClick;
+    if (onClickButton) {
+      onClickButton({} as React.MouseEvent<any>);
+    }
 
     const span = wrapper.find('button');
     expect(span).toHaveLength(1);
 
-    span.prop('onClick')({} as React.MouseEvent<any>);
+    const onClickSpan = span.props().onClick;
+    if (onClickSpan) {
+      onClickSpan({} as React.MouseEvent<any>);
+    }
 
     expect(wrapper.find('button')).toHaveLength(0);
   });

@@ -4,7 +4,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
-import { HistorikkinnslagDel, Kodeverk } from '@fpsak-frontend/types';
+import { HistorikkInnslagOpplysning, Kodeverk, HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
 
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
 import historikkEndretFeltTypeCodes from '../../kodeverk/historikkEndretFeltTypeCodes';
@@ -12,17 +12,17 @@ import BubbleText from './felles/bubbleText';
 import Skjermlenke from './felles/Skjermlenke';
 import HistorikkMal from '../HistorikkMalTsType';
 
-const finnFomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): string => {
+const finnFomOpplysning = (opplysninger: HistorikkInnslagOpplysning[]): string => {
   const found = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.PERIODE_FOM.kode);
   return found.tilVerdi;
 };
 
-const finnTomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): string => {
+const finnTomOpplysning = (opplysninger: HistorikkInnslagOpplysning[]): string => {
   const found = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.PERIODE_TOM.kode);
   return found.tilVerdi;
 };
 
-const buildEndretFeltText = (endredeFelter: HistorikkinnslagDel['endredeFelter'], getKodeverknavn: (kodeverk: Kodeverk) => string): ReactNode => {
+const buildEndretFeltText = (endredeFelter: HistorikkinnslagEndretFelt[], getKodeverknavn: (kodeverk: Kodeverk) => string): ReactNode => {
   const årsakFelt = endredeFelter.filter((felt) => felt.endretFeltNavn.kode === historikkEndretFeltTypeCodes.FAKTA_OM_FEILUTBETALING_AARSAK.kode)[0];
   const underÅrsakFelt = endredeFelter.filter((felt) => felt.endretFeltNavn.kode === historikkEndretFeltTypeCodes.FAKTA_OM_FEILUTBETALING_UNDERAARSAK.kode)[0];
   const underÅrsakFraVerdi = underÅrsakFelt ? getKodeverknavn({ kode: underÅrsakFelt.fraVerdi as string, kodeverk: underÅrsakFelt.klFraVerdi }) : null;
@@ -35,10 +35,10 @@ const buildEndretFeltText = (endredeFelter: HistorikkinnslagDel['endredeFelter']
     const årsakNavn = getKodeverknavn({ kode: årsakVerdi, kodeverk: årsakFelt.klFraVerdi });
     const fraVerdi = underÅrsakFraVerdi ? `${årsakNavn} (${underÅrsakFraVerdi})` : årsakNavn;
     const tilVerdi = underÅrsakTilVerdi ? `${tilVerdiNavn} (${underÅrsakTilVerdi})` : tilVerdiNavn;
-    return <FormattedMessage id="Historikk.Template.Feilutbetaling.endretFelt" values={{ fraVerdi, tilVerdi, b: (chunks) => <b>{chunks}</b> }} />;
+    return <FormattedMessage id="Historikk.Template.Feilutbetaling.endretFelt" values={{ fraVerdi, tilVerdi, b: (chunks: any) => <b>{chunks}</b> }} />;
   }
   const feltVerdi = underÅrsakTilVerdi ? `${tilVerdiNavn} (${underÅrsakTilVerdi})` : tilVerdiNavn;
-  return <FormattedMessage id="Historikk.Template.Feilutbetaling.sattFelt" values={{ feltVerdi, b: (chunks) => <b>{chunks}</b> }} />;
+  return <FormattedMessage id="Historikk.Template.Feilutbetaling.sattFelt" values={{ feltVerdi, b: (chunks: any) => <b>{chunks}</b> }} />;
 };
 
 const HistorikkMalTypeFeilutbetaling: FunctionComponent<HistorikkMal> = ({
@@ -64,7 +64,7 @@ const HistorikkMalTypeFeilutbetaling: FunctionComponent<HistorikkMal> = ({
             values={{
               periodeFom: finnFomOpplysning(historikkinnslagDel.opplysninger),
               periodeTom: finnTomOpplysning(historikkinnslagDel.opplysninger),
-              b: (chunks) => <b>{chunks}</b>,
+              b: (chunks: any) => <b>{chunks}</b>,
             }}
           />
           <Normaltekst>

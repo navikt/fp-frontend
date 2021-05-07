@@ -13,7 +13,7 @@ import { InputField } from '@fpsak-frontend/form';
 
 import styles from './searchForm.less';
 
-const isButtonDisabled = (searchStarted: boolean, searchString?: string): boolean => !!(searchStarted
+const isButtonDisabled = (searchStarted: boolean, searchString: string): boolean => !!(searchStarted
   || searchString.length < 1);
 
 interface PureOwnProps {
@@ -73,17 +73,22 @@ export const SearchForm: FunctionComponent<PureOwnProps & MappedOwnProps & Wrapp
   </form>
 );
 
-const validate = (values) => {
-  const errors = { searchString: undefined };
-  errors.searchString = hasValidSaksnummerOrFodselsnummerFormat(values.searchString);
-  return errors;
+const validate = (values: { searchString: string }): { searchString: string | undefined } => {
+  const validError = hasValidSaksnummerOrFodselsnummerFormat(values.searchString);
+  if (validError) {
+    return {
+      searchString: validError,
+    };
+  }
+  return { searchString: undefined };
 };
 
-const mapStateToProps = (state): MappedOwnProps => ({
+const mapStateToProps = (state: any): MappedOwnProps => ({
   searchString: formValueSelector('SearchForm')(state, 'searchString'),
 });
 
 export default connect(mapStateToProps)(reduxForm({
   form: 'SearchForm',
   validate,
+// @ts-ignore Fiks
 })(injectIntl(SearchForm)));

@@ -248,7 +248,8 @@ const History: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   [alleHistorikkInnslag, valgtBehandlingId, skalSortertePaValgtBehandling]);
 
   const getKodeverknavnFpSak = useMemo(() => getKodeverknavnFn(alleKodeverkFpSak, kodeverkTyper), [alleKodeverkFpSak]);
-  const getKodeverknavnFpTilbake = useMemo(() => getKodeverknavnFn(alleKodeverkFpTilbake, kodeverkTyper), [alleKodeverkFpTilbake]);
+  const getKodeverknavnFpTilbake = useMemo(() => (alleKodeverkFpTilbake
+    ? getKodeverknavnFn(alleKodeverkFpTilbake, kodeverkTyper) : undefined), [alleKodeverkFpTilbake]);
 
   return (
     <>

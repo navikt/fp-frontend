@@ -35,12 +35,12 @@ const lagGjeldendeFraInnslag = (historikkinnslagDel: HistorikkinnslagDel): React
       <>
         <FormattedMessage
           id={historikkEndretFeltTypeCodes[historikkinnslagDel.gjeldendeFra.navn].feltId}
-          values={{ value: historikkinnslagDel.gjeldendeFra.verdi, b: (chunks) => <b>{chunks}</b>, br: <br /> }}
+          values={{ value: historikkinnslagDel.gjeldendeFra.verdi, b: (chunks: any) => <b>{chunks}</b>, br: <br /> }}
         />
         {historikkinnslagDel.gjeldendeFra.fra && (
           <FormattedMessage
             id="Historikk.Template.5.VerdiGjeldendeFra"
-            values={{ dato: historikkinnslagDel.gjeldendeFra.fra, b: (chunks) => <b>{chunks}</b> }}
+            values={{ dato: historikkinnslagDel.gjeldendeFra.fra, b: (chunks: any) => <b>{chunks}</b> }}
           />
         )}
         {isGjeldendeFraUtenEndredeFelter(historikkinnslagDel) && (
@@ -56,7 +56,7 @@ const lagGjeldendeFraInnslag = (historikkinnslagDel: HistorikkinnslagDel): React
       <>
         <FormattedMessage
           id="Historikk.Template.5.GjeldendeFra"
-          values={{ dato: historikkinnslagDel.gjeldendeFra.fra, b: (chunks) => <b>{chunks}</b> }}
+          values={{ dato: historikkinnslagDel.gjeldendeFra.fra, b: (chunks: any) => <b>{chunks}</b> }}
         />
         {isGjeldendeFraUtenEndredeFelter(historikkinnslagDel) && (
           <FormattedMessage
@@ -93,7 +93,7 @@ const formatChangedField = (endretFelt: HistorikkinnslagEndretFelt, intl: IntlSh
           fieldName,
           fromValue,
           toValue,
-          b: (chunks) => <b>{chunks}</b>,
+          b: (chunks: any) => <b>{chunks}</b>,
         }}
       />
     );
@@ -104,7 +104,7 @@ const formatChangedField = (endretFelt: HistorikkinnslagEndretFelt, intl: IntlSh
       values={{
         fieldName,
         value: toValue,
-        b: (chunks) => <b>{chunks}</b>,
+        b: (chunks: any) => <b>{chunks}</b>,
       }}
     />
   );
@@ -136,7 +136,7 @@ const lagSoeknadsperiode = (soeknadsperiode: HistorikkinnslagDel['soeknadsperiod
   : (
     <FormattedMessage
       id={findIdForSoeknadsperiodeCode(soeknadsperiode)}
-      values={{ value: soeknadsperiode.tilVerdi, b: (chunks) => <b>{chunks}</b>, br: <br /> }}
+      values={{ value: soeknadsperiode.tilVerdi, b: (chunks: any) => <b>{chunks}</b>, br: <br /> }}
     />
   ));
 
@@ -181,7 +181,7 @@ const HistorikkMalType5: FunctionComponent<HistorikkMal & WrappedComponentProps>
         {historikkinnslagDel.opplysninger && historikkinnslagDel.opplysninger.map((opplysning) => (
           <FormattedMessage
             id={findIdForOpplysningCode(opplysning)}
-            values={{ antallBarn: opplysning.tilVerdi, b: (chunks) => <b>{chunks}</b>, br: <br /> }}
+            values={{ antallBarn: opplysning.tilVerdi, b: (chunks: any) => <b>{chunks}</b>, br: <br /> }}
             key={`${getKodeverknavn(opplysning.opplysningType)}@${opplysning.tilVerdi}`}
           />
         ))}

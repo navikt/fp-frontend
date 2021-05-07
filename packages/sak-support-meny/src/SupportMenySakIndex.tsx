@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@fpsak-frontend/utils';
@@ -8,14 +8,14 @@ import { ReactComponent as DokumenterSvg } from '@fpsak-frontend/assets/images/f
 import { ReactComponent as TilBeslutterSvg } from '@fpsak-frontend/assets/images/person-favorite-star-2.svg';
 import { ReactComponent as HistorikkSvg } from '@fpsak-frontend/assets/images/synchronize-time.svg';
 
-import TabMeny from './components/TabMeny';
+import TabMeny, { SvgProps } from './components/TabMeny';
 import SupportTabs from './supportTabs';
 
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-const getStyle = (isActive: boolean, isDisabled: boolean) => {
+const getStyle = (isActive: boolean, isDisabled: boolean): { fill: string } => {
   if (isDisabled) {
     return { fill: '#c6c2bf' };
   }
@@ -24,26 +24,26 @@ const getStyle = (isActive: boolean, isDisabled: boolean) => {
 
 const TABS = {
   [SupportTabs.TIL_BESLUTTER]: {
-    getSvg: (isActive, isDisabled, props) => <TilBeslutterSvg {...props} style={getStyle(isActive, isDisabled)} />,
+    getSvg: (isActive: boolean, isDisabled: boolean, props: SvgProps) => <TilBeslutterSvg {...props} style={getStyle(isActive, isDisabled)} />,
     tooltipTextCode: 'SupportMenySakIndex.Godkjenning',
   },
   [SupportTabs.FRA_BESLUTTER]: {
-    getSvg: (isActive, isDisabled, props) => <FraBeslutterSvg {...props} style={getStyle(isActive, isDisabled)} />,
+    getSvg: (isActive: boolean, isDisabled: boolean, props: SvgProps) => <FraBeslutterSvg {...props} style={getStyle(isActive, isDisabled)} />,
     tooltipTextCode: 'SupportMenySakIndex.FraBeslutter',
   },
   [SupportTabs.HISTORIKK]: {
-    getSvg: (isActive, isDisabled, props) => <HistorikkSvg {...props} style={getStyle(isActive, isDisabled)} />,
+    getSvg: (isActive: boolean, isDisabled: boolean, props: SvgProps) => <HistorikkSvg {...props} style={getStyle(isActive, isDisabled)} />,
     tooltipTextCode: 'SupportMenySakIndex.Historikk',
   },
   [SupportTabs.MELDINGER]: {
-    getSvg: (isActive, isDisabled, props) => <SendMeldingSvg {...props} style={getStyle(isActive, isDisabled)} />,
+    getSvg: (isActive: boolean, isDisabled: boolean, props: SvgProps) => <SendMeldingSvg {...props} style={getStyle(isActive, isDisabled)} />,
     tooltipTextCode: 'SupportMenySakIndex.Melding',
   },
   [SupportTabs.DOKUMENTER]: {
-    getSvg: (isActive, isDisabled, props) => <DokumenterSvg {...props} style={getStyle(isActive, isDisabled)} />,
+    getSvg: (isActive: boolean, isDisabled: boolean, props: SvgProps) => <DokumenterSvg {...props} style={getStyle(isActive, isDisabled)} />,
     tooltipTextCode: 'SupportMenySakIndex.Dokumenter',
   },
-};
+} as Record<string, { getSvg: (isActive: boolean, isDisabled: boolean, props: SvgProps) => ReactElement, tooltipTextCode: string }>;
 
 const lagTabs = (tilgjengeligeTabs: string[], valgbareTabs: string[], valgtIndex?: number) => Object.keys(TABS)
   .filter((key) => tilgjengeligeTabs.includes(key))

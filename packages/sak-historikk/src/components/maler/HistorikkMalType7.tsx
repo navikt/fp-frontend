@@ -30,7 +30,7 @@ const formatChangedField = (endretFelt: HistorikkinnslagEndretFelt, intl: IntlSh
           sub2,
           fromValue,
           toValue,
-          b: (chunks) => <b>{chunks}</b>,
+          b: (chunks: any) => <b>{chunks}</b>,
         }}
       />
     );
@@ -78,7 +78,7 @@ const HistorikkMalType7: FunctionComponent<HistorikkMal & WrappedComponentProps>
                     id={findIdForOpplysningCode(opplysning)}
                     values={{
                       antallBarn: opplysning.tilVerdi,
-                      b: (chunks) => <b>{chunks}</b>,
+                      b: (chunks: any) => <b>{chunks}</b>,
                     }}
                   />
                 ))}

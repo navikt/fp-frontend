@@ -12,7 +12,7 @@ import Faresignaler from './Faresignaler';
 import AvklarFaresignalerForm from './AvklarFaresignalerForm';
 
 interface OwnProps {
-  risikoklassifisering?: Risikoklassifisering;
+  risikoklassifisering: Risikoklassifisering;
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
   submitCallback: (data: VurderFaresignalerAp) => Promise<void>;

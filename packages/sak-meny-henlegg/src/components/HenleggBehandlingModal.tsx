@@ -25,8 +25,8 @@ const maxLength1500 = maxLength(1500);
 const previewHenleggBehandlingDoc = (
   previewHenleggBehandling: (erHenleggelse: boolean, data: any) => void,
   ytelseType: Kodeverk,
-  fritekst: string,
-  behandlingId: number,
+  fritekst?: string,
+  behandlingId?: number,
   behandlingUuid?: string,
 ) => (e: React.MouseEvent | React.KeyboardEvent): void => {
   // TODO Hardkoda verdiar. Er dette eit kodeverk?
@@ -77,7 +77,10 @@ export const getHenleggArsaker = (behandlingResultatTyper: KodeverkMedNavn[], be
     .filter((type) => ytelseType.kode !== fagsakYtelseType.ENGANGSSTONAD || (ytelseType.kode === fagsakYtelseType.ENGANGSSTONAD
       && type !== behandlingResultatType.HENLAGT_SOKNAD_MANGLER
       && type !== behandlingResultatType.MANGLER_BEREGNINGSREGLER))
-    .map((type) => behandlingResultatTyper.find((brt) => brt.kode === type));
+    .flatMap((type) => {
+      const typer = behandlingResultatTyper.find((brt) => brt.kode === type);
+      return typer ? [typer] : [];
+    });
 };
 
 interface PureOwnProps {
@@ -210,9 +213,9 @@ export const HenleggBehandlingModalImpl: FunctionComponent<PureOwnProps & Mapped
 };
 
 const getShowLink = createSelector([
-  (state) => formValueSelector('HenleggBehandlingModal')(state, 'årsakKode'),
-  (state) => formValueSelector('HenleggBehandlingModal')(state, 'fritekst'),
-  (_state, ownProps: PureOwnProps) => ownProps.behandlingType],
+  (state: any) => formValueSelector('HenleggBehandlingModal')(state, 'årsakKode'),
+  (state: any) => formValueSelector('HenleggBehandlingModal')(state, 'fritekst'),
+  (_state: any, ownProps: PureOwnProps) => ownProps.behandlingType],
 (arsakKode: string, fritekst: string, type): boolean => {
   if (type.kode === BehandlingType.TILBAKEKREVING) {
     return behandlingResultatType.HENLAGT_FEILOPPRETTET === arsakKode;
@@ -228,7 +231,7 @@ const getShowLink = createSelector([
   ].includes(arsakKode);
 });
 
-const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => ({
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   årsakKode: formValueSelector('HenleggBehandlingModal')(state, 'årsakKode'),
   begrunnelse: formValueSelector('HenleggBehandlingModal')(state, 'begrunnelse'),
   fritekst: formValueSelector('HenleggBehandlingModal')(state, 'fritekst'),

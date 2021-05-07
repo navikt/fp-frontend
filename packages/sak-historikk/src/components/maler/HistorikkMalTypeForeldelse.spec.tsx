@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 
 import { omit } from '@fpsak-frontend/utils';
-import { Historikkinnslag, HistorikkinnslagDel } from '@fpsak-frontend/types';
+import { Historikkinnslag, HistorikkinnslagDel, Kodeverk } from '@fpsak-frontend/types';
 
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
 import HistorikkMalTypeForeldelse from './HistorikkMalTypeForeldelse';
@@ -40,7 +40,7 @@ describe('HistorikkMalTypeForeldelse', () => {
       }],
     }] as HistorikkinnslagDel[];
 
-    const getKodeverknavn = (kodeverk) => {
+    const getKodeverknavn = (kodeverk: Kodeverk) => {
       if (kodeverk.kode === 'feltkode') {
         return 'testing';
       }

@@ -67,10 +67,10 @@ const getPreviewCallback = (
   fagsakYtelseType: Kodeverk,
   fetchPreview: (erHenleggelse: boolean, data: any) => void,
 ) => (
-  mottaker: string,
-  dokumentMal: string,
-  fritekst: string,
-  aarsakskode: string,
+  mottaker?: string,
+  dokumentMal?: string,
+  fritekst?: string,
+  aarsakskode?: string,
 ) => {
   const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandlingTypeKode || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingTypeKode;
   const data = erTilbakekreving ? {

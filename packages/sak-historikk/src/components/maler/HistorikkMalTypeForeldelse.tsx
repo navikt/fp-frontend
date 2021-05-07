@@ -30,13 +30,16 @@ const HistorikkMalTypeForeldelse: FunctionComponent<HistorikkMal> = ({
       />
       {historikkinnslagDeler.map((historikkinnslagDel) => {
         const { begrunnelseFritekst, opplysninger, endredeFelter } = historikkinnslagDel;
-        const periodeFom = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.PERIODE_FOM.kode).tilVerdi;
-        const periodeTom = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.PERIODE_TOM.kode).tilVerdi;
+        const periodeFom = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.PERIODE_FOM.kode)?.tilVerdi;
+        const periodeTom = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.PERIODE_TOM.kode)?.tilVerdi;
 
         return (
           <div key={periodeFom + periodeTom}>
             <Normaltekst>
-              <FormattedMessage id="Historikk.Template.Foreldelse.VurderingAvPerioden" values={{ periodeFom, periodeTom, b: (chunks) => <b>{chunks}</b> }} />
+              <FormattedMessage
+                id="Historikk.Template.Foreldelse.VurderingAvPerioden"
+                values={{ periodeFom, periodeTom, b: (chunks: any) => <b>{chunks}</b> }}
+              />
             </Normaltekst>
             {endredeFelter && endredeFelter.map((felt) => {
               const { endretFeltNavn, fraVerdi, tilVerdi } = felt;
@@ -50,7 +53,7 @@ const HistorikkMalTypeForeldelse: FunctionComponent<HistorikkMal> = ({
                         navn: getKodeverknavn(endretFeltNavn),
                         fraVerdi,
                         tilVerdi,
-                        b: (chunks) => <b>{chunks}</b>,
+                        b: (chunks: any) => <b>{chunks}</b>,
                       }}
                     />
                   </Normaltekst>

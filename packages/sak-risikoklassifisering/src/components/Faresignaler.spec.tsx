@@ -2,19 +2,21 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Normaltekst } from 'nav-frontend-typografi';
 
+import { Risikoklassifisering } from '@fpsak-frontend/types';
+
 import Faresignaler, { FarePanel } from './Faresignaler';
 
-const mockRisikoklassifisering = (medlSignaler?: string[], iaySignaler?: string[]) => ({
+const mockRisikoklassifisering = (medlSignaler?: string[], iaySignaler?: string[]): Risikoklassifisering => ({
   kontrollresultat: {
     kode: 'HOY',
     kodeverk: 'Kontrollresultat',
   },
-  medlFaresignaler: {
+  medlFaresignaler: medlSignaler ? {
     faresignaler: medlSignaler,
-  },
-  iayFaresignaler: {
+  } : undefined,
+  iayFaresignaler: iaySignaler ? {
     faresignaler: iaySignaler,
-  },
+  } : undefined,
 });
 
 describe('<Faresignaler>', () => {
@@ -47,9 +49,9 @@ describe('<Faresignaler>', () => {
   });
 
   it('1skal teste at komponent mountes korrekt når vi har faresignaler i iay kategorien', () => {
-    const data = mockRisikoklassifisering(['Dette er en grunn', 'Dette er en annen grunn']);
+    const medlFaresignaler = { faresignaler: ['Dette er en grunn', 'Dette er en annen grunn'] };
     const wrapper = shallow(<FarePanel
-      risikoFaresignaler={data.medlFaresignaler}
+      risikoFaresignaler={medlFaresignaler}
       labelId="Risikopanel.Panel.Medlemskap"
     />);
 
