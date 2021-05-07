@@ -169,7 +169,7 @@ export const buildInitialValues = createSelector([
 
 const erTerminbekreftelseUtstedtForTidlig = (utstedtdato?: string, termindato?: string): boolean => utstedtdato !== undefined
   && termindato !== undefined
-  && !moment(utstedtdato).isAfter(moment(termindato).subtract(18, 'weeks').subtract(3, 'days'));
+  && !moment(utstedtdato).isAfter(moment(termindato).subtract(18, 'weeks').subtract(4, 'days'));
 
 const transformValues = (values: FormValues): BekreftTerminbekreftelseAp => ({
   kode: aksjonspunktCodes.TERMINBEKREFTELSE,
