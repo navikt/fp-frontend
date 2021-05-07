@@ -16,6 +16,7 @@ describe('<Search>', () => {
       searchString=""
       searchStarted
       {...reduxFormPropsMock}
+      error=""
     />, messages);
 
     expect(wrapper.find('InputField')).toHaveLength(1);
@@ -30,6 +31,7 @@ describe('<Search>', () => {
       searchString=""
       searchStarted
       {...reduxFormPropsMock}
+      error=""
       handleSubmit={onButtonClick}
     />, messages);
 

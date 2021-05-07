@@ -15,7 +15,7 @@ interface OwnProps {
   recipients: string[];
   templates?: Template[];
   sprakKode: Kodeverk;
-  previewCallback: (mottaker: string, brevmalkode: string, fritekst: string, arsakskode: string) => void;
+  previewCallback: (mottaker?: string, brevmalkode?: string, fritekst?: string, arsakskode?: string) => void;
   isKontrollerRevurderingApOpen?: boolean;
   revurderingVarslingArsak: KodeverkMedNavn[];
   fagsakYtelseType: Kodeverk;

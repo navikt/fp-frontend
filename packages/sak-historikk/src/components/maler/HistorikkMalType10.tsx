@@ -43,7 +43,7 @@ const historikkFromToValues = (endretFelt: HistorikkinnslagEndretFelt, fieldName
         fieldName,
         fromValue,
         toValue,
-        b: (chunks) => <b>{chunks}</b>,
+        b: (chunks: any) => <b>{chunks}</b>,
         br: <br />,
       }}
     />
@@ -68,7 +68,7 @@ const formatChangedField = (endretFelt: HistorikkinnslagEndretFelt, intl: IntlSh
           fromValueDays,
           toValueWeeks,
           toValueDays,
-          b: (chunks) => <b>{chunks}</b>,
+          b: (chunks: any) => <b>{chunks}</b>,
         }}
       />
     );
@@ -131,7 +131,7 @@ const HistorikkMalType10: FunctionComponent<HistorikkMal & WrappedComponentProps
               values={{
                 periodeFom: finnFomOpplysning(historikkinnslagDel.opplysninger),
                 periodeTom: finnTomOpplysning(historikkinnslagDel.opplysninger),
-                b: (chunks) => <b>{chunks}</b>,
+                b: (chunks: any) => <b>{chunks}</b>,
               }}
             />
           )}
@@ -142,7 +142,7 @@ const HistorikkMalType10: FunctionComponent<HistorikkMal & WrappedComponentProps
               values={{
                 periodeFom: finnFomOpplysning(historikkinnslagDel.opplysninger),
                 periodeTom: finnTomOpplysning(historikkinnslagDel.opplysninger),
-                b: (chunks) => <b>{chunks}</b>,
+                b: (chunks: any) => <b>{chunks}</b>,
               }}
             />
           )}

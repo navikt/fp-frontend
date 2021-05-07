@@ -88,9 +88,8 @@ export const findEndretFeltNavn = (endretFelt: HistorikkinnslagEndretFelt, intl:
   }) : intl.formatMessage({ id: fieldId });
 };
 
-export const scrollUp = () => {
+export const scrollUp = (): void => {
   if (window.innerWidth < 1305) {
     window.scroll(0, 0);
   }
-  return false;
 };

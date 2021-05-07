@@ -8,6 +8,7 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { CheckboxField, SelectField } from '@fpsak-frontend/form';
 import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 
 import {
@@ -58,6 +59,7 @@ describe('<NyBehandlingModal>', () => {
       }}
       valgtBehandlingTypeKode={behandlingType.FORSTEGANGSSOKNAD}
       erTilbakekreving={false}
+      onSubmit={() => undefined}
     />, messages);
 
     const modal = wrapper.find(Modal);
@@ -100,6 +102,7 @@ describe('<NyBehandlingModal>', () => {
       }}
       valgtBehandlingTypeKode={behandlingType.FORSTEGANGSSOKNAD}
       erTilbakekreving={false}
+      onSubmit={() => undefined}
     />, messages);
 
     const form = wrapper.find('form');
@@ -139,6 +142,7 @@ describe('<NyBehandlingModal>', () => {
       }}
       valgtBehandlingTypeKode={behandlingType.FORSTEGANGSSOKNAD}
       erTilbakekreving={false}
+      onSubmit={() => undefined}
     />, messages);
 
     wrapper.find(Knapp).simulate('click');
@@ -177,6 +181,7 @@ describe('<NyBehandlingModal>', () => {
       }}
       valgtBehandlingTypeKode={behandlingType.FORSTEGANGSSOKNAD}
       erTilbakekreving={false}
+      onSubmit={() => undefined}
     />, messages);
 
     expect(wrapper.find(CheckboxField)).toHaveLength(1);
@@ -214,6 +219,7 @@ describe('<NyBehandlingModal>', () => {
       }}
       valgtBehandlingTypeKode={behandlingType.DOKUMENTINNSYN}
       erTilbakekreving={false}
+      onSubmit={() => undefined}
     />, messages);
 
     expect(wrapper.find(CheckboxField)).toHaveLength(0);
@@ -251,6 +257,7 @@ describe('<NyBehandlingModal>', () => {
       }}
       valgtBehandlingTypeKode={behandlingType.REVURDERING}
       erTilbakekreving={false}
+      onSubmit={() => undefined}
     />, messages);
 
     expect(wrapper.find(SelectField)).toHaveLength(2);
@@ -288,6 +295,7 @@ describe('<NyBehandlingModal>', () => {
       }}
       valgtBehandlingTypeKode={behandlingType.DOKUMENTINNSYN}
       erTilbakekreving={false}
+      onSubmit={() => undefined}
     />, messages);
 
     expect(wrapper.find(SelectField)).toHaveLength(1);
@@ -317,7 +325,7 @@ describe('<NyBehandlingModal>', () => {
     }];
     const bType = behandlingType.TILBAKEKREVING_REVURDERING;
 
-    const behandlingArsakerFpSak = [];
+    const behandlingArsakerFpSak = [] as KodeverkMedNavn[];
 
     const res = getBehandlingAarsaker.resultFunc(ytelseType, behandlingArsakerFpSak, behandlingArsakerFpTilbake, bType);
 
@@ -353,7 +361,7 @@ describe('<NyBehandlingModal>', () => {
       kodeverk: '',
     }];
     const bType = behandlingType.REVURDERING;
-    const behandlingArsakerFpTilbake = [];
+    const behandlingArsakerFpTilbake = [] as KodeverkMedNavn[];
 
     const res = getBehandlingAarsaker.resultFunc(ytelseTypeRevudering, behandlingArsakerFpSak, behandlingArsakerFpTilbake, bType);
 

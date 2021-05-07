@@ -38,7 +38,7 @@ const buildEndretFeltText = (historikkinnslagDel: HistorikkinnslagDel, getKodeve
           periodeTom: finnTomOpplysning(opplysninger),
           fraVerdi,
           tilVerdi: tilVerdiNavn,
-          b: (chunks) => <b>{chunks}</b>,
+          b: (chunks: any) => <b>{chunks}</b>,
         }}
       />
     );
@@ -50,7 +50,7 @@ const buildEndretFeltText = (historikkinnslagDel: HistorikkinnslagDel, getKodeve
         periodeFom: finnFomOpplysning(opplysninger),
         periodeTom: finnTomOpplysning(opplysninger),
         feltVerdi: tilVerdiNavn,
-        b: (chunks) => <b>{chunks}</b>,
+        b: (chunks: any) => <b>{chunks}</b>,
       }}
     />
   );

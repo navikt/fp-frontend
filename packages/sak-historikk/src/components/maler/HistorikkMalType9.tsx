@@ -54,7 +54,7 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal & WrappedComponentProps>
                 opprinneligPeriode: historikkinnslagDel.endredeFelter[0].fraVerdi,
                 numberOfPeriods: historikkinnslagDel.endredeFelter.length,
                 splitPeriods: getSplitPeriods(historikkinnslagDel.endredeFelter),
-                b: (chunks) => <b>{chunks}</b>,
+                b: (chunks: any) => <b>{chunks}</b>,
                 br: <br />,
               }}
             />
@@ -67,7 +67,7 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal & WrappedComponentProps>
                 opprinneligPeriode: historikkinnslagDel.endredeFelter[0].fraVerdi,
                 numberOfPeriods: historikkinnslagDel.endredeFelter.length,
                 splitPeriods: getSplitPeriods(historikkinnslagDel.endredeFelter),
-                b: (chunks) => <b>{chunks}</b>,
+                b: (chunks: any) => <b>{chunks}</b>,
                 br: <br />,
               }}
             />
@@ -83,7 +83,7 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal & WrappedComponentProps>
                     values={{
                       felt: getKodeverknavn(endretFelt.endretFeltNavn),
                       verdi: findEndretFeltVerdi(endretFelt, endretFelt.tilVerdi, intl),
-                      b: (chunks) => <b>{chunks}</b>,
+                      b: (chunks: any) => <b>{chunks}</b>,
                     }}
                   />
                 </div>

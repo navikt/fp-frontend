@@ -11,7 +11,7 @@ import TittelMedDivider from './TittelMedDivider';
 import styles from './hoyRisikoTittel.less';
 
 interface OwnProps {
-  risikoklassifisering?: Risikoklassifisering;
+  risikoklassifisering: Risikoklassifisering;
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
   submitCallback: (data: VurderFaresignalerAp) => Promise<void>;

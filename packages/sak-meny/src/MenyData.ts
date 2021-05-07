@@ -5,9 +5,9 @@ class MenyData {
 
   tekst: string;
 
-  modal: (lukkModal: () => void) => ReactNode;
+  modal: (lukkModal: () => void) => ReactNode = () => undefined;
 
-  constructor(erSynlig: boolean | undefined, tekst) {
+  constructor(erSynlig: boolean | undefined, tekst: string) {
     this.erSynlig = !!erSynlig;
     this.tekst = tekst;
   }
