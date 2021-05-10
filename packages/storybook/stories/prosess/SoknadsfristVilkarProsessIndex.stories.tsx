@@ -17,7 +17,7 @@ import {
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
 const behandling = {
-  id: 1,
+  uuid: '1',
   versjon: 1,
 } as Behandling;
 
@@ -92,7 +92,7 @@ export const visOppfyltVilkår = () => (
   <SoknadsfristVilkarProsessIndex
     {...standardProsessProps}
     behandling={{
-      id: 1,
+      uuid: '1',
       versjon: 1,
       behandlingsresultat: {},
     } as Behandling}
@@ -120,7 +120,7 @@ export const visAvslåttVilkår = () => (
   <SoknadsfristVilkarProsessIndex
     {...standardProsessProps}
     behandling={{
-      id: 1,
+      uuid: '1',
       versjon: 1,
       behandlingsresultat: {
         avslagsarsak: {

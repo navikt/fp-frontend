@@ -37,7 +37,7 @@ export const lagStateMedAksjonspunkterOgBeregningsgrunnlag = (aksjonspunkter, be
         selectedSaksnummer: '1',
       },
       forstegangOgRevurderingBehandling: {
-        behandlingId: 1000051,
+        behandlingUuid: '1000051',
         kodeverk,
       },
       behandling: {

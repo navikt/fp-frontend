@@ -220,9 +220,9 @@ interface OwnProps {
   alleKodeverkFpTilbake?: AlleKodeverkTilbakekreving;
   alleKodeverkFpSak: AlleKodeverk;
   saksnummer?: string;
-  getBehandlingLocation: (behandlingId: number) => Location;
+  getBehandlingLocation: (behandlingUuid: string) => Location;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
-  valgtBehandlingId?: number;
+  valgtBehandlingUuid?: string;
 }
 
 /**
@@ -239,15 +239,15 @@ const History: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   saksnummer = '0',
   getBehandlingLocation,
   createLocationForSkjermlenke,
-  valgtBehandlingId,
+  valgtBehandlingUuid,
 }) => {
   const [skalSortertePaValgtBehandling, setSkalSortertePaBehandling] = useState(false);
 
   const alleHistorikkInnslag = useMemo(() => sortAndTagTilbakekreving(historikkFpSak, historikkFpTilbake), [historikkFpSak, historikkFpTilbake]);
 
-  const filtrerteInnslag = useMemo(() => (valgtBehandlingId && skalSortertePaValgtBehandling
-    ? alleHistorikkInnslag.filter((i) => i.behandlingId === valgtBehandlingId) : alleHistorikkInnslag),
-  [alleHistorikkInnslag, valgtBehandlingId, skalSortertePaValgtBehandling]);
+  const filtrerteInnslag = useMemo(() => (valgtBehandlingUuid && skalSortertePaValgtBehandling
+    ? alleHistorikkInnslag.filter((i) => i.behandlingUuid === valgtBehandlingUuid) : alleHistorikkInnslag),
+  [alleHistorikkInnslag, valgtBehandlingUuid, skalSortertePaValgtBehandling]);
 
   const getKodeverknavnFpSak = useMemo(() => getKodeverknavnFn(alleKodeverkFpSak, kodeverkTyper), [alleKodeverkFpSak]);
   const getKodeverknavnFpTilbake = useMemo(() => (alleKodeverkFpTilbake
@@ -255,7 +255,7 @@ const History: FunctionComponent<OwnProps & WrappedComponentProps> = ({
 
   return (
     <>
-      {valgtBehandlingId && (
+      {valgtBehandlingUuid && (
         <FlexContainer>
           <FlexRow>
             <FlexColumn className={styles.pushRight}>
@@ -291,7 +291,7 @@ const History: FunctionComponent<OwnProps & WrappedComponentProps> = ({
           >
             <HistorikkMal
               historikkinnslag={historikkinnslag}
-              behandlingLocation={getBehandlingLocation(historikkinnslag.behandlingId)}
+              behandlingLocation={getBehandlingLocation(historikkinnslag.behandlingUuid)}
               saksnummer={saksnummer}
               getKodeverknavn={getKodeverknavn}
               createLocationForSkjermlenke={createLocationForSkjermlenke}

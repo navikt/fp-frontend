@@ -17,7 +17,7 @@ type KlageVurdering = Readonly<{
     avvistArsaker: {
       navn?: string;
     }[];
-    paKlagdBehandlingId: number;
+    paKlagdBehandlingUuid: string;
     paklagdBehandlingType: Kodeverk;
     begrunnelse: string;
     erKlagerPart: boolean;
@@ -29,7 +29,7 @@ type KlageVurdering = Readonly<{
     avvistArsaker: {
       navn?: string;
     }[];
-    paKlagdBehandlingId: number;
+    paKlagdBehandlingUuid: string;
     paklagdBehandlingType: Kodeverk;
     begrunnelse: string;
     erKlagerPart: boolean;

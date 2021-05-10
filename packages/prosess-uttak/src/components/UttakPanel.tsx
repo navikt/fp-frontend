@@ -83,7 +83,7 @@ interface FormValues {
 
 interface PureOwnProps {
   fagsak: Fagsak;
-  behandlingId: number;
+  behandlingUuid: string;
   behandlingType: Kodeverk;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   behandlingStatus: Kodeverk;
@@ -99,9 +99,9 @@ interface PureOwnProps {
   alleKodeverk: AlleKodeverk;
   ytelsefordeling: Ytelsefordeling;
   tempUpdateStonadskontoer: (params: {
-    behandlingId: {
+    behandlingUuid: {
       saksnummer: string;
-      behandlingId: number;
+      behandlingUuid: string;
     };
     perioder: any;
   }) => Promise<any>;
@@ -128,7 +128,7 @@ export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & W
   familiehendelse,
   uttakPeriodeGrense,
   ytelsefordeling,
-  behandlingId,
+  behandlingUuid,
   behandlingType,
   behandlingStatus,
   alleKodeverk,
@@ -168,7 +168,7 @@ export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & W
           familiehendelse={familiehendelse}
           uttakPeriodeGrense={uttakPeriodeGrense}
           ytelsefordeling={ytelsefordeling}
-          behandlingId={behandlingId}
+          behandlingUuid={behandlingUuid}
           behandlingType={behandlingType}
           behandlingStatus={behandlingStatus}
           fagsak={fagsak}

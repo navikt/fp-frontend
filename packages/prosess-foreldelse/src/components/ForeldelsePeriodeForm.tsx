@@ -43,8 +43,8 @@ interface PureOwnProps {
   setForrigePeriode: (event: React.KeyboardEvent | React.MouseEvent) => void;
   oppdaterSplittedePerioder: (data: PeriodeMedFeilutbetaling[]) => void;
   readOnly: boolean;
-  beregnBelop: (data: { behandlingId: number; perioder: PeriodeMedBelop[]}) => Promise<any>;
-  behandlingId: number;
+  beregnBelop: (data: { behandlingUuid: string; perioder: PeriodeMedBelop[]}) => Promise<any>;
+  behandlingUuid: string;
 }
 
 interface MappedOwnProps {
@@ -70,7 +70,7 @@ export const ForeldelsePeriodeFormImpl: FunctionComponent<PureOwnProps & MappedO
   beregnBelop,
   erForeldet,
   erMedTilleggsfrist,
-  behandlingId,
+  behandlingUuid,
   ...formProps
 }) => (
   <div className={styles.container}>
@@ -80,7 +80,7 @@ export const ForeldelsePeriodeFormImpl: FunctionComponent<PureOwnProps & MappedO
       callbackBackward={setForrigePeriode}
       oppdaterSplittedePerioder={oppdaterSplittedePerioder}
       readOnly={readOnly}
-      behandlingId={behandlingId}
+      behandlingUuid={behandlingUuid}
       beregnBelop={beregnBelop}
     />
     <VerticalSpacer twentyPx />

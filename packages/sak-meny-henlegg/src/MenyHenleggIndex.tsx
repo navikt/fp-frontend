@@ -59,7 +59,6 @@ const MenyHenleggIndex: FunctionComponent<OwnProps> = ({
           onSubmit={submit}
           cancelEvent={lukkModal}
           previewHenleggBehandling={forhandsvisHenleggBehandling}
-          behandlingId={valgtBehandling.id}
           ytelseType={ytelseType}
           behandlingType={valgtBehandling.type}
           behandlingUuid={valgtBehandling.uuid}

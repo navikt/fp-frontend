@@ -21,7 +21,7 @@ interface OwnProps {
 
 const BehandlingPapirsoknadIndex: FunctionComponent<OwnProps & StandardBehandlingProps> = ({
   behandlingEventHandler,
-  behandlingId,
+  behandlingUuid,
   kodeverk,
   fagsak,
   fagsakPersonnummer,
@@ -33,7 +33,7 @@ const BehandlingPapirsoknadIndex: FunctionComponent<OwnProps & StandardBehandlin
   const {
     behandling, hentBehandling, setBehandling,
   } = useBehandling(
-    requestPapirsoknadApi, PapirsoknadApiKeys.BEHANDLING_PAPIRSOKNAD, behandlingId,
+    requestPapirsoknadApi, PapirsoknadApiKeys.BEHANDLING_PAPIRSOKNAD, behandlingUuid,
   );
 
   const { lagreAksjonspunkter } = useLagreAksjonspunkt(

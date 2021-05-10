@@ -30,7 +30,7 @@ describe('<BehandlingSvangerskapspengerIndex>', () => {
         setHandler: () => {},
         clear: () => {},
       }}
-      behandlingId={1}
+      behandlingUuid="1"
       oppdaterBehandlingVersjon={() => {}}
       kodeverk={{} as AlleKodeverk}
       fagsak={{} as Fagsak}

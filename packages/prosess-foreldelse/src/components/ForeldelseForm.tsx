@@ -51,7 +51,7 @@ const formaterPerioderForTidslinje = (perioder: ForeldelsesresultatActivity[] = 
   }));
 
 interface PureOwnProps {
-  behandlingId: number;
+  behandlingUuid: string;
   apCodes: string[];
   perioderForeldelse: FeilutbetalingPerioderWrapper;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
@@ -60,7 +60,7 @@ interface PureOwnProps {
   navBrukerKjonn: string;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
-  beregnBelop: (data: { behandlingId: number; perioder: PeriodeMedBelop[]}) => Promise<any>;
+  beregnBelop: (data: { behandlingUuid: string; perioder: PeriodeMedBelop[]}) => Promise<any>;
 }
 
 type FormValues = {
@@ -191,7 +191,7 @@ export class ForeldelseForm extends Component<PureOwnProps & MappedOwnProps & Di
       merknaderFraBeslutter,
       alleKodeverk,
       beregnBelop,
-      behandlingId,
+      behandlingUuid,
       ...formProps
     } = this.props;
     const {
@@ -252,7 +252,7 @@ export class ForeldelseForm extends Component<PureOwnProps & MappedOwnProps & Di
                     oppdaterSplittedePerioder={this.oppdaterSplittedePerioder}
                     skjulPeriode={this.togglePeriode}
                     readOnly={readOnly}
-                    behandlingId={behandlingId}
+                    behandlingUuid={behandlingUuid}
                     alleKodeverk={alleKodeverk}
                     beregnBelop={beregnBelop}
                   />

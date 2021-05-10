@@ -11,7 +11,7 @@ import { Aksjonspunkt, Behandling, KlageVurdering } from '@fpsak-frontend/types'
 import alleKodeverk from '../../mocks/alleKodeverk.json';
 
 const behandling = {
-  id: 1,
+  uuid: '1',
   versjon: 1,
   sprakkode: {
     kode: 'NO',
@@ -19,7 +19,7 @@ const behandling = {
 } as Behandling;
 
 const avsluttedeBehandlinger = [{
-  id: 1,
+  uuid: '1',
   type: {
     kode: behandlingType.FORSTEGANGSSOKNAD,
     kodeverk: '',

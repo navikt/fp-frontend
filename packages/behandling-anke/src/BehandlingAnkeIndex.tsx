@@ -15,7 +15,7 @@ import AnkeTrygderettsbehandlingProsessStegInitPanel from './prosessPaneler/Anke
 
 interface OwnProps {
   alleBehandlinger: {
-    id: number;
+    uuid: string;
     type: Kodeverk;
     avsluttet?: string;
   }[];
@@ -23,7 +23,7 @@ interface OwnProps {
 
 const BehandlingAnkeIndex: FunctionComponent<OwnProps & StandardBehandlingProps> = ({
   behandlingEventHandler,
-  behandlingId,
+  behandlingUuid,
   oppdaterBehandlingVersjon,
   kodeverk,
   fagsak,
@@ -40,7 +40,7 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & StandardBehandlingProps>
   const {
     behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
   } = useBehandling(
-    requestAnkeApi, AnkeBehandlingApiKeys.BEHANDLING_ANKE, behandlingId, oppdaterBehandlingVersjon,
+    requestAnkeApi, AnkeBehandlingApiKeys.BEHANDLING_ANKE, behandlingUuid, oppdaterBehandlingVersjon,
   );
 
   const { lagreAksjonspunkter } = useLagreAksjonspunkt(

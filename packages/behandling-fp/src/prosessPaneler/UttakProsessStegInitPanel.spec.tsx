@@ -130,9 +130,9 @@ describe('<UttakProsessStegInitPanel>', () => {
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     panel.props().renderPanel({}, { aksjonspunkter: [], uttaksresultatPerioder: {} as UttaksresultatPeriode }).props.tempUpdateStonadskontoer({
-      behandlingId: {
+      behandlingUuid: {
         saksnummer: '123',
-        behandlingId: 1,
+        behandlingUuid: '1',
       },
       perioder: [],
     });
@@ -140,9 +140,9 @@ describe('<UttakProsessStegInitPanel>', () => {
     const response = requestFpApi.getRequestMockData(FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER.name);
     expect(response).toHaveLength(1);
     expect(response[0].params).toEqual({
-      behandlingId: {
+      behandlingUuid: {
         saksnummer: '123',
-        behandlingId: 1,
+        behandlingUuid: '1',
       },
       perioder: [],
     });

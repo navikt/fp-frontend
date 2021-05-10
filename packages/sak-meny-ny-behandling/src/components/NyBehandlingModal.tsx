@@ -59,7 +59,6 @@ interface PureOwnProps {
     kanRevurderingOpprettes: boolean;
   };
   behandlingType?: Kodeverk;
-  behandlingId?: number;
   behandlingUuid?: string;
   uuidForSistLukkede?: string;
   erTilbakekrevingAktivert: boolean;

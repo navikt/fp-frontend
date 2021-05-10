@@ -54,7 +54,7 @@ const alleKodeverk = {
   ],
 } as AlleKodeverk;
 
-const behandlingId = 1000051;
+const behandlingUuid = '1000051';
 const behandlingVersjon = 1;
 
 const andelField = {
@@ -85,7 +85,7 @@ const beregningsgrunnlag = {
   beregningsgrunnlagPeriode: [{ beregningsgrunnlagPrStatusOgAndel: [{ andelsnr: 1 }] }],
 };
 const ownProps = {
-  alleKodeverk, behandlingId, behandlingVersjon, beregningsgrunnlag, fields, index: 0, isAksjonspunktClosed: false,
+  alleKodeverk, behandlingUuid, behandlingVersjon, beregningsgrunnlag, fields, index: 0, isAksjonspunktClosed: false,
 };
 const state = lagStateMedAksjonspunkterOgBeregningsgrunnlag(aksjonspunkter, beregningsgrunnlag, formNameVurderFaktaBeregning, initial, initial);
 const props = mapStateToProps(state, ownProps);

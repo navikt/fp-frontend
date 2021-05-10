@@ -32,7 +32,6 @@ type EndepunktPanelData = {
 
 interface OwnProps {
   alleBehandlinger: {
-    id: number;
     uuid: string;
     type: Kodeverk;
     status: Kodeverk;

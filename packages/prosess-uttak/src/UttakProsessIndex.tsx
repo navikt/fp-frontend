@@ -24,9 +24,9 @@ interface OwnProps {
   ytelsefordeling: Ytelsefordeling;
   employeeHasAccess: boolean;
   tempUpdateStonadskontoer: (params: {
-    behandlingId: {
+    behandlingUuid: {
       saksnummer: string;
-      behandlingId: number;
+      behandlingUuid: string;
     };
     perioder: any;
   }) => Promise<any>;
@@ -59,7 +59,7 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
     <ReduxWrapper formName="UttakProsessIndex" formData={formData} setFormData={setFormData}>
       <UttakPanel
         fagsak={fagsak}
-        behandlingId={behandling.id}
+        behandlingUuid={behandling.uuid}
         behandlingType={behandling.type}
         behandlingsresultat={behandling.behandlingsresultat}
         behandlingStatus={behandling.status}

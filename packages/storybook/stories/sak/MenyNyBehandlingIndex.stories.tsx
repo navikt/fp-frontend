@@ -64,7 +64,7 @@ export const visMenyForÅLageNyBehandling = () => (
       kodeverk: 'YTELSE_TYPE',
     }}
     saksnummer="123"
-    behandlingId={1}
+    behandlingUuid="1"
     behandlingVersjon={2}
     behandlingType={{
       kode: behandlingType.FORSTEGANGSSOKNAD,
@@ -101,7 +101,7 @@ export const visMenyForÅLageNyTilbakekrevingsbehandling = () => (
       kodeverk: 'YTELSE_TYPE',
     }}
     saksnummer="123"
-    behandlingId={1}
+    behandlingUuid="1"
     behandlingVersjon={2}
     behandlingType={{
       kode: behandlingType.FORSTEGANGSSOKNAD,

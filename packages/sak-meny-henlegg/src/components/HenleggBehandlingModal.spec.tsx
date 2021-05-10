@@ -65,7 +65,6 @@ describe('<HenleggBehandlingModal>', () => {
       showLink={false}
       ytelseType={ytelseType}
       behandlingUuid="123"
-      behandlingId={123}
       behandlingResultatTyper={behandlingResultatTyper}
       behandlingType={{
         kode: behandlingType.FORSTEGANGSSOKNAD,
@@ -99,7 +98,6 @@ describe('<HenleggBehandlingModal>', () => {
       showLink
       ytelseType={ytelseType}
       behandlingUuid="123"
-      behandlingId={123}
       behandlingResultatTyper={behandlingResultatTyper}
       behandlingType={{
         kode: behandlingType.FORSTEGANGSSOKNAD,
@@ -187,7 +185,6 @@ describe('<HenleggBehandlingModal>', () => {
       showLink
       ytelseType={ytelseType}
       behandlingUuid="123"
-      behandlingId={123}
       behandlingResultatTyper={behandlingResultatTyper}
       behandlingType={{
         kode: behandlingType.FORSTEGANGSSOKNAD,
@@ -209,7 +206,6 @@ describe('<HenleggBehandlingModal>', () => {
       showLink
       ytelseType={ytelseType}
       behandlingUuid="123"
-      behandlingId={123}
       behandlingResultatTyper={behandlingResultatTyper}
       behandlingType={{
         kode: behandlingType.FORSTEGANGSSOKNAD,
@@ -234,7 +230,6 @@ describe('<HenleggBehandlingModal>', () => {
       showLink
       ytelseType={ytelseType}
       behandlingUuid="123"
-      behandlingId={123}
       behandlingResultatTyper={behandlingResultatTyper}
       behandlingType={{
         kode: behandlingType.FORSTEGANGSSOKNAD,
@@ -260,7 +255,6 @@ describe('<HenleggBehandlingModal>', () => {
       showLink
       ytelseType={ytelseType}
       behandlingUuid="123"
-      behandlingId={123}
       behandlingResultatTyper={behandlingResultatTyper}
       behandlingType={{
         kode: behandlingType.FORSTEGANGSSOKNAD,
@@ -289,7 +283,6 @@ describe('<HenleggBehandlingModal>', () => {
       showLink
       ytelseType={ytelseType}
       behandlingUuid="123"
-      behandlingId={123}
       behandlingResultatTyper={behandlingResultatTyper}
       behandlingType={{
         kode: behandlingType.FORSTEGANGSSOKNAD,
@@ -320,7 +313,6 @@ describe('<HenleggBehandlingModal>', () => {
       showLink
       ytelseType={ytelseType}
       behandlingUuid="123"
-      behandlingId={123}
       behandlingResultatTyper={behandlingResultatTyper}
       behandlingType={{
         kode: behandlingType.FORSTEGANGSSOKNAD,

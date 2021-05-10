@@ -37,7 +37,6 @@ describe('<TilbakekrevingForm>', () => {
       merknaderFraBeslutter={{
         notAccepted: false,
       }}
-      behandlingId={1}
       behandlingVersjon={2}
       alleKodeverk={{} as AlleKodeverkTilbakekreving}
       beregnBelop={() => undefined}
@@ -73,7 +72,6 @@ describe('<TilbakekrevingForm>', () => {
       merknaderFraBeslutter={{
         notAccepted: false,
       }}
-      behandlingId={1}
       behandlingVersjon={2}
       alleKodeverk={{} as AlleKodeverkTilbakekreving}
       beregnBelop={() => undefined}
@@ -108,7 +106,6 @@ describe('<TilbakekrevingForm>', () => {
       merknaderFraBeslutter={{
         notAccepted: false,
       }}
-      behandlingId={1}
       behandlingVersjon={2}
       alleKodeverk={{} as AlleKodeverkTilbakekreving}
       beregnBelop={() => undefined}

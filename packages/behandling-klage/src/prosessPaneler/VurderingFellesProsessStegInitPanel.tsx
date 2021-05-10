@@ -42,7 +42,7 @@ const lagKlageCallback = (
   behandling: Behandling,
 ) => (aksjonspunktModel: AksjonspunktVerdier) => {
   const data = {
-    behandlingId: behandling.id,
+    behandlingUuid: behandling.uuid,
     ...aksjonspunktModel,
   };
 

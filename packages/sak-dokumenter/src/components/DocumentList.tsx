@@ -68,7 +68,7 @@ const markerSomValgtEllerÅpneDokumenter = (
 
 interface OwnProps {
   documents: Dokument[];
-  behandlingId?: number;
+  behandlingUuid?: string;
   selectDocumentCallback: (e: React.SyntheticEvent, id?: number | string, dokument?: Dokument) => void;
 }
 
@@ -84,7 +84,7 @@ type Timeout = ReturnType<typeof setTimeout>;
 const DocumentList: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   intl,
   documents,
-  behandlingId,
+  behandlingUuid,
   selectDocumentCallback,
 }) => {
   const [isShiftPressed, setShiftPressed] = useState(false);
@@ -150,7 +150,7 @@ const DocumentList: FunctionComponent<OwnProps & WrappedComponentProps> = ({
             </TableColumn>
             <TableColumn>
               {document.tittel}
-              {document.behandlinger && behandlingId && document.behandlinger.includes(behandlingId) && (
+              {document.behandlinger && behandlingUuid && document.behandlinger.includes(behandlingUuid) && (
                 <Image
                   className={styles.image}
                   src={erIBrukImageUrl}

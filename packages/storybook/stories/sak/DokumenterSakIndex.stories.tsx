@@ -5,12 +5,12 @@ import { withKnobs, object } from '@storybook/addon-knobs';
 import DokumenterSakIndex from '@fpsak-frontend/sak-dokumenter';
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
 
-const behandlingId = 1;
+const behandlingUuid = '1';
 
 const dokumenter = [{
   journalpostId: '1',
   dokumentId: '1',
-  behandlinger: [behandlingId],
+  behandlinger: [behandlingUuid],
   tittel: 'Dette er et dokument',
   tidspunkt: '2017-08-02T00:54:25.455',
   kommunikasjonsretning: kommunikasjonsretning.INN,
@@ -47,7 +47,7 @@ export const visMeldingerPanel = () => (
     <DokumenterSakIndex
       documents={object('documents', dokumenter)}
       selectDocumentCallback={action('button-click')}
-      behandlingId={behandlingId}
+      behandlingUuid={behandlingUuid}
     />
   </div>
 );

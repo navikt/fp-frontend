@@ -22,9 +22,8 @@ import {
 const getSubmitCallback = (
   setShowMessageModal: (showModal: boolean) => void,
   behandlingTypeKode: string,
-  behandlingId: number,
   behandlingUuid: string,
-  submitMessage: (params?: { behandlingId?: number; behandlingUuid?: string, mottaker?: string; brevmalkode: string; fritekst: string; arsakskode?: string; },
+  submitMessage: (params?: { behandlingUuid?: string, mottaker?: string; brevmalkode: string; fritekst: string; arsakskode?: string; },
     keepData?: boolean) => Promise<void>,
   resetMessage: () => void,
   setShowSettPaVentModal: (erInnhentetEllerForlenget: boolean) => void,
@@ -46,7 +45,7 @@ const getSubmitCallback = (
     fritekst: values.fritekst,
     brevmalkode: values.brevmalkode,
   } : {
-    behandlingId,
+    behandlingUuid,
     mottaker: values.mottaker,
     brevmalkode: values.brevmalkode,
     fritekst: values.fritekst,
@@ -122,16 +121,16 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
 
   const { startRequest: submitMessage, state: submitState } = restApiHooks.useRestApiRunner(FpsakApiKeys.SUBMIT_MESSAGE);
 
-  const { id, versjon, type } = valgtBehandling;
+  const { uuid, versjon, type } = valgtBehandling;
 
   const resetMessage = () => {
     // FIXME temp fiks for å unngå prod-feil (her skjer det ein oppdatering av behandling, så må oppdatera)
     window.location.reload();
   };
 
-  const submitCallback = useCallback(getSubmitCallback(setShowMessageModal, type.kode, id, valgtBehandling.uuid, submitMessage,
+  const submitCallback = useCallback(getSubmitCallback(setShowMessageModal, type.kode, valgtBehandling.uuid, submitMessage,
     resetMessage, setShowSettPaVentModal, setSubmitCounter, setMeldingForData),
-  [id, versjon]);
+  [uuid, versjon]);
 
   const hideSettPaVentModal = useCallback(() => {
     setShowSettPaVentModal(false);
@@ -150,7 +149,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   const fetchPreview = useVisForhandsvisningAvMelding(type);
 
   const previewCallback = useCallback(getPreviewCallback(type.kode, valgtBehandling.uuid, fagsak.fagsakYtelseType, fetchPreview),
-    [id, versjon]);
+    [uuid, versjon]);
 
   const afterSubmit = useCallback(() => {
     setShowMessageModal(false);
@@ -159,13 +158,13 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
 
   const skalHenteRevAp = requestApi.hasPath(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name);
   const { data: harApentKontrollerRevAp } = restApiHooks.useRestApi(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP, undefined, {
-    updateTriggers: [id, versjon, submitCounter],
+    updateTriggers: [uuid, versjon, submitCounter],
     suspendRequest: !skalHenteRevAp,
     keepData: true,
   });
 
   const { data: brevmaler } = restApiHooks.useRestApi(FpsakApiKeys.BREVMALER, undefined, {
-    updateTriggers: [id, versjon, submitCounter],
+    updateTriggers: [uuid, versjon, submitCounter],
     keepData: true,
   });
 

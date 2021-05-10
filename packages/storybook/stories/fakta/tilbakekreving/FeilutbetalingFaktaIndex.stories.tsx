@@ -21,9 +21,9 @@ const BEHANDLING_RESULTAT_TYPE_KODEVERK = 'BEHANDLING_RESULTAT_TYPE';
 const KONSEKVENS_FOR_YTELSEN_KODEVERK = 'KONSEKVENS_FOR_YTELSEN';
 
 const behandling = {
-  id: 1,
+  uuid: '1',
   versjon: 1,
-};
+} as Behandling;
 
 const feilutbetalingFakta = {
   behandlingFakta: {
@@ -152,7 +152,7 @@ export default {
 export const visAksjonspunktForFeilutbetaling = () => (
   <FeilutbetalingFaktaIndex
     {...standardFaktaProps}
-    behandling={behandling as Behandling}
+    behandling={behandling}
     feilutbetalingFakta={object('feilutbetalingFakta', feilutbetalingFakta as FeilutbetalingFakta)}
     feilutbetalingAarsak={object('feilutbetalingAarsak', feilutbetalingAarsak as FeilutbetalingAarsak[])}
     aksjonspunkter={[{

@@ -69,7 +69,7 @@ describe('RequestRunner', () => {
     const notificationHelper = new NotificationHelper();
     process.setNotificationEmitter(notificationHelper.mapper.getNotificationEmitter());
     const params = {
-      behandlingId: 1,
+      behandlingUuid: '1',
     };
 
     const result = await process.start(params);
@@ -119,7 +119,7 @@ describe('RequestRunner', () => {
     } as HttpClientApi;
 
     const params = {
-      behandlingId: 1,
+      behandlingUuid: '1',
     };
 
     const config = {
@@ -171,7 +171,7 @@ describe('RequestRunner', () => {
     } as HttpClientApi;
 
     const params = {
-      behandlingId: 1,
+      behandlingUuid: '1',
     };
 
     const process = new RequestRunner(httpClientMock, httpClientMock.getAsync, 'behandling', defaultConfig);
@@ -209,7 +209,7 @@ describe('RequestRunner', () => {
     const notificationHelper = new NotificationHelper();
     process.setNotificationEmitter(notificationHelper.mapper.getNotificationEmitter());
     const params = {
-      behandlingId: 1,
+      behandlingUuid: '1',
     };
 
     const result = await process.start(params);

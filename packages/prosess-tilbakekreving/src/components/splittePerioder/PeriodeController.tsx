@@ -16,7 +16,7 @@ import styles from './periodeController.less';
 const isEdited = false;
 
 interface OwnProps {
-  behandlingId: number;
+  behandlingUuid: string;
   beregnBelop: (data: any) => Promise<any>;
   oppdaterSplittedePerioder: (...args: any[]) => any;
   callbackForward: (...args: any[]) => any;
@@ -67,7 +67,7 @@ export class PeriodeController extends Component<OwnProps & WrappedComponentProp
     const {
       periode,
       beregnBelop: callBeregnBelop,
-      behandlingId: selectedBehandlingId,
+      behandlingUuid: selectedBehandlingUuid,
       oppdaterSplittedePerioder,
     } = this.props;
 
@@ -85,7 +85,7 @@ export class PeriodeController extends Component<OwnProps & WrappedComponentProp
     };
 
     const params = {
-      behandlingId: selectedBehandlingId,
+      behandlingUuid: selectedBehandlingUuid,
       perioder: [forstePeriode, andrePeriode],
     };
 

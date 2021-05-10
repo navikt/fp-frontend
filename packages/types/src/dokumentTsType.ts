@@ -1,7 +1,7 @@
 type Dokument = Readonly<{
   journalpostId: string;
   dokumentId: string;
-  behandlinger?: number[];
+  behandlinger?: string[];
   tittel?: string;
   tidspunkt?: string;
   kommunikasjonsretning: string;

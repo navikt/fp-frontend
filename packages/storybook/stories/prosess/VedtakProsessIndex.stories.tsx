@@ -21,7 +21,7 @@ import VedtakProsessIndex from '@fpsak-frontend/prosess-vedtak';
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
 const behandling = {
-  id: 1,
+  uuid: '1',
   versjon: 1,
   type: {
     kode: behandlingType.FORSTEGANGSSOKNAD,

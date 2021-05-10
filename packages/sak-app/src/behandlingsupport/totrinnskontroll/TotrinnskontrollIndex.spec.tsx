@@ -37,7 +37,7 @@ describe('<TotrinnskontrollIndex>', () => {
   };
 
   const valgtBehandling = {
-    id: 1234,
+    uuid: '1234',
     versjon: 123,
     type: {
       kode: behandlingType.FORSTEGANGSSOKNAD,
@@ -134,7 +134,7 @@ describe('<TotrinnskontrollIndex>', () => {
     const reqData = requestApi.getRequestMockData(FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT.name);
     expect(reqData).toHaveLength(1);
     expect(reqData[0].params).toEqual({
-      behandlingId: 1234,
+      behandlingUuid: '1234',
       saksnummer: '1',
       behandlingVersjon: 123,
       bekreftedeAksjonspunktDtoer: [{

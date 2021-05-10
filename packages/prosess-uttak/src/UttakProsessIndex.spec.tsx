@@ -93,7 +93,7 @@ describe('<UttakProsessIndex>', () => {
   } as UttaksresultatPeriode;
 
   const behandling = {
-    id: 1,
+    uuid: '1',
     versjon: 1,
     sprakkode: {
       kode: 'NO',

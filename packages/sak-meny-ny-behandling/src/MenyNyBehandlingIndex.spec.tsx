@@ -33,7 +33,7 @@ describe('<MenyNyBehandlingIndex>', () => {
         kodeverk: 'FAGSAK_YTELSE_TYPE',
       }}
       saksnummer="123"
-      behandlingId={3}
+      behandlingUuid="3"
       behandlingVersjon={1}
       behandlingType={{
         kode: behandlingType.FORSTEGANGSSOKNAD,

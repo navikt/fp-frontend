@@ -10,7 +10,7 @@ import BeregningsresultatProsessIndex from '@fpsak-frontend/prosess-beregningsre
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
 const behandling = {
-  id: 1,
+  uuid: '1',
   versjon: 1,
 } as Behandling;
 

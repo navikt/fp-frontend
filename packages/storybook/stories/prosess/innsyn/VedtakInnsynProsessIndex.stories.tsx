@@ -13,7 +13,7 @@ import { Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
 import alleKodeverk from '../../mocks/alleKodeverk.json';
 
 const behandling = {
-  id: 1,
+  uuid: '1',
   versjon: 1,
   sprakkode: {
     kode: 'NO',

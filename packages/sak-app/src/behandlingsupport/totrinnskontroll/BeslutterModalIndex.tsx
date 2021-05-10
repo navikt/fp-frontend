@@ -23,7 +23,7 @@ const BeslutterModalIndex: FunctionComponent<OwnProps> = ({
   erKlageWithKA,
 }) => {
   const { data, state } = restApiHooks.useRestApi(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT, undefined, {
-    updateTriggers: [behandling.id, behandling.versjon],
+    updateTriggers: [behandling.uuid, behandling.versjon],
     suspendRequest: !requestApi.hasPath(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT.name),
     keepData: true,
   });

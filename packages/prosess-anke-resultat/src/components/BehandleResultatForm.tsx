@@ -69,9 +69,9 @@ export const ResultatAvvise: FunctionComponent<OwnPropsResultat> = ({
 }): ReactElement => (
   <>
     <Undertekst>
-      {ankeVurderingResultat.paAnketBehandlingId != null
+      {ankeVurderingResultat.paAnketBehandlingUuid != null
       && (<FormattedMessage id="Ankebehandling.Resultat.Innstilling.Avvises" />)}
-      {ankeVurderingResultat.paAnketBehandlingId == null
+      {ankeVurderingResultat.paAnketBehandlingUuid == null
       && (<FormattedMessage id="Ankebehandling.Resultat.Innstilling.AvvisesUten" />)}
     </Undertekst>
     <VerticalSpacer sixteenPx />

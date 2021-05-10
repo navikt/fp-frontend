@@ -51,7 +51,7 @@ const familiehendelse = {
 } as FamilieHendelseSamling;
 
 const behandling = {
-  id: 1,
+  uuid: '1',
   versjon: 1,
   type: {
     kode: 'BT-002',
@@ -456,9 +456,9 @@ export const visProsessUttak = () => (
     isReadOnly={boolean('isReadOnly', false)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
     tempUpdateStonadskontoer={action('button-click') as (params: {
-      behandlingId: {
+      behandlingUuid: {
         saksnummer: string;
-        behandlingId: number;
+        behandlingUuid: string;
       };
       perioder: any;
     }) => Promise<any>}

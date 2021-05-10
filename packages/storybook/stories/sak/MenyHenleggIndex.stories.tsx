@@ -21,7 +21,6 @@ interface HenleggParams {
 }
 
 const valgtBehandling = {
-  id: 1,
   versjon: 2,
   uuid: '23r2323',
   type: {

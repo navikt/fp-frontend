@@ -30,7 +30,7 @@ export default {
 };
 
 const behandling = {
-  id: 1,
+  uuid: '1',
   versjon: 1,
   type: {
     kode: 'BT-003',

@@ -13,7 +13,6 @@ const getContentProps = (
   behandling: BehandlingAppKontekst,
   getKodeverkFn: (kodeverk: Kodeverk, behandlingType: Kodeverk) => KodeverkMedNavn | undefined,
 ) => ({
-  behandlingId: behandling.id,
   behandlingTypeNavn: getKodeverkFn(behandling.type, behandling.type)?.navn || '',
   behandlingTypeKode: behandling.type.kode,
   førsteÅrsak: behandling.førsteÅrsak,
@@ -52,7 +51,7 @@ const renderToggleShowAllButton = (
 );
 
 const renderLinkToBehandling = (
-  getBehandlingLocation: (behandlingId: number) => Location,
+  getBehandlingLocation: (behandlingUuid: string) => Location,
   behandling: BehandlingAppKontekst,
   isActive: boolean,
   toggleShowAll: () => void,
@@ -61,7 +60,7 @@ const renderLinkToBehandling = (
 ): ReactElement => (
   <NavLink
     className={styles.linkToBehandling}
-    to={getBehandlingLocation(behandling.id)}
+    to={getBehandlingLocation(behandling.uuid)}
     onClick={toggleShowAll}
   >
     {renderItemContent(behandling, getKodeverkFn, false, showAll && isActive)}
@@ -71,7 +70,7 @@ const renderLinkToBehandling = (
 interface OwnProps {
   onlyOneBehandling: boolean;
   behandling: BehandlingAppKontekst;
-  getBehandlingLocation: (behandlingId: number) => Location;
+  getBehandlingLocation: (behandlingUuid: string) => Location;
   isActive: boolean;
   showAll: boolean;
   toggleShowAll: () => void;

@@ -15,7 +15,7 @@ const periode = {
 const mockProps = {
   ...reduxFormPropsMock,
   formName: '¨test',
-  behandlingId: 1,
+  behandlingUuid: '1',
   behandlingVersjon: 2,
   periode,
   elementId: 0,

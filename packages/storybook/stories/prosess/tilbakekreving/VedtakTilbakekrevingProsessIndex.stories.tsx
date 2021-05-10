@@ -159,7 +159,7 @@ const alleKodeverk = {
 
 const standardProsessProps = {
   behandling: {
-    id: 1,
+    uuid: '1',
     versjon: 1,
   } as Behandling,
   alleKodeverk,

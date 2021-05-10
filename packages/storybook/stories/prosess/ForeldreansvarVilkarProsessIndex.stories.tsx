@@ -33,7 +33,7 @@ export const visÅpentAksjonspunkt2Ledd = () => (
   <ForeldreansvarVilkarProsessIndex
     {...standardProsessProps}
     behandling={{
-      id: 1,
+      uuid: '1',
       versjon: 1,
     } as Behandling}
     aksjonspunkter={[{
@@ -55,7 +55,7 @@ export const visOppfyltVilkår2Ledd = () => (
   <ForeldreansvarVilkarProsessIndex
     {...standardProsessProps}
     behandling={{
-      id: 1,
+      uuid: '1',
       versjon: 1,
       behandlingsresultat: {},
     } as Behandling}
@@ -80,7 +80,7 @@ export const visAvslåttVilkår2Ledd = () => (
   <ForeldreansvarVilkarProsessIndex
     {...standardProsessProps}
     behandling={{
-      id: 1,
+      uuid: '1',
       versjon: 1,
       behandlingsresultat: {
         avslagsarsak: {
@@ -109,7 +109,7 @@ export const visÅpentAksjonspunkt4Ledd = () => (
   <ForeldreansvarVilkarProsessIndex
     {...standardProsessProps}
     behandling={{
-      id: 1,
+      uuid: '1',
       versjon: 1,
     } as Behandling}
     aksjonspunkter={[{
@@ -131,7 +131,7 @@ export const visOppfyltVilkår4Ledd = () => (
   <ForeldreansvarVilkarProsessIndex
     {...standardProsessProps}
     behandling={{
-      id: 1,
+      uuid: '1',
       versjon: 1,
       behandlingsresultat: {},
     } as Behandling}
@@ -156,7 +156,7 @@ export const visAvslåttVilkår4Ledd = () => (
   <ForeldreansvarVilkarProsessIndex
     {...standardProsessProps}
     behandling={{
-      id: 1,
+      uuid: '1',
       versjon: 1,
       behandlingsresultat: {
         avslagsarsak: {

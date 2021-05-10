@@ -12,7 +12,7 @@ import messages from '../../i18n/nb_NO.json';
 const intlMock = getIntlMock(messages);
 
 const historikkFpSak = [{
-  behandlingId: 999951,
+  behandlingUuid: '999951',
   type: {
     kode: 'NYE_REGOPPLYSNINGER',
     kodeverk: 'HISTORIKKINNSLAG_TYPE',
@@ -31,7 +31,7 @@ const historikkFpSak = [{
   historikkinnslagDeler: [],
 },
 {
-  behandlingId: 999952,
+  behandlingUuid: '999952',
   type: {
     kode: 'INNSYN_OPPR',
     kodeverk: 'HISTORIKKINNSLAG_TYPE',
@@ -76,7 +76,7 @@ describe('<History>', () => {
       saksnummer="123"
       getBehandlingLocation={() => ({} as Location)}
       createLocationForSkjermlenke={() => ({} as Location)}
-      valgtBehandlingId={999951}
+      valgtBehandlingUuid="999951"
     />);
 
     expect(wrapper.find(Checkbox)).toHaveLength(1);
@@ -92,7 +92,7 @@ describe('<History>', () => {
       saksnummer="123"
       getBehandlingLocation={() => ({} as Location)}
       createLocationForSkjermlenke={() => ({} as Location)}
-      valgtBehandlingId={999951}
+      valgtBehandlingUuid="999951"
     />);
 
     expect(wrapper.find(Snakkeboble)).toHaveLength(2);
@@ -108,7 +108,7 @@ describe('<History>', () => {
       saksnummer="123"
       getBehandlingLocation={() => ({} as Location)}
       createLocationForSkjermlenke={() => ({} as Location)}
-      valgtBehandlingId={999951}
+      valgtBehandlingUuid="999951"
     />);
 
     // @ts-ignore

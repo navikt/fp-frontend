@@ -64,7 +64,7 @@ FormkravKlageFormNfpImpl.defaultProps = {
 };
 
 const getPåklagdBehandling = (avsluttedeBehandlinger: AvsluttetBehandling[], påklagdVedtak: string): AvsluttetBehandling => avsluttedeBehandlinger
-  .find((behandling: AvsluttetBehandling) => behandling.id.toString() === påklagdVedtak);
+  .find((behandling: AvsluttetBehandling) => behandling.uuid === påklagdVedtak);
 
 export const erTilbakekreving = (avsluttedeBehandlinger: AvsluttetBehandling[], påklagdVedtak: string): boolean => {
   const behandling = getPåklagdBehandling(avsluttedeBehandlinger, påklagdVedtak);

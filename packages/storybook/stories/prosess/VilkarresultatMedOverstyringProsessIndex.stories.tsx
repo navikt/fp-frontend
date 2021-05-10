@@ -46,7 +46,7 @@ export const visOverstyringspanelForFødsel = () => {
     <VilkarresultatMedOverstyringProsessIndex
       {...standardProsessProps}
       behandling={{
-        id: 1,
+        uuid: '1',
         versjon: 1,
         type: {
           kode: behandlingType.FORSTEGANGSSOKNAD,
@@ -77,7 +77,7 @@ export const visOverstyringspanelForMedlemskap = () => {
     <VilkarresultatMedOverstyringProsessIndex
       {...standardProsessProps}
       behandling={{
-        id: 1,
+        uuid: '1',
         versjon: 1,
         type: {
           kode: behandlingType.FORSTEGANGSSOKNAD,
@@ -106,7 +106,7 @@ export const visOverstyrtAksjonspunktSomErBekreftet = () => (
   <VilkarresultatMedOverstyringProsessIndex
     {...standardProsessProps}
     behandling={{
-      id: 1,
+      uuid: '1',
       versjon: 1,
       type: {
         kode: behandlingType.FORSTEGANGSSOKNAD,

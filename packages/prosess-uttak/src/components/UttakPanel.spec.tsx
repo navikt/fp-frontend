@@ -152,7 +152,7 @@ describe('<UttakPanel>', () => {
       ytelsefordeling={{} as Ytelsefordeling}
       behandlingType={{} as Kodeverk}
       alleKodeverk={kodeverk}
-      behandlingId={1}
+      behandlingUuid="1"
       behandlingStatus={{} as Kodeverk}
       employeeHasAccess
       fagsak={{} as Fagsak}
@@ -205,7 +205,7 @@ describe('<UttakPanel>', () => {
       ytelsefordeling={{} as Ytelsefordeling}
       behandlingType={{} as Kodeverk}
       alleKodeverk={kodeverk}
-      behandlingId={1}
+      behandlingUuid="1"
       behandlingStatus={{} as Kodeverk}
       employeeHasAccess
       fagsak={{} as Fagsak}

@@ -41,7 +41,7 @@ const ankeOmgjorArsakRekkefolge = [
 ];
 
 export type BehandlingInfo = {
-  id?: number;
+  uuid?: string;
   opprettet?: string;
   type?: Kodeverk;
   status?: Kodeverk;
@@ -68,7 +68,7 @@ type FormValues = {
 const skalViseForhaandlenke = (avr: Kodeverk): boolean => avr?.kode === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE
   || avr?.kode === ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV || avr?.kode === ankeVurdering.ANKE_OMGJOER;
 
-const IKKE_PAA_ANKET_BEHANDLING_ID = 0;
+const IKKE_PAA_ANKET_BEHANDLING_ID = '0';
 
 const canPreview = (begrunnelse: string, fritekstTilBrev: string): boolean => (begrunnelse && begrunnelse.length > 0)
   && (fritekstTilBrev && fritekstTilBrev.length > 0);
@@ -79,11 +79,11 @@ const formatBehandling = (
   behandlingStatuser: KodeverkMedNavn[],
 ): string => `${formatDate(b.opprettet)} - ${behandlingTyper.find((bt) => bt.kode === b.type.kode)?.navn} `
   + `- ${behandlingStatuser.find((bs) => bs.kode === b.status.kode)?.navn}`;
-const formatId = (id?: number): string => {
+const formatId = (id?: string): string => {
   if (id === null) {
-    return `${IKKE_PAA_ANKET_BEHANDLING_ID}`;
+    return IKKE_PAA_ANKET_BEHANDLING_ID;
   }
-  return `${id}`;
+  return id;
 };
 
 const leggTilUkjent = (behandlinger: BehandlingInfo[] = []): BehandlingInfo[] => {
@@ -105,8 +105,8 @@ const buildOption = (
   behandlingTyper: KodeverkMedNavn[],
   behandlingStatuser: KodeverkMedNavn[],
 ): ReactElement => {
-  const formattedId = formatId(b.id);
-  if (b.id === IKKE_PAA_ANKET_BEHANDLING_ID) {
+  const formattedId = formatId(b.uuid);
+  if (b.uuid === IKKE_PAA_ANKET_BEHANDLING_ID) {
     return (<option key={formattedId} value={formattedId}>{intl.formatMessage({ id: 'Ankebehandling.Resultat.IkkePaaAnketVedtak' })}</option>);
   }
   return (<option key={formattedId} value={formattedId}>{formatBehandling(b, behandlingTyper, behandlingStatuser)}</option>);
@@ -333,7 +333,7 @@ const lagreVurderingOmgjoer = (values: FormValues): Kodeverk | string => (ankeVu
   ? values.ankeVurderingOmgjoer : '-');
 
 export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.ankeVurderingResultat], (resultat): FormValues => ({
-  vedtak: resultat ? formatId(resultat.paAnketBehandlingId) : null,
+  vedtak: resultat ? formatId(resultat.paAnketBehandlingUuid) : null,
   ankeVurdering: resultat ? resultat.ankeVurdering : null,
   begrunnelse: resultat ? resultat.begrunnelse : null,
   fritekstTilBrev: resultat ? resultat.fritekstTilBrev : null,

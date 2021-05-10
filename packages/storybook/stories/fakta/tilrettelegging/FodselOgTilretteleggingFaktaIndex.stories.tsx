@@ -15,7 +15,7 @@ import { tilrettelegging as tilretteleggingPermisjon, inntektArbeidYtelse as iay
 import alleKodeverk from '../../mocks/alleKodeverk.json';
 
 const behandling = {
-  id: 1,
+  uuid: '1',
   versjon: 1,
 } as Behandling;
 

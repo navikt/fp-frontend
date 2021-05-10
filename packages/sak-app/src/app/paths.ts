@@ -21,15 +21,15 @@ const DEV_LOGIN_URL = 'http://localhost:8080/fpsak/jetty/login';
 export const fagsakPath = '/fagsak/:saksnummer(\\d+)/';
 export const aktoerPath = '/aktoer/:aktoerId(\\d+)';
 export const behandlingerPath = `${fagsakPath}behandling/`;
-export const behandlingPath = `${behandlingerPath}:behandlingId(\\d+)/`;
+export const behandlingPath = `${behandlingerPath}:behandlingUuid(\\d+)/`;
 
 export const pathToFagsak = (saksnummer: string): string => buildPath(fagsakPath, { saksnummer });
 export const pathToBehandlinger = (saksnummer: string): string => buildPath(behandlingerPath, { saksnummer });
-export const pathToBehandling = (saksnummer: string, behandlingId: number): string => buildPath(behandlingPath, { saksnummer, behandlingId });
+export const pathToBehandling = (saksnummer: string, behandlingUuid: string): string => buildPath(behandlingPath, { saksnummer, behandlingUuid });
 export const pathToMissingPage = (): string => '/404';
 
-export const pathToAnnenPart = (saksnummer: string, behandlingId: number)
-  : string => `/${FPSAK}/fagsak/${saksnummer}/behandling/${behandlingId}/?punkt=${DEFAULT_PROSESS_STEG}&fakta=${DEFAULT_FAKTA}`;
+export const pathToAnnenPart = (saksnummer: string, behandlingUuid: string)
+  : string => `/${FPSAK}/fagsak/${saksnummer}/behandling/${behandlingUuid}/?punkt=${DEFAULT_PROSESS_STEG}&fakta=${DEFAULT_FAKTA}`;
 
 const emptyQueryString = (queryString: string): boolean => queryString === '?' || !queryString;
 

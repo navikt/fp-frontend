@@ -17,7 +17,7 @@ export default {
 export const visModalEtterGodkjenning = () => (
   <FatterVedtakTotrinnskontrollModalSakIndex
     behandling={{
-      id: 1,
+      uuid: '1',
       status: {
         kode: behandlingStatus.FATTER_VEDTAK,
         kodeverk: '',
@@ -42,7 +42,7 @@ export const visModalEtterGodkjenning = () => (
 export const visModalEtterGodkjenningAvKlage = () => (
   <FatterVedtakTotrinnskontrollModalSakIndex
     behandling={{
-      id: 1,
+      uuid: '1',
       status: {
         kode: behandlingStatus.FATTER_VEDTAK,
         kodeverk: '',
@@ -67,7 +67,7 @@ export const visModalEtterGodkjenningAvKlage = () => (
 export const visModalEtterTilbakesendingTilSaksbehandler = () => (
   <FatterVedtakTotrinnskontrollModalSakIndex
     behandling={{
-      id: 1,
+      uuid: '1',
       status: {
         kode: behandlingStatus.FATTER_VEDTAK,
         kodeverk: '',

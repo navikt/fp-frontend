@@ -13,9 +13,8 @@ import messages from '../i18n/nb_NO.json';
 
 describe('<MenyHenleggIndex>', () => {
   const valgtBehandling = {
-    id: 3,
+    uuid: '3',
     versjon: 1,
-    uuid: '2323',
     type: {
       kode: behandlingType.FORSTEGANGSSOKNAD,
       kodeverk: 'BEHANDLING_TYPE',

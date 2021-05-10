@@ -60,7 +60,7 @@ const getOppdaterProsessStegOgFaktaPanelIUrl = (history: History) => (prosessSte
 };
 
 interface OwnProps {
-  setBehandlingIdOgVersjon: (behandlingId: number, behandlingVersjon: number) => void;
+  setBehandlingUuidOgVersjon: (behandlingUuid: string, behandlingVersjon: number) => void;
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
   setRequestPendingMessage: (message: string) => void;
@@ -73,28 +73,28 @@ interface OwnProps {
  * relatert til den valgte behandlingen.
  */
 const BehandlingIndex: FunctionComponent<OwnProps> = ({
-  setBehandlingIdOgVersjon,
+  setBehandlingUuidOgVersjon,
   fagsak,
   alleBehandlinger,
   setRequestPendingMessage,
 }) => {
-  const { selected: behandlingId } = useTrackRouteParam<number>({
-    paramName: 'behandlingId',
-    parse: (behandlingFromUrl) => Number.parseInt(behandlingFromUrl, 10),
+  const { selected: behandlingUuid } = useTrackRouteParam<string>({
+    paramName: 'behandlingUuid',
+    parse: (behandlingUuidFromUrl) => behandlingUuidFromUrl,
   });
 
-  const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
+  const behandling = alleBehandlinger.find((b) => b.uuid === behandlingUuid);
 
   useEffect(() => {
     if (behandling) {
       requestApi.setLinks(behandling.links, LinkCategory.BEHANDLING);
-      setBehandlingIdOgVersjon(behandlingId, behandling.versjon);
+      setBehandlingUuidOgVersjon(behandlingUuid, behandling.versjon);
     }
   }, [behandling]);
 
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
-  const oppdaterBehandlingVersjon = useCallback((versjon) => setBehandlingIdOgVersjon(behandlingId, versjon), [behandlingId]);
+  const oppdaterBehandlingVersjon = useCallback((versjon) => setBehandlingUuidOgVersjon(behandlingUuid, versjon), [behandlingUuid]);
 
   const kodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
 
@@ -102,7 +102,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
 
   const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
   const rettigheter = useMemo(() => getAccessRights(navAnsatt, fagsak.status, behandling?.status, behandling?.type),
-    [fagsak.status, behandlingId, behandling?.status, behandling?.type]);
+    [fagsak.status, behandlingUuid, behandling?.status, behandling?.type]);
 
   const history = useHistory();
   const opneSokeside = useCallback(() => { history.push('/'); }, []);
@@ -112,8 +112,8 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   const query = parseQueryString(location.search);
 
   const defaultProps = {
-    key: behandlingId,
-    behandlingId,
+    key: behandlingUuid,
+    behandlingUuid,
     oppdaterBehandlingVersjon,
     behandlingEventHandler,
     kodeverk,
@@ -129,7 +129,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   const fagsakBehandlingerInfo = useMemo(() => alleBehandlinger
     .filter((b) => !b.behandlingHenlagt)
     .map((b) => ({
-      id: b.id,
       uuid: b.uuid,
       type: b.type,
       status: b.status,
@@ -137,7 +136,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       avsluttet: b.avsluttet,
     })), [alleBehandlinger]);
 
-  if (!behandlingId) {
+  if (!behandlingUuid) {
     return <LoadingPanel />;
   }
 

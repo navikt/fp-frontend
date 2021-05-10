@@ -30,7 +30,7 @@ describe('<BehandlingSupportIndex>', () => {
   };
 
   const behandling = {
-    id: 1,
+    uuid: '1',
     type: {
       kode: behandlingType.FORSTEGANGSSOKNAD,
       kodeverk: '',
@@ -63,7 +63,7 @@ describe('<BehandlingSupportIndex>', () => {
     const wrapper = shallow(<BehandlingSupportIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
-      behandlingId={1}
+      behandlingUuid="1"
       behandlingVersjon={2}
     />);
 

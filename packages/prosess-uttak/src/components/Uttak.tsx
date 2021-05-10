@@ -106,7 +106,7 @@ interface PureOwnProps {
   familiehendelse: FamilieHendelseSamling;
   uttakPeriodeGrense: UttakPeriodeGrense;
   ytelsefordeling: Ytelsefordeling;
-  behandlingId: number;
+  behandlingUuid: string;
   behandlingType: Kodeverk;
   behandlingStatus: Kodeverk;
   fagsak: Fagsak;
@@ -124,9 +124,9 @@ interface PureOwnProps {
   soknadsType: string;
   omsorgsovertakelseDato?: string;
   tempUpdateStonadskontoer: (params: {
-    behandlingId: {
+    behandlingUuid: {
       saksnummer: string;
-      behandlingId: number;
+      behandlingUuid: string;
     };
     perioder: any;
   }) => Promise<any>;
@@ -242,7 +242,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
       tempUpdateStonadskontoer: updateKontoer,
       reduxFormChange: formChange,
       formName,
-      behandlingId,
+      behandlingUuid,
       saksnummer,
     } = this.props;
 
@@ -268,9 +268,9 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     });
 
     const params = {
-      behandlingId: {
+      behandlingUuid: {
         saksnummer,
-        behandlingId,
+        behandlingUuid,
       },
       perioder: transformedResultat,
     };
