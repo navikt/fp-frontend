@@ -21,7 +21,7 @@ const DEV_LOGIN_URL = 'http://localhost:8080/fpsak/jetty/login';
 export const fagsakPath = '/fagsak/:saksnummer(\\d+)/';
 export const aktoerPath = '/aktoer/:aktoerId(\\d+)';
 export const behandlingerPath = `${fagsakPath}behandling/`;
-export const behandlingPath = `${behandlingerPath}:behandlingUuid(\\d+)/`;
+export const behandlingPath = `${behandlingerPath}:behandlingUuid(.*)/`;
 
 export const pathToFagsak = (saksnummer: string): string => buildPath(fagsakPath, { saksnummer });
 export const pathToBehandlinger = (saksnummer: string): string => buildPath(behandlingerPath, { saksnummer });
