@@ -7,6 +7,7 @@ import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
+import AvklarBeregningsaktiviteterAP, { OverstyrBeregningsaktiviteterAP } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningAktivitetAP';
 import VurderFaktaBeregningPanel from './fellesFaktaForATFLogSN/VurderFaktaBeregningPanel';
 import AvklareAktiviteterPanel from './avklareAktiviteter/AvklareAktiviteterPanel';
 
@@ -17,7 +18,7 @@ const {
 } = aksjonspunktCodes;
 
 type OwnProps = {
-  submitCallback: (data: any) => Promise<any>;
+  submitCallback: (aksjonspunktData: AvklarBeregningsaktiviteterAP | OverstyrBeregningsaktiviteterAP | any) => Promise<void>;
   hasOpenAksjonspunkter: boolean;
   readOnly: boolean;
   aksjonspunkter: Aksjonspunkt[];

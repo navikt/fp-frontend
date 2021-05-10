@@ -49,7 +49,7 @@ export type BeregningAktivitet = Readonly<{
 
 export type AvklarBeregningAktiviteter = Readonly<{
   tom: string;
-  aktiviteter:BeregningAktivitet[];
+  aktiviteter?: BeregningAktivitet[];
 }>
 
 export type AvklarBeregningAktiviteterMap = Readonly<{

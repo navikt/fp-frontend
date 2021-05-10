@@ -152,6 +152,8 @@ describe('<AvklareAktiviteterPanel>', () => {
       reduxFormInitialize={() => {}}
       beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      erOverstyrer={false}
+      validate={sinon.spy()}
     />, messages);
     const vurderAktivitetPanel = wrapper.find(VurderAktiviteterPanel);
     expect(vurderAktivitetPanel).toHaveLength(1);
@@ -181,6 +183,8 @@ describe('<AvklareAktiviteterPanel>', () => {
       beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
       reduxFormInitialize={() => {}}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      erOverstyrer={false}
+      validate={sinon.spy()}
     />, messages);
     const radio = wrapper.find(VurderAktiviteterPanel);
     expect(radio).toHaveLength(0);
@@ -215,6 +219,8 @@ describe('<AvklareAktiviteterPanel>', () => {
       beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
       reduxFormInitialize={() => {}}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      erOverstyrer={false}
+      validate={sinon.spy()}
     />, messages);
     expect(wrapper.find(OverstyringKnapp)).toHaveLength(1);
   });
@@ -248,6 +254,8 @@ describe('<AvklareAktiviteterPanel>', () => {
       alleKodeverk={alleKodeverk}
       reduxFormInitialize={() => {}}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
+      erOverstyrer={false}
+      validate={sinon.spy()}
     />, messages);
     const helptext = wrapper.find(AksjonspunktHelpTextTemp);
     expect(helptext).toHaveLength(0);
@@ -268,7 +276,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       submittable: true,
       harAndreAksjonspunkterIPanel: false,
       submitCallback: null,
-      reduxFormInitialize: null,
+      erOverstyrer: false,
       beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } },
     });
     expect(initialValues !== null).toBe(true);
@@ -290,7 +298,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       submittable: true,
       harAndreAksjonspunkterIPanel: false,
       submitCallback: null,
-      reduxFormInitialize: null,
+      erOverstyrer: false,
       beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } },
     });
     expect(initialValues !== null).toBe(true);
@@ -314,7 +322,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       submittable: true,
       harAndreAksjonspunkterIPanel: false,
       submitCallback: null,
-      reduxFormInitialize: null,
+      erOverstyrer: false,
       beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } },
     });
     expect(initialValues !== null).toBe(true);
@@ -329,15 +337,16 @@ describe('<AvklareAktiviteterPanel>', () => {
     };
     const values = {
       avklarAktiviteter,
+      aktiviteterValues: {},
       aksjonspunkter: apsAvklarAktiviteter,
     };
-    values[id1] = { skalBrukes: false };
-    values[id2] = { skalBrukes: true };
-    values[id3] = { skalBrukes: true };
-    values[idAAP] = { skalBrukes: true };
+    values.aktiviteterValues[id1] = { skalBrukes: false };
+    values.aktiviteterValues[id2] = { skalBrukes: true };
+    values.aktiviteterValues[id3] = { skalBrukes: true };
+    values.aktiviteterValues[idAAP] = { skalBrukes: true };
     const transformed = transformValues(values);
-    expect(transformed[0].beregningsaktivitetLagreDtoList.length).toBe(1);
-    expect(transformed[0].beregningsaktivitetLagreDtoList[0].oppdragsgiverOrg).toBe(aktivitet1.arbeidsgiverId);
+    expect(transformed.beregningsaktivitetLagreDtoList.length).toBe(1);
+    expect(transformed.beregningsaktivitetLagreDtoList[0].oppdragsgiverOrg).toBe(aktivitet1.arbeidsgiverId);
   });
 
   it('skal transform values om for valgt overstyring', () => {
@@ -349,19 +358,20 @@ describe('<AvklareAktiviteterPanel>', () => {
     const aps = [];
     const values = {
       avklarAktiviteter,
+      aktiviteterValues: {},
       aksjonspunkter: aps,
     };
-    values[id1] = { skalBrukes: null };
-    values[id2] = { skalBrukes: true };
-    values[id3] = { skalBrukes: false };
-    values[idAAP] = { skalBrukes: true };
+    values.aktiviteterValues[id1] = { skalBrukes: null };
+    values.aktiviteterValues[id2] = { skalBrukes: true };
+    values.aktiviteterValues[id3] = { skalBrukes: false };
+    values.aktiviteterValues[idAAP] = { skalBrukes: true };
     values[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME] = 'begrunnelse';
     values[MANUELL_OVERSTYRING_FIELD] = true;
     const transformed = transformValues(values);
-    expect(transformed[0].beregningsaktivitetLagreDtoList.length).toBe(1);
-    expect(transformed[0].beregningsaktivitetLagreDtoList[0].arbeidsgiverIdentifikator).toBe(aktivitet3.aktørIdString);
-    expect(transformed[0].begrunnelse).toBe('begrunnelse');
-    expect(transformed[0].kode).toBe(OVERSTYRING_AV_BEREGNINGSAKTIVITETER);
+    expect(transformed.beregningsaktivitetLagreDtoList.length).toBe(1);
+    expect(transformed.beregningsaktivitetLagreDtoList[0].arbeidsgiverIdentifikator).toBe(aktivitet3.aktørIdString);
+    expect(transformed.begrunnelse).toBe('begrunnelse');
+    expect(transformed.kode).toBe(OVERSTYRING_AV_BEREGNINGSAKTIVITETER);
   });
 
   it('skal returnere true for endret begrunnelse', () => {
@@ -373,20 +383,22 @@ describe('<AvklareAktiviteterPanel>', () => {
     };
     const values = {
       avklarAktiviteter: null,
+      aktiviteterValues: {},
     };
-    values[id1] = { skalBrukes: null };
-    values[id2] = { skalBrukes: true };
-    values[id3] = { skalBrukes: false };
-    values[idAAP] = { skalBrukes: null };
+    values.aktiviteterValues[id1] = { skalBrukes: null };
+    values.aktiviteterValues[id2] = { skalBrukes: true };
+    values.aktiviteterValues[id3] = { skalBrukes: false };
+    values.aktiviteterValues[idAAP] = { skalBrukes: null };
     values[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME] = 'sefiojsiejfise';
     values.avklarAktiviteter = avklarAktiviteter;
     const initial = {
       avklarAktiviteter: null,
+      aktiviteterValues: {},
     };
-    initial[id1] = { skalBrukes: null };
-    initial[id2] = { skalBrukes: true };
-    initial[id3] = { skalBrukes: false };
-    initial[idAAP] = { skalBrukes: null };
+    initial.aktiviteterValues[id1] = { skalBrukes: null };
+    initial.aktiviteterValues[id2] = { skalBrukes: true };
+    initial.aktiviteterValues[id3] = { skalBrukes: false };
+    initial.aktiviteterValues[idAAP] = { skalBrukes: null };
     initial[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME] = '53451221412412';
     initial.avklarAktiviteter = avklarAktiviteter;
     const erAvklartOgIkkeEndret = erAvklartAktivitetEndret.resultFunc(
@@ -408,20 +420,22 @@ describe('<AvklareAktiviteterPanel>', () => {
     };
     const values = {
       avklarAktiviteter: null,
+      aktiviteterValues: {},
     };
-    values[id1] = { skalBrukes: null };
-    values[id2] = { skalBrukes: false };
-    values[id3] = { skalBrukes: false };
-    values[idAAP] = { skalBrukes: null };
+    values.aktiviteterValues[id1] = { skalBrukes: null };
+    values.aktiviteterValues[id2] = { skalBrukes: false };
+    values.aktiviteterValues[id3] = { skalBrukes: false };
+    values.aktiviteterValues[idAAP] = { skalBrukes: null };
     values[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME] = 'sefiojsiejfise';
     values.avklarAktiviteter = avklarAktiviteter;
     const initial = {
       avklarAktiviteter: null,
+      aktiviteterValues: {},
     };
-    initial[id1] = { skalBrukes: null };
-    initial[id2] = { skalBrukes: true };
-    initial[id3] = { skalBrukes: false };
-    initial[idAAP] = { skalBrukes: null };
+    initial.aktiviteterValues[id1] = { skalBrukes: null };
+    initial.aktiviteterValues[id2] = { skalBrukes: true };
+    initial.aktiviteterValues[id3] = { skalBrukes: false };
+    initial.aktiviteterValues[idAAP] = { skalBrukes: null };
     initial[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME] = 'sefiojsiejfise';
     initial.avklarAktiviteter = avklarAktiviteter;
     const erAvklartOgIkkeEndret = erAvklartAktivitetEndret.resultFunc(
@@ -443,20 +457,22 @@ describe('<AvklareAktiviteterPanel>', () => {
     };
     const values = {
       avklarAktiviteter: null,
+      aktiviteterValues: {},
     };
-    values[id1] = { skalBrukes: null };
-    values[id2] = { skalBrukes: false };
-    values[id3] = { skalBrukes: false };
-    values[idAAP] = { skalBrukes: null };
+    values.aktiviteterValues[id1] = { skalBrukes: null };
+    values.aktiviteterValues[id2] = { skalBrukes: false };
+    values.aktiviteterValues[id3] = { skalBrukes: false };
+    values.aktiviteterValues[idAAP] = { skalBrukes: null };
     values[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME] = 'sefiojsiejfise';
     values.avklarAktiviteter = avklarAktiviteter;
     const initial = {
       avklarAktiviteter: null,
+      aktiviteterValues: {},
     };
-    initial[id1] = { skalBrukes: null };
-    initial[id2] = { skalBrukes: true };
-    initial[id3] = { skalBrukes: false };
-    initial[idAAP] = { skalBrukes: null };
+    initial.aktiviteterValues[id1] = { skalBrukes: null };
+    initial.aktiviteterValues[id2] = { skalBrukes: true };
+    initial.aktiviteterValues[id3] = { skalBrukes: false };
+    initial.aktiviteterValues[idAAP] = { skalBrukes: null };
     initial[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME] = '345346123112';
     initial.avklarAktiviteter = avklarAktiviteter;
     const erAvklartOgIkkeEndret = erAvklartAktivitetEndret.resultFunc(
@@ -477,11 +493,12 @@ describe('<AvklareAktiviteterPanel>', () => {
     };
     const values = {
       avklarAktiviteter: null,
+      aktiviteterValues: {},
     };
-    values[id1] = { skalBrukes: null };
-    values[id2] = { skalBrukes: true };
-    values[id3] = { skalBrukes: false };
-    values[idAAP] = { skalBrukes: null };
+    values.aktiviteterValues[id1] = { skalBrukes: null };
+    values.aktiviteterValues[id2] = { skalBrukes: true };
+    values.aktiviteterValues[id3] = { skalBrukes: false };
+    values.aktiviteterValues[idAAP] = { skalBrukes: null };
     values[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME] = 'sefiojsiejfise';
     values.avklarAktiviteter = avklarAktiviteter;
     const erAvklartOgIkkeEndret = erAvklartAktivitetEndret.resultFunc(

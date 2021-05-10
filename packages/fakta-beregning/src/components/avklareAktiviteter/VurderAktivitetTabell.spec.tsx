@@ -115,6 +115,7 @@ describe('<VurderAktiviteterTabell>', () => {
   it('skal vise tabell', () => {
     const wrapper = shallow(<VurderAktiviteterTabell
       readOnly={false}
+      formNameAvklarAktiviteter="test"
       isAksjonspunktClosed
       aktiviteter={aktiviteter}
       alleKodeverk={alleKodeverk}
@@ -172,6 +173,7 @@ describe('<VurderAktiviteterTabell>', () => {
       isAksjonspunktClosed
       aktiviteter={utenAAP}
       alleKodeverk={alleKodeverk}
+      formNameAvklarAktiviteter="test"
       erOverstyrt={false}
       harAksjonspunkt
       valgtSkjæringstidspunkt="2019-02-01"
@@ -205,6 +207,7 @@ describe('<VurderAktiviteterTabell>', () => {
       isAksjonspunktClosed
       aktiviteter={aktiviteter}
       alleKodeverk={alleKodeverk}
+      formNameAvklarAktiviteter="test"
       erOverstyrt={false}
       harAksjonspunkt
       valgtSkjæringstidspunkt="2019-02-01"
