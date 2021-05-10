@@ -328,11 +328,13 @@ describe('<VurderAktiviteterTabell>', () => {
   });
 
   it('skal transform values', () => {
-    const values = {};
-    values[id1] = { skalBrukes: true };
-    values[id2] = { skalBrukes: false };
-    values[id3] = { skalBrukes: false };
-    values[idAAP] = { skalBrukes: true };
+    const values = {
+      aktiviteterValues: {},
+    };
+    values.aktiviteterValues[id1] = { skalBrukes: true };
+    values.aktiviteterValues[id2] = { skalBrukes: false };
+    values.aktiviteterValues[id3] = { skalBrukes: false };
+    values.aktiviteterValues[idAAP] = { skalBrukes: true };
     const transformed = VurderAktiviteterTabell.transformValues(values, aktiviteter, '2019-02-02', '2019-02-02');
     expect(transformed.length).toBe(2);
     expect(transformed[0].oppdragsgiverOrg).toBe('334534623342');
