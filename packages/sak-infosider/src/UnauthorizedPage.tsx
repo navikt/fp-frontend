@@ -10,7 +10,6 @@ import ErrorPageWrapper from './components/ErrorPageWrapper';
  * Presentasjonskomponent. Denne komponenten vises når den NAV-ansatte prøver å aksessere en url som ikke finnes.
  * Det blir presentert en generell feilmelding og en lenke som tar NAV-ansatt tilbake til hovedsiden.
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const UnauthorizedPage: FunctionComponent = () => (
   <ErrorPageWrapper titleCode="UnauthorizedPage.Header">
     <Link to="/"><FormattedMessage id="UnauthorizedPage.LinkText" /></Link>
