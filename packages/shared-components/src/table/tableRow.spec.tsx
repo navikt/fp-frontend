@@ -39,7 +39,7 @@ describe('<TableRow>', () => {
     );
 
     const row = wrapper.find('tr');
-    row.simulate('mouseDown');
+    row.simulate('mouseDown', { button: 0 });
     expect(mouseEventFunction).toHaveProperty('callCount', 1);
     expect(keyEventFunction).toHaveProperty('callCount', 0);
 
