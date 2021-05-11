@@ -156,7 +156,7 @@ const lagTableRow = (
       </TableColumn>
       <TableColumn className={styles.radioMiddle}>
         <RadioGroupField
-          name={`${lagAktivitetFieldId(aktivitet)}.skalBrukes`}
+          name={`aktiviteterValues.${lagAktivitetFieldId(aktivitet)}.skalBrukes`}
           readOnly={readOnly || !skalVurdereAktivitet(aktivitet, erOverstyrt, harAksjonspunkt,
             erValgtSkjæringstidspunktLikEllerFørTomDato, ingenAktiviterErBrukt)}
         >
@@ -165,7 +165,7 @@ const lagTableRow = (
       </TableColumn>
       <TableColumn className={styles.radioMiddle}>
         <RadioGroupField
-          name={`${lagAktivitetFieldId(aktivitet)}.skalBrukes`}
+          name={`aktiviteterValues.${lagAktivitetFieldId(aktivitet)}.skalBrukes`}
           readOnly={readOnly || !skalVurdereAktivitet(aktivitet, erOverstyrt, harAksjonspunkt,
             erValgtSkjæringstidspunktLikEllerFørTomDato, ingenAktiviterErBrukt)}
         >
