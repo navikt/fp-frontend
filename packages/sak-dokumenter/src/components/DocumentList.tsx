@@ -115,7 +115,7 @@ const DocumentList: FunctionComponent<OwnProps & WrappedComponentProps> = ({
         timeoutMapRef.current = { [id]: undefined };
         markerSomValgtEllerÅpneDokumenter(event, setValgteDokumentIder, true, id, valgteDokumentIder, selectDocumentCallback, documents);
       };
-      timeoutMapRef.current = { [id]: setTimeout(callback, 200) };
+      timeoutMapRef.current = { [id]: setTimeout(callback, 500) };
     }
   }, [valgteDokumentIder]);
 
