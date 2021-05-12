@@ -37,6 +37,6 @@ const historikkOpplysningTypeCodes = {
   KRAVGRUNNLAG_STATUS: {
     kode: 'KRAVGRUNNLAG_STATUS',
   },
-};
+} as Record<string, { kode: string, feltId?: string }>;
 
 export default historikkOpplysningTypeCodes;

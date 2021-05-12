@@ -89,7 +89,7 @@ const DocumentList: FunctionComponent<OwnProps & WrappedComponentProps> = ({
 }) => {
   const [isShiftPressed, setShiftPressed] = useState(false);
   const [valgteDokumentIder, setValgteDokumentIder] = useState<string[]>([]);
-  const timeoutMapRef = React.useRef<Record<string, Timeout>>({});
+  const timeoutMapRef = React.useRef<Record<string, Timeout | undefined>>({});
 
   useEffect(() => () => Object.values(timeoutMapRef).forEach((timeout?: Timeout) => (timeout && clearTimeout(timeout))), [timeoutMapRef]);
 
@@ -105,13 +105,17 @@ const DocumentList: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   }, [valgteDokumentIder, isShiftPressed]);
 
   const dokumentMouseHandler = useCallback((event: React.MouseEvent, id: string) => {
-    if (timeoutMapRef.current[id]) {
-      clearTimeout(timeoutMapRef.current[id]);
+    const currentTimeout = timeoutMapRef.current[id];
+    if (currentTimeout) {
+      clearTimeout(currentTimeout);
       timeoutMapRef.current = { [id]: undefined };
       markerSomValgtEllerÅpneDokumenter(event, setValgteDokumentIder, false, id, valgteDokumentIder, selectDocumentCallback, documents);
     } else {
       const callback = () => {
-        clearTimeout(timeoutMapRef.current[id]);
+        const cTimeout = timeoutMapRef.current[id];
+        if (cTimeout) {
+          clearTimeout(cTimeout);
+        }
         timeoutMapRef.current = { [id]: undefined };
         markerSomValgtEllerÅpneDokumenter(event, setValgteDokumentIder, true, id, valgteDokumentIder, selectDocumentCallback, documents);
       };

@@ -64,6 +64,6 @@ const historikkSoeknadsperiodeTypeCodes = {
     kode: 'UTSETTELSE_TILTAK_I_REGI_AV_NAV ',
     feltId: 'HistorikkSoeknadsperiode.UtsettelseNavTiltak',
   },
-};
+} as Record<string, { kode: string, feltId: string }>;
 
 export default historikkSoeknadsperiodeTypeCodes;

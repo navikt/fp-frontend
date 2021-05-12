@@ -80,6 +80,10 @@ const HistorikkMalTypeTilbakekreving: FunctionComponent<HistorikkMal> = ({
         const sarligGrunnerBegrunnelse = sarligGrunnerBegrunnelseFelt !== undefined
           ? decodeHtmlEntity(sarligGrunnerBegrunnelseFelt.tilVerdi) : undefined;
 
+        if (!periodeFom || !periodeTom) {
+          return null;
+        }
+
         return (
           <div key={periodeFom + periodeTom}>
             <Normaltekst>

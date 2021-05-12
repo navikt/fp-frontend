@@ -92,6 +92,6 @@ const historikkResultatTypeCodes = {
     kode: 'MIGRERT_FRA_INFOTRYGD_FJERNET',
     feltId: 'HistorikkResultat.MigrertFraInfotrygdFjernet',
   },
-};
+} as Record<string, { kode: string, feltId: string }>;
 
 export default historikkResultatTypeCodes;

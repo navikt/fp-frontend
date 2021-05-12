@@ -80,9 +80,9 @@ const aksjonspunktCodesToTextCode = {
   [aksjonspunktCodes.FORESLA_VEDTAK]: 'Historikk.Vedtak.Fritekstbrev',
   [aksjonspunktCodes.AVKLAR_FØRSTE_UTTAKSDATO]: 'Historikk.FaktaUttak.ForsteUttakDato',
   [aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT]: 'Historikk.FaktaUttak.VurderAnnenForelder',
-};
+} as Record<string, string>;
 
-const tilbakekrevingsAksjonspunktCodesToTextCode = {};
+const tilbakekrevingsAksjonspunktCodesToTextCode = {} as Record<string, string>;
 
 const formaterAksjonspunkt = (aksjonspunkt: HistorikkInnslagAksjonspunkt, intl: IntlShape, erTilbakekreving: boolean): ReactNode => {
   const aksjonspktText = erTilbakekreving

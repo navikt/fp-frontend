@@ -13,12 +13,12 @@ import HistorikkMal from '../HistorikkMalTsType';
 
 const finnFomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): string => {
   const found = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.UTTAK_PERIODE_FOM.kode);
-  return found.tilVerdi;
+  return found?.tilVerdi ? found.tilVerdi : '';
 };
 
 const finnTomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): string => {
   const found = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.UTTAK_PERIODE_TOM.kode);
-  return found.tilVerdi;
+  return found?.tilVerdi ? found.tilVerdi : '';
 };
 
 const buildEndretFeltText = (historikkinnslagDel: HistorikkinnslagDel, getKodeverknavn: (kodeverk: Kodeverk) => string): ReactNode => {
@@ -26,10 +26,10 @@ const buildEndretFeltText = (historikkinnslagDel: HistorikkinnslagDel, getKodeve
   const felt = endredeFelter[0];
   const erEndret = felt.fraVerdi !== null;
 
-  const tilVerdiNavn = getKodeverknavn({ kode: felt.tilVerdi as string, kodeverk: felt.klTilVerdi });
+  const tilVerdiNavn = getKodeverknavn({ kode: felt.tilVerdi as string, kodeverk: felt.klTilVerdi ? felt.klTilVerdi : '' });
   if (erEndret) {
     const årsakVerdi = felt.fraVerdi ? felt.fraVerdi as string : felt.tilVerdi as string;
-    const fraVerdi = `${getKodeverknavn({ kode: årsakVerdi, kodeverk: felt.klFraVerdi })}`;
+    const fraVerdi = `${getKodeverknavn({ kode: årsakVerdi, kodeverk: felt.klFraVerdi ? felt.klFraVerdi : '' })}`;
     return (
       <FormattedMessage
         id="Historikk.Template.Aktivitetskrav.endretFelt"

@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 
-import { omit } from '@fpsak-frontend/utils';
+import { omitOne } from '@fpsak-frontend/utils';
 import { Historikkinnslag, HistorikkinnslagDel, Kodeverk } from '@fpsak-frontend/types';
 
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
@@ -66,14 +66,16 @@ describe('HistorikkMalTypeForeldelse', () => {
       saksnummer="123"
     />);
 
+    type Values = { navn: string, fraVerdi: string, tilVerdi: string, b: () => string };
+
     const messages = wrapper.find(FormattedMessage);
     expect(messages).toHaveLength(3);
-    expect(omit(messages.at(1).prop('values'), 'b')).toEqual({
+    expect(omitOne(messages.at(1).prop('values') as Values, 'b')).toEqual({
       navn: 'testing',
       fraVerdi: 'gammel verdi',
       tilVerdi: 'ny verdi',
     });
-    expect(omit(messages.at(2).prop('values'), 'b')).toEqual({
+    expect(omitOne(messages.at(2).prop('values') as Values, 'b')).toEqual({
       navn: 'testing 2',
       fraVerdi: undefined,
       tilVerdi: 'ny verdi 2',

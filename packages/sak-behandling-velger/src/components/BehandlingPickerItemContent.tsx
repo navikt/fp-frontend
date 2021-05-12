@@ -12,12 +12,12 @@ import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakTyp
 import chevronUp from '@fpsak-frontend/assets/images/pil_opp.svg';
 import chevronDown from '@fpsak-frontend/assets/images/pil_ned.svg';
 import stjerneImg from '@fpsak-frontend/assets/images/stjerne.svg';
-import { BehandlingAppKontekst, Kodeverk } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, Kodeverk, BehandlingÅrsak } from '@fpsak-frontend/types';
 
 import styles from './behandlingPickerItemContent.less';
 
 // TODO (TOR) Kva er dette for noko? Desse tekstane burde vel komma fra kodeverket? Ein skal uansett ikkje hardkoda kodane her!
-const getÅrsak = (årsak: BehandlingAppKontekst['førsteÅrsak']) => {
+const getÅrsak = (årsak: BehandlingÅrsak) => {
   switch (årsak.behandlingArsakType.kode) {
     case 'RE-MF':
     case 'RE-MFIP':
@@ -86,7 +86,7 @@ const tilbakekrevingÅrsakTyperKlage = [
   behandlingArsakType.RE_KLAGE_NFP,
 ];
 
-const erTilbakekrevingÅrsakKlage = (årsak?: Kodeverk): boolean => årsak && tilbakekrevingÅrsakTyperKlage.includes(årsak.kode);
+const erTilbakekrevingÅrsakKlage = (årsak?: Kodeverk): boolean => !!årsak && tilbakekrevingÅrsakTyperKlage.includes(årsak.kode);
 
 const renderChevron = (chevron: string, messageId: string): ReactElement => (
   <FormattedMessage id={messageId}>

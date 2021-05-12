@@ -11,9 +11,9 @@ import historikkEndretFeltTypeCodes from '../../../kodeverk/historikkEndretFeltT
 import historikkOpplysningTypeCodes from '../../../kodeverk/historikkOpplysningTypeCodes';
 import historikkSoeknadsperiodeTypeCodes from '../../../kodeverk/historikkSoeknadsperiodeTypeCodes';
 
-export const findIdForOpplysningCode = (opplysning: HistorikkInnslagOpplysning): string => {
+export const findIdForOpplysningCode = (opplysning: HistorikkInnslagOpplysning): string | undefined => {
   if (!opplysning) {
-    return null;
+    return undefined;
   }
   const typeKode = opplysning.opplysningType.kode;
   const opplysningCode = historikkOpplysningTypeCodes[typeKode];
@@ -23,11 +23,11 @@ export const findIdForOpplysningCode = (opplysning: HistorikkInnslagOpplysning):
   return opplysningCode.feltId;
 };
 
-export const findIdForSoeknadsperiodeCode = (soeknadsperiode: HistorikkinnslagDel['soeknadsperiode']): string => {
+export const findIdForSoeknadsperiodeCode = (soeknadsperiode: HistorikkinnslagDel['soeknadsperiode']): string | undefined => {
   if (!soeknadsperiode) {
-    return null;
+    return undefined;
   }
-  const typeKode = soeknadsperiode.soeknadsperiodeType.kode;
+  const typeKode = soeknadsperiode.soeknadsperiodeType ? soeknadsperiode.soeknadsperiodeType.kode : '';
   const soeknadsperiodeCode = historikkSoeknadsperiodeTypeCodes[typeKode];
   if (!soeknadsperiodeCode) {
     return (`SoeknadsperiodeTypeCode ${typeKode} finnes ikke-LEGG DET INN`);
@@ -35,9 +35,9 @@ export const findIdForSoeknadsperiodeCode = (soeknadsperiode: HistorikkinnslagDe
   return soeknadsperiodeCode.feltId;
 };
 
-export const findResultatText = (resultat: string, intl: IntlShape): string => {
+export const findResultatText = (resultat: string, intl: IntlShape): string | undefined => {
   if (!resultat) {
-    return null;
+    return undefined;
   }
   const resultatCode = historikkResultatTypeCodes[resultat];
   if (!resultatCode) {
@@ -47,8 +47,8 @@ export const findResultatText = (resultat: string, intl: IntlShape): string => {
   return intl.formatMessage({ id: fieldId }, { b: (chunks) => <b>{chunks}</b>, br: <br /> }) as string;
 };
 
-export const findHendelseText = (hendelse: HistorikkinnslagDel['hendelse'], getKodeverknavn: (kodeverk: Kodeverk) => string): string => {
-  if (!hendelse) {
+export const findHendelseText = (hendelse: HistorikkinnslagDel['hendelse'], getKodeverknavn: (kodeverk: Kodeverk) => string): string | undefined => {
+  if (!hendelse || !hendelse.navn) {
     return undefined;
   }
   if (hendelse.verdi === null) {
@@ -59,8 +59,12 @@ export const findHendelseText = (hendelse: HistorikkinnslagDel['hendelse'], getK
 
 const convertToBoolean = (verdi: boolean): string => (verdi === true ? 'Ja' : 'Nei');
 
-export const findEndretFeltVerdi = (endretFelt: HistorikkinnslagEndretFelt, verdi: string | number | boolean, intl: IntlShape): string | number => {
-  if (verdi === null) {
+export const findEndretFeltVerdi = (
+  endretFelt: HistorikkinnslagEndretFelt,
+  verdi: string | number | boolean | undefined,
+  intl: IntlShape,
+): string | number | null => {
+  if (verdi === null || verdi === undefined) {
     return null;
   }
   if (typeof (verdi) === 'boolean') {
