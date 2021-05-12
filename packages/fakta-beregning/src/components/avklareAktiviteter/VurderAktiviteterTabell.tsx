@@ -146,7 +146,7 @@ const lagTableRow = (
           -
           {' '}
           <DatepickerField
-            name={`${lagAktivitetFieldId(aktivitet)}.tom`}
+            name={`aktiviteterValues.${lagAktivitetFieldId(aktivitet)}.tom`}
             validate={[required]}
             readOnly={readOnly}
           />
@@ -160,7 +160,7 @@ const lagTableRow = (
           readOnly={readOnly || !skalVurdereAktivitet(aktivitet, erOverstyrt, harAksjonspunkt,
             erValgtSkjæringstidspunktLikEllerFørTomDato, ingenAktiviterErBrukt)}
         >
-          {[<RadioOption key={`${lagAktivitetFieldId(aktivitet)}.bruk`} value />]}
+          {[<RadioOption key={`lagAktivitetFieldId.${lagAktivitetFieldId(aktivitet)}.bruk`} value />]}
         </RadioGroupField>
       </TableColumn>
       <TableColumn className={styles.radioMiddle}>
@@ -169,7 +169,7 @@ const lagTableRow = (
           readOnly={readOnly || !skalVurdereAktivitet(aktivitet, erOverstyrt, harAksjonspunkt,
             erValgtSkjæringstidspunktLikEllerFørTomDato, ingenAktiviterErBrukt)}
         >
-          {[<RadioOption key={`${lagAktivitetFieldId(aktivitet)}.ikkeBruk`} value={false} />]}
+          {[<RadioOption key={`lagAktivitetFieldId.${lagAktivitetFieldId(aktivitet)}.ikkeBruk`} value={false} />]}
         </RadioGroupField>
       </TableColumn>
       {isAksjonspunktClosed && readOnly
