@@ -12,11 +12,8 @@ const intl = createIntl(messages);
 export const getMenytekst = (): string => intl.formatMessage({ id: 'MenySettPaVentIndex.BehandlingOnHold' });
 
 interface OwnProps {
-  behandlingId?: number;
   behandlingVersjon?: number;
   settBehandlingPaVent: (params: {
-    behandlingVersjon: number;
-    behandlingId: number;
     frist: string;
     ventearsak: string;
   }) => void;
@@ -26,7 +23,6 @@ interface OwnProps {
 }
 
 const MenySettPaVentIndex: FunctionComponent<OwnProps> = ({
-  behandlingId,
   behandlingVersjon,
   settBehandlingPaVent,
   ventearsaker,
@@ -35,15 +31,13 @@ const MenySettPaVentIndex: FunctionComponent<OwnProps> = ({
 }) => {
   const submit = useCallback((formValues) => {
     const values = {
-      behandlingVersjon,
-      behandlingId,
       frist: formValues.frist,
       ventearsak: formValues.ventearsak,
     };
     settBehandlingPaVent(values);
 
     lukkModal();
-  }, [behandlingId, behandlingVersjon]);
+  }, [behandlingVersjon]);
 
   return (
     <RawIntlProvider value={intl}>

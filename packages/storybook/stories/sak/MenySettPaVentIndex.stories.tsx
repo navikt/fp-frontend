@@ -13,7 +13,6 @@ export default {
 
 export const visMenyForÅSetteBehandlingPåVent = () => (
   <MenySettPaVentIndex
-    behandlingId={1}
     behandlingVersjon={2}
     settBehandlingPaVent={action('button-click')}
     ventearsaker={[{

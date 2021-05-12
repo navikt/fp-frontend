@@ -11,29 +11,21 @@ const intl = createIntl(messages);
 export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyTaAvVentIndex.ResumeBehandling' });
 
 interface OwnProps {
-  behandlingId: number;
   behandlingVersjon: number;
-  taBehandlingAvVent: (params: {
-    behandlingId: number;
-    behandlingVersjon: number;
-  }) => void;
+  taBehandlingAvVent: () => void;
   lukkModal: () => void;
 }
 
 const MenyTaAvVentIndex: FunctionComponent<OwnProps> = ({
-  behandlingId,
   behandlingVersjon,
   taBehandlingAvVent,
   lukkModal,
 }) => {
   const submit = useCallback(() => {
-    taBehandlingAvVent({
-      behandlingId,
-      behandlingVersjon,
-    });
+    taBehandlingAvVent();
 
     lukkModal();
-  }, [behandlingId, behandlingVersjon]);
+  }, [behandlingVersjon]);
 
   return (
     <RawIntlProvider value={intl}>

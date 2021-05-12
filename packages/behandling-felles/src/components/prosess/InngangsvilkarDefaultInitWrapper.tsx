@@ -10,6 +10,7 @@ import {
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { createIntl } from '@fpsak-frontend/utils';
+import { Behandling } from '@fpsak-frontend/types';
 
 import ProsessPanelWrapper from './ProsessPanelWrapper';
 import useProsessMenyRegistrerer from '../../utils/prosess/useProsessMenyRegistrerer';
@@ -31,7 +32,10 @@ const getStatus = (paneler: InngangsvilkarPanelData[]): string => {
   return harMinstEttDelPanelStatus(paneler, vilkarUtfallType.IKKE_OPPFYLT) ? vilkarUtfallType.IKKE_OPPFYLT : tempStatus;
 };
 
-const getErAksjonspunktOpen = (paneler: InngangsvilkarPanelData[]): boolean => {
+const getErAksjonspunktOpen = (paneler: InngangsvilkarPanelData[], behandling?: Behandling): boolean => {
+  if (behandling?.behandlingHenlagt) {
+    return false;
+  }
   if (paneler.some((p) => p.harApentAksjonspunkt)) {
     return true;
   }
@@ -51,6 +55,7 @@ interface OwnProps {
 }
 
 const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
+  behandling,
   valgtProsessSteg,
   registrerProsessPanel,
   apentFaktaPanelInfo,
@@ -79,7 +84,7 @@ const InngangsvilkarDefaultInitWrapper: FunctionComponent<OwnProps & ProsessPane
     evt.preventDefault();
   }, [apentFaktaPanelInfo]);
 
-  const harApentAksjonspunkt = getErAksjonspunktOpen(panelInfo);
+  const harApentAksjonspunkt = getErAksjonspunktOpen(panelInfo, behandling);
   const status = getStatus(panelInfo);
 
   const skalVises = panelInfo.length > 0;

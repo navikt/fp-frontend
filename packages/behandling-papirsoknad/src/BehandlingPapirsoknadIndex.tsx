@@ -40,7 +40,7 @@ const BehandlingPapirsoknadIndex: FunctionComponent<OwnProps & StandardBehandlin
     requestPapirsoknadApi, setBehandling, PapirsoknadApiKeys.SAVE_AKSJONSPUNKT,
   );
 
-  useInitBehandlingHandlinger(requestPapirsoknadApi, PapirsoknadApiKeys, behandlingEventHandler, hentBehandling, setBehandling);
+  useInitBehandlingHandlinger(requestPapirsoknadApi, PapirsoknadApiKeys, behandlingEventHandler, hentBehandling, setBehandling, behandling);
 
   if (!behandling) {
     return <LoadingPanel />;

@@ -12,7 +12,6 @@ export default {
 
 export const visMenyForÅTaBehandlingAvVent = () => (
   <MenyTaAvVentIndex
-    behandlingId={1}
     behandlingVersjon={2}
     taBehandlingAvVent={action('button-click')}
     lukkModal={action('button-click')}

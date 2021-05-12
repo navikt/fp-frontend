@@ -17,10 +17,9 @@ export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyHenleggI
 interface OwnProps {
   valgtBehandling: BehandlingAppKontekst;
   henleggBehandling: (params: {
-    behandlingVersjon: number;
-    behandlingId: number;
     årsakKode: string;
     begrunnelse: string;
+    fritekst: string;
   }) => Promise<any>;
   forhandsvisHenleggBehandling: (erHenleggelse: boolean, data: any) => void;
   ytelseType: Kodeverk;
@@ -42,8 +41,6 @@ const MenyHenleggIndex: FunctionComponent<OwnProps> = ({
 
   const submit = useCallback((formValues) => {
     const henleggBehandlingDto = {
-      behandlingVersjon: valgtBehandling.versjon,
-      behandlingId: valgtBehandling.id,
       årsakKode: formValues.årsakKode,
       begrunnelse: formValues.begrunnelse,
       fritekst: formValues.fritekst,

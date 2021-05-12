@@ -12,7 +12,6 @@ export default {
 
 export const visMenyForÅEndreBehandlendeEnhet = () => (
   <MenyEndreBehandlendeEnhetIndex
-    behandlingId={1}
     behandlingVersjon={2}
     behandlendeEnhetId="4292"
     behandlendeEnhetNavn="NAV Klageinstans Midt-Norge"

@@ -11,32 +11,19 @@ const intl = createIntl(messages);
 export const getMenytekst = () => intl.formatMessage({ id: 'MenyApneForEndringerIndex.ReopenBehandling' });
 
 interface OwnProps {
-  behandlingId?: number;
-  behandlingVersjon?: number;
-  apneBehandlingForEndringer: (params: {
-    behandlingId: number;
-    behandlingVersjon: number;
-  }) => void;
+  apneBehandlingForEndringer: () => void;
   lukkModal: () => void;
 }
 
 const MenyApneForEndringerIndex: FunctionComponent<OwnProps> = ({
-  behandlingId,
-  behandlingVersjon,
   apneBehandlingForEndringer,
   lukkModal,
 }) => {
   const submit = useCallback(() => {
-    if (behandlingId && behandlingVersjon) {
-      const params = {
-        behandlingId,
-        behandlingVersjon,
-      };
-      apneBehandlingForEndringer(params);
-    }
+    apneBehandlingForEndringer();
 
     lukkModal();
-  }, [behandlingId, behandlingVersjon]);
+  }, []);
 
   return (
     <RawIntlProvider value={intl}>

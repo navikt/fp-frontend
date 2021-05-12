@@ -12,9 +12,9 @@ import {
 } from '@fpsak-frontend/types';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 
+import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import { useFpSakKodeverk } from '../../data/useKodeverk';
 import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
-import { setBehandlingOnHold } from '../../behandlingmenu/behandlingMenuOperations';
 import {
   FpsakApiKeys, restApiHooks, requestApi,
 } from '../../data/fpsakApi';
@@ -139,15 +139,13 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
 
   const handleSubmitFromModal = useCallback((formValues) => {
     const values = {
-      behandlingId: id,
-      behandlingVersjon: versjon,
       frist: formValues.frist,
       ventearsak: formValues.ventearsak,
     };
-    setBehandlingOnHold(values);
+    behandlingEventHandler.settBehandlingPaVent(values);
     hideSettPaVentModal();
     history.push('/');
-  }, [id, versjon]);
+  }, []);
 
   const fetchPreview = useVisForhandsvisningAvMelding(type);
 

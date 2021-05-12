@@ -19,7 +19,7 @@ interface OwnProps {
 }
 
 const InngangsvilkarProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
-  behandlingVersjon,
+  behandling,
   valgtProsessSteg,
   registrerProsessPanel,
   apentFaktaPanelInfo,
@@ -27,21 +27,22 @@ const InngangsvilkarProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
   rettigheter,
 }) => (
   <InngangsvilkarDefaultInitWrapper
+    behandling={behandling}
     valgtProsessSteg={valgtProsessSteg}
     registrerProsessPanel={registrerProsessPanel}
     apentFaktaPanelInfo={apentFaktaPanelInfo}
     oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
     leftPanels={(props) => (
       <>
-        <FodselInngangsvilkarInitPanel behandlingVersjon={behandlingVersjon} rettigheter={rettigheter} {...props} />
-        <AdopsjonInngangsvilkarInitPanel behandlingVersjon={behandlingVersjon} rettigheter={rettigheter} {...props} />
-        <OmsorgInngangsvilkarInitPanel behandlingVersjon={behandlingVersjon} {...props} />
-        <MedlemskapInngangsvilkarInitPanel behandlingVersjon={behandlingVersjon} rettigheter={rettigheter} {...props} />
-        <ForeldreansvarInngangsvilkarInitPanel behandlingVersjon={behandlingVersjon} {...props} />
+        <FodselInngangsvilkarInitPanel behandlingVersjon={behandling?.versjon} rettigheter={rettigheter} {...props} />
+        <AdopsjonInngangsvilkarInitPanel behandlingVersjon={behandling?.versjon} rettigheter={rettigheter} {...props} />
+        <OmsorgInngangsvilkarInitPanel behandlingVersjon={behandling?.versjon} {...props} />
+        <MedlemskapInngangsvilkarInitPanel behandlingVersjon={behandling?.versjon} rettigheter={rettigheter} {...props} />
+        <ForeldreansvarInngangsvilkarInitPanel behandlingVersjon={behandling?.versjon} {...props} />
       </>
     )}
     rightPanels={(props) => (
-      <OpptjeningInngangsvilkarInitPanel behandlingVersjon={behandlingVersjon} rettigheter={rettigheter} {...props} />
+      <OpptjeningInngangsvilkarInitPanel behandlingVersjon={behandling?.versjon} rettigheter={rettigheter} {...props} />
     )}
   />
 );
