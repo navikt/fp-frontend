@@ -347,7 +347,7 @@ export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ow
 }));
 
 export const transformValues = (values: FormValues): AnkeVurderingResultatAp => ({
-  vedtak: values.vedtak === '0' || !values.vedtak ? null : parseInt(values.vedtak, 10),
+  vedtakBehandlingUuid: values.vedtak === '0' || !values.vedtak ? null : values.vedtak,
   ankeVurdering: values.ankeVurdering,
   begrunnelse: values.begrunnelse,
   fritekstTilBrev: values.fritekstTilBrev,

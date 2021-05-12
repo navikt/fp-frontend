@@ -94,7 +94,7 @@ const transformValues = (values: FormValues, avsluttedeBehandlinger: AvsluttetBe
   erSignert: values.erSignert,
   begrunnelse: values.begrunnelse,
   kode: aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP,
-  vedtak: values.vedtak === IKKE_PA_KLAGD_VEDTAK ? null : Number.parseInt(values.vedtak, 10),
+  vedtakBehandlingUuid: values.vedtak === IKKE_PA_KLAGD_VEDTAK ? null : values.vedtak,
   erTilbakekreving: erTilbakekreving(avsluttedeBehandlinger, values.vedtak),
   tilbakekrevingInfo: påklagdTilbakekrevingInfo(avsluttedeBehandlinger, values.vedtak),
 });

@@ -13,7 +13,7 @@ type KlageFormkravAp = {
     tilbakekrevingVedtakDato?: string;
     tilbakekrevingBehandlingType?: string;
   };
-  vedtak?: number;
+  vedtakBehandlingUuid?: string;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP | AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_KA>;
 
 export default KlageFormkravAp;

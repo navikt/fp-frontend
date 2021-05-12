@@ -177,6 +177,7 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
     const response = requestKlageApi.getRequestMockData(KlageBehandlingApiKeys.SAVE_KLAGE_VURDERING.name);
     expect(response).toHaveLength(1);
     expect(response[0].params).toEqual({
+      behandlingUuid: 'test-uuid',
       kode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
       fritekstTilBrev: 'Fritekst',
       begrunnelse: 'Dette er en begrunnelse',
