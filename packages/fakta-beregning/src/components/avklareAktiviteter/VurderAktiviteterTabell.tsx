@@ -274,7 +274,7 @@ type MappedOwnProps = {
  * Presentasjonskomponent.. Inneholder tabeller for avklaring av skjæringstidspunkt
  */
 export class VurderAktiviteterTabell extends Component<OwnProps & MappedOwnProps & DispatchedProps> {
-  static validate = (values: any, aktiviteter: BeregningAktivitet[]) => {
+  static validate = (values: AvklarAktiviteterValues, aktiviteter: BeregningAktivitet[]) => {
     const errors = {};
     let harError = false;
     aktiviteter

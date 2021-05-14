@@ -1,6 +1,8 @@
 import React, { Component, ReactElement } from 'react';
 import { connect } from 'react-redux';
-import { initialize as reduxFormInitialize, InjectedFormProps, reduxForm } from 'redux-form';
+import {
+  FormAction, initialize as reduxFormInitialize, InjectedFormProps, reduxForm,
+} from 'redux-form';
 import { createSelector } from 'reselect';
 import { bindActionCreators, Dispatch } from 'redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
@@ -143,7 +145,7 @@ type OwnState = {
 }
 
 interface DispatchProps {
-  reduxFormInitialize: (...args: any[]) => any;
+  reduxFormInitialize: (form: string, data: AvklarAktiviteterValues) => FormAction;
 }
 
 /**
@@ -375,7 +377,7 @@ const getIsAksjonspunktClosed = createSelector([(ownProps: OwnProps) => ownProps
 
 const lagSubmitFn = createSelector([
   (ownProps: OwnProps) => ownProps.submitCallback],
-(submitCallback) => (values: AvklarAktiviteterValues): Promise<any> => submitCallback(transformValues(values)));
+(submitCallback) => (values: AvklarAktiviteterValues): Promise<void> => submitCallback(transformValues(values)));
 
 const mapStateToProps = (state, ownProps: OwnProps): MappedOwnProps => {
   const values = getFormValuesForAvklarAktiviteter(state);
