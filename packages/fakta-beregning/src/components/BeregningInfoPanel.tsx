@@ -8,6 +8,7 @@ import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsTy
 
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import AvklarBeregningsaktiviteterAP, { OverstyrBeregningsaktiviteterAP } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningAktivitetAP';
+import BeregningFaktaAP, { BeregningOverstyringAP } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
 import VurderFaktaBeregningPanel from './fellesFaktaForATFLogSN/VurderFaktaBeregningPanel';
 import AvklareAktiviteterPanel from './avklareAktiviteter/AvklareAktiviteterPanel';
 
@@ -18,7 +19,8 @@ const {
 } = aksjonspunktCodes;
 
 type OwnProps = {
-  submitCallback: (aksjonspunktData: AvklarBeregningsaktiviteterAP | OverstyrBeregningsaktiviteterAP | any) => Promise<void>;
+  submitCallback: (aksjonspunktData: AvklarBeregningsaktiviteterAP | OverstyrBeregningsaktiviteterAP
+    | BeregningFaktaAP | BeregningOverstyringAP) => Promise<void>;
   hasOpenAksjonspunkter: boolean;
   readOnly: boolean;
   aksjonspunkter: Aksjonspunkt[];

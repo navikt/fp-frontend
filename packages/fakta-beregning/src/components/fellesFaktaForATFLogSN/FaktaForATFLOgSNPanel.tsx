@@ -24,6 +24,7 @@ import VurderMottarYtelseForm from './vurderOgFastsettATFL/forms/VurderMottarYte
 import VurderBesteberegningForm from './besteberegningFodendeKvinne/VurderBesteberegningForm';
 import VurderRefusjonForm from './vurderrefusjon/VurderRefusjonForm';
 import { erInitialOverstyringAvBeregningsgrunnlag } from './BgFaktaUtils';
+import {FaktaStateProps} from "../../typer/FaktaBeregningTypes";
 
 const {
   VURDER_FAKTA_FOR_ATFL_SN,
@@ -322,7 +323,7 @@ export const transformValuesFaktaForATFLOgSN = (values, erOverstyrt) => {
 const getVurderFaktaAksjonspunkt = createSelector([(ownProps: OwnProps) => ownProps.aksjonspunkter], (aksjonspunkter) => (aksjonspunkter
   ? aksjonspunkter.find((ap) => ap.definisjon.kode === VURDER_FAKTA_FOR_ATFL_SN) : undefined));
 
-const buildInitialValuesForTilfeller = (props) => ({
+const buildInitialValuesForTilfeller = (props: FaktaStateProps): any => ({
   ...TidsbegrensetArbeidsforholdForm.buildInitialValues(props.kortvarigeArbeidsforhold),
   ...VurderMilitaer.buildInitialValues(props.faktaOmBeregning),
   ...NyIArbeidslivetSNForm.buildInitialValues(props.beregningsgrunnlag),
@@ -342,22 +343,22 @@ const buildInitialValuesForTilfeller = (props) => ({
 
 const mapStateToBuildInitialValuesProps = createStructuredSelector({
   beregningsgrunnlag: (state, ownProps: OwnProps) => ownProps.beregningsgrunnlag,
-  kortvarigeArbeidsforhold: (state, ownProps) => getKortvarigeArbeidsforhold(ownProps),
+  kortvarigeArbeidsforhold: (state, ownProps: OwnProps) => getKortvarigeArbeidsforhold(ownProps),
   vurderFaktaAP: (state, ownProps: OwnProps) => getVurderFaktaAksjonspunkt(ownProps),
-  kunYtelse: (state, ownProps) => getKunYtelse(ownProps),
-  tilfeller: (state, ownProps) => getFaktaOmBeregningTilfellerKoder(ownProps),
-  vurderMottarYtelse: (state, ownProps) => getVurderMottarYtelse(ownProps),
-  vurderBesteberegning: (state, ownProps) => getVurderBesteberegning(ownProps),
-  alleKodeverk: (state, ownProps) => ownProps.alleKodeverk,
-  aksjonspunkter: (state, ownProps) => ownProps.aksjonspunkter,
-  faktaOmBeregning: (state, ownProps) => getFaktaOmBeregning(ownProps),
-  arbeidsgiverOpplysningerPerId: (state, ownProps) => ownProps.arbeidsgiverOpplysningerPerId,
-  refusjonskravSomKommerForSentListe: (state, ownProps) => getArbeidsgiverInfoForRefusjonskravSomKommerForSent(ownProps),
+  kunYtelse: (state, ownProps: OwnProps) => getKunYtelse(ownProps),
+  tilfeller: (state, ownProps: OwnProps) => getFaktaOmBeregningTilfellerKoder(ownProps),
+  vurderMottarYtelse: (state, ownProps: OwnProps) => getVurderMottarYtelse(ownProps),
+  vurderBesteberegning: (state, ownProps: OwnProps) => getVurderBesteberegning(ownProps),
+  alleKodeverk: (state, ownProps: OwnProps) => ownProps.alleKodeverk,
+  aksjonspunkter: (state, ownProps: OwnProps) => ownProps.aksjonspunkter,
+  faktaOmBeregning: (state, ownProps: OwnProps) => getFaktaOmBeregning(ownProps),
+  arbeidsgiverOpplysningerPerId: (state, ownProps: OwnProps) => ownProps.arbeidsgiverOpplysningerPerId,
+  refusjonskravSomKommerForSentListe: (state, ownProps: OwnProps) => getArbeidsgiverInfoForRefusjonskravSomKommerForSent(ownProps),
   erOverstyrt: erInitialOverstyringAvBeregningsgrunnlag,
 });
 
 export const getBuildInitialValuesFaktaForATFLOgSN = createSelector(
-  [mapStateToBuildInitialValuesProps], (props) => () => ({
+  [mapStateToBuildInitialValuesProps], (props: FaktaStateProps): any => () => ({
     tilfeller: props.tilfeller,
     kortvarigeArbeidsforhold: props.kortvarigeArbeidsforhold,
     faktaOmBeregning: props.faktaOmBeregning,

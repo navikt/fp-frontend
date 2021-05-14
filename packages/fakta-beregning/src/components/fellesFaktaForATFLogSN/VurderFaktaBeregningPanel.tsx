@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
@@ -12,6 +12,7 @@ import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import { ArbeidsgiverOpplysningerPerId, AlleKodeverk } from '@fpsak-frontend/types';
+import BeregningFaktaAP, { BeregningOverstyringAP } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
 import FaktaForATFLOgSNPanel, {
   getBuildInitialValuesFaktaForATFLOgSN,
   transformValuesFaktaForATFLOgSN,
@@ -29,7 +30,7 @@ const {
   OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
 } = aksjonspunktCodes;
 
-const findAksjonspunktMedBegrunnelse = (aksjonspunkter) => {
+const findAksjonspunktMedBegrunnelse = (aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt => {
   if (aksjonspunkter.some((ap) => ap.definisjon.kode === OVERSTYRING_AV_BEREGNINGSGRUNNLAG)) {
     return aksjonspunkter
       .find((ap) => ap.definisjon.kode === OVERSTYRING_AV_BEREGNINGSGRUNNLAG && ap.begrunnelse !== null);
@@ -40,26 +41,27 @@ const findAksjonspunktMedBegrunnelse = (aksjonspunkter) => {
 
 export const BEGRUNNELSE_FAKTA_TILFELLER_NAME = 'begrunnelseFaktaTilfeller';
 
-export const harIkkeEndringerIAvklarMedFlereAksjonspunkter = (verdiForAvklarAktivitetErEndret, aksjonspunkter) => {
+export const harIkkeEndringerIAvklarMedFlereAksjonspunkter = (verdiForAvklarAktivitetErEndret: any, aksjonspunkter: Aksjonspunkt[]): boolean => {
   if ((hasAksjonspunkt(VURDER_FAKTA_FOR_ATFL_SN, aksjonspunkter) || hasAksjonspunkt(OVERSTYRING_AV_BEREGNINGSGRUNNLAG, aksjonspunkter))) {
     return !verdiForAvklarAktivitetErEndret;
   }
   return true;
 };
 
-const isAksjonspunktClosed = (alleAp) => {
+const isAksjonspunktClosed = (alleAp: Aksjonspunkt[]): boolean => {
   const relevantAp = alleAp.filter((ap) => ap.definisjon.kode === aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN
     || ap.definisjon.kode === aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG);
   return relevantAp.length === 0 ? false : relevantAp.some((ap) => !isAksjonspunktOpen(ap.status.kode));
 };
 
-const lagHelpTextsForFakta = () => {
+const lagHelpTextsForFakta = (): ReactElement[] => {
   const helpTexts = [];
   helpTexts.push(<FormattedMessage key="VurderFaktaForBeregningen" id="BeregningInfoPanel.AksjonspunktHelpText.FaktaOmBeregning" />);
   return helpTexts;
 };
 
-const hasOpenAksjonspunkt = (kode, aksjonspunkter) => aksjonspunkter.some((ap) => ap.definisjon.kode === kode && isAksjonspunktOpen(ap.status.kode));
+const hasOpenAksjonspunkt = (kode: string, aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter.some((ap) => ap.definisjon.kode === kode
+  && isAksjonspunktOpen(ap.status.kode));
 
 type OwnProps = {
     readOnly: boolean;
@@ -71,7 +73,7 @@ type OwnProps = {
     aksjonspunkter: Aksjonspunkt[];
     alleKodeverk: AlleKodeverk;
     erOverstyrer: boolean;
-    submitCallback: (data: any) => Promise<any>;
+    submitCallback: (aksjonspunktData: BeregningFaktaAP | BeregningOverstyringAP) => Promise<void>;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
