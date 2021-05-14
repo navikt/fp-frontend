@@ -60,11 +60,12 @@ describe('<VurderAktiviteterPanel>', () => {
     ];
     const values = {
       avklarAktiviteter: null,
+      aktiviteterValues: {},
     };
-    values[id1] = { skalBrukes: false };
-    values[id2] = { skalBrukes: false };
-    values[id3] = { skalBrukes: false };
-    values[idAAP] = { skalBrukes: false };
+    values.aktiviteterValues[id1] = { skalBrukes: false };
+    values.aktiviteterValues[id2] = { skalBrukes: false };
+    values.aktiviteterValues[id3] = { skalBrukes: false };
+    values.aktiviteterValues[idAAP] = { skalBrukes: false };
     values[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME] = 'sefiojsiejfise';
     values.avklarAktiviteter = {
       aktiviteterTomDatoMapping,
@@ -101,11 +102,12 @@ describe('<VurderAktiviteterPanel>', () => {
     ];
     const values = {
       avklarAktiviteter: null,
+      aktiviteterValues: {},
     };
-    values[id1] = { skalBrukes: true, tom: aktivitet1STP2.tom };
-    values[id2] = { skalBrukes: false, tom: aktivitet2STP2.tom };
-    values[id3] = { skalBrukes: false, tom: aktivitet3.tom };
-    values[idAAP] = { skalBrukes: false, tom: aktivitetAAP.tom };
+    values.aktiviteterValues[id1] = { skalBrukes: true, tom: aktivitet1STP2.tom };
+    values.aktiviteterValues[id2] = { skalBrukes: false, tom: aktivitet2STP2.tom };
+    values.aktiviteterValues[id3] = { skalBrukes: false, tom: aktivitet3.tom };
+    values.aktiviteterValues[idAAP] = { skalBrukes: false, tom: aktivitetAAP.tom };
     values.avklarAktiviteter = {
       aktiviteterTomDatoMapping,
       skjæringstidspunkt: '2019-02-02',
@@ -142,11 +144,12 @@ describe('<VurderAktiviteterPanel>', () => {
     ];
     const values = {
       avklarAktiviteter: null,
+      aktiviteterValues: {},
     };
-    values[lagAktivitetFieldId(aktivitetStp2)] = { skalBrukes: false, tom: aktivitetStp2.tom };
-    values[lagAktivitetFieldId(aktivitetStp3)] = { skalBrukes: null, tom: aktivitetStp3.tom };
-    values[id3] = { skalBrukes: false, tom: aktivitet3.tom };
-    values[idAAP] = { skalBrukes: false, tom: aktivitetAAP.tom };
+    values.aktiviteterValues[lagAktivitetFieldId(aktivitetStp2)] = { skalBrukes: false, tom: aktivitetStp2.tom };
+    values.aktiviteterValues[lagAktivitetFieldId(aktivitetStp3)] = { skalBrukes: null, tom: aktivitetStp3.tom };
+    values.aktiviteterValues[id3] = { skalBrukes: false, tom: aktivitet3.tom };
+    values.aktiviteterValues[idAAP] = { skalBrukes: false, tom: aktivitetAAP.tom };
     values.avklarAktiviteter = {
       aktiviteterTomDatoMapping,
       skjæringstidspunkt: '2019-02-02',
@@ -183,11 +186,12 @@ describe('<VurderAktiviteterPanel>', () => {
     ];
     const values = {
       avklarAktiviteter: null,
+      aktiviteterValues: {},
     };
-    values[id1] = { skalBrukes: false };
-    values[id2] = { skalBrukes: false };
-    values[id3] = { skalBrukes: null };
-    values[idAAP] = { skalBrukes: false };
+    values.aktiviteterValues[id1] = { skalBrukes: false };
+    values.aktiviteterValues[id2] = { skalBrukes: false };
+    values.aktiviteterValues[id3] = { skalBrukes: null };
+    values.aktiviteterValues[idAAP] = { skalBrukes: false };
     values[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME] = 'sefiojsiejfise';
     values.avklarAktiviteter = {
       aktiviteterTomDatoMapping,

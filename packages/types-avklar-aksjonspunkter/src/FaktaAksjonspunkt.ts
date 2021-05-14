@@ -29,6 +29,7 @@ import OverstyringAvklarStartdatoForPeriodenAp from './fakta/OverstyringAvklarSt
 import KontrollerBesteberegningAP from './fakta/KontrollerBesteberegningAP';
 import FordelBeregningsgrunnlagAP from './fakta/FordelBeregningsgrunnlagAP';
 import VurderRefusjonBeregningsgrunnlagAP from './fakta/VurderRefusjonBeregningsgrunnlagAP';
+import BeregningAktivitetAP from './fakta/BeregningAktivitetAP';
 
 export type FaktaAksjonspunkt = AvklarTilleggsopplysningerAp
   | AvklarVergeAp
@@ -60,6 +61,7 @@ export type FaktaAksjonspunkt = AvklarTilleggsopplysningerAp
   | KontrollerBesteberegningAP
   | FordelBeregningsgrunnlagAP
   | VurderRefusjonBeregningsgrunnlagAP
+  | BeregningAktivitetAP
   | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp;
 
 export default FaktaAksjonspunkt;

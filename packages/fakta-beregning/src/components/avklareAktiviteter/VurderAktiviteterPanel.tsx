@@ -1,16 +1,24 @@
 import React, { FunctionComponent } from 'react';
 import moment from 'moment';
-import { ArbeidsgiverOpplysningerPerId, AvklarBeregningAktiviteter, KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  ArbeidsgiverOpplysningerPerId,
+  AvklarBeregningAktiviteter,
+  BeregningAktivitet,
+  KodeverkMedNavn,
+} from '@fpsak-frontend/types';
+import { BeregningAktiviteterTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningAktivitetAP';
 import VurderAktiviteterTabell, { lagAktivitetFieldId } from './VurderAktiviteterTabell';
+import AvklarAktiviteterValues, { AktiviteterValues } from '../../typer/AvklarAktivitetTypes';
 
-const harListeAktivitetSomSkalBrukes = (mapping, values) => mapping.aktiviteter
+const harListeAktivitetSomSkalBrukes = (mapping: AvklarBeregningAktiviteter, values: AvklarAktiviteterValues): boolean => mapping.aktiviteter
   .find((aktivitet) => {
     const fieldId = lagAktivitetFieldId(aktivitet);
-    const { skalBrukes } = values[fieldId] !== undefined && values[fieldId] !== null ? values[fieldId] : aktivitet.skalBrukes;
-    return skalBrukes;
+    return !!values.aktiviteterValues && !!values.aktiviteterValues[fieldId]
+      ? values.aktiviteterValues[fieldId].skalBrukes
+      : aktivitet.skalBrukes;
   }) !== undefined;
 
-export const finnPlasseringIListe = (gjeldendeTomDatoMapping, dato) => {
+export const finnPlasseringIListe = (gjeldendeTomDatoMapping: AvklarBeregningAktiviteter[], dato: string): number => {
   let i = 0;
   while (i < gjeldendeTomDatoMapping.length && moment(dato).isBefore(gjeldendeTomDatoMapping[i].tom === undefined ? null : gjeldendeTomDatoMapping[i].tom)) {
     i += 1;
@@ -18,7 +26,9 @@ export const finnPlasseringIListe = (gjeldendeTomDatoMapping, dato) => {
   return i;
 };
 
-export const leggTilAktivitet = (gjeldendeTomDatoMapping, aktivitet, tomDato) => {
+export const leggTilAktivitet = (gjeldendeTomDatoMapping: AvklarBeregningAktiviteter[],
+  aktivitet: BeregningAktivitet,
+  tomDato: string): void => {
   // Finnes gjeldendeTomDatoMapping med tomDato ?
   const eksisterende = gjeldendeTomDatoMapping.find(({ tom }) => tom === tomDato);
   if (eksisterende === undefined) {
@@ -33,15 +43,16 @@ export const leggTilAktivitet = (gjeldendeTomDatoMapping, aktivitet, tomDato) =>
   }
 };
 
-export const lagTomDatoMapping = (values) => {
+const lagTomDatoMapping = (values: AvklarAktiviteterValues): AvklarBeregningAktiviteter[] => {
   const forrigeTomDatoMapping = values.avklarAktiviteter.aktiviteterTomDatoMapping;
   const gjeldendeTomDatoMapping = [];
+  // @ts-ignore fix: hvor har denne tatt veien?
   const stpOpptjening = values.avklarAktiviteter.skjæringstidspunkt;
 
   // Alle aktiviteter som har t.o.m dato på en dag før, eller etter, skal legges til i gjeldendeTomDatoMapping
   forrigeTomDatoMapping.flatMap(({ aktiviteter }) => aktiviteter).forEach((aktivitet) => {
     const nyAktivitet = { ...aktivitet };
-    const tomDato = values[lagAktivitetFieldId(aktivitet)].tom;
+    const tomDato = values.aktiviteterValues[lagAktivitetFieldId(aktivitet)].tom;
     if (!!tomDato && tomDato !== nyAktivitet.tom) {
       nyAktivitet.tom = tomDato;
     }
@@ -59,7 +70,7 @@ export const lagTomDatoMapping = (values) => {
  * eller også andre aktiviteter for overstyring)
  */
 const finnListerSomSkalVurderes = (aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[],
-  values: any,
+  values: AvklarAktiviteterValues,
   erOverstyrt: boolean): AvklarBeregningAktiviteter[] => {
   const nyTomDatoMapping = values ? lagTomDatoMapping(values) : aktiviteterTomDatoMapping;
   if (erOverstyrt) {
@@ -86,14 +97,14 @@ const finnListerSomSkalVurderes = (aktiviteterTomDatoMapping: AvklarBeregningAkt
  * @returns seneste skjæringstidspunkt for en aktivitet som er satt til "skalBrukes". Undefined hvis
  * noen av argumentene er undefined.
  */
-const utledGjeldendeSkjæringstidspunkt = (values, listeSomSkalVurderes) => {
+const utledGjeldendeSkjæringstidspunkt = (values: AvklarAktiviteterValues, listeSomSkalVurderes: AvklarBeregningAktiviteter[]): string => {
   if (values === undefined || listeSomSkalVurderes === undefined) {
     return undefined;
   }
   for (let k = 0; k < listeSomSkalVurderes.length; k += 1) {
     const { aktiviteter } = listeSomSkalVurderes[k];
     for (let i = 0; i < aktiviteter.length; i += 1) {
-      const tempaktivitet = values[lagAktivitetFieldId(aktiviteter[i])];
+      const tempaktivitet = values.aktiviteterValues[lagAktivitetFieldId(aktiviteter[i])];
       if (tempaktivitet.skalBrukes) {
         return listeSomSkalVurderes[k].tom;
       }
@@ -110,19 +121,26 @@ type OwnProps = {
     aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[];
     alleKodeverk: {[key: string]: KodeverkMedNavn[]};
     formNameAvklarAktiviteter: string;
-    values: any;
+    values: AvklarAktiviteterValues;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 interface StaticFunctions {
-  transformValues: (values: any, aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[], erOverstyrt: boolean) => any;
-  validate: (values: any, aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[], erOverstyrt: boolean) => any;
-  hasValueChangedFromInitial: (aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[], values: any, initialValues: any, erOverstyrt: boolean) => any;
+  transformValues: (values: AvklarAktiviteterValues,
+                    aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[],
+                    erOverstyrt: boolean) => BeregningAktiviteterTransformedValues;
+  validate: (values: AvklarAktiviteterValues,
+             aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[],
+             erOverstyrt: boolean) => any;
+  hasValueChangedFromInitial: (aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[],
+                               values: AvklarAktiviteterValues,
+                               initialValues: AvklarAktiviteterValues,
+                               erOverstyrt: boolean) => boolean;
   buildInitialValues: (aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[],
                        alleKodeverk: {[key: string]: KodeverkMedNavn[]},
                        erOverstyrt: boolean,
                        harAksjonspunkt: boolean,
-                       arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => any;
+                       arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => AktiviteterValues;
 }
 
 /**
@@ -191,9 +209,11 @@ VurderAktiviteterPanel.validate = (values, aktiviteterTomDatoMapping, erOverstyr
   return {};
 };
 
-const erLikEllerFør = (dato1, dato2) => moment(dato1).isSameOrBefore(moment(dato2));
+const erLikEllerFør = (dato1: string, dato2: string): boolean => moment(dato1).isSameOrBefore(moment(dato2));
 
-VurderAktiviteterPanel.transformValues = (values, aktiviteterTomDatoMapping, erOverstyrt) => {
+VurderAktiviteterPanel.transformValues = (values: AvklarAktiviteterValues,
+  aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[],
+  erOverstyrt: boolean): BeregningAktiviteterTransformedValues => {
   const listerSomVurderes = finnListerSomSkalVurderes(aktiviteterTomDatoMapping, values, erOverstyrt);
   const gjeldendeSkjæringstidspunkt = utledGjeldendeSkjæringstidspunkt(values, listerSomVurderes);
   return ({
@@ -202,7 +222,10 @@ VurderAktiviteterPanel.transformValues = (values, aktiviteterTomDatoMapping, erO
   });
 };
 
-VurderAktiviteterPanel.hasValueChangedFromInitial = (aktiviteterTomDatoMapping, values, initialValues, erOverstyrt) => {
+VurderAktiviteterPanel.hasValueChangedFromInitial = (aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[],
+  values: AvklarAktiviteterValues,
+  initialValues: AvklarAktiviteterValues,
+  erOverstyrt: boolean): boolean => {
   if (!aktiviteterTomDatoMapping) {
     return false;
   }
@@ -225,7 +248,7 @@ VurderAktiviteterPanel.hasValueChangedFromInitial = (aktiviteterTomDatoMapping, 
  * @returns seneste skjæringstidspunkt for en aktivitet som er satt til "skalBrukes". Undefined hvis
  * noen av argumentene er undefined.
  */
-const utledGjeldendeSkjæringstidspunktVedPreutfylling = (aktiviteterTomDatoMapping) => {
+const utledGjeldendeSkjæringstidspunktVedPreutfylling = (aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[]): string => {
   if (aktiviteterTomDatoMapping === undefined) {
     return undefined;
   }
@@ -241,7 +264,11 @@ const utledGjeldendeSkjæringstidspunktVedPreutfylling = (aktiviteterTomDatoMapp
   return undefined;
 };
 
-VurderAktiviteterPanel.buildInitialValues = (aktiviteterTomDatoMapping, alleKodeverk, erOverstyrt, harAksjonspunkt, arbeidsgiverOpplysningerPerId) => {
+VurderAktiviteterPanel.buildInitialValues = (aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[],
+  alleKodeverk: {[key: string]: KodeverkMedNavn[]},
+  erOverstyrt: boolean,
+  harAksjonspunkt: boolean,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): AktiviteterValues => {
   if (!aktiviteterTomDatoMapping || aktiviteterTomDatoMapping.length === 0) {
     return {};
   }
