@@ -12,7 +12,7 @@ export const REQUEST_POLLING_CANCELLED = 'INTERNAL_CANCELLATION';
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const hasLocationAndStatusDelayedOrHalted = (responseData): boolean => responseData?.location
+const hasLocationAndStatusDelayedOrHalted = (responseData: any): boolean => responseData?.location
   && (responseData.status === AsyncPollingStatus.DELAYED || responseData.status === AsyncPollingStatus.HALTED);
 
 type Notify = (eventType: keyof typeof EventType, data?: any, isPolling?: boolean) => void
@@ -55,7 +55,7 @@ class RequestRunner {
     this.notify = notificationEmitter;
   }
 
-  execLongPolling = async (location: string, pollingInterval = 0, pollingCounter = 0): Promise<Response> => {
+  execLongPolling = async (location: string, pollingInterval = 0, pollingCounter = 0): Promise<Response | null> => {
     if (pollingCounter === this.maxPollingLimit) {
       throw new TimeoutError(location);
     }
@@ -83,12 +83,16 @@ class RequestRunner {
     return statusOrResultResponse;
   };
 
-  execute = async (path: string, restMethod: (pathArg: string, params?: any) => Promise<Response>, params: any): Promise<Response> => {
+  execute = async <P, >(
+    path: string,
+    restMethod: (pathArg: string, params?: P) => Promise<Response>,
+    params: P,
+  ): Promise<Response | null> => {
     let response = await restMethod(path, params);
     if ('status' in response && response.status === HTTP_ACCEPTED) {
       this.isPollingRequest = true;
       try {
-        response = await this.execLongPolling(response.headers.location);
+        return await this.execLongPolling(response.headers.location);
       } catch (error) {
         const responseData = error.response ? error.response.data : undefined;
         if (hasLocationAndStatusDelayedOrHalted(responseData)) {
@@ -112,12 +116,12 @@ class RequestRunner {
     this.notify(EventType.REQUEST_STARTED);
 
     try {
-      const response = await this.execute(this.path, this.restMethod, params);
+      const response = await this.execute<P>(this.path, this.restMethod, params);
       if (this.isCancelled) {
         throw new Error(REQUEST_POLLING_CANCELLED);
       }
 
-      const responseData = 'data' in response ? response.data : undefined;
+      const responseData = response !== null && 'data' in response ? response.data : undefined;
       this.notify(EventType.REQUEST_FINISHED, responseData, this.isPollingRequest);
       return responseData ? { payload: responseData } : { payload: undefined };
     } catch (error) {

@@ -8,7 +8,7 @@ import RequestConfig, { RequestType } from '../RequestConfig';
 
 const DEFAULT_CATEGORY = 'DEFAULT_CATEGORY';
 
-const getMethod = (httpClientApi: HttpClientApi, restMethod: string, isResponseBlob: boolean) => {
+const getMethod = (httpClientApi: HttpClientApi, restMethod: string, isResponseBlob = false) => {
   if (restMethod === RequestType.GET) {
     return httpClientApi.get;
   }
@@ -33,7 +33,7 @@ const getMethod = (httpClientApi: HttpClientApi, restMethod: string, isResponseB
 const isGetRequest = (restMethod: string): boolean => restMethod === RequestType.GET || restMethod === RequestType.GET_ASYNC;
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-const waitUntilFinished = async (cache: ResponseCache, endpointName: string) => {
+const waitUntilFinished = async (cache: ResponseCache, endpointName: string): Promise<undefined> => {
   if (cache.isFetching(endpointName)) {
     await wait(50);
     return waitUntilFinished(cache, endpointName);
@@ -76,7 +76,7 @@ class RequestApi extends AbstractRequestApi {
     return undefined;
   }
 
-  private findLinks = (rel: string): Link => Object.values(this.links).flat().find((link) => link.rel === rel);
+  private findLinks = (rel?: string): Link | undefined => Object.values(this.links).flat().find((link) => link.rel === rel);
 
   public startRequest = async <T, P>(endpointName: string, params?: P, isCachingOn = false): Promise<{ payload: T }> => {
     const endpointConfig = this.endpointConfigList.find((c) => c.name === endpointName);
@@ -86,6 +86,9 @@ class RequestApi extends AbstractRequestApi {
     const link = this.findLinks(endpointConfig.rel);
     const restMethod = link ? link.type : endpointConfig.restMethod;
     const href = link ? link.href : endpointConfig.path;
+    if (!href) {
+      throw new Error(`Mangler href for endepunkt ${endpointName}`);
+    }
 
     const useCaching = isCachingOn && isGetRequest(restMethod);
     if (useCaching) {

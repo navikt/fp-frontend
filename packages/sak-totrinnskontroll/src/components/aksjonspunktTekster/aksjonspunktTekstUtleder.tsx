@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 
@@ -15,9 +15,11 @@ import {
 import totrinnskontrollaksjonspunktTextCodes, { totrinnsTilbakekrevingkontrollaksjonspunktTextCodes } from '../../totrinnskontrollaksjonspunktTextCodes';
 import OpptjeningTotrinnText from './OpptjeningTotrinnText';
 
-const formatDate = (date?: string) => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
+const formatDate = (date?: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
-const buildVarigEndringBeregningText = (beregningDto?: TotrinnskontrollAksjonspunkt['beregningDto']) => (beregningDto?.fastsattVarigEndringNaering ? (
+const buildVarigEndringBeregningText = (
+  beregningDto?: TotrinnskontrollAksjonspunkt['beregningDto'],
+): ReactElement => (beregningDto?.fastsattVarigEndringNaering ? (
   <FormattedMessage
     id="ToTrinnsForm.Beregning.VarigEndring"
   />
@@ -28,7 +30,10 @@ const buildVarigEndringBeregningText = (beregningDto?: TotrinnskontrollAksjonspu
 ));
 
 // Eksportert kun for test
-export const getFaktaOmArbeidsforholdMessages = (arbeidforholdDto: TotrinnskontrollArbeidsforhold, arbeidsforholdHandlingTyper: KodeverkMedNavn[]) => {
+export const getFaktaOmArbeidsforholdMessages = (
+  arbeidforholdDto: TotrinnskontrollArbeidsforhold,
+  arbeidsforholdHandlingTyper: KodeverkMedNavn[],
+): ReactElement[] => {
   const formattedMessages = [];
   const { kode } = arbeidforholdDto.arbeidsforholdHandlingType;
   if (arbeidforholdDto.brukPermisjon === true) {
@@ -60,7 +65,7 @@ export const getFaktaOmArbeidsforholdMessages = (arbeidforholdDto: Totrinnskontr
 const buildArbeidsforholdText = (
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
-) => {
+): ReactElement[] => {
   if (!aksjonspunkt.arbeidforholdDtos || aksjonspunkt.arbeidforholdDtos.length === 0) {
     return [<FormattedMessage id="ToTrinnsForm.FaktaOmArbeidsforhold.DetErVurdert" />];
   }
@@ -88,8 +93,8 @@ const buildArbeidsforholdText = (
   });
 };
 
-const buildUttakText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactNode[] => (aksjonspunkt.uttakPerioder
-  ? aksjonspunkt.uttakPerioder.map((uttakperiode): ReactNode => {
+const buildUttakText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactElement[] => (aksjonspunkt.uttakPerioder
+  ? aksjonspunkt.uttakPerioder.map((uttakperiode): ReactElement => {
     const fom = formatDate(uttakperiode.fom);
     const tom = formatDate(uttakperiode.tom);
     let id;
@@ -120,7 +125,7 @@ const buildUttakText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactNode[]
     );
   }) : []);
 
-const buildOpptjeningText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactNode[] => (aksjonspunkt.opptjeningAktiviteter
+const buildOpptjeningText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactElement[] => (aksjonspunkt.opptjeningAktiviteter
   ? aksjonspunkt.opptjeningAktiviteter.map((aktivitet) => (
     <OpptjeningTotrinnText
       aktivitet={aktivitet}
@@ -128,25 +133,25 @@ const buildOpptjeningText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactN
   ))
   : []);
 
-const getTextFromAksjonspunktkode = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactNode => {
+const getTextFromAksjonspunktkode = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactElement[] => {
   const aksjonspunktTextId = totrinnskontrollaksjonspunktTextCodes[aksjonspunkt.aksjonspunktKode];
   return aksjonspunktTextId ? (
-    <FormattedMessage
+    [<FormattedMessage
       id={aksjonspunktTextId}
-    />
-  ) : null;
+    />]
+  ) : [];
 };
 
-const getTextFromTilbakekrevingAksjonspunktkode = (aksjonspunkt: TotrinnskontrollAksjonspunkt) => {
+const getTextFromTilbakekrevingAksjonspunktkode = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactElement[] => {
   const aksjonspunktTextId = totrinnsTilbakekrevingkontrollaksjonspunktTextCodes[aksjonspunkt.aksjonspunktKode];
   return aksjonspunktTextId ? (
-    <FormattedMessage
+    [<FormattedMessage
       id={aksjonspunktTextId}
-    />
-  ) : null;
+    />]
+  ) : [];
 };
 
-const getTextForForeldreansvarsvilkåretAndreLedd = (isForeldrepenger: boolean) => {
+const getTextForForeldreansvarsvilkåretAndreLedd = (isForeldrepenger: boolean): ReactElement[] => {
   const aksjonspunktTextId = isForeldrepenger
     ? 'ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddFP'
     : 'ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddES';
@@ -156,14 +161,15 @@ const getTextForForeldreansvarsvilkåretAndreLedd = (isForeldrepenger: boolean) 
 const getFaktaOmBeregningText = (
   faktaOmBeregningTilfeller: KodeverkMedNavn[],
   beregningDto?: TotrinnskontrollAksjonspunkt['beregningDto'],
-): null | Array<string | undefined> => {
+): ReactElement[] => {
   if (!beregningDto || !beregningDto.faktaOmBeregningTilfeller) {
-    return null;
+    return [];
   }
 
-  return beregningDto.faktaOmBeregningTilfeller.map(({
-    kode,
-  }) => faktaOmBeregningTilfeller.find((tilfelle) => tilfelle.kode === kode)?.navn);
+  return beregningDto.faktaOmBeregningTilfeller.flatMap(({ kode }) => {
+    const t = faktaOmBeregningTilfeller.find((tilfelle) => tilfelle.kode === kode);
+    return t ? [<>t.navn</>] : [];
+  });
 };
 
 const omgjoerTekstMap = {
@@ -172,7 +178,9 @@ const omgjoerTekstMap = {
   UGUNST_MEDHOLD_I_KLAGE: 'ToTrinnsForm.Klage.OmgjortTilUgunst',
 } as Record<string, string>;
 
-const getTextForKlageHelper = (klageVurderingResultat: KlageVurdering['klageVurderingResultatNK'] | KlageVurdering['klageVurderingResultatNFP']) => {
+const getTextForKlageHelper = (
+  klageVurderingResultat: KlageVurdering['klageVurderingResultatNK'] | KlageVurdering['klageVurderingResultatNFP'],
+): ReactElement => {
   let aksjonspunktTextId = '';
   switch (klageVurderingResultat?.klageVurdering?.kode) {
     case klageVurderingCodes.STADFESTE_YTELSESVEDTAK:
@@ -201,21 +209,21 @@ const getTextForKlageHelper = (klageVurderingResultat: KlageVurdering['klageVurd
   return <FormattedMessage id={aksjonspunktTextId} />;
 };
 
-const getTextForKlage = (behandlingStaus: Kodeverk, klagebehandlingVurdering?: KlageVurdering) => {
+const getTextForKlage = (behandlingStaus: Kodeverk, klagebehandlingVurdering?: KlageVurdering): ReactElement[] => {
   if (behandlingStaus.kode === behandlingStatusCode.FATTER_VEDTAK) {
     if (klagebehandlingVurdering?.klageVurderingResultatNK) {
-      return getTextForKlageHelper(klagebehandlingVurdering.klageVurderingResultatNK);
+      return [getTextForKlageHelper(klagebehandlingVurdering.klageVurderingResultatNK)];
     }
     if (klagebehandlingVurdering?.klageVurderingResultatNFP) {
-      return getTextForKlageHelper(klagebehandlingVurdering.klageVurderingResultatNFP);
+      return [getTextForKlageHelper(klagebehandlingVurdering.klageVurderingResultatNFP)];
     }
   }
-  return null;
+  return [];
 };
 
-const buildAvklarAnnenForelderText = () => <FormattedMessage id="ToTrinnsForm.AvklarUttak.AnnenForelderHarRett" />;
+const buildAvklarAnnenForelderText = (): ReactElement => <FormattedMessage id="ToTrinnsForm.AvklarUttak.AnnenForelderHarRett" />;
 
-const erKlageAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt) => aksjonspunkt
+const erKlageAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt): boolean => aksjonspunkt
   .aksjonspunktKode === aksjonspunktCodes.BEHANDLE_KLAGE_NFP
   || aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.BEHANDLE_KLAGE_NK
   || aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP
@@ -229,7 +237,7 @@ const getAksjonspunkttekst = (
   erTilbakekreving: boolean,
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
   klagebehandlingVurdering?: KlageVurdering,
-): ReactNode[] => {
+): ReactElement[] => {
   if (aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING) {
     return buildOpptjeningText(aksjonspunkt);
   }
@@ -250,15 +258,15 @@ const getAksjonspunkttekst = (
     return getTextForForeldreansvarsvilkåretAndreLedd(isForeldrepenger);
   }
   if (erKlageAksjonspunkt(aksjonspunkt)) {
-    return [getTextForKlage(behandlingStatus, klagebehandlingVurdering)];
+    return getTextForKlage(behandlingStatus, klagebehandlingVurdering);
   }
   if (aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD) {
     return buildArbeidsforholdText(aksjonspunkt, arbeidsforholdHandlingTyper);
   }
   if (erTilbakekreving) {
-    return [getTextFromTilbakekrevingAksjonspunktkode(aksjonspunkt)];
+    return getTextFromTilbakekrevingAksjonspunktkode(aksjonspunkt);
   }
-  return [getTextFromAksjonspunktkode(aksjonspunkt)];
+  return getTextFromAksjonspunktkode(aksjonspunkt);
 };
 
 export default getAksjonspunkttekst;

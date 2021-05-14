@@ -8,7 +8,7 @@ type NotificationEmitter = (eventType: keyof typeof EventType, data?: any, isPol
 
 const isString = (value: any): boolean => typeof value === 'string';
 
-const isOfTypeBlob = (error: ErrorType): boolean => error && error.config && error.config.responseType === 'blob';
+const isOfTypeBlob = (error: ErrorType): boolean => error && error.config?.responseType === 'blob';
 
 const blobParser = (blob: any): Promise<string> => {
   const fileReader = new FileReader();
@@ -54,7 +54,7 @@ class RequestErrorEventHandler {
     this.isPollingRequest = isPollingRequest;
   }
 
-  handleError = async (error: ErrorType | TimeoutError): Promise<string> => {
+  handleError = async (error: ErrorType | TimeoutError): Promise<string | undefined> => {
     if (error instanceof TimeoutError) {
       this.notify(EventType.POLLING_TIMEOUT, { location: error.location });
       return;

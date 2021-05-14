@@ -1,8 +1,10 @@
 import sinon from 'sinon';
 
+import { Response } from './ResponseTsType';
 import AsyncPollingStatus from './asyncPollingStatus';
 import RequestRunner, { REQUEST_POLLING_CANCELLED } from './RequestRunner';
 import NotificationMapper from './NotificationMapper';
+import HttpClientApi from '../HttpClientApiTsType';
 
 class NotificationHelper {
   mapper: NotificationMapper;
@@ -35,14 +37,14 @@ class NotificationHelper {
 
 const httpClientGeneralMock = {
   get: () => undefined,
-  post: () => undefined,
-  put: () => undefined,
-  getBlob: () => undefined,
-  postBlob: () => undefined,
+  post: () => Promise.resolve({} as Response),
+  put: () => Promise.resolve({} as Response),
+  getBlob: () => Promise.resolve({} as Response),
+  postBlob: () => Promise.resolve({} as Response),
   postAndOpenBlob: () => undefined,
-  getAsync: () => undefined,
-  postAsync: () => undefined,
-  putAsync: () => undefined,
+  getAsync: () => Promise.resolve({} as Response),
+  postAsync: () => Promise.resolve({} as Response),
+  putAsync: () => Promise.resolve({} as Response),
 };
 
 describe('RequestRunner', () => {
@@ -62,7 +64,7 @@ describe('RequestRunner', () => {
     const httpClientMock = {
       ...httpClientGeneralMock,
       get: () => Promise.resolve(response),
-    };
+    } as HttpClientApi;
 
     const process = new RequestRunner(httpClientMock, httpClientMock.get, 'behandling', defaultConfig);
     const notificationHelper = new NotificationHelper();
@@ -115,7 +117,7 @@ describe('RequestRunner', () => {
         },
       }),
       get: () => Promise.resolve(allGetResults.shift()),
-    };
+    } as HttpClientApi;
 
     const params = {
       behandlingId: 1,
@@ -167,7 +169,7 @@ describe('RequestRunner', () => {
           pollIntervalMillis: 0,
         },
       }),
-    };
+    } as HttpClientApi;
 
     const params = {
       behandlingId: 1,
@@ -202,7 +204,7 @@ describe('RequestRunner', () => {
     const httpClientMock = {
       ...httpClientGeneralMock,
       get: () => Promise.resolve(response),
-    };
+    } as HttpClientApi;
 
     const process = new RequestRunner(httpClientMock, httpClientMock.get, 'behandling', defaultConfig);
     const notificationHelper = new NotificationHelper();

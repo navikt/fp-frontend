@@ -13,9 +13,9 @@ abstract class AbstractRequestApi {
 
   public abstract setLinks(links: Link[], linkCategory?: string): void;
 
-  public abstract setRequestPendingHandler(requestPendingHandler): void;
+  public abstract setRequestPendingHandler(requestPendingHandler: (message?: string) => void): void;
 
-  public abstract setAddErrorMessageHandler(addErrorMessage): void;
+  public abstract setAddErrorMessageHandler(addErrorMessage: (message: string) => void): void;
 
   public abstract resetCache(): void;
 

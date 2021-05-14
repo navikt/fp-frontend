@@ -27,11 +27,11 @@ const formatConfig = (config: RequestAdditionalConfig = {}): RequestAdditionalCo
 class RequestConfig {
     name: string;
 
-    config?: RequestAdditionalConfig;
+    config: RequestAdditionalConfig;
 
     path?: string;
 
-    restMethod?: string = RequestType.GET;
+    restMethod: string = RequestType.GET;
 
     rel?: string;
 
