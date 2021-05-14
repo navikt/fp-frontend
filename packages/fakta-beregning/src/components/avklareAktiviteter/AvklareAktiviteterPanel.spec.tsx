@@ -149,7 +149,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       onSubmit={() => undefined}
       erBgOverstyrt={false}
       alleKodeverk={alleKodeverk}
-      reduxFormInitialize={() => {}}
+      reduxFormInitialize={sinon.spy()}
       beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       erOverstyrer={false}
@@ -181,7 +181,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       submitCallback={sinon.spy()}
       onSubmit={() => undefined}
       beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
-      reduxFormInitialize={() => {}}
+      reduxFormInitialize={sinon.spy()}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       erOverstyrer={false}
       validate={sinon.spy()}
@@ -217,7 +217,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       submitCallback={sinon.spy()}
       onSubmit={() => undefined}
       beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
-      reduxFormInitialize={() => {}}
+      reduxFormInitialize={sinon.spy()}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       erOverstyrer={false}
       validate={sinon.spy()}
@@ -252,7 +252,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       erOverstyrt
       erBgOverstyrt={false}
       alleKodeverk={alleKodeverk}
-      reduxFormInitialize={() => {}}
+      reduxFormInitialize={sinon.spy()}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       erOverstyrer={false}
       validate={sinon.spy()}
