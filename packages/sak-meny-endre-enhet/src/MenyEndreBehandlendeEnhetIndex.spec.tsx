@@ -13,7 +13,6 @@ describe('<MenyEndreBehandlendeEnhetIndex>', () => {
     const lukkModalCallback = sinon.spy();
 
     const wrapper = shallowWithIntl(<MenyEndreBehandlendeEnhetIndex
-      behandlingId={3}
       behandlingVersjon={1}
       behandlendeEnhetId="NAVV"
       behandlendeEnhetNavn="NAV Viken"
@@ -41,8 +40,6 @@ describe('<MenyEndreBehandlendeEnhetIndex>', () => {
     expect(kall).toHaveLength(1);
     expect(kall[0].args).toHaveLength(1);
     expect(kall[0].args[0]).toEqual({
-      behandlingId: 3,
-      behandlingVersjon: 1,
       enhetNavn: 'TEST ENHET',
       enhetId: 'TEST',
       begrunnelse: 'Dette er en begrunnelse',

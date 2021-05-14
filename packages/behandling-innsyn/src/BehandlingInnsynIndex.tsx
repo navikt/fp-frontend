@@ -36,7 +36,7 @@ const BehandlingInnsynIndex: FunctionComponent<StandardBehandlingProps> = ({
     requestInnsynApi, setBehandling, InnsynBehandlingApiKeys.SAVE_AKSJONSPUNKT,
   );
 
-  useInitBehandlingHandlinger(requestInnsynApi, InnsynBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);
+  useInitBehandlingHandlinger(requestInnsynApi, InnsynBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling, behandling);
 
   if (!behandling) {
     return <LoadingPanel />;

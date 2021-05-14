@@ -12,8 +12,6 @@ export default {
 
 export const visMenyForÅpneBehandlingForEndringer = () => (
   <MenyApneForEndringerIndex
-    behandlingId={1}
-    behandlingVersjon={2}
     apneBehandlingForEndringer={action('button-click')}
     lukkModal={action('button-click')}
   />

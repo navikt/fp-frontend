@@ -111,12 +111,19 @@ export const useLagreAksjonspunkt = (
   };
 };
 
+const leggTilBehandlingIdentifikator = (behandling: Behandling, params: any) => ({
+  ...params,
+  behandlingId: behandling.id,
+  behandlingVersjon: behandling.versjon,
+});
+
 export const useInitBehandlingHandlinger = (
   requestApi: AbstractRequestApi,
   keys: Record<string, RestKey<any, any>>,
   behandlingEventHandler: BehandlingEventHandler,
   hentBehandling: (keepData: boolean) => Promise<Behandling>,
   setBehandling: (behandling: Behandling) => void,
+  behandling: Behandling,
 ): void => {
   const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
 
@@ -133,26 +140,27 @@ export const useInitBehandlingHandlinger = (
   const { startRequest: lagreRisikoklassifiseringAksjonspunkt } = useRestApiRunner<Behandling, any>(keys.SAVE_AKSJONSPUNKT);
 
   useEffect(() => {
-    behandlingEventHandler.setHandler({
-      endreBehandlendeEnhet: (params) => nyBehandlendeEnhet(params)
-        .then(() => hentBehandling(true)),
-      settBehandlingPaVent: (params) => settBehandlingPaVent(params)
-        .then(() => hentBehandling(true)),
-      taBehandlingAvVent: (params) => taBehandlingAvVent(params)
-        .then((behandlingResTaAvVent) => setBehandling(behandlingResTaAvVent)),
-      henleggBehandling: (params) => henleggBehandling(params),
-      opneBehandlingForEndringer: (params) => opneBehandlingForEndringer(params)
-        .then((behandlingResOpneForEndring) => setBehandling(behandlingResOpneForEndring)),
-      opprettVerge: (params) => opprettVerge(params)
-        .then((behandlingResOpprettVerge) => setBehandling(behandlingResOpprettVerge)),
-      fjernVerge: (params) => fjernVerge(params)
-        .then((behandlingResFjernVerge) => setBehandling(behandlingResFjernVerge)),
-      lagreRisikoklassifiseringAksjonspunkt: (params) => lagreRisikoklassifiseringAksjonspunkt(params)
-        .then((behandlingEtterRisikoAp) => setBehandling(behandlingEtterRisikoAp)),
-    });
-
+    if (behandling) {
+      behandlingEventHandler.setHandler({
+        endreBehandlendeEnhet: (params) => nyBehandlendeEnhet(leggTilBehandlingIdentifikator(behandling, params))
+          .then(() => hentBehandling(true)),
+        settBehandlingPaVent: (params) => settBehandlingPaVent(leggTilBehandlingIdentifikator(behandling, params))
+          .then(() => hentBehandling(true)),
+        taBehandlingAvVent: () => taBehandlingAvVent(leggTilBehandlingIdentifikator(behandling, {}))
+          .then((behandlingResTaAvVent) => setBehandling(behandlingResTaAvVent)),
+        henleggBehandling: (params) => henleggBehandling(leggTilBehandlingIdentifikator(behandling, params)),
+        opneBehandlingForEndringer: () => opneBehandlingForEndringer(leggTilBehandlingIdentifikator(behandling, {}))
+          .then((behandlingResOpneForEndring) => setBehandling(behandlingResOpneForEndring)),
+        opprettVerge: () => opprettVerge(leggTilBehandlingIdentifikator(behandling, {}))
+          .then((behandlingResOpprettVerge) => setBehandling(behandlingResOpprettVerge)),
+        fjernVerge: () => fjernVerge(leggTilBehandlingIdentifikator(behandling, {}))
+          .then((behandlingResFjernVerge) => setBehandling(behandlingResFjernVerge)),
+        lagreRisikoklassifiseringAksjonspunkt: (params) => lagreRisikoklassifiseringAksjonspunkt(leggTilBehandlingIdentifikator(behandling, params))
+          .then((behandlingEtterRisikoAp) => setBehandling(behandlingEtterRisikoAp)),
+      });
+    }
     return () => {
       behandlingEventHandler.clear();
     };
-  }, []);
+  }, [behandling?.versjon]);
 };

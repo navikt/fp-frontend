@@ -15,10 +15,9 @@ export default {
 };
 
 interface HenleggParams {
-  behandlingVersjon: number;
-  behandlingId: number;
   årsakKode: string;
   begrunnelse: string;
+  fritekst: string;
 }
 
 const valgtBehandling = {

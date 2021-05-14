@@ -13,13 +13,10 @@ const intl = createIntl(messages);
 export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyEndreBehandlendeEnhetIndex.ByttBehandlendeEnhet' });
 
 interface OwnProps {
-  behandlingId?: number;
   behandlingVersjon?: number;
   behandlendeEnhetId?: string;
   behandlendeEnhetNavn?: string;
   nyBehandlendeEnhet: (params: {
-    behandlingVersjon: number;
-    behandlingId: number;
     enhetNavn: string;
     enhetId: string;
     begrunnelse: string;
@@ -32,7 +29,6 @@ interface OwnProps {
 }
 
 const MenyEndreBehandlendeEnhetIndex: FunctionComponent<OwnProps> = ({
-  behandlingId,
   behandlingVersjon,
   behandlendeEnhetId,
   behandlendeEnhetNavn,
@@ -44,11 +40,9 @@ const MenyEndreBehandlendeEnhetIndex: FunctionComponent<OwnProps> = ({
     .filter((enhet) => enhet.enhetId !== behandlendeEnhetId), [behandlendeEnheter]);
 
   const submit = useCallback((formValues) => {
-    if (behandlingId && behandlingVersjon) {
+    if (behandlingVersjon) {
       const nyEnhet = filtrerteBehandlendeEnheter[parseInt(formValues.nyEnhet, 10)];
       const values = {
-        behandlingVersjon,
-        behandlingId,
         enhetNavn: nyEnhet.enhetNavn,
         enhetId: nyEnhet.enhetId,
         begrunnelse: formValues.begrunnelse,
@@ -57,7 +51,7 @@ const MenyEndreBehandlendeEnhetIndex: FunctionComponent<OwnProps> = ({
     }
 
     lukkModal();
-  }, [behandlingId, behandlingVersjon, nyBehandlendeEnhet]);
+  }, [behandlingVersjon, nyBehandlendeEnhet]);
   return (
     <RawIntlProvider value={intl}>
       <ReduxWrapper formName="MenyEndreBehandlendeEnhetIndex">

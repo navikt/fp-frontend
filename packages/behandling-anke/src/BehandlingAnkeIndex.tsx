@@ -47,7 +47,7 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & StandardBehandlingProps>
     requestAnkeApi, setBehandling, AnkeBehandlingApiKeys.SAVE_AKSJONSPUNKT,
   );
 
-  useInitBehandlingHandlinger(requestAnkeApi, AnkeBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);
+  useInitBehandlingHandlinger(requestAnkeApi, AnkeBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling, behandling);
 
   if (!behandling) {
     return <LoadingPanel />;

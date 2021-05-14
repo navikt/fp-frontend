@@ -13,8 +13,6 @@ describe('<MenyApneForEndringerIndex>', () => {
     const lukkModalCallback = sinon.spy();
 
     const wrapper = shallowWithIntl(<MenyApneForEndringerIndex
-      behandlingId={3}
-      behandlingVersjon={1}
       apneBehandlingForEndringer={apneForEndringerCallback}
       lukkModal={lukkModalCallback}
     />, messages);
@@ -26,10 +24,5 @@ describe('<MenyApneForEndringerIndex>', () => {
 
     const kall = apneForEndringerCallback.getCalls();
     expect(kall).toHaveLength(1);
-    expect(kall[0].args).toHaveLength(1);
-    expect(kall[0].args[0]).toEqual({
-      behandlingId: 3,
-      behandlingVersjon: 1,
-    });
   });
 });
