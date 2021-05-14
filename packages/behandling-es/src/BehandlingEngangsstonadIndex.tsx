@@ -56,7 +56,7 @@ const BehandlingEngangsstonadIndex: FunctionComponent<StandardBehandlingProps> =
     requestEsApi, setBehandling, EsBehandlingApiKeys.SAVE_AKSJONSPUNKT, EsBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT,
   );
 
-  useInitBehandlingHandlinger(requestEsApi, EsBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling);
+  useInitBehandlingHandlinger(requestEsApi, EsBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling, behandling);
 
   const { data: opplysningsdata, state: opplysningsdataState } = restApiEsHooks.useMultipleRestApi<{
     arbeidsgivereOversikt: ArbeidsgiverOpplysningerWrapper,

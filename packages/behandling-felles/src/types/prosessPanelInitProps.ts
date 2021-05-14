@@ -1,3 +1,5 @@
+import { Behandling } from '@fpsak-frontend/types';
+
 import ProsessPanelMenyData from './prosessPanelMenyData';
 
 export type ProsessPanelExtraInitProps = {
@@ -6,7 +8,7 @@ export type ProsessPanelExtraInitProps = {
 }
 
 type ProsessPanelInitProps = {
-  behandlingVersjon?: number;
+  behandling?: Behandling;
   valgtProsessSteg: string;
   registrerProsessPanel: (data: ProsessPanelMenyData) => void;
 }

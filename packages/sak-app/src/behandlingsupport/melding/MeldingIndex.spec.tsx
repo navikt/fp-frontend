@@ -336,8 +336,6 @@ describe('<MeldingIndex>', () => {
     const { args } = setBehandlingOnHoldCallback.getCalls()[0];
     expect(args).toHaveLength(1);
     expect(args[0]).toEqual({
-      behandlingId: 1,
-      behandlingVersjon: 123,
       frist: formValues.frist,
       ventearsak: formValues.ventearsak,
     });

@@ -30,7 +30,7 @@ export type OwnProps<INIT_DATA, PANEL_DATA> = {
 
 const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   valgtProsessSteg,
-  behandlingVersjon,
+  behandling,
   registrerProsessPanel,
   requestApi,
   initEndepunkter,
@@ -50,7 +50,7 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
 
   const formaterteEndepunkter = initEndepunkter.map((e) => (e instanceof RestKey ? ({ key: e }) : e));
   const { data: initData, state: initState } = restApiHooks.useMultipleRestApi<INIT_DATA, any>(formaterteEndepunkter, {
-    updateTriggers: [behandlingVersjon],
+    updateTriggers: [behandling?.versjon],
     isCachingOn: true,
   });
 
@@ -80,7 +80,7 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
 
   const formatertePanelEndepunkter = panelEndepunkter.map((e) => (e instanceof RestKey ? ({ key: e }) : e));
   const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<PANEL_DATA, any>(formatertePanelEndepunkter, {
-    updateTriggers: [erPanelValgt, behandlingVersjon],
+    updateTriggers: [erPanelValgt, behandling?.versjon],
     suspendRequest: !erPanelValgt || formatertePanelEndepunkter.length === 0,
     isCachingOn: true,
   });

@@ -61,7 +61,7 @@ describe('<ProsessDefaultInitPanel>', () => {
 
     const wrapper = shallow(<ProsessDefaultInitPanel
       valgtProsessSteg="default"
-      behandlingVersjon={1}
+      behandling={behandling}
       registrerProsessPanel={() => {}}
       requestApi={requestMock}
       initEndepunkter={[AKSJONSPUNKTER_KEY]}

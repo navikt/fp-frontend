@@ -53,8 +53,6 @@ describe('<MenyHenleggIndex>', () => {
     expect(kall).toHaveLength(1);
     expect(kall[0].args).toHaveLength(1);
     expect(kall[0].args[0]).toEqual({
-      behandlingId: 3,
-      behandlingVersjon: 1,
       årsakKode: 'test',
       begrunnelse: 'Dette er en begrunnelse',
       fritekst: 'Dette er en fritekst',

@@ -12,7 +12,6 @@ describe('<MenySettPaVentIndex>', () => {
     const lukkModalCallback = sinon.spy();
 
     const wrapper = shallow(<MenySettPaVentIndex
-      behandlingId={3}
       behandlingVersjon={1}
       settBehandlingPaVent={setBehandlingOnHoldCallback}
       ventearsaker={[]}
@@ -32,8 +31,6 @@ describe('<MenySettPaVentIndex>', () => {
     expect(kall).toHaveLength(1);
     expect(kall[0].args).toHaveLength(1);
     expect(kall[0].args[0]).toEqual({
-      behandlingId: 3,
-      behandlingVersjon: 1,
       frist: '20-12-2020',
       ventearsak: 'test',
     });

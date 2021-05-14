@@ -12,7 +12,6 @@ describe('<MenyTaAvVentIndex>', () => {
     const lukkModalCallback = sinon.spy();
 
     const wrapper = shallow(<MenyTaAvVentIndex
-      behandlingId={3}
       behandlingVersjon={1}
       taBehandlingAvVent={resumeBehandlingCallback}
       lukkModal={lukkModalCallback}
@@ -25,10 +24,5 @@ describe('<MenyTaAvVentIndex>', () => {
 
     const kall = resumeBehandlingCallback.getCalls();
     expect(kall).toHaveLength(1);
-    expect(kall[0].args).toHaveLength(1);
-    expect(kall[0].args[0]).toEqual({
-      behandlingId: 3,
-      behandlingVersjon: 1,
-    });
   });
 });

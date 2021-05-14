@@ -78,7 +78,7 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
         <LoadingPanel />
       )}
       {hentPaneler({
-        behandlingVersjon: behandling?.versjon,
+        behandling,
         valgtProsessSteg,
         registrerProsessPanel,
       }, {
