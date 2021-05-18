@@ -14,7 +14,7 @@ import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 
 import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import { useFpSakKodeverk } from '../../data/useKodeverk';
-import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
+import useVisForhandsvisningAvMelding, { ForhandsvisFunksjon } from '../../data/useVisForhandsvisningAvMelding';
 import {
   FpsakApiKeys, restApiHooks, requestApi,
 } from '../../data/fpsakApi';
@@ -64,7 +64,7 @@ const getPreviewCallback = (
   behandlingTypeKode: string,
   behandlingUuid: string,
   fagsakYtelseType: Kodeverk,
-  fetchPreview: (erHenleggelse: boolean, data: any) => void,
+  fetchPreview: ForhandsvisFunksjon,
 ) => (
   mottaker?: string,
   dokumentMal?: string,

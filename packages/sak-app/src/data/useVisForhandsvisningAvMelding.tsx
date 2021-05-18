@@ -3,9 +3,25 @@ import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 
 import { FpsakApiKeys, restApiHooks } from './fpsakApi';
 
-type ForhandsvisFunksjon = (erHenleggelse: boolean, data: any) => void;
+type ForhandsvisDataFormidling = {
+  ytelseType: Kodeverk;
+  arsakskode?: string | null;
+  mottaker?: string;
+  dokumentMal?: string
+}
+type ForhandsvisDataTilbakekreving = {
+  brevmalkode: string;
+}
 
-const forhandsvis = (data: any) => {
+type ForhandsvisData = {
+  behandlingUuid: string;
+  fritekst?: string;
+  gjelderVedtak?: boolean;
+} & (ForhandsvisDataFormidling | ForhandsvisDataTilbakekreving)
+
+export type ForhandsvisFunksjon = (erHenleggelse: boolean, data: ForhandsvisData) => void;
+
+const forhandsvis = (data: ForhandsvisData) => {
   if (window.navigator.msSaveOrOpenBlob) {
     window.navigator.msSaveOrOpenBlob(data);
   } else if (URL.createObjectURL) {
@@ -20,7 +36,7 @@ const useVisForhandsvisningAvMelding = (behandlingType?: Kodeverk): ForhandsvisF
 
   const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandlingType?.kode || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType?.kode;
 
-  return (erHenleggelse: boolean, data: any): void => {
+  return (erHenleggelse: boolean, data: ForhandsvisData): void => {
     if (erTilbakekreving && erHenleggelse) {
       forhandsvisTilbakekrevingHenleggelse(data).then((response) => forhandsvis(response));
     } else if (erTilbakekreving) {
