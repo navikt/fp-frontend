@@ -17,6 +17,7 @@ describe('<ProsessPanelTemplate>', () => {
         readOnlySubmitButton={false}
         isDirty
         readOnly={false}
+        erIkkeGodkjentAvBeslutter={false}
       >
         <div>test</div>
       </ProsessPanelTemplate>,
@@ -36,6 +37,7 @@ describe('<ProsessPanelTemplate>', () => {
         readOnlySubmitButton={false}
         isDirty
         readOnly={false}
+        erIkkeGodkjentAvBeslutter={false}
       >
         <div>test</div>
       </ProsessPanelTemplate>,

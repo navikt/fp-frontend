@@ -27,6 +27,7 @@ describe('<BeregningsresultatEngangsstonadForm>', () => {
       overrideReadOnly
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
+      erIkkeGodkjentAvBeslutter={false}
     />);
 
     const texts = wrapper.find(Element);
@@ -54,6 +55,7 @@ describe('<BeregningsresultatEngangsstonadForm>', () => {
       overrideReadOnly
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
+      erIkkeGodkjentAvBeslutter={false}
     />);
 
     expect(wrapper.find(OverstyringPanel)).toHaveLength(0);

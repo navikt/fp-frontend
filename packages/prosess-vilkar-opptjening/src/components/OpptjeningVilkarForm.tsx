@@ -16,6 +16,7 @@ interface OwnProps {
   readOnly: boolean;
   readOnlySubmitButton: boolean;
   submitCallback: (aksjonspunktData: AvklarOpptjeningsvilkaretAp) => Promise<void>;
+  erIkkeGodkjentAvBeslutter: boolean;
 }
 
 /**
@@ -33,6 +34,7 @@ const OpptjeningVilkarForm: FunctionComponent<OwnProps> = ({
   readOnlySubmitButton,
   readOnly,
   submitCallback,
+  erIkkeGodkjentAvBeslutter,
 }) => {
   if (aksjonspunkter.length > 0) {
     return (
@@ -46,6 +48,7 @@ const OpptjeningVilkarForm: FunctionComponent<OwnProps> = ({
         status={status}
         lovReferanse={lovReferanse}
         fastsattOpptjening={fastsattOpptjening}
+        erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
       />
     );
   }

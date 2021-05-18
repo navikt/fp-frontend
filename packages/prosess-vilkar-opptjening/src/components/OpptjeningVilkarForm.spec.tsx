@@ -47,6 +47,7 @@ describe('<OpptjeningVilkarForm>', () => {
       status="test"
       lovReferanse="Dette er en lovreferanse"
       fastsattOpptjening={fastsattOpptjening}
+      erIkkeGodkjentAvBeslutter={false}
     />);
 
     const aksjonspunktPanel = wrapper.find(OpptjeningVilkarAksjonspunktPanel);
@@ -64,6 +65,7 @@ describe('<OpptjeningVilkarForm>', () => {
       status="test"
       lovReferanse="Dette er en lovreferanse"
       fastsattOpptjening={fastsattOpptjening}
+      erIkkeGodkjentAvBeslutter={false}
     />);
     const vilkarView = wrapper.find(OpptjeningVilkarView);
     expect(vilkarView).toHaveLength(1);

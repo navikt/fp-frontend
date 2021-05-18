@@ -20,6 +20,7 @@ const SvangerskapVilkarProsessIndex: FunctionComponent<StandardProsessPanelProps
   readOnlySubmitButton,
   isAksjonspunktOpen,
   alleKodeverk,
+  alleMerknaderFraBeslutter,
   formData,
   setFormData,
 }) => (
@@ -35,6 +36,7 @@ const SvangerskapVilkarProsessIndex: FunctionComponent<StandardProsessPanelProps
         readOnlySubmitButton={readOnlySubmitButton}
         isApOpen={isAksjonspunktOpen}
         alleKodeverk={alleKodeverk}
+        erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon.kode]?.notAccepted)}
       />
     </ReduxWrapper>
   </RawIntlProvider>

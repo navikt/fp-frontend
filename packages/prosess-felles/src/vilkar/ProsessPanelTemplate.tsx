@@ -25,6 +25,7 @@ interface OwnProps {
   formName: string;
   readOnlySubmitButton: boolean;
   originalErVilkarOk?: boolean;
+  erIkkeGodkjentAvBeslutter: boolean;
   rendreFakta?: () => void;
   readOnly: boolean;
   isDirty?: boolean;
@@ -47,6 +48,7 @@ const ProsessPanelTemplate: FunctionComponent<OwnProps> = ({
   readOnly,
   rendreFakta,
   isDirty,
+  erIkkeGodkjentAvBeslutter,
   children,
 }) => (
   <>
@@ -92,7 +94,7 @@ const ProsessPanelTemplate: FunctionComponent<OwnProps> = ({
         </FlexRow>
       </FlexContainer>
       {isAksjonspunktOpen && <VerticalSpacer eightPx />}
-      <AksjonspunktBox className={styles.aksjonspunktMargin} erAksjonspunktApent={isAksjonspunktOpen}>
+      <AksjonspunktBox className={styles.aksjonspunktMargin} erAksjonspunktApent={isAksjonspunktOpen} erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}>
         {children}
         {!readOnly && <VerticalSpacer sixteenPx />}
         <ProsessStegSubmitButton

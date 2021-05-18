@@ -76,6 +76,7 @@ describe('<SokersOpplysningspliktForm>', () => {
       alleKodeverk={{}}
       originalErVilkarOk
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      erIkkeGodkjentAvBeslutter={false}
     />, messages);
 
     const table = wrapper.find(Table);
@@ -117,6 +118,7 @@ describe('<SokersOpplysningspliktForm>', () => {
       alleKodeverk={{}}
       originalErVilkarOk
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      erIkkeGodkjentAvBeslutter={false}
     />, messages);
 
     expect(wrapper.find(Table)).toHaveLength(0);

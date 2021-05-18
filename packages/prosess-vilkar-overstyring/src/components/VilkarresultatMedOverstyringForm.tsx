@@ -66,6 +66,7 @@ interface PureOwnProps {
   overstyringApKode: OverstyringAksjonspunkter;
   lovReferanse?: string;
   erMedlemskapsPanel: boolean;
+  erIkkeGodkjentAvBeslutter: boolean;
 }
 
 type TextValues = {
@@ -113,6 +114,7 @@ export const VilkarresultatMedOverstyringForm: FunctionComponent<PureOwnProps & 
   kanOverstyreAccess,
   aksjonspunktCodes,
   toggleOverstyring,
+  erIkkeGodkjentAvBeslutter,
   ...formProps
 }) => {
   const togglePa = useCallback(() => toggleOverstyring((oldArray) => [...oldArray, overstyringApKode]), [overstyringApKode]);
@@ -189,6 +191,7 @@ export const VilkarresultatMedOverstyringForm: FunctionComponent<PureOwnProps & 
           isSubmitting={formProps.submitting}
           isPristine={formProps.pristine}
           toggleAv={toggleAv}
+          erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         >
           <VilkarResultPicker
             avslagsarsaker={avslagsarsaker}

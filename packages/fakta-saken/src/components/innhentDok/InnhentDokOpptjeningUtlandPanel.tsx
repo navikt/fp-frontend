@@ -30,6 +30,7 @@ type FormValues = {
 interface PureOwnProps {
   readOnly: boolean;
   harApneAksjonspunkter: boolean;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   submittable: boolean;
   submitCallback: (data: MerkOpptjeningUtlandAp) => Promise<void>;
   aksjonspunkt: Aksjonspunkt;
@@ -45,6 +46,8 @@ export const InnhentDokOpptjeningUtlandPanel: FunctionComponent<PureOwnProps & M
   intl,
   readOnly,
   harApneAksjonspunkter,
+  aksjonspunkt,
+  alleMerknaderFraBeslutter,
   submittable,
   initialValues,
   handleSubmit,
@@ -55,7 +58,11 @@ export const InnhentDokOpptjeningUtlandPanel: FunctionComponent<PureOwnProps & M
       <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.OpptjeningUtland" />
     </Undertittel>
     {harApneAksjonspunkter && <VerticalSpacer sixteenPx />}
-    <AksjonspunktBox className={styles.aksjonspunktMargin} erAksjonspunktApent={harApneAksjonspunkter}>
+    <AksjonspunktBox
+      className={styles.aksjonspunktMargin}
+      erAksjonspunktApent={harApneAksjonspunkter}
+      erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[aksjonspunkt.definisjon.kode]?.notAccepted}
+    >
       <Element>
         <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentelseDok" />
       </Element>
