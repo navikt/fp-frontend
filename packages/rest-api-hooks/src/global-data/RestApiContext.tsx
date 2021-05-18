@@ -24,7 +24,7 @@ export const RestApiProvider: FunctionComponent<OwnProps> = ({
   children,
   initialState,
 }): JSX.Element => {
-  const [state, dispatch] = useReducer((oldState, action) => {
+  const [state, dispatch] = useReducer((oldState: State, action: Action) => {
     switch (action.type) {
       case 'success':
         return {

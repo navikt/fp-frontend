@@ -17,7 +17,7 @@ import { Aksjonspunkt, Behandling, KodeverkMedNavn } from '@fpsak-frontend/types
 import { OmsorgsvilkarAp, VurdereYtelseSammeBarnAnnenForelderAp, VurdereYtelseSammeBarnSokerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 type FormValues = {
-  erVilkarOk: boolean;
+  erVilkarOk?: boolean;
   avslagCode?: string;
   avslagDato?: string;
   begrunnelse?: string;
@@ -36,7 +36,7 @@ interface PureOwnProps {
 }
 
 interface MappedOwnProps {
-  originalErVilkarOk: boolean;
+  originalErVilkarOk?: boolean;
   erVilkarOk?: boolean;
   avslagsarsaker: KodeverkMedNavn[];
   initialValues: FormValues;
@@ -107,7 +107,7 @@ const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
 (submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback(transformValues(values, aksjonspunkter)));
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
+const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
   const {
     aksjonspunkter, status, alleKodeverk,
   } = initialOwnProps;

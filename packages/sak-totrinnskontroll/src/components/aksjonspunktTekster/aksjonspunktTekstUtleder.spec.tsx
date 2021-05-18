@@ -1,3 +1,5 @@
+import React from 'react';
+
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import klageVurderingOmgjoerCodes from '@fpsak-frontend/kodeverk/src/klageVurderingOmgjoer';
 import behandlingStatusCodes from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -33,7 +35,7 @@ const erTilbakekreving = false;
 const behandlingStatus = {} as Kodeverk;
 const faktaOmBeregningTilfeller = {} as KodeverkMedNavn[];
 
-describe('<ApprovalTextUtils>', () => {
+describe('<aksjonspunktTekstUtleder>', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5004', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.ADOPSJONSDOKUMENTAJON,
@@ -755,7 +757,7 @@ describe('<ApprovalTextUtils>', () => {
       beregningDto,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, beregningTilfeller, erTilbakekreving, aksjonspunkt);
-    expect(message[0]).toEqual('Vurder tidsbegrenset arbeidsforhold');
+    expect(message[0]).toEqual(<>Vurder tidsbegrenset arbeidsforhold</>);
   });
   it('skal vise korrekt tekst for aksjonspunkt 5058 ATFL i samme org', () => {
     const beregningTilfeller = [{
@@ -771,7 +773,7 @@ describe('<ApprovalTextUtils>', () => {
       beregningDto,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, beregningTilfeller, erTilbakekreving, aksjonspunkt);
-    expect(message[0]).toEqual('Vurder at og fl');
+    expect(message[0]).toEqual(<>Vurder at og fl</>);
   });
   it('skal vise korrekte tekster for kombinasjon av aksjonspunkt 5058', () => {
     const beregningTilfeller = [{
@@ -794,8 +796,8 @@ describe('<ApprovalTextUtils>', () => {
       beregningDto,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, beregningTilfeller, erTilbakekreving, aksjonspunkt);
-    expect(message[0]).toEqual('Vurder besteberegning');
-    expect(message[1]).toEqual('Vurder tidsbegrenset arbeidsforhold');
+    expect(message[0]).toEqual(<>Vurder besteberegning</>);
+    expect(message[1]).toEqual(<>Vurder tidsbegrenset arbeidsforhold</>);
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5080', () => {

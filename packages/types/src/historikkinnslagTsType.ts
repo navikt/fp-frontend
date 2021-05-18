@@ -11,7 +11,7 @@ export type HistorikkinnslagEndretFelt = {
 };
 
 export type HistorikkInnslagOpplysning = {
-  opplysningType?: Kodeverk;
+  opplysningType: Kodeverk;
   tilVerdi?: string;
 }
 
@@ -28,7 +28,7 @@ export type HistorikkinnslagDel = {
     navn?: Kodeverk;
     verdi?: string;
   };
-  opplysninger?: HistorikkInnslagOpplysning[];
+  opplysninger: HistorikkInnslagOpplysning[];
   soeknadsperiode?: {
     soeknadsperiodeType?: Kodeverk;
     navnVerdi?: string;
@@ -47,7 +47,7 @@ export type HistorikkinnslagDel = {
     verdi?: string;
   };
   resultat?: string;
-  endredeFelter?: HistorikkinnslagEndretFelt[];
+  endredeFelter: HistorikkinnslagEndretFelt[];
   aksjonspunkter?: HistorikkInnslagAksjonspunkt[];
 };
 
@@ -63,7 +63,7 @@ type Historikkinnslag = Readonly<{
   opprettetAv?: string;
   opprettetTidspunkt: string;
   type: Kodeverk;
-  behandlingId?: number;
+  behandlingId: number;
   kjoenn: Kodeverk;
   aktoer: Kodeverk;
   dokumentLinks?: HistorikkInnslagDokumentLink[];

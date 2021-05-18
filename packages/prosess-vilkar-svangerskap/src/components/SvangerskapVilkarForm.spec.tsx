@@ -27,7 +27,7 @@ describe('<SvangerskapVilkarForm>', () => {
       isApOpen
       aksjonspunkter={[]}
       vilkar={[]}
-      submitCallback={() => undefined}
+      submitCallback={() => Promise.resolve()}
       onSubmit={() => undefined}
       alleKodeverk={{}}
       originalErVilkarOk

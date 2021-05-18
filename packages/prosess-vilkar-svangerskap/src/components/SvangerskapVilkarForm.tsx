@@ -19,7 +19,7 @@ import {
 import { BekreftSvangerskapspengervilkarAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 type FormValues = {
-  erVilkarOk: boolean;
+  erVilkarOk?: boolean;
   avslagCode?: string;
   avslagDato?: string;
   begrunnelse?: string;
@@ -39,7 +39,7 @@ interface PureOwnProps {
 
 interface MappedOwnProps {
   erVilkarOk?: boolean;
-  originalErVilkarOk: boolean;
+  originalErVilkarOk?: boolean;
   avslagsarsaker: KodeverkMedNavn[];
   initialValues: FormValues;
   onSubmit: (formValues: FormValues) => any;

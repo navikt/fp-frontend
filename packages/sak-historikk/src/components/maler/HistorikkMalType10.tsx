@@ -78,12 +78,12 @@ const formatChangedField = (endretFelt: HistorikkinnslagEndretFelt, intl: IntlSh
 
 const finnFomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): string => {
   const [found] = opplysninger.filter((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.UTTAK_PERIODE_FOM.kode);
-  return found.tilVerdi;
+  return found.tilVerdi || '';
 };
 
 const finnTomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): string => {
   const [found] = opplysninger.filter((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.UTTAK_PERIODE_TOM.kode);
-  return found.tilVerdi;
+  return found.tilVerdi || '';
 };
 
 const sortArray = ((endredeFelter: HistorikkinnslagEndretFelt[]): HistorikkinnslagEndretFelt[] => {

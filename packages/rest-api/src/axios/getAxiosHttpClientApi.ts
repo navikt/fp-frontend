@@ -1,12 +1,13 @@
 import axios from 'axios';
 
 import initRestMethods from './initRestMethods';
+import HttpClientApi from '../HttpClientApiTsType';
 
 /**
  * getAxiosHttpClientApi
  * Oppretter nytt http-klient api basert på Axios.
  */
-const getAxiosHttpClientApi = () => {
+const getAxiosHttpClientApi = (): HttpClientApi => {
   const axiosInstance = axios.create();
 
   axiosInstance.interceptors.request.use((c): any => {

@@ -68,7 +68,7 @@ interface OwnProps {
   aktoer: Kodeverk;
   kjoenn?: Kodeverk;
   rolleNavn?: string;
-  opprettetAv: string;
+  opprettetAv?: string;
   children: React.ReactElement;
 }
 

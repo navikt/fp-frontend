@@ -8,7 +8,7 @@ import OpptjeningVilkarAksjonspunktPanel from './OpptjeningVilkarAksjonspunktPan
 
 interface OwnProps {
   behandlingsresultat?: Behandling['behandlingsresultat'];
-  fastsattOpptjening?: FastsattOpptjening;
+  fastsattOpptjening: FastsattOpptjening;
   aksjonspunkter: Aksjonspunkt[];
   status: string;
   lovReferanse?: string;

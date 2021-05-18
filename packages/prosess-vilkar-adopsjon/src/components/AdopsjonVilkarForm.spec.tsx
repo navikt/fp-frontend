@@ -35,7 +35,7 @@ describe('<AdopsjonVilkarForm>', () => {
       isApOpen
       aksjonspunkter={[]}
       vilkar={[]}
-      submitCallback={() => undefined}
+      submitCallback={() => Promise.resolve()}
       onSubmit={() => undefined}
       initialValues={{
         erVilkarOk: true,
@@ -66,7 +66,7 @@ describe('<AdopsjonVilkarForm>', () => {
       isApOpen
       aksjonspunkter={[]}
       vilkar={[]}
-      submitCallback={() => undefined}
+      submitCallback={() => Promise.resolve()}
       onSubmit={() => undefined}
       initialValues={{
         erVilkarOk: true,
@@ -101,7 +101,7 @@ describe('<AdopsjonVilkarForm>', () => {
       isApOpen
       aksjonspunkter={[]}
       vilkar={[]}
-      submitCallback={() => undefined}
+      submitCallback={() => Promise.resolve()}
       onSubmit={() => undefined}
       initialValues={{
         erVilkarOk: true,
@@ -194,7 +194,7 @@ describe('<AdopsjonVilkarForm>', () => {
 
     expect(initialValues).toEqual({
       erVilkarOk: false,
-      avslagCode: behandlingsresultat.avslagsarsak.kode,
+      avslagCode: behandlingsresultat?.avslagsarsak?.kode,
       begrunnelse: aksjonspunkter[0].begrunnelse,
     });
   });

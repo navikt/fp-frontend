@@ -473,6 +473,6 @@ const historikkEndretFeltTypeCodes = {
     kode: 'KONTROLL_AV_BESTEBEREGNING',
     feltId: 'HistorikkEndretFelt.Kontroll.Besteberegning',
   },
-};
+} as Record<string, { kode: string, feltId?: string, verdiId?: string }>;
 
 export default historikkEndretFeltTypeCodes;

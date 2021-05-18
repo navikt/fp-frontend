@@ -55,7 +55,7 @@ const capitalizeFirstLetters = (navn: string): string => navn.toLowerCase().spli
 
 const lagArbeidsgiverNavnOgFødselsdatoTekst = (
   navn: string,
-  fodselsdato: string,
+  fodselsdato?: string,
 ): string => `${capitalizeFirstLetters(navn)} (${moment(fodselsdato).format(DDMMYYYY_DATE_FORMAT)})`;
 
 const lagArbeidsgiverNavnOgOrgnrTekst = (
@@ -148,7 +148,7 @@ export const SokersOpplysningspliktFormImpl: FunctionComponent<PureOwnProps & Ma
               {manglendeVedlegg.map((vedlegg) => (
                 <TableRow key={vedlegg.dokumentType.kode + (vedlegg.arbeidsgiverReferanse ? vedlegg.arbeidsgiverReferanse : '')}>
                   <TableColumn>
-                    {dokumentTypeIds.find((dti) => dti.kode === vedlegg.dokumentType.kode).navn}
+                    {dokumentTypeIds.find((dti) => dti.kode === vedlegg.dokumentType.kode)?.navn}
                   </TableColumn>
                   <TableColumn>
                     {vedlegg.dokumentType.kode === dokumentTypeId.INNTEKTSMELDING
@@ -245,7 +245,7 @@ export const buildInitialValues = createSelector(
 );
 
 const transformValues = (
-  values: FormValues,
+  values: Required<FormValues>,
   manglendeVedlegg: ManglendeVedleggSoknad[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   aksjonspunkter: Aksjonspunkt[],
@@ -266,8 +266,8 @@ const transformValues = (
       const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[agRef];
       return {
         // backend sender fødselsdato i orgnummer feltet for privatpersoner... fiks dette
-        organisasjonsnummer: arbeidsgiverOpplysninger.erPrivatPerson ? null : arbeidsgiverOpplysninger.identifikator,
-        aktørId: arbeidsgiverOpplysninger.erPrivatPerson ? arbeidsgiverOpplysninger.referanse : null,
+        organisasjonsnummer: arbeidsgiverOpplysninger.erPrivatPerson ? undefined : arbeidsgiverOpplysninger.identifikator,
+        aktørId: arbeidsgiverOpplysninger.erPrivatPerson ? arbeidsgiverOpplysninger.referanse : undefined,
         brukerHarSagtAtIkkeKommer: values.inntektsmeldingerSomIkkeKommer[lagArbeidsgiverKey(arbeidsgiverOpplysninger)],
       };
     }, {}),
@@ -281,11 +281,11 @@ const submitSelector = createSelector(
     (ownProps: PureOwnProps) => ownProps.aksjonspunkter,
     (props: PureOwnProps) => props.arbeidsgiverOpplysningerPerId],
   (manglendeVedlegg, submitCallback, aksjonspunkter, arbeidsgiverOpplysningerPerId) => (
-    values: FormValues,
+    values: Required<FormValues>,
   ) => submitCallback(transformValues(values, manglendeVedlegg, arbeidsgiverOpplysningerPerId, aksjonspunkter)),
 );
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
+const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
   const getKodeverknavn = getKodeverknavnFn(initialOwnProps.alleKodeverk, kodeverkTyper);
   const isOpenAksjonspunkt = initialOwnProps.aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
   const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === initialOwnProps.status;

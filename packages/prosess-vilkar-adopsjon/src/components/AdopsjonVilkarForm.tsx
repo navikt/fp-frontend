@@ -19,7 +19,7 @@ import { VurdereYtelseSammeBarnAnnenForelderAp, VurdereYtelseSammeBarnSokerAp } 
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 type FormValues = {
-  erVilkarOk: boolean;
+  erVilkarOk?: boolean;
   avslagCode?: string;
   avslagDato?: string;
   begrunnelse?: string;
@@ -38,9 +38,9 @@ interface PureOwnProps {
 }
 
 interface MappedOwnProps {
-  originalErVilkarOk: boolean;
+  originalErVilkarOk?: boolean;
   erVilkarOk?: boolean;
-  lovReferanse: string;
+  lovReferanse?: string;
   avslagsarsaker: KodeverkMedNavn[];
   initialValues: FormValues;
   onSubmit: (formValues: FormValues) => any;
@@ -78,7 +78,7 @@ export const AdopsjonVilkarFormImpl: FunctionComponent<PureOwnProps & MappedOwnP
       erVilkarOk={erVilkarOk}
       readOnly={readOnly}
       customVilkarOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.Oppfylt" />}
-      customVilkarIkkeOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.IkkeOppfylt" values={{ b: (chunks) => <b>{chunks}</b> }} />}
+      customVilkarIkkeOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.IkkeOppfylt" values={{ b: (chunks: any) => <b>{chunks}</b> }} />}
     />
     <ProsessStegBegrunnelseTextField readOnly={readOnly} />
   </ProsessPanelTemplate>
@@ -113,7 +113,7 @@ const lagSubmitFn = createSelector([
 
 const formName = 'AdopsjonVilkarForm';
 
-const mapStateToPropsFactory = (_initialState, staticOwnProps: PureOwnProps) => {
+const mapStateToPropsFactory = (_initialState: any, staticOwnProps: PureOwnProps) => {
   const { aksjonspunkter, status, alleKodeverk } = staticOwnProps;
   const avslagsarsaker = alleKodeverk[kodeverkTyper.AVSLAGSARSAK][vilkarType.ADOPSJONSVILKARET];
 

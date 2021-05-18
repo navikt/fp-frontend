@@ -1,19 +1,23 @@
+import axios from 'axios';
+
 import RequestApi from './RequestApi';
 import RequestConfig from '../RequestConfig';
+import { Response } from './ResponseTsType';
+
+const httpClientGeneralMock = (response: Response) => ({
+  get: () => Promise.resolve(response),
+  post: () => Promise.resolve(response),
+  put: () => Promise.resolve(response),
+  getBlob: () => Promise.resolve(response),
+  postBlob: () => Promise.resolve(response),
+  postAndOpenBlob: () => Promise.resolve(response),
+  getAsync: () => Promise.resolve(response),
+  postAsync: () => Promise.resolve(response),
+  putAsync: () => Promise.resolve(response),
+  axiosInstance: axios.create(),
+});
 
 describe('RequestApi', () => {
-  const httpClientGeneralMock = {
-    get: () => undefined,
-    post: () => undefined,
-    put: () => undefined,
-    getBlob: () => undefined,
-    postBlob: () => undefined,
-    postAndOpenBlob: () => undefined,
-    getAsync: () => undefined,
-    postAsync: () => undefined,
-    putAsync: () => undefined,
-  };
-
   it('skal utføre get-request', async () => {
     const response = {
       data: 'data',
@@ -23,10 +27,7 @@ describe('RequestApi', () => {
       },
     };
 
-    const httpClientMock = {
-      ...httpClientGeneralMock,
-      get: () => Promise.resolve(response),
-    };
+    const httpClientMock = httpClientGeneralMock(response);
 
     const requestConfig = new RequestConfig('BEHANDLING', '/behandling');
     const params = {

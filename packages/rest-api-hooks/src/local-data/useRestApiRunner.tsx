@@ -13,7 +13,7 @@ export type RestApiData<T> = {
 }
 
 export type RunnerOutput<T, P> = {
-  startRequest: (params?: P, keepData?: boolean) => Promise<T>;
+  startRequest: (params?: P, keepData?: boolean) => Promise<T | undefined>;
   resetRequestData: () => void;
 } & RestApiData<T>;
 
@@ -26,7 +26,11 @@ const DEFAULT_STATE = {
 /**
  * For mocking i unit-test
  */
-export const getUseRestApiRunnerMock = (requestApi: AbstractRequestApi) => function useRestApiRunner<T, P>(key: RestKey<T, P>):RunnerOutput<T, P> {
+export const getUseRestApiRunnerMock = (
+  requestApi: AbstractRequestApi,
+) => function useRestApiRunner<T, P>(
+  key: RestKey<T, P>,
+):RunnerOutput<T, P> {
   const [data, setData] = useState<RestApiData<T>>(DEFAULT_STATE);
 
   const startRequest = (params?: P):Promise<T> => {
@@ -51,10 +55,12 @@ export const getUseRestApiRunnerMock = (requestApi: AbstractRequestApi) => funct
 /**
  * Hook som gir deg ein funksjon til å starte restkall, i tillegg til kallets status/resultat/feil
  */
-const getUseRestApiRunner = (requestApi: AbstractRequestApi) => function useRestApiRunner<T, P>(key: RestKey<T, P>): RunnerOutput<T, P> {
+const getUseRestApiRunner = (requestApi: AbstractRequestApi) => function useRestApiRunner<T, P>(
+  key: RestKey<T, P>,
+): RunnerOutput<T, P> {
   const [data, setData] = useState<RestApiData<T>>(DEFAULT_STATE);
 
-  const startRequest = useCallback((params?: P, keepData = false): Promise<T> => {
+  const startRequest = useCallback((params?: P, keepData = false): Promise<T | undefined> => {
     if (requestApi.hasPath(key.name)) {
       setData((oldState) => ({
         state: RestApiState.LOADING,
@@ -84,7 +90,7 @@ const getUseRestApiRunner = (requestApi: AbstractRequestApi) => function useRest
         });
     }
     setData(DEFAULT_STATE);
-    return undefined;
+    return Promise.resolve(undefined);
   }, []);
 
   const resetRequestData = useCallback(() => {

@@ -13,7 +13,7 @@ import useGlobalStateRestApiData from './useGlobalStateRestApiData';
 class RequestApiTestMock extends AbstractRequestApi {
   data: any;
 
-  constructor(data) {
+  constructor(data: any) {
     super();
     this.data = data;
   }
@@ -47,7 +47,7 @@ const dataHentetFraBackend = { id: 1 };
 
 const useGlobalStateRestApi = getUseGlobalStateRestApi(new RequestApiTestMock(dataHentetFraBackend));
 
-const TestGlobalData = ({ setValue }) => {
+const TestGlobalData = ({ setValue }: { setValue: any }) => {
   const BEHANDLING = new RestKey('BEHANDLING');
   useGlobalStateRestApi(BEHANDLING);
 

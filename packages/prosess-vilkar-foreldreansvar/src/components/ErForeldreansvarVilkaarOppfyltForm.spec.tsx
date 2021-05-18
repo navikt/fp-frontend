@@ -50,7 +50,7 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
       erVilkarOk={false}
       isForeldreansvar2Ledd
       status=""
-      submitCallback={() => undefined}
+      submitCallback={() => Promise.resolve()}
       onSubmit={() => undefined}
       initialValues={{
         erVilkarOk: true,
@@ -80,7 +80,7 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
       erVilkarOk={undefined}
       isForeldreansvar2Ledd
       status=""
-      submitCallback={() => undefined}
+      submitCallback={() => Promise.resolve()}
       onSubmit={() => undefined}
       initialValues={{
         erVilkarOk: true,
@@ -133,7 +133,7 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
       erVilkarOk
       isForeldreansvar2Ledd
       status=""
-      submitCallback={() => undefined}
+      submitCallback={() => Promise.resolve()}
       onSubmit={() => undefined}
       initialValues={{
         erVilkarOk: true,
@@ -229,7 +229,7 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
 
     expect(initialValues).toEqual({
       erVilkarOk: false,
-      avslagCode: behandlingsresultat.avslagsarsak.kode,
+      avslagCode: behandlingsresultat?.avslagsarsak?.kode,
       begrunnelse: aksjonspunkter[0].begrunnelse,
     });
   });

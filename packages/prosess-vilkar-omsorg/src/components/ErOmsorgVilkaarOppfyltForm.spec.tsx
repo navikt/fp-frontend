@@ -49,7 +49,7 @@ describe('<ErOmsorgVilkaarOppfyltForm>', () => {
       readOnlySubmitButton
       erVilkarOk={false}
       status=""
-      submitCallback={() => undefined}
+      submitCallback={() => Promise.resolve()}
       onSubmit={() => undefined}
       initialValues={{
         erVilkarOk: true,
@@ -77,7 +77,7 @@ describe('<ErOmsorgVilkaarOppfyltForm>', () => {
       readOnlySubmitButton
       erVilkarOk={undefined}
       status=""
-      submitCallback={() => undefined}
+      submitCallback={() => Promise.resolve()}
       onSubmit={() => undefined}
       initialValues={{
         erVilkarOk: true,
@@ -128,7 +128,7 @@ describe('<ErOmsorgVilkaarOppfyltForm>', () => {
       readOnlySubmitButton
       erVilkarOk
       status=""
-      submitCallback={() => undefined}
+      submitCallback={() => Promise.resolve()}
       onSubmit={() => undefined}
       initialValues={{
         erVilkarOk: true,

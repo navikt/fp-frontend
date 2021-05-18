@@ -274,6 +274,10 @@ const History: FunctionComponent<OwnProps & WrappedComponentProps> = ({
 
         const getKodeverknavn = historikkinnslag.erTilbakekreving ? getKodeverknavnFpTilbake : getKodeverknavnFpSak;
 
+        if (!getKodeverknavn) {
+          return null;
+        }
+
         return (
           <Snakkeboble
             key={historikkinnslag.opprettetTidspunkt + historikkinnslag.type.kode}

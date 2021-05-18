@@ -1,8 +1,11 @@
 import sinon from 'sinon';
+import axios from 'axios';
 
+import { Response } from './ResponseTsType';
 import AsyncPollingStatus from './asyncPollingStatus';
 import RequestRunner, { REQUEST_POLLING_CANCELLED } from './RequestRunner';
 import NotificationMapper from './NotificationMapper';
+import HttpClientApi from '../HttpClientApiTsType';
 
 class NotificationHelper {
   mapper: NotificationMapper;
@@ -33,17 +36,18 @@ class NotificationHelper {
   }
 }
 
-const httpClientGeneralMock = {
-  get: () => undefined,
-  post: () => undefined,
-  put: () => undefined,
-  getBlob: () => undefined,
-  postBlob: () => undefined,
-  postAndOpenBlob: () => undefined,
-  getAsync: () => undefined,
-  postAsync: () => undefined,
-  putAsync: () => undefined,
-};
+const httpClientGeneralMock = (response: Response) => ({
+  get: () => Promise.resolve(response),
+  post: () => Promise.resolve(response),
+  put: () => Promise.resolve(response),
+  getBlob: () => Promise.resolve(response),
+  postBlob: () => Promise.resolve(response),
+  postAndOpenBlob: () => Promise.resolve(response),
+  getAsync: () => Promise.resolve(response),
+  postAsync: () => Promise.resolve(response),
+  putAsync: () => Promise.resolve(response),
+  axiosInstance: axios.create(),
+});
 
 describe('RequestRunner', () => {
   const HTTP_ACCEPTED = 202;
@@ -59,10 +63,7 @@ describe('RequestRunner', () => {
         location: '',
       },
     };
-    const httpClientMock = {
-      ...httpClientGeneralMock,
-      get: () => Promise.resolve(response),
-    };
+    const httpClientMock = httpClientGeneralMock(response);
 
     const process = new RequestRunner(httpClientMock, httpClientMock.get, 'behandling', defaultConfig);
     const notificationHelper = new NotificationHelper();
@@ -106,7 +107,7 @@ describe('RequestRunner', () => {
     }];
 
     const httpClientMock = {
-      ...httpClientGeneralMock,
+      ...httpClientGeneralMock(response),
       getAsync: () => Promise.resolve({
         ...response,
         status: HTTP_ACCEPTED,
@@ -115,7 +116,7 @@ describe('RequestRunner', () => {
         },
       }),
       get: () => Promise.resolve(allGetResults.shift()),
-    };
+    } as HttpClientApi;
 
     const params = {
       behandlingId: 1,
@@ -151,7 +152,7 @@ describe('RequestRunner', () => {
     };
 
     const httpClientMock = {
-      ...httpClientGeneralMock,
+      ...httpClientGeneralMock(response),
       getAsync: () => Promise.resolve({
         ...response,
         status: HTTP_ACCEPTED,
@@ -167,7 +168,7 @@ describe('RequestRunner', () => {
           pollIntervalMillis: 0,
         },
       }),
-    };
+    } as HttpClientApi;
 
     const params = {
       behandlingId: 1,
@@ -200,9 +201,9 @@ describe('RequestRunner', () => {
     };
 
     const httpClientMock = {
-      ...httpClientGeneralMock,
+      ...httpClientGeneralMock(response),
       get: () => Promise.resolve(response),
-    };
+    } as HttpClientApi;
 
     const process = new RequestRunner(httpClientMock, httpClientMock.get, 'behandling', defaultConfig);
     const notificationHelper = new NotificationHelper();
