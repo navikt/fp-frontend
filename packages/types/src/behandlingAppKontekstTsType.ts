@@ -36,11 +36,7 @@ type BehandlingAppKontekst = Readonly<{
   ansvarligSaksbehandler?: string;
   kanHenleggeBehandling?: boolean;
   harVerge?: boolean;
-  førsteÅrsak?: {
-    behandlingArsakType: Kodeverk;
-    manueltOpprettet: boolean;
-    erAutomatiskRevurdering?: boolean;
-  }
+  førsteÅrsak?: BehandlingÅrsak;
 }>
 
 export default BehandlingAppKontekst;

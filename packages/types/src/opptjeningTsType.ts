@@ -37,7 +37,7 @@ export type FastsattOpptjening = {
 }
 
 type Opptjening = {
-  fastsattOpptjening?: FastsattOpptjening;
+  fastsattOpptjening: FastsattOpptjening;
   opptjeningAktivitetList?: OpptjeningAktivitet[];
 }
 

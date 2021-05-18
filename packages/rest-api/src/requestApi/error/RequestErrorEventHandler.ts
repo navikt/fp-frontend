@@ -6,9 +6,9 @@ import { ErrorResponse } from '../ResponseTsType';
 
 type NotificationEmitter = (eventType: keyof typeof EventType, data?: any, isPollingRequest?: boolean) => void
 
-const isString = (value: any): boolean => typeof value === 'string';
+const isString = (value?: any): boolean => typeof value === 'string';
 
-const isOfTypeBlob = (error: ErrorType): boolean => error && error.config && error.config.responseType === 'blob';
+const isOfTypeBlob = (error: ErrorType): boolean => error && error.config?.responseType === 'blob';
 
 const blobParser = (blob: any): Promise<string> => {
   const fileReader = new FileReader();
@@ -20,7 +20,7 @@ const blobParser = (blob: any): Promise<string> => {
     };
 
     fileReader.onload = () => {
-      if (!(fileReader.result instanceof ArrayBuffer)) {
+      if (fileReader.result && !(fileReader.result instanceof ArrayBuffer)) {
         resolve(fileReader.result);
       } else {
         reject(new Error('Problem parsing blob'));
@@ -54,7 +54,7 @@ class RequestErrorEventHandler {
     this.isPollingRequest = isPollingRequest;
   }
 
-  handleError = async (error: ErrorType | TimeoutError): Promise<string> => {
+  handleError = async (error: ErrorType | TimeoutError): Promise<string | undefined> => {
     if (error instanceof TimeoutError) {
       this.notify(EventType.POLLING_TIMEOUT, { location: error.location });
       return;
@@ -84,7 +84,9 @@ class RequestErrorEventHandler {
     }
   };
 
-  getFormattedData = (data: string | Record<string, any>): string | Record<string, any> => (isString(data) ? { message: data } : data);
+  getFormattedData = (
+    data?: string | Record<string, any>,
+  ): string | Record<string, any> | undefined => (isString(data) ? { message: data } : data);
 
   findErrorData = (response: {data?: any; status?: number; statusText?: string}): string | ErrorResponse => (response.data
     ? response.data : response.statusText);

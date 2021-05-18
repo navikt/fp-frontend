@@ -9,8 +9,6 @@ type Vilkar = Readonly<{
   avslagKode?: string;
   lovReferanse?: string;
   overstyrbar: boolean;
-  evaluering?: string;
-  input?: string;
 }>
 
 export default Vilkar;

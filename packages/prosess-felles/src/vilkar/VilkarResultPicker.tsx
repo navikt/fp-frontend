@@ -23,7 +23,7 @@ import styles from './vilkarResultPicker.less';
 const intl = createIntl(messages);
 
 type FormValues = {
-  erVilkarOk: boolean;
+  erVilkarOk?: boolean;
   avslagCode?: string;
   avslagDato?: string;
 }
@@ -38,15 +38,15 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: (behandlingsresultat: Behandlingsresultat, aksjonspunkter: Aksjonspunkt[], status: string) => FormValues;
-  transformValues?: (values: FormValues) => {
+  buildInitialValues: (behandlingsresultat: Behandlingsresultat, aksjonspunkter: Aksjonspunkt[], status: string) => FormValues;
+  transformValues: (values: FormValues) => {
     erVilkarOk: boolean;
   } | {
     erVilkarOk: boolean;
     avslagskode: string;
     avslagDato: string;
   };
-  validate?: (erVilkarOk: boolean, avslagCode: string) => { avslagCode?: string };
+  validate: (erVilkarOk: boolean, avslagCode?: string) => { avslagCode?: string };
 }
 
 /**
@@ -123,7 +123,7 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
   </div>
 );
 
-VilkarResultPicker.validate = (erVilkarOk: boolean, avslagCode: string) => {
+VilkarResultPicker.validate = (erVilkarOk: boolean, avslagCode?: string) => {
   if (erVilkarOk === false && !avslagCode) {
     return {
       avslagCode: isRequiredMessage(),
@@ -143,7 +143,7 @@ VilkarResultPicker.buildInitialValues = (behandlingsresultat: Behandlingsresulta
   };
 };
 
-VilkarResultPicker.transformValues = (values: FormValues) => (
+VilkarResultPicker.transformValues = (values: Required<FormValues>) => (
   values.erVilkarOk
     ? { erVilkarOk: values.erVilkarOk }
     : {

@@ -22,7 +22,7 @@ import { VurdereYtelseSammeBarnAnnenForelderAp, VurdereYtelseSammeBarnSokerAp } 
 const avslagsarsakerES = ['1002', '1003', '1032'];
 
 type FormValues = {
-  erVilkarOk: boolean;
+  erVilkarOk?: boolean;
   avslagCode?: string;
   avslagDato?: string;
   begrunnelse?: string;
@@ -42,9 +42,9 @@ interface PureOwnProps {
 }
 
 interface MappedOwnProps {
-  originalErVilkarOk: boolean;
+  originalErVilkarOk?: boolean;
   erVilkarOk?: boolean;
-  lovReferanse: string;
+  lovReferanse?: string;
   avslagsarsaker: KodeverkMedNavn[];
   onSubmit: (formValues: FormValues) => any;
   initialValues: FormValues;
@@ -83,7 +83,7 @@ export const FodselVilkarFormImpl: FunctionComponent<PureOwnProps & MappedOwnPro
       erVilkarOk={erVilkarOk}
       readOnly={readOnly}
       customVilkarOppfyltText={<FormattedMessage id="FodselVilkarForm.Oppfylt" />}
-      customVilkarIkkeOppfyltText={<FormattedMessage id="FodselVilkarForm.IkkeOppfylt" values={{ b: (chunks) => <b>{chunks}</b> }} />}
+      customVilkarIkkeOppfyltText={<FormattedMessage id="FodselVilkarForm.IkkeOppfylt" values={{ b: (chunks: any) => <b>{chunks}</b> }} />}
     />
     <ProsessStegBegrunnelseTextField useAllWidth readOnly={readOnly} />
   </ProsessPanelTemplate>
@@ -122,7 +122,7 @@ const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
 (submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback(transformValues(values, aksjonspunkter)));
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
+const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
   const {
     aksjonspunkter, status, alleKodeverk, ytelseTypeKode,
   } = initialOwnProps;

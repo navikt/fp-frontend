@@ -1,6 +1,7 @@
 import React from 'react';
 
 import HistorikkSakIndex from '@fpsak-frontend/sak-historikk';
+import { Historikkinnslag } from '@fpsak-frontend/types';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
@@ -33,6 +34,8 @@ const history = [{
           kodeverk: 'HISTORIKKINNSLAG_TYPE',
         },
       },
+      opplysninger: [],
+      endredeFelter: [],
     },
   ],
 },
@@ -62,6 +65,8 @@ const history = [{
           kodeverk: 'HISTORIKKINNSLAG_TYPE',
         },
       },
+      opplysninger: [],
+      endredeFelter: [],
     },
   ],
 },
@@ -98,9 +103,11 @@ const history = [{
           kodeverk: 'HISTORIKKINNSLAG_TYPE',
         },
       },
+      opplysninger: [],
+      endredeFelter: [],
     },
   ],
-}];
+}] as Historikkinnslag[];
 
 const locationMock = {
   pathname: 'test',

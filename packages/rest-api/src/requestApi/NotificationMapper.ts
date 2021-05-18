@@ -23,7 +23,7 @@ class NotificationMapper {
     [EventType.STATUS_REQUEST_STARTED]: [],
     [EventType.UPDATE_POLLING_MESSAGE]: [],
     [EventType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND]: [],
-  };
+  } as Record<string, EventCallback[]>;
 
   private addEventHandler = (eventType: string, callback: EventCallback): void => {
     this.eventTypes = {

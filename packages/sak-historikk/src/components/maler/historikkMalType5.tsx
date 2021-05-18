@@ -23,7 +23,7 @@ import Skjermlenke from './felles/Skjermlenke';
 import HistorikkMal from '../HistorikkMalTsType';
 
 function isGjeldendeFraUtenEndredeFelter(historikkinnslagDel: HistorikkinnslagDel): boolean {
-  return (historikkinnslagDel.gjeldendeFra && !historikkinnslagDel.endredeFelter);
+  return (!!historikkinnslagDel.gjeldendeFra && !historikkinnslagDel.endredeFelter);
 }
 
 const lagGjeldendeFraInnslag = (historikkinnslagDel: HistorikkinnslagDel): ReactNode => {
@@ -70,12 +70,18 @@ const lagGjeldendeFraInnslag = (historikkinnslagDel: HistorikkinnslagDel): React
 };
 
 const lageElementInnhold = (historikkDel: HistorikkinnslagDel, intl: IntlShape, getKodeverknavn: (kodeverk: Kodeverk) => string): string[] => {
-  const list = [];
+  const list = [] as string[];
   if (historikkDel.hendelse) {
-    list.push(findHendelseText(historikkDel.hendelse, getKodeverknavn));
+    const tekst = findHendelseText(historikkDel.hendelse, getKodeverknavn);
+    if (tekst) {
+      list.push(tekst);
+    }
   }
   if (historikkDel.resultat) {
-    list.push(findResultatText(historikkDel.resultat, intl));
+    const tekst = findResultatText(historikkDel.resultat, intl);
+    if (tekst) {
+      list.push(tekst);
+    }
   }
   return list;
 };
@@ -115,20 +121,20 @@ const lagTemaHeadingId = (historikkinnslagDel: HistorikkinnslagDel): ReactNode =
   if (tema) {
     const heading = historikkEndretFeltTypeHeadingCodes[tema.endretFeltNavn.kode];
     if (heading && tema.navnVerdi) {
-      return <FormattedMessage id={heading.feltId} values={{ value: tema.navnVerdi, b: (chunks) => <b>{chunks}</b>, br: <br /> }} />;
+      return <FormattedMessage id={heading.feltId} values={{ value: tema.navnVerdi, b: (chunks: any) => <b>{chunks}</b>, br: <br /> }} />;
     }
   }
   return undefined;
 };
 
-const lagSoeknadsperiode = (soeknadsperiode: HistorikkinnslagDel['soeknadsperiode']): ReactNode => (soeknadsperiode.navnVerdi
+const lagSoeknadsperiode = (soeknadsperiode?: HistorikkinnslagDel['soeknadsperiode']): ReactNode => (soeknadsperiode?.navnVerdi
   ? (
     <FormattedMessage
       id={findIdForSoeknadsperiodeCode(soeknadsperiode)}
       values={{
         navnVerdi: soeknadsperiode.navnVerdi,
         value: soeknadsperiode.tilVerdi,
-        b: (chunks) => <b>{chunks}</b>,
+        b: (chunks: any) => <b>{chunks}</b>,
         br: <br />,
       }}
     />
@@ -136,7 +142,7 @@ const lagSoeknadsperiode = (soeknadsperiode: HistorikkinnslagDel['soeknadsperiod
   : (
     <FormattedMessage
       id={findIdForSoeknadsperiodeCode(soeknadsperiode)}
-      values={{ value: soeknadsperiode.tilVerdi, b: (chunks: any) => <b>{chunks}</b>, br: <br /> }}
+      values={{ value: soeknadsperiode ? soeknadsperiode.tilVerdi : '', b: (chunks: any) => <b>{chunks}</b>, br: <br /> }}
     />
   ));
 

@@ -9,8 +9,16 @@ import { RestApiErrorDispatchContext } from './RestApiErrorContext';
 const useRestApiErrorDispatcher = () => {
   const dispatch = useContext(RestApiErrorDispatchContext);
 
-  const addErrorMessage = useCallback((data) => dispatch({ type: 'add', data }), []);
-  const removeErrorMessages = useCallback(() => dispatch({ type: 'remove' }), []);
+  const addErrorMessage = useCallback((data) => {
+    if (dispatch) {
+      dispatch({ type: 'add', data });
+    }
+  }, []);
+  const removeErrorMessages = useCallback(() => {
+    if (dispatch) {
+      dispatch({ type: 'remove' });
+    }
+  }, []);
 
   return {
     addErrorMessage,

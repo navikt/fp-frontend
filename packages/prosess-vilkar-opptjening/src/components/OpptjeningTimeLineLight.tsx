@@ -150,9 +150,9 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
     const currentSelectedItem = selectedPeriod;
     if (currentSelectedItem) {
       this.setState({
-        selectedPeriod: null,
+        selectedPeriod: undefined,
       });
-    } else {
+    } else if (items) {
       const selectedItem = items[0];
       this.setState({
         selectedPeriod: selectedItem,
@@ -163,24 +163,28 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
   selectNextPeriod(event: React.MouseEvent): void {
     const { selectedPeriod, items } = this.state;
     event.preventDefault();
-    const newIndex = items.findIndex((oa) => oa.id === selectedPeriod.id) + 1;
-    if (newIndex < items.length - 2) {
-      this.setState((state) => ({
-        ...state,
-        selectedPeriod: items[newIndex],
-      }));
+    if (items) {
+      const newIndex = items.findIndex((oa) => oa.id === selectedPeriod?.id) + 1;
+      if (newIndex < items.length - 2) {
+        this.setState((state) => ({
+          ...state,
+          selectedPeriod: items[newIndex],
+        }));
+      }
     }
   }
 
   selectPrevPeriod(event: React.MouseEvent): void {
     const { selectedPeriod, items } = this.state;
     event.preventDefault();
-    const newIndex = items.findIndex((oa) => oa.id === selectedPeriod.id) - 1;
-    if (newIndex >= 0) {
-      this.setState((state) => ({
-        ...state,
-        selectedPeriod: items[newIndex],
-      }));
+    if (items) {
+      const newIndex = items.findIndex((oa) => oa.id === selectedPeriod?.id) - 1;
+      if (newIndex >= 0) {
+        this.setState((state) => ({
+          ...state,
+          selectedPeriod: items[newIndex],
+        }));
+      }
     }
   }
 
@@ -213,8 +217,7 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
                   <TimeLineNavigation
                     openPeriodInfo={this.openPeriodInfo}
                   />
-                  {selectedPeriod
-                  && (
+                  {selectedPeriod?.data && (
                     <TimeLineData
                       fastsattOpptjeningAktivitet={selectedPeriod.data}
                       selectNextPeriod={this.selectNextPeriod}

@@ -910,6 +910,6 @@ const historikkEndretFeltVerdiTypeCodes = {
     verdiId: 'HistorikkEndretFeltVerdiType.IngenInnvirkning',
   },
 
-};
+} as Record<string, { kode: string, verdiId: string }>;
 
 export default historikkEndretFeltVerdiTypeCodes;

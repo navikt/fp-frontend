@@ -68,18 +68,20 @@ const getUseMultipleRestApi = (requestApi: AbstractRequestApi) => function useMu
 ):RestApiData<T> {
   const [data, setData] = useState<RestApiData<T>>(DEFAULT_STATE);
 
+  const allOptions = { ...defaultOptions, ...options };
+
   const ref = useRef<DependencyList>();
   useEffect(() => {
-    ref.current = options.updateTriggers;
+    ref.current = allOptions.updateTriggers;
   }, [options.updateTriggers]);
   const previousTriggers = ref.current;
 
   useEffect(() => {
-    if (!options.suspendRequest) {
+    if (!allOptions.suspendRequest) {
       setData((oldState) => ({
         state: RestApiState.LOADING,
         error: undefined,
-        data: options.keepData ? oldState.data : undefined,
+        data: allOptions.keepData ? oldState.data : undefined,
       }));
 
       const filteredEndpoints = endpoints.filter((e) => requestApi.hasPath(e.key.name));
@@ -105,9 +107,9 @@ const getUseMultipleRestApi = (requestApi: AbstractRequestApi) => function useMu
     } else {
       setData(DEFAULT_STATE);
     }
-  }, [...options.updateTriggers]);
+  }, [...allOptions.updateTriggers]);
 
-  return previousTriggers && notEqual(previousTriggers, options.updateTriggers)
+  return previousTriggers && notEqual(previousTriggers, allOptions.updateTriggers)
     ? { ...DEFAULT_STATE, data: options.keepData ? data.data : undefined } : data;
 };
 

@@ -9,7 +9,11 @@ const createMouseDownHandler = <ID, MODEL, >(
   onMouseDown?: (e: React.MouseEvent, id?: ID, model?: MODEL) => void,
   id?: ID,
   model?: MODEL,
-) => (e: React.MouseEvent): void => onMouseDown && e.button === 0 && onMouseDown(e, id, model);
+) => (e: React.MouseEvent): void => {
+    if (onMouseDown && e.button === 0) {
+      onMouseDown(e, id, model);
+    }
+  };
 
 // @ts-ignore Fiks
 const findNearestRow = (element: EventTarget) => (element.tagName === 'TR' ? element : findNearestRow(element.parentElement));

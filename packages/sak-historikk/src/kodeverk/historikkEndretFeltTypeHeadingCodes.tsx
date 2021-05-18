@@ -8,6 +8,6 @@ const historikkEndretFeltTypeHeadingCodes = {
     kode: 'FORDELING_FOR_ANDEL',
     feltId: 'HistorikkEndretFeltHeading.FordelingForAndel',
   },
-};
+} as Record<string, { kode: string, feltId: string }>;
 
 export default historikkEndretFeltTypeHeadingCodes;

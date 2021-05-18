@@ -34,7 +34,7 @@ describe('<VilkarresultatMedOverstyringForm>', () => {
       }}
       medlemskapFom="10.10.2010"
       aksjonspunkter={[]}
-      submitCallback={() => undefined}
+      submitCallback={() => Promise.resolve()}
       onSubmit={() => undefined}
       validate={() => undefined}
       initialValues={{

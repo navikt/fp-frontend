@@ -16,7 +16,7 @@ import messages from '../../i18n/nb_NO.json';
 const intlMock = getIntlMock(messages);
 
 describe('<SokersOpplysningspliktForm>', () => {
-  const getKodeverknavn = () => undefined;
+  const getKodeverknavn = () => '';
 
   const arbeidsgiverOpplysningerPerId = {
     1: {
