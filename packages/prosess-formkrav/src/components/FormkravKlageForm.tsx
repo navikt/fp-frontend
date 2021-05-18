@@ -20,8 +20,8 @@ import styles from './formkravKlageForm.less';
 
 export const IKKE_PA_KLAGD_VEDTAK = 'ikkePaklagdVedtak';
 
-export const getPaKlagdVedtak = (klageFormkavResultat?: KlageVurdering['klageFormkravResultatKA']): string => (klageFormkavResultat.paKlagdBehandlingUuid
-  ? `${klageFormkavResultat.paKlagdBehandlingUuid}` : IKKE_PA_KLAGD_VEDTAK);
+export const getPaKlagdVedtak = (klageFormkavResultat?: KlageVurdering['klageFormkravResultatKA']): string => (klageFormkavResultat.vedtakBehandlingUuid
+  ? `${klageFormkavResultat.vedtakBehandlingUuid}` : IKKE_PA_KLAGD_VEDTAK);
 
 const getKlagBareVedtak = (
   avsluttedeBehandlinger: AvsluttetBehandling[],

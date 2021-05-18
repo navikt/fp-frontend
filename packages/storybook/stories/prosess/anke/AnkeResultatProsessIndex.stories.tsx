@@ -33,7 +33,7 @@ const ankeVurderingResultat = {
     kode: ankeVurdering.ANKE_AVVIS,
     kodeverk: '',
   },
-  paAnketBehandlingUuid: '1',
+  vedtakBehandlingUuid: '1',
   erAnkerIkkePart: true,
   erIkkeKonkret: true,
   erFristIkkeOverholdt: true,

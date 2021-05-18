@@ -9,7 +9,7 @@ type AnkeVurdering = Readonly<{
     trygderettVurderingOmgjoer?: Kodeverk;
     trygderettOmgjoerArsak?: Kodeverk;
     begrunnelse: string;
-    paAnketBehandlingUuid?: string;
+    vedtakBehandlingUuid?: string;
     erAnkerIkkePart: boolean;
     erIkkeKonkret: boolean;
     erFristIkkeOverholdt: boolean;

@@ -333,7 +333,7 @@ const lagreVurderingOmgjoer = (values: FormValues): Kodeverk | string => (ankeVu
   ? values.ankeVurderingOmgjoer : '-');
 
 export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.ankeVurderingResultat], (resultat): FormValues => ({
-  vedtak: resultat ? formatId(resultat.paAnketBehandlingUuid) : null,
+  vedtak: resultat ? formatId(resultat.vedtakBehandlingUuid) : null,
   ankeVurdering: resultat ? resultat.ankeVurdering : null,
   begrunnelse: resultat ? resultat.begrunnelse : null,
   fritekstTilBrev: resultat ? resultat.fritekstTilBrev : null,
