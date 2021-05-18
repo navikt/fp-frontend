@@ -15,7 +15,7 @@ import messages from '../../i18n/nb_NO.json';
 const intlMock = getIntlMock(messages);
 
 describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
-  const getKodeverknavn = () => undefined;
+  const getKodeverknavn = () => '';
 
   it('skal rendre form og vise søknadsfristdato som er lik mottatt dato minus antallDagerSoknadLevertForSent', () => {
     const wrapper = shallowWithIntl(<UnwrappedForm

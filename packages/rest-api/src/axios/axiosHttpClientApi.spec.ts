@@ -1,5 +1,6 @@
 import MockAdapter from 'axios-mock-adapter';
 
+import { SuccessResponse } from '../requestApi/ResponseTsType';
 import getAxiosHttpClientApi from './getAxiosHttpClientApi';
 
 describe('axiosHttpClientApi', () => {
@@ -29,7 +30,7 @@ describe('axiosHttpClientApi', () => {
     const data = {
       id: 1,
     };
-    const result = await httpClientApi.get(url, data);
+    const result = await httpClientApi.get(url, data) as SuccessResponse;
 
     expect(result.data).toStrictEqual({ resource: true });
   });
@@ -62,7 +63,7 @@ describe('axiosHttpClientApi', () => {
     const data = {
       id: 1,
     };
-    const result = await httpClientApi.post(url, data);
+    const result = await httpClientApi.post(url, data) as SuccessResponse;
 
     expect(result.data).toStrictEqual({ resource: true });
   });
@@ -78,7 +79,7 @@ describe('axiosHttpClientApi', () => {
     const data = {
       id: 1,
     };
-    const result = await httpClientApi.put(url, data);
+    const result = await httpClientApi.put(url, data) as SuccessResponse;
 
     expect(result.data).toStrictEqual({ resource: true });
   });
@@ -94,7 +95,7 @@ describe('axiosHttpClientApi', () => {
     const data = {
       id: 1,
     };
-    const result = await httpClientApi.getBlob(url, data);
+    const result = await httpClientApi.getBlob(url, data) as SuccessResponse;
 
     expect(result.data).toStrictEqual({ resource: true });
   });
@@ -110,7 +111,7 @@ describe('axiosHttpClientApi', () => {
     const data = {
       id: 1,
     };
-    const result = await httpClientApi.postBlob(url, data);
+    const result = await httpClientApi.postBlob(url, data) as SuccessResponse;
 
     expect(result.data).toStrictEqual({ resource: true });
   });
@@ -126,7 +127,7 @@ describe('axiosHttpClientApi', () => {
     const data = {
       id: 1,
     };
-    const result = await httpClientApi.getAsync(url, data);
+    const result = await httpClientApi.getAsync(url, data) as SuccessResponse;
 
     expect(result.data).toStrictEqual({ resource: true });
   });
@@ -142,7 +143,7 @@ describe('axiosHttpClientApi', () => {
     const data = {
       id: 1,
     };
-    const result = await httpClientApi.postAsync(url, data);
+    const result = await httpClientApi.postAsync(url, data) as SuccessResponse;
 
     expect(result.data).toStrictEqual({ resource: true });
   });
@@ -158,7 +159,7 @@ describe('axiosHttpClientApi', () => {
     const data = {
       id: 1,
     };
-    const result = await httpClientApi.putAsync(url, data);
+    const result = await httpClientApi.putAsync(url, data) as SuccessResponse;
 
     expect(result.data).toStrictEqual({ resource: true });
   });

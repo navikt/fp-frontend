@@ -1,21 +1,23 @@
+import axios from 'axios';
+
 import RequestApi from './RequestApi';
 import RequestConfig from '../RequestConfig';
-import HttpClientApi from '../HttpClientApiTsType';
 import { Response } from './ResponseTsType';
 
-describe('RequestApi', () => {
-  const httpClientGeneralMock = {
-    get: () => undefined,
-    post: () => Promise.resolve({} as Response),
-    put: () => Promise.resolve({} as Response),
-    getBlob: () => Promise.resolve({} as Response),
-    postBlob: () => Promise.resolve({} as Response),
-    postAndOpenBlob: () => undefined,
-    getAsync: () => Promise.resolve({} as Response),
-    postAsync: () => Promise.resolve({} as Response),
-    putAsync: () => Promise.resolve({} as Response),
-  };
+const httpClientGeneralMock = (response: Response) => ({
+  get: () => Promise.resolve(response),
+  post: () => Promise.resolve(response),
+  put: () => Promise.resolve(response),
+  getBlob: () => Promise.resolve(response),
+  postBlob: () => Promise.resolve(response),
+  postAndOpenBlob: () => Promise.resolve(response),
+  getAsync: () => Promise.resolve(response),
+  postAsync: () => Promise.resolve(response),
+  putAsync: () => Promise.resolve(response),
+  axiosInstance: axios.create(),
+});
 
+describe('RequestApi', () => {
   it('skal utføre get-request', async () => {
     const response = {
       data: 'data',
@@ -25,10 +27,7 @@ describe('RequestApi', () => {
       },
     };
 
-    const httpClientMock = {
-      ...httpClientGeneralMock,
-      get: () => Promise.resolve(response),
-    } as HttpClientApi;
+    const httpClientMock = httpClientGeneralMock(response);
 
     const requestConfig = new RequestConfig('BEHANDLING', '/behandling');
     const params = {

@@ -43,7 +43,9 @@ export const getUseGlobalStateRestApiMock = (requestApi: AbstractRequestApi) => 
 const getUseGlobalStateRestApi = (requestApi: AbstractRequestApi) => function useGlobalStateRestApi<T, P>(
   key: RestKey<T, P>, params?: P, options: Options = defaultOptions,
 ):RestApiData<T> {
-  const [data, setData] = useState({
+  const allOptions = { ...defaultOptions, ...options };
+
+  const [data, setData] = useState<RestApiData<T>>({
     state: RestApiState.NOT_STARTED,
     error: undefined,
     data: undefined,
@@ -52,7 +54,7 @@ const getUseGlobalStateRestApi = (requestApi: AbstractRequestApi) => function us
   const dispatch = useContext(RestApiDispatchContext);
 
   useEffect(() => {
-    if (requestApi.hasPath(key.name) && !options.suspendRequest) {
+    if (dispatch && requestApi.hasPath(key.name) && !allOptions.suspendRequest) {
       dispatch({ type: 'remove', key: key.name });
 
       setData({
@@ -62,7 +64,7 @@ const getUseGlobalStateRestApi = (requestApi: AbstractRequestApi) => function us
       });
 
       requestApi.startRequest<T, P>(key.name, params)
-        .then((dataRes) => {
+        .then((dataRes: { payload: T }) => {
           dispatch({ type: 'success', key: key.name, data: dataRes.payload });
           setData({
             state: RestApiState.SUCCESS,
@@ -78,7 +80,7 @@ const getUseGlobalStateRestApi = (requestApi: AbstractRequestApi) => function us
           });
         });
     }
-  }, options.updateTriggers);
+  }, allOptions.updateTriggers);
 
   return data;
 };

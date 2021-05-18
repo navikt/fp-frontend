@@ -35,7 +35,7 @@ describe('<FodselVilkarForm>', () => {
       aksjonspunkter={[]}
       vilkar={[]}
       ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
-      submitCallback={() => undefined}
+      submitCallback={() => Promise.resolve()}
       onSubmit={() => undefined}
       initialValues={{
         erVilkarOk: true,
@@ -67,7 +67,7 @@ describe('<FodselVilkarForm>', () => {
       aksjonspunkter={[]}
       vilkar={[]}
       ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
-      submitCallback={() => undefined}
+      submitCallback={() => Promise.resolve()}
       onSubmit={() => undefined}
       initialValues={{
         erVilkarOk: true,
@@ -103,7 +103,7 @@ describe('<FodselVilkarForm>', () => {
       aksjonspunkter={[]}
       vilkar={[]}
       ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
-      submitCallback={() => undefined}
+      submitCallback={() => Promise.resolve()}
       onSubmit={() => undefined}
       initialValues={{
         erVilkarOk: true,
@@ -197,7 +197,7 @@ describe('<FodselVilkarForm>', () => {
 
     expect(initialValues).toEqual({
       erVilkarOk: false,
-      avslagCode: behandlingsresultat.avslagsarsak.kode,
+      avslagCode: behandlingsresultat?.avslagsarsak?.kode,
       begrunnelse: aksjonspunkter[0].begrunnelse,
     });
   });

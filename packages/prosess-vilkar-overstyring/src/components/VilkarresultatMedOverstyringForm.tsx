@@ -41,7 +41,7 @@ const hentErIkkeOppfyltTekstkode = (customVilkarIkkeOppfyltText?: TextValues) =>
   ? customVilkarIkkeOppfyltText.id : 'VilkarresultatMedOverstyringForm.VilkarIkkeOppfylt');
 
 type FormValues = {
-  erVilkarOk: boolean;
+  erVilkarOk?: boolean;
   avslagCode?: string;
   avslagDato?: string;
   begrunnelse?: string;
@@ -196,18 +196,16 @@ export const VilkarresultatMedOverstyringForm: FunctionComponent<PureOwnProps & 
               <FormattedMessage
                 id={hentErOppfyltTekstkode(customVilkarOppfyltText)}
                 values={customVilkarOppfyltText ? {
-                  b: (chunks) => <b>{chunks}</b>,
-                  ...customVilkarIkkeOppfyltText.values,
-                } : { b: (chunks) => <b>{chunks}</b> }}
+                  ...customVilkarOppfyltText.values,
+                } : { b: (chunks: any) => <b>{chunks}</b> }}
               />
             )}
             customVilkarIkkeOppfyltText={(
               <FormattedMessage
                 id={hentErIkkeOppfyltTekstkode(customVilkarIkkeOppfyltText)}
                 values={customVilkarIkkeOppfyltText ? {
-                  b: (chunks) => <b>{chunks}</b>,
                   ...customVilkarIkkeOppfyltText.values,
-                } : { b: (chunks) => <b>{chunks}</b> }}
+                } : { b: (chunks: any) => <b>{chunks}</b> }}
               />
             )}
             erVilkarOk={erVilkarOk}
@@ -267,13 +265,13 @@ const lagSubmitFn = createSelector([
   (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.overstyringApKode],
 (submitCallback, overstyringApKode) => (values: FormValues) => submitCallback(transformValues(values, overstyringApKode)));
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
+const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
   const { overstyringApKode } = initialOwnProps;
   const validateFn = (values: FormValues) => validate(values);
   const aksjonspunktCodes = initialOwnProps.aksjonspunkter.map((a) => a.definisjon.kode);
   const formName = `VilkarresultatForm_${overstyringApKode}`;
 
-  return (state, ownProps: PureOwnProps): MappedOwnProps => {
+  return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
     const { aksjonspunkter, erOverstyrt } = ownProps;
 
     const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === overstyringApKode);

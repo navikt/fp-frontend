@@ -1,4 +1,5 @@
 import sinon from 'sinon';
+import axios from 'axios';
 
 import { Response } from './ResponseTsType';
 import AsyncPollingStatus from './asyncPollingStatus';
@@ -35,17 +36,18 @@ class NotificationHelper {
   }
 }
 
-const httpClientGeneralMock = {
-  get: () => undefined,
-  post: () => Promise.resolve({} as Response),
-  put: () => Promise.resolve({} as Response),
-  getBlob: () => Promise.resolve({} as Response),
-  postBlob: () => Promise.resolve({} as Response),
-  postAndOpenBlob: () => undefined,
-  getAsync: () => Promise.resolve({} as Response),
-  postAsync: () => Promise.resolve({} as Response),
-  putAsync: () => Promise.resolve({} as Response),
-};
+const httpClientGeneralMock = (response: Response) => ({
+  get: () => Promise.resolve(response),
+  post: () => Promise.resolve(response),
+  put: () => Promise.resolve(response),
+  getBlob: () => Promise.resolve(response),
+  postBlob: () => Promise.resolve(response),
+  postAndOpenBlob: () => Promise.resolve(response),
+  getAsync: () => Promise.resolve(response),
+  postAsync: () => Promise.resolve(response),
+  putAsync: () => Promise.resolve(response),
+  axiosInstance: axios.create(),
+});
 
 describe('RequestRunner', () => {
   const HTTP_ACCEPTED = 202;
@@ -61,10 +63,7 @@ describe('RequestRunner', () => {
         location: '',
       },
     };
-    const httpClientMock = {
-      ...httpClientGeneralMock,
-      get: () => Promise.resolve(response),
-    } as HttpClientApi;
+    const httpClientMock = httpClientGeneralMock(response);
 
     const process = new RequestRunner(httpClientMock, httpClientMock.get, 'behandling', defaultConfig);
     const notificationHelper = new NotificationHelper();
@@ -108,7 +107,7 @@ describe('RequestRunner', () => {
     }];
 
     const httpClientMock = {
-      ...httpClientGeneralMock,
+      ...httpClientGeneralMock(response),
       getAsync: () => Promise.resolve({
         ...response,
         status: HTTP_ACCEPTED,
@@ -153,7 +152,7 @@ describe('RequestRunner', () => {
     };
 
     const httpClientMock = {
-      ...httpClientGeneralMock,
+      ...httpClientGeneralMock(response),
       getAsync: () => Promise.resolve({
         ...response,
         status: HTTP_ACCEPTED,
@@ -202,7 +201,7 @@ describe('RequestRunner', () => {
     };
 
     const httpClientMock = {
-      ...httpClientGeneralMock,
+      ...httpClientGeneralMock(response),
       get: () => Promise.resolve(response),
     } as HttpClientApi;
 

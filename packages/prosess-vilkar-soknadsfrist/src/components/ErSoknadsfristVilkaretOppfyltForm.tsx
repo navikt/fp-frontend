@@ -21,7 +21,7 @@ import {
   ProsessStegBegrunnelseTextField, ProsessStegSubmitButton,
 } from '@fpsak-frontend/prosess-felles';
 import {
-  Aksjonspunkt, Behandling, FamilieHendelse, Kodeverk, KodeverkMedNavn, Soknad, Vilkar, Behandlingsresultat,
+  Aksjonspunkt, Behandling, FamilieHendelse, Kodeverk, KodeverkMedNavn, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
 import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SoknadsfristAp from '@fpsak-frontend/types-avklar-aksjonspunkter/src/prosess/SoknadsfristAp';
@@ -38,10 +38,9 @@ const findSoknadsfristDate = (mottattDato: string, antallDagerSoknadLevertForSen
 );
 
 const isEdited = (hasAksjonspunkt: boolean, erVilkarOk?: boolean): boolean => hasAksjonspunkt && erVilkarOk !== undefined;
-const showAvslagsarsak = (erVilkarOk?: boolean, avslagsarsak?: Behandlingsresultat['avslagsarsak']): boolean => erVilkarOk === false && !!avslagsarsak;
 
 type FormValues = {
-  erVilkarOk: boolean;
+  erVilkarOk?: boolean;
   begrunnelse?: string;
 }
 
@@ -187,7 +186,7 @@ export const ErSoknadsfristVilkaretOppfyltFormImpl: FunctionComponent<PureOwnPro
             value=""
           />]}
         </RadioGroupField>
-        {showAvslagsarsak(erVilkarOk, behandlingsresultat?.avslagsarsak) && (
+        {erVilkarOk === false && !!behandlingsresultat?.avslagsarsak && (
           <Normaltekst>{getKodeverknavn(behandlingsresultat.avslagsarsak, vilkarType.SOKNADFRISTVILKARET)}</Normaltekst>
         )}
       </>
@@ -209,7 +208,7 @@ export const buildInitialValues = createSelector([
   ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
 }));
 
-const transformValues = (values: FormValues): SoknadsfristAp => ({
+const transformValues = (values: Required<FormValues>): SoknadsfristAp => ({
   erVilkarOk: values.erVilkarOk,
   kode: AksjonspunktKode.SOKNADSFRISTVILKARET,
   ...ProsessStegBegrunnelseTextField.transformValues(values),
@@ -218,10 +217,11 @@ const transformValues = (values: FormValues): SoknadsfristAp => ({
 const findDate = createSelector([
   (ownProps: PureOwnProps) => ownProps.soknad,
   (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse],
-(soknad, familiehendelse): string => {
+(soknad, familiehendelse): string | undefined => {
   if (soknad.soknadType.kode === soknadType.FODSEL) {
     const soknadFodselsdato = soknad.fodselsdatoer ? Object.values(soknad.fodselsdatoer)[0] : undefined;
-    const fodselsdato = familiehendelse && familiehendelse.avklartBarn.length > 0 ? familiehendelse.avklartBarn[0].fodselsdato : soknadFodselsdato;
+    const fodselsdato = familiehendelse && familiehendelse.avklartBarn && familiehendelse.avklartBarn.length > 0
+      ? familiehendelse.avklartBarn[0].fodselsdato : soknadFodselsdato;
     const termindato = familiehendelse && familiehendelse.termindato ? familiehendelse.termindato : soknad.termindato;
     return fodselsdato || termindato;
   }
@@ -232,7 +232,8 @@ const findTextCode = createSelector([
   (ownProps: PureOwnProps) => ownProps.soknad, (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse], (soknad, familiehendelse): string => {
   if (soknad.soknadType.kode === soknadType.FODSEL) {
     const soknadFodselsdato = soknad.fodselsdatoer ? Object.values(soknad.fodselsdatoer)[0] : undefined;
-    const fodselsdato = familiehendelse && familiehendelse.avklartBarn.length > 0 ? familiehendelse.avklartBarn[0].fodselsdato : soknadFodselsdato;
+    const fodselsdato = familiehendelse && familiehendelse.avklartBarn && familiehendelse.avklartBarn.length > 0
+      ? familiehendelse.avklartBarn[0].fodselsdato : soknadFodselsdato;
     return fodselsdato ? 'ErSoknadsfristVilkaretOppfyltForm.Fodselsdato' : 'ErSoknadsfristVilkaretOppfyltForm.Termindato';
   }
   return 'ErSoknadsfristVilkaretOppfyltForm.Omsorgsovertakelsesdato';
@@ -241,15 +242,15 @@ const findTextCode = createSelector([
 const formName = 'ErSoknadsfristVilkaretOppfyltForm';
 
 const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
-  (submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
+  (submitCallback) => (values: Required<FormValues>) => submitCallback(transformValues(values)));
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
+const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
   const {
     aksjonspunkter, vilkar, alleKodeverk,
   } = initialOwnProps;
-  const vilkarCodes = aksjonspunkter.map((a) => a.vilkarType.kode);
-  const antallDagerSoknadLevertForSent = vilkar
-    .find((v) => vilkarCodes.includes(v.vilkarType.kode)).merknadParametere.antallDagerSoeknadLevertForSent;
+  const vilkarCodes = aksjonspunkter.flatMap((a) => (a.vilkarType ? [a.vilkarType.kode] : []));
+  const funnetVilkar = vilkar.find((v) => vilkarCodes.includes(v.vilkarType.kode));
+  const antallDagerSoknadLevertForSent = funnetVilkar?.merknadParametere.antallDagerSoeknadLevertForSent;
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
 
   return (state: any, ownProps: PureOwnProps): MappedOwnProps => ({

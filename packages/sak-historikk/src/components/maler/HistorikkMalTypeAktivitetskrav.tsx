@@ -24,7 +24,7 @@ const finnTomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): s
 const buildEndretFeltText = (historikkinnslagDel: HistorikkinnslagDel, getKodeverknavn: (kodeverk: Kodeverk) => string): ReactNode => {
   const { opplysninger, endredeFelter } = historikkinnslagDel;
   const felt = endredeFelter[0];
-  const erEndret = felt.fraVerdi !== null;
+  const erEndret = felt.fraVerdi !== null && felt.fraVerdi !== undefined;
 
   const tilVerdiNavn = getKodeverknavn({ kode: felt.tilVerdi as string, kodeverk: felt.klTilVerdi ? felt.klTilVerdi : '' });
   if (erEndret) {

@@ -33,10 +33,6 @@ const HistorikkMalTypeForeldelse: FunctionComponent<HistorikkMal> = ({
         const periodeFom = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.PERIODE_FOM.kode)?.tilVerdi;
         const periodeTom = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.PERIODE_TOM.kode)?.tilVerdi;
 
-        if (!periodeFom || !periodeTom) {
-          return null;
-        }
-
         return (
           <div key={periodeFom + periodeTom}>
             <Normaltekst>

@@ -1,3 +1,5 @@
+import { ResponseType } from 'axios';
+
 import EventType from './eventType';
 import AsyncPollingStatus from './asyncPollingStatus';
 import HttpClientApi from '../HttpClientApiTsType';
@@ -28,7 +30,7 @@ type NotificationEmitter = (eventType: keyof typeof EventType, data?: any) => vo
 class RequestRunner {
   httpClientApi: HttpClientApi;
 
-  restMethod: (url: string, params: any, responseType?: string) => Promise<Response>;
+  restMethod: (url: string, params: any, responseType?: ResponseType) => Promise<Response>;
 
   path: string;
 
@@ -42,7 +44,7 @@ class RequestRunner {
 
   isPollingRequest = false;
 
-  constructor(httpClientApi: HttpClientApi, restMethod: (url: string, params: any, responseType?: string) => Promise<Response>,
+  constructor(httpClientApi: HttpClientApi, restMethod: (url: string, params: any, responseType?: ResponseType) => Promise<Response>,
     path: string, config: RequestAdditionalConfig) {
     this.httpClientApi = httpClientApi;
     this.restMethod = restMethod;
@@ -55,14 +57,14 @@ class RequestRunner {
     this.notify = notificationEmitter;
   }
 
-  execLongPolling = async (location: string, pollingInterval = 0, pollingCounter = 0): Promise<Response | null> => {
+  execLongPolling = async (location?: string, pollingInterval = 0, pollingCounter = 0): Promise<Response | null> => {
     if (pollingCounter === this.maxPollingLimit) {
-      throw new TimeoutError(location);
+      throw new TimeoutError(location || 'No location');
     }
 
     await wait(pollingInterval);
 
-    if (this.isCancelled) {
+    if (!location || this.isCancelled) {
       return null;
     }
 

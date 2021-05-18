@@ -87,7 +87,7 @@ describe('HistorikkMalTypeTilbakekreving', () => {
       fraVerdi: 'gammel verdi',
       tilVerdi: 'ny verdi',
     });
-    expect(omitOne(messages.at(1).prop('values') as Values, 'b')).toEqual({
+    expect(omitOne(messages.at(2).prop('values') as Values, 'b')).toEqual({
       navn: 'testing 2',
       fraVerdi: undefined,
       tilVerdi: 'ny verdi 2',
