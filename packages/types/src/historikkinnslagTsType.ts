@@ -63,7 +63,7 @@ type Historikkinnslag = Readonly<{
   opprettetAv?: string;
   opprettetTidspunkt: string;
   type: Kodeverk;
-  behandlingId: number;
+  behandlingUuid: string;
   kjoenn: Kodeverk;
   aktoer: Kodeverk;
   dokumentLinks?: HistorikkInnslagDokumentLink[];

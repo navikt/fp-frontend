@@ -118,7 +118,7 @@ export const useLagreAksjonspunkt = (
 
 const leggTilBehandlingIdentifikator = (behandling: Behandling, params: any) => ({
   ...params,
-  behandlingId: behandling.id,
+  behandlingUuid: behandling.uuid,
   behandlingVersjon: behandling.versjon,
 });
 
