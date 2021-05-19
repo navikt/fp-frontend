@@ -19,6 +19,7 @@ describe('<OverstyringPanel>', () => {
         isSubmitting
         isPristine
         toggleAv={sinon.spy()}
+        erIkkeGodkjentAvBeslutter={false}
       >
         <div>test</div>
       </OverstyringPanel>,

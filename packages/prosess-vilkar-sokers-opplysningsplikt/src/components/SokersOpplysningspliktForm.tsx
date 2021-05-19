@@ -94,6 +94,7 @@ interface PureOwnProps {
   readOnlySubmitButton: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  erIkkeGodkjentAvBeslutter: boolean;
 }
 
 interface MappedOwnProps {
@@ -125,6 +126,7 @@ export const SokersOpplysningspliktFormImpl: FunctionComponent<PureOwnProps & Ma
   dokumentTypeIds,
   getKodeverknavn,
   arbeidsgiverOpplysningerPerId,
+  erIkkeGodkjentAvBeslutter,
   ...formProps
 }) => (
   <ProsessPanelTemplate
@@ -136,6 +138,7 @@ export const SokersOpplysningspliktFormImpl: FunctionComponent<PureOwnProps & Ma
     readOnlySubmitButton={hasSoknad ? readOnlySubmitButton : !formProps.dirty || readOnlySubmitButton}
     readOnly={readOnly}
     originalErVilkarOk={originalErVilkarOk}
+    erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
   >
     {manglendeVedlegg.length > 0 && (
       <>

@@ -42,6 +42,7 @@ describe('<VilkarresultatMedOverstyringForm>', () => {
       }}
       status=""
       isSolvable
+      erIkkeGodkjentAvBeslutter={false}
     />);
 
     const melding = wrapper.find(FormattedMessage);

@@ -34,6 +34,7 @@ describe('<SvangerskapVilkarForm>', () => {
       initialValues={{
         erVilkarOk: true,
       }}
+      erIkkeGodkjentAvBeslutter={false}
     />, messages);
 
     const readonlyForm = wrapper.find(ProsessStegBegrunnelseTextField);

@@ -40,6 +40,7 @@ interface PureOwnProps {
   readOnly: boolean;
   readOnlySubmitButton: boolean;
   alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  erIkkeGodkjentAvBeslutter: boolean;
 }
 
 interface MappedOwnProps {
@@ -63,6 +64,7 @@ export const ErForeldreansvarVilkaarOppfyltForm: FunctionComponent<PureOwnProps 
   erVilkarOk,
   originalErVilkarOk,
   isEngangsstonad,
+  erIkkeGodkjentAvBeslutter,
   ...formProps
 }) => (
   <ProsessPanelTemplate
@@ -73,6 +75,7 @@ export const ErForeldreansvarVilkaarOppfyltForm: FunctionComponent<PureOwnProps 
     readOnlySubmitButton={readOnlySubmitButton}
     readOnly={readOnly}
     originalErVilkarOk={originalErVilkarOk}
+    erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
   >
     <Element><FormattedMessage id="ErForeldreansvarVilkaarOppfyltForm.RettTilStonad" /></Element>
     <VilkarResultPicker

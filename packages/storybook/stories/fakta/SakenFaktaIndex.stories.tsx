@@ -69,3 +69,27 @@ export const visApentAksjonspunktForInnhentingAvDokumentasjon = () => (
     }]}
   />
 );
+
+export const visAtAksjonspunktIkkeErGodkjentAvBeslutter = () => (
+  <SakenFaktaIndex
+    {...standardFaktaProps}
+    behandling={behandling as Behandling}
+    aksjonspunkter={[{
+      definisjon: {
+        kode: aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+        kodeverk: 'AP_DEF',
+      },
+      status: {
+        kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: 'AP_STATUS',
+      },
+      kanLoses: true,
+      erAktivt: true,
+    }]}
+    alleMerknaderFraBeslutter={{
+      [aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK]: {
+        notAccepted: true,
+      },
+    }}
+  />
+);

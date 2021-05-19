@@ -29,6 +29,7 @@ interface PureOwnProps {
   readOnlySubmitButton: boolean;
   submitCallback: (aksjonspunktData: AvklarOpptjeningsvilkaretAp) => Promise<void>;
   lovReferanse?: string;
+  erIkkeGodkjentAvBeslutter: boolean;
 }
 
 interface MappedOwnProps {
@@ -50,6 +51,7 @@ export const OpptjeningVilkarAksjonspunktPanelImpl: FunctionComponent<PureOwnPro
   readOnly,
   lovReferanse,
   fastsattOpptjening,
+  erIkkeGodkjentAvBeslutter,
   ...formProps
 }) => (
   <ProsessPanelTemplate
@@ -62,6 +64,7 @@ export const OpptjeningVilkarAksjonspunktPanelImpl: FunctionComponent<PureOwnPro
     readOnly={readOnly}
     lovReferanse={lovReferanse}
     originalErVilkarOk={originalErVilkarOk}
+    erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
     rendreFakta={() => (
       <>
         <VerticalSpacer sixteenPx />

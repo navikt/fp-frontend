@@ -25,6 +25,7 @@ const OpptjeningVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsess
   isReadOnly,
   isAksjonspunktOpen,
   readOnlySubmitButton,
+  alleMerknaderFraBeslutter,
   formData,
   setFormData,
 }) => (
@@ -40,6 +41,7 @@ const OpptjeningVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsess
         readOnly={isReadOnly}
         isAksjonspunktOpen={isAksjonspunktOpen}
         readOnlySubmitButton={readOnlySubmitButton}
+        erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon.kode]?.notAccepted)}
       />
     </ReduxWrapper>
   </RawIntlProvider>

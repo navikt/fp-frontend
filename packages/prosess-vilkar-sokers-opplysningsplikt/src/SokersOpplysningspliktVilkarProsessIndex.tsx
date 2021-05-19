@@ -25,6 +25,7 @@ const SokersOpplysningspliktVilkarProsessIndex: FunctionComponent<OwnProps & Sta
   readOnlySubmitButton,
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
+  alleMerknaderFraBeslutter,
   formData,
   setFormData,
 }) => (
@@ -40,6 +41,7 @@ const SokersOpplysningspliktVilkarProsessIndex: FunctionComponent<OwnProps & Sta
         readOnlySubmitButton={readOnlySubmitButton}
         alleKodeverk={alleKodeverk}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon.kode]?.notAccepted)}
       />
     </ReduxWrapper>
   </RawIntlProvider>

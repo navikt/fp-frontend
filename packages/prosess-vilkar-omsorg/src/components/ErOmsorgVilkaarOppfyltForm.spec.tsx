@@ -56,6 +56,7 @@ describe('<ErOmsorgVilkaarOppfyltForm>', () => {
       }}
       alleKodeverk={{}}
       originalErVilkarOk
+      erIkkeGodkjentAvBeslutter={false}
     />);
 
     const form = wrapper.find(ProsessStegBegrunnelseTextField);
@@ -84,6 +85,7 @@ describe('<ErOmsorgVilkaarOppfyltForm>', () => {
       }}
       alleKodeverk={{}}
       originalErVilkarOk
+      erIkkeGodkjentAvBeslutter={false}
     />);
 
     const selector = wrapper.find(VilkarResultPicker);
@@ -135,6 +137,7 @@ describe('<ErOmsorgVilkaarOppfyltForm>', () => {
       }}
       alleKodeverk={{}}
       originalErVilkarOk
+      erIkkeGodkjentAvBeslutter={false}
     />);
 
     const readonlyForm = wrapper.find(ProsessStegBegrunnelseTextField);

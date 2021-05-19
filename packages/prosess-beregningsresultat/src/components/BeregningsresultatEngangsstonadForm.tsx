@@ -37,6 +37,7 @@ interface PureOwnProps {
   behandlingResultatstruktur?: BeregningsresultatEs;
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: OverstyringBeregningAp) => Promise<void>;
+  erIkkeGodkjentAvBeslutter: boolean;
 }
 
 interface MappedOwnProps {
@@ -57,6 +58,7 @@ export const BeregningsresultatEngangsstonadFormImpl: FunctionComponent<PureOwnP
   toggleOverstyring,
   behandlingResultatstruktur,
   isOverstyrt,
+  erIkkeGodkjentAvBeslutter,
   ...formProps
 }) => {
   const [erOverstyrt, toggleOverstyringsknapp] = useState(false);
@@ -130,6 +132,7 @@ export const BeregningsresultatEngangsstonadFormImpl: FunctionComponent<PureOwnP
             isSubmitting={formProps.submitting}
             isPristine={formProps.pristine}
             toggleAv={toggleAv}
+            erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
           >
             <FlexContainer>
               <FlexRow>

@@ -18,6 +18,7 @@ const OmsorgVilkarProsessIndex: FunctionComponent<StandardProsessPanelProps> = (
   isReadOnly,
   readOnlySubmitButton,
   alleKodeverk,
+  alleMerknaderFraBeslutter,
   formData,
   setFormData,
 }) => (
@@ -31,6 +32,7 @@ const OmsorgVilkarProsessIndex: FunctionComponent<StandardProsessPanelProps> = (
         readOnly={isReadOnly}
         readOnlySubmitButton={readOnlySubmitButton}
         alleKodeverk={alleKodeverk}
+        erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon.kode]?.notAccepted)}
       />
     </ReduxWrapper>
   </RawIntlProvider>

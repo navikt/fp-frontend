@@ -17,6 +17,7 @@ interface OwnProps {
   submitCallback: (data: OverstyringUtenlandssakMarkeringAp | MerkOpptjeningUtlandAp) => Promise<void>;
   readOnly: boolean;
   submittable: boolean;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
 }
 
 const personAksjonspunkter = [aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK];
@@ -26,6 +27,7 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
   aksjonspunkter,
   dokStatus,
   harApneAksjonspunkter,
+  alleMerknaderFraBeslutter,
   submitCallback,
   readOnly,
   submittable,
@@ -56,6 +58,7 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
             aksjonspunkt={aksjonspunkter.find((ap) => ap.definisjon.kode === personAksjonspunkter[0])}
             submittable={submittable}
             submitCallback={submitCallback}
+            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           />
         </Column>
       )}

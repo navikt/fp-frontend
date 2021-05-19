@@ -42,6 +42,7 @@ describe('<FodselVilkarForm>', () => {
       }}
       alleKodeverk={{}}
       originalErVilkarOk
+      erIkkeGodkjentAvBeslutter={false}
     />);
 
     const readonlyForm = wrapper.find(ProsessStegBegrunnelseTextField);
@@ -74,6 +75,7 @@ describe('<FodselVilkarForm>', () => {
       }}
       alleKodeverk={{}}
       originalErVilkarOk
+      erIkkeGodkjentAvBeslutter={false}
     />);
 
     const selector = wrapper.find(VilkarResultPicker);
@@ -110,6 +112,7 @@ describe('<FodselVilkarForm>', () => {
       }}
       alleKodeverk={{}}
       originalErVilkarOk
+      erIkkeGodkjentAvBeslutter={false}
     />);
 
     const readonlyForm = wrapper.find(ProsessStegBegrunnelseTextField);
