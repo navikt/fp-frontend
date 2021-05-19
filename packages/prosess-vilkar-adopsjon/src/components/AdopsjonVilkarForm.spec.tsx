@@ -42,6 +42,7 @@ describe('<AdopsjonVilkarForm>', () => {
       }}
       alleKodeverk={{}}
       originalErVilkarOk
+      erIkkeGodkjentAvBeslutter={false}
     />);
 
     const readonlyForm = wrapper.find(ProsessStegBegrunnelseTextField);
@@ -73,6 +74,7 @@ describe('<AdopsjonVilkarForm>', () => {
       }}
       alleKodeverk={{}}
       originalErVilkarOk
+      erIkkeGodkjentAvBeslutter={false}
     />);
 
     const selector = wrapper.find(VilkarResultPicker);
@@ -108,6 +110,7 @@ describe('<AdopsjonVilkarForm>', () => {
       }}
       alleKodeverk={{}}
       originalErVilkarOk
+      erIkkeGodkjentAvBeslutter={false}
     />);
 
     const readonlyForm = wrapper.find(ProsessStegBegrunnelseTextField);

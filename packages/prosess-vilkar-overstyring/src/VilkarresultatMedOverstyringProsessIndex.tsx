@@ -41,6 +41,7 @@ const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & Sta
   overstyringApKode,
   lovReferanse = '',
   erMedlemskapsPanel,
+  alleMerknaderFraBeslutter,
   formData,
   setFormData,
 }) => (
@@ -62,6 +63,7 @@ const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & Sta
         overstyringApKode={overstyringApKode}
         lovReferanse={lovReferanse}
         erMedlemskapsPanel={erMedlemskapsPanel}
+        erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon.kode]?.notAccepted)}
       />
     </ReduxWrapper>
   </RawIntlProvider>

@@ -26,6 +26,7 @@ const BeregningsresultatProsessIndex: FunctionComponent<OwnProps & StandardProse
   submitCallback,
   kanOverstyreAccess,
   toggleOverstyring,
+  alleMerknaderFraBeslutter,
   formData,
   setFormData,
 }) => (
@@ -38,6 +39,7 @@ const BeregningsresultatProsessIndex: FunctionComponent<OwnProps & StandardProse
         submitCallback={submitCallback}
         kanOverstyre={kanOverstyreAccess.isEnabled}
         toggleOverstyring={toggleOverstyring}
+        erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon.kode]?.notAccepted)}
       />
     </ReduxWrapper>
   </RawIntlProvider>

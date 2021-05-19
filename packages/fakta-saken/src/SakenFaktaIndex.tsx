@@ -23,6 +23,7 @@ const SakenFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = (
   submittable,
   harApneAksjonspunkter,
   readOnly,
+  alleMerknaderFraBeslutter,
   formData,
   setFormData,
 }) => (
@@ -35,6 +36,7 @@ const SakenFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = (
         submitCallback={submitCallback}
         readOnly={readOnly}
         submittable={submittable}
+        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
       />
     </ReduxWrapper>
   </RawIntlProvider>

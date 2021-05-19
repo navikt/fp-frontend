@@ -27,6 +27,7 @@ describe('<SakenFaktaPanel>', () => {
       submitCallback={() => undefined}
       readOnly={false}
       submittable
+      alleMerknaderFraBeslutter={{}}
     />);
     expect(wrapper.find(AksjonspunktHelpTextHTML)).toHaveLength(1);
     expect(wrapper.find(InnhentDokOpptjeningUtlandPanel)).toHaveLength(1);
@@ -50,6 +51,7 @@ describe('<SakenFaktaPanel>', () => {
       submitCallback={() => undefined}
       readOnly={false}
       submittable
+      alleMerknaderFraBeslutter={{}}
     />);
     expect(wrapper.find(AksjonspunktHelpTextHTML)).toHaveLength(0);
     expect(wrapper.find(InnhentDokOpptjeningUtlandPanel)).toHaveLength(1);
@@ -62,6 +64,7 @@ describe('<SakenFaktaPanel>', () => {
       submitCallback={() => undefined}
       readOnly={false}
       submittable
+      alleMerknaderFraBeslutter={{}}
     />);
     expect(wrapper.find(AksjonspunktHelpTextHTML)).toHaveLength(0);
     expect(wrapper.find(InnhentDokOpptjeningUtlandPanel)).toHaveLength(0);

@@ -29,6 +29,7 @@ interface OwnProps {
   isSubmitting: boolean;
   isPristine: boolean;
   toggleAv: () => void;
+  erIkkeGodkjentAvBeslutter: boolean;
   children: ReactNode;
 }
 
@@ -41,9 +42,10 @@ const OverstyringPanel: FunctionComponent<OwnProps> = ({
   isSubmitting,
   isPristine,
   toggleAv,
+  erIkkeGodkjentAvBeslutter,
   children,
 }) => (
-  <AksjonspunktBox className={styles.aksjonspunktMargin} erAksjonspunktApent={erOverstyrt}>
+  <AksjonspunktBox className={styles.aksjonspunktMargin} erAksjonspunktApent={erOverstyrt} erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}>
     <Element>{intl.formatMessage({ id: 'OverstyringPanel.AutomatiskVurdering' })}</Element>
     <VerticalSpacer eightPx />
     {children}

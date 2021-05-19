@@ -25,6 +25,7 @@ const ForeldreansvarVilkarProsessIndex: FunctionComponent<OwnProps & StandardPro
   isReadOnly,
   readOnlySubmitButton,
   alleKodeverk,
+  alleMerknaderFraBeslutter,
   formData,
   setFormData,
 }) => (
@@ -40,6 +41,7 @@ const ForeldreansvarVilkarProsessIndex: FunctionComponent<OwnProps & StandardPro
         readOnly={isReadOnly}
         readOnlySubmitButton={readOnlySubmitButton}
         alleKodeverk={alleKodeverk}
+        erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon.kode]?.notAccepted)}
       />
     </ReduxWrapper>
   </RawIntlProvider>
