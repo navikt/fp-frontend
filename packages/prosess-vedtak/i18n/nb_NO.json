@@ -44,6 +44,7 @@
 
   "VedtakFellesPanel.RedigerVedtaksbrev": "Rediger vedtaksbrev",
   "VedtakFellesPanel.AutomatiskVedtaksbrev": "Automatisk vedtaksbrev",
+  "VedtakFellesPanel.UtkastVedtaksbrev": "Utkast vedtaksbrev",
   "VedtakFellesPanel.ForkastManueltBrev": "Forkast manuelt brev",
   "VedtakFellesPanel.Forklaring": "Tekst fra det automatisk genererte brevet kan kopieres og limes inn i det manuelle brevet",
   "VedtakFellesPanel.Forkast": "Dersom du forkaster det manuelle brevet, vil det erstattes av det automatisk genererte brevet",
