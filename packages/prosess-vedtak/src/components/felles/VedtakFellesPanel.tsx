@@ -141,11 +141,11 @@ const VedtakFellesPanel: FunctionComponent<OwnProps & WrappedComponentProps> = (
             </Element>
           </FlexColumn>
           <FlexColumn className={styles.space}>
-            {skalViseLink && !erBehandlingEtterKlage && harIkkeKonsekvensForYtelse && (
+            {skalViseLink && harIkkeKonsekvensForYtelse && (
               <>
                 <Lenke href="#" onClick={previewAutomatiskBrev}>
                   <span>
-                    <FormattedMessage id="VedtakFellesPanel.AutomatiskVedtaksbrev" />
+                    <FormattedMessage id={erBehandlingEtterKlage ? 'VedtakFellesPanel.UtkastVedtaksbrev' : 'VedtakFellesPanel.AutomatiskVedtaksbrev'} />
                   </span>
                   <Image src={popOutPilSvg} className={styles.pil} />
                 </Lenke>
