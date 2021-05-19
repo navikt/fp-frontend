@@ -62,7 +62,9 @@ const VisittkortBarnInfoFodselPanel: FunctionComponent<OwnProps & WrappedCompone
           {visFødselsdato && !!hendelseDato && antallBarn > 0 && (
             <>
               <FormattedMessage id={finnFodselsdatoTekstkode(antallBarn)} values={{ dato: moment(hendelseDato).format(DDMMYYYY_DATE_FORMAT) }} />
-              <FormattedMessage {...finnAlderTekstProps(hendelseDato)} />
+              {!dødfødsel && (
+                <FormattedMessage {...finnAlderTekstProps(hendelseDato)} />
+              )}
             </>
           )}
           {visFødselsdato && (!hendelseDato || antallBarn === 0) && (

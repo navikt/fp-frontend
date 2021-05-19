@@ -69,7 +69,7 @@ describe('<VisittkortBarnInfoFodselPanel>', () => {
     />, messages);
 
     const message = wrapper.find(FormattedMessage);
-    expect(message).toHaveLength(3);
+    expect(message).toHaveLength(2);
     expect(message.last().prop('id')).toEqual('VisittkortBarnInfoFodselPanel.Dod');
   });
 
