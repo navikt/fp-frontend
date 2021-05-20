@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { BeregningsgrunnlagPeriodeProp } from '@fpsak-frontend/types';
+import { BeregningsgrunnlagAndel, BeregningsgrunnlagPeriodeProp } from '@fpsak-frontend/types';
 import { Normaltekst, Element } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
@@ -18,8 +18,11 @@ interface OwnProps {
 
 const erBeløpSatt = (beløp: number): boolean => !!beløp || beløp === 0;
 
-const finnKap8Beregning = (periode: BeregningsgrunnlagPeriodeProp): number => (erBeløpSatt(periode.overstyrtPrAar)
-  ? periode.overstyrtPrAar : periode.beregnetPrAar);
+const finnGjeldendeBeløp = (andel: BeregningsgrunnlagAndel): number => (erBeløpSatt(andel.overstyrtPrAar) ? andel.overstyrtPrAar : andel.beregnetPrAar);
+
+const finnKap8Beregning = (periode: BeregningsgrunnlagPeriodeProp): number => periode.beregningsgrunnlagPrStatusOgAndel
+  .map((andel) => finnGjeldendeBeløp(andel))
+  .reduce((i1, i2) => i1 + i2, 0);
 
 const finnBesteberegnet = (besteMåneder : Månedsgrunnlag[]): number => (
   besteMåneder.flatMap((måned) => måned.inntekter).map(({ inntekt }) => inntekt).reduce((i1, i2) => i1 + i2, 0) * 2
