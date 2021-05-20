@@ -12608,10 +12608,10 @@ nav-frontend-chevron-style@1.0.4, nav-frontend-chevron-style@^1.0.4:
   resolved "https://registry.yarnpkg.com/nav-frontend-chevron-style/-/nav-frontend-chevron-style-1.0.4.tgz#9cad6d1f19507147771e9ff26ebecf6e0964a50c"
   integrity sha512-GFc/IZpb1+E9ZBMoWALmKeTjySxRcwNCtz55P+45k5vUryNh2rnxxErhKh7J3OrIHVAy8BdTLjug3sC5Tscffw==
 
-nav-frontend-chevron@1.0.28, nav-frontend-chevron@^1.0.28:
-  version "1.0.28"
-  resolved "https://registry.yarnpkg.com/nav-frontend-chevron/-/nav-frontend-chevron-1.0.28.tgz#1ec53e142f1b381ee9bd7874b505abd5bc3a6b2a"
-  integrity sha512-gwM2eUTsUlEnxHoWJz4MU2nCGpmLWXBogiPDRd+gvdoDfD4qWMthm0ofaRz5yI3y7v5xKd+gzNq2Q2fDDO0Jvw==
+nav-frontend-chevron@1.0.29, nav-frontend-chevron@^1.0.28:
+  version "1.0.29"
+  resolved "https://registry.yarnpkg.com/nav-frontend-chevron/-/nav-frontend-chevron-1.0.29.tgz#fdd9ac8930f964ee2a9bceeb5ad2ea3b9b69302a"
+  integrity sha512-CZC3H3fyLcZWwCgu3a4z4L1fnXRK0XCQ2tny7aZqr+AJs95m+Y/qku2q1Qhh4mOzk175JQ6zpc68VE+K7CxCig==
 
 nav-frontend-core@5.1.1, nav-frontend-core@^5.1.1:
   version "5.1.1"
