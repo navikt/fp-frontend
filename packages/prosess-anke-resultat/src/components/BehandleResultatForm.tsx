@@ -21,17 +21,17 @@ import { BekreftVedtakUtenTotrinnskontrollAp, ForeslaVedtakAp, ForeslaVedtakManu
 
 import PreviewAnkeLink, { BrevData } from './PreviewAnkeLink';
 
-const isVedtakUtenToTrinn = (apCodes: string): boolean => apCodes.includes(AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL); // 5018
-const isMedUnderskriver = (apCodes: string): boolean => apCodes.includes(AksjonspunktCode.FORESLA_VEDTAK); // 5015
-const isFatterVedtak = (apCodes: string): boolean => apCodes.includes(AksjonspunktCode.FATTER_VEDTAK); // 5016
-const skalViseForhaandlenke = (avr: Kodeverk): boolean => avr.kode === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE
-  || avr.kode === ankeVurdering.ANKE_OMGJOER || avr.kode === ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV;
+const isVedtakUtenToTrinn = (apCode: string): boolean => apCode === AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL;
+const isMedUnderskriver = (apCode: string): boolean => apCode === AksjonspunktCode.FORESLA_VEDTAK;
+const isFatterVedtak = (apCode: string): boolean => apCode === AksjonspunktCode.FATTER_VEDTAK;
+const skalViseForhaandlenke = (avr?: Kodeverk): boolean => avr?.kode === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE
+  || avr?.kode === ankeVurdering.ANKE_OMGJOER || avr?.kode === ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV;
 
 interface OwnPropsResultat {
   ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
 }
 
-const ResultatEnkel: FunctionComponent<OwnPropsResultat> = ({
+export const ResultatEnkel: FunctionComponent<OwnPropsResultat> = ({
   ankeVurderingResultat,
 }): ReactElement => (
   <div>
@@ -42,7 +42,7 @@ const ResultatEnkel: FunctionComponent<OwnPropsResultat> = ({
   </div>
 );
 
-const ResultatOpphev: FunctionComponent<OwnPropsResultat> = ({
+export const ResultatOpphev: FunctionComponent<OwnPropsResultat> = ({
   ankeVurderingResultat,
 }): ReactElement => (
   <div>
@@ -53,7 +53,7 @@ const ResultatOpphev: FunctionComponent<OwnPropsResultat> = ({
   </div>
 );
 
-const ResultatHjemsend: FunctionComponent<OwnPropsResultat> = ({
+export const ResultatHjemsend: FunctionComponent<OwnPropsResultat> = ({
   ankeVurderingResultat,
 }): ReactElement => (
   <div>
@@ -64,7 +64,7 @@ const ResultatHjemsend: FunctionComponent<OwnPropsResultat> = ({
   </div>
 );
 
-const ResultatAvvise: FunctionComponent<OwnPropsResultat> = ({
+export const ResultatAvvise: FunctionComponent<OwnPropsResultat> = ({
   ankeVurderingResultat,
 }): ReactElement => (
   <>
@@ -107,7 +107,7 @@ const hentSprakKode = (ankeOmgjoerArsak: Kodeverk): string => {
   }
 };
 
-const ResultatOmgjores: FunctionComponent<OwnPropsResultat & { alleKodeverk: {[key: string]: KodeverkMedNavn[]}; }> = ({
+export const ResultatOmgjores: FunctionComponent<OwnPropsResultat & { alleKodeverk: {[key: string]: KodeverkMedNavn[]}; }> = ({
   ankeVurderingResultat,
   alleKodeverk,
 }): ReactElement => (
@@ -126,7 +126,7 @@ const ResultatOmgjores: FunctionComponent<OwnPropsResultat & { alleKodeverk: {[k
   </>
 );
 
-const AnkeResultat: FunctionComponent<OwnPropsResultat & { alleKodeverk: {[key: string]: KodeverkMedNavn[]}; }> = ({
+export const AnkeResultat: FunctionComponent<OwnPropsResultat & { alleKodeverk: {[key: string]: KodeverkMedNavn[]}; }> = ({
   ankeVurderingResultat,
   alleKodeverk,
 }): ReactElement | null => {
