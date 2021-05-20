@@ -165,7 +165,7 @@ interface MappedOwnProps {
   onSubmit: (formValues: FormValues) => any;
 }
 
-const AnkeResultatForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
+export const AnkeResultatForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
   intl,
   handleSubmit,
   previewCallback,
