@@ -144,7 +144,7 @@ interface MappedOwnProps {
 /**
  * Presentasjonskomponent. Setter opp aksjonspunktet for behandling.
  */
-const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
+export const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
   readOnly,
   handleSubmit,
   saveAnke,
