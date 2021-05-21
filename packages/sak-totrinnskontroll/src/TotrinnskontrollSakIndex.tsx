@@ -130,9 +130,9 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   const erStatusFatterVedtak = behandling.status.kode === BehandlingStatus.FATTER_VEDTAK;
   const skjemalenkeTyper = alleKodeverk[kodeverkTyper.SKJERMLENKE_TYPE];
   const vurderArsaker = alleKodeverk[kodeverkTyper.VURDER_AARSAK];
-  const arbeidsforholdHandlingTyper = alleKodeverk[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE]
+  const arbeidsforholdHandlingTyper = kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE in alleKodeverk
     ? (alleKodeverk as AlleKodeverk)[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE] : TOMT_KODEVERK;
-  const faktaOmBeregningTilfeller = alleKodeverk[kodeverkTyper.FAKTA_OM_BEREGNING_TILFELLE]
+  const faktaOmBeregningTilfeller = kodeverkTyper.FAKTA_OM_BEREGNING_TILFELLE in alleKodeverk
     ? (alleKodeverk as AlleKodeverk)[kodeverkTyper.FAKTA_OM_BEREGNING_TILFELLE] : TOMT_KODEVERK;
 
   return (
