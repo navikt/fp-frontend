@@ -12,4 +12,4 @@ export const hentDokumentLenke = (
 
 export const hentVedtakDokumentLenke = (
   dokumentId: string,
-): string => (`/fpsak/api/vedtak/hent-vedtaksdokument?behandlingUuid=${dokumentId}`);
+): string => (`/fpsak/api/vedtak/hent-vedtaksdokument?uuid=${dokumentId}`);
