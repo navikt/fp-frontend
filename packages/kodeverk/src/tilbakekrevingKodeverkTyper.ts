@@ -8,6 +8,7 @@ enum TilbakekrevingKodeverkType {
   VENT_AARSAK = 'Venteårsak',
   SKJERMLENKE_TYPE = 'SkjermlenkeType',
   VURDER_AARSAK = 'VurderÅrsak',
+  VERGE_TYPE = 'VergeType',
 }
 
 export default TilbakekrevingKodeverkType;

@@ -7,7 +7,7 @@ import FeilutbetalingFaktaIndex from '@fpsak-frontend/fakta-feilutbetaling';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import { createIntl } from '@fpsak-frontend/utils';
 import {
-  Aksjonspunkt, Fagsak, FeilutbetalingAarsak, FeilutbetalingFakta, AlleKodeverk,
+  Aksjonspunkt, Fagsak, FeilutbetalingAarsak, FeilutbetalingFakta, AlleKodeverkTilbakekreving,
 } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
 
@@ -31,7 +31,7 @@ type EndepunktPanelData = {
 
 interface OwnProps {
   fagsak: Fagsak;
-  fpsakKodeverk: AlleKodeverk;
+  fptilbakeKodeverk: AlleKodeverkTilbakekreving;
 }
 
 /**
@@ -39,7 +39,7 @@ interface OwnProps {
  */
 const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
   fagsak,
-  fpsakKodeverk,
+  fptilbakeKodeverk,
   ...props
 }) => (
   <FaktaDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
@@ -55,7 +55,8 @@ const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
       <FeilutbetalingFaktaIndex
         {...data}
         fagsakYtelseTypeKode={fagsak.fagsakYtelseType.kode}
-        fpsakKodeverk={fpsakKodeverk}
+        fpsakKodeverk={data.alleKodeverk}
+        alleKodeverk={fptilbakeKodeverk}
       />
     )}
   />

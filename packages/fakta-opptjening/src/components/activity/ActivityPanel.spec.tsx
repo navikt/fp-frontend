@@ -8,12 +8,12 @@ import {
 } from '@fpsak-frontend/form';
 import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 import OAType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
 
 import CustomOpptjeningAktivitet from '../../CustomOpptjeningAktivitet';
 import { ActivityPanel } from './ActivityPanel';
 import messages from '../../../i18n/nb_NO.json';
-import { AlleKodeverk } from 'types';
 
 const intlMock = getIntlMock(messages);
 

@@ -3,10 +3,10 @@ import React from 'react';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import innsynResultatTyperKV from '@fpsak-frontend/kodeverk/src/innsynResultatType';
 import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import { InnsynFormImpl } from './InnsynForm';
 import messages from '../../i18n/nb_NO.json';
-import { AlleKodeverk } from 'types';
 
 const intlMock = getIntlMock(messages);
 

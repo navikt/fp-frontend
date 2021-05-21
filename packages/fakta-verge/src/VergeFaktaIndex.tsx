@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { StandardFaktaPanelProps, Verge } from '@fpsak-frontend/types';
+import {
+  AlleKodeverk, AlleKodeverkTilbakekreving, StandardFaktaPanelProps, Verge,
+} from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 import { ReduxWrapper } from '@fpsak-frontend/form';
 
@@ -12,6 +14,7 @@ const intl = createIntl(messages);
 
 type OwnProps = {
   verge?: Verge;
+  alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
 };
 
 const VergeFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({

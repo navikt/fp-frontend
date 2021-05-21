@@ -4,7 +4,9 @@ import sinon from 'sinon';
 
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Aksjonspunkt, AlleKodeverk, Behandling, Fagsak } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, AlleKodeverk, Behandling, Fagsak,
+} from '@fpsak-frontend/types';
 
 import AvregningPanel from './components/AvregningPanel';
 import AvregningProsessIndex from './AvregningProsessIndex';

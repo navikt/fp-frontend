@@ -70,7 +70,7 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehand
         fagsak={fagsak}
         rettigheter={rettigheter}
         hasFetchError={behandlingState === RestApiState.ERROR}
-        alleKodeverk={tilbakekrevingKodeverk}
+        alleKodeverk={fpsakKodeverk}
         lagreAksjonspunkter={lagreAksjonspunkter}
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
       >
@@ -81,16 +81,17 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehand
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
           hentFaktaPaneler={(props) => (
             <>
-              <FeilutbetalingFaktaInitPanel {...props} fpsakKodeverk={fpsakKodeverk} fagsak={fagsak} />
+              <FeilutbetalingFaktaInitPanel {...props} fptilbakeKodeverk={tilbakekrevingKodeverk} fagsak={fagsak} />
               <VergeFaktaInitPanel {...props} />
             </>
           )}
           hentProsessPaneler={(props) => (
             <>
-              <ForeldelseProsessStegInitPanel {...props} fagsakKjønn={fagsakKjønn} />
-              <TilbakekrevingProsessStegInitPanel {...props} fagsakKjønn={fagsakKjønn} />
+              <ForeldelseProsessStegInitPanel {...props} fagsakKjønn={fagsakKjønn} fptilbakeKodeverk={tilbakekrevingKodeverk} />
+              <TilbakekrevingProsessStegInitPanel {...props} fagsakKjønn={fagsakKjønn} fptilbakeKodeverk={tilbakekrevingKodeverk} />
               <VedtakTilbakekrevingProsessStegInitPanel
                 {...props}
+                fptilbakeKodeverk={tilbakekrevingKodeverk}
                 harApenRevurdering={harApenRevurdering}
                 opneSokeside={opneSokeside}
                 toggleOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}

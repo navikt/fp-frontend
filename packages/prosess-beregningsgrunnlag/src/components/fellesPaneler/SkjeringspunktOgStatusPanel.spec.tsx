@@ -4,8 +4,8 @@ import { FormattedMessage } from 'react-intl';
 
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { DateLabel } from '@fpsak-frontend/shared-components';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 import SkjeringspunktOgStatusPanel, { RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN, SkjeringspunktOgStatusPanelImpl } from './SkjeringspunktOgStatusPanel';
-import { AlleKodeverk } from 'types';
 
 const skjeringstidspunktDato = '2017-12-12';
 const aktivitetstatusList = [{
