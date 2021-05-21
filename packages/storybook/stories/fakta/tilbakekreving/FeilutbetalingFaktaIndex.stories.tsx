@@ -11,7 +11,9 @@ import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbake
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import FeilutbetalingFaktaIndex from '@fpsak-frontend/fakta-feilutbetaling';
-import { Behandling, FeilutbetalingFakta, FeilutbetalingAarsak } from '@fpsak-frontend/types';
+import {
+  Behandling, FeilutbetalingFakta, FeilutbetalingAarsak, AlleKodeverkTilbakekreving, AlleKodeverk,
+} from '@fpsak-frontend/types';
 
 const BEHANDLING_AARSAK_KODEVERK = 'BEHANDLING_AARSAK';
 const TILBAKEKR_VIDERE_BEH_KODEVERK = 'TILBAKEKR_VIDERE_BEH';
@@ -98,7 +100,9 @@ const feilutbetalingAarsak = [{
   }],
 }];
 
-const alleKodeverk = {
+const alleKodeverk = {} as AlleKodeverkTilbakekreving;
+
+const fpSakAlleKodeverk = {
   [kodeverkTyper.BEHANDLING_AARSAK]: [{
     kode: behandlingArsakType.FEIL_I_LOVANDVENDELSE,
     navn: 'Feil i lovanvendelse',
@@ -123,7 +127,7 @@ const alleKodeverk = {
     navn: 'Endring i beregning',
     kodeverk: KONSEKVENS_FOR_YTELSEN_KODEVERK,
   }],
-};
+} as AlleKodeverk;
 
 const merknaderFraBeslutter = {
   notAccepted: false,
@@ -165,7 +169,7 @@ export const visAksjonspunktForFeilutbetaling = () => (
       erAktivt: true,
     }]}
     alleKodeverk={alleKodeverk}
-    fpsakKodeverk={alleKodeverk}
+    fpsakKodeverk={fpSakAlleKodeverk}
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodesTilbakekreving.AVKLAR_FAKTA_FOR_FEILUTBETALING]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}

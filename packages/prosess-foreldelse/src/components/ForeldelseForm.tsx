@@ -16,7 +16,7 @@ import {
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
-import { KodeverkMedNavn, FeilutbetalingPeriode, FeilutbetalingPerioderWrapper } from '@fpsak-frontend/types';
+import { FeilutbetalingPeriode, FeilutbetalingPerioderWrapper, AlleKodeverkTilbakekreving } from '@fpsak-frontend/types';
 import { VurderForeldelseAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import ForeldelsePeriodeForm, { FORELDELSE_PERIODE_FORM_NAME, FormValues as PeriodeFormValues } from './ForeldelsePeriodeForm';
@@ -56,7 +56,7 @@ interface PureOwnProps {
   perioderForeldelse: FeilutbetalingPerioderWrapper;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   submitCallback: (aksjonspunktData: VurderForeldelseAp) => Promise<void>;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverkTilbakekreving;
   navBrukerKjonn: string;
   readOnly: boolean;
   readOnlySubmitButton: boolean;

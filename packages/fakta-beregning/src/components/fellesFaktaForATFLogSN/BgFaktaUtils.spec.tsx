@@ -2,6 +2,7 @@ import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import organisasjonstyper from '@fpsak-frontend/kodeverk/src/organisasjonstype';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 import { lonnsendringField } from './vurderOgFastsettATFL/forms/LonnsendringForm';
 import { erNyoppstartetFLField } from './vurderOgFastsettATFL/forms/NyoppstartetFLForm';
 import {
@@ -58,7 +59,7 @@ const alleKodeverk = {
     kodeverk: 'AKTIVITET_STATUS',
     navn: 'Selvstendig næringsdrivende',
   }],
-};
+} as AlleKodeverk;
 
 describe('<BgFaktaUtils>', () => {
   const dagpengerAndel = {
@@ -201,7 +202,7 @@ describe('<BgFaktaUtils>', () => {
       },
     };
 
-    const andelsInfo = setGenerellAndelsinfo(andelValueFromState, agOpplysning, {});
+    const andelsInfo = setGenerellAndelsinfo(andelValueFromState, agOpplysning, {} as AlleKodeverk);
     expect(andelsInfo.andel).toBe('Virksomheten (3284788923)...a7e2');
     expect(andelsInfo.aktivitetStatus).toBe('AT');
     expect(andelsInfo.andelsnr).toBe(3);
@@ -362,7 +363,7 @@ describe('<BgFaktaUtils>', () => {
     };
     const andelFieldValue = {
       ...andelValuesMedInntektsmelding,
-      ...setGenerellAndelsinfo(arbeidstakerAndel4, agOpplysning, {}),
+      ...setGenerellAndelsinfo(arbeidstakerAndel4, agOpplysning, {} as AlleKodeverk),
     };
     const copyValues = { ...values };
     copyValues[MANUELL_OVERSTYRING_BEREGNINGSGRUNNLAG_FIELD] = true;
@@ -380,7 +381,7 @@ describe('<BgFaktaUtils>', () => {
     };
     const andelFieldValue = {
       ...andelValuesUtenInntektsmelding,
-      ...setGenerellAndelsinfo(arbeidstakerAndel3, agOpplysning, {}),
+      ...setGenerellAndelsinfo(arbeidstakerAndel3, agOpplysning, {} as AlleKodeverk),
     };
     const skalRedigereInntekt = skalFastsetteInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
     expect(skalRedigereInntekt).toBe(true);
@@ -396,7 +397,7 @@ describe('<BgFaktaUtils>', () => {
     };
     const andelFieldValue = {
       ...andelValuesUtenInntektsmelding,
-      ...setGenerellAndelsinfo(arbeidstakerAndel1, agOpplysning, {}),
+      ...setGenerellAndelsinfo(arbeidstakerAndel1, agOpplysning, {} as AlleKodeverk),
     };
     faktaOmBeregning.arbeidsforholdMedLønnsendringUtenIM = [arbeidstakerAndel1];
     const skalRedigereInntekt = skalFastsetteInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)(andelFieldValue);
@@ -426,7 +427,7 @@ describe('<BgFaktaUtils>', () => {
     };
     const andelFieldValue = {
       ...andelValuesUtenInntektsmelding,
-      ...setGenerellAndelsinfo(arbeidstakerAndel4, agOpplysning, {}),
+      ...setGenerellAndelsinfo(arbeidstakerAndel4, agOpplysning, {} as AlleKodeverk),
     };
     const faktaOmBeregningCopy = { ...faktaOmBeregning };
     arbeidstakerAndel4.inntektPrMnd = 30000;
@@ -445,7 +446,7 @@ describe('<BgFaktaUtils>', () => {
     };
     const andelFieldValue = {
       ...andelValuesMedInntektsmelding,
-      ...setGenerellAndelsinfo(arbeidstakerAndel4, agOpplysning, {}),
+      ...setGenerellAndelsinfo(arbeidstakerAndel4, agOpplysning, {} as AlleKodeverk),
     };
     const faktaOmBeregningCopy = { ...faktaOmBeregning };
     arbeidstakerAndel4.inntektPrMnd = null;

@@ -8,7 +8,7 @@ import {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import { Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
+import { Aksjonspunkt, AlleKodeverk, Behandling } from '@fpsak-frontend/types';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
@@ -40,7 +40,7 @@ describe('<AdopsjonVilkarForm>', () => {
       initialValues={{
         erVilkarOk: true,
       }}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       originalErVilkarOk
       erIkkeGodkjentAvBeslutter={false}
     />);
@@ -72,7 +72,7 @@ describe('<AdopsjonVilkarForm>', () => {
       initialValues={{
         erVilkarOk: true,
       }}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       originalErVilkarOk
       erIkkeGodkjentAvBeslutter={false}
     />);
@@ -108,7 +108,7 @@ describe('<AdopsjonVilkarForm>', () => {
       initialValues={{
         erVilkarOk: true,
       }}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       originalErVilkarOk
       erIkkeGodkjentAvBeslutter={false}
     />);

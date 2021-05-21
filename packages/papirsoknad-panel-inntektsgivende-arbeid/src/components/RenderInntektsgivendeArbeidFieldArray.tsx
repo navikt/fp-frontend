@@ -11,7 +11,7 @@ import {
 import {
   DatepickerField, InputField, SelectField, PeriodFieldArray,
 } from '@fpsak-frontend/form';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import styles from './renderInntektsgivendeArbeidFieldArray.less';
@@ -38,7 +38,7 @@ interface OwnProps {
   fields: FieldArrayFieldsProps<any>;
   meta: FieldArrayMetaProps;
   readOnly: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
 }
 
 /**

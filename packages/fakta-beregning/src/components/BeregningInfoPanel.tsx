@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
-import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, AlleKodeverk } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
@@ -24,7 +24,7 @@ type OwnProps = {
   aksjonspunkter: Aksjonspunkt[];
   submittable: boolean;
   erOverstyrer: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   beregningsgrunnlag?: Beregningsgrunnlag;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };

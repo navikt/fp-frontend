@@ -5,7 +5,7 @@ import { shallow } from 'enzyme/build';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import {
-  Beregningsgrunnlag, Vilkar, Aksjonspunkt,
+  Beregningsgrunnlag, Vilkar, Aksjonspunkt, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import BeregningFP from './BeregningFP';
 import BeregningForm from './beregningForm/BeregningForm';
@@ -81,7 +81,7 @@ describe('<BeregningFP>', () => {
       submitCallback={sinon.spy}
       beregningsgrunnlag={lagBeregningsgrunnlag(true, 100000, 100000, null, null)}
       vilkar={vilkar as Vilkar[]}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       aksjonspunkter={gjeldendeAksjonspunkter}
       readOnlySubmitButton
       arbeidsgiverOpplysningerPerId={{}}
@@ -101,7 +101,7 @@ describe('<BeregningFP>', () => {
       submitCallback={sinon.spy}
       beregningsgrunnlag={null}
       vilkar={vilkar as Vilkar[]}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       aksjonspunkter={gjeldendeAksjonspunkter}
       readOnlySubmitButton
       arbeidsgiverOpplysningerPerId={{}}
@@ -118,7 +118,7 @@ describe('<BeregningFP>', () => {
     const wrapper = shallow(<BeregningFP
       readOnly={false}
       submitCallback={sinon.spy}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       beregningsgrunnlag={lagBeregningsgrunnlag(true, 250000, 250000, undefined, null) as Beregningsgrunnlag}
       vilkar={vilkar as Vilkar[]}
       aksjonspunkter={gjeldendeAksjonspunkter}
@@ -137,7 +137,7 @@ describe('<BeregningFP>', () => {
       beregningsgrunnlag={lagBeregningsgrunnlag(true, 250000, 250000, undefined, [{ test: 'test' }]) as Beregningsgrunnlag}
       vilkar={vilkar as Vilkar[]}
       aksjonspunkter={graderingAP}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       readOnlySubmitButton
       arbeidsgiverOpplysningerPerId={{}}
     />);
@@ -151,7 +151,7 @@ describe('<BeregningFP>', () => {
       beregningsgrunnlag={lagBeregningsgrunnlag(true, 250000, 250000, undefined, null) as Beregningsgrunnlag}
       vilkar={vilkar as Vilkar[]}
       aksjonspunkter={gjeldendeAksjonspunkter}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       readOnlySubmitButton
       arbeidsgiverOpplysningerPerId={{}}
     />);

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import { createIntl } from '@fpsak-frontend/utils';
 
@@ -15,7 +15,7 @@ interface OwnProps {
   form: string;
   soknadData: SoknadData;
   namePrefix: string;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   permisjonRettigheterPanel?: ReactNode;
 }
 

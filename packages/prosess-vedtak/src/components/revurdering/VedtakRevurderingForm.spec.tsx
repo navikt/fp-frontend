@@ -6,7 +6,7 @@ import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/int
 import BehandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Behandling, BeregningsresultatEs } from '@fpsak-frontend/types';
+import { AlleKodeverk, Behandling, BeregningsresultatEs } from '@fpsak-frontend/types';
 
 import { VedtakRevurderingForm } from './VedtakRevurderingForm';
 import VedtakAvslagArsakOgBegrunnelsePanel from './VedtakAvslagArsakOgBegrunnelsePanel';
@@ -91,7 +91,7 @@ describe('<VedtakRevurderingForm>', () => {
       ytelseTypeKode="ES"
       resultatstruktur={resultatstruktur}
       beregningErManueltFastsatt={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       submitCallback={() => undefined}
       clearFormField={() => undefined}
       onSubmit={() => undefined}
@@ -139,7 +139,7 @@ describe('<VedtakRevurderingForm>', () => {
       ytelseTypeKode="ES"
       resultatstruktur={resultatstruktur}
       beregningErManueltFastsatt={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       submitCallback={() => undefined}
       clearFormField={() => undefined}
       onSubmit={() => undefined}
@@ -165,7 +165,7 @@ describe('<VedtakRevurderingForm>', () => {
       ytelseTypeKode="ES"
       resultatstruktur={resultatstruktur}
       beregningErManueltFastsatt={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       submitCallback={() => undefined}
       clearFormField={() => undefined}
       onSubmit={() => undefined}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FamilieHendelse } from '@fpsak-frontend/types';
+import { AlleKodeverk, FamilieHendelse } from '@fpsak-frontend/types';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import MannAdoptererAleneFaktaForm from './MannAdoptererAleneFaktaForm';
@@ -22,7 +22,7 @@ describe('<MannAdoptererAleneFaktaForm>', () => {
       <MannAdoptererAleneFaktaForm
         readOnly={false}
         mannAdoptererAlene
-        alleKodeverk={{}}
+        alleKodeverk={{} as AlleKodeverk}
         alleMerknaderFraBeslutter={{}}
       />, messages,
     );

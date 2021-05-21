@@ -26,7 +26,7 @@ import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import {
   CheckboxField, DatepickerField, DecimalField, SelectField, PeriodFieldArray,
 } from '@fpsak-frontend/form';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import styles from './renderPermisjonPeriodeFieldArray.less';
 
@@ -76,7 +76,7 @@ interface PureOwnProps {
   meta: FieldArrayMetaProps;
   readOnly: boolean;
   sokerErMor: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   periodePrefix: string;
   namePrefix: string;
 }

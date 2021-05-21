@@ -11,6 +11,7 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import {
+  AlleKodeverk,
   Beregningsgrunnlag as BeregningsgrunnlagProp,
   SammenligningsgrunlagProp,
 } from '@fpsak-frontend/types';
@@ -197,7 +198,7 @@ describe('<BeregningForm>', () => {
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       submitCallback={sinon.spy}
       readOnlySubmitButton
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       vilkaarBG={getBGVilkar(mockVilkar)}
       arbeidsgiverOpplysningerPerId={{}}
       {...reduxFormPropsMock}
@@ -215,7 +216,7 @@ describe('<BeregningForm>', () => {
       readOnly={false}
       gjeldendeAksjonspunkter={apEttLukketOgEttApent}
       beregningsgrunnlag={lagBeregningsgrunnlag(0, 120000, 100000, 100)}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       submitCallback={sinon.spy}
       readOnlySubmitButton
@@ -231,7 +232,7 @@ describe('<BeregningForm>', () => {
       readOnly={false}
       gjeldendeAksjonspunkter={apEttLukketOgEttApent}
       beregningsgrunnlag={lagBeregningsgrunnlag(0, 120000, 100000, 100)}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       submitCallback={sinon.spy}
       readOnlySubmitButton
@@ -248,7 +249,7 @@ describe('<BeregningForm>', () => {
       readOnly={false}
       gjeldendeAksjonspunkter={apEttLukketOgEttApent}
       beregningsgrunnlag={lagBeregningsgrunnlag(0, 120000, 100000, 100)}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       submitCallback={sinon.spy}
       readOnlySubmitButton
@@ -270,7 +271,7 @@ describe('<BeregningForm>', () => {
       readOnly={false}
       gjeldendeAksjonspunkter={apEttLukketOgEttApent}
       beregningsgrunnlag={lagBeregningsgrunnlag(0, 100000, 100000, 100)}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       submitCallback={sinon.spy}
       readOnlySubmitButton
@@ -290,7 +291,7 @@ describe('<BeregningForm>', () => {
       readOnly={false}
       gjeldendeAksjonspunkter={apEttLukketOgEttApent}
       beregningsgrunnlag={lagBeregningsgrunnlag(0, 100000, 100000, 100)}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       submitCallback={sinon.spy}
       readOnlySubmitButton
@@ -309,7 +310,7 @@ describe('<BeregningForm>', () => {
       readOnly={false}
       gjeldendeAksjonspunkter={apEttLukketOgEttApent}
       beregningsgrunnlag={bg as BeregningsgrunnlagProp}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       submitCallback={sinon.spy}
       readOnlySubmitButton

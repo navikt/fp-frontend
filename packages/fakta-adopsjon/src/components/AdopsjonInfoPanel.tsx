@@ -9,7 +9,7 @@ import {
   FaktaBegrunnelseTextField, FaktaSubmitButton, isFieldEdited, FieldEditedInfo, FaktaBegrunnelseFormValues,
 } from '@fpsak-frontend/fakta-felles';
 import {
-  Aksjonspunkt, FamilieHendelse, Kodeverk, KodeverkMedNavn, Soknad,
+  Aksjonspunkt, FamilieHendelse, Kodeverk, AlleKodeverk, Soknad,
 } from '@fpsak-frontend/types';
 import {
   VerticalSpacer, AksjonspunktHelpTextTemp,
@@ -49,7 +49,7 @@ interface PureOwnProps {
   submittable: boolean;
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   hasOpenAksjonspunkter: boolean;
   isForeldrepengerFagsak: boolean;
   soknad: Soknad;

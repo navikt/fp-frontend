@@ -3,7 +3,7 @@ import sinon from 'sinon';
 
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import klageVurdering from '@fpsak-frontend/kodeverk/src/klageVurdering';
-import { KlageVurdering } from '@fpsak-frontend/types';
+import { AlleKodeverk, KlageVurdering } from '@fpsak-frontend/types';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 
 import { BehandleKlageFormNfpImpl } from './BehandleKlageFormNfp';
@@ -34,7 +34,7 @@ describe('<BehandleKlageFormNfpImpl>', () => {
       saveKlage={sinon.spy()}
       intl={intlMock}
       sprakkode={sprakkode}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       submitCallback={sinon.spy()}
       klageVurdering={{} as KlageVurdering}
       {...reduxFormPropsMock}
@@ -54,7 +54,7 @@ describe('<BehandleKlageFormNfpImpl>', () => {
       saveKlage={sinon.spy()}
       intl={intlMock}
       sprakkode={sprakkode}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       submitCallback={sinon.spy()}
       klageVurdering={{} as KlageVurdering}
       {...reduxFormPropsMock}
@@ -78,7 +78,7 @@ describe('<BehandleKlageFormNfpImpl>', () => {
       saveKlage={sinon.spy()}
       intl={intlMock}
       sprakkode={sprakkode}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       submitCallback={sinon.spy()}
       klageVurdering={{} as KlageVurdering}
       {...reduxFormPropsMock}

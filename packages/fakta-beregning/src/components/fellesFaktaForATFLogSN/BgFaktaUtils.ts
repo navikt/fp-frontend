@@ -11,7 +11,8 @@ import {
   FaktaOmBeregning,
   ArbeidsgiverOpplysningerPerId,
   Beregningsgrunnlag,
-  KodeverkMedNavn, ATFLSammeOrgAndel,
+  ATFLSammeOrgAndel,
+  AlleKodeverk,
 } from '@fpsak-frontend/types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { lonnsendringField } from './vurderOgFastsettATFL/forms/LonnsendringForm';
@@ -40,7 +41,7 @@ export const setArbeidsforholdInitialValues = (andel: AndelForFaktaOmBeregning) 
 
 const lagVisningsnavn = (andel: AndelForFaktaOmBeregning,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]}): string => {
+  alleKodeverk: AlleKodeverk): string => {
   const agOpplysning = andel.arbeidsforhold ? arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent] : undefined;
   if (!agOpplysning) {
     return andel.arbeidsforhold && andel.arbeidsforhold.arbeidsforholdType
@@ -52,7 +53,7 @@ const lagVisningsnavn = (andel: AndelForFaktaOmBeregning,
 
 export const setGenerellAndelsinfo = (andel: AndelForFaktaOmBeregning,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]}) => ({
+  alleKodeverk: AlleKodeverk) => ({
   andel: lagVisningsnavn(andel, arbeidsgiverOpplysningerPerId, alleKodeverk),
   aktivitetStatus: andel.aktivitetStatus.kode,
   andelsnr: andel.andelsnr,
@@ -244,7 +245,7 @@ export const mapToBelop = (skalRedigereInntekt) => (andel) => {
 
 export const mapAndelToField = (andel: AndelForFaktaOmBeregning,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]}): AndelFieldValue => ({
+  alleKodeverk: AlleKodeverk): AndelFieldValue => ({
   ...setGenerellAndelsinfo(andel, arbeidsgiverOpplysningerPerId, alleKodeverk),
   ...setArbeidsforholdInitialValues(andel),
   ...mapAndelFieldIdentifikator(andel),

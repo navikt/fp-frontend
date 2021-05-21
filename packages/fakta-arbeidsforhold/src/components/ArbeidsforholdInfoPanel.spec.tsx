@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
-import { Arbeidsforhold } from '@fpsak-frontend/types';
+import { AlleKodeverk, Arbeidsforhold } from '@fpsak-frontend/types';
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import messages from '../../i18n/nb_NO.json';
@@ -46,7 +46,7 @@ describe('<ArbeidsforholdInfoPanel>', () => {
         readOnly={false}
         hasOpenAksjonspunkter
         skalKunneLeggeTilNyeArbeidsforhold={false}
-        alleKodeverk={{}}
+        alleKodeverk={{} as AlleKodeverk}
         alleMerknaderFraBeslutter={{}}
         arbeidsforhold={[]}
         submitCallback={() => undefined}
@@ -68,7 +68,7 @@ describe('<ArbeidsforholdInfoPanel>', () => {
         readOnly={false}
         hasOpenAksjonspunkter
         skalKunneLeggeTilNyeArbeidsforhold
-        alleKodeverk={{}}
+        alleKodeverk={{} as AlleKodeverk}
         alleMerknaderFraBeslutter={{}}
         arbeidsforhold={[]}
         submitCallback={() => undefined}
@@ -90,7 +90,7 @@ describe('<ArbeidsforholdInfoPanel>', () => {
         readOnly={false}
         hasOpenAksjonspunkter={false}
         skalKunneLeggeTilNyeArbeidsforhold
-        alleKodeverk={{}}
+        alleKodeverk={{} as AlleKodeverk}
         alleMerknaderFraBeslutter={{}}
         arbeidsforhold={[]}
         submitCallback={() => undefined}

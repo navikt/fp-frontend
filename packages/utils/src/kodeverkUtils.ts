@@ -1,7 +1,7 @@
-import { KodeverkMedNavn, Kodeverk } from '@fpsak-frontend/types';
+import { Kodeverk, AlleKodeverk, AlleKodeverkTilbakekreving } from '@fpsak-frontend/types';
 
 export const getKodeverknavnFraKode = (
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]},
+  alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving,
   kodeverkType: string,
   kode: string,
   undertype?: string,
@@ -20,7 +20,7 @@ export const getKodeverknavnFraKode = (
 };
 
 export const getKodeverknavnFn = (
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]},
+  alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving,
   kodeverkTyper: {[key: string]: string},
 ) => (
   kodeverkOjekt: Kodeverk,

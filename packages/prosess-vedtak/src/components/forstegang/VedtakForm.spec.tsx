@@ -7,7 +7,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import BehandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import { Behandling, BeregningsresultatEs } from '@fpsak-frontend/types';
+import { AlleKodeverk, Behandling, BeregningsresultatEs } from '@fpsak-frontend/types';
 
 import VedtakFellesPanel from '../felles/VedtakFellesPanel';
 import { VedtakForm } from './VedtakForm';
@@ -63,7 +63,7 @@ describe('<VedtakForm>', () => {
       resultatstruktur={{
         antallBarn: 2,
       } as BeregningsresultatEs}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       initialValues={initialValues}
       vilkar={[]}
       beregningErManueltFastsatt={false}
@@ -114,7 +114,7 @@ describe('<VedtakForm>', () => {
       resultatstruktur={{
         antallBarn: 2,
       } as BeregningsresultatEs}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       initialValues={initialValues}
       vilkar={[]}
       beregningErManueltFastsatt={false}

@@ -21,7 +21,7 @@ import {
   ProsessStegBegrunnelseTextField, ProsessStegSubmitButton,
 } from '@fpsak-frontend/prosess-felles';
 import {
-  Aksjonspunkt, Behandling, FamilieHendelse, Kodeverk, KodeverkMedNavn, Soknad, Vilkar,
+  Aksjonspunkt, AlleKodeverk, Behandling, FamilieHendelse, Kodeverk, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
 import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SoknadsfristAp from '@fpsak-frontend/types-avklar-aksjonspunkter/src/prosess/SoknadsfristAp';
@@ -54,7 +54,7 @@ interface PureOwnProps {
   submitCallback: (aksjonspunktData: SoknadsfristAp) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
 }
 
 interface MappedOwnProps {

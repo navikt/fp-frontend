@@ -9,7 +9,7 @@ import { omit } from '@fpsak-frontend/utils';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { SoknadData, getRegisteredFields } from '@fpsak-frontend/papirsoknad-felles';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 import MottattDatoPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-mottatt-dato';
 import FrilansPapirsoknadIndex, { FormValues as FrilansFormValues } from '@fpsak-frontend/papirsoknad-panel-frilans';
 import OppholdINorgePapirsoknadIndex, { FormValues as OppholdFormValues } from '@fpsak-frontend/papirsoknad-panel-opphold-i-norge';
@@ -40,7 +40,7 @@ interface PureOwnProps {
   onSubmitUfullstendigsoknad: () => Promise<any>;
   readOnly: boolean;
   soknadData: SoknadData;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   fagsakPersonnummer: string;
 }
 

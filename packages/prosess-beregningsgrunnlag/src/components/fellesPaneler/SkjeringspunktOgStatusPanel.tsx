@@ -14,7 +14,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import { EtikettInfo } from 'nav-frontend-etiketter';
 
-import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, Kodeverk } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import styles from './skjeringspunktOgStatusPanel.less';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
@@ -51,7 +51,7 @@ type MappedOwnProps = {
 type OwnProps = {
     skjeringstidspunktDato: string;
     aktivitetStatusList: Kodeverk[];
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
 };
 
 /**

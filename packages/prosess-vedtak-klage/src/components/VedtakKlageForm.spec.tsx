@@ -5,7 +5,7 @@ import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
-import { Behandling, KlageVurdering } from '@fpsak-frontend/types';
+import { AlleKodeverk, Behandling, KlageVurdering } from '@fpsak-frontend/types';
 
 import { getAvvisningsAarsaker, getIsAvvist, VedtakKlageForm } from './VedtakKlageForm';
 import messages from '../../i18n/nb_NO.json';
@@ -45,7 +45,7 @@ describe('<VedtakKlageForm>', () => {
         }, {
           kode: 'KLAGER_IKKE_PART', navn: 'Klager er ikke part', kodeverk: 'KLAGE_AVVIST_AARSAK',
         }],
-      }}
+      } as AlleKodeverk}
       klageVurdering={{} as KlageVurdering}
       aksjonspunkter={[]}
       submitCallback={() => undefined}

@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { Arbeidsforhold } from '@fpsak-frontend/types';
+import { AlleKodeverk, Arbeidsforhold } from '@fpsak-frontend/types';
 
 import { PersonAksjonspunktTextImpl } from './PersonAksjonspunktText';
 
@@ -27,7 +27,7 @@ describe('<PersonAksjonspunktText>', () => {
       kodeverk: '',
       navn: 'Permisjon',
     }],
-  };
+  } as AlleKodeverk;
 
   it('skal ikke vise hjelpetekst når en ikke har arbeidsforhold', () => {
     const wrapper = shallow(<PersonAksjonspunktTextImpl

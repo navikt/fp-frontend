@@ -5,6 +5,7 @@ import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/int
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import { FormkravKlageForm } from './FormkravKlageForm';
 import messages from '../../i18n/nb_NO.json';
@@ -60,7 +61,7 @@ describe('<FormkravKlageForm>', () => {
           navn: 'Tilbakekreving',
           kodeverk: 'BEHANDLING_TYPE',
         }],
-      }}
+      } as AlleKodeverk}
     />, messages);
     const vedtakSelect = wrapper.find('SelectField');
     expect(vedtakSelect).toHaveLength(1);

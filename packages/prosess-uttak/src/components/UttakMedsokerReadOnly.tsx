@@ -5,7 +5,7 @@ import { Element } from 'nav-frontend-typografi';
 
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
 import { FloatRight } from '@fpsak-frontend/shared-components';
-import { ArbeidsgiverOpplysningerPerId, Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, Behandling, AlleKodeverk } from '@fpsak-frontend/types';
 
 import UttakActivity from './UttakActivity';
 import { PeriodeMedClassName } from './Uttak';
@@ -18,7 +18,7 @@ interface OwnProps {
   callbackUpdateActivity: (data: PeriodeMedClassName) => void;
   callbackCancelSelectedActivity: () => void;
   harSoktOmFlerbarnsdager: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }

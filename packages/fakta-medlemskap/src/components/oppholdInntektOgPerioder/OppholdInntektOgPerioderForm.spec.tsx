@@ -6,7 +6,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
-import { Medlemskap, Soknad } from '@fpsak-frontend/types';
+import { AlleKodeverk, Medlemskap, Soknad } from '@fpsak-frontend/types';
 
 import { FormValues as OppholdFormValues } from './OppholdInntektOgPeriodeForm';
 import { OppholdInntektOgPerioderForm, transformValues, FormValues } from './OppholdInntektOgPerioderForm';
@@ -28,7 +28,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       perioder={perioder}
       readOnly
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       reduxFormReset={() => undefined}
       reduxFormChange={() => undefined}
       soknad={{} as Soknad}
@@ -72,7 +72,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       submittable
       readOnly={false}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       reduxFormReset={() => undefined}
       reduxFormChange={() => undefined}
       soknad={{} as Soknad}
@@ -119,7 +119,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       submittable
       readOnly={false}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       reduxFormReset={() => undefined}
       reduxFormChange={() => undefined}
       soknad={{} as Soknad}
@@ -163,7 +163,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       submittable
       readOnly={false}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       reduxFormReset={() => undefined}
       reduxFormChange={() => undefined}
       soknad={{} as Soknad}
@@ -207,7 +207,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       submittable
       readOnly={false}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       reduxFormReset={() => undefined}
       reduxFormChange={() => undefined}
       soknad={{} as Soknad}
@@ -251,7 +251,7 @@ describe('<OppholdInntektOgPerioderForm>', () => {
       submittable
       readOnly={false}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       reduxFormReset={() => undefined}
       reduxFormChange={() => undefined}
       soknad={{} as Soknad}

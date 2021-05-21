@@ -6,7 +6,7 @@ import Lenkepanel from 'nav-frontend-lenkepanel';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import VisittkortSakIndex from '@fpsak-frontend/sak-visittkort';
-import { Fagsak, FagsakPerson, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Fagsak, FagsakPerson, AlleKodeverk } from '@fpsak-frontend/types';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';
 
 import styles from './aktoerGrid.less';
@@ -16,7 +16,7 @@ interface OwnProps {
     fagsaker: Fagsak[];
     person: FagsakPerson;
   };
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   finnPathToFagsak: (saksnummer: string) => string;
 }
 

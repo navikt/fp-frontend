@@ -7,7 +7,7 @@ import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
 import {
-  AktivitetIdentifikator, AktivitetSaldo, UttakStonadskontoer, Stonadskonto,
+  AktivitetIdentifikator, AktivitetSaldo, UttakStonadskontoer, Stonadskonto, AlleKodeverk,
 } from '@fpsak-frontend/types';
 
 import { kalkulerTrekkdager, UttakTimeLineData } from './UttakTimeLineData';
@@ -107,7 +107,7 @@ describe('<UttakTimeLineData>', () => {
       navn: 'Avsluttet',
       kodeverk: 'BEHANDLING_STATUS',
     }],
-  };
+  } as AlleKodeverk;
 
   const arbeidsgiverOpplysningerPerId = {
     910909088: {

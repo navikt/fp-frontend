@@ -7,7 +7,7 @@ import dokumentTypeId from '@fpsak-frontend/kodeverk/src/dokumentTypeId';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { Table, TableRow } from '@fpsak-frontend/shared-components';
 import {
-  Aksjonspunkt, Behandling, KodeverkMedNavn, ManglendeVedleggSoknad, Soknad,
+  Aksjonspunkt, AlleKodeverk, Behandling, KodeverkMedNavn, ManglendeVedleggSoknad, Soknad,
 } from '@fpsak-frontend/types';
 
 import { buildInitialValues, getSortedManglendeVedlegg, SokersOpplysningspliktFormImpl } from './SokersOpplysningspliktForm';
@@ -73,7 +73,7 @@ describe('<SokersOpplysningspliktForm>', () => {
       aksjonspunkter={[]}
       status="test"
       submitCallback={sinon.spy()}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       originalErVilkarOk
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       erIkkeGodkjentAvBeslutter={false}
@@ -115,7 +115,7 @@ describe('<SokersOpplysningspliktForm>', () => {
       aksjonspunkter={[]}
       status="test"
       submitCallback={sinon.spy()}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       originalErVilkarOk
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       erIkkeGodkjentAvBeslutter={false}

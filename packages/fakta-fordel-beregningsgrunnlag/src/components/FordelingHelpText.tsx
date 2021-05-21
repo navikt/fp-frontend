@@ -13,7 +13,7 @@ import {
   ArbeidsforholdTilFordeling,
   ArbeidsgiverOpplysningerPerId,
   Kodeverk,
-  KodeverkMedNavn, PerioderMedGraderingEllerRefusjon,
+  AlleKodeverk, PerioderMedGraderingEllerRefusjon,
 } from '@fpsak-frontend/types';
 import { createVisningsnavnForAktivitetFordeling } from './util/visningsnavnHelper';
 
@@ -192,7 +192,7 @@ type OwnProps = {
 
 type OwnInitialProps = {
   beregningsgrunnlag: Beregningsgrunnlag;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   aksjonspunkter: Aksjonspunkt[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }

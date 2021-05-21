@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 
-import { Behandlingsresultat } from '@fpsak-frontend/types';
+import { AlleKodeverk, Behandlingsresultat } from '@fpsak-frontend/types';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 
 import VedtakAvslagArsakOgBegrunnelsePanel from './VedtakAvslagArsakOgBegrunnelsePanel';
@@ -31,7 +31,7 @@ describe('<VedtakAvslagArsakOgBegrunnelsePanel>', () => {
       behandlingsresultat={behandlingsresultat as Behandlingsresultat}
       sprakkode={sprakkode}
       readOnly
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       skalBrukeOverstyrendeFritekstBrev={false}
     />);
 

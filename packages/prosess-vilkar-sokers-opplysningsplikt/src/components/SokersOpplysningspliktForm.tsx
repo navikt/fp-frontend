@@ -26,7 +26,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import dokumentTypeId from '@fpsak-frontend/kodeverk/src/dokumentTypeId';
 import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, Kodeverk, KodeverkMedNavn, ManglendeVedleggSoknad, Soknad, ArbeidsgiverOpplysninger,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, Kodeverk, KodeverkMedNavn, ManglendeVedleggSoknad, Soknad, ArbeidsgiverOpplysninger, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import { BekreftSokersOpplysningspliktManuAp, OverstyringSokersOpplysingspliktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -92,7 +92,7 @@ interface PureOwnProps {
   submitCallback: (aksjonspunktData: BekreftSokersOpplysningspliktManuAp | OverstyringSokersOpplysingspliktAp) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   erIkkeGodkjentAvBeslutter: boolean;
 }

@@ -13,7 +13,9 @@ import {
 } from '@fpsak-frontend/prosess-felles';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import { Aksjonspunkt, Behandling, KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, AlleKodeverk, Behandling, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
 import { OmsorgsvilkarAp, VurdereYtelseSammeBarnAnnenForelderAp, VurdereYtelseSammeBarnSokerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 type FormValues = {
@@ -32,7 +34,7 @@ interface PureOwnProps {
   submitCallback: (aksjonspunktData: AksjonspunktData) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   erIkkeGodkjentAvBeslutter: boolean;
 }
 

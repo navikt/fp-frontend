@@ -10,7 +10,7 @@ import moment from 'moment';
 import { ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Arbeidsforhold, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Arbeidsforhold, ArbeidsgiverOpplysningerPerId, AlleKodeverk } from '@fpsak-frontend/types';
 
 import ArbeidsforholdHandling from '../kodeverk/arbeidsforholdHandling';
 import AktivtArbeidsforholdHandling from '../kodeverk/aktivtArbeidsforholdHandling';
@@ -208,7 +208,7 @@ interface PureOwnProps {
   readOnly: boolean;
   skalKunneLeggeTilNyeArbeidsforhold: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 

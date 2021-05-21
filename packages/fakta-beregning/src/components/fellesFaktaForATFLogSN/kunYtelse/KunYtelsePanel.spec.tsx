@@ -1,4 +1,6 @@
 import inntektskategorier from '@fpsak-frontend/kodeverk/src/inntektskategorier';
+import { AlleKodeverk } from '@fpsak-frontend/types';
+
 import KunYtelsePanel, { brukersAndelFieldArrayName } from './KunYtelsePanel';
 import { besteberegningField } from './KunYtelseBesteberegningPanel';
 
@@ -33,7 +35,7 @@ const alleKodeverk = {
       kodeverk: 'AKTIVITET_STATUS',
     },
   ],
-};
+} as AlleKodeverk;
 
 const faktaOmBeregningAndeler = [faktaOmBeregningAndel1, faktaOmBeregningAndel2];
 

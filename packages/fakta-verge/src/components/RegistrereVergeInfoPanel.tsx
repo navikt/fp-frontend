@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 
-import { Aksjonspunkt, KodeverkMedNavn, Verge } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, KodeverkMedNavn, Verge, AlleKodeverk,
+} from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -20,7 +22,7 @@ type FormValues = RegistrereFormValues & {
 interface PureOwnProps {
   submitCallback: (aksjonspunktData: AvklarVergeAp) => Promise<void>;
   aksjonspunkter: Aksjonspunkt[];
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   verge: Verge;
   hasOpenAksjonspunkter: boolean;
   submittable?: boolean;

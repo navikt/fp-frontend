@@ -8,7 +8,7 @@ import NavBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import ForeldelseProsessIndex from '@fpsak-frontend/prosess-foreldelse';
-import { Behandling, FeilutbetalingPerioderWrapper } from '@fpsak-frontend/types';
+import { AlleKodeverkTilbakekreving, Behandling, FeilutbetalingPerioderWrapper } from '@fpsak-frontend/types';
 
 const perioderForeldelse = {
   perioder: [{
@@ -71,7 +71,7 @@ const alleKodeverk = {
       kodeverk: 'FORELDELSE_VURDERING',
     },
   ],
-};
+} as AlleKodeverkTilbakekreving;
 
 const merknaderFraBeslutter = {
   notAccepted: false,

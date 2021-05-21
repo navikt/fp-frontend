@@ -8,7 +8,9 @@ import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { Behandling, Aksjonspunkt, KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  Behandling, Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving,
+} from '@fpsak-frontend/types';
 
 const EMPTY_ARRAY = [] as Aksjonspunkt[];
 
@@ -21,7 +23,7 @@ export type SettPaVentParams = {
 
 interface BehandlingPaVentProps {
   behandling: Behandling;
-  kodeverk: {[key: string]: KodeverkMedNavn[]};
+  kodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
   requestApi: AbstractRequestApi;
   oppdaterPaVentKey: RestKey<void, SettPaVentParams>;
   aksjonspunktKey: RestKey<Aksjonspunkt[], void>;

@@ -13,7 +13,7 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { DDMMYYYY_DATE_FORMAT, required } from '@fpsak-frontend/utils';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
-  Aksjonspunkt, Kodeverk, KodeverkMedNavn, MedlemPeriode, Medlemskap, Soknad,
+  Aksjonspunkt, Kodeverk, KodeverkMedNavn, MedlemPeriode, Medlemskap, Soknad, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import { formValueSelector } from 'redux-form';
 
@@ -51,7 +51,7 @@ type TransformedValues = {
 
 interface PureOwnProps {
   id: string;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
 }

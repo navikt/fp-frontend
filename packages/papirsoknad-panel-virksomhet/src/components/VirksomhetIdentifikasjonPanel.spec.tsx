@@ -2,6 +2,7 @@ import React from 'react';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import messages from '../../i18n/nb_NO.json';
 import { VirksomhetIdentifikasjonPanel } from './VirksomhetIdentifikasjonPanel';
@@ -14,7 +15,7 @@ describe('<VirksomhetIdentifikasjonPanel>', () => {
       intl={intlMock}
       alleKodeverk={{
         [kodeverkTyper.LANDKODER]: [],
-      }}
+      } as AlleKodeverk}
       form="test"
     />, messages);
 
@@ -40,7 +41,7 @@ describe('<VirksomhetIdentifikasjonPanel>', () => {
       virksomhetRegistrertINorge
       alleKodeverk={{
         [kodeverkTyper.LANDKODER]: [],
-      }}
+      } as AlleKodeverk}
       intl={intlMock}
       form="test"
     />, messages);
@@ -56,7 +57,7 @@ describe('<VirksomhetIdentifikasjonPanel>', () => {
       virksomhetRegistrertINorge={false}
       alleKodeverk={{
         [kodeverkTyper.LANDKODER]: [],
-      }}
+      } as AlleKodeverk}
       intl={intlMock}
       form="test"
     />, messages);

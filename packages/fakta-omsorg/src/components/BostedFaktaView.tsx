@@ -4,7 +4,7 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { FaktaGruppe } from '@fpsak-frontend/shared-components';
-import { KodeverkMedNavn, Personoversikt } from '@fpsak-frontend/types';
+import { AlleKodeverk, Personoversikt } from '@fpsak-frontend/types';
 
 import BostedBarnView from './BostedBarnView';
 import BostedSokerView from './BostedSokerView';
@@ -14,7 +14,7 @@ import styles from './bostedFaktaView.less';
 interface OwnProps {
   personoversikt: Personoversikt;
   className?: string;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
 }
 
 const BostedFaktaView: FunctionComponent<OwnProps & WrappedComponentProps> = ({

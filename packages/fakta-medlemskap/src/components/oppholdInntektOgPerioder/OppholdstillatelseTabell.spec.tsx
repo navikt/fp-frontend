@@ -6,6 +6,7 @@ import {
   TableRow, TableColumn, PeriodLabel, DateLabel,
 } from '@fpsak-frontend/shared-components';
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import OppholdstillatelseTabell from './OppholdstillatelseTabell';
 import messages from '../../../i18n/nb_NO.json';
@@ -36,7 +37,7 @@ describe('<OppholdstillatelseTabell>', () => {
           navn: 'Midlertidig',
           kodeverk: '',
         }],
-      }}
+      } as AlleKodeverk}
     />);
 
     const rader = wrapper.find(TableRow);

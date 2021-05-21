@@ -1,24 +1,26 @@
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  AlleKodeverk, AlleKodeverkTilbakekreving, Kodeverk, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 class MenyKodeverk {
   $$behandlingType?: Kodeverk;
 
-  $$fpSakKodeverk: {[key: string]: KodeverkMedNavn[]} = {};
+  $$fpSakKodeverk: AlleKodeverk;
 
-  $$fpTilbakeKodeverk: {[key: string]: KodeverkMedNavn[]} = {};
+  $$fpTilbakeKodeverk: AlleKodeverkTilbakekreving;
 
   constructor(behandlingType?: Kodeverk) {
     this.$$behandlingType = behandlingType;
   }
 
-  medFpSakKodeverk(fpSakKodeverk: {[key: string]: KodeverkMedNavn[]}): this {
+  medFpSakKodeverk(fpSakKodeverk: AlleKodeverk): this {
     this.$$fpSakKodeverk = fpSakKodeverk;
     return this;
   }
 
-  medFpTilbakeKodeverk(fpTilbakeKodeverk: {[key: string]: KodeverkMedNavn[]} = {}): this {
+  medFpTilbakeKodeverk(fpTilbakeKodeverk: AlleKodeverkTilbakekreving): this {
     this.$$fpTilbakeKodeverk = fpTilbakeKodeverk;
     return this;
   }
@@ -27,7 +29,10 @@ class MenyKodeverk {
     if (behandlingTypeKode === BehandlingType.TILBAKEKREVING || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING) {
       return this.$$fpTilbakeKodeverk[kodeverkType];
     }
-    return this.$$fpSakKodeverk[kodeverkType];
+    if (kodeverkType !== KodeverkType.AVSLAGSARSAK) {
+      return this.$$fpSakKodeverk[kodeverkType];
+    }
+    throw new Error('Avslagsårsak ikke støttet');
   }
 
   getKodeverkForValgtBehandling(kodeverkType: KodeverkType): KodeverkMedNavn[] {

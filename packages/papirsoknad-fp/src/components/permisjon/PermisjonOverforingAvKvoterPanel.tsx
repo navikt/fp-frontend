@@ -10,7 +10,7 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import overforingArsak from '@fpsak-frontend/kodeverk/src/overforingArsak';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { hasValidPeriodIncludingOtherErrors } from '@fpsak-frontend/utils';
 
 import RenderOverforingAvKvoterFieldArray from './RenderOverforingAvKvoterFieldArray';
@@ -40,7 +40,7 @@ interface PureOwnProps {
   soknadData: SoknadData;
   readOnly: boolean;
   visFeilMelding: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   form: string;
   namePrefix: string;
 }

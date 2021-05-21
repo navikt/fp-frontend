@@ -10,7 +10,7 @@ import { Undertittel } from 'nav-frontend-typografi';
 
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { getRegisteredFields } from '@fpsak-frontend/papirsoknad-felles';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import VirksomhetIdentifikasjonPanel from './VirksomhetIdentifikasjonPanel';
 import VirksomhetRegnskapPanel from './VirksomhetRegnskapPanel';
@@ -27,7 +27,7 @@ interface OwnProps {
   showModal?: boolean;
   closeEvent: () => void;
   readOnly?: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
 }
 
 /**

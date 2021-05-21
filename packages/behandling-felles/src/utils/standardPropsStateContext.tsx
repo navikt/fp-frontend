@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 
 import {
-  AksessRettigheter, Behandling, Fagsak, KodeverkMedNavn,
+  AksessRettigheter, Behandling, Fagsak, AlleKodeverk, AlleKodeverkTilbakekreving,
 } from '@fpsak-frontend/types';
 
 type InputValues = {
@@ -14,7 +14,7 @@ type InputValues = {
   lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<Behandling>,
   lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<Behandling>,
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
 }
 
 type OwnProps = {

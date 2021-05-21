@@ -9,7 +9,7 @@ import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import EngangsstonadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-es';
 import ForeldrepengerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-fp';
 import SvangerskapspengerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-svp';
-import { Fagsak } from '@fpsak-frontend/types';
+import { AlleKodeverk, Fagsak } from '@fpsak-frontend/types';
 
 import RegistrerPapirsoknadPanel from './RegistrerPapirsoknadPanel';
 import SoknadTypePickerForm from './SoknadTypePickerForm';
@@ -31,7 +31,7 @@ describe('<RegistrerPapirsoknadPanel>', () => {
     const wrapper = shallow(<RegistrerPapirsoknadPanel
       fagsak={fagsak}
       fagsakPersonnummer="12343541"
-      kodeverk={{}}
+      kodeverk={{} as AlleKodeverk}
       readOnly={false}
       soknadData={new SoknadData('ES', 'TEST', 'TEST')}
       setSoknadData={sinon.spy()}
@@ -49,7 +49,7 @@ describe('<RegistrerPapirsoknadPanel>', () => {
     const wrapper = shallow(<RegistrerPapirsoknadPanel
       fagsak={fagsak}
       fagsakPersonnummer="12343541"
-      kodeverk={{}}
+      kodeverk={{} as AlleKodeverk}
       readOnly
       soknadData={new SoknadData(fagsakYtelseType.FORELDREPENGER, 'TEST', 'TEST')}
       setSoknadData={sinon.spy()}
@@ -71,7 +71,7 @@ describe('<RegistrerPapirsoknadPanel>', () => {
         },
       }}
       fagsakPersonnummer="12343541"
-      kodeverk={{}}
+      kodeverk={{} as AlleKodeverk}
       readOnly
       soknadData={new SoknadData(fagsakYtelseType.SVANGERSKAPSPENGER, 'TEST', 'TEST')}
       setSoknadData={sinon.spy()}

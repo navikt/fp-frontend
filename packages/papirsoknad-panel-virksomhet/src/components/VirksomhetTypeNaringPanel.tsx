@@ -8,7 +8,7 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { CheckboxField } from '@fpsak-frontend/form';
 import naringsvirksomhetType from '@fpsak-frontend/kodeverk/src/naringsvirksomhetType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 const naringsvirksomhetTypeOrder = {
   [naringsvirksomhetType.DAGMAMMA]: 1,
@@ -26,7 +26,7 @@ const compare = (arg1: number, arg2: number): number => {
 
 interface PureOwnProps {
   readOnly: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
 }
 
 interface MappedOwnProps {

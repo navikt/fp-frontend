@@ -13,7 +13,7 @@ import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form'
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { DATE_TIME_FORMAT, required, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { KlageVurdering, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, KlageVurdering, Kodeverk } from '@fpsak-frontend/types';
 
 import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
 import styles from './formkravKlageForm.less';
@@ -47,7 +47,7 @@ interface OwnProps {
   aksjonspunktCode: string;
   readOnly?: boolean;
   readOnlySubmitButton?: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
 }
 
 /**

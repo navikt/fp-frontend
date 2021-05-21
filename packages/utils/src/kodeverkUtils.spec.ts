@@ -2,6 +2,7 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import arbeidType from '@fpsak-frontend/kodeverk/src/arbeidType';
 import avslagsarsakCodes from '@fpsak-frontend/kodeverk/src/avslagsarsakCodes';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import { getKodeverknavnFn, getKodeverknavnFraKode } from './kodeverkUtils';
 
@@ -13,7 +14,7 @@ describe('<kodeverkUtils>', () => {
         kodeverk: 'ARBEID_TYPE',
         navn: 'Lønn under utdanning',
       }],
-    };
+    } as AlleKodeverk;
 
     const kodeverkType = kodeverkTyper.ARBEID_TYPE;
     const kode = arbeidType.LONN_UNDER_UTDANNING;
@@ -30,7 +31,7 @@ describe('<kodeverkUtils>', () => {
         kodeverk: 'ARBEID_TYPE',
         navn: 'Lønn under utdanning',
       }],
-    };
+    } as AlleKodeverk;
 
     const kodeverk = {
       kodeverk: 'ARBEID_TYPE',

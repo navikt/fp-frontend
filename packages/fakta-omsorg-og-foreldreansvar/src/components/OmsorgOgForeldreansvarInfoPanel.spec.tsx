@@ -5,7 +5,9 @@ import relatertYtelseType from '@fpsak-frontend/kodeverk/src/relatertYtelseType'
 import { FaktaBegrunnelseTextField } from '@fpsak-frontend/fakta-felles';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { FamilieHendelse, Personoversikt, Soknad } from '@fpsak-frontend/types';
+import {
+  AlleKodeverk, FamilieHendelse, Personoversikt, Soknad,
+} from '@fpsak-frontend/types';
 
 import messages from '../../i18n/nb_NO.json';
 import OmsorgOgForeldreansvarFaktaForm from './OmsorgOgForeldreansvarFaktaForm';
@@ -37,7 +39,7 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       innvilgetRelatertTilgrensendeYtelserForAnnenForelder={[]}
       aksjonspunkter={[]}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
     />);
@@ -68,7 +70,7 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       innvilgetRelatertTilgrensendeYtelserForAnnenForelder={[]}
       aksjonspunkter={[]}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
     />);
@@ -94,7 +96,7 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       innvilgetRelatertTilgrensendeYtelserForAnnenForelder={[]}
       aksjonspunkter={[]}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
     />);
@@ -120,7 +122,7 @@ describe('<OmsorgOgForeldreansvarInfoPanel>', () => {
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
       innvilgetRelatertTilgrensendeYtelserForAnnenForelder={[]}
       aksjonspunkter={[]}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
     />);

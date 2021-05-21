@@ -7,7 +7,7 @@ import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { BorderBox } from '@fpsak-frontend/shared-components';
 import { arrayMinLength, required } from '@fpsak-frontend/utils';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import RegistrerVirksomhetPanel from './RegistrerVirksomhetPanel';
 
@@ -20,7 +20,7 @@ const virksomhetsFieldArrayName = 'virksomheter';
 const EGEN_VIRKSOMHET_FORM_NAME_PREFIX = 'egenVirksomhet';
 
 interface PureOwnProps {
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   form: string;
   readOnly?: boolean;
 }

@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { dateFormat, formatCurrencyNoKr } from '@fpsak-frontend/utils';
-import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
+import { AlleKodeverk, BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 
 import createVisningsnavnForAktivitet from '../../util/createVisningsnavnForAktivitet';
 import messages from '../../../i18n/nb_NO.json';
@@ -55,7 +55,7 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
       allePerioder={perioder}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />, messages);
     const rows = wrapper.find('Row');
     expect(rows).toHaveLength(7);
@@ -71,7 +71,7 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
       alleAndelerIFørstePeriode={andeler}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />, messages);
     const rows = wrapper.find('Row');
     const rowsFlex = wrapper.find('FlexRow');
@@ -105,7 +105,7 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
       alleAndelerIFørstePeriode={andeler}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />, messages);
 
     const rows = wrapper.find('Row');

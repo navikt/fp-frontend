@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
-import { ArbeidsgiverOpplysningerPerId, FeriepengegrunnlagAndel, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, FeriepengegrunnlagAndel, AlleKodeverk } from '@fpsak-frontend/types';
 import moment from 'moment';
 import { DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -14,7 +14,7 @@ const lagIdentifikator = (andel: FeriepengegrunnlagAndel) : string => andel.akti
 
 const lagVisningsnavn = (ferieAndel: FeriepengegrunnlagAndel,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]}) => {
+  alleKodeverk: AlleKodeverk) => {
   const agOpplysning = arbeidsgiverOpplysningerPerId[ferieAndel.arbeidsgiverId];
   if (agOpplysning) {
     if (agOpplysning.erPrivatPerson) {
@@ -38,7 +38,7 @@ type AndelerPrId = {
 
 const lagAndelPrId = (ferieAndel: FeriepengegrunnlagAndel,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]}): AndelerPrId => ({
+  alleKodeverk: AlleKodeverk): AndelerPrId => ({
   identifikator: lagIdentifikator(ferieAndel),
   visningsnavn: lagVisningsnavn(ferieAndel, arbeidsgiverOpplysningerPerId, alleKodeverk),
   utbetaltTilSøker: ferieAndel.erBrukerMottaker ? ferieAndel.årsbeløp : 0,
@@ -47,7 +47,7 @@ const lagAndelPrId = (ferieAndel: FeriepengegrunnlagAndel,
 
 const lagAndelerPrIdMap = (andeler: FeriepengegrunnlagAndel[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]}): AndelerPrId[] => {
+  alleKodeverk: AlleKodeverk): AndelerPrId[] => {
   const listeMedAndelerPrId = [];
   andeler.forEach((ferieAndel) => {
     const andelTilSøker = ferieAndel.erBrukerMottaker ? ferieAndel.årsbeløp : 0;
@@ -73,7 +73,7 @@ const HEADER_TEXT_CODES = [
 interface OwnProps {
   alleAndeler: FeriepengegrunnlagAndel[];
   opptjeningsår: number;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 

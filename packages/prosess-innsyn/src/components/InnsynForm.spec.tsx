@@ -6,6 +6,7 @@ import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/int
 
 import { InnsynFormImpl } from './InnsynForm';
 import messages from '../../i18n/nb_NO.json';
+import { AlleKodeverk } from 'types';
 
 const intlMock = getIntlMock(messages);
 
@@ -33,7 +34,7 @@ describe('<InnsynForm>', () => {
       vedtaksdokumentasjon={[]}
       alleDokumenter={[]}
       aksjonspunkter={[]}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
       initialValues={{
@@ -69,7 +70,7 @@ describe('<InnsynForm>', () => {
       vedtaksdokumentasjon={[]}
       alleDokumenter={[]}
       aksjonspunkter={[]}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       submitCallback={() => undefined}
       onSubmit={() => undefined}
       initialValues={{

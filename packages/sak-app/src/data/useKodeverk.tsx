@@ -1,4 +1,6 @@
-import { KodeverkMedNavn, Kodeverk } from '@fpsak-frontend/types';
+import {
+  KodeverkMedNavn, Kodeverk, AlleKodeverk, AlleKodeverkTilbakekreving,
+} from '@fpsak-frontend/types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 
@@ -7,12 +9,11 @@ import { FpsakApiKeys, restApiHooks } from './fpsakApi';
 /**
  * Hook som henter kodeverk knyttet til behandlingstype
  */
-export function useKodeverk<T = KodeverkMedNavn>(behandlingType: Kodeverk): {[key: string]: T[]} {
+export function useKodeverk(behandlingType: Kodeverk): AlleKodeverk | AlleKodeverkTilbakekreving {
   const alleKodeverkFpSak = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
   const alleKodeverkFpTilbake = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
 
   const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandlingType?.kode || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType?.kode;
-  // @ts-ignore Fiks kodeverk-type
   return erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak;
 }
 
@@ -22,7 +23,6 @@ export function useKodeverk<T = KodeverkMedNavn>(behandlingType: Kodeverk): {[ke
  */
 export function useFpSakKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[] {
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
-  // @ts-ignore Fiks kodeverk-type
   return alleKodeverk[kodeverkType];
 }
 
@@ -32,7 +32,6 @@ export function useFpSakKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[]
  */
 export function useFpTilbakeKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[] {
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
-  // @ts-ignore Fiks kodeverk-type
   return alleKodeverk ? alleKodeverk[kodeverkType] : undefined;
 }
 
@@ -52,7 +51,6 @@ export function useFpSakKodeverkMedNavn<T = KodeverkMedNavn>(kodeverkOjekt: Kode
     kodeverkForType = kodeverkForType[undertype];
   }
 
-  // @ts-ignore Fiks dette
   return kodeverkForType.find((k) => k.kode === kodeverkOjekt.kode);
 }
 

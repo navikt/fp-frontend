@@ -16,7 +16,7 @@ import { isAvslag, isInnvilget, isOpphor } from '@fpsak-frontend/kodeverk/src/be
 import BehandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 
 import {
-  KodeverkMedNavn, Behandling, BeregningsresultatFp, BeregningsresultatEs, Vilkar,
+  AlleKodeverk, Behandling, BeregningsresultatFp, BeregningsresultatEs, Vilkar,
   Aksjonspunkt, SimuleringResultat, Kodeverk, TilbakekrevingValg,
 } from '@fpsak-frontend/types';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -213,7 +213,7 @@ interface PureOwnProps {
   previewCallback: (data: ForhandsvisData) => void,
   ytelseTypeKode: string;
   resultatstruktur?: BeregningsresultatFp | BeregningsresultatEs;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
   vilkar?: Vilkar[];

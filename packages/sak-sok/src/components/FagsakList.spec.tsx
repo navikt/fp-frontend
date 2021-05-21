@@ -6,7 +6,7 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { Table } from '@fpsak-frontend/shared-components';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import FagsakList from './FagsakList';
 
@@ -76,7 +76,7 @@ describe('<FagsakList>', () => {
     const wrapper = shallow(<FagsakList
       fagsaker={[fagsak, fagsak2]}
       selectFagsakCallback={clickFunction}
-      alleKodeverk={alleKodeverk as {[key: string]: KodeverkMedNavn[]}}
+      alleKodeverk={alleKodeverk as AlleKodeverk}
     />);
 
     const table = wrapper.find(Table);

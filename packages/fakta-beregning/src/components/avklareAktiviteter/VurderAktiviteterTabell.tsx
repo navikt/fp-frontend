@@ -13,7 +13,9 @@ import opptjeningAktivitetTyper from '@fpsak-frontend/kodeverk/src/opptjeningAkt
 import {
   Table, TableRow, TableColumn, PeriodLabel, EditedIcon, DateLabel,
 } from '@fpsak-frontend/shared-components';
-import { ArbeidsgiverOpplysningerPerId, BeregningAktivitet, KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  ArbeidsgiverOpplysningerPerId, BeregningAktivitet, AlleKodeverk,
+} from '@fpsak-frontend/types';
 import { BeregningAktivitetTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningAktivitetAP';
 import { createVisningsnavnFakta } from '../ArbeidsforholdHelper';
 
@@ -101,7 +103,7 @@ export const skalVurdereAktivitet = (aktivitet: BeregningAktivitet,
 
 const lagVisningsnavn = (aktivitet: BeregningAktivitet,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]}): string => {
+  alleKodeverk: AlleKodeverk): string => {
   const agOpplysning = arbeidsgiverOpplysningerPerId[aktivitet.arbeidsgiverId];
   if (!agOpplysning) {
     return aktivitet.arbeidsforholdType ? getKodeverknavnFn(alleKodeverk, kodeverkTyper)(aktivitet.arbeidsforholdType) : '';
@@ -115,7 +117,7 @@ const lagTableRow = (
   readOnly: boolean,
   isAksjonspunktClosed: boolean,
   aktivitet: BeregningAktivitet,
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]},
+  alleKodeverk: AlleKodeverk,
   erOverstyrt: boolean,
   harAksjonspunkt: boolean,
   tomDatoForAktivitetGruppe: string,
@@ -235,7 +237,7 @@ const skalBrukesPretufylling = (aktivitet: BeregningAktivitet,
 };
 
 const mapToInitialValues = (aktivitet: BeregningAktivitet,
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]},
+  alleKodeverk: AlleKodeverk,
   erOverstyrt: boolean,
   harAksjonspunkt: boolean,
   erTomLikEllerFørSkjæringstidpunkt: boolean,
@@ -250,7 +252,7 @@ type OwnProps = {
     readOnly: boolean;
     isAksjonspunktClosed: boolean;
     aktiviteter: BeregningAktivitet[];
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
     erOverstyrt: boolean;
     harAksjonspunkt: boolean;
     tomDatoForAktivitetGruppe: string;
@@ -326,7 +328,7 @@ export class VurderAktiviteterTabell extends Component<OwnProps & MappedOwnProps
   };
 
   static buildInitialValues = (aktiviteter: BeregningAktivitet[],
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]},
+    alleKodeverk: AlleKodeverk,
     erOverstyrt: boolean,
     harAksjonspunkt: boolean,
     erTomLikEllerFørSkjæringstidpunkt: boolean,

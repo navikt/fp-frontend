@@ -6,6 +6,7 @@ import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-
 import { dateRangesOverlappingMessage, invalidDateMessage, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import messages from '../../../i18n/nb_NO.json';
 import RenderPermisjonPeriodeFieldArray, { RenderPermisjonPeriodeFieldArray as RenderPermisjonPeriodeFieldArrayImpl } from './RenderPermisjonPeriodeFieldArray';
@@ -30,7 +31,7 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
       readOnly={readOnly}
       namePrefix="test"
       periodePrefix="test"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />, messages);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
@@ -61,7 +62,7 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
       readOnly={readOnly}
       namePrefix="test"
       periodePrefix="test"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />, messages);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
@@ -87,7 +88,7 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
       readOnly={readOnly}
       namePrefix="test"
       periodePrefix="test"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />, messages);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
@@ -116,7 +117,7 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
       readOnly={readOnly}
       namePrefix="test"
       periodePrefix="test"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />, messages);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
@@ -145,7 +146,7 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
       readOnly={readOnly}
       namePrefix="test"
       periodePrefix="test"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />, messages);
 
     const fieldArray = wrapper.find(PeriodFieldArray);
@@ -174,7 +175,7 @@ describe('<RenderPermisjonPeriodeFieldArray>', () => {
       readOnly={readOnly}
       namePrefix="test"
       periodePrefix="test"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />, messages);
 
     const fieldArray = wrapper.find(PeriodFieldArray);

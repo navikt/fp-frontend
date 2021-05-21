@@ -9,7 +9,7 @@ import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
-import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, AlleKodeverk } from '@fpsak-frontend/types';
 
 import PersonAksjonspunktText from './PersonAksjonspunktText';
 import PersonNyttEllerErstattArbeidsforholdPanel from './PersonNyttEllerErstattArbeidsforholdPanel';
@@ -45,7 +45,7 @@ interface PureOwnProps {
   aktivtArbeidsforholdTillatUtenIM: boolean;
   arbeidsforhold: CustomArbeidsforhold;
   skalKunneLeggeTilNyeArbeidsforhold: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   updateArbeidsforhold: (values: FormValues) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   intl: IntlShape;

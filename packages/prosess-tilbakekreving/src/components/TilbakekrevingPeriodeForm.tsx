@@ -443,7 +443,7 @@ const validate = (values: any, sarligGrunnTyper: KodeverkMedNavn[], data: DataFo
 
 interface PureOwnProps {
   behandlingId: number;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   oppdaterPeriode: (values: any) => any;
   data: DataForPeriode;
   periode: CustomVilkarsVurdertePeriode;

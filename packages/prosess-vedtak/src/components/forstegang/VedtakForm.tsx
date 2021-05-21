@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux';
 import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
 
 import {
-  KodeverkMedNavn, Behandling, BeregningsresultatFp, BeregningsresultatEs, Vilkar,
+  AlleKodeverk, Behandling, BeregningsresultatFp, BeregningsresultatEs, Vilkar,
   Aksjonspunkt, SimuleringResultat, TilbakekrevingValg,
 } from '@fpsak-frontend/types';
 import klageBehandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
@@ -140,7 +140,7 @@ interface PureOwnProps {
   previewCallback: (data: ForhandsvisData) => Promise<any>,
   ytelseTypeKode: string;
   resultatstruktur?: BeregningsresultatFp | BeregningsresultatEs;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
   vilkar?: Vilkar[];

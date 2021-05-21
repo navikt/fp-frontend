@@ -5,6 +5,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import BeregningInfoPanel from './BeregningInfoPanel';
 import VurderFaktaBeregningPanel from './fellesFaktaForATFLogSN/VurderFaktaBeregningPanel';
@@ -18,7 +19,7 @@ const {
   OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
 } = aksjonspunktCodes;
 
-const alleKodeverk = {};
+const alleKodeverk = {} as AlleKodeverk;
 
 const beregningsgrunnlag = {
   faktaOmBeregning: {

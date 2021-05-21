@@ -6,7 +6,7 @@ import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
-import { Aksjonspunkt, PersonopplysningMedlem, Soknad } from '@fpsak-frontend/types';
+import { Aksjonspunkt, AlleKodeverk, PersonopplysningMedlem, Soknad } from '@fpsak-frontend/types';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import OppholdINorgeOgAdresserFaktaPanel, { PeriodeMedId } from './OppholdINorgeOgAdresserFaktaPanel';
@@ -65,7 +65,7 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
       isBosattAksjonspunktClosed={false}
       opphold={opphold}
       foreldre={foreldre}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
     />, messages);
     const felter = wrapper.find(Normaltekst);
@@ -84,7 +84,7 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
       isBosattAksjonspunktClosed={false}
       opphold={opphold}
       foreldre={foreldre}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
     />, messages);
     const foreldreDivs = wrapper.find('div');
@@ -121,7 +121,7 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
       isBosattAksjonspunktClosed={false}
       opphold={opphold}
       foreldre={toForeldre}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
     />, messages);
 

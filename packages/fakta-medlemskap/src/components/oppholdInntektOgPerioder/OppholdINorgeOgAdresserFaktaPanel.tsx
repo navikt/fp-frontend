@@ -14,7 +14,7 @@ import {
   Image, PeriodLabel, VerticalSpacer, FaktaGruppe,
 } from '@fpsak-frontend/shared-components';
 import {
-  Aksjonspunkt, KodeverkMedNavn, MedlemPeriode, PersonopplysningMedlem, Soknad, UtlandsoppholdPeriode,
+  Aksjonspunkt, AlleKodeverk, MedlemPeriode, PersonopplysningMedlem, Soknad, UtlandsoppholdPeriode,
 } from '@fpsak-frontend/types';
 import checkImage from '@fpsak-frontend/assets/images/check.svg';
 import avslaattImage from '@fpsak-frontend/assets/images/avslaatt.svg';
@@ -86,7 +86,7 @@ interface PureOwnProps {
   id: string;
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
 }
 
 interface MappedOwnProps {

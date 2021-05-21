@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { Location } from 'history';
 
-import { Historikkinnslag, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Historikkinnslag, AlleKodeverk, AlleKodeverkTilbakekreving } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 
 import History from './components/History';
@@ -13,8 +13,8 @@ const intl = createIntl(messages);
 interface OwnProps {
   historikkFpSak: Historikkinnslag[];
   historikkFpTilbake: Historikkinnslag[];
-  alleKodeverkFpTilbake?: {[key: string]: KodeverkMedNavn[]};
-  alleKodeverkFpSak: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverkFpTilbake?: AlleKodeverkTilbakekreving;
+  alleKodeverkFpSak: AlleKodeverk;
   saksnummer?: string;
   getBehandlingLocation: (behandlingId: number) => Location;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;

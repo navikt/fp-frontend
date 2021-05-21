@@ -4,7 +4,7 @@ import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregn
 import { createSelector, createStructuredSelector } from 'reselect';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { ArbeidsgiverOpplysningerPerId, FaktaOmBeregning, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, FaktaOmBeregning, AlleKodeverk } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import TidsbegrensetArbeidsforholdForm from './tidsbegrensetArbeidsforhold/TidsbegrensetArbeidsforholdForm';
@@ -182,7 +182,7 @@ type OwnProps = {
     faktaOmBeregning: FaktaOmBeregning;
     isAksjonspunktClosed: boolean;
     beregningsgrunnlag: Beregningsgrunnlag;
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
     aksjonspunkter: Aksjonspunkt[];
     erOverstyrer: boolean;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;

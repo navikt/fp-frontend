@@ -8,7 +8,7 @@ import { Element } from 'nav-frontend-typografi';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
-  Aksjonspunkt, Behandling, KodeverkMedNavn, Vilkar,
+  Aksjonspunkt, AlleKodeverk, Behandling, KodeverkMedNavn, Vilkar,
 } from '@fpsak-frontend/types';
 import {
   ProsessStegBegrunnelseTextField, VilkarResultPicker, ProsessPanelTemplate, validerApKodeOgHentApEnum,
@@ -34,7 +34,7 @@ interface PureOwnProps {
   readOnly: boolean;
   readOnlySubmitButton: boolean;
   isApOpen: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   erIkkeGodkjentAvBeslutter: boolean;
 }
 

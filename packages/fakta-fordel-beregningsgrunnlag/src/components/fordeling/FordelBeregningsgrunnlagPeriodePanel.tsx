@@ -14,7 +14,7 @@ import {
   BeregningsgrunnlagPeriodeProp, FordelBeregningsgrunnlagAndel,
   FordelBeregningsgrunnlagPeriode,
   Kodeverk,
-  KodeverkMedNavn,
+  AlleKodeverk,
 } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import RenderFordelBGFieldArray, { RenderFordelBGFieldArrayImpl } from './RenderFordelBGFieldArray';
@@ -62,7 +62,7 @@ type OwnProps = {
     isAksjonspunktClosed: boolean;
     showPanel: (...args: any[]) => any;
     beregningsgrunnlag: Beregningsgrunnlag;
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
     behandlingType: Kodeverk;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 };

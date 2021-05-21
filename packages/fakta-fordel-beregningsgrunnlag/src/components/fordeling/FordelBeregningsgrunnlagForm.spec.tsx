@@ -16,6 +16,7 @@ import {
 import FordelBeregningsgrunnlagPeriodePanel from './FordelBeregningsgrunnlagPeriodePanel';
 import messages from '../../../i18n/nb_NO.json';
 import { FordelBeregningsgrunnlagAndelValues } from '../../types/FordelingTsType';
+import { AlleKodeverk } from 'types';
 
 const intlMock = getIntlMock(messages);
 
@@ -188,7 +189,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       isAksjonspunktClosed={false}
       readOnly={false}
       beregningsgrunnlag={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       behandlingType={bt}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
     />);

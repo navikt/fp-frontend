@@ -12,7 +12,7 @@ import { Table, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import {
   AndelForFaktaOmBeregning, ArbeidsgiverOpplysningerPerId,
-  KodeverkMedNavn,
+  KodeverkMedNavn, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import { mapAndelToField, skalHaBesteberegningSelector } from './BgFaktaUtils';
@@ -179,7 +179,7 @@ type OwnProps = {
     skalHaBesteberegning: boolean;
     skalHaMilitær?: boolean,
     beregningsgrunnlag: Beregningsgrunnlag;
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
     isAksjonspunktClosed: boolean;
 };
 
@@ -189,7 +189,7 @@ interface StaticFunctions {
              skalFastsetteInntekt: (andel) => boolean) => any;
   buildInitialValues: (andeler: AndelForFaktaOmBeregning[],
                        arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-                       alleKodeverk: {[key: string]: KodeverkMedNavn[]}) => any;
+                       alleKodeverk: AlleKodeverk) => any;
   transformValues: (values: any) => InntektTransformed;
 }
 
@@ -304,7 +304,7 @@ InntektFieldArray.validate = (values: AndelFieldValue[], erKunYtelse, skalFastse
 
 InntektFieldArray.buildInitialValues = (andeler: AndelForFaktaOmBeregning[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]}) => {
+  alleKodeverk: AlleKodeverk) => {
   if (!andeler || andeler.length === 0) {
     return {};
   }

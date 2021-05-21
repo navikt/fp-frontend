@@ -6,7 +6,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
+import { Aksjonspunkt, AlleKodeverk, Behandling } from '@fpsak-frontend/types';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
 
@@ -29,7 +29,7 @@ describe('<BehandlingPaVent>', () => {
     links: [],
   };
   const aksjonspunkter = [];
-  const kodeverk = {};
+  const kodeverk = {} as AlleKodeverk;
 
   const AKSJONSPUNKT_KEY = new RestKey<Aksjonspunkt[], void>('AP');
   const PA_VENT_KEY = new RestKey<void, SettPaVentParams>('PA_VENT');

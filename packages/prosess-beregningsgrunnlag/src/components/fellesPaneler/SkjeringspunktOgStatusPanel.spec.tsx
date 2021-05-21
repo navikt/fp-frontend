@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { DateLabel } from '@fpsak-frontend/shared-components';
 import SkjeringspunktOgStatusPanel, { RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN, SkjeringspunktOgStatusPanelImpl } from './SkjeringspunktOgStatusPanel';
+import { AlleKodeverk } from 'types';
 
 const skjeringstidspunktDato = '2017-12-12';
 const aktivitetstatusList = [{
@@ -33,7 +34,7 @@ describe('<SkjeringspunktOgStatusPanel>', () => {
       aktivitetStatusList={aktivitetstatusList}
       skjeringstidspunktDato={skjeringstidspunktDato}
       getKodeverknavn={getKodeverknavn}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     const messages = wrapper.find(FormattedMessage);

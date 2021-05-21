@@ -26,7 +26,7 @@ import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import {
-  Aksjonspunkt, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, Soknad, AvklartBarn, FamilieHendelse,
+  Aksjonspunkt, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, Soknad, AvklartBarn, FamilieHendelse, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import { VarselRevurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -59,7 +59,7 @@ interface PureOwnProps {
   submitCallback: (data: VarselRevurderingAp) => Promise<void>;
   previewCallback: (data: ForhandsvisData) => Promise<any>;
   readOnly: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
 }
 
 interface MappedOwnProps {

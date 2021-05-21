@@ -6,7 +6,7 @@ import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared
 import { DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
-  KodeverkMedNavn, ArbeidsforholdPermisjon, Kodeverk,
+  AlleKodeverk, ArbeidsforholdPermisjon, Kodeverk,
 } from '@fpsak-frontend/types';
 
 import CustomArbeidsforhold from '../../typer/CustomArbeidsforholdTsType';
@@ -86,7 +86,7 @@ const lagAksjonspunktMessage = (arbeidsforhold: CustomArbeidsforhold, getKodever
 
 interface OwnProps {
   arbeidsforhold?: CustomArbeidsforhold;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
 }
 
 export const PersonAksjonspunktTextImpl: FunctionComponent<OwnProps> = ({

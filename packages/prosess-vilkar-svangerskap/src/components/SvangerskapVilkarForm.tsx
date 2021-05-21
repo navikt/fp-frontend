@@ -14,7 +14,7 @@ import {
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import {
-  Aksjonspunkt, Behandling, KodeverkMedNavn, Vilkar,
+  Aksjonspunkt, AlleKodeverk, Behandling, KodeverkMedNavn, Vilkar,
 } from '@fpsak-frontend/types';
 import { BekreftSvangerskapspengervilkarAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -34,7 +34,7 @@ interface PureOwnProps {
   readOnly: boolean;
   readOnlySubmitButton: boolean;
   isApOpen: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   erIkkeGodkjentAvBeslutter: boolean;
 }
 

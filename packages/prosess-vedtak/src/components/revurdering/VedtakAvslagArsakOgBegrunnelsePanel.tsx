@@ -4,7 +4,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
 import {
-  KodeverkMedNavn, Vilkar, Kodeverk, Behandlingsresultat,
+  AlleKodeverk, Vilkar, Kodeverk, Behandlingsresultat,
 } from '@fpsak-frontend/types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
@@ -41,7 +41,7 @@ interface OwnProps {
   behandlingsresultat: Behandlingsresultat;
   sprakkode: Kodeverk;
   readOnly: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   skalBrukeOverstyrendeFritekstBrev: boolean;
 }
 

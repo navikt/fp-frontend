@@ -15,7 +15,7 @@ import {
 import { ArrowBox, BorderBox } from '@fpsak-frontend/shared-components';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import landkoder from '@fpsak-frontend/kodeverk/src/landkoder';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] => countryCodes
   .filter(({
@@ -77,7 +77,7 @@ interface PureOwnPropsAnnenForelderPanel {
   permisjonRettigheterPanel?: ReactNode;
   form: string;
   namePrefix: string;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   soknadData: SoknadData;
 }
 

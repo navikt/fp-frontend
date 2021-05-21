@@ -6,7 +6,7 @@ import { createSelector } from 'reselect';
 import { isEqual, omit } from '@fpsak-frontend/utils';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import { SoknadData, getRegisteredFields } from '@fpsak-frontend/papirsoknad-felles';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 import LagreSoknadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-lagre-soknad';
 import MottattDatoPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-mottatt-dato';
 import { rettighet } from '@fpsak-frontend/papirsoknad-panel-rettigheter';
@@ -32,7 +32,7 @@ interface PureOwnProps {
   onSubmitUfullstendigsoknad: () => Promise<any>;
   readOnly: boolean;
   soknadData: SoknadData;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   fagsakPersonnummer: string;
 }
 

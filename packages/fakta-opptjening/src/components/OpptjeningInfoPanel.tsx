@@ -7,7 +7,7 @@ import { InjectedFormProps, reduxForm } from 'redux-form';
 import { addDaysToDate, omitMany } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FastsattOpptjening, KodeverkMedNavn, Opptjening, OpptjeningAktivitet,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FastsattOpptjening, AlleKodeverk, Opptjening, OpptjeningAktivitet,
 } from '@fpsak-frontend/types';
 import { AvklarAktivitetsPerioderAp, OpptjeningAktivitetAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -28,7 +28,7 @@ interface PureOwnProps {
   fastsattOpptjening?: Opptjening['fastsattOpptjening'];
   dokStatus?: string;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   opptjeningAktiviteter: OpptjeningAktivitet[];
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: AvklarAktivitetsPerioderAp) => Promise<void>;

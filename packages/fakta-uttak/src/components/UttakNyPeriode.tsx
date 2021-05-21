@@ -39,8 +39,7 @@ import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import overforingArsak from '@fpsak-frontend/kodeverk/src/overforingArsak';
 import utsettelseArsakCodes from '@fpsak-frontend/kodeverk/src/utsettelseArsakCodes';
 import {
-  ArbeidsgiverOpplysningerPerId,
-  FaktaArbeidsforhold, Kodeverk, KodeverkMedNavn, Personoversikt,
+  ArbeidsgiverOpplysningerPerId, AlleKodeverk, FaktaArbeidsforhold, Kodeverk, KodeverkMedNavn, Personoversikt,
 } from '@fpsak-frontend/types';
 
 import lagVisningsNavn from './utils/lagVisningsNavn';
@@ -147,7 +146,7 @@ interface PureOwnProps {
   getKodeverknavn: (kodeverk: Kodeverk) => string;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
   personoversikt: Personoversikt;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   newPeriodeResetCallback: (...args: any[]) => any;
   nyPeriodeDisabledDaysFom: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;

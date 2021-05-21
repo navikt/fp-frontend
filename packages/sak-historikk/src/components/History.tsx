@@ -4,7 +4,9 @@ import moment from 'moment';
 import { WrappedComponentProps } from 'react-intl';
 import { Checkbox } from 'nav-frontend-skjema';
 
-import { Historikkinnslag, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag, Kodeverk,
+} from '@fpsak-frontend/types';
 import HistorikkAktor from '@fpsak-frontend/kodeverk/src/historikkAktor';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
@@ -215,8 +217,8 @@ const sortAndTagTilbakekreving = (
 interface OwnProps {
   historikkFpSak: Historikkinnslag[];
   historikkFpTilbake: Historikkinnslag[];
-  alleKodeverkFpTilbake?: {[key: string]: KodeverkMedNavn[]};
-  alleKodeverkFpSak: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverkFpTilbake?: AlleKodeverkTilbakekreving;
+  alleKodeverkFpSak: AlleKodeverk;
   saksnummer?: string;
   getBehandlingLocation: (behandlingId: number) => Location;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;

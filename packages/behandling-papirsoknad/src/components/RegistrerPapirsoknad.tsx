@@ -3,7 +3,7 @@ import React, { FunctionComponent, useState, useCallback } from 'react';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { BehandlingPaVent } from '@fpsak-frontend/behandling-felles';
 import {
-  Behandling, KodeverkMedNavn, Fagsak, AksessRettigheter, Aksjonspunkt,
+  Behandling, AlleKodeverk, Fagsak, AksessRettigheter, Aksjonspunkt,
 } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 
@@ -50,7 +50,7 @@ interface OwnProps {
   fagsak: Fagsak;
   fagsakPersonnummer: string;
   behandling: Behandling;
-  kodeverk: {[key: string]: KodeverkMedNavn[]};
+  kodeverk: AlleKodeverk;
   rettigheter: AksessRettigheter;
   hentBehandling: (keepData: boolean) => Promise<Behandling>
   lagreAksjonspunkt: (params?: any, keepData?: boolean) => Promise<any>;

@@ -5,7 +5,7 @@ import {
   ArbeidsgiverOpplysningerPerId,
   Feriepengegrunnlag,
   FeriepengegrunnlagAndel,
-  KodeverkMedNavn,
+  AlleKodeverk,
 } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { Column, Row } from 'nav-frontend-grid';
@@ -25,7 +25,7 @@ const hentTittel = (): React.ReactNode => (
 
 interface OwnProps {
   feriepengegrunnlag: Feriepengegrunnlag;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   erPanelÅpent: boolean;
   togglePanel: () => void;
