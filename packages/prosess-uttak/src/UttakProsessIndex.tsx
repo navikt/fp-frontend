@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import {
-  ArbeidsgiverOpplysningerPerId, StandardProsessPanelProps, Fagsak, FamilieHendelseSamling, Personoversikt,
+  ArbeidsgiverOpplysningerPerId, StandardProsessPanelProps, FamilieHendelseSamling, Personoversikt,
   Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
@@ -14,7 +14,6 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface OwnProps {
-  fagsak: Fagsak;
   uttakStonadskontoer: UttakStonadskontoer;
   soknad: Soknad;
   uttaksresultatPerioder: UttaksresultatPeriode;
@@ -24,17 +23,13 @@ interface OwnProps {
   ytelsefordeling: Ytelsefordeling;
   employeeHasAccess: boolean;
   tempUpdateStonadskontoer: (params: {
-    behandlingUuid: {
-      saksnummer: string;
-      behandlingUuid: string;
-    };
+    behandlingUuid: string;
     perioder: any;
   }) => Promise<any>;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
-  fagsak,
   behandling,
   uttaksresultatPerioder,
   uttakStonadskontoer,
@@ -58,7 +53,6 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="UttakProsessIndex" formData={formData} setFormData={setFormData}>
       <UttakPanel
-        fagsak={fagsak}
         behandlingUuid={behandling.uuid}
         behandlingType={behandling.type}
         behandlingsresultat={behandling.behandlingsresultat}

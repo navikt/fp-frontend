@@ -9,10 +9,7 @@ import {
 import { NyBehandlendeEnhetParams, SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
 type StonadskontoGittUttaksPerioderParams = {
-  behandlingUuid: {
-    saksnummer: string;
-    behandlingUuid: string;
-  };
+  behandlingUuid: string;
   perioder: any;
 }
 

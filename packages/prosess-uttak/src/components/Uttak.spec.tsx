@@ -13,7 +13,7 @@ import { CheckboxField } from '@fpsak-frontend/form';
 import { Tidslinje } from '@fpsak-frontend/tidslinje';
 import { KjønnkodeEnum } from '@fpsak-frontend/types/src/Kjonnkode';
 import {
-  Aksjonspunkt, AlleKodeverk, Behandling, Fagsak, FamilieHendelseSamling, PeriodeSokerAktivitet, Personoversikt,
+  Aksjonspunkt, AlleKodeverk, Behandling, FamilieHendelseSamling, PeriodeSokerAktivitet, Personoversikt,
   UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
@@ -80,7 +80,6 @@ describe('<Uttak>', () => {
       harSoktOmFlerbarnsdager={false}
       annenForelderSoktOmFlerbarnsdager={false}
       tempUpdateStonadskontoer={sinon.spy()}
-      saksnummer="123"
       alleKodeverk={{} as AlleKodeverk}
       behandlingUuid="999"
       behandlingsresultat={{} as Behandling['behandlingsresultat']}
@@ -97,7 +96,6 @@ describe('<Uttak>', () => {
         kode: behandlingStatus.OPPRETTET,
         kodeverk: '',
       }}
-      fagsak={{} as Fagsak}
       employeeHasAccess
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
@@ -139,8 +137,6 @@ describe('<Uttak>', () => {
       harSoktOmFlerbarnsdager={false}
       annenForelderSoktOmFlerbarnsdager={false}
       tempUpdateStonadskontoer={sinon.spy()}
-      saksnummer="123"
-      alleKodeverk={{} as AlleKodeverk}
       behandlingUuid="999"
       behandlingsresultat={{} as Behandling['behandlingsresultat']}
       medsokerKjonnKode={KjønnkodeEnum.MANN}
@@ -156,7 +152,6 @@ describe('<Uttak>', () => {
         kode: behandlingStatus.OPPRETTET,
         kodeverk: '',
       }}
-      fagsak={{} as Fagsak}
       employeeHasAccess
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
@@ -204,8 +199,6 @@ describe('<Uttak>', () => {
       harSoktOmFlerbarnsdager={false}
       annenForelderSoktOmFlerbarnsdager={false}
       tempUpdateStonadskontoer={sinon.spy()}
-      saksnummer="123"
-      alleKodeverk={{} as AlleKodeverk}
       behandlingUuid="999"
       behandlingsresultat={{} as Behandling['behandlingsresultat']}
       medsokerKjonnKode={KjønnkodeEnum.MANN}
@@ -221,7 +214,6 @@ describe('<Uttak>', () => {
         kode: behandlingStatus.OPPRETTET,
         kodeverk: '',
       }}
-      fagsak={{} as Fagsak}
       employeeHasAccess={false}
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
@@ -283,7 +275,6 @@ describe('<Uttak>', () => {
       harSoktOmFlerbarnsdager={false}
       annenForelderSoktOmFlerbarnsdager={false}
       tempUpdateStonadskontoer={sinon.spy()}
-      saksnummer="123"
       alleKodeverk={{} as AlleKodeverk}
       behandlingUuid="999"
       behandlingsresultat={{} as Behandling['behandlingsresultat']}
@@ -300,7 +291,6 @@ describe('<Uttak>', () => {
         kode: behandlingStatus.OPPRETTET,
         kodeverk: '',
       }}
-      fagsak={{} as Fagsak}
       employeeHasAccess={false}
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
@@ -362,7 +352,6 @@ describe('<Uttak>', () => {
       harSoktOmFlerbarnsdager={false}
       annenForelderSoktOmFlerbarnsdager={false}
       tempUpdateStonadskontoer={sinon.spy()}
-      saksnummer="123"
       alleKodeverk={{} as AlleKodeverk}
       behandlingUuid="999"
       behandlingsresultat={{} as Behandling['behandlingsresultat']}
@@ -379,7 +368,6 @@ describe('<Uttak>', () => {
         kode: behandlingStatus.OPPRETTET,
         kodeverk: '',
       }}
-      fagsak={{} as Fagsak}
       employeeHasAccess
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"

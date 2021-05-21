@@ -12,7 +12,7 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, Fagsak, FamilieHendelseSamling, Kodeverk, AlleKodeverk,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, FamilieHendelseSamling, Kodeverk, AlleKodeverk,
   Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling, Stonadskonto, Personoversikt,
 } from '@fpsak-frontend/types';
 import { UttakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -82,7 +82,6 @@ interface FormValues {
 }
 
 interface PureOwnProps {
-  fagsak: Fagsak;
   behandlingUuid: string;
   behandlingType: Kodeverk;
   behandlingsresultat?: Behandling['behandlingsresultat'];
@@ -99,10 +98,7 @@ interface PureOwnProps {
   alleKodeverk: AlleKodeverk;
   ytelsefordeling: Ytelsefordeling;
   tempUpdateStonadskontoer: (params: {
-    behandlingUuid: {
-      saksnummer: string;
-      behandlingUuid: string;
-    };
+    behandlingUuid: string;
     perioder: any;
   }) => Promise<any>;
   submitCallback: (data: UttakAp[]) => Promise<void>;
@@ -137,7 +133,6 @@ export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & W
   tempUpdateStonadskontoer,
   readOnly,
   manuellOverstyring,
-  fagsak,
   isApOpen,
   intl,
   arbeidsgiverOpplysningerPerId,
@@ -171,7 +166,6 @@ export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & W
           behandlingUuid={behandlingUuid}
           behandlingType={behandlingType}
           behandlingStatus={behandlingStatus}
-          fagsak={fagsak}
           alleKodeverk={alleKodeverk}
           readOnly={readOnly}
           isApOpen={isApOpen}
