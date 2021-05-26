@@ -5,7 +5,7 @@ import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregn
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { createSelector } from 'reselect';
 import {
-  ArbeidsgiverOpplysningerPerId, FaktaOmBeregning, KodeverkMedNavn, AlleKodeverk,
+  ArbeidsgiverOpplysningerPerId, FaktaOmBeregning, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
