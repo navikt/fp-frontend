@@ -8,6 +8,7 @@ import {
 } from '@fpsak-frontend/form';
 import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 import OAType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
 
 import CustomOpptjeningAktivitet from '../../CustomOpptjeningAktivitet';
@@ -47,7 +48,7 @@ describe('<ActivityPanel>', () => {
       activityId={1}
       alleMerknaderFraBeslutter={{}}
       updateActivity={() => undefined}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
@@ -82,7 +83,7 @@ describe('<ActivityPanel>', () => {
       activityId={1}
       alleMerknaderFraBeslutter={{}}
       updateActivity={() => undefined}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
@@ -117,7 +118,7 @@ describe('<ActivityPanel>', () => {
       activityId={1}
       alleMerknaderFraBeslutter={{}}
       updateActivity={() => undefined}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
@@ -152,7 +153,7 @@ describe('<ActivityPanel>', () => {
       activityId={1}
       alleMerknaderFraBeslutter={{}}
       updateActivity={() => undefined}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
@@ -187,7 +188,7 @@ describe('<ActivityPanel>', () => {
       activityId={1}
       alleMerknaderFraBeslutter={{}}
       updateActivity={() => undefined}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
@@ -225,7 +226,7 @@ describe('<ActivityPanel>', () => {
       activityId={1}
       alleMerknaderFraBeslutter={{}}
       updateActivity={() => undefined}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
@@ -261,7 +262,7 @@ describe('<ActivityPanel>', () => {
       activityId={1}
       alleMerknaderFraBeslutter={{}}
       updateActivity={() => undefined}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
@@ -296,7 +297,7 @@ describe('<ActivityPanel>', () => {
       activityId={1}
       alleMerknaderFraBeslutter={{}}
       updateActivity={() => undefined}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
@@ -330,7 +331,7 @@ describe('<ActivityPanel>', () => {
       activityId={1}
       alleMerknaderFraBeslutter={{}}
       updateActivity={() => undefined}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
@@ -363,7 +364,7 @@ describe('<ActivityPanel>', () => {
       activityId={1}
       alleMerknaderFraBeslutter={{}}
       updateActivity={() => undefined}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
@@ -398,7 +399,7 @@ describe('<ActivityPanel>', () => {
       activityId={1}
       alleMerknaderFraBeslutter={{}}
       updateActivity={() => undefined}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
@@ -435,7 +436,7 @@ describe('<ActivityPanel>', () => {
       activityId={1}
       alleMerknaderFraBeslutter={{}}
       updateActivity={() => undefined}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"
@@ -472,7 +473,7 @@ describe('<ActivityPanel>', () => {
       activityId={1}
       alleMerknaderFraBeslutter={{}}
       updateActivity={() => undefined}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       activity={activity}
       opptjeningFomDato="2017-08-15"
       opptjeningTomDato="2017-12-31"

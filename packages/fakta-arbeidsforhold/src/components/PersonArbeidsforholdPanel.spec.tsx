@@ -2,7 +2,7 @@ import React from 'react';
 import sinon from 'sinon';
 
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { Arbeidsforhold } from '@fpsak-frontend/types';
+import { AlleKodeverk, Arbeidsforhold } from '@fpsak-frontend/types';
 import AktivtArbeidsforholdHandling from '../kodeverk/aktivtArbeidsforholdHandling';
 import ArbeidsforholdHandling from '../kodeverk/arbeidsforholdHandling';
 import PersonArbeidsforholdTable from './arbeidsforholdTabell/PersonArbeidsforholdTable';
@@ -61,7 +61,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
@@ -83,7 +83,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
@@ -101,7 +101,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
@@ -120,7 +120,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
@@ -141,7 +141,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
@@ -161,7 +161,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
@@ -178,7 +178,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
@@ -210,7 +210,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
@@ -263,7 +263,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
@@ -460,7 +460,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
@@ -503,7 +503,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
@@ -546,7 +546,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
@@ -589,7 +589,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
@@ -632,7 +632,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
@@ -680,7 +680,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
@@ -701,7 +701,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
@@ -721,7 +721,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
@@ -767,7 +767,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
@@ -819,7 +819,7 @@ describe('<PersonArbeidsforholdPanel>', () => {
       reduxFormInitialize={sinon.spy()}
       aktivtArbeidsforholdTillatUtenIM
       skalKunneLeggeTilNyeArbeidsforhold={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);

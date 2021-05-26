@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import inntektskategorier from '@fpsak-frontend/kodeverk/src/inntektskategorier';
-import { FaktaOmBeregning } from '@fpsak-frontend/types';
+import { AlleKodeverk, FaktaOmBeregning } from '@fpsak-frontend/types';
 import VurderOgFastsettATFL, { skalFastsettInntektForArbeidstaker, skalFastsettInntektForFrilans } from './VurderOgFastsettATFL';
 import { INNTEKT_FIELD_ARRAY_NAME } from '../BgFaktaUtils';
 import VurderBesteberegningForm, { besteberegningField } from '../besteberegningFodendeKvinne/VurderBesteberegningForm';
@@ -158,7 +158,7 @@ describe('<VurderOgFastsettATFL>', () => {
       skalHaBesteberegning={false}
       harKunstigArbeid={false}
       manglerInntektsmelding
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       aksjonspunkter={[]}
       erOverstyrer={false}
       beregningsgrunnlag={beregningsgrunnlag}

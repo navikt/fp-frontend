@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import {
   Aksjonspunkt,
-  ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, KodeverkMedNavn, StandardFaktaPanelProps,
+  ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, AlleKodeverk, StandardFaktaPanelProps,
 } from '@fpsak-frontend/types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { createIntl, getKodeverknavnFn } from '@fpsak-frontend/utils';
@@ -17,7 +17,7 @@ const intl = createIntl(messages);
 interface OwnProps {
   beregningsgrunnlag: Beregningsgrunnlag;
   arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   formData?: any;
   setFormData: (data: any) => void;
   aksjonspunkter: Aksjonspunkt[];

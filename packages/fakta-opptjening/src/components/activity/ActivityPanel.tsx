@@ -30,7 +30,9 @@ import {
   PeriodpickerField, RadioGroupField, RadioOption, SelectField, TextAreaField,
 } from '@fpsak-frontend/form';
 import { TimeLineButton } from '@fpsak-frontend/tidslinje';
-import { ArbeidsgiverOpplysningerPerId, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  ArbeidsgiverOpplysningerPerId, Kodeverk, KodeverkMedNavn, AlleKodeverk,
+} from '@fpsak-frontend/types';
 
 import CustomOpptjeningAktivitet, { NyOpptjeningAktivitet } from '../../CustomOpptjeningAktivitet';
 import ActivityDataSubPanel from './ActivityDataSubPanel';
@@ -98,7 +100,7 @@ type FormValues = {
 
 interface PureOwnProps {
   updateActivity: (values: any) => void
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   activity: CustomOpptjeningAktivitet | NyOpptjeningAktivitet;
   opptjeningFomDato: string;
   opptjeningTomDato: string;

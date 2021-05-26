@@ -6,7 +6,9 @@ import { ProsessStegBegrunnelseTextField } from '@fpsak-frontend/prosess-felles'
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { Aksjonspunkt, FamilieHendelse, Soknad } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, AlleKodeverk, FamilieHendelse, Soknad,
+} from '@fpsak-frontend/types';
 import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { buildInitialValues, ErSoknadsfristVilkaretOppfyltFormImpl as UnwrappedForm } from './ErSoknadsfristVilkaretOppfyltForm';
@@ -37,7 +39,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       status=""
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       hasAksjonspunkt
       initialValues={{
         erVilkarOk: true,
@@ -69,7 +71,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       status=""
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       hasAksjonspunkt
       initialValues={{
         erVilkarOk: true,
@@ -102,7 +104,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       status=""
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       hasAksjonspunkt
       initialValues={{
         erVilkarOk: true,
@@ -133,7 +135,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       status=""
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       hasAksjonspunkt
       initialValues={{
         erVilkarOk: true,
@@ -164,7 +166,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       status=""
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       hasAksjonspunkt
       initialValues={{
         erVilkarOk: true,
@@ -197,7 +199,7 @@ describe('<ErSoknadsfristVilkaretOppfyltForm>', () => {
       status=""
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       hasAksjonspunkt
       initialValues={{
         erVilkarOk: true,

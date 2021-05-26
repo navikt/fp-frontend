@@ -6,7 +6,7 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import {
-  BeregningResultatPeriode, Kodeverk, KodeverkMedNavn, VedtaksbrevAvsnitt,
+  BeregningResultatPeriode, Kodeverk, VedtaksbrevAvsnitt, AlleKodeverkTilbakekreving,
 } from '@fpsak-frontend/types';
 import { ForeslaVedtakTilbakekrevingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -18,7 +18,7 @@ interface OwnProps {
   readOnly: boolean;
   resultat: Kodeverk;
   perioder: BeregningResultatPeriode[];
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverkTilbakekreving;
   behandlingUuid: string;
   avsnittsliste: VedtaksbrevAvsnitt[];
   fetchPreviewVedtaksbrev: (data: ForhandsvisData) => Promise<any>;

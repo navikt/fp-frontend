@@ -8,7 +8,7 @@ import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { AnkeVurdering } from '@fpsak-frontend/types';
+import { AlleKodeverk, AnkeVurdering } from '@fpsak-frontend/types';
 import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
 import ankeOmgjorArsak from '@fpsak-frontend/kodeverk/src/ankeOmgjorArsak';
 
@@ -30,7 +30,7 @@ describe('<BehandleResultatForm>', () => {
       previewCallback={sinon.spy()}
       aksjonspunktCode={AksjonspunktCode.FORESLA_VEDTAK}
       readOnly={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
@@ -50,7 +50,7 @@ describe('<BehandleResultatForm>', () => {
       previewCallback={sinon.spy()}
       aksjonspunktCode={AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL}
       readOnly={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
@@ -71,7 +71,7 @@ describe('<BehandleResultatForm>', () => {
       previewCallback={sinon.spy()}
       aksjonspunktCode={AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL}
       readOnly={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
@@ -92,7 +92,7 @@ describe('<BehandleResultatForm>', () => {
           kodeverk: '',
         },
       } as AnkeVurdering['ankeVurderingResultat']}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     expect(wrapper.find(ResultatEnkel)).toHaveLength(1);
@@ -106,7 +106,7 @@ describe('<BehandleResultatForm>', () => {
           kodeverk: '',
         },
       } as AnkeVurdering['ankeVurderingResultat']}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     expect(wrapper.find(ResultatOpphev)).toHaveLength(1);
@@ -120,7 +120,7 @@ describe('<BehandleResultatForm>', () => {
           kodeverk: '',
         },
       } as AnkeVurdering['ankeVurderingResultat']}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     expect(wrapper.find(ResultatHjemsend)).toHaveLength(1);
@@ -134,7 +134,7 @@ describe('<BehandleResultatForm>', () => {
           kodeverk: '',
         },
       } as AnkeVurdering['ankeVurderingResultat']}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     expect(wrapper.find(ResultatOmgjores)).toHaveLength(1);
@@ -148,7 +148,7 @@ describe('<BehandleResultatForm>', () => {
           kodeverk: '',
         },
       } as AnkeVurdering['ankeVurderingResultat']}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     expect(wrapper.find(ResultatAvvise)).toHaveLength(1);
@@ -211,7 +211,7 @@ describe('<BehandleResultatForm>', () => {
           kodeverk: '',
         },
       } as AnkeVurdering['ankeVurderingResultat']}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     const tekst = wrapper.find(Undertekst);
@@ -238,7 +238,7 @@ describe('<BehandleResultatForm>', () => {
           kodeverk: 'ANKE_OMGJOER_AARSAK',
           navn: 'Nye opplysninger',
         }],
-      }}
+      } as AlleKodeverk}
     />);
 
     const tekst = wrapper.find(Undertekst);

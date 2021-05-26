@@ -12,7 +12,7 @@ import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelseSamling, Kodeverk,
-  KodeverkMedNavn, Personoversikt, UttakKontrollerFaktaPerioder, Ytelsefordeling,
+  AlleKodeverk, Personoversikt, UttakKontrollerFaktaPerioder, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { FaktaUttakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -40,7 +40,7 @@ interface PureOwnProps {
   submitCallback: (data: FaktaUttakAp[]) => Promise<void>;
   readOnly: boolean;
   hasOpenAksjonspunkter: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   kanOverstyre: boolean;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
   personoversikt: Personoversikt;

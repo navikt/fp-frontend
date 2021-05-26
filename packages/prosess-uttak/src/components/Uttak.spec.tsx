@@ -13,7 +13,7 @@ import { CheckboxField } from '@fpsak-frontend/form';
 import { Tidslinje } from '@fpsak-frontend/tidslinje';
 import { KjønnkodeEnum } from '@fpsak-frontend/types/src/Kjonnkode';
 import {
-  Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, PeriodeSokerAktivitet, Personoversikt,
+  Aksjonspunkt, AlleKodeverk, Behandling, Fagsak, FamilieHendelseSamling, PeriodeSokerAktivitet, Personoversikt,
   UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
@@ -82,7 +82,7 @@ describe('<Uttak>', () => {
       tempUpdateStonadskontoer={sinon.spy()}
       saksnummer="123"
       behandlingId={999}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       behandlingsresultat={{} as Behandling['behandlingsresultat']}
       medsokerKjonnKode={KjønnkodeEnum.MANN}
       person={{} as Personoversikt}
@@ -141,7 +141,7 @@ describe('<Uttak>', () => {
       tempUpdateStonadskontoer={sinon.spy()}
       saksnummer="123"
       behandlingId={999}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       behandlingsresultat={{} as Behandling['behandlingsresultat']}
       medsokerKjonnKode={KjønnkodeEnum.MANN}
       person={{} as Personoversikt}
@@ -206,7 +206,7 @@ describe('<Uttak>', () => {
       tempUpdateStonadskontoer={sinon.spy()}
       saksnummer="123"
       behandlingId={999}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       behandlingsresultat={{} as Behandling['behandlingsresultat']}
       medsokerKjonnKode={KjønnkodeEnum.MANN}
       person={{} as Personoversikt}
@@ -285,7 +285,7 @@ describe('<Uttak>', () => {
       tempUpdateStonadskontoer={sinon.spy()}
       saksnummer="123"
       behandlingId={999}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       behandlingsresultat={{} as Behandling['behandlingsresultat']}
       medsokerKjonnKode={KjønnkodeEnum.MANN}
       person={{} as Personoversikt}
@@ -364,7 +364,7 @@ describe('<Uttak>', () => {
       tempUpdateStonadskontoer={sinon.spy()}
       saksnummer="123"
       behandlingId={999}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       behandlingsresultat={{} as Behandling['behandlingsresultat']}
       medsokerKjonnKode={KjønnkodeEnum.MANN}
       person={{} as Personoversikt}

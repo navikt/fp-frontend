@@ -10,7 +10,7 @@ import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
 import { ArrowBox } from '@fpsak-frontend/shared-components';
 // TODO (SAFIR) PFP-6021 Ta i bruk InntektFieldArray i staden for BrukersAndelFieldArray
-import { KodeverkMedNavn, KunYtelse } from '@fpsak-frontend/types';
+import { AlleKodeverk, KunYtelse } from '@fpsak-frontend/types';
 import BrukersAndelFieldArray from './BrukersAndelFieldArray';
 import { getFormValuesForBeregning } from '../../BeregningFormUtils';
 
@@ -24,7 +24,7 @@ type OwnProps = {
     brukersAndelFieldArrayName: string;
     erBesteberegning?: boolean;
     skalViseInntektstabell?: boolean;
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
 };
 
 interface StaticFunctions {

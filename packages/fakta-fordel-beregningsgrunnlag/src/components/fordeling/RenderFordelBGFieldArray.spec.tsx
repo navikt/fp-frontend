@@ -5,6 +5,7 @@ import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/int
 
 import { SelectField } from '@fpsak-frontend/form';
 import { TableRow } from '@fpsak-frontend/shared-components';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 import { Element } from 'nav-frontend-typografi';
 import beregningsgrunnlagAndeltyper from '@fpsak-frontend/kodeverk/src/beregningsgrunnlagAndeltyper';
 import { skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding } from '../ValidateAndelerUtils';
@@ -83,7 +84,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       erRevurdering={false}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={agOplysninger}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       behandlingType={null}
       beregningsgrunnlag={{}}
     />, messages);
@@ -112,7 +113,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       erRevurdering={false}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={agOplysninger}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       behandlingType={null}
       beregningsgrunnlag={{}}
     />, messages);
@@ -162,7 +163,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       erRevurdering={false}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={agOplysninger}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       behandlingType={null}
       beregningsgrunnlag={{}}
     />, messages);
@@ -209,7 +210,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       erRevurdering={false}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={agOplysninger}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       behandlingType={null}
       beregningsgrunnlag={{}}
     />, messages);
@@ -270,7 +271,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       erRevurdering={false}
       getKodeverknavn={getKodeverknavn}
       arbeidsgiverOpplysningerPerId={agOplysninger}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       behandlingType={null}
       beregningsgrunnlag={{}}
     />, messages);

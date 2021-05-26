@@ -14,7 +14,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import { ReduxWrapper } from '@fpsak-frontend/form';
 import {
-  BehandlingAppKontekst, Kodeverk, KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
+  BehandlingAppKontekst, Kodeverk, AlleKodeverk, KlageVurdering, TotrinnskontrollSkjermlenkeContext, AlleKodeverkTilbakekreving, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import { FatterVedtakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -31,6 +31,8 @@ const sorterteSkjermlenkeCodesForTilbakekreving = [
   skjermlenkeCodes.TILBAKEKREVING,
   skjermlenkeCodes.VEDTAK,
 ];
+
+const TOMT_KODEVERK = [] as KodeverkMedNavn[];
 
 const getArsaker = (apData: AksjonspunktGodkjenningData): string[] => {
   const arsaker = [];
@@ -49,13 +51,18 @@ const getArsaker = (apData: AksjonspunktGodkjenningData): string[] => {
   return arsaker;
 };
 
+const finnArbeidsforholdHandlingTyper = (alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving) => (kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE in alleKodeverk
+  ? (alleKodeverk as AlleKodeverk)[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE] : TOMT_KODEVERK);
+const finnFaktaOmBeregningTilfeller = (alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving) => (kodeverkTyper.FAKTA_OM_BEREGNING_TILFELLE in alleKodeverk
+  ? (alleKodeverk as AlleKodeverk)[kodeverkTyper.FAKTA_OM_BEREGNING_TILFELLE] : TOMT_KODEVERK);
+
 interface OwnProps {
   behandling: BehandlingAppKontekst;
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   location: Location;
   fagsakYtelseType: Kodeverk;
   behandlingKlageVurdering?: KlageVurdering;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
   readOnly: boolean;
   onSubmit: (data: {
     fatterVedtakAksjonspunktDto: {
@@ -127,9 +134,9 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
 
   const erStatusFatterVedtak = behandling.status.kode === BehandlingStatus.FATTER_VEDTAK;
   const skjemalenkeTyper = alleKodeverk[kodeverkTyper.SKJERMLENKE_TYPE];
-  const arbeidsforholdHandlingTyper = alleKodeverk[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE];
   const vurderArsaker = alleKodeverk[kodeverkTyper.VURDER_AARSAK];
-  const faktaOmBeregningTilfeller = alleKodeverk[kodeverkTyper.FAKTA_OM_BEREGNING_TILFELLE];
+  const arbeidsforholdHandlingTyper = finnArbeidsforholdHandlingTyper(alleKodeverk);
+  const faktaOmBeregningTilfeller = finnFaktaOmBeregningTilfeller(alleKodeverk);
 
   return (
     <RawIntlProvider value={intl}>

@@ -7,7 +7,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
+import { Aksjonspunkt, AlleKodeverk, Behandling } from '@fpsak-frontend/types';
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { buildInitialValues, ErForeldreansvarVilkaarOppfyltForm as UnwrappedForm } from './ErForeldreansvarVilkaarOppfyltForm';
@@ -55,7 +55,7 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
       initialValues={{
         erVilkarOk: true,
       }}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       originalErVilkarOk
       erIkkeGodkjentAvBeslutter={false}
     />);
@@ -86,7 +86,7 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
       initialValues={{
         erVilkarOk: true,
       }}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       originalErVilkarOk
       erIkkeGodkjentAvBeslutter={false}
     />);
@@ -140,7 +140,7 @@ describe('<ErForeldreansvarVilkaarOppfyltForm>', () => {
       initialValues={{
         erVilkarOk: true,
       }}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       originalErVilkarOk
       erIkkeGodkjentAvBeslutter={false}
     />);

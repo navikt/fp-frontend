@@ -4,6 +4,7 @@ import { shallow } from 'enzyme';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import kanIkkeOppgiAnnenForelderArsaker from '@fpsak-frontend/kodeverk/src/kanIkkeOppgiAnnenForelderArsak';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import AnnenForelderPanel, { AnnenForelderPanelImpl, KanIkkeOppgiBegrunnelsePanel } from './AnnenForelderPanel';
 
@@ -86,7 +87,7 @@ describe('<AnnenForelderPanel>', () => {
       namePrefix="test"
       alleKodeverk={{
         [kodeverkTyper.LANDKODER]: countryCodes,
-      }}
+      } as AlleKodeverk}
     />);
 
     let begrunnelse = wrapper.find({ name: 'kanIkkeOppgiBegrunnelse' });

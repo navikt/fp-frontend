@@ -6,7 +6,9 @@ import ForeldelseProsessIndex from '@fpsak-frontend/prosess-foreldelse';
 import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
-import { Aksjonspunkt, FeilutbetalingPerioderWrapper, StandardProsessPanelProps } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, AlleKodeverkTilbakekreving, FeilutbetalingPerioderWrapper, StandardProsessPanelProps,
+} from '@fpsak-frontend/types';
 
 import { requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';
 import ForeldelseProsessStegInitPanel from './ForeldelseProsessStegInitPanel';
@@ -27,6 +29,7 @@ describe('<ForeldelseProsessStegInitPanel>', () => {
         kode: navBrukerKjonn.KVINNE,
         kodeverk: '',
       }}
+      fptilbakeKodeverk={{} as AlleKodeverkTilbakekreving}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);

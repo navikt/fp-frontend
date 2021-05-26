@@ -17,7 +17,7 @@ import {
   validateProsentandel,
 } from '@fpsak-frontend/utils';
 import arbeidskategori from '@fpsak-frontend/kodeverk/src/arbeidskategori';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import RenderGraderingPeriodeFieldArray from './RenderGraderingPeriodeFieldArray';
 
@@ -32,7 +32,7 @@ interface PureOwnProps {
   namePrefix: string;
   readOnly: boolean;
   visFeilMelding: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
 }
 
 interface MappedOwnProps {

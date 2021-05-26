@@ -5,7 +5,7 @@ import sinon from 'sinon';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
-import { FeilutbetalingPerioderWrapper } from '@fpsak-frontend/types';
+import { AlleKodeverkTilbakekreving, FeilutbetalingPerioderWrapper } from '@fpsak-frontend/types';
 
 import ForeldelsesresultatActivity from '../types/foreldelsesresultatActivitytsType';
 import { ForeldelseForm } from './ForeldelseForm';
@@ -35,7 +35,7 @@ describe('<ForeldelseForm>', () => {
       merknaderFraBeslutter={{
         notAccepted: false,
       }}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverkTilbakekreving}
       beregnBelop={sinon.spy()}
       behandlingId={1}
       perioderForeldelse={{} as FeilutbetalingPerioderWrapper}
@@ -73,7 +73,7 @@ describe('<ForeldelseForm>', () => {
         notAccepted: false,
       }}
       apCodes={['5003']}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverkTilbakekreving}
       beregnBelop={sinon.spy()}
       behandlingId={1}
       perioderForeldelse={{} as FeilutbetalingPerioderWrapper}
@@ -109,7 +109,7 @@ describe('<ForeldelseForm>', () => {
         notAccepted: false,
       }}
       apCodes={['5003']}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverkTilbakekreving}
       beregnBelop={sinon.spy()}
       behandlingId={1}
       perioderForeldelse={{} as FeilutbetalingPerioderWrapper}

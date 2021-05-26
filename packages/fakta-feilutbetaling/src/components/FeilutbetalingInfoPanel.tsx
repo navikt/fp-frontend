@@ -21,7 +21,7 @@ import {
   DDMMYYYY_DATE_FORMAT, hasValidText, maxLength, minLength, required, getKodeverknavnFn, decodeHtmlEntity,
 } from '@fpsak-frontend/utils';
 import {
-  Aksjonspunkt, FeilutbetalingFakta, KodeverkMedNavn, FeilutbetalingAarsak,
+  Aksjonspunkt, FeilutbetalingFakta, AlleKodeverk, FeilutbetalingAarsak, AlleKodeverkTilbakekreving,
 } from '@fpsak-frontend/types';
 import { AvklartFaktaFeilutbetalingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -49,8 +49,8 @@ interface PureOwnProps {
   submitCallback: (aksjonspunktData: AvklartFaktaFeilutbetalingAp) => Promise<void>;
   hasOpenAksjonspunkter: boolean;
   readOnly: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
-  fpsakKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverkTilbakekreving;
+  fpsakKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
 }
 

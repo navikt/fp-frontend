@@ -3,9 +3,10 @@ import { FormattedMessage } from 'react-intl';
 
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { AlleKodeverk } from '@fpsak-frontend/types';
+
 import messages from '../../../i18n/nb_NO.json';
 import { AksjonspunktBehandlerImpl as UnwrappedForm } from './AksjonspunktBehandler';
 import AksjonspunktBehandlerTB from '../arbeidstaker/AksjonspunktBehandlerTB';
@@ -51,7 +52,7 @@ const alleKodeverk = {
     kodeverk: 'AKTIVITET_STATUS',
     navn: 'Arbeidstaker',
   }],
-};
+} as AlleKodeverk;
 
 describe('<UnwrappedForm>', () => {
   it('Skal teste at riktig componenter blir renderet for FL readOnly', () => {

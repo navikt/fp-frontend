@@ -13,7 +13,7 @@ import {
   BeregningsresultatFp,
   BeregningsresultatPeriode,
   Feriepengegrunnlag,
-  KodeverkMedNavn,
+  AlleKodeverk,
   Personoversikt,
   Soknad,
   Kjønnkode,
@@ -59,7 +59,7 @@ interface PureOwnProps {
   soknad: Soknad;
   fagsakYtelseTypeKode: string;
   aksjonspunkter: Aksjonspunkt[];
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   readOnly: boolean;
   submitCallback: (data: VurderTilbaketrekkAp) => Promise<void>;
   readOnlySubmitButton: boolean;

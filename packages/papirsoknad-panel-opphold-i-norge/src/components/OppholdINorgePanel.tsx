@@ -10,7 +10,7 @@ import { isRequiredMessage } from '@fpsak-frontend/utils';
 import { ArrowBox, BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 
 import UtenlandsOppholdField, { FormValues as FormValuesFieldArray } from './UtenlandsOppholdField';
@@ -21,7 +21,7 @@ interface PureOwnProps {
   soknadData: SoknadData;
   readOnly: boolean;
   form: string;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
 }
 
 interface MappedOwnProps {

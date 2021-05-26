@@ -5,7 +5,7 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fa
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
-import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
+import { AlleKodeverk, FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 
 import { AdopsjonInfoPanelImpl } from './AdopsjonInfoPanel';
 import DokumentasjonFaktaForm from './DokumentasjonFaktaForm';
@@ -62,7 +62,7 @@ describe('<AdopsjonInfoPanel>', () => {
       readOnly={false}
       editedStatus={editedStatus}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       isForeldrepengerFagsak
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
@@ -108,7 +108,7 @@ describe('<AdopsjonInfoPanel>', () => {
       readOnly={false}
       editedStatus={editedStatus}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       isForeldrepengerFagsak
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}
@@ -140,7 +140,7 @@ describe('<AdopsjonInfoPanel>', () => {
       readOnly
       editedStatus={editedStatus}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       isForeldrepengerFagsak
       soknad={{} as Soknad}
       gjeldendeFamiliehendelse={{} as FamilieHendelse}

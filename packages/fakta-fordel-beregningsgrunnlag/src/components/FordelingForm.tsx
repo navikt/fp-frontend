@@ -11,7 +11,7 @@ import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktSta
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
-import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, AlleKodeverk } from '@fpsak-frontend/types';
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 
@@ -38,7 +38,7 @@ interface PureOwnProps {
   submittable: boolean;
   submitEnabled: boolean;
   beregningsgrunnlag: Beregningsgrunnlag;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   behandlingType: Kodeverk;
   aksjonspunkter: Aksjonspunkt[];
   intl: IntlShape;
@@ -133,7 +133,7 @@ export const buildInitialValuesFordelBeregning = createSelector(
     (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
   (beregningsgrunnlag: Beregningsgrunnlag,
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]},
+    alleKodeverk: AlleKodeverk,
     aksjonspunkter: Aksjonspunkt[]): null | FordelBeregningsgrunnlagMedAksjonspunktValues => {
     const fordelBGPerioder = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag.fordelBeregningsgrunnlagPerioder;
     if (!hasAksjonspunkt(FORDEL_BEREGNINGSGRUNNLAG, aksjonspunkter)) {
@@ -157,7 +157,7 @@ export const getValidationFordelBeregning = createSelector(
     (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
   (beregningsgrunnlag: Beregningsgrunnlag,
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]},
+    alleKodeverk: AlleKodeverk,
     intl: IntlShape,
     aksjonspunkter: Aksjonspunkt[]) => (values: FordelBeregningsgrunnlagMedAksjonspunktValues) => {
     const fordelBGPerioder = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag.fordelBeregningsgrunnlagPerioder;

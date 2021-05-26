@@ -4,7 +4,7 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
-import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, AlleKodeverk } from '@fpsak-frontend/types';
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 
 import FordelBeregningsgrunnlagAP
@@ -32,7 +32,7 @@ interface OwnProps {
   submitCallback: (aksjonspunktData: FordelBeregningsgrunnlagAP | VurderRefusjonBeregningsgrunnlagAP) => Promise<void>;
   submittable: boolean;
   beregningsgrunnlag: Beregningsgrunnlag;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   behandlingType: Kodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }

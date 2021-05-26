@@ -13,7 +13,7 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
 import {
-  ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriodeAndel, Kodeverk, KodeverkMedNavn,
+  ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriodeAndel, Kodeverk, AlleKodeverk,
 } from '@fpsak-frontend/types';
 
 import { PeriodeMedId } from './TilkjentYtelse';
@@ -102,7 +102,7 @@ interface OwnProps {
   selectedItemData?: PeriodeMedId;
   callbackForward: (...args: any[]) => any;
   callbackBackward: (...args: any[]) => any;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   isSoknadSvangerskapspenger: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }

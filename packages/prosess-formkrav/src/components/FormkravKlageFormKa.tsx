@@ -4,7 +4,7 @@ import { createSelector } from 'reselect';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { KlageVurdering, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, KlageVurdering } from '@fpsak-frontend/types';
 import { KlageFormkravAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import FormkravKlageForm, { getPaKlagdVedtak, IKKE_PA_KLAGD_VEDTAK } from './FormkravKlageForm';
@@ -25,7 +25,7 @@ interface PureOwnProps {
   submitCallback: (data: KlageFormkravAp) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   avsluttedeBehandlinger: AvsluttetBehandling[];
 }
 

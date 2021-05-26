@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import {
-  StandardFaktaPanelProps, FeilutbetalingFakta, KodeverkMedNavn, FeilutbetalingAarsak,
+  FeilutbetalingFakta, AlleKodeverk, FeilutbetalingAarsak, StandardFaktaPanelPropsTilbakekreving,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 import { ReduxWrapper } from '@fpsak-frontend/form';
@@ -15,11 +15,11 @@ const intl = createIntl(messages);
 interface OwnProps {
   feilutbetalingFakta: FeilutbetalingFakta;
   feilutbetalingAarsak: FeilutbetalingAarsak[];
-  fpsakKodeverk: {[key: string]: KodeverkMedNavn[]};
+  fpsakKodeverk: AlleKodeverk;
   fagsakYtelseTypeKode: string;
 }
 
-const FeilutbetalingFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
+const FeilutbetalingFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelPropsTilbakekreving> = ({
   feilutbetalingFakta,
   feilutbetalingAarsak,
   fagsakYtelseTypeKode,

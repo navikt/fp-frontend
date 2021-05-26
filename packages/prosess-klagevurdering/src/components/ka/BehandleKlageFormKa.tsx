@@ -13,7 +13,7 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { KlageVurdering, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { KlageVurdering, Kodeverk, AlleKodeverk } from '@fpsak-frontend/types';
 import { KlageVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import KlageVurderingRadioOptionsKa from './KlageVurderingRadioOptionsKa';
@@ -46,7 +46,7 @@ interface PureOwnProps {
   saveKlage: (data: TransformedValues) => Promise<any>;
   readOnly?: boolean;
   readOnlySubmitButton?: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   sprakkode: Kodeverk;
   submitCallback: (data: KlageVurderingResultatAp) => Promise<void>;
   klageVurdering: KlageVurdering;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
+import { AlleKodeverk, BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 import AksjonspunktBehandlerAT from './AksjonspunktBehandlerAT';
 import messages from '../../../i18n/nb_NO.json';
@@ -42,7 +42,7 @@ describe('<AksjonspunktBehandlerAT>', () => {
     const wrapper = shallowWithIntl(<AksjonspunktBehandlerAT
       readOnly={false}
       alleAndelerIForstePeriode={andeler}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
     const rows = wrapper.find('Row');
@@ -64,7 +64,7 @@ describe('<AksjonspunktBehandlerAT>', () => {
     const wrapper = shallowWithIntl(<AksjonspunktBehandlerAT
       readOnly
       alleAndelerIForstePeriode={andeler}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
     const rows = wrapper.find('Row');

@@ -4,7 +4,7 @@ import {
   ArbeidsgiverOpplysningerPerId,
   AvklarBeregningAktiviteter,
   BeregningAktivitet,
-  KodeverkMedNavn,
+  AlleKodeverk,
 } from '@fpsak-frontend/types';
 import { BeregningAktiviteterTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningAktivitetAP';
 import VurderAktiviteterTabell, { lagAktivitetFieldId } from './VurderAktiviteterTabell';
@@ -119,7 +119,7 @@ type OwnProps = {
     isAksjonspunktClosed: boolean;
     harAksjonspunkt: boolean;
     aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[];
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
     formNameAvklarAktiviteter: string;
     values: AvklarAktiviteterValues;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -137,7 +137,7 @@ interface StaticFunctions {
                                initialValues: AvklarAktiviteterValues,
                                erOverstyrt: boolean) => boolean;
   buildInitialValues: (aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[],
-                       alleKodeverk: {[key: string]: KodeverkMedNavn[]},
+                       alleKodeverk: AlleKodeverk,
                        erOverstyrt: boolean,
                        harAksjonspunkt: boolean,
                        arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => AktiviteterValues;
@@ -265,7 +265,7 @@ const utledGjeldendeSkjæringstidspunktVedPreutfylling = (aktiviteterTomDatoMapp
 };
 
 VurderAktiviteterPanel.buildInitialValues = (aktiviteterTomDatoMapping: AvklarBeregningAktiviteter[],
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]},
+  alleKodeverk: AlleKodeverk,
   erOverstyrt: boolean,
   harAksjonspunkt: boolean,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): AktiviteterValues => {

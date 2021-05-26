@@ -15,7 +15,7 @@ import { ProsessStegSubmitButton, validerApKodeOgHentApEnum } from '@fpsak-front
 import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
 import {
-  Aksjonspunkt, AnkeVurdering, Kodeverk, KodeverkMedNavn,
+  Aksjonspunkt, AlleKodeverk, AnkeVurdering, Kodeverk,
 } from '@fpsak-frontend/types';
 import { BekreftVedtakUtenTotrinnskontrollAp, ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -107,7 +107,7 @@ const hentSprakKode = (ankeOmgjoerArsak: Kodeverk): string => {
   }
 };
 
-export const ResultatOmgjores: FunctionComponent<OwnPropsResultat & { alleKodeverk: {[key: string]: KodeverkMedNavn[]}; }> = ({
+export const ResultatOmgjores: FunctionComponent<OwnPropsResultat & { alleKodeverk: AlleKodeverk; }> = ({
   ankeVurderingResultat,
   alleKodeverk,
 }): ReactElement => (
@@ -126,7 +126,7 @@ export const ResultatOmgjores: FunctionComponent<OwnPropsResultat & { alleKodeve
   </>
 );
 
-export const AnkeResultat: FunctionComponent<OwnPropsResultat & { alleKodeverk: {[key: string]: KodeverkMedNavn[]}; }> = ({
+export const AnkeResultat: FunctionComponent<OwnPropsResultat & { alleKodeverk: AlleKodeverk; }> = ({
   ankeVurderingResultat,
   alleKodeverk,
 }): ReactElement | null => {
@@ -154,7 +154,7 @@ interface PureOwnProps {
   ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
   previewCallback: (data: BrevData) => Promise<any>;
   readOnlySubmitButton?: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
 }
 
 interface MappedOwnProps {

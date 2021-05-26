@@ -17,9 +17,10 @@ import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktSta
 
 import {
   Aksjonspunkt,
+  AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
   BeregningsgrunnlagAndel, BeregningsgrunnlagArbeidsforhold,
-  BeregningsgrunnlagPeriodeProp, Kodeverk, KodeverkMedNavn,
+  BeregningsgrunnlagPeriodeProp, Kodeverk,
 } from '@fpsak-frontend/types';
 import createVisningsnavnForAktivitet from '../../util/createVisningsnavnForAktivitet';
 
@@ -141,7 +142,7 @@ export const createTableData = createSelector(
     (ownProps: OwnProps) => ownProps.alleKodeverk,
     (ownProps: OwnProps) => ownProps.arbeidsgiverOpplysningerPerId],
   (allePerioder: BeregningsgrunnlagPeriodeProp[],
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]},
+    alleKodeverk: AlleKodeverk,
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): TidsbegrenseArbeidsforholdTabellData => {
     // Vi er ikke interessert i perioder som oppstår grunnet naturalytelse
     const relevantePerioder = finnPerioderMedAvsluttetArbeidsforhold(allePerioder);
@@ -279,7 +280,7 @@ type OwnProps = {
     formName: string;
     aksjonspunkter: Aksjonspunkt[];
     allePerioder: BeregningsgrunnlagPeriodeProp[];
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
 };
 
 type MappedOwnProps = {

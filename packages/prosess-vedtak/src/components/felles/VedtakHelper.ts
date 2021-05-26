@@ -4,7 +4,7 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
-  KodeverkMedNavn, SimuleringResultat, TilbakekrevingValg, Vilkar,
+  AlleKodeverk, SimuleringResultat, TilbakekrevingValg, Vilkar,
 } from '@fpsak-frontend/types';
 
 const tilbakekrevingMedInntrekk = (tilbakekrevingKode: string, simuleringResultat: SimuleringResultat): boolean => tilbakekrevingKode
@@ -12,7 +12,7 @@ const tilbakekrevingMedInntrekk = (tilbakekrevingKode: string, simuleringResulta
   && (!!simuleringResultat.simuleringResultat.sumInntrekk || !!simuleringResultat.simuleringResultatUtenInntrekk);
 
 export const getTilbakekrevingText = (
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]},
+  alleKodeverk: AlleKodeverk,
   simuleringResultat: SimuleringResultat,
   tilbakekrevingvalg?: TilbakekrevingValg,
 ): string => {

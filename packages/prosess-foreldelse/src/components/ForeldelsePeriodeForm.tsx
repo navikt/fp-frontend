@@ -17,7 +17,7 @@ import {
 } from '@fpsak-frontend/utils';
 import { FlexColumn, FlexRow, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import tilbakekrevingKodeverkTyper from '@fpsak-frontend/kodeverk/src/tilbakekrevingKodeverkTyper';
-import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverkTilbakekreving, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import TilbakekrevingTimelineData from './splittePerioder/TilbakekrevingTimelineData';
 import ForeldelsesresultatActivity from '../types/foreldelsesresultatActivitytsType';
@@ -36,7 +36,7 @@ export type FormValues = {
 
 interface PureOwnProps {
   periode: ForeldelsesresultatActivity;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverkTilbakekreving;
   oppdaterPeriode: (values: FormValues) => void;
   skjulPeriode: (event: React.MouseEvent) => void;
   setNestePeriode: (event: React.KeyboardEvent | React.MouseEvent) => void;

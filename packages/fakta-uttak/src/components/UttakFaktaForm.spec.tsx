@@ -4,6 +4,7 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
+  AlleKodeverk,
   FamilieHendelseSamling, Kodeverk, Personoversikt, UttakKontrollerFaktaPerioder, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
@@ -102,7 +103,7 @@ describe('<UttakFaktaForm>', () => {
         initialValues={{}}
         aksjonspunkter={[]}
         hasRevurderingOvertyringAp={false}
-        alleKodeverk={{}}
+        alleKodeverk={{} as AlleKodeverk}
         kanOverstyre={false}
         faktaArbeidsforhold={[]}
         personoversikt={{} as Personoversikt}

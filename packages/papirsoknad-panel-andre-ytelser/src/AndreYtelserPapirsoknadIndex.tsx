@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 
 import AndreYtelserPanel, { FormValues } from './components/AndreYtelserPanel';
@@ -12,7 +12,7 @@ const intl = createIntl(messages);
 interface OwnProps {
   readOnly: boolean;
   form: string;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   kunMiliterEllerSiviltjeneste?: boolean,
 }
 

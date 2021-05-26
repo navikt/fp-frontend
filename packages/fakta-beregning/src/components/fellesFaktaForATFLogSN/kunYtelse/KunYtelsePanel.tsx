@@ -5,7 +5,7 @@ import { formatCurrencyNoKr, removeSpacesFromNumber } from '@fpsak-frontend/util
 import {
   AndelForFaktaOmBeregning,
   ArbeidsgiverOpplysningerPerId,
-  KodeverkMedNavn,
+  AlleKodeverk,
   KunYtelse,
 } from '@fpsak-frontend/types';
 import { BrukersAndelFieldArrayImpl } from './BrukersAndelFieldArray';
@@ -20,14 +20,14 @@ type OwnProps = {
     isAksjonspunktClosed: boolean;
     skalSjekkeBesteberegning: boolean;
     skalViseInntektstabell?: boolean;
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
 };
 
 interface StaticFunctions {
   buildInitialValues: (kunYtelse: KunYtelse,
                        faktaOmBeregningAndeler: AndelForFaktaOmBeregning[],
                        arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-                       alleKodeverk: {[key: string]: KodeverkMedNavn[]}) => any;
+                       alleKodeverk: AlleKodeverk) => any;
   summerFordeling: (values: any) => number;
   transformValues: (values: any, kunYtelse: KunYtelse) => any;
   validate: (values: any, aktivertePaneler: string[], kunYtelse: KunYtelse) => any;

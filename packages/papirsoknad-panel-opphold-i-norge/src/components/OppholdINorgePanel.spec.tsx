@@ -13,6 +13,7 @@ import {
   DDMMYYYY_DATE_FORMAT,
   isRequiredMessage,
 } from '@fpsak-frontend/utils';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import OppholdINorgePanel, { OppholdINorgePanelImpl } from './OppholdINorgePanel';
 
@@ -38,7 +39,7 @@ describe('<OppholdINorgePanel>', () => {
   }];
   const alleKodeverk = {
     [kodeverkTyper.LANDKODER]: countryCodes,
-  };
+  } as AlleKodeverk;
 
   describe('validate', () => {
     it('skal validere at opphold i Norge nå er besvart', () => {

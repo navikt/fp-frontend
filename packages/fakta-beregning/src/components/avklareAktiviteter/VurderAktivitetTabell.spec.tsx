@@ -8,6 +8,7 @@ import { RadioGroupField } from '@fpsak-frontend/form';
 import {
   Table, TableRow, TableColumn, EditedIcon,
 } from '@fpsak-frontend/shared-components';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 import { VurderAktiviteterTabell, lagAktivitetFieldId, skalVurdereAktivitet } from './VurderAktiviteterTabell';
 
 const aktivitet1 = {
@@ -107,7 +108,7 @@ const alleKodeverk = {
     navn: 'Arbeidsavklaringspenger',
     kodeverk: 'test',
   }],
-};
+} as AlleKodeverk;
 
 const changeCallback = sinon.spy();
 

@@ -6,7 +6,7 @@ import TilbakekrevingProsessIndex from '@fpsak-frontend/prosess-tilbakekreving';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import {
-  Aksjonspunkt, DetaljerteFeilutbetalingsperioder, FeilutbetalingPerioderWrapper, Kodeverk, VilkarsVurdertePerioderWrapper,
+  Aksjonspunkt, AlleKodeverkTilbakekreving, DetaljerteFeilutbetalingsperioder, FeilutbetalingPerioderWrapper, Kodeverk, VilkarsVurdertePerioderWrapper,
 } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@fpsak-frontend/utils';
@@ -36,10 +36,12 @@ type EndepunktPanelData = {
 
 interface OwnProps {
   fagsakKjønn: Kodeverk;
+  fptilbakeKodeverk: AlleKodeverkTilbakekreving;
 }
 
 const TilbakekrevingProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   fagsakKjønn,
+  fptilbakeKodeverk,
   ...props
 }) => {
   const { startRequest: beregnBelop } = restApiTilbakekrevingHooks.useRestApiRunner(TilbakekrevingBehandlingApiKeys.BEREGNE_BELØP);
@@ -59,6 +61,7 @@ const TilbakekrevingProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
           navBrukerKjonn={fagsakKjønn.kode}
           beregnBelop={beregnBelop}
           {...data}
+          alleKodeverk={fptilbakeKodeverk}
         />
       )}
     />

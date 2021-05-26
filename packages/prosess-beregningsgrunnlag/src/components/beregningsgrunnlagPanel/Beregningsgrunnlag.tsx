@@ -6,8 +6,7 @@ import { removeSpacesFromNumber } from '@fpsak-frontend/utils';
 import {
   ArbeidsgiverOpplysningerPerId,
   BeregningsgrunnlagPeriodeProp,
-  KodeverkMedNavn,
-  BeregningsgrunnlagAndel, Inntektsgrunnlag,
+  BeregningsgrunnlagAndel, Inntektsgrunnlag, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import YtelserFraInfotrygd from '../tilstotendeYtelser/YtelserFraInfotrygd';
@@ -57,7 +56,7 @@ const createRelevantePaneler = (alleAndelerIForstePeriode : BeregningsgrunnlagAn
   relevanteStatuser: RelevanteStatuserProp,
   allePerioder: BeregningsgrunnlagPeriodeProp[],
   gjelderBesteberegning: boolean,
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]},
+  alleKodeverk: AlleKodeverk,
   sammenligningsGrunnlagInntekter: Inntektsgrunnlag,
   skjeringstidspunktDato: string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement => ( // NOSONAR TODO splitte i flere komponenter?
@@ -147,7 +146,7 @@ type OwnProps = {
     relevanteStatuser: RelevanteStatuserProp;
     allePerioder?: BeregningsgrunnlagPeriodeProp[];
     gjelderBesteberegning: boolean;
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
     sammenligningsGrunnlagInntekter?: Inntektsgrunnlag;
     skjeringstidspunktDato?: string;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;

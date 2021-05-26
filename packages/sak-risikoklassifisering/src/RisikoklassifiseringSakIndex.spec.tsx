@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import { Risikoklassifisering } from '@fpsak-frontend/types';
+import { AlleKodeverk, Risikoklassifisering } from '@fpsak-frontend/types';
 
 import kontrollresultatKode from './kodeverk/kontrollresultatKode';
 import RisikoklassifiseringSakIndex from './RisikoklassifiseringSakIndex';
@@ -27,7 +27,7 @@ describe('<RisikoklassifiseringSakIndex>', () => {
       readOnly={false}
       submitAksjonspunkt={sinon.spy()}
       toggleRiskPanel={sinon.spy()}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
     expect(wrapper.find(ManglendeKlassifiseringPanel)).toHaveLength(1);
     expect(wrapper.find(IngenRisikoPanel)).toHaveLength(0);
@@ -41,7 +41,7 @@ describe('<RisikoklassifiseringSakIndex>', () => {
       readOnly={false}
       submitAksjonspunkt={sinon.spy()}
       toggleRiskPanel={sinon.spy()}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
     expect(wrapper.find(ManglendeKlassifiseringPanel)).toHaveLength(1);
     expect(wrapper.find(IngenRisikoPanel)).toHaveLength(0);
@@ -55,7 +55,7 @@ describe('<RisikoklassifiseringSakIndex>', () => {
       readOnly={false}
       submitAksjonspunkt={sinon.spy()}
       toggleRiskPanel={sinon.spy()}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
     expect(wrapper.find(ManglendeKlassifiseringPanel)).toHaveLength(0);
     expect(wrapper.find(IngenRisikoPanel)).toHaveLength(1);
@@ -69,7 +69,7 @@ describe('<RisikoklassifiseringSakIndex>', () => {
       readOnly={false}
       submitAksjonspunkt={sinon.spy()}
       toggleRiskPanel={sinon.spy()}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
     expect(wrapper.find(ManglendeKlassifiseringPanel)).toHaveLength(0);
     expect(wrapper.find(IngenRisikoPanel)).toHaveLength(0);

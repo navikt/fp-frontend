@@ -15,7 +15,7 @@ import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   ArbeidsgiverOpplysningerPerId,
-  Behandling, Kodeverk, KodeverkMedNavn, UttakStonadskontoer,
+  Behandling, Kodeverk, AlleKodeverk, UttakStonadskontoer,
 } from '@fpsak-frontend/types';
 import UttakActivity from './UttakActivity';
 import DelOppPeriodeModal, { DeltPeriodeData } from './DelOppPeriodeModal';
@@ -123,7 +123,7 @@ interface OwnProps {
   selectedItemData?: PeriodeMedClassName;
   stonadskonto?: UttakStonadskontoer;
   uttaksresultatActivity: UttaksresultatActivity[];
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }

@@ -3,6 +3,7 @@ import sinon from 'sinon';
 
 import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import BeregningsgrunnlagProsessIndex from './BeregningsgrunnlagProsessIndex';
 import messages from '../i18n/nb_NO.json';
@@ -27,7 +28,7 @@ describe('<BeregningsgrunnlagProsessIndex>', () => {
       isAksjonspunktOpen={false}
       vilkar={[]}
       status=""
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
       alleMerknaderFraBeslutter={{}}
       setFormData={() => undefined}

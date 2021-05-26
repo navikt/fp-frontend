@@ -3,7 +3,7 @@ import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregn
 import {
   AndelForFaktaOmBeregning,
   ArbeidsgiverOpplysningerPerId,
-  KodeverkMedNavn,
+  AlleKodeverk,
   KunYtelse,
 } from '@fpsak-frontend/types';
 import KunYtelsePanel from './KunYtelsePanel';
@@ -56,7 +56,7 @@ export const buildInitialValuesKunYtelse = (kunYtelse: KunYtelse,
   tilfeller: string[],
   faktaOmBeregningAndeler: AndelForFaktaOmBeregning[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]}) => {
+  alleKodeverk: AlleKodeverk) => {
   if (tilfeller && tilfeller.includes(FASTSETT_BG_KUN_YTELSE)) {
     return KunYtelsePanel.buildInitialValues(kunYtelse, faktaOmBeregningAndeler, arbeidsgiverOpplysningerPerId, alleKodeverk);
   }

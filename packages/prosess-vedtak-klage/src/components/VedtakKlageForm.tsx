@@ -11,7 +11,7 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import {
-  Aksjonspunkt, Behandling, KlageVurdering, KlageVurderingResultat, KodeverkMedNavn,
+  Aksjonspunkt, Behandling, KlageVurdering, KlageVurderingResultat, KodeverkMedNavn, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import { BekreftVedtakUtenTotrinnskontrollAp, ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
@@ -46,7 +46,7 @@ interface PureOwnProps {
   submitCallback: (data: AksjonspunktData) => Promise<void>;
   previewVedtakCallback: (data: ForhandsvisData) => Promise<any>;
   readOnly: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
 }
 
 interface MappedOwnProps {

@@ -14,7 +14,7 @@ import {
   AksjonspunktHelpTextTemp, DateLabel, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import { TimeLineNavigation } from '@fpsak-frontend/tidslinje';
-import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, AlleKodeverk } from '@fpsak-frontend/types';
 
 import OpptjeningTimeLine from './timeline/OpptjeningTimeLine';
 import ActivityPanel, { activityPanelName } from './activity/ActivityPanel';
@@ -54,7 +54,7 @@ interface PureOwnProps {
   formName: string;
   submitting: boolean;
   isDirty: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }

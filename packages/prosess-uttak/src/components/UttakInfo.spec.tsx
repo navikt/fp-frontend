@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { shallow } from 'enzyme';
 
-import { PeriodeSokerAktivitet } from '@fpsak-frontend/types';
+import { AlleKodeverk, PeriodeSokerAktivitet } from '@fpsak-frontend/types';
 
 import { UttakInfo } from './UttakInfo';
 import { PeriodeMedClassName } from './Uttak';
@@ -45,7 +45,7 @@ describe('<UttakInfo>', () => {
       readOnly={false}
       harSoktOmFlerbarnsdager
       oppholdArsakTyper={[]}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const checkboxField = wrapper.find('CheckboxField');
@@ -60,7 +60,7 @@ describe('<UttakInfo>', () => {
       readOnly
       oppholdArsakTyper={[]}
       harSoktOmFlerbarnsdager
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const checkboxField = wrapper.find('CheckboxField');
@@ -78,7 +78,7 @@ describe('<UttakInfo>', () => {
       readOnly={false}
       harSoktOmFlerbarnsdager={false}
       oppholdArsakTyper={[]}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />);
     const checkboxField = wrapper.find('CheckboxField');

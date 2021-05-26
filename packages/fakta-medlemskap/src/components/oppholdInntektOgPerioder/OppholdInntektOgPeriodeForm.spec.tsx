@@ -5,7 +5,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { Medlemskap } from '@fpsak-frontend/types';
+import { AlleKodeverk, Medlemskap } from '@fpsak-frontend/types';
 import { FaktaBegrunnelseTextField } from '@fpsak-frontend/fakta-felles';
 import { OppholdInntektOgPeriodeForm, PeriodeMedId, FormValues } from './OppholdInntektOgPeriodeForm';
 import OppholdINorgeOgAdresserFaktaPanel from './OppholdINorgeOgAdresserFaktaPanel';
@@ -28,7 +28,7 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       valgtPeriode={valgtPeriode}
       submittable
       readOnly
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       onSubmit={sinon.spy()}
       medlemskap={{
@@ -73,7 +73,7 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       submittable
       readOnly={false}
       valgtPeriode={valgtPeriodeMedBosattAksjonspunkt}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       onSubmit={sinon.spy()}
       medlemskap={{
@@ -116,7 +116,7 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       submittable
       readOnly={false}
       valgtPeriode={valgtPeriodeMedAksjonspunkt}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       onSubmit={sinon.spy()}
       medlemskap={{
@@ -160,7 +160,7 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       submittable
       readOnly={false}
       valgtPeriode={valgtPeriodeMedOppholdsrettAksjonspunkt}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       onSubmit={sinon.spy()}
       medlemskap={{
@@ -204,7 +204,7 @@ describe('<OppholdInntektOgPeriodeForm>', () => {
       submittable
       readOnly={false}
       valgtPeriode={valgtPeriodeMedLovligoppholdAksjonspunkt}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       onSubmit={sinon.spy()}
       medlemskap={{

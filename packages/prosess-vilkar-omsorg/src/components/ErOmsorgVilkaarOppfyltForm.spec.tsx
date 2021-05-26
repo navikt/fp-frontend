@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
+import { Aksjonspunkt, AlleKodeverk, Behandling } from '@fpsak-frontend/types';
 import { ProsessStegBegrunnelseTextField, VilkarResultPicker } from '@fpsak-frontend/prosess-felles';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
@@ -54,7 +54,7 @@ describe('<ErOmsorgVilkaarOppfyltForm>', () => {
       initialValues={{
         erVilkarOk: true,
       }}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       originalErVilkarOk
       erIkkeGodkjentAvBeslutter={false}
     />);
@@ -83,7 +83,7 @@ describe('<ErOmsorgVilkaarOppfyltForm>', () => {
       initialValues={{
         erVilkarOk: true,
       }}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       originalErVilkarOk
       erIkkeGodkjentAvBeslutter={false}
     />);
@@ -135,7 +135,7 @@ describe('<ErOmsorgVilkaarOppfyltForm>', () => {
       initialValues={{
         erVilkarOk: true,
       }}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       originalErVilkarOk
       erIkkeGodkjentAvBeslutter={false}
     />);

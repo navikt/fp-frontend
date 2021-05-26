@@ -3,8 +3,8 @@ import {
 } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
-  Aksjonspunkt, Aktor, Behandling, BehandlingAppKontekst, Dokument, Fagsak, FagsakPersoner, Historikkinnslag,
-  KlageVurdering, KodeverkMedNavn, NavAnsatt, Risikoklassifisering, TotrinnskontrollSkjermlenkeContext,
+  Aksjonspunkt, Aktor, AlleKodeverk, AlleKodeverkTilbakekreving, Behandling, BehandlingAppKontekst, Dokument, Fagsak, FagsakPersoner, Historikkinnslag,
+  KlageVurdering, NavAnsatt, Risikoklassifisering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
 import SakRettigheter from '../fagsak/sakRettigheterTsType';
@@ -52,8 +52,8 @@ export enum LinkCategory {
 export const FpsakApiKeys = {
   INIT_FETCH: new RestKey<InitLinks, void>('INIT_FETCH'),
   INIT_FETCH_FPTILBAKE: new RestKey<InitLinks, void>('INIT_FETCH_FPTILBAKE'),
-  KODEVERK: new RestKey<{[key: string]: KodeverkMedNavn[]}, void>('KODEVERK'),
-  KODEVERK_FPTILBAKE: new RestKey<{[key: string]: KodeverkMedNavn[]}, void>('KODEVERK_FPTILBAKE'),
+  KODEVERK: new RestKey<AlleKodeverk, void>('KODEVERK'),
+  KODEVERK_FPTILBAKE: new RestKey<AlleKodeverkTilbakekreving, void>('KODEVERK_FPTILBAKE'),
   NAV_ANSATT: new RestKey<NavAnsatt, void>('NAV_ANSATT'),
   BEHANDLENDE_ENHETER: new RestKey<BehandlendeEnheter, void>('BEHANDLENDE_ENHETER'),
   FEATURE_TOGGLE: new RestKey<{ featureToggles: {[key: string]: boolean} }, { toggles: { navn: string }[]}>('FEATURE_TOGGLE'),

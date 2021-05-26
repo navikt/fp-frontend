@@ -5,6 +5,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import {
+  AlleKodeverk,
   InntektArbeidYtelse, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
 import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -60,7 +61,7 @@ describe('<MedlemskapInfoPanel>', () => {
       }}
       soknad={{} as Soknad}
       inntektArbeidYtelse={{} as InntektArbeidYtelse}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       medlemskap={{} as Medlemskap}
       readOnlyForStartdatoForForeldrepenger={false}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -105,7 +106,7 @@ describe('<MedlemskapInfoPanel>', () => {
       }}
       soknad={{} as Soknad}
       inntektArbeidYtelse={{} as InntektArbeidYtelse}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       medlemskap={{} as Medlemskap}
       readOnlyForStartdatoForForeldrepenger={false}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -150,7 +151,7 @@ describe('<MedlemskapInfoPanel>', () => {
       }}
       soknad={{} as Soknad}
       inntektArbeidYtelse={{} as InntektArbeidYtelse}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       medlemskap={{} as Medlemskap}
       readOnlyForStartdatoForForeldrepenger={false}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -179,7 +180,7 @@ describe('<MedlemskapInfoPanel>', () => {
       }}
       soknad={{} as Soknad}
       inntektArbeidYtelse={{} as InntektArbeidYtelse}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       medlemskap={{} as Medlemskap}
       readOnlyForStartdatoForForeldrepenger={false}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

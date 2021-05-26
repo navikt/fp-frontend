@@ -7,7 +7,7 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import behandlingTyper from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatuser from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, FaktaArbeidsforhold, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, FaktaArbeidsforhold, FamilieHendelseSamling, Kodeverk, AlleKodeverk,
   Personoversikt,
   UttakKontrollerFaktaPerioder, Ytelsefordeling,
 } from '@fpsak-frontend/types';
@@ -42,7 +42,7 @@ interface OwnProps {
   behandlingStatus: Kodeverk;
   ytelsefordeling: Ytelsefordeling;
   uttakPerioder: UttakKontrollerFaktaPerioder[];
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   kanOverstyre: boolean;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
   personoversikt: Personoversikt;
@@ -81,7 +81,7 @@ const UttakInfoPanel: FunctionComponent<OwnProps> = ({
   const erArsakTypeHendelseFodsel = getErArsakTypeHendelseFodsel(behandlingArsakTyper);
   const isRevurdering = behandlingIsRevurdering && (erManueltOpprettet || erArsakTypeHendelseFodsel);
   const behandlingUtredes = behandlingStatus.kode === behandlingStatuser.BEHANDLING_UTREDES;
-  const sortedUttakPerioder = [...uttakPerioder.sort(sortUttaksperioder)];
+  const sortedUttakPerioder = [...uttakPerioder].sort(sortUttaksperioder);
 
   return (
     <>

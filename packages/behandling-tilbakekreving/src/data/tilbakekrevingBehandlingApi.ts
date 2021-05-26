@@ -2,7 +2,7 @@ import { RestApiConfigBuilder, createRequestApi, RestKey } from '@fpsak-frontend
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
   Aksjonspunkt, Behandling, BeregningsresultatTilbakekreving, DetaljerteFeilutbetalingsperioder, FeilutbetalingAarsak,
-  FeilutbetalingFakta, FeilutbetalingPerioderWrapper, Kodeverk, KodeverkMedNavn, Vedtaksbrev, Verge, VilkarsVurdertePerioderWrapper,
+  FeilutbetalingFakta, FeilutbetalingPerioderWrapper, Kodeverk, Vedtaksbrev, Verge, VilkarsVurdertePerioderWrapper, AlleKodeverkTilbakekreving,
 } from '@fpsak-frontend/types';
 import { SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
@@ -24,7 +24,7 @@ export const TilbakekrevingBehandlingApiKeys = {
   UPDATE_ON_HOLD: new RestKey<void, SettPaVentParams>('UPDATE_ON_HOLD'),
   SAVE_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_AKSJONSPUNKT'),
   BEREGNE_BELØP: new RestKey<any, any>('BEREGNE_BELØP'),
-  TILBAKE_KODEVERK: new RestKey<{[key: string]: KodeverkMedNavn[]}, void>('TILBAKE_KODEVERK'),
+  TILBAKE_KODEVERK: new RestKey<AlleKodeverkTilbakekreving, void>('TILBAKE_KODEVERK'),
   PREVIEW_VEDTAKSBREV: new RestKey<any, any>('PREVIEW_VEDTAKSBREV'),
   VERGE: new RestKey<Verge, void>('VERGE'),
   VERGE_OPPRETT: new RestKey<Behandling, any>('VERGE_OPPRETT'),

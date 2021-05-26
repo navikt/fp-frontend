@@ -6,7 +6,7 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vedtakResultatType from '@fpsak-frontend/kodeverk/src/vedtakResultatType';
 import VedtakTilbakekrevingProsessIndex from '@fpsak-frontend/prosess-vedtak-tilbakekreving';
 import aktsomhet from '@fpsak-frontend/prosess-tilbakekreving/src/kodeverk/aktsomhet';
-import { Behandling, BeregningsresultatTilbakekreving } from '@fpsak-frontend/types';
+import { AlleKodeverkTilbakekreving, Behandling, BeregningsresultatTilbakekreving } from '@fpsak-frontend/types';
 
 const vedtaksbrev = {
   avsnittsliste: [{
@@ -150,17 +150,12 @@ const beregningsresultat = {
 } as BeregningsresultatTilbakekreving;
 
 const alleKodeverk = {
-  [kodeverkTyper.VEDTAK_RESULTAT_TYPE]: [{
-    kode: vedtakResultatType.DELVIS_TILBAKEBETALING,
-    navn: 'Delvis tilbakebetaling',
-    kodeverk: 'VEDTAK_RESULTAT_TYPE',
-  }],
   [kodeverkTyper.AKTSOMHET]: [{
     kode: aktsomhet.FORSETT,
     navn: 'Forsett',
     kodeverk: 'AKTSOMHET',
   }],
-};
+} as AlleKodeverkTilbakekreving;
 
 const standardProsessProps = {
   behandling: {

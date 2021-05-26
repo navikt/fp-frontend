@@ -5,7 +5,9 @@ import { FormattedMessage } from 'react-intl';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
-import { Personoversikt, Soknad, Ytelsefordeling } from '@fpsak-frontend/types';
+import {
+  AlleKodeverk, Personoversikt, Soknad, Ytelsefordeling,
+} from '@fpsak-frontend/types';
 
 import BostedFaktaView from './BostedFaktaView';
 import OmsorgFaktaForm from './OmsorgFaktaForm';
@@ -64,7 +66,7 @@ describe('<OmsorgInfoPanel>', () => {
       hasOpenAksjonspunkter
       submittable
       readOnly={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       ytelsefordeling={{} as Ytelsefordeling}
       soknad={{} as Soknad}
       alleMerknaderFraBeslutter={{}}
@@ -86,7 +88,7 @@ describe('<OmsorgInfoPanel>', () => {
       submittable
       readOnly={false}
       personoversikt={personoversikt}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       ytelsefordeling={{} as Ytelsefordeling}
       soknad={{} as Soknad}
       alleMerknaderFraBeslutter={{}}
@@ -111,7 +113,7 @@ describe('<OmsorgInfoPanel>', () => {
       submittable
       readOnly={false}
       personoversikt={personoversikt}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       ytelsefordeling={{} as Ytelsefordeling}
       soknad={{} as Soknad}
       alleMerknaderFraBeslutter={{}}
@@ -135,7 +137,7 @@ describe('<OmsorgInfoPanel>', () => {
       submittable
       readOnly={false}
       personoversikt={personoversikt}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       ytelsefordeling={{} as Ytelsefordeling}
       soknad={{} as Soknad}
       alleMerknaderFraBeslutter={{}}
@@ -157,7 +159,7 @@ describe('<OmsorgInfoPanel>', () => {
       submittable
       readOnly={false}
       personoversikt={personoversikt}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       ytelsefordeling={{} as Ytelsefordeling}
       soknad={{} as Soknad}
       alleMerknaderFraBeslutter={{}}

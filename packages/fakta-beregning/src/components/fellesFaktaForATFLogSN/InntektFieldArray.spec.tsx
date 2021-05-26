@@ -6,7 +6,7 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { isRequiredMessage } from '@fpsak-frontend/utils';
 import { metaMock, MockFieldsWithContent } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { Table } from '@fpsak-frontend/shared-components';
-import { FaktaOmBeregning } from '@fpsak-frontend/types';
+import { AlleKodeverk, FaktaOmBeregning } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { lagStateMedAksjonspunkterOgBeregningsgrunnlag } from '../beregning-test-helper';
@@ -58,7 +58,7 @@ const alleKodeverk = {
       kodeverk: 'test',
     },
   ],
-};
+} as AlleKodeverk;
 
 const andelField = {
   nyAndel: false,
@@ -327,7 +327,7 @@ describe('<InntektFieldArray>', () => {
   });
 
   it('skal ikkje bygge initial values om ingen andeler', () => {
-    const iv = InntektFieldArray.buildInitialValues([], {}, {});
+    const iv = InntektFieldArray.buildInitialValues([], {}, {} as AlleKodeverk);
     expect(Object.keys(iv)).toHaveLength(0);
   });
 });

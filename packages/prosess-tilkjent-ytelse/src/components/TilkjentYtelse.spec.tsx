@@ -2,6 +2,7 @@ import React from 'react';
 
 import { TimeLineControl, TimeLineSokerEnsamSoker } from '@fpsak-frontend/tidslinje';
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import messages from '../../i18n/nb_NO.json';
 import { PeriodeMedId, TilkjentYtelse } from './TilkjentYtelse';
@@ -42,7 +43,7 @@ describe('<TilkjentYtelse>', () => {
       hovedsokerKjonnKode="K"
       intl={intlMock}
       isSoknadSvangerskapspenger={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
     expect(wrapper.find(TimeLineSokerEnsamSoker)).toHaveLength(1);

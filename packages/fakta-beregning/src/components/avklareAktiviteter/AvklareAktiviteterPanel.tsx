@@ -18,7 +18,7 @@ import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import {
-  ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, AvklarBeregningAktiviteterMap, KodeverkMedNavn,
+  ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, AvklarBeregningAktiviteterMap, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import BeregningAktivitetAP, { AvklarBeregningsaktiviteterAP, OverstyrBeregningsaktiviteterAP }
   from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningAktivitetAP';
@@ -85,7 +85,7 @@ const skalViseSubmitKnappEllerBegrunnelse = (aksjonspunkter: Aksjonspunkt[],
 
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[],
   avklarAktiviteter: AvklarBeregningAktiviteterMap,
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]},
+  alleKodeverk: AlleKodeverk,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   harOverstyrt = false): AvklarAktiviteterValues => {
   const harAvklarAksjonspunkt = hasAksjonspunkt(AVKLAR_AKTIVITETER, aksjonspunkter);
@@ -117,7 +117,7 @@ type OwnProps = {
     readOnly: boolean;
     submittable: boolean;
     harAndreAksjonspunkterIPanel: boolean;
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
     beregningsgrunnlag: Beregningsgrunnlag;
     aksjonspunkter: Aksjonspunkt[];
     erOverstyrer: boolean;

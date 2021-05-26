@@ -4,6 +4,7 @@ import { shallow } from 'enzyme';
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import {
   FordelBeregningsgrunnlagForm,
@@ -188,7 +189,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       isAksjonspunktClosed={false}
       readOnly={false}
       beregningsgrunnlag={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       behandlingType={bt}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
     />);

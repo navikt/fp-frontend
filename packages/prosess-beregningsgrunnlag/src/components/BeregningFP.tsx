@@ -15,7 +15,7 @@ import aktivitetStatus, {
   isStatusTilstotendeYtelse,
 } from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
-import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Vilkar from '@fpsak-frontend/types/src/vilkarTsType';
 import GraderingUtenBGReadOnly from './gradering/GraderingUtenBGReadOnly';
@@ -71,7 +71,7 @@ type OwnProps = {
     readOnly: boolean;
     readOnlySubmitButton: boolean;
     aksjonspunkter: Aksjonspunkt[];
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
     beregningsgrunnlag: Beregningsgrunnlag;
     vilkar: Vilkar[];
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;

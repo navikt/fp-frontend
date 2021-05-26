@@ -4,7 +4,7 @@ import AlertStripe from 'nav-frontend-alertstriper';
 
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { DetaljertFeilutbetalingPeriode } from '@fpsak-frontend/types';
+import { AlleKodeverkTilbakekreving, DetaljertFeilutbetalingPeriode } from '@fpsak-frontend/types';
 
 import TilbakekrevingTimelinePanel from './timeline/TilbakekrevingTimelinePanel';
 import VilkarResultat from '../kodeverk/vilkarResultat';
@@ -39,7 +39,7 @@ describe('<TilbakekrevingForm>', () => {
       }}
       behandlingId={1}
       behandlingVersjon={2}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverkTilbakekreving}
       beregnBelop={() => undefined}
       perioderForeldelse={{} as any}
       submitCallback={() => undefined}
@@ -75,7 +75,7 @@ describe('<TilbakekrevingForm>', () => {
       }}
       behandlingId={1}
       behandlingVersjon={2}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverkTilbakekreving}
       beregnBelop={() => undefined}
       perioderForeldelse={{} as any}
       submitCallback={() => undefined}
@@ -110,7 +110,7 @@ describe('<TilbakekrevingForm>', () => {
       }}
       behandlingId={1}
       behandlingVersjon={2}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverkTilbakekreving}
       beregnBelop={() => undefined}
       error="TilbakekrevingPeriodeForm.TotalbelopetUnder4Rettsgebyr"
       perioderForeldelse={{} as any}

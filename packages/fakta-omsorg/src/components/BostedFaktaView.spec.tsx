@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { PersonopplysningerBasis, Personoversikt } from '@fpsak-frontend/types';
+import { AlleKodeverk, PersonopplysningerBasis, Personoversikt } from '@fpsak-frontend/types';
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import messages from '../../i18n/nb_NO.json';
@@ -49,7 +49,7 @@ describe('<BostedFaktaView>', () => {
     const wrapper = shallow(<BostedFaktaView.WrappedComponent
       intl={intlMock}
       personoversikt={soker}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
     const bostedBarnView = wrapper.find('BostedBarnView');
     expect(bostedBarnView).toHaveLength(2);
@@ -62,7 +62,7 @@ describe('<BostedFaktaView>', () => {
     const wrapper = shallow(<BostedFaktaView.WrappedComponent
       intl={intlMock}
       personoversikt={soker}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
     const bostedSokerView = wrapper.find(BostedSokerView);
     expect(bostedSokerView).toHaveLength(1);
@@ -89,7 +89,7 @@ describe('<BostedFaktaView>', () => {
         ...soker,
         annenPart: ektefelle,
       }}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
     const bostedSokerView = wrapper.find(BostedSokerView);
     expect(bostedSokerView).toHaveLength(2);

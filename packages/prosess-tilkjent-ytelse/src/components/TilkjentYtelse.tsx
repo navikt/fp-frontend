@@ -9,7 +9,7 @@ import { calcDaysAndWeeks, DDMMYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-fr
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import {
-  ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriode, KodeverkMedNavn, Kjønnkode,
+  ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriode, AlleKodeverk, Kjønnkode,
 } from '@fpsak-frontend/types';
 import { TimeLineControl, TimeLineSokerEnsamSoker } from '@fpsak-frontend/tidslinje';
 
@@ -135,7 +135,7 @@ interface OwnProps {
   familiehendelseDate: Date;
   hovedsokerKjonnKode: Kjønnkode;
   isSoknadSvangerskapspenger: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 

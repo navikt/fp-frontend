@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { Fagsak, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, Fagsak } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 
 import FagsakSearch from './components/FagsakSearch';
@@ -18,7 +18,7 @@ interface OwnProps {
   searchResultAccessDenied?: {
     feilmelding: string;
   };
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
 }
 
 /*

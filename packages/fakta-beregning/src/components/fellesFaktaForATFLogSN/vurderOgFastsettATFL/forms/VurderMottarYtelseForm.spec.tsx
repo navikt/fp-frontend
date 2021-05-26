@@ -6,7 +6,7 @@ import { isRequiredMessage } from '@fpsak-frontend/utils';
 import { RadioGroupField } from '@fpsak-frontend/form';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 
-import { ArbeidstakerUtenIMAndel, FaktaOmBeregning } from '@fpsak-frontend/types';
+import { AlleKodeverk, ArbeidstakerUtenIMAndel, FaktaOmBeregning } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import { createVisningsnavnFakta } from '../../../ArbeidsforholdHelper';
 import VurderMottarYtelseForm, {
@@ -91,7 +91,7 @@ const agOpplysninger = {
   },
 };
 
-const alleKodeverk = {};
+const alleKodeverk = {} as AlleKodeverk;
 
 describe('<VurderMottarYtelseForm>', () => {
   it('skal teste at initial values bygges korrekt uten dto til stede', () => {

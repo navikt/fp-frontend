@@ -26,8 +26,8 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import { Tidslinje, EventProps } from '@fpsak-frontend/tidslinje';
 import {
-  Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn,
-  Soknad, UttakPeriodeGrense, UttaksresultatPeriode, Ytelsefordeling, Kjønnkode,
+  Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, Kodeverk,
+  Soknad, UttakPeriodeGrense, UttaksresultatPeriode, Ytelsefordeling, Kjønnkode, AlleKodeverk,
   AvklartBarn, UttakStonadskontoer, PeriodeSoker, ArbeidsgiverOpplysningerPerId, Personoversikt,
 } from '@fpsak-frontend/types';
 import { TidslinjeTimes } from '@fpsak-frontend/tidslinje/src/Tidslinje';
@@ -110,7 +110,7 @@ interface PureOwnProps {
   behandlingType: Kodeverk;
   behandlingStatus: Kodeverk;
   fagsak: Fagsak;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   readOnly: boolean;
   isApOpen: boolean;
   aksjonspunkter: Aksjonspunkt[];
@@ -706,7 +706,7 @@ const addClassNameGroupIdToPerioder = (
   uttakResultatPerioder: UttaksresultatPeriode,
   intl: IntlShape,
   bStatus: Kodeverk,
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]},
+  alleKodeverk: AlleKodeverk,
   hovedsoker: boolean,
 ): PeriodeMedClassName[] => { // NOSONAR Blir fiksa ved refaktorering av Uttak
   const behandlingStatusKode = bStatus.kode;

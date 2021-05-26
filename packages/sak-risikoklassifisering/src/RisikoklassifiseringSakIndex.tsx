@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { Risikoklassifisering, Aksjonspunkt, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Risikoklassifisering, Aksjonspunkt, AlleKodeverk } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { VurderFaresignalerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -28,7 +28,7 @@ interface OwnProps {
   readOnly: boolean;
   submitAksjonspunkt: (data: VurderFaresignalerAp) => Promise<void>;
   toggleRiskPanel: () => void;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
 }
 
 /**

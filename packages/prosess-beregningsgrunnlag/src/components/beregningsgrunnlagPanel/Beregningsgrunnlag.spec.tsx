@@ -3,6 +3,8 @@ import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { AlleKodeverk } from '@fpsak-frontend/types';
+
 import Beregningsgrunnlag, { TEKSTFELTNAVN_BEGRUNN_DEKNINGSGRAD_ENDRING } from './Beregningsgrunnlag';
 import GrunnlagForAarsinntektPanelAT from '../arbeidstaker/GrunnlagForAarsinntektPanelAT';
 import GrunnlagForAarsinntektPanelFL from '../frilanser/GrunnlagForAarsinntektPanelFL';
@@ -129,7 +131,7 @@ describe('<Beregningsgrunnlag>', () => {
       allePerioder={lagPerioderMedAndeler([arbeidstakerAndel])}
       relevanteStatuser={{ isArbeidstaker: true, isKombinasjonsstatus: true } as RelevanteStatuserProp}
       gjelderBesteberegning={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     const atPanel = wrapper.find(GrunnlagForAarsinntektPanelAT);
@@ -143,7 +145,7 @@ describe('<Beregningsgrunnlag>', () => {
       allePerioder={lagPerioderMedAndeler([frilanserAndel])}
       relevanteStatuser={{ isFrilanser: true, isKombinasjonsstatus: true } as RelevanteStatuserProp}
       gjelderBesteberegning={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     const flPanel = wrapper.find(GrunnlagForAarsinntektPanelFL);
@@ -157,7 +159,7 @@ describe('<Beregningsgrunnlag>', () => {
       allePerioder={lagPerioderMedAndeler([selvstedigNaeringsdrivendeAndel])}
       relevanteStatuser={{ isSelvstendigNaeringsdrivende: true } as RelevanteStatuserProp}
       gjelderBesteberegning={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     const snPanel = wrapper.find(GrunnlagForAarsinntektPanelSN);
@@ -171,7 +173,7 @@ describe('<Beregningsgrunnlag>', () => {
       allePerioder={lagPerioderMedAndeler([selvstedigNaeringsdrivendeAndel])}
       relevanteStatuser={{ isSelvstendigNaeringsdrivende: true } as RelevanteStatuserProp}
       gjelderBesteberegning={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     const snPanel = wrapper.find(GrunnlagForAarsinntektPanelSN);
@@ -186,7 +188,7 @@ describe('<Beregningsgrunnlag>', () => {
       allePerioder={lagPerioderMedAndeler([selvstedigNaeringsdrivendeAndel, arbeidstakerAndel])}
       relevanteStatuser={{ isArbeidstaker: true, isSelvstendigNaeringsdrivende: true, isKombinasjonsstatus: true } as RelevanteStatuserProp}
       gjelderBesteberegning={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     expect(wrapper.find(MilitaerPanel)).toHaveLength(0);
@@ -203,7 +205,7 @@ describe('<Beregningsgrunnlag>', () => {
         isKombinasjonsstatus: true,
       } as RelevanteStatuserProp}
       gjelderBesteberegning={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     expect(wrapper.find(MilitaerPanel)).toHaveLength(0);
@@ -220,7 +222,7 @@ describe('<Beregningsgrunnlag>', () => {
         isKombinasjonsstatus: true,
       } as RelevanteStatuserProp}
       gjelderBesteberegning={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     expect(wrapper.find(MilitaerPanel)).toHaveLength(0);
@@ -238,7 +240,7 @@ describe('<Beregningsgrunnlag>', () => {
         isKombinasjonsstatus: true,
       } as RelevanteStatuserProp}
       gjelderBesteberegning={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     expect(wrapper.find(MilitaerPanel)).toHaveLength(0);
@@ -251,7 +253,7 @@ describe('<Beregningsgrunnlag>', () => {
       allePerioder={lagPerioderMedAndeler([aapAndel, dagpengerAndel])}
       relevanteStatuser={{ harDagpengerEllerAAP: true, isKombinasjonsstatus: false, isSelvstendigNaeringsdrivende: false } as RelevanteStatuserProp}
       gjelderBesteberegning={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(0);
@@ -268,7 +270,7 @@ describe('<Beregningsgrunnlag>', () => {
       allePerioder={lagPerioderMedAndeler([tyAndel])}
       relevanteStatuser={{ harDagpengerEllerAAP: false, isKombinasjonsstatus: false, harAndreTilstotendeYtelser: true } as RelevanteStatuserProp}
       gjelderBesteberegning={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(0);
@@ -283,7 +285,7 @@ describe('<Beregningsgrunnlag>', () => {
       allePerioder={lagPerioderMedAndeler([militaerAndel])}
       relevanteStatuser={{ isMilitaer: true } as RelevanteStatuserProp}
       gjelderBesteberegning={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     expect(wrapper.find(GrunnlagForAarsinntektPanelAT)).toHaveLength(0);

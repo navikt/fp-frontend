@@ -11,7 +11,7 @@ import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src
 
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
-import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, AlleKodeverk } from '@fpsak-frontend/types';
 import FaktaForATFLOgSNPanel, {
   getBuildInitialValuesFaktaForATFLOgSN,
   transformValuesFaktaForATFLOgSN,
@@ -69,7 +69,7 @@ type OwnProps = {
     erOverstyrt: boolean;
     beregningsgrunnlag: Beregningsgrunnlag;
     aksjonspunkter: Aksjonspunkt[];
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
     erOverstyrer: boolean;
     submitCallback: (data: any) => Promise<any>;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;

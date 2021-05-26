@@ -6,6 +6,7 @@ import { Undertekst } from 'nav-frontend-typografi';
 
 import { MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import Image from '@fpsak-frontend/shared-components/src/Image';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import { RegistrerVirksomhetPanel } from './RegistrerVirksomhetPanel';
 
@@ -18,7 +19,7 @@ describe('<RegistrerVirksomhetPanel>', () => {
       meta={{} as FieldArrayMetaProps}
       namePrefix="regvirk"
       form="form"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     const image = wrapper.find(Image);
@@ -36,7 +37,7 @@ describe('<RegistrerVirksomhetPanel>', () => {
       meta={{} as FieldArrayMetaProps}
       namePrefix="regvirk"
       form="form"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     const fields = wrapper.find('Field');
@@ -53,7 +54,7 @@ describe('<RegistrerVirksomhetPanel>', () => {
       namePrefix="regvirk"
       virksomheter={virksomheter}
       form="form"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     // @ts-ignore
@@ -72,7 +73,7 @@ describe('<RegistrerVirksomhetPanel>', () => {
       namePrefix="regvirk"
       virksomheter={virksomheter}
       form="form"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     // @ts-ignore
@@ -99,7 +100,7 @@ describe('<RegistrerVirksomhetPanel>', () => {
       namePrefix="regvirk"
       virksomheter={virksomheter}
       form="form"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     // @ts-ignore
@@ -123,7 +124,7 @@ describe('<RegistrerVirksomhetPanel>', () => {
       namePrefix="regvirk"
       virksomheter={virksomheter}
       form="form"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     // @ts-ignore

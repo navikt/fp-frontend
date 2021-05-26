@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import { Systemtittel } from 'nav-frontend-typografi';
 
-import { BeregningResultatPeriode } from '@fpsak-frontend/types';
+import { AlleKodeverkTilbakekreving, BeregningResultatPeriode } from '@fpsak-frontend/types';
 
 import TilbakekrevingVedtak from './TilbakekrevingVedtak';
 import TilbakekrevingVedtakPeriodeTabell from './TilbakekrevingVedtakPeriodeTabell';
@@ -38,7 +38,7 @@ describe('<TilbakekrevingVedtak>', () => {
       resultat={{ kode: 'testresultat', kodeverk: '' }}
       perioder={perioder as BeregningResultatPeriode[]}
       behandlingUuid="uuid"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverkTilbakekreving}
       avsnittsliste={[]}
       fetchPreviewVedtaksbrev={sinon.spy()}
     />);

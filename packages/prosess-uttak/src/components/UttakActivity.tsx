@@ -38,7 +38,7 @@ import {
 } from '@fpsak-frontend/shared-components';
 
 import {
-  ArbeidsgiverOpplysningerPerId,
+  ArbeidsgiverOpplysningerPerId, AlleKodeverk,
   Behandling, Kodeverk, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import RenderUttakTable, { AktivitetFieldArray } from './RenderUttakTable';
@@ -131,7 +131,7 @@ interface PureOwnProps {
   selectedItemData: PeriodeMedClassName;
   readOnly: boolean;
   harSoktOmFlerbarnsdager: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }

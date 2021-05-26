@@ -8,6 +8,7 @@ import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import MottattDatoPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-mottatt-dato';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import { SvangerskapspengerForm, transformValues } from './SvangerskapspengerForm';
 
@@ -18,7 +19,7 @@ describe('<SvangerskapspengerForm>', () => {
       onSubmitUfullstendigsoknad={sinon.spy()}
       readOnly={false}
       soknadData={new SoknadData(fagsakYtelseType.FORELDREPENGER, familieHendelseType.FODSEL, foreldreType.MOR)}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
       validate={sinon.spy()}

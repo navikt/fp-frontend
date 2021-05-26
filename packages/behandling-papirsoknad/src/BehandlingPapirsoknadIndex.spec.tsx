@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { AksessRettigheter, Fagsak } from '@fpsak-frontend/types';
+import { AksessRettigheter, AlleKodeverk, Fagsak } from '@fpsak-frontend/types';
 
 import RegistrerPapirsoknad from './components/RegistrerPapirsoknad';
 import BehandlingPapirsoknadIndex from './BehandlingPapirsoknadIndex';
@@ -28,7 +28,7 @@ describe('<BehandlingPapirsoknadIndex>', () => {
       }}
       behandlingId={1}
       oppdaterBehandlingVersjon={() => {}}
-      kodeverk={{}}
+      kodeverk={{} as AlleKodeverk}
       fagsak={{} as Fagsak}
       rettigheter={{} as AksessRettigheter}
       oppdaterProsessStegOgFaktaPanelIUrl={() => {}}

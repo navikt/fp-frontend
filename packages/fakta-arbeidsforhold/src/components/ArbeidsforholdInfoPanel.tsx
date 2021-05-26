@@ -8,7 +8,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { omitMany } from '@fpsak-frontend/utils';
 import {
-  Aksjonspunkt, Arbeidsforhold, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn,
+  Aksjonspunkt, Arbeidsforhold, ArbeidsgiverOpplysningerPerId, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import { AvklarArbeidsforholdAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -47,7 +47,7 @@ interface PureOwnProps {
   readOnly: boolean;
   hasOpenAksjonspunkter: boolean;
   skalKunneLeggeTilNyeArbeidsforhold: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }

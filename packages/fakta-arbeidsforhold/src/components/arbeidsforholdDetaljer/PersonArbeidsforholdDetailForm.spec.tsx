@@ -4,7 +4,7 @@ import sinon from 'sinon';
 
 import { TextAreaField } from '@fpsak-frontend/form';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { Arbeidsforhold } from '@fpsak-frontend/types';
+import { AlleKodeverk, Arbeidsforhold } from '@fpsak-frontend/types';
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import PersonNyttEllerErstattArbeidsforholdPanel from './PersonNyttEllerErstattArbeidsforholdPanel';
@@ -60,7 +60,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         tilVurdering: true,
         replaceOptions: [],
       } as CustomArbeidsforhold}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
       validate={() => undefined}
@@ -87,7 +87,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         tilVurdering: true,
         replaceOptions: [{ id: '2' } as Arbeidsforhold],
       } as CustomArbeidsforhold}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
       validate={() => undefined}
@@ -115,7 +115,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         tilVurdering: true,
         replaceOptions: [{ id: '2' } as Arbeidsforhold],
       } as CustomArbeidsforhold}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
       validate={() => undefined}
@@ -143,7 +143,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         tilVurdering: true,
         replaceOptions: [],
       } as CustomArbeidsforhold}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
       validate={() => undefined}
@@ -171,7 +171,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         tilVurdering: true,
         replaceOptions: [],
       } as CustomArbeidsforhold}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
       validate={() => undefined}
@@ -199,7 +199,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         tilVurdering: true,
         replaceOptions: [],
       } as CustomArbeidsforhold}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
       validate={() => undefined}
@@ -227,7 +227,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         tilVurdering: true,
         replaceOptions: [],
       } as CustomArbeidsforhold}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
       validate={() => undefined}
@@ -254,7 +254,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         tilVurdering: true,
         replaceOptions: [],
       } as CustomArbeidsforhold}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
       validate={() => undefined}
@@ -282,7 +282,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         tilVurdering: true,
         replaceOptions: [],
       } as CustomArbeidsforhold}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
       validate={() => undefined}
@@ -310,7 +310,7 @@ describe('<PersonArbeidsforholdDetailForm>', () => {
         tilVurdering: true,
         replaceOptions: [],
       } as CustomArbeidsforhold}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       updateArbeidsforhold={() => undefined}
       onSubmit={() => undefined}
       validate={() => undefined}

@@ -129,7 +129,6 @@ export const visHistorikkNårBehandlingIkkeErValgt = () => (
     <HistorikkSakIndex
       historikkFpSak={history}
       historikkFpTilbake={[]}
-      alleKodeverkFpTilbake={{}}
       alleKodeverkFpSak={alleKodeverk as any}
       saksnummer="2"
       getBehandlingLocation={() => locationMock}
@@ -146,7 +145,6 @@ export const visHistorikkNårBehandlingErValgt = () => (
     <HistorikkSakIndex
       historikkFpSak={history}
       historikkFpTilbake={[]}
-      alleKodeverkFpTilbake={{}}
       alleKodeverkFpSak={alleKodeverk as any}
       saksnummer="2"
       getBehandlingLocation={() => locationMock}

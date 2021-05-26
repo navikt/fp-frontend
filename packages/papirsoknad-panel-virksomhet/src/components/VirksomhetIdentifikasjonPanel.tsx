@@ -13,7 +13,7 @@ import {
   dateBeforeOrEqualToToday, hasValidDate, hasValidInteger, hasValidOrgNumber, required, validPeriodeFomTom,
 } from '@fpsak-frontend/utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] => countryCodes
   .map(({
@@ -23,7 +23,7 @@ const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] =>
 
 interface PureOwnProps {
   readOnly?: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   form: string;
 }
 

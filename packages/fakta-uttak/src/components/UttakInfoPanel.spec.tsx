@@ -3,6 +3,7 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import {
+  AlleKodeverk,
   FamilieHendelseSamling, Kodeverk, Personoversikt, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
@@ -47,7 +48,7 @@ describe('<UttakInfoPanel>', () => {
       behandlingStatus={{} as Kodeverk}
       ytelsefordeling={{} as Ytelsefordeling}
       uttakPerioder={[]}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       kanOverstyre={false}
       faktaArbeidsforhold={[]}
       personoversikt={{} as Personoversikt}
@@ -70,7 +71,7 @@ describe('<UttakInfoPanel>', () => {
       behandlingStatus={{} as Kodeverk}
       ytelsefordeling={{} as Ytelsefordeling}
       uttakPerioder={[]}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       kanOverstyre={false}
       faktaArbeidsforhold={[]}
       personoversikt={{} as Personoversikt}

@@ -6,7 +6,9 @@ import { Knapp } from 'nav-frontend-knapper';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
-import { FamilieHendelseSamling, Kodeverk, Personoversikt } from '@fpsak-frontend/types';
+import {
+  AlleKodeverk, FamilieHendelseSamling, Kodeverk, Personoversikt,
+} from '@fpsak-frontend/types';
 
 import { UttakPerioder } from './UttakPerioder';
 import UttakSlettPeriodeModal from './UttakSlettPeriodeModal';
@@ -55,7 +57,7 @@ describe('<UttakPerioder>', () => {
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
         behandlingStatus={{} as Kodeverk}
-        alleKodeverk={{}}
+        alleKodeverk={{} as AlleKodeverk}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
@@ -98,7 +100,7 @@ describe('<UttakPerioder>', () => {
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
         behandlingStatus={{} as Kodeverk}
-        alleKodeverk={{}}
+        alleKodeverk={{} as AlleKodeverk}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
@@ -140,7 +142,7 @@ describe('<UttakPerioder>', () => {
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
         behandlingStatus={{} as Kodeverk}
-        alleKodeverk={{}}
+        alleKodeverk={{} as AlleKodeverk}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
@@ -178,7 +180,7 @@ describe('<UttakPerioder>', () => {
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
         behandlingStatus={{} as Kodeverk}
-        alleKodeverk={{}}
+        alleKodeverk={{} as AlleKodeverk}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
@@ -211,7 +213,7 @@ describe('<UttakPerioder>', () => {
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
         behandlingStatus={{} as Kodeverk}
-        alleKodeverk={{}}
+        alleKodeverk={{} as AlleKodeverk}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
@@ -244,7 +246,7 @@ describe('<UttakPerioder>', () => {
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
         behandlingStatus={{} as Kodeverk}
-        alleKodeverk={{}}
+        alleKodeverk={{} as AlleKodeverk}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
@@ -300,7 +302,7 @@ describe('<UttakPerioder>', () => {
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
         behandlingStatus={{} as Kodeverk}
-        alleKodeverk={{}}
+        alleKodeverk={{} as AlleKodeverk}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}
@@ -334,7 +336,7 @@ describe('<UttakPerioder>', () => {
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
         behandlingStatus={{} as Kodeverk}
-        alleKodeverk={{}}
+        alleKodeverk={{} as AlleKodeverk}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
         arbeidsgiverOpplysningerPerId={{}}

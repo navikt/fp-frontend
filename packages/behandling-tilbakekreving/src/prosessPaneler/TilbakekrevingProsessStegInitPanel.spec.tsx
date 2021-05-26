@@ -5,7 +5,7 @@ import TilbakekrevingProsessIndex from '@fpsak-frontend/prosess-tilbakekreving';
 import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
-import { Aksjonspunkt, StandardProsessPanelProps } from '@fpsak-frontend/types';
+import { Aksjonspunkt, AlleKodeverkTilbakekreving, StandardProsessPanelProps } from '@fpsak-frontend/types';
 
 import { requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';
 import TilbakekrevingProsessStegInitPanel from './TilbakekrevingProsessStegInitPanel';
@@ -25,6 +25,7 @@ describe('<TilbakekrevingProsessStegInitPanel>', () => {
         kode: navBrukerKjonn.KVINNE,
         kodeverk: '',
       }}
+      fptilbakeKodeverk={{} as AlleKodeverkTilbakekreving}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);

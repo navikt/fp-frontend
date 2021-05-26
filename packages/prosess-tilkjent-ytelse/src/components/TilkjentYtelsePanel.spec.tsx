@@ -7,7 +7,7 @@ import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Aksjonspunkt, BeregningsresultatFp, FamilieHendelseSamling, Personoversikt, Soknad,
+  Aksjonspunkt, AlleKodeverk, BeregningsresultatFp, FamilieHendelseSamling, Personoversikt, Soknad,
 } from '@fpsak-frontend/types';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
@@ -58,7 +58,7 @@ describe('<TilkjentYtelsePanel>', () => {
       beregningresultat={beregningsresultat}
       submitCallback={sinon.spy()}
       readOnlySubmitButton
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       familieHendelseSamling={familiehendelse}
       personoversikt={{} as Personoversikt}
       soknad={{} as Soknad}
@@ -88,7 +88,7 @@ describe('<TilkjentYtelsePanel>', () => {
       beregningresultat={beregningsresultat}
       submitCallback={sinon.spy()}
       readOnlySubmitButton
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       familieHendelseSamling={familiehendelse}
       personoversikt={{} as Personoversikt}
       soknad={{} as Soknad}
@@ -118,7 +118,7 @@ describe('<TilkjentYtelsePanel>', () => {
       beregningresultat={beregningsresultat}
       submitCallback={sinon.spy()}
       readOnlySubmitButton
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       familieHendelseSamling={familiehendelse}
       personoversikt={{} as Personoversikt}
       soknad={{} as Soknad}
@@ -155,7 +155,7 @@ describe('<TilkjentYtelsePanel>', () => {
       beregningresultat={beregningsresultat}
       submitCallback={sinon.spy()}
       readOnlySubmitButton
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       familieHendelseSamling={familiehendelse}
       personoversikt={{} as Personoversikt}
       soknad={{} as Soknad}
@@ -185,7 +185,7 @@ describe('<TilkjentYtelsePanel>', () => {
       beregningresultat={beregningsresultat}
       submitCallback={sinon.spy()}
       readOnlySubmitButton
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       familieHendelseSamling={familiehendelse}
       personoversikt={{} as Personoversikt}
       soknad={{} as Soknad}
@@ -212,7 +212,7 @@ describe('<TilkjentYtelsePanel>', () => {
       beregningresultat={beregningsresultat}
       submitCallback={sinon.spy()}
       readOnlySubmitButton
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       familieHendelseSamling={familiehendelse}
       personoversikt={{} as Personoversikt}
       soknad={{} as Soknad}

@@ -8,7 +8,7 @@ import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
-  Aksjonspunkt, KodeverkMedNavn, Personoversikt, Soknad, Ytelsefordeling,
+  Aksjonspunkt, AlleKodeverk, Personoversikt, Soknad, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { BekreftAleneomsorgVurderingAp, BekreftOmsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -41,7 +41,7 @@ interface PureOwnProps {
   readOnly: boolean;
   hasOpenAksjonspunkter: boolean;
   submittable: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   personoversikt: Personoversikt;
   ytelsefordeling: Ytelsefordeling;

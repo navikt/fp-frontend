@@ -4,7 +4,7 @@ import { FieldArray } from 'redux-form';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 
 import { BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import RenderInntektsgivendeArbeidFieldArray from './RenderInntektsgivendeArbeidFieldArray';
 import RenderInntektsgivendeArbeidAmbassadeFieldArray, { FormValues as IAFormValues } from './RenderInntektsgivendeArbeidAmbassadeFieldArray';
@@ -16,7 +16,7 @@ const RENDER_INNTEKTSGIVENDE_ARBEID_AMBASSADE_FIELD_ARRAY = 'ambassadearbeidsfor
 
 interface OwnProps {
   readOnly: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
 }
 
 export type FormValues = {
