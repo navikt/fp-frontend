@@ -5,6 +5,7 @@ import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import OAType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import { OpptjeningFaktaFormImpl as OpptjeningFaktaForm } from './OpptjeningFaktaForm';
 import CustomOpptjeningAktivitet from '../CustomOpptjeningAktivitet';
@@ -64,7 +65,7 @@ describe('<OpptjeningFaktaForm>', () => {
       submitting={false}
       isDirty={false}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />);
 
@@ -101,7 +102,7 @@ describe('<OpptjeningFaktaForm>', () => {
       submitting={false}
       isDirty={false}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />);
 
@@ -127,7 +128,7 @@ describe('<OpptjeningFaktaForm>', () => {
       submitting={false}
       isDirty={false}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />);
 
@@ -156,7 +157,7 @@ describe('<OpptjeningFaktaForm>', () => {
       submitting={false}
       isDirty={false}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />);
 
@@ -187,7 +188,7 @@ describe('<OpptjeningFaktaForm>', () => {
       submitting={false}
       isDirty={false}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />);
 
@@ -215,7 +216,7 @@ describe('<OpptjeningFaktaForm>', () => {
       submitting={false}
       isDirty={false}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />);
 
@@ -260,7 +261,7 @@ describe('<OpptjeningFaktaForm>', () => {
       submitting={false}
       isDirty={false}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />);
 
@@ -292,7 +293,7 @@ describe('<OpptjeningFaktaForm>', () => {
       submitting={false}
       isDirty={false}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       arbeidsgiverOpplysningerPerId={{}}
     />);
 

@@ -10,9 +10,9 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import {
+  AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
   BeregningsgrunnlagAndel, BeregningsgrunnlagArbeidsforhold, Kodeverk,
-  KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 import createVisningsnavnForAktivitet from '../../util/createVisningsnavnForAktivitet';
@@ -83,7 +83,7 @@ interface StaticFunctions {
 type OwnProps = {
     readOnly: boolean;
     alleAndelerIForstePeriode: BeregningsgrunnlagAndel[];
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 const AksjonspunktBehandlerAT: FunctionComponent<OwnProps> & StaticFunctions = ({

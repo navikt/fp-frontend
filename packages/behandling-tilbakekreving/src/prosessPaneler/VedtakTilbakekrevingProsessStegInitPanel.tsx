@@ -8,7 +8,7 @@ import VedtakTilbakekrevingProsessIndex from '@fpsak-frontend/prosess-vedtak-til
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import {
-  Aksjonspunkt, BeregningsresultatTilbakekreving, Vedtaksbrev,
+  Aksjonspunkt, AlleKodeverkTilbakekreving, BeregningsresultatTilbakekreving, Vedtaksbrev,
 } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps, FatterVedtakStatusModal } from '@fpsak-frontend/behandling-felles';
 import { AdvarselModal } from '@fpsak-frontend/shared-components';
@@ -66,12 +66,14 @@ interface OwnProps {
   harApenRevurdering: boolean;
   opneSokeside: () => void;
   toggleOppdatereFagsakContext: (skalOppdatereFagsak: boolean) => void;
+  fptilbakeKodeverk: AlleKodeverkTilbakekreving;
 }
 
 const VedtakTilbakekrevingProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
   harApenRevurdering,
   opneSokeside,
   toggleOppdatereFagsakContext,
+  fptilbakeKodeverk,
   ...props
 }) => {
   const { startRequest: forhandsvisVedtaksbrev } = restApiTilbakekrevingHooks.useRestApiRunner(TilbakekrevingBehandlingApiKeys.PREVIEW_VEDTAKSBREV);
@@ -114,6 +116,7 @@ const VedtakTilbakekrevingProsessStegInitPanel: FunctionComponent<OwnProps & Pro
           <VedtakTilbakekrevingProsessIndex
             fetchPreviewVedtaksbrev={fetchPreviewVedtaksbrev}
             {...data}
+            alleKodeverk={fptilbakeKodeverk}
           />
         </>
       )}

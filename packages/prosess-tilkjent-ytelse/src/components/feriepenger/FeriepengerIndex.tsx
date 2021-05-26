@@ -1,10 +1,10 @@
 import React, { FunctionComponent, useState } from 'react';
-import { ArbeidsgiverOpplysningerPerId, Feriepengegrunnlag, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, Feriepengegrunnlag, AlleKodeverk } from '@fpsak-frontend/types';
 import { FeriepengerPanel } from './FeriepengerPanel';
 
 interface OwnProps {
   feriepengegrunnlag: Feriepengegrunnlag;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 

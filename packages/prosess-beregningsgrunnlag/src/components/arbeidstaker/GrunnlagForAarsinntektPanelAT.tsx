@@ -16,9 +16,10 @@ import {
 } from '@fpsak-frontend/shared-components';
 
 import {
+  AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
   BeregningsgrunnlagAndel, BeregningsgrunnlagArbeidsforhold,
-  BeregningsgrunnlagPeriodeProp, Kodeverk, KodeverkMedNavn,
+  BeregningsgrunnlagPeriodeProp, Kodeverk,
 } from '@fpsak-frontend/types';
 import createVisningsnavnForAktivitet from '../../util/createVisningsnavnForAktivitet';
 import NaturalytelsePanel from './NaturalytelsePanel';
@@ -184,7 +185,7 @@ type OwnProps = {
     alleAndelerIFørstePeriode: BeregningsgrunnlagAndel[];
     allePerioder?: BeregningsgrunnlagPeriodeProp[];
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
 };
 
 /**

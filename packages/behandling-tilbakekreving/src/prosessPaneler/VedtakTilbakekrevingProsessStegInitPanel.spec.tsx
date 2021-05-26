@@ -6,7 +6,9 @@ import VedtakResultatType from '@fpsak-frontend/kodeverk/src/vedtakResultatType'
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import VedtakTilbakekrevingProsessIndex from '@fpsak-frontend/prosess-vedtak-tilbakekreving';
 import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
-import { Aksjonspunkt, BeregningsresultatTilbakekreving, StandardProsessPanelProps } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, AlleKodeverkTilbakekreving, BeregningsresultatTilbakekreving, StandardProsessPanelProps,
+} from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import { AdvarselModal } from '@fpsak-frontend/shared-components';
@@ -42,6 +44,7 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       toggleOppdatereFagsakContext={() => {}}
       opneSokeside={() => {}}
       harApenRevurdering={false}
+      fptilbakeKodeverk={{} as AlleKodeverkTilbakekreving}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
@@ -61,6 +64,7 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       toggleOppdatereFagsakContext={() => {}}
       opneSokeside={() => {}}
       harApenRevurdering
+      fptilbakeKodeverk={{} as AlleKodeverkTilbakekreving}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
@@ -79,6 +83,7 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       toggleOppdatereFagsakContext={() => {}}
       opneSokeside={() => {}}
       harApenRevurdering={false}
+      fptilbakeKodeverk={{} as AlleKodeverkTilbakekreving}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
@@ -93,6 +98,7 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       toggleOppdatereFagsakContext={() => {}}
       opneSokeside={() => {}}
       harApenRevurdering={false}
+      fptilbakeKodeverk={{} as AlleKodeverkTilbakekreving}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
@@ -115,6 +121,7 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       toggleOppdatereFagsakContext={() => {}}
       opneSokeside={() => {}}
       harApenRevurdering={false}
+      fptilbakeKodeverk={{} as AlleKodeverkTilbakekreving}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
@@ -139,6 +146,7 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       toggleOppdatereFagsakContext={toggleSkalOppdatereFagsakContext}
       opneSokeside={() => {}}
       harApenRevurdering={false}
+      fptilbakeKodeverk={{} as AlleKodeverkTilbakekreving}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
@@ -164,6 +172,7 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       toggleOppdatereFagsakContext={() => {}}
       opneSokeside={() => {}}
       harApenRevurdering={false}
+      fptilbakeKodeverk={{} as AlleKodeverkTilbakekreving}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);

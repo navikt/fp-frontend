@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { CheckboxField } from '@fpsak-frontend/form';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import { VirksomhetTypeNaringPanel } from './VirksomhetTypeNaringPanel';
 
@@ -15,7 +16,7 @@ describe('<VirksomhetTypeNaringPanel>', () => {
     const wrapper = shallow(<VirksomhetTypeNaringPanel
       naringvirksomhetTyper={naringTyper}
       readOnly={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     const undertekst = wrapper.find('Undertekst');

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 
 import InntektsgivendeArbeidPanel, { FormValues } from './components/InntektsgivendeArbeidPanel';
@@ -11,7 +11,7 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   readOnly: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
 }
 
 interface StaticFunctions {

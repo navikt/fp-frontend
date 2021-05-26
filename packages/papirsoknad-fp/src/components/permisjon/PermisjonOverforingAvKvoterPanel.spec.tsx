@@ -4,6 +4,7 @@ import { FieldArray } from 'redux-form';
 import { SelectField } from '@fpsak-frontend/form';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import messages from '../../../i18n/nb_NO.json';
 import { PermisjonOverforingAvKvoterPanelImpl as PermisjonOverforingAvKvoterPanel } from './PermisjonOverforingAvKvoterPanel';
@@ -38,7 +39,7 @@ describe('<PermisjonOverforingAvKvoterPanel>', () => {
       skalOvertaKvote
       readOnly={readOnly}
       visFeilMelding={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       form="test"
       namePrefix="test"
     />, messages);
@@ -60,7 +61,7 @@ describe('<PermisjonOverforingAvKvoterPanel>', () => {
       skalOvertaKvote={false}
       readOnly={readOnly}
       visFeilMelding={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       form="test"
       namePrefix="test"
     />, messages);

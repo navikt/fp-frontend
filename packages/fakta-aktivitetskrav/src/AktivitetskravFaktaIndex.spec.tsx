@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Behandling } from '@fpsak-frontend/types';
+import { AlleKodeverk, Behandling } from '@fpsak-frontend/types';
 
 import AktivitetskravFaktaIndex from './AktivitetskravFaktaIndex';
 import AktivitetskravFaktaForm from './components/AktivitetskravFaktaForm';
@@ -27,7 +27,7 @@ describe('<AktivitetskravFaktaIndex>', () => {
       harApneAksjonspunkter
       uttakKontrollerAktivitetskrav={uttakKontrollerAktivitetskrav}
       submitCallback={() => undefined}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       alleMerknaderFraBeslutter={{}}
       readOnly={false}
       submittable

@@ -6,6 +6,7 @@ import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import inntektskategorier from '@fpsak-frontend/kodeverk/src/inntektskategorier';
 import { TableColumn, TableRow } from '@fpsak-frontend/shared-components';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 import { InputField, PeriodpickerField, SelectField } from '@fpsak-frontend/form';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { lagStateMedAksjonspunkterOgBeregningsgrunnlag } from '../beregning-test-helper';
@@ -51,7 +52,7 @@ const alleKodeverk = {
     kodeverk: 'test',
   },
   ],
-};
+} as AlleKodeverk;
 
 const behandlingId = 1000051;
 const behandlingVersjon = 1;

@@ -10,7 +10,7 @@ import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { FeilutbetalingAarsak } from '@fpsak-frontend/types';
+import { AlleKodeverk, AlleKodeverkTilbakekreving, FeilutbetalingAarsak } from '@fpsak-frontend/types';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 
 import { FeilutbetalingInfoPanelImpl } from './FeilutbetalingInfoPanel';
@@ -70,7 +70,7 @@ const alleKodeverk = {
     navn: 'Tilbakekreving inntrekk',
     kodeverk: TILBAKEKR_VIDERE_BEH_KODEVERK,
   }],
-};
+} as AlleKodeverkTilbakekreving;
 
 const fpsakKodeverk = {
   [kodeverkTyper.BEHANDLING_AARSAK]: [{
@@ -92,7 +92,7 @@ const fpsakKodeverk = {
     navn: 'Endring i beregning',
     kodeverk: KONSEKVENS_FOR_YTELSEN_KODEVERK,
   }],
-};
+} as AlleKodeverk;
 
 describe('<FeilutbetalingInfoPanel>', () => {
   it('skal rendre komponent korrekt', () => {

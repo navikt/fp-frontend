@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import messages from '../../i18n/nb_NO.json';
 import { EgenVirksomhetPanel } from './EgenVirksomhetPanel';
@@ -13,7 +14,7 @@ describe('<EgenVirksomhetPanel>', () => {
     const wrapper = shallow(<EgenVirksomhetPanel
       intl={intlMock}
       form="form"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     const radios = wrapper.find('RadioOption');
@@ -28,7 +29,7 @@ describe('<EgenVirksomhetPanel>', () => {
       harArbeidetIEgenVirksomhet
       intl={intlMock}
       form="form"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     const fieldarray = wrapper.find('FieldArray');

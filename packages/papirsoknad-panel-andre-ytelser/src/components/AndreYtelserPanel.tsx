@@ -9,7 +9,7 @@ import { CheckboxField } from '@fpsak-frontend/form';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import arbeidType from '@fpsak-frontend/kodeverk/src/arbeidType';
 import { ArrowBox, BorderBox } from '@fpsak-frontend/shared-components';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import RenderAndreYtelserPerioderFieldArray from './RenderAndreYtelserPerioderFieldArray';
 
@@ -30,7 +30,7 @@ const removeArbeidstyper = (andreYtelser: KodeverkMedNavn[], kunMiliterEllerSivi
 interface PureOwnProps {
   readOnly: boolean;
   form: string;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   kunMiliterEllerSiviltjeneste?: boolean;
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { BehandlingContainer } from '@fpsak-frontend/behandling-felles';
-import { AksessRettigheter, Fagsak } from '@fpsak-frontend/types';
+import { AksessRettigheter, AlleKodeverk, Fagsak } from '@fpsak-frontend/types';
 
 import BehandlingEngangsstonadIndex from './BehandlingEngangsstonadIndex';
 import { requestEsApi, EsBehandlingApiKeys } from './data/esBehandlingApi';
@@ -32,7 +32,7 @@ describe('<BehandlingEngangsstonadIndex>', () => {
       }}
       behandlingId={1}
       oppdaterBehandlingVersjon={() => {}}
-      kodeverk={{}}
+      kodeverk={{} as AlleKodeverk}
       fagsak={{} as Fagsak}
       rettigheter={{} as AksessRettigheter}
       oppdaterProsessStegOgFaktaPanelIUrl={() => {}}

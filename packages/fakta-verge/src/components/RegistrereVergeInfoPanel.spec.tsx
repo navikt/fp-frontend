@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { Aksjonspunkt } from '@fpsak-frontend/types';
+import { Aksjonspunkt, AlleKodeverk } from '@fpsak-frontend/types';
 
 import { RegistrereVergeInfoPanelImpl } from './RegistrereVergeInfoPanel';
 import RegistrereVergeFaktaForm from './RegistrereVergeFaktaForm';
@@ -29,7 +29,7 @@ describe('<RegistrereVergeInfoPanel>', () => {
         kanLoses: true,
         erAktivt: true,
       } as Aksjonspunkt]}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       verge={{}}
     />);
 

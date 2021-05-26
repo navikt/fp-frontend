@@ -12,7 +12,9 @@ import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatTyp
 import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
 import oppholdArsakType, { oppholdArsakKontoNavn } from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { ArbeidsgiverOpplysningerPerId, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  ArbeidsgiverOpplysningerPerId, Kodeverk, KodeverkMedNavn, AlleKodeverk,
+} from '@fpsak-frontend/types';
 
 import uttakArbeidTypeTekstCodes from '../utils/uttakArbeidTypeCodes';
 import { PeriodeMedClassName } from './Uttak';
@@ -136,7 +138,7 @@ interface OwnProps {
   harSoktOmFlerbarnsdager: boolean;
   graderingInnvilget?: boolean;
   erSamtidigUttak?: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 

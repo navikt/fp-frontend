@@ -2,7 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { Aksjonspunkt, FastsattOpptjening, OpptjeningAktivitet } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, AlleKodeverk, FastsattOpptjening, OpptjeningAktivitet,
+} from '@fpsak-frontend/types';
 
 import { buildInitialValues, OpptjeningInfoPanel } from './OpptjeningInfoPanel';
 import OpptjeningFaktaForm from './OpptjeningFaktaForm';
@@ -22,7 +24,7 @@ describe('<OpptjeningInfoPanel>', () => {
         },
       }}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       opptjeningAktiviteter={[]}
       aksjonspunkter={[]}
       submitCallback={() => undefined}

@@ -10,7 +10,7 @@ import EngangsstonadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-es';
 import ForeldrepengerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-fp';
 import SvangerskapspengerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-svp';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
-import { Fagsak, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Fagsak, AlleKodeverk } from '@fpsak-frontend/types';
 import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import SoknadTypePickerForm from './SoknadTypePickerForm';
@@ -20,7 +20,7 @@ import styles from './registrerPapirsoknadPanel.less';
 interface OwnProps {
   fagsak: Fagsak;
   fagsakPersonnummer: string;
-  kodeverk: {[key: string]: KodeverkMedNavn[]};
+  kodeverk: AlleKodeverk;
   readOnly: boolean;
   setSoknadData: (soknadData: SoknadData) => SoknadData;
   soknadData: SoknadData;

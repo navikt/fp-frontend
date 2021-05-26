@@ -12,7 +12,7 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, Fagsak, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, Fagsak, FamilieHendelseSamling, Kodeverk, AlleKodeverk,
   Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling, Stonadskonto, Personoversikt,
 } from '@fpsak-frontend/types';
 import { UttakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -96,7 +96,7 @@ interface PureOwnProps {
   person: Personoversikt;
   familiehendelse: FamilieHendelseSamling;
   uttakPeriodeGrense: UttakPeriodeGrense;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   ytelsefordeling: Ytelsefordeling;
   tempUpdateStonadskontoer: (params: {
     behandlingId: {

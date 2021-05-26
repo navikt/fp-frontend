@@ -4,6 +4,7 @@ import { FieldArray } from 'redux-form';
 
 import { CheckboxField } from '@fpsak-frontend/form';
 import arbeidType from '@fpsak-frontend/kodeverk/src/arbeidType';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import AndreYtelserPanel, { AndreYtelserPanel as AndreYtelserPanelImpl } from './AndreYtelserPanel';
 
@@ -21,7 +22,7 @@ describe('<AndreYtelserPanel>', () => {
       andreYtelser={andreYtelser}
       selectedYtelser={{}}
       form="test"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     const checkboxes = wrapper.find(CheckboxField);
@@ -35,7 +36,7 @@ describe('<AndreYtelserPanel>', () => {
       selectedYtelser={{}}
       kunMiliterEllerSiviltjeneste
       form="test"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     const checkboxes = wrapper.find(CheckboxField);
@@ -53,7 +54,7 @@ describe('<AndreYtelserPanel>', () => {
         }],
       }}
       form="test"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     const checkboxes = wrapper.find(CheckboxField);

@@ -24,7 +24,7 @@ import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import {
-  ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Kodeverk, KodeverkMedNavn,
+  ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Kodeverk, KodeverkMedNavn, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import LabelType from '@fpsak-frontend/form/src/LabelType';
 import finnUnikeArbeidsforhold from '../FinnUnikeArbeidsforhold';
@@ -404,7 +404,7 @@ type OwnProps = {
     meta: FieldArrayMetaProps;
     isAksjonspunktClosed: boolean;
     periodeUtenAarsak: boolean;
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
     behandlingType: Kodeverk;
     beregningsgrunnlag: Beregningsgrunnlag;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,

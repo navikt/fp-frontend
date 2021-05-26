@@ -1,11 +1,13 @@
-import {
-  Aksjonspunkt, Behandling, KodeverkMedNavn, Vilkar,
-} from '@fpsak-frontend/types';
 import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+
+import Aksjonspunkt from './aksjonspunktTsType';
+import Behandling from './behandlingTsType';
+import Vilkar from './vilkarTsType';
+import AlleKodeverk from './kodeverkAlleTsType';
 
 interface StandardProsessPanelProps {
   behandling: Behandling;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
   status: string;

@@ -6,6 +6,7 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import opptjeningAktivitetType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { AksjonspunktHelpTextTemp, OverstyringKnapp } from '@fpsak-frontend/shared-components';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import sinon from 'sinon';
 import messages from '../../../i18n/nb_NO.json';
@@ -44,7 +45,7 @@ const alleKodeverk = {
     kodeverk: 'test',
     navn: 'Næring',
   }],
-};
+} as AlleKodeverk;
 
 const apsAvklarAktiviteter = [{
   definisjon: { kode: AVKLAR_AKTIVITETER, kodeverk: 'test' }, status: { kode: 'OPPR', kodeverk: 'test' }, erAktivt: true, kanLoses: true,

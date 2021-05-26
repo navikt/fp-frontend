@@ -4,6 +4,7 @@ import Modal from 'nav-frontend-modal';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import messages from '../../i18n/nb_NO.json';
 import { RegistrerVirksomhetModalForm } from './RegistrerVirksomhetModalForm';
@@ -18,7 +19,7 @@ describe('<RegistrerVirksomhetModalForm>', () => {
       handleSubmit={sinon.spy()}
       closeEvent={sinon.spy()}
       showModal
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />, messages);
 
     const modal = wrapper.find(Modal);
@@ -45,7 +46,7 @@ describe('<RegistrerVirksomhetModalForm>', () => {
       handleSubmit={sinon.spy()}
       closeEvent={sinon.spy()}
       showModal={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />, messages);
 
     const modal = wrapper.find(Modal);
@@ -60,7 +61,7 @@ describe('<RegistrerVirksomhetModalForm>', () => {
       handleSubmit={handleSubmit}
       closeEvent={sinon.spy()}
       showModal={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />, messages);
 
     const hovedknapp = wrapper.find('Hovedknapp');
@@ -76,7 +77,7 @@ describe('<RegistrerVirksomhetModalForm>', () => {
       handleSubmit={sinon.spy()}
       closeEvent={closeEvent}
       showModal={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />, messages);
 
     const knapp = wrapper.find('Knapp');

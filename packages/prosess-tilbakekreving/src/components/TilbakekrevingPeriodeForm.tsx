@@ -21,7 +21,7 @@ import {
 } from '@fpsak-frontend/shared-components';
 import tilbakekrevingKodeverkTyper from '@fpsak-frontend/kodeverk/src/tilbakekrevingKodeverkTyper';
 import {
-  FeilutbetalingPerioderWrapper, Kodeverk, KodeverkMedNavn, DetaljertFeilutbetalingPeriode,
+  FeilutbetalingPerioderWrapper, Kodeverk, KodeverkMedNavn, DetaljertFeilutbetalingPeriode, AlleKodeverkTilbakekreving,
 } from '@fpsak-frontend/types';
 
 import sarligGrunn from '../kodeverk/sarligGrunn';
@@ -443,7 +443,7 @@ const validate = (values: any, sarligGrunnTyper: KodeverkMedNavn[], data: DataFo
 
 interface PureOwnProps {
   behandlingId: number;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverkTilbakekreving;
   oppdaterPeriode: (values: any) => any;
   data: DataForPeriode;
   periode: CustomVilkarsVurdertePeriode;

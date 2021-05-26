@@ -11,7 +11,8 @@ import { Knapp } from 'nav-frontend-knapper';
 
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelse, FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, Personoversikt,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelse,
+  FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, Personoversikt, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import { CheckboxField } from '@fpsak-frontend/form';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
@@ -57,7 +58,7 @@ export const findFamiliehendelseDato = (gjeldendeFamiliehendelse: FamilieHendels
 };
 
 interface PureOwnProps {
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   readOnly: boolean;
   hasOpenAksjonspunkter: boolean;
   submitting: boolean;

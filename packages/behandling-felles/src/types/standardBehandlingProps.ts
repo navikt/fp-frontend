@@ -1,5 +1,5 @@
 import {
-  Fagsak, KodeverkMedNavn, AksessRettigheter,
+  Fagsak, AlleKodeverk, AksessRettigheter,
 } from '@fpsak-frontend/types';
 
 export type BehandlingEventHandler = {
@@ -18,7 +18,7 @@ type StandardBehandlingProps = {
   behandlingEventHandler: BehandlingEventHandler;
   opneSokeside: () => void;
   setRequestPendingMessage: (message: string) => void;
-  kodeverk: {[key: string]: KodeverkMedNavn[]};
+  kodeverk: AlleKodeverk;
 }
 
 export default StandardBehandlingProps;

@@ -3,7 +3,7 @@ import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl'
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
 import {
-  KodeverkMedNavn, Vilkar, Behandlingsresultat, Kodeverk,
+  AlleKodeverk, Vilkar, Behandlingsresultat, Kodeverk,
 } from '@fpsak-frontend/types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
@@ -35,7 +35,7 @@ interface OwnProps {
   sprakkode: Kodeverk;
   readOnly: boolean;
   ytelseTypeKode: string;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   beregningErManueltFastsatt: boolean;
   skalBrukeOverstyrendeFritekstBrev: boolean;
 }

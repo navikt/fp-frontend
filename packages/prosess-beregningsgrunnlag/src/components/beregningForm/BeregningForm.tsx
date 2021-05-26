@@ -14,13 +14,13 @@ import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import { Undertittel } from 'nav-frontend-typografi';
 import {
   Aksjonspunkt,
+  AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
   Beregningsgrunnlag as BeregningsgrunnlagProp,
   BeregningsgrunnlagAndel,
   BeregningsgrunnlagPeriodeProp,
   FaktaOmBeregning,
   Kodeverk,
-  KodeverkMedNavn,
   SammenligningsgrunlagProp,
   Vilkar,
   YtelseGrunnlag,
@@ -220,7 +220,7 @@ type OwnProps = {
     submitCallback: (...args: any[]) => any;
     readOnlySubmitButton: boolean;
     beregningsgrunnlag: BeregningsgrunnlagProp;
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
     vilkaarBG: Vilkar;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };

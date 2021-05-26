@@ -19,7 +19,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import innsynResultatTyperKV from '@fpsak-frontend/kodeverk/src/innsynResultatType';
 import {
-  Aksjonspunkt, Dokument, InnsynDokument, InnsynVedtaksdokument, Kodeverk, KodeverkMedNavn,
+  Aksjonspunkt, Dokument, InnsynDokument, InnsynVedtaksdokument, Kodeverk, KodeverkMedNavn, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import { VurderInnsynAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -42,7 +42,7 @@ interface PureOwnProps {
   vedtaksdokumentasjon: InnsynVedtaksdokument[];
   alleDokumenter: Dokument[];
   aksjonspunkter: Aksjonspunkt[];
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   submitCallback: (data: VurderInnsynAp) => Promise<void>;
   readOnly: boolean;
   readOnlySubmitButton: boolean;

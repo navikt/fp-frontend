@@ -48,6 +48,8 @@ export { default as FaktaArbeidsforhold } from './src/faktaArbeidsforholdTsType'
 export { default as InntektArbeidYtelse, IAYInntektsmelding, RelatertTilgrensedYtelse } from './src/inntektArbeidYtelseTsType';
 export { default as Kodeverk } from './src/kodeverkTsType';
 export { default as KodeverkMedNavn } from './src/kodeverkMedNavnTsType';
+export { default as AlleKodeverk } from './src/kodeverkAlleTsType';
+export { default as AlleKodeverkTilbakekreving } from './src/kodeverkAlleTilbakekrevingTsType';
 export { default as NavAnsatt } from './src/navAnsattTsType';
 export {
   default as SimuleringResultat, DetaljertSimuleringResultat, Mottaker, SimuleringResultatRad, SimuleringResultatPerFagområde,
@@ -95,7 +97,9 @@ export { default as Personoversikt, PersonopplysningerBasis } from './src/person
 export { default as Personadresse } from './src/personadresseTsType';
 export { default as AksessRettigheter, Aksess } from './src/aksessRettigheterTsType';
 export { default as StandardFaktaPanelProps } from './src/standardFaktaPanelPropsTsType';
+export { default as StandardFaktaPanelPropsTilbakekreving } from './src/standardFaktaPanelPropsTilbakekrevingTsType';
 export { default as StandardProsessPanelProps } from './src/standardProsessPanelPropsTsType';
+export { default as StandardProsessPanelPropsTilbakekreving } from './src/standardProsessPanelPropsTilbakekrevingTsType';
 export { default as Verge } from './src/vergeTsType';
 export { default as FeilutbetalingAarsak } from './src/feilutbetalingAarsakTsType';
 export { default as DetaljerteFeilutbetalingsperioder, DetaljertFeilutbetalingPeriode } from './src/detaljerteFeilutbetalingsperioderTsType';

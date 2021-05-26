@@ -4,7 +4,9 @@ import { FieldArray } from 'redux-form';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { createSelector } from 'reselect';
-import { ArbeidsgiverOpplysningerPerId, FaktaOmBeregning, KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  ArbeidsgiverOpplysningerPerId, FaktaOmBeregning, AlleKodeverk,
+} from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import LonnsendringForm, { lonnsendringField }
@@ -98,7 +100,7 @@ type OwnProps = {
     skalHaBesteberegning: boolean;
     harKunstigArbeid: boolean;
     skalViseTabell: boolean;
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
     erOverstyrer: boolean;
     aksjonspunkter: Aksjonspunkt[];
     beregningsgrunnlag: Beregningsgrunnlag;
@@ -111,7 +113,7 @@ interface StaticFunctions {
   buildInitialValues: (faktaOmBeregning: FaktaOmBeregning,
                        erOverstyrt: boolean,
                        arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-                       alleKodeverk: {[key: string]: KodeverkMedNavn[]}) => any;
+                       alleKodeverk: AlleKodeverk) => any;
   validate: (values: any, tilfeller: string[], faktaOmBeregning: FaktaOmBeregning, beregningsgrunnlag: Beregningsgrunnlag) => any;
   transformValues: (faktaOmBeregning: FaktaOmBeregning, beregningsgrunnlag: Beregningsgrunnlag) => any;
 }
@@ -208,7 +210,7 @@ const VurderOgFastsettATFL: FunctionComponent<OwnProps> & StaticFunctions = ({
 VurderOgFastsettATFL.buildInitialValues = (faktaOmBeregning: FaktaOmBeregning,
   erOverstyrt: boolean,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]}) => {
+  alleKodeverk: AlleKodeverk) => {
   if (!faktaOmBeregning) {
     return {};
   }

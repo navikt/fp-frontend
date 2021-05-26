@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider, FormattedMessage } from 'react-intl';
 
 import { Normaltekst } from 'nav-frontend-typografi';
-import { Aktor, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Aktor, AlleKodeverk } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 
 import AktoerGrid from './components/AktoerGrid';
@@ -13,7 +13,7 @@ const intl = createIntl(messages);
 interface OwnProps {
   valgtAktorId: string;
   aktorInfo?: Aktor;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   finnPathToFagsak: (saksnummer: string) => string;
 }
 

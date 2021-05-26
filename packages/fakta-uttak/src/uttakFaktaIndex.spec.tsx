@@ -4,7 +4,7 @@ import sinon from 'sinon';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Aksjonspunkt, Behandling, FamilieHendelseSamling, Personoversikt, Ytelsefordeling,
+  Aksjonspunkt, AlleKodeverk, Behandling, FamilieHendelseSamling, Personoversikt, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
 import UttakFaktaIndex from './UttakFaktaIndex';
@@ -63,7 +63,7 @@ describe('<UttakFaktaIndex>', () => {
       faktaArbeidsforhold={[]}
       personoversikt={{} as Personoversikt}
       familiehendelse={{} as FamilieHendelseSamling}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       ytelsefordeling={{} as Ytelsefordeling}
       arbeidsgiverOpplysningerPerId={{}}
       setFormData={() => undefined}

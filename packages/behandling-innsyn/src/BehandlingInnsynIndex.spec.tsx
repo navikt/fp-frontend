@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { BehandlingContainer } from '@fpsak-frontend/behandling-felles';
-import { AksessRettigheter, Fagsak } from '@fpsak-frontend/types';
+import { AksessRettigheter, AlleKodeverk, Fagsak } from '@fpsak-frontend/types';
 
 import BehandlingInnsynIndex from './BehandlingInnsynIndex';
 
@@ -28,7 +28,7 @@ describe('<BehandlingInnsynIndex>', () => {
       }}
       behandlingId={1}
       oppdaterBehandlingVersjon={() => {}}
-      kodeverk={{}}
+      kodeverk={{} as AlleKodeverk}
       fagsak={{} as Fagsak}
       rettigheter={{} as AksessRettigheter}
       oppdaterProsessStegOgFaktaPanelIUrl={() => {}}

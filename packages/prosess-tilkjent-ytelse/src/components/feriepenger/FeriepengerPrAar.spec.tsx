@@ -1,12 +1,12 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { FeriepengegrunnlagAndel } from '@fpsak-frontend/types';
+import { AlleKodeverk, FeriepengegrunnlagAndel } from '@fpsak-frontend/types';
 import { shallow } from 'enzyme';
 import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
 import { Normaltekst } from 'nav-frontend-typografi';
 import FeriepengerPrAar from './FeriepengerPrAar';
 
-const alleKodeverk = {};
+const alleKodeverk = {} as AlleKodeverk;
 
 const agOpplysninger = {
   123: {

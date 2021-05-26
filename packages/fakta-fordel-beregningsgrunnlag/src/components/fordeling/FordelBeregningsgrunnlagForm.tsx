@@ -8,7 +8,7 @@ import {
   ArbeidsgiverOpplysningerPerId,
   BeregningsgrunnlagPeriodeProp,
   FordelBeregningsgrunnlagPeriode,
-  KodeverkMedNavn,
+  AlleKodeverk,
 } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
@@ -155,7 +155,7 @@ type OwnProps = {
     isAksjonspunktClosed: boolean;
     bgPerioder: BeregningsgrunnlagPeriodeProp[];
     beregningsgrunnlag: Beregningsgrunnlag;
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
     behandlingType: Kodeverk;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };

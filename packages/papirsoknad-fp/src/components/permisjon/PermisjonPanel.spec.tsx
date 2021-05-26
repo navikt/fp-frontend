@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import { FieldArray } from 'redux-form';
 
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import { PermisjonPanel } from './PermisjonPanel';
 import PermisjonOverforingAvKvoterPanel from './PermisjonOverforingAvKvoterPanel';
@@ -20,7 +21,7 @@ describe('<PermisjonPanel>', () => {
       readOnly={readOnly}
       visFeilMelding={false}
       fulltUttak
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       submitFailed={false}
     />);
     const fieldArray = wrapper.find(FieldArray);
@@ -34,7 +35,7 @@ describe('<PermisjonPanel>', () => {
       readOnly={readOnly}
       visFeilMelding={false}
       fulltUttak
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       submitFailed={false}
     />);
 

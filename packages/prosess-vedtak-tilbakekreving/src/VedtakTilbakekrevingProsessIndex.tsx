@@ -4,7 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@fpsak-frontend/utils';
 import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 import {
-  BeregningsresultatTilbakekreving, Kodeverk, StandardProsessPanelProps, Vedtaksbrev,
+  BeregningsresultatTilbakekreving, Kodeverk, StandardProsessPanelPropsTilbakekreving, Vedtaksbrev,
 } from '@fpsak-frontend/types';
 import { ReduxWrapper } from '@fpsak-frontend/form';
 
@@ -27,7 +27,7 @@ interface OwnProps {
   fetchPreviewVedtaksbrev: (data: ForhandsvisData) => Promise<any>;
 }
 
-const VedtakTilbakekrevingProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+const VedtakTilbakekrevingProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPropsTilbakekreving> = ({
   behandling,
   beregningsresultat,
   vedtaksbrev,

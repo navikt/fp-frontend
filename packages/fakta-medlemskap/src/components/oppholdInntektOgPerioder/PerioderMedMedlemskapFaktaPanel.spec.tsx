@@ -3,7 +3,9 @@ import { FormattedMessage } from 'react-intl';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { Aksjonspunkt, Medlemskap, Soknad } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, AlleKodeverk, Medlemskap, Soknad,
+} from '@fpsak-frontend/types';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import PerioderMedMedlemskapFaktaPanel, { PerioderMedMedlemskapFaktaPanelImpl as UndecoratedForm, PeriodeMedId } from './PerioderMedMedlemskapFaktaPanel';
@@ -46,7 +48,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       readOnly={false}
       vurderingTypes={manuelleVurderingstyper}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />, messages);
 
     const table = wrapper.find('Table');
@@ -84,7 +86,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       fodselsdato="2016-10-16"
       vurderingTypes={[]}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />, messages);
 
     const message = wrapper.find(FormattedMessage);
@@ -111,7 +113,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       readOnly={false}
       vurderingTypes={[]}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />, messages);
 
     const message = wrapper.find(FormattedMessage);
@@ -138,7 +140,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       readOnly={false}
       vurderingTypes={[]}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />, messages);
 
     const message = wrapper.find(FormattedMessage);
@@ -164,7 +166,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       fixedMedlemskapPerioder={perioder}
       vurderingTypes={[]}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />, messages);
 
     const table = wrapper.find('Table');
@@ -183,7 +185,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       readOnly={false}
       vurderingTypes={[]}
       alleMerknaderFraBeslutter={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />, messages);
 
     const table = wrapper.find('Table');

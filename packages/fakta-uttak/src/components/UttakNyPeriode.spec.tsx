@@ -8,7 +8,7 @@ import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test
 import {
   CheckboxField, DecimalField, PeriodpickerField, SelectField, TextAreaField,
 } from '@fpsak-frontend/form';
-import { FaktaArbeidsforhold, Personoversikt } from '@fpsak-frontend/types';
+import { AlleKodeverk, FaktaArbeidsforhold, Personoversikt } from '@fpsak-frontend/types';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 
 import { NyPeriode, UttakNyPeriode } from './UttakNyPeriode';
@@ -83,7 +83,7 @@ describe('<UttakNyPeriode>', () => {
       nyPeriode={nyPeriode}
       sokerKjonn={sokerKjonn}
       nyPeriodeDisabledDaysFom="2018-05-20"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       getKodeverknavn={getKodeverknavn}
       periodeTyper={periodeTyper}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -134,7 +134,7 @@ describe('<UttakNyPeriode>', () => {
       nyPeriode={nyPeriode}
       sokerKjonn={sokerKjonn}
       nyPeriodeDisabledDaysFom="2018-05-20"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       getKodeverknavn={getKodeverknavn}
       periodeTyper={periodeTyper}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -163,7 +163,7 @@ describe('<UttakNyPeriode>', () => {
       nyPeriode={nyPeriode}
       sokerKjonn={sokerKjonn}
       nyPeriodeDisabledDaysFom="2018-05-20"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       getKodeverknavn={getKodeverknavn}
       periodeTyper={periodeTyper}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -193,7 +193,7 @@ describe('<UttakNyPeriode>', () => {
       nyPeriode={nyPeriode}
       sokerKjonn={sokerKjonn}
       nyPeriodeDisabledDaysFom="2018-05-20"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       getKodeverknavn={getKodeverknavn}
       periodeTyper={periodeTyper}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -223,7 +223,7 @@ describe('<UttakNyPeriode>', () => {
       nyPeriode={nyPeriode}
       sokerKjonn={sokerKjonn}
       nyPeriodeDisabledDaysFom="2018-05-20"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       getKodeverknavn={getKodeverknavn}
       periodeTyper={periodeTyper}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -253,7 +253,7 @@ describe('<UttakNyPeriode>', () => {
       nyPeriode={nyPeriode}
       sokerKjonn={sokerKjonn}
       nyPeriodeDisabledDaysFom="2018-05-20"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       getKodeverknavn={getKodeverknavn}
       periodeTyper={periodeTyper}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -283,7 +283,7 @@ describe('<UttakNyPeriode>', () => {
       nyPeriode={nyPeriode}
       sokerKjonn={sokerKjonn}
       nyPeriodeDisabledDaysFom="2018-05-20"
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       getKodeverknavn={getKodeverknavn}
       periodeTyper={periodeTyper}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

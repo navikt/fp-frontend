@@ -8,7 +8,7 @@ import { CheckboxField } from '@fpsak-frontend/form';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { hasValidPeriodIncludingOtherErrors, isRequiredMessage, required } from '@fpsak-frontend/utils';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import RenderOppholdPeriodeFieldArray from './RenderOppholdPeriodeFieldArray';
 
@@ -16,7 +16,7 @@ export const oppholdPeriodeFieldArrayName = 'oppholdPerioder';
 
 interface PureOwnProps {
   readOnly: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   form: string;
   namePrefix: string;
 }

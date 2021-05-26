@@ -7,7 +7,7 @@ import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { BeregningsgrunnlagPeriodeProp } from '@fpsak-frontend/types';
+import { AlleKodeverk, BeregningsgrunnlagPeriodeProp } from '@fpsak-frontend/types';
 import {
   AksjonspunktBehandlerTidsbegrensetImpl as UnwrappedForm, createInputFieldKey, createTableData, getIsAksjonspunktClosed,
 } from './AksjonspunktBehandlerTB';
@@ -230,7 +230,7 @@ describe('<AksjonspunktBehandlerTB>', () => {
       bruttoPrPeriodeList={mockbruttoPerodeList}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       aksjonspunkter={[]}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       allePerioder={[]}
       formName="test"
     />, messages);
@@ -314,7 +314,7 @@ describe('<AksjonspunktBehandlerTB>', () => {
         },
       ],
     };
-    const selectorData = createTableData.resultFunc(beregningsgrunnlagPerioder, {}, arbeidsgiverOpplysningerPerId);
+    const selectorData = createTableData.resultFunc(beregningsgrunnlagPerioder, {} as AlleKodeverk, arbeidsgiverOpplysningerPerId);
     expect(selectorData).toEqual(expectedResultObjectWhenWeHaveAksjonspunkt);
   });
   it('Skal teste at selector henter ut om aksjonspunktet er lukket eller ikke', () => {

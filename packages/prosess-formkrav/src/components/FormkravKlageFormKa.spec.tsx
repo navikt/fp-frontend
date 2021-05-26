@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { KlageVurdering } from '@fpsak-frontend/types';
+import { AlleKodeverk, KlageVurdering } from '@fpsak-frontend/types';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { FormkravKlageFormKa } from './FormkravKlageFormKa';
@@ -14,7 +14,7 @@ describe('<FormkravKlageFormKa>', () => {
       {...reduxFormPropsMock}
       readOnly={false}
       readOnlySubmitButton
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       avsluttedeBehandlinger={[]}
       klageVurdering={{} as KlageVurdering}
       submitCallback={() => undefined}

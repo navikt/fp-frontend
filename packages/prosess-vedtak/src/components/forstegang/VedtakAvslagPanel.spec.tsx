@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { Vilkar, Behandlingsresultat } from '@fpsak-frontend/types';
+import { Vilkar, Behandlingsresultat, AlleKodeverk } from '@fpsak-frontend/types';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -54,7 +54,7 @@ describe('<VedtakAvslagPanel>', () => {
       sprakkode={sprakkode}
       readOnly
       ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       beregningErManueltFastsatt={false}
       skalBrukeOverstyrendeFritekstBrev
     />, messages);
@@ -75,7 +75,7 @@ describe('<VedtakAvslagPanel>', () => {
       sprakkode={sprakkode}
       readOnly
       ytelseTypeKode={fagsakYtelseType.ENGANGSSTONAD}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       beregningErManueltFastsatt
       skalBrukeOverstyrendeFritekstBrev={false}
     />, messages);

@@ -4,7 +4,9 @@ import sinon from 'sinon';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { FamilieHendelse, Soknad, FamilieHendelseSamling } from '@fpsak-frontend/types';
+import {
+  FamilieHendelse, Soknad, FamilieHendelseSamling, AlleKodeverk,
+} from '@fpsak-frontend/types';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 
@@ -65,7 +67,7 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       kode=""
       ventearsaker={[]}
       initialValues={{
@@ -104,7 +106,7 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       kode=""
       ventearsaker={[]}
       initialValues={{
@@ -148,7 +150,7 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       kode=""
       ventearsaker={[]}
       initialValues={{
@@ -191,7 +193,7 @@ describe('<VarselOmRevurderingFormImpl>', () => {
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       kode=""
       ventearsaker={[]}
       initialValues={{

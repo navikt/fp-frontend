@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import {
-  FeilutbetalingPerioderWrapper, StandardProsessPanelProps, VilkarsVurdertePerioderWrapper, DetaljerteFeilutbetalingsperioder,
+  FeilutbetalingPerioderWrapper, StandardProsessPanelPropsTilbakekreving, VilkarsVurdertePerioderWrapper, DetaljerteFeilutbetalingsperioder,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 import { ReduxWrapper } from '@fpsak-frontend/form';
@@ -22,7 +22,7 @@ interface OwnProps {
   beregnBelop: (data: any) => Promise<any>;
 }
 
-const TilbakekrevingProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+const TilbakekrevingProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPropsTilbakekreving> = ({
   behandling,
   perioderForeldelse,
   vilkarvurderingsperioder,

@@ -16,9 +16,9 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import {
+  AlleKodeverk,
   ArbeidsgiverOpplysningerPerId, BeregningsgrunnlagAndel,
   BeregningsgrunnlagPeriodeProp,
-  KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import styles from './aksjonspunktBehandler.less';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
@@ -77,7 +77,7 @@ interface StaticFunctions {
 type OwnProps = {
     readOnly: boolean;
     aksjonspunkter: Aksjonspunkt[];
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
     formName: string;
     readOnlySubmitButton: boolean;
     tidsBegrensetInntekt: boolean;

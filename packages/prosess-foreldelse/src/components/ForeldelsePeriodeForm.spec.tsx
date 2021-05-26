@@ -5,6 +5,7 @@ import { shallow } from 'enzyme';
 import { RadioOption } from '@fpsak-frontend/form';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import foreldelseVurderingType from '@fpsak-frontend/kodeverk/src/foreldelseVurderingType';
+import { AlleKodeverkTilbakekreving } from '@fpsak-frontend/types';
 
 import { ForeldelsePeriodeFormImpl } from './ForeldelsePeriodeForm';
 import ForeldelsesresultatActivity from '../types/foreldelsesresultatActivitytsType';
@@ -39,7 +40,7 @@ describe('<ForeldelsePeriodeForm>', () => {
         oppdaterSplittedePerioder={sinon.spy()}
         behandlingId={1}
         beregnBelop={sinon.spy()}
-        alleKodeverk={{}}
+        alleKodeverk={{} as AlleKodeverkTilbakekreving}
         oppdaterPeriode={sinon.spy()}
         {...reduxFormPropsMock}
         initialValues={{

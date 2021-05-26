@@ -18,7 +18,7 @@ import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjon
 import tilbakekrevingKodeverkTyper from '@fpsak-frontend/kodeverk/src/tilbakekrevingKodeverkTyper';
 import {
   FeilutbetalingPerioderWrapper, KodeverkMedNavn, VilkarsVurdertePerioderWrapper, VilkarsVurdertPeriode,
-  DetaljerteFeilutbetalingsperioder, DetaljertFeilutbetalingPeriode,
+  DetaljerteFeilutbetalingsperioder, DetaljertFeilutbetalingPeriode, AlleKodeverkTilbakekreving,
 } from '@fpsak-frontend/types';
 import { VilkarsVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -81,7 +81,7 @@ interface PureOwnProps {
   behandlingId: number;
   behandlingVersjon: number;
   perioderForeldelse: FeilutbetalingPerioderWrapper;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverkTilbakekreving;
   submitCallback: (aksjonspunktData: VilkarsVurderingAp) => Promise<void>;
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};

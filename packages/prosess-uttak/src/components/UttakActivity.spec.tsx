@@ -5,7 +5,7 @@ import sinon from 'sinon';
 
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import { lagAktiviteter, UttakActivity } from './UttakActivity';
 import { PeriodeMedClassName } from './Uttak';
@@ -66,7 +66,7 @@ describe('<UttakActivity>', () => {
       starttidspunktForeldrepenger=""
       harSoktOmFlerbarnsdager={false}
       hasValidationError={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       updateActivity={() => undefined}
       kontoIkkeSatt={false}
       utsettelseAarsak={{} as KodeverkMedNavn[]}
@@ -111,7 +111,7 @@ describe('<UttakActivity>', () => {
       starttidspunktForeldrepenger=""
       harSoktOmFlerbarnsdager={false}
       hasValidationError={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       updateActivity={() => undefined}
       kontoIkkeSatt={false}
       utsettelseAarsak={{} as KodeverkMedNavn[]}
@@ -150,7 +150,7 @@ describe('<UttakActivity>', () => {
       starttidspunktForeldrepenger=""
       harSoktOmFlerbarnsdager={false}
       hasValidationError={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       updateActivity={() => undefined}
       kontoIkkeSatt={false}
       utsettelseAarsak={{} as KodeverkMedNavn[]}
@@ -195,7 +195,7 @@ describe('<UttakActivity>', () => {
       starttidspunktForeldrepenger=""
       harSoktOmFlerbarnsdager={false}
       hasValidationError={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       updateActivity={() => undefined}
       kontoIkkeSatt={false}
       utsettelseAarsak={{} as KodeverkMedNavn[]}
@@ -240,7 +240,7 @@ describe('<UttakActivity>', () => {
       starttidspunktForeldrepenger=""
       harSoktOmFlerbarnsdager={false}
       hasValidationError={false}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       updateActivity={() => undefined}
       kontoIkkeSatt={false}
       utsettelseAarsak={{} as KodeverkMedNavn[]}

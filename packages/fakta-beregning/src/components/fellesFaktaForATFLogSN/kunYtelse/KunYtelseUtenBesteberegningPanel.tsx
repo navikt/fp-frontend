@@ -4,14 +4,14 @@ import { Element } from 'nav-frontend-typografi';
 import { FieldArray } from 'redux-form';
 import { BorderBox } from '@fpsak-frontend/shared-components';
 import { Column, Row } from 'nav-frontend-grid';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 import BrukersAndelFieldArray from './BrukersAndelFieldArray';
 
 type OwnProps = {
     readOnly: boolean;
     brukersAndelFieldArrayName: string;
     isAksjonspunktClosed: boolean;
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
 };
 
 /**

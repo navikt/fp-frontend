@@ -8,7 +8,7 @@ import { TableColumn, TableRow } from '@fpsak-frontend/shared-components';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { FieldArrayFieldsProps } from 'redux-form';
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 import styles from './inntektFieldArray.less';
 import { getKanRedigereInntekt, getSkalRedigereInntektskategori } from './BgFaktaUtils';
 
@@ -46,7 +46,7 @@ type OwnProps = {
     andelElementFieldId: string;
     removeAndel: (...args: any[]) => any;
     index: number;
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
     skalHaMilitær?: boolean;
 };
 

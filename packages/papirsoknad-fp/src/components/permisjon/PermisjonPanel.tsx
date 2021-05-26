@@ -9,7 +9,7 @@ import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import { dateRangesNotOverlappingCrossTypes } from '@fpsak-frontend/utils';
 import { CheckboxField } from '@fpsak-frontend/form';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import PermisjonUtsettelsePanel, { utsettelsePeriodeFieldArrayName, FormValues as FormValuesUtsettelse } from './PermisjonUtsettelsePanel';
 import PermisjonGraderingPanel, { graderingPeriodeFieldArrayName, FormValues as FormValuesGradering } from './PermisjonGraderingPanel';
@@ -30,7 +30,7 @@ interface PureOwnProps {
   error?: {
     permisjonsError?: string;
   };
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   submitFailed: boolean;
 }
 

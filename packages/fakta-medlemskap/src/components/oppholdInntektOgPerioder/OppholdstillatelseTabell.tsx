@@ -4,7 +4,7 @@ import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl'
 import {
   PeriodLabel, DateLabel, Table, TableColumn, TableRow, FaktaGruppe,
 } from '@fpsak-frontend/shared-components';
-import { KodeverkMedNavn, Oppholdstillatelse } from '@fpsak-frontend/types';
+import { AlleKodeverk, Oppholdstillatelse } from '@fpsak-frontend/types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 const headerTextCodes = [
@@ -14,7 +14,7 @@ const headerTextCodes = [
 
 interface OwnProps {
   oppholdstillatelse: Oppholdstillatelse[];
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
 }
 
 const OppholdstillatelseTabell: FunctionComponent<OwnProps & WrappedComponentProps> = ({

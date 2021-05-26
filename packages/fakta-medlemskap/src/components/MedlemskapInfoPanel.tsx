@@ -5,7 +5,7 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse, Kodeverk, KodeverkMedNavn, Medlemskap, Soknad,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse, Kodeverk, AlleKodeverk, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
 import {
   AvklarFortsattMedlemskapAp, AvklarStartdatoForPeriodenAp, BekreftBosattVurderingAp, BekreftErMedlemVurderingAp, BekreftLovligOppholdVurderingAp,
@@ -58,7 +58,7 @@ interface OwnProps {
   behandlingStatus: Kodeverk;
   soknad: Soknad;
   inntektArbeidYtelse: InntektArbeidYtelse;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   medlemskap: Medlemskap;
   readOnlyForStartdatoForForeldrepenger: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;

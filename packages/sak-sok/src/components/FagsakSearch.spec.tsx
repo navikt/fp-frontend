@@ -3,6 +3,8 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 
+import { AlleKodeverk } from '@fpsak-frontend/types';
+
 import FagsakSearch from './FagsakSearch';
 import FagsakList from './FagsakList';
 import SearchForm from './SearchForm';
@@ -33,7 +35,7 @@ describe('<FagsakSearch>', () => {
       searchResultReceived={false}
       selectFagsakCallback={sinon.spy()}
       searchStarted
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     const searchComp = wrapper.find(SearchForm);
@@ -49,7 +51,7 @@ describe('<FagsakSearch>', () => {
       searchResultReceived
       selectFagsakCallback={sinon.spy()}
       searchStarted
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     expect(wrapper.find(SearchForm)).toHaveLength(1);
@@ -67,7 +69,7 @@ describe('<FagsakSearch>', () => {
       searchResultReceived
       selectFagsakCallback={selectFagsakFunction}
       searchStarted
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
     />);
 
     expect(wrapper.find(SearchForm)).toHaveLength(1);

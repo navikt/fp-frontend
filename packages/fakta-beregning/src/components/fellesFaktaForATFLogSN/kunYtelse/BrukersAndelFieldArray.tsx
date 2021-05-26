@@ -16,7 +16,7 @@ import {
 } from '@fpsak-frontend/shared-components';
 import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 import styles from './brukersAndelFieldArray.less';
 import { validateUlikeAndelerWithGroupingFunction } from '../ValidateAndelerUtils';
 import { isBeregningFormDirty as isFormDirty } from '../../BeregningFormUtils';
@@ -127,7 +127,7 @@ type OwnProps = {
     aktivitetStatuser: Kodeverk[]
     isAksjonspunktClosed: boolean;
     isBeregningFormDirty: boolean;
-    alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+    alleKodeverk: AlleKodeverk;
 };
 
 interface StaticFunction {

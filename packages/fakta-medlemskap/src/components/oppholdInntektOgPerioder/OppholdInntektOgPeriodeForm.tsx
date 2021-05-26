@@ -13,7 +13,7 @@ import {
   BorderBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import {
-  Aksjonspunkt, KodeverkMedNavn, MedlemPeriode, Medlemskap,
+  Aksjonspunkt, AlleKodeverk, MedlemPeriode, Medlemskap,
 } from '@fpsak-frontend/types';
 
 import OppholdstillatelseTabell from './OppholdstillatelseTabell';
@@ -42,7 +42,7 @@ interface PureOwnProps {
   valgtPeriode: PeriodeMedId;
   aksjonspunkter: Aksjonspunkt[];
   medlemskap: Medlemskap;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
   updateOppholdInntektPeriode: (values: TransformedValues) => void;
   selectedId?: string;
   readOnly: boolean;

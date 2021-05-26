@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import { FaktaOmBeregning } from '@fpsak-frontend/types';
+import { AlleKodeverk, FaktaOmBeregning } from '@fpsak-frontend/types';
 import {
   FaktaForATFLOgSNPanelImpl, transformValues, transformValuesFaktaForATFLOgSN,
 } from './FaktaForATFLOgSNPanel';
@@ -56,7 +56,7 @@ describe('<FaktaForATFLOgSNPanel>', () => {
       isAksjonspunktClosed={false}
       faktaOmBeregning={{} as FaktaOmBeregning}
       beregningsgrunnlag={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       aksjonspunkter={aksjonspunkter}
       erOverstyrer={false}
       arbeidsgiverOpplysningerPerId={{}}
@@ -73,7 +73,7 @@ describe('<FaktaForATFLOgSNPanel>', () => {
       isAksjonspunktClosed={false}
       faktaOmBeregning={{} as FaktaOmBeregning}
       beregningsgrunnlag={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       aksjonspunkter={aksjonspunkter}
       erOverstyrer={false}
       arbeidsgiverOpplysningerPerId={{}}
@@ -90,7 +90,7 @@ describe('<FaktaForATFLOgSNPanel>', () => {
       isAksjonspunktClosed={false}
       faktaOmBeregning={{} as FaktaOmBeregning}
       beregningsgrunnlag={{}}
-      alleKodeverk={{}}
+      alleKodeverk={{} as AlleKodeverk}
       aksjonspunkter={aksjonspunkter}
       erOverstyrer={false}
       arbeidsgiverOpplysningerPerId={{}}

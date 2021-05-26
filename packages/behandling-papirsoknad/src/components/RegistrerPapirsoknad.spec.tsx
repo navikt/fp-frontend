@@ -12,7 +12,7 @@ import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import { BehandlingPaVent } from '@fpsak-frontend/behandling-felles';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
-import { Behandling, Fagsak } from '@fpsak-frontend/types';
+import { AlleKodeverk, Behandling, Fagsak } from '@fpsak-frontend/types';
 
 import RegistrerPapirsoknad from './RegistrerPapirsoknad';
 import SoknadRegistrertModal from './SoknadRegistrertModal';
@@ -66,7 +66,7 @@ describe('<RegistrerPapirsoknad>', () => {
       fagsak={fagsak}
       fagsakPersonnummer="12343541"
       behandling={behandling as Behandling}
-      kodeverk={{}}
+      kodeverk={{} as AlleKodeverk}
       rettigheter={rettigheter}
       hentBehandling={sinon.spy()}
       lagreAksjonspunkt={sinon.spy()}
@@ -85,7 +85,7 @@ describe('<RegistrerPapirsoknad>', () => {
       fagsak={fagsak}
       fagsakPersonnummer="12343541"
       behandling={behandling as Behandling}
-      kodeverk={{}}
+      kodeverk={{} as AlleKodeverk}
       rettigheter={{
         ...rettigheter,
         writeAccess: {
@@ -110,7 +110,7 @@ describe('<RegistrerPapirsoknad>', () => {
         ...behandling,
         behandlingPaaVent: true,
       } as Behandling}
-      kodeverk={{}}
+      kodeverk={{} as AlleKodeverk}
       rettigheter={rettigheter}
       hentBehandling={sinon.spy()}
       lagreAksjonspunkt={sinon.spy()}
@@ -129,7 +129,7 @@ describe('<RegistrerPapirsoknad>', () => {
       fagsak={fagsak}
       fagsakPersonnummer="12343541"
       behandling={behandling as Behandling}
-      kodeverk={{}}
+      kodeverk={{} as AlleKodeverk}
       rettigheter={rettigheter}
       hentBehandling={sinon.spy()}
       lagreAksjonspunkt={sinon.spy()}
@@ -166,7 +166,7 @@ describe('<RegistrerPapirsoknad>', () => {
       fagsak={fagsak}
       fagsakPersonnummer="12343541"
       behandling={behandling as Behandling}
-      kodeverk={{}}
+      kodeverk={{} as AlleKodeverk}
       rettigheter={rettigheter}
       hentBehandling={sinon.spy()}
       lagreAksjonspunkt={lagreAksjonspunkt}

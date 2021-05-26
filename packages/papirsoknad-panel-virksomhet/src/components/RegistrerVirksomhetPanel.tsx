@@ -12,7 +12,7 @@ import { Image, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { NavFieldGroup } from '@fpsak-frontend/form';
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import removeIcon from '@fpsak-frontend/assets/images/remove.svg';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import RegistrerVirksomhetModalForm from './RegistrerVirksomhetModalForm';
 import { FormValues as VirksomhetIdFormValues } from './VirksomhetIdentifikasjonPanel';
@@ -56,7 +56,7 @@ interface PureOwnProps {
   form: string;
   name?: string;
   readOnly?: boolean;
-  alleKodeverk: {[key: string]: KodeverkMedNavn[]};
+  alleKodeverk: AlleKodeverk;
 }
 
 type Virksomhet = VirksomhetIdFormValues & {
