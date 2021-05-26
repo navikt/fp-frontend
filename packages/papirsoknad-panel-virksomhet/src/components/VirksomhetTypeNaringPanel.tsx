@@ -47,7 +47,7 @@ export const VirksomhetTypeNaringPanel: FunctionComponent<PureOwnProps & MappedO
   <>
     <Undertekst><FormattedMessage id="Registrering.VirksomhetNaeringTypePanel.Title" /></Undertekst>
     <VerticalSpacer fourPx />
-    {naringvirksomhetTyper.sort((a, b) => compare(naringsvirksomhetTypeOrder[a.kode], naringsvirksomhetTypeOrder[b.kode]))
+    {[...naringvirksomhetTyper].sort((a, b) => compare(naringsvirksomhetTypeOrder[a.kode], naringsvirksomhetTypeOrder[b.kode]))
       .map((nv) => (
         <Fragment key={nv.kode}>
           <VerticalSpacer fourPx />

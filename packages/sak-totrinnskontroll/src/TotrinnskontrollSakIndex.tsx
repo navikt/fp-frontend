@@ -51,6 +51,11 @@ const getArsaker = (apData: AksjonspunktGodkjenningData): string[] => {
   return arsaker;
 };
 
+const finnArbeidsforholdHandlingTyper = (alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving) => (kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE in alleKodeverk
+  ? (alleKodeverk as AlleKodeverk)[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE] : TOMT_KODEVERK);
+const finnFaktaOmBeregningTilfeller = (alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving) => (kodeverkTyper.FAKTA_OM_BEREGNING_TILFELLE in alleKodeverk
+  ? (alleKodeverk as AlleKodeverk)[kodeverkTyper.FAKTA_OM_BEREGNING_TILFELLE] : TOMT_KODEVERK);
+
 interface OwnProps {
   behandling: BehandlingAppKontekst;
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
@@ -130,10 +135,8 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   const erStatusFatterVedtak = behandling.status.kode === BehandlingStatus.FATTER_VEDTAK;
   const skjemalenkeTyper = alleKodeverk[kodeverkTyper.SKJERMLENKE_TYPE];
   const vurderArsaker = alleKodeverk[kodeverkTyper.VURDER_AARSAK];
-  const arbeidsforholdHandlingTyper = kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE in alleKodeverk
-    ? (alleKodeverk as AlleKodeverk)[kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE] : TOMT_KODEVERK;
-  const faktaOmBeregningTilfeller = kodeverkTyper.FAKTA_OM_BEREGNING_TILFELLE in alleKodeverk
-    ? (alleKodeverk as AlleKodeverk)[kodeverkTyper.FAKTA_OM_BEREGNING_TILFELLE] : TOMT_KODEVERK;
+  const arbeidsforholdHandlingTyper = finnArbeidsforholdHandlingTyper(alleKodeverk);
+  const faktaOmBeregningTilfeller = finnFaktaOmBeregningTilfeller(alleKodeverk);
 
   return (
     <RawIntlProvider value={intl}>

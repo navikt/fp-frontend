@@ -81,7 +81,7 @@ const UttakInfoPanel: FunctionComponent<OwnProps> = ({
   const erArsakTypeHendelseFodsel = getErArsakTypeHendelseFodsel(behandlingArsakTyper);
   const isRevurdering = behandlingIsRevurdering && (erManueltOpprettet || erArsakTypeHendelseFodsel);
   const behandlingUtredes = behandlingStatus.kode === behandlingStatuser.BEHANDLING_UTREDES;
-  const sortedUttakPerioder = [...uttakPerioder.sort(sortUttaksperioder)];
+  const sortedUttakPerioder = [...uttakPerioder].sort(sortUttaksperioder);
 
   return (
     <>

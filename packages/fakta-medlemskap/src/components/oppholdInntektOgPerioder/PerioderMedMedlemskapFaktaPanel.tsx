@@ -89,7 +89,7 @@ export const PerioderMedMedlemskapFaktaPanelImpl: FunctionComponent<PureOwnProps
   alleMerknaderFraBeslutter,
 }) => {
   const intl = useIntl();
-  const sorterteVurderingstyper = useMemo(() => vurderingTypes.sort((a, b) => a.navn.localeCompare(b.navn)), [vurderingTypes]);
+  const sorterteVurderingstyper = useMemo(() => [...vurderingTypes].sort((a, b) => a.navn.localeCompare(b.navn)), [vurderingTypes]);
 
   if (!fixedMedlemskapPerioder || fixedMedlemskapPerioder.length === 0) {
     return (
