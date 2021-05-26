@@ -150,7 +150,7 @@ const DocumentList: FunctionComponent<OwnProps & WrappedComponentProps> = ({
             </TableColumn>
             <TableColumn>
               {document.tittel}
-              {document.behandlinger && behandlingUuid && document.behandlinger.includes(behandlingUuid) && (
+              {document.behandlingUuidList && behandlingUuid && document.behandlingUuidList.includes(behandlingUuid) && (
                 <Image
                   className={styles.image}
                   src={erIBrukImageUrl}
