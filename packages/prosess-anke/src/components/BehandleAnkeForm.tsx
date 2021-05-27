@@ -73,12 +73,14 @@ const IKKE_PAA_ANKET_BEHANDLING_ID = '0';
 const canPreview = (begrunnelse: string, fritekstTilBrev: string): boolean => (begrunnelse && begrunnelse.length > 0)
   && (fritekstTilBrev && fritekstTilBrev.length > 0);
 const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
+
 const formatBehandling = (
   b: BehandlingInfo,
   behandlingTyper: KodeverkMedNavn[],
   behandlingStatuser: KodeverkMedNavn[],
 ): string => `${formatDate(b.opprettet)} - ${behandlingTyper.find((bt) => bt.kode === b.type.kode)?.navn} `
   + `- ${behandlingStatuser.find((bs) => bs.kode === b.status.kode)?.navn}`;
+
 const formatId = (id?: string): string => {
   if (id === null) {
     return IKKE_PAA_ANKET_BEHANDLING_ID;
@@ -89,7 +91,7 @@ const formatId = (id?: string): string => {
 const leggTilUkjent = (behandlinger: BehandlingInfo[] = []): BehandlingInfo[] => {
   const arr = [].concat(behandlinger);
   arr.unshift({
-    id: IKKE_PAA_ANKET_BEHANDLING_ID,
+    uuid: IKKE_PAA_ANKET_BEHANDLING_ID,
     opprettet: null,
     type: {
     },
