@@ -298,6 +298,47 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
     expect(errors).toEqual({});
   });
 
+  it('skal ikke godkjenne arbeidsforhold som har tilretteleggingBehovFom etter termindato minus tre uker', () => {
+    const values = {
+      termindato: '2020-01-25',
+      'BEDRIFT AS9109090880f70f2f2-79f8-4cc0-8929-be25ef2be878': {
+        skalBrukes: true,
+        tilretteleggingBehovFom: '2020-01-10',
+        tilretteleggingDatoer: [{
+          fom: '2020-01-10',
+        }],
+      },
+    };
+    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper, intlMock);
+
+    expect(errors).toEqual({
+      'BEDRIFT AS9109090880f70f2f2-79f8-4cc0-8929-be25ef2be878': {
+        tilretteleggingBehovFom: 'Tilrettelegging fra og med må være tidligere enn 04.01.2020',
+      },
+    });
+  });
+
+  it('skal ikke godkjenne arbeidsforhold som har tilretteleggingBehovFom etter fødselsdato', () => {
+    const values = {
+      termindato: '2020-01-25',
+      fødselsdato: '2020-01-02',
+      'BEDRIFT AS9109090880f70f2f2-79f8-4cc0-8929-be25ef2be878': {
+        skalBrukes: true,
+        tilretteleggingBehovFom: '2020-01-21',
+        tilretteleggingDatoer: [{
+          fom: '2020-01-21',
+        }],
+      },
+    };
+    const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper, intlMock);
+
+    expect(errors).toEqual({
+      'BEDRIFT AS9109090880f70f2f2-79f8-4cc0-8929-be25ef2be878': {
+        tilretteleggingBehovFom: 'Tilrettelegging fra og med må være tidligere enn 02.01.2020',
+      },
+    });
+  });
+
   it('skal vise alert-info når arbeidsgiver ikke finnes i arbeidsforhold i inntektArbeidYtelse', () => {
     const iayArbeidsforhold = [{
       id: '555864629-null',
