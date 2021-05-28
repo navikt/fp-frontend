@@ -13,7 +13,7 @@ import {
 } from '@fpsak-frontend/shared-components';
 import { DatepickerField, TextAreaField } from '@fpsak-frontend/form';
 import {
-  hasValidDate, hasValidText, maxLength, required, requiredIfNotPristine,
+  hasValidDate, hasValidText, maxLength, required, requiredIfNotPristine, DDMMYYYY_DATE_FORMAT,
 } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
@@ -339,12 +339,25 @@ export const validateForm = (
     errors._error = intl.formatMessage({ id: 'FodselOgTilretteleggingFaktaForm.MinstEnTilretteleggingMåBrukes' });
   }
 
-  const { termindato } = values;
+  const { termindato, fødselsdato } = values;
   Object.keys(values)
     .filter((key) => formSectionNames.includes(key))
     .filter((key) => values[key].skalBrukes)
     .forEach((key) => {
       const tilretteleggingForm = moment(values[key].tilretteleggingBehovFom);
+
+      const treUkerFørTermindato = moment(termindato).subtract(3, 'week');
+      const tidligsteTidspunkt = moment.min(treUkerFørTermindato, moment(fødselsdato));
+      if (tilretteleggingForm.isValid() && !tilretteleggingForm.isBefore(tidligsteTidspunkt)) {
+        errors[key] = {
+          tilretteleggingBehovFom: intl.formatMessage({
+            id: 'FodselOgTilretteleggingFaktaForm.TilretteleggingTidligereEnn',
+          }, {
+            dato: tidligsteTidspunkt.format(DDMMYYYY_DATE_FORMAT),
+          }),
+        };
+      }
+
       if (tilretteleggingForm.isValid() && !moment(termindato).isAfter(tilretteleggingForm)) {
         errors[key] = {
           tilretteleggingBehovFom: intl.formatMessage({ id: 'FodselOgTilretteleggingFaktaForm.TermindatoForDato' }),
