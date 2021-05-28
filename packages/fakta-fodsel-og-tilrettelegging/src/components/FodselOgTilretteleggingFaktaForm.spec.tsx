@@ -254,9 +254,8 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
     const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper, intlMock);
 
     expect(errors).toEqual({
-      termindato: 'Termindato er før eller lik dato jordmor/lege oppgir at søker trenger tilrettelegging. Kontroller opplysningene i saken.',
       'BEDRIFT AS9109090880f70f2f2-79f8-4cc0-8929-be25ef2be878': {
-        tilretteleggingBehovFom: 'Termindato er før eller lik dato jordmor/lege oppgir at søker trenger tilrettelegging. Kontroller opplysningene i saken.',
+        tilretteleggingBehovFom: 'Tilrettelegging fra og med må være tidligere enn 11.12.2017',
       },
     });
   });
@@ -275,9 +274,8 @@ describe('<FodselOgTilretteleggingFaktaForm>', () => {
     const errors = validateForm(values, arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper, intlMock);
 
     expect(errors).toEqual({
-      termindato: 'Termindato er før eller lik dato jordmor/lege oppgir at søker trenger tilrettelegging. Kontroller opplysningene i saken.',
       'BEDRIFT AS9109090880f70f2f2-79f8-4cc0-8929-be25ef2be878': {
-        tilretteleggingBehovFom: 'Termindato er før eller lik dato jordmor/lege oppgir at søker trenger tilrettelegging. Kontroller opplysningene i saken.',
+        tilretteleggingBehovFom: 'Tilrettelegging fra og med må være tidligere enn 11.12.2018',
       },
     });
   });

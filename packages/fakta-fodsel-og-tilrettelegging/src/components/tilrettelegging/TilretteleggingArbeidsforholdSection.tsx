@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { FieldArray, FormSection, formValueSelector } from 'redux-form';
 import { Normaltekst, Element } from 'nav-frontend-typografi';
 
@@ -58,7 +58,8 @@ interface MappedOwnProps {
   visTilrettelegginger: boolean;
 }
 
-export const TilretteleggingArbeidsforholdSection: FunctionComponent<PureOwnProps & MappedOwnProps> = ({
+export const TilretteleggingArbeidsforholdSection: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps> = ({
+  intl,
   readOnly,
   arbeidsforhold,
   formSectionName,
@@ -86,20 +87,16 @@ export const TilretteleggingArbeidsforholdSection: FunctionComponent<PureOwnProp
       <FlexContainer>
         <FlexRow alignItemsToBaseline>
           <FlexColumn>
-            <Normaltekst>
-              <FormattedMessage id="TilretteleggingArbeidsforholdSection.DatepickerField.TilretteleggingFra" />
-            </Normaltekst>
-          </FlexColumn>
-          <FlexColumn>
             <DatepickerField
               name="tilretteleggingBehovFom"
-              label=""
+              label={intl.formatMessage({ id: 'TilretteleggingArbeidsforholdSection.DatepickerField.TilretteleggingFra' })}
               validate={[required, hasValidDate]}
               readOnly={readOnly}
             />
             <VerticalSpacer eightPx />
           </FlexColumn>
         </FlexRow>
+        <VerticalSpacer sixteenPx />
         <FlexRow>
           <FlexColumn>
             <Element>
@@ -142,4 +139,4 @@ const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => ({
   visTilrettelegginger: formValueSelector(ownProps.formName)(state, `${ownProps.formSectionName}.skalBrukes`),
 });
 
-export default connect(mapStateToProps)(TilretteleggingArbeidsforholdSection);
+export default connect(mapStateToProps)(injectIntl(TilretteleggingArbeidsforholdSection));
