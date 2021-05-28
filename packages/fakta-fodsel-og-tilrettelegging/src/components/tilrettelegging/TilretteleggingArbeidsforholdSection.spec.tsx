@@ -4,7 +4,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import { CheckboxField, DatepickerField } from '@fpsak-frontend/form';
 import { ArbeidsforholdFodselOgTilrettelegging } from '@fpsak-frontend/types';
-import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { TilretteleggingArbeidsforholdSection } from './TilretteleggingArbeidsforholdSection';
 import messages from '../../../i18n/nb_NO.json';
@@ -31,6 +31,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
 
   it('skal rendre tilrettelegginger korrekt når visTilrettelegginer er true', () => {
     const wrapper = shallowWithIntl(<TilretteleggingArbeidsforholdSection
+      intl={getIntlMock(messages)}
       readOnly={false}
       arbeidsforhold={{
         arbeidsgiverReferanse: '111222333',
@@ -52,7 +53,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
       uttakArbeidTyper={uttakArbeidTyper}
     />, messages);
     const normaltekst = wrapper.find(Normaltekst);
-    expect(normaltekst).toHaveLength(2);
+    expect(normaltekst).toHaveLength(1);
     expect(normaltekst.at(0).props().children).toBe('ARB_NAVN_1 (111222333)....-001');
     const checkboxField = wrapper.find(CheckboxField);
     expect(checkboxField).toHaveLength(1);
@@ -64,6 +65,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
 
   it('skal rendre tilrettelegginger korrekt når visTilrettelegginer er false', () => {
     const wrapper = shallowWithIntl(<TilretteleggingArbeidsforholdSection
+      intl={getIntlMock(messages)}
       readOnly={false}
       arbeidsforhold={{
         arbeidsgiverReferanse: '0',
@@ -97,6 +99,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
 
   it('skal vise arbeidstype når arbeidsforholdReferanse ikke finnes', () => {
     const wrapper = shallowWithIntl(<TilretteleggingArbeidsforholdSection
+      intl={getIntlMock(messages)}
       readOnly={false}
       arbeidsforhold={{
         eksternArbeidsforholdReferanse: '',

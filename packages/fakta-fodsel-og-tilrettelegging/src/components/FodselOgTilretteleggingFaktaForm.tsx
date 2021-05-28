@@ -326,7 +326,7 @@ export const validateForm = (
   uttakArbeidTyper: KodeverkMedNavn[],
   intl: IntlShape,
 ) => {
-  let errors = {};
+  const errors = {};
   if (Object.keys(values).length === 0) {
     return errors;
   }
@@ -347,7 +347,7 @@ export const validateForm = (
       const tilretteleggingForm = moment(values[key].tilretteleggingBehovFom);
 
       const treUkerFørTermindato = moment(termindato).subtract(3, 'week');
-      const tidligsteTidspunkt = moment.min(treUkerFørTermindato, moment(fødselsdato));
+      const tidligsteTidspunkt = fødselsdato ? moment.min(treUkerFørTermindato, moment(fødselsdato)) : treUkerFørTermindato;
       if (tilretteleggingForm.isValid() && !tilretteleggingForm.isBefore(tidligsteTidspunkt)) {
         errors[key] = {
           tilretteleggingBehovFom: intl.formatMessage({
@@ -355,16 +355,6 @@ export const validateForm = (
           }, {
             dato: tidligsteTidspunkt.format(DDMMYYYY_DATE_FORMAT),
           }),
-        };
-      }
-
-      if (tilretteleggingForm.isValid() && !moment(termindato).isAfter(tilretteleggingForm)) {
-        errors[key] = {
-          tilretteleggingBehovFom: intl.formatMessage({ id: 'FodselOgTilretteleggingFaktaForm.TermindatoForDato' }),
-        };
-        errors = {
-          ...errors,
-          termindato: intl.formatMessage({ id: 'FodselOgTilretteleggingFaktaForm.TermindatoForDato' }),
         };
       }
     });
