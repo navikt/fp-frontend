@@ -1,43 +1,20 @@
-import React, {
-  FunctionComponent, useCallback, useState,
-} from 'react';
+import React, { FunctionComponent, useState } from 'react';
 
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import AnkeTrygderettsbehandlingProsessIndex, { AnkeTrygderettBrevData } from '@fpsak-frontend/prosess-anke-trygderettsbehandling';
+import { AnkeTrygderettsbehandlingProsessDataIndex, ProsessDataAnkeTrygderettsbehandling } from '@fpsak-frontend/prosess-anke-trygderettsbehandling';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import {
-  Aksjonspunkt, AnkeVurdering, Behandling, Fagsak,
+  Aksjonspunkt, AlleKodeverk, Behandling, Fagsak,
 } from '@fpsak-frontend/types';
-import { ProsessDefaultInitPanel, ProsessPanelInitProps, useStandardProsessPanelProps } from '@fpsak-frontend/behandling-felles';
+import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@fpsak-frontend/utils';
 
 import messages from '../../i18n/nb_NO.json';
 import AnkeBehandlingModal from '../modaler/AnkeBehandlingModal';
-import { restApiAnkeHooks, requestAnkeApi, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi';
+import { requestAnkeApi, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi';
 
 const intl = createIntl(messages);
-
-const forhandsvis = (data) => {
-  if (window.navigator.msSaveOrOpenBlob) {
-    window.navigator.msSaveOrOpenBlob(data);
-  } else if (URL.createObjectURL) {
-    window.open(URL.createObjectURL(data));
-  }
-};
-
-const lagForhandsvisCallback = (
-  forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<any>,
-  fagsak: Fagsak,
-  behandling: Behandling,
-) => (data: AnkeTrygderettBrevData) => {
-  const brevData = {
-    ...data,
-    behandlingUuid: behandling.uuid,
-    ytelseType: fagsak.fagsakYtelseType,
-  };
-  return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
-};
 
 const getLagringSideeffekter = (
   toggleAnkeModal: (skalToggle: boolean) => void,
@@ -71,63 +48,65 @@ type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
 }
 
-const ENDEPUNKTER_PANEL_DATA = [AnkeBehandlingApiKeys.ANKE_VURDERING];
-type EndepunktPanelData = {
-  ankeVurdering: AnkeVurdering;
-}
-
 interface OwnProps {
-  fagsak: Fagsak;
+  behandlingData: {
+    fagsak: Fagsak;
+    behandling: Behandling;
+    alleKodeverk: AlleKodeverk;
+  };
   opneSokeside: () => void;
   toggleSkalOppdatereFagsakContext: (skalOppdatereFagsak: boolean) => void;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
+  lagreAksjonspunkter: (params?: any, keepData?: boolean) => Promise<Behandling>;
 }
 
 const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
-  fagsak,
+  behandlingData,
   opneSokeside,
   toggleSkalOppdatereFagsakContext,
   oppdaterProsessStegOgFaktaPanelIUrl,
+  lagreAksjonspunkter,
   ...props
 }) => {
   const [visModalAnkeBehandling, toggleAnkeModal] = useState(false);
-
-  const standardPanelProps = useStandardProsessPanelProps();
-
-  const { startRequest: forhandsvisMelding } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeys.PREVIEW_MESSAGE);
-  const previewCallback = useCallback(lagForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
-    [standardPanelProps.behandling.versjon]);
-
   const lagringSideeffekterCallback = getLagringSideeffekter(toggleAnkeModal, toggleSkalOppdatereFagsakContext,
     oppdaterProsessStegOgFaktaPanelIUrl);
 
   return (
-    <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+    <ProsessDefaultInitPanel<EndepunktInitData>
       {...props}
       requestApi={requestAnkeApi}
       initEndepunkter={ENDEPUNKTER_INIT_DATA}
-      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.ANKE_MERKNADER}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.AnkeMerknader' })}
       skalPanelVisesIMeny={() => true}
-      lagringSideEffekter={lagringSideeffekterCallback}
-      renderPanel={(data) => (
-        <>
-          <AnkeBehandlingModal
-            visModal={visModalAnkeBehandling}
-            lukkModal={() => { toggleAnkeModal(false); opneSokeside(); }}
-            erFerdigbehandlet={false}
-            venterTrygderett={!!data?.aksjonspunkter
-              && data.aksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktCodes.AUTO_VENT_ANKE_MERKNADER_FRA_BRUKER
-              && ap.status.kode === aksjonspunktStatus.OPPRETTET)}
-          />
-          <AnkeTrygderettsbehandlingProsessIndex
-            previewCallback={previewCallback}
-            {...data}
-          />
-        </>
-      )}
+      renderPanel={(data) => {
+        const prosessData = new ProsessDataAnkeTrygderettsbehandling(requestAnkeApi, behandlingData)
+          .medRestEndepunkter(AnkeBehandlingApiKeys.ANKE_VURDERING, AnkeBehandlingApiKeys.PREVIEW_MESSAGE)
+          .medAksjonspunkter(data.aksjonspunkter, AKSJONSPUNKT_KODER)
+          .medLagring(oppdaterProsessStegOgFaktaPanelIUrl, lagreAksjonspunkter)
+          .medLagringSideeffekter(lagringSideeffekterCallback);
+        return (
+          <>
+            <AnkeBehandlingModal
+              visModal={visModalAnkeBehandling}
+              lukkModal={() => { toggleAnkeModal(false); opneSokeside(); }}
+              erFerdigbehandlet={false}
+              venterTrygderett={!!data?.aksjonspunkter
+                && data.aksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktCodes.AUTO_VENT_ANKE_MERKNADER_FRA_BRUKER
+                && ap.status.kode === aksjonspunktStatus.OPPRETTET)}
+            />
+            <AnkeTrygderettsbehandlingProsessDataIndex
+              prosessData={prosessData}
+              isReadOnly={data.isReadOnly}
+              readOnlySubmitButton={data.readOnlySubmitButton}
+              formData={data.formData}
+              setFormData={data.setFormData}
+            />
+          </>
+        );
+      }}
     />
   );
 };

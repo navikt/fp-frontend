@@ -1,55 +1,22 @@
 import React, {
-  FunctionComponent, useCallback, useState,
+  FunctionComponent, useState,
 } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import AnkeResultatProsessIndex, { AnkeResultatBrevData } from '@fpsak-frontend/prosess-anke-resultat';
+import { AnkeResultatProsessDataIndex, ProsessDataAnkeResultat } from '@fpsak-frontend/prosess-anke-resultat';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import {
-  Aksjonspunkt, AnkeVurdering, Behandling, Fagsak,
+  Aksjonspunkt, AlleKodeverk, Behandling, Fagsak,
 } from '@fpsak-frontend/types';
-import { ProsessDefaultInitPanel, ProsessPanelInitProps, useStandardProsessPanelProps } from '@fpsak-frontend/behandling-felles';
+import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { createIntl } from '@fpsak-frontend/utils';
 
 import messages from '../../i18n/nb_NO.json';
 import AnkeBehandlingModal from '../modaler/AnkeBehandlingModal';
-import { restApiAnkeHooks, requestAnkeApi, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi';
+import { requestAnkeApi, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi';
 
 const intl = createIntl(messages);
-
-const forhandsvis = (data) => {
-  if (window.navigator.msSaveOrOpenBlob) {
-    window.navigator.msSaveOrOpenBlob(data);
-  } else if (URL.createObjectURL) {
-    window.open(URL.createObjectURL(data));
-  }
-};
-
-const lagForhandsvisCallback = (
-  forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<any>,
-  fagsak: Fagsak,
-  behandling: Behandling,
-) => (data: AnkeResultatBrevData) => {
-  const brevData = {
-    ...data,
-    behandlingUuid: behandling.uuid,
-    ytelseType: fagsak.fagsakYtelseType,
-  };
-  return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
-};
-
-const getLagringSideeffekter = (
-  toggleAnkeModal: (skalViseModal: boolean) => void,
-  toggleOppdatereFagsakContext: (skalOppdatereFagsak: boolean) => void,
-) => () => {
-  toggleOppdatereFagsakContext(false);
-
-  // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
-  return () => {
-    toggleAnkeModal(true);
-  };
-};
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.FORESLA_VEDTAK,
@@ -63,60 +30,76 @@ type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
 }
 
-const ENDEPUNKTER_PANEL_DATA = [AnkeBehandlingApiKeys.ANKE_VURDERING];
-type EndepunktPanelData = {
-  ankeVurdering: AnkeVurdering;
-}
+const getLagringSideeffekter = (
+  toggleAnkeModal: (skalViseModal: boolean) => void,
+  toggleOppdatereFagsakContext: (skalOppdatereFagsak: boolean) => void,
+) => () => {
+  toggleOppdatereFagsakContext(false);
+
+  // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
+  return () => {
+    toggleAnkeModal(true);
+  };
+};
 
 interface OwnProps {
-  fagsak: Fagsak;
+  behandlingData: {
+    fagsak: Fagsak;
+    behandling: Behandling;
+    alleKodeverk: AlleKodeverk;
+  };
   opneSokeside: () => void;
   toggleSkalOppdatereFagsakContext: (skalOppdatereFagsak: boolean) => void;
+  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
+  lagreAksjonspunkter: (params?: any, keepData?: boolean) => Promise<Behandling>;
 }
 
 const AnkeResultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
-  fagsak,
+  behandlingData,
   opneSokeside,
   toggleSkalOppdatereFagsakContext,
+  oppdaterProsessStegOgFaktaPanelIUrl,
+  lagreAksjonspunkter,
   ...props
 }) => {
   const [visModalAnkeBehandling, toggleAnkeModal] = useState(false);
-
-  const standardPanelProps = useStandardProsessPanelProps();
-
-  const { startRequest: forhandsvisMelding } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeys.PREVIEW_MESSAGE);
-  const previewCallback = useCallback(lagForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
-    [standardPanelProps.behandling.versjon]);
-
   const lagringSideeffekterCallback = getLagringSideeffekter(toggleAnkeModal, toggleSkalOppdatereFagsakContext);
 
   return (
-    <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+    <ProsessDefaultInitPanel<EndepunktInitData>
       {...props}
       requestApi={requestAnkeApi}
       initEndepunkter={ENDEPUNKTER_INIT_DATA}
-      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.ANKE_RESULTAT}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.AnkeResultat' })}
       skalPanelVisesIMeny={() => true}
-      lagringSideEffekter={lagringSideeffekterCallback}
-      renderPanel={(data) => (
-        <>
-          <AnkeBehandlingModal
-            visModal={visModalAnkeBehandling}
-            lukkModal={() => { toggleAnkeModal(false); opneSokeside(); }}
-            erFerdigbehandlet={!!data?.aksjonspunkter && data.aksjonspunkter
-              .some((ap) => ap.definisjon.kode === aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL
-                && ap.status.kode === aksjonspunktStatus.UTFORT)}
-            venterTrygderett={false}
-          />
-          <AnkeResultatProsessIndex
-            previewCallback={previewCallback}
-            {...data}
-          />
-        </>
-      )}
+      renderPanel={(data) => {
+        const prosessData = new ProsessDataAnkeResultat(requestAnkeApi, behandlingData)
+          .medRestEndepunkter(AnkeBehandlingApiKeys.ANKE_VURDERING, AnkeBehandlingApiKeys.PREVIEW_MESSAGE)
+          .medAksjonspunkter(data.aksjonspunkter, AKSJONSPUNKT_KODER)
+          .medLagring(oppdaterProsessStegOgFaktaPanelIUrl, lagreAksjonspunkter)
+          .medLagringSideeffekter(lagringSideeffekterCallback);
+        return (
+          <>
+            <AnkeBehandlingModal
+              visModal={visModalAnkeBehandling}
+              lukkModal={() => { toggleAnkeModal(false); opneSokeside(); }}
+              erFerdigbehandlet={!!data?.aksjonspunkter && data.aksjonspunkter
+                .some((ap) => ap.definisjon.kode === aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL
+                  && ap.status.kode === aksjonspunktStatus.UTFORT)}
+              venterTrygderett={false}
+            />
+            <AnkeResultatProsessDataIndex
+              prosessData={prosessData}
+              isReadOnly={data.isReadOnly}
+              readOnlySubmitButton={data.readOnlySubmitButton}
+              formData={data.formData}
+              setFormData={data.setFormData}
+            />
+          </>
+        );
+      }}
     />
   );
 };

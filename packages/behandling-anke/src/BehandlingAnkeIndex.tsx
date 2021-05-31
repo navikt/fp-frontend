@@ -53,6 +53,12 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & StandardBehandlingProps>
     return <LoadingPanel />;
   }
 
+  const behandlingData = {
+    fagsak,
+    behandling,
+    alleKodeverk: kodeverk,
+  };
+
   return (
     <>
       <BehandlingPaVent
@@ -79,19 +85,28 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & StandardBehandlingProps>
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
           hentProsessPaneler={(props) => (
             <>
-              <AnkeBehandlingProsessStegInitPanel {...props} fagsak={fagsak} alleBehandlinger={alleBehandlinger} />
+              <AnkeBehandlingProsessStegInitPanel
+                {...props}
+                behandlingData={behandlingData}
+                oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+                lagreAksjonspunkter={lagreAksjonspunkter}
+                alleBehandlinger={alleBehandlinger}
+              />
               <AnkeResultatProsessStegInitPanel
                 {...props}
-                fagsak={fagsak}
+                behandlingData={behandlingData}
+                oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+                lagreAksjonspunkter={lagreAksjonspunkter}
                 opneSokeside={opneSokeside}
                 toggleSkalOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
               />
               <AnkeTrygderettsbehandlingProsessStegInitPanel
                 {...props}
-                fagsak={fagsak}
+                behandlingData={behandlingData}
+                oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+                lagreAksjonspunkter={lagreAksjonspunkter}
                 opneSokeside={opneSokeside}
                 toggleSkalOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
-                oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
               />
             </>
           )}

@@ -2,9 +2,11 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { AnkeVurdering, StandardProsessPanelProps } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, AlleKodeverk, AnkeVurdering, Behandling,
+} from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
+import { AnkeVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import BehandleAnkeForm, { BehandlingInfo } from './components/BehandleAnkeForm';
 import { AnkeData } from './components/TempsaveAnkeButton';
@@ -14,13 +16,19 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface OwnProps {
-  ankeVurdering: AnkeVurdering;
+  ankeVurdering?: AnkeVurdering;
   saveAnke: (data: AnkeData) => Promise<any>;
   previewCallback: (data: BrevData) => Promise<any>;
   behandlinger: BehandlingInfo[];
+  behandling: Behandling;
+  alleKodeverk: AlleKodeverk;
+  submitCallback: (data: AnkeVurderingResultatAp) => Promise<void>;
+  isReadOnly: boolean;
+  readOnlySubmitButton: boolean;
+  aksjonspunkter: Aksjonspunkt[];
 }
 
-const AnkeProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+const AnkeProsessIndex: FunctionComponent<OwnProps> = ({
   behandling,
   ankeVurdering,
   behandlinger,
@@ -31,26 +39,22 @@ const AnkeProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> 
   saveAnke,
   previewCallback,
   alleKodeverk,
-  formData,
-  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <ReduxWrapper formName="AnkeProsessIndex" formData={formData} setFormData={setFormData}>
-      <BehandleAnkeForm
-        sprakkode={behandling.sprakkode}
-        ankeVurderingResultat={ankeVurdering ? ankeVurdering.ankeVurderingResultat : undefined}
-        behandlinger={behandlinger}
-        aksjonspunkter={aksjonspunkter}
-        submitCallback={submitCallback}
-        readOnly={isReadOnly}
-        readOnlySubmitButton={readOnlySubmitButton}
-        saveAnke={saveAnke}
-        previewCallback={previewCallback}
-        ankeOmgorArsaker={alleKodeverk[kodeverkTyper.ANKE_OMGJOER_AARSAK]}
-        behandlingTyper={alleKodeverk[kodeverkTyper.BEHANDLING_TYPE]}
-        behandlingStatuser={alleKodeverk[kodeverkTyper.BEHANDLING_STATUS]}
-      />
-    </ReduxWrapper>
+    <BehandleAnkeForm
+      sprakkode={behandling.sprakkode}
+      ankeVurderingResultat={ankeVurdering ? ankeVurdering.ankeVurderingResultat : undefined}
+      behandlinger={behandlinger}
+      aksjonspunkter={aksjonspunkter}
+      submitCallback={submitCallback}
+      readOnly={isReadOnly}
+      readOnlySubmitButton={readOnlySubmitButton}
+      saveAnke={saveAnke}
+      previewCallback={previewCallback}
+      ankeOmgorArsaker={alleKodeverk[kodeverkTyper.ANKE_OMGJOER_AARSAK]}
+      behandlingTyper={alleKodeverk[kodeverkTyper.BEHANDLING_TYPE]}
+      behandlingStatuser={alleKodeverk[kodeverkTyper.BEHANDLING_STATUS]}
+    />
   </RawIntlProvider>
 );
 

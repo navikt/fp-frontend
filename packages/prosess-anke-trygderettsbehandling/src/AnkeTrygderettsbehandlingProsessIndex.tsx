@@ -2,9 +2,11 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { AnkeVurdering, StandardProsessPanelProps } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, AlleKodeverk, AnkeVurdering, Behandling,
+} from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
+import { AnkeMerknaderResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import TrygderettsbehandlingForm from './components/TrygderettsbehandlingForm';
 import { BrevData } from './components/PreviewAnkeLink';
@@ -15,9 +17,15 @@ const intl = createIntl(messages);
 interface OwnProps {
   ankeVurdering: AnkeVurdering;
   previewCallback: (data: BrevData) => Promise<any>;
+  behandling: Behandling;
+  alleKodeverk: AlleKodeverk;
+  submitCallback: (data: AnkeMerknaderResultatAp) => Promise<void>;
+  isReadOnly: boolean;
+  readOnlySubmitButton: boolean;
+  aksjonspunkter: Aksjonspunkt[];
 }
 
-const AnkeTrygderettsbehandlingProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+const AnkeTrygderettsbehandlingProsessIndex: FunctionComponent<OwnProps> = ({
   behandling,
   ankeVurdering,
   aksjonspunkter,
@@ -26,22 +34,18 @@ const AnkeTrygderettsbehandlingProsessIndex: FunctionComponent<OwnProps & Standa
   readOnlySubmitButton,
   previewCallback,
   alleKodeverk,
-  formData,
-  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <ReduxWrapper formName="AnkeTrygderettsbehandlingProsessIndex" formData={formData} setFormData={setFormData}>
-      <TrygderettsbehandlingForm
-        ankeVurderingResultat={ankeVurdering.ankeVurderingResultat}
-        aksjonspunkter={aksjonspunkter}
-        submitCallback={submitCallback}
-        sprakkode={behandling.sprakkode}
-        readOnly={isReadOnly}
-        readOnlySubmitButton={readOnlySubmitButton}
-        previewCallback={previewCallback}
-        ankeOmgorArsaker={alleKodeverk[kodeverkTyper.ANKE_OMGJOER_AARSAK]}
-      />
-    </ReduxWrapper>
+    <TrygderettsbehandlingForm
+      ankeVurderingResultat={ankeVurdering.ankeVurderingResultat}
+      aksjonspunkter={aksjonspunkter}
+      submitCallback={submitCallback}
+      sprakkode={behandling.sprakkode}
+      readOnly={isReadOnly}
+      readOnlySubmitButton={readOnlySubmitButton}
+      previewCallback={previewCallback}
+      ankeOmgorArsaker={alleKodeverk[kodeverkTyper.ANKE_OMGJOER_AARSAK]}
+    />
   </RawIntlProvider>
 );
 

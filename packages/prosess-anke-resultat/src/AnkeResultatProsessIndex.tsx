@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { AnkeVurdering, StandardProsessPanelProps } from '@fpsak-frontend/types';
+import { Aksjonspunkt, AlleKodeverk, AnkeVurdering } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
+import { BekreftVedtakUtenTotrinnskontrollAp, ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import BehandleResultatForm from './components/BehandleResultatForm';
 import { BrevData } from './components/PreviewAnkeLink';
@@ -14,9 +14,14 @@ const intl = createIntl(messages);
 interface OwnProps {
   ankeVurdering: AnkeVurdering;
   previewCallback: (data: BrevData) => Promise<any>;
+  alleKodeverk: AlleKodeverk;
+  submitCallback: (data: ForeslaVedtakAp | ForeslaVedtakManueltAp | BekreftVedtakUtenTotrinnskontrollAp) => Promise<void>;
+  isReadOnly: boolean;
+  readOnlySubmitButton: boolean;
+  aksjonspunkter: Aksjonspunkt[];
 }
 
-const AnkeResultatProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
+const AnkeResultatProsessIndex: FunctionComponent<OwnProps> = ({
   ankeVurdering,
   aksjonspunkter,
   submitCallback,
@@ -24,21 +29,17 @@ const AnkeResultatProsessIndex: FunctionComponent<OwnProps & StandardProsessPane
   readOnlySubmitButton,
   previewCallback,
   alleKodeverk,
-  formData,
-  setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <ReduxWrapper formName="AnkeResultatProsessIndex" formData={formData} setFormData={setFormData}>
-      <BehandleResultatForm
-        ankeVurderingResultat={ankeVurdering.ankeVurderingResultat}
-        aksjonspunkter={aksjonspunkter}
-        submitCallback={submitCallback}
-        readOnly={isReadOnly}
-        readOnlySubmitButton={readOnlySubmitButton}
-        previewCallback={previewCallback}
-        alleKodeverk={alleKodeverk}
-      />
-    </ReduxWrapper>
+    <BehandleResultatForm
+      ankeVurderingResultat={ankeVurdering.ankeVurderingResultat}
+      aksjonspunkter={aksjonspunkter}
+      submitCallback={submitCallback}
+      readOnly={isReadOnly}
+      readOnlySubmitButton={readOnlySubmitButton}
+      previewCallback={previewCallback}
+      alleKodeverk={alleKodeverk}
+    />
   </RawIntlProvider>
 );
 
