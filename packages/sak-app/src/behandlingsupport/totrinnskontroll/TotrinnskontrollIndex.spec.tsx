@@ -15,7 +15,7 @@ import TotrinnskontrollIndex from './TotrinnskontrollIndex';
 import BeslutterModalIndex from './BeslutterModalIndex';
 
 jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+  ...jest.requireActual('react-router-dom') as any,
   useHistory: () => ({
     push: jest.fn(),
   }),

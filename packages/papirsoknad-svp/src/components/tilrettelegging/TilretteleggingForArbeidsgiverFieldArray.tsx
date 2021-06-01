@@ -62,7 +62,7 @@ const TilretteleggingForArbeidsgiverFieldArray: FunctionComponent<OwnProps> = ({
           </FlexRow>
         </FlexContainer>
         <FieldArray
-          name={`${fieldId}.${behovForTilretteleggingFieldArrayName}`}
+          name={`${fieldId}.${behovForTilretteleggingFieldArrayName}` as string}
           component={BehovForTilrettteleggingFieldArray}
           readOnly={readOnly}
         />
