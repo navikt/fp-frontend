@@ -11445,10 +11445,10 @@ jest-worker@^26.2.1, jest-worker@^26.6.2:
     merge-stream "^2.0.0"
     supports-color "^7.0.0"
 
-jest-worker@^27.0.1:
-  version "27.0.1"
-  resolved "https://registry.yarnpkg.com/jest-worker/-/jest-worker-27.0.1.tgz#b255fcbb40fb467295010c628474b1185cab4f9e"
-  integrity sha512-NhHqClI3owOjmS8dBhQMKHZ2rrT0sBTpqGitp9nMX5AAjVXd+15o4v96uBEMhoywaLKN+5opcKBlXwAoADZolA==
+jest-worker@^27.0.1, jest-worker@^27.0.2:
+  version "27.0.2"
+  resolved "https://registry.yarnpkg.com/jest-worker/-/jest-worker-27.0.2.tgz#4ebeb56cef48b3e7514552f80d0d80c0129f0b05"
+  integrity sha512-EoBdilOTTyOgmHXtw/cPc+ZrCA0KJMrkXzkrPGNwLmnvvlN1nj7MPrxpT7m+otSv2e1TLaVffzDnE/LB14zJMg==
   dependencies:
     "@types/node" "*"
     merge-stream "^2.0.0"
@@ -17328,24 +17328,12 @@ terser-webpack-plugin@^3.1.0:
     terser "^4.8.0"
     webpack-sources "^1.4.3"
 
-terser-webpack-plugin@^5.0.3, terser-webpack-plugin@^5.1.1:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/terser-webpack-plugin/-/terser-webpack-plugin-5.1.1.tgz#7effadee06f7ecfa093dbbd3e9ab23f5f3ed8673"
-  integrity sha512-5XNNXZiR8YO6X6KhSGXfY0QrGrCRlSwAEjIIrlRQR4W8nP69TaJUlh3bkuac6zzgspiGPfKEHcY295MMVExl5Q==
+terser-webpack-plugin@^5.0.3, terser-webpack-plugin@^5.1.1, terser-webpack-plugin@^5.1.2:
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/terser-webpack-plugin/-/terser-webpack-plugin-5.1.3.tgz#30033e955ca28b55664f1e4b30a1347e61aa23af"
+  integrity sha512-cxGbMqr6+A2hrIB5ehFIF+F/iST5ZOxvOmy9zih9ySbP1C2oEWQSOUS+2SNBTjzx5xLKO4xnod9eywdfq1Nb9A==
   dependencies:
-    jest-worker "^26.6.2"
-    p-limit "^3.1.0"
-    schema-utils "^3.0.0"
-    serialize-javascript "^5.0.1"
-    source-map "^0.6.1"
-    terser "^5.5.1"
-
-terser-webpack-plugin@^5.1.2:
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/terser-webpack-plugin/-/terser-webpack-plugin-5.1.2.tgz#51d295eb7cc56785a67a372575fdc46e42d5c20c"
-  integrity sha512-6QhDaAiVHIQr5Ab3XUWZyDmrIPCHMiqJVljMF91YKyqwKkL5QHnYMkrMBy96v9Z7ev1hGhSEw1HQZc2p/s5Z8Q==
-  dependencies:
-    jest-worker "^26.6.2"
+    jest-worker "^27.0.2"
     p-limit "^3.1.0"
     schema-utils "^3.0.0"
     serialize-javascript "^5.0.1"
@@ -17361,7 +17349,7 @@ terser@^4.1.2, terser@^4.6.3, terser@^4.8.0:
     source-map "~0.6.1"
     source-map-support "~0.5.12"
 
-terser@^5.5.1, terser@^5.7.0:
+terser@^5.7.0:
   version "5.7.0"
   resolved "https://registry.yarnpkg.com/terser/-/terser-5.7.0.tgz#a761eeec206bc87b605ab13029876ead938ae693"
   integrity sha512-HP5/9hp2UaZt5fYkuhNBR8YyRcT8juw8+uFbAme53iN9hblvKnLUTKkmwJG6ocWpIKf8UK4DoeWG4ty0J6S6/g==
