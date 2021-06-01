@@ -170,7 +170,7 @@ export default {
   decorators: [withKnobs],
 };
 
-export const visAksjonspunktForAvklaringAvStartdatoForForeldrepengerperioden = () => (
+export const visAksjonspunktForOverstyringAvStartdatoForForeldrepengerperioden = () => (
   <MedlemskapFaktaIndex
     {...standardFaktaProps}
     behandling={object('behandling', behandling)}
@@ -179,7 +179,7 @@ export const visAksjonspunktForAvklaringAvStartdatoForForeldrepengerperioden = (
     inntektArbeidYtelse={object('inntektArbeidYtelse', inntektArbeidYtelse)}
     aksjonspunkter={[{
       definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN,
+        kode: aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO,
         kodeverk: '',
       },
       status: {
@@ -193,7 +193,7 @@ export const visAksjonspunktForAvklaringAvStartdatoForForeldrepengerperioden = (
     isForeldrepengerFagsak={boolean('isForeldrepengerFagsak', true)}
     alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+      [aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO]: object('merknaderFraBeslutter', merknaderFraBeslutter),
     }}
     readOnlyForStartdatoForForeldrepenger={boolean('readOnly', false)}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

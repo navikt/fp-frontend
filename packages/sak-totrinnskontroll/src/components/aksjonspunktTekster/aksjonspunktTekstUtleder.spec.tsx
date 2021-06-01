@@ -252,16 +252,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     expect(message[0].props.id).toEqual('ToTrinnsForm.Soknadsfrist.VilkarOverstyrt');
   });
 
-  it('skal vise korrekt tekst for aksjonspunkt 5045', () => {
-    const aksjonspunkt = {
-      aksjonspunktKode: aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN,
-      besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: false,
-    } as TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
-    // @ts-ignore
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.FastsettStartdato');
-  });
   it('skal vise korrekt tekst for aksjonspunkt 5021', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,

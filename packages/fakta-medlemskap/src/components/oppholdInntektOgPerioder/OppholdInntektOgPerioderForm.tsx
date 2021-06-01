@@ -24,7 +24,6 @@ import OppholdInntektOgPeriodeForm, { FormValues as OppholdFormValues } from './
 import MedlemskapEndringerTabell from './MedlemskapEndringerTabell';
 
 const {
-  AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN,
   AVKLAR_OM_BRUKER_ER_BOSATT,
   AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
   AVKLAR_OPPHOLDSRETT,
@@ -253,7 +252,6 @@ export class OppholdInntektOgPerioderForm extends Component<Props, OwnState> {
 }
 
 const medlemAksjonspunkter = [
-  AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN,
   AVKLAR_OM_BRUKER_ER_BOSATT,
   AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
   AVKLAR_OPPHOLDSRETT,
@@ -281,8 +279,7 @@ const mapOgFiltrerPerioder = (ap: Aksjonspunkt, perioder: OppholdFormValues[]) =
 export const transformValues = (perioder: OppholdFormValues[], aksjonspunkter: Aksjonspunkt[]): AksjonspunktData => {
   const aktiveMedlemAksjonspunkter = aksjonspunkter
     .filter((ap) => medlemAksjonspunkter.some((kode) => kode === ap.definisjon.kode))
-    .filter((ap) => ap.erAktivt)
-    .filter((ap) => ap.definisjon.kode !== aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN);
+    .filter((ap) => ap.erAktivt);
 
   // @ts-ignore Fiks
   return aktiveMedlemAksjonspunkter.map((ap) => ({
