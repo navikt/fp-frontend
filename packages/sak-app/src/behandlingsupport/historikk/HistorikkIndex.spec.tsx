@@ -7,7 +7,7 @@ import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import HistorikkIndex from './HistorikkIndex';
 
 jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+  ...jest.requireActual('react-router-dom') as any,
   useLocation: () => ({
     pathname: 'test',
     search: 'test',
