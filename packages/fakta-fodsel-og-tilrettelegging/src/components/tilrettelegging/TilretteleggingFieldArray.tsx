@@ -186,10 +186,6 @@ export const TilretteleggingFieldArray: FunctionComponent<PureOwnProps & MappedO
                       tilretteleggingKode={tilretteleggingKode}
                       readOnly={readOnly}
                       formSectionName={formSectionName}
-                      changeField={changeField}
-                      index={index}
-                      utbetalingsgrad={finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold, velferdspermisjonprosent,
-                        tilretteleggingKode === tilretteleggingType.INGEN_TILRETTELEGGING ? 0 : data.stillingsprosent)}
                       setOverstyrtUtbetalingsgrad={setOverstyrtUtbetalingsgrad}
                       formName={formName}
                     />
