@@ -444,7 +444,9 @@ const getInitialArbeidsforholdValues = createSelector([
           ...tilretteleggingsdato,
           stillingsprosent: tilretteleggingsdato.stillingsprosent,
           oldOverstyrtUtbetalingsgrad: tilretteleggingsdato.overstyrtUtbetalingsgrad,
-          overstyrtUtbetalingsgrad: utledUtbetalingsgrad(tilretteleggingsdato, stillingsprosentArbeidsforhold, velferdspermisjonprosent),
+          overstyrtUtbetalingsgrad: tilretteleggingsdato.overstyrtUtbetalingsgrad !== undefined
+            && tilretteleggingsdato.overstyrtUtbetalingsgrad !== null ? tilretteleggingsdato.overstyrtUtbetalingsgrad
+            : utledUtbetalingsgrad(tilretteleggingsdato, stillingsprosentArbeidsforhold, velferdspermisjonprosent),
         })),
         ...permisjoner,
       },
