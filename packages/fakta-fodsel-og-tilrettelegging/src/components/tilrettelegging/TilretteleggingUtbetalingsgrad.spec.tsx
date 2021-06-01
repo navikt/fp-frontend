@@ -15,10 +15,7 @@ describe('<TilretteleggingUtbetalingsgrad>', () => {
       erOverstyrer
       fieldId="1"
       setOverstyrtUtbetalingsgrad={() => undefined}
-      utbetalingsgrad="0"
       formSectionName=""
-      changeField={() => undefined}
-      index={0}
       overstyrtUtbetalingsgrad="0"
       formName="test"
     />, messages);

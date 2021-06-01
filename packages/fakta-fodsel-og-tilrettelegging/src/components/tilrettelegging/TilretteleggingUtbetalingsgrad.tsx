@@ -25,10 +25,7 @@ interface PureOwnProps {
   fieldId: string;
   tilretteleggingKode: string;
   setOverstyrtUtbetalingsgrad: (erOverstyrt: boolean) => void;
-  utbetalingsgrad: string;
   formSectionName: string;
-  changeField: (field: string, value: string) => void;
-  index: number;
 }
 
 interface MappedOwnProps {
@@ -42,17 +39,9 @@ const TilretteleggingUtbetalingsgrad: FunctionComponent<PureOwnProps & MappedOwn
   erOverstyrer,
   fieldId,
   setOverstyrtUtbetalingsgrad,
-  changeField,
-  formSectionName,
-  index,
-  utbetalingsgrad,
-  overstyrtUtbetalingsgrad,
 }) => {
   const [erIEditeringsmodus, setEditeres] = useState(false);
 
-  if (!erIEditeringsmodus && overstyrtUtbetalingsgrad !== utbetalingsgrad) {
-    changeField(`${formSectionName}.tilretteleggingDatoer[${index}].${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`, utbetalingsgrad);
-  }
   useEffect(() => {
     setEditeres(false);
   }, [tilretteleggingKode]);
