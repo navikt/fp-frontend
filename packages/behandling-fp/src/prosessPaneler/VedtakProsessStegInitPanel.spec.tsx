@@ -64,7 +64,7 @@ describe('<VedtakProsessStegInitPanel>', () => {
       opneSokeside={() => {}}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<Required<ProsessDefaultInitPanelProps<INIT_DATA, any>> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     expect(panel.props().hentOverstyrtStatus({}, { behandling } as StandardProsessPanelProps)).toBe(vilkarUtfallType.IKKE_VURDERT);
   });
@@ -81,7 +81,7 @@ describe('<VedtakProsessStegInitPanel>', () => {
       opneSokeside={() => {}}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<Required<ProsessDefaultInitPanelProps<INIT_DATA, any>> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const aksjonspunktModels = [{
       kode: aksjonspunktCodes.VARSEL_REVURDERING_ETTERKONTROLL,

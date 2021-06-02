@@ -63,7 +63,7 @@ describe('skalViseProsessPanel', () => {
         kodeverk: '',
       },
     }] as Aksjonspunkt[];
-    const vilkar = [];
+    const vilkar = [] as Vilkar[];
 
     const skalVise = skalViseProsessPanel(aksjonspunkter, [vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE], vilkar);
 

@@ -58,9 +58,11 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
   const currentData = ikkeKlar ? forrige.current : menyDataSomVises;
 
   const oppdaterMenyValg = useCallback((index: number) => {
-    const panel = currentData[index];
-    const nyvalgtProsessSteg = panel.erAktiv ? undefined : panel.id;
-    oppdaterProsessStegOgFaktaPanelIUrl(nyvalgtProsessSteg, valgtFaktaSteg);
+    if (currentData) {
+      const panel = currentData[index];
+      const nyvalgtProsessSteg = panel.erAktiv ? undefined : panel.id;
+      oppdaterProsessStegOgFaktaPanelIUrl(nyvalgtProsessSteg, valgtFaktaSteg);
+    }
   }, [currentData, valgtFaktaSteg]);
 
   if (!hentPaneler) {
@@ -68,13 +70,13 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <div className={currentData.length > 0 ? styles.container : undefined}>
-      {currentData.length > 0 && (
+    <div className={currentData && currentData.length > 0 ? styles.container : undefined}>
+      {currentData && currentData.length > 0 && (
         <div className={styles.meny}>
           <ProsessMeny menyData={currentData} oppdaterProsessPanelIUrl={oppdaterMenyValg} />
         </div>
       )}
-      {currentData.length === 0 && (
+      {(!currentData || currentData.length === 0) && (
         <LoadingPanel />
       )}
       {hentPaneler({

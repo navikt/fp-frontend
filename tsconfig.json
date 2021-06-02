@@ -6,7 +6,7 @@
 		"types": [ "node", "jest" ],
 		"allowJs": true,
 		"noEmit": true,
-		"strict": false,
+		"strict": true,
 		"resolveJsonModule": true,
 		"esModuleInterop": true,
 		"sourceMap": true,

@@ -1,7 +1,7 @@
 type FaktaPanelMenyData = {
   id: string;
   harHentetInitData: boolean;
-  tekst?: string;
+  tekst: string;
   erAktiv?: boolean;
   harApneAksjonspunkter?: boolean;
 }

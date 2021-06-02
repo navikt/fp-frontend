@@ -12,8 +12,8 @@ const HookWrapper: FunctionComponent<{ hook: () => any }> = ({
 }) => <div hook={hook()} />;
 
 describe('useFaktaMenyRegistrerer', () => {
-  const mockUseEffect = (useEffect) => {
-    useEffect.mockImplementationOnce((f) => f());
+  const mockUseEffect = (useEffect: any) => {
+    useEffect.mockImplementationOnce((f: any) => f());
   };
 
   it('skal registrere panel men ikke vise det i meny fordi en henter data', () => {

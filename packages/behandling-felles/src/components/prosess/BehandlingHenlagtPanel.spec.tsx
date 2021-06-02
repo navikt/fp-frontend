@@ -9,8 +9,8 @@ import ProsessPanelWrapper from './ProsessPanelWrapper';
 import messages from '../../../i18n/nb_NO.json';
 
 describe('<BehandlingHenlagtPanel>', () => {
-  const mockUseEffect = (useEffect) => {
-    useEffect.mockImplementationOnce((f) => f());
+  const mockUseEffect = (useEffect: any) => {
+    useEffect.mockImplementationOnce((f: any) => f());
   };
 
   it('skal registrere panel', () => {

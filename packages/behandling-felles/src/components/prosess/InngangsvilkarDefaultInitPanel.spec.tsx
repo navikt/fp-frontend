@@ -13,8 +13,8 @@ import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus'
 
 import InngangsvilkarDefaultInitPanel from './InngangsvilkarDefaultInitPanel';
 
-let realUseContext;
-let useContextMock;
+let realUseContext: any;
+let useContextMock: any;
 
 const fagsak = {
   saksnummer: '1234',
