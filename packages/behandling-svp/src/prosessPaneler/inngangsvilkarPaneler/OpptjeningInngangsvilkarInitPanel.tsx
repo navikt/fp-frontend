@@ -23,7 +23,7 @@ type EndepunktInitData = {
 }
 
 interface OwnProps {
-  behandlingVersjon?: number;
+  behandlingVersjon: number;
   rettigheter: AksessRettigheter;
 }
 
@@ -44,7 +44,6 @@ const OpptjeningInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvi
     renderPanel={(data, erOverstyrt, toggleOverstyring) => (
       <>
         <OverstyringPanelDef
-          behandling={data.behandling}
           aksjonspunkter={data.aksjonspunkter}
           aksjonspunktKode={aksjonspunktCodes.OVERSTYRING_AV_OPPTJENINGSVILKARET}
           vilkar={data.vilkar}

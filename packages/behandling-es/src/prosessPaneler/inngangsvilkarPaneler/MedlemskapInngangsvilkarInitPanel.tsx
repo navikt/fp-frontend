@@ -52,7 +52,6 @@ const MedlemskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvi
     renderPanel={(data, erOverstyrt, toggleOverstyring) => (
       <>
         <OverstyringPanelDef
-          behandling={data.behandling}
           aksjonspunkter={data.aksjonspunkter}
           aksjonspunktKode={AKSJONSPUNKT_KODE}
           vilkar={data.vilkar}

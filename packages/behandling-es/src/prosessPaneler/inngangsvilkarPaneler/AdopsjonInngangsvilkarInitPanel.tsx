@@ -57,7 +57,6 @@ const AdopsjonInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvilk
       <>
         {data.aksjonspunkter.length === 0 && (
           <OverstyringPanelDef
-            behandling={data.behandling}
             aksjonspunkter={data.aksjonspunkter}
             aksjonspunktKode={aksjonspunktCodes.OVERSTYR_ADOPSJONSVILKAR}
             vilkar={data.vilkar}
