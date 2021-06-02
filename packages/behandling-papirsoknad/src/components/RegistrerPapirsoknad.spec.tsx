@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
+import { Dispatch } from 'redux';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -44,8 +45,7 @@ const behandling = {
   },
   behandlingPaaVent: false,
   behandlingHenlagt: false,
-  links: [],
-};
+} as Behandling;
 
 const rettigheter = {
   writeAccess: {
@@ -65,7 +65,7 @@ describe('<RegistrerPapirsoknad>', () => {
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
       fagsakPersonnummer="12343541"
-      behandling={behandling as Behandling}
+      behandling={behandling}
       kodeverk={{} as AlleKodeverk}
       rettigheter={rettigheter}
       hentBehandling={sinon.spy()}
@@ -84,7 +84,7 @@ describe('<RegistrerPapirsoknad>', () => {
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
       fagsakPersonnummer="12343541"
-      behandling={behandling as Behandling}
+      behandling={behandling}
       kodeverk={{} as AlleKodeverk}
       rettigheter={{
         ...rettigheter,
@@ -128,7 +128,7 @@ describe('<RegistrerPapirsoknad>', () => {
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
       fagsakPersonnummer="12343541"
-      behandling={behandling as Behandling}
+      behandling={behandling}
       kodeverk={{} as AlleKodeverk}
       rettigheter={rettigheter}
       hentBehandling={sinon.spy()}
@@ -165,7 +165,7 @@ describe('<RegistrerPapirsoknad>', () => {
     const wrapper = shallow(<RegistrerPapirsoknad
       fagsak={fagsak}
       fagsakPersonnummer="12343541"
-      behandling={behandling as Behandling}
+      behandling={behandling}
       kodeverk={{} as AlleKodeverk}
       rettigheter={rettigheter}
       hentBehandling={sinon.spy()}
@@ -178,7 +178,7 @@ describe('<RegistrerPapirsoknad>', () => {
     panel.prop('setSoknadData')(nyeSoknadsdata);
 
     const panelV2 = wrapper.find(RegistrerPapirsoknadPanel);
-    panelV2.prop('lagreFullstendig')(undefined, undefined, { valuesForRegisteredFieldsOnly: { data: 'test' } });
+    panelV2.prop('lagreFullstendig')(undefined, {} as Dispatch, { valuesForRegisteredFieldsOnly: { data: 'test' } });
 
     const calls = lagreAksjonspunkt.getCalls();
     expect(calls).toHaveLength(1);

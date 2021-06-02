@@ -7,6 +7,7 @@ import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseTyp
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import { SoknadTypePickerForm } from './SoknadTypePickerForm';
 
@@ -23,6 +24,10 @@ describe('<SoknadTypePickerForm>', () => {
       fagsakYtelseTyper={fagsakYtelseTyper}
       foreldreTyper={foreldreTyper}
       ytelseErSatt={ytelseErSatt}
+      setSoknadData={sinon.spy()}
+      fagsakYtelseType={fagsakYtelseTyper[0]}
+      alleKodeverk={{} as AlleKodeverk}
+      onSubmit={sinon.spy()}
     />);
 
     const radioGroupFields = wrapper.find(RadioGroupField);
@@ -54,6 +59,10 @@ describe('<SoknadTypePickerForm>', () => {
       foreldreTyper={foreldreTyper}
       selectedFagsakYtelseType={selectedFagsakYtelseType}
       ytelseErSatt
+      setSoknadData={sinon.spy()}
+      fagsakYtelseType={fagsakYtelseTyper[0]}
+      alleKodeverk={{} as AlleKodeverk}
+      onSubmit={sinon.spy()}
     />);
 
     const radioGroupFields = wrapper.find(RadioGroupField);
@@ -75,6 +84,10 @@ describe('<SoknadTypePickerForm>', () => {
       foreldreTyper={foreldreTyper}
       selectedFagsakYtelseType={selectedFagsakYtelseType}
       ytelseErSatt
+      setSoknadData={sinon.spy()}
+      fagsakYtelseType={fagsakYtelseTyper[0]}
+      alleKodeverk={{} as AlleKodeverk}
+      onSubmit={sinon.spy()}
     />);
 
     const familieHendelseRadioGroup = wrapper.find('[name="familieHendelseType"]');
@@ -100,6 +113,10 @@ describe('<SoknadTypePickerForm>', () => {
       foreldreTyper={foreldreTyper}
       selectedFagsakYtelseType={selectedFagsakYtelseType}
       ytelseErSatt={false}
+      setSoknadData={sinon.spy()}
+      fagsakYtelseType={fagsakYtelseTyper[0]}
+      alleKodeverk={{} as AlleKodeverk}
+      onSubmit={sinon.spy()}
     />);
 
     const radioGroupFields = wrapper.find(RadioGroupField);

@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Container } from 'nav-frontend-grid';
 import Panel from 'nav-frontend-paneler';
 import { Undertittel } from 'nav-frontend-typografi';
+import { Dispatch } from 'redux';
 
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -23,9 +24,9 @@ interface OwnProps {
   kodeverk: AlleKodeverk;
   readOnly: boolean;
   setSoknadData: (soknadData: SoknadData) => SoknadData;
-  soknadData: SoknadData;
+  soknadData?: SoknadData;
   lagreUfullstendig: () => Promise<any>;
-  lagreFullstendig: (_formValues, _dispatch, values: any) => Promise<any>;
+  lagreFullstendig: (_formValues: any, _dispatch: Dispatch, values: any) => Promise<any>;
 }
 
 const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({

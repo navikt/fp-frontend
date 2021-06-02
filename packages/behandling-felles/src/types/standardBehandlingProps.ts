@@ -17,7 +17,7 @@ type StandardBehandlingProps = {
   oppdaterBehandlingVersjon: (versjon: number) => void;
   behandlingEventHandler: BehandlingEventHandler;
   opneSokeside: () => void;
-  setRequestPendingMessage: (message: string) => void;
+  setRequestPendingMessage: (message?: string) => void;
   kodeverk: AlleKodeverk;
 }
 

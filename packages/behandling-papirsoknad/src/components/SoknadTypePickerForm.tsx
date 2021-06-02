@@ -16,7 +16,7 @@ import { BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import styles from './soknadTypePickerForm.less';
 
@@ -26,13 +26,27 @@ export const soeknadsTyper = [
   familieHendelseType.ADOPSJON,
   familieHendelseType.FODSEL];
 
-interface OwnProps {
+interface FormValues {
+  fagsakYtelseType?: string;
+  familieHendelseType?: string;
+  foreldreType?: string;
+}
+
+interface PureOwnProps {
+  setSoknadData: (soknadData: SoknadData) => SoknadData;
+  soknadData?: SoknadData;
+  fagsakYtelseType: Kodeverk;
+  alleKodeverk: AlleKodeverk;
+}
+
+interface MappedOwnProps {
   fagsakYtelseTyper: KodeverkMedNavn[];
   familieHendelseTyper: KodeverkMedNavn[];
   foreldreTyper: KodeverkMedNavn[];
   selectedFagsakYtelseType?: string;
   ytelseErSatt: boolean;
-  submitSucceeded: boolean;
+  initialValues: FormValues;
+  onSubmit: (values: FormValues) => void;
 }
 
 /**
@@ -40,7 +54,7 @@ interface OwnProps {
  *
  * Presentasjonskomponent: Toppkomponent for registrering av papirsøknad der søknadstype, tema og søker/foreldretype blir valgt.
  */
-export const SoknadTypePickerForm: FunctionComponent<OwnProps & InjectedFormProps> = ({
+export const SoknadTypePickerForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   fagsakYtelseTyper,
   familieHendelseTyper,
   foreldreTyper,
@@ -118,14 +132,8 @@ export const SoknadTypePickerForm: FunctionComponent<OwnProps & InjectedFormProp
   </form>
 );
 
-interface FormValues {
-  fagsakYtelseType?: KodeverkMedNavn;
-  familieHendelseType?: KodeverkMedNavn;
-  foreldreType?: KodeverkMedNavn;
-}
-
 const buildInitialValues = createSelector(
-  [(_state, ownProps) => ownProps.fagsakYtelseType, getFormValues(SOKNAD_TYPE_PICKER_FORM)],
+  [(_state: any, ownProps: PureOwnProps) => ownProps.fagsakYtelseType, getFormValues(SOKNAD_TYPE_PICKER_FORM)],
   (sakstype, formValues: FormValues) => {
     const { ...selectedValues } = formValues;
     const initialFagsakYtelseType = selectedValues.fagsakYtelseType ? selectedValues.fagsakYtelseType : sakstype.kode;
@@ -141,15 +149,16 @@ const buildInitialValues = createSelector(
     const initialForeldreType = selectedValues.foreldreType ? selectedValues.foreldreType : null;
     return {
       ...initialValues,
-      familieHendelseType: initialFamilieHendelseType && initialFamilieHendelseType.kode === '-' ? null : initialFamilieHendelseType,
+      familieHendelseType: initialFamilieHendelseType === '-' ? null : initialFamilieHendelseType,
       foreldreType: initialForeldreType,
     };
   },
 );
 
-const mapStateToPropsFactory = (_initialState, initialOwnProps) => {
-  const onSubmit = (values) => initialOwnProps.setSoknadData(new SoknadData(values.fagsakYtelseType, values.familieHendelseType, values.foreldreType));
-  return (state, ownProps) => ({
+const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
+  const onSubmit = (values: FormValues) => initialOwnProps
+    .setSoknadData(new SoknadData(values.fagsakYtelseType, values.familieHendelseType, values.foreldreType));
+  return (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
     selectedFagsakYtelseType: formValueSelector(SOKNAD_TYPE_PICKER_FORM)(state, 'fagsakYtelseType'),
     ytelseErSatt: !!ownProps.fagsakYtelseType.kode,
     initialValues: buildInitialValues(state, ownProps),

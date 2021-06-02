@@ -17,7 +17,7 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  validate?: (values: FormValues, otherFodselsdato: string, familieHendelseType: string) => any;
+  validate: (values: FormValues, otherFodselsdato: string, familieHendelseType: string) => any;
 }
 
 const OmsorgOgAdopsjonPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = ({

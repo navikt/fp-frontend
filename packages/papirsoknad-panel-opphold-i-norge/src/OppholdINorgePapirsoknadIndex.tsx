@@ -19,7 +19,7 @@ interface OwnProps {
 
 interface StaticFunctions {
   buildInitialValues: () => FormValues;
-  validate?: (values: FormValues) => any
+  validate: (values: FormValues) => any
 }
 
 const OppholdINorgePapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = ({
