@@ -24,7 +24,6 @@ import FaktaUttakAp from './fakta/FaktaUttakAp';
 import AvklarAnnenforelderHarRettAp from './fakta/AvklarAnnenforelderHarRettAp';
 import VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp from './fakta/VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp';
 import BekreftOppholdsrettVurderingAp from './fakta/BekreftOppholdsrettVurderingAp';
-import AvklarStartdatoForPeriodenAp from './fakta/AvklarStartdatoForPeriodenAp';
 import OverstyringAvklarStartdatoForPeriodenAp from './fakta/OverstyringAvklarStartdatoForPeriodenAp';
 import KontrollerBesteberegningAP from './fakta/KontrollerBesteberegningAP';
 import FordelBeregningsgrunnlagAP from './fakta/FordelBeregningsgrunnlagAP';
@@ -43,7 +42,6 @@ export type FaktaAksjonspunkt = AvklarTilleggsopplysningerAp
   | BekreftAleneomsorgVurderingAp
   | BekreftSvangerskapspengerAp
   | BekreftOmsorgVurderingAp
-  | AvklarStartdatoForPeriodenAp
   | BekreftBosattVurderingAp
   | BekreftErMedlemVurderingAp
   | BekreftOppholdsrettVurderingAp

@@ -26,51 +26,6 @@ describe('<MedlemskapInfoPanel>', () => {
     },
   };
 
-  it('skal vise form for startdato for foreldrepengerperioden når en har aksjonspunktet for dette', () => {
-    const avklarStartdatoAksjonspunkt = {
-      id: 1,
-      definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
-      toTrinnsBehandling: true,
-      toTrinnsBehandlingGodkjent: false,
-      kanLoses: true,
-      erAktivt: true,
-    };
-
-    const wrapper = shallowWithIntl(<MedlemskapInfoPanel.WrappedComponent
-      intl={intlMock}
-      aksjonspunkter={[avklarStartdatoAksjonspunkt]}
-      hasOpenAksjonspunkter={false}
-      submittable
-      readOnly
-      submitCallback={sinon.spy()}
-      alleMerknaderFraBeslutter={{}}
-      behandlingType={{
-        kode: 'TEst',
-        kodeverk: '',
-      }}
-      behandlingStatus={{
-        kode: behandlingStatus.BEHANDLING_UTREDES,
-        kodeverk: '',
-      }}
-      soknad={{} as Soknad}
-      inntektArbeidYtelse={{} as InntektArbeidYtelse}
-      alleKodeverk={{} as AlleKodeverk}
-      medlemskap={{} as Medlemskap}
-      readOnlyForStartdatoForForeldrepenger={false}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />, messages);
-
-    expect(wrapper.find(StartdatoForForeldrepengerperiodenForm)).toHaveLength(1);
-    expect(wrapper.find(OppholdInntektOgPerioderForm)).toHaveLength(0);
-  });
-
   it('skal vise form for startdato for foreldrepengerperioden når en har overstyr-aksjonspunktet for dette', () => {
     const avklarStartdatoAksjonspunkt = {
       id: 1,
@@ -116,11 +71,11 @@ describe('<MedlemskapInfoPanel>', () => {
     expect(wrapper.find(OppholdInntektOgPerioderForm)).toHaveLength(0);
   });
 
-  it('skal vise begge medlemskapsformer når aksjonspunkt for startdato for foreldrepengerperioden er avklart', () => {
+  it('skal vise begge medlemskapsformer når aksjonspunkt for overstyrt startdato for foreldrepengerperioden er avklart', () => {
     const avklarStartdatoAksjonspunkt = {
       id: 1,
       definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN,
+        kode: aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO,
         kodeverk: '',
       },
       status: {

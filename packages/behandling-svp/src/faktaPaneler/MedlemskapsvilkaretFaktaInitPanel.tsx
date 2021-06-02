@@ -18,7 +18,6 @@ import { requestSvpApi, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
 const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [
-  aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN,
   aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT,
   aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
   aksjonspunktCodes.AVKLAR_OPPHOLDSRETT,
