@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
 import VedtakKlageProsessIndex from '@fpsak-frontend/prosess-vedtak-klage';
-import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
+import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import {
   Aksjonspunkt, Behandling, Fagsak, StandardProsessPanelProps,
 } from '@fpsak-frontend/types';
@@ -54,7 +54,7 @@ describe('<KlageresultatProsessStegInitPanel>', () => {
       behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
 
@@ -73,9 +73,9 @@ describe('<KlageresultatProsessStegInitPanel>', () => {
       behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
-    const aksjonspunkter = [];
+    const aksjonspunkter = [] as Aksjonspunkt[];
 
     expect(panel.props().hentOverstyrtStatus({ aksjonspunkter }, {
       behandling,
@@ -92,7 +92,7 @@ describe('<KlageresultatProsessStegInitPanel>', () => {
       behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const aksjonspunkter = [{
       status: {
@@ -126,7 +126,7 @@ describe('<KlageresultatProsessStegInitPanel>', () => {
       behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const aksjonspunkter = [{
       status: {
@@ -162,7 +162,7 @@ describe('<KlageresultatProsessStegInitPanel>', () => {
       behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const aksjonspunktModels = [{
       kode: aksjonspunktCodes.FORESLA_VEDTAK,
@@ -188,7 +188,7 @@ describe('<KlageresultatProsessStegInitPanel>', () => {
       behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const innerElement = panel.renderProp('renderPanel')({ behandling }, { aksjonspunkter: [] });
 

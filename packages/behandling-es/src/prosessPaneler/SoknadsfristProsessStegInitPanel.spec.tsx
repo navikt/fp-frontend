@@ -3,7 +3,9 @@ import { shallow } from 'enzyme';
 
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import SoknadsfristVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-soknadsfrist';
-import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, OverstyringPanelDef } from '@fpsak-frontend/behandling-felles';
+import {
+  ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, OverstyringPanelDef, ProsessPanelInitProps,
+} from '@fpsak-frontend/behandling-felles';
 import {
   AksessRettigheter, Aksjonspunkt, Behandling, StandardProsessPanelProps, Vilkar,
 } from '@fpsak-frontend/types';
@@ -31,9 +33,9 @@ describe('<SoknadsfristProsessStegInitPanel>', () => {
       behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
-    const aksjonspunkter = [];
+    const aksjonspunkter = [] as Aksjonspunkt[];
 
     const vilkar = [{
       vilkarType: {
@@ -57,7 +59,7 @@ describe('<SoknadsfristProsessStegInitPanel>', () => {
       behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const aksjonspunkter = [{
       definisjon: {

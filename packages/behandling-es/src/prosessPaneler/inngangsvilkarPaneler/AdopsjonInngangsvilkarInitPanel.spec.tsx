@@ -2,7 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import AdopsjonVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-adopsjon';
-import { InngangsvilkarDefaultInitPanel, InngangsvilkarDefaultInitPanelProps, OverstyringPanelDef } from '@fpsak-frontend/behandling-felles';
+import {
+  InngangsvilkarDefaultInitPanel, InngangsvilkarDefaultInitPanelProps, OverstyringPanelDef, InngangsvilkarPanelInitProps,
+} from '@fpsak-frontend/behandling-felles';
 import { AksessRettigheter, Aksjonspunkt } from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
@@ -26,12 +28,12 @@ describe('<AdopsjonInngangsvilkarInitPanel>', () => {
       } as AksessRettigheter}
     />);
 
-    const panel = wrapper.find<InngangsvilkarDefaultInitPanelProps<INIT_DATA, any>>(InngangsvilkarDefaultInitPanel);
+    const panel = wrapper.find<InngangsvilkarDefaultInitPanelProps<INIT_DATA, any> & InngangsvilkarPanelInitProps>(InngangsvilkarDefaultInitPanel);
 
     const erOverstyrt = false;
     const toggleOverstyring = () => {};
 
-    const aksjonspunkter = [];
+    const aksjonspunkter = [] as Aksjonspunkt[];
 
     const innerElement = panel.renderProp('renderPanel')({
       aksjonspunkter,
@@ -54,7 +56,7 @@ describe('<AdopsjonInngangsvilkarInitPanel>', () => {
       } as AksessRettigheter}
     />);
 
-    const panel = wrapper.find<InngangsvilkarDefaultInitPanelProps<INIT_DATA, any>>(InngangsvilkarDefaultInitPanel);
+    const panel = wrapper.find<InngangsvilkarDefaultInitPanelProps<INIT_DATA, any> & InngangsvilkarPanelInitProps>(InngangsvilkarDefaultInitPanel);
 
     const erOverstyrt = false;
     const toggleOverstyring = () => {};

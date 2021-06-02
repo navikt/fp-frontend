@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import ForeldelseProsessIndex from '@fpsak-frontend/prosess-foreldelse';
-import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
+import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import {
@@ -33,7 +33,7 @@ describe('<ForeldelseProsessStegInitPanel>', () => {
       behandling={{ versjon: 1 } as Behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
 

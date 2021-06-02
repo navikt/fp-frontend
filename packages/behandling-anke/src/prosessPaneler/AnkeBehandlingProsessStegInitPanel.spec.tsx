@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AnkeProsessIndex from '@fpsak-frontend/prosess-anke';
-import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
+import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import {
   Aksjonspunkt, Behandling, Fagsak, StandardProsessPanelProps,
 } from '@fpsak-frontend/types';
@@ -40,7 +40,7 @@ jest.mock('@fpsak-frontend/behandling-felles', () => {
   };
 });
 
-const alleBehandlinger = [];
+const alleBehandlinger = [] as Behandling[];
 
 describe('<AnkeBehandlingProsessStegInitPanel>', () => {
   it('skal rendre komponent korrekt', () => {
@@ -52,7 +52,7 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
       behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
 
@@ -72,7 +72,7 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
       behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const innerElement = panel.renderProp('renderPanel')({ behandling }, { aksjonspunkter: [] });
 
@@ -110,7 +110,7 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
       behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const innerElement = panel.renderProp('renderPanel')({ behandling }, { aksjonspunkter: [] });
 

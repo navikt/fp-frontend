@@ -34,11 +34,11 @@ const InngangsvilkarProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
     oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
     leftPanels={(props) => (
       <>
-        <FodselInngangsvilkarInitPanel behandlingVersjon={behandling?.versjon} rettigheter={rettigheter} {...props} />
-        <AdopsjonInngangsvilkarInitPanel behandlingVersjon={behandling?.versjon} rettigheter={rettigheter} {...props} />
-        <OmsorgInngangsvilkarInitPanel behandlingVersjon={behandling?.versjon} {...props} />
-        <MedlemskapInngangsvilkarInitPanel behandlingVersjon={behandling?.versjon} rettigheter={rettigheter} {...props} />
-        <ForeldreansvarInngangsvilkarInitPanel behandlingVersjon={behandling?.versjon} {...props} />
+        <FodselInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} rettigheter={rettigheter} {...props} />
+        <AdopsjonInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} rettigheter={rettigheter} {...props} />
+        <OmsorgInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} {...props} />
+        <MedlemskapInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} rettigheter={rettigheter} {...props} />
+        <ForeldreansvarInngangsvilkarInitPanel behandlingVersjon={behandling.versjon} {...props} />
       </>
     )}
     rightPanels={(props) => (

@@ -29,7 +29,7 @@ const forhandsvis = (data: any): void => {
 };
 
 const getForhandsvisFptilbakeCallback = (
-  forhandsvisTilbakekrevingMelding: (params?: any, keepData?: boolean) => Promise<Behandling>,
+  forhandsvisTilbakekrevingMelding: (params?: any, keepData?: boolean) => Promise<Behandling | undefined>,
   fagsak: Fagsak,
   behandling: Behandling,
 ) => (

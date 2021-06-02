@@ -5,7 +5,7 @@ import sinon from 'sinon';
 import VedtakResultatType from '@fpsak-frontend/kodeverk/src/vedtakResultatType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import VedtakTilbakekrevingProsessIndex from '@fpsak-frontend/prosess-vedtak-tilbakekreving';
-import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
+import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import {
   Aksjonspunkt, AlleKodeverkTilbakekreving, Behandling, BeregningsresultatTilbakekreving, StandardProsessPanelProps,
 } from '@fpsak-frontend/types';
@@ -48,7 +48,7 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
 
@@ -69,7 +69,7 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
 
@@ -89,7 +89,7 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     expect(panel.props().hentOverstyrtStatus({}, {} as StandardProsessPanelProps)).toEqual(vilkarUtfallType.IKKE_VURDERT);
   });
@@ -105,7 +105,7 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const beregningsresultat = {
       vedtakResultatType: {
@@ -129,7 +129,7 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const beregningsresultat = {
       vedtakResultatType: {
@@ -155,7 +155,7 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const aksjonspunktModels = [{
       kode: aksjonspunktCodesTilbakekreving.FORESLA_VEDTAK,
@@ -182,7 +182,7 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const innerElement = panel.renderProp('renderPanel')({ behandling }, { aksjonspunkter: [], beregningsresultat: {} as BeregningsresultatTilbakekreving });
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import OmsorgVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-omsorg';
-import { InngangsvilkarDefaultInitPanel, InngangsvilkarDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
+import { InngangsvilkarDefaultInitPanel, InngangsvilkarDefaultInitPanelProps, InngangsvilkarPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
 
 import OmsorgInngangsvilkarInitPanel from './OmsorgInngangsvilkarInitPanel';
@@ -21,7 +21,7 @@ describe('<OmsorgInngangsvilkarInitPanel>', () => {
       behandlingVersjon={1}
     />);
 
-    const panel = wrapper.find<InngangsvilkarDefaultInitPanelProps<INIT_DATA, any>>(InngangsvilkarDefaultInitPanel);
+    const panel = wrapper.find<InngangsvilkarDefaultInitPanelProps<INIT_DATA, any> & InngangsvilkarPanelInitProps>(InngangsvilkarDefaultInitPanel);
 
     const erOverstyrt = false;
     const toggleOverstyring = () => {};

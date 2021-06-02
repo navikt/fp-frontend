@@ -54,7 +54,7 @@ const FodselvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (pr
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.FODSELSVILKARET}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'FodselInfoPanel.Fodsel' })}
-    skalPanelVisesIMeny={(initData) => initData && initData.vilkar.some((v) => fodselsvilkarene.some((fv) => fv === v.vilkarType.kode))}
+    skalPanelVisesIMeny={(initData) => !!initData?.vilkar && initData.vilkar.some((v) => fodselsvilkarene.some((fv) => fv === v.vilkarType.kode))}
     renderPanel={(data) => <FodselFaktaIndex {...data} />}
   />
 );

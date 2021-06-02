@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import MedlemskapFaktaIndex from '@fpsak-frontend/fakta-medlemskap';
-import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
+import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { AksessRettigheter, Soknad } from '@fpsak-frontend/types';
 
 import MedlemskapsvilkaretFaktaInitPanel from './MedlemskapsvilkaretFaktaInitPanel';
@@ -25,7 +25,7 @@ describe('<MedlemskapsvilkaretFaktaInitPanel>', () => {
       hasFetchError={false}
     />);
 
-    const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any>>(FaktaDefaultInitPanel);
+    const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any> & FaktaPanelInitProps>(FaktaDefaultInitPanel);
 
     const soknad = {} as Soknad;
 

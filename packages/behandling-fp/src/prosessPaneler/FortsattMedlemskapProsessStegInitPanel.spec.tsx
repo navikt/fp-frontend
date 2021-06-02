@@ -1,7 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, OverstyringPanelDef } from '@fpsak-frontend/behandling-felles';
+import {
+  ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, OverstyringPanelDef, ProsessPanelInitProps,
+} from '@fpsak-frontend/behandling-felles';
 import {
   AksessRettigheter, Aksjonspunkt, Behandling, StandardProsessPanelProps, Vilkar,
 } from '@fpsak-frontend/types';
@@ -30,7 +32,7 @@ describe('<FortsattMedlemskapProsessStegInitPanel>', () => {
       behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const vilkar = [{
       vilkarType: {
@@ -51,7 +53,7 @@ describe('<FortsattMedlemskapProsessStegInitPanel>', () => {
     } as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
     expect(panel.props().skalPanelVisesIMeny({
       aksjonspunkter,
-      vilkar: [],
+      vilkar: [] as Vilkar[],
     } as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(false);
     expect(panel.props().renderPanel({}, { aksjonspunkter: [], vilkar: [] }).type).toEqual(OverstyringPanelDef);
   });

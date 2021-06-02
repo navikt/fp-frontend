@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import OmsorgFaktaIndex from '@fpsak-frontend/fakta-omsorg';
-import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
+import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { Aksjonspunkt, Personoversikt } from '@fpsak-frontend/types';
 
 import OmsorgFaktaInitPanel from './OmsorgFaktaInitPanel';
@@ -20,7 +20,7 @@ describe('<OmsorgFaktaInitPanel>', () => {
       personoversikt={{} as Personoversikt}
     />);
 
-    const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any>>(FaktaDefaultInitPanel);
+    const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any> & FaktaPanelInitProps>(FaktaDefaultInitPanel);
 
     const aksjonspunkter = [{
       definisjon: {

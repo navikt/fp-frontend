@@ -75,7 +75,7 @@ const UttakFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = (
     overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={FaktaPanelCode.UTTAK}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'UttakInfoPanel.FaktaUttak' })}
-    skalPanelVisesIMeny={(initData) => initData && initData.ytelsefordeling && initData.ytelsefordeling.endringsdato !== undefined}
+    skalPanelVisesIMeny={(initData) => !!initData.ytelsefordeling && initData.ytelsefordeling.endringsdato !== undefined}
     renderPanel={(data) => (
       <UttakFaktaIndex
         kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}

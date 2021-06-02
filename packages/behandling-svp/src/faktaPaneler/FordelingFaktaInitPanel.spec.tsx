@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import FordelBeregningsgrunnlagFaktaIndex from '@fpsak-frontend/fakta-fordel-beregningsgrunnlag';
-import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
+import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 
 import FordelingFaktaInitPanel from './FordelingFaktaInitPanel';
@@ -20,7 +20,7 @@ describe('<FordelingFaktaInitPanel>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
 
-    const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any>>(FaktaDefaultInitPanel);
+    const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any> & FaktaPanelInitProps>(FaktaDefaultInitPanel);
 
     const fordelingAp = [{
       definisjon: {

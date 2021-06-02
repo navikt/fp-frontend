@@ -35,7 +35,7 @@ type EndepunktInitData = {
 }
 
 interface OwnProps {
-  behandlingVersjon?: number;
+  behandlingVersjon: number;
   rettigheter: AksessRettigheter;
 }
 

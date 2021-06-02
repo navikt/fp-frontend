@@ -30,7 +30,7 @@ const getVedtakStatus = (innsyn: Innsyn, aksjonspunkter: Aksjonspunkt[]): string
     ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_OPPFYLT;
 };
 
-const forhandsvis = (data) => {
+const forhandsvis = (data: any) => {
   if (window.navigator.msSaveOrOpenBlob) {
     window.navigator.msSaveOrOpenBlob(data);
   } else if (URL.createObjectURL) {
