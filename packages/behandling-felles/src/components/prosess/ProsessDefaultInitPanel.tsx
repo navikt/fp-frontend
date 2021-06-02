@@ -12,6 +12,8 @@ import useStandardProsessPanelProps from '../../utils/prosess/useStandardProsess
 import useProsessMenyRegistrerer from '../../utils/prosess/useProsessMenyRegistrerer';
 import ProsessPanelWrapper from './ProsessPanelWrapper';
 
+const DEFAULT_INIT_DATA = {};
+
 export type OwnProps<INIT_DATA, PANEL_DATA> = {
   requestApi: AbstractRequestApi;
   initEndepunkter: RestKey<any, any>[] | { key: RestKey<INIT_DATA, any>, params?: any }[];
@@ -20,7 +22,7 @@ export type OwnProps<INIT_DATA, PANEL_DATA> = {
   vilkarKoder?: string[];
   skalPanelVisesIMeny: (data: Partial<INIT_DATA> & StandardProsessPanelProps, state: RestApiState) => boolean;
   hentOverstyrtStatus?: (initData: Partial<INIT_DATA>, standardData: StandardProsessPanelProps) => string;
-  renderPanel: (data: INIT_DATA & PANEL_DATA & StandardProsessPanelProps, initData?: Partial<INIT_DATA>) => ReactElement;
+  renderPanel: (data: INIT_DATA & PANEL_DATA & StandardProsessPanelProps, initData: INIT_DATA) => ReactElement;
   prosessPanelKode: ProsessStegCode;
   prosessPanelMenyTekst: string;
   lagringSideEffekter?: (aksjonspunktModeller: any) => () => void,
@@ -48,9 +50,9 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
 }: OwnProps<INIT_DATA, PANEL_DATA> & ProsessPanelInitProps) => {
   const restApiHooks = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
 
-  const formaterteEndepunkter = initEndepunkter.map((e) => (e instanceof RestKey ? ({ key: e }) : e));
-  const { data: initData, state: initState } = restApiHooks.useMultipleRestApi<INIT_DATA, any>(formaterteEndepunkter, {
-    updateTriggers: [behandling?.versjon],
+  const formaterteEndepunkter = initEndepunkter.map((e: any) => (e instanceof RestKey ? ({ key: e }) : e));
+  const { data: initData = DEFAULT_INIT_DATA as INIT_DATA, state: initState } = restApiHooks.useMultipleRestApi<INIT_DATA, any>(formaterteEndepunkter, {
+    updateTriggers: [behandling.versjon],
     isCachingOn: true,
   });
 
@@ -78,9 +80,9 @@ const ProsessDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
     skalMarkeresSomAktiv || harApentAksjonspunkt,
   );
 
-  const formatertePanelEndepunkter = panelEndepunkter.map((e) => (e instanceof RestKey ? ({ key: e }) : e));
+  const formatertePanelEndepunkter = panelEndepunkter.map((e: any) => (e instanceof RestKey ? ({ key: e }) : e));
   const { data: panelData, state: panelDataState } = restApiHooks.useMultipleRestApi<PANEL_DATA, any>(formatertePanelEndepunkter, {
-    updateTriggers: [erPanelValgt, behandling?.versjon],
+    updateTriggers: [erPanelValgt, behandling.versjon],
     suspendRequest: !erPanelValgt || formatertePanelEndepunkter.length === 0,
     isCachingOn: true,
   });

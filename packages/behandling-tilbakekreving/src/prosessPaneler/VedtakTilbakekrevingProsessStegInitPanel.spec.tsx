@@ -7,7 +7,7 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import VedtakTilbakekrevingProsessIndex from '@fpsak-frontend/prosess-vedtak-tilbakekreving';
 import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
 import {
-  Aksjonspunkt, AlleKodeverkTilbakekreving, BeregningsresultatTilbakekreving, StandardProsessPanelProps,
+  Aksjonspunkt, AlleKodeverkTilbakekreving, Behandling, BeregningsresultatTilbakekreving, StandardProsessPanelProps,
 } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
@@ -24,7 +24,7 @@ type INIT_DATA = {
 const behandling = {
   uuid: 'test-uuid',
   versjon: 1,
-};
+} as Behandling;
 
 jest.mock('@fpsak-frontend/behandling-felles', () => {
   const felles = jest.requireActual('@fpsak-frontend/behandling-felles');
@@ -45,13 +45,14 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       opneSokeside={() => {}}
       harApenRevurdering={false}
       fptilbakeKodeverk={{} as AlleKodeverkTilbakekreving}
+      behandling={behandling}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
 
     expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
 
-    const innerElement = panel.renderProp('renderPanel')({ behandling });
+    const innerElement = panel.renderProp('renderPanel')({ behandling }, { aksjonspunkter: [], beregningsresultat: {} as BeregningsresultatTilbakekreving });
 
     expect(innerElement.find(VedtakTilbakekrevingProsessIndex)).toHaveLength(1);
     expect(innerElement.find(AdvarselModal)).toHaveLength(0);
@@ -65,13 +66,14 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       opneSokeside={() => {}}
       harApenRevurdering
       fptilbakeKodeverk={{} as AlleKodeverkTilbakekreving}
+      behandling={behandling}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
 
     expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
 
-    const innerElement = panel.renderProp('renderPanel')({ behandling });
+    const innerElement = panel.renderProp('renderPanel')({ behandling }, { aksjonspunkter: [], beregningsresultat: {} as BeregningsresultatTilbakekreving });
 
     expect(innerElement.find(AdvarselModal)).toHaveLength(1);
   });
@@ -84,6 +86,7 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       opneSokeside={() => {}}
       harApenRevurdering={false}
       fptilbakeKodeverk={{} as AlleKodeverkTilbakekreving}
+      behandling={behandling}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
@@ -99,6 +102,7 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       opneSokeside={() => {}}
       harApenRevurdering={false}
       fptilbakeKodeverk={{} as AlleKodeverkTilbakekreving}
+      behandling={behandling}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
@@ -122,6 +126,7 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       opneSokeside={() => {}}
       harApenRevurdering={false}
       fptilbakeKodeverk={{} as AlleKodeverkTilbakekreving}
+      behandling={behandling}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
@@ -147,6 +152,7 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       opneSokeside={() => {}}
       harApenRevurdering={false}
       fptilbakeKodeverk={{} as AlleKodeverkTilbakekreving}
+      behandling={behandling}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
@@ -173,11 +179,12 @@ describe('<VedtakTilbakekrevingProsessStegInitPanel>', () => {
       opneSokeside={() => {}}
       harApenRevurdering={false}
       fptilbakeKodeverk={{} as AlleKodeverkTilbakekreving}
+      behandling={behandling}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
 
-    const innerElement = panel.renderProp('renderPanel')({ behandling });
+    const innerElement = panel.renderProp('renderPanel')({ behandling }, { aksjonspunkter: [], beregningsresultat: {} as BeregningsresultatTilbakekreving });
 
     const tilbakeProsessPanel = innerElement.find(VedtakTilbakekrevingProsessIndex);
     expect(tilbakeProsessPanel).toHaveLength(1);

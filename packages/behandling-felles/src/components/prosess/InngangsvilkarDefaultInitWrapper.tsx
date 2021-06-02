@@ -32,8 +32,8 @@ const getStatus = (paneler: InngangsvilkarPanelData[]): string => {
   return harMinstEttDelPanelStatus(paneler, vilkarUtfallType.IKKE_OPPFYLT) ? vilkarUtfallType.IKKE_OPPFYLT : tempStatus;
 };
 
-const getErAksjonspunktOpen = (paneler: InngangsvilkarPanelData[], behandling?: Behandling): boolean => {
-  if (behandling?.behandlingHenlagt) {
+const getErAksjonspunktOpen = (paneler: InngangsvilkarPanelData[], behandling: Behandling): boolean => {
+  if (behandling.behandlingHenlagt) {
     return false;
   }
   if (paneler.some((p) => p.harApentAksjonspunkt)) {

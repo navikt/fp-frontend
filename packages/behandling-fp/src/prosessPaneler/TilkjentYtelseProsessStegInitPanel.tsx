@@ -20,8 +20,8 @@ import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
 const intl = createIntl(messages);
 
-const getStatusFromResultatstruktur = (resultatstruktur: BeregningsresultatFp, uttaksresultat: UttaksresultatPeriode): string => {
-  if (resultatstruktur && resultatstruktur.perioder.length > 0) {
+const getStatusFromResultatstruktur = (resultatstruktur?: BeregningsresultatFp, uttaksresultat?: UttaksresultatPeriode): string => {
+  if (resultatstruktur && resultatstruktur.perioder && resultatstruktur.perioder.length > 0) {
     if (!resultatstruktur.perioder.some((p) => p.dagsats > 0)) {
       return vilkarUtfallType.IKKE_VURDERT;
     }
@@ -82,7 +82,7 @@ const TilkjentYtelseProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPa
     prosessPanelKode={ProsessStegCode.TILKJENT_YTELSE}
     prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
     skalPanelVisesIMeny={(_data, initState) => initState === RestApiState.SUCCESS}
-    hentOverstyrtStatus={(initData) => getStatusFromResultatstruktur(initData?.beregningresultatForeldrepenger, initData?.uttaksresultatPerioder)}
+    hentOverstyrtStatus={(initData) => getStatusFromResultatstruktur(initData.beregningresultatForeldrepenger, initData.uttaksresultatPerioder)}
     renderPanel={(data) => (
       <TilkjentYtelseProsessIndex
         fagsak={fagsak}

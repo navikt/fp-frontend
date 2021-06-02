@@ -5,7 +5,9 @@ import sinon from 'sinon';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import KlagevurderingProsessIndex from '@fpsak-frontend/prosess-klagevurdering';
 import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
-import { Aksjonspunkt, Fagsak, StandardProsessPanelProps } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, Behandling, Fagsak, StandardProsessPanelProps,
+} from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -29,7 +31,7 @@ const behandling = {
   id: 1,
   uuid: 'test-uuid',
   versjon: 1,
-};
+} as Behandling;
 
 jest.mock('@fpsak-frontend/behandling-felles', () => {
   const felles = jest.requireActual('@fpsak-frontend/behandling-felles');
@@ -54,13 +56,14 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.AVREGNING}
       prosessPanelMenyTekst="Dette er en test"
+      behandling={behandling}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
 
     expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
 
-    const innerElement = panel.renderProp('renderPanel')({ behandling });
+    const innerElement = panel.renderProp('renderPanel')({ behandling }, { aksjonspunkter: [] });
 
     expect(innerElement.find(KlagevurderingProsessIndex)).toHaveLength(1);
   });
@@ -77,6 +80,7 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.AVREGNING}
       prosessPanelMenyTekst="Dette er en test"
+      behandling={behandling}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
@@ -109,11 +113,12 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.AVREGNING}
       prosessPanelMenyTekst="Dette er en test"
+      behandling={behandling}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
 
-    const innerElement = panel.renderProp('renderPanel')({ behandling });
+    const innerElement = panel.renderProp('renderPanel')({ behandling }, { aksjonspunkter: [] });
 
     const klageProsessPanel = innerElement.find(KlagevurderingProsessIndex);
     expect(klageProsessPanel).toHaveLength(1);
@@ -150,11 +155,12 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       prosessPanelKode={ProsessStegCode.AVREGNING}
       prosessPanelMenyTekst="Dette er en test"
+      behandling={behandling}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
 
-    const innerElement = panel.renderProp('renderPanel')({ behandling });
+    const innerElement = panel.renderProp('renderPanel')({ behandling }, { aksjonspunkter: [] });
 
     const klageProsessPanel = innerElement.find(KlagevurderingProsessIndex);
     expect(klageProsessPanel).toHaveLength(1);

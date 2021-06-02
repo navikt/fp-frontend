@@ -5,7 +5,7 @@ import sinon from 'sinon';
 import VedtakInnsynProsessIndex from '@fpsak-frontend/prosess-vedtak-innsyn';
 import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
 import {
-  Aksjonspunkt, Fagsak, StandardProsessPanelProps,
+  Aksjonspunkt, Behandling, Fagsak, StandardProsessPanelProps,
 } from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -24,6 +24,11 @@ const fagsak = {
     kodeverk: '',
   },
 } as Fagsak;
+
+const behandling = {
+  uuid: 'test-uuid',
+  versjon: 1,
+} as Behandling;
 
 jest.mock('@fpsak-frontend/behandling-felles', () => {
   const felles = jest.requireActual('@fpsak-frontend/behandling-felles');
@@ -52,13 +57,14 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
       toggleOppdatereFagsakContext={() => {}}
       fagsak={fagsak}
       opneSokeside={() => {}}
+      behandling={behandling}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
 
     expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
 
-    const innerElement = panel.renderProp('renderPanel')({});
+    const innerElement = panel.renderProp('renderPanel')({}, { aksjonspunkter: [] });
 
     expect(innerElement.find(VedtakInnsynProsessIndex)).toHaveLength(1);
   });
@@ -74,6 +80,7 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
       toggleOppdatereFagsakContext={toggleSkalOppdatereFagsakContext}
       fagsak={fagsak}
       opneSokeside={() => {}}
+      behandling={behandling}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
@@ -99,11 +106,12 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
       toggleOppdatereFagsakContext={() => {}}
       fagsak={fagsak}
       opneSokeside={() => {}}
+      behandling={behandling}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
 
-    const innerElement = panel.renderProp('renderPanel')({});
+    const innerElement = panel.renderProp('renderPanel')({}, { aksjonspunkter: [] });
 
     const innnerPanel = innerElement.find(VedtakInnsynProsessIndex);
 

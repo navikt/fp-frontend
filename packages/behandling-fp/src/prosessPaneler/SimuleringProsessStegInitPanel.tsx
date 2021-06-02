@@ -90,7 +90,7 @@ const SimuleringProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelI
         && (d.status !== vilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt));
         return !!data?.simuleringResultat || (initState === RestApiState.SUCCESS && !harVedtakspanel);
       }}
-      hentOverstyrtStatus={(initData) => (initData?.simuleringResultat ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT)}
+      hentOverstyrtStatus={(initData) => (initData.simuleringResultat ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_VURDERT)}
       renderPanel={(data) => (
         <AvregningProsessIndex
           fagsak={fagsak}

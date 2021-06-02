@@ -20,10 +20,18 @@ type INIT_DATA = {
 
 describe('<OpplysningspliktProsessStegInitPanel>', () => {
   it('skal rendre komponent', () => {
+    const behandling = {
+      type: {
+        kode: behandlingType.REVURDERING,
+        kodeverk: '',
+      },
+    } as Behandling;
+
     const wrapper = shallow(<OpplysningspliktProsessStegInitPanel
       valgtProsessSteg="default"
       registrerProsessPanel={() => {}}
       arbeidsgiverOpplysningerPerId={{}}
+      behandling={behandling}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
@@ -40,12 +48,6 @@ describe('<OpplysningspliktProsessStegInitPanel>', () => {
         kodeverk: '',
       },
     }] as Aksjonspunkt[];
-    const behandling = {
-      type: {
-        kode: behandlingType.REVURDERING,
-        kodeverk: '',
-      },
-    } as Behandling;
 
     expect(panel.props().skalPanelVisesIMeny({
       behandling,
@@ -57,6 +59,6 @@ describe('<OpplysningspliktProsessStegInitPanel>', () => {
       aksjonspunkter: [],
       vilkar: [],
     } as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(false);
-    expect(panel.props().renderPanel({}).type).toEqual(SokersOpplysningspliktVilkarProsessIndex);
+    expect(panel.props().renderPanel({}, { aksjonspunkter: [], vilkar: [] }).type).toEqual(SokersOpplysningspliktVilkarProsessIndex);
   });
 });

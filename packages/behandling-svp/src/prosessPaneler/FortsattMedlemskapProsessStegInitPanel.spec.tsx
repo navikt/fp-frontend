@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, OverstyringPanelDef } from '@fpsak-frontend/behandling-felles';
 import {
-  AksessRettigheter, Aksjonspunkt, StandardProsessPanelProps, Vilkar,
+  AksessRettigheter, Aksjonspunkt, Behandling, StandardProsessPanelProps, Vilkar,
 } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
@@ -16,9 +16,15 @@ type INIT_DATA = {
   vilkar: Vilkar[];
 }
 
+const behandling = {
+  uuid: 'test-uuid',
+  versjon: 1,
+} as Behandling;
+
 describe('<FortsattMedlemskapProsessStegInitPanel>', () => {
   it('skal rendre komponent', () => {
     const wrapper = shallow(<FortsattMedlemskapProsessStegInitPanel
+      behandling={behandling}
       valgtProsessSteg="default"
       registrerProsessPanel={() => {}}
       rettigheter={{} as AksessRettigheter}
@@ -47,6 +53,6 @@ describe('<FortsattMedlemskapProsessStegInitPanel>', () => {
       aksjonspunkter,
       vilkar: [],
     } as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(false);
-    expect(panel.props().renderPanel({}).type).toEqual(OverstyringPanelDef);
+    expect(panel.props().renderPanel({}, { aksjonspunkter: [], vilkar: [] }).type).toEqual(OverstyringPanelDef);
   });
 });

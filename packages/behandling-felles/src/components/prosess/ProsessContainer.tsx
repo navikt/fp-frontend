@@ -86,7 +86,7 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
         allMenyData: currentData,
       })}
       {behandling.behandlingHenlagt && (
-        <BehandlingHenlagtPanel valgtProsessSteg={valgtProsessSteg} registrerProsessPanel={registrerProsessPanel} />
+        <BehandlingHenlagtPanel valgtProsessSteg={valgtProsessSteg} registrerProsessPanel={registrerProsessPanel} behandling={behandling} />
       )}
     </div>
   );

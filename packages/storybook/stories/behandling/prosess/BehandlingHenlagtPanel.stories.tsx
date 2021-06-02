@@ -4,6 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@fpsak-frontend/utils';
 import { BehandlingHenlagtPanel } from '@fpsak-frontend/behandling-felles';
+import { Behandling } from '@fpsak-frontend/types';
 
 const messages = {
   'BehandlingHenlagtPanel.Henlagt': 'Behandling er henlagt',
@@ -21,6 +22,7 @@ export const visBehandlingErHenlagtProsessPanel = () => (
     <BehandlingHenlagtPanel
       valgtProsessSteg="henlagt"
       registrerProsessPanel={() => undefined}
+      behandling={{ versjon: 1 } as Behandling}
     />
   </RawIntlProvider>
 );

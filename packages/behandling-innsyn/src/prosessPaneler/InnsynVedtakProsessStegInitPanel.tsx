@@ -110,10 +110,10 @@ const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
       prosessPanelKode={ProsessStegCode.VEDTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={(initData) => (initData?.innsyn ? getVedtakStatus(initData.innsyn, initData.aksjonspunkter) : vilkarUtfallType.IKKE_VURDERT)}
+      hentOverstyrtStatus={(initData) => (initData.innsyn ? getVedtakStatus(initData.innsyn, initData.aksjonspunkter || []) : vilkarUtfallType.IKKE_VURDERT)}
       lagringSideEffekter={lagringSideeffekterCallback}
-      hentSkalMarkeresSomAktiv={(initData) => (initData?.innsyn
-        && getVedtakStatus(initData.innsyn, initData.aksjonspunkter) !== vilkarUtfallType.IKKE_VURDERT)}
+      hentSkalMarkeresSomAktiv={(initData) => (!!initData.innsyn
+        && getVedtakStatus(initData.innsyn, initData.aksjonspunkter || []) !== vilkarUtfallType.IKKE_VURDERT)}
       renderPanel={(data, initData) => (
         <>
           <IverksetterVedtakStatusModal

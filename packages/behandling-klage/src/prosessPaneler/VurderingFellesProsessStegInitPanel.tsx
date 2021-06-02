@@ -14,7 +14,7 @@ import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { restApiKlageHooks, KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';
 import KlageBehandlingModal from '../modaler/KlageBehandlingModal';
 
-const forhandsvis = (data) => {
+const forhandsvis = (data: any) => {
   if (window.navigator.msSaveOrOpenBlob) {
     window.navigator.msSaveOrOpenBlob(data);
   } else if (URL.createObjectURL) {
@@ -52,7 +52,7 @@ const lagKlageCallback = (
 const getLagringSideeffekter = (
   toggleKlageModal: (skalViseModal: boolean) => void,
   toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
-  oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void,
+  oppdaterProsessStegOgFaktaPanelIUrl?: (punktnavn?: string, faktanavn?: string) => void,
 ) => (aksjonspunktModels: { kode: string, klageVurdering?: Kodeverk }[]) => {
   const skalByttTilKlageinstans = aksjonspunktModels
     .some((apValue) => apValue.kode === aksjonspunktCodes.BEHANDLE_KLAGE_NFP
@@ -66,7 +66,7 @@ const getLagringSideeffekter = (
   return () => {
     if (skalByttTilKlageinstans) {
       toggleKlageModal(true);
-    } else {
+    } else if (oppdaterProsessStegOgFaktaPanelIUrl) {
       oppdaterProsessStegOgFaktaPanelIUrl('default', 'default');
     }
   };
@@ -133,7 +133,12 @@ const VurderingFellesProsessStegInitPanel: FunctionComponent<OwnProps & ProsessP
         <>
           <KlageBehandlingModal
             visModal={visModalKlageBehandling}
-            lukkModal={() => { toggleKlageModal(false); opneSokeside(); }}
+            lukkModal={() => {
+              toggleKlageModal(false);
+              if (opneSokeside) {
+                opneSokeside();
+              }
+            }}
           />
           <KlagevurderingProsessIndex
             previewCallback={previewCallback}

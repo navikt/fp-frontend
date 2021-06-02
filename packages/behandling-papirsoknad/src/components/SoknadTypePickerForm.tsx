@@ -46,7 +46,7 @@ interface MappedOwnProps {
   selectedFagsakYtelseType?: string;
   ytelseErSatt: boolean;
   initialValues: FormValues;
-  onSubmit: (values: FormValues) => void;
+  onSubmit: (values: Required<FormValues>) => void;
 }
 
 /**
@@ -141,22 +141,22 @@ const buildInitialValues = createSelector(
     const initialValues = {
       ...selectedValues,
       fagsakYtelseType: initialFagsakYtelseType,
-      familieHendelseType: null,
-      foreldreType: null,
+      familieHendelseType: undefined,
+      foreldreType: undefined,
     };
 
-    const initialFamilieHendelseType = selectedValues.familieHendelseType ? selectedValues.familieHendelseType : null;
-    const initialForeldreType = selectedValues.foreldreType ? selectedValues.foreldreType : null;
+    const initialFamilieHendelseType = selectedValues.familieHendelseType ? selectedValues.familieHendelseType : undefined;
+    const initialForeldreType = selectedValues.foreldreType ? selectedValues.foreldreType : undefined;
     return {
       ...initialValues,
-      familieHendelseType: initialFamilieHendelseType === '-' ? null : initialFamilieHendelseType,
+      familieHendelseType: initialFamilieHendelseType === '-' ? undefined : initialFamilieHendelseType,
       foreldreType: initialForeldreType,
     };
   },
 );
 
 const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
-  const onSubmit = (values: FormValues) => initialOwnProps
+  const onSubmit = (values: Required<FormValues>) => initialOwnProps
     .setSoknadData(new SoknadData(values.fagsakYtelseType, values.familieHendelseType, values.foreldreType));
   return (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
     selectedFagsakYtelseType: formValueSelector(SOKNAD_TYPE_PICKER_FORM)(state, 'fagsakYtelseType'),

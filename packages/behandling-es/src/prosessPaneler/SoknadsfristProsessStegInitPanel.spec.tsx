@@ -5,7 +5,7 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import SoknadsfristVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-soknadsfrist';
 import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, OverstyringPanelDef } from '@fpsak-frontend/behandling-felles';
 import {
-  AksessRettigheter, Aksjonspunkt, StandardProsessPanelProps, Vilkar,
+  AksessRettigheter, Aksjonspunkt, Behandling, StandardProsessPanelProps, Vilkar,
 } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -17,12 +17,18 @@ type INIT_DATA = {
   vilkar: Vilkar[];
 }
 
+const behandling = {
+  uuid: 'test-uuid',
+  versjon: 1,
+} as Behandling;
+
 describe('<SoknadsfristProsessStegInitPanel>', () => {
   it('skal rendre overstyringskomponent når en ikke har aksjonspunkt', () => {
     const wrapper = shallow(<SoknadsfristProsessStegInitPanel
       valgtProsessSteg="default"
       registrerProsessPanel={() => {}}
       rettigheter={{} as AksessRettigheter}
+      behandling={behandling}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
@@ -38,7 +44,7 @@ describe('<SoknadsfristProsessStegInitPanel>', () => {
 
     expect(panel.props().skalPanelVisesIMeny({ aksjonspunkter, vilkar } as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
 
-    const innerElement = panel.renderProp('renderPanel')({ aksjonspunkter, vilkar });
+    const innerElement = panel.renderProp('renderPanel')({ aksjonspunkter, vilkar }, { aksjonspunkter, vilkar });
     expect(innerElement.find(OverstyringPanelDef)).toHaveLength(1);
     expect(innerElement.find(SoknadsfristVilkarProsessIndex)).toHaveLength(0);
   });
@@ -48,6 +54,7 @@ describe('<SoknadsfristProsessStegInitPanel>', () => {
       valgtProsessSteg="default"
       registrerProsessPanel={() => {}}
       rettigheter={{} as AksessRettigheter}
+      behandling={behandling}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
@@ -59,7 +66,7 @@ describe('<SoknadsfristProsessStegInitPanel>', () => {
       },
     }] as Aksjonspunkt[];
 
-    const innerElement = panel.renderProp('renderPanel')({ aksjonspunkter });
+    const innerElement = panel.renderProp('renderPanel')({ aksjonspunkter }, { aksjonspunkter, vilkar: [] });
     expect(innerElement.find(OverstyringPanelDef)).toHaveLength(0);
     expect(innerElement.find(SoknadsfristVilkarProsessIndex)).toHaveLength(1);
   });

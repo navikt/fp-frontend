@@ -20,7 +20,7 @@ import { requestFpApi, restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBeh
 
 const intl = createIntl(messages);
 
-const getStatusFromUttakresultat = (uttaksresultat: UttaksresultatPeriode): string => {
+const getStatusFromUttakresultat = (uttaksresultat?: UttaksresultatPeriode): string => {
   if (!uttaksresultat) {
     return vilkarUtfallType.IKKE_VURDERT;
   }
@@ -98,7 +98,7 @@ const UttakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitPr
       prosessPanelKode={ProsessStegCode.UTTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Uttak' })}
       skalPanelVisesIMeny={(_data, initState) => initState === RestApiState.SUCCESS}
-      hentOverstyrtStatus={(initData) => getStatusFromUttakresultat(initData?.uttaksresultatPerioder)}
+      hentOverstyrtStatus={(initData) => getStatusFromUttakresultat(initData.uttaksresultatPerioder)}
       renderPanel={(data) => (
         <UttakProsessIndex
           fagsak={fagsak}

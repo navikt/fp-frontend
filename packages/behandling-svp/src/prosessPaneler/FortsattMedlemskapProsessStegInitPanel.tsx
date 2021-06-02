@@ -39,7 +39,7 @@ const FortsattMedlemskapProsessStegInitPanel: FunctionComponent<OwnProps & Prose
   const toggleOverstyring = useCallback(() => setOverstyrt(!erOverstyrt), [erOverstyrt]);
   useEffect(() => {
     setOverstyrt(false);
-  }, [behandling?.versjon]);
+  }, [behandling.versjon]);
 
   return (
     <ProsessDefaultInitPanel<EndepunktInitData>

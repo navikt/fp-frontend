@@ -7,7 +7,7 @@ import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-fr
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import {
-  Aksjonspunkt, AlleKodeverkTilbakekreving, FeilutbetalingPerioderWrapper, StandardProsessPanelProps,
+  Aksjonspunkt, AlleKodeverkTilbakekreving, Behandling, FeilutbetalingPerioderWrapper, StandardProsessPanelProps,
 } from '@fpsak-frontend/types';
 
 import { requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';
@@ -30,6 +30,7 @@ describe('<ForeldelseProsessStegInitPanel>', () => {
         kodeverk: '',
       }}
       fptilbakeKodeverk={{} as AlleKodeverkTilbakekreving}
+      behandling={{ versjon: 1 } as Behandling}
     />);
 
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
@@ -42,6 +43,6 @@ describe('<ForeldelseProsessStegInitPanel>', () => {
     // @ts-ignore
     expect(panel.props().hentOverstyrtStatus({ perioderForeldelse })).toEqual(vilkarUtfallType.OPPFYLT);
 
-    expect(panel.props().renderPanel({}).type).toEqual(ForeldelseProsessIndex);
+    expect(panel.props().renderPanel({}, { aksjonspunkter: [], perioderForeldelse: {} as FeilutbetalingPerioderWrapper }).type).toEqual(ForeldelseProsessIndex);
   });
 });
