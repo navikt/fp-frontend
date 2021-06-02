@@ -18,7 +18,7 @@ import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse, Kodeverk, Soknad,
 } from '@fpsak-frontend/types';
-import { AvklarStartdatoForPeriodenAp, OverstyringAvklarStartdatoForPeriodenAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import { OverstyringAvklarStartdatoForPeriodenAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import ArbeidsgiverInfo from './ArbeidsgiverInfo';
 
@@ -40,7 +40,7 @@ interface PureOwnProps {
   aksjonspunkt: Aksjonspunkt;
   soknad: Soknad;
   inntektArbeidYtelse: InntektArbeidYtelse;
-  submitCallback: (data: AvklarStartdatoForPeriodenAp | OverstyringAvklarStartdatoForPeriodenAp) => Promise<void>;
+  submitCallback: (data: OverstyringAvklarStartdatoForPeriodenAp) => Promise<void>;
   readOnlyForStartdatoForForeldrepenger: boolean;
   behandlingStatus: Kodeverk;
   hasOpenMedlemskapAksjonspunkter: boolean;
@@ -83,7 +83,7 @@ export const StartdatoForForeldrepengerperiodenForm: FunctionComponent<PureOwnPr
       )}
       <FaktaGruppe
         title={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.StartdatoForPerioden' })}
-        merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN]}
+        merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO]}
       >
         <div className={styles.explanationTextarea}>
           <TextAreaField
@@ -131,31 +131,26 @@ const buildInitialValues = createSelector(
     (ownProps: PureOwnProps) => ownProps.soknad.oppgittFordeling,
     (ownProps: PureOwnProps) => ownProps.inntektArbeidYtelse],
   (aksjonspunkter, oppgittFordeling = {}, inntektArbeidYtelse = {} as InntektArbeidYtelse): FormValues => {
-    const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN);
     const overstyringAp = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO);
     return {
       opprinneligDato: oppgittFordeling.startDatoForPermisjon,
       startdatoFraSoknad: oppgittFordeling.startDatoForPermisjon,
       arbeidsgivere: inntektArbeidYtelse.inntektsmeldinger,
-      begrunnelse: (overstyringAp && overstyringAp.begrunnelse) || (aksjonspunkt && aksjonspunkt.begrunnelse),
+      begrunnelse: (overstyringAp && overstyringAp.begrunnelse) || '',
     };
   },
 );
 
-const transformValues = (values: FormValues, isOverstyring: boolean): AvklarStartdatoForPeriodenAp | OverstyringAvklarStartdatoForPeriodenAp => ({
-  kode: isOverstyring ? aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO : aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN,
+const transformValues = (values: FormValues): OverstyringAvklarStartdatoForPeriodenAp => ({
+  kode: aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO,
   opprinneligDato: values.opprinneligDato,
   startdatoFraSoknad: values.startdatoFraSoknad,
   begrunnelse: values.begrunnelse,
 });
 
-const lagSubmitFn = createSelector([
-  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkt],
-(submitCallback, aksjonspunkt) => {
-  const hasAksjonspunkt = aksjonspunkt !== undefined;
-  const isOverstyring = !hasAksjonspunkt || aksjonspunkt.definisjon.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO;
-  return (values: FormValues) => submitCallback(transformValues(values, isOverstyring));
-});
+const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback], (submitCallback) => (
+  values: FormValues,
+) => submitCallback(transformValues(values)));
 
 const isBefore2019 = (startdato: string): boolean => moment(startdato).isBefore(moment('2019-01-01'));
 

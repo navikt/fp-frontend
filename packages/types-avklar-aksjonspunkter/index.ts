@@ -10,7 +10,6 @@ export { default as BekreftSvangerskapspengerAp } from './src/fakta/BekreftSvang
 export { default as BekreftMannAdoptererAksjonspunktAp } from './src/fakta/BekreftMannAdoptererAksjonspunktAp';
 export { default as BekreftAleneomsorgVurderingAp } from './src/fakta/BekreftAleneomsorgVurderingAp';
 export { default as BekreftOmsorgVurderingAp } from './src/fakta/BekreftOmsorgVurderingAp';
-export { default as AvklarStartdatoForPeriodenAp } from './src/fakta/AvklarStartdatoForPeriodenAp';
 export { default as BekreftBosattVurderingAp } from './src/fakta/BekreftBosattVurderingAp';
 export { default as BekreftErMedlemVurderingAp } from './src/fakta/BekreftErMedlemVurderingAp';
 export { default as BekreftOppholdsrettVurderingAp } from './src/fakta/BekreftOppholdsrettVurderingAp';

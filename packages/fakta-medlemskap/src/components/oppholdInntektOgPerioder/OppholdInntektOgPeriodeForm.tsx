@@ -146,8 +146,7 @@ const buildInitialValues = createSelector([
 (valgtPeriode, alleAksjonspunkter, soknad, medlemskapPerioder, alleKodeverk): FormValues => {
   const aksjonspunkter = alleAksjonspunkter
     .filter((ap) => valgtPeriode.aksjonspunkter
-      .includes(ap.definisjon.kode) || ap.definisjon.kode === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP)
-    .filter((ap) => ap.definisjon.kode !== aksjonspunktCodes.AVKLAR_STARTDATO_FOR_FORELDREPENGERPERIODEN);
+      .includes(ap.definisjon.kode) || ap.definisjon.kode === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP);
   let oppholdValues = {};
   let confirmValues = {};
   if (hasAksjonspunkt(AVKLAR_OPPHOLDSRETT, valgtPeriode.aksjonspunkter) || hasAksjonspunkt(AVKLAR_LOVLIG_OPPHOLD, valgtPeriode.aksjonspunkter)) {
