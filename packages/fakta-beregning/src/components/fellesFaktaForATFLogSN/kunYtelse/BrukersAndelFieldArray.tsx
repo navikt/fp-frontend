@@ -18,8 +18,9 @@ import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 import styles from './brukersAndelFieldArray.less';
-import { validateUlikeAndelerWithGroupingFunction } from '../ValidateAndelerUtils';
+import {SortedAndelInfo, validateUlikeAndelerWithGroupingFunction} from '../ValidateAndelerUtils';
 import { isBeregningFormDirty as isFormDirty } from '../../BeregningFormUtils';
+import { BrukersAndelValues } from '../../../typer/FaktaBeregningTypes';
 
 const defaultBGFordeling = (aktivitetStatuser, alleKodeverk) => ({
   andel: getKodeverknavnFn(alleKodeverk, kodeverkTyper)(aktivitetStatuser.filter(({ kode }) => kode === aktivitetStatus.BRUKERS_ANDEL)[0]),
@@ -131,7 +132,7 @@ type OwnProps = {
 };
 
 interface StaticFunction {
-  validate: (values: any) => any;
+  validate: (values: BrukersAndelValues[]) => any;
 }
 
 /**
@@ -196,12 +197,12 @@ export const BrukersAndelFieldArrayImpl: FunctionComponent<OwnProps & WrappedCom
 
 const BrukersAndelFieldArray = injectIntl(BrukersAndelFieldArrayImpl);
 
-const mapBrukesAndelToSortedObject = (value) => {
+const mapBrukesAndelToSortedObject = (value: BrukersAndelValues): SortedAndelInfo => {
   const { andel, inntektskategori } = value;
   return { andelsinfo: andel, inntektskategori };
 };
 
-BrukersAndelFieldArrayImpl.validate = (values) => {
+BrukersAndelFieldArrayImpl.validate = (values: BrukersAndelValues[]) => {
   if (!values) {
     return null;
   }

@@ -71,9 +71,9 @@ export type VurderRefusjonValues = {
   [key: string]: boolean;
 }
 
-export type TilfellerValues = VurderMilitærValues | NyIArbeidslivetValues
-  | LønnsendringValues | NyoppstartetFLValues | KunYtelseValues |
-  VurderEtterlønnSluttpakkeValues | VurderBesteberegningValues | VurderOgFastsettATFLValues |{
+export type TilfellerValues = VurderMilitærValues & NyIArbeidslivetValues
+  & LønnsendringValues & NyoppstartetFLValues & KunYtelseValues &
+  VurderEtterlønnSluttpakkeValues & VurderBesteberegningValues & VurderOgFastsettATFLValues & {
   tidsbegrensetValues?: TidsbegrensetandelValues;
   vurderMottarYtelseValues?: VurderMottarYtelseValues;
   vurderRefusjonValues?: VurderRefusjonValues;
@@ -109,8 +109,8 @@ export type FaktaStateProps = {
   erOverstyrt: boolean;
 }
 
-export type FaktaValues = {
-
+export type FaktaBeregningError = {
+  id: string;
 }
 
 type FaktaOgAksjonspunktBeregningValues = {

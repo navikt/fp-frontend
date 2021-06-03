@@ -22,7 +22,11 @@ import {
 } from './VurderMottarYtelseUtils';
 import { createVisningsnavnFakta } from '../../../ArbeidsforholdHelper';
 import { InntektTransformed } from '../../../../typer/FieldValues';
-import {VurderMottarYtelseValues} from "../../../../typer/FaktaBeregningTypes";
+import {
+  FaktaOmBeregningAksjonspunktValues,
+  TilfellerValues,
+  VurderMottarYtelseValues
+} from "../../../../typer/FaktaBeregningTypes";
 
 const andreFrilansTilfeller = [faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL, faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON];
 
@@ -86,7 +90,7 @@ type OwnProps = {
 };
 
 interface StaticFunctions {
-  validate: (values: any, vurderMottarYtelse: VurderMottarYtelse) => any;
+  validate: (values: FaktaOmBeregningAksjonspunktValues, vurderMottarYtelse: VurderMottarYtelse) => any;
   transformValues: (values: any,
                     inntektVerdier: InntektTransformed[],
                     faktaOmBeregning: FaktaOmBeregning,
@@ -235,7 +239,7 @@ VurderMottarYtelseForm.transformValues = (values, inntektVerdier, faktaOmBeregni
   });
 };
 
-VurderMottarYtelseForm.validate = (values, vurderMottarYtelse) => {
+VurderMottarYtelseForm.validate = (values: FaktaOmBeregningAksjonspunktValues, vurderMottarYtelse: VurderMottarYtelse): any => {
   const errors = {};
   if (!vurderMottarYtelse) {
     return null;

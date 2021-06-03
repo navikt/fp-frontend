@@ -12,7 +12,7 @@ import { BrukersAndelFieldArrayImpl } from './BrukersAndelFieldArray';
 import KunYtelseBesteberegningPanel from './KunYtelseBesteberegningPanel';
 import KunYtelseUtenBesteberegningPanel from './KunYtelseUtenBesteberegningPanel';
 import { setGenerellAndelsinfo } from '../BgFaktaUtils';
-import { KunYtelseValues } from '../../../typer/FaktaBeregningTypes';
+import { FaktaOmBeregningAksjonspunktValues, KunYtelseValues } from '../../../typer/FaktaBeregningTypes';
 
 export const brukersAndelFieldArrayName = 'brukersAndelBG';
 
@@ -31,7 +31,7 @@ interface StaticFunctions {
                        alleKodeverk: AlleKodeverk) => KunYtelseValues;
   summerFordeling: (values: any) => number;
   transformValues: (values: any, kunYtelse: KunYtelse) => any;
-  validate: (values: any, aktivertePaneler: string[], kunYtelse: KunYtelse) => any;
+  validate: (values: FaktaOmBeregningAksjonspunktValues, aktivertePaneler: string[], kunYtelse: KunYtelse) => any;
 }
 
 /**
@@ -119,7 +119,7 @@ KunYtelsePanel.transformValues = (values, kunYtelse) => ({
   },
 });
 
-KunYtelsePanel.validate = (values, aktivertePaneler, kunYtelse) => {
+KunYtelsePanel.validate = (values: FaktaOmBeregningAksjonspunktValues, aktivertePaneler: string[], kunYtelse: KunYtelse): any => {
   if (!values || !aktivertePaneler.includes(faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE)) {
     return {};
   }

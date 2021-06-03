@@ -15,7 +15,7 @@ import { getFormValuesForBeregning } from '../../BeregningFormUtils';
 
 import styles from '../kunYtelse/kunYtelseBesteberegningPanel.less';
 import InntektPrAndelProp from '../inntektPrAndelProp';
-import { VurderBesteberegningValues } from '../../../typer/FaktaBeregningTypes';
+import {FaktaOmBeregningAksjonspunktValues, VurderBesteberegningValues} from '../../../typer/FaktaBeregningTypes';
 
 export const besteberegningField = 'vurderbesteberegningField';
 
@@ -35,7 +35,7 @@ interface StaticFunctions {
                         faktaOmBeregningTilfeller: string[],
                         erOverstyrt: boolean) => VurderBesteberegningValues;
   transformValues: (values: any, faktaOmBeregning: FaktaOmBeregning, inntektPrAndel: InntektPrAndelProp[]) => any;
-  validate: (values: any, aktivertePaneler: string[]) => any;
+  validate: (values: FaktaOmBeregningAksjonspunktValues, aktivertePaneler: string[]) => any;
 }
 
 /**
@@ -98,7 +98,7 @@ VurderBesteberegningPanelImpl.buildInitialValues = (aksjonspunkter: Aksjonspunkt
   };
 };
 
-VurderBesteberegningPanelImpl.validate = (values, aktivertePaneler) => {
+VurderBesteberegningPanelImpl.validate = (values: FaktaOmBeregningAksjonspunktValues, aktivertePaneler: string[]): any => {
   if (!values || !(aktivertePaneler.includes(faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING)
   || aktivertePaneler.includes(faktaOmBeregningTilfelle.FASTSETT_BESTEBEREGNING_FODENDE_KVINNE))) {
     return {};

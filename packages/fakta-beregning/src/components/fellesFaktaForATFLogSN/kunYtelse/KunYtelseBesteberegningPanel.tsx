@@ -15,7 +15,10 @@ import BrukersAndelFieldArray from './BrukersAndelFieldArray';
 import { getFormValuesForBeregning } from '../../BeregningFormUtils';
 
 import styles from './kunYtelseBesteberegningPanel.less';
-import { VurderBesteberegningMedKunYtelseValues } from '../../../typer/FaktaBeregningTypes';
+import {
+  FaktaOmBeregningAksjonspunktValues,
+  VurderBesteberegningMedKunYtelseValues,
+} from '../../../typer/FaktaBeregningTypes';
 
 export const besteberegningField = 'besteberegningField';
 
@@ -30,7 +33,7 @@ type OwnProps = {
 
 interface StaticFunctions {
   buildInitialValues: (kunYtelse: KunYtelse) => VurderBesteberegningMedKunYtelseValues;
-  validate: (values: any) => any;
+  validate: (values: FaktaOmBeregningAksjonspunktValues) => any;
   transformValues: (values: any) => any;
 }
 
@@ -106,7 +109,7 @@ KunYtelseBesteberegningImpl.defaultProps = {
 
 KunYtelseBesteberegningImpl.buildInitialValues = (kunYtelse): VurderBesteberegningMedKunYtelseValues => ({ [besteberegningField]: kunYtelse.erBesteberegning });
 
-KunYtelseBesteberegningImpl.validate = (values) => {
+KunYtelseBesteberegningImpl.validate = (values: FaktaOmBeregningAksjonspunktValues): any => {
   const errors = {};
   errors[besteberegningField] = required(values[besteberegningField]);
   return errors;

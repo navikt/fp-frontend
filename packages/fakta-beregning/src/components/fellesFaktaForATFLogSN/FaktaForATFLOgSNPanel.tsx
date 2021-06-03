@@ -24,7 +24,12 @@ import VurderMottarYtelseForm from './vurderOgFastsettATFL/forms/VurderMottarYte
 import VurderBesteberegningForm from './besteberegningFodendeKvinne/VurderBesteberegningForm';
 import VurderRefusjonForm from './vurderrefusjon/VurderRefusjonForm';
 import { erInitialOverstyringAvBeregningsgrunnlag } from './BgFaktaUtils';
-import {FaktaOmBeregningValues, FaktaStateProps, TilfellerValues} from '../../typer/FaktaBeregningTypes';
+import {
+  FaktaOmBeregningAksjonspunktValues,
+  FaktaOmBeregningValues,
+  FaktaStateProps,
+  TilfellerValues
+} from '../../typer/FaktaBeregningTypes';
 
 const {
   VURDER_FAKTA_FOR_ATFL_SN,
@@ -65,7 +70,7 @@ export const getArbeidsgiverInfoForRefusjonskravSomKommerForSent = createSelecto
   },
 );
 
-export const validationForVurderFakta = (values) => {
+export const validationForVurderFakta = (values: FaktaOmBeregningAksjonspunktValues): any => {
   if (!values) {
     return {};
   }

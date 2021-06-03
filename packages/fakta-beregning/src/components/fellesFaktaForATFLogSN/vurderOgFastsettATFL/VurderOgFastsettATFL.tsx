@@ -5,7 +5,7 @@ import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregn
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { createSelector } from 'reselect';
 import {
-  ArbeidsgiverOpplysningerPerId, FaktaOmBeregning, AlleKodeverk,
+  ArbeidsgiverOpplysningerPerId, FaktaOmBeregning, AlleKodeverk, VurderMottarYtelse,
 } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
@@ -28,32 +28,34 @@ import {
 import VurderBesteberegningForm, { besteberegningField, vurderBesteberegningTransform } from '../besteberegningFodendeKvinne/VurderBesteberegningForm';
 import InntektFieldArray, { InntektFieldArray as InntektFieldArrayImpl } from '../InntektFieldArray';
 import VurderEtterlonnSluttpakkeForm from './forms/VurderEtterlonnSluttpakkeForm';
-import {VurderOgFastsettATFLValues} from "../../../typer/FaktaBeregningTypes";
+import { FaktaOmBeregningAksjonspunktValues, VurderOgFastsettATFLValues } from '../../../typer/FaktaBeregningTypes';
+import AndelFieldValue from "../../../typer/FieldValues";
 
-const lonnsendringErVurdertEllerIkkjeTilstede = (tilfeller, values) => (
+const lonnsendringErVurdertEllerIkkjeTilstede = (tilfeller: string[], values: FaktaOmBeregningAksjonspunktValues): boolean => (
   !tilfeller.includes(faktaOmBeregningTilfelle.VURDER_LONNSENDRING)
   || (values[lonnsendringField] !== undefined && values[lonnsendringField] !== null));
 
-const nyoppstartetFLErVurdertEllerIkkjeTilstede = (tilfeller, values) => (
+const nyoppstartetFLErVurdertEllerIkkjeTilstede = (tilfeller: string[], values: FaktaOmBeregningAksjonspunktValues): boolean => (
   !tilfeller.includes(faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL)
   || (values[erNyoppstartetFLField] !== undefined && values[erNyoppstartetFLField] !== null));
 
-const besteberegningErVurdertEllerIkkjeTilstede = (tilfeller, values) => (
+const besteberegningErVurdertEllerIkkjeTilstede = (tilfeller: string[], values: FaktaOmBeregningAksjonspunktValues): boolean => (
   !tilfeller.includes(faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING)
   || (values[besteberegningField] !== undefined && values[besteberegningField] !== null));
 
-const mottarYtelseErVurdertEllerIkkjeTilstede = (tilfeller, vurderMottarYtelse, values) => (
+const mottarYtelseErVurdertEllerIkkjeTilstede = (tilfeller: string[], vurderMottarYtelse: VurderMottarYtelse,
+  values: FaktaOmBeregningAksjonspunktValues): boolean => (
   !tilfeller.includes(faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE)
   || (harVurdertMottarYtelse(values, vurderMottarYtelse)));
 
-const harVurdert = (tilfeller, values, faktaOmBeregning) => (
+const harVurdert = (tilfeller: string[], values: FaktaOmBeregningAksjonspunktValues, faktaOmBeregning: FaktaOmBeregning): boolean => (
   lonnsendringErVurdertEllerIkkjeTilstede(tilfeller, values)
     && nyoppstartetFLErVurdertEllerIkkjeTilstede(tilfeller, values)
     && mottarYtelseErVurdertEllerIkkjeTilstede(tilfeller, faktaOmBeregning.vurderMottarYtelse, values)
     && besteberegningErVurdertEllerIkkjeTilstede(tilfeller, values)
 );
 
-const skalFastsetteInntekt = (values: any, faktaOmBeregning: FaktaOmBeregning,
+const skalFastsetteInntekt = (values: FaktaOmBeregningAksjonspunktValues, faktaOmBeregning: FaktaOmBeregning,
   beregningsgrunnlag: Beregningsgrunnlag) => faktaOmBeregning.andelerForFaktaOmBeregning
   .map((andel) => mapAndelFieldIdentifikator(andel))
   .find(skalFastsetteInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)) !== undefined;
@@ -115,7 +117,10 @@ interface StaticFunctions {
                        erOverstyrt: boolean,
                        arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
                        alleKodeverk: AlleKodeverk) => VurderOgFastsettATFLValues;
-  validate: (values: any, tilfeller: string[], faktaOmBeregning: FaktaOmBeregning, beregningsgrunnlag: Beregningsgrunnlag) => any;
+  validate: (values: FaktaOmBeregningAksjonspunktValues,
+             tilfeller: string[],
+             faktaOmBeregning: FaktaOmBeregning,
+             beregningsgrunnlag: Beregningsgrunnlag) => any;
   transformValues: (faktaOmBeregning: FaktaOmBeregning, beregningsgrunnlag: Beregningsgrunnlag) => any;
 }
 
@@ -225,7 +230,7 @@ VurderOgFastsettATFL.buildInitialValues = (faktaOmBeregning: FaktaOmBeregning,
   };
 };
 
-const validateEnFastsattVedOverstyring = (values) => {
+const validateEnFastsattVedOverstyring = (values: AndelFieldValue[]): any => {
   const minstEnFastsattErrorMessage = validateMinstEnFastsatt(values);
   if (minstEnFastsattErrorMessage != null) {
     return { _error: minstEnFastsattErrorMessage };
@@ -233,7 +238,10 @@ const validateEnFastsattVedOverstyring = (values) => {
   return null;
 };
 
-VurderOgFastsettATFL.validate = (values, tilfeller, faktaOmBeregning, beregningsgrunnlag) => {
+VurderOgFastsettATFL.validate = (values: FaktaOmBeregningAksjonspunktValues,
+  tilfeller: string[],
+  faktaOmBeregning: FaktaOmBeregning,
+  beregningsgrunnlag: Beregningsgrunnlag): any => {
   const errors = {};
   if (harVurdert(tilfeller, values, faktaOmBeregning) && skalFastsetteInntekt(values, faktaOmBeregning, beregningsgrunnlag)) {
     errors[INNTEKT_FIELD_ARRAY_NAME] = InntektFieldArrayImpl.validate(values[INNTEKT_FIELD_ARRAY_NAME], false,

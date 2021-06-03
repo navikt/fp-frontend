@@ -22,10 +22,7 @@ import FaktaForATFLOgSNPanel, {
 import { erAvklartAktivitetEndret } from '../avklareAktiviteter/AvklareAktiviteterPanel';
 import { formNameVurderFaktaBeregning } from '../BeregningFormUtils';
 import { erOverstyring, erOverstyringAvBeregningsgrunnlag } from './BgFaktaUtils';
-import any = jasmine.any;
-import {FaktaOmBeregningAksjonspunktValues, FaktaOmBeregningValues} from "../../typer/FaktaBeregningTypes";
-import AvklarAktiviteterValues from "../../typer/AvklarAktivitetTypes";
-import OmsorgFaktaForm from "@fpsak-frontend/fakta-omsorg/src/components/OmsorgFaktaForm";
+import { FaktaOmBeregningAksjonspunktValues, FaktaOmBeregningValues } from '../../typer/FaktaBeregningTypes';
 
 const {
   VURDER_FAKTA_FOR_ATFL_SN,
@@ -201,7 +198,7 @@ export const buildInitialValuesVurderFaktaBeregning = createSelector(
   }),
 );
 
-export const validateVurderFaktaBeregning = (values) => {
+export const validateVurderFaktaBeregning = (values: FaktaOmBeregningAksjonspunktValues): any => {
   const { aksjonspunkter } = values;
   if (values && ((aksjonspunkter && hasAksjonspunkt(VURDER_FAKTA_FOR_ATFL_SN, aksjonspunkter)) || erOverstyring(values))) {
     return {

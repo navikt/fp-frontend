@@ -17,7 +17,7 @@ import {
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import { mapAndelToField, skalHaBesteberegningSelector } from './BgFaktaUtils';
 import styles from './inntektFieldArray.less';
-import { validateUlikeAndeler, validateUlikeAndelerWithGroupingFunction } from './ValidateAndelerUtils';
+import {SortedAndelInfo, validateUlikeAndeler, validateUlikeAndelerWithGroupingFunction} from './ValidateAndelerUtils';
 import { getFormValuesForBeregning, isBeregningFormDirty as isFormDirty } from '../BeregningFormUtils';
 import { AndelRow, getHeaderTextCodes } from './InntektFieldArrayRow';
 import AddDagpengerAndelButton from './AddDagpengerAndelButton';
@@ -184,7 +184,7 @@ type OwnProps = {
 };
 
 interface StaticFunctions {
-  validate: (values: any,
+  validate: (values: AndelFieldValue[],
              erKunYtelse: boolean,
              skalFastsetteInntekt: (andel) => boolean) => any;
   buildInitialValues: (andeler: AndelForFaktaOmBeregning[],
@@ -270,7 +270,7 @@ InntektFieldArray.transformValues = (values): InntektTransformed => (values
     })) : null
 );
 
-const mapAndelToSortedObject = (value) => {
+const mapAndelToSortedObject = (value: AndelFieldValue): SortedAndelInfo => {
   const { andel, inntektskategori } = value;
   return { andelsinfo: andel, inntektskategori };
 };
