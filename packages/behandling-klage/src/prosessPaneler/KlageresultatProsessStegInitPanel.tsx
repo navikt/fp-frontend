@@ -21,7 +21,7 @@ import { restApiKlageHooks, KlageBehandlingApiKeys, requestKlageApi } from '../d
 
 const intl = createIntl(messages);
 
-const forhandsvis = (data) => {
+const forhandsvis = (data: any) => {
   if (window.navigator.msSaveOrOpenBlob) {
     window.navigator.msSaveOrOpenBlob(data);
   } else if (URL.createObjectURL) {
@@ -118,9 +118,9 @@ const KlageresultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPan
       prosessPanelKode={ProsessStegCode.KLAGE_RESULTAT}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.ResultatKlage' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={(initData, standardData) => getVedtakStatus(initData?.aksjonspunkter, standardData.behandling.behandlingsresultat)}
+      hentOverstyrtStatus={(initData, standardData) => getVedtakStatus(initData.aksjonspunkter, standardData.behandling.behandlingsresultat)}
       lagringSideEffekter={lagringSideEffekter}
-      hentSkalMarkeresSomAktiv={(initData, standardData) => getVedtakStatus(initData?.aksjonspunkter, standardData.behandling.behandlingsresultat)
+      hentSkalMarkeresSomAktiv={(initData, standardData) => getVedtakStatus(initData.aksjonspunkter, standardData.behandling.behandlingsresultat)
         !== vilkarUtfallType.IKKE_VURDERT}
       renderPanel={(data) => (
         <>

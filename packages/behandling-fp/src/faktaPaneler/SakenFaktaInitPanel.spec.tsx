@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import SakenFaktaIndex from '@fpsak-frontend/fakta-saken';
-import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
+import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles';
 
 import SakenFaktaInitPanel from './SakenFaktaInitPanel';
 
@@ -13,7 +13,7 @@ describe('<SakenFaktaInitPanel>', () => {
       registrerFaktaPanel={() => {}}
     />);
 
-    const panel = wrapper.find<FaktaDefaultInitPanelProps<any, any>>(FaktaDefaultInitPanel);
+    const panel = wrapper.find<FaktaDefaultInitPanelProps<any, any> & FaktaPanelInitProps>(FaktaDefaultInitPanel);
 
     expect(panel.props().skalPanelVisesIMeny({})).toBe(true);
     expect(panel.props().renderPanel({}).type).toEqual(SakenFaktaIndex);

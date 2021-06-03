@@ -15,7 +15,7 @@ const selvstendigNaringsdrivendeFieldArrayName = 'tilretteleggingSelvstendigNari
 const frilansFieldArrayName = 'tilretteleggingFrilans';
 const tilretteleggingForArbeidsgiverFieldArrayName = 'tilretteleggingForArbeidsgiver';
 
-type Tilrettelegging = {
+export type Tilrettelegging = {
   tilretteleggingType: string;
   fomDato: string;
   stillingsprosent?: string;

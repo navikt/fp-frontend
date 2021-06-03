@@ -18,8 +18,8 @@ interface OwnProps {
 
 interface StaticFunctions {
   buildInitialValues: (andreYtelser: KodeverkMedNavn[]) => FormValues;
-  validate?: (values: FormValues, andreYtelser: KodeverkMedNavn[]) => any,
-  transformValues?: (values: FormValues, andreYtelser: KodeverkMedNavn[]) => any;
+  validate: (values: FormValues, andreYtelser: KodeverkMedNavn[]) => any,
+  transformValues: (values: FormValues, andreYtelser: KodeverkMedNavn[]) => any;
 }
 
 const AndreYtelserPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = ({
@@ -38,10 +38,10 @@ const AndreYtelserPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunction
   </RawIntlProvider>
 );
 
-AndreYtelserPapirsoknadIndex.buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => AndreYtelserPanel.buildInitialValues(andreYtelser);
+AndreYtelserPapirsoknadIndex.buildInitialValues = (andreYtelser) => AndreYtelserPanel.buildInitialValues(andreYtelser);
 
-AndreYtelserPapirsoknadIndex.validate = (values: FormValues, andreYtelser: KodeverkMedNavn[]) => AndreYtelserPanel.validate(values, andreYtelser);
+AndreYtelserPapirsoknadIndex.validate = (values, andreYtelser) => AndreYtelserPanel.validate(values, andreYtelser);
 
-AndreYtelserPapirsoknadIndex.transformValues = (values: FormValues, andreYtelser: KodeverkMedNavn[]) => AndreYtelserPanel.transformValues(values, andreYtelser);
+AndreYtelserPapirsoknadIndex.transformValues = (values, andreYtelser) => AndreYtelserPanel.transformValues(values, andreYtelser);
 
 export default AndreYtelserPapirsoknadIndex;

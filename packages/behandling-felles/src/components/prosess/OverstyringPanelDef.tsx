@@ -6,7 +6,7 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import VilkarresultatMedOverstyringProsessIndex from '@fpsak-frontend/prosess-vilkar-overstyring';
 import {
-  Aksjonspunkt, Behandling, KodeverkMedNavn, Medlemskap, Vilkar,
+  Aksjonspunkt, KodeverkMedNavn, Medlemskap, Vilkar,
 } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { OverstyringAksjonspunkter } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -24,7 +24,6 @@ const filtrerAvslagsarsaker = (
   : avslagsarsaker[vilkarTypeKode]);
 
 interface OwnProps {
-  behandling: Behandling;
   aksjonspunkter: Aksjonspunkt[];
   aksjonspunktKode: OverstyringAksjonspunkter;
   vilkar: Vilkar[];
@@ -39,7 +38,6 @@ interface OwnProps {
 }
 
 const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
-  behandling,
   aksjonspunkter,
   aksjonspunktKode,
   vilkar,
@@ -72,7 +70,6 @@ const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
   return (
     <>
       <VilkarresultatMedOverstyringProsessIndex
-        behandling={behandling}
         medlemskap={medlemskap}
         overrideReadOnly={overrideReadOnly}
         kanOverstyreAccess={kanOverstyreAccess}

@@ -38,7 +38,7 @@ export type FormValues = {
 }
 
 interface StaticFunctions {
-  validate?: (values: FormValues) => {
+  validate: (values: FormValues) => {
     tomDato?: any;
     fomDato?: any;
   }[] | null,
@@ -83,9 +83,11 @@ export const FrilansOppdragForFamilieFieldArray: FunctionComponent<OwnProps> & S
                   label={{ id: 'Registrering.FrilansOppdrag.FieldArray.Oppdragsgiver' }}
                 />
               </FlexColumn>
-              <FlexColumn>
-                {getRemoveButton()}
-              </FlexColumn>
+              {getRemoveButton && (
+                <FlexColumn>
+                  {getRemoveButton()}
+                </FlexColumn>
+              )}
             </FlexRow>
           </FlexContainer>
         </Column>
@@ -99,7 +101,7 @@ const sortFomDates = (perioder: { periodeFom: string; periodeTom?: string; }[]) 
   .filter((p) => p && p !== '')
   .sort((periodeFom1, periodeFom2) => moment(periodeFom1, ISO_DATE_FORMAT).diff(moment(periodeFom2, ISO_DATE_FORMAT)));
 
-FrilansOppdragForFamilieFieldArray.validate = (values: FormValues): any => {
+FrilansOppdragForFamilieFieldArray.validate = (values) => {
   if (!values) {
     return null;
   }

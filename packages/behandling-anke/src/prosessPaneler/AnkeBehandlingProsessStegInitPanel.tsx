@@ -16,7 +16,7 @@ import { restApiAnkeHooks, requestAnkeApi, AnkeBehandlingApiKeys } from '../data
 
 const intl = createIntl(messages);
 
-const forhandsvis = (data) => {
+const forhandsvis = (data: any) => {
   if (window.navigator.msSaveOrOpenBlob) {
     window.navigator.msSaveOrOpenBlob(data);
   } else if (URL.createObjectURL) {

@@ -10,12 +10,14 @@ import { VirksomhetIdentifikasjonPanel } from './VirksomhetIdentifikasjonPanel';
 const intlMock = getIntlMock(messages);
 
 describe('<VirksomhetIdentifikasjonPanel>', () => {
+  const alleKodeverk = {
+    [kodeverkTyper.LANDKODER]: [{}],
+  } as AlleKodeverk;
+
   it('skal rendre korrekt ved default props', () => {
     const wrapper = shallowWithIntl(<VirksomhetIdentifikasjonPanel
       intl={intlMock}
-      alleKodeverk={{
-        [kodeverkTyper.LANDKODER]: [],
-      } as AlleKodeverk}
+      alleKodeverk={alleKodeverk}
       form="test"
     />, messages);
 
@@ -39,9 +41,7 @@ describe('<VirksomhetIdentifikasjonPanel>', () => {
   it('skal rendre korrekt når virksomhet er registrert i Norge', () => {
     const wrapper = shallowWithIntl(<VirksomhetIdentifikasjonPanel
       virksomhetRegistrertINorge
-      alleKodeverk={{
-        [kodeverkTyper.LANDKODER]: [],
-      } as AlleKodeverk}
+      alleKodeverk={alleKodeverk}
       intl={intlMock}
       form="test"
     />, messages);
@@ -55,9 +55,7 @@ describe('<VirksomhetIdentifikasjonPanel>', () => {
   it('skal rendre korrekt når virksomhet ikke er registrert i Norge', () => {
     const wrapper = shallowWithIntl(<VirksomhetIdentifikasjonPanel
       virksomhetRegistrertINorge={false}
-      alleKodeverk={{
-        [kodeverkTyper.LANDKODER]: [],
-      } as AlleKodeverk}
+      alleKodeverk={alleKodeverk}
       intl={intlMock}
       form="test"
     />, messages);

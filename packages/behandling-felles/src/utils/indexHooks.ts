@@ -9,6 +9,8 @@ import { usePrevious } from '@fpsak-frontend/shared-components';
 
 import { BehandlingEventHandler } from '../types/standardBehandlingProps';
 
+const DUMMY_KEY = new RestKey<any, any>('');
+
 export type NyBehandlendeEnhetParams = {
   behandlingId: number;
   enhetNavn: string;
@@ -19,7 +21,7 @@ export type NyBehandlendeEnhetParams = {
 
 export const useInitRequestApi = (
   requestApi: AbstractRequestApi,
-  setRequestPendingMessage: (message: string) => void,
+  setRequestPendingMessage: (message?: string) => void,
 ): void => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
@@ -30,8 +32,8 @@ export const useInitRequestApi = (
 };
 
 const useSetBehandlingVedEndring = (
-  behandling: Behandling,
   setBehandling: (behandling: Behandling) => void,
+  behandling?: Behandling,
 ): void => {
   useEffect(() => {
     if (behandling) {
@@ -41,8 +43,8 @@ const useSetBehandlingVedEndring = (
 };
 
 const useOppdaterFagsak = (
-  behandling: Behandling,
   oppdaterBehandlingVersjon?: (versjon: number) => void,
+  behandling?: Behandling,
 ): void => {
   const previousBehandling = usePrevious(behandling);
   useEffect(() => {
@@ -72,7 +74,7 @@ export const useBehandling = (
 
   const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
   const { startRequest: hentBehandling, data: behandlingRes, state: behandlingState } = useRestApiRunner(behandlingKey);
-  useSetBehandlingVedEndring(behandlingRes, setBehandling);
+  useSetBehandlingVedEndring(setBehandling, behandlingRes);
 
   const hentBehandlingInklId = useCallback((keepData: boolean) => hentBehandling({ behandlingId }, keepData), []);
 
@@ -80,7 +82,7 @@ export const useBehandling = (
     hentBehandlingInklId(false);
   }, []);
 
-  useOppdaterFagsak(behandling, oppdaterBehandlingVersjon);
+  useOppdaterFagsak(oppdaterBehandlingVersjon, behandling);
 
   return {
     behandling,
@@ -100,14 +102,17 @@ export const useLagreAksjonspunkt = (
   const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
 
   const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = useRestApiRunner(lagreAksjonspunktKey);
-  useSetBehandlingVedEndring(apBehandlingRes, setBehandling);
+  useSetBehandlingVedEndring(setBehandling, apBehandlingRes);
 
-  const { startRequest: lagreOverstyrteAksjonspunkter, data: apOverstyrtBehandlingRes } = useRestApiRunner(lagreOverstyrtyAksjonspunktKey);
-  useSetBehandlingVedEndring(apOverstyrtBehandlingRes, setBehandling);
+  const {
+    startRequest: lagreOverstyrteAksjonspunkter,
+    data: apOverstyrtBehandlingRes,
+  } = useRestApiRunner(lagreOverstyrtyAksjonspunktKey || DUMMY_KEY);
+  useSetBehandlingVedEndring(setBehandling, apOverstyrtBehandlingRes);
 
   return {
     lagreAksjonspunkter,
-    lagreOverstyrteAksjonspunkter,
+    lagreOverstyrteAksjonspunkter: lagreOverstyrtyAksjonspunktKey ? lagreOverstyrteAksjonspunkter : undefined,
   };
 };
 
@@ -121,9 +126,9 @@ export const useInitBehandlingHandlinger = (
   requestApi: AbstractRequestApi,
   keys: Record<string, RestKey<any, any>>,
   behandlingEventHandler: BehandlingEventHandler,
-  hentBehandling: (keepData: boolean) => Promise<Behandling>,
+  hentBehandling: (keepData: boolean) => Promise<Behandling | undefined>,
   setBehandling: (behandling: Behandling) => void,
-  behandling: Behandling,
+  behandling?: Behandling,
 ): void => {
   const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
 
@@ -147,16 +152,16 @@ export const useInitBehandlingHandlinger = (
         settBehandlingPaVent: (params) => settBehandlingPaVent(leggTilBehandlingIdentifikator(behandling, params))
           .then(() => hentBehandling(true)),
         taBehandlingAvVent: () => taBehandlingAvVent(leggTilBehandlingIdentifikator(behandling, {}))
-          .then((behandlingResTaAvVent) => setBehandling(behandlingResTaAvVent)),
+          .then((behandlingResTaAvVent?: Behandling) => behandlingResTaAvVent && setBehandling(behandlingResTaAvVent)),
         henleggBehandling: (params) => henleggBehandling(leggTilBehandlingIdentifikator(behandling, params)),
         opneBehandlingForEndringer: () => opneBehandlingForEndringer(leggTilBehandlingIdentifikator(behandling, {}))
-          .then((behandlingResOpneForEndring) => setBehandling(behandlingResOpneForEndring)),
+          .then((behandlingResOpneForEndring?: Behandling) => behandlingResOpneForEndring && setBehandling(behandlingResOpneForEndring)),
         opprettVerge: () => opprettVerge(leggTilBehandlingIdentifikator(behandling, {}))
-          .then((behandlingResOpprettVerge) => setBehandling(behandlingResOpprettVerge)),
+          .then((behandlingResOpprettVerge?: Behandling) => behandlingResOpprettVerge && setBehandling(behandlingResOpprettVerge)),
         fjernVerge: () => fjernVerge(leggTilBehandlingIdentifikator(behandling, {}))
-          .then((behandlingResFjernVerge) => setBehandling(behandlingResFjernVerge)),
+          .then((behandlingResFjernVerge?: Behandling) => behandlingResFjernVerge && setBehandling(behandlingResFjernVerge)),
         lagreRisikoklassifiseringAksjonspunkt: (params) => lagreRisikoklassifiseringAksjonspunkt(leggTilBehandlingIdentifikator(behandling, params))
-          .then((behandlingEtterRisikoAp) => setBehandling(behandlingEtterRisikoAp)),
+          .then((behandlingEtterRisikoAp?: Behandling) => behandlingEtterRisikoAp && setBehandling(behandlingEtterRisikoAp)),
       });
     }
     return () => {

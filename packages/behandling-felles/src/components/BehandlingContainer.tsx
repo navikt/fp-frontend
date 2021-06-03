@@ -54,7 +54,7 @@ const BehandlingContainer: FunctionComponent<OwnProps> = ({
         valgtFaktaSteg={valgtFaktaSteg}
         valgtProsessSteg={valgtProsessSteg}
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
-        behandlingVersjon={behandling?.versjon}
+        behandlingVersjon={behandling.versjon}
         setApentFaktaPanel={setApentFaktaPanel}
         apentFaktaPanelInfo={apentFaktaPanelInfo}
       />

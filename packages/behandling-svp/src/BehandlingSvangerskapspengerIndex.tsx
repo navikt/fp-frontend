@@ -70,7 +70,7 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<StandardBehandlingPro
 
   const harIkkeHentetArbeidsgiverOpplysninger = opplysningsdataState === RestApiState.LOADING || opplysningsdataState === RestApiState.NOT_STARTED;
 
-  if (!behandling || harIkkeHentetArbeidsgiverOpplysninger) {
+  if (!behandling || harIkkeHentetArbeidsgiverOpplysninger || !opplysningsdata) {
     return <LoadingPanel />;
   }
 

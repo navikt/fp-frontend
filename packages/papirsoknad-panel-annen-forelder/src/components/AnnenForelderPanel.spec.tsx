@@ -106,7 +106,7 @@ describe('<AnnenForelderPanel>', () => {
         readOnly={false}
         formatMessage={() => ''}
         countryCodes={countryCodes}
-        kanIkkeOppgiBegrunnelse={{ arsak: undefined }}
+        kanIkkeOppgiBegrunnelse={{ arsak: '' }}
       />);
 
       let land = wrapper.find({ name: 'land' });

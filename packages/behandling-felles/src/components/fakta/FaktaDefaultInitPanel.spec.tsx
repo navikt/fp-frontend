@@ -12,8 +12,8 @@ import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import FaktaPanelWrapper from './FaktaPanelWrapper';
 import FaktaDefaultInitPanel from './FaktaDefaultInitPanel';
 
-let realUseContext;
-let useContextMock;
+let realUseContext: any;
+let useContextMock: any;
 
 const fagsak = {
   saksnummer: '1234',

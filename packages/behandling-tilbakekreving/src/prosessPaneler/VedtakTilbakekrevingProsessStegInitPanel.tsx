@@ -95,9 +95,9 @@ const VedtakTilbakekrevingProsessStegInitPanel: FunctionComponent<OwnProps & Pro
       prosessPanelKode={ProsessStegCode.VEDTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={(initData) => getOverstyrtStatus(initData?.beregningsresultat)}
+      hentOverstyrtStatus={(initData) => getOverstyrtStatus(initData.beregningsresultat)}
       lagringSideEffekter={lagringSideeffekterCallback}
-      hentSkalMarkeresSomAktiv={(initData) => getOverstyrtStatus(initData?.beregningsresultat) !== vilkarUtfallType.IKKE_VURDERT}
+      hentSkalMarkeresSomAktiv={(initData) => getOverstyrtStatus(initData.beregningsresultat) !== vilkarUtfallType.IKKE_VURDERT}
       renderPanel={(data) => (
         <>
           {visApenRevurderingModal && (

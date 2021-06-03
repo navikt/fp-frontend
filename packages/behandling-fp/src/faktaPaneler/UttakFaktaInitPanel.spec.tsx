@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import UttakFaktaIndex from '@fpsak-frontend/fakta-uttak';
-import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
+import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { AksessRettigheter, Personoversikt, Ytelsefordeling } from '@fpsak-frontend/types';
 
 import UttakFaktaInitPanel from './UttakFaktaInitPanel';
@@ -21,7 +21,7 @@ describe('<UttakFaktaInitPanel>', () => {
       personoversikt={{} as Personoversikt}
     />);
 
-    const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any>>(FaktaDefaultInitPanel);
+    const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any> & FaktaPanelInitProps>(FaktaDefaultInitPanel);
 
     const ytelsefordelingSkalVises = {
       endringsdato: '2020-01-01',

@@ -20,7 +20,6 @@ describe('<getAlleMerknaderFraBeslutter>', () => {
     },
     behandlingPaaVent: false,
     behandlingHenlagt: false,
-    links: [],
   };
 
   const aksjonspunkter = [{

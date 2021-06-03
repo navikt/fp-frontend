@@ -3,11 +3,11 @@ import { shallow } from 'enzyme';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import ForeldelseProsessIndex from '@fpsak-frontend/prosess-foreldelse';
-import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
+import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import {
-  Aksjonspunkt, AlleKodeverkTilbakekreving, FeilutbetalingPerioderWrapper, StandardProsessPanelProps,
+  Aksjonspunkt, AlleKodeverkTilbakekreving, Behandling, FeilutbetalingPerioderWrapper, StandardProsessPanelProps,
 } from '@fpsak-frontend/types';
 
 import { requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';
@@ -30,9 +30,10 @@ describe('<ForeldelseProsessStegInitPanel>', () => {
         kodeverk: '',
       }}
       fptilbakeKodeverk={{} as AlleKodeverkTilbakekreving}
+      behandling={{ versjon: 1 } as Behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<Required<ProsessDefaultInitPanelProps<INIT_DATA, any>> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
 
@@ -42,6 +43,6 @@ describe('<ForeldelseProsessStegInitPanel>', () => {
     // @ts-ignore
     expect(panel.props().hentOverstyrtStatus({ perioderForeldelse })).toEqual(vilkarUtfallType.OPPFYLT);
 
-    expect(panel.props().renderPanel({}).type).toEqual(ForeldelseProsessIndex);
+    expect(panel.props().renderPanel({}, { aksjonspunkter: [], perioderForeldelse: {} as FeilutbetalingPerioderWrapper }).type).toEqual(ForeldelseProsessIndex);
   });
 });

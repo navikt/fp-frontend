@@ -59,7 +59,7 @@ type FormValidationResult = string | null | undefined;
 
 export const maxLengthOrFodselsnr = (length: number) => (text: string): FormValidationResult => (isEmpty(text)
   || text.toString().trim().length <= length ? null : maxLengthOrFodselsnrMessage(length));
-export const required = (value: InputValue): FormValidationResult => (isEmpty(value) ? isRequiredMessage() : undefined);
+export const required = (value?: InputValue): FormValidationResult => (isEmpty(value) ? isRequiredMessage() : undefined);
 export const notDash = (value: InputValue): FormValidationResult => (value === '-' ? isRequiredMessage() : undefined);
 
 export const requiredIfNotPristine = (

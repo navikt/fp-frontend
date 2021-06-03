@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import ArbeidsforholdFaktaIndex from '@fpsak-frontend/fakta-arbeidsforhold';
-import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
+import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles';
 
 import ArbeidsforholdFaktaInitPanel from './ArbeidsforholdFaktaInitPanel';
 
@@ -14,7 +14,7 @@ describe('<ArbeidsforholdFaktaInitPanel>', () => {
       arbeidsgiverOpplysningerPerId={{}}
     />);
 
-    const panel = wrapper.find<FaktaDefaultInitPanelProps<any, any>>(FaktaDefaultInitPanel);
+    const panel = wrapper.find<FaktaDefaultInitPanelProps<any, any> & FaktaPanelInitProps>(FaktaDefaultInitPanel);
 
     expect(panel.props().skalPanelVisesIMeny({})).toBe(true);
     expect(panel.props().renderPanel({}).type).toEqual(ArbeidsforholdFaktaIndex);

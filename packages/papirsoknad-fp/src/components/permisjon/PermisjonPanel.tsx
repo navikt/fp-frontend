@@ -11,17 +11,17 @@ import { CheckboxField } from '@fpsak-frontend/form';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 
-import PermisjonUtsettelsePanel, { utsettelsePeriodeFieldArrayName, FormValues as FormValuesUtsettelse } from './PermisjonUtsettelsePanel';
-import PermisjonGraderingPanel, { graderingPeriodeFieldArrayName, FormValues as FormValuesGradering } from './PermisjonGraderingPanel';
-import PermisjonOverforingAvKvoterPanel, { overforingPeriodeFieldArrayName, FormValues as FormValuesOverforing } from './PermisjonOverforingAvKvoterPanel';
+import PermisjonUtsettelsePanel, { UTSETTELSE_PERIODE_FIELD_ARRAY_NAME, FormValues as FormValuesUtsettelse } from './PermisjonUtsettelsePanel';
+import PermisjonGraderingPanel, { GRADERING_PERIODE_FIELD_ARRAY_NAME, FormValues as FormValuesGradering } from './PermisjonGraderingPanel';
+import PermisjonOverforingAvKvoterPanel, { OVERFORING_PERIODE_FIELD_ARRAY_NAME, FormValues as FormValuesOverforing } from './PermisjonOverforingAvKvoterPanel';
 import RenderPermisjonPeriodeFieldArray, { FormValues as FormValuesPermisjon } from './RenderPermisjonPeriodeFieldArray';
-import PermisjonOppholdPanel, { oppholdPeriodeFieldArrayName, FormValues as FormValuesOpphold } from './PermisjonOppholdPanel';
+import PermisjonOppholdPanel, { OPPHOLD_PERIODE_FIELD_ARRAY_NAME, FormValues as FormValuesOpphold } from './PermisjonOppholdPanel';
 
 import styles from './permisjonPanel.less';
 
 export const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
 
-export const permisjonPeriodeFieldArrayName = 'permisjonsPerioder';
+export const PERMISJON_PERIODE_FIELD_ARRAY_NAME = 'permisjonsPerioder';
 
 interface PureOwnProps {
   soknadData: SoknadData;
@@ -41,16 +41,25 @@ interface MappedOwnProps {
 
 type TidsromPermisjon = {
   fulltUttak: boolean;
-} & FormValuesOverforing & FormValuesPermisjon & FormValuesUtsettelse & FormValuesGradering & FormValuesOpphold;
+  skalUtsette: boolean;
+  skalGradere: boolean;
+  skalHaOpphold: boolean;
+  skalOvertaKvote: boolean;
+  [PERMISJON_PERIODE_FIELD_ARRAY_NAME]?: FormValuesPermisjon[];
+  [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]?: FormValuesUtsettelse[];
+  [GRADERING_PERIODE_FIELD_ARRAY_NAME]?: FormValuesGradering[];
+  [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]?: FormValuesOpphold[];
+  [OVERFORING_PERIODE_FIELD_ARRAY_NAME]?: FormValuesOverforing[];
+};
 
 export type FormValues = {
   [TIDSROM_PERMISJON_FORM_NAME_PREFIX]?: TidsromPermisjon;
 };
 
 interface StaticFunctions {
-  buildInitialValues?: () => any;
+  buildInitialValues: () => any;
   validate: (values: FormValues) => any;
-  transformValues: (values: FormValues) => any;
+  transformValues: (values: Required<FormValues>) => any;
 }
 
 /**
@@ -72,12 +81,11 @@ export const PermisjonPanel: FunctionComponent<PureOwnProps & MappedOwnProps> & 
       <div className={styles.flexContainer}>
         <Undertittel><FormattedMessage id="Registrering.Permisjon.Title" /></Undertittel>
         <VerticalSpacer sixteenPx />
-        { visFeilMelding
-          && (
+        { visFeilMelding && error && (
           <div role="alert" aria-live="assertive">
             <div className="skjemaelement__feilmelding"><FormattedMessage id={error.permisjonsError} /></div>
           </div>
-          )}
+        )}
         <VerticalSpacer eightPx />
         <Element><FormattedMessage id="Registrering.Permisjon.FulltUttak" /></Element>
         <VerticalSpacer eightPx />
@@ -90,9 +98,9 @@ export const PermisjonPanel: FunctionComponent<PureOwnProps & MappedOwnProps> & 
         { fulltUttak
           && (
             <FieldArray
-              name={permisjonPeriodeFieldArrayName}
+              name={PERMISJON_PERIODE_FIELD_ARRAY_NAME}
               component={RenderPermisjonPeriodeFieldArray}
-              periodePrefix={permisjonPeriodeFieldArrayName}
+              periodePrefix={PERMISJON_PERIODE_FIELD_ARRAY_NAME}
               namePrefix={TIDSROM_PERMISJON_FORM_NAME_PREFIX}
               sokerErMor={soknadData.getForeldreType() === foreldreType.MOR}
               readOnly={readOnly}
@@ -136,32 +144,32 @@ PermisjonPanel.defaultProps = {
   error: { permisjonsError: undefined },
 };
 
-const permisjonErrors = (values: TidsromPermisjon) => {
+const permisjonErrors = (values?: TidsromPermisjon) => {
   // @ts-ignore Fiks
   const errors = PermisjonOverforingAvKvoterPanel.validate(values);
 
-  const permisjonPeriodeValues = values ? values[permisjonPeriodeFieldArrayName] : null;
-  errors[permisjonPeriodeFieldArrayName] = RenderPermisjonPeriodeFieldArray.validate(permisjonPeriodeValues);
+  const permisjonPeriodeValues = values ? values[PERMISJON_PERIODE_FIELD_ARRAY_NAME] : undefined;
+  errors[PERMISJON_PERIODE_FIELD_ARRAY_NAME] = RenderPermisjonPeriodeFieldArray.validate(permisjonPeriodeValues);
 
-  if (values.skalUtsette) {
-    const utsettelseperiodeValues = values ? values[utsettelsePeriodeFieldArrayName] : null;
-    errors[utsettelsePeriodeFieldArrayName] = PermisjonUtsettelsePanel.validate(utsettelseperiodeValues);
+  if (values?.skalUtsette) {
+    const utsettelseperiodeValues = values ? values[UTSETTELSE_PERIODE_FIELD_ARRAY_NAME] : undefined;
+    errors[UTSETTELSE_PERIODE_FIELD_ARRAY_NAME] = PermisjonUtsettelsePanel.validate(utsettelseperiodeValues);
   }
 
-  if (values.skalGradere) {
-    const graderingperiodeValues = values ? values[graderingPeriodeFieldArrayName] : null;
-    errors[graderingPeriodeFieldArrayName] = PermisjonGraderingPanel.validate(graderingperiodeValues);
+  if (values?.skalGradere) {
+    const graderingperiodeValues = values ? values[GRADERING_PERIODE_FIELD_ARRAY_NAME] : undefined;
+    errors[GRADERING_PERIODE_FIELD_ARRAY_NAME] = PermisjonGraderingPanel.validate(graderingperiodeValues);
   }
-  if (values.skalHaOpphold) {
-    const oppholdPerioderValues = values ? values[oppholdPeriodeFieldArrayName] : null;
-    errors[oppholdPeriodeFieldArrayName] = PermisjonOppholdPanel.validate(oppholdPerioderValues);
+  if (values?.skalHaOpphold) {
+    const oppholdPerioderValues = values ? values[OPPHOLD_PERIODE_FIELD_ARRAY_NAME] : undefined;
+    errors[OPPHOLD_PERIODE_FIELD_ARRAY_NAME] = PermisjonOppholdPanel.validate(oppholdPerioderValues);
   }
   return errors;
 };
 
 type Periode = {
-  periodeFom,
-  periodeTom,
+  periodeFom: string,
+  periodeTom: string,
 };
 
 // Den her checken trengs för att ikke validerings skall slå till för tidligt
@@ -180,13 +188,13 @@ const validateXrossPeriodTypes = (errorArray: Periode[]) => {
   return false;
 };
 
-const overLappingError = (values: TidsromPermisjon) => {
+const overLappingError = (values?: TidsromPermisjon) => {
   if (values) {
-    const permisjonPeriodeValues = values.fulltUttak ? values[permisjonPeriodeFieldArrayName] : [];
-    const utsettelseperiodeValues = values.skalUtsette ? values[utsettelsePeriodeFieldArrayName] : [];
-    const graderingperiodeValues = values.skalGradere ? values[graderingPeriodeFieldArrayName] : [];
-    const oppholdPerioderValues = values.skalHaOpphold ? values[oppholdPeriodeFieldArrayName] : [];
-    const overforingsperiodeValues = values.skalOvertaKvote ? values[overforingPeriodeFieldArrayName] : [];
+    const permisjonPeriodeValues = values.fulltUttak ? values[PERMISJON_PERIODE_FIELD_ARRAY_NAME] || [] : [];
+    const utsettelseperiodeValues = values.skalUtsette ? values[UTSETTELSE_PERIODE_FIELD_ARRAY_NAME] || [] : [];
+    const graderingperiodeValues = values.skalGradere ? values[GRADERING_PERIODE_FIELD_ARRAY_NAME] || [] : [];
+    const oppholdPerioderValues = values.skalHaOpphold ? values[OPPHOLD_PERIODE_FIELD_ARRAY_NAME] || [] : [];
+    const overforingsperiodeValues = values.skalOvertaKvote ? values[OVERFORING_PERIODE_FIELD_ARRAY_NAME] || [] : [];
     const errorArrayRaw = [
       ...permisjonPeriodeValues,
       ...utsettelseperiodeValues,
@@ -220,7 +228,7 @@ PermisjonPanel.validate = (values: FormValues) => {
     };
   }
 
-  const permisjonValues = values[TIDSROM_PERMISJON_FORM_NAME_PREFIX] || null;
+  const permisjonValues = values[TIDSROM_PERMISJON_FORM_NAME_PREFIX] || undefined;
   if (overLappingError(permisjonValues)) {
     errors = {
       _error: {
@@ -232,14 +240,17 @@ PermisjonPanel.validate = (values: FormValues) => {
   return errors;
 };
 
-PermisjonPanel.transformValues = (values: FormValues) => {
+PermisjonPanel.transformValues = (values: Required<FormValues>) => {
   const permisjonValues = values[TIDSROM_PERMISJON_FORM_NAME_PREFIX];
   const newValues = permisjonValues;
-  if (values.tidsromPermisjon.fulltUttak && permisjonValues[permisjonPeriodeFieldArrayName]) {
-    newValues[permisjonPeriodeFieldArrayName] = RenderPermisjonPeriodeFieldArray.transformValues(permisjonValues[permisjonPeriodeFieldArrayName]);
+  const permisjonsdata = permisjonValues[PERMISJON_PERIODE_FIELD_ARRAY_NAME];
+  if (values.tidsromPermisjon.fulltUttak && permisjonsdata) {
+    newValues[PERMISJON_PERIODE_FIELD_ARRAY_NAME] = RenderPermisjonPeriodeFieldArray.transformValues(permisjonsdata);
   }
-  if (values.tidsromPermisjon.skalGradere && permisjonValues[graderingPeriodeFieldArrayName]) {
-    newValues[graderingPeriodeFieldArrayName] = PermisjonGraderingPanel.transformValues(permisjonValues[graderingPeriodeFieldArrayName]);
+  const graderingdata = permisjonValues[GRADERING_PERIODE_FIELD_ARRAY_NAME];
+  if (values.tidsromPermisjon.skalGradere && graderingdata) {
+    // @ts-ignore Fikse denne
+    newValues[GRADERING_PERIODE_FIELD_ARRAY_NAME] = PermisjonGraderingPanel.transformValues(graderingdata);
   }
   return newValues;
 };
@@ -250,7 +261,7 @@ PermisjonPanel.buildInitialValues = () => ({
     ...PermisjonGraderingPanel.buildInitialValues(),
     ...PermisjonOverforingAvKvoterPanel.buildInitialValues(),
     ...PermisjonOppholdPanel.buildInitialValues(),
-    [permisjonPeriodeFieldArrayName]: [{}],
+    [PERMISJON_PERIODE_FIELD_ARRAY_NAME]: [{}],
     fulltUttak: false,
   },
 });

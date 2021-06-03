@@ -15,7 +15,7 @@ type Ytelsefordeling = Readonly<{
       periodeTom: string;
     };
   };
-  endringsdato: string;
+  endringsdato?: string;
   gjeldendeDekningsgrad: number;
   førsteUttaksdato: string;
 }>

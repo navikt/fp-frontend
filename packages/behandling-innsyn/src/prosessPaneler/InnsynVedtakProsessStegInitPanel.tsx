@@ -30,7 +30,7 @@ const getVedtakStatus = (innsyn: Innsyn, aksjonspunkter: Aksjonspunkt[]): string
     ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_OPPFYLT;
 };
 
-const forhandsvis = (data) => {
+const forhandsvis = (data: any) => {
   if (window.navigator.msSaveOrOpenBlob) {
     window.navigator.msSaveOrOpenBlob(data);
   } else if (URL.createObjectURL) {
@@ -110,10 +110,10 @@ const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
       prosessPanelKode={ProsessStegCode.VEDTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={(initData) => (initData?.innsyn ? getVedtakStatus(initData.innsyn, initData.aksjonspunkter) : vilkarUtfallType.IKKE_VURDERT)}
+      hentOverstyrtStatus={(initData) => (initData.innsyn ? getVedtakStatus(initData.innsyn, initData.aksjonspunkter || []) : vilkarUtfallType.IKKE_VURDERT)}
       lagringSideEffekter={lagringSideeffekterCallback}
-      hentSkalMarkeresSomAktiv={(initData) => (initData?.innsyn
-        && getVedtakStatus(initData.innsyn, initData.aksjonspunkter) !== vilkarUtfallType.IKKE_VURDERT)}
+      hentSkalMarkeresSomAktiv={(initData) => (!!initData.innsyn
+        && getVedtakStatus(initData.innsyn, initData.aksjonspunkter || []) !== vilkarUtfallType.IKKE_VURDERT)}
       renderPanel={(data, initData) => (
         <>
           <IverksetterVedtakStatusModal

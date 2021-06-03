@@ -71,9 +71,11 @@ export const RenderOverforingAvKvoterFieldArray: FunctionComponent<OwnProps & Wr
                 label={index === 0 ? <FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.tomDato" /> : ''}
               />
             </FlexColumn>
-            <FlexColumn>
-              {getRemoveButton()}
-            </FlexColumn>
+            {getRemoveButton && (
+              <FlexColumn>
+                {getRemoveButton()}
+              </FlexColumn>
+            )}
           </>
         </FlexRow>
       </FlexContainer>

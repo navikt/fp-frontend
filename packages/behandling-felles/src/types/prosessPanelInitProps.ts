@@ -8,7 +8,7 @@ export type ProsessPanelExtraInitProps = {
 }
 
 type ProsessPanelInitProps = {
-  behandling?: Behandling;
+  behandling: Behandling;
   valgtProsessSteg: string;
   registrerProsessPanel: (data: ProsessPanelMenyData) => void;
 }

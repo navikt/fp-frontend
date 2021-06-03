@@ -93,9 +93,11 @@ const BehovForTilrettteleggingFieldArray: FunctionComponent<OwnProps & WrappedCo
                     maxLength={99}
                   />
                 </FlexColumn>
-                <FlexColumn>
-                  {getRemoveButton()}
-                </FlexColumn>
+                {getRemoveButton && (
+                  <FlexColumn>
+                    {getRemoveButton()}
+                  </FlexColumn>
+                )}
               </FlexRow>
             </FlexContainer>
           </Column>

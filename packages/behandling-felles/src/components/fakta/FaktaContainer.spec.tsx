@@ -6,10 +6,10 @@ import FaktaMeny from './FaktaMeny';
 import FaktaContainer from './FaktaContainer';
 
 describe('<FaktaContainer>', () => {
-  let useEffect;
+  let useEffect: any;
 
   const mockUseEffect = () => {
-    useEffect.mockImplementationOnce((f) => f());
+    useEffect.mockImplementationOnce((f: any) => f());
   };
 
   const FaktaPanelTest1: FunctionComponent<FaktaPanelInitProps> = ({

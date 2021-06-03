@@ -26,9 +26,8 @@ describe('<BehandlingPaVent>', () => {
     },
     behandlingPaaVent: false,
     behandlingHenlagt: false,
-    links: [],
   };
-  const aksjonspunkter = [];
+  const aksjonspunkter = [] as Aksjonspunkt[];
   const kodeverk = {} as AlleKodeverk;
 
   const AKSJONSPUNKT_KEY = new RestKey<Aksjonspunkt[], void>('AP');

@@ -19,7 +19,7 @@ interface OwnProps {
   ventearsak?: string;
   visBrevErBestilt?: boolean;
   hasManualPaVent: boolean;
-  erTilbakekreving?: boolean;
+  erTilbakekreving: boolean;
 }
 
 const SettPaVentModalIndex: FunctionComponent<OwnProps> = ({

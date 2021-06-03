@@ -200,9 +200,11 @@ export const RenderGraderingPeriodeFieldArray: FunctionComponent<PureOwnProps & 
                     />
                   )}
                 </FlexColumn>
-                <FlexColumn className={styles.placeRemoveButton}>
-                  {getRemoveButton()}
-                </FlexColumn>
+                {getRemoveButton && (
+                  <FlexColumn className={styles.placeRemoveButton}>
+                    {getRemoveButton()}
+                  </FlexColumn>
+                )}
               </FlexRow>
               {periodeFomForTidlig
               && (

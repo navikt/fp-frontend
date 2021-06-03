@@ -3,9 +3,9 @@ import { shallow } from 'enzyme';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import BeregningsresultatProsessIndex from '@fpsak-frontend/prosess-beregningsresultat';
-import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
+import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import {
-  AksessRettigheter, Aksjonspunkt, BeregningsresultatEs, StandardProsessPanelProps, Vilkar,
+  AksessRettigheter, Aksjonspunkt, Behandling, BeregningsresultatEs, StandardProsessPanelProps, Vilkar,
 } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
@@ -16,15 +16,21 @@ type INIT_DATA = {
   vilkar: Vilkar[];
 }
 
+const behandling = {
+  uuid: 'test-uuid',
+  versjon: 1,
+} as Behandling;
+
 describe('<BeregningProsessStegInitPanel>', () => {
   it('skal rendre komponent', () => {
     const wrapper = shallow(<BeregningProsessStegInitPanel
       valgtProsessSteg="default"
       registrerProsessPanel={() => {}}
       rettigheter={{} as AksessRettigheter}
+      behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<Required<ProsessDefaultInitPanelProps<INIT_DATA, any>> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
 
@@ -34,6 +40,6 @@ describe('<BeregningProsessStegInitPanel>', () => {
     // @ts-ignore fiks
     expect(panel.props().hentOverstyrtStatus({ beregningresultatEngangsstonad })).toEqual(vilkarUtfallType.OPPFYLT);
 
-    expect(panel.props().renderPanel({}).type).toEqual(BeregningsresultatProsessIndex);
+    expect(panel.props().renderPanel({}, { aksjonspunkter: [], vilkar: [] }).type).toEqual(BeregningsresultatProsessIndex);
   });
 });

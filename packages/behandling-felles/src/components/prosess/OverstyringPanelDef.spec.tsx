@@ -12,8 +12,8 @@ import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus'
 
 import OverstyringPanelDef from './OverstyringPanelDef';
 
-let realUseContext;
-let useContextMock;
+let realUseContext: any;
+let useContextMock: any;
 
 const fagsak = {
   saksnummer: '1234',
@@ -78,7 +78,6 @@ describe('<OverstyringPanelDef>', () => {
     }] as Aksjonspunkt[];
 
     const wrapper = shallow(<OverstyringPanelDef
-      behandling={behandling}
       aksjonspunkter={aksjonspunkter}
       aksjonspunktKode={aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR}
       vilkar={vilkar}

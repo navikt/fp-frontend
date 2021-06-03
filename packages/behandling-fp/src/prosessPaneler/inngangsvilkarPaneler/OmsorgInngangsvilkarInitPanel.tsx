@@ -31,7 +31,7 @@ type EndepunktInitData = {
 }
 
 interface OwnProps {
-  behandlingVersjon?: number;
+  behandlingVersjon: number;
 }
 
 const OmsorgInngangsvilkarInitPanel: FunctionComponent<OwnProps & InngangsvilkarPanelInitProps> = ({

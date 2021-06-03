@@ -12,8 +12,8 @@ const HookWrapper: FunctionComponent<{ hook: () => any }> = ({
 }) => <div hook={hook()} />;
 
 describe('useInngangsvilkarRegistrerer', () => {
-  const mockUseEffect = (useEffect) => {
-    useEffect.mockImplementationOnce((f) => f());
+  const mockUseEffect = (useEffect: any) => {
+    useEffect.mockImplementationOnce((f: any) => f());
   };
 
   it('skal registrere panel', () => {

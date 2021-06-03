@@ -25,7 +25,7 @@ export type FormValues = {
 }
 
 interface StaticFunctions {
-  validate?: (values: FormValues[]) => {
+  validate: (values: FormValues[]) => {
     periodeFom: any;
     periodeTom: any;
   }[] | null,
@@ -60,9 +60,11 @@ export const FrilansPerioderFieldArray: FunctionComponent<OwnProps> & StaticFunc
                   label={index === 0 ? { id: 'Registrering.Frilans.periodeTom' } : ''}
                 />
               </FlexColumn>
-              <FlexColumn>
-                {getRemoveButton()}
-              </FlexColumn>
+              {getRemoveButton && (
+                <FlexColumn>
+                  {getRemoveButton()}
+                </FlexColumn>
+              )}
             </FlexRow>
           </FlexContainer>
         </Column>

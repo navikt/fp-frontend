@@ -96,7 +96,7 @@ export type FormValues = {
 };
 
 interface StaticFunctions {
-  validate?: (values: FormValues[], options?: Options) => any;
+  validate: (values?: FormValues[], options?: Options) => any;
 }
 
 /**
@@ -120,7 +120,7 @@ const UtenlandsOppholdField: FunctionComponent<OwnPropsUtenlandsOppholdField> & 
   />
 );
 
-UtenlandsOppholdField.validate = (values: FormValues[], options?: Options) => {
+UtenlandsOppholdField.validate = (values, options) => {
   if (!values || !values.length) {
     return { _error: isRequiredMessage() };
   }

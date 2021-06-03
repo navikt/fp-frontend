@@ -35,7 +35,7 @@ type EndepunktInitData = {
 }
 
 interface OwnProps {
-  behandlingVersjon?: number;
+  behandlingVersjon: number;
   rettigheter: AksessRettigheter;
 }
 
@@ -57,7 +57,6 @@ const FodselInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsvilkar
       <>
         {data.aksjonspunkter.length === 0 && (
           <OverstyringPanelDef
-            behandling={data.behandling}
             aksjonspunkter={data.aksjonspunkter}
             aksjonspunktKode={data.vilkar.some((v) => v.vilkarType.kode === vilkarType.FODSELSVILKARET_MOR)
               ? aksjonspunktCodes.OVERSTYR_FODSELSVILKAR : aksjonspunktCodes.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR}

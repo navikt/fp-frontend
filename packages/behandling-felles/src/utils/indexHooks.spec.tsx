@@ -14,15 +14,14 @@ const HookWrapper: FunctionComponent<{ hook: () => any }> = ({
 }) => <div hook={hook()} />;
 
 describe('indexHooks', () => {
-  let useEffect;
+  let useEffect: ReturnType<typeof jest.spyOn>;
 
   const mockUseEffect = () => {
-    useEffect.mockImplementationOnce((f) => f());
+    useEffect.mockImplementationOnce((f: any) => f());
   };
 
   const behandlingSomHentes = {
     id: 1,
-    links: [],
   } as Behandling;
 
   it('skal hente behandling fra server og returnere behandling m.m.', () => {

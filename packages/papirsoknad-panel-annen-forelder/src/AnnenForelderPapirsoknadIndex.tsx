@@ -20,7 +20,7 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  validate?: (sokerPersonnummer: string, values: FormValues) => any,
+  validate: (sokerPersonnummer: string, values?: FormValues) => any,
 }
 
 const AnnenForelderPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = ({
@@ -43,6 +43,7 @@ const AnnenForelderPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctio
   </RawIntlProvider>
 );
 
-AnnenForelderPapirsoknadIndex.validate = (sokerPersonnummer: string, values: FormValues) => AnnenForelderPanel.validate(sokerPersonnummer, values);
+AnnenForelderPapirsoknadIndex.validate = (sokerPersonnummer, values) => AnnenForelderPanel.validate
+  && AnnenForelderPanel.validate(sokerPersonnummer, values);
 
 export default AnnenForelderPapirsoknadIndex;

@@ -18,8 +18,8 @@ const HookWrapper: FunctionComponent<{ hook: () => any }> = ({
 // @ts-ignore
 }) => <div hook={hook()} />;
 
-let realUseContext;
-let useContextMock;
+let realUseContext: any;
+let useContextMock: any;
 
 const fagsak = {
   saksnummer: '1234',
