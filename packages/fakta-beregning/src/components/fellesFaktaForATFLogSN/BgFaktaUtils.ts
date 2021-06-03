@@ -25,6 +25,7 @@ import { besteberegningField } from './besteberegningFodendeKvinne/VurderBestebe
 import { MANUELL_OVERSTYRING_BEREGNINGSGRUNNLAG_FIELD } from './InntektstabellPanel';
 import AndelFieldValue, { AndelFieldIdentifikator } from '../../typer/FieldValues';
 import { createVisningsnavnFakta } from '../ArbeidsforholdHelper';
+import {GenerellAndelInfo} from "../../typer/FaktaBeregningTypes";
 
 export const INNTEKT_FIELD_ARRAY_NAME = 'inntektFieldArray';
 
@@ -53,7 +54,7 @@ const lagVisningsnavn = (andel: AndelForFaktaOmBeregning,
 
 export const setGenerellAndelsinfo = (andel: AndelForFaktaOmBeregning,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  alleKodeverk: AlleKodeverk) => ({
+  alleKodeverk: AlleKodeverk): GenerellAndelInfo => ({
   andel: lagVisningsnavn(andel, arbeidsgiverOpplysningerPerId, alleKodeverk),
   aktivitetStatus: andel.aktivitetStatus.kode,
   andelsnr: andel.andelsnr,

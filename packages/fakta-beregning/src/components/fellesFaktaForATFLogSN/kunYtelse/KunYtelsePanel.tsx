@@ -12,6 +12,7 @@ import { BrukersAndelFieldArrayImpl } from './BrukersAndelFieldArray';
 import KunYtelseBesteberegningPanel from './KunYtelseBesteberegningPanel';
 import KunYtelseUtenBesteberegningPanel from './KunYtelseUtenBesteberegningPanel';
 import { setGenerellAndelsinfo } from '../BgFaktaUtils';
+import { KunYtelseValues } from '../../../typer/FaktaBeregningTypes';
 
 export const brukersAndelFieldArrayName = 'brukersAndelBG';
 
@@ -76,19 +77,20 @@ KunYtelsePanel.defaultProps = {
 KunYtelsePanel.buildInitialValues = (kunYtelse,
   faktaOmBeregningAndeler,
   arbeidsgiverOpplysningerPerId,
-  alleKodeverk) => {
+  alleKodeverk): KunYtelseValues => {
   if (!kunYtelse || !kunYtelse.andeler || kunYtelse.andeler.length === 0) {
     return {};
   }
+  const kunYtelseValues = kunYtelse.andeler.map((andel) => {
+    const andelMedInfo = faktaOmBeregningAndeler.find((faktaAndel) => faktaAndel.andelsnr === andel.andelsnr);
+    return ({
+      ...setGenerellAndelsinfo(andelMedInfo, arbeidsgiverOpplysningerPerId, alleKodeverk),
+      fastsattBelop: andel.fastsattBelopPrMnd || andel.fastsattBelopPrMnd === 0
+        ? formatCurrencyNoKr(andel.fastsattBelopPrMnd) : '',
+    });
+  });
   const initialValues = {
-    [brukersAndelFieldArrayName]: kunYtelse.andeler.map((andel) => {
-      const andelMedInfo = faktaOmBeregningAndeler.find((faktaAndel) => faktaAndel.andelsnr === andel.andelsnr);
-      return ({
-        ...setGenerellAndelsinfo(andelMedInfo, arbeidsgiverOpplysningerPerId, alleKodeverk),
-        fastsattBelop: andel.fastsattBelopPrMnd || andel.fastsattBelopPrMnd === 0
-          ? formatCurrencyNoKr(andel.fastsattBelopPrMnd) : '',
-      });
-    }),
+    [brukersAndelFieldArrayName]: kunYtelseValues,
   };
   if (kunYtelse.fodendeKvinneMedDP) {
     return {

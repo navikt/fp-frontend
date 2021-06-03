@@ -8,6 +8,7 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import { Beregningsgrunnlag, FaktaOmBeregning } from '@fpsak-frontend/types';
 import { InntektTransformed } from '../../../../typer/FieldValues';
+import {NyoppstartetFLValues} from "../../../../typer/FaktaBeregningTypes";
 
 /**
  * NyOppstartetFLForm
@@ -26,7 +27,7 @@ type OwnProps = {
 };
 
 interface StaticFunctions {
-  buildInitialValues: (beregningsgrunnlag: Beregningsgrunnlag) => any;
+  buildInitialValues: (beregningsgrunnlag: Beregningsgrunnlag) => NyoppstartetFLValues;
   transformValues: (values: any, inntektPrMnd: InntektTransformed[], faktaOmBeregning: FaktaOmBeregning, fastsatteAndelsnr: number[]) => any;
 }
 
@@ -48,7 +49,7 @@ const NyoppstartetFLForm: FunctionComponent<OwnProps> & StaticFunctions = ({ rea
   </div>
 );
 
-NyoppstartetFLForm.buildInitialValues = (beregningsgrunnlag) => {
+NyoppstartetFLForm.buildInitialValues = (beregningsgrunnlag: Beregningsgrunnlag): NyoppstartetFLValues => {
   const initialValues = {};
   if (beregningsgrunnlag === undefined || beregningsgrunnlag.beregningsgrunnlagPeriode === undefined) {
     return initialValues;

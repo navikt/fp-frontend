@@ -22,6 +22,7 @@ import FaktaForATFLOgSNPanel, {
 import { erAvklartAktivitetEndret } from '../avklareAktiviteter/AvklareAktiviteterPanel';
 import { formNameVurderFaktaBeregning } from '../BeregningFormUtils';
 import { erOverstyring, erOverstyringAvBeregningsgrunnlag } from './BgFaktaUtils';
+import any = jasmine.any;
 
 const {
   VURDER_FAKTA_FOR_ATFL_SN,
@@ -41,7 +42,7 @@ const findAksjonspunktMedBegrunnelse = (aksjonspunkter: Aksjonspunkt[]): Aksjons
 
 export const BEGRUNNELSE_FAKTA_TILFELLER_NAME = 'begrunnelseFaktaTilfeller';
 
-export const harIkkeEndringerIAvklarMedFlereAksjonspunkter = (verdiForAvklarAktivitetErEndret: any, aksjonspunkter: Aksjonspunkt[]): boolean => {
+export const harIkkeEndringerIAvklarMedFlereAksjonspunkter = (verdiForAvklarAktivitetErEndret: boolean, aksjonspunkter: Aksjonspunkt[]): boolean => {
   if ((hasAksjonspunkt(VURDER_FAKTA_FOR_ATFL_SN, aksjonspunkter) || hasAksjonspunkt(OVERSTYRING_AV_BEREGNINGSGRUNNLAG, aksjonspunkter))) {
     return !verdiForAvklarAktivitetErEndret;
   }
@@ -182,7 +183,7 @@ export const transformValuesVurderFaktaBeregning = (values) => {
 
 export const buildInitialValuesVurderFaktaBeregning = createSelector(
   [(state, ownProps) => ownProps.aksjonspunkter, getBuildInitialValuesFaktaForATFLOgSN],
-  (aksjonspunkter, buildInitialValuesTilfeller) => ({
+  (aksjonspunkter: Aksjonspunkt[], buildInitialValuesTilfeller): any => ({
     aksjonspunkter,
     ...FaktaBegrunnelseTextField.buildInitialValues(findAksjonspunktMedBegrunnelse(aksjonspunkter), BEGRUNNELSE_FAKTA_TILFELLER_NAME),
     ...buildInitialValuesTilfeller(),

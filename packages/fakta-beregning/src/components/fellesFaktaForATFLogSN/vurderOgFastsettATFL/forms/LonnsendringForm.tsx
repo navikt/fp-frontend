@@ -6,7 +6,8 @@ import { required } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import { Beregningsgrunnlag, FaktaOmBeregning } from '@fpsak-frontend/types';
+import {Beregningsgrunnlag, BeregningsgrunnlagAndel, FaktaOmBeregning} from '@fpsak-frontend/types';
+import { LønnsendringValues } from '../../../../typer/FaktaBeregningTypes';
 
 /**
  * LonnsendringForm
@@ -25,7 +26,7 @@ type OwnProps = {
 };
 
 interface StaticFunctions {
-  buildInitialValues: (beregningsgrunnlag: Beregningsgrunnlag) => any;
+  buildInitialValues: (beregningsgrunnlag: Beregningsgrunnlag) => LønnsendringValues;
   transformValues: (values: any, faktaOmBeregning: FaktaOmBeregning) => any;
 }
 
@@ -47,14 +48,14 @@ const LonnsendringForm: FunctionComponent<OwnProps> & StaticFunctions = ({ readO
   </div>
 );
 
-const buildInitialLonnsendring = (alleATAndeler) => {
+const buildInitialLonnsendring = (alleATAndeler: BeregningsgrunnlagAndel[]): boolean | undefined => {
   const harSattLonnsendringTilTrue = alleATAndeler.find((andel) => andel.lonnsendringIBeregningsperioden === true) !== undefined;
   const harSattLonnsendringTilFalse = alleATAndeler.find((andel) => andel.lonnsendringIBeregningsperioden === false) !== undefined;
   return harSattLonnsendringTilTrue || (harSattLonnsendringTilFalse ? false : undefined);
 };
 
-LonnsendringForm.buildInitialValues = (beregningsgrunnlag) => {
-  let initialValues = {};
+LonnsendringForm.buildInitialValues = (beregningsgrunnlag: Beregningsgrunnlag): LønnsendringValues => {
+  const initialValues = {};
   if (!beregningsgrunnlag || !beregningsgrunnlag.beregningsgrunnlagPeriode) {
     return initialValues;
   }
@@ -66,9 +67,7 @@ LonnsendringForm.buildInitialValues = (beregningsgrunnlag) => {
   if (!alleATAndeler || alleATAndeler.length < 1) {
     return initialValues;
   }
-  initialValues = {
-    lonnsendringField: buildInitialLonnsendring(alleATAndeler),
-  };
+  initialValues[lonnsendringField] = buildInitialLonnsendring(alleATAndeler);
   return initialValues;
 };
 

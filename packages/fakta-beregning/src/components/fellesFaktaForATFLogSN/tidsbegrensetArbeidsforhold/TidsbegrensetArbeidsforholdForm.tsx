@@ -13,6 +13,7 @@ import {
   KortvarigAndel,
 } from '@fpsak-frontend/types';
 import { createVisningsnavnFakta } from '../../ArbeidsforholdHelper';
+import { TidsbegrensetandelValues } from '../../../typer/FaktaBeregningTypes';
 
 const kortvarigStringId = 'BeregningInfoPanel.TidsbegrensetArbFor.Arbeidsforhold';
 
@@ -35,7 +36,7 @@ type OwnProps = {
 
 interface StaticFunctions {
   transformValues: (values: any, andeler: KortvarigAndel[]) => any;
-  buildInitialValues: (andeler: KortvarigAndel[]) => any;
+  buildInitialValues: (andeler: KortvarigAndel[]) => TidsbegrensetandelValues;
 }
 
 /**
@@ -65,7 +66,7 @@ export const TidsbegrensetArbeidsforholdForm: FunctionComponent<OwnProps> & Stat
           </Normaltekst>
           <VerticalSpacer eightPx />
           <RadioGroupField
-            name={createArbeidsforholdRadioKey(andel)}
+            name={`tidsbegrensetValues.${createArbeidsforholdRadioKey(andel)}`}
             validate={[required]}
             readOnly={readOnly}
             isEdited={isAksjonspunktClosed}
@@ -79,7 +80,7 @@ export const TidsbegrensetArbeidsforholdForm: FunctionComponent<OwnProps> & Stat
   );
 };
 
-TidsbegrensetArbeidsforholdForm.buildInitialValues = (andeler) => {
+TidsbegrensetArbeidsforholdForm.buildInitialValues = (andeler: KortvarigAndel[]): TidsbegrensetandelValues => {
   const initialValues = {};
   if (!andeler) {
     return initialValues;
