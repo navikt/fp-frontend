@@ -16,6 +16,7 @@ import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src
 
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import styles from './InntektstabellPanel.less';
+import {ErOverstyringValues} from "../../typer/FaktaBeregningTypes";
 
 export const MANUELL_OVERSTYRING_BEREGNINGSGRUNNLAG_FIELD = 'manuellOverstyringRapportertInntekt';
 
@@ -39,7 +40,7 @@ interface DispatchProps {
   reduxFormChange: (form: string, field: string, value: any, touch?: boolean, persistentSubmitErrors?: boolean) => FormAction;
 }
 interface StaticFunctions {
-  buildInitialValues: (erOverstyrt: boolean) => any;
+  buildInitialValues: (erOverstyrt: boolean) => ErOverstyringValues;
 }
 
 /**
@@ -109,7 +110,7 @@ export const InntektstabellPanelImpl: FunctionComponent<OwnProps & DispatchProps
   );
 };
 
-InntektstabellPanelImpl.buildInitialValues = (erOverstyrt) => ({
+InntektstabellPanelImpl.buildInitialValues = (erOverstyrt: boolean): ErOverstyringValues => ({
   // I revurderinger kopieres det ikke med aksjonspunkt, og derfor er det ikke nok å kun se på aksjonspunkt her
   [MANUELL_OVERSTYRING_BEREGNINGSGRUNNLAG_FIELD]: erOverstyrt,
 });

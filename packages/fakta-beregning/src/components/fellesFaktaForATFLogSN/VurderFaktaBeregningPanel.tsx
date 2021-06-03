@@ -23,6 +23,9 @@ import { erAvklartAktivitetEndret } from '../avklareAktiviteter/AvklareAktivitet
 import { formNameVurderFaktaBeregning } from '../BeregningFormUtils';
 import { erOverstyring, erOverstyringAvBeregningsgrunnlag } from './BgFaktaUtils';
 import any = jasmine.any;
+import {FaktaOmBeregningAksjonspunktValues, FaktaOmBeregningValues} from "../../typer/FaktaBeregningTypes";
+import AvklarAktiviteterValues from "../../typer/AvklarAktivitetTypes";
+import OmsorgFaktaForm from "@fpsak-frontend/fakta-omsorg/src/components/OmsorgFaktaForm";
 
 const {
   VURDER_FAKTA_FOR_ATFL_SN,
@@ -66,7 +69,6 @@ const hasOpenAksjonspunkt = (kode: string, aksjonspunkter: Aksjonspunkt[]): bool
 
 type OwnProps = {
     readOnly: boolean;
-    hasBegrunnelse: boolean;
     submittable: boolean;
     verdiForAvklarAktivitetErEndret: boolean;
     erOverstyrt: boolean;
@@ -78,6 +80,15 @@ type OwnProps = {
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
+type MappedOwnProps = {
+  initialValues: FaktaOmBeregningAksjonspunktValues;
+  validate: (formValues: FaktaOmBeregningAksjonspunktValues) => any;
+  onSubmit: (formValues: FaktaOmBeregningAksjonspunktValues) => void;
+  verdiForAvklarAktivitetErEndret: boolean,
+  erOverstyrt: boolean,
+  hasBegrunnelse: boolean,
+}
+
 type OwnState = {
   submitEnabled: boolean;
 }
@@ -87,8 +98,8 @@ type OwnState = {
  *
  * Container komponent.. Inneholder begrunnelsefelt og komponent som innholder panelene for fakta om beregning tilfeller
  */
-export class VurderFaktaBeregningPanelImpl extends Component<OwnProps & InjectedFormProps, OwnState> {
-  constructor(props: OwnProps & InjectedFormProps) {
+export class VurderFaktaBeregningPanelImpl extends Component<OwnProps & InjectedFormProps & MappedOwnProps, OwnState> {
+  constructor(props: OwnProps & MappedOwnProps & InjectedFormProps) {
     super(props);
     this.state = {
       submitEnabled: false,
@@ -182,8 +193,8 @@ export const transformValuesVurderFaktaBeregning = (values) => {
 };
 
 export const buildInitialValuesVurderFaktaBeregning = createSelector(
-  [(state, ownProps) => ownProps.aksjonspunkter, getBuildInitialValuesFaktaForATFLOgSN],
-  (aksjonspunkter: Aksjonspunkt[], buildInitialValuesTilfeller): any => ({
+  [(state: any, ownProps: any) => ownProps.aksjonspunkter, getBuildInitialValuesFaktaForATFLOgSN],
+  (aksjonspunkter: Aksjonspunkt[], buildInitialValuesTilfeller: () => FaktaOmBeregningValues): FaktaOmBeregningAksjonspunktValues => ({
     aksjonspunkter,
     ...FaktaBegrunnelseTextField.buildInitialValues(findAksjonspunktMedBegrunnelse(aksjonspunkter), BEGRUNNELSE_FAKTA_TILFELLER_NAME),
     ...buildInitialValuesTilfeller(),
@@ -206,7 +217,7 @@ const lagSubmitFn = createSelector([
 
 const mapStateToPropsFactory = () => {
   const validate = (values) => validateVurderFaktaBeregning(values);
-  return (state, ownProps) => {
+  return (state: any, ownProps: OwnProps): MappedOwnProps => {
     const initialValues = buildInitialValuesVurderFaktaBeregning(state, ownProps);
     return ({
       initialValues,

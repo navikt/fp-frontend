@@ -10,11 +10,12 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { LINK_TIL_BESTE_BEREGNING_REGNEARK } from '@fpsak-frontend/konstanter';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
-import { FaktaOmBeregning } from '@fpsak-frontend/types';
+import { Aksjonspunkt, FaktaOmBeregning, VurderBesteberegning } from '@fpsak-frontend/types';
 import { getFormValuesForBeregning } from '../../BeregningFormUtils';
 
 import styles from '../kunYtelse/kunYtelseBesteberegningPanel.less';
 import InntektPrAndelProp from '../inntektPrAndelProp';
+import { VurderBesteberegningValues } from '../../../typer/FaktaBeregningTypes';
 
 export const besteberegningField = 'vurderbesteberegningField';
 
@@ -29,9 +30,12 @@ type OwnProps = {
 };
 
 interface StaticFunctions {
-  buildInitialValues?: (aksjonspunkter, vurderBesteberegning, faktaOmBeregningTilfeller, erOverstyrt) => any;
-  transformValues?: (values: any, faktaOmBeregning: FaktaOmBeregning, inntektPrAndel: InntektPrAndelProp[]) => any;
-  validate?: (values: any, aktivertePaneler: string[]) => any;
+  buildInitialValues: (aksjonspunkter: Aksjonspunkt[],
+                        vurderBesteberegning: VurderBesteberegning,
+                        faktaOmBeregningTilfeller: string[],
+                        erOverstyrt: boolean) => VurderBesteberegningValues;
+  transformValues: (values: any, faktaOmBeregning: FaktaOmBeregning, inntektPrAndel: InntektPrAndelProp[]) => any;
+  validate: (values: any, aktivertePaneler: string[]) => any;
 }
 
 /**
@@ -72,7 +76,10 @@ const VurderBesteberegningPanelImpl: FunctionComponent<OwnProps> & StaticFunctio
   </div>
 );
 
-VurderBesteberegningPanelImpl.buildInitialValues = (aksjonspunkter, vurderBesteberegning, faktaOmBeregningTilfeller, erOverstyrt) => {
+VurderBesteberegningPanelImpl.buildInitialValues = (aksjonspunkter: Aksjonspunkt[],
+  vurderBesteberegning: VurderBesteberegning,
+  faktaOmBeregningTilfeller: string[],
+  erOverstyrt: boolean): VurderBesteberegningValues => {
   if (!(faktaOmBeregningTilfeller.includes(faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING)
     || faktaOmBeregningTilfeller.includes(faktaOmBeregningTilfelle.FASTSETT_BESTEBEREGNING_FODENDE_KVINNE))) {
     return {};

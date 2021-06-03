@@ -24,7 +24,7 @@ import VurderMottarYtelseForm from './vurderOgFastsettATFL/forms/VurderMottarYte
 import VurderBesteberegningForm from './besteberegningFodendeKvinne/VurderBesteberegningForm';
 import VurderRefusjonForm from './vurderrefusjon/VurderRefusjonForm';
 import { erInitialOverstyringAvBeregningsgrunnlag } from './BgFaktaUtils';
-import {FaktaStateProps, TilfellerValues} from "../../typer/FaktaBeregningTypes";
+import {FaktaOmBeregningValues, FaktaStateProps, TilfellerValues} from '../../typer/FaktaBeregningTypes';
 
 const {
   VURDER_FAKTA_FOR_ATFL_SN,
@@ -323,27 +323,23 @@ export const transformValuesFaktaForATFLOgSN = (values, erOverstyrt) => {
 const getVurderFaktaAksjonspunkt = createSelector([(ownProps: OwnProps) => ownProps.aksjonspunkter], (aksjonspunkter) => (aksjonspunkter
   ? aksjonspunkter.find((ap) => ap.definisjon.kode === VURDER_FAKTA_FOR_ATFL_SN) : undefined));
 
-const buildInitialValuesForTilfeller = (props: FaktaStateProps): TilfellerValues => {
-  return {
-    tidsbegrensetValues: TidsbegrensetArbeidsforholdForm.buildInitialValues(props.kortvarigeArbeidsforhold),
-    ...VurderMilitaer.buildInitialValues(props.faktaOmBeregning),
-    ...NyIArbeidslivetSNForm.buildInitialValues(props.beregningsgrunnlag),
-    ...LonnsendringForm.buildInitialValues(props.beregningsgrunnlag),
-    ...NyoppstartetFLForm.buildInitialValues(props.beregningsgrunnlag),
-  };
-  ({
-    ...buildInitialValuesKunYtelse(props.kunYtelse,
-      props.tilfeller,
-      props.faktaOmBeregning.andelerForFaktaOmBeregning,
-      props.arbeidsgiverOpplysningerPerId,
-      props.alleKodeverk),
-    ...VurderEtterlonnSluttpakkeForm.buildInitialValues(props.beregningsgrunnlag, props.vurderFaktaAP),
-    ...VurderMottarYtelseForm.buildInitialValues(props.vurderMottarYtelse),
-    ...VurderBesteberegningForm.buildInitialValues(props.aksjonspunkter, props.vurderBesteberegning, props.tilfeller, props.erOverstyrt),
-    ...VurderOgFastsettATFL.buildInitialValues(props.faktaOmBeregning, props.erOverstyrt, props.arbeidsgiverOpplysningerPerId, props.alleKodeverk),
-    ...VurderRefusjonForm.buildInitialValues(props.tilfeller, props.refusjonskravSomKommerForSentListe),
-  });
-}
+const buildInitialValuesForTilfeller = (props: FaktaStateProps): TilfellerValues => ({
+  tidsbegrensetValues: TidsbegrensetArbeidsforholdForm.buildInitialValues(props.kortvarigeArbeidsforhold),
+  vurderMottarYtelseValues: VurderMottarYtelseForm.buildInitialValues(props.vurderMottarYtelse),
+  vurderRefusjonValues: VurderRefusjonForm.buildInitialValues(props.tilfeller, props.refusjonskravSomKommerForSentListe),
+  ...VurderMilitaer.buildInitialValues(props.faktaOmBeregning),
+  ...NyIArbeidslivetSNForm.buildInitialValues(props.beregningsgrunnlag),
+  ...LonnsendringForm.buildInitialValues(props.beregningsgrunnlag),
+  ...NyoppstartetFLForm.buildInitialValues(props.beregningsgrunnlag),
+  ...VurderEtterlonnSluttpakkeForm.buildInitialValues(props.beregningsgrunnlag, props.vurderFaktaAP),
+  ...VurderBesteberegningForm.buildInitialValues(props.aksjonspunkter, props.vurderBesteberegning, props.tilfeller, props.erOverstyrt),
+  ...VurderOgFastsettATFL.buildInitialValues(props.faktaOmBeregning, props.erOverstyrt, props.arbeidsgiverOpplysningerPerId, props.alleKodeverk),
+  ...buildInitialValuesKunYtelse(props.kunYtelse,
+    props.tilfeller,
+    props.faktaOmBeregning.andelerForFaktaOmBeregning,
+    props.arbeidsgiverOpplysningerPerId,
+    props.alleKodeverk),
+});
 
 const mapStateToBuildInitialValuesProps = createStructuredSelector({
   beregningsgrunnlag: (state, ownProps: OwnProps) => ownProps.beregningsgrunnlag,
@@ -362,7 +358,7 @@ const mapStateToBuildInitialValuesProps = createStructuredSelector({
 });
 
 export const getBuildInitialValuesFaktaForATFLOgSN = createSelector(
-  [mapStateToBuildInitialValuesProps], (props: FaktaStateProps): any => () => ({
+  [mapStateToBuildInitialValuesProps], (props: FaktaStateProps) => (): FaktaOmBeregningValues => ({
     tilfeller: props.tilfeller,
     kortvarigeArbeidsforhold: props.kortvarigeArbeidsforhold,
     faktaOmBeregning: props.faktaOmBeregning,

@@ -189,7 +189,7 @@ interface StaticFunctions {
              skalFastsetteInntekt: (andel) => boolean) => any;
   buildInitialValues: (andeler: AndelForFaktaOmBeregning[],
                        arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-                       alleKodeverk: AlleKodeverk) => any;
+                       alleKodeverk: AlleKodeverk) => AndelFieldValue[];
   transformValues: (values: any) => InntektTransformed;
 }
 
@@ -304,9 +304,9 @@ InntektFieldArray.validate = (values: AndelFieldValue[], erKunYtelse, skalFastse
 
 InntektFieldArray.buildInitialValues = (andeler: AndelForFaktaOmBeregning[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  alleKodeverk: AlleKodeverk) => {
+  alleKodeverk: AlleKodeverk): AndelFieldValue[] => {
   if (!andeler || andeler.length === 0) {
-    return {};
+    return [];
   }
   return andeler.map((a) => mapAndelToField(a, arbeidsgiverOpplysningerPerId, alleKodeverk));
 };

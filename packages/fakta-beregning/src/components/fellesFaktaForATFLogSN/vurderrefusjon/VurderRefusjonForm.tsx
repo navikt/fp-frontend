@@ -5,6 +5,7 @@ import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import { FaktaOmBeregning, RefusjonskravSomKommerForSentListe } from '@fpsak-frontend/types';
+import {VurderRefusjonValues} from "../../../typer/FaktaBeregningTypes";
 
 const {
   VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT,
@@ -27,7 +28,7 @@ const lagRefusjonskravRadios = (senRefusjonkravListe, readOnly, isAksjonspunktCl
       />
       <VerticalSpacer eightPx />
       <RadioGroupField
-        name={lagFieldName(arbeidsgiverId)}
+        name={`vurderRefusjonValues.${lagFieldName(arbeidsgiverId)}`}
         validate={[required]}
         readOnly={readOnly}
         isEdited={isAksjonspunktClosed}
@@ -47,7 +48,7 @@ type OwnProps = {
 
 interface StaticFunctions {
   transformValues: (arbeidsgiverListe: RefusjonskravSomKommerForSentListe[]) => any;
-  buildInitialValues: (tilfeller: string[], arbeidsgiverListe: RefusjonskravSomKommerForSentListe[]) => any;
+  buildInitialValues: (tilfeller: string[], arbeidsgiverListe: RefusjonskravSomKommerForSentListe[]) => VurderRefusjonValues;
 }
 
 /**
@@ -67,12 +68,12 @@ VurderRefusjonForm.transformValues = (arbeidsgiverListe) => (values) => {
   return {
     refusjonskravGyldighet: arbeidsgiverListe.map(({ arbeidsgiverId }) => ({
       arbeidsgiverId,
-      skalUtvideGyldighet: values[lagFieldName(arbeidsgiverId)],
+      skalUtvideGyldighet: values.vurderRefusjonValues[lagFieldName(arbeidsgiverId)],
     })),
   };
 };
 
-VurderRefusjonForm.buildInitialValues = (tilfeller, arbeidsgiverListe) => {
+VurderRefusjonForm.buildInitialValues = (tilfeller, arbeidsgiverListe): VurderRefusjonValues => {
   const initialValues = {};
   if (!tilfeller.includes(VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT) || arbeidsgiverListe.length === 0) {
     return initialValues;

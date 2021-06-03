@@ -22,6 +22,7 @@ import {
 } from './VurderMottarYtelseUtils';
 import { createVisningsnavnFakta } from '../../../ArbeidsforholdHelper';
 import { InntektTransformed } from '../../../../typer/FieldValues';
+import {VurderMottarYtelseValues} from "../../../../typer/FaktaBeregningTypes";
 
 const andreFrilansTilfeller = [faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL, faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON];
 
@@ -55,7 +56,7 @@ const mottarYtelseArbeidsforholdRadio = (andel: ArbeidstakerUtenIMAndel,
       </div>
       <VerticalSpacer eightPx />
       <RadioGroupField
-        name={utledArbeidsforholdFieldName(andel)}
+        name={`vurderMottarYtelseValues.${utledArbeidsforholdFieldName(andel)}`}
         readOnly={readOnly}
         isEdited={isAksjonspunktClosed}
       >
@@ -91,7 +92,7 @@ interface StaticFunctions {
                     faktaOmBeregning: FaktaOmBeregning,
                     beregningsgrunnlag: Beregningsgrunnlag,
                     fastsatteAndelsnr: number[]) => any;
-  buildInitialValues: (vurderMottarYtelse: VurderMottarYtelse) => any;
+  buildInitialValues: (vurderMottarYtelse: VurderMottarYtelse) => VurderMottarYtelseValues;
 }
 
 /**
@@ -195,13 +196,13 @@ const transformValuesMottarYtelse = (values, faktaOmBeregning, faktaOmBeregningT
       frilansMottarYtelse: values[finnFrilansFieldName()],
       arbeidstakerUtenIMMottarYtelse: ATAndelerUtenIM.map((andel) => ({
         andelsnr: andel.andelsnr,
-        mottarYtelse: values[utledArbeidsforholdFieldName(andel)],
+        mottarYtelse: values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel)],
       })),
     },
   };
 };
 
-VurderMottarYtelseForm.buildInitialValues = (vurderMottarYtelse) => {
+VurderMottarYtelseForm.buildInitialValues = (vurderMottarYtelse: VurderMottarYtelse): VurderMottarYtelseValues => {
   const initialValues = {};
   if (!vurderMottarYtelse) {
     return null;
@@ -244,7 +245,7 @@ VurderMottarYtelseForm.validate = (values, vurderMottarYtelse) => {
   }
   const ATAndelerUtenIM = vurderMottarYtelse.arbeidstakerAndelerUtenIM ? vurderMottarYtelse.arbeidstakerAndelerUtenIM : [];
   ATAndelerUtenIM.forEach((andel) => {
-    errors[utledArbeidsforholdFieldName(andel)] = required(values[utledArbeidsforholdFieldName(andel)]);
+    errors[utledArbeidsforholdFieldName(andel)] = required(values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel)]);
   });
   return errors;
 };

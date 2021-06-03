@@ -28,7 +28,7 @@ interface StaticFunctions {
   buildInitialValues: (kunYtelse: KunYtelse,
                        faktaOmBeregningAndeler: AndelForFaktaOmBeregning[],
                        arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-                       alleKodeverk: AlleKodeverk) => any;
+                       alleKodeverk: AlleKodeverk) => KunYtelseValues;
   summerFordeling: (values: any) => number;
   transformValues: (values: any, kunYtelse: KunYtelse) => any;
   validate: (values: any, aktivertePaneler: string[], kunYtelse: KunYtelse) => any;

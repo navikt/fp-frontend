@@ -28,6 +28,7 @@ import {
 import VurderBesteberegningForm, { besteberegningField, vurderBesteberegningTransform } from '../besteberegningFodendeKvinne/VurderBesteberegningForm';
 import InntektFieldArray, { InntektFieldArray as InntektFieldArrayImpl } from '../InntektFieldArray';
 import VurderEtterlonnSluttpakkeForm from './forms/VurderEtterlonnSluttpakkeForm';
+import {VurderOgFastsettATFLValues} from "../../../typer/FaktaBeregningTypes";
 
 const lonnsendringErVurdertEllerIkkjeTilstede = (tilfeller, values) => (
   !tilfeller.includes(faktaOmBeregningTilfelle.VURDER_LONNSENDRING)
@@ -113,7 +114,7 @@ interface StaticFunctions {
   buildInitialValues: (faktaOmBeregning: FaktaOmBeregning,
                        erOverstyrt: boolean,
                        arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-                       alleKodeverk: AlleKodeverk) => any;
+                       alleKodeverk: AlleKodeverk) => VurderOgFastsettATFLValues;
   validate: (values: any, tilfeller: string[], faktaOmBeregning: FaktaOmBeregning, beregningsgrunnlag: Beregningsgrunnlag) => any;
   transformValues: (faktaOmBeregning: FaktaOmBeregning, beregningsgrunnlag: Beregningsgrunnlag) => any;
 }
@@ -210,7 +211,7 @@ const VurderOgFastsettATFL: FunctionComponent<OwnProps> & StaticFunctions = ({
 VurderOgFastsettATFL.buildInitialValues = (faktaOmBeregning: FaktaOmBeregning,
   erOverstyrt: boolean,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  alleKodeverk: AlleKodeverk) => {
+  alleKodeverk: AlleKodeverk): VurderOgFastsettATFLValues => {
   if (!faktaOmBeregning) {
     return {};
   }

@@ -5,6 +5,7 @@ import {
   KunYtelse, RefusjonskravSomKommerForSentListe, VurderBesteberegning,
   VurderMottarYtelse,
 } from '@fpsak-frontend/types';
+import AndelFieldValue from "./FieldValues";
 
 export type TidsbegrensetandelValues = {
   [key: string]: boolean;
@@ -25,8 +26,24 @@ export type LønnsendringValues = {
 export type NyoppstartetFLValues = {
   NyoppstartetFLField?: boolean
 }
-export type VurderBesteberegningValues = {
+export type VurderBesteberegningMedKunYtelseValues = {
   besteberegningField: boolean;
+}
+
+export type VurderBesteberegningValues = {
+  vurderbesteberegningField?: boolean;
+}
+
+export type VurderEtterlønnSluttpakkeValues = {
+  vurderEtterlønnSluttpakke?: boolean;
+}
+
+export type ErOverstyringValues = {
+  manuellOverstyringRapportertInntekt?: boolean;
+}
+
+export type VurderOgFastsettATFLValues = ErOverstyringValues & {
+  inntektFieldArray?: AndelFieldValue[];
 }
 
 export type GenerellAndelInfo = {
@@ -38,16 +55,42 @@ export type GenerellAndelInfo = {
   lagtTilAvSaksbehandler: boolean;
 }
 
-export type KunYtelseValues = VurderBesteberegningValues | {
-  besteberegningField?: boolean;
-  brukersAndelBG?: GenerellAndelInfo & {
-    fastsattBelop: string;
-  }
+export type BrukersAndelValues = GenerellAndelInfo & {
+  fastsattBelop: string;
+}
+
+export type KunYtelseValues = VurderBesteberegningMedKunYtelseValues | {
+  brukersAndelBG?: BrukersAndelValues[];
+}
+
+export type VurderMottarYtelseValues = {
+  [key: string]: boolean;
+}
+
+export type VurderRefusjonValues = {
+  [key: string]: boolean;
 }
 
 export type TilfellerValues = VurderMilitærValues | NyIArbeidslivetValues
-  | LønnsendringValues | NyoppstartetFLValues | {
+  | LønnsendringValues | NyoppstartetFLValues | KunYtelseValues |
+  VurderEtterlønnSluttpakkeValues | VurderBesteberegningValues | VurderOgFastsettATFLValues |{
   tidsbegrensetValues?: TidsbegrensetandelValues;
+  vurderMottarYtelseValues?: VurderMottarYtelseValues;
+  vurderRefusjonValues?: VurderRefusjonValues;
+}
+
+export type FaktaOmBeregningValues = TilfellerValues & {
+  tilfeller: string[];
+  kortvarigeArbeidsforhold: KortvarigAndel[];
+  faktaOmBeregning: FaktaOmBeregning;
+  beregningsgrunnlag: Beregningsgrunnlag;
+  vurderMottarYtelse: VurderMottarYtelse;
+  kunYtelse: KunYtelse;
+}
+
+export type FaktaOmBeregningAksjonspunktValues = FaktaOmBeregningValues & {
+  aksjonspunkter: Aksjonspunkt[];
+  begrunnelseFaktaTilfeller?: string;
 }
 
 export type FaktaStateProps = {
