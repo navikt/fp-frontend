@@ -123,7 +123,7 @@ const buildInitialValuesSelector = createSelector([(ownProps: PureOwnProps) => o
   return buildInitialValues(soknadData);
 });
 
-const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {
+const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
   const sokerPersonnummer = ownProps.fagsakPersonnummer;
   const validate = getValidation(ownProps.soknadData, sokerPersonnummer);
   return (state: any): MappedOwnProps => {

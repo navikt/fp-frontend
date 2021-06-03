@@ -14,7 +14,7 @@ interface OwnProps {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: () => FormValues;
+  buildInitialValues: () => FormValues;
   validate: (values: FormValues) => any;
 }
 
@@ -30,8 +30,8 @@ const FrilansPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = (
   </RawIntlProvider>
 );
 
-FrilansPapirsoknadIndex.buildInitialValues = (): FormValues => FrilansPanel.buildInitialValues();
+FrilansPapirsoknadIndex.buildInitialValues = () => FrilansPanel.buildInitialValues();
 
-FrilansPapirsoknadIndex.validate = (values: FormValues) => FrilansPanel.validate(values);
+FrilansPapirsoknadIndex.validate = (values) => FrilansPanel.validate(values);
 
 export default FrilansPapirsoknadIndex;

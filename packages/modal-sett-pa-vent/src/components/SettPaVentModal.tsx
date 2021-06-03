@@ -25,15 +25,15 @@ const initFrist = (): string => {
   return date.toISOString().substr(0, 10);
 };
 
-const isButtonDisabled = (frist: string, showAvbryt: boolean, venteArsakHasChanged: boolean, fristHasChanged: boolean, hasManualPaVent: boolean): boolean => {
-  const dateNotValid = !!hasValidDate(frist) || !!dateAfterOrEqualToToday(frist);
+const isButtonDisabled = (showAvbryt: boolean, venteArsakHasChanged: boolean, fristHasChanged: boolean, hasManualPaVent: boolean, frist?: string): boolean => {
+  const dateNotValid = (!frist || !!hasValidDate(frist)) || !!dateAfterOrEqualToToday(frist);
   const defaultOptions = (!hasManualPaVent || showAvbryt) && (!venteArsakHasChanged && !fristHasChanged);
   return defaultOptions || dateNotValid;
 };
 
 const hovedKnappenType = (venteArsakHasChanged: boolean, fristHasChanged: boolean): boolean => venteArsakHasChanged || fristHasChanged;
 
-const getPaVentText = (originalVentearsak: string, hasManualPaVent: boolean, frist: string): string => {
+const getPaVentText = (hasManualPaVent: boolean, originalVentearsak?: string, frist?: string): string => {
   if (originalVentearsak) {
     return (hasManualPaVent || frist ? 'SettPaVentModal.ErSettPaVent' : 'SettPaVentModal.ErPaVentUtenFrist');
   }
@@ -137,7 +137,7 @@ export const SettPaVentModal: FunctionComponent<PureOwnProps & MappedOwnProps & 
             <Column xs="7">
               <div className={styles.label}>
                 <Normaltekst className={styles.label}>
-                  <FormattedMessage id={getPaVentText(originalVentearsak, hasManualPaVent, frist)} />
+                  <FormattedMessage id={getPaVentText(hasManualPaVent, originalVentearsak, frist)} />
                 </Normaltekst>
               </div>
             </Column>
@@ -203,7 +203,7 @@ export const SettPaVentModal: FunctionComponent<PureOwnProps & MappedOwnProps & 
                 htmlType={hovedKnappenType(venteArsakHasChanged, fristHasChanged) ? 'submit' : 'button'}
                 className={styles.button}
                 onClick={showAvbryt ? ariaCheck : cancelEvent}
-                disabled={isButtonDisabled(frist, showAvbryt, venteArsakHasChanged, fristHasChanged, hasManualPaVent)}
+                disabled={isButtonDisabled(showAvbryt, venteArsakHasChanged, fristHasChanged, hasManualPaVent, frist)}
               >
                 <FormattedMessage id="SettPaVentModal.Ok" />
               </Hovedknapp>
@@ -230,7 +230,7 @@ const buildInitialValues = (initialProps: PureOwnProps): FormValues => ({
   frist: initialProps.frist || initialProps.hasManualPaVent === false ? initialProps.frist : initFrist(),
 });
 
-const mapStateToProps = (state, initialOwnProps: PureOwnProps): MappedOwnProps => ({
+const mapStateToProps = (state: any, initialOwnProps: PureOwnProps): MappedOwnProps => ({
   initialValues: buildInitialValues(initialOwnProps),
   frist: formValueSelector('settPaVentModalForm')(state, 'frist'),
   ventearsak: formValueSelector('settPaVentModalForm')(state, 'ventearsak'),

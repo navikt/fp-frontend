@@ -8,7 +8,7 @@ import OppholdINorgePapirsoknadIndex, { FormValues as OppholdFormValues } from '
 import TilleggsopplysningerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-tilleggsopplysninger';
 import RettigheterPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-rettigheter';
 import OmsorgOgAdopsjonPapirsoknadIndex, { FormValues as OmsorgOgAdopsjonFormValues } from '@fpsak-frontend/papirsoknad-panel-omsorg-og-adopsjon';
-import AnnenForelderPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-annen-forelder';
+import AnnenForelderPapirsoknadIndex, { AnnenForelderFormValues } from '@fpsak-frontend/papirsoknad-panel-annen-forelder';
 
 const ANNEN_FORELDER_FORM_NAME_PREFIX = 'annenForelder';
 const OMSORG_FORM_NAME_PREFIX = 'omsorg';
@@ -23,12 +23,13 @@ interface OwnProps {
 export type FormValues = {
   rettigheter?: string;
   foedselsDato?: string;
-  omsorg?: Record<string, never> | OmsorgOgAdopsjonFormValues;
+  [OMSORG_FORM_NAME_PREFIX]?: OmsorgOgAdopsjonFormValues;
+  [ANNEN_FORELDER_FORM_NAME_PREFIX]?: AnnenForelderFormValues;
 } & OppholdFormValues;
 
 interface StaticFunctions {
-  buildInitialValues?: () => FormValues;
-  validate?: (values: FormValues, sokerPersonnummer: string, familieHendelseType: string) => any;
+  buildInitialValues: () => FormValues;
+  validate: (values: FormValues, sokerPersonnummer: string, familieHendelseType: string) => any;
 }
 
 /*
@@ -71,14 +72,14 @@ const RegistreringAdopsjonOgOmsorgGrid: FunctionComponent<OwnProps> & StaticFunc
   </Row>
 );
 
-RegistreringAdopsjonOgOmsorgGrid.buildInitialValues = (): FormValues => ({
+RegistreringAdopsjonOgOmsorgGrid.buildInitialValues = () => ({
   [OMSORG_FORM_NAME_PREFIX]: {},
   ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
 });
 
-RegistreringAdopsjonOgOmsorgGrid.validate = (values: FormValues, sokerPersonnummer: string, familieHendelseType: string): any => ({
+RegistreringAdopsjonOgOmsorgGrid.validate = (values, sokerPersonnummer, familieHendelseType): any => ({
   ...OppholdINorgePapirsoknadIndex.validate(values),
-  [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.validate(values[OMSORG_FORM_NAME_PREFIX], values.foedselsDato, familieHendelseType),
+  [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.validate(familieHendelseType, values.foedselsDato, values[OMSORG_FORM_NAME_PREFIX]),
   [ANNEN_FORELDER_FORM_NAME_PREFIX]: AnnenForelderPapirsoknadIndex.validate(sokerPersonnummer, values[ANNEN_FORELDER_FORM_NAME_PREFIX]),
 });
 

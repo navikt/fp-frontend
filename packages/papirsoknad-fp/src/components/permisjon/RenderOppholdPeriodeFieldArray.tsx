@@ -85,9 +85,11 @@ const RenderOppholdPeriodeFieldArray: FunctionComponent<OwnProps & WrappedCompon
                   selectValues={mapTyper(oppholdsReasons)}
                 />
               </FlexColumn>
-              <FlexColumn>
-                {getRemoveButton()}
-              </FlexColumn>
+              {getRemoveButton && (
+                <FlexColumn>
+                  {getRemoveButton()}
+                </FlexColumn>
+              )}
             </FlexRow>
           </FlexContainer>
         </Column>

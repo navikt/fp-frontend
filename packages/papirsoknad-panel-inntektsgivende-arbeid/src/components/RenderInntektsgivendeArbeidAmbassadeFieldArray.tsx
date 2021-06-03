@@ -35,7 +35,7 @@ export type FormValues = {
 }
 
 interface StaticFunctions {
-  validate?: (values: FormValues[]) => any,
+  validate: (values?: FormValues[]) => any,
 }
 
 /**
@@ -87,9 +87,11 @@ export const RenderInntektsgivendeArbeidAmbassadeFieldArray: FunctionComponent<O
                     label={index === 0 ? { id: 'Registrering.InntektsgivendeArbeid.periodeTom' } : ''}
                   />
                 </FlexColumn>
-                <FlexColumn>
-                  {getRemoveButton()}
-                </FlexColumn>
+                {getRemoveButton && (
+                  <FlexColumn>
+                    {getRemoveButton()}
+                  </FlexColumn>
+                )}
               </FlexRow>
             </FlexContainer>
           </Column>
@@ -99,7 +101,7 @@ export const RenderInntektsgivendeArbeidAmbassadeFieldArray: FunctionComponent<O
   );
 };
 
-RenderInntektsgivendeArbeidAmbassadeFieldArray.validate = (values: FormValues[]): any => {
+RenderInntektsgivendeArbeidAmbassadeFieldArray.validate = (values) => {
   if (!values) {
     return null;
   }

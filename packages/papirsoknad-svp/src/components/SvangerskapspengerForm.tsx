@@ -24,7 +24,7 @@ import AndreYtelserPapirsoknadIndex, {
 
 import TerminFodselSvpPanel from './terminOgFodsel/TerminFodselSvpPanel';
 import MigreringFraInfotrygdPanel from './migreringFraInfotrygd/MigreringFraInfotrygdPanel';
-import BehovForTilretteleggingPanel, { FormValues as BehovForTilretteleggingFormValues } from './tilrettelegging/BehovForTilretteleggingPanel';
+import BehovForTilretteleggingPanel, { FormValues as BehovForTilretteleggingFormValues, Tilrettelegging } from './tilrettelegging/BehovForTilretteleggingPanel';
 
 const SVANGERSKAPSPENGER_FORM_NAME = 'SvangerskapspengerForm';
 const TILRETTELEGGING_NAME_PREFIX = 'tilretteleggingArbeidsforhold';
@@ -36,7 +36,7 @@ type FormValues = {
 
 interface PureOwnProps {
   onSubmitUfullstendigsoknad: () => Promise<any>;
-  submitCallback: (_formValues, _dispatch, values: any) => Promise<any>;
+  submitCallback: (_formValues: any, _dispatch: Dispatch, values: any) => Promise<any>;
   readOnly?: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
@@ -70,7 +70,7 @@ export class SvangerskapspengerForm extends React.Component<PureOwnProps & Mappe
       handleSubmit,
       submitting,
       form,
-      readOnly,
+      readOnly = false,
       soknadData,
       onSubmitUfullstendigsoknad,
       alleKodeverk,
@@ -116,9 +116,16 @@ const buildInitialValues = createSelector([(ownProps: { andreYtelser: KodeverkMe
   [TILRETTELEGGING_NAME_PREFIX]: BehovForTilretteleggingPanel.buildInitialValues(),
 }));
 
-const transformTilretteleggingsArbeidsforhold = (tilretteleggingArbeidsforhold: BehovForTilretteleggingFormValues): any => {
-  let transformerteVerdier = [];
-  if (tilretteleggingArbeidsforhold.sokForArbeidsgiver) {
+type TilretteleggingArbeidsforhold = {
+  '@type': string;
+  behovsdato?: string;
+  organisasjonsnummer?: string;
+  tilrettelegginger?: Tilrettelegging[];
+}
+
+const transformTilretteleggingsArbeidsforhold = (tilretteleggingArbeidsforhold?: BehovForTilretteleggingFormValues): TilretteleggingArbeidsforhold[] => {
+  let transformerteVerdier = [] as TilretteleggingArbeidsforhold[];
+  if (tilretteleggingArbeidsforhold?.sokForArbeidsgiver && tilretteleggingArbeidsforhold?.tilretteleggingForArbeidsgiver) {
     transformerteVerdier = transformerteVerdier.concat(tilretteleggingArbeidsforhold.tilretteleggingForArbeidsgiver.map((ta) => ({
       '@type': 'VI',
       behovsdato: ta.behovsdato,
@@ -126,14 +133,14 @@ const transformTilretteleggingsArbeidsforhold = (tilretteleggingArbeidsforhold: 
       tilrettelegginger: ta.tilretteleggingArbeidsgiver,
     })));
   }
-  if (tilretteleggingArbeidsforhold.sokForFrilans) {
+  if (tilretteleggingArbeidsforhold?.sokForFrilans) {
     transformerteVerdier.push({
       '@type': 'FR',
       behovsdato: tilretteleggingArbeidsforhold.behovsdatoFrilans,
       tilrettelegginger: tilretteleggingArbeidsforhold.tilretteleggingFrilans,
     });
   }
-  if (tilretteleggingArbeidsforhold.sokForSelvstendigNaringsdrivende) {
+  if (tilretteleggingArbeidsforhold?.sokForSelvstendigNaringsdrivende) {
     transformerteVerdier.push({
       '@type': 'SN',
       behovsdato: tilretteleggingArbeidsforhold.behovsdatoSN,
@@ -150,7 +157,7 @@ export const transformValues = (values: FormValues): any => ({
   tilretteleggingArbeidsforhold: transformTilretteleggingsArbeidsforhold(values.tilretteleggingArbeidsforhold),
 });
 
-const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {
+const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
   const andreYtelserObject = { andreYtelser: ownProps.alleKodeverk[kodeverkTyper.ARBEID_TYPE] };
   const validate = getValidation(andreYtelserObject.andreYtelser);
   const onSubmit = (values: FormValues, dispatch: Dispatch, props: PureOwnProps & MappedOwnProps & InjectedArrayProps) => ownProps

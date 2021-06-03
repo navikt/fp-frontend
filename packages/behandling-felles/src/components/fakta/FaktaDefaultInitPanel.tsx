@@ -12,6 +12,8 @@ import useStandardFaktaPanelProps from '../../utils/fakta/useStandardFaktaPanelP
 import useFaktaMenyRegistrerer from '../../utils/fakta/useFaktaMenyRegistrerer';
 import FaktaPanelWrapper from './FaktaPanelWrapper';
 
+const DEFAULT_INIT_DATA = {};
+
 export type OwnProps<INIT_DATA, PANEL_DATA> = {
   requestApi: AbstractRequestApi;
   initEndepunkter: RestKey<any, any>[];
@@ -41,7 +43,7 @@ const FaktaDefaultInitPanel = <INIT_DATA, PANEL_DATA = void, >({
   const restApiHooks = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
 
   const formaterteEndepunkter = initEndepunkter.map((e) => ({ key: e }));
-  const { data: initData, state: initState } = restApiHooks.useMultipleRestApi<INIT_DATA, any>(formaterteEndepunkter, {
+  const { data: initData = DEFAULT_INIT_DATA as INIT_DATA, state: initState } = restApiHooks.useMultipleRestApi<INIT_DATA, any>(formaterteEndepunkter, {
     updateTriggers: [behandlingVersjon],
     isCachingOn: true,
   });

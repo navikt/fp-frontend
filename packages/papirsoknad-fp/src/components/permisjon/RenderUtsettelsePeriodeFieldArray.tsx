@@ -109,9 +109,11 @@ export const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps & Wra
                   ]}
                 />
               </FlexColumn>
-              <FlexColumn>
-                {getRemoveButton()}
-              </FlexColumn>
+              {getRemoveButton && (
+                <FlexColumn>
+                  {getRemoveButton()}
+                </FlexColumn>
+              )}
             </FlexRow>
           </FlexContainer>
         </Column>

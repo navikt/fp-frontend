@@ -24,7 +24,7 @@ const REGISTRER_VIRKSOMHET_FORM_NAME = 'VirksomhetForm';
 const TYPE_VIRKSOMHET_PREFIX = 'typeVirksomhet';
 
 interface OwnProps {
-  showModal?: boolean;
+  showModal: boolean;
   closeEvent: () => void;
   readOnly?: boolean;
   alleKodeverk: AlleKodeverk;
@@ -41,7 +41,7 @@ export const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps & WrappedC
   showModal,
   closeEvent,
   handleSubmit,
-  readOnly,
+  readOnly = false,
   intl,
   alleKodeverk,
 }) => (

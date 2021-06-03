@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
+import { Dispatch } from 'redux';
 
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import { AlleKodeverk } from '@fpsak-frontend/types';
@@ -13,7 +14,7 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   onSubmitUfullstendigsoknad: () => Promise<any>;
-  onSubmit: (_formValues, _dispatch, values: any) => Promise<any>;
+  onSubmit: (_formValues: any, _dispatch: Dispatch, values: any) => Promise<any>;
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;

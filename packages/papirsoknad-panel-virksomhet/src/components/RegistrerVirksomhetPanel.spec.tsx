@@ -84,7 +84,7 @@ describe('<RegistrerVirksomhetPanel>', () => {
     // @ts-ignore
     wrapper.instance().hideRegistrerVirksomhetModal(0);
     // @ts-ignore
-    expect(wrapper.state().editVirksomhet).toBe(null);
+    expect(wrapper.state().editVirksomhet).toBe(undefined);
     // @ts-ignore
     expect(wrapper.state().editIndex).toBe(-1);
   });

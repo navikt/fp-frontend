@@ -90,7 +90,7 @@ interface MappedOwnPropsAnnenForelderPanel {
 
 export type FormValues = {
   kanIkkeOppgiAnnenForelder?: boolean;
-  kanIkkeOppgiBegrunnelse?: {
+  kanIkkeOppgiBegrunnelse: {
     arsak: string;
   };
   fornavn?: string;
@@ -99,13 +99,15 @@ export type FormValues = {
 }
 
 interface StaticFunctions {
-  validate?: (sokerPersonnummer: string, values: FormValues) => any,
+  validate?: (sokerPersonnummer: string, values?: FormValues) => any,
 }
 
 export const AnnenForelderPanelImpl: FunctionComponent<PureOwnPropsAnnenForelderPanel & MappedOwnPropsAnnenForelderPanel> & StaticFunctions = ({
-  readOnly,
+  readOnly = true,
   kanIkkeOppgiAnnenForelder,
-  kanIkkeOppgiBegrunnelse,
+  kanIkkeOppgiBegrunnelse = {
+    arsak: '',
+  },
   permisjonRettigheterPanel,
   alleKodeverk,
 }) => {
@@ -147,20 +149,13 @@ export const AnnenForelderPanelImpl: FunctionComponent<PureOwnPropsAnnenForelder
   );
 };
 
-AnnenForelderPanelImpl.defaultProps = {
-  kanIkkeOppgiBegrunnelse: {
-    arsak: '',
-  },
-  readOnly: true,
-};
-
 const mapStateToProps = (state: any, initialProps: PureOwnPropsAnnenForelderPanel) => ({
   ...formValueSelector(initialProps.form)(state, initialProps.namePrefix),
 });
 
 const AnnenForelderPanel = connect(mapStateToProps)(AnnenForelderPanelImpl);
 
-AnnenForelderPanel.validate = (sokerPersonnummer: string, values: FormValues) => {
+AnnenForelderPanel.validate = (sokerPersonnummer, values?) => {
   if (!values) {
     return undefined;
   }
@@ -174,12 +169,12 @@ AnnenForelderPanel.validate = (sokerPersonnummer: string, values: FormValues) =>
   }
 
   return {
-    fornavn: required(values.fornavn) || hasValidName(values.fornavn),
-    etternavn: required(values.etternavn) || hasValidName(values.etternavn),
-    foedselsnummer: required(values.foedselsnummer)
-      || hasValidFodselsnummerFormat(values.foedselsnummer)
+    fornavn: required(values.fornavn) || (values.fornavn && hasValidName(values.fornavn)),
+    etternavn: required(values.etternavn) || (values.etternavn && hasValidName(values.etternavn)),
+    foedselsnummer: required(values.foedselsnummer) || (values.foedselsnummer && (
+      hasValidFodselsnummerFormat(values.foedselsnummer)
       || hasValidFodselsnummer(values.foedselsnummer)
-      || ((values.foedselsnummer === sokerPersonnummer) ? sammeFodselsnummerSomSokerMessage() : null),
+      || ((values.foedselsnummer === sokerPersonnummer) ? sammeFodselsnummerSomSokerMessage() : null))),
   };
 };
 
