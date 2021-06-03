@@ -34,7 +34,7 @@ type OwnProps = {
 interface StaticFunctions {
   buildInitialValues: (kunYtelse: KunYtelse) => VurderBesteberegningMedKunYtelseValues;
   validate: (values: FaktaOmBeregningAksjonspunktValues) => any;
-  transformValues: (values: any) => any;
+  transformValues: (values: FaktaOmBeregningAksjonspunktValues) => boolean;
 }
 
 /**
@@ -115,7 +115,7 @@ KunYtelseBesteberegningImpl.validate = (values: FaktaOmBeregningAksjonspunktValu
   return errors;
 };
 
-KunYtelseBesteberegningImpl.transformValues = (values) => (values[besteberegningField]);
+KunYtelseBesteberegningImpl.transformValues = (values: FaktaOmBeregningAksjonspunktValues): boolean => (values[besteberegningField]);
 
 const mapStateToProps = (state) => ({
   erBesteberegning: getFormValuesForBeregning(state)[besteberegningField],

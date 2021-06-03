@@ -6,8 +6,9 @@ import {
   AlleKodeverk,
   KunYtelse,
 } from '@fpsak-frontend/types';
+import { FaktaBeregningTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
 import KunYtelsePanel from './KunYtelsePanel';
-import {FaktaOmBeregningAksjonspunktValues, KunYtelseValues} from "../../../typer/FaktaBeregningTypes";
+import { FaktaOmBeregningAksjonspunktValues, KunYtelseValues } from '../../../typer/FaktaBeregningTypes';
 
 const { FASTSETT_BG_KUN_YTELSE, VURDER_BESTEBEREGNING } = faktaOmBeregningTilfelle;
 
@@ -31,7 +32,9 @@ export const setFaktaPanelForKunYtelse = (faktaPanels,
   }
 };
 
-export const transformValuesForKunYtelse = (values, kunYtelse, tilfeller) => {
+export const transformValuesForKunYtelse = (values: FaktaOmBeregningAksjonspunktValues,
+  kunYtelse: KunYtelse,
+  tilfeller: string[]): FaktaBeregningTransformedValues => {
   if (tilfeller.includes(FASTSETT_BG_KUN_YTELSE)) {
     const kunYtelseTransformedValues = KunYtelsePanel.transformValues(values, kunYtelse);
     const faktaOmBeregningTilfeller = [FASTSETT_BG_KUN_YTELSE];

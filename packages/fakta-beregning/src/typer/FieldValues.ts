@@ -9,6 +9,7 @@ export type AndelFieldIdentifikator = {
 
 type AndelFieldValue = AndelFieldIdentifikator & {
   andel: string;
+  kanRedigereInntekt?: boolean;
   nyAndel?: boolean;
   inntektskategori: string;
   lagtTilAvSaksbehandler?: boolean;

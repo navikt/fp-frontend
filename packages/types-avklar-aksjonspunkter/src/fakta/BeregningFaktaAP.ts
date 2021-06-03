@@ -126,22 +126,22 @@ export type RefusjonskravPrArbeidsgiverVurderingTransformedValues = {
   skalUtvideGyldighet: boolean;
 }
 
-type FaktaBeregningTransformedValues = {
-  faktaOmBeregningTilfeller: string[];
-  vurderNyoppstartetFL: NyoppstartetFLTransformedValues;
-  vurderTidsbegrensetArbeidsforhold: TidsbegrensetArbeidsforholdTransformedValues;
-  vurderNyIArbeidslivet: NyIArbeidslivetTransformedValues;
-  fastsettMaanedsinntektFL: FastsettMånedsinntektFLTransformedValues;
-  vurdertLonnsendring: VurderLønnsendringTransformedValues;
-  fastsattUtenInntektsmelding: FastsettMånedsinntektUtenInntektsmeldingTransformedValues;
-  vurderATogFLiSammeOrganisasjon: VurderATFLISammeOrgTransformedValues;
-  besteberegningAndeler: BesteberegningFødendeKvinneTransformedValues;
-  kunYtelseFordeling: FastsettBgKunYtelseTransformedValues;
-  vurderEtterlønnSluttpakke: VurderEtterlønnSluttpakkeTransformedValues;
-  fastsettEtterlønnSluttpakke: FastsettEtterlønnSluttpakkeTransformedValues;
-  mottarYtelse: MottarYtelseTransformedValues;
-  vurderMilitaer: VurderMilitærTransformedValues;
-  refusjonskravGyldighet: RefusjonskravPrArbeidsgiverVurderingTransformedValues[];
+export type FaktaBeregningTransformedValues = {
+  faktaOmBeregningTilfeller?: string[];
+  vurderNyoppstartetFL?: NyoppstartetFLTransformedValues;
+  vurderTidsbegrensetArbeidsforhold?: TidsbegrensetArbeidsforholdTransformedValues;
+  vurderNyIArbeidslivet?: NyIArbeidslivetTransformedValues;
+  fastsettMaanedsinntektFL?: FastsettMånedsinntektFLTransformedValues;
+  vurdertLonnsendring?: VurderLønnsendringTransformedValues;
+  fastsattUtenInntektsmelding?: FastsettMånedsinntektUtenInntektsmeldingTransformedValues;
+  vurderATogFLiSammeOrganisasjon?: VurderATFLISammeOrgTransformedValues;
+  besteberegningAndeler?: BesteberegningFødendeKvinneTransformedValues;
+  kunYtelseFordeling?: FastsettBgKunYtelseTransformedValues;
+  vurderEtterlønnSluttpakke?: VurderEtterlønnSluttpakkeTransformedValues;
+  fastsettEtterlønnSluttpakke?: FastsettEtterlønnSluttpakkeTransformedValues;
+  mottarYtelse?: MottarYtelseTransformedValues;
+  vurderMilitaer?: VurderMilitærTransformedValues;
+  refusjonskravGyldighet?: RefusjonskravPrArbeidsgiverVurderingTransformedValues[];
 }
 
 export type BeregningFaktaTransformedValues = {
@@ -184,5 +184,7 @@ export type BeregningFaktaAP = BeregningFaktaTransformedValues
 
 export type BeregningOverstyringAP = OverstyrBeregningsgrunnlagTransformedValues
   & AksjonspunktTilBekreftelse<AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG>;
+
+export type BeregningFaktaOgOverstyringAP = BeregningFaktaAP | BeregningOverstyringAP;
 
 export default BeregningFaktaAP;

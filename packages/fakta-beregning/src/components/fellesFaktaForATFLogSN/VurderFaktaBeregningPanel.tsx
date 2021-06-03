@@ -12,7 +12,10 @@ import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import { ArbeidsgiverOpplysningerPerId, AlleKodeverk } from '@fpsak-frontend/types';
-import BeregningFaktaAP, { BeregningOverstyringAP } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
+import BeregningFaktaAP, {
+  BeregningFaktaOgOverstyringAP,
+  BeregningOverstyringAP
+} from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
 import FaktaForATFLOgSNPanel, {
   getBuildInitialValuesFaktaForATFLOgSN,
   transformValuesFaktaForATFLOgSN,
@@ -73,7 +76,7 @@ type OwnProps = {
     aksjonspunkter: Aksjonspunkt[];
     alleKodeverk: AlleKodeverk;
     erOverstyrer: boolean;
-    submitCallback: (aksjonspunktData: BeregningFaktaAP | BeregningOverstyringAP) => Promise<void>;
+    submitCallback: (aksjonspunktData: BeregningFaktaOgOverstyringAP) => Promise<void>;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
@@ -175,18 +178,18 @@ export class VurderFaktaBeregningPanelImpl extends Component<OwnProps & Injected
   }
 }
 
-export const transformValuesVurderFaktaBeregning = (values) => {
+export const transformValuesVurderFaktaBeregning = (values: FaktaOmBeregningAksjonspunktValues): BeregningFaktaOgOverstyringAP => {
   const { aksjonspunkter } = values;
   if (hasAksjonspunkt(VURDER_FAKTA_FOR_ATFL_SN, aksjonspunkter) || erOverstyring(values)) {
     const faktaBeregningValues = values;
     const beg = faktaBeregningValues[BEGRUNNELSE_FAKTA_TILFELLER_NAME];
-    return [{
+    return {
       kode: erOverstyring(values) ? OVERSTYRING_AV_BEREGNINGSGRUNNLAG : VURDER_FAKTA_FOR_ATFL_SN,
       begrunnelse: beg === undefined ? null : beg,
       ...transformValuesFaktaForATFLOgSN(faktaBeregningValues, erOverstyring(values)),
-    }];
+    };
   }
-  return {};
+  return null;
 };
 
 export const buildInitialValuesVurderFaktaBeregning = createSelector(
@@ -210,7 +213,7 @@ export const validateVurderFaktaBeregning = (values: FaktaOmBeregningAksjonspunk
 
 const lagSubmitFn = createSelector([
   (ownProps: OwnProps) => ownProps.submitCallback],
-(submitCallback) => (values) => submitCallback(transformValuesVurderFaktaBeregning(values)));
+(submitCallback) => (values: FaktaOmBeregningAksjonspunktValues) => submitCallback(transformValuesVurderFaktaBeregning(values)));
 
 const mapStateToPropsFactory = () => {
   const validate = (values) => validateVurderFaktaBeregning(values);

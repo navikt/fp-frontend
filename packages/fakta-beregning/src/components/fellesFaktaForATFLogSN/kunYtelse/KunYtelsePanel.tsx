@@ -13,6 +13,7 @@ import KunYtelseBesteberegningPanel from './KunYtelseBesteberegningPanel';
 import KunYtelseUtenBesteberegningPanel from './KunYtelseUtenBesteberegningPanel';
 import { setGenerellAndelsinfo } from '../BgFaktaUtils';
 import { FaktaOmBeregningAksjonspunktValues, KunYtelseValues } from '../../../typer/FaktaBeregningTypes';
+import {FaktaBeregningTransformedValues} from "@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP";
 
 export const brukersAndelFieldArrayName = 'brukersAndelBG';
 
@@ -30,7 +31,7 @@ interface StaticFunctions {
                        arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
                        alleKodeverk: AlleKodeverk) => KunYtelseValues;
   summerFordeling: (values: any) => number;
-  transformValues: (values: any, kunYtelse: KunYtelse) => any;
+  transformValues: (values: FaktaOmBeregningAksjonspunktValues, kunYtelse: KunYtelse) => FaktaBeregningTransformedValues;
   validate: (values: FaktaOmBeregningAksjonspunktValues, aktivertePaneler: string[], kunYtelse: KunYtelse) => any;
 }
 
@@ -105,7 +106,7 @@ KunYtelsePanel.summerFordeling = (values) => (values[brukersAndelFieldArrayName]
   .map(({ fastsattBelop }) => (fastsattBelop ? removeSpacesFromNumber(fastsattBelop) : 0))
   .reduce((sum, fastsattBelop) => sum + fastsattBelop, 0));
 
-KunYtelsePanel.transformValues = (values, kunYtelse) => ({
+KunYtelsePanel.transformValues = (values: FaktaOmBeregningAksjonspunktValues, kunYtelse: KunYtelse): FaktaBeregningTransformedValues => ({
   kunYtelseFordeling: {
     andeler: values[brukersAndelFieldArrayName].map((fieldValue) => ({
       andelsnr: fieldValue.andelsnr,

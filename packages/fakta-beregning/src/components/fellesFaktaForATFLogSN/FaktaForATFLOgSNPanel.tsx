@@ -4,9 +4,15 @@ import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregn
 import { createSelector, createStructuredSelector } from 'reselect';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { ArbeidsgiverOpplysningerPerId, FaktaOmBeregning, AlleKodeverk } from '@fpsak-frontend/types';
+import {
+  ArbeidsgiverOpplysningerPerId, FaktaOmBeregning, AlleKodeverk, KortvarigAndel,
+} from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
+import {
+  BeregningFaktaTransformedValues,
+  FaktaBeregningTransformedValues,
+} from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
 import TidsbegrensetArbeidsforholdForm from './tidsbegrensetArbeidsforhold/TidsbegrensetArbeidsforholdForm';
 import VurderMilitaer from './vurderMilitaer/VurderMilitaer';
 import NyoppstartetFLForm from './vurderOgFastsettATFL/forms/NyoppstartetFLForm';
@@ -28,7 +34,7 @@ import {
   FaktaOmBeregningAksjonspunktValues,
   FaktaOmBeregningValues,
   FaktaStateProps,
-  TilfellerValues
+  TilfellerValues,
 } from '../../typer/FaktaBeregningTypes';
 
 const {
@@ -230,7 +236,8 @@ export const FaktaForATFLOgSNPanelImpl: FunctionComponent<OwnProps & MappedOwnPr
   </div>
 );
 
-const kunYtelseTransform = (faktaOmBeregning, aktivePaneler) => (values) => transformValuesForKunYtelse(values,
+const kunYtelseTransform = (faktaOmBeregning: FaktaOmBeregning,
+  aktivePaneler: string[]) => (values: FaktaOmBeregningAksjonspunktValues): FaktaBeregningTransformedValues => transformValuesForKunYtelse(values,
   faktaOmBeregning.kunYtelse, aktivePaneler);
 
 const nyIArbeidslivetTransform = (vurderFaktaValues, values) => {
@@ -290,19 +297,27 @@ export const transformValues = (
   return transformed;
 };
 
-export const setInntektValues = (aktivePaneler, fatsettKunYtelseTransform,
-  vurderOgFastsettATFLTransform, erOverstyrt) => (values) => {
+export const setInntektValues = (aktivePaneler: string[],
+  fatsettKunYtelseTransform: ((values: FaktaOmBeregningAksjonspunktValues) => FaktaBeregningTransformedValues),
+  vurderOgFastsettATFLTransform,
+  erOverstyrt: boolean) => (values: FaktaOmBeregningAksjonspunktValues): BeregningFaktaTransformedValues => {
   if (aktivePaneler.includes(faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE)) {
-    return { fakta: fatsettKunYtelseTransform(values), overstyrteAndeler: [] };
+    return { fakta: fatsettKunYtelseTransform(values) };
   }
   return { ...vurderOgFastsettATFLTransform(values, erOverstyrt) };
 };
 
-const setValuesForVurderFakta = (aktivePaneler, values, kortvarigeArbeidsforhold, faktaOmBeregning, beregningsgrunnlag, erOverstyrt) => {
+const setValuesForVurderFakta = (aktivePaneler: string[],
+  values: FaktaOmBeregningAksjonspunktValues,
+  kortvarigeArbeidsforhold: KortvarigAndel[],
+  faktaOmBeregning: FaktaOmBeregning,
+  beregningsgrunnlag: Beregningsgrunnlag,
+  erOverstyrt: boolean): any => {
   const vurderFaktaValues = setInntektValues(
     aktivePaneler,
     kunYtelseTransform(faktaOmBeregning, aktivePaneler),
-    VurderOgFastsettATFL.transformValues(faktaOmBeregning, beregningsgrunnlag), erOverstyrt,
+    VurderOgFastsettATFL.transformValues(faktaOmBeregning, beregningsgrunnlag),
+    erOverstyrt,
   )(values);
   return ({
     fakta: transformValues(aktivePaneler,
@@ -314,7 +329,7 @@ const setValuesForVurderFakta = (aktivePaneler, values, kortvarigeArbeidsforhold
   });
 };
 
-export const transformValuesFaktaForATFLOgSN = (values, erOverstyrt) => {
+export const transformValuesFaktaForATFLOgSN = (values: FaktaOmBeregningAksjonspunktValues, erOverstyrt: boolean): any => {
   const {
     tilfeller,
     kortvarigeArbeidsforhold,

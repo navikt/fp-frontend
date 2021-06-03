@@ -190,7 +190,7 @@ interface StaticFunctions {
   buildInitialValues: (andeler: AndelForFaktaOmBeregning[],
                        arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
                        alleKodeverk: AlleKodeverk) => AndelFieldValue[];
-  transformValues: (values: any) => InntektTransformed;
+  transformValues: (values: AndelFieldValue[]) => InntektTransformed[];
 }
 
 /**
@@ -255,7 +255,7 @@ InntektFieldArray.defaultProps = {
   skalKunneLeggeTilDagpengerManuelt: false,
 };
 
-InntektFieldArray.transformValues = (values): InntektTransformed => (values
+InntektFieldArray.transformValues = (values: AndelFieldValue[]): InntektTransformed[] => (values
   ? values.filter(({ kanRedigereInntekt }) => kanRedigereInntekt)
     .filter(({ fastsattBelop }) => fastsattBelop !== null && fastsattBelop !== '')
     .map((fieldValue) => ({

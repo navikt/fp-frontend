@@ -29,7 +29,7 @@ import VurderBesteberegningForm, { besteberegningField, vurderBesteberegningTran
 import InntektFieldArray, { InntektFieldArray as InntektFieldArrayImpl } from '../InntektFieldArray';
 import VurderEtterlonnSluttpakkeForm from './forms/VurderEtterlonnSluttpakkeForm';
 import { FaktaOmBeregningAksjonspunktValues, VurderOgFastsettATFLValues } from '../../../typer/FaktaBeregningTypes';
-import AndelFieldValue from "../../../typer/FieldValues";
+import AndelFieldValue from '../../../typer/FieldValues';
 
 const lonnsendringErVurdertEllerIkkjeTilstede = (tilfeller: string[], values: FaktaOmBeregningAksjonspunktValues): boolean => (
   !tilfeller.includes(faktaOmBeregningTilfelle.VURDER_LONNSENDRING)
@@ -313,7 +313,8 @@ const transformValuesForAksjonspunkt = (values, inntektVerdier, fastsatteAndelsn
   return transformed;
 };
 
-VurderOgFastsettATFL.transformValues = (faktaOmBeregning, beregningsgrunnlag) => (values) => {
+VurderOgFastsettATFL.transformValues = (faktaOmBeregning: FaktaOmBeregning,
+  beregningsgrunnlag: Beregningsgrunnlag) => (values: FaktaOmBeregningAksjonspunktValues) => {
   const inntektVerdier = InntektFieldArrayImpl.transformValues(values[INNTEKT_FIELD_ARRAY_NAME]);
   const fastsatteAndelsnr = [];
   const transformed = transformValuesForAksjonspunkt(values, inntektVerdier, fastsatteAndelsnr, faktaOmBeregning, beregningsgrunnlag);
