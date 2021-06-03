@@ -3,8 +3,10 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
 import VedtakKlageProsessIndex from '@fpsak-frontend/prosess-vedtak-klage';
-import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
-import { Aksjonspunkt, Fagsak, StandardProsessPanelProps } from '@fpsak-frontend/types';
+import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
+import {
+  Aksjonspunkt, Behandling, Fagsak, StandardProsessPanelProps,
+} from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -29,7 +31,7 @@ const fagsak = {
 const behandling = {
   uuid: 'test-uuid',
   versjon: 1,
-};
+} as Behandling;
 
 jest.mock('@fpsak-frontend/behandling-felles', () => {
   const felles = jest.requireActual('@fpsak-frontend/behandling-felles');
@@ -49,13 +51,14 @@ describe('<KlageresultatProsessStegInitPanel>', () => {
       toggleOppdatereFagsakContext={() => {}}
       fagsak={fagsak}
       opneSokeside={() => {}}
+      behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
 
-    const innerElement = panel.renderProp('renderPanel')({ behandling });
+    const innerElement = panel.renderProp('renderPanel')({ behandling }, { aksjonspunkter: [] });
 
     expect(innerElement.find(VedtakKlageProsessIndex)).toHaveLength(1);
   });
@@ -67,11 +70,12 @@ describe('<KlageresultatProsessStegInitPanel>', () => {
       toggleOppdatereFagsakContext={() => {}}
       fagsak={fagsak}
       opneSokeside={() => {}}
+      behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<Required<ProsessDefaultInitPanelProps<INIT_DATA, any>> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
-    const aksjonspunkter = [];
+    const aksjonspunkter = [] as Aksjonspunkt[];
 
     expect(panel.props().hentOverstyrtStatus({ aksjonspunkter }, {
       behandling,
@@ -85,9 +89,10 @@ describe('<KlageresultatProsessStegInitPanel>', () => {
       toggleOppdatereFagsakContext={() => {}}
       fagsak={fagsak}
       opneSokeside={() => {}}
+      behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<Required<ProsessDefaultInitPanelProps<INIT_DATA, any>> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const aksjonspunkter = [{
       status: {
@@ -118,9 +123,10 @@ describe('<KlageresultatProsessStegInitPanel>', () => {
       toggleOppdatereFagsakContext={() => {}}
       fagsak={fagsak}
       opneSokeside={() => {}}
+      behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<Required<ProsessDefaultInitPanelProps<INIT_DATA, any>> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const aksjonspunkter = [{
       status: {
@@ -153,9 +159,10 @@ describe('<KlageresultatProsessStegInitPanel>', () => {
       toggleOppdatereFagsakContext={toggleSkalOppdatereFagsakContext}
       fagsak={fagsak}
       opneSokeside={() => {}}
+      behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<Required<ProsessDefaultInitPanelProps<INIT_DATA, any>> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const aksjonspunktModels = [{
       kode: aksjonspunktCodes.FORESLA_VEDTAK,
@@ -178,11 +185,12 @@ describe('<KlageresultatProsessStegInitPanel>', () => {
       toggleOppdatereFagsakContext={() => {}}
       fagsak={fagsak}
       opneSokeside={() => {}}
+      behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
-    const innerElement = panel.renderProp('renderPanel')({ behandling });
+    const innerElement = panel.renderProp('renderPanel')({ behandling }, { aksjonspunkter: [] });
 
     const klageProsessPanel = innerElement.find(VedtakKlageProsessIndex);
     expect(klageProsessPanel).toHaveLength(1);

@@ -102,9 +102,11 @@ const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps & Wrappe
                     bredde="m"
                   />
                 </FlexColumn>
-                <FlexColumn>
-                  {getRemoveButton()}
-                </FlexColumn>
+                {getRemoveButton && (
+                  <FlexColumn>
+                    {getRemoveButton()}
+                  </FlexColumn>
+                )}
               </FlexRow>
             </FlexContainer>
           </Column>

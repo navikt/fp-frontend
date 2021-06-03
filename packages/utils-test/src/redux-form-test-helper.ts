@@ -167,7 +167,7 @@ export class MockFieldsWithContent implements FieldArrayFieldsProps<any> {
 
   name: string;
 
-  shift: () => undefined;
+  shift: () => any;
 
   splice: () => undefined;
 

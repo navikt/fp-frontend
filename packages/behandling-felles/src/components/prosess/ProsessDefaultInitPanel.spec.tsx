@@ -13,8 +13,8 @@ import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import ProsessPanelWrapper from './ProsessPanelWrapper';
 import ProsessDefaultInitPanel from './ProsessDefaultInitPanel';
 
-let realUseContext;
-let useContextMock;
+let realUseContext: any;
+let useContextMock: any;
 
 const fagsak = {
   saksnummer: '1234',

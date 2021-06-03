@@ -11,7 +11,7 @@ type InputValues = {
   fagsak: Fagsak;
   rettigheter: AksessRettigheter;
   hasFetchError: boolean;
-  lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<Behandling>,
+  lagreAksjonspunkter: (params: any, keepData?: boolean) => Promise<Behandling | undefined>,
   lagreOverstyrteAksjonspunkter?: (params: any, keepData?: boolean) => Promise<Behandling>,
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   alleKodeverk: AlleKodeverk;

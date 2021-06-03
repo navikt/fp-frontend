@@ -38,7 +38,7 @@ const findStatusForVedtak = (
   vilkar: Vilkar[],
   aksjonspunkter: Aksjonspunkt[],
   vedtakAksjonspunkter: Aksjonspunkt[],
-  behandlingsresultat: Behandlingsresultat,
+  behandlingsresultat?: Behandlingsresultat,
 ): string => {
   if (vilkar.length === 0) {
     return vilkarUtfallType.IKKE_VURDERT;
@@ -56,7 +56,7 @@ const findStatusForVedtak = (
     return vilkarUtfallType.IKKE_VURDERT;
   }
 
-  if (isAvslag(behandlingsresultat.type.kode)) {
+  if (behandlingsresultat && isAvslag(behandlingsresultat.type.kode)) {
     return vilkarUtfallType.IKKE_OPPFYLT;
   }
   return vilkarUtfallType.OPPFYLT;
@@ -178,11 +178,11 @@ const VedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny={(_data, initState) => initState === RestApiState.SUCCESS}
       hentOverstyrtStatus={(initData, standardData) => findStatusForVedtak(
-        initData?.vilkar || [], initData?.aksjonspunkter || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
+        initData.vilkar || [], initData.aksjonspunkter || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
       )}
       lagringSideEffekter={lagringSideEffekter}
       hentSkalMarkeresSomAktiv={(initData, standardData) => findStatusForVedtak(
-        initData?.vilkar || [], initData?.aksjonspunkter || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
+        initData.vilkar || [], initData.aksjonspunkter || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
       ) !== vilkarUtfallType.IKKE_VURDERT}
       renderPanel={(data, initData) => (
         <>
@@ -200,8 +200,8 @@ const VedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
             ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
             previewCallback={previewCallback}
             {...data}
-            aksjonspunkter={initData?.aksjonspunkter}
-            vilkar={initData?.vilkar}
+            aksjonspunkter={initData.aksjonspunkter}
+            vilkar={initData.vilkar}
           />
         </>
       )}

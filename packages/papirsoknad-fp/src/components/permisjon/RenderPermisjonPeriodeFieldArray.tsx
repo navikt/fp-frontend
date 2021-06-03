@@ -98,8 +98,8 @@ export type FormValues = {
 }
 
 interface StaticFunctions {
-  validate?: (values: FormValues[]) => any;
-  transformValues?: (values: FormValues[]) => any;
+  validate: (values?: FormValues[]) => any;
+  transformValues: (values: FormValues[]) => any;
 }
 
 /**
@@ -238,7 +238,7 @@ export const RenderPermisjonPeriodeFieldArray: FunctionComponent<PureOwnProps & 
   );
 };
 
-RenderPermisjonPeriodeFieldArray.validate = (values: FormValues[]) => {
+RenderPermisjonPeriodeFieldArray.validate = (values) => {
   // eslint-disable-next-line react/destructuring-assignment
   if ((!values || !values.length)) {
     return { _error: isRequiredMessage() };
@@ -316,7 +316,7 @@ const mapStateToPropsFactory = (initialState: any, ownProps: PureOwnProps) => {
   if (typeof permisjonValues[ownProps.periodePrefix] !== 'undefined') {
     selectedPeriodeTyper = permisjonValues[ownProps.periodePrefix].map(({
       periodeType,
-    }) => periodeType);
+    }: { periodeType: string }) => periodeType);
   }
   const periodeTyper = ownProps.alleKodeverk[kodeverkTyper.UTTAK_PERIODE_TYPE];
   const morsAktivitetTyper = ownProps.alleKodeverk[kodeverkTyper.MORS_AKTIVITET];

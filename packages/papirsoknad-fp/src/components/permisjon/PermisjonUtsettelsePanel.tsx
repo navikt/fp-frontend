@@ -14,7 +14,7 @@ import RenderUtsettelsePeriodeFieldArray from './RenderUtsettelsePeriodeFieldArr
 
 import styles from './permisjonPanel.less';
 
-export const utsettelsePeriodeFieldArrayName = 'utsettelsePeriode';
+export const UTSETTELSE_PERIODE_FIELD_ARRAY_NAME = 'utsettelsePeriode';
 
 interface PureOwnProps {
   readOnly: boolean;
@@ -41,8 +41,8 @@ export type FormValues = {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: () => any;
-  validate?: (values: FormValues[]) => any;
+  buildInitialValues: () => any;
+  validate: (values?: FormValues[]) => any;
 }
 
 /**
@@ -70,7 +70,7 @@ export const PermisjonUtsettelsePanel: FunctionComponent<PureOwnProps & MappedOw
     { skalUtsette
       && (
       <FieldArray
-        name={utsettelsePeriodeFieldArrayName}
+        name={UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}
         component={RenderUtsettelsePeriodeFieldArray}
         utsettelseReasons={utsettelseReasons}
         utsettelseKvoter={utsettelseKvoter}
@@ -80,7 +80,7 @@ export const PermisjonUtsettelsePanel: FunctionComponent<PureOwnProps & MappedOw
   </div>
 );
 
-PermisjonUtsettelsePanel.validate = (values: FormValues[]) => {
+PermisjonUtsettelsePanel.validate = (values) => {
   if (!values || !values.length) {
     return { _error: isRequiredMessage() };
   }
@@ -104,7 +104,7 @@ PermisjonUtsettelsePanel.validate = (values: FormValues[]) => {
 };
 
 PermisjonUtsettelsePanel.buildInitialValues = () => ({
-  [utsettelsePeriodeFieldArrayName]: [{}],
+  [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: [{}],
   skalUtsette: false,
 });
 

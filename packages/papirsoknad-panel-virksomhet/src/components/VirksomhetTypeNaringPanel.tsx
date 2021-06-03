@@ -62,7 +62,7 @@ const getFilteredNaringsvirksomhetTypes = createSelector(
     .filter((t) => t.kode !== naringsvirksomhetType.FRILANSER),
 );
 
-const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
+const mapStateToProps = (_state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   naringvirksomhetTyper: getFilteredNaringsvirksomhetTypes(ownProps),
 });
 

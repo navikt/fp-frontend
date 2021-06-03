@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import AdopsjonFaktaIndex from '@fpsak-frontend/fakta-adopsjon';
-import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
+import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { Fagsak, Vilkar } from '@fpsak-frontend/types';
 
@@ -28,7 +28,7 @@ describe('<AdopsjonsvilkaretFaktaInitPanel>', () => {
       fagsak={fagsak}
     />);
 
-    const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any>>(FaktaDefaultInitPanel);
+    const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any> & FaktaPanelInitProps>(FaktaDefaultInitPanel);
 
     const adopsjonsVilkar = [{
       vilkarType: {

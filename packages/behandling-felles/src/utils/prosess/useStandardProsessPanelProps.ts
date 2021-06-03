@@ -43,7 +43,7 @@ const getBekreftAksjonspunktProsessCallback = (
   if (lagreOverstyrteAksjonspunkter) {
     const aksjonspunkterTilLagring = aksjonspunkter.filter((ap) => apListe.some((apModel) => apModel.kode === ap.definisjon.kode));
     const erOverstyringsaksjonspunkter = aksjonspunkterTilLagring
-      .some((ap) => ap.aksjonspunktType.kode === aksjonspunktType.OVERSTYRING || ap.aksjonspunktType.kode === aksjonspunktType.SAKSBEHANDLEROVERSTYRING);
+      .some((ap) => ap.aksjonspunktType?.kode === aksjonspunktType.OVERSTYRING || ap.aksjonspunktType?.kode === aksjonspunktType.SAKSBEHANDLEROVERSTYRING);
 
     if (aksjonspunkterTilLagring.length === 0 || erOverstyringsaksjonspunkter) {
       return lagreOverstyrteAksjonspunkter({
@@ -94,11 +94,11 @@ const useStandardProsessPanelProps = (
     }
   }, [value.behandling.versjon]);
 
-  const aksjonspunkterForSteg = useMemo(() => (data && aksjonspunktKoder
+  const aksjonspunkterForSteg = useMemo(() => (data?.aksjonspunkter && aksjonspunktKoder
     ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : []),
   [data?.aksjonspunkter, aksjonspunktKoder]);
 
-  const vilkarForSteg = useMemo(() => (data && vilkarKoder
+  const vilkarForSteg = useMemo(() => (data?.vilkar && vilkarKoder
     ? data.vilkar.filter((v) => vilkarKoder.includes(v.vilkarType.kode)) : []),
   [data?.vilkar, vilkarKoder]);
 

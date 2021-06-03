@@ -51,8 +51,8 @@ export type FormValues = {
 
 interface StaticFunctions {
   buildInitialValues: (andreYtelser: KodeverkMedNavn[]) => FormValues;
-  validate?: (values: FormValues, andreYtelser: KodeverkMedNavn[]) => any,
-  transformValues?: (values: FormValues, andreYtelser: KodeverkMedNavn[]) => any;
+  validate: (values: FormValues, andreYtelser: KodeverkMedNavn[]) => any,
+  transformValues: (values: FormValues, andreYtelser: KodeverkMedNavn[]) => any;
 }
 
 /**

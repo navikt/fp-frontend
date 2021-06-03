@@ -8,7 +8,7 @@ import { AlleKodeverk } from '@fpsak-frontend/types';
 import OppholdINorgePapirsoknadIndex, { FormValues as OppholdFormValues } from '@fpsak-frontend/papirsoknad-panel-opphold-i-norge';
 import TilleggsopplysningerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-tilleggsopplysninger';
 import RettigheterPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-rettigheter';
-import AnnenForelderPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-annen-forelder';
+import AnnenForelderPapirsoknadIndex, { AnnenForelderFormValues } from '@fpsak-frontend/papirsoknad-panel-annen-forelder';
 import FodselPapirsoknadIndex, { FormValues as FodselFormValues } from '@fpsak-frontend/papirsoknad-panel-fodsel';
 import OmsorgOgAdopsjonPapirsoknadIndex, { FormValues as OmsorgOgAdopsjonFormValues } from '@fpsak-frontend/papirsoknad-panel-omsorg-og-adopsjon';
 
@@ -17,7 +17,7 @@ import OmsorgOgAdopsjonPapirsoknadIndex, { FormValues as OmsorgOgAdopsjonFormVal
  *
  * Form som brukes for registrering av fodsel.
  */
-const annenForelderFormNamePrefix = 'annenForelder';
+const ANNEN_FORELDER_FORM_NAME_PREFIX = 'annenForelder';
 const OMSORG_FORM_NAME_PREFIX = 'omsorg';
 
 interface OwnProps {
@@ -30,12 +30,13 @@ interface OwnProps {
 export type FormValues = {
   rettigheter?: string;
   foedselsData?: string;
-  omsorg?: Record<string, never> | OmsorgOgAdopsjonFormValues;
+  [OMSORG_FORM_NAME_PREFIX]?: OmsorgOgAdopsjonFormValues;
+  [ANNEN_FORELDER_FORM_NAME_PREFIX]?: AnnenForelderFormValues;
 } & OppholdFormValues & FodselFormValues;
 
 interface StaticFunctions {
-  buildInitialValues?: () => FormValues;
-  validate?: (values: FormValues, sokerPersonnummer: string, familieHendelseType: string) => any;
+  buildInitialValues: () => FormValues;
+  validate: (values: FormValues, sokerPersonnummer: string, familieHendelseType: string) => any;
 }
 
 const RegistreringFodselGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
@@ -65,10 +66,10 @@ const RegistreringFodselGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
         </FormSection>
         )}
       <FodselPapirsoknadIndex readOnly={readOnly} form={form} />
-      <FormSection name={annenForelderFormNamePrefix}>
+      <FormSection name={ANNEN_FORELDER_FORM_NAME_PREFIX}>
         <AnnenForelderPapirsoknadIndex
           soknadData={soknadData}
-          namePrefix={annenForelderFormNamePrefix}
+          namePrefix={ANNEN_FORELDER_FORM_NAME_PREFIX}
           form={form}
           readOnly={readOnly}
           alleKodeverk={alleKodeverk}
@@ -78,16 +79,16 @@ const RegistreringFodselGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
   </Row>
 );
 
-RegistreringFodselGrid.buildInitialValues = (): FormValues => ({
+RegistreringFodselGrid.buildInitialValues = () => ({
   ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
   [OMSORG_FORM_NAME_PREFIX]: {},
 });
 
-RegistreringFodselGrid.validate = (values: FormValues, sokerPersonnummer: string, familieHendelseType: string): any => ({
+RegistreringFodselGrid.validate = (values, sokerPersonnummer, familieHendelseType) => ({
   ...OppholdINorgePapirsoknadIndex.validate(values),
   ...FodselPapirsoknadIndex.validate(values),
-  [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.validate(values[OMSORG_FORM_NAME_PREFIX], values.foedselsDato, familieHendelseType),
-  [annenForelderFormNamePrefix]: AnnenForelderPapirsoknadIndex.validate(sokerPersonnummer, values[annenForelderFormNamePrefix]),
+  [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.validate(familieHendelseType, values.foedselsDato, values[OMSORG_FORM_NAME_PREFIX]),
+  [ANNEN_FORELDER_FORM_NAME_PREFIX]: AnnenForelderPapirsoknadIndex.validate(sokerPersonnummer, values[ANNEN_FORELDER_FORM_NAME_PREFIX]),
 });
 
 export default RegistreringFodselGrid;

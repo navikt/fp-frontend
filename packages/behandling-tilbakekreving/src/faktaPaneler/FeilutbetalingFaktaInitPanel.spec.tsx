@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import FeilutbetalingFaktaIndex from '@fpsak-frontend/fakta-feilutbetaling';
-import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
+import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import {
   Aksjonspunkt, AlleKodeverkTilbakekreving, Fagsak, FeilutbetalingFakta,
 } from '@fpsak-frontend/types';
@@ -24,7 +24,7 @@ describe('<FeilutbetalingFaktaInitPanel>', () => {
       fptilbakeKodeverk={{} as AlleKodeverkTilbakekreving}
     />);
 
-    const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any>>(FaktaDefaultInitPanel);
+    const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any> & FaktaPanelInitProps>(FaktaDefaultInitPanel);
 
     const feilutbetalingFakta = {};
 

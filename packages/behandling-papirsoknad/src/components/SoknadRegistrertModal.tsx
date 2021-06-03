@@ -25,7 +25,7 @@ export const SoknadRegistrertModal: FunctionComponent<OwnProps & WrappedComponen
     isOpen={isOpen}
     contentLabel={intl.formatMessage({ id: 'SoknadRegistrertModal.ContentLabel' })}
     closeButton={false}
-    onRequestClose={() => null}
+    onRequestClose={() => undefined}
     shouldCloseOnOverlayClick={false}
   >
     <AlertStripeSuksess className={styles.alertStyle}>

@@ -90,7 +90,7 @@ interface MappedOwnPropsAnnenForelderPanel {
 
 export type FormValues = {
   kanIkkeOppgiAnnenForelder?: boolean;
-  kanIkkeOppgiBegrunnelse?: {
+  kanIkkeOppgiBegrunnelse: {
     arsak: string;
   };
   fornavn?: string;
@@ -99,13 +99,15 @@ export type FormValues = {
 }
 
 interface StaticFunctions {
-  validate?: (sokerPersonnummer: string, values: FormValues) => any,
+  validate?: (sokerPersonnummer: string, values?: FormValues) => any,
 }
 
 export const AnnenForelderPanelImpl: FunctionComponent<PureOwnPropsAnnenForelderPanel & MappedOwnPropsAnnenForelderPanel> & StaticFunctions = ({
-  readOnly,
+  readOnly = true,
   kanIkkeOppgiAnnenForelder,
-  kanIkkeOppgiBegrunnelse,
+  kanIkkeOppgiBegrunnelse = {
+    arsak: '',
+  },
   permisjonRettigheterPanel,
   alleKodeverk,
 }) => {
@@ -147,20 +149,13 @@ export const AnnenForelderPanelImpl: FunctionComponent<PureOwnPropsAnnenForelder
   );
 };
 
-AnnenForelderPanelImpl.defaultProps = {
-  kanIkkeOppgiBegrunnelse: {
-    arsak: '',
-  },
-  readOnly: true,
-};
-
 const mapStateToProps = (state: any, initialProps: PureOwnPropsAnnenForelderPanel) => ({
   ...formValueSelector(initialProps.form)(state, initialProps.namePrefix),
 });
 
 const AnnenForelderPanel = connect(mapStateToProps)(AnnenForelderPanelImpl);
 
-AnnenForelderPanel.validate = (sokerPersonnummer: string, values: FormValues) => {
+AnnenForelderPanel.validate = (sokerPersonnummer, values?) => {
   if (!values) {
     return undefined;
   }

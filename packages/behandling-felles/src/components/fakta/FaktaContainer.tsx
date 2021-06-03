@@ -20,7 +20,7 @@ interface OwnProps {
   valgtProsessSteg?: string;
   valgtFaktaSteg?: string;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
-  setApentFaktaPanel: (panelData: { urlCode: string, text: string }) => void,
+  setApentFaktaPanel: (panelData?: { urlCode: string, text: string }) => void,
   apentFaktaPanelInfo?: {urlCode: string, text: string };
 }
 
@@ -68,8 +68,10 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
   const currentData = ikkeKlar ? forrige.current : menyDataSomVises;
 
   const oppdaterMenyValg = useCallback((index: number) => {
-    const panel = currentData[index];
-    oppdaterProsessStegOgFaktaPanelIUrl(valgtProsessSteg, panel.id);
+    if (currentData) {
+      const panel = currentData[index];
+      oppdaterProsessStegOgFaktaPanelIUrl(valgtProsessSteg, panel.id);
+    }
   }, [currentData, valgtProsessSteg]);
 
   if (!hentPaneler) {
@@ -81,7 +83,7 @@ const FaktaContainer: FunctionComponent<OwnProps> = ({
       <FlexContainer fullHeight>
         <FlexRow>
           <FlexColumn className={styles.sideMenu}>
-            {currentData.length > 0 && (
+            {currentData && currentData.length > 0 && (
               <FaktaMeny menyData={currentData} oppdaterFaktaPanelIUrl={oppdaterMenyValg} />
             )}
           </FlexColumn>

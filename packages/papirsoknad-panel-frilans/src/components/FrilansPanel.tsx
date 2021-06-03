@@ -23,7 +23,7 @@ export type FormValues = {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: () => FormValues;
+  buildInitialValues: () => FormValues;
   validate: (values: FormValues) => any;
 }
 
@@ -80,7 +80,7 @@ const FrilansPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   </FormSection>
 );
 
-FrilansPanel.buildInitialValues = (): FormValues => ({
+FrilansPanel.buildInitialValues = () => ({
   [FRILANS_FORM_NAME_PREFIX]: {
     ...FrilansOppdragForFamiliePanel.buildInitialValues(),
     perioder: [{
@@ -90,7 +90,7 @@ FrilansPanel.buildInitialValues = (): FormValues => ({
   },
 });
 
-FrilansPanel.validate = (values: FormValues) => {
+FrilansPanel.validate = (values) => {
   if (!values[FRILANS_FORM_NAME_PREFIX]) {
     return null;
   }

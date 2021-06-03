@@ -135,11 +135,19 @@ OppholdINorgePanelImpl.defaultProps = {
   readOnly: true,
 };
 
-const mapStateToProps = (state, initialProps: PureOwnProps): MappedOwnProps => ({
+const mapStateToProps = (state: any, initialProps: PureOwnProps): MappedOwnProps => ({
   ...formValueSelector(initialProps.form)(state, 'harTidligereOppholdUtenlands', 'harFremtidigeOppholdUtenlands'),
 });
 
 const OppholdINorgePanel = connect(mapStateToProps)(OppholdINorgePanelImpl);
+
+type OppholdErrors = {
+  oppholdINorge?: string;
+  harTidligereOppholdUtenlands?: string;
+  tidligereOppholdUtenlands?: string;
+  harFremtidigeOppholdUtenlands?: string;
+  fremtidigeOppholdUtenlands?: string;
+}
 
 OppholdINorgePanel.validate = (values: FormValues) => {
   const errors = {
@@ -148,7 +156,7 @@ OppholdINorgePanel.validate = (values: FormValues) => {
     tidligereOppholdUtenlands: undefined,
     harFremtidigeOppholdUtenlands: undefined,
     fremtidigeOppholdUtenlands: undefined,
-  };
+  } as OppholdErrors;
   if (values.oppholdINorge === undefined) {
     errors.oppholdINorge = isRequiredMessage();
   }

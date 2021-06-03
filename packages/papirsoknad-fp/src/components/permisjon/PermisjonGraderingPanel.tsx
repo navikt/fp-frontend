@@ -23,7 +23,7 @@ import RenderGraderingPeriodeFieldArray from './RenderGraderingPeriodeFieldArray
 
 import styles from './permisjonPanel.less';
 
-export const graderingPeriodeFieldArrayName = 'graderingPeriode';
+export const GRADERING_PERIODE_FIELD_ARRAY_NAME = 'graderingPeriode';
 
 const maxLength9OrFodselsnr = maxLengthOrFodselsnr(9);
 
@@ -61,8 +61,8 @@ type Periode = {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: () => any;
-  validate: (values: FormValues[]) => any;
+  buildInitialValues: () => any;
+  validate: (values?: FormValues[]) => any;
   transformValues: (perioder: Periode[]) => any;
 }
 
@@ -93,12 +93,12 @@ export const PermisjonGraderingPanel: FunctionComponent<PureOwnProps & MappedOwn
     { skalGradere
     && (
     <FieldArray
-      name={graderingPeriodeFieldArrayName}
+      name={GRADERING_PERIODE_FIELD_ARRAY_NAME}
       component={RenderGraderingPeriodeFieldArray}
       graderingKvoter={graderingKvoter}
       form={form}
       namePrefix={namePrefix}
-      graderingPrefix={graderingPeriodeFieldArrayName}
+      graderingPrefix={GRADERING_PERIODE_FIELD_ARRAY_NAME}
       arbeidskategoriTyper={arbeidskategoriTyper}
       readOnly={readOnly}
     />
@@ -118,7 +118,7 @@ export const validateOtherErrors = (values: FormValues[]) => values.map(({
   const prosentandelArbeidError = validateProsentandel(prosentandelArbeid);
   const arbeidsgiverShouldBeRequired = arbeidskategoriType === arbeidskategori.ARBEIDSTAKER;
   const arbeidsgiverError = (arbeidsgiverShouldBeRequired && required(arbeidsgiverIdentifikator))
-    || hasValidInteger(arbeidsgiverIdentifikator)
+    || (arbeidsgiverIdentifikator && hasValidInteger(arbeidsgiverIdentifikator))
     || ((arbeidsgiverIdentifikator && arbeidsgiverIdentifikator.toString().length) === 11
       ? hasValidFodselsnummer(arbeidsgiverIdentifikator)
       : maxLength9OrFodselsnr(arbeidsgiverIdentifikator));
@@ -134,7 +134,7 @@ export const validateOtherErrors = (values: FormValues[]) => values.map(({
   return null;
 });
 
-PermisjonGraderingPanel.validate = (values: FormValues[]) => {
+PermisjonGraderingPanel.validate = (values) => {
   if (!values || !values.length) {
     return { _error: isRequiredMessage() };
   }
@@ -154,7 +154,7 @@ PermisjonGraderingPanel.transformValues = (perioder: Periode[]) => perioder.map(
 });
 
 PermisjonGraderingPanel.buildInitialValues = () => ({
-  [graderingPeriodeFieldArrayName]: [{}],
+  [GRADERING_PERIODE_FIELD_ARRAY_NAME]: [{}],
   skalGradere: false,
 });
 

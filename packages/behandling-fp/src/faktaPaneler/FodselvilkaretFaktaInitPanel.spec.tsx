@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import FodselFaktaIndex from '@fpsak-frontend/fakta-fodsel';
-import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
+import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { Vilkar } from '@fpsak-frontend/types';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 
@@ -19,7 +19,7 @@ describe('<FodselvilkaretFaktaInitPanel>', () => {
       registrerFaktaPanel={() => {}}
     />);
 
-    const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any>>(FaktaDefaultInitPanel);
+    const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any> & FaktaPanelInitProps>(FaktaDefaultInitPanel);
 
     const fodselVilkar = [{
       vilkarType: {

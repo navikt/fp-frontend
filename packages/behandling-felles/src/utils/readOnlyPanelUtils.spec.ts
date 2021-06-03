@@ -22,7 +22,6 @@ describe('<readOnlyUtils>', () => {
     },
     behandlingPaaVent: false,
     behandlingHenlagt: false,
-    links: [],
   };
 
   const aksjonspunkter = [{

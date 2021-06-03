@@ -12,7 +12,7 @@ import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import RenderOppholdPeriodeFieldArray from './RenderOppholdPeriodeFieldArray';
 
-export const oppholdPeriodeFieldArrayName = 'oppholdPerioder';
+export const OPPHOLD_PERIODE_FIELD_ARRAY_NAME = 'oppholdPerioder';
 
 interface PureOwnProps {
   readOnly: boolean;
@@ -34,8 +34,8 @@ export type FormValues = {
 }
 
 interface StaticFunctions {
-  buildInitialValues?: () => any;
-  validate: (values: FormValues[]) => any;
+  buildInitialValues: () => any;
+  validate: (values?: FormValues[]) => any;
 }
 
 /**
@@ -60,7 +60,7 @@ export const PermisjonOppholdPanel: FunctionComponent<PureOwnProps & MappedOwnPr
     { skalHaOpphold
     && (
       <FieldArray
-        name={oppholdPeriodeFieldArrayName}
+        name={OPPHOLD_PERIODE_FIELD_ARRAY_NAME}
         component={RenderOppholdPeriodeFieldArray}
         oppholdsReasons={oppholdsReasons}
         readOnly={readOnly}
@@ -69,7 +69,7 @@ export const PermisjonOppholdPanel: FunctionComponent<PureOwnProps & MappedOwnPr
   </div>
 );
 
-PermisjonOppholdPanel.validate = (values: FormValues[]) => {
+PermisjonOppholdPanel.validate = (values) => {
   if (!values || !values.length) {
     return { _error: isRequiredMessage() };
   }
@@ -89,7 +89,7 @@ PermisjonOppholdPanel.validate = (values: FormValues[]) => {
 };
 
 PermisjonOppholdPanel.buildInitialValues = () => ({
-  [oppholdPeriodeFieldArrayName]: [{}],
+  [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]: [{}],
   skalHaOpphold: false,
 });
 

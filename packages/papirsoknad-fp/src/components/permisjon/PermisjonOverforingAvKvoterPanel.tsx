@@ -34,7 +34,7 @@ const mapArsaker = (arsaker: KodeverkMedNavn[], sokerErMor: boolean, intl: IntlS
   ? <option value={kode} key={kode}>{getText(intl, kode, navn)}</option>
   : <option value={kode} key={kode}>{navn}</option>));
 
-export const overforingPeriodeFieldArrayName = 'overforingsperioder';
+export const OVERFORING_PERIODE_FIELD_ARRAY_NAME = 'overforingsperioder';
 
 interface PureOwnProps {
   soknadData: SoknadData;

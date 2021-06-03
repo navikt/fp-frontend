@@ -67,7 +67,6 @@ const SoknadsfristProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
           <>
             {!harSoknadsfristAp && (
               <OverstyringPanelDef
-                behandling={data.behandling}
                 aksjonspunkter={data?.aksjonspunkter}
                 aksjonspunktKode={aksjonspunktCodes.OVERSTYR_SOKNADSFRISTVILKAR}
                 vilkar={data.vilkar}

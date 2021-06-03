@@ -16,6 +16,7 @@ import OppholdINorgePapirsoknadIndex, { FormValues as OppholdFormValues } from '
 import TilleggsopplysningerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-tilleggsopplysninger';
 import LagreSoknadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-lagre-soknad';
 import VirksomhetPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-virksomhet';
+import OmsorgOgAdopsjonPapirsoknadIndex, { FormValues as OmsorgOgAdopsjonFormValues } from '@fpsak-frontend/papirsoknad-panel-omsorg-og-adopsjon';
 import InntektsgivendeArbeidPapirsoknadIndex, {
   FormValues as InntektFormValues,
 } from '@fpsak-frontend/papirsoknad-panel-inntektsgivende-arbeid';
@@ -23,8 +24,7 @@ import AndreYtelserPapirsoknadIndex, {
   ANDRE_YTELSER_FORM_NAME_PREFIX, FormValues as AndreYtelserFormValues,
 } from '@fpsak-frontend/papirsoknad-panel-andre-ytelser';
 import RettigheterPapirsoknadIndex, { rettighet } from '@fpsak-frontend/papirsoknad-panel-rettigheter';
-import OmsorgOgAdopsjonPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-omsorg-og-adopsjon';
-import AnnenForelderPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-annen-forelder';
+import AnnenForelderPapirsoknadIndex, { AnnenForelderFormValues } from '@fpsak-frontend/papirsoknad-panel-annen-forelder';
 import FodselPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-fodsel';
 
 import PermisjonRettigheterPanel from './permisjon/PermisjonRettigheterPanel';
@@ -47,6 +47,8 @@ interface PureOwnProps {
 type FormValues = {
   rettigheter?: string;
   foedselsDato?: string;
+  [OMSORG_FORM_NAME_PREFIX]?: OmsorgOgAdopsjonFormValues;
+  [ANNEN_FORELDER_FORM_NAME_PREFIX]?: AnnenForelderFormValues;
 } & AndreYtelserFormValues & InntektFormValues & FrilansFormValues & OppholdFormValues & FormValuesPermisjon;
 
 interface MappedOwnProps {
@@ -150,7 +152,7 @@ const getValidation = (soknadData: SoknadData, andreYtelser: KodeverkMedNavn[], 
       ...OppholdINorgePapirsoknadIndex.validate(values),
       ...FodselPapirsoknadIndex.validate(values),
       [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.validate(
-        values[OMSORG_FORM_NAME_PREFIX], values.foedselsDato, soknadData.familieHendelseType,
+        soknadData.familieHendelseType, values.foedselsDato, values[OMSORG_FORM_NAME_PREFIX],
       ),
       ...PermisjonPanel.validate(values),
       [ANNEN_FORELDER_FORM_NAME_PREFIX]: AnnenForelderPapirsoknadIndex.validate(sokerPersonnummer, values[ANNEN_FORELDER_FORM_NAME_PREFIX]),
@@ -163,7 +165,7 @@ const getValidation = (soknadData: SoknadData, andreYtelser: KodeverkMedNavn[], 
       ...FrilansPapirsoknadIndex.validate(values),
       ...OppholdINorgePapirsoknadIndex.validate(values),
       [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.validate(
-        values[OMSORG_FORM_NAME_PREFIX], values.foedselsDato, soknadData.familieHendelseType,
+        soknadData.familieHendelseType, values.foedselsDato, values[OMSORG_FORM_NAME_PREFIX],
       ),
       ...PermisjonPanel.validate(values),
       [ANNEN_FORELDER_FORM_NAME_PREFIX]: AnnenForelderPapirsoknadIndex.validate(sokerPersonnummer, values[ANNEN_FORELDER_FORM_NAME_PREFIX]),
@@ -189,7 +191,7 @@ const buildInitialValues = createSelector([(ownProps: { andreYtelser: KodeverkMe
   ...PermisjonPanel.buildInitialValues(),
 }));
 
-const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {
+const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
   const sokerPersonnummer = ownProps.fagsakPersonnummer;
   const andreYtelserObject = { andreYtelser: ownProps.alleKodeverk[kodeverkTyper.ARBEID_TYPE] };
   const validate = getValidation(ownProps.soknadData, andreYtelserObject.andreYtelser, sokerPersonnummer);

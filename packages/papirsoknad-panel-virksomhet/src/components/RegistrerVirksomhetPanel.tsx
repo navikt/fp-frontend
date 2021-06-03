@@ -78,7 +78,7 @@ interface DispatchProps {
 
 interface OwnState {
   editVirksomhet?: Virksomhet;
-  editIndex: number;
+  editIndex?: number;
 }
 
 /**
@@ -103,7 +103,7 @@ export class RegistrerVirksomhetPanel extends Component<PureOwnProps & MappedOwn
     this.removeVirksomhet = this.removeVirksomhet.bind(this);
 
     this.state = {
-      editVirksomhet: null,
+      editVirksomhet: undefined,
       editIndex: -1,
     };
   }
@@ -112,7 +112,7 @@ export class RegistrerVirksomhetPanel extends Component<PureOwnProps & MappedOwn
     if (index !== null && index !== undefined && index > -1) {
       const { virksomheter } = this.props;
       this.setState({
-        editVirksomhet: virksomheter[index],
+        editVirksomhet: virksomheter ? virksomheter[index] : undefined,
         editIndex: index,
       });
     } else {
@@ -125,12 +125,12 @@ export class RegistrerVirksomhetPanel extends Component<PureOwnProps & MappedOwn
 
   hideRegistrerVirksomhetModal(): void {
     this.setState({
-      editVirksomhet: null,
+      editVirksomhet: undefined,
       editIndex: -1,
     });
   }
 
-  addVirksomhet(_values, _dispatch, {
+  addVirksomhet(_values: any, _dispatch: Dispatch, {
     valuesForRegisteredFieldsOnly,
   }: {
     valuesForRegisteredFieldsOnly: {
@@ -149,7 +149,7 @@ export class RegistrerVirksomhetPanel extends Component<PureOwnProps & MappedOwn
       ...valuesForRegisteredFieldsOnly,
       landJobberFra: valuesForRegisteredFieldsOnly.virksomhetRegistrertINorge ? 'NOR' : valuesForRegisteredFieldsOnly.landJobberFra,
       varigEndringGjeldendeFom: valuesForRegisteredFieldsOnly.nyIArbeidslivetFom || valuesForRegisteredFieldsOnly.varigEndringGjeldendeFom,
-      stillingsprosent: parseFloat(valuesForRegisteredFieldsOnly.stillingsprosent),
+      stillingsprosent: valuesForRegisteredFieldsOnly.stillingsprosent ? parseFloat(valuesForRegisteredFieldsOnly.stillingsprosent) : undefined,
     };
 
     if (index !== null && index !== undefined && index > -1) {

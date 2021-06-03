@@ -2,9 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import UttakProsessIndex from '@fpsak-frontend/prosess-uttak';
-import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps } from '@fpsak-frontend/behandling-felles';
+import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import {
-  AksessRettigheter, Aksjonspunkt, Fagsak, Personoversikt, StandardProsessPanelProps, UttaksresultatPeriode,
+  AksessRettigheter, Aksjonspunkt, Behandling, Fagsak, Personoversikt, StandardProsessPanelProps, UttaksresultatPeriode,
 } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
@@ -20,6 +20,11 @@ type INIT_DATA = {
   uttaksresultatPerioder: UttaksresultatPeriode;
 }
 
+const behandling = {
+  uuid: 'test-uuid',
+  versjon: 1,
+} as Behandling;
+
 describe('<UttakProsessStegInitPanel>', () => {
   it('skal rendre komponent', () => {
     const wrapper = shallow(<UttakProsessStegInitPanel
@@ -33,14 +38,15 @@ describe('<UttakProsessStegInitPanel>', () => {
           isEnabled: true,
         },
       } as AksessRettigheter}
+      behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
     expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.LOADING)).toBe(false);
 
-    expect(panel.props().renderPanel({}).type).toEqual(UttakProsessIndex);
+    expect(panel.props().renderPanel({}, { aksjonspunkter: [], uttaksresultatPerioder: {} as UttaksresultatPeriode }).type).toEqual(UttakProsessIndex);
   });
 
   it('skal vise at panelet ikke er vurdert når det ikke finnes uttaktsresultatperioder', () => {
@@ -55,9 +61,10 @@ describe('<UttakProsessStegInitPanel>', () => {
           isEnabled: true,
         },
       } as AksessRettigheter}
+      behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<Required<ProsessDefaultInitPanelProps<INIT_DATA, any>> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     expect(panel.props().hentOverstyrtStatus({}, {} as StandardProsessPanelProps)).toBe(vilkarUtfallType.IKKE_VURDERT);
   });
@@ -74,9 +81,10 @@ describe('<UttakProsessStegInitPanel>', () => {
           isEnabled: true,
         },
       } as AksessRettigheter}
+      behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<Required<ProsessDefaultInitPanelProps<INIT_DATA, any>> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const uttaksresultatPerioder = {
       perioderSøker: [{
@@ -116,11 +124,12 @@ describe('<UttakProsessStegInitPanel>', () => {
           isEnabled: true,
         },
       } as AksessRettigheter}
+      behandling={behandling}
     />);
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any>>(ProsessDefaultInitPanel);
+    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
-    panel.props().renderPanel({}).props.tempUpdateStonadskontoer({
+    panel.props().renderPanel({}, { aksjonspunkter: [], uttaksresultatPerioder: {} as UttaksresultatPeriode }).props.tempUpdateStonadskontoer({
       behandlingId: {
         saksnummer: '123',
         behandlingId: 1,
