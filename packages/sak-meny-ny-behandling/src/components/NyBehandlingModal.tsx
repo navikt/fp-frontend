@@ -206,7 +206,6 @@ const manuelleRevurderingsArsakerFP = [
   behandlingArsakType.SØKNADSFRIST,
   behandlingArsakType.KLAGE_U_INNTK,
   behandlingArsakType.KLAGE_M_INNTK,
-  behandlingArsakType.REBEREGN_FERIEPENGER,
 ];
 
 const manuelleRevurderingsArsakerSVP = [
@@ -218,7 +217,6 @@ const manuelleRevurderingsArsakerSVP = [
   behandlingArsakType.DØD,
   behandlingArsakType.ANNET,
   behandlingArsakType.INNTEKT,
-  behandlingArsakType.REBEREGN_FERIEPENGER,
 ];
 
 const tilbakekrevingRevurderingArsaker = [
