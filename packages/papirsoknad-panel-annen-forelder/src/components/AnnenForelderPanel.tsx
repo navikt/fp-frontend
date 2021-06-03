@@ -169,12 +169,12 @@ AnnenForelderPanel.validate = (sokerPersonnummer, values?) => {
   }
 
   return {
-    fornavn: required(values.fornavn) || (values.fornavn && hasValidName(values.fornavn)),
-    etternavn: required(values.etternavn) || (values.etternavn && hasValidName(values.etternavn)),
-    foedselsnummer: required(values.foedselsnummer) || (values.foedselsnummer && (
-      hasValidFodselsnummerFormat(values.foedselsnummer)
+    fornavn: required(values.fornavn) || hasValidName(values.fornavn),
+    etternavn: required(values.etternavn) || hasValidName(values.etternavn),
+    foedselsnummer: required(values.foedselsnummer)
+      || hasValidFodselsnummerFormat(values.foedselsnummer)
       || hasValidFodselsnummer(values.foedselsnummer)
-      || ((values.foedselsnummer === sokerPersonnummer) ? sammeFodselsnummerSomSokerMessage() : null))),
+      || ((values.foedselsnummer === sokerPersonnummer) ? sammeFodselsnummerSomSokerMessage() : null),
   };
 };
 
