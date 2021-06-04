@@ -12,6 +12,7 @@ export { ErrorTypes, errorOfType, getErrorResponseData } from './src/requestApi/
 export { default as ErrorType } from './src/requestApi/error/errorTsType';
 export type { default as Link } from './src/requestApi/LinkTsType';
 export { default as RestKey } from './src/RestKey';
+export { default as AsyncPollingStatus } from './src/requestApi/asyncPollingStatus';
 
 let isUnitTestModeOn = false;
 export const switchOnTestMode = () => {

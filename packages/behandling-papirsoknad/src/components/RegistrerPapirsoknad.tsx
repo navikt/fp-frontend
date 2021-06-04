@@ -7,6 +7,7 @@ import {
 } from '@fpsak-frontend/types';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
+import { AsyncPollingStatus } from '@fpsak-frontend/rest-api';
 
 import SoknadRegistrertModal from './SoknadRegistrertModal';
 import RegistrerPapirsoknadPanel from './RegistrerPapirsoknadPanel';
@@ -23,7 +24,7 @@ const lagLagreFunksjon = (
   behandling: Behandling,
   aksjonspunkter: Aksjonspunkt[],
   fagsak: Fagsak,
-  lagreAksjonspunkt: (params?: any, keepData?: boolean) => Promise<any>,
+  lagreAksjonspunkt: (params?: any, keepData?: boolean) => Promise<Behandling>,
   setAksjonspunktLagret: (erApLagret: boolean) => void,
   soknadData?: SoknadData,
 ) => (valuesForRegisteredFieldsOnly: any) => {
@@ -45,7 +46,11 @@ const lagLagreFunksjon = (
     behandlingVersjon: behandling.versjon,
     bekreftedeAksjonspunktDtoer: manuellRegistreringDtoList,
   };
-  return lagreAksjonspunkt(params).then(() => setAksjonspunktLagret(true));
+  return lagreAksjonspunkt(params).then((returnertBehandling) => {
+    if (returnertBehandling?.taskStatus.status === AsyncPollingStatus.COMPLETE) {
+      setAksjonspunktLagret(true);
+    }
+  });
 };
 
 const EMPTY_ARRAY = [] as Aksjonspunkt[];
@@ -57,7 +62,7 @@ interface OwnProps {
   kodeverk: AlleKodeverk;
   rettigheter: AksessRettigheter;
   hentBehandling: (keepData: boolean) => Promise<Behandling | undefined>
-  lagreAksjonspunkt: (params?: any, keepData?: boolean) => Promise<any>;
+  lagreAksjonspunkt: (params?: any, keepData?: boolean) => Promise<Behandling>;
 }
 
 /**
