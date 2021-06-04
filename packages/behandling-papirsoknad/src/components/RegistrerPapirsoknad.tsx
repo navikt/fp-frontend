@@ -47,7 +47,7 @@ const lagLagreFunksjon = (
     bekreftedeAksjonspunktDtoer: manuellRegistreringDtoList,
   };
   return lagreAksjonspunkt(params).then((returnertBehandling) => {
-    if (returnertBehandling?.taskStatus.status === AsyncPollingStatus.COMPLETE) {
+    if (returnertBehandling?.taskStatus?.status !== AsyncPollingStatus.HALTED) {
       setAksjonspunktLagret(true);
     }
   });
