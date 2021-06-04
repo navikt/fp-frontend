@@ -40,7 +40,7 @@ const lagLagreFunksjon = (
   },
   ];
 
-  const params = {d
+  const params = {
     saksnummer: fagsak.saksnummer,
     behandlingUuid: behandling.uuid,
     behandlingVersjon: behandling.versjon,
