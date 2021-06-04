@@ -51,6 +51,14 @@ const useOutsideClickEvent = (erLenkepanelApent: boolean, setLenkePanelApent: (e
   return wrapperRef;
 };
 
+const parseErrorDetails = (details: string) => {
+  try {
+    return JSON.parse(details);
+  } catch (error) {
+    return 'Kunne ikke tolke feildetaljer';
+  }
+};
+
 const lagFeilmeldinger = (errorMessages: ErrorMessage[], queryStrings: QueryStrings): Feilmelding[] => {
   const resolvedErrorMessages: Feilmelding[] = [];
   if (queryStrings.errorcode) {
@@ -68,7 +76,7 @@ const lagFeilmeldinger = (errorMessages: ErrorMessage[], queryStrings: QueryStri
       const decodedDetails = decodeHtmlEntity(message.params.errorDetails);
       msg = {
         ...msg,
-        additionalInfo: decodedDetails ? JSON.parse(decodedDetails) : undefined,
+        additionalInfo: decodedDetails ? parseErrorDetails(decodedDetails) : undefined,
       };
     }
     resolvedErrorMessages.push(msg);
