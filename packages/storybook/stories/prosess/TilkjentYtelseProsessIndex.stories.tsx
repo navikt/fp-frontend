@@ -26,7 +26,7 @@ const fagsak = {
 } as Fagsak;
 
 const behandling = {
-  id: 1,
+  uuid: '1',
   versjon: 1,
 } as Behandling;
 

@@ -24,7 +24,7 @@ const fagsak = {
 };
 
 const behandling = {
-  id: 1,
+  uuid: '1',
 };
 
 const location = {
@@ -71,7 +71,7 @@ describe('<RisikoklassifiseringIndex>', () => {
       alleBehandlinger={[behandling] as Behandling[]}
       kontrollresultat={lagRisikoklassifisering(kontrollresultatKode.HOY)}
       behandlingVersjon={1}
-      behandlingId={1}
+      behandlingUuid="1"
     />);
     expect(wrapper.find(RisikoklassifiseringSakIndex)).toHaveLength(1);
   });

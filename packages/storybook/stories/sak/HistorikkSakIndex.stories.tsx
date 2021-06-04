@@ -6,7 +6,7 @@ import { Historikkinnslag } from '@fpsak-frontend/types';
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
 const history = [{
-  behandlingId: 999951,
+  behandlingUuid: '999951',
   type: {
     kode: 'NYE_REGOPPLYSNINGER',
     kodeverk: 'HISTORIKKINNSLAG_TYPE',
@@ -40,7 +40,7 @@ const history = [{
   ],
 },
 {
-  behandlingId: 999951,
+  behandlingUuid: '999951',
   type: {
     kode: 'INNSYN_OPPR',
     kodeverk: 'HISTORIKKINNSLAG_TYPE',
@@ -71,7 +71,7 @@ const history = [{
   ],
 },
 {
-  behandlingId: 999952,
+  behandlingUuid: '999952',
   type: {
     kode: 'BEH_STARTET',
     kodeverk: 'HISTORIKKINNSLAG_TYPE',
@@ -149,7 +149,7 @@ export const visHistorikkNårBehandlingErValgt = () => (
       saksnummer="2"
       getBehandlingLocation={() => locationMock}
       createLocationForSkjermlenke={() => locationMock}
-      valgtBehandlingId={999951}
+      valgtBehandlingUuid="999951"
     />
   </div>
 );

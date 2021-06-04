@@ -9,7 +9,7 @@ import BeregningsgrunnlagProsessIndex from './BeregningsgrunnlagProsessIndex';
 import messages from '../i18n/nb_NO.json';
 
 const behandling = {
-  id: 1,
+  uuid: '1',
   versjon: 1,
   sprakkode: {
     kode: '-',

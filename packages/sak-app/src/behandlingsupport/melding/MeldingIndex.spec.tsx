@@ -29,8 +29,7 @@ describe('<MeldingIndex>', () => {
   };
 
   const valgtBehandling = {
-    id: 1,
-    uuid: '1212',
+    uuid: '1',
     versjon: 123,
     type: {
       kode: BehandlingType.FORSTEGANGSSOKNAD,
@@ -160,7 +159,7 @@ describe('<MeldingIndex>', () => {
     const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE.name);
     expect(reqData).toHaveLength(1);
     expect(reqData[0].params).toEqual({
-      behandlingId: 1,
+      behandlingUuid: '1',
       mottaker: message.mottaker,
       brevmalkode: message.brevmalkode,
       fritekst: message.fritekst,
@@ -202,7 +201,7 @@ describe('<MeldingIndex>', () => {
     const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE.name);
     expect(reqData).toHaveLength(1);
     expect(reqData[0].params).toEqual({
-      behandlingId: 1,
+      behandlingUuid: '1',
       mottaker: message.mottaker,
       brevmalkode: message.brevmalkode,
       fritekst: message.fritekst,
@@ -244,7 +243,7 @@ describe('<MeldingIndex>', () => {
     const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE.name);
     expect(reqData).toHaveLength(1);
     expect(reqData[0].params).toEqual({
-      behandlingId: 1,
+      behandlingUuid: '1',
       mottaker: message.mottaker,
       brevmalkode: message.brevmalkode,
       fritekst: message.fritekst,
@@ -286,7 +285,7 @@ describe('<MeldingIndex>', () => {
     const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE.name);
     expect(reqData).toHaveLength(1);
     expect(reqData[0].params).toEqual({
-      behandlingId: 1,
+      behandlingUuid: '1',
       mottaker: message.mottaker,
       brevmalkode: message.brevmalkode,
       fritekst: message.fritekst,

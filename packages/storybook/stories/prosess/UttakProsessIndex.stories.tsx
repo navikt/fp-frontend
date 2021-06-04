@@ -4,7 +4,7 @@ import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import UttakProsessIndex from '@fpsak-frontend/prosess-uttak';
 import {
-  Behandling, Fagsak, FamilieHendelseSamling, Personoversikt, Soknad, UttakStonadskontoer,
+  Behandling, FamilieHendelseSamling, Personoversikt, Soknad, UttakStonadskontoer,
 } from '@fpsak-frontend/types';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
@@ -35,10 +35,6 @@ const aksjonspunkter = [
   },
 ];
 
-const fagsak = {
-  saksnummer: '1',
-} as Fagsak;
-
 const familiehendelse = {
   gjeldende: {
     skjaringstidspunkt: '2019-11-04',
@@ -51,7 +47,7 @@ const familiehendelse = {
 } as FamilieHendelseSamling;
 
 const behandling = {
-  id: 1,
+  uuid: '1',
   versjon: 1,
   type: {
     kode: 'BT-002',
@@ -440,7 +436,6 @@ const arbeidsgiverOpplysningerPerId = {
 
 export const visProsessUttak = () => (
   <UttakProsessIndex
-    fagsak={fagsak}
     behandling={behandling}
     uttaksresultatPerioder={uttaksresultatPerioder}
     uttakStonadskontoer={uttakStonadskontoer}
@@ -456,10 +451,7 @@ export const visProsessUttak = () => (
     isReadOnly={boolean('isReadOnly', false)}
     readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
     tempUpdateStonadskontoer={action('button-click') as (params: {
-      behandlingId: {
-        saksnummer: string;
-        behandlingId: number;
-      };
+      behandlingUuid: string;
       perioder: any;
     }) => Promise<any>}
     isAksjonspunktOpen={boolean('isAksjonspunktOpen', true)}

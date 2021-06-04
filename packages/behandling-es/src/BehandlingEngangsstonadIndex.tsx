@@ -33,7 +33,7 @@ const endepunkterSomSkalHentesEnGang = [
 
 const BehandlingEngangsstonadIndex: FunctionComponent<StandardBehandlingProps> = ({
   behandlingEventHandler,
-  behandlingId,
+  behandlingUuid,
   oppdaterBehandlingVersjon,
   kodeverk,
   fagsak,
@@ -49,7 +49,7 @@ const BehandlingEngangsstonadIndex: FunctionComponent<StandardBehandlingProps> =
   const {
     behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
   } = useBehandling(
-    requestEsApi, EsBehandlingApiKeys.BEHANDLING_ES, behandlingId, oppdaterBehandlingVersjon,
+    requestEsApi, EsBehandlingApiKeys.BEHANDLING_ES, behandlingUuid, oppdaterBehandlingVersjon,
   );
 
   const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter } = useLagreAksjonspunkt(

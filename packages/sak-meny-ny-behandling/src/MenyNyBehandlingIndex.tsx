@@ -19,13 +19,12 @@ export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyNyBehand
 interface OwnProps {
   ytelseType: Kodeverk;
   saksnummer: string;
-  behandlingId?: number;
   behandlingUuid?: string;
   behandlingVersjon?: number;
   behandlingType?: Kodeverk;
   lagNyBehandling: (isTilbakekreving: boolean, data: {
     saksnummer: string;
-    behandlingId?: number;
+    behandlingUuid?: string;
   } & FormValues) => void;
   behandlingstyper: KodeverkMedNavn[];
   tilbakekrevingRevurderingArsaker: KodeverkMedNavn[];
@@ -50,7 +49,6 @@ interface OwnProps {
 const MenyNyBehandlingIndex: FunctionComponent<OwnProps> = ({
   ytelseType,
   saksnummer,
-  behandlingId,
   behandlingUuid,
   behandlingVersjon,
   behandlingType,
@@ -68,17 +66,17 @@ const MenyNyBehandlingIndex: FunctionComponent<OwnProps> = ({
 }) => {
   const submit = useCallback((formValues: FormValues) => {
     const isTilbakekreving = !!formValues.behandlingType && TILBAKEKREVING_BEHANDLINGSTYPER.includes(formValues.behandlingType);
-    const tilbakekrevingBehandlingId = behandlingId && isTilbakekreving ? { behandlingId } : {};
+    const tilbakekrevingBehandlingUuid = behandlingUuid && isTilbakekreving ? { behandlingUuid } : {};
     const params = {
       saksnummer,
-      ...tilbakekrevingBehandlingId,
+      ...tilbakekrevingBehandlingUuid,
       ...formValues,
     };
 
     lagNyBehandling(isTilbakekreving, params);
 
     lukkModal();
-  }, [behandlingId, behandlingVersjon]);
+  }, [behandlingUuid, behandlingVersjon]);
   return (
     <RawIntlProvider value={intl}>
       <ReduxWrapper formName="MenyNyBehandlingIndex">
@@ -93,7 +91,6 @@ const MenyNyBehandlingIndex: FunctionComponent<OwnProps> = ({
           revurderingArsaker={revurderingArsaker}
           kanTilbakekrevingOpprettes={kanTilbakekrevingOpprettes}
           behandlingType={behandlingType}
-          behandlingId={behandlingId}
           behandlingUuid={behandlingUuid}
           uuidForSistLukkede={uuidForSistLukkede}
           erTilbakekrevingAktivert={erTilbakekrevingAktivert}

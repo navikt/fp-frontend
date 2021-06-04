@@ -31,7 +31,7 @@ describe('<DokumentIndex>', () => {
     requestApi.mock(FpsakApiKeys.ALL_DOCUMENTS.name, documents);
 
     const wrapper = shallow(<DokumentIndex
-      behandlingId={1}
+      behandlingUuid="1"
       behandlingVersjon={2}
       saksnummer="123"
     />);

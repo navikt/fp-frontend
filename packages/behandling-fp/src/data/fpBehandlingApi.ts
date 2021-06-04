@@ -9,15 +9,12 @@ import {
 import { NyBehandlendeEnhetParams, SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
 type StonadskontoGittUttaksPerioderParams = {
-  behandlingId: {
-    saksnummer: string;
-    behandlingId: number;
-  };
+  behandlingUuid: string;
   perioder: any;
 }
 
 export const FpBehandlingApiKeys = {
-  BEHANDLING_FP: new RestKey<Behandling, { behandlingId: number }>('BEHANDLING_FP'),
+  BEHANDLING_FP: new RestKey<Behandling, { behandlingUuid: string }>('BEHANDLING_FP'),
   UPDATE_ON_HOLD: new RestKey<void, SettPaVentParams>('UPDATE_ON_HOLD'),
   SAVE_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_AKSJONSPUNKT'),
   SAVE_OVERSTYRT_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_OVERSTYRT_AKSJONSPUNKT'),
@@ -48,10 +45,10 @@ export const FpBehandlingApiKeys = {
   UTTAK_STONADSKONTOER: new RestKey<UttakStonadskontoer, void>('UTTAK_STONADSKONTOER'),
   UTTAK_KONTROLLER_FAKTA_PERIODER: new RestKey<UttakKontrollerFaktaPerioderWrapper, void>('UTTAK_KONTROLLER_FAKTA_PERIODER'),
   BEHANDLING_NY_BEHANDLENDE_ENHET: new RestKey<void, NyBehandlendeEnhetParams>('BEHANDLING_NY_BEHANDLENDE_ENHET'),
-  HENLEGG_BEHANDLING: new RestKey<void, { behandlingId: number, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>('HENLEGG_BEHANDLING'),
-  RESUME_BEHANDLING: new RestKey<Behandling, { behandlingId: number, behandlingVersjon: number }>('RESUME_BEHANDLING'),
-  BEHANDLING_ON_HOLD: new RestKey<void, { behandlingId: number, behandlingVersjon: number, frist: string, ventearsak: Kodeverk }>('BEHANDLING_ON_HOLD'),
-  OPEN_BEHANDLING_FOR_CHANGES: new RestKey<Behandling, { behandlingId: number, behandlingVersjon: number }>('OPEN_BEHANDLING_FOR_CHANGES'),
+  HENLEGG_BEHANDLING: new RestKey<void, { behandlingUuid: string, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>('HENLEGG_BEHANDLING'),
+  RESUME_BEHANDLING: new RestKey<Behandling, { behandlingUuid: string, behandlingVersjon: number }>('RESUME_BEHANDLING'),
+  BEHANDLING_ON_HOLD: new RestKey<void, { behandlingUuid: string, behandlingVersjon: number, frist: string, ventearsak: Kodeverk }>('BEHANDLING_ON_HOLD'),
+  OPEN_BEHANDLING_FOR_CHANGES: new RestKey<Behandling, { behandlingUuid: string, behandlingVersjon: number }>('OPEN_BEHANDLING_FOR_CHANGES'),
   VERGE_OPPRETT: new RestKey<Behandling, any>('VERGE_OPPRETT'),
   VERGE_FJERN: new RestKey<Behandling, any>('VERGE_FJERN'),
   UTLAND_DOK_STATUS: new RestKey<{ dokStatus: string }, void>('UTLAND_DOK_STATUS'),

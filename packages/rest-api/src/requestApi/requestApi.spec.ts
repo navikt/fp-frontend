@@ -31,7 +31,7 @@ describe('RequestApi', () => {
 
     const requestConfig = new RequestConfig('BEHANDLING', '/behandling');
     const params = {
-      behandlingId: 1,
+      behandlingUuid: '1',
     };
 
     const api = new RequestApi(httpClientMock, [requestConfig]);

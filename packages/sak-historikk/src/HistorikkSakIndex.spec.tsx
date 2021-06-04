@@ -15,7 +15,7 @@ describe('<HistorikkSakIndex>', () => {
       saksnummer="123"
       getBehandlingLocation={() => ({} as Location)}
       createLocationForSkjermlenke={() => ({} as Location)}
-      valgtBehandlingId={1}
+      valgtBehandlingUuid="1"
     />);
 
     expect(wrapper.find(History)).toHaveLength(1);

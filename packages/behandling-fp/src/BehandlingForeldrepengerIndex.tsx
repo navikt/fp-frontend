@@ -43,7 +43,7 @@ const endepunkterSomSkalHentesEnGang = [
 
 const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> = ({
   behandlingEventHandler,
-  behandlingId,
+  behandlingUuid,
   oppdaterBehandlingVersjon,
   kodeverk,
   fagsak,
@@ -59,7 +59,7 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
   const {
     behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
   } = useBehandling(
-    requestFpApi, FpBehandlingApiKeys.BEHANDLING_FP, behandlingId, oppdaterBehandlingVersjon,
+    requestFpApi, FpBehandlingApiKeys.BEHANDLING_FP, behandlingUuid, oppdaterBehandlingVersjon,
   );
 
   const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter } = useLagreAksjonspunkt(
@@ -154,7 +154,6 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
               <FortsattMedlemskapProsessStegInitPanel {...props} rettigheter={rettigheter} />
               <UttakProsessStegInitPanel
                 {...props}
-                fagsak={fagsak}
                 arbeidsgiverOpplysningerPerId={arbeidsgivere}
                 personoversikt={personoversikt}
                 rettigheter={rettigheter}

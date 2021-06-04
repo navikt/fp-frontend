@@ -53,12 +53,12 @@ describe('<TilbakekrevingPeriodeForm>', () => {
       oppdaterSplittedePerioder={() => undefined}
       setNestePeriode={() => undefined}
       setForrigePeriode={() => undefined}
+      behandlingUuid="1"
       antallPerioderMedAksjonspunkt={2}
       vilkarResultatTyper={[]}
       aktsomhetTyper={aktsomhetTyper}
       sarligGrunnTyper={sarligGrunnTyper}
       reduserteBelop={[]}
-      behandlingId={1}
       beregnBelop={() => undefined}
       intl={intlMock}
       vilkarsVurdertePerioder={[]}
@@ -129,7 +129,7 @@ describe('<TilbakekrevingPeriodeForm>', () => {
       aktsomhetTyper={aktsomhetTyper}
       sarligGrunnTyper={sarligGrunnTyper}
       reduserteBelop={[]}
-      behandlingId={1}
+      behandlingUuid="1"
       beregnBelop={() => undefined}
       intl={intlMock}
       vilkarsVurdertePerioder={vilkårsPerioder}

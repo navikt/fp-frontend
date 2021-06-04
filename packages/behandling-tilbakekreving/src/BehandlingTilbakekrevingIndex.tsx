@@ -22,7 +22,7 @@ interface OwnProps {
 
 const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehandlingProps> = ({
   behandlingEventHandler,
-  behandlingId,
+  behandlingUuid,
   oppdaterBehandlingVersjon,
   kodeverk: fpsakKodeverk,
   fagsak,
@@ -40,7 +40,7 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehand
   const {
     behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
   } = useBehandling(
-    requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys.BEHANDLING_TILBAKE, behandlingId, oppdaterBehandlingVersjon,
+    requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys.BEHANDLING_TILBAKE, behandlingUuid, oppdaterBehandlingVersjon,
   );
 
   const { lagreAksjonspunkter } = useLagreAksjonspunkt(

@@ -30,7 +30,7 @@ export default {
 };
 
 const lagBehandling = (årsak?: string) => ({
-  id: 1,
+  uuid: '1',
   versjon: 1,
   venteArsakKode: årsak,
   type: {

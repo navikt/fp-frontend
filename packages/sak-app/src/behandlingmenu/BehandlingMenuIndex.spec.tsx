@@ -38,7 +38,6 @@ const fagsak = {
 };
 
 const alleBehandlinger = [{
-  id: 1,
   versjon: 2,
   uuid: '423223',
   behandlingKoet: false,
@@ -100,7 +99,7 @@ describe('BehandlingMenuIndex', () => {
     const wrapper = shallow(<BehandlingMenuIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      behandlingId={1}
+      behandlingUuid="1"
       behandlingVersjon={2}
       oppfriskBehandlinger={sinon.spy()}
       behandlingRettigheter={behandlingRettigheter}

@@ -1,9 +1,9 @@
 import { usePrevious } from '@fpsak-frontend/shared-components';
 
-const useBehandlingEndret = (behandlingId?: number, behandlingVersjon?: number): boolean => {
-  const erBehandlingIdEndretFraUndefined = !usePrevious(behandlingId) && !!behandlingId;
+const useBehandlingEndret = (behandlingUuid?: string, behandlingVersjon?: number): boolean => {
+  const erBehandlingUuidEndretFraUndefined = !usePrevious(behandlingUuid) && !!behandlingUuid;
   const erBehandlingVersjonEndretFraUndefined = !usePrevious(behandlingVersjon) && !!behandlingVersjon;
-  return erBehandlingIdEndretFraUndefined || erBehandlingVersjonEndretFraUndefined;
+  return erBehandlingUuidEndretFraUndefined || erBehandlingVersjonEndretFraUndefined;
 };
 
 export default useBehandlingEndret;

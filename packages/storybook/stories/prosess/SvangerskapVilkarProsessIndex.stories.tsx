@@ -33,7 +33,7 @@ export const visÅpentAksjonspunkt = () => (
   <SvangerskapVilkarProsessIndex
     {...standardProsessProps}
     behandling={{
-      id: 1,
+      uuid: '1',
       versjon: 1,
     } as Behandling}
     aksjonspunkter={[{
@@ -56,7 +56,7 @@ export const visOppfyltVilkår = () => (
   <SvangerskapVilkarProsessIndex
     {...standardProsessProps}
     behandling={{
-      id: 1,
+      uuid: '1',
       versjon: 1,
       behandlingsresultat: {},
     } as Behandling}
@@ -83,7 +83,7 @@ export const visAvslåttVilkår = () => (
   <SvangerskapVilkarProsessIndex
     {...standardProsessProps}
     behandling={{
-      id: 1,
+      uuid: '1',
       versjon: 1,
       behandlingsresultat: {
         avslagsarsak: {

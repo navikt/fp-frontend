@@ -28,7 +28,7 @@ type Writeable<T> = { -readonly [P in keyof T]: T[P] };
 type DeepWriteable<T> = { -readonly [P in keyof T]: DeepWriteable<T[P]> };
 
 const behandling = {
-  id: 1,
+  uuid: '1',
   versjon: 1,
 } as Behandling;
 const lagPGIVerdier = () => ([

@@ -14,7 +14,7 @@ import {
 import alleKodeverk from '../../mocks/alleKodeverk.json';
 
 const behandling = {
-  id: 1,
+  uuid: '1',
   versjon: 1,
   behandlingPaaVent: false,
 } as Behandling;

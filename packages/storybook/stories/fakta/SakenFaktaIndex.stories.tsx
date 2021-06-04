@@ -12,7 +12,7 @@ import SakenFaktaIndex from '@fpsak-frontend/fakta-saken';
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
 const behandling = {
-  id: 1,
+  uuid: '1',
   versjon: 2,
   status: {
     kode: behandlingStatus.BEHANDLING_UTREDES,

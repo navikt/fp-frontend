@@ -24,7 +24,7 @@ const aksjonspunkter = [
   },
 ];
 
-const behandlingId = 1000051;
+const behandlingUuid = '1000051';
 const behandlingVersjon = 1;
 
 const alleKodeverk = {
@@ -74,7 +74,7 @@ const andelField = {
 };
 
 const ownProps = {
-  behandlingId, behandlingVersjon, alleKodeverk, isAksjonspunktClosed: false, skalKunneLeggeTilDagpengerManuelt: false,
+  behandlingUuid, behandlingVersjon, alleKodeverk, isAksjonspunktClosed: false, skalKunneLeggeTilDagpengerManuelt: false,
 };
 
 jest.mock('redux-form', () => {

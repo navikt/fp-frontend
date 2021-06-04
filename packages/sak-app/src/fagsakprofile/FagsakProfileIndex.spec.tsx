@@ -50,7 +50,7 @@ describe('<FagsakProfileIndex>', () => {
   };
 
   const behandling = {
-    id: 1,
+    uuid: '1',
   };
 
   const fagsakRettigheter = {
@@ -91,7 +91,7 @@ describe('<FagsakProfileIndex>', () => {
       alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
       harHentetBehandlinger
       oppfriskBehandlinger={sinon.spy()}
-      behandlingId={1}
+      behandlingUuid="1"
       fagsakRettigheter={fagsakRettigheter}
     />);
 

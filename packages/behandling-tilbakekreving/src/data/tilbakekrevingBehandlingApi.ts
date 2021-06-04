@@ -7,7 +7,7 @@ import {
 import { SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
 export const TilbakekrevingBehandlingApiKeys = {
-  BEHANDLING_TILBAKE: new RestKey<Behandling, { behandlingId: number }>('BEHANDLING_TILBAKE'),
+  BEHANDLING_TILBAKE: new RestKey<Behandling, { behandlingUuid: string }>('BEHANDLING_TILBAKE'),
   AKSJONSPUNKTER: new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER'),
   VEDTAKSBREV: new RestKey<Vedtaksbrev, void>('VEDTAKSBREV'),
   BEREGNINGSRESULTAT: new RestKey<BeregningsresultatTilbakekreving, void>('BEREGNINGSRESULTAT'),
@@ -17,10 +17,10 @@ export const TilbakekrevingBehandlingApiKeys = {
   VILKARVURDERINGSPERIODER: new RestKey<DetaljerteFeilutbetalingsperioder, void>('VILKARVURDERINGSPERIODER'),
   VILKARVURDERING: new RestKey<VilkarsVurdertePerioderWrapper, void>('VILKARVURDERING'),
   BEHANDLING_NY_BEHANDLENDE_ENHET: new RestKey<void,
-    { behandlingId: number, enhetNavn: string, enhetId: string, begrunnelse: string, behandlingVersjon: string }>('BEHANDLING_NY_BEHANDLENDE_ENHET'),
-  HENLEGG_BEHANDLING: new RestKey<void, { behandlingId: number, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>('HENLEGG_BEHANDLING'),
-  RESUME_BEHANDLING: new RestKey<Behandling, { behandlingId: number, behandlingVersjon: number }>('RESUME_BEHANDLING'),
-  BEHANDLING_ON_HOLD: new RestKey<void, { behandlingId: number, behandlingVersjon: number, frist: string, ventearsak: Kodeverk }>('BEHANDLING_ON_HOLD'),
+    { behandlingUuid: string, enhetNavn: string, enhetId: string, begrunnelse: string, behandlingVersjon: string }>('BEHANDLING_NY_BEHANDLENDE_ENHET'),
+  HENLEGG_BEHANDLING: new RestKey<void, { behandlingUuid: string, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>('HENLEGG_BEHANDLING'),
+  RESUME_BEHANDLING: new RestKey<Behandling, { behandlingUuid: string, behandlingVersjon: number }>('RESUME_BEHANDLING'),
+  BEHANDLING_ON_HOLD: new RestKey<void, { behandlingUuid: string, behandlingVersjon: number, frist: string, ventearsak: Kodeverk }>('BEHANDLING_ON_HOLD'),
   UPDATE_ON_HOLD: new RestKey<void, SettPaVentParams>('UPDATE_ON_HOLD'),
   SAVE_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_AKSJONSPUNKT'),
   BEREGNE_BELØP: new RestKey<any, any>('BEREGNE_BELØP'),

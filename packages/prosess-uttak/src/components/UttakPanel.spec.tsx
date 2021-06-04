@@ -7,7 +7,7 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import {
-  Aksjonspunkt, AlleKodeverk, Fagsak, FamilieHendelseSamling, Kodeverk, Personoversikt,
+  Aksjonspunkt, AlleKodeverk, FamilieHendelseSamling, Kodeverk, Personoversikt,
   Soknad, Stonadskonto, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
@@ -152,10 +152,9 @@ describe('<UttakPanel>', () => {
       ytelsefordeling={{} as Ytelsefordeling}
       behandlingType={{} as Kodeverk}
       alleKodeverk={kodeverk}
-      behandlingId={1}
+      behandlingUuid="1"
       behandlingStatus={{} as Kodeverk}
       employeeHasAccess
-      fagsak={{} as Fagsak}
       tempUpdateStonadskontoer={sinon.spy()}
       validate={sinon.spy()}
       onSubmit={sinon.spy()}
@@ -205,10 +204,9 @@ describe('<UttakPanel>', () => {
       ytelsefordeling={{} as Ytelsefordeling}
       behandlingType={{} as Kodeverk}
       alleKodeverk={kodeverk}
-      behandlingId={1}
+      behandlingUuid="1"
       behandlingStatus={{} as Kodeverk}
       employeeHasAccess
-      fagsak={{} as Fagsak}
       tempUpdateStonadskontoer={sinon.spy()}
       validate={sinon.spy()}
       onSubmit={sinon.spy()}

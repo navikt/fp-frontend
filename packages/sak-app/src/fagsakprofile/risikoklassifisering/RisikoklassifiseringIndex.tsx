@@ -27,7 +27,7 @@ const getReadOnly = (navAnsatt: NavAnsatt, rettigheter: AksessRettigheter, erPaa
 interface OwnProps {
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
-  behandlingId?: number;
+  behandlingUuid?: string;
   behandlingVersjon?: number;
   kontrollresultat?: Risikoklassifisering;
   risikoAksjonspunkt?: Aksjonspunkt;
@@ -46,9 +46,9 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
   risikoAksjonspunkt,
   kontrollresultat,
   behandlingVersjon,
-  behandlingId,
+  behandlingUuid,
 }) => {
-  const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
+  const behandling = alleBehandlinger.find((b) => b.uuid === behandlingUuid);
   const erPaaVent = behandling ? behandling.behandlingPaaVent : false;
   const behandlingStatus = behandling?.status;
   const behandlingType = behandling?.type;
@@ -80,14 +80,14 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
     if (!!risikoAksjonspunkt && risikoAksjonspunkt.status.kode === aksjonspunktStatus.UTFORT) {
       history.push(getRiskPanelLocationCreator(location)(false));
     }
-  }, [!!risikoAksjonspunkt, behandlingId, behandlingVersjon]);
+  }, [!!risikoAksjonspunkt, behandlingUuid, behandlingVersjon]);
 
   const submitAksjonspunkt = useCallback((aksjonspunkt: VurderFaresignalerAp) => {
-    if (!behandlingId || !behandlingVersjon) {
+    if (!behandlingUuid || !behandlingVersjon) {
       return Promise.reject();
     }
     const params = {
-      behandlingId,
+      behandlingUuid,
       saksnummer: fagsak.saksnummer,
       behandlingVersjon,
       bekreftedeAksjonspunktDtoer: [{
@@ -97,7 +97,7 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
     };
 
     return behandlingEventHandler.lagreRisikoklassifiseringAksjonspunkt(params);
-  }, [behandlingId, behandlingVersjon]);
+  }, [behandlingUuid, behandlingVersjon]);
 
   return (
     <RisikoklassifiseringSakIndex

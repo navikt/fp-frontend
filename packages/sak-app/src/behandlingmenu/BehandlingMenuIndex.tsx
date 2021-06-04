@@ -37,9 +37,9 @@ const BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES = [
   BehandlingType.TILBAKEKREVING_REVURDERING,
 ];
 
-const findNewBehandlingId = (alleBehandlinger: BehandlingAppKontekst[]): number => {
+const findNewBehandlingUuid = (alleBehandlinger: BehandlingAppKontekst[]): string => {
   alleBehandlinger.sort((b1, b2) => moment(b2.opprettet).diff(moment(b1.opprettet)));
-  return alleBehandlinger[0].id;
+  return alleBehandlinger[0].uuid;
 };
 
 const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKontekst[] = []): string | undefined => {
@@ -51,16 +51,16 @@ const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKont
 const skalLageVergeFn = (
   vergeType: VergeBehandlingmenyValg,
   vergeMenyvalg?: VergeBehandlingmenyValg,
-  behandlingId?: number,
+  behandlingUuid?: string,
   behandlingVersjon?: number,
-): boolean => vergeMenyvalg === vergeType && !!behandlingId && !!behandlingVersjon;
+): boolean => vergeMenyvalg === vergeType && !!behandlingUuid && !!behandlingVersjon;
 
 const EMPTY_ARRAY = [] as BehandlingAppKontekst[];
 
 interface OwnProps {
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
-  behandlingId?: number;
+  behandlingUuid?: string;
   behandlingVersjon?: number;
   behandlingRettigheter?: BehandlingRettigheter;
   sakRettigheter: SakRettigheter;
@@ -70,13 +70,13 @@ interface OwnProps {
 export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   fagsak,
   alleBehandlinger = EMPTY_ARRAY,
-  behandlingId,
+  behandlingUuid,
   behandlingVersjon,
   sakRettigheter,
   behandlingRettigheter,
   oppfriskBehandlinger,
 }) => {
-  const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
+  const behandling = alleBehandlinger.find((b) => b.uuid === behandlingUuid);
 
   const { push: pushLocation } = useHistory();
   const location = useLocation();
@@ -85,7 +85,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   useEffect(() => {
     // Når antallet har endret seg er det laget en ny behandling og denne må da velges
     if (ref.current && ref.current > 0) {
-      const pathname = pathToBehandling(fagsak.saksnummer, findNewBehandlingId(alleBehandlinger));
+      const pathname = pathToBehandling(fagsak.saksnummer, findNewBehandlingUuid(alleBehandlinger));
       pushLocation(getLocationWithDefaultProsessStegAndFakta({ ...location, pathname }));
     }
 
@@ -133,12 +133,12 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   const setLocation = () => {
     pushLocation(getLocationWithDefaultProsessStegAndFakta({
       ...location,
-      pathname: pathToBehandling(fagsak.saksnummer, behandlingId),
+      pathname: pathToBehandling(fagsak.saksnummer, behandlingUuid),
     }));
   };
-  const fjernVergeFn = skalLageVergeFn(VergeBehandlingmenyValg.FJERN, vergeMenyvalg, behandlingId, behandlingVersjon)
+  const fjernVergeFn = skalLageVergeFn(VergeBehandlingmenyValg.FJERN, vergeMenyvalg, behandlingUuid, behandlingVersjon)
     ? () => behandlingEventHandler.fjernVerge().then(setLocation) : undefined;
-  const opprettVergeFn = skalLageVergeFn(VergeBehandlingmenyValg.OPPRETT, vergeMenyvalg, behandlingId, behandlingVersjon)
+  const opprettVergeFn = skalLageVergeFn(VergeBehandlingmenyValg.OPPRETT, vergeMenyvalg, behandlingUuid, behandlingVersjon)
     ? () => behandlingEventHandler.opprettVerge().then(setLocation) : undefined;
   return (
     <MenySakIndex
@@ -203,7 +203,6 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
           .medModal((lukkModal) => (
             <MenyNyBehandlingIndex
               saksnummer={fagsak.saksnummer}
-              behandlingId={behandlingId}
               behandlingUuid={behandling?.uuid}
               behandlingVersjon={behandlingVersjon}
               behandlingType={behandling?.type}

@@ -19,7 +19,6 @@ describe('<FatterVedtakApprovalModal>', () => {
       intl={intlMock}
       closeEvent={closeEventCallback}
       allAksjonspunktApproved
-      behandlingId={1}
       behandlingStatusKode={behandlingStatus.FATTER_VEDTAK}
       behandlingTypeKode={BehandlingType.KLAGE}
       erKlageWithKA
@@ -39,7 +38,6 @@ describe('<FatterVedtakApprovalModal>', () => {
       intl={intlMock}
       closeEvent={closeEventCallback}
       allAksjonspunktApproved
-      behandlingId={1}
       behandlingStatusKode={behandlingStatus.FATTER_VEDTAK}
       behandlingTypeKode={BehandlingType.FORSTEGANGSSOKNAD}
       erKlageWithKA
@@ -61,7 +59,6 @@ describe('<FatterVedtakApprovalModal>', () => {
       intl={intlMock}
       closeEvent={closeEventCallback}
       allAksjonspunktApproved
-      behandlingId={1}
       behandlingStatusKode={behandlingStatus.FATTER_VEDTAK}
       behandlingTypeKode={BehandlingType.FORSTEGANGSSOKNAD}
       erKlageWithKA

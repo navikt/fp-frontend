@@ -131,7 +131,7 @@ describe('<BehandleAnkeForm>', () => {
         },
       }}
       behandlinger={[{
-        id: 1,
+        uuid: '1',
         opprettet: '2021-08-02T00:54:25.455',
         type: {
           kode: behandlingType.FORSTEGANGSSOKNAD,
@@ -142,7 +142,7 @@ describe('<BehandleAnkeForm>', () => {
           kodeverk: '',
         },
       }, {
-        id: 2,
+        uuid: '2',
         opprettet: '2021-10-10T00:54:25.455',
         type: {
           kode: behandlingType.KLAGE,
@@ -154,7 +154,6 @@ describe('<BehandleAnkeForm>', () => {
         },
       }]}
     />);
-
     const select = wrapper.find(SelectField);
     expect(select.at(0).props().selectValues.map((sv) => sv.props.children))
       .toStrictEqual(['Ikke påanket vedtak', '10.10.2021 - Klage - Opprettet']);

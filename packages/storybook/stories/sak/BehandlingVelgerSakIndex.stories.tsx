@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  withKnobs, object, number, boolean,
+  withKnobs, object, boolean,
 } from '@storybook/addon-knobs';
 
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -178,7 +178,7 @@ export const visPanelForValgAvBehandlinger = () => {
         behandlinger={object('behandlinger', behandlinger as Behandling[])}
         getBehandlingLocation={() => locationMock}
         noExistingBehandlinger={boolean('noExistingBehandlinger', false)}
-        behandlingId={number('behandlingId', 1)}
+        behandlingUuid="1"
         showAll={visAlle}
         toggleShowAll={() => toggleVisAlle(!visAlle)}
         getKodeverkFn={getKodeverkFn}

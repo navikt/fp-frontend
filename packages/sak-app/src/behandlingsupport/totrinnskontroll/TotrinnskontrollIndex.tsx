@@ -26,7 +26,7 @@ type Values = {
 
 const getLagreFunksjon = (
   saksnummer: string,
-  behandlingId: number,
+  behandlingUuid: string,
   behandlingVersjon: number,
   setAlleAksjonspunktTilGodkjent: (erGodkjent: boolean) => void,
   setVisBeslutterModal: (visModal: boolean) => void,
@@ -36,7 +36,7 @@ const getLagreFunksjon = (
 ) => {
   const params = {
     saksnummer,
-    behandlingId,
+    behandlingUuid,
     behandlingVersjon,
     bekreftedeAksjonspunktDtoer: [totrinnskontrollData.fatterVedtakAksjonspunktDto],
   };
@@ -74,20 +74,20 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
   const alleKodeverk = useKodeverk(valgtBehandling.type);
 
   const {
-    id, uuid, versjon, type, status,
+    uuid, versjon, type, status,
   } = valgtBehandling;
 
   const erInnsynBehandling = type.kode === BehandlingType.DOKUMENTINNSYN;
 
   const { data: totrinnArsaker } = restApiHooks.useRestApi(
     FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER, undefined, {
-      updateTriggers: [id, status.kode],
+      updateTriggers: [uuid, status.kode],
       suspendRequest: !!erInnsynBehandling || status.kode !== BehandlingStatus.FATTER_VEDTAK,
     },
   );
   const { data: totrinnArsakerReadOnly } = restApiHooks.useRestApi(
     FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY, undefined, {
-      updateTriggers: [id, status.kode],
+      updateTriggers: [uuid, status.kode],
       suspendRequest: !!erInnsynBehandling || status.kode !== BehandlingStatus.BEHANDLING_UTREDES,
     },
   );
@@ -95,7 +95,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
   const { data: totrinnsKlageVurdering } = restApiHooks.useRestApi(
     FpsakApiKeys.TOTRINNS_KLAGE_VURDERING, undefined, {
       keepData: true,
-      updateTriggers: [id, versjon],
+      updateTriggers: [uuid, versjon],
       suspendRequest: !requestApi.hasPath(FpsakApiKeys.TOTRINNS_KLAGE_VURDERING.name),
     },
   );
@@ -111,9 +111,9 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
       gjelderVedtak: true,
     });
   }, []);
-  const onSubmit = useCallback(getLagreFunksjon(fagsak.saksnummer, id, versjon,
+  const onSubmit = useCallback(getLagreFunksjon(fagsak.saksnummer, uuid, versjon,
     setAlleAksjonspunktTilGodkjent, setVisBeslutterModal, godkjennTotrinnsaksjonspunkter),
-  [id, versjon]);
+  [uuid, versjon]);
 
   const totrinnskontrollSkjermlenkeContext = totrinnArsaker || totrinnArsakerReadOnly;
   if (!totrinnskontrollSkjermlenkeContext) {

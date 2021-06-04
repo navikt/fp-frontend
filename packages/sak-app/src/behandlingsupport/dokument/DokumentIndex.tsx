@@ -27,7 +27,7 @@ const sorterDokumenter = ((dok1: Dokument, dok2: Dokument): number => {
 
 interface OwnProps {
   saksnummer: string;
-  behandlingId?: number;
+  behandlingUuid?: string;
   behandlingVersjon?: number;
 }
 
@@ -39,14 +39,14 @@ const EMPTY_ARRAY = [] as Dokument[];
  * Container komponent. Har ansvar for å hente sakens dokumenter fra state og rendre det i en liste.
  */
 export const DokumentIndex: FunctionComponent<OwnProps> = ({
-  behandlingId,
+  behandlingUuid,
   behandlingVersjon,
   saksnummer,
 }) => {
   const forrigeSaksnummer = usePrevious(saksnummer);
-  const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
+  const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingUuid, behandlingVersjon);
   const { data: alleDokumenter = EMPTY_ARRAY, state } = restApiHooks.useRestApi(FpsakApiKeys.ALL_DOCUMENTS, { saksnummer }, {
-    updateTriggers: [behandlingId, behandlingVersjon],
+    updateTriggers: [behandlingUuid, behandlingVersjon],
     suspendRequest: !!forrigeSaksnummer && erBehandlingEndretFraUndefined,
     keepData: true,
   });
@@ -61,7 +61,7 @@ export const DokumentIndex: FunctionComponent<OwnProps> = ({
     <DokumenterSakIndex
       documents={sorterteDokumenter}
       selectDocumentCallback={selectDocument(saksnummer)}
-      behandlingId={behandlingId}
+      behandlingUuid={behandlingUuid}
     />
   );
 };

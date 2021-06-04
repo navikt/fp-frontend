@@ -41,7 +41,7 @@ const lagLagreFunksjon = (
 
   const params = {
     saksnummer: fagsak.saksnummer,
-    behandlingId: behandling.id,
+    behandlingUuid: behandling.uuid,
     behandlingVersjon: behandling.versjon,
     bekreftedeAksjonspunktDtoer: manuellRegistreringDtoList,
   };

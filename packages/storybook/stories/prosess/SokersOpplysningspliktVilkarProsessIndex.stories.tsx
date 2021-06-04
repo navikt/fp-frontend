@@ -13,7 +13,7 @@ import { Aksjonspunkt, Behandling, Soknad } from '@fpsak-frontend/types';
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
 const behandling = {
-  id: 1,
+  uuid: '1',
   versjon: 1,
 } as Behandling;
 
@@ -77,7 +77,7 @@ export const visOppfyltVilkår = () => (
   <SokersOpplysningspliktVilkarProsessIndex
     {...standardProsessProps}
     behandling={{
-      id: 1,
+      uuid: '1',
       versjon: 1,
       behandlingsresultat: {},
     } as Behandling}
@@ -102,7 +102,7 @@ export const visAvslåttVilkår = () => (
   <SokersOpplysningspliktVilkarProsessIndex
     {...standardProsessProps}
     behandling={{
-      id: 1,
+      uuid: '1',
       versjon: 1,
       behandlingsresultat: {
         avslagsarsak: {

@@ -18,7 +18,7 @@ import messages from '../../../i18n/nb_NO.json';
 const intlMock = getIntlMock(messages);
 
 const createBehandling = (behandlingResultatType) => ({
-  id: 1,
+  uuid: '1',
   versjon: 123,
   behandlingPaaVent: false,
   behandlingHenlagt: false,

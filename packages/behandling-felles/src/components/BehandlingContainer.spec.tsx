@@ -9,7 +9,7 @@ import BehandlingContainer from './BehandlingContainer';
 
 describe('<BehandlingContainer>', () => {
   const behandling = {
-    id: 1,
+    uuid: '1',
   } as Behandling;
 
   it('skal rendre komponent korrekt', () => {

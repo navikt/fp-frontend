@@ -14,7 +14,7 @@ import BehandlingPaVent, { SettPaVentParams } from './BehandlingPaVent';
 
 describe('<BehandlingPaVent>', () => {
   const behandling = {
-    id: 1,
+    uuid: '1',
     versjon: 1,
     status: {
       kode: behandlingStatus.BEHANDLING_UTREDES,
@@ -160,7 +160,7 @@ describe('<BehandlingPaVent>', () => {
     const requestData = requestMock.getRequestMockData(PA_VENT_KEY.name);
     expect(requestData).toHaveLength(1);
     expect(requestData[0].params).toEqual({
-      behandlingId: 1,
+      behandlingUuid: '1',
       behandlingVersjon: 1,
       dato: '10.10.2019',
     });

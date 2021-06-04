@@ -14,7 +14,7 @@ import {
 const alleKodeverk = require('../../mocks/alleKodeverk.json'); // eslint-disable-line
 
 const behandling = {
-  id: 1,
+  uuid: '1',
   versjon: 1,
   behandlingsresultat: {
     type: {

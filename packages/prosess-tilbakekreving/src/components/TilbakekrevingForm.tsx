@@ -78,7 +78,6 @@ const formaterPerioderForTidslinje = (vilkarsVurdertePerioder: CustomVilkarsVurd
   });
 
 interface PureOwnProps {
-  behandlingId: number;
   behandlingVersjon: number;
   perioderForeldelse: FeilutbetalingPerioderWrapper;
   alleKodeverk: AlleKodeverkTilbakekreving;
@@ -226,7 +225,6 @@ export class TilbakekrevingFormImpl extends Component<Props, StateProps> {
       vilkarsVurdertePerioder,
       dataForDetailForm,
       navBrukerKjonn,
-      behandlingId,
       behandlingVersjon,
       alleKodeverk,
       beregnBelop,
@@ -279,7 +277,6 @@ export class TilbakekrevingFormImpl extends Component<Props, StateProps> {
                     skjulPeriode={this.togglePeriode}
                     oppdaterPeriode={this.oppdaterPeriode}
                     oppdaterSplittedePerioder={this.oppdaterSplittedePerioder}
-                    behandlingId={behandlingId}
                     behandlingVersjon={behandlingVersjon}
                     alleKodeverk={alleKodeverk}
                     beregnBelop={beregnBelop}

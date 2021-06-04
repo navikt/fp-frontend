@@ -13,13 +13,13 @@ describe('BehandlingerIndex', () => {
       saksnummer: '123',
     };
     const alleBehandlinger = [{
-      id: 1,
+      uuid: '1',
     }];
 
     const wrapper = shallow(<BehandlingerIndex
       fagsak={fagsak as Fagsak}
       alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
-      setBehandlingIdOgVersjon={sinon.spy()}
+      setBehandlingUuidOgVersjon={sinon.spy()}
       setRequestPendingMessage={sinon.spy()}
     />);
 

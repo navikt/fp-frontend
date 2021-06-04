@@ -95,7 +95,7 @@ interface OwnProps {
     erTrekk: boolean;
     belop: number;
   }[];
-  behandlingId: number;
+  behandlingUuid: string;
   beregnBelop: (...args: any[]) => any;
   vilkarsVurdertePerioder: CustomVilkarsVurdertePeriode[];
   valgtVilkarResultatType?: string;
@@ -218,7 +218,7 @@ export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & Dispatch
       oppdaterSplittedePerioder,
       data,
       andelSomTilbakekreves,
-      behandlingId,
+      behandlingUuid,
       beregnBelop,
       intl,
       vilkarsVurdertePerioder,
@@ -234,7 +234,7 @@ export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & Dispatch
           callbackBackward={setForrigePeriode}
           oppdaterSplittedePerioder={oppdaterSplittedePerioder}
           readOnly={readOnly}
-          behandlingId={behandlingId}
+          behandlingUuid={behandlingUuid}
           beregnBelop={beregnBelop}
         />
         <VerticalSpacer twentyPx />
@@ -442,7 +442,6 @@ const validate = (values: any, sarligGrunnTyper: KodeverkMedNavn[], data: DataFo
 };
 
 interface PureOwnProps {
-  behandlingId: number;
   alleKodeverk: AlleKodeverkTilbakekreving;
   oppdaterPeriode: (values: any) => any;
   data: DataForPeriode;

@@ -69,7 +69,7 @@ describe('<DelOppPeriodeModal>', () => {
       finnesBelopMed0Verdi: false,
       cancelEvent: () => undefined,
       splitPeriod: () => undefined,
-      behandlingId: 1,
+      behandlingUuid: '1',
       behandlingVersjon: 2,
     };
 
@@ -93,7 +93,7 @@ describe('<DelOppPeriodeModal>', () => {
       finnesBelopMed0Verdi: false,
       cancelEvent: () => undefined,
       splitPeriod: () => undefined,
-      behandlingId: 1,
+      behandlingUuid: '1',
       behandlingVersjon: 2,
     };
 
@@ -119,7 +119,7 @@ describe('<DelOppPeriodeModal>', () => {
       finnesBelopMed0Verdi: false,
       cancelEvent: () => undefined,
       splitPeriod: () => undefined,
-      behandlingId: 1,
+      behandlingUuid: '1',
       behandlingVersjon: 2,
     };
 
@@ -145,7 +145,7 @@ describe('<DelOppPeriodeModal>', () => {
       finnesBelopMed0Verdi: false,
       cancelEvent: () => undefined,
       splitPeriod: (value: any) => value,
-      behandlingId: 1,
+      behandlingUuid: '1',
       behandlingVersjon: 2,
     };
 
