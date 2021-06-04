@@ -12,7 +12,7 @@ import BeslutterModalIndex from './BeslutterModalIndex';
 
 describe('<BeslutterModalIndex>', () => {
   const behandling = {
-    id: 1,
+    uuid: '1',
     versjon: 2,
     behandlingsresultat: {},
     type: {

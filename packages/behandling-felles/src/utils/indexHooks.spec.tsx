@@ -21,11 +21,11 @@ describe('indexHooks', () => {
   };
 
   const behandlingSomHentes = {
-    id: 1,
+    uuid: '1',
   } as Behandling;
 
   it('skal hente behandling fra server og returnere behandling m.m.', () => {
-    const BEHANDLING_KEY = new RestKey<Behandling, { behandlingId: number }>('BEHANDLING_KEY');
+    const BEHANDLING_KEY = new RestKey<Behandling, { behandlingUuid: string }>('BEHANDLING_KEY');
 
     useEffect = jest.spyOn(React, 'useEffect');
 
@@ -42,7 +42,7 @@ describe('indexHooks', () => {
     mockUseEffect();
     mockUseEffect();
 
-    const wrapper = shallow(<HookWrapper hook={() => useBehandling(requestMock, BEHANDLING_KEY, 1)} />);
+    const wrapper = shallow(<HookWrapper hook={() => useBehandling(requestMock, BEHANDLING_KEY, '1')} />);
 
     // @ts-ignore
     const { hook } = wrapper.find('div').props();

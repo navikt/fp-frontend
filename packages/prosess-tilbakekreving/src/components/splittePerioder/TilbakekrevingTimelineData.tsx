@@ -11,7 +11,7 @@ type OwnProps = {
   callbackBackward: (...args: any[]) => any;
   oppdaterSplittedePerioder: (...args: any[]) => any;
   readOnly: boolean;
-  behandlingId: number;
+  behandlingUuid: string;
   beregnBelop: (data: any) => Promise<any>;
 };
 
@@ -21,7 +21,7 @@ export const TilbakekrevingTimelineData: FunctionComponent<OwnProps> = ({
   callbackBackward,
   readOnly,
   oppdaterSplittedePerioder,
-  behandlingId,
+  behandlingUuid,
   beregnBelop,
 }) => (
   <Row>
@@ -32,7 +32,7 @@ export const TilbakekrevingTimelineData: FunctionComponent<OwnProps> = ({
         periode={periode}
         readOnly={readOnly}
         oppdaterSplittedePerioder={oppdaterSplittedePerioder}
-        behandlingId={behandlingId}
+        behandlingUuid={behandlingUuid}
         beregnBelop={beregnBelop}
       />
       <PeriodeInformasjon

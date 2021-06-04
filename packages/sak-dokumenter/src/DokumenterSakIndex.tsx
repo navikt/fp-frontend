@@ -12,19 +12,19 @@ const intl = createIntl(messages);
 interface OwnProps {
   documents: Dokument[];
   selectDocumentCallback: (e: React.SyntheticEvent, id?: number | string, dokument?: Dokument) => void;
-  behandlingId?: number;
+  behandlingUuid?: string;
 }
 
 const DokumenterSakIndex: FunctionComponent<OwnProps> = ({
   documents,
   selectDocumentCallback,
-  behandlingId,
+  behandlingUuid,
 }) => (
   <RawIntlProvider value={intl}>
     <DocumentList
       documents={documents}
       selectDocumentCallback={selectDocumentCallback}
-      behandlingId={behandlingId}
+      behandlingUuid={behandlingUuid}
     />
   </RawIntlProvider>
 );

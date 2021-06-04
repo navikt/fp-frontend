@@ -7,22 +7,22 @@ import useBehandlingEndret from '../behandling/useBehandlingEndret';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 import SakRettigheter from './sakRettigheterTsType';
 
-const useHentFagsakRettigheter = (saksnummer: string, behandlingId?: number, behandlingVersjon?: number):
+const useHentFagsakRettigheter = (saksnummer: string, behandlingUuid?: string, behandlingVersjon?: number):
 [ harHentet: boolean, rettigheter?: SakRettigheter ] => {
-  const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
+  const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingUuid, behandlingVersjon);
   const enabledApplicationContexts = useGetEnabledApplikasjonContext();
   const skalHenteFraFpTilbake = enabledApplicationContexts.includes(ApplicationContextPath.FPTILBAKE);
 
   const { data: sakRettigheterFpSak, state: sakRettigheterStateFpSak } = restApiHooks
     .useRestApi(FpsakApiKeys.SAK_RETTIGHETER, { saksnummer }, {
-      updateTriggers: [saksnummer, behandlingId, behandlingVersjon],
+      updateTriggers: [saksnummer, behandlingUuid, behandlingVersjon],
       suspendRequest: !saksnummer || erBehandlingEndretFraUndefined,
       keepData: true,
     });
 
   const { data: sakRettigheterFpTilbake, state: sakRettigheterStateFpTilbake } = restApiHooks
     .useRestApi(FpsakApiKeys.SAK_RETTIGHETER_FPTILBAKE, { saksnummer }, {
-      updateTriggers: [saksnummer, behandlingId, behandlingVersjon],
+      updateTriggers: [saksnummer, behandlingUuid, behandlingVersjon],
       suspendRequest: !skalHenteFraFpTilbake || !saksnummer || erBehandlingEndretFraUndefined,
       keepData: true,
     });

@@ -12,9 +12,9 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   behandlinger: BehandlingAppKontekst[];
-  getBehandlingLocation: (behandlingId: number) => Location;
+  getBehandlingLocation: (behandlingUuid: string) => Location;
   noExistingBehandlinger: boolean;
-  behandlingId?: number;
+  behandlingUuid?: string;
   showAll: boolean;
   toggleShowAll: () => void;
   getKodeverkFn: (kodeverk: Kodeverk, behandlingType: Kodeverk) => KodeverkMedNavn | undefined;
@@ -24,7 +24,7 @@ const BehandlingVelgerSakIndex: FunctionComponent<OwnProps> = ({
   behandlinger,
   getBehandlingLocation,
   noExistingBehandlinger,
-  behandlingId,
+  behandlingUuid,
   showAll,
   toggleShowAll,
   getKodeverkFn,
@@ -34,7 +34,7 @@ const BehandlingVelgerSakIndex: FunctionComponent<OwnProps> = ({
       behandlinger={behandlinger}
       getBehandlingLocation={getBehandlingLocation}
       noExistingBehandlinger={noExistingBehandlinger}
-      behandlingId={behandlingId}
+      behandlingUuid={behandlingUuid}
       showAll={showAll}
       toggleShowAll={toggleShowAll}
       getKodeverkFn={getKodeverkFn}

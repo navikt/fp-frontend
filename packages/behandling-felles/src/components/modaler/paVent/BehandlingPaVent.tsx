@@ -17,7 +17,7 @@ const EMPTY_ARRAY = [] as Aksjonspunkt[];
 export type SettPaVentParams = {
   ventearsak: string;
   frist?: string;
-  behandlingId: number;
+  behandlingUuid: string;
   behandlingVersjon: number;
 }
 
@@ -57,7 +57,7 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
   }, [behandling.versjon]);
 
   const oppdaterPaVentData = useCallback((formData: { ventearsak: string; frist?: string; }) => settPaVent({
-    ...formData, behandlingId: behandling.id, behandlingVersjon: behandling.versjon,
+    ...formData, behandlingUuid: behandling.uuid, behandlingVersjon: behandling.versjon,
   }).then(() => hentBehandling(false)), [behandling.versjon]);
 
   const erManueltSattPaVent = useMemo(() => aksjonspunkter.filter((ap) => isAksjonspunktOpen(ap.status.kode))

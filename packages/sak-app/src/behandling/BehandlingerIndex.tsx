@@ -10,14 +10,14 @@ import BehandlingIndex from './BehandlingIndex';
 interface OwnProps {
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
-  setBehandlingIdOgVersjon: (behandlingId: number, behandlingVersjon: number) => void;
+  setBehandlingUuidOgVersjon: (behandlingUuid: string, behandlingVersjon: number) => void;
   setRequestPendingMessage: (message: string) => void;
 }
 
 export const BehandlingerIndex: FunctionComponent<OwnProps> = ({
   fagsak,
   alleBehandlinger,
-  setBehandlingIdOgVersjon,
+  setBehandlingUuidOgVersjon,
   setRequestPendingMessage,
 }) => (
   <Switch>
@@ -29,7 +29,7 @@ export const BehandlingerIndex: FunctionComponent<OwnProps> = ({
           {...props}
           fagsak={fagsak}
           alleBehandlinger={alleBehandlinger}
-          setBehandlingIdOgVersjon={setBehandlingIdOgVersjon}
+          setBehandlingUuidOgVersjon={setBehandlingUuidOgVersjon}
           setRequestPendingMessage={setRequestPendingMessage}
         />
       )}

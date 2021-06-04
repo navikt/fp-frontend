@@ -17,7 +17,7 @@ const EMPTY_ARRAY = [] as Historikkinnslag[];
 
 interface OwnProps {
   saksnummer: string;
-  behandlingId?: number;
+  behandlingUuid?: string;
   behandlingVersjon?: number;
 }
 
@@ -28,7 +28,7 @@ interface OwnProps {
  */
 const HistorikkIndex: FunctionComponent<OwnProps> = ({
   saksnummer,
-  behandlingId,
+  behandlingUuid,
   behandlingVersjon,
 }) => {
   const enabledApplicationContexts = useGetEnabledApplikasjonContext();
@@ -37,23 +37,23 @@ const HistorikkIndex: FunctionComponent<OwnProps> = ({
   const alleKodeverkFpTilbake = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
 
   const location = useLocation();
-  const getBehandlingLocation = useCallback((bId: number) => ({
+  const getBehandlingLocation = useCallback((bUuid: string) => ({
     ...location,
-    pathname: pathToBehandling(saksnummer, bId),
+    pathname: pathToBehandling(saksnummer, bUuid),
   }), [location]);
 
   const skalBrukeFpTilbakeHistorikk = enabledApplicationContexts.includes(ApplicationContextPath.FPTILBAKE);
-  const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
+  const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingUuid, behandlingVersjon);
   const forrigeSaksnummer = usePrevious(saksnummer);
   const erBehandlingEndret = !!forrigeSaksnummer && erBehandlingEndretFraUndefined;
 
   const { data: historikkFpSak = EMPTY_ARRAY } = restApiHooks.useRestApi(FpsakApiKeys.HISTORY_FPSAK, { saksnummer }, {
-    updateTriggers: [behandlingId, behandlingVersjon],
+    updateTriggers: [behandlingUuid, behandlingVersjon],
     suspendRequest: erBehandlingEndret,
     keepData: true,
   });
   const { data: historikkFpTilbake = EMPTY_ARRAY } = restApiHooks.useRestApi(FpsakApiKeys.HISTORY_FPTILBAKE, { saksnummer }, {
-    updateTriggers: [behandlingId, behandlingVersjon],
+    updateTriggers: [behandlingUuid, behandlingVersjon],
     suspendRequest: !skalBrukeFpTilbakeHistorikk || erBehandlingEndret,
     keepData: true,
   });
@@ -67,7 +67,7 @@ const HistorikkIndex: FunctionComponent<OwnProps> = ({
       saksnummer={saksnummer}
       getBehandlingLocation={getBehandlingLocation}
       createLocationForSkjermlenke={createLocationForSkjermlenke}
-      valgtBehandlingId={behandlingId}
+      valgtBehandlingUuid={behandlingUuid}
     />
   );
 };

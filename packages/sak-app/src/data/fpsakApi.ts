@@ -21,7 +21,6 @@ type Brevmal = {
 }
 
 type SubmitMessageParams = {
-  behandlingId?: number;
   behandlingUuid?: string,
   mottaker?: string;
   brevmalkode: string;
@@ -33,7 +32,7 @@ export type AnnenPartBehandling = {
   saksnr: {
     verdi: string;
   };
-  behandlingId: number;
+  behandlingUuid: string;
 };
 
 type InitLinks = {

@@ -106,7 +106,6 @@ interface OwnProps {
   allAksjonspunktApproved: boolean;
   erKlageWithKA?: boolean;
   behandlingsresultat?: Behandling['behandlingsresultat'];
-  behandlingId: number;
   behandlingStatusKode: string;
   behandlingTypeKode: string;
   harSammeResultatSomOriginalBehandling?: boolean;

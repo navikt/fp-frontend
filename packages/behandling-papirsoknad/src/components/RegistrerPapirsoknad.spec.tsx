@@ -33,7 +33,7 @@ const fagsak = {
 } as Fagsak;
 
 const behandling = {
-  id: 1,
+  uuid: '1',
   versjon: 2,
   status: {
     kode: behandlingStatus.BEHANDLING_UTREDES,
@@ -186,7 +186,7 @@ describe('<RegistrerPapirsoknad>', () => {
     expect(args).toHaveLength(1);
     expect(args[0]).toEqual({
       saksnummer: fagsak.saksnummer,
-      behandlingId: behandling.id,
+      behandlingUuid: behandling.uuid,
       behandlingVersjon: behandling.versjon,
       bekreftedeAksjonspunktDtoer: [{
         '@type': aksjonspunktCodes.REGISTRER_PAPIRSOKNAD_FORELDREPENGER,

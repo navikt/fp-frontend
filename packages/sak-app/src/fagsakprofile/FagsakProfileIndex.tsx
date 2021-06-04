@@ -27,7 +27,7 @@ const findPathToBehandling = (saksnummer: string, location: Location, alleBehand
   if (alleBehandlinger.length === 1) {
     return getLocationWithDefaultProsessStegAndFakta({
       ...location,
-      pathname: pathToBehandling(saksnummer, alleBehandlinger[0].id),
+      pathname: pathToBehandling(saksnummer, alleBehandlinger[0].uuid),
     });
   }
   return pathToBehandlinger(saksnummer);
@@ -36,7 +36,7 @@ const findPathToBehandling = (saksnummer: string, location: Location, alleBehand
 interface OwnProps {
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
-  behandlingId?: number;
+  behandlingUuid?: string;
   behandlingVersjon?: number;
   harHentetBehandlinger: boolean;
   oppfriskBehandlinger: () => void;
@@ -48,13 +48,13 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   fagsak,
   alleBehandlinger,
   harHentetBehandlinger,
-  behandlingId,
+  behandlingUuid,
   behandlingVersjon,
   oppfriskBehandlinger,
   fagsakRettigheter,
   behandlingRettigheter,
 }) => {
-  const [showAll, setShowAll] = useState(!behandlingId);
+  const [showAll, setShowAll] = useState(!behandlingUuid);
   const toggleShowAll = useCallback(() => setShowAll(!showAll), [showAll]);
 
   const getKodeverkFn = useGetKodeverkFn();
@@ -63,25 +63,25 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   const fagsakYtelseTypeMedNavn = useFpSakKodeverkMedNavn(fagsak.fagsakYtelseType);
 
   const { data: risikoAksjonspunkt } = restApiHooks.useRestApi(FpsakApiKeys.RISIKO_AKSJONSPUNKT, undefined, {
-    updateTriggers: [behandlingId, behandlingVersjon],
+    updateTriggers: [behandlingUuid, behandlingVersjon],
     suspendRequest: !requestApi.hasPath(FpsakApiKeys.RISIKO_AKSJONSPUNKT.name),
   });
   const { data: kontrollresultat } = restApiHooks.useRestApi(FpsakApiKeys.KONTROLLRESULTAT, undefined, {
-    updateTriggers: [behandlingId, behandlingVersjon],
+    updateTriggers: [behandlingUuid, behandlingVersjon],
     suspendRequest: !requestApi.hasPath(FpsakApiKeys.KONTROLLRESULTAT.name),
   });
 
   useEffect(() => {
-    setShowAll(!behandlingId);
-  }, [behandlingId]);
+    setShowAll(!behandlingUuid);
+  }, [behandlingUuid]);
 
   const match = useRouteMatch();
   const shouldRedirectToBehandlinger = match.isExact;
 
   const location = useLocation();
-  const getBehandlingLocation = useCallback((valgtBehandlingId) => getLocationWithDefaultProsessStegAndFakta({
+  const getBehandlingLocation = useCallback((valgtBehandlingUuid) => getLocationWithDefaultProsessStegAndFakta({
     ...location,
-    pathname: pathToBehandling(fagsak.saksnummer, valgtBehandlingId),
+    pathname: pathToBehandling(fagsak.saksnummer, valgtBehandlingUuid),
   }), [fagsak.saksnummer]);
 
   return (
@@ -106,7 +106,7 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
               <BehandlingMenuIndex
                 fagsak={fagsak}
                 alleBehandlinger={alleBehandlinger}
-                behandlingId={behandlingId}
+                behandlingUuid={behandlingUuid}
                 behandlingVersjon={behandlingVersjon}
                 oppfriskBehandlinger={oppfriskBehandlinger}
                 behandlingRettigheter={behandlingRettigheter}
@@ -119,7 +119,7 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
               behandlinger={alleBehandlinger}
               getBehandlingLocation={getBehandlingLocation}
               noExistingBehandlinger={alleBehandlinger.length === 0}
-              behandlingId={behandlingId}
+              behandlingUuid={behandlingUuid}
               showAll={showAll}
               toggleShowAll={toggleShowAll}
               getKodeverkFn={getKodeverkFn}
@@ -132,7 +132,7 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
         alleBehandlinger={alleBehandlinger}
         risikoAksjonspunkt={risikoAksjonspunkt}
         kontrollresultat={kontrollresultat}
-        behandlingId={behandlingId}
+        behandlingUuid={behandlingUuid}
         behandlingVersjon={behandlingVersjon}
       />
     </div>

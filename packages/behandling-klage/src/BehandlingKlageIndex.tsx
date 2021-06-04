@@ -17,7 +17,6 @@ import KlageresultatProsessStegInitPanel from './prosessPaneler/KlageresultatPro
 
 interface OwnProps {
   alleBehandlinger: {
-    id: number;
     uuid: string;
     type: Kodeverk;
     status: Kodeverk;
@@ -28,7 +27,7 @@ interface OwnProps {
 
 const BehandlingKlageIndex: FunctionComponent<OwnProps & StandardBehandlingProps> = ({
   behandlingEventHandler,
-  behandlingId,
+  behandlingUuid,
   oppdaterBehandlingVersjon,
   kodeverk,
   fagsak,
@@ -45,7 +44,7 @@ const BehandlingKlageIndex: FunctionComponent<OwnProps & StandardBehandlingProps
   const {
     behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
   } = useBehandling(
-    requestKlageApi, KlageBehandlingApiKeys.BEHANDLING_KLAGE, behandlingId, oppdaterBehandlingVersjon,
+    requestKlageApi, KlageBehandlingApiKeys.BEHANDLING_KLAGE, behandlingUuid, oppdaterBehandlingVersjon,
   );
 
   const { lagreAksjonspunkter } = useLagreAksjonspunkt(

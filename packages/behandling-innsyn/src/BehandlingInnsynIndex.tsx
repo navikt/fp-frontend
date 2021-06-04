@@ -13,7 +13,7 @@ import InnsynVedtakProsessStegInitPanel from './prosessPaneler/InnsynVedtakProse
 
 const BehandlingInnsynIndex: FunctionComponent<StandardBehandlingProps> = ({
   behandlingEventHandler,
-  behandlingId,
+  behandlingUuid,
   oppdaterBehandlingVersjon,
   kodeverk,
   fagsak,
@@ -29,7 +29,7 @@ const BehandlingInnsynIndex: FunctionComponent<StandardBehandlingProps> = ({
   const {
     behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
   } = useBehandling(
-    requestInnsynApi, InnsynBehandlingApiKeys.BEHANDLING_INNSYN, behandlingId, oppdaterBehandlingVersjon,
+    requestInnsynApi, InnsynBehandlingApiKeys.BEHANDLING_INNSYN, behandlingUuid, oppdaterBehandlingVersjon,
   );
 
   const { lagreAksjonspunkter } = useLagreAksjonspunkt(

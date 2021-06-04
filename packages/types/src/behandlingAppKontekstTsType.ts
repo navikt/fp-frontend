@@ -7,7 +7,6 @@ export type BehandlingÅrsak = {
 };
 
 type BehandlingAppKontekst = Readonly<{
-  id: number;
   versjon: number;
   uuid: string;
   status: Kodeverk;

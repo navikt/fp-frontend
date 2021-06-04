@@ -40,7 +40,7 @@ export const hentValgbarePaneler = (
 interface OwnProps {
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
-  behandlingId?: number;
+  behandlingUuid?: string;
   behandlingVersjon?: number;
   behandlingRettigheter?: BehandlingRettigheter;
 }
@@ -54,7 +54,7 @@ interface OwnProps {
 const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   fagsak,
   alleBehandlinger,
-  behandlingId,
+  behandlingUuid,
   behandlingVersjon,
   behandlingRettigheter,
 }) => {
@@ -66,7 +66,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   const [meldingFormData, setMeldingForData] = useState();
   const [beslutterFormData, setBeslutterForData] = useState();
 
-  const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
+  const behandling = alleBehandlinger.find((b) => b.uuid === behandlingUuid);
 
   const history = useHistory();
 
@@ -109,7 +109,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
         {aktivtSupportPanel === SupportTabs.HISTORIKK && (
           <HistorikkIndex
             saksnummer={fagsak.saksnummer}
-            behandlingId={behandlingId}
+            behandlingUuid={behandlingUuid}
             behandlingVersjon={behandlingVersjon}
           />
         )}
@@ -124,7 +124,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
         {aktivtSupportPanel === SupportTabs.DOKUMENTER && (
           <DokumentIndex
             saksnummer={fagsak.saksnummer}
-            behandlingId={behandlingId}
+            behandlingUuid={behandlingUuid}
             behandlingVersjon={behandlingVersjon}
           />
         )}

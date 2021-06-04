@@ -21,7 +21,7 @@ describe('<AvregningProsessIndex>', () => {
   } as Fagsak;
 
   const behandling = {
-    id: 1,
+    uuid: '1',
     versjon: 1,
     sprakkode: {
       kode: 'NO',

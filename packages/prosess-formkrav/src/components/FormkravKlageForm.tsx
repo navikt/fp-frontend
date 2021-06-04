@@ -20,8 +20,8 @@ import styles from './formkravKlageForm.less';
 
 export const IKKE_PA_KLAGD_VEDTAK = 'ikkePaklagdVedtak';
 
-export const getPaKlagdVedtak = (klageFormkavResultat?: KlageVurdering['klageFormkravResultatKA']): string => (klageFormkavResultat.paKlagdBehandlingId
-  ? `${klageFormkavResultat.paKlagdBehandlingId}` : IKKE_PA_KLAGD_VEDTAK);
+export const getPaKlagdVedtak = (klageFormkavResultat?: KlageVurdering['klageFormkravResultatKA']): string => (klageFormkavResultat.vedtakBehandlingUuid
+  ? `${klageFormkavResultat.vedtakBehandlingUuid}` : IKKE_PA_KLAGD_VEDTAK);
 
 const getKlagBareVedtak = (
   avsluttedeBehandlinger: AvsluttetBehandling[],
@@ -32,7 +32,7 @@ const getKlagBareVedtak = (
   return klagBareVedtak.concat([...avsluttedeBehandlinger]
     .sort((b1, b2) => moment(b1.avsluttet).diff(moment(b2.avsluttet)))
     .map((behandling) => (
-      <option key={behandling.id} value={`${behandling.id}`}>
+      <option key={behandling.uuid} value={`${behandling.uuid}`}>
         {`${getKodeverknavn(behandling.type)} ${moment(behandling.avsluttet).format(DATE_TIME_FORMAT)}`}
       </option>
     )));

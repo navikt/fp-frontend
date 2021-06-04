@@ -16,7 +16,7 @@ interface OwnProps {
   perioderForeldelse: FeilutbetalingPerioderWrapper;
   navBrukerKjonn: string;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  beregnBelop: (data: { behandlingId: number; perioder: PeriodeMedBelop[]}) => Promise<any>;
+  beregnBelop: (data: { behandlingUuid: string; perioder: PeriodeMedBelop[]}) => Promise<any>;
 }
 
 const ForeldelseProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPropsTilbakekreving> = ({
@@ -36,7 +36,7 @@ const ForeldelseProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelP
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="ForeldelseProsessIndex" formData={formData} setFormData={setFormData}>
       <ForeldelseForm
-        behandlingId={behandling.id}
+        behandlingUuid={behandling.uuid}
         perioderForeldelse={perioderForeldelse}
         submitCallback={submitCallback}
         readOnly={isReadOnly}

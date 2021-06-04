@@ -42,7 +42,7 @@ const saveAnkeText = (
   behandling: Behandling,
 ) => (aksjonspunktModel: AnkeProsessData) => {
   const data = {
-    behandlingId: behandling.id,
+    behandlingUuid: behandling.uuid,
     ...aksjonspunktModel,
   };
 
@@ -64,7 +64,7 @@ type EndepunktPanelData = {
 interface OwnProps {
   fagsak: Fagsak;
   alleBehandlinger: {
-    id: number;
+    uuid: string;
     type: Kodeverk;
     avsluttet?: string;
   }[];

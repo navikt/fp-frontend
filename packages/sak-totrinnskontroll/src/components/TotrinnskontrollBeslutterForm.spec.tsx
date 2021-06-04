@@ -14,7 +14,7 @@ const location = {
 
 describe('<TotrinnskontrollBeslutterForm>', () => {
   const behandling = {
-    id: 1234,
+    uuid: '1234',
     versjon: 123,
     type: {
       kode: 'BT-001',

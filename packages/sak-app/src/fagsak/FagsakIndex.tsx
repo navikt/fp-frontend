@@ -25,7 +25,7 @@ import useHentFagsakRettigheter from './useHentFagsakRettigheter';
 import useHentAlleBehandlinger from './useHentAlleBehandlinger';
 
 const finnLenkeTilAnnenPart = (annenPartBehandling: AnnenPartBehandling): string => pathToAnnenPart(
-  annenPartBehandling.saksnr.verdi, annenPartBehandling.behandlingId,
+  annenPartBehandling.saksnr.verdi, annenPartBehandling.behandlingUuid,
 );
 
 const erTilbakekreving = (behandlingType?: Kodeverk): boolean => !!behandlingType
@@ -36,8 +36,8 @@ const henterData = (state: RestApiState): boolean => state === RestApiState.NOT_
 const finnSkalIkkeHenteData = (
   location: Location,
   selectedSaksnummer?: string,
-  behandlingId?: string,
-) => !selectedSaksnummer || erUrlUnderBehandling(location) || (erBehandlingValgt(location) && !behandlingId);
+  behandlingUuid?: string,
+) => !selectedSaksnummer || erUrlUnderBehandling(location) || (erBehandlingValgt(location) && !behandlingUuid);
 
 /**
  * FagsakIndex
@@ -48,12 +48,12 @@ const FagsakIndex: FunctionComponent = () => {
   const [behandlingerTeller, setBehandlingTeller] = useState(0);
   const [requestPendingMessage, setRequestPendingMessage] = useState<string>();
 
-  const [behandlingIdOgVersjon, setIdOgVersjon] = useState({ behandlingId: undefined, behandlingVersjon: undefined });
-  const setBehandlingIdOgVersjon = useCallback((nyBehandlingId, nyBehandlingVersjon) => setIdOgVersjon({
-    behandlingId: nyBehandlingId,
+  const [behandlingUuidOgVersjon, setUuidOgVersjon] = useState({ behandlingUuid: undefined, behandlingVersjon: undefined });
+  const setBehandlingUuidOgVersjon = useCallback((nyBehandlingUuid, nyBehandlingVersjon) => setUuidOgVersjon({
+    behandlingUuid: nyBehandlingUuid,
     behandlingVersjon: nyBehandlingVersjon,
   }), []);
-  const { behandlingId, behandlingVersjon } = behandlingIdOgVersjon;
+  const { behandlingUuid, behandlingVersjon } = behandlingUuidOgVersjon;
 
   const oppfriskBehandlinger = useCallback(() => setBehandlingTeller(behandlingerTeller + 1), [behandlingerTeller]);
 
@@ -61,7 +61,7 @@ const FagsakIndex: FunctionComponent = () => {
     paramName: 'saksnummer',
   });
 
-  const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingId, behandlingVersjon);
+  const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingUuid, behandlingVersjon);
 
   const { data: fagsakPersoner, state: fagsakPersonerState } = restApiHooks.useGlobalStateRestApi(FpsakApiKeys.SAK_PERSONER,
     { saksnummer: selectedSaksnummer }, {
@@ -75,26 +75,26 @@ const FagsakIndex: FunctionComponent = () => {
   });
 
   const { data: fagsak, state: fagsakState } = restApiHooks.useRestApi(FpsakApiKeys.FETCH_FAGSAK, { saksnummer: selectedSaksnummer }, {
-    updateTriggers: [selectedSaksnummer, behandlingId, behandlingVersjon],
+    updateTriggers: [selectedSaksnummer, behandlingUuid, behandlingVersjon],
     suspendRequest: !selectedSaksnummer || erBehandlingEndretFraUndefined,
     keepData: true,
   });
 
   const [harFerdighentetfagsakRettigheter, fagsakRettigheter] = useHentFagsakRettigheter(
-    selectedSaksnummer, behandlingId, behandlingVersjon,
+    selectedSaksnummer, behandlingUuid, behandlingVersjon,
   );
 
   const [alleBehandlinger, harFerdighentetAlleBehandlinger] = useHentAlleBehandlinger(
-    selectedSaksnummer, behandlingerTeller, behandlingId, behandlingVersjon,
+    selectedSaksnummer, behandlingerTeller, behandlingUuid, behandlingVersjon,
   );
 
   const location = useLocation();
-  const skalIkkeHenteData = finnSkalIkkeHenteData(location, selectedSaksnummer, behandlingId);
+  const skalIkkeHenteData = finnSkalIkkeHenteData(location, selectedSaksnummer, behandlingUuid);
 
-  const behandling = alleBehandlinger.find((b) => b.id === behandlingId);
+  const behandling = alleBehandlinger.find((b) => b.uuid === behandlingUuid);
 
   const { data: behandlingRettigheter } = restApiHooks.useRestApi(FpsakApiKeys.BEHANDLING_RETTIGHETER, { uuid: behandling?.uuid }, {
-    updateTriggers: [skalIkkeHenteData, behandlingId, behandlingVersjon],
+    updateTriggers: [skalIkkeHenteData, behandlingUuid, behandlingVersjon],
     suspendRequest: skalIkkeHenteData,
     keepData: true,
   });
@@ -125,7 +125,7 @@ const FagsakIndex: FunctionComponent = () => {
                 {...props}
                 fagsak={fagsak}
                 alleBehandlinger={alleBehandlinger}
-                setBehandlingIdOgVersjon={setBehandlingIdOgVersjon}
+                setBehandlingUuidOgVersjon={setBehandlingUuidOgVersjon}
                 setRequestPendingMessage={setRequestPendingMessage}
               />
             )}
@@ -137,7 +137,7 @@ const FagsakIndex: FunctionComponent = () => {
             {fagsak && (
               <FagsakProfileIndex
                 fagsak={fagsak}
-                behandlingId={behandlingId}
+                behandlingUuid={behandlingUuid}
                 behandlingVersjon={behandlingVersjon}
                 alleBehandlinger={alleBehandlinger}
                 harHentetBehandlinger={harFerdighentetAlleBehandlinger}
@@ -152,7 +152,7 @@ const FagsakIndex: FunctionComponent = () => {
           <BehandlingSupportIndex
             fagsak={fagsak}
             alleBehandlinger={alleBehandlinger}
-            behandlingId={behandlingId}
+            behandlingUuid={behandlingUuid}
             behandlingVersjon={behandlingVersjon}
             behandlingRettigheter={behandlingRettigheter}
           />

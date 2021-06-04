@@ -25,7 +25,7 @@ const fagsak = {
   saksnummer: '1234',
 };
 const behandling = {
-  id: 1,
+  uuid: '1',
   versjon: 2,
   status: {
     kode: behandlingStatus.OPPRETTET,
@@ -229,7 +229,7 @@ describe('useStandardFaktaPanelProps', () => {
     expect(args).toHaveLength(2);
     expect(args[0]).toEqual({
       saksnummer: fagsak.saksnummer,
-      behandlingId: behandling.id,
+      behandlingUuid: behandling.uuid,
       behandlingVersjon: behandling.versjon,
       bekreftedeAksjonspunktDtoer: [{
         '@type': '6012',
@@ -298,7 +298,7 @@ describe('useStandardFaktaPanelProps', () => {
     expect(args).toHaveLength(2);
     expect(args[0]).toEqual({
       saksnummer: fagsak.saksnummer,
-      behandlingId: behandling.id,
+      behandlingUuid: behandling.uuid,
       behandlingVersjon: behandling.versjon,
       overstyrteAksjonspunktDtoer: [{
         '@type': '6012',

@@ -33,7 +33,7 @@ describe('<DocumentList>', () => {
       intl={intlMock}
       documents={[document, anotherDocument]}
       selectDocumentCallback={sinon.spy()}
-      behandlingId={1}
+      behandlingUuid="1"
     />, messages);
 
     const label = wrapper.find(Label);
@@ -65,7 +65,7 @@ describe('<DocumentList>', () => {
       intl={intlMock}
       documents={[document]}
       selectDocumentCallback={sinon.spy()}
-      behandlingId={1}
+      behandlingUuid="1"
     />, messages);
 
     const formattedMessage = wrapper.find(FormattedMessage);
@@ -78,7 +78,7 @@ describe('<DocumentList>', () => {
       intl={intlMock}
       documents={[]}
       selectDocumentCallback={sinon.spy()}
-      behandlingId={1}
+      behandlingUuid="1"
     />, messages);
 
     const label = wrapper.find(Normaltekst);

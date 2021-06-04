@@ -26,7 +26,6 @@ const previewHenleggBehandlingDoc = (
   previewHenleggBehandling: (erHenleggelse: boolean, data: any) => void,
   ytelseType: Kodeverk,
   fritekst?: string,
-  behandlingId?: number,
   behandlingUuid?: string,
 ) => (e: React.MouseEvent | React.KeyboardEvent): void => {
   // TODO Hardkoda verdiar. Er dette eit kodeverk?
@@ -36,7 +35,6 @@ const previewHenleggBehandlingDoc = (
     dokumentMal: 'HENLEG',
     fritekst,
     mottaker: 'Søker',
-    behandlingId,
   };
   previewHenleggBehandling(true, data);
   e.preventDefault();
@@ -88,7 +86,6 @@ interface PureOwnProps {
   previewHenleggBehandling: (erHenleggelse: boolean, data: any) => void;
   behandlingUuid?: string;
   ytelseType: Kodeverk;
-  behandlingId?: number;
   behandlingResultatTyper: KodeverkMedNavn[];
   behandlingType: Kodeverk;
 }
@@ -118,7 +115,6 @@ export const HenleggBehandlingModalImpl: FunctionComponent<PureOwnProps & Mapped
   fritekst,
   showLink,
   behandlingType,
-  behandlingId,
   behandlingResultatTyper,
 }) => {
   const henleggArsaker = useMemo(() => getHenleggArsaker(behandlingResultatTyper, behandlingType, ytelseType),
@@ -195,8 +191,8 @@ export const HenleggBehandlingModalImpl: FunctionComponent<PureOwnProps & Mapped
                     <Undertekst>{intl.formatMessage({ id: 'HenleggBehandlingModal.SokerInformeres' })}</Undertekst>
                     <a
                       href=""
-                      onClick={previewHenleggBehandlingDoc(previewHenleggBehandling, ytelseType, fritekst, behandlingId, behandlingUuid)}
-                      onKeyDown={previewHenleggBehandlingDoc(previewHenleggBehandling, ytelseType, fritekst, behandlingId, behandlingUuid)}
+                      onClick={previewHenleggBehandlingDoc(previewHenleggBehandling, ytelseType, fritekst, behandlingUuid)}
+                      onKeyDown={previewHenleggBehandlingDoc(previewHenleggBehandling, ytelseType, fritekst, behandlingUuid)}
                       className="lenke lenke--frittstaende"
                     >
                       {intl.formatMessage({ id: 'HenleggBehandlingModal.ForhandsvisBrev' })}

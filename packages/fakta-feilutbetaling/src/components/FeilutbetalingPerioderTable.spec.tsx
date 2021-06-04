@@ -29,8 +29,6 @@ const mockProps = {
   readOnly: false,
   onChangeÅrsak: sinon.spy(),
   onChangeUnderÅrsak: sinon.spy(),
-  behandlingId: 1,
-  behandlingVersjon: 1,
 };
 
 describe('<FeilutbetalingPerioderTable>', () => {

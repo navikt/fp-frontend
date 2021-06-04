@@ -42,7 +42,7 @@ const mockProps = {
   previewCallback: sinon.spy(),
   hasOpenTilbakekrevingsbehandling: false,
   fagsak: {} as Fagsak,
-  behandlingId: 1,
+  behandlingUuid: '1',
   behandlingVersjon: 2,
   sprakkode: {
     kode: 'NB',

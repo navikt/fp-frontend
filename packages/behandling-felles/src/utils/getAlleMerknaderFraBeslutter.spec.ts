@@ -8,7 +8,7 @@ import getAlleMerknaderFraBeslutter from './getAlleMerknaderFraBeslutter';
 
 describe('<getAlleMerknaderFraBeslutter>', () => {
   const behandling = {
-    id: 1,
+    uuid: '1',
     versjon: 1,
     status: {
       kode: behandlingStatus.BEHANDLING_UTREDES,

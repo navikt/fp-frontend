@@ -26,7 +26,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import { Tidslinje, EventProps } from '@fpsak-frontend/tidslinje';
 import {
-  Aksjonspunkt, Behandling, Fagsak, FamilieHendelseSamling, Kodeverk,
+  Aksjonspunkt, Behandling, FamilieHendelseSamling, Kodeverk,
   Soknad, UttakPeriodeGrense, UttaksresultatPeriode, Ytelsefordeling, Kjønnkode, AlleKodeverk,
   AvklartBarn, UttakStonadskontoer, PeriodeSoker, ArbeidsgiverOpplysningerPerId, Personoversikt,
 } from '@fpsak-frontend/types';
@@ -106,10 +106,9 @@ interface PureOwnProps {
   familiehendelse: FamilieHendelseSamling;
   uttakPeriodeGrense: UttakPeriodeGrense;
   ytelsefordeling: Ytelsefordeling;
-  behandlingId: number;
+  behandlingUuid: string;
   behandlingType: Kodeverk;
   behandlingStatus: Kodeverk;
-  fagsak: Fagsak;
   alleKodeverk: AlleKodeverk;
   readOnly: boolean;
   isApOpen: boolean;
@@ -124,10 +123,7 @@ interface PureOwnProps {
   soknadsType: string;
   omsorgsovertakelseDato?: string;
   tempUpdateStonadskontoer: (params: {
-    behandlingId: {
-      saksnummer: string;
-      behandlingId: number;
-    };
+    behandlingUuid: string;
     perioder: any;
   }) => Promise<any>;
 }
@@ -142,7 +138,6 @@ interface MappedOwnProps {
   hovedsokerKjonnKode?: Kjønnkode;
   isRevurdering: boolean;
   medsokerKjonnKode: Kjønnkode;
-  saksnummer: string;
   soknadDate: string;
   stonadskonto: UttakStonadskontoer;
   uttakPerioder: PeriodeMedClassName[];
@@ -242,8 +237,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
       tempUpdateStonadskontoer: updateKontoer,
       reduxFormChange: formChange,
       formName,
-      behandlingId,
-      saksnummer,
+      behandlingUuid,
     } = this.props;
 
     const transformedResultat = perioder.map((periode) => {
@@ -268,10 +262,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     });
 
     const params = {
-      behandlingId: {
-        saksnummer,
-        behandlingId,
-      },
+      behandlingUuid,
       perioder: transformedResultat,
     };
 
@@ -766,7 +757,6 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
     uttaksresultat,
     uttakPeriodeGrense,
     ytelsefordeling,
-    fagsak,
   } = props;
   const periodeGrenseMottatDato = uttakPeriodeGrense.mottattDato;
   const hovedsokerKjonnKode = person ? person.bruker.kjønn.kode : undefined;
@@ -798,7 +788,6 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
     isRevurdering: props.behandlingType.kode === behandlingType.REVURDERING,
     medsokerKjonnKode,
     person,
-    saksnummer: fagsak.saksnummer,
     soknadDate: determineMottatDato(periodeGrenseMottatDato, mottattDato),
     stonadskonto: formValueSelector(formName)(state, 'stonadskonto'),
     uttaksresultatActivity: lagUttaksresultatActivity(state, props),

@@ -9,7 +9,7 @@ import BehandlingPickerItem from './BehandlingPickerItem';
 
 describe('<BehandlingPickerItem>', () => {
   const behandlingTemplate = {
-    id: 1,
+    uuid: '1',
     versjon: 123,
     type: {
       kode: '',

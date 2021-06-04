@@ -8,7 +8,7 @@ export type BehandlingEventHandler = {
 };
 
 type StandardBehandlingProps = {
-  behandlingId: number;
+  behandlingUuid: string;
   fagsak: Fagsak;
   rettigheter: AksessRettigheter;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;

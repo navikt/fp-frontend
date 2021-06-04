@@ -25,7 +25,6 @@ const fagsak = {
 } as Fagsak;
 
 const behandling = {
-  id: 1,
   uuid: 'test-uuid',
   versjon: 1,
 } as Behandling;
@@ -126,7 +125,7 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
     const response = requestAnkeApi.getRequestMockData(AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING.name);
     expect(response).toHaveLength(1);
     expect(response[0].params).toEqual({
-      behandlingId: 1,
+      behandlingUuid: 'test-uuid',
       kode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
       fritekstTilBrev: 'Dette er en fritekst',
       begrunnelse: 'Dette er en begrunnelse',

@@ -16,9 +16,9 @@ interface OwnProps {
   alleKodeverkFpTilbake?: AlleKodeverkTilbakekreving;
   alleKodeverkFpSak: AlleKodeverk;
   saksnummer?: string;
-  getBehandlingLocation: (behandlingId: number) => Location;
+  getBehandlingLocation: (behandlingUuid: string) => Location;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
-  valgtBehandlingId?: number;
+  valgtBehandlingUuid?: string;
 }
 
 const HistorikkSakIndex: FunctionComponent<OwnProps> = ({
@@ -29,7 +29,7 @@ const HistorikkSakIndex: FunctionComponent<OwnProps> = ({
   saksnummer,
   getBehandlingLocation,
   createLocationForSkjermlenke,
-  valgtBehandlingId,
+  valgtBehandlingUuid,
 }) => (
   <RawIntlProvider value={intl}>
     <History
@@ -41,7 +41,7 @@ const HistorikkSakIndex: FunctionComponent<OwnProps> = ({
       saksnummer={saksnummer}
       getBehandlingLocation={getBehandlingLocation}
       createLocationForSkjermlenke={createLocationForSkjermlenke}
-      valgtBehandlingId={valgtBehandlingId}
+      valgtBehandlingUuid={valgtBehandlingUuid}
     />
   </RawIntlProvider>
 );

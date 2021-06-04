@@ -9,7 +9,7 @@ import InngangsvilkarProsessStegInitPanel from './InngangsvilkarProsessStegInitP
 describe('<InngangsvilkarProsessStegInitPanel>', () => {
   it('skal rendre komponent', () => {
     const wrapper = shallow(<InngangsvilkarProsessStegInitPanel
-      behandling={{ id: 1 } as Behandling}
+      behandling={{ uuid: '1' } as Behandling}
       valgtProsessSteg="default"
       registrerProsessPanel={() => {}}
       oppdaterProsessStegOgFaktaPanelIUrl={() => {}}

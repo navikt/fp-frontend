@@ -25,21 +25,21 @@ export const sortBehandlinger = (behandlinger: BehandlingAppKontekst[]): Behandl
 
 const renderListItems = (
   behandlinger: BehandlingAppKontekst[],
-  getBehandlingLocation: (behandlingId: number) => Location,
+  getBehandlingLocation: (behandlingUuid: string) => Location,
   showAll: boolean,
   toggleShowAll: () => void,
   getKodeverkFn: (kodeverk: Kodeverk, behandlingType: Kodeverk) => KodeverkMedNavn | undefined,
-  behandlingId?: number,
+  behandlingUuid?: string,
 ): ReactElement[] => (
   sortBehandlinger(behandlinger)
-    .filter((behandling) => showAll || behandling.id === behandlingId)
+    .filter((behandling) => showAll || behandling.uuid === behandlingUuid)
     .map((behandling) => (
-      <li key={behandling.id}>
+      <li key={behandling.uuid}>
         <BehandlingPickerItem
           onlyOneBehandling={behandlinger.length === 1}
           behandling={behandling}
           getBehandlingLocation={getBehandlingLocation}
-          isActive={behandling.id === behandlingId}
+          isActive={behandling.uuid === behandlingUuid}
           showAll={showAll}
           toggleShowAll={toggleShowAll}
           getKodeverkFn={getKodeverkFn}
@@ -50,9 +50,9 @@ const renderListItems = (
 
 interface OwnProps {
   behandlinger: BehandlingAppKontekst[];
-  getBehandlingLocation: (behandlingId: number) => Location;
+  getBehandlingLocation: (behandlingUuid: string) => Location;
   noExistingBehandlinger: boolean;
-  behandlingId?: number;
+  behandlingUuid?: string;
   showAll: boolean;
   toggleShowAll: () => void;
   getKodeverkFn: (kodeverk: Kodeverk, behandlingType: Kodeverk) => KodeverkMedNavn | undefined;
@@ -67,14 +67,14 @@ const BehandlingPicker: FunctionComponent<OwnProps> = ({
   noExistingBehandlinger,
   behandlinger,
   getBehandlingLocation,
-  behandlingId,
+  behandlingUuid,
   showAll,
   toggleShowAll,
   getKodeverkFn,
 }) => (
   <ul className={styles.behandlingList}>
     {noExistingBehandlinger && <Normaltekst><FormattedMessage id="BehandlingList.ZeroBehandlinger" /></Normaltekst>}
-    {!noExistingBehandlinger && renderListItems(behandlinger, getBehandlingLocation, showAll, toggleShowAll, getKodeverkFn, behandlingId)}
+    {!noExistingBehandlinger && renderListItems(behandlinger, getBehandlingLocation, showAll, toggleShowAll, getKodeverkFn, behandlingUuid)}
   </ul>
 );
 

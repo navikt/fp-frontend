@@ -10,6 +10,7 @@ import BehandlingPicker, { sortBehandlinger } from './BehandlingPicker';
 
 describe('<BehandlingPicker>', () => {
   const behandlingTemplate = {
+    uuid: '1',
     versjon: 123,
     type: {
       kode: '',
@@ -56,15 +57,15 @@ describe('<BehandlingPicker>', () => {
   it('skal vise alle behandlinger sortert med sist opprettet først i listen', () => {
     const behandlinger = [{
       ...behandlingTemplate,
-      id: 1,
+      uid: '1',
       opprettet: '2017-05-01',
     }, {
       ...behandlingTemplate,
-      id: 2,
+      uuid: '2',
       opprettet: '2018-01-01',
     }, {
       ...behandlingTemplate,
-      id: 3,
+      uuid: '3',
       opprettet: '2017-01-01',
     }];
     const wrapper = shallow(<BehandlingPicker
@@ -78,29 +79,29 @@ describe('<BehandlingPicker>', () => {
 
     const item = wrapper.find(BehandlingPickerItem);
     expect(item).toHaveLength(3);
-    expect(item.first().prop('behandling').id).toEqual(2);
-    expect(item.at(1).prop('behandling').id).toEqual(1);
-    expect(item.last().prop('behandling').id).toEqual(3);
+    expect(item.first().prop('behandling').uuid).toEqual('2');
+    expect(item.at(1).prop('behandling').uuid).toEqual('1');
+    expect(item.last().prop('behandling').uuid).toEqual('3');
   });
 
   it('skal vise alle behandlinger sortert med valgt behandling først i listen', () => {
     const behandlinger = [{
       ...behandlingTemplate,
-      id: 1,
+      uuid: '1',
       opprettet: '2017-05-01',
     }, {
       ...behandlingTemplate,
-      id: 2,
+      uuid: '2',
       opprettet: '2018-01-01',
     }, {
       ...behandlingTemplate,
-      id: 3,
+      uuid: '3',
       opprettet: '2017-01-01',
     }];
     const wrapper = shallow(<BehandlingPicker
       noExistingBehandlinger={false}
       behandlinger={behandlinger as Behandling[]}
-      behandlingId={2}
+      behandlingUuid="2"
       getBehandlingLocation={() => locationMock}
       showAll
       toggleShowAll={sinon.spy()}
@@ -109,9 +110,9 @@ describe('<BehandlingPicker>', () => {
 
     const item = wrapper.find(BehandlingPickerItem);
     expect(item).toHaveLength(3);
-    expect(item.first().prop('behandling').id).toEqual(2);
-    expect(item.at(1).prop('behandling').id).toEqual(1);
-    expect(item.last().prop('behandling').id).toEqual(3);
+    expect(item.first().prop('behandling').uuid).toEqual('2');
+    expect(item.at(1).prop('behandling').uuid).toEqual('1');
+    expect(item.last().prop('behandling').uuid).toEqual('3');
   });
 
   it('skal sortere behandlingene gitt avsluttet og opprettet datoer', () => {

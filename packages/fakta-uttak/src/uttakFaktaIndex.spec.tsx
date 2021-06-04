@@ -12,7 +12,7 @@ import UttakInfoPanel from './components/UttakInfoPanel';
 
 describe('<UttakFaktaIndex>', () => {
   const behandling = {
-    id: 1,
+    uuid: '1',
     versjon: 1,
     sprakkode: {
       kode: 'NO',

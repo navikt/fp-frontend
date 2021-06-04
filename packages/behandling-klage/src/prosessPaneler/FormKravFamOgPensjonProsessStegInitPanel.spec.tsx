@@ -13,7 +13,6 @@ import FormKravFamOgPensjonProsessStegInitPanel from './FormKravFamOgPensjonPros
 describe('<FormKravFamOgPensjonProsessStegInitPanel>', () => {
   it('skal rendre komponent og filtrere avslutte behandlinger', () => {
     const alleBehandlinger = [{
-      id: 1,
       uuid: 'test',
       type: {
         kode: behandlingType.FORSTEGANGSSOKNAD,

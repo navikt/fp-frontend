@@ -13,7 +13,6 @@ import FormKravKlageInstansProsessStegInitPanel from './FormKravKlageInstansPros
 describe('<FormKravKlageInstansProsessStegInitPanel>', () => {
   it('skal rendre komponent og filtrere avslutte behandlinger', () => {
     const alleBehandlinger = [{
-      id: 1,
       uuid: 'test',
       type: {
         kode: behandlingType.FORSTEGANGSSOKNAD,

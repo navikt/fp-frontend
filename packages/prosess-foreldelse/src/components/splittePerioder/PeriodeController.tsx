@@ -29,8 +29,8 @@ export type PeriodeMedFeilutbetaling = {
 }
 
 interface PureOwnProps {
-  behandlingId: number;
-  beregnBelop: (data: { behandlingId: number; perioder: PeriodeMedBelop[]}) => Promise<any>;
+  behandlingUuid: string;
+  beregnBelop: (data: { behandlingUuid: string; perioder: PeriodeMedBelop[]}) => Promise<any>;
   oppdaterSplittedePerioder: (data: PeriodeMedFeilutbetaling[]) => void;
   callbackForward: (event: React.KeyboardEvent | React.MouseEvent) => void;
   callbackBackward: (event: React.KeyboardEvent | React.MouseEvent) => void;
@@ -80,7 +80,7 @@ export class PeriodeController extends Component<PureOwnProps & WrappedComponent
     const {
       periode,
       beregnBelop: callBeregnBelop,
-      behandlingId: selectedBehandlingId,
+      behandlingUuid: selectedBehandlingUuid,
       oppdaterSplittedePerioder,
     } = this.props;
 
@@ -98,7 +98,7 @@ export class PeriodeController extends Component<PureOwnProps & WrappedComponent
     };
 
     const params = {
-      behandlingId: selectedBehandlingId,
+      behandlingUuid: selectedBehandlingUuid,
       perioder: [forstePeriode, andrePeriode],
     };
 

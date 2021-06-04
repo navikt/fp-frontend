@@ -20,7 +20,7 @@ const fagsak = {
   saksnummer: '1234',
 };
 const behandling = {
-  id: 1,
+  uuid: '1',
   versjon: 2,
   status: {
     kode: behandlingStatus.OPPRETTET,

@@ -12,7 +12,7 @@ import { BehandlingEventHandler } from '../types/standardBehandlingProps';
 const DUMMY_KEY = new RestKey<any, any>('');
 
 export type NyBehandlendeEnhetParams = {
-  behandlingId: number;
+  behandlingUuid: string;
   enhetNavn: string;
   enhetId: string;
   begrunnelse: string;
@@ -57,8 +57,8 @@ const useOppdaterFagsak = (
 
 export const useBehandling = (
   requestApi: AbstractRequestApi,
-  behandlingKey: RestKey<Behandling, { behandlingId: number }>,
-  behandlingId: number,
+  behandlingKey: RestKey<Behandling, { behandlingUuid: string }>,
+  behandlingUuid: string,
   oppdaterBehandlingVersjon?: (versjon: number) => void,
 ) => {
   const [behandling, setNyBehandling] = useState<Behandling>();
@@ -76,7 +76,7 @@ export const useBehandling = (
   const { startRequest: hentBehandling, data: behandlingRes, state: behandlingState } = useRestApiRunner(behandlingKey);
   useSetBehandlingVedEndring(setBehandling, behandlingRes);
 
-  const hentBehandlingInklId = useCallback((keepData: boolean) => hentBehandling({ behandlingId }, keepData), []);
+  const hentBehandlingInklId = useCallback((keepData: boolean) => hentBehandling({ behandlingUuid }, keepData), []);
 
   useEffect(() => {
     hentBehandlingInklId(false);
@@ -118,7 +118,7 @@ export const useLagreAksjonspunkt = (
 
 const leggTilBehandlingIdentifikator = (behandling: Behandling, params: any) => ({
   ...params,
-  behandlingId: behandling.id,
+  behandlingUuid: behandling.uuid,
   behandlingVersjon: behandling.versjon,
 });
 
@@ -134,12 +134,12 @@ export const useInitBehandlingHandlinger = (
 
   const { startRequest: nyBehandlendeEnhet } = useRestApiRunner<void, NyBehandlendeEnhetParams>(keys.BEHANDLING_NY_BEHANDLENDE_ENHET);
   const { startRequest: settBehandlingPaVent } = useRestApiRunner<void,
-    { behandlingId: number, behandlingVersjon: number, frist: string, ventearsak: Kodeverk }>(keys.BEHANDLING_ON_HOLD);
-  const { startRequest: taBehandlingAvVent } = useRestApiRunner<Behandling, { behandlingId: number, behandlingVersjon: number }>(keys.RESUME_BEHANDLING);
+    { behandlingUuid: string, behandlingVersjon: number, frist: string, ventearsak: Kodeverk }>(keys.BEHANDLING_ON_HOLD);
+  const { startRequest: taBehandlingAvVent } = useRestApiRunner<Behandling, { behandlingUuid: string, behandlingVersjon: number }>(keys.RESUME_BEHANDLING);
   const { startRequest: henleggBehandling } = useRestApiRunner<void,
-    { behandlingId: number, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>(keys.HENLEGG_BEHANDLING);
+    { behandlingUuid: string, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>(keys.HENLEGG_BEHANDLING);
   const { startRequest: opneBehandlingForEndringer } = useRestApiRunner<Behandling,
-    { behandlingId: number, behandlingVersjon: number }>(keys.OPEN_BEHANDLING_FOR_CHANGES);
+    { behandlingUuid: string, behandlingVersjon: number }>(keys.OPEN_BEHANDLING_FOR_CHANGES);
   const { startRequest: opprettVerge } = useRestApiRunner<Behandling, any>(keys.VERGE_OPPRETT);
   const { startRequest: fjernVerge } = useRestApiRunner<Behandling, any>(keys.VERGE_FJERN);
   const { startRequest: lagreRisikoklassifiseringAksjonspunkt } = useRestApiRunner<Behandling, any>(keys.SAVE_AKSJONSPUNKT);

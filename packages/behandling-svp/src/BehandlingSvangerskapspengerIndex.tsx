@@ -35,7 +35,7 @@ const endepunkterSomSkalHentesEnGang = [
 
 const BehandlingSvangerskapspengerIndex: FunctionComponent<StandardBehandlingProps> = ({
   behandlingEventHandler,
-  behandlingId,
+  behandlingUuid,
   oppdaterBehandlingVersjon,
   kodeverk,
   fagsak,
@@ -51,7 +51,7 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<StandardBehandlingPro
   const {
     behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
   } = useBehandling(
-    requestSvpApi, SvpBehandlingApiKeys.BEHANDLING_SVP, behandlingId, oppdaterBehandlingVersjon,
+    requestSvpApi, SvpBehandlingApiKeys.BEHANDLING_SVP, behandlingUuid, oppdaterBehandlingVersjon,
   );
 
   const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter } = useLagreAksjonspunkt(
