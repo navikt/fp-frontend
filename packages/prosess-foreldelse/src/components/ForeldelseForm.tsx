@@ -245,6 +245,7 @@ export class ForeldelseForm extends Component<PureOwnProps & MappedOwnProps & Di
               />
                 {valgtPeriode && (
                   <ForeldelsePeriodeForm
+                    key={valgtPeriode.fom}
                     periode={valgtPeriode}
                     setNestePeriode={this.setNestePeriode}
                     setForrigePeriode={this.setForrigePeriode}
