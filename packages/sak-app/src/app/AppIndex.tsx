@@ -4,7 +4,6 @@ import React, {
 import { withRouter, match } from 'react-router-dom';
 import moment from 'moment';
 import { Location, History } from 'history';
-import { configureScope } from '@sentry/browser';
 import Modal from 'nav-frontend-modal';
 
 import { useRestApiError } from '@fpsak-frontend/rest-api-hooks';
@@ -42,12 +41,6 @@ const AppIndex: FunctionComponent<OwnProps> = ({
   const [crashMessage, setCrashMessage] = useState<string>();
 
   const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
-
-  useEffect(() => {
-    configureScope((scope) => {
-      scope.setUser({ username: navAnsatt?.navn });
-    });
-  }, [navAnsatt?.navn]);
 
   useEffect(() => {
     if (navAnsatt?.funksjonellTid) {
