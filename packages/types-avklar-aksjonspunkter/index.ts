@@ -1,6 +1,5 @@
 export { default as FaktaAksjonspunkt } from './src/FaktaAksjonspunkt';
 export { default as AvklarVergeAp } from './src/fakta/AvklarVergeAp';
-export { default as AvklarTilleggsopplysningerAp } from './src/fakta/AvklarTilleggsopplysningerAp';
 export { default as MerkOpptjeningUtlandAp } from './src/fakta/MerkOpptjeningUtlandAp';
 export { default as OverstyringUtenlandssakMarkeringAp } from './src/fakta/OverstyringUtenlandssakMarkeringAp';
 export { default as KontrollerAktivitetskravAp } from './src/fakta/KontrollerAktivitetskravAp';

@@ -14,7 +14,6 @@ enum FaktaPanelCode {
   OMSORGSVILKARET = 'omsorgsvilkaaret',
   OPPTJENINGSVILKARET = 'opptjeningsvilkaaret',
   SAKEN = 'saken',
-  TILLEGGSOPPLYSNINGER = 'tilleggsopplysninger',
   UTTAK = 'uttak',
   VERGE = 'verge',
   YTELSER = 'ytelser',

@@ -14,7 +14,7 @@
     "@fpsak-frontend/papirsoknad-panel-lagre-soknad": "1.0.0",
     "@fpsak-frontend/papirsoknad-panel-mottatt-dato": "1.0.0",
     "@fpsak-frontend/papirsoknad-panel-opphold-i-norge": "1.0.0",
-    "@fpsak-frontend/papirsoknad-panel-tilleggsopplysninger": "1.0.0",
+    "@fpsak-frontend/papirsoknad-panel-sprak": "1.0.0",
     "@fpsak-frontend/papirsoknad-panel-virksomhet": "1.0.0",
     "@fpsak-frontend/shared-components": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",

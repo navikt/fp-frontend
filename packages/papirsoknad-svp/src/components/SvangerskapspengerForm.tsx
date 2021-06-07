@@ -12,7 +12,7 @@ import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 import MottattDatoPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-mottatt-dato';
 import FrilansPapirsoknadIndex, { FormValues as FrilansFormValues } from '@fpsak-frontend/papirsoknad-panel-frilans';
 import OppholdINorgePapirsoknadIndex, { FormValues as OppholdFormValues } from '@fpsak-frontend/papirsoknad-panel-opphold-i-norge';
-import TilleggsopplysningerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-tilleggsopplysninger';
+import SprakPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-sprak';
 import LagreSoknadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-lagre-soknad';
 import VirksomhetPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-virksomhet';
 import InntektsgivendeArbeidPapirsoknadIndex, {
@@ -88,7 +88,7 @@ export class SvangerskapspengerForm extends React.Component<PureOwnProps & Mappe
         <FormSection name={TILRETTELEGGING_NAME_PREFIX}>
           <BehovForTilretteleggingPanel readOnly={readOnly} formName={SVANGERSKAPSPENGER_FORM_NAME} namePrefix={TILRETTELEGGING_NAME_PREFIX} />
         </FormSection>
-        <TilleggsopplysningerPapirsoknadIndex readOnly={readOnly} />
+        <SprakPapirsoknadIndex readOnly={readOnly} />
         <MigreringFraInfotrygdPanel readOnly={readOnly} />
         <LagreSoknadPapirsoknadIndex readOnly={readOnly} onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad} form={form} submitting={submitting} />
       </form>

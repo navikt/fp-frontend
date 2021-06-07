@@ -13,7 +13,6 @@ import SakenFaktaInitPanel from './faktaPaneler/SakenFaktaInitPanel';
 import ArbeidsforholdFaktaInitPanel from './faktaPaneler/ArbeidsforholdFaktaInitPanel';
 import YtelserFaktaInitPanel from './faktaPaneler/YtelserFaktaInitPanel';
 import VergeFaktaInitPanel from './faktaPaneler/VergeFaktaInitPanel';
-import TilleggsopplysningerFaktaInitPanel from './faktaPaneler/TilleggsopplysningerFaktaInitPanel';
 import FodseltilretteleggingFaktaInitPanel from './faktaPaneler/FodseltilretteleggingFaktaInitPanel';
 import MedlemskapsvilkaretFaktaInitPanel from './faktaPaneler/MedlemskapsvilkaretFaktaInitPanel';
 import OpptjeningsvilkaretFaktaInitPanel from './faktaPaneler/OpptjeningsvilkaretFaktaInitPanel';
@@ -107,7 +106,6 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<StandardBehandlingPro
               <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <YtelserFaktaInitPanel {...props} />
               <VergeFaktaInitPanel {...props} />
-              <TilleggsopplysningerFaktaInitPanel {...props} />
               <FodseltilretteleggingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} rettigheter={rettigheter} />
               <MedlemskapsvilkaretFaktaInitPanel
                 {...props}

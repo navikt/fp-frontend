@@ -5,7 +5,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 import OppholdINorgePapirsoknadIndex, { FormValues as OppholdFormValues } from '@fpsak-frontend/papirsoknad-panel-opphold-i-norge';
-import TilleggsopplysningerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-tilleggsopplysninger';
+import SprakPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-sprak';
 import RettigheterPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-rettigheter';
 import OmsorgOgAdopsjonPapirsoknadIndex, { FormValues as OmsorgOgAdopsjonFormValues } from '@fpsak-frontend/papirsoknad-panel-omsorg-og-adopsjon';
 import AnnenForelderPapirsoknadIndex, { AnnenForelderFormValues } from '@fpsak-frontend/papirsoknad-panel-annen-forelder';
@@ -47,7 +47,7 @@ const RegistreringAdopsjonOgOmsorgGrid: FunctionComponent<OwnProps> & StaticFunc
     <Column xs="6">
       <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
       <OppholdINorgePapirsoknadIndex form={form} readOnly={readOnly} soknadData={soknadData} alleKodeverk={alleKodeverk} />
-      <TilleggsopplysningerPapirsoknadIndex readOnly={readOnly} />
+      <SprakPapirsoknadIndex readOnly={readOnly} />
     </Column>
     <Column xs="6">
       <FormSection name={OMSORG_FORM_NAME_PREFIX}>

@@ -19,7 +19,6 @@ const aksjonspunktCodesToTextCode = {
   [aksjonspunktCodes.SOKNADSFRISTVILKARET]: 'HistorikkEndretFelt.ErSoknadsfristVilkaretOppfyltForm.ApplicationInformation',
   [aksjonspunktCodes.VURDER_SOKNADSFRIST_FORELDREPENGER]: 'HistorikkEndretFelt.ErSoknadsfristVilkaretOppfyltForm.ApplicationInformation',
   [aksjonspunktCodes.OMSORGSOVERTAKELSE]: 'Historikk.OmsorgOgForeldreansvarInfoPanel.Omsorg',
-  [aksjonspunktCodes.TILLEGGSOPPLYSNINGER]: 'Historikk.TilleggsopplysningerInfoPanel.Tilleggsopplysninger',
   [aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING]: 'Historikk.Behandlingspunkt.Opptjeningsvilkaret',
   [aksjonspunktCodes.MANUELL_VURDERING_AV_OMSORGSVILKARET]: 'HistorikkEndretFeltVerdiType.ApplicationInformation',
   [aksjonspunktCodes.REGISTRER_PAPIRSOKNAD_ENGANGSSTONAD]: 'Historikk.RegistrerePapirSoknadAksPkt',

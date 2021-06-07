@@ -13,7 +13,6 @@ import SakenFaktaInitPanel from './faktaPaneler/SakenFaktaInitPanel';
 import ArbeidsforholdFaktaInitPanel from './faktaPaneler/ArbeidsforholdFaktaInitPanel';
 import YtelserFaktaInitPanel from './faktaPaneler/YtelserFaktaInitPanel';
 import VergeFaktaInitPanel from './faktaPaneler/VergeFaktaInitPanel';
-import TilleggsopplysningerFaktaInitPanel from './faktaPaneler/TilleggsopplysningerFaktaInitPanel';
 import OmsorgvilkaretFaktaInitPanel from './faktaPaneler/OmsorgvilkaretFaktaInitPanel';
 import FordelingFaktaInitPanel from './faktaPaneler/FordelingFaktaInitPanel';
 import FodselvilkaretFaktaInitPanel from './faktaPaneler/FodselvilkaretFaktaInitPanel';
@@ -115,7 +114,6 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
               <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <YtelserFaktaInitPanel {...props} />
               <VergeFaktaInitPanel {...props} />
-              <TilleggsopplysningerFaktaInitPanel {...props} />
               <OmsorgvilkaretFaktaInitPanel {...props} personoversikt={personoversikt} />
               <AdopsjonsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
               <FodselvilkaretFaktaInitPanel {...props} />
