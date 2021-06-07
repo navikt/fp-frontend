@@ -13,7 +13,6 @@ import { restApiEsHooks, requestEsApi, EsBehandlingApiKeys } from './data/esBeha
 import SakenFaktaInitPanel from './faktaPaneler/SakenFaktaInitPanel';
 import YtelserFaktaInitPanel from './faktaPaneler/YtelserFaktaInitPanel';
 import VergeFaktaInitPanel from './faktaPaneler/VergeFaktaInitPanel';
-import TilleggsopplysningerFaktaInitPanel from './faktaPaneler/TilleggsopplysningerFaktaInitPanel';
 import OmsorgvilkaretFaktaInitPanel from './faktaPaneler/OmsorgvilkaretFaktaInitPanel';
 import AdopsjonsvilkaretFaktaInitPanel from './faktaPaneler/AdopsjonsvilkaretFaktaInitPanel';
 import FodselvilkaretFaktaInitPanel from './faktaPaneler/FodselvilkaretFaktaInitPanel';
@@ -104,7 +103,6 @@ const BehandlingEngangsstonadIndex: FunctionComponent<StandardBehandlingProps> =
               <SakenFaktaInitPanel {...props} />
               <YtelserFaktaInitPanel {...props} />
               <VergeFaktaInitPanel {...props} />
-              <TilleggsopplysningerFaktaInitPanel {...props} />
               <OmsorgvilkaretFaktaInitPanel {...props} personoversikt={personoversikt} />
               <AdopsjonsvilkaretFaktaInitPanel {...props} />
               <FodselvilkaretFaktaInitPanel {...props} />
