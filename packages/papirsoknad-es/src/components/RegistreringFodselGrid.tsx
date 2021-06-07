@@ -6,7 +6,7 @@ import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 import OppholdINorgePapirsoknadIndex, { FormValues as OppholdFormValues } from '@fpsak-frontend/papirsoknad-panel-opphold-i-norge';
-import TilleggsopplysningerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-tilleggsopplysninger';
+import SprakPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-sprak';
 import RettigheterPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-rettigheter';
 import AnnenForelderPapirsoknadIndex, { AnnenForelderFormValues } from '@fpsak-frontend/papirsoknad-panel-annen-forelder';
 import FodselPapirsoknadIndex, { FormValues as FodselFormValues } from '@fpsak-frontend/papirsoknad-panel-fodsel';
@@ -50,7 +50,7 @@ const RegistreringFodselGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
       { soknadData.getForeldreType() !== foreldreType.MOR
         && <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />}
       <OppholdINorgePapirsoknadIndex form={form} readOnly={readOnly} soknadData={soknadData} alleKodeverk={alleKodeverk} />
-      <TilleggsopplysningerPapirsoknadIndex readOnly={readOnly} />
+      <SprakPapirsoknadIndex readOnly={readOnly} />
     </Column>
     <Column xs="6">
       { soknadData.getForeldreType() !== foreldreType.MOR

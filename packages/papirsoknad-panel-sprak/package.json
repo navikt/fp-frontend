@@ -1,5 +1,5 @@
 {
-  "name": "@fpsak-frontend/papirsoknad-panel-tilleggsopplysninger",
+  "name": "@fpsak-frontend/papirsoknad-panel-sprak",
   "version": "1.0.0",
   "module": "index.ts",
   "license": "MIT",

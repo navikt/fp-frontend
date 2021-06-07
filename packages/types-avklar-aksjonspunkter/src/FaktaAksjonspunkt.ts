@@ -1,4 +1,3 @@
-import AvklarTilleggsopplysningerAp from './fakta/AvklarTilleggsopplysningerAp';
 import AvklarVergeAp from './fakta/AvklarVergeAp';
 import MerkOpptjeningUtlandAp from './fakta/MerkOpptjeningUtlandAp';
 import OverstyringUtenlandssakMarkeringAp from './fakta/OverstyringUtenlandssakMarkeringAp';
@@ -30,8 +29,7 @@ import FordelBeregningsgrunnlagAP from './fakta/FordelBeregningsgrunnlagAP';
 import VurderRefusjonBeregningsgrunnlagAP from './fakta/VurderRefusjonBeregningsgrunnlagAP';
 import BeregningAktivitetAP from './fakta/BeregningAktivitetAP';
 
-export type FaktaAksjonspunkt = AvklarTilleggsopplysningerAp
-  | AvklarVergeAp
+export type FaktaAksjonspunkt = AvklarVergeAp
   | MerkOpptjeningUtlandAp
   | OverstyringUtenlandssakMarkeringAp
   | AvklarAktivitetsPerioderAp
