@@ -5,12 +5,17 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { AlleKodeverkTilbakekreving, DetaljertFeilutbetalingPeriode } from '@fpsak-frontend/types';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import TilbakekrevingTimelinePanel from './timeline/TilbakekrevingTimelinePanel';
 import VilkarResultat from '../kodeverk/vilkarResultat';
 import { slaSammenOriginaleOgLagredePeriode, TilbakekrevingFormImpl } from './TilbakekrevingForm';
 import TilbakekrevingPeriodeForm, { CustomVilkarsVurdertePeriode } from './TilbakekrevingPeriodeForm';
 import DataForPeriode from '../types/dataForPeriodeTsType';
+
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<TilbakekrevingForm>', () => {
   it('skal vise tidslinje når en har perioder', () => {
@@ -48,6 +53,7 @@ describe('<TilbakekrevingForm>', () => {
       rettsgebyr={{} as any}
       onSubmit={() => undefined}
       initialValues={{} as any}
+      intl={intlMock}
     />);
 
     wrapper.setState({ valgtPeriode: perioder[0] });
@@ -83,6 +89,7 @@ describe('<TilbakekrevingForm>', () => {
       rettsgebyr={{} as any}
       onSubmit={() => undefined}
       initialValues={{} as any}
+      intl={intlMock}
     />);
 
     expect(wrapper.find(TilbakekrevingPeriodeForm)).toHaveLength(0);
@@ -118,6 +125,7 @@ describe('<TilbakekrevingForm>', () => {
       rettsgebyr={{} as any}
       onSubmit={() => undefined}
       initialValues={{} as any}
+      intl={intlMock}
     />);
 
     expect(wrapper.find(AlertStripe)).toHaveLength(1);

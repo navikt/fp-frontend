@@ -71,6 +71,7 @@ describe('<DelOppPeriodeModal>', () => {
       splitPeriod: () => undefined,
       behandlingUuid: '1',
       behandlingVersjon: 2,
+      intl: intlMock,
     };
 
     const validateAndOnSubmit = mapStateToPropsFactory(initialState, ownProps)();
@@ -95,6 +96,7 @@ describe('<DelOppPeriodeModal>', () => {
       splitPeriod: () => undefined,
       behandlingUuid: '1',
       behandlingVersjon: 2,
+      intl: intlMock,
     };
 
     const validateAndOnSubmit = mapStateToPropsFactory(initialState, ownProps)();
@@ -104,7 +106,7 @@ describe('<DelOppPeriodeModal>', () => {
     };
     const result = validateAndOnSubmit.validate(values);
     expect(result).toEqual({
-      ForstePeriodeTomDato: [{ id: 'DelOppPeriodeModalImpl.DatoUtenforPeriode' }],
+      ForstePeriodeTomDato: 'Dato må være innenfor perioden',
     });
   });
 
@@ -121,6 +123,7 @@ describe('<DelOppPeriodeModal>', () => {
       splitPeriod: () => undefined,
       behandlingUuid: '1',
       behandlingVersjon: 2,
+      intl: intlMock,
     };
 
     const validateAndOnSubmit = mapStateToPropsFactory(initialState, ownProps)();
@@ -130,7 +133,7 @@ describe('<DelOppPeriodeModal>', () => {
     };
     const result = validateAndOnSubmit.validate(values);
     expect(result).toEqual({
-      ForstePeriodeTomDato: [{ id: 'DelOppPeriodeModalImpl.DatoUtenforPeriode' }],
+      ForstePeriodeTomDato: 'Dato må være innenfor perioden',
     });
   });
 
@@ -147,6 +150,7 @@ describe('<DelOppPeriodeModal>', () => {
       splitPeriod: (value: any) => value,
       behandlingUuid: '1',
       behandlingVersjon: 2,
+      intl: intlMock,
     };
 
     const validateAndOnSubmit = mapStateToPropsFactory(initialState, ownProps)();

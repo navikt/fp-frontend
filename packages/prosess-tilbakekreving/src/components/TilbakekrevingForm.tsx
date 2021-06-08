@@ -6,7 +6,7 @@ import {
   change as reduxFormChange, formValueSelector, getFormValues, initialize as reduxFormInitialize, InjectedFormProps, reduxForm,
 } from 'redux-form';
 import { bindActionCreators, Dispatch } from 'redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 import AlertStripe from 'nav-frontend-alertstriper';
 
@@ -113,7 +113,7 @@ interface StateProps {
   valgtPeriode?: CustomVilkarsVurdertePeriode;
 }
 
-type Props = PureOwnProps & MappedOwnProps & DispatchProps & InjectedFormProps;
+type Props = PureOwnProps & MappedOwnProps & DispatchProps & InjectedFormProps & WrappedComponentProps;
 
 /**
  * TilbakekrevingForm
@@ -228,6 +228,7 @@ export class TilbakekrevingFormImpl extends Component<Props, StateProps> {
       behandlingVersjon,
       alleKodeverk,
       beregnBelop,
+      intl,
       ...formProps
     } = this.props;
     const {
@@ -281,6 +282,7 @@ export class TilbakekrevingFormImpl extends Component<Props, StateProps> {
                     alleKodeverk={alleKodeverk}
                     beregnBelop={beregnBelop}
                     vilkarsVurdertePerioder={vilkarsVurdertePerioder}
+                    intl={intl}
                   />
                 )}
             </>
@@ -463,6 +465,6 @@ const TilbakekrevingForm = connect(mapStateToProps, mapDispatchToProps)(reduxFor
   validate: validateForm,
   destroyOnUnmount: false,
   // @ts-ignore FIks
-})(TilbakekrevingFormImpl));
+})(injectIntl(TilbakekrevingFormImpl)));
 
 export default TilbakekrevingForm;

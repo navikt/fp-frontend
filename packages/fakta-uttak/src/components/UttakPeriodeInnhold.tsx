@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import moment from 'moment';
+import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
 
 import { FamilieHendelse, FamilieHendelseSamling, Kodeverk } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
@@ -31,6 +32,7 @@ export const renderPeriode = (
   vilkarForSykdomExists: boolean,
   getKodeverknavn: (kodeverk: Kodeverk) => string,
   sisteUttakdatoFørsteSeksUker: moment.Moment,
+  intl: IntlShape,
 ) => { // NOSONAR Det er planlagt å laga nye uttakskomponentar
   const utsettelseSwitch = utsettelseArsak ? utsettelseArsak.kode : utsettelseArsakCodes.UDEFINERT;
   const overforingSwitch = overforingArsak ? overforingArsak.kode : overforingArsakCodes.UDEFINERT;
@@ -73,6 +75,7 @@ export const renderPeriode = (
           vilkarForSykdomExists={vilkarForSykdomExists}
           erHeimevern={utsettelseSwitch === utsettelseArsakCodes.HV_OVELSE}
           erNavTiltak={utsettelseSwitch === utsettelseArsakCodes.NAV_TILTAK}
+          intl={intl}
         />
       );
     case utsettelseArsakCodes.INSTITUSJONSOPPHOLD_SØKER:
@@ -105,6 +108,7 @@ export const renderPeriode = (
             behandlingStatusKode={behandlingStatusKode}
             gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
             vilkarForSykdomExists={vilkarForSykdomExists}
+            intl={intl}
           />
         );
       }
@@ -182,7 +186,7 @@ interface OwnProps {
   sisteUttakdatoFørsteSeksUker: moment.Moment;
 }
 
-export const UttakPeriodeInnhold: FunctionComponent<OwnProps> = ({
+export const UttakPeriodeInnhold: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   fieldId,
   utsettelseArsak,
   overforingArsak,
@@ -202,6 +206,7 @@ export const UttakPeriodeInnhold: FunctionComponent<OwnProps> = ({
   vilkarForSykdomExists,
   getKodeverknavn,
   sisteUttakdatoFørsteSeksUker,
+  intl,
 }) => {
   const editable = !(!readOnly && openForm);
 
@@ -227,9 +232,10 @@ export const UttakPeriodeInnhold: FunctionComponent<OwnProps> = ({
         vilkarForSykdomExists,
         getKodeverknavn,
         sisteUttakdatoFørsteSeksUker,
+        intl,
       )}
     </div>
   );
 };
 
-export default UttakPeriodeInnhold;
+export default injectIntl(UttakPeriodeInnhold);
