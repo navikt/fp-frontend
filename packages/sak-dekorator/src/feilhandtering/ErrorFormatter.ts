@@ -18,6 +18,9 @@ class ErrorFormatter {
 
     if (errorMessages.length > 0) {
       errorMessages.map((e: any) => {
+        if (!e.type) {
+          return defaultFormatter.formatString(e);
+        }
         const formatter = formatters.find((f) => f.isOfType(e.type));
         return formatter ? formatter.format(e) : undefined;
       })

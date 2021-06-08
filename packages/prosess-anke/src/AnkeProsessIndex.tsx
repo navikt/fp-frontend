@@ -5,9 +5,9 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { AnkeVurdering, StandardProsessPanelProps } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 import { ReduxWrapper } from '@fpsak-frontend/form';
+import { AnkeVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import BehandleAnkeForm, { BehandlingInfo } from './components/BehandleAnkeForm';
-import { AnkeData } from './components/TempsaveAnkeButton';
 import { BrevData } from './components/PreviewAnkeLink';
 import messages from '../i18n/nb_NO.json';
 
@@ -15,7 +15,7 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   ankeVurdering: AnkeVurdering;
-  saveAnke: (data: AnkeData) => Promise<any>;
+  saveAnke: (data: AnkeVurderingResultatAp) => Promise<any>;
   previewCallback: (data: BrevData) => Promise<any>;
   behandlinger: BehandlingInfo[];
 }
