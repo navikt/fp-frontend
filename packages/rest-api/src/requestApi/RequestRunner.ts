@@ -9,7 +9,7 @@ import TimeoutError from './error/TimeoutError';
 import RequestErrorEventHandler from './error/RequestErrorEventHandler';
 
 const HTTP_ACCEPTED = 202;
-const MAX_POLLING_ATTEMPTS = 150;
+const MAX_POLLING_ATTEMPTS = 75;
 export const REQUEST_POLLING_CANCELLED = 'INTERNAL_CANCELLATION';
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -59,10 +59,12 @@ class RequestRunner {
 
   execLongPolling = async (location?: string, pollingInterval = 0, pollingCounter = 0): Promise<Response | null> => {
     if (pollingCounter === this.maxPollingLimit) {
+      this.notify(EventType.REQUEST_FINISHED);
       throw new TimeoutError(location || 'No location');
     }
 
-    await wait(pollingInterval);
+    const interval = pollingCounter < 30 ? pollingInterval : pollingInterval + ((pollingCounter - 30) * pollingInterval);
+    await wait(interval);
 
     if (!location || this.isCancelled) {
       return null;
