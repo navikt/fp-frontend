@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import {
+  FormattedMessage, IntlShape,
+} from 'react-intl';
 import { connect } from 'react-redux';
 import moment from 'moment/moment';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
@@ -40,6 +42,7 @@ interface PureOwnProps {
   cancelEvent: () => void;
   showModal: boolean;
   splitPeriod: (data: DeltPeriodeData) => void;
+  intl: IntlShape;
 }
 
 interface MappedOwnProps {
@@ -48,7 +51,7 @@ interface MappedOwnProps {
   onSubmit: (formValues: FormValues) => any;
 }
 
-export const DelOppPeriodeModal: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
+export const DelOppPeriodeModal: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
   intl,
   periodeData,
   showModal,
@@ -137,12 +140,12 @@ export const DelOppPeriodeModal: FunctionComponent<PureOwnProps & MappedOwnProps
   );
 };
 
-const validateForm = (value: FormValues, periodeData: PeriodeMedClassName) => {
+const validateForm = (value: FormValues, periodeData: PeriodeMedClassName, intl: IntlShape) => {
   if (value.ForstePeriodeTomDato
     && (dateAfterOrEqual(value.ForstePeriodeTomDato)(moment(periodeData.tom.toString()).subtract(1, 'day'))
       || dateBeforeOrEqual(value.ForstePeriodeTomDato)(periodeData.fom))) {
     return {
-      ForstePeriodeTomDato: [{ id: 'DelOppPeriodeModalImpl.DatoUtenforPeriode' }],
+      ForstePeriodeTomDato: intl.formatMessage({ id: 'DelOppPeriodeModalImpl.DatoUtenforPeriode' }),
     };
   }
   return null;
@@ -169,7 +172,7 @@ const transformValues = (values: FormValues, periodeData: PeriodeMedClassName): 
 };
 
 const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {
-  const validate = (values: FormValues) => validateForm(values, ownProps.periodeData);
+  const validate = (values: FormValues) => validateForm(values, ownProps.periodeData, ownProps.intl);
   const onSubmit = (values: FormValues) => ownProps.splitPeriod(transformValues(values, ownProps.periodeData));
   return (state: any): MappedOwnProps => ({
     førstePeriodeTom: formValueSelector('DelOppPeriode')(state, 'ForstePeriodeTomDato'),
@@ -181,4 +184,4 @@ const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps) => {
 export default connect(mapStateToPropsFactory)(reduxForm({
   form: 'DelOppPeriode',
   destroyOnUnmount: false,
-})(injectIntl(DelOppPeriodeModal)));
+})(DelOppPeriodeModal));

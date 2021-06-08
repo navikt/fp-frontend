@@ -4,7 +4,7 @@ import {
   FieldArray, formValueSelector, getFormSyncErrors, InjectedFormProps, reduxForm,
 } from 'redux-form';
 import { createSelector } from 'reselect';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, IntlShape } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -66,6 +66,7 @@ interface PureOwnProps {
   behandlingStatusKode?: string;
   erHeimevern?: boolean;
   erNavTiltak?: boolean;
+  intl: IntlShape;
 }
 
 interface MappedOwnProps {
@@ -202,6 +203,7 @@ const validateSykdomOgSkadeForm = (
   familieHendelse: FamilieHendelse,
   overforingArsak: Kodeverk,
   vilkarForSykdomOppfyltExists: boolean,
+  intl: IntlShape,
 ) => {
   const errors = {
     dokumentertePerioder: [],
@@ -214,7 +216,7 @@ const validateSykdomOgSkadeForm = (
     && !morForSykVedFodsel.includes(values.resultat)
     && vilkarForSykdomOppfyltExists) {
     return {
-      resultat: values.resultat ? [{ id: 'UttakInfoPanel.IkkeDokumentertSykdom' }] : [{ id: 'UttakInfoPanel.DokumentertSykdom' }],
+      resultat: intl.formatMessage(values.resultat ? { id: 'UttakInfoPanel.IkkeDokumentertSykdom' } : { id: 'UttakInfoPanel.DokumentertSykdom' }),
     };
   }
 
@@ -244,10 +246,10 @@ const buildInitialValues = createSelector([
 }));
 
 const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
-  const { gjeldendeFamiliehendelse, vilkarForSykdomExists } = initialOwnProps;
+  const { gjeldendeFamiliehendelse, vilkarForSykdomExists, intl } = initialOwnProps;
   const formName = `sykdomOgSkadeForm-${initialOwnProps.id}`;
   const familiehendelse = gjeldendeFamiliehendelse;
-  const validate = (values: FormValues) => validateSykdomOgSkadeForm(values, familiehendelse, initialOwnProps.overforingArsak, vilkarForSykdomExists);
+  const validate = (values: FormValues) => validateSykdomOgSkadeForm(values, familiehendelse, initialOwnProps.overforingArsak, vilkarForSykdomExists, intl);
   const onSubmit = (values: FormValues) => initialOwnProps.updatePeriode((values));
 
   return (state: any, ownProps: PureOwnProps): MappedOwnProps => ({

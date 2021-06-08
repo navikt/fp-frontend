@@ -275,6 +275,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
                     showModal={showDelPeriodeModal}
                     periodeData={selectedItemData}
                     splitPeriod={this.splitPeriod}
+                    intl={intl}
                   />
                 )}
           </Column>

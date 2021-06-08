@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import {
+  FormattedMessage, IntlShape,
+} from 'react-intl';
 import { connect } from 'react-redux';
 import moment from 'moment/moment';
 import { InjectedFormProps, reduxForm } from 'redux-form';
@@ -36,9 +38,10 @@ interface PureOwnProps {
   finnesBelopMed0Verdi: boolean;
   splitPeriod: (perioder: PerioderData) => void;
   cancelEvent: () => void;
+  intl: IntlShape;
 }
 
-export const DelOppPeriodeModalImpl: FunctionComponent<PureOwnProps & WrappedComponentProps & InjectedFormProps> = ({
+export const DelOppPeriodeModalImpl: FunctionComponent<PureOwnProps & InjectedFormProps> = ({
   intl,
   periodeData,
   showModal,
@@ -102,12 +105,12 @@ export const DelOppPeriodeModalImpl: FunctionComponent<PureOwnProps & WrappedCom
   </Modal>
 );
 
-const validateForm = (value: FormValues, periodeData: Periode): any => {
+const validateForm = (value: FormValues, periodeData: Periode, intl: IntlShape): any => {
   if (value.ForstePeriodeTomDato
     && (dateAfterOrEqual(value.ForstePeriodeTomDato)(moment(periodeData.tom.toString()).subtract(1, 'day'))
       || dateBeforeOrEqual(value.ForstePeriodeTomDato)(periodeData.fom))) {
     return {
-      ForstePeriodeTomDato: [{ id: 'DelOppPeriodeModalImpl.DatoUtenforPeriode' }],
+      ForstePeriodeTomDato: intl.formatMessage({ id: 'DelOppPeriodeModalImpl.DatoUtenforPeriode' }),
     };
   }
   return null;
@@ -130,7 +133,7 @@ const transformValues = (values: FormValues, periodeData: Periode): any => {
 };
 
 export const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps): any => {
-  const validate = (values: FormValues) => validateForm(values, ownProps.periodeData);
+  const validate = (values: FormValues) => validateForm(values, ownProps.periodeData, ownProps.intl);
   const onSubmit = (values: FormValues) => ownProps.splitPeriod(transformValues(values, ownProps.periodeData));
   return () => ({
     validate,
@@ -141,4 +144,4 @@ export const mapStateToPropsFactory = (_initialState, ownProps: PureOwnProps): a
 export default connect(mapStateToPropsFactory)(reduxForm({
   form: 'DelOppPeriode',
   destroyOnUnmount: false,
-})(injectIntl(DelOppPeriodeModalImpl)));
+})(DelOppPeriodeModalImpl));

@@ -4,13 +4,14 @@ import sinon from 'sinon';
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 
-import messages from '../../i18n/nb_NO.json';
 import sarligGrunn from '../kodeverk/sarligGrunn';
 import Aktsomhet from '../kodeverk/aktsomhet';
 import ForeldetFormPanel from './tilbakekrevingPeriodePaneler/ForeldetFormPanel';
 import { TilbakekrevingPeriodeFormImpl, CustomVilkarsVurdertePeriode } from './TilbakekrevingPeriodeForm';
 import vilkarResultat from '../kodeverk/vilkarResultat';
 import DataForPeriode from '../types/dataForPeriodeTsType';
+
+import messages from '../../i18n/nb_NO.json';
 
 const intlMock = getIntlMock(messages);
 
@@ -60,9 +61,9 @@ describe('<TilbakekrevingPeriodeForm>', () => {
       sarligGrunnTyper={sarligGrunnTyper}
       reduserteBelop={[]}
       beregnBelop={() => undefined}
-      intl={intlMock}
       vilkarsVurdertePerioder={[]}
       handletUaktsomhetGrad={Aktsomhet.FORSETT}
+      intl={intlMock}
       {...reduxFormPropsMock}
     />, messages);
 
@@ -131,9 +132,9 @@ describe('<TilbakekrevingPeriodeForm>', () => {
       reduserteBelop={[]}
       behandlingUuid="1"
       beregnBelop={() => undefined}
-      intl={intlMock}
       vilkarsVurdertePerioder={vilkårsPerioder}
       handletUaktsomhetGrad={Aktsomhet.FORSETT}
+      intl={intlMock}
       {...reduxFormPropsMock}
       change={changeValue}
     />, messages);

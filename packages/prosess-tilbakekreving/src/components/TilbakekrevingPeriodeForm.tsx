@@ -4,7 +4,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import {
   clearFields, FormSection, change, InjectedFormProps, formValueSelector, reduxForm,
 } from 'redux-form';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { FormattedMessage, IntlShape } from 'react-intl';
 import moment from 'moment';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
@@ -102,6 +102,7 @@ interface OwnProps {
   handletUaktsomhetGrad: Aktsomhet;
   harGrunnerTilReduksjon?: boolean;
   erSerligGrunnAnnetValgt?: boolean;
+  intl: IntlShape;
 }
 
 interface DispatchProps {
@@ -113,7 +114,7 @@ interface OwnState {
   showModal: boolean;
 }
 
-export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & DispatchProps & WrappedComponentProps & InjectedFormProps, OwnState> {
+export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & DispatchProps & InjectedFormProps, OwnState> {
   state = { showModal: false }
 
   static defaultProps = {
@@ -401,7 +402,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   }, dispatch),
 });
 
-const validate = (values: any, sarligGrunnTyper: KodeverkMedNavn[], data: DataForPeriode) => {
+const validate = (values: any, sarligGrunnTyper: KodeverkMedNavn[], data: DataForPeriode, intl: IntlShape) => {
   let errors = {};
   if (!values) {
     return errors;
@@ -413,7 +414,7 @@ const validate = (values: any, sarligGrunnTyper: KodeverkMedNavn[], data: DataFo
       errors = {
         [values.valgtVilkarResultatType]: {
           [vilkarResultatInfo.handletUaktsomhetGrad]: {
-            [sarligGrunn.ANNET]: [{ id: 'TilbakekrevingPeriodeForm.MaVelgeSarligGrunn' }],
+            [sarligGrunn.ANNET]: intl.formatMessage({ id: 'TilbakekrevingPeriodeForm.MaVelgeSarligGrunn' }),
           },
         },
       };
@@ -423,7 +424,7 @@ const validate = (values: any, sarligGrunnTyper: KodeverkMedNavn[], data: DataFo
         ...errors,
         [values.valgtVilkarResultatType]: {
           [vilkarResultatInfo.handletUaktsomhetGrad]: {
-            belopSomSkalTilbakekreves: [{ id: 'TilbakekrevingPeriodeForm.BelopMaVereMindreEnnFeilutbetalingen' }],
+            belopSomSkalTilbakekreves: intl.formatMessage({ id: 'TilbakekrevingPeriodeForm.BelopMaVereMindreEnnFeilutbetalingen' }),
           },
         },
       };
@@ -433,7 +434,7 @@ const validate = (values: any, sarligGrunnTyper: KodeverkMedNavn[], data: DataFo
     errors = {
       ...errors,
       [values.valgtVilkarResultatType]: {
-        tilbakekrevdBelop: [{ id: 'TilbakekrevingPeriodeForm.BelopKanIkkeVereStorreEnnFeilutbetalingen' }],
+        tilbakekrevdBelop: intl.formatMessage({ id: 'TilbakekrevingPeriodeForm.BelopKanIkkeVereStorreEnnFeilutbetalingen' }),
       },
     };
   }
@@ -446,6 +447,7 @@ interface PureOwnProps {
   oppdaterPeriode: (values: any) => any;
   data: DataForPeriode;
   periode: CustomVilkarsVurdertePeriode;
+  intl: IntlShape;
 }
 
 const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
@@ -455,7 +457,7 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
   const sorterteAktsomhetTyper = AKTSOMHET_REKKEFØLGE.map((a) => aktsomhetTyper.find((el: KodeverkMedNavn) => el.kode === a));
 
   const submitCallback = (values: any) => ownProps.oppdaterPeriode(values);
-  const validateForm = (values: any) => validate(values, sarligGrunnTyper, ownProps.data);
+  const validateForm = (values: any) => validate(values, sarligGrunnTyper, ownProps.data, ownProps.intl);
 
   return (state: any, oProps: PureOwnProps) => {
     const sel = formValueSelector(TILBAKEKREVING_PERIODE_FORM_NAME);
@@ -485,7 +487,8 @@ const TilbakekrevingPeriodeForm = connect(mapStateToPropsFactory, mapDispatchToP
   form: TILBAKEKREVING_PERIODE_FORM_NAME,
   enableReinitialize: true,
   destroyOnUnmount: false,
-})(injectIntl(TilbakekrevingPeriodeFormImpl)));
+// @ts-ignore Fiks!
+})(TilbakekrevingPeriodeFormImpl));
 
 export const periodeFormBuildInitialValues = (periode: any, foreldelsePerioder: FeilutbetalingPerioderWrapper): InitialValuesDetailForm => {
   const { vilkarResultat, begrunnelse, vilkarResultatInfo } = periode;
