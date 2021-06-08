@@ -124,7 +124,7 @@ const VurderMottarYtelseForm:FunctionComponent<OwnProps> & StaticFunctions = ({
           </div>
           <VerticalSpacer eightPx />
           <RadioGroupField
-            name={finnFrilansFieldName()}
+            name={`vurderMottarYtelseValues.${finnFrilansFieldName()}`}
             readOnly={readOnly}
             isEdited={isAksjonspunktClosed}
           >
@@ -260,7 +260,7 @@ VurderMottarYtelseForm.validate = (values: FaktaOmBeregningAksjonspunktValues, v
     return null;
   }
   if (vurderMottarYtelse.erFrilans) {
-    errors[finnFrilansFieldName()] = required(values[finnFrilansFieldName()]);
+    errors[finnFrilansFieldName()] = required(values.vurderMottarYtelseValues[finnFrilansFieldName()]);
   }
   const ATAndelerUtenIM = vurderMottarYtelse.arbeidstakerAndelerUtenIM ? vurderMottarYtelse.arbeidstakerAndelerUtenIM : [];
   ATAndelerUtenIM.forEach((andel) => {

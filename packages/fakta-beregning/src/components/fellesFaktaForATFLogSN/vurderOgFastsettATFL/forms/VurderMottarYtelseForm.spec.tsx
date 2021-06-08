@@ -192,7 +192,7 @@ describe('<VurderMottarYtelseForm>', () => {
     />);
     const flRadio = wrapper.find(RadioGroupField);
     expect(flRadio).toHaveLength(1);
-    expect(flRadio.prop('name')).toBe(finnFrilansFieldName());
+    expect(flRadio.prop('name')).toBe(`vurderMottarYtelseValues.${finnFrilansFieldName()}`);
     const formattedMsg = wrapper.find(FormattedMessage);
     expect(formattedMsg).toHaveLength(1);
     expect(formattedMsg.prop('id')).toBe(frilansUtenAndreFrilanstilfeller());
@@ -215,7 +215,7 @@ describe('<VurderMottarYtelseForm>', () => {
     />);
     const flRadio = wrapper.find(RadioGroupField);
     expect(flRadio).toHaveLength(1);
-    expect(flRadio.prop('name')).toBe(finnFrilansFieldName());
+    expect(flRadio.prop('name')).toBe(`vurderMottarYtelseValues.${finnFrilansFieldName()}`);
     const formattedMsg = wrapper.find(FormattedMessage);
     expect(formattedMsg).toHaveLength(1);
     expect(formattedMsg.prop('id')).toBe(frilansMedAndreFrilanstilfeller());
@@ -240,7 +240,9 @@ describe('<VurderMottarYtelseForm>', () => {
     />);
     const atRadio = wrapper.find(RadioGroupField);
     expect(atRadio).toHaveLength(3);
-    atRadio.forEach((radio, index) => expect(radio.prop('name')).toBe(utledArbeidsforholdFieldName(arbeidstakerAndelerUtenIM[index])));
+    atRadio.forEach((radio,
+      index) => expect(radio.prop('name'))
+      .toBe(`vurderMottarYtelseValues.${utledArbeidsforholdFieldName(arbeidstakerAndelerUtenIM[index])}`));
     const formattedMsg = wrapper.find(FormattedMessage);
     expect(formattedMsg).toHaveLength(3);
     formattedMsg.forEach((msg, index) => {
