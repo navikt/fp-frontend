@@ -69,8 +69,6 @@ const hasOpenAksjonspunkt = (kode: string, aksjonspunkter: Aksjonspunkt[]): bool
 type OwnProps = {
     readOnly: boolean;
     submittable: boolean;
-    verdiForAvklarAktivitetErEndret: boolean;
-    erOverstyrt: boolean;
     beregningsgrunnlag: Beregningsgrunnlag;
     aksjonspunkter: Aksjonspunkt[];
     alleKodeverk: AlleKodeverk;

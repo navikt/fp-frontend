@@ -316,7 +316,8 @@ const setValuesForVurderFakta = (aktivePaneler: string[],
   const vurderFaktaValues = setInntektValues(
     aktivePaneler,
     kunYtelseTransform(faktaOmBeregning, aktivePaneler),
-    VurderOgFastsettATFL.transformValues(faktaOmBeregning, beregningsgrunnlag))(values);
+    VurderOgFastsettATFL.transformValues(faktaOmBeregning, beregningsgrunnlag),
+  )(values);
   return ({
     fakta: transformValues(aktivePaneler,
       nyIArbeidslivetTransform,

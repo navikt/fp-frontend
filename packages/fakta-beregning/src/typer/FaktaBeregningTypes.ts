@@ -5,7 +5,7 @@ import {
   KunYtelse, RefusjonskravSomKommerForSentListe, VurderBesteberegning,
   VurderMottarYtelse,
 } from '@fpsak-frontend/types';
-import AndelFieldValue from "./FieldValues";
+import AndelFieldValue from './FieldValues';
 
 export type TidsbegrensetandelValues = {
   [key: string]: boolean;
@@ -111,10 +111,4 @@ export type FaktaStateProps = {
 
 export type FaktaBeregningError = {
   id: string;
-}
-
-type FaktaOgAksjonspunktBeregningValues = {
-  aksjonspunkter: Aksjonspunkt[];
-  begrunnelseFaktaTilfeller: string;
-
 }
