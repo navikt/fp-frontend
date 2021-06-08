@@ -3,7 +3,8 @@ import React, {
 } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import AnkeProsessIndex, { AnkeProsessBrevData, AnkeProsessData } from '@fpsak-frontend/prosess-anke';
+import AnkeProsessIndex, { AnkeProsessBrevData } from '@fpsak-frontend/prosess-anke';
+import { AnkeVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import {
   Aksjonspunkt, AnkeVurdering, Behandling, Fagsak, Kodeverk,
@@ -40,7 +41,7 @@ const lagForhandsvisCallback = (
 const saveAnkeText = (
   lagreAnkeVurdering: (params?: any, keepData?: boolean) => Promise<any>,
   behandling: Behandling,
-) => (aksjonspunktModel: AnkeProsessData) => {
+) => (aksjonspunktModel: AnkeVurderingResultatAp) => {
   const data = {
     behandlingUuid: behandling.uuid,
     ...aksjonspunktModel,

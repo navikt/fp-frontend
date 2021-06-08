@@ -9,6 +9,7 @@ import {
 } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import { AnkeVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import { AnkeBehandlingApiKeys, requestAnkeApi } from '../data/ankeBehandlingApi';
 import AnkeBehandlingProsessStegInitPanel from './AnkeBehandlingProsessStegInitPanel';
@@ -120,7 +121,7 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
       kode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
       fritekstTilBrev: 'Dette er en fritekst',
       begrunnelse: 'Dette er en begrunnelse',
-    });
+    } as AnkeVurderingResultatAp);
 
     const response = requestAnkeApi.getRequestMockData(AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING.name);
     expect(response).toHaveLength(1);
