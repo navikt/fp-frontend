@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { FormattedMessage } from 'react-intl';
+import { InjectedFormProps } from 'redux-form';
 
 export type AnkeData = {
   kode: string;
@@ -8,10 +9,15 @@ export type AnkeData = {
   begrunnelse: string;
 }
 
-const transformValues = (fritekstTilBrev: string, begrunnelse: string, aksjonspunktCode: string): AnkeData => ({
+type FormValues = {
+  begrunnelse?: string;
+  fritekstTilBrev?: string;
+};
+
+const transformValues = (values: FormValues, aksjonspunktCode: string): AnkeData => ({
   kode: aksjonspunktCode,
-  fritekstTilBrev,
-  begrunnelse,
+  fritekstTilBrev: values.fritekstTilBrev,
+  begrunnelse: values.begrunnelse,
 });
 
 interface OwnProps {
@@ -21,36 +27,32 @@ interface OwnProps {
   saveAnke: (data: AnkeData) => Promise<any>;
   spinner?: boolean;
   readOnly?: boolean;
+  handleSubmit: InjectedFormProps['handleSubmit'];
 }
 
 export const TempsaveAnkeButton: FunctionComponent<OwnProps> = ({
-  fritekstTilBrev,
-  begrunnelse,
   saveAnke,
   spinner,
   aksjonspunktCode,
   readOnly,
-}) => {
-  const tempSave = (event: React.MouseEvent): void => {
-    event.preventDefault();
-    saveAnke(transformValues(fritekstTilBrev, begrunnelse, aksjonspunktCode));
-  };
-
-  return (
-    <div>
-      {!readOnly && (
-        <Hovedknapp
-          mini
-          htmlType="button"
-          spinner={spinner}
-          onClick={(event) => { tempSave(event); }}
-        >
-          <FormattedMessage id="Ankebehandling.TempSaveButton" />
-        </Hovedknapp>
-      )}
-    </div>
-  );
-};
+  handleSubmit,
+}) => (
+  <>
+    {!readOnly && (
+      <Hovedknapp
+        mini
+        htmlType="button"
+        spinner={spinner}
+        onClick={handleSubmit((values: FormValues) => saveAnke(transformValues(
+          values,
+          aksjonspunktCode,
+        )))}
+      >
+        <FormattedMessage id="Ankebehandling.TempSaveButton" />
+      </Hovedknapp>
+    )}
+  </>
+);
 
 TempsaveAnkeButton.defaultProps = {
   spinner: false,

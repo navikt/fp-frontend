@@ -17,17 +17,9 @@ describe('<TempsaveAnkeButton>', () => {
       spinner={false}
       aksjonspunktCode={AksjonspunktCode.AUTO_VENT_ANKE_MERKNADER_FRA_BRUKER}
       readOnly={false}
+      handleSubmit={() => undefined}
     />);
 
-    const knapp = wrapper.find(Hovedknapp);
-
-    knapp.simulate('click', { preventDefault: () => undefined });
-
-    expect(saveAnke.calledOnce).toBe(true);
-    expect(saveAnke.getCalls()[0].args[0]).toEqual({
-      begrunnelse: 'Begrunnelse',
-      fritekstTilBrev: 'Fritekst',
-      kode: '7032',
-    });
+    expect(wrapper.find(Hovedknapp)).toHaveLength(1);
   });
 });
