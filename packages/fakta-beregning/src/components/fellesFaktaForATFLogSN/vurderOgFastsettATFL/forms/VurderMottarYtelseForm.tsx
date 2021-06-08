@@ -25,7 +25,6 @@ import { createVisningsnavnFakta } from '../../../ArbeidsforholdHelper';
 import { InntektTransformed } from '../../../../typer/FieldValues';
 import {
   FaktaOmBeregningAksjonspunktValues,
-  TilfellerValues,
   VurderMottarYtelseValues,
 } from '../../../../typer/FaktaBeregningTypes';
 

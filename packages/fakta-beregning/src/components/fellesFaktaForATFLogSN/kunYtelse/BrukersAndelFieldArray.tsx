@@ -18,7 +18,7 @@ import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 import styles from './brukersAndelFieldArray.less';
-import {SortedAndelInfo, validateUlikeAndelerWithGroupingFunction} from '../ValidateAndelerUtils';
+import { SortedAndelInfo, validateUlikeAndelerWithGroupingFunction } from '../ValidateAndelerUtils';
 import { isBeregningFormDirty as isFormDirty } from '../../BeregningFormUtils';
 import { BrukersAndelValues } from '../../../typer/FaktaBeregningTypes';
 

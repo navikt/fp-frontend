@@ -28,7 +28,7 @@ import KontrollerBesteberegningAP from './fakta/KontrollerBesteberegningAP';
 import FordelBeregningsgrunnlagAP from './fakta/FordelBeregningsgrunnlagAP';
 import VurderRefusjonBeregningsgrunnlagAP from './fakta/VurderRefusjonBeregningsgrunnlagAP';
 import BeregningAktivitetAP from './fakta/BeregningAktivitetAP';
-import BeregningFaktaAP, {BeregningOverstyringAP} from "./fakta/BeregningFaktaAP";
+import BeregningFaktaAP, { BeregningOverstyringAP } from './fakta/BeregningFaktaAP';
 
 export type FaktaAksjonspunkt = AvklarVergeAp
   | MerkOpptjeningUtlandAp

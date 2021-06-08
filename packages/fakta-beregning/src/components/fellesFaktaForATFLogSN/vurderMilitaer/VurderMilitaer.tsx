@@ -4,7 +4,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
 import { FaktaOmBeregning } from '@fpsak-frontend/types';
-import {VurderMilitærValues} from "../../../typer/FaktaBeregningTypes";
+import { VurderMilitærValues } from '../../../typer/FaktaBeregningTypes';
 
 /**
  * VurderMilitær

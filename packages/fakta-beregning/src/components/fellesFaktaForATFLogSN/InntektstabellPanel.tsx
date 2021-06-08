@@ -16,7 +16,7 @@ import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src
 
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import styles from './InntektstabellPanel.less';
-import {ErOverstyringValues} from "../../typer/FaktaBeregningTypes";
+import { ErOverstyringValues } from '../../typer/FaktaBeregningTypes';
 
 export const MANUELL_OVERSTYRING_BEREGNINGSGRUNNLAG_FIELD = 'manuellOverstyringRapportertInntekt';
 

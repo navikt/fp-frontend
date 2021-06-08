@@ -17,7 +17,7 @@ import {
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import { mapAndelToField, skalHaBesteberegningSelector } from './BgFaktaUtils';
 import styles from './inntektFieldArray.less';
-import {SortedAndelInfo, validateUlikeAndeler, validateUlikeAndelerWithGroupingFunction} from './ValidateAndelerUtils';
+import { SortedAndelInfo, validateUlikeAndeler, validateUlikeAndelerWithGroupingFunction } from './ValidateAndelerUtils';
 import { getFormValuesForBeregning, isBeregningFormDirty as isFormDirty } from '../BeregningFormUtils';
 import { AndelRow, getHeaderTextCodes } from './InntektFieldArrayRow';
 import AddDagpengerAndelButton from './AddDagpengerAndelButton';

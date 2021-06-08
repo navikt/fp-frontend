@@ -1,8 +1,7 @@
 import beregningsgrunnlagAndeltyper from '@fpsak-frontend/kodeverk/src/beregningsgrunnlagAndeltyper';
 import { aktivitetstatusTilAndeltypeMap } from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import {BrukersAndelValues, FaktaBeregningError} from '../../typer/FaktaBeregningTypes';
-import LabelType from "@fpsak-frontend/form/src/LabelType";
-import AndelFieldValue from "../../typer/FieldValues";
+import { BrukersAndelValues, FaktaBeregningError } from '../../typer/FaktaBeregningTypes';
+import AndelFieldValue from '../../typer/FieldValues';
 
 export const compareAndeler = (andel1: SortedAndelInfo, andel2: SortedAndelInfo): number => {
   if (andel1.andelsinfo === andel2.andelsinfo) {
