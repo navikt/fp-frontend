@@ -80,16 +80,16 @@ export type TilfellerValues = VurderMilitærValues & NyIArbeidslivetValues
 }
 
 export type FaktaOmBeregningValues = TilfellerValues & {
-  tilfeller: string[];
-  kortvarigeArbeidsforhold: KortvarigAndel[];
-  faktaOmBeregning: FaktaOmBeregning;
-  beregningsgrunnlag: Beregningsgrunnlag;
-  vurderMottarYtelse: VurderMottarYtelse;
-  kunYtelse: KunYtelse;
+  tilfeller?: string[];
+  kortvarigeArbeidsforhold?: KortvarigAndel[];
+  faktaOmBeregning?: FaktaOmBeregning;
+  beregningsgrunnlag?: Beregningsgrunnlag;
+  vurderMottarYtelse?: VurderMottarYtelse;
+  kunYtelse?: KunYtelse;
 }
 
 export type FaktaOmBeregningAksjonspunktValues = FaktaOmBeregningValues & {
-  aksjonspunkter: Aksjonspunkt[];
+  aksjonspunkter?: Aksjonspunkt[];
   begrunnelseFaktaTilfeller?: string;
 }
 

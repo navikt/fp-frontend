@@ -183,7 +183,7 @@ const transformValuesFrilans = (values: FaktaOmBeregningAksjonspunktValues,
   if (inntektVerdier === null) {
     return {};
   }
-  const skalFastsetteInntektFrilans = values[finnFrilansFieldName()];
+  const skalFastsetteInntektFrilans = values.vurderMottarYtelseValues[finnFrilansFieldName()];
   if (skalFastsetteInntektFrilans) {
     const frilansAndel = beregningsgrunnlag.beregningsgrunnlagPeriode[0].beregningsgrunnlagPrStatusOgAndel
       .find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.FRILANSER);
@@ -208,7 +208,7 @@ const transformValuesMottarYtelse = (values: FaktaOmBeregningAksjonspunktValues,
   faktaOmBeregningTilfeller.push(faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE);
   return {
     mottarYtelse: {
-      frilansMottarYtelse: values[finnFrilansFieldName()],
+      frilansMottarYtelse: values.vurderMottarYtelseValues[finnFrilansFieldName()],
       arbeidstakerUtenIMMottarYtelse: ATAndelerUtenIM.map((andel) => ({
         andelsnr: andel.andelsnr,
         mottarYtelse: values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel)],

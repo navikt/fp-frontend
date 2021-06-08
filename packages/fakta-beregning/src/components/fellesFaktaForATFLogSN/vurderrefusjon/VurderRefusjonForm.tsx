@@ -5,7 +5,7 @@ import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import { FaktaOmBeregning, RefusjonskravSomKommerForSentListe } from '@fpsak-frontend/types';
-import {VurderRefusjonValues} from "../../../typer/FaktaBeregningTypes";
+import { VurderRefusjonValues } from '../../../typer/FaktaBeregningTypes';
 
 const {
   VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT,

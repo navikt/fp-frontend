@@ -40,7 +40,7 @@ export const andelsnrMottarYtelseMap = (values: FaktaOmBeregningAksjonspunktValu
   return mottarYtelseMap;
 };
 
-export const harVurdertMottarYtelse = (values, vurderMottarYtelse) => {
+export const harVurdertMottarYtelse = (values: FaktaOmBeregningAksjonspunktValues, vurderMottarYtelse: VurderMottarYtelse): boolean => {
   if (vurderMottarYtelse.erFrilans) {
     const flMottarYtelse = frilansMottarYtelse(values);
     if (flMottarYtelse === undefined || flMottarYtelse === null) {
