@@ -15,7 +15,6 @@ import { FaktaBeregningTransformedValues } from '@fpsak-frontend/types-avklar-ak
 import { getFormValuesForBeregning } from '../../BeregningFormUtils';
 
 import styles from '../kunYtelse/kunYtelseBesteberegningPanel.less';
-import InntektPrAndelProp from '../inntektPrAndelProp';
 import { FaktaOmBeregningAksjonspunktValues, VurderBesteberegningValues } from '../../../typer/FaktaBeregningTypes';
 import { InntektTransformed } from '../../../typer/FieldValues';
 
