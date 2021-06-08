@@ -5,7 +5,7 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import { RadioGroupField } from '@fpsak-frontend/form';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
 import { FamilieHendelse } from '@fpsak-frontend/types';
-import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { SykdomOgSkadePeriode } from './SykdomOgSkadePeriode';
 import messages from '../../../i18n/nb_NO.json';
@@ -16,6 +16,8 @@ const periode = {
   fom: '01-10-2017',
 };
 const behandlingStatusKode = '';
+
+const intlMock = getIntlMock(messages);
 
 describe('<SykdomOgSkadePeriode>', () => {
   it('skal vise sykdom og skade periode', () => {
@@ -37,6 +39,7 @@ describe('<SykdomOgSkadePeriode>', () => {
       vilkarForSykdomExists
       onSubmit={() => undefined}
       validate={() => undefined}
+      intl={intlMock}
     />, messages);
 
     const undertekst = wrapper.find('Undertekst');
@@ -66,6 +69,7 @@ describe('<SykdomOgSkadePeriode>', () => {
       vilkarForSykdomExists
       onSubmit={() => undefined}
       validate={() => undefined}
+      intl={intlMock}
     />, messages);
     const textAreaField = wrapper.find('TextAreaField');
     expect(textAreaField).toHaveLength(1);

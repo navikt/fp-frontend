@@ -158,6 +158,7 @@ export class PeriodeController extends Component<OwnProps & WrappedComponentProp
               periodeData={periode}
               splitPeriod={this.splitPeriod}
               finnesBelopMed0Verdi={finnesBelopMed0Verdi}
+              intl={intl}
             />
           )}
         </Column>

@@ -5,8 +5,11 @@ import { shallow } from 'enzyme';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { FamilieHendelseSamling, Kodeverk } from '@fpsak-frontend/types';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { UttakPeriodeInnhold } from './UttakPeriodeInnhold';
+
+import messages from '../../i18n/nb_NO.json';
 
 const behandlingStatusKode = behandlingStatus.BEHANDLING_UTREDES;
 
@@ -42,6 +45,7 @@ describe('<UttakPeriodeInnhold>', () => {
       vilkarForSykdomExists={false}
       getKodeverknavn={sinon.spy()}
       sisteUttakdatoFørsteSeksUker={{} as moment.Moment}
+      intl={getIntlMock(messages)}
     />);
 
     const verticalSpacer = wrapper.find(VerticalSpacer);
