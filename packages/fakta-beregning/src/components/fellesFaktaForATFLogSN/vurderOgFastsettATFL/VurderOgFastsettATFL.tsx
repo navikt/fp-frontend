@@ -9,6 +9,10 @@ import {
 } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+import {
+  BeregningFaktaTransformedValues,
+  FaktaBeregningTransformedValues,
+} from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
 import LonnsendringForm, { lonnsendringField }
   from './forms/LonnsendringForm';
 import NyoppstartetFLForm, { erNyoppstartetFLField }
@@ -29,7 +33,7 @@ import VurderBesteberegningForm, { besteberegningField, vurderBesteberegningTran
 import InntektFieldArray, { InntektFieldArray as InntektFieldArrayImpl } from '../InntektFieldArray';
 import VurderEtterlonnSluttpakkeForm from './forms/VurderEtterlonnSluttpakkeForm';
 import { FaktaOmBeregningAksjonspunktValues, VurderOgFastsettATFLValues } from '../../../typer/FaktaBeregningTypes';
-import AndelFieldValue from '../../../typer/FieldValues';
+import AndelFieldValue, { InntektTransformed } from '../../../typer/FieldValues';
 
 const lonnsendringErVurdertEllerIkkjeTilstede = (tilfeller: string[], values: FaktaOmBeregningAksjonspunktValues): boolean => (
   !tilfeller.includes(faktaOmBeregningTilfelle.VURDER_LONNSENDRING)
@@ -121,7 +125,8 @@ interface StaticFunctions {
              tilfeller: string[],
              faktaOmBeregning: FaktaOmBeregning,
              beregningsgrunnlag: Beregningsgrunnlag) => any;
-  transformValues: (faktaOmBeregning: FaktaOmBeregning, beregningsgrunnlag: Beregningsgrunnlag) => any;
+  transformValues: (faktaOmBeregning: FaktaOmBeregning, beregningsgrunnlag: Beregningsgrunnlag) =>
+    (values: FaktaOmBeregningAksjonspunktValues) => BeregningFaktaTransformedValues;
 }
 
 /**
@@ -253,14 +258,18 @@ VurderOgFastsettATFL.validate = (values: FaktaOmBeregningAksjonspunktValues,
   return errors;
 };
 
-const concatTilfeller = (transformed, newTransformedValues) => ({
+const concatTilfeller = (transformed: FaktaBeregningTransformedValues,
+  newTransformedValues: FaktaBeregningTransformedValues): FaktaBeregningTransformedValues => ({
   ...transformed,
   ...newTransformedValues,
   faktaOmBeregningTilfeller: newTransformedValues.faktaOmBeregningTilfeller
     ? transformed.faktaOmBeregningTilfeller.concat(newTransformedValues.faktaOmBeregningTilfeller) : transformed.faktaOmBeregningTilfeller,
 });
 
-const transformValuesForOverstyring = (values, transformed, inntektVerdier, fastsatteAndelsnr) => {
+const transformValuesForOverstyring = (values: FaktaOmBeregningAksjonspunktValues,
+  transformed: FaktaBeregningTransformedValues,
+  inntektVerdier: InntektTransformed[],
+  fastsatteAndelsnr: number[]): BeregningFaktaTransformedValues => {
   if (erOverstyring(values)) {
     const overstyrteAndeler = inntektVerdier.filter((andel) => !fastsatteAndelsnr.includes(andel.andelsnr))
       .filter((verdi) => verdi.fastsattBelop != null)
@@ -284,10 +293,14 @@ const transformValuesForOverstyring = (values, transformed, inntektVerdier, fast
   };
 };
 
-const transformValuesForAksjonspunkt = (values, inntektVerdier, fastsatteAndelsnr, faktaOmBeregning, beregningsgrunnlag) => {
+const transformValuesForAksjonspunkt = (values: FaktaOmBeregningAksjonspunktValues,
+  inntektVerdier: InntektTransformed[],
+  fastsatteAndelsnr: number[],
+  faktaOmBeregning: FaktaOmBeregning,
+  beregningsgrunnlag: Beregningsgrunnlag): FaktaBeregningTransformedValues => {
   const tilfeller = faktaOmBeregning.faktaOmBeregningTilfeller
     ? faktaOmBeregning.faktaOmBeregningTilfeller.map(({ kode }) => kode) : [];
-  let transformed = { faktaOmBeregningTilfeller: [] };
+  let transformed = { faktaOmBeregningTilfeller: [] } as FaktaBeregningTransformedValues;
   if (tilfeller.length > 0) {
     // Besteberegning
     transformed = concatTilfeller(transformed, vurderBesteberegningTransform(faktaOmBeregning)(values, inntektVerdier));
@@ -314,7 +327,7 @@ const transformValuesForAksjonspunkt = (values, inntektVerdier, fastsatteAndelsn
 };
 
 VurderOgFastsettATFL.transformValues = (faktaOmBeregning: FaktaOmBeregning,
-  beregningsgrunnlag: Beregningsgrunnlag) => (values: FaktaOmBeregningAksjonspunktValues) => {
+  beregningsgrunnlag: Beregningsgrunnlag) => (values: FaktaOmBeregningAksjonspunktValues): BeregningFaktaTransformedValues => {
   const inntektVerdier = InntektFieldArrayImpl.transformValues(values[INNTEKT_FIELD_ARRAY_NAME]);
   const fastsatteAndelsnr = [];
   const transformed = transformValuesForAksjonspunkt(values, inntektVerdier, fastsatteAndelsnr, faktaOmBeregning, beregningsgrunnlag);

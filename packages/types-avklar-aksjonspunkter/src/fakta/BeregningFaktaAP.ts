@@ -144,12 +144,8 @@ export type FaktaBeregningTransformedValues = {
   refusjonskravGyldighet?: RefusjonskravPrArbeidsgiverVurderingTransformedValues[];
 }
 
-export type BeregningFaktaTransformedValues = {
-  fakta: FaktaBeregningTransformedValues;
-}
-
 export type FastsatteVerdierTransformedValues = {
-  refusjon: number;
+  refusjon?: number;
   refusjonPrÅr?: number;
   fastsattBeløp?: number;
   fastsattÅrsbeløp?: number;
@@ -174,15 +170,15 @@ export type FastsettBeregningsgrunnlagAndelTransformedValues = {
   fastsatteVerdier: FastsatteVerdierTransformedValues;
 }
 
-export type OverstyrBeregningsgrunnlagTransformedValues = {
-  fakta: BeregningFaktaTransformedValues;
-  overstyrteAndeler: FastsettBeregningsgrunnlagAndelTransformedValues[];
+export type BeregningFaktaTransformedValues = {
+  fakta: FaktaBeregningTransformedValues;
+  overstyrteAndeler?: FastsettBeregningsgrunnlagAndelTransformedValues[];
 }
 
 export type BeregningFaktaAP = BeregningFaktaTransformedValues
   & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN>;
 
-export type BeregningOverstyringAP = OverstyrBeregningsgrunnlagTransformedValues
+export type BeregningOverstyringAP = BeregningFaktaTransformedValues
   & AksjonspunktTilBekreftelse<AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG>;
 
 export type BeregningFaktaOgOverstyringAP = BeregningFaktaAP | BeregningOverstyringAP;

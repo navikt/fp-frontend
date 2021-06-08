@@ -13,6 +13,7 @@ import {
 } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { FaktaBeregningTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
 import {
   andelsnrMottarYtelseMap,
   finnFrilansFieldName,
@@ -25,8 +26,8 @@ import { InntektTransformed } from '../../../../typer/FieldValues';
 import {
   FaktaOmBeregningAksjonspunktValues,
   TilfellerValues,
-  VurderMottarYtelseValues
-} from "../../../../typer/FaktaBeregningTypes";
+  VurderMottarYtelseValues,
+} from '../../../../typer/FaktaBeregningTypes';
 
 const andreFrilansTilfeller = [faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL, faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON];
 
@@ -91,11 +92,11 @@ type OwnProps = {
 
 interface StaticFunctions {
   validate: (values: FaktaOmBeregningAksjonspunktValues, vurderMottarYtelse: VurderMottarYtelse) => any;
-  transformValues: (values: any,
+  transformValues: (values: FaktaOmBeregningAksjonspunktValues,
                     inntektVerdier: InntektTransformed[],
                     faktaOmBeregning: FaktaOmBeregning,
                     beregningsgrunnlag: Beregningsgrunnlag,
-                    fastsatteAndelsnr: number[]) => any;
+                    fastsatteAndelsnr: number[]) => FaktaBeregningTransformedValues;
   buildInitialValues: (vurderMottarYtelse: VurderMottarYtelse) => VurderMottarYtelseValues;
 }
 
@@ -139,7 +140,12 @@ const VurderMottarYtelseForm:FunctionComponent<OwnProps> & StaticFunctions = ({
   );
 };
 
-const transformValuesArbeidstakerUtenIM = (values, inntektVerdier, faktaOmBeregning, beregningsgrunnlag, fastsatteAndelsnr, faktaOmBeregningTilfeller) => {
+const transformValuesArbeidstakerUtenIM = (values: FaktaOmBeregningAksjonspunktValues,
+  inntektVerdier: InntektTransformed[],
+  faktaOmBeregning: FaktaOmBeregning,
+  beregningsgrunnlag: Beregningsgrunnlag,
+  fastsatteAndelsnr: number[],
+  faktaOmBeregningTilfeller: string[]): FaktaBeregningTransformedValues => {
   if (inntektVerdier === null) {
     return {};
   }
@@ -170,7 +176,10 @@ const transformValuesArbeidstakerUtenIM = (values, inntektVerdier, faktaOmBeregn
   return {};
 };
 
-const transformValuesFrilans = (values, inntektVerdier, beregningsgrunnlag, fastsatteAndelsnr, faktaOmBeregningTilfeller) => {
+const transformValuesFrilans = (values: FaktaOmBeregningAksjonspunktValues,
+  inntektVerdier: InntektTransformed[],
+  beregningsgrunnlag: Beregningsgrunnlag,
+  fastsatteAndelsnr: number[], faktaOmBeregningTilfeller: string[]): FaktaBeregningTransformedValues => {
   if (inntektVerdier === null) {
     return {};
   }
@@ -192,7 +201,9 @@ const transformValuesFrilans = (values, inntektVerdier, beregningsgrunnlag, fast
   return {};
 };
 
-const transformValuesMottarYtelse = (values, faktaOmBeregning, faktaOmBeregningTilfeller) => {
+const transformValuesMottarYtelse = (values: FaktaOmBeregningAksjonspunktValues,
+  faktaOmBeregning: FaktaOmBeregning,
+  faktaOmBeregningTilfeller: string[]): FaktaBeregningTransformedValues => {
   const ATAndelerUtenIM = faktaOmBeregning.vurderMottarYtelse.arbeidstakerAndelerUtenIM ? faktaOmBeregning.vurderMottarYtelse.arbeidstakerAndelerUtenIM : [];
   faktaOmBeregningTilfeller.push(faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE);
   return {
@@ -225,7 +236,11 @@ VurderMottarYtelseForm.buildInitialValues = (vurderMottarYtelse: VurderMottarYte
   return initialValues;
 };
 
-VurderMottarYtelseForm.transformValues = (values, inntektVerdier, faktaOmBeregning, beregningsgrunnlag, fastsatteAndelsnr) => {
+VurderMottarYtelseForm.transformValues = (values: FaktaOmBeregningAksjonspunktValues,
+  inntektVerdier: InntektTransformed[],
+  faktaOmBeregning: FaktaOmBeregning,
+  beregningsgrunnlag: Beregningsgrunnlag,
+  fastsatteAndelsnr: number[]): FaktaBeregningTransformedValues => {
   const faktaOmBeregningTilfeller = [];
   const aktiveTilfeller = faktaOmBeregning.faktaOmBeregningTilfeller ? faktaOmBeregning.faktaOmBeregningTilfeller : [];
   if (!aktiveTilfeller.map(({ kode }) => kode).includes(faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE)) {

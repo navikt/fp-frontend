@@ -299,26 +299,24 @@ export const transformValues = (
 
 export const setInntektValues = (aktivePaneler: string[],
   fatsettKunYtelseTransform: ((values: FaktaOmBeregningAksjonspunktValues) => FaktaBeregningTransformedValues),
-  vurderOgFastsettATFLTransform,
-  erOverstyrt: boolean) => (values: FaktaOmBeregningAksjonspunktValues): BeregningFaktaTransformedValues => {
+  vurderOgFastsettATFLTransform: (values: FaktaOmBeregningAksjonspunktValues) => BeregningFaktaTransformedValues) => (
+  values: FaktaOmBeregningAksjonspunktValues,
+): BeregningFaktaTransformedValues => {
   if (aktivePaneler.includes(faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE)) {
     return { fakta: fatsettKunYtelseTransform(values) };
   }
-  return { ...vurderOgFastsettATFLTransform(values, erOverstyrt) };
+  return { ...vurderOgFastsettATFLTransform(values) };
 };
 
 const setValuesForVurderFakta = (aktivePaneler: string[],
   values: FaktaOmBeregningAksjonspunktValues,
   kortvarigeArbeidsforhold: KortvarigAndel[],
   faktaOmBeregning: FaktaOmBeregning,
-  beregningsgrunnlag: Beregningsgrunnlag,
-  erOverstyrt: boolean): any => {
+  beregningsgrunnlag: Beregningsgrunnlag): BeregningFaktaTransformedValues => {
   const vurderFaktaValues = setInntektValues(
     aktivePaneler,
     kunYtelseTransform(faktaOmBeregning, aktivePaneler),
-    VurderOgFastsettATFL.transformValues(faktaOmBeregning, beregningsgrunnlag),
-    erOverstyrt,
-  )(values);
+    VurderOgFastsettATFL.transformValues(faktaOmBeregning, beregningsgrunnlag))(values);
   return ({
     fakta: transformValues(aktivePaneler,
       nyIArbeidslivetTransform,
@@ -329,7 +327,7 @@ const setValuesForVurderFakta = (aktivePaneler: string[],
   });
 };
 
-export const transformValuesFaktaForATFLOgSN = (values: FaktaOmBeregningAksjonspunktValues, erOverstyrt: boolean): any => {
+export const transformValuesFaktaForATFLOgSN = (values: FaktaOmBeregningAksjonspunktValues): BeregningFaktaTransformedValues => {
   const {
     tilfeller,
     kortvarigeArbeidsforhold,
@@ -337,7 +335,7 @@ export const transformValuesFaktaForATFLOgSN = (values: FaktaOmBeregningAksjonsp
     beregningsgrunnlag,
   } = values;
   return setValuesForVurderFakta(tilfeller, values, kortvarigeArbeidsforhold,
-    faktaOmBeregning, beregningsgrunnlag, erOverstyrt);
+    faktaOmBeregning, beregningsgrunnlag);
 };
 
 const getVurderFaktaAksjonspunkt = createSelector([(ownProps: OwnProps) => ownProps.aksjonspunkter], (aksjonspunkter) => (aksjonspunkter

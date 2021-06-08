@@ -12,9 +12,8 @@ import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import { ArbeidsgiverOpplysningerPerId, AlleKodeverk } from '@fpsak-frontend/types';
-import BeregningFaktaAP, {
+import {
   BeregningFaktaOgOverstyringAP,
-  BeregningOverstyringAP
 } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
 import FaktaForATFLOgSNPanel, {
   getBuildInitialValuesFaktaForATFLOgSN,
@@ -186,7 +185,7 @@ export const transformValuesVurderFaktaBeregning = (values: FaktaOmBeregningAksj
     return {
       kode: erOverstyring(values) ? OVERSTYRING_AV_BEREGNINGSGRUNNLAG : VURDER_FAKTA_FOR_ATFL_SN,
       begrunnelse: beg === undefined ? null : beg,
-      ...transformValuesFaktaForATFLOgSN(faktaBeregningValues, erOverstyring(values)),
+      ...transformValuesFaktaForATFLOgSN(faktaBeregningValues),
     };
   }
   return null;

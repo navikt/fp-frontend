@@ -7,8 +7,9 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import { Beregningsgrunnlag, FaktaOmBeregning } from '@fpsak-frontend/types';
+import { FaktaBeregningTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
 import { InntektTransformed } from '../../../../typer/FieldValues';
-import {NyoppstartetFLValues} from "../../../../typer/FaktaBeregningTypes";
+import { FaktaOmBeregningAksjonspunktValues, NyoppstartetFLValues } from '../../../../typer/FaktaBeregningTypes';
 
 /**
  * NyOppstartetFLForm
@@ -28,7 +29,10 @@ type OwnProps = {
 
 interface StaticFunctions {
   buildInitialValues: (beregningsgrunnlag: Beregningsgrunnlag) => NyoppstartetFLValues;
-  transformValues: (values: any, inntektPrMnd: InntektTransformed[], faktaOmBeregning: FaktaOmBeregning, fastsatteAndelsnr: number[]) => any;
+  transformValues: (values: FaktaOmBeregningAksjonspunktValues,
+                    inntektPrMnd: InntektTransformed[],
+                    faktaOmBeregning: FaktaOmBeregning,
+                    fastsatteAndelsnr: number[]) => FaktaBeregningTransformedValues;
 }
 
 const NyoppstartetFLForm: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly, isAksjonspunktClosed }) => (
@@ -63,7 +67,10 @@ NyoppstartetFLForm.buildInitialValues = (beregningsgrunnlag: Beregningsgrunnlag)
   return initialValues;
 };
 
-NyoppstartetFLForm.transformValues = (values, inntektPrMnd, faktaOmBeregning, fastsatteAndelsnr) => {
+NyoppstartetFLForm.transformValues = (values: FaktaOmBeregningAksjonspunktValues,
+  inntektPrMnd: InntektTransformed[],
+  faktaOmBeregning: FaktaOmBeregning,
+  fastsatteAndelsnr: number[]): FaktaBeregningTransformedValues => {
   const tilfeller = faktaOmBeregning.faktaOmBeregningTilfeller ? faktaOmBeregning.faktaOmBeregningTilfeller : [];
   if (!tilfeller.map(({ kode }) => kode).includes(faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL)) {
     return {};

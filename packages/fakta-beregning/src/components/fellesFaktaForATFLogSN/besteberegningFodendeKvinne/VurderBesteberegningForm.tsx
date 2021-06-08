@@ -11,11 +11,13 @@ import { LINK_TIL_BESTE_BEREGNING_REGNEARK } from '@fpsak-frontend/konstanter';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
 import { Aksjonspunkt, FaktaOmBeregning, VurderBesteberegning } from '@fpsak-frontend/types';
+import { FaktaBeregningTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
 import { getFormValuesForBeregning } from '../../BeregningFormUtils';
 
 import styles from '../kunYtelse/kunYtelseBesteberegningPanel.less';
 import InntektPrAndelProp from '../inntektPrAndelProp';
-import {FaktaOmBeregningAksjonspunktValues, VurderBesteberegningValues} from '../../../typer/FaktaBeregningTypes';
+import { FaktaOmBeregningAksjonspunktValues, VurderBesteberegningValues } from '../../../typer/FaktaBeregningTypes';
+import { InntektTransformed } from '../../../typer/FieldValues';
 
 export const besteberegningField = 'vurderbesteberegningField';
 
@@ -34,7 +36,9 @@ interface StaticFunctions {
                         vurderBesteberegning: VurderBesteberegning,
                         faktaOmBeregningTilfeller: string[],
                         erOverstyrt: boolean) => VurderBesteberegningValues;
-  transformValues: (values: any, faktaOmBeregning: FaktaOmBeregning, inntektPrAndel: InntektPrAndelProp[]) => any;
+  transformValues: (values: FaktaOmBeregningAksjonspunktValues,
+                    faktaOmBeregning: FaktaOmBeregning,
+                    inntektPrAndel: InntektTransformed[]) => FaktaBeregningTransformedValues;
   validate: (values: FaktaOmBeregningAksjonspunktValues, aktivertePaneler: string[]) => any;
 }
 
@@ -108,7 +112,9 @@ VurderBesteberegningPanelImpl.validate = (values: FaktaOmBeregningAksjonspunktVa
   return errors;
 };
 
-VurderBesteberegningPanelImpl.transformValues = (values, faktaOmBeregning, inntektPrAndel) => {
+VurderBesteberegningPanelImpl.transformValues = (values: FaktaOmBeregningAksjonspunktValues,
+  faktaOmBeregning: FaktaOmBeregning,
+  inntektPrAndel: InntektTransformed[]): FaktaBeregningTransformedValues => {
   if (!faktaOmBeregning || !faktaOmBeregning.vurderBesteberegning) {
     return {};
   }
@@ -146,7 +152,8 @@ VurderBesteberegningPanelImpl.transformValues = (values, faktaOmBeregning, innte
   };
 };
 
-export const vurderBesteberegningTransform = (faktaOmBeregning) => (values, inntektPrAndel) => {
+export const vurderBesteberegningTransform = (faktaOmBeregning: FaktaOmBeregning) => (values: FaktaOmBeregningAksjonspunktValues,
+  inntektPrAndel: InntektTransformed[]): FaktaBeregningTransformedValues => {
   const tilfeller = faktaOmBeregning.faktaOmBeregningTilfeller ? faktaOmBeregning.faktaOmBeregningTilfeller : [];
   if (!(tilfeller.map(({ kode }) => kode).includes(faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING)
       || tilfeller.map(({ kode }) => kode).includes(faktaOmBeregningTilfelle.FASTSETT_BESTEBEREGNING_FODENDE_KVINNE))) {

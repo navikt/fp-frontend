@@ -1,20 +1,20 @@
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { ArbeidstakerUtenIMAndel, Beregningsgrunnlag, VurderMottarYtelse } from '@fpsak-frontend/types';
 import { AndelMottarYtelseMap } from '../../../../typer/AndelMottarYtelseMap';
-import {FaktaOmBeregningAksjonspunktValues} from "../../../../typer/FaktaBeregningTypes";
+import { FaktaOmBeregningAksjonspunktValues } from '../../../../typer/FaktaBeregningTypes';
 
 export const mottarYtelseFieldPrefix = 'mottarYtelseField';
 export const frilansSuffix = '_frilans';
 export const utledArbeidsforholdFieldName = (andel: ArbeidstakerUtenIMAndel): string => mottarYtelseFieldPrefix + andel.andelsnr;
 export const finnFrilansFieldName = (): string => (mottarYtelseFieldPrefix + frilansSuffix);
 
-export const skalFastsetteInntektATUtenInntektsmelding = (values, vurderMottarYtelse) => {
+export const skalFastsetteInntektATUtenInntektsmelding = (values: FaktaOmBeregningAksjonspunktValues, vurderMottarYtelse: VurderMottarYtelse): boolean => {
   const atAndelerUtenIM = vurderMottarYtelse && vurderMottarYtelse.arbeidstakerAndelerUtenIM ? vurderMottarYtelse.arbeidstakerAndelerUtenIM : [];
   return atAndelerUtenIM.map((andel) => values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel)])
     .find((mottarYtelse) => mottarYtelse) !== undefined;
 };
 
-export const frilansMottarYtelse = (values) => (values[finnFrilansFieldName()]);
+export const frilansMottarYtelse = (values: FaktaOmBeregningAksjonspunktValues): boolean => (values.vurderMottarYtelseValues[finnFrilansFieldName()]);
 
 export const andelsnrMottarYtelseMap = (values: FaktaOmBeregningAksjonspunktValues,
   vurderMottarYtelse: VurderMottarYtelse,

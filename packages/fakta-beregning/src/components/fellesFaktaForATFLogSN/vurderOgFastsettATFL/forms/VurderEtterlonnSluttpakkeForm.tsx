@@ -11,8 +11,12 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Beregningsgrunnlag, FaktaOmBeregning } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
+import { FaktaBeregningTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
 import { InntektTransformed } from '../../../../typer/FieldValues';
-import { VurderEtterlønnSluttpakkeValues } from '../../../../typer/FaktaBeregningTypes';
+import {
+  FaktaOmBeregningAksjonspunktValues,
+  VurderEtterlønnSluttpakkeValues,
+} from '../../../../typer/FaktaBeregningTypes';
 
 /**
  * VurderEtterlønnSluttpakkeForm
@@ -29,7 +33,10 @@ type OwnProps = {
 
 interface StaticFunctions {
   buildInitialValues: (beregningsgrunnlag: Beregningsgrunnlag, faktaAksjonspunkt: Aksjonspunkt) => VurderEtterlønnSluttpakkeValues;
-  transformValues: (values: any, inntektPrMnd: InntektTransformed[], faktaOmBeregning: FaktaOmBeregning, fastsatteAndelsnr: number[]) => any;
+  transformValues: (values: FaktaOmBeregningAksjonspunktValues,
+                    inntektPrMnd: InntektTransformed[],
+                    faktaOmBeregning: FaktaOmBeregning,
+                    fastsatteAndelsnr: number[]) => FaktaBeregningTransformedValues;
 }
 
 const VurderEtterlonnSluttpakkeForm: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly, isAksjonspunktClosed }) => (
@@ -78,7 +85,10 @@ const finnEtterlønnSluttpakkeAndelNr = (faktaOmBeregning: FaktaOmBeregning): nu
   return etterlønnSluttpakkeAndel ? etterlønnSluttpakkeAndel.andelsnr : undefined;
 };
 
-VurderEtterlonnSluttpakkeForm.transformValues = (values, inntektPrMnd, faktaOmBeregning, fastsatteAndelsnr) => {
+VurderEtterlonnSluttpakkeForm.transformValues = (values: FaktaOmBeregningAksjonspunktValues,
+  inntektPrMnd: InntektTransformed[],
+  faktaOmBeregning: FaktaOmBeregning,
+  fastsatteAndelsnr: number[]): FaktaBeregningTransformedValues => {
   const tilfeller = faktaOmBeregning.faktaOmBeregningTilfeller ? faktaOmBeregning.faktaOmBeregningTilfeller : [];
   if (!tilfeller.map(({ kode }) => kode).includes(faktaOmBeregningTilfelle.VURDER_ETTERLONN_SLUTTPAKKE)) {
     return {};
