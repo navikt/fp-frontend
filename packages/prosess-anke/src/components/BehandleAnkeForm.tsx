@@ -5,7 +5,9 @@ import {
 } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
+import {
+  Form, formValueSelector, InjectedFormProps, reduxForm,
+} from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 
@@ -19,7 +21,6 @@ import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
-import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import ankeOmgjorArsak from '@fpsak-frontend/kodeverk/src/ankeOmgjorArsak';
 import {
@@ -29,7 +30,7 @@ import { AnkeVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspun
 
 import PreviewAnkeLink, { BrevData } from './PreviewAnkeLink';
 import FritekstBrevTextField from './FritekstAnkeBrevTextField';
-import TempsaveAnkeButton, { AnkeData } from './TempsaveAnkeButton';
+import TempsaveAnkeButton, { transformValues } from './TempsaveAnkeButton';
 
 import styles from './behandleAnkeForm.less';
 
@@ -82,7 +83,7 @@ const formatBehandling = (
   + `- ${behandlingStatuser.find((bs) => bs.kode === b.status.kode)?.navn}`;
 
 const formatId = (id?: string): string => {
-  if (id === null) {
+  if (id === null || id === undefined || id === '-') {
     return IKKE_PAA_ANKET_BEHANDLING_ID;
   }
   return id;
@@ -126,7 +127,7 @@ interface PureOwnProps {
   submitCallback: (data: AnkeVurderingResultatAp) => Promise<void>;
   ankeVurderingResultat: AnkeVurdering['ankeVurderingResultat'];
   previewCallback: (data: BrevData) => Promise<any>;
-  saveAnke: (data: AnkeData) => Promise<any>;
+  saveAnke: (data: AnkeVurderingResultatAp) => Promise<any>;
   readOnly?: boolean;
   readOnlySubmitButton?: boolean;
   sprakkode: Kodeverk;
@@ -140,7 +141,6 @@ interface MappedOwnProps {
   aksjonspunktCode: string;
   formValues?: FormValuesUtrekk;
   initialValues: FormValues;
-  onSubmit: (formValues: FormValues) => any;
 }
 
 /**
@@ -160,9 +160,10 @@ export const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps &
   ankeOmgorArsaker,
   behandlingTyper,
   behandlingStatuser,
+  submitCallback,
   ...formProps
 }) => (
-  <form onSubmit={handleSubmit}>
+  <Form onSubmit={handleSubmit((values: FormValues) => submitCallback(transformValues(values)))}>
     <Undertittel><FormattedMessage id="Ankebehandling.Title" /></Undertittel>
     <VerticalSpacer fourPx />
     <AksjonspunktHelpTextTemp isAksjonspunktOpen={!readOnlySubmitButton}>
@@ -310,29 +311,21 @@ export const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps &
         </Column>
         <Column xs="2">
           <TempsaveAnkeButton
-            fritekstTilBrev={formValues.fritekstTilBrev}
-            begrunnelse={formValues.begrunnelse}
             saveAnke={saveAnke}
             readOnly={readOnly}
-            aksjonspunktCode={aksjonspunktCode}
+            handleSubmit={handleSubmit}
+            spinner={formProps.submitting}
           />
         </Column>
       </Row>
     </div>
-  </form>
+  </Form>
 );
 
 BehandleAnkeForm.defaultProps = {
   readOnly: true,
   readOnlySubmitButton: true,
 };
-
-const lagreOmgjoerAarsak = (values: FormValues): Kodeverk | string => (ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE === values.ankeVurdering?.kode
-|| ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV === values.ankeVurdering?.kode
-|| ankeVurdering.ANKE_OMGJOER === values.ankeVurdering?.kode ? values.ankeOmgjoerArsak : '-');
-
-const lagreVurderingOmgjoer = (values: FormValues): Kodeverk | string => (ankeVurdering.ANKE_OMGJOER === values.ankeVurdering?.kode
-  ? values.ankeVurderingOmgjoer : '-');
 
 export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.ankeVurderingResultat], (resultat): FormValues => ({
   vedtak: resultat ? formatId(resultat.vedtakBehandlingUuid) : null,
@@ -348,26 +341,7 @@ export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ow
   ankeVurderingOmgjoer: resultat ? resultat.ankeVurderingOmgjoer : null,
 }));
 
-export const transformValues = (values: FormValues): AnkeVurderingResultatAp => ({
-  vedtakBehandlingUuid: values.vedtak === '0' || !values.vedtak ? null : values.vedtak,
-  ankeVurdering: values.ankeVurdering,
-  begrunnelse: values.begrunnelse,
-  fritekstTilBrev: values.fritekstTilBrev,
-  erGodkjentAvMedunderskriver: values.erGodkjentAvMedunderskriver,
-  erAnkerIkkePart: values.erAnkerIkkePart,
-  erIkkeKonkret: values.erIkkeKonkret,
-  erFristIkkeOverholdt: values.erFristIkkeOverholdt,
-  erIkkeSignert: values.erIkkeSignert,
-  erSubsidiartRealitetsbehandles: values.erSubsidiartRealitetsbehandles,
-  ankeOmgjoerArsak: lagreOmgjoerAarsak(values),
-  ankeVurderingOmgjoer: lagreVurderingOmgjoer(values),
-  kode: AksjonspunktKode.MANUELL_VURDERING_AV_ANKE,
-});
-
 const formName = 'BehandleAnkeForm';
-
-const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
-  (submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   aksjonspunktCode: ownProps.aksjonspunkter[0].definisjon.kode,
@@ -380,7 +354,6 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
     'erSubsidiartRealitetsbehandles',
     'ankeOmgjoerArsak',
     'ankeVurderingOmgjoer') || {},
-  onSubmit: lagSubmitFn(ownProps),
 });
 
 export default connect(mapStateToProps)(reduxForm({

@@ -88,6 +88,7 @@ export const ResultatAvvise: FunctionComponent<OwnPropsResultat> = ({
     </ul>
     <Undertekst>
       <FormattedMessage id="Ankebehandling.Realitetsbehandles" />
+      <span> </span>
       <FormattedMessage id={ankeVurderingResultat.erSubsidiartRealitetsbehandles
         ? 'Ankebehandling.Realitetsbehandles.Ja' : 'Ankebehandling.Realitetsbehandles.Nei'}
       />
