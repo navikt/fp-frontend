@@ -248,7 +248,7 @@ const nyIArbeidslivetTransform = (vurderFaktaValues, values) => {
   });
 };
 
-const kortvarigeArbeidsforholdTransform = (kortvarigeArbeidsforhold) => (vurderFaktaValues, values) => {
+const kortvarigeArbeidsforholdTransform = (kortvarigeArbeidsforhold: KortvarigAndel[]) => (vurderFaktaValues, values: FaktaOmBeregningAksjonspunktValues) => {
   vurderFaktaValues.faktaOmBeregningTilfeller.push(faktaOmBeregningTilfelle.VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD);
   return ({
     ...vurderFaktaValues,

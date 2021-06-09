@@ -12,8 +12,9 @@ import {
   FaktaOmBeregning,
   KortvarigAndel,
 } from '@fpsak-frontend/types';
+import { FaktaBeregningTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
 import { createVisningsnavnFakta } from '../../ArbeidsforholdHelper';
-import { TidsbegrensetandelValues } from '../../../typer/FaktaBeregningTypes';
+import { FaktaOmBeregningAksjonspunktValues, TidsbegrensetandelValues } from '../../../typer/FaktaBeregningTypes';
 
 const kortvarigStringId = 'BeregningInfoPanel.TidsbegrensetArbFor.Arbeidsforhold';
 
@@ -35,7 +36,7 @@ type OwnProps = {
 };
 
 interface StaticFunctions {
-  transformValues: (values: any, andeler: KortvarigAndel[]) => any;
+  transformValues: (values: FaktaOmBeregningAksjonspunktValues, andeler: KortvarigAndel[]) => any;
   buildInitialValues: (andeler: KortvarigAndel[]) => TidsbegrensetandelValues;
 }
 
@@ -93,11 +94,12 @@ TidsbegrensetArbeidsforholdForm.buildInitialValues = (andeler: KortvarigAndel[])
   return initialValues;
 };
 
-TidsbegrensetArbeidsforholdForm.transformValues = (values, andeler) => {
+TidsbegrensetArbeidsforholdForm.transformValues = (values: FaktaOmBeregningAksjonspunktValues,
+  andeler: KortvarigAndel[]): FaktaBeregningTransformedValues => {
   const newValues = [];
   andeler.forEach((andel) => {
     const fieldName = createArbeidsforholdRadioKey(andel);
-    const booleanValue = values[fieldName];
+    const booleanValue = values.tidsbegrensetValues[fieldName];
     const valueObject = {
       andelsnr: andel.andelsnr,
       tidsbegrensetArbeidsforhold: booleanValue,
