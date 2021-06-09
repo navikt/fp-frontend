@@ -87,37 +87,35 @@ const settOppKomponenterForNæring = (readOnly: boolean,
   const erVarigEndring = snAndel.næringer && snAndel.næringer.some((naring) => naring.erVarigEndret === true);
   const erNyoppstartet = snAndel.næringer && snAndel.næringer.some((naring) => naring.erNyoppstartet === true);
   return (
-    <div className={readOnly ? '' : styles.aksjonspunktBehandlerContainer}>
-      <Panel className={readOnly ? beregningStyles.panelRight : styles.aksjonspunktBehandlerBorder}>
-        <Row>
-          <Column xs="12">
-            <Element className={beregningStyles.avsnittOverskrift}>
-              {erNyArbLivet && (
+    <>
+      <Row>
+        <Column xs="12">
+          <Element className={beregningStyles.avsnittOverskrift}>
+            {erNyArbLivet && (
               <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler.NyIArbeidslivet" />
-              )}
-              {erNyoppstartet && !erVarigEndring && (
+            )}
+            {erNyoppstartet && !erVarigEndring && (
               <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler.Nyoppstartet" />
-              )}
-              {!erNyArbLivet && !erNyoppstartet && erVarigEndring && (
+            )}
+            {!erNyArbLivet && !erNyoppstartet && erVarigEndring && (
               <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler.VarigEndring" />
-              )}
-              {!erNyArbLivet && erNyoppstartet && erVarigEndring && (
+            )}
+            {!erNyArbLivet && erNyoppstartet && erVarigEndring && (
               <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler" />
-              )}
-            </Element>
-          </Column>
-        </Row>
-        <VerticalSpacer eightPx />
-        <AksjonspunktBehandlerSN
-          readOnly={readOnly}
-          aksjonspunkter={aksjonspunkter}
-          erNyArbLivet={erNyArbLivet}
-          erVarigEndring={erVarigEndring}
-          erNyoppstartet={erNyoppstartet}
-          endretTekst={lagEndretTekst(aksjonspunkter, readOnly)}
-        />
-      </Panel>
-    </div>
+            )}
+          </Element>
+        </Column>
+      </Row>
+      <VerticalSpacer eightPx />
+      <AksjonspunktBehandlerSN
+        readOnly={readOnly}
+        aksjonspunkter={aksjonspunkter}
+        erNyArbLivet={erNyArbLivet}
+        erVarigEndring={erVarigEndring}
+        erNyoppstartet={erNyoppstartet}
+        endretTekst={lagEndretTekst(aksjonspunkter, readOnly)}
+      />
+    </>
   );
 };
 
@@ -216,11 +214,14 @@ export const AksjonspunktBehandlerImpl: FunctionComponent<OwnProps & WrappedComp
   );
   if (relevanteStatuser.isSelvstendigNaeringsdrivende) {
     return (
-      <>
-        {settOppKomponenterForNæring(readOnly, allePerioder, aksjonspunkter)}
-        <VerticalSpacer sixteenPx />
-        {submittKnapp}
-      </>
+      <div className={readOnly ? '' : styles.aksjonspunktBehandlerContainer}>
+        <Panel className={readOnly ? beregningStyles.panelRight : styles.aksjonspunktBehandlerBorder}>
+          {settOppKomponenterForNæring(readOnly, allePerioder, aksjonspunkter)}
+          <VerticalSpacer sixteenPx />
+          {submittKnapp}
+          <VerticalSpacer sixteenPx />
+        </Panel>
+      </div>
     );
   }
   return (
