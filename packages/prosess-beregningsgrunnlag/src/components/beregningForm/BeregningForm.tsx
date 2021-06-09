@@ -1,12 +1,11 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import { createSelector } from 'reselect';
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { AksjonspunktHelpTextHTML, AvsnittSkiller, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { AvsnittSkiller, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { Column, Row } from 'nav-frontend-grid';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 
@@ -41,6 +40,7 @@ import BeregningsgrunnlagValues from '../../types/BeregningsgrunnlagAksjonspunkt
 import { ATFLTidsbegrensetValues, ATFLValues } from '../../types/ATFLAksjonspunktTsType';
 import { VurderOgFastsettValues } from '../../types/NæringAksjonspunktTsType';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
+import AksjonspunktTittel from '../fellesPaneler/AksjonspunktTittel';
 
 // ------------------------------------------------------------------------------------------ //
 // Variables
@@ -51,7 +51,6 @@ const {
   FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
   VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
   FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
-  FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE,
   FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
   VURDER_DEKNINGSGRAD,
 } = aksjonspunktCodes;
@@ -64,66 +63,6 @@ const gjelderBehandlingenBesteberegning = (faktaOmBeregning: FaktaOmBeregning): 
   : false);
 
 const erAutomatiskBesteberegnet = (ytelsesspesifiktGrunnlag: YtelseGrunnlag): boolean => !!ytelsesspesifiktGrunnlag?.besteberegninggrunnlag;
-
-const findAksjonspunktHelpTekst = (gjeldendeAksjonspunkt: Aksjonspunkt, erVarigEndring: boolean, erNyArbLivet: boolean, erNyoppstartet: boolean): string => {
-  switch (gjeldendeAksjonspunkt.definisjon.kode) {
-    case FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS:
-      return 'Beregningsgrunnlag.Helptext.Arbeidstaker2';
-    case VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE:
-      if (erVarigEndring) {
-        return 'Beregningsgrunnlag.Helptext.SelvstendigNaeringsdrivende.VarigEndring';
-      }
-      if (erNyoppstartet) {
-        return 'Beregningsgrunnlag.Helptext.SelvstendigNaeringsdrivende.Nyoppstartet';
-      }
-      return 'Beregningsgrunnlag.Helptext.SelvstendigNaeringsdrivende2';
-    case FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD:
-      return 'Beregningsgrunnlag.Helptext.TidsbegrensetArbeidsforhold2';
-    case FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE:
-      return 'Beregningsgrunnlag.Helptext.SelvstendigNaeringsdrivende2';
-    case FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET:
-      return 'Beregningsgrunnlag.Helptext.NyIArbeidslivetSN2';
-    case VURDER_DEKNINGSGRAD:
-      return 'Beregningsgrunnlag.Helptext.BarnetHarDødDeFørsteSeksUkene';
-    default:
-      return 'Beregningsgrunnlag.Helptext.Ukjent';
-  }
-};
-
-const lagAksjonspunktHelpText = (gjeldendeAksjonspunkter: Aksjonspunkt[],
-  avvikProsent: number,
-  alleAndelerIForstePeriode: BeregningsgrunnlagAndel[]): ReactElement => {
-  if (gjeldendeAksjonspunkter === undefined || gjeldendeAksjonspunkter === null) {
-    return undefined;
-  }
-  const vurderDekninsgradAksjonspunkt = gjeldendeAksjonspunkter.filter((ap) => ap.definisjon.kode === VURDER_DEKNINGSGRAD);
-  const sorterteAksjonspunkter = vurderDekninsgradAksjonspunkt.concat(gjeldendeAksjonspunkter);
-  const apneAksjonspunkt = sorterteAksjonspunkter.filter((ap) => isAksjonspunktOpen(ap.status.kode));
-  const erDetMinstEttApentAksjonspunkt = apneAksjonspunkt.length > 0;
-  const snAndel = alleAndelerIForstePeriode.find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
-  const erVarigEndring = snAndel && snAndel.næringer && snAndel.næringer.some((naring) => naring.erVarigEndret === true);
-  const erNyoppstartet = snAndel && snAndel.næringer && snAndel.næringer.some((naring) => naring.erNyoppstartet === true);
-  const erNyArbLivet = snAndel && snAndel.erNyIArbeidslivet;
-  return (
-    <div>
-      { erDetMinstEttApentAksjonspunkt && (
-        <>
-          <AksjonspunktHelpTextHTML>
-            { apneAksjonspunkt.map((ap) => (
-              <FormattedMessage
-                key={ap.definisjon.kode}
-                id={findAksjonspunktHelpTekst(ap, erVarigEndring, erNyArbLivet, erNyoppstartet)}
-                values={{ verdi: avvikProsent, b: (chunks) => <b>{chunks}</b>, br: <br /> }}
-              />
-            ))}
-          </AksjonspunktHelpTextHTML>
-          <VerticalSpacer thirtyTwoPx />
-        </>
-      )}
-
-    </div>
-  );
-};
 
 export const buildInitialValues = createSelector(
   [(ownProps: OwnProps) => ownProps.beregningsgrunnlag,
@@ -184,25 +123,6 @@ const getSammenligningsgrunnlagsPrStatus = (bg: BeregningsgrunnlagProp): Sammenl
   ? bg.sammenligningsgrunnlagPrStatus
   : undefined);
 
-const finnAlleAndelerIFørstePeriode = (allePerioder: BeregningsgrunnlagPeriodeProp[]): BeregningsgrunnlagAndel[] => {
-  if (allePerioder && allePerioder.length > 0) {
-    return allePerioder[0].beregningsgrunnlagPrStatusOgAndel;
-  }
-  return undefined;
-};
-
-const getAvviksprosent = (sammenligningsgrunnlagPrStatus: SammenligningsgrunlagProp[]): number => {
-  if (!sammenligningsgrunnlagPrStatus) {
-    return undefined;
-  }
-  const avvikElem = sammenligningsgrunnlagPrStatus.find((status) => status.avvikProsent > 25);
-  const avvikProsent = avvikElem && avvikElem.avvikProsent ? avvikElem.avvikProsent : 0;
-  if (avvikProsent || avvikProsent === 0) {
-    return Number((avvikProsent).toFixed(1));
-  }
-  return undefined;
-};
-
 const getStatusList = (beregningsgrunnlagPerioder: BeregningsgrunnlagPeriodeProp[]): Kodeverk[] => beregningsgrunnlagPerioder[0]
   .beregningsgrunnlagPrStatusOgAndel
   .filter((statusAndel) => statusAndel.erTilkommetAndel !== true)
@@ -250,18 +170,15 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
   const gjelderAutomatiskBesteberegning = erAutomatiskBesteberegnet(ytelsesspesifiktGrunnlag);
 
   const sammenligningsgrunnlagPrStatus = getSammenligningsgrunnlagsPrStatus(beregningsgrunnlag);
-  const avvikProsent = getAvviksprosent(sammenligningsgrunnlagPrStatus);
   const aktivitetStatusList = getStatusList(beregningsgrunnlagPeriode);
   const harAksjonspunkter = gjeldendeAksjonspunkter && gjeldendeAksjonspunkter.length > 0;
-  const alleAndelerIForstePeriode = finnAlleAndelerIFørstePeriode(beregningsgrunnlagPeriode);
-
   return (
     <form onSubmit={formProps.handleSubmit} className={beregningStyles.beregningForm}>
-      { gjeldendeAksjonspunkter
+      { harAksjonspunkter
         && (
           <>
             <VerticalSpacer eightPx />
-            { lagAksjonspunktHelpText(gjeldendeAksjonspunkter, avvikProsent, alleAndelerIForstePeriode)}
+            <AksjonspunktTittel aksjonspunkter={gjeldendeAksjonspunkter} beregningsgrunnlag={beregningsgrunnlag} />
           </>
 
         )}
