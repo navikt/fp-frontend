@@ -115,7 +115,7 @@ const FordelBeregningsgrunnlagPeriodePanel: FunctionComponent<OwnProps> & Static
       name={fordelBGFieldArrayName}
       component={RenderFordelBGFieldArray}
       readOnly={readOnly}
-      periodeUtenAarsak={!skalRedigereInntekt}
+      skalIkkeRedigereInntekt={!skalRedigereInntekt}
       isAksjonspunktClosed={isAksjonspunktClosed}
       alleKodeverk={alleKodeverk}
       beregningsgrunnlag={beregningsgrunnlag}

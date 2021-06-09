@@ -218,9 +218,9 @@ const arbeidsforholdReadOnlyOrSelect = (fields: FieldArrayFieldsProps<FordelBere
 
 export const lagBelopKolonne = (andelElementFieldId: string,
   readOnly: boolean,
-  periodeUtenAarsak: boolean,
+  skalIkkeRedigereInntekt: boolean,
   isAksjonspunktClosed: boolean): ReactElement => {
-  if (!readOnly && periodeUtenAarsak) {
+  if (!readOnly && skalIkkeRedigereInntekt) {
     return (
       <TableColumn>
         <InputField
@@ -240,7 +240,7 @@ export const lagBelopKolonne = (andelElementFieldId: string,
         bredde="XS"
         parse={parseCurrencyInput}
         readOnly={readOnly}
-        isEdited={isAksjonspunktClosed && !periodeUtenAarsak}
+        isEdited={isAksjonspunktClosed && !skalIkkeRedigereInntekt}
       />
     </TableColumn>
   );
@@ -255,14 +255,15 @@ const createAndelerTableRows = (fields: FieldArrayFieldsProps<FordelBeregningsgr
   isAksjonspunktClosed: boolean,
   readOnly: boolean,
   inntektskategoriKoder: KodeverkMedNavn[],
-  periodeUtenAarsak: boolean,
+  skalIkkeRedigereInntekt: boolean,
   arbeidsforholdList: BGFordelArbeidsforhold[],
   selectVals: ReactElement[],
-  erRevurdering: boolean): ReactElement[] => (
-  fields.map((andelElementFieldId, index) => (
+  erRevurdering: boolean): ReactElement[] => {
+  const skalIkkeEndres = readOnly || skalIkkeRedigereInntekt;
+  return fields.map((andelElementFieldId, index) => (
     <TableRow key={andelElementFieldId}>
       <TableColumn>
-        {arbeidsforholdReadOnlyOrSelect(fields, index, andelElementFieldId, selectVals, (readOnly || periodeUtenAarsak), arbeidsforholdList)}
+        {arbeidsforholdReadOnlyOrSelect(fields, index, andelElementFieldId, selectVals, skalIkkeEndres, arbeidsforholdList)}
         {!isSelvstendigOrFrilanser(fields.get(index))
         && (
           <div className={styles.wordwrap}>
@@ -276,14 +277,14 @@ const createAndelerTableRows = (fields: FieldArrayFieldsProps<FordelBeregningsgr
       </TableColumn>
       {erRevurdering
       && (
-      <TableColumn>
-        <InputField
-          name={`${andelElementFieldId}.fordelingForrigeBehandling`}
-          bredde="S"
-          readOnly
-          parse={parseCurrencyInput}
-        />
-      </TableColumn>
+        <TableColumn>
+          <InputField
+            name={`${andelElementFieldId}.fordelingForrigeBehandling`}
+            bredde="S"
+            readOnly
+            parse={parseCurrencyInput}
+          />
+        </TableColumn>
       )}
       <TableColumn>
         <DecimalField
@@ -300,11 +301,13 @@ const createAndelerTableRows = (fields: FieldArrayFieldsProps<FordelBeregningsgr
           normalizeOnBlur={(value) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
         />
       </TableColumn>
-      <TableColumn className={(readOnly || periodeUtenAarsak) || !fields.get(index).skalKunneEndreRefusjon ? undefined : styles.rightAlignInput}>
+      <TableColumn
+        className={skalIkkeEndres || !fields.get(index).skalKunneEndreRefusjon ? undefined : styles.rightAlignInput}
+      >
         <InputField
           name={`${andelElementFieldId}.refusjonskrav`}
           bredde="XS"
-          readOnly={(readOnly || periodeUtenAarsak) || !fields.get(index).skalKunneEndreRefusjon}
+          readOnly={skalIkkeEndres || !fields.get(index).skalKunneEndreRefusjon}
           parse={parseCurrencyInput}
         />
       </TableColumn>
@@ -316,19 +319,19 @@ const createAndelerTableRows = (fields: FieldArrayFieldsProps<FordelBeregningsgr
           parse={parseCurrencyInput}
         />
       </TableColumn>
-      {lagBelopKolonne(andelElementFieldId, readOnly, periodeUtenAarsak, isAksjonspunktClosed)}
-      <TableColumn className={(readOnly || periodeUtenAarsak) ? styles.shortLeftAligned : undefined}>
+      {lagBelopKolonne(andelElementFieldId, readOnly, skalIkkeRedigereInntekt, isAksjonspunktClosed)}
+      <TableColumn className={skalIkkeEndres ? styles.shortLeftAligned : undefined}>
         <SelectField
           label=""
           name={`${andelElementFieldId}.inntektskategori`}
           bredde="s"
           selectValues={inntektskategoriSelectValues(inntektskategoriKoder)}
           value={fields.get(index).inntektskategori}
-          readOnly={(readOnly || periodeUtenAarsak)}
+          readOnly={skalIkkeEndres}
         />
       </TableColumn>
       <TableColumn>
-        {skalViseSletteknapp(index, fields, (readOnly || periodeUtenAarsak))
+        {skalViseSletteknapp(index, fields, skalIkkeEndres)
         && (
           <button
             className={styles.buttonRemove}
@@ -340,8 +343,8 @@ const createAndelerTableRows = (fields: FieldArrayFieldsProps<FordelBeregningsgr
         )}
       </TableColumn>
     </TableRow>
-  ))
-);
+  ));
+};
 
 const createBruttoBGSummaryRow = (sumFordelingForrigeBehandling: string,
   sumFordeling: string,
@@ -403,7 +406,7 @@ type OwnProps = {
     fields: FieldArrayFieldsProps<FordelBeregningsgrunnlagAndelValues>;
     meta: FieldArrayMetaProps;
     isAksjonspunktClosed: boolean;
-    periodeUtenAarsak: boolean;
+    skalIkkeRedigereInntekt: boolean;
     alleKodeverk: AlleKodeverk;
     behandlingType: Kodeverk;
     beregningsgrunnlag: Beregningsgrunnlag;
@@ -434,7 +437,7 @@ export const RenderFordelBGFieldArrayImpl: FunctionComponent<OwnProps & MappedOw
   arbeidsforholdList,
   inntektskategoriKoder,
   readOnly,
-  periodeUtenAarsak,
+  skalIkkeRedigereInntekt,
   isAksjonspunktClosed,
   harKunYtelse,
   erRevurdering,
@@ -447,7 +450,7 @@ export const RenderFordelBGFieldArrayImpl: FunctionComponent<OwnProps & MappedOw
   const selectVals = harKunYtelse
     ? arbeidsgiverSelectValuesForKunYtelse(arbeidsforholdList, intl, getKodeverknavn, arbeidsgiverOpplysningerPerId)
     : arbeidsgiverSelectValues(arbeidsforholdList, getKodeverknavn, arbeidsgiverOpplysningerPerId);
-  const tablerows = createAndelerTableRows(fields, isAksjonspunktClosed, readOnly, inntektskategoriKoder, periodeUtenAarsak,
+  const tablerows = createAndelerTableRows(fields, isAksjonspunktClosed, readOnly, inntektskategoriKoder, skalIkkeRedigereInntekt,
     arbeidsforholdList, selectVals, erRevurdering);
   tablerows.push(createBruttoBGSummaryRow(sumFordelingForrigeBehandling, sumFordeling, sumBeregningsgrunnlagPrAar, erRevurdering));
   const error = getErrorMessage(meta, intl);
@@ -456,7 +459,7 @@ export const RenderFordelBGFieldArrayImpl: FunctionComponent<OwnProps & MappedOw
       <Table headerTextCodes={getHeaderTextCodes(erRevurdering)} noHover classNameTable={styles.inntektTable}>
         {tablerows}
       </Table>
-      {!readOnly && !periodeUtenAarsak
+      {!readOnly && !skalIkkeRedigereInntekt
       && (
       <Row className={styles.buttonRow}>
         <Column xs="3">
@@ -465,9 +468,9 @@ export const RenderFordelBGFieldArrayImpl: FunctionComponent<OwnProps & MappedOw
           <div
             id="leggTilAndelDiv"
             onClick={() => {
-              fields.push(defaultBGFordeling(periodeUtenAarsak));
+              fields.push(defaultBGFordeling(skalIkkeRedigereInntekt));
             }}
-            onKeyDown={onKeyDown(fields, periodeUtenAarsak)}
+            onKeyDown={onKeyDown(fields, skalIkkeRedigereInntekt)}
             className={styles.addPeriode}
             role="button"
             tabIndex={0}
