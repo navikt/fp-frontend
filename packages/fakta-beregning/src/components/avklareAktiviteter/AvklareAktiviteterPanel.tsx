@@ -216,28 +216,47 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
     }
     const avklarAktiviteter = getAvklarAktiviteter(this.props);
     const skalViseSubmitknappInneforBorderBox = (harAndreAksjonspunkterIPanel || erOverstyrt || erBgOverstyrt) && !hasOpenAvklarAksjonspunkter(aksjonspunkter);
+    const skalViseOverstyringsknapp = kanOverstyre || erOverstyrt;
+    const harBlittOverstyrt = erOverstyrtKnappTrykket || hasAksjonspunkt(OVERSTYRING_AV_BEREGNINGSAKTIVITETER, aksjonspunkter) || readOnly;
+    const skalViseAktivitetTabell = hasAksjonspunkt(AVKLAR_AKTIVITETER, aksjonspunkter) || kanOverstyre || erOverstyrt;
+
+    const overskriftOgKnapp = (
+      <FlexContainer>
+        <FlexRow>
+          <FlexColumn>
+            <Element className={styles.avsnittOverskrift}>
+              <FormattedMessage id="AvklarAktivitetPanel.Overskrift" />
+            </Element>
+          </FlexColumn>
+          {skalViseOverstyringsknapp && (
+          <FlexColumn>
+            <OverstyringKnapp
+              onClick={() => this.initializeAktiviteter()}
+              erOverstyrt={harBlittOverstyrt}
+            />
+          </FlexColumn>
+          )}
+        </FlexRow>
+      </FlexContainer>
+    );
+
+    if (!skalViseAktivitetTabell) {
+      return (
+        <>
+          <form onSubmit={formProps.handleSubmit}>
+            {overskriftOgKnapp}
+            <VerticalSpacer sixteenPx />
+          </form>
+          {harAndreAksjonspunkterIPanel && <VerticalSpacer twentyPx />}
+        </>
+      );
+    }
+
     return (
       <>
         <form onSubmit={formProps.handleSubmit}>
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Element className={styles.avsnittOverskrift}>
-                  <FormattedMessage id="AvklarAktivitetPanel.Overskrift" />
-                </Element>
-              </FlexColumn>
-              {(kanOverstyre || erOverstyrt) && (
-              <FlexColumn>
-                <OverstyringKnapp
-                  onClick={() => this.initializeAktiviteter()}
-                  erOverstyrt={erOverstyrtKnappTrykket || hasAksjonspunkt(OVERSTYRING_AV_BEREGNINGSAKTIVITETER, aksjonspunkter) || readOnly}
-                />
-              </FlexColumn>
-              )}
-            </FlexRow>
-          </FlexContainer>
+          {overskriftOgKnapp}
           <VerticalSpacer sixteenPx />
-          {(hasAksjonspunkt(AVKLAR_AKTIVITETER, aksjonspunkter) || kanOverstyre || erOverstyrt) && (
           <>
             {hasAksjonspunkt(AVKLAR_AKTIVITETER, aksjonspunkter) && (
             <AksjonspunktHelpTextTemp isAksjonspunktOpen={!isAksjonspunktClosed}>{helpText}</AksjonspunktHelpTextTemp>
@@ -324,7 +343,6 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
             </>
             )}
           </>
-          )}
         </form>
         {harAndreAksjonspunkterIPanel && <VerticalSpacer twentyPx />}
       </>
