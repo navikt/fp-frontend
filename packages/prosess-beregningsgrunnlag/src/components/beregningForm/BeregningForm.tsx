@@ -10,7 +10,6 @@ import { AksjonspunktHelpTextHTML, AvsnittSkiller, VerticalSpacer } from '@fpsak
 import { Column, Row } from 'nav-frontend-grid';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 
-import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import { Undertittel } from 'nav-frontend-typografi';
 import {
   Aksjonspunkt,
@@ -65,10 +64,6 @@ const gjelderBehandlingenBesteberegning = (faktaOmBeregning: FaktaOmBeregning): 
   : false);
 
 const erAutomatiskBesteberegnet = (ytelsesspesifiktGrunnlag: YtelseGrunnlag): boolean => !!ytelsesspesifiktGrunnlag?.besteberegninggrunnlag;
-
-const harPerioderMedAvsluttedeArbeidsforhold = (allePerioder: BeregningsgrunnlagPeriodeProp[]): boolean => allePerioder
-  .some(({ periodeAarsaker }) => periodeAarsaker
-  && periodeAarsaker.some(({ kode }) => kode === periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET));
 
 const findAksjonspunktHelpTekst = (gjeldendeAksjonspunkt: Aksjonspunkt, erVarigEndring: boolean, erNyArbLivet: boolean, erNyoppstartet: boolean): string => {
   switch (gjeldendeAksjonspunkt.definisjon.kode) {
@@ -257,7 +252,6 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
   const sammenligningsgrunnlagPrStatus = getSammenligningsgrunnlagsPrStatus(beregningsgrunnlag);
   const avvikProsent = getAvviksprosent(sammenligningsgrunnlagPrStatus);
   const aktivitetStatusList = getStatusList(beregningsgrunnlagPeriode);
-  const tidsBegrensetInntekt = harPerioderMedAvsluttedeArbeidsforhold(beregningsgrunnlagPeriode);
   const harAksjonspunkter = gjeldendeAksjonspunkter && gjeldendeAksjonspunkter.length > 0;
   const alleAndelerIForstePeriode = finnAlleAndelerIFørstePeriode(beregningsgrunnlagPeriode);
 
@@ -331,7 +325,6 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
                 alleKodeverk={alleKodeverk}
                 aksjonspunkter={gjeldendeAksjonspunkter}
                 relevanteStatuser={relevanteStatuser}
-                tidsBegrensetInntekt={tidsBegrensetInntekt}
                 arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
               />
             </>
