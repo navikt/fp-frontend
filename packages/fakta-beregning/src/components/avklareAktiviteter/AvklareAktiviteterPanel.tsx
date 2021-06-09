@@ -140,6 +140,9 @@ const erSubmittable = (submittable: boolean,
   submitEnabled: boolean,
   formProps: InjectedFormProps): boolean => submittable && submitEnabled && !formProps.error;
 
+const skalViseOverstyringsknapp = (kanOverstyre: boolean,
+  erOverstyrt: boolean): boolean => kanOverstyre || erOverstyrt;
+
 type OwnProps = {
     readOnly: boolean;
     submittable: boolean;
@@ -241,8 +244,6 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
       return null;
     }
     const avklarAktiviteter = getAvklarAktiviteter(this.props);
-    const skalViseOverstyringsknapp = kanOverstyre || erOverstyrt;
-
     const overskriftOgKnapp = (
       <FlexContainer>
         <FlexRow>
@@ -251,7 +252,7 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
               <FormattedMessage id="AvklarAktivitetPanel.Overskrift" />
             </Element>
           </FlexColumn>
-          {skalViseOverstyringsknapp && (
+          {skalViseOverstyringsknapp(kanOverstyre, erOverstyrt) && (
           <FlexColumn>
             <OverstyringKnapp
               onClick={() => this.initializeAktiviteter()}
