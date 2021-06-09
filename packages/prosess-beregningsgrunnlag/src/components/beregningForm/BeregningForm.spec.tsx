@@ -259,7 +259,6 @@ describe('<BeregningForm>', () => {
     />);
     const aksjonspunktBehandler = wrapper.find(AksjonspunktBehandler);
     expect(aksjonspunktBehandler.props().readOnly).toBe(false);
-    expect(aksjonspunktBehandler.props().tidsBegrensetInntekt).toBe(false);
     const expectedPerioder = lagPeriode();
     expect(aksjonspunktBehandler.props().allePerioder[0]).toEqual(expectedPerioder);
     expect(aksjonspunktBehandler.props().aksjonspunkter).toEqual(apEttLukketOgEttApent);

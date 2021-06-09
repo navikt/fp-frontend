@@ -7,6 +7,7 @@ import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 
+import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import messages from '../../../i18n/nb_NO.json';
 import { AksjonspunktBehandlerImpl as UnwrappedForm } from './AksjonspunktBehandler';
 import AksjonspunktBehandlerTB from '../arbeidstaker/AksjonspunktBehandlerTB';
@@ -23,6 +24,7 @@ const relevanteStatuser = {
 
 const allePerioder = [
   {
+    periodeAarsaker: [],
     beregningsgrunnlagPrStatusOgAndel: [
       {
         beregnetPrAar: 360000,
@@ -68,7 +70,6 @@ describe('<UnwrappedForm>', () => {
       allePerioder={allePerioder}
       alleKodeverk={alleKodeverk}
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
-      tidsBegrensetInntekt={false}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
     const rows = wrapper.find('Row');
@@ -99,7 +100,6 @@ describe('<UnwrappedForm>', () => {
       allePerioder={allePerioder}
       alleKodeverk={alleKodeverk}
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
-      tidsBegrensetInntekt={false}
       intl={intlMock}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
@@ -132,7 +132,6 @@ describe('<UnwrappedForm>', () => {
       allePerioder={allePerioder}
       alleKodeverk={alleKodeverk}
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
-      tidsBegrensetInntekt={false}
       intl={intlMock}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
@@ -156,6 +155,7 @@ describe('<UnwrappedForm>', () => {
     relevanteStatuser.isSelvstendigNaeringsdrivende = false;
     relevanteStatuser.isArbeidstaker = true;
     allePerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetStatus.kode = 'AT';
+    allePerioder[0].periodeAarsaker.push({ kode: periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET, kodeverk: 'test' });
     const readOnly = true;
     const wrapper = shallowWithIntl(<UnwrappedForm
       readOnly={readOnly}
@@ -165,7 +165,6 @@ describe('<UnwrappedForm>', () => {
       allePerioder={allePerioder}
       alleKodeverk={alleKodeverk}
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
-      tidsBegrensetInntekt
       intl={intlMock}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);
@@ -215,7 +214,6 @@ describe('<UnwrappedForm>', () => {
       allePerioder={perioderMedSNAndel}
       alleKodeverk={alleKodeverk}
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
-      tidsBegrensetInntekt={false}
       intl={intlMock}
       arbeidsgiverOpplysningerPerId={{}}
     />, messages);

@@ -20,6 +20,7 @@ import {
   ArbeidsgiverOpplysningerPerId, BeregningsgrunnlagAndel,
   BeregningsgrunnlagPeriodeProp,
 } from '@fpsak-frontend/types';
+import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import styles from './aksjonspunktBehandler.less';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import AksjonspunktBehandlerAT from '../arbeidstaker/AksjonspunktBehandlerAT';
@@ -45,19 +46,17 @@ const finnATFLVurderingLabel = (gjeldendeAksjonspunkter: Aksjonspunkt[]): ReactE
   }
   return <FormattedMessage id="Beregningsgrunnlag.Forms.Vurdering" />;
 };
-const finnGjeldeneAksjonsPunkt = (aksjonspunkter: Aksjonspunkt[], erNyiArbeidslivet: boolean, readOnly: boolean, erSNellerFL: boolean): Aksjonspunkt => {
-  if (erSNellerFL) {
-    return aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS);
-  }
-  if (erNyiArbeidslivet) {
-    return aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET);
-  }
-  return aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
+const finnGjeldeneAksjonsPunkt = (aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt => {
+  const eksklusiveAksjonspunkter = [aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
+    aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
+    aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
+    aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE] as string[];
+  return aksjonspunkter.find((ap) => eksklusiveAksjonspunkter.includes(ap.definisjon.kode));
 };
 
-const lagEndretTekst = (aksjonspunkter: Aksjonspunkt[], erNyiArbeidslivet: boolean, readOnly: boolean, erSNellerFL: boolean): ReactElement => {
+const lagEndretTekst = (aksjonspunkter: Aksjonspunkt[], readOnly: boolean): ReactElement => {
   if (!aksjonspunkter || !readOnly) return null;
-  const aksjonspunkt = finnGjeldeneAksjonsPunkt(aksjonspunkter, erNyiArbeidslivet, readOnly, erSNellerFL);
+  const aksjonspunkt = finnGjeldeneAksjonsPunkt(aksjonspunkter);
   if (!aksjonspunkt) return null;
   const { endretAv, endretTidspunkt } = aksjonspunkt;
   if (!endretTidspunkt) return null;
@@ -67,6 +66,109 @@ const lagEndretTekst = (aksjonspunkter: Aksjonspunkt[], erNyiArbeidslivet: boole
       id="Beregningsgrunnlag.Forms.EndretTekst"
       values={{ endretAv: godkjentEndretAv, endretDato: dateFormat(endretTidspunkt) }}
     />
+  );
+};
+
+const harPerioderMedAvsluttedeArbeidsforhold = (allePerioder: BeregningsgrunnlagPeriodeProp[]): boolean => allePerioder
+  .some(({ periodeAarsaker }) => periodeAarsaker
+    && periodeAarsaker.some(({ kode }) => kode === periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET));
+
+const settOppKomponenterForNæring = (readOnly: boolean,
+  allePerioder: BeregningsgrunnlagPeriodeProp[],
+  aksjonspunkter: Aksjonspunkt[]): ReactElement => {
+  const alleAndelerIForstePeriode = finnAlleAndelerIFørstePeriode(allePerioder);
+  const snAndel = alleAndelerIForstePeriode.find(
+    (andel) => andel.aktivitetStatus && andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE,
+  );
+  if (!snAndel) {
+    return null;
+  }
+  const erNyArbLivet = snAndel.erNyIArbeidslivet;
+  const erVarigEndring = snAndel.næringer && snAndel.næringer.some((naring) => naring.erVarigEndret === true);
+  const erNyoppstartet = snAndel.næringer && snAndel.næringer.some((naring) => naring.erNyoppstartet === true);
+  return (
+    <>
+      <Row>
+        <Column xs="12">
+          <Element className={beregningStyles.avsnittOverskrift}>
+            {erNyArbLivet && (
+              <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler.NyIArbeidslivet" />
+            )}
+            {erNyoppstartet && !erVarigEndring && (
+              <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler.Nyoppstartet" />
+            )}
+            {!erNyArbLivet && !erNyoppstartet && erVarigEndring && (
+              <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler.VarigEndring" />
+            )}
+            {!erNyArbLivet && erNyoppstartet && erVarigEndring && (
+              <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler" />
+            )}
+          </Element>
+        </Column>
+      </Row>
+      <VerticalSpacer eightPx />
+      <AksjonspunktBehandlerSN
+        readOnly={readOnly}
+        aksjonspunkter={aksjonspunkter}
+        erNyArbLivet={erNyArbLivet}
+        erVarigEndring={erVarigEndring}
+        erNyoppstartet={erNyoppstartet}
+        endretTekst={lagEndretTekst(aksjonspunkter, readOnly)}
+      />
+    </>
+  );
+};
+
+const settOppKomponenterForATFL = (aksjonspunkter: Aksjonspunkt[],
+  alleKodeverk: AlleKodeverk,
+  allePerioder: BeregningsgrunnlagPeriodeProp[],
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+  readOnly: boolean,
+  formName: string): ReactElement => {
+  const erTidsbegrenset = harPerioderMedAvsluttedeArbeidsforhold(allePerioder);
+  const alleAndelerIForstePeriode = finnAlleAndelerIFørstePeriode(allePerioder);
+  const flAndel = alleAndelerIForstePeriode.find(
+    (andel) => andel.aktivitetStatus && andel.aktivitetStatus.kode === aktivitetStatus.FRILANSER,
+  );
+  const atAndel = alleAndelerIForstePeriode.find(
+    (andel) => andel.aktivitetStatus && andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER,
+  );
+  const visFL = flAndel && flAndel.skalFastsetteGrunnlag;
+  const visAT = atAndel && atAndel.skalFastsetteGrunnlag;
+  return (
+    <>
+      <Row>
+        <Column xs="12">
+          <Element className={beregningStyles.avsnittOverskrift}>
+            <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler" />
+          </Element>
+        </Column>
+      </Row>
+      <VerticalSpacer eightPx />
+      {erTidsbegrenset && (
+      <AksjonspunktBehandlerTB
+        readOnly={readOnly}
+        formName={formName}
+        allePerioder={allePerioder}
+        alleKodeverk={alleKodeverk}
+        aksjonspunkter={aksjonspunkter}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      />
+      )}
+      {!erTidsbegrenset && visAT && (
+      <AksjonspunktBehandlerAT
+        readOnly={readOnly}
+        alleAndelerIForstePeriode={alleAndelerIForstePeriode}
+        alleKodeverk={alleKodeverk}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      />
+      )}
+      {visFL && (
+      <AksjonspunktBehandlerFL
+        readOnly={readOnly}
+      />
+      )}
+    </>
   );
 };
 
@@ -80,7 +182,6 @@ type OwnProps = {
     alleKodeverk: AlleKodeverk;
     formName: string;
     readOnlySubmitButton: boolean;
-    tidsBegrensetInntekt: boolean;
     allePerioder?: BeregningsgrunnlagPeriodeProp[];
     relevanteStatuser: RelevanteStatuserProp;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -95,150 +196,59 @@ export const AksjonspunktBehandlerImpl: FunctionComponent<OwnProps & WrappedComp
   allePerioder,
   alleKodeverk,
   relevanteStatuser,
-  tidsBegrensetInntekt,
   arbeidsgiverOpplysningerPerId,
 }) => {
-  const alleAndelerIForstePeriode = finnAlleAndelerIFørstePeriode(allePerioder);
-  let erVarigEndring = false;
-  let erNyoppstartet = false;
-  let erNyArbLivet = false;
-  let visFL = false;
-  let visAT = false;
-  const snAndel = alleAndelerIForstePeriode.find(
-    (andel) => andel.aktivitetStatus && andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE,
-  );
-  const flAndel = alleAndelerIForstePeriode.find(
-    (andel) => andel.aktivitetStatus && andel.aktivitetStatus.kode === aktivitetStatus.FRILANSER,
-  );
-  const atAndel = alleAndelerIForstePeriode.find(
-    (andel) => andel.aktivitetStatus && andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER,
-  );
-  if (flAndel) {
-    visFL = flAndel.skalFastsetteGrunnlag;
-  }
-  if (atAndel) {
-    visAT = atAndel.skalFastsetteGrunnlag;
-  }
-  if (snAndel && snAndel.erNyIArbeidslivet) {
-    erNyArbLivet = snAndel.erNyIArbeidslivet;
-  }
-  erVarigEndring = snAndel && snAndel.næringer && snAndel.næringer.some((naring) => naring.erVarigEndret === true);
-  erNyoppstartet = snAndel && snAndel.næringer && snAndel.næringer.some((naring) => naring.erNyoppstartet === true);
   if (!aksjonspunkter || aksjonspunkter.length === 0) {
     return null;
   }
-  if (!relevanteStatuser.isSelvstendigNaeringsdrivende) {
-    return (
-      <div className={readOnly ? '' : styles.aksjonspunktBehandlerContainer}>
-        <Panel className={readOnly ? beregningStyles.panelRight : styles.aksjonspunktBehandlerBorder}>
-          <Row>
-            <Column xs="12">
-              <Element className={beregningStyles.avsnittOverskrift}>
-                <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler" />
-              </Element>
-            </Column>
-          </Row>
-          <VerticalSpacer eightPx />
-          {tidsBegrensetInntekt && (
-          <AksjonspunktBehandlerTB
-            readOnly={readOnly}
-            formName={formName}
-            allePerioder={allePerioder}
-            alleKodeverk={alleKodeverk}
-            aksjonspunkter={aksjonspunkter}
-            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          />
-          )}
-          {!tidsBegrensetInntekt && visAT && (
-          <AksjonspunktBehandlerAT
-            readOnly={readOnly}
-            alleAndelerIForstePeriode={alleAndelerIForstePeriode}
-            alleKodeverk={alleKodeverk}
-            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          />
-          )}
-          {visFL && (
-          <AksjonspunktBehandlerFL
-            readOnly={readOnly}
-          />
-          )}
-
-          <VerticalSpacer sixteenPx />
-          <Row>
-            <Column xs="12">
-              <TextAreaField
-                name="ATFLVurdering"
-                label={finnATFLVurderingLabel(aksjonspunkter)}
-                validate={[required, maxLength1500, minLength3, hasValidText]}
-                maxLength={1500}
-                readOnly={readOnly}
-                textareaClass={styles.textAreaStyle}
-                placeholder={intl.formatMessage({ id: 'Beregningsgrunnlag.Forms.VurderingAvFastsattBeregningsgrunnlag.Placeholder' })}
-                endrettekst={lagEndretTekst(aksjonspunkter, erNyArbLivet, readOnly, true)}
-              />
-            </Column>
-          </Row>
-          <VerticalSpacer sixteenPx />
-          <Row>
-            <Column xs="12">
-              <ProsessStegSubmitButton
-                formName={formName}
-                isReadOnly={readOnly}
-                isSubmittable={!readOnlySubmitButton}
-              />
-            </Column>
-          </Row>
-          <VerticalSpacer sixteenPx />
-        </Panel>
-      </div>
-    );
-  }
+  const submittKnapp = (
+    <Row>
+      <Column xs="12">
+        <ProsessStegSubmitButton
+          formName={formName}
+          isReadOnly={readOnly}
+          isSubmittable={!readOnlySubmitButton}
+        />
+      </Column>
+    </Row>
+  );
   if (relevanteStatuser.isSelvstendigNaeringsdrivende) {
     return (
       <div className={readOnly ? '' : styles.aksjonspunktBehandlerContainer}>
         <Panel className={readOnly ? beregningStyles.panelRight : styles.aksjonspunktBehandlerBorder}>
-          <Row>
-            <Column xs="12">
-              <Element className={beregningStyles.avsnittOverskrift}>
-                {erNyArbLivet && (
-                  <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler.NyIArbeidslivet" />
-                )}
-                {erNyoppstartet && !erVarigEndring && (
-                  <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler.Nyoppstartet" />
-                )}
-                {!erNyArbLivet && !erNyoppstartet && erVarigEndring && (
-                  <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler.VarigEndring" />
-                )}
-                {!erNyArbLivet && erNyoppstartet && erVarigEndring && (
-                  <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler" />
-                )}
-              </Element>
-            </Column>
-          </Row>
-          <VerticalSpacer eightPx />
-          <AksjonspunktBehandlerSN
-            readOnly={readOnly}
-            aksjonspunkter={aksjonspunkter}
-            erNyArbLivet={erNyArbLivet}
-            erVarigEndring={erVarigEndring}
-            erNyoppstartet={erNyoppstartet}
-            endretTekst={lagEndretTekst(aksjonspunkter, erNyArbLivet, readOnly, false)}
-          />
+          {settOppKomponenterForNæring(readOnly, allePerioder, aksjonspunkter)}
           <VerticalSpacer sixteenPx />
-          <Row>
-            <Column xs="12">
-              <ProsessStegSubmitButton
-                formName={formName}
-                isReadOnly={readOnly}
-                isSubmittable={!readOnlySubmitButton}
-              />
-            </Column>
-          </Row>
+          {submittKnapp}
+          <VerticalSpacer sixteenPx />
         </Panel>
       </div>
     );
   }
-  return null;
+  return (
+    <div className={readOnly ? '' : styles.aksjonspunktBehandlerContainer}>
+      <Panel className={readOnly ? beregningStyles.panelRight : styles.aksjonspunktBehandlerBorder}>
+        {settOppKomponenterForATFL(aksjonspunkter, alleKodeverk, allePerioder, arbeidsgiverOpplysningerPerId, readOnly, formName)}
+        <VerticalSpacer sixteenPx />
+        <Row>
+          <Column xs="12">
+            <TextAreaField
+              name="ATFLVurdering"
+              label={finnATFLVurderingLabel(aksjonspunkter)}
+              validate={[required, maxLength1500, minLength3, hasValidText]}
+              maxLength={1500}
+              readOnly={readOnly}
+              textareaClass={styles.textAreaStyle}
+              placeholder={intl.formatMessage({ id: 'Beregningsgrunnlag.Forms.VurderingAvFastsattBeregningsgrunnlag.Placeholder' })}
+              endrettekst={lagEndretTekst(aksjonspunkter, readOnly)}
+            />
+          </Column>
+        </Row>
+        <VerticalSpacer sixteenPx />
+        {submittKnapp}
+        <VerticalSpacer sixteenPx />
+      </Panel>
+    </div>
+  );
 };
 
 AksjonspunktBehandlerImpl.defaultProps = {
