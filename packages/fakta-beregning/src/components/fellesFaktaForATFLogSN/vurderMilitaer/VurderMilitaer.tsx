@@ -4,6 +4,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
 import { FaktaOmBeregning } from '@fpsak-frontend/types';
+import { VurderMilitærValues } from '../../../typer/FaktaBeregningTypes';
 
 /**
  * VurderMilitær
@@ -19,7 +20,7 @@ type OwnProps = {
 };
 
 interface StaticFunctions {
-  buildInitialValues: (faktaOmBeregning: FaktaOmBeregning) => any;
+  buildInitialValues: (faktaOmBeregning: FaktaOmBeregning) => VurderMilitærValues;
   transformValues: (values: any) => any;
 }
 
@@ -40,7 +41,7 @@ const VurderMilitaer: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnl
   </div>
 );
 
-VurderMilitaer.buildInitialValues = (faktaOmBeregning) => {
+VurderMilitaer.buildInitialValues = (faktaOmBeregning: FaktaOmBeregning): VurderMilitærValues => {
   const initialValues = {};
   if (!faktaOmBeregning || !faktaOmBeregning.vurderMilitaer) {
     return initialValues;

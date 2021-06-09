@@ -1,8 +1,8 @@
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { Beregningsgrunnlag } from '@fpsak-frontend/types';
-import { AndelFieldIdentifikator } from '../../../../typer/FieldValues';
+import { AndelFieldIdentifikator, InntektTransformed } from '../../../../typer/FieldValues';
 
-const erAndelUtenReferanseOgGrunnlagHarAndelForSammeArbeidsgiverMedReferanse = (andel: AndelFieldIdentifikator,
+const erAndelUtenReferanseOgGrunnlagHarAndelForSammeArbeidsgiverMedReferanse = (andel: AndelFieldIdentifikator | InntektTransformed,
   beregningsgrunnlag: Beregningsgrunnlag, arbeidsforholdId?: string): boolean => {
   if (arbeidsforholdId === null) {
     const antallAndelerISammeVirksomhetMedReferanse = beregningsgrunnlag.beregningsgrunnlagPeriode[0].beregningsgrunnlagPrStatusOgAndel

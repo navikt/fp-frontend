@@ -299,6 +299,7 @@ describe('<BgFaktaUtils>', () => {
 
   const faktaOmBeregning = {
     faktaOmBeregningTilfeller: [],
+    andelerForFaktaOmBeregning: [],
     arbeidstakerOgFrilanserISammeOrganisasjonListe: null,
     arbeidsforholdMedLønnsendringUtenIM: null,
     vurderMottarYtelse: {
@@ -309,9 +310,9 @@ describe('<BgFaktaUtils>', () => {
     },
   };
 
-  const values = {};
-  values[utledArbeidsforholdFieldName(arbeidstakerAndel3)] = true;
-  values[finnFrilansFieldName()] = true;
+  const values = { vurderMottarYtelseValues: {} };
+  values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(arbeidstakerAndel3)] = true;
+  values.vurderMottarYtelseValues[finnFrilansFieldName()] = true;
   values[lonnsendringField] = true;
 
   const andelValuesUtenInntektsmelding = {
@@ -411,7 +412,7 @@ describe('<BgFaktaUtils>', () => {
     };
     const fakta = {
       ...faktaOmBeregning,
-      faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE }],
+      faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE, kodeverk: 'test' }],
     };
     const skalRedigereInntekt = skalFastsetteInntektForAndel(values, fakta, beregningsgrunnlag)(brukersAndel);
     expect(skalRedigereInntekt).toBe(true);
@@ -466,7 +467,7 @@ describe('<BgFaktaUtils>', () => {
 
   it('skal redigere inntekt for frilansandel som ikke mottar ytelse, men er nyoppstartet', () => {
     const valuesLocalCopy = { ...values };
-    valuesLocalCopy[finnFrilansFieldName()] = false;
+    valuesLocalCopy.vurderMottarYtelseValues[finnFrilansFieldName()] = false;
     valuesLocalCopy[erNyoppstartetFLField] = true;
     const andelFieldValue = {
       ...andelValuesUtenInntektsmelding,
@@ -478,7 +479,7 @@ describe('<BgFaktaUtils>', () => {
 
   it('skal ikke redigere inntekt for frilansandel som ikke mottar ytelse og ikke er nyoppstartet', () => {
     const valuesLocalCopy = { ...values };
-    valuesLocalCopy[finnFrilansFieldName()] = false;
+    valuesLocalCopy.vurderMottarYtelseValues[finnFrilansFieldName()] = false;
     valuesLocalCopy[erNyoppstartetFLField] = false;
     const andelFieldValue = {
       ...andelValuesUtenInntektsmelding,

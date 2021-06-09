@@ -6,7 +6,10 @@ import { required } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import { Beregningsgrunnlag, FaktaOmBeregning } from '@fpsak-frontend/types';
+import { Beregningsgrunnlag, BeregningsgrunnlagAndel, FaktaOmBeregning } from '@fpsak-frontend/types';
+import { FaktaBeregningTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
+import { FaktaOmBeregningAksjonspunktValues, LønnsendringValues } from '../../../../typer/FaktaBeregningTypes';
+import { InntektTransformed } from '../../../../typer/FieldValues';
 
 /**
  * LonnsendringForm
@@ -25,8 +28,8 @@ type OwnProps = {
 };
 
 interface StaticFunctions {
-  buildInitialValues: (beregningsgrunnlag: Beregningsgrunnlag) => any;
-  transformValues: (values: any, faktaOmBeregning: FaktaOmBeregning) => any;
+  buildInitialValues: (beregningsgrunnlag: Beregningsgrunnlag) => LønnsendringValues;
+  transformValues: (values: FaktaOmBeregningAksjonspunktValues, faktaOmBeregning: FaktaOmBeregning) => FaktaBeregningTransformedValues;
 }
 
 const LonnsendringForm: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly, isAksjonspunktClosed }) => (
@@ -47,14 +50,14 @@ const LonnsendringForm: FunctionComponent<OwnProps> & StaticFunctions = ({ readO
   </div>
 );
 
-const buildInitialLonnsendring = (alleATAndeler) => {
+const buildInitialLonnsendring = (alleATAndeler: BeregningsgrunnlagAndel[]): boolean | undefined => {
   const harSattLonnsendringTilTrue = alleATAndeler.find((andel) => andel.lonnsendringIBeregningsperioden === true) !== undefined;
   const harSattLonnsendringTilFalse = alleATAndeler.find((andel) => andel.lonnsendringIBeregningsperioden === false) !== undefined;
   return harSattLonnsendringTilTrue || (harSattLonnsendringTilFalse ? false : undefined);
 };
 
-LonnsendringForm.buildInitialValues = (beregningsgrunnlag) => {
-  let initialValues = {};
+LonnsendringForm.buildInitialValues = (beregningsgrunnlag: Beregningsgrunnlag): LønnsendringValues => {
+  const initialValues = {};
   if (!beregningsgrunnlag || !beregningsgrunnlag.beregningsgrunnlagPeriode) {
     return initialValues;
   }
@@ -66,16 +69,17 @@ LonnsendringForm.buildInitialValues = (beregningsgrunnlag) => {
   if (!alleATAndeler || alleATAndeler.length < 1) {
     return initialValues;
   }
-  initialValues = {
-    lonnsendringField: buildInitialLonnsendring(alleATAndeler),
-  };
+  initialValues[lonnsendringField] = buildInitialLonnsendring(alleATAndeler);
   return initialValues;
 };
 
-export const harFieldLønnsendring = (field, faktaOmBeregning, values) => values[lonnsendringField] && faktaOmBeregning.arbeidsforholdMedLønnsendringUtenIM
-  .find((andel) => andel.andelsnr === field.andelsnr || andel.andelsnr === field.andelsnrRef) !== undefined;
+export const harFieldLønnsendring = (field: InntektTransformed,
+  faktaOmBeregning: FaktaOmBeregning,
+  values: FaktaOmBeregningAksjonspunktValues): boolean => values[lonnsendringField] && faktaOmBeregning.arbeidsforholdMedLønnsendringUtenIM
+  .find((andel) => andel.andelsnr === field.andelsnr) !== undefined;
 
-LonnsendringForm.transformValues = (values, faktaOmBeregning) => {
+LonnsendringForm.transformValues = (values: FaktaOmBeregningAksjonspunktValues,
+  faktaOmBeregning: FaktaOmBeregning): FaktaBeregningTransformedValues => {
   const tilfeller = faktaOmBeregning.faktaOmBeregningTilfeller ? faktaOmBeregning.faktaOmBeregningTilfeller : [];
   if (!tilfeller.map(({ kode }) => kode).includes(faktaOmBeregningTilfelle.VURDER_LONNSENDRING)) {
     return {};

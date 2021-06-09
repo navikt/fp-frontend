@@ -27,6 +27,7 @@ export {
   VurderMottarYtelse,
   ArbeidstakerUtenIMAndel,
   ATFLSammeOrgAndel,
+  VurderBesteberegning,
   RefusjonskravSomKommerForSentListe,
 } from './src/beregningsgrunnlagFaktaTsType';
 export { Månedsgrunnlag, BesteberegningInntekt, Besteberegninggrunnlag } from './src/besteberegningTsTypes';

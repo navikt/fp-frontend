@@ -9,6 +9,7 @@ export type AndelFieldIdentifikator = {
 
 type AndelFieldValue = AndelFieldIdentifikator & {
   andel: string;
+  kanRedigereInntekt?: boolean;
   nyAndel?: boolean;
   inntektskategori: string;
   lagtTilAvSaksbehandler?: boolean;
@@ -24,12 +25,12 @@ type AndelFieldValue = AndelFieldIdentifikator & {
 export type InntektTransformed = {
   andelsnr: number;
   fastsattBelop: number;
-  inntektskategori: string;
-  nyAndel: boolean;
-  lagtTilAvSaksbehandler: boolean;
-  aktivitetStatus: string;
-  arbeidsforholdId: string;
-  arbeidsgiverId: string;
+  inntektskategori?: string;
+  nyAndel?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+  aktivitetStatus?: string;
+  arbeidsforholdId?: string;
+  arbeidsgiverId?: string;
 }
 
 export default AndelFieldValue;

@@ -15,6 +15,10 @@ import BrukersAndelFieldArray from './BrukersAndelFieldArray';
 import { getFormValuesForBeregning } from '../../BeregningFormUtils';
 
 import styles from './kunYtelseBesteberegningPanel.less';
+import {
+  FaktaOmBeregningAksjonspunktValues,
+  VurderBesteberegningMedKunYtelseValues,
+} from '../../../typer/FaktaBeregningTypes';
 
 export const besteberegningField = 'besteberegningField';
 
@@ -28,9 +32,9 @@ type OwnProps = {
 };
 
 interface StaticFunctions {
-  buildInitialValues: (kunYtelse: KunYtelse) => { [besteberegningField] };
-  validate: (values: any) => any;
-  transformValues: (values: any) => any;
+  buildInitialValues: (kunYtelse: KunYtelse) => VurderBesteberegningMedKunYtelseValues;
+  validate: (values: FaktaOmBeregningAksjonspunktValues) => any;
+  transformValues: (values: FaktaOmBeregningAksjonspunktValues) => boolean;
 }
 
 /**
@@ -103,15 +107,15 @@ KunYtelseBesteberegningImpl.defaultProps = {
   skalViseInntektstabell: true,
 };
 
-KunYtelseBesteberegningImpl.buildInitialValues = (kunYtelse) => ({ [besteberegningField]: kunYtelse.erBesteberegning });
+KunYtelseBesteberegningImpl.buildInitialValues = (kunYtelse): VurderBesteberegningMedKunYtelseValues => ({ [besteberegningField]: kunYtelse.erBesteberegning });
 
-KunYtelseBesteberegningImpl.validate = (values) => {
+KunYtelseBesteberegningImpl.validate = (values: FaktaOmBeregningAksjonspunktValues): any => {
   const errors = {};
   errors[besteberegningField] = required(values[besteberegningField]);
   return errors;
 };
 
-KunYtelseBesteberegningImpl.transformValues = (values) => (values[besteberegningField]);
+KunYtelseBesteberegningImpl.transformValues = (values: FaktaOmBeregningAksjonspunktValues): boolean => (values[besteberegningField]);
 
 const mapStateToProps = (state) => ({
   erBesteberegning: getFormValuesForBeregning(state)[besteberegningField],
