@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
@@ -12,6 +12,9 @@ import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import { ArbeidsgiverOpplysningerPerId, AlleKodeverk } from '@fpsak-frontend/types';
+import {
+  BeregningFaktaOgOverstyringAP,
+} from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
 import FaktaForATFLOgSNPanel, {
   getBuildInitialValuesFaktaForATFLOgSN,
   transformValuesFaktaForATFLOgSN,
@@ -21,6 +24,7 @@ import FaktaForATFLOgSNPanel, {
 import { erAvklartAktivitetEndret } from '../avklareAktiviteter/AvklareAktiviteterPanel';
 import { formNameVurderFaktaBeregning } from '../BeregningFormUtils';
 import { erOverstyring, erOverstyringAvBeregningsgrunnlag } from './BgFaktaUtils';
+import { FaktaOmBeregningAksjonspunktValues, FaktaOmBeregningValues } from '../../typer/FaktaBeregningTypes';
 
 const {
   VURDER_FAKTA_FOR_ATFL_SN,
@@ -29,7 +33,7 @@ const {
   OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
 } = aksjonspunktCodes;
 
-const findAksjonspunktMedBegrunnelse = (aksjonspunkter) => {
+const findAksjonspunktMedBegrunnelse = (aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt => {
   if (aksjonspunkter.some((ap) => ap.definisjon.kode === OVERSTYRING_AV_BEREGNINGSGRUNNLAG)) {
     return aksjonspunkter
       .find((ap) => ap.definisjon.kode === OVERSTYRING_AV_BEREGNINGSGRUNNLAG && ap.begrunnelse !== null);
@@ -40,40 +44,47 @@ const findAksjonspunktMedBegrunnelse = (aksjonspunkter) => {
 
 export const BEGRUNNELSE_FAKTA_TILFELLER_NAME = 'begrunnelseFaktaTilfeller';
 
-export const harIkkeEndringerIAvklarMedFlereAksjonspunkter = (verdiForAvklarAktivitetErEndret, aksjonspunkter) => {
+export const harIkkeEndringerIAvklarMedFlereAksjonspunkter = (verdiForAvklarAktivitetErEndret: boolean, aksjonspunkter: Aksjonspunkt[]): boolean => {
   if ((hasAksjonspunkt(VURDER_FAKTA_FOR_ATFL_SN, aksjonspunkter) || hasAksjonspunkt(OVERSTYRING_AV_BEREGNINGSGRUNNLAG, aksjonspunkter))) {
     return !verdiForAvklarAktivitetErEndret;
   }
   return true;
 };
 
-const isAksjonspunktClosed = (alleAp) => {
+const isAksjonspunktClosed = (alleAp: Aksjonspunkt[]): boolean => {
   const relevantAp = alleAp.filter((ap) => ap.definisjon.kode === aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN
     || ap.definisjon.kode === aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG);
   return relevantAp.length === 0 ? false : relevantAp.some((ap) => !isAksjonspunktOpen(ap.status.kode));
 };
 
-const lagHelpTextsForFakta = () => {
+const lagHelpTextsForFakta = (): ReactElement[] => {
   const helpTexts = [];
   helpTexts.push(<FormattedMessage key="VurderFaktaForBeregningen" id="BeregningInfoPanel.AksjonspunktHelpText.FaktaOmBeregning" />);
   return helpTexts;
 };
 
-const hasOpenAksjonspunkt = (kode, aksjonspunkter) => aksjonspunkter.some((ap) => ap.definisjon.kode === kode && isAksjonspunktOpen(ap.status.kode));
+const hasOpenAksjonspunkt = (kode: string, aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter.some((ap) => ap.definisjon.kode === kode
+  && isAksjonspunktOpen(ap.status.kode));
 
 type OwnProps = {
     readOnly: boolean;
-    hasBegrunnelse: boolean;
     submittable: boolean;
-    verdiForAvklarAktivitetErEndret: boolean;
-    erOverstyrt: boolean;
     beregningsgrunnlag: Beregningsgrunnlag;
     aksjonspunkter: Aksjonspunkt[];
     alleKodeverk: AlleKodeverk;
     erOverstyrer: boolean;
-    submitCallback: (data: any) => Promise<any>;
+    submitCallback: (aksjonspunktData: BeregningFaktaOgOverstyringAP) => Promise<void>;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
+
+type MappedOwnProps = {
+  initialValues: FaktaOmBeregningAksjonspunktValues;
+  validate: (formValues: FaktaOmBeregningAksjonspunktValues) => any;
+  onSubmit: (formValues: FaktaOmBeregningAksjonspunktValues) => void;
+  verdiForAvklarAktivitetErEndret: boolean,
+  erOverstyrt: boolean,
+  hasBegrunnelse: boolean,
+}
 
 type OwnState = {
   submitEnabled: boolean;
@@ -84,8 +95,8 @@ type OwnState = {
  *
  * Container komponent.. Inneholder begrunnelsefelt og komponent som innholder panelene for fakta om beregning tilfeller
  */
-export class VurderFaktaBeregningPanelImpl extends Component<OwnProps & InjectedFormProps, OwnState> {
-  constructor(props: OwnProps & InjectedFormProps) {
+export class VurderFaktaBeregningPanelImpl extends Component<OwnProps & InjectedFormProps & MappedOwnProps, OwnState> {
+  constructor(props: OwnProps & MappedOwnProps & InjectedFormProps) {
     super(props);
     this.state = {
       submitEnabled: false,
@@ -164,30 +175,30 @@ export class VurderFaktaBeregningPanelImpl extends Component<OwnProps & Injected
   }
 }
 
-export const transformValuesVurderFaktaBeregning = (values) => {
+export const transformValuesVurderFaktaBeregning = (values: FaktaOmBeregningAksjonspunktValues): BeregningFaktaOgOverstyringAP => {
   const { aksjonspunkter } = values;
   if (hasAksjonspunkt(VURDER_FAKTA_FOR_ATFL_SN, aksjonspunkter) || erOverstyring(values)) {
     const faktaBeregningValues = values;
     const beg = faktaBeregningValues[BEGRUNNELSE_FAKTA_TILFELLER_NAME];
-    return [{
+    return {
       kode: erOverstyring(values) ? OVERSTYRING_AV_BEREGNINGSGRUNNLAG : VURDER_FAKTA_FOR_ATFL_SN,
       begrunnelse: beg === undefined ? null : beg,
-      ...transformValuesFaktaForATFLOgSN(faktaBeregningValues, erOverstyring(values)),
-    }];
+      ...transformValuesFaktaForATFLOgSN(faktaBeregningValues),
+    };
   }
-  return {};
+  return null;
 };
 
 export const buildInitialValuesVurderFaktaBeregning = createSelector(
-  [(state, ownProps) => ownProps.aksjonspunkter, getBuildInitialValuesFaktaForATFLOgSN],
-  (aksjonspunkter, buildInitialValuesTilfeller) => ({
+  [(state: any, ownProps: any) => ownProps.aksjonspunkter, getBuildInitialValuesFaktaForATFLOgSN],
+  (aksjonspunkter: Aksjonspunkt[], buildInitialValuesTilfeller: () => FaktaOmBeregningValues): FaktaOmBeregningAksjonspunktValues => ({
     aksjonspunkter,
     ...FaktaBegrunnelseTextField.buildInitialValues(findAksjonspunktMedBegrunnelse(aksjonspunkter), BEGRUNNELSE_FAKTA_TILFELLER_NAME),
     ...buildInitialValuesTilfeller(),
   }),
 );
 
-export const validateVurderFaktaBeregning = (values) => {
+export const validateVurderFaktaBeregning = (values: FaktaOmBeregningAksjonspunktValues): any => {
   const { aksjonspunkter } = values;
   if (values && ((aksjonspunkter && hasAksjonspunkt(VURDER_FAKTA_FOR_ATFL_SN, aksjonspunkter)) || erOverstyring(values))) {
     return {
@@ -199,11 +210,11 @@ export const validateVurderFaktaBeregning = (values) => {
 
 const lagSubmitFn = createSelector([
   (ownProps: OwnProps) => ownProps.submitCallback],
-(submitCallback) => (values) => submitCallback(transformValuesVurderFaktaBeregning(values)));
+(submitCallback) => (values: FaktaOmBeregningAksjonspunktValues) => submitCallback(transformValuesVurderFaktaBeregning(values)));
 
 const mapStateToPropsFactory = () => {
   const validate = (values) => validateVurderFaktaBeregning(values);
-  return (state, ownProps) => {
+  return (state: any, ownProps: OwnProps): MappedOwnProps => {
     const initialValues = buildInitialValuesVurderFaktaBeregning(state, ownProps);
     return ({
       initialValues,

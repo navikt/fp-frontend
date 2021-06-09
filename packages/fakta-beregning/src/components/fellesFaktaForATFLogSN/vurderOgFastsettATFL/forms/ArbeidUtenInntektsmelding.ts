@@ -1,10 +1,18 @@
 import { removeSpacesFromNumber } from '@fpsak-frontend/utils';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
+import { Beregningsgrunnlag, FaktaOmBeregning } from '@fpsak-frontend/types';
+import { FaktaBeregningTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
 import erAndelUtenReferanseOgGrunnlagHarAndelForSammeArbeidsgiverMedReferanse from './AvsluttetArbeidsforhold';
 import { harFieldKunstigArbeidsforhold } from './KunstigArbeidsforhold';
 import { harFieldLønnsendring } from './LonnsendringForm';
+import { FaktaOmBeregningAksjonspunktValues } from '../../../../typer/FaktaBeregningTypes';
+import { InntektTransformed } from '../../../../typer/FieldValues';
 
-const transformValuesArbeidUtenInntektsmelding = (values, inntektVerdier, faktaOmBeregning, bg, fastsatteAndelsnr) => {
+const transformValuesArbeidUtenInntektsmelding = (values: FaktaOmBeregningAksjonspunktValues,
+  inntektVerdier: InntektTransformed[],
+  faktaOmBeregning: FaktaOmBeregning,
+  bg: Beregningsgrunnlag,
+  fastsatteAndelsnr: number[]): FaktaBeregningTransformedValues => {
   const tilfeller = faktaOmBeregning.faktaOmBeregningTilfeller ? faktaOmBeregning.faktaOmBeregningTilfeller : [];
 
   if (!tilfeller.map(({ kode }) => kode)
@@ -17,7 +25,7 @@ const transformValuesArbeidUtenInntektsmelding = (values, inntektVerdier, faktaO
     return {};
   }
   const arbeidUtenInntektsmelding = inntektVerdier
-    .filter((field) => !fastsatteAndelsnr.includes(field.andelsnr) && !fastsatteAndelsnr.includes(field.andelsnrRef))
+    .filter((field) => !fastsatteAndelsnr.includes(field.andelsnr))
     .filter((field) => erAndelUtenReferanseOgGrunnlagHarAndelForSammeArbeidsgiverMedReferanse(field, bg, field.arbeidsforholdId)
       || harFieldKunstigArbeidsforhold(field, bg)
       || harFieldLønnsendring(field, faktaOmBeregning, values));

@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import { AlleKodeverk, FaktaOmBeregning } from '@fpsak-frontend/types';
+import { AlleKodeverk, Beregningsgrunnlag, FaktaOmBeregning } from '@fpsak-frontend/types';
 import {
   FaktaForATFLOgSNPanelImpl, transformValues, transformValuesFaktaForATFLOgSN,
 } from './FaktaForATFLOgSNPanel';
@@ -44,7 +44,6 @@ const lagBeregningsgrunnlag = (andeler) => ({
       )),
     },
   ],
-  faktaOmBeregning: {},
 });
 
 describe('<FaktaForATFLOgSNPanel>', () => {
@@ -101,12 +100,13 @@ describe('<FaktaForATFLOgSNPanel>', () => {
 
   it('skal kunne transform values for kun besteberegning', () => {
     const aktivePaneler = [faktaOmBeregningTilfelle.FASTSETT_BESTEBEREGNING_FODENDE_KVINNE];
-    const andel1 = { andelsnr: 1, aktivitetStatus: { kode: 'ATFL' } };
-    const andel2 = { andelsnr: 2, aktivitetStatus: { kode: 'SN' } };
+    const andel1 = { andelsnr: 1, aktivitetStatus: { kode: 'ATFL', kodeverk: 'test' } };
+    const andel2 = { andelsnr: 2, aktivitetStatus: { kode: 'SN', kodeverk: 'test' } };
     const faktaOmBeregning = {
-      faktaOmBeregningTilfeller: aktivePaneler.map((kode) => ({ kode })),
+      andelerForFaktaOmBeregning: [],
+      faktaOmBeregningTilfeller: aktivePaneler.map((kode) => ({ kode, kodeverk: 'test' })),
       besteberegningAndeler: [andel1, andel2],
-      vurderBesteberegning: { andeler: [andel1, andel2] },
+      vurderBesteberegning: { skalHaBesteberegning: true },
     };
     const beregningsgrunnlag = {
       beregninsgrunnlagPeriode: [
@@ -114,7 +114,7 @@ describe('<FaktaForATFLOgSNPanel>', () => {
           beregningsgrunnlagPrStatusOgAndel: [andel1, andel2],
         },
       ],
-    };
+    } as Beregningsgrunnlag;
     const values = {
       tilfeller: aktivePaneler,
       vurderMottarYtelse: undefined,
@@ -130,7 +130,7 @@ describe('<FaktaForATFLOgSNPanel>', () => {
         fastsattBelop: '20 000', inntektskategori: 'SELVSTENDIG_NÆRINGSDRIVENDE', andelsnr: andel2.andelsnr, kanRedigereInntekt: true,
       },
     ];
-    const transformedValues = transformValuesFaktaForATFLOgSN(values, false);
+    const transformedValues = transformValuesFaktaForATFLOgSN(values);
     expect(transformedValues.fakta.faktaOmBeregningTilfeller).toHaveLength(2);
     expect(transformedValues.fakta.faktaOmBeregningTilfeller[1]).toEqual(faktaOmBeregningTilfelle.FASTSETT_BESTEBEREGNING_FODENDE_KVINNE);
     expect(transformedValues.fakta.faktaOmBeregningTilfeller[0]).toEqual(faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING);
@@ -148,7 +148,8 @@ describe('<FaktaForATFLOgSNPanel>', () => {
     const forholdMedAtOgFl = {
       andelsnr: 2,
       inntektskategori: {
-        navn: 'Arbeidstaker',
+        kode: 'Arbeidstaker',
+        kodeverk: 'test',
       },
       arbeidsforhold: {
         arbeidsgiverNavn: 'bedrift',
@@ -162,7 +163,7 @@ describe('<FaktaForATFLOgSNPanel>', () => {
       andelsnr: 2,
       inntektskategori: {
         kode: 'ARBEIDSTAKER',
-        navn: 'Arbeidstaker',
+        kodeverk: 'test',
       },
       arbeidsforhold: {
         arbeidsgiverNavn: 'bedrift',
@@ -174,7 +175,8 @@ describe('<FaktaForATFLOgSNPanel>', () => {
 
     const frilansAndel = {
       inntektskategori: {
-        navn: 'Frilans',
+        kode: 'Frilans',
+        kodeverk: 'test',
       },
       arbeidsforhold: {
         startdato: '2018-01-01',
@@ -183,12 +185,14 @@ describe('<FaktaForATFLOgSNPanel>', () => {
       andelsnr: 1,
       arbeidsforholdType: {
         navn: 'Frilans',
+        kodeverk: 'test',
       },
-      aktivitetStatus: { kode: aktivitetStatus.FRILANSER },
+      aktivitetStatus: { kode: aktivitetStatus.FRILANSER, kodeverk: 'test' },
     };
 
     const faktaOmBeregning = {
-      faktaOmBeregningTilfeller: aktivePaneler.map((kode) => ({ kode })),
+      andelerForFaktaOmBeregning: [],
+      faktaOmBeregningTilfeller: aktivePaneler.map((kode) => ({ kode, kodeverk: 'test' })),
       arbeidsforholdMedLønnsendringUtenIM: [forholdMedLonnsendringUtenIM],
       arbeidstakerOgFrilanserISammeOrganisasjonListe: [forholdMedAtOgFl],
       frilansAndel,
@@ -214,7 +218,7 @@ describe('<FaktaForATFLOgSNPanel>', () => {
         kanRedigereInntekt: true,
       },
     ];
-    const transformedValues = transformValuesFaktaForATFLOgSN(values, false);
+    const transformedValues = transformValuesFaktaForATFLOgSN(values);
     expect(transformedValues.fakta.faktaOmBeregningTilfeller).toHaveLength(4);
     expect(transformedValues.fakta.faktaOmBeregningTilfeller.includes(faktaOmBeregningTilfelle.VURDER_LONNSENDRING)).toEqual(true);
     expect(transformedValues.fakta.faktaOmBeregningTilfeller

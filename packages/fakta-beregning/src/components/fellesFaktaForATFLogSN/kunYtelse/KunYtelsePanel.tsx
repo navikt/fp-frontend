@@ -8,10 +8,12 @@ import {
   AlleKodeverk,
   KunYtelse,
 } from '@fpsak-frontend/types';
+import { FaktaBeregningTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
 import { BrukersAndelFieldArrayImpl } from './BrukersAndelFieldArray';
 import KunYtelseBesteberegningPanel from './KunYtelseBesteberegningPanel';
 import KunYtelseUtenBesteberegningPanel from './KunYtelseUtenBesteberegningPanel';
 import { setGenerellAndelsinfo } from '../BgFaktaUtils';
+import { FaktaOmBeregningAksjonspunktValues, KunYtelseValues } from '../../../typer/FaktaBeregningTypes';
 
 export const brukersAndelFieldArrayName = 'brukersAndelBG';
 
@@ -27,10 +29,10 @@ interface StaticFunctions {
   buildInitialValues: (kunYtelse: KunYtelse,
                        faktaOmBeregningAndeler: AndelForFaktaOmBeregning[],
                        arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-                       alleKodeverk: AlleKodeverk) => any;
+                       alleKodeverk: AlleKodeverk) => KunYtelseValues;
   summerFordeling: (values: any) => number;
-  transformValues: (values: any, kunYtelse: KunYtelse) => any;
-  validate: (values: any, aktivertePaneler: string[], kunYtelse: KunYtelse) => any;
+  transformValues: (values: FaktaOmBeregningAksjonspunktValues, kunYtelse: KunYtelse) => FaktaBeregningTransformedValues;
+  validate: (values: FaktaOmBeregningAksjonspunktValues, aktivertePaneler: string[], kunYtelse: KunYtelse) => any;
 }
 
 /**
@@ -76,19 +78,20 @@ KunYtelsePanel.defaultProps = {
 KunYtelsePanel.buildInitialValues = (kunYtelse,
   faktaOmBeregningAndeler,
   arbeidsgiverOpplysningerPerId,
-  alleKodeverk) => {
+  alleKodeverk): KunYtelseValues => {
   if (!kunYtelse || !kunYtelse.andeler || kunYtelse.andeler.length === 0) {
     return {};
   }
+  const kunYtelseValues = kunYtelse.andeler.map((andel) => {
+    const andelMedInfo = faktaOmBeregningAndeler.find((faktaAndel) => faktaAndel.andelsnr === andel.andelsnr);
+    return ({
+      ...setGenerellAndelsinfo(andelMedInfo, arbeidsgiverOpplysningerPerId, alleKodeverk),
+      fastsattBelop: andel.fastsattBelopPrMnd || andel.fastsattBelopPrMnd === 0
+        ? formatCurrencyNoKr(andel.fastsattBelopPrMnd) : '',
+    });
+  });
   const initialValues = {
-    [brukersAndelFieldArrayName]: kunYtelse.andeler.map((andel) => {
-      const andelMedInfo = faktaOmBeregningAndeler.find((faktaAndel) => faktaAndel.andelsnr === andel.andelsnr);
-      return ({
-        ...setGenerellAndelsinfo(andelMedInfo, arbeidsgiverOpplysningerPerId, alleKodeverk),
-        fastsattBelop: andel.fastsattBelopPrMnd || andel.fastsattBelopPrMnd === 0
-          ? formatCurrencyNoKr(andel.fastsattBelopPrMnd) : '',
-      });
-    }),
+    [brukersAndelFieldArrayName]: kunYtelseValues,
   };
   if (kunYtelse.fodendeKvinneMedDP) {
     return {
@@ -103,7 +106,7 @@ KunYtelsePanel.summerFordeling = (values) => (values[brukersAndelFieldArrayName]
   .map(({ fastsattBelop }) => (fastsattBelop ? removeSpacesFromNumber(fastsattBelop) : 0))
   .reduce((sum, fastsattBelop) => sum + fastsattBelop, 0));
 
-KunYtelsePanel.transformValues = (values, kunYtelse) => ({
+KunYtelsePanel.transformValues = (values: FaktaOmBeregningAksjonspunktValues, kunYtelse: KunYtelse): FaktaBeregningTransformedValues => ({
   kunYtelseFordeling: {
     andeler: values[brukersAndelFieldArrayName].map((fieldValue) => ({
       andelsnr: fieldValue.andelsnr,
@@ -117,7 +120,7 @@ KunYtelsePanel.transformValues = (values, kunYtelse) => ({
   },
 });
 
-KunYtelsePanel.validate = (values, aktivertePaneler, kunYtelse) => {
+KunYtelsePanel.validate = (values: FaktaOmBeregningAksjonspunktValues, aktivertePaneler: string[], kunYtelse: KunYtelse): any => {
   if (!values || !aktivertePaneler.includes(faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE)) {
     return {};
   }

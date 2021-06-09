@@ -1,7 +1,9 @@
 import beregningsgrunnlagAndeltyper from '@fpsak-frontend/kodeverk/src/beregningsgrunnlagAndeltyper';
 import { aktivitetstatusTilAndeltypeMap } from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
+import { BrukersAndelValues, FaktaBeregningError } from '../../typer/FaktaBeregningTypes';
+import AndelFieldValue from '../../typer/FieldValues';
 
-export const compareAndeler = (andel1, andel2) => {
+export const compareAndeler = (andel1: SortedAndelInfo, andel2: SortedAndelInfo): number => {
   if (andel1.andelsinfo === andel2.andelsinfo) {
     if (andel1.inntektskategori === andel2.inntektskategori) {
       return 0;
@@ -33,11 +35,18 @@ const mapAndelToSortedObject = (value, andelList) => {
   return { andelsinfo: andel, inntektskategori };
 };
 
-export const ulikeAndelerErrorMessage = () => ([{ id: 'BeregningInfoPanel.FordelBG.Validation.UlikeAndeler' }]);
+export const ulikeAndelerErrorMessage = (): FaktaBeregningError[] => ([{ id: 'BeregningInfoPanel.FordelBG.Validation.UlikeAndeler' }]);
 
-const erAndelerLike = (andel1, andel2) => andel2.andelsinfo === andel1.andelsinfo && andel2.inntektskategori === andel1.inntektskategori;
+const erAndelerLike = (andel1: SortedAndelInfo, andel2: SortedAndelInfo): boolean => andel2.andelsinfo === andel1.andelsinfo
+  && andel2.inntektskategori === andel1.inntektskategori;
 
-export const validateUlikeAndelerWithGroupingFunction = (andelList, mapToSort) => {
+export type SortedAndelInfo = {
+  andelsinfo: string;
+  inntektskategori: string;
+}
+
+export const validateUlikeAndelerWithGroupingFunction = (andelList: BrukersAndelValues[] | AndelFieldValue[], mapToSort: ((andel: BrukersAndelValues,
+   andelList: BrukersAndelValues[] | AndelFieldValue[]) => SortedAndelInfo)): any => {
   const mappedAndeler = andelList.map((value) => (mapToSort(value, andelList)));
   const sortedAndeler = mappedAndeler.slice().sort((andel1, andel2) => compareAndeler(andel1, andel2));
   for (let i = 0; i < sortedAndeler.length - 1; i += 1) {
@@ -52,7 +61,7 @@ export const validateUlikeAndeler = (andelList) => validateUlikeAndelerWithGroup
 
 const minstEnFastsattErrorMessage = () => ([{ id: 'BeregningInfoPanel.Validation.MinstEnFastsatt' }]);
 
-export const validateMinstEnFastsatt = (andelList) => {
+export const validateMinstEnFastsatt = (andelList: AndelFieldValue[]): FaktaBeregningError[] => {
   const harAndelMedFastsattInntekt = andelList.some(({ fastsattBelop }) => fastsattBelop !== null && fastsattBelop !== '');
   if (!harAndelMedFastsattInntekt) {
     return minstEnFastsattErrorMessage();

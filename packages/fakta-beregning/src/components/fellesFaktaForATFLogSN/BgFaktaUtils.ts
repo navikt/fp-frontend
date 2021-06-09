@@ -12,7 +12,7 @@ import {
   ArbeidsgiverOpplysningerPerId,
   Beregningsgrunnlag,
   ATFLSammeOrgAndel,
-  AlleKodeverk,
+  AlleKodeverk, Aksjonspunkt,
 } from '@fpsak-frontend/types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { lonnsendringField } from './vurderOgFastsettATFL/forms/LonnsendringForm';
@@ -25,6 +25,7 @@ import { besteberegningField } from './besteberegningFodendeKvinne/VurderBestebe
 import { MANUELL_OVERSTYRING_BEREGNINGSGRUNNLAG_FIELD } from './InntektstabellPanel';
 import AndelFieldValue, { AndelFieldIdentifikator } from '../../typer/FieldValues';
 import { createVisningsnavnFakta } from '../ArbeidsforholdHelper';
+import { FaktaOmBeregningAksjonspunktValues, GenerellAndelInfo } from '../../typer/FaktaBeregningTypes';
 
 export const INNTEKT_FIELD_ARRAY_NAME = 'inntektFieldArray';
 
@@ -53,7 +54,7 @@ const lagVisningsnavn = (andel: AndelForFaktaOmBeregning,
 
 export const setGenerellAndelsinfo = (andel: AndelForFaktaOmBeregning,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  alleKodeverk: AlleKodeverk) => ({
+  alleKodeverk: AlleKodeverk): GenerellAndelInfo => ({
   andel: lagVisningsnavn(andel, arbeidsgiverOpplysningerPerId, alleKodeverk),
   aktivitetStatus: andel.aktivitetStatus.kode,
   andelsnr: andel.andelsnr,
@@ -100,7 +101,7 @@ const erNyoppstartetFrilanser = (field: AndelFieldIdentifikator, values: any): b
 
 // Besteberegning
 
-const skalHaBesteberegning = (values: any): boolean => values[besteberegningField];
+const skalHaBesteberegning = (values: FaktaOmBeregningAksjonspunktValues): boolean => values[besteberegningField];
 
 export const skalHaBesteberegningSelector = createSelector([getFormValuesForBeregning], skalHaBesteberegning);
 
@@ -126,10 +127,10 @@ const andelErStatusATUtenInntektsmeldingOgHarFLISammeOrg = (field: AndelFieldIde
 && erArbeidstaker(field) && erArbeidstakerUtenInntektsmeldingOgFrilansISammeOrganisasjon(field, faktaOmBeregning);
 
 // Søker mottar ytelse
-const sokerMottarYtelseForAndel = (values: any,
+const sokerMottarYtelseForAndel = (values: FaktaOmBeregningAksjonspunktValues,
   field: AndelFieldIdentifikator,
   faktaOmBeregning: FaktaOmBeregning,
-  beregningsgrunnlag: Beregningsgrunnlag) => {
+  beregningsgrunnlag: Beregningsgrunnlag): boolean => {
   const mottarYtelseMap = andelsnrMottarYtelseMap(values, faktaOmBeregning.vurderMottarYtelse, beregningsgrunnlag);
   return mottarYtelseMap[field.andelsnr];
 };
@@ -154,10 +155,10 @@ const erAndelKunstigArbeidsforhold = (andel: AndelFieldIdentifikator,
 };
 
 // Kun Ytelse
-const harKunYtelse = (faktaOmBeregning) => !!faktaOmBeregning.faktaOmBeregningTilfeller && faktaOmBeregning.faktaOmBeregningTilfeller
+const harKunYtelse = (faktaOmBeregning: FaktaOmBeregning): boolean => !!faktaOmBeregning.faktaOmBeregningTilfeller && faktaOmBeregning.faktaOmBeregningTilfeller
   .find(({ kode }) => kode === faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE) !== undefined;
 
-const skalKunneOverstigeRapportertInntektOgTotaltBeregningsgrunnlag = (values: any,
+const skalKunneOverstigeRapportertInntektOgTotaltBeregningsgrunnlag = (values: FaktaOmBeregningAksjonspunktValues,
   faktaOmBeregning: FaktaOmBeregning,
   beregningsgrunnlag: Beregningsgrunnlag) => (andel: AndelFieldIdentifikator): boolean => {
   if (skalHaBesteberegning(values)) {
@@ -187,7 +188,7 @@ const skalKunneOverstigeRapportertInntektOgTotaltBeregningsgrunnlag = (values: a
   return false;
 };
 
-const skalKunneEndreTotaltBeregningsgrunnlag = (values: any,
+const skalKunneEndreTotaltBeregningsgrunnlag = (values: FaktaOmBeregningAksjonspunktValues,
   faktaOmBeregning: FaktaOmBeregning,
   beregningsgrunnlag: Beregningsgrunnlag) => (andel: AndelFieldIdentifikator): boolean => {
   if (skalKunneOverstigeRapportertInntektOgTotaltBeregningsgrunnlag(values, faktaOmBeregning, beregningsgrunnlag)(andel)) {
@@ -201,15 +202,18 @@ const skalKunneEndreTotaltBeregningsgrunnlag = (values: any,
 
 // Overstyring
 
-export const erOverstyring = (values) => (!!values && values[MANUELL_OVERSTYRING_BEREGNINGSGRUNNLAG_FIELD] === true);
+export const erOverstyring = (values: FaktaOmBeregningAksjonspunktValues): boolean => (!!values
+  && values[MANUELL_OVERSTYRING_BEREGNINGSGRUNNLAG_FIELD] === true);
 
-const harOverstyringsAP = (aksjonspuntker) => aksjonspuntker
+const harOverstyringsAP = (aksjonspuntker: Aksjonspunkt[]): boolean => aksjonspuntker
   && aksjonspuntker.some((ap) => ap.definisjon.kode === aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG);
 
 export const erOverstyringAvBeregningsgrunnlag = createSelector([
   getFormValuesForBeregning,
   (state, ownProps) => ownProps.beregningsgrunnlag,
-  (state, ownProps) => ownProps.aksjonspunkter], (values, beregningsgrunnlag, aksjonspunkter) => erOverstyring(values)
+  (state, ownProps) => ownProps.aksjonspunkter], (values: FaktaOmBeregningAksjonspunktValues,
+  beregningsgrunnlag: Beregningsgrunnlag,
+  aksjonspunkter: Aksjonspunkt[]) => erOverstyring(values)
   || beregningsgrunnlag.erOverstyrtInntekt || harOverstyringsAP(aksjonspunkter));
 
 export const erInitialOverstyringAvBeregningsgrunnlag = createSelector([
@@ -217,7 +221,9 @@ export const erInitialOverstyringAvBeregningsgrunnlag = createSelector([
   (state, ownProps) => ownProps.aksjonspunkter], (beregningsgrunnlag, aksjonspunkter) => beregningsgrunnlag.erOverstyrtInntekt
   || harOverstyringsAP(aksjonspunkter));
 
-export const skalFastsetteInntektForAndel = (values, faktaOmBeregning, beregningsgrunnlag) => (andel: AndelFieldIdentifikator) => harKunYtelse(faktaOmBeregning)
+export const skalFastsetteInntektForAndel = (values: FaktaOmBeregningAksjonspunktValues,
+  faktaOmBeregning: FaktaOmBeregning,
+  beregningsgrunnlag: Beregningsgrunnlag) => (andel: AndelFieldIdentifikator): boolean => harKunYtelse(faktaOmBeregning)
 || skalKunneEndreTotaltBeregningsgrunnlag(values, faktaOmBeregning, beregningsgrunnlag)(andel);
 
 export const kanRedigereInntektForAndel = (values, faktaOmBeregning, beregningsgrunnlag) => (andel) => erOverstyring(values)

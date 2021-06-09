@@ -67,8 +67,8 @@ describe('<ATFLSammeOrg>', () => {
   const faktaOmBeregningFrilansAndel = {
     andelsnr: 1,
     arbeidsforhold: null,
-    inntektskategori: { kode: inntektskategorier.FRILANSER },
-    aktivitetStatus: { kode: aktivitetStatus.FRILANSER },
+    inntektskategori: { kode: inntektskategorier.FRILANSER, kodeverk: 'test' },
+    aktivitetStatus: { kode: aktivitetStatus.FRILANSER, kodeverk: 'test' },
     lagtTilAvSaksbehandler: false,
     andelIArbeid: [],
   };
@@ -76,8 +76,8 @@ describe('<ATFLSammeOrg>', () => {
   const faktaOmBeregningATAndel = {
     andelsnr: 2,
     arbeidsforhold,
-    inntektskategori: { kode: inntektskategorier.ARBEIDSTAKER },
-    aktivitetStatus: { kode: aktivitetStatus.ARBEIDSTAKER },
+    inntektskategori: { kode: inntektskategorier.ARBEIDSTAKER, kodeverk: 'test' },
+    aktivitetStatus: { kode: aktivitetStatus.ARBEIDSTAKER, kodeverk: 'test' },
     lagtTilAvSaksbehandler: false,
     andelIArbeid: [],
   };
@@ -104,7 +104,8 @@ describe('<ATFLSammeOrg>', () => {
 
   it('skal ikkje transform values uten tilfelle', () => {
     const faktaOmBeregning = {
-      faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_LONNSENDRING }],
+      andelerForFaktaOmBeregning: [],
+      faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_LONNSENDRING, kodeverk: 'test' }],
       arbeidstakerOgFrilanserISammeOrganisasjonListe: [{ ...faktaOmBeregningATAndel, inntektPrMnd: 10000 }],
       frilansAndel: faktaOmBeregningFrilansAndel,
     };
@@ -115,7 +116,8 @@ describe('<ATFLSammeOrg>', () => {
 
   it('skal transform values', () => {
     const faktaOmBeregning = {
-      faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON }],
+      andelerForFaktaOmBeregning: [],
+      faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON, kodeverk: 'test' }],
       arbeidstakerOgFrilanserISammeOrganisasjonListe: [{ ...faktaOmBeregningATAndel, inntektPrMnd: 10000 }],
       frilansAndel: faktaOmBeregningFrilansAndel,
     };
@@ -136,7 +138,8 @@ describe('<ATFLSammeOrg>', () => {
 
   it('skal ikkje transform values når andelsnr har blitt submittet fra før', () => {
     const faktaOmBeregning = {
-      faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON }],
+      andelerForFaktaOmBeregning: [],
+      faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON, kodeverk: 'test' }],
       arbeidstakerOgFrilanserISammeOrganisasjonListe: [{ ...faktaOmBeregningATAndel, inntektPrMnd: 10000 }],
       frilansAndel: faktaOmBeregningFrilansAndel,
     };

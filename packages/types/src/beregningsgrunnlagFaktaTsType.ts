@@ -31,7 +31,7 @@ type VurderMilitaer = Readonly<{
   harMilitaer?: boolean;
 }>
 
-type VurderBesteberegning = Readonly<{
+export type VurderBesteberegning = Readonly<{
   skalHaBesteberegning?: boolean;
 }>
 

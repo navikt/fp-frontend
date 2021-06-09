@@ -79,8 +79,8 @@ describe('<VurderMottarYtelseUtils>', () => {
       erFrilans: true,
       arbeidstakerAndelerUtenIM: [],
     };
-    const values = {};
-    values[finnFrilansFieldName()] = null;
+    const values = { vurderMottarYtelseValues: {} };
+    values.vurderMottarYtelseValues[finnFrilansFieldName()] = null;
     const harVurdert = harVurdertMottarYtelse(values, vurderMottarYtelse);
     expect(harVurdert).toBe(false);
   });
@@ -90,8 +90,8 @@ describe('<VurderMottarYtelseUtils>', () => {
       erFrilans: true,
       arbeidstakerAndelerUtenIM: [],
     };
-    const values = {};
-    values[finnFrilansFieldName()] = true;
+    const values = { vurderMottarYtelseValues: {} };
+    values.vurderMottarYtelseValues[finnFrilansFieldName()] = true;
     const harVurdert = harVurdertMottarYtelse(values, vurderMottarYtelse);
     expect(harVurdert).toBe(true);
   });
@@ -101,10 +101,10 @@ describe('<VurderMottarYtelseUtils>', () => {
       erFrilans: false,
       arbeidstakerAndelerUtenIM,
     };
-    const values = {};
-    values[utledArbeidsforholdFieldName(andel)] = true;
-    values[utledArbeidsforholdFieldName(andel2)] = false;
-    values[utledArbeidsforholdFieldName(andel3)] = false;
+    const values = { vurderMottarYtelseValues: {} };
+    values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel)] = true;
+    values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel2)] = false;
+    values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel3)] = false;
     const harVurdert = harVurdertMottarYtelse(values, vurderMottarYtelse);
     expect(harVurdert).toBe(true);
   });
@@ -114,10 +114,10 @@ describe('<VurderMottarYtelseUtils>', () => {
       erFrilans: false,
       arbeidstakerAndelerUtenIM,
     };
-    const values = {};
-    values[utledArbeidsforholdFieldName(andel)] = true;
-    values[utledArbeidsforholdFieldName(andel2)] = false;
-    values[utledArbeidsforholdFieldName(andel3)] = null;
+    const values = { vurderMottarYtelseValues: {} };
+    values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel)] = true;
+    values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel2)] = false;
+    values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel3)] = null;
     const harVurdert = harVurdertMottarYtelse(values, vurderMottarYtelse);
     expect(harVurdert).toBe(false);
   });
@@ -131,10 +131,10 @@ describe('<VurderMottarYtelseUtils>', () => {
     const vurderMottarYtelse = {
       arbeidstakerAndelerUtenIM,
     };
-    const values = {};
-    values[utledArbeidsforholdFieldName(andel)] = true;
-    values[utledArbeidsforholdFieldName(andel2)] = false;
-    values[utledArbeidsforholdFieldName(andel3)] = null;
+    const values = { vurderMottarYtelseValues: {} };
+    values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel)] = true;
+    values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel2)] = false;
+    values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel3)] = null;
     const mottarYtelseMap = andelsnrMottarYtelseMap(values, vurderMottarYtelse, beregningsgrunnlag);
     expect(mottarYtelseMap[1]).toBe(true);
     expect(mottarYtelseMap[2]).toBe(false);
@@ -145,11 +145,11 @@ describe('<VurderMottarYtelseUtils>', () => {
     const vurderMottarYtelse = {
       arbeidstakerAndelerUtenIM,
     };
-    const values = {};
-    values[utledArbeidsforholdFieldName(andel)] = true;
-    values[utledArbeidsforholdFieldName(andel2)] = false;
-    values[utledArbeidsforholdFieldName(andel3)] = null;
-    values[finnFrilansFieldName()] = true;
+    const values = { vurderMottarYtelseValues: {} };
+    values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel)] = true;
+    values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel2)] = false;
+    values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel3)] = null;
+    values.vurderMottarYtelseValues[finnFrilansFieldName()] = true;
     const mottarYtelseMap = andelsnrMottarYtelseMap(values, vurderMottarYtelse, beregningsgrunnlag);
     expect(mottarYtelseMap[1]).toBe(true);
     expect(mottarYtelseMap[2]).toBe(false);
@@ -161,11 +161,11 @@ describe('<VurderMottarYtelseUtils>', () => {
     const vurderMottarYtelse = {
       arbeidstakerAndelerUtenIM,
     };
-    const values = {};
-    values[utledArbeidsforholdFieldName(andel)] = true;
-    values[utledArbeidsforholdFieldName(andel2)] = false;
-    values[utledArbeidsforholdFieldName(andel3)] = null;
-    values[finnFrilansFieldName()] = true;
+    const values = { vurderMottarYtelseValues: {} };
+    values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel)] = true;
+    values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel2)] = false;
+    values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel3)] = null;
+    values.vurderMottarYtelseValues[finnFrilansFieldName()] = true;
     const skalFastsetteAT = skalFastsetteInntektATUtenInntektsmelding(values, vurderMottarYtelse);
     expect(skalFastsetteAT).toBe(true);
   });
@@ -174,8 +174,8 @@ describe('<VurderMottarYtelseUtils>', () => {
     const vurderMottarYtelse = {
       arbeidstakerAndelerUtenIM,
     };
-    const values = {};
-    values[finnFrilansFieldName()] = true;
+    const values = { vurderMottarYtelseValues: {} };
+    values.vurderMottarYtelseValues[finnFrilansFieldName()] = true;
     const skalFastsetteAT = skalFastsetteInntektATUtenInntektsmelding(values, vurderMottarYtelse);
     expect(skalFastsetteAT).toBe(false);
   });
@@ -184,11 +184,11 @@ describe('<VurderMottarYtelseUtils>', () => {
     const vurderMottarYtelse = {
       arbeidstakerAndelerUtenIM,
     };
-    const values = {};
-    values[utledArbeidsforholdFieldName(andel)] = null;
-    values[utledArbeidsforholdFieldName(andel2)] = null;
-    values[utledArbeidsforholdFieldName(andel3)] = null;
-    values[finnFrilansFieldName()] = true;
+    const values = { vurderMottarYtelseValues: {} };
+    values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel)] = null;
+    values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel2)] = null;
+    values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel3)] = null;
+    values.vurderMottarYtelseValues[finnFrilansFieldName()] = true;
     const skalFastsetteAT = skalFastsetteInntektATUtenInntektsmelding(values, vurderMottarYtelse);
     expect(skalFastsetteAT).toBe(false);
   });
@@ -197,11 +197,11 @@ describe('<VurderMottarYtelseUtils>', () => {
     const vurderMottarYtelse = {
       arbeidstakerAndelerUtenIM,
     };
-    const values = {};
-    values[utledArbeidsforholdFieldName(andel)] = false;
-    values[utledArbeidsforholdFieldName(andel2)] = false;
-    values[utledArbeidsforholdFieldName(andel3)] = false;
-    values[finnFrilansFieldName()] = true;
+    const values = { vurderMottarYtelseValues: {} };
+    values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel)] = false;
+    values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel2)] = false;
+    values.vurderMottarYtelseValues[utledArbeidsforholdFieldName(andel3)] = false;
+    values.vurderMottarYtelseValues[finnFrilansFieldName()] = true;
     const skalFastsetteAT = skalFastsetteInntektATUtenInntektsmelding(values, vurderMottarYtelse);
     expect(skalFastsetteAT).toBe(false);
   });

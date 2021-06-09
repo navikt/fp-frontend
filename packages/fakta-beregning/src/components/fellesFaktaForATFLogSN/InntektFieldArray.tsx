@@ -17,7 +17,7 @@ import {
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import { mapAndelToField, skalHaBesteberegningSelector } from './BgFaktaUtils';
 import styles from './inntektFieldArray.less';
-import { validateUlikeAndeler, validateUlikeAndelerWithGroupingFunction } from './ValidateAndelerUtils';
+import { SortedAndelInfo, validateUlikeAndeler, validateUlikeAndelerWithGroupingFunction } from './ValidateAndelerUtils';
 import { getFormValuesForBeregning, isBeregningFormDirty as isFormDirty } from '../BeregningFormUtils';
 import { AndelRow, getHeaderTextCodes } from './InntektFieldArrayRow';
 import AddDagpengerAndelButton from './AddDagpengerAndelButton';
@@ -184,13 +184,13 @@ type OwnProps = {
 };
 
 interface StaticFunctions {
-  validate: (values: any,
+  validate: (values: AndelFieldValue[],
              erKunYtelse: boolean,
              skalFastsetteInntekt: (andel) => boolean) => any;
   buildInitialValues: (andeler: AndelForFaktaOmBeregning[],
                        arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-                       alleKodeverk: AlleKodeverk) => any;
-  transformValues: (values: any) => InntektTransformed;
+                       alleKodeverk: AlleKodeverk) => AndelFieldValue[];
+  transformValues: (values: AndelFieldValue[]) => InntektTransformed[];
 }
 
 /**
@@ -255,7 +255,7 @@ InntektFieldArray.defaultProps = {
   skalKunneLeggeTilDagpengerManuelt: false,
 };
 
-InntektFieldArray.transformValues = (values): InntektTransformed => (values
+InntektFieldArray.transformValues = (values: AndelFieldValue[]): InntektTransformed[] => (values
   ? values.filter(({ kanRedigereInntekt }) => kanRedigereInntekt)
     .filter(({ fastsattBelop }) => fastsattBelop !== null && fastsattBelop !== '')
     .map((fieldValue) => ({
@@ -270,7 +270,7 @@ InntektFieldArray.transformValues = (values): InntektTransformed => (values
     })) : null
 );
 
-const mapAndelToSortedObject = (value) => {
+const mapAndelToSortedObject = (value: AndelFieldValue): SortedAndelInfo => {
   const { andel, inntektskategori } = value;
   return { andelsinfo: andel, inntektskategori };
 };
@@ -304,9 +304,9 @@ InntektFieldArray.validate = (values: AndelFieldValue[], erKunYtelse, skalFastse
 
 InntektFieldArray.buildInitialValues = (andeler: AndelForFaktaOmBeregning[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  alleKodeverk: AlleKodeverk) => {
+  alleKodeverk: AlleKodeverk): AndelFieldValue[] => {
   if (!andeler || andeler.length === 0) {
-    return {};
+    return [];
   }
   return andeler.map((a) => mapAndelToField(a, arbeidsgiverOpplysningerPerId, alleKodeverk));
 };

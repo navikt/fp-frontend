@@ -33,7 +33,19 @@ describe('<VurderBesteberegning>', () => {
       skalHaBesteberegning: null,
       andeler: [{ andelsnr: 1, aktivitetStatus: { kode: 'AT' } }],
     };
-    const initialValues = VurderBesteberegningForm.buildInitialValues([{ definisjon: { kode: OVERSTYRING_AV_BEREGNINGSGRUNNLAG } }],
+    const ap = {
+      definisjon: {
+        kode: OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
+        kodeverk: 'test',
+      },
+      status: {
+        kode: 'OPPR',
+        kodeverk: 'test',
+      },
+      kanLoses: true,
+      erAktivt: true,
+    };
+    const initialValues = VurderBesteberegningForm.buildInitialValues([ap],
       vurderBesteberegning, [faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING], false);
     expect(initialValues[besteberegningField]).toBe(false);
   });

@@ -68,9 +68,9 @@ describe('<VurderRefusjonForm>', () => {
       { arbeidsgiverId: '8279312213', arbeidsgiverVisningsnavn: 'Arbeidsgiveren (8279312213) AS', erRefusjonskravGyldig: true },
       { arbeidsgiverId: '45345345345', arbeidsgiverVisningsnavn: 'Arbeidsgiverto (45345345345) AS', erRefusjonskravGyldig: false },
     ];
-    const values = {};
-    values[lagFieldName('8279312213')] = false;
-    values[lagFieldName('45345345345')] = true;
+    const values = { vurderRefusjonValues: {} };
+    values.vurderRefusjonValues[lagFieldName('8279312213')] = false;
+    values.vurderRefusjonValues[lagFieldName('45345345345')] = true;
     const transformedValues = VurderRefusjonForm.transformValues(senRefusjonkravListe)(values);
     expect(transformedValues.refusjonskravGyldighet.length).toBe(2);
     expect(transformedValues.refusjonskravGyldighet[0].arbeidsgiverId).toBe('8279312213');

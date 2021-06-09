@@ -12,7 +12,9 @@ import {
   FaktaOmBeregning,
   KortvarigAndel,
 } from '@fpsak-frontend/types';
+import { FaktaBeregningTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
 import { createVisningsnavnFakta } from '../../ArbeidsforholdHelper';
+import { FaktaOmBeregningAksjonspunktValues, TidsbegrensetandelValues } from '../../../typer/FaktaBeregningTypes';
 
 const kortvarigStringId = 'BeregningInfoPanel.TidsbegrensetArbFor.Arbeidsforhold';
 
@@ -34,8 +36,8 @@ type OwnProps = {
 };
 
 interface StaticFunctions {
-  transformValues: (values: any, andeler: KortvarigAndel[]) => any;
-  buildInitialValues: (andeler: KortvarigAndel[]) => any;
+  transformValues: (values: FaktaOmBeregningAksjonspunktValues, andeler: KortvarigAndel[]) => any;
+  buildInitialValues: (andeler: KortvarigAndel[]) => TidsbegrensetandelValues;
 }
 
 /**
@@ -65,7 +67,7 @@ export const TidsbegrensetArbeidsforholdForm: FunctionComponent<OwnProps> & Stat
           </Normaltekst>
           <VerticalSpacer eightPx />
           <RadioGroupField
-            name={createArbeidsforholdRadioKey(andel)}
+            name={`tidsbegrensetValues.${createArbeidsforholdRadioKey(andel)}`}
             validate={[required]}
             readOnly={readOnly}
             isEdited={isAksjonspunktClosed}
@@ -79,7 +81,7 @@ export const TidsbegrensetArbeidsforholdForm: FunctionComponent<OwnProps> & Stat
   );
 };
 
-TidsbegrensetArbeidsforholdForm.buildInitialValues = (andeler) => {
+TidsbegrensetArbeidsforholdForm.buildInitialValues = (andeler: KortvarigAndel[]): TidsbegrensetandelValues => {
   const initialValues = {};
   if (!andeler) {
     return initialValues;
@@ -92,11 +94,12 @@ TidsbegrensetArbeidsforholdForm.buildInitialValues = (andeler) => {
   return initialValues;
 };
 
-TidsbegrensetArbeidsforholdForm.transformValues = (values, andeler) => {
+TidsbegrensetArbeidsforholdForm.transformValues = (values: FaktaOmBeregningAksjonspunktValues,
+  andeler: KortvarigAndel[]): FaktaBeregningTransformedValues => {
   const newValues = [];
   andeler.forEach((andel) => {
     const fieldName = createArbeidsforholdRadioKey(andel);
-    const booleanValue = values[fieldName];
+    const booleanValue = values.tidsbegrensetValues[fieldName];
     const valueObject = {
       andelsnr: andel.andelsnr,
       tidsbegrensetArbeidsforhold: booleanValue,

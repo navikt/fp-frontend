@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
 import OAType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
@@ -12,8 +11,12 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Beregningsgrunnlag, FaktaOmBeregning } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
-import { getFormValuesForBeregning } from '../../../BeregningFormUtils';
+import { FaktaBeregningTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
 import { InntektTransformed } from '../../../../typer/FieldValues';
+import {
+  FaktaOmBeregningAksjonspunktValues,
+  VurderEtterlønnSluttpakkeValues,
+} from '../../../../typer/FaktaBeregningTypes';
 
 /**
  * VurderEtterlønnSluttpakkeForm
@@ -29,8 +32,11 @@ type OwnProps = {
 };
 
 interface StaticFunctions {
-  buildInitialValues: (beregningsgrunnlag: Beregningsgrunnlag, faktaAksjonspunkt: Aksjonspunkt) => any;
-  transformValues: (values: any, inntektPrMnd: InntektTransformed[], faktaOmBeregning: FaktaOmBeregning, fastsatteAndelsnr: number[]) => any;
+  buildInitialValues: (beregningsgrunnlag: Beregningsgrunnlag, faktaAksjonspunkt: Aksjonspunkt) => VurderEtterlønnSluttpakkeValues;
+  transformValues: (values: FaktaOmBeregningAksjonspunktValues,
+                    inntektPrMnd: InntektTransformed[],
+                    faktaOmBeregning: FaktaOmBeregning,
+                    fastsatteAndelsnr: number[]) => FaktaBeregningTransformedValues;
 }
 
 const VurderEtterlonnSluttpakkeForm: FunctionComponent<OwnProps> & StaticFunctions = ({ readOnly, isAksjonspunktClosed }) => (
@@ -51,10 +57,11 @@ const VurderEtterlonnSluttpakkeForm: FunctionComponent<OwnProps> & StaticFunctio
   </div>
 );
 
-VurderEtterlonnSluttpakkeForm.buildInitialValues = (beregningsgrunnlag, faktaAksjonspunkt) => {
+VurderEtterlonnSluttpakkeForm.buildInitialValues = (beregningsgrunnlag: Beregningsgrunnlag,
+  faktaAksjonspunkt: Aksjonspunkt): VurderEtterlønnSluttpakkeValues => {
   const initialValues = {};
   if (!beregningsgrunnlag || !beregningsgrunnlag.beregningsgrunnlagPeriode || !faktaAksjonspunkt) {
-    return initialValues;
+    return {};
   }
   const apErTidligereLost = !isAksjonspunktOpen(faktaAksjonspunkt.status.kode);
   const relevanteAndeler = beregningsgrunnlag.beregningsgrunnlagPeriode
@@ -67,7 +74,7 @@ VurderEtterlonnSluttpakkeForm.buildInitialValues = (beregningsgrunnlag, faktaAks
   return initialValues;
 };
 
-const finnEtterlønnSluttpakkeAndel = (faktaOmBeregning) => {
+const finnEtterlønnSluttpakkeAndelNr = (faktaOmBeregning: FaktaOmBeregning): number | undefined => {
   if (!faktaOmBeregning.andelerForFaktaOmBeregning) {
     return undefined;
   }
@@ -78,7 +85,10 @@ const finnEtterlønnSluttpakkeAndel = (faktaOmBeregning) => {
   return etterlønnSluttpakkeAndel ? etterlønnSluttpakkeAndel.andelsnr : undefined;
 };
 
-VurderEtterlonnSluttpakkeForm.transformValues = (values, inntektPrMnd, faktaOmBeregning, fastsatteAndelsnr) => {
+VurderEtterlonnSluttpakkeForm.transformValues = (values: FaktaOmBeregningAksjonspunktValues,
+  inntektPrMnd: InntektTransformed[],
+  faktaOmBeregning: FaktaOmBeregning,
+  fastsatteAndelsnr: number[]): FaktaBeregningTransformedValues => {
   const tilfeller = faktaOmBeregning.faktaOmBeregningTilfeller ? faktaOmBeregning.faktaOmBeregningTilfeller : [];
   if (!tilfeller.map(({ kode }) => kode).includes(faktaOmBeregningTilfelle.VURDER_ETTERLONN_SLUTTPAKKE)) {
     return {};
@@ -89,7 +99,7 @@ VurderEtterlonnSluttpakkeForm.transformValues = (values, inntektPrMnd, faktaOmBe
       vurderEtterlønnSluttpakke: { erEtterlønnSluttpakke: values[harEtterlonnSluttpakkeField] },
     });
   }
-  const etterlønnSluttpakkeAndelsnr = finnEtterlønnSluttpakkeAndel(faktaOmBeregning);
+  const etterlønnSluttpakkeAndelsnr = finnEtterlønnSluttpakkeAndelNr(faktaOmBeregning);
   if (!etterlønnSluttpakkeAndelsnr) {
     return {};
   }
@@ -118,8 +128,4 @@ VurderEtterlonnSluttpakkeForm.transformValues = (values, inntektPrMnd, faktaOmBe
   };
 };
 
-const mapStateToProps = (state) => ({
-  harEtterlonnSluttpakke: getFormValuesForBeregning(state)[harEtterlonnSluttpakkeField],
-});
-
-export default connect(mapStateToProps)(VurderEtterlonnSluttpakkeForm);
+export default VurderEtterlonnSluttpakkeForm;

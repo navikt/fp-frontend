@@ -6,6 +6,7 @@ import { required } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+import { NyIArbeidslivetValues } from '../../../typer/FaktaBeregningTypes';
 
 /**
  * NyIArbeidslivetSNForm
@@ -28,7 +29,7 @@ type TansformedProps = {
 }
 
 interface StaticFunctions {
-  buildInitialValues: (beregningsgrunnlag: Beregningsgrunnlag) => any;
+  buildInitialValues: (beregningsgrunnlag: Beregningsgrunnlag) => NyIArbeidslivetValues;
   transformValues: (values: any) => TansformedProps;
 }
 
@@ -50,7 +51,7 @@ const NyIArbeidslivetSNForm: FunctionComponent<OwnProps> & StaticFunctions = ({ 
   </div>
 );
 
-NyIArbeidslivetSNForm.buildInitialValues = (beregningsgrunnlag) => {
+NyIArbeidslivetSNForm.buildInitialValues = (beregningsgrunnlag: Beregningsgrunnlag): NyIArbeidslivetValues => {
   const initialValues = {};
   if (!beregningsgrunnlag || !beregningsgrunnlag.beregningsgrunnlagPeriode) {
     return initialValues;
