@@ -113,6 +113,33 @@ const hasOpenAksjonspunkt = (kode: string, aksjonspunkter: Aksjonspunkt[]): bool
 const hasOpenAvklarAksjonspunkter = (aksjonspunkter: Aksjonspunkt[]): boolean => hasOpenAksjonspunkt(AVKLAR_AKTIVITETER, aksjonspunkter)
 || hasOpenAksjonspunkt(OVERSTYRING_AV_BEREGNINGSAKTIVITETER, aksjonspunkter);
 
+const skalSkjuleKomponent = (aksjonspunkter: Aksjonspunkt[],
+  kanOverstyre: boolean,
+  erOverstyrt: boolean): boolean => !hasAksjonspunkt(AVKLAR_AKTIVITETER, aksjonspunkter) && !kanOverstyre && !erOverstyrt;
+
+const skalViseSubmitknappInneforBorderBox = (harAndreAksjonspunkterIPanel: boolean,
+  erOverstyrt: boolean,
+  erBgOverstyrt: boolean,
+  aksjonspunkter: Aksjonspunkt[]): boolean => (harAndreAksjonspunkterIPanel || erOverstyrt || erBgOverstyrt) && !hasOpenAvklarAksjonspunkter(aksjonspunkter);
+
+const skalViseSubmitknappForPanel = (harAndreAksjonspunkterIPanel: boolean,
+  erOverstyrt: boolean,
+  erBgOverstyrt: boolean,
+  aksjonspunkter: Aksjonspunkt[]): boolean => !skalViseSubmitknappInneforBorderBox(harAndreAksjonspunkterIPanel, erOverstyrt, erBgOverstyrt, aksjonspunkter)
+    && skalViseSubmitKnappEllerBegrunnelse(aksjonspunkter, erOverstyrt);
+
+const skalViseAktiviteterTabell = (aksjonspunkter: Aksjonspunkt[],
+  kanOverstyre: boolean,
+  erOverstyrt: boolean): boolean => hasAksjonspunkt(AVKLAR_AKTIVITETER, aksjonspunkter) || kanOverstyre || erOverstyrt;
+
+const harBlittOverstyrt = (erOverstyrtKnappTrykket: boolean,
+  aksjonspunkter: Aksjonspunkt[],
+  readOnly: boolean): boolean => erOverstyrtKnappTrykket || hasAksjonspunkt(OVERSTYRING_AV_BEREGNINGSAKTIVITETER, aksjonspunkter) || readOnly;
+
+const erSubmittable = (submittable: boolean,
+  submitEnabled: boolean,
+  formProps: InjectedFormProps): boolean => submittable && submitEnabled && !formProps.error;
+
 type OwnProps = {
     readOnly: boolean;
     submittable: boolean;
@@ -210,15 +237,11 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
         erOverstyrtKnappTrykket,
       },
     } = this;
-
-    if (!hasAksjonspunkt(AVKLAR_AKTIVITETER, aksjonspunkter) && !kanOverstyre && !erOverstyrt) {
+    if (skalSkjuleKomponent(aksjonspunkter, kanOverstyre, erOverstyrt)) {
       return null;
     }
     const avklarAktiviteter = getAvklarAktiviteter(this.props);
-    const skalViseSubmitknappInneforBorderBox = (harAndreAksjonspunkterIPanel || erOverstyrt || erBgOverstyrt) && !hasOpenAvklarAksjonspunkter(aksjonspunkter);
     const skalViseOverstyringsknapp = kanOverstyre || erOverstyrt;
-    const harBlittOverstyrt = erOverstyrtKnappTrykket || hasAksjonspunkt(OVERSTYRING_AV_BEREGNINGSAKTIVITETER, aksjonspunkter) || readOnly;
-    const skalViseAktivitetTabell = hasAksjonspunkt(AVKLAR_AKTIVITETER, aksjonspunkter) || kanOverstyre || erOverstyrt;
 
     const overskriftOgKnapp = (
       <FlexContainer>
@@ -232,7 +255,7 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
           <FlexColumn>
             <OverstyringKnapp
               onClick={() => this.initializeAktiviteter()}
-              erOverstyrt={harBlittOverstyrt}
+              erOverstyrt={harBlittOverstyrt(erOverstyrtKnappTrykket, aksjonspunkter, readOnly)}
             />
           </FlexColumn>
           )}
@@ -240,7 +263,7 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
       </FlexContainer>
     );
 
-    if (!skalViseAktivitetTabell) {
+    if (!skalViseAktiviteterTabell(aksjonspunkter, kanOverstyre, erOverstyrt)) {
       return (
         <>
           <form onSubmit={formProps.handleSubmit}>
@@ -251,7 +274,6 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
         </>
       );
     }
-
     return (
       <>
         <form onSubmit={formProps.handleSubmit}>
@@ -297,7 +319,7 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
                 isReadOnly={readOnly}
                 hasBegrunnelse={hasBegrunnelse}
               />
-              {skalViseSubmitknappInneforBorderBox && (
+              {skalViseSubmitknappInneforBorderBox(harAndreAksjonspunkterIPanel, erOverstyrt, erBgOverstyrt, aksjonspunkter) && (
               <>
                 <VerticalSpacer twentyPx />
                 <FlexContainer>
@@ -306,7 +328,7 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
                       <FaktaSubmitButton
                         buttonText={intl.formatMessage({ id: erOverstyrt ? 'AvklarAktivitetPanel.OverstyrText' : 'AvklarAktivitetPanel.ButtonText' })}
                         formName={formProps.form}
-                        isSubmittable={submittable && submitEnabled && !formProps.error}
+                        isSubmittable={erSubmittable(submittable, submitEnabled, formProps)}
                         isReadOnly={readOnly}
                         hasOpenAksjonspunkter={!isAksjonspunktClosed}
                       />
@@ -330,13 +352,13 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
               )}
             </>
             )}
-            {!(skalViseSubmitknappInneforBorderBox) && skalViseSubmitKnappEllerBegrunnelse(aksjonspunkter, erOverstyrt) && (
+            {skalViseSubmitknappForPanel(harAndreAksjonspunkterIPanel, erOverstyrt, erBgOverstyrt, aksjonspunkter) && (
             <>
               <VerticalSpacer twentyPx />
               <FaktaSubmitButton
                 buttonText={erOverstyrt ? intl.formatMessage({ id: 'AvklarAktivitetPanel.OverstyrText' }) : undefined}
                 formName={formProps.form}
-                isSubmittable={submittable && submitEnabled && !formProps.error}
+                isSubmittable={erSubmittable(submittable, submitEnabled, formProps)}
                 isReadOnly={readOnly}
                 hasOpenAksjonspunkter={!isAksjonspunktClosed}
               />
