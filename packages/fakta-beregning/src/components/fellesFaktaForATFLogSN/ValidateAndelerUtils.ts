@@ -3,6 +3,12 @@ import { aktivitetstatusTilAndeltypeMap } from '@fpsak-frontend/kodeverk/src/akt
 import { BrukersAndelValues, FaktaBeregningError } from '../../typer/FaktaBeregningTypes';
 import AndelFieldValue from '../../typer/FieldValues';
 
+export type SortedAndelInfo = {
+  andelsinfo: string;
+  inntektskategori: string;
+  arbeidsforholdId?: string;
+}
+
 export const compareAndeler = (andel1: SortedAndelInfo, andel2: SortedAndelInfo): number => {
   if (andel1.andelsinfo === andel2.andelsinfo) {
     if (andel1.inntektskategori === andel2.inntektskategori) {
@@ -13,9 +19,9 @@ export const compareAndeler = (andel1: SortedAndelInfo, andel2: SortedAndelInfo)
   return andel1.andelsinfo > andel2.andelsinfo ? 1 : -1;
 };
 
-const mapAndelToSortedObject = (value, andelList) => {
+const mapAndelToSortedObject = (value, andelList): SortedAndelInfo => {
   const {
-    nyAndel, andel, inntektskategori, aktivitetStatus,
+    nyAndel, andel, inntektskategori, aktivitetStatus, arbeidsforholdId,
   } = value;
   if (nyAndel) {
     if (!Number.isNaN(Number(andel))) {
@@ -32,18 +38,13 @@ const mapAndelToSortedObject = (value, andelList) => {
   if (aktivitetstatusTilAndeltypeMap[aktivitetStatus]) {
     return { andelsinfo: aktivitetstatusTilAndeltypeMap[aktivitetStatus], inntektskategori };
   }
-  return { andelsinfo: andel, inntektskategori };
+  return { andelsinfo: andel, inntektskategori, arbeidsforholdId };
 };
 
 export const ulikeAndelerErrorMessage = (): FaktaBeregningError[] => ([{ id: 'BeregningInfoPanel.FordelBG.Validation.UlikeAndeler' }]);
 
 const erAndelerLike = (andel1: SortedAndelInfo, andel2: SortedAndelInfo): boolean => andel2.andelsinfo === andel1.andelsinfo
-  && andel2.inntektskategori === andel1.inntektskategori;
-
-export type SortedAndelInfo = {
-  andelsinfo: string;
-  inntektskategori: string;
-}
+  && andel2.inntektskategori === andel1.inntektskategori && andel1.arbeidsforholdId === andel2.arbeidsforholdId;
 
 export const validateUlikeAndelerWithGroupingFunction = (andelList: BrukersAndelValues[] | AndelFieldValue[], mapToSort: ((andel: BrukersAndelValues,
    andelList: BrukersAndelValues[] | AndelFieldValue[]) => SortedAndelInfo)): any => {
