@@ -271,8 +271,8 @@ InntektFieldArray.transformValues = (values: AndelFieldValue[]): InntektTransfor
 );
 
 const mapAndelToSortedObject = (value: AndelFieldValue): SortedAndelInfo => {
-  const { andel, inntektskategori } = value;
-  return { andelsinfo: andel, inntektskategori };
+  const { andel, inntektskategori, arbeidsforholdId } = value;
+  return { andelsinfo: andel, arbeidsforholdId, inntektskategori };
 };
 
 InntektFieldArray.validate = (values: AndelFieldValue[], erKunYtelse, skalFastsetteInntekt) => {
