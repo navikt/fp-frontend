@@ -50,7 +50,7 @@ const findAksjonspunktHelpTekst = (gjeldendeAksjonspunkt: Aksjonspunkt, erVarigE
 const lagAksjonspunktHelpText = (åpneAksjonspunkter: Aksjonspunkt[],
   avvikProsent: number,
   alleAndelerIForstePeriode: BeregningsgrunnlagAndel[]): ReactElement => {
-  const snAndel = alleAndelerIForstePeriode.find((andel) => andel.aktivitetStatus?.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
+  const snAndel = alleAndelerIForstePeriode.find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
   const erVarigEndring = !!(snAndel?.næringer?.some((naring) => naring.erVarigEndret === true));
   return (
     <div>

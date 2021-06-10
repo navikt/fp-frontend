@@ -42,7 +42,7 @@ export type PgiVerdier = Readonly <{
 }>
 
 export type BeregningsgrunnlagAndel = Readonly <{
-  aktivitetStatus?: Kodeverk;
+  aktivitetStatus: Kodeverk;
   arbeidsforholdType?: Kodeverk;
   arbeidsforhold?: BeregningsgrunnlagArbeidsforhold;
   avkortetPrAar?: number;

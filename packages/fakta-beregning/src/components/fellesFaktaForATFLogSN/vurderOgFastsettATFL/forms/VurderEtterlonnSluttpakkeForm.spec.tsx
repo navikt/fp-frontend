@@ -2,6 +2,7 @@ import React from 'react';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
+import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import VurderEtterlonnSluttpakkeForm from './VurderEtterlonnSluttpakkeForm';
 import messages from '../../../../../i18n/nb_NO.json';
 
@@ -39,7 +40,7 @@ describe('<VurderEtterlonnSluttpakkeForm>', () => {
                 },
               },
               beregnetPrAar: 120000,
-            },
+            } as BeregningsgrunnlagAndel,
           ],
         },
       ],
@@ -77,7 +78,7 @@ describe('<VurderEtterlonnSluttpakkeForm>', () => {
                 },
               },
               beregnetPrAar: null,
-            },
+            } as BeregningsgrunnlagAndel,
           ],
         },
       ],

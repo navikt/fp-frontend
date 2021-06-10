@@ -1,5 +1,6 @@
 import organisasjonstyper from '@fpsak-frontend/kodeverk/src/organisasjonstype';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
+import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import { lonnsendringField } from './LonnsendringForm';
 import transformValues from './ArbeidUtenInntektsmelding';
 
@@ -39,7 +40,7 @@ describe('<ArbeidUtenInntektsmelding>', () => {
       beregningsgrunnlagPeriode: [
         {
           beregningsgrunnlagPrStatusOgAndel: [
-            { andelsnr: 1, arbeidsforhold: { organisasjonstype: { kode: organisasjonstyper.KUNSTIG, kodeverk: 'test' } } },
+            { andelsnr: 1, arbeidsforhold: { organisasjonstype: { kode: organisasjonstyper.KUNSTIG, kodeverk: 'test' } } } as BeregningsgrunnlagAndel,
           ],
         },
       ],
@@ -62,7 +63,7 @@ describe('<ArbeidUtenInntektsmelding>', () => {
       beregningsgrunnlagPeriode: [
         {
           beregningsgrunnlagPrStatusOgAndel: [
-            { andelsnr: 1, arbeidsforhold: { organisasjonstype: { kode: organisasjonstyper.KUNSTIG, kodeverk: 'test' } } },
+            { andelsnr: 1, arbeidsforhold: { organisasjonstype: { kode: organisasjonstyper.KUNSTIG, kodeverk: 'test' } } } as BeregningsgrunnlagAndel,
           ],
         },
       ],
@@ -93,7 +94,7 @@ describe('<ArbeidUtenInntektsmelding>', () => {
       beregningsgrunnlagPeriode: [
         {
           beregningsgrunnlagPrStatusOgAndel: [
-            { andelsnr: 1, arbeidsforhold: {} },
+            { andelsnr: 1, arbeidsforhold: {} } as BeregningsgrunnlagAndel,
           ],
         },
       ],
@@ -119,7 +120,7 @@ describe('<ArbeidUtenInntektsmelding>', () => {
       beregningsgrunnlagPeriode: [
         {
           beregningsgrunnlagPrStatusOgAndel: [
-            { andelsnr: 1, arbeidsforhold: {} },
+            { andelsnr: 1, arbeidsforhold: {} } as BeregningsgrunnlagAndel,
           ],
         },
       ],
