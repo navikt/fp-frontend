@@ -80,11 +80,11 @@ const AksjonspunktTittel: FunctionComponent<OwnProps> = ({
   const førstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode ? beregningsgrunnlag.beregningsgrunnlagPeriode[0] : undefined;
   const andelerIFørstePeriode = førstePeriode && førstePeriode.beregningsgrunnlagPrStatusOgAndel ? førstePeriode.beregningsgrunnlagPrStatusOgAndel : [];
   const åpneAksjonspunkter = aksjonspunkter.filter((ap) => isAksjonspunktOpen(ap.status.kode));
-  const sammenligningGr = getSammenligningsgrunnlagsPrStatus(beregningsgrunnlag);
-  const harGrunnTilÅViseKomponent = definertOgIkkeTom(åpneAksjonspunkter) && definertOgIkkeTom(andelerIFørstePeriode) && definertOgIkkeTom(sammenligningGr);
+  const harGrunnTilÅViseKomponent = definertOgIkkeTom(åpneAksjonspunkter) && definertOgIkkeTom(andelerIFørstePeriode);
   if (!harGrunnTilÅViseKomponent) {
     return null;
   }
+  const sammenligningGr = getSammenligningsgrunnlagsPrStatus(beregningsgrunnlag);
   const avvikProsent = getAvviksprosent(sammenligningGr);
   return (
     <>
