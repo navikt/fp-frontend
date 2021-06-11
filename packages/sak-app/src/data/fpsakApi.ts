@@ -29,9 +29,7 @@ type SubmitMessageParams = {
 };
 
 export type AnnenPartBehandling = {
-  saksnr: {
-    verdi: string;
-  };
+  saksnummer: string;
   behandlingUuid: string;
 };
 

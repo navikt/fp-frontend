@@ -25,7 +25,7 @@ import useHentFagsakRettigheter from './useHentFagsakRettigheter';
 import useHentAlleBehandlinger from './useHentAlleBehandlinger';
 
 const finnLenkeTilAnnenPart = (annenPartBehandling: AnnenPartBehandling): string => pathToAnnenPart(
-  annenPartBehandling.saksnr.verdi, annenPartBehandling.behandlingUuid,
+  annenPartBehandling.saksnummer, annenPartBehandling.behandlingUuid,
 );
 
 const erTilbakekreving = (behandlingType?: Kodeverk): boolean => !!behandlingType
