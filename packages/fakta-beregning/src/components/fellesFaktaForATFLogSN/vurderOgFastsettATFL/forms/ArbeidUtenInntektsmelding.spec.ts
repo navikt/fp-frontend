@@ -1,5 +1,6 @@
 import organisasjonstyper from '@fpsak-frontend/kodeverk/src/organisasjonstype';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
+import { Beregningsgrunnlag, BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import { lonnsendringField } from './LonnsendringForm';
 import transformValues from './ArbeidUtenInntektsmelding';
 
@@ -12,7 +13,7 @@ describe('<ArbeidUtenInntektsmelding>', () => {
       andelerForFaktaOmBeregning: [],
       faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE, kodeverk: 'test' }],
     };
-    const transformed = transformValues({}, inntektVerdier, faktaOmBeregning, {}, []);
+    const transformed = transformValues({}, inntektVerdier, faktaOmBeregning, {} as Beregningsgrunnlag, []);
     expect(Object.keys(transformed)).toHaveLength(0);
   });
 
@@ -22,7 +23,7 @@ describe('<ArbeidUtenInntektsmelding>', () => {
       faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE, kodeverk: 'test' },
         { kode: faktaOmBeregningTilfelle.FASTSETT_MAANEDSLONN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING, kodeverk: 'test' }],
     };
-    const transformed = transformValues({}, null, faktaOmBeregning, {}, []);
+    const transformed = transformValues({}, null, faktaOmBeregning, {} as Beregningsgrunnlag, []);
     expect(Object.keys(transformed)).toHaveLength(0);
   });
 
@@ -39,13 +40,13 @@ describe('<ArbeidUtenInntektsmelding>', () => {
       beregningsgrunnlagPeriode: [
         {
           beregningsgrunnlagPrStatusOgAndel: [
-            { andelsnr: 1, arbeidsforhold: { organisasjonstype: { kode: organisasjonstyper.KUNSTIG, kodeverk: 'test' } } },
+            { andelsnr: 1, arbeidsforhold: { organisasjonstype: { kode: organisasjonstyper.KUNSTIG, kodeverk: 'test' } } } as BeregningsgrunnlagAndel,
           ],
         },
       ],
     };
     const fastsatteAndeler = [1];
-    const transformed = transformValues({}, inntektVerdier, faktaOmBeregning, bg, fastsatteAndeler);
+    const transformed = transformValues({}, inntektVerdier, faktaOmBeregning, bg as Beregningsgrunnlag, fastsatteAndeler);
     expect(Object.keys(transformed)).toHaveLength(0);
   });
 
@@ -62,13 +63,13 @@ describe('<ArbeidUtenInntektsmelding>', () => {
       beregningsgrunnlagPeriode: [
         {
           beregningsgrunnlagPrStatusOgAndel: [
-            { andelsnr: 1, arbeidsforhold: { organisasjonstype: { kode: organisasjonstyper.KUNSTIG, kodeverk: 'test' } } },
+            { andelsnr: 1, arbeidsforhold: { organisasjonstype: { kode: organisasjonstyper.KUNSTIG, kodeverk: 'test' } } } as BeregningsgrunnlagAndel,
           ],
         },
       ],
     };
     const fastsatteAndeler = [];
-    const transformed = transformValues({}, inntektVerdier, faktaOmBeregning, bg, fastsatteAndeler);
+    const transformed = transformValues({}, inntektVerdier, faktaOmBeregning, bg as Beregningsgrunnlag, fastsatteAndeler);
     expect(transformed.faktaOmBeregningTilfeller[0]).toBe(
       faktaOmBeregningTilfelle.FASTSETT_MAANEDSLONN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING,
     );
@@ -93,12 +94,12 @@ describe('<ArbeidUtenInntektsmelding>', () => {
       beregningsgrunnlagPeriode: [
         {
           beregningsgrunnlagPrStatusOgAndel: [
-            { andelsnr: 1, arbeidsforhold: {} },
+            { andelsnr: 1, arbeidsforhold: {} } as BeregningsgrunnlagAndel,
           ],
         },
       ],
     };
-    const transformedObject = transformValues(values, inntektVerdier, faktaOmBeregning, bg, []);
+    const transformedObject = transformValues(values, inntektVerdier, faktaOmBeregning, bg as Beregningsgrunnlag, []);
     expect(transformedObject.fastsattUtenInntektsmelding.andelListe.length).toBe(1);
     expect(transformedObject.fastsattUtenInntektsmelding.andelListe[0].andelsnr).toBe(1);
     expect(transformedObject.fastsattUtenInntektsmelding.andelListe[0].fastsattBeløp).toBe(10000);
@@ -119,12 +120,12 @@ describe('<ArbeidUtenInntektsmelding>', () => {
       beregningsgrunnlagPeriode: [
         {
           beregningsgrunnlagPrStatusOgAndel: [
-            { andelsnr: 1, arbeidsforhold: {} },
+            { andelsnr: 1, arbeidsforhold: {} } as BeregningsgrunnlagAndel,
           ],
         },
       ],
     };
-    const transformedObject = transformValues(values, inntektVerdier, faktaOmBeregning, bg, []);
+    const transformedObject = transformValues(values, inntektVerdier, faktaOmBeregning, bg as Beregningsgrunnlag, []);
     expect(Object.keys(transformedObject)).toHaveLength(0);
   });
 
@@ -158,7 +159,7 @@ describe('<ArbeidUtenInntektsmelding>', () => {
         },
       ],
     };
-    const transformedObject = transformValues(values, inntektVerdier, faktaOmBeregning, bg, []);
+    const transformedObject = transformValues(values, inntektVerdier, faktaOmBeregning, bg as Beregningsgrunnlag, []);
     expect(transformedObject.fastsattUtenInntektsmelding.andelListe.length).toBe(1);
     expect(transformedObject.fastsattUtenInntektsmelding.andelListe[0].andelsnr).toBe(1);
     expect(transformedObject.fastsattUtenInntektsmelding.andelListe[0].fastsattBeløp).toBe(10000);

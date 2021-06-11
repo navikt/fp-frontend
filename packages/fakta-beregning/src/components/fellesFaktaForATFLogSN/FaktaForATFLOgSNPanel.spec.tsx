@@ -4,7 +4,14 @@ import sinon from 'sinon';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import { AlleKodeverk, Beregningsgrunnlag, FaktaOmBeregning } from '@fpsak-frontend/types';
+import {
+  AlleKodeverk,
+  Beregningsgrunnlag,
+  BeregningsgrunnlagAndel,
+  BeregningsgrunnlagArbeidsforhold,
+  FaktaOmBeregning,
+  FaktaOmBeregningAndel,
+} from '@fpsak-frontend/types';
 import {
   FaktaForATFLOgSNPanelImpl, transformValues, transformValuesFaktaForATFLOgSN,
 } from './FaktaForATFLOgSNPanel';
@@ -44,7 +51,7 @@ const lagBeregningsgrunnlag = (andeler) => ({
       )),
     },
   ],
-});
+} as Beregningsgrunnlag);
 
 describe('<FaktaForATFLOgSNPanel>', () => {
   it('skal vise TidsbegrensetArbeidsforholdForm', () => {
@@ -54,7 +61,7 @@ describe('<FaktaForATFLOgSNPanel>', () => {
       aktivePaneler={aktivertePaneler}
       isAksjonspunktClosed={false}
       faktaOmBeregning={{} as FaktaOmBeregning}
-      beregningsgrunnlag={{}}
+      beregningsgrunnlag={{} as Beregningsgrunnlag}
       alleKodeverk={{} as AlleKodeverk}
       aksjonspunkter={aksjonspunkter}
       erOverstyrer={false}
@@ -71,7 +78,7 @@ describe('<FaktaForATFLOgSNPanel>', () => {
       aktivePaneler={aktivertePaneler}
       isAksjonspunktClosed={false}
       faktaOmBeregning={{} as FaktaOmBeregning}
-      beregningsgrunnlag={{}}
+      beregningsgrunnlag={{} as Beregningsgrunnlag}
       alleKodeverk={{} as AlleKodeverk}
       aksjonspunkter={aksjonspunkter}
       erOverstyrer={false}
@@ -88,7 +95,7 @@ describe('<FaktaForATFLOgSNPanel>', () => {
       aktivePaneler={aktivertePaneler}
       isAksjonspunktClosed={false}
       faktaOmBeregning={{} as FaktaOmBeregning}
-      beregningsgrunnlag={{}}
+      beregningsgrunnlag={{} as Beregningsgrunnlag}
       alleKodeverk={{} as AlleKodeverk}
       aksjonspunkter={aksjonspunkter}
       erOverstyrer={false}
@@ -100,8 +107,8 @@ describe('<FaktaForATFLOgSNPanel>', () => {
 
   it('skal kunne transform values for kun besteberegning', () => {
     const aktivePaneler = [faktaOmBeregningTilfelle.FASTSETT_BESTEBEREGNING_FODENDE_KVINNE];
-    const andel1 = { andelsnr: 1, aktivitetStatus: { kode: 'ATFL', kodeverk: 'test' } };
-    const andel2 = { andelsnr: 2, aktivitetStatus: { kode: 'SN', kodeverk: 'test' } };
+    const andel1 = { andelsnr: 1, aktivitetStatus: { kode: 'ATFL', kodeverk: 'test' } } as BeregningsgrunnlagAndel;
+    const andel2 = { andelsnr: 2, aktivitetStatus: { kode: 'SN', kodeverk: 'test' } } as BeregningsgrunnlagAndel;
     const faktaOmBeregning = {
       andelerForFaktaOmBeregning: [],
       faktaOmBeregningTilfeller: aktivePaneler.map((kode) => ({ kode, kodeverk: 'test' })),
@@ -109,6 +116,10 @@ describe('<FaktaForATFLOgSNPanel>', () => {
       vurderBesteberegning: { skalHaBesteberegning: true },
     };
     const beregningsgrunnlag = {
+      skjaeringstidspunktBeregning: null,
+      dekningsgrad: null,
+      grunnbeløp: null,
+      erOverstyrtInntekt: null,
       beregninsgrunnlagPeriode: [
         {
           beregningsgrunnlagPrStatusOgAndel: [andel1, andel2],
@@ -156,7 +167,7 @@ describe('<FaktaForATFLOgSNPanel>', () => {
         arbeidsgiverId: '123',
         arbeidsforholdId: 'abc',
         startdato: '2018-01-01',
-      },
+      } as BeregningsgrunnlagArbeidsforhold,
     };
 
     const forholdMedLonnsendringUtenIM = {
@@ -170,7 +181,7 @@ describe('<FaktaForATFLOgSNPanel>', () => {
         arbeidsgiverId: '123',
         arbeidsforholdId: 'abc',
         startdato: '2018-01-01',
-      },
+      } as BeregningsgrunnlagArbeidsforhold,
     };
 
     const frilansAndel = {
@@ -181,14 +192,14 @@ describe('<FaktaForATFLOgSNPanel>', () => {
       arbeidsforhold: {
         startdato: '2018-01-01',
         opphoersdato: '2018-06-01',
-      },
+      } as BeregningsgrunnlagArbeidsforhold,
       andelsnr: 1,
       arbeidsforholdType: {
         navn: 'Frilans',
         kodeverk: 'test',
       },
       aktivitetStatus: { kode: aktivitetStatus.FRILANSER, kodeverk: 'test' },
-    };
+    } as FaktaOmBeregningAndel;
 
     const faktaOmBeregning = {
       andelerForFaktaOmBeregning: [],

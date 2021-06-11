@@ -14,6 +14,7 @@ const dagpengerInntekt = 200000;
 const aapInntekt = 300000;
 const aapNavn = 'Beregningsgrunnlag.TilstottendeYtelse.AAP';
 const dagpengerNavn = 'Beregningsgrunnlag.TilstottendeYtelse.Dagpenger';
+
 const dpAndel = {
   aktivitetStatus: {
     kode: aktivitetStatus.DAGPENGER,
@@ -22,6 +23,7 @@ const dpAndel = {
   beregnetPrAar: dagpengerInntekt,
   elementNavn: dagpengerNavn,
 } as BeregningsgrunnlagAndel;
+
 const aapAndel = {
   aktivitetStatus: {
     kode: aktivitetStatus.ARBEIDSAVKLARINGSPENGER,
@@ -30,6 +32,7 @@ const aapAndel = {
   beregnetPrAar: aapInntekt,
   elementNavn: aapNavn,
 } as BeregningsgrunnlagAndel;
+
 const urelatertAndel = {
   aktivitetStatus: {
     kode: aktivitetStatus.FRILANSER,
@@ -37,10 +40,12 @@ const urelatertAndel = {
   },
   beregnetPrAar: aapInntekt,
 } as BeregningsgrunnlagAndel;
-const relevanteStatuser = (erSN, erKombo) => ({
+
+const relevanteStatuser = (erSN: boolean, erKombo: boolean): RelevanteStatuserProp => ({
   isSelvstendigNaeringsdrivende: erSN,
   isKombinasjonsstatus: erKombo,
-});
+} as RelevanteStatuserProp);
+
 const andeler = [dpAndel, aapAndel, urelatertAndel];
 describe('<TilstotendeYtelser>', () => {
   it('Skal teste at de korrekte ytelser for dagpenger / AAP vises og at urelaterte andeler ikke vises', () => {

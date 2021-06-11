@@ -15,9 +15,9 @@ const arbeidsforholdEksistererIListen = (arbeidsforhold: BeregningsgrunnlagArbei
 };
 
 const finnBgAndelMedSammeArbeidsforhold = (bgAndeler: BeregningsgrunnlagAndel[],
-  andel: FordelBeregningsgrunnlagAndel): BeregningsgrunnlagAndel => bgAndeler.find(({ arbeidsforhold }) => !!arbeidsforhold
-&& arbeidsforhold.arbeidsgiverIdent === andel.arbeidsforhold.arbeidsgiverIdent
-&& arbeidsforhold.arbeidsforholdId === andel.arbeidsforhold.arbeidsforholdId);
+  andel: FordelBeregningsgrunnlagAndel): BeregningsgrunnlagAndel => bgAndeler.find((bga) => !!bga.arbeidsforhold
+&& bga.arbeidsforhold.arbeidsgiverIdent === andel.arbeidsforhold.arbeidsgiverIdent
+&& bga.arbeidsforhold.arbeidsforholdId === andel.arbeidsforhold.arbeidsforholdId);
 
 const getUniqueListOfArbeidsforholdFromAndeler = (andeler: FordelBeregningsgrunnlagAndel[],
   bgAndeler: BeregningsgrunnlagAndel[]): BGFordelArbeidsforhold[] => {

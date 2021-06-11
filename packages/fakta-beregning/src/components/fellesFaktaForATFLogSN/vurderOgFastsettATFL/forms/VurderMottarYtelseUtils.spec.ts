@@ -1,4 +1,5 @@
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
+import { Beregningsgrunnlag, BeregningsgrunnlagArbeidsforhold } from '@fpsak-frontend/types';
 import {
   andelsnrMottarYtelseMap,
   finnFrilansFieldName,
@@ -12,21 +13,21 @@ const arbeidsforhold = {
   arbeidsforholdId: '321378huda7e2',
   startdato: '2017-01-01',
   opphoersdato: '2018-01-01',
-};
+} as BeregningsgrunnlagArbeidsforhold;
 
 const arbeidsforhold2 = {
   arbeidsgiverIdent: '843597943435',
   arbeidsforholdId: 'jjisefoosfe',
   startdato: '2017-01-01',
   opphoersdato: '2018-01-01',
-};
+} as BeregningsgrunnlagArbeidsforhold;
 
 const arbeidsforhold3 = {
   arbeidsgiverIdent: '843597943435',
   arbeidsforholdId: '5465465464',
   startdato: '2017-01-01',
   opphoersdato: '2018-01-01',
-};
+} as BeregningsgrunnlagArbeidsforhold;
 
 const andel = {
   aktivitetStatus: { kode: aktivitetStatus.ARBEIDSTAKER, kodeverk: 'test' },
@@ -71,7 +72,7 @@ const beregningsgrunnlag = {
       ],
     },
   ],
-};
+} as Beregningsgrunnlag;
 
 describe('<VurderMottarYtelseUtils>', () => {
   it('skal returnere false når man ikke har vurdert alle punktene i mottar ytelse for frilans', () => {

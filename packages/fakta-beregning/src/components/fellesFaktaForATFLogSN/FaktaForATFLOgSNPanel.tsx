@@ -43,7 +43,7 @@ const {
 
 export const getFaktaOmBeregning = createSelector(
   [(ownProps: OwnProps) => ownProps.beregningsgrunnlag],
-  (beregningsgrunnlag = {}) => (beregningsgrunnlag ? beregningsgrunnlag.faktaOmBeregning : undefined),
+  (beregningsgrunnlag) => (beregningsgrunnlag ? beregningsgrunnlag.faktaOmBeregning : undefined),
 );
 export const getKortvarigeArbeidsforhold = createSelector(
   [(ownProps: OwnProps) => getFaktaOmBeregning(ownProps)],

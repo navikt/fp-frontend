@@ -5,7 +5,7 @@ import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/int
 
 import { SelectField } from '@fpsak-frontend/form';
 import { TableRow } from '@fpsak-frontend/shared-components';
-import { AlleKodeverk } from '@fpsak-frontend/types';
+import { AlleKodeverk, Beregningsgrunnlag } from '@fpsak-frontend/types';
 import { Element } from 'nav-frontend-typografi';
 import beregningsgrunnlagAndeltyper from '@fpsak-frontend/kodeverk/src/beregningsgrunnlagAndeltyper';
 import { skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding } from '../ValidateAndelerUtils';
@@ -86,7 +86,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       arbeidsgiverOpplysningerPerId={agOplysninger}
       alleKodeverk={{} as AlleKodeverk}
       behandlingType={null}
-      beregningsgrunnlag={{}}
+      beregningsgrunnlag={{} as Beregningsgrunnlag}
     />, messages);
 
     const selectFields = wrapper.find(SelectField);
@@ -115,7 +115,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       arbeidsgiverOpplysningerPerId={agOplysninger}
       alleKodeverk={{} as AlleKodeverk}
       behandlingType={null}
-      beregningsgrunnlag={{}}
+      beregningsgrunnlag={{} as Beregningsgrunnlag}
     />, messages);
 
     const selectFields = wrapper.find(SelectField);
@@ -165,7 +165,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       arbeidsgiverOpplysningerPerId={agOplysninger}
       alleKodeverk={{} as AlleKodeverk}
       behandlingType={null}
-      beregningsgrunnlag={{}}
+      beregningsgrunnlag={{} as Beregningsgrunnlag}
     />, messages);
 
     const rows = wrapper.find(TableRow);
@@ -212,7 +212,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       arbeidsgiverOpplysningerPerId={agOplysninger}
       alleKodeverk={{} as AlleKodeverk}
       behandlingType={null}
-      beregningsgrunnlag={{}}
+      beregningsgrunnlag={{} as Beregningsgrunnlag}
     />, messages);
 
     const rows = wrapper.find(TableRow);
@@ -273,7 +273,7 @@ describe('<RenderFordelBGFieldArray>', () => {
       arbeidsgiverOpplysningerPerId={agOplysninger}
       alleKodeverk={{} as AlleKodeverk}
       behandlingType={null}
-      beregningsgrunnlag={{}}
+      beregningsgrunnlag={{} as Beregningsgrunnlag}
     />, messages);
 
     const rows = wrapper.find(TableRow);

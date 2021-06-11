@@ -2,7 +2,11 @@ import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import organisasjonstyper from '@fpsak-frontend/kodeverk/src/organisasjonstype';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { AlleKodeverk } from '@fpsak-frontend/types';
+import {
+  AlleKodeverk,
+  Beregningsgrunnlag,
+  BeregningsgrunnlagArbeidsforhold,
+} from '@fpsak-frontend/types';
 import { lonnsendringField } from './vurderOgFastsettATFL/forms/LonnsendringForm';
 import { erNyoppstartetFLField } from './vurderOgFastsettATFL/forms/NyoppstartetFLForm';
 import {
@@ -33,7 +37,7 @@ const arbeidstakerAndel1 = {
   arbeidsforhold: {
     ...arbeidsgiver,
     arbeidsforholdId: '6765756g5',
-  },
+  } as BeregningsgrunnlagArbeidsforhold,
   andelsnr: 1,
   ...arbeidstakerIkkeFastsatt,
 };
@@ -167,7 +171,7 @@ describe('<BgFaktaUtils>', () => {
       belopFraMeldekortPrMnd: null,
       fastsattBelop: null,
       belopReadOnly: 20000,
-      arbeidsforhold: { belopFraInntektsmeldingPrMnd: 20000 },
+      arbeidsforhold: { belopFraInntektsmeldingPrMnd: 20000 } as BeregningsgrunnlagArbeidsforhold,
     };
     const atField = mapAndelToField(ATAndel, {}, alleKodeverk);
     expect(atField.aktivitetStatus).toBe('AT');
@@ -187,7 +191,7 @@ describe('<BgFaktaUtils>', () => {
         arbeidsgiverIdent: '3284788923',
         arbeidsforholdId: '321378huda7e2',
         eksternArbeidsforholdId: 'sdfgsdfgda7e2',
-      },
+      } as BeregningsgrunnlagArbeidsforhold,
       aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER, kodeverk: 'test' },
       andelsnr: 3,
       lagtTilAvSaksbehandler: false,
@@ -253,7 +257,7 @@ describe('<BgFaktaUtils>', () => {
     arbeidsforhold: {
       ...kunstigArbeidsgiver,
       arbeidsforholdId: null,
-    },
+    } as BeregningsgrunnlagArbeidsforhold,
     andelsnr: andelsnrKunstigArbeid,
     ...arbeidstakerIkkeFastsatt,
   };
@@ -262,7 +266,7 @@ describe('<BgFaktaUtils>', () => {
     arbeidsforhold: {
       ...arbeidsgiver,
       arbeidsforholdId: '321378huda7e2',
-    },
+    } as BeregningsgrunnlagArbeidsforhold,
     andelsnr: 3,
     ...arbeidstakerIkkeFastsatt,
   };
@@ -278,7 +282,7 @@ describe('<BgFaktaUtils>', () => {
     arbeidsforhold: {
       ...arbeidsgiver,
       arbeidsforholdId: '546546g54',
-    },
+    } as BeregningsgrunnlagArbeidsforhold,
     andelsnr: 4,
     inntektPrMnd: null,
     ...arbeidstakerIkkeFastsatt,
@@ -295,7 +299,7 @@ describe('<BgFaktaUtils>', () => {
       beregningsgrunnlagPrStatusOgAndel: [arbeidstakerAndel1, arbeidstakerAndel3, frilansAndel, arbeidstakerAndel4, kunstigArbeidstakerAndel],
     },
     ],
-  };
+  } as Beregningsgrunnlag;
 
   const faktaOmBeregning = {
     faktaOmBeregningTilfeller: [],

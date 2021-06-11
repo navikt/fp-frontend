@@ -8,11 +8,10 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import { AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import {
   AlleKodeverk,
-  Beregningsgrunnlag as BeregningsgrunnlagProp,
+  Beregningsgrunnlag as BeregningsgrunnlagProp, BeregningsgrunnlagPeriodeProp,
   SammenligningsgrunlagProp,
 } from '@fpsak-frontend/types';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
@@ -123,7 +122,7 @@ const relevanteStatuser = {
   isMilitaer: false,
 };
 
-const lagPeriode = () => ({
+const lagPeriode = (): BeregningsgrunnlagPeriodeProp => ({
   beregningsgrunnlagPeriodeFom: '2019-09-16',
   beregningsgrunnlagPeriodeTom: undefined,
   beregnetPrAar: 360000,
@@ -137,14 +136,15 @@ const lagPeriode = () => ({
       kodeverk: 'AKTIVITET_STATUS',
     },
   }],
-  andelerLagtTilManueltIForrige: [],
 });
-const lagBeregningsgrunnlag = (avvikPromille, årsinntektVisningstall,
-  sammenligningSum, dekningsgrad) => ({
+const lagBeregningsgrunnlag = (avvikPromille: number, årsinntektVisningstall: number,
+  sammenligningSum: number, dekningsgrad: number, sammenligningsgrunnlagInput?: SammenligningsgrunlagProp): BeregningsgrunnlagProp => ({
   beregningsgrunnlagPeriode: [lagPeriode()],
   skjaeringstidspunktBeregning: '2019-10-31',
-  sammenligningsgrunnlagPrStatus: null,
-  sammenligningsgrunnlag: {
+  grunnbeløp: null,
+  erOverstyrtInntekt: false,
+  sammenligningsgrunnlagPrStatus: sammenligningsgrunnlagInput ? [sammenligningsgrunnlagInput] : null,
+  sammenligningsgrunnlag: sammenligningsgrunnlagInput || {
     sammenligningsgrunnlagFom: '2018-09-01',
     sammenligningsgrunnlagTom: '2019-10-31',
     avvikProsent: 27.5,
@@ -162,7 +162,7 @@ const lagBeregningsgrunnlag = (avvikPromille, årsinntektVisningstall,
     kode: 'UDEFINERT',
     kodeverk: 'test',
   }],
-});
+} as BeregningsgrunnlagProp);
 const mockVilkar = [{
   vilkarType: {
     kode: 'FP_VK_41',
@@ -172,7 +172,7 @@ const mockVilkar = [{
     kode: vilkarUtfallType.OPPFYLT,
   },
 }];
-const sammenligningsgrunnlag = (kode) => ({
+const sammenligningsgrunnlag = (kode: string): SammenligningsgrunlagProp => ({
   sammenligningsgrunnlagFom: '2018-09-01',
   sammenligningsgrunnlagTom: '2019-10-31',
   rapportertPrAar: 330000,
@@ -188,9 +188,8 @@ const sammenligningsgrunnlag = (kode) => ({
 const getBGVilkar = (vilkar) => (vilkar ? vilkar.find((v) => v.vilkarType && v.vilkarType.kode === vilkarType.BEREGNINGSGRUNNLAGVILKARET) : undefined);
 describe('<BeregningForm>', () => {
   it('skal teste at AvviksopplysningerPanel får korrekte props fra BeregningFP', () => {
-    const beregningsgrunnlag = lagBeregningsgrunnlag(0, 100000, 100000, 100);
-    const sammenligningsgrunnlagPrStatus = sammenligningsgrunnlag('SAMMENLIGNING_ATFL_SN');
-    beregningsgrunnlag.sammenligningsgrunnlagPrStatus = [sammenligningsgrunnlagPrStatus as SammenligningsgrunlagProp];
+    const sg = sammenligningsgrunnlag('SAMMENLIGNING_ATFL_SN');
+    const beregningsgrunnlag = lagBeregningsgrunnlag(0, 100000, 100000, 100, sg);
     const wrapper = shallow(<BeregningFormImpl
       readOnly={false}
       beregningsgrunnlag={beregningsgrunnlag}
@@ -206,26 +205,10 @@ describe('<BeregningForm>', () => {
     const avvikPanel = wrapper.find(AvviksopplysningerPanel);
     expect(avvikPanel.props().harAksjonspunkter).toBe(true);
     expect(avvikPanel.props().gjelderBesteberegning).toBe(false);
-    expect(avvikPanel.props().sammenligningsgrunnlagPrStatus[0]).toBe(sammenligningsgrunnlagPrStatus);
+    expect(avvikPanel.props().sammenligningsgrunnlagPrStatus[0]).toBe(sg);
     expect(avvikPanel.props().relevanteStatuser).toBe(relevanteStatuser);
     const expectedPerioder = lagPeriode();
     expect(avvikPanel.props().allePerioder[0]).toEqual(expectedPerioder);
-  });
-  it('skal teste at AksjonspunktHjelp rendrer fra BeregningFP', () => {
-    const wrapper = shallow(<BeregningFormImpl
-      readOnly={false}
-      gjeldendeAksjonspunkter={apEttLukketOgEttApent}
-      beregningsgrunnlag={lagBeregningsgrunnlag(0, 120000, 100000, 100)}
-      alleKodeverk={{} as AlleKodeverk}
-      relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
-      submitCallback={sinon.spy}
-      readOnlySubmitButton
-      vilkaarBG={getBGVilkar(mockVilkar)}
-      arbeidsgiverOpplysningerPerId={{}}
-      {...reduxFormPropsMock}
-    />);
-    const aksjonspunktHelpTextHTML = wrapper.find(AksjonspunktHelpTextHTML);
-    expect(aksjonspunktHelpTextHTML.length).toBe(1);
   });
   it('skal teste at SkjeringspunktOgStatusPanel får korrekte props fra BeregningFP', () => {
     const wrapper = shallow(<BeregningFormImpl
@@ -283,7 +266,6 @@ describe('<BeregningForm>', () => {
     const expectedPerioder = lagPeriode();
     expect(beregningsgrunnlag.props().allePerioder[0]).toEqual(expectedPerioder);
   });
-
   it('skal teste at Beregningsgrunnlag ikke blir vist', () => {
     relevanteStatuser.skalViseBeregningsgrunnlag = false;
     const wrapper = shallow(<BeregningFormImpl
@@ -301,7 +283,6 @@ describe('<BeregningForm>', () => {
     const beregningsgrunnlag = wrapper.find(Beregningsgrunnlag);
     expect(beregningsgrunnlag).toHaveLength(0);
   });
-
   it('skal teste at BeregningForm rendrer riktige komponenter', () => {
     relevanteStatuser.skalViseBeregningsgrunnlag = false;
     const bg = lagBeregningsgrunnlag(0, 100000, 100000, 100);
@@ -324,7 +305,6 @@ describe('<BeregningForm>', () => {
     const beregningsResultatPanel = wrapper.find(BeregningsresultatTable);
     expect(beregningsResultatPanel).toHaveLength(1);
   });
-
   it('skal teste at transformValues blir transformert riktig med aksjonspunkt 5087 og 5039, samt varigEndring', () => {
     const values = {
       fellesVurdering: 'bbb',
@@ -339,7 +319,6 @@ describe('<BeregningForm>', () => {
     expect(result[0].kode).toBe('5087');
     expect(result[1].kode).toBe('5039');
   });
-
   it('skal teste at transformValues blir transformert riktig med aksjonspunkt 5087 og 5039, uten varigEndring', () => {
     const values = {
       fellesVurdering: 'bbb',
@@ -354,7 +333,6 @@ describe('<BeregningForm>', () => {
     expect(result[0].kode).toBe('5087');
     expect(result[1].kode).toBe('5039');
   });
-
   it('skal teste at transformValues blir transformert riktig med aksjonspunkt 5087 og 5049', () => {
     const values = {
       fellesVurdering: 'bbb',
