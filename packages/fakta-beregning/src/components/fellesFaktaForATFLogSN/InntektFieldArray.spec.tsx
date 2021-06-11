@@ -138,7 +138,7 @@ describe('<InntektFieldArray>', () => {
       {},
     ],
     faktaOmBeregning,
-  };
+  } as Beregningsgrunnlag;
   const state = lagStateMedAksjonspunkterOgBeregningsgrunnlag(aksjonspunkter, bg, formNameVurderFaktaBeregning, initial, initial);
   const props = mapStateToProps(state, { ...ownProps, beregningsgrunnlag: bg, fields: new MockFieldsWithContent('fieldArrayName', [andelField]) });
 

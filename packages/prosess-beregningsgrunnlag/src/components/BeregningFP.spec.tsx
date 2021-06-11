@@ -5,45 +5,49 @@ import { shallow } from 'enzyme/build';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import {
-  Beregningsgrunnlag, Vilkar, Aksjonspunkt, AlleKodeverk,
+  Aksjonspunkt, AlleKodeverk, Beregningsgrunnlag, BeregningsgrunnlagAndel, Vilkar,
 } from '@fpsak-frontend/types';
 import BeregningFP from './BeregningFP';
 import BeregningForm from './beregningForm/BeregningForm';
 import GraderingUtenBGReadOnly from './gradering/GraderingUtenBGReadOnly';
 
-const lagBeregningsgrunnlag = (ferdigstilt, beregnetPrAar, sammenligningSum, avvikPromille, gradering) => {
-  const beregningsgrunnlag = {
-    halvG: 30000,
-    ledetekstBrutto: 'Brutto tekst',
-    ledetekstAvkortet: 'Avkortet tekst',
-    ledetekstRedusert: 'Redusert tekst',
-    skjaeringstidspunktBeregning: '12.12.2017',
-    årsinntektVisningstall: beregnetPrAar,
-    andelerMedGraderingUtenBG: gradering,
-    sammenligningsgrunnlag: {
-      sammenligningsgrunnlagType: {
-        kode: 'AT',
-        kodeverk: 'test',
-      },
-      differanseBeregnet: null,
-      avvikProsent: avvikPromille ? avvikPromille * 100 : null,
-      rapportertPrAar: sammenligningSum,
-      avvikPromille,
+const lagBeregningsgrunnlag = (ferdigstilt: boolean,
+  beregnetPrAar: number,
+  sammenligningSum: number,
+  avvikPromille: number,
+  gradering: BeregningsgrunnlagAndel[]) => ({
+  halvG: 30000,
+  dekningsgrad: null,
+  grunnbeløp: null,
+  erOverstyrtInntekt: false,
+  ledetekstBrutto: 'Brutto tekst',
+  ledetekstAvkortet: 'Avkortet tekst',
+  ledetekstRedusert: 'Redusert tekst',
+  skjaeringstidspunktBeregning: '12.12.2017',
+  årsinntektVisningstall: beregnetPrAar,
+  andelerMedGraderingUtenBG: gradering,
+  sammenligningsgrunnlag: {
+    sammenligningsgrunnlagType: {
+      kode: 'AT',
+      kodeverk: 'test',
     },
-    aktivitetStatus: [
-      {
-        kode: aktivitetStatus.KOMBINERT_AT_SN,
-        kodeverk: 'test',
-      },
-    ],
-    beregningsgrunnlagPeriode: [
-      {
-        dagsats: ferdigstilt ? 1500 : undefined,
-      },
-    ],
-  } as Beregningsgrunnlag;
-  return beregningsgrunnlag;
-};
+    differanseBeregnet: null,
+    avvikProsent: avvikPromille ? avvikPromille * 100 : null,
+    rapportertPrAar: sammenligningSum,
+    avvikPromille,
+  },
+  aktivitetStatus: [
+    {
+      kode: aktivitetStatus.KOMBINERT_AT_SN,
+      kodeverk: 'test',
+    },
+  ],
+  beregningsgrunnlagPeriode: [
+    {
+      dagsats: ferdigstilt ? 1500 : undefined,
+    },
+  ],
+} as Beregningsgrunnlag);
 
 const vilkar = [{
   vilkarType: {
@@ -134,7 +138,9 @@ describe('<BeregningFP>', () => {
     const wrapper = shallow(<BeregningFP
       readOnly={false}
       submitCallback={sinon.spy}
-      beregningsgrunnlag={lagBeregningsgrunnlag(true, 250000, 250000, undefined, [{ test: 'test' }]) as Beregningsgrunnlag}
+      beregningsgrunnlag={lagBeregningsgrunnlag(true, 250000,
+        250000, undefined,
+        [{ aktivitetStatus: { kode: 'test', kodeverk: 'test' } } as BeregningsgrunnlagAndel]) as Beregningsgrunnlag}
       vilkar={vilkar as Vilkar[]}
       aksjonspunkter={graderingAP}
       alleKodeverk={{} as AlleKodeverk}

@@ -1,3 +1,5 @@
+import { Beregningsgrunnlag, BeregningsgrunnlagAndel, FordelBeregningsgrunnlagAndel } from '@fpsak-frontend/types';
+
 export const beregningsgrunnlag = {
   skjaeringstidspunktBeregning: '2019-03-05',
   skjæringstidspunkt: '2019-03-05',
@@ -147,9 +149,6 @@ export const beregningsgrunnlag = {
       erTilkommetAndel: false,
       skalFastsetteGrunnlag: false,
     }, {
-      dtoType: 'SN',
-      beregningsgrunnlagTom: '2017-12-31',
-      beregningsgrunnlagFom: '2015-01-01',
       aktivitetStatus: {
         kodeverk: 'AKTIVITET_STATUS',
         kode: 'SN',
@@ -199,7 +198,7 @@ export const beregningsgrunnlag = {
         erNyIArbeidslivet: false,
         oppgittInntekt: 24425,
       }],
-    }],
+    } as BeregningsgrunnlagAndel],
   }, {
     beregningsgrunnlagPeriodeFom: '2019-12-10',
     beregningsgrunnlagPeriodeTom: '9999-12-31',
@@ -246,9 +245,6 @@ export const beregningsgrunnlag = {
       erTilkommetAndel: false,
       skalFastsetteGrunnlag: false,
     }, {
-      dtoType: 'SN',
-      beregningsgrunnlagTom: '2017-12-31',
-      beregningsgrunnlagFom: '2015-01-01',
       aktivitetStatus: {
         kodeverk: 'AKTIVITET_STATUS',
         kode: 'SN',
@@ -607,7 +603,7 @@ export const beregningsgrunnlag = {
             kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
             kode: 'NÆRING',
           },
-        }],
+        } as FordelBeregningsgrunnlagAndel],
         skalRedigereInntekt: true,
         skalPreutfyllesMedBeregningsgrunnlag: true,
         skalKunneEndreRefusjon: false,
@@ -629,7 +625,8 @@ export const beregningsgrunnlag = {
   },
   årsinntektVisningstall: 403557,
   dekningsgrad: 100,
-};
+  erOverstyrtInntekt: false,
+} as Beregningsgrunnlag;
 
 export const aksjonspunkt = [
   {

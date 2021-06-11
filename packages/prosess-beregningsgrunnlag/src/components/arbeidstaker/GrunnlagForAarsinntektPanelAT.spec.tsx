@@ -10,7 +10,11 @@ import createVisningsnavnForAktivitet from '../../util/createVisningsnavnForAkti
 import messages from '../../../i18n/nb_NO.json';
 import { GrunnlagForAarsinntektPanelATImpl as UnwrappedForm } from './GrunnlagForAarsinntektPanelAT';
 
-const mockAndel = (arbeidsgiverIdent, overstyrtPrAar, beregnetPrAar, erTilkommetAndel) => ({
+const mockAndel = (arbeidsgiverIdent: string,
+  overstyrtPrAar: number,
+  beregnetPrAar: number,
+  erTilkommetAndel: boolean,
+  opphørsdato?: string): BeregningsgrunnlagAndel => ({
   aktivitetStatus: {
     kode: aktivitetStatus.ARBEIDSTAKER,
     kodeverk: 'test',
@@ -19,14 +23,12 @@ const mockAndel = (arbeidsgiverIdent, overstyrtPrAar, beregnetPrAar, erTilkommet
     arbeidsgiverIdent,
     eksternArbeidsforholdId: '345678',
     startdato: '2018-10-09',
-    opphoersdato: null,
+    opphoersdato: opphørsdato,
   },
   beregnetPrAar,
   overstyrtPrAar,
   erTilkommetAndel,
-});
-
-const getKodeverknavn = () => undefined;
+} as BeregningsgrunnlagAndel);
 
 const arbeidsgiverOpplysningerPerId = {
   123: {
@@ -53,7 +55,7 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
     const wrapper = shallowWithIntl(<UnwrappedForm
       alleAndelerIFørstePeriode={andeler}
       allePerioder={perioder}
-      getKodeverknavn={getKodeverknavn}
+      getKodeverknavn={() => undefined}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       alleKodeverk={{} as AlleKodeverk}
     />, messages);
@@ -64,12 +66,11 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
   });
 
   it('Skal teste at korrekte verdier settes i tabellen med EN arbeidsandel med opphørsdato', () => {
-    const andeler = [mockAndel('123', 100, 200001, false)];
-    andeler[0].arbeidsforhold.opphoersdato = '2019-11-11';
+    const andeler = [mockAndel('123', 100, 200001, false, '2019-11-11')];
     const wrapper = shallowWithIntl(<UnwrappedForm
       allePerioder={perioder}
       alleAndelerIFørstePeriode={andeler}
-      getKodeverknavn={getKodeverknavn}
+      getKodeverknavn={() => undefined}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       alleKodeverk={{} as AlleKodeverk}
     />, messages);
@@ -103,7 +104,7 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
     const wrapper = shallowWithIntl(<UnwrappedForm
       allePerioder={perioder}
       alleAndelerIFørstePeriode={andeler}
-      getKodeverknavn={getKodeverknavn}
+      getKodeverknavn={() => undefined}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       alleKodeverk={{} as AlleKodeverk}
     />, messages);

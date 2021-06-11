@@ -30,7 +30,6 @@ type OwnProps = {
 const TilstotendeYtelser: FunctionComponent<OwnProps> = ({ alleAndeler, relevanteStatuser, gjelderBesteberegning }) => {
   const relevanteAndeler = alleAndeler.filter((andel) => isStatusDagpengerOrAAP(andel.aktivitetStatus.kode));
   const harFlereYtelser = relevanteAndeler.length > 1;
-
   return (
     <>
       {relevanteStatuser.isKombinasjonsstatus
@@ -70,7 +69,9 @@ const TilstotendeYtelser: FunctionComponent<OwnProps> = ({ alleAndeler, relevant
                 </Element>
               </Column>
               <Column xs="3" />
-              <Column xs="2" className={beregningStyles.colMaanedText}><Normaltekst>{formatCurrencyNoKr(andel.beregnetPrAar / 12)}</Normaltekst></Column>
+              <Column xs="2" className={beregningStyles.colMaanedText}>
+                <Normaltekst>{formatCurrencyNoKr(andel.beregnetPrAar ? andel.beregnetPrAar / 12 : 0)}</Normaltekst>
+              </Column>
               <Column xs="2" className={beregningStyles.colAarText}>
                 <Normaltekst className={!harFlereYtelser ? beregningStyles.semiBoldText : ''}>{formatCurrencyNoKr(andel.beregnetPrAar)}</Normaltekst>
               </Column>

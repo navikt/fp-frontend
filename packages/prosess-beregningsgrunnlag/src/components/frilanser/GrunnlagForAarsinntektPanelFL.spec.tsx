@@ -5,10 +5,11 @@ import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 
+import { BeregningsgrunnlagAndel, BeregningsgrunnlagArbeidsforhold } from '@fpsak-frontend/types';
 import GrunnlagForAarsinntektPanelFL from './GrunnlagForAarsinntektPanelFL';
 import messages from '../../../i18n/nb_NO.json';
 
-const andel = {
+const lagAndel = (startdato?: string): BeregningsgrunnlagAndel => ({
   aktivitetStatus: {
     kode: aktivitetStatus.FRILANSER,
     kodeverk: 'test',
@@ -18,12 +19,13 @@ const andel = {
   overstyrtPrAar: 100,
   beregningsgrunnlagFom: '2019-06-01',
   arbeidsforhold: {
-    startdato: null,
-  },
-};
+    startdato,
+  } as BeregningsgrunnlagArbeidsforhold,
+} as BeregningsgrunnlagAndel);
 
 describe('<GrunnlagForAarsinntektPanelFL>', () => {
   it('Skal teste tabellen får korrekt antall rader UTEN arbeidsforhold startdato', () => {
+    const andel = lagAndel();
     const wrapper = shallowWithIntl(<GrunnlagForAarsinntektPanelFL
       alleAndeler={[andel]}
     />, messages);
@@ -39,7 +41,7 @@ describe('<GrunnlagForAarsinntektPanelFL>', () => {
     expect(aarAndelFL.childAt(0).text()).toBe(formatCurrencyNoKr(andel.beregnetPrAar));
   });
   it('Skal teste tabellen får korrekt antall rader ved arbeidsforhold startdato', () => {
-    andel.arbeidsforhold.startdato = '2011-12-12';
+    const andel = lagAndel('2011-12-12');
     const wrapper = shallowWithIntl(<GrunnlagForAarsinntektPanelFL
       alleAndeler={[andel]}
     />, messages);

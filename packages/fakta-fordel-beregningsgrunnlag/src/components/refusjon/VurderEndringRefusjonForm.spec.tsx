@@ -1,4 +1,4 @@
-import { RefusjonTilVurderingAndel } from '@fpsak-frontend/types';
+import { Beregningsgrunnlag, RefusjonTilVurderingAndel } from '@fpsak-frontend/types';
 import { transformValues } from './VurderEndringRefusjonForm';
 import { lagNøkkelDelvisRefusjon, lagNøkkelRefusjonsstart } from './VurderEndringRefusjonRad';
 
@@ -24,7 +24,7 @@ const lagBG = (andeler) => ({
   refusjonTilVurdering: {
     andeler,
   },
-});
+} as Beregningsgrunnlag);
 
 describe('<VurderEndringRefusjonForm>', () => {
   it('Skal utføre transformeValues korrekt med et ref.krav hos en AG', () => {

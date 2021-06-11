@@ -49,12 +49,16 @@ const lagBeregningsgrunnlagAvklarAktiviteter = (
     },
     andelerForFaktaOmBeregning: [],
   },
-});
+} as Beregningsgrunnlag);
 
 const lagBeregningsgrunnlag = (
   andeler: FaktaOmBeregningAndel[],
   faktaOmBeregning: FaktaOmBeregning,
-) => ({
+): Beregningsgrunnlag => ({
+  skjaeringstidspunktBeregning: null,
+  dekningsgrad: null,
+  grunnbeløp: null,
+  erOverstyrtInntekt: null,
   beregningsgrunnlagPeriode: [
     {
       beregningsgrunnlagPrStatusOgAndel: andeler.map((andel) => (
@@ -67,7 +71,7 @@ const lagBeregningsgrunnlag = (
     },
   ],
   faktaOmBeregning,
-});
+} as Beregningsgrunnlag);
 
 const mapTilKodeliste = (arrayOfCodes: string[]): Kodeverk[] => arrayOfCodes.map((kode) => ({ kode, kodeverk: '' }));
 

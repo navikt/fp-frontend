@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import inntektskategorier from '@fpsak-frontend/kodeverk/src/inntektskategorier';
+import { Beregningsgrunnlag } from '@fpsak-frontend/types';
 import NyoppstartetFLForm, { erNyoppstartetFLField } from './NyoppstartetFLForm';
 import { InntektTransformed } from '../../../../typer/FieldValues';
 
@@ -80,7 +81,7 @@ describe('<NyoppstartetFLForm>', () => {
         },
       ],
     };
-    const initialValues = NyoppstartetFLForm.buildInitialValues(gyldigBG);
+    const initialValues = NyoppstartetFLForm.buildInitialValues(gyldigBG as Beregningsgrunnlag);
     expect(initialValues[erNyoppstartetFLField]).toBe(true);
   });
 });

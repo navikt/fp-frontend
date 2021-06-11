@@ -1,5 +1,6 @@
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
+import { BeregningsgrunnlagArbeidsforhold } from '@fpsak-frontend/types';
 import {
   mapToBelop,
   setArbeidsforholdInitialValues,
@@ -77,7 +78,7 @@ describe('<BgFordelingUtils>', () => {
         arbeidsgiverIdent: '3284788923',
         arbeidsforholdId: '321378huda7e2',
         eksternArbeidsforholdId: '345678',
-      },
+      } as BeregningsgrunnlagArbeidsforhold,
       aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER, kodeverk: 'test' },
       andelsnr: 3,
       kilde: { kode: 'PROSESS_START', kodeverk: 'test' },
@@ -128,7 +129,7 @@ describe('<BgFordelingUtils>', () => {
     arbeidsforhold: {
       ...arbeidsgiver,
       arbeidsforholdId: '321378huda7e2',
-    },
+    } as BeregningsgrunnlagArbeidsforhold,
     andelsnr: 3,
     ...arbeidstakerIkkeFastsatt,
   };

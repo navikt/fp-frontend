@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import inntektskategorier from '@fpsak-frontend/kodeverk/src/inntektskategorier';
+import { FaktaOmBeregning, BeregningsgrunnlagArbeidsforhold, Beregningsgrunnlag } from '@fpsak-frontend/types';
 import { ATFLSammeOrgTekst, transformValuesForATFLISammeOrg } from './ATFLSammeOrg';
 
 describe('<ATFLSammeOrg>', () => {
@@ -15,7 +16,7 @@ describe('<ATFLSammeOrg>', () => {
           faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE, kodeverk: 'test' }],
           andelerForFaktaOmBeregning: [],
         },
-      }}
+      } as Beregningsgrunnlag}
       manglerInntektsmelding
     />);
     expect(wrapper.find(Normaltekst).length).toBe(0);
@@ -31,7 +32,7 @@ describe('<ATFLSammeOrg>', () => {
       },
     };
     const wrapper = shallow(<ATFLSammeOrgTekst
-      beregningsgrunnlag={beregningsgrunnlag}
+      beregningsgrunnlag={beregningsgrunnlag as Beregningsgrunnlag}
       manglerInntektsmelding
     />);
     const msg = wrapper.find(FormattedMessage);
@@ -49,7 +50,7 @@ describe('<ATFLSammeOrg>', () => {
       },
     };
     const wrapper = shallow(<ATFLSammeOrgTekst
-      beregningsgrunnlag={beregningsgrunnlag}
+      beregningsgrunnlag={beregningsgrunnlag as Beregningsgrunnlag}
       manglerInntektsmelding={false}
     />);
     const msg = wrapper.find(FormattedMessage);
@@ -62,7 +63,7 @@ describe('<ATFLSammeOrg>', () => {
     arbeidsgiverId: '123',
     arbeidsforholdId: 'abc',
     startdato: '2018-01-01',
-  };
+  } as BeregningsgrunnlagArbeidsforhold;
 
   const faktaOmBeregningFrilansAndel = {
     andelsnr: 1,
@@ -110,7 +111,7 @@ describe('<ATFLSammeOrg>', () => {
       frilansAndel: faktaOmBeregningFrilansAndel,
     };
 
-    const transformed = transformValuesForATFLISammeOrg(inntektVerdier, faktaOmBeregning, []);
+    const transformed = transformValuesForATFLISammeOrg(inntektVerdier, faktaOmBeregning as FaktaOmBeregning, []);
     expect(transformed.faktaOmBeregningTilfeller.length).toBe(0);
   });
 
@@ -123,7 +124,7 @@ describe('<ATFLSammeOrg>', () => {
     };
 
     const fastsatteAndeler = [];
-    const transformed = transformValuesForATFLISammeOrg(inntektVerdier, faktaOmBeregning, fastsatteAndeler);
+    const transformed = transformValuesForATFLISammeOrg(inntektVerdier, faktaOmBeregning as FaktaOmBeregning, fastsatteAndeler);
     expect(transformed.faktaOmBeregningTilfeller.length).toBe(1);
     expect(transformed.faktaOmBeregningTilfeller.includes(faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON)).toBe(true);
     expect(transformed.vurderATogFLiSammeOrganisasjon.vurderATogFLiSammeOrganisasjonAndelListe.length).toBe(2);
@@ -145,7 +146,7 @@ describe('<ATFLSammeOrg>', () => {
     };
 
     const fastsatteAndeler = [1];
-    const transformed = transformValuesForATFLISammeOrg(inntektVerdier, faktaOmBeregning, fastsatteAndeler);
+    const transformed = transformValuesForATFLISammeOrg(inntektVerdier, faktaOmBeregning as FaktaOmBeregning, fastsatteAndeler);
     expect(transformed.faktaOmBeregningTilfeller.length).toBe(1);
     expect(transformed.faktaOmBeregningTilfeller.includes(faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON)).toBe(true);
     expect(transformed.vurderATogFLiSammeOrganisasjon.vurderATogFLiSammeOrganisasjonAndelListe.length).toBe(1);

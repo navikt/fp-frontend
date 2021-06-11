@@ -1,5 +1,10 @@
+import { Beregningsgrunnlag } from '@fpsak-frontend/types';
+
 export const bgUtenDelvisRefusjon = {
   skjaeringstidspunktBeregning: '2020-05-15',
+  dekningsgrad: null,
+  grunnbeløp: null,
+  erOverstyrtInntekt: null,
   skjæringstidspunkt: '2020-05-15',
   refusjonTilVurdering: {
     andeler: [
@@ -24,11 +29,14 @@ export const bgUtenDelvisRefusjon = {
       },
     ],
   },
-};
+} as Beregningsgrunnlag;
 
 export const bgMedDelvisRefusjon = {
   skjaeringstidspunktBeregning: '2020-06-01',
   skjæringstidspunkt: '2020-06-01',
+  dekningsgrad: null,
+  grunnbeløp: null,
+  erOverstyrtInntekt: null,
   refusjonTilVurdering: {
     andeler: [
       {
@@ -53,7 +61,7 @@ export const bgMedDelvisRefusjon = {
       },
     ],
   },
-};
+} as Beregningsgrunnlag;
 
 export const aksjonspunkt = [
   {

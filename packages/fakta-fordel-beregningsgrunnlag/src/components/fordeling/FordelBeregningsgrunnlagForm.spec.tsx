@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { AlleKodeverk } from '@fpsak-frontend/types';
+import { AlleKodeverk, Beregningsgrunnlag } from '@fpsak-frontend/types';
 
 import {
   FordelBeregningsgrunnlagForm,
@@ -188,7 +188,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       bgPerioder={bgPerioder}
       isAksjonspunktClosed={false}
       readOnly={false}
-      beregningsgrunnlag={{}}
+      beregningsgrunnlag={{} as Beregningsgrunnlag}
       alleKodeverk={{} as AlleKodeverk}
       behandlingType={bt}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
@@ -207,7 +207,10 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
       aktivitetStatus: [{ kode: 'AT', kodeverk: 'AKTIVITET_STATUS' }],
       beregningsgrunnlagPeriode: [bgPeriode1, bgPeriode2, bgPeriode3],
       skjaeringstidspunktBeregning: '2019-03-30',
-    };
+      dekningsgrad: null,
+      grunnbeløp: null,
+      erOverstyrtInntekt: false,
+    } as Beregningsgrunnlag;
 
     const initialValues = FordelBeregningsgrunnlagForm.buildInitialValues(perioder, bg, getKodeverknavn, agOpplysninger);
     expect(initialValues[fieldName1].length).toBe(andeler1.length);
@@ -558,7 +561,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
   it('skal ikkje validere om det ikkje finnes perioder', () => {
     const values = {};
     const fordelBGPerioder = [];
-    const beregningsgrunnlag = {};
+    const beregningsgrunnlag = {} as Beregningsgrunnlag;
     const errors = FordelBeregningsgrunnlagForm.validate(intlMock, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn, agOpplysninger);
     expect(Object.keys(errors)).toHaveLength(0);
   });
@@ -573,7 +576,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
         beregningsgrunnlagPeriodeFom: '2018-01-01',
         beregningsgrunnlagPrStatusOgAndel: [],
       }],
-    };
+    } as Beregningsgrunnlag;
     const errors = FordelBeregningsgrunnlagForm.validate(intlMock, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn, agOpplysninger);
     expect(errors[getFieldNameKey(0)]).not.toHaveLength(0);
   });
@@ -594,7 +597,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
         beregningsgrunnlagPeriodeFom: '2018-07-02',
         beregningsgrunnlagPrStatusOgAndel: [],
       }],
-    };
+    } as Beregningsgrunnlag;
     const errors = FordelBeregningsgrunnlagForm.validate(intlMock, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn, agOpplysninger);
     expect(errors[getFieldNameKey(0)]).not.toHaveLength(0);
     expect(errors[getFieldNameKey(1)]).not.toHaveLength(0);
