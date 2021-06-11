@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
+import { BeregningsgrunnlagArbeidsforhold } from '@fpsak-frontend/types';
 import { TidsbegrensetArbeidsforholdForm } from './TidsbegrensetArbeidsforholdForm';
 import messages from '../../../../i18n/nb_NO.json';
 
@@ -15,7 +16,7 @@ const andeler = [
       arbeidsgiverIdVisning: '123456789',
       startdato: '2017-01-01',
       opphoersdato: '2017-02-02',
-    },
+    } as BeregningsgrunnlagArbeidsforhold,
   },
   {
     erTidsbegrensetArbeidsforhold: true,
@@ -25,7 +26,7 @@ const andeler = [
       arbeidsgiverIdVisning: '987654321',
       startdato: '2017-02-02',
       opphoersdato: '2017-03-03',
-    },
+    } as BeregningsgrunnlagArbeidsforhold,
   },
 ];
 

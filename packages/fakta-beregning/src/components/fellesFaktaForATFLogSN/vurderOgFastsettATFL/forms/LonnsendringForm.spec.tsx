@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
+import { Beregningsgrunnlag } from '@fpsak-frontend/types';
 import LonnsendringForm, { lonnsendringField } from './LonnsendringForm';
 
 describe('<LonnsendringForm>', () => {
@@ -51,7 +52,7 @@ describe('<LonnsendringForm>', () => {
         },
       ],
     };
-    const initialValues = LonnsendringForm.buildInitialValues(gyldigBG);
+    const initialValues = LonnsendringForm.buildInitialValues(gyldigBG as Beregningsgrunnlag);
     expect(initialValues[lonnsendringField]).toBe(true);
   });
 });

@@ -1,3 +1,5 @@
+import { Beregningsgrunnlag, BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
+
 export const beregningsgrunnlag = {
   skjaeringstidspunktBeregning: '2020-01-13',
   skjæringstidspunkt: '2020-01-13',
@@ -10,8 +12,6 @@ export const beregningsgrunnlag = {
     avkortetPrAar: 0,
     periodeAarsaker: [],
     beregningsgrunnlagPrStatusOgAndel: [{
-      beregningsgrunnlagFom: '2019-10-01',
-      beregningsgrunnlagTom: '2019-12-31',
       aktivitetStatus: { kode: 'AT', kodeverk: 'AKTIVITET_STATUS' },
       beregningsperiodeFom: '2019-10-01',
       beregningsperiodeTom: '2019-12-31',
@@ -33,7 +33,7 @@ export const beregningsgrunnlag = {
       belopPrAarEtterAOrdningen: 120000.000000000000,
       erTilkommetAndel: false,
       skalFastsetteGrunnlag: false,
-    }],
+    } as BeregningsgrunnlagAndel],
   }],
   sammenligningsgrunnlagPrStatus: [],
   ledetekstBrutto: 'Brutto beregningsgrunnlag',
@@ -88,7 +88,8 @@ export const beregningsgrunnlag = {
   hjemmel: { kode: '-', kodeverk: 'BG_HJEMMEL' },
   årsinntektVisningstall: 0,
   dekningsgrad: 100,
-};
+  erOverstyrtInntekt: false,
+} as Beregningsgrunnlag;
 
 export const aksjonspunkt = [
   {

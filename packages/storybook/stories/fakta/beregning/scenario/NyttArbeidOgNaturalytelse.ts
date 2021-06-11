@@ -1,3 +1,5 @@
+import { Beregningsgrunnlag, BeregningsgrunnlagAndel, FordelBeregningsgrunnlagAndel } from '@fpsak-frontend/types';
+
 export const beregningsgrunnlag = {
   skjaeringstidspunktBeregning: '2019-12-14',
   skjæringstidspunkt: '2019-12-14',
@@ -232,9 +234,6 @@ export const beregningsgrunnlag = {
       erTilkommetAndel: true,
       skalFastsetteGrunnlag: false,
     }, {
-      dtoType: 'FL',
-      beregningsgrunnlagFom: '2019-09-01',
-      beregningsgrunnlagTom: '2019-11-30',
       aktivitetStatus: {
         kodeverk: 'AKTIVITET_STATUS',
         kode: 'FL',
@@ -259,7 +258,7 @@ export const beregningsgrunnlag = {
       belopPrMndEtterAOrdningen: 0.0,
       erTilkommetAndel: false,
       skalFastsetteGrunnlag: false,
-    }],
+    } as BeregningsgrunnlagAndel],
   }],
   sammenligningsgrunnlag: {
     sammenligningsgrunnlagFom: '2018-12-01',
@@ -634,14 +633,13 @@ export const beregningsgrunnlag = {
             kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
             kode: 'ARBEID',
           },
-        }],
+        } as FordelBeregningsgrunnlagAndel],
         skalRedigereInntekt: true,
         skalPreutfyllesMedBeregningsgrunnlag: false,
         skalKunneEndreRefusjon: false,
       }],
       arbeidsforholdTilFordeling: [{
         arbeidsgiverIdent: '883551222',
-        arbeidsgiverIdVisning: '883551222',
         startdato: '2020-01-01',
         arbeidsforholdType: {
           kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
@@ -659,7 +657,8 @@ export const beregningsgrunnlag = {
   },
   årsinntektVisningstall: 456120.0,
   dekningsgrad: 100,
-};
+  erOverstyrtInntekt: false,
+} as Beregningsgrunnlag;
 
 export const aksjonspunkt = [
   {

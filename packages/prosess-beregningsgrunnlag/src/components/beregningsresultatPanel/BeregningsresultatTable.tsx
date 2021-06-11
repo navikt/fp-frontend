@@ -402,9 +402,9 @@ const settVisningsRaderForDefault = (periode: BeregningsgrunnlagPeriodeProp,
       inntekt: null,
     };
     const atAndel = periode.beregningsgrunnlagPrStatusOgAndel.filter(
-      (andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER && andel.bortfaltNaturalytelse,
+      (andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER && andel.arbeidsforhold?.naturalytelseBortfaltPrÅr,
     );
-    ntElement.verdi = atAndel && atAndel.length > 0 ? atAndel.reduce((sum, andel) => sum + andel.bortfaltNaturalytelse, 0) : undefined;
+    ntElement.verdi = atAndel && atAndel.length > 0 ? atAndel.reduce((sum, andel) => sum + andel.arbeidsforhold?.naturalytelseBortfaltPrÅr, 0) : undefined;
     ntElement.skalFastsetteGrunnlag = false;
     ntElement.ledetekst = <FormattedMessage id="Beregningsgrunnlag.BeregningTable.Naturalytelser" />;
     rowsAndeler.push(ntElement);
@@ -431,9 +431,9 @@ const sjekkHarBortfaltNaturalYtelse = (periode: BeregningsgrunnlagPeriodeProp): 
   if (!periode) {
     return false;
   }
-  return periode.beregningsgrunnlagPrStatusOgAndel.some((andel) => andel.bortfaltNaturalytelse !== undefined
-      && andel.bortfaltNaturalytelse !== null
-      && andel.bortfaltNaturalytelse !== 0);
+  return periode.beregningsgrunnlagPrStatusOgAndel.some((andel) => andel.arbeidsforhold?.naturalytelseBortfaltPrÅr !== undefined
+      && andel.arbeidsforhold?.naturalytelseBortfaltPrÅr !== null
+      && andel.arbeidsforhold?.naturalytelseBortfaltPrÅr !== 0);
 };
 
 export const createBeregningTableData = createSelector(

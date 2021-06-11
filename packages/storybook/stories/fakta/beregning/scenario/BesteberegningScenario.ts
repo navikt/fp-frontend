@@ -1,4 +1,5 @@
 import opptjeningAktivitetType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
+import { Beregningsgrunnlag, BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 
 export const besteberegninggrunnlag = {
   besteMåneder: [{
@@ -109,8 +110,6 @@ export const beregningsgrunnlag = {
     redusertPrAar: 600000.00,
     periodeAarsaker: [],
     beregningsgrunnlagPrStatusOgAndel: [{
-      beregningsgrunnlagFom: '2019-10-01',
-      beregningsgrunnlagTom: '2019-12-31',
       aktivitetStatus: { kode: 'AT', kodeverk: 'AKTIVITET_STATUS' },
       beregningsperiodeFom: '2019-10-01',
       beregningsperiodeTom: '2019-12-31',
@@ -135,8 +134,8 @@ export const beregningsgrunnlag = {
       skalFastsetteGrunnlag: false,
     },
     {
-      beregningsgrunnlagFom: '2019-10-01',
-      beregningsgrunnlagTom: '2019-12-31',
+      beregningsperiodeFom: '2019-10-01',
+      beregningsperiodeTom: '2019-12-31',
       aktivitetStatus: { kode: 'DP', kodeverk: 'AKTIVITET_STATUS' },
       beregnetPrAar: 200000.00,
       andelsnr: 2,
@@ -148,7 +147,7 @@ export const beregningsgrunnlag = {
       belopPrAarEtterAOrdningen: 120000.000000000000,
       erTilkommetAndel: false,
       skalFastsetteGrunnlag: false,
-    }],
+    } as BeregningsgrunnlagAndel],
   }],
   ytelsesspesifiktGrunnlag: {
     besteberegninggrunnlag,
@@ -160,4 +159,5 @@ export const beregningsgrunnlag = {
   hjemmel: { kode: '-', kodeverk: 'BG_HJEMMEL' },
   årsinntektVisningstall: 0,
   dekningsgrad: 100,
-};
+  erOverstyrtInntekt: false,
+} as Beregningsgrunnlag;

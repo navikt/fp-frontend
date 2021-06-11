@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
+import { Beregningsgrunnlag } from '@fpsak-frontend/types';
 import AksjonspunktTittel from './AksjonspunktTittel';
 
 const lagPeriode = () => ({
@@ -20,8 +21,12 @@ const lagPeriode = () => ({
   }],
   andelerLagtTilManueltIForrige: [],
 });
-const lagBG = (avvikPromille) => ({
+const lagBG = (avvikPromille: number): Beregningsgrunnlag => ({
   beregningsgrunnlagPeriode: [lagPeriode()],
+  skjaeringstidspunktBeregning: null,
+  dekningsgrad: null,
+  grunnbeløp: null,
+  erOverstyrtInntekt: false,
   sammenligningsgrunnlagPrStatus: [{
     sammenligningsgrunnlagFom: '2018-09-01',
     sammenligningsgrunnlagTom: '2019-10-31',
@@ -33,7 +38,7 @@ const lagBG = (avvikPromille) => ({
     differanseBeregnet: 12100,
     avvikPromille,
   }],
-});
+} as Beregningsgrunnlag);
 
 const apATFLAvvik = {
   definisjon: {

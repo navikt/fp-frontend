@@ -11,7 +11,7 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import {
   AlleKodeverk,
-  Beregningsgrunnlag as BeregningsgrunnlagProp,
+  Beregningsgrunnlag as BeregningsgrunnlagProp, BeregningsgrunnlagPeriodeProp,
   SammenligningsgrunlagProp,
 } from '@fpsak-frontend/types';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
@@ -122,7 +122,7 @@ const relevanteStatuser = {
   isMilitaer: false,
 };
 
-const lagPeriode = () => ({
+const lagPeriode = (): BeregningsgrunnlagPeriodeProp => ({
   beregningsgrunnlagPeriodeFom: '2019-09-16',
   beregningsgrunnlagPeriodeTom: undefined,
   beregnetPrAar: 360000,
@@ -136,14 +136,15 @@ const lagPeriode = () => ({
       kodeverk: 'AKTIVITET_STATUS',
     },
   }],
-  andelerLagtTilManueltIForrige: [],
 });
-const lagBeregningsgrunnlag = (avvikPromille, årsinntektVisningstall,
-  sammenligningSum, dekningsgrad) => ({
+const lagBeregningsgrunnlag = (avvikPromille: number, årsinntektVisningstall: number,
+  sammenligningSum: number, dekningsgrad: number, sammenligningsgrunnlagInput?: SammenligningsgrunlagProp): BeregningsgrunnlagProp => ({
   beregningsgrunnlagPeriode: [lagPeriode()],
   skjaeringstidspunktBeregning: '2019-10-31',
-  sammenligningsgrunnlagPrStatus: null,
-  sammenligningsgrunnlag: {
+  grunnbeløp: null,
+  erOverstyrtInntekt: false,
+  sammenligningsgrunnlagPrStatus: sammenligningsgrunnlagInput ? [sammenligningsgrunnlagInput] : null,
+  sammenligningsgrunnlag: sammenligningsgrunnlagInput || {
     sammenligningsgrunnlagFom: '2018-09-01',
     sammenligningsgrunnlagTom: '2019-10-31',
     avvikProsent: 27.5,
@@ -161,7 +162,7 @@ const lagBeregningsgrunnlag = (avvikPromille, årsinntektVisningstall,
     kode: 'UDEFINERT',
     kodeverk: 'test',
   }],
-});
+} as BeregningsgrunnlagProp);
 const mockVilkar = [{
   vilkarType: {
     kode: 'FP_VK_41',
@@ -171,7 +172,7 @@ const mockVilkar = [{
     kode: vilkarUtfallType.OPPFYLT,
   },
 }];
-const sammenligningsgrunnlag = (kode) => ({
+const sammenligningsgrunnlag = (kode: string): SammenligningsgrunlagProp => ({
   sammenligningsgrunnlagFom: '2018-09-01',
   sammenligningsgrunnlagTom: '2019-10-31',
   rapportertPrAar: 330000,
@@ -187,9 +188,8 @@ const sammenligningsgrunnlag = (kode) => ({
 const getBGVilkar = (vilkar) => (vilkar ? vilkar.find((v) => v.vilkarType && v.vilkarType.kode === vilkarType.BEREGNINGSGRUNNLAGVILKARET) : undefined);
 describe('<BeregningForm>', () => {
   it('skal teste at AvviksopplysningerPanel får korrekte props fra BeregningFP', () => {
-    const beregningsgrunnlag = lagBeregningsgrunnlag(0, 100000, 100000, 100);
-    const sammenligningsgrunnlagPrStatus = sammenligningsgrunnlag('SAMMENLIGNING_ATFL_SN');
-    beregningsgrunnlag.sammenligningsgrunnlagPrStatus = [sammenligningsgrunnlagPrStatus as SammenligningsgrunlagProp];
+    const sg = sammenligningsgrunnlag('SAMMENLIGNING_ATFL_SN');
+    const beregningsgrunnlag = lagBeregningsgrunnlag(0, 100000, 100000, 100, sg);
     const wrapper = shallow(<BeregningFormImpl
       readOnly={false}
       beregningsgrunnlag={beregningsgrunnlag}
@@ -205,7 +205,7 @@ describe('<BeregningForm>', () => {
     const avvikPanel = wrapper.find(AvviksopplysningerPanel);
     expect(avvikPanel.props().harAksjonspunkter).toBe(true);
     expect(avvikPanel.props().gjelderBesteberegning).toBe(false);
-    expect(avvikPanel.props().sammenligningsgrunnlagPrStatus[0]).toBe(sammenligningsgrunnlagPrStatus);
+    expect(avvikPanel.props().sammenligningsgrunnlagPrStatus[0]).toBe(sg);
     expect(avvikPanel.props().relevanteStatuser).toBe(relevanteStatuser);
     const expectedPerioder = lagPeriode();
     expect(avvikPanel.props().allePerioder[0]).toEqual(expectedPerioder);

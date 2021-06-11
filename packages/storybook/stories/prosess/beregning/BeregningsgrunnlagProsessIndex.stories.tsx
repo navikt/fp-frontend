@@ -289,6 +289,7 @@ const lagBG = (
       kodeverk: 'BG_HJEMMEL',
     },
     årsinntektVisningstall: 360000,
+    erOverstyrtInntekt: false,
     inntektsgrunnlag,
   };
   return beregningsgrunnlag;

@@ -6,7 +6,12 @@ import { isRequiredMessage } from '@fpsak-frontend/utils';
 import { RadioGroupField } from '@fpsak-frontend/form';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 
-import { AlleKodeverk, ArbeidstakerUtenIMAndel, FaktaOmBeregning } from '@fpsak-frontend/types';
+import {
+  AlleKodeverk,
+  ArbeidstakerUtenIMAndel,
+  BeregningsgrunnlagArbeidsforhold,
+  FaktaOmBeregning,
+} from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import { createVisningsnavnFakta } from '../../../ArbeidsforholdHelper';
 import VurderMottarYtelseForm, {
@@ -28,28 +33,28 @@ const beregningsgrunnlag = {
       { andelsnr: 4, aktivitetStatus: { kode: 'FL', kodeverk: 'test' } },
     ],
   }],
-};
+} as Beregningsgrunnlag;
 
 const arbeidsforhold = {
   arbeidsgiverIdent: '3284788923',
   arbeidsforholdId: '321378huda7e2',
   startdato: '2017-01-01',
   opphoersdato: '2018-01-01',
-};
+} as BeregningsgrunnlagArbeidsforhold;
 
 const arbeidsforhold2 = {
   arbeidsgiverIdent: '843597943435',
   arbeidsforholdId: 'jjisefoosfe',
   startdato: '2017-01-01',
   opphoersdato: '2018-01-01',
-};
+} as BeregningsgrunnlagArbeidsforhold;
 
 const arbeidsforhold3 = {
   arbeidsgiverIdent: '843597943435',
   arbeidsforholdId: '5465465464',
   startdato: '2017-01-01',
   opphoersdato: '2018-01-01',
-};
+} as BeregningsgrunnlagArbeidsforhold;
 
 const andel = {
   andelsnr: 1,
@@ -187,7 +192,7 @@ describe('<VurderMottarYtelseForm>', () => {
       isAksjonspunktClosed={false}
       tilfeller={[]}
       alleKodeverk={alleKodeverk}
-      beregningsgrunnlag={{ faktaOmBeregning: faktaBG }}
+      beregningsgrunnlag={{ faktaOmBeregning: faktaBG } as Beregningsgrunnlag}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
     />);
     const flRadio = wrapper.find(RadioGroupField);
@@ -209,7 +214,7 @@ describe('<VurderMottarYtelseForm>', () => {
       readOnly={false}
       isAksjonspunktClosed={false}
       tilfeller={[faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL]}
-      beregningsgrunnlag={{ faktaOmBeregning: faktaBG }}
+      beregningsgrunnlag={{ faktaOmBeregning: faktaBG } as Beregningsgrunnlag}
       alleKodeverk={alleKodeverk}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
     />);

@@ -84,6 +84,9 @@ const lagBGPeriode = (andelsliste: BeregningsgrunnlagAndel[], periodeAarsaker: K
 const lagBG = (perioder: BeregningsgrunnlagPeriodeProp[], faktaOmFordeling: FaktaOmFordeling): Beregningsgrunnlag => ({
   skjaeringstidspunktBeregning: '2019-09-16',
   aktivitetStatus: [],
+  dekningsgrad: null,
+  grunnbeløp: null,
+  erOverstyrtInntekt: null,
   beregningsgrunnlagPeriode: perioder,
   ledetekstBrutto: 'Brutto beregningsgrunnlag',
   ledetekstAvkortet: 'Avkortet beregningsgrunnlag (6G=599148)',

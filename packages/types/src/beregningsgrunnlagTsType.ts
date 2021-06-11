@@ -46,11 +46,16 @@ export type BeregningsgrunnlagAndel = Readonly <{
   arbeidsforholdType?: Kodeverk;
   arbeidsforhold?: BeregningsgrunnlagArbeidsforhold;
   avkortetPrAar?: number;
+  inntektskategori?: Kodeverk;
+
+  // Fjern disse to da er flyttet inn i arbeidsforhold objektet over her
+  bortfaltNaturalytelse?: number;
+  tilkommetNaturalytelse?: number;
+
   beregnetPrAar?: number;
   beregningsperiodeFom?: string;
   beregningsperiodeTom?: string;
   bruttoPrAar?: number;
-  arbeidsforholdId?: string;
   overstyrtPrAar?: number;
   redusertPrAar?: number;
   pgi1?: number;
@@ -59,13 +64,9 @@ export type BeregningsgrunnlagAndel = Readonly <{
   pgiSnitt?: number;
   pgiVerdier?: PgiVerdier[],
   aarsbeloepFraTilstoetendeYtelse?: number;
-  bortfaltNaturalytelse?: number;
-  tilkommetNaturalytelse?: number;
   erNyIArbeidslivet?: boolean;
   erTidsbegrensetArbeidsforhold?: boolean;
   erNyoppstartet?: boolean;
-  arbeidsgiverId?: string;
-  arbeidsgiverNavn?: string;
   andelsnr?: number;
   lonnsendringIBeregningsperioden?: boolean;
   besteberegningPrAar?: number;
@@ -108,19 +109,19 @@ export type BeregningsgrunnlagPeriodeProp = Readonly<{
 }>
 
 type Beregningsgrunnlag = Readonly<{
+  skjaeringstidspunktBeregning: string;
+  dekningsgrad: number;
+  grunnbeløp: number;
+  erOverstyrtInntekt: boolean;
   aktivitetStatus?: Kodeverk[];
   beregningsgrunnlagPeriode?: BeregningsgrunnlagPeriodeProp[];
-  dekningsgrad?: number;
-  grunnbeløp?: number;
   sammenligningsgrunnlag?: SammenligningsgrunlagProp;
   sammenligningsgrunnlagPrStatus?: SammenligningsgrunlagProp[];
-  skjaeringstidspunktBeregning?: string;
   faktaOmBeregning?: FaktaOmBeregning;
   faktaOmFordeling?: FaktaOmFordeling;
   andelerMedGraderingUtenBG?: BeregningsgrunnlagAndel[];
   ytelsesspesifiktGrunnlag?: YtelseGrunnlag;
   refusjonTilVurdering?: RefusjonTilVurdering;
-  erOverstyrtInntekt?: boolean;
   inntektsgrunnlag?: Inntektsgrunnlag;
 }>
 

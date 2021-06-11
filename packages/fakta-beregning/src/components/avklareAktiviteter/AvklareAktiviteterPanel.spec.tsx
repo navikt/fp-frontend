@@ -6,7 +6,7 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import opptjeningAktivitetType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { AksjonspunktHelpTextTemp, OverstyringKnapp } from '@fpsak-frontend/shared-components';
-import { AlleKodeverk } from '@fpsak-frontend/types';
+import { FaktaOmBeregning, AlleKodeverk, Beregningsgrunnlag } from '@fpsak-frontend/types';
 
 import sinon from 'sinon';
 import messages from '../../../i18n/nb_NO.json';
@@ -151,7 +151,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       erBgOverstyrt={false}
       alleKodeverk={alleKodeverk}
       reduxFormInitialize={sinon.spy()}
-      beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
+      beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } as FaktaOmBeregning } as Beregningsgrunnlag}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       erOverstyrer={false}
       validate={sinon.spy()}
@@ -181,7 +181,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       alleKodeverk={alleKodeverk}
       submitCallback={sinon.spy()}
       onSubmit={() => undefined}
-      beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
+      beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } as FaktaOmBeregning } as Beregningsgrunnlag}
       reduxFormInitialize={sinon.spy()}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       erOverstyrer={false}
@@ -217,7 +217,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       alleKodeverk={alleKodeverk}
       submitCallback={sinon.spy()}
       onSubmit={() => undefined}
-      beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
+      beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } as FaktaOmBeregning } as Beregningsgrunnlag}
       reduxFormInitialize={sinon.spy()}
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       erOverstyrer={false}
@@ -241,7 +241,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       intl={intlMock}
       readOnly={false}
       isAksjonspunktClosed={false}
-      beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } }}
+      beregningsgrunnlag={{ faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } as FaktaOmBeregning } as Beregningsgrunnlag}
       hasBegrunnelse={false}
       submittable
       helpText={[]}
@@ -278,7 +278,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       harAndreAksjonspunkterIPanel: false,
       submitCallback: null,
       erOverstyrer: false,
-      beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } },
+      beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } as FaktaOmBeregning } as Beregningsgrunnlag,
     });
     expect(initialValues !== null).toBe(true);
     expect(initialValues[MANUELL_OVERSTYRING_FIELD]).toBe(false);
@@ -300,7 +300,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       harAndreAksjonspunkterIPanel: false,
       submitCallback: null,
       erOverstyrer: false,
-      beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } },
+      beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } as FaktaOmBeregning } as Beregningsgrunnlag,
     });
     expect(initialValues !== null).toBe(true);
     expect(initialValues[MANUELL_OVERSTYRING_FIELD]).toBe(false);
@@ -324,7 +324,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       harAndreAksjonspunkterIPanel: false,
       submitCallback: null,
       erOverstyrer: false,
-      beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } },
+      beregningsgrunnlag: { faktaOmBeregning: { avklarAktiviteter, andelerForFaktaOmBeregning: [] } as FaktaOmBeregning } as Beregningsgrunnlag,
     });
     expect(initialValues !== null).toBe(true);
     expect(initialValues[MANUELL_OVERSTYRING_FIELD]).toBe(true);

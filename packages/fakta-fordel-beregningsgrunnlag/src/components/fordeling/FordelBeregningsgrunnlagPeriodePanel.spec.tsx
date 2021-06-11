@@ -1,5 +1,6 @@
 import moment from 'moment';
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
+import { BeregningsgrunnlagArbeidsforhold } from '@fpsak-frontend/types';
 import FordelBeregningsgrunnlagPeriodePanel from './FordelBeregningsgrunnlagPeriodePanel';
 
 const stpBeregning = '2018-01-01';
@@ -10,7 +11,7 @@ const arbeidsforhold = {
   eksternArbeidsforholdId: '12345',
   startdato: '2017-01-01',
   opphoersdato: '2018-01-01',
-};
+} as BeregningsgrunnlagArbeidsforhold;
 
 const arbeidsforhold2 = {
   arbeidsgiverIdent: '32847889234234233',
@@ -18,7 +19,7 @@ const arbeidsforhold2 = {
   eksternArbeidsforholdId: '234567',
   startdato: '2017-01-01',
   opphoersdato: '2018-01-01',
-};
+} as BeregningsgrunnlagArbeidsforhold;
 
 const arbeidsforholdEtterStp = {
   arbeidsgiverIdent: '3284788923',
@@ -26,7 +27,7 @@ const arbeidsforholdEtterStp = {
   eksternArbeidsforholdId: '345678',
   startdato: '2018-05-01',
   opphoersdato: '2019-01-01',
-};
+} as BeregningsgrunnlagArbeidsforhold;
 
 const lagArbeidstakerAndelEtterStp = (andelsnr, lagtTilAvSaksbehandler, fordelingForrigeBehandlingPrAar,
   beregnetPrAar, fordeltPrAar, refusjonskravPrAar, belopFraInntektsmeldingPrAar,
