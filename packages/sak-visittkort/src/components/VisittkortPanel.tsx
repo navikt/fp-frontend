@@ -84,6 +84,7 @@ const VisittkortPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
                 fodselsnummer={annenPart.fødselsnummer}
                 gender={utledKjonn(annenPart.kjønn)}
                 url={lenkeTilAnnenPart}
+                renderLabelContent={(): JSX.Element => <VisittkortLabels fagsakPerson={annenPart} harVerge={false} />}
                 isActive={!erMor}
               />
             </FlexColumn>
