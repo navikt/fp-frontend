@@ -10,7 +10,7 @@ type AnkeVurderingResultatAp = {
   ankeOmgjoerArsak: Kodeverk | string;
   ankeVurderingOmgjoer: Kodeverk | string;
   erGodkjentAvMedunderskriver?: boolean;
-  vedtakBehandlingUuid?: string;
+  påAnketKlageBehandlingUuid?: string;
   erAnkerIkkePart?: boolean;
   erFristIkkeOverholdt?: boolean;
   erIkkeKonkret?: boolean;

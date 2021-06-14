@@ -34,7 +34,7 @@ const lagreOmgjoerAarsak = (values: FormValues): Kodeverk | string => (ankeVurde
   || ankeVurdering.ANKE_OMGJOER === values.ankeVurdering?.kode ? values.ankeOmgjoerArsak : '-');
 
 export const transformValues = (values: FormValues): AnkeVurderingResultatAp => ({
-  vedtakBehandlingUuid: values.vedtak === '0' || !values.vedtak ? null : values.vedtak,
+  påAnketKlageBehandlingUuid: values.vedtak === '0' || !values.vedtak ? null : values.vedtak,
   ankeVurdering: values.ankeVurdering,
   begrunnelse: values.begrunnelse,
   fritekstTilBrev: values.fritekstTilBrev,
