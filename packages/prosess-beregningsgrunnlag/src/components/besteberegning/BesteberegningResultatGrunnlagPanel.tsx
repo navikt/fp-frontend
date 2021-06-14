@@ -13,17 +13,19 @@ import {
   Table, TableColumn, TableRow,
 } from '@fpsak-frontend/shared-components';
 
-interface OwnProps {
-  periode: BeregningsgrunnlagPeriodeProp;
-  besteMåneder: Månedsgrunnlag[];
-}
+const finnGjeldendeBeløp = (andel: BeregningsgrunnlagAndel): number => {
+  if (andel.overstyrtPrAar || andel.overstyrtPrAar === 0) {
+    return andel.overstyrtPrAar;
+  }
+  if (andel.beregnetPrAar || andel.beregnetPrAar === 0) {
+    return andel.beregnetPrAar;
+  }
+  return 0;
+};
 
-const erBeløpSatt = (beløp: number): boolean => !!beløp || beløp === 0;
-
-const finnGjeldendeBeløp = (andel: BeregningsgrunnlagAndel): number => (erBeløpSatt(andel.overstyrtPrAar) ? andel.overstyrtPrAar : andel.beregnetPrAar);
-
-const finnKap8Beregning = (periode: BeregningsgrunnlagPeriodeProp): number => periode.beregningsgrunnlagPrStatusOgAndel
-  .map((andel) => finnGjeldendeBeløp(andel)).reduce((i1, i2) => i1 + i2, 0);
+const finnKap8Beregning = (periode: BeregningsgrunnlagPeriodeProp): number => (periode.beregningsgrunnlagPrStatusOgAndel
+  ? periode.beregningsgrunnlagPrStatusOgAndel.map((andel) => finnGjeldendeBeløp(andel)).reduce((i1, i2) => i1 + i2, 0)
+  : 0);
 
 const finnBesteberegnet = (besteMåneder : Månedsgrunnlag[]): number => (
   besteMåneder.flatMap((måned) => måned.inntekter).map(({ inntekt }) => inntekt).reduce((i1, i2) => i1 + i2, 0) * 2
@@ -45,6 +47,11 @@ const headerColumnContent = [
     {' '}
   </Element>,
 ];
+
+interface OwnProps {
+  periode: BeregningsgrunnlagPeriodeProp;
+  besteMåneder: Månedsgrunnlag[];
+}
 
 /**
  * BesteberegningResultatGrunnlagPanel

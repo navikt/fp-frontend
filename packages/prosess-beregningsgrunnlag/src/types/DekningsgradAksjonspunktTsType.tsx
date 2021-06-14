@@ -1,5 +1,5 @@
 export type DekningsgradValues = {
-  dekningsgrad: number;
+  dekningsgrad?: number;
 };
 
 type DekningsgradTransformedValues = {

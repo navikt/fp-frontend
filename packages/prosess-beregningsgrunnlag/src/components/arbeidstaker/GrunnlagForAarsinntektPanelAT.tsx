@@ -174,7 +174,7 @@ const createArbeidsIntektRows = (relevanteAndeler: BeregningsgrunnlagAndel[],
 };
 
 interface StaticFunctions {
-  buildInitialValues?: (alleAndeler: BeregningsgrunnlagAndel[]) => ArbeidstakerInntektValues;
+  buildInitialValues: (alleAndeler: BeregningsgrunnlagAndel[]) => ArbeidstakerInntektValues;
 }
 
 type MappedOwnProps = {

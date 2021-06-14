@@ -22,8 +22,14 @@ import { DekningsgradValues } from '../../types/DekningsgradAksjonspunktTsType';
 
 export const RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN = 'dekningsgrad';
 
+type StatusInfo = {
+  visningsNavn: string;
+  kode: string;
+  className: string;
+}
+
 const createStatusEtiketter = (listeMedStatuser: Kodeverk[], getKodeverknavn: (kodeverk: Kodeverk) => string): ReactElement => {
-  const statusList = [];
+  const statusList = [] as StatusInfo[];
   const unikeStatuser = listeMedStatuser.filter((status, index, self) => index === self.findIndex((t) => (
     t.kode === status.kode)));
   unikeStatuser.forEach((status) => {
@@ -41,7 +47,7 @@ const createStatusEtiketter = (listeMedStatuser: Kodeverk[], getKodeverknavn: (k
 };
 
 interface StaticFunctions {
-  buildInitialValues?: (gjeldendeDekningsgrad: number, gjeldendeAksjonspunkter: Aksjonspunkt[]) => DekningsgradValues;
+  buildInitialValues: (gjeldendeDekningsgrad: number, gjeldendeAksjonspunkter: Aksjonspunkt[]) => DekningsgradValues;
 }
 
 type MappedOwnProps = {
@@ -88,7 +94,7 @@ export const SkjeringspunktOgStatusPanelImpl: FunctionComponent<OwnProps & Mappe
   </>
 );
 
-const mapStateToProps = (state, ownProps: OwnProps): MappedOwnProps => {
+const mapStateToProps = (state: any, ownProps: OwnProps): MappedOwnProps => {
   const getKodeverknavn = getKodeverknavnFn(ownProps.alleKodeverk, kodeverkTyper);
   return {
     getKodeverknavn,
@@ -97,7 +103,7 @@ const mapStateToProps = (state, ownProps: OwnProps): MappedOwnProps => {
 
 const SkjeringspunktOgStatusPanel = connect(mapStateToProps)(SkjeringspunktOgStatusPanelImpl);
 
-SkjeringspunktOgStatusPanel.buildInitialValues = (gjeldendeDekningsgrad, gjeldendeAksjonspunkter): DekningsgradValues => {
+SkjeringspunktOgStatusPanelImpl.buildInitialValues = (gjeldendeDekningsgrad, gjeldendeAksjonspunkter): DekningsgradValues => {
   const aksjonspunkt = gjeldendeAksjonspunkter && gjeldendeAksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.VURDER_DEKNINGSGRAD);
   const initialDekningsgrad = aksjonspunkt && gjeldendeDekningsgrad === 100 ? gjeldendeDekningsgrad : undefined;
   return { [RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN]: initialDekningsgrad };

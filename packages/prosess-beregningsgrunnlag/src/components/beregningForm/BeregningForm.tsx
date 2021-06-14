@@ -19,14 +19,15 @@ import {
   BeregningsgrunnlagPeriodeProp,
   FaktaOmBeregning,
   Kodeverk,
-  SammenligningsgrunlagProp,
   Vilkar,
-  YtelseGrunnlag,
 } from '@fpsak-frontend/types';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import BesteberegningResultatGrunnlagPanel from '../besteberegning/BesteberegningResultatGrunnlagPanel';
 import AvviksopplysningerPanel from '../fellesPaneler/AvvikopplysningerPanel';
-import SkjeringspunktOgStatusPanel, { RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN } from '../fellesPaneler/SkjeringspunktOgStatusPanel';
+import SkjeringspunktOgStatusPanel, {
+  SkjeringspunktOgStatusPanelImpl,
+  RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN,
+} from '../fellesPaneler/SkjeringspunktOgStatusPanel';
 import VurderOgFastsettSN from '../selvstendigNaeringsdrivende/VurderOgFastsettSN';
 import { GrunnlagForAarsinntektPanelATImpl } from '../arbeidstaker/GrunnlagForAarsinntektPanelAT';
 import { AksjonspunktBehandlerTidsbegrensetImpl } from '../arbeidstaker/AksjonspunktBehandlerTB';
@@ -62,28 +63,30 @@ const gjelderBehandlingenBesteberegning = (faktaOmBeregning: FaktaOmBeregning): 
   ? faktaOmBeregning.faktaOmBeregningTilfeller.some((tilfelle) => tilfelle.kode === faktaOmBeregningTilfelle.FASTSETT_BESTEBEREGNING_FODENDE_KVINNE)
   : false);
 
-const erAutomatiskBesteberegnet = (ytelsesspesifiktGrunnlag: YtelseGrunnlag): boolean => !!ytelsesspesifiktGrunnlag?.besteberegninggrunnlag;
+const finnAndelerMedStatus = (andeler: BeregningsgrunnlagAndel[] | undefined,
+  kode: string): BeregningsgrunnlagAndel[] => (andeler ? andeler.filter((andel) => andel.aktivitetStatus.kode === kode) : []);
 
 export const buildInitialValues = createSelector(
   [(ownProps: OwnProps) => ownProps.beregningsgrunnlag,
     (ownProps: OwnProps) => ownProps.gjeldendeAksjonspunkter],
-  (beregningsgrunnlag: BeregningsgrunnlagProp, gjeldendeAksjonspunkter: Aksjonspunkt[]): BeregningsgrunnlagValues => {
+  (beregningsgrunnlag: BeregningsgrunnlagProp, gjeldendeAksjonspunkter: Aksjonspunkt[]): BeregningsgrunnlagValues | undefined => {
     if (!beregningsgrunnlag || !beregningsgrunnlag.beregningsgrunnlagPeriode) {
       return undefined;
     }
     const allePerioder = beregningsgrunnlag.beregningsgrunnlagPeriode;
     const gjeldendeDekningsgrad = beregningsgrunnlag.dekningsgrad;
     const alleAndelerIForstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode[0].beregningsgrunnlagPrStatusOgAndel;
-    const arbeidstakerAndeler = alleAndelerIForstePeriode.filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER);
-    const frilanserAndeler = alleAndelerIForstePeriode.filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.FRILANSER);
-    const selvstendigNaeringAndeler = alleAndelerIForstePeriode.filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
+    const arbeidstakerAndeler = finnAndelerMedStatus(alleAndelerIForstePeriode, aktivitetStatus.ARBEIDSTAKER);
+    const frilanserAndeler = finnAndelerMedStatus(alleAndelerIForstePeriode, aktivitetStatus.FRILANSER);
+    const selvstendigNaeringAndeler = finnAndelerMedStatus(alleAndelerIForstePeriode, aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
     return {
+      erVarigEndretNaering: false,
       ...Beregningsgrunnlag.buildInitialValues(gjeldendeAksjonspunkter),
       ...AksjonspunktBehandlerTidsbegrensetImpl.buildInitialValues(allePerioder),
       ...AksjonspunktBehandlerFL.buildInitialValues((frilanserAndeler)),
       ...VurderOgFastsettSN.buildInitialValues(selvstendigNaeringAndeler, gjeldendeAksjonspunkter),
       ...GrunnlagForAarsinntektPanelATImpl.buildInitialValues(arbeidstakerAndeler),
-      ...SkjeringspunktOgStatusPanel.buildInitialValues(gjeldendeDekningsgrad, gjeldendeAksjonspunkter),
+      ...SkjeringspunktOgStatusPanelImpl.buildInitialValues(gjeldendeDekningsgrad, gjeldendeAksjonspunkter),
     };
   },
 );
@@ -119,14 +122,9 @@ export const transformValues = (values: BeregningsgrunnlagValues,
   return aksjonspunkter;
 };
 
-const getSammenligningsgrunnlagsPrStatus = (bg: BeregningsgrunnlagProp): SammenligningsgrunlagProp[] => (bg.sammenligningsgrunnlagPrStatus
-  ? bg.sammenligningsgrunnlagPrStatus
-  : undefined);
-
-const getStatusList = (beregningsgrunnlagPerioder: BeregningsgrunnlagPeriodeProp[]): Kodeverk[] => beregningsgrunnlagPerioder[0]
-  .beregningsgrunnlagPrStatusOgAndel
+const getStatusList = (andeler: BeregningsgrunnlagAndel[]): Kodeverk[] => (andeler
   .filter((statusAndel) => statusAndel.erTilkommetAndel !== true)
-  .map((statusAndel) => statusAndel.aktivitetStatus);
+  .map((statusAndel) => statusAndel.aktivitetStatus));
 
 type OwnProps = {
     readOnly: boolean;
@@ -166,11 +164,16 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
     dekningsgrad, skjaeringstidspunktBeregning, beregningsgrunnlagPeriode, faktaOmBeregning,
     ytelsesspesifiktGrunnlag,
   } = beregningsgrunnlag;
-  const gjelderBesteberegning = gjelderBehandlingenBesteberegning(faktaOmBeregning);
-  const gjelderAutomatiskBesteberegning = erAutomatiskBesteberegnet(ytelsesspesifiktGrunnlag);
-
-  const sammenligningsgrunnlagPrStatus = getSammenligningsgrunnlagsPrStatus(beregningsgrunnlag);
-  const aktivitetStatusList = getStatusList(beregningsgrunnlagPeriode);
+  const førsteBGPeriode = beregningsgrunnlagPeriode && beregningsgrunnlagPeriode.length > 0 ? beregningsgrunnlagPeriode[0] : undefined;
+  if (!førsteBGPeriode) {
+    return null;
+  }
+  const gjelderBesteberegning = faktaOmBeregning ? gjelderBehandlingenBesteberegning(faktaOmBeregning) : false;
+  const bbMåneder = ytelsesspesifiktGrunnlag?.besteberegninggrunnlag?.besteMåneder;
+  const sammenligningsgrunnlagPrStatus = beregningsgrunnlag.sammenligningsgrunnlagPrStatus ? beregningsgrunnlag.sammenligningsgrunnlagPrStatus : [];
+  const aktivitetStatusList = førsteBGPeriode.beregningsgrunnlagPrStatusOgAndel
+    ? getStatusList(førsteBGPeriode.beregningsgrunnlagPrStatusOgAndel)
+    : [];
   const harAksjonspunkter = gjeldendeAksjonspunkter && gjeldendeAksjonspunkter.length > 0;
   return (
     <form onSubmit={formProps.handleSubmit} className={beregningStyles.beregningForm}>
@@ -207,10 +210,10 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
             </>
           )}
           <VerticalSpacer twentyPx />
-          {gjelderAutomatiskBesteberegning && (
+          {bbMåneder && (
             <BesteberegningResultatGrunnlagPanel
-              besteMåneder={ytelsesspesifiktGrunnlag.besteberegninggrunnlag.besteMåneder}
-              periode={beregningsgrunnlagPeriode[0]}
+              besteMåneder={bbMåneder}
+              periode={førsteBGPeriode}
             />
           )}
         </Column>
@@ -249,7 +252,7 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
           <>
             <AvsnittSkiller spaceAbove spaceUnder rightPanel />
             <BeregningsresultatTable
-              beregningsgrunnlagPerioder={beregningsgrunnlag.beregningsgrunnlagPeriode}
+              beregningsgrunnlagPerioder={beregningsgrunnlagPeriode}
               dekningsgrad={dekningsgrad}
               vilkaarBG={vilkaarBG}
               aktivitetStatusList={aktivitetStatusList}

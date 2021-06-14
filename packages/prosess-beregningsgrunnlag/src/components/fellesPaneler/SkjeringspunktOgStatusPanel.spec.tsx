@@ -4,8 +4,8 @@ import { FormattedMessage } from 'react-intl';
 
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { DateLabel } from '@fpsak-frontend/shared-components';
-import { AlleKodeverk } from '@fpsak-frontend/types';
-import SkjeringspunktOgStatusPanel, { RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN, SkjeringspunktOgStatusPanelImpl } from './SkjeringspunktOgStatusPanel';
+import { AlleKodeverk, Kodeverk } from '@fpsak-frontend/types';
+import { RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN, SkjeringspunktOgStatusPanelImpl } from './SkjeringspunktOgStatusPanel';
 
 const skjeringstidspunktDato = '2017-12-12';
 const aktivitetstatusList = [{
@@ -17,7 +17,7 @@ const aktivitetstatusList = [{
 },
 ];
 
-const getKodeverknavn = (kodeverk) => {
+const getKodeverknavn = (kodeverk: Kodeverk): string => {
   if (kodeverk.kode === aktivitetStatus.ARBEIDSTAKER) {
     return 'Arbeidstaker';
   }
@@ -46,8 +46,7 @@ describe('<SkjeringspunktOgStatusPanel>', () => {
 
   it('Skal teste buildInitialValues når ingen aksjonspunkt', () => {
     const dekningsgradFraSoknad = 100;
-    const gjeldendeAksjonspunkter = [];
-    const initialValues = SkjeringspunktOgStatusPanel.buildInitialValues(dekningsgradFraSoknad, gjeldendeAksjonspunkter);
+    const initialValues = SkjeringspunktOgStatusPanelImpl.buildInitialValues(dekningsgradFraSoknad, []);
     expect(initialValues[RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN]).toBeUndefined();
   });
 });

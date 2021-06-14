@@ -45,12 +45,12 @@ export type TidsbegrensetArbeidsforholdPeriodeTransformedValues = {
 }
 
 export type ArbeidstakerFrilansValues = FrilansInntektValues & {
-  ATFLVurdering: string;
+  ATFLVurdering?: string;
 };
 
 export type ATFLDekningsgradBegrunnelseValues = {
-  ATFLVurdering: string;
-  begrunnDekningsgradEndring: string;
+  ATFLVurdering?: string;
+  begrunnDekningsgradEndring?: string;
 };
 
 export type ArbeidsinntektTransformedValues = {

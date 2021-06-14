@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Undertittel } from 'nav-frontend-typografi';
@@ -22,7 +22,7 @@ import GraderingUtenBGReadOnly from './gradering/GraderingUtenBGReadOnly';
 import BeregningForm from './beregningForm/BeregningForm';
 import RelevanteStatuserProp from '../types/RelevanteStatuserTsType';
 
-const visningForManglendeBG = () => (
+const visningForManglendeBG = (): ReactElement => (
   <>
     <Undertittel>
       <FormattedMessage id="Beregningsgrunnlag.Title" />
@@ -45,24 +45,24 @@ const getAksjonspunkterForBeregning = (aksjonspunkter: Aksjonspunkt[]): Aksjonsp
   ? aksjonspunkter.filter((ap) => isBeregningAksjonspunkt(ap.definisjon.kode))
   : []);
 
-const getRelevanteStatuser = (bg: Beregningsgrunnlag): RelevanteStatuserProp => (bg.aktivitetStatus ? ({
-  isArbeidstaker: bg.aktivitetStatus.some(({ kode }) => isStatusArbeidstakerOrKombinasjon(kode)),
-  isFrilanser: bg.aktivitetStatus.some(({ kode }) => isStatusFrilanserOrKombinasjon(kode)),
-  isSelvstendigNaeringsdrivende: bg.aktivitetStatus.some(({ kode }) => isStatusSNOrKombinasjon(kode)),
-  harAndreTilstotendeYtelser: bg.aktivitetStatus.some(({ kode }) => isStatusTilstotendeYtelse(kode)),
-  harDagpengerEllerAAP: bg.aktivitetStatus.some(({ kode }) => isStatusDagpengerOrAAP(kode)),
-  isAAP: bg.aktivitetStatus.some(({ kode }) => kode === aktivitetStatus.ARBEIDSAVKLARINGSPENGER),
-  isDagpenger: bg.aktivitetStatus.some(({ kode }) => kode === aktivitetStatus.DAGPENGER),
-  skalViseBeregningsgrunnlag: bg.aktivitetStatus && bg.aktivitetStatus.length > 0,
-  isKombinasjonsstatus: bg.aktivitetStatus.some(({ kode }) => isStatusKombinasjon(kode)) || bg.aktivitetStatus.length > 1,
-  isMilitaer: bg.aktivitetStatus.some(({ kode }) => isStatusMilitaer(kode)),
-}) : null);
+const getRelevanteStatuser = (bg: Beregningsgrunnlag): RelevanteStatuserProp => ({
+  isArbeidstaker: !!(bg.aktivitetStatus && bg.aktivitetStatus.some(({ kode }) => isStatusArbeidstakerOrKombinasjon(kode))),
+  isFrilanser: !!(bg.aktivitetStatus && bg.aktivitetStatus.some(({ kode }) => isStatusFrilanserOrKombinasjon(kode))),
+  isSelvstendigNaeringsdrivende: !!(bg.aktivitetStatus && bg.aktivitetStatus.some(({ kode }) => isStatusSNOrKombinasjon(kode))),
+  harAndreTilstotendeYtelser: !!(bg.aktivitetStatus && bg.aktivitetStatus.some(({ kode }) => isStatusTilstotendeYtelse(kode))),
+  harDagpengerEllerAAP: !!(bg.aktivitetStatus && bg.aktivitetStatus.some(({ kode }) => isStatusDagpengerOrAAP(kode))),
+  isAAP: !!(bg.aktivitetStatus && bg.aktivitetStatus.some(({ kode }) => kode === aktivitetStatus.ARBEIDSAVKLARINGSPENGER)),
+  isDagpenger: !!(bg.aktivitetStatus && bg.aktivitetStatus.some(({ kode }) => kode === aktivitetStatus.DAGPENGER)),
+  skalViseBeregningsgrunnlag: !!(bg.aktivitetStatus && bg.aktivitetStatus && bg.aktivitetStatus.length > 0),
+  isKombinasjonsstatus: !!(bg.aktivitetStatus && (bg.aktivitetStatus.some(({ kode }) => isStatusKombinasjon(kode)) || bg.aktivitetStatus.length > 1)),
+  isMilitaer: !!(bg.aktivitetStatus && bg.aktivitetStatus.some(({ kode }) => isStatusMilitaer(kode))),
+});
 
-const getBGVilkar = (vilkar: Vilkar[]): Vilkar => (vilkar
+const getBGVilkar = (vilkar: Vilkar[]): Vilkar | undefined => (vilkar
   ? vilkar.find((v) => v.vilkarType && v.vilkarType.kode === vilkarType.BEREGNINGSGRUNNLAGVILKARET)
   : undefined);
 
-const getAksjonspunktForGraderingPaaAndelUtenBG = (aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt => (aksjonspunkter
+const getAksjonspunktForGraderingPaaAndelUtenBG = (aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt | undefined => (aksjonspunkter
   ? aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.VURDER_GRADERING_UTEN_BEREGNINGSGRUNNLAG)
   : undefined);
 
@@ -72,7 +72,7 @@ type OwnProps = {
     readOnlySubmitButton: boolean;
     aksjonspunkter: Aksjonspunkt[];
     alleKodeverk: AlleKodeverk;
-    beregningsgrunnlag: Beregningsgrunnlag;
+    beregningsgrunnlag?: Beregningsgrunnlag;
     vilkar: Vilkar[];
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };

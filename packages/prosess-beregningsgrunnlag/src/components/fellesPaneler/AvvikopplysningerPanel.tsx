@@ -19,9 +19,9 @@ import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less'
 
 const finnAlleAndelerIFørstePeriode = (allePerioder: BeregningsgrunnlagPeriodeProp[]): BeregningsgrunnlagAndel[] => {
   if (allePerioder && allePerioder.length > 0) {
-    return allePerioder[0].beregningsgrunnlagPrStatusOgAndel;
+    return allePerioder[0].beregningsgrunnlagPrStatusOgAndel || [];
   }
-  return undefined;
+  return [];
 };
 const andelErIkkeTilkommetEllerLagtTilAvSBH = (andel: BeregningsgrunnlagAndel): boolean => {
   // Andelen er fastsatt før og må kunne fastsettes igjen
@@ -35,17 +35,17 @@ const finnAndelerSomSkalVises = (andeler: BeregningsgrunnlagAndel[], status: str
   if (!andeler) {
     return [];
   }
-
   return andeler
     .filter((andel) => andel.aktivitetStatus.kode === status)
     .filter((andel) => andelErIkkeTilkommetEllerLagtTilAvSBH(andel));
 };
-const beregnAarsintektForAktivitetStatus = (alleAndelerIForstePeriode: BeregningsgrunnlagAndel[], status: string): number => {
+
+const beregnAarsintektForAktivitetStatus = (alleAndelerIForstePeriode: BeregningsgrunnlagAndel[], status: string): number | undefined => {
   const relevanteAndeler = finnAndelerSomSkalVises(alleAndelerIForstePeriode, status);
   if (relevanteAndeler) {
     return relevanteAndeler.reduce((acc, andel) => acc + andel.beregnetPrAar, 0);
   }
-  return null;
+  return undefined;
 };
 
 const lagRelevantePaneler = (
@@ -122,21 +122,23 @@ const harRelevanteStatuserSatt = (statuser: RelevanteStatuserProp): boolean => (
 type OwnProps = {
     relevanteStatuser: RelevanteStatuserProp;
     allePerioder?: BeregningsgrunnlagPeriodeProp[];
-    sammenligningsgrunnlagPrStatus?: SammenligningsgrunlagProp[];
-    harAksjonspunkter?: boolean;
+    sammenligningsgrunnlagPrStatus: SammenligningsgrunlagProp[];
+    harAksjonspunkter: boolean;
     gjelderBesteberegning: boolean;
 };
 
 const AvviksopplysningerPanel: FunctionComponent<OwnProps> = ({
-  relevanteStatuser, allePerioder, harAksjonspunkter, sammenligningsgrunnlagPrStatus, gjelderBesteberegning,
+  relevanteStatuser,
+  allePerioder,
+  harAksjonspunkter,
+  sammenligningsgrunnlagPrStatus,
+  gjelderBesteberegning,
 }) => {
-  const alleAndelerIForstePeriode = finnAlleAndelerIFørstePeriode(allePerioder);
-
-  const skalViseAvviksPanel = harRelevanteStatuserSatt({ ...relevanteStatuser });
-  if (!skalViseAvviksPanel) {
+  const skalViseAvviksPanel = harRelevanteStatuserSatt(relevanteStatuser);
+  if (!skalViseAvviksPanel || !allePerioder) {
     return null;
   }
-
+  const alleAndelerIForstePeriode = finnAlleAndelerIFørstePeriode(allePerioder);
   return (
     <Panel className={beregningStyles.panelRight}>
       <AvsnittSkiller spaceUnder />

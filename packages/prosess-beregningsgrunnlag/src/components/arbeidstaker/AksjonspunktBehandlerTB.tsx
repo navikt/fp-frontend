@@ -264,8 +264,8 @@ const createRows = (tableData: TidsbegrenseArbeidsforholdTabellData,
 };
 
 interface StaticFunctions {
-  buildInitialValues?: (allePerioder: BeregningsgrunnlagPeriodeProp[]) => TidsbegrenseArbeidsforholdValues;
-  transformValues?: (values: TidsbegrenseArbeidsforholdValues,
+  buildInitialValues: (allePerioder: BeregningsgrunnlagPeriodeProp[]) => TidsbegrenseArbeidsforholdValues;
+  transformValues: (values: TidsbegrenseArbeidsforholdValues,
                      perioder: BeregningsgrunnlagPeriodeProp[]) => TidsbegrensetArbeidsforholdPeriodeTransformedValues[];
 }
 

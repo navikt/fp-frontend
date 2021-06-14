@@ -11,8 +11,8 @@ import styles from '../fellesPaneler/aksjonspunktBehandler.less';
 import ArbeidstakerFrilansValues, { FrilansInntektValues } from '../../types/ATFLAksjonspunktTsType';
 
 interface StaticFunctions {
-  buildInitialValues?: (relevanteAndeler: BeregningsgrunnlagAndel[]) => FrilansInntektValues;
-  transformValuesForFL?: (values: ArbeidstakerFrilansValues) => number;
+  buildInitialValues: (relevanteAndeler: BeregningsgrunnlagAndel[]) => FrilansInntektValues;
+  transformValuesForFL: (values: ArbeidstakerFrilansValues) => number;
 }
 
 type OwnProps = {
