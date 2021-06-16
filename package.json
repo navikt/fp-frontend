@@ -43,7 +43,7 @@
     "history": "^4.9.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-modal": "3.14.2"
+    "react-modal": "3.14.3"
   },
   "devDependencies": {
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.2",
@@ -67,7 +67,7 @@
     "@storybook/builder-webpack5": "^6.2.9",
     "@storybook/cli": "^6.2.9",
     "@storybook/react": "^6.2.9",
-    "@storybook/storybook-deployer": "^2.8.8",
+    "@storybook/storybook-deployer": "^2.8.10",
     "@storybook/theming": "^6.2.9",
     "@svgr/webpack": "^5.5.0",
     "@types/enzyme": "^3.10.8",
@@ -132,13 +132,10 @@
   },
   "resolutions": {
     "browserslist": "^4.16.5",
-    "css-what": "^5.0.1",
-    "glob-parent": "^5.1.2",
+    "glob-parent": "^6.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-test-renderer": "^17.0.2",
-    "normalize-url": "^4.5.1",
-    "postcss": "^8.2.10",
     "trim": "^1.0.1",
     "trim-newlines": "^3.0.1"
   }
