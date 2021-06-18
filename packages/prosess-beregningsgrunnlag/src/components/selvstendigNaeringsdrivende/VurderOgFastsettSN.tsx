@@ -28,13 +28,16 @@ const finnSnAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt | unde
 
 type OwnProps = {
     readOnly: boolean;
-    erVarigEndretNaering?: boolean;
-    isAksjonspunktClosed: boolean;
-    erNyArbLivet: boolean;
-    erVarigEndring: boolean;
-    erNyoppstartet: boolean;
+    erNyArbLivet?: boolean;
+    erVarigEndring?: boolean;
+    erNyoppstartet?: boolean;
     endretTekst?: React.ReactNode;
     gjeldendeAksjonspunkter: Aksjonspunkt[];
+};
+
+type MappedProps = {
+  erVarigEndretNaering?: boolean;
+  isAksjonspunktClosed: boolean;
 };
 
 interface StaticFunctions {
@@ -48,7 +51,7 @@ interface StaticFunctions {
  *
  * Containerkomponent. Setter opp riktige forms basert på hvilket aksjonspunkt vi har og hva som er valgt i radioknapper
  */
-export const VurderOgFastsettSNImpl: FunctionComponent<OwnProps> & StaticFunctions = ({
+export const VurderOgFastsettSNImpl: FunctionComponent<OwnProps & MappedProps> & StaticFunctions = ({
   readOnly,
   erVarigEndretNaering,
   isAksjonspunktClosed,
@@ -97,7 +100,7 @@ VurderOgFastsettSNImpl.defaultProps = {
 
 const mapStateToPropsFactory = (initialState: any, ownPropsStatic: OwnProps) => {
   const aksjonspunkt = finnSnAksjonspunkt(ownPropsStatic.gjeldendeAksjonspunkter);
-  return (state: any) => ({
+  return (state: any): MappedProps => ({
     erVarigEndretNaering: formValueSelector(FORM_NAME)(state, 'erVarigEndretNaering'),
     isAksjonspunktClosed: aksjonspunkt ? !isAksjonspunktOpen(aksjonspunkt.status.kode) : false,
   });

@@ -5,7 +5,7 @@ import { Undertekst } from 'nav-frontend-typografi';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
-import {BeregningsgrunnlagAndel, PgiVerdier} from '@fpsak-frontend/types';
+import { BeregningsgrunnlagAndel, PgiVerdier } from '@fpsak-frontend/types';
 
 import { GrunnlagForAarsinntektPanelSN } from './GrunnlagForAarsinntektPanelSN';
 import messages from '../../../i18n/nb_NO.json';

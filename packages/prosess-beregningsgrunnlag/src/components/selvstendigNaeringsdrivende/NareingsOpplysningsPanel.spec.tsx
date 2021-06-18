@@ -5,10 +5,9 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import {BeregningsgrunnlagAndel, Næring} from '@fpsak-frontend/types';
+import { BeregningsgrunnlagAndel, Næring } from '@fpsak-frontend/types';
 import messages from '../../../i18n/nb_NO.json';
 import NaeringsopplysningsPanel from './NaeringsOpplysningsPanel';
-import NæringAksjonspunktTsType from "../../types/NæringAksjonspunktTsType";
 
 const intlMock = getIntlMock(messages);
 

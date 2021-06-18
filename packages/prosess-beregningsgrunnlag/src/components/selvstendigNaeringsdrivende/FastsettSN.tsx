@@ -39,7 +39,7 @@ type OwnProps = {
     endretTekst?: React.ReactNode;
     readOnly: boolean;
     isAksjonspunktClosed: boolean;
-    erNyArbLivet: boolean;
+    erNyArbLivet?: boolean;
     gjeldendeAksjonspunkter: Aksjonspunkt[];
 };
 

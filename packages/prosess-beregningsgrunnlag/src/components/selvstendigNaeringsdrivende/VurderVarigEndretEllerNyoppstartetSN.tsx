@@ -25,7 +25,6 @@ import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
 import VurderVarigEndretTransformed, { VurderOgFastsettValues } from '../../types/NæringAksjonspunktTsType';
-import validate = WebAssembly.validate;
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
@@ -37,8 +36,8 @@ const { VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVE
 type OwnProps = {
     endretTekst?: React.ReactNode;
     readOnly: boolean;
-    erVarigEndring: boolean;
-    erNyoppstartet: boolean;
+    erVarigEndring?: boolean;
+    erNyoppstartet?: boolean;
     erVarigEndretNaering?: boolean;
 };
 

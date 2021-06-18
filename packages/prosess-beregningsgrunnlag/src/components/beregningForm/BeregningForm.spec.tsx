@@ -419,6 +419,7 @@ describe('<BeregningForm>', () => {
       begrunnDekningsgradEndring: '',
       undefined: '',
       dekningsgrad: undefined,
+      erVarigEndretNaering: false,
     };
     expect(actualValues).toEqual(expectedValues);
   });
