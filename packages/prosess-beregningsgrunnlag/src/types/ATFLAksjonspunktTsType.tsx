@@ -62,7 +62,7 @@ export type ATFLTransformedValues = {
   begrunnelse: string;
   kode: string;
   inntektPrAndelList: ArbeidsinntektTransformedValues[];
-  inntektFrilanser: number;
+  inntektFrilanser?: number | null;
 };
 
 export type ATFLTidsbegrensetTransformedValues = {

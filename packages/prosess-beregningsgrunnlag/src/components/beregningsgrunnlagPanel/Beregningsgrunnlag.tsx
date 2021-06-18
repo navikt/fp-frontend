@@ -17,6 +17,7 @@ import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 import MilitaerPanel from '../militar/MilitaerPanel';
 import { AksjonspunktBehandlerTidsbegrensetImpl } from '../arbeidstaker/AksjonspunktBehandlerTB';
 import AksjonspunktBehandlerAT from '../arbeidstaker/AksjonspunktBehandlerAT';
+import AksjonspunktBehandlerFL from '../frilanser/AksjonspunktBehandlerFL';
 
 import GrunnlagForAarsinntektPanelFL from '../frilanser/GrunnlagForAarsinntektPanelFL';
 import SammenlignsgrunnlagAOrdningen from '../fellesPaneler/SammenligningsgrunnlagAOrdningen';
@@ -206,7 +207,7 @@ Beregningsgrunnlag.transformATFLValues = (values: ATFLValues,
   kode: FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
   begrunnelse: values.ATFLVurdering,
   inntektPrAndelList: AksjonspunktBehandlerAT.transformValues(values, relevanteStatuser, alleAndelerIFørstePeriode),
-  inntektFrilanser: values.inntektFrilanser !== undefined ? removeSpacesFromNumber(values.inntektFrilanser) : null,
+  inntektFrilanser: AksjonspunktBehandlerFL.transformValuesForFL(values),
 });
 
 Beregningsgrunnlag.transformATFLTidsbegrensetValues = (values: ATFLTidsbegrensetValues,

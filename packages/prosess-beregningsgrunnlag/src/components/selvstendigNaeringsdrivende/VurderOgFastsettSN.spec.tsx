@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { Aksjonspunkt } from '@fpsak-frontend/types';
 import VurderOgFastsettSN, { VurderOgFastsettSNImpl } from './VurderOgFastsettSN';
 import VurderVarigEndretEllerNyoppstartetSN2,
 {
@@ -15,7 +16,7 @@ const {
   FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
 } = aksjonspunktCodes;
 
-const mockAksjonspunktMedKodeOgStatus = (apKode, begrunnelse, status) => ({
+const mockAksjonspunktMedKodeOgStatus = (apKode: string, begrunnelse: string | undefined, status: string): Aksjonspunkt => ({
   definisjon: {
     kode: apKode,
     kodeverk: 'test',

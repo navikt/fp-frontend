@@ -40,12 +40,12 @@ const AvvikopplysningerFL: FunctionComponent<OwnProps> = ({ relevanteStatuser, s
   if (!sammenligningsGrunnlagFL) {
     return null;
   }
-  if (kombinasjonsstatusATFL && sammenligningsgrunnlagPrStatus.find((status) => status.sammenligningsgrunnlagType.kode === sammenligningType.ATFLSN)) {
+  if (kombinasjonsstatusATFL) {
     return null;
   }
   const avvikFL = sammenligningsGrunnlagFL.avvikProsent !== undefined ? sammenligningsGrunnlagFL.avvikProsent : '';
   const avvikRoundedFL = avvikFL ? parseFloat((avvikFL.toFixed(1))) : 0;
-  const sammenligningsgrunnlagSumFL = sammenligningsGrunnlagFL.rapportertPrAar;
+  const sammenligningsgrunnlagSumFL = sammenligningsGrunnlagFL.rapportertPrAar || 0;
   const { differanseBeregnet } = sammenligningsGrunnlagFL;
   const visPaneler = {
     visAT: false,

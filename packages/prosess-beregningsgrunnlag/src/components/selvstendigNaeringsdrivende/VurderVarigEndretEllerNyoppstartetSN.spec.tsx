@@ -20,7 +20,7 @@ const {
   VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
 } = aksjonspunktCodes;
 
-const mockAksjonspunktMedKodeOgStatus = (apKode, begrunnelse, status) => ({
+const mockAksjonspunktMedKodeOgStatus = (apKode: string, begrunnelse: string | undefined, status: string): Aksjonspunkt => ({
   definisjon: {
     kode: apKode,
   },
@@ -30,7 +30,7 @@ const mockAksjonspunktMedKodeOgStatus = (apKode, begrunnelse, status) => ({
   begrunnelse,
 } as Aksjonspunkt);
 
-const lagAndel = (status, fastsattBelop) => ({
+const lagAndel = (status: string, fastsattBelop: number | undefined): BeregningsgrunnlagAndel => ({
   aktivitetStatus: {
     kode: status,
     kodeverk: 'test',
@@ -57,7 +57,7 @@ describe('<VurderVarigEndretEllerNyoppstartetSN>', () => {
   });
 
   it('Skal teste at buildInitialValues bygges korrekt når tidligere vurdert ingen varig endring', () => {
-    const andeler = [lagAndel(aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE, null), lagAndel(aktivitetStatus.ARBEIDSTAKER, 250000)];
+    const andeler = [lagAndel(aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE, undefined), lagAndel(aktivitetStatus.ARBEIDSTAKER, 250000)];
     const aksjonspunkter = [mockAksjonspunktMedKodeOgStatus(VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE, 'Ok.', 'UTFO')];
 
     const actualValues = UnwrappedForm.buildInitialValues(andeler, aksjonspunkter);
@@ -86,7 +86,7 @@ describe('<VurderVarigEndretEllerNyoppstartetSN>', () => {
   });
 
   it('Skal teste at buildInitialValues bygges korrekt når ikke tidligere vurdert', () => {
-    const andeler = [lagAndel(aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE, null), lagAndel(aktivitetStatus.ARBEIDSTAKER, 250000)];
+    const andeler = [lagAndel(aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE, undefined), lagAndel(aktivitetStatus.ARBEIDSTAKER, 250000)];
     const aksjonspunkter = [mockAksjonspunktMedKodeOgStatus(VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE, undefined, 'OPPR')];
 
     const actualValues = UnwrappedForm.buildInitialValues(andeler, aksjonspunkter);

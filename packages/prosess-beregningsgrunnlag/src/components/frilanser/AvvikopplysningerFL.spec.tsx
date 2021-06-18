@@ -8,7 +8,7 @@ import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 import messages from '../../../i18n/nb_NO.json';
 
 const beregnetAarsinntekt = 360000;
-const sammenligningsgrunnlag = (kode) => ({
+const sammenligningsgrunnlag = (kode: string): SammenligningsgrunlagProp => ({
   sammenligningsgrunnlagFom: '2018-09-01',
   sammenligningsgrunnlagTom: '2019-10-31',
   rapportertPrAar: 330000,
@@ -16,6 +16,7 @@ const sammenligningsgrunnlag = (kode) => ({
   avvikProsent: 27.5,
   sammenligningsgrunnlagType: {
     kode,
+    kodeverk: 'test',
   },
   differanseBeregnet: 12100,
 });

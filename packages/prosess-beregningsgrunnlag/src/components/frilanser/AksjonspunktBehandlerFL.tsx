@@ -12,7 +12,7 @@ import ArbeidstakerFrilansValues, { FrilansInntektValues } from '../../types/ATF
 
 interface StaticFunctions {
   buildInitialValues: (relevanteAndeler: BeregningsgrunnlagAndel[]) => FrilansInntektValues;
-  transformValuesForFL: (values: ArbeidstakerFrilansValues) => number;
+  transformValuesForFL: (values: ArbeidstakerFrilansValues) => number | null;
 }
 
 type OwnProps = {
@@ -40,13 +40,13 @@ const AksjonspunktBehandlerFL: FunctionComponent<OwnProps> & StaticFunctions = (
   </Row>
 );
 
-AksjonspunktBehandlerFL.transformValuesForFL = (values: ArbeidstakerFrilansValues): number => (values.inntektFrilanser !== undefined
+AksjonspunktBehandlerFL.transformValuesForFL = (values: ArbeidstakerFrilansValues): number | null => (values.inntektFrilanser !== undefined
   ? removeSpacesFromNumber(values.inntektFrilanser)
   : null);
 
-AksjonspunktBehandlerFL.buildInitialValues = (relevanteAndeler) => {
+AksjonspunktBehandlerFL.buildInitialValues = (relevanteAndeler: BeregningsgrunnlagAndel[]): FrilansInntektValues => {
   if (relevanteAndeler.length === 0) {
-    return undefined;
+    return {};
   }
   return {
     inntektFrilanser: relevanteAndeler[0].overstyrtPrAar !== undefined ? formatCurrencyNoKr(relevanteAndeler[0].overstyrtPrAar) : '',

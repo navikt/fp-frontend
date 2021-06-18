@@ -13,7 +13,7 @@ const {
   FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
 } = aksjonspunktCodes;
 
-const mockAksjonspunktMedKodeOgStatus = (apKode, begrunnelse, status) => ({
+const mockAksjonspunktMedKodeOgStatus = (apKode: string, begrunnelse: string | undefined, status: string): Aksjonspunkt => ({
   definisjon: {
     kode: apKode,
   },

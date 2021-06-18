@@ -5,7 +5,7 @@ import { Undertekst } from 'nav-frontend-typografi';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
-import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
+import {BeregningsgrunnlagAndel, PgiVerdier} from '@fpsak-frontend/types';
 
 import { GrunnlagForAarsinntektPanelSN } from './GrunnlagForAarsinntektPanelSN';
 import messages from '../../../i18n/nb_NO.json';
@@ -56,8 +56,8 @@ describe('<GrunnlagForAarsinntektPanelSN>', () => {
     expect(formattedMessage.at(1).prop('id')).toEqual('Beregningsgrunnlag.AarsinntektPanel.SN.sisteTreAar');
     expect(formattedMessage.at(2).prop('id')).toEqual('Beregningsgrunnlag.AarsinntektPanel.AarHeader');
     expect(formattedMessage.at(3).prop('id')).toEqual('Beregningsgrunnlag.AarsinntektPanel.TotalPensjonsGivende');
-
-    andel.pgiVerdier.forEach((pgi, index) => {
+    const verdier = andel.pgiVerdier as PgiVerdier[];
+    verdier.forEach((pgi, index) => {
       const etikettLiten = rows.at(index + 2).find(Undertekst);
       const expectedBelop = formatCurrencyNoKr(pgi.beløp);
       const expectedAar = pgi.årstall.toString();

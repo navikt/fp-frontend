@@ -20,8 +20,8 @@ const ingenAvviksvurdering = (forklarendeTekst: string): ReactElement => (
 );
 
 type OwnProps = {
-    alleAndelerIForstePeriode?: BeregningsgrunnlagAndel[];
-    sammenligningsgrunnlagPrStatus?: SammenligningsgrunlagProp[];
+    alleAndelerIForstePeriode: BeregningsgrunnlagAndel[];
+    sammenligningsgrunnlagPrStatus: SammenligningsgrunlagProp[];
     relevanteStatuser: RelevanteStatuserProp
 };
 
@@ -31,6 +31,9 @@ const AvvikopplysningerSN: FunctionComponent<OwnProps> = ({
   relevanteStatuser,
 }) => {
   const snAndel = alleAndelerIForstePeriode.find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
+  if (!snAndel) {
+    return null;
+  }
   const erNyArbLivet = snAndel.erNyIArbeidslivet;
   const erVarigEndring = snAndel.næringer && snAndel.næringer.some((naring) => naring.erVarigEndret === true);
   const erNyoppstartet = snAndel.næringer && snAndel.næringer.some((naring) => naring.erNyoppstartet === true);
@@ -50,7 +53,7 @@ const AvvikopplysningerSN: FunctionComponent<OwnProps> = ({
   const { pgiSnitt } = snAndel;
   const avvikSN = sammenligningsGrunnlagSN.avvikProsent;
   const avvikRoundedSN = avvikSN ? parseFloat((avvikSN.toFixed(1))) : 0;
-  const sammenligningsgrunnlagSumSN = sammenligningsGrunnlagSN.rapportertPrAar;
+  const sammenligningsgrunnlagSumSN = sammenligningsGrunnlagSN.rapportertPrAar || 0;
   const { differanseBeregnet } = sammenligningsGrunnlagSN;
   const visPaneler = {
     visAT: false,

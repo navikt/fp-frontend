@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
   Element, Normaltekst, Undertekst,
@@ -27,7 +27,7 @@ const createHeaderRow = (): React.ReactNode => (
     </Column>
   </Row>
 );
-const createSumRow = (pgiSnitt: number): React.ReactNode => (
+const createSumRow = (pgiSnitt: number | undefined): React.ReactNode => (
   <>
     {pgiSnitt !== undefined && (
       <>
@@ -54,24 +54,29 @@ const createSumRow = (pgiSnitt: number): React.ReactNode => (
     )}
   </>
 );
-const createInntektRows = (pgiVerdier: PgiVerdier[]): React.ReactNode => (
-  <>
-    {pgiVerdier.map((element) => (
-      <Row key={element.årstall}>
-        <Column xs="7">
-          <Undertekst>
-            {element.årstall}
-          </Undertekst>
-        </Column>
-        <Column xs="5" className={beregningStyles.colAarText}>
-          <Undertekst>
-            {formatCurrencyNoKr(element.beløp)}
-          </Undertekst>
-        </Column>
-      </Row>
-    ))}
-  </>
-);
+const createInntektRows = (pgiVerdier: PgiVerdier[] | undefined): ReactElement => {
+  if (!pgiVerdier) {
+    return <></>;
+  }
+  return (
+    <>
+      {pgiVerdier.map((element) => (
+        <Row key={element.årstall}>
+          <Column xs="7">
+            <Undertekst>
+              {element.årstall}
+            </Undertekst>
+          </Column>
+          <Column xs="5" className={beregningStyles.colAarText}>
+            <Undertekst>
+              {formatCurrencyNoKr(element.beløp)}
+            </Undertekst>
+          </Column>
+        </Row>
+      ))}
+    </>
+  );
+};
 
 type OwnProps = {
     alleAndeler: BeregningsgrunnlagAndel[];

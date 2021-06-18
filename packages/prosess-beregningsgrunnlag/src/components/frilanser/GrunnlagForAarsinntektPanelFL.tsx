@@ -20,9 +20,9 @@ type OwnProps = {
  * Vises også hvis status er en kombinasjonsstatus som inkluderer frilanser.
  */
 const GrunnlagForAarsinntektPanelFL: FunctionComponent<OwnProps> = ({ alleAndeler }) => {
-  const relevanteAndeler = alleAndeler.filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.FRILANSER);
-  const beregnetAarsinntekt = relevanteAndeler[0].beregnetPrAar;
-  const startDato = relevanteAndeler[0].arbeidsforhold.startdato;
+  const frilansAndel = alleAndeler.find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.FRILANSER);
+  const beregnetAarsinntekt = frilansAndel?.beregnetPrAar || 0;
+  const startDato = frilansAndel?.arbeidsforhold?.startdato;
   return (
     <>
       <>

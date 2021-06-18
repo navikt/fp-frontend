@@ -15,7 +15,7 @@ const lagAndel = (startdato?: string): BeregningsgrunnlagAndel => ({
     kodeverk: 'test',
   },
   elementNavn: 'arbeidsgiver 1',
-  beregnetPrAar: 200000,
+  beregnetPrAar: 240000,
   overstyrtPrAar: 100,
   beregningsgrunnlagFom: '2019-06-01',
   arbeidsforhold: {
@@ -37,7 +37,7 @@ describe('<GrunnlagForAarsinntektPanelFL>', () => {
     const mndAndelFL = rows.at(1).find('Normaltekst');
     const aarAndelFL = rows.at(1).find('Element');
     expect(ledeText.get(0).props.id).toBe('Beregningsgrunnlag.AarsinntektPanel.InnrapportertFrilans');
-    expect(mndAndelFL.at(1).childAt(0).text()).toBe(formatCurrencyNoKr((andel.beregnetPrAar / 12)));
+    expect(mndAndelFL.at(1).childAt(0).text()).toBe(formatCurrencyNoKr(240000 / 12));
     expect(aarAndelFL.childAt(0).text()).toBe(formatCurrencyNoKr(andel.beregnetPrAar));
   });
   it('Skal teste tabellen får korrekt antall rader ved arbeidsforhold startdato', () => {
@@ -58,7 +58,7 @@ describe('<GrunnlagForAarsinntektPanelFL>', () => {
     const aarAndelFL = rows.at(2).find('Element');
 
     expect(ledeText.get(0).props.id).toBe('Beregningsgrunnlag.AarsinntektPanel.InnrapportertFrilans');
-    expect(mndAndelFL.at(1).childAt(0).text()).toBe(formatCurrencyNoKr((andel.beregnetPrAar / 12)));
+    expect(mndAndelFL.at(1).childAt(0).text()).toBe(formatCurrencyNoKr(240000 / 12));
     expect(aarAndelFL.childAt(0).text()).toBe(formatCurrencyNoKr(andel.beregnetPrAar));
   });
 });

@@ -21,10 +21,10 @@ const {
   VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
 } = aksjonspunktCodes;
 
-const finnSnAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt => aksjonspunkter && aksjonspunkter.find(
-  (ap) => ap.definisjon.kode === VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE
-    || ap.definisjon.kode === FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
-);
+const finnSnAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt | undefined => (aksjonspunkter
+  ? aksjonspunkter.find((ap) => ap.definisjon.kode === VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE
+    || ap.definisjon.kode === FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET)
+  : undefined);
 
 type OwnProps = {
     readOnly: boolean;
@@ -95,11 +95,11 @@ VurderOgFastsettSNImpl.defaultProps = {
   erVarigEndretNaering: undefined,
 };
 
-const mapStateToPropsFactory = (initialState, ownPropsStatic) => {
+const mapStateToPropsFactory = (initialState: any, ownPropsStatic: OwnProps) => {
   const aksjonspunkt = finnSnAksjonspunkt(ownPropsStatic.gjeldendeAksjonspunkter);
-  return (state) => ({
+  return (state: any) => ({
     erVarigEndretNaering: formValueSelector(FORM_NAME)(state, 'erVarigEndretNaering'),
-    isAksjonspunktClosed: !isAksjonspunktOpen(aksjonspunkt.status.kode),
+    isAksjonspunktClosed: aksjonspunkt ? !isAksjonspunktOpen(aksjonspunkt.status.kode) : false,
   });
 };
 

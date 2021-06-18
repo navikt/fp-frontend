@@ -5,9 +5,10 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
+import {BeregningsgrunnlagAndel, Næring} from '@fpsak-frontend/types';
 import messages from '../../../i18n/nb_NO.json';
 import NaeringsopplysningsPanel from './NaeringsOpplysningsPanel';
+import NæringAksjonspunktTsType from "../../types/NæringAksjonspunktTsType";
 
 const intlMock = getIntlMock(messages);
 
@@ -29,7 +30,6 @@ const andelerForstePeriode = {
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    utenlandskvirksomhetsnavn: null,
     virksomhetType:
     {
       kode: 'ANNEN',
@@ -58,11 +58,11 @@ describe('NaeringsopplysningsPanel', () => {
     expect(formattedMessages.first().props().id).toBe('Beregningsgrunnlag.NaeringsOpplysningsPanel.Overskrift');
     expect(formattedMessages.at(1).props().id).toBe('Beregningsgrunnlag.NaeringsOpplysningsPanel.OppgittAar');
     expect(formattedMessages.at(2).props().id).toBe('Beregningsgrunnlag.NaeringsOpplysningsPanel.VirksomhetsType.ANNEN');
-
+    const næringer = andelerForstePeriode.næringer as Næring[];
     const allMessages = wrapper.find('Normaltekst');
     expect(allMessages).toHaveLength(5);
-    expect(allMessages.at(1).childAt(0).text()).toBe(formatCurrencyNoKr(andelerForstePeriode.næringer[0].oppgittInntekt));
-    expect(allMessages.at(2).childAt(0).text()).toBe(andelerForstePeriode.næringer[0].orgnr);
+    expect(allMessages.at(1).childAt(0).text()).toBe(formatCurrencyNoKr(næringer[0].oppgittInntekt));
+    expect(allMessages.at(2).childAt(0).text()).toBe(næringer[0].orgnr);
     const lesMer = wrapper.find('Lesmerpanel');
     expect(lesMer.length).toBe(1);
   });

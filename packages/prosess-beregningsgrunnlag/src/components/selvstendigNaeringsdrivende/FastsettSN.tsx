@@ -122,7 +122,7 @@ export const FastsettSNImpl: FunctionComponent<OwnProps & WrappedComponentProps>
 FastsettSNImpl.buildInitialValuesNyIArbeidslivet = (relevanteAndeler: BeregningsgrunnlagAndel[],
   gjeldendeAksjonspunkter: Aksjonspunkt[]): NyIArbeidslivetValues => {
   if (relevanteAndeler.length === 0 || !gjeldendeAksjonspunkter || gjeldendeAksjonspunkter.length === 0) {
-    return undefined;
+    return {};
   }
   const snAndel = relevanteAndeler.find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
   const nyIArbeidslivetAP = gjeldendeAksjonspunkter
@@ -135,8 +135,8 @@ FastsettSNImpl.buildInitialValuesNyIArbeidslivet = (relevanteAndeler: Beregnings
 
 FastsettSNImpl.transformValuesNyIArbeidslivet = (values: NyIArbeidslivetValues): NyIArbeidslivetruttoNæringTransformed => ({
   kode: FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
-  begrunnelse: values[begrunnelseFieldname],
-  bruttoBeregningsgrunnlag: removeSpacesFromNumber(values[fastsettInntektFieldname]),
+  begrunnelse: values.fastsettBeregningsgrnunnlagSNBegrunnelse,
+  bruttoBeregningsgrunnlag: values.bruttoBeregningsgrunnlag ? removeSpacesFromNumber(values.bruttoBeregningsgrunnlag) : undefined,
 });
 
 export default injectIntl(FastsettSNImpl);

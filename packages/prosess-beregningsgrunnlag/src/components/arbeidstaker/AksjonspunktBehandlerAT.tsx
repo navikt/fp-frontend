@@ -76,7 +76,7 @@ const createRows = (relevanteAndelerAT: BeregningsgrunnlagAndel[],
 ));
 
 interface StaticFunctions {
-  transformValues?: (values: ArbeidstakerInntektValues, relevanteStatuser: RelevanteStatuserProp,
+  transformValues: (values: ArbeidstakerInntektValues, relevanteStatuser: RelevanteStatuserProp,
                      alleAndelerIForstePeriode: BeregningsgrunnlagAndel[],) => ArbeidsinntektTransformedValues[];
 }
 
