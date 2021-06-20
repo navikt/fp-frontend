@@ -41,7 +41,6 @@
                     "kode": "BOSTEDSADRESSE",
                     "kodeverk": "ADRESSE_TYPE"
                 },
-                "mottakerNavn": "Harepus Hjørdis",
                 "adresselinje1": "Fjordlandet 10 B",
                 "postNummer": "2500",
                 "poststed": "Tynset",
@@ -72,8 +71,7 @@
                     "adresseType": {
                         "kode": "UKJENT_ADRESSE",
                         "kodeverk": "ADRESSE_TYPE"
-                    },
-                    "mottakerNavn": "Duck Dole"
+                    }
                 }
             ]
         }

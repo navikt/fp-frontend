@@ -102,7 +102,6 @@ const medlemskap = {
           kode: 'BOSTEDSADRESSE',
           kodeverk: 'ADRESSE_TYPE',
         },
-        mottakerNavn: 'Mygg Robust',
         adresselinje1: 'Skogvegen 3',
         postNummer: '4353',
         poststed: 'Klepp Stasjon',
