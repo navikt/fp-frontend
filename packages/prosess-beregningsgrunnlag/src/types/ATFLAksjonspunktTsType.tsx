@@ -11,11 +11,11 @@ export type TidsbegrenseArbeidsforholdValues = {
 }
 
 export type ATFLValues = FrilansInntektValues & ArbeidstakerInntektValues & {
-  ATFLVurdering: string;
+  ATFLVurdering?: string;
 }
 
 export type ATFLTidsbegrensetValues = FrilansInntektValues & TidsbegrenseArbeidsforholdValues & {
-  ATFLVurdering: string;
+  ATFLVurdering?: string;
 }
 
 export type TidsbegrenseArbeidsforholdInntektMap = {

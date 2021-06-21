@@ -53,6 +53,7 @@ describe('<Avviksopplysninger>', () => {
       sammenligningsgrunnlagPrStatus={[sammenligningsgrunnlagPrStatus]}
       allePerioder={allePerioder}
       gjelderBesteberegning={false}
+      harAksjonspunkter={false}
     />, messages);
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find(FormattedMessage).first();
@@ -69,6 +70,7 @@ describe('<Avviksopplysninger>', () => {
       sammenligningsgrunnlagPrStatus={[sammenligningsgrunnlagPrStatus]}
       allePerioder={allePerioder}
       gjelderBesteberegning={false}
+      harAksjonspunkter={false}
     />, messages);
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find(FormattedMessage).first();
@@ -104,6 +106,7 @@ describe('<Avviksopplysninger>', () => {
       relevanteStatuser={relevanteStatuser as RelevanteStatuserProp}
       allePerioder={perioderMedSNAndel}
       gjelderBesteberegning={false}
+      harAksjonspunkter={false}
     />, messages);
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find(FormattedMessage).first();
@@ -123,6 +126,7 @@ describe('<Avviksopplysninger>', () => {
       sammenligningsgrunnlagPrStatus={[sammenligningsgrunnlagPrStatus]}
       allePerioder={allePerioder}
       gjelderBesteberegning={false}
+      harAksjonspunkter={false}
     />, messages);
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find(FormattedMessage).first();
@@ -142,6 +146,7 @@ describe('<Avviksopplysninger>', () => {
       sammenligningsgrunnlagPrStatus={[]}
       allePerioder={allePerioder}
       gjelderBesteberegning={false}
+      harAksjonspunkter={false}
     />, messages);
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find(FormattedMessage).first();
@@ -165,6 +170,7 @@ describe('<Avviksopplysninger>', () => {
       sammenligningsgrunnlagPrStatus={[]}
       allePerioder={allePerioder}
       gjelderBesteberegning={false}
+      harAksjonspunkter={false}
     />, messages);
     const panel = wrapper.find(Panel);
     const headerTitle = panel.find(FormattedMessage).first();
@@ -188,6 +194,7 @@ describe('<Avviksopplysninger>', () => {
       sammenligningsgrunnlagPrStatus={[]}
       allePerioder={allePerioder}
       gjelderBesteberegning={false}
+      harAksjonspunkter={false}
     />, messages);
     const panel = wrapper.find(Panel);
     const formatedText = panel.find(FormattedMessage);
@@ -209,6 +216,7 @@ describe('<Avviksopplysninger>', () => {
       sammenligningsgrunnlagPrStatus={[]}
       allePerioder={allePerioder}
       gjelderBesteberegning
+      harAksjonspunkter={false}
     />, messages);
     const panel = wrapper.find(Panel);
     const formatedText = panel.find(FormattedMessage);

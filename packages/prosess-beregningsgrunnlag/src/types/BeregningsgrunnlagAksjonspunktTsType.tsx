@@ -8,11 +8,11 @@ import { NyIArbeidslivetValues, VurderOgFastsettValues } from './NæringAksjonsp
 import { DekningsgradValues } from './DekningsgradAksjonspunktTsType';
 
 type BeregningsgrunnlagValues = ATFLDekningsgradBegrunnelseValues
-  & ATFLTidsbegrensetValues
-  & FrilansInntektValues
-  & VurderOgFastsettValues
-  & NyIArbeidslivetValues
-  & ATFLValues
-  & DekningsgradValues;
+  | ATFLTidsbegrensetValues
+  | FrilansInntektValues
+  | VurderOgFastsettValues
+  | NyIArbeidslivetValues
+  | ATFLValues
+  | DekningsgradValues;
 
 export default BeregningsgrunnlagValues;

@@ -53,7 +53,7 @@ const getRelevanteStatuser = (bg: Beregningsgrunnlag): RelevanteStatuserProp => 
   harDagpengerEllerAAP: !!(bg.aktivitetStatus && bg.aktivitetStatus.some(({ kode }) => isStatusDagpengerOrAAP(kode))),
   isAAP: !!(bg.aktivitetStatus && bg.aktivitetStatus.some(({ kode }) => kode === aktivitetStatus.ARBEIDSAVKLARINGSPENGER)),
   isDagpenger: !!(bg.aktivitetStatus && bg.aktivitetStatus.some(({ kode }) => kode === aktivitetStatus.DAGPENGER)),
-  skalViseBeregningsgrunnlag: !!(bg.aktivitetStatus && bg.aktivitetStatus && bg.aktivitetStatus.length > 0),
+  skalViseBeregningsgrunnlag: !!(bg.aktivitetStatus && bg.aktivitetStatus.length > 0),
   isKombinasjonsstatus: !!(bg.aktivitetStatus && (bg.aktivitetStatus.some(({ kode }) => isStatusKombinasjon(kode)) || bg.aktivitetStatus.length > 1)),
   isMilitaer: !!(bg.aktivitetStatus && bg.aktivitetStatus.some(({ kode }) => isStatusMilitaer(kode))),
 });
