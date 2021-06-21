@@ -90,6 +90,7 @@ interface PureOwnProps {
   readOnlySubmitButton: boolean;
   navBrukerKjonn: string;
   beregnBelop: (data: any) => Promise<any>;
+  behandlingUuid: string;
 }
 
 interface MappedOwnProps {
@@ -229,6 +230,7 @@ export class TilbakekrevingFormImpl extends Component<Props, StateProps> {
       alleKodeverk,
       beregnBelop,
       intl,
+      behandlingUuid,
       ...formProps
     } = this.props;
     const {
@@ -279,6 +281,7 @@ export class TilbakekrevingFormImpl extends Component<Props, StateProps> {
                     oppdaterPeriode={this.oppdaterPeriode}
                     oppdaterSplittedePerioder={this.oppdaterSplittedePerioder}
                     behandlingVersjon={behandlingVersjon}
+                    behandlingUuid={behandlingUuid}
                     alleKodeverk={alleKodeverk}
                     beregnBelop={beregnBelop}
                     vilkarsVurdertePerioder={vilkarsVurdertePerioder}
