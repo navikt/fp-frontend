@@ -41,6 +41,7 @@ const TilbakekrevingProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
     <ReduxWrapper formName="TilbakekrevingProsessIndex" formData={formData} setFormData={setFormData}>
       <TilbakekrevingForm
         behandlingVersjon={behandling.versjon}
+        behandlingUuid={behandling.uuid}
         perioderForeldelse={perioderForeldelse}
         perioder={vilkarvurderingsperioder.perioder}
         rettsgebyr={vilkarvurderingsperioder.rettsgebyr}
