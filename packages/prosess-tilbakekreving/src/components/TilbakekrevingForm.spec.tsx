@@ -43,6 +43,7 @@ describe('<TilbakekrevingForm>', () => {
         notAccepted: false,
       }}
       behandlingVersjon={2}
+      behandlingUuid="1"
       alleKodeverk={{} as AlleKodeverkTilbakekreving}
       beregnBelop={() => undefined}
       perioderForeldelse={{} as any}
@@ -79,6 +80,7 @@ describe('<TilbakekrevingForm>', () => {
         notAccepted: false,
       }}
       behandlingVersjon={2}
+      behandlingUuid="1"
       alleKodeverk={{} as AlleKodeverkTilbakekreving}
       beregnBelop={() => undefined}
       perioderForeldelse={{} as any}
@@ -114,6 +116,7 @@ describe('<TilbakekrevingForm>', () => {
         notAccepted: false,
       }}
       behandlingVersjon={2}
+      behandlingUuid="1"
       alleKodeverk={{} as AlleKodeverkTilbakekreving}
       beregnBelop={() => undefined}
       error="TilbakekrevingPeriodeForm.TotalbelopetUnder4Rettsgebyr"
