@@ -36,6 +36,10 @@
   "Behandlingspunkt.Årsak.Dødfødsel": "Dødfødsel",
   "Behandlingspunkt.Årsak.NyeRegisteropplysninger": "Nye registeropplysninger",
   "Behandlingspunkt.Årsak.OpplysningerAnnenYtelse": "Opplysninger annen ytelse",
+  "Behandlingspunkt.Årsak.Feriepenger": "Omfordel feriepenger",
+  "Behandlingspunkt.Årsak.Gregulering": "Regulering grunnbeløp",
+  "Behandlingspunkt.Årsak.NyttBarn": "Nytt barn/sak",
+  "Behandlingspunkt.Årsak.Pleiepenger": "Pleiepenger",
 
   "DateTimeLabel.Kl": "Kl."
 }

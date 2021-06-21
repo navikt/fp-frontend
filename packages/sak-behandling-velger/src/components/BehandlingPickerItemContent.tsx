@@ -76,6 +76,14 @@ const getÅrsak = (årsak: BehandlingÅrsak) => {
       return 'Behandlingspunkt.Årsak.Dødfødsel';
     case 'RE-REGISTEROPPL':
       return 'Behandlingspunkt.Årsak.NyeRegisteropplysninger';
+    case 'REBEREGN-FERIEPENGER':
+      return 'Behandlingspunkt.Årsak.Feriepenger';
+    case 'RE-SATS-REGULERING':
+      return 'Behandlingspunkt.Årsak.Gregulering';
+    case 'OPPHØR-NYTT-BARN':
+      return 'Behandlingspunkt.Årsak.NyttBarn';
+    case 'RE-VEDTAK-PSB':
+      return 'Behandlingspunkt.Årsak.Pleiepenger';
     default:
       return 'Behandlingspunkt.Årsak.Annet';
   }
