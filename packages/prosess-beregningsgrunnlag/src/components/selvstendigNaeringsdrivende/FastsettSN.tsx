@@ -54,7 +54,7 @@ interface StaticFunctions {
  * Aksjonspunkt: FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET, FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE
  *
  * Presentasjonskomponent. Setter opp inputfelt som lar saksbehandler fastsette
- * næringsinntekt for selvstendig næringsdrivende. Opprettes enten hvis det er varig endret / nyoppstartet næring eller søker er ny i arbeidslivet.
+ * næringsinntekt for selvstendig næringsdrivende. Settes opp enten hvis det er varig endret / nyoppstartet næring eller søker er ny i arbeidslivet.
  */
 export const FastsettSNImpl: FunctionComponent<OwnProps & WrappedComponentProps> & StaticFunctions = ({
   readOnly, isAksjonspunktClosed, intl, gjeldendeAksjonspunkter, erNyArbLivet, endretTekst,
