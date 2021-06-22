@@ -53,6 +53,7 @@ interface OwnProps {
 const BehandlingPickerItemContent: FunctionComponent<OwnProps> = ({
   withChevronDown = false,
   withChevronUp = false,
+  getKodeverkFn,
   behandlendeEnhetId,
   behandlendeEnhetNavn,
   opprettetDato,
@@ -63,7 +64,6 @@ const BehandlingPickerItemContent: FunctionComponent<OwnProps> = ({
   behandlingsresultatTypeKode,
   behandlingsresultatTypeNavn,
   førsteÅrsak,
-  førsteÅrsakNavn,
   behandlingTypeKode,
 }) => (
   <Panel border>
@@ -76,7 +76,9 @@ const BehandlingPickerItemContent: FunctionComponent<OwnProps> = ({
           <>
             <FlexColumn className={styles.arsakPadding}>-</FlexColumn>
             <FlexColumn>
-              <Normaltekst>{førsteÅrsakNavn}</Normaltekst>
+              <Normaltekst>
+                {getKodeverkFn(førsteÅrsak.behandlingArsakType, { kode: behandlingType.REVURDERING, kodeverk: '' })?.navn || ''}
+              </Normaltekst>
             </FlexColumn>
           </>
         )}
