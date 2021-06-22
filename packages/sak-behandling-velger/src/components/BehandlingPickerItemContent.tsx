@@ -12,7 +12,7 @@ import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakTyp
 import chevronUp from '@fpsak-frontend/assets/images/pil_opp.svg';
 import chevronDown from '@fpsak-frontend/assets/images/pil_ned.svg';
 import stjerneImg from '@fpsak-frontend/assets/images/stjerne.svg';
-import { BehandlingAppKontekst, Kodeverk } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import styles from './behandlingPickerItemContent.less';
 
@@ -32,6 +32,7 @@ const renderChevron = (chevron: string, messageId: string): ReactElement => (
 interface OwnProps {
   withChevronDown?: boolean;
   withChevronUp?: boolean;
+  getKodeverkFn: (kodeverk: Kodeverk, behandlingType: Kodeverk) => KodeverkMedNavn | undefined;
   behandlendeEnhetId?: string;
   behandlendeEnhetNavn?: string;
   opprettetDato: string;
