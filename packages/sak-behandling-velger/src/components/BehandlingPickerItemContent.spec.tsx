@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { FormattedMessage } from 'react-intl';
 import Panel from 'nav-frontend-paneler';
 
 import { DateLabel } from '@fpsak-frontend/shared-components';
@@ -8,10 +7,17 @@ import { DateLabel } from '@fpsak-frontend/shared-components';
 import BehandlingPickerItemContent from './BehandlingPickerItemContent';
 
 describe('<BehandlingPickerItemContent>', () => {
+  const getKodeverkFn = () => ({
+    kode: '',
+    kodeverk: '',
+    navn: 'Annet',
+  });
+
   it('skal rendre komponent', () => {
     const wrapper = shallow(<BehandlingPickerItemContent
       withChevronDown
       withChevronUp
+      getKodeverkFn={getKodeverkFn}
       behandlingTypeKode="BT-002"
       behandlingTypeNavn="Foreldrepenger"
       opprettetDato="2018-01-01"
@@ -27,6 +33,7 @@ describe('<BehandlingPickerItemContent>', () => {
     const wrapper = shallow(<BehandlingPickerItemContent
       withChevronDown
       withChevronUp
+      getKodeverkFn={getKodeverkFn}
       behandlingTypeKode="BT-002"
       behandlingTypeNavn="Foreldrepenger"
       opprettetDato="2018-01-01"
@@ -53,6 +60,7 @@ describe('<BehandlingPickerItemContent>', () => {
     const wrapper = shallow(<BehandlingPickerItemContent
       withChevronDown
       withChevronUp
+      getKodeverkFn={getKodeverkFn}
       behandlingTypeKode="BT-004"
       behandlingTypeNavn="Foreldrepenger"
       opprettetDato="2018-01-01"
@@ -62,7 +70,6 @@ describe('<BehandlingPickerItemContent>', () => {
       erGjeldendeVedtak={false}
     />);
 
-    const formattedMessages = wrapper.find(FormattedMessage);
-    expect(formattedMessages.first().prop('id')).toEqual('Behandlingspunkt.Årsak.Annet');
+    expect(wrapper.contains('Annet'));
   });
 });
