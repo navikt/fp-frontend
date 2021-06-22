@@ -6,6 +6,7 @@ import Panel from 'nav-frontend-paneler';
 import { DateLabel } from '@fpsak-frontend/shared-components';
 
 import BehandlingPickerItemContent from './BehandlingPickerItemContent';
+import {FlexColumn} from "../../../shared-components";
 
 describe('<BehandlingPickerItemContent>', () => {
   const getKodeverkFn = () => ({
@@ -71,7 +72,7 @@ describe('<BehandlingPickerItemContent>', () => {
       erGjeldendeVedtak={false}
     />);
 
-    const formattedMessages = wrapper.find(FormattedMessage);
-    expect(formattedMessages.first().prop('id')).toEqual('Annet');
+    const messages = wrapper.find('Annet');
+    expect(messages).toHaveLength(1);
   });
 });
