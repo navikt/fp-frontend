@@ -35,6 +35,7 @@ const renderItemContent = (
   <BehandlingPickerItemContent
     withChevronDown={withChevronDown}
     withChevronUp={withChevronUp}
+    getKodeverkFn={getKodeverkFn}
     {...getContentProps(behandling, getKodeverkFn)}
   />
 );

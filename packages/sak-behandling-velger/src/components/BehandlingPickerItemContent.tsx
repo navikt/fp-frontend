@@ -12,74 +12,9 @@ import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakTyp
 import chevronUp from '@fpsak-frontend/assets/images/pil_opp.svg';
 import chevronDown from '@fpsak-frontend/assets/images/pil_ned.svg';
 import stjerneImg from '@fpsak-frontend/assets/images/stjerne.svg';
-import { BehandlingAppKontekst, Kodeverk, BehandlingÅrsak } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import styles from './behandlingPickerItemContent.less';
-
-// TODO (TOR) Kva er dette for noko? Desse tekstane burde vel komma fra kodeverket? Ein skal uansett ikkje hardkoda kodane her!
-const getÅrsak = (årsak: BehandlingÅrsak) => {
-  switch (årsak.behandlingArsakType.kode) {
-    case 'RE-MF':
-    case 'RE-MFIP':
-      return 'Behandlingspunkt.Årsak.ManglerFødselsdato';
-    case 'RE-AVAB':
-      return 'Behandlingspunkt.Årsak.AvvikAntallBarn';
-    case 'RE-LOV':
-    case 'RE-RGLF':
-      return 'Behandlingspunkt.Årsak.FeilLovanvendelse';
-    case 'RE-FEFAKTA':
-      return 'Behandlingspunkt.Årsak.EndredeOpplysninger';
-    case 'RE-PRSSL':
-    case 'RE-ANNET':
-      return 'Behandlingspunkt.Årsak.Annet';
-    case 'RE-END-FRA-BRUKER':
-      return 'Behandlingspunkt.Årsak.Søknad';
-    case 'RE-END-INNTEKTSMELD':
-      return 'Behandlingspunkt.Årsak.Inntektsmelding';
-    case 'BERØRT-BEHANDLING':
-      return 'Behandlingspunkt.Årsak.BerørtBehandling';
-    case 'KØET-BEHANDLING':
-      return 'Behandlingspunkt.Årsak.KøetBehandling';
-    case 'RE-KLAG-U-INNTK':
-    case 'RE-KLAG-M-INNTK':
-    case 'ETTER_KLAGE':
-      return 'Behandlingspunkt.Årsak.Klage';
-    case 'RE-MDL':
-      return 'Behandlingspunkt.Årsak.OpplysningerMedlemskap';
-    case 'RE-OPTJ':
-      return 'Behandlingspunkt.Årsak.OpplysningerOpptjening';
-    case 'RE-FRDLING':
-      return 'Behandlingspunkt.Årsak.OpplysningerFordeling';
-    case 'RE-INNTK':
-      return 'Behandlingspunkt.Årsak.OpplysningerInntekt';
-    case 'RE-DØD':
-      return 'Behandlingspunkt.Årsak.OpplysningerDød';
-    case 'RE-SRTB':
-      return 'Behandlingspunkt.Årsak.OpplysningerRelasjon';
-    case 'RE-FRIST':
-      return 'Behandlingspunkt.Årsak.OpplysningerSøknadsfrist';
-    case 'RE-BER-GRUN':
-    case 'RE-ENDR-BER-GRUN':
-      return 'Behandlingspunkt.Årsak.OpplysningerBeregning';
-    case 'RE-YTELSE':
-    case 'RE-TILST-YT-INNVIL':
-    case 'RE-TILST-YT-OPPH':
-      return 'Behandlingspunkt.Årsak.OpplysningerAnnenYtelse';
-    case 'RE-HENDELSE-FØDSEL':
-    case 'RE-FØDSEL':
-      return 'Behandlingspunkt.Årsak.Fødsel';
-    case 'RE-HENDELSE-DØD-F':
-      return 'Behandlingspunkt.Årsak.SøkerDød';
-    case 'RE-HENDELSE-DØD-B':
-      return 'Behandlingspunkt.Årsak.BarnDød';
-    case 'RE-HENDELSE-DØDFØD':
-      return 'Behandlingspunkt.Årsak.Dødfødsel';
-    case 'RE-REGISTEROPPL':
-      return 'Behandlingspunkt.Årsak.NyeRegisteropplysninger';
-    default:
-      return 'Behandlingspunkt.Årsak.Annet';
-  }
-};
 
 const tilbakekrevingÅrsakTyperKlage = [
   behandlingArsakType.RE_KLAGE_KA,
@@ -97,6 +32,7 @@ const renderChevron = (chevron: string, messageId: string): ReactElement => (
 interface OwnProps {
   withChevronDown?: boolean;
   withChevronUp?: boolean;
+  getKodeverkFn: (kodeverk: Kodeverk, behandlingType: Kodeverk) => KodeverkMedNavn | undefined;
   behandlendeEnhetId?: string;
   behandlendeEnhetNavn?: string;
   opprettetDato: string;
@@ -118,6 +54,7 @@ interface OwnProps {
 const BehandlingPickerItemContent: FunctionComponent<OwnProps> = ({
   withChevronDown = false,
   withChevronUp = false,
+  getKodeverkFn,
   behandlendeEnhetId,
   behandlendeEnhetNavn,
   opprettetDato,
@@ -141,7 +78,7 @@ const BehandlingPickerItemContent: FunctionComponent<OwnProps> = ({
             <FlexColumn className={styles.arsakPadding}>-</FlexColumn>
             <FlexColumn>
               <Normaltekst>
-                <FormattedMessage id={getÅrsak(førsteÅrsak)} />
+                {getKodeverkFn(førsteÅrsak.behandlingArsakType, { kode: behandlingType.REVURDERING, kodeverk: '' })?.navn || ''}
               </Normaltekst>
             </FlexColumn>
           </>
