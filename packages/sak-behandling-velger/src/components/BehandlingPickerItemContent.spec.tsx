@@ -70,7 +70,6 @@ describe('<BehandlingPickerItemContent>', () => {
       erGjeldendeVedtak={false}
     />);
 
-    const messages = wrapper.find('Annet');
-    expect(messages).toHaveLength(1);
+    expect(wrapper.contains('Annet'));
   });
 });
