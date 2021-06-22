@@ -8,10 +8,18 @@ import { DateLabel } from '@fpsak-frontend/shared-components';
 import BehandlingPickerItemContent from './BehandlingPickerItemContent';
 
 describe('<BehandlingPickerItemContent>', () => {
+
+  const getKodeverkFn = () => ({
+    kode: '',
+    kodeverk: '',
+    navn: 'Annet',
+  });
+
   it('skal rendre komponent', () => {
     const wrapper = shallow(<BehandlingPickerItemContent
       withChevronDown
       withChevronUp
+      getKodeverkFn={getKodeverkFn}
       behandlingTypeKode="BT-002"
       behandlingTypeNavn="Foreldrepenger"
       opprettetDato="2018-01-01"
@@ -27,6 +35,7 @@ describe('<BehandlingPickerItemContent>', () => {
     const wrapper = shallow(<BehandlingPickerItemContent
       withChevronDown
       withChevronUp
+      getKodeverkFn={getKodeverkFn}
       behandlingTypeKode="BT-002"
       behandlingTypeNavn="Foreldrepenger"
       opprettetDato="2018-01-01"
@@ -53,6 +62,7 @@ describe('<BehandlingPickerItemContent>', () => {
     const wrapper = shallow(<BehandlingPickerItemContent
       withChevronDown
       withChevronUp
+      getKodeverkFn={getKodeverkFn}
       behandlingTypeKode="BT-004"
       behandlingTypeNavn="Foreldrepenger"
       opprettetDato="2018-01-01"
@@ -63,6 +73,6 @@ describe('<BehandlingPickerItemContent>', () => {
     />);
 
     const formattedMessages = wrapper.find(FormattedMessage);
-    expect(formattedMessages.first().prop('id')).toEqual('Behandlingspunkt.Årsak.Annet');
+    expect(formattedMessages.first().prop('id')).toEqual('Annet');
   });
 });
