@@ -16,6 +16,7 @@ const getContentProps = (
   behandlingTypeNavn: getKodeverkFn(behandling.type, behandling.type)?.navn || '',
   behandlingTypeKode: behandling.type.kode,
   førsteÅrsak: behandling.førsteÅrsak,
+  førsteÅrsakNavn: getKodeverkFn(behandling.førsteÅrsak.behandlingÅrsakType, behandling.type)?.navn || '',
   behandlendeEnhetId: behandling.behandlendeEnhetId,
   behandlendeEnhetNavn: behandling.behandlendeEnhetNavn,
   opprettetDato: behandling.opprettet,
