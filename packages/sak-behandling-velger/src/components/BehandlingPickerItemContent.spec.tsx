@@ -1,12 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { FormattedMessage } from 'react-intl';
 import Panel from 'nav-frontend-paneler';
 
 import { DateLabel } from '@fpsak-frontend/shared-components';
 
 import BehandlingPickerItemContent from './BehandlingPickerItemContent';
-import {FlexColumn} from "../../../shared-components";
 
 describe('<BehandlingPickerItemContent>', () => {
   const getKodeverkFn = () => ({
