@@ -8,7 +8,6 @@ import { DateLabel } from '@fpsak-frontend/shared-components';
 import BehandlingPickerItemContent from './BehandlingPickerItemContent';
 
 describe('<BehandlingPickerItemContent>', () => {
-
   const getKodeverkFn = () => ({
     kode: '',
     kodeverk: '',
