@@ -31,17 +31,17 @@ const andelErIkkeTilkommetEllerLagtTilAvSBH = (andel: BeregningsgrunnlagAndel): 
   // Andeler som er lagt til av sbh eller tilkom før stp skal ikke kunne endres på
   return andel.erTilkommetAndel === false && andel.lagtTilAvSaksbehandler === false;
 };
-const finnAndelerSomSkalVises = (andeler: BeregningsgrunnlagAndel[], status: string): BeregningsgrunnlagAndel[] => {
+const finnAndelerSomSkalVises = (andeler: BeregningsgrunnlagAndel[], statuser: string[]): BeregningsgrunnlagAndel[] => {
   if (!andeler) {
     return [];
   }
 
   return andeler
-    .filter((andel) => andel.aktivitetStatus.kode === status)
+    .filter((andel) => statuser.includes(andel.aktivitetStatus.kode))
     .filter((andel) => andelErIkkeTilkommetEllerLagtTilAvSBH(andel));
 };
-const beregnAarsintektForAktivitetStatus = (alleAndelerIForstePeriode: BeregningsgrunnlagAndel[], status: string): number => {
-  const relevanteAndeler = finnAndelerSomSkalVises(alleAndelerIForstePeriode, status);
+const beregnAarsintektForAktivitetStatuser = (alleAndelerIForstePeriode: BeregningsgrunnlagAndel[], statuser: string[]): number => {
+  const relevanteAndeler = finnAndelerSomSkalVises(alleAndelerIForstePeriode, statuser);
   if (relevanteAndeler) {
     return relevanteAndeler.reduce((acc, andel) => acc + andel.beregnetPrAar, 0);
   }
@@ -89,7 +89,7 @@ const lagRelevantePaneler = (
       {
         relevanteStatuser.isArbeidstaker && (
           <AvviksopplysningerAT
-            beregnetAarsinntekt={beregnAarsintektForAktivitetStatus(alleAndelerIForstePeriode, aktivitetStatus.ARBEIDSTAKER)}
+            beregnetAarsinntekt={beregnAarsintektForAktivitetStatuser(alleAndelerIForstePeriode, [aktivitetStatus.ARBEIDSTAKER, aktivitetStatus.FRILANSER])}
             sammenligningsgrunnlagPrStatus={sammenligningsgrunnlagPrStatus}
             relevanteStatuser={relevanteStatuser}
           />
@@ -98,7 +98,7 @@ const lagRelevantePaneler = (
       {
         relevanteStatuser.isFrilanser && (
           <AvviksopplysningerFL
-            beregnetAarsinntekt={beregnAarsintektForAktivitetStatus(alleAndelerIForstePeriode, aktivitetStatus.FRILANSER)}
+            beregnetAarsinntekt={beregnAarsintektForAktivitetStatuser(alleAndelerIForstePeriode, [aktivitetStatus.ARBEIDSTAKER, aktivitetStatus.FRILANSER])}
             sammenligningsgrunnlagPrStatus={sammenligningsgrunnlagPrStatus}
             relevanteStatuser={relevanteStatuser}
           />
