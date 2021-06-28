@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -48,9 +47,9 @@ const merknaderFraBeslutter = {
 const standardFaktaProps = {
   aksjonspunkter: [],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  readOnly: boolean('readOnly', false),
-  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
-  submittable: boolean('submittable', true),
+  readOnly: false,
+  harApneAksjonspunkter: true,
+  submittable: true,
   alleMerknaderFraBeslutter: {},
   setFormData: () => undefined,
 };
@@ -58,15 +57,13 @@ const standardFaktaProps = {
 export default {
   title: 'fakta/fakta-adopsjon',
   component: AdopsjonFaktaIndex,
-  decorators: [withKnobs],
 };
 
-export const visAksjonspunktForAdopsjonsvilkåret = () => (
+export const visAksjonspunktForAdopsjonsvilkåret = (args) => (
   <AdopsjonFaktaIndex
     {...standardFaktaProps}
+    {...args}
     behandling={behandling}
-    soknad={object('soknad', soknad)}
-    familiehendelse={object('familiehendelse', familieHendelse)}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.ADOPSJONSDOKUMENTAJON,
@@ -80,20 +77,24 @@ export const visAksjonspunktForAdopsjonsvilkåret = () => (
       kanLoses: true,
       erAktivt: true,
     }]}
-    alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.ADOPSJONSDOKUMENTAJON]: object('merknaderFraBeslutter', merknaderFraBeslutter),
-    }}
     alleKodeverk={alleKodeverk as any}
     isForeldrepengerFagsak
   />
 );
 
-export const visAksjonspunktForOmSøkerErMannSomAdoptererAlene = () => (
+visAksjonspunktForAdopsjonsvilkåret.args = {
+  soknad,
+  familiehendelse: familieHendelse,
+  alleMerknaderFraBeslutter: {
+    [aksjonspunktCodes.ADOPSJONSDOKUMENTAJON]: merknaderFraBeslutter,
+  },
+};
+
+export const visAksjonspunktForOmSøkerErMannSomAdoptererAlene = (args) => (
   <AdopsjonFaktaIndex
     {...standardFaktaProps}
+    {...args}
     behandling={behandling}
-    soknad={object('soknad', soknad)}
-    familiehendelse={object('familiehendelse', familieHendelse)}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
@@ -107,20 +108,24 @@ export const visAksjonspunktForOmSøkerErMannSomAdoptererAlene = () => (
       kanLoses: true,
       erAktivt: true,
     }]}
-    alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]: object('merknaderFraBeslutter', merknaderFraBeslutter),
-    }}
     alleKodeverk={alleKodeverk as any}
     isForeldrepengerFagsak
   />
 );
 
-export const visAksjonspunktForOmAdopsjonGjelderEktefellesBarn = () => (
+visAksjonspunktForOmSøkerErMannSomAdoptererAlene.args = {
+  soknad,
+  familiehendelse: familieHendelse,
+  alleMerknaderFraBeslutter: {
+    [aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]: merknaderFraBeslutter,
+  },
+};
+
+export const visAksjonspunktForOmAdopsjonGjelderEktefellesBarn = (args) => (
   <AdopsjonFaktaIndex
     {...standardFaktaProps}
+    {...args}
     behandling={behandling}
-    soknad={object('soknad', soknad)}
-    familiehendelse={object('familiehendelse', familieHendelse)}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
@@ -134,10 +139,15 @@ export const visAksjonspunktForOmAdopsjonGjelderEktefellesBarn = () => (
       kanLoses: true,
       erAktivt: true,
     }]}
-    alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
-    }}
     alleKodeverk={alleKodeverk as any}
-    isForeldrepengerFagsak={boolean('isForeldrepengerFagsak', true)}
   />
 );
+
+visAksjonspunktForOmSøkerErMannSomAdoptererAlene.args = {
+  soknad,
+  familiehendelse: familieHendelse,
+  alleMerknaderFraBeslutter: {
+    [aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: merknaderFraBeslutter,
+  },
+  isForeldrepengerFagsak: true,
+};

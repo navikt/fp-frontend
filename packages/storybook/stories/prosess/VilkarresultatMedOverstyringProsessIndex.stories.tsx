@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import aksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -25,9 +24,9 @@ const standardProsessProps = {
   aksjonspunkter: [],
   alleKodeverk: alleKodeverk as any,
   submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: boolean('readOnly', false),
-  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
-  readOnlySubmitButton: boolean('readOnly', false),
+  isReadOnly: false,
+  isAksjonspunktOpen: true,
+  readOnlySubmitButton: false,
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
@@ -37,7 +36,6 @@ const standardProsessProps = {
 export default {
   title: 'prosess/prosess-vilkar-overstyring',
   component: VilkarresultatMedOverstyringProsessIndex,
-  decorators: [withKnobs],
 };
 
 export const visOverstyringspanelForFødsel = () => {
@@ -55,10 +53,10 @@ export const visOverstyringspanelForFødsel = () => {
       medlemskap={{
         fom: '2019-01-01',
       } as Medlemskap}
-      overrideReadOnly={boolean('overrideReadOnly', false)}
-      kanOverstyreAccess={object('kanOverstyreAccess', {
+      overrideReadOnly={false}
+      kanOverstyreAccess={{
         isEnabled: true,
-      })}
+      }}
       toggleOverstyring={() => toggleOverstyring(!erOverstyrt)}
       erOverstyrt={erOverstyrt}
       avslagsarsaker={avslagsarsaker}
@@ -86,10 +84,10 @@ export const visOverstyringspanelForMedlemskap = () => {
       medlemskap={{
         fom: '2019-01-01',
       } as Medlemskap}
-      overrideReadOnly={boolean('overrideReadOnly', false)}
-      kanOverstyreAccess={object('kanOverstyreAccess', {
+      overrideReadOnly={false}
+      kanOverstyreAccess={{
         isEnabled: true,
-      })}
+      }}
       toggleOverstyring={() => toggleOverstyring(!erOverstyrt)}
       erOverstyrt={erOverstyrt}
       avslagsarsaker={avslagsarsaker}
@@ -130,12 +128,12 @@ export const visOverstyrtAksjonspunktSomErBekreftet = () => (
       kanLoses: false,
       begrunnelse: 'Dette er en begrunnelse',
     }] as Aksjonspunkt[]}
-    overrideReadOnly={boolean('overrideReadOnly', false)}
-    kanOverstyreAccess={object('kanOverstyreAccess', {
+    overrideReadOnly={false}
+    kanOverstyreAccess={{
       isEnabled: true,
-    })}
+    }}
     toggleOverstyring={action('button-click')}
-    erOverstyrt={boolean('erOverstyrt', false)}
+    erOverstyrt={false}
     avslagsarsaker={avslagsarsaker}
     status={vilkarUtfallType.IKKE_OPPFYLT}
     panelTittelKode="Inngangsvilkar.Fodselsvilkaret"

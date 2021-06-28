@@ -1,5 +1,4 @@
 import React from 'react';
-import { withKnobs } from '@storybook/addon-knobs';
 import BesteberegningFaktaIndex from '@fpsak-frontend/fakta-besteberegning';
 import { action } from '@storybook/addon-actions';
 import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
@@ -26,7 +25,6 @@ const arbeidsgiverOpplysninger = {
 export default {
   title: 'fakta/fakta-besteberegning',
   component: BesteberegningFaktaIndex,
-  decorators: [withKnobs],
 };
 
 const lagBehandling = (årsak?: string) => ({

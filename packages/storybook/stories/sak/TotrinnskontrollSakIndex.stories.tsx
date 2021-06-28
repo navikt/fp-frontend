@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -85,7 +84,7 @@ const behandling = {
 export default {
   title: 'sak/sak-totrinnskontroll',
   component: TotrinnskontrollSakIndex,
-  decorators: [withKnobs, withRouterProvider],
+  decorators: [withRouterProvider],
 };
 
 export const visTotrinnskontrollForBeslutter = () => (
@@ -97,7 +96,7 @@ export const visTotrinnskontrollForBeslutter = () => (
       behandling={behandling}
       totrinnskontrollSkjermlenkeContext={data}
       location={location}
-      readOnly={boolean('readOnly', false)}
+      readOnly={false}
       onSubmit={action('button-click') as any}
       forhandsvisVedtaksbrev={action('button-click')}
       fagsakYtelseType={{

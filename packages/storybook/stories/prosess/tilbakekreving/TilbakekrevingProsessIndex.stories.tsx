@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import tilbakekrevingKodeverkTyper from '@fpsak-frontend/kodeverk/src/tilbakekrevingKodeverkTyper';
@@ -139,8 +138,8 @@ const standardProsessProps = {
   alleKodeverk,
   aksjonspunkter: [],
   submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: boolean('readOnly', false),
-  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  isReadOnly: false,
+  isAksjonspunktOpen: true,
   readOnlySubmitButton: false,
   status: '',
   vilkar: [],
@@ -150,7 +149,6 @@ const standardProsessProps = {
 export default {
   title: 'prosess/tilbakekreving/prosess-tilbakekreving',
   component: TilbakekrevingProsessIndex,
-  decorators: [withKnobs],
 };
 
 const beregnBelop = (params: { perioder: any[]}) => {
@@ -163,9 +161,9 @@ const beregnBelop = (params: { perioder: any[]}) => {
 export const visAksjonspunktForTilbakekreving = () => (
   <TilbakekrevingProsessIndex
     {...standardProsessProps}
-    perioderForeldelse={object('perioderForeldelse', perioderForeldelse)}
-    vilkarvurderingsperioder={object('vilkarvurderingsperioder', vilkarvurderingsperioder)}
-    vilkarvurdering={object('vilkarvurdering', vilkarvurdering)}
+    perioderForeldelse={perioderForeldelse}
+    vilkarvurderingsperioder={vilkarvurderingsperioder}
+    vilkarvurdering={vilkarvurdering}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodesTilbakekreving.VURDER_TILBAKEKREVING,
@@ -181,7 +179,7 @@ export const visAksjonspunktForTilbakekreving = () => (
     }]}
     navBrukerKjonn={NavBrukerKjonn.KVINNE}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodesTilbakekreving.VURDER_TILBAKEKREVING]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+      [aksjonspunktCodesTilbakekreving.VURDER_TILBAKEKREVING]: merknaderFraBeslutter,
     }}
     beregnBelop={(params) => beregnBelop(params)}
   />

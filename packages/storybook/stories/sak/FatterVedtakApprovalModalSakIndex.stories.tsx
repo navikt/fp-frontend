@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
@@ -11,7 +10,6 @@ import { Behandling } from '@fpsak-frontend/types';
 export default {
   title: 'sak/sak-totrinnskontroll-fatter-vedtak-modal',
   component: FatterVedtakTotrinnskontrollModalSakIndex,
-  decorators: [withKnobs],
 };
 
 export const visModalEtterGodkjenning = () => (
@@ -28,14 +26,14 @@ export const visModalEtterGodkjenning = () => (
       },
       behandlingsresultat: {
         type: {
-          kode: text('behandlingResultatType', behandlingResultatType.OPPHOR),
+          kode: behandlingResultatType.OPPHOR,
         },
       },
     } as Behandling}
     closeEvent={action('button-click')}
     allAksjonspunktApproved
     erKlageWithKA={false}
-    harSammeResultatSomOriginalBehandling={boolean('Har samme resultat som original behandling', false)}
+    harSammeResultatSomOriginalBehandling={false}
   />
 );
 
@@ -53,14 +51,14 @@ export const visModalEtterGodkjenningAvKlage = () => (
       },
       behandlingsresultat: {
         type: {
-          kode: text('behandlingResultatType', behandlingResultatType.OPPHOR),
+          kode: behandlingResultatType.OPPHOR,
         },
       },
     } as Behandling}
     closeEvent={action('button-click')}
     allAksjonspunktApproved
-    erKlageWithKA={boolean('erKlageWithKA', false)}
-    harSammeResultatSomOriginalBehandling={boolean('Har samme resultat som original behandling', false)}
+    erKlageWithKA={false}
+    harSammeResultatSomOriginalBehandling={false}
   />
 );
 
@@ -78,13 +76,13 @@ export const visModalEtterTilbakesendingTilSaksbehandler = () => (
       },
       behandlingsresultat: {
         type: {
-          kode: text('behandlingResultatType', behandlingResultatType.OPPHOR),
+          kode: behandlingResultatType.OPPHOR,
         },
       },
     } as Behandling}
     closeEvent={action('button-click')}
     allAksjonspunktApproved={false}
     erKlageWithKA={false}
-    harSammeResultatSomOriginalBehandling={boolean('Har samme resultat som original behandling', false)}
+    harSammeResultatSomOriginalBehandling={false}
   />
 );

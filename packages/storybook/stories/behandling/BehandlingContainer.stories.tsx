@@ -1,5 +1,4 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import { withKnobs } from '@storybook/addon-knobs';
 import { useState } from '@storybook/addons';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
@@ -110,7 +109,6 @@ const ProsessPanelTest2: FunctionComponent<ProsessPanelInitProps> = ({
 export default {
   title: 'behandling/behandling-container',
   component: BehandlingContainer,
-  decorators: [withKnobs],
 };
 
 export const visKunFaktaPaneler = () => {

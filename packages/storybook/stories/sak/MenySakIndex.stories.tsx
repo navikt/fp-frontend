@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { withKnobs } from '@storybook/addon-knobs';
 import Modal from 'nav-frontend-modal';
 
 import MenySakIndex, { MenyData } from '@fpsak-frontend/sak-meny';
@@ -7,7 +6,6 @@ import MenySakIndex, { MenyData } from '@fpsak-frontend/sak-meny';
 export default {
   title: 'sak/sak-meny',
   component: MenySakIndex,
-  decorators: [withKnobs],
 };
 
 export const visMenyMedToHandlinger = () => {

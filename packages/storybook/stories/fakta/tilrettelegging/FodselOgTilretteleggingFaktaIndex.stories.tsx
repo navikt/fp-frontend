@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -165,9 +164,9 @@ const arbeidsgiverOpplysningerPerId = {
 const standardFaktaProps = {
   aksjonspunkter: [],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  readOnly: boolean('readOnly', false),
-  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
-  submittable: boolean('submittable', true),
+  readOnly: false,
+  harApneAksjonspunkter: true,
+  submittable: true,
   alleMerknaderFraBeslutter: {},
   setFormData: () => undefined,
 };
@@ -175,14 +174,13 @@ const standardFaktaProps = {
 export default {
   title: 'fakta/fakta-fodsel-og-tilrettelegging',
   component: FodselOgTilretteleggingFaktaIndex,
-  decorators: [withKnobs],
 };
 
 export const tilretteleggingMedVelferdspermisjon = () => (
   <FodselOgTilretteleggingFaktaIndex
     {...standardFaktaProps}
     behandling={behandling}
-    svangerskapspengerTilrettelegging={object('Tilrettelegging', tilretteleggingPermisjon)}
+    svangerskapspengerTilrettelegging={tilretteleggingPermisjon}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.FODSELTILRETTELEGGING,
@@ -207,7 +205,7 @@ export const visAksjonspunktForFødselstilretteleggingForArbeidsgiver = () => (
   <FodselOgTilretteleggingFaktaIndex
     {...standardFaktaProps}
     behandling={behandling}
-    svangerskapspengerTilrettelegging={object('Tilrettelegging', svangerskapspengerTilretteleggingForArbeidsgiver)}
+    svangerskapspengerTilrettelegging={svangerskapspengerTilretteleggingForArbeidsgiver}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.FODSELTILRETTELEGGING,
@@ -232,7 +230,7 @@ export const visAksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigN
   <FodselOgTilretteleggingFaktaIndex
     {...standardFaktaProps}
     behandling={behandling}
-    svangerskapspengerTilrettelegging={object('Tilrettelegging', svangerskapspengerTilretteleggingForFrilanser)}
+    svangerskapspengerTilrettelegging={svangerskapspengerTilretteleggingForFrilanser}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.FODSELTILRETTELEGGING,
@@ -267,7 +265,7 @@ export const visInfoDialogForVarIkkeAnsattDaBehovetForTilretteleggingOppstod = (
     <FodselOgTilretteleggingFaktaIndex
       {...standardFaktaProps}
       behandling={behandling}
-      svangerskapspengerTilrettelegging={object('Tilrettelegging', svangerskapspengerTilretteleggingForArbeidsgiver)}
+      svangerskapspengerTilrettelegging={svangerskapspengerTilretteleggingForArbeidsgiver}
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.FODSELTILRETTELEGGING,

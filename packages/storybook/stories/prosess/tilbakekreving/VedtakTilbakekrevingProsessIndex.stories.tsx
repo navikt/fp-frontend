@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vedtakResultatType from '@fpsak-frontend/kodeverk/src/vedtakResultatType';
@@ -165,8 +164,8 @@ const standardProsessProps = {
   alleKodeverk,
   aksjonspunkter: [],
   submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: boolean('readOnly', false),
-  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  isReadOnly: false,
+  isAksjonspunktOpen: true,
   readOnlySubmitButton: false,
   status: '',
   vilkar: [],
@@ -177,7 +176,6 @@ const standardProsessProps = {
 export default {
   title: 'prosess/tilbakekreving/prosess-vedtak-tilbakekreving',
   component: VedtakTilbakekrevingProsessIndex,
-  decorators: [withKnobs],
 };
 
 export const visVedtakspanel = () => (

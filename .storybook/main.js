@@ -10,7 +10,7 @@ module.exports = {
     builder: "webpack5",
   },
   stories: ['../packages/storybook/stories/**/*.stories.@(js|tsx)'],
-  addons: ['@storybook/addon-docs/preset', '@storybook/addon-actions/register', '@storybook/addon-knobs/register'],
+  addons: ['@storybook/addon-docs/preset', '@storybook/addon-actions/register'],
   webpackFinal: async (config, { configType }) => {
     //Fjern default svg-loader
     config.module.rules = config.module.rules.map( data => {

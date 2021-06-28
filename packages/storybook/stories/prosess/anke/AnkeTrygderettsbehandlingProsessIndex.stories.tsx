@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -28,13 +27,13 @@ const aksjonspunkter = [{
 }] as Aksjonspunkt[];
 
 const standardProsessProps = {
-  behandling: object('behandling', behandling),
+  behandling,
   alleKodeverk: alleKodeverk as any,
   aksjonspunkter,
   submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: boolean('readOnly', false),
-  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
-  readOnlySubmitButton: boolean('readOnly', false),
+  isReadOnly: false,
+  isAksjonspunktOpen: true,
+  readOnlySubmitButton: false,
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
@@ -45,13 +44,12 @@ const standardProsessProps = {
 export default {
   title: 'prosess/anke/prosess-anke-trygderettsbehandling',
   component: AnkeTrygderettsbehandlingProsessIndex,
-  decorators: [withKnobs],
 };
 
 export const visPanelForResultatVedStadfestYtelsesvedtak = () => (
   <AnkeTrygderettsbehandlingProsessIndex
     {...standardProsessProps}
-    ankeVurdering={object('ankeVurdering', {
+    ankeVurdering={{
       ankeVurderingResultat: {
         ankeVurdering: {
           kode: ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK,
@@ -59,7 +57,7 @@ export const visPanelForResultatVedStadfestYtelsesvedtak = () => (
         },
         begrunnelse: 'Dette er en begrunnelse',
       },
-    } as AnkeVurdering)}
+    } as AnkeVurdering}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );

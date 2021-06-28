@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs } from '@storybook/addon-knobs';
 
 import { BehandlingAppKontekst } from '@fpsak-frontend/types';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
@@ -11,7 +10,6 @@ import MenyHenleggIndex from '@fpsak-frontend/sak-meny-henlegg';
 export default {
   title: 'sak/sak-meny-henlegg',
   component: MenyHenleggIndex,
-  decorators: [withKnobs],
 };
 
 interface HenleggParams {

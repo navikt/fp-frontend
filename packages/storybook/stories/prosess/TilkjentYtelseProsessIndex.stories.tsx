@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import arbeidsforholdHandlingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdHandlingType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -96,13 +95,13 @@ const arbeidsgiverOpplysningerPerId = {
 };
 
 const standardProsessProps = {
-  behandling: object('behandling', behandling),
+  behandling,
   alleKodeverk: alleKodeverk as any,
   aksjonspunkter: [],
   submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: boolean('readOnly', false),
-  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
-  readOnlySubmitButton: boolean('readOnly', true),
+  isReadOnly: false,
+  isAksjonspunktOpen: true,
+  readOnlySubmitButton: true,
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
@@ -112,7 +111,6 @@ const standardProsessProps = {
 export default {
   title: 'prosess/prosess-tilkjent-ytelse',
   component: TilkjentYtelseProsessIndex,
-  decorators: [withKnobs],
 };
 
 export const visUtenAksjonspunkt = () => (
@@ -120,7 +118,7 @@ export const visUtenAksjonspunkt = () => (
     {...standardProsessProps}
     beregningresultat={beregningresultat}
     familiehendelse={familiehendelse}
-    personoversikt={object('personoversikt', personoversikt)}
+    personoversikt={personoversikt}
     soknad={soknad}
     fagsak={fagsak}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -132,7 +130,7 @@ export const visÅpentAksjonspunkt = () => (
     {...standardProsessProps}
     beregningresultat={beregningresultat}
     familiehendelse={familiehendelse}
-    personoversikt={object('personoversikt', personoversikt)}
+    personoversikt={personoversikt}
     soknad={soknad}
     fagsak={fagsak}
     aksjonspunkter={[{

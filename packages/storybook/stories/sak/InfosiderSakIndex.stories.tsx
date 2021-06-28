@@ -1,5 +1,4 @@
 import React from 'react';
-import { withKnobs } from '@storybook/addon-knobs';
 
 import {
   ForbiddenPage, NotFoundPage, UnauthorizedPage, IngenBehandlingValgtPanel,
@@ -9,7 +8,7 @@ import withRouterProvider from '../../decorators/withRouter';
 
 export default {
   title: 'sak/sak-infosider',
-  decorators: [withKnobs, withRouterProvider],
+  decorators: [withRouterProvider],
 };
 
 export const visPanelForHarIkkeTilgang = () => (

@@ -1,5 +1,4 @@
 import React from 'react';
-import { withKnobs } from '@storybook/addon-knobs';
 
 import relatertYtelseType from '@fpsak-frontend/kodeverk/src/relatertYtelseType';
 import YtelserFaktaIndex from '@fpsak-frontend/fakta-ytelser';
@@ -37,7 +36,6 @@ const inntektArbeidYtelse = {
 export default {
   title: 'fakta/fakta-ytelser',
   component: YtelserFaktaIndex,
-  decorators: [withKnobs],
 };
 
 export const visYtelserForHovedsøker = () => (

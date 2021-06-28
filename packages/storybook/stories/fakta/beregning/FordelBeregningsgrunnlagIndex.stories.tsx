@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, object, boolean } from '@storybook/addon-knobs';
 
 import inntektskategorier from '@fpsak-frontend/kodeverk/src/inntektskategorier';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -26,7 +25,6 @@ type Writeable<T> = { -readonly [P in keyof T]: T[P] };
 export default {
   title: 'fakta/fakta-fordel-beregningsgrunnlag',
   component: FordelBeregningsgrunnlagFaktaIndex,
-  decorators: [withKnobs],
 };
 
 const behandling = {
@@ -247,14 +245,14 @@ export const arbeidOgGradertNæringUtenBeregningsgrunnlag = () => (
     behandling={behandling}
     alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+      [aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG]: merknaderFraBeslutter,
     }}
     submitCallback={action('button-click') as (data: any) => Promise<any>}
     readOnly={false}
     beregningsgrunnlag={bgArbeidOgGradertNæring}
     aksjonspunkter={apArbeidOgGradertNæring}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
+    harApneAksjonspunkter
+    submittable
     arbeidsgiverOpplysningerPerId={agOpplysninger}
     setFormData={() => undefined}
   />
@@ -265,14 +263,14 @@ export const tilkommetArbeidMedFlyttingAvNaturalytelse = () => (
     behandling={behandling}
     alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+      [aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG]: merknaderFraBeslutter,
     }}
     submitCallback={action('button-click') as (data: any) => Promise<any>}
     readOnly={false}
     beregningsgrunnlag={bgMedNaturalytelse}
     aksjonspunkter={apMedNaturalytelse}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
+    harApneAksjonspunkter
+    submittable
     arbeidsgiverOpplysningerPerId={agOpplysninger}
     setFormData={() => undefined}
   />
@@ -299,14 +297,14 @@ export const aapOgRefusjon = () => {
       behandling={behandling}
       alleKodeverk={alleKodeverk as any}
       alleMerknaderFraBeslutter={{
-        [aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+        [aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG]: merknaderFraBeslutter,
       }}
       submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={false}
       beregningsgrunnlag={bg}
       aksjonspunkter={fordelAP}
-      harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-      submittable={boolean('submittable', true)}
+      harApneAksjonspunkter
+      submittable
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       setFormData={() => undefined}
     />
@@ -334,14 +332,14 @@ export const kanEndreRefusjonskrav = () => {
       behandling={behandling}
       alleKodeverk={alleKodeverk as any}
       alleMerknaderFraBeslutter={{
-        [aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+        [aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG]: merknaderFraBeslutter,
       }}
       submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={false}
       beregningsgrunnlag={bg}
       aksjonspunkter={fordelAP}
-      harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-      submittable={boolean('submittable', true)}
+      harApneAksjonspunkter
+      submittable
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       setFormData={() => undefined}
     />
@@ -388,14 +386,14 @@ export const skalSlåSammenNaturalytelseperioder = () => {
       behandling={behandling}
       alleKodeverk={alleKodeverk as any}
       alleMerknaderFraBeslutter={{
-        [aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+        [aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG]: merknaderFraBeslutter,
       }}
       submitCallback={action('button-click') as (data: any) => Promise<any>}
       readOnly={false}
       beregningsgrunnlag={bg}
       aksjonspunkter={fordelAP}
-      harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-      submittable={boolean('submittable', true)}
+      harApneAksjonspunkter
+      submittable
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       setFormData={() => undefined}
     />
@@ -407,14 +405,14 @@ export const viseVurderTilkommetRefusjonskrav = () => (
     behandling={behandling}
     alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.VURDER_REFUSJON_BERGRUNN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+      [aksjonspunktCodes.VURDER_REFUSJON_BERGRUNN]: merknaderFraBeslutter,
     }}
     submitCallback={action('button-click') as (data: any) => Promise<any>}
     readOnly={false}
     beregningsgrunnlag={vurderRefusjonBG}
     aksjonspunkter={vurderRefusjonAP}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
+    harApneAksjonspunkter
+    submittable
     arbeidsgiverOpplysningerPerId={agOpplysninger}
     setFormData={() => undefined}
   />
@@ -425,14 +423,14 @@ export const skalVurdereTilkommetØktRefusjonPåTidligereInnvilgetDelvisRefusjon
     behandling={behandling}
     alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.VURDER_REFUSJON_BERGRUNN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+      [aksjonspunktCodes.VURDER_REFUSJON_BERGRUNN]: merknaderFraBeslutter,
     }}
     submitCallback={action('button-click') as (data: any) => Promise<any>}
     readOnly={false}
     beregningsgrunnlag={vurderDelvisRefBG}
     aksjonspunkter={vurderRefusjonAP}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
+    harApneAksjonspunkter
+    submittable
     arbeidsgiverOpplysningerPerId={agOpplysninger}
     setFormData={() => undefined}
   />

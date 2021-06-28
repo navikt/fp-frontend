@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -40,9 +39,9 @@ const standardProsessProps = {
   aksjonspunkter: [],
   alleKodeverk: alleKodeverk as any,
   submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: boolean('readOnly', false),
-  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
-  readOnlySubmitButton: boolean('readOnly', false),
+  isReadOnly: false,
+  isAksjonspunktOpen: true,
+  readOnlySubmitButton: false,
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
@@ -52,7 +51,6 @@ const standardProsessProps = {
 export default {
   title: 'prosess/prosess-vilkar-opptjening',
   component: OpptjeningVilkarProsessIndex,
-  decorators: [withKnobs],
 };
 
 export const visPanelForÅpentAksjonspunkt = () => (

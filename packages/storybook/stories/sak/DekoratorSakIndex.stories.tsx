@@ -1,5 +1,4 @@
 import React from 'react';
-import { withKnobs } from '@storybook/addon-knobs';
 
 import HeaderWithErrorPanel from '@fpsak-frontend/sak-dekorator';
 import { useState } from '@storybook/addons';
@@ -7,7 +6,6 @@ import { useState } from '@storybook/addons';
 export default {
   title: 'sak/sak-dekoratør',
   component: HeaderWithErrorPanel,
-  decorators: [withKnobs],
 };
 
 export const visDekoratorUtenFeilmeldinger = () => (

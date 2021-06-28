@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import opptjeningAktivitetType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -114,9 +113,9 @@ const arbeidsgiverOpplysningerPerId = {
 const standardFaktaProps = {
   aksjonspunkter: [],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  readOnly: boolean('readOnly', false),
-  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
-  submittable: boolean('submittable', true),
+  readOnly: false,
+  harApneAksjonspunkter: true,
+  submittable: true,
   alleMerknaderFraBeslutter: {},
   setFormData: () => undefined,
 };
@@ -124,14 +123,13 @@ const standardFaktaProps = {
 export default {
   title: 'fakta/fakta-opptjening',
   component: OpptjeningFaktaIndex,
-  decorators: [withKnobs],
 };
 
 export const visAksjonspunktForOpptjeningsvilkåret = () => (
   <OpptjeningFaktaIndex
     {...standardFaktaProps}
     behandling={behandling as Behandling}
-    opptjening={object('opptjening', opptjeningNårEnHarAksjonspunkt)}
+    opptjening={opptjeningNårEnHarAksjonspunkt}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     aksjonspunkter={[{
       definisjon: {
@@ -148,7 +146,7 @@ export const visAksjonspunktForOpptjeningsvilkåret = () => (
     }]}
     alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+      [aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING]: merknaderFraBeslutter,
     }}
   />
 );
@@ -158,7 +156,7 @@ export const visPanelUtenAksjonpunkt = () => (
     {...standardFaktaProps}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     behandling={behandling as Behandling}
-    opptjening={object('opptjening', opptjeningUtenAksjonspunkt)}
+    opptjening={opptjeningUtenAksjonspunkt}
     alleKodeverk={alleKodeverk as any}
   />
 );

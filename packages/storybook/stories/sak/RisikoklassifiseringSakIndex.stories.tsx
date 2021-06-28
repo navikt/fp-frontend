@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -19,13 +18,13 @@ const withWidthProvider = (story: any) => (
 export default {
   title: 'sak/sak-risikoklassifisering',
   component: RisikoklassifiseringSakIndex,
-  decorators: [withKnobs, withWidthProvider],
+  decorators: [withWidthProvider],
 };
 
 export const visPanelUtenInformasjon = () => (
   <RisikoklassifiseringSakIndex
-    isPanelOpen={boolean('isPanelOpen', false)}
-    readOnly={boolean('readOnly', false)}
+    isPanelOpen={false}
+    readOnly={false}
     submitAksjonspunkt={action('button-click') as () => Promise<any>}
     toggleRiskPanel={action('button-click')}
     alleKodeverk={alleKodeverk as any}
@@ -40,8 +39,8 @@ export const visPanelForLavRisikoklassifisering = () => (
         kodeverk: '',
       },
     }}
-    isPanelOpen={boolean('isPanelOpen', false)}
-    readOnly={boolean('readOnly', false)}
+    isPanelOpen={false}
+    readOnly={false}
     submitAksjonspunkt={action('button-click') as () => Promise<any>}
     toggleRiskPanel={action('button-click')}
     alleKodeverk={alleKodeverk as any}
@@ -73,7 +72,7 @@ export const visPanelForHøyRisikoklassifisering = () => (
         faresignaler: ['Faresignal 2', 'Faresignal 3', 'Faresignal 4'],
       },
     }}
-    readOnly={boolean('readOnly', false)}
+    readOnly={false}
     submitAksjonspunkt={action('button-click') as () => Promise<any>}
     isPanelOpen
     toggleRiskPanel={action('button-click')}

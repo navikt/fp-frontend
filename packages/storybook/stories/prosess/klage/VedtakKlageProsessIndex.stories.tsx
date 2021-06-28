@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
@@ -39,9 +38,9 @@ const standardProsessProps = {
   alleKodeverk: alleKodeverk as any,
   aksjonspunkter,
   submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: boolean('readOnly', false),
-  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
-  readOnlySubmitButton: boolean('readOnly', false),
+  isReadOnly: false,
+  isAksjonspunktOpen: true,
+  readOnlySubmitButton: false,
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
@@ -51,13 +50,12 @@ const standardProsessProps = {
 export default {
   title: 'prosess/klage/prosess-vedtak-klage',
   component: VedtakKlageProsessIndex,
-  decorators: [withKnobs],
 };
 
 export const visVedtakspanelDerKlageErVurdertAvNk = () => (
   <VedtakKlageProsessIndex
     {...standardProsessProps}
-    klageVurdering={object('klageVurdering', {
+    klageVurdering={{
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
         klageVurdering: {
@@ -75,7 +73,7 @@ export const visVedtakspanelDerKlageErVurdertAvNk = () => (
           navn: 'IKKE_KONKRET',
         }],
       },
-    } as KlageVurdering)}
+    } as KlageVurdering}
     previewVedtakCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );
@@ -83,7 +81,7 @@ export const visVedtakspanelDerKlageErVurdertAvNk = () => (
 export const visVedtakspanelDerKlageErVurdertAvNfp = () => (
   <VedtakKlageProsessIndex
     {...standardProsessProps}
-    klageVurdering={object('klageVurdering', {
+    klageVurdering={{
       klageVurderingResultatNK: {
         klageVurdertAv: 'NFP',
         klageVurdering: {
@@ -101,7 +99,7 @@ export const visVedtakspanelDerKlageErVurdertAvNfp = () => (
           navn: 'IKKE_KONKRET',
         }],
       },
-    } as KlageVurdering)}
+    } as KlageVurdering}
     previewVedtakCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );

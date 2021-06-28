@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -136,9 +135,9 @@ const merknaderFraBeslutter = {
 const standardFaktaProps = {
   aksjonspunkter: [],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  readOnly: boolean('readOnly', false),
-  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
-  submittable: boolean('submittable', true),
+  readOnly: false,
+  harApneAksjonspunkter: true,
+  submittable: true,
   alleMerknaderFraBeslutter: {},
   setFormData: () => undefined,
 };
@@ -146,15 +145,14 @@ const standardFaktaProps = {
 export default {
   title: 'fakta/tilbakekreving/fakta-feilutbetaling',
   component: FeilutbetalingFaktaIndex,
-  decorators: [withKnobs],
 };
 
 export const visAksjonspunktForFeilutbetaling = () => (
   <FeilutbetalingFaktaIndex
     {...standardFaktaProps}
     behandling={behandling}
-    feilutbetalingFakta={object('feilutbetalingFakta', feilutbetalingFakta as FeilutbetalingFakta)}
-    feilutbetalingAarsak={object('feilutbetalingAarsak', feilutbetalingAarsak as FeilutbetalingAarsak[])}
+    feilutbetalingFakta={feilutbetalingFakta as FeilutbetalingFakta}
+    feilutbetalingAarsak={feilutbetalingAarsak as FeilutbetalingAarsak[]}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodesTilbakekreving.AVKLAR_FAKTA_FOR_FEILUTBETALING,
@@ -171,7 +169,7 @@ export const visAksjonspunktForFeilutbetaling = () => (
     alleKodeverk={alleKodeverk}
     fpsakKodeverk={fpSakAlleKodeverk}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodesTilbakekreving.AVKLAR_FAKTA_FOR_FEILUTBETALING]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+      [aksjonspunktCodesTilbakekreving.AVKLAR_FAKTA_FOR_FEILUTBETALING]: merknaderFraBeslutter,
     }}
     fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
   />

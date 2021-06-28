@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
@@ -52,9 +51,9 @@ const standardProsessProps = {
   aksjonspunkter: [],
   alleKodeverk: alleKodeverk as any,
   submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: boolean('readOnly', false),
-  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
-  readOnlySubmitButton: boolean('readOnly', false),
+  isReadOnly: false,
+  isAksjonspunktOpen: true,
+  readOnlySubmitButton: false,
   status: '',
   vilkar,
   alleMerknaderFraBeslutter: {},
@@ -64,14 +63,13 @@ const standardProsessProps = {
 export default {
   title: 'prosess/prosess-vilkar-soknadsfrist',
   component: SoknadsfristVilkarProsessIndex,
-  decorators: [withKnobs],
 };
 
 export const visÅpentAksjonspunkt = () => (
   <SoknadsfristVilkarProsessIndex
     {...standardProsessProps}
-    soknad={object('soknad', soknad)}
-    familiehendelse={object('familiehendelse', familiehendelse)}
+    soknad={soknad}
+    familiehendelse={familiehendelse}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.SOKNADSFRISTVILKARET,
@@ -96,8 +94,8 @@ export const visOppfyltVilkår = () => (
       versjon: 1,
       behandlingsresultat: {},
     } as Behandling}
-    soknad={object('soknad', soknad)}
-    familiehendelse={object('familiehendelse', familiehendelse)}
+    soknad={soknad}
+    familiehendelse={familiehendelse}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.SOKNADSFRISTVILKARET,
@@ -110,8 +108,8 @@ export const visOppfyltVilkår = () => (
         kode: vilkarType.SOKNADFRISTVILKARET,
       },
     }] as Aksjonspunkt[]}
-    isReadOnly={boolean('isReadOnly', true)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
+    isReadOnly
+    readOnlySubmitButton
     status={vilkarUtfallType.OPPFYLT}
   />
 );
@@ -128,8 +126,8 @@ export const visAvslåttVilkår = () => (
         },
       },
     } as Behandling}
-    soknad={object('soknad', soknad)}
-    familiehendelse={object('familiehendelse', familiehendelse)}
+    soknad={soknad}
+    familiehendelse={familiehendelse}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.SOKNADSFRISTVILKARET,
@@ -142,8 +140,8 @@ export const visAvslåttVilkår = () => (
         kode: vilkarType.SOKNADFRISTVILKARET,
       },
     }] as Aksjonspunkt[]}
-    isReadOnly={boolean('isReadOnly', true)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
+    isReadOnly
+    readOnlySubmitButton
     status={vilkarUtfallType.IKKE_OPPFYLT}
   />
 );

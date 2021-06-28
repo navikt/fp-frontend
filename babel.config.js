@@ -14,7 +14,6 @@ module.exports = function (api) {
     ],
     '@babel/preset-typescript',
   ];
-  const plugins = ['@babel/plugin-proposal-class-properties'];
 
   if (NODE_ENV && BABEL_ENV && NODE_ENV !== BABEL_ENV) {
     console.warn('WARNING: Both BABEL_ENV and NODE_ENV are set in');
@@ -30,6 +29,5 @@ module.exports = function (api) {
 
   return {
     presets,
-    plugins,
   };
 };

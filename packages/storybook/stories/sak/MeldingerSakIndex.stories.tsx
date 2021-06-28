@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, object } from '@storybook/addon-knobs';
 
 import MeldingerSakIndex, { MessagesModalSakIndex } from '@fpsak-frontend/sak-meldinger';
 import ugunstAarsakTyper from '@fpsak-frontend/kodeverk/src/ugunstAarsakTyper';
@@ -26,7 +25,6 @@ const sprakKode = {
 export default {
   title: 'sak/sak-meldinger',
   component: MeldingerSakIndex,
-  decorators: [withKnobs],
 };
 
 export const visMeldingerPanel = () => (
@@ -36,9 +34,9 @@ export const visMeldingerPanel = () => (
   >
     <MeldingerSakIndex
       submitCallback={action('button-click')}
-      recipients={object('recipients', recipients)}
-      templates={object('templates', templates)}
-      sprakKode={object('sprakKode', sprakKode)}
+      recipients={recipients}
+      templates={templates}
+      sprakKode={sprakKode}
       previewCallback={action('button-click')}
       isKontrollerRevurderingApOpen={false}
       kanVeilede={false}

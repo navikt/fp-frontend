@@ -1,8 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import {
-  withKnobs, object, boolean,
-} from '@storybook/addon-knobs';
 
 import mottakerTyper from '@fpsak-frontend/kodeverk/src/mottakerTyper';
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
@@ -111,9 +108,9 @@ const standardProsessProps = {
   alleKodeverk: alleKodeverk as any,
   aksjonspunkter: [],
   submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: boolean('readOnly', false),
-  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
-  readOnlySubmitButton: boolean('readOnly', false),
+  isReadOnly: false,
+  isAksjonspunktOpen: true,
+  readOnlySubmitButton: false,
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
@@ -123,20 +120,19 @@ const standardProsessProps = {
 export default {
   title: 'prosess/prosess-avregning',
   component: AvregningProsessIndex,
-  decorators: [withKnobs],
 };
 
 export const visAksjonspunktVurderFeilutbetaling = () => (
   <AvregningProsessIndex
     {...standardProsessProps}
-    fagsak={object('fagsak', fagsak)}
-    aksjonspunkter={object('aksjonspunkter', [{
+    fagsak={fagsak}
+    aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.VURDER_FEILUTBETALING,
       },
       begrunnelse: undefined,
-    }] as Aksjonspunkt[])}
-    simuleringResultat={object('simuleringResultat', simuleringResultat)}
+    }] as Aksjonspunkt[]}
+    simuleringResultat={simuleringResultat}
     previewFptilbakeCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );
@@ -144,15 +140,15 @@ export const visAksjonspunktVurderFeilutbetaling = () => (
 export const visSimuleringspanelUtenAksjonspunkt = () => (
   <AvregningProsessIndex
     {...standardProsessProps}
-    fagsak={object('fagsak', fagsak)}
-    simuleringResultat={object('simuleringResultat', simuleringResultat)}
-    tilbakekrevingvalg={object('tilbakekrevingvalg', {
+    fagsak={fagsak}
+    simuleringResultat={simuleringResultat}
+    tilbakekrevingvalg={{
       videreBehandling: {
         kode: tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
         kodeverk: '',
       },
       varseltekst: 'varsel-eksempel',
-    } as TilbakekrevingValg)}
+    } as TilbakekrevingValg}
     previewFptilbakeCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );
