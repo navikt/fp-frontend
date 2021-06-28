@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import BeregningsgrunnlagProsessIndex from '@fpsak-frontend/prosess-beregningsgrunnlag';
@@ -298,7 +297,6 @@ const lagBG = (
 export default {
   title: 'prosess/prosess-beregningsgrunnlag',
   component: BeregningsgrunnlagProsessIndex,
-  decorators: [withKnobs],
 };
 
 export const arbeidstakerUtenAvvik = () => {
@@ -310,14 +308,14 @@ export const arbeidstakerUtenAvvik = () => {
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg as Beregningsgrunnlag)}
-      aksjonspunkter={object('aksjonspunkter', [])}
+      behandling={behandling}
+      beregningsgrunnlag={bg as Beregningsgrunnlag}
+      aksjonspunkter={[]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -344,14 +342,14 @@ export const brukersAndelUtenAvvik = () => {
   bg.dekningsgrad = 80;
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg as Beregningsgrunnlag)}
-      aksjonspunkter={object('aksjonspunkter', [])}
+      behandling={behandling}
+      beregningsgrunnlag={bg as Beregningsgrunnlag}
+      aksjonspunkter={[]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -374,14 +372,14 @@ export const arbeidstakerMedAvvik = () => {
   const ap = lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS);
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling) as Behandling}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling as Behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', true)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
+      isReadOnly
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -409,14 +407,14 @@ export const arbeidstakerFrilansMedAvvikMedGradering = () => {
   const ap = lagAPMedKode(aksjonspunktCodes.VURDER_GRADERING_UTEN_BEREGNINGSGRUNNLAG);
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -435,14 +433,14 @@ export const militær = () => {
   const bg = lagBG(perioder, statuser);
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -500,14 +498,14 @@ export const selvstendigNæringsdrivende = () => {
   const ap = lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -559,14 +557,14 @@ export const tidsbegrensetArbeidsforholdMedAvvik = () => {
   const ap = lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD);
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={nyArbeidsgiverOpplysningerPerId}
@@ -592,14 +590,14 @@ export const arbeidstakerFrilanserOgSelvstendigNæringsdrivende = () => {
   const ap = lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -692,14 +690,14 @@ export const naturalYtelse = () => {
   bg.dekningsgrad = 80;
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={nyArbeidsgiverOpplysningerPerId}
@@ -724,14 +722,14 @@ export const arbeidstakerDagpengerOgSelvstendigNæringsdrivende = () => {
   bg.dekningsgrad = 80;
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -759,14 +757,14 @@ export const graderingPåBeregningsgrunnlagUtenPenger = () => {
   const ap = lagAPMedKode(aksjonspunktCodes.VURDER_GRADERING_UTEN_BEREGNINGSGRUNNLAG);
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -812,14 +810,14 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeUtenAkjsonspunkt = () => {
   bg.dekningsgrad = 100;
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -870,14 +868,14 @@ export const arbeidstakerOgFrilansOgSelvstendigNæringsdrivendeMedAksjonspunktBe
   const ap = lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -925,14 +923,14 @@ export const arbeidstakerDagpengerOgSelvstendigNæringsdrivendeUtenAksjonspunkt 
   bg.dekningsgrad = 100;
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.IKKE_OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -977,14 +975,14 @@ export const arbeidstakerMed3Arbeidsforhold2ISammeOrganisasjonSide3 = () => {
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={nyArbeidsgiverOpplysningerPerId}
@@ -1022,14 +1020,14 @@ export const arbeidstakerAvslagHalvGSide4 = () => {
   bg.dekningsgrad = 100;
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.IKKE_OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={nyArbeidsgiverOpplysningerPerId}
@@ -1064,14 +1062,14 @@ export const arbeidstakerMedAksjonspunktSide5 = () => {
   const ap = lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS);
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={nyArbeidsgiverOpplysningerPerId}
@@ -1100,14 +1098,14 @@ export const arbeidstakerMedAksjonspunktBehandletSide6 = () => {
   ap.endretTidspunkt = '2020-01-20';
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', true)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -1155,14 +1153,14 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktkSide7 = () => {
   const ap = lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD);
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={nyArbeidsgiverOpplysningerPerId}
@@ -1232,14 +1230,14 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktBehandletSide7 = () => {
 
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={nyArbeidsgiverOpplysningerPerId}
@@ -1260,14 +1258,14 @@ export const FrilansSide8 = () => {
   const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -1289,14 +1287,14 @@ export const FrilansMedAksjonspunktSide9 = () => {
   const ap = lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS);
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -1320,14 +1318,14 @@ export const arbeidstakerFrilansMedAksjonspunktSide10 = () => {
   const ap = lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS);
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -1358,14 +1356,14 @@ export const arbeidstakerFrilansMedAksjonspunktBehandletSide11 = () => {
   perioder[0].bruttoInkludertBortfaltNaturalytelsePrAar = 710316;
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', true)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -1412,14 +1410,14 @@ export const SelvstendigNæringsdrivendeUtenVarigEndringIkkeNyoppstartetSide12 =
   bg.dekningsgrad = 100;
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -1483,14 +1481,14 @@ export const SelvstendigNæringsdrivendeMedVarigEndringSide13 = () => {
   bg.dekningsgrad = 100;
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -1539,14 +1537,14 @@ export const SelvstendigNæringsdrivendeMedVarigEndringMedAksjonspunktSide14 = (
   const ap = lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -1598,14 +1596,14 @@ export const SelvstendigNæringsdrivendeMedVarigEndringMedAksjonspunktUtførtSid
   ap.status.kode = 'UTFO';
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', true)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly
+      readOnlySubmitButton
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -1654,14 +1652,14 @@ export const SelvstendigNæringsdrivendeNyoppstartetMedAksjonspunktSide16 = () =
 
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -1711,14 +1709,14 @@ export const SelvstendigNæringsdrivendeNyINæringslivetMedAksjonspunktSide17 = 
 
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', true)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -1765,14 +1763,14 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeSnStorreEnnAtOgStorreEnn6g
   bg.dekningsgrad = 80;
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -1820,14 +1818,14 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeSnMindreEnnAtOgStorreEnn6g
   bg.dekningsgrad = 80;
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -1875,14 +1873,14 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeMedAPVarigEndringSide20 = 
   const ap = lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -1935,14 +1933,14 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeMedVarigEndringApBehandlet
   ap.status.kode = 'UTFO';
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', true)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly
+      readOnlySubmitButton
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -1995,14 +1993,14 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeAtStorreEnnSNSide22 = () =
   ap.status.kode = 'UTFO';
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', true)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly
+      readOnlySubmitButton
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -2050,14 +2048,14 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedApOgVarigEndring
   const ap = lagAPMedKode(aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -2116,14 +2114,14 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedApOgVarigEndring
   ap.status.kode = 'UTFO';
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', true)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly
+      readOnlySubmitButton
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -2182,14 +2180,14 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedAPVarigEndringSn
   ap.status.kode = 'UTFO';
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', true)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly
+      readOnlySubmitButton
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -2210,14 +2208,14 @@ export const YtelseFraNavSide26 = () => {
   bg.dekningsgrad = 80;
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -2239,14 +2237,14 @@ export const arbeidstakerOgAAPMedAksjonspunktSide27 = () => {
 
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -2282,14 +2280,14 @@ export const arbeidstakerOgAAPMedAksjonspunktOppfyltSide27 = () => {
   ap.status.kode = 'UTFO';
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={nyArbeidsgiverOpplysningerPerId}
@@ -2319,14 +2317,14 @@ export const arbeidstakerDagpengerMedBesteberegningSide28 = () => {
   bg.dekningsgrad = 100;
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -2354,14 +2352,14 @@ export const frilansDagpengerOgSelvstendigNæringsdrivendeSide29 = () => {
   bg.dekningsgrad = 80;
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -2389,14 +2387,14 @@ export const frilansDagpengerOgSelvstendigNæringsdrivendeFnOgDpOverstigerSNSide
   bg.dekningsgrad = 100;
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -2424,14 +2422,14 @@ export const ArbeidstagerDagpengerOgSelvstendigNæringsdrivendeATOgDpOverstigerS
   bg.dekningsgrad = 100;
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -2479,14 +2477,14 @@ export const frilansDagpengerOgSelvstendigNæringsdrivendeMedAksjonspunktSide31 
 
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [ap as Aksjonspunkt])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[ap as Aksjonspunkt]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
@@ -2509,14 +2507,14 @@ export const militærOgSiviltjenesteSide33 = () => {
   bg.dekningsgrad = 80;
   return (
     <BeregningsgrunnlagProsessIndex
-      behandling={object('behandling', behandling)}
-      beregningsgrunnlag={object('beregningsgrunnlag', bg)}
-      aksjonspunkter={object('aksjonspunkter', [])}
+      behandling={behandling}
+      beregningsgrunnlag={bg}
+      aksjonspunkter={[]}
       submitCallback={action('button-click') as () => Promise<any>}
-      isReadOnly={boolean('readOnly', false)}
-      readOnlySubmitButton={boolean('readOnlySubmitButton', false)}
-      isAksjonspunktOpen={boolean('isAksjonspunktOpen', false)}
-      vilkar={object('vilkår', vilkarMedUtfall(vilkarUtfallType.OPPFYLT))}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
       alleKodeverk={alleKodeverk as any}
       status=""
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}

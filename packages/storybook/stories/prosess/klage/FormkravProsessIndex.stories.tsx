@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -30,13 +29,12 @@ const avsluttedeBehandlinger = [{
 export default {
   title: 'prosess/klage/prosess-formkrav',
   component: FormkravProsessIndex,
-  decorators: [withKnobs],
 };
 
 export const visFormkravPanelForAksjonspunktNfp = () => (
   <FormkravProsessIndex
     behandling={behandling}
-    klageVurdering={object('klageVurdering', {
+    klageVurdering={{
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
         klageVurdering: { kode: klageVurderingCodes.AVVIS_KLAGE, kodeverk: '' },
@@ -48,10 +46,10 @@ export const visFormkravPanelForAksjonspunktNfp = () => (
           navn: 'Denne er avvist fordi...',
         }],
       },
-    } as KlageVurdering)}
+    } as KlageVurdering}
     submitCallback={action('button-click') as (data: any) => Promise<any>}
-    isReadOnly={boolean('isReadOnly', false)}
-    readOnlySubmitButton={boolean('readOnly', false)}
+    isReadOnly={false}
+    readOnlySubmitButton={false}
     alleKodeverk={alleKodeverk as any}
     avsluttedeBehandlinger={avsluttedeBehandlinger}
     aksjonspunkter={[{
@@ -70,7 +68,7 @@ export const visFormkravPanelForAksjonspunktNfp = () => (
 export const visFormkravPanelForAksjonspunktKa = () => (
   <FormkravProsessIndex
     behandling={behandling}
-    klageVurdering={object('klageVurdering', {
+    klageVurdering={{
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
         klageVurdering: { kode: klageVurderingCodes.AVVIS_KLAGE, kodeverk: '' },
@@ -82,10 +80,10 @@ export const visFormkravPanelForAksjonspunktKa = () => (
           navn: 'Denne er avvist fordi...',
         }],
       },
-    } as KlageVurdering)}
+    } as KlageVurdering}
     submitCallback={action('button-click') as (data: any) => Promise<any>}
-    isReadOnly={boolean('isReadOnly', false)}
-    readOnlySubmitButton={boolean('readOnly', false)}
+    isReadOnly={false}
+    readOnlySubmitButton={false}
     alleKodeverk={alleKodeverk as any}
     avsluttedeBehandlinger={avsluttedeBehandlinger}
     aksjonspunkter={[{

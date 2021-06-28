@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import avslagsarsakCodes from '@fpsak-frontend/kodeverk/src/avslagsarsakCodes';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
@@ -14,9 +13,9 @@ import alleKodeverk from '../mocks/alleKodeverk.json';
 const standardProsessProps = {
   alleKodeverk: alleKodeverk as any,
   submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: boolean('readOnly', false),
-  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
-  readOnlySubmitButton: boolean('readOnly', false),
+  isReadOnly: false,
+  isAksjonspunktOpen: true,
+  readOnlySubmitButton: false,
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
@@ -26,7 +25,6 @@ const standardProsessProps = {
 export default {
   title: 'prosess/prosess-vilkar-foreldreansvar',
   component: ForeldreansvarVilkarProsessIndex,
-  decorators: [withKnobs],
 };
 
 export const visÅpentAksjonspunkt2Ledd = () => (
@@ -46,8 +44,8 @@ export const visÅpentAksjonspunkt2Ledd = () => (
       begrunnelse: undefined,
     }] as Aksjonspunkt[]}
     status={vilkarUtfallType.IKKE_VURDERT}
-    isEngangsstonad={boolean('isEngangsstonad', false)}
-    isForeldreansvar2Ledd={boolean('isForeldreansvar2Ledd', true)}
+    isEngangsstonad={false}
+    isForeldreansvar2Ledd
   />
 );
 
@@ -68,11 +66,11 @@ export const visOppfyltVilkår2Ledd = () => (
       },
       begrunnelse: 'Dette vilkåret er godkjent',
     }] as Aksjonspunkt[]}
-    isReadOnly={boolean('isReadOnly', true)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
+    isReadOnly
+    readOnlySubmitButton
     status={vilkarUtfallType.OPPFYLT}
-    isEngangsstonad={boolean('isEngangsstonad', false)}
-    isForeldreansvar2Ledd={boolean('isForeldreansvar2Ledd', true)}
+    isEngangsstonad={false}
+    isForeldreansvar2Ledd
   />
 );
 
@@ -97,11 +95,11 @@ export const visAvslåttVilkår2Ledd = () => (
       },
       begrunnelse: 'Dette vilkåret er avslått',
     }] as Aksjonspunkt[]}
-    isReadOnly={boolean('isReadOnly', true)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
+    isReadOnly
+    readOnlySubmitButton
     status={vilkarUtfallType.IKKE_OPPFYLT}
-    isEngangsstonad={boolean('isEngangsstonad', false)}
-    isForeldreansvar2Ledd={boolean('isForeldreansvar2Ledd', true)}
+    isEngangsstonad={false}
+    isForeldreansvar2Ledd
   />
 );
 
@@ -123,7 +121,7 @@ export const visÅpentAksjonspunkt4Ledd = () => (
     }] as Aksjonspunkt[]}
     status={vilkarUtfallType.IKKE_VURDERT}
     isEngangsstonad={false}
-    isForeldreansvar2Ledd={boolean('isForeldreansvar2Ledd', false)}
+    isForeldreansvar2Ledd={false}
   />
 );
 
@@ -144,11 +142,11 @@ export const visOppfyltVilkår4Ledd = () => (
       },
       begrunnelse: 'Dette vilkåret er godkjent',
     }] as Aksjonspunkt[]}
-    isReadOnly={boolean('isReadOnly', true)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
+    isReadOnly
+    readOnlySubmitButton
     status={vilkarUtfallType.OPPFYLT}
     isEngangsstonad={false}
-    isForeldreansvar2Ledd={boolean('isForeldreansvar2Ledd', false)}
+    isForeldreansvar2Ledd={false}
   />
 );
 
@@ -173,10 +171,10 @@ export const visAvslåttVilkår4Ledd = () => (
       },
       begrunnelse: 'Dette vilkåret er avslått',
     }] as Aksjonspunkt[]}
-    isReadOnly={boolean('isReadOnly', true)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
+    isReadOnly
+    readOnlySubmitButton
     status={vilkarUtfallType.IKKE_OPPFYLT}
     isEngangsstonad={false}
-    isForeldreansvar2Ledd={boolean('isForeldreansvar2Ledd', false)}
+    isForeldreansvar2Ledd={false}
   />
 );

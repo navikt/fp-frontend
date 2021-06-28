@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -156,9 +155,9 @@ const arbeidsgiverOpplysningerPerId = {
 const standardFaktaProps = {
   aksjonspunkter: [],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  readOnly: boolean('readOnly', false),
-  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
-  submittable: boolean('submittable', true),
+  readOnly: false,
+  harApneAksjonspunkter: true,
+  submittable: true,
   alleMerknaderFraBeslutter: {},
   setFormData: () => undefined,
 };
@@ -166,16 +165,15 @@ const standardFaktaProps = {
 export default {
   title: 'fakta/fakta-medlemskap',
   component: MedlemskapFaktaIndex,
-  decorators: [withKnobs],
 };
 
 export const visAksjonspunktForOverstyringAvStartdatoForForeldrepengerperioden = () => (
   <MedlemskapFaktaIndex
     {...standardFaktaProps}
-    behandling={object('behandling', behandling)}
-    medlemskap={object('medlemskap', medlemskap)}
-    soknad={object('soknad', soknad)}
-    inntektArbeidYtelse={object('inntektArbeidYtelse', inntektArbeidYtelse)}
+    behandling={behandling}
+    medlemskap={medlemskap}
+    soknad={soknad}
+    inntektArbeidYtelse={inntektArbeidYtelse}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO,
@@ -189,12 +187,12 @@ export const visAksjonspunktForOverstyringAvStartdatoForForeldrepengerperioden =
       kanLoses: true,
       erAktivt: true,
     }]}
-    isForeldrepengerFagsak={boolean('isForeldrepengerFagsak', true)}
+    isForeldrepengerFagsak
     alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+      [aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO]: merknaderFraBeslutter,
     }}
-    readOnlyForStartdatoForForeldrepenger={boolean('readOnly', false)}
+    readOnlyForStartdatoForForeldrepenger={false}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );
@@ -202,10 +200,10 @@ export const visAksjonspunktForOverstyringAvStartdatoForForeldrepengerperioden =
 export const visAksjonspunktForAlleAndreMedlemskapsaksjonspunkter = () => (
   <MedlemskapFaktaIndex
     {...standardFaktaProps}
-    behandling={object('behandling', behandling)}
-    medlemskap={object('medlemskap', medlemskap)}
-    soknad={object('soknad', soknad)}
-    inntektArbeidYtelse={object('inntektArbeidYtelse', inntektArbeidYtelse)}
+    behandling={behandling}
+    medlemskap={medlemskap}
+    soknad={soknad}
+    inntektArbeidYtelse={inntektArbeidYtelse}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT,
@@ -255,15 +253,15 @@ export const visAksjonspunktForAlleAndreMedlemskapsaksjonspunkter = () => (
       kanLoses: true,
       erAktivt: true,
     }]}
-    isForeldrepengerFagsak={boolean('isForeldrepengerFagsak', true)}
+    isForeldrepengerFagsak
     alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT]: object('merknaderFraBeslutter', merknaderFraBeslutter),
-      [aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP]: object('merknaderFraBeslutter', merknaderFraBeslutter),
-      [aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE]: object('merknaderFraBeslutter', merknaderFraBeslutter),
-      [aksjonspunktCodes.AVKLAR_OPPHOLDSRETT]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+      [aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT]: merknaderFraBeslutter,
+      [aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP]: merknaderFraBeslutter,
+      [aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE]: merknaderFraBeslutter,
+      [aksjonspunktCodes.AVKLAR_OPPHOLDSRETT]: merknaderFraBeslutter,
     }}
-    readOnlyForStartdatoForForeldrepenger={boolean('readOnly', false)}
+    readOnlyForStartdatoForForeldrepenger={false}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );

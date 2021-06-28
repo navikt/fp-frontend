@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import {
   FaktaArbeidsforhold, FamilieHendelseSamling, Personoversikt, UttakKontrollerFaktaPerioderWrapper,
@@ -44,9 +43,9 @@ const arbeidsgiverOpplysningerPerId = {
 const standardFaktaProps = {
   aksjonspunkter: [],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  readOnly: boolean('readOnly', false),
-  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
-  submittable: boolean('submittable', true),
+  readOnly: false,
+  harApneAksjonspunkter: true,
+  submittable: true,
   alleMerknaderFraBeslutter: {},
   setFormData: () => undefined,
 };
@@ -54,7 +53,6 @@ const standardFaktaProps = {
 export default {
   title: 'fakta/fakta-uttak',
   component: UttakFaktaIndex,
-  decorators: [withKnobs],
 };
 
 export const vurderOmAnnenPartHarRett = () => {
@@ -71,7 +69,7 @@ export const vurderOmAnnenPartHarRett = () => {
       faktaArbeidsforhold={faktaArbeidsforholdVurderAnnenPartHarRett as FaktaArbeidsforhold[]}
       personoversikt={personoversiktVurderAnnenPartHarRett as Personoversikt}
       familiehendelse={familiehendelseVurderAnnenPartHarRett as FamilieHendelseSamling}
-      readOnly={boolean('readOnly', readOnly)}
+      readOnly={readOnly}
       kanOverstyre={false}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
@@ -92,7 +90,7 @@ export const farSøkerFørsteSeksUker = () => {
       faktaArbeidsforhold={faktaArbeidsforholdFarSøkerFørsteSeksUker as FaktaArbeidsforhold[]}
       personoversikt={personoversiktFarSøkerFørsteSeksUker as Personoversikt}
       familiehendelse={familiehendelseFarSøkerFørsteSeksUker as FamilieHendelseSamling}
-      readOnly={boolean('readOnly', readOnly)}
+      readOnly={readOnly}
       kanOverstyre={false}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
@@ -113,7 +111,7 @@ export const overføringAvPerioder = () => {
       faktaArbeidsforhold={faktaArbeidsforholdOverføringAvPerioder as FaktaArbeidsforhold[]}
       personoversikt={personoversiktOverføringAvPerioder as Personoversikt}
       familiehendelse={familiehendelseOverføringAvPerioder as FamilieHendelseSamling}
-      readOnly={boolean('readOnly', readOnly)}
+      readOnly={readOnly}
       kanOverstyre={false}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />

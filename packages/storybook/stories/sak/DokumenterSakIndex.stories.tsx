@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, object } from '@storybook/addon-knobs';
 
 import DokumenterSakIndex from '@fpsak-frontend/sak-dokumenter';
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
@@ -36,7 +35,6 @@ const dokumenter = [{
 export default {
   title: 'sak/sak-dokumenter',
   component: DokumenterSakIndex,
-  decorators: [withKnobs],
 };
 
 export const visMeldingerPanel = () => (
@@ -45,7 +43,7 @@ export const visMeldingerPanel = () => (
   }}
   >
     <DokumenterSakIndex
-      documents={object('documents', dokumenter)}
+      documents={dokumenter}
       selectDocumentCallback={action('button-click')}
       behandlingUuid={behandlingUuid}
     />

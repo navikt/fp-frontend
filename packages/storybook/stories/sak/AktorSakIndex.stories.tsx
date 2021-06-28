@@ -1,5 +1,4 @@
 import React from 'react';
-import { withKnobs } from '@storybook/addon-knobs';
 
 import AktorSakIndex from '@fpsak-frontend/sak-aktor';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -36,7 +35,7 @@ const fagsak = {
 export default {
   title: 'sak/sak-aktor',
   component: AktorSakIndex,
-  decorators: [withKnobs, withRouterProvider],
+  decorators: [withRouterProvider],
 };
 
 export const visSakerOpprettetPaAktor = () => (

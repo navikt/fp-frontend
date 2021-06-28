@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import inntektskategorier from '@fpsak-frontend/kodeverk/src/inntektskategorier';
@@ -187,7 +186,6 @@ const merknaderFraBeslutter = {
 export default {
   title: 'fakta/fakta-beregning',
   component: BeregningFaktaIndex,
-  decorators: [withKnobs],
 };
 
 const agOpplysninger = {
@@ -221,17 +219,17 @@ const agOpplysninger = {
 export const ArbeidOgDagpenger = () => (
   <BeregningFaktaIndex
     behandling={behandling}
-    beregningsgrunnlag={object('beregningsgrunnlag', bgMedArbeidOgDagpenger)}
+    beregningsgrunnlag={bgMedArbeidOgDagpenger}
     aksjonspunkter={aksjonspunktArbeidOgDagpenger}
     erOverstyrer
     alleKodeverk={alleKodeverkMock as any}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+      [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: merknaderFraBeslutter,
     }}
     submitCallback={action('button-click') as (data: any) => Promise<any>}
-    readOnly={boolean('readOnly', false)}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
+    readOnly={false}
+    harApneAksjonspunkter
+    submittable
     arbeidsgiverOpplysningerPerId={agOpplysninger}
     setFormData={() => undefined}
   />
@@ -257,7 +255,7 @@ export const AvklarAktiviteterFullAAPOgAndreAktiviteter = () => {
   return (
     <BeregningFaktaIndex
       behandling={behandling}
-      beregningsgrunnlag={object('beregningsgrunnlag', beregningsgrunnlag)}
+      beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.AVKLAR_AKTIVITETER,
@@ -274,12 +272,12 @@ export const AvklarAktiviteterFullAAPOgAndreAktiviteter = () => {
       erOverstyrer={false}
       alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
-        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: merknaderFraBeslutter,
       }}
       submitCallback={action('button-click') as (data: any) => Promise<any>}
-      readOnly={boolean('readOnly', false)}
-      harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-      submittable={boolean('submittable', true)}
+      readOnly={false}
+      harApneAksjonspunkter
+      submittable
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       setFormData={() => undefined}
     />
@@ -343,7 +341,7 @@ export const AvklartAktiviteterMedAksjonspunktIFaktaAvklaring = () => {
   return (
     <BeregningFaktaIndex
       behandling={behandling}
-      beregningsgrunnlag={object('beregningsgrunnlag', beregningsgrunnlag)}
+      beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.AVKLAR_AKTIVITETER,
@@ -373,12 +371,12 @@ export const AvklartAktiviteterMedAksjonspunktIFaktaAvklaring = () => {
       erOverstyrer={false}
       alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
-        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: merknaderFraBeslutter,
       }}
       submitCallback={action('button-click') as (data: any) => Promise<any>}
-      readOnly={boolean('readOnly', false)}
-      harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-      submittable={boolean('submittable', true)}
+      readOnly={false}
+      harApneAksjonspunkter
+      submittable
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       setFormData={() => undefined}
     />
@@ -421,7 +419,7 @@ export const FrilansOgArbeidsforholdMedLønnendringOgNyoppstartet = () => {
   return (
     <BeregningFaktaIndex
       behandling={behandling}
-      beregningsgrunnlag={object('beregningsgrunnlag', beregningsgrunnlag)}
+      beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
@@ -438,12 +436,12 @@ export const FrilansOgArbeidsforholdMedLønnendringOgNyoppstartet = () => {
       erOverstyrer={false}
       alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
-        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: merknaderFraBeslutter,
       }}
       submitCallback={action('button-click') as (data: any) => Promise<any>}
-      readOnly={boolean('readOnly', false)}
-      harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-      submittable={boolean('submittable', true)}
+      readOnly={false}
+      harApneAksjonspunkter
+      submittable
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       setFormData={() => undefined}
     />
@@ -488,7 +486,7 @@ export const DagpengerOgArbeidstakerMedVurderingAvBesteberegning = () => {
   return (
     <BeregningFaktaIndex
       behandling={behandling}
-      beregningsgrunnlag={object('beregningsgrunnlag', beregningsgrunnlag)}
+      beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
@@ -505,12 +503,12 @@ export const DagpengerOgArbeidstakerMedVurderingAvBesteberegning = () => {
       erOverstyrer={false}
       alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
-        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: merknaderFraBeslutter,
       }}
       submitCallback={action('button-click') as (data: any) => Promise<any>}
-      readOnly={boolean('readOnly', false)}
-      harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-      submittable={boolean('submittable', true)}
+      readOnly={false}
+      harApneAksjonspunkter
+      submittable
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       setFormData={() => undefined}
     />
@@ -548,7 +546,7 @@ export const KunArbeidstakerMedVurderingAvBesteberegning = () => {
   return (
     <BeregningFaktaIndex
       behandling={behandling}
-      beregningsgrunnlag={object('beregningsgrunnlag', beregningsgrunnlag)}
+      beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
@@ -565,12 +563,12 @@ export const KunArbeidstakerMedVurderingAvBesteberegning = () => {
       erOverstyrer={false}
       alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
-        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: merknaderFraBeslutter,
       }}
       submitCallback={action('button-click') as (data: any) => Promise<any>}
-      readOnly={boolean('readOnly', false)}
-      harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-      submittable={boolean('submittable', true)}
+      readOnly={false}
+      harApneAksjonspunkter
+      submittable
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       setFormData={() => undefined}
     />
@@ -612,7 +610,7 @@ export const KunArbeidstakerMedVurderingSentRefusjonskrav = () => {
   return (
     <BeregningFaktaIndex
       behandling={behandling}
-      beregningsgrunnlag={object('beregningsgrunnlag', beregningsgrunnlag)}
+      beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
@@ -629,12 +627,12 @@ export const KunArbeidstakerMedVurderingSentRefusjonskrav = () => {
       erOverstyrer={false}
       alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
-        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: merknaderFraBeslutter,
       }}
       submitCallback={action('button-click') as (data: any) => Promise<any>}
-      readOnly={boolean('readOnly', false)}
-      harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-      submittable={boolean('submittable', true)}
+      readOnly={false}
+      harApneAksjonspunkter
+      submittable
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       setFormData={() => undefined}
     />
@@ -677,7 +675,7 @@ export const FrilansOgArbeidsforholdISammeOrganisasjon = () => {
   return (
     <BeregningFaktaIndex
       behandling={behandling}
-      beregningsgrunnlag={object('beregningsgrunnlag', beregningsgrunnlag)}
+      beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
@@ -694,12 +692,12 @@ export const FrilansOgArbeidsforholdISammeOrganisasjon = () => {
       erOverstyrer={false}
       alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
-        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: merknaderFraBeslutter,
       }}
       submitCallback={action('button-click') as (data: any) => Promise<any>}
-      readOnly={boolean('readOnly', false)}
-      harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-      submittable={boolean('submittable', true)}
+      readOnly={false}
+      harApneAksjonspunkter
+      submittable
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       setFormData={() => undefined}
     />
@@ -726,7 +724,7 @@ export const VurderingAvMilitær = () => {
   return (
     <BeregningFaktaIndex
       behandling={behandling}
-      beregningsgrunnlag={object('beregningsgrunnlag', beregningsgrunnlag)}
+      beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
@@ -743,12 +741,12 @@ export const VurderingAvMilitær = () => {
       erOverstyrer={false}
       alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
-        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: merknaderFraBeslutter,
       }}
       submitCallback={action('button-click') as (data: any) => Promise<any>}
-      readOnly={boolean('readOnly', false)}
-      harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-      submittable={boolean('submittable', true)}
+      readOnly={false}
+      harApneAksjonspunkter
+      submittable
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       setFormData={() => undefined}
     />
@@ -791,7 +789,7 @@ export const FrilansOgTidsbegrensetArbeidsforholdISammeOrganisasjon = () => {
   return (
     <BeregningFaktaIndex
       behandling={behandling}
-      beregningsgrunnlag={object('beregningsgrunnlag', beregningsgrunnlag)}
+      beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
@@ -808,12 +806,12 @@ export const FrilansOgTidsbegrensetArbeidsforholdISammeOrganisasjon = () => {
       erOverstyrer={false}
       alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
-        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: merknaderFraBeslutter,
       }}
       submitCallback={action('button-click') as (data: any) => Promise<any>}
-      readOnly={boolean('readOnly', false)}
-      harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-      submittable={boolean('submittable', true)}
+      readOnly={false}
+      harApneAksjonspunkter
+      submittable
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       setFormData={() => undefined}
     />
@@ -842,7 +840,7 @@ export const KunTidsbegrensetArbeidsforhold = () => {
   return (
     <BeregningFaktaIndex
       behandling={behandling}
-      beregningsgrunnlag={object('beregningsgrunnlag', beregningsgrunnlag)}
+      beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
@@ -859,12 +857,12 @@ export const KunTidsbegrensetArbeidsforhold = () => {
       erOverstyrer={false}
       alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
-        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: merknaderFraBeslutter,
       }}
       submitCallback={action('button-click') as (data: any) => Promise<any>}
-      readOnly={boolean('readOnly', false)}
-      harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-      submittable={boolean('submittable', true)}
+      readOnly={false}
+      harApneAksjonspunkter
+      submittable
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       setFormData={() => undefined}
     />
@@ -892,7 +890,7 @@ export const VurderingAvEtterlønnSluttpakke = () => {
   return (
     <BeregningFaktaIndex
       behandling={behandling}
-      beregningsgrunnlag={object('beregningsgrunnlag', beregningsgrunnlag)}
+      beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
@@ -909,12 +907,12 @@ export const VurderingAvEtterlønnSluttpakke = () => {
       erOverstyrer={false}
       alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
-        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: merknaderFraBeslutter,
       }}
       submitCallback={action('button-click') as (data: any) => Promise<any>}
-      readOnly={boolean('readOnly', false)}
-      harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-      submittable={boolean('submittable', true)}
+      readOnly={false}
+      harApneAksjonspunkter
+      submittable
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       setFormData={() => undefined}
     />
@@ -946,7 +944,7 @@ export const FastsettingAvBeregningsgrunnlagForKunYtelse = () => {
   return (
     <BeregningFaktaIndex
       behandling={behandling}
-      beregningsgrunnlag={object('beregningsgrunnlag', beregningsgrunnlag)}
+      beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
@@ -963,12 +961,12 @@ export const FastsettingAvBeregningsgrunnlagForKunYtelse = () => {
       erOverstyrer={false}
       alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
-        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: merknaderFraBeslutter,
       }}
       submitCallback={action('button-click') as (data: any) => Promise<any>}
-      readOnly={boolean('readOnly', false)}
-      harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-      submittable={boolean('submittable', true)}
+      readOnly={false}
+      harApneAksjonspunkter
+      submittable
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       setFormData={() => undefined}
     />
@@ -995,7 +993,7 @@ export const SelvstendigNæringNyIArbeidslivet = () => {
   return (
     <BeregningFaktaIndex
       behandling={behandling}
-      beregningsgrunnlag={object('beregningsgrunnlag', beregningsgrunnlag)}
+      beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
@@ -1012,12 +1010,12 @@ export const SelvstendigNæringNyIArbeidslivet = () => {
       erOverstyrer={false}
       alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
-        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: merknaderFraBeslutter,
       }}
       submitCallback={action('button-click') as (data: any) => Promise<any>}
-      readOnly={boolean('readOnly', false)}
-      harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-      submittable={boolean('submittable', true)}
+      readOnly={false}
+      harApneAksjonspunkter
+      submittable
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       setFormData={() => undefined}
     />
@@ -1186,7 +1184,7 @@ export const KombinasjonstestForFaktapanel = () => {
   return (
     <BeregningFaktaIndex
       behandling={behandling}
-      beregningsgrunnlag={object('beregningsgrunnlag', beregningsgrunnlag)}
+      beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.AVKLAR_AKTIVITETER,
@@ -1216,12 +1214,12 @@ export const KombinasjonstestForFaktapanel = () => {
       erOverstyrer={false}
       alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
-        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: merknaderFraBeslutter,
       }}
       submitCallback={action('button-click') as (data: any) => Promise<any>}
-      readOnly={boolean('readOnly', false)}
-      harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-      submittable={boolean('submittable', true)}
+      readOnly={false}
+      harApneAksjonspunkter
+      submittable
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       setFormData={() => undefined}
     />
@@ -1281,7 +1279,7 @@ export const OverstyringAvInntekt = () => {
   return (
     <BeregningFaktaIndex
       behandling={behandling}
-      beregningsgrunnlag={object('beregningsgrunnlag', beregningsgrunnlag)}
+      beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
@@ -1298,12 +1296,12 @@ export const OverstyringAvInntekt = () => {
       erOverstyrer
       alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
-        [aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+        [aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG]: merknaderFraBeslutter,
       }}
       submitCallback={action('button-click') as (data: any) => Promise<any>}
-      readOnly={boolean('readOnly', false)}
-      harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-      submittable={boolean('submittable', true)}
+      readOnly={false}
+      harApneAksjonspunkter
+      submittable
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       setFormData={() => undefined}
     />
@@ -1335,7 +1333,7 @@ export const VurderKunYtelseBesteberegning = () => {
   return (
     <BeregningFaktaIndex
       behandling={behandling}
-      beregningsgrunnlag={object('beregningsgrunnlag', beregningsgrunnlag)}
+      beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
         definisjon: {
           kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
@@ -1352,12 +1350,12 @@ export const VurderKunYtelseBesteberegning = () => {
       erOverstyrer={false}
       alleKodeverk={alleKodeverkMock as any}
       alleMerknaderFraBeslutter={{
-        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+        [aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN]: merknaderFraBeslutter,
       }}
       submitCallback={action('button-click') as (data: any) => Promise<any>}
-      readOnly={boolean('readOnly', false)}
-      harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-      submittable={boolean('submittable', true)}
+      readOnly={false}
+      harApneAksjonspunkter
+      submittable
       arbeidsgiverOpplysningerPerId={agOpplysninger}
       setFormData={() => undefined}
     />

@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import tilbakekrevingKodeverkTyper from '@fpsak-frontend/kodeverk/src/tilbakekrevingKodeverkTyper';
@@ -85,8 +84,8 @@ const standardProsessProps = {
   alleKodeverk,
   aksjonspunkter: [],
   submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: boolean('readOnly', false),
-  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  isReadOnly: false,
+  isAksjonspunktOpen: true,
   readOnlySubmitButton: false,
   status: '',
   vilkar: [],
@@ -96,7 +95,6 @@ const standardProsessProps = {
 export default {
   title: 'prosess/tilbakekreving/prosess-foreldelse',
   component: ForeldelseProsessIndex,
-  decorators: [withKnobs],
 };
 
 const beregnBelop = (params: {perioder: any[]}) => {
@@ -109,7 +107,7 @@ const beregnBelop = (params: {perioder: any[]}) => {
 export const visAksjonspunktForForeldelse = () => (
   <ForeldelseProsessIndex
     {...standardProsessProps}
-    perioderForeldelse={object('perioderForeldelse', perioderForeldelse)}
+    perioderForeldelse={perioderForeldelse}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodesTilbakekreving.VURDER_FORELDELSE,
@@ -125,7 +123,7 @@ export const visAksjonspunktForForeldelse = () => (
     }]}
     navBrukerKjonn={NavBrukerKjonn.KVINNE}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodesTilbakekreving.VURDER_FORELDELSE]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+      [aksjonspunktCodesTilbakekreving.VURDER_FORELDELSE]: merknaderFraBeslutter,
     }}
     beregnBelop={(params) => beregnBelop(params)}
   />

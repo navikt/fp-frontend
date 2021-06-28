@@ -1,5 +1,4 @@
 import React from 'react';
-import { withKnobs } from '@storybook/addon-knobs';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@fpsak-frontend/utils';
@@ -19,7 +18,6 @@ const intl = createIntl(messages);
 export default {
   title: 'behandling/vedtak/IverksetterVedtakStatusModal',
   component: IverksetterVedtakStatusModal,
-  decorators: [withKnobs],
 };
 
 export const visIverksetterVedtakInnvilget = () => (

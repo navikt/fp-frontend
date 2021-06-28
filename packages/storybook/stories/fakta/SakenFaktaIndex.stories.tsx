@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -29,9 +28,9 @@ const behandling = {
 const standardFaktaProps = {
   aksjonspunkter: [],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  readOnly: boolean('readOnly', false),
-  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
-  submittable: boolean('submittable', true),
+  readOnly: false,
+  harApneAksjonspunkter: true,
+  submittable: true,
   alleMerknaderFraBeslutter: {},
   alleKodeverk: alleKodeverk as any,
   setFormData: () => undefined,
@@ -40,14 +39,13 @@ const standardFaktaProps = {
 export default {
   title: 'fakta/fakta-saken',
   component: SakenFaktaIndex,
-  decorators: [withKnobs],
 };
 
 export const visEndringAvUtland = () => (
   <SakenFaktaIndex
     {...standardFaktaProps}
     behandling={behandling as Behandling}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', false)}
+    harApneAksjonspunkter={false}
   />
 );
 

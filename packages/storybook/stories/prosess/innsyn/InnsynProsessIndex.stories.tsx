@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
@@ -36,9 +35,9 @@ const standardProsessProps = {
   alleKodeverk: alleKodeverk as any,
   aksjonspunkter,
   submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: boolean('readOnly', false),
-  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
-  readOnlySubmitButton: boolean('readOnly', false),
+  isReadOnly: false,
+  isAksjonspunktOpen: true,
+  readOnlySubmitButton: false,
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
@@ -48,20 +47,19 @@ const standardProsessProps = {
 export default {
   title: 'prosess/innsyn/prosess-innsyn',
   component: InnsynProsessIndex,
-  decorators: [withKnobs],
 };
 
 export const visPanelForVurderingAvInnsyn = () => (
   <InnsynProsessIndex
     {...standardProsessProps}
-    innsyn={object('innsyn', {
+    innsyn={{
       dokumenter: [] as InnsynDokument[],
       vedtaksdokumentasjon: [{
         dokumentId: '1',
         tittel: behandlingType.FORSTEGANGSSOKNAD,
         opprettetDato: '2019-01-01',
       }],
-    } as Innsyn)}
+    } as Innsyn}
     saksnummer="123434"
     alleDokumenter={[{
       journalpostId: '2',

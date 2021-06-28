@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import {
   Behandling, BeregningsresultatEs, Beregningsgrunnlag, BeregningsresultatFp, Medlemskap, Vilkar,
@@ -75,8 +74,8 @@ const standardProsessProps = {
   alleKodeverk: alleKodeverk as any,
   aksjonspunkter: [],
   submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: boolean('readOnly', false),
-  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
+  isReadOnly: false,
+  isAksjonspunktOpen: true,
   readOnlySubmitButton: false,
   status: '',
   vilkar,
@@ -87,7 +86,6 @@ const standardProsessProps = {
 export default {
   title: 'prosess/prosess-vedtak',
   component: VedtakProsessIndex,
-  decorators: [withKnobs],
 };
 
 /*

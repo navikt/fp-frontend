@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import innsynResultatType from '@fpsak-frontend/kodeverk/src/innsynResultatType';
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
@@ -43,13 +42,13 @@ const aksjonspunkter = [{
 }] as Aksjonspunkt[];
 
 const standardProsessProps = {
-  behandling: object('behandling', behandling),
+  behandling,
   alleKodeverk: alleKodeverk as any,
   aksjonspunkter,
   submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: boolean('readOnly', false),
-  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
-  readOnlySubmitButton: boolean('readOnly', false),
+  isReadOnly: false,
+  isAksjonspunktOpen: true,
+  readOnlySubmitButton: false,
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
@@ -59,13 +58,12 @@ const standardProsessProps = {
 export default {
   title: 'prosess/innsyn/prosess-vedtak-innsyn',
   component: VedtakInnsynProsessIndex,
-  decorators: [withKnobs],
 };
 
 export const visPanelForInnvilgetVedtak = () => (
   <VedtakInnsynProsessIndex
     {...standardProsessProps}
-    innsyn={object('innsyn', {
+    innsyn={{
       dokumenter: [{
         journalpostId: '2',
         dokumentId: '3',
@@ -81,7 +79,7 @@ export const visPanelForInnvilgetVedtak = () => (
         kodeverk: '',
       },
       innsynMottattDato: '2019-01-01',
-    })}
+    }}
     saksnummer="123434"
     alleDokumenter={[{
       journalpostId: '2',
@@ -97,7 +95,7 @@ export const visPanelForInnvilgetVedtak = () => (
 export const visPanelForAvvistVedtak = () => (
   <VedtakInnsynProsessIndex
     {...standardProsessProps}
-    innsyn={object('innsyn', {
+    innsyn={{
       dokumenter: [{
         journalpostId: '2',
         dokumentId: '3',
@@ -113,7 +111,7 @@ export const visPanelForAvvistVedtak = () => (
         kodeverk: '',
       },
       innsynMottattDato: '2019-01-01',
-    })}
+    }}
     saksnummer="123434"
     alleDokumenter={[{
       journalpostId: '2',

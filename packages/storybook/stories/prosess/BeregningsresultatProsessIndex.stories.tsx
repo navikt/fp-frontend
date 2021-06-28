@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import { Behandling, Aksjonspunkt } from '@fpsak-frontend/types';
 
@@ -32,9 +31,9 @@ const standardProsessProps = {
   alleKodeverk: alleKodeverk as any,
   aksjonspunkter,
   submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: boolean('readOnly', false),
-  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
-  readOnlySubmitButton: boolean('readOnly', false),
+  isReadOnly: false,
+  isAksjonspunktOpen: true,
+  readOnlySubmitButton: false,
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
@@ -44,7 +43,6 @@ const standardProsessProps = {
 export default {
   title: 'prosess/prosess-beregningsresultat',
   component: BeregningsresultatProsessIndex,
-  decorators: [withKnobs],
 };
 
 export const saksbehandlerKanIkkeOverstyre = () => (
@@ -62,7 +60,7 @@ export const saksbehandlerKanOverstyre = () => (
     {...standardProsessProps}
     beregningresultatEngangsstonad={beregningsresultat}
     aksjonspunkter={aksjonspunkter as Aksjonspunkt[]}
-    overrideReadOnly={boolean('readOnly', false)}
+    overrideReadOnly={false}
     kanOverstyreAccess={{ isEnabled: true }}
     toggleOverstyring={action('button-click')}
   />

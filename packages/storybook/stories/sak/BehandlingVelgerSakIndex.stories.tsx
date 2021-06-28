@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import {
-  withKnobs, object, boolean,
-} from '@storybook/addon-knobs';
 
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
@@ -167,7 +164,7 @@ const getKodeverkFn = (kodeverk: Kodeverk) => {
 export default {
   title: 'sak/sak-behandling-velger',
   component: BehandlingVelgerSakIndex,
-  decorators: [withKnobs, withRouterProvider],
+  decorators: [withRouterProvider],
 };
 
 export const visPanelForValgAvBehandlinger = () => {
@@ -175,9 +172,9 @@ export const visPanelForValgAvBehandlinger = () => {
   return (
     <div style={{ width: '600px' }}>
       <BehandlingVelgerSakIndex
-        behandlinger={object('behandlinger', behandlinger as Behandling[])}
+        behandlinger={behandlinger as Behandling[]}
         getBehandlingLocation={() => locationMock}
-        noExistingBehandlinger={boolean('noExistingBehandlinger', false)}
+        noExistingBehandlinger={false}
         behandlingUuid="1"
         showAll={visAlle}
         toggleShowAll={() => toggleVisAlle(!visAlle)}

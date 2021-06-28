@@ -1,7 +1,4 @@
 import React from 'react';
-import {
-  withKnobs, object, text,
-} from '@storybook/addon-knobs';
 
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
@@ -31,40 +28,39 @@ const familiehendelse = {
 export default {
   title: 'prosessOgFakta/prosess-fakta-fodsel-sammenligning',
   component: FodselSammenligningIndex,
-  decorators: [withKnobs],
 };
 
 export const visPanelForNårBehandlingstypeErRevurdering = () => (
   <FodselSammenligningIndex
     behandlingsTypeKode={behandlingType.REVURDERING}
-    avklartBarn={object('avklartBarn', avklartBarn)}
-    termindato={text('termindato', '2019-01-01')}
-    soknad={object('soknad', soknad)}
-    familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', familiehendelse)}
+    avklartBarn={avklartBarn}
+    termindato="2019-01-01"
+    soknad={soknad}
+    familiehendelseOriginalBehandling={familiehendelse}
   />
 );
 
 export const visPanelForNårBehandlingstypeErFørstegangssoknad = () => (
   <FodselSammenligningIndex
     behandlingsTypeKode={behandlingType.FORSTEGANGSSOKNAD}
-    avklartBarn={object('avklartBarn', avklartBarn)}
-    termindato={text('termindato', '2019-01-01')}
-    soknad={object('soknad', soknad)}
-    familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', familiehendelse)}
+    avklartBarn={avklartBarn}
+    termindato="2019-01-01"
+    soknad={soknad}
+    familiehendelseOriginalBehandling={familiehendelse}
   />
 );
 
 export const visPanelForMedVisningAvSvangerskapsuke = () => (
   <FodselSammenligningIndex
     behandlingsTypeKode={behandlingType.REVURDERING}
-    avklartBarn={object('avklartBarn', avklartBarn)}
-    termindato={text('termindato', '2019-01-01')}
+    avklartBarn={avklartBarn}
+    termindato="2019-01-01"
     vedtaksDatoSomSvangerskapsuke={43}
-    soknad={object('soknad', soknad)}
-    familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', {
+    soknad={soknad}
+    familiehendelseOriginalBehandling={{
       avklartBarn: [] as AvklartBarn[],
       termindato: '2019-01-01',
       antallBarnTermin: 1,
-    } as FamilieHendelse)}
+    } as FamilieHendelse}
   />
 );

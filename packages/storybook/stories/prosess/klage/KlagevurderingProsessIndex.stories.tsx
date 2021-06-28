@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -18,13 +17,13 @@ const behandling = {
 } as Behandling;
 
 const standardProsessProps = {
-  behandling: object('behandling', behandling),
+  behandling,
   alleKodeverk: alleKodeverk as any,
   aksjonspunkter: [],
   submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: boolean('readOnly', false),
-  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
-  readOnlySubmitButton: boolean('readOnly', false),
+  isReadOnly: false,
+  isAksjonspunktOpen: true,
+  readOnlySubmitButton: false,
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
@@ -34,13 +33,12 @@ const standardProsessProps = {
 export default {
   title: 'prosess/klage/prosess-klagevurdering',
   component: KlagevurderingProsessIndex,
-  decorators: [withKnobs],
 };
 
 export const visPanelForKlagevurderingMedAksjonspunktNk = () => (
   <KlagevurderingProsessIndex
     {...standardProsessProps}
-    klageVurdering={object('klageVurdering', {
+    klageVurdering={{
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
         klageVurdering: { kode: klageVurderingCodes.AVVIS_KLAGE, kodeverk: '' },
@@ -52,7 +50,7 @@ export const visPanelForKlagevurderingMedAksjonspunktNk = () => (
           navn: 'Denne er avvist fordi...',
         }],
       },
-    } as KlageVurdering)}
+    } as KlageVurdering}
     saveKlage={action('button-click') as (data: any) => Promise<any>}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
     aksjonspunkter={[{
@@ -66,7 +64,7 @@ export const visPanelForKlagevurderingMedAksjonspunktNk = () => (
 export const visPanelForKlagevurderingMedAksjonspunktNfp = () => (
   <KlagevurderingProsessIndex
     {...standardProsessProps}
-    klageVurdering={object('klageVurdering', {
+    klageVurdering={{
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
         klageVurdering: { kode: klageVurderingCodes.AVVIS_KLAGE, kodeverk: '' },
@@ -78,7 +76,7 @@ export const visPanelForKlagevurderingMedAksjonspunktNfp = () => (
           navn: 'Denne er avvist fordi...',
         }],
       },
-    } as KlageVurdering)}
+    } as KlageVurdering}
     saveKlage={action('button-click') as (data: any) => Promise<any>}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
     aksjonspunkter={[{

@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -47,9 +46,9 @@ const standardProsessProps = {
   alleKodeverk: alleKodeverk as any,
   aksjonspunkter,
   submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: boolean('readOnly', false),
-  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
-  readOnlySubmitButton: boolean('readOnly', false),
+  isReadOnly: false,
+  isAksjonspunktOpen: true,
+  readOnlySubmitButton: false,
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
@@ -60,13 +59,12 @@ const standardProsessProps = {
 export default {
   title: 'prosess/anke/prosess-anke-resultat',
   component: AnkeResultatProsessIndex,
-  decorators: [withKnobs],
 };
 
 export const visPanelForResultatVedStadfestYtelsesvedtak = () => (
   <AnkeResultatProsessIndex
     {...standardProsessProps}
-    ankeVurdering={object('ankeVurdering', {
+    ankeVurdering={{
       ankeVurderingResultat: {
         ...ankeVurderingResultat,
         ankeVurdering: {
@@ -74,7 +72,7 @@ export const visPanelForResultatVedStadfestYtelsesvedtak = () => (
           kodeverk: '',
         },
       },
-    } as AnkeVurdering)}
+    } as AnkeVurdering}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );
@@ -82,7 +80,7 @@ export const visPanelForResultatVedStadfestYtelsesvedtak = () => (
 export const visPanelForResultatVedOppheveOgHjemsende = () => (
   <AnkeResultatProsessIndex
     {...standardProsessProps}
-    ankeVurdering={object('ankeVurdering', {
+    ankeVurdering={{
       ankeVurderingResultat: {
         ...ankeVurderingResultat,
         ankeVurdering: {
@@ -90,7 +88,7 @@ export const visPanelForResultatVedOppheveOgHjemsende = () => (
           kodeverk: '',
         },
       },
-    } as AnkeVurdering)}
+    } as AnkeVurdering}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );
@@ -98,7 +96,7 @@ export const visPanelForResultatVedOppheveOgHjemsende = () => (
 export const visPanelForResultatVedOmgjør = () => (
   <AnkeResultatProsessIndex
     {...standardProsessProps}
-    ankeVurdering={object('ankeVurdering', {
+    ankeVurdering={{
       ankeVurderingResultat: {
         ...ankeVurderingResultat,
         ankeVurdering: {
@@ -111,7 +109,7 @@ export const visPanelForResultatVedOmgjør = () => (
         },
         ankeOmgjoerArsakNavn: 'Testårsak',
       },
-    } as AnkeVurdering)}
+    } as AnkeVurdering}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );
@@ -119,9 +117,9 @@ export const visPanelForResultatVedOmgjør = () => (
 export const visPanelForResultatVedAvvis = () => (
   <AnkeResultatProsessIndex
     {...standardProsessProps}
-    ankeVurdering={object('ankeVurdering', {
+    ankeVurdering={{
       ankeVurderingResultat,
-    } as AnkeVurdering)}
+    } as AnkeVurdering}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );

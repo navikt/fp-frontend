@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
 import relatertYtelseTilstand from '@fpsak-frontend/kodeverk/src/relatertYtelseTilstand';
@@ -115,9 +114,9 @@ const merknaderFraBeslutter = {
 const standardFaktaProps = {
   aksjonspunkter: [],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  readOnly: boolean('readOnly', false),
-  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
-  submittable: boolean('submittable', true),
+  readOnly: false,
+  harApneAksjonspunkter: true,
+  submittable: true,
   alleMerknaderFraBeslutter: {},
   setFormData: () => undefined,
 };
@@ -125,17 +124,16 @@ const standardFaktaProps = {
 export default {
   title: 'fakta/fakta-omsorg-og-foreldreansvar',
   component: OmsorgOgForeldreansvarFaktaIndex,
-  decorators: [withKnobs],
 };
 
 export const visÅpentAksjonspunktForOmsorgovertakelse = () => (
   <OmsorgOgForeldreansvarFaktaIndex
     {...standardFaktaProps}
     behandling={behandling}
-    soknad={object('soknad', soknad)}
-    familiehendelse={object('familiehendelse', familieHendelse)}
-    personoversikt={object('personoversikt', personoversikt)}
-    inntektArbeidYtelse={object('inntektArbeidYtelse', inntektArbeidYtelse)}
+    soknad={soknad}
+    familiehendelse={familieHendelse}
+    personoversikt={personoversikt}
+    inntektArbeidYtelse={inntektArbeidYtelse}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.OMSORGSOVERTAKELSE,
@@ -150,7 +148,7 @@ export const visÅpentAksjonspunktForOmsorgovertakelse = () => (
       erAktivt: true,
     }]}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.OMSORGSOVERTAKELSE]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+      [aksjonspunktCodes.OMSORGSOVERTAKELSE]: merknaderFraBeslutter,
     }}
     alleKodeverk={alleKodeverk as any}
   />
@@ -160,10 +158,10 @@ export const visÅpentAksjonspunktForAvklareVilkårForForeldreansvar = () => (
   <OmsorgOgForeldreansvarFaktaIndex
     {...standardFaktaProps}
     behandling={behandling}
-    soknad={object('soknad', soknad)}
-    familiehendelse={object('familiehendelse', familieHendelse)}
-    personoversikt={object('personoversikt', personoversikt)}
-    inntektArbeidYtelse={object('inntektArbeidYtelse', inntektArbeidYtelse)}
+    soknad={soknad}
+    familiehendelse={familieHendelse}
+    personoversikt={personoversikt}
+    inntektArbeidYtelse={inntektArbeidYtelse}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
@@ -178,7 +176,7 @@ export const visÅpentAksjonspunktForAvklareVilkårForForeldreansvar = () => (
       erAktivt: true,
     }]}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+      [aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,
     }}
     alleKodeverk={alleKodeverk as any}
   />

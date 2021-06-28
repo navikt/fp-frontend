@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -79,9 +78,9 @@ const merknaderFraBeslutter = {
 const standardFaktaProps = {
   aksjonspunkter: [],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  readOnly: boolean('readOnly', false),
-  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
-  submittable: boolean('submittable', true),
+  readOnly: false,
+  harApneAksjonspunkter: true,
+  submittable: true,
   alleMerknaderFraBeslutter: {},
   setFormData: () => undefined,
 };
@@ -89,7 +88,6 @@ const standardFaktaProps = {
 export default {
   title: 'fakta/fakta-omsorg',
   component: OmsorgFaktaIndex,
-  decorators: [withKnobs],
 };
 
 export const visÅpentAksjonspunktForKontrollAvOmBrukerHarAleneomsorg = () => (
@@ -97,8 +95,8 @@ export const visÅpentAksjonspunktForKontrollAvOmBrukerHarAleneomsorg = () => (
     {...standardFaktaProps}
     behandling={behandling}
     ytelsefordeling={ytelsefordeling}
-    soknad={object('soknad', soknad)}
-    personoversikt={object('personoversikt', personoversikt)}
+    soknad={soknad}
+    personoversikt={personoversikt}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
@@ -114,7 +112,7 @@ export const visÅpentAksjonspunktForKontrollAvOmBrukerHarAleneomsorg = () => (
     }]}
     alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+      [aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG]: merknaderFraBeslutter,
     }}
   />
 );
@@ -124,8 +122,8 @@ export const visÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg = () => (
     {...standardFaktaProps}
     behandling={behandling}
     ytelsefordeling={ytelsefordeling}
-    soknad={object('soknad', soknad)}
-    personoversikt={object('personoversikt', personoversikt)}
+    soknad={soknad}
+    personoversikt={personoversikt}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
@@ -141,7 +139,7 @@ export const visÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg = () => (
     }]}
     alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+      [aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: merknaderFraBeslutter,
     }}
   />
 );

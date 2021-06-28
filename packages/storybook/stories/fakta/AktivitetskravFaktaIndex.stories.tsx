@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -53,7 +52,6 @@ const merknaderFraBeslutter = {
 export default {
   title: 'fakta/fakta-aktivitetskrav',
   component: AktivitetskravFaktaIndex,
-  decorators: [withKnobs],
 };
 
 export const visAksjonspunktMedToUavklartePerioder = () => (
@@ -75,9 +73,9 @@ export const visAksjonspunktMedToUavklartePerioder = () => (
       erAktivt: true,
     }]}
     submitCallback={action('button-click') as (data: any) => Promise<any>}
-    readOnly={boolean('readOnly', false)}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
+    readOnly={false}
+    harApneAksjonspunkter
+    submittable
     alleMerknaderFraBeslutter={{}}
     setFormData={() => undefined}
   />
@@ -102,9 +100,9 @@ export const visAksjonspunktSomErBekreftet = () => (
       erAktivt: false,
     }]}
     submitCallback={action('button-click') as (data: any) => Promise<any>}
-    readOnly={boolean('readOnly', true)}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', false)}
-    submittable={boolean('submittable', false)}
+    readOnly
+    harApneAksjonspunkter={false}
+    submittable={false}
     alleMerknaderFraBeslutter={{}}
     setFormData={() => undefined}
   />
@@ -129,11 +127,11 @@ export const visAksjonspunktSomErReåpnetAvBeslutter = () => (
       erAktivt: true,
     }]}
     submitCallback={action('button-click') as (data: any) => Promise<any>}
-    readOnly={boolean('readOnly', false)}
-    harApneAksjonspunkter={boolean('harApneAksjonspunkter', true)}
-    submittable={boolean('submittable', true)}
+    readOnly={false}
+    harApneAksjonspunkter
+    submittable
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+      [aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV]: merknaderFraBeslutter,
     }}
     setFormData={() => undefined}
   />

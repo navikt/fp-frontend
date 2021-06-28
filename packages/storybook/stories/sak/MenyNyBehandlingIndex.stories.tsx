@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs } from '@storybook/addon-knobs';
 
 import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
@@ -10,7 +9,6 @@ import MenyNyBehandlingIndex from '@fpsak-frontend/sak-meny-ny-behandling';
 export default {
   title: 'sak/sak-meny-ny-behandling',
   component: MenyNyBehandlingIndex,
-  decorators: [withKnobs],
 };
 
 const behandlingstyper = [{

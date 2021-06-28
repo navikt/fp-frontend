@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -27,13 +26,13 @@ const uttakPeriodeGrense = {
 };
 
 const standardProsessProps = {
-  behandling: object('behandling', behandling),
+  behandling,
   alleKodeverk: alleKodeverk as any,
   aksjonspunkter: [],
   submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: boolean('readOnly', false),
-  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
-  readOnlySubmitButton: boolean('readOnly', true),
+  isReadOnly: false,
+  isAksjonspunktOpen: true,
+  readOnlySubmitButton: true,
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
@@ -43,13 +42,12 @@ const standardProsessProps = {
 export default {
   title: 'prosess/prosess-soknadsfrist',
   component: VurderSoknadsfristForeldrepengerIndex,
-  decorators: [withKnobs],
 };
 export const visPanelForSoknadsfrist = () => (
   <VurderSoknadsfristForeldrepengerIndex
     {...standardProsessProps}
-    uttakPeriodeGrense={object('uttakPeriodeGrense', uttakPeriodeGrense)}
-    soknad={object('soknad', soknad)}
+    uttakPeriodeGrense={uttakPeriodeGrense}
+    soknad={soknad}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.VURDER_SOKNADSFRIST_FORELDREPENGER,

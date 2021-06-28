@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, object, boolean } from '@storybook/addon-knobs';
 
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
@@ -42,18 +41,17 @@ const fagsaker = [{
 export default {
   title: 'sak/sak-sok',
   component: FagsakSokSakIndex,
-  decorators: [withKnobs],
 };
 
 export const visMeldingerPanel = () => {
   const [visResultat, toggleResultat] = useState(false);
   return (
     <FagsakSokSakIndex
-      fagsaker={visResultat ? object('fagsaker', fagsaker as Fagsak[]) : []}
+      fagsaker={visResultat ? fagsaker as Fagsak[] : []}
       searchFagsakCallback={() => toggleResultat(true) as any}
-      searchResultReceived={boolean('searchResultReceived', false)}
+      searchResultReceived={false}
       selectFagsakCallback={action('button-click')}
-      searchStarted={boolean('searchStarted', false)}
+      searchStarted={false}
       alleKodeverk={alleKodeverk as any}
     />
   );
@@ -63,12 +61,12 @@ export const visSøkDerEnIkkeHarAdgang = () => (
   <FagsakSokSakIndex
     fagsaker={[]}
     searchFagsakCallback={action('button-click') as any}
-    searchResultReceived={boolean('searchResultReceived', false)}
+    searchResultReceived={false}
     selectFagsakCallback={action('button-click')}
-    searchStarted={boolean('searchStarted', false)}
-    searchResultAccessDenied={object('searchResultAccessDenied', {
+    searchStarted={false}
+    searchResultAccessDenied={{
       feilmelding: 'Har ikke adgang',
-    })}
+    }}
     alleKodeverk={alleKodeverk as any}
   />
 );

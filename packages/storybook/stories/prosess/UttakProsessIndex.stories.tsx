@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import UttakProsessIndex from '@fpsak-frontend/prosess-uttak';
 import {
@@ -12,7 +11,6 @@ import alleKodeverk from '../mocks/alleKodeverk.json';
 export default {
   title: 'prosess/prosess-uttak',
   component: UttakProsessIndex,
-  decorators: [withKnobs],
 };
 
 const aksjonspunkter = [
@@ -446,15 +444,15 @@ export const visProsessUttak = () => (
     uttakPeriodeGrense={uttakPeriodeGrense}
     ytelsefordeling={ytelsefordeling}
     alleKodeverk={alleKodeverk as any}
-    employeeHasAccess={boolean('employeeHasAccess', true)}
+    employeeHasAccess
     submitCallback={action('button-click') as () => Promise<any>}
-    isReadOnly={boolean('isReadOnly', false)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
+    isReadOnly={false}
+    readOnlySubmitButton
     tempUpdateStonadskontoer={action('button-click') as (params: {
       behandlingUuid: string;
       perioder: any;
     }) => Promise<any>}
-    isAksjonspunktOpen={boolean('isAksjonspunktOpen', true)}
+    isAksjonspunktOpen
     status="test"
     vilkar={[]}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import dokumentTypeId from '@fpsak-frontend/kodeverk/src/dokumentTypeId';
 import avslagsarsakCodes from '@fpsak-frontend/kodeverk/src/avslagsarsakCodes';
@@ -40,9 +39,9 @@ const standardProsessProps = {
   aksjonspunkter: [],
   alleKodeverk: alleKodeverk as any,
   submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: boolean('readOnly', false),
-  isAksjonspunktOpen: boolean('harApneAksjonspunkter', true),
-  readOnlySubmitButton: boolean('readOnly', false),
+  isReadOnly: false,
+  isAksjonspunktOpen: true,
+  readOnlySubmitButton: false,
   status: '',
   vilkar: [],
   alleMerknaderFraBeslutter: {},
@@ -52,7 +51,6 @@ const standardProsessProps = {
 export default {
   title: 'prosess/prosess-vilkar-sokers-opplysningsplikt',
   component: SokersOpplysningspliktVilkarProsessIndex,
-  decorators: [withKnobs],
 };
 
 export const visÅpentAksjonspunkt = () => (
@@ -91,8 +89,8 @@ export const visOppfyltVilkår = () => (
       },
       begrunnelse: 'Dette vilkåret er godkjent',
     }] as Aksjonspunkt[]}
-    isReadOnly={boolean('isReadOnly', true)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
+    isReadOnly
+    readOnlySubmitButton
     status={vilkarUtfallType.OPPFYLT}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
@@ -120,8 +118,8 @@ export const visAvslåttVilkår = () => (
       },
       begrunnelse: 'Dette vilkåret er avslått',
     }] as Aksjonspunkt[]}
-    isReadOnly={boolean('isReadOnly', true)}
-    readOnlySubmitButton={boolean('readOnlySubmitButton', true)}
+    isReadOnly
+    readOnlySubmitButton
     status={vilkarUtfallType.IKKE_OPPFYLT}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />

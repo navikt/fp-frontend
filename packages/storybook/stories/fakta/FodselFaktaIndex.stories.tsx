@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
 
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
@@ -87,9 +86,9 @@ const merknaderFraBeslutter = {
 const standardFaktaProps = {
   aksjonspunkter: [],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
-  readOnly: boolean('readOnly', false),
-  harApneAksjonspunkter: boolean('harApneAksjonspunkter', true),
-  submittable: boolean('submittable', true),
+  readOnly: false,
+  harApneAksjonspunkter: true,
+  submittable: true,
   alleMerknaderFraBeslutter: {},
   alleKodeverk: alleKodeverk as any,
   setFormData: () => undefined,
@@ -98,20 +97,19 @@ const standardFaktaProps = {
 export default {
   title: 'fakta/fakta-fodsel',
   component: FodselFaktaIndex,
-  decorators: [withKnobs],
 };
 
 export const visAksjonspunktTerminbekreftelse = () => (
   <FodselFaktaIndex
     {...standardFaktaProps}
     behandling={behandling}
-    soknad={object('soknad', soknad)}
-    familiehendelse={object('familiehendelse', familieHendelse)}
-    soknadOriginalBehandling={object('soknadOriginalBehandling', soknadOriginalBehandling)}
-    familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', familiehendelseOriginalBehandling)}
+    soknad={soknad}
+    familiehendelse={familieHendelse}
+    soknadOriginalBehandling={soknadOriginalBehandling}
+    familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
     aksjonspunkter={aksjonspunkter}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.TERMINBEKREFTELSE]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+      [aksjonspunktCodes.TERMINBEKREFTELSE]: merknaderFraBeslutter,
     }}
   />
 );
@@ -120,10 +118,10 @@ export const visAksjonspunktSjekkManglendeFødsel = () => (
   <FodselFaktaIndex
     {...standardFaktaProps}
     behandling={behandling}
-    soknad={object('soknad', soknad)}
-    familiehendelse={object('familiehendelse', familieHendelse)}
-    soknadOriginalBehandling={object('soknadOriginalBehandling', soknadOriginalBehandling)}
-    familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', familiehendelseOriginalBehandling)}
+    soknad={soknad}
+    familiehendelse={familieHendelse}
+    soknadOriginalBehandling={soknadOriginalBehandling}
+    familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
     aksjonspunkter={aksjonspunkter.map((a) => ({
       ...a,
       definisjon: {
@@ -132,7 +130,7 @@ export const visAksjonspunktSjekkManglendeFødsel = () => (
       },
     }))}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+      [aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL]: merknaderFraBeslutter,
     }}
   />
 );
@@ -141,10 +139,10 @@ export const visAksjonspunktVurderOmVilkårForSykdomErOppfylt = () => (
   <FodselFaktaIndex
     {...standardFaktaProps}
     behandling={behandling}
-    soknad={object('soknad', soknad)}
-    familiehendelse={object('familiehendelse', familieHendelse)}
-    soknadOriginalBehandling={object('soknadOriginalBehandling', soknadOriginalBehandling)}
-    familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', familiehendelseOriginalBehandling)}
+    soknad={soknad}
+    familiehendelse={familieHendelse}
+    soknadOriginalBehandling={soknadOriginalBehandling}
+    familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
     aksjonspunkter={aksjonspunkter.map((a) => ({
       ...a,
       definisjon: {
@@ -153,7 +151,7 @@ export const visAksjonspunktVurderOmVilkårForSykdomErOppfylt = () => (
       },
     }))}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT]: object('merknaderFraBeslutter', merknaderFraBeslutter),
+      [aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT]: merknaderFraBeslutter,
     }}
   />
 );
@@ -162,10 +160,10 @@ export const visPanelForFødselssammenligningNårDetIkkeFinnesAksjonspunkter = (
   <FodselFaktaIndex
     {...standardFaktaProps}
     behandling={behandling}
-    soknad={object('soknad', soknad)}
-    familiehendelse={object('familiehendelse', familieHendelse)}
-    soknadOriginalBehandling={object('soknadOriginalBehandling', soknadOriginalBehandling)}
-    familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', familiehendelseOriginalBehandling)}
+    soknad={soknad}
+    familiehendelse={familieHendelse}
+    soknadOriginalBehandling={soknadOriginalBehandling}
+    familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
     aksjonspunkter={[]}
   />
 );

@@ -1,5 +1,4 @@
 import React from 'react';
-import { withKnobs } from '@storybook/addon-knobs';
 
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
@@ -11,7 +10,6 @@ import { KjønnkodeEnum } from '@fpsak-frontend/types';
 export default {
   title: 'sak/sak-visittkort',
   component: VisittkortSakIndex,
-  decorators: [withKnobs],
 };
 
 const fagsak = {

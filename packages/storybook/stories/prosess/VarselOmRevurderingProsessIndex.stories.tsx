@@ -1,6 +1,5 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, object } from '@storybook/addon-knobs';
 
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -85,16 +84,15 @@ const standardProsessProps = {
 export default {
   title: 'prosess/prosess-varsel-om-revurdering',
   component: VarselOmRevurderingProsessIndex,
-  decorators: [withKnobs],
 };
 
 export const visForFørstegangsbehandling = () => (
   <VarselOmRevurderingProsessIndex
     {...standardProsessProps}
-    familiehendelse={object('familieHendelse', familieHendelse)}
-    soknad={object('soknad', soknad)}
-    soknadOriginalBehandling={object('soknadOriginalBehandling', soknadOriginalBehandling)}
-    familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', familiehendelseOriginalBehandling)}
+    familiehendelse={familieHendelse}
+    soknad={soknad}
+    soknadOriginalBehandling={soknadOriginalBehandling}
+    familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
     previewCallback={action('button-click') as any}
   />
 );
@@ -108,10 +106,10 @@ export const visForRevurdering = () => (
         kode: behandlingType.REVURDERING,
       },
     } as Behandling}
-    familiehendelse={object('familieHendelse', familieHendelse)}
-    soknad={object('soknad', soknad)}
-    soknadOriginalBehandling={object('soknadOriginalBehandling', soknadOriginalBehandling)}
-    familiehendelseOriginalBehandling={object('familiehendelseOriginalBehandling', familiehendelseOriginalBehandling)}
+    familiehendelse={familieHendelse}
+    soknad={soknad}
+    soknadOriginalBehandling={soknadOriginalBehandling}
+    familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
     previewCallback={action('button-click') as any}
   />
 );
