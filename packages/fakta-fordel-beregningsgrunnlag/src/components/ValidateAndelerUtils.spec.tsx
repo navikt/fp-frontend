@@ -65,7 +65,7 @@ describe('<ValidateAndelerUtils>', () => {
       arbeidsforholdId: '', refusjonskrav: null, refusjonskravFraInntektsmelding: 0,
     },
     ];
-    const error = validateTotalRefusjonPrArbeidsforhold(andeler as FordelBeregningsgrunnlagAndelValues[], getKodeverknavn, arbeidsgiverOppysninger);
+    const error = validateTotalRefusjonPrArbeidsforhold(andeler as FordelBeregningsgrunnlagAndelValues[], getKodeverknavn, arbeidsgiverOppysninger, intlMock);
     expect(error).toBe(null);
   });
 
@@ -96,7 +96,7 @@ describe('<ValidateAndelerUtils>', () => {
       arbeidsforholdId: '', refusjonskrav: null, refusjonskravFraInntektsmelding: 0,
     },
     ];
-    const error = validateTotalRefusjonPrArbeidsforhold(andeler as FordelBeregningsgrunnlagAndelValues[], getKodeverknavn, arbeidsgiverOppysninger);
+    const error = validateTotalRefusjonPrArbeidsforhold(andeler as FordelBeregningsgrunnlagAndelValues[], getKodeverknavn, arbeidsgiverOppysninger, intlMock);
     expect(error).toBe(null);
   });
 
@@ -127,7 +127,7 @@ describe('<ValidateAndelerUtils>', () => {
       arbeidsforholdId: '', refusjonskrav: null, refusjonskravFraInntektsmelding: 0,
     },
     ];
-    const error = validateTotalRefusjonPrArbeidsforhold(andeler as FordelBeregningsgrunnlagAndelValues[], getKodeverknavn, arbeidsgiverOppysninger);
+    const error = validateTotalRefusjonPrArbeidsforhold(andeler as FordelBeregningsgrunnlagAndelValues[], getKodeverknavn, arbeidsgiverOppysninger, intlMock);
     expect(error).toBe(null);
   });
 
@@ -136,6 +136,7 @@ describe('<ValidateAndelerUtils>', () => {
       arbeidsforholdId: '89r2hf923',
       arbeidsgiverNavn: 'Andersen flyttebyrå',
       arbeidsgiverId: '36363463463',
+      eksternArbeidsforholdId: 'srgsdthrthf923',
     };
     const andeler = [{
       ...arbeidsgiverAndersen,
@@ -159,13 +160,10 @@ describe('<ValidateAndelerUtils>', () => {
     },
     ];
 
-    const arbeidsgiverString = 'Andersen flyttebyrå (36363463463) ...f923';
-    const error = validateTotalRefusjonPrArbeidsforhold(andeler as FordelBeregningsgrunnlagAndelValues[], getKodeverknavn, arbeidsgiverOppysninger);
-    const expected = skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding(arbeidsgiverString);
-    // @ts-ignore TODO fiks denne
-    expect(error.id).toBe(expected.id);
-    // @ts-ignore TODO fiks denne
-    expect(error.arbeidsgiver).toBe(expected.arbeidsgiver);
+    const arbeidsgiverString = 'Andersen flyttebyrå (36363463463)...f923';
+    const error = validateTotalRefusjonPrArbeidsforhold(andeler as FordelBeregningsgrunnlagAndelValues[], getKodeverknavn, arbeidsgiverOppysninger, intlMock);
+    const expected = skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding(arbeidsgiverString, intlMock);
+    expect(error).toBe(expected);
   });
 
   it('skal returnere 0 for lik andelsinfo og lik inntektskategori', () => {
@@ -281,7 +279,7 @@ describe('<ValidateAndelerUtils>', () => {
       arbeidsforholdId: 'egg4g232',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[], intlMock);
     expect(ulikeAndelerError).toBe(null);
   });
 
@@ -308,7 +306,7 @@ describe('<ValidateAndelerUtils>', () => {
       andelsnr: null, andel: '2', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER_SJØMANN', arbeidsforholdId: '34r343f',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[], intlMock);
     expect(ulikeAndelerError).toBe(null);
   });
 
@@ -335,9 +333,8 @@ describe('<ValidateAndelerUtils>', () => {
       andelsnr: null, andel: '2', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER', arbeidsforholdId: '433f34',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
-    expect(ulikeAndelerError).toHaveLength(1);
-    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[], intlMock);
+    expect(ulikeAndelerError).toBe(ulikeAndelerErrorMessage(intlMock));
   });
 
   it('skal ikkje gi error om to andeler har lik inntektskategori men ulik arbeidsforholdId', () => {
@@ -360,7 +357,7 @@ describe('<ValidateAndelerUtils>', () => {
       arbeidsforholdId: '433f34',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[], intlMock);
     expect(ulikeAndelerError).toBe(null);
   });
 
@@ -393,9 +390,8 @@ describe('<ValidateAndelerUtils>', () => {
       andelsnr: null, andel: '1', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'SJØMANN',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
-    expect(ulikeAndelerError).toHaveLength(1);
-    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[], intlMock);
+    expect(ulikeAndelerError).toBe(ulikeAndelerErrorMessage(intlMock));
   });
 
   it('skal ikkje gi error om det er nye andeler der to har lik andelstype og ulik inntektskategori', () => {
@@ -422,7 +418,7 @@ describe('<ValidateAndelerUtils>', () => {
       andelsnr: null, andel: 'BRUKERS_ANDEL', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'FRILANSER',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[], intlMock);
     expect(ulikeAndelerError).toBe(null);
   });
 
@@ -450,9 +446,8 @@ describe('<ValidateAndelerUtils>', () => {
       andelsnr: null, andel: 'BRUKERS_ANDEL', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
-    expect(ulikeAndelerError).toHaveLength(1);
-    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[], intlMock);
+    expect(ulikeAndelerError).toBe(ulikeAndelerErrorMessage(intlMock));
   });
 
   it('skal gi error om det er ingen nye andeler, men andel lagt til av saksbehandler der to har lik inntektskategori og andelstype', () => {
@@ -479,9 +474,8 @@ describe('<ValidateAndelerUtils>', () => {
       andelsnr: 4, andel: 'Brukers andel', nyAndel: false, aktivitetStatus: 'BA', lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
-    expect(ulikeAndelerError).toHaveLength(1);
-    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[], intlMock);
+    expect(ulikeAndelerError).toBe(ulikeAndelerErrorMessage(intlMock));
   });
 
   it('skal gi error om det er ein ny brukers andel, og ein eksisterende der begge har lik inntektskategori', () => {
@@ -517,9 +511,8 @@ describe('<ValidateAndelerUtils>', () => {
       inntektskategori: 'ARBEIDSTAKER',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
-    expect(ulikeAndelerError).toHaveLength(1);
-    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[], intlMock);
+    expect(ulikeAndelerError).toBe(ulikeAndelerErrorMessage(intlMock));
   });
 
   it('skal gi error om det er ein ny egen næring, og ein selvstendig næringsdrivende lagt til tidligere der begge har lik inntektskategori', () => {
@@ -536,9 +529,8 @@ describe('<ValidateAndelerUtils>', () => {
       andelsnr: 4, andel: 'EGEN_NÆRING', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
-    expect(ulikeAndelerError).toHaveLength(1);
-    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[], intlMock);
+    expect(ulikeAndelerError).toBe(ulikeAndelerErrorMessage(intlMock));
   });
 
   it('skal gi error om det er ein ny egen næring, og ein eksisterende selvstendig næringsdrivende der begge har lik inntektskategori', () => {
@@ -555,9 +547,8 @@ describe('<ValidateAndelerUtils>', () => {
       andelsnr: 4, andel: 'EGEN_NÆRING', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[]);
-    expect(ulikeAndelerError).toHaveLength(1);
-    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
+    const ulikeAndelerError = validateUlikeAndeler(andeler as FordelBeregningsgrunnlagAndelValues[], intlMock);
+    expect(ulikeAndelerError).toBe(ulikeAndelerErrorMessage(intlMock));
   });
 
   it('skal gi error om fastsatt beløp er ulik oppgitt sum', () => {
@@ -574,10 +565,8 @@ describe('<ValidateAndelerUtils>', () => {
       fastsattBelop: '10 000',
     },
     ];
-    const fastsattError = validateSumFastsattBelop(values as FordelBeregningsgrunnlagAndelValues[], 40000);
-    expect(fastsattError).toHaveLength(2);
-    expect(fastsattError[0].id).toBe(skalVereLikFordelingMessage('40000')[0].id);
-    expect(fastsattError[1].fordeling).toBe('40 000');
+    const fastsattError = validateSumFastsattBelop(values as FordelBeregningsgrunnlagAndelValues[], 40000, intlMock);
+    expect(fastsattError).toBe(skalVereLikFordelingMessage('40 000', intlMock));
   });
 
   it('skal ikkje gi error om fastsatt beløp er lik oppgitt sum', () => {
@@ -598,7 +587,7 @@ describe('<ValidateAndelerUtils>', () => {
       fastsattBelop: '10 000',
     },
     ];
-    const fastsattError = validateSumFastsattBelop(values as FordelBeregningsgrunnlagAndelValues[], 50000);
+    const fastsattError = validateSumFastsattBelop(values as FordelBeregningsgrunnlagAndelValues[], 50000, intlMock);
     expect(fastsattError).toBe(null);
   });
 
@@ -628,7 +617,7 @@ describe('<ValidateAndelerUtils>', () => {
       readOnlyBelop: '10 000',
     },
     ];
-    const fastsattError = validateSumFastsattBelop(values as FordelBeregningsgrunnlagAndelValues[], 50000);
+    const fastsattError = validateSumFastsattBelop(values as FordelBeregningsgrunnlagAndelValues[], 50000, intlMock);
     expect(fastsattError).toBe(null);
   });
 
@@ -654,10 +643,8 @@ describe('<ValidateAndelerUtils>', () => {
       readOnlyBelop: '15 000',
     },
     ];
-    const fastsattError = validateSumFastsattBelop(values as FordelBeregningsgrunnlagAndelValues[], 50000);
-    expect(fastsattError).toHaveLength(2);
-    expect(fastsattError[0].id).toBe(skalVereLikFordelingMessage('50000')[0].id);
-    expect(fastsattError[1].fordeling).toBe('50 000');
+    const fastsattError = validateSumFastsattBelop(values as FordelBeregningsgrunnlagAndelValues[], 50000, intlMock);
+    expect(fastsattError).toBe(skalVereLikFordelingMessage('50 000', intlMock));
   });
 
   it('skal returnere required error om fastsatt beløp ikkje er satt', () => {

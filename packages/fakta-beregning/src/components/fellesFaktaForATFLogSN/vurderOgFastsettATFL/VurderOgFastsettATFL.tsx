@@ -13,6 +13,7 @@ import {
   BeregningFaktaTransformedValues,
   FaktaBeregningTransformedValues,
 } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
+import { IntlShape } from 'react-intl';
 import LonnsendringForm, { lonnsendringField }
   from './forms/LonnsendringForm';
 import NyoppstartetFLForm, { erNyoppstartetFLField }
@@ -124,7 +125,8 @@ interface StaticFunctions {
   validate: (values: FaktaOmBeregningAksjonspunktValues,
              tilfeller: string[],
              faktaOmBeregning: FaktaOmBeregning,
-             beregningsgrunnlag: Beregningsgrunnlag) => any;
+             beregningsgrunnlag: Beregningsgrunnlag,
+             intl: IntlShape) => any;
   transformValues: (faktaOmBeregning: FaktaOmBeregning, beregningsgrunnlag: Beregningsgrunnlag) =>
     (values: FaktaOmBeregningAksjonspunktValues) => BeregningFaktaTransformedValues;
 }
@@ -235,10 +237,10 @@ VurderOgFastsettATFL.buildInitialValues = (faktaOmBeregning: FaktaOmBeregning,
   };
 };
 
-const validateEnFastsattVedOverstyring = (values: AndelFieldValue[]): any => {
-  const minstEnFastsattErrorMessage = validateMinstEnFastsatt(values);
-  if (minstEnFastsattErrorMessage != null) {
-    return { _error: minstEnFastsattErrorMessage };
+const validateEnFastsattVedOverstyring = (values: AndelFieldValue[], intl: IntlShape): any => {
+  const minstEnFastsattFeilmelding = validateMinstEnFastsatt(values, intl);
+  if (minstEnFastsattFeilmelding != null) {
+    return { _error: minstEnFastsattFeilmelding };
   }
   return null;
 };
@@ -246,14 +248,15 @@ const validateEnFastsattVedOverstyring = (values: AndelFieldValue[]): any => {
 VurderOgFastsettATFL.validate = (values: FaktaOmBeregningAksjonspunktValues,
   tilfeller: string[],
   faktaOmBeregning: FaktaOmBeregning,
-  beregningsgrunnlag: Beregningsgrunnlag): any => {
+  beregningsgrunnlag: Beregningsgrunnlag,
+  intl: IntlShape): any => {
   const errors = {};
   if (harVurdert(tilfeller, values, faktaOmBeregning) && skalFastsetteInntekt(values, faktaOmBeregning, beregningsgrunnlag)) {
     errors[INNTEKT_FIELD_ARRAY_NAME] = InntektFieldArrayImpl.validate(values[INNTEKT_FIELD_ARRAY_NAME], false,
-      skalFastsetteInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag));
+      skalFastsetteInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag), intl);
   }
   if (!errors[INNTEKT_FIELD_ARRAY_NAME] && erOverstyring(values)) {
-    errors[INNTEKT_FIELD_ARRAY_NAME] = validateEnFastsattVedOverstyring(values[INNTEKT_FIELD_ARRAY_NAME]);
+    errors[INNTEKT_FIELD_ARRAY_NAME] = validateEnFastsattVedOverstyring(values[INNTEKT_FIELD_ARRAY_NAME], intl);
   }
   return errors;
 };

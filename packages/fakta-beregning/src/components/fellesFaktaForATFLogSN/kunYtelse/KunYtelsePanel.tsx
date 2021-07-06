@@ -14,6 +14,7 @@ import KunYtelseBesteberegningPanel from './KunYtelseBesteberegningPanel';
 import KunYtelseUtenBesteberegningPanel from './KunYtelseUtenBesteberegningPanel';
 import { setGenerellAndelsinfo } from '../BgFaktaUtils';
 import { FaktaOmBeregningAksjonspunktValues, KunYtelseValues } from '../../../typer/FaktaBeregningTypes';
+import {IntlShape} from "react-intl";
 
 export const brukersAndelFieldArrayName = 'brukersAndelBG';
 
@@ -32,7 +33,7 @@ interface StaticFunctions {
                        alleKodeverk: AlleKodeverk) => KunYtelseValues;
   summerFordeling: (values: any) => number;
   transformValues: (values: FaktaOmBeregningAksjonspunktValues, kunYtelse: KunYtelse) => FaktaBeregningTransformedValues;
-  validate: (values: FaktaOmBeregningAksjonspunktValues, aktivertePaneler: string[], kunYtelse: KunYtelse) => any;
+  validate: (values: FaktaOmBeregningAksjonspunktValues, aktivertePaneler: string[], kunYtelse: KunYtelse, intl: IntlShape) => any;
 }
 
 /**
@@ -120,12 +121,12 @@ KunYtelsePanel.transformValues = (values: FaktaOmBeregningAksjonspunktValues, ku
   },
 });
 
-KunYtelsePanel.validate = (values: FaktaOmBeregningAksjonspunktValues, aktivertePaneler: string[], kunYtelse: KunYtelse): any => {
+KunYtelsePanel.validate = (values: FaktaOmBeregningAksjonspunktValues, aktivertePaneler: string[], kunYtelse: KunYtelse, intl: IntlShape): any => {
   if (!values || !aktivertePaneler.includes(faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE)) {
     return {};
   }
   const errors = {};
-  errors[brukersAndelFieldArrayName] = BrukersAndelFieldArrayImpl.validate(values[brukersAndelFieldArrayName]);
+  errors[brukersAndelFieldArrayName] = BrukersAndelFieldArrayImpl.validate(values[brukersAndelFieldArrayName], intl);
   if (kunYtelse.fodendeKvinneMedDP) {
     return {
       ...errors,

@@ -24,6 +24,7 @@ import AddDagpengerAndelButton from './AddDagpengerAndelButton';
 import SummaryRow from './SummaryRow';
 import AndelFieldValue, { InntektTransformed } from '../../typer/FieldValues';
 import { vurderMilitaerField } from './vurderMilitaer/VurderMilitaer';
+import {IntlShape} from "react-intl";
 
 const dagpenger = (aktivitetStatuser: KodeverkMedNavn[]) : AndelFieldValue => ({
   andel: aktivitetStatuser.find(({ kode }) => kode === aktivitetStatus.DAGPENGER).navn,
@@ -186,7 +187,8 @@ type OwnProps = {
 interface StaticFunctions {
   validate: (values: AndelFieldValue[],
              erKunYtelse: boolean,
-             skalFastsetteInntekt: (andel) => boolean) => any;
+             skalFastsetteInntekt: (andel) => boolean,
+             intl: IntlShape) => any;
   buildInitialValues: (andeler: AndelForFaktaOmBeregning[],
                        arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
                        alleKodeverk: AlleKodeverk) => AndelFieldValue[];
@@ -275,7 +277,7 @@ const mapAndelToSortedObject = (value: AndelFieldValue): SortedAndelInfo => {
   return { andelsinfo: andel, arbeidsforholdId, inntektskategori };
 };
 
-InntektFieldArray.validate = (values: AndelFieldValue[], erKunYtelse, skalFastsetteInntekt) => {
+InntektFieldArray.validate = (values: AndelFieldValue[], erKunYtelse, skalFastsetteInntekt, intl: IntlShape) => {
   // eslint-disable-next-line react/destructuring-assignment
   const arrayErrors = values
     .map((andelFieldValues) => {
@@ -295,7 +297,7 @@ InntektFieldArray.validate = (values: AndelFieldValue[], erKunYtelse, skalFastse
   if (isArrayEmpty(values)) {
     return null;
   }
-  const ulikeAndelerError = erKunYtelse ? validateUlikeAndelerWithGroupingFunction(values, mapAndelToSortedObject) : validateUlikeAndeler(values);
+  const ulikeAndelerError = erKunYtelse ? validateUlikeAndelerWithGroupingFunction(values, mapAndelToSortedObject, intl) : validateUlikeAndeler(values, intl);
   if (ulikeAndelerError) {
     return { _error: ulikeAndelerError };
   }

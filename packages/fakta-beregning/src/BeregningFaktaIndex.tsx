@@ -32,6 +32,7 @@ const BeregningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps>
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="BeregningFaktaIndex" formData={formData} setFormData={setFormData}>
       <BeregningInfoPanel
+        intl={intl}
         beregningsgrunnlag={beregningsgrunnlag}
         alleKodeverk={alleKodeverk}
         aksjonspunkter={aksjonspunkter}

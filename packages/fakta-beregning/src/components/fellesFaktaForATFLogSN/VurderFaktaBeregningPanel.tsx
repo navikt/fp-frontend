@@ -1,5 +1,5 @@
 import React, { Component, ReactElement } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, IntlShape, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { InjectedFormProps, reduxForm } from 'redux-form';
@@ -67,6 +67,7 @@ const hasOpenAksjonspunkt = (kode: string, aksjonspunkter: Aksjonspunkt[]): bool
   && isAksjonspunktOpen(ap.status.kode));
 
 type OwnProps = {
+    intl: IntlShape,
     readOnly: boolean;
     submittable: boolean;
     beregningsgrunnlag: Beregningsgrunnlag;
@@ -198,11 +199,11 @@ export const buildInitialValuesVurderFaktaBeregning = createSelector(
   }),
 );
 
-export const validateVurderFaktaBeregning = (values: FaktaOmBeregningAksjonspunktValues): any => {
+export const validateVurderFaktaBeregning = (values: FaktaOmBeregningAksjonspunktValues, intl: IntlShape): any => {
   const { aksjonspunkter } = values;
   if (values && ((aksjonspunkter && hasAksjonspunkt(VURDER_FAKTA_FOR_ATFL_SN, aksjonspunkter)) || erOverstyring(values))) {
     return {
-      ...validationForVurderFakta(values),
+      ...validationForVurderFakta(values, intl),
     };
   }
   return null;
@@ -212,8 +213,8 @@ const lagSubmitFn = createSelector([
   (ownProps: OwnProps) => ownProps.submitCallback],
 (submitCallback) => (values: FaktaOmBeregningAksjonspunktValues) => submitCallback(transformValuesVurderFaktaBeregning(values)));
 
-const mapStateToPropsFactory = () => {
-  const validate = (values) => validateVurderFaktaBeregning(values);
+const mapStateToPropsFactory = (_state: any, _ownProps: OwnProps) => {
+  const validate = (values) => validateVurderFaktaBeregning(values, _ownProps.intl);
   return (state: any, ownProps: OwnProps): MappedOwnProps => {
     const initialValues = buildInitialValuesVurderFaktaBeregning(state, ownProps);
     return ({

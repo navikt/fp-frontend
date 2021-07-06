@@ -7,6 +7,7 @@ import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsTy
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 
+import { IntlShape } from 'react-intl';
 import BeregningInfoPanel from './BeregningInfoPanel';
 import VurderFaktaBeregningPanel from './fellesFaktaForATFLogSN/VurderFaktaBeregningPanel';
 import AvklareAktiviteterPanel from './avklareAktiviteter/AvklareAktiviteterPanel';
@@ -47,6 +48,7 @@ describe('<BeregningInfoPanel>', () => {
     };
 
     const wrapper = shallowWithIntl(<BeregningInfoPanel
+      intl={{} as IntlShape}
       aksjonspunkter={[tidsbegrensetAP]}
       hasOpenAksjonspunkter
       submittable
@@ -78,6 +80,7 @@ describe('<BeregningInfoPanel>', () => {
       },
     };
     const wrapper = shallowWithIntl(<BeregningInfoPanel
+      intl={{} as IntlShape}
       aksjonspunkter={[overstyringAP]}
       hasOpenAksjonspunkter
       submittable
@@ -110,6 +113,7 @@ describe('<BeregningInfoPanel>', () => {
       erAktivt: true,
     };
     const wrapper = shallowWithIntl(<BeregningInfoPanel
+      intl={{} as IntlShape}
       aksjonspunkter={[overstyringAP]}
       hasOpenAksjonspunkter
       submittable
@@ -142,6 +146,7 @@ describe('<BeregningInfoPanel>', () => {
       erAktivt: true,
     };
     const wrapper = shallowWithIntl(<BeregningInfoPanel
+      intl={{} as IntlShape}
       aksjonspunkter={[tidsbegrensetAP]}
       hasOpenAksjonspunkter
       submittable
