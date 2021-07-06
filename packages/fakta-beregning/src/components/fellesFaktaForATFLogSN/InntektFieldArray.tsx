@@ -15,6 +15,7 @@ import {
   KodeverkMedNavn, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+import { IntlShape } from 'react-intl';
 import { mapAndelToField, skalHaBesteberegningSelector } from './BgFaktaUtils';
 import styles from './inntektFieldArray.less';
 import { SortedAndelInfo, validateUlikeAndeler, validateUlikeAndelerWithGroupingFunction } from './ValidateAndelerUtils';
@@ -24,7 +25,6 @@ import AddDagpengerAndelButton from './AddDagpengerAndelButton';
 import SummaryRow from './SummaryRow';
 import AndelFieldValue, { InntektTransformed } from '../../typer/FieldValues';
 import { vurderMilitaerField } from './vurderMilitaer/VurderMilitaer';
-import {IntlShape} from "react-intl";
 
 const dagpenger = (aktivitetStatuser: KodeverkMedNavn[]) : AndelFieldValue => ({
   andel: aktivitetStatuser.find(({ kode }) => kode === aktivitetStatus.DAGPENGER).navn,

@@ -1,5 +1,5 @@
 import React, { Component, ReactElement } from 'react';
-import { FormattedMessage, IntlShape, WrappedComponentProps } from 'react-intl';
+import { FormattedMessage, IntlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { InjectedFormProps, reduxForm } from 'redux-form';

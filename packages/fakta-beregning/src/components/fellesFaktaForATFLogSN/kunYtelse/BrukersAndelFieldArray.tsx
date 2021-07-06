@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import {FormattedMessage, injectIntl, IntlShape, WrappedComponentProps} from 'react-intl';
+import {
+  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+} from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import { InputField, NavFieldGroup, SelectField } from '@fpsak-frontend/form';

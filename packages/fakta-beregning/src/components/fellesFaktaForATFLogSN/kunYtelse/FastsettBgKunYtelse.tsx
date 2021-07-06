@@ -7,9 +7,9 @@ import {
   KunYtelse,
 } from '@fpsak-frontend/types';
 import { FaktaBeregningTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
+import { IntlShape } from 'react-intl';
 import KunYtelsePanel from './KunYtelsePanel';
 import { FaktaOmBeregningAksjonspunktValues, KunYtelseValues } from '../../../typer/FaktaBeregningTypes';
-import {IntlShape} from "react-intl";
 
 const { FASTSETT_BG_KUN_YTELSE, VURDER_BESTEBEREGNING } = faktaOmBeregningTilfelle;
 

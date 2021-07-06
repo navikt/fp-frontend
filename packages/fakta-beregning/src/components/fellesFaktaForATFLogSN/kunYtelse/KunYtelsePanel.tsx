@@ -9,12 +9,12 @@ import {
   KunYtelse,
 } from '@fpsak-frontend/types';
 import { FaktaBeregningTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
+import { IntlShape } from 'react-intl';
 import { BrukersAndelFieldArrayImpl } from './BrukersAndelFieldArray';
 import KunYtelseBesteberegningPanel from './KunYtelseBesteberegningPanel';
 import KunYtelseUtenBesteberegningPanel from './KunYtelseUtenBesteberegningPanel';
 import { setGenerellAndelsinfo } from '../BgFaktaUtils';
 import { FaktaOmBeregningAksjonspunktValues, KunYtelseValues } from '../../../typer/FaktaBeregningTypes';
-import {IntlShape} from "react-intl";
 
 export const brukersAndelFieldArrayName = 'brukersAndelBG';
 
