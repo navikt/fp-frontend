@@ -1,6 +1,7 @@
 import beregningsgrunnlagAndeltyper from '@fpsak-frontend/kodeverk/src/beregningsgrunnlagAndeltyper';
 import { aktivitetstatusTilAndeltypeMap } from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import { BrukersAndelValues, FaktaBeregningError } from '../../typer/FaktaBeregningTypes';
+import { IntlShape } from 'react-intl';
+import { BrukersAndelValues } from '../../typer/FaktaBeregningTypes';
 import AndelFieldValue from '../../typer/FieldValues';
 
 export type SortedAndelInfo = {
@@ -41,31 +42,32 @@ const mapAndelToSortedObject = (value, andelList): SortedAndelInfo => {
   return { andelsinfo: andel, inntektskategori, arbeidsforholdId };
 };
 
-export const ulikeAndelerErrorMessage = (): FaktaBeregningError[] => ([{ id: 'BeregningInfoPanel.FordelBG.Validation.UlikeAndeler' }]);
+export const ulikeAndelerErrorMessage = (intl: IntlShape): string => intl.formatMessage({ id: 'BeregningInfoPanel.FordelBG.Validation.UlikeAndeler' });
 
 const erAndelerLike = (andel1: SortedAndelInfo, andel2: SortedAndelInfo): boolean => andel2.andelsinfo === andel1.andelsinfo
   && andel2.inntektskategori === andel1.inntektskategori && andel1.arbeidsforholdId === andel2.arbeidsforholdId;
 
 export const validateUlikeAndelerWithGroupingFunction = (andelList: BrukersAndelValues[] | AndelFieldValue[], mapToSort: ((andel: BrukersAndelValues,
-   andelList: BrukersAndelValues[] | AndelFieldValue[]) => SortedAndelInfo)): any => {
+   andelList: BrukersAndelValues[] | AndelFieldValue[]) => SortedAndelInfo), intl: IntlShape): string => {
   const mappedAndeler = andelList.map((value) => (mapToSort(value, andelList)));
   const sortedAndeler = mappedAndeler.slice().sort((andel1, andel2) => compareAndeler(andel1, andel2));
   for (let i = 0; i < sortedAndeler.length - 1; i += 1) {
     if (erAndelerLike(sortedAndeler[i], sortedAndeler[i + 1])) {
-      return ulikeAndelerErrorMessage();
+      return ulikeAndelerErrorMessage(intl);
     }
   }
   return null;
 };
 
-export const validateUlikeAndeler = (andelList) => validateUlikeAndelerWithGroupingFunction(andelList, mapAndelToSortedObject);
+export const validateUlikeAndeler = (andelList: AndelFieldValue[],
+  intl: IntlShape): string => validateUlikeAndelerWithGroupingFunction(andelList, mapAndelToSortedObject, intl);
 
-const minstEnFastsattErrorMessage = () => ([{ id: 'BeregningInfoPanel.Validation.MinstEnFastsatt' }]);
+const minstEnFastsattErrorMessage = (intl: IntlShape): string => intl.formatMessage({ id: 'BeregningInfoPanel.Validation.MinstEnFastsatt' });
 
-export const validateMinstEnFastsatt = (andelList: AndelFieldValue[]): FaktaBeregningError[] => {
+export const validateMinstEnFastsatt = (andelList: AndelFieldValue[], intl: IntlShape): string => {
   const harAndelMedFastsattInntekt = andelList.some(({ fastsattBelop }) => fastsattBelop !== null && fastsattBelop !== '');
   if (!harAndelMedFastsattInntekt) {
-    return minstEnFastsattErrorMessage();
+    return minstEnFastsattErrorMessage(intl);
   }
   return null;
 };

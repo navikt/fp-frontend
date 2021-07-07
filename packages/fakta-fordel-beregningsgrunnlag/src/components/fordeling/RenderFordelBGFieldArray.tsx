@@ -503,28 +503,28 @@ RenderFordelBGFieldArrayImpl.validate = (intl, values, sumIPeriode, getKodeverkn
   if (isArrayEmpty(values)) {
     return null;
   }
-  const ulikeAndelerError = validateUlikeAndeler(values);
-  if (ulikeAndelerError) {
-    return { _error: <FormattedMessage id={ulikeAndelerError[0].id} /> };
+  const ulikeAndelerFeilmelding = validateUlikeAndeler(values, intl);
+  if (ulikeAndelerFeilmelding) {
+    return { _error: ulikeAndelerFeilmelding };
   }
-  const fastsattForUgraderteAktiviteterError = validateSumFastsattForUgraderteAktiviteter(values, grunnbeløp, getKodeverknavn);
-  if (fastsattForUgraderteAktiviteterError) {
-    return { _error: <FormattedMessage id={fastsattForUgraderteAktiviteterError[0].id} values={fastsattForUgraderteAktiviteterError[1]} /> };
+  const fastsattForUgraderteAktiviteterFeilmelding = validateSumFastsattForUgraderteAktiviteter(values, grunnbeløp, getKodeverknavn, intl);
+  if (fastsattForUgraderteAktiviteterFeilmelding) {
+    return { _error: fastsattForUgraderteAktiviteterFeilmelding };
   }
   if (skalValidereRefusjon) {
-    const totalRefusjonError = validateSumRefusjon(values, grunnbeløp);
-    if (totalRefusjonError) {
-      return { _error: <FormattedMessage id={totalRefusjonError[0].id} values={totalRefusjonError[1]} /> };
+    const totalRefusjonFeilmelding = validateSumRefusjon(values, grunnbeløp, intl);
+    if (totalRefusjonFeilmelding) {
+      return { _error: totalRefusjonFeilmelding };
     }
-    const refusjonPrArbeidsforholdError = validateTotalRefusjonPrArbeidsforhold(values, getKodeverknavn, arbeidsgiverOpplysningerPerId);
-    if (refusjonPrArbeidsforholdError) {
-      return { _error: <FormattedMessage id={refusjonPrArbeidsforholdError[0].id} values={refusjonPrArbeidsforholdError[1]} /> };
+    const refusjonPrArbeidsforholdFeilmelding = validateTotalRefusjonPrArbeidsforhold(values, getKodeverknavn, arbeidsgiverOpplysningerPerId, intl);
+    if (refusjonPrArbeidsforholdFeilmelding) {
+      return { _error: refusjonPrArbeidsforholdFeilmelding };
     }
   }
   if (sumIPeriode !== undefined && sumIPeriode !== null && values.some((andel) => andel.skalRedigereInntekt === true)) {
-    const fastsattBelopError = validateSumFastsattBelop(values, sumIPeriode);
-    if (fastsattBelopError) {
-      return { _error: <FormattedMessage id={fastsattBelopError[0].id} values={fastsattBelopError[1]} /> };
+    const fastsattBelopFeilmelding = validateSumFastsattBelop(values, sumIPeriode, intl);
+    if (fastsattBelopFeilmelding) {
+      return { _error: fastsattBelopFeilmelding };
     }
   }
   return null;

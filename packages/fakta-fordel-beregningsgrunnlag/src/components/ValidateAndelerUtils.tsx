@@ -11,7 +11,6 @@ import { GRADERING_RANGE_DENOMINATOR, mapToBelop } from './BgFordelingUtils';
 import { createVisningsnavnForAktivitetFordeling } from './util/visningsnavnHelper';
 import {
   FordelBeregningsgrunnlagAndelValues,
-  FordelErrorMessage,
   FordelingFieldError,
   PeriodeTsType,
 } from '../types/FordelingTsType';
@@ -72,25 +71,27 @@ const mapAndelToSortedObject = (value: FordelBeregningsgrunnlagAndelValues, ande
   return { andelsinfo: andel + arbeidsforholdId, inntektskategori };
 };
 
-export const ulikeAndelerErrorMessage = (): FordelErrorMessage[] => ([{ id: 'BeregningInfoPanel.FordelBG.Validation.UlikeAndeler' }]);
+export const ulikeAndelerErrorMessage = (intl: IntlShape): string => intl
+  .formatMessage({ id: 'BeregningInfoPanel.FordelBG.Validation.UlikeAndeler' });
 
 const erAndelerLike = (andel1: SortertAndelInfo, andel2: SortertAndelInfo): boolean => andel2.andelsinfo === andel1.andelsinfo
   && andel2.inntektskategori === andel1.inntektskategori;
 
 export const validateUlikeAndelerWithGroupingFunction = (andelList: FordelBeregningsgrunnlagAndelValues[],
-  mapToSort: (value: FordelBeregningsgrunnlagAndelValues, andelList: FordelBeregningsgrunnlagAndelValues[]) => SortertAndelInfo) => {
+  mapToSort: (value: FordelBeregningsgrunnlagAndelValues, andelList: FordelBeregningsgrunnlagAndelValues[]) => SortertAndelInfo,
+  intl: IntlShape) => {
   const mappedAndeler = andelList.map((value) => (mapToSort(value, andelList)));
   const sortedAndeler = mappedAndeler.slice().sort((andel1, andel2) => compareAndeler(andel1, andel2));
   for (let i = 0; i < sortedAndeler.length - 1; i += 1) {
     if (erAndelerLike(sortedAndeler[i], sortedAndeler[i + 1])) {
-      return ulikeAndelerErrorMessage();
+      return ulikeAndelerErrorMessage(intl);
     }
   }
   return null;
 };
 
-export const validateUlikeAndeler = (andelList: FordelBeregningsgrunnlagAndelValues[]) => validateUlikeAndelerWithGroupingFunction(andelList,
-  mapAndelToSortedObject);
+export const validateUlikeAndeler = (andelList: FordelBeregningsgrunnlagAndelValues[], intl: IntlShape) => validateUlikeAndelerWithGroupingFunction(andelList,
+  mapAndelToSortedObject, intl);
 
 const finnArbeidsforholdRefusjonsinfoListe = (andelList: FordelBeregningsgrunnlagAndelValues[]): Refusjonsinfo[] => {
   const andelerMedArbeidsforhold = andelList.filter((andel) => andel.arbeidsforholdId !== '');
@@ -128,13 +129,13 @@ const finnArbeidsforholdRefusjonsinfoListe = (andelList: FordelBeregningsgrunnla
   return arbeidsforholdRefusjonsbelop;
 };
 
-export const skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding = (arbeidsgiver: string): FordelErrorMessage[] => (
-  [{ id: 'BeregningInfoPanel.FordelBG.Validation.IkkjeHogereRefusjonEnnInntektsmelding' },
-    { arbeidsgiver }]);
+export const skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding = (arbeidsgiver: string, intl: IntlShape): string => intl
+  .formatMessage({ id: 'BeregningInfoPanel.FordelBG.Validation.IkkjeHogereRefusjonEnnInntektsmelding' }, { arbeidsgiver });
 
 export const validateTotalRefusjonPrArbeidsforhold = (andelList: FordelBeregningsgrunnlagAndelValues[],
   getKodeverknavn: (kodeverk: Kodeverk) => string,
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): FordelErrorMessage[] => {
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+  intl: IntlShape): string => {
   const arbeidsforholdRefusjonsinfo = finnArbeidsforholdRefusjonsinfoListe(andelList);
   const arbeidsforholdMedForHogRefusjon = arbeidsforholdRefusjonsinfo
     .filter((refusjonsInfo) => refusjonsInfo.totalRefusjon > refusjonsInfo.refusjonskravFraInntektsmelding);
@@ -146,34 +147,34 @@ export const validateTotalRefusjonPrArbeidsforhold = (andelList: FordelBeregning
     } else {
       arbeidsgiverString = createVisningsnavnForAktivitetFordeling(agOpplysninger, arbeidsforholdMedForHogRefusjon[0].eksternArbeidsforholdId);
     }
-    return skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding(arbeidsgiverString);
+    return skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding(arbeidsgiverString, intl);
   }
   return null;
 };
 
-export const skalVereLikFordelingMessage = (fordeling: string): FordelErrorMessage[] => (
-  [{ id: 'BeregningInfoPanel.FordelBG.Validation.LikFordeling' },
-    { fordeling }]);
+export const skalVereLikFordelingMessage = (fordeling: string, intl: IntlShape): string => intl
+  .formatMessage({ id: 'BeregningInfoPanel.FordelBG.Validation.LikFordeling' }, { fordeling });
 
 export const kanIkkjeHaNullBeregningsgrunnlagError = (intl: IntlShape): string => intl
   .formatMessage({ id: 'FordelBeregningsgrunnlag.Validation.KanIkkeHaNullIBeregningsgrunnlag' });
 
-export const totalRefusjonMåVereLavereEnn = (seksG: string): FordelErrorMessage[] => (
-  [{ id: 'BeregningInfoPanel.FordelBG.Validation.TotalRefusjonSkalIkkeOverstige' }, { seksG }]);
+export const totalRefusjonMåVereLavereEnn = (seksG: string, intl: IntlShape): string => intl
+  .formatMessage({ id: 'BeregningInfoPanel.FordelBG.Validation.TotalRefusjonSkalIkkeOverstige' }, { seksG });
 
 const totalRefusjonSkalVereLavereEnn = (value: number,
-  seksG: number): FordelErrorMessage[] => ((value >= Math.round(seksG)) ? totalRefusjonMåVereLavereEnn(formatCurrencyNoKr(seksG)) : undefined);
+  seksG: number, intl: IntlShape): string => ((value >= Math.round(seksG)) ? totalRefusjonMåVereLavereEnn(formatCurrencyNoKr(seksG), intl) : undefined);
 
-export const totalFordelingForMåVæreLavereEnn = (seksG: string, andelsliste: string): FordelErrorMessage[] => (
-  [{ id: 'BeregningInfoPanel.FordelBG.Validation.TotalFordelingLavereEnn' }, { seksG, andelsliste }]);
+export const totalFordelingForMåVæreLavereEnn = (seksG: string, andelsliste: string, intl: IntlShape): string => intl
+  .formatMessage({ id: 'BeregningInfoPanel.FordelBG.Validation.TotalFordelingLavereEnn' }, { seksG, andelsliste });
 
 const totalFordelingSkalVereLavereEnn = (
-  value: number, seksG: number, beskrivendeString: string, errorMessage: (seksG: string, andelsliste: string) => FordelErrorMessage,
-): FordelErrorMessage => ((value >= Math.round(seksG)) ? errorMessage(formatCurrencyNoKr(seksG), beskrivendeString) : undefined);
+  value: number, seksG: number, beskrivendeString: string, errorMessage: (seksG: string, andelsliste: string, intl: IntlShape) => string,
+  intl: IntlShape,
+): string => ((value >= Math.round(seksG)) ? errorMessage(formatCurrencyNoKr(seksG), beskrivendeString, intl) : undefined);
 
 export const likFordeling = (
-  value: number, fordeling: number,
-): FordelErrorMessage => ((value !== Math.round(fordeling)) ? skalVereLikFordelingMessage(formatCurrencyNoKr(Math.round(fordeling))) : null);
+  value: number, fordeling: number, intl: IntlShape,
+): string => ((value !== Math.round(fordeling)) ? skalVereLikFordelingMessage(formatCurrencyNoKr(Math.round(fordeling)), intl) : null);
 
 const validateRefusjonsbelop = (refusjonskrav: string, skalKunneEndreRefusjon: boolean): string | undefined => {
   let refusjonskravError;
@@ -249,18 +250,18 @@ export const validateAndeler = (intl: IntlShape, values: FordelBeregningsgrunnla
   return null;
 };
 
-export const validateSumFastsattBelop = (values: FordelBeregningsgrunnlagAndelValues[], fordeling: number): FordelErrorMessage => {
+export const validateSumFastsattBelop = (values: FordelBeregningsgrunnlagAndelValues[], fordeling: number, intl: IntlShape): string => {
   const sumFastsattBelop = values.map(mapToBelop)
     .reduce((sum, fastsattBelop) => sum + fastsattBelop, 0);
-  return fordeling !== undefined && fordeling !== null ? likFordeling(sumFastsattBelop, fordeling) : null;
+  return fordeling !== undefined && fordeling !== null ? likFordeling(sumFastsattBelop, fordeling, intl) : null;
 };
 
-export const validateSumRefusjon = (values: FordelBeregningsgrunnlagAndelValues[], grunnbeløp: number): FordelErrorMessage => {
+export const validateSumRefusjon = (values: FordelBeregningsgrunnlagAndelValues[], grunnbeløp: number, intl: IntlShape): string => {
   const harGraderingUtenRefusjon = !!values.find((v) => v.andelIArbeid !== '0.00' && convertToNumber(v.refusjonskrav) === 0);
   const sumRefusjon = values.map(({ refusjonskrav }) => convertToNumber(refusjonskrav))
     .reduce((sum, refusjonskrav) => sum + refusjonskrav, 0);
   const seksG = 6 * grunnbeløp;
-  return harGraderingUtenRefusjon ? totalRefusjonSkalVereLavereEnn(sumRefusjon, seksG) : null;
+  return harGraderingUtenRefusjon ? totalRefusjonSkalVereLavereEnn(sumRefusjon, seksG, intl) : null;
 };
 
 const lagBeskrivendeStringAvStatuser = (statuser: string[], getKodeverknavn: (kodeverk: Kodeverk) => string): string => {
@@ -277,16 +278,18 @@ const finnFastsattBeløpForStatus = (values: FordelBeregningsgrunnlagAndelValues
 
 const validateSumFastsattArbeidstaker = (values: FordelBeregningsgrunnlagAndelValues[],
   seksG: number,
-  getKodeverknavn: (kodeverk: Kodeverk) => string): FordelErrorMessage => {
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  intl: IntlShape): string => {
   const statuserSomValideres = [AktivitetStatus.ARBEIDSTAKER];
   const sumFastsattBelop = finnFastsattBeløpForStatus(values, statuserSomValideres);
   const beskrivendeString = lagBeskrivendeStringAvStatuser(statuserSomValideres, getKodeverknavn);
-  return totalFordelingSkalVereLavereEnn(sumFastsattBelop, seksG, beskrivendeString, totalFordelingForMåVæreLavereEnn);
+  return totalFordelingSkalVereLavereEnn(sumFastsattBelop, seksG, beskrivendeString, totalFordelingForMåVæreLavereEnn, intl);
 };
 
 const validateSumFastsattArbeidstakerOgFrilanser = (values: FordelBeregningsgrunnlagAndelValues[],
   seksG: number,
-  getKodeverknavn: (kodeverk: Kodeverk) => string): FordelErrorMessage => {
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  intl: IntlShape): string => {
   const statuserSomPrioriteresOverSN = [AktivitetStatus.ARBEIDSTAKER,
     AktivitetStatus.FRILANSER,
     AktivitetStatus.DAGPENGER,
@@ -294,20 +297,21 @@ const validateSumFastsattArbeidstakerOgFrilanser = (values: FordelBeregningsgrun
   const statuserSomValideres = values.filter((v) => statuserSomPrioriteresOverSN.includes(v.aktivitetStatus)).map((v) => v.aktivitetStatus);
   const sumFastsattBelop = finnFastsattBeløpForStatus(values, statuserSomValideres);
   const beskrivendeString = lagBeskrivendeStringAvStatuser(statuserSomValideres, getKodeverknavn);
-  return totalFordelingSkalVereLavereEnn(sumFastsattBelop, seksG, beskrivendeString, totalFordelingForMåVæreLavereEnn);
+  return totalFordelingSkalVereLavereEnn(sumFastsattBelop, seksG, beskrivendeString, totalFordelingForMåVæreLavereEnn, intl);
 };
 
 export const validateSumFastsattForUgraderteAktiviteter = (values: FordelBeregningsgrunnlagAndelValues[],
   grunnbeløp: number,
-  getKodeverknavn: (kodeverk: Kodeverk) => string): FordelErrorMessage => {
+  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  intl: IntlShape): string => {
   const skalGradereFL = !!values.find((v) => v.andelIArbeid !== '0.00' && v.aktivitetStatus === AktivitetStatus.FRILANSER);
   const seksG = 6 * grunnbeløp;
   if (skalGradereFL) {
-    return validateSumFastsattArbeidstaker(values, seksG, getKodeverknavn);
+    return validateSumFastsattArbeidstaker(values, seksG, getKodeverknavn, intl);
   }
   const skalGradereSN = !!values.find((v) => v.andelIArbeid !== '0.00' && v.aktivitetStatus === AktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
   if (skalGradereSN) {
-    return validateSumFastsattArbeidstakerOgFrilanser(values, seksG, getKodeverknavn);
+    return validateSumFastsattArbeidstakerOgFrilanser(values, seksG, getKodeverknavn, intl);
   }
   return null;
 };

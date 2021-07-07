@@ -329,7 +329,7 @@ const settVisningsRaderForATDPSN = (periode: BeregningsgrunnlagPeriodeProp,
     vilkarStatus,
   );
 
-  if ((hentVerdiFraAndel(dpElement) + hentVerdiFraAndel(atElement)) > hentVerdiFraAndel(snElement)) {
+  if ((hentVerdiFraAndel(dpElement) + hentVerdiFraAndel(atElement)) > hentPGIFraSNAndel(snElement)) {
     rowsForklaringer.push(<FormattedMessage id="Beregningsgrunnlag.BeregningTable.Omberegnet.ForklaringAT_DPoverstigerSN" />);
     rowsAndeler.push(atElement);
     rowsAndeler.push(dpElement);

@@ -364,10 +364,9 @@ describe('<RenderFordelBGFieldArray>', () => {
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
       getKodeverknavn, 97000, undefined, true, agOplysninger);
-    const expected = skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding(arbeidsgiverstring);
+    const expected = skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding(arbeidsgiverstring, intlMock);
     /* eslint no-underscore-dangle: ["error", { "allow": ["_error"] }] */
-    expect(errors._error.props.id).toBe(expected[0].id);
-    expect(errors._error.props.values.arbeidsgiver).toBe(arbeidsgiverstring);
+    expect(errors._error).toBe(expected);
   });
 
   it('skal returnerer errors for refusjonskrav når refusjonskrav er 0 i inntektsmelding', () => {
@@ -387,10 +386,9 @@ describe('<RenderFordelBGFieldArray>', () => {
     values.push(andel1);
     const errors = RenderFordelBGFieldArrayImpl.validate(intlMock, values, 100000,
       getKodeverknavn, 97000, undefined, true, agOplysninger);
-    const expected = skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding(arbeidsgiverstring);
+    const expected = skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding(arbeidsgiverstring, intlMock);
     /* eslint no-underscore-dangle: ["error", { "allow": ["_error"] }] */
-    expect(errors._error.props.id).toBe(expected[0].id);
-    expect(errors._error.props.values.arbeidsgiver).toBe(arbeidsgiverstring);
+    expect(errors._error).toBe(expected);
   });
 
   it('skal returnerer errors for fastsattbeløp når ikkje oppgitt', () => {
