@@ -213,8 +213,8 @@ const lagSubmitFn = createSelector([
   (ownProps: OwnProps) => ownProps.submitCallback],
 (submitCallback) => (values: FaktaOmBeregningAksjonspunktValues) => submitCallback(transformValuesVurderFaktaBeregning(values)));
 
-const mapStateToPropsFactory = (_state: any, _ownProps: OwnProps) => {
-  const validate = (values) => validateVurderFaktaBeregning(values, _ownProps.intl);
+const mapStateToPropsFactory = (_state: any, initialProps: OwnProps) => {
+  const validate = (values) => validateVurderFaktaBeregning(values, initialProps.intl);
   return (state: any, ownProps: OwnProps): MappedOwnProps => {
     const initialValues = buildInitialValuesVurderFaktaBeregning(state, ownProps);
     return ({
