@@ -13,6 +13,7 @@ import {
   BeregningFaktaTransformedValues,
   FaktaBeregningTransformedValues,
 } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
+import { IntlShape } from 'react-intl';
 import TidsbegrensetArbeidsforholdForm from './tidsbegrensetArbeidsforhold/TidsbegrensetArbeidsforholdForm';
 import VurderMilitaer from './vurderMilitaer/VurderMilitaer';
 import NyoppstartetFLForm from './vurderOgFastsettATFL/forms/NyoppstartetFLForm';
@@ -76,7 +77,7 @@ export const getArbeidsgiverInfoForRefusjonskravSomKommerForSent = createSelecto
   },
 );
 
-export const validationForVurderFakta = (values: FaktaOmBeregningAksjonspunktValues): any => {
+export const validationForVurderFakta = (values: FaktaOmBeregningAksjonspunktValues, intl: IntlShape): any => {
   if (!values) {
     return {};
   }
@@ -91,10 +92,10 @@ export const validationForVurderFakta = (values: FaktaOmBeregningAksjonspunktVal
     return {};
   }
   return ({
-    ...getKunYtelseValidation(values, kunYtelse, tilfeller),
+    ...getKunYtelseValidation(values, kunYtelse, tilfeller, intl),
     ...VurderMottarYtelseForm.validate(values, vurderMottarYtelse),
     ...VurderBesteberegningForm.validate(values, tilfeller),
-    ...VurderOgFastsettATFL.validate(values, tilfeller, faktaOmBeregning, beregningsgrunnlag),
+    ...VurderOgFastsettATFL.validate(values, tilfeller, faktaOmBeregning, beregningsgrunnlag, intl),
   });
 };
 

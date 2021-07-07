@@ -15,6 +15,7 @@ import {
   KodeverkMedNavn, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
+import { IntlShape } from 'react-intl';
 import { mapAndelToField, skalHaBesteberegningSelector } from './BgFaktaUtils';
 import styles from './inntektFieldArray.less';
 import { SortedAndelInfo, validateUlikeAndeler, validateUlikeAndelerWithGroupingFunction } from './ValidateAndelerUtils';
@@ -186,7 +187,8 @@ type OwnProps = {
 interface StaticFunctions {
   validate: (values: AndelFieldValue[],
              erKunYtelse: boolean,
-             skalFastsetteInntekt: (andel) => boolean) => any;
+             skalFastsetteInntekt: (andel) => boolean,
+             intl: IntlShape) => any;
   buildInitialValues: (andeler: AndelForFaktaOmBeregning[],
                        arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
                        alleKodeverk: AlleKodeverk) => AndelFieldValue[];
@@ -275,7 +277,7 @@ const mapAndelToSortedObject = (value: AndelFieldValue): SortedAndelInfo => {
   return { andelsinfo: andel, arbeidsforholdId, inntektskategori };
 };
 
-InntektFieldArray.validate = (values: AndelFieldValue[], erKunYtelse, skalFastsetteInntekt) => {
+InntektFieldArray.validate = (values: AndelFieldValue[], erKunYtelse, skalFastsetteInntekt, intl: IntlShape) => {
   // eslint-disable-next-line react/destructuring-assignment
   const arrayErrors = values
     .map((andelFieldValues) => {
@@ -295,7 +297,7 @@ InntektFieldArray.validate = (values: AndelFieldValue[], erKunYtelse, skalFastse
   if (isArrayEmpty(values)) {
     return null;
   }
-  const ulikeAndelerError = erKunYtelse ? validateUlikeAndelerWithGroupingFunction(values, mapAndelToSortedObject) : validateUlikeAndeler(values);
+  const ulikeAndelerError = erKunYtelse ? validateUlikeAndelerWithGroupingFunction(values, mapAndelToSortedObject, intl) : validateUlikeAndeler(values, intl);
   if (ulikeAndelerError) {
     return { _error: ulikeAndelerError };
   }

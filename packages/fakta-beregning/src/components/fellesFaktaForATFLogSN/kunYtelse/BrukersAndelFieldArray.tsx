@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import {
+  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+} from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import { InputField, NavFieldGroup, SelectField } from '@fpsak-frontend/form';
@@ -132,7 +134,7 @@ type OwnProps = {
 };
 
 interface StaticFunction {
-  validate: (values: BrukersAndelValues[]) => any;
+  validate: (values: BrukersAndelValues[], intl: IntlShape) => any;
 }
 
 /**
@@ -202,7 +204,7 @@ const mapBrukesAndelToSortedObject = (value: BrukersAndelValues): SortedAndelInf
   return { andelsinfo: andel, inntektskategori };
 };
 
-BrukersAndelFieldArrayImpl.validate = (values: BrukersAndelValues[]) => {
+BrukersAndelFieldArrayImpl.validate = (values: BrukersAndelValues[], intl: IntlShape) => {
   if (!values) {
     return null;
   }
@@ -222,9 +224,9 @@ BrukersAndelFieldArrayImpl.validate = (values: BrukersAndelValues[]) => {
   if (isArrayEmpty(values)) {
     return null;
   }
-  const ulikeAndelerError = validateUlikeAndelerWithGroupingFunction(values, mapBrukesAndelToSortedObject);
-  if (ulikeAndelerError) {
-    return { _error: <FormattedMessage id={ulikeAndelerError[0].id} /> };
+  const ulikeAndelerFeilmelding = validateUlikeAndelerWithGroupingFunction(values, mapBrukesAndelToSortedObject, intl);
+  if (ulikeAndelerFeilmelding) {
+    return { _error: ulikeAndelerFeilmelding };
   }
   return null;
 };

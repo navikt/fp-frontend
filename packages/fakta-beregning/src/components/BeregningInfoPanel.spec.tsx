@@ -4,13 +4,15 @@ import sinon from 'sinon';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
-import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { AlleKodeverk } from '@fpsak-frontend/types';
-
 import BeregningInfoPanel from './BeregningInfoPanel';
 import VurderFaktaBeregningPanel from './fellesFaktaForATFLogSN/VurderFaktaBeregningPanel';
 import AvklareAktiviteterPanel from './avklareAktiviteter/AvklareAktiviteterPanel';
+
 import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 const {
   AVKLAR_AKTIVITETER,
@@ -47,6 +49,7 @@ describe('<BeregningInfoPanel>', () => {
     };
 
     const wrapper = shallowWithIntl(<BeregningInfoPanel
+      intl={intlMock}
       aksjonspunkter={[tidsbegrensetAP]}
       hasOpenAksjonspunkter
       submittable
@@ -78,6 +81,7 @@ describe('<BeregningInfoPanel>', () => {
       },
     };
     const wrapper = shallowWithIntl(<BeregningInfoPanel
+      intl={intlMock}
       aksjonspunkter={[overstyringAP]}
       hasOpenAksjonspunkter
       submittable
@@ -110,6 +114,7 @@ describe('<BeregningInfoPanel>', () => {
       erAktivt: true,
     };
     const wrapper = shallowWithIntl(<BeregningInfoPanel
+      intl={intlMock}
       aksjonspunkter={[overstyringAP]}
       hasOpenAksjonspunkter
       submittable
@@ -142,6 +147,7 @@ describe('<BeregningInfoPanel>', () => {
       erAktivt: true,
     };
     const wrapper = shallowWithIntl(<BeregningInfoPanel
+      intl={intlMock}
       aksjonspunkter={[tidsbegrensetAP]}
       hasOpenAksjonspunkter
       submittable

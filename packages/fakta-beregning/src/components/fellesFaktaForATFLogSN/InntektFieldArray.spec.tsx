@@ -8,7 +8,7 @@ import { metaMock, MockFieldsWithContent } from '@fpsak-frontend/utils-test/src/
 import { Table } from '@fpsak-frontend/shared-components';
 import { AlleKodeverk, FaktaOmBeregning } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
-import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { lagStateMedAksjonspunkterOgBeregningsgrunnlag } from '../beregning-test-helper';
 import { besteberegningField } from './besteberegningFodendeKvinne/VurderBesteberegningForm';
 import { AndelRow } from './InntektFieldArrayRow';
@@ -16,6 +16,8 @@ import SummaryRow from './SummaryRow';
 import { InntektFieldArray, leggTilDagpengerOmBesteberegning, mapStateToProps } from './InntektFieldArray';
 import { formNameVurderFaktaBeregning } from '../BeregningFormUtils';
 import messages from '../../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 const aksjonspunkter = [
   {
@@ -261,7 +263,7 @@ describe('<InntektFieldArray>', () => {
       inntektskategori: 'ARBEIDSTAKER',
     };
     values.push(andel2);
-    const errors = InntektFieldArray.validate(values, false, skalFastsetteInntekt);
+    const errors = InntektFieldArray.validate(values, false, skalFastsetteInntekt, intlMock);
     expect(errors).toBe(null);
   });
 
@@ -276,7 +278,7 @@ describe('<InntektFieldArray>', () => {
       inntektskategori: 'ARBEIDSTAKER',
     };
     values.push(andel2);
-    const errors = InntektFieldArray.validate(values, false, skalFastsetteInntekt);
+    const errors = InntektFieldArray.validate(values, false, skalFastsetteInntekt, intlMock);
     expect(errors[0].fastsattBelop).toBe(isRequiredMessage());
   });
 
@@ -291,7 +293,7 @@ describe('<InntektFieldArray>', () => {
       inntektskategori: 'ARBEIDSTAKER',
     };
     values.push(andel2);
-    const errors = InntektFieldArray.validate(values, false, skalFastsetteInntekt);
+    const errors = InntektFieldArray.validate(values, false, skalFastsetteInntekt, intlMock);
     expect(errors).toBe(null);
   });
 
@@ -306,7 +308,7 @@ describe('<InntektFieldArray>', () => {
       inntektskategori: '',
     };
     values.push(andel2);
-    const errors = InntektFieldArray.validate(values, false, skalFastsetteInntekt);
+    const errors = InntektFieldArray.validate(values, false, skalFastsetteInntekt, intlMock);
     expect(errors[0].inntektskategori).toBe(isRequiredMessage());
   });
 
@@ -322,7 +324,7 @@ describe('<InntektFieldArray>', () => {
       nyAndel: true,
     };
     values.push(andel2);
-    const errors = InntektFieldArray.validate(values, false, skalFastsetteInntekt);
+    const errors = InntektFieldArray.validate(values, false, skalFastsetteInntekt, intlMock);
     expect(errors[0].andel).toBe(isRequiredMessage());
   });
 

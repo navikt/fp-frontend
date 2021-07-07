@@ -7,6 +7,7 @@ import {
   KunYtelse,
 } from '@fpsak-frontend/types';
 import { FaktaBeregningTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
+import { IntlShape } from 'react-intl';
 import KunYtelsePanel from './KunYtelsePanel';
 import { FaktaOmBeregningAksjonspunktValues, KunYtelseValues } from '../../../typer/FaktaBeregningTypes';
 
@@ -49,9 +50,9 @@ export const transformValuesForKunYtelse = (values: FaktaOmBeregningAksjonspunkt
   return {};
 };
 
-export const getKunYtelseValidation = (values: FaktaOmBeregningAksjonspunktValues, kunYtelse: KunYtelse, aktivertePaneler: string[]): any => {
+export const getKunYtelseValidation = (values: FaktaOmBeregningAksjonspunktValues, kunYtelse: KunYtelse, aktivertePaneler: string[], intl: IntlShape): any => {
   if (aktivertePaneler.includes(FASTSETT_BG_KUN_YTELSE)) {
-    return KunYtelsePanel.validate(values, aktivertePaneler, kunYtelse);
+    return KunYtelsePanel.validate(values, aktivertePaneler, kunYtelse, intl);
   }
   return {};
 };

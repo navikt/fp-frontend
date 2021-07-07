@@ -1,4 +1,9 @@
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { compareAndeler, ulikeAndelerErrorMessage, validateUlikeAndeler } from './ValidateAndelerUtils';
+import messages from '../../../i18n/nb_NO.json';
+import AndelFieldValue from '../../typer/FieldValues';
+
+const intlMock = getIntlMock(messages);
 
 describe('<ValidateAndelerUtils>', () => {
   it('skal returnere 0 for lik andelsinfo og lik inntektskategori', () => {
@@ -96,39 +101,38 @@ describe('<ValidateAndelerUtils>', () => {
       andelsnr: 3, andel: 'Virksomheten 3', nyAndel: false, lagtTilAvSaksbehandler: false, aktivitetStatus: 'ARBEIDSTAKER', inntektskategori: 'ARBEIDSTAKER',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler);
+    const ulikeAndelerError = validateUlikeAndeler(andeler, intlMock);
     expect(ulikeAndelerError).toBe(null);
   });
 
   it('skal ikkje gi error om det er andeler lagt til av saksbehandler og ingen har lik inntektskategori og andelsnr', () => {
     const andeler = [{
       andelsnr: 1, andel: 'Virksomheten 1', nyAndel: false, aktivitetStatus: 'ARBEIDSTAKER', lagtTilAvSaksbehandler: false, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: 2, andel: 'Virksomheten 2', nyAndel: false, aktivitetStatus: 'ARBEIDSTAKER', lagtTilAvSaksbehandler: false, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: null, andel: '2', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER_SJØMANN',
-    },
+    } as AndelFieldValue,
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler);
+    const ulikeAndelerError = validateUlikeAndeler(andeler, intlMock);
     expect(ulikeAndelerError).toBe(null);
   });
 
   it('skal gi error om det er nye andeler to har lik inntektskategori og andelsnr', () => {
     const andeler = [{
       andelsnr: 1, andel: 'Virksomheten 1', nyAndel: false, aktivitetStatus: 'ARBEIDSTAKER', lagtTilAvSaksbehandler: false, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: 2, andel: 'Virksomheten 2', nyAndel: false, aktivitetStatus: 'ARBEIDSTAKER', lagtTilAvSaksbehandler: false, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: null, andel: '2', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).toHaveLength(1);
-    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
+    const ulikeAndelerError = validateUlikeAndeler(andeler, intlMock);
+    expect(ulikeAndelerError).toBe(ulikeAndelerErrorMessage(intlMock));
   });
 
   it('skal gi error om det er nye andeler to har lik inntektskategori og andelsnr når det finnes to eksisterende andeler med samme virksomhet', () => {
@@ -139,7 +143,7 @@ describe('<ValidateAndelerUtils>', () => {
       aktivitetStatus: 'ARBEIDSTAKER',
       lagtTilAvSaksbehandler: false,
       inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: 2,
       andel: 'Virksomheten 2',
@@ -147,7 +151,7 @@ describe('<ValidateAndelerUtils>', () => {
       aktivitetStatus: 'ARBEIDSTAKER',
       lagtTilAvSaksbehandler: false,
       inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: 3,
       andel: 'Virksomheten 1 (...fesf342334)',
@@ -155,51 +159,49 @@ describe('<ValidateAndelerUtils>', () => {
       nyAndel: false,
       lagtTilAvSaksbehandler: true,
       inntektskategori: 'SJØMANN',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: null, andel: '1', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'SJØMANN',
-    },
+    } as AndelFieldValue,
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).toHaveLength(1);
-    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
+    const ulikeAndelerError = validateUlikeAndeler(andeler, intlMock);
+    expect(ulikeAndelerError).toBe(ulikeAndelerErrorMessage(intlMock));
   });
 
   it('skal ikkje gi error om det er nye andeler der to har lik andelstype og ulik inntektskategori', () => {
     const andeler = [{
       andelsnr: 1, andel: 'Virksomheten 1', nyAndel: false, aktivitetStatus: 'ARBEIDSTAKER', lagtTilAvSaksbehandler: false, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: 2, andel: 'Virksomheten 2', nyAndel: false, aktivitetStatus: 'ARBEIDSTAKER', lagtTilAvSaksbehandler: false, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: null, andel: 'BRUKERS_ANDEL', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: null, andel: 'BRUKERS_ANDEL', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'FRILANSER',
-    },
+    } as AndelFieldValue,
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler);
+    const ulikeAndelerError = validateUlikeAndeler(andeler, intlMock);
     expect(ulikeAndelerError).toBe(null);
   });
 
   it('skal gi error om det er nye andeler der to har lik inntektskategori og andelstype', () => {
     const andeler = [{
       andelsnr: 1, andel: 'Virksomheten 1', nyAndel: false, aktivitetStatus: 'ARBEIDSTAKER', lagtTilAvSaksbehandler: false, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: 2, andel: 'Virksomheten 2', nyAndel: false, aktivitetStatus: 'ARBEIDSTAKER', lagtTilAvSaksbehandler: false, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: null, andel: 'BRUKERS_ANDEL', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: null, andel: 'BRUKERS_ANDEL', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).toHaveLength(1);
-    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
+    const ulikeAndelerError = validateUlikeAndeler(andeler, intlMock);
+    expect(ulikeAndelerError).toBe(ulikeAndelerErrorMessage(intlMock));
   });
 
   it('skal gi error om det er ingen nye andeler, men andel lagt til av saksbehandler der to har lik inntektskategori og andelstype', () => {
@@ -216,65 +218,61 @@ describe('<ValidateAndelerUtils>', () => {
       andelsnr: 4, andel: 'Brukers andel', nyAndel: false, aktivitetStatus: 'BA', lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER',
     },
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).toHaveLength(1);
-    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
+    const ulikeAndelerError = validateUlikeAndeler(andeler, intlMock);
+    expect(ulikeAndelerError).toBe(ulikeAndelerErrorMessage(intlMock));
   });
 
   it('skal gi error om det er ein ny brukers andel, og ein eksisterende der begge har lik inntektskategori', () => {
     const andeler = [{
       andelsnr: 1, andel: 'Virksomheten 1', nyAndel: false, aktivitetStatus: 'ARBEIDSTAKER', lagtTilAvSaksbehandler: false, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: 2, andel: 'Virksomheten 2', nyAndel: false, aktivitetStatus: 'ARBEIDSTAKER', lagtTilAvSaksbehandler: false, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: 3, andel: 'Brukers andel', aktivitetStatus: 'BA', nyAndel: false, lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: 4, andel: 'BRUKERS_ANDEL', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).toHaveLength(1);
-    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
+    const ulikeAndelerError = validateUlikeAndeler(andeler, intlMock);
+    expect(ulikeAndelerError).toBe(ulikeAndelerErrorMessage(intlMock));
   });
 
   it('skal gi error om det er ein ny egen næring, og ein selvstendig næringsdrivende lagt til tidligere der begge har lik inntektskategori', () => {
     const andeler = [{
       andelsnr: 1, andel: 'Virksomheten 1', nyAndel: false, aktivitetStatus: 'ARBEIDSTAKER', lagtTilAvSaksbehandler: false, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: 2, andel: 'Virksomheten 2', nyAndel: false, aktivitetStatus: 'ARBEIDSTAKER', lagtTilAvSaksbehandler: false, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: 3, andel: 'Selvstendig næringsdrivende', aktivitetStatus: 'SN', nyAndel: false, lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: 4, andel: 'EGEN_NÆRING', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).toHaveLength(1);
-    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
+    const ulikeAndelerError = validateUlikeAndeler(andeler, intlMock);
+    expect(ulikeAndelerError).toBe(ulikeAndelerErrorMessage(intlMock));
   });
 
   it('skal gi error om det er ein ny egen næring, og ein eksisterende selvstendig næringsdrivende der begge har lik inntektskategori', () => {
     const andeler = [{
       andelsnr: 1, andel: 'Virksomheten 1', nyAndel: false, aktivitetStatus: 'ARBEIDSTAKER', lagtTilAvSaksbehandler: false, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: 2, andel: 'Virksomheten 2', nyAndel: false, aktivitetStatus: 'ARBEIDSTAKER', lagtTilAvSaksbehandler: false, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: 3, andel: 'Selvstendig næringsdrivende', aktivitetStatus: 'SN', nyAndel: false, lagtTilAvSaksbehandler: false, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     {
       andelsnr: 4, andel: 'EGEN_NÆRING', nyAndel: true, lagtTilAvSaksbehandler: true, inntektskategori: 'ARBEIDSTAKER',
-    },
+    } as AndelFieldValue,
     ];
-    const ulikeAndelerError = validateUlikeAndeler(andeler);
-    expect(ulikeAndelerError).toHaveLength(1);
-    expect(ulikeAndelerError[0].id).toBe(ulikeAndelerErrorMessage()[0].id);
+    const ulikeAndelerError = validateUlikeAndeler(andeler, intlMock);
+    expect(ulikeAndelerError).toBe(ulikeAndelerErrorMessage(intlMock));
   });
 });
