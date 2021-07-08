@@ -26,21 +26,22 @@ import {
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import BesteberegningResultatGrunnlagPanel from '../besteberegning/BesteberegningResultatGrunnlagPanel';
 import AvviksopplysningerPanel from '../fellesPaneler/AvvikopplysningerPanel';
-import SkjeringspunktOgStatusPanel, { RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN } from '../fellesPaneler/SkjeringspunktOgStatusPanel';
+import SkjeringspunktOgStatusPanel from '../fellesPaneler/SkjeringspunktOgStatusPanel';
 import VurderOgFastsettSN from '../selvstendigNaeringsdrivende/VurderOgFastsettSN';
 import { GrunnlagForAarsinntektPanelATImpl } from '../arbeidstaker/GrunnlagForAarsinntektPanelAT';
 import { AksjonspunktBehandlerTidsbegrensetImpl } from '../arbeidstaker/AksjonspunktBehandlerTB';
-import Beregningsgrunnlag, { TEKSTFELTNAVN_BEGRUNN_DEKNINGSGRAD_ENDRING } from '../beregningsgrunnlagPanel/Beregningsgrunnlag';
+import Beregningsgrunnlag from '../beregningsgrunnlagPanel/Beregningsgrunnlag';
 import AksjonspunktBehandler from '../fellesPaneler/AksjonspunktBehandler';
 import BeregningsresultatTable from '../beregningsresultatPanel/BeregningsresultatTable';
 import AksjonspunktBehandlerFL from '../frilanser/AksjonspunktBehandlerFL';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
-import DekningsgradTransformedValues from '../../types/DekningsgradAksjonspunktTsType';
 import BeregningsgrunnlagValues from '../../types/BeregningsgrunnlagAksjonspunktTsType';
 import { ATFLTidsbegrensetValues, ATFLValues } from '../../types/ATFLAksjonspunktTsType';
 import { VurderOgFastsettValues } from '../../types/NaringAksjonspunktTsType';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 import AksjonspunktTittel from '../fellesPaneler/AksjonspunktTittel';
+import { DekningsgradAksjonspunktPanelImpl } from '../fellesPaneler/DekningsgradAksjonspunktPanel';
+import { DekningsgradValues } from '../../types/DekningsgradAksjonspunktTsType';
 
 // ------------------------------------------------------------------------------------------ //
 // Variables
@@ -72,7 +73,6 @@ export const buildInitialValues = createSelector(
       return undefined;
     }
     const allePerioder = beregningsgrunnlag.beregningsgrunnlagPeriode;
-    const gjeldendeDekningsgrad = beregningsgrunnlag.dekningsgrad;
     const alleAndelerIForstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode[0].beregningsgrunnlagPrStatusOgAndel;
     const arbeidstakerAndeler = alleAndelerIForstePeriode.filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER);
     const frilanserAndeler = alleAndelerIForstePeriode.filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.FRILANSER);
@@ -83,7 +83,7 @@ export const buildInitialValues = createSelector(
       ...AksjonspunktBehandlerFL.buildInitialValues((frilanserAndeler)),
       ...VurderOgFastsettSN.buildInitialValues(selvstendigNaeringAndeler, gjeldendeAksjonspunkter),
       ...GrunnlagForAarsinntektPanelATImpl.buildInitialValues(arbeidstakerAndeler),
-      ...SkjeringspunktOgStatusPanel.buildInitialValues(gjeldendeDekningsgrad, gjeldendeAksjonspunkter),
+      ...DekningsgradAksjonspunktPanelImpl.buildInitialValues(beregningsgrunnlag, gjeldendeAksjonspunkter),
     };
   },
 );
@@ -98,13 +98,8 @@ export const transformValues = (values: BeregningsgrunnlagValues,
   gjeldendeAksjonspunkter: Aksjonspunkt[],
   allePerioder: BeregningsgrunnlagPeriodeProp[]) => {
   const aksjonspunkter = [];
-  const vurderDekningsgradAksjonspunkt = {
-    kode: VURDER_DEKNINGSGRAD,
-    begrunnelse: values[TEKSTFELTNAVN_BEGRUNN_DEKNINGSGRAD_ENDRING],
-    dekningsgrad: values[RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN],
-  } as DekningsgradTransformedValues;
   if (harAksjonspunkt(VURDER_DEKNINGSGRAD, gjeldendeAksjonspunkter)) {
-    aksjonspunkter.push(vurderDekningsgradAksjonspunkt);
+    aksjonspunkter.push(DekningsgradAksjonspunktPanelImpl.transformValues(values as DekningsgradValues));
   }
   if (harAksjonspunkt(FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS, gjeldendeAksjonspunkter)) {
     return aksjonspunkter.concat(Beregningsgrunnlag.transformATFLValues(values as ATFLValues, relevanteStatuser, alleAndelerIForstePeriode));

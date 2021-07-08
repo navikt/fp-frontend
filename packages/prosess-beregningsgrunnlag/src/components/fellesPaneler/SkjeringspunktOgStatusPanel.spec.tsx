@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { DateLabel } from '@fpsak-frontend/shared-components';
 import { AlleKodeverk } from '@fpsak-frontend/types';
-import SkjeringspunktOgStatusPanel, { RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN, SkjeringspunktOgStatusPanelImpl } from './SkjeringspunktOgStatusPanel';
+import { SkjeringspunktOgStatusPanelImpl } from './SkjeringspunktOgStatusPanel';
 
 const skjeringstidspunktDato = '2017-12-12';
 const aktivitetstatusList = [{
@@ -42,12 +42,5 @@ describe('<SkjeringspunktOgStatusPanel>', () => {
     expect(messages.first().props().id).toBe('Beregningsgrunnlag.Skjeringstidspunkt.SkjeringForBeregning');
     const dato = wrapper.find(DateLabel);
     expect(dato.first().props().dateString).toBe(skjeringstidspunktDato);
-  });
-
-  it('Skal teste buildInitialValues når ingen aksjonspunkt', () => {
-    const dekningsgradFraSoknad = 100;
-    const gjeldendeAksjonspunkter = [];
-    const initialValues = SkjeringspunktOgStatusPanel.buildInitialValues(dekningsgradFraSoknad, gjeldendeAksjonspunkter);
-    expect(initialValues[RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN]).toBeUndefined();
   });
 });
