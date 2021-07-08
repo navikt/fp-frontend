@@ -90,6 +90,7 @@
   "Beregningsgrunnlag.AarsinntektPanel.BeregnetAarsinntekt": "Beregnet årsinntekt",
   "Beregningsgrunnlag.AarsinntektPanel.TomString": " ",
   "Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler": "Skjønnsmessig fastsettelse av årsinntekt ved avvik",
+  "Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler.Dekningsgrad": "Fastsett dekningsgrad ved dødsfall",
   "Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler.Nyoppstartet": "Skjønnsmessig fastsettelse av årsinntekt ved varig endring (nyoppstartet næring)",
   "Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler.VarigEndring": "Skjønnsmessig fastsettelse av årsinntekt ved varig endring",
   "Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler.NyIArbeidslivet": "Skjønnsmessig fastsettelse av årsinntekt når søker er ny i arbeidslivet",
