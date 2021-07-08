@@ -4036,6 +4036,14 @@
     core-js "^3.8.2"
     global "^4.4.0"
 
+"@storybook/client-logger@6.3.3":
+  version "6.3.3"
+  resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-6.3.3.tgz#87aaa7b92ed2389f90317469fb99c5d066446554"
+  integrity sha512-eckaVBPYOLh5ZFWrcCS+JqXkIQMESpiR2IfmEBHpZFq8lHZRq/dpmfLnDM2HrGiRR5EvPn9/Hl9jIKLaVx3Yng==
+  dependencies:
+    core-js "^3.8.2"
+    global "^4.4.0"
+
 "@storybook/codemod@6.3.2":
   version "6.3.2"
   resolved "https://registry.yarnpkg.com/@storybook/codemod/-/codemod-6.3.2.tgz#f2aadbd7e157a38d1b87b8d04c7dcb4e4827f19c"
@@ -4438,7 +4446,7 @@
     shelljs "^0.8.1"
     yargs "^15.0.0"
 
-"@storybook/theming@6.3.2", "@storybook/theming@^6.3.2":
+"@storybook/theming@6.3.2":
   version "6.3.2"
   resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-6.3.2.tgz#1fbee52cb46b0386431c016f5150c7c7a0a05d4b"
   integrity sha512-XICs67cuEGQxnzJ2SYPRZiIELaUCFQsYhtBTXycJIpBUbcbysdBE7GH+3aG8PpDMaSgHWJ7qaiYEoPlhFbAv1w==
@@ -4447,6 +4455,24 @@
     "@emotion/is-prop-valid" "^0.8.6"
     "@emotion/styled" "^10.0.27"
     "@storybook/client-logger" "6.3.2"
+    core-js "^3.8.2"
+    deep-object-diff "^1.1.0"
+    emotion-theming "^10.0.27"
+    global "^4.4.0"
+    memoizerific "^1.11.3"
+    polished "^4.0.5"
+    resolve-from "^5.0.0"
+    ts-dedent "^2.0.0"
+
+"@storybook/theming@^6.3.2":
+  version "6.3.3"
+  resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-6.3.3.tgz#4801a6a774b3e6a356e86f3c6351f79d1dc9bee7"
+  integrity sha512-+V6aDZhzesYgiRe5hb8AAmLIh2GzIDTU6N2ssVuJQkujv6XE9uiL2hfORRChVm/dKPgTr84vX2jnJ+1317iCEg==
+  dependencies:
+    "@emotion/core" "^10.1.1"
+    "@emotion/is-prop-valid" "^0.8.6"
+    "@emotion/styled" "^10.0.27"
+    "@storybook/client-logger" "6.3.3"
     core-js "^3.8.2"
     deep-object-diff "^1.1.0"
     emotion-theming "^10.0.27"
@@ -7546,12 +7572,7 @@ core-js-pure@^3.0.0, core-js-pure@^3.8.2:
   resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.12.1.tgz#934da8b9b7221e2a2443dc71dfa5bd77a7ea00b8"
   integrity sha512-1cch+qads4JnDSWsvc7d6nzlKAippwjUlf6vykkTLW53VSV+NkE6muGBToAjEA8pG90cSfcud3JgVmW2ds5TaQ==
 
-core-js@^3.0.4, core-js@^3.6.5, core-js@^3.8.2:
-  version "3.12.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.12.1.tgz#6b5af4ff55616c08a44d386f1f510917ff204112"
-  integrity sha512-Ne9DKPHTObRuB09Dru5AjwKjY4cJHVGu+y5f7coGn1E9Grkc3p2iBwE9AI/nJzsE29mQF7oq+mhYYRqOMFN1Bw==
-
-core-js@^3.15.2:
+core-js@^3.0.4, core-js@^3.15.2, core-js@^3.6.5, core-js@^3.8.2:
   version "3.15.2"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.15.2.tgz#740660d2ff55ef34ce664d7e2455119c5bdd3d61"
   integrity sha512-tKs41J7NJVuaya8DxIOCnl8QuPHx5/ZVbFo1oKgVl1qHFBBrDctzQGtuLjPpRdNTWmKPH6oEvgN/MUID+l485Q==
