@@ -4952,9 +4952,9 @@
     redux "^4.0.0"
 
 "@types/react-responsive@^8.0.2":
-  version "8.0.2"
-  resolved "https://registry.yarnpkg.com/@types/react-responsive/-/react-responsive-8.0.2.tgz#959fdc32f72e38b807e32be617a74be2c315081b"
-  integrity sha512-DTvm3Hb77v0hme7L4GYzRjLQqlZP+zNImFBzdKbSH7CsQ5c7QebGnSQX2Xf3BaA0rm/TQE57eFMhMGLcMe/A9w==
+  version "8.0.3"
+  resolved "https://registry.yarnpkg.com/@types/react-responsive/-/react-responsive-8.0.3.tgz#7096b888a5963ab7755ec4e9e52b652e1cc3146b"
+  integrity sha512-K9VsY1tbwt/CNQ/00oGIXjnRwj+3WRB/nDN9Oglqn41sFgVH5A0WkERO7P2xGJJU3ylttiKnT3stZxIccGVBug==
   dependencies:
     "@types/react" "*"
 
@@ -4982,16 +4982,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*":
-  version "17.0.5"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.5.tgz#3d887570c4489011f75a3fc8f965bf87d09a1bea"
-  integrity sha512-bj4biDB9ZJmGAYTWSKJly6bMr4BLUiBrx9ujiJEoP9XIDY9CTaPGxE5QWN/1WjpPLzYF7/jRNnV2nNxNe970sw==
-  dependencies:
-    "@types/prop-types" "*"
-    "@types/scheduler" "*"
-    csstype "^3.0.2"
-
-"@types/react@^17.0.13":
+"@types/react@*", "@types/react@^17.0.13":
   version "17.0.13"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.13.tgz#6b7c9a8f2868586ad87d941c02337c6888fb874f"
   integrity sha512-D/G3PiuqTfE3IMNjLn/DCp6umjVCSvtZTPdtAFy5+Ved6CsdRvivfKeCzw79W4AatShtU4nGqgvOv5Gro534vQ==
