@@ -1,24 +1,18 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
 
+import { Normaltekst } from 'nav-frontend-typografi';
+import { EtikettInfo } from 'nav-frontend-etiketter';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import {
   DateLabel, FlexContainer, FlexColumn, FlexRow, VerticalSpacer, AvsnittSkiller,
 } from '@fpsak-frontend/shared-components';
-
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-
-import { EtikettInfo } from 'nav-frontend-etiketter';
-
 import { AlleKodeverk, Kodeverk } from '@fpsak-frontend/types';
-import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
+
 import styles from './skjeringspunktOgStatusPanel.less';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
-import { DekningsgradValues } from '../../types/DekningsgradAksjonspunktTsType';
 
 export const RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN = 'dekningsgrad';
 
@@ -40,10 +34,6 @@ const createStatusEtiketter = (listeMedStatuser: Kodeverk[], getKodeverknavn: (k
   );
 };
 
-interface StaticFunctions {
-  buildInitialValues?: (gjeldendeDekningsgrad: number, gjeldendeAksjonspunkter: Aksjonspunkt[]) => DekningsgradValues;
-}
-
 type MappedOwnProps = {
   getKodeverknavn: (kodeverk: Kodeverk) => string;
 }
@@ -60,7 +50,7 @@ type OwnProps = {
  * Viser skjæringstidspunkt for beregningen og en liste med aktivitetsstatuser.
  */
 
-export const SkjeringspunktOgStatusPanelImpl: FunctionComponent<OwnProps & MappedOwnProps> & StaticFunctions = ({
+export const SkjeringspunktOgStatusPanelImpl: FunctionComponent<OwnProps & MappedOwnProps> = ({
   skjeringstidspunktDato,
   aktivitetStatusList,
   getKodeverknavn,
@@ -96,11 +86,5 @@ const mapStateToProps = (state, ownProps: OwnProps): MappedOwnProps => {
 };
 
 const SkjeringspunktOgStatusPanel = connect(mapStateToProps)(SkjeringspunktOgStatusPanelImpl);
-
-SkjeringspunktOgStatusPanel.buildInitialValues = (gjeldendeDekningsgrad, gjeldendeAksjonspunkter): DekningsgradValues => {
-  const aksjonspunkt = gjeldendeAksjonspunkter && gjeldendeAksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.VURDER_DEKNINGSGRAD);
-  const initialDekningsgrad = aksjonspunkt && gjeldendeDekningsgrad === 100 ? gjeldendeDekningsgrad : undefined;
-  return { [RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN]: initialDekningsgrad };
-};
 
 export default SkjeringspunktOgStatusPanel;
