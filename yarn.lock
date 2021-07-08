@@ -4928,9 +4928,9 @@
     "@types/react" "*"
 
 "@types/react-collapse@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@types/react-collapse/-/react-collapse-5.0.0.tgz#ffe6173db457b4b147319e1bd522b5b9d3d68fac"
-  integrity sha512-iM5QPtS0JVbL5TWm8vilaG4iYiQIFSSqXDHcRUA50qBLSgC0GURk7VZYmgo6u4YF0LnpvKBQYRhPv1ut9DukIg==
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@types/react-collapse/-/react-collapse-5.0.1.tgz#078ea1ad15e00ba2063f2e4d8d6760c9375a2023"
+  integrity sha512-Iq3OrqvzCIP0DmAawU4T2VKH6XAplbjo/D7Qk14mcfQ92plU+OrA2SF10r2XrcFg1Wvya/5f8w1vS29RVpdoLQ==
   dependencies:
     "@types/react" "*"
 
@@ -4982,16 +4982,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*":
-  version "17.0.5"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.5.tgz#3d887570c4489011f75a3fc8f965bf87d09a1bea"
-  integrity sha512-bj4biDB9ZJmGAYTWSKJly6bMr4BLUiBrx9ujiJEoP9XIDY9CTaPGxE5QWN/1WjpPLzYF7/jRNnV2nNxNe970sw==
-  dependencies:
-    "@types/prop-types" "*"
-    "@types/scheduler" "*"
-    csstype "^3.0.2"
-
-"@types/react@^17.0.13":
+"@types/react@*", "@types/react@^17.0.13":
   version "17.0.13"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.13.tgz#6b7c9a8f2868586ad87d941c02337c6888fb874f"
   integrity sha512-D/G3PiuqTfE3IMNjLn/DCp6umjVCSvtZTPdtAFy5+Ved6CsdRvivfKeCzw79W4AatShtU4nGqgvOv5Gro534vQ==
