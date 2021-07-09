@@ -647,17 +647,17 @@ export const naturalYtelse = () => {
   const andel3MedFrafall = lagAndel('AT', 750000, undefined, false, 755000);
   const nyArbeidsgiverOpplysningerPerId = {
     ...arbeidsgiverOpplysninger,
-    987654321: {
+    9109090881: {
       identifikator: '9109090881',
       navn: 'BEDRIFT AS 1',
       erPrivatPerson: false,
     },
-    9478541223: {
+    9109090882: {
       identifikator: '9109090882',
       navn: 'BEDRIFT AS 2',
       erPrivatPerson: false,
     },
-    93178545: {
+    9109090883: {
       identifikator: '9109090883',
       navn: 'BEDRIFT AS 3',
       erPrivatPerson: false,
