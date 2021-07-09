@@ -22,7 +22,7 @@ const tableData = {
   } as RedusertRadType,
   bruttoRad: { ledetekst: <FormattedMessage id="Beregningsgrunnlag.BeregningTable.BruttoTotalt" />, verdi: '400' } as BruttoRadType,
   dagsatser: { verdi: '100', grunnlag: '400' },
-  headers: [<FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.TomString" />],
+  headers: [],
   rowsAndeler: [{ ledetekst: <FormattedMessage id="Beregningsgrunnlag.BeregningTable.MåFastsettes" />, verdi: 130250, skalFastsetteGrunnlag: false }],
   rowsForklaringer: [],
 } as BeregningsresultatPeriodeTabellType;

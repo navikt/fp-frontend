@@ -2,7 +2,9 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import Panel from 'nav-frontend-paneler';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element } from 'nav-frontend-typografi';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import {
+  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+} from 'react-intl';
 
 import {
   dateFormat,
@@ -29,6 +31,7 @@ import AksjonspunktBehandlerTB from '../arbeidstaker/AksjonspunktBehandlerTB';
 import AksjonspunktBehandlerSN from '../selvstendigNaeringsdrivende/AksjonspunktsbehandlerSN';
 import ArbeidstakerFrilansValues from '../../types/ATFLAksjonspunktTsType';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
+import DekningsgradAksjonspunktPanel from './DekningsgradAksjonspunktPanel';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -124,7 +127,8 @@ const settOppKomponenterForATFL = (aksjonspunkter: Aksjonspunkt[],
   allePerioder: BeregningsgrunnlagPeriodeProp[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   readOnly: boolean,
-  formName: string): ReactElement => {
+  formName: string,
+  intl: IntlShape): ReactElement => {
   const erTidsbegrenset = harPerioderMedAvsluttedeArbeidsforhold(allePerioder);
   const alleAndelerIForstePeriode = finnAlleAndelerIFørstePeriode(allePerioder);
   const flAndel = alleAndelerIForstePeriode.find(
@@ -168,6 +172,22 @@ const settOppKomponenterForATFL = (aksjonspunkter: Aksjonspunkt[],
         readOnly={readOnly}
       />
       )}
+      <VerticalSpacer sixteenPx />
+      <Row>
+        <Column xs="12">
+          <TextAreaField
+            name="ATFLVurdering"
+            label={finnATFLVurderingLabel(aksjonspunkter)}
+            validate={[required, maxLength1500, minLength3, hasValidText]}
+            maxLength={1500}
+            readOnly={readOnly}
+            textareaClass={styles.textAreaStyle}
+            placeholder={intl.formatMessage({ id: 'Beregningsgrunnlag.Forms.VurderingAvFastsattBeregningsgrunnlag.Placeholder' })}
+            endrettekst={lagEndretTekst(aksjonspunkter, readOnly)}
+          />
+        </Column>
+      </Row>
+      <VerticalSpacer sixteenPx />
     </>
   );
 };
@@ -224,26 +244,36 @@ export const AksjonspunktBehandlerImpl: FunctionComponent<OwnProps & WrappedComp
       </div>
     );
   }
+  const atflAPKoder = [aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
+    aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD] as string[];
+
+  const harATFLAP = aksjonspunkter.some((ap) => atflAPKoder.includes(ap.definisjon.kode));
+  const harDekningsgradAP = aksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktCodes.VURDER_DEKNINGSGRAD);
   return (
     <div className={readOnly ? '' : styles.aksjonspunktBehandlerContainer}>
       <Panel className={readOnly ? beregningStyles.panelRight : styles.aksjonspunktBehandlerBorder}>
-        {settOppKomponenterForATFL(aksjonspunkter, alleKodeverk, allePerioder, arbeidsgiverOpplysningerPerId, readOnly, formName)}
-        <VerticalSpacer sixteenPx />
-        <Row>
-          <Column xs="12">
-            <TextAreaField
-              name="ATFLVurdering"
-              label={finnATFLVurderingLabel(aksjonspunkter)}
-              validate={[required, maxLength1500, minLength3, hasValidText]}
-              maxLength={1500}
-              readOnly={readOnly}
-              textareaClass={styles.textAreaStyle}
-              placeholder={intl.formatMessage({ id: 'Beregningsgrunnlag.Forms.VurderingAvFastsattBeregningsgrunnlag.Placeholder' })}
-              endrettekst={lagEndretTekst(aksjonspunkter, readOnly)}
-            />
-          </Column>
-        </Row>
-        <VerticalSpacer sixteenPx />
+        {harATFLAP && settOppKomponenterForATFL(aksjonspunkter, alleKodeverk, allePerioder, arbeidsgiverOpplysningerPerId, readOnly, formName, intl)}
+        {harDekningsgradAP
+        && (
+          <>
+            <Row>
+              <Column xs="12">
+                <Element className={beregningStyles.avsnittOverskrift}>
+                  <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.AksjonspunktBehandler.Dekningsgrad" />
+                </Element>
+              </Column>
+            </Row>
+            <VerticalSpacer eightPx />
+            <Row>
+              <Column xs="12">
+                <DekningsgradAksjonspunktPanel
+                  readOnly={readOnly}
+                />
+              </Column>
+            </Row>
+            <VerticalSpacer sixteenPx />
+          </>
+        )}
         {submittKnapp}
         <VerticalSpacer sixteenPx />
       </Panel>

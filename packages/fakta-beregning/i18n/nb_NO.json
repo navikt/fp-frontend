@@ -1,6 +1,4 @@
 {
-  "BegrunnelsePanel.readOnly": "Begrunnelse",
-
   "BeregningInfoPanel.AksjonspunktHelpText.FaktaOmBeregning": "Vurder fakta for beregningen",
   "BeregningInfoPanel.TidsbegrensetArbFor.Arbeidsforhold": "Er arbeidsforholdet i {navn} med varighet {fom} - {tom} tidsbegrenset?",
   "BeregningInfoPanel.FormAlternativ.Ja": "Ja",
@@ -27,9 +25,9 @@
   "BeregningInfoPanel.VurderMottarYtelse.MottarYtelseForArbeid" : "Søker er arbeidstaker og det er ikke mottatt inntektsmelding. Mottar søker sykepenger, foreldrepenger, pleiepenger eller svangerskapspenger for arbeid i {arbeid}?",
 
   "BeregningInfoPanel.VurderBestebergning.HarBesteberegning" : "Søker har hatt dagpenger i opptjeningsperioden. Skal dette fordeles etter besteberegning?",
-  
+
   "InntektstabellPanel.Avbryt": "Avbryt overstyring",
-  
+
   "BeregningInfoPanel.FordelingBG.LeggTilAndel": "Legg til aktivitet",
   "BeregningInfoPanel.FastsettBBFodendeKvinne.RegnarkNavet": "Finn regneark på navet",
   "BeregningInfoPanel.FordelingBG.Sum": "Sum",
@@ -43,8 +41,6 @@
   "BeregningInfoPanel.FordelingBG.Ytelse": "Ytelse",
 
   "AvklareAktiviteter.OverstyrerAktivitetAdvarsel": "Overstyr hvilke aktiviteter og eventuelle inntektsmeldinger som skal benyttes i beregning.",
-  "AvklareAktiviteter.ManuellOverstyring": "Overstyring av aktiviteter i beregningsgrunnlaget",
-  "AvklarAktiviteter.Tittel": "Aktiviteter i beregningsgrunnlaget",
   "VurderAktiviteterTabell.Header.Aktivitet": "Aktivitet",
   "VurderAktiviteterTabell.Header.Periode": "Periode",
   "VurderAktiviteterTabell.Header.Benytt": "Benytt",
@@ -52,11 +48,8 @@
   "VurderAktiviteterTabell.Validation.MåHaMinstEnAktivitet": "Må ha minst én aktivitet for å kunne fastsette beregningsgrunnlag",
 
   "BeregningInfoPanel.AksjonspunktHelpText.VurderAktiviteter": "Vurder hvilke aktiviteter som skal benyttes i beregningsgrunnlaget.",
-  "VurderFaktaBeregning.ManuellOverstyring": "Overstyring av rapporterte inntekter",
   "BeregningInfoPanel.KunstigArbeidsforhold.FastsettKunstigArbeidsforhold": "Det finnes ikke registerdata for arbeidsforholdet og det er ikke mottatt inntektsmelding. Fastsett månedsinntekt for arbeidsforholdet",
-  "BeregningInfoPanel.FaktaBeregningPeriodePanel.Inntektsgrunnlag": "Inntekter som danner grunnlag for beregningsgrunnlaget",
   "KunYtelsePanel.Overskrift": "Søker har ytelse som eneste inntekt. Fastsett månedsbeløp for fordeling av beregningsgrunnlaget.",
-  "KunYtelsePanel.YtelseSomEnesteInntekt": "Søker har ytelse som eneste inntekt. ",
   "KunYtelsePanel.HarBesteberegning": "Søker har ytelse som eneste inntekt. Skal denne fordeles etter besteberegning?",
   "KunYtelsePanel.OverskriftBesteberegning": "Fastsett månedsbeløp for brutto beregningsgrunnlag etter besteberegning",
   "BeregningInfoPanel.FordelBG.Validation.UlikeAndeler": "Andeler for samme aktivitet må ha ulik inntektskategori",
@@ -64,7 +57,6 @@
   "InntektstabellPanel.RapporterteInntekter": "Rapporterte inntekter",
 
   "BeregningInfoPanel.EtterlønnSluttpakke.HarSøkerInntekt": "Har søker etterlønn eller sluttpakke?",
-  "BeregningInfoPanel.EtterlønnSluttpakke.Månedsinntekt": "Månedsinntekt",
 
   "BeregningInfoPanel.VurderMilitaer.HarSøkerMilitærinntekt": "Har søker vært i militær- eller sivilforsvarstjeneste i opptjeningsperioden?",
 
