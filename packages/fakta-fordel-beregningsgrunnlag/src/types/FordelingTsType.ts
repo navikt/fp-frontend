@@ -6,11 +6,10 @@ export type FordelBeregningsgrunnlagGenerellAndelValues = {
   andelsnr?: number;
   andelsnrRef?: number;
   nyAndel: boolean;
-  kilde: string;
+  kilde?: string;
   lagtTilAvSaksbehandler: boolean;
   inntektskategori?: string;
   forrigeInntektskategori?: string;
-
 }
 
 export type FordelBeregningsgrunnlagArbeidAndelValues = {

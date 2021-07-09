@@ -28,7 +28,7 @@ export const textCase = {
   ENDRING_YTELSE: 'ENDRING_YTELSE',
 };
 
-const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
+const formatDate = (date?: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
 const byggListeSomStreng = (listeMedStrenger: string[]): string => {
   if (listeMedStrenger.length === 0) {
@@ -57,15 +57,11 @@ const lagPeriodeStreng = (perioder: PerioderMedGraderingEllerRefusjon[]): string
   return byggListeSomStreng(listeMedPeriodeStrenger);
 };
 
-type ArbeidsforholdInfo = {
-  navnOgOrgnr: string;
-  dato: string;
-}
 
 const finnVisningsnavn = (arbeidsforhold: ArbeidsforholdTilFordeling,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   getKodeverknavn: (kodeverk: Kodeverk) => string): string => {
-  const agOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
+  const agOpplysninger = arbeidsforhold.arbeidsgiverIdent ? arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent] : undefined;
   if (!agOpplysninger) {
     return arbeidsforhold.arbeidsforholdType ? getKodeverknavn(arbeidsforhold.arbeidsforholdType) : '';
   }
@@ -75,7 +71,7 @@ const finnVisningsnavn = (arbeidsforhold: ArbeidsforholdTilFordeling,
 export const createFordelArbeidsforholdString = (listOfArbeidsforhold: ArbeidsforholdTilFordeling[],
   mTextCase: string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  getKodeverknavn: (kodeverk: Kodeverk) => string): string | ArbeidsforholdInfo => {
+  getKodeverknavn: (kodeverk: Kodeverk) => string): string => {
   const listOfStrings = listOfArbeidsforhold.map((arbeidsforhold) => {
     const visningsnavn = finnVisningsnavn(arbeidsforhold, arbeidsgiverOpplysningerPerId, getKodeverknavn);
     if (mTextCase === textCase.GRADERING) {
@@ -88,9 +84,9 @@ export const createFordelArbeidsforholdString = (listOfArbeidsforhold: Arbeidsfo
       return visningsnavn + lagPeriodeStreng(arbeidsforhold.perioderMedGraderingEllerRefusjon.filter(({ erSøktYtelse }) => erSøktYtelse));
     }
     if (mTextCase === textCase.PERMISJON) {
-      return visningsnavn.concat(` f.o.m ${formatDate(arbeidsforhold.permisjon.permisjonTom)}`);
+      return visningsnavn.concat(` f.o.m ${formatDate(arbeidsforhold.permisjon?.permisjonTom)}`);
     }
-    return null;
+    return '';
   });
   return byggListeSomStreng(listOfStrings);
 };
@@ -210,8 +206,8 @@ export const getHelpTextsFordelBG = createSelector(
     alleKodeverk,
     arbeidsgiverOpplysningerPerId,
     aksjonspunkter): ReactElement[] => {
-    const fordelBG = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag;
-    const endredeArbeidsforhold = fordelBG ? fordelBG.arbeidsforholdTilFordeling : [];
+    const fordelBG = beregningsgrunnlag.faktaOmFordeling?.fordelBeregningsgrunnlag;
+    const endredeArbeidsforhold = fordelBG?.arbeidsforholdTilFordeling || [];
     return hasAksjonspunkt(FORDEL_BEREGNINGSGRUNNLAG, aksjonspunkter)
       ? lagHelpTextsFordelBG(endredeArbeidsforhold, getKodeverknavnFn(alleKodeverk, kodeverkTyper), arbeidsgiverOpplysningerPerId)
       : [];

@@ -49,7 +49,7 @@ export type ArbeidsforholdTilFordeling = Readonly<{
   naturalytelseTilkommetPrÅr?: number;
   opphoersdato?: string;
   organisasjonstype?: Kodeverk;
-  perioderMedGraderingEllerRefusjon?: PerioderMedGraderingEllerRefusjon[];
+  perioderMedGraderingEllerRefusjon: PerioderMedGraderingEllerRefusjon[];
   permisjon?: {
     permisjonFom?: string;
     permisjonTom?: string;
@@ -59,7 +59,7 @@ export type ArbeidsforholdTilFordeling = Readonly<{
 }>
 
 export type FordelBeregningsgrunnlagAndel = Readonly<{
-  aktivitetStatus?: Kodeverk;
+  aktivitetStatus: Kodeverk;
   andelIArbeid?: number[];
   andelsnr?: number;
   arbeidsforhold?: BeregningsgrunnlagArbeidsforhold;

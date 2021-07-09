@@ -41,7 +41,8 @@ const createAndelnavn = (andel: FordelBeregningsgrunnlagAndel,
     return '';
   }
   if (andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER && andel.arbeidsforhold) {
-    const agOpplysninger = arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent];
+    const arbeidsgiverIdent = andel.arbeidsforhold?.arbeidsgiverIdent;
+    const agOpplysninger = arbeidsgiverIdent ? arbeidsgiverOpplysningerPerId[arbeidsgiverIdent] : undefined;
     if (!agOpplysninger) {
       return andel.arbeidsforhold.arbeidsforholdType ? getKodeverknavn(andel.arbeidsforhold.arbeidsforholdType) : '';
     }
@@ -59,9 +60,10 @@ export const settFastsattBelop = (fordeltPrAar: number, bruttoPrAar: number,
   skalPreutfyllesMedBeregningsgrunnlag: boolean): string => {
   const fastsatt = finnFastsattPrAar(fordeltPrAar);
   if (fastsatt !== null) {
-    return formatCurrencyNoKr(fastsatt);
+    return formatCurrencyNoKr(fastsatt) || '';
   }
-  return skalPreutfyllesMedBeregningsgrunnlag && !nullOrUndefined(bruttoPrAar) ? formatCurrencyNoKr(bruttoPrAar) : '';
+  const kanPreutfyllesMedBrutto = skalPreutfyllesMedBeregningsgrunnlag && !nullOrUndefined(bruttoPrAar);
+  return kanPreutfyllesMedBrutto ? formatCurrencyNoKr(bruttoPrAar) || '' : '';
 };
 
 export const setArbeidsforholdInitialValues = (andel: FordelBeregningsgrunnlagAndel): FordelBeregningsgrunnlagArbeidAndelValues => ({
@@ -83,10 +85,10 @@ export const setGenerellAndelsinfo = (andel: FordelBeregningsgrunnlagAndel,
   aktivitetStatus: andel.aktivitetStatus.kode,
   andelsnr: andel.andelsnr,
   nyAndel: false,
-  kilde: andel.kilde == null ? null : andel.kilde.kode,
+  kilde: andel.kilde?.kode,
   lagtTilAvSaksbehandler: andel.lagtTilAvSaksbehandler === true,
   inntektskategori: finnnInntektskategorikode(andel),
-  forrigeInntektskategori: !andel.inntektskategori || andel.inntektskategori.kode === inntektskategorier.UDEFINERT ? null : andel.inntektskategori.kode,
+  forrigeInntektskategori: !andel.inntektskategori || andel.inntektskategori.kode === inntektskategorier.UDEFINERT ? undefined : andel.inntektskategori.kode,
 });
 
 export const mapToBelop = (andel: FordelBeregningsgrunnlagAndelValues): number => {
