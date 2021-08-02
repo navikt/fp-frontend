@@ -458,5 +458,6 @@ export const visProsessUttak = () => (
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     alleMerknaderFraBeslutter={{}}
     setFormData={() => undefined}
+    kreverSammenhengendeUttak={{ kreverSammenhengendeUttak: true }}
   />
 );
