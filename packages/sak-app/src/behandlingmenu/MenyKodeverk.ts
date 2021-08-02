@@ -27,7 +27,7 @@ class MenyKodeverk {
 
   getKodeverkForBehandlingstype(kodeverkType: KodeverkType, behandlingTypeKode?: string): KodeverkMedNavn[] {
     if (behandlingTypeKode === BehandlingType.TILBAKEKREVING || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING) {
-      return this.$$fpTilbakeKodeverk[kodeverkType];
+      return this.$$fpTilbakeKodeverk ? this.$$fpTilbakeKodeverk[kodeverkType] : undefined;
     }
     if (kodeverkType !== KodeverkType.AVSLAGSARSAK) {
       return this.$$fpSakKodeverk[kodeverkType];
