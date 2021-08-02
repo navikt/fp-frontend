@@ -3,7 +3,7 @@ export { default as Arbeidsforhold, ArbeidsforholdPermisjon } from './src/arbeid
 export { default as Behandling } from './src/behandlingTsType';
 export { default as BehandlingAppKontekst, BehandlingÅrsak } from './src/behandlingAppKontekstTsType';
 export { default as Behandlingsresultat } from './src/behandlingsresultatTsType';
-export {
+export type {
   default as Beregningsgrunnlag,
   BeregningsgrunnlagAndel,
   SammenligningsgrunlagProp,
@@ -15,7 +15,7 @@ export {
   Inntektsgrunnlag,
   InntektsgrunnlagInntekt,
 } from './src/beregningsgrunnlagTsType';
-export {
+export type {
   default as FaktaOmBeregning,
   FaktaOmBeregningAndel,
   AvklarBeregningAktiviteterMap,
@@ -31,7 +31,7 @@ export {
   RefusjonskravSomKommerForSentListe,
 } from './src/beregningsgrunnlagFaktaTsType';
 export { Månedsgrunnlag, BesteberegningInntekt, Besteberegninggrunnlag } from './src/besteberegningTsTypes';
-export { default as BeregningsgrunnlagArbeidsforhold } from './src/beregningsgrunnlagArbeidsforholdTsType';
+export type { default as BeregningsgrunnlagArbeidsforhold } from './src/beregningsgrunnlagArbeidsforholdTsType';
 export {
   RefusjonTilVurderingAndel,
   TidligereUtbetalinger,
@@ -71,7 +71,7 @@ export {
   default as Medlemskap, MedlemPeriode, MedlemskapPeriode, Oppholdstillatelse, PersonopplysningMedlem,
 } from './src/medlemskapTsType';
 export { default as Risikoklassifisering } from './src/risikoklassifiseringTsType';
-export { default as AnkeVurdering } from './src/ankeVurderingTsType';
+export type { default as AnkeVurdering } from './src/ankeVurderingTsType';
 export { default as KlageVurdering, KlageVurderingResultat } from './src/klageVurderingTsType';
 export { default as Innsyn, InnsynDokument, InnsynVedtaksdokument } from './src/innsynTsType';
 export { default as UttakKontrollerFaktaPerioderWrapper, UttakKontrollerFaktaPerioder } from './src/uttakKontrollerFaktaPerioderTsType';
@@ -95,7 +95,7 @@ export { default as Aktor } from './src/aktorTsType';
 export type { Kjønnkode } from './src/Kjonnkode';
 export { KjønnkodeEnum } from './src/Kjonnkode';
 export { default as Personoversikt, PersonopplysningerBasis } from './src/personoversiktTsType';
-export { default as Personadresse } from './src/personadresseTsType';
+export type { default as Personadresse } from './src/personadresseTsType';
 export { default as AksessRettigheter, Aksess } from './src/aksessRettigheterTsType';
 export { default as StandardFaktaPanelProps } from './src/standardFaktaPanelPropsTsType';
 export { default as StandardFaktaPanelPropsTilbakekreving } from './src/standardFaktaPanelPropsTilbakekrevingTsType';
