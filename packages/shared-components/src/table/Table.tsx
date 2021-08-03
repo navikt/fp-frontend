@@ -50,7 +50,8 @@ const Table: FunctionComponent<OwnProps> = ({
     </thead>
     <tbody>
       {Array.isArray(children)
-        ? React.Children.map(children, ((child) => React.cloneElement(child as any, { noHover }))) : React.cloneElement(children, { noHover })}
+        ? React.Children.map(children, ((child) => React.cloneElement(child as any, { noHover }))) // NOSONAR
+        : React.cloneElement(children, { noHover })}
     </tbody>
   </table>
 );

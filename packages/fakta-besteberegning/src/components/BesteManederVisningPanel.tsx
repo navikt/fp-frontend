@@ -165,11 +165,11 @@ const finnÅrsinntekt = (besteMåneder : Månedsgrunnlag[]): number => {
 const sorterEtterMåned = (besteMåneder : Månedsgrunnlag[]) => [...besteMåneder].sort((a, b) => moment(a.fom).diff(moment(b.fom)));
 
 /**
- * BesteMånederVisningPanel
+ * BesteManederVisningPanel
  *
  * Presentasjonskomponent. Viser månedene som brukes i beregning etter §14-7, tredje ledd
  */
-const BesteMånederVisningPanel: FunctionComponent<BesteMånederProps> = ({
+const BesteManederVisningPanel: FunctionComponent<BesteMånederProps> = ({
   besteMåneder,
   arbeidsgiverOpplysninger,
   getKodeverkNavn,
@@ -212,4 +212,4 @@ const BesteMånederVisningPanel: FunctionComponent<BesteMånederProps> = ({
   </div>
 );
 
-export default BesteMånederVisningPanel;
+export default BesteManederVisningPanel;
