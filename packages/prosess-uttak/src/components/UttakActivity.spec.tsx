@@ -60,7 +60,10 @@ describe('<UttakActivity>', () => {
       validate={sinon.spy()}
       warn={sinon.spy()}
       onSubmit={sinon.spy()}
-      avslagAarsakKoder={[{ kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK' }]}
+      avslagAarsakKoder={[
+        {
+          kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [],
+        }]}
       innvilgelseAarsakKoder={[]}
       graderingAvslagAarsakKoder={[]}
       starttidspunktForeldrepenger=""
@@ -76,6 +79,7 @@ describe('<UttakActivity>', () => {
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
       arbeidsgiverOpplysningerPerId={{}}
+      kreverSammenhengendeUttak
     />);
 
     const fieldArray = wrapper.find('FieldArray');
@@ -105,7 +109,10 @@ describe('<UttakActivity>', () => {
       validate={sinon.spy()}
       warn={sinon.spy()}
       onSubmit={sinon.spy()}
-      avslagAarsakKoder={[{ kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK' }]}
+      avslagAarsakKoder={[
+        {
+          kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [],
+        }]}
       innvilgelseAarsakKoder={[]}
       graderingAvslagAarsakKoder={[]}
       starttidspunktForeldrepenger=""
@@ -121,6 +128,7 @@ describe('<UttakActivity>', () => {
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
       arbeidsgiverOpplysningerPerId={{}}
+      kreverSammenhengendeUttak
     />);
 
     const row = wrapper.find('Row');
@@ -144,7 +152,10 @@ describe('<UttakActivity>', () => {
       validate={sinon.spy()}
       warn={sinon.spy()}
       onSubmit={sinon.spy()}
-      avslagAarsakKoder={[{ kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK' }]}
+      avslagAarsakKoder={[
+        {
+          kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [],
+        }]}
       innvilgelseAarsakKoder={[]}
       graderingAvslagAarsakKoder={[]}
       starttidspunktForeldrepenger=""
@@ -160,6 +171,7 @@ describe('<UttakActivity>', () => {
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
       arbeidsgiverOpplysningerPerId={{}}
+      kreverSammenhengendeUttak
     />);
 
     const fieldArray = wrapper.find('FieldArray');
@@ -190,7 +202,10 @@ describe('<UttakActivity>', () => {
       warn={sinon.spy()}
       onSubmit={sinon.spy()}
       avslagAarsakKoder={[]}
-      innvilgelseAarsakKoder={[{ kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK' }]}
+      innvilgelseAarsakKoder={[
+        {
+          kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [],
+        }]}
       graderingAvslagAarsakKoder={[]}
       starttidspunktForeldrepenger=""
       harSoktOmFlerbarnsdager={false}
@@ -205,6 +220,7 @@ describe('<UttakActivity>', () => {
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
       arbeidsgiverOpplysningerPerId={{}}
+      kreverSammenhengendeUttak
     />);
 
     const fieldArray = wrapper.find('FieldArray');
@@ -234,7 +250,10 @@ describe('<UttakActivity>', () => {
       validate={sinon.spy()}
       warn={sinon.spy()}
       onSubmit={sinon.spy()}
-      avslagAarsakKoder={[{ kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK' }]}
+      avslagAarsakKoder={[
+        {
+          kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [],
+        }]}
       innvilgelseAarsakKoder={[]}
       graderingAvslagAarsakKoder={[]}
       starttidspunktForeldrepenger=""
@@ -250,6 +269,7 @@ describe('<UttakActivity>', () => {
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
       arbeidsgiverOpplysningerPerId={{}}
+      kreverSammenhengendeUttak
     />);
 
     const fieldArray = wrapper.find('FieldArray');

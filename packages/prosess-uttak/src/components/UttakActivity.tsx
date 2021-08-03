@@ -71,18 +71,23 @@ type ArsakKodeverk = {
   gyldigTom?: string;
   uttakTyper?: string[];
   valgbarForKonto?: string[];
+  gyldigForLovendringer: string[];
 } & KodeverkMedNavn;
 
 const mapAarsak = (
   innvilgelseAarsakKoder: ArsakKodeverk[],
   starttidspunktForeldrepenger: string,
+  kreverSammenhengendeUttak: boolean,
   utsettelseType?: Kodeverk,
   periodeType?: Kodeverk,
   skalFiltrere?: boolean,
 ): ReactElement[] => {
   innvilgelseAarsakKoder.sort(sortAlphabetically);
-  let filteredNyKodeArray = innvilgelseAarsakKoder.filter((kodeItem) => kodeItem.gyldigTom >= starttidspunktForeldrepenger
-    && kodeItem.gyldigFom <= starttidspunktForeldrepenger);
+  let filteredNyKodeArray = innvilgelseAarsakKoder
+    .filter((kodeItem) => kodeItem.gyldigTom >= starttidspunktForeldrepenger && kodeItem.gyldigFom <= starttidspunktForeldrepenger)
+    .filter((kodeItem) => (kreverSammenhengendeUttak
+      ? kodeItem.gyldigForLovendringer.includes('KREVER_SAMMENHENGENDE_UTTAK')
+      : kodeItem.gyldigForLovendringer.includes('FRITT_UTTAK')));
 
   if (!skalFiltrere) {
     return filteredNyKodeArray
@@ -134,6 +139,7 @@ interface PureOwnProps {
   alleKodeverk: AlleKodeverk;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  kreverSammenhengendeUttak: boolean;
 }
 
 interface MappedOwnProps {
@@ -177,6 +183,7 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
   hasValidationError,
   currentlySelectedStønadskonto,
   arbeidsgiverOpplysningerPerId,
+  kreverSammenhengendeUttak,
   ...formProps
 }) => (
   <div>
@@ -238,6 +245,7 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
                                   mapAarsak(
                                     innvilgelseAarsakKoder,
                                     starttidspunktForeldrepenger,
+                                    kreverSammenhengendeUttak,
                                     selectedItemData.utsettelseType,
                                     currentlySelectedStønadskonto || selectedItemData.periodeType,
                                     selectedItemData.aktiviteter.length === 1,
@@ -256,6 +264,7 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
                                   mapAarsak(
                                     avslagAarsakKoder,
                                     starttidspunktForeldrepenger,
+                                    kreverSammenhengendeUttak,
                                     selectedItemData.utsettelseType,
                                     currentlySelectedStønadskonto || selectedItemData.periodeType,
                                     selectedItemData.aktiviteter.length === 1,
@@ -280,7 +289,7 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
                                 {graderingInnvilget === false && (
                                   <SelectField
                                     name="graderingAvslagAarsak"
-                                    selectValues={mapAarsak(graderingAvslagAarsakKoder, starttidspunktForeldrepenger)}
+                                    selectValues={mapAarsak(graderingAvslagAarsakKoder, starttidspunktForeldrepenger, kreverSammenhengendeUttak)}
                                     validate={[required, notDash]}
                                     label={{ id: 'UttakActivity.GraderingAvslagAarsaker' }}
                                     readOnly={readOnly}

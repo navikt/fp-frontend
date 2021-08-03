@@ -64,6 +64,7 @@ const ENDEPUNKTER_PANEL_DATA = [
   FpBehandlingApiKeys.UTTAK_STONADSKONTOER,
   FpBehandlingApiKeys.SOKNAD,
   FpBehandlingApiKeys.YTELSEFORDELING,
+  FpBehandlingApiKeys.KREVER_SAMMENHENGENDE_UTTAK,
 ];
 type EndepunktPanelData = {
   familiehendelse: FamilieHendelseSamling;
@@ -71,6 +72,7 @@ type EndepunktPanelData = {
   uttakStonadskontoer: UttakStonadskontoer;
   soknad: Soknad;
   ytelsefordeling: Ytelsefordeling;
+  kreverSammenhengendeUttak: { kreverSammenhengendeUttak: boolean };
 }
 
 interface OwnProps {

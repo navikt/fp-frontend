@@ -27,6 +27,7 @@ interface OwnProps {
     perioder: any;
   }) => Promise<any>;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  kreverSammenhengendeUttak: { kreverSammenhengendeUttak: boolean };
 }
 
 const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
@@ -49,6 +50,7 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
   arbeidsgiverOpplysningerPerId,
   formData,
   setFormData,
+  kreverSammenhengendeUttak,
 }) => (
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="UttakProsessIndex" formData={formData} setFormData={setFormData}>
@@ -75,6 +77,7 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
         apCodes={aksjonspunkter.map((a) => a.definisjon.kode)}
         isApOpen={isAksjonspunktOpen}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        kreverSammenhengendeUttak={kreverSammenhengendeUttak.kreverSammenhengendeUttak}
       />
     </ReduxWrapper>
   </RawIntlProvider>
