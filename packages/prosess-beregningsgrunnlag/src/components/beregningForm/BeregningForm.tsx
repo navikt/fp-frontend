@@ -38,7 +38,7 @@ import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less'
 import DekningsgradTransformedValues from '../../types/DekningsgradAksjonspunktTsType';
 import BeregningsgrunnlagValues from '../../types/BeregningsgrunnlagAksjonspunktTsType';
 import { ATFLTidsbegrensetValues, ATFLValues } from '../../types/ATFLAksjonspunktTsType';
-import { VurderOgFastsettValues } from '../../types/NæringAksjonspunktTsType';
+import { VurderOgFastsettValues } from '../../types/NaringAksjonspunktTsType';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 import AksjonspunktTittel from '../fellesPaneler/AksjonspunktTittel';
 
