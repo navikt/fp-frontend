@@ -4,7 +4,7 @@ import {
   ATFLTidsbegrensetValues,
   FrilansInntektValues,
 } from './ATFLAksjonspunktTsType';
-import { NyIArbeidslivetValues, VurderOgFastsettValues } from './NæringAksjonspunktTsType';
+import { NyIArbeidslivetValues, VurderOgFastsettValues } from './NaringAksjonspunktTsType';
 import { DekningsgradValues } from './DekningsgradAksjonspunktTsType';
 
 type BeregningsgrunnlagValues = ATFLDekningsgradBegrunnelseValues
