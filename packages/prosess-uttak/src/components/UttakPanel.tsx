@@ -107,6 +107,7 @@ interface PureOwnProps {
   apCodes: string[];
   isApOpen: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  kreverSammenhengendeUttak: boolean;
 }
 
 interface MappedOwnProps {
@@ -136,6 +137,7 @@ export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & W
   isApOpen,
   intl,
   arbeidsgiverOpplysningerPerId,
+  kreverSammenhengendeUttak,
   ...formProps
 }) => (
   <>
@@ -181,6 +183,7 @@ export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & W
           omsorgsovertakelseDato={soknad.omsorgsovertakelseDato}
           tempUpdateStonadskontoer={tempUpdateStonadskontoer}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          kreverSammenhengendeUttak={kreverSammenhengendeUttak}
         />
       </form>
     )}

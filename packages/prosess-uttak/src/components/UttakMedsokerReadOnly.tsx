@@ -21,6 +21,7 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  kreverSammenhengendeUttak: boolean;
 }
 
 const UttakMedsokerReadOnly: FunctionComponent<OwnProps> = ({
@@ -34,6 +35,7 @@ const UttakMedsokerReadOnly: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   behandlingsresultat,
   arbeidsgiverOpplysningerPerId,
+  kreverSammenhengendeUttak,
 }) => {
   const intl = useIntl();
   return (
@@ -61,6 +63,7 @@ const UttakMedsokerReadOnly: FunctionComponent<OwnProps> = ({
         alleKodeverk={alleKodeverk}
         behandlingsresultat={behandlingsresultat}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        kreverSammenhengendeUttak={kreverSammenhengendeUttak}
       />
     </TimeLineDataContainer>
   );

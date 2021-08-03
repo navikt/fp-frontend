@@ -143,6 +143,7 @@ describe('<UttakProsessIndex>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       alleMerknaderFraBeslutter={{}}
       setFormData={() => undefined}
+      kreverSammenhengendeUttak={{ kreverSammenhengendeUttak: true }}
     />);
     expect(wrapper.find(UttakPanel)).toHaveLength(1);
   });

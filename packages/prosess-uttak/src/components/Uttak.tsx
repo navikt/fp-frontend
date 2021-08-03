@@ -126,6 +126,7 @@ interface PureOwnProps {
     behandlingUuid: string;
     perioder: any;
   }) => Promise<any>;
+  kreverSammenhengendeUttak: boolean;
 }
 
 interface MappedOwnProps {
@@ -447,6 +448,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
       alleKodeverk,
       behandlingsresultat,
       arbeidsgiverOpplysningerPerId,
+      kreverSammenhengendeUttak,
     } = this.props;
     const { selectedItem, stonadskonto, isButtonDisabled } = this.state;
 
@@ -525,6 +527,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
                         alleKodeverk={alleKodeverk}
                         behandlingsresultat={behandlingsresultat}
                         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+                        kreverSammenhengendeUttak={kreverSammenhengendeUttak}
                       />
                     )}
                   {!selectedItem.hovedsoker
@@ -540,6 +543,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
                         alleKodeverk={alleKodeverk}
                         behandlingsresultat={behandlingsresultat}
                         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+                        kreverSammenhengendeUttak={kreverSammenhengendeUttak}
                       />
                     )}
                 </>

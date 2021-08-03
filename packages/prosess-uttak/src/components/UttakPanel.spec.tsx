@@ -162,6 +162,7 @@ describe('<UttakPanel>', () => {
       readOnlySubmitButton={false}
       apCodes={[]}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      kreverSammenhengendeUttak
     />, messages);
     const uttak = wrapper.find(Uttak);
     expect(uttak).toHaveLength(1);
@@ -214,6 +215,7 @@ describe('<UttakPanel>', () => {
       readOnlySubmitButton={false}
       apCodes={[]}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      kreverSammenhengendeUttak
     />, messages);
     const uttak = wrapper.find(Uttak);
     expect(uttak).toHaveLength(1);
