@@ -24,7 +24,7 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
-import VurderVarigEndretTransformed, { VurderOgFastsettValues } from '../../types/NæringAksjonspunktTsType';
+import VurderVarigEndretTransformed, { VurderOgFastsettValues } from '../../types/NaringAksjonspunktTsType';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);

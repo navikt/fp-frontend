@@ -7,7 +7,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
 import KontrollerBesteberegningAP
   from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/KontrollerBesteberegningAP';
-import BesteMånederVisningPanel from './BesteMånederVisningPanel';
+import BesteMånederVisningPanel from './BesteManederVisningPanel';
 import BesteberegningResultatGrunnlagPanel from './BesteberegningResultatGrunnlagPanel';
 import KontrollerBesteberegningPanel from './KontrollerBesteberegningPanel';
 

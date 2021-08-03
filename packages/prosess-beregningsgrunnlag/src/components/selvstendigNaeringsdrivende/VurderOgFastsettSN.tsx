@@ -13,7 +13,7 @@ import VurderVarigEndretTransformed, {
   NyIArbeidslivetruttoNæringTransformed,
   NyIArbeidslivetValues,
   VurderOgFastsettValues,
-} from '../../types/NæringAksjonspunktTsType';
+} from '../../types/NaringAksjonspunktTsType';
 
 const FORM_NAME = 'BeregningForm';
 const {

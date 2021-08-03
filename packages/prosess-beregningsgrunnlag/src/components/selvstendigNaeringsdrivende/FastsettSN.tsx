@@ -24,7 +24,7 @@ import styles from '../fellesPaneler/aksjonspunktBehandler.less';
 import {
   NyIArbeidslivetruttoNæringTransformed,
   NyIArbeidslivetValues,
-} from '../../types/NæringAksjonspunktTsType';
+} from '../../types/NaringAksjonspunktTsType';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
