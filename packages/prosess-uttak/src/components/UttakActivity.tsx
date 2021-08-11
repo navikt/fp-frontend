@@ -75,19 +75,24 @@ type ArsakKodeverk = {
 } & KodeverkMedNavn;
 
 const mapAarsak = (
-  innvilgelseAarsakKoder: ArsakKodeverk[],
+  årsakKoder: ArsakKodeverk[],
   starttidspunktForeldrepenger: string,
   kreverSammenhengendeUttak: boolean,
   utsettelseType?: Kodeverk,
   periodeType?: Kodeverk,
   skalFiltrere?: boolean,
 ): ReactElement[] => {
-  innvilgelseAarsakKoder.sort(sortAlphabetically);
-  let filteredNyKodeArray = innvilgelseAarsakKoder
+  årsakKoder.sort(sortAlphabetically);
+  let filteredNyKodeArray = årsakKoder
     .filter((kodeItem) => kodeItem.gyldigTom >= starttidspunktForeldrepenger && kodeItem.gyldigFom <= starttidspunktForeldrepenger)
-    .filter((kodeItem) => (kreverSammenhengendeUttak
-      ? kodeItem.gyldigForLovendringer.includes('KREVER_SAMMENHENGENDE_UTTAK')
-      : kodeItem.gyldigForLovendringer.includes('FRITT_UTTAK')));
+    .filter((kodeItem) => {
+      if (kodeItem.gyldigForLovendringer === undefined) {
+        return true;
+      }
+      return kreverSammenhengendeUttak
+        ? kodeItem.gyldigForLovendringer.includes('KREVER_SAMMENHENGENDE_UTTAK')
+        : kodeItem.gyldigForLovendringer.includes('FRITT_UTTAK');
+    });
 
   if (!skalFiltrere) {
     return filteredNyKodeArray
