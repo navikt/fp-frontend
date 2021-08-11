@@ -44,7 +44,7 @@ const lagPGIVerdier = () => ([
     årstall: 2015,
   },
 ]);
-const lagAPMedKode = (kode: string): DeepWriteable<Aksjonspunkt> => ({
+const lagAPMedKode = (kode: string, begrunnelse?: string): DeepWriteable<Aksjonspunkt> => ({
   definisjon: {
     kode,
     kodeverk: 'test',
@@ -53,7 +53,7 @@ const lagAPMedKode = (kode: string): DeepWriteable<Aksjonspunkt> => ({
     kode: 'OPPR',
     kodeverk: 'test',
   },
-  begrunnelse: 'Dette er en begrunnelse',
+  begrunnelse,
   kanLoses: true,
   erAktivt: true,
   endretAv: 'B123456',
@@ -297,6 +297,37 @@ const lagBG = (
 export default {
   title: 'prosess/prosess-beregningsgrunnlag',
   component: BeregningsgrunnlagProsessIndex,
+};
+
+export const justerDekningsgradAP = () => {
+  lagKunATInntektsgrunnlag();
+  const andeler = [lagAndel('AT', 300000, false, false)];
+  andeler[0].skalFastsetteGrunnlag = true;
+  const perioder = [lagStandardPeriode(andeler)];
+  const statuser = [lagStatus('AT')];
+  const sammenligningsgrunnlagPrStatus = [
+    lagSammenligningsGrunnlag(sammenligningType.ATFLSN, 465000, 35.48, -165000)];
+  const bg = lagBG(perioder, statuser, sammenligningsgrunnlagPrStatus);
+  bg.skjaeringstidspunktBeregning = '2021-01-01';
+  const apAvvik = lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS);
+  const apDekning = lagAPMedKode(aksjonspunktCodes.VURDER_DEKNINGSGRAD);
+  return (
+    <BeregningsgrunnlagProsessIndex
+      behandling={behandling}
+      beregningsgrunnlag={bg as Beregningsgrunnlag}
+      aksjonspunkter={[apDekning, apAvvik]}
+      submitCallback={action('button-click') as () => Promise<any>}
+      isReadOnly={false}
+      readOnlySubmitButton={false}
+      isAksjonspunktOpen
+      vilkar={vilkarMedUtfall(vilkarUtfallType.OPPFYLT)}
+      alleKodeverk={alleKodeverk as any}
+      status=""
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysninger}
+      alleMerknaderFraBeslutter={{}}
+      setFormData={() => undefined}
+    />
+  );
 };
 
 export const arbeidstakerUtenAvvik = () => {
@@ -616,17 +647,17 @@ export const naturalYtelse = () => {
   const andel3MedFrafall = lagAndel('AT', 750000, undefined, false, 755000);
   const nyArbeidsgiverOpplysningerPerId = {
     ...arbeidsgiverOpplysninger,
-    987654321: {
+    9109090881: {
       identifikator: '9109090881',
       navn: 'BEDRIFT AS 1',
       erPrivatPerson: false,
     },
-    9478541223: {
+    9109090882: {
       identifikator: '9109090882',
       navn: 'BEDRIFT AS 2',
       erPrivatPerson: false,
     },
-    93178545: {
+    9109090883: {
       identifikator: '9109090883',
       navn: 'BEDRIFT AS 3',
       erPrivatPerson: false,
