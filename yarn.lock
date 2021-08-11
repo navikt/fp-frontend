@@ -2422,6 +2422,15 @@
     "@formatjs/ecma402-abstract" "1.9.6"
     tslib "^2.1.0"
 
+"@formatjs/intl-datetimeformat@^4.2.0":
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-datetimeformat/-/intl-datetimeformat-4.2.1.tgz#a8549ecab76692ba7ad82e0d9c31fbe2909b70ec"
+  integrity sha512-YthmYVZC07oRLW7jtDT8PBahhjBS8Kh4j8Z+Sn1depAVFRMbZ1hgGqY74Bk5GEFQ8j5uFiH+/+NpSCm/netBOw==
+  dependencies:
+    "@formatjs/ecma402-abstract" "1.9.6"
+    "@formatjs/intl-localematcher" "0.2.19"
+    tslib "^2.1.0"
+
 "@formatjs/intl-displaynames@5.2.1":
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/@formatjs/intl-displaynames/-/intl-displaynames-5.2.1.tgz#b74131187dec8efb0da383889f0d12b81c19d5ee"
@@ -2445,6 +2454,14 @@
   resolved "https://registry.yarnpkg.com/@formatjs/intl-localematcher/-/intl-localematcher-0.2.19.tgz#a4ade690b122cc719b669808063e2a04414622f7"
   integrity sha512-eyrTiqciBSBfwx6PyyVJCEhXeAOXVJWWlvyR0Lx7OkTikWIrqhl8VIifyq3wwBiCMPOyCDN1ccik9VBdGcDiHA==
   dependencies:
+    tslib "^2.1.0"
+
+"@formatjs/intl-numberformat@^7.2.0":
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-numberformat/-/intl-numberformat-7.2.1.tgz#dda451dc183b67573571c92855440b9d96a3e9a4"
+  integrity sha512-kaWtKGbteBsh1/BL3WvBEeIAvcT3ReZpFDgZckYNQoXMS3rebgL52EoxmJvstPGFB6esMJSuWGGnINChPL9ljw==
+  dependencies:
+    "@formatjs/ecma402-abstract" "1.9.6"
     tslib "^2.1.0"
 
 "@formatjs/intl@1.13.5":
