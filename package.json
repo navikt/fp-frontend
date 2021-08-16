@@ -107,7 +107,7 @@
     "jest": "^27.0.6",
     "jest-runner-eslint": "^0.10.1",
     "jest-transform-stub": "^2.0.0",
-    "jsdom": "^16.7.0",
+    "jsdom": "^17.0.0",
     "lerna": "^4.0.0",
     "less": "^4.1.1",
     "less-loader": "^10.0.1",
