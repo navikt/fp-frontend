@@ -26,6 +26,7 @@ export type ArbeidsforholdFodselOgTilrettelegging = Readonly<{
   internArbeidsforholdReferanse?: string;
   eksternArbeidsforholdReferanse?: string;
   skalBrukes: boolean;
+  kanTilrettelegges: boolean;
   begrunnelse?: string;
   velferdspermisjoner: Permisjon[];
 }>
