@@ -30,7 +30,6 @@ const svangerskapspengerTilrettelegging: Partial<FodselOgTilrettelegging> = {
       kodeverk: 'UTTAK_ARBEID_TYPE',
     },
     skalBrukes: true,
-    kanTilrettelegges: true,
     velferdspermisjoner: [],
   }],
 };

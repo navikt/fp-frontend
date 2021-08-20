@@ -4,7 +4,7 @@ import { InjectedFormProps, reduxForm, Validator } from 'redux-form';
 import moment from 'moment';
 import { FormattedMessage, IntlShape } from 'react-intl';
 import { createSelector } from 'reselect';
-import { Element, Undertittel } from 'nav-frontend-typografi';
+import { Normaltekst, Element } from 'nav-frontend-typografi';
 import { AlertStripeInfo, AlertStripeFeil } from 'nav-frontend-alertstriper';
 
 import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
@@ -29,7 +29,6 @@ import { finnPermisjonFieldName, finnSkalTaHensynTilPermisjon } from './tilrette
 import { finnUtbetalingsgradForTilrettelegging } from './tilrettelegging/TilretteleggingFieldArray';
 
 import styles from './fodselOgTilretteleggingFaktaForm.less';
-import UtilgjengeligeArbeidsforhold from './tilrettelegging/UtilgjengeligeArbeidsforhold';
 
 const FODSEL_TILRETTELEGGING_FORM = 'FodselOgTilretteleggingForm';
 const maxLength1500 = maxLength(1500);
@@ -126,7 +125,6 @@ export const FodselOgTilretteleggingFaktaForm: FunctionComponent<PureOwnProps & 
 }) => {
   const visInfoAlert = useMemo(() => skalViseInfoAlert(iayArbeidsforhold, arbeidsforhold), [behandlingVersjon]);
   const [harOverstyrtUtbetalingsgrad, setOverstyrtUtbetalingsgrad] = useState(false);
-  const arbeidsforholdSomIkkeKanTilrettelegges = arbeidsforhold.filter((a) => !a.kanTilrettelegges);
 
   return (
     <form onSubmit={formProps.handleSubmit}>
@@ -155,9 +153,9 @@ export const FodselOgTilretteleggingFaktaForm: FunctionComponent<PureOwnProps & 
         <FlexRow>
           <FlexColumn>
             <VerticalSpacer eightPx />
-            <Undertittel className={styles.arbeidsforholdTittel}>
+            <Normaltekst className={styles.arbeidsforholdTittel}>
               <FormattedMessage id="FodselOgTilretteleggingFaktaForm.ArbeidsforholdDetErSoktTilretteleggingFor" />
-            </Undertittel>
+            </Normaltekst>
           </FlexColumn>
         </FlexRow>
         {visInfoAlert && (
@@ -182,7 +180,7 @@ export const FodselOgTilretteleggingFaktaForm: FunctionComponent<PureOwnProps & 
         </FlexRow>
         <FlexRow>
           <FlexColumn>
-            {arbeidsforhold.filter((a) => a.kanTilrettelegges).map((a, index) => {
+            {arbeidsforhold.map((a, index) => {
               const alleIafAf = iayArbeidsforhold.filter((iaya) => iaya.arbeidsgiverReferanse === a.arbeidsgiverReferanse);
               const af = finnArbeidsforhold(alleIafAf, a.internArbeidsforholdReferanse);
               const formSectionName = utledFormSectionName(a, arbeidsgiverOpplysningerPerId, uttakArbeidTyper);
@@ -213,10 +211,6 @@ export const FodselOgTilretteleggingFaktaForm: FunctionComponent<PureOwnProps & 
           </FlexColumn>
         </FlexRow>
         <VerticalSpacer sixteenPx />
-        <UtilgjengeligeArbeidsforhold
-          arbeidsgiverOpplysningerPrId={arbeidsgiverOpplysningerPerId}
-          arbeidsforholdSomIkkeKanTilrettelegges={arbeidsforholdSomIkkeKanTilrettelegges}
-        />
         <FlexRow>
           <FlexColumn className={styles.halvBredde}>
             <VerticalSpacer eightPx />
@@ -305,7 +299,6 @@ const transformValues = (
       .reduce((sum, prosent) => sum + prosent, 0);
     return {
       ...value,
-      skalBrukes: a.skalBrukes && a.kanTilrettelegges,
       tilretteleggingDatoer: value.tilretteleggingDatoer.map((t) => ({
         fom: t.fom,
         type: t.type,

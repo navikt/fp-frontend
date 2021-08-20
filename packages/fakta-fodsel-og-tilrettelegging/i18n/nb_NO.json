@@ -4,16 +4,12 @@
   "FodselOgTilretteleggingFaktaForm.Fodselsdato": "Fødselsdato",
   "FodselOgTilretteleggingFaktaForm.BegrunnEndringene": "Begrunn endringene",
   "FodselOgTilretteleggingFaktaForm.ArbeidsforholdDetErSoktTilretteleggingFor": "Arbeidsforhold det er søkt tilrettelegging for",
-
-  "FodselOgTilretteleggingFaktaForm.ArbeidsforholdDetErSoktTilretteleggingForKanIkkeInnvilges": "Arbeidsforhold det er søkt tilrettelegging for, men det ikke kan beregnes svangerskapspenger for",
-  "FodselOgTilretteleggingFaktaForm.SoktFraDato": "Det er søkt tilrettelegging fra {dato}",
-
   "FodselOgTilretteleggingFaktaForm.MinstEnTilretteleggingMåBrukes": "Minst en tilrettelegging må brukes.",
   "FodselOgTilretteleggingFaktaForm.DuplikateDatoer": "Flere like datoer.",
   "FodselOgTilretteleggingFaktaForm.UndersokNarmere": "Det er søkt for et org.nr. eller fødselsnummer der søker ikke var ansatt da behovet for tilrettelegging oppsto. Vurder om du skal kontakte arbeidsgiver eller søker for avklaring. Hvis du innvilger behandlingen nå, vil bruker få 0 kroner utbetalt.",
   "FodselOgTilretteleggingFaktaForm.BegrunnOverstyring": "Begrunn overstyring av utbetalingsgrad",
   "FodselOgTilretteleggingFaktaForm.TilretteleggingTidligereEnn": "Tilrettelegging fra og med må være tidligere enn {dato}",
-
+  
   "TilretteleggingArbeidsforholdSection.DatepickerField.TilretteleggingFra": "Jordmor/lege oppgir at tilrettelegging er nødvendig fra og med",
   "TilretteleggingArbeidsforholdSection.Checkbox.SoekerSkalhaTilrettelegging": "Søker har søkt svangerskapspenger for dette arbeidsforholdet",
   "TilretteleggingArbeidsforholdSection.OppgitteNoedvendigeTilrettelegginger": "Arbeidsgiver oppgir nødvendig tilrettelegging",

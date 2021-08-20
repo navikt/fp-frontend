@@ -16,7 +16,6 @@ export const tilrettelegging = {
     kopiertFraTidligereBehandling: true,
     mottattTidspunkt: '2020-03-11T16:21:48.532298',
     skalBrukes: true,
-    kanTilrettelegges: true,
     velferdspermisjoner: [{
       permisjonFom: '2020-02-17',
       permisjonTom: '2020-07-12',

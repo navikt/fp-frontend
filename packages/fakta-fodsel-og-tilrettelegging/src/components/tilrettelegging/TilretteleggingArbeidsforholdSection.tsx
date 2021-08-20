@@ -22,6 +22,7 @@ const utledArbeidsforholdTittel = (
   uttakArbeidTyper: KodeverkMedNavn[],
 ): string => {
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse];
+
   let tittel = '';
   if (arbeidsforhold.arbeidsgiverReferanse && arbeidsgiverOpplysninger) {
     tittel = `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.identifikator})`;
@@ -29,6 +30,7 @@ const utledArbeidsforholdTittel = (
     const arbeidType = uttakArbeidTyper.find((type) => type.kode === arbeidsforhold.uttakArbeidType.kode);
     tittel = arbeidType?.navn;
   }
+
   if (arbeidsforhold.eksternArbeidsforholdReferanse) {
     let ref = arbeidsforhold.eksternArbeidsforholdReferanse;
     if (ref.length > 4) {
