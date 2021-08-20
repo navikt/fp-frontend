@@ -14,17 +14,17 @@ if (process.argv.includes('--no-fix')) {
 }
 
 const options = {
-  contentBase: [
-    'packages',
-  ],
-  watchContentBase: true,
-  before: function (app, server) {
-    vtpLogin(app);
-    sentryMock(app);
-    fakeError(app);
+  static: {
+    directory: 'packages',
+    watch: true,
+  },
+  onBeforeSetupMiddleware: function (devServer) {
+    vtpLogin(devServer.app);
+    sentryMock(devServer.app);
+    fakeError(devServer.app);
     if (process.argv.includes('--feature-toggles')) {
       console.warn('Mocking feature toggles');
-      featureToggles(app);
+      featureToggles(devServer.app);
     }
   },
   proxy: {
@@ -55,23 +55,37 @@ const options = {
       },
     },
   },
-  publicPath: config.output.publicPath,
-  hot: true,
-  noInfo: true,
-  historyApiFallback: true,
-  stats: {
-    children: false,
-    colors: true,
+  devMiddleware: {
+    publicPath: config.output.publicPath,
+    stats: {
+      children: false,
+      colors: true,
+    },
   },
+  hot: true,
+  historyApiFallback: true,
+  port: 9000,
 };
 
 const wds = new WebpackDevServer(webpack(config), options);
 
-wds.listen(9000, 'localhost', function (err) {
+(async () => {
+  try {
+    await wds.start();
+  } catch(error) {
+    return console.log(err); // NOSONAR
+  }
+
+  console.log('Listening at http://localhost:9000/');
+
+  console.log('If running agains VTP you can login or change user here: http://localhost:9000/login-with-vtp');
+})();
+
+/*wds.listen(9000, 'localhost', function (err) {
   if (err) {
     return console.log(err); // NOSONAR
   }
   console.log('Listening at http://localhost:9000/');
 
   console.log('If running agains VTP you can login or change user here: http://localhost:9000/login-with-vtp');
-});
+});*/
