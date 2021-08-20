@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import classNames from 'classnames';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Panel from 'nav-frontend-paneler';
@@ -23,11 +23,10 @@ const tilbakekrevingÅrsakTyperKlage = [
 
 const erTilbakekrevingÅrsakKlage = (årsak?: Kodeverk): boolean => !!årsak && tilbakekrevingÅrsakTyperKlage.includes(årsak.kode);
 
-const renderChevron = (chevron: string, messageId: string): ReactElement => (
-  <FormattedMessage id={messageId}>
-    {(altText: string) => <Image src={chevron} alt={altText} />}
-  </FormattedMessage>
-);
+const renderChevron = (chevron: string, messageId: string): ReactElement => {
+  const intl = useIntl();
+  return <Image src={chevron} alt={intl.formatMessage({ id: messageId })} tooltip={intl.formatMessage({ id: messageId })} alignTooltipLeft />;
+};
 
 interface OwnProps {
   withChevronDown?: boolean;
