@@ -305,7 +305,7 @@ const transformValues = (
       .reduce((sum, prosent) => sum + prosent, 0);
     return {
       ...value,
-      skalBrukes: a.skalBrukes && a.kanTilrettelegges,
+      skalBrukes: value.skalBrukes && value.kanTilrettelegges,
       tilretteleggingDatoer: value.tilretteleggingDatoer.map((t) => ({
         fom: t.fom,
         type: t.type,
