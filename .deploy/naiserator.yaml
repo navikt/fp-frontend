@@ -45,6 +45,8 @@ spec:
       value: fp-frontend
     - name: REDIS_HOST
       value: "fpsak-redis.teamforeldrepenger.svc.nais.local"
+    - name: REDIS_PORT
+      value: "80"
     - name: APP_URL_FPSAK
       value: "http://fpsak"
   accessPolicy:
