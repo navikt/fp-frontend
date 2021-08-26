@@ -4,25 +4,63 @@ metadata:
   labels:
     team: teamforeldrepenger
   name: fpsak-redis
-  namespace: default
+  namespace: teamforeldrepenger
 spec:
-  image: redis:4.0-alpine
+  image: bitnami/redis:latest
   port: 6379
   sessionAffinity: ClientIP
   team: teamforeldrepenger
   replicas:
     min: 1
     max: 1
-    cpuThresholdPercentage: 50
-  leaderElection: false
-  preStopHookPath: ""
   resources:
     limits:
-      cpu: 200m
-      memory: 512Mi
+      cpu: 250m
+      memory: 1Gi
+    requests:
+      cpu: 250m
+      memory: 1Gi
+  service:
+    port: 6379
+    protocol: redis
+  accessPolicy:
+    inbound:
+      rules:
+        - application: fp-frontend
+        - application: fpsak-redis-exporter
+
+---
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  labels:
+    team: teamforeldrepenger
+  name: fpsak-redis-exporter
+  namespace: teamforeldrepenger
+spec:
+  image: oliver006/redis_exporter:latest
+  port: 9121
+  prometheus:
+    enabled: true
+  replicas:
+    min: 1
+    max: 1
+  resources:
+    limits:
+      cpu: 100m
+      memory: 100Mi
     requests:
       cpu: 100m
-      memory: 256Mi
-  webproxy: false
-  vault:
-    enabled: false
+      memory: 100Mi
+  liveness:
+    path: /health
+  accessPolicy: # for GCP
+    outbound:
+      rules:
+        - application: fpsak-redis
+  env:
+    - name: REDIS_ADDR
+      value: fpsak-redis:6379
+    - name: REDIS_EXPORTER_LOG_FORMAT
+      value: json
+
