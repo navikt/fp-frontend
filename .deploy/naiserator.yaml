@@ -51,4 +51,6 @@ spec:
     outbound:
       rules:
         - application: fpsak-redis
+  envFrom:
+    - secret: redis-password
 
