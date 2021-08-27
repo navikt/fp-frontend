@@ -6,7 +6,7 @@ metadata:
   name: fpsak-redis
   namespace: teamforeldrepenger
 spec:
-  image: redis:6.2.5-alpine
+  image: bitnami/redis:latest
   port: 6379
   replicas:
     min: 1
@@ -21,13 +21,13 @@ spec:
   service:
     port: 6379
     protocol: redis
-  accessPolicy:
-    inbound:
-      rules:
-        - application: fp-frontend
-        - application: fpsak-redis-exporter
   envFrom:
     - secret: redis-password
+#  accessPolicy:
+#    inbound:
+#      rules:
+#        - application: fp-frontend
+#        - application: fpsak-redis-exporter
 
 ---
 apiVersion: "nais.io/v1alpha1"
@@ -54,10 +54,6 @@ spec:
       memory: 100Mi
   liveness:
     path: /health
-  accessPolicy: # for GCP
-    outbound:
-      rules:
-        - application: fpsak-redis
   env:
     - name: REDIS_ADDR
       value: fpsak-redis:6379
@@ -65,4 +61,8 @@ spec:
       value: json
   envFrom:
     - secret: redis-password
+#  accessPolicy: # for GCP
+#    outbound:
+#      rules:
+#        - application: fpsak-redis
 
