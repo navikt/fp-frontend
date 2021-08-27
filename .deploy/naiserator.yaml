@@ -49,10 +49,10 @@ spec:
       value: "80"
     - name: APP_URL_FPSAK
       value: "http://fpsak"
-  accessPolicy:
-    outbound:
-      rules:
-        - application: fpsak-redis
-  envFrom:
-    - secret: redis-password
+#  accessPolicy:
+#    outbound:
+#      rules:
+#        - application: fpsak-redis
+#  envFrom:
+#    - secret: redis-password
 
