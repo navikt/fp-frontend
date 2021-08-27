@@ -254,6 +254,8 @@ export const buildInitialValues = createSelector(
     aksjonspunktKoder: aksjonspunkter.filter((ap) => ap.kanLoses).map((ap) => ap.definisjon.kode),
     overskrift: decodeHtmlEntity(behandling.behandlingsresultat.overskrift),
     brødtekst: decodeHtmlEntity(behandling.behandlingsresultat.fritekstbrev),
+    begrunnelse: behandling.behandlingsresultat?.avslagsarsakFritekst
+      ? decodeHtmlEntity(behandling.behandlingsresultat.avslagsarsakFritekst) : undefined,
   }),
 );
 
