@@ -69,9 +69,6 @@ describe('BeregningsresultatPanel', () => {
     const rows = panel.find('Row');
     expect(rows).toHaveLength(5);
 
-    // eslint-disable-next-line no-console
-    console.log(rows.first().debug());
-
     const andelRow = rows.first();
 
     const andelText = andelRow.find(FormattedMessage).at(0).props().id;
