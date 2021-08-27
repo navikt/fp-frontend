@@ -46,13 +46,13 @@ spec:
     - name: REDIS_HOST
       value: "fpsak-redis.teamforeldrepenger.svc.nais.local"
     - name: REDIS_PORT
-      value: "80"
+      value: "6379"
     - name: APP_URL_FPSAK
       value: "http://fpsak"
-  accessPolicy:
-    outbound:
-      rules:
-        - application: fpsak-redis
   envFrom:
     - secret: redis-password
+#  accessPolicy:
+#    outbound:
+#      rules:
+#        - application: fpsak-redis
 
