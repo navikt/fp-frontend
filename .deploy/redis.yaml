@@ -6,7 +6,7 @@ metadata:
   name: fpsak-redis
   namespace: teamforeldrepenger
 spec:
-  image: bitnami/redis:latest
+  image: redis:6.2.5-alpine
   port: 6379
   replicas:
     min: 1
