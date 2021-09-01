@@ -41,7 +41,7 @@ import { VurderOgFastsettValues } from '../../types/NaringAksjonspunktTsType';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 import AksjonspunktTittel from '../fellesPaneler/AksjonspunktTittel';
 import { DekningsgradAksjonspunktPanelImpl } from '../fellesPaneler/DekningsgradAksjonspunktPanel';
-import { DekningsgradValuesComplete } from '../../types/DekningsgradAksjonspunktTsType';
+import { DekningsgradValues } from '../../types/DekningsgradAksjonspunktTsType';
 
 // ------------------------------------------------------------------------------------------ //
 // Variables
@@ -99,7 +99,7 @@ export const transformValues = (values: BeregningsgrunnlagValues,
   allePerioder: BeregningsgrunnlagPeriodeProp[]) => {
   const aksjonspunkter = [];
   if (harAksjonspunkt(VURDER_DEKNINGSGRAD, gjeldendeAksjonspunkter)) {
-    aksjonspunkter.push(DekningsgradAksjonspunktPanelImpl.transformValues(values as DekningsgradValuesComplete));
+    aksjonspunkter.push(DekningsgradAksjonspunktPanelImpl.transformValues(values as Required<DekningsgradValues>));
   }
   if (harAksjonspunkt(FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS, gjeldendeAksjonspunkter)) {
     return aksjonspunkter.concat(Beregningsgrunnlag.transformATFLValues(values as ATFLValues, relevanteStatuser, alleAndelerIForstePeriode));
