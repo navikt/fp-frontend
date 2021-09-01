@@ -11,7 +11,9 @@ import {
 } from '@fpsak-frontend/utils';
 import { Column, Row } from 'nav-frontend-grid';
 import dekningsgrad from '@fpsak-frontend/kodeverk/src/dekningsgrad';
-import DekningsgradTransformedValues, { DekningsgradValues } from '../../types/DekningsgradAksjonspunktTsType';
+import DekningsgradTransformedValues, {
+  DekningsgradValues,
+} from '../../types/DekningsgradAksjonspunktTsType';
 import styles from './aksjonspunktBehandler.less';
 import { isAksjonspunktOpen } from '../../../../kodeverk/src/aksjonspunktStatus';
 
@@ -23,7 +25,7 @@ const maxLength1500 = maxLength(1500);
 
 interface StaticFunctions {
   buildInitialValues: (beregningsgrunnlag: Beregningsgrunnlag, aksjonspunkter: Aksjonspunkt[]) => DekningsgradValues;
-  transformValues: (values: DekningsgradValues) => DekningsgradTransformedValues
+  transformValues: (values: Required<DekningsgradValues>) => DekningsgradTransformedValues
 }
 
 type OwnProps = {
@@ -57,20 +59,23 @@ export const DekningsgradAksjonspunktPanelImpl: FunctionComponent<OwnProps & Wra
         />
       </Column>
     </Row>
-
   </>
 );
 
 DekningsgradAksjonspunktPanelImpl.buildInitialValues = (beregningsgrunnlag: Beregningsgrunnlag, aksjonspunter: Aksjonspunkt[]): DekningsgradValues => {
   const aksjonspunkt = aksjonspunter && aksjonspunter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.VURDER_DEKNINGSGRAD);
+  const begrunnelse = aksjonspunkt && aksjonspunkt.begrunnelse ? aksjonspunkt.begrunnelse : null;
   const initialDekningsgrad = aksjonspunkt && !isAksjonspunktOpen(aksjonspunkt.status.kode) ? beregningsgrunnlag.dekningsgrad : null;
-  return {
-    [RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN]: initialDekningsgrad,
-    [TEKSTFELTNAVN_BEGRUNN_DEKNINGSGRAD_ENDRING]: aksjonspunkt ? aksjonspunkt.begrunnelse : null,
-  };
+  if (initialDekningsgrad && begrunnelse) {
+    return {
+      [RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN]: initialDekningsgrad,
+      [TEKSTFELTNAVN_BEGRUNN_DEKNINGSGRAD_ENDRING]: begrunnelse,
+    };
+  }
+  return {};
 };
 
-DekningsgradAksjonspunktPanelImpl.transformValues = (values: DekningsgradValues): DekningsgradTransformedValues => ({
+DekningsgradAksjonspunktPanelImpl.transformValues = (values: Required<DekningsgradValues>): DekningsgradTransformedValues => ({
   kode: aksjonspunktCodes.VURDER_DEKNINGSGRAD,
   begrunnelse: values[TEKSTFELTNAVN_BEGRUNN_DEKNINGSGRAD_ENDRING],
   dekningsgrad: values[RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN],
