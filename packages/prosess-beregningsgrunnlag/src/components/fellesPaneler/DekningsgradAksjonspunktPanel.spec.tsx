@@ -11,7 +11,7 @@ import messages from '../../../i18n/nb_NO.json';
 
 const intlMock = getIntlMock(messages);
 
-describe('<SkjeringspunktOgStatusPanel>', () => {
+describe('<DekningsgradAksjonspunktPanel>', () => {
   it('Skal teste at komponenten renderes', () => {
     const wrapper = shallow(<DekningsgradAksjonspunktPanelImpl
       intl={intlMock}
@@ -34,7 +34,7 @@ describe('<SkjeringspunktOgStatusPanel>', () => {
       dekningsgrad: 100,
     } as Beregningsgrunnlag;
     const initialValues = DekningsgradAksjonspunktPanelImpl.buildInitialValues(bg, [ap]);
-    expect(initialValues.dekningsgrad).toBeNull();
+    expect(initialValues.dekningsgrad).toBeUndefined();
   });
 
   it('Skal teste buildInitialValues når aksjonspunkt er løst', () => {

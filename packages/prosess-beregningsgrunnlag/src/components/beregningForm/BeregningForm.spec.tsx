@@ -416,9 +416,7 @@ describe('<BeregningForm>', () => {
     const actualValues = buildInitialValues.resultFunc(beregningsgrunnlag, gjeldendeAksjonspunkter);
     const expectedValues = {
       ATFLVurdering: undefined,
-      begrunnDekningsgradEndring: null,
       undefined: '',
-      dekningsgrad: null,
     };
     expect(actualValues).toEqual(expectedValues);
   });
