@@ -1,6 +1,11 @@
 export type DekningsgradValues = {
-  dekningsgrad?: number;
-  begrunnDekningsgradEndring?: string;
+  dekningsgrad?: number | null;
+  begrunnDekningsgradEndring?: string | null;
+};
+
+export type DekningsgradValuesComplete = {
+  dekningsgrad: number;
+  begrunnDekningsgradEndring: string;
 };
 
 type DekningsgradTransformedValues = {
