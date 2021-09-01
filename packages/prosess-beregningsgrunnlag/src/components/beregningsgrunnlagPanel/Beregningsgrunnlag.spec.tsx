@@ -5,7 +5,7 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 
-import Beregningsgrunnlag, { TEKSTFELTNAVN_BEGRUNN_DEKNINGSGRAD_ENDRING } from './Beregningsgrunnlag';
+import Beregningsgrunnlag from './Beregningsgrunnlag';
 import GrunnlagForAarsinntektPanelAT from '../arbeidstaker/GrunnlagForAarsinntektPanelAT';
 import GrunnlagForAarsinntektPanelFL from '../frilanser/GrunnlagForAarsinntektPanelFL';
 import GrunnlagForAarsinntektPanelSN from '../selvstendigNaeringsdrivende/GrunnlagForAarsinntektPanelSN';
@@ -105,22 +105,6 @@ const atflAksjonspunkt = {
     kodeverk: 'Opprettet',
   },
   begrunnelse: 'begrunnelse arbeidstaker/frilans',
-  vilkarType: null,
-  kanLoses: true,
-};
-const vurderAksjonspunktDekningsgrad = {
-  id: 56,
-  erAktivt: true,
-  definisjon: {
-    kode: aksjonspunktCodes.VURDER_DEKNINGSGRAD,
-    kodeverk: 'Vurder Dekningsgrad',
-  },
-  toTrinnsBehandling: false,
-  status: {
-    kode: 'OPPR',
-    kodeverk: 'Opprettet',
-  },
-  begrunnelse: 'begrunnelse dekningsgrad',
   vilkarType: null,
   kanLoses: true,
 };
@@ -296,15 +280,13 @@ describe('<Beregningsgrunnlag>', () => {
     expect(wrapper.find(MilitaerPanel)).toHaveLength(1);
   });
   it('Skal teste buildInitialValues med ATFL og vurderDekningsgrad aksjonspunkt', () => {
-    const aksjonspunkter = [vurderAksjonspunktDekningsgrad, atflAksjonspunkt];
+    const aksjonspunkter = [atflAksjonspunkt];
     const values = Beregningsgrunnlag.buildInitialValues(aksjonspunkter);
-    expect(values[TEKSTFELTNAVN_BEGRUNN_DEKNINGSGRAD_ENDRING]).toBe('begrunnelse dekningsgrad');
     expect(values.ATFLVurdering).toBe('begrunnelse arbeidstaker/frilans');
   });
   it('Skal teste buildInitialValues uten aksjonspunkter', () => {
     const aksjonspunkter = [];
     const values = Beregningsgrunnlag.buildInitialValues(aksjonspunkter);
-    expect(values[TEKSTFELTNAVN_BEGRUNN_DEKNINGSGRAD_ENDRING]).toBe('');
     expect(values.ATFLVurdering).toBe('');
   });
   it('Skal teste at transformValues gir forventet resultat', () => {
