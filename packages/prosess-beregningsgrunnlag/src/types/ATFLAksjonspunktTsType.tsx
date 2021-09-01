@@ -50,7 +50,6 @@ export type ArbeidstakerFrilansValues = FrilansInntektValues & {
 
 export type ATFLDekningsgradBegrunnelseValues = {
   ATFLVurdering: string;
-  begrunnDekningsgradEndring: string;
 };
 
 export type ArbeidsinntektTransformedValues = {
