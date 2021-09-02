@@ -7,6 +7,7 @@ export {
   isIE11,
   isEdge,
   getRelatedTargetIE11,
+  forhandsvisDokument,
 } from './src/browserUtils';
 export {
   formatCurrencyWithKr,

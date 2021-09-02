@@ -13,20 +13,12 @@ import {
   ProsessDefaultInitPanel, useStandardProsessPanelProps, ProsessPanelMenyData, ProsessPanelInitProps,
 } from '@fpsak-frontend/behandling-felles';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl, forhandsvisDokument } from '@fpsak-frontend/utils';
 
 import messages from '../../i18n/nb_NO.json';
 import { restApiEsHooks, EsBehandlingApiKeys, requestEsApi } from '../data/esBehandlingApi';
 
 const intl = createIntl(messages);
-
-const forhandsvis = (data: any): void => {
-  if (window.navigator.msSaveOrOpenBlob) {
-    window.navigator.msSaveOrOpenBlob(data);
-  } else if (URL.createObjectURL) {
-    window.open(URL.createObjectURL(data));
-  }
-};
 
 const getForhandsvisFptilbakeCallback = (
   forhandsvisTilbakekrevingMelding: (params?: any, keepData?: boolean) => Promise<Behandling | undefined>,
@@ -43,7 +35,7 @@ const getForhandsvisFptilbakeCallback = (
     mottaker,
     brevmalkode,
   };
-  return forhandsvisTilbakekrevingMelding(data).then((response) => forhandsvis(response));
+  return forhandsvisTilbakekrevingMelding(data).then((response) => forhandsvisDokument(response));
 };
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_FEILUTBETALING];

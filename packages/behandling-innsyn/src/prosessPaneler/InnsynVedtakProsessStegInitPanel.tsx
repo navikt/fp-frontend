@@ -8,7 +8,7 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VedtakInnsynProsessIndex, { InnsynBrevData } from '@fpsak-frontend/prosess-vedtak-innsyn';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl, forhandsvisDokument } from '@fpsak-frontend/utils';
 import {
   Aksjonspunkt, Behandling, Dokument, Fagsak, Innsyn,
 } from '@fpsak-frontend/types';
@@ -30,14 +30,6 @@ const getVedtakStatus = (innsyn: Innsyn, aksjonspunkter: Aksjonspunkt[]): string
     ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_OPPFYLT;
 };
 
-const forhandsvis = (data: any) => {
-  if (window.navigator.msSaveOrOpenBlob) {
-    window.navigator.msSaveOrOpenBlob(data);
-  } else if (URL.createObjectURL) {
-    window.open(URL.createObjectURL(data));
-  }
-};
-
 const hentForhandsvisCallback = (
   forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<unknown>,
   fagsak: Fagsak,
@@ -48,7 +40,7 @@ const hentForhandsvisCallback = (
     behandlingUuid: behandling.uuid,
     ytelseType: fagsak.fagsakYtelseType,
   };
-  return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
+  return forhandsvisMelding(brevData).then((response) => forhandsvisDokument(response));
 };
 
 const getLagringSideeffekter = (

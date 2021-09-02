@@ -10,17 +10,10 @@ import {
 import klageVurderingKodeverk from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { useStandardProsessPanelProps, ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
+import { forhandsvisDokument } from '@fpsak-frontend/utils';
 
 import { restApiKlageHooks, KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';
 import KlageBehandlingModal from '../modaler/KlageBehandlingModal';
-
-const forhandsvis = (data: any) => {
-  if (window.navigator.msSaveOrOpenBlob) {
-    window.navigator.msSaveOrOpenBlob(data);
-  } else if (URL.createObjectURL) {
-    window.open(URL.createObjectURL(data));
-  }
-};
 
 const lagForhandsvisCallback = (
   forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<any>,
@@ -34,7 +27,7 @@ const lagForhandsvisCallback = (
     behandlingUuid: behandling.uuid,
     ytelseType: fagsak.fagsakYtelseType,
   };
-  return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
+  return forhandsvisMelding(brevData).then((response) => forhandsvisDokument(response));
 };
 
 const lagKlageCallback = (
