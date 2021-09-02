@@ -4,12 +4,15 @@ import { Input as NavInput, InputProps as NavFrontendInputProps } from 'nav-fron
 
 import renderNavField from './renderNavField';
 import ReadOnlyField, { ReadOnlyFieldProps } from './ReadOnlyField';
+import LabelType from './LabelType';
 
 const renderNavInput = renderNavField(NavInput);
 
 interface InputFieldProps {
   readOnly?: boolean;
   isEdited?: boolean;
+  type?: string;
+  label?: LabelType;
 }
 
 const InputField: FunctionComponent<BaseFieldProps & InputFieldProps & (NavFrontendInputProps | ReadOnlyFieldProps)> = ({

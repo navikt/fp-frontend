@@ -111,9 +111,9 @@ const sjekkOmPeriodeSkalLeggesTil = (bgPerioder: BeregningsgrunnlagPeriodeProp[]
   return aggregatedPeriodList;
 };
 
-const inkludererPeriode = (periode: FordelBeregningsgrunnlagPeriode) => (p: FordelBeregningsgrunnlagPeriode): boolean => moment(p.fom)
+const inkludererPeriode = (periode: FordelBeregningsgrunnlagPeriode) => ({ fom, tom }: FordelBeregningsgrunnlagPeriode): boolean => moment(fom)
   .isSameOrAfter(moment(periode.fom))
-    && (periode.tom === null || moment(p.tom).isSameOrBefore(moment(periode.tom)));
+    && (periode.tom === null || moment(tom).isSameOrBefore(moment(periode.tom)));
 
 export const lagPerioderForSubmit = (values: FordelBeregningsgrunnlagMedAksjonspunktValues,
   index: number,

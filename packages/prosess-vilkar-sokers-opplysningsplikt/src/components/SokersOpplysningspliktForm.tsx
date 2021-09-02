@@ -199,11 +199,6 @@ export const SokersOpplysningspliktFormImpl: FunctionComponent<PureOwnProps & Ma
   </ProsessPanelTemplate>
 );
 
-SokersOpplysningspliktFormImpl.defaultProps = {
-  hasAksjonspunkt: false,
-  manglendeVedlegg: [],
-};
-
 export const getSortedManglendeVedlegg = createSelector([
   (ownProps: PureOwnProps) => ownProps.soknad], (soknad): ManglendeVedleggSoknad[] => (soknad && soknad.manglendeVedlegg
   ? soknad.manglendeVedlegg.slice().sort((mv1) => (mv1.dokumentType.kode === dokumentTypeId.DOKUMENTASJON_AV_TERMIN_ELLER_FØDSEL ? 1 : -1))
@@ -288,6 +283,8 @@ const submitSelector = createSelector(
   ) => submitCallback(transformValues(values, manglendeVedlegg, arbeidsgiverOpplysningerPerId, aksjonspunkter)),
 );
 
+const EMPTY_ARRAY = [];
+
 const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
   const getKodeverknavn = getKodeverknavnFn(initialOwnProps.alleKodeverk, kodeverkTyper);
   const isOpenAksjonspunkt = initialOwnProps.aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
@@ -301,7 +298,7 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
       hasSoknad: harSoknad(ownProps),
       originalErVilkarOk: erVilkarOk,
       dokumentTypeIds: alleKodeverk[kodeverkTyper.DOKUMENT_TYPE_ID],
-      manglendeVedlegg: getSortedManglendeVedlegg(ownProps),
+      manglendeVedlegg: getSortedManglendeVedlegg(ownProps) || EMPTY_ARRAY,
       initialValues: buildInitialValues(ownProps),
       ...formValueSelector(formName)(state, 'hasAksjonspunkt', 'erVilkarOk'),
     };

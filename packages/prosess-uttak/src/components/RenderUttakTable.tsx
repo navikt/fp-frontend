@@ -69,8 +69,10 @@ const utsettelse = (erOppfylt: boolean, utsettelseType: Kodeverk): boolean => {
   return false;
 };
 
-const getNoMoreThanZeroIfRejectedAndNotUtsettelse = (intl: IntlShape) => (value: string, elmnt: FormValues): string | null => (utsettelse(
-  elmnt.erOppfylt, elmnt.utsettelseType,
+const getNoMoreThanZeroIfRejectedAndNotUtsettelse = (intl: IntlShape) => (
+  value: string, { erOppfylt, utsettelseType }: FormValues,
+): string | null => (utsettelse(
+  erOppfylt, utsettelseType,
 ) && parseFloat(value) > 0
   ? intl.formatMessage({ id: 'RenderUttakTable.MerEnNullUtaksprosent' }) : null);
 

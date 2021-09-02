@@ -71,6 +71,7 @@ const config = {
     '@typescript-eslint/no-explicit-any': OFF,
     '@typescript-eslint/ban-ts-comment': OFF,
     '@typescript-eslint/explicit-module-boundary-types': OFF,
+    'react/no-unused-prop-types': OFF,
   },
   overrides: [{
     files: ['*.spec.tsx', '*.spec.ts'],
