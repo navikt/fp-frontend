@@ -1,5 +1,6 @@
 import { Kodeverk } from '@fpsak-frontend/types';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import { forhandsvisDokument } from '@fpsak-frontend/utils';
 
 import { FpsakApiKeys, restApiHooks } from './fpsakApi';
 
@@ -21,14 +22,6 @@ type ForhandsvisData = {
 
 export type ForhandsvisFunksjon = (erHenleggelse: boolean, data: ForhandsvisData) => void;
 
-const forhandsvis = (data: ForhandsvisData) => {
-  if (window.navigator.msSaveOrOpenBlob) {
-    window.navigator.msSaveOrOpenBlob(data);
-  } else if (URL.createObjectURL) {
-    window.open(URL.createObjectURL(data));
-  }
-};
-
 const useVisForhandsvisningAvMelding = (behandlingType?: Kodeverk): ForhandsvisFunksjon => {
   const { startRequest: forhandsvisTilbakekrevingHenleggelse } = restApiHooks.useRestApiRunner(FpsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE);
   const { startRequest: forhandsvisTilbakekreving } = restApiHooks.useRestApiRunner(FpsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING);
@@ -38,11 +31,11 @@ const useVisForhandsvisningAvMelding = (behandlingType?: Kodeverk): ForhandsvisF
 
   return (erHenleggelse: boolean, data: ForhandsvisData): void => {
     if (erTilbakekreving && erHenleggelse) {
-      forhandsvisTilbakekrevingHenleggelse(data).then((response) => forhandsvis(response));
+      forhandsvisTilbakekrevingHenleggelse(data).then((response) => forhandsvisDokument(response));
     } else if (erTilbakekreving) {
-      forhandsvisTilbakekreving(data).then((response) => forhandsvis(response));
+      forhandsvisTilbakekreving(data).then((response) => forhandsvisDokument(response));
     } else {
-      forhandsvisMelding(data).then((response) => forhandsvis(response));
+      forhandsvisMelding(data).then((response) => forhandsvisDokument(response));
     }
   };
 };

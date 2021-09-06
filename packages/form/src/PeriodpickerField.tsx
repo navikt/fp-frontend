@@ -25,6 +25,8 @@ interface PeriodpickerFieldProps {
     before: Date;
     after?: Date;
   };
+  format?: (value) => string;
+  parse?: (value) => string;
 }
 
 const formatError = (otherProps: any, names: string[]): string => {

@@ -12,20 +12,12 @@ import {
 } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps, FatterVedtakStatusModal } from '@fpsak-frontend/behandling-felles';
 import { AdvarselModal } from '@fpsak-frontend/shared-components';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl, forhandsvisDokument } from '@fpsak-frontend/utils';
 
 import messages from '../../i18n/nb_NO.json';
 import { restApiTilbakekrevingHooks, requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';
 
 const intl = createIntl(messages);
-
-const forhandsvis = (data: any) => {
-  if (window.navigator.msSaveOrOpenBlob) {
-    window.navigator.msSaveOrOpenBlob(data);
-  } else if (URL.createObjectURL) {
-    window.open(URL.createObjectURL(data));
-  }
-};
 
 const getOverstyrtStatus = (beregningsresultat?: BeregningsresultatTilbakekreving): string => {
   if (!beregningsresultat) {
@@ -77,7 +69,7 @@ const VedtakTilbakekrevingProsessStegInitPanel: FunctionComponent<OwnProps & Pro
   ...props
 }) => {
   const { startRequest: forhandsvisVedtaksbrev } = restApiTilbakekrevingHooks.useRestApiRunner(TilbakekrevingBehandlingApiKeys.PREVIEW_VEDTAKSBREV);
-  const fetchPreviewVedtaksbrev = useCallback((param) => forhandsvisVedtaksbrev(param).then((response) => forhandsvis(response)), []);
+  const fetchPreviewVedtaksbrev = useCallback((param) => forhandsvisVedtaksbrev(param).then((response) => forhandsvisDokument(response)), []);
 
   const [visApenRevurderingModal, toggleApenRevurderingModal] = useState(harApenRevurdering);
   const lukkApenRevurderingModal = useCallback(() => toggleApenRevurderingModal(false), []);

@@ -12,19 +12,11 @@ module.exports = {
   stories: ['../packages/storybook/stories/**/*.stories.@(js|tsx)'],
   addons: ['@storybook/addon-docs/preset', '@storybook/addon-actions/register'],
   webpackFinal: async (config, { configType }) => {
-    //Fjern default svg-loader
-    config.module.rules = config.module.rules.map( data => {
-      if (/svg\|/.test(String(data.test))) {
-        data.test = /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|cur|ani)(\?.*)?$/;
-      }
-      return data;
-    });
-
     config.devtool = 'eval-cheap-source-map';
 
     // Make whatever fine-grained changes you need
     config.module.rules = config.module.rules.concat({
-      test: /\.(tsx?|ts?|jsx?)$/,
+      test: /\.(tsx?|ts?)$/,
       enforce: 'pre',
       loader: 'eslint-loader',
       options: {
@@ -108,40 +100,6 @@ module.exports = {
           },
         }],
       include: [CSS_DIR, CORE_DIR],
-    }, {
-      test: /\.(svg)$/,
-      issuer: {
-        or: [/\.less?$/],
-      },
-      loader: 'file-loader',
-      options: {
-        esModule: false,
-        name: '[name]_[contenthash].[ext]',
-      },
-      include: [IMAGE_DIR],
-    }, {
-      test: /\.(svg)$/,
-      issuer: {
-        or: [/\.(tsx)?$/],
-      },
-      use: [{
-        loader: '@svgr/webpack',
-      },{
-        loader: 'file-loader',
-        options: {
-          esModule: false,
-          name: '[name]_[contenthash].[ext]',
-        },
-      }],
-      include: [IMAGE_DIR],
-    },{
-      test: /\.(svg)$/,
-      loader: 'file-loader',
-      options: {
-        esModule: false,
-        name: '[name]_[contenthash].[ext]',
-      },
-      include: [CORE_DIR],
     });
 
     config.plugins.push(new MiniCssExtractPlugin({

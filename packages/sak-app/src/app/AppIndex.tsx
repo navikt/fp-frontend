@@ -1,9 +1,9 @@
 import React, {
   FunctionComponent, useState, useEffect, useCallback,
 } from 'react';
-import { withRouter, match } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import moment from 'moment';
-import { Location, History } from 'history';
+import { Location } from 'history';
 import Modal from 'nav-frontend-modal';
 
 import { useRestApiError } from '@fpsak-frontend/rest-api-hooks';
@@ -24,8 +24,6 @@ const EMPTY_ARRAY = [] as any[];
 
 interface OwnProps {
   location: Location;
-  history: History;
-  match: match;
 }
 
 /**

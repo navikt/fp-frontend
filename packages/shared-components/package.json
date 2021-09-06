@@ -15,15 +15,15 @@
     "nav-frontend-core": "6.0.1",
     "nav-frontend-grid": "2.0.1",
     "nav-frontend-grid-style": "1.0.2",
-    "nav-frontend-knapper": "3.0.2",
-    "nav-frontend-knapper-style": "2.0.2",
+    "nav-frontend-knapper": "3.1.1",
+    "nav-frontend-knapper-style": "2.1.1",
     "nav-frontend-lukknapp": "2.0.1",
     "nav-frontend-lukknapp-style": "2.0.1",
     "nav-frontend-modal": "2.0.1",
     "nav-frontend-modal-style": "2.0.1",
     "nav-frontend-paneler": "3.0.1",
     "nav-frontend-paneler-style": "2.0.1",
-    "nav-frontend-skjema": "4.0.1",
+    "nav-frontend-skjema": "4.0.2",
     "nav-frontend-skjema-style": "3.0.1",
     "nav-frontend-spinner": "3.0.1",
     "nav-frontend-spinner-style": "1.0.2",
@@ -31,10 +31,10 @@
     "nav-frontend-typografi-style": "2.0.1",
     "react": "^17.0.2",
     "react-day-picker": "^7.4.10",
-    "react-intl": "^5.20.9",
+    "react-intl": "^5.20.10",
     "react-modal": "3.14.3",
     "redux-form": "^8.3.7",
-    "react-redux": "^7.2.4"
+    "react-redux": "^7.2.5"
   },
   "devDependencies": {
     "@fpsak-frontend/utils-test": "1.0.0"

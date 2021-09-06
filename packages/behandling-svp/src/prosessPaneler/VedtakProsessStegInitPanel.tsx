@@ -16,7 +16,7 @@ import {
   ProsessDefaultInitPanel, IverksetterVedtakStatusModal, FatterVedtakStatusModal, ProsessPanelInitProps, useStandardProsessPanelProps,
 } from '@fpsak-frontend/behandling-felles';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl, forhandsvisDokument } from '@fpsak-frontend/utils';
 
 import messages from '../../i18n/nb_NO.json';
 import { restApiSvpHooks, requestSvpApi, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
@@ -62,14 +62,6 @@ const findStatusForVedtak = (
   return vilkarUtfallType.OPPFYLT;
 };
 
-const forhandsvis = (data: any): void => {
-  if (window.navigator.msSaveOrOpenBlob) {
-    window.navigator.msSaveOrOpenBlob(data);
-  } else if (URL.createObjectURL) {
-    window.open(URL.createObjectURL(data));
-  }
-};
-
 const getForhandsvisCallback = (
   forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<unknown>,
   fagsak: Fagsak,
@@ -81,7 +73,7 @@ const getForhandsvisCallback = (
     ytelseType: fagsak.fagsakYtelseType,
   };
 
-  return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
+  return forhandsvisMelding(brevData).then((response) => forhandsvisDokument(response));
 };
 
 const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [

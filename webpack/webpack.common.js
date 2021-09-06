@@ -57,7 +57,7 @@ const config = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: isDevelopment ? './' : '.',
+              publicPath: isDevelopment ? './' : '',
             },
           }, {
             loader: 'css-loader',
@@ -88,7 +88,7 @@ const config = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: isDevelopment ? './' : '.',
+              publicPath: isDevelopment ? './' : '',
             },
           }, {
             loader: 'css-loader',
