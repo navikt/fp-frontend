@@ -10,20 +10,12 @@ import {
   Aksjonspunkt, AnkeVurdering, Behandling, Fagsak, Kodeverk,
 } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps, useStandardProsessPanelProps } from '@fpsak-frontend/behandling-felles';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl, forhandsvisDokument } from '@fpsak-frontend/utils';
 
 import messages from '../../i18n/nb_NO.json';
 import { restApiAnkeHooks, requestAnkeApi, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi';
 
 const intl = createIntl(messages);
-
-const forhandsvis = (data: any) => {
-  if (window.navigator.msSaveOrOpenBlob) {
-    window.navigator.msSaveOrOpenBlob(data);
-  } else if (URL.createObjectURL) {
-    window.open(URL.createObjectURL(data));
-  }
-};
 
 const lagForhandsvisCallback = (
   forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<any>,
@@ -35,7 +27,7 @@ const lagForhandsvisCallback = (
     behandlingUuid: behandling.uuid,
     ytelseType: fagsak.fagsakYtelseType,
   };
-  return forhandsvisMelding(brevData).then((response) => forhandsvis(response));
+  return forhandsvisMelding(brevData).then((response) => forhandsvisDokument(response));
 };
 
 const saveAnkeText = (

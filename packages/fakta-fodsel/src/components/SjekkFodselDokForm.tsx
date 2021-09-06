@@ -72,7 +72,7 @@ interface PureOwnProps {
 
 interface MappedOwnProps {
   initialValues: FormValues;
-  avklartBarn: any;
+  avklartBarn?: any;
   dokumentasjonForeligger?: boolean;
   dokumentasjonForeliggerIsEdited?: boolean;
   termindato?: string;

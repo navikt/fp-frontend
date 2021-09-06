@@ -20,6 +20,8 @@ interface DatepickerFieldProps {
   };
   initialMonth?: Date;
   numberOfMonths?: number;
+  format?: (value) => string;
+  parse?: (value) => string;
 }
 
 const isoToDdMmYyyy = (string: string): string => {

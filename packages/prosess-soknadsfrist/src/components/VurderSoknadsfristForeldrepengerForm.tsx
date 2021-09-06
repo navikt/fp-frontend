@@ -48,7 +48,7 @@ interface PureOwnProps {
 interface MappedOwnProps {
   gyldigSenFremsetting?: boolean;
   antallDagerSoknadLevertForSent?: number;
-  hasAksjonspunkt: boolean;
+  hasAksjonspunkt?: boolean;
   soknadsperiodeStart?: string;
   soknadsperiodeSlutt?: string;
   soknadsfristdato?: string;

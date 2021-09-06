@@ -23,8 +23,8 @@ type FormValues = {
 interface PureOwnProps {
   klageVurdering: KlageVurdering;
   submitCallback: (data: KlageFormkravAp) => Promise<void>;
-  readOnly: boolean;
-  readOnlySubmitButton: boolean;
+  readOnly?: boolean;
+  readOnlySubmitButton?: boolean;
   alleKodeverk: AlleKodeverk;
   avsluttedeBehandlinger: AvsluttetBehandling[];
 }

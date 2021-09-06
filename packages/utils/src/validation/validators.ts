@@ -58,6 +58,7 @@ type InputValue = string | number | boolean;
 type FormValidationResult = string | null | undefined;
 
 export const maxLengthOrFodselsnr = (length: number) => (text: string): FormValidationResult => (isEmpty(text)
+  // eslint-disable-next-line react/destructuring-assignment
   || text.toString().trim().length <= length ? null : maxLengthOrFodselsnrMessage(length));
 export const required = (value?: InputValue): FormValidationResult => (isEmpty(value) ? isRequiredMessage() : undefined);
 export const notDash = (value: InputValue): FormValidationResult => (value === '-' ? isRequiredMessage() : undefined);
@@ -81,8 +82,10 @@ export const requiredIfCustomFunctionIsTrue = (
 ): FormValidationResult => (isEmpty(value) && isRequiredFunction(allValues, props) ? isRequiredMessage() : undefined);
 
 export const minLength = (length: number) => (text: string): FormValidationResult => (isEmpty(text)
+  // eslint-disable-next-line react/destructuring-assignment
   || text.toString().trim().length >= length ? null : minLengthMessage(length));
 export const maxLength = (length: number) => (text: string): FormValidationResult => (isEmpty(text)
+  // eslint-disable-next-line react/destructuring-assignment
   || text.toString().trim().length <= length ? null : maxLengthMessage(length));
 
 export const minValue = (length: number) => (number: number): FormValidationResult => (number >= length ? null : minValueMessage(length));
@@ -164,6 +167,7 @@ export const hasValidName = (text: string): FormValidationResult => {
 };
 
 export const hasValidValue = (value: string) => (invalidValue: string): FormValidationResult => (value === invalidValue ? invalidValueMessage(value) : null);
+// eslint-disable-next-line react/destructuring-assignment
 export const arrayMinLength = (length: number) => (value: string): FormValidationResult => (value && value.length >= length
   ? null : arrayMinLengthMessage(length));
 

@@ -1,7 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { History } from 'history';
-import { match } from 'react-router-dom';
 
 import AppIndex from './AppIndex';
 import Home from './components/Home';
@@ -20,8 +18,6 @@ describe('<AppIndex>', () => {
     requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, { navn: 'Peder' });
     const wrapper = shallow(<AppIndex.WrappedComponent
       location={locationMock}
-      history={{} as History}
-      match={{} as match}
     />);
     expect(wrapper.find(Dekorator)).toHaveLength(1);
     expect(wrapper.find(Home)).toHaveLength(1);
@@ -35,8 +31,6 @@ describe('<AppIndex>', () => {
 
     const wrapper = shallow(<AppIndex.WrappedComponent
       location={{ ...locationMock, ...location }}
-      history={{} as History}
-      match={{} as match}
     />);
 
     const headerComp = wrapper.find(Dekorator);
