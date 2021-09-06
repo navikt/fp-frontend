@@ -106,21 +106,15 @@ const config = {
         include: [CSS_DIR, CORE_DIR],
       }, {
         test: /\.(svg)$/,
-        issuer: {
-          or: [/\.less?$/],
-        },
-        loader: 'file-loader',
-        options: {
-          esModule: false,
-          name: isDevelopment ? '[name]_[contenthash].[ext]' : '/[name]_[contenthash].[ext]',
+        issuer: /\.less?$/,
+        type: 'asset/resource',
+        generator: {
+          filename: '[name]_[contenthash].[ext]',
         },
         include: [IMAGE_DIR],
-        type: 'javascript/auto',
       }, {
         test: /\.(svg)$/,
-        issuer: {
-          or: [/\.(tsx)?$/],
-        },
+        issuer: /\.(tsx)?$/,
         use: [{
           loader: '@svgr/webpack',
         },{
@@ -134,13 +128,11 @@ const config = {
         type: 'javascript/auto',
       },{
         test: /\.(svg)$/,
-        loader: 'file-loader',
-        options: {
-          esModule: false,
-          name: isDevelopment ? '[name]_[contenthash].[ext]' : '/[name]_[contenthash].[ext]',
+        type: 'asset/resource',
+        generator: {
+          filename: '[name]_[contenthash].[ext]',
         },
         include: [CORE_DIR],
-        type: 'javascript/auto',
       }],
   },
 
