@@ -62,7 +62,6 @@ const options = {
       colors: true,
     },
   },
-  hot: true,
   historyApiFallback: true,
   port: 9000,
 };
