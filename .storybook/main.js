@@ -2,7 +2,6 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PACKAGES_DIR = path.resolve(__dirname, '../packages');
 const CORE_DIR = path.resolve(__dirname, '../node_modules');
-const IMAGE_DIR = path.join(PACKAGES_DIR, 'assets/images');
 const CSS_DIR = path.join(PACKAGES_DIR, 'assets/styles');
 
 module.exports = {
