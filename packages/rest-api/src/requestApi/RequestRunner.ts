@@ -50,6 +50,7 @@ class RequestRunner {
     this.restMethod = restMethod;
     this.path = path;
     this.config = config;
+
     this.maxPollingLimit = config.maxPollingLimit || this.maxPollingLimit;
   }
 
