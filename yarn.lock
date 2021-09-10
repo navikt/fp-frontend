@@ -9137,6 +9137,14 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
+echarts@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/echarts/-/echarts-5.2.0.tgz#9f1fbfbf048c15ab630bf0a74525c4c534d6cebc"
+  integrity sha512-7CrCKGRjFdpLIJ/Yt1gpHeqs5PiCem2GHPdWZPwKl7WSYeZu0Qzm1bcCFe9/b4dfVaL1zlY4JmdzaVwKksVeqg==
+  dependencies:
+    tslib "2.3.0"
+    zrender "5.2.0"
+
 ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
@@ -18887,6 +18895,11 @@ tsconfig-paths@^3.11.0:
     minimist "^1.2.0"
     strip-bom "^3.0.0"
 
+tslib@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.0.tgz#803b8cdab3e12ba581a4ca41c8839bbb0dacb09e"
+  integrity sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==
+
 tslib@^1.10.0, tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
@@ -20117,6 +20130,13 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
+
+zrender@5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/zrender/-/zrender-5.2.0.tgz#f8abc484ac4a8a51b04c3ccd37beabe1def342cd"
+  integrity sha512-87v3gvB0lcWy48ObA/DwrhQ95ADMMRhECVrXmHDFCBNvbxHFfEDZtrZh4VmVjLAeFAjimY4PyZ65rbLCivdszA==
+  dependencies:
+    tslib "2.3.0"
 
 zwitch@^1.0.0:
   version "1.0.5"
