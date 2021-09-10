@@ -1,0 +1,39 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: fp-frontend-azure-login-test
+  namespace: teamforeldrepenger
+  labels:
+    team: teamforeldrepenger
+spec:
+  image: {{image}}
+  port: 443
+  ingresses:
+    - https://app-q1.adeo.no/fpsak-azure-login-test
+  team: teamforeldrepenger
+  liveness:
+    path: /
+  readiness:
+    path: /
+  resources:
+    limits:
+      cpu: 200m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 64Mi
+  replicas:
+    min: 1
+    max: 1
+    cpuThresholdPercentage: 90
+  vault:
+    enabled: true
+  env:
+    - name: APP_NAME
+      value: fp-frontend
+    - name: REDIS_HOST
+      value: "fpsak-redis.teamforeldrepenger.svc.nais.local"
+    - name: REDIS_PORT
+      value: "6379"
+    - name: APP_URL_FPSAK
+      value: "http://fpsak"

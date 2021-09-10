@@ -1,0 +1,9 @@
+FROM navikt/node-express:14-alpine
+USER root
+ENV NODE_OPTIONS="--experimental-modules"
+WORKDIR /app
+COPY dist /app/fpsak/
+COPY packages/server /app
+RUN npm i
+
+EXPOSE 9090
