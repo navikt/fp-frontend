@@ -12,9 +12,9 @@ spec:
     - https://app-q1.adeo.no/fpsak-azure-login-test
   team: teamforeldrepenger
   liveness:
-    path: /
+    path: /fpsak-azure-login-test/isAlive
   readiness:
-    path: /
+    path: /fpsak-azure-login-test/isReady
   resources:
     limits:
       cpu: 200m
@@ -29,11 +29,15 @@ spec:
   vault:
     enabled: true
   env:
-    - name: APP_NAME
-      value: fp-frontend
     - name: REDIS_HOST
       value: "fpsak-redis.teamforeldrepenger.svc.nais.local"
     - name: REDIS_PORT
       value: "6379"
-    - name: APP_URL_FPSAK
+    - name: DOWNSTREAM_API_URL
       value: "http://fpsak"
+    - name: DOWNSTREAM_API_CLIENT_ID
+      value: "fp-frontend"
+    - name: AZURE_APP_LOGOUT_REDIRECT_URL
+      value: /fpsak-azure-login-test/logged-out
+    - name: AZURE_APP_REDIRECT_URL
+      value: https://app-q1.adeo.no/fpsak-azure-login-test/oauth2/callback

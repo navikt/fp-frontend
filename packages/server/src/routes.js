@@ -7,13 +7,14 @@ import reverseProxy from './proxy/reverse-proxy.js';
 import msgraph from './auth/msgraph.js';
 
 const router = express.Router();
+const ingress = '/fpsak-azure-login-test';
 
 const ensureAuthenticated = async (req, res, next) => {
   if (req.isAuthenticated() && authUtils.hasValidAccessToken(req)) {
     next();
   } else {
     session.redirectTo = req.url;
-    res.redirect('/login');
+    res.redirect(`${ingress}/login`);
   }
 };
 
@@ -21,16 +22,16 @@ const setup = (authClient) => {
   // These routes are unprotected and do not require auth to reach
 
   // Liveness and readiness probes for Kubernetes / nais
-  router.get('/isAlive', (req, res) => res.send('Alive'));
-  router.get('/isReady', (req, res) => res.send('Ready'));
+  router.get(`${ingress}/isAlive`, (req, res) => res.send('Alive'));
+  router.get(`${ingress}/isReady`, (req, res) => res.send('Ready'));
 
   // Routes for passport to handle the authentication flow
-  router.get('/login', passport.authenticate('azureOidc', { failureRedirect: '/login' }));
-  router.use('/oauth2/callback', passport.authenticate('azureOidc', { failureRedirect: '/login' }), (req, res) => {
+  router.get(`${ingress}/login`, passport.authenticate('azureOidc', { failureRedirect: `${ingress}/login` }));
+  router.use(`${ingress}/oauth2/callback`, passport.authenticate('azureOidc', { failureRedirect: `${ingress}/login` }), (req, res) => {
     if (session.redirectTo) {
       res.redirect(session.redirectTo);
     } else {
-      res.redirect('/');
+      res.redirect(`${ingress}/`);
     }
   });
 
@@ -39,12 +40,12 @@ const setup = (authClient) => {
 
   // return tokeninfo for the current user
   // DO NOT DO THIS IN PRODUCTION
-  router.get('/', (req, res) => {
+  router.get(`${ingress}/`, (req, res) => {
     res.json(req.user);
   });
 
   // return user info fetched from the Microsoft Graph API
-  router.get('/me', (req, res) => {
+  router.get(`${ingress}/me`, (req, res) => {
     msgraph.getUserInfoFromGraphApi(authClient, req)
       .then((userinfo) => res.json(userinfo))
       .catch((err) => res.status(500)
@@ -52,7 +53,7 @@ const setup = (authClient) => {
   });
 
   // return groups that the user is a member of from the Microsoft Graph API
-  router.get('/me/memberOf', (req, res) => {
+  router.get(`${ingress}/me/memberOf`, (req, res) => {
     msgraph.getUserGroups(authClient, req)
       .then((userinfo) => res.json(userinfo))
       .catch((err) => res.status(500)
@@ -60,7 +61,7 @@ const setup = (authClient) => {
   });
 
   // log the user out
-  router.get('/logout', (req, res) => {
+  router.get(`${ingress}/logout`, (req, res) => {
     req.logOut();
     res.redirect(authClient.endSessionUrl({ post_logout_redirect_uri: config.azureAd.logoutRedirectUri }));
   });
