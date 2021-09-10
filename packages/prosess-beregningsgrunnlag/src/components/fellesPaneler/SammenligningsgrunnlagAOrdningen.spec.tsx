@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { Normaltekst } from 'nav-frontend-typografi';
 
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
@@ -99,17 +100,14 @@ describe('<SammenligningsgrunnlagFraAOrdningen>', () => {
       skjeringstidspunktDato={skjeringstidspunktDato}
       intl={intlMock}
     />, messages);
-
     const lesmer = wrapper.find('Lesmerpanel');
     expect(lesmer).toHaveLength(1);
-    const arbeidTittel = wrapper.find(FormattedMessage).first();
-    expect(arbeidTittel.props().id).toBe('Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Arbeid');
-    const sumTitle = wrapper.find(FormattedMessage).at(1);
+    const sumTitle = wrapper.find(FormattedMessage).first();
     expect(sumTitle.props().id).toBe('Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.SumTittel');
-    const sumATAndeler = wrapper.find('Element').at(0);
+    const arbeidTittel = wrapper.find(FormattedMessage).last();
+    expect(arbeidTittel.props().id).toBe('Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Arbeid');
+    const sumATAndeler = wrapper.find(Normaltekst).last();
     expect(sumATAndeler.children().at(0).text()).toBe(formatCurrencyNoKr(10000));
-    const xyz = wrapper.find('FlexibleXYPlot');
-    expect(xyz).toHaveLength(12);
   });
 
   it('Skal se at panelet rendrer korrekt SammenligningsgrunnlagInntekt ved kun AT_FL', () => {
@@ -118,20 +116,17 @@ describe('<SammenligningsgrunnlagFraAOrdningen>', () => {
       skjeringstidspunktDato={skjeringstidspunktDato}
       intl={intlMock}
     />, messages);
-
     const lesmer = wrapper.find('Lesmerpanel');
     expect(lesmer).toHaveLength(1);
-    const ArbeidTittel = wrapper.find(FormattedMessage).first();
-    expect(ArbeidTittel.props().id).toBe('Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Arbeid');
-    const frilansTittel = wrapper.find(FormattedMessage).at(1);
-    expect(frilansTittel.props().id).toBe('Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Frilans');
-    const sumTitle = wrapper.find(FormattedMessage).at(2);
+    const sumTitle = wrapper.find(FormattedMessage).first();
     expect(sumTitle.props().id).toBe('Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.SumTittel');
-    const sumATAndeler = wrapper.find('Element').at(0);
+    const ArbeidTittel = wrapper.find(FormattedMessage).at(1);
+    expect(ArbeidTittel.props().id).toBe('Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Arbeid');
+    const frilansTittel = wrapper.find(FormattedMessage).at(2);
+    expect(frilansTittel.props().id).toBe('Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Frilans');
+    const sumATAndeler = wrapper.find(Normaltekst).at(2);
     expect(sumATAndeler.children().at(0).text()).toBe(formatCurrencyNoKr(5000));
-    const sumFLAndeler = wrapper.find('Element').at(1);
+    const sumFLAndeler = wrapper.find(Normaltekst).at(4);
     expect(sumFLAndeler.children().at(0).text()).toBe(formatCurrencyNoKr(5000));
-    const xyz = wrapper.find('FlexibleXYPlot');
-    expect(xyz).toHaveLength(12);
   });
 });

@@ -1,14 +1,13 @@
-import React, { FunctionComponent, ReactElement, useMemo } from 'react';
-import {
-  HorizontalRectSeries, FlexibleWidthXYPlot,
-} from 'react-vis';
+import React, {
+  FunctionComponent, ReactElement, useMemo, useCallback,
+} from 'react';
 import { Column, Row } from 'nav-frontend-grid';
-import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import {
-  FlexColumn, FlexRow, VerticalSpacer, AvsnittSkiller,
+  FlexColumn, FlexRow, VerticalSpacer, AvsnittSkiller, ReactECharts,
 } from '@fpsak-frontend/shared-components';
 import moment from 'moment';
 
@@ -22,69 +21,9 @@ import styles from './sammenligningsgrunnlagAOrdningen.less';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 import Lesmerpanel from '../redesign/LesmerPanel';
 
-const grafFargeAT = '#99bdcd';
-const grafFargeFL = '#c1b5d0';
-const grafFargeYtelse = '#C6C2BF';
-const grafBorderFarge = '#0c5472';
-
-const finnAntallStatuser = (statuser: Inntektstyper): number => Object.values(statuser).reduce((a, status) => a + (status === true ? 1 : 0), 0);
-
-type InntektKolonneBredde = '1' | '2' | '3';
-
-const arbeidsinntektBredde = (statuser: Inntektstyper): InntektKolonneBredde => {
-  const unikeStatuser = finnAntallStatuser(statuser);
-  if (unikeStatuser === 1) {
-    return '3';
-  }
-  if (unikeStatuser === 2) {
-    return '2';
-  }
-  return '1';
-};
-
-const frilansInntektBredde = (statuser: Inntektstyper): InntektKolonneBredde => {
-  const unikeStatuser = finnAntallStatuser(statuser);
-  if (unikeStatuser === 1) {
-    return '3';
-  }
-  if (unikeStatuser === 3) {
-    return '1';
-  }
-  return statuser.harArbeidsinntekt ? '1' : '2';
-};
-
-const ytelseInntektBredde = (statuser: Inntektstyper): InntektKolonneBredde => {
-  const unikeStatuser = finnAntallStatuser(statuser);
-  if (unikeStatuser === 1) {
-    return '3';
-  }
-  return '1';
-};
-
-const finnInntektForStatus = (andeler: InntektsgrunnlagInntekt[], status?: string): number => {
-  if (!andeler || andeler.length === 0) {
-    return 0;
-  }
-  if (status) {
-    return andeler.filter((andel) => andel.inntektAktivitetType.kode === status).reduce((acc, atAndel) => acc + atAndel.beløp, 0);
-  }
-  return andeler.reduce((acc, atAndel) => acc + atAndel.beløp, 0);
-};
-
-const finnMaksVerdien = (andeler: InntektsgrunnlagMåned[],
-  skjeringstidspunktDato: string): number => {
-  if (andeler) {
-    let radMax = 0;
-    for (let step = 12; step > 0; step -= 1) {
-      const yearMont = moment(skjeringstidspunktDato, ISO_DATE_FORMAT).subtract(step, 'M').format('YYYYMM');
-      const korrektMåned = andeler.find((andel) => moment(andel.fom, ISO_DATE_FORMAT).format('YYYYMM') === yearMont);
-      const sumMåned = korrektMåned ? finnInntektForStatus(korrektMåned.inntekter) : 0;
-      radMax = radMax < sumMåned ? sumMåned : radMax;
-    }
-    return radMax;
-  }
-  return null;
-};
+const GRAF_FARGE_AT = '#99bdcd';
+const GRAF_FARGE_FL = '#c1b5d0';
+const GRAF_FARGE_YTELSE = '#C6C2BF';
 
 const lagSumRad = (månederMedInntekter: InntektsgrunnlagMåned[], relevanteStatuser: Inntektstyper): ReactElement => {
   const sumATAndeler = månederMedInntekter.flatMap((måned) => måned.inntekter)
@@ -98,126 +37,80 @@ const lagSumRad = (månederMedInntekter: InntektsgrunnlagMåned[], relevanteStat
     .map(({ beløp }) => beløp).reduce((i1, i2) => i1 + i2, 0);
   return (
     <>
+      <VerticalSpacer eightPx />
       <Row>
-        <Column xs="12" className={styles.aarDevider} />
-      </Row>
-      <Row>
-        <Column xs="8">
+        <Column xs="12">
           <Normaltekst className={beregningStyles.semiBoldText}>
             <FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.SumTittel" />
           </Normaltekst>
         </Column>
-        {relevanteStatuser.harArbeidsinntekt && (
-          <Column xs={arbeidsinntektBredde(relevanteStatuser)} className={beregningStyles.colMaanedText}>
-            <Element className={beregningStyles.semiBoldText}>{formatCurrencyNoKr(sumATAndeler)}</Element>
-          </Column>
-        )}
-        {relevanteStatuser.harFrilansinntekt && (
-          <Column xs={frilansInntektBredde(relevanteStatuser)} className={beregningStyles.colMaanedText}>
-            <Element>{formatCurrencyNoKr(sumFLAndeler)}</Element>
-          </Column>
-        )}
-        {relevanteStatuser.harYtelseinntekt && (
-          <Column xs={ytelseInntektBredde(relevanteStatuser)} className={beregningStyles.colMaanedText}>
-            <Element>{formatCurrencyNoKr(sumYtelseAndeler)}</Element>
-          </Column>
-        )}
-        <Column xs="1" className={beregningStyles.rightAlignElementNoWrap} />
       </Row>
+      {relevanteStatuser.harArbeidsinntekt && (
+        <Row>
+          <Column xs="1">
+            <Normaltekst>
+              <FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Arbeid" />
+            </Normaltekst>
+          </Column>
+          <Column xs="3">
+            <Normaltekst className={styles.rightAlign}>
+              {formatCurrencyNoKr(sumATAndeler)}
+            </Normaltekst>
+          </Column>
+        </Row>
+      )}
+      {relevanteStatuser.harFrilansinntekt && (
+        <Row>
+          <Column xs="1">
+            <Normaltekst>
+              <FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Frilans" />
+            </Normaltekst>
+          </Column>
+          <Column xs="3">
+            <Normaltekst className={styles.rightAlign}>
+              {formatCurrencyNoKr(sumFLAndeler)}
+            </Normaltekst>
+          </Column>
+        </Row>
+      )}
+      {relevanteStatuser.harYtelseinntekt && (
+        <Row>
+          <Column xs="1">
+            <Normaltekst>
+              <FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Ytelse" />
+            </Normaltekst>
+          </Column>
+          <Column xs="3">
+            <Normaltekst className={styles.rightAlign}>
+              {formatCurrencyNoKr(sumYtelseAndeler)}
+            </Normaltekst>
+          </Column>
+        </Row>
+      )}
     </>
   );
 };
-const lagRad = (relevanteStatuser: Inntektstyper, månedMedInntekter: InntektsgrunnlagMåned, maksVerdi: number, aarMaaned: string): ReactElement => {
-  const dato = `${aarMaaned}01`;
-  const maanedNavn = moment(dato, ISO_DATE_FORMAT).format('MMM');
-  const formattedMaaned = maanedNavn.charAt(0).toUpperCase() + maanedNavn.slice(1, 3);
-  const maaned = moment(dato, ISO_DATE_FORMAT).format('MM');
-  const aar = moment(dato, ISO_DATE_FORMAT).format('YYYY');
-  const atBeløp = finnInntektForStatus(månedMedInntekter?.inntekter, inntektAktivitetType.ARBEID);
-  const flBeløp = finnInntektForStatus(månedMedInntekter?.inntekter, inntektAktivitetType.FRILANS);
-  const ytelseBeløp = finnInntektForStatus(månedMedInntekter?.inntekter, inntektAktivitetType.YTELSE);
-  const rest = Math.max(maksVerdi - atBeløp - flBeløp - ytelseBeløp, 0);
-  return (
-    <React.Fragment key={`${dato}wrapper`}>
-      { maaned === '01' && (
-        <Row>
-          <Column xs="12" className={styles.aarDevider} />
-        </Row>
-      )}
-      <Row>
-        <Column xs="1" className={styles.maanedColumn}>
-          <Undertekst>{formattedMaaned}</Undertekst>
-        </Column>
-        <Column xs="7" className={styles.chartColumn}>
-          <FlexibleWidthXYPlot height={10} stackBy="x" yDomain={[1, 1]}>
-            {relevanteStatuser.harArbeidsinntekt && (
-              <HorizontalRectSeries
-                data={[{ y0: 0.5, y: 1, x: atBeløp }]}
-                fill={grafFargeAT}
-                stroke={grafBorderFarge}
-              />
-            )}
-            {relevanteStatuser.harFrilansinntekt && (
-              <HorizontalRectSeries
-                data={[{ y0: 0.5, y: 1, x: flBeløp }]}
-                fill={grafFargeFL}
-                stroke={grafBorderFarge}
-              />
-            )}
-            {relevanteStatuser.harYtelseinntekt && (
-              <HorizontalRectSeries
-                data={[{ y0: 0.5, y: 1, x: ytelseBeløp }]}
-                fill={grafFargeYtelse}
-                stroke={grafBorderFarge}
-              />
-            )}
-            <HorizontalRectSeries
-              data={[{ y0: 0.5, y: 1, x: rest }]}
-              fill="transparent"
-              stroke="transparent"
-            />
-          </FlexibleWidthXYPlot>
 
-        </Column>
-        {relevanteStatuser.harArbeidsinntekt && (
-          <Column xs={arbeidsinntektBredde(relevanteStatuser)} className={beregningStyles.colMaanedText}>
-            <Undertekst>{formatCurrencyNoKr(atBeløp)}</Undertekst>
-          </Column>
-        )}
-        {relevanteStatuser.harFrilansinntekt && (
-          <Column
-            xs={frilansInntektBredde(relevanteStatuser)}
-            className={relevanteStatuser.harArbeidsinntekt ? beregningStyles.colAarText : beregningStyles.colMaanedText}
-          >
-            <Undertekst>{formatCurrencyNoKr(flBeløp)}</Undertekst>
-          </Column>
-        )}
-        {relevanteStatuser.harYtelseinntekt && (
-          <Column
-            xs={ytelseInntektBredde(relevanteStatuser)}
-            className={relevanteStatuser.harArbeidsinntekt ? beregningStyles.colAarText : beregningStyles.colMaanedText}
-          >
-            <Undertekst>{formatCurrencyNoKr(ytelseBeløp)}</Undertekst>
-          </Column>
-        )}
-        <Column xs="1" className={beregningStyles.rightAlignElementNoWrap}>
-          { (maaned === '12' || maaned === '01') && (
-            <Undertekst>{aar}</Undertekst>
-          )}
-        </Column>
-      </Row>
-    </React.Fragment>
-  );
-};
-const lagRader = (andeler: InntektsgrunnlagMåned[], relevanteStatuser: Inntektstyper, skjeringstidspunktDato: string): ReactElement[] => {
-  const rows = [];
-  const maksVerdi = finnMaksVerdien(andeler, skjeringstidspunktDato);
-  for (let step = 12; step > 0; step -= 1) {
-    const yearMont = moment(skjeringstidspunktDato, ISO_DATE_FORMAT).subtract(step, 'M').format('YYYYMM');
-    const månedMedInntekter = andeler.find((andel) => moment(andel.fom, ISO_DATE_FORMAT).format('YYYYMM') === yearMont);
-    rows.push(lagRad(relevanteStatuser, månedMedInntekter, maksVerdi, yearMont));
+const finnInntektForStatus = (andeler: InntektsgrunnlagInntekt[], status?: string): number => {
+  if (!andeler || andeler.length === 0) {
+    return 0;
   }
-  return rows;
+  if (status) {
+    return andeler.filter((andel) => andel.inntektAktivitetType.kode === status).reduce((acc, atAndel) => acc + atAndel.beløp, 0);
+  }
+  return andeler.reduce((acc, atAndel) => acc + atAndel.beløp, 0);
+};
+
+const finnDataForIAT = (andeler: InntektsgrunnlagMåned[], skjeringstidspunktDato: string, inntektAType?: string) => {
+  const data = [];
+  for (let step = 1; step <= 12; step += 1) {
+    const dato = moment(skjeringstidspunktDato, ISO_DATE_FORMAT).subtract(step, 'M');
+    const aarMaaned = dato.format('YYYYMM');
+    const månedMedInntekter = andeler.find((andel) => moment(andel.fom, ISO_DATE_FORMAT).format('YYYYMM') === aarMaaned);
+    const beløp = finnInntektForStatus(månedMedInntekter?.inntekter, inntektAType);
+    data.push([beløp, dato.toDate()]);
+  }
+  return data;
 };
 
 const lagOverskrift = (): ReactElement => (
@@ -260,10 +153,30 @@ export const SammenligningsgrunnlagAOrdningenImpl: FunctionComponent<OwnProps & 
     return null;
   }
   const relevanteStatuser = {
-    harFrilansinntekt: useMemo(() => finnesInntektAvType(måneder, inntektAktivitetType.FRILANS), [måneder]),
-    harArbeidsinntekt: useMemo(() => finnesInntektAvType(måneder, inntektAktivitetType.ARBEID), [måneder]),
-    harYtelseinntekt: useMemo(() => finnesInntektAvType(måneder, inntektAktivitetType.YTELSE), [måneder]),
+    harFrilansinntekt: finnesInntektAvType(måneder, inntektAktivitetType.FRILANS),
+    harArbeidsinntekt: finnesInntektAvType(måneder, inntektAktivitetType.ARBEID),
+    harYtelseinntekt: finnesInntektAvType(måneder, inntektAktivitetType.YTELSE),
   } as Inntektstyper;
+
+  const arbeidTekst = intl.formatMessage({ id: 'Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Arbeid' });
+  const frilansTekst = intl.formatMessage({ id: 'Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Frilans' });
+  const ytelseTekst = intl.formatMessage({ id: 'Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Ytelse' });
+
+  const dataForArbeid = useMemo(() => (relevanteStatuser.harArbeidsinntekt ? finnDataForIAT(måneder, skjeringstidspunktDato, inntektAktivitetType.ARBEID) : []),
+    [relevanteStatuser.harArbeidsinntekt, måneder, skjeringstidspunktDato]);
+  const dataForFrilans = useMemo(() => (relevanteStatuser.harFrilansinntekt
+    ? finnDataForIAT(måneder, skjeringstidspunktDato, inntektAktivitetType.FRILANS) : []),
+  [relevanteStatuser.harArbeidsinntekt, måneder, skjeringstidspunktDato]);
+  const dataForYtelse = useMemo(() => (relevanteStatuser.harYtelseinntekt ? finnDataForIAT(måneder, skjeringstidspunktDato, inntektAktivitetType.YTELSE) : []),
+    [relevanteStatuser.harArbeidsinntekt, måneder, skjeringstidspunktDato]);
+
+  const barFormatter = useCallback((params) => {
+    if (params.value[0] > 5000) {
+      return formatCurrencyNoKr(params.value[0]);
+    }
+    return params.value[0] === 0 ? '' : '..';
+  }, []);
+
   return (
     <>
       <AvsnittSkiller spaceAbove spaceUnder />
@@ -274,37 +187,112 @@ export const SammenligningsgrunnlagAOrdningenImpl: FunctionComponent<OwnProps & 
         apneTekst={intl.formatMessage({ id: 'Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.VisMaaneder' })}
         defaultApen
       >
-        <Row>
-          <Column xs="1" className={styles.maanedColumn} />
-          <Column xs="7" />
-          {relevanteStatuser.harArbeidsinntekt
-          && (
-            <Column xs={arbeidsinntektBredde(relevanteStatuser)} className={beregningStyles.colMaanedText}>
-              <Undertekst className={beregningStyles.semiBoldText}>
-                <FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Arbeid" />
-              </Undertekst>
-            </Column>
-          )}
-          {relevanteStatuser.harFrilansinntekt
-          && (
-            <Column xs={frilansInntektBredde(relevanteStatuser)} className={beregningStyles.colAarText}>
-              <Undertekst className={beregningStyles.semiBoldText}>
-                <FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Frilans" />
-              </Undertekst>
-            </Column>
-          )}
-          {relevanteStatuser.harYtelseinntekt
-          && (
-            <Column xs={ytelseInntektBredde(relevanteStatuser)} className={beregningStyles.colMaanedText}>
-              <Undertekst className={beregningStyles.semiBoldText}>
-                <FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Ytelse" />
-              </Undertekst>
-            </Column>
-          )}
-          <Column xs="1" />
-        </Row>
-        {lagRader(måneder, relevanteStatuser, skjeringstidspunktDato)}
+        <ReactECharts
+          height={350}
+          option={{
+            tooltip: {
+              trigger: 'axis',
+              formatter: (series) => {
+                const date = moment(series[0].data[1]);
+                const maanedNavn = date.format('MMM');
+                const aar = date.format('YYYY');
+                const formattedMaaned = maanedNavn.charAt(0).toUpperCase() + maanedNavn.slice(1);
+                const overskrift = `${formattedMaaned} ${aar}`;
 
+                const seriesData = series
+                  .reduce((acc, sData) => acc.concat(`${sData.marker + sData.seriesName}: ${formatCurrencyNoKr(sData.data[0])}`), [])
+                  .join('<br/>');
+                return `${overskrift}<br />${seriesData}`;
+              },
+              axisPointer: {
+                type: 'shadow',
+              },
+            },
+            toolbox: {
+              feature: {
+                saveAsImage: {
+                  title: 'Lagre ',
+                  name: 'inntekt_og_ytelse',
+                },
+              },
+            },
+            legend: {
+              data: [arbeidTekst, frilansTekst, ytelseTekst],
+            },
+            grid: {
+              left: '1%',
+              right: '5%',
+              bottom: '0%',
+              containLabel: true,
+            },
+            xAxis: {
+              type: 'value',
+              axisLabel: {
+                formatter: (value: any) => formatCurrencyNoKr(value),
+                margin: 12,
+              },
+            },
+            yAxis: {
+              type: 'category',
+              boundaryGap: false,
+              axisLabel: {
+                formatter: (value: any) => {
+                  const date = moment(value);
+                  const erIJanuar = date.format('MM') === '01' || date.format('MM') === '12';
+                  const maanedNavn = date.format('MMM');
+                  const aar = date.format('YYYY');
+                  const formattedMaaned = maanedNavn.charAt(0).toUpperCase() + maanedNavn.slice(1, 3);
+                  return erIJanuar ? `${formattedMaaned}\n${aar}` : formattedMaaned;
+                },
+              },
+            },
+            series: [
+              {
+                name: arbeidTekst,
+                type: 'bar',
+                stack: 'total',
+                label: {
+                  show: true,
+                  fontSize: '11',
+                  formatter: barFormatter,
+                },
+                emphasis: {
+                  focus: 'series',
+                },
+                data: dataForArbeid,
+              },
+              {
+                name: frilansTekst,
+                type: 'bar',
+                stack: 'total',
+                label: {
+                  show: true,
+                  fontSize: '11',
+                  formatter: barFormatter,
+                },
+                emphasis: {
+                  focus: 'series',
+                },
+                data: dataForFrilans,
+              },
+              {
+                name: ytelseTekst,
+                type: 'bar',
+                stack: 'total',
+                label: {
+                  show: true,
+                  fontSize: '11',
+                  formatter: barFormatter,
+                },
+                emphasis: {
+                  focus: 'series',
+                },
+                data: dataForYtelse,
+              },
+            ],
+            color: [GRAF_FARGE_AT, GRAF_FARGE_FL, GRAF_FARGE_YTELSE],
+          }}
+        />
       </Lesmerpanel>
       {lagSumRad(måneder, relevanteStatuser)}
     </>
