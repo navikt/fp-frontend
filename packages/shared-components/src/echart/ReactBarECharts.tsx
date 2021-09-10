@@ -1,38 +1,15 @@
 import React, { useRef, useEffect, FunctionComponent } from 'react';
+import { init, getInstanceByDom } from 'echarts';
 import type { CSSProperties } from 'react';
-import * as echarts from 'echarts/core';
-import {
-  BarChart,
-  BarSeriesOption,
-} from 'echarts/charts';
-import {
-  ToolboxComponent,
-  ToolboxComponentOption,
-  TooltipComponent,
-  TooltipComponentOption,
-  LegendComponent,
-  GridComponent,
-  GridComponentOption,
-} from 'echarts/components';
-import {
-  CanvasRenderer,
-} from 'echarts/renderers';
-
-type ECOption = echarts.ComposeOption<
-  BarSeriesOption | ToolboxComponentOption | TooltipComponentOption | GridComponentOption
->;
-
-echarts.use(
-  [ToolboxComponent, TooltipComponent, LegendComponent, GridComponent, BarChart, CanvasRenderer],
-);
+import type { EChartsOption, ECharts } from 'echarts';
 
 export interface OwnProps {
-  option: ECOption;
+  option: EChartsOption;
   style?: CSSProperties;
   height: number;
 }
 
-const ReactBarECharts: FunctionComponent<OwnProps> = ({
+const ReactECharts: FunctionComponent<OwnProps> = ({
   option,
   style,
   height,
@@ -40,9 +17,9 @@ const ReactBarECharts: FunctionComponent<OwnProps> = ({
   const chartRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let chart: echarts.ECharts | undefined;
+    let chart: ECharts | undefined;
     if (chartRef.current !== null) {
-      chart = echarts.init(chartRef.current);
+      chart = init(chartRef.current);
     }
 
     const resizeChart = () => {
@@ -58,7 +35,7 @@ const ReactBarECharts: FunctionComponent<OwnProps> = ({
 
   useEffect(() => {
     if (chartRef.current !== null) {
-      const chart = echarts.getInstanceByDom(chartRef.current);
+      const chart = getInstanceByDom(chartRef.current);
       chart.setOption(option);
     }
   }, [chartRef.current, option]);
@@ -66,4 +43,4 @@ const ReactBarECharts: FunctionComponent<OwnProps> = ({
   return <div ref={chartRef} style={{ width: 'auto', height, ...style }} />;
 };
 
-export default ReactBarECharts;
+export default ReactECharts;
