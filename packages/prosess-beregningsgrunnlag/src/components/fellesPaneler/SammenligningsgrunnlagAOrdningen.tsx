@@ -7,7 +7,7 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import {
-  FlexColumn, FlexRow, VerticalSpacer, AvsnittSkiller, ReactBarECharts,
+  FlexColumn, FlexRow, VerticalSpacer, AvsnittSkiller, ReactECharts,
 } from '@fpsak-frontend/shared-components';
 import moment from 'moment';
 
@@ -47,13 +47,13 @@ const lagSumRad = (månederMedInntekter: InntektsgrunnlagMåned[], relevanteStat
       </Row>
       {relevanteStatuser.harArbeidsinntekt && (
         <Row>
-          <Column xs="2">
+          <Column xs="1">
             <Normaltekst>
               <FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Arbeid" />
             </Normaltekst>
           </Column>
-          <Column xs="4">
-            <Normaltekst>
+          <Column xs="3">
+            <Normaltekst className={styles.rightAlign}>
               {formatCurrencyNoKr(sumATAndeler)}
             </Normaltekst>
           </Column>
@@ -61,13 +61,13 @@ const lagSumRad = (månederMedInntekter: InntektsgrunnlagMåned[], relevanteStat
       )}
       {relevanteStatuser.harFrilansinntekt && (
         <Row>
-          <Column xs="2">
+          <Column xs="1">
             <Normaltekst>
               <FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Frilans" />
             </Normaltekst>
           </Column>
-          <Column xs="4">
-            <Normaltekst>
+          <Column xs="3">
+            <Normaltekst className={styles.rightAlign}>
               {formatCurrencyNoKr(sumFLAndeler)}
             </Normaltekst>
           </Column>
@@ -75,13 +75,13 @@ const lagSumRad = (månederMedInntekter: InntektsgrunnlagMåned[], relevanteStat
       )}
       {relevanteStatuser.harYtelseinntekt && (
         <Row>
-          <Column xs="2">
+          <Column xs="1">
             <Normaltekst>
               <FormattedMessage id="Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.Ytelse" />
             </Normaltekst>
           </Column>
-          <Column xs="4">
-            <Normaltekst>
+          <Column xs="3">
+            <Normaltekst className={styles.rightAlign}>
               {formatCurrencyNoKr(sumYtelseAndeler)}
             </Normaltekst>
           </Column>
@@ -187,7 +187,7 @@ export const SammenligningsgrunnlagAOrdningenImpl: FunctionComponent<OwnProps & 
         apneTekst={intl.formatMessage({ id: 'Beregningsgrunnlag.SammenligningsGrunnlaAOrdningen.VisMaaneder' })}
         defaultApen
       >
-        <ReactBarECharts
+        <ReactECharts
           height={350}
           option={{
             tooltip: {

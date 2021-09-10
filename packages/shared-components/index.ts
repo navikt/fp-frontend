@@ -29,4 +29,4 @@ export { default as DataFetchPendingModal } from './src/DataFetchPendingModal';
 export { default as FaktaGruppe } from './src/FaktaGruppe';
 export { default as AvsnittSkiller } from './src/AvsnittSkiller';
 export { default as usePrevious } from './src/hooks/usePrevious';
-export { default as ReactBarECharts } from './src/echart/ReactBarECharts';
+export { default as ReactECharts } from './src/echart/ReactECharts';
