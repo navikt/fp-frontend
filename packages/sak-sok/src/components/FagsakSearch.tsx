@@ -4,7 +4,6 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import { Fagsak, AlleKodeverk } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import SearchForm from './SearchForm';
 import FagsakList from './FagsakList';
@@ -39,14 +38,11 @@ const FagsakSearch: FunctionComponent<OwnProps> = ({
   alleKodeverk,
 }) => (
   <div className={styles.container}>
-    <ReduxWrapper formName="FagsakSearch">
-      <SearchForm
-        onSubmit={searchFagsakCallback}
-      // @ts-ignore Fiks denne!
-        searchStarted={searchStarted}
-        searchResultAccessDenied={searchResultAccessDenied}
-      />
-    </ReduxWrapper>
+    <SearchForm
+      searchFagsakCallback={searchFagsakCallback}
+      searchStarted={searchStarted}
+      searchResultAccessDenied={searchResultAccessDenied}
+    />
 
     {searchResultReceived && fagsaker.length === 0 && (
       <Normaltekst className={styles.label}><FormattedMessage id="FagsakSearch.ZeroSearchResults" /></Normaltekst>
