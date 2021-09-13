@@ -8,7 +8,7 @@ module.exports = {
   core: {
     builder: "webpack5",
   },
-  stories: ['../packages/storybook/stories/**/*.stories.@(js|tsx)'],
+  stories: ['../packages/**/*.stories.@(tsx)'],
   addons: ['@storybook/addon-docs/preset', '@storybook/addon-actions/register'],
   webpackFinal: async (config, { configType }) => {
     config.devtool = 'eval-cheap-source-map';
