@@ -27,7 +27,7 @@ const Template: Story<{
   const [visResultat, toggleResultat] = useState(false);
   return (
     <FagsakSokSakIndex
-      fagsaker={visResultat ? fagsaker as Fagsak[] : []}
+      fagsaker={visResultat ? fagsaker : []}
       searchFagsakCallback={() => toggleResultat(true) as any}
       searchResultReceived={visResultat}
       selectFagsakCallback={action('button-click')}

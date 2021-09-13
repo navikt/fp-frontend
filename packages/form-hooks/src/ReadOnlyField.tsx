@@ -11,9 +11,12 @@ const hasValue = (value: any): boolean => value !== undefined && value !== null 
 interface OwnProps {
   label?: LabelType;
   isEdited?: boolean;
+  input: {
+    value?: string;
+  };
 }
 
-export const ReadOnlyField: FunctionComponent<OwnProps & any> = ({
+export const ReadOnlyField: FunctionComponent<OwnProps> = ({
   label,
   input,
   isEdited,

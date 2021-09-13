@@ -6,10 +6,10 @@ const history = createBrowserHistory({
   basename: '/',
 });
 
-const withRouterProvider = (Story: any) => (
+const withRouter = (Story: any) => (
   <Router history={history}>
     <Story />
   </Router>
 );
 
-export default withRouterProvider;
+export default withRouter;

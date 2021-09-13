@@ -44,7 +44,6 @@ class CustomNavSelect extends Component<OwnProps> {
     }
   }
 
-  // TODO Kva for type blir returnert her?
   getOptionValues(): any {
     const { props: { selectValues } } = this;
     return selectValues
