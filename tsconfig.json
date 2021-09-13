@@ -7,13 +7,14 @@
 		"allowJs": true,
 		"noEmit": true,
 		"strict": false,
+		"strictBindCallApply": true,
 		"resolveJsonModule": true,
 		"esModuleInterop": true,
 		"sourceMap": true,
 		"jsx": "react",
 		"typeRoots": ["./node_modules/@types", "./@types"],
 		"baseUrl": "packages/",
-		"skipLibCheck": true, //TODO Fjern denne
+		"skipLibCheck": true,
 	},
 	"include": [
 		"packages/**/*",
