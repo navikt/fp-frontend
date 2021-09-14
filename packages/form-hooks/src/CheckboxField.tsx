@@ -3,7 +3,7 @@ import { Checkbox as NavCheckbox } from 'nav-frontend-skjema';
 import { useController, useFormContext } from 'react-hook-form';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { LabelType } from './Label';
-import getError from './formUtils';
+import getError from './getError';
 
 interface OwnProps {
   name: string;

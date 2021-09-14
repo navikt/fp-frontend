@@ -7,7 +7,7 @@ import { Datepicker } from '@fpsak-frontend/shared-components';
 
 import ReadOnlyField from './ReadOnlyField';
 import Label, { LabelType } from './Label';
-import getError from './formUtils';
+import getError from './getError';
 
 interface OwnProps {
   name: string;

@@ -5,7 +5,7 @@ import classnames from 'classnames/bind';
 import CustomNavSelect from './CustomNavSelect';
 import styles from './selectField.less';
 import ReadOnlyField from './ReadOnlyField';
-import getError from './formUtils';
+import getError from './getError';
 
 const classNames = classnames.bind(styles);
 

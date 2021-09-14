@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
-import getError from './formUtils';
+import getError from './getError';
 
 interface NavFieldGroupProps {
   name?: string;

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { NavLink } from 'react-router-dom';
-import { useFormContext, useFieldArray } from 'react-hook-form';
+import { useFormContext, useFieldArray, UseFormGetValues } from 'react-hook-form';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { Location } from 'history';
 import { Undertekst, Normaltekst } from 'nav-frontend-typografi';
@@ -29,7 +29,7 @@ const maxLength2000 = maxLength(2000);
 
 const FIELD_ARRAY_NAME = 'aksjonspunktGodkjenning';
 
-const validerValgtFakta = (getValues, fieldIndex) => () => {
+const validerValgtFakta = (getValues: UseFormGetValues<any>, fieldIndex: string) => () => {
   if (!getValues(`${fieldIndex}.feilFakta`)
     && !getValues(`${fieldIndex}.feilLov`)
     && !getValues(`${fieldIndex}.feilRegel`)

@@ -3,7 +3,7 @@ import { useController, useFormContext } from 'react-hook-form';
 import { Input as NavInput } from 'nav-frontend-skjema';
 import Label from './Label';
 import ReadOnlyField from './ReadOnlyField';
-import getError from './formUtils';
+import getError from './getError';
 
 interface OwnProps {
   name: string;

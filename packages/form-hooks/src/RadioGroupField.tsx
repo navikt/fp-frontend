@@ -6,7 +6,7 @@ import { useController, useFormContext } from 'react-hook-form';
 import { LabelType } from './Label';
 import { RadioOptionProps } from './RadioOption';
 import OptionGrid, { Direction } from './OptionGrid';
-import getError from './formUtils';
+import getError from './getError';
 
 import styles from './radioGroupField.less';
 

@@ -37,7 +37,7 @@ export default {
 };
 
 const Template: Story<{
-  lagre: (data: any) => undefined,
+  lagre: (data: any) => Promise<void>,
   behandling: Behandling,
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[],
   readOnly: boolean,

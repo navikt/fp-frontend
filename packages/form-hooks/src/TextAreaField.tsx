@@ -7,7 +7,7 @@ import Label, { LabelType } from './Label';
 
 import styles from './textAreaField.less';
 import ReadOnlyField from './ReadOnlyField';
-import getError from './formUtils';
+import getError from './getError';
 
 type BadgesType = 'suksess' | 'info' | 'advarsel' | 'fokus';
 
