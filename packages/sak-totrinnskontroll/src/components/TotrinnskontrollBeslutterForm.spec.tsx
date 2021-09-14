@@ -45,12 +45,9 @@ describe('<TotrinnskontrollBeslutterForm>', () => {
       erForeldrepengerFagsak
       arbeidsforholdHandlingTyper={[]}
       skjemalenkeTyper={[]}
-      aksjonspunktGodkjenning={[]}
-      initialValues={{
-        aksjonspunktGodkjenning: [],
-      }}
       faktaOmBeregningTilfeller={[]}
       onSubmit={() => undefined}
+      setBeslutterForData={() => undefined}
     />, messages);
 
     const form = wrapper.find('form');

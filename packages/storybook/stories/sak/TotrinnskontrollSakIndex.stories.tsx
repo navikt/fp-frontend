@@ -45,7 +45,7 @@ const dataReadOnly = [{
         }],
       },
       besluttersBegrunnelse: 'asdfa',
-      totrinnskontrollGodkjent: false,
+      totrinnskontrollGodkjent: 'false',
       vurderPaNyttArsaker: [
         {
           kode: 'FEIL_REGEL',
