@@ -3,6 +3,7 @@ import { useController, useFormContext } from 'react-hook-form';
 import { Input as NavInput } from 'nav-frontend-skjema';
 import Label from './Label';
 import ReadOnlyField from './ReadOnlyField';
+import getError from './getError';
 
 interface OwnProps {
   name: string;
@@ -51,7 +52,7 @@ const InputField: FunctionComponent<OwnProps> = ({
       className={className}
       placeholder={placeholder}
       label={<Label input={label} readOnly={false} />}
-      feil={errors[name] && errors[name].message}
+      feil={getError(errors, name)}
       bredde={bredde}
       {...field}
       value={field.value ? field.value : ''}

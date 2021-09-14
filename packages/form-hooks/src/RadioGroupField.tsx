@@ -6,6 +6,7 @@ import { useController, useFormContext } from 'react-hook-form';
 import { LabelType } from './Label';
 import { RadioOptionProps } from './RadioOption';
 import OptionGrid, { Direction } from './OptionGrid';
+import getError from './getError';
 
 import styles from './radioGroupField.less';
 
@@ -57,7 +58,7 @@ const RadioGroupField: FunctionComponent<OwnProps> = ({
       checked: radioOption.props.value.toString() === field.value?.toString(),
     })), [children, field.value, customOnChange]);
 
-  const feil = errors[name] && errors[name].message;
+  const feil = getError(errors, name);
 
   return (
     <NavSkjemaGruppe

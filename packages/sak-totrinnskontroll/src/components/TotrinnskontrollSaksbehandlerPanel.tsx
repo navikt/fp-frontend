@@ -77,7 +77,7 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
                     </div>
                   ))}
                   <div className={styles.approvalItem}>
-                    {aksjonspunkt.totrinnskontrollGodkjent ? (
+                    {aksjonspunkt.totrinnskontrollGodkjent === 'true' ? (
                       <div>
                         <span>
                           <Image

@@ -32,7 +32,7 @@ type TotrinnskontrollAksjonspunkt = Readonly<{
     faktaOmBeregningTilfeller: Kodeverk[];
   };
   besluttersBegrunnelse?: string;
-  totrinnskontrollGodkjent?: boolean;
+  totrinnskontrollGodkjent?: string;
   vurderPaNyttArsaker?: Kodeverk[];
   uttakPerioder?: {
     fom: string;

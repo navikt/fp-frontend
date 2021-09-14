@@ -7,6 +7,7 @@ import Label, { LabelType } from './Label';
 
 import styles from './textAreaField.less';
 import ReadOnlyField from './ReadOnlyField';
+import getError from './getError';
 
 type BadgesType = 'suksess' | 'info' | 'advarsel' | 'fokus';
 
@@ -63,7 +64,7 @@ const TextAreaField: FunctionComponent<OwnProps> = ({
       )}
       <NavTextarea
         label={<Label input={label} readOnly={false} />}
-        feil={errors[name] && errors[name].message}
+        feil={getError(errors, name)}
         {...field}
         value={field.value ? field.value : ''}
         {...otherProps}

@@ -7,6 +7,7 @@ import { Datepicker } from '@fpsak-frontend/shared-components';
 
 import ReadOnlyField from './ReadOnlyField';
 import Label, { LabelType } from './Label';
+import getError from './getError';
 
 interface OwnProps {
   name: string;
@@ -75,7 +76,7 @@ const DatepickerField: FunctionComponent<OwnProps> = ({
   return (
     <Datepicker
       label={<Label input={label} readOnly={false} />}
-      feil={errors[name] && errors[name].message}
+      feil={getError(errors, name)}
       {...inputProps}
       {...otherProps}
       value={inputProps.value ? isoToDdMmYyyy(inputProps.value) : ''}
