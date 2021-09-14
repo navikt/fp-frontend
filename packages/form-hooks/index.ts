@@ -6,3 +6,4 @@ export { default as RadioOption } from './src/RadioOption';
 export { default as SelectField } from './src/SelectField';
 export { default as TextAreaField } from './src/TextAreaField';
 export { default as Form } from './src/Form';
+export { default as SkjemaGruppeMedFeilviser } from './src/SkjemaGruppeMedFeilviser';

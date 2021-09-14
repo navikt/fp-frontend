@@ -16,7 +16,7 @@ const classNames = classnames.bind(styles);
 interface OwnProps {
   label?: ReactNode;
   placeholder?: string;
-  feil?: { feilmelding?: string };
+  feil?: string;
   disabled?: boolean;
   onChange: (dato: string | ChangeEvent) => void;
   onBlur: (event: any) => void;
@@ -41,7 +41,6 @@ class Datepicker extends Component<OwnProps, StateProps> {
     label: '',
     placeholder: 'dd.mm.åååå',
     value: '',
-    feil: null,
     disabled: false,
     initialMonth: new Date(),
     numberOfMonths: 1,
