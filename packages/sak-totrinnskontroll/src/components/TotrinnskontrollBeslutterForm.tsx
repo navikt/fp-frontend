@@ -81,6 +81,8 @@ interface OwnProps {
   faktaOmBeregningTilfeller: KodeverkMedNavn[];
   lagLenke: (skjermlenkeCode: string) => Location | undefined;
   onSubmit: (data: FormValues) => void;
+  beslutterFormData?: any;
+  setBeslutterForData: (data?: any) => void;
 }
 
 /*
@@ -102,6 +104,8 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<OwnProps> = ({
   totrinnskontrollSkjermlenkeContext,
   faktaOmBeregningTilfeller,
   lagLenke,
+  beslutterFormData,
+  setBeslutterForData,
 }) => {
   const erKlage = behandlingKlageVurdering && (!!behandlingKlageVurdering.klageVurderingResultatNFP || !!behandlingKlageVurdering.klageVurderingResultatNK);
   const erAnke = behandling && behandling.type.kode === BehandlingType.ANKE;
@@ -111,7 +115,7 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<OwnProps> = ({
 
   const defaultValues = useMemo(() => buildInitialValues(totrinnskontrollSkjermlenkeContext), [totrinnskontrollSkjermlenkeContext]);
   const formMethods = useForm({
-    defaultValues,
+    defaultValues: beslutterFormData || defaultValues,
   });
 
   const aksjonspunktGodkjenning = formMethods.watch('aksjonspunktGodkjenning');
@@ -121,7 +125,7 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <Form formMethods={formMethods} onSubmit={onSubmit} className={styles.container}>
+    <Form formMethods={formMethods} onSubmit={onSubmit} className={styles.container} setDataOnUnmount={setBeslutterForData}>
       {!readOnly && (
         <>
           <AksjonspunktHelpTextHTML>

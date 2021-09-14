@@ -10,7 +10,7 @@ import {
   Kodeverk, KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 import {
-  CheckboxField, TextAreaField, RadioGroupField, RadioOption,
+  CheckboxField, TextAreaField, RadioGroupField, RadioOption, SkjemaGruppeMedFeilviser,
 } from '@fpsak-frontend/form-hooks';
 import {
   ArrowBox, FlexColumn, FlexContainer, FlexRow,
@@ -29,9 +29,12 @@ const maxLength2000 = maxLength(2000);
 
 const FIELD_ARRAY_NAME = 'aksjonspunktGodkjenning';
 
-const validerValgtFakta = (getValues) => () => {
-  debugger;
-  if (!getValues('feilFakta') && !getValues('feilLov') && !getValues('feilRegel') && !getValues('annet')) {
+const validerValgtFakta = (getValues, fieldIndex) => () => {
+  if (!getValues(`${fieldIndex}.feilFakta`)
+    && !getValues(`${fieldIndex}.feilLov`)
+    && !getValues(`${fieldIndex}.feilRegel`)
+    && !getValues(`${fieldIndex}.annet`)
+  ) {
     return isRequiredMessage();
   }
   return undefined;
@@ -76,7 +79,9 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
   faktaOmBeregningTilfeller,
   lagLenke,
 }) => {
-  const { control, watch, getValues } = useFormContext();
+  const {
+    control, watch, getValues,
+  } = useFormContext();
   const { fields } = useFieldArray({
     control,
     name: FIELD_ARRAY_NAME,
@@ -109,6 +114,8 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
 
         const lenke = lagLenke(context.skjermlenkeType);
 
+        const fieldIndex = `${FIELD_ARRAY_NAME}.${index}`;
+
         return (
           <div key={field.id}>
             {lenke && skjermlenkeTypeKodeverk && (
@@ -125,7 +132,7 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
                 </div>
               ))}
               <SkjemaGruppe>
-                <RadioGroupField name={`${FIELD_ARRAY_NAME}.${index}.totrinnskontrollGodkjent`} bredde="M" readOnly={readOnly}>
+                <RadioGroupField name={`${fieldIndex}.totrinnskontrollGodkjent`} bredde="M" readOnly={readOnly}>
                   <RadioOption label={<FormattedMessage id="ApprovalField.Godkjent" />} value="true" />
                   <RadioOption label={<FormattedMessage id="ApprovalField.Vurder" />} value="false" />
                 </RadioGroupField>
@@ -139,40 +146,42 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
                           </FlexColumn>
                         </FlexRow>
                         <FlexRow>
-                          <SkjemaGruppe>
+                          <SkjemaGruppeMedFeilviser
+                            name={`${fieldIndex}.faktagruppe`}
+                            validate={[validerValgtFakta(getValues, fieldIndex)]}
+                          >
                             <FlexRow>
                               <FlexColumn className={styles.halfColumn}>
                                 <CheckboxField
-                                  name={`${FIELD_ARRAY_NAME}.${index}.feilFakta`}
+                                  name={`${fieldIndex}.feilFakta`}
                                   label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.FeilFakta" />}
                                   readOnly={readOnly}
-                                  validate={[validerValgtFakta(getValues)]}
                                 />
                                 <CheckboxField
-                                  name={`${FIELD_ARRAY_NAME}.${index}.feilRegel`}
+                                  name={`${fieldIndex}.feilRegel`}
                                   label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.FeilRegelForstaelse" />}
                                   readOnly={readOnly}
                                 />
                               </FlexColumn>
                               <FlexColumn className={styles.halfColumn}>
                                 <CheckboxField
-                                  name={`${FIELD_ARRAY_NAME}.${index}.feilLov`}
+                                  name={`${fieldIndex}.feilLov`}
                                   label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.FeilLovanvendelse" />}
                                   readOnly={readOnly}
                                 />
                                 <CheckboxField
-                                  name={`${FIELD_ARRAY_NAME}.${index}.annet`}
+                                  name={`${fieldIndex}.annet`}
                                   label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Annet" />}
                                   readOnly={readOnly}
                                 />
                               </FlexColumn>
                             </FlexRow>
-                          </SkjemaGruppe>
+                          </SkjemaGruppeMedFeilviser>
                         </FlexRow>
                       </FlexContainer>
                     )}
                     <TextAreaField
-                      name={`${FIELD_ARRAY_NAME}.${index}.besluttersBegrunnelse`}
+                      name={`${fieldIndex}.besluttersBegrunnelse`}
                       label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Begrunnelse" />}
                       validate={[required, minLength3, maxLength2000, hasValidText]}
                       readOnly={readOnly}
