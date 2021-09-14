@@ -12,7 +12,6 @@ import klageBehandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArs
 import vurderPaNyttArsakType from '@fpsak-frontend/kodeverk/src/vurderPaNyttArsakType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 import {
   BehandlingAppKontekst, Kodeverk, AlleKodeverk, KlageVurdering, TotrinnskontrollSkjermlenkeContext, AlleKodeverkTilbakekreving, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
@@ -141,23 +140,23 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   return (
     <RawIntlProvider value={intl}>
       {erStatusFatterVedtak && (
-        <ReduxWrapper formName="TotrinnskontrollSakIndex" formData={beslutterFormData} setFormData={setBeslutterForData}>
-          <TotrinnskontrollBeslutterForm
-            behandling={behandling}
-            totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}
-            readOnly={readOnly}
-            onSubmit={submitHandler}
-            forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
-            erForeldrepengerFagsak={fagsakYtelseType.kode === FagsakYtelseType.FORELDREPENGER}
-            behandlingKlageVurdering={behandlingKlageVurdering}
-            arbeidsforholdHandlingTyper={arbeidsforholdHandlingTyper}
-            skjemalenkeTyper={skjemalenkeTyper}
-            erBehandlingEtterKlage={erBehandlingEtterKlage}
-            faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
-            erTilbakekreving={erTilbakekreving}
-            lagLenke={lagLenke}
-          />
-        </ReduxWrapper>
+        <TotrinnskontrollBeslutterForm
+          behandling={behandling}
+          totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}
+          readOnly={readOnly}
+          onSubmit={submitHandler}
+          forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
+          erForeldrepengerFagsak={fagsakYtelseType.kode === FagsakYtelseType.FORELDREPENGER}
+          behandlingKlageVurdering={behandlingKlageVurdering}
+          arbeidsforholdHandlingTyper={arbeidsforholdHandlingTyper}
+          skjemalenkeTyper={skjemalenkeTyper}
+          erBehandlingEtterKlage={erBehandlingEtterKlage}
+          faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
+          erTilbakekreving={erTilbakekreving}
+          lagLenke={lagLenke}
+          beslutterFormData={beslutterFormData}
+          setBeslutterForData={setBeslutterForData}
+        />
       )}
       {!erStatusFatterVedtak && (
         <TotrinnskontrollSaksbehandlerPanel

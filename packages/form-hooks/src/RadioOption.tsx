@@ -7,7 +7,7 @@ import Label, { LabelType } from './Label';
 export interface RadioOptionProps {
   name?: string;
   label: LabelType;
-  value: any;
+  value: string | number;
   style?: CSSProperties;
   onChange?: (value: any) => void;
   checked?: boolean;

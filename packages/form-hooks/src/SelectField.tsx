@@ -5,6 +5,7 @@ import classnames from 'classnames/bind';
 import CustomNavSelect from './CustomNavSelect';
 import styles from './selectField.less';
 import ReadOnlyField from './ReadOnlyField';
+import getError from './formUtils';
 
 const classNames = classnames.bind(styles);
 
@@ -58,7 +59,7 @@ const SelectField: FunctionComponent<OwnProps> = ({
       hideValueOnDisable={hideValueOnDisable}
       className={classNames('navSelect', { navSelectReadOnly: readOnly })}
       label={label}
-      feil={errors[name] && errors[name].message}
+      feil={getError(errors, name)}
       bredde={bredde}
       {...field}
       {...otherProps}

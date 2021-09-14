@@ -1,17 +1,14 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { connect } from 'react-redux';
-import {
-  FieldArray, formValueSelector, InjectedFormProps, reduxForm,
-} from 'redux-form';
+import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
-import { createSelector } from 'reselect';
 import { Location } from 'history';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
+import { Form } from '@fpsak-frontend/form-hooks';
 import vurderPaNyttArsakType from '@fpsak-frontend/kodeverk/src/vurderPaNyttArsakType';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import konsekvensForYtelsen from '@fpsak-frontend/kodeverk/src/konsekvensForYtelsen';
-import { ariaCheck, isRequiredMessage, decodeHtmlEntity } from '@fpsak-frontend/utils';
+import { ariaCheck, decodeHtmlEntity } from '@fpsak-frontend/utils';
 import { VerticalSpacer, AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
 import {
   Behandling, Kodeverk, KodeverkMedNavn, KlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,
@@ -22,7 +19,7 @@ import AksjonspunktGodkjenningFieldArray, { AksjonspunktGodkjenningData } from '
 import styles from './totrinnskontrollBeslutterForm.less';
 
 const erAlleGodkjent = (formState: TotrinnskontrollAksjonspunkt[] = []) => formState
-  .every((ap) => ap.totrinnskontrollGodkjent && ap.totrinnskontrollGodkjent === true);
+  .every((ap) => ap.totrinnskontrollGodkjent && ap.totrinnskontrollGodkjent === 'true');
 
 const erAlleGodkjentEllerAvvist = (formState: TotrinnskontrollAksjonspunkt[] = []) => formState
   .every((ap) => ap.totrinnskontrollGodkjent !== null);
@@ -36,140 +33,6 @@ const harIkkeKonsekvenserForYtelsen = (konsekvenserForYtelsenKoder: string[], be
     return true;
   }
   return !konsekvenserForYtelsenKoder.some((kode) => kode === konsekvenserForYtelsen[0].kode);
-};
-
-export type FormValues = {
-  aksjonspunktGodkjenning: AksjonspunktGodkjenningData[];
-};
-
-interface PureOwnProps {
-  behandling: Behandling;
-  totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
-  forhandsvisVedtaksbrev: () => void;
-  behandlingKlageVurdering?: KlageVurdering;
-  erBehandlingEtterKlage?: boolean;
-  readOnly: boolean;
-  erTilbakekreving: boolean;
-  erForeldrepengerFagsak: boolean;
-  arbeidsforholdHandlingTyper: KodeverkMedNavn[],
-  skjemalenkeTyper: KodeverkMedNavn[];
-  faktaOmBeregningTilfeller: KodeverkMedNavn[];
-  lagLenke: (skjermlenkeCode: string) => Location | undefined;
-  onSubmit: (data: FormValues) => void;
-}
-
-interface MappedOwnProps {
-  initialValues: FormValues;
-  aksjonspunktGodkjenning: TotrinnskontrollAksjonspunkt[];
-}
-
-/*
-  * TotrinnskontrollBeslutterForm
-  *
-  * Presentasjonskomponent. Holds the form of the totrinnkontroll
-  */
-export const TotrinnskontrollBeslutterForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps<FormValues>> = ({
-  behandling,
-  handleSubmit,
-  forhandsvisVedtaksbrev,
-  readOnly,
-  erBehandlingEtterKlage,
-  behandlingKlageVurdering,
-  erForeldrepengerFagsak,
-  arbeidsforholdHandlingTyper,
-  skjemalenkeTyper,
-  erTilbakekreving,
-  aksjonspunktGodkjenning,
-  totrinnskontrollSkjermlenkeContext,
-  faktaOmBeregningTilfeller,
-  lagLenke,
-  ...formProps
-}) => {
-  const erKlage = behandlingKlageVurdering && (!!behandlingKlageVurdering.klageVurderingResultatNFP || !!behandlingKlageVurdering.klageVurderingResultatNK);
-  const erAnke = behandling && behandling.type.kode === BehandlingType.ANKE;
-  const harIkkeKonsekvensForYtelse = useMemo(() => harIkkeKonsekvenserForYtelsen([
-    konsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, konsekvensForYtelsen.INGEN_ENDRING,
-  ], behandling.behandlingsresultat), [behandling.behandlingsresultat]);
-
-  if (!behandling.toTrinnsBehandling) {
-    return null;
-  }
-
-  return (
-    <form name="toTrinn" onSubmit={handleSubmit}>
-      {!readOnly && (
-        <>
-          <AksjonspunktHelpTextHTML>
-            {[<FormattedMessage key={1} id="HelpText.ToTrinnsKontroll" />]}
-          </AksjonspunktHelpTextHTML>
-          <VerticalSpacer sixteenPx />
-        </>
-      )}
-      <FieldArray
-        name="aksjonspunktGodkjenning"
-        component={AksjonspunktGodkjenningFieldArray}
-        erForeldrepengerFagsak={erForeldrepengerFagsak}
-        klagebehandlingVurdering={behandlingKlageVurdering}
-        behandlingStatus={behandling.status}
-        erTilbakekreving={erTilbakekreving}
-        arbeidsforholdHandlingTyper={arbeidsforholdHandlingTyper}
-        readOnly={readOnly}
-        klageKA={behandlingKlageVurdering ? !!behandlingKlageVurdering.klageVurderingResultatNK : undefined}
-        totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
-        skjemalenkeTyper={skjemalenkeTyper}
-        faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
-        lagLenke={lagLenke}
-      />
-      <div className={styles.buttonRow}>
-        <Hovedknapp
-          mini
-          disabled={!erAlleGodkjent(aksjonspunktGodkjenning) || !erAlleGodkjentEllerAvvist(aksjonspunktGodkjenning) || formProps.submitting}
-          spinner={formProps.submitting}
-        >
-          <FormattedMessage id="ToTrinnsForm.Godkjenn" />
-        </Hovedknapp>
-        <Hovedknapp
-          mini
-          disabled={erAlleGodkjent(aksjonspunktGodkjenning) || !erAlleGodkjentEllerAvvist(aksjonspunktGodkjenning) || formProps.submitting}
-          spinner={formProps.submitting}
-          onClick={ariaCheck}
-        >
-          <FormattedMessage id="ToTrinnsForm.SendTilbake" />
-        </Hovedknapp>
-        {!erKlage && !erBehandlingEtterKlage && !erAnke && !erTilbakekreving && harIkkeKonsekvensForYtelse && (
-          <>
-            <VerticalSpacer eightPx />
-            <button
-              type="button"
-              className={styles.buttonLink}
-              onClick={forhandsvisVedtaksbrev}
-            >
-              <FormattedMessage id="ToTrinnsForm.ForhandvisBrev" />
-            </button>
-          </>
-        )}
-      </div>
-    </form>
-  );
-};
-
-const validate = (values: FormValues) => {
-  const errors = {};
-  if (!values.aksjonspunktGodkjenning) {
-    return errors;
-  }
-
-  return {
-    aksjonspunktGodkjenning: values.aksjonspunktGodkjenning.map((kontekst) => {
-      if (!kontekst.feilFakta && !kontekst.feilLov && !kontekst.feilRegel && !kontekst.annet) {
-        return {
-          missingArsakError: isRequiredMessage(),
-        };
-      }
-
-      return undefined;
-    }),
-  };
 };
 
 const finnArsaker = (vurderPaNyttArsaker: Kodeverk[]) => vurderPaNyttArsaker.reduce((acc, arsak) => {
@@ -188,28 +51,129 @@ const finnArsaker = (vurderPaNyttArsaker: Kodeverk[]) => vurderPaNyttArsaker.red
   return {};
 }, {});
 
-const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.totrinnskontrollSkjermlenkeContext],
-  (totrinnskontrollContext): FormValues => ({
-    aksjonspunktGodkjenning: totrinnskontrollContext
-      .map((context) => context.totrinnskontrollAksjonspunkter)
-      .flat()
-      .map((ap) => ({
-        aksjonspunktKode: ap.aksjonspunktKode,
-        totrinnskontrollGodkjent: ap.totrinnskontrollGodkjent,
-        besluttersBegrunnelse: decodeHtmlEntity(ap.besluttersBegrunnelse),
-        ...finnArsaker(ap.vurderPaNyttArsaker ? ap.vurderPaNyttArsaker : []),
-      })),
-  }));
+export type FormValues = {
+  aksjonspunktGodkjenning: AksjonspunktGodkjenningData[];
+};
 
-const formName = 'toTrinnForm';
-
-const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  initialValues: buildInitialValues(ownProps),
-  aksjonspunktGodkjenning: formValueSelector(formName)(state, 'aksjonspunktGodkjenning'),
+const buildInitialValues = (totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[]): FormValues => ({
+  aksjonspunktGodkjenning: totrinnskontrollSkjermlenkeContext
+    .map((context) => context.totrinnskontrollAksjonspunkter)
+    .flat()
+    .map((ap) => ({
+      aksjonspunktKode: ap.aksjonspunktKode,
+      totrinnskontrollGodkjent: ap.totrinnskontrollGodkjent,
+      besluttersBegrunnelse: decodeHtmlEntity(ap.besluttersBegrunnelse),
+      ...finnArsaker(ap.vurderPaNyttArsaker ? ap.vurderPaNyttArsaker : []),
+    })),
 });
 
-export default connect(mapStateToProps)(reduxForm({
-  form: formName,
-  destroyOnUnmount: false,
-  validate,
-})(TotrinnskontrollBeslutterForm));
+interface OwnProps {
+  behandling: Behandling;
+  totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
+  forhandsvisVedtaksbrev: () => void;
+  behandlingKlageVurdering?: KlageVurdering;
+  erBehandlingEtterKlage?: boolean;
+  readOnly: boolean;
+  erTilbakekreving: boolean;
+  erForeldrepengerFagsak: boolean;
+  arbeidsforholdHandlingTyper: KodeverkMedNavn[],
+  skjemalenkeTyper: KodeverkMedNavn[];
+  faktaOmBeregningTilfeller: KodeverkMedNavn[];
+  lagLenke: (skjermlenkeCode: string) => Location | undefined;
+  onSubmit: (data: FormValues) => void;
+}
+
+/*
+  * TotrinnskontrollBeslutterForm
+  *
+  * Presentasjonskomponent. Holds the form of the totrinnkontroll
+  */
+export const TotrinnskontrollBeslutterForm: FunctionComponent<OwnProps> = ({
+  behandling,
+  onSubmit,
+  forhandsvisVedtaksbrev,
+  readOnly,
+  erBehandlingEtterKlage,
+  behandlingKlageVurdering,
+  erForeldrepengerFagsak,
+  arbeidsforholdHandlingTyper,
+  skjemalenkeTyper,
+  erTilbakekreving,
+  totrinnskontrollSkjermlenkeContext,
+  faktaOmBeregningTilfeller,
+  lagLenke,
+}) => {
+  const erKlage = behandlingKlageVurdering && (!!behandlingKlageVurdering.klageVurderingResultatNFP || !!behandlingKlageVurdering.klageVurderingResultatNK);
+  const erAnke = behandling && behandling.type.kode === BehandlingType.ANKE;
+  const harIkkeKonsekvensForYtelse = useMemo(() => harIkkeKonsekvenserForYtelsen([
+    konsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, konsekvensForYtelsen.INGEN_ENDRING,
+  ], behandling.behandlingsresultat), [behandling.behandlingsresultat]);
+
+  const defaultValues = useMemo(() => buildInitialValues(totrinnskontrollSkjermlenkeContext), [totrinnskontrollSkjermlenkeContext]);
+  const formMethods = useForm({
+    defaultValues,
+  });
+
+  const aksjonspunktGodkjenning = formMethods.watch('aksjonspunktGodkjenning');
+
+  if (!behandling.toTrinnsBehandling) {
+    return null;
+  }
+
+  return (
+    <Form formMethods={formMethods} onSubmit={onSubmit} className={styles.container}>
+      {!readOnly && (
+        <>
+          <AksjonspunktHelpTextHTML>
+            {[<FormattedMessage key={1} id="HelpText.ToTrinnsKontroll" />]}
+          </AksjonspunktHelpTextHTML>
+          <VerticalSpacer sixteenPx />
+        </>
+      )}
+      <AksjonspunktGodkjenningFieldArray
+        erForeldrepengerFagsak={erForeldrepengerFagsak}
+        klagebehandlingVurdering={behandlingKlageVurdering}
+        behandlingStatus={behandling.status}
+        erTilbakekreving={erTilbakekreving}
+        arbeidsforholdHandlingTyper={arbeidsforholdHandlingTyper}
+        readOnly={readOnly}
+        klageKA={behandlingKlageVurdering ? !!behandlingKlageVurdering.klageVurderingResultatNK : undefined}
+        totrinnskontrollSkjermlenkeContext={totrinnskontrollSkjermlenkeContext}
+        skjemalenkeTyper={skjemalenkeTyper}
+        faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
+        lagLenke={lagLenke}
+      />
+      <div className={styles.buttonRow}>
+        <Hovedknapp
+          mini
+          disabled={!erAlleGodkjent(aksjonspunktGodkjenning) || !erAlleGodkjentEllerAvvist(aksjonspunktGodkjenning) || formMethods.formState.isSubmitting}
+          spinner={formMethods.formState.isSubmitting}
+        >
+          <FormattedMessage id="ToTrinnsForm.Godkjenn" />
+        </Hovedknapp>
+        <Hovedknapp
+          mini
+          disabled={erAlleGodkjent(aksjonspunktGodkjenning) || !erAlleGodkjentEllerAvvist(aksjonspunktGodkjenning) || formMethods.formState.isSubmitting}
+          spinner={formMethods.formState.isSubmitting}
+          onClick={ariaCheck}
+        >
+          <FormattedMessage id="ToTrinnsForm.SendTilbake" />
+        </Hovedknapp>
+        {!erKlage && !erBehandlingEtterKlage && !erAnke && !erTilbakekreving && harIkkeKonsekvensForYtelse && (
+          <>
+            <VerticalSpacer eightPx />
+            <button
+              type="button"
+              className={styles.buttonLink}
+              onClick={forhandsvisVedtaksbrev}
+            >
+              <FormattedMessage id="ToTrinnsForm.ForhandvisBrev" />
+            </button>
+          </>
+        )}
+      </div>
+    </Form>
+  );
+};
+
+export default TotrinnskontrollBeslutterForm;

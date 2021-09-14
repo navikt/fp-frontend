@@ -2,10 +2,12 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { Checkbox as NavCheckbox } from 'nav-frontend-skjema';
 import { useController, useFormContext } from 'react-hook-form';
 import { Normaltekst } from 'nav-frontend-typografi';
+import { LabelType } from './Label';
+import getError from './formUtils';
 
 interface OwnProps {
   name: string;
-  label: string;
+  label: LabelType;
   validate?: ((value: string) => any)[];
   readOnly?: boolean;
   onChange?: (isChecked: boolean) => void;
@@ -36,7 +38,7 @@ const CheckboxField: FunctionComponent<OwnProps> = ({
   return (
     <NavCheckbox
       label={<Normaltekst>{label}</Normaltekst>}
-      feil={errors[name] && errors[name].message}
+      feil={getError(errors, name)}
       disabled={readOnly}
       checked={field.value === true}
       {...field}
