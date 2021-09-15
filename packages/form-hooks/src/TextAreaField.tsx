@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import { Textarea as NavTextarea } from 'nav-frontend-skjema';
 import EtikettFokus from 'nav-frontend-etiketter';
@@ -7,7 +7,7 @@ import Label, { LabelType } from './Label';
 
 import styles from './textAreaField.less';
 import ReadOnlyField from './ReadOnlyField';
-import getError from './getError';
+import { getError, getValidationRules } from './formUtils';
 
 type BadgesType = 'suksess' | 'info' | 'advarsel' | 'fokus';
 
@@ -35,15 +35,10 @@ const TextAreaField: FunctionComponent<OwnProps> = ({
   ...otherProps
 }) => {
   const { formState: { errors } } = useFormContext();
-  const validationFunctions = validate.reduce((acc, fn, index) => ({
-    ...acc,
-    [index]: (value: any) => fn(value) || true,
-  }), {});
-
   const { field } = useController({
     name,
     rules: {
-      validate: validationFunctions,
+      validate: useMemo(() => getValidationRules(validate), [validate]),
     },
   });
 

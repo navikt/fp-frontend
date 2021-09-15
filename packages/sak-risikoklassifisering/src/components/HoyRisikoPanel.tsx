@@ -6,7 +6,6 @@ import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus'
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { Risikoklassifisering, Aksjonspunkt, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { VurderFaresignalerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import Faresignaler from './Faresignaler';
 import AvklarFaresignalerForm from './AvklarFaresignalerForm';
@@ -41,18 +40,15 @@ const HoyRisikoPanel: FunctionComponent<OwnProps> = ({
       </>
     )}
     <Faresignaler risikoklassifisering={risikoklassifisering} />
-    {!!aksjonspunkt
-      && (
-        <ReduxWrapper formName="HoyRisikoPanel">
-          <AvklarFaresignalerForm
-            aksjonspunkt={aksjonspunkt}
-            readOnly={readOnly}
-            submitCallback={submitCallback}
-            risikoklassifisering={risikoklassifisering}
-            faresignalVurderinger={faresignalVurderinger}
-          />
-        </ReduxWrapper>
-      )}
+    {!!aksjonspunkt && (
+      <AvklarFaresignalerForm
+        aksjonspunkt={aksjonspunkt}
+        readOnly={readOnly}
+        submitCallback={submitCallback}
+        risikoklassifisering={risikoklassifisering}
+        faresignalVurderinger={faresignalVurderinger}
+      />
+    )}
   </Panel>
 );
 
