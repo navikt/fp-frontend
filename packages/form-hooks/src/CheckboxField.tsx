@@ -3,7 +3,7 @@ import { Checkbox as NavCheckbox } from 'nav-frontend-skjema';
 import { useController, useFormContext } from 'react-hook-form';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { LabelType } from './Label';
-import getError from './getError';
+import { getError, getValidationRules } from './formUtils';
 
 interface OwnProps {
   name: string;
@@ -23,15 +23,11 @@ const CheckboxField: FunctionComponent<OwnProps> = ({
   onClick,
 }) => {
   const { formState: { errors } } = useFormContext();
-  const validationFunctions = useMemo(() => validate.reduce((acc, fn, index) => ({
-    ...acc,
-    [index]: (value: any) => fn(value) || true,
-  }), {}), [validate]);
 
   const { field } = useController({
     name,
     rules: {
-      validate: validationFunctions,
+      validate: useMemo(() => getValidationRules(validate), [validate]),
     },
   });
 

@@ -1,11 +1,11 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { useMemo, FunctionComponent, ReactNode } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import classnames from 'classnames/bind';
 
 import CustomNavSelect from './CustomNavSelect';
 import styles from './selectField.less';
 import ReadOnlyField from './ReadOnlyField';
-import getError from './getError';
+import { getError, getValidationRules } from './formUtils';
 
 const classNames = classnames.bind(styles);
 
@@ -33,15 +33,11 @@ const SelectField: FunctionComponent<OwnProps> = ({
   ...otherProps
 }) => {
   const { formState: { errors } } = useFormContext();
-  const validationFunctions = validate.reduce((acc, fn, index) => ({
-    ...acc,
-    [index]: (value: any) => fn(value) || true,
-  }), {});
 
   const { field } = useController({
     name,
     rules: {
-      validate: validationFunctions,
+      validate: useMemo(() => getValidationRules(validate), [validate]),
     },
   });
 
