@@ -25,6 +25,7 @@ import {
   NyIArbeidslivetruttoNæringTransformed,
   NyIArbeidslivetValues,
 } from '../../types/NaringAksjonspunktTsType';
+import { DekningsgradValues } from '../../types/DekningsgradAksjonspunktTsType';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
@@ -45,7 +46,7 @@ type OwnProps = {
 
 interface StaticFunctions {
   buildInitialValuesNyIArbeidslivet: (relevanteAndeler: BeregningsgrunnlagAndel[], gjeldendeAksjonspunkter: Aksjonspunkt[]) => NyIArbeidslivetValues;
-  transformValuesNyIArbeidslivet: (values: NyIArbeidslivetValues) => NyIArbeidslivetruttoNæringTransformed
+  transformValuesNyIArbeidslivet: (values: Required<NyIArbeidslivetValues>) => NyIArbeidslivetruttoNæringTransformed
 }
 
 /**
@@ -121,19 +122,16 @@ export const FastsettSNImpl: FunctionComponent<OwnProps & WrappedComponentProps>
 
 FastsettSNImpl.buildInitialValuesNyIArbeidslivet = (relevanteAndeler: BeregningsgrunnlagAndel[],
   gjeldendeAksjonspunkter: Aksjonspunkt[]): NyIArbeidslivetValues => {
-  if (relevanteAndeler.length === 0 || !gjeldendeAksjonspunkter || gjeldendeAksjonspunkter.length === 0) {
-    return undefined;
-  }
   const snAndel = relevanteAndeler.find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
   const nyIArbeidslivetAP = gjeldendeAksjonspunkter
     .find((ap) => ap.definisjon.kode === FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET);
   return {
     [fastsettInntektFieldname]: snAndel ? formatCurrencyNoKr(snAndel.overstyrtPrAar) : undefined,
-    [begrunnelseFieldname]: nyIArbeidslivetAP && nyIArbeidslivetAP.begrunnelse ? nyIArbeidslivetAP.begrunnelse : '',
-  } as NyIArbeidslivetValues;
+    [begrunnelseFieldname]: nyIArbeidslivetAP && nyIArbeidslivetAP.begrunnelse ? nyIArbeidslivetAP.begrunnelse : undefined,
+  };
 };
 
-FastsettSNImpl.transformValuesNyIArbeidslivet = (values: NyIArbeidslivetValues): NyIArbeidslivetruttoNæringTransformed => ({
+FastsettSNImpl.transformValuesNyIArbeidslivet = (values:Required<NyIArbeidslivetValues>): NyIArbeidslivetruttoNæringTransformed => ({
   kode: FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
   begrunnelse: values[begrunnelseFieldname],
   bruttoBeregningsgrunnlag: removeSpacesFromNumber(values[fastsettInntektFieldname]),

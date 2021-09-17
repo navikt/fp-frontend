@@ -5,7 +5,6 @@ import { Undertekst } from 'nav-frontend-typografi';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
-import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 
 import { GrunnlagForAarsinntektPanelSN } from './GrunnlagForAarsinntektPanelSN';
 import messages from '../../../i18n/nb_NO.json';
@@ -35,7 +34,7 @@ const andel = {
   pgiSnitt: 200000,
   beregningsperiodeFom: '2015-01-01',
   beregningsperiodeTom: '2017-01-01',
-} as BeregningsgrunnlagAndel;
+};
 
 describe('<GrunnlagForAarsinntektPanelSN>', () => {
   it('Skal teste tabellen får korrekt antall rader', () => {

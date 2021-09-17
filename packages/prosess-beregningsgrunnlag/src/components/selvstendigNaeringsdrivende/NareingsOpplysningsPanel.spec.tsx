@@ -29,14 +29,13 @@ const andelerForstePeriode = {
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    utenlandskvirksomhetsnavn: null,
     virksomhetType:
     {
       kode: 'ANNEN',
       kodeverk: 'VIRKSOMHET_TYPE',
     },
   }],
-} as BeregningsgrunnlagAndel;
+};
 
 const agOpp = {
   910909088: {

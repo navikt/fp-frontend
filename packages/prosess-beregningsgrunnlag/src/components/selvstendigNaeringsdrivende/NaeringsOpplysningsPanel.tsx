@@ -20,7 +20,7 @@ const finnvirksomhetsTypeKode = (næring: Næring): string => {
   const kode = næring?.virksomhetType?.kode;
   return kode || 'UDEFINERT';
 };
-const virksomhetsDatoer = (næring: Næring): string => {
+const virksomhetsDatoer = (næring: Næring): string | undefined => {
   const { oppstartsdato, opphørsdato } = næring;
   if (!oppstartsdato) {
     return undefined;
@@ -28,10 +28,10 @@ const virksomhetsDatoer = (næring: Næring): string => {
   return opphørsdato ? `${dateFormat(oppstartsdato)}-${dateFormat(opphørsdato)} ` : `${dateFormat(oppstartsdato)}-`;
 };
 
-const revisorDetaljer = (næring: Næring): string => {
+const revisorDetaljer = (næring: Næring): string | undefined => {
   const { regnskapsførerNavn, regnskapsførerTlf } = næring;
   if (!regnskapsførerNavn) {
-    return null;
+    return undefined;
   }
   return regnskapsførerTlf ? `${regnskapsførerNavn}-${regnskapsførerTlf} ` : `${regnskapsførerNavn}-`;
 };
@@ -52,16 +52,16 @@ const lagIntroTilEndringspanel = (næring: Næring): React.ReactNode => {
   }
   return (
     <span>
-      <FormattedMessage id={hendelseTekst} values={{ dato: dateFormat(hendelseDato), b: (chunks) => <b>{chunks}</b> }} />
+      <FormattedMessage id={hendelseTekst} values={{ dato: dateFormat(hendelseDato), b: (chunks: any) => <b>{chunks}</b> }} />
     </span>
   );
 };
 
-const erNæringNyoppstartetEllerVarigEndret = (næring): boolean => {
+const erNæringNyoppstartetEllerVarigEndret = (næring: Næring): boolean => {
   const {
     erNyoppstartet, erVarigEndret,
   } = næring;
-  return erVarigEndret || erNyoppstartet;
+  return !!erVarigEndret || !!erNyoppstartet;
 };
 
 const lagBeskrivelsePanel = (næringsAndel: Næring, intl: IntlShape): React.ReactNode => (
@@ -86,7 +86,7 @@ const lagBeskrivelsePanel = (næringsAndel: Næring, intl: IntlShape): React.Rea
 const søkerHarOppgittInntekt = (næring: Næring): boolean => !!næring.oppgittInntekt || næring.oppgittInntekt === 0;
 
 type OwnProps = {
-    alleAndelerIForstePeriode?: BeregningsgrunnlagAndel[];
+    alleAndelerIForstePeriode: BeregningsgrunnlagAndel[];
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
@@ -96,7 +96,7 @@ export const NaeringsopplysningsPanel: FunctionComponent<OwnProps & WrappedCompo
   intl,
 }) => {
   const snAndel = alleAndelerIForstePeriode.find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
-  if (!snAndel.næringer) {
+  if (!snAndel?.næringer) {
     return null;
   }
 
@@ -178,9 +178,6 @@ export const NaeringsopplysningsPanel: FunctionComponent<OwnProps & WrappedCompo
       ))}
     </>
   );
-};
-NaeringsopplysningsPanel.defaultProps = {
-  alleAndelerIForstePeriode: undefined,
 };
 
 export default injectIntl(NaeringsopplysningsPanel);
