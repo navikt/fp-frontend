@@ -71,7 +71,7 @@ export const IkkeAdgang = Template.bind({});
 IkkeAdgang.args = {
   fagsaker: [],
   searchResultAccessDenied: {
-    feilmelding: 'Har ikke adgang',
+    feilmelding: 'FagsakSokSakIndex.HarIkkeAdgang',
   },
 };
 

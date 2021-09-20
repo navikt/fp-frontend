@@ -13,5 +13,7 @@
   "Person.Man": "Mann",
   "Person.Woman": "Kvinne",
   "Person.ImageText": "Personinformasjon",
-  "ValidationMessage.InvalidSaksnummerOrFodselsnummerFormat": "Ugyldig saksnummer eller fødselsnummer"
+  "ValidationMessage.InvalidSaksnummerOrFodselsnummerFormat": "Ugyldig saksnummer eller fødselsnummer",
+
+  "FagsakSokSakIndex.HarIkkeAdgang": "Har ikke adgang"
 }
