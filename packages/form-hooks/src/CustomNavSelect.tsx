@@ -59,10 +59,11 @@ class CustomNavSelect extends Component<OwnProps> {
 
   checkCorrespondingOptionForValue(): void {
     const { getOptionValues, props: { value } } = this;
+    const n = value || '';
     // (aa) added "&& value !== ''" as to not spam other browsers
-    if (!getOptionValues().includes(value) && value !== '') {
+    if (!getOptionValues().includes(n) && n !== '') {
       // eslint-disable-next-line no-console
-      console.warn(`No corresponding option found for value '${value}'`); // NOSONAR Viser ikke sensitiv info
+      console.warn(`No corresponding option found for value '${n}'`); // NOSONAR Viser ikke sensitiv info
     }
   }
 
