@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { connect } from 'react-redux';
-import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { useForm } from 'react-hook-form';
+import { useIntl } from 'react-intl';
 import classNames from 'classnames';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
@@ -11,7 +10,7 @@ import {
   ariaCheck, getLanguageFromSprakkode, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
 import ugunstAarsakTyper from '@fpsak-frontend/kodeverk/src/ugunstAarsakTyper';
-import { SelectField, TextAreaField } from '@fpsak-frontend/form';
+import { SelectField, TextAreaField, Form } from '@fpsak-frontend/form-hooks';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 
@@ -56,7 +55,31 @@ const getfiltrerteRevurderingVarslingArsaker = (revurderingVarslingArsaker: Kode
   return revurderingVarslingArsaker;
 };
 
-interface PureOwnProps {
+const buildInitalValues = (recipients: string[], templates: Template[], isKontrollerRevurderingApOpen?: boolean): FormValues => {
+  const initialValues = {
+    mottaker: recipients[0] ? recipients[0] : undefined,
+    brevmalkode: templates && templates[0] ? templates[0].kode : undefined,
+    fritekst: '',
+  };
+
+  if (isKontrollerRevurderingApOpen) {
+    const defaultVerdi = templates.some((template) => template.kode === dokumentMalType.REVURDERING_DOK)
+      ? dokumentMalType.REVURDERING_DOK : dokumentMalType.VARREV;
+    return { ...initialValues, brevmalkode: defaultVerdi };
+  }
+  return { ...initialValues };
+};
+
+const transformValues = (values: FormValues) => {
+  const newValues = values;
+  if ((values.brevmalkode === dokumentMalType.REVURDERING_DOK || values.brevmalkode === dokumentMalType.VARREV)
+      && newValues.arsakskode !== ugunstAarsakTyper.ANNET) {
+    newValues.fritekst = ' ';
+  }
+  return newValues;
+};
+
+interface OwnProps {
   submitCallback: (values: FormValues) => void;
   previewCallback: (mottaker?: string, brevmalkode?: string, fritekst?: string, arsakskode?: string) => void;
   recipients: string[];
@@ -66,13 +89,8 @@ interface PureOwnProps {
   isKontrollerRevurderingApOpen?: boolean;
   fagsakYtelseType: Kodeverk;
   kanVeilede: boolean;
-}
-
-interface MappedOwnProps {
-  mottaker?: string;
-  brevmalkode?: string;
-  fritekst?: string;
-  arsakskode?: string;
+  meldingFormData?: any,
+  setMeldingForData: (data?: any) => void,
 }
 
 /**
@@ -81,28 +99,37 @@ interface MappedOwnProps {
  * Presentasjonskomponent. Gir mulighet for å forhåndsvise og sende brev. Mottaker og brevtype velges fra predefinerte lister,
  * og fritekst som skal flettes inn i brevet skrives inn i et eget felt.
  */
-export const MessagesImpl: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
-  intl,
+export const Messages: FunctionComponent<OwnProps> = ({
   recipients,
   templates,
   previewCallback,
-  handleSubmit,
+  submitCallback,
   sprakKode,
-  mottaker,
-  brevmalkode,
-  fritekst,
-  arsakskode,
   revurderingVarslingArsak,
   fagsakYtelseType,
   kanVeilede,
-  ...formProps
+  meldingFormData,
+  setMeldingForData,
+  isKontrollerRevurderingApOpen,
 }) => {
+  const intl = useIntl();
+  const formMethods = useForm<FormValues>({
+    defaultValues: meldingFormData || buildInitalValues(recipients, templates, isKontrollerRevurderingApOpen),
+  });
+
+  const mottaker = formMethods.watch('mottaker');
+  const brevmalkode = formMethods.watch('brevmalkode');
+  const fritekst = formMethods.watch('fritekst');
+  const arsakskode = formMethods.watch('arsakskode');
+
   if (!sprakKode) {
     return null;
   }
 
+  const { formState } = formMethods;
+
   const previewMessage = (e: React.MouseEvent | React.KeyboardEvent) => {
-    if (formProps.valid || formProps.pristine) {
+    if (formState.isValid || !formState.isDirty) {
       previewCallback(mottaker, brevmalkode, fritekst, arsakskode);
     } else {
       // TODO Fungerar dette? Typescript seier at submit ikkje ligg i formProps
@@ -117,7 +144,11 @@ export const MessagesImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Wra
   const language = getLanguageFromSprakkode(sprakKode);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form
+      formMethods={formMethods}
+      onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
+      setDataOnUnmount={setMeldingForData}
+    >
       <SelectField
         name="mottaker"
         label={intl.formatMessage({ id: 'Messages.Recipient' })}
@@ -157,13 +188,13 @@ export const MessagesImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Wra
               label={intl.formatMessage({ id: getFritekstMessage(brevmalkode) })}
               validate={[required, maxLength4000, minLength3, hasValidText]}
               maxLength={4000}
-              badges={[{ type: 'fokus', text: language, title: 'Messages.Beskrivelse' }]}
+              badges={[{ type: 'fokus', text: language, titleText: intl.formatMessage({ id: 'Messages.Beskrivelse' }) }]}
             />
           </div>
         </>
       )}
       <div className={styles.buttonRow}>
-        <Hovedknapp mini spinner={formProps.submitting} disabled={formProps.submitting || kanVeilede} onClick={ariaCheck}>
+        <Hovedknapp mini spinner={formState.isSubmitting} disabled={formState.isSubmitting || kanVeilede} onClick={ariaCheck}>
           {intl.formatMessage({ id: 'Messages.Submit' })}
         </Hovedknapp>
         <a
@@ -175,48 +206,8 @@ export const MessagesImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Wra
           {intl.formatMessage({ id: 'Messages.Preview' })}
         </a>
       </div>
-    </form>
+    </Form>
   );
 };
-
-const buildInitalValues = (recipients: string[], templates: Template[], isKontrollerRevurderingApOpen?: boolean): FormValues => {
-  const initialValues = {
-    mottaker: recipients[0] ? recipients[0] : undefined,
-    brevmalkode: templates && templates[0] ? templates[0].kode : undefined,
-    fritekst: '',
-  };
-
-  if (isKontrollerRevurderingApOpen) {
-    const defaultVerdi = templates.some((template) => template.kode === dokumentMalType.REVURDERING_DOK)
-      ? dokumentMalType.REVURDERING_DOK : dokumentMalType.VARREV;
-    return { ...initialValues, brevmalkode: defaultVerdi };
-  }
-  return { ...initialValues };
-};
-
-const transformValues = (values: FormValues) => {
-  const newValues = values;
-  if ((values.brevmalkode === dokumentMalType.REVURDERING_DOK || values.brevmalkode === dokumentMalType.VARREV)
-      && newValues.arsakskode !== ugunstAarsakTyper.ANNET) {
-    newValues.fritekst = ' ';
-  }
-  return newValues;
-};
-
-const formName = 'Messages';
-
-const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProps) => {
-  const onSubmit = (values: FormValues) => initialOwnProps.submitCallback(transformValues(values));
-  return (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-    ...formValueSelector(formName)(state, 'mottaker', 'brevmalkode', 'fritekst', 'arsakskode'),
-    initialValues: buildInitalValues(ownProps.recipients, ownProps.templates, ownProps.isKontrollerRevurderingApOpen),
-    onSubmit,
-  });
-};
-
-const Messages = connect(mapStateToPropsFactory)(reduxForm({
-  form: formName,
-  destroyOnUnmount: false,
-})(injectIntl(MessagesImpl)));
 
 export default Messages;
