@@ -77,7 +77,7 @@ describe('<FastsettSN>', () => {
 
     const expectedValues = {
       [fastsettInntektFieldname]: undefined,
-      [begrunnelseFieldname]: '',
+      [begrunnelseFieldname]: undefined,
     };
 
     expect(actualValues).toEqual(expectedValues);
@@ -90,7 +90,7 @@ describe('<FastsettSN>', () => {
     const actualValues = FastsettSNImpl.buildInitialValuesNyIArbeidslivet(andeler, aksjonspunkter);
     const expectedValues = {
       [fastsettInntektFieldname]: undefined,
-      [begrunnelseFieldname]: '',
+      [begrunnelseFieldname]: undefined,
     };
 
     expect(actualValues).toEqual(expectedValues);

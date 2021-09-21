@@ -25,7 +25,6 @@ import {
   NyIArbeidslivetruttoNæringTransformed,
   NyIArbeidslivetValues,
 } from '../../types/NaringAksjonspunktTsType';
-import { DekningsgradValues } from '../../types/DekningsgradAksjonspunktTsType';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
