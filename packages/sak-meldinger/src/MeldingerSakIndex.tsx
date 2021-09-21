@@ -3,7 +3,6 @@ import { RawIntlProvider } from 'react-intl';
 
 import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import Messages, { FormValues, Template } from './components/Messages';
 import messages from '../i18n/nb_NO.json';
@@ -38,19 +37,19 @@ const MeldingerSakIndex: FunctionComponent<OwnProps> = ({
   setMeldingForData,
 }) => (
   <RawIntlProvider value={intl}>
-    <ReduxWrapper formName="MeldingerSakIndex" formData={meldingFormData} setFormData={setMeldingForData}>
-      <Messages
-        submitCallback={submitCallback}
-        recipients={recipients}
-        templates={templates}
-        sprakKode={sprakKode}
-        previewCallback={previewCallback}
-        isKontrollerRevurderingApOpen={isKontrollerRevurderingApOpen}
-        revurderingVarslingArsak={revurderingVarslingArsak}
-        fagsakYtelseType={fagsakYtelseType}
-        kanVeilede={kanVeilede}
-      />
-    </ReduxWrapper>
+    <Messages
+      submitCallback={submitCallback}
+      recipients={recipients}
+      templates={templates}
+      sprakKode={sprakKode}
+      previewCallback={previewCallback}
+      isKontrollerRevurderingApOpen={isKontrollerRevurderingApOpen}
+      revurderingVarslingArsak={revurderingVarslingArsak}
+      fagsakYtelseType={fagsakYtelseType}
+      kanVeilede={kanVeilede}
+      meldingFormData={meldingFormData}
+      setMeldingForData={setMeldingForData}
+    />
   </RawIntlProvider>
 );
 
