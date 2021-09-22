@@ -112,7 +112,7 @@
     "ignore-styles": "^5.0.1",
     "jest": "^27.1.0",
     "jest-canvas-mock": "^2.3.1",
-    "jest-runner-eslint": "^0.10.1",
+    "jest-runner-eslint": "^0.11.1",
     "jest-transform-stub": "^2.0.0",
     "jsdom": "^17.0.0",
     "lerna": "^4.0.0",
