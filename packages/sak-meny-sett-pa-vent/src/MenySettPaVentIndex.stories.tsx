@@ -1,4 +1,5 @@
 import React from 'react';
+import { Story } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import MenySettPaVentIndex from '@fpsak-frontend/sak-meny-sett-pa-vent';
@@ -9,10 +10,16 @@ export default {
   component: MenySettPaVentIndex,
 };
 
-export const visMenyForÅSetteBehandlingPåVent = () => (
+const Template: Story<{
+  settBehandlingPaVent: () => void,
+  lukkModal: () => void;
+}> = ({
+  settBehandlingPaVent,
+  lukkModal,
+}) => (
   <MenySettPaVentIndex
     behandlingVersjon={2}
-    settBehandlingPaVent={action('button-click')}
+    settBehandlingPaVent={settBehandlingPaVent}
     ventearsaker={[{
       kode: venteArsakType.AVV_DOK,
       kodeverk: 'VENT_ARSAK_TYPE',
@@ -22,7 +29,13 @@ export const visMenyForÅSetteBehandlingPåVent = () => (
       kodeverk: 'VENT_ARSAK_TYPE',
       navn: 'Avvent fødsel',
     }]}
-    lukkModal={action('button-click')}
+    lukkModal={lukkModal}
     erTilbakekreving={false}
   />
 );
+
+export const Default = Template.bind({});
+Default.args = {
+  settBehandlingPaVent: action('button-click'),
+  lukkModal: action('button-click'),
+};

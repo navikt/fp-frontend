@@ -3,9 +3,8 @@ import { RawIntlProvider } from 'react-intl';
 
 import { BehandlingAppKontekst, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
-import HenleggBehandlingModal from './components/HenleggBehandlingModal';
+import HenleggBehandlingModal, { FormValues } from './components/HenleggBehandlingModal';
 import HenlagtBehandlingModal from './components/HenlagtBehandlingModal';
 
 import messages from '../i18n/nb_NO.json';
@@ -39,7 +38,7 @@ const MenyHenleggIndex: FunctionComponent<OwnProps> = ({
 }) => {
   const [erHenlagt, setHenlagt] = useState(false);
 
-  const submit = useCallback((formValues) => {
+  const submit = useCallback((formValues: FormValues) => {
     const henleggBehandlingDto = {
       årsakKode: formValues.årsakKode,
       begrunnelse: formValues.begrunnelse,
@@ -53,10 +52,8 @@ const MenyHenleggIndex: FunctionComponent<OwnProps> = ({
   return (
     <RawIntlProvider value={intl}>
       {!erHenlagt && (
-      <ReduxWrapper formName="MenyHenleggIndex">
         <HenleggBehandlingModal
-          // @ts-ignore Fiks denne
-          onSubmit={submit}
+          handleSubmit={submit}
           cancelEvent={lukkModal}
           previewHenleggBehandling={forhandsvisHenleggBehandling}
           ytelseType={ytelseType}
@@ -64,7 +61,6 @@ const MenyHenleggIndex: FunctionComponent<OwnProps> = ({
           behandlingUuid={valgtBehandling.uuid}
           behandlingResultatTyper={behandlingResultatTyper}
         />
-      </ReduxWrapper>
       )}
       {erHenlagt && (
         <HenlagtBehandlingModal
