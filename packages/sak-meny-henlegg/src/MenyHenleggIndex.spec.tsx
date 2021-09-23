@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
+import Modal from 'nav-frontend-modal';
 import * as stories from './MenyHenleggIndex.stories';
 
 const {
@@ -9,6 +10,8 @@ const {
 } = composeStories(stories);
 
 describe('<MenyHenleggIndex>', () => {
+  Modal.setAppElement('body');
+
   it('skal velge henlegge behandling og så vise modal som viser at behandling er henlagt', async () => {
     const henleggBehandling = jest.fn(() => Promise.resolve());
     const utils = render(<ForFørstegangssøknad henleggBehandling={henleggBehandling} />);
