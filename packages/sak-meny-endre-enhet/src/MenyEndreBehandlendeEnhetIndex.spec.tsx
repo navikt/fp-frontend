@@ -2,11 +2,14 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
+import Modal from 'nav-frontend-modal';
 import * as stories from './MenyEndreBehandlendeEnhetIndex.stories';
 
 const { Default } = composeStories(stories);
 
 describe('<MenyEndreBehandlendeEnhetIndex>', () => {
+  Modal.setAppElement('body');
+
   it('skal velge og lagre ny enhet', async () => {
     const lagreNyBehandlendeEnhet = jest.fn();
     const lukkModal = jest.fn();

@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { RawIntlProvider } from 'react-intl';
+import Modal from 'nav-frontend-modal';
 
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import messages from '../../i18n/nb_NO.json';
@@ -10,6 +11,8 @@ import SettPaVentModal from './SettPaVentModal';
 const intlMock = getIntlMock(messages);
 
 describe('<SettPaVentModal>', () => {
+  Modal.setAppElement('body');
+
   it('skal ikke disable knapp for lagring når frist er en gyldig fremtidig dato', async () => {
     const cancelEventCallback = jest.fn();
     const submitCallback = jest.fn();
