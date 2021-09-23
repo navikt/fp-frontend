@@ -58,11 +58,17 @@ const RadioOption: FunctionComponent<RadioOptionProps> = ({
 };
 
 RadioOption.defaultProps = {
+  // eslint-disable-next-line react/default-props-match-prop-types
   name: '',
+  // eslint-disable-next-line react/default-props-match-prop-types
   className: '',
+  // eslint-disable-next-line react/default-props-match-prop-types
   disabled: false,
+  // eslint-disable-next-line react/default-props-match-prop-types
   groupDisabled: false,
+  // eslint-disable-next-line react/default-props-match-prop-types
   onChange: () => undefined,
+  // eslint-disable-next-line react/default-props-match-prop-types
   manualHideChildren: false,
 };
 

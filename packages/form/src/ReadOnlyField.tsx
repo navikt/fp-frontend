@@ -62,7 +62,9 @@ const ReadOnlyField: FunctionComponent<ReadOnlyFieldProps> = ({
 };
 
 ReadOnlyField.defaultProps = {
+  // eslint-disable-next-line react/default-props-match-prop-types
   isEdited: false,
+  // eslint-disable-next-line react/default-props-match-prop-types
   alignRightCenterOnReadOnly: false,
 };
 
