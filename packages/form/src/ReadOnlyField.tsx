@@ -22,7 +22,7 @@ export interface ReadOnlyFieldProps {
 
 const hasValue = (value: string | number): boolean => value !== undefined && value !== null && value !== '';
 
-export const ReadOnlyField: FunctionComponent<ReadOnlyFieldProps> = ({
+const ReadOnlyField: FunctionComponent<ReadOnlyFieldProps> = ({
   label,
   input,
   isEdited,
@@ -62,7 +62,9 @@ export const ReadOnlyField: FunctionComponent<ReadOnlyFieldProps> = ({
 };
 
 ReadOnlyField.defaultProps = {
+  // eslint-disable-next-line react/default-props-match-prop-types
   isEdited: false,
+  // eslint-disable-next-line react/default-props-match-prop-types
   alignRightCenterOnReadOnly: false,
 };
 
