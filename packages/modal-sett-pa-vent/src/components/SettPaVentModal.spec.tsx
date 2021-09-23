@@ -52,7 +52,7 @@ describe('<SettPaVentModal>', () => {
     );
 
     expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
-    expect(utils.getByLabelText('Behandlingen settes på vent med frist')).toBeDisabled();
+    expect(utils.getByText('OK')).toBeDisabled();
   });
 
   it('skal disable knapp for lagring når frist er en historisk dato', async () => {
@@ -74,8 +74,7 @@ describe('<SettPaVentModal>', () => {
     );
 
     expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
-    expect(utils.getByLabelText('Behandlingen settes på vent med frist')).toBeDisabled();
-    expect(utils.queryByRole('textbox')).toHaveLength(2);
+    expect(utils.getByText('OK')).toBeDisabled();
   });
 
   it('skal ikke vise frist-input når behandling automatisk er satt på vent uten frist', async () => {
@@ -85,19 +84,19 @@ describe('<SettPaVentModal>', () => {
     const utils = render(
       <RawIntlProvider value={intlMock}>
         <SettPaVentModal
+          showModal
           submitCallback={submitCallback}
           cancelEvent={cancelEventCallback}
-          frist="2015-10-10"
+          ventearsak="ventearsak"
           hasManualPaVent={false}
           ventearsaker={[]}
           erTilbakekreving={false}
-          showModal
         />
       </RawIntlProvider>,
     );
 
-    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
-    expect(utils.getByRole('textbox')).toHaveLength(1);
+    expect(await screen.findByText('Behandlingen er satt på vent')).toBeInTheDocument();
+    expect(utils.queryByRole('textbox')).not.toBeInTheDocument();
   });
 
   it('skal vise tekst for tilbakekreving behandling venter på kravgrunnlag og fristen er utløpt', async () => {
