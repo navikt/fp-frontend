@@ -148,6 +148,9 @@ const finnBeregningsgrunnlagPrAar = (bgAndel: BeregningsgrunnlagAndel): string |
   }
   const bortfaltNaturalytelse = bgAndel.bortfaltNaturalytelse === null || bgAndel.bortfaltNaturalytelse === undefined ? 0 : bgAndel.bortfaltNaturalytelse;
   const tilkommetNaturalytelse = bgAndel.tilkommetNaturalytelse === null || bgAndel.tilkommetNaturalytelse === undefined ? 0 : bgAndel.tilkommetNaturalytelse;
+  if (bgAndel.besteberegningPrAar || bgAndel.besteberegningPrAar === 0) {
+    return formatCurrencyNoKr(bgAndel.besteberegningPrAar + bortfaltNaturalytelse - tilkommetNaturalytelse);
+  }
   if (bgAndel.overstyrtPrAar || bgAndel.overstyrtPrAar === 0) {
     return formatCurrencyNoKr(bgAndel.overstyrtPrAar + bortfaltNaturalytelse - tilkommetNaturalytelse);
   }
