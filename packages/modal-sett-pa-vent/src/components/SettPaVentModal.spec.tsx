@@ -1,187 +1,132 @@
 import React from 'react';
-import sinon from 'sinon';
+import { render, screen } from '@testing-library/react';
+import { RawIntlProvider } from 'react-intl';
 import Modal from 'nav-frontend-modal';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { Normaltekst } from 'nav-frontend-typografi';
 
-import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { DatepickerField, SelectField } from '@fpsak-frontend/form';
-import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import messages from '../../i18n/nb_NO.json';
 
-import { SettPaVentModal } from './SettPaVentModal';
+import SettPaVentModal from './SettPaVentModal';
 
 const intlMock = getIntlMock(messages);
 
 describe('<SettPaVentModal>', () => {
-  it('skal rendre åpen modal', () => {
-    const cancelEventCallback = sinon.spy();
+  Modal.setAppElement('body');
 
-    const wrapper = shallowWithIntl(<SettPaVentModal
-      intl={intlMock}
-      cancelEvent={cancelEventCallback}
-      frist="frist"
-      originalFrist="frist"
-      ventearsak="ventearsak"
-      originalVentearsak="ventearsak"
-      hasManualPaVent
-      ventearsaker={[]}
-      erTilbakekreving={false}
-      showModal
-      {...reduxFormPropsMock}
-    />, messages);
+  it('skal ikke disable knapp for lagring når frist er en gyldig fremtidig dato', async () => {
+    const cancelEventCallback = jest.fn();
+    const submitCallback = jest.fn();
 
-    const modal = wrapper.find(Modal);
-    expect(modal).toHaveLength(1);
-    expect(modal.prop('isOpen')).toBe(true);
-    expect(modal.prop('closeButton')).toBe(false);
-    expect(modal.prop('contentLabel')).toEqual('Behandlingen er satt på vent');
-    expect(modal.prop('onRequestClose')).toEqual(cancelEventCallback);
+    const utils = render(
+      <RawIntlProvider value={intlMock}>
+        <SettPaVentModal
+          submitCallback={submitCallback}
+          cancelEvent={cancelEventCallback}
+          frist="2030-10-19"
+          hasManualPaVent
+          ventearsaker={[]}
+          erTilbakekreving={false}
+          showModal
+        />
+      </RawIntlProvider>,
+    );
+
+    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
+    expect(utils.getByLabelText('Behandlingen settes på vent med frist')).not.toBeDisabled();
+    expect(screen.getByText('OK')).not.toBeDisabled();
   });
 
-  it('skal ikke disable knapp for lagring når frist er en gyldig fremtidig dato', () => {
-    const wrapper = shallowWithIntl(<SettPaVentModal
-      intl={intlMock}
-      showModal
-      cancelEvent={sinon.spy()}
-      frist="2099-10-10"
-      originalFrist="frist"
-      ventearsak="ventearsak"
-      originalVentearsak="ventearsak"
-      hasManualPaVent
-      ventearsaker={[]}
-      erTilbakekreving={false}
-      {...reduxFormPropsMock}
-    />, messages);
+  it('skal disable knapp for lagring når frist er en ugyldig dato', async () => {
+    const cancelEventCallback = jest.fn();
+    const submitCallback = jest.fn();
 
-    const button = wrapper.find(Hovedknapp);
-    expect(button.prop('disabled')).toBe(false);
+    const utils = render(
+      <RawIntlProvider value={intlMock}>
+        <SettPaVentModal
+          submitCallback={submitCallback}
+          cancelEvent={cancelEventCallback}
+          frist="20-10-10"
+          hasManualPaVent
+          ventearsaker={[]}
+          erTilbakekreving={false}
+          showModal
+        />
+      </RawIntlProvider>,
+    );
+
+    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
+    expect(utils.getByText('OK')).toBeDisabled();
   });
 
-  it('skal disable knapp for lagring når frist er en ugyldig dato', () => {
-    const wrapper = shallowWithIntl(<SettPaVentModal
-      intl={intlMock}
-      showModal
-      cancelEvent={sinon.spy()}
-      frist="20-10-10"
-      originalFrist="frist"
-      ventearsak="ventearsak"
-      originalVentearsak="ventearsak"
-      hasManualPaVent
-      ventearsaker={[]}
-      erTilbakekreving={false}
-      {...reduxFormPropsMock}
-    />, messages);
+  it('skal disable knapp for lagring når frist er en historisk dato', async () => {
+    const cancelEventCallback = jest.fn();
+    const submitCallback = jest.fn();
 
-    const button = wrapper.find(Hovedknapp);
-    expect(button.prop('disabled')).toBe(true);
+    const utils = render(
+      <RawIntlProvider value={intlMock}>
+        <SettPaVentModal
+          submitCallback={submitCallback}
+          cancelEvent={cancelEventCallback}
+          frist="2015-10-10"
+          hasManualPaVent
+          ventearsaker={[]}
+          erTilbakekreving={false}
+          showModal
+        />
+      </RawIntlProvider>,
+    );
+
+    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
+    expect(utils.getByText('OK')).toBeDisabled();
   });
 
-  it('skal disable knapp for lagring når frist er en historisk dato', () => {
-    const wrapper = shallowWithIntl(<SettPaVentModal
-      intl={intlMock}
-      showModal
-      cancelEvent={sinon.spy()}
-      frist="2015-10-10"
-      originalFrist="frist"
-      ventearsak="ventearsak"
-      originalVentearsak="ventearsak"
-      hasManualPaVent
-      ventearsaker={[]}
-      erTilbakekreving={false}
-      {...reduxFormPropsMock}
-    />, messages);
+  it('skal ikke vise frist-input når behandling automatisk er satt på vent uten frist', async () => {
+    const cancelEventCallback = jest.fn();
+    const submitCallback = jest.fn();
 
-    const button = wrapper.find(Hovedknapp);
-    expect(button.prop('disabled')).toBe(true);
+    const utils = render(
+      <RawIntlProvider value={intlMock}>
+        <SettPaVentModal
+          showModal
+          submitCallback={submitCallback}
+          cancelEvent={cancelEventCallback}
+          ventearsak="ventearsak"
+          hasManualPaVent={false}
+          ventearsaker={[]}
+          erTilbakekreving={false}
+        />
+      </RawIntlProvider>,
+    );
+
+    expect(await screen.findByText('Behandlingen er satt på vent')).toBeInTheDocument();
+    expect(utils.queryByRole('textbox')).not.toBeInTheDocument();
   });
 
-  it('skal være obligatorisk å velge årsak', () => {
-    const wrapper = shallowWithIntl(<SettPaVentModal
-      intl={intlMock}
-      showModal
-      cancelEvent={sinon.spy()}
-      frist="2099-10-10"
-      originalFrist="frist"
-      ventearsak="ventearsak"
-      originalVentearsak="ventearsak"
-      hasManualPaVent
-      ventearsaker={[]}
-      erTilbakekreving={false}
-      {...reduxFormPropsMock}
-    />, messages);
-    const select = wrapper.find(SelectField);
-    expect(select.prop('validate')).toHaveLength(1);
-  });
+  it('skal vise tekst for tilbakekreving behandling venter på kravgrunnlag og fristen er utløpt', async () => {
+    const cancelEventCallback = jest.fn();
+    const submitCallback = jest.fn();
 
-  it('skal ikke vise frist-input når behandling automatisk er satt på vent uten frist', () => {
-    const wrapper = shallowWithIntl(<SettPaVentModal
-      intl={intlMock}
-      showModal
-      cancelEvent={sinon.spy()}
-      ventearsak="ventearsak"
-      originalVentearsak="ventearsak"
-      hasManualPaVent={false}
-      ventearsaker={[]}
-      erTilbakekreving={false}
-      {...reduxFormPropsMock}
-    />, messages);
+    render(
+      <RawIntlProvider value={intlMock}>
+        <SettPaVentModal
+          submitCallback={submitCallback}
+          cancelEvent={cancelEventCallback}
+          frist="2015-10-10"
+          hasManualPaVent={false}
+          ventearsaker={[{
+            kode: 'VENT_PÅ_TILBAKEKREVINGSGRUNNLAG',
+            kodeverk: 'VENT_AARSAK',
+            navn: 'Venter på kravgrunnlag',
+          }]}
+          ventearsak="VENT_PÅ_TILBAKEKREVINGSGRUNNLAG"
+          erTilbakekreving
+          showModal
+        />
+      </RawIntlProvider>,
+    );
 
-    expect(wrapper.find(DatepickerField)).toHaveLength(0);
-  });
-
-  it('skal vise frist-input når behandling automatisk er satt på vent med frist', () => {
-    const wrapper = shallowWithIntl(<SettPaVentModal
-      intl={intlMock}
-      showModal
-      cancelEvent={sinon.spy()}
-      frist="2015-10-10"
-      ventearsaker={[]}
-      hasManualPaVent={false}
-      erTilbakekreving={false}
-      {...reduxFormPropsMock}
-    />, messages);
-
-    expect(wrapper.find(DatepickerField)).toHaveLength(1);
-  });
-
-  it('skal vise årsak-input som readonly når behandling automatisk er satt på vent', () => {
-    const wrapper = shallowWithIntl(<SettPaVentModal
-      intl={intlMock}
-      showModal
-      cancelEvent={sinon.spy()}
-      frist="2015-10-10"
-      ventearsaker={[]}
-      hasManualPaVent={false}
-      erTilbakekreving={false}
-      {...reduxFormPropsMock}
-    />, messages);
-
-    expect(wrapper.find(SelectField).prop('readOnly')).toBe(true);
-  });
-
-  it('skal vise fristen tekst for tilbakekreving behandling venter på kravgrunnlag og fristen er utløpt', () => {
-    const wrapper = shallowWithIntl(<SettPaVentModal
-      intl={intlMock}
-      showModal
-      cancelEvent={sinon.spy()}
-      frist="2015-10-10"
-      ventearsaker={[{
-        kode: 'VENT_PÅ_TILBAKEKREVINGSGRUNNLAG',
-        kodeverk: 'VENT_AARSAK',
-        navn: 'Venter på kravgrunnlag',
-      }]}
-      ventearsak="VENT_PÅ_TILBAKEKREVINGSGRUNNLAG"
-      hasManualPaVent={false}
-      erTilbakekreving
-      {...reduxFormPropsMock}
-    />, messages);
-
-    expect(wrapper.find(SelectField).prop('readOnly')).toBe(true);
-    const label = wrapper.find(Normaltekst);
-    expect(label).toHaveLength(2);
-    expect(label.first().childAt(0).prop('id')).toEqual('SettPaVentModal.SettesPaVent');
-    expect(label.at(1).childAt(0).prop('id')).toEqual('SettPaVentModal.UtløptFrist');
-    expect(label.at(1).childAt(2).prop('id')).toEqual('SettPaVentModal.HenleggeSaken');
+    expect(await screen.findByText('Behandlingen er satt på vent med frist')).toBeInTheDocument();
+    expect(screen.getByText('Venter på kravgrunnlag')).toBeInTheDocument();
+    expect(screen.getByText(/OBS! Fristen på denne behandlingen er utløpt!/)).toBeInTheDocument();
   });
 });

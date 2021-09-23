@@ -6,7 +6,7 @@ import { useController, useFormContext } from 'react-hook-form';
 import { LabelType } from './Label';
 import { RadioOptionProps } from './RadioOption';
 import OptionGrid, { Direction } from './OptionGrid';
-import getError from './getError';
+import { getError, getValidationRules } from './formUtils';
 
 import styles from './radioGroupField.less';
 
@@ -22,6 +22,7 @@ interface OwnProps {
   onChange?: (value: any) => void;
   readOnly?: boolean;
   isEdited?: boolean;
+  validate?: ((value: string) => any)[];
 }
 
 const RadioGroupField: FunctionComponent<OwnProps> = ({
@@ -34,11 +35,14 @@ const RadioGroupField: FunctionComponent<OwnProps> = ({
   children,
   spaceBetween,
   direction,
+  validate = [],
 }) => {
   const { formState: { errors } } = useFormContext();
-
   const { field } = useController({
     name,
+    rules: {
+      validate: useMemo(() => getValidationRules(validate), [validate]),
+    },
   });
 
   const customOnChange = useCallback((e: any) => {

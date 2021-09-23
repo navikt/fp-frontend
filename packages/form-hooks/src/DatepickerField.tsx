@@ -1,13 +1,16 @@
-import React, { FunctionComponent } from 'react';
+import React, { useMemo, FunctionComponent } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 import { ACCEPTED_DATE_INPUT_FORMATS, DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import { Datepicker } from '@fpsak-frontend/shared-components';
 
 import ReadOnlyField from './ReadOnlyField';
 import Label, { LabelType } from './Label';
-import getError from './getError';
+import { getError, getValidationRules } from './formUtils';
+
+dayjs.extend(customParseFormat);
 
 interface OwnProps {
   name: string;
@@ -56,16 +59,12 @@ const DatepickerField: FunctionComponent<OwnProps> = ({
   ...otherProps
 }) => {
   const { formState: { errors }, trigger } = useFormContext();
-  const validationFunctions = validate.reduce((acc, fn, index) => ({
-    ...acc,
-    [index]: (value: any) => fn(value) || true,
-  }), {});
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { field: { ref, ...inputProps } } = useController({
     name,
     rules: {
-      validate: validationFunctions,
+      validate: useMemo(() => getValidationRules(validate), [validate]),
     },
   });
 

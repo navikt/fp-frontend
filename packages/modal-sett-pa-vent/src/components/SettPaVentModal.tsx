@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import moment from 'moment';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { formValueSelector, reduxForm, InjectedFormProps } from 'redux-form';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Column, Container, Row } from 'nav-frontend-grid';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -10,7 +9,7 @@ import Modal from 'nav-frontend-modal';
 
 import { Image, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
-import { DatepickerField, SelectField } from '@fpsak-frontend/form';
+import { DatepickerField, SelectField, Form } from '@fpsak-frontend/form-hooks';
 import {
   ariaCheck, dateAfterOrEqualToToday, hasValidDate, required, dateBeforeToday,
 } from '@fpsak-frontend/utils';
@@ -39,6 +38,11 @@ const getPaVentText = (hasManualPaVent: boolean, originalVentearsak?: string, fr
   }
   return hasManualPaVent || frist ? 'SettPaVentModal.SettesPaVent' : 'SettPaVentModal.SettesPaVentUtenFrist';
 };
+
+const buildInitialValues = (hasManualPaVent: boolean, ventearsak?: string, frist?: string): FormValues => ({
+  ventearsak,
+  frist: frist || hasManualPaVent === false ? frist : initFrist(),
+});
 
 const manuelleVenteArsaker = [
   venteArsakType.AVV_DOK,
@@ -80,6 +84,7 @@ type FormValues = {
 }
 
 interface PureOwnProps {
+  submitCallback: (formData: any) => void;
   cancelEvent: () => void;
   showModal: boolean;
   ventearsaker: KodeverkMedNavn[];
@@ -90,45 +95,43 @@ interface PureOwnProps {
   ventearsak?: string;
 }
 
-interface MappedOwnProps {
-  ventearsak?: string;
-  frist?: string;
-  originalFrist?: string;
-  originalVentearsak?: string;
-  initialValues: FormValues,
-}
-
-export const SettPaVentModal: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
-  intl,
-  handleSubmit,
+const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
+  submitCallback,
   cancelEvent,
   showModal,
   ventearsaker,
   erTilbakekreving,
   frist,
-  originalFrist,
   ventearsak,
-  originalVentearsak,
   visBrevErBestilt = false,
   hasManualPaVent,
 }) => {
-  const venteArsakHasChanged = harEndretVenteårsak(originalVentearsak, ventearsak);
-  const fristHasChanged = harEndretFrist(originalFrist, frist);
+  const intl = useIntl();
 
-  const showAvbryt = !(originalFrist === frist && !venteArsakHasChanged);
-  const showFristenTekst = skalViseFristenTekst(erTilbakekreving, frist, originalFrist, ventearsak);
+  const formMethods = useForm<FormValues>({
+    defaultValues: buildInitialValues(hasManualPaVent, ventearsak, frist),
+  });
+
+  const fristFraFelt = formMethods.watch('frist');
+  const ventearsakFraFelt = formMethods.watch('ventearsak');
+
+  const venteArsakHasChanged = harEndretVenteårsak(ventearsak, ventearsakFraFelt);
+  const fristHasChanged = harEndretFrist(frist, fristFraFelt);
+
+  const showAvbryt = !(frist === fristFraFelt && !venteArsakHasChanged);
+  const showFristenTekst = skalViseFristenTekst(erTilbakekreving, fristFraFelt, frist, ventearsakFraFelt);
 
   return (
     <Modal
       className={styles.modal}
       isOpen={showModal}
       closeButton={false}
-      contentLabel={intl.formatMessage({ id: originalVentearsak ? 'SettPaVentModal.ModalDescriptionErPaVent' : 'SettPaVentModal.ModalDescription' })}
+      contentLabel={intl.formatMessage({ id: ventearsak ? 'SettPaVentModal.ModalDescriptionErPaVent' : 'SettPaVentModal.ModalDescription' })}
       onRequestClose={cancelEvent}
       shouldCloseOnOverlayClick={false}
     >
       <Container fluid>
-        <form onSubmit={handleSubmit} name="ventModalForm">
+        <Form formMethods={formMethods} onSubmit={submitCallback}>
           <Row>
             <Column xs="1">
               <Image className={styles.image} alt={intl.formatMessage({ id: 'SettPaVentModal.PaVent' })} src={innvilgetImageUrl} />
@@ -137,11 +140,11 @@ export const SettPaVentModal: FunctionComponent<PureOwnProps & MappedOwnProps & 
             <Column xs="7">
               <div className={styles.label}>
                 <Normaltekst className={styles.label}>
-                  <FormattedMessage id={getPaVentText(hasManualPaVent, originalVentearsak, frist)} />
+                  <FormattedMessage id={getPaVentText(hasManualPaVent, ventearsak, fristFraFelt)} />
                 </Normaltekst>
               </div>
             </Column>
-            {(hasManualPaVent || frist) && (
+            {(hasManualPaVent || fristFraFelt) && (
               <Column xs="2">
                 <div className={styles.datePicker}>
                   <DatepickerField
@@ -161,7 +164,7 @@ export const SettPaVentModal: FunctionComponent<PureOwnProps & MappedOwnProps & 
                 placeholder={intl.formatMessage({ id: 'SettPaVentModal.SelectPlaceholder' })}
                 validate={[required]}
                 selectValues={ventearsaker.filter((va) => (erTilbakekreving
-                  ? inkluderVentearsak(va, ventearsak) : manuelleVenteArsaker.includes(va.kode)))
+                  ? inkluderVentearsak(va, ventearsakFraFelt) : manuelleVenteArsaker.includes(va.kode)))
                   .sort((v1, v2) => v1.navn.localeCompare(v2.navn))
                   .map((va) => <option key={va.kode} value={va.kode}>{va.navn}</option>)}
                 bredde="xxl"
@@ -186,11 +189,15 @@ export const SettPaVentModal: FunctionComponent<PureOwnProps & MappedOwnProps & 
                 <Normaltekst>{intl.formatMessage({ id: 'SettPaVentModal.EndreFrist' })}</Normaltekst>
               )}
               {!hasManualPaVent && showFristenTekst && (
-                <Normaltekst>
-                  <FormattedMessage id="SettPaVentModal.UtløptFrist" />
+                <>
+                  <Normaltekst>
+                    <FormattedMessage id="SettPaVentModal.UtløptFrist" />
+                  </Normaltekst>
                   <VerticalSpacer eightPx />
-                  <FormattedMessage id="SettPaVentModal.HenleggeSaken" />
-                </Normaltekst>
+                  <Normaltekst>
+                    <FormattedMessage id="SettPaVentModal.HenleggeSaken" />
+                  </Normaltekst>
+                </>
               )}
             </Column>
           </Row>
@@ -203,7 +210,7 @@ export const SettPaVentModal: FunctionComponent<PureOwnProps & MappedOwnProps & 
                 htmlType={hovedKnappenType(venteArsakHasChanged, fristHasChanged) ? 'submit' : 'button'}
                 className={styles.button}
                 onClick={showAvbryt ? ariaCheck : cancelEvent}
-                disabled={isButtonDisabled(showAvbryt, venteArsakHasChanged, fristHasChanged, hasManualPaVent, frist)}
+                disabled={isButtonDisabled(showAvbryt, venteArsakHasChanged, fristHasChanged, hasManualPaVent, fristFraFelt)}
               >
                 <FormattedMessage id="SettPaVentModal.Ok" />
               </Hovedknapp>
@@ -219,26 +226,10 @@ export const SettPaVentModal: FunctionComponent<PureOwnProps & MappedOwnProps & 
               )}
             </Column>
           </Row>
-        </form>
+        </Form>
       </Container>
     </Modal>
   );
 };
 
-const buildInitialValues = (initialProps: PureOwnProps): FormValues => ({
-  ventearsak: initialProps.ventearsak,
-  frist: initialProps.frist || initialProps.hasManualPaVent === false ? initialProps.frist : initFrist(),
-});
-
-const mapStateToProps = (state: any, initialOwnProps: PureOwnProps): MappedOwnProps => ({
-  initialValues: buildInitialValues(initialOwnProps),
-  frist: formValueSelector('settPaVentModalForm')(state, 'frist'),
-  ventearsak: formValueSelector('settPaVentModalForm')(state, 'ventearsak'),
-  originalFrist: initialOwnProps.frist,
-  originalVentearsak: initialOwnProps.ventearsak,
-});
-
-export default connect(mapStateToProps)(reduxForm({
-  form: 'settPaVentModalForm',
-  enableReinitialize: true,
-})(injectIntl(SettPaVentModal)));
+export default SettPaVentModal;

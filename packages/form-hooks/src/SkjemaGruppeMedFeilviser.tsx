@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
-import getError from './getError';
+import { getError, getValidationRules } from './formUtils';
 
 interface NavFieldGroupProps {
   name?: string;
@@ -21,15 +21,10 @@ const SkjemaGruppeMedFeilviser: FunctionComponent<NavFieldGroupProps> = ({
   validate,
 }) => {
   const { formState: { errors } } = useFormContext();
-  const validationFunctions = useMemo(() => validate.reduce((acc, fn, index) => ({
-    ...acc,
-    [index]: (value: any) => fn(value) || true,
-  }), {}), [validate]);
-
   const { field } = useController({
     name,
     rules: {
-      validate: validationFunctions,
+      validate: useMemo(() => getValidationRules(validate), [validate]),
     },
   });
 
@@ -41,12 +36,10 @@ const SkjemaGruppeMedFeilviser: FunctionComponent<NavFieldGroupProps> = ({
     );
   }
 
-  const feil = getError(errors, name);
-
   return (
     <SkjemaGruppe
       description={description}
-      feil={feil}
+      feil={getError(errors, name)}
       className={className}
       {...field}
     >

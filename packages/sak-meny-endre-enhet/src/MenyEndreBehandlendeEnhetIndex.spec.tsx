@@ -1,51 +1,48 @@
 import React from 'react';
-import sinon from 'sinon';
+import { render, screen, waitFor } from '@testing-library/react';
+import { composeStories } from '@storybook/testing-react';
+import userEvent from '@testing-library/user-event';
+import Modal from 'nav-frontend-modal';
+import * as stories from './MenyEndreBehandlendeEnhetIndex.stories';
 
-import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-
-import EndreBehandlendeEnhetModal from './components/EndreBehandlendeEnhetModal';
-import MenyEndreBehandlendeEnhetIndex from './MenyEndreBehandlendeEnhetIndex';
-import messages from '../i18n/nb_NO.json';
+const { Default } = composeStories(stories);
 
 describe('<MenyEndreBehandlendeEnhetIndex>', () => {
-  it('skal vise modal og så lagre ny enhet', () => {
-    const nyBehandlendeEnhetCallback = sinon.spy();
-    const lukkModalCallback = sinon.spy();
+  Modal.setAppElement('body');
 
-    const wrapper = shallowWithIntl(<MenyEndreBehandlendeEnhetIndex
-      behandlingVersjon={1}
-      behandlendeEnhetId="NAVV"
-      behandlendeEnhetNavn="NAV Viken"
-      nyBehandlendeEnhet={nyBehandlendeEnhetCallback}
-      behandlendeEnheter={[{
-        enhetId: 'NAVV',
-        enhetNavn: 'NAV Viken',
-      }, {
-        enhetId: 'TEST',
-        enhetNavn: 'TEST ENHET',
-      }]}
-      lukkModal={lukkModalCallback}
-    />, messages);
+  it('skal velge og lagre ny enhet', async () => {
+    const lagreNyBehandlendeEnhet = jest.fn();
+    const lukkModal = jest.fn();
+    const utils = render(<Default lagreNyBehandlendeEnhet={lagreNyBehandlendeEnhet} lukkModal={lukkModal} />);
+    expect(await screen.findByText('Endre behandlende enhet for valgt behandling')).toBeInTheDocument();
+    expect(screen.getByText('OK')).toBeDisabled();
 
-    const modal = wrapper.find(EndreBehandlendeEnhetModal);
-    expect(modal).toHaveLength(1);
+    const begrunnelseInput = utils.getByLabelText('Begrunnelse');
+    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
-    // @ts-ignore
-    modal.prop('onSubmit')({
-      nyEnhet: '0',
+    userEvent.selectOptions(utils.getByLabelText('Ny enhet'), '0');
+
+    await waitFor(() => expect(screen.getByText('OK')).not.toBeDisabled());
+    userEvent.click(screen.getByText('OK'));
+
+    await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(lagreNyBehandlendeEnhet).toHaveBeenCalledTimes(1));
+    expect(lagreNyBehandlendeEnhet).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
+      enhetId: '1000',
+      enhetNavn: 'NAV Viken',
     });
+  });
 
-    const kall = nyBehandlendeEnhetCallback.getCalls();
-    expect(kall).toHaveLength(1);
-    expect(kall[0].args).toHaveLength(1);
-    expect(kall[0].args[0]).toEqual({
-      enhetNavn: 'TEST ENHET',
-      enhetId: 'TEST',
-      begrunnelse: 'Dette er en begrunnelse',
-    });
+  it('skal avbryte endring av enhet', async () => {
+    const lagreNyBehandlendeEnhet = jest.fn();
+    const lukkModal = jest.fn();
+    render(<Default lagreNyBehandlendeEnhet={lagreNyBehandlendeEnhet} lukkModal={lukkModal} />);
+    expect(await screen.findByText('Endre behandlende enhet for valgt behandling')).toBeInTheDocument();
 
-    const lukkKall = lukkModalCallback.getCalls();
-    expect(lukkKall).toHaveLength(1);
+    userEvent.click(screen.getByText('Avbryt'));
+
+    await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(lagreNyBehandlendeEnhet).toHaveBeenCalledTimes(0));
   });
 });

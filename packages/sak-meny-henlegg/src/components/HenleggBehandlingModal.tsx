@@ -1,17 +1,15 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
-import { formValueSelector, reduxForm, InjectedFormProps } from 'redux-form';
+import { useIntl } from 'react-intl';
+import { useForm } from 'react-hook-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
 import Modal from 'nav-frontend-modal';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Undertekst } from 'nav-frontend-typografi';
 
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
-import { SelectField, TextAreaField } from '@fpsak-frontend/form';
+import { SelectField, TextAreaField, Form } from '@fpsak-frontend/form-hooks';
 import { hasValidText, maxLength, required } from '@fpsak-frontend/utils';
 import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
@@ -57,6 +55,21 @@ const disableHovedKnapp = (
   return !(årsakKode && begrunnelse);
 };
 
+const getShowLink = (arsakKode: string, fritekst: string, behandlingType): boolean => {
+  if (behandlingType.kode === BehandlingType.TILBAKEKREVING) {
+    return behandlingResultatType.HENLAGT_FEILOPPRETTET === arsakKode;
+  }
+  if (behandlingType.kode === BehandlingType.TILBAKEKREVING_REVURDERING) {
+    return behandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV === arsakKode && !!fritekst;
+  }
+
+  return [
+    behandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
+    behandlingResultatType.HENLAGT_KLAGE_TRUKKET,
+    behandlingResultatType.HENLAGT_INNSYN_TRUKKET,
+  ].includes(arsakKode);
+};
+
 const henleggArsakerPerBehandlingType = {
   [BehandlingType.KLAGE]: [behandlingResultatType.HENLAGT_KLAGE_TRUKKET, behandlingResultatType.HENLAGT_FEILOPPRETTET],
   [BehandlingType.ANKE]: [behandlingResultatType.HENLAGT_SOKNAD_TRUKKET, behandlingResultatType.HENLAGT_FEILOPPRETTET],
@@ -81,7 +94,14 @@ export const getHenleggArsaker = (behandlingResultatTyper: KodeverkMedNavn[], be
     });
 };
 
+export type FormValues = {
+  årsakKode?: string;
+  begrunnelse?: string;
+  fritekst?: string;
+}
+
 interface PureOwnProps {
+  handleSubmit: (values: FormValues) => void;
   cancelEvent: () => void;
   previewHenleggBehandling: (erHenleggelse: boolean, data: any) => void;
   behandlingUuid?: string;
@@ -90,35 +110,34 @@ interface PureOwnProps {
   behandlingType: Kodeverk;
 }
 
-interface MappedOwnProps {
-  årsakKode?: string;
-  begrunnelse?: string;
-  fritekst?: string;
-  showLink: boolean;
-}
-
 /**
  * HenleggBehandlingModal
  *
  * Presentasjonskomponent. Denne modalen vises når saksbehandler valger 'Henlegg behandling og avslutt'.
  * Ved å angi årsak og begrunnelse og trykke på 'Henlegg behandling' blir behandlingen henlagt og avsluttet.
  */
-export const HenleggBehandlingModalImpl: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
+const HenleggBehandlingModal: FunctionComponent<PureOwnProps> = ({
   handleSubmit,
   cancelEvent,
   previewHenleggBehandling,
   behandlingUuid,
   ytelseType,
-  intl,
-  årsakKode,
-  begrunnelse,
-  fritekst,
-  showLink,
   behandlingType,
   behandlingResultatTyper,
 }) => {
+  const intl = useIntl();
+
+  const formMethods = useForm<FormValues>();
+
+  const årsakKode = formMethods.watch('årsakKode');
+  const begrunnelse = formMethods.watch('begrunnelse');
+  const fritekst = formMethods.watch('fritekst');
+
+  const showLink = getShowLink(årsakKode, fritekst, behandlingType);
+
   const henleggArsaker = useMemo(() => getHenleggArsaker(behandlingResultatTyper, behandlingType, ytelseType),
     [behandlingResultatTyper, behandlingType, ytelseType]);
+
   return (
     <Modal
       className={styles.modal}
@@ -128,115 +147,82 @@ export const HenleggBehandlingModalImpl: FunctionComponent<PureOwnProps & Mapped
       onRequestClose={cancelEvent}
       shouldCloseOnOverlayClick={false}
     >
-      <form onSubmit={handleSubmit}>
-        <div>
-          <SkjemaGruppe legend={intl.formatMessage({ id: 'HenleggBehandlingModal.HenleggBehandling' })}>
-            <Row>
-              <Column xs="5">
-                <SelectField
-                  name="årsakKode"
-                  label={intl.formatMessage({ id: 'HenleggBehandlingModal.ArsakField' })}
-                  validate={[required]}
-                  placeholder={intl.formatMessage({ id: 'HenleggBehandlingModal.ArsakFieldDefaultValue' })}
-                  selectValues={henleggArsaker.map((arsak) => <option value={arsak.kode} key={arsak.kode}>{intl.formatMessage({ id: arsak.kode })}</option>)}
-                />
-              </Column>
-            </Row>
+      <Form formMethods={formMethods} onSubmit={handleSubmit}>
+        <SkjemaGruppe legend={intl.formatMessage({ id: 'HenleggBehandlingModal.HenleggBehandling' })}>
+          <Row>
+            <Column xs="5">
+              <SelectField
+                name="årsakKode"
+                label={intl.formatMessage({ id: 'HenleggBehandlingModal.ArsakField' })}
+                validate={[required]}
+                placeholder={intl.formatMessage({ id: 'HenleggBehandlingModal.ArsakFieldDefaultValue' })}
+                selectValues={henleggArsaker.map((arsak) => <option value={arsak.kode} key={arsak.kode}>{intl.formatMessage({ id: arsak.kode })}</option>)}
+              />
+            </Column>
+          </Row>
+          <Row>
+            <Column xs="8">
+              <TextAreaField
+                name="begrunnelse"
+                label={intl.formatMessage({ id: 'HenleggBehandlingModal.BegrunnelseField' })}
+                validate={[required, maxLength1500, hasValidText]}
+                maxLength={1500}
+              />
+            </Column>
+          </Row>
+          {showHenleggelseFritekst(behandlingType.kode, årsakKode) && (
             <Row>
               <Column xs="8">
-                <TextAreaField
-                  name="begrunnelse"
-                  label={intl.formatMessage({ id: 'HenleggBehandlingModal.BegrunnelseField' })}
-                  validate={[required, maxLength1500, hasValidText]}
-                  maxLength={1500}
-                />
-              </Column>
-            </Row>
-            {showHenleggelseFritekst(behandlingType.kode, årsakKode) && (
-              <Row>
-                <Column xs="8">
-                  <div className={styles.fritekstTilBrevTextArea}>
-                    <TextAreaField
-                      name="fritekst"
-                      label={intl.formatMessage({ id: 'HenleggBehandlingModal.Fritekst' })}
-                      validate={[required, hasValidText]}
-                      maxLength={2000}
-                    />
-                  </div>
-                </Column>
-              </Row>
-            )}
-            <Row>
-              <Column xs="6">
-                <div>
-                  <Hovedknapp
-                    mini
-                    className={styles.button}
-                    disabled={disableHovedKnapp(behandlingType.kode, årsakKode, begrunnelse, fritekst)}
-                  >
-                    {intl.formatMessage({ id: 'HenleggBehandlingModal.HenleggBehandlingSubmit' })}
-                  </Hovedknapp>
-                  <Knapp
-                    htmlType="button"
-                    mini
-                    onClick={cancelEvent}
-                  >
-                    {intl.formatMessage({ id: 'HenleggBehandlingModal.Avbryt' })}
-                  </Knapp>
+                <div className={styles.fritekstTilBrevTextArea}>
+                  <TextAreaField
+                    name="fritekst"
+                    label={intl.formatMessage({ id: 'HenleggBehandlingModal.Fritekst' })}
+                    validate={[required, hasValidText]}
+                    maxLength={2000}
+                  />
                 </div>
               </Column>
-              <Column xs="4">
-                {showLink && (
-                  <div className={styles.forhandsvis}>
-                    <Undertekst>{intl.formatMessage({ id: 'HenleggBehandlingModal.SokerInformeres' })}</Undertekst>
-                    <a
-                      href=""
-                      onClick={previewHenleggBehandlingDoc(previewHenleggBehandling, ytelseType, fritekst, behandlingUuid)}
-                      onKeyDown={previewHenleggBehandlingDoc(previewHenleggBehandling, ytelseType, fritekst, behandlingUuid)}
-                      className="lenke lenke--frittstaende"
-                    >
-                      {intl.formatMessage({ id: 'HenleggBehandlingModal.ForhandsvisBrev' })}
-                    </a>
-                  </div>
-                )}
-              </Column>
             </Row>
-          </SkjemaGruppe>
-        </div>
-      </form>
+          )}
+          <Row>
+            <Column xs="6">
+              <div>
+                <Hovedknapp
+                  mini
+                  className={styles.button}
+                  disabled={disableHovedKnapp(behandlingType.kode, årsakKode, begrunnelse, fritekst)}
+                >
+                  {intl.formatMessage({ id: 'HenleggBehandlingModal.HenleggBehandlingSubmit' })}
+                </Hovedknapp>
+                <Knapp
+                  htmlType="button"
+                  mini
+                  onClick={cancelEvent}
+                >
+                  {intl.formatMessage({ id: 'HenleggBehandlingModal.Avbryt' })}
+                </Knapp>
+              </div>
+            </Column>
+            <Column xs="4">
+              {showLink && (
+                <div className={styles.forhandsvis}>
+                  <Undertekst>{intl.formatMessage({ id: 'HenleggBehandlingModal.SokerInformeres' })}</Undertekst>
+                  <a
+                    href=""
+                    onClick={previewHenleggBehandlingDoc(previewHenleggBehandling, ytelseType, fritekst, behandlingUuid)}
+                    onKeyDown={previewHenleggBehandlingDoc(previewHenleggBehandling, ytelseType, fritekst, behandlingUuid)}
+                    className="lenke lenke--frittstaende"
+                  >
+                    {intl.formatMessage({ id: 'HenleggBehandlingModal.ForhandsvisBrev' })}
+                  </a>
+                </div>
+              )}
+            </Column>
+          </Row>
+        </SkjemaGruppe>
+      </Form>
     </Modal>
   );
 };
 
-const getShowLink = createSelector([
-  (state: any) => formValueSelector('HenleggBehandlingModal')(state, 'årsakKode'),
-  (state: any) => formValueSelector('HenleggBehandlingModal')(state, 'fritekst'),
-  (_state: any, ownProps: PureOwnProps) => ownProps.behandlingType],
-(arsakKode: string, fritekst: string, type): boolean => {
-  if (type.kode === BehandlingType.TILBAKEKREVING) {
-    return behandlingResultatType.HENLAGT_FEILOPPRETTET === arsakKode;
-  }
-  if (type.kode === BehandlingType.TILBAKEKREVING_REVURDERING) {
-    return behandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV === arsakKode && !!fritekst;
-  }
-
-  return [
-    behandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
-    behandlingResultatType.HENLAGT_KLAGE_TRUKKET,
-    behandlingResultatType.HENLAGT_INNSYN_TRUKKET,
-  ].includes(arsakKode);
-});
-
-const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  årsakKode: formValueSelector('HenleggBehandlingModal')(state, 'årsakKode'),
-  begrunnelse: formValueSelector('HenleggBehandlingModal')(state, 'begrunnelse'),
-  fritekst: formValueSelector('HenleggBehandlingModal')(state, 'fritekst'),
-  showLink: getShowLink(state, ownProps),
-});
-
-const HenleggBehandlingModal = reduxForm({
-  form: 'HenleggBehandlingModal',
-})(HenleggBehandlingModalImpl);
-
-// @ts-ignore Fiks
-export default connect(mapStateToProps)(injectIntl(HenleggBehandlingModal));
+export default HenleggBehandlingModal;

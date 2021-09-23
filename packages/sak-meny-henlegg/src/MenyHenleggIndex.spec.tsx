@@ -1,60 +1,159 @@
 import React from 'react';
-import sinon from 'sinon';
+import { render, screen, waitFor } from '@testing-library/react';
+import { composeStories } from '@storybook/testing-react';
+import userEvent from '@testing-library/user-event';
+import Modal from 'nav-frontend-modal';
+import * as stories from './MenyHenleggIndex.stories';
 
-import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import { BehandlingAppKontekst } from '@fpsak-frontend/types';
-
-import HenleggBehandlingModal from './components/HenleggBehandlingModal';
-import HenlagtBehandlingModal from './components/HenlagtBehandlingModal';
-import MenyHenleggIndex from './MenyHenleggIndex';
-import messages from '../i18n/nb_NO.json';
+const {
+  ForFørstegangssøknad, ForKlage, ForInnsyn, ForTilbakekreving, ForTilbakekrevingRevurdering, ForRevurdering,
+} = composeStories(stories);
 
 describe('<MenyHenleggIndex>', () => {
-  const valgtBehandling = {
-    uuid: '3',
-    versjon: 1,
-    type: {
-      kode: behandlingType.FORSTEGANGSSOKNAD,
-      kodeverk: 'BEHANDLING_TYPE',
-    },
-  } as BehandlingAppKontekst;
+  Modal.setAppElement('body');
 
-  it('skal vise modal og så henlegge behandling', () => {
-    const henleggBehandlingCallback = sinon.stub().resolves();
-    const lukkModalCallback = sinon.spy();
+  it('skal velge henlegge behandling og så vise modal som viser at behandling er henlagt', async () => {
+    const henleggBehandling = jest.fn(() => Promise.resolve());
+    const utils = render(<ForFørstegangssøknad henleggBehandling={henleggBehandling} />);
+    expect(await screen.findAllByText('Henlegg behandling')).toHaveLength(2);
+    expect(screen.getAllByText('Henlegg behandling')[1]).toBeDisabled();
 
-    const wrapper = shallowWithIntl(<MenyHenleggIndex
-      valgtBehandling={valgtBehandling}
-      henleggBehandling={henleggBehandlingCallback}
-      forhandsvisHenleggBehandling={sinon.spy()}
-      ytelseType={{
-        kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: 'FAGSAK_YTELSE_TYPE',
-      }}
-      behandlingResultatTyper={[]}
-      gaaTilSokeside={sinon.spy()}
-      lukkModal={lukkModalCallback}
-    />, messages);
+    expect(screen.getByText('Søknaden er trukket')).toBeInTheDocument();
+    expect(screen.getByText('Behandlingen er feilaktig opprettet')).toBeInTheDocument();
+    expect(screen.getByText('Søknad mangler')).toBeInTheDocument();
+    expect(screen.getByText('Mangler beregningsregler (1. jan 2019)')).toBeInTheDocument();
+    expect(screen.queryByText('Henlagt feilopprettet')).not.toBeInTheDocument();
+    expect(screen.queryByText('Mangler beregningsregler')).not.toBeInTheDocument();
+    expect(screen.queryByText('Klagen er trukket')).not.toBeInTheDocument();
+    expect(screen.queryByText('Innsynskrav er trukket')).not.toBeInTheDocument();
 
-    const modal = wrapper.find(HenleggBehandlingModal);
-    expect(modal).toHaveLength(1);
-    expect(wrapper.find(HenlagtBehandlingModal)).toHaveLength(0);
-    // @ts-ignore fiks denne
-    modal.prop('onSubmit')({
-      årsakKode: 'test',
+    userEvent.selectOptions(utils.getByLabelText('Velg årsak'), 'HENLAGT_SØKNAD_TRUKKET');
+
+    const begrunnelseInput = utils.getByLabelText('Begrunnelse');
+    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+
+    userEvent.click(screen.getAllByText('Henlegg behandling')[1]);
+
+    await waitFor(() => expect(henleggBehandling).toHaveBeenCalledTimes(1));
+    expect(henleggBehandling).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
-      fritekst: 'Dette er en fritekst',
+      fritekst: undefined,
+      årsakKode: 'HENLAGT_SØKNAD_TRUKKET',
     });
 
-    const kall = henleggBehandlingCallback.getCalls();
-    expect(kall).toHaveLength(1);
-    expect(kall[0].args).toHaveLength(1);
-    expect(kall[0].args[0]).toEqual({
-      årsakKode: 'test',
-      begrunnelse: 'Dette er en begrunnelse',
-      fritekst: 'Dette er en fritekst',
+    expect(await screen.findByText('Behandlingen er henlagt')).toBeInTheDocument();
+    expect(screen.getByText('Du kommer nå til forsiden')).toBeInTheDocument();
+  });
+
+  it('skal lukke modal ved trykk på avbryt-knapp', async () => {
+    const avbryt = jest.fn(() => Promise.resolve());
+    render(<ForFørstegangssøknad lukkModal={avbryt} />);
+    expect(await screen.findByText('Avbryt')).toBeInTheDocument();
+
+    userEvent.click(screen.getByText('Avbryt'));
+
+    await waitFor(() => expect(avbryt).toHaveBeenCalledTimes(1));
+  });
+
+  it('skal vise behandlingsresultat-typer for klage', async () => {
+    render(<ForKlage />);
+    expect(await screen.findAllByText('Henlegg behandling')).toHaveLength(2);
+
+    expect(screen.queryByText('Henlagt soknad trukket')).not.toBeInTheDocument();
+    expect(screen.queryByText('Henlagt feilopprettet')).not.toBeInTheDocument();
+    expect(screen.queryByText('Henlagt soknad mangler')).not.toBeInTheDocument();
+    expect(screen.queryByText('Mangler beregningsregler')).not.toBeInTheDocument();
+    expect(screen.queryByText('Innsynskrav er trukket')).not.toBeInTheDocument();
+    expect(screen.getByText('Klagen er trukket')).toBeInTheDocument();
+    expect(screen.getByText('Behandlingen er feilaktig opprettet')).toBeInTheDocument();
+  });
+
+  it('skal vise behandlingsresultat-typer for innsyn', async () => {
+    render(<ForInnsyn />);
+    expect(await screen.findAllByText('Henlegg behandling')).toHaveLength(2);
+
+    expect(screen.queryByText('Henlagt soknad trukket')).not.toBeInTheDocument();
+    expect(screen.queryByText('Henlagt feilopprettet')).not.toBeInTheDocument();
+    expect(screen.queryByText('Henlagt soknad mangler')).not.toBeInTheDocument();
+    expect(screen.queryByText('Mangler beregningsregler')).not.toBeInTheDocument();
+    expect(screen.queryByText('Klagen er trukket')).not.toBeInTheDocument();
+    expect(screen.getByText('Innsynskrav er trukket')).toBeInTheDocument();
+    expect(screen.getByText('Behandlingen er feilaktig opprettet')).toBeInTheDocument();
+  });
+
+  it('skal vise behandlingsresultat-typer for tilbakekreving', async () => {
+    render(<ForTilbakekreving />);
+    expect(await screen.findAllByText('Henlegg behandling')).toHaveLength(2);
+
+    expect(screen.queryByText('Henlagt soknad trukket')).not.toBeInTheDocument();
+    expect(screen.queryByText('Henlagt feilopprettet')).not.toBeInTheDocument();
+    expect(screen.queryByText('Henlagt soknad mangler')).not.toBeInTheDocument();
+    expect(screen.queryByText('Mangler beregningsregler')).not.toBeInTheDocument();
+    expect(screen.queryByText('Klagen er trukket')).not.toBeInTheDocument();
+    expect(screen.queryByText('Innsynskrav er trukket')).not.toBeInTheDocument();
+    expect(screen.getByText('Behandlingen er feilaktig opprettet')).toBeInTheDocument();
+  });
+
+  it('skal vise behandlingsresultat-typer for tilbakekreving revurdering', async () => {
+    render(<ForTilbakekrevingRevurdering />);
+    expect(await screen.findAllByText('Henlegg behandling')).toHaveLength(2);
+
+    expect(screen.queryByText('Henlagt soknad trukket')).not.toBeInTheDocument();
+    expect(screen.queryByText('Henlagt feilopprettet')).not.toBeInTheDocument();
+    expect(screen.queryByText('Henlagt soknad mangler')).not.toBeInTheDocument();
+    expect(screen.queryByText('Mangler beregningsregler')).not.toBeInTheDocument();
+    expect(screen.queryByText('Klagen er trukket')).not.toBeInTheDocument();
+    expect(screen.queryByText('Innsynskrav er trukket')).not.toBeInTheDocument();
+    expect(screen.queryByText('Behandlingen er feilaktig opprettet')).not.toBeInTheDocument();
+    expect(screen.getByText('Feilaktig opprettet - med henleggelsesbrev')).toBeInTheDocument();
+    expect(screen.getByText('Feilaktig opprettet - uten henleggelsesbrev')).toBeInTheDocument();
+  });
+
+  it('skal vise behandlingsresultat-typer for revurdering', async () => {
+    render(<ForRevurdering />);
+    expect(await screen.findAllByText('Henlegg behandling')).toHaveLength(2);
+
+    expect(screen.getByText('Søknaden er trukket')).toBeInTheDocument();
+    expect(screen.getByText('Søknad mangler')).toBeInTheDocument();
+    expect(screen.getByText('Behandlingen er feilaktig opprettet')).toBeInTheDocument();
+    expect(screen.queryByText('Henlagt feilopprettet')).not.toBeInTheDocument();
+    expect(screen.queryByText('Mangler beregningsregler')).not.toBeInTheDocument();
+    expect(screen.queryByText('Klagen er trukket')).not.toBeInTheDocument();
+    expect(screen.queryByText('Innsynskrav er trukket')).not.toBeInTheDocument();
+    expect(screen.queryByText('Feilaktig opprettet - med henleggelsesbrev')).not.toBeInTheDocument();
+    expect(screen.queryByText('Feilaktig opprettet - uten henleggelsesbrev')).not.toBeInTheDocument();
+  });
+
+  it('skal vise lenke for forhåndsvisning når en har valgt årsak Søknaden er trukket', async () => {
+    const forhandsvisHenleggBehandling = jest.fn(() => Promise.resolve());
+    const utils = render(<ForFørstegangssøknad forhandsvisHenleggBehandling={forhandsvisHenleggBehandling} />);
+    expect(await screen.findAllByText('Henlegg behandling')).toHaveLength(2);
+
+    userEvent.selectOptions(utils.getByLabelText('Velg årsak'), 'HENLAGT_SØKNAD_TRUKKET');
+
+    expect(await screen.findByText('Informer søker')).toBeInTheDocument();
+    userEvent.click(screen.getByText('Forhåndsvis brev'));
+
+    await waitFor(() => expect(forhandsvisHenleggBehandling).toHaveBeenCalledTimes(1));
+    expect(forhandsvisHenleggBehandling).toHaveBeenNthCalledWith(1, true, {
+      behandlingUuid: '23r2323',
+      dokumentMal: 'HENLEG',
+      fritekst: undefined,
+      mottaker: 'Søker',
+      ytelseType: {
+        kode: 'FP',
+        kodeverk: 'YTELSE_TYPE',
+      },
     });
+  });
+
+  it('skal ikke vise lenke for forhåndsvisning når en har valgt årsak Søknaden mangler', async () => {
+    const forhandsvisHenleggBehandling = jest.fn(() => Promise.resolve());
+    const utils = render(<ForFørstegangssøknad forhandsvisHenleggBehandling={forhandsvisHenleggBehandling} />);
+    expect(await screen.findAllByText('Henlegg behandling')).toHaveLength(2);
+
+    userEvent.selectOptions(utils.getByLabelText('Velg årsak'), 'HENLAGT_SØKNAD_MANGLER');
+
+    await waitFor(() => expect(screen.queryByText('Informer søker')).not.toBeInTheDocument());
   });
 });

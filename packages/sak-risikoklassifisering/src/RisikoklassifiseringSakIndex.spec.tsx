@@ -1,78 +1,115 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import sinon from 'sinon';
+import { render, screen, waitFor } from '@testing-library/react';
+import { composeStories } from '@storybook/testing-react';
+import userEvent from '@testing-library/user-event';
+import * as stories from './RisikoklassifiseringSakIndex.stories';
 
-import { AlleKodeverk, Risikoklassifisering } from '@fpsak-frontend/types';
-
-import kontrollresultatKode from './kodeverk/kontrollresultatKode';
-import RisikoklassifiseringSakIndex from './RisikoklassifiseringSakIndex';
-import ManglendeKlassifiseringPanel from './components/ManglendeKlassifiseringPanel';
-import IngenRisikoPanel from './components/IngenRisikoPanel';
-import HoyRisikoTittel from './components/HoyRisikoTittel';
-
-const lagRisikoklassifisering = (kode: string): Risikoklassifisering => ({
-  kontrollresultat: {
-    kode,
-    kodeverk: 'Kontrollresultat',
-  },
-  medlFaresignaler: undefined,
-  iayFaresignaler: undefined,
-});
+const { IngenRisikoklassifisering, LavRisikoklassifisering, HøyRisikoklassifisering } = composeStories(stories);
 
 describe('<RisikoklassifiseringSakIndex>', () => {
-  it('skal rendere korrekt komponent når det mangler klassifisering', () => {
-    const wrapper = shallow(<RisikoklassifiseringSakIndex
-      risikoklassifisering={undefined}
-      isPanelOpen={false}
-      readOnly={false}
-      submitAksjonspunkt={sinon.spy()}
-      toggleRiskPanel={sinon.spy()}
-      alleKodeverk={{} as AlleKodeverk}
-    />);
-    expect(wrapper.find(ManglendeKlassifiseringPanel)).toHaveLength(1);
-    expect(wrapper.find(IngenRisikoPanel)).toHaveLength(0);
-    expect(wrapper.find(HoyRisikoTittel)).toHaveLength(0);
+  it('skal mangle klassifisering', async () => {
+    render(<IngenRisikoklassifisering />);
+    expect(await screen.findAllByText('Faresignaler')).toHaveLength(2);
   });
 
-  it('skal rendere korrekt komponent når det ikke er utfør klassifisering', () => {
-    const wrapper = shallow(<RisikoklassifiseringSakIndex
-      risikoklassifisering={lagRisikoklassifisering(kontrollresultatKode.IKKE_KLASSIFISERT)}
-      isPanelOpen={false}
-      readOnly={false}
-      submitAksjonspunkt={sinon.spy()}
-      toggleRiskPanel={sinon.spy()}
-      alleKodeverk={{} as AlleKodeverk}
-    />);
-    expect(wrapper.find(ManglendeKlassifiseringPanel)).toHaveLength(1);
-    expect(wrapper.find(IngenRisikoPanel)).toHaveLength(0);
-    expect(wrapper.find(HoyRisikoTittel)).toHaveLength(0);
+  it('skal vise ingen faresignaler når en har lav klassifisering', async () => {
+    render(<LavRisikoklassifisering />);
+    expect(await screen.findByText('Ingen faresignaler oppdaget')).toBeInTheDocument();
   });
 
-  it('skal rendere korrekt komponent når det er ikke_hoy resultat', () => {
-    const wrapper = shallow(<RisikoklassifiseringSakIndex
-      risikoklassifisering={lagRisikoklassifisering(kontrollresultatKode.IKKE_HOY)}
-      isPanelOpen={false}
-      readOnly={false}
-      submitAksjonspunkt={sinon.spy()}
-      toggleRiskPanel={sinon.spy()}
-      alleKodeverk={{} as AlleKodeverk}
-    />);
-    expect(wrapper.find(ManglendeKlassifiseringPanel)).toHaveLength(0);
-    expect(wrapper.find(IngenRisikoPanel)).toHaveLength(1);
-    expect(wrapper.find(HoyRisikoTittel)).toHaveLength(0);
+  it('skal vurdere faresignaler som ikke reelle', async () => {
+    const lagreAksjonspunkt = jest.fn();
+    const utils = render(<HøyRisikoklassifisering submitAksjonspunkt={lagreAksjonspunkt} />);
+    expect(await screen.findByText('Faresignaler oppdaget')).toBeInTheDocument();
+    expect(await screen.findByText('Vurder faresignalene')).toBeInTheDocument();
+
+    expect(await screen.findByText('Medlemskap')).toBeInTheDocument();
+    expect(await screen.findByText('Faresignal 1')).toBeInTheDocument();
+
+    expect(await screen.findByText('Arbeidsforhold og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Faresignal 2')).toBeInTheDocument();
+    expect(await screen.findByText('Faresignal 3')).toBeInTheDocument();
+    expect(await screen.findByText('Faresignal 4')).toBeInTheDocument();
+
+    const vurderingInput = utils.getByLabelText('Vurdering');
+    userEvent.type(vurderingInput, 'Dette er en begrunnelse');
+
+    userEvent.click(screen.getByText('Faresignalene vurderes ikke som reelle'));
+
+    userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagreAksjonspunkt).toHaveBeenCalledTimes(1));
+    expect(lagreAksjonspunkt).toHaveBeenNthCalledWith(1, {
+      begrunnelse: 'Dette er en begrunnelse',
+      faresignalVurdering: 'INGEN_INNVIRKNING',
+      kode: '5095',
+    });
   });
 
-  it('skal rendere korrekt komponent når det er hoy resultat', () => {
-    const wrapper = shallow(<RisikoklassifiseringSakIndex
-      risikoklassifisering={lagRisikoklassifisering(kontrollresultatKode.HOY)}
-      isPanelOpen={false}
-      readOnly={false}
-      submitAksjonspunkt={sinon.spy()}
-      toggleRiskPanel={sinon.spy()}
-      alleKodeverk={{} as AlleKodeverk}
-    />);
-    expect(wrapper.find(ManglendeKlassifiseringPanel)).toHaveLength(0);
-    expect(wrapper.find(IngenRisikoPanel)).toHaveLength(0);
-    expect(wrapper.find(HoyRisikoTittel)).toHaveLength(1);
+  it('skal vurdere faresignaler som reelle', async () => {
+    const lagreAksjonspunkt = jest.fn();
+    const utils = render(<HøyRisikoklassifisering submitAksjonspunkt={lagreAksjonspunkt} />);
+    expect(await screen.findByText('Faresignaler oppdaget')).toBeInTheDocument();
+    expect(await screen.findByText('Vurder faresignalene')).toBeInTheDocument();
+
+    expect(await screen.findByText('Medlemskap')).toBeInTheDocument();
+    expect(await screen.findByText('Faresignal 1')).toBeInTheDocument();
+
+    expect(await screen.findByText('Arbeidsforhold og inntekt')).toBeInTheDocument();
+    expect(await screen.findByText('Faresignal 2')).toBeInTheDocument();
+    expect(await screen.findByText('Faresignal 3')).toBeInTheDocument();
+    expect(await screen.findByText('Faresignal 4')).toBeInTheDocument();
+
+    const vurderingInput = utils.getByLabelText('Vurdering');
+    userEvent.type(vurderingInput, 'Dette er en begrunnelse');
+
+    userEvent.click(screen.getByText('Faresignalene vurderes som reelle'));
+
+    userEvent.click(screen.getByText('Saken er innvilget med redusert beregningsgrunnlag'));
+
+    userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagreAksjonspunkt).toHaveBeenCalledTimes(1));
+    expect(lagreAksjonspunkt).toHaveBeenNthCalledWith(1, {
+      begrunnelse: 'Dette er en begrunnelse',
+      faresignalVurdering: 'INNVILGET_REDUSERT',
+      kode: '5095',
+    });
+  });
+
+  it('skal få feilmelding når en ikke krysser av type vurdering og vurdering er for kort', async () => {
+    const lagreAksjonspunkt = jest.fn();
+    const utils = render(<HøyRisikoklassifisering submitAksjonspunkt={lagreAksjonspunkt} />);
+    expect(await screen.findByText('Faresignaler oppdaget')).toBeInTheDocument();
+    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+
+    const vurderingInput = utils.getByLabelText('Vurdering');
+    userEvent.type(vurderingInput, 'De');
+
+    await waitFor(() => expect(screen.getByText('Bekreft og fortsett')).not.toBeDisabled());
+
+    userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    expect(await screen.findByText('Du må skrive minst 3 tegn')).toBeInTheDocument();
+    expect(screen.getByText('Feltet må fylles ut')).toBeInTheDocument();
+
+    expect(lagreAksjonspunkt).toHaveBeenCalledTimes(0);
+  });
+
+  it('skal få feilmelding når en ikke krysser av grunn til at sak er innvilget eller avslått', async () => {
+    const lagreAksjonspunkt = jest.fn();
+    const utils = render(<HøyRisikoklassifisering submitAksjonspunkt={lagreAksjonspunkt} />);
+    expect(await screen.findByText('Faresignaler oppdaget')).toBeInTheDocument();
+
+    const vurderingInput = utils.getByLabelText('Vurdering');
+    userEvent.type(vurderingInput, 'Dette er en begrunnelse');
+
+    userEvent.click(screen.getByText('Faresignalene vurderes som reelle'));
+
+    userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
+
+    expect(lagreAksjonspunkt).toHaveBeenCalledTimes(0);
   });
 });
