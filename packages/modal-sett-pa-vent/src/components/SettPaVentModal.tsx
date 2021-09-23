@@ -189,11 +189,15 @@ const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
                 <Normaltekst>{intl.formatMessage({ id: 'SettPaVentModal.EndreFrist' })}</Normaltekst>
               )}
               {!hasManualPaVent && showFristenTekst && (
-                <Normaltekst>
-                  <FormattedMessage id="SettPaVentModal.UtløptFrist" />
+                <>
+                  <Normaltekst>
+                    <FormattedMessage id="SettPaVentModal.UtløptFrist" />
+                  </Normaltekst>
                   <VerticalSpacer eightPx />
-                  <FormattedMessage id="SettPaVentModal.HenleggeSaken" />
-                </Normaltekst>
+                  <Normaltekst>
+                    <FormattedMessage id="SettPaVentModal.HenleggeSaken" />
+                  </Normaltekst>
+                </>
               )}
             </Column>
           </Row>
