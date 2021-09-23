@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import { Input as NavInput } from 'nav-frontend-skjema';
 import Label from './Label';
 import ReadOnlyField from './ReadOnlyField';
-import getError from './getError';
+import { getError, getValidationRules } from './formUtils';
 
 interface OwnProps {
   name: string;
@@ -31,15 +31,10 @@ const InputField: FunctionComponent<OwnProps> = ({
   autoFocus,
 }) => {
   const { formState: { errors }, trigger } = useFormContext();
-  const validationFunctions = validate.reduce((acc, fn, index) => ({
-    ...acc,
-    [index]: (value: any) => fn(value) || true,
-  }), {});
-
   const { field } = useController({
     name,
     rules: {
-      validate: validationFunctions,
+      validate: useMemo(() => getValidationRules(validate), [validate]),
     },
   });
 

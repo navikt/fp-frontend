@@ -1,38 +1,37 @@
 import React from 'react';
-import sinon from 'sinon';
-import { shallow } from 'enzyme';
+import moment from 'moment';
+import { render, screen, waitFor } from '@testing-library/react';
+import { composeStories } from '@storybook/testing-react';
+import userEvent from '@testing-library/user-event';
+import Modal from 'nav-frontend-modal';
+import * as stories from './MenySettPaVentIndex.stories';
 
-import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
+const { Default } = composeStories(stories);
 
-import MenySettPaVentIndex from './MenySettPaVentIndex';
+const initFrist = (): string => {
+  const date = moment().toDate();
+  date.setDate(date.getDate() + 28);
+  return date.toISOString().substr(0, 10);
+};
 
 describe('<MenySettPaVentIndex>', () => {
-  it('skal vise modal og velge å åpne ta behandling av vent', () => {
-    const setBehandlingOnHoldCallback = sinon.spy();
-    const lukkModalCallback = sinon.spy();
+  Modal.setAppElement('body');
 
-    const wrapper = shallow(<MenySettPaVentIndex
-      behandlingVersjon={1}
-      settBehandlingPaVent={setBehandlingOnHoldCallback}
-      ventearsaker={[]}
-      lukkModal={lukkModalCallback}
-      erTilbakekreving={false}
-    />);
+  it('skal velge årsak for sett på vent og så fortsette', async () => {
+    const settBehandlingPaVent = jest.fn();
+    const lukkModal = jest.fn();
+    const utils = render(<Default settBehandlingPaVent={settBehandlingPaVent} lukkModal={lukkModal} />);
+    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
 
-    const modal = wrapper.find(SettPaVentModalIndex);
-    expect(modal).toHaveLength(1);
+    userEvent.selectOptions(utils.getByLabelText('Årsak'), 'AVV_DOK');
 
-    modal.prop('submitCallback')({
-      frist: '20-12-2020',
-      ventearsak: 'test',
-    });
+    userEvent.click(screen.getByText('OK'));
 
-    const kall = setBehandlingOnHoldCallback.getCalls();
-    expect(kall).toHaveLength(1);
-    expect(kall[0].args).toHaveLength(1);
-    expect(kall[0].args[0]).toEqual({
-      frist: '20-12-2020',
-      ventearsak: 'test',
+    await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(settBehandlingPaVent).toHaveBeenCalledTimes(1));
+    expect(settBehandlingPaVent).toHaveBeenNthCalledWith(1, {
+      frist: initFrist(),
+      ventearsak: 'AVV_DOK',
     });
   });
 });

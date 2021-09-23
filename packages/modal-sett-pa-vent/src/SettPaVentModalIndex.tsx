@@ -3,7 +3,6 @@ import { RawIntlProvider } from 'react-intl';
 
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import SettPaVentModal from './components/SettPaVentModal';
 import messages from '../i18n/nb_NO.json';
@@ -34,19 +33,17 @@ const SettPaVentModalIndex: FunctionComponent<OwnProps> = ({
   erTilbakekreving,
 }) => (
   <RawIntlProvider value={intl}>
-    <ReduxWrapper formName="SettPaVentModalIndex">
-      <SettPaVentModal
-        cancelEvent={cancelEvent}
-        onSubmit={submitCallback}
-        showModal={showModal}
-        ventearsaker={ventearsaker}
-        frist={frist}
-        ventearsak={ventearsak}
-        visBrevErBestilt={visBrevErBestilt}
-        hasManualPaVent={hasManualPaVent}
-        erTilbakekreving={erTilbakekreving}
-      />
-    </ReduxWrapper>
+    <SettPaVentModal
+      cancelEvent={cancelEvent}
+      submitCallback={submitCallback}
+      showModal={showModal}
+      ventearsaker={ventearsaker}
+      frist={frist}
+      ventearsak={ventearsak}
+      visBrevErBestilt={visBrevErBestilt}
+      hasManualPaVent={hasManualPaVent}
+      erTilbakekreving={erTilbakekreving}
+    />
   </RawIntlProvider>
 );
 

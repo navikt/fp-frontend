@@ -1,8 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
-import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { useForm } from 'react-hook-form';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
@@ -12,7 +10,9 @@ import {
 import {
   ariaCheck, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
-import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
+import {
+  RadioGroupField, RadioOption, TextAreaField, Form,
+} from '@fpsak-frontend/form-hooks';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
@@ -27,18 +27,38 @@ import styles from './avklarFaresignalerForm.less';
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
 
-const formName = 'avklarFaresignalerForm';
 export const begrunnelseFieldName = 'begrunnelse';
-export const vurderingerHovedkategori = 'vurderingerHovedkategori';
-export const ikkeReelleVurderingerUnderkategori = 'ikkeReelleVurderingerUnderkategori';
+export const VURDERING_HOVEDKATEGORI = 'vurderingerHovedkategori';
+export const IKKE_REELLE_VURDERINGER_UNDERKATEGORI = 'ikkeReelleVurderingerUnderkategori';
+
+export const buildInitialValues = (aksjonspunkt: Aksjonspunkt, risikoklassifisering?: Risikoklassifisering): Values | undefined => {
+  if (aksjonspunkt && aksjonspunkt.begrunnelse && risikoklassifisering && risikoklassifisering.faresignalVurdering) {
+    const { kode } = risikoklassifisering.faresignalVurdering;
+    return {
+      [begrunnelseFieldName]: aksjonspunkt.begrunnelse,
+      [VURDERING_HOVEDKATEGORI]: kode === faresignalVurdering.INGEN_INNVIRKNING ? faresignalVurdering.INGEN_INNVIRKNING : faresignalVurdering.INNVIRKNING,
+      [IKKE_REELLE_VURDERINGER_UNDERKATEGORI]: kode === faresignalVurdering.INGEN_INNVIRKNING ? undefined : kode,
+    };
+  }
+  return undefined;
+};
+
+const utledFaresignalVurderingVerdi = (vurderingHovedkategori: string, vurderingUnderkategori: string): string => (
+  vurderingHovedkategori === faresignalVurdering.INGEN_INNVIRKNING ? faresignalVurdering.INGEN_INNVIRKNING : vurderingUnderkategori);
+
+const transformValues = (values: Values): VurderFaresignalerAp => ({
+  kode: aksjonspunktCodes.VURDER_FARESIGNALER,
+  faresignalVurdering: utledFaresignalVurderingVerdi(values[VURDERING_HOVEDKATEGORI], values[IKKE_REELLE_VURDERINGER_UNDERKATEGORI]),
+  begrunnelse: values[begrunnelseFieldName],
+});
 
 type Values = {
   [begrunnelseFieldName]?: string;
-  [vurderingerHovedkategori]?: string;
-  [ikkeReelleVurderingerUnderkategori]?: string;
+  [VURDERING_HOVEDKATEGORI]?: string;
+  [IKKE_REELLE_VURDERINGER_UNDERKATEGORI]?: string;
 }
 
-interface PureOwnProps {
+interface OwnProps {
   aksjonspunkt: Aksjonspunkt;
   readOnly: boolean;
   risikoklassifisering?: Risikoklassifisering;
@@ -46,31 +66,34 @@ interface PureOwnProps {
   faresignalVurderinger: KodeverkMedNavn[];
 }
 
-interface MappedOwnProps {
-  initialValues: Values | undefined;
-  onSubmit: (values: Values) => void;
-  harValgtReelle: boolean;
-}
-
 /**
  * IngenRisikoPanel
  *
  * Presentasjonskomponent. Statisk visning av panel som tilsier ingen faresignaler funnet i behandlingen.
  */
-export const AvklarFaresignalerForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+export const AvklarFaresignalerForm: FunctionComponent<OwnProps> = ({
   readOnly,
   aksjonspunkt,
   faresignalVurderinger,
-  harValgtReelle,
-  ...formProps
+  risikoklassifisering,
+  submitCallback,
 }) => {
   const underkategoriFaresignalVurderinger = useMemo(() => faresignalVurderinger
     .filter((vurdering) => vurdering.kode !== faresignalVurdering.INNVIRKNING && vurdering.kode !== faresignalVurdering.INGEN_INNVIRKNING),
   []);
 
+  const defaultValues = useMemo(() => buildInitialValues(aksjonspunkt, risikoklassifisering),
+    [aksjonspunkt, risikoklassifisering]);
+
+  const formMethods = useForm<Values>({
+    defaultValues,
+  });
+
+  const harValgtReelle = formMethods.watch(VURDERING_HOVEDKATEGORI) === faresignalVurdering.INNVIRKNING;
+
   return (
     <FlexContainer>
-      <form onSubmit={formProps.handleSubmit}>
+      <Form formMethods={formMethods} onSubmit={(values: Values) => submitCallback(transformValues(values))}>
         <FlexRow>
           <FlexColumn className={styles.fullWidth}>
             <TextAreaField
@@ -92,7 +115,7 @@ export const AvklarFaresignalerForm: FunctionComponent<PureOwnProps & MappedOwnP
         <FlexRow>
           <FlexColumn>
             <RadioGroupField
-              name={vurderingerHovedkategori}
+              name={VURDERING_HOVEDKATEGORI}
               validate={[required]}
               direction="vertical"
               readOnly={readOnly}
@@ -106,7 +129,7 @@ export const AvklarFaresignalerForm: FunctionComponent<PureOwnProps & MappedOwnP
                   {harValgtReelle && (
                   <ArrowBox alignOffset={20}>
                     <RadioGroupField
-                      name={ikkeReelleVurderingerUnderkategori}
+                      name={IKKE_REELLE_VURDERINGER_UNDERKATEGORI}
                       validate={[required]}
                       direction="vertical"
                       readOnly={readOnly}
@@ -135,53 +158,17 @@ export const AvklarFaresignalerForm: FunctionComponent<PureOwnProps & MappedOwnP
           <FlexColumn>
             <Hovedknapp
               mini
-              spinner={formProps.submitting}
-              disabled={!formProps.dirty || readOnly || formProps.submitting}
+              spinner={formMethods.formState.isSubmitting}
+              disabled={!formMethods.formState.isDirty || readOnly || formMethods.formState.isSubmitting}
               onClick={ariaCheck}
             >
               <FormattedMessage id="Risikopanel.Form.Bekreft" />
             </Hovedknapp>
           </FlexColumn>
         </FlexRow>
-      </form>
+      </Form>
     </FlexContainer>
   );
 };
 
-export const buildInitialValues = createSelector([
-  (ownProps: PureOwnProps) => ownProps.risikoklassifisering,
-  (ownProps: PureOwnProps) => ownProps.aksjonspunkt], (risikoklassifisering, aksjonspunkt): Values | undefined => {
-  if (aksjonspunkt && aksjonspunkt.begrunnelse && risikoklassifisering && risikoklassifisering.faresignalVurdering) {
-    const { kode } = risikoklassifisering.faresignalVurdering;
-    return {
-      [begrunnelseFieldName]: aksjonspunkt.begrunnelse,
-      [vurderingerHovedkategori]: kode === faresignalVurdering.INGEN_INNVIRKNING ? faresignalVurdering.INGEN_INNVIRKNING : faresignalVurdering.INNVIRKNING,
-      [ikkeReelleVurderingerUnderkategori]: kode === faresignalVurdering.INGEN_INNVIRKNING ? undefined : kode,
-    };
-  }
-  return undefined;
-});
-
-const utledFaresignalVurderingVerdi = (vurderingHovedkategori: string, vurderingUnderkategori: string): string => (
-  vurderingHovedkategori === faresignalVurdering.INGEN_INNVIRKNING ? faresignalVurdering.INGEN_INNVIRKNING : vurderingUnderkategori);
-
-const transformValues = (values: Values): VurderFaresignalerAp => ({
-  kode: aksjonspunktCodes.VURDER_FARESIGNALER,
-  faresignalVurdering: utledFaresignalVurderingVerdi(values[vurderingerHovedkategori], values[ikkeReelleVurderingerUnderkategori]),
-  begrunnelse: values[begrunnelseFieldName],
-});
-
-const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
-  const onSubmit = (values: Values) => ownProps.submitCallback(transformValues(values));
-  const initialValues = buildInitialValues(ownProps);
-  return (state: any): MappedOwnProps => ({
-    initialValues,
-    onSubmit,
-    harValgtReelle: formValueSelector(formName)(state, vurderingerHovedkategori) === faresignalVurdering.INNVIRKNING,
-  });
-};
-
-export default connect(mapStateToPropsFactory)(reduxForm({
-  form: formName,
-  destroyOnUnmount: false,
-})(AvklarFaresignalerForm));
+export default AvklarFaresignalerForm;

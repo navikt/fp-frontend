@@ -2,9 +2,8 @@ import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@fpsak-frontend/utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
-import EndreBehandlendeEnhetModal from './components/EndreBehandlendeEnhetModal';
+import EndreBehandlendeEnhetModal, { FormValues } from './components/EndreBehandlendeEnhetModal';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -39,7 +38,7 @@ const MenyEndreBehandlendeEnhetIndex: FunctionComponent<OwnProps> = ({
   const filtrerteBehandlendeEnheter = useMemo(() => behandlendeEnheter
     .filter((enhet) => enhet.enhetId !== behandlendeEnhetId), [behandlendeEnheter]);
 
-  const submit = useCallback((formValues) => {
+  const submit = useCallback((formValues: FormValues) => {
     if (behandlingVersjon) {
       const nyEnhet = filtrerteBehandlendeEnheter[parseInt(formValues.nyEnhet, 10)];
       const values = {
@@ -54,16 +53,13 @@ const MenyEndreBehandlendeEnhetIndex: FunctionComponent<OwnProps> = ({
   }, [behandlingVersjon, nyBehandlendeEnhet]);
   return (
     <RawIntlProvider value={intl}>
-      <ReduxWrapper formName="MenyEndreBehandlendeEnhetIndex">
-        <EndreBehandlendeEnhetModal
-        // @ts-ignore Fiks denne
-          lukkModal={lukkModal}
-          behandlendeEnheter={filtrerteBehandlendeEnheter}
-          gjeldendeBehandlendeEnhetId={behandlendeEnhetId}
-          gjeldendeBehandlendeEnhetNavn={behandlendeEnhetNavn}
-          onSubmit={submit}
-        />
-      </ReduxWrapper>
+      <EndreBehandlendeEnhetModal
+        lukkModal={lukkModal}
+        behandlendeEnheter={filtrerteBehandlendeEnheter}
+        gjeldendeBehandlendeEnhetId={behandlendeEnhetId}
+        gjeldendeBehandlendeEnhetNavn={behandlendeEnhetNavn}
+        handleSubmit={submit}
+      />
     </RawIntlProvider>
   );
 };
