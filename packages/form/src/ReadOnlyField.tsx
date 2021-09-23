@@ -25,9 +25,9 @@ const hasValue = (value: string | number): boolean => value !== undefined && val
 export const ReadOnlyField: FunctionComponent<ReadOnlyFieldProps> = ({
   label,
   input,
-  isEdited,
+  isEdited = false,
   type,
-  alignRightCenterOnReadOnly,
+  alignRightCenterOnReadOnly = false,
   endrettekst,
 }): JSX.Element => {
   if (!hasValue(input.value)) {
@@ -59,11 +59,6 @@ export const ReadOnlyField: FunctionComponent<ReadOnlyFieldProps> = ({
       )}
     </div>
   );
-};
-
-ReadOnlyField.defaultProps = {
-  isEdited: false,
-  alignRightCenterOnReadOnly: false,
 };
 
 export default ReadOnlyField;
