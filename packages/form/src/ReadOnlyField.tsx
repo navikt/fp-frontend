@@ -22,12 +22,12 @@ export interface ReadOnlyFieldProps {
 
 const hasValue = (value: string | number): boolean => value !== undefined && value !== null && value !== '';
 
-export const ReadOnlyField: FunctionComponent<ReadOnlyFieldProps> = ({
+const ReadOnlyField: FunctionComponent<ReadOnlyFieldProps> = ({
   label,
   input,
-  isEdited = false,
+  isEdited,
   type,
-  alignRightCenterOnReadOnly = false,
+  alignRightCenterOnReadOnly,
   endrettekst,
 }): JSX.Element => {
   if (!hasValue(input.value)) {
@@ -59,6 +59,11 @@ export const ReadOnlyField: FunctionComponent<ReadOnlyFieldProps> = ({
       )}
     </div>
   );
+};
+
+ReadOnlyField.defaultProps = {
+  isEdited: false,
+  alignRightCenterOnReadOnly: false,
 };
 
 export default ReadOnlyField;

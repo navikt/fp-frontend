@@ -21,18 +21,18 @@ export interface RadioOptionProps {
   wrapperClassName?: string;
 }
 
-export const RadioOption: FunctionComponent<RadioOptionProps> = ({
-  name = '',
-  className = '',
+const RadioOption: FunctionComponent<RadioOptionProps> = ({
+  name,
+  className,
   label,
   value,
   actualValue,
-  disabled = false,
-  groupDisabled = false,
-  onChange = () => undefined,
+  disabled,
+  groupDisabled,
+  onChange,
   children,
   style,
-  manualHideChildren = false,
+  manualHideChildren,
   dataId,
   wrapperClassName,
 }) => {
@@ -55,6 +55,15 @@ export const RadioOption: FunctionComponent<RadioOptionProps> = ({
       {(checked || manualHideChildren) && children}
     </div>
   );
+};
+
+RadioOption.defaultProps = {
+  name: '',
+  className: '',
+  disabled: false,
+  groupDisabled: false,
+  onChange: () => undefined,
+  manualHideChildren: false,
 };
 
 RadioOption.displayName = 'RadioOption';
