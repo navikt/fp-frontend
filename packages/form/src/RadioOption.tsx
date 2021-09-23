@@ -21,7 +21,7 @@ export interface RadioOptionProps {
   wrapperClassName?: string;
 }
 
-export const RadioOption: FunctionComponent<RadioOptionProps> = ({
+const RadioOption: FunctionComponent<RadioOptionProps> = ({
   name,
   className,
   label,
@@ -58,11 +58,17 @@ export const RadioOption: FunctionComponent<RadioOptionProps> = ({
 };
 
 RadioOption.defaultProps = {
+  // eslint-disable-next-line react/default-props-match-prop-types
   name: '',
+  // eslint-disable-next-line react/default-props-match-prop-types
   className: '',
+  // eslint-disable-next-line react/default-props-match-prop-types
   disabled: false,
+  // eslint-disable-next-line react/default-props-match-prop-types
   groupDisabled: false,
+  // eslint-disable-next-line react/default-props-match-prop-types
   onChange: () => undefined,
+  // eslint-disable-next-line react/default-props-match-prop-types
   manualHideChildren: false,
 };
 
