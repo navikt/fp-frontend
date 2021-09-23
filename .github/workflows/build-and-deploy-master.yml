@@ -75,7 +75,7 @@ jobs:
 
       - name: Lukk deployment-issues
         if: success()
-        uses: actions/github-script@v4.0.2
+        uses: actions/github-script@v4.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -97,7 +97,7 @@ jobs:
 
       - name: Opprett issue, trigg deploy til dev-fss
         if: success()
-        uses: actions/github-script@v4.0.2
+        uses: actions/github-script@v4.1
         with:
           github-token: ${{secrets.GH_P_TOKEN}}
           script: |
