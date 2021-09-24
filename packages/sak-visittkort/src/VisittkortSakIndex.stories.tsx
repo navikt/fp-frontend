@@ -1,18 +1,19 @@
 import React from 'react';
+import { Story } from '@storybook/react';
 
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';
-import VisittkortSakIndex from '@fpsak-frontend/sak-visittkort';
-import { KjønnkodeEnum } from '@fpsak-frontend/types';
+import { KjønnkodeEnum, Fagsak, FagsakPersoner } from '@fpsak-frontend/types';
+import VisittkortSakIndex from './VisittkortSakIndex';
 
 export default {
   title: 'sak/sak-visittkort',
   component: VisittkortSakIndex,
 };
 
-const fagsak = {
+const defaultFagsak = {
   saksnummer: '123456',
   fagsakYtelseType: {
     kode: fagsakYtelseType.FORELDREPENGER,
@@ -34,6 +35,7 @@ const fagsakPerson = {
   fødselsdato: '1979-01-01',
   fødselsnummer: '1234567',
   kjønn: { kode: KjønnkodeEnum.MANN, kodeverk: '' },
+  aktørId: '234',
   personstatusType: {
     kode: personstatusType.BOSATT,
     kodeverk: 'PERSONSTATUS_TYPE',
@@ -77,25 +79,38 @@ const fagsakPersonerMedAnnenPartUkjent = {
   annenPart: fagsakPersonAnnenPartUkjent,
 };
 
-export const visVisittkortDerEnIkkeHarAnnenPart = () => (
+const Template: Story<{
+  fagsak: Fagsak,
+  fagsakPersoner: FagsakPersoner,
+  lenkeTilAnnenPart?: string,
+}> = ({
+  fagsak,
+  fagsakPersoner,
+  lenkeTilAnnenPart,
+}) => (
   <VisittkortSakIndex
     fagsak={fagsak}
-    fagsakPersoner={fagsakPersonerUtenAnnenPart}
+    fagsakPersoner={fagsakPersoner}
+    lenkeTilAnnenPart={lenkeTilAnnenPart}
   />
 );
 
-export const visVisittkortNårEnHarPersonopplysningerForBeggeParter = () => (
-  <VisittkortSakIndex
-    fagsak={fagsak}
-    fagsakPersoner={fagsakPersonerMedAnnenPart}
-    lenkeTilAnnenPart="testlenke til annen part"
-  />
-);
+export const IkkeHarAnnenPart = Template.bind({});
+IkkeHarAnnenPart.args = {
+  fagsak: defaultFagsak,
+  fagsakPersoner: fagsakPersonerUtenAnnenPart,
+};
 
-export const visVisittkortForAnnenPartDerAktørIdErUkjent = () => (
-  <VisittkortSakIndex
-    fagsak={fagsak}
-    fagsakPersoner={fagsakPersonerMedAnnenPartUkjent}
-    lenkeTilAnnenPart="testlenke til annen part"
-  />
-);
+export const PersonopplysningerForBeggeParter = Template.bind({});
+PersonopplysningerForBeggeParter.args = {
+  fagsak: defaultFagsak,
+  fagsakPersoner: fagsakPersonerMedAnnenPart,
+  lenkeTilAnnenPart: 'testlenke til annen part',
+};
+
+export const ForAnnenPartDerAktørIdErUkjent = Template.bind({});
+ForAnnenPartDerAktørIdErUkjent.args = {
+  fagsak: defaultFagsak,
+  fagsakPersoner: fagsakPersonerMedAnnenPartUkjent,
+  lenkeTilAnnenPart: 'testlenke til annen part',
+};
