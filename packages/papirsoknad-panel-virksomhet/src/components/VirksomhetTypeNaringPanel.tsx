@@ -5,10 +5,11 @@ import { FormattedMessage } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { CheckboxField } from '@fpsak-frontend/form';
+import { CheckboxField, NavFieldGroup } from '@fpsak-frontend/form';
 import naringsvirksomhetType from '@fpsak-frontend/kodeverk/src/naringsvirksomhetType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { isRequiredMessage } from '@fpsak-frontend/utils';
 
 const naringsvirksomhetTypeOrder = {
   [naringsvirksomhetType.DAGMAMMA]: 1,
@@ -27,10 +28,15 @@ const compare = (arg1: number, arg2: number): number => {
 interface PureOwnProps {
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
+  error?: string;
 }
 
 interface MappedOwnProps {
   naringvirksomhetTyper: KodeverkMedNavn[];
+}
+
+interface StaticFunctions {
+  validate: (values: any) => any;
 }
 
 /**
@@ -40,22 +46,35 @@ interface MappedOwnProps {
  * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for
  * søker.
  */
-export const VirksomhetTypeNaringPanel: FunctionComponent<PureOwnProps & MappedOwnProps> = ({
+export const VirksomhetTypeNaringPanel: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
   readOnly,
   naringvirksomhetTyper,
+  error,
 }) => (
   <>
     <Undertekst><FormattedMessage id="Registrering.VirksomhetNaeringTypePanel.Title" /></Undertekst>
     <VerticalSpacer fourPx />
-    {[...naringvirksomhetTyper].sort((a, b) => compare(naringsvirksomhetTypeOrder[a.kode], naringsvirksomhetTypeOrder[b.kode]))
-      .map((nv) => (
-        <Fragment key={nv.kode}>
-          <VerticalSpacer fourPx />
-          <CheckboxField name={nv.kode} key={nv.kode} label={nv.navn} readOnly={readOnly} />
-        </Fragment>
-      ))}
+    <NavFieldGroup errorMessage={error}>
+      {[...naringvirksomhetTyper].sort((a, b) => compare(naringsvirksomhetTypeOrder[a.kode], naringsvirksomhetTypeOrder[b.kode]))
+        .map((nv) => (
+          <Fragment key={nv.kode}>
+            <VerticalSpacer fourPx />
+            <CheckboxField name={nv.kode} key={nv.kode} label={nv.navn} readOnly={readOnly} />
+          </Fragment>
+        ))}
+    </NavFieldGroup>
   </>
 );
+
+VirksomhetTypeNaringPanel.validate = (values: any) => {
+  if (!values.typeVirksomhet
+    || Object.keys(values.typeVirksomhet).length === 0
+    || !Object.values(values.typeVirksomhet).some((verdi) => verdi === true)
+  ) {
+    return { _error: isRequiredMessage() };
+  }
+  return {};
+};
 
 const getFilteredNaringsvirksomhetTypes = createSelector(
   [(ownProps: PureOwnProps) => ownProps.alleKodeverk[kodeverkTyper.VIRKSOMHET_TYPE]], (types = []) => types
