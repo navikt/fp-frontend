@@ -44,6 +44,7 @@ export const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps & WrappedC
   readOnly = false,
   intl,
   alleKodeverk,
+  ...props
 }) => (
   <Modal
     className={styles.modal}
@@ -66,6 +67,7 @@ export const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps & WrappedC
         <VirksomhetTypeNaringPanel
           readOnly={readOnly}
           alleKodeverk={alleKodeverk}
+          error={props.submitFailed ? props.error : undefined}
         />
       </FormSection>
       <VirksomhetStartetEndretPanel readOnly={readOnly} form={REGISTRER_VIRKSOMHET_FORM_NAME} />
@@ -111,8 +113,17 @@ const mapStateToProps = (state: any) => {
   };
 };
 
+const validate = (values: any) => {
+  const errors1 = VirksomhetIdentifikasjonPanel.validate(values);
+  const errors2 = VirksomhetTypeNaringPanel.validate(values);
+  return {
+    ...errors1,
+    ...errors2,
+  };
+};
+
 export default connect(mapStateToProps)(reduxForm({
   enableReinitialize: true,
-  validate: VirksomhetIdentifikasjonPanel.validate,
+  validate,
   form: REGISTRER_VIRKSOMHET_FORM_NAME,
 })(injectIntl(RegistrerVirksomhetModalForm)));
