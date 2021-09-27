@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
+import { Story } from '@storybook/react';
 import Modal from 'nav-frontend-modal';
 
-import MenySakIndex, { MenyData } from '@fpsak-frontend/sak-meny';
+import MenySakIndex from './MenySakIndex';
+import MenyData from './MenyData';
 
 export default {
   title: 'sak/sak-meny',
   component: MenySakIndex,
 };
 
-export const visMenyMedToHandlinger = () => {
+const Template: Story = () => {
   const [isOpen, setOpen] = useState(true);
   return (
     <MenySakIndex
@@ -41,3 +43,5 @@ export const visMenyMedToHandlinger = () => {
     />
   );
 };
+
+export const MenyMedToHandlinger = Template.bind({});
