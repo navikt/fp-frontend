@@ -1,50 +1,15 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import { composeStories } from '@storybook/testing-react';
+import * as stories from './SupportMenySakIndex.stories';
 
-import SupportMenySakIndex from './SupportMenySakIndex';
-import SupportTabs from './supportTabs';
-import TabMeny from './components/TabMeny';
+const { UtenBeslutterGodkjenningOgTilbakesending } = composeStories(stories);
 
 describe('<SupportMenySakIndex>', () => {
-  it('skal lage tabs og sette Send melding som valgt', () => {
-    const wrapper = shallow(<SupportMenySakIndex
-      tilgjengeligeTabs={[SupportTabs.HISTORIKK, SupportTabs.MELDINGER, SupportTabs.DOKUMENTER]}
-      valgbareTabs={[SupportTabs.HISTORIKK, SupportTabs.MELDINGER, SupportTabs.DOKUMENTER]}
-      valgtIndex={1}
-      onClick={() => undefined}
-    />);
+  it('skal vise meny uten beslutter-panelet', async () => {
+    render(<UtenBeslutterGodkjenningOgTilbakesending />);
 
-    const tabMeny = wrapper.find(TabMeny);
-    expect(tabMeny).toHaveLength(1);
-
-    const tabs = tabMeny.prop('tabs');
-    expect(tabs[0].isActive).toBe(false);
-    expect(tabs[0].isDisabled).toBe(false);
-    expect(tabs[0].tooltip).toEqual('Historikk');
-    expect(tabs[1].isActive).toBe(true);
-    expect(tabs[1].isDisabled).toBe(false);
-    expect(tabs[1].tooltip).toEqual('Send melding');
-    expect(tabs[2].isActive).toBe(false);
-    expect(tabs[2].isDisabled).toBe(false);
-    expect(tabs[2].tooltip).toEqual('Dokumenter');
-  });
-
-  it('skal lage tabs og sette Send Melding til disablet', () => {
-    const wrapper = shallow(<SupportMenySakIndex
-      tilgjengeligeTabs={[SupportTabs.HISTORIKK, SupportTabs.MELDINGER]}
-      valgbareTabs={[SupportTabs.HISTORIKK]}
-      onClick={() => undefined}
-    />);
-
-    const tabMeny = wrapper.find(TabMeny);
-    expect(tabMeny).toHaveLength(1);
-
-    const tabs = tabMeny.prop('tabs');
-    expect(tabs[0].isActive).toBe(false);
-    expect(tabs[0].isDisabled).toBe(false);
-    expect(tabs[0].tooltip).toEqual('Historikk');
-    expect(tabs[1].isActive).toBe(false);
-    expect(tabs[1].isDisabled).toBe(true);
-    expect(tabs[1].tooltip).toEqual('Send melding');
+    expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
+    expect(screen.getByText('1234567')).toBeInTheDocument();
   });
 });
