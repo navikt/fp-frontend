@@ -3,20 +3,20 @@ import { Knapp } from 'nav-frontend-knapper';
 
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
-import FagsakProfilSakIndex from '@fpsak-frontend/sak-fagsak-profil';
+import { withRouter } from '@fpsak-frontend/storybook-utils';
 
-import withRouterProvider from '../../decorators/withRouter';
+import FagsakProfilSakIndex from './FagsakProfilSakIndex';
 
 export default {
   title: 'sak/sak-fagsak-profil',
   component: FagsakProfilSakIndex,
-  decorators: [withRouterProvider],
+  decorators: [withRouter],
 };
 
 const FAGSAK_STATUS_KODEVERK = 'FAGSAK_STATUS';
 const FAGSAK_YTELSE_KODEVERK = 'FAGSAK_YTELSE';
 
-export const visPanelForValgAvBehandlinger = () => (
+export const Default = () => (
   <div style={{ width: '600px', backgroundColor: 'white', padding: '30px' }}>
     <FagsakProfilSakIndex
       saksnummer="232341251"

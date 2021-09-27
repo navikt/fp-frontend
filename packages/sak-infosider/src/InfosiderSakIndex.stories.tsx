@@ -4,29 +4,29 @@ import {
   ForbiddenPage, NotFoundPage, UnauthorizedPage, IngenBehandlingValgtPanel,
 } from '@fpsak-frontend/sak-infosider';
 
-import withRouterProvider from '../../decorators/withRouter';
+import { withRouter } from '@fpsak-frontend/storybook-utils';
 
 export default {
   title: 'sak/sak-infosider',
-  decorators: [withRouterProvider],
+  decorators: [withRouter],
 };
 
-export const visPanelForHarIkkeTilgang = () => (
+export const HarIkkeTilgang = () => (
   <ForbiddenPage />
 );
 
-export const visPanelForSideIkkeFunnet = () => (
+export const SideIkkeFunnet = () => (
   <NotFoundPage />
 );
 
-export const visPanelForIkkeInnloggetBruker = () => (
+export const IkkeInnloggetBruker = () => (
   <UnauthorizedPage />
 );
 
-export const visPanelForBehandlingErIkkeValgt = () => (
+export const BehandlingErIkkeValgt = () => (
   <IngenBehandlingValgtPanel numBehandlinger={2} />
 );
 
-export const visPanelForBehandlingerFinnesIkke = () => (
+export const BehandlingerFinnesIkke = () => (
   <IngenBehandlingValgtPanel numBehandlinger={0} />
 );
