@@ -1,7 +1,7 @@
 import React from 'react';
 
-import HeaderWithErrorPanel from '@fpsak-frontend/sak-dekorator';
 import { useState } from '@storybook/addons';
+import HeaderWithErrorPanel from './HeaderWithErrorPanel';
 
 export default {
   title: 'sak/sak-dekoratør',

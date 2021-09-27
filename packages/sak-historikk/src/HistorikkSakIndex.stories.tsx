@@ -1,9 +1,8 @@
 import React from 'react';
 
-import HistorikkSakIndex from '@fpsak-frontend/sak-historikk';
 import { Historikkinnslag } from '@fpsak-frontend/types';
-
-import alleKodeverk from '../mocks/alleKodeverk.json';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import HistorikkSakIndex from './HistorikkSakIndex';
 
 const history = [{
   behandlingUuid: '999951',

@@ -1,13 +1,13 @@
 import React from 'react';
+import { Story } from '@storybook/react';
 
-import AktorSakIndex from '@fpsak-frontend/sak-aktor';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
-import { KjønnkodeEnum } from '@fpsak-frontend/types';
+import { KjønnkodeEnum, Aktor } from '@fpsak-frontend/types';
+import { withRouter, alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
-import alleKodeverk from '../mocks/alleKodeverk.json';
-import withRouterProvider from '../../decorators/withRouter';
+import AktorSakIndex from './AktorSakIndex';
 
 const fagsak = {
   saksnummer: '35425245',
@@ -35,33 +35,37 @@ const fagsak = {
 export default {
   title: 'sak/sak-aktor',
   component: AktorSakIndex,
-  decorators: [withRouterProvider],
+  decorators: [withRouter],
 };
 
-export const visSakerOpprettetPaAktor = () => (
+const Template: Story<{
+  aktorInfo?: Aktor;
+}> = ({
+  aktorInfo,
+}) => (
   <AktorSakIndex
     valgtAktorId="123"
-    aktorInfo={{
-      fagsaker: [fagsak, {
-        ...fagsak,
-        saksnummer: '123',
-      }],
-      person: {
-        navn: 'Espen Utvikler',
-        kjønn: { kode: KjønnkodeEnum.MANN, kodeverk: '' },
-        fødselsdato: '1979-01-01',
-        fødselsnummer: '123456233',
-      },
-    }}
+    aktorInfo={aktorInfo}
     alleKodeverk={alleKodeverk as any}
     finnPathToFagsak={() => 'path'}
   />
 );
 
-export const visningAvUgyldigAktorId = () => (
-  <AktorSakIndex
-    valgtAktorId="123"
-    alleKodeverk={alleKodeverk as any}
-    finnPathToFagsak={() => 'path'}
-  />
-);
+export const Default = Template.bind({});
+Default.args = {
+  aktorInfo: {
+    fagsaker: [fagsak, {
+      ...fagsak,
+      saksnummer: '123',
+    }],
+    person: {
+      navn: 'Espen Utvikler',
+      kjønn: { kode: KjønnkodeEnum.MANN, kodeverk: '' },
+      fødselsdato: '1979-01-01',
+      fødselsnummer: '123456233',
+      aktørId: '2323',
+    },
+  },
+};
+
+export const UgyldigAktørId = Template.bind({});
