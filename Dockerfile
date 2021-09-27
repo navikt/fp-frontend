@@ -1,4 +1,4 @@
-FROM navikt/nginx-oidc:latest
+FROM nginxinc/nginx-unprivileged
 # FPSAK spesifikk
 ENV APP_DIR="/app" \
 	APP_PATH_PREFIX="/fpsak" \
