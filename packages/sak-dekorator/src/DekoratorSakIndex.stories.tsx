@@ -1,27 +1,20 @@
-import React from 'react';
-
-import { useState } from '@storybook/addons';
+import React, { useState } from 'react';
+import { Story } from '@storybook/react';
+import EventType from '@fpsak-frontend/rest-api/src/requestApi/eventType';
 import HeaderWithErrorPanel from './HeaderWithErrorPanel';
+import { InputErrorMessage } from './feilhandtering/ErrorFormatter';
 
 export default {
   title: 'sak/sak-dekoratør',
   component: HeaderWithErrorPanel,
 };
 
-export const visDekoratorUtenFeilmeldinger = () => (
-  <div style={{ marginLeft: '-56px' }}>
-    <HeaderWithErrorPanel
-      navAnsattName="Espen Utvikler"
-      removeErrorMessage={() => undefined}
-      setSiteHeight={() => undefined}
-      hideErrorMessages={false}
-      queryStrings={{}}
-    />
-  </div>
-);
-
-export const visDekoratorMedFeilmeldinger = () => {
-  const [errorMessages, removeErrorMessages] = useState([{ message: 'Feilmelding 1', type: '' }, { message: 'Feilmelding 2', type: '' }]);
+const Template: Story<{
+  feilmeldinger?: InputErrorMessage[];
+}> = ({
+  feilmeldinger,
+}) => {
+  const [errorMessages, removeErrorMessages] = useState(feilmeldinger);
   return (
     <div style={{ marginLeft: '-56px' }}>
       <HeaderWithErrorPanel
@@ -34,4 +27,22 @@ export const visDekoratorMedFeilmeldinger = () => {
       />
     </div>
   );
+};
+
+export const UtenFeilmeldinger = Template.bind({});
+
+export const MedFeilmeldinger = Template.bind({});
+MedFeilmeldinger.args = {
+  feilmeldinger: [{
+    feilmelding: 'Feilmelding 1', type: EventType.REQUEST_ERROR,
+  }, {
+    feilmelding: 'Spesialtegn-test: Høna &amp; egget og &#34;test1&#34; og &#39;test2&#39;', type: EventType.REQUEST_ERROR,
+  }],
+};
+
+export const MedFeilmeldingDetaljer = Template.bind({});
+MedFeilmeldingDetaljer.args = {
+  feilmeldinger: [{
+    status: 'HALTED', message: 'Feilmelding 1', type: EventType.POLLING_HALTED_OR_DELAYED,
+  }],
 };
