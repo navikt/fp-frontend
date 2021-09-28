@@ -63,7 +63,7 @@ interface OwnProps {
   setBehandlingUuidOgVersjon: (behandlingUuid: string, behandlingVersjon: number) => void;
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
-  setRequestPendingMessage: (message: string) => void;
+  setRequestPendingMessage: (message?: string) => void;
 }
 
 /**

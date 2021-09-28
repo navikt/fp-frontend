@@ -1,11 +1,12 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-
+import { RawIntlProvider } from 'react-intl';
+import { render, screen } from '@testing-library/react';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
-
-import VisittkortBarnInfoFodselPanel from './VisittkortBarnInfoFodselPanel';
-import VisittkortBarnInfoOmsorgPanel from './VisittkortBarnInfoOmsorgPanel';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import VisittkortBarnInfoPanel from './VisittkortBarnInfoPanel';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<VisittkortBarnInfoPanel>', () => {
   const familiehendelse = {
@@ -18,25 +19,34 @@ describe('<VisittkortBarnInfoPanel>', () => {
     dødfødsel: false,
   };
 
-  it('skal vise panel for fødsel', () => {
-    const wrapper = shallow(<VisittkortBarnInfoPanel
-      familiehendelse={familiehendelse}
-    />);
+  it('skal vise panel for fødsel', async () => {
+    render(
+      <RawIntlProvider value={intlMock}>
+        <VisittkortBarnInfoPanel
+          familiehendelse={familiehendelse}
+        />
+      </RawIntlProvider>,
+    );
 
-    expect(wrapper.find(VisittkortBarnInfoFodselPanel)).toHaveLength(1);
+    expect(await screen.findByText(/Født 01.01.2020/)).toBeInTheDocument();
+    expect(screen.getByText(/(1 år)/)).toBeInTheDocument();
   });
 
-  it('skal vise panel for omsorg', () => {
-    const wrapper = shallow(<VisittkortBarnInfoPanel
-      familiehendelse={{
-        ...familiehendelse,
-        hendelseType: {
-          kode: familieHendelseType.OMSORG,
-          kodeverk: '',
-        },
-      }}
-    />);
+  it('skal vise panel for omsorg', async () => {
+    render(
+      <RawIntlProvider value={intlMock}>
+        <VisittkortBarnInfoPanel
+          familiehendelse={{
+            ...familiehendelse,
+            hendelseType: {
+              kode: familieHendelseType.OMSORG,
+              kodeverk: '',
+            },
+          }}
+        />
+      </RawIntlProvider>,
+    );
 
-    expect(wrapper.find(VisittkortBarnInfoOmsorgPanel)).toHaveLength(1);
+    expect(await screen.findByText('Foreldreansvar 01.01.2020')).toBeInTheDocument();
   });
 });

@@ -1,6 +1,8 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { NedChevron, OppChevron } from 'nav-frontend-chevron';
+import { RawIntlProvider } from 'react-intl';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+// import { NedChevron, OppChevron } from 'nav-frontend-chevron';
 
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
@@ -10,52 +12,54 @@ import BubbleText from './bubbleText';
 const intlMock = getIntlMock(messages);
 
 describe('<BubbleText>', () => {
-  it('skal kun vise en del av teksten om cutoffpointen vi sender er mindre en tekstens lengde', () => {
+  it('skal kun vise en del av teksten om cutoffpointen vi sender er mindre en tekstens lengde', async () => {
     const bodyText = 'My bodytekst is the only thing that keeps me awake at night';
     const cutOffLength = 10;
-    const wrapper = shallow(<BubbleText.WrappedComponent
-      intl={intlMock}
-      bodyText={bodyText}
-      cutOffLength={cutOffLength}
-    />);
-    expect(wrapper.find('div').text()).toEqual('My body...');
+
+    render(
+      <RawIntlProvider value={intlMock}>
+        <BubbleText
+          bodyText={bodyText}
+          cutOffLength={cutOffLength}
+        />
+      </RawIntlProvider>,
+    );
+
+    expect(await screen.findByText('My body...')).toBeInTheDocument();
+    expect(screen.getByTitle('Åpne tekstfelt')).toBeInTheDocument();
   });
 
-  it('skal vise chevron ned om teksten er cutoff', () => {
+  it('skal vise hele teksten om cutoffpointen vi sender er størren en teksten', async () => {
+    const bodyText = 'My bodytekst is the only thing that keeps me awake at night';
+    const cutOffLength = 100;
+
+    render(
+      <RawIntlProvider value={intlMock}>
+        <BubbleText
+          bodyText={bodyText}
+          cutOffLength={cutOffLength}
+        />
+      </RawIntlProvider>,
+    );
+
+    expect(await screen.findByText(bodyText)).toBeInTheDocument();
+  });
+
+  it('skal vise chevron opp om man klikker på chevron', async () => {
     const bodyText = 'My bodytekst is the only thing that keeps me awake at night';
     const cutOffLength = 10;
-    const wrapper = shallow(<BubbleText.WrappedComponent
-      intl={intlMock}
-      bodyText={bodyText}
-      cutOffLength={cutOffLength}
-    />);
-    const nedChevron = wrapper.find(NedChevron);
-    expect(nedChevron).toHaveLength(1);
-  });
 
-  it('skal vise chevron opp om man klikker på chevron', () => {
-    const bodyText = 'My bodytekst is the only thing that keeps me awake at night';
-    const cutOffLength = 10;
-    const wrapper = shallow(<BubbleText.WrappedComponent
-      intl={intlMock}
-      bodyText={bodyText}
-      cutOffLength={cutOffLength}
-    />);
-    const x = wrapper.find('a');
-    x.simulate('click');
-    const oppChevron = wrapper.find(OppChevron);
-    expect(oppChevron).toHaveLength(1);
-  });
+    render(
+      <RawIntlProvider value={intlMock}>
+        <BubbleText
+          bodyText={bodyText}
+          cutOffLength={cutOffLength}
+        />
+      </RawIntlProvider>,
+    );
 
-  it('skal vise hele teksten om cutoffpointen vi sender er størren en teksten', () => {
-    const bodyText = 'My bodytekst is the only thing tha keeps me awake at night';
-    const cutOffLength = 50;
-    const wrapper = shallow(<BubbleText.WrappedComponent
-      intl={intlMock}
-      bodyText={bodyText}
-      cutOffLength={cutOffLength}
-    />);
+    userEvent.click(screen.getByTitle('Åpne tekstfelt'));
 
-    expect(wrapper.find('div').text()).toEqual('My bodytekst is the only thing tha keeps me awa...');
+    expect(await screen.findByTitle('Lukke tekstfelt')).toBeInTheDocument();
   });
 });

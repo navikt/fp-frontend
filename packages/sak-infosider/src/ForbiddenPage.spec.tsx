@@ -1,13 +1,13 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { FormattedMessage } from 'react-intl';
-import ForbiddenPage from './ForbiddenPage';
-import ErrorPageWrapper from './components/ErrorPageWrapper';
+import { render, screen } from '@testing-library/react';
+import { composeStories } from '@storybook/testing-react';
+import * as stories from './InfosiderSakIndex.stories';
+
+const { HarIkkeTilgang } = composeStories(stories);
 
 describe('<ForbiddenPage>', () => {
-  it('skal rendre ForbiddenPage korrekt', () => {
-    const wrapper = shallow(<ForbiddenPage />);
-    expect(wrapper.find(ErrorPageWrapper)).toHaveLength(1);
-    expect(wrapper.find(FormattedMessage)).toHaveLength(1);
+  it('skal rendre ForbiddenPage korrekt', async () => {
+    render(<HarIkkeTilgang />);
+    expect(await screen.findByText('Du har ikke tilgang til å slå opp denne personen')).toBeInTheDocument();
   });
 });

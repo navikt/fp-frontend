@@ -85,7 +85,7 @@ const Snakkeboble: FunctionComponent<OwnProps> = ({
   opprettetAv,
   children,
 }) => (
-  <div className={snakkebobleCls(aktoer)}>
+  <div className={snakkebobleCls(aktoer)} data-testid={`snakkeboble-${dato}`}>
     <Image className={styles.image} src={utledIkon(aktoer, kjoenn)} tooltip={rolleNavn} alignTooltipLeft={utledTooltipPlassering(aktoer)} />
     <div className={styles['snakkeboble__snakkeboble-pil-container']}>
       <i className={snakkeboblePilCls(aktoer)} />
