@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AvsnittSkiller } from '@fpsak-frontend/shared-components';
+import AvsnittSkiller from './AvsnittSkiller';
 
 export default {
   title: 'sharedComponents/AvsnittSkiller',

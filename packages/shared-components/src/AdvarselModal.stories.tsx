@@ -1,7 +1,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { AdvarselModal } from '@fpsak-frontend/shared-components';
+import AdvarselModal from './AdvarselModal';
 
 export default {
   title: 'sharedComponents/AdvarselModal',

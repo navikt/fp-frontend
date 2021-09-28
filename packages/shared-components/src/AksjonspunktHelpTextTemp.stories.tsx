@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
+import AksjonspunktHelpTextTemp from './AksjonspunktHelpTextTemp';
 
 export default {
   title: 'sharedComponents/AksjonspunktHelpTextTemp',

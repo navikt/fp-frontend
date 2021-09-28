@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
 
-import { Image, AdvarselModal } from '@fpsak-frontend/shared-components';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 import questionNormalUrl from '@fpsak-frontend/assets/images/question_normal.svg';
 import questionHoverUrl from '@fpsak-frontend/assets/images/question_hover.svg';
+import AdvarselModal from './AdvarselModal';
+import Image from './Image';
 
 export default {
   title: 'sharedComponents/Image',
   component: Image,
 };
 
-export const visIkon = () => (
+export const Default = () => (
   <Image
     alt="Alt-tekst"
     src={innvilgetImageUrl}
   />
 );
 
-export const visKlikkbartIkon = () => {
+export const KlikkbartIkon = () => {
   const [visModal, setVisModal] = useState(false);
 
   return (
@@ -38,7 +39,7 @@ export const visKlikkbartIkon = () => {
   );
 };
 
-export const visIkonMedTooltip = () => (
+export const IkonMedTooltip = () => (
   <Image
     alt="Alt-tekst"
     src={innvilgetImageUrl}
@@ -46,7 +47,7 @@ export const visIkonMedTooltip = () => (
   />
 );
 
-export const visAnnetIkonVedHoover = () => (
+export const AnnetIkonVedHoover = () => (
   <Image
     alt="Alt-tekst"
     src={questionNormalUrl}

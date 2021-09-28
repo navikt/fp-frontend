@@ -2,7 +2,7 @@ import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@fpsak-frontend/utils';
-import { PeriodLabel } from '@fpsak-frontend/shared-components';
+import PeriodLabel from './PeriodLabel';
 
 const intl = createIntl({});
 

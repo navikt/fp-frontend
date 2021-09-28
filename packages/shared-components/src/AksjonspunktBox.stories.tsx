@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AksjonspunktBox } from '@fpsak-frontend/shared-components';
+import AksjonspunktBox from './AksjonspunktBox';
 
 export default {
   title: 'sharedComponents/AksjonspunktBox',

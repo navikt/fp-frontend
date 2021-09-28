@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
+import AksjonspunktHelpTextHTML from './AksjonspunktHelpTextHTML';
 
 export default {
   title: 'sharedComponents/AksjonspunktHelpTextHTML',

@@ -1,13 +1,15 @@
 import React from 'react';
 
-import { Table, TableRow, TableColumn } from '@fpsak-frontend/shared-components';
+import Table from './Table';
+import TableRow from './TableRow';
+import TableColumn from './TableColumn';
 
 export default {
   title: 'sharedComponents/Table',
   component: Table,
 };
 
-export const visTabellMedRadhoover = () => (
+export const TabellMedRadhoover = () => (
   <Table headerColumnContent={[<div>Navn</div>, <div>Alder</div>]}>
     <TableRow isDashedBottomBorder>
       <TableColumn>
@@ -28,7 +30,7 @@ export const visTabellMedRadhoover = () => (
   </Table>
 );
 
-export const visTabellUtenRadhoover = () => (
+export const TabellUtenRadhoover = () => (
   <Table headerColumnContent={[<div>Navn</div>, <div>Alder</div>]} noHover>
     <TableRow isSelected>
       <TableColumn>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Periodpicker } from '@fpsak-frontend/shared-components';
+import Periodpicker from './Periodpicker';
 
 export default {
   title: 'sharedComponents/Periodpicker',

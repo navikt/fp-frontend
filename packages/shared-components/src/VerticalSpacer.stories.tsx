@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import VerticalSpacer from './VerticalSpacer';
 
 export default {
   title: 'sharedComponents/VerticalSpacer',

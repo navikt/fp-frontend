@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Tooltip } from '@fpsak-frontend/shared-components';
+import Tooltip from './Tooltip';
 
 export default {
   title: 'sharedComponents/Tooltip',

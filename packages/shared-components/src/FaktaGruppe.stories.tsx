@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FaktaGruppe } from '@fpsak-frontend/shared-components';
+import FaktaGruppe from './FaktaGruppe';
 
 export default {
   title: 'sharedComponents/FaktaGruppe',

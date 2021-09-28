@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BorderBox } from '@fpsak-frontend/shared-components';
+import BorderBox from './BorderBox';
 
 export default {
   title: 'sharedComponents/BorderBox',

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { OverstyringKnapp } from '@fpsak-frontend/shared-components';
+import OverstyringKnapp from './OverstyringKnapp';
 
 export default {
   title: 'sharedComponents/OverstyringKnapp',

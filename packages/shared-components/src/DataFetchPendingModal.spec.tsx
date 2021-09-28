@@ -1,26 +1,14 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import Modal from 'nav-frontend-modal';
+import { render, screen } from '@testing-library/react';
+import { composeStories } from '@storybook/testing-react';
+import * as stories from './LoadingPanel.stories';
 
-import DataFetchPendingModal from './DataFetchPendingModal';
+const { Default } = composeStories(stories);
 
 describe('<DataFetchPendingModal>', () => {
-  it('skal rendre modal når timer er gått ut', () => {
-    const wrapper = shallow(<DataFetchPendingModal pendingMessage="test" />);
+  it('skal rendre modal når timer er gått ut', async () => {
+    render(<Default />);
 
-    wrapper.setState({ displayMessage: true });
-
-    const modal = wrapper.find(Modal);
-    expect(modal).toHaveLength(1);
-    expect(modal.prop('isOpen')).toBe(true);
-    expect(modal.prop('closeButton')).toBe(false);
-    expect(modal.prop('contentLabel')).toEqual('test');
-
-    expect(wrapper.find('NavFrontendSpinner')).toHaveLength(1);
-  });
-
-  it('skal ikke rendre modal før timer har gått ut', () => {
-    const wrapper = shallow(<DataFetchPendingModal pendingMessage="test" />);
-    expect(wrapper.find(Modal)).toHaveLength(0);
+    expect(await screen.findByText('Venter...')).toBeInTheDocument();
   });
 });

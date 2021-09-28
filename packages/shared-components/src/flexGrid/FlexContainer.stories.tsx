@@ -1,13 +1,15 @@
 import React from 'react';
 
-import { FlexContainer, FlexRow, FlexColumn } from '@fpsak-frontend/shared-components';
+import FlexContainer from './FlexContainer';
+import FlexRow from './FlexRow';
+import FlexColumn from './FlexColumn';
 
 export default {
   title: 'sharedComponents/FlexContainer',
   component: FlexContainer,
 };
 
-export const visFlexContainerMedToRaderOgTreKolonner = () => (
+export const Default = () => (
   <FlexContainer>
     <FlexRow>
       <FlexColumn>

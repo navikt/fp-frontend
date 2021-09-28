@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FloatRight } from '@fpsak-frontend/shared-components';
+import FloatRight from './FloatRight';
 
 export default {
   title: 'sharedComponents/FloatRight',

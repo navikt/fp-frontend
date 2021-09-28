@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { EditedIcon } from '@fpsak-frontend/shared-components';
+import EditedIcon from './EditedIcon';
 
 export default {
   title: 'sharedComponents/EditedIcon',
   component: EditedIcon,
 };
 
-export const visMarkørForEditertVerdi = () => (
+export const Default = () => (
   <div>
     Dette er en tekst
     <EditedIcon />

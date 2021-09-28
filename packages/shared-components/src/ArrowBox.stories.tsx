@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { ArrowBox } from '@fpsak-frontend/shared-components';
+import ArrowBox from './ArrowBox';
 
 export default {
   title: 'sharedComponents/ArrowBox',
   component: ArrowBox,
 };
 
-export const medPilPåToppen = () => (
+export const MedPilPåToppen = () => (
   <div style={{ width: '200px' }}>
     <ArrowBox>Dette er en tekst</ArrowBox>
   </div>

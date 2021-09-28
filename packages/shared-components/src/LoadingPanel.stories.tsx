@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
+import LoadingPanel from './LoadingPanel';
 
 export default {
   title: 'sharedComponents/LoadingPanel',
   component: LoadingPanel,
 };
 
-export const visLoadingPanel = () => (
+export const Default = () => (
   <LoadingPanel />
 );

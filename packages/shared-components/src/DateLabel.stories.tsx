@@ -1,8 +1,8 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { DateLabel } from '@fpsak-frontend/shared-components';
 import { createIntl } from '@fpsak-frontend/utils';
+import DateLabel from './DateLabel';
 
 const intl = createIntl({
   'OkAvbrytModal.Ok': 'Ok',
@@ -15,7 +15,7 @@ export default {
   component: DateLabel,
 };
 
-export const visFormatertDato = () => (
+export const Default = () => (
   <RawIntlProvider value={intl}>
     <DateLabel
       dateString="2017-10-02"

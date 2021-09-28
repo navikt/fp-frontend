@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FadingPanel } from '@fpsak-frontend/shared-components';
+import FadingPanel from './FadingPanel';
 
 export default {
   title: 'sharedComponents/FadingPanel',
