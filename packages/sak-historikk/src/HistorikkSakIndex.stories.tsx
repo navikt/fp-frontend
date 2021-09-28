@@ -1,4 +1,5 @@
 import React from 'react';
+import { Story } from '@storybook/react';
 
 import { Historikkinnslag } from '@fpsak-frontend/types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
@@ -120,7 +121,11 @@ export default {
   component: HistorikkSakIndex,
 };
 
-export const visHistorikkNårBehandlingIkkeErValgt = () => (
+const Template: Story<{
+  valgtBehandlingUuid?: string;
+}> = ({
+  valgtBehandlingUuid,
+}) => (
   <div style={{
     width: '600px', backgroundColor: 'white', padding: '30px',
   }}
@@ -132,23 +137,14 @@ export const visHistorikkNårBehandlingIkkeErValgt = () => (
       saksnummer="2"
       getBehandlingLocation={() => locationMock}
       createLocationForSkjermlenke={() => locationMock}
+      valgtBehandlingUuid={valgtBehandlingUuid}
     />
   </div>
 );
 
-export const visHistorikkNårBehandlingErValgt = () => (
-  <div style={{
-    width: '600px', backgroundColor: 'white', padding: '30px',
-  }}
-  >
-    <HistorikkSakIndex
-      historikkFpSak={history}
-      historikkFpTilbake={[]}
-      alleKodeverkFpSak={alleKodeverk as any}
-      saksnummer="2"
-      getBehandlingLocation={() => locationMock}
-      createLocationForSkjermlenke={() => locationMock}
-      valgtBehandlingUuid="999951"
-    />
-  </div>
-);
+export const BehandlingIkkeErValgt = Template.bind({});
+
+export const BehandlingErValgt = Template.bind({});
+BehandlingErValgt.args = {
+  valgtBehandlingUuid: '999951',
+};
