@@ -93,7 +93,10 @@ const DocumentList: FunctionComponent<OwnProps & WrappedComponentProps> = ({
 
   useEffect(() => () => Object.values(timeoutMapRef).forEach((timeout?: Timeout) => (timeout && clearTimeout(timeout))), [timeoutMapRef]);
 
-  const dokumentKeyHandler = useCallback((event: React.KeyboardEvent, id: string) => {
+  const dokumentKeyHandler = useCallback((event: React.KeyboardEvent, id?: string) => {
+    if (id === undefined) {
+      return;
+    }
     const isShiftKey = event.key === 'Shift';
     if (isShiftKey) {
       setShiftPressed(event.type === 'keydown');
@@ -104,7 +107,10 @@ const DocumentList: FunctionComponent<OwnProps & WrappedComponentProps> = ({
     }
   }, [valgteDokumentIder, isShiftPressed]);
 
-  const dokumentMouseHandler = useCallback((event: React.MouseEvent, id: string) => {
+  const dokumentMouseHandler = useCallback((event: React.MouseEvent, id?: string) => {
+    if (id === undefined) {
+      return;
+    }
     const currentTimeout = timeoutMapRef.current[id];
     if (currentTimeout) {
       clearTimeout(currentTimeout);
