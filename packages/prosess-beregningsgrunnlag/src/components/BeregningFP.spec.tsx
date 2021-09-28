@@ -5,7 +5,13 @@ import { shallow } from 'enzyme/build';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import {
-  Aksjonspunkt, AlleKodeverk, Beregningsgrunnlag, BeregningsgrunnlagAndel, Vilkar,
+  Aksjonspunkt,
+  AlleKodeverk,
+  Beregningsgrunnlag,
+  BeregningsgrunnlagAndel,
+  BeregningsgrunnlagPeriodeProp,
+  SammenligningsgrunlagProp,
+  Vilkar,
 } from '@fpsak-frontend/types';
 import BeregningFP from './BeregningFP';
 import BeregningForm from './beregningForm/BeregningForm';
@@ -35,7 +41,7 @@ const lagBeregningsgrunnlag = (ferdigstilt: boolean,
     avvikProsent: avvikPromille ? avvikPromille * 100 : null,
     rapportertPrAar: sammenligningSum,
     avvikPromille,
-  },
+  } as SammenligningsgrunlagProp,
   aktivitetStatus: [
     {
       kode: aktivitetStatus.KOMBINERT_AT_SN,

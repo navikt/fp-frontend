@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
-import { Beregningsgrunnlag } from '@fpsak-frontend/types';
+import {Beregningsgrunnlag, SammenligningsgrunlagProp} from '@fpsak-frontend/types';
 import { FormattedMessage } from 'react-intl';
 import AksjonspunktTittel from './AksjonspunktTittel';
 
@@ -39,7 +39,7 @@ const lagBG = (avvikPromille?: number): Beregningsgrunnlag => ({
     },
     differanseBeregnet: 12100,
     avvikPromille,
-  }] : null,
+  } as SammenligningsgrunlagProp] : null,
 } as Beregningsgrunnlag);
 
 const lagAP = (kode: string) => ({
