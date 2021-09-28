@@ -37,7 +37,7 @@ Default.args = {
     dokumentId: '1',
     behandlingUuidList: [behandlingUuid],
     tittel: 'Dette er et dokument',
-    tidspunkt: '2017-08-02T00:54:25.455',
+    tidspunkt: '2017-08-02T02:04:25.455',
     kommunikasjonsretning: kommunikasjonsretning.INN,
     gjelderFor: 'test1',
   }, {
@@ -45,7 +45,7 @@ Default.args = {
     dokumentId: '2',
     behandlingUuidList: [],
     tittel: 'Dette er et nytt dokument',
-    tidspunkt: '2017-02-02T01:54:25.455',
+    tidspunkt: '2017-02-02T02:54:25.455',
     kommunikasjonsretning: kommunikasjonsretning.UT,
     gjelderFor: 'test2',
   }, {

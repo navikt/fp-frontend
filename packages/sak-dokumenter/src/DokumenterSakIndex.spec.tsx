@@ -17,7 +17,7 @@ describe('<DokumenterSakIndex>', () => {
     expect(screen.getByText('Dette er et dokument')).toBeInTheDocument();
     expect(screen.getByText('Brukes i behandlingen')).toBeInTheDocument();
     expect(screen.getByText('test1')).toBeInTheDocument();
-    expect(screen.getByText(/01.08.2017/)).toBeInTheDocument();
+    expect(screen.getByText(/02.08.2017/)).toBeInTheDocument();
 
     expect(screen.getByText('Ut')).toBeInTheDocument();
     expect(screen.getByText('Dette er et nytt dokument')).toBeInTheDocument();

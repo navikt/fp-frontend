@@ -15,7 +15,7 @@ describe('<BehandlingVelgerSakIndex>', () => {
     expect(screen.getByText('Resultat')).toBeInTheDocument();
     expect(screen.getByText('Avslått')).toBeInTheDocument();
     expect(screen.getByText('Opprettet')).toBeInTheDocument();
-    expect(screen.getByText(/01.08.2017/)).toBeInTheDocument();
+    expect(screen.getByText(/02.08.2017/)).toBeInTheDocument();
     expect(screen.getByText(/02.08.2017/)).toBeInTheDocument();
     expect(screen.getByText('Enhet')).toBeInTheDocument();
     expect(screen.getByText('NAV Familie- og pensjonsytelser Bergen')).toBeInTheDocument();
@@ -48,9 +48,9 @@ describe('<BehandlingVelgerSakIndex>', () => {
 
     const alleRader = screen.getAllByTestId('behandling', { exact: false });
     expect(alleRader.length).toBe(4);
-    expect(alleRader[0]).toHaveTextContent(/Opprettet01.10.2017Kl.22:54:25/);
-    expect(alleRader[1]).toHaveTextContent(/Opprettet01.08.2017Kl.22:54:25/);
-    expect(alleRader[2]).toHaveTextContent(/Opprettet31.07.2017Kl.22:54/);
-    expect(alleRader[3]).toHaveTextContent(/Opprettet11.07.2017Kl.22:54:25/);
+    expect(alleRader[0]).toHaveTextContent(/Opprettet02.10.2017Kl.00:04:25/);
+    expect(alleRader[1]).toHaveTextContent(/Opprettet02.08.2017Kl.00:04:25/);
+    expect(alleRader[2]).toHaveTextContent(/Opprettet01.08.2017Kl.00:04:25/);
+    expect(alleRader[3]).toHaveTextContent(/Opprettet12.07.2017Kl.00:04:25/);
   });
 });
