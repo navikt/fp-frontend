@@ -48,9 +48,9 @@ describe('<BehandlingVelgerSakIndex>', () => {
 
     const alleRader = screen.getAllByTestId('behandling', { exact: false });
     expect(alleRader.length).toBe(4);
-    expect(alleRader[0]).toHaveTextContent(/Opprettet02.10.2017Kl.00:04:25/);
-    expect(alleRader[1]).toHaveTextContent(/Opprettet02.08.2017Kl.00:04:25/);
-    expect(alleRader[2]).toHaveTextContent(/Opprettet01.08.2017Kl.00:04:25/);
-    expect(alleRader[3]).toHaveTextContent(/Opprettet12.07.2017Kl.00:04:25/);
+    expect(alleRader[0]).toHaveTextContent(/Opprettet02.10.2017/);
+    expect(alleRader[1]).toHaveTextContent(/Opprettet02.08.2017/);
+    expect(alleRader[2]).toHaveTextContent(/Opprettet01.08.2017/);
+    expect(alleRader[3]).toHaveTextContent(/Opprettet12.07.2017/);
   });
 });
