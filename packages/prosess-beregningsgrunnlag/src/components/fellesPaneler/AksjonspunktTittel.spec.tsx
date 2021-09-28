@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
-import {Beregningsgrunnlag, SammenligningsgrunlagProp} from '@fpsak-frontend/types';
+import { Beregningsgrunnlag, SammenligningsgrunlagProp } from '@fpsak-frontend/types';
 import { FormattedMessage } from 'react-intl';
 import AksjonspunktTittel from './AksjonspunktTittel';
 

@@ -9,7 +9,6 @@ import {
   AlleKodeverk,
   Beregningsgrunnlag,
   BeregningsgrunnlagAndel,
-  BeregningsgrunnlagPeriodeProp,
   SammenligningsgrunlagProp,
   Vilkar,
 } from '@fpsak-frontend/types';
