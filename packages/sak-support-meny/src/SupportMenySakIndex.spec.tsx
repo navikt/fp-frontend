@@ -1,50 +1,48 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import { composeStories } from '@storybook/testing-react';
+import * as stories from './SupportMenySakIndex.stories';
 
-import SupportMenySakIndex from './SupportMenySakIndex';
-import SupportTabs from './supportTabs';
-import TabMeny from './components/TabMeny';
+const {
+  UtenBeslutterGodkjenningOgTilbakesending, MedBeslutterGodkjenning, EtterTilbakesendingFraBeslutter, SendMeldingSomIkkeValgbar,
+} = composeStories(stories);
 
 describe('<SupportMenySakIndex>', () => {
-  it('skal lage tabs og sette Send melding som valgt', () => {
-    const wrapper = shallow(<SupportMenySakIndex
-      tilgjengeligeTabs={[SupportTabs.HISTORIKK, SupportTabs.MELDINGER, SupportTabs.DOKUMENTER]}
-      valgbareTabs={[SupportTabs.HISTORIKK, SupportTabs.MELDINGER, SupportTabs.DOKUMENTER]}
-      valgtIndex={1}
-      onClick={() => undefined}
-    />);
+  it('skal vise meny uten beslutter-panelet', async () => {
+    render(<UtenBeslutterGodkjenningOgTilbakesending />);
 
-    const tabMeny = wrapper.find(TabMeny);
-    expect(tabMeny).toHaveLength(1);
-
-    const tabs = tabMeny.prop('tabs');
-    expect(tabs[0].isActive).toBe(false);
-    expect(tabs[0].isDisabled).toBe(false);
-    expect(tabs[0].tooltip).toEqual('Historikk');
-    expect(tabs[1].isActive).toBe(true);
-    expect(tabs[1].isDisabled).toBe(false);
-    expect(tabs[1].tooltip).toEqual('Send melding');
-    expect(tabs[2].isActive).toBe(false);
-    expect(tabs[2].isDisabled).toBe(false);
-    expect(tabs[2].tooltip).toEqual('Dokumenter');
+    expect(await screen.findByTestId('Historikk')).toBeInTheDocument();
+    expect(screen.getByTestId('Send melding')).toBeInTheDocument();
+    expect(screen.getByTestId('Dokumenter')).toBeInTheDocument();
+    expect(screen.getAllByRole('button')).toHaveLength(3);
+    expect(screen.getByTestId('Send melding')).not.toBeDisabled();
   });
 
-  it('skal lage tabs og sette Send Melding til disablet', () => {
-    const wrapper = shallow(<SupportMenySakIndex
-      tilgjengeligeTabs={[SupportTabs.HISTORIKK, SupportTabs.MELDINGER]}
-      valgbareTabs={[SupportTabs.HISTORIKK]}
-      onClick={() => undefined}
-    />);
+  it('skal vise meny med beslutter-godkjenning', async () => {
+    render(<MedBeslutterGodkjenning />);
 
-    const tabMeny = wrapper.find(TabMeny);
-    expect(tabMeny).toHaveLength(1);
+    expect(await screen.findByTestId('Godkjenning')).toBeInTheDocument();
+    expect(screen.getByTestId('Historikk')).toBeInTheDocument();
+    expect(screen.getByTestId('Send melding')).toBeInTheDocument();
+    expect(screen.getByTestId('Dokumenter')).toBeInTheDocument();
+    expect(screen.getAllByRole('button')).toHaveLength(4);
+    expect(screen.getByTestId('Send melding')).not.toBeDisabled();
+  });
 
-    const tabs = tabMeny.prop('tabs');
-    expect(tabs[0].isActive).toBe(false);
-    expect(tabs[0].isDisabled).toBe(false);
-    expect(tabs[0].tooltip).toEqual('Historikk');
-    expect(tabs[1].isActive).toBe(false);
-    expect(tabs[1].isDisabled).toBe(true);
-    expect(tabs[1].tooltip).toEqual('Send melding');
+  it('skal vise meny med info fra beslutter', async () => {
+    render(<EtterTilbakesendingFraBeslutter />);
+
+    expect(await screen.findByTestId('Fra beslutter')).toBeInTheDocument();
+    expect(screen.getByTestId('Historikk')).toBeInTheDocument();
+    expect(screen.getByTestId('Send melding')).toBeInTheDocument();
+    expect(screen.getByTestId('Dokumenter')).toBeInTheDocument();
+    expect(screen.getAllByRole('button')).toHaveLength(4);
+    expect(screen.getByTestId('Send melding')).not.toBeDisabled();
+  });
+
+  it('skal vise send melding som ikke valgbar', async () => {
+    render(<SendMeldingSomIkkeValgbar />);
+    expect(await screen.findByTestId('Send melding')).toBeInTheDocument();
+    expect(screen.getByTestId('Send melding')).toBeDisabled();
   });
 });

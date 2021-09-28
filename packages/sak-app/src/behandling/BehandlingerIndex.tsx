@@ -11,7 +11,7 @@ interface OwnProps {
   fagsak: Fagsak;
   alleBehandlinger: BehandlingAppKontekst[];
   setBehandlingUuidOgVersjon: (behandlingUuid: string, behandlingVersjon: number) => void;
-  setRequestPendingMessage: (message: string) => void;
+  setRequestPendingMessage: (message?: string) => void;
 }
 
 export const BehandlingerIndex: FunctionComponent<OwnProps> = ({

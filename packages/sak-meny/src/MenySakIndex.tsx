@@ -33,7 +33,7 @@ const MenySakIndex: FunctionComponent<OwnProps> = ({
 
   const [valgtModal, setValgtModal] = useState(-1);
 
-  const menyRef = useRef(null);
+  const menyRef = useRef<any>(null);
   const handleClickOutside = (event: Event) => {
     if (menyRef.current && !menyRef.current.contains(event.target)) {
       toggleMenyVisning();

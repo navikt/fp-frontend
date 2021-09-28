@@ -34,7 +34,7 @@ const renderListItems = (
   sortBehandlinger(behandlinger)
     .filter((behandling) => showAll || behandling.uuid === behandlingUuid)
     .map((behandling) => (
-      <li key={behandling.uuid}>
+      <li key={behandling.uuid} data-testid={`behandling-${behandling.uuid}`}>
         <BehandlingPickerItem
           onlyOneBehandling={behandlinger.length === 1}
           behandling={behandling}

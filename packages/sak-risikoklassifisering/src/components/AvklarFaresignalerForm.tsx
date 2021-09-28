@@ -122,7 +122,7 @@ export const AvklarFaresignalerForm: FunctionComponent<OwnProps> = ({
               isEdited={!isAksjonspunktOpen(aksjonspunkt.status.kode)}
             >
               <RadioOption
-                label={faresignalVurderinger.find((vurdering) => vurdering.kode === faresignalVurdering.INNVIRKNING)?.navn}
+                label={faresignalVurderinger.find((vurdering) => vurdering.kode === faresignalVurdering.INNVIRKNING)?.navn || ''}
                 value={faresignalVurdering.INNVIRKNING}
               >
                 <>
@@ -147,7 +147,7 @@ export const AvklarFaresignalerForm: FunctionComponent<OwnProps> = ({
                 </>
               </RadioOption>
               <RadioOption
-                label={faresignalVurderinger.find((vurdering) => vurdering.kode === faresignalVurdering.INGEN_INNVIRKNING)?.navn}
+                label={faresignalVurderinger.find((vurdering) => vurdering.kode === faresignalVurdering.INGEN_INNVIRKNING)?.navn || ''}
                 value={faresignalVurdering.INGEN_INNVIRKNING}
               />
             </RadioGroupField>

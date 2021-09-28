@@ -1,28 +1,25 @@
 import React from 'react';
-import sinon from 'sinon';
-import { shallow } from 'enzyme';
+import { render, screen, waitFor } from '@testing-library/react';
+import { composeStories } from '@storybook/testing-react';
+import userEvent from '@testing-library/user-event';
+import Modal from 'nav-frontend-modal';
+import * as stories from './MenyTaAvVentIndex.stories';
 
-import { OkAvbrytModal } from '@fpsak-frontend/shared-components';
-
-import MenyTaAvVentIndex from './MenyTaAvVentIndex';
+const { Default } = composeStories(stories);
 
 describe('<MenyTaAvVentIndex>', () => {
-  it('skal vise modal og velge å åpne ta behandling av vent', () => {
-    const resumeBehandlingCallback = sinon.spy();
-    const lukkModalCallback = sinon.spy();
+  Modal.setAppElement('body');
 
-    const wrapper = shallow(<MenyTaAvVentIndex
-      behandlingVersjon={1}
-      taBehandlingAvVent={resumeBehandlingCallback}
-      lukkModal={lukkModalCallback}
-    />);
+  it('skal vise modal og velge å åpne ta behandling av vent', async () => {
+    const taBehandlingAvVent = jest.fn();
+    const lukkModal = jest.fn();
+    render(<Default taBehandlingAvVent={taBehandlingAvVent} lukkModal={lukkModal} />);
 
-    const modal = wrapper.find(OkAvbrytModal);
-    expect(modal).toHaveLength(1);
+    expect(await screen.findByText('Ta behandlingen av vent?')).toBeInTheDocument();
 
-    modal.prop('submit')();
+    userEvent.click(screen.getByText('OK'));
 
-    const kall = resumeBehandlingCallback.getCalls();
-    expect(kall).toHaveLength(1);
+    await waitFor(() => expect(taBehandlingAvVent).toHaveBeenCalledTimes(1));
+    expect(lukkModal).toHaveBeenCalledTimes(1);
   });
 });

@@ -1,28 +1,25 @@
 import React from 'react';
-import sinon from 'sinon';
+import { render, screen, waitFor } from '@testing-library/react';
+import { composeStories } from '@storybook/testing-react';
+import userEvent from '@testing-library/user-event';
+import Modal from 'nav-frontend-modal';
+import * as stories from './MenyApneForEndringerIndex.stories';
 
-import { OkAvbrytModal } from '@fpsak-frontend/shared-components';
-import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-
-import MenyApneForEndringerIndex from './MenyApneForEndringerIndex';
-import messages from '../i18n/nb_NO.json';
+const { Default } = composeStories(stories);
 
 describe('<MenyApneForEndringerIndex>', () => {
-  it('skal vise modal og velge å åpne behandling for endringer', () => {
-    const apneForEndringerCallback = sinon.spy();
-    const lukkModalCallback = sinon.spy();
+  Modal.setAppElement('body');
 
-    const wrapper = shallowWithIntl(<MenyApneForEndringerIndex
-      apneBehandlingForEndringer={apneForEndringerCallback}
-      lukkModal={lukkModalCallback}
-    />, messages);
+  it('skal vise modal og velge å åpne behandling for endringer', async () => {
+    const apneBehandlingForEndringer = jest.fn();
+    const lukkModal = jest.fn();
+    render(<Default apneBehandlingForEndringer={apneBehandlingForEndringer} lukkModal={lukkModal} />);
 
-    const modal = wrapper.find(OkAvbrytModal);
-    expect(modal).toHaveLength(1);
+    expect(await screen.findByText('Åpne behandling for endringer?')).toBeInTheDocument();
 
-    modal.prop('submit')();
+    userEvent.click(screen.getByText('OK'));
 
-    const kall = apneForEndringerCallback.getCalls();
-    expect(kall).toHaveLength(1);
+    await waitFor(() => expect(apneBehandlingForEndringer).toHaveBeenCalledTimes(1));
+    expect(lukkModal).toHaveBeenCalledTimes(1);
   });
 });

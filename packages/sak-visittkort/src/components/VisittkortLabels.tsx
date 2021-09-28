@@ -1,6 +1,6 @@
 import React, { useMemo, FunctionComponent } from 'react';
 import moment from 'moment';
-import { injectIntl, FormattedMessage, WrappedComponentProps } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 import {
   EtikettInfo, EtikettAdvarsel, EtikettFokus,
 } from 'nav-frontend-etiketter';
@@ -17,11 +17,11 @@ interface OwnProps {
   harVerge: boolean;
 }
 
-const VisittkortLabels: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const VisittkortLabels: FunctionComponent<OwnProps> = ({
   fagsakPerson,
   harVerge,
 }) => {
+  const intl = useIntl();
   const erSokerUnder18 = useMemo(() => moment().diff(fagsakPerson.fødselsdato, 'years') < 18, [fagsakPerson]);
   return (
     <>
@@ -64,4 +64,4 @@ const VisittkortLabels: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   );
 };
 
-export default injectIntl(VisittkortLabels);
+export default VisittkortLabels;

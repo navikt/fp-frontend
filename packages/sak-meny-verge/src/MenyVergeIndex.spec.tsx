@@ -1,53 +1,38 @@
 import React from 'react';
-import sinon from 'sinon';
-import { shallow } from 'enzyme';
+import { render, screen, waitFor } from '@testing-library/react';
+import { composeStories } from '@storybook/testing-react';
+import userEvent from '@testing-library/user-event';
+import Modal from 'nav-frontend-modal';
+import * as stories from './MenyVergeIndex.stories';
 
-import { OkAvbrytModal } from '@fpsak-frontend/shared-components';
-
-import MenyVergeIndex from './MenyVergeIndex';
+const { LeggeTilVerge, FjerneVerge } = composeStories(stories);
 
 describe('<MenyVergeIndex>', () => {
-  it('skal vise modal for opprett og så velge å opprette verge', () => {
-    const opprettVergeCallback = sinon.spy();
-    const lukkModalCallback = sinon.spy();
+  Modal.setAppElement('body');
 
-    const wrapper = shallow(<MenyVergeIndex
-      opprettVerge={opprettVergeCallback}
-      lukkModal={lukkModalCallback}
-    />);
+  it('skal vise modal for opprett og så velge å opprette verge', async () => {
+    const opprettVerge = jest.fn();
+    const lukkModal = jest.fn();
+    render(<LeggeTilVerge opprettVerge={opprettVerge} lukkModal={lukkModal} />);
 
-    const modal = wrapper.find(OkAvbrytModal);
-    expect(modal).toHaveLength(1);
-    expect(modal.prop('text')).toEqual('Opprett verge/fullmektig?');
+    expect(await screen.findByText('Opprett verge/fullmektig?')).toBeInTheDocument();
 
-    modal.prop('submit')();
+    userEvent.click(screen.getByText('OK'));
 
-    const kall = opprettVergeCallback.getCalls();
-    expect(kall).toHaveLength(1);
-
-    const lukkKall = lukkModalCallback.getCalls();
-    expect(lukkKall).toHaveLength(1);
+    await waitFor(() => expect(opprettVerge).toHaveBeenCalledTimes(1));
+    expect(lukkModal).toHaveBeenCalledTimes(1);
   });
 
-  it('skal vise modal for fjerne og så velge å fjerne verge', () => {
-    const fjernVergeCallback = sinon.spy();
-    const lukkModalCallback = sinon.spy();
+  it('skal vise modal for fjerne og så velge å fjerne verge', async () => {
+    const fjernVerge = jest.fn();
+    const lukkModal = jest.fn();
+    render(<FjerneVerge fjernVerge={fjernVerge} lukkModal={lukkModal} />);
 
-    const wrapper = shallow(<MenyVergeIndex
-      fjernVerge={fjernVergeCallback}
-      lukkModal={lukkModalCallback}
-    />);
+    expect(await screen.findByText('Fjern verge/fullmektig?')).toBeInTheDocument();
 
-    const modal = wrapper.find(OkAvbrytModal);
-    expect(modal).toHaveLength(1);
-    expect(modal.prop('text')).toEqual('Fjern verge/fullmektig?');
+    userEvent.click(screen.getByText('OK'));
 
-    modal.prop('submit')();
-
-    const kall = fjernVergeCallback.getCalls();
-    expect(kall).toHaveLength(1);
-
-    const lukkKall = lukkModalCallback.getCalls();
-    expect(lukkKall).toHaveLength(1);
+    await waitFor(() => expect(fjernVerge).toHaveBeenCalledTimes(1));
+    expect(lukkModal).toHaveBeenCalledTimes(1);
   });
 });

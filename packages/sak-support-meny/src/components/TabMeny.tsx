@@ -52,6 +52,7 @@ const TabMeny: FunctionComponent<OwnProps> = ({
                 onClick(index);
               }}
               data-tooltip={tab.tooltip}
+              data-testid={tab.tooltip}
               disabled={tab.isDisabled}
               ref={(el) => {
                 if (tabRef.current && el) {

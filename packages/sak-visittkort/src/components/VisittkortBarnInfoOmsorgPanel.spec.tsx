@@ -1,10 +1,12 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { FormattedMessage } from 'react-intl';
-
+import { RawIntlProvider } from 'react-intl';
+import { render, screen } from '@testing-library/react';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
-
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import VisittkortBarnInfoOmsorgPanel from './VisittkortBarnInfoOmsorgPanel';
+import messages from '../../i18n/nb_NO.json';
+
+const intlMock = getIntlMock(messages);
 
 describe('<VisittkortBarnInfoOmsorgPanel>', () => {
   const familiehendelse = {
@@ -17,37 +19,33 @@ describe('<VisittkortBarnInfoOmsorgPanel>', () => {
     dødfødsel: false,
   };
 
-  it('skal vise adopsjonsinformasjon', () => {
-    const wrapper = shallow(<VisittkortBarnInfoOmsorgPanel
-      familiehendelse={familiehendelse}
-    />);
+  it('skal vise adopsjonsinformasjon', async () => {
+    render(
+      <RawIntlProvider value={intlMock}>
+        <VisittkortBarnInfoOmsorgPanel
+          familiehendelse={familiehendelse}
+        />
+      </RawIntlProvider>,
+    );
 
-    const message = wrapper.find(FormattedMessage);
-    expect(message).toHaveLength(1);
-    expect(message.prop('id')).toEqual('VisittkortBarnInfoOmsorgPanel.Adopsjon');
-    expect(message.prop('values')).toEqual({
-      antall: 1,
-      dato: '21.01.2020',
-    });
+    expect(await screen.findByText('Adopsjon 21.01.2020')).toBeInTheDocument();
   });
 
-  it('skal vise foreldreansvarsinformasjon', () => {
-    const wrapper = shallow(<VisittkortBarnInfoOmsorgPanel
-      familiehendelse={{
-        ...familiehendelse,
-        hendelseType: {
-          kode: familieHendelseType.OMSORG,
-          kodeverk: '',
-        },
-      }}
-    />);
+  it('skal vise foreldreansvarsinformasjon', async () => {
+    render(
+      <RawIntlProvider value={intlMock}>
+        <VisittkortBarnInfoOmsorgPanel
+          familiehendelse={{
+            ...familiehendelse,
+            hendelseType: {
+              kode: familieHendelseType.OMSORG,
+              kodeverk: '',
+            },
+          }}
+        />
+      </RawIntlProvider>,
+    );
 
-    const message = wrapper.find(FormattedMessage);
-    expect(message).toHaveLength(1);
-    expect(message.prop('id')).toEqual('VisittkortBarnInfoOmsorgPanel.Foreldreansvar');
-    expect(message.prop('values')).toEqual({
-      antall: 1,
-      dato: '21.01.2020',
-    });
+    expect(await screen.findByText('Foreldreansvar 21.01.2020')).toBeInTheDocument();
   });
 });

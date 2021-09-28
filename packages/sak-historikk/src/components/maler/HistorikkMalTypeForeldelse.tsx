@@ -62,9 +62,11 @@ const HistorikkMalTypeForeldelse: FunctionComponent<HistorikkMal> = ({
               );
             })}
             <VerticalSpacer eightPx />
-            <Normaltekst>
-              {begrunnelseFritekst && decodeHtmlEntity(begrunnelseFritekst)}
-            </Normaltekst>
+            {begrunnelseFritekst && (
+              <Normaltekst>
+                {decodeHtmlEntity(begrunnelseFritekst)}
+              </Normaltekst>
+            )}
             <VerticalSpacer eightPx />
           </div>
         );
