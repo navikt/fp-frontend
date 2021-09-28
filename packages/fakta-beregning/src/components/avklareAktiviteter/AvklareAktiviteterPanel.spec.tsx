@@ -95,7 +95,7 @@ const aktiviteter = [
 
 const id1 = '3847238947232019-01-01';
 const id2 = '334534623342efj8343f34f2019-01-01';
-const id3 = '1960-01-01efj8343f34f2019-01-01';
+const id3 = '324234234234efj8343f34f2019-01-01';
 const idAAP = 'AAP2019-01-01';
 
 const agOpplysninger = {

@@ -31,6 +31,7 @@ const aktivitet2 = {
 
 const aktivitet3 = {
   aktørIdString: '324234234234',
+  arbeidsgiverIdent: '324234234234',
   arbeidsforholdId: 'efj8343f34f',
   eksternArbeidsforholdId: '56789',
   fom: '2019-01-01',
