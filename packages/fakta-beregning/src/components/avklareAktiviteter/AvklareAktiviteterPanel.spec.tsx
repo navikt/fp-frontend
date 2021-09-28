@@ -52,8 +52,7 @@ const apsAvklarAktiviteter = [{
 }];
 
 const aktivitet1 = {
-  arbeidsgiverNavn: 'Arbeidsgiveren',
-  arbeidsgiverId: '384723894723',
+  arbeidsgiverIdent: '384723894723',
   fom: '2019-01-01',
   tom: null,
   skalBrukes: null,
@@ -61,8 +60,7 @@ const aktivitet1 = {
 };
 
 const aktivitet2 = {
-  arbeidsgiverNavn: 'Arbeidsgiveren2',
-  arbeidsgiverId: '334534623342',
+  arbeidsgiverIdent: '334534623342',
   arbeidsforholdId: 'efj8343f34f',
   fom: '2019-01-01',
   tom: '2019-02-02',
@@ -71,9 +69,8 @@ const aktivitet2 = {
 };
 
 const aktivitet3 = {
-  arbeidsgiverNavn: 'Arbeidsgiveren3',
   aktørIdString: '324234234234',
-  arbeidsgiverId: '1960-01-01',
+  arbeidsgiverIdent: '324234234234',
   arbeidsforholdId: 'efj8343f34f',
   fom: '2019-01-01',
   tom: '2019-02-02',
@@ -82,8 +79,7 @@ const aktivitet3 = {
 };
 
 const aktivitetAAP = {
-  arbeidsgiverNavn: null,
-  arbeidsgiverId: null,
+  arbeidsgiverIdent: null,
   arbeidsforholdType: { kode: 'AAP', navn: 'Arbeidsavklaringspenger', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
   fom: '2019-01-01',
   tom: '2020-02-02',
@@ -347,7 +343,7 @@ describe('<AvklareAktiviteterPanel>', () => {
     values.aktiviteterValues[idAAP] = { skalBrukes: true };
     const transformed = transformValues(values);
     expect(transformed.beregningsaktivitetLagreDtoList.length).toBe(1);
-    expect(transformed.beregningsaktivitetLagreDtoList[0].oppdragsgiverOrg).toBe(aktivitet1.arbeidsgiverId);
+    expect(transformed.beregningsaktivitetLagreDtoList[0].oppdragsgiverOrg).toBe(aktivitet1.arbeidsgiverIdent);
   });
 
   it('skal transform values om for valgt overstyring', () => {

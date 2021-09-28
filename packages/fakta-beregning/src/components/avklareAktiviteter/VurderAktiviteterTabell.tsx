@@ -27,7 +27,7 @@ import AvklarAktiviteterValues, { AktiviteterValues, AktivitetValues } from '../
  * aktivitet.arbeidsforholdId, om den finnes.
  *
  * @param {*} aktivitet
- * @param {*} idType er enten arbeidsgiverId eller aktørIdString for en aktivitet
+ * @param {*} idType er enten arbeidsgiverIdent eller aktørIdString for en aktivitet
  */
 const aktivitetFieldIdPrefiks = (aktivitet: BeregningAktivitet, idType: string): string => {
   if (aktivitet.arbeidsforholdId) {
@@ -48,7 +48,7 @@ const appendAktivitetFieldIdSuffiks = (aktivitetPrefiks: string,
 
 /**
  * Oppretter en unik ID for en aktivitet. Denne IDen brukes for å identifisere aktiviteter, slik at man f.eks kan
- * gjøre oppslag på disse. IDen består av en prefiks som genereres ift om det finnes en arbeidsgiverId
+ * gjøre oppslag på disse. IDen består av en prefiks som genereres ift om det finnes en arbeidsgiverIdent
  * eller en aktørIdString (eller ingen).
  *
  * Det legges til slutt på en felles "suffiks" på alle genererte prefikser
@@ -56,8 +56,8 @@ const appendAktivitetFieldIdSuffiks = (aktivitetPrefiks: string,
  * @param {*} aktivitet
  */
 export const lagAktivitetFieldId = (aktivitet: BeregningAktivitet): string => {
-  if (aktivitet.arbeidsgiverId || aktivitet.aktørIdString) {
-    const aktivitetPrefiks = aktivitetFieldIdPrefiks(aktivitet, aktivitet.arbeidsgiverId ? aktivitet.arbeidsgiverId : aktivitet.aktørIdString);
+  if (aktivitet.arbeidsgiverIdent || aktivitet.aktørIdString) {
+    const aktivitetPrefiks = aktivitetFieldIdPrefiks(aktivitet, aktivitet.arbeidsgiverIdent ? aktivitet.arbeidsgiverIdent : aktivitet.aktørIdString);
     return appendAktivitetFieldIdSuffiks(aktivitetPrefiks, aktivitet);
   }
   return appendAktivitetFieldIdSuffiks(aktivitet.arbeidsforholdType.kode, aktivitet);
@@ -104,7 +104,7 @@ export const skalVurdereAktivitet = (aktivitet: BeregningAktivitet,
 const lagVisningsnavn = (aktivitet: BeregningAktivitet,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   alleKodeverk: AlleKodeverk): string => {
-  const agOpplysning = arbeidsgiverOpplysningerPerId[aktivitet.arbeidsgiverId];
+  const agOpplysning = arbeidsgiverOpplysningerPerId[aktivitet.arbeidsgiverIdent];
   if (!agOpplysning) {
     return aktivitet.arbeidsforholdType ? getKodeverknavnFn(alleKodeverk, kodeverkTyper)(aktivitet.arbeidsforholdType) : '';
   }
@@ -303,7 +303,7 @@ export class VurderAktiviteterTabell extends Component<OwnProps & MappedOwnProps
       .filter((aktivitet) => values.aktiviteterValues[lagAktivitetFieldId(aktivitet)].skalBrukes === false
         || values.aktiviteterValues[lagAktivitetFieldId(aktivitet)].tom != null)
       .map((aktivitet) => ({
-        oppdragsgiverOrg: aktivitet.aktørIdString ? null : aktivitet.arbeidsgiverId,
+        oppdragsgiverOrg: aktivitet.aktørIdString ? null : aktivitet.arbeidsgiverIdent,
         arbeidsforholdRef: aktivitet.arbeidsforholdId,
         fom: aktivitet.fom,
         tom: values.aktiviteterValues[lagAktivitetFieldId(aktivitet)].tom != null

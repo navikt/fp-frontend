@@ -35,8 +35,7 @@ export type VurderBesteberegning = Readonly<{
 }>
 
 export type BeregningAktivitet = Readonly<{
-  arbeidsgiverNavn?: string;
-  arbeidsgiverId?: string;
+  arbeidsgiverIdent?: string;
   eksternArbeidsforholdId?: string;
   fom: string;
   tom?: string;
