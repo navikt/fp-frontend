@@ -18,7 +18,6 @@ const AxiosMock: FunctionComponent<Props> = ({
 }) => {
   const apiMock = new MockAdapter(requestApi.getAxios());
   useEffect(() => {
-    console.log(requestApi.endpointConfigList);
     requestApi.setLinks(data.map((d) => ({
       href: d.key,
       rel: d.key,

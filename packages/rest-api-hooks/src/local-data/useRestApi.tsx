@@ -42,6 +42,7 @@ const getUseRestApi = (requestApi: RequestApi) => function useRestApi<T, P>(
   const [data, setData] = useState<RestApiData<T>>(DEFAULT_STATE);
 
   useEffect(() => {
+    console.log(requestApi.endpointConfigList);
     if (requestApi.hasPath(key.name) && !allOptions.suspendRequest) {
       setData((oldState) => ({
         state: RestApiState.LOADING,
