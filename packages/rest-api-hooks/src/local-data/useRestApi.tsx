@@ -48,9 +48,10 @@ const getUseRestApi = (requestApi: RequestApi) => function useRestApi<T, P>(
         error: undefined,
         data: allOptions.keepData ? oldState.data : undefined,
       }));
-
+      console.log(key.name);
       requestApi.startRequest<T, P>(key.name, params)
         .then((dataRes) => {
+          console.log(dataRes);
           setData({
             state: RestApiState.SUCCESS,
             data: dataRes.payload,
@@ -58,6 +59,7 @@ const getUseRestApi = (requestApi: RequestApi) => function useRestApi<T, P>(
           });
         })
         .catch((error) => {
+          console.log(error);
           if (error?.message !== REQUEST_POLLING_CANCELLED) {
             setData({
               state: RestApiState.ERROR,
