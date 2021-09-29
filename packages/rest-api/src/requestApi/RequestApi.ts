@@ -163,11 +163,7 @@ class RequestApi {
       throw new Error(`Mangler konfig for endepunkt ${endpointName}`);
     }
     const link = this.findLinks(endpointConfig.rel);
-    const url = link?.href || endpointConfig?.path;
-    if (!url) {
-      throw new Error(`Mangler url for endepunkt ${endpointName}`);
-    }
-    return url;
+    return link?.href || endpointConfig?.path;
   };
 
   public getRestType = (endpointName: string): string => {

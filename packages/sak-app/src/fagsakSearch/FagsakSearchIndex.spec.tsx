@@ -39,7 +39,6 @@ describe('<FagsakSearchIndex>', () => {
     );
 
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
-
     // const fagsakSearchIndex = wrapper.find(FagsakSokSakIndex);
     // expect(fagsakSearchIndex).toHaveLength(1);
 

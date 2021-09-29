@@ -19,12 +19,14 @@ const AxiosMock: FunctionComponent<Props> = ({
   const apiMock = new MockAdapter(requestApi.getAxios());
   useEffect(() => {
     data.forEach((d) => {
+      const url = requestApi.getUrl(d.key);
+      const urlOrKey = url || d.key;
       if (requestApi.getRestType(d.key) === 'GET') {
-        apiMock.onGet(requestApi.getUrl(d.key)).reply(200, d.data);
+        apiMock.onGet(urlOrKey).reply(200, d.data);
       } else if (requestApi.getRestType(d.key) === 'GET_ASYNC') {
-        apiMock.onGet(requestApi.getUrl(d.key)).replyOnce(200, d.data);
+        apiMock.onGet(urlOrKey).replyOnce(200, d.data);
       } else {
-        apiMock.onPost(requestApi.getUrl(d.key)).reply(200, d.data);
+        apiMock.onPost(urlOrKey).reply(200, d.data);
       }
     });
 
