@@ -38,7 +38,7 @@ describe('<FagsakSearchIndex>', () => {
       </RestApiMock>,
     );
 
-    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
+    expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
 
     // const fagsakSearchIndex = wrapper.find(FagsakSokSakIndex);
     // expect(fagsakSearchIndex).toHaveLength(1);
@@ -63,7 +63,7 @@ describe('<FagsakSearchIndex>', () => {
       </RestApiMock>,
     );
 
-    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
+    expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
 
     // const fagsakSearchIndex = wrapper.find(FagsakSokSakIndex);
     // const velgFagsak = fagsakSearchIndex.prop('selectFagsakCallback') as (event: any, saksnummer: string) => undefined;
