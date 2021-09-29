@@ -5,9 +5,12 @@ metadata:
   namespace: {{namespace}}
   labels:
     team: teamforeldrepenger
+  annotations:
+    nais.io/run-as-user: "101" # Fix permissions for nginx
+    nais.io/read-only-file-system: "false" # Fix permissions for nginx
 spec:
   image: {{image}}
-  port: 443
+  port: 9000
   ingresses:
   {{#each ingresses as |url|}}
      - {{url}}
@@ -15,18 +18,15 @@ spec:
   sessionAffinity: ClientIP
   team: teamforeldrepenger
   liveness:
-    path: /fpsak/health/is-alive
+    path: /isAlive
     initialDelay: 20
     timeout: 1
     periodSeconds: 5
     failureThreshold: 10
   readiness:
-    path: /fpsak/health/is-ready
+    path: /isReady
     initialDelay: 20
     timeout: 1
-  prometheus:
-    enabled: false
-    path: /fpsak/prometheus
   replicas:
     min: {{minReplicas}}
     max: {{maxReplicas}}
@@ -43,14 +43,24 @@ spec:
   env:
     - name: APP_NAME
       value: fp-frontend
+    - name: APP_PORT
+      value: "9000"
+    - name: APP_URL
+      value: "http://fpsak"
+    - name: APP_URL_FPSAK
+      value: "http://fpsak"
+    - name: APP_URL_FPOPPDRAG
+      value: "http://fpoppdrag"
+    - name: APP_URL_FPTILBAKE
+      value: "http://fptilbake"
+    - name: APP_URL_FPFORMIDLING
+      value: "http://fpformidling"
     - name: REDIS_HOST
       value: "fpsak-redis.teamforeldrepenger.svc.nais.local"
     - name: REDIS_PORT
       value: "6379"
-    - name: APP_URL_FPSAK
-      value: "http://fpsak"
-  envFrom:
-    - secret: redis-password
+#  envFrom:
+#    - secret: redis-password
 #  accessPolicy:
 #    outbound:
 #      rules:
