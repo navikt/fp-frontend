@@ -1,5 +1,7 @@
 import React from 'react';
+import { createMemoryHistory } from 'history';
 import sinon, { SinonStub } from 'sinon';
+import { Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
@@ -41,7 +43,7 @@ describe('<FagsakIndex>', () => {
   it('skal hente alle behandlinger fra fpsak og fptilbake', async () => {
     const data = [
       { key: FpsakApiKeys.KODEVERK.name, global: true, data: {} },
-      { key: FpsakApiKeys.FETCH_FAGSAK.name, global: true, data: fagsak },
+      { key: FpsakApiKeys.FETCH_FAGSAK.name, data: fagsak },
       { key: FpsakApiKeys.SAK_PERSONER.name, global: true, data: {} },
       { key: FpsakApiKeys.SAK_RETTIGHETER.name, data: { behandlingTypeKanOpprettes: [] } },
       { key: FpsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
@@ -53,7 +55,9 @@ describe('<FagsakIndex>', () => {
 
     render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <FagsakIndex />
+        <Router history={createMemoryHistory()}>
+          <FagsakIndex />
+        </Router>
       </RestApiMock>,
     );
 
