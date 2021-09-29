@@ -1,7 +1,7 @@
+import { AxiosInstance } from 'axios';
 import HttpClientApi from '../HttpClientApiTsType';
 import NotificationMapper from './NotificationMapper';
 import Link from './LinkTsType';
-import AbstractRequestApi from './AbstractRequestApi';
 import RequestRunner from './RequestRunner';
 import ResponseCache from './ResponseCache';
 import RequestConfig, { RequestType } from '../RequestConfig';
@@ -47,7 +47,7 @@ const waitUntilFinished = async (cache: ResponseCache, endpointName: string): Pr
  * Denne klassen opprettes med en referanse til et HttpClientApi (for eksempel Axios), context-path og konfig for
  * de enkelte endepunktene. Det blir så satt opp RequestRunner's for endepunktene. Desse kan hentes via metoden @see getRequestRunner.
  */
-class RequestApi extends AbstractRequestApi {
+class RequestApi {
   httpClientApi: HttpClientApi;
 
   endpointConfigList: RequestConfig[];
@@ -59,7 +59,6 @@ class RequestApi extends AbstractRequestApi {
   cache: ResponseCache = new ResponseCache();
 
   constructor(httpClientApi: HttpClientApi, endpointConfigList: RequestConfig[]) {
-    super();
     this.httpClientApi = httpClientApi;
     this.endpointConfigList = endpointConfigList;
   }
@@ -156,19 +155,33 @@ class RequestApi extends AbstractRequestApi {
     this.cache = new ResponseCache();
   }
 
-  public isMock = (): boolean => false;
+  public getAxios = (): AxiosInstance => this.httpClientApi.axiosInstance;
 
-  // Kun for test
-  public mock = () => { throw new Error('Not Implemented'); };
+  public getUrl = (endpointName: string): string => {
+    const endpointConfig = this.endpointConfigList.find((c) => c.name === endpointName);
+    if (!endpointConfig) {
+      throw new Error(`Mangler konfig for endepunkt ${endpointName}`);
+    }
+    const link = this.findLinks(endpointConfig.rel);
+    const url = link?.href || endpointConfig?.path;
+    if (!url) {
+      throw new Error(`Mangler url for endepunkt ${endpointName}`);
+    }
+    return url;
+  };
 
-  // Kun for test
-  public setMissingPath = () => { throw new Error('Not Implemented'); };
-
-  // Kun for test
-  public getRequestMockData = () => { throw new Error('Not Implemented'); };
-
-  // Kun for test
-  public clearAllMockData = () => { throw new Error('Not Implemented'); };
+  public getRestType = (endpointName: string): string => {
+    const endpointConfig = this.endpointConfigList.find((c) => c.name === endpointName);
+    if (!endpointConfig) {
+      throw new Error(`Mangler konfig for endepunkt ${endpointName}`);
+    }
+    const link = this.findLinks(endpointConfig.rel);
+    const type = link?.type || endpointConfig?.restMethod;
+    if (!type) {
+      throw new Error(`Mangler type for endepunkt ${endpointName}`);
+    }
+    return type;
+  };
 }
 
 export default RequestApi;

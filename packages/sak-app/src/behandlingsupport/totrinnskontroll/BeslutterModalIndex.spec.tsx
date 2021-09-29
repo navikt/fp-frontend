@@ -1,10 +1,9 @@
 import React from 'react';
-import sinon from 'sinon';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { FatterVedtakTotrinnskontrollModalSakIndex } from '@fpsak-frontend/sak-totrinnskontroll';
 import { Behandling } from '@fpsak-frontend/types';
 
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
@@ -25,38 +24,50 @@ describe('<BeslutterModalIndex>', () => {
     },
   } as Behandling;
 
-  it('skal vise modal når beslutter godkjenner', () => {
-    requestApi.mock(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT.name, {
-      harRevurderingSammeResultat: true,
-    });
+  it('skal vise modal når beslutter godkjenner', async () => {
+    const data = [
+      { key: FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT.name, data: { harRevurderingSammeResultat: true } },
+    ];
 
-    const wrapper = shallow(<BeslutterModalIndex
-      behandling={behandling}
-      pushLocation={sinon.spy()}
-      allAksjonspunktApproved={false}
-      erKlageWithKA={false}
-    />);
+    render(
+      <RestApiMock data={data} requestApi={requestApi}>
+        <BeslutterModalIndex
+          behandling={behandling}
+          pushLocation={jest.fn()}
+          allAksjonspunktApproved={false}
+          erKlageWithKA={false}
+        />
+      </RestApiMock>,
+    );
 
-    const modal = wrapper.find(FatterVedtakTotrinnskontrollModalSakIndex);
-    expect(modal).toHaveLength(1);
-    expect(modal.prop('harSammeResultatSomOriginalBehandling')).toBe(true);
+    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
+
+    // const modal = wrapper.find(FatterVedtakTotrinnskontrollModalSakIndex);
+    // expect(modal).toHaveLength(1);
+    // expect(modal.prop('harSammeResultatSomOriginalBehandling')).toBe(true);
   });
 
-  it('skal vise modal men ikke hente data når en ikke har url', () => {
-    requestApi.mock(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT.name, {
-      harRevurderingSammeResultat: true,
-    });
-    requestApi.setMissingPath(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT.name);
+  it('skal vise modal men ikke hente data når en ikke har url', async () => {
+    const data = [
+      { key: FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT.name, data: { harRevurderingSammeResultat: true } },
+    ];
+    // requestApi.setMissingPath(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT.name);
 
-    const wrapper = shallow(<BeslutterModalIndex
-      behandling={behandling}
-      pushLocation={sinon.spy()}
-      allAksjonspunktApproved={false}
-      erKlageWithKA={false}
-    />);
+    render(
+      <RestApiMock data={data} requestApi={requestApi}>
+        <BeslutterModalIndex
+          behandling={behandling}
+          pushLocation={jest.fn()}
+          allAksjonspunktApproved={false}
+          erKlageWithKA={false}
+        />
+      </RestApiMock>,
+    );
 
-    const modal = wrapper.find(FatterVedtakTotrinnskontrollModalSakIndex);
-    expect(modal).toHaveLength(1);
-    expect(modal.prop('harSammeResultatSomOriginalBehandling')).toBeUndefined();
+    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
+
+    // const modal = wrapper.find(FatterVedtakTotrinnskontrollModalSakIndex);
+    // expect(modal).toHaveLength(1);
+    // expect(modal.prop('harSammeResultatSomOriginalBehandling')).toBeUndefined();
   });
 });

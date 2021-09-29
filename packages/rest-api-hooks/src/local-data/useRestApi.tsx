@@ -2,7 +2,7 @@ import {
   useState, useEffect, DependencyList,
 } from 'react';
 
-import { REQUEST_POLLING_CANCELLED, AbstractRequestApi, RestKey } from '@fpsak-frontend/rest-api';
+import { REQUEST_POLLING_CANCELLED, RequestApi, RestKey } from '@fpsak-frontend/rest-api';
 
 import RestApiState from '../RestApiState';
 
@@ -24,20 +24,6 @@ const defaultOptions = {
   suspendRequest: false,
 };
 
-/**
- * For mocking i unit-test
- */
-export const getUseRestApiMock = (requestApi: AbstractRequestApi) => function useRestApi<T, P>(
-  key: RestKey<T, P>, params?: P, options: Options = defaultOptions,
-): RestApiData<T> {
-  return {
-    state: options.suspendRequest ? RestApiState.NOT_STARTED : RestApiState.SUCCESS,
-    error: undefined,
-    // @ts-ignore
-    data: options.suspendRequest ? undefined : requestApi.startRequest<T, P>(key.name, params),
-  };
-};
-
 const DEFAULT_STATE = {
   state: RestApiState.NOT_STARTED,
   error: undefined,
@@ -48,7 +34,7 @@ const DEFAULT_STATE = {
   * Hook som utfører et restkall ved mount. En kan i tillegg legge ved en dependencies-liste som kan trigge ny henting når data
   * blir oppdatert. Hook returnerer rest-kallets status/resultat/feil
   */
-const getUseRestApi = (requestApi: AbstractRequestApi) => function useRestApi<T, P>(
+const getUseRestApi = (requestApi: RequestApi) => function useRestApi<T, P>(
   key: RestKey<T, P>, params?: P, options?: Options,
 ): RestApiData<T> {
   const allOptions = { ...defaultOptions, ...options };

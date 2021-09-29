@@ -1,22 +1,13 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import sinon, { SinonStub } from 'sinon';
+import { render, screen } from '@testing-library/react';
 
-import FagsakGrid from './components/FagsakGrid';
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+
 import * as useTrackRouteParam from '../app/useTrackRouteParam';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 
 import FagsakIndex from './FagsakIndex';
-
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom') as any,
-  useLocation: () => ({
-    pathname: 'test',
-    search: 'test',
-    state: {},
-    hash: 'test',
-  }),
-}));
 
 describe('<FagsakIndex>', () => {
   const fagsak = {
@@ -47,30 +38,35 @@ describe('<FagsakIndex>', () => {
     contextStub.restore();
   });
 
-  it('skal hente alle behandlinger fra fpsak og fptilbake', () => {
-    requestApi.mock(FpsakApiKeys.KODEVERK.name, {});
-    requestApi.mock(FpsakApiKeys.FETCH_FAGSAK.name, fagsak);
-    requestApi.mock(FpsakApiKeys.SAK_PERSONER.name, {});
-    requestApi.mock(FpsakApiKeys.SAK_RETTIGHETER.name, {
-      behandlingTypeKanOpprettes: [],
-    });
-    requestApi.mock(FpsakApiKeys.SAK_RETTIGHETER_FPTILBAKE.name, {
-      behandlingTypeKanOpprettes: [],
-    });
-    requestApi.mock(FpsakApiKeys.INIT_FETCH_FPTILBAKE.name, {});
-    requestApi.mock(FpsakApiKeys.ANNEN_PART_BEHANDLING.name, {});
-    requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE.name, {});
-    requestApi.mock(FpsakApiKeys.BEHANDLINGER_FPSAK.name, [behandling]);
-    requestApi.mock(FpsakApiKeys.BEHANDLINGER_FPTILBAKE.name, [behandling2]);
+  it('skal hente alle behandlinger fra fpsak og fptilbake', async () => {
+    const data = [
+      { key: FpsakApiKeys.KODEVERK.name, global: true, data: {} },
+      { key: FpsakApiKeys.FETCH_FAGSAK.name, global: true, data: fagsak },
+      { key: FpsakApiKeys.SAK_PERSONER.name, global: true, data: {} },
+      { key: FpsakApiKeys.SAK_RETTIGHETER.name, data: { behandlingTypeKanOpprettes: [] } },
+      { key: FpsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
+      { key: FpsakApiKeys.ANNEN_PART_BEHANDLING.name, data: {} },
+      { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
+      { key: FpsakApiKeys.BEHANDLINGER_FPSAK.name, data: [behandling] },
+      { key: FpsakApiKeys.BEHANDLINGER_FPTILBAKE.name, data: [behandling2] },
+    ];
 
-    const wrapper = shallow(<FagsakIndex />);
+    render(
+      <RestApiMock data={data} requestApi={requestApi}>
+        <FagsakIndex />
+      </RestApiMock>,
+    );
 
-    const grid = wrapper.find(FagsakGrid);
-    expect(grid).toHaveLength(1);
+    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
 
-    const behandlingSupportIndex = grid.prop('supportContent');
+    // const wrapper = shallow(<FagsakIndex />);
 
-    // @ts-ignore
-    expect(behandlingSupportIndex.props.alleBehandlinger).toEqual([behandling, behandling2]);
+    // const grid = wrapper.find(FagsakGrid);
+    // expect(grid).toHaveLength(1);
+
+    // const behandlingSupportIndex = grid.prop('supportContent');
+
+    // // @ts-ignore
+    // expect(behandlingSupportIndex.props.alleBehandlinger).toEqual([behandling, behandling2]);
   });
 });

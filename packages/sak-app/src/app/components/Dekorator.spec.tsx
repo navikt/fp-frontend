@@ -1,13 +1,10 @@
 import React from 'react';
-import sinon, { SinonStub } from 'sinon';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
-import HeaderWithErrorPanel from '@fpsak-frontend/sak-dekorator';
-import EventType from '@fpsak-frontend/rest-api/src/requestApi/eventType';
-import * as useRestApiError from '@fpsak-frontend/rest-api-hooks/src/error/useRestApiError';
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 
-import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import Dekorator from './Dekorator';
+import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 
 const navAnsatt = {
   brukernavn: 'Test',
@@ -21,41 +18,47 @@ const navAnsatt = {
   navn: 'Test',
 };
 
-let contextStubHistory: SinonStub;
-afterEach(() => {
-  if (contextStubHistory) {
-    contextStubHistory.restore();
-  }
-});
-
 describe('<Dekorator>', () => {
-  it('skal vise søkeskjermbildet, men ikke systemstatuser', () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, navAnsatt);
+  it('skal vise søkeskjermbildet, men ikke systemstatuser', async () => {
+    const data = [
+      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
+    ];
 
-    const wrapper = shallow(<Dekorator
-      queryStrings={{}}
-      setSiteHeight={sinon.spy()}
-    />);
-    const header = wrapper.find(HeaderWithErrorPanel);
-    expect(header.length).toBe(1);
+    render(
+      <RestApiMock data={data} requestApi={requestApi}>
+        <Dekorator
+          queryStrings={{}}
+          setSiteHeight={jest.fn()}
+        />
+      </RestApiMock>,
+    );
+
+    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
   });
 
-  it('skal vise feilmeldinger', () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, navAnsatt);
+  it('skal vise feilmeldinger', async () => {
+    const data = [
+      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
+    ];
 
-    contextStubHistory = sinon.stub(useRestApiError, 'default').returns([{
-      type: EventType.REQUEST_ERROR,
-      feilmelding: 'Dette er en feilmelding',
-    }]);
+    // contextStubHistory = sinon.stub(useRestApiError, 'default').returns([{
+    //   type: EventType.REQUEST_ERROR,
+    //   feilmelding: 'Dette er en feilmelding',
+    // }]);
 
-    const wrapper = shallow(<Dekorator
-      queryStrings={{}}
-      setSiteHeight={sinon.spy()}
-    />);
-    const header = wrapper.find(HeaderWithErrorPanel);
-    expect(header.prop('errorMessages')).toEqual([{
-      type: EventType.REQUEST_ERROR,
-      feilmelding: 'Dette er en feilmelding',
-    }]);
+    render(
+      <RestApiMock data={data} requestApi={requestApi}>
+        <Dekorator
+          queryStrings={{}}
+          setSiteHeight={jest.fn()}
+        />
+      </RestApiMock>,
+    );
+
+    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
+    // expect(header.prop('errorMessages')).toEqual([{
+    //   type: EventType.REQUEST_ERROR,
+    //   feilmelding: 'Dette er en feilmelding',
+    // }]);
   });
 });

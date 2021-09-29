@@ -20,7 +20,9 @@ import {
   pathToMissingPage, erUrlUnderBehandling, erBehandlingValgt, behandlingerPath, pathToAnnenPart,
 } from '../app/paths';
 import FagsakGrid from './components/FagsakGrid';
-import { AnnenPartBehandling, FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
+import {
+  AnnenPartBehandling, FpsakApiKeys, restApiHooks,
+} from '../data/fpsakApi';
 import useHentFagsakRettigheter from './useHentFagsakRettigheter';
 import useHentAlleBehandlinger from './useHentAlleBehandlinger';
 
