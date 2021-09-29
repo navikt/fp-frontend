@@ -25,7 +25,7 @@ const RestApiMock: FunctionComponent<Props> = ({
   errors,
 }) => (
   <RestApiProvider>
-    <RestApiErrorProvider initialState={{ errors }}>
+    <RestApiErrorProvider initialState={errors ? { errors } : undefined}>
       <RestApiGlobalStateMock data={data.filter((d) => d.global)}>
         <AxiosMock data={data} requestApi={requestApi}>
           {children}

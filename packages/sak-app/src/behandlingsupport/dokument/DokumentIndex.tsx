@@ -45,6 +45,7 @@ export const DokumentIndex: FunctionComponent<OwnProps> = ({
 }) => {
   const forrigeSaksnummer = usePrevious(saksnummer);
   const erBehandlingEndretFraUndefined = useBehandlingEndret(behandlingUuid, behandlingVersjon);
+
   const { data: alleDokumenter = EMPTY_ARRAY, state } = restApiHooks.useRestApi(FpsakApiKeys.ALL_DOCUMENTS, { saksnummer }, {
     updateTriggers: [behandlingUuid, behandlingVersjon],
     suspendRequest: !!forrigeSaksnummer && erBehandlingEndretFraUndefined,

@@ -42,7 +42,7 @@ describe('<DokumentIndex>', () => {
       </RestApiMock>,
     );
 
-    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
+    expect(await screen.findByText('Inn/ut')).toBeInTheDocument();
 
     // const index = wrapper.find(DokumenterSakIndex);
     // expect(index).toHaveLength(1);
