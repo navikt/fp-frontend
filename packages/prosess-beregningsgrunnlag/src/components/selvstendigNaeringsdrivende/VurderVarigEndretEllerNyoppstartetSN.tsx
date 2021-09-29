@@ -43,7 +43,7 @@ type OwnProps = {
 
 interface StaticFunctions {
   buildInitialValues: (relevanteAndeler: BeregningsgrunnlagAndel[], gjeldendeAksjonspunkter: Aksjonspunkt[]) => VurderOgFastsettValues;
-  transformValues: (values: VurderOgFastsettValues) => VurderVarigEndretTransformed;
+  transformValues: (values: Required<VurderOgFastsettValues>) => VurderVarigEndretTransformed;
 }
 
 /**
@@ -155,9 +155,6 @@ VurderVarigEndretEllerNyoppstartetSNImpl.defaultProps = {
 
 VurderVarigEndretEllerNyoppstartetSNImpl.buildInitialValues = (relevanteAndeler: BeregningsgrunnlagAndel[],
   gjeldendeAksjonspunkter: Aksjonspunkt[]): VurderOgFastsettValues => {
-  if (relevanteAndeler.length === 0 || !gjeldendeAksjonspunkter || gjeldendeAksjonspunkter.length === 0) {
-    return undefined;
-  }
   const snAndel = relevanteAndeler.find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
   const varigEndretNaeringAP = gjeldendeAksjonspunkter
     .find((ap) => ap.definisjon.kode === VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE);
@@ -169,10 +166,10 @@ VurderVarigEndretEllerNyoppstartetSNImpl.buildInitialValues = (relevanteAndeler:
       [fastsettInntektFieldname]: snAndel ? formatCurrencyNoKr(snAndel.overstyrtPrAar) : undefined,
     };
   }
-  return undefined;
+  return {};
 };
 
-VurderVarigEndretEllerNyoppstartetSNImpl.transformValues = (values: VurderOgFastsettValues): VurderVarigEndretTransformed => {
+VurderVarigEndretEllerNyoppstartetSNImpl.transformValues = (values: Required<VurderOgFastsettValues>): VurderVarigEndretTransformed => {
   const erVarigEndring = values[varigEndringRadioname];
   return {
     kode: VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,

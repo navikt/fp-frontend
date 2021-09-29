@@ -7,7 +7,7 @@ import {
 } from './AvklareAktiviteterPanel';
 
 const aktivitet1 = {
-  arbeidsgiverId: '384723894723',
+  arbeidsgiverIdent: '384723894723',
   fom: '2019-01-01',
   tom: null,
   skalBrukes: null,
@@ -15,7 +15,7 @@ const aktivitet1 = {
 };
 
 const aktivitet2 = {
-  arbeidsgiverId: '334534623342',
+  arbeidsgiverIdent: '334534623342',
   arbeidsforholdId: 'efj8343f34f',
   fom: '2019-01-01',
   tom: '2019-02-02',
@@ -25,7 +25,7 @@ const aktivitet2 = {
 
 const aktivitet3 = {
   aktørIdString: '324234234234',
-  arbeidsgiverId: '324234234234',
+  arbeidsgiverIdent: '324234234234',
   arbeidsforholdId: 'efj8343f34f',
   fom: '2019-01-01',
   tom: '2019-02-02',
@@ -34,7 +34,6 @@ const aktivitet3 = {
 };
 
 const aktivitetAAP = {
-  arbeidsgiverId: null,
   arbeidsforholdType: { kode: 'AAP', navn: 'Arbeidsavklaringspenger', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
   fom: '2019-01-01',
   tom: '2020-02-02',
@@ -78,16 +77,14 @@ describe('<VurderAktiviteterPanel>', () => {
 
   it('skal ikkje validere om ingen aktiviteter skal brukes og det finnes fleire aktiviteter i opptjeningsperioden', () => {
     const aktivitet1STP2 = {
-      arbeidsgiverNavn: 'Arbeidsgiveren',
-      arbeidsgiverId: '384723894723',
+      arbeidsgiverIdent: '384723894723',
       fom: '2019-01-01',
       tom: '2019-01-01',
       skalBrukes: null,
       arbeidsforholdType: { kode: 'ARBEID', navn: 'Arbeid', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
     };
     const aktivitet2STP2 = {
-      arbeidsgiverNavn: 'Arbeidsgiveren2',
-      arbeidsgiverId: '334534623342',
+      arbeidsgiverIdent: '334534623342',
       arbeidsforholdId: 'efj8343f34f',
       fom: '2019-01-01',
       tom: '2019-01-01',
@@ -119,17 +116,15 @@ describe('<VurderAktiviteterPanel>', () => {
 
   it('skal validere om ingen aktiviteter er valgt i stp nr 2', () => {
     const aktivitetStp2 = {
-      arbeidsgiverNavn: 'Arbeidsgiveren',
-      arbeidsgiverId: '384723894723',
+      arbeidsgiverIdent: '384723894723',
       fom: '2019-01-01',
       tom: '2019-01-01',
       skalBrukes: null,
       arbeidsforholdType: { kode: 'ARBEID', navn: 'Arbeid', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
     };
     const aktivitetStp3 = {
-      arbeidsgiverNavn: 'Arbeidsgiveren3',
       aktørIdString: '324234234234',
-      arbeidsgiverId: '1960-01-01',
+      arbeidsgiverIdent: '1960-01-01',
       arbeidsforholdId: 'efj8343f34f',
       fom: '2018-01-01',
       tom: '2018-12-31',
@@ -163,16 +158,14 @@ describe('<VurderAktiviteterPanel>', () => {
 
   it('skal validere ubesvart radio', () => {
     const aktivitet1STP2 = {
-      arbeidsgiverNavn: 'Arbeidsgiveren',
-      arbeidsgiverId: '384723894723',
+      arbeidsgiverIdent: '384723894723',
       fom: '2019-01-01',
       tom: '2019-01-01',
       skalBrukes: null,
       arbeidsforholdType: { kode: 'ARBEID', navn: 'Arbeid', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
     };
     const aktivitet2STP2 = {
-      arbeidsgiverNavn: 'Arbeidsgiveren2',
-      arbeidsgiverId: '334534623342',
+      arbeidsgiverIdent: '334534623342',
       arbeidsforholdId: 'efj8343f34f',
       fom: '2019-01-01',
       tom: '2019-01-01',

@@ -162,6 +162,7 @@ const getFaktaPanels = (
         <React.Fragment key={tilfelle}>
           <VurderRefusjonForm
             readOnly={readOnly}
+            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             isAksjonspunktClosed={isAksjonspunktClosed}
             faktaOmBeregning={faktaOmBeregning}
           />

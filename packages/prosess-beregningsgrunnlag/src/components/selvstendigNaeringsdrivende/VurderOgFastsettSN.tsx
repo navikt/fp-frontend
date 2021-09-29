@@ -21,15 +21,18 @@ const {
   VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
 } = aksjonspunktCodes;
 
-const finnSnAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt => aksjonspunkter && aksjonspunkter.find(
+const finnSnAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt | undefined => aksjonspunkter && aksjonspunkter.find(
   (ap) => ap.definisjon.kode === VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE
     || ap.definisjon.kode === FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
 );
 
+type MappedOwnProps = {
+  erVarigEndretNaering?: boolean;
+  isAksjonspunktClosed: boolean;
+}
+
 type OwnProps = {
     readOnly: boolean;
-    erVarigEndretNaering?: boolean;
-    isAksjonspunktClosed: boolean;
     erNyArbLivet: boolean;
     erVarigEndring: boolean;
     erNyoppstartet: boolean;
@@ -48,7 +51,7 @@ interface StaticFunctions {
  *
  * Containerkomponent. Setter opp riktige forms basert på hvilket aksjonspunkt vi har og hva som er valgt i radioknapper
  */
-export const VurderOgFastsettSNImpl: FunctionComponent<OwnProps> & StaticFunctions = ({
+export const VurderOgFastsettSNImpl: FunctionComponent<OwnProps & MappedOwnProps> & StaticFunctions = ({
   readOnly,
   erVarigEndretNaering,
   isAksjonspunktClosed,
@@ -95,11 +98,11 @@ VurderOgFastsettSNImpl.defaultProps = {
   erVarigEndretNaering: undefined,
 };
 
-const mapStateToPropsFactory = (initialState, ownPropsStatic) => {
+const mapStateToPropsFactory = (initialState: any, ownPropsStatic: OwnProps) => {
   const aksjonspunkt = finnSnAksjonspunkt(ownPropsStatic.gjeldendeAksjonspunkter);
-  return (state) => ({
+  return (state: any): MappedOwnProps => ({
     erVarigEndretNaering: formValueSelector(FORM_NAME)(state, 'erVarigEndretNaering'),
-    isAksjonspunktClosed: !isAksjonspunktOpen(aksjonspunkt.status.kode),
+    isAksjonspunktClosed: aksjonspunkt ? !isAksjonspunktOpen(aksjonspunkt.status.kode) : false,
   });
 };
 
@@ -116,9 +119,9 @@ VurderOgFastsettSNImpl.buildInitialValues = (relevanteAndeler: Beregningsgrunnla
 VurderOgFastsettSNImpl.transformValues = (values: VurderOgFastsettValues | NyIArbeidslivetValues, gjeldendeAksjonspunkter: Aksjonspunkt[]):
   VurderVarigEndretTransformed | NyIArbeidslivetruttoNæringTransformed => {
   if (hasAksjonspunkt(FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET, gjeldendeAksjonspunkter)) {
-    return FastsettSNImpl.transformValuesNyIArbeidslivet(values as NyIArbeidslivetValues);
+    return FastsettSNImpl.transformValuesNyIArbeidslivet(values as Required<NyIArbeidslivetValues>);
   }
-  return VurderVarigEndretEllerNyoppstartetSNImpl.transformValues(values as VurderOgFastsettValues);
+  return VurderVarigEndretEllerNyoppstartetSNImpl.transformValues(values as Required<VurderOgFastsettValues>);
 };
 
 const VurderOgFastsettSN = connect(mapStateToPropsFactory)(VurderOgFastsettSNImpl);

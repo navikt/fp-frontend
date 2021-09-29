@@ -4,7 +4,7 @@ import moment from 'moment';
 
 const getEndCharFromId = (id?: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
-export const createVisningsnavnFakta = (agOpplysning: ArbeidsgiverOpplysninger, eksternArbeidsforholdId: string): string => {
+export const createVisningsnavnFakta = (agOpplysning: ArbeidsgiverOpplysninger, eksternArbeidsforholdId?: string): string => {
   if (agOpplysning.erPrivatPerson) {
     if (agOpplysning.fødselsdato) {
       return `${agOpplysning.navn} (${moment(agOpplysning.fødselsdato).format(DDMMYYYY_DATE_FORMAT)})${getEndCharFromId(eksternArbeidsforholdId)}`;

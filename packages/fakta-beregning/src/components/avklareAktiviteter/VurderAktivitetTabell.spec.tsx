@@ -12,8 +12,7 @@ import { AlleKodeverk } from '@fpsak-frontend/types';
 import { VurderAktiviteterTabell, lagAktivitetFieldId, skalVurdereAktivitet } from './VurderAktiviteterTabell';
 
 const aktivitet1 = {
-  arbeidsgiverId: '384723894723',
-  arbeidsgiverIdVisning: '384723894723',
+  arbeidsgiverIdent: '384723894723',
   fom: '2019-01-01',
   tom: null,
   skalBrukes: null,
@@ -21,8 +20,7 @@ const aktivitet1 = {
 };
 
 const aktivitet2 = {
-  arbeidsgiverId: '334534623342',
-  arbeidsgiverIdVisning: '334534623342',
+  arbeidsgiverIdent: '334534623342',
   arbeidsforholdId: 'efj8343f34f',
   eksternArbeidsforholdId: '123456',
   fom: '2019-01-01',
@@ -33,7 +31,7 @@ const aktivitet2 = {
 
 const aktivitet3 = {
   aktørIdString: '324234234234',
-  arbeidsgiverId: '324234234234',
+  arbeidsgiverIdent: '324234234234',
   arbeidsforholdId: 'efj8343f34f',
   eksternArbeidsforholdId: '56789',
   fom: '2019-01-01',
@@ -44,7 +42,7 @@ const aktivitet3 = {
 
 const aktivitetAAP = {
   arbeidsgiverNavn: null,
-  arbeidsgiverId: null,
+  arbeidsgiverIdent: null,
   arbeidsforholdType: { kode: opptjeningAktivitetType.AAP, kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
   fom: '2019-01-01',
   tom: '2020-02-02',
@@ -53,7 +51,7 @@ const aktivitetAAP = {
 
 const aktivitetVentelonnVartpenger = {
   arbeidsgiverNavn: null,
-  arbeidsgiverId: null,
+  arbeidsgiverIdent: null,
   arbeidsforholdType: { kode: 'VENTELØNN_VARTPENGER', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
   fom: '2019-01-01',
   tom: '2020-02-02',
