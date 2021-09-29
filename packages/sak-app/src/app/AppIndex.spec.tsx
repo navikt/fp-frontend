@@ -32,7 +32,7 @@ describe('<AppIndex>', () => {
       </RestApiMock>,
     );
 
-    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
+    expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
   });
 
   it('skal vise query-feilmelding', async () => {
@@ -53,8 +53,6 @@ describe('<AppIndex>', () => {
         </Router>
       </RestApiMock>,
     );
-
-    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
-    // expect(headerComp.prop('queryStrings')).toEqual({ errormessage: 'Det finnes ingen sak med denne referansen: 266' });
+    expect(await screen.findByText('Det finnes ingen sak med denne referansen: 266')).toBeInTheDocument();
   });
 });

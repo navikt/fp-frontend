@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { RequestApi } from '@fpsak-frontend/rest-api';
-import { RestApiProvider } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiProvider, RestApiErrorProvider } from '@fpsak-frontend/rest-api-hooks';
 import AxiosMock from './AxiosMock';
 import RestApiGlobalStateMock from './RestApiGlobalStateMock';
 
@@ -12,19 +12,26 @@ interface Props {
     data: any,
   }[];
   requestApi: RequestApi;
+  errors?: {
+    type: string;
+    feilmelding: string;
+  }[];
 }
 
 const RestApiMock: FunctionComponent<Props> = ({
   children,
   data,
   requestApi,
+  errors,
 }) => (
   <RestApiProvider>
-    <RestApiGlobalStateMock data={data.filter((d) => d.global)}>
-      <AxiosMock data={data} requestApi={requestApi}>
-        {children}
-      </AxiosMock>
-    </RestApiGlobalStateMock>
+    <RestApiErrorProvider initialState={{ errors }}>
+      <RestApiGlobalStateMock data={data.filter((d) => d.global)}>
+        <AxiosMock data={data} requestApi={requestApi}>
+          {children}
+        </AxiosMock>
+      </RestApiGlobalStateMock>
+    </RestApiErrorProvider>
   </RestApiProvider>
 );
 
