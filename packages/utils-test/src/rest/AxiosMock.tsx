@@ -17,12 +17,13 @@ const AxiosMock: FunctionComponent<Props> = ({
   requestApi,
 }) => {
   const apiMock = new MockAdapter(requestApi.getAxios());
+  requestApi.setLinks(data.map((d) => ({
+    href: d.key,
+    rel: d.key,
+    type: 'GET',
+  })));
+
   useEffect(() => {
-    requestApi.setLinks(data.map((d) => ({
-      href: d.key,
-      rel: d.key,
-      type: 'GET',
-    })));
     data.forEach((d) => {
       if (requestApi.getRestType(d.key) === 'GET') {
         apiMock.onGet(requestApi.getUrl(d.key)).reply(200, d.data);
