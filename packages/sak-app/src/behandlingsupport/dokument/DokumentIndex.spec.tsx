@@ -31,6 +31,7 @@ describe('<DokumentIndex>', () => {
     const data = [
       { key: FpsakApiKeys.ALL_DOCUMENTS.name, data: documents },
     ];
+
     render(
       <RestApiMock data={data} requestApi={requestApi}>
         <DokumentIndex
