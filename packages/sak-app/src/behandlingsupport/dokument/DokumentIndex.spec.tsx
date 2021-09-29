@@ -43,6 +43,7 @@ describe('<DokumentIndex>', () => {
     );
 
     expect(await screen.findByText('Inn/ut')).toBeInTheDocument();
+
     // const index = wrapper.find(DokumenterSakIndex);
     // expect(index).toHaveLength(1);
 

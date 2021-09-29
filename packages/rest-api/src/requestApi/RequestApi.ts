@@ -123,6 +123,8 @@ class RequestApi {
       throw new Error(`Mangler konfig for endepunkt ${endpointName}`);
     }
     const link = this.findLinks(endpointConfig.rel);
+    console.log(link?.href);
+    console.log(!!link?.href);
     return !!link?.href || !!endpointConfig?.path;
   };
 
