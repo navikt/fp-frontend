@@ -20,8 +20,8 @@ const ingenAvviksvurdering = (forklarendeTekst: string): ReactElement => (
 );
 
 type OwnProps = {
-    alleAndelerIForstePeriode?: BeregningsgrunnlagAndel[];
-    sammenligningsgrunnlagPrStatus?: SammenligningsgrunlagProp[];
+    alleAndelerIForstePeriode: BeregningsgrunnlagAndel[];
+    sammenligningsgrunnlagPrStatus: SammenligningsgrunlagProp[];
     relevanteStatuser: RelevanteStatuserProp
 };
 
@@ -31,9 +31,9 @@ const AvvikopplysningerSN: FunctionComponent<OwnProps> = ({
   relevanteStatuser,
 }) => {
   const snAndel = alleAndelerIForstePeriode.find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
-  const erNyArbLivet = snAndel.erNyIArbeidslivet;
-  const erVarigEndring = snAndel.næringer && snAndel.næringer.some((naring) => naring.erVarigEndret === true);
-  const erNyoppstartet = snAndel.næringer && snAndel.næringer.some((naring) => naring.erNyoppstartet === true);
+  const erNyArbLivet = snAndel?.erNyIArbeidslivet;
+  const erVarigEndring = snAndel?.næringer && snAndel.næringer.some((naring) => naring.erVarigEndret === true);
+  const erNyoppstartet = snAndel?.næringer && snAndel.næringer.some((naring) => naring.erNyoppstartet === true);
   if (erNyArbLivet) {
     return ingenAvviksvurdering('Beregningsgrunnlag.Avviksopplysninger.SN.NyIArbeidslivet');
   }
@@ -67,9 +67,6 @@ const AvvikopplysningerSN: FunctionComponent<OwnProps> = ({
       sammenligningsgrunnlagSum={sammenligningsgrunnlagSumSN}
     />
   );
-};
-AvvikopplysningerSN.defaultProps = {
-  sammenligningsgrunnlagPrStatus: undefined,
 };
 
 export default AvvikopplysningerSN;

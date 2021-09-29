@@ -5,7 +5,6 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
-import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import messages from '../../../i18n/nb_NO.json';
 import NaeringsopplysningsPanel from './NaeringsOpplysningsPanel';
 
@@ -29,14 +28,13 @@ const andelerForstePeriode = {
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    utenlandskvirksomhetsnavn: null,
     virksomhetType:
     {
       kode: 'ANNEN',
       kodeverk: 'VIRKSOMHET_TYPE',
     },
   }],
-} as BeregningsgrunnlagAndel;
+};
 
 const agOpp = {
   910909088: {

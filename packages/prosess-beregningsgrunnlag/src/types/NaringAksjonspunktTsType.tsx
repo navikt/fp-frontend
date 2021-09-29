@@ -1,11 +1,11 @@
 export type NyIArbeidslivetValues = {
-  bruttoBeregningsgrunnlag: string;
+  bruttoBeregningsgrunnlag?: string;
   fastsettBeregningsgrnunnlagSNBegrunnelse?: string;
 }
 
 export type VurderOgFastsettValues = {
-  erVarigEndretNaering: boolean;
-  varigEndringNyoppstartetBegrunnelse: string;
+  erVarigEndretNaering?: boolean;
+  varigEndringNyoppstartetBegrunnelse?: string;
   bruttoBeregningsgrunnlag?: string;
 }
 

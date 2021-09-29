@@ -11,7 +11,7 @@ import { FastsettSNImpl, begrunnelseFieldname, fastsettInntektFieldname } from '
 
 const intlMock = getIntlMock(messages);
 
-const mockAksjonspunktMedKodeOgStatus = (apKode, begrunnelse) => ({
+const mockAksjonspunktMedKodeOgStatus = (apKode: string, begrunnelse?: string): Aksjonspunkt => ({
   definisjon: {
     kode: apKode,
     kodeverk: 'AKSJONSPUNKT_DEFINISJON',
@@ -25,7 +25,7 @@ const mockAksjonspunktMedKodeOgStatus = (apKode, begrunnelse) => ({
   begrunnelse,
 });
 
-const lagAndel = (status, fastsattBelop) => ({
+const lagAndel = (status: string, fastsattBelop?: number): BeregningsgrunnlagAndel => ({
   aktivitetStatus: {
     kode: status,
     kodeverk: 'test',
@@ -70,27 +70,27 @@ describe('<FastsettSN>', () => {
   });
 
   it('Skal teste at buildInitialValues bygges korrekt når ikke tidligere fastsatt', () => {
-    const andeler = [lagAndel(aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE, null), lagAndel(aktivitetStatus.ARBEIDSTAKER, 250000)];
-    const aksjonspunkter = [mockAksjonspunktMedKodeOgStatus(aksjonspunktCodes.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE, null)];
+    const andeler = [lagAndel(aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE), lagAndel(aktivitetStatus.ARBEIDSTAKER, 250000)];
+    const aksjonspunkter = [mockAksjonspunktMedKodeOgStatus(aksjonspunktCodes.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE)];
 
     const actualValues = FastsettSNImpl.buildInitialValuesNyIArbeidslivet(andeler, aksjonspunkter);
 
     const expectedValues = {
       [fastsettInntektFieldname]: undefined,
-      [begrunnelseFieldname]: '',
+      [begrunnelseFieldname]: undefined,
     };
 
     expect(actualValues).toEqual(expectedValues);
   });
 
   it('Skal teste at buildInitialValues bygges korrekt når ikke tidligere fastsatt på sn ny i arbliv', () => {
-    const andeler = [lagAndel(aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE, null), lagAndel(aktivitetStatus.ARBEIDSTAKER, 250000)];
-    const aksjonspunkter = [mockAksjonspunktMedKodeOgStatus(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET, null)];
+    const andeler = [lagAndel(aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE), lagAndel(aktivitetStatus.ARBEIDSTAKER, 250000)];
+    const aksjonspunkter = [mockAksjonspunktMedKodeOgStatus(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET)];
 
     const actualValues = FastsettSNImpl.buildInitialValuesNyIArbeidslivet(andeler, aksjonspunkter);
     const expectedValues = {
       [fastsettInntektFieldname]: undefined,
-      [begrunnelseFieldname]: '',
+      [begrunnelseFieldname]: undefined,
     };
 
     expect(actualValues).toEqual(expectedValues);

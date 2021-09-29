@@ -22,8 +22,7 @@ export type AndelForFaktaOmBeregning = Readonly<{
 }>
 
 export type RefusjonskravSomKommerForSentListe = Readonly<{
-  arbeidsgiverId: string;
-  arbeidsgiverVisningsnavn: string;
+  arbeidsgiverIdent: string;
   erRefusjonskravGyldig?: boolean;
 }>
 
@@ -36,8 +35,7 @@ export type VurderBesteberegning = Readonly<{
 }>
 
 export type BeregningAktivitet = Readonly<{
-  arbeidsgiverNavn?: string;
-  arbeidsgiverId?: string;
+  arbeidsgiverIdent?: string;
   eksternArbeidsforholdId?: string;
   fom: string;
   tom?: string;

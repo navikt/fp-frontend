@@ -11,10 +11,23 @@ const {
   VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT,
 } = faktaOmBeregningTilfelle;
 
+const agOpplysninger = {
+  8279312213: {
+    identifikator: '8279312213',
+    navn: 'Arbeidsgiveren AS',
+    erPrivatPerson: false,
+  },
+  45345345345: {
+    identifikator: '45345345345',
+    navn: 'ArbeidsgiverTo AS',
+    erPrivatPerson: false,
+  },
+};
+
 describe('<VurderRefusjonForm>', () => {
   it('skal vise eitt sett med radioknapper om ein arbeidsgiver', () => {
     const senRefusjonkravListe = [
-      { arbeidsgiverVisningsnavn: 'Arbeidsgiveren (8279312213) AS', arbeidsgiverId: '8279312213' },
+      { arbeidsgiverIdent: '8279312213' },
     ];
     const fakta = {
       andelerForFaktaOmBeregning: [],
@@ -22,6 +35,7 @@ describe('<VurderRefusjonForm>', () => {
     } as FaktaOmBeregning;
     const wrapper = shallow(<VurderRefusjonForm
       readOnly={false}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
       isAksjonspunktClosed={false}
       faktaOmBeregning={fakta}
     />);
@@ -35,8 +49,8 @@ describe('<VurderRefusjonForm>', () => {
 
   it('skal vise to sett med radioknapper om to arbeidsgivere', () => {
     const senRefusjonkravListe = [
-      { arbeidsgiverVisningsnavn: 'Arbeidsgiveren (8279312213) AS', arbeidsgiverId: '8279312213' },
-      { arbeidsgiverVisningsnavn: 'Arbeidsgiverto (45345345345) AS', arbeidsgiverId: '45345345345' },
+      { arbeidsgiverIdent: '8279312213' },
+      { arbeidsgiverIdent: '45345345345' },
     ];
     const fakta = {
       andelerForFaktaOmBeregning: [],
@@ -44,6 +58,7 @@ describe('<VurderRefusjonForm>', () => {
     } as FaktaOmBeregning;
     const wrapper = shallow(<VurderRefusjonForm
       readOnly={false}
+      arbeidsgiverOpplysningerPerId={agOpplysninger}
       isAksjonspunktClosed={false}
       faktaOmBeregning={fakta}
     />);
@@ -55,8 +70,8 @@ describe('<VurderRefusjonForm>', () => {
 
   it('skal bygge initial values', () => {
     const senRefusjonkravListe = [
-      { arbeidsgiverVisningsnavn: 'Arbeidsgiveren (8279312213) AS', erRefusjonskravGyldig: true, arbeidsgiverId: '8279312213' },
-      { arbeidsgiverVisningsnavn: 'Arbeidsgiverto (45345345345) AS', erRefusjonskravGyldig: false, arbeidsgiverId: '45345345345' },
+      { erRefusjonskravGyldig: true, arbeidsgiverIdent: '8279312213' },
+      { erRefusjonskravGyldig: false, arbeidsgiverIdent: '45345345345' },
     ];
     const initialValues = VurderRefusjonForm.buildInitialValues([VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT], senRefusjonkravListe);
     expect(initialValues[lagFieldName('8279312213')]).toBe(true);
@@ -65,8 +80,8 @@ describe('<VurderRefusjonForm>', () => {
 
   it('skal bygge transform values', () => {
     const senRefusjonkravListe = [
-      { arbeidsgiverId: '8279312213', arbeidsgiverVisningsnavn: 'Arbeidsgiveren (8279312213) AS', erRefusjonskravGyldig: true },
-      { arbeidsgiverId: '45345345345', arbeidsgiverVisningsnavn: 'Arbeidsgiverto (45345345345) AS', erRefusjonskravGyldig: false },
+      { arbeidsgiverIdent: '8279312213', erRefusjonskravGyldig: true },
+      { arbeidsgiverIdent: '45345345345', erRefusjonskravGyldig: false },
     ];
     const values = { vurderRefusjonValues: {} };
     values.vurderRefusjonValues[lagFieldName('8279312213')] = false;

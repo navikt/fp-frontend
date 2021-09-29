@@ -120,7 +120,7 @@ describe('<FaktaForATFLOgSNPanel>', () => {
       dekningsgrad: null,
       grunnbeløp: null,
       erOverstyrtInntekt: null,
-      beregninsgrunnlagPeriode: [
+      beregningsgrunnlagPeriode: [
         {
           beregningsgrunnlagPrStatusOgAndel: [andel1, andel2],
         },

@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { Aksjonspunkt } from '@fpsak-frontend/types';
 import VurderOgFastsettSN, { VurderOgFastsettSNImpl } from './VurderOgFastsettSN';
 import VurderVarigEndretEllerNyoppstartetSN2,
 {
@@ -15,7 +16,7 @@ const {
   FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
 } = aksjonspunktCodes;
 
-const mockAksjonspunktMedKodeOgStatus = (apKode, begrunnelse, status) => ({
+const mockAksjonspunktMedKodeOgStatus = (apKode: string, status: string, begrunnelse?: string): Aksjonspunkt => ({
   definisjon: {
     kode: apKode,
     kodeverk: 'test',
@@ -38,14 +39,14 @@ describe('<VurderOgFastsettSN>', () => {
       erNyArbLivet
       erVarigEndring
       erNyoppstartet={false}
-      gjeldendeAksjonspunkter={[mockAksjonspunktMedKodeOgStatus(FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET, undefined, 'OPPR')]}
+      gjeldendeAksjonspunkter={[mockAksjonspunktMedKodeOgStatus(FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET, 'OPPR')]}
     />, messages);
     expect(wrapper.find(FastsettSN2)).toHaveLength(1);
     expect(wrapper.find(VurderVarigEndretEllerNyoppstartetSN2)).toHaveLength(0);
   });
 
   it('Skal vise korrekte komponenter når det er aksjonspunkt for å vurdere varig endring uten at varig endring er bestemt', () => {
-    const vurderEndring = mockAksjonspunktMedKodeOgStatus(VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE, undefined, 'OPPR');
+    const vurderEndring = mockAksjonspunktMedKodeOgStatus(VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE, 'OPPR');
     const wrapper = shallowWithIntl(<VurderOgFastsettSNImpl
       readOnly={false}
       erVarigEndretNaering={undefined}
@@ -60,7 +61,7 @@ describe('<VurderOgFastsettSN>', () => {
   });
 
   it('Skal vise korrekte komponenter når det er aksjonspunkt for å vurdere varig endring og det er vurdert at det ikke er varig endring', () => {
-    const vurderEndring = mockAksjonspunktMedKodeOgStatus(VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE, undefined, 'OPPR');
+    const vurderEndring = mockAksjonspunktMedKodeOgStatus(VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE, 'OPPR');
     const wrapper = shallowWithIntl(<VurderOgFastsettSNImpl
       readOnly={false}
       erVarigEndretNaering={false}
@@ -75,7 +76,7 @@ describe('<VurderOgFastsettSN>', () => {
   });
 
   it('Skal vise korrekte komponenter når det er aksjonspunkt for å vurdere varig endring og det er vurdert at det er varig endring', () => {
-    const vurderEndring = mockAksjonspunktMedKodeOgStatus(VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE, undefined, 'OPPR');
+    const vurderEndring = mockAksjonspunktMedKodeOgStatus(VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE, 'OPPR');
     const wrapper = shallowWithIntl(<VurderOgFastsettSNImpl
       readOnly={false}
       erVarigEndretNaering
@@ -90,7 +91,7 @@ describe('<VurderOgFastsettSN>', () => {
   });
 
   it('Skal teste at transformValues setter korrekte values når det kun skal fastsettes inntekt for søker ny i arbeidslivet', () => {
-    const snNyIArb = mockAksjonspunktMedKodeOgStatus(FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET, undefined, 'OPPR');
+    const snNyIArb = mockAksjonspunktMedKodeOgStatus(FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET, 'OPPR');
     const values = {
       [fastsettingBegrunnelse]: 'Ok.',
       [fastsettInntektFieldname]: '360 000',
@@ -105,7 +106,7 @@ describe('<VurderOgFastsettSN>', () => {
   });
 
   it('Skal teste at transformValues setter korrekte values når det er vurdert at det ikke er varig endret næring', () => {
-    const vurderEndring = mockAksjonspunktMedKodeOgStatus(VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE, undefined, 'OPPR');
+    const vurderEndring = mockAksjonspunktMedKodeOgStatus(VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE, 'OPPR');
     const values = {
       [vurderingBegrunnelse]: 'Ok.',
       [varigEndringRadioname]: false,
@@ -121,7 +122,7 @@ describe('<VurderOgFastsettSN>', () => {
   });
 
   it('Skal teste at transformValues setter korrekte values når det er vurdert at det er varig endret næring og inntekt er fastsatt', () => {
-    const vurderEndring = mockAksjonspunktMedKodeOgStatus(VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE, undefined, 'OPPR');
+    const vurderEndring = mockAksjonspunktMedKodeOgStatus(VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE, 'OPPR');
     const values = {
       [vurderingBegrunnelse]: 'Ok varig endring.',
       [fastsettingBegrunnelse]: 'Ok fastsatt inntekt.',

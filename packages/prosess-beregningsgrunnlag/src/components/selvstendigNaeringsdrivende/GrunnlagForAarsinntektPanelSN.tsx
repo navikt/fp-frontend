@@ -29,29 +29,25 @@ const createHeaderRow = (): React.ReactNode => (
 );
 const createSumRow = (pgiSnitt: number): React.ReactNode => (
   <>
-    {pgiSnitt !== undefined && (
-      <>
-        <Row key="grunnlagAarsinntektSNLine">
-          <Column xs="12" className={beregningStyles.noPaddingRight}>
-            <div className={beregningStyles.colDevider} />
-          </Column>
-        </Row>
-        <Row key="grunnlagAarsinntektSN">
-          <Column xs="10" className={beregningStyles.rightAlignTextInDiv}>
-            <Element>
-              <FormattedMessage
-                id="Beregningsgrunnlag.AarsinntektPanel.SnittPensjonsGivende"
-              />
-            </Element>
-          </Column>
-          <Column xs="2" className={beregningStyles.colAarText}>
-            <Element>
-              {formatCurrencyNoKr(pgiSnitt)}
-            </Element>
-          </Column>
-        </Row>
-      </>
-    )}
+    <Row key="grunnlagAarsinntektSNLine">
+      <Column xs="12" className={beregningStyles.noPaddingRight}>
+        <div className={beregningStyles.colDevider} />
+      </Column>
+    </Row>
+    <Row key="grunnlagAarsinntektSN">
+      <Column xs="10" className={beregningStyles.rightAlignTextInDiv}>
+        <Element>
+          <FormattedMessage
+            id="Beregningsgrunnlag.AarsinntektPanel.SnittPensjonsGivende"
+          />
+        </Element>
+      </Column>
+      <Column xs="2" className={beregningStyles.colAarText}>
+        <Element>
+          {formatCurrencyNoKr(pgiSnitt)}
+        </Element>
+      </Column>
+    </Row>
   </>
 );
 const createInntektRows = (pgiVerdier: PgiVerdier[]): React.ReactNode => (
@@ -105,8 +101,16 @@ export const GrunnlagForAarsinntektPanelSN: FunctionComponent<OwnProps> = ({ all
       </Row>
       <VerticalSpacer fourPx />
       {createHeaderRow()}
-      {createInntektRows(pgiVerdier)}
-      {createSumRow(pgiSnitt)}
+      {!!pgiVerdier && (
+        <>
+          {createInntektRows(pgiVerdier)}
+        </>
+      )}
+      {pgiSnitt !== undefined && (
+        <>
+          {createSumRow(pgiSnitt)}
+        </>
+      )}
     </>
   );
 };

@@ -86,9 +86,9 @@ export type SammenligningsgrunlagProp = Readonly<{
   differanseBeregnet: number;
   avvikProsent: number;
   avvikPromille: number;
-  rapportertPrAar?: number;
-  sammenligningsgrunnlagFom?: string;
-  sammenligningsgrunnlagTom?: string;
+  rapportertPrAar: number;
+  sammenligningsgrunnlagFom: string;
+  sammenligningsgrunnlagTom: string;
 }>
 
 export type BeregningsgrunnlagPeriodeProp = Readonly<{
@@ -114,7 +114,7 @@ type Beregningsgrunnlag = Readonly<{
   grunnbeløp: number;
   erOverstyrtInntekt: boolean;
   aktivitetStatus?: Kodeverk[];
-  beregningsgrunnlagPeriode?: BeregningsgrunnlagPeriodeProp[];
+  beregningsgrunnlagPeriode: BeregningsgrunnlagPeriodeProp[];
   sammenligningsgrunnlag?: SammenligningsgrunlagProp;
   sammenligningsgrunnlagPrStatus?: SammenligningsgrunlagProp[];
   faktaOmBeregning?: FaktaOmBeregning;
