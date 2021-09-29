@@ -57,9 +57,5 @@ describe('<Dekorator>', () => {
     );
 
     expect(await screen.findByText('Dette er en feilmelding')).toBeInTheDocument();
-    // expect(header.prop('errorMessages')).toEqual([{
-    //   type: EventType.REQUEST_ERROR,
-    //   feilmelding: 'Dette er en feilmelding',
-    // }]);
   });
 });

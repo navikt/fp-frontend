@@ -101,25 +101,11 @@ describe('BehandlingMenuIndex', () => {
         </Router>
       </RestApiMock>,
     );
-
-    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
-    // const meny = wrapper.find(MenySakIndex);
-    // expect(meny).toHaveLength(1);
-    // const data = meny.prop('data');
-    // expect(data).toHaveLength(7);
-    // expect(data[0].erSynlig).toBe(false);
-    // expect(data[0].tekst).toEqual('Fortsett behandlingen');
-    // expect(data[1].erSynlig).toBe(true);
-    // expect(data[1].tekst).toEqual('Sett behandlingen på vent');
-    // expect(data[2].erSynlig).toBe(true);
-    // expect(data[2].tekst).toEqual('Henlegg behandlingen og avslutt');
-    // expect(data[3].erSynlig).toBe(true);
-    // expect(data[3].tekst).toEqual('Endre behandlende enhet');
-    // expect(data[4].erSynlig).toBe(true);
-    // expect(data[4].tekst).toEqual('Åpne behandling for endringer');
-    // expect(data[5].erSynlig).toBe(true);
-    // expect(data[5].tekst).toEqual('Opprett ny behandling');
-    // expect(data[6].erSynlig).toBe(true);
-    // expect(data[6].tekst).toEqual('Opprett verge/fullmektig');
+    expect(await screen.findByText('Sett behandlingen på vent')).toBeInTheDocument();
+    expect(screen.getByText('Henlegg behandlingen og avslutt')).toBeInTheDocument();
+    expect(screen.getByText('Endre behandlende enhet')).toBeInTheDocument();
+    expect(screen.getByText('Åpne behandling for endringer')).toBeInTheDocument();
+    expect(screen.getByText('Opprett ny behandling')).toBeInTheDocument();
+    expect(screen.getByText('Opprett verge/fullmektig')).toBeInTheDocument();
   });
 });
