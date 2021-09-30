@@ -27,7 +27,7 @@ describe('<DokumentIndex>', () => {
     kommunikasjonsretning: 'Inn',
   }];
 
-  it('skal vise liste med sorterte dokumenter', async () => {
+  it('skal vise liste med tre dokumenter', async () => {
     const data = [
       { key: FpsakApiKeys.ALL_DOCUMENTS.name, data: documents },
     ];
@@ -42,15 +42,6 @@ describe('<DokumentIndex>', () => {
       </RestApiMock>,
     );
 
-    expect(await screen.findByText('Inn/ut')).toBeInTheDocument();
-
-    // const index = wrapper.find(DokumenterSakIndex);
-    // expect(index).toHaveLength(1);
-
-    // const dokumenter = index.prop('documents');
-
-    // expect(dokumenter[0].journalpostId).toEqual('2');
-    // expect(dokumenter[1].journalpostId).toEqual('3');
-    // expect(dokumenter[2].journalpostId).toEqual('1');
+    expect(await screen.findAllByRole('row')).toHaveLength(4);
   });
 });

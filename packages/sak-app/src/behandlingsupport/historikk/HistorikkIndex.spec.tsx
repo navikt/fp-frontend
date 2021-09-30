@@ -1,4 +1,6 @@
 import React from 'react';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
@@ -7,59 +9,33 @@ import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import HistorikkIndex from './HistorikkIndex';
 
 describe('<HistorikkIndex>', () => {
-  it('skal slå sammen og sortere historikk for fpsak og fptilbake', async () => {
+  it('skal prøve å hente historikk og så vise historikk-panel', async () => {
     const data = [
       { key: FpsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
       { key: FpsakApiKeys.KODEVERK.name, global: true, data: {} },
       { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
       {
         key: FpsakApiKeys.HISTORY_FPSAK.name,
-        global: true,
-        data: [{
-          opprettetTidspunkt: '2019-01-01',
-          historikkinnslagDeler: [],
-          type: {
-            kode: 'Test fpsak 1',
-          },
-        }, {
-          opprettetTidspunkt: '2019-01-06',
-          historikkinnslagDeler: [],
-          type: {
-            kode: 'Test fpsak 2',
-          },
-        }],
+        data: [],
       },
       {
         key: FpsakApiKeys.HISTORY_FPTILBAKE.name,
-        global: true,
-        data: [{
-          opprettetTidspunkt: '2019-01-04',
-          historikkinnslagDeler: [],
-          type: {
-            kode: 'Test fptilbake',
-          },
-        }],
+        data: [],
       },
     ];
 
     render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <HistorikkIndex
-          saksnummer="12345"
-          behandlingUuid="1"
-          behandlingVersjon={2}
-        />
+        <Router history={createMemoryHistory()}>
+          <HistorikkIndex
+            saksnummer="12345"
+            behandlingUuid="1"
+            behandlingVersjon={2}
+          />
+        </Router>
       </RestApiMock>,
     );
 
-    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
-
-    // const index = wrapper.find(HistorikkSakIndex);
-    // expect(index).toHaveLength(1);
-
-    // const { historikkFpSak, historikkFpTilbake } = index.props();
-
-    // expect(historikkFpSak).toHaveLength(2);
-    // expect(historikkFpTilbake).toHaveLength(1);
+    expect(await screen.findByText('Filtrer på behandling')).toBeInTheDocument();
   });
 });

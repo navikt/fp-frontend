@@ -1,11 +1,16 @@
 import React from 'react';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
+import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 
+import useVisForhandsvisningAvMelding from '../../data/useVisForhandsvisningAvMelding';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import MeldingIndex from './MeldingIndex';
 
@@ -14,6 +19,10 @@ describe('<MeldingIndex>', () => {
 
   const fagsak = {
     saksnummer: '123456',
+    fagsakYtelseType: {
+      kode: fagsakYtelseType.FORELDREPENGER,
+      kodeverk: 'FAGSAK_YTELSE_TYPE',
+    },
   };
 
   const valgtBehandling = {
@@ -22,6 +31,10 @@ describe('<MeldingIndex>', () => {
     type: {
       kode: BehandlingType.FORSTEGANGSSOKNAD,
       kodeverk: '',
+    },
+    sprakkode: {
+      kode: 'nb',
+      kodeverk: 'SPRÅK',
     },
   };
 
@@ -45,29 +58,34 @@ describe('<MeldingIndex>', () => {
     assignMock.mockClear();
   });
 
+  const history = createMemoryHistory();
+
   it('skal vise messages når mottakere og brevmaler har blitt hentet fra server', async () => {
     const data = [
       { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: { navn: 'Peder' } },
       { key: FpsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
       { key: FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, data: true },
+      { key: FpsakApiKeys.SUBMIT_MESSAGE.name, data: undefined },
       { key: FpsakApiKeys.BREVMALER.name, data: templates },
     ];
 
     render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <MeldingIndex
-          fagsak={fagsak as Fagsak}
-          valgtBehandling={valgtBehandling as BehandlingAppKontekst}
-          setMeldingForData={() => undefined}
-        />
+        <Router history={history}>
+          <MeldingIndex
+            fagsak={fagsak as Fagsak}
+            valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+            setMeldingForData={() => undefined}
+          />
+        </Router>
       </RestApiMock>,
     );
 
-    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
-
-    // const index = wrapper.find(MeldingerSakIndex);
-    // expect(index.prop('recipients')).toEqual(recipients);
-    // expect(index.prop('templates')).toEqual(templates);
+    expect(await screen.findByText('Mottaker')).toBeInTheDocument();
+    expect(screen.getByText('Søker')).toBeInTheDocument();
+    expect(screen.getByText('Mal 1')).toBeInTheDocument();
+    expect(screen.getByText('Mal 2')).toBeInTheDocument();
+    expect(screen.getByText('Mal 3')).toBeInTheDocument();
   });
 
   it('skal sette default tom streng ved forhåndsvisning dersom fritekst ikke er fylt ut', async () => {
@@ -79,21 +97,23 @@ describe('<MeldingIndex>', () => {
       { key: FpsakApiKeys.PREVIEW_MESSAGE_FORMIDLING.name, data: {} },
     ];
 
+    //useVisForhandsvisningAvMelding 
+
     render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <MeldingIndex
-          fagsak={fagsak as Fagsak}
-          valgtBehandling={valgtBehandling as BehandlingAppKontekst}
-          setMeldingForData={() => undefined}
-        />
+        <Router history={history}>
+          <MeldingIndex
+            fagsak={fagsak as Fagsak}
+            valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+            setMeldingForData={() => undefined}
+          />
+        </Router>
       </RestApiMock>,
     );
 
-    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
+    expect(await screen.findByText('Forhåndsvis')).toBeInTheDocument();
 
-    // const index = wrapper.find(MeldingerSakIndex);
-    // const previewCallback = index.prop('previewCallback') as (params: any) => void;
-    // previewCallback({ mottaker: 'Søker', brevmalkode: 'Mal1' });
+    userEvent.click(screen.getByText('Forhåndsvis'));
 
     // const reqData = requestApi.getRequestMockData(FpsakApiKeys.PREVIEW_MESSAGE_FORMIDLING.name);
     // expect(reqData).toHaveLength(1);
@@ -111,11 +131,13 @@ describe('<MeldingIndex>', () => {
 
     render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <MeldingIndex
-          fagsak={fagsak as Fagsak}
-          valgtBehandling={valgtBehandling as BehandlingAppKontekst}
-          setMeldingForData={() => undefined}
-        />
+        <Router history={history}>
+          <MeldingIndex
+            fagsak={fagsak as Fagsak}
+            valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+            setMeldingForData={() => undefined}
+          />
+        </Router>
       </RestApiMock>,
     );
 
@@ -155,11 +177,13 @@ describe('<MeldingIndex>', () => {
 
     render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <MeldingIndex
-          fagsak={fagsak as Fagsak}
-          valgtBehandling={valgtBehandling as BehandlingAppKontekst}
-          setMeldingForData={() => undefined}
-        />
+        <Router history={history}>
+          <MeldingIndex
+            fagsak={fagsak as Fagsak}
+            valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+            setMeldingForData={() => undefined}
+          />
+        </Router>
       </RestApiMock>,
     );
 
@@ -198,11 +222,13 @@ describe('<MeldingIndex>', () => {
 
     render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <MeldingIndex
-          fagsak={fagsak as Fagsak}
-          valgtBehandling={valgtBehandling as BehandlingAppKontekst}
-          setMeldingForData={() => undefined}
-        />
+        <Router history={history}>
+          <MeldingIndex
+            fagsak={fagsak as Fagsak}
+            valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+            setMeldingForData={() => undefined}
+          />
+        </Router>
       </RestApiMock>,
     );
 
@@ -248,11 +274,13 @@ describe('<MeldingIndex>', () => {
 
     render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <MeldingIndex
-          fagsak={fagsak as Fagsak}
-          valgtBehandling={valgtBehandling as BehandlingAppKontekst}
-          setMeldingForData={() => undefined}
-        />
+        <Router history={history}>
+          <MeldingIndex
+            fagsak={fagsak as Fagsak}
+            valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+            setMeldingForData={() => undefined}
+          />
+        </Router>
       </RestApiMock>,
     );
 
@@ -298,11 +326,13 @@ describe('<MeldingIndex>', () => {
 
     render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <MeldingIndex
-          fagsak={fagsak as Fagsak}
-          valgtBehandling={valgtBehandling as BehandlingAppKontekst}
-          setMeldingForData={() => undefined}
-        />
+        <Router history={history}>
+          <MeldingIndex
+            fagsak={fagsak as Fagsak}
+            valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+            setMeldingForData={() => undefined}
+          />
+        </Router>
       </RestApiMock>,
     );
 
@@ -348,11 +378,13 @@ describe('<MeldingIndex>', () => {
 
     render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <MeldingIndex
-          fagsak={fagsak as Fagsak}
-          valgtBehandling={valgtBehandling as BehandlingAppKontekst}
-          setMeldingForData={() => undefined}
-        />
+        <Router history={history}>
+          <MeldingIndex
+            fagsak={fagsak as Fagsak}
+            valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+            setMeldingForData={() => undefined}
+          />
+        </Router>
       </RestApiMock>,
     );
 
