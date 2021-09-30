@@ -9,14 +9,17 @@ interface Props {
     key: string;
     data: any,
   }[];
+  setApiMock?: (mockAdapter: MockAdapter) => void;
 }
 
 const AxiosMock: FunctionComponent<Props> = ({
   children,
   data,
   requestApi,
+  setApiMock = () => undefined,
 }) => {
   const apiMock = new MockAdapter(requestApi.getAxios());
+  setApiMock(apiMock);
 
   requestApi.setLinks(data.map((d) => ({
     href: d.key,

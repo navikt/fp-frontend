@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import MockAdapter from 'axios-mock-adapter';
 import { RequestApi } from '@fpsak-frontend/rest-api';
 import { RestApiProvider, RestApiErrorProvider } from '@fpsak-frontend/rest-api-hooks';
 import AxiosMock from './AxiosMock';
@@ -16,6 +17,7 @@ interface Props {
     type: string;
     feilmelding: string;
   }[];
+  setApiMock?: (mockAdapter: MockAdapter) => void;
 }
 
 const RestApiMock: FunctionComponent<Props> = ({
@@ -23,11 +25,12 @@ const RestApiMock: FunctionComponent<Props> = ({
   data,
   requestApi,
   errors,
+  setApiMock,
 }) => (
   <RestApiProvider>
     <RestApiErrorProvider initialState={errors ? { errors } : undefined}>
       <RestApiGlobalStateMock data={data.filter((d) => d.global)}>
-        <AxiosMock data={data} requestApi={requestApi}>
+        <AxiosMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
           {children}
         </AxiosMock>
       </RestApiGlobalStateMock>
