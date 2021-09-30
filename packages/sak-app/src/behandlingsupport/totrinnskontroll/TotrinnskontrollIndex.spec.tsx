@@ -1,5 +1,10 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
+import userEvent from '@testing-library/user-event';
+import MockAdapter from 'axios-mock-adapter';
+import Modal from 'nav-frontend-modal';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -14,6 +19,7 @@ import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import TotrinnskontrollIndex from './TotrinnskontrollIndex';
 
 describe('<TotrinnskontrollIndex>', () => {
+  Modal.setAppElement('body');
   const fagsak = {
     saksnummer: '1',
     fagsakYtelseType: {
@@ -99,44 +105,78 @@ describe('<TotrinnskontrollIndex>', () => {
       { key: FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER.name, data: totrinnskontrollAksjonspunkter },
     ];
 
+    let axiosMock: MockAdapter;
+    const setApiMock = (mockAdapter: MockAdapter) => { axiosMock = mockAdapter; };
+
     render(
-      <RestApiMock data={data} requestApi={requestApi}>
-        <TotrinnskontrollIndex
-          fagsak={fagsak as Fagsak}
-          valgtBehandling={valgtBehandling}
-          setBeslutterForData={() => undefined}
-        />
+      <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
+        <Router history={createMemoryHistory()}>
+          <TotrinnskontrollIndex
+            fagsak={fagsak as Fagsak}
+            valgtBehandling={valgtBehandling}
+            setBeslutterForData={() => undefined}
+          />
+        </Router>
       </RestApiMock>,
     );
 
-    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
+    expect(await screen.findByText('Kontroller endrede opplysninger og faglige vurderinger')).toBeInTheDocument();
 
-    // const index = wrapper.find(TotrinnskontrollSakIndex);
+    userEvent.click(screen.getByText('Send til saksbehandler'));
 
-    // expect(wrapper.find(BeslutterModalIndex)).toHaveLength(0);
-
-    // const submit = index.prop('onSubmit') as (params: any) => void;
-    // submit({
-    //   fatterVedtakAksjonspunktDto: {
-    //     '@type': '5016',
-    //     aksjonspunktGodkjenningDtos: [],
-    //     begrunnelse: null,
-    //   },
-    // });
-
-    // const reqData = requestApi.getRequestMockData(FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT.name);
-    // expect(reqData).toHaveLength(1);
-    // expect(reqData[0].params).toEqual({
-    //   behandlingUuid: '1234',
-    //   saksnummer: '1',
-    //   behandlingVersjon: 123,
-    //   bekreftedeAksjonspunktDtoer: [{
-    //     '@type': '5016',
-    //     aksjonspunktGodkjenningDtos: [],
-    //     begrunnelse: null,
-    //   }],
-    // });
-
-    // expect(wrapper.find(BeslutterModalIndex)).toHaveLength(1);
+    await waitFor(() => expect(axiosMock.history.get
+      .find((a) => a.url === FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT.name)?.params).toStrictEqual({
+      behandlingUuid: '1234',
+      saksnummer: '1',
+      behandlingVersjon: 123,
+      bekreftedeAksjonspunktDtoer: [{
+        '@type': '5016',
+        aksjonspunktGodkjenningDtos: [
+          {
+            aksjonspunktKode: '5027',
+            arsaker: [],
+            begrunnelse: undefined,
+            godkjent: undefined,
+          },
+          {
+            aksjonspunktKode: '5001',
+            arsaker: [],
+            begrunnelse: undefined,
+            godkjent: undefined,
+          },
+          {
+            aksjonspunktKode: '7002',
+            arsaker: [],
+            begrunnelse: undefined,
+            godkjent: undefined,
+          },
+          {
+            aksjonspunktKode: '5008',
+            arsaker: [],
+            begrunnelse: undefined,
+            godkjent: undefined,
+          },
+          {
+            aksjonspunktKode: '5011',
+            arsaker: [],
+            begrunnelse: undefined,
+            godkjent: undefined,
+          },
+          {
+            aksjonspunktKode: '5014',
+            arsaker: [],
+            begrunnelse: undefined,
+            godkjent: undefined,
+          },
+          {
+            aksjonspunktKode: '5013',
+            arsaker: [],
+            begrunnelse: undefined,
+            godkjent: undefined,
+          },
+        ],
+        begrunnelse: null,
+      }],
+    }));
   });
 });
