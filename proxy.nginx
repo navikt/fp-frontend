@@ -74,26 +74,9 @@ server {
       open_file_cache_errors off;
   }
 
-  # Just slap frontend directly to the prefix
-  location / {
-
-    expires                 $expires;
-    etag                    on;
-    if_modified_since       off;
-    sendfile                on;
-
-    add_header              X-Content-Type-Options "nosniff";
-    add_header              X-XSS-Protection "1;mode=block";
-    add_header              Strict-Transport-Security "max-age=31536000";
-
-    # beholder default root slik at vi kan swappe ut med stock nginx
-    index  index.html index.htm;
-    try_files $uri @rewrites;
-  }
-
-  location  "/fpsak/" {
+  location /fpsak/api/ {
     proxy_set_header Host	$http_host;
-    proxy_pass "${APP_URL}";
+    proxy_pass "${APP_URL}/fpsak/api/";
     proxy_intercept_errors on;
     error_page 401 = @401_json;
     error_page 403 = @403_json;
@@ -101,12 +84,39 @@ server {
     error_page 504 = @504_json;
   }
 
-  location /fpsak/api/ {
-    proxy_pass "${APP_URL_FPSAK}/fpsak/api/";
+  location /fpformidling/api/ {
+    proxy_set_header Host	$http_host;
+    proxy_pass "${$APP_URL_FPFORMIDLING}/fpformidling/api/";
+    proxy_intercept_errors on;
+    error_page 401 = @401_json;
+    error_page 403 = @403_json;
+    error_page 404 = @404_json;
+    error_page 504 = @504_json;
   }
-  # Simple Proxy to backend
-  location /fpsak/formidling/ {
-    # proxy_pass "http://fpformidling/fpsak/formidling/";
+
+  location /fpoppdrag/api/ {
+    proxy_set_header Host	$http_host;
+    proxy_pass "${$APP_URL_FPOPPDRAG}/fpoppdrag/api/";
+    proxy_intercept_errors on;
+    error_page 401 = @401_json;
+    error_page 403 = @403_json;
+    error_page 404 = @404_json;
+    error_page 504 = @504_json;
+  }
+
+  location /fptilbake/api/ {
+    proxy_set_header Host	$http_host;
+    proxy_pass "${$APP_URL_FPTILBAKE}/fptilbake/api/";
+    proxy_intercept_errors on;
+    error_page 401 = @401_json;
+    error_page 403 = @403_json;
+    error_page 404 = @404_json;
+    error_page 504 = @504_json;
+  }
+
+  location /fpsak/resource/ {
+    proxy_set_header Host	$http_host;
+    proxy_pass "${APP_URL}/fpsak/resource/";
   }
 
   # If no asset matches, send it to your javascript app. Hopefully it's a route in the app!
@@ -133,5 +143,22 @@ server {
   location @504_json {
     default_type application/json;
     return 504 '{"feilmelding":"Timet ut","type":"GENERELL_FEIL"}';
+  }
+
+  # If no asset matches, send it to your javascript app. Hopefully it's a route in the app!
+  location / {
+
+    expires                 $expires;
+    etag                    on;
+    if_modified_since       off;
+    sendfile                on;
+
+    add_header              X-Content-Type-Options "nosniff";
+    add_header              X-XSS-Protection "1;mode=block";
+    add_header              Strict-Transport-Security "max-age=31536000";
+
+    # beholder default root slik at vi kan swappe ut med stock nginx
+    index  index.html index.htm;
+    try_files $uri @rewrites;
   }
 }
