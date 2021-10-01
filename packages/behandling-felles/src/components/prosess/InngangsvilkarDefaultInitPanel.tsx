@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 
 import { RestApiHooks, RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { AbstractRequestApi, RestKey } from '@fpsak-frontend/rest-api';
+import { RequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import { StandardProsessPanelProps } from '@fpsak-frontend/types';
 
@@ -14,7 +14,7 @@ import useInngangsvilkarRegistrerer from '../../utils/prosess/useInngangsvilkarR
 
 export type OwnProps<INIT_DATA, PANEL_DATA> = {
   behandlingVersjon: number;
-  requestApi: AbstractRequestApi;
+  requestApi: RequestApi;
   initEndepunkter: RestKey<any, any>[];
   panelEndepunkter?: RestKey<any, any>[];
   aksjonspunktKoder?: string[];

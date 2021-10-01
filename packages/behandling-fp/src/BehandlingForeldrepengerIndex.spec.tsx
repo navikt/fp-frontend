@@ -1,49 +1,59 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
-import { BehandlingContainer } from '@fpsak-frontend/behandling-felles';
 import { AksessRettigheter, AlleKodeverk, Fagsak } from '@fpsak-frontend/types';
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 
 import BehandlingForeldrepengerIndex from './BehandlingForeldrepengerIndex';
 import { requestFpApi, FpBehandlingApiKeys } from './data/fpBehandlingApi';
 
-jest.mock('@fpsak-frontend/behandling-felles', () => {
-  const felles = jest.requireActual('@fpsak-frontend/behandling-felles');
-  return {
-    ...felles,
-    useBehandling: () => ({
-      behandling: {
-        uuid: 'test-uuid',
-        versjon: 1,
-      },
-    }),
-  };
-});
-
 describe('<BehandlingForeldrepengerIndex>', () => {
-  it('skal rendre korrekt', () => {
-    requestFpApi.mock(FpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT.name, {});
-    requestFpApi.mock(FpBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT.name, {});
+  it('skal rendre korrekt', async () => {
+    const data = [
+      {
+        key: FpBehandlingApiKeys.BEHANDLING_FP.name,
+        data: {
+          behandling: {
+            uuid: 'test-uuid',
+            versjon: 1,
+            status: {
+              kode: behandlingStatus.OPPRETTET,
+              kodeverk: '',
+            },
+          },
+        },
+      },
+      { key: FpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT.name, data: {} },
+      { key: FpBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT.name, data: {} },
+      { key: FpBehandlingApiKeys.PREVIEW_MESSAGE.name, data: undefined },
+    ];
 
-    const wrapper = shallow(<BehandlingForeldrepengerIndex
-      behandlingEventHandler={{
-        setHandler: () => {},
-        clear: () => {},
-      }}
-      behandlingUuid="1"
-      oppdaterBehandlingVersjon={() => {}}
-      kodeverk={{} as AlleKodeverk}
-      fagsak={{} as Fagsak}
-      rettigheter={{} as AksessRettigheter}
-      oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
-      valgtProsessSteg="default"
-      valgtFaktaSteg="default"
-      opneSokeside={() => {}}
-      setRequestPendingMessage={() => {}}
-    />);
+    render(
+      <RestApiMock data={data} requestApi={requestFpApi}>
+        <BehandlingForeldrepengerIndex
+          behandlingEventHandler={{
+            setHandler: () => {},
+            clear: () => {},
+          }}
+          behandlingUuid="test-uuid"
+          oppdaterBehandlingVersjon={() => {}}
+          kodeverk={{} as AlleKodeverk}
+          fagsak={{} as Fagsak}
+          rettigheter={{
+            writeAccess: {
+              isEnabled: true,
+            },
+          } as AksessRettigheter}
+          oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
+          valgtProsessSteg="default"
+          valgtFaktaSteg="default"
+          opneSokeside={() => {}}
+          setRequestPendingMessage={() => {}}
+        />
+      </RestApiMock>,
+    );
 
-    const panel = wrapper.find(BehandlingContainer);
-
-    expect(panel).toHaveLength(1);
+    expect(await screen.findByText('Venfter...')).toBeInTheDocument();
   });
 });

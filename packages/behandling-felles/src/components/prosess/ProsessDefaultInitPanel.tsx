@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 
 import { RestApiHooks, RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { AbstractRequestApi, RestKey } from '@fpsak-frontend/rest-api';
+import { RequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import StandardProsessPanelProps from '@fpsak-frontend/types/src/standardProsessPanelPropsTsType';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 
@@ -15,7 +15,7 @@ import ProsessPanelWrapper from './ProsessPanelWrapper';
 const DEFAULT_INIT_DATA = {};
 
 export type OwnProps<INIT_DATA, PANEL_DATA> = {
-  requestApi: AbstractRequestApi;
+  requestApi: RequestApi;
   initEndepunkter: RestKey<any, any>[] | { key: RestKey<INIT_DATA, any>, params?: any }[];
   panelEndepunkter?: RestKey<any, any>[] | { key: RestKey<any, any>, params?: any }[];
   aksjonspunktKoder?: string[];

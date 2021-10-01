@@ -4,7 +4,7 @@ import {
 
 import { Behandling, Kodeverk } from '@fpsak-frontend/types';
 import { RestApiHooks, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
-import { AbstractRequestApi, RestKey } from '@fpsak-frontend/rest-api';
+import { RequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { usePrevious } from '@fpsak-frontend/shared-components';
 
 import { BehandlingEventHandler } from '../types/standardBehandlingProps';
@@ -20,7 +20,7 @@ export type NyBehandlendeEnhetParams = {
 }
 
 export const useInitRequestApi = (
-  requestApi: AbstractRequestApi,
+  requestApi: RequestApi,
   setRequestPendingMessage: (message?: string) => void,
 ): void => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
@@ -56,7 +56,7 @@ const useOppdaterFagsak = (
 };
 
 export const useBehandling = (
-  requestApi: AbstractRequestApi,
+  requestApi: RequestApi,
   behandlingKey: RestKey<Behandling, { behandlingUuid: string }>,
   behandlingUuid: string,
   oppdaterBehandlingVersjon?: (versjon: number) => void,
@@ -94,7 +94,7 @@ export const useBehandling = (
 };
 
 export const useLagreAksjonspunkt = (
-  requestApi: AbstractRequestApi,
+  requestApi: RequestApi,
   setBehandling: (behandling: Behandling) => void,
   lagreAksjonspunktKey: RestKey<Behandling, any>,
   lagreOverstyrtyAksjonspunktKey?: RestKey<Behandling, any>,
@@ -123,7 +123,7 @@ const leggTilBehandlingIdentifikator = (behandling: Behandling, params: any) => 
 });
 
 export const useInitBehandlingHandlinger = (
-  requestApi: AbstractRequestApi,
+  requestApi: RequestApi,
   keys: Record<string, RestKey<any, any>>,
   behandlingEventHandler: BehandlingEventHandler,
   hentBehandling: (keepData: boolean) => Promise<Behandling | undefined>,

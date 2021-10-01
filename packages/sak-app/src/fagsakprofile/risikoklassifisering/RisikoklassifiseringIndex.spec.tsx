@@ -1,5 +1,7 @@
 import React from 'react';
 import sinon, { SinonStub } from 'sinon';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
@@ -58,16 +60,17 @@ describe('<RisikoklassifiseringIndex>', () => {
 
     render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <RisikoklassifiseringIndex
-          fagsak={fagsak as Fagsak}
-          alleBehandlinger={[behandling] as Behandling[]}
-          kontrollresultat={lagRisikoklassifisering(kontrollresultatKode.HOY)}
-          behandlingVersjon={1}
-          behandlingUuid="1"
-        />
+        <Router history={createMemoryHistory()}>
+          <RisikoklassifiseringIndex
+            fagsak={fagsak as Fagsak}
+            alleBehandlinger={[behandling] as Behandling[]}
+            kontrollresultat={lagRisikoklassifisering(kontrollresultatKode.HOY)}
+            behandlingVersjon={1}
+            behandlingUuid="1"
+          />
+        </Router>
       </RestApiMock>,
     );
-
-    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
+    expect(await screen.findByText('Faresignaler oppdaget')).toBeInTheDocument();
   });
 });

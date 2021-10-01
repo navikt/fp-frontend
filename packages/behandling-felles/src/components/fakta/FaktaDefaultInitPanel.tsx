@@ -4,7 +4,7 @@ import React, {
 
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import StandardFaktaPanelProps from '@fpsak-frontend/types/src/standardFaktaPanelPropsTsType';
-import { AbstractRequestApi, RestKey } from '@fpsak-frontend/rest-api';
+import { RequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 
 import FaktaPanelInitProps from '../../types/faktaPanelInitProps';
@@ -15,7 +15,7 @@ import FaktaPanelWrapper from './FaktaPanelWrapper';
 const DEFAULT_INIT_DATA = {};
 
 export type OwnProps<INIT_DATA, PANEL_DATA> = {
-  requestApi: AbstractRequestApi;
+  requestApi: RequestApi;
   initEndepunkter: RestKey<any, any>[];
   panelEndepunkter?: RestKey<any, any>[];
   aksjonspunktKoder?: string[];
