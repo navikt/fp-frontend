@@ -22,7 +22,7 @@ map $upstream_http_cache_control $custom_cache_control {
 server {
   listen       "${APP_PORT}";
   server_name  "${APP_HOSTNAME}";
-  root          /usr/share/nginx/html;
+  root          "/usr/share/nginx/html";
 
   # Set some varable for usage in OpenResty modules.
   set $app_baseurl                https://$host;
@@ -74,7 +74,7 @@ server {
       open_file_cache_errors off;
   }
 
-  location /fpsak/api/ {
+  location "/fpsak/api/" {
     proxy_set_header Host	$http_host;
     proxy_pass "${APP_URL}/fpsak/api/";
     proxy_intercept_errors on;
@@ -84,7 +84,7 @@ server {
     error_page 504 = @504_json;
   }
 
-  location /fpformidling/api/ {
+  location "/fpformidling/api/" {
     proxy_set_header Host	$http_host;
     proxy_pass "${$APP_URL_FPFORMIDLING}/fpformidling/api/";
     proxy_intercept_errors on;
@@ -94,7 +94,7 @@ server {
     error_page 504 = @504_json;
   }
 
-  location /fpoppdrag/api/ {
+  location "/fpoppdrag/api/" {
     proxy_set_header Host	$http_host;
     proxy_pass "${$APP_URL_FPOPPDRAG}/fpoppdrag/api/";
     proxy_intercept_errors on;
@@ -114,7 +114,7 @@ server {
     error_page 504 = @504_json;
   }
 
-  location /fpsak/resource/ {
+  location "/fpsak/resource/" {
     proxy_set_header Host	$http_host;
     proxy_pass "${APP_URL}/fpsak/resource/";
   }
@@ -157,7 +157,6 @@ server {
     add_header              X-XSS-Protection "1;mode=block";
     add_header              Strict-Transport-Security "max-age=31536000";
 
-    # beholder default root slik at vi kan swappe ut med stock nginx
     index  index.html index.htm;
     try_files $uri @rewrites;
   }
