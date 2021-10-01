@@ -36,9 +36,7 @@ const useSetBehandlingVedEndring = (
   behandling?: Behandling,
 ): void => {
   useEffect(() => {
-    console.log('6');
     if (behandling) {
-      console.log('7');
       setBehandling(behandling);
     }
   }, [behandling]);
@@ -65,27 +63,22 @@ export const useBehandling = (
 ) => {
   const [behandling, setNyBehandling] = useState<Behandling>();
   const [skalOppdatereFagsakOgBehandling, toggleOppdateringAvFagsakOgBehandling] = useState(true);
-  console.log('1');
+
   const setBehandling = useCallback((nyBehandling) => {
-    console.log('2');
     if (skalOppdatereFagsakOgBehandling) {
-      console.log('3');
       requestApi.resetCache();
       requestApi.setLinks(nyBehandling.links);
       setNyBehandling(nyBehandling);
     }
   }, [skalOppdatereFagsakOgBehandling]);
-  console.log('4');
+
   const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
   const { startRequest: hentBehandling, data: behandlingRes, state: behandlingState } = useRestApiRunner(behandlingKey);
-  console.log(behandlingRes);
-  console.log(behandlingState);
   useSetBehandlingVedEndring(setBehandling, behandlingRes);
 
   const hentBehandlingInklId = useCallback((keepData: boolean) => hentBehandling({ behandlingUuid }, keepData), []);
 
   useEffect(() => {
-    console.log('5');
     hentBehandlingInklId(false);
   }, []);
 

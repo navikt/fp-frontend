@@ -13,6 +13,7 @@ describe('<BehandlingForeldrepengerIndex>', () => {
     const data = [
       {
         key: FpBehandlingApiKeys.BEHANDLING_FP.name,
+        type: 'POST_ASYNC',
         data: {
           uuid: 'test-uuid',
           versjon: 1,
@@ -51,7 +52,6 @@ describe('<BehandlingForeldrepengerIndex>', () => {
         />
       </RestApiMock>,
     );
-
     expect(await screen.findByText('Venfter...')).toBeInTheDocument();
   });
 });
