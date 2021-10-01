@@ -1,13 +1,19 @@
-FROM navikt/nginx-oidc:latest
+FROM nginxinc/nginx-unprivileged:1.21.3-alpine
+
+LABEL org.opencontainers.image.source=https://github.com/navikt/fp-frontend
+
+ADD proxy.nginx /etc/nginx/conf.d/app.conf.template
+ADD start-server.sh /start-server.sh
+
 # FPSAK spesifikk
 ENV APP_DIR="/app" \
 	APP_PATH_PREFIX="/fpsak" \
-	APP_CALLBACK_PATH="/fpsak/cb" \
-	APP_URL_FPTILBAKE="http://fptilbake" \
-	APP_URL_FPOPPDRAG="http://fpoppdrag" \
-	APP_URL_FPSAK="http://fpsak"
-#FPSAK spesifkk
-COPY dist /app/fpsak/
-COPY .deploy/proxy.nginx /nginx/proxy.nginx
+	APP_CALLBACK_PATH="/fpsak/cb"
 
-EXPOSE 9000 443
+#FPSAK spesifkk
+COPY dist /usr/share/nginx/html
+
+EXPOSE 9000
+
+# using bash over sh for better signal-handling
+CMD sh /start-server.sh

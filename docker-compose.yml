@@ -4,9 +4,9 @@ services:
     image: navikt/fp-frontend:latest
     # build: .
     ports:
-      - 9090:9090
+      - 9000:9000
     environment:
-      - APP_PORT=9090
+      - APP_PORT=9000
       - APP_URL_FPSAK=http://host.docker.internal:8080
       - OIDC_HOST_URL=http://host.docker.internal:8060/rest/isso/oauth2
       - OIDC_REDIRECT_URI=http://localhost:9090/fpsak/cb
