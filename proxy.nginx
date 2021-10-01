@@ -75,8 +75,20 @@ server {
   }
 
   # Just slap frontend directly to the prefix
-  location = / {
-      return 301 "${APP_PATH_PREFIX}/";
+  location / {
+
+    expires                 $expires;
+    etag                    on;
+    if_modified_since       off;
+    sendfile                on;
+
+    add_header              X-Content-Type-Options "nosniff";
+    add_header              X-XSS-Protection "1;mode=block";
+    add_header              Strict-Transport-Security "max-age=31536000";
+
+    # beholder default root slik at vi kan swappe ut med stock nginx
+    index  index.html index.htm;
+    try_files $uri @rewrites;
   }
 
   location  "/fpsak/" {
@@ -89,22 +101,17 @@ server {
     error_page 504 = @504_json;
   }
 
-  # To make sure any assets can get through :)
-  location "${APP_PATH_PREFIX}/" {
-      try_files $uri @rewrites;
-  }
-
-    # If no asset matches, send it to your javascript app. Hopefully it's a route in the app!
-  location @rewrites {
-    rewrite ^(.+)$ "${APP_PATH_PREFIX}/index.html" last;
-  }
-
   location /fpsak/api/ {
     proxy_pass "${APP_URL_FPSAK}/fpsak/api/";
   }
   # Simple Proxy to backend
   location /fpsak/formidling/ {
     # proxy_pass "http://fpformidling/fpsak/formidling/";
+  }
+
+  # If no asset matches, send it to your javascript app. Hopefully it's a route in the app!
+  location @rewrites {
+    rewrite ^(.+)$ "${APP_PATH_PREFIX}/index.html" last;
   }
 
   location @401_json {
