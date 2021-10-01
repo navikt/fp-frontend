@@ -75,7 +75,9 @@ class RequestApi {
     return undefined;
   }
 
-  private findLinks = (rel?: string): Link | undefined => Object.values(this.links).flat().find((link) => link.rel === rel);
+  private findLinks = (rel?: string): Link | undefined => (rel
+    ? Object.values(this.links).flat().find((link) => link.rel === rel)
+    : undefined);
 
   public startRequest = async <T, P>(endpointName: string, params?: P, isCachingOn = false): Promise<{ payload: T }> => {
     const endpointConfig = this.endpointConfigList.find((c) => c.name === endpointName);
@@ -96,7 +98,6 @@ class RequestApi {
         return cachedResult;
       }
     }
-
     const apiRestMethod = getMethod(this.httpClientApi, restMethod, endpointConfig.config.isResponseBlob);
     const runner = new RequestRunner(this.httpClientApi, apiRestMethod, href, endpointConfig.config);
     if (this.notificationMapper) {

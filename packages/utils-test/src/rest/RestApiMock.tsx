@@ -11,6 +11,7 @@ interface Props {
     key: string;
     global?: boolean;
     data: any,
+    noRelLink?: boolean,
   }[];
   requestApi: RequestApi;
   errors?: {
