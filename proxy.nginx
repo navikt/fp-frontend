@@ -82,7 +82,7 @@ server {
   }
 
     # If no asset matches, send it to your javascript app. Hopefully it's a route in the app!
-    location @rewrites {
+  location @rewrites {
     rewrite ^(.+)$ "${APP_PATH_PREFIX}/index.html" last;
   }
 
