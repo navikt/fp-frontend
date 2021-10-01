@@ -78,6 +78,8 @@ export const useBehandling = (
   console.log('4');
   const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
   const { startRequest: hentBehandling, data: behandlingRes, state: behandlingState } = useRestApiRunner(behandlingKey);
+  console.log(behandlingRes);
+  console.log(behandlingState);
   useSetBehandlingVedEndring(setBehandling, behandlingRes);
 
   const hentBehandlingInklId = useCallback((keepData: boolean) => hentBehandling({ behandlingUuid }, keepData), []);

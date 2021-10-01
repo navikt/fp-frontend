@@ -14,13 +14,11 @@ describe('<BehandlingForeldrepengerIndex>', () => {
       {
         key: FpBehandlingApiKeys.BEHANDLING_FP.name,
         data: {
-          behandling: {
-            uuid: 'test-uuid',
-            versjon: 1,
-            status: {
-              kode: behandlingStatus.OPPRETTET,
-              kodeverk: '',
-            },
+          uuid: 'test-uuid',
+          versjon: 1,
+          status: {
+            kode: behandlingStatus.OPPRETTET,
+            kodeverk: '',
           },
         },
       },
@@ -53,6 +51,7 @@ describe('<BehandlingForeldrepengerIndex>', () => {
         />
       </RestApiMock>,
     );
+
     expect(await screen.findByText('Venfter...')).toBeInTheDocument();
   });
 });
