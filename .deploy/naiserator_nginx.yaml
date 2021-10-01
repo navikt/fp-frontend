@@ -1,0 +1,66 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: fp-frontend
+  namespace: teamforeldrepenger
+  labels:
+    team: teamforeldrepenger
+  annotations:
+    nais.io/run-as-user: "101" # Fix permissions for nginx
+    nais.io/read-only-file-system: "false" # Fix permissions for nginx
+spec:
+  image: ghcr.io/navikt/fp-frontend:latest
+  port: 9000
+  ingresses:
+     - "https://app-q1.adeo.no/fpsak"
+  sessionAffinity: ClientIP
+  team: teamforeldrepenger
+  liveness:
+    path: /isAlive
+    initialDelay: 20
+    timeout: 1
+    periodSeconds: 5
+    failureThreshold: 10
+  readiness:
+    path: /isReady
+    initialDelay: 20
+    timeout: 1
+  replicas:
+    min: 1
+    max: 2
+    cpuThresholdPercentage: 50
+  resources:
+    limits:
+      cpu: 500m
+      memory: 64Mi
+    requests:
+      cpu: 200m
+      memory: 32Mi
+  vault:
+    enabled: true
+  env:
+    - name: APP_NAME
+      value: fp-frontend
+    - name: APP_PORT
+      value: "9000"
+    - name: APP_URL
+      value: "http://fpsak"
+    - name: APP_URL_FPSAK
+      value: "http://fpsak"
+    - name: APP_URL_FPOPPDRAG
+      value: "http://fpoppdrag"
+    - name: APP_URL_FPTILBAKE
+      value: "http://fptilbake"
+    - name: APP_URL_FPFORMIDLING
+      value: "http://fpformidling"
+#    - name: REDIS_HOST
+#      value: "fpsak-redis.teamforeldrepenger.svc.nais.local"
+#    - name: REDIS_PORT
+#      value: "6379"
+#  envFrom:
+#    - secret: redis-password
+#  accessPolicy:
+#    outbound:
+#      rules:
+#        - application: fpsak-redis
+
