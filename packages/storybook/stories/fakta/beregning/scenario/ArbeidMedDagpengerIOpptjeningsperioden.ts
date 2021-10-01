@@ -48,8 +48,7 @@ export const beregningsgrunnlag = {
       aktiviteterTomDatoMapping: [{
         tom: '2020-01-13',
         aktiviteter: [{
-          arbeidsgiverNavn: 'BEDRIFT AS',
-          arbeidsgiverId: '910909088',
+          arbeidsgiverIdent: '910909088',
           fom: '2019-02-03',
           tom: '2020-02-03',
           arbeidsforholdType: { kode: 'ARBEID', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },

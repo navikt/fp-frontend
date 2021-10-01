@@ -1,16 +1,18 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import { composeStories } from '@storybook/testing-react';
+import * as stories from './InfosiderSakIndex.stories';
 
-import { FormattedMessage } from 'react-intl';
-
-import IngenBehandlingValgtPanel from './IngenBehandlingValgtPanel';
+const { BehandlingErIkkeValgt, BehandlingerFinnesIkke } = composeStories(stories);
 
 describe('<IngenBehandlingValgtPanel>', () => {
-  it('skal rendre korrekt melding', () => {
-    const wrapper1 = shallow(<IngenBehandlingValgtPanel numBehandlinger={0} />);
-    expect(wrapper1.find(FormattedMessage).at(0).prop('id')).toEqual('IngenBehandlingValgtPanel.ZeroBehandlinger');
+  it('skal vise tekst når ingen behandlinger er valgt', async () => {
+    render(<BehandlingErIkkeValgt />);
+    expect(await screen.findByText('Velg behandling')).toBeInTheDocument();
+  });
 
-    const wrapper2 = shallow(<IngenBehandlingValgtPanel numBehandlinger={2} />);
-    expect(wrapper2.find(FormattedMessage).at(0).prop('id')).toEqual('IngenBehandlingValgtPanel.PleaseSelectBehandling');
+  it('skal vise tekst når ingen behandlinger finnes', async () => {
+    render(<BehandlingerFinnesIkke />);
+    expect(await screen.findByText('Ingen behandlinger er opprettet')).toBeInTheDocument();
   });
 });

@@ -1,19 +1,15 @@
 import React from 'react';
-import {
-  EtikettInfo, EtikettAdvarsel, EtikettFokus,
-} from 'nav-frontend-etiketter';
-
-import diskresjonskodeType from '@fpsak-frontend/kodeverk/src/diskresjonskodeType';
-import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { Tooltip } from '@fpsak-frontend/shared-components';
+import { RawIntlProvider } from 'react-intl';
+import { render, screen } from '@testing-library/react';
 import { KjønnkodeEnum } from '@fpsak-frontend/types';
-
+import diskresjonskodeType from '@fpsak-frontend/kodeverk/src/diskresjonskodeType';
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import VisittkortLabels from './VisittkortLabels';
 import messages from '../../i18n/nb_NO.json';
 
 const intlMock = getIntlMock(messages);
 
-describe('<VisittkortLabels>', () => {
+describe('<VisittkortSakIndex>', () => {
   const fagsakPerson = {
     navn: 'Olga Utvikler',
     kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
@@ -21,90 +17,85 @@ describe('<VisittkortLabels>', () => {
     fødselsnummer: '1234567',
   };
 
-  it('skal ikke vise noen etiketter', () => {
-    const wrapper = shallowWithIntl(<VisittkortLabels.WrappedComponent
-      intl={intlMock}
-      fagsakPerson={fagsakPerson}
-      harVerge={false}
-    />, messages);
+  it('skal vise etikett for dødsdato', async () => {
+    render(
+      <RawIntlProvider value={intlMock}>
+        <VisittkortLabels
+          fagsakPerson={{
+            ...fagsakPerson,
+            dodsdato: '2019-01-01',
+          }}
+          harVerge={false}
+        />
+      </RawIntlProvider>,
+    );
 
-    expect(wrapper.find(EtikettInfo)).toHaveLength(0);
+    expect(await screen.findByText('Personen er død')).toBeInTheDocument();
+    expect(screen.getByText('DØD 01.01.2019')).toBeInTheDocument();
   });
 
-  it('skal vise etikett for dødsdato', () => {
-    const wrapper = shallowWithIntl(<VisittkortLabels.WrappedComponent
-      intl={intlMock}
-      fagsakPerson={{
-        ...fagsakPerson,
-        dodsdato: '2019-01-01',
-      }}
-      harVerge={false}
-    />, messages);
+  it('skal vise etikett for kode 6', async () => {
+    render(
+      <RawIntlProvider value={intlMock}>
+        <VisittkortLabels
+          fagsakPerson={{
+            ...fagsakPerson,
+            diskresjonskode: diskresjonskodeType.KODE6,
+          }}
+          harVerge={false}
+        />
+      </RawIntlProvider>,
+    );
 
-    expect(wrapper.find(EtikettInfo)).toHaveLength(1);
-    const tooltip = wrapper.find(Tooltip);
-    expect(tooltip).toHaveLength(1);
-    expect(tooltip.prop('content')).toEqual('Personen er død');
+    expect(await screen.findByText('Personen har diskresjonsmerking kode 6')).toBeInTheDocument();
+    expect(screen.getByText('Kode 6')).toBeInTheDocument();
   });
 
-  it('skal vise etikett for kode 6', () => {
-    const wrapper = shallowWithIntl(<VisittkortLabels.WrappedComponent
-      intl={intlMock}
-      fagsakPerson={{
-        ...fagsakPerson,
-        diskresjonskode: diskresjonskodeType.KODE6,
-      }}
-      harVerge={false}
-    />, messages);
+  it('skal vise etikett for kode 7', async () => {
+    render(
+      <RawIntlProvider value={intlMock}>
+        <VisittkortLabels
+          fagsakPerson={{
+            ...fagsakPerson,
+            diskresjonskode: diskresjonskodeType.KODE7,
+          }}
+          harVerge={false}
+        />
+      </RawIntlProvider>,
+    );
 
-    expect(wrapper.find(EtikettAdvarsel)).toHaveLength(1);
-    const tooltip = wrapper.find(Tooltip);
-    expect(tooltip).toHaveLength(1);
-    expect(tooltip.prop('content')).toEqual('Personen har diskresjonsmerking kode 6');
+    expect(await screen.findByText('Personen har diskresjonsmerking kode 7')).toBeInTheDocument();
+    expect(screen.getByText('Kode 7')).toBeInTheDocument();
   });
 
-  it('skal vise etikett for kode 7', () => {
-    const wrapper = shallowWithIntl(<VisittkortLabels.WrappedComponent
-      intl={intlMock}
-      fagsakPerson={{
-        ...fagsakPerson,
-        diskresjonskode: diskresjonskodeType.KODE7,
-      }}
-      harVerge={false}
-    />, messages);
+  it('skal vise etikett for verge', async () => {
+    render(
+      <RawIntlProvider value={intlMock}>
+        <VisittkortLabels
+          fagsakPerson={fagsakPerson}
+          harVerge
+        />
+      </RawIntlProvider>,
+    );
 
-    expect(wrapper.find(EtikettFokus)).toHaveLength(1);
-    const tooltip = wrapper.find(Tooltip);
-    expect(tooltip).toHaveLength(1);
-    expect(tooltip.prop('content')).toEqual('Personen har diskresjonsmerking kode 7');
+    expect(await screen.findByText('Personen har verge')).toBeInTheDocument();
+    expect(screen.getByText('Verge')).toBeInTheDocument();
   });
 
-  it('skal vise etikett for verge', () => {
-    const wrapper = shallowWithIntl(<VisittkortLabels.WrappedComponent
-      intl={intlMock}
-      fagsakPerson={fagsakPerson}
-      harVerge
-    />, messages);
+  it('skal vise etikett for søker under 18', async () => {
+    render(
+      <RawIntlProvider value={intlMock}>
+        <VisittkortLabels
+          fagsakPerson={{
+            ...fagsakPerson,
+            fødselsdato: '2019-01-01',
+          }}
+          harVerge={false}
+        />
+      </RawIntlProvider>,
+    );
 
-    expect(wrapper.find(EtikettInfo)).toHaveLength(1);
-    const tooltip = wrapper.find(Tooltip);
-    expect(tooltip).toHaveLength(1);
-    expect(tooltip.prop('content')).toEqual('Personen har verge');
-  });
-
-  it('skal vise etikett for søker under 18', () => {
-    const wrapper = shallowWithIntl(<VisittkortLabels.WrappedComponent
-      intl={intlMock}
-      fagsakPerson={{
-        ...fagsakPerson,
-        fødselsdato: '2019-01-01',
-      }}
-      harVerge={false}
-    />, messages);
-
-    expect(wrapper.find(EtikettInfo)).toHaveLength(1);
-    const tooltip = wrapper.find(Tooltip);
-    expect(tooltip).toHaveLength(1);
-    expect(tooltip.prop('content')).toEqual('Personen er under 18 år');
+    expect(await screen.findByText('Personen er under 18 år')).toBeInTheDocument();
+    expect(screen.getByText('Under 18')).toBeInTheDocument();
   });
 });

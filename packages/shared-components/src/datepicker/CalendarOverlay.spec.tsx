@@ -1,116 +1,51 @@
 import React from 'react';
-import DayPicker from 'react-day-picker';
-import sinon from 'sinon';
+import { render, screen } from '@testing-library/react';
+import { RawIntlProvider } from 'react-intl';
+import { createIntl } from '@fpsak-frontend/utils';
 
-import { dateFormat } from '@fpsak-frontend/utils';
-import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import CalendarOverlay from './CalendarOverlay';
 import messages from '../../i18n/nb_NO.json';
+import CalendarOverlay from './CalendarOverlay';
+
+const intl = createIntl(messages);
 
 describe('<CalendarOverlay>', () => {
   it('skal ikke vise overlay når disabled', () => {
-    const wrapper = shallowWithIntl(<CalendarOverlay
-      onDayChange={sinon.spy()}
-      className="test"
-      dayPickerClassName="test"
-      elementIsCalendarButton={sinon.spy()}
-      value="21.08.2017"
-      numberOfMonths={1}
-      disabled
-    />, messages);
+    render(
+      <RawIntlProvider value={intl}>
+        <CalendarOverlay
+          onDayChange={() => undefined}
+          elementIsCalendarButton={() => true}
+          numberOfMonths={1}
+          value="21.08.2017"
+          disabled
+        />
+      </RawIntlProvider>,
+    );
 
-    expect(wrapper.find(DayPicker)).toHaveLength(0);
+    expect(screen.queryByText('02.10.2017')).not.toBeInTheDocument();
   });
 
-  it('skal vise overlay', () => {
-    const wrapper = shallowWithIntl(<CalendarOverlay
-      onDayChange={sinon.spy()}
-      className="test"
-      dayPickerClassName="test"
-      numberOfMonths={1}
-      elementIsCalendarButton={sinon.spy()}
-      value="21.08.2017"
-    />, messages);
+  it('skal vise overlay', async () => {
+    render(
+      <RawIntlProvider value={intl}>
+        <CalendarOverlay
+          onDayChange={() => undefined}
+          elementIsCalendarButton={() => true}
+          numberOfMonths={1}
+          value="21.08.2017"
+        />
+      </RawIntlProvider>,
+    );
 
-    const daypicker = wrapper.find(DayPicker);
-    expect(daypicker).toHaveLength(1);
-    expect(daypicker.prop('months')).toEqual(['Januar', 'Februar', 'Mars', 'April', 'Mai', 'Juni', 'Juli',
-      'August', 'September', 'Oktober', 'November', 'Desember']);
-    expect(daypicker.prop('weekdaysLong')).toEqual(['søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag']);
-    expect(daypicker.prop('weekdaysShort')).toEqual(['søn', 'man', 'tir', 'ons', 'tor', 'fre', 'lør']);
-    expect(daypicker.prop('firstDayOfWeek')).toEqual(1);
-    expect(dateFormat(daypicker.prop('selectedDays') as Date)).toEqual('21.08.2017');
-  });
-
-  it('skal ikke sette dato når denne ikke er korrekt', () => {
-    const onDayChangeCallback = sinon.spy();
-    const date = '21.sd.2017';
-    const wrapper = shallowWithIntl(<CalendarOverlay
-      onDayChange={onDayChangeCallback}
-      className="test"
-      dayPickerClassName="test"
-      numberOfMonths={1}
-      elementIsCalendarButton={sinon.spy()}
-      value={date}
-      onClose={sinon.spy()}
-    />, messages);
-
-    const daypicker = wrapper.find(DayPicker);
-    expect(daypicker.prop('selectedDays')).toBeUndefined();
-  });
-
-  it('skal kjøre callback når overlay blir lukket og target er noe annet enn kalender eller kalenderknapp', () => {
-    const onCloseCallback = () => {
-      expect(true).toBe(true);
-    };
-    const elementIsCalendarButton = () => false;
-    const wrapper = shallowWithIntl(<CalendarOverlay
-      onDayChange={sinon.spy()}
-      className="test"
-      dayPickerClassName="test"
-      numberOfMonths={1}
-      elementIsCalendarButton={elementIsCalendarButton}
-      value="21.08.2017"
-      onClose={onCloseCallback}
-    />, messages);
-
-    // @ts-ignore
-    wrapper.find('div').prop('onBlur')({} as React.FocusEvent);
-  });
-
-  it('skal kjøre callback når en trykker escape-knappen', () => {
-    const onCloseCallback = sinon.spy();
-    const wrapper = shallowWithIntl(<CalendarOverlay
-      onDayChange={sinon.spy()}
-      className="test"
-      dayPickerClassName="test"
-      numberOfMonths={1}
-      elementIsCalendarButton={sinon.spy()}
-      value="21.08.2017"
-      onClose={onCloseCallback}
-    />, messages);
-
-    // @ts-ignore
-    wrapper.find('div').prop('onKeyDown')({ key: 'Escape' } as React.KeyboardEvent<any>);
-
-    expect(onCloseCallback.called).toBe(true);
-  });
-
-  it('skal ikke kjøre callback når en trykker noe annet enn escape-knappen', () => {
-    const onCloseCallback = sinon.spy();
-    const wrapper = shallowWithIntl(<CalendarOverlay
-      onDayChange={sinon.spy()}
-      className="test"
-      dayPickerClassName="test"
-      numberOfMonths={1}
-      elementIsCalendarButton={sinon.spy()}
-      value="21.08.2017"
-      onClose={onCloseCallback}
-    />, messages);
-
-    // @ts-ignore
-    wrapper.find('div').prop('onKeyDown')({ keyCode: 20 } as React.KeyboardEvent<any>);
-
-    expect(onCloseCallback.called).toBe(false);
+    expect(await screen.findByText('August 2017')).toBeInTheDocument();
+    expect(screen.getByText('man')).toBeInTheDocument();
+    expect(screen.getByText('tir')).toBeInTheDocument();
+    expect(screen.getByText('ons')).toBeInTheDocument();
+    expect(screen.getByText('tor')).toBeInTheDocument();
+    expect(screen.getByText('fre')).toBeInTheDocument();
+    expect(screen.getByText('lør')).toBeInTheDocument();
+    expect(screen.getByText('søn')).toBeInTheDocument();
+    expect(screen.getByText('1')).toBeInTheDocument();
+    expect(screen.getByText('31')).toBeInTheDocument();
   });
 });

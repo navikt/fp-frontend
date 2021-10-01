@@ -48,7 +48,7 @@ const FagsakSearchIndex: FunctionComponent = () => {
       fagsaker={fagsaker}
       searchFagsakCallback={searchFagsaker}
       searchResultReceived={sokFerdig}
-      selectFagsakCallback={(e, saksnummer: string) => goToFagsak(saksnummer)}
+      selectFagsakCallback={(e: React.SyntheticEvent, saksnummer?: string) => goToFagsak(saksnummer)}
       searchStarted={sokeStatus === RestApiState.LOADING}
       searchResultAccessDenied={searchResultAccessDenied}
       alleKodeverk={alleKodeverk}

@@ -19,14 +19,14 @@ const getRelatedTarget = (e: React.FocusEvent): Promise<any> => {
 
 interface OwnProps {
   onDayChange: (selectedDay: Date) => void;
-  className: string;
-  dayPickerClassName: string;
+  className?: string;
+  dayPickerClassName?: string;
   elementIsCalendarButton: (target: EventTarget) => boolean;
   value?: string;
   disabled?: boolean;
   onClose?: () => void;
   initialMonth?: Date;
-  numberOfMonths: number;
+  numberOfMonths?: number;
   disabledDays?: Modifier | Modifier[];
 }
 

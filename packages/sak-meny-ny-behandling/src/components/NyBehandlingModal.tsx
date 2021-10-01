@@ -72,7 +72,7 @@ export const getBehandlingAarsaker = (
   ytelseType: Kodeverk,
   alleRevurderingArsaker: KodeverkMedNavn[],
   alleTilbakekrevingRevurderingArsaker: KodeverkMedNavn[],
-  valgtBehandlingType: string,
+  valgtBehandlingType?: string,
 ): KodeverkMedNavn[] => {
   if (valgtBehandlingType === bType.TILBAKEKREVING_REVURDERING) {
     return TilbakekrevingRevurderingArsaker

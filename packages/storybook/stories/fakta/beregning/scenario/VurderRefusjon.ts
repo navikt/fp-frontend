@@ -6,6 +6,7 @@ export const bgUtenDelvisRefusjon = {
   grunnbeløp: null,
   erOverstyrtInntekt: null,
   skjæringstidspunkt: '2020-05-15',
+  beregningsgrunnlagPeriode: [],
   refusjonTilVurdering: {
     andeler: [
       {
@@ -37,6 +38,7 @@ export const bgMedDelvisRefusjon = {
   dekningsgrad: null,
   grunnbeløp: null,
   erOverstyrtInntekt: null,
+  beregningsgrunnlagPeriode: [],
   refusjonTilVurdering: {
     andeler: [
       {

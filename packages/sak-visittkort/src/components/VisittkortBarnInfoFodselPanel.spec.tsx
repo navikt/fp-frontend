@@ -1,11 +1,9 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-
+import { RawIntlProvider } from 'react-intl';
+import { render, screen } from '@testing-library/react';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
-import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-
+import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import VisittkortBarnInfoFodselPanel from './VisittkortBarnInfoFodselPanel';
-
 import messages from '../../i18n/nb_NO.json';
 
 const intlMock = getIntlMock(messages);
@@ -21,73 +19,73 @@ describe('<VisittkortBarnInfoFodselPanel>', () => {
     dødfødsel: false,
   };
 
-  it('skal vise termindato', () => {
-    const wrapper = shallowWithIntl(<VisittkortBarnInfoFodselPanel.WrappedComponent
-      intl={intlMock}
-      familiehendelse={familiehendelse}
-    />, messages);
+  it('skal vise termindato', async () => {
+    render(
+      <RawIntlProvider value={intlMock}>
+        <VisittkortBarnInfoFodselPanel
+          familiehendelse={familiehendelse}
+        />
+      </RawIntlProvider>,
+    );
 
-    const message = wrapper.find(FormattedMessage);
-    expect(message).toHaveLength(1);
-    expect(message.prop('id')).toEqual('VisittkortBarnInfoFodselPanel.Termin');
-    expect(message.prop('values')).toEqual({
-      dato: '21.01.2020',
-    });
+    expect(await screen.findByText('Termin 21.01.2020')).toBeInTheDocument();
   });
 
-  it('skal vise fødselsdato', () => {
-    const wrapper = shallowWithIntl(<VisittkortBarnInfoFodselPanel.WrappedComponent
-      intl={intlMock}
-      familiehendelse={{
-        ...familiehendelse,
-        hendelseType: {
-          kode: familieHendelseType.FODSEL,
-          kodeverk: '',
-        },
-      }}
-    />, messages);
+  it('skal vise fødselsdato', async () => {
+    render(
+      <RawIntlProvider value={intlMock}>
+        <VisittkortBarnInfoFodselPanel
+          familiehendelse={{
+            ...familiehendelse,
+            hendelseType: {
+              kode: familieHendelseType.FODSEL,
+              kodeverk: '',
+            },
+          }}
+        />
+      </RawIntlProvider>,
+    );
 
-    const message = wrapper.find(FormattedMessage);
-    expect(message).toHaveLength(2);
-    expect(message.first().prop('id')).toEqual('VisittkortBarnInfoFodselPanel.Fodt');
-    expect(message.first().prop('values')).toEqual({
-      dato: '21.01.2020',
-    });
+    expect(await screen.findByText(/Født 21.01.2020/)).toBeInTheDocument();
+    expect(screen.getByText(/(1 år)/)).toBeInTheDocument();
   });
 
-  it('skal etikett for dødfødt barn', () => {
-    const wrapper = shallowWithIntl(<VisittkortBarnInfoFodselPanel.WrappedComponent
-      intl={intlMock}
-      familiehendelse={{
-        ...familiehendelse,
-        hendelseType: {
-          kode: familieHendelseType.FODSEL,
-          kodeverk: '',
-        },
-        dødfødsel: true,
-      }}
-    />, messages);
+  it('skal etikett for dødfødt barn', async () => {
+    render(
+      <RawIntlProvider value={intlMock}>
+        <VisittkortBarnInfoFodselPanel
+          familiehendelse={{
+            ...familiehendelse,
+            hendelseType: {
+              kode: familieHendelseType.FODSEL,
+              kodeverk: '',
+            },
+            dødfødsel: true,
+          }}
+        />
+      </RawIntlProvider>,
+    );
 
-    const message = wrapper.find(FormattedMessage);
-    expect(message).toHaveLength(2);
-    expect(message.last().prop('id')).toEqual('VisittkortBarnInfoFodselPanel.Dod');
+    expect(await screen.findByText('Født 21.01.2020')).toBeInTheDocument();
+    expect(screen.getByText('DØD')).toBeInTheDocument();
   });
 
-  it('skal vise manglende fødselsopplysninger når antall barn er 0 og det mangler fødselsdato', () => {
-    const wrapper = shallowWithIntl(<VisittkortBarnInfoFodselPanel.WrappedComponent
-      intl={intlMock}
-      familiehendelse={{
-        hendelseType: {
-          kode: familieHendelseType.FODSEL,
-          kodeverk: '',
-        },
-        antallBarn: 0,
-        dødfødsel: false,
-      }}
-    />, messages);
+  it('skal vise manglende fødselsopplysninger når antall barn er 0 og det mangler fødselsdato', async () => {
+    render(
+      <RawIntlProvider value={intlMock}>
+        <VisittkortBarnInfoFodselPanel
+          familiehendelse={{
+            hendelseType: {
+              kode: familieHendelseType.FODSEL,
+              kodeverk: '',
+            },
+            antallBarn: 0,
+            dødfødsel: false,
+          }}
+        />
+      </RawIntlProvider>,
+    );
 
-    const message = wrapper.find(FormattedMessage);
-    expect(message).toHaveLength(1);
-    expect(message.last().prop('id')).toEqual('VisittkortBarnInfoFodselPanel.ManglerFodselOpplysninger');
+    expect(await screen.findByText('Har ikke opplysninger om fødsel')).toBeInTheDocument();
   });
 });

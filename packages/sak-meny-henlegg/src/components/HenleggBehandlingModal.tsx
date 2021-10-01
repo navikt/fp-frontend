@@ -55,7 +55,7 @@ const disableHovedKnapp = (
   return !(årsakKode && begrunnelse);
 };
 
-const getShowLink = (arsakKode: string, fritekst: string, behandlingType): boolean => {
+const getShowLink = (behandlingType: Kodeverk, arsakKode?: string, fritekst?: string): boolean => {
   if (behandlingType.kode === BehandlingType.TILBAKEKREVING) {
     return behandlingResultatType.HENLAGT_FEILOPPRETTET === arsakKode;
   }
@@ -67,7 +67,7 @@ const getShowLink = (arsakKode: string, fritekst: string, behandlingType): boole
     behandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
     behandlingResultatType.HENLAGT_KLAGE_TRUKKET,
     behandlingResultatType.HENLAGT_INNSYN_TRUKKET,
-  ].includes(arsakKode);
+  ].includes(arsakKode || '');
 };
 
 const henleggArsakerPerBehandlingType = {
@@ -133,7 +133,7 @@ const HenleggBehandlingModal: FunctionComponent<PureOwnProps> = ({
   const begrunnelse = formMethods.watch('begrunnelse');
   const fritekst = formMethods.watch('fritekst');
 
-  const showLink = getShowLink(årsakKode, fritekst, behandlingType);
+  const showLink = getShowLink(behandlingType, årsakKode, fritekst);
 
   const henleggArsaker = useMemo(() => getHenleggArsaker(behandlingResultatTyper, behandlingType, ytelseType),
     [behandlingResultatTyper, behandlingType, ytelseType]);

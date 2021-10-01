@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { NedChevron, OppChevron } from 'nav-frontend-chevron';
 
 import styles from './bubbleText.less';
@@ -22,11 +22,11 @@ interface OwnProps {
  * <BubbleText bodyText={tekst} cutOffLength={70} />
  * ```
  */
-const BubbleText: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const BubbleText: FunctionComponent<OwnProps> = ({
   cutOffLength = 83,
   bodyText = '',
 }) => {
+  const intl = useIntl();
   const [expanded, setExpanded] = useState(false);
 
   const handleOnClick = useCallback(() => setExpanded((prevState) => !prevState), []);
@@ -63,4 +63,4 @@ const BubbleText: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   );
 };
 
-export default injectIntl(BubbleText);
+export default BubbleText;

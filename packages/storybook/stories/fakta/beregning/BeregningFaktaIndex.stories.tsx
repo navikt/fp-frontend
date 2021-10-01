@@ -90,7 +90,6 @@ const lagAndel = (andelsnr: number, aktivitetStatus: string, inntektskategori: s
 
 const standardFaktaArbeidstakerAndel = {
   ...lagAndel(1, aktivitetStatuser.ARBEIDSTAKER, inntektskategorier.ARBEIDSTAKER),
-  visningsnavn: 'Bedriften (12345678)',
   belopReadOnly: 30000,
   lagtTilAvSaksbehandler: false,
   arbeidsforhold: {
@@ -103,7 +102,6 @@ const standardFaktaArbeidstakerAndel = {
 };
 const standardFaktaArbeidstakerAndel2 = {
   ...lagAndel(4, aktivitetStatuser.ARBEIDSTAKER, inntektskategorier.ARBEIDSTAKER),
-  visningsnavn: 'Bedriften2 (12345679)',
   belopReadOnly: 30000,
   lagtTilAvSaksbehandler: false,
   arbeidsforhold: {
@@ -117,7 +115,6 @@ const standardFaktaArbeidstakerAndel2 = {
 };
 const tidsbegrensetFaktaArbeidstakerAndel = {
   ...lagAndel(6, aktivitetStatuser.ARBEIDSTAKER, inntektskategorier.ARBEIDSTAKER),
-  visningsnavn: 'Bedriften3 (12345671)',
   belopReadOnly: 30000,
   lagtTilAvSaksbehandler: false,
   arbeidsforhold: {
@@ -131,7 +128,6 @@ const tidsbegrensetFaktaArbeidstakerAndel = {
 };
 const etterlønnSluttpakkeFaktaArbeidstakerAndel = {
   ...lagAndel(7, aktivitetStatuser.ARBEIDSTAKER, inntektskategorier.ARBEIDSTAKER),
-  visningsnavn: 'Bedriften4 (795349533)',
   belopReadOnly: 30000,
   lagtTilAvSaksbehandler: false,
   arbeidsforhold: {
@@ -144,37 +140,31 @@ const etterlønnSluttpakkeFaktaArbeidstakerAndel = {
 };
 const standardFaktaDagpengerAndel = {
   ...lagAndel(3, aktivitetStatuser.DAGPENGER, inntektskategorier.DAGPENGER),
-  visningsnavn: 'Dagpenger',
   belopReadOnly: 30000,
   lagtTilAvSaksbehandler: false,
 };
 const standardFaktaFrilansAndel = {
   ...lagAndel(2, aktivitetStatuser.FRILANSER, inntektskategorier.FRILANSER),
-  visningsnavn: 'Frilans',
   belopReadOnly: 10000,
   lagtTilAvSaksbehandler: false,
 };
 const standardFaktaMilitærAndel = {
   ...lagAndel(5, aktivitetStatuser.MILITAER_ELLER_SIVIL, inntektskategorier.ARBEIDSTAKER),
-  visningsnavn: 'Militær- eller sivilforsvarstjeneste',
   belopReadOnly: 10000,
   lagtTilAvSaksbehandler: false,
 };
 const standardFaktaYtelseAndel = {
   ...lagAndel(8, aktivitetStatuser.KUN_YTELSE, inntektskategorier.UDEFINERT),
-  visningsnavn: 'Ytelse',
   belopReadOnly: 10000,
   lagtTilAvSaksbehandler: false,
 };
 const standardFaktaNæringAndel = {
   ...lagAndel(9, aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE, inntektskategorier.SELVSTENDIG_NÆRINGSDRIVENDE),
-  visningsnavn: 'Selvstendig næringsdrivende',
   belopReadOnly: 10000,
   lagtTilAvSaksbehandler: false,
 };
 const standardFaktaAAPAndel = {
   ...lagAndel(10, aktivitetStatuser.ARBEIDSAVKLARINGSPENGER, inntektskategorier.ARBEIDSAVKLARINGSPENGER),
-  visningsnavn: 'Arbeidsavklaringspenger',
   belopReadOnly: 10000,
   lagtTilAvSaksbehandler: false,
 };
@@ -320,8 +310,7 @@ export const AvklartAktiviteterMedAksjonspunktIFaktaAvklaring = () => {
   ];
   const refusjonskravSomKommerForSentListe = [
     {
-      arbeidsgiverId: standardFaktaArbeidstakerAndel.arbeidsforhold.arbeidsgiverIdent,
-      arbeidsgiverVisningsnavn: standardFaktaArbeidstakerAndel.visningsnavn,
+      arbeidsgiverIdent: standardFaktaArbeidstakerAndel.arbeidsforhold.arbeidsgiverIdent,
     },
   ];
   const faktaOmBeregning = {
@@ -596,8 +585,7 @@ export const KunArbeidstakerMedVurderingSentRefusjonskrav = () => {
   ];
   const refusjonskravSomKommerForSentListe = [
     {
-      arbeidsgiverId: standardFaktaArbeidstakerAndel.arbeidsforhold.arbeidsgiverIdent,
-      arbeidsgiverVisningsnavn: standardFaktaArbeidstakerAndel.visningsnavn,
+      arbeidsgiverIdent: standardFaktaArbeidstakerAndel.arbeidsforhold.arbeidsgiverIdent,
     },
   ];
   const faktaOmBeregning = {
@@ -1148,8 +1136,7 @@ export const KombinasjonstestForFaktapanel = () => {
   ];
   const refusjonskravSomKommerForSentListe = [
     {
-      arbeidsgiverId: standardFaktaArbeidstakerAndel.arbeidsforhold.arbeidsgiverIdent,
-      arbeidsgiverVisningsnavn: standardFaktaArbeidstakerAndel.visningsnavn,
+      arbeidsgiverIdent: standardFaktaArbeidstakerAndel.arbeidsforhold.arbeidsgiverIdent,
     },
   ];
   const vurderMottarYtelse = {
