@@ -53,7 +53,6 @@ describe('<BehandlingForeldrepengerIndex>', () => {
         />
       </RestApiMock>,
     );
-
     expect(await screen.findByText('Venfter...')).toBeInTheDocument();
   });
 });
