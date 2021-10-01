@@ -12,7 +12,7 @@ import BehandlingForeldrepengerIndex from './BehandlingForeldrepengerIndex';
 import { requestFpApi, FpBehandlingApiKeys } from './data/fpBehandlingApi';
 
 describe('<BehandlingForeldrepengerIndex>', () => {
-  it('skal rendre korrekt', async () => {
+  it('skal vise paneler korrekt i prosess og faktameny', async () => {
     const data = [
       {
         key: FpBehandlingApiKeys.BEHANDLING_FP.name,
@@ -53,6 +53,7 @@ describe('<BehandlingForeldrepengerIndex>', () => {
           }}
           behandlingUuid="test-uuid"
           oppdaterBehandlingVersjon={() => {}}
+          // @ts-ignore
           kodeverk={alleKodeverk as AlleKodeverk}
           fagsak={{
             fagsakYtelseType: {
