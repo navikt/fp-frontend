@@ -66,6 +66,7 @@ server {
 
   # Just slap frontend directly to the prefix
   location = / {
+
     expires                 $expires;
     etag                    on;
     if_modified_since       off;
@@ -81,24 +82,24 @@ server {
     root   /usr/share/nginx/html;
     index  index.html index.htm;
     try_files $uri @rewrites;
-    return 301 "${APP_PATH_PREFIX}/";
   }
 
-  # To make sure any assets can get through :)
-  location "${APP_PATH_PREFIX}/" {
-      #access_by_lua_file oidc_protected.lua;
-      try_files $uri @rewrites;
-  }
-  # The Callback path should allways be
-  location "${APP_CALLBACK_PATH}" {
-      # access_by_lua_file oidc_protected.lua;
-  }
   # If no asset matches, send it to your javascript app. Hopefully it's a route in the app!
   location @rewrites {
     rewrite ^(.+)$ "${APP_PATH_PREFIX}/index.html" last;
   }
 
-  location  "/fpsak/api/" {
+  location "/fpsak/" {
+    proxy_set_header Host	$http_host;
+    proxy_pass "${APP_URL_FPSAK}";
+    proxy_intercept_errors on;
+    error_page 401 = @401_json;
+    error_page 403 = @403_json;
+    error_page 404 = @404_json;
+    error_page 504 = @504_json;
+  }
+
+  location "/fpsak/api/" {
     proxy_set_header Host	$http_host;
     proxy_pass "${APP_URL_FPSAK}/fpsak/api/";
     proxy_intercept_errors on;
@@ -108,7 +109,7 @@ server {
     error_page 504 = @504_json;
   }
 
-  location  "/fpformidling/api/" {
+  location "/fpformidling/api/" {
     proxy_set_header Host	$http_host;
     proxy_pass "${APP_URL_FPFORMIDLING}/fpformidling/api/";
     proxy_intercept_errors on;
@@ -118,7 +119,7 @@ server {
     error_page 504 = @504_json;
   }
 
-  location  "/fpoppdrag/api/" {
+  location "/fpoppdrag/api/" {
     proxy_set_header Host	$http_host;
     proxy_pass "${APP_URL_FPOPPDRAG}/fpoppdrag/api/";
     proxy_intercept_errors on;
