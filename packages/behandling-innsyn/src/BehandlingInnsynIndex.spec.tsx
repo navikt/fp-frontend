@@ -28,9 +28,20 @@ describe('<BehandlingInnsynIndex>', () => {
             kode: behandlingType.DOKUMENTINNSYN,
             kodeverk: '',
           },
+          links: [{
+            href: InnsynBehandlingApiKeys.UPDATE_ON_HOLD.name,
+            rel: 'update',
+            type: 'POST',
+          }, {
+            href: InnsynBehandlingApiKeys.AKSJONSPUNKTER.name,
+            rel: 'aksjonspunkter',
+            type: 'GET',
+          }],
         },
       },
       { key: InnsynBehandlingApiKeys.PREVIEW_MESSAGE.name, noRelLink: true, data: undefined },
+      { key: InnsynBehandlingApiKeys.UPDATE_ON_HOLD.name, data: undefined },
+      { key: InnsynBehandlingApiKeys.AKSJONSPUNKTER.name, data: [] },
     ];
 
     render(
@@ -66,11 +77,7 @@ describe('<BehandlingInnsynIndex>', () => {
         />
       </RestApiMock>,
     );
-    expect(await screen.findByText('Beregning')).toBeInTheDocument();
-    expect(screen.getByText('Simulering')).toBeInTheDocument();
+    expect(await screen.findByText('Behandle innsyn')).toBeInTheDocument();
     expect(screen.getByText('Vedtak')).toBeInTheDocument();
-
-    expect(screen.getByText('Fakta om')).toBeInTheDocument();
-    expect(screen.getByText('Saken')).toBeInTheDocument();
   });
 });
