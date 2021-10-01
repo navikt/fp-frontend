@@ -7,16 +7,16 @@ client_body_buffer_size 10M; # Default er satt veldig lavt. Får problemer med e
 
 # Expires map
 map $sent_http_content_type $expires {
-    default                    off;
-    text/html                  epoch;
-    text/css                   max;
-    application/javascript     max;
-    ~image/                    max;
+  default                    off;
+  text/html                  epoch;
+  text/css                   max;
+  application/javascript     max;
+  ~image/                    max;
 }
 
 # Cache-control map
 map $upstream_http_cache_control $custom_cache_control {
-    ''        'no-cache, must-revalidate, proxy-revalidate, max-age=0';
+  default        'no-cache, must-revalidate, proxy-revalidate, max-age=0';
 }
 
 server {
@@ -46,6 +46,8 @@ server {
   add_header              Strict-Transport-Security "max-age=31536000";
 
   add_header              Cache-Control $custom_cache_control;
+
+  expires                 $expires;
 
   proxy_hide_header       Content-Security-Policy;
 
@@ -77,7 +79,7 @@ server {
       return 301 "${APP_PATH_PREFIX}/";
   }
 
-    location  "/fpsak/" {
+  location  "/fpsak/" {
     proxy_set_header Host	$http_host;
     proxy_pass "${APP_URL}";
     proxy_intercept_errors on;
