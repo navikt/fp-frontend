@@ -86,7 +86,7 @@ server {
 
   location "/fpformidling/api/" {
     proxy_set_header Host	$http_host;
-    proxy_pass "${$APP_URL_FPFORMIDLING}/fpformidling/api/";
+    proxy_pass "${APP_URL_FPFORMIDLING}/fpformidling/api/";
     proxy_intercept_errors on;
     error_page 401 = @401_json;
     error_page 403 = @403_json;
@@ -96,7 +96,7 @@ server {
 
   location "/fpoppdrag/api/" {
     proxy_set_header Host	$http_host;
-    proxy_pass "${$APP_URL_FPOPPDRAG}/fpoppdrag/api/";
+    proxy_pass "${APP_URL_FPOPPDRAG}/fpoppdrag/api/";
     proxy_intercept_errors on;
     error_page 401 = @401_json;
     error_page 403 = @403_json;
@@ -104,9 +104,9 @@ server {
     error_page 504 = @504_json;
   }
 
-  location /fptilbake/api/ {
+  location "/fptilbake/api/" {
     proxy_set_header Host	$http_host;
-    proxy_pass "${$APP_URL_FPTILBAKE}/fptilbake/api/";
+    proxy_pass "${APP_URL_FPTILBAKE}/fptilbake/api/";
     proxy_intercept_errors on;
     error_page 401 = @401_json;
     error_page 403 = @403_json;
