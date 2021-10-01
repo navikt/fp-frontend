@@ -11,7 +11,7 @@ ENV APP_DIR="/app" \
 	APP_CALLBACK_PATH="/fpsak/cb"
 
 #FPSAK spesifkk
-COPY dist /usr/share/nginx/html
+COPY dist /usr/share/nginx/html/fpsak
 
 EXPOSE 9000
 
