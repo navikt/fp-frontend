@@ -77,6 +77,16 @@ server {
       return 301 "${APP_PATH_PREFIX}/";
   }
 
+    location  "/fpsak/" {
+    proxy_set_header Host	$http_host;
+    proxy_pass "${APP_URL}";
+    proxy_intercept_errors on;
+    error_page 401 = @401_json;
+    error_page 403 = @403_json;
+    error_page 404 = @404_json;
+    error_page 504 = @504_json;
+  }
+
   # To make sure any assets can get through :)
   location "${APP_PATH_PREFIX}/" {
       try_files $uri @rewrites;
