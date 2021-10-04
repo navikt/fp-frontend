@@ -1,123 +1,108 @@
-import React, { FunctionComponent } from 'react';
-import { shallow } from 'enzyme';
-import sinon from 'sinon';
+import { renderHook } from '@testing-library/react-hooks';
+import { waitFor, act } from '@testing-library/react';
+import MockAdapter from 'axios-mock-adapter';
 
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
 import { Behandling } from '@fpsak-frontend/types';
+import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import { useBehandling, useLagreAksjonspunkt } from './indexHooks';
 
-const HookWrapper: FunctionComponent<{ hook: () => any }> = ({
-  hook,
-// @ts-ignore
-}) => <div hook={hook()} />;
-
 describe('indexHooks', () => {
-  let useEffect: ReturnType<typeof jest.spyOn>;
-
-  const mockUseEffect = () => {
-    useEffect.mockImplementationOnce((f: any) => f());
-  };
-
   const behandlingSomHentes = {
     uuid: '1',
   } as Behandling;
 
-  it('skal hente behandling fra server og returnere behandling m.m.', () => {
+  it('skal hente behandling fra server og returnere behandling m.m.', async () => {
     const BEHANDLING_KEY = new RestKey<Behandling, { behandlingUuid: string }>('BEHANDLING_KEY');
 
-    useEffect = jest.spyOn(React, 'useEffect');
-
     const endpoints = new RestApiConfigBuilder()
-      .withRel('test', BEHANDLING_KEY)
+      .withRel('Behandling', BEHANDLING_KEY)
       .build();
 
-    const requestMock = createRequestApi(endpoints);
-    requestMock.mock(BEHANDLING_KEY.name, behandlingSomHentes);
+    const requestApi = createRequestApi(endpoints);
+    requestApi.setLinks([{
+      href: 'behandling-url',
+      rel: 'Behandling',
+      type: 'GET',
+    }]);
+    const apiMock = new MockAdapter(requestApi.getAxios());
+    apiMock.onGet('behandling-url').replyOnce(200, behandlingSomHentes);
 
-    mockUseEffect();
-    mockUseEffect();
-    mockUseEffect();
-    mockUseEffect();
-    mockUseEffect();
+    const { result, waitForNextUpdate } = renderHook(() => useBehandling(requestApi, BEHANDLING_KEY, '1'));
+    await waitForNextUpdate();
 
-    const wrapper = shallow(<HookWrapper hook={() => useBehandling(requestMock, BEHANDLING_KEY, '1')} />);
-
-    // @ts-ignore
-    const { hook } = wrapper.find('div').props();
-    expect(hook.behandling).toEqual(behandlingSomHentes);
-    expect(hook.behandlingState).toEqual(RestApiState.SUCCESS);
+    expect(result.current.behandling).toEqual(behandlingSomHentes);
+    expect(result.current.behandlingState).toEqual(RestApiState.SUCCESS);
   });
 
-  it('skal lagre aksjonspunkt og så oppdatere behandling', () => {
+  it('skal lagre aksjonspunkt og så oppdatere behandling', async () => {
+    const setBehandling = jest.fn();
     const LAGRE_AKSJONSPUNKT_KEY = new RestKey<Behandling, void>('LAGRE_AKSJONSPUNKT_KEY');
     const LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY = new RestKey<Behandling, void>('LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY');
 
     const endpoints = new RestApiConfigBuilder()
-      .withRel('test1', LAGRE_AKSJONSPUNKT_KEY)
-      .withRel('test2', LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY)
+      .withRel('Aksjonspunkt', LAGRE_AKSJONSPUNKT_KEY)
+      .withRel('OverstyrtAksjonspunkt', LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY)
       .build();
 
-    const requestMock = createRequestApi(endpoints);
+    const requestApi = createRequestApi(endpoints);
+    requestApi.setLinks([{
+      href: 'ap-url',
+      rel: 'Aksjonspunkt',
+      type: 'GET',
+    }, {
+      href: 'oap-url',
+      rel: 'OverstyrtAksjonspunkt',
+      type: 'GET',
+    }]);
+    const apiMock = new MockAdapter(requestApi.getAxios());
+    apiMock.onGet('ap-url').replyOnce(200, behandlingSomHentes);
+    apiMock.onGet('oap-url').replyOnce(200, behandlingSomHentes);
 
-    requestMock.mock(LAGRE_AKSJONSPUNKT_KEY.name, behandlingSomHentes);
-    requestMock.mock(LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY.name);
+    const { result } = renderHook(() => useLagreAksjonspunkt(
+      requestApi, setBehandling, LAGRE_AKSJONSPUNKT_KEY, LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY,
+    ));
 
-    const setBehandling = sinon.spy();
+    await act(async () => {
+      result.current.lagreAksjonspunkter([]);
+    });
 
-    const wrapper = shallow(
-      <HookWrapper hook={() => useLagreAksjonspunkt(
-        requestMock, setBehandling, LAGRE_AKSJONSPUNKT_KEY, LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY,
-      )}
-      />,
-    );
-
-    // @ts-ignore
-    const { hook } = wrapper.find('div').props();
-
-    mockUseEffect();
-
-    hook.lagreAksjonspunkter();
-
-    expect(setBehandling.called).toBe(true);
-    const { args } = setBehandling.getCalls()[0];
-    expect(args).toHaveLength(1);
-    expect(args[0]).toEqual(behandlingSomHentes);
+    await waitFor(() => expect(setBehandling).toHaveBeenCalledTimes(1));
+    expect(setBehandling).toHaveBeenNthCalledWith(1, behandlingSomHentes);
   });
 
-  it('skal lagre overstyrt aksjonspunkt og så oppdatere behandling', () => {
+  it('skal lagre overstyrt aksjonspunkt og så oppdatere behandling', async () => {
+    const setBehandling = jest.fn();
     const LAGRE_AKSJONSPUNKT_KEY = new RestKey<Behandling, void>('LAGRE_AKSJONSPUNKT_KEY');
     const LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY = new RestKey<Behandling, void>('LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY');
 
     const endpoints = new RestApiConfigBuilder()
-      .withRel('test2', LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY)
+      .withRel('Aksjonspunkt', LAGRE_AKSJONSPUNKT_KEY)
+      .withRel('OverstyrtAksjonspunkt', LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY)
       .build();
 
-    const requestMock = createRequestApi(endpoints);
+    const requestApi = createRequestApi(endpoints);
+    requestApi.setLinks([{
+      href: 'ap-url',
+      rel: 'Aksjonspunkt',
+      type: 'GET',
+    }, {
+      href: 'oap-url',
+      rel: 'OverstyrtAksjonspunkt',
+      type: 'GET',
+    }]);
+    const apiMock = new MockAdapter(requestApi.getAxios());
+    apiMock.onGet('ap-url').replyOnce(200, behandlingSomHentes);
+    apiMock.onGet('oap-url').replyOnce(200, behandlingSomHentes);
 
-    requestMock.mock(LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY.name, behandlingSomHentes);
+    const { result } = renderHook(() => useLagreAksjonspunkt(
+      requestApi, setBehandling, LAGRE_AKSJONSPUNKT_KEY, LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY,
+    ));
 
-    const setBehandling = sinon.spy();
+    await result.current.lagreOverstyrteAksjonspunkter([]);
 
-    const wrapper = shallow(
-      <HookWrapper hook={() => useLagreAksjonspunkt(
-        requestMock, setBehandling, LAGRE_AKSJONSPUNKT_KEY, LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY,
-      )}
-      />,
-    );
-
-    // @ts-ignore
-    const { hook } = wrapper.find('div').props();
-
-    mockUseEffect();
-    mockUseEffect();
-
-    hook.lagreOverstyrteAksjonspunkter();
-
-    expect(setBehandling.called).toBe(true);
-    const { args } = setBehandling.getCalls()[0];
-    expect(args).toHaveLength(1);
-    expect(args[0]).toEqual(behandlingSomHentes);
+    await waitFor(() => expect(setBehandling).toHaveBeenCalledTimes(1));
+    expect(setBehandling).toHaveBeenNthCalledWith(1, behandlingSomHentes);
   });
 });

@@ -1,22 +1,20 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import MockAdapter from 'axios-mock-adapter';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import AnkeProsessIndex from '@fpsak-frontend/prosess-anke';
-import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import {
-  Aksjonspunkt, Behandling, Fagsak, StandardProsessPanelProps,
+  Behandling, AlleKodeverk, Fagsak, Aksjonspunkt,
 } from '@fpsak-frontend/types';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import { AnkeVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+import * as Felles from '@fpsak-frontend/behandling-felles/src/utils/prosess/useStandardProsessPanelProps';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import { AnkeBehandlingApiKeys, requestAnkeApi } from '../data/ankeBehandlingApi';
 import AnkeBehandlingProsessStegInitPanel from './AnkeBehandlingProsessStegInitPanel';
-
-type INIT_DATA = {
-  aksjonspunkter: Aksjonspunkt[];
-}
 
 const fagsak = {
   fagsakYtelseType: {
@@ -30,64 +28,87 @@ const behandling = {
   versjon: 1,
 } as Behandling;
 
-jest.mock('@fpsak-frontend/behandling-felles', () => {
-  const felles = jest.requireActual('@fpsak-frontend/behandling-felles');
-  return {
-    ...felles,
-    useStandardProsessPanelProps: () => ({
-      behandling,
-    }),
-  };
-});
-
 const alleBehandlinger = [] as Behandling[];
 
+// @ts-ignore Fiks
+const kodeverk = alleKodeverk as AlleKodeverk;
+
 describe('<AnkeBehandlingProsessStegInitPanel>', () => {
-  it('skal rendre komponent korrekt', () => {
-    const wrapper = shallow(<AnkeBehandlingProsessStegInitPanel
-      valgtProsessSteg="default"
-      registrerProsessPanel={() => {}}
-      fagsak={fagsak}
-      alleBehandlinger={alleBehandlinger}
-      behandling={behandling}
-    />);
+  jest.spyOn(Felles, 'default').mockImplementation(() => ({
+    behandling,
+    alleMerknaderFraBeslutter: {},
+    submitCallback: () => undefined,
+    status: vilkarUtfallType.IKKE_VURDERT,
+    alleKodeverk: kodeverk,
+    isReadOnly: false,
+    readOnlySubmitButton: false,
+    aksjonspunkter: [{
+      definisjon: {
+        kode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
+        kodeverk: '',
+      },
+      erAktivt: true,
+      kanLoses: true,
+    }] as Aksjonspunkt[],
+    vilkar: [],
+    isAksjonspunktOpen: true,
+    setFormData: () => undefined,
+  }));
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
+  it('skal rendre komponent korrekt', async () => {
+    const data = [
+      { key: AnkeBehandlingApiKeys.AKSJONSPUNKTER.name, data: [] },
+      { key: AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING.name, data: undefined },
+    ];
+    render(
+      <RestApiMock data={data} requestApi={requestAnkeApi}>
+        <AnkeBehandlingProsessStegInitPanel
+          valgtProsessSteg="default"
+          registrerProsessPanel={() => {}}
+          fagsak={fagsak}
+          alleBehandlinger={alleBehandlinger}
+          behandling={behandling}
+        />
+      </RestApiMock>,
+    );
 
-    expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
-
-    const innerElement = panel.renderProp('renderPanel')({ behandling }, { aksjonspunkter: [] });
-
-    expect(innerElement.find(AnkeProsessIndex)).toHaveLength(1);
+    expect(await screen.findByText('Ankebehandling')).toBeInTheDocument();
+    expect(screen.getByText('Fastsett resultatet av ankebehandlingen')).toBeInTheDocument();
   });
 
-  it('skal vise forhåndsvisning av melding', () => {
-    requestAnkeApi.mock(AnkeBehandlingApiKeys.PREVIEW_MESSAGE.name, {});
+  it('skal vise forhåndsvisning av melding', async () => {
+    const data = [
+      { key: AnkeBehandlingApiKeys.AKSJONSPUNKTER.name, data: [] },
+      { key: AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING.name, data: undefined },
+      { key: AnkeBehandlingApiKeys.PREVIEW_MESSAGE.name, data: undefined },
+    ];
 
-    const wrapper = shallow(<AnkeBehandlingProsessStegInitPanel
-      valgtProsessSteg="default"
-      registrerProsessPanel={() => {}}
-      fagsak={fagsak}
-      alleBehandlinger={alleBehandlinger}
-      behandling={behandling}
-    />);
+    let axiosMock: MockAdapter;
+    const setApiMock = (mockAdapter: MockAdapter) => { axiosMock = mockAdapter; };
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
+    const utils = render(
+      <RestApiMock data={data} requestApi={requestAnkeApi} setApiMock={setApiMock}>
+        <AnkeBehandlingProsessStegInitPanel
+          valgtProsessSteg="default"
+          registrerProsessPanel={() => {}}
+          fagsak={fagsak}
+          alleBehandlinger={alleBehandlinger}
+          behandling={behandling}
+        />
+      </RestApiMock>,
+    );
 
-    const innerElement = panel.renderProp('renderPanel')({ behandling }, { aksjonspunkter: [] });
+    expect(await screen.findByText('Ankebehandling')).toBeInTheDocument();
 
-    const klageProsessPanel = innerElement.find(AnkeProsessIndex);
-    expect(klageProsessPanel).toHaveLength(1);
+    userEvent.click(screen.getByText('Omgjør'));
 
-    klageProsessPanel.props().previewCallback({
-      fritekst: 'Dette er en fritekst',
-      dokumentMal: 'mal',
-      mottaker: 'Mottaker',
-    });
+    const fritekstInput = utils.getByLabelText('Fritekst til brev');
+    userEvent.type(fritekstInput, 'Dette er en fritekst');
 
-    const response = requestAnkeApi.getRequestMockData(AnkeBehandlingApiKeys.PREVIEW_MESSAGE.name);
-    expect(response).toHaveLength(1);
-    expect(response[0].params).toEqual({
+    userEvent.click(screen.getByText('Forhåndsvis brev'));
+
+    await waitFor(() => expect(axiosMock.history.post
+      .find((a) => a.url === AnkeBehandlingApiKeys.PREVIEW_MESSAGE.name).params).toStrictEqual({
       behandlingUuid: 'test-uuid',
       ytelseType: {
         kode: fagsakYtelseType.FORELDREPENGER,
@@ -96,40 +117,46 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
       fritekst: 'Dette er en fritekst',
       dokumentMal: 'mal',
       mottaker: 'Mottaker',
-    });
+    }));
   });
 
-  it('skal lagre anke-vurdering', () => {
-    requestAnkeApi.mock(AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING.name, {});
+  it('skal lagre anke-vurdering', async () => {
+    const data = [
+      { key: AnkeBehandlingApiKeys.AKSJONSPUNKTER.name, data: [] },
+      { key: AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING.name, data: undefined },
+    ];
 
-    const wrapper = shallow(<AnkeBehandlingProsessStegInitPanel
-      valgtProsessSteg="default"
-      registrerProsessPanel={() => {}}
-      fagsak={fagsak}
-      alleBehandlinger={alleBehandlinger}
-      behandling={behandling}
-    />);
+    let axiosMock: MockAdapter;
+    const setApiMock = (mockAdapter: MockAdapter) => { axiosMock = mockAdapter; };
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
+    const utils = render(
+      <RestApiMock data={data} requestApi={requestAnkeApi} setApiMock={setApiMock}>
+        <AnkeBehandlingProsessStegInitPanel
+          valgtProsessSteg="default"
+          registrerProsessPanel={() => {}}
+          fagsak={fagsak}
+          alleBehandlinger={alleBehandlinger}
+          behandling={behandling}
+        />
+      </RestApiMock>,
+    );
 
-    const innerElement = panel.renderProp('renderPanel')({ behandling }, { aksjonspunkter: [] });
+    expect(await screen.findByText('Ankebehandling')).toBeInTheDocument();
 
-    const klageProsessPanel = innerElement.find(AnkeProsessIndex);
-    expect(klageProsessPanel).toHaveLength(1);
+    const begrunnelseInput = utils.getByLabelText('Begrunnelse');
+    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
-    klageProsessPanel.props().saveAnke({
-      kode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
-      fritekstTilBrev: 'Dette er en fritekst',
-      begrunnelse: 'Dette er en begrunnelse',
-    } as AnkeVurderingResultatAp);
+    const fritekstInput = utils.getByLabelText('Fritekst til brev');
+    userEvent.type(fritekstInput, 'Dette er en fritekst');
 
-    const response = requestAnkeApi.getRequestMockData(AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING.name);
-    expect(response).toHaveLength(1);
-    expect(response[0].params).toEqual({
+    userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(axiosMock.history.get
+      .find((a) => a.url === AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING.name).params).toStrictEqual({
       behandlingUuid: 'test-uuid',
       kode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
       fritekstTilBrev: 'Dette er en fritekst',
       begrunnelse: 'Dette er en begrunnelse',
-    });
+    }));
   });
 });

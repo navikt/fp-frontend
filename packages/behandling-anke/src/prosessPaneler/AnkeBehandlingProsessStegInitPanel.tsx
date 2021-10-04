@@ -22,6 +22,7 @@ const lagForhandsvisCallback = (
   fagsak: Fagsak,
   behandling: Behandling,
 ) => (data: AnkeProsessBrevData) => {
+  console.log('sdafasdfasdfasdf');
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
