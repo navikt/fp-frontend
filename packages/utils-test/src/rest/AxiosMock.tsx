@@ -44,6 +44,7 @@ const AxiosMock: FunctionComponent<Props> = ({
     return () => {
       apiMock.reset();
       requestApi.setLinks([]);
+      requestApi.resetCache();
     };
   });
   return children;
