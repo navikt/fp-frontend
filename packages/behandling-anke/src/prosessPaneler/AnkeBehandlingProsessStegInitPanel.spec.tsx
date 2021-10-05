@@ -34,10 +34,11 @@ const alleBehandlinger = [] as Behandling[];
 const kodeverk = alleKodeverk as AlleKodeverk;
 
 describe('<AnkeBehandlingProsessStegInitPanel>', () => {
+  const submitCallback = jest.fn();
   jest.spyOn(Felles, 'default').mockImplementation(() => ({
     behandling,
     alleMerknaderFraBeslutter: {},
-    submitCallback: () => undefined,
+    submitCallback,
     status: vilkarUtfallType.IKKE_VURDERT,
     alleKodeverk: kodeverk,
     isReadOnly: false,
@@ -80,7 +81,7 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
     const data = [
       { key: AnkeBehandlingApiKeys.AKSJONSPUNKTER.name, data: [] },
       { key: AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING.name, data: undefined },
-      { key: AnkeBehandlingApiKeys.PREVIEW_MESSAGE.name, data: undefined },
+      { key: AnkeBehandlingApiKeys.PREVIEW_MESSAGE.name, noRelLink: true, data: undefined },
     ];
 
     let axiosMock: MockAdapter;
@@ -102,46 +103,45 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
 
     userEvent.click(screen.getByText('Omgjør'));
 
+    const begrunnelseInput = utils.getByLabelText('Begrunnelse');
+    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+
     const fritekstInput = utils.getByLabelText('Fritekst til brev');
     userEvent.type(fritekstInput, 'Dette er en fritekst');
 
     userEvent.click(screen.getByText('Forhåndsvis brev'));
 
-    await waitFor(() => expect(axiosMock.history.post
-      .find((a) => a.url === AnkeBehandlingApiKeys.PREVIEW_MESSAGE.name).params).toStrictEqual({
+    await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
+
+    expect(axiosMock.history.post
+      .find((a) => a.url === '/fpformidling/api/brev/forhaandsvis')?.data).toBe(JSON.stringify({
+      fritekst: 'Dette er en fritekst',
+      mottaker: '',
+      dokumentMal: 'VEDOGA',
       behandlingUuid: 'test-uuid',
       ytelseType: {
         kode: fagsakYtelseType.FORELDREPENGER,
         kodeverk: '',
       },
-      fritekst: 'Dette er en fritekst',
-      dokumentMal: 'mal',
-      mottaker: 'Mottaker',
     }));
   });
 
   it('skal lagre anke-vurdering', async () => {
-    const data = [
-      { key: AnkeBehandlingApiKeys.AKSJONSPUNKTER.name, data: [] },
-      { key: AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING.name, data: undefined },
-    ];
-
-    let axiosMock: MockAdapter;
-    const setApiMock = (mockAdapter: MockAdapter) => { axiosMock = mockAdapter; };
-
     const utils = render(
-      <RestApiMock data={data} requestApi={requestAnkeApi} setApiMock={setApiMock}>
-        <AnkeBehandlingProsessStegInitPanel
-          valgtProsessSteg="default"
-          registrerProsessPanel={() => {}}
-          fagsak={fagsak}
-          alleBehandlinger={alleBehandlinger}
-          behandling={behandling}
-        />
-      </RestApiMock>,
+      <AnkeBehandlingProsessStegInitPanel
+        valgtProsessSteg="default"
+        registrerProsessPanel={() => {}}
+        fagsak={fagsak}
+        alleBehandlinger={alleBehandlinger}
+        behandling={behandling}
+      />,
     );
 
     expect(await screen.findByText('Ankebehandling')).toBeInTheDocument();
+
+    userEvent.selectOptions(utils.getByLabelText('Vedtaket som er anket'), '0');
+
+    userEvent.click(utils.getByLabelText('Stadfest'));
 
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
     userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
@@ -151,12 +151,24 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 
-    await waitFor(() => expect(axiosMock.history.get
-      .find((a) => a.url === AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING.name).params).toStrictEqual({
-      behandlingUuid: 'test-uuid',
-      kode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
-      fritekstTilBrev: 'Dette er en fritekst',
+    await waitFor(() => expect(submitCallback).toHaveBeenCalledTimes(1));
+    expect(submitCallback).toHaveBeenNthCalledWith(1, {
+      ankeOmgjoerArsak: '-',
+      ankeVurdering: {
+        kode: 'ANKE_STADFESTE_YTELSESVEDTAK',
+      },
+      ankeVurderingOmgjoer: '-',
       begrunnelse: 'Dette er en begrunnelse',
-    }));
+      erAnkerIkkePart: false,
+      erFristIkkeOverholdt: false,
+      erGodkjentAvMedunderskriver: undefined,
+      erIkkeKonkret: false,
+      erIkkeSignert: false,
+      erSubsidiartRealitetsbehandles: null,
+      fritekstTilBrev: 'Dette er en fritekst',
+      kode: '5093',
+      påAnketKlageBehandlingUuid: null,
+
+    });
   });
 });
