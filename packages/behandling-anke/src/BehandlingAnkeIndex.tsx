@@ -88,7 +88,6 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & StandardBehandlingProps>
               />
               <AnkeTrygderettsbehandlingProsessStegInitPanel
                 {...props}
-                fagsak={fagsak}
                 opneSokeside={opneSokeside}
                 toggleSkalOppdatereFagsakContext={toggleOppdateringAvFagsakOgBehandling}
                 oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}

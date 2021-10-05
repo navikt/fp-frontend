@@ -7,14 +7,12 @@ import { createIntl } from '@fpsak-frontend/utils';
 import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import TrygderettsbehandlingForm from './components/TrygderettsbehandlingForm';
-import { BrevData } from './components/PreviewAnkeLink';
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
 interface OwnProps {
   ankeVurdering: AnkeVurdering;
-  previewCallback: (data: BrevData) => Promise<any>;
 }
 
 const AnkeTrygderettsbehandlingProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
@@ -24,7 +22,6 @@ const AnkeTrygderettsbehandlingProsessIndex: FunctionComponent<OwnProps & Standa
   submitCallback,
   isReadOnly,
   readOnlySubmitButton,
-  previewCallback,
   alleKodeverk,
   formData,
   setFormData,
@@ -38,7 +35,6 @@ const AnkeTrygderettsbehandlingProsessIndex: FunctionComponent<OwnProps & Standa
         sprakkode={behandling.sprakkode}
         readOnly={isReadOnly}
         readOnlySubmitButton={readOnlySubmitButton}
-        previewCallback={previewCallback}
         ankeOmgorArsaker={alleKodeverk[kodeverkTyper.ANKE_OMGJOER_AARSAK]}
       />
     </ReduxWrapper>

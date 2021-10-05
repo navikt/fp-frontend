@@ -1,35 +1,20 @@
 import React, {
-  FunctionComponent, useCallback, useState,
+  FunctionComponent, useState,
 } from 'react';
 
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import AnkeTrygderettsbehandlingProsessIndex, { AnkeTrygderettBrevData } from '@fpsak-frontend/prosess-anke-trygderettsbehandling';
+import AnkeTrygderettsbehandlingProsessIndex from '@fpsak-frontend/prosess-anke-trygderettsbehandling';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import {
-  Aksjonspunkt, AnkeVurdering, Behandling, Fagsak,
-} from '@fpsak-frontend/types';
-import { ProsessDefaultInitPanel, ProsessPanelInitProps, useStandardProsessPanelProps } from '@fpsak-frontend/behandling-felles';
-import { createIntl, forhandsvisDokument } from '@fpsak-frontend/utils';
+import { Aksjonspunkt, AnkeVurdering } from '@fpsak-frontend/types';
+import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
+import { createIntl } from '@fpsak-frontend/utils';
 
 import messages from '../../i18n/nb_NO.json';
 import AnkeBehandlingModal from '../modaler/AnkeBehandlingModal';
-import { restApiAnkeHooks, requestAnkeApi, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi';
+import { requestAnkeApi, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi';
 
 const intl = createIntl(messages);
-
-const lagForhandsvisCallback = (
-  forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<any>,
-  fagsak: Fagsak,
-  behandling: Behandling,
-) => (data: AnkeTrygderettBrevData) => {
-  const brevData = {
-    ...data,
-    behandlingUuid: behandling.uuid,
-    ytelseType: fagsak.fagsakYtelseType,
-  };
-  return forhandsvisMelding(brevData).then((response) => forhandsvisDokument(response));
-};
 
 const getLagringSideeffekter = (
   toggleAnkeModal: (skalToggle: boolean) => void,
@@ -69,26 +54,18 @@ type EndepunktPanelData = {
 }
 
 interface OwnProps {
-  fagsak: Fagsak;
   opneSokeside: () => void;
   toggleSkalOppdatereFagsakContext: (skalOppdatereFagsak: boolean) => void;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
 }
 
 const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitProps> = ({
-  fagsak,
   opneSokeside,
   toggleSkalOppdatereFagsakContext,
   oppdaterProsessStegOgFaktaPanelIUrl,
   ...props
 }) => {
   const [visModalAnkeBehandling, toggleAnkeModal] = useState(false);
-
-  const standardPanelProps = useStandardProsessPanelProps();
-
-  const { startRequest: forhandsvisMelding } = restApiAnkeHooks.useRestApiRunner(AnkeBehandlingApiKeys.PREVIEW_MESSAGE);
-  const previewCallback = useCallback(lagForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
-    [standardPanelProps.behandling.versjon]);
 
   const lagringSideeffekterCallback = getLagringSideeffekter(toggleAnkeModal, toggleSkalOppdatereFagsakContext,
     oppdaterProsessStegOgFaktaPanelIUrl);
@@ -115,7 +92,6 @@ const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<OwnProps 
               && ap.status.kode === aksjonspunktStatus.OPPRETTET)}
           />
           <AnkeTrygderettsbehandlingProsessIndex
-            previewCallback={previewCallback}
             {...data}
           />
         </>
