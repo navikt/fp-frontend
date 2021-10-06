@@ -24,12 +24,6 @@ server {
   server_name  "${APP_HOSTNAME}";
   root          "/usr/share/nginx/html";
 
-  # Set some varable for usage in OpenResty modules.
-  set $app_baseurl                https://$host;
-  set $app_callback_path          "${APP_CALLBACK_PATH}";
-  set $app_hostname               "${APP_HOSTNAME}";
-  set $app_path_prefix            "${APP_PATH_PREFIX}";
-
   # Proxy headers. Will be overwritten if you set them in blocks.
   proxy_buffers 16 16k;
   proxy_buffer_size 16k;
@@ -74,9 +68,9 @@ server {
       open_file_cache_errors off;
   }
 
-  location "/fpsak/api/" {
+  location "/fpsak/" {
     proxy_set_header Host	$http_host;
-    proxy_pass "${APP_URL}/fpsak/api/";
+    proxy_pass "${APP_URL}/fpsak/";
     proxy_intercept_errors on;
     error_page 401 = @401_json;
     error_page 403 = @403_json;
@@ -112,11 +106,6 @@ server {
     error_page 403 = @403_json;
     error_page 404 = @404_json;
     error_page 504 = @504_json;
-  }
-
-  location "/fpsak/resource/" {
-    proxy_set_header Host	$http_host;
-    proxy_pass "${APP_URL}/fpsak/resource/";
   }
 
   # If no asset matches, send it to your javascript app. Hopefully it's a route in the app!
