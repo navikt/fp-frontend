@@ -68,9 +68,19 @@ server {
       open_file_cache_errors off;
   }
 
-  location "/fpsak/" {
+  location "/fpsak/api/" {
     proxy_set_header Host	$http_host;
-    proxy_pass "${APP_URL}/fpsak/";
+    proxy_pass "${APP_URL}/fpsak/api/";
+    proxy_intercept_errors on;
+    error_page 401 = @401_json;
+    error_page 403 = @403_json;
+    error_page 404 = @404_json;
+    error_page 504 = @504_json;
+  }
+
+  location "/fpsak/cb/" {
+    proxy_set_header Host	$http_host;
+    proxy_pass "${APP_URL}/fpsak/cb/";
     proxy_intercept_errors on;
     error_page 401 = @401_json;
     error_page 403 = @403_json;
@@ -106,6 +116,16 @@ server {
     error_page 403 = @403_json;
     error_page 404 = @404_json;
     error_page 504 = @504_json;
+  }
+
+  location "/fpsak/resource/" {
+    proxy_set_header Host	$http_host;
+    proxy_pass "${APP_URL}/fpsak/resource/";
+        proxy_intercept_errors on;
+        error_page 401 = @401_json;
+        error_page 403 = @403_json;
+        error_page 404 = @404_json;
+        error_page 504 = @504_json;
   }
 
   # If no asset matches, send it to your javascript app. Hopefully it's a route in the app!
