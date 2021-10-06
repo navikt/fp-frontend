@@ -78,9 +78,9 @@ server {
     error_page 504 = @504_json;
   }
 
-  location "/fpsak/cb/" {
+  location "/fpsak/cb" {
     proxy_set_header Host	$http_host;
-    proxy_pass "${APP_URL}/fpsak/cb/";
+    proxy_pass "${APP_URL}/fpsak/cb";
     proxy_intercept_errors on;
     error_page 401 = @401_json;
     error_page 403 = @403_json;
