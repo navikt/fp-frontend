@@ -1,18 +1,20 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import sinon from 'sinon';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import MockAdapter from 'axios-mock-adapter';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { Aksjonspunkt, AlleKodeverk, Behandling } from '@fpsak-frontend/types';
-import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
+import Modal from 'nav-frontend-modal';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
 
 import BehandlingPaVent, { SettPaVentParams } from './BehandlingPaVent';
 
 describe('<BehandlingPaVent>', () => {
+  Modal.setAppElement('body');
   const behandling = {
     uuid: '1',
     versjon: 1,
@@ -26,148 +28,133 @@ describe('<BehandlingPaVent>', () => {
     },
     behandlingPaaVent: false,
     behandlingHenlagt: false,
+    fristBehandlingPaaVent: '2019-10-10',
   };
   const aksjonspunkter = [] as Aksjonspunkt[];
-  const kodeverk = {} as AlleKodeverk;
+  // @ts-ignore
+  const kodeverk = alleKodeverk as AlleKodeverk;
 
   const AKSJONSPUNKT_KEY = new RestKey<Aksjonspunkt[], void>('AP');
   const PA_VENT_KEY = new RestKey<void, SettPaVentParams>('PA_VENT');
 
   const endpoints = new RestApiConfigBuilder()
     .withRel('test', AKSJONSPUNKT_KEY)
+    .withRel('test_pa', PA_VENT_KEY)
     .build();
 
   const requestMock = createRequestApi(endpoints);
 
-  afterEach(() => {
-    requestMock.clearAllMockData();
+  it('skal ikke vise modal når behandling ikke er på vent', async () => {
+    const data = [
+      { key: AKSJONSPUNKT_KEY.name, data: aksjonspunkter },
+    ];
+    render(
+      <RestApiMock data={data} requestApi={requestMock}>
+        <BehandlingPaVent
+          behandling={behandling as Behandling}
+          requestApi={requestMock}
+          oppdaterPaVentKey={PA_VENT_KEY}
+          aksjonspunktKey={AKSJONSPUNKT_KEY}
+          kodeverk={kodeverk}
+          hentBehandling={jest.fn()}
+        />
+      </RestApiMock>,
+    );
+
+    await waitFor(() => expect(screen.queryByText('Behandlingen settes på vent')).not.toBeInTheDocument());
   });
 
-  it('skal ikke vise modal når behandling ikke er på vent', () => {
-    requestMock.mock(AKSJONSPUNKT_KEY.name, aksjonspunkter);
+  it('skal vise modal når behandling er på vent', async () => {
+    const data = [
+      { key: AKSJONSPUNKT_KEY.name, data: aksjonspunkter },
+    ];
+    render(
+      <RestApiMock data={data} requestApi={requestMock}>
+        <BehandlingPaVent
+          behandling={{
+            ...behandling,
+            behandlingPaaVent: true,
+          } as Behandling}
+          requestApi={requestMock}
+          oppdaterPaVentKey={PA_VENT_KEY}
+          aksjonspunktKey={AKSJONSPUNKT_KEY}
+          kodeverk={kodeverk}
+          hentBehandling={jest.fn()}
+        />
+      </RestApiMock>,
+    );
 
-    const wrapper = shallow(<BehandlingPaVent
-      behandling={behandling as Behandling}
-      requestApi={requestMock}
-      oppdaterPaVentKey={PA_VENT_KEY}
-      aksjonspunktKey={AKSJONSPUNKT_KEY}
-      kodeverk={kodeverk}
-      hentBehandling={sinon.spy()}
-    />);
-
-    const modal = wrapper.find(SettPaVentModalIndex);
-    expect(modal.props().showModal).toBe(false);
+    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
   });
 
-  it('skal vise modal når behandling er på vent', () => {
-    requestMock.mock(AKSJONSPUNKT_KEY.name, aksjonspunkter);
+  it('skal vise modal og så skjule den ved trykk på knapp', async () => {
+    const data = [
+      { key: AKSJONSPUNKT_KEY.name, data: aksjonspunkter },
+    ];
+    render(
+      <RestApiMock data={data} requestApi={requestMock}>
+        <BehandlingPaVent
+          behandling={{
+            ...behandling,
+            behandlingPaaVent: true,
+          } as Behandling}
+          requestApi={requestMock}
+          oppdaterPaVentKey={PA_VENT_KEY}
+          aksjonspunktKey={AKSJONSPUNKT_KEY}
+          kodeverk={kodeverk}
+          hentBehandling={jest.fn()}
+        />
+      </RestApiMock>,
+    );
 
-    const wrapper = shallow(<BehandlingPaVent
-      behandling={{
-        ...behandling,
-        behandlingPaaVent: true,
-      } as Behandling}
-      requestApi={requestMock}
-      oppdaterPaVentKey={PA_VENT_KEY}
-      aksjonspunktKey={AKSJONSPUNKT_KEY}
-      kodeverk={kodeverk}
-      hentBehandling={sinon.spy()}
-    />);
+    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
 
-    const modal = wrapper.find(SettPaVentModalIndex);
-    expect(modal).toHaveLength(1);
-    expect(modal.props().showModal).toBe(true);
-    expect(modal.props().hasManualPaVent).toBe(false);
-  });
+    userEvent.click(screen.getByText('Lukk'));
 
-  it('skal vise modal og så skjule den ved trykk på knapp', () => {
-    requestMock.mock(AKSJONSPUNKT_KEY.name, aksjonspunkter);
-
-    const wrapper = shallow(<BehandlingPaVent
-      behandling={{
-        ...behandling,
-        behandlingPaaVent: true,
-      } as Behandling}
-      requestApi={requestMock}
-      oppdaterPaVentKey={PA_VENT_KEY}
-      aksjonspunktKey={AKSJONSPUNKT_KEY}
-      kodeverk={kodeverk}
-      hentBehandling={sinon.spy()}
-    />);
-
-    const modal = wrapper.find(SettPaVentModalIndex);
-    expect(modal).toHaveLength(1);
-
-    modal.prop('cancelEvent')();
-
-    const modalNew = wrapper.find(SettPaVentModalIndex);
-    expect(modalNew.props().showModal).toBe(false);
-  });
-
-  it('skal markeres som automatisk satt på vent når en har åpent aksjonspunkt for auto-manuelt satt på vent', () => {
-    requestMock.mock(AKSJONSPUNKT_KEY.name, [{
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: 'AKSJONSPUNKT_STATUS',
-      },
-      definisjon: {
-        kode: aksjonspunktCodes.AUTO_MANUELT_SATT_PÅ_VENT,
-        kodeverk: 'AKSJONSPUNKT_KODE',
-      },
-      kanLoses: true,
-      erAktivt: true,
-    }]);
-
-    const wrapper = shallow(<BehandlingPaVent
-      behandling={{
-        ...behandling,
-        behandlingPaaVent: true,
-      } as Behandling}
-      requestApi={requestMock}
-      oppdaterPaVentKey={PA_VENT_KEY}
-      aksjonspunktKey={AKSJONSPUNKT_KEY}
-      kodeverk={kodeverk}
-      hentBehandling={sinon.spy()}
-    />);
-
-    const modal = wrapper.find(SettPaVentModalIndex);
-    expect(modal).toHaveLength(1);
-    expect(modal.prop('hasManualPaVent')).toBe(true);
+    await waitFor(() => expect(screen.queryByText('Behandlingen settes på vent med frist')).not.toBeInTheDocument());
   });
 
   it('skal oppdatere på-vent-informasjon og så hente behandling på nytt', async () => {
-    requestMock.mock(AKSJONSPUNKT_KEY.name, aksjonspunkter);
-    requestMock.mock(PA_VENT_KEY.name);
+    const data = [
+      { key: AKSJONSPUNKT_KEY.name, data: aksjonspunkter },
+      { key: PA_VENT_KEY.name, data: undefined },
+    ];
 
-    const hentBehandlingCallback = sinon.spy();
+    const hentBehandlingCallback = jest.fn();
 
-    const wrapper = shallow(<BehandlingPaVent
-      behandling={{
-        ...behandling,
-        behandlingPaaVent: true,
-      } as Behandling}
-      requestApi={requestMock}
-      oppdaterPaVentKey={PA_VENT_KEY}
-      aksjonspunktKey={AKSJONSPUNKT_KEY}
-      kodeverk={kodeverk}
-      hentBehandling={hentBehandlingCallback}
-    />);
+    let axiosMock: MockAdapter;
+    const setApiMock = (mockAdapter: MockAdapter) => { axiosMock = mockAdapter; };
 
-    const modal = wrapper.find(SettPaVentModalIndex);
+    render(
+      <RestApiMock data={data} requestApi={requestMock} setApiMock={setApiMock}>
+        <BehandlingPaVent
+          behandling={{
+            ...behandling,
+            behandlingPaaVent: true,
+          } as Behandling}
+          requestApi={requestMock}
+          oppdaterPaVentKey={PA_VENT_KEY}
+          aksjonspunktKey={AKSJONSPUNKT_KEY}
+          kodeverk={kodeverk}
+          hentBehandling={hentBehandlingCallback}
+        />
+      </RestApiMock>,
+    );
 
-    await modal.prop('submitCallback')({ dato: '10.10.2019' });
+    expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
+    console.log(screen.debug(undefined, 30000));
+    userEvent.click(screen.getByText('OK'));
 
-    const requestData = requestMock.getRequestMockData(PA_VENT_KEY.name);
-    expect(requestData).toHaveLength(1);
-    expect(requestData[0].params).toEqual({
+    await waitFor(() => expect(axiosMock.history.get.length).toBe(1));
+    console.log(axiosMock.history.get);
+    expect(axiosMock.history.get
+      .find((a) => a.url === PA_VENT_KEY.name)?.params).toBe(JSON.stringify({
       behandlingUuid: '1',
       behandlingVersjon: 1,
       dato: '10.10.2019',
-    });
+    }));
 
-    const calls = hentBehandlingCallback.getCalls();
-    expect(calls).toHaveLength(1);
-    expect(calls[0].args).toHaveLength(1);
-    expect(calls[0].args[0]).toBe(false);
+    await waitFor(() => expect(hentBehandlingCallback).toHaveBeenCalledTimes(1));
+    expect(hentBehandlingCallback).toHaveBeenNthCalledWith(1, false);
   });
 });
