@@ -82,7 +82,6 @@ describe('<MeldingIndex>', () => {
         </Router>
       </RestApiMock>,
     );
-
     expect(await screen.findByText('Mottaker')).toBeInTheDocument();
     expect(screen.getByText('Søker')).toBeInTheDocument();
     expect(screen.getByText('Mal 1')).toBeInTheDocument();
@@ -118,8 +117,9 @@ describe('<MeldingIndex>', () => {
 
     userEvent.click(screen.getByText('Forhåndsvis'));
 
-    await waitFor(() => expect(axiosMock.history.get
-      .find((a) => a.url === FpsakApiKeys.PREVIEW_MESSAGE_FORMIDLING.name).params).toStrictEqual({
+    await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
+    await waitFor(() => expect(axiosMock.history.post
+      .find((a) => a.url === '/fpformidling/api/brev/forhaandsvis').data).toBe(JSON.stringify({
       behandlingUuid: '1',
       ytelseType: {
         kode: fagsakYtelseType.FORELDREPENGER,
@@ -129,7 +129,7 @@ describe('<MeldingIndex>', () => {
       arsakskode: null,
       mottaker: 'Søker',
       dokumentMal: undefined,
-    }));
+    })));
   });
 
   it('skal sende melding og så lukke modal', async () => {
@@ -166,6 +166,8 @@ describe('<MeldingIndex>', () => {
     expect(await screen.findByText('Brevet er bestilt')).toBeInTheDocument();
 
     userEvent.click(screen.getByText('OK'));
+
+    await waitFor(() => expect(axiosMock.history.get.length).toBe(5));
 
     await waitFor(() => expect(axiosMock.history.get
       .find((a) => a.url === FpsakApiKeys.SUBMIT_MESSAGE.name).params).toStrictEqual({
@@ -214,6 +216,8 @@ describe('<MeldingIndex>', () => {
     expect(await screen.findByText('Behandlingen er satt på vent')).toBeInTheDocument();
 
     userEvent.click(screen.getByText('OK'));
+
+    await waitFor(() => expect(axiosMock.history.get.length).toBe(5));
 
     await waitFor(() => expect(axiosMock.history.get
       .find((a) => a.url === FpsakApiKeys.SUBMIT_MESSAGE.name).params).toStrictEqual({
