@@ -88,6 +88,16 @@ server {
     error_page 504 = @504_json;
   }
 
+  location "/fpsak/swagger" {
+    proxy_set_header Host	$http_host;
+    proxy_pass "${APP_URL}/fpsak/swagger";
+    proxy_intercept_errors on;
+    error_page 401 = @401_json;
+    error_page 403 = @403_json;
+    error_page 404 = @404_json;
+    error_page 504 = @504_json;
+  }
+
   location "/fpformidling/api/" {
     proxy_set_header Host	$http_host;
     proxy_pass "${APP_URL_FPFORMIDLING}/fpformidling/api/";
