@@ -57,17 +57,6 @@ server {
     add_header Content-Type text/plain;
   }
 
-  ## All static files will be served directly and cached
-  location ~* ^.+\.(?:css|cur|js|jpe?g|gif|htc|ico|png|xml|otf|ttf|eot|woff|svg|map|json)$ {
-      add_header Cache-Control "public";
-      expires 365d;
-      ## Set the OS file cache.
-      open_file_cache max=3000 inactive=120s;
-      open_file_cache_valid 45s;
-      open_file_cache_min_uses 2;
-      open_file_cache_errors off;
-  }
-
   location "/fpsak/api/" {
     proxy_set_header Host	$http_host;
     proxy_pass "${APP_URL}/fpsak/api/";
