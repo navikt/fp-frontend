@@ -89,8 +89,7 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       </RestApiMock>,
     );
 
-    expect(await screen.findByText('Vedtak')).toBeInTheDocument();
-    expect(screen.getByText('Resultat')).toBeInTheDocument();
+    expect(await screen.findByText('Behandle klage')).toBeInTheDocument();
   });
 
   it('skal ikke oppdatere fagsak-kontekst etter lagring når en bytter til klageinstans', () => {
@@ -152,9 +151,9 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       </RestApiMock>,
     );
 
-    expect(await screen.findByText('Ankebehandling')).toBeInTheDocument();
+    expect(await screen.findByText('Behandle klage')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Omgjør'));
+    userEvent.click(screen.getByText('Oppretthold vedtaket'));
 
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
     userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
@@ -168,14 +167,14 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
 
     expect(axiosMock.history.post
       .find((a) => a.url === '/fpformidling/api/brev/forhaandsvis')?.data).toBe(JSON.stringify({
+      fritekst: 'Dette er en fritekst',
+      dokumentMal: 'KOVKLA',
+      erOpphevetKlage: false,
       behandlingUuid: 'test-uuid',
       ytelseType: {
         kode: fagsakYtelseType.FORELDREPENGER,
         kodeverk: '',
       },
-      fritekst: 'Dette er en fritekst',
-      dokumentMal: 'mal',
-      erOpphevetKlage: false,
     }));
   });
 
@@ -186,11 +185,8 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       { key: KlageBehandlingApiKeys.SAVE_KLAGE_VURDERING.name, data: undefined },
     ];
 
-    let axiosMock: MockAdapter;
-    const setApiMock = (mockAdapter: MockAdapter) => { axiosMock = mockAdapter; };
-
     const utils = render(
-      <RestApiMock data={data} requestApi={requestKlageApi} setApiMock={setApiMock}>
+      <RestApiMock data={data} requestApi={requestKlageApi}>
         <VurderingFellesProsessStegInitPanel
           valgtProsessSteg="default"
           registrerProsessPanel={() => {}}
@@ -205,9 +201,9 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       </RestApiMock>,
     );
 
-    expect(await screen.findByText('Ankebehandling')).toBeInTheDocument();
+    expect(await screen.findByText('Behandle klage')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Omgjør'));
+    userEvent.click(screen.getByText('Oppretthold vedtaket'));
 
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
     userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
@@ -215,20 +211,18 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
     const fritekstInput = utils.getByLabelText('Fritekst til brev');
     userEvent.type(fritekstInput, 'Dette er en fritekst');
 
-    userEvent.click(screen.getByText('Forhåndsvis brev'));
+    userEvent.click(screen.getByText('Bekreft og fortsett'));
 
-    await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
-
-    expect(axiosMock.history.post
-      .find((a) => a.url === KlageBehandlingApiKeys.SAVE_KLAGE_VURDERING.name)?.data).toBe(JSON.stringify({
-      behandlingUuid: 'test-uuid',
+    await waitFor(() => expect(submitCallback).toHaveBeenCalledTimes(1));
+    expect(submitCallback).toHaveBeenNthCalledWith(1, {
       kode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
-      fritekstTilBrev: 'Fritekst',
       begrunnelse: 'Dette er en begrunnelse',
+      klageVurderingOmgjoer: null,
+      fritekstTilBrev: 'Dette er en fritekst',
+      klageMedholdArsak: null,
       klageVurdering: {
-        kode: klageVurdering.MEDHOLD_I_KLAGE,
-        kodeverk: '',
+        kode: klageVurdering.STADFESTE_YTELSESVEDTAK,
       },
-    }));
+    });
   });
 });
