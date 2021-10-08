@@ -31,6 +31,7 @@ describe('<FagsakIndex>', () => {
 
   const behandling = {
     id: 1,
+    uuid: 'test',
     type: {
       kode: behandlingType.FORSTEGANGSSOKNAD,
       kodeverk: 'BEHANDLING_TYPE',
@@ -39,9 +40,13 @@ describe('<FagsakIndex>', () => {
       kode: behandlingStatus.OPPRETTET,
       kodeverk: 'BEHANDLING_STATUS',
     },
+    behandlendeEnhetId: 'test',
+    behandlendeEnhetNavn: 'NAV Viken',
+    opprettet: '2017-08-02T00:54:25.455',
   };
   const behandling2 = {
     id: 2,
+    uuid: 'test2',
     type: {
       kode: behandlingType.FORSTEGANGSSOKNAD,
       kodeverk: 'BEHANDLING_TYPE',
@@ -50,6 +55,9 @@ describe('<FagsakIndex>', () => {
       kode: behandlingStatus.OPPRETTET,
       kodeverk: 'BEHANDLING_STATUS',
     },
+    behandlendeEnhetId: 'test',
+    behandlendeEnhetNavn: 'NAV Viken',
+    opprettet: '2017-08-02T00:54:25.455',
   };
 
   const navAnsatt = {

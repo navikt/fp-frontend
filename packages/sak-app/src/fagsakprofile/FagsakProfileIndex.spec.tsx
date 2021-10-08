@@ -10,7 +10,7 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
-import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, Fagsak, Behandling } from '@fpsak-frontend/types';
 
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 import { FagsakProfileIndex } from './FagsakProfileIndex';
@@ -41,6 +41,7 @@ describe('<FagsakProfileIndex>', () => {
   };
 
   const behandling = {
+    uuid: 'test',
     type: {
       kode: behandlingType.FORSTEGANGSSOKNAD,
       kodeverk: 'BEHANDLING_TYPE',
@@ -49,7 +50,10 @@ describe('<FagsakProfileIndex>', () => {
       kode: behandlingStatus.OPPRETTET,
       kodeverk: 'BEHANDLING_STATUS',
     },
-  };
+    behandlendeEnhetId: 'test',
+    behandlendeEnhetNavn: 'NAV Viken',
+    opprettet: '2017-08-02T00:54:25.455',
+  } as Behandling;
 
   const fagsakRettigheter = {
     sakSkalTilInfotrygd: true,
