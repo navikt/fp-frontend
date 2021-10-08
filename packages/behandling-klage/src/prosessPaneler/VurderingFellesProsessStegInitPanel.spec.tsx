@@ -1,17 +1,21 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import MockAdapter from 'axios-mock-adapter';
 import sinon from 'sinon';
 
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import KlagevurderingProsessIndex from '@fpsak-frontend/prosess-klagevurdering';
 import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
-import {
-  Aksjonspunkt, Behandling, Fagsak, StandardProsessPanelProps,
-} from '@fpsak-frontend/types';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { Aksjonspunkt, Behandling, Fagsak } from '@fpsak-frontend/types';
+import * as Felles from '@fpsak-frontend/behandling-felles/src/utils/prosess/useStandardProsessPanelProps';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import klageVurdering from '@fpsak-frontend/kodeverk/src/klageVurdering';
+import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
 import { KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';
 import VurderingFellesProsessStegInitPanel from './VurderingFellesProsessStegInitPanel';
@@ -32,39 +36,61 @@ const behandling = {
   versjon: 1,
 } as Behandling;
 
-jest.mock('@fpsak-frontend/behandling-felles', () => {
-  const felles = jest.requireActual('@fpsak-frontend/behandling-felles');
-  return {
-    ...felles,
-    useStandardProsessPanelProps: () => ({
-      behandling,
-    }),
-  };
-});
+// @ts-ignore Fiks
+const kodeverk = alleKodeverk as AlleKodeverk;
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.BEHANDLE_KLAGE_NFP];
 
 describe('<VurderingFellesProsessStegInitPanel>', () => {
-  it('skal rendre komponent korrekt', () => {
-    const wrapper = shallow(<VurderingFellesProsessStegInitPanel
-      valgtProsessSteg="default"
-      registrerProsessPanel={() => {}}
-      toggleOppdatereFagsakContext={() => {}}
-      fagsak={fagsak}
-      opneSokeside={() => {}}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
-      prosessPanelKode={ProsessStegCode.AVREGNING}
-      prosessPanelMenyTekst="Dette er en test"
-      behandling={behandling}
-    />);
+  const submitCallback = jest.fn();
+  jest.spyOn(Felles, 'default').mockImplementation(() => ({
+    behandling,
+    alleMerknaderFraBeslutter: {},
+    submitCallback,
+    status: vilkarUtfallType.IKKE_VURDERT,
+    alleKodeverk: kodeverk,
+    isReadOnly: false,
+    readOnlySubmitButton: false,
+    aksjonspunkter: [{
+      definisjon: {
+        kode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
+        kodeverk: '',
+      },
+      erAktivt: true,
+      kanLoses: true,
+      status: {
+        kode: aksjonspunktStatus.OPPRETTET,
+        kodeverk: '',
+      },
+    }] as Aksjonspunkt[],
+    vilkar: [],
+    isAksjonspunktOpen: true,
+    setFormData: () => undefined,
+  }));
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
+  it('skal rendre komponent korrekt', async () => {
+    const data = [
+      { key: KlageBehandlingApiKeys.AKSJONSPUNKTER.name, data: [] },
+      { key: KlageBehandlingApiKeys.KLAGE_VURDERING.name, data: {} },
+    ];
+    render(
+      <RestApiMock data={data} requestApi={requestKlageApi}>
+        <VurderingFellesProsessStegInitPanel
+          valgtProsessSteg="default"
+          registrerProsessPanel={() => {}}
+          toggleOppdatereFagsakContext={() => {}}
+          fagsak={fagsak}
+          opneSokeside={() => {}}
+          aksjonspunktKoder={AKSJONSPUNKT_KODER}
+          prosessPanelKode={ProsessStegCode.AVREGNING}
+          prosessPanelMenyTekst="Dette er en test"
+          behandling={behandling}
+        />
+      </RestApiMock>,
+    );
 
-    expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
-
-    const innerElement = panel.renderProp('renderPanel')({ behandling }, { aksjonspunkter: [] });
-
-    expect(innerElement.find(KlagevurderingProsessIndex)).toHaveLength(1);
+    expect(await screen.findByText('Vedtak')).toBeInTheDocument();
+    expect(screen.getByText('Resultat')).toBeInTheDocument();
   });
 
   it('skal ikke oppdatere fagsak-kontekst etter lagring når en bytter til klageinstans', () => {
@@ -100,37 +126,48 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
     expect(args[0]).toEqual(false);
   });
 
-  it('skal vise forhåndsvisning av melding', () => {
-    requestKlageApi.mock(KlageBehandlingApiKeys.PREVIEW_MESSAGE.name, {});
+  it('skal vise forhåndsvisning av melding', async () => {
+    const data = [
+      { key: KlageBehandlingApiKeys.AKSJONSPUNKTER.name, data: [] },
+      { key: KlageBehandlingApiKeys.KLAGE_VURDERING.name, data: {} },
+      { key: KlageBehandlingApiKeys.PREVIEW_MESSAGE.name, data: undefined },
+    ];
 
-    const wrapper = shallow(<VurderingFellesProsessStegInitPanel
-      valgtProsessSteg="default"
-      registrerProsessPanel={() => {}}
-      toggleOppdatereFagsakContext={() => {}}
-      fagsak={fagsak}
-      opneSokeside={() => {}}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
-      prosessPanelKode={ProsessStegCode.AVREGNING}
-      prosessPanelMenyTekst="Dette er en test"
-      behandling={behandling}
-    />);
+    let axiosMock: MockAdapter;
+    const setApiMock = (mockAdapter: MockAdapter) => { axiosMock = mockAdapter; };
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
+    const utils = render(
+      <RestApiMock data={data} requestApi={requestKlageApi} setApiMock={setApiMock}>
+        <VurderingFellesProsessStegInitPanel
+          valgtProsessSteg="default"
+          registrerProsessPanel={() => {}}
+          toggleOppdatereFagsakContext={() => {}}
+          fagsak={fagsak}
+          opneSokeside={() => {}}
+          aksjonspunktKoder={AKSJONSPUNKT_KODER}
+          prosessPanelKode={ProsessStegCode.KLAGE_RESULTAT}
+          prosessPanelMenyTekst="Dette er en test"
+          behandling={behandling}
+        />
+      </RestApiMock>,
+    );
 
-    const innerElement = panel.renderProp('renderPanel')({ behandling }, { aksjonspunkter: [] });
+    expect(await screen.findByText('Ankebehandling')).toBeInTheDocument();
 
-    const klageProsessPanel = innerElement.find(KlagevurderingProsessIndex);
-    expect(klageProsessPanel).toHaveLength(1);
+    userEvent.click(screen.getByText('Omgjør'));
 
-    klageProsessPanel.props().previewCallback({
-      fritekst: 'Dette er en fritekst',
-      dokumentMal: 'mal',
-      erOpphevetKlage: false,
-    });
+    const begrunnelseInput = utils.getByLabelText('Begrunnelse');
+    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
-    const response = requestKlageApi.getRequestMockData(KlageBehandlingApiKeys.PREVIEW_MESSAGE.name);
-    expect(response).toHaveLength(1);
-    expect(response[0].params).toEqual({
+    const fritekstInput = utils.getByLabelText('Fritekst til brev');
+    userEvent.type(fritekstInput, 'Dette er en fritekst');
+
+    userEvent.click(screen.getByText('Forhåndsvis brev'));
+
+    await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
+
+    expect(axiosMock.history.post
+      .find((a) => a.url === '/fpformidling/api/brev/forhaandsvis')?.data).toBe(JSON.stringify({
       behandlingUuid: 'test-uuid',
       ytelseType: {
         kode: fagsakYtelseType.FORELDREPENGER,
@@ -139,44 +176,51 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       fritekst: 'Dette er en fritekst',
       dokumentMal: 'mal',
       erOpphevetKlage: false,
-    });
+    }));
   });
 
-  it('skal lagre klage', () => {
-    requestKlageApi.mock(KlageBehandlingApiKeys.SAVE_KLAGE_VURDERING.name, {});
+  it('skal lagre klage', async () => {
+    const data = [
+      { key: KlageBehandlingApiKeys.AKSJONSPUNKTER.name, data: [] },
+      { key: KlageBehandlingApiKeys.KLAGE_VURDERING.name, data: {} },
+      { key: KlageBehandlingApiKeys.SAVE_KLAGE_VURDERING.name, data: undefined },
+    ];
 
-    const wrapper = shallow(<VurderingFellesProsessStegInitPanel
-      valgtProsessSteg="default"
-      registrerProsessPanel={() => {}}
-      toggleOppdatereFagsakContext={() => {}}
-      fagsak={fagsak}
-      opneSokeside={() => {}}
-      aksjonspunktKoder={AKSJONSPUNKT_KODER}
-      prosessPanelKode={ProsessStegCode.AVREGNING}
-      prosessPanelMenyTekst="Dette er en test"
-      behandling={behandling}
-    />);
+    let axiosMock: MockAdapter;
+    const setApiMock = (mockAdapter: MockAdapter) => { axiosMock = mockAdapter; };
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
+    const utils = render(
+      <RestApiMock data={data} requestApi={requestKlageApi} setApiMock={setApiMock}>
+        <VurderingFellesProsessStegInitPanel
+          valgtProsessSteg="default"
+          registrerProsessPanel={() => {}}
+          toggleOppdatereFagsakContext={() => {}}
+          fagsak={fagsak}
+          opneSokeside={() => {}}
+          aksjonspunktKoder={AKSJONSPUNKT_KODER}
+          prosessPanelKode={ProsessStegCode.KLAGE_RESULTAT}
+          prosessPanelMenyTekst="Dette er en test"
+          behandling={behandling}
+        />
+      </RestApiMock>,
+    );
 
-    const innerElement = panel.renderProp('renderPanel')({ behandling }, { aksjonspunkter: [] });
+    expect(await screen.findByText('Ankebehandling')).toBeInTheDocument();
 
-    const klageProsessPanel = innerElement.find(KlagevurderingProsessIndex);
-    expect(klageProsessPanel).toHaveLength(1);
+    userEvent.click(screen.getByText('Omgjør'));
 
-    klageProsessPanel.props().saveKlage({
-      kode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
-      fritekstTilBrev: 'Fritekst',
-      begrunnelse: 'Dette er en begrunnelse',
-      klageVurdering: {
-        kode: klageVurdering.MEDHOLD_I_KLAGE,
-        kodeverk: '',
-      },
-    });
+    const begrunnelseInput = utils.getByLabelText('Begrunnelse');
+    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
-    const response = requestKlageApi.getRequestMockData(KlageBehandlingApiKeys.SAVE_KLAGE_VURDERING.name);
-    expect(response).toHaveLength(1);
-    expect(response[0].params).toEqual({
+    const fritekstInput = utils.getByLabelText('Fritekst til brev');
+    userEvent.type(fritekstInput, 'Dette er en fritekst');
+
+    userEvent.click(screen.getByText('Forhåndsvis brev'));
+
+    await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
+
+    expect(axiosMock.history.post
+      .find((a) => a.url === KlageBehandlingApiKeys.SAVE_KLAGE_VURDERING.name)?.data).toBe(JSON.stringify({
       behandlingUuid: 'test-uuid',
       kode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
       fritekstTilBrev: 'Fritekst',
@@ -185,6 +229,6 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
         kode: klageVurdering.MEDHOLD_I_KLAGE,
         kodeverk: '',
       },
-    });
+    }));
   });
 });

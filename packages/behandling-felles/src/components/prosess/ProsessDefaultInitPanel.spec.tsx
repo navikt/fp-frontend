@@ -1,24 +1,18 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+import * as Felles from '@fpsak-frontend/behandling-felles/src/utils/prosess/useStandardProsessPanelProps';
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
-import {
-  Behandling, AksessRettigheter, StandardProsessPanelProps, Aksjonspunkt,
-} from '@fpsak-frontend/types';
+import { Behandling, Aksjonspunkt } from '@fpsak-frontend/types';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
+import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
-import ProsessPanelWrapper from './ProsessPanelWrapper';
 import ProsessDefaultInitPanel from './ProsessDefaultInitPanel';
 
-let realUseContext: any;
-let useContextMock: any;
-
-const fagsak = {
-  saksnummer: '1234',
-};
 const behandling = {
   uuid: '1',
   versjon: 2,
@@ -28,24 +22,34 @@ const behandling = {
   },
   behandlingPaaVent: false,
 } as Behandling;
-const rettigheter = {
-  writeAccess: {
-    isEnabled: true,
-  },
-} as AksessRettigheter;
+
+// @ts-ignore Fiks
+const kodeverk = alleKodeverk as AlleKodeverk;
+
+const defaultProps = {
+  behandling,
+  alleMerknaderFraBeslutter: {},
+  submitCallback: jest.fn(),
+  status: vilkarUtfallType.IKKE_VURDERT,
+  alleKodeverk: kodeverk,
+  isReadOnly: false,
+  readOnlySubmitButton: false,
+  aksjonspunkter: [{
+    definisjon: {
+      kode: aksjonspunktCodes.VURDER_FEILUTBETALING,
+      kodeverk: '',
+    },
+    erAktivt: true,
+    kanLoses: true,
+  }] as Aksjonspunkt[],
+  vilkar: [],
+  isAksjonspunktOpen: true,
+  setFormData: () => undefined,
+};
 
 describe('<ProsessDefaultInitPanel>', () => {
-  beforeEach(() => {
-    realUseContext = React.useContext;
-    useContextMock = jest.fn();
-    React.useContext = useContextMock;
-  });
-
-  afterEach(() => {
-    React.useContext = realUseContext;
-  });
-
-  it('skal rendre panel korrekt', () => {
+  jest.spyOn(Felles, 'default').mockImplementation(() => defaultProps);
+  it('skal rendre panel korrekt', async () => {
     const AKSJONSPUNKTER_KEY = new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER_KEY');
 
     const endpoints = new RestApiConfigBuilder()
@@ -53,40 +57,27 @@ describe('<ProsessDefaultInitPanel>', () => {
       .build();
 
     const requestMock = createRequestApi(endpoints);
-    requestMock.mock(AKSJONSPUNKTER_KEY.name, []);
 
-    useContextMock.mockReturnValue({
-      fagsak, behandling, rettigheter, alleKodeverk: { test: '' }, hasFetchError: false,
-    });
+    const data = [
+      { key: AKSJONSPUNKTER_KEY.name, data: [] },
+    ];
 
-    const wrapper = shallow(<ProsessDefaultInitPanel
-      valgtProsessSteg="default"
-      behandling={behandling}
-      registrerProsessPanel={() => {}}
-      requestApi={requestMock}
-      initEndepunkter={[AKSJONSPUNKTER_KEY]}
-      skalPanelVisesIMeny={() => true}
-      // @ts-ignore
-      renderPanel={(props) => <div {...props} />}
-      prosessPanelKode={ProsessStegCode.AVREGNING}
-      prosessPanelMenyTekst="Dette er en tekst"
-    />);
+    render(
+      <RestApiMock data={data} requestApi={requestMock}>
+        <ProsessDefaultInitPanel
+          valgtProsessSteg="default"
+          behandling={behandling}
+          registrerProsessPanel={() => {}}
+          requestApi={requestMock}
+          initEndepunkter={[AKSJONSPUNKTER_KEY]}
+          skalPanelVisesIMeny={() => true}
+          renderPanel={() => <div>Dette er komponenten</div>}
+          prosessPanelKode={ProsessStegCode.AVREGNING}
+          prosessPanelMenyTekst="Dette er en tekst"
+        />
+      </RestApiMock>,
+    );
 
-    const prosessWrapper = wrapper.find(ProsessPanelWrapper);
-    expect(prosessWrapper).toHaveLength(1);
-    expect(prosessWrapper.props().erPanelValgt).toBe(false);
-    expect(prosessWrapper.props().erAksjonspunktOpent).toBe(false);
-    expect(prosessWrapper.props().status).toBe(vilkarUtfallType.IKKE_VURDERT);
-    expect(prosessWrapper.props().dataState).toEqual(RestApiState.SUCCESS);
-
-    const div = wrapper.find('div');
-    expect(div).toHaveLength(1);
-    const panelProps = div.props() as StandardProsessPanelProps;
-    expect(panelProps.aksjonspunkter).toEqual([]);
-    expect(panelProps.behandling).toEqual(behandling);
-    expect(panelProps.status).toEqual(vilkarUtfallType.IKKE_VURDERT);
-    expect(panelProps.isReadOnly).toBe(false);
-    expect(panelProps.readOnlySubmitButton).toBe(true);
-    expect(panelProps.isAksjonspunktOpen).toBe(false);
+    await expect(screen.findByText('Dette er komponenten')).toBeInTheDocument();
   });
 });
