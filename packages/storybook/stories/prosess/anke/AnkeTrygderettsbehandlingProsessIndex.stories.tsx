@@ -58,6 +58,5 @@ export const visPanelForResultatVedStadfestYtelsesvedtak = () => (
         begrunnelse: 'Dette er en begrunnelse',
       },
     } as AnkeVurdering}
-    previewCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );
