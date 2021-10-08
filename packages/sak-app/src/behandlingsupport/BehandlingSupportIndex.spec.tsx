@@ -1,11 +1,13 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { Router } from 'react-router-dom';
 import sinon, { SinonStub } from 'sinon';
+import { render, screen } from '@testing-library/react';
+import { createMemoryHistory } from 'history';
 
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import SupportMenySakIndex from '@fpsak-frontend/sak-support-meny';
 
 import { VergeBehandlingmenyValg } from '../behandling/behandlingRettigheterTsType';
 import * as useTrackRouteParam from '../app/useTrackRouteParam';
@@ -57,17 +59,24 @@ describe('<BehandlingSupportIndex>', () => {
     contextStub.restore();
   });
 
-  it('skal vise godkjennings-panelet', () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, navAnsatt);
+  it('skal vise historikk-panelet som default', async () => {
+    const data = [
+      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
+    ];
 
-    const wrapper = shallow(<BehandlingSupportIndex
-      fagsak={fagsak as Fagsak}
-      alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
-      behandlingUuid="1"
-      behandlingVersjon={2}
-    />);
-
-    expect(wrapper.find(SupportMenySakIndex)).toHaveLength(1);
+    render(
+      <RestApiMock data={data} requestApi={requestApi}>
+        <Router history={createMemoryHistory()}>
+          <BehandlingSupportIndex
+            fagsak={fagsak as Fagsak}
+            alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
+            behandlingUuid="1"
+            behandlingVersjon={2}
+          />
+        </Router>
+      </RestApiMock>,
+    );
+    expect(await screen.findByText('Filtrer på behandling')).toBeInTheDocument();
   });
 
   describe('hentSynligePaneler', () => {

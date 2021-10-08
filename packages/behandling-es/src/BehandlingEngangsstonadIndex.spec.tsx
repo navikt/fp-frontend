@@ -1,49 +1,87 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
-import { BehandlingContainer } from '@fpsak-frontend/behandling-felles';
+import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { AksessRettigheter, AlleKodeverk, Fagsak } from '@fpsak-frontend/types';
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
 import BehandlingEngangsstonadIndex from './BehandlingEngangsstonadIndex';
 import { requestEsApi, EsBehandlingApiKeys } from './data/esBehandlingApi';
 
-jest.mock('@fpsak-frontend/behandling-felles', () => {
-  const felles = jest.requireActual('@fpsak-frontend/behandling-felles');
-  return {
-    ...felles,
-    useBehandling: () => ({
-      behandling: {
-        uuid: 'test-uuid',
-        versjon: 1,
-      },
-    }),
-  };
-});
-
 describe('<BehandlingEngangsstonadIndex>', () => {
-  it('skal rendre korrekt', () => {
-    requestEsApi.mock(EsBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT.name, {});
-    requestEsApi.mock(EsBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT.name, {});
+  it('skal vise paneler korrekt i prosess og faktameny', async () => {
+    const data = [
+      {
+        key: EsBehandlingApiKeys.BEHANDLING_ES.name,
+        noRelLink: true,
+        data: {
+          uuid: 'test-uuid',
+          versjon: 1,
+          status: {
+            kode: behandlingStatus.OPPRETTET,
+            kodeverk: '',
+          },
+          type: {
+            kode: behandlingType.FORSTEGANGSSOKNAD,
+            kodeverk: '',
+          },
+          links: [{
+            href: EsBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT.name,
+            rel: 'arbeidsgivere-oversikt',
+            type: 'GET',
+          }, {
+            href: EsBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT.name,
+            rel: 'behandling-personoversikt',
+            type: 'GET',
+          }],
+        },
+      },
+      { key: EsBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT.name, data: {} },
+      { key: EsBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT.name, data: {} },
+      { key: EsBehandlingApiKeys.PREVIEW_MESSAGE.name, noRelLink: true, data: undefined },
+    ];
 
-    const wrapper = shallow(<BehandlingEngangsstonadIndex
-      behandlingEventHandler={{
-        setHandler: () => {},
-        clear: () => {},
-      }}
-      behandlingUuid="1"
-      oppdaterBehandlingVersjon={() => {}}
-      kodeverk={{} as AlleKodeverk}
-      fagsak={{} as Fagsak}
-      rettigheter={{} as AksessRettigheter}
-      oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
-      valgtProsessSteg="default"
-      valgtFaktaSteg="default"
-      opneSokeside={() => {}}
-      setRequestPendingMessage={() => {}}
-    />);
+    render(
+      <RestApiMock data={data} requestApi={requestEsApi}>
+        <BehandlingEngangsstonadIndex
+          behandlingEventHandler={{
+            setHandler: () => {},
+            clear: () => {},
+          }}
+          behandlingUuid="test-uuid"
+          oppdaterBehandlingVersjon={() => {}}
+          // @ts-ignore
+          kodeverk={alleKodeverk as AlleKodeverk}
+          fagsak={{
+            fagsakYtelseType: {
+              kode: fagsakYtelseType.ENGANGSSTONAD,
+              kodeverk: '',
+            },
+          } as Fagsak}
+          rettigheter={{
+            writeAccess: {
+              isEnabled: true,
+            },
+            kanOverstyreAccess: {
+              isEnabled: true,
+            },
+          } as AksessRettigheter}
+          oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
+          valgtProsessSteg="default"
+          valgtFaktaSteg="default"
+          opneSokeside={() => {}}
+          setRequestPendingMessage={() => {}}
+        />
+      </RestApiMock>,
+    );
+    expect(await screen.findByText('Beregning')).toBeInTheDocument();
+    expect(screen.getByText('Simulering')).toBeInTheDocument();
+    expect(screen.getByText('Vedtak')).toBeInTheDocument();
 
-    const panel = wrapper.find(BehandlingContainer);
-
-    expect(panel).toHaveLength(1);
+    expect(screen.getByText('Fakta om')).toBeInTheDocument();
+    expect(screen.getByText('Saken')).toBeInTheDocument();
   });
 });

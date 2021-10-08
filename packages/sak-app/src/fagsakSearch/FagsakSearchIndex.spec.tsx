@@ -1,8 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import { Fagsak } from '@fpsak-frontend/types';
-import FagsakSokSakIndex from '@fpsak-frontend/sak-sok';
 
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 import FagsakSearchIndex from './FagsakSearchIndex';
@@ -35,33 +36,57 @@ describe('<FagsakSearchIndex>', () => {
   };
   const fagsaker = [fagsak, fagsak2];
 
-  it('skal søke opp fagsaker', () => {
-    requestApi.mock(FpsakApiKeys.KODEVERK.name, {});
-    requestApi.mock(FpsakApiKeys.SEARCH_FAGSAK.name, fagsaker);
+  it('skal søke opp fagsaker', async () => {
+    const data = [
+      { key: FpsakApiKeys.KODEVERK.name, global: true, data: {} },
+      { key: FpsakApiKeys.SEARCH_FAGSAK.name, data: fagsaker },
+    ];
 
-    const wrapper = shallow(<FagsakSearchIndex />);
+    const utils = render(
+      <RestApiMock data={data} requestApi={requestApi}>
+        <FagsakSearchIndex />
+      </RestApiMock>,
+    );
 
-    const fagsakSearchIndex = wrapper.find(FagsakSokSakIndex);
-    expect(fagsakSearchIndex).toHaveLength(1);
+    expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
 
-    expect(fagsakSearchIndex.prop('fagsaker')).toEqual([]);
+    const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
+    userEvent.type(nrInput, '123');
 
-    const sok = fagsakSearchIndex.prop('searchFagsakCallback');
-    sok();
+    await waitFor(() => expect(screen.queryByText('Søk')).not.toBeDisabled());
 
-    expect(wrapper.find(FagsakSokSakIndex).prop('fagsaker')).toEqual(fagsaker);
+    userEvent.click(screen.getByText('Søk'));
+
+    expect(await screen.findByText('Saksnummer')).toBeInTheDocument();
+    expect(screen.getByText('12345')).toBeInTheDocument();
+    expect(screen.getByText('23456')).toBeInTheDocument();
   });
 
-  it('skal gå til valgt fagsak', () => {
-    requestApi.mock(FpsakApiKeys.KODEVERK.name, {});
-    requestApi.mock(FpsakApiKeys.SEARCH_FAGSAK.name, fagsaker);
+  it('skal gå til valgt fagsak', async () => {
+    const data = [
+      { key: FpsakApiKeys.KODEVERK.name, global: true, data: {} },
+      { key: FpsakApiKeys.SEARCH_FAGSAK.name, data: fagsaker },
+    ];
 
-    const wrapper = shallow(<FagsakSearchIndex />);
+    const utils = render(
+      <RestApiMock data={data} requestApi={requestApi}>
+        <FagsakSearchIndex />
+      </RestApiMock>,
+    );
 
-    const fagsakSearchIndex = wrapper.find(FagsakSokSakIndex);
-    const velgFagsak = fagsakSearchIndex.prop('selectFagsakCallback') as (event: any, saksnummer: string) => undefined;
-    velgFagsak('', fagsak.saksnummer);
+    expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
 
-    expect(mockHistoryPush).toHaveBeenCalledWith(`/fagsak/${fagsak.saksnummer}/`);
+    const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
+    userEvent.type(nrInput, '123');
+
+    await waitFor(() => expect(screen.queryByText('Søk')).not.toBeDisabled());
+
+    userEvent.click(screen.getByText('Søk'));
+
+    expect(await screen.findByText('Saksnummer')).toBeInTheDocument();
+
+    userEvent.click(screen.getAllByRole('row')[1]);
+
+    await waitFor(() => expect(mockHistoryPush).toHaveBeenCalledWith(`/fagsak/${fagsak.saksnummer}/`));
   });
 });

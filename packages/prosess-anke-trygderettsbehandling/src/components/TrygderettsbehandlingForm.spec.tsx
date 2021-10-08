@@ -33,7 +33,6 @@ describe('<TrygderettsbehandlingForm>', () => {
         ankeVurderingResultat={{} as AnkeVurdering['ankeVurderingResultat']}
         aksjonspunkter={[]}
         submitCallback={sinon.spy()}
-        previewCallback={sinon.spy()}
         onSubmit={sinon.spy()}
         valgtTrygderettVurdering={{
           kode: ankeVurderingType.ANKE_OMGJOER,
@@ -61,7 +60,6 @@ describe('<TrygderettsbehandlingForm>', () => {
         ankeVurderingResultat={{} as AnkeVurdering['ankeVurderingResultat']}
         aksjonspunkter={[]}
         submitCallback={sinon.spy()}
-        previewCallback={sinon.spy()}
         onSubmit={sinon.spy()}
         valgtTrygderettVurdering={{
           kode: ankeVurderingType.ANKE_STADFESTE_YTELSESVEDTAK,

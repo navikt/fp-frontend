@@ -1,15 +1,15 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
+import { render, screen } from '@testing-library/react';
 
-import AnkeTrygderettsbehandlingProsessIndex from '@fpsak-frontend/prosess-anke-trygderettsbehandling';
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+import * as Felles from '@fpsak-frontend/behandling-felles/src/utils/prosess/useStandardProsessPanelProps';
 import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
-import {
-  Aksjonspunkt, Behandling, Fagsak, StandardProsessPanelProps,
-} from '@fpsak-frontend/types';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
 import { AnkeBehandlingApiKeys, requestAnkeApi } from '../data/ankeBehandlingApi';
 import AnkeTrygderettsbehandlingProsessStegInitPanel from './AnkeTrygderettsbehandlingProsessStegInitPanel';
@@ -18,47 +18,58 @@ type INIT_DATA = {
   aksjonspunkter: Aksjonspunkt[];
 }
 
-const fagsak = {
-  fagsakYtelseType: {
-    kode: fagsakYtelseType.FORELDREPENGER,
-    kodeverk: '',
-  },
-} as Fagsak;
-
 const behandling = {
   uuid: 'test-uuid',
   versjon: 1,
 } as Behandling;
 
-jest.mock('@fpsak-frontend/behandling-felles', () => {
-  const felles = jest.requireActual('@fpsak-frontend/behandling-felles');
-  return {
-    ...felles,
-    useStandardProsessPanelProps: () => ({
-      behandling,
-    }),
-  };
-});
+// @ts-ignore Fiks
+const kodeverk = alleKodeverk as AlleKodeverk;
 
 describe('<AnkeTrygderettsbehandlingProsessStegInitPanel>', () => {
-  it('skal rendre komponent korrekt', () => {
-    const wrapper = shallow(<AnkeTrygderettsbehandlingProsessStegInitPanel
-      valgtProsessSteg="default"
-      registrerProsessPanel={() => {}}
-      toggleSkalOppdatereFagsakContext={() => {}}
-      oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
-      fagsak={fagsak}
-      opneSokeside={() => {}}
-      behandling={behandling}
-    />);
+  const submitCallback = jest.fn();
+  jest.spyOn(Felles, 'default').mockImplementation(() => ({
+    behandling,
+    alleMerknaderFraBeslutter: {},
+    submitCallback,
+    status: vilkarUtfallType.IKKE_VURDERT,
+    alleKodeverk: kodeverk,
+    isReadOnly: false,
+    readOnlySubmitButton: false,
+    aksjonspunkter: [{
+      definisjon: {
+        kode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
+        kodeverk: '',
+      },
+      erAktivt: true,
+      kanLoses: true,
+    }] as Aksjonspunkt[],
+    vilkar: [],
+    isAksjonspunktOpen: true,
+    setFormData: () => undefined,
+  }));
 
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
+  it('skal rendre komponent korrekt', async () => {
+    const data = [
+      { key: AnkeBehandlingApiKeys.AKSJONSPUNKTER.name, data: [] },
+      { key: AnkeBehandlingApiKeys.ANKE_VURDERING.name, data: {} },
+      { key: AnkeBehandlingApiKeys.PREVIEW_MESSAGE.name, noRelLink: true, data: undefined },
+    ];
+    render(
+      <RestApiMock data={data} requestApi={requestAnkeApi}>
+        <AnkeTrygderettsbehandlingProsessStegInitPanel
+          valgtProsessSteg="default"
+          registrerProsessPanel={() => {}}
+          toggleSkalOppdatereFagsakContext={() => {}}
+          oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
+          opneSokeside={() => {}}
+          behandling={behandling}
+        />
+      </RestApiMock>,
+    );
 
-    expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
-
-    const innerElement = panel.renderProp('renderPanel')({ behandling }, { aksjonspunkter: [] });
-
-    expect(innerElement.find(AnkeTrygderettsbehandlingProsessIndex)).toHaveLength(1);
+    expect(await screen.findByText('Trygderettsbehandling')).toBeInTheDocument();
+    expect(screen.getByText('Kommentarer til Trygderettsbehandlingen og videre oppfølging')).toBeInTheDocument();
   });
 
   it('skal ikke oppdatere fagsak-kontekst etter lagring når ap er manuell vurdering', () => {
@@ -69,7 +80,6 @@ describe('<AnkeTrygderettsbehandlingProsessStegInitPanel>', () => {
       registrerProsessPanel={() => {}}
       toggleSkalOppdatereFagsakContext={toggleSkalOppdatereFagsakContext}
       oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
-      fagsak={fagsak}
       opneSokeside={() => {}}
       behandling={behandling}
     />);
@@ -86,45 +96,5 @@ describe('<AnkeTrygderettsbehandlingProsessStegInitPanel>', () => {
     const { args } = toggleSkalOppdatereFagsakContext.getCalls()[0];
     expect(args).toHaveLength(1);
     expect(args[0]).toEqual(false);
-  });
-
-  it('skal vise forhåndsvisning av melding', () => {
-    requestAnkeApi.mock(AnkeBehandlingApiKeys.PREVIEW_MESSAGE.name, {});
-
-    const wrapper = shallow(<AnkeTrygderettsbehandlingProsessStegInitPanel
-      valgtProsessSteg="default"
-      registrerProsessPanel={() => {}}
-      toggleSkalOppdatereFagsakContext={() => {}}
-      oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
-      fagsak={fagsak}
-      opneSokeside={() => {}}
-      behandling={behandling}
-    />);
-
-    const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
-
-    const innerElement = panel.renderProp('renderPanel')({ behandling }, { aksjonspunkter: [] });
-
-    const klageProsessPanel = innerElement.find(AnkeTrygderettsbehandlingProsessIndex);
-    expect(klageProsessPanel).toHaveLength(1);
-
-    klageProsessPanel.props().previewCallback({
-      fritekst: 'Dette er en fritekst',
-      dokumentMal: 'mal',
-      mottaker: 'Mottaker',
-    });
-
-    const response = requestAnkeApi.getRequestMockData(AnkeBehandlingApiKeys.PREVIEW_MESSAGE.name);
-    expect(response).toHaveLength(1);
-    expect(response[0].params).toEqual({
-      behandlingUuid: 'test-uuid',
-      ytelseType: {
-        kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: '',
-      },
-      fritekst: 'Dette er en fritekst',
-      dokumentMal: 'mal',
-      mottaker: 'Mottaker',
-    });
   });
 });

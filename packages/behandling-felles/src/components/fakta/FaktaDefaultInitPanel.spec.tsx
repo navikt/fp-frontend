@@ -1,23 +1,17 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
-import {
-  Behandling, AksessRettigheter, StandardFaktaPanelProps, Aksjonspunkt,
-} from '@fpsak-frontend/types';
+import { Behandling, Aksjonspunkt } from '@fpsak-frontend/types';
+import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
-import FaktaPanelWrapper from './FaktaPanelWrapper';
+import * as Felles from '../../utils/fakta/useStandardFaktaPanelProps';
 import FaktaDefaultInitPanel from './FaktaDefaultInitPanel';
 
-let realUseContext: any;
-let useContextMock: any;
-
-const fagsak = {
-  saksnummer: '1234',
-};
 const behandling = {
   uuid: '1',
   versjon: 2,
@@ -27,24 +21,32 @@ const behandling = {
   },
   behandlingPaaVent: false,
 } as Behandling;
-const rettigheter = {
-  writeAccess: {
-    isEnabled: true,
-  },
-} as AksessRettigheter;
+
+// @ts-ignore Fiks
+const kodeverk = alleKodeverk as AlleKodeverk;
 
 describe('<FaktaDefaultInitPanel>', () => {
-  beforeEach(() => {
-    realUseContext = React.useContext;
-    useContextMock = jest.fn();
-    React.useContext = useContextMock;
-  });
+  const submitCallback = jest.fn();
+  jest.spyOn(Felles, 'default').mockImplementation(() => ({
+    behandling,
+    submitCallback,
+    alleKodeverk: kodeverk,
+    readOnly: false,
+    aksjonspunkter: [{
+      definisjon: {
+        kode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
+        kodeverk: '',
+      },
+      erAktivt: true,
+      kanLoses: true,
+    }] as Aksjonspunkt[],
+    harApneAksjonspunkter: true,
+    alleMerknaderFraBeslutter: {},
+    setFormData: () => undefined,
+    submittable: true,
+  }));
 
-  afterEach(() => {
-    React.useContext = realUseContext;
-  });
-
-  it('skal rendre panel korrekt', () => {
+  it('skal rendre panel korrekt', async () => {
     const AKSJONSPUNKTER_KEY = new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER_KEY');
 
     const endpoints = new RestApiConfigBuilder()
@@ -52,37 +54,26 @@ describe('<FaktaDefaultInitPanel>', () => {
       .build();
 
     const requestMock = createRequestApi(endpoints);
-    requestMock.mock(AKSJONSPUNKTER_KEY.name, []);
 
-    useContextMock.mockReturnValue({
-      fagsak, behandling, rettigheter, alleKodeverk: { test: '' }, hasFetchError: false,
-    });
+    const data = [
+      { key: AKSJONSPUNKTER_KEY.name, data: [] },
+    ];
+    render(
+      <RestApiMock data={data} requestApi={requestMock}>
+        <FaktaDefaultInitPanel
+          valgtFaktaSteg="default"
+          behandlingVersjon={1}
+          registrerFaktaPanel={() => {}}
+          requestApi={requestMock}
+          initEndepunkter={[AKSJONSPUNKTER_KEY]}
+          skalPanelVisesIMeny={() => true}
+          renderPanel={() => <div>Dette er et panel</div>}
+          faktaPanelKode={FaktaPanelCode.AKTIVITETSKRAV}
+          faktaPanelMenyTekst="Dette er en tekst"
+        />
+      </RestApiMock>,
+    );
 
-    const wrapper = shallow(<FaktaDefaultInitPanel
-      valgtFaktaSteg="default"
-      behandlingVersjon={1}
-      registrerFaktaPanel={() => {}}
-      requestApi={requestMock}
-      initEndepunkter={[AKSJONSPUNKTER_KEY]}
-      skalPanelVisesIMeny={() => true}
-      // @ts-ignore
-      renderPanel={(props) => <div {...props} />}
-      faktaPanelKode={FaktaPanelCode.AKTIVITETSKRAV}
-      faktaPanelMenyTekst="Dette er en tekst"
-    />);
-
-    const faktaWrapper = wrapper.find(FaktaPanelWrapper);
-    expect(faktaWrapper).toHaveLength(1);
-    expect(faktaWrapper.props().erPanelValgt).toBe(false);
-    expect(faktaWrapper.props().dataState).toEqual(RestApiState.SUCCESS);
-
-    const div = wrapper.find('div');
-    expect(div).toHaveLength(1);
-    const panelProps = div.props() as StandardFaktaPanelProps;
-    expect(panelProps.aksjonspunkter).toEqual([]);
-    expect(panelProps.behandling).toEqual(behandling);
-    expect(panelProps.submittable).toBe(true);
-    expect(panelProps.harApneAksjonspunkter).toBe(false);
-    expect(panelProps.readOnly).toBe(false);
+    expect(await screen.findByText('Dette er et panel')).toBeInTheDocument();
   });
 });

@@ -1,27 +1,19 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import sinon from 'sinon';
+import { render, screen } from '@testing-library/react';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 
-import FagsakProfilSakIndex from '@fpsak-frontend/sak-fagsak-profil';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
-import BehandlingVelgerSakIndex from '@fpsak-frontend/sak-behandling-velger';
-import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { BehandlingAppKontekst, Fagsak, Behandling } from '@fpsak-frontend/types';
 
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 import { FagsakProfileIndex } from './FagsakProfileIndex';
-
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom') as any,
-  useRouteMatch: () => ({ isExact: false }),
-  useLocation: () => ({
-    pathname: 'test',
-    search: 'test',
-    state: {},
-    hash: 'test',
-  }),
-}));
 
 describe('<FagsakProfileIndex>', () => {
   const fagsak = {
@@ -36,70 +28,90 @@ describe('<FagsakProfileIndex>', () => {
     },
   };
 
-  const alleKodeverk = {
-    [kodeverkTyper.FAGSAK_YTELSE]: [{
-      kode: fagsakYtelseType.FORELDREPENGER,
-      kodeverk: 'FAGSAK_YTELSE',
-      navn: 'Foreldrepenger',
-    }],
-    [kodeverkTyper.FAGSAK_STATUS]: [{
-      kode: fagsakStatus.OPPRETTET,
-      kodeverk: 'FAGSAK_STATUS',
-      navn: 'Opprettet',
-    }],
+  const navAnsatt = {
+    brukernavn: 'Peder',
+    kanBehandleKode6: false,
+    kanBehandleKode7: false,
+    kanBehandleKodeEgenAnsatt: false,
+    kanBeslutte: true,
+    kanOverstyre: false,
+    kanSaksbehandle: true,
+    kanVeilede: false,
+    navn: 'Peder Pjokk',
   };
 
   const behandling = {
-    uuid: '1',
-  };
+    uuid: 'test',
+    type: {
+      kode: behandlingType.FORSTEGANGSSOKNAD,
+      kodeverk: 'BEHANDLING_TYPE',
+    },
+    status: {
+      kode: behandlingStatus.OPPRETTET,
+      kodeverk: 'BEHANDLING_STATUS',
+    },
+    behandlendeEnhetId: 'test',
+    behandlendeEnhetNavn: 'NAV Viken',
+    opprettet: '2017-08-02T00:54:25.455',
+  } as Behandling;
 
   const fagsakRettigheter = {
     sakSkalTilInfotrygd: true,
     behandlingTypeKanOpprettes: [],
   };
 
-  it('skal rendre komponent og vise alle behandlinger når ingen behandling er valgt', () => {
-    requestApi.mock(FpsakApiKeys.KODEVERK.name, alleKodeverk);
-    requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE.name, {});
-    requestApi.mock(FpsakApiKeys.RISIKO_AKSJONSPUNKT.name, {});
-    requestApi.mock(FpsakApiKeys.KONTROLLRESULTAT.name, {});
+  it('skal rendre komponent og vise alle behandlinger når ingen behandling er valgt', async () => {
+    const data = [
+      { key: FpsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
+      { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
+      { key: FpsakApiKeys.RISIKO_AKSJONSPUNKT.name, data: undefined },
+      { key: FpsakApiKeys.KONTROLLRESULTAT.name, data: {} },
+      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
+    ];
 
-    const wrapper = shallow(<FagsakProfileIndex
-      fagsak={fagsak as Fagsak}
-      alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
-      harHentetBehandlinger
-      oppfriskBehandlinger={sinon.spy()}
-      fagsakRettigheter={fagsakRettigheter}
-    />);
+    render(
+      <RestApiMock data={data} requestApi={requestApi}>
+        <Router history={createMemoryHistory()}>
+          <FagsakProfileIndex
+            fagsak={fagsak as Fagsak}
+            alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
+            harHentetBehandlinger
+            oppfriskBehandlinger={sinon.spy()}
+            fagsakRettigheter={fagsakRettigheter}
+          />
+        </Router>
+      </RestApiMock>,
+    );
 
-    const fagsakProfile = wrapper.find(FagsakProfilSakIndex);
-    expect(fagsakProfile).toHaveLength(1);
-
-    const behandlingVelger = fagsakProfile.renderProp('renderBehandlingVelger')().find(BehandlingVelgerSakIndex);
-    expect(behandlingVelger).toHaveLength(1);
-    expect(behandlingVelger.prop('showAll')).toBe(true);
+    expect(await screen.findByText('123 - Opprettet')).toBeInTheDocument();
+    expect(screen.getByText('Førstegangsbehandling')).toBeInTheDocument();
   });
 
-  it('skal ikke vise alle behandlinger når behandling er valgt', () => {
-    requestApi.mock(FpsakApiKeys.KODEVERK.name, alleKodeverk);
-    requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE.name, {});
-    requestApi.mock(FpsakApiKeys.RISIKO_AKSJONSPUNKT.name, {});
-    requestApi.mock(FpsakApiKeys.KONTROLLRESULTAT.name, {});
+  it('skal ikke vise alle behandlinger når behandling er valgt', async () => {
+    const data = [
+      { key: FpsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
+      { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: {} },
+      { key: FpsakApiKeys.RISIKO_AKSJONSPUNKT.name, data: undefined },
+      { key: FpsakApiKeys.KONTROLLRESULTAT.name, data: {} },
+      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
+    ];
 
-    const wrapper = shallow(<FagsakProfileIndex
-      fagsak={fagsak as Fagsak}
-      alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
-      harHentetBehandlinger
-      oppfriskBehandlinger={sinon.spy()}
-      behandlingUuid="1"
-      fagsakRettigheter={fagsakRettigheter}
-    />);
+    render(
+      <RestApiMock data={data} requestApi={requestApi}>
+        <Router history={createMemoryHistory()}>
+          <FagsakProfileIndex
+            fagsak={fagsak as Fagsak}
+            alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
+            harHentetBehandlinger
+            oppfriskBehandlinger={sinon.spy()}
+            behandlingUuid="1"
+            fagsakRettigheter={fagsakRettigheter}
+          />
+        </Router>
+      </RestApiMock>,
+    );
 
-    const fagsakProfile = wrapper.find(FagsakProfilSakIndex);
-    expect(fagsakProfile).toHaveLength(1);
-
-    const behandlingVelger = fagsakProfile.renderProp('renderBehandlingVelger')().find(BehandlingVelgerSakIndex);
-    expect(behandlingVelger).toHaveLength(1);
-    expect(behandlingVelger.prop('showAll')).toBe(false);
+    expect(await screen.findByText('123 - Opprettet')).toBeInTheDocument();
+    expect(screen.queryByText('Førstegangsbehandling')).not.toBeInTheDocument();
   });
 });

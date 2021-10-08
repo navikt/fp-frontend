@@ -1,49 +1,87 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
-import { BehandlingContainer } from '@fpsak-frontend/behandling-felles';
+import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { AksessRettigheter, AlleKodeverk, Fagsak } from '@fpsak-frontend/types';
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
 import BehandlingSvangerskapspengerIndex from './BehandlingSvangerskapspengerIndex';
 import { requestSvpApi, SvpBehandlingApiKeys } from './data/svpBehandlingApi';
 
-jest.mock('@fpsak-frontend/behandling-felles', () => {
-  const felles = jest.requireActual('@fpsak-frontend/behandling-felles');
-  return {
-    ...felles,
-    useBehandling: () => ({
-      behandling: {
-        uuid: 'test-uuid',
-        versjon: 1,
-      },
-    }),
-  };
-});
-
 describe('<BehandlingSvangerskapspengerIndex>', () => {
-  it('skal rendre korrekt', () => {
-    requestSvpApi.mock(SvpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT.name, {});
-    requestSvpApi.mock(SvpBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT.name, {});
+  it('skal vise paneler korrekt i prosess og faktameny', async () => {
+    const data = [
+      {
+        key: SvpBehandlingApiKeys.BEHANDLING_SVP.name,
+        noRelLink: true,
+        data: {
+          uuid: 'test-uuid',
+          versjon: 1,
+          status: {
+            kode: behandlingStatus.OPPRETTET,
+            kodeverk: '',
+          },
+          type: {
+            kode: behandlingType.FORSTEGANGSSOKNAD,
+            kodeverk: '',
+          },
+          links: [{
+            href: SvpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT.name,
+            rel: 'arbeidsgivere-oversikt',
+            type: 'GET',
+          }, {
+            href: SvpBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT.name,
+            rel: 'behandling-personoversikt',
+            type: 'GET',
+          }],
+        },
+      },
+      { key: SvpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT.name, data: {} },
+      { key: SvpBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT.name, data: {} },
+      { key: SvpBehandlingApiKeys.PREVIEW_MESSAGE.name, noRelLink: true, data: undefined },
+    ];
 
-    const wrapper = shallow(<BehandlingSvangerskapspengerIndex
-      behandlingEventHandler={{
-        setHandler: () => {},
-        clear: () => {},
-      }}
-      behandlingUuid="1"
-      oppdaterBehandlingVersjon={() => {}}
-      kodeverk={{} as AlleKodeverk}
-      fagsak={{} as Fagsak}
-      rettigheter={{} as AksessRettigheter}
-      oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
-      valgtProsessSteg="default"
-      valgtFaktaSteg="default"
-      opneSokeside={() => {}}
-      setRequestPendingMessage={() => {}}
-    />);
+    render(
+      <RestApiMock data={data} requestApi={requestSvpApi}>
+        <BehandlingSvangerskapspengerIndex
+          behandlingEventHandler={{
+            setHandler: () => {},
+            clear: () => {},
+          }}
+          behandlingUuid="test-uuid"
+          oppdaterBehandlingVersjon={() => {}}
+          // @ts-ignore
+          kodeverk={alleKodeverk as AlleKodeverk}
+          fagsak={{
+            fagsakYtelseType: {
+              kode: fagsakYtelseType.ENGANGSSTONAD,
+              kodeverk: '',
+            },
+          } as Fagsak}
+          rettigheter={{
+            writeAccess: {
+              isEnabled: true,
+            },
+            kanOverstyreAccess: {
+              isEnabled: true,
+            },
+          } as AksessRettigheter}
+          oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
+          valgtProsessSteg="default"
+          valgtFaktaSteg="default"
+          opneSokeside={() => {}}
+          setRequestPendingMessage={() => {}}
+        />
+      </RestApiMock>,
+    );
+    expect(await screen.findByText('Beregning')).toBeInTheDocument();
+    expect(screen.getByText('Simulering')).toBeInTheDocument();
+    expect(screen.getByText('Vedtak')).toBeInTheDocument();
 
-    const panel = wrapper.find(BehandlingContainer);
-
-    expect(panel).toHaveLength(1);
+    expect(screen.getByText('Fakta om')).toBeInTheDocument();
+    expect(screen.getByText('Saken')).toBeInTheDocument();
   });
 });

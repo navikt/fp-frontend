@@ -2,7 +2,7 @@ import {
   useState, useEffect, useContext, DependencyList,
 } from 'react';
 
-import { AbstractRequestApi, RestKey } from '@fpsak-frontend/rest-api';
+import { RequestApi, RestKey } from '@fpsak-frontend/rest-api';
 
 import { RestApiDispatchContext } from './RestApiContext';
 import RestApiState from '../RestApiState';
@@ -24,23 +24,9 @@ const defaultOptions = {
 };
 
 /**
- * For mocking i unit-test
- */
-export const getUseGlobalStateRestApiMock = (requestApi: AbstractRequestApi) => function useGlobalStateRestApi<T, P>(
-  key: RestKey<T, P>, params?: P,
-):RestApiData<T> {
-  return {
-    state: RestApiState.SUCCESS,
-    error: undefined,
-    // @ts-ignore
-    data: requestApi.startRequest<T, P>(key.name, params),
-  };
-};
-
-/**
  * Hook som henter data fra backend og deretter lagrer i @see RestApiContext
  */
-const getUseGlobalStateRestApi = (requestApi: AbstractRequestApi) => function useGlobalStateRestApi<T, P>(
+const getUseGlobalStateRestApi = (requestApi: RequestApi) => function useGlobalStateRestApi<T, P>(
   key: RestKey<T, P>, params?: P, options: Options = defaultOptions,
 ):RestApiData<T> {
   const allOptions = { ...defaultOptions, ...options };

@@ -23,7 +23,6 @@ module.exports = {
       ],
       setupFilesAfterEnv: [
         '<rootDir>/packages/utils-test/src/setup-test-env.ts',
-        '<rootDir>/packages/utils-test/src/setup-test-env-hooks.ts',
       ],
       testEnvironment: 'jsdom',
       testMatch: ['**/?(*.)+(spec).+(ts|tsx)'],

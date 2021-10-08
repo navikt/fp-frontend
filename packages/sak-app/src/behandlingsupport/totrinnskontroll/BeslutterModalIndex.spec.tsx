@@ -1,62 +1,66 @@
 import React from 'react';
-import sinon from 'sinon';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import Modal from 'nav-frontend-modal';
 
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { FatterVedtakTotrinnskontrollModalSakIndex } from '@fpsak-frontend/sak-totrinnskontroll';
 import { Behandling } from '@fpsak-frontend/types';
+import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import BeslutterModalIndex from './BeslutterModalIndex';
 
 describe('<BeslutterModalIndex>', () => {
+  Modal.setAppElement('body');
   const behandling = {
     uuid: '1',
     versjon: 2,
-    behandlingsresultat: {},
     type: {
       kode: behandlingType.FORSTEGANGSSOKNAD,
       kodeverk: '',
     },
     status: {
-      kode: behandlingStatus.OPPRETTET,
+      kode: behandlingStatus.FATTER_VEDTAK,
       kodeverk: '',
+    },
+    behandlingsresultat: {
+      type: {
+        kode: behandlingResultatType.OPPHOR,
+        kodeverk: '',
+      },
     },
   } as Behandling;
 
-  it('skal vise modal når beslutter godkjenner', () => {
-    requestApi.mock(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT.name, {
-      harRevurderingSammeResultat: true,
-    });
+  it('skal vise modal når beslutter sender tilbake til ny vurdering', async () => {
+    const data = [
+      { key: FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT.name, data: { harRevurderingSammeResultat: true } },
+    ];
 
-    const wrapper = shallow(<BeslutterModalIndex
-      behandling={behandling}
-      pushLocation={sinon.spy()}
-      allAksjonspunktApproved={false}
-      erKlageWithKA={false}
-    />);
+    render(
+      <RestApiMock data={data} requestApi={requestApi}>
+        <BeslutterModalIndex
+          behandling={behandling}
+          pushLocation={jest.fn()}
+          allAksjonspunktApproved
+          erKlageWithKA={false}
+        />
+      </RestApiMock>,
+    );
 
-    const modal = wrapper.find(FatterVedtakTotrinnskontrollModalSakIndex);
-    expect(modal).toHaveLength(1);
-    expect(modal.prop('harSammeResultatSomOriginalBehandling')).toBe(true);
+    expect(await screen.findByText('Resultat: Ingen endring, behandlingen avsluttes')).toBeInTheDocument();
   });
 
-  it('skal vise modal men ikke hente data når en ikke har url', () => {
-    requestApi.mock(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT.name, {
-      harRevurderingSammeResultat: true,
-    });
-    requestApi.setMissingPath(FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT.name);
+  it('skal vise modal men ikke hente data når en ikke har url', async () => {
+    render(
+      <BeslutterModalIndex
+        behandling={behandling}
+        pushLocation={jest.fn()}
+        allAksjonspunktApproved
+        erKlageWithKA={false}
+      />,
+    );
 
-    const wrapper = shallow(<BeslutterModalIndex
-      behandling={behandling}
-      pushLocation={sinon.spy()}
-      allAksjonspunktApproved={false}
-      erKlageWithKA={false}
-    />);
-
-    const modal = wrapper.find(FatterVedtakTotrinnskontrollModalSakIndex);
-    expect(modal).toHaveLength(1);
-    expect(modal.prop('harSammeResultatSomOriginalBehandling')).toBeUndefined();
+    expect(await screen.findByText('Vedtaket er opphørt.')).toBeInTheDocument();
   });
 });

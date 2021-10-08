@@ -1,44 +1,83 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
+import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { AksessRettigheter, AlleKodeverk, Fagsak } from '@fpsak-frontend/types';
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
-import RegistrerPapirsoknad from './components/RegistrerPapirsoknad';
 import BehandlingPapirsoknadIndex from './BehandlingPapirsoknadIndex';
-
-jest.mock('@fpsak-frontend/behandling-felles', () => {
-  const felles = jest.requireActual('@fpsak-frontend/behandling-felles');
-  return {
-    ...felles,
-    useBehandling: () => ({
-      behandling: {
-        uuid: 'test-uuid',
-        versjon: 1,
-      },
-    }),
-  };
-});
+import { requestPapirsoknadApi, PapirsoknadApiKeys } from './data/papirsoknadApi';
 
 describe('<BehandlingPapirsoknadIndex>', () => {
-  it('skal rendre korrekt', () => {
-    const wrapper = shallow(<BehandlingPapirsoknadIndex
-      behandlingEventHandler={{
-        setHandler: () => {},
-        clear: () => {},
-      }}
-      behandlingUuid="1"
-      oppdaterBehandlingVersjon={() => {}}
-      kodeverk={{} as AlleKodeverk}
-      fagsak={{} as Fagsak}
-      rettigheter={{} as AksessRettigheter}
-      oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
-      valgtProsessSteg="default"
-      valgtFaktaSteg="default"
-      opneSokeside={() => {}}
-      setRequestPendingMessage={() => {}}
-      fagsakPersonnummer="1224342"
-    />);
+  it('skal rendre korrekt', async () => {
+    const data = [
+      {
+        key: PapirsoknadApiKeys.BEHANDLING_PAPIRSOKNAD.name,
+        noRelLink: true,
+        data: {
+          uuid: 'test-uuid',
+          versjon: 1,
+          status: {
+            kode: behandlingStatus.OPPRETTET,
+            kodeverk: '',
+          },
+          type: {
+            kode: behandlingType.FORSTEGANGSSOKNAD,
+            kodeverk: '',
+          },
+          links: [{
+            href: PapirsoknadApiKeys.UPDATE_ON_HOLD.name,
+            rel: 'update',
+            type: 'POST',
+          }, {
+            href: PapirsoknadApiKeys.AKSJONSPUNKTER.name,
+            rel: 'aksjonspunkter',
+            type: 'GET',
+          }],
+        },
+      },
+      { key: PapirsoknadApiKeys.UPDATE_ON_HOLD.name, data: undefined },
+      { key: PapirsoknadApiKeys.AKSJONSPUNKTER.name, data: [] },
+    ];
 
-    expect(wrapper.find(RegistrerPapirsoknad)).toHaveLength(1);
+    render(
+      <RestApiMock data={data} requestApi={requestPapirsoknadApi}>
+        <BehandlingPapirsoknadIndex
+          behandlingEventHandler={{
+            setHandler: () => {},
+            clear: () => {},
+          }}
+          behandlingUuid="test-uuid"
+          oppdaterBehandlingVersjon={() => {}}
+          // @ts-ignore
+          kodeverk={alleKodeverk as AlleKodeverk}
+          fagsak={{
+            fagsakYtelseType: {
+              kode: fagsakYtelseType.ENGANGSSTONAD,
+              kodeverk: '',
+            },
+          } as Fagsak}
+          rettigheter={{
+            writeAccess: {
+              isEnabled: true,
+            },
+            kanOverstyreAccess: {
+              isEnabled: true,
+            },
+          } as AksessRettigheter}
+          oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
+          valgtProsessSteg="default"
+          valgtFaktaSteg="default"
+          opneSokeside={() => {}}
+          setRequestPendingMessage={() => {}}
+          fagsakPersonnummer="1224342"
+        />
+      </RestApiMock>,
+    );
+    expect(await screen.findByText('Registrere søknad')).toBeInTheDocument();
+    expect(screen.getByText('Registrer inn alle opplysninger fra papirsøknaden')).toBeInTheDocument();
   });
 });

@@ -1,16 +1,14 @@
 import React from 'react';
-import sinon, { SinonStub } from 'sinon';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
-import HeaderWithErrorPanel from '@fpsak-frontend/sak-dekorator';
 import EventType from '@fpsak-frontend/rest-api/src/requestApi/eventType';
-import * as useRestApiError from '@fpsak-frontend/rest-api-hooks/src/error/useRestApiError';
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 
-import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import Dekorator from './Dekorator';
+import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 
 const navAnsatt = {
-  brukernavn: 'Test',
+  brukernavn: 'Peder',
   kanBehandleKode6: false,
   kanBehandleKode7: false,
   kanBehandleKodeEgenAnsatt: false,
@@ -18,44 +16,46 @@ const navAnsatt = {
   kanOverstyre: false,
   kanSaksbehandle: true,
   kanVeilede: false,
-  navn: 'Test',
+  navn: 'Peder Pjokk',
 };
 
-let contextStubHistory: SinonStub;
-afterEach(() => {
-  if (contextStubHistory) {
-    contextStubHistory.restore();
-  }
-});
-
 describe('<Dekorator>', () => {
-  it('skal vise søkeskjermbildet, men ikke systemstatuser', () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, navAnsatt);
+  it('skal vise dekorator', async () => {
+    const data = [
+      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
+    ];
 
-    const wrapper = shallow(<Dekorator
-      queryStrings={{}}
-      setSiteHeight={sinon.spy()}
-    />);
-    const header = wrapper.find(HeaderWithErrorPanel);
-    expect(header.length).toBe(1);
+    render(
+      <RestApiMock data={data} requestApi={requestApi}>
+        <Dekorator
+          queryStrings={{}}
+          setSiteHeight={jest.fn()}
+        />
+      </RestApiMock>,
+    );
+
+    expect(await screen.findByText('Svangerskap, fødsel og adopsjon')).toBeInTheDocument();
   });
 
-  it('skal vise feilmeldinger', () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, navAnsatt);
+  it('skal vise feilmeldinger', async () => {
+    const data = [
+      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
+    ];
 
-    contextStubHistory = sinon.stub(useRestApiError, 'default').returns([{
+    const errors = [{
       type: EventType.REQUEST_ERROR,
       feilmelding: 'Dette er en feilmelding',
-    }]);
+    }];
 
-    const wrapper = shallow(<Dekorator
-      queryStrings={{}}
-      setSiteHeight={sinon.spy()}
-    />);
-    const header = wrapper.find(HeaderWithErrorPanel);
-    expect(header.prop('errorMessages')).toEqual([{
-      type: EventType.REQUEST_ERROR,
-      feilmelding: 'Dette er en feilmelding',
-    }]);
+    render(
+      <RestApiMock data={data} requestApi={requestApi} errors={errors}>
+        <Dekorator
+          queryStrings={{}}
+          setSiteHeight={jest.fn()}
+        />
+      </RestApiMock>,
+    );
+
+    expect(await screen.findByText('Dette er en feilmelding')).toBeInTheDocument();
   });
 });
