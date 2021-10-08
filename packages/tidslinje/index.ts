@@ -7,3 +7,4 @@ export { default as TimeLineDataContainer } from './src/components/TimeLineDataC
 export { default as TimeLineNavigation } from './src/components/TimeLineNavigation';
 export { default as TimeLineSoker } from './src/components/TimeLineSoker';
 export { default as TimeLineSokerEnsamSoker } from './src/components/TimeLineSokerEnsamSoker';
+export { default as Timeline } from './src/Timeline';

@@ -1,7 +1,6 @@
 import React, { Component, RefObject } from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
-import Timeline from 'react-visjs-timeline';
 import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -11,7 +10,7 @@ import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src
 import {
   ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriode, AlleKodeverk, Kjønnkode,
 } from '@fpsak-frontend/types';
-import { TimeLineControl, TimeLineSokerEnsamSoker } from '@fpsak-frontend/tidslinje';
+import { Timeline, TimeLineControl, TimeLineSokerEnsamSoker } from '@fpsak-frontend/tidslinje';
 
 import TilkjentYtelseTimelineData from './TilkjentYtelseTimelineData';
 
@@ -35,14 +34,14 @@ const getOptions = (nyePerioder: NyPeriode[]): any => {
   const lastPeriod = nyePerioder[nyePerioder.length - 1];
 
   return {
-    end: moment(lastPeriod.tom).add(2, 'days'),
+    end: moment(lastPeriod.tom).add(2, 'days').toDate(),
     locale: moment.locale('nb'),
     margin: { item: 10 },
     moment,
     orientation: { axis: 'top' },
     showCurrentTime: false,
     stack: false,
-    start: moment(firstPeriod.fom).subtract(1, 'days'),
+    start: moment(firstPeriod.fom).subtract(1, 'days').toDate(),
     tooltip: { followMouse: true },
     width: '100%',
     zoomMax: 1000 * 60 * 60 * 24 * 31 * 40,
@@ -170,16 +169,6 @@ export class TilkjentYtelse extends Component<OwnProps & WrappedComponentProps, 
     this.timelineRef = React.createRef();
   }
 
-  componentDidMount(): void {
-    // Fjern om denne blir retta: https://github.com/Lighthouse-io/react-visjs-timeline/issues/40
-    // eslint-disable-next-line react/no-find-dom-node
-    const node = ReactDOM.findDOMNode(this.timelineRef.current);
-    if (node) {
-      // @ts-ignore
-      node.children[0].style.visibility = 'visible';
-    }
-  }
-
   openPeriodInfo(): void {
     const { props: { items }, state: { selectedItem } } = this;
     if (selectedItem) {
@@ -224,35 +213,33 @@ export class TilkjentYtelse extends Component<OwnProps & WrappedComponentProps, 
   }
 
   zoomIn(): void {
-    const timeline = this.timelineRef.current.$el;
-    timeline.zoomIn(0.5);
+    this.timelineRef.current.zoomOut(0.5);
   }
 
   zoomOut(): void {
-    const timeline = this.timelineRef.current.$el;
-    timeline.zoomOut(0.5);
+    this.timelineRef.current.zoomIn(0.5);
   }
 
   goForward(): void {
-    const timeline = this.timelineRef.current.$el;
+    const timeline = this.timelineRef.current;
     const currentWindowTimes = timeline.getWindow();
     const newWindowTimes = {
       start: new Date(currentWindowTimes.start).setDate(currentWindowTimes.start.getDate() + 42),
       end: new Date(currentWindowTimes.end).setDate(currentWindowTimes.end.getDate() + 42),
     };
 
-    timeline.setWindow(newWindowTimes);
+    timeline.setWindow(newWindowTimes.start, newWindowTimes.end);
   }
 
   goBackward(): void {
-    const timeline = this.timelineRef.current.$el;
+    const timeline = this.timelineRef.current;
     const currentWindowTimes = timeline.getWindow();
     const newWindowTimes = {
       start: new Date(currentWindowTimes.start).setDate(currentWindowTimes.start.getDate() - 42),
       end: new Date(currentWindowTimes.end).setDate(currentWindowTimes.end.getDate() - 42),
     };
 
-    timeline.setWindow(newWindowTimes);
+    timeline.setWindow(newWindowTimes.start, newWindowTimes.end);
   }
 
   render() {
@@ -290,8 +277,8 @@ export class TilkjentYtelse extends Component<OwnProps & WrappedComponentProps, 
               <Timeline
                 ref={this.timelineRef}
                 options={getOptions(nyePerioder)}
-                items={nyePerioder}
-                groups={groups}
+                initialItems={nyePerioder}
+                initialGroups={groups}
                 customTimes={customTimes}
                 selectHandler={this.selectHandler}
                 selection={[selectedItem ? selectedItem.id : null]}
