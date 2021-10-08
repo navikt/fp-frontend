@@ -78,6 +78,6 @@ describe('<ProsessDefaultInitPanel>', () => {
       </RestApiMock>,
     );
 
-    await expect(screen.findByText('Dette er komponenten')).toBeInTheDocument();
+    expect(await screen.findByText('Dette er komponenten')).toBeInTheDocument();
   });
 });
