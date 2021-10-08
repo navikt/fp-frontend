@@ -127,6 +127,7 @@ describe('<ForeldelseProsessStegInitPanel>', () => {
       { key: TilbakekrevingBehandlingApiKeys.PERIODER_FORELDELSE.name, data: perioderForeldelse },
       { key: TilbakekrevingBehandlingApiKeys.BEREGNE_BELØP.name, data: undefined },
     ];
+
     render(
       <RestApiMock data={data} requestApi={requestTilbakekrevingApi}>
         <ForeldelseProsessStegInitPanel
@@ -143,6 +144,6 @@ describe('<ForeldelseProsessStegInitPanel>', () => {
     );
 
     expect(await screen.findByText('Foreldelse')).toBeInTheDocument();
-    expect(screen.getByText('Perioden før 07.04.2019 kan være foreldet. Del opp perioden ved behov og fastsett foreldelse')).toBeInTheDocument();
+    expect(screen.getByText(/kan være foreldet. Del opp perioden ved behov og fastsett foreldelse/)).toBeInTheDocument();
   });
 });
