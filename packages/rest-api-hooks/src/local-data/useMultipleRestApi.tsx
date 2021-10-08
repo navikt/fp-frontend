@@ -2,7 +2,7 @@ import {
   useState, useEffect, DependencyList, useRef,
 } from 'react';
 
-import { AbstractRequestApi, RestKey } from '@fpsak-frontend/rest-api';
+import { RequestApi, RestKey } from '@fpsak-frontend/rest-api';
 
 import RestApiState from '../RestApiState';
 
@@ -35,24 +35,6 @@ const defaultOptions = {
   isCachingOn: false,
 };
 
-/**
- * For mocking i unit-test
- */
-export const getUseMultipleRestApiMock = (requestApi: AbstractRequestApi) => function useMultipleRestApi<T, P>(
-  endpoints: EndpointData[], options: Options = defaultOptions,
-):RestApiData<T> {
-  const endpointData = endpoints.reduce((acc, endpoint) => ({
-    ...acc,
-    [format(endpoint.key.name)]: requestApi.startRequest<T, P>(endpoint.key.name, endpoint.params),
-  }), {});
-  return {
-    state: options.suspendRequest ? RestApiState.NOT_STARTED : RestApiState.SUCCESS,
-    error: undefined,
-    // @ts-ignore
-    data: options.suspendRequest ? undefined : endpointData,
-  };
-};
-
 const DEFAULT_STATE = {
   state: RestApiState.NOT_STARTED,
   error: undefined,
@@ -63,7 +45,7 @@ const DEFAULT_STATE = {
   * Hook som utfører et restkall ved mount. En kan i tillegg legge ved en dependencies-liste som kan trigge ny henting når data
   * blir oppdatert. Hook returnerer rest-kallets status/resultat/feil
   */
-const getUseMultipleRestApi = (requestApi: AbstractRequestApi) => function useMultipleRestApi<T, P>(
+const getUseMultipleRestApi = (requestApi: RequestApi) => function useMultipleRestApi<T, P>(
   endpoints: EndpointData[], options: Options = defaultOptions,
 ):RestApiData<T> {
   const [data, setData] = useState<RestApiData<T>>(DEFAULT_STATE);

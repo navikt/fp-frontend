@@ -1,33 +1,75 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { createMemoryHistory } from 'history';
 import sinon, { SinonStub } from 'sinon';
+import { Router } from 'react-router-dom';
+import { render, screen } from '@testing-library/react';
 
-import FagsakGrid from './components/FagsakGrid';
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
+import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+
 import * as useTrackRouteParam from '../app/useTrackRouteParam';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 
 import FagsakIndex from './FagsakIndex';
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom') as any,
-  useLocation: () => ({
-    pathname: 'test',
-    search: 'test',
-    state: {},
-    hash: 'test',
-  }),
-}));
-
 describe('<FagsakIndex>', () => {
   const fagsak = {
     saksnummer: '123456',
+    status: {
+      kode: fagsakStatus.LOPENDE,
+      kodeverk: 'FAGSAK_STATUS',
+    },
+    fagsakYtelseType: {
+      kode: fagsakYtelseType.FORELDREPENGER,
+      kodeverk: 'FAGSAK_YTELSE',
+    },
   };
 
   const behandling = {
     id: 1,
+    uuid: 'test',
+    type: {
+      kode: behandlingType.FORSTEGANGSSOKNAD,
+      kodeverk: 'BEHANDLING_TYPE',
+    },
+    status: {
+      kode: behandlingStatus.OPPRETTET,
+      kodeverk: 'BEHANDLING_STATUS',
+    },
+    behandlendeEnhetId: 'test',
+    behandlendeEnhetNavn: 'NAV Viken',
+    opprettet: '2017-08-02T00:54:25.455',
   };
   const behandling2 = {
     id: 2,
+    uuid: 'test2',
+    type: {
+      kode: behandlingType.FORSTEGANGSSOKNAD,
+      kodeverk: 'BEHANDLING_TYPE',
+    },
+    status: {
+      kode: behandlingStatus.OPPRETTET,
+      kodeverk: 'BEHANDLING_STATUS',
+    },
+    behandlendeEnhetId: 'test',
+    behandlendeEnhetNavn: 'NAV Viken',
+    opprettet: '2017-08-02T00:54:25.455',
+  };
+
+  const navAnsatt = {
+    brukernavn: 'Peder',
+    kanBehandleKode6: false,
+    kanBehandleKode7: false,
+    kanBehandleKodeEgenAnsatt: false,
+    kanBeslutte: true,
+    kanOverstyre: false,
+    kanSaksbehandle: true,
+    kanVeilede: false,
+    navn: 'Peder Pjokk',
   };
 
   let contextStub: SinonStub;
@@ -47,30 +89,55 @@ describe('<FagsakIndex>', () => {
     contextStub.restore();
   });
 
-  it('skal hente alle behandlinger fra fpsak og fptilbake', () => {
-    requestApi.mock(FpsakApiKeys.KODEVERK.name, {});
-    requestApi.mock(FpsakApiKeys.FETCH_FAGSAK.name, fagsak);
-    requestApi.mock(FpsakApiKeys.SAK_PERSONER.name, {});
-    requestApi.mock(FpsakApiKeys.SAK_RETTIGHETER.name, {
-      behandlingTypeKanOpprettes: [],
-    });
-    requestApi.mock(FpsakApiKeys.SAK_RETTIGHETER_FPTILBAKE.name, {
-      behandlingTypeKanOpprettes: [],
-    });
-    requestApi.mock(FpsakApiKeys.INIT_FETCH_FPTILBAKE.name, {});
-    requestApi.mock(FpsakApiKeys.ANNEN_PART_BEHANDLING.name, {});
-    requestApi.mock(FpsakApiKeys.KODEVERK_FPTILBAKE.name, {});
-    requestApi.mock(FpsakApiKeys.BEHANDLINGER_FPSAK.name, [behandling]);
-    requestApi.mock(FpsakApiKeys.BEHANDLINGER_FPTILBAKE.name, [behandling2]);
+  it('skal vise ventikon', async () => {
+    const data = [
+      { key: FpsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
+      { key: FpsakApiKeys.FETCH_FAGSAK.name, data: fagsak },
+      { key: FpsakApiKeys.SAK_PERSONER.name, global: true, data: {} },
+      { key: FpsakApiKeys.SAK_RETTIGHETER.name, data: { behandlingTypeKanOpprettes: [] } },
+      { key: FpsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
+      { key: FpsakApiKeys.ANNEN_PART_BEHANDLING.name, data: {} },
+      { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: alleKodeverk },
+      { key: FpsakApiKeys.BEHANDLINGER_FPSAK.name, data: [behandling] },
+      { key: FpsakApiKeys.BEHANDLINGER_FPTILBAKE.name, data: [behandling2] },
+    ];
 
-    const wrapper = shallow(<FagsakIndex />);
+    render(
+      <RestApiMock data={data} requestApi={requestApi}>
+        <Router history={createMemoryHistory()}>
+          <FagsakIndex />
+        </Router>
+      </RestApiMock>,
+    );
 
-    const grid = wrapper.find(FagsakGrid);
-    expect(grid).toHaveLength(1);
+    expect(await screen.findByText('Venter...')).toBeInTheDocument();
+  });
 
-    const behandlingSupportIndex = grid.prop('supportContent');
+  it('skal hente alle behandlinger fra fpsak og fptilbake', async () => {
+    const data = [
+      { key: FpsakApiKeys.KODEVERK.name, global: true, data: alleKodeverk },
+      { key: FpsakApiKeys.FETCH_FAGSAK.name, data: fagsak },
+      { key: FpsakApiKeys.SAK_PERSONER.name, global: true, data: {} },
+      { key: FpsakApiKeys.SAK_RETTIGHETER.name, data: { behandlingTypeKanOpprettes: [] } },
+      { key: FpsakApiKeys.SAK_RETTIGHETER_FPTILBAKE.name, data: { behandlingTypeKanOpprettes: [] } },
+      { key: FpsakApiKeys.INIT_FETCH_FPTILBAKE.name, global: true, data: {} },
+      { key: FpsakApiKeys.ANNEN_PART_BEHANDLING.name, data: {} },
+      { key: FpsakApiKeys.KODEVERK_FPTILBAKE.name, global: true, data: alleKodeverk },
+      { key: FpsakApiKeys.BEHANDLINGER_FPSAK.name, data: [behandling] },
+      { key: FpsakApiKeys.BEHANDLINGER_FPTILBAKE.name, data: [behandling2] },
+      { key: FpsakApiKeys.RISIKO_AKSJONSPUNKT.name, data: undefined },
+      { key: FpsakApiKeys.KONTROLLRESULTAT.name, data: undefined },
+      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
+    ];
 
-    // @ts-ignore
-    expect(behandlingSupportIndex.props.alleBehandlinger).toEqual([behandling, behandling2]);
+    render(
+      <RestApiMock data={data} requestApi={requestApi}>
+        <Router history={createMemoryHistory()}>
+          <FagsakIndex />
+        </Router>
+      </RestApiMock>,
+    );
+
+    expect(await screen.findByText('123456 - Løpende')).toBeInTheDocument();
   });
 });

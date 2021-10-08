@@ -51,7 +51,7 @@ export default {
 export const visPanelForResultatVedStadfestYtelsesvedtak = () => (
   <AnkeProsessIndex
     {...standardProsessProps}
-    isReadOnly
+    isReadOnly={false}
     ankeVurdering={{
       ankeVurderingResultat: {
         ankeVurdering: {

@@ -23,7 +23,6 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AnkeMerknaderResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import FritekstAnkeMerknaderTextField from './FritekstAnkeMerknaderTextField';
-import { BrevData } from './PreviewAnkeLink';
 
 import styles from './trygderettsbehandlingForm.less';
 
@@ -47,7 +46,6 @@ interface PureOwnProps {
   ankeVurderingResultat: AnkeVurdering['ankeVurderingResultat'];
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: AnkeMerknaderResultatAp) => Promise<void>;
-  previewCallback: (data: BrevData) => Promise<any>;
   readOnly?: boolean;
   readOnlySubmitButton?: boolean;
   sprakkode: Kodeverk;

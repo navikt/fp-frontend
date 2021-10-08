@@ -1,8 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import sinon, { SinonStub } from 'sinon';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
+import { render, screen } from '@testing-library/react';
 
-import RisikoklassifiseringSakIndex from '@fpsak-frontend/sak-risikoklassifisering';
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import kontrollresultatKode from '@fpsak-frontend/sak-risikoklassifisering/src/kodeverk/kontrollresultatKode';
 import { Fagsak, Behandling } from '@fpsak-frontend/types';
 
@@ -36,19 +38,6 @@ const location = {
 
 const navAnsatt = { navn: 'Ann S. Att', kanSaksbehandle: true };
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom') as any,
-  useHistory: () => ({
-    push: jest.fn(),
-  }),
-  useLocation: () => ({
-    hash: '23',
-    pathname: '/test/',
-    state: {},
-    search: '',
-  }),
-}));
-
 describe('<RisikoklassifiseringIndex>', () => {
   let contextStub: SinonStub;
 
@@ -63,16 +52,25 @@ describe('<RisikoklassifiseringIndex>', () => {
     contextStub.restore();
   });
 
-  it('skal rendere komponent', () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, navAnsatt);
-    requestApi.mock(FpsakApiKeys.KODEVERK.name, {});
-    const wrapper = shallow(<RisikoklassifiseringIndex
-      fagsak={fagsak as Fagsak}
-      alleBehandlinger={[behandling] as Behandling[]}
-      kontrollresultat={lagRisikoklassifisering(kontrollresultatKode.HOY)}
-      behandlingVersjon={1}
-      behandlingUuid="1"
-    />);
-    expect(wrapper.find(RisikoklassifiseringSakIndex)).toHaveLength(1);
+  it('skal rendere komponent', async () => {
+    const data = [
+      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
+      { key: FpsakApiKeys.KODEVERK.name, global: true, data: {} },
+    ];
+
+    render(
+      <RestApiMock data={data} requestApi={requestApi}>
+        <Router history={createMemoryHistory()}>
+          <RisikoklassifiseringIndex
+            fagsak={fagsak as Fagsak}
+            alleBehandlinger={[behandling] as Behandling[]}
+            kontrollresultat={lagRisikoklassifisering(kontrollresultatKode.HOY)}
+            behandlingVersjon={1}
+            behandlingUuid="1"
+          />
+        </Router>
+      </RestApiMock>,
+    );
+    expect(await screen.findByText('Faresignaler oppdaget')).toBeInTheDocument();
   });
 });

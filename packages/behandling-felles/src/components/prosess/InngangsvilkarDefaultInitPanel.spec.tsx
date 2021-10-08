@@ -1,24 +1,19 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen, waitFor } from '@testing-library/react';
 
+import * as Felles from '@fpsak-frontend/behandling-felles/src/utils/prosess/useStandardProsessPanelProps';
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
-import {
-  Behandling, AksessRettigheter, StandardProsessPanelProps, Vilkar, Aksjonspunkt,
-} from '@fpsak-frontend/types';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+import { Behandling, Vilkar, Aksjonspunkt } from '@fpsak-frontend/types';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
 import InngangsvilkarDefaultInitPanel from './InngangsvilkarDefaultInitPanel';
 
-let realUseContext: any;
-let useContextMock: any;
-
-const fagsak = {
-  saksnummer: '1234',
-};
 const behandling = {
   uuid: '1',
   versjon: 2,
@@ -28,24 +23,41 @@ const behandling = {
   },
   behandlingPaaVent: false,
 } as Behandling;
-const rettigheter = {
-  writeAccess: {
-    isEnabled: true,
-  },
-} as AksessRettigheter;
+
+// @ts-ignore Fiks
+const kodeverk = alleKodeverk as AlleKodeverk;
+
+const defaultProps = {
+  behandling,
+  alleMerknaderFraBeslutter: {},
+  submitCallback: jest.fn(),
+  status: vilkarUtfallType.IKKE_VURDERT,
+  alleKodeverk: kodeverk,
+  isReadOnly: false,
+  readOnlySubmitButton: false,
+  aksjonspunkter: [{
+    definisjon: {
+      kode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
+      kodeverk: '',
+    },
+    erAktivt: true,
+    kanLoses: true,
+  }] as Aksjonspunkt[],
+  vilkar: [],
+  isAksjonspunktOpen: true,
+  setFormData: () => undefined,
+};
+
+afterAll(() => {
+  jest.clearAllMocks();
+});
 
 describe('<InngangsvilkarDefaultInitPanel>', () => {
-  beforeEach(() => {
-    realUseContext = React.useContext;
-    useContextMock = jest.fn();
-    React.useContext = useContextMock;
-  });
-
-  afterEach(() => {
-    React.useContext = realUseContext;
-  });
-
-  it('skal ikke vise panel når en ikke har åpne aksjonspunkter', () => {
+  it('skal ikke vise panel når en ikke har åpne aksjonspunkter', async () => {
+    jest.spyOn(Felles, 'default').mockImplementation(() => ({
+      ...defaultProps,
+      aksjonspunkter: [] as Aksjonspunkt[],
+    }));
     const AKSJONSPUNKTER_KEY = new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER_KEY');
 
     const endpoints = new RestApiConfigBuilder()
@@ -53,30 +65,32 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
       .build();
 
     const requestMock = createRequestApi(endpoints);
-    requestMock.mock(AKSJONSPUNKTER_KEY.name, []);
 
-    useContextMock.mockReturnValue({
-      fagsak, behandling, rettigheter, alleKodeverk: { test: '' }, hasFetchError: false,
-    });
+    const data = [
+      { key: AKSJONSPUNKTER_KEY.name, data: [] },
+    ];
 
-    const wrapper = shallow(<InngangsvilkarDefaultInitPanel
-      erPanelValgt
-      behandlingVersjon={1}
-      registrerInngangsvilkarPanel={() => {}}
-      requestApi={requestMock}
-      initEndepunkter={[AKSJONSPUNKTER_KEY]}
-      // @ts-ignore
-      renderPanel={(props) => <div {...props} />}
-      inngangsvilkarPanelKode="test"
-      hentInngangsvilkarPanelTekst={() => 'test'}
-      harInngangsvilkarApentAksjonspunkt={false}
-    />);
+    render(
+      <RestApiMock data={data} requestApi={requestMock}>
+        <InngangsvilkarDefaultInitPanel
+          erPanelValgt
+          behandlingVersjon={1}
+          registrerInngangsvilkarPanel={() => {}}
+          requestApi={requestMock}
+          initEndepunkter={[AKSJONSPUNKTER_KEY]}
+          renderPanel={() => <div>Dette er komponenten</div>}
+          inngangsvilkarPanelKode="test"
+          hentInngangsvilkarPanelTekst={() => 'test'}
+          harInngangsvilkarApentAksjonspunkt={false}
+        />
+      </RestApiMock>,
+    );
 
-    const div = wrapper.find('div');
-    expect(div).toHaveLength(0);
+    await waitFor(() => expect(screen.queryByText('Dette er komponenten')).not.toBeInTheDocument());
   });
 
-  it('skal vise panel', () => {
+  it('skal vise panel', async () => {
+    jest.spyOn(Felles, 'default').mockImplementation(() => defaultProps);
     const vilkar = [{
       vilkarType: {
         kode: vilkarType.MEDLEMSKAPSVILKARET,
@@ -105,35 +119,29 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
       .build();
 
     const requestMock = createRequestApi(endpoints);
-    requestMock.mock(AKSJONSPUNKTER_KEY.name, aksjonspunkter);
-    requestMock.mock(VILKAR_KEY.name, vilkar);
 
-    useContextMock.mockReturnValue({
-      fagsak, behandling, rettigheter, alleKodeverk: { test: '' }, hasFetchError: false,
-    });
+    const data = [
+      { key: AKSJONSPUNKTER_KEY.name, data: aksjonspunkter },
+      { key: VILKAR_KEY.name, data: vilkar },
+    ];
 
-    const wrapper = shallow(<InngangsvilkarDefaultInitPanel
-      erPanelValgt
-      behandlingVersjon={1}
-      registrerInngangsvilkarPanel={() => {}}
-      requestApi={requestMock}
-      initEndepunkter={[AKSJONSPUNKTER_KEY, VILKAR_KEY]}
-      aksjonspunktKoder={[aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR]}
-      // @ts-ignore
-      renderPanel={(props) => <div {...props} />}
-      inngangsvilkarPanelKode="test"
-      hentInngangsvilkarPanelTekst={() => 'test'}
-      harInngangsvilkarApentAksjonspunkt={false}
-    />);
+    render(
+      <RestApiMock data={data} requestApi={requestMock}>
+        <InngangsvilkarDefaultInitPanel
+          erPanelValgt
+          behandlingVersjon={1}
+          registrerInngangsvilkarPanel={() => {}}
+          requestApi={requestMock}
+          initEndepunkter={[AKSJONSPUNKTER_KEY, VILKAR_KEY]}
+          aksjonspunktKoder={[aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR]}
+          renderPanel={() => <div>Dette er komponenten</div>}
+          inngangsvilkarPanelKode="test"
+          hentInngangsvilkarPanelTekst={() => 'test'}
+          harInngangsvilkarApentAksjonspunkt={false}
+        />
+      </RestApiMock>,
+    );
 
-    const div = wrapper.find('div');
-    expect(div).toHaveLength(1);
-    const panelProps = div.props() as StandardProsessPanelProps;
-    expect(panelProps.aksjonspunkter).toEqual(aksjonspunkter);
-    expect(panelProps.behandling).toEqual(behandling);
-    expect(panelProps.status).toEqual(vilkarUtfallType.IKKE_VURDERT);
-    expect(panelProps.isReadOnly).toBe(false);
-    expect(panelProps.readOnlySubmitButton).toBe(false);
-    expect(panelProps.isAksjonspunktOpen).toBe(true);
+    expect(await screen.findByText('Dette er komponenten')).toBeInTheDocument();
   });
 });

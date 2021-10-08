@@ -1,31 +1,29 @@
 import React from 'react';
-import sinon from 'sinon';
-import { shallow } from 'enzyme';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import MockAdapter from 'axios-mock-adapter';
+import Modal from 'nav-frontend-modal';
 
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import MeldingerSakIndex, { MessagesModalSakIndex } from '@fpsak-frontend/sak-meldinger';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
-import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
+import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 
-import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import MeldingIndex from './MeldingIndex';
 
-const mockHistoryPush = jest.fn();
-
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom') as any,
-  useHistory: () => ({
-    push: mockHistoryPush,
-  }),
-}));
-
 describe('<MeldingIndex>', () => {
-  const recipients = ['Søker'];
+  Modal.setAppElement('body');
 
   const fagsak = {
     saksnummer: '123456',
+    fagsakYtelseType: {
+      kode: fagsakYtelseType.FORELDREPENGER,
+      kodeverk: 'FAGSAK_YTELSE_TYPE',
+    },
   };
 
   const valgtBehandling = {
@@ -34,6 +32,10 @@ describe('<MeldingIndex>', () => {
     type: {
       kode: BehandlingType.FORSTEGANGSSOKNAD,
       kodeverk: '',
+    },
+    sprakkode: {
+      kode: 'nb',
+      kodeverk: 'SPRÅK',
     },
   };
 
@@ -45,6 +47,7 @@ describe('<MeldingIndex>', () => {
     { kode: 'Mal1', navn: 'Mal 1', tilgjengelig: true },
     { kode: 'Mal2', navn: 'Mal 2', tilgjengelig: true },
     { kode: 'Mal3', navn: 'Mal 3', tilgjengelig: true },
+    { kode: 'INNHEN', navn: 'Innhent', tilgjengelig: true },
   ];
 
   const assignMock = jest.fn();
@@ -57,292 +60,172 @@ describe('<MeldingIndex>', () => {
     assignMock.mockClear();
   });
 
-  it('skal vise messages når mottakere og brevmaler har blitt hentet fra server', () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, { navn: 'Peder' });
-    requestApi.mock(FpsakApiKeys.KODEVERK.name, kodeverk);
-    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, true);
-    requestApi.mock(FpsakApiKeys.BREVMALER.name, templates);
+  const history = createMemoryHistory();
 
-    const wrapper = shallow(<MeldingIndex
-      fagsak={fagsak as Fagsak}
-      valgtBehandling={valgtBehandling as BehandlingAppKontekst}
-      setMeldingForData={() => undefined}
-    />);
+  it('skal vise messages når mottakere og brevmaler har blitt hentet fra server', async () => {
+    const data = [
+      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: { navn: 'Peder' } },
+      { key: FpsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
+      { key: FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, data: true },
+      { key: FpsakApiKeys.SUBMIT_MESSAGE.name, data: undefined },
+      { key: FpsakApiKeys.BREVMALER.name, data: templates },
+    ];
 
-    const index = wrapper.find(MeldingerSakIndex);
-    expect(index.prop('recipients')).toEqual(recipients);
-    expect(index.prop('templates')).toEqual(templates);
+    render(
+      <RestApiMock data={data} requestApi={requestApi}>
+        <Router history={history}>
+          <MeldingIndex
+            fagsak={fagsak as Fagsak}
+            valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+            setMeldingForData={() => undefined}
+          />
+        </Router>
+      </RestApiMock>,
+    );
+    expect(await screen.findByText('Mottaker')).toBeInTheDocument();
+    expect(screen.getByText('Søker')).toBeInTheDocument();
+    expect(screen.getByText('Mal 1')).toBeInTheDocument();
+    expect(screen.getByText('Mal 2')).toBeInTheDocument();
+    expect(screen.getByText('Mal 3')).toBeInTheDocument();
   });
 
-  it('skal sette default tom streng ved forhåndsvisning dersom fritekst ikke er fylt ut', () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, { navn: 'Peder' });
-    requestApi.mock(FpsakApiKeys.KODEVERK.name, kodeverk);
-    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, true);
-    requestApi.mock(FpsakApiKeys.BREVMALER.name, templates);
-    requestApi.mock(FpsakApiKeys.PREVIEW_MESSAGE_FORMIDLING.name, {});
+  it('skal sette default tom streng ved forhåndsvisning dersom fritekst ikke er fylt ut', async () => {
+    const data = [
+      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: { navn: 'Peder' } },
+      { key: FpsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
+      { key: FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, data: true },
+      { key: FpsakApiKeys.BREVMALER.name, data: templates },
+      { key: FpsakApiKeys.PREVIEW_MESSAGE_FORMIDLING.name, data: {} },
+    ];
 
-    const wrapper = shallow(<MeldingIndex
-      fagsak={fagsak as Fagsak}
-      valgtBehandling={valgtBehandling as BehandlingAppKontekst}
-      setMeldingForData={() => undefined}
-    />);
+    let axiosMock: MockAdapter;
+    const setApiMock = (mockAdapter: MockAdapter) => { axiosMock = mockAdapter; };
 
-    const index = wrapper.find(MeldingerSakIndex);
-    const previewCallback = index.prop('previewCallback') as (params: any) => void;
-    previewCallback({ mottaker: 'Søker', brevmalkode: 'Mal1' });
+    render(
+      <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
+        <Router history={history}>
+          <MeldingIndex
+            fagsak={fagsak as Fagsak}
+            valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+            setMeldingForData={() => undefined}
+          />
+        </Router>
+      </RestApiMock>,
+    );
 
-    const reqData = requestApi.getRequestMockData(FpsakApiKeys.PREVIEW_MESSAGE_FORMIDLING.name);
-    expect(reqData).toHaveLength(1);
-    expect(reqData[0].params.fritekst).toBe(' ');
-  });
+    expect(await screen.findByText('Forhåndsvis')).toBeInTheDocument();
 
-  it('skal lukke av modal', async () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, { navn: 'Peder' });
-    requestApi.mock(FpsakApiKeys.KODEVERK.name, kodeverk);
-    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, true);
-    requestApi.mock(FpsakApiKeys.BREVMALER.name, templates);
-    requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE.name);
+    userEvent.click(screen.getByText('Forhåndsvis'));
 
-    const wrapper = shallow(<MeldingIndex
-      fagsak={fagsak as Fagsak}
-      valgtBehandling={valgtBehandling as BehandlingAppKontekst}
-      setMeldingForData={() => undefined}
-    />);
-
-    const message = {
-      mottaker: 'Michal Utvikler',
-      brevmalkode: 'testbrevkode',
-      fritekst: 'Dette er en tekst',
-      arsakskode: undefined,
-    };
-
-    const index = wrapper.find(MeldingerSakIndex);
-    const submitCallback = index.prop('submitCallback') as (messageArg: any) => Promise<any>;
-
-    expect(wrapper.find(MessagesModalSakIndex)).toHaveLength(0);
-
-    await submitCallback(message);
-
-    const modal = wrapper.find(MessagesModalSakIndex);
-    expect(modal).toHaveLength(1);
-
-    const closeEvent = modal.prop('closeEvent') as () => void;
-    closeEvent();
-
-    expect(wrapper.find(MessagesModalSakIndex)).toHaveLength(0);
-  });
-
-  it('skal sende melding', async () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, { navn: 'Peder' });
-    requestApi.mock(FpsakApiKeys.KODEVERK.name, kodeverk);
-    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, true);
-    requestApi.mock(FpsakApiKeys.BREVMALER.name, templates);
-    requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE.name);
-
-    const wrapper = shallow(<MeldingIndex
-      fagsak={fagsak as Fagsak}
-      valgtBehandling={valgtBehandling as BehandlingAppKontekst}
-      setMeldingForData={() => undefined}
-    />);
-
-    const message = {
-      mottaker: 'Espen Utvikler',
-      brevmalkode: 'testkode',
-      fritekst: 'Dette er en tekst',
-      arsakskode: undefined,
-    };
-
-    const index = wrapper.find(MeldingerSakIndex);
-    const submitCallback = index.prop('submitCallback') as (params: any) => void;
-    await submitCallback(message);
-
-    const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE.name);
-    expect(reqData).toHaveLength(1);
-    expect(reqData[0].params).toEqual({
+    await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
+    await waitFor(() => expect(axiosMock.history.post
+      .find((a) => a.url === '/fpformidling/api/brev/forhaandsvis').data).toBe(JSON.stringify({
       behandlingUuid: '1',
-      mottaker: message.mottaker,
-      brevmalkode: message.brevmalkode,
-      fritekst: message.fritekst,
-      arsakskode: undefined,
-    });
+      ytelseType: {
+        kode: fagsakYtelseType.FORELDREPENGER,
+        kodeverk: 'FAGSAK_YTELSE_TYPE',
+      },
+      fritekst: ' ',
+      arsakskode: null,
+      mottaker: 'Søker',
+      dokumentMal: undefined,
+    })));
   });
 
-  it('skal sende melding og ikke sette saken på vent hvis ikke Innhent eller forlenget', async () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, { navn: 'Peder' });
-    requestApi.mock(FpsakApiKeys.KODEVERK.name, kodeverk);
-    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, true);
-    requestApi.mock(FpsakApiKeys.BREVMALER.name, templates);
-    requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE.name);
+  it('skal sende melding og så lukke modal', async () => {
+    const data = [
+      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: { navn: 'Peder' } },
+      { key: FpsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
+      { key: FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, data: true },
+      { key: FpsakApiKeys.BREVMALER.name, data: templates },
+      { key: FpsakApiKeys.SUBMIT_MESSAGE.name, data: undefined },
+    ];
 
-    const wrapper = shallow(<MeldingIndex
-      fagsak={fagsak as Fagsak}
-      valgtBehandling={valgtBehandling as BehandlingAppKontekst}
-      setMeldingForData={() => undefined}
-    />);
+    let axiosMock: MockAdapter;
+    const setApiMock = (mockAdapter: MockAdapter) => { axiosMock = mockAdapter; };
 
-    const message = {
-      mottaker: 'Michal Utvikler',
-      brevmalkode: 'testbrevkode',
-      fritekst: 'Dette er en tekst',
-      arsakskode: undefined,
-    };
+    const utils = render(
+      <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
+        <Router history={history}>
+          <MeldingIndex
+            fagsak={fagsak as Fagsak}
+            valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+            setMeldingForData={() => undefined}
+          />
+        </Router>
+      </RestApiMock>,
+    );
 
-    const index = wrapper.find(MeldingerSakIndex);
-    const submitCallback = index.prop('submitCallback') as (messageArg: any) => Promise<any>;
+    expect(await screen.findByText('Send brev')).toBeInTheDocument();
 
-    expect(wrapper.find(MessagesModalSakIndex)).toHaveLength(0);
-    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(0);
+    userEvent.selectOptions(utils.getByLabelText('Mottaker'), 'Søker');
+    userEvent.selectOptions(utils.getByLabelText('Mal'), 'Mal1');
 
-    await submitCallback(message);
+    userEvent.click(screen.getByText('Send brev'));
 
-    expect(wrapper.find(MessagesModalSakIndex)).toHaveLength(1);
-    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(0);
+    expect(await screen.findByText('Brevet er bestilt')).toBeInTheDocument();
 
-    const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE.name);
-    expect(reqData).toHaveLength(1);
-    expect(reqData[0].params).toEqual({
+    userEvent.click(screen.getByText('OK'));
+
+    await waitFor(() => expect(axiosMock.history.get.length).toBe(5));
+
+    await waitFor(() => expect(axiosMock.history.get
+      .find((a) => a.url === FpsakApiKeys.SUBMIT_MESSAGE.name).params).toStrictEqual({
       behandlingUuid: '1',
-      mottaker: message.mottaker,
-      brevmalkode: message.brevmalkode,
-      fritekst: message.fritekst,
       arsakskode: undefined,
-    });
+      mottaker: 'Søker',
+      fritekst: '',
+      brevmalkode: 'Mal1',
+    }));
   });
 
   it('skal sende melding og sette saken på vent hvis INNHENT_DOK', async () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, { navn: 'Peder' });
-    requestApi.mock(FpsakApiKeys.KODEVERK.name, kodeverk);
-    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, true);
-    requestApi.mock(FpsakApiKeys.BREVMALER.name, templates);
-    requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE.name);
+    const data = [
+      { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: { navn: 'Peder' } },
+      { key: FpsakApiKeys.KODEVERK.name, global: true, data: kodeverk },
+      { key: FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, data: true },
+      { key: FpsakApiKeys.BREVMALER.name, data: templates },
+      { key: FpsakApiKeys.SUBMIT_MESSAGE.name, data: undefined },
+    ];
 
-    const wrapper = shallow(<MeldingIndex
-      fagsak={fagsak as Fagsak}
-      valgtBehandling={valgtBehandling as BehandlingAppKontekst}
-      setMeldingForData={() => undefined}
-    />);
+    let axiosMock: MockAdapter;
+    const setApiMock = (mockAdapter: MockAdapter) => { axiosMock = mockAdapter; };
 
-    const message = {
-      mottaker: 'Michal Utvikler',
+    const utils = render(
+      <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
+        <Router history={history}>
+          <MeldingIndex
+            fagsak={fagsak as Fagsak}
+            valgtBehandling={valgtBehandling as BehandlingAppKontekst}
+            setMeldingForData={() => undefined}
+          />
+        </Router>
+      </RestApiMock>,
+    );
+
+    expect(await screen.findByText('Send brev')).toBeInTheDocument();
+
+    userEvent.selectOptions(utils.getByLabelText('Mottaker'), 'Søker');
+    userEvent.selectOptions(utils.getByLabelText('Mal'), 'INNHEN');
+
+    const begrunnelseInput = utils.getByLabelText('Liste over dokumenter (skriv ett dokument pr. linje)');
+    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+
+    userEvent.click(screen.getByText('Send brev'));
+
+    expect(await screen.findByText('Behandlingen er satt på vent')).toBeInTheDocument();
+
+    userEvent.click(screen.getByText('OK'));
+
+    await waitFor(() => expect(axiosMock.history.get.length).toBe(5));
+
+    await waitFor(() => expect(axiosMock.history.get
+      .find((a) => a.url === FpsakApiKeys.SUBMIT_MESSAGE.name).params).toStrictEqual({
+      behandlingUuid: '1',
+      arsakskode: undefined,
       brevmalkode: 'INNHEN',
-      fritekst: 'Dette er en tekst',
-      arsakskode: undefined,
-    };
-
-    const index = wrapper.find(MeldingerSakIndex);
-    const submitCallback = index.prop('submitCallback') as (messageArg: any) => Promise<any>;
-
-    expect(wrapper.find(MessagesModalSakIndex)).toHaveLength(0);
-    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(0);
-
-    await submitCallback(message);
-
-    expect(wrapper.find(MessagesModalSakIndex)).toHaveLength(0);
-    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(1);
-
-    const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE.name);
-    expect(reqData).toHaveLength(1);
-    expect(reqData[0].params).toEqual({
-      behandlingUuid: '1',
-      mottaker: message.mottaker,
-      brevmalkode: message.brevmalkode,
-      fritekst: message.fritekst,
-      arsakskode: undefined,
-    });
-  });
-
-  it('skal sende melding og sette saken på vent hvis FORLEN', async () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, { navn: 'Peder' });
-    requestApi.mock(FpsakApiKeys.KODEVERK.name, kodeverk);
-    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, true);
-    requestApi.mock(FpsakApiKeys.BREVMALER.name, templates);
-    requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE.name);
-
-    const wrapper = shallow(<MeldingIndex
-      fagsak={fagsak as Fagsak}
-      valgtBehandling={valgtBehandling as BehandlingAppKontekst}
-      setMeldingForData={() => undefined}
-    />);
-
-    const message = {
-      mottaker: 'Michal Utvikler',
-      brevmalkode: 'FORLEN',
-      fritekst: 'Dette er en tekst',
-      arsakskode: undefined,
-    };
-
-    const index = wrapper.find(MeldingerSakIndex);
-    const submitCallback = index.prop('submitCallback') as (messageArg: any) => Promise<any>;
-
-    expect(wrapper.find(MessagesModalSakIndex)).toHaveLength(0);
-    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(0);
-
-    await submitCallback(message);
-
-    expect(wrapper.find(MessagesModalSakIndex)).toHaveLength(0);
-    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(1);
-
-    const reqData = requestApi.getRequestMockData(FpsakApiKeys.SUBMIT_MESSAGE.name);
-    expect(reqData).toHaveLength(1);
-    expect(reqData[0].params).toEqual({
-      behandlingUuid: '1',
-      mottaker: message.mottaker,
-      brevmalkode: message.brevmalkode,
-      fritekst: message.fritekst,
-      arsakskode: undefined,
-    });
-  });
-
-  it('skal håndtere melding fra modal', async () => {
-    requestApi.mock(FpsakApiKeys.NAV_ANSATT.name, { navn: 'Peder' });
-    requestApi.mock(FpsakApiKeys.KODEVERK.name, kodeverk);
-    requestApi.mock(FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP.name, true);
-    requestApi.mock(FpsakApiKeys.BREVMALER.name, templates);
-    requestApi.mock(FpsakApiKeys.SUBMIT_MESSAGE.name);
-
-    const setBehandlingOnHoldCallback = sinon.spy();
-    behandlingEventHandler.setHandler({
-      settBehandlingPaVent: setBehandlingOnHoldCallback,
-    });
-
-    const wrapper = shallow(<MeldingIndex
-      fagsak={fagsak as Fagsak}
-      valgtBehandling={valgtBehandling as BehandlingAppKontekst}
-      setMeldingForData={() => undefined}
-    />);
-
-    const message = {
-      mottaker: 'Michal Utvikler',
-      brevmalkode: 'FORLEN',
-      fritekst: 'Dette er en tekst',
-      arsakskode: undefined,
-    };
-
-    const index = wrapper.find(MeldingerSakIndex);
-    const submitCallback = index.prop('submitCallback') as (messageArg: any) => Promise<any>;
-
-    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(0);
-    await submitCallback(message);
-    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(1);
-
-    const formValues = {
-      frist: '2017-10-10',
-      ventearsak: 'TEST',
-    };
-    wrapper.find(SettPaVentModalIndex).prop('submitCallback')(formValues);
-
-    expect(setBehandlingOnHoldCallback).toHaveProperty('callCount', 1);
-    const { args } = setBehandlingOnHoldCallback.getCalls()[0];
-    expect(args).toHaveLength(1);
-    expect(args[0]).toEqual({
-      frist: formValues.frist,
-      ventearsak: formValues.ventearsak,
-    });
-
-    expect(mockHistoryPush).toHaveBeenCalledWith('/');
-
-    expect(wrapper.find(SettPaVentModalIndex)).toHaveLength(0);
-
-    behandlingEventHandler.clear();
+      fritekst: 'Dette er en begrunnelse',
+      mottaker: 'Søker',
+    }));
   });
 });

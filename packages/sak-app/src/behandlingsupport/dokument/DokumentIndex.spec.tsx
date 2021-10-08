@@ -1,7 +1,7 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
-import DokumenterSakIndex from '@fpsak-frontend/sak-dokumenter';
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import { DokumentIndex } from './DokumentIndex';
@@ -27,22 +27,21 @@ describe('<DokumentIndex>', () => {
     kommunikasjonsretning: 'Inn',
   }];
 
-  it('skal vise liste med sorterte dokumenter', () => {
-    requestApi.mock(FpsakApiKeys.ALL_DOCUMENTS.name, documents);
+  it('skal vise liste med tre dokumenter', async () => {
+    const data = [
+      { key: FpsakApiKeys.ALL_DOCUMENTS.name, data: documents },
+    ];
 
-    const wrapper = shallow(<DokumentIndex
-      behandlingUuid="1"
-      behandlingVersjon={2}
-      saksnummer="123"
-    />);
+    render(
+      <RestApiMock data={data} requestApi={requestApi}>
+        <DokumentIndex
+          behandlingUuid="1"
+          behandlingVersjon={2}
+          saksnummer="123"
+        />
+      </RestApiMock>,
+    );
 
-    const index = wrapper.find(DokumenterSakIndex);
-    expect(index).toHaveLength(1);
-
-    const dokumenter = index.prop('documents');
-
-    expect(dokumenter[0].journalpostId).toEqual('2');
-    expect(dokumenter[1].journalpostId).toEqual('3');
-    expect(dokumenter[2].journalpostId).toEqual('1');
+    expect(await screen.findAllByRole('row')).toHaveLength(4);
   });
 });

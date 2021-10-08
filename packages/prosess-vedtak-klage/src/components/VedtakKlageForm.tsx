@@ -155,7 +155,7 @@ export const getAvvisningsAarsaker = createSelector([
       return klageVurderingResultat.klageFormkravResultatNFP.avvistArsaker;
     }
   }
-  return null;
+  return [];
 });
 
 const omgjoerTekstMap = {

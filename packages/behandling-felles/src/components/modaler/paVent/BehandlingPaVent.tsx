@@ -2,7 +2,7 @@ import React, {
   useState, useMemo, useCallback, FunctionComponent, useEffect,
 } from 'react';
 
-import { AbstractRequestApi, RestKey } from '@fpsak-frontend/rest-api';
+import { RequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -24,7 +24,7 @@ export type SettPaVentParams = {
 interface BehandlingPaVentProps {
   behandling: Behandling;
   kodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
-  requestApi: AbstractRequestApi;
+  requestApi: RequestApi;
   oppdaterPaVentKey: RestKey<void, SettPaVentParams>;
   aksjonspunktKey: RestKey<Aksjonspunkt[], void>;
   hentBehandling: (keepData: boolean) => Promise<any>;
