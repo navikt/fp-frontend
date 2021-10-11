@@ -16,7 +16,7 @@ type QueryParams = {
   risiko?: boolean;
 }
 
-const DEV_LOGIN_URL = 'http://localhost:8080/fpsak/jetty/login';
+const DEV_LOGIN_URL = 'http://localhost:8080/fpsak/resource/login';
 
 export const fagsakPath = '/fagsak/:saksnummer(\\d+)/';
 export const aktoerPath = '/aktoer/:aktoerId(\\d+)';
