@@ -24,6 +24,7 @@ interface OwnProps {
   maxLength?: number;
   badges?: Badges[];
   validate?: ((value: string) => any)[];
+  textareaClass?: string;
 }
 
 const TextAreaField: FunctionComponent<OwnProps> = ({
