@@ -49,7 +49,7 @@ describe('<TilbakekrevingTimeline>', () => {
     expect(wrapper.find(TimeLineControl)).toHaveLength(1);
 
     const tidslinje = wrapper.find(Timeline);
-    const options = tidslinje.prop('options') as { min: moment.Moment; max: moment.Moment };
+    const options = tidslinje.prop('options') as { min: Date; max: Date };
     expect(moment(options.min).format(ISO_DATE_FORMAT)).toEqual('2019-09-12');
     expect(moment(options.max).format(ISO_DATE_FORMAT)).toEqual('2023-10-10');
 

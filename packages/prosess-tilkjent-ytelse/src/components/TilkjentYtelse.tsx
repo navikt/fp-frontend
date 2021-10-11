@@ -1,5 +1,4 @@
 import React, { Component, RefObject } from 'react';
-import ReactDOM from 'react-dom';
 import moment from 'moment';
 import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
@@ -277,6 +276,7 @@ export class TilkjentYtelse extends Component<OwnProps & WrappedComponentProps, 
               <Timeline
                 ref={this.timelineRef}
                 options={getOptions(nyePerioder)}
+                // @ts-ignore Fiks
                 initialItems={nyePerioder}
                 initialGroups={groups}
                 customTimes={customTimes}

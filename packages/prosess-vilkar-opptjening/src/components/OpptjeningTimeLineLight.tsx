@@ -1,5 +1,4 @@
 import React, { Component, RefObject } from 'react';
-import ReactDOM from 'react-dom';
 import moment from 'moment';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -197,6 +196,7 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
                     <Timeline
                       ref={this.timelineRef}
                       options={options(opptjeningFomDate, opptjeningTomDate)}
+                      // @ts-ignore Fiks
                       initialItems={items}
                       customTimes={{ currentDate: new Date(opptjeningTomDate) }}
                       selectHandler={this.selectHandler}

@@ -192,6 +192,7 @@ class Tidslinje extends Component<TidslinjeProps> {
                 <Timeline
                   ref={this.timelineRef}
                   options={getOptions(customTimes, [...uttakPerioder].sort(sortByDate))}
+                  // @ts-ignore Fiks
                   initialItems={items}
                   initialGroups={groups}
                   customTimes={customTimes}
