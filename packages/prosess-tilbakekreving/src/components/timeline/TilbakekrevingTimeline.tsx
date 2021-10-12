@@ -1,7 +1,5 @@
 import React, { Component, MouseEvent, RefObject } from 'react';
-import ReactDOM from 'react-dom';
 import moment from 'moment';
-import Timeline from 'react-visjs-timeline';
 import { Column, Row } from 'nav-frontend-grid';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 
@@ -10,7 +8,7 @@ import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import { Image } from '@fpsak-frontend/shared-components';
 import urlMann from '@fpsak-frontend/assets/images/mann.svg';
 import urlKvinne from '@fpsak-frontend/assets/images/kvinne.svg';
-import { TimeLineControl } from '@fpsak-frontend/tidslinje';
+import { Timeline, TimeLineControl } from '@fpsak-frontend/tidslinje';
 
 import TidslinjePeriode from '../../types/tidslinjePeriodeTsType';
 import styles from './tilbakekrevingTimeline.less';
@@ -30,17 +28,17 @@ const getOptions = (sortedPeriods: Periode[]) => {
   const lastPeriod = sortedPeriods[sortedPeriods.length - 1];
 
   return {
-    end: moment(lastPeriod.tom).add(2, 'days'),
+    end: moment(lastPeriod.tom).add(2, 'days').toDate(),
     locale: moment.locale('nb'),
     margin: { item: 14 },
-    max: moment(firstPeriod.fom).add(4, 'years'),
-    min: moment(firstPeriod.fom).subtract(4, 'weeks'),
+    max: moment(firstPeriod.fom).add(4, 'years').toDate(),
+    min: moment(firstPeriod.fom).subtract(4, 'weeks').toDate(),
     moment,
     moveable: true,
     orientation: { axis: 'top' },
     showCurrentTime: false,
     stack: false,
-    start: moment(firstPeriod.fom).subtract(1, 'days'),
+    start: moment(firstPeriod.fom).subtract(1, 'days').toDate(),
     tooltip: { followMouse: true },
     verticalScroll: false,
     width: '100%',
@@ -120,46 +118,34 @@ class TilbakekrevingTimeline extends Component<OwnProps & WrappedComponentProps>
     this.timelineRef = React.createRef();
   }
 
-  componentDidMount() {
-    // Fjern om denne blir retta: https://github.com/Lighthouse-io/react-visjs-timeline/issues/40
-    // eslint-disable-next-line react/no-find-dom-node
-    const node = ReactDOM.findDOMNode(this.timelineRef.current);
-    if (node) {
-      // @ts-ignore
-      node.children[0].style.visibility = 'visible';
-    }
-  }
-
   zoomIn() {
-    const timeline = this.timelineRef.current.$el;
-    timeline.zoomIn(0.5);
+    this.timelineRef.current.zoomOut(0.5);
   }
 
   zoomOut() {
-    const timeline = this.timelineRef.current.$el;
-    timeline.zoomOut(0.5);
+    this.timelineRef.current.zoomIn(0.5);
   }
 
   goForward() {
-    const timeline = this.timelineRef.current.$el;
+    const timeline = this.timelineRef.current;
     const currentWindowTimes = timeline.getWindow();
     const newWindowTimes = {
       start: new Date(currentWindowTimes.start).setDate(currentWindowTimes.start.getDate() + 42),
       end: new Date(currentWindowTimes.end).setDate(currentWindowTimes.end.getDate() + 42),
     };
 
-    timeline.setWindow(newWindowTimes);
+    timeline.setWindow(newWindowTimes.start, newWindowTimes.end);
   }
 
   goBackward() {
-    const timeline = this.timelineRef.current.$el;
+    const timeline = this.timelineRef.current;
     const currentWindowTimes = timeline.getWindow();
     const newWindowTimes = {
       start: new Date(currentWindowTimes.start).setDate(currentWindowTimes.start.getDate() - 42),
       end: new Date(currentWindowTimes.end).setDate(currentWindowTimes.end.getDate() - 42),
     };
 
-    timeline.setWindow(newWindowTimes);
+    timeline.setWindow(newWindowTimes.start, newWindowTimes.end);
   }
 
   render() {
@@ -203,8 +189,8 @@ class TilbakekrevingTimeline extends Component<OwnProps & WrappedComponentProps>
                 <Timeline
                   ref={this.timelineRef}
                   options={getOptions([...newPerioder].sort(sortByDate))}
-                  items={items}
-                  groups={groups}
+                  initialItems={items}
+                  initialGroups={groups}
                   selectHandler={selectPeriodCallback}
                   selection={[selectedPeriod ? selectedPeriod.id : null]}
                 />

@@ -1,9 +1,8 @@
 import React, { Component, RefObject } from 'react';
-import ReactDOM from 'react-dom';
 import moment from 'moment';
-import Timeline from 'react-visjs-timeline';
 import { Column, Row } from 'nav-frontend-grid';
 
+import { Timeline } from '@fpsak-frontend/tidslinje';
 import { DDMMYYYY_DATE_FORMAT, isEqual } from '@fpsak-frontend/utils';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
@@ -90,17 +89,17 @@ const createGroups = (opptjeningPeriods: CustomOpptjeningAktivitet[], opptjening
 };
 
 const options = (opptjeningFomDato: string, opptjeningTomDato: string) => ({
-  end: moment(opptjeningTomDato).add(1, 'months').endOf('month'),
+  end: moment(opptjeningTomDato).add(1, 'months').endOf('month').toDate(),
   locale: moment.locale('nb'),
   margin: { item: 10 },
-  max: moment(opptjeningTomDato).endOf('month'),
-  min: moment(opptjeningFomDato).startOf('month'),
+  max: moment(opptjeningTomDato).endOf('month').toDate(),
+  min: moment(opptjeningFomDato).startOf('month').toDate(),
   moment,
   moveable: false,
   orientation: { axis: 'top' },
   showCurrentTime: false,
   stack: false,
-  start: moment(opptjeningFomDato).subtract(1, 'months').startOf('month'),
+  start: moment(opptjeningFomDato).subtract(1, 'months').startOf('month').toDate(),
   verticalScroll: false,
   width: '100%',
   zoomable: false,
@@ -152,17 +151,6 @@ class OpptjeningTimeLine extends Component<OwnProps, OwnState> {
     });
   }
 
-  componentDidMount(): void {
-    // Ser ut som react-visjs-timeline ikkje blir vedlikeholdt lenger, men fjern om denne
-    // blir retta: https://github.com/Lighthouse-io/react-visjs-timeline/issues/40
-    // eslint-disable-next-line react/no-find-dom-node
-    const node = ReactDOM.findDOMNode(this.timelineRef.current);
-    if (node) {
-      // @ts-ignore
-      node.children[0].style.visibility = 'visible';
-    }
-  }
-
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillReceiveProps(nextProps: OwnProps): void {
     const { opptjeningPeriods } = this.props;
@@ -204,10 +192,10 @@ class OpptjeningTimeLine extends Component<OwnProps, OwnState> {
                   <Timeline
                     ref={this.timelineRef}
                     options={options(opptjeningFomDato, opptjeningTomDato)}
-                    items={items}
+                    initialItems={items}
                     customTimes={{ currentDate: new Date(opptjeningTomDato) }}
                     selectHandler={this.selectHandler}
-                    groups={groups}
+                    initialGroups={groups}
                     selection={[selectedPeriod ? selectedPeriod.id : undefined]}
                   />
                 </div>
