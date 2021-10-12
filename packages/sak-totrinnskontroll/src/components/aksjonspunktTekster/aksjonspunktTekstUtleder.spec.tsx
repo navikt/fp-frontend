@@ -40,7 +40,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.ADOPSJONSDOKUMENTAJON,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -50,7 +50,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -60,7 +60,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -70,7 +70,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.OVERSTYR_ADOPSJONSVILKAR,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -81,7 +81,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.OMSORGSOVERTAKELSE,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -91,7 +91,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.MANUELL_VURDERING_AV_OMSORGSVILKARET,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -102,7 +102,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.AUTO_VENT_PÅ_FODSELREGISTRERING,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -112,7 +112,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.TERMINBEKREFTELSE,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -122,7 +122,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -132,7 +132,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.OVERSTYR_FODSELSVILKAR,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -143,7 +143,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -153,7 +153,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(false, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -163,7 +163,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -173,7 +173,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -184,7 +184,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -194,7 +194,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -204,7 +204,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.OVERSTYR_BEREGNING,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -214,7 +214,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -225,7 +225,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.SOKNADSFRISTVILKARET,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -235,7 +235,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.VURDER_SOKNADSFRIST_FORELDREPENGER,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -245,7 +245,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.OVERSTYR_SOKNADSFRISTVILKAR,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -256,7 +256,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -266,7 +266,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -276,7 +276,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -286,7 +286,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.AVKLAR_OPPHOLDSRETT,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -296,7 +296,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.OVERSTYR_MEDLEMSKAPSVILKAR,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -307,7 +307,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.AVKLAR_FØRSTE_UTTAKSDATO,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
     // @ts-ignore
@@ -318,7 +318,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
       beregningDto: { fastsattVarigEndringNaering: true },
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
@@ -329,7 +329,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
       beregningDto: { fastsattVarigEndringNaering: false },
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, aksjonspunkt);
@@ -349,7 +349,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.AVKLAR_UTTAK,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
       beregningDto: { fastsattVarigEndringNaering: false },
       uttakPerioder: [uttakPeriode],
     } as TotrinnskontrollAksjonspunkt;
@@ -370,7 +370,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
       beregningDto: { fastsattVarigEndringNaering: false },
       uttakPerioder: [uttakPeriode],
     } as TotrinnskontrollAksjonspunkt;
@@ -391,7 +391,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.FASTSETT_UTTAKPERIODER,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
       beregningDto: { fastsattVarigEndringNaering: false },
       uttakPerioder: [uttakPeriode],
     } as TotrinnskontrollAksjonspunkt;
@@ -413,7 +413,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.AVKLAR_UTTAK,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
       beregningDto: { fastsattVarigEndringNaering: false },
       uttakPerioder: [uttakPeriode],
     } as TotrinnskontrollAksjonspunkt;
@@ -434,7 +434,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
       beregningDto: { fastsattVarigEndringNaering: false },
       uttakPerioder: [uttakPeriode],
     } as TotrinnskontrollAksjonspunkt;
@@ -455,7 +455,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.FASTSETT_UTTAKPERIODER,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
       beregningDto: { fastsattVarigEndringNaering: false },
       uttakPerioder: [uttakPeriode],
     } as TotrinnskontrollAksjonspunkt;
@@ -477,7 +477,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.AVKLAR_UTTAK,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
       beregningDto: { fastsattVarigEndringNaering: false },
       uttakPerioder: [uttakPeriode],
     } as TotrinnskontrollAksjonspunkt;
@@ -498,7 +498,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
       beregningDto: { fastsattVarigEndringNaering: false },
       uttakPerioder: [uttakPeriode],
     } as TotrinnskontrollAksjonspunkt;
@@ -519,7 +519,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.FASTSETT_UTTAKPERIODER,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
       beregningDto: { fastsattVarigEndringNaering: false },
       uttakPerioder: [uttakPeriode],
     } as TotrinnskontrollAksjonspunkt;
@@ -541,7 +541,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.AVKLAR_UTTAK,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
       beregningDto: { fastsattVarigEndringNaering: false },
       uttakPerioder: [uttakPeriode],
     } as TotrinnskontrollAksjonspunkt;
@@ -562,7 +562,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
       beregningDto: { fastsattVarigEndringNaering: false },
       uttakPerioder: [uttakPeriode],
     } as TotrinnskontrollAksjonspunkt;
@@ -583,7 +583,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.FASTSETT_UTTAKPERIODER,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
       beregningDto: { fastsattVarigEndringNaering: false },
       uttakPerioder: [uttakPeriode],
     } as TotrinnskontrollAksjonspunkt;
@@ -628,7 +628,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const klagebehandlingVurdering = {
       klageVurderingResultatNFP: medholdIKlage,
@@ -641,7 +641,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const klagebehandlingVurdering = {
       klageVurderingResultatNK: medholdIKlage,
@@ -659,7 +659,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], faktaOmBeregningTilfeller, false, aksjonspunkt, klagebehandlingVurdering);
     // @ts-ignore
@@ -672,7 +672,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], faktaOmBeregningTilfeller, false, aksjonspunkt, klagebehandlingVurdering);
     // @ts-ignore
@@ -686,7 +686,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, klagebehandlingVurdering);
     // @ts-ignore
@@ -699,7 +699,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, klagebehandlingVurdering);
     // @ts-ignore
@@ -713,7 +713,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, klagebehandlingVurdering);
     // @ts-ignore
@@ -726,7 +726,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], [], false, aksjonspunkt, klagebehandlingVurdering);
     // @ts-ignore
@@ -743,7 +743,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
       beregningDto,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, beregningTilfeller, erTilbakekreving, aksjonspunkt);
@@ -759,7 +759,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
       beregningDto,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, beregningTilfeller, erTilbakekreving, aksjonspunkt);
@@ -782,7 +782,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
       besluttersBegrunnelse: 'begrunnelse',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
       beregningDto,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, beregningTilfeller, erTilbakekreving, aksjonspunkt);
@@ -811,7 +811,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
 
     const aksjonspunkt = {
       aksjonspunktKode: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
       arbeidforholdDtos,
     } as TotrinnskontrollAksjonspunkt;
 
