@@ -140,7 +140,7 @@ ForSaksbehandler.args = {
         }],
       },
       besluttersBegrunnelse: 'Denne er ikke godkjent fordi...',
-      totrinnskontrollGodkjent: 'false',
+      totrinnskontrollGodkjent: false,
       vurderPaNyttArsaker: [
         {
           kode: 'FEIL_REGEL',
@@ -166,7 +166,7 @@ ForSaksbehandler.args = {
           kodeverk: '',
         }],
       },
-      totrinnskontrollGodkjent: 'true',
+      totrinnskontrollGodkjent: true,
       uttakPerioder: [],
       arbeidforholdDtos: [],
     }],

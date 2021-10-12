@@ -42,7 +42,7 @@ const validerValgtFakta = (getValues: UseFormGetValues<any>, fieldIndex: string)
 
 export type AksjonspunktGodkjenningData = {
   aksjonspunktKode: string;
-  totrinnskontrollGodkjent?: string;
+  totrinnskontrollGodkjent?: boolean;
   besluttersBegrunnelse?: string;
   feilFakta?: boolean;
   feilRegel?: boolean;
@@ -102,10 +102,10 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
           return null;
         }
 
-        const erKlageKA = klageKA && totrinnskontrollGodkjent === 'true';
-        const erAnke = aksjonspunktKode === aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE && totrinnskontrollGodkjent === 'true';
-        const visKunBegrunnelse = erAnke || erKlageKA ? totrinnskontrollGodkjent === 'true' : showBegrunnelse;
-        const visArsaker = erAnke || erKlageKA || totrinnskontrollGodkjent === 'false';
+        const erKlageKA = klageKA && totrinnskontrollGodkjent;
+        const erAnke = aksjonspunktKode === aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE && totrinnskontrollGodkjent;
+        const visKunBegrunnelse = erAnke || erKlageKA ? totrinnskontrollGodkjent : showBegrunnelse;
+        const visArsaker = erAnke || erKlageKA || totrinnskontrollGodkjent === false;
 
         const aksjonspunktText = getAksjonspunkttekst(erForeldrepengerFagsak, behandlingStatus,
           arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, totrinnskontrollAksjonspunkt, klagebehandlingVurdering);
@@ -132,12 +132,17 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
                 </div>
               ))}
               <SkjemaGruppe>
-                <RadioGroupField name={`${fieldIndex}.totrinnskontrollGodkjent`} bredde="M" readOnly={readOnly}>
+                <RadioGroupField
+                  name={`${fieldIndex}.totrinnskontrollGodkjent`}
+                  bredde="M"
+                  readOnly={readOnly}
+                  parse={(value: string) => value === 'true'}
+                >
                   <RadioOption label={<FormattedMessage id="ApprovalField.Godkjent" />} value="true" />
                   <RadioOption label={<FormattedMessage id="ApprovalField.Vurder" />} value="false" />
                 </RadioGroupField>
                 {visArsaker && (
-                  <ArrowBox alignOffset={totrinnskontrollGodkjent === 'true' ? 1 : 110}>
+                  <ArrowBox alignOffset={totrinnskontrollGodkjent ? 1 : 110}>
                     {!visKunBegrunnelse && (
                       <FlexContainer wrap>
                         <FlexRow>
