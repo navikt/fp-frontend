@@ -17,6 +17,7 @@ import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import styles from './messages.less';
 
 const maxLength4000 = maxLength(4000);
+const maxLength6000 = maxLength(6000);
 const minLength3 = minLength(3);
 
 export type FormValues = {
@@ -143,6 +144,8 @@ export const Messages: FunctionComponent<OwnProps> = ({
 
   const language = getLanguageFromSprakkode(sprakKode);
 
+  const erVarselOmRevurdering = brevmalkode === dokumentMalType.REVURDERING_DOK || brevmalkode === dokumentMalType.VARREV;
+
   return (
     <Form
       formMethods={formMethods}
@@ -166,7 +169,7 @@ export const Messages: FunctionComponent<OwnProps> = ({
         selectValues={templates.map((template) => <option key={template.kode} value={template.kode} disabled={!template.tilgjengelig}>{template.navn}</option>)}
         bredde="xxl"
       />
-      {(brevmalkode === dokumentMalType.REVURDERING_DOK || brevmalkode === dokumentMalType.VARREV) && (
+      {erVarselOmRevurdering && (
         <>
           <VerticalSpacer eightPx />
           <SelectField
@@ -186,8 +189,8 @@ export const Messages: FunctionComponent<OwnProps> = ({
             <TextAreaField
               name="fritekst"
               label={intl.formatMessage({ id: getFritekstMessage(brevmalkode) })}
-              validate={[required, maxLength4000, minLength3, hasValidText]}
-              maxLength={4000}
+              validate={[required, erVarselOmRevurdering ? maxLength6000 : maxLength4000, minLength3, hasValidText]}
+              maxLength={erVarselOmRevurdering ? 6000 : 4000}
               badges={[{ type: 'fokus', text: language, titleText: intl.formatMessage({ id: 'Messages.Beskrivelse' }) }]}
             />
           </div>
