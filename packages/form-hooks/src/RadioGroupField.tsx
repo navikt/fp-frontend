@@ -23,6 +23,7 @@ interface OwnProps {
   readOnly?: boolean;
   isEdited?: boolean;
   validate?: ((value: string) => any)[];
+  parse?: (value: string) => any;
 }
 
 const RadioGroupField: FunctionComponent<OwnProps> = ({
@@ -36,6 +37,7 @@ const RadioGroupField: FunctionComponent<OwnProps> = ({
   spaceBetween,
   direction,
   validate = [],
+  parse = (value) => value,
 }) => {
   const { formState: { errors } } = useFormContext();
   const { field } = useController({
@@ -46,7 +48,7 @@ const RadioGroupField: FunctionComponent<OwnProps> = ({
   });
 
   const customOnChange = useCallback((e: any) => {
-    field.onChange(e);
+    field.onChange(parse(e.target.value));
     if (onChange) {
       onChange(e.target.value);
     }

@@ -110,7 +110,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
     return onSubmit({
       // @ts-ignore Fiks denne!
       fatterVedtakAksjonspunktDto,
-      erAlleAksjonspunktGodkjent: values.aksjonspunktGodkjenning.every((ap) => ap.totrinnskontrollGodkjent && ap.totrinnskontrollGodkjent === 'true'),
+      erAlleAksjonspunktGodkjent: values.aksjonspunktGodkjenning.every((ap) => ap.totrinnskontrollGodkjent),
     });
   }, [erTilbakekreving]);
 
