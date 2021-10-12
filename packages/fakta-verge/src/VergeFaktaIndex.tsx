@@ -5,7 +5,6 @@ import {
   AlleKodeverk, AlleKodeverkTilbakekreving, StandardFaktaPanelProps, Verge,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import RegistrereVergeInfoPanel from './components/RegistrereVergeInfoPanel';
 import messages from '../i18n/nb_NO.json';
@@ -30,18 +29,18 @@ const VergeFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = (
   setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <ReduxWrapper formName="VergeFaktaIndex" formData={formData} setFormData={setFormData}>
-      <RegistrereVergeInfoPanel
-        verge={verge}
-        aksjonspunkter={aksjonspunkter}
-        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-        hasOpenAksjonspunkter={harApneAksjonspunkter}
-        alleKodeverk={alleKodeverk}
-        submitCallback={submitCallback}
-        readOnly={readOnly}
-        submittable={submittable}
-      />
-    </ReduxWrapper>
+    <RegistrereVergeInfoPanel
+      verge={verge}
+      aksjonspunkter={aksjonspunkter}
+      alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+      hasOpenAksjonspunkter={harApneAksjonspunkter}
+      alleKodeverk={alleKodeverk}
+      submitCallback={submitCallback}
+      readOnly={readOnly}
+      submittable={submittable}
+      formData={formData}
+      setFormData={setFormData}
+    />
   </RawIntlProvider>
 );
 

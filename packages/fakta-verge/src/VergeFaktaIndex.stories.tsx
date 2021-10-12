@@ -1,17 +1,12 @@
 import React from 'react';
+import { Story } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import VergeFaktaIndex from '@fpsak-frontend/fakta-verge';
 import { Behandling } from '@fpsak-frontend/types';
-
-import alleKodeverk from '../mocks/alleKodeverk.json';
-
-const behandling = {
-  uuid: '1',
-  versjon: 1,
-};
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
 const aksjonspunkter = [{
   definisjon: {
@@ -33,24 +28,24 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
-const standardFaktaProps = {
-  aksjonspunkter: [],
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  readOnly: false,
-  harApneAksjonspunkter: true,
-  submittable: true,
-  alleMerknaderFraBeslutter: {},
-  setFormData: () => undefined,
-};
-
 export default {
   title: 'fakta/fakta-verge',
   component: VergeFaktaIndex,
 };
 
-export const visAksjonspunktForAvklaringAvVerge = () => (
+const Template: Story<{
+  behandling: Behandling,
+  submitCallback: (aksjonspunktData: any) => Promise<void>;
+}> = ({
+  behandling,
+  submitCallback,
+}) => (
   <VergeFaktaIndex
-    {...standardFaktaProps}
+    submitCallback={submitCallback}
+    readOnly={false}
+    harApneAksjonspunkter
+    submittable
+    setFormData={() => undefined}
     behandling={behandling as Behandling}
     verge={verge}
     aksjonspunkter={aksjonspunkter}
@@ -60,3 +55,12 @@ export const visAksjonspunktForAvklaringAvVerge = () => (
     }}
   />
 );
+
+export const Default = Template.bind({});
+Default.args = {
+  behandling: {
+    uuid: '1',
+    versjon: 1,
+  } as Behandling,
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};
