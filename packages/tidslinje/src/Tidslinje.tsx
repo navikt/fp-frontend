@@ -8,7 +8,7 @@ import { Kjønnkode } from '@fpsak-frontend/types';
 import TimeLineControl from './components/TimeLineControl';
 import TimeLineSoker from './components/TimeLineSoker';
 import TimeLineSokerEnsamSoker from './components/TimeLineSokerEnsamSoker';
-import Timeline from './Timeline';
+import Timeline from './TimelineComp';
 
 import styles from './tidslinje.less';
 import EventProps from './eventPropsTsType';
