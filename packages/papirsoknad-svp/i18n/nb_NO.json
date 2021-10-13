@@ -19,11 +19,6 @@
   "TilretteleggingForArbeidsgiverFieldArray.TilretteleggingFra": "Jordmor/lege oppgir at tilrettelegging er nødvendig fra og med",
   "TilretteleggingForArbeidsgiverFieldArray.LeggTilArbeidsgiver": "Legg til arbeidsgiver",
 
-  "MigreringFraInfotrygdPanel.Migrering": "Flytting fra Infotrygd",
-  "MigreringFraInfotrygdPanel.Ja": "Ja",
-  "MigreringFraInfotrygdPanel.Nei": "Nei",
-  "MigreringFraInfotrygdPanel.ErDenneSakenMigrert": "Gjelder denne søknaden flytting av en sak fra Infotrygd?",
-
   "TerminFodselSvpPanel.TerminOgFodsel": "Opplysninger om termin og fødsel",
   "TerminFodselSvpPanel.Termindato": "Termindato",
   "TerminFodselSvpPanel.Fodselsdato": "Fødselsdato"

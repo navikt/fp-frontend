@@ -23,7 +23,6 @@ import AndreYtelserPapirsoknadIndex, {
 } from '@fpsak-frontend/papirsoknad-panel-andre-ytelser';
 
 import TerminFodselSvpPanel from './terminOgFodsel/TerminFodselSvpPanel';
-import MigreringFraInfotrygdPanel from './migreringFraInfotrygd/MigreringFraInfotrygdPanel';
 import BehovForTilretteleggingPanel, { FormValues as BehovForTilretteleggingFormValues, Tilrettelegging } from './tilrettelegging/BehovForTilretteleggingPanel';
 
 const SVANGERSKAPSPENGER_FORM_NAME = 'SvangerskapspengerForm';
@@ -89,7 +88,6 @@ export class SvangerskapspengerForm extends React.Component<PureOwnProps & Mappe
           <BehovForTilretteleggingPanel readOnly={readOnly} formName={SVANGERSKAPSPENGER_FORM_NAME} namePrefix={TILRETTELEGGING_NAME_PREFIX} />
         </FormSection>
         <SprakPapirsoknadIndex readOnly={readOnly} />
-        <MigreringFraInfotrygdPanel readOnly={readOnly} />
         <LagreSoknadPapirsoknadIndex readOnly={readOnly} onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad} form={form} submitting={submitting} />
       </form>
     );
