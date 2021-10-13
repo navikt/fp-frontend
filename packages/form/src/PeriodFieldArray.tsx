@@ -40,9 +40,7 @@ const getRemoveButton = (index: number, fields: FieldArrayFieldsProps<any>) => (
 
 const showErrorMessage = (meta?: FieldArrayMetaProps): boolean => meta && meta.error && (meta.dirty || meta.submitFailed);
 
-const finnFeilmelding = (meta?: FieldArrayMetaProps): string => (Array.isArray(meta.error)
-  ? intl.formatMessage({ id: meta.error[0].id }, meta.error[0].values)
-  : intl.formatMessage({ id: meta.error.id }, meta.error.values));
+const finnFeilmelding = (meta?: FieldArrayMetaProps): string => (Array.isArray(meta.error) ? meta.error[0] : meta.error);
 
 interface OwnProps {
   children: (id: any, index: number, removeButtonElmt?: (className?: string) => ReactNode) => ReactNode;
