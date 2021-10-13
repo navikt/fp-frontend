@@ -33,6 +33,8 @@
   "ValidationMessage.UtsettelseUtenFullArbeid": "Søker har ikke 100% stilling, vurder om perioden kan utsettes.",
   "ValidationMessage.MerEn100Prosent": "Samlet utbetalingsgrad og andel i arbeid bør ikke overskride 100%.",
   "ValidationMessage.InvalidOrganisasjonsnummer": "Ugyldig organisasjonsnummer.",
+  "ValidationMessage.InvalidOrganisasjonsnummerOrFodselsnr": "Ugyldig organisasjonsnummer eller fødselsnummer.",
+  "ValidationMessage.NoWhiteSpace": "Feltet kan ikke inneholde mellomrom.",
 
   "Malform.Bokmal": "Bokmål",
   "Malform.Nynorsk": "Nynorsk",

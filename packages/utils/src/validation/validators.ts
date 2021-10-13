@@ -34,6 +34,7 @@ import {
   ukerOgDagerVidNullUtbetalningsgradMessage,
   utbetalingMerEnnNullUtsettelseMessage,
   utbetalingsgradErMerSamtidigUttaksprosentMessage,
+  hasWhiteSpace,
 } from './messages';
 import {
   dateRangesAreSequential,
@@ -98,7 +99,8 @@ export const maxValueFormatted = (max: number) => (number: number): FormValidati
 
 export const hasValidOrgNumber = (number: number): FormValidationResult => (number.toString().trim().length === 9 ? null : invalidOrgNumberMessage());
 export const hasValidOrgNumberOrFodselsnr = (number: number): FormValidationResult => (number.toString().trim().length === 9
-  || number.toString().trim().length === 11 ? null : invalidOrgNumberOrFodselsnrMessage());
+|| number.toString().trim().length === 11 ? null : invalidOrgNumberOrFodselsnrMessage());
+export const hasNoWhiteSpace = (value: string): FormValidationResult => (/\s/g.test(value) ? hasWhiteSpace() : null);
 
 const hasValidNumber = (text: string | number): FormValidationResult => (isEmpty(text) || numberRegex.test(text.toString())
   ? null : invalidNumberMessage(text.toString()));
