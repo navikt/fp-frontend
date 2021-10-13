@@ -127,11 +127,11 @@ class Tidslinje extends Component<TidslinjeProps> {
   }
 
   zoomIn(): void {
-    this.timelineRef.current.zoomOut(0.5);
+    this.timelineRef.current.zoomIn(0.5);
   }
 
   zoomOut(): void {
-    this.timelineRef.current.zoomIn(0.5);
+    this.timelineRef.current.zoomOut(0.5);
   }
 
   goForward(): void {
@@ -168,6 +168,7 @@ class Tidslinje extends Component<TidslinjeProps> {
     } = this.props;
     const groups = formatGroups(uttakPerioder);
     const items = formatItems(uttakPerioder);
+
     return (
       <div className={styles.timelineContainer}>
         <Row>

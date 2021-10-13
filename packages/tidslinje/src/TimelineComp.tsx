@@ -151,6 +151,16 @@ function Timeline(
       timeline.current.setSelection(selection, selectionOptions as Required<SelectionOptions>);
     }
   }, [selection]);
+  useEffect(() => {
+    if (initialItems) {
+      items.update(initialItems);
+    }
+  }, [initialItems]);
+  useEffect(() => {
+    if (initialGroups) {
+      groups.update(initialGroups);
+    }
+  }, [initialGroups]);
 
   /**
    * Her er en oversikt over alle metoder som er tilgjengelige på timeline.
