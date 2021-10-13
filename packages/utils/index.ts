@@ -107,6 +107,7 @@ export {
   isUtbetalingMerEnnNullUtsettelse,
   hasValidOrgNumber,
   hasValidOrgNumberOrFodselsnr,
+  hasNoWhiteSpace,
 } from './src/validation/validators';
 export type { Options } from './src/validation/validators';
 

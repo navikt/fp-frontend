@@ -43,3 +43,4 @@ export const merEn100ProsentMessage = (): string => intl.formatMessage({ id: 'Va
 export const dateRangesOverlappingBetweenPeriodTypesMessage = (): string => intl.formatMessage({ id: 'ValidationMessage.DateRangesOverlappingPeriodTypes' });
 export const invalidOrgNumberMessage = (): string => intl.formatMessage({ id: 'ValidationMessage.InvalidOrganisasjonsnummer' });
 export const invalidOrgNumberOrFodselsnrMessage = (): string => intl.formatMessage({ id: 'ValidationMessage.InvalidOrganisasjonsnummerOrFodselsnr' });
+export const hasWhiteSpace = (): string => intl.formatMessage({ id: 'ValidationMessage.NoWhiteSpace' });
