@@ -87,9 +87,7 @@ MedAksjonspunkt.args = {
       arbeidsgiverReferanse: '1',
       stillingsandel: 100,
       naringRegistreringsdato: '1995-09-14',
-      erManueltOpprettet: false,
       erEndret: false,
-      erPeriodeEndret: false,
     }, {
       aktivitetType: {
         kode: opptjeningAktivitetType.ARBEID,
@@ -101,10 +99,8 @@ MedAksjonspunkt.args = {
       arbeidsforholdRef: 'e5ec2632-0e31-4c8f-8190-d942053f847b',
       stillingsandel: 100,
       naringRegistreringsdato: '1995-09-14',
-      erManueltOpprettet: false,
       erGodkjent: true,
       erEndret: false,
-      erPeriodeEndret: false,
     }],
   } as Opptjening,
 };
@@ -132,8 +128,6 @@ UtenAksjonspunkt.args = {
       arbeidsforholdRef: 'bf623ff9-6ffb-4a81-b9f1-2648e5530a47',
       erEndret: false,
       erGodkjent: true,
-      erManueltOpprettet: false,
-      erPeriodeEndret: false,
       naringRegistreringsdato: '1995-09-14',
       stillingsandel: 50,
     }, {
@@ -147,8 +141,6 @@ UtenAksjonspunkt.args = {
       arbeidsforholdRef: 'bf623ff9-6ffb-4a81-b9f1-2648e5530a47',
       erEndret: false,
       erGodkjent: true,
-      erManueltOpprettet: false,
-      erPeriodeEndret: false,
       naringRegistreringsdato: '1995-09-14',
       oppdragsgiverOrg: '973861778',
       stillingsandel: 50,
@@ -192,9 +184,7 @@ MedToLikePerioderForSammeAktivitetstype.args = {
       arbeidsforholdRef: 'e5ec2632-0e31-4c8f-8190-d942053f847b',
       stillingsandel: 100,
       naringRegistreringsdato: '1995-09-14',
-      erManueltOpprettet: false,
       erEndret: false,
-      erPeriodeEndret: false,
     }, {
       aktivitetType: {
         kode: opptjeningAktivitetType.NARING,
@@ -206,10 +196,8 @@ MedToLikePerioderForSammeAktivitetstype.args = {
       arbeidsforholdRef: 'e5ec2632-0e31-4c8f-8190-d942053f847b',
       stillingsandel: 100,
       naringRegistreringsdato: '1995-09-14',
-      erManueltOpprettet: false,
       erGodkjent: true,
       erEndret: false,
-      erPeriodeEndret: false,
     }],
   } as Opptjening,
 };

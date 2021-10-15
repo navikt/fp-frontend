@@ -3,11 +3,10 @@ import moment from 'moment';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { Timeline } from '@fpsak-frontend/tidslinje';
-import { DDMMYYYY_DATE_FORMAT, isEqual } from '@fpsak-frontend/utils';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { DDMMYYYY_DATE_FORMAT, isEqual, addDaysToDate } from '@fpsak-frontend/utils';
+import { KodeverkMedNavn, OpptjeningAktivitet } from '@fpsak-frontend/types';
 
 import DateContainer from './DateContainer';
-import CustomOpptjeningAktivitet, { NyOpptjeningAktivitet } from '../../CustomOpptjeningAktivitet';
 
 import styles from './opptjeningTimeLine.less';
 
@@ -40,7 +39,7 @@ const standardItems = (opptjeningFomDato: string, opptjeningTomDato: string) => 
   },
 ];
 
-const classNameGenerator = (ap: CustomOpptjeningAktivitet): string => {
+const classNameGenerator = (ap: OpptjeningAktivitet): string => {
   if (ap.erGodkjent === false) {
     return 'avvistPeriode';
   }
@@ -58,11 +57,32 @@ interface Group {
   arbeidsgiverReferanse: string;
 }
 
-const createItems = (opptjeningPeriods: CustomOpptjeningAktivitet[], groups: Group[], opptjeningFomDato: string, opptjeningTomDato: string) => {
-  const items = opptjeningPeriods.map((ap: CustomOpptjeningAktivitet) => ({
-    id: ap.id,
-    start: moment(ap.opptjeningFom),
-    end: moment(ap.opptjeningTom),
+const addDay = (date: string): string => addDaysToDate(date, 1);
+const getOpptjeningsperiodeIfEqual = (
+  activityDate: string, opptjeningsperiodeDate: string,
+): string => (moment(addDay(activityDate)).isSame(opptjeningsperiodeDate) ? opptjeningsperiodeDate : activityDate);
+
+const finnOpptjeningFom = (
+  opptjeningFom: string,
+  opptjeningsperiodeFom: string,
+  opptjeningsperiodeTom: string,
+) => (moment(opptjeningFom).isBefore(opptjeningsperiodeFom)
+  ? opptjeningsperiodeFom
+  : getOpptjeningsperiodeIfEqual(opptjeningFom, opptjeningsperiodeTom));
+
+const finnOpptjeningTom = (
+  opptjeningTom: string,
+  opptjeningsperiodeFom: string,
+  opptjeningsperiodeTom: string,
+) => (moment(opptjeningTom).isAfter(opptjeningsperiodeTom)
+  ? opptjeningsperiodeTom
+  : getOpptjeningsperiodeIfEqual(opptjeningTom, opptjeningsperiodeFom));
+
+const createItems = (opptjeningPeriods: OpptjeningAktivitet[], groups: Group[], opptjeningFomDato: string, opptjeningTomDato: string) => {
+  const items = opptjeningPeriods.map((ap, index) => ({
+    id: index,
+    start: moment(finnOpptjeningFom(ap.opptjeningFom, opptjeningFomDato, opptjeningTomDato)),
+    end: moment(finnOpptjeningTom(ap.opptjeningTom, opptjeningFomDato, opptjeningTomDato)),
     group: groups.find((g) => g.aktivitetTypeKode === ap.aktivitetType.kode
       && g.arbeidsforholdRef === ap.arbeidsforholdRef && g.arbeidsgiverReferanse === ap.arbeidsgiverReferanse).id,
     className: classNameGenerator(ap),
@@ -72,16 +92,16 @@ const createItems = (opptjeningPeriods: CustomOpptjeningAktivitet[], groups: Gro
   return items.concat(standardItems(opptjeningFomDato, opptjeningTomDato));
 };
 
-const createGroups = (opptjeningPeriods: CustomOpptjeningAktivitet[], opptjeningAktivitetTypes: KodeverkMedNavn[]) => {
-  const duplicatesRemoved = opptjeningPeriods.reduce((accPeriods: any, period: CustomOpptjeningAktivitet): Group[] => {
+const createGroups = (opptjeningPeriods: OpptjeningAktivitet[], opptjeningAktivitetTypes: KodeverkMedNavn[]) => {
+  const duplicatesRemoved = opptjeningPeriods.reduce((accPeriods: any, period): Group[] => {
     const hasPeriod = accPeriods.some((p) => p.aktivitetType.kode === period.aktivitetType.kode
       && p.arbeidsforholdRef === period.arbeidsforholdRef && p.oppdragsgiverOrg === period.arbeidsgiverReferanse);
     if (!hasPeriod) accPeriods.push(period);
     return accPeriods;
   }, []);
-  return duplicatesRemoved.map((activity: CustomOpptjeningAktivitet, index: number) => ({
+  return duplicatesRemoved.map((activity: OpptjeningAktivitet, index: number) => ({
     id: index + 1,
-    content: opptjeningAktivitetTypes.find((oat: any) => oat.kode === activity.aktivitetType.kode).navn,
+    content: opptjeningAktivitetTypes.find((oat) => oat.kode === activity.aktivitetType.kode).navn,
     aktivitetTypeKode: activity.aktivitetType.kode,
     arbeidsforholdRef: activity.arbeidsforholdRef,
     arbeidsgiverReferanse: activity.arbeidsgiverReferanse,
@@ -106,10 +126,10 @@ const options = (opptjeningFomDato: string, opptjeningTomDato: string) => ({
 });
 
 interface OwnProps {
-  opptjeningPeriods: CustomOpptjeningAktivitet[];
-  selectedPeriod?: CustomOpptjeningAktivitet | NyOpptjeningAktivitet;
+  opptjeningPerioder: OpptjeningAktivitet[];
+  valgtAktivitetIndex?: number;
   opptjeningAktivitetTypes: KodeverkMedNavn[];
-  selectPeriodCallback: (...args: any[]) => any;
+  setValgtAktivitetIndex: (periodeIndex: number) => void;
   opptjeningFomDato: string;
   opptjeningTomDato: string;
 }
@@ -139,10 +159,10 @@ class OpptjeningTimeLine extends Component<OwnProps, OwnState> {
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount(): void {
     const {
-      opptjeningAktivitetTypes, opptjeningPeriods, opptjeningFomDato, opptjeningTomDato,
+      opptjeningAktivitetTypes, opptjeningPerioder, opptjeningFomDato, opptjeningTomDato,
     } = this.props;
-    const groups = createGroups(opptjeningPeriods, opptjeningAktivitetTypes);
-    const items = createItems(opptjeningPeriods, groups, opptjeningFomDato, opptjeningTomDato);
+    const groups = createGroups(opptjeningPerioder, opptjeningAktivitetTypes);
+    const items = createItems(opptjeningPerioder, groups, opptjeningFomDato, opptjeningTomDato);
     this.setState({
       groups,
       items,
@@ -151,10 +171,10 @@ class OpptjeningTimeLine extends Component<OwnProps, OwnState> {
 
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillReceiveProps(nextProps: OwnProps): void {
-    const { opptjeningPeriods } = this.props;
-    if (!isEqual(opptjeningPeriods, nextProps.opptjeningPeriods)) {
-      const groups = createGroups(nextProps.opptjeningPeriods, nextProps.opptjeningAktivitetTypes);
-      const items = createItems(nextProps.opptjeningPeriods, groups, nextProps.opptjeningFomDato, nextProps.opptjeningTomDato);
+    const { opptjeningPerioder } = this.props;
+    if (!isEqual(opptjeningPerioder, nextProps.opptjeningPerioder)) {
+      const groups = createGroups(nextProps.opptjeningPerioder, nextProps.opptjeningAktivitetTypes);
+      const items = createItems(nextProps.opptjeningPerioder, groups, nextProps.opptjeningFomDato, nextProps.opptjeningTomDato);
       this.setState({
         groups,
         items,
@@ -165,16 +185,16 @@ class OpptjeningTimeLine extends Component<OwnProps, OwnState> {
   timelineRef: RefObject<any>;
 
   selectHandler(eventProps: any): void {
-    const { selectPeriodCallback } = this.props;
+    const { setValgtAktivitetIndex } = this.props;
     const { items } = this.state;
     const selectedItem = items.find((item) => item.id === eventProps.items[0]);
     if (selectedItem) {
-      selectPeriodCallback(selectedItem.data);
+      setValgtAktivitetIndex(selectedItem.id);
     }
   }
 
   render() {
-    const { opptjeningFomDato, opptjeningTomDato, selectedPeriod } = this.props;
+    const { opptjeningFomDato, opptjeningTomDato, valgtAktivitetIndex } = this.props;
     const { items, groups } = this.state;
     return (
       <div className="opptjening">
@@ -196,7 +216,7 @@ class OpptjeningTimeLine extends Component<OwnProps, OwnState> {
                     customTimes={{ currentDate: new Date(opptjeningTomDato) }}
                     selectHandler={this.selectHandler}
                     initialGroups={groups}
-                    selection={[selectedPeriod ? selectedPeriod.id : undefined]}
+                    selection={[valgtAktivitetIndex]}
                   />
                 </div>
               </div>

@@ -5,10 +5,8 @@ import {
   ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, Opptjening,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
-import OpptjeningInfoPanel from './components/OpptjeningInfoPanel';
-import OpptjeningFaktaForm from './components/OpptjeningFaktaFormNew';
+import OpptjeningFaktaForm from './components/OpptjeningFaktaForm';
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
@@ -39,20 +37,6 @@ const OpptjeningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps
   const opptjeningAktiviteter = opptjening ? opptjening.opptjeningAktivitetList : undefined;
   return (
     <RawIntlProvider value={intl}>
-      <ReduxWrapper formName="OpptjeningFaktaIndex" formData={formData} setFormData={setFormData}>
-        <OpptjeningInfoPanel
-          fastsattOpptjening={opptjening ? opptjening.fastsattOpptjening : undefined}
-          opptjeningAktiviteter={opptjening ? opptjening.opptjeningAktivitetList : undefined}
-          dokStatus={utlandDokStatus ? utlandDokStatus.dokStatus : undefined}
-          aksjonspunkter={aksjonspunkter}
-          submitCallback={submitCallback}
-          readOnly={readOnly}
-          alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-          alleKodeverk={alleKodeverk}
-          hasOpenAksjonspunkter={harApneAksjonspunkter}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        />
-      </ReduxWrapper>
       <OpptjeningFaktaForm
         opptjeningFomDato={fastsattOpptjening ? fastsattOpptjening.opptjeningFom : undefined}
         opptjeningTomDato={fastsattOpptjening ? fastsattOpptjening.opptjeningTom : undefined}
