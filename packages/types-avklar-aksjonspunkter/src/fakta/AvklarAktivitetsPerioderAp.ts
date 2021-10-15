@@ -20,8 +20,16 @@ export type OpptjeningAktivitetAp = {
   erEndret: boolean;
 }
 
+export type OpptjeningAktivitetApNew = {
+  arbeidsgiverReferanse: string;
+  arbeidsforholdRef: string;
+  erGodkjent: boolean;
+  begrunnelse: string;
+}
+
 export type AvklarAktivitetsPerioderAp = {
-  opptjeningAktivitetList: OpptjeningAktivitetAp[];
+  opptjeningAktivitetList?: OpptjeningAktivitetAp[];
+  opptjeningsaktiviteter?: OpptjeningAktivitetApNew[];
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING>;
 
 export default AvklarAktivitetsPerioderAp;

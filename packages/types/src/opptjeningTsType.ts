@@ -17,6 +17,19 @@ export type OpptjeningAktivitet = {
   erPeriodeEndret: boolean;
 };
 
+export type OpptjeningAktivitetNew = {
+  aktivitetType: Kodeverk;
+  opptjeningFom: string;
+  opptjeningTom: string;
+  arbeidsgiverReferanse: string;
+  arbeidsforholdRef: string;
+  stillingsandel: number;
+  naringRegistreringsdato: string;
+  erGodkjent: boolean;
+  erEndret: boolean;
+  begrunnelse?: string;
+};
+
 export type FastsattOpptjeningAktivitet = {
   fom: string;
   tom: string;
@@ -38,7 +51,7 @@ export type FastsattOpptjening = {
 
 type Opptjening = {
   fastsattOpptjening: FastsattOpptjening;
-  opptjeningAktivitetList?: OpptjeningAktivitet[];
+  opptjeningAktivitetList?: OpptjeningAktivitet[] | OpptjeningAktivitetNew[];
 }
 
 export default Opptjening;

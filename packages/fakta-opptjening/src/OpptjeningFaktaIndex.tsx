@@ -65,6 +65,7 @@ const OpptjeningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         opptjeningAktiviteter={opptjeningAktiviteter}
         fastsattOpptjening={fastsattOpptjening}
+        submitCallback={submitCallback}
       />
     </RawIntlProvider>
   );

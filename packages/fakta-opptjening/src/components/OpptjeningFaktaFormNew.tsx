@@ -6,6 +6,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ISO_DATE_FORMAT, addDaysToDate } from '@fpsak-frontend/utils';
 import {
   AksjonspunktHelpTextTemp, DateLabel, VerticalSpacer,
@@ -14,6 +15,7 @@ import { TimeLineNavigation } from '@fpsak-frontend/tidslinje';
 import {
   ArbeidsgiverOpplysningerPerId, AlleKodeverk, OpptjeningAktivitet, Opptjening,
 } from '@fpsak-frontend/types';
+import { AvklarAktivitetsPerioderAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import OpptjeningTimeLine from './timeline/OpptjeningTimeLineNew';
 import ActivityPanel, { FormValues } from './activity/ActivityPanelNew2';
@@ -63,6 +65,7 @@ interface PureOwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   opptjeningAktiviteter: OpptjeningAktivitet[];
   fastsattOpptjening?: Opptjening['fastsattOpptjening'];
+  submitCallback: (data: AvklarAktivitetsPerioderAp) => Promise<void>;
 }
 
 /**
@@ -83,6 +86,7 @@ const OpptjeningFaktaForm: FunctionComponent<PureOwnProps> = ({
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
   fastsattOpptjening,
+  submitCallback,
 }) => {
   const opptjeningAktivitetTypes = alleKodeverk[kodeverkTyper.OPPTJENING_AKTIVITET_TYPE];
   const filtrerteOgSorterteOpptjeningsaktiviteter = sorterEtterOpptjeningFom(filtrerOpptjeningAktiviteter(opptjeningAktiviteter, fastsattOpptjening));
@@ -95,6 +99,26 @@ const OpptjeningFaktaForm: FunctionComponent<PureOwnProps> = ({
 
   const [formVerdierForAlleAktiviteter, oppdaterFormVerdier] = useState<FormValues[]>(formValuesAktiviteter);
   const [valgtAktivitetIndex, setValgtAktivitetIndex] = useState<number>(førsteAktivitetSomIkkeErGodkjent !== -1 ? førsteAktivitetSomIkkeErGodkjent : 0);
+
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+  const bekreft = () => {
+    setIsSubmitting(true);
+
+    const opptjeningsaktiviteterSomSkallagres = filtrerteOgSorterteOpptjeningsaktiviteter
+      .map((a, index) => ({
+        arbeidsforholdRef: a.arbeidsforholdRef,
+        arbeidsgiverReferanse: a.arbeidsgiverReferanse,
+        erGodkjent: formVerdierForAlleAktiviteter[index].erGodkjent,
+        begrunnelse: formVerdierForAlleAktiviteter[index].begrunnelse,
+      }))
+      .filter((b) => b.begrunnelse !== undefined);
+
+    submitCallback({
+      opptjeningsaktiviteter: opptjeningsaktiviteterSomSkallagres,
+      kode: aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING,
+    }).then(() => setIsSubmitting(false));
+  };
 
   const velgNesteAktivitet = () => undefined;
   const velgForrigeAktivitet = () => undefined;
@@ -110,6 +134,8 @@ const OpptjeningFaktaForm: FunctionComponent<PureOwnProps> = ({
       setValgtAktivitetIndex(førsteAktivitetSomIkkeErGodkjent !== -1 ? førsteAktivitetSomIkkeErGodkjent : 0);
     }
   };
+
+  const harIkkeBehandletAlle = formVerdierForAlleAktiviteter.some((a) => a.erGodkjent === null || a.erGodkjent === undefined);
 
   return (
     <div className={styles.container}>
@@ -171,7 +197,7 @@ const OpptjeningFaktaForm: FunctionComponent<PureOwnProps> = ({
         </>
       )}
       {hasAksjonspunkt && (
-        <Hovedknapp mini>
+        <Hovedknapp mini htmlType="button" onClick={bekreft} disabled={isSubmitting || readOnly || harIkkeBehandletAlle} spinner={isSubmitting}>
           <FormattedMessage id="OpptjeningFaktaForm.Confirm" />
         </Hovedknapp>
       )}
