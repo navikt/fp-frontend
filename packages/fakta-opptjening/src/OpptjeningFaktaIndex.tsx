@@ -6,7 +6,7 @@ import {
 } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 
-import OpptjeningFaktaForm from './components/OpptjeningFaktaForm';
+import OpptjeningFaktaPanel from './components/OpptjeningFaktaPanel';
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
@@ -37,7 +37,7 @@ const OpptjeningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps
   const opptjeningAktiviteter = opptjening ? opptjening.opptjeningAktivitetList : undefined;
   return (
     <RawIntlProvider value={intl}>
-      <OpptjeningFaktaForm
+      <OpptjeningFaktaPanel
         opptjeningFomDato={fastsattOpptjening ? fastsattOpptjening.opptjeningFom : undefined}
         opptjeningTomDato={fastsattOpptjening ? fastsattOpptjening.opptjeningTom : undefined}
         dokStatus={dokStatus}

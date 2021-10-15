@@ -5,7 +5,6 @@ import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import dayjs from 'dayjs';
-import moment from 'moment';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
@@ -18,7 +17,6 @@ import {
   minLength,
   required,
   DDMMYYYY_DATE_FORMAT,
-  addDaysToDate,
 } from '@fpsak-frontend/utils';
 import {
   RadioGroupField, RadioOption, TextAreaField, Form,
@@ -28,105 +26,83 @@ import {
   ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, AlleKodeverk, OpptjeningAktivitet,
 } from '@fpsak-frontend/types';
 
-import ActivityDataSubPanel from './ActivityDataSubPanel';
+import ValgtAktivitetSubForm from './ValgtAktivitetSubForm';
+import { finnOpptjeningFom, finnOpptjeningTom } from '../../utils/opptjeningDatoUtil';
 
-import styles from './activityPanel.less';
+import styles from './valgtAktivitetForm.less';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
-const addDay = (date: string): string => addDaysToDate(date, 1);
-const getOpptjeningsperiodeIfEqual = (
-  activityDate: string, opptjeningsperiodeDate: string,
-): string => (moment(addDay(activityDate)).isSame(opptjeningsperiodeDate) ? opptjeningsperiodeDate : activityDate);
-
-const finnOpptjeningFom = (
-  opptjeningFom: string,
-  opptjeningsperiodeFom: string,
-  opptjeningsperiodeTom: string,
-) => (moment(opptjeningFom).isBefore(opptjeningsperiodeFom)
-  ? opptjeningsperiodeFom
-  : getOpptjeningsperiodeIfEqual(opptjeningFom, opptjeningsperiodeTom));
-
-const finnOpptjeningTom = (
-  opptjeningTom: string,
-  opptjeningsperiodeFom: string,
-  opptjeningsperiodeTom: string,
-) => (moment(opptjeningTom).isAfter(opptjeningsperiodeTom)
-  ? opptjeningsperiodeTom
-  : getOpptjeningsperiodeIfEqual(opptjeningTom, opptjeningsperiodeFom));
-
-const shouldDisablePeriodpicker = (hasAksjonspunkt: boolean, erGodkjent: boolean, erEndret: boolean): boolean => {
+const skalIkkeKunneEditere = (hasAksjonspunkt: boolean, erGodkjent: boolean, erEndret: boolean): boolean => {
   if (!hasAksjonspunkt) {
     return true;
   }
   return !!erGodkjent && !erEndret;
 };
 
-const findInYearsMonthsAndDays = (opptjeningFom: string, opptjeningTom: string): ReactElement => {
-  const difference = findDifferenceInMonthsAndDays(opptjeningFom, opptjeningTom);
-  if (!difference) {
+const finnMånederOgDager = (opptjeningFom: string, opptjeningTom: string): ReactElement => {
+  const differanse = findDifferenceInMonthsAndDays(opptjeningFom, opptjeningTom);
+  if (!differanse) {
     return <span />;
   }
-  return difference.months >= 1
-    ? <FormattedMessage id="ActivityPanel.MonthsAndDays" values={{ months: difference.months, days: difference.days }} />
-    : <FormattedMessage id="ActivityPanel.Days" values={{ days: difference.days }} />;
+  return differanse.months >= 1
+    ? <FormattedMessage id="ActivityPanel.MonthsAndDays" values={{ months: differanse.months, days: differanse.days }} />
+    : <FormattedMessage id="ActivityPanel.Days" values={{ days: differanse.days }} />;
 };
 
 const finnBegrunnelseLabel = (erGodkjent: boolean, erEndret: boolean, readOnly: boolean, hasAksjonspunkt: boolean): string => (
-  readOnly || shouldDisablePeriodpicker(hasAksjonspunkt, erGodkjent, erEndret)
+  readOnly || skalIkkeKunneEditere(hasAksjonspunkt, erGodkjent, erEndret)
     ? 'ActivityPanel.Begrunnelse'
     : 'ActivityPanel.BegrunnEndringene'
 );
-
-export const activityPanelName = 'ActivityPanel';
 
 export type FormValues = {
   erGodkjent: boolean;
   begrunnelse: string;
 }
 
-interface PureOwnProps {
-  oppdaterAktivitet: (values: FormValues) => void
+interface OwnProps {
   alleKodeverk: AlleKodeverk;
   valgtOpptjeningAktivitet: OpptjeningAktivitet;
-  valgtFormData: FormValues;
+  valgteFormValues: FormValues;
   readOnly: boolean;
-  cancelSelectedOpptjeningActivity: (...args: any[]) => any;
-  selectNextPeriod?: (...args: any[]) => any;
-  selectPrevPeriod?: (...args: any[]) => any;
-  hasAksjonspunkt: boolean;
+  oppdaterAktivitet: (values: FormValues) => void
+  avbrytAktivitet: () => void;
+  velgNesteAktivitet: () => void;
+  velgForrigeAktivitet: () => void;
+  harAksjonspunkt: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  opptjeningAktivitetTypes: KodeverkMedNavn[];
+  opptjeningAktivitetTyper: KodeverkMedNavn[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   opptjeningFomDato: string;
   opptjeningTomDato: string;
 }
 
 /**
- * ActivityPanel
+ * ValgtAktivitetForm
  *
- * Presentasjonskomponent. Viser informasjon om valgt aktivitet
+ * Viser informasjon om valgt aktivitet
  */
-export const ActivityPanel: FunctionComponent<PureOwnProps> = ({
+export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
   readOnly,
-  opptjeningAktivitetTypes,
-  cancelSelectedOpptjeningActivity,
-  selectNextPeriod,
-  selectPrevPeriod,
-  hasAksjonspunkt,
+  opptjeningAktivitetTyper,
+  avbrytAktivitet,
+  velgNesteAktivitet,
+  velgForrigeAktivitet,
+  harAksjonspunkt,
   alleMerknaderFraBeslutter,
   arbeidsgiverOpplysningerPerId,
   valgtOpptjeningAktivitet,
   oppdaterAktivitet,
-  valgtFormData,
+  valgteFormValues,
   opptjeningFomDato,
   opptjeningTomDato,
 }) => {
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: valgtFormData,
+    defaultValues: valgteFormValues,
   });
 
   const {
@@ -147,8 +123,8 @@ export const ActivityPanel: FunctionComponent<PureOwnProps> = ({
             <Element><FormattedMessage id="ActivityPanel.Details" /></Element>
           </Column>
           <Column xs="2">
-            <TimeLineButton text={intl.formatMessage({ id: 'Timeline.prevPeriod' })} type="prev" callback={selectPrevPeriod} />
-            <TimeLineButton text={intl.formatMessage({ id: 'Timeline.nextPeriod' })} type="next" callback={selectNextPeriod} />
+            <TimeLineButton text={intl.formatMessage({ id: 'Timeline.prevPeriod' })} type="prev" callback={velgForrigeAktivitet} />
+            <TimeLineButton text={intl.formatMessage({ id: 'Timeline.nextPeriod' })} type="next" callback={velgNesteAktivitet} />
           </Column>
         </Row>
         <Row>
@@ -164,7 +140,7 @@ export const ActivityPanel: FunctionComponent<PureOwnProps> = ({
               </Column>
               <Column xs="6">
                 <Normaltekst>
-                  {findInYearsMonthsAndDays(opptjeningFom, opptjeningTom)}
+                  {finnMånederOgDager(opptjeningFom, opptjeningTom)}
                 </Normaltekst>
               </Column>
             </Row>
@@ -174,21 +150,27 @@ export const ActivityPanel: FunctionComponent<PureOwnProps> = ({
               <FormattedMessage id="ActivityPanel.Activity" />
             </Undertekst>
             <Normaltekst>
-              {opptjeningAktivitetTypes.find((oat) => oat.kode === aktivitetType.kode)?.navn}
+              {opptjeningAktivitetTyper.find((oat) => oat.kode === aktivitetType.kode)?.navn}
             </Normaltekst>
           </Column>
         </Row>
-        <ActivityDataSubPanel
+        <ValgtAktivitetSubForm
           valgtAktivitetstype={aktivitetType}
           arbeidsgiverReferanse={arbeidsgiverReferanse}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           stillingsandel={stillingsandel}
           naringRegistreringsdato={naringRegistreringsdato}
         />
-        {!shouldDisablePeriodpicker(hasAksjonspunkt, erGodkjent, erEndret) && (
+        {!skalIkkeKunneEditere(harAksjonspunkt, erGodkjent, erEndret) && (
           <>
             <VerticalSpacer twentyPx />
-            <RadioGroupField name="erGodkjent" validate={[required]} readOnly={readOnly} isEdited={erEndret}>
+            <RadioGroupField
+              name="erGodkjent"
+              validate={[required]}
+              readOnly={readOnly}
+              isEdited={erEndret}
+              parse={(value: string) => value === 'true'}
+            >
               <RadioOption value="true" label={intl.formatMessage({ id: 'ActivityPanel.Godkjent' })} />
               <RadioOption
                 value="false"
@@ -208,12 +190,12 @@ export const ActivityPanel: FunctionComponent<PureOwnProps> = ({
         <TextAreaField
           name="begrunnelse"
           textareaClass={styles.explanationTextarea}
-          label={<FormattedMessage id={finnBegrunnelseLabel(erGodkjent, erEndret, readOnly, hasAksjonspunkt)} />}
+          label={<FormattedMessage id={finnBegrunnelseLabel(erGodkjent, erEndret, readOnly, harAksjonspunkt)} />}
           validate={[required, minLength3, maxLength1500, hasValidText]}
           maxLength={1500}
-          readOnly={readOnly || shouldDisablePeriodpicker(hasAksjonspunkt, erGodkjent, erEndret)}
+          readOnly={readOnly || skalIkkeKunneEditere(harAksjonspunkt, erGodkjent, erEndret)}
         />
-        {!shouldDisablePeriodpicker(hasAksjonspunkt, erGodkjent, erEndret) && (
+        {!skalIkkeKunneEditere(harAksjonspunkt, erGodkjent, erEndret) && (
           <>
             <VerticalSpacer sixteenPx />
             <FlexContainer>
@@ -224,7 +206,7 @@ export const ActivityPanel: FunctionComponent<PureOwnProps> = ({
                   </Hovedknapp>
                 </FlexColumn>
                 <FlexColumn>
-                  <Knapp mini htmlType="button" onClick={cancelSelectedOpptjeningActivity}>
+                  <Knapp mini htmlType="button" onClick={avbrytAktivitet}>
                     <FormattedMessage id="ActivityPanel.Avbryt" />
                   </Knapp>
                 </FlexColumn>
@@ -237,4 +219,4 @@ export const ActivityPanel: FunctionComponent<PureOwnProps> = ({
   );
 };
 
-export default ActivityPanel;
+export default ValgtAktivitetForm;

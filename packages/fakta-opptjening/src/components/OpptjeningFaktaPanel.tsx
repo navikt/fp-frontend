@@ -19,10 +19,10 @@ import {
 } from '@fpsak-frontend/types';
 import { AvklarAktivitetsPerioderAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
-import OpptjeningTimeLine from './timeline/OpptjeningTimeLine';
-import ActivityPanel, { FormValues } from './activity/ActivityPanel';
+import OpptjeningTidslinje from './tidslinje/OpptjeningTidslinje';
+import ValgtAktivitetForm, { FormValues } from './aktivitet/ValgtAktivitetForm';
 
-import styles from './opptjeningFaktaForm.less';
+import styles from './opptjeningFaktaPanel.less';
 
 const getAksjonspunktHelpTexts = (opptjeningAktiviteter: OpptjeningAktivitet[]): string[] => {
   const texts = [];
@@ -55,7 +55,7 @@ const filtrerOpptjeningAktiviteter = (
   .filter((oa) => moment(fastsattOpptjening.opptjeningFom).isBefore(addDay(oa.opptjeningTom)))
   .filter((oa) => moment(oa.opptjeningFom).isBefore(addDay(fastsattOpptjening.opptjeningTom)));
 
-interface PureOwnProps {
+interface OwnProps {
   hasAksjonspunkt: boolean;
   hasOpenAksjonspunkter: boolean;
   opptjeningFomDato: string;
@@ -73,12 +73,12 @@ interface PureOwnProps {
 }
 
 /**
- * OpptjeningFaktaForm
+ * OpptjeningFaktaPanel
  *
  * Vises faktapanelet for opptjeningsvilkåret. For Foreldrepenger vises dette alltid. Finnes
  * det aksjonspunkt kan nav-ansatt endre opplysninger før en går videre i prosessen.
  */
-const OpptjeningFaktaForm: FunctionComponent<PureOwnProps> = ({
+const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
   hasAksjonspunkt,
   hasOpenAksjonspunkter,
   opptjeningAktiviteter,
@@ -187,13 +187,14 @@ const OpptjeningFaktaForm: FunctionComponent<PureOwnProps> = ({
       <Undertekst><FormattedMessage id="OpptjeningFaktaForm.Skjaringstidspunkt" /></Undertekst>
       <Normaltekst><DateLabel dateString={findSkjaringstidspunkt(opptjeningTomDato)} /></Normaltekst>
       <VerticalSpacer twentyPx />
-      <OpptjeningTimeLine
+      <OpptjeningTidslinje
         opptjeningPerioder={filtrerteOgSorterteOpptjeningsaktiviteter}
+        formVerdierForAlleAktiviteter={formVerdierForAlleAktiviteter}
         opptjeningAktivitetTypes={opptjeningAktivitetTypes}
         setValgtAktivitetIndex={setValgtAktivitetIndex}
+        valgtAktivitetIndex={valgtAktivitetIndex}
         opptjeningFomDato={opptjeningFomDato}
         opptjeningTomDato={opptjeningTomDato}
-        valgtAktivitetIndex={valgtAktivitetIndex}
       />
       <TimeLineNavigation
         openPeriodInfo={opneInfo}
@@ -201,18 +202,18 @@ const OpptjeningFaktaForm: FunctionComponent<PureOwnProps> = ({
       <VerticalSpacer eightPx />
       {valgtAktivitetIndex !== undefined && (
         <>
-          <ActivityPanel
+          <ValgtAktivitetForm
             valgtOpptjeningAktivitet={filtrerteOgSorterteOpptjeningsaktiviteter[valgtAktivitetIndex]}
-            valgtFormData={formVerdierForAlleAktiviteter[valgtAktivitetIndex]}
+            valgteFormValues={formVerdierForAlleAktiviteter[valgtAktivitetIndex]}
             readOnly={readOnly}
-            opptjeningAktivitetTypes={opptjeningAktivitetTypes}
-            cancelSelectedOpptjeningActivity={avbrytAktivitet}
+            opptjeningAktivitetTyper={opptjeningAktivitetTypes}
+            avbrytAktivitet={avbrytAktivitet}
             oppdaterAktivitet={oppdaterAktivitet}
             opptjeningFomDato={opptjeningFomDato}
             opptjeningTomDato={opptjeningTomDato}
-            selectNextPeriod={velgNesteAktivitet}
-            selectPrevPeriod={velgForrigeAktivitet}
-            hasAksjonspunkt={hasAksjonspunkt}
+            velgNesteAktivitet={velgNesteAktivitet}
+            velgForrigeAktivitet={velgForrigeAktivitet}
+            harAksjonspunkt={hasAksjonspunkt}
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
             alleKodeverk={alleKodeverk}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -235,4 +236,4 @@ const OpptjeningFaktaForm: FunctionComponent<PureOwnProps> = ({
   );
 };
 
-export default OpptjeningFaktaForm;
+export default OpptjeningFaktaPanel;

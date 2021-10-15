@@ -9,17 +9,17 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import OAType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
 import { ArbeidsgiverOpplysningerPerId, Kodeverk } from '@fpsak-frontend/types';
 
-const ytelseTypes = [OAType.SYKEPENGER, OAType.FORELDREPENGER, OAType.PLEIEPENGER, OAType.SVANGERSKAPSPENGER, OAType.UTENLANDSK_ARBEIDSFORHOLD];
+const YTELSE_TYPER = [OAType.SYKEPENGER, OAType.FORELDREPENGER, OAType.PLEIEPENGER, OAType.SVANGERSKAPSPENGER, OAType.UTENLANDSK_ARBEIDSFORHOLD];
 
-const isOfType = (selectedActivityType?: Kodeverk, ...opptjeningAktivitetType: string[]): boolean => selectedActivityType
-  && opptjeningAktivitetType.includes(selectedActivityType.kode);
+const erAvType = (valgtAktivitetstype?: Kodeverk, ...opptjeningAktivitetType: string[]): boolean => valgtAktivitetstype
+  && opptjeningAktivitetType.includes(valgtAktivitetstype.kode);
 
-const formatDate = (date: string): string => (date ? dayjs(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
+const formatDato = (dato: string): string => (dato ? dayjs(dato, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
-const getOppdragsgiverMessageId = (selectedActivityType?: Kodeverk): string => (isOfType(selectedActivityType, OAType.FRILANS)
+const getOppdragsgiverIntlId = (valgtAktivitetstype?: Kodeverk): string => (erAvType(valgtAktivitetstype, OAType.FRILANS)
   ? 'ActivityPanel.Oppdragsgiver' : 'ActivityPanel.Arbeidsgiver');
 
-const getArbeidsgiverText = (
+const finnArbeidsgivertekst = (
   arbeidsgiverReferanse: string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): string => {
@@ -30,7 +30,7 @@ const getArbeidsgiverText = (
   }
 
   if (arbeidsgiverOpplysninger.erPrivatPerson) {
-    const fodselsdato = formatDate(arbeidsgiverOpplysninger.fødselsdato);
+    const fodselsdato = formatDato(arbeidsgiverOpplysninger.fødselsdato);
     return `${arbeidsgiverOpplysninger.navn} (${fodselsdato})`;
   }
 
@@ -48,11 +48,11 @@ interface OwnProps {
 }
 
 /**
- * ActivityDataSubPanel
+ * ValgtAktivitetSubForm
  *
  * Viser informasjon om valgt aktivitet
  */
-const ActivityDataSubPanel: FunctionComponent<OwnProps> = ({
+const ValgtAktivitetSubForm: FunctionComponent<OwnProps> = ({
   valgtAktivitetstype,
   arbeidsgiverReferanse,
   arbeidsgiverOpplysningerPerId,
@@ -60,16 +60,16 @@ const ActivityDataSubPanel: FunctionComponent<OwnProps> = ({
   naringRegistreringsdato,
 }) => (
   <>
-    {isOfType(valgtAktivitetstype, ...[OAType.ARBEID, OAType.NARING, ...ytelseTypes]) && (
+    {erAvType(valgtAktivitetstype, ...[OAType.ARBEID, OAType.NARING, ...YTELSE_TYPER]) && (
       <Row>
         <Column xs="7">
           <VerticalSpacer eightPx />
           <Undertekst>
-            <FormattedMessage id={getOppdragsgiverMessageId(valgtAktivitetstype)} />
+            <FormattedMessage id={getOppdragsgiverIntlId(valgtAktivitetstype)} />
           </Undertekst>
-          <Normaltekst>{getArbeidsgiverText(arbeidsgiverReferanse, arbeidsgiverOpplysningerPerId)}</Normaltekst>
+          <Normaltekst>{finnArbeidsgivertekst(arbeidsgiverReferanse, arbeidsgiverOpplysningerPerId)}</Normaltekst>
         </Column>
-        {isOfType(valgtAktivitetstype, OAType.ARBEID) && (
+        {erAvType(valgtAktivitetstype, OAType.ARBEID) && (
           <Column xs="5">
             <VerticalSpacer eightPx />
             <Undertekst>
@@ -81,7 +81,7 @@ const ActivityDataSubPanel: FunctionComponent<OwnProps> = ({
       </Row>
     )}
     <VerticalSpacer eightPx />
-    {isOfType(valgtAktivitetstype, OAType.NARING) && (
+    {erAvType(valgtAktivitetstype, OAType.NARING) && (
       <Row>
         <Column xs="8">
           <Undertekst>
@@ -94,4 +94,4 @@ const ActivityDataSubPanel: FunctionComponent<OwnProps> = ({
   </>
 );
 
-export default ActivityDataSubPanel;
+export default ValgtAktivitetSubForm;
