@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
@@ -66,6 +66,8 @@ interface PureOwnProps {
   opptjeningAktiviteter: OpptjeningAktivitet[];
   fastsattOpptjening?: Opptjening['fastsattOpptjening'];
   submitCallback: (data: AvklarAktivitetsPerioderAp) => Promise<void>;
+  formData: any;
+  setFormData: (data: any) => void;
 }
 
 /**
@@ -87,6 +89,8 @@ const OpptjeningFaktaForm: FunctionComponent<PureOwnProps> = ({
   arbeidsgiverOpplysningerPerId,
   fastsattOpptjening,
   submitCallback,
+  formData,
+  setFormData,
 }) => {
   const opptjeningAktivitetTypes = alleKodeverk[kodeverkTyper.OPPTJENING_AKTIVITET_TYPE];
   const filtrerteOgSorterteOpptjeningsaktiviteter = sorterEtterOpptjeningFom(filtrerOpptjeningAktiviteter(opptjeningAktiviteter, fastsattOpptjening));
@@ -97,10 +101,14 @@ const OpptjeningFaktaForm: FunctionComponent<PureOwnProps> = ({
 
   const førsteAktivitetSomIkkeErGodkjent = filtrerteOgSorterteOpptjeningsaktiviteter.findIndex((a) => !a.erGodkjent);
 
-  const [formVerdierForAlleAktiviteter, oppdaterFormVerdier] = useState<FormValues[]>(formValuesAktiviteter);
+  const [formVerdierForAlleAktiviteter, oppdaterFormVerdier] = useState<FormValues[]>(formData || formValuesAktiviteter);
   const [valgtAktivitetIndex, setValgtAktivitetIndex] = useState<number>(førsteAktivitetSomIkkeErGodkjent !== -1 ? førsteAktivitetSomIkkeErGodkjent : 0);
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+  useEffect(() => () => {
+    setFormData(formVerdierForAlleAktiviteter);
+  }, [formVerdierForAlleAktiviteter]);
 
   const bekreft = () => {
     setIsSubmitting(true);
@@ -120,8 +128,16 @@ const OpptjeningFaktaForm: FunctionComponent<PureOwnProps> = ({
     }).then(() => setIsSubmitting(false));
   };
 
-  const velgNesteAktivitet = () => undefined;
-  const velgForrigeAktivitet = () => undefined;
+  const velgNesteAktivitet = () => {
+    if (valgtAktivitetIndex < filtrerteOgSorterteOpptjeningsaktiviteter.length - 1) {
+      setValgtAktivitetIndex(valgtAktivitetIndex + 1);
+    }
+  };
+  const velgForrigeAktivitet = () => {
+    if (valgtAktivitetIndex > 0) {
+      setValgtAktivitetIndex(valgtAktivitetIndex - 1);
+    }
+  };
   const oppdaterAktivitet = (formValues: FormValues) => {
     oppdaterFormVerdier((oldValues: FormValues[]) => Object.assign([], oldValues, { [valgtAktivitetIndex]: formValues }));
     setValgtAktivitetIndex(undefined);

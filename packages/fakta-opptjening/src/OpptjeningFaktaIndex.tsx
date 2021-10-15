@@ -66,6 +66,8 @@ const OpptjeningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps
         opptjeningAktiviteter={opptjeningAktiviteter}
         fastsattOpptjening={fastsattOpptjening}
         submitCallback={submitCallback}
+        formData={formData}
+        setFormData={setFormData}
       />
     </RawIntlProvider>
   );
