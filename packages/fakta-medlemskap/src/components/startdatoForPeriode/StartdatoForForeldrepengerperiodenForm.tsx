@@ -159,17 +159,8 @@ const validateDates = (values: FormValues, intl: IntlShape): any => {
   if (!values) {
     return errors;
   }
-  const { arbeidsgivere, startdatoFraSoknad } = values;
+  const { startdatoFraSoknad } = values;
 
-  const isStartdatoEtterArbeidsgiverdato = arbeidsgivere && arbeidsgivere
-    .map((a) => a.arbeidsgiverStartdato)
-    .some((datoFraInntektsmelding) => moment(datoFraInntektsmelding).isBefore(moment(startdatoFraSoknad)));
-
-  if (isStartdatoEtterArbeidsgiverdato) {
-    return {
-      startdatoFraSoknad: intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.StartdatoEtterArbeidsgiverdato' }),
-    };
-  }
   if (isBefore2019(startdatoFraSoknad)) {
     return {
       startdatoFraSoknad: intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.StartdatoFør2019' }),
