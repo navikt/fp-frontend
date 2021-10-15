@@ -31,9 +31,14 @@ export default {
   component: OpptjeningFaktaIndex,
 };
 
-const Template: Story<{ aksjonspunkter: Aksjonspunkt[], opptjening: Opptjening }> = ({
+const Template: Story<{
+  aksjonspunkter: Aksjonspunkt[],
+  opptjening: Opptjening,
+  submitCallback: (data: any) => Promise<void>;
+}> = ({
   aksjonspunkter,
   opptjening,
+  submitCallback,
 }) => (
   <OpptjeningFaktaIndex
     behandling={behandling as Behandling}
@@ -44,7 +49,7 @@ const Template: Story<{ aksjonspunkter: Aksjonspunkt[], opptjening: Opptjening }
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING]: merknaderFraBeslutter,
     }}
-    submitCallback={action('button-click') as (data: any) => Promise<any>}
+    submitCallback={submitCallback}
     readOnly={false}
     harApneAksjonspunkter
     submittable
@@ -54,6 +59,7 @@ const Template: Story<{ aksjonspunkter: Aksjonspunkt[], opptjening: Opptjening }
 
 export const MedAksjonspunkt = Template.bind({});
 MedAksjonspunkt.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
     definisjon: {
       kode: aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING,
@@ -78,6 +84,19 @@ MedAksjonspunkt.args = {
       fastsattOpptjeningAktivitetList: [],
     },
     opptjeningAktivitetList: [{
+      aktivitetType: {
+        kode: opptjeningAktivitetType.ARBEID,
+        kodeverk: '',
+      },
+      opptjeningFom: '1995-09-14',
+      opptjeningTom: '9999-12-31',
+      arbeidsgiverReferanse: '3',
+      arbeidsforholdRef: 'e5ec2632-0e31-4c8f-8190-d942053f8474',
+      stillingsandel: 100,
+      naringRegistreringsdato: '1995-09-14',
+      erGodkjent: true,
+      erEndret: false,
+    }, {
       aktivitetType: {
         kode: opptjeningAktivitetType.NARING,
         kodeverk: '',
@@ -107,6 +126,7 @@ MedAksjonspunkt.args = {
 
 export const UtenAksjonspunkt = Template.bind({});
 UtenAksjonspunkt.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [],
   opptjening: {
     fastsattOpptjening: {
@@ -150,6 +170,7 @@ UtenAksjonspunkt.args = {
 
 export const MedToLikePerioderForSammeAktivitetstype = Template.bind({});
 MedToLikePerioderForSammeAktivitetstype.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
     definisjon: {
       kode: aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING,
