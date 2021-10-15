@@ -221,7 +221,13 @@ const OpptjeningFaktaForm: FunctionComponent<PureOwnProps> = ({
         </>
       )}
       {hasAksjonspunkt && (
-        <Hovedknapp mini htmlType="button" onClick={bekreft} disabled={isSubmitting || readOnly || harIkkeBehandletAlle} spinner={isSubmitting}>
+        <Hovedknapp
+          mini
+          htmlType="button"
+          onClick={bekreft}
+          disabled={valgtAktivitetIndex !== undefined || isSubmitting || readOnly || harIkkeBehandletAlle}
+          spinner={isSubmitting}
+        >
           <FormattedMessage id="OpptjeningFaktaForm.Confirm" />
         </Hovedknapp>
       )}

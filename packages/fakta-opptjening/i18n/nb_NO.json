@@ -18,6 +18,10 @@
   "ActivityPanel.Avbryt": "Avbryt",
   "ActivityPanel.MonthsAndDays": "({months} mndr. {days} dager)",
   "ActivityPanel.Days": "({days} dager)",
+  "ActivityPanel.Arbeidsgiver": "Arbeidsgiver",
+  "ActivityPanel.Oppdragsgiver": "Oppdragsgiver",
+  "ActivityPanel.Stillingsandel": "Stillingsandel",
+  "ActivityPanel.Registreringsdato": "Registreringsdato",
 
   "Timeline.openData": "Åpne info om første periode",
   "Timeline.nextPeriod": "Neste periode",
