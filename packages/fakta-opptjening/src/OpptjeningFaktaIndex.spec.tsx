@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 import * as stories from './OpptjeningFaktaIndex.stories';
 
 const {
-  MedAksjonspunkt,
+  MedAksjonspunkt, UtenAksjonspunkt,
 } = composeStories(stories);
 
 describe('<OpptjeningFaktaIndex>', () => {
@@ -21,7 +21,7 @@ describe('<OpptjeningFaktaIndex>', () => {
     expect(screen.getByText('24.10.2019')).toBeInTheDocument();
 
     expect(screen.getByText('Detaljer for valgt aktivitet')).toBeInTheDocument();
-    // expect(screen.getByText('Næring')).toHaveLength(2);
+    expect(screen.getAllByText('Næring')).toHaveLength(2);
 
     expect(screen.getByText('Oppdater')).toBeDisabled();
     expect(screen.getByText('Avbryt')).not.toBeDisabled();
@@ -49,5 +49,38 @@ describe('<OpptjeningFaktaIndex>', () => {
         erGodkjent: true,
       }],
     });
+  });
+
+  it('skal bytte og så lukke aktiviteter ved hjelp av pil-ikoner', async () => {
+    render(<MedAksjonspunkt />);
+
+    expect(await screen.findByText('Vurder om aktiviteten kan godkjennes')).toBeInTheDocument();
+
+    expect(screen.getByText('Detaljer for valgt aktivitet')).toBeInTheDocument();
+    expect(screen.getAllByText('Næring')).toHaveLength(2);
+
+    userEvent.click(screen.getByAltText('Forrige periode'));
+
+    expect(await screen.findAllByText('Arbeid')).toHaveLength(2);
+
+    userEvent.click(screen.getByAltText('Neste periode'));
+
+    expect(await screen.findAllByText('Næring')).toHaveLength(2);
+
+    userEvent.click(screen.getByAltText('Åpne info om første periode'));
+
+    expect(await screen.findAllByText('Næring')).toHaveLength(1);
+  });
+
+  it('skal ikke vise aksjonspunkt-tekst og knapper når det ikke finnes aksjonspunkt', async () => {
+    render(<UtenAksjonspunkt />);
+
+    expect(await screen.findByText('Detaljer for valgt aktivitet')).toBeInTheDocument();
+    expect(screen.queryByText('Vurder om aktiviteten kan godkjennes')).not.toBeInTheDocument();
+    expect(screen.getAllByText('Arbeid')).toHaveLength(2);
+
+    expect(screen.queryByText('Oppdater')).not.toBeInTheDocument();
+    expect(screen.queryByText('Avbryt')).not.toBeInTheDocument();
+    expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
   });
 });
