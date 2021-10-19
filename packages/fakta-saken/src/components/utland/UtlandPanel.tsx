@@ -1,8 +1,6 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
-import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { createSelector } from 'reselect';
-import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useForm } from 'react-hook-form';
 import {
   Normaltekst, Element, Undertittel,
 } from 'nav-frontend-typografi';
@@ -10,7 +8,7 @@ import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
 import editUtlandIcon from '@fpsak-frontend/assets/images/endre.svg';
 import editUtlandDisabledIcon from '@fpsak-frontend/assets/images/endre_disablet.svg';
-import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption, Form } from '@fpsak-frontend/form-hooks';
 import { required } from '@fpsak-frontend/utils';
 import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
@@ -54,34 +52,47 @@ type FormValues = {
   gammelVerdi?: string;
 }
 
-interface PureOwnProps {
+interface OwnProps {
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
   submitCallback: (data: OverstyringUtenlandssakMarkeringAp) => Promise<void>;
 }
 
-interface MappedOwnProps {
-  utlandSakstype?: string;
-  initialValues: FormValues;
-  onSubmit: (formValues: FormValues) => any;
-}
-
-export const UtlandPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
-  intl,
+const UtlandPanel: FunctionComponent<OwnProps> = ({
   readOnly,
-  dirty,
-  handleSubmit,
-  reset,
-  utlandSakstype = UtlandSakstypeKode.NASJONAL,
+  aksjonspunkter,
+  submitCallback,
 }) => {
+  const intl = useIntl();
+
+  const formMethods = useForm<FormValues>({
+    defaultValues: {
+      utlandSakstype: getUtlandSakstype(aksjonspunkter),
+      gammelVerdi: getUtlandSakstype(aksjonspunkter),
+    },
+  });
+
   const [visEditeringsmodus, toggleEditUtland] = useState(false);
   const [visModal, toggleModal] = useState(false);
   const slaPaVisningAvModal = useCallback(() => toggleModal(true), []);
   const slaPaEditeringAvUtland = useCallback(() => toggleEditUtland(true), []);
-  const slaAvEditeringAvUtland = useCallback(() => { reset(); toggleEditUtland(false); }, []);
+  const slaAvEditeringAvUtland = useCallback(() => { formMethods.reset(); toggleEditUtland(false); }, []);
+
+  const utlandSakstype = formMethods.watch('utlandSakstype') || UtlandSakstypeKode.NASJONAL;
+
+  const handleSubmit = formMethods.handleSubmit((values) => submitCallback({
+    kode: MANUELL_MARKERING_AV_UTLAND_SAKSTYPE,
+    begrunnelse: values.utlandSakstype,
+    gammelVerdi: values.gammelVerdi,
+  }));
+
+  const lagreOgLukk = (values) => {
+    toggleModal(false);
+    return handleSubmit(values);
+  };
 
   return (
-    <>
+    <Form formMethods={formMethods}>
       <Undertittel>
         <FormattedMessage id="UtlandPanel.utland" />
       </Undertittel>
@@ -121,15 +132,15 @@ export const UtlandPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & 
                 validate={[required]}
               >
                 <RadioOption
-                  label={{ id: 'UtlandPanel.Nasjonal' }}
+                  label={intl.formatMessage({ id: 'UtlandPanel.Nasjonal' })}
                   value={UtlandSakstypeKode.NASJONAL}
                 />
                 <RadioOption
-                  label={{ id: 'UtlandPanel.EøsBosattNorge' }}
+                  label={intl.formatMessage({ id: 'UtlandPanel.EøsBosattNorge' })}
                   value={UtlandSakstypeKode.EØS_BOSATT_NORGE}
                 />
                 <RadioOption
-                  label={{ id: 'UtlandPanel.BosattUtland' }}
+                  label={intl.formatMessage({ id: 'UtlandPanel.BosattUtland' })}
                   value={UtlandSakstypeKode.BOSATT_UTLAND}
                 />
               </RadioGroupField>
@@ -140,8 +151,9 @@ export const UtlandPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & 
             <FlexColumn>
               <Hovedknapp
                 mini
+                htmlType="button"
                 onClick={slaPaVisningAvModal}
-                disabled={!dirty}
+                disabled={!formMethods.formState.isDirty}
               >
                 <FormattedMessage id="UtlandPanel.lagre" />
               </Hovedknapp>
@@ -159,30 +171,10 @@ export const UtlandPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & 
       )}
       <UtlandEndretModal
         visModal={visModal}
-        lagreOgLukk={handleSubmit}
+        lagreOgLukk={lagreOgLukk}
       />
-    </>
+    </Form>
   );
 };
 
-const lagSubmitFn = createSelector([
-  (ownProps: PureOwnProps) => ownProps.submitCallback],
-(submitCallback) => (values: FormValues) => submitCallback({
-  kode: MANUELL_MARKERING_AV_UTLAND_SAKSTYPE,
-  begrunnelse: values.utlandSakstype,
-  gammelVerdi: values.gammelVerdi,
-}));
-
-const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  initialValues: {
-    utlandSakstype: getUtlandSakstype(ownProps.aksjonspunkter),
-    gammelVerdi: getUtlandSakstype(ownProps.aksjonspunkter),
-  },
-  utlandSakstype: formValueSelector('UtlandPanel')(state, 'utlandSakstype'),
-  onSubmit: lagSubmitFn(ownProps),
-});
-
-export default connect(mapStateToProps)(reduxForm({
-  form: 'UtlandPanel',
-  destroyOnUnmount: false,
-})(injectIntl(UtlandPanelImpl)));
+export default UtlandPanel;
