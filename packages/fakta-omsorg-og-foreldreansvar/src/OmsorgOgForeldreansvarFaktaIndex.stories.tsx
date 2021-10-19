@@ -1,4 +1,5 @@
 import React from 'react';
+import { Story } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
@@ -9,11 +10,11 @@ import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import OmsorgOgForeldreansvarFaktaIndex from '@fpsak-frontend/fakta-omsorg-og-foreldreansvar';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import {
-  Behandling, FamilieHendelseSamling, InntektArbeidYtelse, Soknad,
+  Behandling, FamilieHendelseSamling, InntektArbeidYtelse, Soknad, Aksjonspunkt,
 } from '@fpsak-frontend/types';
-
-import alleKodeverk from '../mocks/alleKodeverk.json';
+import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 const behandling = {
   uuid: '1',
@@ -111,73 +112,75 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
-const standardFaktaProps = {
-  aksjonspunkter: [],
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  readOnly: false,
-  harApneAksjonspunkter: true,
-  submittable: true,
-  alleMerknaderFraBeslutter: {},
-  setFormData: () => undefined,
-};
-
 export default {
   title: 'fakta/fakta-omsorg-og-foreldreansvar',
   component: OmsorgOgForeldreansvarFaktaIndex,
 };
 
-export const visÅpentAksjonspunktForOmsorgovertakelse = () => (
+const Template: Story<{
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+}> = ({
+  aksjonspunkter,
+  submitCallback,
+  alleMerknaderFraBeslutter,
+}) => (
   <OmsorgOgForeldreansvarFaktaIndex
-    {...standardFaktaProps}
+    submitCallback={submitCallback}
+    readOnly={false}
+    harApneAksjonspunkter
+    submittable
+    setFormData={() => undefined}
     behandling={behandling}
     soknad={soknad}
     familiehendelse={familieHendelse}
     personoversikt={personoversikt}
     inntektArbeidYtelse={inntektArbeidYtelse}
-    aksjonspunkter={[{
-      definisjon: {
-        kode: aksjonspunktCodes.OMSORGSOVERTAKELSE,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
-      begrunnelse: undefined,
-      kanLoses: true,
-      erAktivt: true,
-    }]}
-    alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.OMSORGSOVERTAKELSE]: merknaderFraBeslutter,
-    }}
+    aksjonspunkter={aksjonspunkter}
+    alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
     alleKodeverk={alleKodeverk as any}
   />
 );
 
-export const visÅpentAksjonspunktForAvklareVilkårForForeldreansvar = () => (
-  <OmsorgOgForeldreansvarFaktaIndex
-    {...standardFaktaProps}
-    behandling={behandling}
-    soknad={soknad}
-    familiehendelse={familieHendelse}
-    personoversikt={personoversikt}
-    inntektArbeidYtelse={inntektArbeidYtelse}
-    aksjonspunkter={[{
-      definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
-      begrunnelse: undefined,
-      kanLoses: true,
-      erAktivt: true,
-    }]}
-    alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,
-    }}
-    alleKodeverk={alleKodeverk as any}
-  />
-);
+export const ÅpentAksjonspunktForOmsorgovertakelse = Template.bind({});
+ÅpentAksjonspunktForOmsorgovertakelse.args = {
+  aksjonspunkter: [{
+    definisjon: {
+      kode: aksjonspunktCodes.OMSORGSOVERTAKELSE,
+      kodeverk: '',
+    },
+    status: {
+      kode: aksjonspunktStatus.OPPRETTET,
+      kodeverk: '',
+    },
+    begrunnelse: undefined,
+    kanLoses: true,
+    erAktivt: true,
+  }],
+  alleMerknaderFraBeslutter: {
+    [aksjonspunktCodes.OMSORGSOVERTAKELSE]: merknaderFraBeslutter,
+  },
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};
+
+export const ÅpentAksjonspunktForAvklareVilkårForForeldreansvar = Template.bind({});
+ÅpentAksjonspunktForAvklareVilkårForForeldreansvar.args = {
+  aksjonspunkter: [{
+    definisjon: {
+      kode: aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
+      kodeverk: '',
+    },
+    status: {
+      kode: aksjonspunktStatus.OPPRETTET,
+      kodeverk: '',
+    },
+    begrunnelse: undefined,
+    kanLoses: true,
+    erAktivt: true,
+  }],
+  alleMerknaderFraBeslutter: {
+    [aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,
+  },
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};

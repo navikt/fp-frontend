@@ -19,6 +19,7 @@ interface OwnProps {
   placeholder?: ReactNode;
   hideValueOnDisable?: boolean;
   bredde?: 'fullbredde' | 'xxl' | 'xl' | 'l' | 'm' | 's' | 'xs';
+  disabled?: boolean;
 }
 
 const SelectField: FunctionComponent<OwnProps> = ({
