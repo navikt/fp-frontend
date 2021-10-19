@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { formValueSelector } from 'redux-form';
-import { connect } from 'react-redux';
+import { useFormContext } from 'react-hook-form';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import relatertYtelseTilstand from '@fpsak-frontend/kodeverk/src/relatertYtelseTilstand';
@@ -26,11 +25,6 @@ interface PureOwnProps {
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
 }
 
-interface MappedOwnProps {
-  farSokerType: string;
-  ytelser: RelatertTilgrensedYtelse[];
-}
-
 interface StaticFunctions {
   buildInitialValues?: (soknad: Soknad, innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],
     getKodeverknavn: (kodeverk: Kodeverk) => string) => FormValues;
@@ -39,13 +33,16 @@ interface StaticFunctions {
 /**
  * RettighetFaktaPanel
  */
-const RettighetFaktaPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
-  farSokerType,
-  ytelser,
+const RettighetFaktaPanel: FunctionComponent<PureOwnProps> & StaticFunctions = ({
   relatertYtelseTypes,
   alleMerknaderFraBeslutter,
 }) => {
   const intl = useIntl();
+  const { watch } = useFormContext();
+
+  const farSokerType = watch('farSokerType');
+  const ytelser = watch('ytelser');
+
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.Rettighet' })}
@@ -70,14 +67,6 @@ const RettighetFaktaPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps> 
     </FaktaGruppe>
   );
 };
-
-const FORM_NAME = 'OmsorgOgForeldreansvarInfoPanel';
-
-const mapStateToProps = (state: any): MappedOwnProps => ({
-  ...formValueSelector(FORM_NAME)(state, 'farSokerType', 'ytelser'),
-});
-
-const RettighetFaktaPanel = connect(mapStateToProps)(RettighetFaktaPanelImpl);
 
 RettighetFaktaPanel.buildInitialValues = (soknad: Soknad,
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],

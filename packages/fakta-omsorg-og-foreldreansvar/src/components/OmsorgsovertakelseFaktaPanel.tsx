@@ -3,8 +3,8 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Undertekst, Normaltekst } from 'nav-frontend-typografi';
 
+import { DatepickerField } from '@fpsak-frontend/form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { DatepickerField } from '@fpsak-frontend/form';
 import { hasValidDate, required } from '@fpsak-frontend/utils';
 import { FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
@@ -58,7 +58,7 @@ const OmsorgsovertakelseFaktaPanel: FunctionComponent<OwnProps> & StaticFunction
         <Column xs={erAksjonspunktForeldreansvar ? '4' : '8'}>
           <DatepickerField
             name="omsorgsovertakelseDato"
-            label={{ id: 'OmsorgOgForeldreansvarFaktaForm.OmsorgsovertakelseDate' }}
+            label={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.OmsorgsovertakelseDate' })}
             validate={[required, hasValidDate]}
             readOnly={readOnly}
             isEdited={editedStatus.omsorgsovertakelseDato}
@@ -69,7 +69,7 @@ const OmsorgsovertakelseFaktaPanel: FunctionComponent<OwnProps> & StaticFunction
           <Column xs="4">
             <DatepickerField
               name="foreldreansvarDato"
-              label={{ id: 'OmsorgOgForeldreansvarFaktaForm.ForeldreansvarDato' }}
+              label={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.ForeldreansvarDato' })}
               validate={[required, hasValidDate]}
               readOnly={readOnly}
             />
