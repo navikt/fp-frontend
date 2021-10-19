@@ -1,17 +1,13 @@
 import React, { FunctionComponent } from 'react';
-import {
-  FormattedMessage, injectIntl, WrappedComponentProps,
-} from 'react-intl';
-import { InjectedFormProps, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
+import { useForm } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Undertittel, Element } from 'nav-frontend-typografi';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
+import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@fpsak-frontend/fakta-felles';
 import { AksjonspunktBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { required } from '@fpsak-frontend/utils';
-import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption, Form } from '@fpsak-frontend/form-hooks';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import { MerkOpptjeningUtlandAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -22,12 +18,17 @@ const OpptjeningIUtlandDokStatus = {
   DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET: 'DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET',
 };
 
-type FormValues = {
+const transformValues = (values: FormValues): MerkOpptjeningUtlandAp => ({
+  kode: aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+  ...values,
+});
+
+export type FormValues = {
   begrunnelse?: string;
   dokStatus?: string;
 }
 
-interface PureOwnProps {
+interface OwnProps {
   readOnly: boolean;
   harApneAksjonspunkter: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
@@ -35,90 +36,83 @@ interface PureOwnProps {
   submitCallback: (data: MerkOpptjeningUtlandAp) => Promise<void>;
   aksjonspunkt: Aksjonspunkt;
   dokStatus?: string;
+  formData: FormValues,
+  setFormData: (data: FormValues) => void,
 }
 
-interface MappedOwnProps {
-  initialValues: FormValues;
-  onSubmit: (formValues: FormValues) => any;
-}
-
-export const InnhentDokOpptjeningUtlandPanel: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
-  intl,
+const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps> = ({
   readOnly,
   harApneAksjonspunkter,
   aksjonspunkt,
   alleMerknaderFraBeslutter,
   submittable,
-  initialValues,
-  handleSubmit,
-  form,
-}) => (
-  <form onSubmit={handleSubmit}>
-    <Undertittel>
-      <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.OpptjeningUtland" />
-    </Undertittel>
-    {harApneAksjonspunkter && <VerticalSpacer sixteenPx />}
-    <AksjonspunktBox
-      className={styles.aksjonspunktMargin}
-      erAksjonspunktApent={harApneAksjonspunkter}
-      erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[aksjonspunkt.definisjon.kode]?.notAccepted}
+  submitCallback,
+  dokStatus,
+  formData,
+  setFormData,
+}) => {
+  const intl = useIntl();
+
+  const formMethods = useForm<FormValues>({
+    defaultValues: formData || {
+      dokStatus,
+      ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkt),
+    },
+  });
+
+  const begrunnelse = formMethods.watch('begrunnelse');
+
+  return (
+    <Form
+      formMethods={formMethods}
+      onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
+      setDataOnUnmount={setFormData}
     >
-      <Element>
-        <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentelseDok" />
-      </Element>
-      <VerticalSpacer sixteenPx />
-      <RadioGroupField name="dokStatus" validate={[required]} direction="vertical" readOnly={readOnly}>
-        <RadioOption
-          label={<FormattedMessage id="InnhentDokOpptjeningUtlandPanel.Innhentes" />}
-          value={OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_BLI_INNHENTET}
+      <Undertittel>
+        <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.OpptjeningUtland" />
+      </Undertittel>
+      {harApneAksjonspunkter && <VerticalSpacer sixteenPx />}
+      <AksjonspunktBox
+        className={styles.aksjonspunktMargin}
+        erAksjonspunktApent={harApneAksjonspunkter}
+        erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[aksjonspunkt.definisjon.kode]?.notAccepted}
+      >
+        <Element>
+          <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentelseDok" />
+        </Element>
+        <VerticalSpacer sixteenPx />
+        <RadioGroupField name="dokStatus" validate={[required]} direction="vertical" readOnly={readOnly}>
+          <RadioOption
+            label={<FormattedMessage id="InnhentDokOpptjeningUtlandPanel.Innhentes" />}
+            value={OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_BLI_INNHENTET}
+          />
+          <RadioOption
+            label={(
+              <FormattedMessage
+                id="InnhentDokOpptjeningUtlandPanel.InnhentesIkke"
+                values={{
+                  b: (chunks) => <b>{chunks}</b>,
+                }}
+              />
+            )}
+            value={OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET}
+          />
+        </RadioGroupField>
+        <FaktaBegrunnelseTextFieldNew
+          isSubmittable={submittable}
+          isReadOnly={readOnly}
+          hasBegrunnelse={!!begrunnelse}
+          label={intl.formatMessage({ id: 'InnhentDokOpptjeningUtlandPanel.Begrunnelse' })}
         />
-        <RadioOption
-          label={(
-            <FormattedMessage
-              id="InnhentDokOpptjeningUtlandPanel.InnhentesIkke"
-              values={{
-                b: (chunks) => <b>{chunks}</b>,
-              }}
-            />
-          )}
-          value={OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET}
+        <VerticalSpacer sixteenPx />
+        <FaktaSubmitButtonNew
+          isSubmittable={submittable}
+          isReadOnly={readOnly}
+          hasOpenAksjonspunkter={harApneAksjonspunkter}
         />
-      </RadioGroupField>
-      <FaktaBegrunnelseTextField
-        isSubmittable={submittable}
-        isReadOnly={readOnly}
-        hasBegrunnelse={!!initialValues.begrunnelse}
-        label={intl.formatMessage({ id: 'InnhentDokOpptjeningUtlandPanel.Begrunnelse' })}
-      />
-      <VerticalSpacer sixteenPx />
-      <FaktaSubmitButton
-        formName={form}
-        isSubmittable={submittable}
-        isReadOnly={readOnly}
-        hasOpenAksjonspunkter={harApneAksjonspunkter}
-      />
-    </AksjonspunktBox>
-  </form>
-);
+      </AksjonspunktBox>
+    </Form>
+  );
+};
 
-const transformValues = (values: FormValues): MerkOpptjeningUtlandAp => ({
-  kode: aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-  ...values,
-});
-
-const lagSubmitFn = createSelector([
-  (ownProps: PureOwnProps) => ownProps.submitCallback],
-(submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
-
-const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
-  onSubmit: lagSubmitFn(ownProps),
-  initialValues: {
-    dokStatus: ownProps.dokStatus,
-    ...FaktaBegrunnelseTextField.buildInitialValues(ownProps.aksjonspunkt),
-  },
-});
-
-export default connect(mapStateToProps)(reduxForm({
-  form: 'InnhentDokOpptjeningUtlandPanel',
-  destroyOnUnmount: false,
-})(injectIntl(InnhentDokOpptjeningUtlandPanel)));
+export default InnhentDokOpptjeningUtlandPanel;
