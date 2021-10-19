@@ -18,10 +18,12 @@ interface OwnProps {
   readOnly: boolean;
   submittable: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  formData?: any,
+  setFormData: (data: any) => void,
 }
 
-const personAksjonspunkter = [aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK];
-const erMarkertUtenlandssak = (aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter.some((ap) => ap.definisjon.kode === personAksjonspunkter[0]);
+const UTENLANDSSAK_AKSJONSPUNKTER = [aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK];
+const erMarkertUtenlandssak = (aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter.some((ap) => ap.definisjon.kode === UTENLANDSSAK_AKSJONSPUNKTER[0]);
 
 const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
   aksjonspunkter,
@@ -31,6 +33,8 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
   submitCallback,
   readOnly,
   submittable,
+  formData,
+  setFormData,
 }) => (
   <>
     {harApneAksjonspunkter && erMarkertUtenlandssak(aksjonspunkter) && (
@@ -55,10 +59,12 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
             dokStatus={dokStatus}
             readOnly={readOnly}
             harApneAksjonspunkter={harApneAksjonspunkter}
-            aksjonspunkt={aksjonspunkter.find((ap) => ap.definisjon.kode === personAksjonspunkter[0])}
+            aksjonspunkt={aksjonspunkter.find((ap) => ap.definisjon.kode === UTENLANDSSAK_AKSJONSPUNKTER[0])}
             submittable={submittable}
             submitCallback={submitCallback}
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+            formData={formData}
+            setFormData={setFormData}
           />
         </Column>
       )}
