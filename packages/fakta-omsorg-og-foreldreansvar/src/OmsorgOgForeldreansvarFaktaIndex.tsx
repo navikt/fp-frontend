@@ -5,7 +5,6 @@ import {
   StandardFaktaPanelProps, FamilieHendelseSamling, InntektArbeidYtelse, Personoversikt, Soknad,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import OmsorgOgForeldreansvarInfoPanel from './components/OmsorgOgForeldreansvarInfoPanel';
 import messages from '../i18n/nb_NO.json';
@@ -35,22 +34,21 @@ const OmsorgOgForeldreansvarFaktaIndex: FunctionComponent<OwnProps & StandardFak
   setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <ReduxWrapper formName="OmsorgOgForeldreansvarFaktaIndex" formData={formData} setFormData={setFormData}>
-      <OmsorgOgForeldreansvarInfoPanel
-        intl={intl}
-        gjeldendeFamiliehendelse={familiehendelse.gjeldende}
-        soknad={soknad}
-        personoversikt={personoversikt}
-        aksjonspunkter={aksjonspunkter}
-        innvilgetRelatertTilgrensendeYtelserForAnnenForelder={inntektArbeidYtelse.innvilgetRelatertTilgrensendeYtelserForAnnenForelder}
-        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-        submitCallback={submitCallback}
-        readOnly={readOnly}
-        alleKodeverk={alleKodeverk}
-        hasOpenAksjonspunkter={harApneAksjonspunkter}
-        submittable={submittable}
-      />
-    </ReduxWrapper>
+    <OmsorgOgForeldreansvarInfoPanel
+      gjeldendeFamiliehendelse={familiehendelse.gjeldende}
+      soknad={soknad}
+      personoversikt={personoversikt}
+      aksjonspunkter={aksjonspunkter}
+      innvilgetRelatertTilgrensendeYtelserForAnnenForelder={inntektArbeidYtelse.innvilgetRelatertTilgrensendeYtelserForAnnenForelder}
+      alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+      submitCallback={submitCallback}
+      readOnly={readOnly}
+      alleKodeverk={alleKodeverk}
+      hasOpenAksjonspunkter={harApneAksjonspunkter}
+      submittable={submittable}
+      formData={formData}
+      setFormData={setFormData}
+    />
   </RawIntlProvider>
 );
 
