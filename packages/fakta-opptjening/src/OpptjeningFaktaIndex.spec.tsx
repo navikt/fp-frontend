@@ -45,8 +45,14 @@ describe('<OpptjeningFaktaIndex>', () => {
       opptjeningsaktiviteter: [{
         arbeidsforholdRef: undefined,
         arbeidsgiverReferanse: '1',
+        aktivitetType: {
+          kode: 'NÆRING',
+          kodeverk: '',
+        },
         begrunnelse: 'Dette er en begrunnelse',
         erGodkjent: true,
+        opptjeningFom: '1995-09-14',
+        opptjeningTom: '9999-12-31',
       }],
     });
   });

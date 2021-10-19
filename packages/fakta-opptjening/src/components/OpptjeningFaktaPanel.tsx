@@ -123,6 +123,9 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
       .map((a, index) => ({
         arbeidsforholdRef: a.arbeidsforholdRef,
         arbeidsgiverReferanse: a.arbeidsgiverReferanse,
+        opptjeningFom: a.opptjeningFom,
+        opptjeningTom: a.opptjeningTom,
+        aktivitetType: a.aktivitetType,
         erGodkjent: formVerdierForAlleAktiviteter[index].erGodkjent,
         begrunnelse: formVerdierForAlleAktiviteter[index].begrunnelse,
       }))
