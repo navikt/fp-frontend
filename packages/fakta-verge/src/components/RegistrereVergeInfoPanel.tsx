@@ -96,6 +96,8 @@ const RegistrereVergeInfoPanel: FunctionComponent<PureOwnProps> = ({
           isReadOnly={readOnly}
           hasOpenAksjonspunkter={hasOpenAksjonspunkter}
           doNotCheckForRequiredFields
+          isSubmitting={formMethods.formState.isSubmitting}
+          isDirty={formMethods.formState.isDirty}
         />
       </Form>
     </>
