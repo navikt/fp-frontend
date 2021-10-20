@@ -123,6 +123,8 @@ export const Messages: FunctionComponent<OwnProps> = ({
   const fritekst = formMethods.watch('fritekst');
   const arsakskode = formMethods.watch('arsakskode');
 
+  const filtrerteRevurderingVarslingArsaker = useMemo(() => getfiltrerteRevurderingVarslingArsaker(revurderingVarslingArsak, fagsakYtelseType), []);
+
   if (!sprakKode) {
     return null;
   }
@@ -130,17 +132,11 @@ export const Messages: FunctionComponent<OwnProps> = ({
   const { formState } = formMethods;
 
   const previewMessage = (e: React.MouseEvent | React.KeyboardEvent) => {
-    if (formState.isValid || !formState.isDirty) {
+    if (mottaker && brevmalkode) {
       previewCallback(mottaker, brevmalkode, fritekst, arsakskode);
-    } else {
-      // TODO Fungerar dette? Typescript seier at submit ikkje ligg i formProps
-      // @ts-ignore
-      formProps.submit();
     }
     e.preventDefault();
   };
-
-  const filtrerteRevurderingVarslingArsaker = useMemo(() => getfiltrerteRevurderingVarslingArsaker(revurderingVarslingArsak, fagsakYtelseType), []);
 
   const language = getLanguageFromSprakkode(sprakKode);
 

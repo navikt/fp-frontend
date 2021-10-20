@@ -101,7 +101,7 @@ describe('<MeldingIndex>', () => {
     let axiosMock: MockAdapter;
     const setApiMock = (mockAdapter: MockAdapter) => { axiosMock = mockAdapter; };
 
-    render(
+    const utils = render(
       <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
         <Router history={history}>
           <MeldingIndex
@@ -114,6 +114,9 @@ describe('<MeldingIndex>', () => {
     );
 
     expect(await screen.findByText('Forhåndsvis')).toBeInTheDocument();
+
+    userEvent.selectOptions(utils.getByLabelText('Mottaker'), 'Søker');
+    userEvent.selectOptions(utils.getByLabelText('Mal'), 'Mal1');
 
     userEvent.click(screen.getByText('Forhåndsvis'));
 
@@ -128,7 +131,7 @@ describe('<MeldingIndex>', () => {
       fritekst: ' ',
       arsakskode: null,
       mottaker: 'Søker',
-      dokumentMal: undefined,
+      dokumentMal: 'Mal1',
     })));
   });
 
