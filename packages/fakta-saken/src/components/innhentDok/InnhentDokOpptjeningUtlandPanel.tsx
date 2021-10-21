@@ -107,6 +107,8 @@ const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps> = ({
         <VerticalSpacer sixteenPx />
         <FaktaSubmitButtonNew
           isSubmittable={submittable}
+          isSubmitting={formMethods.formState.isSubmitting}
+          isDirty={formMethods.formState.isDirty}
           isReadOnly={readOnly}
           hasOpenAksjonspunkter={harApneAksjonspunkter}
         />

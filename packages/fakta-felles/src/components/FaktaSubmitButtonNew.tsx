@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider, FormattedMessage } from 'react-intl';
-import { useFormContext } from 'react-hook-form';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import { createIntl, ariaCheck } from '@fpsak-frontend/utils';
@@ -33,6 +32,8 @@ interface PureOwnProps {
   isSubmittable: boolean;
   hasOpenAksjonspunkter: boolean;
   onClick?: (event: React.MouseEvent) => void;
+  isSubmitting: boolean;
+  isDirty: boolean;
 }
 
 /**
@@ -44,11 +45,9 @@ export const FaktaSubmitButton: FunctionComponent<PureOwnProps> = ({
   hasOpenAksjonspunkter,
   buttonText,
   onClick,
+  isSubmitting,
+  isDirty,
 }) => {
-  const {
-    formState: { isSubmitting, isDirty },
-  } = useFormContext();
-
   const hasEmptyRequiredFields = false;
 
   return (

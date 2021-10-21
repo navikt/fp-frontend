@@ -115,6 +115,8 @@ export const OmsorgOgForeldreansvarInfoPanel: FunctionComponent<PureOwnProps> = 
       <VerticalSpacer twentyPx />
       <FaktaSubmitButtonNew
         isSubmittable={submittable}
+        isSubmitting={formMethods.formState.isSubmitting}
+        isDirty={formMethods.formState.isDirty}
         isReadOnly={readOnly}
         hasOpenAksjonspunkter={hasOpenAksjonspunkter}
       />
