@@ -1,20 +1,19 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
-import { InjectedFormProps, reduxForm } from 'redux-form';
+import { useForm } from 'react-hook-form';
 import { Column, Row } from 'nav-frontend-grid';
 
 import {
-  FaktaBegrunnelseTextField, FaktaSubmitButton, isFieldEdited, FieldEditedInfo, FaktaBegrunnelseFormValues,
+  FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew, isFieldEdited, FieldEditedInfo, FaktaBegrunnelseFormValues,
 } from '@fpsak-frontend/fakta-felles';
 import {
-  Aksjonspunkt, FamilieHendelse, Kodeverk, AlleKodeverk, Soknad,
+  Aksjonspunkt, FamilieHendelse, AlleKodeverk, Soknad,
 } from '@fpsak-frontend/types';
 import {
   VerticalSpacer, AksjonspunktHelpTextTemp,
 } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { Form } from '@fpsak-frontend/form-hooks';
 import {
   BekreftDokumentertDatoAksjonspunktAp, BekreftEktefelleAksjonspunktAp, BekreftMannAdoptererAksjonspunktAp,
 } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -40,112 +39,10 @@ const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   return helpTexts;
 };
 
-type FormValues = EktefelleFormValues & DokFormValues & MannAdoptererFormValues & FaktaBegrunnelseFormValues;
-
-type AksjonspunktData = Array<BekreftEktefelleAksjonspunktAp | BekreftDokumentertDatoAksjonspunktAp | BekreftMannAdoptererAksjonspunktAp>;
-
-interface PureOwnProps {
-  aksjonspunkter: Aksjonspunkt[];
-  submittable: boolean;
-  readOnly: boolean;
-  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  alleKodeverk: AlleKodeverk;
-  hasOpenAksjonspunkter: boolean;
-  isForeldrepengerFagsak: boolean;
-  soknad: Soknad;
-  gjeldendeFamiliehendelse: FamilieHendelse;
-  submitCallback: (aksjonspunktData: AksjonspunktData) => Promise<void>;
-}
-
-interface MappedOwnProps {
-  farSokerType?: Kodeverk;
-  editedStatus: FieldEditedInfo;
-  initialValues: FormValues;
-  onSubmit: (formValues: FormValues) => void;
-}
-
-/**
- * AdopsjonInfoPanel
- *
- * Presentasjonskomponent. Har ansvar for å sette opp Redux Formen for faktapenelet til Adopsjonsvilkåret.
- */
-export const AdopsjonInfoPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
-  aksjonspunkter,
-  hasOpenAksjonspunkter,
-  submittable,
-  readOnly,
-  initialValues,
-  editedStatus,
-  alleMerknaderFraBeslutter,
-  alleKodeverk,
-  isForeldrepengerFagsak,
-  farSokerType,
-  ...formProps
-}) => (
-  <>
-    <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
-      {getHelpTexts(aksjonspunkter)}
-    </AksjonspunktHelpTextTemp>
-    <form onSubmit={formProps.handleSubmit}>
-      <VerticalSpacer eightPx />
-      <Row>
-        <Column xs="6">
-          <DokumentasjonFaktaForm
-            readOnly={readOnly}
-            editedStatus={editedStatus}
-            erForeldrepengerFagsak={isForeldrepengerFagsak}
-            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-            hasEktefellesBarnAksjonspunkt={hasAksjonspunkt(
-              OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
-              aksjonspunkter,
-            )}
-          />
-        </Column>
-        <Column xs="6">
-          {hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkter) && (
-            <EktefelleFaktaForm
-              readOnly={readOnly}
-              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-              ektefellesBarnIsEdited={editedStatus.ektefellesBarn}
-            />
-          )}
-          {hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkter) && (
-            <MannAdoptererAleneFaktaForm
-              farSokerType={farSokerType}
-              readOnly={readOnly}
-              mannAdoptererAlene={editedStatus.mannAdoptererAlene}
-              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-              alleKodeverk={alleKodeverk}
-            />
-          )}
-        </Column>
-      </Row>
-      {aksjonspunkter && aksjonspunkter.length > 0 && (
-        <>
-          <VerticalSpacer twentyPx />
-          <FaktaBegrunnelseTextField
-            isSubmittable={submittable}
-            isReadOnly={readOnly}
-            hasBegrunnelse={!!initialValues.begrunnelse}
-          />
-          <VerticalSpacer twentyPx />
-          <FaktaSubmitButton
-            formName={formProps.form}
-            isSubmittable={submittable}
-            isReadOnly={readOnly}
-            hasOpenAksjonspunkter={hasOpenAksjonspunkter}
-          />
-        </>
-      )}
-    </form>
-  </>
-);
-
-const buildInitialValues = createSelector([
-  (ownProps: PureOwnProps) => ownProps.soknad,
-  (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse,
-  (ownProps: PureOwnProps) => ownProps.aksjonspunkter], (
-  soknad, familiehendelse, allAksjonspunkter,
+const buildInitialValues = (
+  soknad: Soknad,
+  familiehendelse: FamilieHendelse,
+  allAksjonspunkter: Aksjonspunkt[],
 ): FormValues => {
   const aksjonspunkter = allAksjonspunkter.filter((ap) => adopsjonAksjonspunkter.some((kode) => kode === ap.definisjon.kode));
 
@@ -158,14 +55,13 @@ const buildInitialValues = createSelector([
     omAdopsjonGjelderEktefellesBarn = EktefelleFaktaForm.buildInitialValues(familiehendelse);
   }
 
-  // @ts-ignore Fiks!
   return {
     ...DokumentasjonFaktaForm.buildInitialValues(soknad, familiehendelse),
     ...omAdopsjonGjelderEktefellesBarn,
     ...mannAdoptererAleneValues,
-    ...FaktaBegrunnelseTextField.buildInitialValues(aksjonspunkter[0]),
+    ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter[0]),
   };
-});
+};
 
 const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): AksjonspunktData => {
   const aksjonspunkterArray = [] as AksjonspunktData;
@@ -184,26 +80,120 @@ const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): Ak
   }));
 };
 
-const getEditedStatus = createSelector(
-  [(ownProps: PureOwnProps) => ownProps.soknad,
-    (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse],
-  (soknad, gjeldendeFamiliehendelse): FieldEditedInfo => (
-    isFieldEdited(soknad, gjeldendeFamiliehendelse)
-  ),
+const getEditedStatus = (soknad: Soknad, gjeldendeFamiliehendelse: FamilieHendelse): FieldEditedInfo => (
+  isFieldEdited(soknad, gjeldendeFamiliehendelse)
 );
 
-const lagSubmitFn = createSelector([
-  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(submitCallback, aksjonspunkter) => (values: FormValues): Promise<any> => submitCallback(transformValues(values, aksjonspunkter)));
+type FormValues = EktefelleFormValues & DokFormValues & MannAdoptererFormValues & FaktaBegrunnelseFormValues;
 
-const mapStateToPropsFactory = (_state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  editedStatus: getEditedStatus(ownProps),
-  initialValues: buildInitialValues(ownProps),
-  farSokerType: ownProps.soknad.farSokerType,
-  onSubmit: lagSubmitFn(ownProps),
-});
+type AksjonspunktData = Array<BekreftEktefelleAksjonspunktAp | BekreftDokumentertDatoAksjonspunktAp | BekreftMannAdoptererAksjonspunktAp>;
 
-export default connect(mapStateToPropsFactory)(reduxForm({
-  form: 'AdopsjonInfoPanel',
-  destroyOnUnmount: false,
-})(AdopsjonInfoPanelImpl));
+interface OwnProps {
+  aksjonspunkter: Aksjonspunkt[];
+  submittable: boolean;
+  readOnly: boolean;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  alleKodeverk: AlleKodeverk;
+  hasOpenAksjonspunkter: boolean;
+  isForeldrepengerFagsak: boolean;
+  soknad: Soknad;
+  gjeldendeFamiliehendelse: FamilieHendelse;
+  submitCallback: (aksjonspunktData: AksjonspunktData) => Promise<void>;
+  formData?: FormValues,
+  setFormData: (data: FormValues) => void,
+}
+
+/**
+ * AdopsjonInfoPanel
+ *
+ * Har ansvar for å sette opp formen for faktapenelet til Adopsjonsvilkåret.
+ */
+const AdopsjonInfoPanel: FunctionComponent<OwnProps> = ({
+  aksjonspunkter,
+  hasOpenAksjonspunkter,
+  submittable,
+  readOnly,
+  alleMerknaderFraBeslutter,
+  alleKodeverk,
+  isForeldrepengerFagsak,
+  submitCallback,
+  soknad,
+  gjeldendeFamiliehendelse,
+  formData,
+  setFormData,
+}) => {
+  const formMethods = useForm<FormValues>({
+    defaultValues: formData || buildInitialValues(soknad, gjeldendeFamiliehendelse, aksjonspunkter),
+  });
+
+  const begrunnelse = formMethods.watch('begrunnelse');
+
+  const editedStatus = useMemo(() => getEditedStatus(soknad, gjeldendeFamiliehendelse), [soknad, gjeldendeFamiliehendelse]);
+
+  return (
+    <>
+      <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
+        {getHelpTexts(aksjonspunkter)}
+      </AksjonspunktHelpTextTemp>
+      <Form
+        formMethods={formMethods}
+        onSubmit={(values: FormValues): Promise<any> => submitCallback(transformValues(values, aksjonspunkter))}
+        setDataOnUnmount={setFormData}
+      >
+        <VerticalSpacer eightPx />
+        <Row>
+          <Column xs="6">
+            <DokumentasjonFaktaForm
+              readOnly={readOnly}
+              editedStatus={editedStatus}
+              erForeldrepengerFagsak={isForeldrepengerFagsak}
+              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+              hasEktefellesBarnAksjonspunkt={hasAksjonspunkt(
+                OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+                aksjonspunkter,
+              )}
+            />
+          </Column>
+          <Column xs="6">
+            {hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkter) && (
+              <EktefelleFaktaForm
+                readOnly={readOnly}
+                alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+                ektefellesBarnIsEdited={editedStatus.ektefellesBarn}
+              />
+            )}
+            {hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkter) && (
+              <MannAdoptererAleneFaktaForm
+                farSokerType={soknad.farSokerType}
+                readOnly={readOnly}
+                mannAdoptererAlene={editedStatus.mannAdoptererAlene}
+                alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+                alleKodeverk={alleKodeverk}
+              />
+            )}
+          </Column>
+        </Row>
+        {aksjonspunkter && aksjonspunkter.length > 0 && (
+          <>
+            <VerticalSpacer twentyPx />
+            <FaktaBegrunnelseTextFieldNew
+              isSubmittable={submittable}
+              isReadOnly={readOnly}
+              hasBegrunnelse={!!begrunnelse}
+            />
+            <VerticalSpacer twentyPx />
+            <FaktaSubmitButtonNew
+              isSubmittable={submittable}
+              isReadOnly={readOnly}
+              hasOpenAksjonspunkter={hasOpenAksjonspunkter}
+              isSubmitting={formMethods.formState.isSubmitting}
+              isDirty={formMethods.formState.isDirty}
+            />
+          </>
+        )}
+      </Form>
+    </>
+  );
+};
+
+export default AdopsjonInfoPanel;
