@@ -1,19 +1,18 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import { Column, Container, Row } from 'nav-frontend-grid';
-import { formValueSelector } from 'redux-form';
-import { connect } from 'react-redux';
-import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import { useFormContext } from 'react-hook-form';
 import moment from 'moment';
+import { Column, Container, Row } from 'nav-frontend-grid';
+import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
 import { FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
-import { DatepickerField } from '@fpsak-frontend/form';
+import { DatepickerField } from '@fpsak-frontend/form-hooks';
 import { hasValidDate, required } from '@fpsak-frontend/utils';
 import { Image, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import advarselImageUrl from '@fpsak-frontend/assets/images/advarsel.svg';
 import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 import { BekreftDokumentertDatoAksjonspunktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import advarselImageUrl from '@fpsak-frontend/assets/images/advarsel.svg';
 
 import styles from './dokumentasjonFaktaForm.less';
 
@@ -37,18 +36,12 @@ const isAgeAbove15 = (fodselsdatoer: Record<number, string>, omsorgsovertakelseD
     .isSameOrBefore(moment(omsorgsovertakelseDato)
       .subtract(15, 'years'));
 
-interface PureOwnProps {
+interface OwnProps {
   readOnly: boolean;
   erForeldrepengerFagsak: boolean;
   hasEktefellesBarnAksjonspunkt: boolean;
   editedStatus: FieldEditedInfo;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-}
-
-interface MappedOwnProps {
-  fodselsdatoer?: Record<number, string>;
-  omsorgsovertakelseDato?: string;
-  barnetsAnkomstTilNorgeDato?: string;
 }
 
 export type FormValues = {
@@ -67,17 +60,20 @@ interface StaticFunctions {
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for avklaring av adopsjonsopplysninger i søknaden.
  */
-const DokumentasjonFaktaFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
+const DokumentasjonFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
-  fodselsdatoer,
-  omsorgsovertakelseDato,
   editedStatus,
-  barnetsAnkomstTilNorgeDato,
   erForeldrepengerFagsak,
   hasEktefellesBarnAksjonspunkt,
   alleMerknaderFraBeslutter,
 }) => {
   const intl = useIntl();
+
+  const { watch } = useFormContext<FormValues>();
+  const fodselsdatoer = watch('fodselsdatoer') || {};
+  const omsorgsovertakelseDato = watch('omsorgsovertakelseDato');
+  const barnetsAnkomstTilNorgeDato = watch('barnetsAnkomstTilNorgeDato');
+
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'DokumentasjonFaktaForm.ApplicationInformation' })}
@@ -86,10 +82,10 @@ const DokumentasjonFaktaFormImpl: FunctionComponent<PureOwnProps & MappedOwnProp
       <Container className={styles.container}>
         <DatepickerField
           name="omsorgsovertakelseDato"
-          label={{
+          label={intl.formatMessage({
             id: erForeldrepengerFagsak && hasEktefellesBarnAksjonspunkt
               ? 'DokumentasjonFaktaForm.Stebarnsadopsjon' : 'DokumentasjonFaktaForm.Omsorgsovertakelsesdato',
-          }}
+          })}
           validate={[required, hasValidDate]}
           readOnly={readOnly}
           isEdited={editedStatus.omsorgsovertakelseDato}
@@ -97,7 +93,7 @@ const DokumentasjonFaktaFormImpl: FunctionComponent<PureOwnProps & MappedOwnProp
         {erForeldrepengerFagsak && barnetsAnkomstTilNorgeDato && (
           <DatepickerField
             name="barnetsAnkomstTilNorgeDato"
-            label={{ id: 'DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge' }}
+            label={intl.formatMessage({ id: 'DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge' })}
             validate={[hasValidDate]}
             readOnly={readOnly}
             isEdited={editedStatus.barnetsAnkomstTilNorgeDato}
@@ -111,10 +107,9 @@ const DokumentasjonFaktaFormImpl: FunctionComponent<PureOwnProps & MappedOwnProp
               <Column xs="6">
                 <DatepickerField
                   name={`fodselsdatoer.${id}`}
-                  label={{
+                  label={intl.formatMessage({
                     id: 'DokumentasjonFaktaForm.Fodselsdato',
-                    args: { number: i + 1 },
-                  }}
+                  }, { number: i + 1 })}
                   validate={[required, hasValidDate]}
                   readOnly={readOnly}
                   isEdited={editedStatus.adopsjonFodelsedatoer[id]}
@@ -140,20 +135,6 @@ const DokumentasjonFaktaFormImpl: FunctionComponent<PureOwnProps & MappedOwnProp
     </FaktaGruppe>
   );
 };
-
-DokumentasjonFaktaFormImpl.defaultProps = {
-  fodselsdatoer: {},
-};
-
-const FORM_NAME = 'AdopsjonInfoPanel';
-
-const mapStateToProps = (state: any): MappedOwnProps => ({
-  ...formValueSelector(FORM_NAME)(
-    state, 'fodselsdatoer', 'omsorgsovertakelseDato', 'barnetsAnkomstTilNorgeDato',
-  ),
-});
-
-const DokumentasjonFaktaForm = connect(mapStateToProps)(DokumentasjonFaktaFormImpl);
 
 DokumentasjonFaktaForm.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse): FormValues => ({
   omsorgsovertakelseDato: familiehendelse && familiehendelse.omsorgsovertakelseDato ? familiehendelse.omsorgsovertakelseDato : soknad.omsorgsovertakelseDato,

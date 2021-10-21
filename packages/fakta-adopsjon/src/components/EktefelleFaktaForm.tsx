@@ -4,7 +4,7 @@ import { Container } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
 import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { required } from '@fpsak-frontend/utils';
 import { FamilieHendelse } from '@fpsak-frontend/types';
@@ -30,9 +30,9 @@ interface StaticFunctions {
 /**
  * EktefelleFaktaForm
  *
- * Presentasjonskomponent. Setter opp aksjonspunktet for vurdering av om det er ektefelles barn som adopteres.
+ * Setter opp aksjonspunktet for vurdering av om det er ektefelles barn som adopteres.
  */
-export const EktefelleFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
+const EktefelleFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   ektefellesBarnIsEdited,
   alleMerknaderFraBeslutter,
@@ -47,9 +47,16 @@ export const EktefelleFaktaForm: FunctionComponent<OwnProps> & StaticFunctions =
         <Normaltekst><FormattedMessage id="EktefelleFaktaForm.EktefellesBarn" /></Normaltekst>
         <VerticalSpacer twentyPx />
         <hr className={styles.hr} />
-        <RadioGroupField name="ektefellesBarn" validate={[required]} bredde="XL" readOnly={readOnly} isEdited={ektefellesBarnIsEdited}>
-          <RadioOption value={false} label={{ id: 'EktefelleFaktaForm.ErIkkeValg' }} />
-          <RadioOption value label={{ id: 'EktefelleFaktaForm.ErValg' }} />
+        <RadioGroupField
+          name="ektefellesBarn"
+          validate={[required]}
+          bredde="XL"
+          readOnly={readOnly}
+          isEdited={ektefellesBarnIsEdited}
+          parse={(value: string) => value === 'true'}
+        >
+          <RadioOption value="false" label={intl.formatMessage({ id: 'EktefelleFaktaForm.ErIkkeValg' })} />
+          <RadioOption value="true" label={intl.formatMessage({ id: 'EktefelleFaktaForm.ErValg' })} />
         </RadioGroupField>
       </Container>
     </FaktaGruppe>
