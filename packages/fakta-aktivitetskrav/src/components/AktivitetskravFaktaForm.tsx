@@ -70,9 +70,9 @@ export const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
     setIsSubmitting(true);
     submitCallback({
       kode: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
-      avklartePerioder: aktivitetskrav,
+      avklartePerioder: aktivitetskrav as Required<UttakKontrollerAktivitetskrav>[],
     }).then(() => setIsSubmitting(false));
-  };
+  }, [aktivitetskrav]);
 
   const isSubmittable = useMemo(() => submittable && !valgtAktivitetskrav && aktivitetskrav?.every((a) => a.avklaring), [aktivitetskrav, valgtAktivitetskrav]);
 
