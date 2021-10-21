@@ -93,7 +93,7 @@ const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<PureOwnProps> & StaticF
 }) => {
   const intl = useIntl();
 
-  const { watch } = useFormContext();
+  const { watch } = useFormContext<FormValues>();
 
   const editedStatus = getEditedStatus(soknad, gjeldendeFamiliehendelse);
   const vilkarType = watch('vilkarType');

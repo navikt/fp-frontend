@@ -7,7 +7,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { required, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
-import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
 import { FamilieHendelse, Kodeverk, AlleKodeverk } from '@fpsak-frontend/types';
 import { BekreftMannAdoptererAksjonspunktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -55,9 +55,16 @@ const MannAdoptererAleneFaktaForm: FunctionComponent<OwnProps> & StaticFunctions
           && <Normaltekst>{getKodeverknavnFn(alleKodeverk, kodeverkTyper)(farSokerType)}</Normaltekst>}
         <VerticalSpacer sixteenPx />
         <hr className={styles.hr} />
-        <RadioGroupField name="mannAdoptererAlene" validate={[required]} bredde="XL" readOnly={readOnly} isEdited={mannAdoptererAlene}>
-          <RadioOption label={{ id: 'MannAdoptererAleneFaktaForm.AdoptererAlene' }} value />
-          <RadioOption label={{ id: 'MannAdoptererAleneFaktaForm.AdoptererIkkeAlene' }} value={false} />
+        <RadioGroupField
+          name="mannAdoptererAlene"
+          validate={[required]}
+          bredde="XL"
+          readOnly={readOnly}
+          isEdited={mannAdoptererAlene}
+          parse={(value: string) => value === 'true'}
+        >
+          <RadioOption label={intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.AdoptererAlene' })} value="true" />
+          <RadioOption label={intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.AdoptererIkkeAlene' })} value="false" />
         </RadioGroupField>
       </Container>
     </FaktaGruppe>
