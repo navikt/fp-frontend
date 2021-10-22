@@ -62,6 +62,7 @@ const TextAreaField: FunctionComponent<OwnProps> = ({
         label={<Label input={label} readOnly={false} />}
         feil={getError(errors, name)}
         {...field}
+        onChange={(event) => field.onChange(event.currentTarget.value !== '' ? event.currentTarget.value : undefined)}
         value={field.value ? field.value : ''}
         {...otherProps}
       />

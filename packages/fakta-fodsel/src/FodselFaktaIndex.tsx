@@ -5,7 +5,6 @@ import {
   StandardFaktaPanelProps, FamilieHendelse, FamilieHendelseSamling, Soknad,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import FodselInfoPanel from './components/FodselInfoPanel';
 import messages from '../i18n/nb_NO.json';

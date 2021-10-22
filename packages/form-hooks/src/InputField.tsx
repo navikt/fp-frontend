@@ -9,13 +9,15 @@ interface OwnProps {
   name: string;
   label?: string;
   bredde?: 'fullbredde' | 'XXL' | 'XL' | 'L' | 'M' | 'S' | 'XS' | 'XXS';
-  validate?: ((value: string) => any)[];
+  validate?: ((value: string | number) => any)[];
   readOnly?: boolean;
   className?: string;
   placeholder?: string;
   onBlur?: (value: any) => void;
   shouldValidateOnBlur?: boolean;
   autoFocus?: boolean;
+  parse?: (value: string | number) => string | number;
+  isEdited?: boolean;
 }
 
 const InputField: FunctionComponent<OwnProps> = ({
@@ -29,6 +31,8 @@ const InputField: FunctionComponent<OwnProps> = ({
   className,
   placeholder,
   autoFocus,
+  parse = (value) => value,
+  isEdited,
 }) => {
   const { formState: { errors }, trigger } = useFormContext();
   const { field } = useController({
@@ -39,7 +43,7 @@ const InputField: FunctionComponent<OwnProps> = ({
   });
 
   if (readOnly) {
-    return <ReadOnlyField label={<Label input={label} readOnly />} input={field} />;
+    return <ReadOnlyField label={<Label input={label} readOnly />} input={field} isEdited={isEdited} />;
   }
 
   return (
@@ -52,6 +56,7 @@ const InputField: FunctionComponent<OwnProps> = ({
       {...field}
       value={field.value ? field.value : ''}
       autoFocus={autoFocus}
+      onChange={(event) => field.onChange(event.currentTarget.value ? parse(event.currentTarget.value) : undefined)}
       onBlur={async (event) => {
         field.onBlur();
         if (shouldValidateOnBlur) {

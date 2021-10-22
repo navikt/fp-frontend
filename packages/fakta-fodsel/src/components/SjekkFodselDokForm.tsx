@@ -1,18 +1,14 @@
 import React, { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import {
-  FieldArray, formValueSelector, InjectedFormProps, reduxForm,
-} from 'redux-form';
-import { createSelector } from 'reselect';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useFormContext } from 'react-hook-form';
 import { Column } from 'nav-frontend-grid';
 
-import { FaktaBegrunnelseTextField, FieldEditedInfo, isFieldEdited } from '@fpsak-frontend/fakta-felles';
+import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@fpsak-frontend/fakta-felles';
 import {
   ArrowBox, VerticalSpacer, FaktaGruppe,
 } from '@fpsak-frontend/shared-components';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
-import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
 import { required } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
@@ -20,7 +16,7 @@ import {
 } from '@fpsak-frontend/types';
 import { SjekkManglendeFodselAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
-import avklartBarnFieldArray from './AvklartBarnFieldArray';
+import AvklartBarnFieldArray from './AvklartBarnFieldArray';
 
 import styles from './SjekkFodselDokForm.less';
 
@@ -34,20 +30,7 @@ type CustomAvklartBarn = {
   isBarnDodt?: boolean;
 }
 
-const createNewChildren = (antallBarnFraSoknad: number): CustomAvklartBarn[] => {
-  let antallBarn = antallBarnFraSoknad;
-  if (antallBarn === 0 || !antallBarn) {
-    antallBarn = 1;
-  }
-  const childrenArray: CustomAvklartBarn[] = [];
-  while (antallBarn > 0) {
-    childrenArray.push({ fodselsdato: '', isBarnDodt: false, dodsdato: '' });
-    antallBarn -= 1;
-  }
-  return childrenArray;
-};
-
-type FormValues = {
+export type FormValues = {
   fodselsdato?: string;
   dokumentasjonForeligger?: boolean;
   brukAntallBarnITps?: boolean;
@@ -56,12 +39,11 @@ type FormValues = {
   antallBarnFodt?: number;
 }
 
-interface PureOwnProps {
+interface OwnProps {
   gjeldendeFamiliehendelse: FamilieHendelse;
   aksjonspunkt: Aksjonspunkt;
   soknad: Soknad;
   avklartBarn: AvklartBarn[];
-  submitHandler: (data: SjekkManglendeFodselAp) => Promise<void>;
   readOnly: boolean;
   submittable: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
@@ -70,82 +52,79 @@ interface PureOwnProps {
   familiehendelseOriginalBehandling?: FamilieHendelse;
 }
 
-interface MappedOwnProps {
-  initialValues: FormValues;
-  avklartBarn?: any;
-  dokumentasjonForeligger?: boolean;
-  dokumentasjonForeliggerIsEdited?: boolean;
-  termindato?: string;
-  vedtaksDatoSomSvangerskapsuke?: number;
-  onSubmit: (values: FormValues) => any;
+interface StaticFunctions {
+  buildInitialValues?: (soknad: Soknad, familiehendelse: FamilieHendelse, aksjonspunkt: Aksjonspunkt) => FormValues;
+  transformValues?: (values: FormValues, avklartBarn: AvklartBarn[]) => SjekkManglendeFodselAp;
 }
 
 /**
  * FodselInfoPanel
  *
- * Presentasjonskomponent. Setter opp aksjonspunktet for avklaring av manglende fødsel (Fødselsvilkåret).
+ * Setter opp aksjonspunktet for avklaring av manglende fødsel (Fødselsvilkåret).
  */
-export const SjekkFodselDokForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
-  intl,
+export const SjekkFodselDokForm: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
-  dokumentasjonForeliggerIsEdited,
-  dokumentasjonForeligger,
-  initialValues,
   submittable,
-  avklartBarn,
   behandlingType,
-  termindato,
-  vedtaksDatoSomSvangerskapsuke,
   soknad,
   soknadOriginalBehandling,
   familiehendelseOriginalBehandling,
   alleMerknaderFraBeslutter,
-}) => (
-  <>
-    <FodselSammenligningIndex
-      behandlingsTypeKode={behandlingType.kode}
-      avklartBarn={avklartBarn}
-      termindato={termindato}
-      vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
-      soknad={soknad}
-      soknadOriginalBehandling={soknadOriginalBehandling}
-      familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
-    />
-    <FaktaGruppe
-      title={intl.formatMessage({ id: 'SjekkFodselDokForm.DokumentasjonAvFodsel' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL]}
-    >
-      <div className={styles.horizontalForm}>
-        <RadioGroupField name="dokumentasjonForeligger" validate={[required]} readOnly={readOnly} isEdited={dokumentasjonForeliggerIsEdited}>
-          <RadioOption label={<FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeligger" />} value />
-          <RadioOption label={<FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeliggerIkke" />} value={false} />
-        </RadioGroupField>
-      </div>
+  gjeldendeFamiliehendelse,
+}) => {
+  const intl = useIntl();
+  const { watch } = useFormContext<FormValues>();
 
-      {dokumentasjonForeligger && (
-        <div className={styles.clearfix}>
-          <Column xs="12">
-            <ArrowBox>
-              <FormattedMessage id="SjekkFodselDokForm.FyllInnDokumenterteOpplysninger" />
-              <FieldArray<any>
-                name={avklarteBarnFieldArrayName}
-                component={avklartBarnFieldArray}
-                readOnly={readOnly}
-                avklartBarn={avklartBarn}
-              />
-            </ArrowBox>
-          </Column>
+  const avklartBarn = watch('avklartBarn') || [];
+  const dokumentasjonForeligger = watch('dokumentasjonForeligger') || false;
+  const begrunnelse = watch('begrunnelse') || false;
+
+  const dokumentasjonForeliggerIsEdited = isFieldEdited(soknad, gjeldendeFamiliehendelse).dokumentasjonForeligger;
+  const { termindato, vedtaksDatoSomSvangerskapsuke } = gjeldendeFamiliehendelse;
+
+  return (
+    <>
+      <FodselSammenligningIndex
+        behandlingsTypeKode={behandlingType.kode}
+        avklartBarn={avklartBarn}
+        termindato={termindato}
+        vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
+        soknad={soknad}
+        soknadOriginalBehandling={soknadOriginalBehandling}
+        familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
+      />
+      <FaktaGruppe
+        title={intl.formatMessage({ id: 'SjekkFodselDokForm.DokumentasjonAvFodsel' })}
+        merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL]}
+      >
+        <div className={styles.horizontalForm}>
+          <RadioGroupField
+            name="dokumentasjonForeligger"
+            validate={[required]}
+            readOnly={readOnly}
+            isEdited={dokumentasjonForeliggerIsEdited}
+            parse={(value: string) => value === 'true'}
+          >
+            <RadioOption label={<FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeligger" />} value="true" />
+            <RadioOption label={<FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeliggerIkke" />} value="false" />
+          </RadioGroupField>
         </div>
-      )}
-    </FaktaGruppe>
-    <VerticalSpacer sixteenPx />
-    <FaktaBegrunnelseTextField isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!initialValues.begrunnelse} />
-  </>
-);
 
-SjekkFodselDokForm.defaultProps = {
-  dokumentasjonForeliggerIsEdited: false,
-  avklartBarn: [],
+        {dokumentasjonForeligger && (
+          <div className={styles.clearfix}>
+            <Column xs="12">
+              <ArrowBox>
+                <FormattedMessage id="SjekkFodselDokForm.FyllInnDokumenterteOpplysninger" />
+                <AvklartBarnFieldArray readOnly={readOnly} />
+              </ArrowBox>
+            </Column>
+          </div>
+        )}
+      </FaktaGruppe>
+      <VerticalSpacer sixteenPx />
+      <FaktaBegrunnelseTextFieldNew isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!begrunnelse} />
+    </>
+  );
 };
 
 const addIsBarnDodt = (avklarteBarn: AvklartBarn[]): CustomAvklartBarn[] => {
@@ -171,59 +150,35 @@ const hentAlleBarn = (avklarteBarn: CustomAvklartBarn[]): AvklartBarn[] => {
   return komplettBarn;
 };
 
-export const buildInitialValues = createSelector([
-  (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse,
-  (ownProps: PureOwnProps) => ownProps.aksjonspunkt,
-  (ownProps: PureOwnProps) => ownProps.soknad.antallBarn],
-(familiehendelse, aksjonspunkt, soknadAntallBarn): FormValues => ({
+const createNewChildren = (antallBarnFraSoknad: number): CustomAvklartBarn[] => {
+  let antallBarn = antallBarnFraSoknad;
+  if (antallBarn === 0 || !antallBarn) {
+    antallBarn = 1;
+  }
+  const childrenArray: CustomAvklartBarn[] = [];
+  while (antallBarn > 0) {
+    childrenArray.push({ fodselsdato: '', isBarnDodt: false, dodsdato: '' });
+    antallBarn -= 1;
+  }
+  return childrenArray;
+};
+
+SjekkFodselDokForm.buildInitialValues = (soknad, familiehendelse, aksjonspunkt): FormValues => ({
   dokumentasjonForeligger: familiehendelse.dokumentasjonForeligger !== null
     ? familiehendelse.dokumentasjonForeligger : undefined,
   brukAntallBarnITps: familiehendelse.brukAntallBarnFraTps !== null
     ? familiehendelse.brukAntallBarnFraTps : undefined,
   avklartBarn: (familiehendelse.avklartBarn && familiehendelse.avklartBarn.length > 0)
-    ? addIsBarnDodt(familiehendelse.avklartBarn) : createNewChildren(soknadAntallBarn || 0),
-  ...FaktaBegrunnelseTextField.buildInitialValues(aksjonspunkt),
-}));
+    ? addIsBarnDodt(familiehendelse.avklartBarn) : createNewChildren(soknad.antallBarn || 0),
+  ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkt),
+});
 
-const getEditedStatus = createSelector(
-  [(ownProps: PureOwnProps) => ownProps.soknad,
-    (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse],
-  (soknad, gjeldendeFamiliehendelse): FieldEditedInfo => (
-    isFieldEdited(soknad, gjeldendeFamiliehendelse)
-  ),
-);
-
-const transformValues = (values: FormValues, fodselInfo: AvklartBarn[]): SjekkManglendeFodselAp => ({
+SjekkFodselDokForm.transformValues = (values: FormValues, avklartBarn: AvklartBarn[]): SjekkManglendeFodselAp => ({
   kode: aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL,
   dokumentasjonForeligger: values.dokumentasjonForeligger,
   uidentifiserteBarn: hentAlleBarn(values.avklartBarn),
-  brukAntallBarnITps: fodselInfo && !!fodselInfo.length ? values.brukAntallBarnITps : false,
-  ...FaktaBegrunnelseTextField.transformValues(values),
+  brukAntallBarnITps: avklartBarn && !!avklartBarn.length ? values.brukAntallBarnITps : false,
+  ...FaktaBegrunnelseTextFieldNew.transformValues(values),
 });
 
-export const sjekkFodselDokForm = 'SjekkFodselDokForm';
-
-const lagSubmitFn = createSelector([
-  (ownProps: PureOwnProps) => ownProps.submitHandler,
-  (ownProps: PureOwnProps) => ownProps.gjeldendeFamiliehendelse],
-(submitCallback, gjeldendeFamiliehendelse) => (
-  values: FormValues,
-) => submitCallback(transformValues(values, gjeldendeFamiliehendelse.avklartBarn)));
-
-const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
-  const { gjeldendeFamiliehendelse } = ownProps;
-  return {
-    onSubmit: lagSubmitFn(ownProps),
-    initialValues: buildInitialValues(ownProps),
-    avklartBarn: formValueSelector(sjekkFodselDokForm)(state, 'avklartBarn'),
-    dokumentasjonForeliggerIsEdited: getEditedStatus(ownProps).dokumentasjonForeligger,
-    dokumentasjonForeligger: formValueSelector(sjekkFodselDokForm)(state, 'dokumentasjonForeligger'),
-    termindato: gjeldendeFamiliehendelse.termindato,
-    vedtaksDatoSomSvangerskapsuke: gjeldendeFamiliehendelse.vedtaksDatoSomSvangerskapsuke,
-  };
-};
-
-export default connect(mapStateToProps)(reduxForm({
-  form: sjekkFodselDokForm,
-  destroyOnUnmount: false,
-})(injectIntl(SjekkFodselDokForm)));
+export default SjekkFodselDokForm;

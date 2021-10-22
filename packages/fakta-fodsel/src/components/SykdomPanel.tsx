@@ -1,11 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { connect } from 'react-redux';
-import { InjectedFormProps, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
-import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form-hooks';
 import {
   hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
@@ -16,84 +13,78 @@ import { VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp } from '@fps
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
 
-type FormValues = {
+export type FormValues = {
   begrunnelseSykdom?: string;
   erMorForSykVedFodsel?: boolean;
 }
 
-interface PureOwnProps {
+interface OwnProps {
   aksjonspunkt: Aksjonspunkt;
   morForSykVedFodsel: boolean;
-  submitHandler: (data: VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp) => Promise<void>;
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
 }
 
-interface MappedOwnProps {
-  initialValues: FormValues;
-  onSubmit: (values: FormValues) => any;
+interface StaticFunctions {
+  buildInitialValues?: (aksjonspunkt: Aksjonspunkt, morForSykVedFodsel: boolean) => FormValues;
+  transformValues?: (values: FormValues) => VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp;
 }
 
 /**
  * SykdomPanel
  */
-export const SykdomPanel: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps & WrappedComponentProps> = ({
-  intl,
+export const SykdomPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   alleMerknaderFraBeslutter,
-}) => (
-  <FaktaGruppe
-    title={intl.formatMessage({ id: 'SykdomPanel.ApplicationInformation' })}
-    merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT]}
-  >
-    <TextAreaField
-      name="begrunnelseSykdom"
-      label={{ id: 'SykdomPanel.Begrunnelse' }}
-      validate={[required, minLength3, maxLength1500, hasValidText]}
-      maxLength={1500}
-      readOnly={readOnly}
-    />
-    <VerticalSpacer eightPx />
-    <RadioGroupField name="erMorForSykVedFodsel" validate={[required]} bredde="XL" readOnly={readOnly} direction="vertical">
-      <RadioOption value label={{ id: 'SykdomPanel.AnnenForelderForSyk' }} />
-      <RadioOption
-        value={false}
-        label={(
-          <FormattedMessage
-            id="SykdomPanel.AnnenForelderIkkeForSyk"
-            values={{
-              b: (chunks: any) => <b>{chunks}</b>,
-            }}
-          />
-      )}
+}) => {
+  const intl = useIntl();
+  return (
+    <FaktaGruppe
+      title={intl.formatMessage({ id: 'SykdomPanel.ApplicationInformation' })}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT]}
+    >
+      <TextAreaField
+        name="begrunnelseSykdom"
+        label={intl.formatMessage({ id: 'SykdomPanel.Begrunnelse' })}
+        validate={[required, minLength3, maxLength1500, hasValidText]}
+        maxLength={1500}
+        readOnly={readOnly}
       />
-    </RadioGroupField>
-  </FaktaGruppe>
-);
+      <VerticalSpacer eightPx />
+      <RadioGroupField
+        name="erMorForSykVedFodsel"
+        validate={[required]}
+        bredde="XL"
+        readOnly={readOnly}
+        direction="vertical"
+        parse={(value: string) => value === 'true'}
+      >
+        <RadioOption value="true" label={intl.formatMessage({ id: 'SykdomPanel.AnnenForelderForSyk' })} />
+        <RadioOption
+          value="false"
+          label={(
+            <FormattedMessage
+              id="SykdomPanel.AnnenForelderIkkeForSyk"
+              values={{
+                b: (chunks: any) => <b>{chunks}</b>,
+              }}
+            />
+        )}
+        />
+      </RadioGroupField>
+    </FaktaGruppe>
+  );
+};
 
-const buildInitialValues = (aksjonspunkt: Aksjonspunkt, morForSykVedFodsel: boolean): FormValues => ({
+SykdomPanel.buildInitialValues = (aksjonspunkt, morForSykVedFodsel) => ({
   begrunnelseSykdom: aksjonspunkt.begrunnelse ? aksjonspunkt.begrunnelse : '',
   erMorForSykVedFodsel: morForSykVedFodsel,
 });
 
-const transformValues = (values: FormValues): VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp => ({
+SykdomPanel.transformValues = (values) => ({
   kode: aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
   begrunnelse: values.begrunnelseSykdom,
   erMorForSykVedFodsel: values.erMorForSykVedFodsel,
 });
 
-const lagSubmitFn = createSelector([
-  (ownProps: PureOwnProps) => ownProps.submitHandler],
-(submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
-
-const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
-  initialValues: buildInitialValues(ownProps.aksjonspunkt, ownProps.morForSykVedFodsel),
-  onSubmit: lagSubmitFn(ownProps),
-});
-
-export const sykdomPanelName = 'SykdomPanel';
-
-export default connect(mapStateToProps)(reduxForm({
-  form: sykdomPanelName,
-  destroyOnUnmount: false,
-})(injectIntl(SykdomPanel)));
+export default SykdomPanel;

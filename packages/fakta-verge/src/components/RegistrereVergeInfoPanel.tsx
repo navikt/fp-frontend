@@ -94,8 +94,6 @@ const RegistrereVergeInfoPanel: FunctionComponent<PureOwnProps> = ({
         <FaktaSubmitButtonNew
           isSubmittable={submittable && !!valgtVergeType}
           isReadOnly={readOnly}
-          hasOpenAksjonspunkter={hasOpenAksjonspunkter}
-          doNotCheckForRequiredFields
           isSubmitting={formMethods.formState.isSubmitting}
           isDirty={formMethods.formState.isDirty}
         />

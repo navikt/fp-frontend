@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 
 import { Form } from '@fpsak-frontend/form-hooks';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
+import { FaktaSubmitButtonNew } from '@fpsak-frontend/fakta-felles';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
 import {
@@ -14,9 +14,9 @@ import {
   BekreftTerminbekreftelseAp, SjekkManglendeFodselAp, VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp,
 } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
-import TermindatoFaktaForm, { termindatoFaktaFormName } from './TermindatoFaktaForm';
-import SjekkFodselDokForm, { sjekkFodselDokForm } from './SjekkFodselDokForm';
-import SykdomPanel, { sykdomPanelName } from './SykdomPanel';
+import TermindatoFaktaForm, { FormValues as TermindatoFormValues } from './TermindatoFaktaForm';
+import SjekkFodselDokForm, { FormValues as SjekkFodselDokFormValues } from './SjekkFodselDokForm';
+import SykdomPanel, { FormValues as SykdomFormValues } from './SykdomPanel';
 
 const {
   TERMINBEKREFTELSE, SJEKK_MANGLENDE_FODSEL, VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
@@ -36,13 +36,43 @@ const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   return helpTexts;
 };
 
-const EMPTY_ARRAY = [];
+type FormValues = SykdomFormValues & TermindatoFormValues & SjekkFodselDokFormValues;
 
-const nullSafe = (value: FamilieHendelse): FamilieHendelse => value || {} as FamilieHendelse;
-
-const formNames = [sykdomPanelName, termindatoFaktaFormName, sjekkFodselDokForm];
+const buildInitialValues = (
+  sykdomAp: Aksjonspunkt,
+  terminbekreftelseAp: Aksjonspunkt,
+  manglendeFødselAp: Aksjonspunkt,
+  soknad: Soknad,
+  familieHendelse: FamilieHendelseSamling,
+) => ({
+  ...sykdomAp ? SykdomPanel.buildInitialValues(sykdomAp, familieHendelse.gjeldende.morForSykVedFodsel) : {},
+  ...terminbekreftelseAp ? TermindatoFaktaForm.buildInitialValues(soknad, familieHendelse.gjeldende, terminbekreftelseAp) : {},
+  ...manglendeFødselAp ? SjekkFodselDokForm.buildInitialValues(soknad, familieHendelse.gjeldende, manglendeFødselAp) : {},
+});
 
 type AksjonspunktData = Array<BekreftTerminbekreftelseAp | VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp | SjekkManglendeFodselAp>;
+
+const transformValues = (
+  values: FormValues,
+  sykdomAp: Aksjonspunkt,
+  terminbekreftelseAp: Aksjonspunkt,
+  manglendeFødselAp: Aksjonspunkt,
+  familieHendelse: FamilieHendelseSamling,
+): AksjonspunktData => {
+  const aksjonspunkterSomSkalBekreftes = [];
+  if (sykdomAp) {
+    aksjonspunkterSomSkalBekreftes.push(SykdomPanel.transformValues(values));
+  }
+  if (terminbekreftelseAp) {
+    aksjonspunkterSomSkalBekreftes.push(TermindatoFaktaForm.transformValues(values));
+  }
+  if (manglendeFødselAp) {
+    aksjonspunkterSomSkalBekreftes.push(SjekkFodselDokForm.transformValues(values, familieHendelse.gjeldende.avklartBarn));
+  }
+  return aksjonspunkterSomSkalBekreftes;
+};
+
+const EMPTY_ARRAY = [];
 
 interface OwnProps {
   familiehendelse: FamilieHendelseSamling;
@@ -50,14 +80,14 @@ interface OwnProps {
   hasOpenAksjonspunkter: boolean;
   submittable: boolean;
   readOnly: boolean;
-  submitCallback: (data: AksjonspunktData) => Promise<void>;
   soknad: Soknad;
+  submitCallback: (data: AksjonspunktData) => Promise<void>;
   soknadOriginalBehandling?: Soknad;
   familiehendelseOriginalBehandling?: FamilieHendelse;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   behandlingType: Kodeverk;
-  formData?: any,
-  setFormData: (data: any) => void,
+  formData?: FormValues,
+  setFormData: (data: FormValues) => void,
 }
 
 /**
@@ -71,52 +101,39 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
   submittable,
   readOnly,
   soknad,
+  submitCallback,
   soknadOriginalBehandling,
   familiehendelseOriginalBehandling,
   familiehendelse,
   alleMerknaderFraBeslutter,
   behandlingType,
+  formData,
+  setFormData,
 }) => {
-  const avklartBarn = nullSafe(familiehendelse.register).avklartBarn || EMPTY_ARRAY;
-  const termindato = nullSafe(familiehendelse.gjeldende).termindato;
-  const vedtaksDatoSomSvangerskapsuke = nullSafe(familiehendelse.gjeldende).vedtaksDatoSomSvangerskapsuke;
+  const avklartBarn = familiehendelse?.register?.avklartBarn || EMPTY_ARRAY;
+  const termindato = familiehendelse?.gjeldende?.termindato;
+  const vedtaksDatoSomSvangerskapsuke = familiehendelse?.gjeldende?.vedtaksDatoSomSvangerskapsuke;
+
+  const sykdomAp = aksjonspunkter.find((ap) => ap.definisjon.kode === VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT);
+  const terminbekreftelseAp = aksjonspunkter.find((ap) => ap.definisjon.kode === TERMINBEKREFTELSE);
+  const manglendeFødselAp = aksjonspunkter.find((ap) => ap.definisjon.kode === SJEKK_MANGLENDE_FODSEL);
 
   const formMethods = useForm<FormValues>({
-    defaultValues: formData || buildInitialValues(verge, aksjonspunkter),
-    shouldUnregister: true,
+    defaultValues: formData || buildInitialValues(sykdomAp, terminbekreftelseAp, manglendeFødselAp, soknad, familiehendelse),
   });
-
-  //submittedAksjonspunkter?: Record<string, BekreftTerminbekreftelseAp | VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp | SjekkManglendeFodselAp>;
-
- /* getSubmitFunction(dispatch: Dispatch) {
-    return (e) => {
-      this.submittedAksjonspunkter = {};
-      formNames.forEach((formName) => dispatch(reduxSubmit(formName)));
-      e.preventDefault();
-    };
-  }
-
-  submitHandler(data: BekreftTerminbekreftelseAp | VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp | SjekkManglendeFodselAp) {
-    this.submittedAksjonspunkter = {
-      ...this.submittedAksjonspunkter,
-      [data.kode]: data,
-    };
-    const { aksjonspunkter, submitCallback } = this.props;
-
-    return aksjonspunkter.every((ap) => this.submittedAksjonspunkter[ap.definisjon.kode])
-      ? submitCallback(Object.values(this.submittedAksjonspunkter))
-      : undefined;
-  }*/
 
   return (
     <>
       <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>{getHelpTexts(aksjonspunkter)}</AksjonspunktHelpTextTemp>
-      <Form formMethods={formMethods} onSubmit={this.getSubmitFunction(dispatch)} setDataOnUnmount={setFormData}>
-        {hasAksjonspunkt(VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT, aksjonspunkter) && (
+      <Form
+        formMethods={formMethods}
+        onSubmit={(values) => submitCallback(transformValues(values, sykdomAp, terminbekreftelseAp, manglendeFødselAp, familiehendelse))}
+        setDataOnUnmount={setFormData}
+      >
+        {sykdomAp && (
           <SykdomPanel
             readOnly={readOnly}
-            aksjonspunkt={aksjonspunkter.find((ap: any) => ap.definisjon.kode === VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT)}
-            submitHandler={this.submitHandler}
+            aksjonspunkt={sykdomAp}
             morForSykVedFodsel={familiehendelse.gjeldende.morForSykVedFodsel}
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           />
@@ -126,7 +143,6 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
             aksjonspunkt={aksjonspunkter.find((ap: any) => ap.definisjon.kode === TERMINBEKREFTELSE)}
             readOnly={readOnly}
             submittable={submittable}
-            submitHandler={this.submitHandler}
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
             soknad={soknad}
             gjeldendeFamiliehendelse={familiehendelse.gjeldende}
@@ -138,7 +154,6 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
             aksjonspunkt={aksjonspunkter.find((ap: any) => ap.definisjon.kode === SJEKK_MANGLENDE_FODSEL)}
             readOnly={readOnly}
             submittable={submittable}
-            submitHandler={this.submitHandler}
             soknadOriginalBehandling={soknadOriginalBehandling}
             familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
@@ -147,18 +162,17 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
             gjeldendeFamiliehendelse={familiehendelse.gjeldende}
           />
         )}
-        {aksjonspunkter.length !== 0 && !readOnly
-          && (
-            <>
-              <VerticalSpacer twentyPx />
-              <FaktaSubmitButton
-                formNames={formNames}
-                isSubmittable={submittable}
-                isReadOnly={readOnly}
-                hasOpenAksjonspunkter={hasOpenAksjonspunkter}
-              />
-            </>
-          )}
+        {aksjonspunkter.length !== 0 && !readOnly && (
+          <>
+            <VerticalSpacer twentyPx />
+            <FaktaSubmitButtonNew
+              isSubmittable={submittable}
+              isReadOnly={readOnly}
+              isSubmitting={formMethods.formState.isSubmitting}
+              isDirty={formMethods.formState.isDirty}
+            />
+          </>
+        )}
         {aksjonspunkter.length === 0 && (
           <FodselSammenligningIndex
             behandlingsTypeKode={behandlingType.kode}
@@ -173,6 +187,6 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
       </Form>
     </>
   );
-}
+};
 
 export default FodselInfoPanel;

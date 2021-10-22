@@ -110,7 +110,6 @@ const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps> = ({
           isSubmitting={formMethods.formState.isSubmitting}
           isDirty={formMethods.formState.isDirty}
           isReadOnly={readOnly}
-          hasOpenAksjonspunkter={harApneAksjonspunkter}
         />
       </AksjonspunktBox>
     </Form>
