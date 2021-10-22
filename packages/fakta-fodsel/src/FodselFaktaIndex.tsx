@@ -35,21 +35,21 @@ const FodselFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = 
   setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <ReduxWrapper formName="FodselFaktaIndex" formData={formData} setFormData={setFormData}>
-      <FodselInfoPanel
-        behandlingType={behandling.type}
-        soknad={soknad}
-        familiehendelse={familiehendelse}
-        soknadOriginalBehandling={soknadOriginalBehandling}
-        familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
-        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-        aksjonspunkter={aksjonspunkter}
-        hasOpenAksjonspunkter={harApneAksjonspunkter}
-        submittable={submittable}
-        submitCallback={submitCallback}
-        readOnly={readOnly}
-      />
-    </ReduxWrapper>
+    <FodselInfoPanel
+      behandlingType={behandling.type}
+      soknad={soknad}
+      familiehendelse={familiehendelse}
+      soknadOriginalBehandling={soknadOriginalBehandling}
+      familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
+      alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+      aksjonspunkter={aksjonspunkter}
+      hasOpenAksjonspunkter={harApneAksjonspunkter}
+      submittable={submittable}
+      submitCallback={submitCallback}
+      readOnly={readOnly}
+      formData={formData}
+      setFormData={setFormData}
+    />
   </RawIntlProvider>
 );
 
