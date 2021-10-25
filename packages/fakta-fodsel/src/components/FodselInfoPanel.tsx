@@ -159,7 +159,7 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
             soknad={soknad}
             avklartBarn={avklartBarn}
-            gjeldendeFamiliehendelse={familiehendelse.gjeldende}
+            familiehendelse={familiehendelse}
           />
         )}
         {aksjonspunkter.length !== 0 && !readOnly && (

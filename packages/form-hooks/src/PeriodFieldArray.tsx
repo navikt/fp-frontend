@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { FieldArrayMethodProps } from 'react-hook-form';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
@@ -10,21 +10,23 @@ import SkjemaGruppeMedFeilviser from './SkjemaGruppeMedFeilviser';
 
 import styles from './periodFieldArray.less';
 
-const onClick = (
-  append: (value: Partial<unknown> | Partial<unknown>[], options?: FieldArrayMethodProps) => void,
+function onClick<PERIOD_TYPE>(
+  append: (value: PERIOD_TYPE, options?: FieldArrayMethodProps) => void,
   emptyPeriodTemplate?: any,
-) => (): void => {
-  append(emptyPeriodTemplate);
-};
+) {
+  return (): void => { append(emptyPeriodTemplate); };
+}
 
-const onKeyDown = (
-  append: (value: Partial<unknown> | Partial<unknown>[], options?: FieldArrayMethodProps) => void,
+function onKeyDown<PERIOD_TYPE>(
+  append: (value: PERIOD_TYPE, options?: FieldArrayMethodProps) => void,
   emptyPeriodTemplate?: any,
-) => ({ key }: React.KeyboardEvent): void => {
-  if (key === 'Enter') {
-    append(emptyPeriodTemplate);
-  }
-};
+) {
+  return ({ key }: React.KeyboardEvent): void => {
+    if (key === 'Enter') {
+      append(emptyPeriodTemplate);
+    }
+  };
+}
 
 const getRemoveButton = (
   index: number,
@@ -44,9 +46,9 @@ const getRemoveButton = (
   return undefined;
 };
 
-interface OwnProps {
+interface OwnProps<PERIOD_TYPE> {
   children: (id: any, index: number, removeButtonElmt?: (className?: string) => ReactNode) => ReactNode;
-  fields: Record<string, string>[];
+  fields: Record<string, PERIOD_TYPE>[];
   readOnly?: boolean;
   titleText?: string;
   bodyText: string;
@@ -54,7 +56,7 @@ interface OwnProps {
   shouldShowAddButton?: boolean;
   createAddButtonInsteadOfImageLink?: boolean;
   remove: (index?: number | number[]) => void,
-  append: (value: Partial<unknown> | Partial<unknown>[], options?: FieldArrayMethodProps) => void
+  append: (value: PERIOD_TYPE, options?: FieldArrayMethodProps) => void
 }
 
 /**
@@ -76,7 +78,7 @@ const PeriodFieldArray = <PERIOD_TYPE, >({
   children,
   remove,
   append,
-}: OwnProps) => (
+}: OwnProps<PERIOD_TYPE>) => (
   <SkjemaGruppeMedFeilviser
     name="dummy"
     description={titleText}
@@ -89,8 +91,8 @@ const PeriodFieldArray = <PERIOD_TYPE, >({
             // eslint-disable-next-line jsx-a11y/click-events-have-key-events
             && (
             <div
-              onClick={onClick(append, emptyPeriodTemplate)}
-              onKeyDown={onKeyDown(append, emptyPeriodTemplate)}
+              onClick={onClick<PERIOD_TYPE>(append, emptyPeriodTemplate)}
+              onKeyDown={onKeyDown<PERIOD_TYPE>(append, emptyPeriodTemplate)}
               className={styles.addPeriode}
               role="button"
               tabIndex={0}
@@ -104,7 +106,7 @@ const PeriodFieldArray = <PERIOD_TYPE, >({
           {createAddButtonInsteadOfImageLink && !readOnly && (
             <button
               type="button"
-              onClick={onClick(append, emptyPeriodTemplate)}
+              onClick={onClick<PERIOD_TYPE>(append, emptyPeriodTemplate)}
               className={styles.buttonAdd}
             >
               {bodyText}

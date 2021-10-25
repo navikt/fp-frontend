@@ -12,7 +12,7 @@ import { RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
 import { required } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Aksjonspunkt, FamilieHendelse, Kodeverk, Soknad, AvklartBarn,
+  Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Kodeverk, Soknad, AvklartBarn,
 } from '@fpsak-frontend/types';
 import { SjekkManglendeFodselAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -40,7 +40,7 @@ export type FormValues = {
 }
 
 interface OwnProps {
-  gjeldendeFamiliehendelse: FamilieHendelse;
+  familiehendelse: FamilieHendelseSamling;
   aksjonspunkt: Aksjonspunkt;
   soknad: Soknad;
   avklartBarn: AvklartBarn[];
@@ -70,23 +70,23 @@ export const SjekkFodselDokForm: FunctionComponent<OwnProps> & StaticFunctions =
   soknadOriginalBehandling,
   familiehendelseOriginalBehandling,
   alleMerknaderFraBeslutter,
-  gjeldendeFamiliehendelse,
+  familiehendelse,
 }) => {
   const intl = useIntl();
   const { watch } = useFormContext<FormValues>();
+  const { gjeldende, register } = familiehendelse;
 
-  const avklartBarn = watch('avklartBarn') || [];
   const dokumentasjonForeligger = watch('dokumentasjonForeligger') || false;
   const begrunnelse = watch('begrunnelse') || false;
 
-  const dokumentasjonForeliggerIsEdited = isFieldEdited(soknad, gjeldendeFamiliehendelse).dokumentasjonForeligger;
-  const { termindato, vedtaksDatoSomSvangerskapsuke } = gjeldendeFamiliehendelse;
+  const dokumentasjonForeliggerIsEdited = isFieldEdited(soknad, gjeldende).dokumentasjonForeligger;
+  const { termindato, vedtaksDatoSomSvangerskapsuke } = gjeldende;
 
   return (
     <>
       <FodselSammenligningIndex
         behandlingsTypeKode={behandlingType.kode}
-        avklartBarn={avklartBarn}
+        avklartBarn={register?.avklartBarn}
         termindato={termindato}
         vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
         soknad={soknad}
