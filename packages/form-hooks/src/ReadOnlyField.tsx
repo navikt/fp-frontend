@@ -11,24 +11,22 @@ const hasValue = (value: any): boolean => value !== undefined && value !== null 
 interface OwnProps {
   label?: LabelType;
   isEdited?: boolean;
-  input: {
-    value?: string;
-  };
+  value?: string;
 }
 
 export const ReadOnlyField: FunctionComponent<OwnProps> = ({
   label,
-  input,
+  value,
   isEdited,
 }) => {
-  if (!hasValue(input.value)) {
+  if (!hasValue(value)) {
     return null;
   }
   return (
     <div className={styles.readOnlyContainer}>
       <Label input={label} readOnly />
       <Normaltekst className={styles.readOnlyContent}>
-        {input.value}
+        {value}
         {isEdited && <EditedIcon />}
       </Normaltekst>
     </div>

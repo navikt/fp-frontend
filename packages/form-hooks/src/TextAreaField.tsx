@@ -44,7 +44,7 @@ const TextAreaField: FunctionComponent<OwnProps> = ({
   });
 
   if (readOnly) {
-    return <ReadOnlyField label={<Label input={label} readOnly />} input={field} />;
+    return <ReadOnlyField label={<Label input={label} readOnly />} value={field.value} />;
   }
 
   return (

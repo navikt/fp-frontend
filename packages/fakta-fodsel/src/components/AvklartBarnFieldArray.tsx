@@ -4,6 +4,7 @@ import { useFormContext, useFieldArray } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { hasValidDate, required, dateBeforeOrEqualToToday } from '@fpsak-frontend/utils';
+import { AvklartBarn } from '@fpsak-frontend/types';
 import {
   FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
@@ -34,7 +35,7 @@ export const AvklartBarnFieldArray: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const { control, watch } = useFormContext();
+  const { control, watch } = useFormContext<{ avklartBarn: AvklartBarn[] }>();
   const { fields, remove, append } = useFieldArray({
     control,
     name: FIELD_ARRAY_NAME,
@@ -75,7 +76,6 @@ export const AvklartBarnFieldArray: FunctionComponent<OwnProps> = ({
                 </FlexColumn>
                 {avklartBarn[index].dodsdato && (
                   <FlexColumn>
-                    <span>{avklartBarn[index].dod}</span>
                     <DatepickerField
                       name={`${FIELD_ARRAY_NAME}.${index}.dodsdato`}
                       label={intl.formatMessage({ id: 'AvklartBarnFieldArray.Dodsdato' })}

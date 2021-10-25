@@ -43,7 +43,7 @@ const InputField: FunctionComponent<OwnProps> = ({
   });
 
   if (readOnly) {
-    return <ReadOnlyField label={<Label input={label} readOnly />} input={field} isEdited={isEdited} />;
+    return <ReadOnlyField label={<Label input={label} readOnly />} value={field.value} isEdited={isEdited} />;
   }
 
   return (
