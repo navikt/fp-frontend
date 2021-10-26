@@ -156,7 +156,9 @@ export const getInntektskategorierAlfabetiskSortert = createSelector(
 
 export const mapStateToProps = (state, ownProps) => {
   const field = ownProps.fields.get(ownProps.index);
+  // @ts-ignore FIX reselect
   const kanRedigereInntekt = getKanRedigereInntekt(state, ownProps)(field);
+  // @ts-ignore FIX reselect
   const skalRedigereInntektskategori = getSkalRedigereInntektskategori(state, ownProps)(field);
   return {
     kanRedigereInntekt,

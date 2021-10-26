@@ -373,8 +373,11 @@ const getSkalViseTabell = createSelector([
 (tilfeller) => !tilfeller.includes(faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE));
 
 const mapStateToProps = (state, ownProps) => ({
+  // @ts-ignore FIX reselect
   erOverstyrt: erOverstyringAvBeregningsgrunnlag(state, ownProps),
+  // @ts-ignore FIX reselect
   skalFastsetteAT: skalFastsettInntektForArbeidstaker(state, ownProps),
+  // @ts-ignore FIX reselect
   skalFastsetteFL: skalFastsettInntektForFrilans(state, ownProps),
   skalHaBesteberegning: getFormValuesForBeregning(state)[besteberegningField] === true,
   manglerInntektsmelding: getManglerInntektsmelding(ownProps),
