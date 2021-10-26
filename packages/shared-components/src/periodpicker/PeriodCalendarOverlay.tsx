@@ -28,8 +28,6 @@ interface OwnProps {
 }
 
 class PeriodCalendarOverlay extends Component<OwnProps> {
-  calendarRootRef: HTMLDivElement | undefined;
-
   static defaultProps = {
     startDate: null,
     endDate: null,
@@ -92,6 +90,8 @@ class PeriodCalendarOverlay extends Component<OwnProps> {
       calendarRootRef.focus();
     }
   }
+
+  calendarRootRef: HTMLDivElement | undefined;
 
   targetIsCalendarOrCalendarButton(target: HTMLDivElement): boolean {
     const { calendarRootRef, props: { elementIsCalendarButton } } = this;

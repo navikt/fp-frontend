@@ -29,7 +29,7 @@ class ErrorFormatter {
     }
 
     return allErrorMessages;
-  }
+  };
 }
 
 export default ErrorFormatter;

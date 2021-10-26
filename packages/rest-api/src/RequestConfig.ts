@@ -25,68 +25,68 @@ const formatConfig = (config: RequestAdditionalConfig = {}): RequestAdditionalCo
  * RequestConfig
  */
 class RequestConfig {
-    name: string;
+  name: string;
 
-    config: RequestAdditionalConfig;
+  config: RequestAdditionalConfig;
 
-    path?: string;
+  path?: string;
 
-    restMethod: string = RequestType.GET;
+  restMethod: string = RequestType.GET;
 
-    rel?: string;
+  rel?: string;
 
-    requestPayload?: any;
+  requestPayload?: any;
 
-    constructor(name: string, path?: string, config?: RequestAdditionalConfig) {
-      this.name = name;
-      this.path = path;
-      this.config = formatConfig(config);
-    }
+  constructor(name: string, path?: string, config?: RequestAdditionalConfig) {
+    this.name = name;
+    this.path = path;
+    this.config = formatConfig(config);
+  }
 
-    withGetMethod = (): this => {
-      this.restMethod = RequestType.GET;
-      return this;
-    }
+  withGetMethod = (): this => {
+    this.restMethod = RequestType.GET;
+    return this;
+  };
 
-    withGetAsyncMethod = (): this => {
-      this.restMethod = RequestType.GET_ASYNC;
-      return this;
-    }
+  withGetAsyncMethod = (): this => {
+    this.restMethod = RequestType.GET_ASYNC;
+    return this;
+  };
 
-    withPostMethod = (): this => {
-      this.restMethod = RequestType.POST;
-      return this;
-    }
+  withPostMethod = (): this => {
+    this.restMethod = RequestType.POST;
+    return this;
+  };
 
-    withPostAsyncMethod = (): this => {
-      this.restMethod = RequestType.POST_ASYNC;
-      return this;
-    }
+  withPostAsyncMethod = (): this => {
+    this.restMethod = RequestType.POST_ASYNC;
+    return this;
+  };
 
-    withPutMethod = (): this => {
-      this.restMethod = RequestType.PUT;
-      return this;
-    }
+  withPutMethod = (): this => {
+    this.restMethod = RequestType.PUT;
+    return this;
+  };
 
-    withPutAsyncMethod = (): this => {
-      this.restMethod = RequestType.PUT_ASYNC;
-      return this;
-    }
+  withPutAsyncMethod = (): this => {
+    this.restMethod = RequestType.PUT_ASYNC;
+    return this;
+  };
 
-    withRel = (rel: string): this => {
-      this.rel = rel;
-      return this;
-    }
+  withRel = (rel: string): this => {
+    this.rel = rel;
+    return this;
+  };
 
-    withRestMethod = (restMethod: string): this => {
-      this.restMethod = restMethod.toUpperCase();
-      return this;
-    }
+  withRestMethod = (restMethod: string): this => {
+    this.restMethod = restMethod.toUpperCase();
+    return this;
+  };
 
-    withRequestPayload = (requestPayload?: any): this => {
-      this.requestPayload = requestPayload;
-      return this;
-    }
+  withRequestPayload = (requestPayload?: any): this => {
+    this.requestPayload = requestPayload;
+    return this;
+  };
 }
 
 export default RequestConfig;

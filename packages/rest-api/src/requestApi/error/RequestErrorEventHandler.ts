@@ -45,9 +45,9 @@ interface FormatedError {
 }
 
 class RequestErrorEventHandler {
-  notify: NotificationEmitter
+  notify: NotificationEmitter;
 
-  isPollingRequest: boolean
+  isPollingRequest: boolean;
 
   constructor(notificationEmitter: NotificationEmitter, isPollingRequest: boolean) {
     this.notify = notificationEmitter;

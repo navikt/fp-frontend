@@ -8,7 +8,7 @@ export type ErrorData = {
 }
 
 class DefaultFormatter implements Formatter<ErrorData> {
-  isOfType = () => true
+  isOfType = () => true;
 
   formatString = (errorData: string): ErrorMessage => ErrorMessage.withMessage(errorData);
 

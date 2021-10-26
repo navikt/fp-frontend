@@ -12,8 +12,6 @@ interface CustomNavSelectProps {
 }
 
 class CustomNavSelect extends Component<WrappedFieldProps & CustomNavSelectProps> {
-  selectElement: RefObject<any>;
-
   static defaultProps = {
     hideValueOnDisable: false,
     disabled: false,
@@ -47,6 +45,8 @@ class CustomNavSelect extends Component<WrappedFieldProps & CustomNavSelectProps
       .map((option) => option.props)
       .map((props = {}) => props.value);
   }
+
+  selectElement: RefObject<any>;
 
   selectedValue(value: string): string {
     const selectedValue = this.getOptionValues().find((optionValue) => optionValue === value);

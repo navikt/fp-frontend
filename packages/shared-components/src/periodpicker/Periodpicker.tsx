@@ -32,10 +32,6 @@ const createPeriod = (startDay?: Date | null, endDay?: Date | null): string => `
   .format(DDMMYYYY_DATE_FORMAT)} - ${moment(endDay).format(DDMMYYYY_DATE_FORMAT)}`;
 
 class Periodpicker extends Component<OwnProps, StateProps> {
-  buttonRef: HTMLButtonElement | undefined;
-
-  inputRef: HTMLDivElement | undefined;
-
   static defaultProps = {
     label: '',
     placeholder: 'dd.mm.åååå - dd.mm.åååå',
@@ -148,6 +144,10 @@ class Periodpicker extends Component<OwnProps, StateProps> {
     getStartDateInput(this.props).onBlur(e);
     getEndDateInput(this.props).onBlur(e);
   }
+
+  buttonRef: HTMLButtonElement | undefined;
+
+  inputRef: HTMLDivElement | undefined;
 
   parseToDate(name: string): Date | null {
     const nameFromProps = haystack(this.props, name);

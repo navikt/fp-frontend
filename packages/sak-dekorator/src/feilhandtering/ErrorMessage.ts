@@ -3,9 +3,9 @@ class ErrorMessage {
 
   code?: string;
 
-  params: any
+  params: any;
 
-  type?: string
+  type?: string;
 
   static withMessage(message: string, type?: string) {
     const errorMessage = new ErrorMessage();

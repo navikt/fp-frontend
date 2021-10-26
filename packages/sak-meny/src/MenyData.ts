@@ -15,13 +15,13 @@ class MenyData {
   medModal = (modal: (lukkModal: () => void) => ReactNode) => {
     this.modal = modal;
     return this;
-  }
+  };
 
-  getErSynlig = () => this.erSynlig
+  getErSynlig = () => this.erSynlig;
 
-  getTekst = () => this.tekst
+  getTekst = () => this.tekst;
 
-  getModal = () => this.modal
+  getModal = () => this.modal;
 }
 
 export default MenyData;

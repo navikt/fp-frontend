@@ -106,8 +106,6 @@ interface PureOwnProps {
  * Presentationskomponent. Masserer data og populerer felten samt formatterar tidslinjen for tilbakekreving
  */
 class TilbakekrevingTimeline extends Component<PureOwnProps & WrappedComponentProps> {
-  timelineRef: RefObject<any>
-
   constructor(props: PureOwnProps & WrappedComponentProps) {
     super(props);
 
@@ -117,6 +115,8 @@ class TilbakekrevingTimeline extends Component<PureOwnProps & WrappedComponentPr
     this.zoomOut = this.zoomOut.bind(this);
     this.timelineRef = React.createRef();
   }
+
+  timelineRef: RefObject<any>;
 
   zoomIn(): void {
     this.timelineRef.current.zoomOut(0.5);
