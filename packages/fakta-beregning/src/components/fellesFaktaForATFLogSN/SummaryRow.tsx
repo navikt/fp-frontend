@@ -48,6 +48,7 @@ const SummaryRow: FunctionComponent<OwnProps> = ({
 );
 
 export const mapStateToProps = (state, ownProps) => {
+  // @ts-ignore FIX reselect
   const sumBeregnet = summerBeregnet(ownProps.fields, getKanRedigereInntekt(state, ownProps)) || 0;
   return {
     sumBeregnet,

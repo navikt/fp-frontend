@@ -377,7 +377,7 @@ export const buildInitialValues = createSelector([
   })).sort(sortPeriods),
 }));
 
-const settOppPeriodeDataForDetailForm = createSelector([
+const settOppPeriodeDataForDetailForm = createSelector<any, any>([
   slaSammenOriginaleOgLagredePeriode,
   (state) => formValueSelector(TILBAKEKREVING_FORM_NAME)(state,
     'vilkarsVurdertePerioder')], (perioder: CustomPerioder, perioderFormState: CustomVilkarsVurdertePeriode[]): DataForPeriode[] => {
@@ -417,6 +417,7 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
     || { erForeldet: false };
   return {
     initialValues: buildInitialValues(state, ownProps),
+    // @ts-ignore FIX reselect
     dataForDetailForm: settOppPeriodeDataForDetailForm(state, ownProps),
     vilkarsVurdertePerioder: formValueSelector(TILBAKEKREVING_FORM_NAME)(state, 'vilkarsVurdertePerioder'),
     readOnly: ownProps.readOnly || periodFormValues.erForeldet === true,

@@ -222,6 +222,7 @@ const mapStateToPropsFactory = (_state: any, initialProps: OwnProps) => {
       validate,
       onSubmit: lagSubmitFn(ownProps),
       verdiForAvklarAktivitetErEndret: erAvklartAktivitetEndret(state, ownProps),
+      // @ts-ignore FIX reselect
       erOverstyrt: erOverstyringAvBeregningsgrunnlag(state, ownProps),
       hasBegrunnelse: initialValues && !!initialValues[BEGRUNNELSE_FAKTA_TILFELLER_NAME],
     });

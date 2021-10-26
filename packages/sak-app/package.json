@@ -5,6 +5,8 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "@formatjs/intl-datetimeformat": "^4.2.5",
+    "@formatjs/intl-numberformat": "^7.2.5",
     "@fpsak-frontend/assets": "1.0.0",
     "@fpsak-frontend/behandling-anke": "1.0.0",
     "@fpsak-frontend/behandling-es": "1.0.0",
@@ -33,7 +35,7 @@
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
     "@sentry/browser": "^6.13.3",
-    "axios": "0.23.0",
+    "axios": "0.24.0",
     "history": "^4.9.0",
     "moment": "^2.29.1",
     "nav-frontend-core": "6.0.1",
