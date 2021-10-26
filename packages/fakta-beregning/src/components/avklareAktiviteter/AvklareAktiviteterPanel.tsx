@@ -434,6 +434,7 @@ const mapStateToProps = (state, ownProps: OwnProps): MappedOwnProps => {
     avklarAktiviteter: getAvklarAktiviteter(ownProps),
     hasBegrunnelse: initialValues && !!initialValues[BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME],
     erOverstyrt: !!values && values[MANUELL_OVERSTYRING_FIELD],
+    // @ts-ignore FIX reselect
     erBgOverstyrt: erOverstyringAvBeregningsgrunnlag(state, ownProps),
   });
 };

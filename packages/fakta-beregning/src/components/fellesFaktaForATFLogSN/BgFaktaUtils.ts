@@ -208,7 +208,7 @@ export const erOverstyring = (values: FaktaOmBeregningAksjonspunktValues): boole
 const harOverstyringsAP = (aksjonspuntker: Aksjonspunkt[]): boolean => aksjonspuntker
   && aksjonspuntker.some((ap) => ap.definisjon.kode === aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG);
 
-export const erOverstyringAvBeregningsgrunnlag = createSelector([
+export const erOverstyringAvBeregningsgrunnlag = createSelector<any, any>([
   getFormValuesForBeregning,
   (state, ownProps) => ownProps.beregningsgrunnlag,
   (state, ownProps) => ownProps.aksjonspunkter], (values: FaktaOmBeregningAksjonspunktValues,
@@ -229,7 +229,7 @@ export const skalFastsetteInntektForAndel = (values: FaktaOmBeregningAksjonspunk
 export const kanRedigereInntektForAndel = (values, faktaOmBeregning, beregningsgrunnlag) => (andel) => erOverstyring(values)
   || skalFastsetteInntektForAndel(values, faktaOmBeregning, beregningsgrunnlag)(andel);
 
-export const getKanRedigereInntekt = createSelector([
+export const getKanRedigereInntekt = createSelector<any, any>([
   getFormValuesForBeregning,
   (state, ownProps) => ownProps.beregningsgrunnlag.faktaOmBeregning,
   (state, ownProps) => ownProps.beregningsgrunnlag], kanRedigereInntektForAndel);
@@ -237,7 +237,7 @@ export const getKanRedigereInntekt = createSelector([
 // Skal redigere inntektskategori
 export const skalRedigereInntektskategoriForAndel = (beregningsgrunnlag) => (andel) => erAndelKunstigArbeidsforhold(andel, beregningsgrunnlag);
 
-export const getSkalRedigereInntektskategori = createSelector([
+export const getSkalRedigereInntektskategori = createSelector<any, any>([
   (state, ownProps) => ownProps.beregningsgrunnlag],
 skalRedigereInntektskategoriForAndel);
 
