@@ -15,9 +15,10 @@ import styles from './avklartBarnFieldArray.less';
 const FIELD_ARRAY_NAME = 'avklartBarn';
 
 type FIELD_ARRAY_TYPE = {
-  fodselsdato: string;
-  isBarnDodt: boolean;
-  dodsDato: string;
+  fodselsdato?: string;
+  isBarnDodt?: boolean;
+  dodsDato?: string;
+  id: string;
 };
 
 export const defaultAntallBarn = {

@@ -48,7 +48,7 @@ const getRemoveButton = (
 
 interface OwnProps<PERIOD_TYPE> {
   children: (id: any, index: number, removeButtonElmt?: (className?: string) => ReactNode) => ReactNode;
-  fields: Record<string, PERIOD_TYPE>[];
+  fields: PERIOD_TYPE[];
   readOnly?: boolean;
   titleText?: string;
   bodyText: string;
