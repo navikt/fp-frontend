@@ -28,7 +28,7 @@ jobs:
       - name: Sette opp Node
         uses: actions/setup-node@v2.4.0
         with:
-          node-version: 15.x
+          node-version: 16.x
 
       - name: Get yarn cache
         id: yarn-cache
