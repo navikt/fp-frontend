@@ -41,3 +41,5 @@ spec:
       value: /fpsak-azure-login-test/logged-out
     - name: AZURE_APP_REDIRECT_URL
       value: https://app-q1.adeo.no/fpsak-azure-login-test/oauth2/callback
+  envFrom:
+    - secret: redis-password
