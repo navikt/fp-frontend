@@ -52,6 +52,8 @@ interface PureOwnProps {
   alleKodeverk: AlleKodeverkTilbakekreving;
   fpsakKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+  formData?: FormValues,
+  setFormData: (data: FormValues) => void,
 }
 
 interface MappedOwnProps {

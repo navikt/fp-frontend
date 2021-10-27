@@ -12,7 +12,7 @@ const classNames = classnames.bind(styles);
 interface OwnProps {
   name: string;
   label: string;
-  onClick?: () => void;
+  onClick?: (event: any) => void;
   validate?: ((value: string) => any)[];
   readOnly?: boolean;
   selectValues: React.ReactElement[];
