@@ -7,7 +7,7 @@ import { FeilutbetalingAarsak, FeilutbetalingFakta } from '@fpsak-frontend/types
 import { DDMMYYYY_DATE_FORMAT, required } from '@fpsak-frontend/utils';
 import { SelectField } from '@fpsak-frontend/form-hooks';
 
-import styles from './feilutbetalingPerioderTable.less';
+import styles from './feilutbetalingPerioderFieldArray.less';
 
 const FIELD_ARRAY_NAME = 'perioder';
 
@@ -58,6 +58,7 @@ const FeilutbetalingPerioderFieldArray: FunctionComponent<OwnProps> = ({
           if (årsak) {
             const feltÅrsak = getValues(`${FIELD_ARRAY_NAME}.${fieldIndex}.årsak`);
             if (feltÅrsak === årsak) {
+              // @ts-ignore Fiks. Må legge til årsak.underÅrsak i FormValues
               setValue(`${FIELD_ARRAY_NAME}.${fieldIndex}.${årsak}.underÅrsak`, verdi);
             }
           } else {

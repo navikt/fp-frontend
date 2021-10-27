@@ -6,7 +6,7 @@ import {
 } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 
-import FeilutbetalingInfoPanel from './components/FeilutbetalingInfoPanelNew';
+import FeilutbetalingInfoPanel from './components/FeilutbetalingInfoPanel';
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
