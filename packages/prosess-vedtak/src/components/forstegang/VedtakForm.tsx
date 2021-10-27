@@ -245,6 +245,14 @@ export const VedtakForm: FunctionComponent<PureOwnProps & MappedOwnProps & Dispa
   );
 };
 
+const finnBegrunnelse = (behandling: Behandling, beregningErManueltFastsatt: boolean): string | undefined => {
+  if (!beregningErManueltFastsatt) {
+    return undefined;
+  }
+  return behandling.behandlingsresultat?.avslagsarsakFritekst
+    ? decodeHtmlEntity(behandling.behandlingsresultat.avslagsarsakFritekst) : undefined;
+};
+
 export const buildInitialValues = createSelector(
   [(ownProps: PureOwnProps) => ownProps.aksjonspunkter,
     (ownProps: PureOwnProps) => ownProps.behandling,
@@ -254,8 +262,7 @@ export const buildInitialValues = createSelector(
     aksjonspunktKoder: aksjonspunkter.filter((ap) => ap.kanLoses).map((ap) => ap.definisjon.kode),
     overskrift: decodeHtmlEntity(behandling.behandlingsresultat.overskrift),
     brødtekst: decodeHtmlEntity(behandling.behandlingsresultat.fritekstbrev),
-    begrunnelse: behandling.behandlingsresultat?.avslagsarsakFritekst
-      ? decodeHtmlEntity(behandling.behandlingsresultat.avslagsarsakFritekst) : undefined,
+    begrunnelse: finnBegrunnelse(behandling, beregningErManueltFastsatt),
   }),
 );
 
