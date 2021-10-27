@@ -43,21 +43,26 @@ const FeilutbetalingPerioderFieldArray: FunctionComponent<OwnProps> = ({
   readOnly,
   behandlePerioderSamlet,
 }) => {
-  const { control, watch, setValue } = useFormContext<FormValues>();
-  const { fields, update } = useFieldArray({
+  const {
+    control, watch, setValue, getValues,
+  } = useFormContext<FormValues>();
+  const { fields } = useFieldArray({
     control,
     name: FIELD_ARRAY_NAME,
   });
 
-  const settAndreFelter = (navn: string, verdi: string, index: number) => {
+  const settAndreFelter = (verdi: string, index: number, årsak?: string) => {
     if (behandlePerioderSamlet) {
-      fields.forEach((f, fieldIndex) => {
+      fields.forEach((_f, fieldIndex) => {
         if (index !== fieldIndex) {
-          update(fieldIndex, {
-            ...f,
-            [navn]: verdi,
-          });
-          setValue(`${FIELD_ARRAY_NAME}.${fieldIndex}.${navn}`, verdi);
+          if (årsak) {
+            const feltÅrsak = getValues(`${FIELD_ARRAY_NAME}.${fieldIndex}.årsak`);
+            if (feltÅrsak === årsak) {
+              setValue(`${FIELD_ARRAY_NAME}.${fieldIndex}.${årsak}.underÅrsak`, verdi);
+            }
+          } else {
+            setValue(`${FIELD_ARRAY_NAME}.${fieldIndex}.årsak`, verdi);
+          }
         }
       });
     }
@@ -83,7 +88,7 @@ const FeilutbetalingPerioderFieldArray: FunctionComponent<OwnProps> = ({
                   selectValues={årsaker.map((a) => <option key={a.hendelseType.kode} value={a.hendelseType.kode}>{a.hendelseType.navn}</option>)}
                   validate={[required]}
                   disabled={readOnly}
-                  onClick={(event) => settAndreFelter('årsak', event.target.value, index)}
+                  onChange={(event) => settAndreFelter(event.target.value, index)}
                   bredde="m"
                   label=""
                 />
@@ -93,7 +98,7 @@ const FeilutbetalingPerioderFieldArray: FunctionComponent<OwnProps> = ({
                     selectValues={hendelseUndertyper.map((a) => <option key={a.kode} value={a.kode}>{a.navn}</option>)}
                     validate={[required]}
                     disabled={readOnly}
-                    onClick={(event) => settAndreFelter(`${årsak}.underÅrsak`, event.target.value, index)}
+                    onChange={(event) => settAndreFelter(event.target.value, index, årsak)}
                     bredde="m"
                     label=""
                   />

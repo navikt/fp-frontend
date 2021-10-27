@@ -12,6 +12,7 @@ interface OwnProps {
   className?: string;
   label?: string;
   feil?: string;
+  onChange?: (event: any) => void;
 }
 
 class CustomNavSelect extends Component<OwnProps> {
