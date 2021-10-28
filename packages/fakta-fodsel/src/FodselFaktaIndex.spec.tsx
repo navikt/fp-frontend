@@ -71,9 +71,13 @@ describe('<FodselFaktaIndex>', () => {
 
     userEvent.click(screen.getByAltText('Legg til barn'));
 
-    const fødselsdatoFelt2 = utils.getAllByRole('textbox')[1];
+    const fødselsdatoFelt2 = utils.getAllByRole('textbox')[2];
     userEvent.type(fødselsdatoFelt2, '23.09.2021');
     fireEvent.blur(fødselsdatoFelt2);
+
+    const dødsdatoFelt = utils.getAllByRole('textbox')[3];
+    userEvent.type(dødsdatoFelt, '23.09.2021');
+    fireEvent.blur(dødsdatoFelt);
 
     userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
@@ -87,10 +91,10 @@ describe('<FodselFaktaIndex>', () => {
       dokumentasjonForeligger: true,
       kode: '5027',
       uidentifiserteBarn: [{
-        dodsdato: null,
+        dodsdato: undefined,
         fodselsdato: '2010-01-01',
       }, {
-        dodsdato: null,
+        dodsdato: '2021-09-23',
         fodselsdato: '2021-09-23',
       }],
       begrunnelse: 'Dette er en begrunnelse',
@@ -99,7 +103,6 @@ describe('<FodselFaktaIndex>', () => {
 
   it('skal bekrefte aksjonspunkt for manglende fødsel ved å velge at dokumentasjon ikke foreligger', async () => {
     const lagre = jest.fn(() => Promise.resolve());
-
     const utils = render(<AksjonspunktSjekkManglendeFødsel submitCallback={lagre} />);
 
     expect(await screen.findByText('Kontroller mot opplysningene fra fødselsdokumentasjonen')).toBeInTheDocument();
@@ -129,7 +132,7 @@ describe('<FodselFaktaIndex>', () => {
       dokumentasjonForeligger: false,
       kode: '5027',
       uidentifiserteBarn: [{
-        dodsdato: null,
+        dodsdato: undefined,
         fodselsdato: '2019-01-01',
       }],
       begrunnelse: 'Dette er en begrunnelse',
