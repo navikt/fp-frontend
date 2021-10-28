@@ -1,4 +1,5 @@
 import React from 'react';
+import { Story } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -10,6 +11,7 @@ import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbake
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import FeilutbetalingFaktaIndex from '@fpsak-frontend/fakta-feilutbetaling';
+import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import {
   Behandling, FeilutbetalingFakta, FeilutbetalingAarsak, AlleKodeverkTilbakekreving, AlleKodeverk,
 } from '@fpsak-frontend/types';
@@ -33,7 +35,11 @@ const feilutbetalingFakta = {
     }, {
       fom: '2018-02-01',
       tom: '2018-02-28',
-      belop: 1000,
+      belop: 5000,
+    }, {
+      fom: '2018-03-01',
+      tom: '2018-03-15',
+      belop: 100,
     }],
     totalPeriodeFom: '2019-01-01',
     totalPeriodeTom: '2019-01-02',
@@ -83,7 +89,13 @@ const feilutbetalingAarsak = [{
       kode: 'ANNET',
       navn: 'Annet',
     },
-    hendelseUndertyper: [],
+    hendelseUndertyper: [{
+      kode: 'TEST1',
+      navn: 'Årsak 1',
+    }, {
+      kode: 'TEST2',
+      navn: 'Årsak 2',
+    }],
   }, {
     hendelseType: {
       kode: 'MEDLEM',
@@ -128,28 +140,22 @@ const fpSakAlleKodeverk = {
   }],
 } as AlleKodeverk;
 
-const merknaderFraBeslutter = {
-  notAccepted: false,
-};
-
-const standardFaktaProps = {
-  aksjonspunkter: [],
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  readOnly: false,
-  harApneAksjonspunkter: true,
-  submittable: true,
-  alleMerknaderFraBeslutter: {},
-  setFormData: () => undefined,
-};
-
 export default {
   title: 'fakta/tilbakekreving/fakta-feilutbetaling',
   component: FeilutbetalingFaktaIndex,
 };
 
-export const visAksjonspunktForFeilutbetaling = () => (
+const Template: Story<{
+  submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
+}> = ({
+  submitCallback,
+}) => (
   <FeilutbetalingFaktaIndex
-    {...standardFaktaProps}
+    submitCallback={submitCallback}
+    readOnly={false}
+    harApneAksjonspunkter
+    submittable
+    setFormData={() => undefined}
     behandling={behandling}
     feilutbetalingFakta={feilutbetalingFakta as FeilutbetalingFakta}
     feilutbetalingAarsak={feilutbetalingAarsak as FeilutbetalingAarsak[]}
@@ -169,8 +175,15 @@ export const visAksjonspunktForFeilutbetaling = () => (
     alleKodeverk={alleKodeverk}
     fpsakKodeverk={fpSakAlleKodeverk}
     alleMerknaderFraBeslutter={{
-      [aksjonspunktCodesTilbakekreving.AVKLAR_FAKTA_FOR_FEILUTBETALING]: merknaderFraBeslutter,
+      [aksjonspunktCodesTilbakekreving.AVKLAR_FAKTA_FOR_FEILUTBETALING]: {
+        notAccepted: false,
+      },
     }}
     fagsakYtelseTypeKode={fagsakYtelseType.FORELDREPENGER}
   />
 );
+
+export const AksjonspunktForFeilutbetaling = Template.bind({});
+AksjonspunktForFeilutbetaling.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};
