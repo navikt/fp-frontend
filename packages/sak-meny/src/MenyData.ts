@@ -5,6 +5,7 @@ class MenyData {
 
   tekst: string;
 
+  // eslint-disable-next-line class-methods-use-this
   modal: (lukkModal: () => void) => ReactNode = () => undefined;
 
   constructor(erSynlig: boolean | undefined, tekst: string) {
@@ -15,13 +16,13 @@ class MenyData {
   medModal = (modal: (lukkModal: () => void) => ReactNode) => {
     this.modal = modal;
     return this;
-  }
+  };
 
-  getErSynlig = () => this.erSynlig
+  getErSynlig = () => this.erSynlig;
 
-  getTekst = () => this.tekst
+  getTekst = () => this.tekst;
 
-  getModal = () => this.modal
+  getModal = () => this.modal;
 }
 
 export default MenyData;

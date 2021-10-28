@@ -19,6 +19,7 @@ class RestHaltedOrDelayedFormatter implements Formatter<ErrorData> {
 
   isOfType = (type: string) => type === this.type;
 
+  // eslint-disable-next-line class-methods-use-this
   format = (errorData: ErrorData) => {
     const { message, status, eta } = errorData;
     if (status === 'HALTED') {

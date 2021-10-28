@@ -14,7 +14,7 @@ const arbeidsforhold = {
 } as BeregningsgrunnlagArbeidsforhold;
 
 const arbeidsforhold2 = {
-  arbeidsgiverIdent: '32847889234234233',
+  arbeidsgiverIdent: '3284788923423423',
   arbeidsforholdId: '3534gggg4g45',
   eksternArbeidsforholdId: '234567',
   startdato: '2017-01-01',
@@ -203,7 +203,7 @@ describe('<FordelBeregningsgrunnlagPeriodePanel>', () => {
         identifikator: '3284788923',
         erPrivatPerson: false,
       },
-      32847889234234233: {
+      3284788923423423: {
         navn: 'Virksomheten 2',
         identifikator: '3284788923',
         erPrivatPerson: false,

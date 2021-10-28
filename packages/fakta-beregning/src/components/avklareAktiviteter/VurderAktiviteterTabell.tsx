@@ -276,6 +276,21 @@ type MappedOwnProps = {
  * Presentasjonskomponent.. Inneholder tabeller for avklaring av skjæringstidspunkt
  */
 export class VurderAktiviteterTabell extends Component<OwnProps & MappedOwnProps & DispatchedProps> {
+  componentDidUpdate() {
+    const {
+      behandlingFormName, reduxChange: reduxFieldChange, aktiviteter,
+      valgtSkjæringstidspunkt, tomDatoForAktivitetGruppe, ingenAktiviterErBrukt,
+    } = this.props;
+
+    const erValgtSkjæringstidspunktLikEllerFørTomDato = isSameOrBefore(valgtSkjæringstidspunkt, tomDatoForAktivitetGruppe);
+    if (!erAktivitetValgbar(erValgtSkjæringstidspunktLikEllerFørTomDato, ingenAktiviterErBrukt)) {
+      aktiviteter.map((a) => `${lagAktivitetFieldId(a)}.skalBrukes`)
+        .forEach((fieldName) => {
+          reduxFieldChange(behandlingFormName, fieldName, true);
+        });
+    }
+  }
+
   static validate = (values: AvklarAktiviteterValues, aktiviteter: BeregningAktivitet[]) => {
     const errors = {};
     let harError = false;
@@ -343,21 +358,6 @@ export class VurderAktiviteterTabell extends Component<OwnProps & MappedOwnProps
     });
     return initialValues;
   };
-
-  componentDidUpdate() {
-    const {
-      behandlingFormName, reduxChange: reduxFieldChange, aktiviteter,
-      valgtSkjæringstidspunkt, tomDatoForAktivitetGruppe, ingenAktiviterErBrukt,
-    } = this.props;
-
-    const erValgtSkjæringstidspunktLikEllerFørTomDato = isSameOrBefore(valgtSkjæringstidspunkt, tomDatoForAktivitetGruppe);
-    if (!erAktivitetValgbar(erValgtSkjæringstidspunktLikEllerFørTomDato, ingenAktiviterErBrukt)) {
-      aktiviteter.map((a) => `${lagAktivitetFieldId(a)}.skalBrukes`)
-        .forEach((fieldName) => {
-          reduxFieldChange(behandlingFormName, fieldName, true);
-        });
-    }
-  }
 
   render() {
     const {

@@ -31,8 +31,6 @@ interface OwnProps {
 }
 
 class CalendarOverlay extends Component<OwnProps> {
-  calendarRootRef: HTMLDivElement | undefined;
-
   static defaultProps = {
     value: '',
     disabled: false,
@@ -77,6 +75,8 @@ class CalendarOverlay extends Component<OwnProps> {
       calendarRootRef.focus();
     }
   }
+
+  calendarRootRef: HTMLDivElement | undefined;
 
   parseDateValue(): Date | undefined {
     const { value } = this.props;

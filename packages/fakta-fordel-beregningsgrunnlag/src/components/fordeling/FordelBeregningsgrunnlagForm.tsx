@@ -171,6 +171,14 @@ interface OwnState {
  */
 
 export class FordelBeregningsgrunnlagForm extends Component<OwnProps, OwnState> {
+  constructor(props: OwnProps) {
+    super(props);
+    this.state = {
+      openPanels: props.perioder.map((periode) => periode.fom),
+    };
+    this.showPanel = this.showPanel.bind(this);
+  }
+
   static validate = (
     intl: IntlShape,
     values: FordelBeregningsgrunnlagMedAksjonspunktValues,
@@ -219,14 +227,6 @@ export class FordelBeregningsgrunnlagForm extends Component<OwnProps, OwnState> 
     });
     return initialValues;
   };
-
-  constructor(props: OwnProps) {
-    super(props);
-    this.state = {
-      openPanels: props.perioder.map((periode) => periode.fom),
-    };
-    this.showPanel = this.showPanel.bind(this);
-  }
 
   showPanel(fom: string): void {
     const { openPanels } = this.state;

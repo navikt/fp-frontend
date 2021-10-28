@@ -113,14 +113,7 @@ export class ForeldelseForm extends Component<PureOwnProps & MappedOwnProps & Di
       valgtPeriode: valgt,
     }));
     this.initializeValgtPeriodeForm(valgt);
-  }
-
-  togglePeriode = (): void => {
-    const { foreldelsesresultatActivity } = this.props;
-    const { valgtPeriode } = this.state;
-    const periode = valgtPeriode ? undefined : foreldelsesresultatActivity[0];
-    this.setPeriode(periode);
-  }
+  };
 
   setNestePeriode = (): void => {
     const { foreldelsesresultatActivity } = this.props;
@@ -128,7 +121,7 @@ export class ForeldelseForm extends Component<PureOwnProps & MappedOwnProps & Di
     const index = foreldelsesresultatActivity
       .findIndex((p: ForeldelsesresultatActivity) => p.fom === valgtPeriode.fom && p.tom === valgtPeriode.tom);
     this.setPeriode(foreldelsesresultatActivity[index + 1]);
-  }
+  };
 
   setForrigePeriode = (): void => {
     const { foreldelsesresultatActivity } = this.props;
@@ -136,7 +129,14 @@ export class ForeldelseForm extends Component<PureOwnProps & MappedOwnProps & Di
     const index = foreldelsesresultatActivity
       .findIndex((p: ForeldelsesresultatActivity) => p.fom === valgtPeriode.fom && p.tom === valgtPeriode.tom);
     this.setPeriode(foreldelsesresultatActivity[index - 1]);
-  }
+  };
+
+  togglePeriode = (): void => {
+    const { foreldelsesresultatActivity } = this.props;
+    const { valgtPeriode } = this.state;
+    const periode = valgtPeriode ? undefined : foreldelsesresultatActivity[0];
+    this.setPeriode(periode);
+  };
 
   oppdaterPeriode = (values: PeriodeFormValues): void => {
     const {
@@ -153,12 +153,12 @@ export class ForeldelseForm extends Component<PureOwnProps & MappedOwnProps & Di
     if (periodeMedApenAksjonspunkt) {
       this.setPeriode(periodeMedApenAksjonspunkt);
     }
-  }
+  };
 
   initializeValgtPeriodeForm = (valgtPeriode: ForeldelsesresultatActivity): void => {
     const { reduxFormInitialize: formInitialize } = this.props;
     formInitialize(FORELDELSE_PERIODE_FORM_NAME, valgtPeriode);
-  }
+  };
 
   oppdaterSplittedePerioder = (perioder: ForeldelsesresultatActivity[]): void => {
     const {
@@ -179,7 +179,7 @@ export class ForeldelseForm extends Component<PureOwnProps & MappedOwnProps & Di
     this.togglePeriode();
     formChange(FORELDELSE_FORM_NAME, 'foreldelsesresultatActivity', sortedActivities);
     this.setPeriode(nyePerioder[0]);
-  }
+  };
 
   render() {
     const {

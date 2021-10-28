@@ -96,8 +96,6 @@ interface OwnState {
 }
 
 class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
-  timelineRef: RefObject<any>
-
   constructor(props: OwnProps) {
     super(props);
 
@@ -121,6 +119,8 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
     const items = createItems(unsortedItems, opptjeningFomDate, opptjeningTomDate);
     this.setState({ items });
   }
+
+  timelineRef: RefObject<any>;
 
   selectHandler(eventProps: { items: number[] }): void {
     const { items } = this.state;

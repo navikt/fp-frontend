@@ -151,28 +151,28 @@ export class TilbakekrevingFormImpl extends Component<Props, StateProps> {
       valgtPeriode: valgt,
     }));
     this.initializeValgtPeriodeForm(valgt);
-  }
-
-  togglePeriode = () => {
-    const { vilkarsVurdertePerioder } = this.props;
-    const { valgtPeriode } = this.state;
-    const periode = valgtPeriode ? undefined : vilkarsVurdertePerioder[0];
-    this.setPeriode(periode);
-  }
+  };
 
   setNestePeriode = () => {
     const { vilkarsVurdertePerioder } = this.props;
     const { valgtPeriode } = this.state;
     const index = vilkarsVurdertePerioder.findIndex((p) => p.fom === valgtPeriode.fom && p.tom === valgtPeriode.tom);
     this.setPeriode(vilkarsVurdertePerioder[index + 1]);
-  }
+  };
 
   setForrigePeriode = () => {
     const { vilkarsVurdertePerioder } = this.props;
     const { valgtPeriode } = this.state;
     const index = vilkarsVurdertePerioder.findIndex((p) => p.fom === valgtPeriode.fom && p.tom === valgtPeriode.tom);
     this.setPeriode(vilkarsVurdertePerioder[index - 1]);
-  }
+  };
+
+  togglePeriode = () => {
+    const { vilkarsVurdertePerioder } = this.props;
+    const { valgtPeriode } = this.state;
+    const periode = valgtPeriode ? undefined : vilkarsVurdertePerioder[0];
+    this.setPeriode(periode);
+  };
 
   oppdaterPeriode = (values: any) => {
     const {
@@ -189,12 +189,12 @@ export class TilbakekrevingFormImpl extends Component<Props, StateProps> {
     if (periodeMedApenAksjonspunkt) {
       this.setPeriode(periodeMedApenAksjonspunkt);
     }
-  }
+  };
 
   initializeValgtPeriodeForm = (valgtPeriode: CustomVilkarsVurdertePeriode) => {
     const { reduxFormInitialize: formInitialize } = this.props;
     formInitialize(TILBAKEKREVING_PERIODE_FORM_NAME, valgtPeriode);
-  }
+  };
 
   oppdaterSplittedePerioder = (perioder: any) => {
     const {
@@ -215,7 +215,7 @@ export class TilbakekrevingFormImpl extends Component<Props, StateProps> {
     this.togglePeriode();
     formChange(TILBAKEKREVING_FORM_NAME, 'vilkarsVurdertePerioder', sortedActivities);
     this.setPeriode(nyePerioder[0]);
-  }
+  };
 
   render() {
     const {
