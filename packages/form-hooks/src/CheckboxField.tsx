@@ -12,6 +12,8 @@ interface OwnProps {
   readOnly?: boolean;
   onChange?: (isChecked: boolean) => void;
   onClick?: () => void;
+  className?: string;
+  disabled?: boolean;
 }
 
 const CheckboxField: FunctionComponent<OwnProps> = ({
@@ -21,6 +23,8 @@ const CheckboxField: FunctionComponent<OwnProps> = ({
   readOnly = false,
   onChange,
   onClick,
+  className,
+  disabled,
 }) => {
   const { formState: { errors } } = useFormContext();
 
@@ -35,8 +39,9 @@ const CheckboxField: FunctionComponent<OwnProps> = ({
     <NavCheckbox
       label={<Normaltekst>{label}</Normaltekst>}
       feil={getError(errors, name)}
-      disabled={readOnly}
+      disabled={disabled || readOnly}
       checked={field.value === true}
+      className={className}
       {...field}
       onChange={(event) => {
         field.onChange(event);

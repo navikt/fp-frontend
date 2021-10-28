@@ -47,8 +47,7 @@ const SelectField: FunctionComponent<OwnProps> = ({
   if (readOnly) {
     const option = selectValues.map((sv) => sv.props).find((o) => o.value === field.value);
     const value = option ? option.children : undefined;
-    // @ts-ignore Fiks
-    return <ReadOnlyField input={{ value }} {...otherProps} />;
+    return <ReadOnlyField value={value} {...otherProps} />;
   }
 
   return (

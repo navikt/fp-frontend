@@ -1,87 +1,86 @@
 import React, { FunctionComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
-import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { useFormContext, useFieldArray } from 'react-hook-form';
+import { useIntl } from 'react-intl';
 
 import { hasValidDate, required, dateBeforeOrEqualToToday } from '@fpsak-frontend/utils';
+import { AvklartBarn } from '@fpsak-frontend/types';
 import {
   FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
-import { CheckboxField, DatepickerField, PeriodFieldArray } from '@fpsak-frontend/form';
-import { FamilieHendelse } from '@fpsak-frontend/types';
+import { DatepickerField, PeriodFieldArray } from '@fpsak-frontend/form-hooks';
 
-import styles from './avklartBarnFieldArray.less';
+const FIELD_ARRAY_NAME = 'avklartBarn';
+
+type FIELD_ARRAY_TYPE = {
+  fodselsdato?: string;
+  dodsdato?: string;
+  id: string;
+};
 
 export const defaultAntallBarn = {
-  fodselsdato: '',
-  isBarnDodt: false,
-  dodsDato: '',
+  fodselsdato: undefined,
+  dodsdato: undefined,
 };
 
 interface OwnProps {
-  fields: FieldArrayFieldsProps<{ arbeidsgiver: string }>;
-  meta?: FieldArrayMetaProps;
   readOnly: boolean;
-  avklartBarn?: FamilieHendelse['avklartBarn'];
 }
 
-export const AvklartBarnFieldArray: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
-  fields,
-  meta,
+export const AvklartBarnFieldArray: FunctionComponent<OwnProps> = ({
   readOnly,
-  avklartBarn,
-}) => (
-  <PeriodFieldArray
-    fields={fields}
-    meta={meta}
-    emptyPeriodTemplate={defaultAntallBarn}
-    readOnly={readOnly}
-    bodyText={intl.formatMessage({ id: 'AvklartBarnFieldArray.LeggTilBarn' })}
-    shouldShowAddButton={avklartBarn.length < 9}
-  >
-    {(periodeElementFieldId, index, getRemoveButton) => (
-      <Row key={periodeElementFieldId}>
-        <Column xs="12">
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <DatepickerField
-                  name={`${periodeElementFieldId}.fodselsdato`}
-                  label={{ id: 'AvklartBarnFieldArray.Title' }}
-                  validate={[hasValidDate, required, dateBeforeOrEqualToToday]}
-                  readOnly={readOnly}
-                />
-              </FlexColumn>
-              <FlexColumn>
-                <CheckboxField
-                  className={styles.registerBarnCheckbox}
-                  name={`${periodeElementFieldId}.isBarnDodt`}
-                  label={{ id: 'AvklartBarnFieldArray.ErBarnetDott' }}
-                  disabled={readOnly}
-                />
-              </FlexColumn>
-              {avklartBarn[index].dodsdato
-              && (
-              <FlexColumn>
-                <span>{periodeElementFieldId.dod}</span>
-                <DatepickerField
-                  name={`${periodeElementFieldId}.dodsdato`}
-                  label={{ id: 'AvklartBarnFieldArray.Dodsdato' }}
-                  validate={[hasValidDate, dateBeforeOrEqualToToday]}
-                  readOnly={readOnly}
-                />
-              </FlexColumn>
-              )}
-              <FlexColumn>
-                {getRemoveButton()}
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
-        </Column>
-      </Row>
-    )}
-  </PeriodFieldArray>
-);
+}) => {
+  const intl = useIntl();
 
-export default injectIntl(AvklartBarnFieldArray);
+  const { control, watch } = useFormContext<{ avklartBarn: AvklartBarn[] }>();
+  const { fields, remove, append } = useFieldArray({
+    control,
+    name: FIELD_ARRAY_NAME,
+  });
+
+  const avklartBarn = watch('avklartBarn');
+
+  return (
+    <PeriodFieldArray<FIELD_ARRAY_TYPE>
+      fields={fields}
+      emptyPeriodTemplate={defaultAntallBarn}
+      readOnly={readOnly}
+      bodyText={intl.formatMessage({ id: 'AvklartBarnFieldArray.LeggTilBarn' })}
+      shouldShowAddButton={avklartBarn.length < 9}
+      remove={remove}
+      append={append}
+    >
+      {(field, index, getRemoveButton) => (
+        <Row key={field.id}>
+          <Column xs="12">
+            <FlexContainer>
+              <FlexRow>
+                <FlexColumn>
+                  <DatepickerField
+                    name={`${FIELD_ARRAY_NAME}.${index}.fodselsdato`}
+                    label={intl.formatMessage({ id: 'AvklartBarnFieldArray.Title' })}
+                    validate={[hasValidDate, required, dateBeforeOrEqualToToday]}
+                    readOnly={readOnly}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <DatepickerField
+                    name={`${FIELD_ARRAY_NAME}.${index}.dodsdato`}
+                    label={intl.formatMessage({ id: 'AvklartBarnFieldArray.Dodsdato' })}
+                    validate={[hasValidDate, dateBeforeOrEqualToToday]}
+                    readOnly={readOnly}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  {getRemoveButton()}
+                </FlexColumn>
+              </FlexRow>
+            </FlexContainer>
+          </Column>
+        </Row>
+      )}
+    </PeriodFieldArray>
+  );
+};
+
+export default AvklartBarnFieldArray;

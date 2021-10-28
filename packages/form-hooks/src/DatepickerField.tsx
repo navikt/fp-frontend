@@ -69,7 +69,7 @@ const DatepickerField: FunctionComponent<OwnProps> = ({
   });
 
   if (readOnly) {
-    return <ReadOnlyField label={<Label input={label} readOnly />} input={inputProps} />;
+    return <ReadOnlyField label={<Label input={label} readOnly />} value={inputProps.value ? isoToDdMmYyyy(inputProps.value) : undefined} />;
   }
 
   return (

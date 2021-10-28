@@ -119,7 +119,6 @@ export const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
       <FaktaSubmitButtonNew
         isSubmittable={isSubmittable}
         isReadOnly={readOnly}
-        hasOpenAksjonspunkter={harApneAksjonspunkter}
         onClick={bekreft}
         isSubmitting={isSubmitting}
         isDirty

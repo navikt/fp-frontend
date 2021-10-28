@@ -70,15 +70,18 @@ describe('<SakenFaktaIndex>', () => {
   it('skal få feilmelding når en ikke har fylt ut alle feltene under Opptjening utland', async () => {
     const lagre = jest.fn();
 
-    render(<ApentAksjonspunktForInnhentingAvDokumentasjon submitCallback={lagre} />);
+    const utils = render(<ApentAksjonspunktForInnhentingAvDokumentasjon submitCallback={lagre} />);
 
     expect(await screen.findByText(
       'Søker har oppgitt informasjon om opptjening i utlandet. Innhent dokumentasjon fra utenlandsk trygdemyndighet ved behov.',
     )).toBeInTheDocument();
 
+    const begrunnelseInput = utils.getByLabelText('Begrunnelse');
+    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 
-    expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
+    expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(1);
 
     expect(lagre).toHaveBeenCalledTimes(0);
   });
