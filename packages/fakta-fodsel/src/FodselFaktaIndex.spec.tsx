@@ -89,12 +89,9 @@ describe('<FodselFaktaIndex>', () => {
       uidentifiserteBarn: [{
         dodsdato: null,
         fodselsdato: '2010-01-01',
-        isBarnDodt: undefined,
       }, {
-        dodsDato: undefined,
         dodsdato: null,
         fodselsdato: '2021-09-23',
-        isBarnDodt: false,
       }],
       begrunnelse: 'Dette er en begrunnelse',
     }]);
@@ -134,7 +131,6 @@ describe('<FodselFaktaIndex>', () => {
       uidentifiserteBarn: [{
         dodsdato: null,
         fodselsdato: '2019-01-01',
-        isBarnDodt: undefined,
       }],
       begrunnelse: 'Dette er en begrunnelse',
     }]);

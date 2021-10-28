@@ -8,23 +8,19 @@ import { AvklartBarn } from '@fpsak-frontend/types';
 import {
   FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
-import { CheckboxField, DatepickerField, PeriodFieldArray } from '@fpsak-frontend/form-hooks';
-
-import styles from './avklartBarnFieldArray.less';
+import { DatepickerField, PeriodFieldArray } from '@fpsak-frontend/form-hooks';
 
 const FIELD_ARRAY_NAME = 'avklartBarn';
 
 type FIELD_ARRAY_TYPE = {
   fodselsdato?: string;
-  isBarnDodt?: boolean;
-  dodsDato?: string;
+  dodsdato?: string;
   id: string;
 };
 
 export const defaultAntallBarn = {
   fodselsdato: undefined,
-  isBarnDodt: false,
-  dodsDato: undefined,
+  dodsdato: undefined,
 };
 
 interface OwnProps {
@@ -68,23 +64,13 @@ export const AvklartBarnFieldArray: FunctionComponent<OwnProps> = ({
                   />
                 </FlexColumn>
                 <FlexColumn>
-                  <CheckboxField
-                    className={styles.registerBarnCheckbox}
-                    name={`${FIELD_ARRAY_NAME}.${index}.isBarnDodt`}
-                    label={intl.formatMessage({ id: 'AvklartBarnFieldArray.ErBarnetDott' })}
-                    disabled={readOnly}
+                  <DatepickerField
+                    name={`${FIELD_ARRAY_NAME}.${index}.dodsdato`}
+                    label={intl.formatMessage({ id: 'AvklartBarnFieldArray.Dodsdato' })}
+                    validate={[hasValidDate, dateBeforeOrEqualToToday]}
+                    readOnly={readOnly}
                   />
                 </FlexColumn>
-                {avklartBarn[index].dodsdato && (
-                  <FlexColumn>
-                    <DatepickerField
-                      name={`${FIELD_ARRAY_NAME}.${index}.dodsdato`}
-                      label={intl.formatMessage({ id: 'AvklartBarnFieldArray.Dodsdato' })}
-                      validate={[hasValidDate, dateBeforeOrEqualToToday]}
-                      readOnly={readOnly}
-                    />
-                  </FlexColumn>
-                )}
                 <FlexColumn>
                   {getRemoveButton()}
                 </FlexColumn>

@@ -20,21 +20,11 @@ import AvklartBarnFieldArray from './AvklartBarnFieldArray';
 
 import styles from './SjekkFodselDokForm.less';
 
-export const AVKLARTE_BARN_FORM_NAME_PREFIX = 'avklartBarn';
-
-export const avklarteBarnFieldArrayName = 'avklartBarn';
-
-type CustomAvklartBarn = {
-  fodselsdato: string;
-  dodsdato?: string;
-  isBarnDodt?: boolean;
-}
-
 export type FormValues = {
   fodselsdato?: string;
   dokumentasjonForeligger?: boolean;
   brukAntallBarnITps?: boolean;
-  avklartBarn?: CustomAvklartBarn[];
+  avklartBarn?: AvklartBarn[];
   begrunnelse?: string;
   antallBarnFodt?: number;
 }
@@ -127,41 +117,23 @@ export const SjekkFodselDokForm: FunctionComponent<OwnProps> & StaticFunctions =
   );
 };
 
-const addIsBarnDodt = (avklarteBarn: AvklartBarn[]): CustomAvklartBarn[] => {
-  const avklarteBarnMedDodFlagg: CustomAvklartBarn[] = [];
-  avklarteBarn.forEach((barn, index) => {
-    avklarteBarnMedDodFlagg.push(barn);
-    if (barn.dodsdato) {
-      avklarteBarnMedDodFlagg[index].isBarnDodt = true;
-    }
-  });
-  return avklarteBarnMedDodFlagg;
-};
-
-const hentAlleBarn = (avklarteBarn: CustomAvklartBarn[]): AvklartBarn[] => {
-  const komplettBarn: AvklartBarn[] = [];
-  avklarteBarn.forEach((barn, index) => {
-    komplettBarn.push(barn);
-    if (!barn.isBarnDodt) {
-      // @ts-ignore Fiks
-      komplettBarn[index].dodsdato = null;
-    }
-  });
-  return komplettBarn;
-};
-
-const createNewChildren = (antallBarnFraSoknad: number): CustomAvklartBarn[] => {
+const lagBarn = (antallBarnFraSoknad: number): AvklartBarn[] => {
   let antallBarn = antallBarnFraSoknad;
   if (antallBarn === 0 || !antallBarn) {
     antallBarn = 1;
   }
-  const childrenArray: CustomAvklartBarn[] = [];
+  const childrenArray: AvklartBarn[] = [];
   while (antallBarn > 0) {
-    childrenArray.push({ fodselsdato: '', isBarnDodt: false, dodsdato: '' });
+    childrenArray.push({ fodselsdato: undefined, dodsdato: undefined });
     antallBarn -= 1;
   }
   return childrenArray;
 };
+
+const ryddOppIAvklarteBarn = (avklartBarn: AvklartBarn[]): AvklartBarn[] => avklartBarn.map((ab) => ({
+  fodselsdato: ab.fodselsdato,
+  dodsdato: ab.dodsdato === '' ? undefined : ab.dodsdato,
+}));
 
 SjekkFodselDokForm.buildInitialValues = (soknad, familiehendelse, aksjonspunkt): FormValues => ({
   dokumentasjonForeligger: familiehendelse.dokumentasjonForeligger !== null
@@ -169,14 +141,14 @@ SjekkFodselDokForm.buildInitialValues = (soknad, familiehendelse, aksjonspunkt):
   brukAntallBarnITps: familiehendelse.brukAntallBarnFraTps !== null
     ? familiehendelse.brukAntallBarnFraTps : undefined,
   avklartBarn: (familiehendelse.avklartBarn && familiehendelse.avklartBarn.length > 0)
-    ? addIsBarnDodt(familiehendelse.avklartBarn) : createNewChildren(soknad.antallBarn || 0),
+    ? familiehendelse.avklartBarn : lagBarn(soknad.antallBarn || 0),
   ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkt),
 });
 
 SjekkFodselDokForm.transformValues = (values: FormValues, avklartBarn: AvklartBarn[]): SjekkManglendeFodselAp => ({
   kode: aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL,
   dokumentasjonForeligger: values.dokumentasjonForeligger,
-  uidentifiserteBarn: hentAlleBarn(values.avklartBarn),
+  uidentifiserteBarn: ryddOppIAvklarteBarn(values.avklartBarn),
   brukAntallBarnITps: avklartBarn && !!avklartBarn.length ? values.brukAntallBarnITps : false,
   ...FaktaBegrunnelseTextFieldNew.transformValues(values),
 });
