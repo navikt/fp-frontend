@@ -5,6 +5,7 @@ class MenyData {
 
   tekst: string;
 
+  // eslint-disable-next-line class-methods-use-this
   modal: (lukkModal: () => void) => ReactNode = () => undefined;
 
   constructor(erSynlig: boolean | undefined, tekst: string) {

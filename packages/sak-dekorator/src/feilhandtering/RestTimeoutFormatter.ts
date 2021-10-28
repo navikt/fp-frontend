@@ -15,6 +15,7 @@ class RestTimeoutFormatter implements Formatter<ErrorData> {
 
   isOfType = (type: string) => type === this.type;
 
+  // eslint-disable-next-line class-methods-use-this
   format = (errorData: ErrorData) => ErrorMessage.withMessageCode(TIMEOUT_MESSAGE_CODE, errorData);
 }
 

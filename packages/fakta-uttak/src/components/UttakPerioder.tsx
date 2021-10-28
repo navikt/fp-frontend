@@ -122,6 +122,7 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
     this.isAnyFormOpen = this.isAnyFormOpen.bind(this);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   overrideResultat = (resultat: any) => {
     if (
       [uttakPeriodeVurdering.PERIODE_KAN_IKKE_AVKLARES, uttakPeriodeVurdering.PERIODE_OK].some(

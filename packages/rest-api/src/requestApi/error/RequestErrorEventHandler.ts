@@ -84,10 +84,12 @@ class RequestErrorEventHandler {
     }
   };
 
+  // eslint-disable-next-line class-methods-use-this
   getFormattedData = (
     data?: string | Record<string, any>,
   ): string | Record<string, any> | undefined => (isString(data) ? { message: data } : data);
 
+  // eslint-disable-next-line class-methods-use-this
   findErrorData = (response: {data?: any; status?: number; statusText?: string}): string | ErrorResponse => (response.data
     ? response.data : response.statusText);
 
