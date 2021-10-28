@@ -12,7 +12,8 @@ const classNames = classnames.bind(styles);
 interface OwnProps {
   name: string;
   label: string;
-  onClick?: () => void;
+  onClick?: (event: any) => void;
+  onChange?: (event: any) => void;
   validate?: ((value: string) => any)[];
   readOnly?: boolean;
   selectValues: React.ReactElement[];
@@ -31,6 +32,7 @@ const SelectField: FunctionComponent<OwnProps> = ({
   placeholder = ' ',
   hideValueOnDisable = false,
   bredde,
+  onChange,
   ...otherProps
 }) => {
   const { formState: { errors } } = useFormContext();
@@ -59,6 +61,12 @@ const SelectField: FunctionComponent<OwnProps> = ({
       feil={getError(errors, name)}
       bredde={bredde}
       {...field}
+      onChange={(evt) => {
+        if (onChange) {
+          onChange(evt);
+        }
+        field.onChange(evt);
+      }}
       {...otherProps}
     />
   );
