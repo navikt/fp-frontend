@@ -1,5 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const PACKAGES_DIR = path.resolve(__dirname, '../packages');
 const IMAGE_DIR = path.join(PACKAGES_DIR, 'assets/images');
 const CORE_DIR = path.resolve(__dirname, '../node_modules');
@@ -25,18 +26,6 @@ module.exports = {
 
     // Make whatever fine-grained changes you need
     config.module.rules = config.module.rules.concat({
-      test: /\.(tsx?|ts?)$/,
-      enforce: 'pre',
-      loader: 'eslint-loader',
-      options: {
-        failOnWarning: false,
-        failOnError: false,
-        configFile: path.resolve(__dirname, '../eslint/eslintrc.dev.js'),
-        fix: true,
-        cache: true,
-      },
-      include: [PACKAGES_DIR],
-    }, {
       test: /\.(tsx?|ts?)$/,
       use: [
         { loader: 'cache-loader' },
@@ -144,6 +133,15 @@ module.exports = {
       filename: 'style[name].css',
       ignoreOrder: true,
     }));
+    config.plugins.push(new ESLintPlugin({
+      context: PACKAGES_DIR,
+      extensions: ['tsx', 'ts'],
+      failOnWarning: false,
+      failOnError: false,
+      fix: true,
+      overrideConfigFile: path.resolve(__dirname, '../eslint/eslintrc.dev.js'),
+      cache: true,
+    }),);
     
     config.resolve.extensions.push('.ts', '.tsx', '.less');
 
