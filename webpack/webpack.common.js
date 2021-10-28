@@ -141,11 +141,12 @@ const config = {
   plugins: [
     new ESLintPlugin({
       context: PACKAGES_DIR,
-      eslintPath: path.resolve(__dirname, isDevelopment ? '../eslint/eslintrc.dev.js' : '../eslint/eslintrc.prod.js'),
       extensions: ['tsx', 'ts'],
-      fix: isDevelopment,
       failOnWarning: false,
       failOnError: !isDevelopment,
+      fix: isDevelopment,
+      overrideConfigFile: path.resolve(__dirname, isDevelopment ? '../eslint/eslintrc.dev.js' : '../eslint/eslintrc.prod.js'),
+      cache: true,
     }),
     new MiniCssExtractPlugin({
       filename: isDevelopment ? 'style[name].css' : 'style[name]_[contenthash].css',
