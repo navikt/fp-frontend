@@ -7,6 +7,7 @@ import { getError, getValidationRules } from './formUtils';
 
 interface NavFieldGroupProps {
   name?: string;
+  errorMessage?: string | ReactNode;
   description?: string;
   children: ReactNodeArray | ReactNode;
   className?: string;
@@ -15,6 +16,7 @@ interface NavFieldGroupProps {
 
 const SkjemaGruppeMedFeilviser: FunctionComponent<NavFieldGroupProps> = ({
   name,
+  errorMessage,
   description,
   children,
   className,
@@ -23,14 +25,14 @@ const SkjemaGruppeMedFeilviser: FunctionComponent<NavFieldGroupProps> = ({
   const { formState: { errors } } = useFormContext();
   const { field } = useController({
     name,
-    rules: {
+    rules: validate ? {
       validate: useMemo(() => getValidationRules(validate), [validate]),
-    },
+    } : undefined,
   });
 
   if (!name) {
     return (
-      <SkjemaGruppe description={description} className={className}>
+      <SkjemaGruppe description={description} className={className} feil={errorMessage}>
         {children}
       </SkjemaGruppe>
     );

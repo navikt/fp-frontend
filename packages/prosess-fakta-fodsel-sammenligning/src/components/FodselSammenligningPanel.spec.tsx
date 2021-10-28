@@ -56,7 +56,7 @@ describe('<FodselSammenligningPanel>', () => {
       termindato="2019-01-01"
     />, messages);
 
-    expect(wrapper.find('Normaltekst').at(2).children().text()).toBe('15.05.2017');
+    expect(wrapper.find('Normaltekst').at(0).children().text()).toBe('15.05.2017');
   });
 
   it('skal rendre default verdier når tpsfodsel ikke finnes', () => {
@@ -69,7 +69,7 @@ describe('<FodselSammenligningPanel>', () => {
       termindato="2019-01-01"
     />, messages);
 
-    expect(wrapper.find('Normaltekst')).toHaveLength(3);
+    expect(wrapper.find('Normaltekst')).toHaveLength(1);
   });
 
   it('skal vise etikkett når minst ett av barna er dødfødte', () => {

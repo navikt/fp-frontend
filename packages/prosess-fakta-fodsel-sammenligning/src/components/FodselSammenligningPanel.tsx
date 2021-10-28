@@ -72,12 +72,8 @@ const FodselSammenligningPanel: FunctionComponent<OwnProps> = ({
         )}
       </Row>
       <Row>
-        <Column xs="4"><Normaltekst><FormattedMessage id="FodselsammenligningPanel.Fodselsdato" /></Normaltekst></Column>
-        <Column xs="4"><Normaltekst><FormattedMessage id="FodselsammenligningPanel.Dodsdato" /></Normaltekst></Column>
-      </Row>
-      <Row>
         {avklartBarn.length > 0 && (
-          <Table>
+          <Table headerTextCodes={['FodselsammenligningPanel.Fodselsdato', 'FodselsammenligningPanel.Dodsdato']}>
             {avklartBarn.map((barn: AvklartBarn) => {
               const key = barn.fodselsdato + barn.dodsdato;
               return (

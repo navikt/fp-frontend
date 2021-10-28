@@ -1,11 +1,10 @@
-import React, { Component, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { submit as reduxSubmit } from 'redux-form';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import { useForm } from 'react-hook-form';
 
+import { Form } from '@fpsak-frontend/form-hooks';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
+import { FaktaSubmitButtonNew } from '@fpsak-frontend/fakta-felles';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
 import {
@@ -15,9 +14,9 @@ import {
   BekreftTerminbekreftelseAp, SjekkManglendeFodselAp, VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp,
 } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
-import TermindatoFaktaForm, { termindatoFaktaFormName } from './TermindatoFaktaForm';
-import SjekkFodselDokForm, { sjekkFodselDokForm } from './SjekkFodselDokForm';
-import SykdomPanel, { sykdomPanelName } from './SykdomPanel';
+import TermindatoFaktaForm, { FormValues as TermindatoFormValues } from './TermindatoFaktaForm';
+import SjekkFodselDokForm, { FormValues as SjekkFodselDokFormValues } from './SjekkFodselDokForm';
+import SykdomPanel, { FormValues as SykdomFormValues } from './SykdomPanel';
 
 const {
   TERMINBEKREFTELSE, SJEKK_MANGLENDE_FODSEL, VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
@@ -37,165 +36,157 @@ const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   return helpTexts;
 };
 
-const formNames = [sykdomPanelName, termindatoFaktaFormName, sjekkFodselDokForm];
+type FormValues = SykdomFormValues & TermindatoFormValues & SjekkFodselDokFormValues;
+
+const buildInitialValues = (
+  sykdomAp: Aksjonspunkt,
+  terminbekreftelseAp: Aksjonspunkt,
+  manglendeFødselAp: Aksjonspunkt,
+  soknad: Soknad,
+  familieHendelse: FamilieHendelseSamling,
+) => ({
+  ...sykdomAp ? SykdomPanel.buildInitialValues(sykdomAp, familieHendelse.gjeldende.morForSykVedFodsel) : {},
+  ...terminbekreftelseAp ? TermindatoFaktaForm.buildInitialValues(soknad, familieHendelse.gjeldende, terminbekreftelseAp) : {},
+  ...manglendeFødselAp ? SjekkFodselDokForm.buildInitialValues(soknad, familieHendelse.gjeldende, manglendeFødselAp) : {},
+});
 
 type AksjonspunktData = Array<BekreftTerminbekreftelseAp | VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp | SjekkManglendeFodselAp>;
 
-interface PureOwnProps {
+const transformValues = (
+  values: FormValues,
+  sykdomAp: Aksjonspunkt,
+  terminbekreftelseAp: Aksjonspunkt,
+  manglendeFødselAp: Aksjonspunkt,
+  familieHendelse: FamilieHendelseSamling,
+): AksjonspunktData => {
+  const aksjonspunkterSomSkalBekreftes = [];
+  if (sykdomAp) {
+    aksjonspunkterSomSkalBekreftes.push(SykdomPanel.transformValues(values));
+  }
+  if (terminbekreftelseAp) {
+    aksjonspunkterSomSkalBekreftes.push(TermindatoFaktaForm.transformValues(values));
+  }
+  if (manglendeFødselAp) {
+    aksjonspunkterSomSkalBekreftes.push(SjekkFodselDokForm.transformValues(values, familieHendelse.gjeldende.avklartBarn));
+  }
+  return aksjonspunkterSomSkalBekreftes;
+};
+
+const EMPTY_ARRAY = [];
+
+interface OwnProps {
   familiehendelse: FamilieHendelseSamling;
   aksjonspunkter: Aksjonspunkt[];
   hasOpenAksjonspunkter: boolean;
   submittable: boolean;
   readOnly: boolean;
-  submitCallback: (data: AksjonspunktData) => Promise<void>;
   soknad: Soknad;
+  submitCallback: (data: AksjonspunktData) => Promise<void>;
   soknadOriginalBehandling?: Soknad;
   familiehendelseOriginalBehandling?: FamilieHendelse;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   behandlingType: Kodeverk;
-}
-
-interface MappedOwnProps {
-  avklartBarn?: FamilieHendelse['avklartBarn'];
-  termindato?: string;
-  vedtaksDatoSomSvangerskapsuke?: number;
-}
-
-interface DispatchProps {
-  // Denne blir injecta fra redux når connect kun tar en parameter
-  dispatch: Dispatch;
+  formData?: FormValues,
+  setFormData: (data: FormValues) => void,
 }
 
 /**
  * FodselInfoPanel
  *
- * Presentasjonskomponent. Har ansvar for å sette opp Redux Formen for faktapenelet til Fødselsvilkåret.
+ * Har ansvar for å sette opp formen for faktapenelet til Fødselsvilkåret.
  */
-export class FodselInfoPanelImpl extends Component<PureOwnProps & MappedOwnProps & DispatchProps> {
-  submittedAksjonspunkter?: Record<string, BekreftTerminbekreftelseAp | VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp | SjekkManglendeFodselAp>;
+const FodselInfoPanel: FunctionComponent<OwnProps> = ({
+  aksjonspunkter,
+  hasOpenAksjonspunkter,
+  submittable,
+  readOnly,
+  soknad,
+  submitCallback,
+  soknadOriginalBehandling,
+  familiehendelseOriginalBehandling,
+  familiehendelse,
+  alleMerknaderFraBeslutter,
+  behandlingType,
+  formData,
+  setFormData,
+}) => {
+  const avklartBarn = familiehendelse?.register?.avklartBarn || EMPTY_ARRAY;
+  const termindato = familiehendelse?.gjeldende?.termindato;
+  const vedtaksDatoSomSvangerskapsuke = familiehendelse?.gjeldende?.vedtaksDatoSomSvangerskapsuke;
 
-  constructor(props: PureOwnProps & MappedOwnProps & DispatchProps) {
-    super(props);
+  const sykdomAp = aksjonspunkter.find((ap) => ap.definisjon.kode === VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT);
+  const terminbekreftelseAp = aksjonspunkter.find((ap) => ap.definisjon.kode === TERMINBEKREFTELSE);
+  const manglendeFødselAp = aksjonspunkter.find((ap) => ap.definisjon.kode === SJEKK_MANGLENDE_FODSEL);
 
-    this.submittedAksjonspunkter = {};
+  const formMethods = useForm<FormValues>({
+    defaultValues: formData || buildInitialValues(sykdomAp, terminbekreftelseAp, manglendeFødselAp, soknad, familiehendelse),
+  });
 
-    this.submitHandler = this.submitHandler.bind(this);
-    this.getSubmitFunction = this.getSubmitFunction.bind(this);
-  }
-
-  getSubmitFunction(dispatch: Dispatch) {
-    return (e) => {
-      this.submittedAksjonspunkter = {};
-      formNames.forEach((formName) => dispatch(reduxSubmit(formName)));
-      e.preventDefault();
-    };
-  }
-
-  submitHandler(data: BekreftTerminbekreftelseAp | VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp | SjekkManglendeFodselAp) {
-    this.submittedAksjonspunkter = {
-      ...this.submittedAksjonspunkter,
-      [data.kode]: data,
-    };
-    const { aksjonspunkter, submitCallback } = this.props;
-
-    return aksjonspunkter.every((ap) => this.submittedAksjonspunkter[ap.definisjon.kode])
-      ? submitCallback(Object.values(this.submittedAksjonspunkter))
-      : undefined;
-  }
-
-  render() {
-    const {
-      aksjonspunkter,
-      hasOpenAksjonspunkter,
-      submittable,
-      readOnly,
-      dispatch,
-      avklartBarn,
-      termindato,
-      vedtaksDatoSomSvangerskapsuke,
-      soknad,
-      soknadOriginalBehandling,
-      familiehendelseOriginalBehandling,
-      familiehendelse,
-      alleMerknaderFraBeslutter,
-      behandlingType,
-    } = this.props;
-    return (
-      <>
-        <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>{getHelpTexts(aksjonspunkter)}</AksjonspunktHelpTextTemp>
-        <form onSubmit={this.getSubmitFunction(dispatch)}>
-          {hasAksjonspunkt(VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT, aksjonspunkter) && (
-            <SykdomPanel
-              readOnly={readOnly}
-              aksjonspunkt={aksjonspunkter.find((ap: any) => ap.definisjon.kode === VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT)}
-              submitHandler={this.submitHandler}
-              morForSykVedFodsel={familiehendelse.gjeldende.morForSykVedFodsel}
-              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+  return (
+    <>
+      <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>{getHelpTexts(aksjonspunkter)}</AksjonspunktHelpTextTemp>
+      <Form
+        formMethods={formMethods}
+        onSubmit={(values) => submitCallback(transformValues(values, sykdomAp, terminbekreftelseAp, manglendeFødselAp, familiehendelse))}
+        setDataOnUnmount={setFormData}
+      >
+        {sykdomAp && (
+          <SykdomPanel
+            readOnly={readOnly}
+            aksjonspunkt={sykdomAp}
+            morForSykVedFodsel={familiehendelse.gjeldende.morForSykVedFodsel}
+            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+          />
+        )}
+        {hasAksjonspunkt(TERMINBEKREFTELSE, aksjonspunkter) && (
+          <TermindatoFaktaForm
+            aksjonspunkt={aksjonspunkter.find((ap: any) => ap.definisjon.kode === TERMINBEKREFTELSE)}
+            readOnly={readOnly}
+            submittable={submittable}
+            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+            soknad={soknad}
+            gjeldendeFamiliehendelse={familiehendelse.gjeldende}
+          />
+        )}
+        {hasAksjonspunkt(SJEKK_MANGLENDE_FODSEL, aksjonspunkter) && (
+          <SjekkFodselDokForm
+            behandlingType={behandlingType}
+            aksjonspunkt={aksjonspunkter.find((ap: any) => ap.definisjon.kode === SJEKK_MANGLENDE_FODSEL)}
+            readOnly={readOnly}
+            submittable={submittable}
+            soknadOriginalBehandling={soknadOriginalBehandling}
+            familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
+            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+            soknad={soknad}
+            avklartBarn={avklartBarn}
+            familiehendelse={familiehendelse}
+          />
+        )}
+        {aksjonspunkter.length !== 0 && !readOnly && (
+          <>
+            <VerticalSpacer twentyPx />
+            <FaktaSubmitButtonNew
+              isSubmittable={submittable}
+              isReadOnly={readOnly}
+              isSubmitting={formMethods.formState.isSubmitting}
+              isDirty={formMethods.formState.isDirty}
             />
-          )}
-          {hasAksjonspunkt(TERMINBEKREFTELSE, aksjonspunkter) && (
-            <TermindatoFaktaForm
-              aksjonspunkt={aksjonspunkter.find((ap: any) => ap.definisjon.kode === TERMINBEKREFTELSE)}
-              readOnly={readOnly}
-              submittable={submittable}
-              submitHandler={this.submitHandler}
-              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-              soknad={soknad}
-              gjeldendeFamiliehendelse={familiehendelse.gjeldende}
-            />
-          )}
-          {hasAksjonspunkt(SJEKK_MANGLENDE_FODSEL, aksjonspunkter) && (
-            <SjekkFodselDokForm
-              behandlingType={behandlingType}
-              aksjonspunkt={aksjonspunkter.find((ap: any) => ap.definisjon.kode === SJEKK_MANGLENDE_FODSEL)}
-              readOnly={readOnly}
-              submittable={submittable}
-              submitHandler={this.submitHandler}
-              soknadOriginalBehandling={soknadOriginalBehandling}
-              familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
-              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-              soknad={soknad}
-              avklartBarn={avklartBarn}
-              gjeldendeFamiliehendelse={familiehendelse.gjeldende}
-            />
-          )}
-          {aksjonspunkter.length !== 0 && !readOnly
-            && (
-              <>
-                <VerticalSpacer twentyPx />
-                <FaktaSubmitButton
-                  formNames={formNames}
-                  isSubmittable={submittable}
-                  isReadOnly={readOnly}
-                  hasOpenAksjonspunkter={hasOpenAksjonspunkter}
-                />
-              </>
-            )}
-          {aksjonspunkter.length === 0 && (
-            <FodselSammenligningIndex
-              behandlingsTypeKode={behandlingType.kode}
-              avklartBarn={avklartBarn}
-              termindato={termindato}
-              vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
-              soknad={soknad}
-              soknadOriginalBehandling={soknadOriginalBehandling}
-              familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
-            />
-          )}
-        </form>
-      </>
-    );
-  }
-}
+          </>
+        )}
+        {aksjonspunkter.length === 0 && (
+          <FodselSammenligningIndex
+            behandlingsTypeKode={behandlingType.kode}
+            avklartBarn={avklartBarn}
+            termindato={termindato}
+            vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
+            soknad={soknad}
+            soknadOriginalBehandling={soknadOriginalBehandling}
+            familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
+          />
+        )}
+      </Form>
+    </>
+  );
+};
 
-const EMPTY_ARRAY = [];
-
-const nullSafe = (value: FamilieHendelse): FamilieHendelse => value || {} as FamilieHendelse;
-
-const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
-  avklartBarn: nullSafe(ownProps.familiehendelse.register).avklartBarn || EMPTY_ARRAY,
-  termindato: nullSafe(ownProps.familiehendelse.gjeldende).termindato,
-  vedtaksDatoSomSvangerskapsuke: nullSafe(ownProps.familiehendelse.gjeldende).vedtaksDatoSomSvangerskapsuke,
-});
-
-export default connect(mapStateToProps)(FodselInfoPanelImpl);
+export default FodselInfoPanel;

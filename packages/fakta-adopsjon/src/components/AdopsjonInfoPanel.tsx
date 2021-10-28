@@ -185,7 +185,6 @@ const AdopsjonInfoPanel: FunctionComponent<OwnProps> = ({
             <FaktaSubmitButtonNew
               isSubmittable={submittable}
               isReadOnly={readOnly}
-              hasOpenAksjonspunkter={hasOpenAksjonspunkter}
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={formMethods.formState.isDirty}
             />
