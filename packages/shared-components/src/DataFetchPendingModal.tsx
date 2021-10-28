@@ -32,8 +32,6 @@ interface OwnState {
  * Presentasjonskomponent. Denne modalen vises når det går mer enn to sekund å polle etter serverdata.
  */
 export class DataFetchPendingModal extends Component<OwnProps, OwnState> {
-  timer: ReturnType<typeof setTimeout>;
-
   constructor(props: OwnProps) {
     super(props);
     this.enableMessage = this.enableMessage.bind(this);
@@ -48,6 +46,8 @@ export class DataFetchPendingModal extends Component<OwnProps, OwnState> {
   componentWillUnmount(): void {
     clearTimeout(this.timer);
   }
+
+  timer: ReturnType<typeof setTimeout>;
 
   enableMessage(): void {
     this.setState({ displayMessage: true });

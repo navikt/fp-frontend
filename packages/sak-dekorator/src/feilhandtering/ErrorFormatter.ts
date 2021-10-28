@@ -10,6 +10,7 @@ const formatters = [new RestTimeoutFormatter(), new RestHaltedOrDelayedFormatter
 export type InputErrorMessage = ErrorDataDefault | ErrorDataRestDefault | ErrorDataHaltedOrDelayed | ErrorDataTimeoutOrNotFound;
 
 class ErrorFormatter {
+  // eslint-disable-next-line class-methods-use-this
   format = (errorMessages: InputErrorMessage[], crashMessage?: string): ErrorMessage[] => {
     const allErrorMessages: ErrorMessage[] = [];
     if (crashMessage) {
@@ -29,7 +30,7 @@ class ErrorFormatter {
     }
 
     return allErrorMessages;
-  }
+  };
 }
 
 export default ErrorFormatter;

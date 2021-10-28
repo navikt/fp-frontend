@@ -30,7 +30,7 @@ class NotificationMapper {
       ...this.eventTypes,
       [eventType]: [callback],
     };
-  }
+  };
 
   public addRequestStartedEventHandler = (callback: EventCallback): void => this.addEventHandler(EventType.REQUEST_STARTED, callback);
 
@@ -54,7 +54,7 @@ class NotificationMapper {
   public getNotificationEmitter = () => (eventType: keyof typeof EventType, data?: any, isAsync?: boolean): void => {
     const eventHandlers = this.eventTypes[eventType];
     eventHandlers.forEach((handler) => handler(data, eventType, isAsync));
-  }
+  };
 }
 
 export default NotificationMapper;

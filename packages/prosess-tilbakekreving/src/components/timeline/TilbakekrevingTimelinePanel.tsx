@@ -51,7 +51,7 @@ class TilbakekrevingTimelinePanel extends Component<OwnProps, OwnState> {
       this.setState({ valgtPeriode });
     }
     eventProps.event.preventDefault();
-  }
+  };
 
   render() {
     const {

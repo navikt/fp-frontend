@@ -125,8 +125,6 @@ interface OwnState {
  * Presentationskomponent. Masserer data og populerer felten samt formatterar tidslinjen for fakta/opptjening
  */
 class OpptjeningTimeLine extends Component<OwnProps, OwnState> {
-  timelineRef: RefObject<any>;
-
   constructor(props: OwnProps) {
     super(props);
 
@@ -163,6 +161,8 @@ class OpptjeningTimeLine extends Component<OwnProps, OwnState> {
       });
     }
   }
+
+  timelineRef: RefObject<any>;
 
   selectHandler(eventProps: any): void {
     const { selectPeriodCallback } = this.props;

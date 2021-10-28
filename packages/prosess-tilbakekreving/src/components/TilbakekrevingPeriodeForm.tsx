@@ -115,65 +115,13 @@ interface OwnState {
 }
 
 export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & DispatchProps & InjectedFormProps, OwnState> {
-  state = { showModal: false }
-
   static defaultProps = {
     erBelopetIBehold: undefined,
     tilbakekrevSelvOmBeloepErUnder4Rettsgebyr: undefined,
     andelSomTilbakekreves: undefined,
   };
 
-  resetFields = () => {
-    const {
-      clearFields: clearFormFields, valgtVilkarResultatType,
-    } = this.props;
-    const fields = [valgtVilkarResultatType];
-    clearFormFields(TILBAKEKREVING_PERIODE_FORM_NAME, false, false, ...fields);
-  };
-
-  resetAnnetTextField = () => {
-    const {
-      clearFields: clearFormFields, valgtVilkarResultatType, handletUaktsomhetGrad, erSerligGrunnAnnetValgt,
-    } = this.props;
-    if (!erSerligGrunnAnnetValgt) {
-      const fields = [`${valgtVilkarResultatType}.${handletUaktsomhetGrad}.annetBegrunnelse`];
-      clearFormFields(TILBAKEKREVING_PERIODE_FORM_NAME, false, false, ...fields);
-    }
-  };
-
-  saveOrToggleModal = () => {
-    const { showModal } = this.state;
-    const {
-      data,
-      tilbakekrevSelvOmBeloepErUnder4Rettsgebyr,
-      antallPerioderMedAksjonspunkt,
-      ...formProps
-    } = this.props;
-
-    if (antallPerioderMedAksjonspunkt > 1 && data.erTotalBelopUnder4Rettsgebyr && tilbakekrevSelvOmBeloepErUnder4Rettsgebyr === false) {
-      this.setState((state: any) => ({
-        ...state,
-        showModal: !showModal,
-      }));
-    } else {
-      // @ts-ignore Kva med parametere?
-      formProps.handleSubmit();
-    }
-  };
-
-  saveForm = () => {
-    const { showModal } = this.state;
-    const {
-      ...formProps
-    } = this.props;
-
-    this.setState((state: any) => ({
-      ...state,
-      showModal: !showModal,
-    }));
-    // @ts-ignore Kva med parametere?
-    formProps.handleSubmit();
-  };
+  state = { showModal: false };
 
   onEndrePeriodeForKopi = (event: any, vurdertePerioder: CustomVilkarsVurdertePeriode[]) => {
     const { change: changeValue, periode } = this.props;
@@ -199,7 +147,59 @@ export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & Dispatch
     changeValue(vilkårResultatType, resultatTypeKopi);
 
     event.preventDefault();
-  }
+  };
+
+  saveForm = () => {
+    const { showModal } = this.state;
+    const {
+      ...formProps
+    } = this.props;
+
+    this.setState((state: any) => ({
+      ...state,
+      showModal: !showModal,
+    }));
+    // @ts-ignore Kva med parametere?
+    formProps.handleSubmit();
+  };
+
+  saveOrToggleModal = () => {
+    const { showModal } = this.state;
+    const {
+      data,
+      tilbakekrevSelvOmBeloepErUnder4Rettsgebyr,
+      antallPerioderMedAksjonspunkt,
+      ...formProps
+    } = this.props;
+
+    if (antallPerioderMedAksjonspunkt > 1 && data.erTotalBelopUnder4Rettsgebyr && tilbakekrevSelvOmBeloepErUnder4Rettsgebyr === false) {
+      this.setState((state: any) => ({
+        ...state,
+        showModal: !showModal,
+      }));
+    } else {
+      // @ts-ignore Kva med parametere?
+      formProps.handleSubmit();
+    }
+  };
+
+  resetAnnetTextField = () => {
+    const {
+      clearFields: clearFormFields, valgtVilkarResultatType, handletUaktsomhetGrad, erSerligGrunnAnnetValgt,
+    } = this.props;
+    if (!erSerligGrunnAnnetValgt) {
+      const fields = [`${valgtVilkarResultatType}.${handletUaktsomhetGrad}.annetBegrunnelse`];
+      clearFormFields(TILBAKEKREVING_PERIODE_FORM_NAME, false, false, ...fields);
+    }
+  };
+
+  resetFields = () => {
+    const {
+      clearFields: clearFormFields, valgtVilkarResultatType,
+    } = this.props;
+    const fields = [valgtVilkarResultatType];
+    clearFormFields(TILBAKEKREVING_PERIODE_FORM_NAME, false, false, ...fields);
+  };
 
   render() {
     const {

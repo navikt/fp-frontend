@@ -73,7 +73,7 @@ class RequestApi {
     }
     this.cache.setToFetching(endpointName);
     return undefined;
-  }
+  };
 
   private findLinks = (rel?: string): Link | undefined => (rel
     ? Object.values(this.links).flat().find((link) => link.rel === rel)
@@ -116,7 +116,7 @@ class RequestApi {
       this.cache.addData(endpointName, undefined);
       throw error;
     }
-  }
+  };
 
   public hasPath = (endpointName: string): boolean => {
     const endpointConfig = this.endpointConfigList.find((c) => c.name === endpointName);
@@ -132,7 +132,7 @@ class RequestApi {
       ...this.links,
       [linkCategory]: links,
     };
-  }
+  };
 
   public setRequestPendingHandler = (requestPendingHandler: (message?: string) => void): void => {
     this.notificationMapper.addUpdatePollingMessageEventHandler((data) => {
@@ -144,7 +144,7 @@ class RequestApi {
     this.notificationMapper.addRequestErrorEventHandlers(() => {
       requestPendingHandler();
     });
-  }
+  };
 
   public setAddErrorMessageHandler = (addErrorMessage: (message: string) => void): void => {
     this.notificationMapper.addRequestErrorEventHandlers((errorData, type) => {
@@ -154,7 +154,7 @@ class RequestApi {
 
   public resetCache = (): void => {
     this.cache = new ResponseCache();
-  }
+  };
 
   public getAxios = (): AxiosInstance => this.httpClientApi.axiosInstance;
 

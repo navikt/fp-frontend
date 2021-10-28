@@ -38,6 +38,7 @@ class RequestRunner {
 
   maxPollingLimit: number = MAX_POLLING_ATTEMPTS;
 
+  // eslint-disable-next-line class-methods-use-this
   notify: Notify = () => undefined;
 
   isCancelled = false;
@@ -56,7 +57,7 @@ class RequestRunner {
 
   setNotificationEmitter = (notificationEmitter: NotificationEmitter): void => {
     this.notify = notificationEmitter;
-  }
+  };
 
   execLongPolling = async (location?: string, pollingInterval = 0, pollingCounter = 0): Promise<Response | null> => {
     if (pollingCounter === this.maxPollingLimit) {
@@ -111,11 +112,11 @@ class RequestRunner {
       }
     }
     return response;
-  }
+  };
 
   cancel = (): void => {
     this.isCancelled = true;
-  }
+  };
 
   start = async <T, P>(params: P): Promise<{payload: T}> => {
     this.notify(EventType.REQUEST_STARTED);
@@ -138,7 +139,7 @@ class RequestRunner {
       new RequestErrorEventHandler(this.notify, this.isPollingRequest).handleError(error);
       throw error;
     }
-  }
+  };
 }
 
 export default RequestRunner;
