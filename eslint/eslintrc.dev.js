@@ -8,7 +8,6 @@ const config = {
   rules: {
     'no-debugger': OFF,
     'no-console': WARN,
-    'import/no-extraneous-dependencies': OFF,
   },
 };
 
