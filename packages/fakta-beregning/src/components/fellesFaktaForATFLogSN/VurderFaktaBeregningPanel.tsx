@@ -216,6 +216,7 @@ const lagSubmitFn = createSelector([
 const mapStateToPropsFactory = (_state: any, initialProps: OwnProps) => {
   const validate = (values) => validateVurderFaktaBeregning(values, initialProps.intl);
   return (state: any, ownProps: OwnProps): MappedOwnProps => {
+    // @ts-ignore FIX reselect
     const initialValues = buildInitialValuesVurderFaktaBeregning(state, ownProps);
     return ({
       initialValues,
