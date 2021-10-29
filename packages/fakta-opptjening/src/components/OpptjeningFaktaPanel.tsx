@@ -129,7 +129,7 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
         erGodkjent: formVerdierForAlleAktiviteter[index].erGodkjent,
         begrunnelse: formVerdierForAlleAktiviteter[index].begrunnelse,
       }))
-      .filter((b) => b.begrunnelse !== undefined);
+      .filter((b) => b.begrunnelse);
 
     submitCallback({
       opptjeningsaktiviteter: opptjeningsaktiviteterSomSkallagres,
