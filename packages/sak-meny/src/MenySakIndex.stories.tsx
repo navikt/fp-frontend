@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Story } from '@storybook/react';
+import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import Modal from 'nav-frontend-modal';
 
 import MenySakIndex from './MenySakIndex';

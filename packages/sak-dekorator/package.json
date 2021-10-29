@@ -7,6 +7,7 @@
   "dependencies": {
     "@fpsak-frontend/assets": "1.0.0",
     "@fpsak-frontend/konstanter": "1.0.0",
+    "@fpsak-frontend/rest-api": "1.0.0",
     "@fpsak-frontend/shared-components": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
     "@navikt/boxed-list-with-links": "1.0.4",

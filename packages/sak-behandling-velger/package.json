@@ -27,6 +27,7 @@
     "react-router-dom": "^5.3.0"
   },
   "devDependencies": {
+    "@fpsak-frontend/storybook-utils": "^1.0.0",
     "@storybook/addon-actions": "^6.3.12",
     "@storybook/testing-react": "^0.0.22",
     "@testing-library/react": "^12.1.2",
