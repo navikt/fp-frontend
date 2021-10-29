@@ -46,7 +46,7 @@ const Template: Story<{
     harApneAksjonspunkter
     submittable
     setFormData={() => undefined}
-    behandling={behandling as Behandling}
+    behandling={behandling}
     verge={verge}
     aksjonspunkter={aksjonspunkter}
     alleKodeverk={alleKodeverk as any}
