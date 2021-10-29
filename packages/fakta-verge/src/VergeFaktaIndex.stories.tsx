@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react';
+import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -46,7 +46,7 @@ const Template: Story<{
     harApneAksjonspunkter
     submittable
     setFormData={() => undefined}
-    behandling={behandling as Behandling}
+    behandling={behandling}
     verge={verge}
     aksjonspunkter={aksjonspunkter}
     alleKodeverk={alleKodeverk as any}

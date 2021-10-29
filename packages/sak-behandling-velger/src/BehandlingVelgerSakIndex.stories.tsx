@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Story } from '@storybook/react';
+import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';

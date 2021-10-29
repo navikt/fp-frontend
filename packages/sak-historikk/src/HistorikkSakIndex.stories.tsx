@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react';
+import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import { skjermlenkeCodes } from '@fpsak-frontend/konstanter';
 import { Historikkinnslag, HistorikkinnslagDel } from '@fpsak-frontend/types';

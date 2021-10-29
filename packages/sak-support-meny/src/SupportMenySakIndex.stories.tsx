@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story } from '@storybook/react';
+import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import SupportMenySakIndex from './SupportMenySakIndex';
 import SupportTabs from './supportTabs';

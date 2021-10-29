@@ -75,7 +75,7 @@ export const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
         readOnly={readOnly}
         isEdited={valgtAktivitetskrav.endret}
       >
-        {aktivitetskravAvklaringer.sort(((a1, a2) => a1.navn.localeCompare(a2.navn))).map((avklaring) => (
+        {[...aktivitetskravAvklaringer].sort(((a1, a2) => a1.navn.localeCompare(a2.navn))).map((avklaring) => (
           <RadioOption
             key={avklaring.kode}
             label={avklaring.navn}

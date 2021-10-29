@@ -1,5 +1,5 @@
 import React, {
-  ReactNode, ReactNodeArray, FunctionComponent, useMemo,
+  ReactNode, FunctionComponent, useMemo,
 } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
@@ -9,7 +9,7 @@ interface NavFieldGroupProps {
   name?: string;
   errorMessage?: string | ReactNode;
   description?: string;
-  children: ReactNodeArray | ReactNode;
+  children: ReactNode[] | ReactNode;
   className?: string;
   validate?: ((value: string) => any)[];
 }
