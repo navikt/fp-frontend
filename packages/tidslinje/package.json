@@ -21,5 +21,7 @@
     "vis-data": "^7.1.2",
     "vis-timeline": "^7.4.9"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@fpsak-frontend/utils-test": "1.0.0"
+  }
 }
