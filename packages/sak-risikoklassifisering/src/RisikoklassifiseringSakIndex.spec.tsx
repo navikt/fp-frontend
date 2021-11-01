@@ -86,7 +86,7 @@ describe('<RisikoklassifiseringSakIndex>', () => {
     const vurderingInput = utils.getByLabelText('Vurdering');
     userEvent.type(vurderingInput, 'De');
 
-    await waitFor(() => expect(screen.getByText('Bekreft og fortsett')).not.toBeDisabled());
+    expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 
