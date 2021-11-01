@@ -21,7 +21,7 @@ describe('<FeilutbetalingFaktaIndex>', () => {
 
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    const selects = utils.getAllByRole('combobox');
+    const selects = utils.getAllByRole('combobox', { hidden: true });
     userEvent.selectOptions(selects[0], 'OPPTJENING');
     userEvent.selectOptions(selects[1], 'OPPTJENING');
     userEvent.selectOptions(selects[2], 'OPPTJENING');
@@ -78,11 +78,11 @@ describe('<FeilutbetalingFaktaIndex>', () => {
 
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    userEvent.selectOptions(utils.getAllByRole('combobox')[0], 'MEDLEM');
-    userEvent.selectOptions(utils.getAllByRole('combobox')[1], 'IKKE_EØS');
-    userEvent.selectOptions(utils.getAllByRole('combobox')[2], 'OPPTJENING');
-    userEvent.selectOptions(utils.getAllByRole('combobox')[3], 'ANNET');
-    userEvent.selectOptions(utils.getAllByRole('combobox')[4], 'TEST1');
+    userEvent.selectOptions(utils.getAllByRole('combobox', { hidden: true })[0], 'MEDLEM');
+    userEvent.selectOptions(utils.getAllByRole('combobox', { hidden: true })[1], 'IKKE_EØS');
+    userEvent.selectOptions(utils.getAllByRole('combobox', { hidden: true })[2], 'OPPTJENING');
+    userEvent.selectOptions(utils.getAllByRole('combobox', { hidden: true })[3], 'ANNET');
+    userEvent.selectOptions(utils.getAllByRole('combobox', { hidden: true })[4], 'TEST1');
 
     const begrunnValgInput = utils.getByLabelText('Forklar årsaken(e) til feilutbetalingen');
     userEvent.type(begrunnValgInput, 'Dette er en forklaring');
@@ -147,8 +147,8 @@ describe('<FeilutbetalingFaktaIndex>', () => {
 
     userEvent.click(screen.getByText('Behandle alle perioder samlet'));
 
-    userEvent.selectOptions(utils.getAllByRole('combobox')[0], 'MEDLEM');
-    userEvent.selectOptions(utils.getAllByRole('combobox')[1], 'IKKE_EØS');
+    userEvent.selectOptions(utils.getAllByRole('combobox', { hidden: true })[0], 'MEDLEM');
+    userEvent.selectOptions(utils.getAllByRole('combobox', { hidden: true })[1], 'IKKE_EØS');
 
     const begrunnValgInput = utils.getByLabelText('Forklar årsaken(e) til feilutbetalingen');
     userEvent.type(begrunnValgInput, 'Dette er en forklaring');

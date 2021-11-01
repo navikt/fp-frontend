@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './FagsakSokSakIndex.stories';
@@ -15,7 +15,7 @@ describe('<FagsakSokSakIndex>', () => {
     const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
     userEvent.type(nrInput, 'TEST');
 
-    await waitFor(() => expect(screen.queryByText('Søk')).not.toBeDisabled());
+    expect(await screen.findByText('Søk')).toBeEnabled();
 
     userEvent.click(screen.getByText('Søk'));
 
@@ -30,7 +30,7 @@ describe('<FagsakSokSakIndex>', () => {
     const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
     userEvent.type(nrInput, '123');
 
-    await waitFor(() => expect(screen.queryByText('Søk')).not.toBeDisabled());
+    expect(await screen.findByText('Søk')).toBeEnabled();
 
     userEvent.click(screen.getByText('Søk'));
 
@@ -57,7 +57,7 @@ describe('<FagsakSokSakIndex>', () => {
     const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
     userEvent.type(nrInput, '123');
 
-    await waitFor(() => expect(screen.queryByText('Søk')).not.toBeDisabled());
+    expect(await screen.findByText('Søk')).toBeEnabled();
 
     userEvent.click(screen.getByText('Søk'));
 

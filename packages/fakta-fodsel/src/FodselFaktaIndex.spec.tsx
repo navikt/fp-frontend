@@ -29,7 +29,7 @@ describe('<FodselFaktaIndex>', () => {
 
     userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
-    await waitFor(() => expect(screen.queryByText('Bekreft og fortsett')).not.toBeDisabled());
+    expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -65,23 +65,24 @@ describe('<FodselFaktaIndex>', () => {
 
     expect(await screen.findByText('Fyll inn dokumenterte opplysninger')).toBeInTheDocument();
 
-    const fødselsdatoFelt = utils.getAllByRole('textbox')[0];
+    userEvent.click(screen.getByAltText('Legg til barn'));
+
+    const alleDatofelt = utils.getAllByRole('textbox', { hidden: true });
+    const fødselsdatoFelt = alleDatofelt[0];
     userEvent.type(fødselsdatoFelt, '{backspace}0');
     fireEvent.blur(fødselsdatoFelt);
 
-    userEvent.click(screen.getByAltText('Legg til barn'));
-
-    const fødselsdatoFelt2 = utils.getAllByRole('textbox')[2];
+    const fødselsdatoFelt2 = alleDatofelt[2];
     userEvent.type(fødselsdatoFelt2, '23.09.2021');
     fireEvent.blur(fødselsdatoFelt2);
 
-    const dødsdatoFelt = utils.getAllByRole('textbox')[3];
+    const dødsdatoFelt = alleDatofelt[3];
     userEvent.type(dødsdatoFelt, '23.09.2021');
     fireEvent.blur(dødsdatoFelt);
 
     userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
-    await waitFor(() => expect(screen.queryByText('Bekreft og fortsett')).not.toBeDisabled());
+    expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -122,7 +123,7 @@ describe('<FodselFaktaIndex>', () => {
 
     userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
-    await waitFor(() => expect(screen.queryByText('Bekreft og fortsett')).not.toBeDisabled());
+    expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -151,7 +152,7 @@ describe('<FodselFaktaIndex>', () => {
 
     userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
-    await waitFor(() => expect(screen.queryByText('Bekreft og fortsett')).not.toBeDisabled());
+    expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -177,7 +178,7 @@ describe('<FodselFaktaIndex>', () => {
 
     userEvent.click(screen.getByText(/ikke/));
 
-    await waitFor(() => expect(screen.queryByText('Bekreft og fortsett')).not.toBeDisabled());
+    expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 

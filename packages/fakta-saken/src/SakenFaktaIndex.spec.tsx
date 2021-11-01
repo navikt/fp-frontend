@@ -26,7 +26,7 @@ describe('<SakenFaktaIndex>', () => {
 
     userEvent.click(screen.getByText('Bosatt utland'));
 
-    await waitFor(() => expect(screen.getByText('Lagre')).not.toBeDisabled());
+    expect(await screen.findByText('Lagre')).toBeEnabled();
 
     userEvent.click(screen.getByText('Lagre'));
 
@@ -81,7 +81,7 @@ describe('<SakenFaktaIndex>', () => {
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 
-    expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(1);
+    await waitFor(() => expect(screen.getAllByText('Feltet må fylles ut')[0]).toBeInTheDocument());
 
     expect(lagre).toHaveBeenCalledTimes(0);
   });

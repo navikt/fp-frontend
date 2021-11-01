@@ -32,8 +32,8 @@ describe('<SettPaVentModal>', () => {
     );
 
     expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
-    expect(utils.getByLabelText('Behandlingen settes på vent med frist')).not.toBeDisabled();
-    expect(screen.getByText('OK')).not.toBeDisabled();
+    expect(utils.getByLabelText('Behandlingen settes på vent med frist')).toBeEnabled();
+    expect(screen.getByText('OK')).toBeEnabled();
   });
 
   it('skal disable knapp for lagring når frist er en ugyldig dato', async () => {
@@ -99,7 +99,7 @@ describe('<SettPaVentModal>', () => {
     );
 
     expect(await screen.findByText('Behandlingen er satt på vent')).toBeInTheDocument();
-    expect(utils.queryByRole('textbox')).not.toBeInTheDocument();
+    expect(utils.queryByRole('textbox', { hidden: true })).not.toBeInTheDocument();
   });
 
   it('skal vise tekst for tilbakekreving behandling venter på kravgrunnlag og fristen er utløpt', async () => {

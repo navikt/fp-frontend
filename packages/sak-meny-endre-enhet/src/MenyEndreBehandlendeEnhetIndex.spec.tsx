@@ -22,7 +22,7 @@ describe('<MenyEndreBehandlendeEnhetIndex>', () => {
 
     userEvent.selectOptions(utils.getByLabelText('Ny enhet'), '0');
 
-    await waitFor(() => expect(screen.getByText('OK')).not.toBeDisabled());
+    expect(await screen.findByText('OK')).toBeEnabled();
     userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));

@@ -17,13 +17,13 @@ describe('<TotrinnskontrollSakIndex>', () => {
     expect(screen.getByText('Klageresultat Vedtaksinstans')).toBeInTheDocument();
 
     expect(screen.getByText('Godkjenn vedtaket')).toBeDisabled();
-    expect(screen.getByText('Send til saksbehandler')).not.toBeDisabled();
+    expect(screen.getByText('Send til saksbehandler')).toBeEnabled();
 
     const checkboxes = screen.getAllByText('Godkjent');
     userEvent.click(checkboxes[0]);
     userEvent.click(checkboxes[1]);
 
-    await waitFor(() => expect(screen.queryByText('Godkjenn vedtaket')).not.toBeDisabled());
+    expect(await screen.findByText('Godkjenn vedtaket')).toBeEnabled();
     expect(screen.getByText('Send til saksbehandler')).toBeDisabled();
 
     userEvent.click(screen.getByText('Godkjenn vedtaket'));

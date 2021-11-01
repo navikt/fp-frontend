@@ -8,7 +8,7 @@ import * as stories from './AktivitetskravFaktaIndex.stories';
 
 const { AksjonspunktMedToUavklartePerioder, AksjonspunktSomErBekreftet } = composeStories(stories);
 
-describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
+describe('<AktivitetskravFaktaIndex>', () => {
   it('skal avklare to perioder og så bekrefte aksjonspunkt', async () => {
     const lagre = jest.fn(() => Promise.resolve());
 
@@ -35,7 +35,7 @@ describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
 
     userEvent.click(screen.getByText('Oppdater'));
 
-    await waitFor(() => expect(screen.queryByText('Bekreft og fortsett')).not.toBeDisabled());
+    expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -95,7 +95,7 @@ describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
     expect(screen.queryByText('Detaljer')).not.toBeInTheDocument();
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getAllByRole('row')[1]);
+    userEvent.click(screen.getAllByRole('row', { hidden: true })[1]);
 
     expect(await screen.findByText('Detaljer')).toBeInTheDocument();
     expect(screen.getByText('Oppdater')).toBeDisabled();
