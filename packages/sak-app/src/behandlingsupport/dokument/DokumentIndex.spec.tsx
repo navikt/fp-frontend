@@ -42,6 +42,6 @@ describe('<DokumentIndex>', () => {
       </RestApiMock>,
     );
 
-    expect(await screen.findAllByRole('row')).toHaveLength(4);
+    expect(await screen.findAllByRole('row', { hidden: true })).toHaveLength(4);
   });
 });

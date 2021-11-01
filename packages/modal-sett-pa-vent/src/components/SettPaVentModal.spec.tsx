@@ -99,7 +99,7 @@ describe('<SettPaVentModal>', () => {
     );
 
     expect(await screen.findByText('Behandlingen er satt på vent')).toBeInTheDocument();
-    expect(utils.queryByRole('textbox')).not.toBeInTheDocument();
+    expect(utils.queryByRole('textbox', { hidden: true })).not.toBeInTheDocument();
   });
 
   it('skal vise tekst for tilbakekreving behandling venter på kravgrunnlag og fristen er utløpt', async () => {

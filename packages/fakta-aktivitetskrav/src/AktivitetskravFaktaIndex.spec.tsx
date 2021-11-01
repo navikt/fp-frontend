@@ -95,7 +95,7 @@ describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
     expect(screen.queryByText('Detaljer')).not.toBeInTheDocument();
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getAllByRole('row')[1]);
+    userEvent.click(screen.getAllByRole('row', { hidden: true })[1]);
 
     expect(await screen.findByText('Detaljer')).toBeInTheDocument();
     expect(screen.getByText('Oppdater')).toBeDisabled();

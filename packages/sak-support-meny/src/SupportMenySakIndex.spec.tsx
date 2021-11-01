@@ -14,7 +14,7 @@ describe('<SupportMenySakIndex>', () => {
     expect(await screen.findByTestId('Historikk')).toBeInTheDocument();
     expect(screen.getByTestId('Send melding')).toBeInTheDocument();
     expect(screen.getByTestId('Dokumenter')).toBeInTheDocument();
-    expect(screen.getAllByRole('button')).toHaveLength(3);
+    expect(screen.getAllByRole('button', { hidden: true })).toHaveLength(3);
     expect(screen.getByTestId('Send melding')).not.toBeDisabled();
   });
 
@@ -25,7 +25,7 @@ describe('<SupportMenySakIndex>', () => {
     expect(screen.getByTestId('Historikk')).toBeInTheDocument();
     expect(screen.getByTestId('Send melding')).toBeInTheDocument();
     expect(screen.getByTestId('Dokumenter')).toBeInTheDocument();
-    expect(screen.getAllByRole('button')).toHaveLength(4);
+    expect(screen.getAllByRole('button', { hidden: true })).toHaveLength(4);
     expect(screen.getByTestId('Send melding')).not.toBeDisabled();
   });
 
@@ -36,7 +36,7 @@ describe('<SupportMenySakIndex>', () => {
     expect(screen.getByTestId('Historikk')).toBeInTheDocument();
     expect(screen.getByTestId('Send melding')).toBeInTheDocument();
     expect(screen.getByTestId('Dokumenter')).toBeInTheDocument();
-    expect(screen.getAllByRole('button')).toHaveLength(4);
+    expect(screen.getAllByRole('button', { hidden: true })).toHaveLength(4);
     expect(screen.getByTestId('Send melding')).not.toBeDisabled();
   });
 

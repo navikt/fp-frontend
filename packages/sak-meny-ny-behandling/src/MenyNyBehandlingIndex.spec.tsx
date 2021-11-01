@@ -13,7 +13,7 @@ describe('<MenyNyBehandlingIndex>', () => {
     const utils = render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByRole('combobox'), 'BT-008');
+    userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-008');
 
     userEvent.click(screen.getByText('OK'));
 
@@ -29,7 +29,7 @@ describe('<MenyNyBehandlingIndex>', () => {
       saksnummer: '123',
     });
 
-    expect(utils.queryByRole('checkbox')).not.toBeInTheDocument();
+    expect(utils.queryByRole('checkbox', { hidden: true })).not.toBeInTheDocument();
   });
 
   it('skal opprette ny førstegangssøknad og krysse av for at den er et resultat av klagebehandling', async () => {
@@ -38,9 +38,9 @@ describe('<MenyNyBehandlingIndex>', () => {
     const utils = render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByRole('combobox'), 'BT-002');
+    userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-002');
 
-    userEvent.click(utils.getByRole('checkbox'));
+    userEvent.click(utils.getByRole('checkbox', { hidden: true }));
 
     userEvent.click(screen.getByText('OK'));
 
@@ -64,7 +64,7 @@ describe('<MenyNyBehandlingIndex>', () => {
     const utils = render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByRole('combobox'), 'BT-002');
+    userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-002');
 
     userEvent.click(screen.getByText('OK'));
 
@@ -88,9 +88,9 @@ describe('<MenyNyBehandlingIndex>', () => {
     const utils = render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByRole('combobox'), 'BT-004');
+    userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-004');
 
-    userEvent.selectOptions(utils.getAllByRole('combobox')[1], 'RE-KLAG-U-INNTK');
+    userEvent.selectOptions(utils.getAllByRole('combobox', { hidden: true })[1], 'RE-KLAG-U-INNTK');
 
     userEvent.click(screen.getByText('OK'));
 
@@ -118,7 +118,7 @@ describe('<MenyNyBehandlingIndex>', () => {
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByRole('combobox'), 'BT-004');
+    userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-004');
 
     await waitFor(() => expect(screen.queryByText('Feltet må fylles ut')).not.toBeInTheDocument());
 

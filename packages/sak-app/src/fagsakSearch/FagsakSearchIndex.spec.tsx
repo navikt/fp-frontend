@@ -85,7 +85,7 @@ describe('<FagsakSearchIndex>', () => {
 
     expect(await screen.findByText('Saksnummer')).toBeInTheDocument();
 
-    userEvent.click(screen.getAllByRole('row')[1]);
+    userEvent.click(screen.getAllByRole('row', { hidden: true })[1]);
 
     await waitFor(() => expect(mockHistoryPush).toHaveBeenCalledWith(`/fagsak/${fagsak.saksnummer}/`));
   });

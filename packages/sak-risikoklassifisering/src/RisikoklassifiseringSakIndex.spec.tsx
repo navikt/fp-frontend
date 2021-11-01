@@ -50,15 +50,15 @@ describe('<RisikoklassifiseringSakIndex>', () => {
     const lagreAksjonspunkt = jest.fn();
     const utils = render(<HøyRisikoklassifisering submitAksjonspunkt={lagreAksjonspunkt} />);
     expect(await screen.findByText('Faresignaler oppdaget')).toBeInTheDocument();
-    expect(await screen.findByText('Vurder faresignalene')).toBeInTheDocument();
+    expect(screen.getByText('Vurder faresignalene')).toBeInTheDocument();
 
-    expect(await screen.findByText('Medlemskap')).toBeInTheDocument();
-    expect(await screen.findByText('Faresignal 1')).toBeInTheDocument();
+    expect(screen.getByText('Medlemskap')).toBeInTheDocument();
+    expect(screen.getByText('Faresignal 1')).toBeInTheDocument();
 
-    expect(await screen.findByText('Arbeidsforhold og inntekt')).toBeInTheDocument();
-    expect(await screen.findByText('Faresignal 2')).toBeInTheDocument();
-    expect(await screen.findByText('Faresignal 3')).toBeInTheDocument();
-    expect(await screen.findByText('Faresignal 4')).toBeInTheDocument();
+    expect(screen.getByText('Arbeidsforhold og inntekt')).toBeInTheDocument();
+    expect(screen.getByText('Faresignal 2')).toBeInTheDocument();
+    expect(screen.getByText('Faresignal 3')).toBeInTheDocument();
+    expect(screen.getByText('Faresignal 4')).toBeInTheDocument();
 
     const vurderingInput = utils.getByLabelText('Vurdering');
     userEvent.type(vurderingInput, 'Dette er en begrunnelse');
