@@ -53,7 +53,7 @@ describe('<FagsakSearchIndex>', () => {
     const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
     userEvent.type(nrInput, '123');
 
-    await waitFor(() => expect(screen.queryByText('Søk')).not.toBeDisabled());
+    expect(await screen.findByText('Søk')).toBeEnabled();
 
     userEvent.click(screen.getByText('Søk'));
 
@@ -79,13 +79,13 @@ describe('<FagsakSearchIndex>', () => {
     const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
     userEvent.type(nrInput, '123');
 
-    await waitFor(() => expect(screen.queryByText('Søk')).not.toBeDisabled());
+    expect(await screen.findByText('Søk')).toBeEnabled();
 
     userEvent.click(screen.getByText('Søk'));
 
     expect(await screen.findByText('Saksnummer')).toBeInTheDocument();
 
-    userEvent.click(screen.getAllByRole('row')[1]);
+    userEvent.click(screen.getAllByRole('row', { hidden: true })[1]);
 
     await waitFor(() => expect(mockHistoryPush).toHaveBeenCalledWith(`/fagsak/${fagsak.saksnummer}/`));
   });

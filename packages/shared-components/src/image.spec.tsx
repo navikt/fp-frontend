@@ -12,15 +12,15 @@ describe('<Image>', () => {
   it('skal vise et ikon', async () => {
     render(<Default />);
 
-    expect(await screen.findByRole('img')).toBeInTheDocument();
+    expect(await screen.findByRole('img', { hidden: true })).toBeInTheDocument();
   });
 
   it('skal åpne en modal når en trykker på ikon', async () => {
     render(<KlikkbartIkon />);
 
-    expect(await screen.findByRole('img')).toBeInTheDocument();
+    expect(await screen.findByRole('img', { hidden: true })).toBeInTheDocument();
 
-    userEvent.click(screen.getByRole('img'));
+    userEvent.click(screen.getByRole('img', { hidden: true }));
 
     expect(await screen.findByText('OK')).toBeInTheDocument();
   });

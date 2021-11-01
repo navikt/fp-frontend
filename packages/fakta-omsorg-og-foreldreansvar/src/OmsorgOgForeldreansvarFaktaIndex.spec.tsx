@@ -40,7 +40,7 @@ describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
     expect(screen.getByText('01.01.2021')).toBeInTheDocument();
 
     expect(screen.getAllByText('Velg vilkår som skal anvendes')[1]).toBeInTheDocument();
-    userEvent.selectOptions(screen.getByRole('combobox'), 'FP_VK_5');
+    userEvent.selectOptions(screen.getByRole('combobox', { hidden: true }), 'FP_VK_5');
 
     expect(await screen.findByText(
       'Dersom mor dør i forbindelse med fødselen eller omsorgsovertakelsen, har faren rett til '

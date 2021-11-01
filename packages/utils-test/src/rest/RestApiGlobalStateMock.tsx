@@ -20,7 +20,7 @@ const RestApiGlobalStateMock: FunctionComponent<Props> = ({ children, data }) =>
       const dispatchData = data.map((d) => () => dispatch({ type: 'success', key: d.key, data: d.data }));
       Promise.all(dispatchData.map((d) => d())).then(() => setFerdig(true));
     }
-  }, [dispatch, data, erFerdig]);
+  }, [erFerdig]);
 
   return erFerdig ? children : null;
 };

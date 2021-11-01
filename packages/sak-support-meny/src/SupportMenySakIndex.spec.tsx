@@ -14,8 +14,8 @@ describe('<SupportMenySakIndex>', () => {
     expect(await screen.findByTestId('Historikk')).toBeInTheDocument();
     expect(screen.getByTestId('Send melding')).toBeInTheDocument();
     expect(screen.getByTestId('Dokumenter')).toBeInTheDocument();
-    expect(screen.getAllByRole('button')).toHaveLength(3);
-    expect(screen.getByTestId('Send melding')).not.toBeDisabled();
+    expect(screen.getAllByRole('button', { hidden: true })).toHaveLength(3);
+    expect(screen.getByTestId('Send melding')).toBeEnabled();
   });
 
   it('skal vise meny med beslutter-godkjenning', async () => {
@@ -25,8 +25,8 @@ describe('<SupportMenySakIndex>', () => {
     expect(screen.getByTestId('Historikk')).toBeInTheDocument();
     expect(screen.getByTestId('Send melding')).toBeInTheDocument();
     expect(screen.getByTestId('Dokumenter')).toBeInTheDocument();
-    expect(screen.getAllByRole('button')).toHaveLength(4);
-    expect(screen.getByTestId('Send melding')).not.toBeDisabled();
+    expect(screen.getAllByRole('button', { hidden: true })).toHaveLength(4);
+    expect(screen.getByTestId('Send melding')).toBeEnabled();
   });
 
   it('skal vise meny med info fra beslutter', async () => {
@@ -36,8 +36,8 @@ describe('<SupportMenySakIndex>', () => {
     expect(screen.getByTestId('Historikk')).toBeInTheDocument();
     expect(screen.getByTestId('Send melding')).toBeInTheDocument();
     expect(screen.getByTestId('Dokumenter')).toBeInTheDocument();
-    expect(screen.getAllByRole('button')).toHaveLength(4);
-    expect(screen.getByTestId('Send melding')).not.toBeDisabled();
+    expect(screen.getAllByRole('button', { hidden: true })).toHaveLength(4);
+    expect(screen.getByTestId('Send melding')).toBeEnabled();
   });
 
   it('skal vise send melding som ikke valgbar', async () => {
