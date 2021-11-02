@@ -48,7 +48,7 @@
     "@fpsak-frontend/utils": "1.0.0",
     "@sentry/browser": "^6.13.3",
     "axios": "0.24.0",
-    "history": "^4.9.0",
+    "history": "^5.0.3",
     "moment": "^2.29.1",
     "nav-frontend-core": "6.0.1",
     "nav-frontend-modal": "2.0.1",
