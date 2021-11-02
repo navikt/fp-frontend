@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import {
-  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+  FormattedMessage, IntlShape, useIntl,
 } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Alertstripe from 'nav-frontend-alertstriper';
@@ -9,7 +9,10 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
-const findHelpTexts = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[]): string[] => {
+const findHelpTexts = (
+  intl: IntlShape,
+  aksjonspunkter: Aksjonspunkt[],
+): string[] => {
   const helpTexts = [];
   if (aksjonspunkter && aksjonspunkter.some((a) => a.definisjon.kode === aksjonspunktCodes.VURDERE_ANNEN_YTELSE)) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.VurderAnnenYtelse' }));
@@ -25,17 +28,17 @@ const findHelpTexts = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[]): string[
 };
 
 interface OwnProps {
-  readOnly: boolean;
+  isReadOnly: boolean;
   aksjonspunkter: Aksjonspunkt[];
 }
 
-const VedtakHelpTextPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
-  readOnly,
+const VedtakHelpTextPanel: FunctionComponent<OwnProps> = ({
+  isReadOnly,
   aksjonspunkter,
 }) => {
+  const intl = useIntl();
   const helpTexts = findHelpTexts(intl, aksjonspunkter);
-  if (!readOnly && helpTexts.length > 0) {
+  if (!isReadOnly && helpTexts.length > 0) {
     return (
       <>
         <VerticalSpacer sixteenPx />
@@ -51,4 +54,4 @@ const VedtakHelpTextPanel: FunctionComponent<OwnProps & WrappedComponentProps> =
   return null;
 };
 
-export default injectIntl(VedtakHelpTextPanel);
+export default VedtakHelpTextPanel;

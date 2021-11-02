@@ -1,11 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { connect } from 'react-redux';
-import {
-  change, formValueSelector, InjectedFormProps, reduxForm,
-} from 'redux-form';
-import { bindActionCreators } from 'redux';
-import { createSelector } from 'reselect';
-import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
+import { useForm } from 'react-hook-form';
+import { IntlShape, useIntl } from 'react-intl';
 import moment from 'moment';
 
 import {
@@ -14,7 +9,7 @@ import {
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { isAvslag, isInnvilget, isOpphor } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import BehandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
-
+import { Form } from '@fpsak-frontend/form-hooks';
 import {
   AlleKodeverk, Behandling, BeregningsresultatFp, BeregningsresultatEs, Vilkar,
   Aksjonspunkt, SimuleringResultat, Kodeverk, TilbakekrevingValg,
@@ -27,7 +22,7 @@ import {
 import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
-import vedtakResultType from '../../kodeverk/vedtakResultType';
+import VedtakResultType from '../../kodeverk/vedtakResultType';
 import VedtakInnvilgetRevurderingPanel from './VedtakInnvilgetRevurderingPanel';
 import VedtakAvslagArsakOgBegrunnelsePanel from './VedtakAvslagArsakOgBegrunnelsePanel';
 import VedtakOpphorRevurderingPanel from './VedtakOpphorRevurderingPanel';
@@ -51,15 +46,16 @@ type ForhandsvisData = {
   vedtaksbrev?: { kode: string };
 }
 
-const getPreviewManueltBrevCallback = (
-  formProps: InjectedFormProps,
+const hentForhåndsvisManueltBrevCallback = (
+  isValid: boolean,
+  isDirty: boolean,
   begrunnelse: string,
   brodtekst: string,
   overskrift: string,
   skalOverstyre: boolean,
-  previewCallback: (data: ForhandsvisData) => void,
+  forhåndsvisCallback: (data: ForhandsvisData) => void,
 ) => (e: React.MouseEvent): void => {
-  if (formProps.valid || formProps.pristine) {
+  if (isValid || !isDirty) {
     const data = {
       fritekst: skalOverstyre ? brodtekst : begrunnelse,
       dokumentMal: skalOverstyre ? 'FRITKS' : undefined,
@@ -70,21 +66,20 @@ const getPreviewManueltBrevCallback = (
       } : undefined,
     };
 
-    previewCallback(data);
-  } else {
-    // @ts-ignore
-    formProps.submit();
+    forhåndsvisCallback(data);
   }
   e.preventDefault();
 };
 
-const erArsakTypeBehandlingEtterKlage = (behandlingArsakTyper: Behandling['behandlingÅrsaker'] = []): boolean => behandlingArsakTyper
+const erÅrsakTypeBehandlingEtterKlage = (
+  behandlingArsakTyper: Behandling['behandlingÅrsaker'] = [],
+): boolean => behandlingArsakTyper
   .map(({ behandlingArsakType }) => behandlingArsakType)
   .some((bt) => bt.kode === BehandlingArsakType.ETTER_KLAGE
     || bt.kode === BehandlingArsakType.KLAGE_U_INNTK
     || bt.kode === BehandlingArsakType.KLAGE_M_INNTK);
 
-const createAarsakString = (
+const lagÅrsakString = (
   revurderingAarsaker: Kodeverk[],
   getKodeverknavn: (kodeverk: Kodeverk) => string,
 ): string | undefined => {
@@ -105,12 +100,12 @@ const createAarsakString = (
   return aarsakTekstList.join(', ');
 };
 
-const isNewBehandlingResult = (
+const erNyttBehandlingResult = (
   beregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
   originaltBeregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
 ): boolean => {
-  const vedtakResult = beregningResultat ? vedtakResultType.INNVILGET : vedtakResultType.AVSLAG;
-  const vedtakResultOriginal = originaltBeregningResultat ? vedtakResultType.INNVILGET : vedtakResultType.AVSLAG;
+  const vedtakResult = beregningResultat ? VedtakResultType.INNVILGET : VedtakResultType.AVSLAG;
+  const vedtakResultOriginal = originaltBeregningResultat ? VedtakResultType.INNVILGET : VedtakResultType.AVSLAG;
   return vedtakResultOriginal !== vedtakResult;
 };
 
@@ -124,7 +119,7 @@ export const lagKonsekvensForYtelsenTekst = (
   return konsekvenser.map((k) => getKodeverknavn(k)).join(' og ');
 };
 
-const isNewAmount = (
+const erTilkjentYtelseEllerAntallBarnEndret = (
   erInnvilget: boolean,
   beregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
   originaltBeregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
@@ -150,20 +145,20 @@ const isNewAmount = (
   return false;
 };
 
-const resultText = (
+const hentResultattekst = (
   erInnvilget: boolean,
   beregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
   originaltBeregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
 ): string => {
-  if (isNewBehandlingResult(beregningResultat, originaltBeregningResultat)) {
+  if (erNyttBehandlingResult(beregningResultat, originaltBeregningResultat)) {
     return beregningResultat ? 'VedtakForm.Resultat.EndretTilInnvilget' : 'VedtakForm.Resultat.EndretTilAvslag';
   }
   if (erInnvilget) {
-    return isNewAmount(erInnvilget, beregningResultat, originaltBeregningResultat)
+    return erTilkjentYtelseEllerAntallBarnEndret(erInnvilget, beregningResultat, originaltBeregningResultat)
       ? 'VedtakForm.Resultat.EndretTilkjentYtelse'
       : 'VedtakForm.Resultat.IngenEndring';
   }
-  return isNewAmount(erInnvilget, beregningResultat, originaltBeregningResultat)
+  return erTilkjentYtelseEllerAntallBarnEndret(erInnvilget, beregningResultat, originaltBeregningResultat)
     ? 'VedtakForm.Resultat.EndretAntallBarn'
     : 'VedtakForm.Resultat.IngenEndring';
 };
@@ -178,7 +173,7 @@ const finnInvilgetRevurderingTekst = (
   originaltBeregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
 ): string => {
   if (ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD) {
-    return intl.formatMessage({ id: resultText(true, beregningResultat, originaltBeregningResultat) });
+    return intl.formatMessage({ id: hentResultattekst(true, beregningResultat, originaltBeregningResultat) });
   }
   const konsekvens = lagKonsekvensForYtelsenTekst(getKodeverknavn, konsekvenserForYtelsen);
   return `${konsekvens}${konsekvens !== '' ? tilbakekrevingText : '. '}`;
@@ -199,6 +194,31 @@ const getOpphorsdato = (
     ? behandlingsresultat.skjæringstidspunkt.dato : '';
 };
 
+const transformValues = (
+  values: FormValues,
+): RevurderingVedtakAksjonspunkter[] => values.aksjonspunktKoder.map((apCode) => ({
+  kode: validerApKodeOgHentApEnum(apCode, AksjonspunktCode.FORESLA_VEDTAK,
+    AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
+    AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL,
+    AksjonspunktCode.VURDERE_ANNEN_YTELSE,
+    AksjonspunktCode.VURDERE_DOKUMENT,
+    AksjonspunktCode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
+    AksjonspunktCode.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING),
+  begrunnelse: values.begrunnelse,
+  fritekstBrev: values.brødtekst,
+  skalBrukeOverstyrendeFritekstBrev: !!values.brødtekst,
+  overskrift: values.overskrift,
+}));
+
+const buildInitialValues = (
+  aksjonspunkter: Aksjonspunkt[],
+  behandling: Behandling,
+): FormValues => ({
+  aksjonspunktKoder: aksjonspunkter.filter((ap) => ap.kanLoses).map((ap) => ap.definisjon.kode),
+  overskrift: decodeHtmlEntity(behandling.behandlingsresultat.overskrift),
+  brødtekst: decodeHtmlEntity(behandling.behandlingsresultat.fritekstbrev),
+});
+
 interface FormValues {
   aksjonspunktKoder?: string[];
   begrunnelse?: string;
@@ -206,7 +226,7 @@ interface FormValues {
   overskrift?: string;
 }
 
-interface PureOwnProps {
+interface OwnProps {
   behandling: Behandling;
   readOnly: boolean;
   aksjonspunkter: Aksjonspunkt[];
@@ -221,29 +241,15 @@ interface PureOwnProps {
   medlemskapFom?: string;
   resultatstrukturOriginalBehandling?: BeregningsresultatFp | BeregningsresultatEs;
   submitCallback: (data: RevurderingVedtakAksjonspunkter[]) => Promise<void>;
+  formData?: FormValues;
+  setFormData: (data: FormValues) => void;
 }
 
-interface MappedOwnProps {
-  begrunnelse?: string;
-  brødtekst?: string;
-  overskrift?: string;
-  onSubmit: (formValues: FormValues) => any;
-  initialValues: FormValues;
-}
-
-interface DispatchProps {
-  clearFormField: (fieldId: string) => void;
-}
-
-export const VedtakRevurderingForm: FunctionComponent<PureOwnProps & MappedOwnProps & DispatchProps & InjectedFormProps & WrappedComponentProps> = ({
-  intl,
+const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
   behandling,
   readOnly,
   aksjonspunkter,
   previewCallback,
-  begrunnelse,
-  brødtekst,
-  overskrift,
   ytelseTypeKode,
   resultatstruktur,
   alleKodeverk,
@@ -253,27 +259,40 @@ export const VedtakRevurderingForm: FunctionComponent<PureOwnProps & MappedOwnPr
   beregningErManueltFastsatt,
   medlemskapFom,
   resultatstrukturOriginalBehandling,
-  clearFormField,
-  ...formProps
+  submitCallback,
+  formData,
+  setFormData,
 }) => {
+  const intl = useIntl();
+
+  const formMethods = useForm<FormValues>({
+    defaultValues: formData || buildInitialValues(aksjonspunkter, behandling),
+  });
+
+  const begrunnelse = formMethods.watch('begrunnelse');
+  const overskrift = formMethods.watch('overskrift');
+  const brødtekst = formMethods.watch('brødtekst');
+
+  const { formState: { isValid, isDirty } } = formMethods;
+
   const {
     behandlingsresultat, sprakkode, status, behandlingÅrsaker,
   } = behandling;
 
-  const erBehandlingEtterKlage = useMemo(() => erArsakTypeBehandlingEtterKlage(behandling.behandlingÅrsaker), [behandling.behandlingÅrsaker]);
-  const revurderingsAarsakString = useMemo(() => createAarsakString(behandlingÅrsaker
+  const erBehandlingEtterKlage = useMemo(() => erÅrsakTypeBehandlingEtterKlage(behandling.behandlingÅrsaker), [behandling.behandlingÅrsaker]);
+  const revurderingsÅrsakString = useMemo(() => lagÅrsakString(behandlingÅrsaker
     .map((arsak) => arsak.behandlingArsakType), getKodeverknavnFn(alleKodeverk, kodeverkTyper)), [behandlingÅrsaker]);
   const tilbakekrevingtekst = useMemo(() => getTilbakekrevingText(alleKodeverk, simuleringResultat, tilbakekrevingvalg), [
     simuleringResultat, tilbakekrevingvalg]);
 
   let vedtakstatusTekst = '';
-  const konsekvenserForYtelsen = behandlingsresultat !== undefined ? behandlingsresultat.konsekvenserForYtelsen : undefined;
   if (isInnvilget(behandlingsresultat.type.kode)) {
+    const konsekvenserForYtelsen = behandlingsresultat !== undefined ? behandlingsresultat.konsekvenserForYtelsen : undefined;
     vedtakstatusTekst = finnInvilgetRevurderingTekst(intl, ytelseTypeKode, getKodeverknavnFn(alleKodeverk, kodeverkTyper), tilbakekrevingtekst,
       konsekvenserForYtelsen, resultatstruktur, resultatstrukturOriginalBehandling);
   }
   if (isAvslag(behandlingsresultat.type.kode)) {
-    vedtakstatusTekst = intl.formatMessage({ id: resultText(false, resultatstruktur, resultatstrukturOriginalBehandling) });
+    vedtakstatusTekst = intl.formatMessage({ id: hentResultattekst(false, resultatstruktur, resultatstrukturOriginalBehandling) });
   }
   if (isOpphor(behandlingsresultat.type.kode)) {
     vedtakstatusTekst = intl.formatMessage({
@@ -282,8 +301,8 @@ export const VedtakRevurderingForm: FunctionComponent<PureOwnProps & MappedOwnPr
     }, { dato: moment(getOpphorsdato(resultatstruktur, medlemskapFom, behandlingsresultat)).format(DDMMYYYY_DATE_FORMAT) });
   }
 
-  const previewOverstyrtBrev = getPreviewManueltBrevCallback(formProps, begrunnelse, brødtekst, overskrift, true, previewCallback);
-  const previewDefaultBrev = getPreviewManueltBrevCallback(formProps, begrunnelse, brødtekst, overskrift, false, previewCallback);
+  const forhåndsvisOverstyrtBrev = hentForhåndsvisManueltBrevCallback(isValid, isDirty, begrunnelse, brødtekst, overskrift, true, previewCallback);
+  const forhåndsvisDefaultBrev = hentForhåndsvisManueltBrevCallback(isValid, isDirty, begrunnelse, brødtekst, overskrift, false, previewCallback);
 
   return (
     <>
@@ -293,112 +312,65 @@ export const VedtakRevurderingForm: FunctionComponent<PureOwnProps & MappedOwnPr
           behandlingsresultat={behandlingsresultat}
         />
       )}
-      <VedtakFellesPanel
-        behandling={behandling}
-        vedtakstatusTekst={vedtakstatusTekst}
-        aksjonspunkter={aksjonspunkter}
-        readOnly={readOnly}
-        previewAutomatiskBrev={previewDefaultBrev}
-        previewOverstyrtBrev={previewOverstyrtBrev}
-        tilbakekrevingtekst={tilbakekrevingtekst}
-        erBehandlingEtterKlage={erBehandlingEtterKlage}
-        handleSubmit={formProps.handleSubmit}
-        submitting={formProps.submitting}
-        clearFormField={clearFormField}
-        renderPanel={(skalBrukeOverstyrendeFritekstBrev, erInnvilget, erAvslatt, erOpphor) => {
-          if (erInnvilget) {
-            return (
-              <VedtakInnvilgetRevurderingPanel
-                ytelseTypeKode={ytelseTypeKode}
-                revurderingsAarsakString={revurderingsAarsakString}
-                readOnly={readOnly}
-                resultatstruktur={resultatstruktur}
-                sprakKode={sprakkode}
+      <Form
+        formMethods={formMethods}
+        onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
+        setDataOnUnmount={setFormData}
+      >
+        <VedtakFellesPanel
+          behandling={behandling}
+          vedtakstatusTekst={vedtakstatusTekst}
+          aksjonspunkter={aksjonspunkter}
+          readOnly={readOnly}
+          previewAutomatiskBrev={forhåndsvisDefaultBrev}
+          previewOverstyrtBrev={forhåndsvisOverstyrtBrev}
+          tilbakekrevingtekst={tilbakekrevingtekst}
+          erBehandlingEtterKlage={erBehandlingEtterKlage}
+          renderPanel={(skalBrukeOverstyrendeFritekstBrev, erInnvilget, erAvslatt, erOpphor) => {
+            if (erInnvilget) {
+              return (
+                <VedtakInnvilgetRevurderingPanel
+                  ytelseTypeKode={ytelseTypeKode}
+                  revurderingsÅrsakString={revurderingsÅrsakString}
+                  isReadOnly={readOnly}
+                  resultatstruktur={resultatstruktur}
+                  språkKode={sprakkode}
+                  behandlingsresultat={behandlingsresultat}
+                  beregningErManueltFastsatt={beregningErManueltFastsatt}
+                  skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
+                />
+              );
+            }
+
+            if (erAvslatt) {
+              return (
+                <VedtakAvslagArsakOgBegrunnelsePanel
+                  behandlingStatusKode={status.kode}
+                  vilkar={vilkar}
+                  behandlingsresultat={behandlingsresultat}
+                  språkKode={sprakkode}
+                  erReadOnly={readOnly}
+                  alleKodeverk={alleKodeverk}
+                  skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
+                />
+              );
+            }
+
+            return erOpphor ? (
+              <VedtakOpphorRevurderingPanel
+                revurderingsÅrsakString={revurderingsÅrsakString}
+                isReadOnly={readOnly}
                 behandlingsresultat={behandlingsresultat}
+                språkKode={sprakkode}
                 beregningErManueltFastsatt={beregningErManueltFastsatt}
                 skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
               />
-            );
-          }
-
-          if (erAvslatt) {
-            return (
-              <VedtakAvslagArsakOgBegrunnelsePanel
-                behandlingStatusKode={status.kode}
-                vilkar={vilkar}
-                behandlingsresultat={behandlingsresultat}
-                sprakkode={sprakkode}
-                readOnly={readOnly}
-                alleKodeverk={alleKodeverk}
-                skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
-              />
-            );
-          }
-
-          return erOpphor ? (
-            <VedtakOpphorRevurderingPanel
-              revurderingsAarsakString={revurderingsAarsakString}
-              readOnly={readOnly}
-              behandlingsresultat={behandlingsresultat}
-              sprakKode={sprakkode}
-              beregningErManueltFastsatt={beregningErManueltFastsatt}
-              skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
-            />
-          ) : null;
-        }}
-      />
+            ) : null;
+          }}
+        />
+      </Form>
     </>
   );
 };
 
-export const buildInitialValues = createSelector(
-  [(ownProps: PureOwnProps) => ownProps.aksjonspunkter,
-    (ownProps: PureOwnProps) => ownProps.behandling],
-  (aksjonspunkter, behandling): FormValues => ({
-    aksjonspunktKoder: aksjonspunkter.filter((ap) => ap.kanLoses).map((ap) => ap.definisjon.kode),
-    overskrift: decodeHtmlEntity(behandling.behandlingsresultat.overskrift),
-    brødtekst: decodeHtmlEntity(behandling.behandlingsresultat.fritekstbrev),
-  }),
-);
-
-const transformValues = (values: FormValues): RevurderingVedtakAksjonspunkter[] => values.aksjonspunktKoder.map((apCode) => ({
-  kode: validerApKodeOgHentApEnum(apCode, AksjonspunktCode.FORESLA_VEDTAK,
-    AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
-    AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL,
-    AksjonspunktCode.VURDERE_ANNEN_YTELSE,
-    AksjonspunktCode.VURDERE_DOKUMENT,
-    AksjonspunktCode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
-    AksjonspunktCode.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING),
-  begrunnelse: values.begrunnelse,
-  fritekstBrev: values.brødtekst,
-  skalBrukeOverstyrendeFritekstBrev: !!values.brødtekst,
-  overskrift: values.overskrift,
-}));
-
-export const VEDTAK_REVURDERING_FORM_NAME = 'VEDTAK_REVURDERING_FORM';
-
-const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
-  (submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
-
-const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => ({
-  onSubmit: lagSubmitFn(ownProps),
-  initialValues: buildInitialValues(ownProps),
-  ...formValueSelector(VEDTAK_REVURDERING_FORM_NAME)(
-    state,
-    'aksjonspunktKoder',
-    'begrunnelse',
-    'overskrift',
-    'brødtekst',
-  ),
-});
-
-const mapDispatchToProps = (dispatch): DispatchProps => ({
-  ...bindActionCreators({
-    clearFormField: (fieldId) => change(VEDTAK_REVURDERING_FORM_NAME, fieldId, null),
-  }, dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
-  form: VEDTAK_REVURDERING_FORM_NAME,
-  destroyOnUnmount: false,
-})(injectIntl(VedtakRevurderingForm)));
+export default VedtakRevurderingForm;

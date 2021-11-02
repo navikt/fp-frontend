@@ -99,6 +99,7 @@ export {
   maxLength,
   minLength,
   requiredIfCustomFunctionIsTrue,
+  requiredIfCustomFunctionIsTrueNew,
   requiredIfNotPristine,
   notDash,
   required,

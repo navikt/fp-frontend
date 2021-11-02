@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
 import {
@@ -32,26 +32,26 @@ interface OwnProps {
   behandlingStatusKode: string;
   vilkar: Vilkar[];
   behandlingsresultat: Behandlingsresultat;
-  sprakkode: Kodeverk;
-  readOnly: boolean;
+  språkKode: Kodeverk;
+  isReadOnly: boolean;
   ytelseTypeKode: string;
   alleKodeverk: AlleKodeverk;
   beregningErManueltFastsatt: boolean;
   skalBrukeOverstyrendeFritekstBrev: boolean;
 }
 
-const VedtakAvslagPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const VedtakAvslagPanel: FunctionComponent<OwnProps> = ({
   behandlingStatusKode,
   vilkar,
   behandlingsresultat,
-  sprakkode,
-  readOnly,
+  språkKode,
+  isReadOnly,
   ytelseTypeKode,
   alleKodeverk,
   beregningErManueltFastsatt,
   skalBrukeOverstyrendeFritekstBrev,
 }) => {
+  const intl = useIntl();
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
   const fritekstfeltForSoknadsfrist = behandlingStatusKode === behandlingStatus.BEHANDLING_UTREDES
     && hasIkkeOppfyltSoknadsfristvilkar(vilkar) && ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD;
@@ -70,14 +70,15 @@ const VedtakAvslagPanel: FunctionComponent<OwnProps & WrappedComponentProps> = (
       {(!skalBrukeOverstyrendeFritekstBrev
         && (fritekstfeltForSoknadsfrist || behandlingsresultat.avslagsarsakFritekst || beregningErManueltFastsatt)) && (
         <VedtakFritekstPanel
-          readOnly={readOnly}
-          sprakkode={sprakkode}
+          isReadOnly={isReadOnly}
+          språkKode={språkKode}
           behandlingsresultat={behandlingsresultat}
           labelTextCode={textCode}
+          beregningErManueltFastsatt={beregningErManueltFastsatt}
         />
       )}
     </>
   );
 };
 
-export default injectIntl(VedtakAvslagPanel);
+export default VedtakAvslagPanel;
