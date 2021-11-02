@@ -24,7 +24,7 @@ describe('<OpptjeningFaktaIndex>', () => {
     expect(screen.getAllByText('Næring')).toHaveLength(2);
 
     expect(screen.getByText('Oppdater')).toBeDisabled();
-    expect(screen.getByText('Avbryt')).not.toBeDisabled();
+    expect(screen.getByText('Avbryt')).toBeEnabled();
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
     userEvent.click(screen.getAllByRole('radio')[0]);
@@ -34,7 +34,7 @@ describe('<OpptjeningFaktaIndex>', () => {
 
     userEvent.click(screen.getByText('Oppdater'));
 
-    await waitFor(() => expect(screen.queryByText('Bekreft og fortsett')).not.toBeDisabled());
+    expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
     expect(screen.queryByText('Detaljer for valgt aktivitet')).not.toBeInTheDocument();
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
@@ -75,7 +75,7 @@ describe('<OpptjeningFaktaIndex>', () => {
 
     userEvent.click(screen.getByAltText('Åpne info om første periode'));
 
-    expect(await screen.findAllByText('Næring')).toHaveLength(1);
+    expect(await screen.findAllByText('Næring')[0]).toBeInTheDocument();
   });
 
   it('skal ikke vise aksjonspunkt-tekst og knapper når det ikke finnes aksjonspunkt', async () => {
