@@ -5,9 +5,8 @@ import {
   ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, Opptjening,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
-import OpptjeningInfoPanel from './components/OpptjeningInfoPanel';
+import OpptjeningFaktaPanel from './components/OpptjeningFaktaPanel';
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
@@ -32,23 +31,30 @@ const OpptjeningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps
   arbeidsgiverOpplysningerPerId,
   formData,
   setFormData,
-}) => (
-  <RawIntlProvider value={intl}>
-    <ReduxWrapper formName="OpptjeningFaktaIndex" formData={formData} setFormData={setFormData}>
-      <OpptjeningInfoPanel
-        fastsattOpptjening={opptjening ? opptjening.fastsattOpptjening : undefined}
-        opptjeningAktiviteter={opptjening ? opptjening.opptjeningAktivitetList : undefined}
-        dokStatus={utlandDokStatus ? utlandDokStatus.dokStatus : undefined}
-        aksjonspunkter={aksjonspunkter}
-        submitCallback={submitCallback}
+}) => {
+  const fastsattOpptjening = opptjening ? opptjening.fastsattOpptjening : undefined;
+  const dokStatus = utlandDokStatus ? utlandDokStatus.dokStatus : undefined;
+  const opptjeningAktiviteter = opptjening ? opptjening.opptjeningAktivitetList : undefined;
+  return (
+    <RawIntlProvider value={intl}>
+      <OpptjeningFaktaPanel
+        opptjeningFomDato={fastsattOpptjening ? fastsattOpptjening.opptjeningFom : undefined}
+        opptjeningTomDato={fastsattOpptjening ? fastsattOpptjening.opptjeningTom : undefined}
+        dokStatus={dokStatus}
         readOnly={readOnly}
+        hasOpenAksjonspunkter={harApneAksjonspunkter}
+        hasAksjonspunkt={aksjonspunkter[0] !== undefined}
         alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
         alleKodeverk={alleKodeverk}
-        hasOpenAksjonspunkter={harApneAksjonspunkter}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        opptjeningAktiviteter={opptjeningAktiviteter}
+        fastsattOpptjening={fastsattOpptjening}
+        submitCallback={submitCallback}
+        formData={formData}
+        setFormData={setFormData}
       />
-    </ReduxWrapper>
-  </RawIntlProvider>
-);
+    </RawIntlProvider>
+  );
+};
 
 export default OpptjeningFaktaIndex;
