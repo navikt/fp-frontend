@@ -75,7 +75,7 @@ describe('<OpptjeningFaktaIndex>', () => {
 
     userEvent.click(screen.getByAltText('Åpne info om første periode'));
 
-    // expect(await screen.findAllByText('Næring')[0]).toBeInTheDocument();
+    expect(await screen.findByText('Næring')).toBeInTheDocument();
   });
 
   it('skal ikke vise aksjonspunkt-tekst og knapper når det ikke finnes aksjonspunkt', async () => {
