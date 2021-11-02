@@ -1,14 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 
-import styles from './dateContainer.less';
+import styles from './datoPanel.less';
 
 interface OwnProps {
   opptjeningFomDato: string;
   opptjeningTomDato: string;
 }
 
-const DateContainer: FunctionComponent<OwnProps> = ({
+const DatoPanel: FunctionComponent<OwnProps> = ({
   opptjeningFomDato,
   opptjeningTomDato,
 }) => (
@@ -29,4 +29,4 @@ const DateContainer: FunctionComponent<OwnProps> = ({
   </div>
 );
 
-export default DateContainer;
+export default DatoPanel;

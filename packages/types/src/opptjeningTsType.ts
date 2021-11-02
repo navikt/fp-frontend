@@ -2,19 +2,15 @@ import Kodeverk from './kodeverkTsType';
 
 export type OpptjeningAktivitet = {
   aktivitetType: Kodeverk;
-  originalFom?: string;
-  originalTom?: string;
   opptjeningFom: string;
   opptjeningTom: string;
   arbeidsgiverReferanse: string;
   arbeidsforholdRef: string;
   stillingsandel: number;
   naringRegistreringsdato: string;
-  erManueltOpprettet: boolean;
   erGodkjent: boolean;
   erEndret: boolean;
   begrunnelse?: string;
-  erPeriodeEndret: boolean;
 };
 
 export type FastsattOpptjeningAktivitet = {
