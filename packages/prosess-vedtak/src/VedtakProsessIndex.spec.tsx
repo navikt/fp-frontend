@@ -36,10 +36,11 @@ describe('<VedtakProsessIndex>', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, []);
   });
 
-  it('skal redigere vedtaksbrev, forhåndsvise og så fatte vedtak', async () => {
+  it('skal redigere vedtaksbrev og så fatte vedtak', async () => {
     const lagre = jest.fn();
+    const forhåndsvis = jest.fn();
 
-    const utils = render(<InnvilgetForeldrepengerTilGodkjenningForSaksbehandler submitCallback={lagre} />);
+    const utils = render(<InnvilgetForeldrepengerTilGodkjenningForSaksbehandler submitCallback={lagre} previewCallback={forhåndsvis} />);
 
     expect(await screen.findByText('Vedtak')).toBeInTheDocument();
 
@@ -53,6 +54,17 @@ describe('<VedtakProsessIndex>', () => {
 
     const innholdInput = utils.getByLabelText('Innhold i brev til søker');
     userEvent.type(innholdInput, 'Dette er innhold');
+
+    userEvent.click(screen.getByText('Forhåndsvis manuelt brev'));
+
+    await waitFor(() => expect(forhåndsvis).toHaveBeenCalledTimes(1));
+    expect(forhåndsvis).toHaveBeenNthCalledWith(1, {
+      dokumentMal: 'FRITKS',
+      fritekst: 'Dette er innhold',
+      gjelderVedtak: true,
+      tittel: 'Dette er en overskrift',
+      vedtaksbrev: undefined,
+    });
 
     userEvent.click(screen.getByText('Fatt vedtak'));
 

@@ -97,8 +97,9 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
 
   const [skalBrukeManueltBrev, toggleSkalBrukeManueltBrev] = useState(behandlingsresultat.vedtaksbrev && behandlingsresultat.vedtaksbrev.kode === 'FRITEKST');
   const [skalViseModal, toggleVisModal] = useState(false);
-  const onToggleOverstyring = useCallback(() => {
+  const onToggleOverstyring = useCallback((e) => {
     toggleSkalBrukeManueltBrev(true);
+    e.preventDefault();
   }, []);
   const avsluttRedigering = useCallback(() => {
     toggleSkalBrukeManueltBrev(false);
