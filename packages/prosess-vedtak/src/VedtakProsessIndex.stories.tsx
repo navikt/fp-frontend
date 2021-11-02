@@ -89,6 +89,7 @@ const Template: Story<{
     'beregningsresultat-foreldrepenger'?: BeregningsresultatFp;
   };
   vilkar?: Vilkar[];
+  previewCallback?: (data: any) => Promise<any>,
 }> = ({
   behandling,
   beregningresultatForeldrepenger,
@@ -100,6 +101,7 @@ const Template: Story<{
   aksjonspunkter = [],
   beregningsresultatOriginalBehandling,
   vilkar,
+  previewCallback,
 }) => (
   <VedtakProsessIndex
     behandling={behandling}
@@ -115,7 +117,7 @@ const Template: Story<{
     beregningresultatForeldrepenger={beregningresultatForeldrepenger}
     beregningresultatEngangsstonad={beregningresultatEngangsstonad}
     medlemskap={{ fom: '2019-01-01' } as Medlemskap}
-    previewCallback={action('button-click') as any}
+    previewCallback={previewCallback || action('button-click') as any}
     ytelseTypeKode={ytelseTypeKode}
     alleKodeverk={alleKodeverk as any}
     beregningsgrunnlag={beregningsgrunnlag}
