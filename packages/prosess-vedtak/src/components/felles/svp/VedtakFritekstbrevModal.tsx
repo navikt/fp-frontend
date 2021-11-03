@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import Modal from 'nav-frontend-modal';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Column, Row } from 'nav-frontend-grid';
@@ -12,7 +12,10 @@ import { isAvslag, isOpphor } from '@fpsak-frontend/kodeverk/src/behandlingResul
 
 import styles from './vedtakFritekstbrevModal.less';
 
-const isFritekstbrevRequired = (readOnly: boolean, behandlingsresultat?: Behandlingsresultat): boolean => {
+const isFritekstbrevRequired = (
+  readOnly: boolean,
+  behandlingsresultat?: Behandlingsresultat,
+): boolean => {
   if (readOnly) {
     return false;
   }
@@ -39,55 +42,56 @@ interface OwnProps {
  * Se https://jira.adeo.no/browse/TFP-738 for mer informasjon.
  *
  */
-export const VedtakFritekstbrevModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const VedtakFritekstbrevModal: FunctionComponent<OwnProps> = ({
   readOnly,
   behandlingsresultat,
 }) => {
+  const intl = useIntl();
   const fritektsbrevRequired = isFritekstbrevRequired(readOnly, behandlingsresultat);
   const [showModal, settShowModal] = useState(fritektsbrevRequired);
+
+  if (!fritektsbrevRequired) {
+    return null;
+  }
+
   return (
-    <>
-      { fritektsbrevRequired && (
-        <Modal
-          className={styles.modal}
-          isOpen={showModal}
-          closeButton={false}
-          contentLabel="VedtakForm.SvpFritektsBrevModal.ModalDescription"
-          onRequestClose={() => {
-            settShowModal(false);
-          }}
-          shouldCloseOnOverlayClick={false}
-        >
-          <Row>
-            <Column xs="1">
-              <Image
-                className={styles.image}
-                src={infoImageUrl}
-                alt={intl.formatMessage({ id: 'VedtakForm.SvpFritektsBrevModal.IngenAutomatiskVedtaksbrevImage' })}
-              />
-              <div className={styles.divider} />
-            </Column>
-            <Column xs="9">
-              <Normaltekst>
-                <FormattedMessage id="VedtakForm.SvpFritektsBrevModal.IngenAutomatiskVedtaksbrev" />
-              </Normaltekst>
-            </Column>
-            <Column xs="2">
-              <Hovedknapp
-                mini
-                className={styles.button}
-                onClick={(event) => { event.preventDefault(); settShowModal(false); }}
-                autoFocus
-              >
-                <FormattedMessage id="VedtakForm.SvpFritektsBrevModal.Ok" />
-              </Hovedknapp>
-            </Column>
-          </Row>
-        </Modal>
-      )}
-    </>
+    <Modal
+      className={styles.modal}
+      isOpen={showModal}
+      closeButton={false}
+      contentLabel="VedtakForm.SvpFritektsBrevModal.ModalDescription"
+      onRequestClose={() => {
+        settShowModal(false);
+      }}
+      shouldCloseOnOverlayClick={false}
+    >
+      <Row>
+        <Column xs="1">
+          <Image
+            className={styles.image}
+            src={infoImageUrl}
+            alt={intl.formatMessage({ id: 'VedtakForm.SvpFritektsBrevModal.IngenAutomatiskVedtaksbrevImage' })}
+          />
+          <div className={styles.divider} />
+        </Column>
+        <Column xs="9">
+          <Normaltekst>
+            <FormattedMessage id="VedtakForm.SvpFritektsBrevModal.IngenAutomatiskVedtaksbrev" />
+          </Normaltekst>
+        </Column>
+        <Column xs="2">
+          <Hovedknapp
+            mini
+            className={styles.button}
+            onClick={(event) => { event.preventDefault(); settShowModal(false); }}
+            autoFocus
+          >
+            <FormattedMessage id="VedtakForm.SvpFritektsBrevModal.Ok" />
+          </Hovedknapp>
+        </Column>
+      </Row>
+    </Modal>
   );
 };
 
-export default injectIntl(VedtakFritekstbrevModal);
+export default VedtakFritekstbrevModal;

@@ -1,7 +1,8 @@
 import React, {
   FunctionComponent, useMemo, useState, useCallback, ReactNode, MouseEvent,
 } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { useFormContext } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Element, Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
@@ -25,12 +26,18 @@ import VedtakHelpTextPanel from './VedtakHelpTextPanel';
 
 import styles from './vedtakFellesPanel.less';
 
-export const getTextCode = (behandlingStatus: string): string => (behandlingStatus === behandlingStatusCode.AVSLUTTET
+export const finnTekstkodeFraBehandlingstatus = (
+  behandlingStatus: string,
+): string => (behandlingStatus === behandlingStatusCode.AVSLUTTET
   || behandlingStatus === behandlingStatusCode.IVERKSETTER_VEDTAK ? 'VedtakForm.vedtak' : 'VedtakForm.ForslagTilVedtak');
 
-const kanSendesTilGodkjenning = (behandlingStatusKode: string): boolean => behandlingStatusKode === behandlingStatusCode.BEHANDLING_UTREDES;
+const kanSendesTilGodkjenning = (
+  behandlingStatusKode: string,
+): boolean => behandlingStatusKode === behandlingStatusCode.BEHANDLING_UTREDES;
 
-const finnKnappetekstkode = (aksjonspunkter: Aksjonspunkt[]): string => {
+const finnKnappetekstkode = (
+  aksjonspunkter: Aksjonspunkt[],
+): string => {
   if (aksjonspunkter && aksjonspunkter.some((ap) => ap.erAktivt && ap.toTrinnsBehandling)) {
     return 'VedtakForm.TilGodkjenning';
   }
@@ -38,10 +45,15 @@ const finnKnappetekstkode = (aksjonspunkter: Aksjonspunkt[]): string => {
   return 'VedtakForm.FattVedtak';
 };
 
-const finnSkalViseLink = (behandlingsresultat: Behandlingsresultat): boolean => !behandlingsresultat.avslagsarsak
+const finnSkalViseLink = (
+  behandlingsresultat: Behandlingsresultat,
+): boolean => !behandlingsresultat.avslagsarsak
   || (behandlingsresultat.avslagsarsak && behandlingsresultat.avslagsarsak.kode !== avslagsarsakCodes.INGEN_BEREGNINGSREGLER);
 
-const harIkkeKonsekvenserForYtelsen = (konsekvenserForYtelsenKoder: string[], behandlingResultat?: Behandling['behandlingsresultat']): boolean => {
+const harIkkeKonsekvenserForYtelsen = (
+  konsekvenserForYtelsenKoder: string[],
+  behandlingResultat?: Behandling['behandlingsresultat'],
+): boolean => {
   if (!behandlingResultat) {
     return true;
   }
@@ -61,14 +73,10 @@ interface OwnProps {
   previewAutomatiskBrev: (e: MouseEvent) => void;
   previewOverstyrtBrev: (e: MouseEvent) => void;
   tilbakekrevingtekst?: string;
-  clearFormField: (fieldId: string) => void;
-  handleSubmit: (any) => void;
-  submitting: boolean;
   vedtakstatusTekst?: string;
 }
 
-const VedtakFellesPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
   behandling,
   aksjonspunkter,
   readOnly,
@@ -77,25 +85,27 @@ const VedtakFellesPanel: FunctionComponent<OwnProps & WrappedComponentProps> = (
   previewOverstyrtBrev,
   tilbakekrevingtekst,
   erBehandlingEtterKlage,
-  handleSubmit,
-  submitting,
   vedtakstatusTekst,
-  clearFormField,
 }) => {
+  const intl = useIntl();
+
+  const { setValue, formState: { isSubmitting } } = useFormContext();
+
   const {
     behandlingsresultat, behandlingPaaVent, sprakkode, status,
   } = behandling;
 
   const [skalBrukeManueltBrev, toggleSkalBrukeManueltBrev] = useState(behandlingsresultat.vedtaksbrev && behandlingsresultat.vedtaksbrev.kode === 'FRITEKST');
   const [skalViseModal, toggleVisModal] = useState(false);
-  const onToggleOverstyring = useCallback(() => {
+  const onToggleOverstyring = useCallback((e) => {
     toggleSkalBrukeManueltBrev(true);
+    e.preventDefault();
   }, []);
   const avsluttRedigering = useCallback(() => {
     toggleSkalBrukeManueltBrev(false);
     toggleVisModal(false);
-    clearFormField('overskrift');
-    clearFormField('brødtekst');
+    setValue('overskrift', undefined);
+    setValue('brødtekst', undefined);
   }, []);
 
   const erInnvilget = isInnvilget(behandlingsresultat.type.kode);
@@ -125,7 +135,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps & WrappedComponentProps> = (
             </FlexColumn>
           )}
           <FlexColumn>
-            <Undertittel><FormattedMessage id={getTextCode(status.kode)} /></Undertittel>
+            <Undertittel><FormattedMessage id={finnTekstkodeFraBehandlingstatus(status.kode)} /></Undertittel>
           </FlexColumn>
         </FlexRow>
       </FlexContainer>
@@ -174,14 +184,14 @@ const VedtakFellesPanel: FunctionComponent<OwnProps & WrappedComponentProps> = (
           </FlexColumn>
         </FlexRow>
       </FlexContainer>
-      <VedtakHelpTextPanel aksjonspunkter={aksjonspunkter} readOnly={readOnly} />
+      <VedtakHelpTextPanel aksjonspunkter={aksjonspunkter} isReadOnly={readOnly} />
       <VerticalSpacer twentyPx />
       {renderPanel(skalBrukeManueltBrev, erInnvilget, erAvslatt, erOpphor)}
       {skalBrukeManueltBrev && (
         <ManueltVedtaksbrevPanel
-          readOnly={readOnly}
-          sprakkode={sprakkode}
-          previewOverstyrtBrev={previewOverstyrtBrev}
+          isReadOnly={readOnly}
+          språkKode={sprakkode}
+          forhåndsvisOverstyrtBrev={previewOverstyrtBrev}
           skalViseLink={skalViseLink}
         />
       )}
@@ -194,9 +204,9 @@ const VedtakFellesPanel: FunctionComponent<OwnProps & WrappedComponentProps> = (
                 {!readOnly && (
                   <Hovedknapp
                     mini
-                    onClick={handleSubmit}
-                    disabled={behandlingPaaVent || submitting}
-                    spinner={submitting}
+                    htmlType="submit"
+                    disabled={behandlingPaaVent || isSubmitting}
+                    spinner={isSubmitting}
                   >
                     <FormattedMessage id={finnKnappetekstkode(aksjonspunkter)} />
                   </Hovedknapp>
@@ -221,4 +231,4 @@ const VedtakFellesPanel: FunctionComponent<OwnProps & WrappedComponentProps> = (
   );
 };
 
-export default injectIntl(VedtakFellesPanel);
+export default VedtakFellesPanel;

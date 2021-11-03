@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { Element, Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -16,47 +16,50 @@ interface OwnProps {
   resultatstruktur?: BeregningsresultatFp | BeregningsresultatEs;
   behandlingsresultat: Behandlingsresultat;
   ytelseTypeKode: string;
-  sprakkode?: Kodeverk;
-  readOnly: boolean;
+  språkKode?: Kodeverk;
+  isReadOnly: boolean;
   skalBrukeOverstyrendeFritekstBrev: boolean;
   beregningErManueltFastsatt: boolean;
 }
 
-const VedtakInnvilgetPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const VedtakInnvilgetPanel: FunctionComponent<OwnProps> = ({
   behandlingsresultat,
   ytelseTypeKode,
-  sprakkode,
-  readOnly,
+  språkKode,
+  isReadOnly,
   skalBrukeOverstyrendeFritekstBrev,
   beregningErManueltFastsatt,
   resultatstruktur = {},
-}) => (
-  <>
-    {ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD && resultatstruktur && 'antallBarn' in resultatstruktur && (
-      <>
-        <Row>
-          <Column xs="4">
-            <Undertekst>{intl.formatMessage({ id: 'VedtakForm.beregnetTilkjentYtelse' })}</Undertekst>
-            <Element>{formatCurrencyWithKr((resultatstruktur as BeregningsresultatEs).beregnetTilkjentYtelse)}</Element>
-          </Column>
-          <Column xs="8">
-            <Undertekst>{intl.formatMessage({ id: 'VedtakForm.AntallBarn' })}</Undertekst>
-            <Element>{resultatstruktur.antallBarn}</Element>
-          </Column>
-        </Row>
-        <VerticalSpacer sixteenPx />
-      </>
-    )}
-    {beregningErManueltFastsatt && !skalBrukeOverstyrendeFritekstBrev && (
-      <VedtakFritekstPanel
-        readOnly={readOnly}
-        sprakkode={sprakkode}
-        behandlingsresultat={behandlingsresultat}
-        labelTextCode="VedtakForm.Fritekst.Beregningsgrunnlag"
-      />
-    )}
-  </>
-);
+}) => {
+  const intl = useIntl();
+  return (
+    <>
+      {ytelseTypeKode === fagsakYtelseType.ENGANGSSTONAD && resultatstruktur && 'antallBarn' in resultatstruktur && (
+        <>
+          <Row>
+            <Column xs="4">
+              <Undertekst>{intl.formatMessage({ id: 'VedtakForm.beregnetTilkjentYtelse' })}</Undertekst>
+              <Element>{formatCurrencyWithKr((resultatstruktur as BeregningsresultatEs).beregnetTilkjentYtelse)}</Element>
+            </Column>
+            <Column xs="8">
+              <Undertekst>{intl.formatMessage({ id: 'VedtakForm.AntallBarn' })}</Undertekst>
+              <Element>{resultatstruktur.antallBarn}</Element>
+            </Column>
+          </Row>
+          <VerticalSpacer sixteenPx />
+        </>
+      )}
+      {beregningErManueltFastsatt && !skalBrukeOverstyrendeFritekstBrev && (
+        <VedtakFritekstPanel
+          isReadOnly={isReadOnly}
+          språkKode={språkKode}
+          behandlingsresultat={behandlingsresultat}
+          labelTextCode="VedtakForm.Fritekst.Beregningsgrunnlag"
+          beregningErManueltFastsatt={beregningErManueltFastsatt}
+        />
+      )}
+    </>
+  );
+};
 
-export default injectIntl(VedtakInnvilgetPanel);
+export default VedtakInnvilgetPanel;

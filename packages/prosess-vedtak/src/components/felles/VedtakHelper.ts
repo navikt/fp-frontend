@@ -7,7 +7,10 @@ import {
   AlleKodeverk, SimuleringResultat, TilbakekrevingValg, Vilkar,
 } from '@fpsak-frontend/types';
 
-const tilbakekrevingMedInntrekk = (tilbakekrevingKode: string, simuleringResultat: SimuleringResultat): boolean => tilbakekrevingKode
+const tilbakekrevingMedInntrekk = (
+  tilbakekrevingKode: string,
+  simuleringResultat: SimuleringResultat,
+): boolean => tilbakekrevingKode
   === tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD
   && (!!simuleringResultat.simuleringResultat.sumInntrekk || !!simuleringResultat.simuleringResultatUtenInntrekk);
 
@@ -26,5 +29,7 @@ export const getTilbakekrevingText = (
   return '';
 };
 
-export const hasIkkeOppfyltSoknadsfristvilkar = (vilkar: Vilkar[]): boolean => vilkar.some((v) => v.vilkarType.kode === vilkarType.SOKNADFRISTVILKARET
+export const hasIkkeOppfyltSoknadsfristvilkar = (
+  vilkar: Vilkar[],
+): boolean => vilkar.some((v) => v.vilkarType.kode === vilkarType.SOKNADFRISTVILKARET
   && v.vilkarStatus.kode === vilkarUtfallType.IKKE_OPPFYLT);

@@ -7,35 +7,38 @@ import { Kodeverk, Behandlingsresultat } from '@fpsak-frontend/types';
 import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
 
 interface OwnProps {
-  revurderingsAarsakString?: string;
-  sprakKode?: Kodeverk;
-  readOnly: boolean;
+  revurderingsÅrsakString?: string;
+  språkKode?: Kodeverk;
+  isReadOnly: boolean;
   behandlingsresultat: Behandlingsresultat;
   beregningErManueltFastsatt: boolean;
   skalBrukeOverstyrendeFritekstBrev: boolean;
 }
 
 const VedtakOpphorRevurderingPanel: FunctionComponent<OwnProps> = ({
-  revurderingsAarsakString,
-  sprakKode,
-  readOnly,
+  revurderingsÅrsakString,
+  språkKode,
+  isReadOnly,
   behandlingsresultat,
   beregningErManueltFastsatt,
   skalBrukeOverstyrendeFritekstBrev,
 }) => (
   <>
-    <Undertekst><FormattedMessage id="VedtakForm.RevurderingFP.Aarsak" /></Undertekst>
-    {revurderingsAarsakString && (
+    <Undertekst>
+      <FormattedMessage id="VedtakForm.RevurderingFP.Aarsak" />
+    </Undertekst>
+    {revurderingsÅrsakString && (
       <Normaltekst>
-        {revurderingsAarsakString}
+        {revurderingsÅrsakString}
       </Normaltekst>
     )}
     {!skalBrukeOverstyrendeFritekstBrev && beregningErManueltFastsatt && (
       <VedtakFritekstPanel
-        readOnly={readOnly}
-        sprakkode={sprakKode}
+        isReadOnly={isReadOnly}
+        språkKode={språkKode}
         behandlingsresultat={behandlingsresultat}
         labelTextCode="VedtakForm.Fritekst.Beregningsgrunnlag"
+        beregningErManueltFastsatt={beregningErManueltFastsatt}
       />
     )}
   </>

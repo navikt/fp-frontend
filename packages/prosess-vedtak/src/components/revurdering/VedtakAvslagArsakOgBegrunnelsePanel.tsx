@@ -1,5 +1,6 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useFormContext } from 'react-hook-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
@@ -9,9 +10,9 @@ import {
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import { TextAreaField } from '@fpsak-frontend/form';
+import { TextAreaField } from '@fpsak-frontend/form-hooks';
 import {
-  decodeHtmlEntity, getLanguageFromSprakkode, hasValidText, maxLength, minLength, requiredIfNotPristine, getKodeverknavnFn,
+  decodeHtmlEntity, getLanguageFromSprakkode, hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew, getKodeverknavnFn,
 } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
@@ -22,7 +23,7 @@ import styles from './vedtakAvslagArsakOgBegrunnelsePanel.less';
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
 
-export const getAvslagArsak = (
+const getAvslagArsak = (
   vilkar: Vilkar[],
   behandlingsresultat: Behandlingsresultat,
   getKodeverknavn: (kodeverk: Kodeverk, undertype?: string) => string,
@@ -35,12 +36,14 @@ export const getAvslagArsak = (
   return `${getKodeverknavn(avslatteVilkar[0].vilkarType)}: ${getKodeverknavn(behandlingsresultat.avslagsarsak, avslatteVilkar[0].vilkarType.kode)}`;
 };
 
+const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) => value !== undefined || isDirty;
+
 interface OwnProps {
   behandlingStatusKode: string;
   vilkar?: Vilkar[];
   behandlingsresultat: Behandlingsresultat;
-  sprakkode: Kodeverk;
-  readOnly: boolean;
+  språkKode: Kodeverk;
+  erReadOnly: boolean;
   alleKodeverk: AlleKodeverk;
   skalBrukeOverstyrendeFritekstBrev: boolean;
 }
@@ -49,19 +52,25 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
   behandlingStatusKode,
   vilkar,
   behandlingsresultat,
-  sprakkode,
-  readOnly,
+  språkKode,
+  erReadOnly,
   alleKodeverk,
   skalBrukeOverstyrendeFritekstBrev,
 }) => {
+  const intl = useIntl();
+  const { formState: { isDirty } } = useFormContext();
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+
+  const isRequiredFn = getIsBegrunnelseRequired(isDirty);
+  const avslagsårsak = getAvslagArsak(vilkar, behandlingsresultat, getKodeverknavn);
+
   return (
     <>
-      {getAvslagArsak(vilkar, behandlingsresultat, getKodeverknavn) && (
+      {avslagsårsak && (
         <>
           <Undertekst><FormattedMessage id="VedtakForm.ArsakTilAvslag" /></Undertekst>
           <Normaltekst>
-            {getAvslagArsak(vilkar, behandlingsresultat, getKodeverknavn)}
+            {avslagsårsak}
           </Normaltekst>
           <VerticalSpacer sixteenPx />
         </>
@@ -74,19 +83,19 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
               <TextAreaField
                 name="begrunnelse"
                 label={<FormattedMessage id="VedtakForm.Fritekst" />}
-                validate={[requiredIfNotPristine, minLength3, maxLength1500, hasValidText]}
+                validate={[requiredIfCustomFunctionIsTrueNew(isRequiredFn), minLength3, maxLength1500, hasValidText]}
                 maxLength={1500}
-                readOnly={readOnly}
+                readOnly={erReadOnly}
                 badges={[{
                   type: 'fokus',
-                  text: getLanguageFromSprakkode(sprakkode),
-                  title: 'Malform.Beskrivelse',
+                  text: getLanguageFromSprakkode(språkKode),
+                  titleText: intl.formatMessage({ id: 'Malform.Beskrivelse' }),
                 }]}
               />
             </Column>
           </Row>
       )}
-      {readOnly && behandlingsresultat.avslagsarsakFritekst && (
+      {erReadOnly && behandlingsresultat.avslagsarsakFritekst && (
         <span>
           <VerticalSpacer twentyPx />
           <Undertekst><FormattedMessage id="VedtakForm.Fritekst" /></Undertekst>
