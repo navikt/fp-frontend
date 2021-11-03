@@ -33,10 +33,16 @@ describe('<VedtakProsessIndex>', () => {
     userEvent.click(screen.getByText('Fatt vedtak'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, []);
+    expect(lagre).toHaveBeenNthCalledWith(1, [{
+      begrunnelse: undefined,
+      fritekstBrev: undefined,
+      kode: '5015',
+      overskrift: undefined,
+      skalBrukeOverstyrendeFritekstBrev: false,
+    }]);
   });
 
-  it('skal redigere vedtaksbrev og så fatte vedtak', async () => {
+  it('skal redigere vedtaksbrev, forhåndsvise og så fatte vedtak', async () => {
     const lagre = jest.fn();
     const forhåndsvis = jest.fn();
 
@@ -49,11 +55,17 @@ describe('<VedtakProsessIndex>', () => {
     expect(await screen.findByText('Manuelt vedtaksbrev')).toBeInTheDocument();
     expect(screen.getByText('Tekst fra det automatisk genererte brevet kan kopieres og limes inn i det manuelle brevet')).toBeInTheDocument();
 
+    userEvent.click(screen.getByText('Fatt vedtak'));
+
+    expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
+
     const overskriftInput = utils.getByLabelText('Overskrift');
     userEvent.type(overskriftInput, 'Dette er en overskrift');
 
     const innholdInput = utils.getByLabelText('Innhold i brev til søker');
     userEvent.type(innholdInput, 'Dette er innhold');
+
+    await waitFor(() => expect(screen.queryByText('Feltet må fylles ut')).not.toBeInTheDocument());
 
     userEvent.click(screen.getByText('Forhåndsvis manuelt brev'));
 
@@ -67,8 +79,56 @@ describe('<VedtakProsessIndex>', () => {
     });
 
     userEvent.click(screen.getByText('Fatt vedtak'));
-
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, []);
+    expect(lagre).toHaveBeenNthCalledWith(1, [{
+      begrunnelse: undefined,
+      fritekstBrev: 'Dette er innhold',
+      kode: '5015',
+      overskrift: 'Dette er en overskrift',
+      skalBrukeOverstyrendeFritekstBrev: true,
+    }]);
+  });
+
+  it('skal redigere vedtaksbrev, forkaste det via modal og så fatte vedtak', async () => {
+    const lagre = jest.fn();
+
+    const utils = render(<InnvilgetForeldrepengerTilGodkjenningForSaksbehandler submitCallback={lagre} />);
+
+    expect(await screen.findByText('Vedtak')).toBeInTheDocument();
+
+    userEvent.click(screen.getByText('Rediger vedtaksbrev'));
+
+    expect(await screen.findByText('Manuelt vedtaksbrev')).toBeInTheDocument();
+    expect(screen.getByText('Tekst fra det automatisk genererte brevet kan kopieres og limes inn i det manuelle brevet')).toBeInTheDocument();
+
+    userEvent.click(screen.getByText('Fatt vedtak'));
+
+    expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
+
+    const overskriftInput = utils.getByLabelText('Overskrift');
+    userEvent.type(overskriftInput, 'Dette er en overskrift');
+
+    const innholdInput = utils.getByLabelText('Innhold i brev til søker');
+    userEvent.type(innholdInput, 'Dette er innhold');
+
+    await waitFor(() => expect(screen.queryByText('Feltet må fylles ut')).not.toBeInTheDocument());
+
+    userEvent.click(screen.getByText('Forkast manuelt brev'));
+
+    expect(await screen.findByText('Dersom du forkaster det manuelle brevet, vil det erstattes av det automatisk genererte brevet')).toBeInTheDocument();
+
+    userEvent.click(screen.getAllByText('Forkast manuelt brev')[1]);
+
+    await waitFor(() => expect(screen.queryByText('Manuelt vedtaksbrev')).not.toBeInTheDocument());
+
+    userEvent.click(screen.getByText('Fatt vedtak'));
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    expect(lagre).toHaveBeenNthCalledWith(1, [{
+      begrunnelse: undefined,
+      fritekstBrev: undefined,
+      kode: '5015',
+      overskrift: undefined,
+      skalBrukeOverstyrendeFritekstBrev: false,
+    }]);
   });
 });

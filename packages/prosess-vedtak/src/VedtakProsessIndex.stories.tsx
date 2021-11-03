@@ -64,6 +64,14 @@ const defaultVilkar = [{
   overstyrbar: true,
 }] as Vilkar[];
 
+const defaultAksjonspunkter = [{
+  definisjon: {
+    kode: aksjonspunktCodes.FORESLA_VEDTAK,
+    kodeverk: '',
+  },
+  kanLoses: true,
+}] as Aksjonspunkt[];
+
 const defaultBeregningresultatForeldrepenger = {
   antallBarn: 1,
   beregnetTilkjentYtelse: 10000,
@@ -98,14 +106,14 @@ const Template: Story<{
   isReadOnly,
   submitCallback,
   beregningsgrunnlag,
-  aksjonspunkter = [],
+  aksjonspunkter,
   beregningsresultatOriginalBehandling,
   vilkar,
   previewCallback,
 }) => (
   <VedtakProsessIndex
     behandling={behandling}
-    aksjonspunkter={aksjonspunkter}
+    aksjonspunkter={aksjonspunkter || defaultAksjonspunkter}
     submitCallback={submitCallback}
     isReadOnly={isReadOnly}
     isAksjonspunktOpen
@@ -397,13 +405,6 @@ AvslåttEngangsstønadDerBeregningErManueltFastsatt.args = {
     beregnetTilkjentYtelse: 10000,
   } as BeregningsresultatEs,
   ytelseTypeKode: fagsakYtelseType.ENGANGSSTONAD,
-  beregningsgrunnlag: {
-    beregningsgrunnlagPeriode: [{
-      beregningsgrunnlagPrStatusOgAndel: [{
-        overstyrtPrAar: 0,
-      }],
-    }],
-  } as Beregningsgrunnlag,
   isReadOnly: false,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };

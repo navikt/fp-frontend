@@ -80,8 +80,9 @@ const hentForhåndsvisManueltBrevCallback = (
   overskrift: string,
   skalOverstyre: boolean,
   forhåndsvisCallback: (data: ForhandsvisData) => Promise<any>,
+  trigger: () => void,
 ) => (e: React.MouseEvent): void => {
-  if (isValid || !isDirty) {
+  if (!skalOverstyre || isValid) {
     const data = {
       fritekst: skalOverstyre ? brodtekst : begrunnelse,
       dokumentMal: skalOverstyre ? 'FRITKS' : undefined,
@@ -91,8 +92,9 @@ const hentForhåndsvisManueltBrevCallback = (
         kode: 'AUTOMATISK',
       } : undefined,
     };
-
     forhåndsvisCallback(data);
+  } else {
+    trigger();
   }
   e.preventDefault();
 };
@@ -212,7 +214,7 @@ const VedtakForm: FunctionComponent<OwnProps> = ({
   const overskrift = formMethods.watch('overskrift');
   const brødtekst = formMethods.watch('brødtekst');
 
-  const { formState: { isValid, isDirty } } = formMethods;
+  const { formState: { isValid, isDirty }, trigger } = formMethods;
 
   const {
     behandlingsresultat, sprakkode, status,
@@ -223,8 +225,8 @@ const VedtakForm: FunctionComponent<OwnProps> = ({
     simuleringResultat, tilbakekrevingvalg]);
   const vedtakstatusTekst = useMemo(() => finnVedtakstatusTekst(behandlingsresultat, intl, ytelseTypeKode), [behandlingsresultat]);
 
-  const forhåndsvisOverstyrtBrev = hentForhåndsvisManueltBrevCallback(isValid, isDirty, begrunnelse, brødtekst, overskrift, true, previewCallback);
-  const forhåndsvisDefaultBrev = hentForhåndsvisManueltBrevCallback(isValid, isDirty, begrunnelse, brødtekst, overskrift, false, previewCallback);
+  const forhåndsvisOverstyrtBrev = hentForhåndsvisManueltBrevCallback(isValid, isDirty, begrunnelse, brødtekst, overskrift, true, previewCallback, trigger);
+  const forhåndsvisDefaultBrev = hentForhåndsvisManueltBrevCallback(isValid, isDirty, begrunnelse, brødtekst, overskrift, false, previewCallback, trigger);
 
   return (
     <>
