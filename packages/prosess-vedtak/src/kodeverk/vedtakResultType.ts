@@ -1,6 +1,6 @@
-const vedtakResultType = {
-  INNVILGET: 'INNVILGET',
-  AVSLAG: 'AVSLAG',
-};
+enum VedtakResultType {
+  INNVILGET = 'INNVILGET',
+  AVSLAG = 'AVSLAG',
+}
 
-export default vedtakResultType;
+export default VedtakResultType;

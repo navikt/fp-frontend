@@ -82,6 +82,12 @@ export const requiredIfCustomFunctionIsTrue = (
   props: { pristine: boolean},
 ): FormValidationResult => (isEmpty(value) && isRequiredFunction(allValues, props) ? isRequiredMessage() : undefined);
 
+export const requiredIfCustomFunctionIsTrueNew = (
+  isRequiredFunction: (value?: InputValue) => boolean,
+) => (
+  value?: InputValue,
+): FormValidationResult => (isEmpty(value) && isRequiredFunction(value) ? isRequiredMessage() : undefined);
+
 export const minLength = (length: number) => (text: string): FormValidationResult => (isEmpty(text)
   // eslint-disable-next-line react/destructuring-assignment
   || text.toString().trim().length >= length ? null : minLengthMessage(length));

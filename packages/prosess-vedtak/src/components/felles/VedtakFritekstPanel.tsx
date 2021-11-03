@@ -1,13 +1,14 @@
 import React, { FunctionComponent } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { useIntl } from 'react-intl';
+import { useFormContext } from 'react-hook-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { Undertekst } from 'nav-frontend-typografi';
 
 import { Behandlingsresultat, Kodeverk } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { TextAreaField } from '@fpsak-frontend/form';
+import { TextAreaField } from '@fpsak-frontend/form-hooks';
 import {
-  decodeHtmlEntity, getLanguageFromSprakkode, hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrue,
+  decodeHtmlEntity, getLanguageFromSprakkode, hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew,
 } from '@fpsak-frontend/utils';
 
 import styles from './vedtakFritekstPanel.less';
@@ -17,55 +18,67 @@ const minLength3 = minLength(3);
 
 interface OwnProps {
   behandlingsresultat: Behandlingsresultat;
-  sprakkode: Kodeverk;
-  readOnly: boolean;
+  språkKode: Kodeverk;
+  isReadOnly: boolean;
   labelTextCode: string;
+  beregningErManueltFastsatt: boolean;
 }
 
-const isBegrunnelseRequired = (allValues, props) => {
-  if (allValues.beregningErManueltFastsatt === true) {
+const getIsBegrunnelseRequired = (beregningErManueltFastsatt: boolean, isDirty: boolean) => (value?: string) => {
+  if (beregningErManueltFastsatt === true) {
     return true;
   }
-  return !props.pristine;
+  return value !== undefined || isDirty;
 };
-const requiredCustom = requiredIfCustomFunctionIsTrue(isBegrunnelseRequired);
 
-const VedtakFritekstPanelImpl: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const VedtakFritekstPanel: FunctionComponent<OwnProps> = ({
   behandlingsresultat,
-  sprakkode,
-  readOnly,
+  språkKode,
+  isReadOnly,
   labelTextCode,
-}) => (
-  <>
-    {!readOnly && (
-      <Row>
-        <VerticalSpacer sixteenPx />
-        <Column xs="8">
-          <TextAreaField
-            name="begrunnelse"
-            label={intl.formatMessage({ id: labelTextCode })}
-            validate={[requiredCustom, minLength3, maxLength1500, hasValidText]}
-            maxLength={1500}
-            readOnly={readOnly}
-            badges={[{
-              type: 'fokus',
-              text: getLanguageFromSprakkode(sprakkode),
-              title: 'Malform.Beskrivelse',
-            }]}
-          />
-        </Column>
-      </Row>
-    )}
-    {readOnly && behandlingsresultat.avslagsarsakFritekst !== null && (
-      <span>
-        <VerticalSpacer twentyPx />
-        <Undertekst>{intl.formatMessage({ id: labelTextCode })}</Undertekst>
-        <VerticalSpacer eightPx />
-        <div className={styles.fritekstItem}>{decodeHtmlEntity(behandlingsresultat.avslagsarsakFritekst)}</div>
-      </span>
-    )}
-  </>
-);
+  beregningErManueltFastsatt,
+}) => {
+  const intl = useIntl();
+  const { formState: { isDirty } } = useFormContext();
 
-export default injectIntl(VedtakFritekstPanelImpl);
+  const isRequiredFn = getIsBegrunnelseRequired(beregningErManueltFastsatt, isDirty);
+
+  return (
+    <>
+      {!isReadOnly && (
+        <Row>
+          <VerticalSpacer sixteenPx />
+          <Column xs="8">
+            <TextAreaField
+              name="begrunnelse"
+              label={intl.formatMessage({ id: labelTextCode })}
+              validate={[
+                requiredIfCustomFunctionIsTrueNew(isRequiredFn),
+                minLength3,
+                maxLength1500,
+                hasValidText,
+              ]}
+              maxLength={1500}
+              readOnly={isReadOnly}
+              badges={[{
+                type: 'fokus',
+                text: getLanguageFromSprakkode(språkKode),
+                titleText: intl.formatMessage({ id: 'Malform.Beskrivelse' }),
+              }]}
+            />
+          </Column>
+        </Row>
+      )}
+      {isReadOnly && behandlingsresultat.avslagsarsakFritekst !== null && (
+        <span>
+          <VerticalSpacer twentyPx />
+          <Undertekst>{intl.formatMessage({ id: labelTextCode })}</Undertekst>
+          <VerticalSpacer eightPx />
+          <div className={styles.fritekstItem}>{decodeHtmlEntity(behandlingsresultat.avslagsarsakFritekst)}</div>
+        </span>
+      )}
+    </>
+  );
+};
+
+export default VedtakFritekstPanel;

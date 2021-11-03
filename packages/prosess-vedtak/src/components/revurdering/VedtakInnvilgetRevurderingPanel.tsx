@@ -14,10 +14,10 @@ import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
 
 interface OwnProps {
   ytelseTypeKode: string;
-  revurderingsAarsakString?: string;
-  readOnly: boolean;
+  revurderingsÅrsakString?: string;
+  isReadOnly: boolean;
   resultatstruktur?: BeregningsresultatFp | BeregningsresultatEs;
-  sprakKode: Kodeverk;
+  språkKode: Kodeverk;
   behandlingsresultat: Behandlingsresultat;
   beregningErManueltFastsatt: boolean;
   skalBrukeOverstyrendeFritekstBrev: boolean;
@@ -25,10 +25,10 @@ interface OwnProps {
 
 const VedtakInnvilgetRevurderingPanel: FunctionComponent<OwnProps> = ({
   ytelseTypeKode,
-  revurderingsAarsakString,
-  readOnly,
+  revurderingsÅrsakString,
+  isReadOnly,
   resultatstruktur,
-  sprakKode,
+  språkKode,
   behandlingsresultat,
   beregningErManueltFastsatt,
   skalBrukeOverstyrendeFritekstBrev,
@@ -48,13 +48,13 @@ const VedtakInnvilgetRevurderingPanel: FunctionComponent<OwnProps> = ({
     )}
     {(ytelseTypeKode === fagsakYtelseType.FORELDREPENGER || ytelseTypeKode === fagsakYtelseType.SVANGERSKAPSPENGER) && (
       <>
-        {revurderingsAarsakString && (
+        {revurderingsÅrsakString && (
           <>
             <Row>
               <Column xs="4">
                 <Undertekst><FormattedMessage id="VedtakForm.RevurderingFP.Aarsak" /></Undertekst>
                 <Normaltekst>
-                  {revurderingsAarsakString}
+                  {revurderingsÅrsakString}
                 </Normaltekst>
               </Column>
             </Row>
@@ -63,10 +63,11 @@ const VedtakInnvilgetRevurderingPanel: FunctionComponent<OwnProps> = ({
         )}
         {!skalBrukeOverstyrendeFritekstBrev && beregningErManueltFastsatt && (
           <VedtakFritekstPanel
-            readOnly={readOnly}
-            sprakkode={sprakKode}
+            isReadOnly={isReadOnly}
+            språkKode={språkKode}
             behandlingsresultat={behandlingsresultat}
             labelTextCode="VedtakForm.Fritekst.Beregningsgrunnlag"
+            beregningErManueltFastsatt={beregningErManueltFastsatt}
           />
         )}
       </>
