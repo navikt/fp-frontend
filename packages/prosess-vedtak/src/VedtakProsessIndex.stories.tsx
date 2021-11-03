@@ -280,7 +280,7 @@ TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil.args = {
       }],
     }],
   } as Beregningsgrunnlag,
-  aksjonspunkter: [{
+  aksjonspunkter: [...defaultAksjonspunkter, {
     definisjon: {
       kode: aksjonspunktCodes.VURDERE_ANNEN_YTELSE,
       kodeverk: '',
@@ -290,7 +290,7 @@ TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil.args = {
       kodeverk: '',
     },
     begrunnelse: undefined,
-    kanLoses: true,
+    kanLoses: false,
     erAktivt: true,
     toTrinnsBehandling: true,
   }, {
@@ -303,7 +303,7 @@ TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil.args = {
       kodeverk: '',
     },
     begrunnelse: undefined,
-    kanLoses: true,
+    kanLoses: false,
     erAktivt: true,
   }, {
     definisjon: {
@@ -315,7 +315,7 @@ TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil.args = {
       kodeverk: '',
     },
     begrunnelse: undefined,
-    kanLoses: true,
+    kanLoses: false,
     erAktivt: true,
     toTrinnsBehandling: true,
   }],
