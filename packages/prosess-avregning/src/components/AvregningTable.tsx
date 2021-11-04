@@ -26,7 +26,10 @@ export const avregningCodes = {
   REDUKSJON: 'reduksjon',
 };
 
-const isNextPeriod = (monthAndYear: { month: string, year: string}, nextPeriod: string): boolean => `${monthAndYear.month}${monthAndYear.year}` === (nextPeriod
+const isNextPeriod = (
+  monthAndYear: { month: string, year: string },
+  nextPeriod: string,
+): boolean => `${monthAndYear.month}${monthAndYear.year}` === (nextPeriod
   ? moment(nextPeriod).format('MMMMYY') : false);
 
 const getHeaderCodes = (
@@ -56,12 +59,18 @@ const skalViseCollapseButton = (
   mottakerResultatPerFag: SimuleringResultatPerFagområde[],
 ): boolean => mottakerResultatPerFag.some((fag) => fag.rader.length > 1);
 
-const rowToggable = (fagOmråde: SimuleringResultatPerFagområde, rowIsFeilUtbetalt: boolean): boolean => {
+const rowToggable = (
+  fagOmråde: SimuleringResultatPerFagområde,
+  rowIsFeilUtbetalt: boolean,
+): boolean => {
   const fagFeilUtbetalt = fagOmråde.rader.find((rad) => rad.feltnavn === avregningCodes.DIFFERANSE);
   return fagFeilUtbetalt && !rowIsFeilUtbetalt;
 };
 
-const rowIsHidden = (isRowToggable: boolean, showDetails: boolean): boolean => isRowToggable && !showDetails;
+const rowIsHidden = (
+  isRowToggable: boolean,
+  showDetails: boolean,
+): boolean => isRowToggable && !showDetails;
 
 const createColumns = (
   perioder: SimuleringResultatRad['resultaterPerMåned'],

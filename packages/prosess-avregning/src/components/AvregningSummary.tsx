@@ -20,8 +20,6 @@ interface OwnProps {
 
 /**
  * Avregning oppsummering
- *
- * Presentationskomponent
  */
 const AvregningSummary: FunctionComponent<OwnProps> = ({
   fom,
@@ -35,12 +33,12 @@ const AvregningSummary: FunctionComponent<OwnProps> = ({
     <Normaltekst className={styles.summaryTitle}><FormattedMessage id="Avregning.bruker" /></Normaltekst>
     <VerticalSpacer eightPx />
     <div className={styles.infoSummary}>
-      { ingenPerioderMedAvvik && (
+      {ingenPerioderMedAvvik && (
         <div className={styles.ingenPerioder}>
           <FormattedMessage id="Avregning.ingenPerioder" />
         </div>
       )}
-      { !ingenPerioderMedAvvik && (
+      {!ingenPerioderMedAvvik && (
         <>
           <Row>
             <Column xs="12">
@@ -71,7 +69,7 @@ const AvregningSummary: FunctionComponent<OwnProps> = ({
               <Column xs="2">
                 <span className={feilutbetaling ? styles.redNumber : styles.positivNumber}>{ formatCurrencyNoKr(feilutbetaling) }</span>
               </Column>
-              { inntrekk !== null && (
+              {inntrekk !== null && (
                 <Column xs="4">
                   <Normaltekst>
                     <FormattedMessage id="Avregning.inntrekk" />
