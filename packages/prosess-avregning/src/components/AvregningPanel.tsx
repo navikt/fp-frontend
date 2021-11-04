@@ -25,7 +25,7 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import questionNormalUrl from '@fpsak-frontend/assets/images/question_normal.svg';
 import questionHoverUrl from '@fpsak-frontend/assets/images/question_hover.svg';
 import {
-  Aksjonspunkt, DetaljertSimuleringResultat, Fagsak, Kodeverk, SimuleringResultat, TilbakekrevingValg,
+  Aksjonspunkt, Fagsak, Kodeverk, SimuleringResultat, TilbakekrevingValg,
 } from '@fpsak-frontend/types';
 import { VurderFeilutbetalingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -43,18 +43,6 @@ const lagHjelpetekstTooltip = (
 ): ReactElement => (
   <FormattedMessage id={isForeldrepenger ? 'Avregning.HjelpetekstForeldrepenger' : 'Avregning.HjelpetekstEngangsstonad'} />
 );
-
-const hentSimuleringsresultat = (
-  simuleringResultat: SimuleringResultat,
-  feilutbetaling: number,
-): DetaljertSimuleringResultat | undefined => {
-  if (!simuleringResultat) {
-    return undefined;
-  }
-  return feilutbetaling === undefined || feilutbetaling
-    ? simuleringResultat.simuleringResultat
-    : simuleringResultat.simuleringResultatUtenInntrekk;
-};
 
 type Details = {
   id: number;
@@ -175,7 +163,6 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
   const { formState } = formMethods;
 
   const [showDetails, setShowDetails] = useState<Details[]>([]);
-  const [feilutbetaling] = useState<number>();
 
   const isForeldrepenger = fagsak.fagsakYtelseType.kode === fagsakYtelseType.FORELDREPENGER;
 
@@ -189,7 +176,7 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
 
   const toggleDetaljer = hentToggleDetaljer(showDetails, setShowDetails);
 
-  const simuleringResultatOption = hentSimuleringsresultat(simuleringResultat, feilutbetaling);
+  const simuleringResultatOption = simuleringResultat?.simuleringResultat;
 
   return (
     <>
