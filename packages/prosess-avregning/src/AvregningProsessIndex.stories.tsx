@@ -1,4 +1,5 @@
 import React from 'react';
+import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
 import mottakerTyper from '@fpsak-frontend/kodeverk/src/mottakerTyper';
@@ -9,8 +10,8 @@ import AvregningProsessIndex from '@fpsak-frontend/prosess-avregning';
 import {
   Aksjonspunkt, Behandling, Fagsak, SimuleringResultat, TilbakekrevingValg,
 } from '@fpsak-frontend/types';
-
-import alleKodeverk from '../mocks/alleKodeverk.json';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 const fagsak = {
   saksnummer: '123',
@@ -103,52 +104,63 @@ const simuleringResultat = {
   slåttAvInntrekk: false,
 } as SimuleringResultat;
 
-const standardProsessProps = {
-  behandling,
-  alleKodeverk: alleKodeverk as any,
-  aksjonspunkter: [],
-  submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: false,
-  isAksjonspunktOpen: true,
-  readOnlySubmitButton: false,
-  status: '',
-  vilkar: [],
-  alleMerknaderFraBeslutter: {},
-  setFormData: () => undefined,
-};
-
 export default {
   title: 'prosess/prosess-avregning',
   component: AvregningProsessIndex,
 };
 
-export const visAksjonspunktVurderFeilutbetaling = () => (
+const Template: Story<{
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
+  tilbakekrevingvalg?: TilbakekrevingValg;
+  isAksjonspunktOpen: boolean;
+}> = ({
+  aksjonspunkter,
+  submitCallback,
+  tilbakekrevingvalg,
+  isAksjonspunktOpen,
+}) => (
   <AvregningProsessIndex
-    {...standardProsessProps}
+    behandling={behandling}
+    alleKodeverk={alleKodeverk as any}
+    submitCallback={submitCallback}
+    isReadOnly={false}
+    isAksjonspunktOpen={isAksjonspunktOpen}
+    readOnlySubmitButton={false}
+    status=""
+    vilkar={[]}
+    alleMerknaderFraBeslutter={{}}
+    setFormData={() => undefined}
     fagsak={fagsak}
-    aksjonspunkter={[{
-      definisjon: {
-        kode: aksjonspunktCodes.VURDER_FEILUTBETALING,
-      },
-      begrunnelse: undefined,
-    }] as Aksjonspunkt[]}
+    aksjonspunkter={aksjonspunkter}
     simuleringResultat={simuleringResultat}
+    tilbakekrevingvalg={tilbakekrevingvalg}
     previewFptilbakeCallback={action('button-click') as (data: any) => Promise<any>}
   />
 );
 
-export const visSimuleringspanelUtenAksjonspunkt = () => (
-  <AvregningProsessIndex
-    {...standardProsessProps}
-    fagsak={fagsak}
-    simuleringResultat={simuleringResultat}
-    tilbakekrevingvalg={{
-      videreBehandling: {
-        kode: tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
-        kodeverk: '',
-      },
-      varseltekst: 'varsel-eksempel',
-    } as TilbakekrevingValg}
-    previewFptilbakeCallback={action('button-click') as (data: any) => Promise<any>}
-  />
-);
+export const AksjonspunktVurderFeilutbetaling = Template.bind({});
+AksjonspunktVurderFeilutbetaling.args = {
+  aksjonspunkter: [{
+    definisjon: {
+      kode: aksjonspunktCodes.VURDER_FEILUTBETALING,
+    },
+    begrunnelse: undefined,
+  }] as Aksjonspunkt[],
+  isAksjonspunktOpen: true,
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};
+
+export const SimuleringspanelUtenAksjonspunkt = Template.bind({});
+SimuleringspanelUtenAksjonspunkt.args = {
+  aksjonspunkter: [],
+  isAksjonspunktOpen: false,
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  tilbakekrevingvalg: {
+    videreBehandling: {
+      kode: tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
+      kodeverk: '',
+    },
+    varseltekst: 'varsel-eksempel',
+  } as TilbakekrevingValg,
+};

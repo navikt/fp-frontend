@@ -42,7 +42,6 @@ const AvregningProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPr
       submitCallback={submitCallback}
       readOnly={isReadOnly}
       readOnlySubmitButton={readOnlySubmitButton}
-      apCodes={aksjonspunkter.map((a) => a.definisjon.kode)}
       isApOpen={isAksjonspunktOpen}
       previewCallback={previewFptilbakeCallback}
       formData={formData}
