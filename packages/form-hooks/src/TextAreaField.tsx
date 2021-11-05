@@ -25,6 +25,7 @@ interface OwnProps {
   badges?: Badges[];
   validate?: ((value: string) => any)[];
   textareaClass?: string;
+  placeholder?: string;
 }
 
 const TextAreaField: FunctionComponent<OwnProps> = ({
@@ -44,7 +45,7 @@ const TextAreaField: FunctionComponent<OwnProps> = ({
   });
 
   if (readOnly) {
-    return <ReadOnlyField label={<Label input={label} readOnly />} value={field.value} />;
+    return <ReadOnlyField label={label} value={field.value} type="textarea" />;
   }
 
   return (
