@@ -50,21 +50,19 @@ describe('<BeregningsresultatProsessIndex>', () => {
     userEvent.click(screen.getByText('Bekreft overstyring'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [{
-      begrunnelse: undefined,
-      fritekstBrev: undefined,
-      kode: '5015',
-      overskrift: undefined,
-      skalBrukeOverstyrendeFritekstBrev: false,
-    }]);
+    expect(lagre).toHaveBeenNthCalledWith(1, {
+      begrunnelse: 'Dette er en begrunnelse',
+      beregnetTilkjentYtelse: 100,
+      kode: '6007',
+    });
   });
 
   it('skal vise readonly panel der saksbehandler har overstyrt', async () => {
     render(<OverstyrtReadonlyPanel />);
+
     expect(await screen.findByText('Beregning')).toBeInTheDocument();
     expect(screen.getByText('Manuell overstyring av automatisk vurdering')).toBeInTheDocument();
     expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
     expect(screen.getByText('Endret av saksbehandler')).toBeInTheDocument();
-    expect(screen.queryByAltText('Overstyr')).not.toBeInTheDocument();
   });
 });

@@ -36,17 +36,19 @@ const Template: Story<{
   aksjonspunkter: Aksjonspunkt[];
   kanOverstyreAccess: { isEnabled: boolean };
   submitCallback?: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
+  isReadOnly?: boolean;
 }> = ({
   aksjonspunkter,
   kanOverstyreAccess,
   submitCallback,
+  isReadOnly = false,
 }) => (
   <BeregningsresultatProsessIndex
     behandling={behandling}
     alleKodeverk={alleKodeverk as any}
     aksjonspunkter={aksjonspunkter}
     submitCallback={submitCallback || action('button-click') as (data: any) => Promise<any>}
-    isReadOnly={false}
+    isReadOnly={isReadOnly}
     isAksjonspunktOpen
     readOnlySubmitButton={false}
     status=""
@@ -81,4 +83,5 @@ OverstyrtReadonlyPanel.args = {
     begrunnelse: 'Dette er en begrunnelse',
   }] as Aksjonspunkt[],
   kanOverstyreAccess: { isEnabled: true },
+  isReadOnly: true,
 };
