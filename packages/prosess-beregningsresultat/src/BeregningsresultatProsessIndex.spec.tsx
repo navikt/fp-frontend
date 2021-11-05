@@ -12,11 +12,10 @@ describe('<BeregningsresultatProsessIndex>', () => {
 
     expect(await screen.findByText('Beregning')).toBeInTheDocument();
     expect(screen.getByText('Sats')).toBeInTheDocument();
-    expect(screen.getByText('100 kr')).toBeInTheDocument();
+    expect(screen.getAllByText('100 kr')).toHaveLength(2);
     expect(screen.getByText('Antall barn')).toBeInTheDocument();
     expect(screen.getByText('1')).toBeInTheDocument();
     expect(screen.getByText('Beregnet engangsstønad')).toBeInTheDocument();
-    expect(screen.getByText('100 kr')).toBeInTheDocument();
     expect(screen.queryByAltText('Overstyr')).not.toBeInTheDocument();
   });
 
@@ -27,10 +26,12 @@ describe('<BeregningsresultatProsessIndex>', () => {
 
     expect(await screen.findByText('Beregning')).toBeInTheDocument();
     expect(screen.getByAltText('Overstyr')).toBeInTheDocument();
+    expect(screen.queryByAltText('Har overstyrt')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Overstyr'));
+    userEvent.click(screen.getByAltText('Overstyr'));
 
-    expect(await screen.findByText('Overstyr')).toBeDisabled();
+    expect(await screen.findByAltText('Har overstyrt')).toBeInTheDocument();
+    expect(screen.queryByAltText('Overstyr')).not.toBeInTheDocument();
 
     expect(screen.getByText('Bekreft overstyring')).toBeDisabled();
 
@@ -40,9 +41,9 @@ describe('<BeregningsresultatProsessIndex>', () => {
 
     userEvent.click(screen.getByText('Avbryt'));
 
-    expect(await screen.findByText('Overstyr')).toBeEnabled();
+    expect(await screen.findByAltText('Overstyr')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Overstyr'));
+    userEvent.click(screen.getByAltText('Overstyr'));
 
     userEvent.type(utils.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
 
@@ -60,7 +61,6 @@ describe('<BeregningsresultatProsessIndex>', () => {
 
   it('skal vise readonly panel der saksbehandler har overstyrt', async () => {
     render(<OverstyrtReadonlyPanel />);
-
     expect(await screen.findByText('Beregning')).toBeInTheDocument();
     expect(screen.getByText('Manuell overstyring av automatisk vurdering')).toBeInTheDocument();
     expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();

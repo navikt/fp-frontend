@@ -45,7 +45,7 @@ const OverstyringKnapp: FunctionComponent<OwnProps> = ({
       onKeyDown={!erOverstyrt ? setOverstyrtFn : undefined}
       tabIndex={0}
       tooltip={intl.formatMessage({ id: 'OverstyringKnapp.Overstyring' })}
-      alt={intl.formatMessage({ id: 'OverstyringKnapp.Overstyring' })}
+      alt={intl.formatMessage({ id: erOverstyrt ? 'OverstyringKnapp.HarOverstyrt' : 'OverstyringKnapp.Overstyring' })}
     />
   );
 };
