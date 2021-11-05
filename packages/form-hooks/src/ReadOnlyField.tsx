@@ -12,12 +12,14 @@ interface OwnProps {
   label?: LabelType;
   isEdited?: boolean;
   value?: string;
+  type?: string;
 }
 
 export const ReadOnlyField: FunctionComponent<OwnProps> = ({
   label,
   value,
   isEdited,
+  type,
 }) => {
   if (!hasValue(value)) {
     return null;
@@ -25,10 +27,12 @@ export const ReadOnlyField: FunctionComponent<OwnProps> = ({
   return (
     <div className={styles.readOnlyContainer}>
       <Label input={label} readOnly />
-      <Normaltekst className={styles.readOnlyContent}>
-        {value}
-        {isEdited && <EditedIcon />}
-      </Normaltekst>
+      <div className={type === 'textarea' ? styles.textarea : ''}>
+        <Normaltekst className={styles.readOnlyContent}>
+          {value}
+          {isEdited && <EditedIcon className={styles.space} />}
+        </Normaltekst>
+      </div>
     </div>
   );
 };
