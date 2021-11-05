@@ -3,7 +3,6 @@ import { RawIntlProvider } from 'react-intl';
 
 import { BeregningsresultatEs, StandardProsessPanelProps } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import BeregningsresultatEngangsstonadForm from './components/BeregningsresultatEngangsstonadForm';
 import messages from '../i18n/nb_NO.json';
@@ -31,17 +30,17 @@ const BeregningsresultatProsessIndex: FunctionComponent<OwnProps & StandardProse
   setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <ReduxWrapper formName="BeregningsresultatProsessIndex" formData={formData} setFormData={setFormData}>
-      <BeregningsresultatEngangsstonadForm
-        behandlingResultatstruktur={beregningresultatEngangsstonad}
-        aksjonspunkter={aksjonspunkter}
-        overrideReadOnly={overrideReadOnly}
-        submitCallback={submitCallback}
-        kanOverstyre={kanOverstyreAccess.isEnabled}
-        toggleOverstyring={toggleOverstyring}
-        erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon.kode]?.notAccepted)}
-      />
-    </ReduxWrapper>
+    <BeregningsresultatEngangsstonadForm
+      behandlingResultatstruktur={beregningresultatEngangsstonad}
+      aksjonspunkter={aksjonspunkter}
+      overrideReadOnly={overrideReadOnly}
+      submitCallback={submitCallback}
+      kanOverstyre={kanOverstyreAccess.isEnabled}
+      toggleOverstyring={toggleOverstyring}
+      erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon.kode]?.notAccepted)}
+      formData={formData}
+      setFormData={setFormData}
+    />
   </RawIntlProvider>
 );
 
