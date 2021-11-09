@@ -20,6 +20,8 @@ interface OwnProps {
   behandling: Behandling;
   submitCallback: (aksjonspunktData: KontrollerBesteberegningAP) => Promise<void>;
   submittable: boolean;
+  formData?: any,
+  setFormData: (data: any) => void,
 }
 
 /**
@@ -36,6 +38,8 @@ const BesteberegningPanel: FunctionComponent<OwnProps> = ({
   behandling,
   submitCallback,
   submittable,
+  formData,
+  setFormData,
 }) => {
   const { ytelsesspesifiktGrunnlag, beregningsgrunnlagPeriode } = beregningsgrunnlag;
   const besteberegninggrunnlag = ytelsesspesifiktGrunnlag?.besteberegninggrunnlag;
@@ -54,6 +58,8 @@ const BesteberegningPanel: FunctionComponent<OwnProps> = ({
           submittable={submittable}
           readOnly={readOnly}
           venteårsak={behandling.venteArsakKode}
+          formData={formData}
+          setFormData={setFormData}
         />
         )}
       <BorderBox>

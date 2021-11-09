@@ -46,6 +46,8 @@ const BesteberegningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelP
         readOnly={readOnly}
         submitCallback={submitCallback}
         submittable={submittable}
+        formData={formData}
+        setFormData={setFormData}
       />
     </ReduxWrapper>
   </RawIntlProvider>

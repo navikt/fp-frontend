@@ -1,94 +1,23 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useForm } from 'react-hook-form';
 import {
   AksjonspunktHelpTextTemp, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import { required } from '@fpsak-frontend/utils';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import {
-  FaktaBegrunnelseFormValues,
-  FaktaBegrunnelseTextField,
-  FaktaSubmitButton,
+  FaktaBegrunnelseTextField, FaktaBegrunnelseTextFieldNew,
+  FaktaSubmitButtonNew,
 } from '@fpsak-frontend/fakta-felles';
-import { InjectedFormProps, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import aksjonspunktStatus, { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption, Form } from '@fpsak-frontend/form-hooks';
 import KontrollerBesteberegningAP
   from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/KontrollerBesteberegningAP';
 
-type OwnProps = {
-  aksjonspunkt: Aksjonspunkt;
-  submitCallback: (data: KontrollerBesteberegningAP) => Promise<void>;
-  venteårsak: string;
-  readOnly: boolean;
-  submittable: boolean;
-}
-
-type BesteBeregningFormValues = {
-  besteberegningErKorrektValg: boolean;
-}
-
-type FormValues = BesteBeregningFormValues & FaktaBegrunnelseFormValues;
-
-interface MappedOwnProps {
-  initialValues: FormValues;
-  onSubmit: (formValues: FormValues) => void;
-}
-
-/**
- * KontrollerBesteberegningPanel
- *
- * Formkomponent. Lar saksbehandler vurdere om den automatiske besteberegningen er korrekt utført.
- */
-const KontrollerBesteberegningPanel: FunctionComponent<OwnProps & InjectedFormProps & MappedOwnProps> = ({
-  aksjonspunkt,
-  readOnly,
-  submittable,
-  initialValues,
-  ...formProps
-}) => {
-  if (!aksjonspunkt) {
-    return null;
-  }
-  return (
-    <>
-      <AksjonspunktHelpTextTemp isAksjonspunktOpen={isAksjonspunktOpen(aksjonspunkt.status.kode)}>
-        {[<FormattedMessage key="BesteberegningAksjonspunktTekst" id="BesteberegningProsessPanel.Aksjonspunkt.HelpText" />]}
-      </AksjonspunktHelpTextTemp>
-      <VerticalSpacer twentyPx />
-      <form onSubmit={formProps.handleSubmit}>
-        <RadioGroupField name="besteberegningErKorrektValg" validate={[required]} readOnly={readOnly}>
-          <RadioOption label={{ id: 'BesteberegningProsessPanel.Aksjonspunkt.ErKorrekt' }} value />
-          <RadioOption label={{ id: 'BesteberegningProsessPanel.Aksjonspunkt.ErFeil' }} value={false} />
-        </RadioGroupField>
-        <VerticalSpacer twentyPx />
-        <FaktaBegrunnelseTextField
-          isSubmittable={submittable}
-          isReadOnly={readOnly}
-          hasBegrunnelse={!!initialValues.begrunnelse}
-          hasVurderingText
-        />
-        <VerticalSpacer twentyPx />
-        <FaktaSubmitButton
-          formName={formProps.form}
-          isSubmittable={submittable}
-          isReadOnly={readOnly}
-          hasOpenAksjonspunkter={isAksjonspunktOpen(aksjonspunkt.status.kode)}
-        />
-      </form>
-    </>
-  );
-};
-
-export const buildInitialValues = createSelector([
-  (ownProps: OwnProps) => ownProps.venteårsak,
-  (ownProps: OwnProps) => ownProps.aksjonspunkt], (
-  venteårsak, aksjonspunkt,
-): FormValues => {
+export const buildInitialValues = (venteårsak: string, aksjonspunkt: Aksjonspunkt): FormValues => {
   if (!aksjonspunkt) {
     return null;
   }
@@ -97,7 +26,7 @@ export const buildInitialValues = createSelector([
     ...FaktaBegrunnelseTextField.buildInitialValues(aksjonspunkt),
     besteberegningErKorrektValg: apErLøst ? venteårsak !== venteArsakType.VENT_PÅ_KORRIGERT_BESTEBEREGNING : null,
   };
-});
+};
 
 export const transformValues = (values: FormValues): KontrollerBesteberegningAP => ({
   kode: aksjonspunktCodes.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
@@ -105,18 +34,87 @@ export const transformValues = (values: FormValues): KontrollerBesteberegningAP 
   besteberegningErKorrekt: values.besteberegningErKorrektValg,
 });
 
-const mapStateToPropsFactory = (initialState: any, initialProps: OwnProps) => {
-  const onSubmit = (values) => initialProps.submitCallback(transformValues(values));
-  return (state: any, ownProps: OwnProps): MappedOwnProps => {
-    const initialValues = buildInitialValues(ownProps);
-    return ({
-      initialValues,
-      onSubmit,
-    });
-  };
+type FormValues = {
+  begrunnelse?: string;
+  besteberegningErKorrektValg?: boolean;
+}
+
+interface OwnProps {
+  aksjonspunkt: Aksjonspunkt;
+  submitCallback: (data: KontrollerBesteberegningAP) => Promise<void>;
+  venteårsak: string;
+  readOnly: boolean;
+  submittable: boolean;
+  formData?: FormValues;
+  setFormData: (data: FormValues) => void,
+}
+
+/**
+ * KontrollerBesteberegningPanel
+ *
+ * Formkomponent. Lar saksbehandler vurdere om den automatiske besteberegningen er korrekt utført.
+ */
+const KontrollerBesteberegningPanel: FunctionComponent<OwnProps> = ({
+  aksjonspunkt,
+  venteårsak,
+  readOnly,
+  submittable,
+  submitCallback,
+  formData,
+  setFormData,
+}) => {
+  if (!aksjonspunkt) {
+    return null;
+  }
+  const intl = useIntl();
+  const formMethods = useForm<FormValues>({
+    defaultValues: formData || buildInitialValues(venteårsak, aksjonspunkt),
+  });
+  const begrunnelse = formMethods.watch('begrunnelse');
+  return (
+    <>
+      <AksjonspunktHelpTextTemp isAksjonspunktOpen={isAksjonspunktOpen(aksjonspunkt.status.kode)}>
+        {[<FormattedMessage key="BesteberegningAksjonspunktTekst" id="BesteberegningProsessPanel.Aksjonspunkt.HelpText" />]}
+      </AksjonspunktHelpTextTemp>
+      <VerticalSpacer twentyPx />
+      <Form
+        formMethods={formMethods}
+        onSubmit={(values) => submitCallback(transformValues(values))}
+        setDataOnUnmount={setFormData}
+      >
+        <RadioGroupField
+          name="besteberegningErKorrektValg"
+          direction="horizontal"
+          validate={[required]}
+          readOnly={readOnly}
+          parse={(value: string) => value === 'true'}
+        >
+          <RadioOption
+            label={intl.formatMessage({ id: 'BesteberegningProsessPanel.Aksjonspunkt.ErKorrekt' })}
+            value="true"
+          />
+          <RadioOption
+            label={intl.formatMessage({ id: 'BesteberegningProsessPanel.Aksjonspunkt.ErFeil' })}
+            value="false"
+          />
+        </RadioGroupField>
+        <VerticalSpacer twentyPx />
+        <FaktaBegrunnelseTextFieldNew
+          isSubmittable={submittable}
+          isReadOnly={readOnly}
+          hasBegrunnelse={!!begrunnelse}
+          hasVurderingText
+        />
+        <VerticalSpacer twentyPx />
+        <FaktaSubmitButtonNew
+          isSubmittable={submittable}
+          isSubmitting={formMethods.formState.isSubmitting}
+          isDirty={formMethods.formState.isDirty}
+          isReadOnly={readOnly}
+        />
+      </Form>
+    </>
+  );
 };
 
-export default connect(mapStateToPropsFactory)(reduxForm({
-  form: 'KontrollerAutomatiskBesteberegningForm',
-  destroyOnUnmount: false,
-})(KontrollerBesteberegningPanel));
+export default KontrollerBesteberegningPanel;

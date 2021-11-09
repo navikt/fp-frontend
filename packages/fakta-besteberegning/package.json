@@ -6,12 +6,12 @@
   "private": true,
   "dependencies": {
     "@fpsak-frontend/fakta-felles": "1.0.0",
-    "@fpsak-frontend/form": "1.0.0",
     "@fpsak-frontend/kodeverk": "1.0.0",
     "@fpsak-frontend/shared-components": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/types-avklar-aksjonspunkter": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
+    "@fpsak-frontend/form-hooks": "1.0.0",
     "moment": "^2.29.1",
     "nav-frontend-core": "6.0.1",
     "nav-frontend-grid": "2.0.1",
@@ -23,6 +23,10 @@
     "reselect": "^4.1.1"
   },
   "devDependencies": {
-    "enzyme": "^3.11.0"
+    "@fpsak-frontend/storybook-utils": "^1.0.0",
+    "@storybook/addon-actions": "^6.3.12",
+    "@storybook/testing-react": "^0.0.22",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0"
   }
 }
