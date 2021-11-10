@@ -6,7 +6,9 @@ import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { RadioGroupField, RadioOption, DatepickerField } from '@fpsak-frontend/form';
-import { required, getKodeverknavnFn, DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
+import {
+  required, getKodeverknavnFn, DDMMYYYY_DATE_FORMAT, hasValidDate,
+} from '@fpsak-frontend/utils';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import opptjeningAktivitetTyper from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
 
@@ -128,7 +130,7 @@ const lagTableRow = (
   const erValgtSkjæringstidspunktLikEllerFørTomDato = isSameOrBefore(valgtSkjæringstidspunkt, tomDatoForAktivitetGruppe);
   return (
     <TableRow key={lagAktivitetFieldId(aktivitet)}>
-      <TableColumn>
+      <TableColumn className={styles.navnKol}>
         <Normaltekst>
           {lagVisningsnavn(aktivitet, arbeidsgiverOpplysningerPerId, alleKodeverk)}
         </Normaltekst>
@@ -149,7 +151,7 @@ const lagTableRow = (
           {' '}
           <DatepickerField
             name={`aktiviteterValues.${lagAktivitetFieldId(aktivitet)}.tom`}
-            validate={[required]}
+            validate={[required, hasValidDate]}
             readOnly={readOnly}
           />
         </>
@@ -195,23 +197,24 @@ const getHeaderTextCodes = (): string[] => ([
 );
 
 const finnHeading = (aktiviteter: BeregningAktivitet[], erOverstyrt: boolean, skjaeringstidspunkt: string) => {
+  const datoFeil = hasValidDate(skjaeringstidspunkt);
+  const formatertStp = datoFeil ? '' : moment(skjaeringstidspunkt).format(DDMMYYYY_DATE_FORMAT);
   if (erOverstyrt) {
     return (
       <FormattedMessage
         id="VurderAktiviteterTabell.Overstyrt.Overskrift"
-        values={{ skjaeringstidspunkt: moment(skjaeringstidspunkt).format(DDMMYYYY_DATE_FORMAT) }}
+        values={{ skjaeringstidspunkt: formatertStp }}
       />
     );
   }
   const harAAP = aktiviteter.some((a) => a.arbeidsforholdType && a.arbeidsforholdType.kode === opptjeningAktivitetTyper.AAP);
-
   const harVentelonnVartpenger = aktiviteter.some((aktivitet) => aktivitet.arbeidsforholdType
     && aktivitet.arbeidsforholdType.kode === opptjeningAktivitetTyper.VENTELØNN_VARTPENGER);
   if (harAAP) {
     return (
       <FormattedMessage
         id="VurderAktiviteterTabell.FullAAPKombinert.Overskrift"
-        values={{ skjaeringstidspunkt: moment(skjaeringstidspunkt).format(DDMMYYYY_DATE_FORMAT) }}
+        values={{ skjaeringstidspunkt: formatertStp }}
       />
     );
   }
@@ -219,7 +222,7 @@ const finnHeading = (aktiviteter: BeregningAktivitet[], erOverstyrt: boolean, sk
     return (
       <FormattedMessage
         id="VurderAktiviteterTabell.VentelonnVartpenger.Overskrift"
-        values={{ skjaeringstidspunkt: moment(skjaeringstidspunkt).format(DDMMYYYY_DATE_FORMAT) }}
+        values={{ skjaeringstidspunkt: formatertStp }}
       />
     );
   }
