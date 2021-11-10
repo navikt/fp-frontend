@@ -9,7 +9,7 @@ import KontrollerBesteberegningAP
   from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/KontrollerBesteberegningAP';
 import BesteMånederVisningPanel from './BesteManederVisningPanel';
 import BesteberegningResultatGrunnlagPanel from './BesteberegningResultatGrunnlagPanel';
-import KontrollerBesteberegningPanel from './KontrollerBesteberegningPanel';
+import KontrollerBesteberegningPanel, { FormValues } from './KontrollerBesteberegningPanel';
 
 interface OwnProps {
   beregningsgrunnlag: Beregningsgrunnlag;
@@ -20,6 +20,8 @@ interface OwnProps {
   behandling: Behandling;
   submitCallback: (aksjonspunktData: KontrollerBesteberegningAP) => Promise<void>;
   submittable: boolean;
+  formData?: FormValues,
+  setFormData: (data: any) => void,
 }
 
 /**
@@ -36,6 +38,8 @@ const BesteberegningPanel: FunctionComponent<OwnProps> = ({
   behandling,
   submitCallback,
   submittable,
+  formData,
+  setFormData,
 }) => {
   const { ytelsesspesifiktGrunnlag, beregningsgrunnlagPeriode } = beregningsgrunnlag;
   const besteberegninggrunnlag = ytelsesspesifiktGrunnlag?.besteberegninggrunnlag;
@@ -54,6 +58,8 @@ const BesteberegningPanel: FunctionComponent<OwnProps> = ({
           submittable={submittable}
           readOnly={readOnly}
           venteårsak={behandling.venteArsakKode}
+          formData={formData}
+          setFormData={setFormData}
         />
         )}
       <BorderBox>
