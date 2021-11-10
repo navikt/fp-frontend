@@ -1,4 +1,5 @@
 import React from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Story } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
@@ -11,9 +12,9 @@ import {
 } from '@fpsak-frontend/types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
+import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import BesteberegningFaktaIndex from './BesteberegningFaktaIndex';
 import { beregningsgrunnlag as scenarioBG } from './scenario/BesteberegningScenario';
-import {FaktaAksjonspunkt} from "@fpsak-frontend/types-avklar-aksjonspunkter";
 
 const arbeidsgiverOpplysninger = {
   910909088: {

@@ -7,7 +7,7 @@ import {
 import { required } from '@fpsak-frontend/utils';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import {
-  FaktaBegrunnelseTextField, FaktaBegrunnelseTextFieldNew,
+  FaktaBegrunnelseTextFieldNew,
   FaktaSubmitButtonNew,
 } from '@fpsak-frontend/fakta-felles';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -23,7 +23,7 @@ export const buildInitialValues = (venteårsak: string, aksjonspunkt: Aksjonspun
   }
   const apErLøst = aksjonspunkt.status.kode === aksjonspunktStatus.UTFORT;
   return {
-    ...FaktaBegrunnelseTextField.buildInitialValues(aksjonspunkt),
+    ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkt),
     besteberegningErKorrektValg: apErLøst ? venteårsak !== venteArsakType.VENT_PÅ_KORRIGERT_BESTEBEREGNING : null,
   };
 };
@@ -34,7 +34,7 @@ export const transformValues = (values: FormValues): KontrollerBesteberegningAP 
   besteberegningErKorrekt: values.besteberegningErKorrektValg,
 });
 
-type FormValues = {
+export type FormValues = {
   begrunnelse?: string;
   besteberegningErKorrektValg?: boolean;
 }

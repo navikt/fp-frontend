@@ -38,11 +38,11 @@ describe('<BesteberegningFaktaIndex>', () => {
     const utils = render(<BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt submitCallback={lagre} />);
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeInTheDocument();
-    expect(await screen.findByText('Bekreft og fortsett')).toBeDisabled();
+    expect(await screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
     expect(screen.getByText('Saken er riktig beregnet, fortsett behandlingen')).toBeEnabled();
     expect(screen.getByText('Saken er ikke riktig beregnet, sett saken på vent')).toBeEnabled();
-    userEvent.click(screen.getAllByRole('radio')[0]);
+    userEvent.click(screen.getByLabelText('Saken er riktig beregnet, fortsett behandlingen'));
     userEvent.type(utils.getByLabelText('Vurdering'), 'Min begrunnelse for vurdering av besteberegning');
 
     expect(screen.getByText('Bekreft og fortsett')).toBeEnabled();

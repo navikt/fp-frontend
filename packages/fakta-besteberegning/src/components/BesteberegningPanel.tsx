@@ -9,7 +9,7 @@ import KontrollerBesteberegningAP
   from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/KontrollerBesteberegningAP';
 import BesteMånederVisningPanel from './BesteManederVisningPanel';
 import BesteberegningResultatGrunnlagPanel from './BesteberegningResultatGrunnlagPanel';
-import KontrollerBesteberegningPanel from './KontrollerBesteberegningPanel';
+import KontrollerBesteberegningPanel, { FormValues } from './KontrollerBesteberegningPanel';
 
 interface OwnProps {
   beregningsgrunnlag: Beregningsgrunnlag;
@@ -20,7 +20,7 @@ interface OwnProps {
   behandling: Behandling;
   submitCallback: (aksjonspunktData: KontrollerBesteberegningAP) => Promise<void>;
   submittable: boolean;
-  formData?: any,
+  formData?: FormValues,
   setFormData: (data: any) => void,
 }
 
