@@ -1,6 +1,5 @@
 import React from 'react';
-import { createMemoryHistory } from 'history';
-import { Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
@@ -26,13 +25,13 @@ describe('<HistorikkIndex>', () => {
 
     render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <Router history={createMemoryHistory()}>
+        <MemoryRouter>
           <HistorikkIndex
             saksnummer="12345"
             behandlingUuid="1"
             behandlingVersjon={2}
           />
-        </Router>
+        </MemoryRouter>
       </RestApiMock>,
     );
 

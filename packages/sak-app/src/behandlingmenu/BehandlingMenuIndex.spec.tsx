@@ -1,7 +1,6 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
 
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -88,7 +87,7 @@ describe('BehandlingMenuIndex', () => {
 
     render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <Router history={createMemoryHistory()}>
+        <MemoryRouter>
           <BehandlingMenuIndex
             fagsak={fagsak as Fagsak}
             alleBehandlinger={alleBehandlinger as BehandlingAppKontekst[]}
@@ -98,7 +97,7 @@ describe('BehandlingMenuIndex', () => {
             behandlingRettigheter={behandlingRettigheter}
             sakRettigheter={sakRettigheter}
           />
-        </Router>
+        </MemoryRouter>
       </RestApiMock>,
     );
     expect(await screen.findByText('Sett behandlingen på vent')).toBeInTheDocument();

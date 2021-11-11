@@ -1,7 +1,6 @@
 import React from 'react';
-import { createMemoryHistory } from 'history';
 import sinon, { SinonStub } from 'sinon';
-import { Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
@@ -77,6 +76,7 @@ describe('<FagsakIndex>', () => {
     contextStub = sinon.stub(useTrackRouteParam, 'default').callsFake(() => ({
       selected: '123456',
       location: {
+        key: '1',
         pathname: 'test',
         search: 'test',
         state: {},
@@ -104,9 +104,9 @@ describe('<FagsakIndex>', () => {
 
     render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <Router history={createMemoryHistory()}>
+        <MemoryRouter>
           <FagsakIndex />
-        </Router>
+        </MemoryRouter>
       </RestApiMock>,
     );
 
@@ -132,9 +132,9 @@ describe('<FagsakIndex>', () => {
 
     render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <Router history={createMemoryHistory()}>
+        <MemoryRouter initialEntries={['/behandling']}>
           <FagsakIndex />
-        </Router>
+        </MemoryRouter>
       </RestApiMock>,
     );
 

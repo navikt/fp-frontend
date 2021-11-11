@@ -1,6 +1,5 @@
 import React from 'react';
-import { createMemoryHistory } from 'history';
-import { Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import MockAdapter from 'axios-mock-adapter';
@@ -60,8 +59,6 @@ describe('<MeldingIndex>', () => {
     assignMock.mockClear();
   });
 
-  const history = createMemoryHistory();
-
   it('skal vise messages når mottakere og brevmaler har blitt hentet fra server', async () => {
     const data = [
       { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: { navn: 'Peder' } },
@@ -73,13 +70,13 @@ describe('<MeldingIndex>', () => {
 
     render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <Router history={history}>
+        <MemoryRouter>
           <MeldingIndex
             fagsak={fagsak as Fagsak}
             valgtBehandling={valgtBehandling as BehandlingAppKontekst}
             setMeldingForData={() => undefined}
           />
-        </Router>
+        </MemoryRouter>
       </RestApiMock>,
     );
     expect(await screen.findByText('Mottaker')).toBeInTheDocument();
@@ -103,13 +100,13 @@ describe('<MeldingIndex>', () => {
 
     const utils = render(
       <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
-        <Router history={history}>
+        <MemoryRouter>
           <MeldingIndex
             fagsak={fagsak as Fagsak}
             valgtBehandling={valgtBehandling as BehandlingAppKontekst}
             setMeldingForData={() => undefined}
           />
-        </Router>
+        </MemoryRouter>
       </RestApiMock>,
     );
 
@@ -149,13 +146,13 @@ describe('<MeldingIndex>', () => {
 
     const utils = render(
       <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
-        <Router history={history}>
+        <MemoryRouter>
           <MeldingIndex
             fagsak={fagsak as Fagsak}
             valgtBehandling={valgtBehandling as BehandlingAppKontekst}
             setMeldingForData={() => undefined}
           />
-        </Router>
+        </MemoryRouter>
       </RestApiMock>,
     );
 
@@ -196,13 +193,13 @@ describe('<MeldingIndex>', () => {
 
     const utils = render(
       <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
-        <Router history={history}>
+        <MemoryRouter>
           <MeldingIndex
             fagsak={fagsak as Fagsak}
             valgtBehandling={valgtBehandling as BehandlingAppKontekst}
             setMeldingForData={() => undefined}
           />
-        </Router>
+        </MemoryRouter>
       </RestApiMock>,
     );
 
