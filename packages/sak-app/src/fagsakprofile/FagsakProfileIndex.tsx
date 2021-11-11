@@ -75,14 +75,18 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
     setShowAll(!behandlingUuid);
   }, [behandlingUuid]);
 
-  const match = useMatch('');
-  const shouldRedirectToBehandlinger = match.isExact;
+  const match = useMatch('/fagsak/:saksnummer/');
+  const shouldRedirectToBehandlinger = !!match;
 
   const location = useLocation();
-  const getBehandlingLocation = useCallback((valgtBehandlingUuid) => getLocationWithDefaultProsessStegAndFakta({
-    ...location,
-    pathname: pathToBehandling(fagsak.saksnummer, valgtBehandlingUuid),
-  }), [fagsak.saksnummer]);
+  const getBehandlingLocation = useCallback((valgtBehandlingUuid) => {
+    const test = getLocationWithDefaultProsessStegAndFakta({
+      ...location,
+      pathname: pathToBehandling(fagsak.saksnummer, valgtBehandlingUuid),
+    });
+    debugger;
+    return test;
+  }, [fagsak.saksnummer]);
 
   return (
     <div className={styles.panelPadding}>

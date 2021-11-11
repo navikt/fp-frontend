@@ -32,9 +32,7 @@ export const BehandlingerIndex: FunctionComponent<OwnProps> = ({
         />
       )}
     />
-    <Route>
-      <IngenBehandlingValgtPanel numBehandlinger={alleBehandlinger.length} />
-    </Route>
+    <Route path="/" element={<IngenBehandlingValgtPanel numBehandlinger={alleBehandlinger.length} />} />
   </Routes>
 );
 

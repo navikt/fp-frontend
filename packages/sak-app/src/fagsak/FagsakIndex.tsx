@@ -123,7 +123,7 @@ const FagsakIndex: FunctionComponent = () => {
         behandlingContent={(
           <Routes>
             <Route
-              path={behandlingerPath}
+              path={`${behandlingerPath}/*`}
               element={(
                 <BehandlingerIndex
                   fagsak={fagsak}

@@ -25,7 +25,7 @@ const Home: FunctionComponent<OwnProps> = ({
   <div className={styles.content} style={{ margin: `${headerHeight}px auto 0` }}>
     <Routes>
       <Route path="/" element={<DashboardResolver />} />
-      <Route path={fagsakPath} element={<FagsakIndex />} />
+      <Route path={`${fagsakPath}/*`} element={<FagsakIndex />} />
       <Route path={aktoerPath} element={<AktoerIndex />} />
       <Route element={<NotFoundPage />} />
     </Routes>
