@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
 import { IngenBehandlingValgtPanel } from '@fpsak-frontend/sak-infosider';
 
-import { behandlingPathRoute } from '../app/paths';
+import { behandlingRoutePath } from '../app/paths';
 import BehandlingIndex from './BehandlingIndex';
 
 interface OwnProps {
@@ -22,7 +22,7 @@ export const BehandlingerIndex: FunctionComponent<OwnProps> = ({
 }) => (
   <Routes>
     <Route
-      path={behandlingPathRoute}
+      path={behandlingRoutePath}
       element={(
         <BehandlingIndex
           fagsak={fagsak}

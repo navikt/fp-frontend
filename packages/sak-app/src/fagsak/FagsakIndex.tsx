@@ -19,7 +19,7 @@ import useTrackRouteParam from '../app/useTrackRouteParam';
 import BehandlingSupportIndex from '../behandlingsupport/BehandlingSupportIndex';
 import FagsakProfileIndex from '../fagsakprofile/FagsakProfileIndex';
 import {
-  pathToMissingPage, erUrlUnderBehandling, erBehandlingValgt, behandlingerPathRoute, pathToAnnenPart,
+  pathToMissingPage, erUrlUnderBehandling, erBehandlingValgt, behandlingerRoutePath, pathToAnnenPart,
 } from '../app/paths';
 import FagsakGrid from './components/FagsakGrid';
 import {
@@ -123,7 +123,7 @@ const FagsakIndex: FunctionComponent = () => {
         behandlingContent={(
           <Routes>
             <Route
-              path={behandlingerPathRoute}
+              path={behandlingerRoutePath}
               element={(
                 <BehandlingerIndex
                   fagsak={fagsak}

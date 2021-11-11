@@ -20,10 +20,11 @@ type QueryParams = {
 
 const DEV_LOGIN_URL = 'http://localhost:8080/fpsak/resource/login';
 
-export const fagsakPath = '/fagsak/:saksnummer/';
-export const aktoerPath = '/aktoer/:aktoerId(\\d+)';
-export const behandlingerPathRoute = '/behandling//*';
-export const behandlingPathRoute = '/:behandlingUuid/';
+export const fagsakRoutePath = '/fagsak/:saksnummer//*';
+export const aktoerRoutePath = '/aktoer/:aktoerId';
+export const behandlingerRoutePath = '/behandling//*';
+export const behandlingRoutePath = '/:behandlingUuid/';
+const fagsakPath = '/fagsak/:saksnummer/';
 const behandlingerPath = `${fagsakPath}behandling/`;
 const behandlingPath = `${behandlingerPath}:behandlingUuid(.*)/`;
 

@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { NotFoundPage } from '@fpsak-frontend/sak-infosider';
 
-import { aktoerPath, fagsakPath } from '../paths';
+import { aktoerRoutePath, fagsakRoutePath } from '../paths';
 import FagsakIndex from '../../fagsak/FagsakIndex';
 import AktoerIndex from '../../aktoer/AktoerIndex';
 import DashboardResolver from './DashboardResolver';
@@ -25,8 +25,8 @@ const Home: FunctionComponent<OwnProps> = ({
   <div className={styles.content} style={{ margin: `${headerHeight}px auto 0` }}>
     <Routes>
       <Route path="/" element={<DashboardResolver />} />
-      <Route path={`${fagsakPath}/*`} element={<FagsakIndex />} />
-      <Route path={aktoerPath} element={<AktoerIndex />} />
+      <Route path={fagsakRoutePath} element={<FagsakIndex />} />
+      <Route path={aktoerRoutePath} element={<AktoerIndex />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   </div>
