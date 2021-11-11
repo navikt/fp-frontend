@@ -114,6 +114,7 @@ const historikkInnslag = [{
 }] as Historikkinnslag[];
 
 const locationMock = {
+  key: 'test',
   pathname: 'test',
   search: 'test',
   state: {},

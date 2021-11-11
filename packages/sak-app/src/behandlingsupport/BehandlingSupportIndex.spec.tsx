@@ -1,8 +1,7 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import sinon, { SinonStub } from 'sinon';
 import { render, screen } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
@@ -44,7 +43,7 @@ describe('<BehandlingSupportIndex>', () => {
   };
 
   const location = {
-    pathname: '', search: '', state: {}, hash: '',
+    key: '', pathname: '', search: '', state: {}, hash: '',
   };
 
   let contextStub: SinonStub;
@@ -66,14 +65,14 @@ describe('<BehandlingSupportIndex>', () => {
 
     render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <Router history={createMemoryHistory()}>
+        <MemoryRouter>
           <BehandlingSupportIndex
             fagsak={fagsak as Fagsak}
             alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
             behandlingUuid="1"
             behandlingVersjon={2}
           />
-        </Router>
+        </MemoryRouter>
       </RestApiMock>,
     );
     expect(await screen.findByText('Filtrer på behandling')).toBeInTheDocument();

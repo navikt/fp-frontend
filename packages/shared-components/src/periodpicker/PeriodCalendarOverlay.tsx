@@ -35,6 +35,8 @@ class PeriodCalendarOverlay extends Component<OwnProps> {
     onClose: () => undefined,
   };
 
+  calendarRootRef: HTMLDivElement | undefined;
+
   constructor(props: OwnProps) {
     super(props);
     this.onBlur = this.onBlur.bind(this);
@@ -90,8 +92,6 @@ class PeriodCalendarOverlay extends Component<OwnProps> {
       calendarRootRef.focus();
     }
   }
-
-  calendarRootRef: HTMLDivElement | undefined;
 
   targetIsCalendarOrCalendarButton(target: HTMLDivElement): boolean {
     const { calendarRootRef, props: { elementIsCalendarButton } } = this;

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
+import { BrowserRouter } from 'react-router-dom';
 import { render } from 'react-dom';
 import {
   Event, EventHint, init, Integrations,
@@ -54,18 +53,14 @@ polyfill().then(() => {
     },
   });
 
-  const history = createBrowserHistory({
-    basename: '/fpsak/',
-  });
-
   render(
-    <Router history={history}>
+    <BrowserRouter basename="/fpsak/">
       <RestApiProvider>
         <RestApiErrorProvider>
           <AppIndex />
         </RestApiErrorProvider>
       </RestApiProvider>
-    </Router>,
+    </BrowserRouter>,
     app,
   );
 });

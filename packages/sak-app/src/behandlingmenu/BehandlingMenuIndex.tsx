@@ -2,7 +2,7 @@ import React, {
   FunctionComponent, useCallback, useMemo, useEffect, useRef,
 } from 'react';
 import moment from 'moment';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -78,7 +78,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
 }) => {
   const behandling = alleBehandlinger.find((b) => b.uuid === behandlingUuid);
 
-  const { push: pushLocation } = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
 
   const ref = useRef<number>();
@@ -86,7 +86,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
     // Når antallet har endret seg er det laget en ny behandling og denne må da velges
     if (ref.current && ref.current > 0) {
       const pathname = pathToBehandling(fagsak.saksnummer, findNewBehandlingUuid(alleBehandlinger));
-      pushLocation(getLocationWithDefaultProsessStegAndFakta({ ...location, pathname }));
+      navigate(getLocationWithDefaultProsessStegAndFakta({ ...location, pathname }));
     }
 
     ref.current = alleBehandlinger.length;
@@ -110,7 +110,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
     .medFpSakKodeverk(alleFpSakKodeverk)
     .medFpTilbakeKodeverk(alleFpTilbakeKodeverk);
 
-  const gaaTilSokeside = useCallback(() => pushLocation('/'), [pushLocation]);
+  const gaaTilSokeside = useCallback(() => navigate('/'), [navigate]);
 
   const { startRequest: lagNyBehandlingFpSak } = restApiHooks.useRestApiRunner(FpsakApiKeys.NEW_BEHANDLING_FPSAK);
   const { startRequest: lagNyBehandlingFpTilbake } = restApiHooks.useRestApiRunner(FpsakApiKeys.NEW_BEHANDLING_FPTILBAKE);
@@ -131,7 +131,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
 
   const vergeMenyvalg = behandlingRettigheter?.vergeBehandlingsmeny;
   const setLocation = () => {
-    pushLocation(getLocationWithDefaultProsessStegAndFakta({
+    navigate(getLocationWithDefaultProsessStegAndFakta({
       ...location,
       pathname: pathToBehandling(fagsak.saksnummer, behandlingUuid),
     }));

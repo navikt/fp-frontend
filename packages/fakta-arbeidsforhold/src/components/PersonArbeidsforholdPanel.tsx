@@ -243,6 +243,19 @@ type Props = PureOwnProps & MappedOwnProps & DispatchProps & StaticFunctions & W
  * ikke er med i PropTypen må håndteres f.eks. i UpdateArbeidsforhold metoden.
  */
 export class PersonArbeidsforholdPanelImpl extends Component<Props, OwnState> {
+  static buildInitialValues = (arbeidsforhold: Arbeidsforhold[], arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => ({
+    arbeidsforhold: leggTilValuesForRendering(addReplaceableArbeidsforhold(arbeidsforhold), arbeidsgiverOpplysningerPerId),
+  });
+
+  static isReadOnly = (state: any): boolean => {
+    const isDetailFormOpen = !!formValueSelector(PERSON_ARBEIDSFORHOLD_DETAIL_FORM)(state, 'navn');
+    if (isDetailFormOpen) {
+      return true;
+    }
+    const arbeidsforhold = formValueSelector('ArbeidsforholdInfoPanel')(state, 'arbeidsforhold');
+    return !arbeidsforhold || !!getUnresolvedArbeidsforhold(arbeidsforhold);
+  };
+
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -271,19 +284,6 @@ export class PersonArbeidsforholdPanelImpl extends Component<Props, OwnState> {
     const { reduxFormChange: formChange } = this.props;
     formChange('ArbeidsforholdInfoPanel', fieldName, fieldValue);
   }
-
-  static buildInitialValues = (arbeidsforhold: Arbeidsforhold[], arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => ({
-    arbeidsforhold: leggTilValuesForRendering(addReplaceableArbeidsforhold(arbeidsforhold), arbeidsgiverOpplysningerPerId),
-  });
-
-  static isReadOnly = (state: any): boolean => {
-    const isDetailFormOpen = !!formValueSelector(PERSON_ARBEIDSFORHOLD_DETAIL_FORM)(state, 'navn');
-    if (isDetailFormOpen) {
-      return true;
-    }
-    const arbeidsforhold = formValueSelector('ArbeidsforholdInfoPanel')(state, 'arbeidsforhold');
-    return !arbeidsforhold || !!getUnresolvedArbeidsforhold(arbeidsforhold);
-  };
 
   initializeActivityForm(arbeidsforhold: CustomArbeidsforhold): void {
     const { selectedArbeidsforhold } = this.state;

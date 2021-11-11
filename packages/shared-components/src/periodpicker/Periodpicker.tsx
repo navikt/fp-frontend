@@ -39,6 +39,10 @@ class Periodpicker extends Component<OwnProps, StateProps> {
     disabled: false,
   };
 
+  buttonRef: HTMLButtonElement | undefined;
+
+  inputRef: HTMLDivElement | undefined;
+
   constructor(props: OwnProps) {
     super(props);
     this.handleInputRef = this.handleInputRef.bind(this);
@@ -144,10 +148,6 @@ class Periodpicker extends Component<OwnProps, StateProps> {
     getStartDateInput(this.props).onBlur(e);
     getEndDateInput(this.props).onBlur(e);
   }
-
-  buttonRef: HTMLButtonElement | undefined;
-
-  inputRef: HTMLDivElement | undefined;
 
   parseToDate(name: string): Date | null {
     const nameFromProps = haystack(this.props, name);

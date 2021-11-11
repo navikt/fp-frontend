@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
@@ -12,9 +13,7 @@ const mockHistoryPush = jest.fn();
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom') as any,
-  useHistory: () => ({
-    push: mockHistoryPush,
-  }),
+  useNavigate: () => mockHistoryPush,
 }));
 
 describe('<FagsakSearchIndex>', () => {
@@ -44,7 +43,9 @@ describe('<FagsakSearchIndex>', () => {
 
     const utils = render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <FagsakSearchIndex />
+        <MemoryRouter>
+          <FagsakSearchIndex />
+        </MemoryRouter>
       </RestApiMock>,
     );
 
@@ -70,7 +71,9 @@ describe('<FagsakSearchIndex>', () => {
 
     const utils = render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <FagsakSearchIndex />
+        <MemoryRouter>
+          <FagsakSearchIndex />
+        </MemoryRouter>
       </RestApiMock>,
     );
 

@@ -115,6 +115,7 @@ export const transformValuesFordelBeregning = createSelector(
     const bgPerioder = beregningsgrunnlag.beregningsgrunnlagPeriode;
     const fordelBGPerioder = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag.fordelBeregningsgrunnlagPerioder;
     if (hasAksjonspunkt(FORDEL_BEREGNINGSGRUNNLAG, aksjonspunkter)) {
+      // eslint-disable-next-line react/destructuring-assignment
       const begrunnelse = values[BEGRUNNELSE_FORDELING_NAME];
       return {
         kode: FORDEL_BEREGNINGSGRUNNLAG,

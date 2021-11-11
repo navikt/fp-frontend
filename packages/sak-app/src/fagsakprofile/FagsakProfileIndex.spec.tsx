@@ -1,8 +1,7 @@
 import React from 'react';
 import sinon from 'sinon';
 import { render, screen } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
-import { Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -71,7 +70,7 @@ describe('<FagsakProfileIndex>', () => {
 
     render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <Router history={createMemoryHistory()}>
+        <MemoryRouter>
           <FagsakProfileIndex
             fagsak={fagsak as Fagsak}
             alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
@@ -79,7 +78,7 @@ describe('<FagsakProfileIndex>', () => {
             oppfriskBehandlinger={sinon.spy()}
             fagsakRettigheter={fagsakRettigheter}
           />
-        </Router>
+        </MemoryRouter>
       </RestApiMock>,
     );
 
@@ -98,7 +97,7 @@ describe('<FagsakProfileIndex>', () => {
 
     render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <Router history={createMemoryHistory()}>
+        <MemoryRouter>
           <FagsakProfileIndex
             fagsak={fagsak as Fagsak}
             alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
@@ -107,7 +106,7 @@ describe('<FagsakProfileIndex>', () => {
             behandlingUuid="1"
             fagsakRettigheter={fagsakRettigheter}
           />
-        </Router>
+        </MemoryRouter>
       </RestApiMock>,
     );
 

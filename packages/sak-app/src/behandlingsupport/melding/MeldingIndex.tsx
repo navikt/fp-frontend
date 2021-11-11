@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
@@ -112,7 +112,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   const [showMessagesModal, setShowMessageModal] = useState(false);
   const [submitCounter, setSubmitCounter] = useState(0);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
 
@@ -143,7 +143,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
     };
     behandlingEventHandler.settBehandlingPaVent(values);
     hideSettPaVentModal();
-    history.push('/');
+    navigate('/');
   }, []);
 
   const fetchPreview = useVisForhandsvisningAvMelding(type);

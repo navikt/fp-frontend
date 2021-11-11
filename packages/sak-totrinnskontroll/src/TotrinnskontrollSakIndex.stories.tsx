@@ -12,7 +12,7 @@ import {
 import { withRouter, alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
 const location = {
-  pathname: '', search: '', state: {}, hash: '',
+  key: '1', pathname: '', search: '', state: {}, hash: '',
 };
 
 const defaultBehandling = {
