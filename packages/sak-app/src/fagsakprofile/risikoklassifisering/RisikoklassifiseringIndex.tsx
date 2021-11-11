@@ -1,7 +1,7 @@
 import React, {
   FunctionComponent, useEffect, useCallback, useMemo,
 } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import {
   Aksjonspunkt, NavAnsatt, Risikoklassifisering, Fagsak, BehandlingAppKontekst, AksessRettigheter,
@@ -59,7 +59,7 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
     isQueryParam: true,
   });
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
 
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
@@ -70,15 +70,15 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
     [rettigheter, erPaaVent]);
 
   const toggleRiskPanel = useCallback(() => {
-    history.push(getRiskPanelLocationCreator(location)(!isRiskPanelOpen));
+    navigate(getRiskPanelLocationCreator(location)(!isRiskPanelOpen));
   }, [location, isRiskPanelOpen]);
 
   useEffect(() => {
     if (!!risikoAksjonspunkt && risikoAksjonspunkt.status.kode === aksjonspunktStatus.OPPRETTET && !isRiskPanelOpen) {
-      history.push(getRiskPanelLocationCreator(location)(true));
+      navigate(getRiskPanelLocationCreator(location)(true));
     }
     if (!!risikoAksjonspunkt && risikoAksjonspunkt.status.kode === aksjonspunktStatus.UTFORT) {
-      history.push(getRiskPanelLocationCreator(location)(false));
+      navigate(getRiskPanelLocationCreator(location)(false));
     }
   }, [!!risikoAksjonspunkt, behandlingUuid, behandlingVersjon]);
 

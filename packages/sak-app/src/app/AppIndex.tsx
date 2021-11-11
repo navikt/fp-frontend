@@ -1,9 +1,8 @@
 import React, {
   FunctionComponent, useState, useEffect, useCallback,
 } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import moment from 'moment';
-import { Location } from 'history';
 import Modal from 'nav-frontend-modal';
 
 import { useRestApiError } from '@fpsak-frontend/rest-api-hooks';
@@ -22,23 +21,19 @@ import '@fpsak-frontend/assets/styles/global.less';
 
 const EMPTY_ARRAY = [] as any[];
 
-interface OwnProps {
-  location: Location;
-}
-
 /**
  * AppIndex
  *
  * Container komponent. Dette er toppkomponenten i applikasjonen. Denne vil rendre header
  * og home-komponentene. Home-komponenten vil rendre barn-komponenter via ruter.
  */
-const AppIndex: FunctionComponent<OwnProps> = ({
-  location,
-}) => {
+const AppIndex: FunctionComponent = () => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [crashMessage, setCrashMessage] = useState<string>();
 
   const navAnsatt = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
+
+  const location = useLocation();
 
   useEffect(() => {
     if (navAnsatt?.funksjonellTid) {
@@ -94,4 +89,4 @@ const AppIndex: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default withRouter(AppIndex);
+export default AppIndex;

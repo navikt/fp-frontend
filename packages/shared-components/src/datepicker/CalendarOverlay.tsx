@@ -38,6 +38,8 @@ class CalendarOverlay extends Component<OwnProps> {
     initialMonth: null,
   };
 
+  calendarRootRef: HTMLDivElement | undefined;
+
   constructor(props: OwnProps) {
     super(props);
     this.onBlur = this.onBlur.bind(this);
@@ -75,8 +77,6 @@ class CalendarOverlay extends Component<OwnProps> {
       calendarRootRef.focus();
     }
   }
-
-  calendarRootRef: HTMLDivElement | undefined;
 
   parseDateValue(): Date | undefined {
     const { value } = this.props;

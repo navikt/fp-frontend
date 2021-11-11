@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import { NotFoundPage } from '@fpsak-frontend/sak-infosider';
 
@@ -23,12 +23,12 @@ const Home: FunctionComponent<OwnProps> = ({
   headerHeight,
 }) => (
   <div className={styles.content} style={{ margin: `${headerHeight}px auto 0` }}>
-    <Switch>
-      <Route exact path="/" component={DashboardResolver} />
-      <Route strict path={fagsakPath} component={FagsakIndex} />
-      <Route strict path={aktoerPath} component={AktoerIndex} />
-      <Route component={NotFoundPage} />
-    </Switch>
+    <Routes>
+      <Route path="/" element={<DashboardResolver />} />
+      <Route path={fagsakPath} element={<FagsakIndex />} />
+      <Route path={aktoerPath} element={<AktoerIndex />} />
+      <Route element={<NotFoundPage />} />
+    </Routes>
   </div>
 );
 

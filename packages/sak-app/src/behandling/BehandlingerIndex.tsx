@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
 import { IngenBehandlingValgtPanel } from '@fpsak-frontend/sak-infosider';
@@ -20,13 +20,11 @@ export const BehandlingerIndex: FunctionComponent<OwnProps> = ({
   setBehandlingUuidOgVersjon,
   setRequestPendingMessage,
 }) => (
-  <Switch>
+  <Routes>
     <Route
-      strict
       path={behandlingPath}
-      render={(props) => (
+      element={(
         <BehandlingIndex
-          {...props}
           fagsak={fagsak}
           alleBehandlinger={alleBehandlinger}
           setBehandlingUuidOgVersjon={setBehandlingUuidOgVersjon}
@@ -37,7 +35,7 @@ export const BehandlingerIndex: FunctionComponent<OwnProps> = ({
     <Route>
       <IngenBehandlingValgtPanel numBehandlinger={alleBehandlinger.length} />
     </Route>
-  </Switch>
+  </Routes>
 );
 
 export default BehandlingerIndex;

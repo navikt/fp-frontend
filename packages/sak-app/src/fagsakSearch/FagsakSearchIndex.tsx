@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect, useMemo } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import {
   errorOfType, ErrorTypes, getErrorResponseData,
@@ -22,9 +22,9 @@ const EMPTY_ARRAY = [] as Fagsak[];
 const FagsakSearchIndex: FunctionComponent = () => {
   const alleKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const goToFagsak = (saksnummer: string) => {
-    history.push(pathToFagsak(saksnummer));
+    navigate(pathToFagsak(saksnummer));
   };
 
   const {

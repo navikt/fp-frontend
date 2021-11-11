@@ -1,7 +1,9 @@
 import React, {
   FunctionComponent, useState, useCallback,
 } from 'react';
-import { Route, Redirect, useLocation } from 'react-router-dom';
+import {
+  Route, Navigate, useLocation, Routes,
+} from 'react-router-dom';
 import { Location } from 'history';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
@@ -105,33 +107,33 @@ const FagsakIndex: FunctionComponent = () => {
     if (henterData(fagsakState)) {
       return <LoadingPanel />;
     }
-    return <Redirect to={pathToMissingPage()} />;
+    return <Navigate to={pathToMissingPage()} />;
   }
   if (henterData(fagsakPersonerState) || !harFerdighentetfagsakRettigheter || !fagsakRettigheter) {
     return <LoadingPanel />;
   }
 
   if (fagsak.saksnummer !== selectedSaksnummer) {
-    return <Redirect to={pathToMissingPage()} />;
+    return <Navigate to={pathToMissingPage()} />;
   }
 
   return (
     <>
       <FagsakGrid
         behandlingContent={(
-          <Route
-            strict
-            path={behandlingerPath}
-            render={(props) => (
-              <BehandlingerIndex
-                {...props}
-                fagsak={fagsak}
-                alleBehandlinger={alleBehandlinger}
-                setBehandlingUuidOgVersjon={setBehandlingUuidOgVersjon}
-                setRequestPendingMessage={setRequestPendingMessage}
-              />
-            )}
-          />
+          <Routes>
+            <Route
+              path={behandlingerPath}
+              element={(
+                <BehandlingerIndex
+                  fagsak={fagsak}
+                  alleBehandlinger={alleBehandlinger}
+                  setBehandlingUuidOgVersjon={setBehandlingUuidOgVersjon}
+                  setRequestPendingMessage={setRequestPendingMessage}
+                />
+              )}
+            />
+          </Routes>
         )}
         profileAndNavigationContent={(
           <>

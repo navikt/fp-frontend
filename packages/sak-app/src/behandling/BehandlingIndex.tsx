@@ -1,8 +1,8 @@
 import React, {
   Suspense, FunctionComponent, useEffect, useCallback, useMemo,
 } from 'react';
-import { useHistory } from 'react-router-dom';
-import { History } from 'history';
+import { useNavigate, useLocation, NavigateFunction } from 'react-router-dom';
+import { Location } from 'history';
 
 import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -37,9 +37,14 @@ const erTilbakekreving = (behandlingTypeKode?:string): boolean => behandlingType
 
 const formatName = (bpName = ''): string => replaceNorwegianCharacters(bpName.toLowerCase());
 
-const getOppdaterProsessStegOgFaktaPanelIUrl = (history: History) => (prosessStegId?: string, faktaPanelId?: string): void => {
+const getOppdaterProsessStegOgFaktaPanelIUrl = (
+  location: Location,
+  navigate: NavigateFunction,
+) => (
+  prosessStegId?: string,
+  faktaPanelId?: string,
+): void => {
   let newLocation;
-  const { location } = history;
   if (prosessStegId === 'default') {
     newLocation = getLocationWithDefaultProsessStegAndFakta(location);
   } else if (prosessStegId) {
@@ -56,7 +61,7 @@ const getOppdaterProsessStegOgFaktaPanelIUrl = (history: History) => (prosessSte
     newLocation = getFaktaLocation(newLocation)();
   }
 
-  history.push(newLocation);
+  navigate(newLocation);
 };
 
 interface OwnProps {
@@ -104,11 +109,11 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
   const rettigheter = useMemo(() => getAccessRights(navAnsatt, fagsak.status, behandling?.status, behandling?.type),
     [fagsak.status, behandlingUuid, behandling?.status, behandling?.type]);
 
-  const history = useHistory();
-  const opneSokeside = useCallback(() => { history.push('/'); }, []);
-  const oppdaterProsessStegOgFaktaPanelIUrl = useCallback(getOppdaterProsessStegOgFaktaPanelIUrl(history), [history]);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const opneSokeside = useCallback(() => { navigate('/'); }, []);
+  const oppdaterProsessStegOgFaktaPanelIUrl = useCallback(getOppdaterProsessStegOgFaktaPanelIUrl(location, navigate), [location, navigate]);
 
-  const { location } = history;
   const query = parseQueryString(location.search);
 
   const defaultProps = {
