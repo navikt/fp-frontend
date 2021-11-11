@@ -81,8 +81,13 @@ const utledInfoTextCode = (
 ): string => {
   if (allAksjonspunktApproved) {
     return isStatusFatterVedtak(behandlingStatusKode)
-      ? getInfoTextCode(behandlingTypeKode, behandlingsresultat, isBehandlingsresultatOpphor, harSammeResultatSomOriginalBehandling,
-        erKlageWithKA)
+      ? getInfoTextCode(
+        behandlingTypeKode,
+        behandlingsresultat,
+        isBehandlingsresultatOpphor,
+        harSammeResultatSomOriginalBehandling,
+        erKlageWithKA,
+      )
       : '';
   }
   return 'FatterVedtakApprovalModal.VedtakReturneresTilSaksbehandler';
@@ -128,8 +133,15 @@ const FatterVedtakApprovalModal: FunctionComponent<OwnProps & WrappedComponentPr
   erKlageWithKA,
 }) => {
   const isBehandlingsresultatOpphor = !!behandlingsresultat && behandlingsresultat.type.kode === behandlingResultatType.OPPHOR;
-  const infoTextCode = utledInfoTextCode(allAksjonspunktApproved, behandlingStatusKode, behandlingTypeKode, behandlingsresultat,
-    isBehandlingsresultatOpphor, erKlageWithKA, harSammeResultatSomOriginalBehandling);
+  const infoTextCode = utledInfoTextCode(
+    allAksjonspunktApproved,
+    behandlingStatusKode,
+    behandlingTypeKode,
+    behandlingsresultat,
+    isBehandlingsresultatOpphor,
+    erKlageWithKA,
+    harSammeResultatSomOriginalBehandling,
+  );
 
   const altImgTextCode = utledAltImgTextCode(behandlingStatusKode);
 

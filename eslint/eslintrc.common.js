@@ -54,7 +54,13 @@ const config = {
     'react/state-in-constructor': OFF,
     'react/prop-types': OFF,
     'jest/valid-expect': OFF,
+    'function-paren-newline': OFF,
+    'function-call-argument-newline': OFF,
     'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/*.spec.ts', '**/*.spec.tsx', '**/*.stories.tsx'] }],
+    'react/function-component-definition': ['error', {
+      namedComponents: 'arrow-function',
+      unnamedComponents: 'arrow-function',
+    }],
 
     // note you must disable the base rule as it can report incorrect errors
     'no-use-before-define': OFF,
@@ -65,6 +71,7 @@ const config = {
     '@typescript-eslint/no-unused-vars': [ERROR],
 
     // TODO (TOR) Ignorert inntil videre grunnet kost/nytte
+    'react/no-unstable-nested-components': OFF,
     'max-classes-per-file': OFF,
     'jsx-a11y/anchor-is-valid': OFF,
     'jsx-a11y/control-has-associated-label': OFF,

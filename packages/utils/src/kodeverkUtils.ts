@@ -25,6 +25,4 @@ export const getKodeverknavnFn = (
 ) => (
   kodeverkOjekt: Kodeverk,
   undertype?: string,
-): string => getKodeverknavnFraKode(
-  alleKodeverk, kodeverkTyper[kodeverkOjekt.kodeverk], kodeverkOjekt.kode, undertype,
-);
+): string => getKodeverknavnFraKode(alleKodeverk, kodeverkTyper[kodeverkOjekt.kodeverk], kodeverkOjekt.kode, undertype);
