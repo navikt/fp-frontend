@@ -79,14 +79,10 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   const shouldRedirectToBehandlinger = !!match;
 
   const location = useLocation();
-  const getBehandlingLocation = useCallback((valgtBehandlingUuid) => {
-    const test = getLocationWithDefaultProsessStegAndFakta({
-      ...location,
-      pathname: pathToBehandling(fagsak.saksnummer, valgtBehandlingUuid),
-    });
-    debugger;
-    return test;
-  }, [fagsak.saksnummer]);
+  const getBehandlingLocation = useCallback((valgtBehandlingUuid) => getLocationWithDefaultProsessStegAndFakta({
+    ...location,
+    pathname: pathToBehandling(fagsak.saksnummer, valgtBehandlingUuid),
+  }), [fagsak.saksnummer]);
 
   return (
     <div className={styles.panelPadding}>

@@ -22,8 +22,10 @@ const DEV_LOGIN_URL = 'http://localhost:8080/fpsak/resource/login';
 
 export const fagsakPath = '/fagsak/:saksnummer/';
 export const aktoerPath = '/aktoer/:aktoerId(\\d+)';
-export const behandlingerPath = '/behandling/';
-export const behandlingPath = '/:behandlingUuid/';
+export const behandlingerPathRoute = '/behandling//*';
+export const behandlingPathRoute = '/:behandlingUuid/';
+const behandlingerPath = `${fagsakPath}behandling/`;
+const behandlingPath = `${behandlingerPath}:behandlingUuid(.*)/`;
 
 export const pathToFagsak = (saksnummer: string): string => buildPath(fagsakPath, { saksnummer });
 export const pathToBehandlinger = (saksnummer: string): string => buildPath(behandlingerPath, { saksnummer });

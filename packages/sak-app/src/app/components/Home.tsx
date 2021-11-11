@@ -27,7 +27,7 @@ const Home: FunctionComponent<OwnProps> = ({
       <Route path="/" element={<DashboardResolver />} />
       <Route path={`${fagsakPath}/*`} element={<FagsakIndex />} />
       <Route path={aktoerPath} element={<AktoerIndex />} />
-      <Route element={<NotFoundPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   </div>
 );
