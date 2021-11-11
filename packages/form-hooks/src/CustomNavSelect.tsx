@@ -21,6 +21,8 @@ class CustomNavSelect extends Component<OwnProps> {
     disabled: false,
   };
 
+  selectElement: ReactNode;
+
   constructor(props: OwnProps) {
     super(props);
     this.getOptionValues = this.getOptionValues.bind(this);
@@ -49,8 +51,6 @@ class CustomNavSelect extends Component<OwnProps> {
       .map((option) => option.props)
       .map((props = {}) => props.value);
   }
-
-  selectElement: ReactNode;
 
   selectedValue(value: ReactNode): any {
     const selectedValue = this.getOptionValues().find((optionValue: ReactNode) => optionValue === value);

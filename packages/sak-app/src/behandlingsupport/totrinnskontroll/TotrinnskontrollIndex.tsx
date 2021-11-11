@@ -1,7 +1,7 @@
 import React, {
   FunctionComponent, useState, useCallback,
 } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -67,7 +67,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
   const [erAlleAksjonspunktGodkjent, setAlleAksjonspunktTilGodkjent] = useState(false);
 
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { brukernavn, kanVeilede } = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.NAV_ANSATT);
 
@@ -139,7 +139,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
       {visBeslutterModal && (
         <BeslutterModalIndex
           behandling={valgtBehandling}
-          pushLocation={history.push}
+          pushLocation={navigate}
           allAksjonspunktApproved={erAlleAksjonspunktGodkjent}
           erKlageWithKA={totrinnsKlageVurdering ? !!totrinnsKlageVurdering.klageVurderingResultatNK : undefined}
         />

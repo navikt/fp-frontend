@@ -17,6 +17,8 @@ class CustomNavSelect extends Component<WrappedFieldProps & CustomNavSelectProps
     disabled: false,
   };
 
+  selectElement: RefObject<any>;
+
   constructor(props: WrappedFieldProps & CustomNavSelectProps) {
     super(props);
     this.getOptionValues = this.getOptionValues.bind(this);
@@ -45,8 +47,6 @@ class CustomNavSelect extends Component<WrappedFieldProps & CustomNavSelectProps
       .map((option) => option.props)
       .map((props = {}) => props.value);
   }
-
-  selectElement: RefObject<any>;
 
   selectedValue(value: string): string {
     const selectedValue = this.getOptionValues().find((optionValue) => optionValue === value);

@@ -113,6 +113,8 @@ const formatGroups = (periodItems: Periode[] = []) => {
  * Presentationskomponent. Masserer data og populerer felten samt formatterar tidslinjen for uttak
  */
 class Tidslinje extends Component<TidslinjeProps> {
+  timelineRef: React.RefObject<any>;
+
   constructor(props: TidslinjeProps) {
     super(props);
 
@@ -123,8 +125,6 @@ class Tidslinje extends Component<TidslinjeProps> {
 
     this.timelineRef = React.createRef();
   }
-
-  timelineRef: React.RefObject<any>;
 
   zoomIn(): void {
     this.timelineRef.current.zoomIn(0.5);

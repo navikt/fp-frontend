@@ -12,6 +12,7 @@ const BEHANDLING_TYPE_KODEVERK = 'BEHANDLING_TYPE';
 const BEHANDLING_STATUS_KODEVERK = 'BEHANDLING_STATUS';
 
 const locationMock = {
+  key: '1',
   pathname: 'test',
   search: 'test',
   state: {},

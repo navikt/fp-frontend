@@ -147,6 +147,8 @@ interface OwnState {
  * Presentationskomponent. Masserer data og populerer felten samt formatterar tidslinjen for tilkjent ytelse
  */
 export class TilkjentYtelse extends Component<OwnProps & WrappedComponentProps, OwnState> {
+  timelineRef: RefObject<any>;
+
   constructor(props: OwnProps & WrappedComponentProps) {
     super(props);
 
@@ -165,8 +167,6 @@ export class TilkjentYtelse extends Component<OwnProps & WrappedComponentProps, 
 
     this.timelineRef = React.createRef();
   }
-
-  timelineRef: RefObject<any>;
 
   openPeriodInfo(): void {
     const { props: { items }, state: { selectedItem } } = this;

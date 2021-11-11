@@ -1,7 +1,6 @@
 import React from 'react';
 import sinon, { SinonStub } from 'sinon';
-import { createMemoryHistory } from 'history';
-import { Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
@@ -30,6 +29,7 @@ const behandling = {
 };
 
 const location = {
+  key: '1',
   hash: '23',
   pathname: '/test/',
   state: {},
@@ -60,7 +60,7 @@ describe('<RisikoklassifiseringIndex>', () => {
 
     render(
       <RestApiMock data={data} requestApi={requestApi}>
-        <Router history={createMemoryHistory()}>
+        <MemoryRouter>
           <RisikoklassifiseringIndex
             fagsak={fagsak as Fagsak}
             alleBehandlinger={[behandling] as Behandling[]}
@@ -68,7 +68,7 @@ describe('<RisikoklassifiseringIndex>', () => {
             behandlingVersjon={1}
             behandlingUuid="1"
           />
-        </Router>
+        </MemoryRouter>
       </RestApiMock>,
     );
     expect(await screen.findByText('Faresignaler oppdaget')).toBeInTheDocument();

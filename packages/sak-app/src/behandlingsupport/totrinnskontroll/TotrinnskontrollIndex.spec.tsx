@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
+import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import MockAdapter from 'axios-mock-adapter';
 import Modal from 'nav-frontend-modal';
@@ -110,13 +109,13 @@ describe('<TotrinnskontrollIndex>', () => {
 
     render(
       <RestApiMock data={data} requestApi={requestApi} setApiMock={setApiMock}>
-        <Router history={createMemoryHistory()}>
+        <MemoryRouter>
           <TotrinnskontrollIndex
             fagsak={fagsak as Fagsak}
             valgtBehandling={valgtBehandling}
             setBeslutterForData={() => undefined}
           />
-        </Router>
+        </MemoryRouter>
       </RestApiMock>,
     );
 
