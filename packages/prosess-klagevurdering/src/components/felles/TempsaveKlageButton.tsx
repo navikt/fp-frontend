@@ -50,9 +50,9 @@ const TempsaveKlageButton: FunctionComponent<OwnProps> = ({
   aksjonspunktCode,
   readOnly,
   handleSubmit,
-}) => (
-  <>
-    {!readOnly && (
+}) => {
+  if (!readOnly) {
+    return (
       <Hovedknapp
         mini
         htmlType="button"
@@ -64,9 +64,10 @@ const TempsaveKlageButton: FunctionComponent<OwnProps> = ({
       >
         <FormattedMessage id="Klage.ResolveKlage.TempSaveButton" />
       </Hovedknapp>
-    )}
-  </>
-);
+    );
+  }
+  return null;
+};
 
 TempsaveKlageButton.defaultProps = {
   spinner: false,

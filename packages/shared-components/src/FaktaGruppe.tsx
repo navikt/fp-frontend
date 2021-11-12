@@ -11,18 +11,19 @@ interface OwnPropsWrapper {
   className: string;
 }
 
+// @ts-ignore fiks
 const Wrapper: FunctionComponent<OwnPropsWrapper> = ({
   withoutBorder,
   error,
   children,
   className,
-}) => (
-  <>
-    {withoutBorder
-      ? children
-      : <BorderBox error={error} className={className}>{children}</BorderBox>}
-  </>
-);
+}) => {
+  if (withoutBorder) {
+    return children;
+  }
+
+  return <BorderBox error={error} className={className}>{children}</BorderBox>;
+};
 
 interface OwnPropsFaktaGruppe {
   merknaderFraBeslutter?: {

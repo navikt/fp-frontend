@@ -85,7 +85,11 @@ const HistorikkMalTypeTilbakekreving: FunctionComponent<HistorikkMal> = ({
             <Normaltekst>
               <FormattedMessage
                 id="Historikk.Template.Tilbakekreving.VurderingAvPerioden"
-                values={{ periodeFom, periodeTom, b: (chunks: any) => <b>{chunks}</b> }}
+                values={{
+                  periodeFom: periodeFom || '',
+                  periodeTom: periodeTom || '',
+                  b: (chunks: any) => <b>{chunks}</b>,
+                }}
               />
             </Normaltekst>
             <VerticalSpacer eightPx />

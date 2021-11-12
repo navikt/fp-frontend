@@ -54,14 +54,12 @@ const ManueltVedtaksbrevPanel: FunctionComponent<OwnProps> = ({
           </FlexColumn>
           <FlexColumn>
             {!isReadOnly && skalViseLink && (
-            <>
-              <Lenke href="#" onClick={forhåndsvisOverstyrtBrev}>
-                <span>
-                  <FormattedMessage id="FritekstBrevPanel.ForhandsvisManueltVedtaksbrev" />
-                </span>
-                <Image src={popOutPilSvg} className={styles.pil} />
-              </Lenke>
-            </>
+            <Lenke href="#" onClick={forhåndsvisOverstyrtBrev}>
+              <span>
+                <FormattedMessage id="FritekstBrevPanel.ForhandsvisManueltVedtaksbrev" />
+              </span>
+              <Image src={popOutPilSvg} className={styles.pil} />
+            </Lenke>
             )}
           </FlexColumn>
         </FlexRow>

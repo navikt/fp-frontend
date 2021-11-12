@@ -183,16 +183,6 @@ export class TilbakekrevingPeriodeFormImpl extends Component<OwnProps & Dispatch
     }
   };
 
-  resetAnnetTextField = () => {
-    const {
-      clearFields: clearFormFields, valgtVilkarResultatType, handletUaktsomhetGrad, erSerligGrunnAnnetValgt,
-    } = this.props;
-    if (!erSerligGrunnAnnetValgt) {
-      const fields = [`${valgtVilkarResultatType}.${handletUaktsomhetGrad}.annetBegrunnelse`];
-      clearFormFields(TILBAKEKREVING_PERIODE_FORM_NAME, false, false, ...fields);
-    }
-  };
-
   resetFields = () => {
     const {
       clearFields: clearFormFields, valgtVilkarResultatType,

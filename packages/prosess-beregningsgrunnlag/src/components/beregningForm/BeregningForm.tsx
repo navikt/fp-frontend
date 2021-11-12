@@ -189,17 +189,15 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
             skjeringstidspunktDato={skjaeringstidspunktBeregning}
           />
           { relevanteStatuser.skalViseBeregningsgrunnlag && (
-            <>
-              <Beregningsgrunnlag
-                relevanteStatuser={relevanteStatuser}
-                allePerioder={beregningsgrunnlagPeriode}
-                gjelderBesteberegning={gjelderBesteberegning}
-                alleKodeverk={alleKodeverk}
-                skjeringstidspunktDato={skjaeringstidspunktBeregning}
-                arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-                sammenligningsGrunnlagInntekter={beregningsgrunnlag.inntektsgrunnlag}
-              />
-            </>
+            <Beregningsgrunnlag
+              relevanteStatuser={relevanteStatuser}
+              allePerioder={beregningsgrunnlagPeriode}
+              gjelderBesteberegning={gjelderBesteberegning}
+              alleKodeverk={alleKodeverk}
+              skjeringstidspunktDato={skjaeringstidspunktBeregning}
+              arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+              sammenligningsGrunnlagInntekter={beregningsgrunnlag.inntektsgrunnlag}
+            />
           )}
           <VerticalSpacer twentyPx />
           {gjelderAutomatiskBesteberegning && (

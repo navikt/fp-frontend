@@ -107,8 +107,15 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
         const visKunBegrunnelse = erAnke || erKlageKA ? totrinnskontrollGodkjent : showBegrunnelse;
         const visArsaker = erAnke || erKlageKA || totrinnskontrollGodkjent === false;
 
-        const aksjonspunktText = getAksjonspunkttekst(erForeldrepengerFagsak, behandlingStatus,
-          arbeidsforholdHandlingTyper, faktaOmBeregningTilfeller, erTilbakekreving, totrinnskontrollAksjonspunkt, klagebehandlingVurdering);
+        const aksjonspunktText = getAksjonspunkttekst(
+          erForeldrepengerFagsak,
+          behandlingStatus,
+          arbeidsforholdHandlingTyper,
+          faktaOmBeregningTilfeller,
+          erTilbakekreving,
+          totrinnskontrollAksjonspunkt,
+          klagebehandlingVurdering,
+        );
 
         const skjermlenkeTypeKodeverk = skjemalenkeTyper.find((skjemalenkeType) => skjemalenkeType.kode === context.skjermlenkeType);
 

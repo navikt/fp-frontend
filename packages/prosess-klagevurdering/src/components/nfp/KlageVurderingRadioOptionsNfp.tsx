@@ -25,17 +25,15 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps & Wrapped
   const medholdOptions = medholdReasons.map((mo: KodeverkMedNavn) => <option key={mo.kode} value={mo.kode}>{mo.navn}</option>);
   return (
     <div>
-      <>
-        <RadioGroupField
-          name="klageVurdering.kode"
-          validate={[required]}
-          readOnly={readOnly}
-          className={readOnly ? styles.selectReadOnly : null}
-        >
-          <RadioOption value={klageVurderingType.MEDHOLD_I_KLAGE} label={{ id: 'Klage.ResolveKlage.ChangeVedtak' }} />
-          <RadioOption value={klageVurderingType.STADFESTE_YTELSESVEDTAK} label={{ id: 'Klage.ResolveKlage.KeepVedtakNfp' }} />
-        </RadioGroupField>
-      </>
+      <RadioGroupField
+        name="klageVurdering.kode"
+        validate={[required]}
+        readOnly={readOnly}
+        className={readOnly ? styles.selectReadOnly : null}
+      >
+        <RadioOption value={klageVurderingType.MEDHOLD_I_KLAGE} label={{ id: 'Klage.ResolveKlage.ChangeVedtak' }} />
+        <RadioOption value={klageVurderingType.STADFESTE_YTELSESVEDTAK} label={{ id: 'Klage.ResolveKlage.KeepVedtakNfp' }} />
+      </RadioGroupField>
       {(klageVurdering?.kode === klageVurderingType.MEDHOLD_I_KLAGE)
       && (
         <ArrowBox>

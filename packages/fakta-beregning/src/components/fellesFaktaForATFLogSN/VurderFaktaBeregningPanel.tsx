@@ -132,9 +132,9 @@ export class VurderFaktaBeregningPanelImpl extends Component<OwnProps & Injected
         submitEnabled,
       },
     } = this;
-    return (
-      <>
-        {!(hasOpenAksjonspunkt(AVKLAR_AKTIVITETER, aksjonspunkter) || hasOpenAksjonspunkt(OVERSTYRING_AV_BEREGNINGSAKTIVITETER, aksjonspunkter)) && (
+
+    if (!(hasOpenAksjonspunkt(AVKLAR_AKTIVITETER, aksjonspunkter) || hasOpenAksjonspunkt(OVERSTYRING_AV_BEREGNINGSAKTIVITETER, aksjonspunkter))) {
+      return (
         <form onSubmit={formProps.handleSubmit}>
           {hasAksjonspunkt(VURDER_FAKTA_FOR_ATFL_SN, aksjonspunkter) && (
             <AksjonspunktHelpTextTemp isAksjonspunktOpen={!isAksjonspunktClosed(aksjonspunkter)}>
@@ -170,9 +170,9 @@ export class VurderFaktaBeregningPanelImpl extends Component<OwnProps & Injected
             </>
           )}
         </form>
-        )}
-      </>
-    );
+      );
+    }
+    return null;
   }
 }
 

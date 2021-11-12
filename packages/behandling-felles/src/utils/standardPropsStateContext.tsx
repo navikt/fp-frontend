@@ -1,5 +1,5 @@
 import React, {
-  createContext, FunctionComponent, ReactElement,
+  createContext, FunctionComponent, ReactElement, useMemo,
 } from 'react';
 
 import {
@@ -33,8 +33,8 @@ const StandardPropsProvider: FunctionComponent<OwnProps> = ({
   lagreOverstyrteAksjonspunkter,
   oppdaterProsessStegOgFaktaPanelIUrl,
   alleKodeverk,
-}): JSX.Element => (
-  <StandardPropsStateContext.Provider value={{
+}): JSX.Element => {
+  const values = useMemo(() => ({
     behandling,
     fagsak,
     rettigheter,
@@ -43,10 +43,12 @@ const StandardPropsProvider: FunctionComponent<OwnProps> = ({
     lagreOverstyrteAksjonspunkter,
     oppdaterProsessStegOgFaktaPanelIUrl,
     alleKodeverk,
-  }}
-  >
-    {children}
-  </StandardPropsStateContext.Provider>
-);
+  }), [behandling, fagsak, rettigheter, hasFetchError, oppdaterProsessStegOgFaktaPanelIUrl]);
+  return (
+    <StandardPropsStateContext.Provider value={values}>
+      {children}
+    </StandardPropsStateContext.Provider>
+  );
+};
 
 export default StandardPropsProvider;

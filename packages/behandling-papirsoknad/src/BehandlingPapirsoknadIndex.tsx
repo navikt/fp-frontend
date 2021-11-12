@@ -47,19 +47,17 @@ const BehandlingPapirsoknadIndex: FunctionComponent<OwnProps & StandardBehandlin
   }
 
   return (
-    <>
-      <RawIntlProvider value={intl}>
-        <RegistrerPapirsoknad
-          behandling={behandling}
-          fagsak={fagsak}
-          fagsakPersonnummer={fagsakPersonnummer}
-          kodeverk={kodeverk}
-          rettigheter={rettigheter}
-          hentBehandling={hentBehandling}
-          lagreAksjonspunkt={lagreAksjonspunkter}
-        />
-      </RawIntlProvider>
-    </>
+    <RawIntlProvider value={intl}>
+      <RegistrerPapirsoknad
+        behandling={behandling}
+        fagsak={fagsak}
+        fagsakPersonnummer={fagsakPersonnummer}
+        kodeverk={kodeverk}
+        rettigheter={rettigheter}
+        hentBehandling={hentBehandling}
+        lagreAksjonspunkt={lagreAksjonspunkter}
+      />
+    </RawIntlProvider>
   );
 };
 

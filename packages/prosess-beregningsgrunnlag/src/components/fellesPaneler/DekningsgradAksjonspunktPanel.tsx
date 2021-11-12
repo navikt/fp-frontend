@@ -9,13 +9,13 @@ import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/for
 import {
   hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
+import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { Column, Row } from 'nav-frontend-grid';
 import dekningsgrad from '@fpsak-frontend/kodeverk/src/dekningsgrad';
 import DekningsgradTransformedValues, {
   DekningsgradValues,
 } from '../../types/DekningsgradAksjonspunktTsType';
 import styles from './aksjonspunktBehandler.less';
-import { isAksjonspunktOpen } from '../../../../kodeverk/src/aksjonspunktStatus';
 
 const RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN = 'dekningsgrad';
 const TEKSTFELTNAVN_BEGRUNN_DEKNINGSGRAD_ENDRING = 'begrunnDekningsgradEndring';

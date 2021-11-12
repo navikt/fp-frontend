@@ -110,8 +110,8 @@ const lagAndel = (
   aktivitetstatuskode: string,
   beregnetPrAar: number,
   erTidsbegrensetArbeidsforhold?: boolean,
-  skalFastsetteGrunnlag = false,
   overstyrtPrAar?: number,
+  skalFastsetteGrunnlag = false,
 ): DeepWriteable<BeregningsgrunnlagAndel> => ({
   aktivitetStatus: {
     kode: aktivitetstatuskode,
@@ -301,7 +301,7 @@ export default {
 
 export const justerDekningsgradAP = () => {
   lagKunATInntektsgrunnlag();
-  const andeler = [lagAndel('AT', 300000, false, false)];
+  const andeler = [lagAndel('AT', 300000, false)];
   andeler[0].skalFastsetteGrunnlag = true;
   const perioder = [lagStandardPeriode(andeler)];
   const statuser = [lagStatus('AT')];
@@ -331,7 +331,7 @@ export const justerDekningsgradAP = () => {
 };
 
 export const arbeidstakerUtenAvvik = () => {
-  const andeler = [lagAndel('AT', 450000, false, false)];
+  const andeler = [lagAndel('AT', 450000, false)];
   const perioder = [lagPeriodeMedDagsats(andeler, 1384.6153)];
   const statuser = [lagStatus('AT')];
   const sammenligningsgrunnlagPrStatus = [
@@ -358,8 +358,8 @@ export const arbeidstakerUtenAvvik = () => {
 
 export const brukersAndelUtenAvvik = () => {
   const andeler = [
-    lagAndel('BA', 34230, false, false),
-    lagAndel('AT', 534230, false, false),
+    lagAndel('BA', 34230, false),
+    lagAndel('AT', 534230, false),
   ];
   const perioder = [lagPeriodeMedDagsats(andeler, 2340)];
   perioder[0].bruttoInkludertBortfaltNaturalytelsePrAar = 564000;
@@ -392,7 +392,7 @@ export const brukersAndelUtenAvvik = () => {
 
 export const arbeidstakerMedAvvik = () => {
   lagKunATInntektsgrunnlag();
-  const andeler = [lagAndel('AT', 300000, false, false)];
+  const andeler = [lagAndel('AT', 300000, false)];
   andeler[0].skalFastsetteGrunnlag = true;
   const perioder = [lagStandardPeriode(andeler)];
   const statuser = [lagStatus('AT')];
@@ -422,8 +422,8 @@ export const arbeidstakerMedAvvik = () => {
 
 export const arbeidstakerFrilansMedAvvikMedGradering = () => {
   const andeler = [
-    lagAndel('AT', 551316, false, false),
-    lagAndel('FL', 596000, false, false),
+    lagAndel('AT', 551316, false),
+    lagAndel('FL', 596000, false),
   ];
   andeler[0].skalFastsetteGrunnlag = true;
   andeler[1].skalFastsetteGrunnlag = false;
@@ -457,8 +457,8 @@ export const arbeidstakerFrilansMedAvvikMedGradering = () => {
 
 export const militær = () => {
   const andeler = [
-    lagAndel('AT', 110232, false, false),
-    lagAndel('MS', 300000, false, false)];
+    lagAndel('AT', 110232, false),
+    lagAndel('MS', 300000, false)];
   const perioder = [lagPeriodeMedDagsats(andeler, 1234)];
   const statuser = [lagStatus('AT'), lagStatus('MS')];
   const bg = lagBG(perioder, statuser);
@@ -482,7 +482,7 @@ export const militær = () => {
 };
 
 export const selvstendigNæringsdrivende = () => {
-  const andeler = [lagAndel('SN', 300000, false, true)];
+  const andeler = [lagAndel('SN', 300000, false, undefined, true)];
   const perioder = [lagPeriodeMedDagsats(andeler)];
   const statuser = [lagStatus('SN')];
   const pgi = lagPGIVerdier();
@@ -548,9 +548,9 @@ export const selvstendigNæringsdrivende = () => {
 
 export const tidsbegrensetArbeidsforholdMedAvvik = () => {
   const andeler = [
-    lagAndel('AT', 300000, false, true),
-    lagAndel('AT', 132250, true, true),
-    lagAndel('AT', 140250, true, true),
+    lagAndel('AT', 300000, false, undefined, true),
+    lagAndel('AT', 132250, true, undefined, true),
+    lagAndel('AT', 140250, true, undefined, true),
     lagAndel('FL', 133250)];
   const nyArbeidsgiverOpplysningerPerId = {
     ...arbeidsgiverOpplysninger,
@@ -607,7 +607,7 @@ export const tidsbegrensetArbeidsforholdMedAvvik = () => {
 
 export const arbeidstakerFrilanserOgSelvstendigNæringsdrivende = () => {
   const andeler = [
-    lagAndel('SN', 300000, false, true),
+    lagAndel('SN', 300000, false, undefined, true),
     lagAndel('AT', 130250),
     lagAndel('FL', 230250)];
   const pgi = lagPGIVerdier();
@@ -641,10 +641,10 @@ export const arbeidstakerFrilanserOgSelvstendigNæringsdrivende = () => {
 export const naturalYtelse = () => {
   const andel1MedFrafall = lagAndel('AT', 240000);
   const andel1MedMerFrafall = lagAndel('AT', 240000);
-  const andel2UtenFrafall = lagAndel('AT', 740000, undefined, false, 744000);
-  const andel2MedFrafall = lagAndel('AT', 740000, undefined, false, 744000);
-  const andel3UtenFrafall = lagAndel('AT', 750000, undefined, false, 755000);
-  const andel3MedFrafall = lagAndel('AT', 750000, undefined, false, 755000);
+  const andel2UtenFrafall = lagAndel('AT', 740000, undefined, 744000);
+  const andel2MedFrafall = lagAndel('AT', 740000, undefined, 744000);
+  const andel3UtenFrafall = lagAndel('AT', 750000, undefined, 755000);
+  const andel3MedFrafall = lagAndel('AT', 750000, undefined, 755000);
   const nyArbeidsgiverOpplysningerPerId = {
     ...arbeidsgiverOpplysninger,
     9109090881: {
@@ -860,7 +860,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeUtenAkjsonspunkt = () => {
 
 export const arbeidstakerOgFrilansOgSelvstendigNæringsdrivendeMedAksjonspunktBehandlet = () => {
   const andeler = [
-    lagAndel('SN', 331000, undefined, true),
+    lagAndel('SN', 331000, undefined, undefined, true),
     lagAndel('AT', 355000),
     lagAndel('FL', 311000),
   ];
@@ -973,9 +973,9 @@ export const arbeidstakerDagpengerOgSelvstendigNæringsdrivendeUtenAksjonspunkt 
 
 export const arbeidstakerMed3Arbeidsforhold2ISammeOrganisasjonSide3 = () => {
   const andeler = [
-    lagAndel('AT', 395232, false, false),
-    lagAndel('AT', 78000, false, false),
-    lagAndel('AT', 88084, false, false),
+    lagAndel('AT', 395232, false),
+    lagAndel('AT', 78000, false),
+    lagAndel('AT', 88084, false),
   ];
   const nyArbeidsgiverOpplysningerPerId = {
     ...arbeidsgiverOpplysninger,
@@ -1025,7 +1025,7 @@ export const arbeidstakerMed3Arbeidsforhold2ISammeOrganisasjonSide3 = () => {
 
 export const arbeidstakerAvslagHalvGSide4 = () => {
   const andeler = [
-    lagAndel('AT', 32232, false, false),
+    lagAndel('AT', 32232, false),
   ];
   const nyArbeidsgiverOpplysningerPerId = {
     ...arbeidsgiverOpplysninger,
@@ -1069,7 +1069,7 @@ export const arbeidstakerAvslagHalvGSide4 = () => {
 };
 
 export const arbeidstakerMedAksjonspunktSide5 = () => {
-  const andeler = [lagAndel('AT', 348576, false, true)];
+  const andeler = [lagAndel('AT', 348576, false, undefined, true)];
   andeler[0].arbeidsforhold = lagArbeidsforhold('123456789',
     'sdefsef-swdefsdf-sdf-sdfdsf-98das',
     undefined,
@@ -1110,7 +1110,7 @@ export const arbeidstakerMedAksjonspunktSide5 = () => {
   );
 };
 export const arbeidstakerMedAksjonspunktBehandletSide6 = () => {
-  const andeler = [lagAndel('AT', 348576, false, true)];
+  const andeler = [lagAndel('AT', 348576, false, undefined, true)];
   andeler[0].overstyrtPrAar = 522864;
   andeler[0].bruttoPrAar = 522864;
 
@@ -1147,8 +1147,8 @@ export const arbeidstakerMedAksjonspunktBehandletSide6 = () => {
 };
 export const tidsbegrensetArbeidsforholdMedAksjonspunktkSide7 = () => {
   const andeler = [
-    lagAndel('AT', 395232, false, true),
-    lagAndel('AT', 156084, true, true),
+    lagAndel('AT', 395232, false, undefined, true),
+    lagAndel('AT', 156084, true, undefined, true),
   ];
   const nyArbeidsgiverOpplysningerPerId = {
     ...arbeidsgiverOpplysninger,
@@ -1202,8 +1202,8 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktkSide7 = () => {
 };
 export const tidsbegrensetArbeidsforholdMedAksjonspunktBehandletSide7 = () => {
   const andeler = [
-    lagAndel('AT', 395232, false, true),
-    lagAndel('AT', 156084, true, true),
+    lagAndel('AT', 395232, false, undefined, true),
+    lagAndel('AT', 156084, true, undefined, true),
   ];
   const nyArbeidsgiverOpplysningerPerId = {
     ...arbeidsgiverOpplysninger,
@@ -1278,7 +1278,7 @@ export const tidsbegrensetArbeidsforholdMedAksjonspunktBehandletSide7 = () => {
   );
 };
 export const FrilansSide8 = () => {
-  const andeler = [lagAndel('FL', 551316, undefined, false)];
+  const andeler = [lagAndel('FL', 551316, undefined)];
   const perioder = [lagPeriodeMedDagsats(andeler, 1696)];
   perioder[0].redusertPrAar = 441053;
   perioder[0].bruttoInkludertBortfaltNaturalytelsePrAar = 441053;
@@ -1336,8 +1336,8 @@ export const FrilansMedAksjonspunktSide9 = () => {
 };
 export const arbeidstakerFrilansMedAksjonspunktSide10 = () => {
   const andeler = [
-    lagAndel('AT', 551316, false, false),
-    lagAndel('FL', 596000, false, true)];
+    lagAndel('AT', 551316, false),
+    lagAndel('FL', 596000, false, undefined, true)];
   const perioder = [lagStandardPeriode(andeler)];
   const statuser = [lagStatus('AT_FL')];
   const sammenligningsgrunnlagPrStatus = [
@@ -1367,8 +1367,8 @@ export const arbeidstakerFrilansMedAksjonspunktSide10 = () => {
 };
 export const arbeidstakerFrilansMedAksjonspunktBehandletSide11 = () => {
   const andeler = [
-    lagAndel('AT', 551316, false, false),
-    lagAndel('FL', 596000, false, true)];
+    lagAndel('AT', 551316, false),
+    lagAndel('FL', 596000, false, undefined, true)];
   andeler[1].overstyrtPrAar = 159000;
   andeler[1].bruttoPrAar = 159000;
   const perioder = [lagPeriodeMedDagsats(andeler, 1843)];
@@ -1406,7 +1406,7 @@ export const arbeidstakerFrilansMedAksjonspunktBehandletSide11 = () => {
 
 export const SelvstendigNæringsdrivendeUtenVarigEndringIkkeNyoppstartetSide12 = () => {
   const andeler = [
-    lagAndel('SN', 631129, undefined, false),
+    lagAndel('SN', 631129, undefined),
   ];
   const pgi = lagPGIVerdier();
   andeler[0].pgiVerdier = pgi;
@@ -1530,7 +1530,7 @@ export const SelvstendigNæringsdrivendeMedVarigEndringSide13 = () => {
 };
 export const SelvstendigNæringsdrivendeMedVarigEndringMedAksjonspunktSide14 = () => {
   const andeler = [
-    lagAndel('SN', 531000, undefined, true),
+    lagAndel('SN', 531000, undefined, undefined, true),
   ];
   const pgi = lagPGIVerdier();
   andeler[0].pgiVerdier = pgi;
@@ -1586,7 +1586,7 @@ export const SelvstendigNæringsdrivendeMedVarigEndringMedAksjonspunktSide14 = (
 };
 export const SelvstendigNæringsdrivendeMedVarigEndringMedAksjonspunktUtførtSide15 = () => {
   const andeler = [
-    lagAndel('SN', 531000, undefined, true),
+    lagAndel('SN', 531000, undefined, undefined, true),
   ];
   const pgi = lagPGIVerdier();
   andeler[0].pgiVerdier = pgi;
@@ -1645,7 +1645,7 @@ export const SelvstendigNæringsdrivendeMedVarigEndringMedAksjonspunktUtførtSid
 };
 export const SelvstendigNæringsdrivendeNyoppstartetMedAksjonspunktSide16 = () => {
   const andeler = [
-    lagAndel('SN', 531000, undefined, true),
+    lagAndel('SN', 531000, undefined, undefined, true),
   ];
   const pgi = lagPGIVerdier();
   andeler[0].pgiVerdier = pgi;
@@ -1701,7 +1701,7 @@ export const SelvstendigNæringsdrivendeNyoppstartetMedAksjonspunktSide16 = () =
 };
 export const SelvstendigNæringsdrivendeNyINæringslivetMedAksjonspunktSide17 = () => {
   const andeler = [
-    lagAndel('SN', 531000, undefined, true),
+    lagAndel('SN', 531000, undefined, undefined, true),
   ];
   const pgi = lagPGIVerdier();
   andeler[0].pgiVerdier = pgi;
@@ -1868,7 +1868,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeSnMindreEnnAtOgStorreEnn6g
 
 export const arbeidstakerOgSelvstendigNæringsdrivendeMedAPVarigEndringSide20 = () => {
   const andeler = [
-    lagAndel('SN', 531000, undefined, true),
+    lagAndel('SN', 531000, undefined, undefined, true),
     lagAndel('AT', 551316),
   ];
   const pgi = lagPGIVerdier();
@@ -1922,7 +1922,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeMedAPVarigEndringSide20 = 
 };
 export const arbeidstakerOgSelvstendigNæringsdrivendeMedVarigEndringApBehandletSide21 = () => {
   const andeler = [
-    lagAndel('SN', 531000, undefined, true),
+    lagAndel('SN', 531000, undefined, undefined, true),
     lagAndel('AT', 551316),
   ];
   const pgi = lagPGIVerdier();
@@ -1982,7 +1982,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeMedVarigEndringApBehandlet
 };
 export const arbeidstakerOgSelvstendigNæringsdrivendeAtStorreEnnSNSide22 = () => {
   const andeler = [
-    lagAndel('SN', 0, undefined, true, 780342),
+    lagAndel('SN', 0, undefined, 780342, true),
     lagAndel('AT', 851316),
   ];
   const pgi = lagPGIVerdier();
@@ -2042,7 +2042,7 @@ export const arbeidstakerOgSelvstendigNæringsdrivendeAtStorreEnnSNSide22 = () =
 };
 export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedApOgVarigEndringSide23 = () => {
   const andeler = [
-    lagAndel('SN', 531000, undefined, true),
+    lagAndel('SN', 531000, undefined, undefined, true),
     lagAndel('AT', 24000),
     lagAndel('FL', 596000),
   ];
@@ -2097,7 +2097,7 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedApOgVarigEndring
 };
 export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedApOgVarigEndringSide24 = () => {
   const andeler = [
-    lagAndel('SN', 531000, undefined, true),
+    lagAndel('SN', 531000, undefined, undefined, true),
     lagAndel('AT', 24000, undefined),
     lagAndel('FL', 596000, undefined),
   ];
@@ -2163,7 +2163,7 @@ export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedApOgVarigEndring
 };
 export const arbeidstakerFrilansOgSelvstendigNæringsdrivendeMedAPVarigEndringSnMindreEnnATFLSide25 = () => {
   const andeler = [
-    lagAndel('SN', 531000, undefined, true),
+    lagAndel('SN', 531000, undefined, undefined, true),
     lagAndel('AT', 551316),
     lagAndel('FL', 596000),
   ];
@@ -2257,7 +2257,7 @@ export const YtelseFraNavSide26 = () => {
 };
 export const arbeidstakerOgAAPMedAksjonspunktSide27 = () => {
   const andeler = [
-    lagAndel('AT', 107232, false, true),
+    lagAndel('AT', 107232, false, undefined, true),
     lagAndel('AAP', 272304, false)];
   const perioder = [lagPeriodeMedDagsats(andeler, 1234)];
   const statuser = [lagStatus('AT'), lagStatus('AAP')];
@@ -2286,7 +2286,7 @@ export const arbeidstakerOgAAPMedAksjonspunktSide27 = () => {
 };
 export const arbeidstakerOgAAPMedAksjonspunktOppfyltSide27 = () => {
   const andeler = [
-    lagAndel('AT', 107232, false, true),
+    lagAndel('AT', 107232, false, undefined, true),
     lagAndel('AAP', 272304, false)];
   andeler[0].overstyrtPrAar = 167000;
   const nyArbeidsgiverOpplysningerPerId = {
@@ -2473,7 +2473,7 @@ export const frilansDagpengerOgSelvstendigNæringsdrivendeMedAksjonspunktSide31 
   const andeler = [
     lagAndel('FL', 40824),
     lagAndel('DP', 272304),
-    lagAndel('SN', 631129, undefined, true),
+    lagAndel('SN', 631129, undefined, undefined, true),
   ];
   const pgi = lagPGIVerdier();
   andeler[2].pgiVerdier = pgi;

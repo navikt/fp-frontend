@@ -95,38 +95,36 @@ export const VirksomhetIdentifikasjonPanel: FunctionComponent<PureOwnProps & Map
       )}
       { !virksomhetRegistrertINorge && virksomhetRegistrertINorge !== undefined
       && (
-        <>
-          <ArrowBox alignOffset={57}>
-            <Row>
-              <Column xs="5">
-                <SelectField
-                  name="landJobberFra"
-                  selectValues={countrySelectValues(sortedCountriesByName)}
-                  validate={[required]}
-                  label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.Country' })}
-                />
-              </Column>
-            </Row>
-            <Row>
-              <Column xs="3">
-                <DatepickerField
-                  readOnly={readOnly}
-                  validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
-                  name="fom"
-                  label={{ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeFom' }}
-                />
-              </Column>
-              <Column xs="3">
-                <DatepickerField
-                  readOnly={readOnly}
-                  validate={[hasValidDate]}
-                  name="tom"
-                  label={{ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeTom' }}
-                />
-              </Column>
-            </Row>
-          </ArrowBox>
-        </>
+        <ArrowBox alignOffset={57}>
+          <Row>
+            <Column xs="5">
+              <SelectField
+                name="landJobberFra"
+                selectValues={countrySelectValues(sortedCountriesByName)}
+                validate={[required]}
+                label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.Country' })}
+              />
+            </Column>
+          </Row>
+          <Row>
+            <Column xs="3">
+              <DatepickerField
+                readOnly={readOnly}
+                validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
+                name="fom"
+                label={{ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeFom' }}
+              />
+            </Column>
+            <Column xs="3">
+              <DatepickerField
+                readOnly={readOnly}
+                validate={[hasValidDate]}
+                name="tom"
+                label={{ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeTom' }}
+              />
+            </Column>
+          </Row>
+        </ArrowBox>
       )}
     </>
   );

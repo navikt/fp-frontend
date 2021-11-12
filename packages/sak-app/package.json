@@ -46,7 +46,7 @@
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/types-avklar-aksjonspunkter": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
-    "@sentry/browser": "^6.14.1",
+    "@sentry/browser": "^6.14.3",
     "axios": "0.24.0",
     "history": "^5.1.0",
     "moment": "^2.29.1",

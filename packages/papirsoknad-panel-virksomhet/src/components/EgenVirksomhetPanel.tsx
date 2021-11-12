@@ -52,20 +52,17 @@ export const EgenVirksomhetPanel: FunctionComponent<PureOwnProps & MappedOwnProp
             <RadioOption label={intl.formatMessage({ id: 'Registrering.EgenVirksomhet.Yes' })} value />
           </RadioGroupField>
         </div>
-        <>
-          {harArbeidetIEgenVirksomhet
-        && (
-        <FieldArray
-          name={virksomhetsFieldArrayName}
-          component={RegistrerVirksomhetPanel}
-          form={form}
-          namePrefix={EGEN_VIRKSOMHET_FORM_NAME_PREFIX}
-          validate={[arrayMinLength1]}
-          readOnly={readOnly}
-          alleKodeverk={alleKodeverk}
-        />
+        {harArbeidetIEgenVirksomhet && (
+          <FieldArray
+            name={virksomhetsFieldArrayName}
+            component={RegistrerVirksomhetPanel}
+            form={form}
+            namePrefix={EGEN_VIRKSOMHET_FORM_NAME_PREFIX}
+            validate={[arrayMinLength1]}
+            readOnly={readOnly}
+            alleKodeverk={alleKodeverk}
+          />
         )}
-        </>
       </SkjemaGruppe>
     </BorderBox>
   </FormSection>

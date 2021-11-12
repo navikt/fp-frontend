@@ -108,6 +108,7 @@ const formaterAksjonspunkt = (aksjonspunkt: HistorikkInnslagAksjonspunkt, intl: 
   );
 };
 
+// @ts-ignore Fiks
 const HistorikkMalType3: FunctionComponent<HistorikkMal & WrappedComponentProps> = ({
   intl,
   historikkinnslag,
@@ -115,9 +116,9 @@ const HistorikkMalType3: FunctionComponent<HistorikkMal & WrappedComponentProps>
   getKodeverknavn,
   createLocationForSkjermlenke,
   erTilbakekreving,
-}) => (
-  <>
-    {historikkinnslag.historikkinnslagDeler && historikkinnslag.historikkinnslagDeler.map((historikkinnslagDel, index) => (
+}) => {
+  if (historikkinnslag.historikkinnslagDeler) {
+    return historikkinnslag.historikkinnslagDeler.map((historikkinnslagDel, index) => (
       <div key={`totrinnsvurdering${index + 1}`}>
         {historikkinnslagDel.hendelse && (
           <>
@@ -139,8 +140,9 @@ const HistorikkMalType3: FunctionComponent<HistorikkMal & WrappedComponentProps>
           </div>
         ))}
       </div>
-    ))}
-  </>
-);
+    ));
+  }
+  return null;
+};
 
 export default injectIntl(HistorikkMalType3);

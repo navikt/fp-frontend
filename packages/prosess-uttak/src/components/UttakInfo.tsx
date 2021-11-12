@@ -214,29 +214,27 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
                 </>
                 {erSamtidigUttak
                   && (
-                    <>
-                      <Row className={styles.fieldHorizontal}>
-                        <Column className={styles.textAlignRight}>
-                          <DecimalField
-                            name="samtidigUttaksprosent"
-                            bredde="XS"
-                            readOnly={readOnly}
-                            value={selectedItemData.samtidigUttaksprosent}
-                            label={{ id: 'UttakInfo.SamtidigUttaksprosent' }}
-                            validate={[required, maxValue100, hasValidDecimal]}
-                            format={(value) => {
-                              if (value || value === 0) {
-                                return readOnly ? `${value} %` : value;
-                              }
-                              return '';
-                            }}
+                    <Row className={styles.fieldHorizontal}>
+                      <Column className={styles.textAlignRight}>
+                        <DecimalField
+                          name="samtidigUttaksprosent"
+                          bredde="XS"
+                          readOnly={readOnly}
+                          value={selectedItemData.samtidigUttaksprosent}
+                          label={{ id: 'UttakInfo.SamtidigUttaksprosent' }}
+                          validate={[required, maxValue100, hasValidDecimal]}
+                          format={(value) => {
+                            if (value || value === 0) {
+                              return readOnly ? `${value} %` : value;
+                            }
+                            return '';
+                          }}
                             // @ts-ignore Fiks dette
-                            normalizeOnBlur={(value) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
-                          />
-                        </Column>
+                          normalizeOnBlur={(value) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
+                        />
+                      </Column>
                         {!readOnly && <Column className={styles.suffix}>%</Column>}
-                      </Row>
-                    </>
+                    </Row>
                   )}
               </Column>
             </Row>
