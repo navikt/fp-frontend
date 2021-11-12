@@ -95,15 +95,13 @@ const FordelingFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Injec
       isReadOnly={readOnly}
       hasBegrunnelse={hasBegrunnelse}
     />
-    <>
-      <VerticalSpacer twentyPx />
-      <FaktaSubmitButton
-        formName={formProps.form}
-        isSubmittable={submittable && submitEnabled}
-        isReadOnly={readOnly}
-        hasOpenAksjonspunkter={!isAksjonspunktClosed}
-      />
-    </>
+    <VerticalSpacer twentyPx />
+    <FaktaSubmitButton
+      formName={formProps.form}
+      isSubmittable={submittable && submitEnabled}
+      isReadOnly={readOnly}
+      hasOpenAksjonspunkter={!isAksjonspunktClosed}
+    />
   </form>
 );
 

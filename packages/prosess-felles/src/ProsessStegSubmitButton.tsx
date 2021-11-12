@@ -42,9 +42,9 @@ export const ProsessStegSubmitButton: FunctionComponent<PureOwnProps & MappedOwn
   isDirty,
   hasEmptyRequiredFields,
   text,
-}) => (
-  <>
-    {!isReadOnly && (
+}) => {
+  if (!isReadOnly) {
+    return (
       <Hovedknapp
         mini
         spinner={isSubmitting}
@@ -53,9 +53,10 @@ export const ProsessStegSubmitButton: FunctionComponent<PureOwnProps & MappedOwn
       >
         {text || intl.formatMessage({ id: 'SubmitButton.ConfirmInformation' })}
       </Hovedknapp>
-    )}
-  </>
-);
+    );
+  }
+  return null;
+};
 
 const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => {
   const fNames = ownProps.formNames ? ownProps.formNames : [ownProps.formName];

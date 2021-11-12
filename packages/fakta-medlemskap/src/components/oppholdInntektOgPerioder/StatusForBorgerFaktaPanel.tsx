@@ -69,62 +69,58 @@ const StatusForBorgerFaktaPanelImpl: FunctionComponent<PureOwnProps & MappedOwnP
       </RadioGroupField>
 
       {erEosBorger && (
-        <>
-          <ArrowBox>
-            <Undertekst>
-              <FormattedMessage id="StatusForBorgerFaktaPanel.Oppholdsrett" />
-            </Undertekst>
-            <VerticalSpacer fourPx />
-            <RadioGroupField
-              name="oppholdsrettVurdering"
-              validate={[required]}
-              readOnly={readOnly}
-              isEdited={isBorgerAksjonspunktClosed}
-            >
-              <RadioOption label={{ id: 'StatusForBorgerFaktaPanel.HarOppholdsrett' }} value />
-              <RadioOption
-                label={(
-                  <FormattedMessage
-                    id="StatusForBorgerFaktaPanel.HarIkkeOppholdsrett"
-                    values={{
-                      b: (chunks: any) => <b>{chunks}</b>,
-                    }}
-                  />
+        <ArrowBox>
+          <Undertekst>
+            <FormattedMessage id="StatusForBorgerFaktaPanel.Oppholdsrett" />
+          </Undertekst>
+          <VerticalSpacer fourPx />
+          <RadioGroupField
+            name="oppholdsrettVurdering"
+            validate={[required]}
+            readOnly={readOnly}
+            isEdited={isBorgerAksjonspunktClosed}
+          >
+            <RadioOption label={{ id: 'StatusForBorgerFaktaPanel.HarOppholdsrett' }} value />
+            <RadioOption
+              label={(
+                <FormattedMessage
+                  id="StatusForBorgerFaktaPanel.HarIkkeOppholdsrett"
+                  values={{
+                    b: (chunks: any) => <b>{chunks}</b>,
+                  }}
+                />
                 )}
-                value={false}
-              />
-            </RadioGroupField>
-          </ArrowBox>
-        </>
+              value={false}
+            />
+          </RadioGroupField>
+        </ArrowBox>
       )}
       {erEosBorger === false && (
-        <>
-          <ArrowBox alignOffset={130}>
-            <Undertekst>
-              <FormattedMessage id="StatusForBorgerFaktaPanel.LovligOpphold" />
-            </Undertekst>
-            <VerticalSpacer fourPx />
-            <RadioGroupField
-              name="lovligOppholdVurdering"
-              validate={[required]}
-              readOnly={readOnly}
-              isEdited={isBorgerAksjonspunktClosed}
-            >
-              <RadioOption label={{ id: 'StatusForBorgerFaktaPanel.HarLovligOpphold' }} value />
-              <RadioOption
-                label={(
-                  <FormattedMessage
-                    id="StatusForBorgerFaktaPanel.HarIkkeLovligOpphold"
-                    values={{
-                      b: (chunks: any) => <b>{chunks}</b>,
-                    }}
-                  />
+        <ArrowBox alignOffset={130}>
+          <Undertekst>
+            <FormattedMessage id="StatusForBorgerFaktaPanel.LovligOpphold" />
+          </Undertekst>
+          <VerticalSpacer fourPx />
+          <RadioGroupField
+            name="lovligOppholdVurdering"
+            validate={[required]}
+            readOnly={readOnly}
+            isEdited={isBorgerAksjonspunktClosed}
+          >
+            <RadioOption label={{ id: 'StatusForBorgerFaktaPanel.HarLovligOpphold' }} value />
+            <RadioOption
+              label={(
+                <FormattedMessage
+                  id="StatusForBorgerFaktaPanel.HarIkkeLovligOpphold"
+                  values={{
+                    b: (chunks: any) => <b>{chunks}</b>,
+                  }}
+                />
                 )}
-                value={false}
-              />
-            </RadioGroupField>
-          </ArrowBox>
-        </>
+              value={false}
+            />
+          </RadioGroupField>
+        </ArrowBox>
       )}
     </FaktaGruppe>
   );

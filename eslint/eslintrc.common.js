@@ -56,6 +56,7 @@ const config = {
     'jest/valid-expect': OFF,
     'function-paren-newline': OFF,
     'function-call-argument-newline': OFF,
+    'no-restricted-exports': OFF,
     'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/*.spec.ts', '**/*.spec.tsx', '**/*.stories.tsx'] }],
     'react/function-component-definition': ['error', {
       namedComponents: 'arrow-function',
@@ -72,6 +73,7 @@ const config = {
 
     // TODO (TOR) Ignorert inntil videre grunnet kost/nytte
     'react/no-unstable-nested-components': OFF,
+    'prefer-regex-literals': OFF,
     'max-classes-per-file': OFF,
     'jsx-a11y/anchor-is-valid': OFF,
     'jsx-a11y/control-has-associated-label': OFF,

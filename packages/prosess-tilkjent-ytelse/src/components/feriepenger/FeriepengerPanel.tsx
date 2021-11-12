@@ -40,30 +40,28 @@ export const FeriepengerPanel: FunctionComponent<OwnProps> = ({
   }
   const opptjeningsår = useMemo(() => finnListeMedOpptjeningsår(andeler), [andeler]);
   return (
-    <>
-      <Row>
-        <Column xs="6">
-          <EkspanderbartpanelBase
-            tittel={hentTittel()}
-            apen={erPanelÅpent}
-            onClick={togglePanel}
-          >
-            {opptjeningsår.map((år) => (
-              <div key={`div_${år}`}>
-                <VerticalSpacer sixteenPx key={`spacer_${år}`} />
-                <FeriepengerPrAar
-                  key={`tabell_${år}`}
-                  alleAndeler={andeler}
-                  opptjeningsår={år}
-                  alleKodeverk={alleKodeverk}
-                  arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-                />
-              </div>
-            ))}
-          </EkspanderbartpanelBase>
-        </Column>
-      </Row>
-    </>
+    <Row>
+      <Column xs="6">
+        <EkspanderbartpanelBase
+          tittel={hentTittel()}
+          apen={erPanelÅpent}
+          onClick={togglePanel}
+        >
+          {opptjeningsår.map((år) => (
+            <div key={`div_${år}`}>
+              <VerticalSpacer sixteenPx key={`spacer_${år}`} />
+              <FeriepengerPrAar
+                key={`tabell_${år}`}
+                alleAndeler={andeler}
+                opptjeningsår={år}
+                alleKodeverk={alleKodeverk}
+                arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+              />
+            </div>
+          ))}
+        </EkspanderbartpanelBase>
+      </Column>
+    </Row>
   );
 };
 

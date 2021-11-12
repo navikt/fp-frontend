@@ -15,15 +15,13 @@ export const FeriepengerIndex: FunctionComponent<OwnProps> = ({
 }) => {
   const [erPanelApent, togglePanel] = useState(false);
   return (
-    <>
-      <FeriepengerPanel
-        feriepengegrunnlag={feriepengegrunnlag}
-        alleKodeverk={alleKodeverk}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        erPanelÅpent={erPanelApent}
-        togglePanel={() => togglePanel(!erPanelApent)}
-      />
-    </>
+    <FeriepengerPanel
+      feriepengegrunnlag={feriepengegrunnlag}
+      alleKodeverk={alleKodeverk}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      erPanelÅpent={erPanelApent}
+      togglePanel={() => togglePanel(!erPanelApent)}
+    />
   );
 };
 

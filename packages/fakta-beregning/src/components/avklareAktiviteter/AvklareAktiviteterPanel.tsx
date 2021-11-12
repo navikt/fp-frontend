@@ -280,25 +280,24 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
         <form onSubmit={formProps.handleSubmit}>
           {overskriftOgKnapp}
           <VerticalSpacer sixteenPx />
-          <>
-            {hasAksjonspunkt(AVKLAR_AKTIVITETER, aksjonspunkter) && (
+          {hasAksjonspunkt(AVKLAR_AKTIVITETER, aksjonspunkter) && (
             <AksjonspunktHelpTextTemp isAksjonspunktOpen={!isAksjonspunktClosed}>{helpText}</AksjonspunktHelpTextTemp>
-            )}
-            {formProps.error && (
+          )}
+          {formProps.error && (
             <>
               <VerticalSpacer sixteenPx />
               <AlertStripe type="feil">
                 <FormattedMessage id={formProps.error} />
               </AlertStripe>
             </>
-            )}
-            {erOverstyrt && (
+          )}
+          {erOverstyrt && (
             <Element>
               <FormattedMessage id="AvklareAktiviteter.OverstyrerAktivitetAdvarsel" />
             </Element>
-            )}
-            <VerticalSpacer twentyPx />
-            {avklarAktiviteter && avklarAktiviteter.aktiviteterTomDatoMapping && (
+          )}
+          <VerticalSpacer twentyPx />
+          {avklarAktiviteter && avklarAktiviteter.aktiviteterTomDatoMapping && (
             <VurderAktiviteterPanel
               aktiviteterTomDatoMapping={avklarAktiviteter.aktiviteterTomDatoMapping}
               readOnly={readOnly}
@@ -310,9 +309,9 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
               formNameAvklarAktiviteter={formNameAvklarAktiviteter}
               arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             />
-            )}
-            <VerticalSpacer twentyPx />
-            {skalViseSubmitKnappEllerBegrunnelse(aksjonspunkter, erOverstyrt) && (
+          )}
+          <VerticalSpacer twentyPx />
+          {skalViseSubmitKnappEllerBegrunnelse(aksjonspunkter, erOverstyrt) && (
             <>
               <FaktaBegrunnelseTextField
                 name={BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME}
@@ -352,8 +351,8 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
               </>
               )}
             </>
-            )}
-            {skalViseSubmitknappForPanel(harAndreAksjonspunkterIPanel, erOverstyrt, erBgOverstyrt, aksjonspunkter) && (
+          )}
+          {skalViseSubmitknappForPanel(harAndreAksjonspunkterIPanel, erOverstyrt, erBgOverstyrt, aksjonspunkter) && (
             <>
               <VerticalSpacer twentyPx />
               <FaktaSubmitButton
@@ -364,8 +363,7 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
                 hasOpenAksjonspunkter={!isAksjonspunktClosed}
               />
             </>
-            )}
-          </>
+          )}
         </form>
         {harAndreAksjonspunkterIPanel && <VerticalSpacer twentyPx />}
       </>

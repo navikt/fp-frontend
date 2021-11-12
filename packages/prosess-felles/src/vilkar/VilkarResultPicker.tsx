@@ -96,29 +96,27 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
         />
       </RadioGroupField>
     )}
+    {erVilkarOk !== undefined && !erVilkarOk && avslagsarsaker && (
     <>
-      {erVilkarOk !== undefined && !erVilkarOk && avslagsarsaker && (
-        <>
-          <VerticalSpacer eightPx />
-          <SelectField
-            name="avslagCode"
-            label={intl.formatMessage({ id: 'VilkarResultPicker.Arsak' })}
-            placeholder={intl.formatMessage({ id: 'VilkarResultPicker.SelectArsak' })}
-            selectValues={avslagsarsaker.map((aa) => <option key={aa.kode} value={aa.kode}>{aa.navn}</option>)}
-            bredde="xl"
-            readOnly={readOnly}
-          />
-          {erMedlemskapsPanel && (
-          <DatepickerField
-            name="avslagDato"
-            label={intl.formatMessage({ id: 'VilkarResultPicker.VilkarDato' })}
-            readOnly={readOnly}
-            validate={[required, hasValidDate]}
-          />
-          )}
-        </>
+      <VerticalSpacer eightPx />
+      <SelectField
+        name="avslagCode"
+        label={intl.formatMessage({ id: 'VilkarResultPicker.Arsak' })}
+        placeholder={intl.formatMessage({ id: 'VilkarResultPicker.SelectArsak' })}
+        selectValues={avslagsarsaker.map((aa) => <option key={aa.kode} value={aa.kode}>{aa.navn}</option>)}
+        bredde="xl"
+        readOnly={readOnly}
+      />
+      {erMedlemskapsPanel && (
+      <DatepickerField
+        name="avslagDato"
+        label={intl.formatMessage({ id: 'VilkarResultPicker.VilkarDato' })}
+        readOnly={readOnly}
+        validate={[required, hasValidDate]}
+      />
       )}
     </>
+    )}
     <VerticalSpacer eightPx />
   </div>
 );

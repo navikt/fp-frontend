@@ -11,6 +11,7 @@ interface OwnPropsWrapper {
   className: string;
 }
 
+// @ts-ignore fiks
 const Wrapper: FunctionComponent<OwnPropsWrapper> = ({
   withoutBorder,
   error,

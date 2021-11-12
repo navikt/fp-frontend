@@ -22,26 +22,24 @@ const lagRadNøkkel = (andel: RefusjonTilVurderingAndel): string => {
 export const TidligereUtbetalinger: FunctionComponent<OwnProps> = ({ beregningsgrunnlag, arbeidsgiverOpplysningerPerId }) => {
   const { andeler } = beregningsgrunnlag.refusjonTilVurdering;
   return (
-    <>
-      <Row>
-        <Column xs="8">
-          <Table
-            headerTextCodes={['BeregningInfoPanel.RefusjonBG.Aktivitet', 'BeregningInfoPanel.RefusjonBG.TidligereUtb',
-              'BeregningInfoPanel.RefusjonBG.GjeldendeFra']}
-            noHover
-            classNameTable={styles.tabell}
-          >
-            { andeler.map((andel) => (
-              <TidligereUtbetalingRad
-                arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-                refusjonAndel={andel}
-                key={lagRadNøkkel(andel)}
-              />
-            ))}
-          </Table>
-        </Column>
-      </Row>
-    </>
+    <Row>
+      <Column xs="8">
+        <Table
+          headerTextCodes={['BeregningInfoPanel.RefusjonBG.Aktivitet', 'BeregningInfoPanel.RefusjonBG.TidligereUtb',
+            'BeregningInfoPanel.RefusjonBG.GjeldendeFra']}
+          noHover
+          classNameTable={styles.tabell}
+        >
+          { andeler.map((andel) => (
+            <TidligereUtbetalingRad
+              arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+              refusjonAndel={andel}
+              key={lagRadNøkkel(andel)}
+            />
+          ))}
+        </Table>
+      </Column>
+    </Row>
   );
 };
 
