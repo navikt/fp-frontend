@@ -13,6 +13,8 @@ import VurderRefusjonBeregningsgrunnlagAP
   from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/VurderRefusjonBeregningsgrunnlagAP';
 import VurderEndringRefusjonForm from './refusjon/VurderEndringRefusjonForm';
 import FordelingForm from './FordelingForm';
+import VurderRefusjonValues from '../types/VurderRefusjonTsType';
+import FordelBeregningsgrunnlagMedAksjonspunktValues from '../types/FordelingTsType';
 
 const {
   FORDEL_BEREGNINGSGRUNNLAG,
@@ -35,6 +37,8 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
   behandlingType: Kodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  formData?: VurderRefusjonValues & FordelBeregningsgrunnlagMedAksjonspunktValues,
+  setFormData: (data: VurderRefusjonValues & FordelBeregningsgrunnlagMedAksjonspunktValues) => void,
 }
 
 interface OwnState {
@@ -75,6 +79,8 @@ export class FordelBeregningsgrunnlagPanel extends Component<OwnProps & WrappedC
         behandlingType,
         submittable,
         arbeidsgiverOpplysningerPerId,
+        formData,
+        setFormData,
       },
       state: {
         submitEnabled,
@@ -96,6 +102,8 @@ export class FordelBeregningsgrunnlagPanel extends Component<OwnProps & WrappedC
         beregningsgrunnlag={beregningsgrunnlag}
         aksjonspunkter={aksjonspunkter}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        formData={formData}
+        setFormData={setFormData}
       />
       )}
         {skalViseFordeling && (
