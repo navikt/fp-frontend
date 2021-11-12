@@ -14,7 +14,7 @@ const config = {
   performance: { hints: false },
 
   entry: [
-    APP_DIR + '/index.tsx',
+    APP_DIR + '/index.ts',
   ],
   output: {
     filename: '[name]-[contenthash].js',

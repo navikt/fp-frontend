@@ -3,9 +3,12 @@ const CircularDependencyPlugin = require('circular-dependency-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const ExternalTemplateRemotesPlugin = require('external-remotes-plugin');
 const webpack = require('webpack');
+const { ModuleFederationPlugin } = require('webpack').container;
 const path = require('path');
-const PACKAGE = require('./../package.json');
+const PACKAGE = require('../package.json');
+const deps = require('../package.json').dependencies;
 const VERSION = PACKAGE.version;
 
 const ROOT_DIR = path.resolve(__dirname, '../public/client');
@@ -168,6 +171,23 @@ const config = {
       exclude: /node_modules/,
       failOnError: true,
     }),
+    new ModuleFederationPlugin({
+      name: "fp-frontend",
+      remotes: {
+        fp_tilbake_frontend: 'fp_tilbake_frontend@[getFpTilbakeUrl()]/remoteEntry.js',
+      },
+      shared: {
+        react: {
+          singleton: true,
+          requiredVersion: deps.react,
+        },
+        "react-dom": {
+          singleton: true,
+          requiredVersion: deps["react-dom"],
+        },
+      },
+    }),
+    new ExternalTemplateRemotesPlugin(),
   ],
 };
 
