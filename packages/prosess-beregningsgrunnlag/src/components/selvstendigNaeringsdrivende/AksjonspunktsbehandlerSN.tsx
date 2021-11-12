@@ -29,21 +29,22 @@ const AksjonspunktsbehandlerSN: FunctionComponent<OwnProps> = ({
   erVarigEndring,
   erNyoppstartet,
   endretTekst,
-}) => (
-  <>
-    { skalFastsetteSN(aksjonspunkter)
-      && (
-        <VurderOgFastsettSN
-          gjeldendeAksjonspunkter={aksjonspunkter}
-          readOnly={readOnly}
-          erNyArbLivet={erNyArbLivet}
-          erVarigEndring={erVarigEndring}
-          erNyoppstartet={erNyoppstartet}
-          endretTekst={endretTekst}
-        />
-      )}
-  </>
-);
+}) => {
+  if (skalFastsetteSN(aksjonspunkter)) {
+    return (
+      <VurderOgFastsettSN
+        gjeldendeAksjonspunkter={aksjonspunkter}
+        readOnly={readOnly}
+        erNyArbLivet={erNyArbLivet}
+        erVarigEndring={erVarigEndring}
+        erNyoppstartet={erNyoppstartet}
+        endretTekst={endretTekst}
+      />
+    );
+  }
+  return null;
+};
+
 AksjonspunktsbehandlerSN.defaultProps = {
   erNyArbLivet: false,
   erVarigEndring: false,

@@ -21,9 +21,9 @@ interface OwnProps {
 
 const PermisjonPeriode: FunctionComponent<OwnProps> = ({
   arbeidsforhold,
-}) => (
-  <>
-    { arbeidsforhold.permisjoner && arbeidsforhold.permisjoner.length > 0 && (
+}) => {
+  if (arbeidsforhold.permisjoner && arbeidsforhold.permisjoner.length > 0) {
+    return (
       <div>
         <VerticalSpacer sixteenPx />
         <Normaltekst>
@@ -39,8 +39,9 @@ const PermisjonPeriode: FunctionComponent<OwnProps> = ({
         ))}
         <VerticalSpacer sixteenPx />
       </div>
-    )}
-  </>
-);
+    );
+  }
+  return null;
+};
 
 export default PermisjonPeriode;

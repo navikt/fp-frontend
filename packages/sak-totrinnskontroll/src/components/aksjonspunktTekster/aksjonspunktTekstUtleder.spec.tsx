@@ -747,7 +747,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
       beregningDto,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, beregningTilfeller, erTilbakekreving, aksjonspunkt);
-    expect(message[0]).toEqual(<>Vurder tidsbegrenset arbeidsforhold</>);
+    expect(message[0]).toEqual(<div>Vurder tidsbegrenset arbeidsforhold</div>);
   });
   it('skal vise korrekt tekst for aksjonspunkt 5058 ATFL i samme org', () => {
     const beregningTilfeller = [{
@@ -763,7 +763,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
       beregningDto,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, beregningTilfeller, erTilbakekreving, aksjonspunkt);
-    expect(message[0]).toEqual(<>Vurder at og fl</>);
+    expect(message[0]).toEqual(<div>Vurder at og fl</div>);
   });
   it('skal vise korrekte tekster for kombinasjon av aksjonspunkt 5058', () => {
     const beregningTilfeller = [{
@@ -786,8 +786,8 @@ describe('<aksjonspunktTekstUtleder>', () => {
       beregningDto,
     } as TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, beregningTilfeller, erTilbakekreving, aksjonspunkt);
-    expect(message[0]).toEqual(<>Vurder besteberegning</>);
-    expect(message[1]).toEqual(<>Vurder tidsbegrenset arbeidsforhold</>);
+    expect(message[0]).toEqual(<div>Vurder besteberegning</div>);
+    expect(message[1]).toEqual(<div>Vurder tidsbegrenset arbeidsforhold</div>);
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5080', () => {

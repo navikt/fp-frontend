@@ -103,7 +103,7 @@ const lagInntektRader = (inntekter: BesteberegningInntekt[], arbeidsgiverOpplysn
   ))
 );
 
-const lagSummeringsRad = (inntekter: BesteberegningInntekt[], labelId: string): ReactElement => (inntekter.length === 0 ? <></> : (
+const lagSummeringsRad = (inntekter: BesteberegningInntekt[], labelId: string): ReactElement => (inntekter.length === 0 ? <div /> : (
   <TableRow key="sum">
     <TableColumn>
       <Element>

@@ -59,22 +59,18 @@ const createRelevantePaneler = (alleAndelerIForstePeriode : BeregningsgrunnlagAn
     <div className={beregningStyles.panelLeft}>
       { relevanteStatuser.isArbeidstaker
       && (
-        <>
-          <GrunnlagForAarsinntektPanelAT
-            alleAndelerIFørstePeriode={alleAndelerIForstePeriode}
-            allePerioder={allePerioder}
-            alleKodeverk={alleKodeverk}
-            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          />
-        </>
+        <GrunnlagForAarsinntektPanelAT
+          alleAndelerIFørstePeriode={alleAndelerIForstePeriode}
+          allePerioder={allePerioder}
+          alleKodeverk={alleKodeverk}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        />
       )}
       { relevanteStatuser.isFrilanser
     && (
-      <>
-        <GrunnlagForAarsinntektPanelFL
-          alleAndeler={alleAndelerIForstePeriode}
-        />
-      </>
+      <GrunnlagForAarsinntektPanelFL
+        alleAndeler={alleAndelerIForstePeriode}
+      />
     )}
       {(relevanteStatuser.harDagpengerEllerAAP)
       && (
@@ -88,19 +84,15 @@ const createRelevantePaneler = (alleAndelerIForstePeriode : BeregningsgrunnlagAn
       )}
       {(relevanteStatuser.isMilitaer)
       && (
-        <>
-          <MilitaerPanel
-            alleAndeler={alleAndelerIForstePeriode}
-          />
-        </>
+        <MilitaerPanel
+          alleAndeler={alleAndelerIForstePeriode}
+        />
       )}
       {(relevanteStatuser.harAndreTilstotendeYtelser)
       && (
-        <>
-          <YtelserFraInfotrygd
-            bruttoPrAar={allePerioder[0].bruttoPrAar}
-          />
-        </>
+        <YtelserFraInfotrygd
+          bruttoPrAar={allePerioder[0].bruttoPrAar}
+        />
       )}
 
       { relevanteStatuser.isSelvstendigNaeringsdrivende
@@ -120,12 +112,10 @@ const createRelevantePaneler = (alleAndelerIForstePeriode : BeregningsgrunnlagAn
       && skjeringstidspunktDato
       && (relevanteStatuser.isFrilanser || relevanteStatuser.isArbeidstaker)
       && (
-        <>
-          <SammenlignsgrunnlagAOrdningen
-            sammenligningsGrunnlagInntekter={sammenligningsGrunnlagInntekter}
-            skjeringstidspunktDato={skjeringstidspunktDato}
-          />
-        </>
+        <SammenlignsgrunnlagAOrdningen
+          sammenligningsGrunnlagInntekter={sammenligningsGrunnlagInntekter}
+          skjeringstidspunktDato={skjeringstidspunktDato}
+        />
       )}
     </div>
 );

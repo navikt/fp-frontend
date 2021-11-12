@@ -39,58 +39,56 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
   lagreUfullstendig,
   lagreFullstendig,
 }) => (
-  <>
-    <Panel className={styles.panel}>
-      <Container fluid>
-        <Undertittel><FormattedMessage id="Registrering.RegistrereSoknad" /></Undertittel>
-        <VerticalSpacer sixteenPx />
-        {!readOnly && (
-          <AksjonspunktHelpTextHTML>
-            <FormattedMessage key="regOpplysninger" id="Registrering.RegistrerAlleOpplysninger" />
-          </AksjonspunktHelpTextHTML>
-        )}
-        <VerticalSpacer sixteenPx />
-        <VerticalSpacer sixteenPx />
-        <ReduxWrapper formName="RegistrerPapirsoknadPanel">
-          <SoknadTypePickerForm
-            setSoknadData={setSoknadData}
-            soknadData={soknadData}
-            fagsakYtelseType={fagsak.fagsakYtelseType}
-            alleKodeverk={kodeverk}
-          />
-        </ReduxWrapper>
-        {soknadData && soknadData.getFagsakYtelseType() === fagsakYtelseType.ENGANGSSTONAD && (
-          <EngangsstonadPapirsoknadIndex
-            onSubmitUfullstendigsoknad={lagreUfullstendig}
-            onSubmit={lagreFullstendig}
-            readOnly={readOnly}
-            soknadData={soknadData}
-            alleKodeverk={kodeverk}
-            fagsakPersonnummer={fagsakPersonnummer}
-          />
-        )}
-        {soknadData && soknadData.getFagsakYtelseType() === fagsakYtelseType.FORELDREPENGER && (
-          <ForeldrepengerPapirsoknadIndex
-            onSubmitUfullstendigsoknad={lagreUfullstendig}
-            onSubmit={lagreFullstendig}
-            readOnly={readOnly}
-            soknadData={soknadData}
-            alleKodeverk={kodeverk}
-            fagsakPersonnummer={fagsakPersonnummer}
-          />
-        )}
-        {soknadData && soknadData.getFagsakYtelseType() === fagsakYtelseType.SVANGERSKAPSPENGER && (
-          <SvangerskapspengerPapirsoknadIndex
-            onSubmitUfullstendigsoknad={lagreUfullstendig}
-            onSubmit={lagreFullstendig}
-            readOnly={readOnly}
-            soknadData={soknadData}
-            alleKodeverk={kodeverk}
-          />
-        )}
-      </Container>
-    </Panel>
-  </>
+  <Panel className={styles.panel}>
+    <Container fluid>
+      <Undertittel><FormattedMessage id="Registrering.RegistrereSoknad" /></Undertittel>
+      <VerticalSpacer sixteenPx />
+      {!readOnly && (
+      <AksjonspunktHelpTextHTML>
+        <FormattedMessage key="regOpplysninger" id="Registrering.RegistrerAlleOpplysninger" />
+      </AksjonspunktHelpTextHTML>
+      )}
+      <VerticalSpacer sixteenPx />
+      <VerticalSpacer sixteenPx />
+      <ReduxWrapper formName="RegistrerPapirsoknadPanel">
+        <SoknadTypePickerForm
+          setSoknadData={setSoknadData}
+          soknadData={soknadData}
+          fagsakYtelseType={fagsak.fagsakYtelseType}
+          alleKodeverk={kodeverk}
+        />
+      </ReduxWrapper>
+      {soknadData && soknadData.getFagsakYtelseType() === fagsakYtelseType.ENGANGSSTONAD && (
+      <EngangsstonadPapirsoknadIndex
+        onSubmitUfullstendigsoknad={lagreUfullstendig}
+        onSubmit={lagreFullstendig}
+        readOnly={readOnly}
+        soknadData={soknadData}
+        alleKodeverk={kodeverk}
+        fagsakPersonnummer={fagsakPersonnummer}
+      />
+      )}
+      {soknadData && soknadData.getFagsakYtelseType() === fagsakYtelseType.FORELDREPENGER && (
+      <ForeldrepengerPapirsoknadIndex
+        onSubmitUfullstendigsoknad={lagreUfullstendig}
+        onSubmit={lagreFullstendig}
+        readOnly={readOnly}
+        soknadData={soknadData}
+        alleKodeverk={kodeverk}
+        fagsakPersonnummer={fagsakPersonnummer}
+      />
+      )}
+      {soknadData && soknadData.getFagsakYtelseType() === fagsakYtelseType.SVANGERSKAPSPENGER && (
+      <SvangerskapspengerPapirsoknadIndex
+        onSubmitUfullstendigsoknad={lagreUfullstendig}
+        onSubmit={lagreFullstendig}
+        readOnly={readOnly}
+        soknadData={soknadData}
+        alleKodeverk={kodeverk}
+      />
+      )}
+    </Container>
+  </Panel>
 );
 
 export default RegistrerPapirsoknadPanel;

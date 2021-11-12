@@ -80,23 +80,21 @@ export const VurderEndringRefusjonFormImpl: FunctionComponent<OwnProps & MappedO
             formName={FORM_NAME}
           />
         ))}
-        <>
-          <VerticalSpacer twentyPx />
-          <FaktaBegrunnelseTextField
-            name={BEGRUNNELSE_FIELD}
-            isSubmittable={submittable}
-            isReadOnly={readOnly}
-            hasBegrunnelse={!!(ap && ap.begrunnelse)}
-          />
+        <VerticalSpacer twentyPx />
+        <FaktaBegrunnelseTextField
+          name={BEGRUNNELSE_FIELD}
+          isSubmittable={submittable}
+          isReadOnly={readOnly}
+          hasBegrunnelse={!!(ap && ap.begrunnelse)}
+        />
 
-          <VerticalSpacer twentyPx />
-          <FaktaSubmitButton
-            formName={formProps.form}
-            isSubmittable={submittable && submitEnabled}
-            isReadOnly={readOnly}
-            hasOpenAksjonspunkter={erAksjonspunktÅpent}
-          />
-        </>
+        <VerticalSpacer twentyPx />
+        <FaktaSubmitButton
+          formName={formProps.form}
+          isSubmittable={submittable && submitEnabled}
+          isReadOnly={readOnly}
+          hasOpenAksjonspunkter={erAksjonspunktÅpent}
+        />
         <VerticalSpacer sixteenPx />
       </form>
     </>

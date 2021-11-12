@@ -219,17 +219,16 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
             </Column>
           </Row>
         )}
-    <>
-      <div className={styles.marginBottom20}>
-        <TextAreaField
-          name="begrunnelse"
-          label={{ id: 'UttakActivity.Vurdering' }}
-          validate={[requiredIfNotPristine, minLength3, maxLength1500, hasValidText]}
-          maxLength={1500}
-          readOnly={readOnly}
-        />
-      </div>
-      {!readOnly
+    <div className={styles.marginBottom20}>
+      <TextAreaField
+        name="begrunnelse"
+        label={{ id: 'UttakActivity.Vurdering' }}
+        validate={[requiredIfNotPristine, minLength3, maxLength1500, hasValidText]}
+        maxLength={1500}
+        readOnly={readOnly}
+      />
+    </div>
+    {!readOnly
           && (
             <div>
               {selectedItemData.oppholdÅrsak.kode === oppholdArsakType.UDEFINERT
@@ -331,7 +330,6 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
               </FlexContainer>
             </div>
           )}
-    </>
   </div>
 );
 

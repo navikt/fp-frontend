@@ -404,6 +404,8 @@ const settVisningsRaderForDefault = (periode: BeregningsgrunnlagPeriodeProp,
     const atAndel = periode.beregningsgrunnlagPrStatusOgAndel.filter(
       (andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER && andel.arbeidsforhold?.naturalytelseBortfaltPrÅr,
     );
+    // TODO Fiks denne
+    // eslint-disable-next-line no-unsafe-optional-chaining
     ntElement.verdi = atAndel && atAndel.length > 0 ? atAndel.reduce((sum, andel) => sum + andel.arbeidsforhold?.naturalytelseBortfaltPrÅr, 0) : undefined;
     ntElement.skalFastsetteGrunnlag = false;
     ntElement.ledetekst = <FormattedMessage id="Beregningsgrunnlag.BeregningTable.Naturalytelser" />;

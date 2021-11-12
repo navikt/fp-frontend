@@ -125,7 +125,7 @@ export const AvklarFaresignalerForm: FunctionComponent<OwnProps> = ({
                 label={faresignalVurderinger.find((vurdering) => vurdering.kode === faresignalVurdering.INNVIRKNING)?.navn || ''}
                 value={faresignalVurdering.INNVIRKNING}
               >
-                <>
+                <div>
                   {harValgtReelle && (
                   <ArrowBox alignOffset={20}>
                     <RadioGroupField
@@ -144,7 +144,7 @@ export const AvklarFaresignalerForm: FunctionComponent<OwnProps> = ({
                     </RadioGroupField>
                   </ArrowBox>
                   )}
-                </>
+                </div>
               </RadioOption>
               <RadioOption
                 label={faresignalVurderinger.find((vurdering) => vurdering.kode === faresignalVurdering.INGEN_INNVIRKNING)?.navn || ''}

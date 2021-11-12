@@ -14,7 +14,7 @@ describe('<IngenArbeidsforholdRegistrert>', () => {
     <span>PersonArbeidsforholdTable.Kilde</span>,
     <span>PersonArbeidsforholdTable.Stillingsprosent</span>,
     <span>PersonArbeidsforholdTable.MottattDato</span>,
-    <></>,
+    <div />,
   ];
   it('Skal sjekke at IngenArbeidsforholdRegistrert rendrer korrekt', () => {
     const wrapper = shallowWithIntl(

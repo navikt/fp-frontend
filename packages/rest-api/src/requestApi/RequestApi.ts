@@ -32,7 +32,9 @@ const getMethod = (httpClientApi: HttpClientApi, restMethod: string, isResponseB
 
 const isGetRequest = (restMethod: string): boolean => restMethod === RequestType.GET || restMethod === RequestType.GET_ASYNC;
 
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const wait = (ms: number) => new Promise((resolve) => {
+  setTimeout(resolve, ms);
+});
 const waitUntilFinished = async (cache: ResponseCache, endpointName: string): Promise<undefined> => {
   if (cache.isFetching(endpointName)) {
     await wait(50);

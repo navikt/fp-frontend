@@ -54,7 +54,7 @@ polyfill().then(() => {
   });
 
   render(
-    <BrowserRouter basename="/fpsak/">
+    <BrowserRouter basename="/">
       <RestApiProvider>
         <RestApiErrorProvider>
           <AppIndex />

@@ -145,7 +145,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
       data={[
         new MenyData(behandlingRettigheter?.behandlingKanGjenopptas, getTaAvVentMenytekst())
           .medModal((lukkModal) => (
-            <>
+            <div>
               {behandling && (
                 <MenyTaAvVentIndex
                   behandlingVersjon={behandling.versjon}
@@ -153,7 +153,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
                   lukkModal={lukkModal}
                 />
               )}
-            </>
+            </div>
           )),
         new MenyData(behandlingRettigheter?.behandlingKanSettesPaVent, getSettPaVentMenytekst())
           .medModal((lukkModal) => (
@@ -167,7 +167,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
           )),
         new MenyData(behandlingRettigheter?.behandlingKanHenlegges, getHenleggMenytekst())
           .medModal((lukkModal) => (
-            <>
+            <div>
               {behandling && (
                 <MenyHenleggIndex
                   valgtBehandling={behandling}
@@ -179,7 +179,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
                   gaaTilSokeside={gaaTilSokeside}
                 />
               )}
-            </>
+            </div>
           )),
         new MenyData(behandlingRettigheter?.behandlingKanBytteEnhet, getMenytekst())
           .medModal((lukkModal) => (

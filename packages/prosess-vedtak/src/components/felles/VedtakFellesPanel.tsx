@@ -152,26 +152,22 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
           </FlexColumn>
           <FlexColumn className={styles.space}>
             {skalViseLink && harIkkeKonsekvensForYtelse && (
-              <>
-                <Lenke href="#" onClick={previewAutomatiskBrev}>
-                  <span>
-                    <FormattedMessage id={erBehandlingEtterKlage ? 'VedtakFellesPanel.UtkastVedtaksbrev' : 'VedtakFellesPanel.AutomatiskVedtaksbrev'} />
-                  </span>
-                  <Image src={popOutPilSvg} className={styles.pil} />
-                </Lenke>
-              </>
+              <Lenke href="#" onClick={previewAutomatiskBrev}>
+                <span>
+                  <FormattedMessage id={erBehandlingEtterKlage ? 'VedtakFellesPanel.UtkastVedtaksbrev' : 'VedtakFellesPanel.AutomatiskVedtaksbrev'} />
+                </span>
+                <Image src={popOutPilSvg} className={styles.pil} />
+              </Lenke>
             )}
           </FlexColumn>
           <FlexColumn>
             {!readOnly && !skalBrukeManueltBrev && (
-            <>
-              <Lenke href="#" onClick={onToggleOverstyring} className={skalBrukeManueltBrev && styles.test}>
-                <Image src={endreSvg} className={styles.blyant} />
-                <span>
-                  <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
-                </span>
-              </Lenke>
-            </>
+            <Lenke href="#" onClick={onToggleOverstyring} className={skalBrukeManueltBrev && styles.test}>
+              <Image src={endreSvg} className={styles.blyant} />
+              <span>
+                <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
+              </span>
+            </Lenke>
             )}
             {(readOnly || skalBrukeManueltBrev) && (
             <>

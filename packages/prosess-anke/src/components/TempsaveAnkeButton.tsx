@@ -61,9 +61,9 @@ export const TempsaveAnkeButton: FunctionComponent<OwnProps> = ({
   spinner,
   readOnly,
   handleSubmit,
-}) => (
-  <>
-    {!readOnly && (
+}) => {
+  if (!readOnly) {
+    return (
       <Hovedknapp
         mini
         htmlType="button"
@@ -74,9 +74,10 @@ export const TempsaveAnkeButton: FunctionComponent<OwnProps> = ({
       >
         <FormattedMessage id="Ankebehandling.TempSaveButton" />
       </Hovedknapp>
-    )}
-  </>
-);
+    );
+  }
+  return null;
+};
 
 TempsaveAnkeButton.defaultProps = {
   spinner: false,
