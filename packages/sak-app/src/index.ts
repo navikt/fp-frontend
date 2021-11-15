@@ -1,5 +1,5 @@
 const FP_FRONTEND = 'fpsak';
-const FP_TILBAKE_FRONTEND = 'fp/web/tilbake';
+const FP_TILBAKE_FRONTEND = 'fp/web/tilbake/public';
 const LOKAL_FP_FRONTEND_PORT = '9000';
 const LOKAL_FP_TILBAKE_FRONTEND_PORT = '9005';
 
@@ -11,7 +11,7 @@ const getPathToFpTilbakeFrontend = (href: string): string => {
 
 // @ts-ignore
 window.getFpTilbakeUrl = () => {
-  if (process.env.NODE_ENV !== 'development') {
+  if (process.env.NODE_ENV === 'development') {
     return 'http://localhost:9005';
   }
 
