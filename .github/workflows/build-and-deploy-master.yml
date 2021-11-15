@@ -44,11 +44,11 @@ jobs:
       - name: Run yarn install
         run: yarn install --ignore-optional --no-progress --frozen-lockfile
 
-      #- name: Run linting
-      #  run: yarn less:lint && yarn lint && yarn ts-check
+      - name: Run linting
+        run: yarn less:lint && yarn lint && yarn ts-check
 
-      #- name: Run test and coverage
-      #  run: yarn test:coverage
+      - name: Run test and coverage
+        run: yarn test:coverage
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2.2.4
