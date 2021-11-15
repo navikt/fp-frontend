@@ -11,7 +11,7 @@ const getPathToFpTilbakeFrontend = (href: string): string => {
 
 // @ts-ignore
 window.getFpTilbakeUrl = () => {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV !== 'development') {
     return 'http://localhost:9005';
   }
 
