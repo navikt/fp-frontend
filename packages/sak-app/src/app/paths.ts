@@ -3,8 +3,8 @@ import { Location, Search } from 'history';
 import { buildPath, formatQueryString, parseQueryString } from '@fpsak-frontend/utils';
 import { skjermlenkeCodes } from '@fpsak-frontend/konstanter';
 
-const FPSAK = 'fpsak';
-const LOKAL_FPSAK_PORT = '9000';
+const FP_FRONTEND = 'fpsak';
+const LOKAL_FP_FRONTEND_PORT = '9000';
 const FPLOS = 'fplos';
 const LOKAL_FPLOS_PORT = '9100';
 
@@ -34,7 +34,7 @@ export const pathToBehandling = (saksnummer: string, behandlingUuid: string): st
 export const pathToMissingPage = (): string => '/404';
 
 export const pathToAnnenPart = (saksnummer: string, behandlingUuid: string)
-  : string => `/${FPSAK}/fagsak/${saksnummer}/behandling/${behandlingUuid}/?punkt=${DEFAULT_PROSESS_STEG}&fakta=${DEFAULT_FAKTA}`;
+  : string => `/${FP_FRONTEND}/fagsak/${saksnummer}/behandling/${behandlingUuid}/?punkt=${DEFAULT_PROSESS_STEG}&fakta=${DEFAULT_FAKTA}`;
 
 const emptyQueryString = (queryString: string): boolean => queryString === '?' || !queryString;
 
@@ -65,9 +65,9 @@ export const getLocationWithDefaultProsessStegAndFakta = (location: Location): L
 );
 
 export const getPathToFplos = (href: string): string => {
-  const hostAndContextPath = href.substr(0, href.lastIndexOf(FPSAK) + FPSAK.length);
+  const hostAndContextPath = href.substr(0, href.lastIndexOf(FP_FRONTEND) + FP_FRONTEND.length);
   // Replace av port er lagt til for at kjøring i docker skal fungere korrekt. Vil ikke påvirke miljøene
-  return hostAndContextPath.replace(new RegExp(FPSAK, 'g'), FPLOS).replace(LOKAL_FPSAK_PORT, LOKAL_FPLOS_PORT);
+  return hostAndContextPath.replace(new RegExp(FP_FRONTEND, 'g'), FPLOS).replace(LOKAL_FP_FRONTEND_PORT, LOKAL_FPLOS_PORT);
 };
 
 export const createLocationForSkjermlenke = (behandlingLocation: Location, skjermlenkeCode: string): Location | undefined => {

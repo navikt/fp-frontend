@@ -13,7 +13,7 @@ const config = {
   entry: [
     'webpack-dev-server/client?http://localhost:9000',
     'webpack/hot/only-dev-server',
-    APP_DIR + '/index.tsx',
+    APP_DIR + '/index.ts',
   ],
   output: {
     path: ROOT_DIR,
