@@ -28,7 +28,11 @@ const BehandlingForeldrepengerIndex = React.lazy(() => import('@fpsak-frontend/b
 const BehandlingSvangerskapspengerIndex = React.lazy(() => import('@fpsak-frontend/behandling-svp'));
 const BehandlingInnsynIndex = React.lazy(() => import('@fpsak-frontend/behandling-innsyn'));
 const BehandlingKlageIndex = React.lazy(() => import('@fpsak-frontend/behandling-klage'));
-const BehandlingTilbakekrevingIndex = React.lazy(() => import('@fpsak-frontend/behandling-tilbakekreving'));
+// const BehandlingTilbakekrevingIndex = React.lazy(() => import('@fpsak-frontend/behandling-tilbakekreving'));
+const BehandlingTilbakekrevingIndex = React.lazy(() => import(
+  // @ts-ignore
+  'fp_tilbake_frontend/BehandlingTilbakekrevingIndex' // eslint-disable-line import/no-unresolved
+));
 const BehandlingAnkeIndex = React.lazy(() => import('@fpsak-frontend/behandling-anke'));
 const BehandlingPapirsoknadIndex = React.lazy(() => import('@fpsak-frontend/behandling-papirsoknad'));
 
