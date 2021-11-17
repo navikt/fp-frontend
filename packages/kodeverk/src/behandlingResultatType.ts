@@ -17,6 +17,7 @@ const behandlingResultatType = {
   HENLAGT_FEILOPPRETTET_UTEN_BREV: 'HENLAGT_FEILOPPRETTET_UTEN_BREV',
   HENLAGT_BRUKER_DOD: 'HENLAGT_BRUKER_DØD',
   FORELDREPENGER_ENDRET: 'FORELDREPENGER_ENDRET',
+  FORELDREPENGER_SENERE: 'FORELDREPENGER_SENERE',
   INGEN_ENDRING: 'INGEN_ENDRING',
   MANGLER_BEREGNINGSREGLER: 'MANGLER_BEREGNINGSREGLER',
   HENLAGT_SOKNAD_MANGLER: 'HENLAGT_SØKNAD_MANGLER',
@@ -29,7 +30,9 @@ const innvilgetKlageResultatTyper = [
   behandlingResultatType.HJEMSENDE_UTEN_OPPHEVE,
 ];
 
-const innvilgetRevurderingFPResultatTyper = [behandlingResultatType.FORELDREPENGER_ENDRET, behandlingResultatType.INGEN_ENDRING];
+const innvilgetRevurderingFPResultatTyper = [behandlingResultatType.FORELDREPENGER_ENDRET,
+  behandlingResultatType.FORELDREPENGER_SENERE,
+  behandlingResultatType.INGEN_ENDRING];
 
 export const isInnvilget = (behandlingResultatTypeKode: string): boolean => innvilgetKlageResultatTyper.includes(behandlingResultatTypeKode)
   || innvilgetRevurderingFPResultatTyper.includes(behandlingResultatTypeKode)
