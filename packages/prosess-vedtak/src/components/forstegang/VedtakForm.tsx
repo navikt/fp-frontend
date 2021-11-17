@@ -83,10 +83,9 @@ const hentForhåndsvisManueltBrevCallback = (
   e.preventDefault();
 
   const erFeltUtfylt = skalOverstyre ? brodtekst?.length > 0 && overskrift?.length > 0 : begrunnelse?.length > 0;
-
   trigger();
 
-  if (erFeltUtfylt) {
+  if (!skalOverstyre || erFeltUtfylt) {
     const data = {
       fritekst: skalOverstyre ? brodtekst : begrunnelse,
       dokumentMal: skalOverstyre ? 'FRITKS' : undefined,
