@@ -151,7 +151,7 @@ const lagTableRow = (
           {' '}
           <DatepickerField
             name={`aktiviteterValues.${lagAktivitetFieldId(aktivitet)}.tom`}
-            validate={[required, hasValidDate]}
+            validate={[required]}
             readOnly={readOnly}
           />
         </>
