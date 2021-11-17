@@ -73,8 +73,6 @@ export type ForhandsvisData = {
 }
 
 const hentForhåndsvisManueltBrevCallback = (
-  isValid: boolean,
-  isDirty: boolean,
   begrunnelse: string,
   brodtekst: string,
   overskrift: string,
@@ -82,7 +80,12 @@ const hentForhåndsvisManueltBrevCallback = (
   forhåndsvisCallback: (data: ForhandsvisData) => Promise<any>,
   trigger: () => void,
 ) => (e: React.MouseEvent): void => {
-  if (!skalOverstyre || isValid) {
+  e.preventDefault();
+
+  const erFeltUtfylt = skalOverstyre ? brodtekst?.length > 0 && overskrift?.length > 0 : begrunnelse?.length > 0;
+  trigger();
+
+  if (!skalOverstyre || erFeltUtfylt) {
     const data = {
       fritekst: skalOverstyre ? brodtekst : begrunnelse,
       dokumentMal: skalOverstyre ? 'FRITKS' : undefined,
@@ -93,10 +96,7 @@ const hentForhåndsvisManueltBrevCallback = (
       } : undefined,
     };
     forhåndsvisCallback(data);
-  } else {
-    trigger();
   }
-  e.preventDefault();
 };
 
 const erÅrsakTypeBehandlingEtterKlage = (
@@ -214,7 +214,7 @@ const VedtakForm: FunctionComponent<OwnProps> = ({
   const overskrift = formMethods.watch('overskrift');
   const brødtekst = formMethods.watch('brødtekst');
 
-  const { formState: { isValid, isDirty }, trigger } = formMethods;
+  const { trigger } = formMethods;
 
   const {
     behandlingsresultat, sprakkode, status,
@@ -225,8 +225,8 @@ const VedtakForm: FunctionComponent<OwnProps> = ({
     simuleringResultat, tilbakekrevingvalg]);
   const vedtakstatusTekst = useMemo(() => finnVedtakstatusTekst(behandlingsresultat, intl, ytelseTypeKode), [behandlingsresultat]);
 
-  const forhåndsvisOverstyrtBrev = hentForhåndsvisManueltBrevCallback(isValid, isDirty, begrunnelse, brødtekst, overskrift, true, previewCallback, trigger);
-  const forhåndsvisDefaultBrev = hentForhåndsvisManueltBrevCallback(isValid, isDirty, begrunnelse, brødtekst, overskrift, false, previewCallback, trigger);
+  const forhåndsvisOverstyrtBrev = hentForhåndsvisManueltBrevCallback(begrunnelse, brødtekst, overskrift, true, previewCallback, trigger);
+  const forhåndsvisDefaultBrev = hentForhåndsvisManueltBrevCallback(begrunnelse, brødtekst, overskrift, false, previewCallback, trigger);
 
   return (
     <>
