@@ -186,6 +186,10 @@ const config = {
           singleton: true,
           requiredVersion: deps["react-dom"],
         },
+        "nav-frontend-paneler-style": {
+          eager: true,
+          requiredVersion: deps.react,
+        },
       },
     }),
     new ExternalTemplateRemotesPlugin(),
