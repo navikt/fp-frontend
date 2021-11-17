@@ -26,6 +26,7 @@ interface OwnProps {
   validate?: ((value: string) => any)[];
   textareaClass?: string;
   placeholder?: string;
+  parse?: (value: string | number) => string | number;
 }
 
 const TextAreaField: FunctionComponent<OwnProps> = ({
@@ -34,6 +35,7 @@ const TextAreaField: FunctionComponent<OwnProps> = ({
   validate = [],
   readOnly,
   badges,
+  parse = (value) => value,
   ...otherProps
 }) => {
   const { formState: { errors } } = useFormContext();
@@ -63,7 +65,7 @@ const TextAreaField: FunctionComponent<OwnProps> = ({
         label={<Label input={label} readOnly={false} />}
         feil={getError(errors, name)}
         {...field}
-        onChange={(event) => field.onChange(event.currentTarget.value !== '' ? event.currentTarget.value : undefined)}
+        onChange={(event) => field.onChange(event.currentTarget.value !== '' ? parse(event.currentTarget.value) : undefined)}
         value={field.value ? field.value : ''}
         {...otherProps}
       />
