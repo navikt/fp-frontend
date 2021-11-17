@@ -174,7 +174,7 @@ const config = {
     new ModuleFederationPlugin({
       name: "fp-frontend",
       remotes: {
-        fp_tilbake_frontend: 'fp_tilbake_frontend@[getFpTilbakeUrl()]/remoteEntry.js?[getRandomString()]',
+        fp_tilbake_frontend: 'fp_tilbake_frontend@[getFpTilbakeUrl()]/remoteEntry.js',
       },
       shared: {
         ...deps,
