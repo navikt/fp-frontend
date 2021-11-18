@@ -47,15 +47,17 @@ type ForhandsvisData = {
 }
 
 const hentForhåndsvisManueltBrevCallback = (
-  isValid: boolean,
-  isDirty: boolean,
   begrunnelse: string,
   brodtekst: string,
   overskrift: string,
   skalOverstyre: boolean,
   forhåndsvisCallback: (data: ForhandsvisData) => void,
 ) => (e: React.MouseEvent): void => {
-  if (isValid || !isDirty) {
+  e.preventDefault();
+
+  const erFeltUtfylt = skalOverstyre ? brodtekst?.length > 0 && overskrift?.length > 0 : begrunnelse?.length > 0;
+
+  if (!skalOverstyre || erFeltUtfylt) {
     const data = {
       fritekst: skalOverstyre ? brodtekst : begrunnelse,
       dokumentMal: skalOverstyre ? 'FRITKS' : undefined,
@@ -68,7 +70,6 @@ const hentForhåndsvisManueltBrevCallback = (
 
     forhåndsvisCallback(data);
   }
-  e.preventDefault();
 };
 
 const erÅrsakTypeBehandlingEtterKlage = (
@@ -273,8 +274,6 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
   const overskrift = formMethods.watch('overskrift');
   const brødtekst = formMethods.watch('brødtekst');
 
-  const { formState: { isValid, isDirty } } = formMethods;
-
   const {
     behandlingsresultat, sprakkode, status, behandlingÅrsaker,
   } = behandling;
@@ -301,8 +300,8 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
     }, { dato: moment(getOpphorsdato(resultatstruktur, medlemskapFom, behandlingsresultat)).format(DDMMYYYY_DATE_FORMAT) });
   }
 
-  const forhåndsvisOverstyrtBrev = hentForhåndsvisManueltBrevCallback(isValid, isDirty, begrunnelse, brødtekst, overskrift, true, previewCallback);
-  const forhåndsvisDefaultBrev = hentForhåndsvisManueltBrevCallback(isValid, isDirty, begrunnelse, brødtekst, overskrift, false, previewCallback);
+  const forhåndsvisOverstyrtBrev = hentForhåndsvisManueltBrevCallback(begrunnelse, brødtekst, overskrift, true, previewCallback);
+  const forhåndsvisDefaultBrev = hentForhåndsvisManueltBrevCallback(begrunnelse, brødtekst, overskrift, false, previewCallback);
 
   return (
     <>
