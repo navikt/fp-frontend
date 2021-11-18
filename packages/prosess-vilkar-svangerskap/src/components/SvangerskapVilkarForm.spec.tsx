@@ -4,7 +4,7 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import { ProsessStegBegrunnelseTextField } from '@fpsak-frontend/prosess-felles';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { AlleKodeverk } from '@fpsak-frontend/types';
+import { AlleKodeverk, FodselOgTilrettelegging } from '@fpsak-frontend/types';
 
 import { SvangerskapVilkarFormImpl as UnwrappedForm } from './SvangerskapVilkarForm';
 import messages from '../../i18n/nb_NO.json';
@@ -35,6 +35,7 @@ describe('<SvangerskapVilkarForm>', () => {
       initialValues={{
         erVilkarOk: true,
       }}
+      svangerskapspengerTilrettelegging={{} as FodselOgTilrettelegging}
       erIkkeGodkjentAvBeslutter={false}
     />, messages);
 
