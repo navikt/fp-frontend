@@ -33,6 +33,7 @@ jobs:
         run: yarn test:coverage
 
       - name: SonarCloud Scan
+        if: github.actor != 'dependabot[bot]'
         uses: SonarSource/sonarcloud-github-action@v1.6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
