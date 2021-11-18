@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { Element } from 'nav-frontend-typografi';
 
@@ -14,9 +15,31 @@ import {
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import {
-  Aksjonspunkt, AlleKodeverk, Behandling, KodeverkMedNavn, Vilkar,
+  Aksjonspunkt,
+  AlleKodeverk,
+  ArbeidsforholdFodselOgTilrettelegging, ArbeidsforholdTilretteleggingDato,
+  Behandling,
+  FodselOgTilrettelegging,
+  KodeverkMedNavn,
+  Vilkar,
 } from '@fpsak-frontend/types';
 import { BekreftSvangerskapspengervilkarAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
+import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+
+const finnesUttakPåArbfor = (arbfor: ArbeidsforholdFodselOgTilrettelegging): boolean => {
+  const finnesAnnenTilretteleggingEnnHel = arbfor.tilretteleggingDatoer
+    .some((dato: ArbeidsforholdTilretteleggingDato) => dato.type.kode !== tilretteleggingType.HEL_TILRETTELEGGING);
+  const finnesHelTilretteleggingEtterBehovOppstår = arbfor.tilretteleggingDatoer
+    .some((dato: ArbeidsforholdTilretteleggingDato) => dato.type.kode === tilretteleggingType.HEL_TILRETTELEGGING
+    && moment(dato.fom).isAfter(moment(arbfor.tilretteleggingBehovFom)));
+  return finnesAnnenTilretteleggingEnnHel || finnesHelTilretteleggingEtterBehovOppstår;
+};
+
+const finnesInnvilgetUttak = (svangerskapspengerTilrettelegging: FodselOgTilrettelegging): boolean => (svangerskapspengerTilrettelegging
+  && svangerskapspengerTilrettelegging.arbeidsforholdListe
+  ? svangerskapspengerTilrettelegging.arbeidsforholdListe.some((arbfor) => finnesUttakPåArbfor(arbfor))
+  : false);
 
 type FormValues = {
   erVilkarOk?: boolean;
@@ -36,6 +59,7 @@ interface PureOwnProps {
   isApOpen: boolean;
   alleKodeverk: AlleKodeverk;
   erIkkeGodkjentAvBeslutter: boolean;
+  svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
 }
 
 interface MappedOwnProps {
@@ -60,30 +84,42 @@ export const SvangerskapVilkarFormImpl: FunctionComponent<PureOwnProps & MappedO
   isApOpen,
   originalErVilkarOk,
   erIkkeGodkjentAvBeslutter,
+  svangerskapspengerTilrettelegging,
   ...formProps
-}) => (
-  <ProsessPanelTemplate
-    title={intl.formatMessage({ id: 'SvangerskapVilkarForm.Svangerskap' })}
-    isAksjonspunktOpen={isApOpen}
-    formName={formProps.form}
-    handleSubmit={formProps.handleSubmit}
-    readOnlySubmitButton={readOnlySubmitButton}
-    readOnly={readOnly}
-    originalErVilkarOk={originalErVilkarOk}
-    erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
-  >
-    <Element><FormattedMessage id="SvangerskapVilkarForm.RettTilSvp" /></Element>
-    <VilkarResultPicker
-      avslagsarsaker={avslagsarsaker}
-      erVilkarOk={erVilkarOk}
+}) => {
+  const finnesUttak = finnesInnvilgetUttak(svangerskapspengerTilrettelegging);
+  return (
+    <ProsessPanelTemplate
+      title={intl.formatMessage({ id: 'SvangerskapVilkarForm.Svangerskap' })}
+      isAksjonspunktOpen={isApOpen}
+      formName={formProps.form}
+      handleSubmit={formProps.handleSubmit}
+      readOnlySubmitButton={readOnlySubmitButton}
       readOnly={readOnly}
-      customVilkarOppfyltText={<FormattedMessage id="SvangerskapVilkarForm.Oppfylt" />}
-      customVilkarIkkeOppfyltText={<FormattedMessage id="SvangerskapVilkarForm.IkkeOppfylt" values={{ b: (chunks) => <b>{chunks}</b> }} />}
-    />
-    {erVilkarOk === false
+      originalErVilkarOk={originalErVilkarOk}
+      erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
+    >
+      <Element><FormattedMessage id="SvangerskapVilkarForm.RettTilSvp" /></Element>
+      {!finnesUttak
+      && (
+      <>
+        <VerticalSpacer sixteenPx />
+        <Element><FormattedMessage id="SvangerskapVilkarForm.IkkeInnvilgetUttak" /></Element>
+      </>
+      )}
+      <VilkarResultPicker
+        avslagsarsaker={avslagsarsaker}
+        erVilkarOk={erVilkarOk}
+        readOnly={readOnly}
+        skalKunneInnvilge={finnesUttak}
+        customVilkarOppfyltText={<FormattedMessage id="SvangerskapVilkarForm.Oppfylt" />}
+        customVilkarIkkeOppfyltText={<FormattedMessage id="SvangerskapVilkarForm.IkkeOppfylt" values={{ b: (chunks) => <b>{chunks}</b> }} />}
+      />
+      {erVilkarOk === false
       && <ProsessStegBegrunnelseTextField readOnly={readOnly} />}
-  </ProsessPanelTemplate>
-);
+    </ProsessPanelTemplate>
+  );
+};
 
 const validate = ({
   erVilkarOk,

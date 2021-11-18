@@ -1,7 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { StandardProsessPanelProps } from '@fpsak-frontend/types';
+import {
+  FodselOgTilrettelegging,
+  StandardProsessPanelProps,
+} from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 import { ReduxWrapper } from '@fpsak-frontend/form';
 
@@ -10,7 +13,11 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-const SvangerskapVilkarProsessIndex: FunctionComponent<StandardProsessPanelProps> = ({
+interface OwnProps {
+  svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
+}
+
+const SvangerskapVilkarProsessIndex: FunctionComponent<StandardProsessPanelProps & OwnProps> = ({
   behandling,
   aksjonspunkter,
   status,
@@ -21,6 +28,7 @@ const SvangerskapVilkarProsessIndex: FunctionComponent<StandardProsessPanelProps
   isAksjonspunktOpen,
   alleKodeverk,
   alleMerknaderFraBeslutter,
+  svangerskapspengerTilrettelegging,
   formData,
   setFormData,
 }) => (
@@ -36,6 +44,7 @@ const SvangerskapVilkarProsessIndex: FunctionComponent<StandardProsessPanelProps
         readOnlySubmitButton={readOnlySubmitButton}
         isApOpen={isAksjonspunktOpen}
         alleKodeverk={alleKodeverk}
+        svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
         erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon.kode]?.notAccepted)}
       />
     </ReduxWrapper>

@@ -6,7 +6,9 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SvangerskapVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-svangerskap';
-import { Aksjonspunkt, Behandling, Vilkar } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, Behandling, FodselOgTilrettelegging, Vilkar,
+} from '@fpsak-frontend/types';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
 
@@ -44,6 +46,7 @@ export const visÅpentAksjonspunkt = () => (
       begrunnelse: undefined,
     }] as Aksjonspunkt[]}
     status={vilkarUtfallType.IKKE_VURDERT}
+    svangerskapspengerTilrettelegging={{} as FodselOgTilrettelegging}
     vilkar={[{
       lovReferanse: '§§Dette er en lovreferanse',
     }] as Vilkar[]}
@@ -70,6 +73,7 @@ export const visOppfyltVilkår = () => (
     isReadOnly
     readOnlySubmitButton
     isAksjonspunktOpen
+    svangerskapspengerTilrettelegging={{} as FodselOgTilrettelegging}
     status={vilkarUtfallType.OPPFYLT}
     vilkar={[{
       lovReferanse: '§§Dette er en lovreferanse',
@@ -101,6 +105,7 @@ export const visAvslåttVilkår = () => (
     isReadOnly
     readOnlySubmitButton
     isAksjonspunktOpen
+    svangerskapspengerTilrettelegging={{} as FodselOgTilrettelegging}
     status={vilkarUtfallType.IKKE_OPPFYLT}
     vilkar={[{
       lovReferanse: '§§Dette er en lovreferanse',

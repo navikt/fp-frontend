@@ -3,6 +3,7 @@
   "SvangerskapVilkarForm.RettTilSvp": "Rett til svangerskapspenger",
   "SvangerskapVilkarForm.Oppfylt": "Mor har rett til svangerskapspenger, vilkåret er oppfylt",
   "SvangerskapVilkarForm.IkkeOppfylt": "Mor har ikke rett til svangerskapspenger, vilkåret er <b>ikke</b> oppfylt",
-  
+  "SvangerskapVilkarForm.IkkeInnvilgetUttak": "Det finnes ingen perioder med svangerskapspenger som kan innvilges",
+
   "ShowVilkarStatus.Check": "Informasjonen er utfylt"
 }
