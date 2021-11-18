@@ -36,8 +36,10 @@ const finnesUttakPåArbfor = (arbfor: ArbeidsforholdFodselOgTilrettelegging): bo
   return finnesAnnenTilretteleggingEnnHel || finnesHelTilretteleggingEtterBehovOppstår;
 };
 
-const finnesInnvilgetUttak = (svangerskapspengerTilrettelegging: FodselOgTilrettelegging): boolean => svangerskapspengerTilrettelegging.arbeidsforholdListe
-  .some((arbfor) => finnesUttakPåArbfor(arbfor));
+const finnesInnvilgetUttak = (svangerskapspengerTilrettelegging: FodselOgTilrettelegging): boolean => (svangerskapspengerTilrettelegging
+  && svangerskapspengerTilrettelegging.arbeidsforholdListe
+  ? svangerskapspengerTilrettelegging.arbeidsforholdListe.some((arbfor) => finnesUttakPåArbfor(arbfor))
+  : false);
 
 type FormValues = {
   erVilkarOk?: boolean;
