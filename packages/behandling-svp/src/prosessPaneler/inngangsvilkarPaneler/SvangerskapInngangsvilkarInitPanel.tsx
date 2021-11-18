@@ -6,7 +6,9 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SvangerskapVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-svangerskap';
-import { Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, FodselOgTilrettelegging, Vilkar,
+} from '@fpsak-frontend/types';
 import { InngangsvilkarDefaultInitPanel, InngangsvilkarPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@fpsak-frontend/utils';
 
@@ -25,6 +27,12 @@ type EndepunktInitData = {
   vilkar: Vilkar[];
 }
 
+const ENDEPUNKTER_PANEL_DATA = [SvpBehandlingApiKeys.SVANGERSKAPSPENGER_TILRETTELEGGING];
+
+type EndepunktPanelData = {
+  svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
+}
+
 interface OwnProps {
   behandlingVersjon?: number;
 }
@@ -33,11 +41,12 @@ const SvangerskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngangsv
   behandlingVersjon,
   ...props
 }) => (
-  <InngangsvilkarDefaultInitPanel<EndepunktInitData>
+  <InngangsvilkarDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
     {...props}
     behandlingVersjon={behandlingVersjon}
     requestApi={requestSvpApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
+    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     vilkarKoder={VILKAR_KODER}
     inngangsvilkarPanelKode="SVANGERSKAP"

@@ -35,6 +35,7 @@ interface OwnProps {
   customVilkarOppfyltText: string | ReactNode;
   readOnly: boolean;
   erMedlemskapsPanel?: boolean;
+  skalKunneInnvilge?: boolean;
 }
 
 interface StaticFunctions {
@@ -61,6 +62,7 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
   customVilkarOppfyltText,
   readOnly,
   erMedlemskapsPanel = false,
+  skalKunneInnvilge = true,
 }) => (
   <div className={styles.container}>
     <VerticalSpacer sixteenPx />
@@ -89,6 +91,7 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
         <RadioOption
           label={customVilkarOppfyltText}
           value
+          disabled={!skalKunneInnvilge}
         />
         <RadioOption
           label={customVilkarIkkeOppfyltText}
