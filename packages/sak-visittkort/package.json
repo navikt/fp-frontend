@@ -10,7 +10,7 @@
     "@fpsak-frontend/shared-components": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
-    "@navikt/nap-person-card": "1.1.4",
+    "@navikt/fp-react-components": "1.0.0",
     "moment": "^2.29.1",
     "nav-frontend-etiketter": "3.0.1",
     "nav-frontend-etiketter-style": "2.0.1",

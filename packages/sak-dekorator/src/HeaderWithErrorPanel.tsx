@@ -2,11 +2,9 @@ import React, {
   FunctionComponent, useState, useMemo, useCallback, useEffect, useRef, RefObject,
 } from 'react';
 import { RawIntlProvider } from 'react-intl';
-import BoxedListWithLinks from '@navikt/boxed-list-with-links';
-import Header from '@navikt/nap-header';
-import Popover from '@navikt/nap-popover';
-import SystemButton from '@navikt/nap-system-button';
-import UserPanel from '@navikt/nap-user-panel';
+import {
+  BoxedListWithLinks, Header, Popover, SystemButton, UserPanel,
+} from '@navikt/fp-react-components';
 
 import { decodeHtmlEntity, createIntl } from '@fpsak-frontend/utils';
 import { RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@fpsak-frontend/konstanter';
@@ -172,7 +170,7 @@ const HeaderWithErrorPanel: FunctionComponent<OwnProps> = ({
               popperProps={{
                 children: popperPropsChildren,
                 placement: 'bottom-start',
-                positionFixed: true,
+                strategy: 'fixed',
               }}
               referenceProps={{
                 children: referencePropsChildren,

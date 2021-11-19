@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { StepType } from '@navikt/nap-process-menu/dist/Step';
-import ProcessMenu from '@navikt/nap-process-menu';
+import { ProcessMenu, ProcessMenuStepType } from '@navikt/fp-react-components';
 
 import ProsessMeny from './ProsessMeny';
 
@@ -26,7 +25,7 @@ describe('<ProsessMeny>', () => {
       isActive: true,
       isDisabled: false,
       isFinished: false,
-      type: StepType.warning,
+      type: ProcessMenuStepType.warning,
     }]);
   });
 });

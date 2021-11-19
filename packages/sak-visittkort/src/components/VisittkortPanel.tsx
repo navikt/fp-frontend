@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
-import { PersonCard, EmptyPersonCard, Gender } from '@navikt/nap-person-card';
+import { PersonCard, EmptyPersonCard, Gender } from '@navikt/fp-react-components';
 
 import {
   FlexColumn, FlexContainer, FlexRow,
