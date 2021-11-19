@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { StepType } from '@navikt/nap-process-menu/dist/Step';
-import ProcessMenu from '@navikt/nap-process-menu';
+import { ProcessMenuStepType, ProcessMenu } from '@navikt/fp-react-components';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 
@@ -11,17 +10,17 @@ import ProsessPanelMenyData from '../../types/prosessPanelMenyData';
 const finnProsessmenyType = (
   status: string,
   harApentAksjonspunkt: boolean,
-): StepType => {
+): ProcessMenuStepType => {
   if (harApentAksjonspunkt) {
-    return StepType.warning;
+    return ProcessMenuStepType.warning;
   }
   if (status === vilkarUtfallType.OPPFYLT) {
-    return StepType.success;
+    return ProcessMenuStepType.success;
   }
   if (status === vilkarUtfallType.IKKE_OPPFYLT) {
-    return StepType.danger;
+    return ProcessMenuStepType.danger;
   }
-  return StepType.default;
+  return ProcessMenuStepType.default;
 };
 
 interface OwnProps {
@@ -39,7 +38,7 @@ const ProsessMeny: FunctionComponent<OwnProps> = ({
       label: data.tekst,
       isActive: data.erAktiv,
       isDisabled: false,
-      isFinished: type === StepType.success,
+      isFinished: type === ProcessMenuStepType.success,
       type,
     };
   }), [menyData]);
