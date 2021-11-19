@@ -4,7 +4,7 @@ import React, {
 import {
   FormattedMessage, RawIntlProvider,
 } from 'react-intl';
-import Popover from '@navikt/nap-popover';
+import { Popover } from '@navikt/fp-react-components';
 import BoxedListWithSelection from '@navikt/boxed-list-with-selection';
 import { Knapp } from 'nav-frontend-knapper';
 
@@ -65,7 +65,7 @@ const MenySakIndex: FunctionComponent<OwnProps> = ({
               />
             ),
             placement: 'bottom-start',
-            positionFixed: false,
+            strategy: 'absolute',
           }}
           referenceProps={{
             children: ({ ref }) => (
