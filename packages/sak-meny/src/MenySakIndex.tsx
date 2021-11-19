@@ -4,8 +4,7 @@ import React, {
 import {
   FormattedMessage, RawIntlProvider,
 } from 'react-intl';
-import { Popover } from '@navikt/fp-react-components';
-import BoxedListWithSelection from '@navikt/boxed-list-with-selection';
+import { Popover, BoxedListWithSelection } from '@navikt/fp-react-components';
 import { Knapp } from 'nav-frontend-knapper';
 
 import { createIntl } from '@fpsak-frontend/utils';
