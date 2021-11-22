@@ -54,7 +54,6 @@ const RadioGroupField: FunctionComponent<OwnProps> = ({
     }
   }, [field, onChange]);
 
-  const actualValueStringified = JSON.stringify(field.value);
   const showCheckedOnly = readOnly && field.value !== null && field.value !== undefined && field.value !== '';
 
   const options = useMemo(() => children
@@ -67,7 +66,7 @@ const RadioGroupField: FunctionComponent<OwnProps> = ({
       groupDisabled: readOnly,
       checked: radioOption.props.value.toString() === field.value?.toString(),
     }))
-    .filter((radioOption) => !showCheckedOnly || radioOption.props.value.toString() === actualValueStringified),
+    .filter((radioOption) => !showCheckedOnly || radioOption.props.value.toString() === field.value?.toString()),
   [children, field.value, customOnChange]);
 
   const feil = getError(errors, name);
