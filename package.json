@@ -43,7 +43,7 @@
     "core-js": "^3.19.1",
     "dotenv": "^10.0.0",
     "history": "^5.1.0",
-    "nav-frontend-ikonknapper": "2.0.1",
+    "nav-frontend-ikonknapper": "2.1.2",
     "nav-frontend-paneler": "3.0.1",
     "nav-frontend-paneler-style": "2.0.1",
     "nav-frontend-ikoner-assets": "3.0.1",
