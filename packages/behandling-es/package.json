@@ -39,7 +39,7 @@
     "@fpsak-frontend/utils-test": "^1.0.0",
     "@fpsak-frontend/storybook-utils": "^1.0.0",
     "@storybook/addon-actions": "^6.3.12",
-    "@storybook/testing-react": "^0.0.22",
+    "@storybook/testing-react": "^1.0.0",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "axios-mock-adapter": "^1.20.0",

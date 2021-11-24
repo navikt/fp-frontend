@@ -4539,10 +4539,10 @@
     shelljs "^0.8.1"
     yargs "^15.0.0"
 
-"@storybook/testing-react@^0.0.22":
-  version "0.0.22"
-  resolved "https://registry.yarnpkg.com/@storybook/testing-react/-/testing-react-0.0.22.tgz#65d3defefbac0183eded0dafb601241d8f135c66"
-  integrity sha512-XBJpH1cROXkwwKwD89kIcyhyMPEN5zfSyOUanrN+/Tx4nB5IwzVc/Om+7mtSFvh4UTSNOk5G42Y12KE/HbH7VA==
+"@storybook/testing-react@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@storybook/testing-react/-/testing-react-1.0.0.tgz#8fc350d16f2bac17ebbdbb976731139a25a236e4"
+  integrity sha512-wyMG79eqdxam/jGcqzFMBoWiYTlLFh4EdlnGetfK0HpkPlwi1pqDcW+IybGykw73K7ZpN5yebAOwih+3EgG4zw==
 
 "@storybook/theming@6.3.12", "@storybook/theming@^6.3.12":
   version "6.3.12"

@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@fpsak-frontend/utils-test": "1.0.0",
-    "@storybook/testing-react": "^0.0.22",
+    "@storybook/testing-react": "^1.0.0",
     "@testing-library/react": "^12.1.2"
   }
 }
