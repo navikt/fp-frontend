@@ -212,14 +212,8 @@ describe('<VedtakProsessIndex>', () => {
     expect(screen.getByText('Påvirker den åpne Gosys-oppgaven «Vurder dokument» behandlingen?')).toBeInTheDocument();
     expect(screen.getByText('Beregningsgrunnlaget er endret til ugunst for søker. Skal det sendes varsel?')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Til godkjenning'));
-
-    expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
-
     const fritekstInput = utils.getByLabelText('Fritekst i brev til søker som handler om fastsettelse av beregningsgrunnlaget');
     userEvent.type(fritekstInput, 'Dette er en tekst');
-
-    await waitFor(() => expect(screen.queryByText('Feltet må fylles ut')).not.toBeInTheDocument());
 
     userEvent.click(screen.getByText('Til godkjenning'));
 

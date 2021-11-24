@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import { useFormContext } from 'react-hook-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { Undertekst } from 'nav-frontend-typografi';
 
@@ -8,7 +7,7 @@ import { Behandlingsresultat, Kodeverk } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { TextAreaField } from '@fpsak-frontend/form-hooks';
 import {
-  decodeHtmlEntity, getLanguageFromSprakkode, hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew,
+  decodeHtmlEntity, getLanguageFromSprakkode, hasValidText, maxLength, minLength,
 } from '@fpsak-frontend/utils';
 
 import styles from './vedtakFritekstPanel.less';
@@ -21,27 +20,15 @@ interface OwnProps {
   språkKode: Kodeverk;
   isReadOnly: boolean;
   labelTextCode: string;
-  beregningErManueltFastsatt: boolean;
 }
-
-const getIsBegrunnelseRequired = (beregningErManueltFastsatt: boolean, isDirty: boolean) => (value?: string) => {
-  if (beregningErManueltFastsatt === true) {
-    return true;
-  }
-  return value !== undefined || isDirty;
-};
 
 const VedtakFritekstPanel: FunctionComponent<OwnProps> = ({
   behandlingsresultat,
   språkKode,
   isReadOnly,
   labelTextCode,
-  beregningErManueltFastsatt,
 }) => {
   const intl = useIntl();
-  const { formState: { isDirty } } = useFormContext();
-
-  const isRequiredFn = getIsBegrunnelseRequired(beregningErManueltFastsatt, isDirty);
 
   return (
     <>
@@ -53,7 +40,6 @@ const VedtakFritekstPanel: FunctionComponent<OwnProps> = ({
               name="begrunnelse"
               label={intl.formatMessage({ id: labelTextCode })}
               validate={[
-                requiredIfCustomFunctionIsTrueNew(isRequiredFn),
                 minLength3,
                 maxLength1500,
                 hasValidText,
