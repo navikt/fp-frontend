@@ -74,7 +74,6 @@ const VedtakAvslagPanel: FunctionComponent<OwnProps> = ({
           språkKode={språkKode}
           behandlingsresultat={behandlingsresultat}
           labelTextCode={textCode}
-          beregningErManueltFastsatt={beregningErManueltFastsatt}
         />
       )}
     </>

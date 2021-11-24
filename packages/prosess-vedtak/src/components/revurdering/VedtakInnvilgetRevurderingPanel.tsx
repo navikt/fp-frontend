@@ -67,7 +67,6 @@ const VedtakInnvilgetRevurderingPanel: FunctionComponent<OwnProps> = ({
             språkKode={språkKode}
             behandlingsresultat={behandlingsresultat}
             labelTextCode="VedtakForm.Fritekst.Beregningsgrunnlag"
-            beregningErManueltFastsatt={beregningErManueltFastsatt}
           />
         )}
       </>
