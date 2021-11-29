@@ -70,7 +70,7 @@
     "@storybook/storybook-deployer": "^2.8.10",
     "@storybook/testing-react": "^0.0.22",
     "@storybook/theming": "^6.3.12",
-    "@svgr/webpack": "^5.5.0",
+    "@svgr/webpack": "^6.0.0",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^12.1.2",
     "@testing-library/react-hooks": "^7.0.2",
