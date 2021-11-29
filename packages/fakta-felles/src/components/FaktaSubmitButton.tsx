@@ -81,6 +81,7 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
     isSubmitting: formNames.some((formName) => reduxIsSubmitting(formName)(state)),
     isDirty: formNames.some((formName) => reduxIsDirty(formName)(state)),
     hasEmptyRequiredFields: ownProps.doNotCheckForRequiredFields
+    // @ts-ignore
       ? false : formNames.some((formName) => hasBehandlingFormErrorsOfType(formName, isRequiredMessage())(state)),
   };
 };

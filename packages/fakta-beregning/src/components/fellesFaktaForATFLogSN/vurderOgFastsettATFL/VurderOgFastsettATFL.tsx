@@ -381,6 +381,7 @@ const mapStateToProps = (state, ownProps) => ({
   skalFastsetteFL: skalFastsettInntektForFrilans(state, ownProps),
   skalHaBesteberegning: getFormValuesForBeregning(state)[besteberegningField] === true,
   manglerInntektsmelding: getManglerInntektsmelding(ownProps),
+  // @ts-ignore
   skalViseTabell: getSkalViseTabell(state, ownProps),
   harKunstigArbeid: harKunstigArbeidsforhold(ownProps.tilfeller, ownProps.beregningsgrunnlag),
 });

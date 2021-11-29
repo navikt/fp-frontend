@@ -222,6 +222,7 @@ const mapStateToPropsFactory = (_state: any, initialProps: OwnProps) => {
       initialValues,
       validate,
       onSubmit: lagSubmitFn(ownProps),
+      // @ts-ignore
       verdiForAvklarAktivitetErEndret: erAvklartAktivitetEndret(state, ownProps),
       // @ts-ignore FIX reselect
       erOverstyrt: erOverstyringAvBeregningsgrunnlag(state, ownProps),

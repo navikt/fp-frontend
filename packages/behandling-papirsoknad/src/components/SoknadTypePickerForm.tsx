@@ -161,6 +161,7 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
   return (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
     selectedFagsakYtelseType: formValueSelector(SOKNAD_TYPE_PICKER_FORM)(state, 'fagsakYtelseType'),
     ytelseErSatt: !!ownProps.fagsakYtelseType.kode,
+    // @ts-ignore
     initialValues: buildInitialValues(state, ownProps),
     fagsakYtelseTyper: ownProps.alleKodeverk[kodeverkTyper.FAGSAK_YTELSE],
     familieHendelseTyper: ownProps.alleKodeverk[kodeverkTyper.FAMILIE_HENDELSE_TYPE],
