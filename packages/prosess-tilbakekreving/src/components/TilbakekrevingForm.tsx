@@ -416,6 +416,7 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
   const periodFormValues = getFormValues(TILBAKEKREVING_PERIODE_FORM_NAME)(state) as { erForeldet: boolean }
     || { erForeldet: false };
   return {
+    // @ts-ignore
     initialValues: buildInitialValues(state, ownProps),
     // @ts-ignore FIX reselect
     dataForDetailForm: settOppPeriodeDataForDetailForm(state, ownProps),

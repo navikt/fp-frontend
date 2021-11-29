@@ -771,7 +771,9 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
   const medsokerKjonnKode = viseUttakMedsoker && getMedsokerKjonnKode === undefined ? navBrukerKjonn.UDEFINERT : getMedsokerKjonnKode;
 
   const { gjeldende } = familiehendelse;
+  // @ts-ignore
   const hovedsokerPerioder = addClassNameGroupIdToPerioderHovedsoker(state, props);
+  // @ts-ignore
   const annenForelderPerioder = addClassNameGroupIdToPerioderAnnenForelder(state, props);
   const uttakPerioder = hovedsokerPerioder.concat(annenForelderPerioder).sort((pers1, pers2) => {
     if (pers1.group === pers2.group) {
@@ -794,6 +796,7 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
     person,
     soknadDate: determineMottatDato(periodeGrenseMottatDato, mottattDato),
     stonadskonto: formValueSelector(formName)(state, 'stonadskonto'),
+    // @ts-ignore
     uttaksresultatActivity: lagUttaksresultatActivity(state, props),
     uttakPerioder,
   };

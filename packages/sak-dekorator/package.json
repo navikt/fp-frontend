@@ -10,7 +10,6 @@
     "@fpsak-frontend/rest-api": "1.0.0",
     "@fpsak-frontend/shared-components": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
-    "@navikt/boxed-list-with-links": "1.0.4",
     "@navikt/fp-react-components": "1.0.0",
     "nav-frontend-core": "6.0.1",
     "nav-frontend-grid": "2.0.1",
@@ -26,11 +25,11 @@
     "nav-frontend-typografi": "4.0.1",
     "nav-frontend-typografi-style": "2.0.1",
     "react": "^17.0.2",
-    "react-intl": "^5.21.1"
+    "react-intl": "^5.22.0"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.3.12",
-    "@storybook/testing-react": "^0.0.22",
+    "@storybook/addon-actions": "^6.4.0",
+    "@storybook/testing-react": "^1.0.0",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0"
   }

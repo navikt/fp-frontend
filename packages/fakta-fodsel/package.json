@@ -22,13 +22,13 @@
     "nav-frontend-typografi": "4.0.1",
     "nav-frontend-typografi-style": "2.0.1",
     "react": "^17.0.2",
-    "react-intl": "^5.21.1",
-    "react-hook-form": "^7.19.5"
+    "react-intl": "^5.22.0",
+    "react-hook-form": "^7.20.4"
   },
   "devDependencies": {
     "@fpsak-frontend/storybook-utils": "^1.0.0",
-    "@storybook/addon-actions": "^6.3.12",
-    "@storybook/testing-react": "^0.0.22",
+    "@storybook/addon-actions": "^6.4.0",
+    "@storybook/testing-react": "^1.0.0",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0"
   }
