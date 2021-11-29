@@ -54,11 +54,11 @@
     "@fpsak-frontend/tidslinje": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
-    "@storybook/addon-actions": "^6.3.12",
-    "@storybook/addons": "^6.3.12",
+    "@storybook/addon-actions": "^6.4.0",
+    "@storybook/addons": "^6.4.0",
     "history": "^5.1.0",
     "react": "^17.0.2",
-    "react-intl": "^5.21.1",
+    "react-intl": "^5.22.0",
     "react-router-dom": "^6.0.2",
     "redux": "^4.1.2"
   }

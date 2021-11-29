@@ -316,6 +316,7 @@ InntektFieldArray.buildInitialValues = (andeler: AndelForFaktaOmBeregning[],
 export const mapStateToProps = (state, ownProps) => {
   const isBeregningFormDirty = isFormDirty(state);
   const aktivitetStatuser = ownProps.alleKodeverk[kodeverkTyper.AKTIVITET_STATUS];
+  // @ts-ignore
   const skalHaBesteberegning = skalHaBesteberegningSelector(state) === true;
   const skalHaMilitær = getFormValuesForBeregning(state)[vurderMilitaerField];
   const tilfeller = ownProps.beregningsgrunnlag.faktaOmBeregning.faktaOmBeregningTilfeller
