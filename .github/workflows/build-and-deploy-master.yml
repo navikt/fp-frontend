@@ -79,14 +79,14 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            github.issues.listForRepo({
+            github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: 'open',
               labels: ['bygg']
             }).then(response => {
               response.data.forEach(issue => {
-                github.issues.update({
+                github.rest.issues.update({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: issue.number,
@@ -99,9 +99,9 @@ jobs:
         if: success()
         uses: actions/github-script@v5
         with:
-          github-token: ${{secrets.GH_P_TOKEN}}
+          github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-              github.issues.create( {
+              github.rest.issues.create( {
                 owner: context.issue.owner,
                 repo: context.issue.repo,
                 labels: ['bygg'],
@@ -111,7 +111,7 @@ jobs:
                       const issue = { owner: context.issue.owner,
                       repo: context.issue.repo,
                       issue_number: response.data.number }
-                     github.issues.createComment({...issue,
+                     github.rest.issues.createComment({...issue,
                             title: 'Deploy av ${{ env.TAG }}',
                             body: '/promote dev-fss'})
                });
