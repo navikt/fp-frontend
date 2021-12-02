@@ -4138,6 +4138,14 @@
     core-js "^3.8.2"
     global "^4.4.0"
 
+"@storybook/client-logger@6.4.4":
+  version "6.4.4"
+  resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-6.4.4.tgz#212b70f42552e69abf884b538f027bca5f532d1c"
+  integrity sha512-UcMhhTaky7oXA/rUbyi4mBgx74a+hoENBhFk1twmiaAvZEysMT1c+dxT1H5vuASu6z3G+4PILzOqcoQpfV0jGQ==
+  dependencies:
+    core-js "^3.8.2"
+    global "^4.4.0"
+
 "@storybook/codemod@6.4.0":
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/@storybook/codemod/-/codemod-6.4.0.tgz#89b9153e820941b3d5c2253e9fe009c36fce6aa1"
@@ -4603,7 +4611,7 @@
   resolved "https://registry.yarnpkg.com/@storybook/testing-react/-/testing-react-1.0.0.tgz#8fc350d16f2bac17ebbdbb976731139a25a236e4"
   integrity sha512-wyMG79eqdxam/jGcqzFMBoWiYTlLFh4EdlnGetfK0HpkPlwi1pqDcW+IybGykw73K7ZpN5yebAOwih+3EgG4zw==
 
-"@storybook/theming@6.4.0", "@storybook/theming@^6.4.0":
+"@storybook/theming@6.4.0":
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-6.4.0.tgz#c884de8a8931d2f08b477cedf105b6c4fa129f12"
   integrity sha512-h07H/crnt7IpgYm0fXiFRtvLgcxjyCRi9+QjXK+aroYjWQYFkSKh1Z8jrGsXGZ42059hPyE9GvpzbJGMVlAELA==
@@ -4612,6 +4620,24 @@
     "@emotion/is-prop-valid" "^0.8.6"
     "@emotion/styled" "^10.0.27"
     "@storybook/client-logger" "6.4.0"
+    core-js "^3.8.2"
+    deep-object-diff "^1.1.0"
+    emotion-theming "^10.0.27"
+    global "^4.4.0"
+    memoizerific "^1.11.3"
+    polished "^4.0.5"
+    resolve-from "^5.0.0"
+    ts-dedent "^2.0.0"
+
+"@storybook/theming@^6.4.0":
+  version "6.4.4"
+  resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-6.4.4.tgz#5ba5b33d703eb6a7a5088ae7ee9f49460c13318c"
+  integrity sha512-CcxwsQOosdA0OzAJjl1q6X74OT8y6vGvZmjEGhRr68cw3+u+soaXmatweJ3qb3LYuxHRYIBFnCHGnqIf2R5Rlg==
+  dependencies:
+    "@emotion/core" "^10.1.1"
+    "@emotion/is-prop-valid" "^0.8.6"
+    "@emotion/styled" "^10.0.27"
+    "@storybook/client-logger" "6.4.4"
     core-js "^3.8.2"
     deep-object-diff "^1.1.0"
     emotion-theming "^10.0.27"
@@ -8088,12 +8114,7 @@ core-js-pure@^3.8.1:
   resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.19.1.tgz#edffc1fc7634000a55ba05e95b3f0fe9587a5aa4"
   integrity sha512-Q0Knr8Es84vtv62ei6/6jXH/7izKmOrtrxH9WJTHLCMAVeU+8TF8z8Nr08CsH4Ot0oJKzBzJJL9SJBYIv7WlfQ==
 
-core-js@^3.0.4, core-js@^3.6.5, core-js@^3.8.2:
-  version "3.12.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.12.1.tgz#6b5af4ff55616c08a44d386f1f510917ff204112"
-  integrity sha512-Ne9DKPHTObRuB09Dru5AjwKjY4cJHVGu+y5f7coGn1E9Grkc3p2iBwE9AI/nJzsE29mQF7oq+mhYYRqOMFN1Bw==
-
-core-js@^3.19.1:
+core-js@^3.0.4, core-js@^3.19.1, core-js@^3.6.5, core-js@^3.8.2:
   version "3.19.1"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.19.1.tgz#f6f173cae23e73a7d88fa23b6e9da329276c6641"
   integrity sha512-Tnc7E9iKd/b/ff7GFbhwPVzJzPztGrChB8X8GLqoYGdEOG8IpLnK1xPyo3ZoO3HsK6TodJS58VGPOxA+hLHQMg==
