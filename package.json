@@ -120,7 +120,7 @@
     "jest-canvas-mock": "^2.3.1",
     "jest-runner-eslint": "^1.0.0",
     "jest-transform-stub": "^2.0.0",
-    "jsdom": "^18.1.1",
+    "jsdom": "^19.0.0",
     "lerna": "^4.0.0",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
