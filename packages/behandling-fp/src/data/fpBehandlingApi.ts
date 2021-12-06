@@ -4,7 +4,7 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerWrapper, Behandling, Beregningsgrunnlag, BeregningsresultatFp, FaktaArbeidsforhold,
   FamilieHendelse, FamilieHendelseSamling, Feriepengegrunnlag, ForhåndsvisMeldingParams, InntektArbeidYtelse, Medlemskap, Opptjening, Personoversikt,
   SimuleringResultat, Soknad, TilbakekrevingValg, UttakKontrollerAktivitetskrav, UttakKontrollerFaktaPerioderWrapper, UttakPeriodeGrense,
-  UttaksresultatPeriode, UttakStonadskontoer, Verge, Vilkar, Ytelsefordeling,
+  UttaksresultatPeriode, UttakStonadskontoer, Verge, Vilkar, Ytelsefordeling, ArbeidOgInntektsmelding,
 } from '@fpsak-frontend/types';
 import { NyBehandlendeEnhetParams, SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
@@ -56,6 +56,7 @@ export const FpBehandlingApiKeys = {
   ARBEIDSGIVERE_OVERSIKT: new RestKey<ArbeidsgiverOpplysningerWrapper, void>('ARBEIDSGIVERE_OVERSIKT'),
   UTTAK_KONTROLLER_AKTIVITETSKRAV: new RestKey<UttakKontrollerAktivitetskrav[], void>('UTTAK_KONTROLLER_AKTIVITETSKRAV'),
   BEHANDLING_PERSONOVERSIKT: new RestKey<Personoversikt, void>('BEHANDLING_PERSONOVERSIKT'),
+  ARBEID_OG_INNTEKT: new RestKey<ArbeidOgInntektsmelding, void>('ARBEID_OG_INNTEKT'),
 };
 
 const endpoints = new RestApiConfigBuilder()
@@ -89,6 +90,7 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('arbeidsgivere-oversikt', FpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT)
   .withRel('uttak-kontroller-aktivitetskrav', FpBehandlingApiKeys.UTTAK_KONTROLLER_AKTIVITETSKRAV)
   .withRel('behandling-personoversikt', FpBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT)
+  .withRel('arbeidsforhold-inntektsmelding', FpBehandlingApiKeys.ARBEID_OG_INNTEKT)
 
   // operasjoner
   .withRel('lagre-stonadskontoer-gitt-uttaksperioder', FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER)

@@ -101,6 +101,9 @@ export type { default as StandardProsessPanelPropsTilbakekreving } from './src/s
 export type { default as Verge } from './src/vergeTsType';
 export type { default as ForhåndsvisMeldingParams } from './src/forhåndsvisMeldingParamsTsType';
 export type { default as VilkarsVurdertePerioderWrapper, VilkarsVurdertPeriode, AktsomhetInfo } from './src/vilkarsVurdertePerioderTsType';
+export type { default as Vedtaksbrev } from './src/vedtaksbrevTsType';
+export type { default as VedtaksbrevAvsnitt } from './src/vedtaksbrevAvsnittTsType';
+export type { default as ArbeidOgInntektsmelding } from './src/arbeidOgInntektsmeldingTsType';
 export type {
   default as FodselOgTilrettelegging, ArbeidsforholdFodselOgTilrettelegging, ArbeidsforholdTilretteleggingDato, Permisjon,
 } from './src/fodselOgTilretteleggingTsType';

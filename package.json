@@ -30,7 +30,7 @@
     "remove-node-modules": "find . -name \"node_modules\" -exec rm -rf '{}' +",
     "lint:config": "node -e 'console.dir(require(\"./.eslintrc.js\"))'",
     "storybook": "cross-env NODE_OPTIONS='--openssl-legacy-provider' start-storybook -p 9002",
-    "deploy-storybook": "build-storybook -o .static_storybook && storybook-to-ghpages --existing-output-dir=.static_storybook"
+    "deploy-storybook": "cross-env NODE_OPTIONS='--openssl-legacy-provider' build-storybook -o .static_storybook && storybook-to-ghpages --existing-output-dir=.static_storybook"
   },
   "workspaces": [
     "packages/*"

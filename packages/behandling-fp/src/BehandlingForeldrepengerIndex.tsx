@@ -11,6 +11,7 @@ import {
 import { restApiFpHooks, requestFpApi, FpBehandlingApiKeys } from './data/fpBehandlingApi';
 import SakenFaktaInitPanel from './faktaPaneler/SakenFaktaInitPanel';
 import ArbeidsforholdFaktaInitPanel from './faktaPaneler/ArbeidsforholdFaktaInitPanel';
+import ArbeidOgInntektFaktaInitPanel from './faktaPaneler/ArbeidOgInntektFaktaInitPanel';
 import YtelserFaktaInitPanel from './faktaPaneler/YtelserFaktaInitPanel';
 import VergeFaktaInitPanel from './faktaPaneler/VergeFaktaInitPanel';
 import OmsorgvilkaretFaktaInitPanel from './faktaPaneler/OmsorgvilkaretFaktaInitPanel';
@@ -111,6 +112,7 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
           hentFaktaPaneler={(props) => (
             <>
               <SakenFaktaInitPanel {...props} />
+              <ArbeidOgInntektFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <YtelserFaktaInitPanel {...props} />
               <VergeFaktaInitPanel {...props} />

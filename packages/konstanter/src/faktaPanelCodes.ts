@@ -2,6 +2,7 @@
 enum FaktaPanelCode {
   ADOPSJONSVILKARET = 'adopsjonsvilkaaret',
   ARBEIDSFORHOLD = 'arbeidsforhold',
+  ARBEID_OG_INNTEKT = 'arbeidoginntekt',
   BEREGNING = 'beregning',
   BESTEBEREGNING = 'besteberegning',
   DEFAULT = 'default',
