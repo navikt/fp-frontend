@@ -11,6 +11,7 @@ import {
 import ExpandableTable from './ETable';
 import ETRow from './ETRow';
 import ETColumn from './ETColumn';
+import InntektsmeldingInnhentesForm from './InntektsmeldingInnhentesForm';
 
 const HEADER_TEXT_IDS = [
   'ArbeidOgInntektFaktaPanel.Arbeidsforhold',
@@ -52,7 +53,16 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
         {arbeidOgInntekt.arbeidsforhold.map((aForhold) => {
           const arbeidsgiver = arbeidsgiverOpplysningerPerId[aForhold.arbeidsgiverIdent];
           return (
-            <ETRow content={<div>test innhold</div>} showContent={false} toggleOpenHandler={() => undefined}>
+            <ETRow
+              content={(
+                <InntektsmeldingInnhentesForm
+                  inntekter={arbeidOgInntekt.inntekter.filter((inntekt) => inntekt.arbeidsgiverIdent === aForhold.arbeidsgiverIdent)}
+                  isReadOnly={false}
+                />
+              )}
+              showContent={false}
+              toggleOpenHandler={() => undefined}
+            >
               <ETColumn>
                 <Image alt={intl.formatMessage({ id: 'ArbeidOgInntektFaktaPanel.Aksjonspunkt' })} src={advarselIkonUrl} />
               </ETColumn>

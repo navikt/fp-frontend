@@ -6,5 +6,14 @@
   "ArbeidOgInntektFaktaPanel.InntektsmeldingMottatt": "Inntektsmelding mottatt",
   "ArbeidOgInntektFaktaPanel.Aksjonspunkt": "Aksjonspunkt",
   "ArbeidOgInntektFaktaPanel.InnhentManglendeInntektsmelding": "Innhent manglende inntektsmelding",
-  "ArbeidOgInntektFaktaPanel.Skjaringstidspunkt": "Skjæringstidspunkt for opptjening: "
+  "ArbeidOgInntektFaktaPanel.Skjaringstidspunkt": "Skjæringstidspunkt for opptjening: ",
+
+  "InntektsmeldingInnhentesForm.Stillingsprosent": "Stillingsprosent",
+  "InntektsmeldingInnhentesForm.Inntekter": "Inntekter (fra AA-registeret)",
+  "InntektsmeldingInnhentesForm.MåInnhentes": "Må inntektsmelding innhentes?",
+  "InntektsmeldingInnhentesForm.TarKontakt": "Jeg tar kontakt med arbeidsgiver for å innhente inntektsmelding",
+  "InntektsmeldingInnhentesForm.GåVidere": "Gå videre uten inntektsmelding",
+  "InntektsmeldingInnhentesForm.Begrunn": "Begrunn valget",
+  "InntektsmeldingInnhentesForm.Lagre": "Lagre",
+  "InntektsmeldingInnhentesForm.Avbryt": "Avbryt"
 }

@@ -28,7 +28,7 @@ type Inntektspost = Readonly<{
   type: Kodeverk;
 }>
 
-type Inntekt = Readonly<{
+export type Inntekt = Readonly<{
   arbeidsgiverIdent: string;
   inntekter: Inntektspost[];
 }>
