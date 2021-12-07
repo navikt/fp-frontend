@@ -33,6 +33,8 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
   const headers = [undefined].concat(HEADER_TEXT_IDS.map((textId) => intl.formatMessage({ id: textId })));
 
+  const harIngenArbeidsforholdEllerInntektsmeldinger = arbeidOgInntekt.arbeidsforhold.length === 0 && arbeidOgInntekt.inntektsmeldinger.length === 0;
+
   return (
     <>
       <Row>
@@ -52,6 +54,13 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
         <FormattedMessage id="ArbeidOgInntektFaktaPanel.IngenArbeidsforhold" />
       </AksjonspunktHelpTextHTML>
       <VerticalSpacer sixteenPx />
+      {harIngenArbeidsforholdEllerInntektsmeldinger && (
+        <>
+          <VerticalSpacer sixteenPx />
+          <LeggTilArbeidsforholdForm isReadOnly={false} />
+          <VerticalSpacer sixteenPx />
+        </>
+      )}
       <ExpandableTable headers={headers}>
         {arbeidOgInntekt.arbeidsforhold.map((aForhold) => {
           const arbeidsgiver = arbeidsgiverOpplysningerPerId[aForhold.arbeidsgiverIdent];
@@ -101,6 +110,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           );
         })}
       </ExpandableTable>
+      <VerticalSpacer sixteenPx />
       <Hovedknapp
         mini
         autoFocus

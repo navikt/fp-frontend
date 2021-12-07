@@ -92,8 +92,8 @@ MedArbeidsforholdMenUtenInntektOgInnteksmelding.args = {
   },
 };
 
-export const MedArbeidsforholdOgInntekterMenUtenInnteksmelding = Template.bind({});
-MedArbeidsforholdOgInntekterMenUtenInnteksmelding.args = {
+export const MedArbeidsforholdOgInntekterMenOgInnteksmelding = Template.bind({});
+MedArbeidsforholdOgInntekterMenOgInnteksmelding.args = {
   arbeidsgiverOpplysningerPerId: {
     342352362: {
       erPrivatPerson: false,
@@ -181,5 +181,14 @@ MedArbeidsforholdOgInntekterMenUtenInnteksmelding.args = {
         },
       }],
     }],
+  },
+};
+
+export const MedIngenArbeidsforholdEllerInnteksmeldingerRegistrert = Template.bind({});
+MedIngenArbeidsforholdEllerInnteksmeldingerRegistrert.args = {
+  arbeidOgInntekt: {
+    arbeidsforhold: [],
+    inntektsmeldinger: [],
+    inntekter: [],
   },
 };

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Element, Undertekst } from 'nav-frontend-typografi';
 
-import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
+import telefonImageUrl from '@fpsak-frontend/assets/images/phone-3.svg';
 import { AoIArbeidsforhold, Inntektsmelding } from '@fpsak-frontend/types';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image,
@@ -58,7 +58,7 @@ const ReadonlyPanel: FunctionComponent<OwnProps> = ({
       )}
       <FlexRow>
         <FlexColumn>
-          <Image src={innvilgetImageUrl} />
+          <Image src={telefonImageUrl} />
         </FlexColumn>
         <FlexColumn>
           <FlexRow>
