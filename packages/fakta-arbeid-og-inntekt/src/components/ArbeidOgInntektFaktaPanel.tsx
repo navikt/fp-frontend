@@ -3,6 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
+import { Hovedknapp } from 'nav-frontend-knapper';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import { ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 import {
@@ -11,7 +12,7 @@ import {
 import ExpandableTable from './ETable';
 import ETRow from './ETRow';
 import ETColumn from './ETColumn';
-import InntektsmeldingInnhentesForm from './InntektsmeldingInnhentesForm';
+import ReadonlyPanel from './ReadonlyPanel';
 
 const HEADER_TEXT_IDS = [
   'ArbeidOgInntektFaktaPanel.Arbeidsforhold',
@@ -47,6 +48,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
       <VerticalSpacer sixteenPx />
       <AksjonspunktHelpTextHTML>
         <FormattedMessage id="ArbeidOgInntektFaktaPanel.InnhentManglendeInntektsmelding" />
+        <FormattedMessage id="ArbeidOgInntektFaktaPanel.AvklarManglendeOpplysninger" />
       </AksjonspunktHelpTextHTML>
       <VerticalSpacer sixteenPx />
       <ExpandableTable headers={headers}>
@@ -54,10 +56,16 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           const arbeidsgiver = arbeidsgiverOpplysningerPerId[aForhold.arbeidsgiverIdent];
           return (
             <ETRow
-              content={(
+              /* content={(
                 <InntektsmeldingInnhentesForm
                   inntekter={arbeidOgInntekt.inntekter.filter((inntekt) => inntekt.arbeidsgiverIdent === aForhold.arbeidsgiverIdent)}
                   isReadOnly={false}
+                />
+              )} */
+              content={(
+                <ReadonlyPanel
+                  arbeidsforhold={aForhold}
+                  inntektsmelding={arbeidOgInntekt.inntektsmeldinger.find((iMelding) => iMelding.arbeidsgiverIdent === aForhold.arbeidsgiverIdent)}
                 />
               )}
               showContent={false}
@@ -82,6 +90,18 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           );
         })}
       </ExpandableTable>
+      <Hovedknapp
+        mini
+        autoFocus
+      >
+        <FormattedMessage id="ArbeidOgInntektFaktaPanel.SettPaVent" />
+      </Hovedknapp>
+      <Hovedknapp
+        mini
+        autoFocus
+      >
+        <FormattedMessage id="ArbeidOgInntektFaktaPanel.Bekreft" />
+      </Hovedknapp>
     </>
   );
 };

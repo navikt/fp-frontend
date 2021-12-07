@@ -1,6 +1,6 @@
 import { Kodeverk } from '@fpsak-frontend/types';
 
-type Inntektsmelding = Readonly<{
+export type Inntektsmelding = Readonly<{
   inntektPrMnd: number;
   refusjonPrMnd: number;
   arbeidsgiverIdent: string;
@@ -12,7 +12,7 @@ type Inntektsmelding = Readonly<{
   innsendingstidspunkt: string;
 }>
 
-type Arbeidsforhold = Readonly<{
+export type Arbeidsforhold = Readonly<{
   arbeidsgiverIdent: string;
   internArbeidsforholdId: string;
   eksternArbeidsforholdId: string;

@@ -103,7 +103,9 @@ export type { default as ForhåndsvisMeldingParams } from './src/forhåndsvisMel
 export type { default as VilkarsVurdertePerioderWrapper, VilkarsVurdertPeriode, AktsomhetInfo } from './src/vilkarsVurdertePerioderTsType';
 export type { default as Vedtaksbrev } from './src/vedtaksbrevTsType';
 export type { default as VedtaksbrevAvsnitt } from './src/vedtaksbrevAvsnittTsType';
-export type { default as ArbeidOgInntektsmelding, Inntekt } from './src/arbeidOgInntektsmeldingTsType';
+export type {
+  default as ArbeidOgInntektsmelding, Inntekt, Arbeidsforhold as AoIArbeidsforhold, Inntektsmelding,
+} from './src/arbeidOgInntektsmeldingTsType';
 export type {
   default as FodselOgTilrettelegging, ArbeidsforholdFodselOgTilrettelegging, ArbeidsforholdTilretteleggingDato, Permisjon,
 } from './src/fodselOgTilretteleggingTsType';

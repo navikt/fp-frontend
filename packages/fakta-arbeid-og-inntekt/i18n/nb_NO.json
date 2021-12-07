@@ -6,7 +6,10 @@
   "ArbeidOgInntektFaktaPanel.InntektsmeldingMottatt": "Inntektsmelding mottatt",
   "ArbeidOgInntektFaktaPanel.Aksjonspunkt": "Aksjonspunkt",
   "ArbeidOgInntektFaktaPanel.InnhentManglendeInntektsmelding": "Innhent manglende inntektsmelding",
+  "ArbeidOgInntektFaktaPanel.AvklarManglendeOpplysninger": "Avklar manglende opplysninger",
   "ArbeidOgInntektFaktaPanel.Skjaringstidspunkt": "Skjæringstidspunkt for opptjening: ",
+  "ArbeidOgInntektFaktaPanel.SettPaVent": "Sett på vent",
+  "ArbeidOgInntektFaktaPanel.Bekreft": "Bekreft og fortsett",
 
   "InntektsmeldingInnhentesForm.Stillingsprosent": "Stillingsprosent",
   "InntektsmeldingInnhentesForm.Inntekter": "Inntekter (fra AA-registeret)",
@@ -15,5 +18,14 @@
   "InntektsmeldingInnhentesForm.GåVidere": "Gå videre uten inntektsmelding",
   "InntektsmeldingInnhentesForm.Begrunn": "Begrunn valget",
   "InntektsmeldingInnhentesForm.Lagre": "Lagre",
-  "InntektsmeldingInnhentesForm.Avbryt": "Avbryt"
+  "InntektsmeldingInnhentesForm.Avbryt": "Avbryt",
+
+  "ReadonlyPanel.Stillingsprosent": "Stillingsprosent",
+  "ReadonlyPanel.Inntektsmelding": "Inntektsmelding",
+  "ReadonlyPanel.Refusjon": "Refusjon",
+  "ReadonlyPanel.Ja": "Ja",
+  "ReadonlyPanel.Nei": "Nei",
+  "ReadonlyPanel.Refusjonsbeløp": "Refusjonsbeløp",
+  "ReadonlyPanel.Kontaktinfo": "Kontaktinfo",
+  "ReadonlyPanel.Tlf": "Tlf"
 }
