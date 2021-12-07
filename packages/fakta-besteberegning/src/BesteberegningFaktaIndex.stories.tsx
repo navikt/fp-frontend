@@ -30,9 +30,9 @@ const arbeidsgiverOpplysninger = {
   },
 };
 
-const lagAksjonspunkt = (status: string, begrunnelse?: string) => ({
+const lagAksjonspunkt = (apKode: string, status: string, begrunnelse?: string) => ({
   definisjon: {
-    kode: aksjonspunktCodes.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
+    kode: apKode,
     kodeverk: 'test',
   },
   status: {
@@ -103,7 +103,7 @@ export const BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt = Template.bin
 BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt.args = {
   behandling: behandlingMal as Behandling,
   beregningsgrunnlag: scenarioBG,
-  aksjonspunkter: [lagAksjonspunkt(aksjonspunktStatus.OPPRETTET)],
+  aksjonspunkter: [lagAksjonspunkt(aksjonspunktCodes.KONTROLLER_AUTOMATISK_BESTEBEREGNING, aksjonspunktStatus.OPPRETTET)],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
@@ -114,6 +114,15 @@ BesteberegningMedDagpengerOgArbeidLukketAksjonspunktPåVent.args = {
     venteArsakKode: venteArsakType.VENT_PÅ_KORRIGERT_BESTEBEREGNING,
   } as Behandling,
   beregningsgrunnlag: scenarioBG,
-  aksjonspunkter: [lagAksjonspunkt(aksjonspunktStatus.UTFORT, 'Min begrunnelse for at besteberegningen er feil')],
+  aksjonspunkter: [lagAksjonspunkt(aksjonspunktCodes.KONTROLLER_AUTOMATISK_BESTEBEREGNING, aksjonspunktStatus.UTFORT,
+    'Min begrunnelse for at besteberegningen er feil')],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};
+
+export const BesteberegningMedAvvik = Template.bind({});
+BesteberegningMedAvvik.args = {
+  behandling: behandlingMal as Behandling,
+  beregningsgrunnlag: scenarioBG,
+  aksjonspunkter: [lagAksjonspunkt(aksjonspunktCodes.MANUELL_KONTROLL_AV_BESTEBEREGNING, aksjonspunktStatus.OPPRETTET)],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };

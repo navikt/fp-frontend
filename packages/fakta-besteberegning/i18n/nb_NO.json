@@ -12,7 +12,9 @@
   "ResultatGrunnlag.Kap8GirBesteBeregning": "Beregning etter §14-7, 1. ledd gir beste beregning.",
   "ResultatGrunnlag.Kap1473GirBesteBeregning": "Beregning etter §14-7, 3. ledd gir beste beregning.",
 
+  "BesteberegningProsessPanel.Aksjonspunkt.Radiotekst": "Beregningen er korrekt og behandlingen kan fortsette.",
   "BesteberegningProsessPanel.Aksjonspunkt.HelpText": "Saken er automatisk besteberegnet, vennligst kontroller beregningen",
+  "BesteberegningProsessPanel.Aksjonspunkt.HelpTextKontroll": "Saken er tatt ut til kontroll på grunn av stort avvik mellom 3. og 1. ledd. Vennligst kontroller beregningen",
   "BesteberegningProsessPanel.Aksjonspunkt.ErKorrekt": "Saken er riktig beregnet, fortsett behandlingen",
   "BesteberegningProsessPanel.Aksjonspunkt.ErFeil": "Saken er ikke riktig beregnet, sett saken på vent"
 }
