@@ -118,6 +118,13 @@ MedArbeidsforholdOgInntekterMenUtenInnteksmelding.args = {
       internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
       stillingsprosent: 100,
       tom: '9999-12-31',
+    }, {
+      arbeidsgiverIdent: '910909088',
+      eksternArbeidsforholdId: 'ARB001-001',
+      fom: '2019-12-06',
+      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
+      stillingsprosent: 100,
+      tom: '9999-12-31',
     }],
     inntektsmeldinger: [],
     inntekter: [{

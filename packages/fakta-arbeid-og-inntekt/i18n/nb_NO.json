@@ -4,5 +4,7 @@
   "ArbeidOgInntektFaktaPanel.Periode": "Periode",
   "ArbeidOgInntektFaktaPanel.Kilde": "Kilde",
   "ArbeidOgInntektFaktaPanel.InntektsmeldingMottatt": "Inntektsmelding mottatt",
-  "ArbeidOgInntektFaktaPanel.Aksjonspunkt": "Aksjonspunkt"
+  "ArbeidOgInntektFaktaPanel.Aksjonspunkt": "Aksjonspunkt",
+  "ArbeidOgInntektFaktaPanel.InnhentManglendeInntektsmelding": "Innhent manglende inntektsmelding",
+  "ArbeidOgInntektFaktaPanel.Skjaringstidspunkt": "Skjæringstidspunkt for opptjening: "
 }

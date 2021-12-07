@@ -1,10 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { Column, Row } from 'nav-frontend-grid';
 
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import { ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
-import { VerticalSpacer, Image } from '@fpsak-frontend/shared-components';
+import {
+  VerticalSpacer, Image, AksjonspunktHelpTextHTML, FloatRight,
+} from '@fpsak-frontend/shared-components';
 import ExpandableTable from './ETable';
 import ETRow from './ETRow';
 import ETColumn from './ETColumn';
@@ -30,13 +33,26 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <Undertittel><FormattedMessage id="ArbeidOgInntektFaktaPanel.Overskrift" /></Undertittel>
-      <VerticalSpacer eightPx />
+      <Row>
+        <Column xs="8">
+          <Undertittel><FormattedMessage id="ArbeidOgInntektFaktaPanel.Overskrift" /></Undertittel>
+        </Column>
+        <Column xs="4">
+          <FloatRight>
+            <Normaltekst><FormattedMessage id="ArbeidOgInntektFaktaPanel.Skjaringstidspunkt" /></Normaltekst>
+          </FloatRight>
+        </Column>
+      </Row>
+      <VerticalSpacer sixteenPx />
+      <AksjonspunktHelpTextHTML>
+        <FormattedMessage id="ArbeidOgInntektFaktaPanel.InnhentManglendeInntektsmelding" />
+      </AksjonspunktHelpTextHTML>
+      <VerticalSpacer sixteenPx />
       <ExpandableTable headers={headers}>
         {arbeidOgInntekt.arbeidsforhold.map((aForhold) => {
           const arbeidsgiver = arbeidsgiverOpplysningerPerId[aForhold.arbeidsgiverIdent];
           return (
-            <ETRow content={<div>test innhold</div>} isOpen toggleOpenHandler={() => undefined}>
+            <ETRow content={<div>test innhold</div>} showContent={false} toggleOpenHandler={() => undefined}>
               <ETColumn>
                 <Image alt={intl.formatMessage({ id: 'ArbeidOgInntektFaktaPanel.Aksjonspunkt' })} src={advarselIkonUrl} />
               </ETColumn>
