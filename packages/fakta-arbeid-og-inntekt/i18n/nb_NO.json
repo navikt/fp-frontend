@@ -27,5 +27,17 @@
   "ReadonlyPanel.Nei": "Nei",
   "ReadonlyPanel.Refusjonsbeløp": "Refusjonsbeløp",
   "ReadonlyPanel.Kontaktinfo": "Kontaktinfo",
-  "ReadonlyPanel.Tlf": "Tlf"
+  "ReadonlyPanel.Tlf": "Tlf",
+
+  "ManglendeOpplysningerForm.ErMottattMenIkkeReg": "Inntektsmelding er mottatt, men arbeidsforholdet er ikke registrert i AA-registeret",
+  "ManglendeOpplysningerForm.SkalBrukeInntekstmelding": "Skal vi bruke denne inntektsmeldingen?",
+  "ManglendeOpplysningerForm.TarKontakt": "Jeg kontakter arbeidsgiver",
+  "ManglendeOpplysningerForm.GåVidere": "Se bort fra inntektsmeldingen",
+  "ManglendeOpplysningerForm.OpprettArbeidsforhold": "Opprett arbeidsforhold basert på inntektsmeldingen.",
+  "ManglendeOpplysningerForm.Begrunn": "Begrunn valget",
+  "ManglendeOpplysningerForm.PeriodeFra": "Periode fra",
+  "ManglendeOpplysningerForm.PeriodeTil": "Periode til",
+  "ManglendeOpplysningerForm.Stillingsprosent": "Stillingsprosent",
+  "ManglendeOpplysningerForm.Lagre": "Lagre",
+  "ManglendeOpplysningerForm.Avbryt": "Avbryt"
 }

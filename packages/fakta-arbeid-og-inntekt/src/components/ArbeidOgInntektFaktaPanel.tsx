@@ -12,7 +12,7 @@ import {
 import ExpandableTable from './ETable';
 import ETRow from './ETRow';
 import ETColumn from './ETColumn';
-import ReadonlyPanel from './ReadonlyPanel';
+import ManglendeOpplysningerForm from './ManglendeOpplysningerForm';
 
 const HEADER_TEXT_IDS = [
   'ArbeidOgInntektFaktaPanel.Arbeidsforhold',
@@ -62,10 +62,17 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
                   isReadOnly={false}
                 />
               )} */
-              content={(
-                <ReadonlyPanel
+              /* content={(
+                <InntektsmeldingOpplysningerPanel
                   arbeidsforhold={aForhold}
                   inntektsmelding={arbeidOgInntekt.inntektsmeldinger.find((iMelding) => iMelding.arbeidsgiverIdent === aForhold.arbeidsgiverIdent)}
+                />
+              )} */
+              content={(
+                <ManglendeOpplysningerForm
+                  arbeidsforhold={aForhold}
+                  inntektsmelding={arbeidOgInntekt.inntektsmeldinger.find((iMelding) => iMelding.arbeidsgiverIdent === aForhold.arbeidsgiverIdent)}
+                  isReadOnly={false}
                 />
               )}
               showContent={false}
