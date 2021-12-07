@@ -12,7 +12,7 @@ import {
 import ExpandableTable from './ETable';
 import ETRow from './ETRow';
 import ETColumn from './ETColumn';
-import ManglendeOpplysningerForm from './ManglendeOpplysningerForm';
+import LeggTilArbeidsforholdForm from './LeggTilArbeidsforholdForm';
 
 const HEADER_TEXT_IDS = [
   'ArbeidOgInntektFaktaPanel.Arbeidsforhold',
@@ -49,6 +49,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
       <AksjonspunktHelpTextHTML>
         <FormattedMessage id="ArbeidOgInntektFaktaPanel.InnhentManglendeInntektsmelding" />
         <FormattedMessage id="ArbeidOgInntektFaktaPanel.AvklarManglendeOpplysninger" />
+        <FormattedMessage id="ArbeidOgInntektFaktaPanel.IngenArbeidsforhold" />
       </AksjonspunktHelpTextHTML>
       <VerticalSpacer sixteenPx />
       <ExpandableTable headers={headers}>
@@ -68,12 +69,15 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
                   inntektsmelding={arbeidOgInntekt.inntektsmeldinger.find((iMelding) => iMelding.arbeidsgiverIdent === aForhold.arbeidsgiverIdent)}
                 />
               )} */
-              content={(
+              /* content={(
                 <ManglendeOpplysningerForm
                   arbeidsforhold={aForhold}
                   inntektsmelding={arbeidOgInntekt.inntektsmeldinger.find((iMelding) => iMelding.arbeidsgiverIdent === aForhold.arbeidsgiverIdent)}
                   isReadOnly={false}
                 />
+              )} */
+              content={(
+                <LeggTilArbeidsforholdForm isReadOnly={false} />
               )}
               showContent={false}
               toggleOpenHandler={() => undefined}
