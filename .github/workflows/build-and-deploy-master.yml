@@ -44,7 +44,7 @@ jobs:
         run: yarn test:coverage
 
       - name: Archive code coverage results
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v2.3.0
         with:
           name: code-coverage-report
           path: coverage
