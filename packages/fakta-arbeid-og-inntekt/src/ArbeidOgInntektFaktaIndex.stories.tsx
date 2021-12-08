@@ -184,8 +184,8 @@ MedArbeidsforholdOgInntekterMenOgInnteksmelding.args = {
   },
 };
 
-export const MedIngenArbeidsforholdEllerInnteksmeldingerRegistrert = Template.bind({});
-MedIngenArbeidsforholdEllerInnteksmeldingerRegistrert.args = {
+export const SkalKunneLeggTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnes = Template.bind({});
+SkalKunneLeggTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnes.args = {
   arbeidOgInntekt: {
     arbeidsforhold: [],
     inntektsmeldinger: [],

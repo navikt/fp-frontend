@@ -75,6 +75,7 @@ interface OwnProps<ID, MODEL = void> {
   isApLeftBorder?: boolean;
   className?: string;
   useMultiselect?: boolean;
+  hasNoBottomBorder?: boolean;
 }
 
 /**
@@ -97,15 +98,17 @@ const TableRow = <ID, MODEL = void, >({
   isApLeftBorder = false,
   className,
   useMultiselect = false,
+  hasNoBottomBorder = false,
 }: OwnProps<ID, MODEL>) => (
   <tr
-    className={classNames(className, {
+    className={classNames(className, styles.column, {
       rowHeader: isHeader,
       rowContent: (!isHeader && !noHover),
       selected: isSelected,
       bold: isBold,
       dashedBottomBorder: isDashedBottomBorder,
       solidBottomBorder: isSolidBottomBorder,
+      noBottomBorder: hasNoBottomBorder,
       apLeftBorder: isApLeftBorder,
     })}
     onMouseDown={createMouseDownHandler<ID, MODEL>(onMouseDown, id, model)}

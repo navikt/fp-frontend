@@ -7,14 +7,14 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import { ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 import {
-  VerticalSpacer, Image, AksjonspunktHelpTextHTML, FloatRight,
+  VerticalSpacer, Image, AksjonspunktHelpTextHTML, FloatRight, Table, TableColumn,
 } from '@fpsak-frontend/shared-components';
-import ExpandableTable from './ETable';
-import ETRow from './ETRow';
-import ETColumn from './ETColumn';
+import ExpandableTableRow from './ExpandableTableRow';
 import LeggTilArbeidsforholdForm from './LeggTilArbeidsforholdForm';
+import ManglendeOpplysningerForm from './ManglendeOpplysningerForm';
 
 const HEADER_TEXT_IDS = [
+  'EMPTY',
   'ArbeidOgInntektFaktaPanel.Arbeidsforhold',
   'ArbeidOgInntektFaktaPanel.Periode',
   'ArbeidOgInntektFaktaPanel.Kilde',
@@ -31,7 +31,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   arbeidsgiverOpplysningerPerId,
 }) => {
   const intl = useIntl();
-  const headers = [undefined].concat(HEADER_TEXT_IDS.map((textId) => intl.formatMessage({ id: textId })));
+  const headers = HEADER_TEXT_IDS.map((textId) => (textId !== 'EMPTY' ? intl.formatMessage({ id: textId }) : textId));
 
   const harIngenArbeidsforholdEllerInntektsmeldinger = arbeidOgInntekt.arbeidsforhold.length === 0 && arbeidOgInntekt.inntektsmeldinger.length === 0;
 
@@ -61,11 +61,11 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
         </>
       )}
-      <ExpandableTable headers={headers}>
+      <Table headerTextCodes={headers} noHover>
         {arbeidOgInntekt.arbeidsforhold.map((aForhold) => {
           const arbeidsgiver = arbeidsgiverOpplysningerPerId[aForhold.arbeidsgiverIdent];
           return (
-            <ETRow
+            <ExpandableTableRow
               /* content={(
                 <InntektsmeldingInnhentesForm
                   inntekter={arbeidOgInntekt.inntekter.filter((inntekt) => inntekt.arbeidsgiverIdent === aForhold.arbeidsgiverIdent)}
@@ -78,38 +78,39 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
                   inntektsmelding={arbeidOgInntekt.inntektsmeldinger.find((iMelding) => iMelding.arbeidsgiverIdent === aForhold.arbeidsgiverIdent)}
                 />
               )} */
-              /* content={(
+              content={(
                 <ManglendeOpplysningerForm
                   arbeidsforhold={aForhold}
                   inntektsmelding={arbeidOgInntekt.inntektsmeldinger.find((iMelding) => iMelding.arbeidsgiverIdent === aForhold.arbeidsgiverIdent)}
                   isReadOnly={false}
                 />
-              )} */
-              content={(
-                <LeggTilArbeidsforholdForm isReadOnly={false} />
               )}
+              /* content={(
+                <LeggTilArbeidsforholdForm isReadOnly={false} />
+              )} */
               showContent={false}
               toggleOpenHandler={() => undefined}
+              isApLeftBorder
             >
-              <ETColumn>
+              <TableColumn>
                 <Image alt={intl.formatMessage({ id: 'ArbeidOgInntektFaktaPanel.Aksjonspunkt' })} src={advarselIkonUrl} />
-              </ETColumn>
-              <ETColumn>
+              </TableColumn>
+              <TableColumn>
                 {arbeidsgiver.navn}
-              </ETColumn>
-              <ETColumn>
+              </TableColumn>
+              <TableColumn>
                 periode
-              </ETColumn>
-              <ETColumn>
+              </TableColumn>
+              <TableColumn>
                 kilde
-              </ETColumn>
-              <ETColumn>
+              </TableColumn>
+              <TableColumn>
                 mottattDato
-              </ETColumn>
-            </ETRow>
+              </TableColumn>
+            </ExpandableTableRow>
           );
         })}
-      </ExpandableTable>
+      </Table>
       <VerticalSpacer sixteenPx />
       <Hovedknapp
         mini
