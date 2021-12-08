@@ -33,7 +33,7 @@ const BesteberegningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
   <FaktaDefaultInitPanel<EndepunktInitData>
     {...props}
     requestApi={requestFpApi}
-    aksjonspunktKoder={[aksjonspunktCodes.KONTROLLER_AUTOMATISK_BESTEBEREGNING]}
+    aksjonspunktKoder={[aksjonspunktCodes.KONTROLLER_AUTOMATISK_BESTEBEREGNING, aksjonspunktCodes.MANUELL_KONTROLL_AV_BESTEBEREGNING]}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     faktaPanelKode={FaktaPanelCode.BESTEBEREGNING}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'BesteberegningInfoPanel.Title' })}
