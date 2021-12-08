@@ -5,11 +5,12 @@ import {
 import { BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
-import KontrollerBesteberegningAP
+import BesteberegningAP
   from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/KontrollerBesteberegningAP';
 import BesteMånederVisningPanel from './BesteManederVisningPanel';
 import BesteberegningResultatGrunnlagPanel from './BesteberegningResultatGrunnlagPanel';
 import KontrollerBesteberegningPanel, { FormValues } from './KontrollerBesteberegningPanel';
+import KontrollerBesteberegningPanelOld from './KontrollerBesteberegningPanelOld';
 
 interface OwnProps {
   beregningsgrunnlag: Beregningsgrunnlag;
@@ -18,7 +19,7 @@ interface OwnProps {
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
   behandling: Behandling;
-  submitCallback: (aksjonspunktData: KontrollerBesteberegningAP) => Promise<void>;
+  submitCallback: (aksjonspunktData: BesteberegningAP) => Promise<void>;
   submittable: boolean;
   formData?: FormValues,
   setFormData: (data: any) => void,
@@ -47,13 +48,14 @@ const BesteberegningPanel: FunctionComponent<OwnProps> = ({
     return null;
   }
   const førstePeriode = beregningsgrunnlagPeriode[0];
-  const besteberegningAP = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.KONTROLLER_AUTOMATISK_BESTEBEREGNING);
+  const nyttBesteberegningAP = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_BESTEBEREGNING);
+  const gammeltBesteberegningAP = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.KONTROLLER_AUTOMATISK_BESTEBEREGNING);
   return (
     <div>
-      {!!besteberegningAP
+      {!!nyttBesteberegningAP
         && (
         <KontrollerBesteberegningPanel
-          aksjonspunkt={besteberegningAP}
+          aksjonspunkt={nyttBesteberegningAP}
           submitCallback={submitCallback}
           submittable={submittable}
           readOnly={readOnly}
@@ -62,6 +64,18 @@ const BesteberegningPanel: FunctionComponent<OwnProps> = ({
           setFormData={setFormData}
         />
         )}
+      {!!gammeltBesteberegningAP
+      && (
+        <KontrollerBesteberegningPanelOld
+          aksjonspunkt={gammeltBesteberegningAP}
+          submitCallback={submitCallback}
+          submittable={submittable}
+          readOnly={readOnly}
+          venteårsak={behandling.venteArsakKode}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      )}
       <BorderBox>
         <BesteberegningResultatGrunnlagPanel
           periode={førstePeriode}

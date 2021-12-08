@@ -1,9 +1,10 @@
-import React, { FunctionComponent, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import React, { FunctionComponent } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import {
   AksjonspunktHelpTextTemp, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
+import { required } from '@fpsak-frontend/utils';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import {
   FaktaBegrunnelseTextFieldNew,
@@ -12,9 +13,8 @@ import {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import aksjonspunktStatus, { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { Form, CheckboxField } from '@fpsak-frontend/form-hooks';
-import { ManuellKontrollBesteberegningAP }
-  from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/KontrollerBesteberegningAP';
+import { RadioGroupField, RadioOption, Form } from '@fpsak-frontend/form-hooks';
+import { KontrollerBesteberegningAP } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/KontrollerBesteberegningAP';
 
 export const buildInitialValues = (venteårsak: string, aksjonspunkt: Aksjonspunkt): FormValues => {
   if (!aksjonspunkt) {
@@ -27,8 +27,8 @@ export const buildInitialValues = (venteårsak: string, aksjonspunkt: Aksjonspun
   };
 };
 
-export const transformValues = (values: FormValues): ManuellKontrollBesteberegningAP => ({
-  kode: aksjonspunktCodes.MANUELL_KONTROLL_AV_BESTEBEREGNING,
+export const transformValues = (values: FormValues): KontrollerBesteberegningAP => ({
+  kode: aksjonspunktCodes.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
   begrunnelse: values.begrunnelse,
   besteberegningErKorrekt: values.besteberegningErKorrektValg,
 });
@@ -40,7 +40,7 @@ export type FormValues = {
 
 interface OwnProps {
   aksjonspunkt: Aksjonspunkt;
-  submitCallback: (data: ManuellKontrollBesteberegningAP) => Promise<void>;
+  submitCallback: (data: KontrollerBesteberegningAP) => Promise<void>;
   venteårsak: string;
   readOnly: boolean;
   submittable: boolean;
@@ -51,9 +51,9 @@ interface OwnProps {
 /**
  * KontrollerBesteberegningPanel
  *
- * Formkomponent. Lar saksbehandler vurdere om den automatiske besteberegningen er korrekt utført.
+ * Kan erstattes av ren readOnly komponent når alle saker er over på nytt AP.
  */
-const KontrollerBesteberegningPanel: FunctionComponent<OwnProps> = ({
+const KontrollerBesteberegningPanelOld: FunctionComponent<OwnProps> = ({
   aksjonspunkt,
   venteårsak,
   readOnly,
@@ -65,7 +65,7 @@ const KontrollerBesteberegningPanel: FunctionComponent<OwnProps> = ({
   if (!aksjonspunkt) {
     return null;
   }
-  const [erKnappEnabled, toggleKnapp] = useState(false);
+  const intl = useIntl();
   const formMethods = useForm<FormValues>({
     defaultValues: formData || buildInitialValues(venteårsak, aksjonspunkt),
   });
@@ -73,7 +73,7 @@ const KontrollerBesteberegningPanel: FunctionComponent<OwnProps> = ({
   return (
     <>
       <AksjonspunktHelpTextTemp isAksjonspunktOpen={isAksjonspunktOpen(aksjonspunkt.status.kode)}>
-        {[<FormattedMessage key="BesteberegningAksjonspunktTekst" id="BesteberegningProsessPanel.Aksjonspunkt.HelpTextKontroll" />]}
+        {[<FormattedMessage key="BesteberegningAksjonspunktTekst" id="BesteberegningProsessPanel.Aksjonspunkt.HelpText" />]}
       </AksjonspunktHelpTextTemp>
       <VerticalSpacer twentyPx />
       <Form
@@ -81,12 +81,22 @@ const KontrollerBesteberegningPanel: FunctionComponent<OwnProps> = ({
         onSubmit={(values) => submitCallback(transformValues(values))}
         setDataOnUnmount={setFormData}
       >
-        <CheckboxField
+        <RadioGroupField
           name="besteberegningErKorrektValg"
-          label={<FormattedMessage id="BesteberegningProsessPanel.Aksjonspunkt.Radiotekst" />}
+          direction="horizontal"
+          validate={[required]}
           readOnly={readOnly}
-          onChange={() => toggleKnapp(!erKnappEnabled)}
-        />
+          parse={(value: string) => value === 'true'}
+        >
+          <RadioOption
+            label={intl.formatMessage({ id: 'BesteberegningProsessPanel.Aksjonspunkt.ErKorrekt' })}
+            value="true"
+          />
+          <RadioOption
+            label={intl.formatMessage({ id: 'BesteberegningProsessPanel.Aksjonspunkt.ErFeil' })}
+            value="false"
+          />
+        </RadioGroupField>
         <VerticalSpacer twentyPx />
         <FaktaBegrunnelseTextFieldNew
           isSubmittable={submittable}
@@ -96,7 +106,7 @@ const KontrollerBesteberegningPanel: FunctionComponent<OwnProps> = ({
         />
         <VerticalSpacer twentyPx />
         <FaktaSubmitButtonNew
-          isSubmittable={submittable && erKnappEnabled}
+          isSubmittable={submittable}
           isSubmitting={formMethods.formState.isSubmitting}
           isDirty={formMethods.formState.isDirty}
           isReadOnly={readOnly}
@@ -106,4 +116,4 @@ const KontrollerBesteberegningPanel: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default KontrollerBesteberegningPanel;
+export default KontrollerBesteberegningPanelOld;
