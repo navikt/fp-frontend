@@ -13,12 +13,13 @@ export type Inntektsmelding = Readonly<{
 }>
 
 export type Arbeidsforhold = Readonly<{
-  arbeidsgiverIdent: string;
-  internArbeidsforholdId: string;
-  eksternArbeidsforholdId: string;
+  arbeidsgiverIdent?: string;
+  internArbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
   fom: string;
   tom: string;
   stillingsprosent: number;
+  begrunnelse?: string;
 }>
 
 export type Inntektspost = Readonly<{

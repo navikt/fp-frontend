@@ -6,10 +6,11 @@ import { useIntl } from 'react-intl';
 import pilNedIkonUrl from '@fpsak-frontend/assets/images/pil_ned.svg';
 import { Image, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
 
+import styles from './expandableTableRow.less';
+
 interface OwnProps {
   showContent: boolean;
   content: ReactNode;
-  toggleOpenHandler: (isOpen: boolean) => void;
   children: ReactNode | ReactNode[];
   isApLeftBorder?: boolean;
 }
@@ -17,7 +18,6 @@ interface OwnProps {
 const ExpandableTableRow: FunctionComponent<OwnProps> = ({
   showContent,
   content,
-  toggleOpenHandler,
   children,
   isApLeftBorder = false,
 }) => {
@@ -25,7 +25,6 @@ const ExpandableTableRow: FunctionComponent<OwnProps> = ({
   const [isOpen, setIsOpen] = useState(showContent);
   const toggleIsOpen = useCallback(() => {
     setIsOpen(!isOpen);
-    toggleOpenHandler(!isOpen);
   }, [isOpen]);
 
   return (
@@ -36,14 +35,12 @@ const ExpandableTableRow: FunctionComponent<OwnProps> = ({
           <Image alt={intl.formatMessage({ id: 'ArbeidOgInntektFaktaPanel.Aksjonspunkt' })} src={pilNedIkonUrl} />
         </TableColumn>
       </TableRow>
-      {isOpen && (
-        <TableRow noHover isApLeftBorder={isApLeftBorder}>
-          <TableColumn />
-          <TableColumn colspanAll>
-            {content}
-          </TableColumn>
-        </TableRow>
-      )}
+      <TableRow noHover isApLeftBorder={isApLeftBorder} className={!isOpen ? styles.hidden : undefined}>
+        <TableColumn />
+        <TableColumn colspanAll>
+          {content}
+        </TableColumn>
+      </TableRow>
     </>
   );
 };

@@ -11,6 +11,7 @@
   "ArbeidOgInntektFaktaPanel.Skjaringstidspunkt": "Skjæringstidspunkt for opptjening: {skjæringspunktDato}",
   "ArbeidOgInntektFaktaPanel.SettPaVent": "Sett på vent",
   "ArbeidOgInntektFaktaPanel.Bekreft": "Bekreft og fortsett",
+  "ArbeidOgInntektFaktaPanel.LeggTilArbeidsforhold": " Legg til arbeidsforhold",
 
   "InntektsmeldingInnhentesForm.Stillingsprosent": "Stillingsprosent {stillingsprosent}%",
   "InntektsmeldingInnhentesForm.Inntekter": "Inntekter (fra AA-registeret)",

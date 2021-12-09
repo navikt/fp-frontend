@@ -6,7 +6,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import ArbeidOgInntektFaktaIndex from '@fpsak-frontend/fakta-arbeid-og-inntekt';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, ArbeidOgInntektsmelding,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, ArbeidOgInntektsmelding, AksessRettigheter,
 } from '@fpsak-frontend/types';
 import { FaktaDefaultInitPanel, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@fpsak-frontend/utils';
@@ -26,10 +26,12 @@ type EndepunktInitData = {
 
 interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  rettigheter: AksessRettigheter;
 }
 
 const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
   arbeidsgiverOpplysningerPerId,
+  rettigheter,
   ...props
 }) => (
   <FaktaDefaultInitPanel<EndepunktInitData>
@@ -43,6 +45,7 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
     renderPanel={(data) => (
       <ArbeidOgInntektFaktaIndex
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
         {...data}
       />
     )}

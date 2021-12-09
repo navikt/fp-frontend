@@ -16,6 +16,7 @@ interface OwnProps {
   lagreNyttArbeidsforhold: (formValues: NyttArbeidsforholdFormValues) => void;
   lagreManglendeArbeidsforhold: (formValues: FormValuesForManglendeArbeidsforhold) => void;
   lagreManglendeInntekstmelding: (formValues: FormValuesForManglendeInntektsmelding) => void;
+  erOverstyrer: boolean;
 }
 
 const intl = createIntl(messages);
@@ -24,22 +25,28 @@ const ArbeidOgInntektFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanel
   behandling,
   aksjonspunkter,
   readOnly,
+  formData,
+  setFormData,
   arbeidOgInntekt,
   arbeidsgiverOpplysningerPerId,
   lagreNyttArbeidsforhold,
   lagreManglendeArbeidsforhold,
   lagreManglendeInntekstmelding,
+  erOverstyrer,
 }) => (
   <RawIntlProvider value={intl}>
     <ArbeidOgInntektFaktaPanel
       skjæringspunktDato={behandling.behandlingsresultat.skjæringstidspunkt.dato}
       aksjonspunkter={aksjonspunkter}
       isReadOnly={readOnly}
+      formData={formData}
+      setFormData={setFormData}
       arbeidOgInntekt={arbeidOgInntekt}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       lagreNyttArbeidsforhold={lagreNyttArbeidsforhold}
       lagreManglendeArbeidsforhold={lagreManglendeArbeidsforhold}
       lagreManglendeInntekstmelding={lagreManglendeInntekstmelding}
+      erOverstyrer={erOverstyrer}
     />
   </RawIntlProvider>
 );

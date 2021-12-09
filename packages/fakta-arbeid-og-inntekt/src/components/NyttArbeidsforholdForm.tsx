@@ -1,12 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { useForm } from 'react-hook-form';
+import { useForm, UseFormGetValues } from 'react-hook-form';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 
+import { AoIArbeidsforhold } from '@fpsak-frontend/types';
 import {
-  hasValidText, maxLength, minLength, hasValidDate, hasValidInteger, required, minValue, maxValue,
+  hasValidText, maxLength, minLength, hasValidDate, hasValidInteger, required, minValue, maxValue, dateAfterOrEqual,
 } from '@fpsak-frontend/utils';
 import {
   TextAreaField, DatepickerField, InputField, Form,
@@ -20,24 +21,40 @@ const maxLength1500 = maxLength(1500);
 const minValue1 = minValue(1);
 const maxValue100 = maxValue(100);
 
+const validerPeriodeRekkefølge = (getValues: UseFormGetValues<any>) => (tom: string) => dateAfterOrEqual(getValues('periodeFra'))(tom);
+
 export type FormValues = {
-  skalBrukeInntektsmelding: string;
-  periodeFra?: string;
-  periodeTil?: string;
-  stillingsprosent?: number;
+  arbeidsgiver: string;
+  periodeFra: string;
+  periodeTil: string;
+  stillingsprosent: number;
   begrunnelse: string;
 }
 
 interface OwnProps {
   isReadOnly: boolean;
   lagreNyttArbeidsforhold: (formValues: FormValues) => void;
+  arbeidsforhold?: AoIArbeidsforhold;
+  arbeidsforholdNavn?: string;
+  avbrytEditering?: () => void;
 }
 
-const LeggTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
+const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   isReadOnly,
   lagreNyttArbeidsforhold,
+  arbeidsforhold,
+  arbeidsforholdNavn,
+  avbrytEditering,
 }) => {
-  const formMethods = useForm<FormValues>();
+  const formMethods = useForm<FormValues>({
+    defaultValues: arbeidsforhold ? {
+      periodeFra: arbeidsforhold.fom,
+      periodeTil: arbeidsforhold.tom,
+      stillingsprosent: arbeidsforhold.stillingsprosent,
+      begrunnelse: arbeidsforhold.begrunnelse,
+      arbeidsgiver: arbeidsforholdNavn,
+    } : undefined,
+  });
 
   return (
     <>
@@ -69,7 +86,7 @@ const LeggTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
               <DatepickerField
                 name="periodeTil"
                 label={<FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeTil" />}
-                validate={[required, hasValidDate]}
+                validate={[required, hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
                 readOnly={isReadOnly}
               />
             </FlexColumn>
@@ -114,7 +131,7 @@ const LeggTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                 mini
                 spinner={false}
                 disabled={false}
-                onClick={() => undefined}
+                onClick={avbrytEditering}
                 htmlType="button"
               >
                 <FormattedMessage id="LeggTilArbeidsforholdForm.Avbryt" />
@@ -127,4 +144,4 @@ const LeggTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default LeggTilArbeidsforholdForm;
+export default NyttArbeidsforholdForm;

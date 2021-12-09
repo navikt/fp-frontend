@@ -112,7 +112,7 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
           hentFaktaPaneler={(props) => (
             <>
               <SakenFaktaInitPanel {...props} />
-              <ArbeidOgInntektFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+              <ArbeidOgInntektFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <YtelserFaktaInitPanel {...props} />
               <VergeFaktaInitPanel {...props} />

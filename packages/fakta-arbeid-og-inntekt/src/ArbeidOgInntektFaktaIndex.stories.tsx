@@ -18,10 +18,12 @@ const Template: Story<{
   aksjonspunkter?: Aksjonspunkt[];
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  erOverstyrer?: boolean;
 }> = ({
   aksjonspunkter = [],
   arbeidOgInntekt,
   arbeidsgiverOpplysningerPerId,
+  erOverstyrer = false,
 }) => (
   <ArbeidOgInntektFaktaIndex
     behandling={{
@@ -44,6 +46,7 @@ const Template: Story<{
     lagreNyttArbeidsforhold={action('button-click') as (data: any) => Promise<any>}
     lagreManglendeArbeidsforhold={action('button-click') as (data: any) => Promise<any>}
     lagreManglendeInntekstmelding={action('button-click') as (data: any) => Promise<any>}
+    erOverstyrer={erOverstyrer}
   />
 );
 
@@ -283,8 +286,18 @@ SkalAvklareManglendeOpplysninger.args = {
   },
 };
 
-export const SkalKunneLeggTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnes = Template.bind({});
-SkalKunneLeggTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnes.args = {
+export const SkalKunneLeggTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnErOverstyrer = Template.bind({});
+SkalKunneLeggTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnErOverstyrer.args = {
+  arbeidOgInntekt: {
+    arbeidsforhold: [],
+    inntektsmeldinger: [],
+    inntekter: [],
+  },
+  erOverstyrer: true,
+};
+
+export const SkalIkkeKunneLeggTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnIkkeErOverstyrer = Template.bind({});
+SkalIkkeKunneLeggTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnIkkeErOverstyrer.args = {
   arbeidOgInntekt: {
     arbeidsforhold: [],
     inntektsmeldinger: [],
