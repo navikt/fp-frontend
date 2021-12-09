@@ -21,7 +21,7 @@ export type Arbeidsforhold = Readonly<{
   stillingsprosent: number;
 }>
 
-type Inntektspost = Readonly<{
+export type Inntektspost = Readonly<{
   beløp: number;
   fom: string;
   tom: string;

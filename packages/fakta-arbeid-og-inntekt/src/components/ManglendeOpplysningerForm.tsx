@@ -11,7 +11,7 @@ import {
 import {
   TextAreaField, RadioGroupField, RadioOption, DatepickerField, InputField, Form,
 } from '@fpsak-frontend/form-hooks';
-import { AoIArbeidsforhold, Inntektsmelding } from '@fpsak-frontend/types';
+import { Inntektsmelding } from '@fpsak-frontend/types';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
@@ -30,16 +30,21 @@ type FormValues = {
   begrunnelse: string;
 }
 
+export type FormValuesForManglendeArbeidsforhold = {
+  arbeidsgiverIdent: string;
+  internArbeidsforholdId: string;
+} & FormValues;
+
 interface OwnProps {
-  arbeidsforhold: AoIArbeidsforhold;
   inntektsmelding: Inntektsmelding;
   isReadOnly: boolean;
+  lagreManglendeArbeidsforhold: (formValues: FormValuesForManglendeArbeidsforhold) => void;
 }
 
 const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
-  arbeidsforhold,
   inntektsmelding,
   isReadOnly,
+  lagreManglendeArbeidsforhold,
 }) => {
   const intl = useIntl();
   const formMethods = useForm<FormValues>();
@@ -49,13 +54,19 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   return (
     <>
       <InntektsmeldingOpplysningerPanel
-        arbeidsforhold={arbeidsforhold}
         inntektsmelding={inntektsmelding}
       />
-      <VerticalSpacer sixteenPx />
+      <VerticalSpacer thirtyTwoPx />
       <AlertStripeInfo><FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" /></AlertStripeInfo>
-      <VerticalSpacer eightPx />
-      <Form formMethods={formMethods} onSubmit={(values) => undefined}>
+      <VerticalSpacer sixteenPx />
+      <Form
+        formMethods={formMethods}
+        onSubmit={(values) => lagreManglendeArbeidsforhold({
+          ...values,
+          arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
+          internArbeidsforholdId: inntektsmelding.innsendingstidspunkt,
+        })}
+      >
         <RadioGroupField
           label={<Undertekst><FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" /></Undertekst>}
           name="skalBrukeInntektsmelding"
@@ -68,39 +79,42 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
           <RadioOption value="opprett" label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.OpprettArbeidsforhold' })} />
         </RadioGroupField>
         {skalBrukeInntektsmelding === 'opprett' && (
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <DatepickerField
-                  name="periodeFra"
-                  label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeFra" />}
-                  validate={[required, hasValidDate]}
-                  readOnly={isReadOnly}
-                />
-              </FlexColumn>
-              <FlexColumn>
-                <DatepickerField
-                  name="periodeTil"
-                  label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeTil" />}
-                  validate={[required, hasValidDate]}
-                  readOnly={isReadOnly}
-                />
-              </FlexColumn>
-              <FlexColumn>
-                <InputField
-                  name="stillingsprosent"
-                  label={<FormattedMessage id="ManglendeOpplysningerForm.Stillingsprosent" />}
-                  parse={(value: string) => {
-                    const parsedValue = parseInt(value, 10);
-                    return Number.isNaN(parsedValue) ? value : parsedValue;
-                  }}
-                  validate={[required, hasValidInteger, minValue1, maxValue100]}
-                  bredde="XS"
-                  readOnly={isReadOnly}
-                />
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
+          <>
+            <FlexContainer>
+              <FlexRow>
+                <FlexColumn>
+                  <DatepickerField
+                    name="periodeFra"
+                    label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeFra" />}
+                    validate={[required, hasValidDate]}
+                    readOnly={isReadOnly}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <DatepickerField
+                    name="periodeTil"
+                    label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeTil" />}
+                    validate={[required, hasValidDate]}
+                    readOnly={isReadOnly}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <InputField
+                    name="stillingsprosent"
+                    label={<FormattedMessage id="ManglendeOpplysningerForm.Stillingsprosent" />}
+                    parse={(value: string) => {
+                      const parsedValue = parseInt(value, 10);
+                      return Number.isNaN(parsedValue) ? value : parsedValue;
+                    }}
+                    validate={[required, hasValidInteger, minValue1, maxValue100]}
+                    bredde="XS"
+                    readOnly={isReadOnly}
+                  />
+                </FlexColumn>
+              </FlexRow>
+            </FlexContainer>
+            <VerticalSpacer eightPx />
+          </>
         )}
         {(skalBrukeInntektsmelding === 'false' || skalBrukeInntektsmelding === 'opprett') && (
           <TextAreaField
@@ -111,6 +125,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
             readOnly={isReadOnly}
           />
         )}
+        <VerticalSpacer sixteenPx />
         {skalBrukeInntektsmelding !== undefined && (
           <FlexContainer>
             <FlexRow>
@@ -138,6 +153,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
             </FlexRow>
           </FlexContainer>
         )}
+        <VerticalSpacer thirtyTwoPx />
       </Form>
     </>
   );

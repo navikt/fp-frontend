@@ -3,59 +3,68 @@ import { FormattedMessage } from 'react-intl';
 import { Element, Undertekst } from 'nav-frontend-typografi';
 
 import telefonImageUrl from '@fpsak-frontend/assets/images/phone-3.svg';
-import { AoIArbeidsforhold, Inntektsmelding } from '@fpsak-frontend/types';
+import { Inntektsmelding } from '@fpsak-frontend/types';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image,
 } from '@fpsak-frontend/shared-components';
 
 interface OwnProps {
-  arbeidsforhold: AoIArbeidsforhold;
+  stillingsprosent?: number;
   inntektsmelding: Inntektsmelding;
 }
 
-const ReadonlyPanel: FunctionComponent<OwnProps> = ({
-  arbeidsforhold,
+const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
+  stillingsprosent,
   inntektsmelding,
 }) => (
   <>
     <VerticalSpacer sixteenPx />
     <FlexContainer>
-      {arbeidsforhold.stillingsprosent && (
-        <FlexRow>
-          <FlexColumn>
-            <Element><FormattedMessage id="ReadonlyPanel.Stillingsprosent" /></Element>
-          </FlexColumn>
-          <FlexColumn>
-            {`${arbeidsforhold.stillingsprosent} %`}
-          </FlexColumn>
-        </FlexRow>
+      {stillingsprosent && (
+        <>
+          <FlexRow>
+            <FlexColumn>
+              <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Stillingsprosent" /></Element>
+            </FlexColumn>
+            <FlexColumn>
+              {`${stillingsprosent} %`}
+            </FlexColumn>
+          </FlexRow>
+          <VerticalSpacer eightPx />
+        </>
       )}
       <FlexRow>
         <FlexColumn>
-          <Element><FormattedMessage id="ReadonlyPanel.Inntektsmelding" /></Element>
+          <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" /></Element>
         </FlexColumn>
         <FlexColumn>
           {inntektsmelding.inntektPrMnd}
         </FlexColumn>
       </FlexRow>
+      <VerticalSpacer eightPx />
       <FlexRow>
         <FlexColumn>
-          <Element><FormattedMessage id="ReadonlyPanel.Refusjon" /></Element>
+          <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" /></Element>
         </FlexColumn>
         <FlexColumn>
-          <FormattedMessage id={inntektsmelding.refusjonPrMnd ? 'ReadonlyPanel.Ja' : 'ReadonlyPanel.Nei'} />
+          <FormattedMessage id={inntektsmelding.refusjonPrMnd ? 'InntektsmeldingOpplysningerPanel.Ja' : 'InntektsmeldingOpplysningerPanel.Nei'} />
         </FlexColumn>
       </FlexRow>
+      <VerticalSpacer eightPx />
       {inntektsmelding.refusjonPrMnd && (
-        <FlexRow>
-          <FlexColumn>
-            <Element><FormattedMessage id="ReadonlyPanel.Refusjonsbeløp" /></Element>
-          </FlexColumn>
-          <FlexColumn>
-            {inntektsmelding.refusjonPrMnd}
-          </FlexColumn>
-        </FlexRow>
+        <>
+          <FlexRow>
+            <FlexColumn>
+              <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" /></Element>
+            </FlexColumn>
+            <FlexColumn>
+              {inntektsmelding.refusjonPrMnd}
+            </FlexColumn>
+          </FlexRow>
+          <VerticalSpacer eightPx />
+        </>
       )}
+      <VerticalSpacer sixteenPx />
       <FlexRow>
         <FlexColumn>
           <Image src={telefonImageUrl} />
@@ -63,7 +72,7 @@ const ReadonlyPanel: FunctionComponent<OwnProps> = ({
         <FlexColumn>
           <FlexRow>
             <FlexColumn>
-              <Element><FormattedMessage id="ReadonlyPanel.Kontaktinfo" /></Element>
+              <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Kontaktinfo" /></Element>
             </FlexColumn>
           </FlexRow>
           <FlexRow>
@@ -74,8 +83,7 @@ const ReadonlyPanel: FunctionComponent<OwnProps> = ({
           <FlexRow>
             <FlexColumn>
               <Undertekst>
-                <FormattedMessage id="ReadonlyPanel.Tlf" />
-                {inntektsmelding.kontaktpersonNummer}
+                <FormattedMessage id="InntektsmeldingOpplysningerPanel.Tlf" values={{ nr: inntektsmelding.kontaktpersonNummer }} />
               </Undertekst>
             </FlexColumn>
           </FlexRow>
@@ -85,4 +93,4 @@ const ReadonlyPanel: FunctionComponent<OwnProps> = ({
   </>
 );
 
-export default ReadonlyPanel;
+export default InntektsmeldingOpplysningerPanel;

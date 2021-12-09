@@ -20,7 +20,7 @@ const maxLength1500 = maxLength(1500);
 const minValue1 = minValue(1);
 const maxValue100 = maxValue(100);
 
-type FormValues = {
+export type FormValues = {
   skalBrukeInntektsmelding: string;
   periodeFra?: string;
   periodeTil?: string;
@@ -30,10 +30,12 @@ type FormValues = {
 
 interface OwnProps {
   isReadOnly: boolean;
+  lagreNyttArbeidsforhold: (formValues: FormValues) => void;
 }
 
 const LeggTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   isReadOnly,
+  lagreNyttArbeidsforhold,
 }) => {
   const formMethods = useForm<FormValues>();
 
@@ -42,8 +44,8 @@ const LeggTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
       <Undertittel><FormattedMessage id="LeggTilArbeidsforholdForm.LeggTilArbeidsforhold" /></Undertittel>
       <VerticalSpacer sixteenPx />
       <AlertStripeInfo><FormattedMessage id="LeggTilArbeidsforholdForm.Info" /></AlertStripeInfo>
-      <VerticalSpacer sixteenPx />
-      <Form formMethods={formMethods} onSubmit={(values) => undefined}>
+      <VerticalSpacer thirtyTwoPx />
+      <Form formMethods={formMethods} onSubmit={lagreNyttArbeidsforhold}>
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
@@ -51,7 +53,7 @@ const LeggTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                 name="arbeidsgiver"
                 label={<FormattedMessage id="LeggTilArbeidsforholdForm.Arbeidsgiver" />}
                 validate={[required]}
-                bredde="XS"
+                bredde="XXL"
                 readOnly={isReadOnly}
               />
             </FlexColumn>

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Element, Undertekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 
 import {
@@ -10,9 +10,9 @@ import {
 import {
   TextAreaField, RadioGroupField, RadioOption, Form,
 } from '@fpsak-frontend/form-hooks';
-import { Inntekt } from '@fpsak-frontend/types';
+import { AoIArbeidsforhold, Inntektspost } from '@fpsak-frontend/types';
 import {
-  VerticalSpacer, Table, TableRow, TableColumn, FlexColumn, FlexContainer, FlexRow,
+  VerticalSpacer, DateLabel, FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
 
 const minLength3 = minLength(3);
@@ -23,14 +23,23 @@ type FormValues = {
   begrunnelse: string;
 }
 
+export type FormValuesForManglendeInntektsmelding = {
+  arbeidsgiverIdent: string;
+  internArbeidsforholdId: string;
+} & FormValues;
+
 interface OwnProps {
-  inntekter: Inntekt[];
+  inntektsposter: Inntektspost[];
   isReadOnly: boolean;
+  arbeidsforhold: AoIArbeidsforhold;
+  lagreManglendeInntekstmelding: (formValues: FormValuesForManglendeInntektsmelding) => void;
 }
 
 const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
-  inntekter,
+  inntektsposter,
+  arbeidsforhold,
   isReadOnly,
+  lagreManglendeInntekstmelding,
 }) => {
   const intl = useIntl();
   const formMethods = useForm<FormValues>();
@@ -40,22 +49,32 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
   return (
     <>
       <VerticalSpacer sixteenPx />
-      <Element><FormattedMessage id="InntektsmeldingInnhentesForm.Stillingsprosent" /></Element>
-      <VerticalSpacer thirtyTwoPx />
+      <Normaltekst>
+        <FormattedMessage id="InntektsmeldingInnhentesForm.Stillingsprosent" values={{ stillingsprosent: arbeidsforhold.stillingsprosent }} />
+      </Normaltekst>
+      <VerticalSpacer sixteenPx />
       <Element><FormattedMessage id="InntektsmeldingInnhentesForm.Inntekter" /></Element>
-      <Table noHover>
-        {inntekter[0].inntekter.map((inntekt) => (
-          <TableRow>
-            <TableColumn>
-              {inntekt.fom}
-            </TableColumn>
-            <TableColumn>
+      <FlexContainer>
+        {inntektsposter.map((inntekt) => (
+          <FlexRow>
+            <FlexColumn>
+              <DateLabel dateString={inntekt.fom} />
+            </FlexColumn>
+            <FlexColumn>
               {inntekt.beløp}
-            </TableColumn>
-          </TableRow>
+            </FlexColumn>
+          </FlexRow>
         ))}
-      </Table>
-      <Form formMethods={formMethods} onSubmit={(values) => undefined}>
+      </FlexContainer>
+      <VerticalSpacer thirtyTwoPx />
+      <Form
+        formMethods={formMethods}
+        onSubmit={(values) => lagreManglendeInntekstmelding({
+          ...values,
+          arbeidsgiverIdent: arbeidsforhold.arbeidsgiverIdent,
+          internArbeidsforholdId: arbeidsforhold.internArbeidsforholdId,
+        })}
+      >
         <RadioGroupField
           label={<Undertekst><FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" /></Undertekst>}
           name="skalInnhenteInntektsmelding"
@@ -68,14 +87,18 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
           <RadioOption value="false" label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.GåVidere' })} />
         </RadioGroupField>
         {skalInnhenteInntektsmelding === false && (
-          <TextAreaField
-            label={<FormattedMessage id="InntektsmeldingInnhentesForm.Begrunn" />}
-            name="begrunnelse"
-            validate={[required, minLength3, maxLength1500, hasValidText]}
-            maxLength={1500}
-            readOnly={isReadOnly}
-          />
+          <>
+            <TextAreaField
+              label={<FormattedMessage id="InntektsmeldingInnhentesForm.Begrunn" />}
+              name="begrunnelse"
+              validate={[required, minLength3, maxLength1500, hasValidText]}
+              maxLength={1500}
+              readOnly={isReadOnly}
+            />
+            <VerticalSpacer sixteenPx />
+          </>
         )}
+        <VerticalSpacer eightPx />
         {skalInnhenteInntektsmelding !== undefined && (
           <FlexContainer>
             <FlexRow>
@@ -103,6 +126,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
             </FlexRow>
           </FlexContainer>
         )}
+        <VerticalSpacer thirtyTwoPx />
       </Form>
     </>
   );
