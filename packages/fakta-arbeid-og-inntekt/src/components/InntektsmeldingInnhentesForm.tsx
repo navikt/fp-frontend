@@ -29,7 +29,7 @@ export type FormValuesForManglendeInntektsmelding = {
 } & FormValues;
 
 interface OwnProps {
-  inntektsposter: Inntektspost[];
+  inntektsposter?: Inntektspost[];
   isReadOnly: boolean;
   arbeidsforhold: AoIArbeidsforhold;
   lagreManglendeInntekstmelding: (formValues: FormValuesForManglendeInntektsmelding) => void;
@@ -52,20 +52,24 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
       <Normaltekst>
         <FormattedMessage id="InntektsmeldingInnhentesForm.Stillingsprosent" values={{ stillingsprosent: arbeidsforhold.stillingsprosent }} />
       </Normaltekst>
-      <VerticalSpacer sixteenPx />
-      <Element><FormattedMessage id="InntektsmeldingInnhentesForm.Inntekter" /></Element>
-      <FlexContainer>
-        {inntektsposter.map((inntekt) => (
-          <FlexRow>
-            <FlexColumn>
-              <DateLabel dateString={inntekt.fom} />
-            </FlexColumn>
-            <FlexColumn>
-              {inntekt.beløp}
-            </FlexColumn>
-          </FlexRow>
-        ))}
-      </FlexContainer>
+      {inntektsposter && (
+        <>
+          <VerticalSpacer sixteenPx />
+          <Element><FormattedMessage id="InntektsmeldingInnhentesForm.Inntekter" /></Element>
+          <FlexContainer>
+            {inntektsposter.map((inntekt) => (
+              <FlexRow>
+                <FlexColumn>
+                  <DateLabel dateString={inntekt.fom} />
+                </FlexColumn>
+                <FlexColumn>
+                  {inntekt.beløp}
+                </FlexColumn>
+              </FlexRow>
+            ))}
+          </FlexContainer>
+        </>
+      )}
       <VerticalSpacer thirtyTwoPx />
       <Form
         formMethods={formMethods}
