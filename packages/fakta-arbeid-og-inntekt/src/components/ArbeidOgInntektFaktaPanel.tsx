@@ -8,18 +8,18 @@ import Lenke from 'nav-frontend-lenker';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
-import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import {
-  Aksjonspunkt, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, AoIArbeidsforhold, Inntektsmelding, Inntektspost,
+  Aksjonspunkt, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId,
 } from '@fpsak-frontend/types';
 import {
-  VerticalSpacer, Image, AksjonspunktHelpTextHTML, FloatRight, Table, TableColumn, PeriodLabel, DateTimeLabel, OverstyringKnapp,
+  VerticalSpacer, Image, AksjonspunktHelpTextHTML, FloatRight, Table, OverstyringKnapp,
   FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
-import ExpandableTableRow from './ExpandableTableRow';
 import NyttArbeidsforholdForm, { FormValues as NyttArbeidsforholdFormValues } from './NyttArbeidsforholdForm';
-import ManglendeOpplysningerForm, { FormValuesForManglendeArbeidsforhold } from './ManglendeOpplysningerForm';
-import InntektsmeldingInnhentesForm, { FormValuesForManglendeInntektsmelding } from './InntektsmeldingInnhentesForm';
+import { FormValuesForManglendeArbeidsforhold } from './ManglendeOpplysningerForm';
+import { FormValuesForManglendeInntektsmelding } from './InntektsmeldingInnhentesForm';
+import ArbeidsforholdRad from './ArbeidsforholdRad';
+import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
 const HEADER_TEXT_IDS = [
   'EMPTY',
@@ -45,14 +45,6 @@ const finnApTekstKode = (
   }
   return undefined;
 };
-
-type ArbeidsforholdOgInntekt = {
-  arbeidsforhold: AoIArbeidsforhold | undefined;
-  arbeidsforholdNavn: string | undefined;
-  inntektsmelding: Inntektsmelding | undefined;
-  inntektsposter: Inntektspost[] | undefined;
-  erNyttArbeidsforhold?: boolean;
-}
 
 const byggStruktur = (
   arbeidOgInntekt: ArbeidOgInntektsmelding,
@@ -119,22 +111,56 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   const harIngenArbeidsforholdEllerInntektsmeldinger = arbeidsforhold.length === 0 && inntektsmeldinger.length === 0;
   const aksjonspunktTekstKode = finnApTekstKode(aksjonspunkter, harIngenArbeidsforholdEllerInntektsmeldinger, erOverstyrer);
 
-  const lagreStateOgNyttArbeidsforhold = (formValues: NyttArbeidsforholdFormValues) => {
+  const kanBekrefte = listeData.length > 0 && listeData.every((d) => d.nyttArbeidsforholdId);
+
+  const lagreStateOgNyttArbeidsforhold = (formValues: NyttArbeidsforholdFormValues, nyttArbeidsforholdId?: number) => {
     lagreNyttArbeidsforhold(formValues);
-    setListeData((oldData) => oldData.concat({
-      arbeidsforhold: {
-        fom: formValues.periodeFra,
-        tom: formValues.periodeTil,
-        stillingsprosent: formValues.stillingsprosent,
-        begrunnelse: formValues.begrunnelse,
-      },
-      arbeidsforholdNavn: formValues.arbeidsgiver,
-      inntektsmelding: undefined,
-      inntektsposter: undefined,
-      erNyttArbeidsforhold: true,
-    }));
+    setListeData((oldData) => {
+      const index = oldData.findIndex((data) => data.nyttArbeidsforholdId === nyttArbeidsforholdId);
+      if (index === -1) {
+        const nyId = oldData.reduce((sisteId, data) => (data.nyttArbeidsforholdId > sisteId ? data.nyttArbeidsforholdId + 1 : sisteId), 1);
+        return oldData.concat({
+          arbeidsforhold: {
+            fom: formValues.periodeFra,
+            tom: formValues.periodeTil,
+            stillingsprosent: formValues.stillingsprosent,
+            begrunnelse: formValues.begrunnelse,
+          },
+          arbeidsforholdNavn: formValues.arbeidsgiver,
+          inntektsmelding: undefined,
+          inntektsposter: undefined,
+          nyttArbeidsforholdId: nyId,
+        });
+      }
+      return oldData.map((data, i) => {
+        if (i === index) {
+          return {
+            arbeidsforhold: {
+              fom: formValues.periodeFra,
+              tom: formValues.periodeTil,
+              stillingsprosent: formValues.stillingsprosent,
+              begrunnelse: formValues.begrunnelse,
+            },
+            arbeidsforholdNavn: formValues.arbeidsgiver,
+            inntektsmelding: undefined,
+            inntektsposter: undefined,
+            nyttArbeidsforholdId,
+          };
+        }
+        return data;
+      });
+    });
+    // Kun returner om lagring har gått bra
+    return Promise.resolve();
   };
 
+  const [antallÅpnedeRader, setÅpenRad] = useState(0);
+  const oppdaterÅpenRad = (skalLukke: boolean) => {
+    setÅpenRad((antall) => {
+      debugger;
+      return (skalLukke ? antall + 1 : antall - 1);
+    });
+  };
   const [erOverstyrt, toggleOverstyring] = useState(false);
   const [skalLeggeTilArbeidsforhold, toggleLeggTilArbeidsforhold] = useState(false);
 
@@ -186,7 +212,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer thirtyTwoPx />
         </>
       )}
-      {listeData.length === 0 && skalLeggeTilArbeidsforhold && (
+      {skalLeggeTilArbeidsforhold && (
         <>
           <VerticalSpacer thirtyTwoPx />
           <NyttArbeidsforholdForm
@@ -200,81 +226,34 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
       <Table headerTextCodes={headers} noHover>
         <>
           {listeData.map((data) => (
-            <ExpandableTableRow
-                /* content={(
-                  <InntektsmeldingOpplysningerPanel
-                    arbeidsforhold={aForhold}
-                    inntektsmelding={inntektsmelding}
-                  />
-                )} */
-              content={(
-                <>
-                  {data.erNyttArbeidsforhold && (
-                    <NyttArbeidsforholdForm
-                      isReadOnly={false}
-                      lagreNyttArbeidsforhold={lagreStateOgNyttArbeidsforhold}
-                      arbeidsforhold={data.arbeidsforhold}
-                      arbeidsforholdNavn={data.arbeidsforholdNavn}
-                    />
-                  )}
-                  {data.arbeidsforhold && !data.erNyttArbeidsforhold && (
-                    <InntektsmeldingInnhentesForm
-                      inntektsposter={data.inntektsposter}
-                      isReadOnly={isReadOnly}
-                      arbeidsforhold={data.arbeidsforhold}
-                      lagreManglendeInntekstmelding={lagreManglendeInntekstmelding}
-                    />
-                  )}
-                  {!data.arbeidsforhold && (
-                    <ManglendeOpplysningerForm
-                      inntektsmelding={data.inntektsmelding}
-                      isReadOnly={isReadOnly}
-                      lagreManglendeArbeidsforhold={lagreManglendeArbeidsforhold}
-                    />
-                  )}
-                </>
-              )}
-              showContent={false}
-              isApLeftBorder
-            >
-              <TableColumn>
-                <Image alt={intl.formatMessage({ id: 'ArbeidOgInntektFaktaPanel.Aksjonspunkt' })} src={advarselIkonUrl} />
-              </TableColumn>
-              <TableColumn>
-                {data.arbeidsforholdNavn}
-              </TableColumn>
-              <TableColumn>
-                {data.arbeidsforhold && (
-                <PeriodLabel dateStringFom={data.arbeidsforhold.fom} dateStringTom={data.arbeidsforhold.tom} />
-                )}
-                {!data.arbeidsforhold && '-'}
-              </TableColumn>
-              <TableColumn>
-                {data.arbeidsforhold ? 'AA-registeret' : 'Inntektsmelding'}
-              </TableColumn>
-              <TableColumn>
-                {data.inntektsmelding?.motattDato && (
-                <DateTimeLabel dateTimeString={data.inntektsmelding.motattDato} />
-                )}
-                {!data.inntektsmelding?.motattDato && '-'}
-              </TableColumn>
-            </ExpandableTableRow>
+            <ArbeidsforholdRad
+              arbeidsforholdOgInntekt={data}
+              isReadOnly={isReadOnly}
+              lagreNyttArbeidsforhold={lagreStateOgNyttArbeidsforhold}
+              lagreManglendeArbeidsforhold={lagreManglendeArbeidsforhold}
+              lagreManglendeInntekstmelding={lagreManglendeInntekstmelding}
+              oppdaterÅpenRad={oppdaterÅpenRad}
+            />
           ))}
         </>
       </Table>
       <VerticalSpacer sixteenPx />
+      {false && (
       <Hovedknapp
         mini
         autoFocus
       >
         <FormattedMessage id="ArbeidOgInntektFaktaPanel.SettPaVent" />
       </Hovedknapp>
-      <Hovedknapp
-        mini
-        autoFocus
-      >
-        <FormattedMessage id="ArbeidOgInntektFaktaPanel.Bekreft" />
-      </Hovedknapp>
+      )}
+      {kanBekrefte && antallÅpnedeRader === 0 && (
+        <Hovedknapp
+          mini
+          autoFocus
+        >
+          <FormattedMessage id="ArbeidOgInntektFaktaPanel.Bekreft" />
+        </Hovedknapp>
+      )}
     </>
   );
 };

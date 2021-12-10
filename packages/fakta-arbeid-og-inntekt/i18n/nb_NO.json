@@ -4,7 +4,6 @@
   "ArbeidOgInntektFaktaPanel.Periode": "Periode",
   "ArbeidOgInntektFaktaPanel.Kilde": "Kilde",
   "ArbeidOgInntektFaktaPanel.InntektsmeldingMottatt": "Inntektsmelding mottatt",
-  "ArbeidOgInntektFaktaPanel.Aksjonspunkt": "Aksjonspunkt",
   "ArbeidOgInntektFaktaPanel.InnhentManglendeInntektsmelding": "Innhent manglende inntektsmelding.",
   "ArbeidOgInntektFaktaPanel.AvklarManglendeOpplysninger": "Avklar manglende opplysninger.",
   "ArbeidOgInntektFaktaPanel.IngenArbeidsforhold": "Ingen arbeidsforhold eller inntektsmeldinger registrert på bruker. Vurder om det er dokumentert andre arbeidsforhold.",
@@ -12,6 +11,11 @@
   "ArbeidOgInntektFaktaPanel.SettPaVent": "Sett på vent",
   "ArbeidOgInntektFaktaPanel.Bekreft": "Bekreft og fortsett",
   "ArbeidOgInntektFaktaPanel.LeggTilArbeidsforhold": " Legg til arbeidsforhold",
+
+  "ArbeidsforholdRad.Saksbehandler": "Saksbehandler",
+  "ArbeidsforholdRad.AaRegisteret": "AA-registeret",
+  "ArbeidsforholdRad.Inntektsmelding": "Inntektsmelding",
+  "ArbeidsforholdRad.Aksjonspunkt": "Aksjonspunkt",
 
   "InntektsmeldingInnhentesForm.Stillingsprosent": "Stillingsprosent {stillingsprosent}%",
   "InntektsmeldingInnhentesForm.Inntekter": "Inntekter (fra AA-registeret)",
@@ -51,5 +55,7 @@
   "LeggTilArbeidsforholdForm.Stillingsprosent": "Stillingsprosent",
   "LeggTilArbeidsforholdForm.Begrunn": "Begrunn endringene",
   "LeggTilArbeidsforholdForm.Lagre": "Lagre",
-  "LeggTilArbeidsforholdForm.Avbryt": "Avbryt"
+  "LeggTilArbeidsforholdForm.Avbryt": "Avbryt",
+
+  "ExpandableTableRow.Apne": "Åpne rad"
 }

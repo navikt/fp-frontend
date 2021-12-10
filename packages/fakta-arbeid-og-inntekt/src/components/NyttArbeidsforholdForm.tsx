@@ -33,10 +33,11 @@ export type FormValues = {
 
 interface OwnProps {
   isReadOnly: boolean;
-  lagreNyttArbeidsforhold: (formValues: FormValues) => void;
+  lagreNyttArbeidsforhold: (formValues: FormValues, nyttArbeidsforholdId?: number) => Promise<any>;
   arbeidsforhold?: AoIArbeidsforhold;
   arbeidsforholdNavn?: string;
   avbrytEditering?: () => void;
+  nyttArbeidsforholdId?: number;
 }
 
 const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
@@ -45,6 +46,7 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   arbeidsforhold,
   arbeidsforholdNavn,
   avbrytEditering,
+  nyttArbeidsforholdId,
 }) => {
   const formMethods = useForm<FormValues>({
     defaultValues: arbeidsforhold ? {
@@ -62,7 +64,7 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
       <VerticalSpacer sixteenPx />
       <AlertStripeInfo><FormattedMessage id="LeggTilArbeidsforholdForm.Info" /></AlertStripeInfo>
       <VerticalSpacer thirtyTwoPx />
-      <Form formMethods={formMethods} onSubmit={lagreNyttArbeidsforhold}>
+      <Form formMethods={formMethods} onSubmit={(values) => lagreNyttArbeidsforhold(values, nyttArbeidsforholdId).then(() => avbrytEditering())}>
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
