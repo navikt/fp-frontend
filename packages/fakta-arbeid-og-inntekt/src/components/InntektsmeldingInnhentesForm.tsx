@@ -59,9 +59,14 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
   return (
     <>
       <VerticalSpacer sixteenPx />
-      <Normaltekst>
-        <FormattedMessage id="InntektsmeldingInnhentesForm.Stillingsprosent" values={{ stillingsprosent: arbeidsforhold.stillingsprosent }} />
-      </Normaltekst>
+      <FlexRow>
+        <FlexColumn>
+          <Element><FormattedMessage id="InntektsmeldingInnhentesForm.Stillingsprosent" /></Element>
+        </FlexColumn>
+        <FlexColumn>
+          {`${arbeidsforhold.stillingsprosent}%`}
+        </FlexColumn>
+      </FlexRow>
       {sorterteInntektsposter.length > 0 && (
         <>
           <VerticalSpacer sixteenPx />
