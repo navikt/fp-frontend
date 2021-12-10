@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Undertekst } from 'nav-frontend-typografi';
+import { Element } from 'nav-frontend-typografi';
+import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 
@@ -67,8 +68,17 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
           internArbeidsforholdId: inntektsmelding.innsendingstidspunkt,
         })}
       >
+        <FlexContainer>
+          <FlexRow>
+            <FlexColumn>
+              <Element><FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" /></Element>
+            </FlexColumn>
+            <FlexColumn>
+              <Hjelpetekst><FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" /></Hjelpetekst>
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
         <RadioGroupField
-          label={<Undertekst><FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" /></Undertekst>}
           name="skalBrukeInntektsmelding"
           validate={[required]}
           readOnly={isReadOnly}

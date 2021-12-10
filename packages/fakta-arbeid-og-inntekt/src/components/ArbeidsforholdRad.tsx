@@ -5,12 +5,14 @@ import { IntlShape, useIntl } from 'react-intl';
 
 import { AoIArbeidsforhold } from '@fpsak-frontend/types';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
+import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
 import {
-  Image, TableColumn, PeriodLabel, DateTimeLabel,
+  Image, TableColumn, PeriodLabel, DateTimeLabel, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import ExpandableTableRow from './ExpandableTableRow';
 import NyttArbeidsforholdForm, { FormValues as NyttArbeidsforholdFormValues } from './NyttArbeidsforholdForm';
 import ManglendeOpplysningerForm, { FormValuesForManglendeArbeidsforhold } from './ManglendeOpplysningerForm';
+import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 import InntektsmeldingInnhentesForm, { FormValuesForManglendeInntektsmelding } from './InntektsmeldingInnhentesForm';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
@@ -57,17 +59,16 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
     toggleEkspandertRad(erApen);
   };
 
+  const erArbeidsforholdLagetAvSaksbehandler = nyttArbeidsforholdId;
+  const harIngenAksjonspunkt = arbeidsforhold && inntektsmelding;
+  const manglerInntektsmelding = arbeidsforhold && !nyttArbeidsforholdId && !inntektsmelding;
+  const manglerArbeidsforhold = !arbeidsforhold && inntektsmelding;
+
   return (
     <ExpandableTableRow
-        /* content={(
-          <InntektsmeldingOpplysningerPanel
-            arbeidsforhold={aForhold}
-            inntektsmelding={inntektsmelding}
-          />
-        )} */
       content={(
         <>
-          {nyttArbeidsforholdId && (
+          {erArbeidsforholdLagetAvSaksbehandler && (
             <NyttArbeidsforholdForm
               isReadOnly={false}
               lagreNyttArbeidsforhold={lagreNyttArbeidsforhold}
@@ -77,7 +78,16 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               nyttArbeidsforholdId={nyttArbeidsforholdId}
             />
           )}
-          {arbeidsforhold && !nyttArbeidsforholdId && (
+          {harIngenAksjonspunkt && (
+            <>
+              <InntektsmeldingOpplysningerPanel
+                stillingsprosent={arbeidsforhold.stillingsprosent}
+                inntektsmelding={inntektsmelding}
+              />
+              <VerticalSpacer thirtyTwoPx />
+            </>
+          )}
+          {manglerInntektsmelding && (
             <InntektsmeldingInnhentesForm
               inntektsposter={inntektsposter}
               isReadOnly={isReadOnly}
@@ -85,7 +95,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               lagreManglendeInntekstmelding={lagreManglendeInntekstmelding}
             />
           )}
-          {!arbeidsforhold && (
+          {manglerArbeidsforhold && (
             <ManglendeOpplysningerForm
               inntektsmelding={inntektsmelding}
               isReadOnly={isReadOnly}
@@ -96,10 +106,15 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
       )}
       showContent={erRadEkspandert}
       toggleContent={toggleRad}
-      isApLeftBorder
+      isApLeftBorder={!harIngenAksjonspunkt}
     >
       <TableColumn>
-        <Image alt={intl.formatMessage({ id: 'ArbeidOgInntektFaktaPanel.Aksjonspunkt' })} src={advarselIkonUrl} />
+        {harIngenAksjonspunkt && (
+          <Image alt={intl.formatMessage({ id: 'ArbeidsforholdRad.Aksjonspunkt' })} src={okIkonUrl} />
+        )}
+        {!harIngenAksjonspunkt && (
+          <Image alt={intl.formatMessage({ id: 'ArbeidsforholdRad.Ok' })} src={advarselIkonUrl} />
+        )}
       </TableColumn>
       <TableColumn>
         {arbeidsforholdNavn}
@@ -115,7 +130,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
       </TableColumn>
       <TableColumn>
         {inntektsmelding?.motattDato && (
-        <DateTimeLabel dateTimeString={inntektsmelding.motattDato} />
+        <DateTimeLabel dateTimeString={inntektsmelding.motattDato} useNewFormat />
         )}
         {!inntektsmelding?.motattDato && '-'}
       </TableColumn>

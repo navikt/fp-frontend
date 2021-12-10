@@ -212,9 +212,9 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer thirtyTwoPx />
         </>
       )}
+      <VerticalSpacer thirtyTwoPx />
       {skalLeggeTilArbeidsforhold && (
         <>
-          <VerticalSpacer thirtyTwoPx />
           <NyttArbeidsforholdForm
             isReadOnly={false}
             lagreNyttArbeidsforhold={lagreStateOgNyttArbeidsforhold}

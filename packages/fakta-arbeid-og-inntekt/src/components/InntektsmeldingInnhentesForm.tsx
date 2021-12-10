@@ -1,18 +1,24 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import dayjs from 'dayjs';
+import Lenke from 'nav-frontend-lenker';
+import Hjelpetekst from 'nav-frontend-hjelpetekst';
+import { Column, Row } from 'nav-frontend-grid';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 
+import pilOppIkonUrl from '@fpsak-frontend/assets/images/pil_opp.svg';
+import pilNedIkonUrl from '@fpsak-frontend/assets/images/pil_ned.svg';
 import {
-  required, hasValidText, maxLength, minLength,
+  required, hasValidText, maxLength, minLength, formatCurrencyNoKr,
 } from '@fpsak-frontend/utils';
 import {
   TextAreaField, RadioGroupField, RadioOption, Form,
 } from '@fpsak-frontend/form-hooks';
 import { AoIArbeidsforhold, Inntektspost } from '@fpsak-frontend/types';
 import {
-  VerticalSpacer, DateLabel, FlexColumn, FlexContainer, FlexRow,
+  VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image,
 } from '@fpsak-frontend/shared-components';
 
 const minLength3 = minLength(3);
@@ -36,7 +42,7 @@ interface OwnProps {
 }
 
 const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
-  inntektsposter,
+  inntektsposter = [],
   arbeidsforhold,
   isReadOnly,
   lagreManglendeInntekstmelding,
@@ -46,28 +52,44 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
 
   const skalInnhenteInntektsmelding = formMethods.watch('skalInnhenteInntektsmelding');
 
+  const [visAlleMåneder, toggleMånedvisning] = useState(false);
+
+  const sorterteInntektsposter = [...inntektsposter].sort((i1, i2) => dayjs(i2.fom).diff(i1.fom));
+
   return (
     <>
       <VerticalSpacer sixteenPx />
       <Normaltekst>
         <FormattedMessage id="InntektsmeldingInnhentesForm.Stillingsprosent" values={{ stillingsprosent: arbeidsforhold.stillingsprosent }} />
       </Normaltekst>
-      {inntektsposter && (
+      {sorterteInntektsposter.length > 0 && (
         <>
           <VerticalSpacer sixteenPx />
           <Element><FormattedMessage id="InntektsmeldingInnhentesForm.Inntekter" /></Element>
-          <FlexContainer>
-            {inntektsposter.map((inntekt) => (
-              <FlexRow>
-                <FlexColumn>
-                  <DateLabel dateString={inntekt.fom} />
-                </FlexColumn>
-                <FlexColumn>
-                  {inntekt.beløp}
-                </FlexColumn>
-              </FlexRow>
-            ))}
-          </FlexContainer>
+          {sorterteInntektsposter.filter((inntekt, index) => (visAlleMåneder ? true : index < 3)).map((inntekt) => (
+            <Row>
+              <Column xs="1">
+                {`${intl.formatMessage({ id: `InntektsmeldingInnhentesForm.${dayjs(inntekt.fom).month()}` })} ${dayjs(inntekt.fom).year()}`}
+              </Column>
+              <Column xs="2">
+                {formatCurrencyNoKr(inntekt.beløp)}
+              </Column>
+            </Row>
+          ))}
+          {sorterteInntektsposter.length > 3 && (
+            <Lenke
+              onClick={(e) => {
+                e.preventDefault();
+                toggleMånedvisning(!visAlleMåneder);
+              }}
+              href=""
+            >
+              <span>
+                <FormattedMessage id={visAlleMåneder ? 'InntektsmeldingInnhentesForm.FaerreManeder' : 'InntektsmeldingInnhentesForm.TidligereManeder'} />
+              </span>
+              <Image src={visAlleMåneder ? pilOppIkonUrl : pilNedIkonUrl} />
+            </Lenke>
+          )}
         </>
       )}
       <VerticalSpacer thirtyTwoPx />
@@ -79,8 +101,17 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
           internArbeidsforholdId: arbeidsforhold.internArbeidsforholdId,
         })}
       >
+        <FlexContainer>
+          <FlexRow>
+            <FlexColumn>
+              <Element><FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" /></Element>
+            </FlexColumn>
+            <FlexColumn>
+              <Hjelpetekst><FormattedMessage id="InntektsmeldingInnhentesForm.Hjelpetekst" /></Hjelpetekst>
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
         <RadioGroupField
-          label={<Undertekst><FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" /></Undertekst>}
           name="skalInnhenteInntektsmelding"
           validate={[required]}
           readOnly={isReadOnly}

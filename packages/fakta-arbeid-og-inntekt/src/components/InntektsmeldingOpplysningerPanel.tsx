@@ -4,6 +4,7 @@ import { Element, Undertekst } from 'nav-frontend-typografi';
 
 import telefonImageUrl from '@fpsak-frontend/assets/images/phone-3.svg';
 import { Inntektsmelding } from '@fpsak-frontend/types';
+import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image,
 } from '@fpsak-frontend/shared-components';
@@ -27,7 +28,7 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
               <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Stillingsprosent" /></Element>
             </FlexColumn>
             <FlexColumn>
-              {`${stillingsprosent} %`}
+              {`${stillingsprosent}%`}
             </FlexColumn>
           </FlexRow>
           <VerticalSpacer eightPx />
@@ -38,7 +39,7 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
           <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" /></Element>
         </FlexColumn>
         <FlexColumn>
-          {inntektsmelding.inntektPrMnd}
+          {formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}
         </FlexColumn>
       </FlexRow>
       <VerticalSpacer eightPx />
@@ -58,7 +59,7 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
               <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" /></Element>
             </FlexColumn>
             <FlexColumn>
-              {inntektsmelding.refusjonPrMnd}
+              {formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)}
             </FlexColumn>
           </FlexRow>
           <VerticalSpacer eightPx />
