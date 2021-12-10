@@ -40,17 +40,24 @@ interface OwnProps {
   inntektsmelding: Inntektsmelding;
   isReadOnly: boolean;
   lagreManglendeArbeidsforhold: (formValues: FormValuesForManglendeArbeidsforhold) => void;
+  avbrytEditering: () => void;
 }
 
 const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   inntektsmelding,
   isReadOnly,
   lagreManglendeArbeidsforhold,
+  avbrytEditering,
 }) => {
   const intl = useIntl();
   const formMethods = useForm<FormValues>();
 
   const skalBrukeInntektsmelding = formMethods.watch('skalBrukeInntektsmelding');
+
+  const avbryt = () => {
+    avbrytEditering();
+    formMethods.reset();
+  };
 
   return (
     <>
@@ -154,7 +161,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
                   mini
                   spinner={false}
                   disabled={false}
-                  onClick={() => undefined}
+                  onClick={avbryt}
                   htmlType="button"
                 >
                   <FormattedMessage id="ManglendeOpplysningerForm.Avbryt" />

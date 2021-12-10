@@ -58,13 +58,18 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
     } : undefined,
   });
 
+  const avbryt = () => {
+    avbrytEditering();
+    formMethods.reset();
+  };
+
   return (
     <>
       <Undertittel><FormattedMessage id="LeggTilArbeidsforholdForm.LeggTilArbeidsforhold" /></Undertittel>
       <VerticalSpacer sixteenPx />
       <AlertStripeInfo><FormattedMessage id="LeggTilArbeidsforholdForm.Info" /></AlertStripeInfo>
       <VerticalSpacer thirtyTwoPx />
-      <Form formMethods={formMethods} onSubmit={(values) => lagreNyttArbeidsforhold(values, nyttArbeidsforholdId).then(() => avbrytEditering())}>
+      <Form formMethods={formMethods} onSubmit={(values) => lagreNyttArbeidsforhold(values, nyttArbeidsforholdId).then(() => avbryt())}>
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
@@ -133,7 +138,7 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                 mini
                 spinner={false}
                 disabled={false}
-                onClick={avbrytEditering}
+                onClick={avbryt}
                 htmlType="button"
               >
                 <FormattedMessage id="LeggTilArbeidsforholdForm.Avbryt" />

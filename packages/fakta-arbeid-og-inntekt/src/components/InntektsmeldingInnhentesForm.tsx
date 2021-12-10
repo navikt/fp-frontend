@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import Lenke from 'nav-frontend-lenker';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { Column, Row } from 'nav-frontend-grid';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Element } from 'nav-frontend-typografi';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 
 import pilOppIkonUrl from '@fpsak-frontend/assets/images/pil_opp.svg';
@@ -39,6 +39,7 @@ interface OwnProps {
   isReadOnly: boolean;
   arbeidsforhold: AoIArbeidsforhold;
   lagreManglendeInntekstmelding: (formValues: FormValuesForManglendeInntektsmelding) => void;
+  avbrytEditering: () => void;
 }
 
 const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
@@ -46,6 +47,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
   arbeidsforhold,
   isReadOnly,
   lagreManglendeInntekstmelding,
+  avbrytEditering,
 }) => {
   const intl = useIntl();
   const formMethods = useForm<FormValues>();
@@ -55,6 +57,11 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
   const [visAlleMåneder, toggleMånedvisning] = useState(false);
 
   const sorterteInntektsposter = [...inntektsposter].sort((i1, i2) => dayjs(i2.fom).diff(i1.fom));
+
+  const avbryt = () => {
+    avbrytEditering();
+    formMethods.reset();
+  };
 
   return (
     <>
@@ -157,7 +164,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
                   mini
                   spinner={false}
                   disabled={false}
-                  onClick={() => undefined}
+                  onClick={avbryt}
                   htmlType="button"
                 >
                   <FormattedMessage id="InntektsmeldingInnhentesForm.Avbryt" />

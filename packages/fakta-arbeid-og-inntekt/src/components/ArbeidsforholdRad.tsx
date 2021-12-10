@@ -93,6 +93,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               isReadOnly={isReadOnly}
               arbeidsforhold={arbeidsforhold}
               lagreManglendeInntekstmelding={lagreManglendeInntekstmelding}
+              avbrytEditering={() => toggleRad(false)}
             />
           )}
           {manglerArbeidsforhold && (
@@ -100,6 +101,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               inntektsmelding={inntektsmelding}
               isReadOnly={isReadOnly}
               lagreManglendeArbeidsforhold={lagreManglendeArbeidsforhold}
+              avbrytEditering={() => toggleRad(false)}
             />
           )}
         </>
