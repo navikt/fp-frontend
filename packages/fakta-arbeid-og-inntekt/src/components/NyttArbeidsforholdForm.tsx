@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
 import { Undertittel } from 'nav-frontend-typografi';
@@ -34,19 +34,23 @@ export type FormValues = {
 interface OwnProps {
   isReadOnly: boolean;
   lagreNyttArbeidsforhold: (formValues: FormValues, nyttArbeidsforholdId?: number) => Promise<any>;
+  slettNyttArbeidsforhold: () => Promise<any>;
   arbeidsforhold?: AoIArbeidsforhold;
   arbeidsforholdNavn?: string;
   avbrytEditering?: () => void;
   nyttArbeidsforholdId?: number;
+  erOverstyrt: boolean;
 }
 
 const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   isReadOnly,
   lagreNyttArbeidsforhold,
+  slettNyttArbeidsforhold,
   arbeidsforhold,
   arbeidsforholdNavn,
   avbrytEditering,
   nyttArbeidsforholdId,
+  erOverstyrt,
 }) => {
   const formMethods = useForm<FormValues>({
     defaultValues: arbeidsforhold ? {
@@ -58,17 +62,24 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
     } : undefined,
   });
 
-  const avbryt = () => {
+  const avbryt = useCallback(() => {
     avbrytEditering();
     formMethods.reset();
-  };
+  }, []);
+  const slett = useCallback(() => {
+    slettNyttArbeidsforhold().then(() => avbrytEditering());
+  }, []);
 
   return (
     <>
-      <Undertittel><FormattedMessage id="LeggTilArbeidsforholdForm.LeggTilArbeidsforhold" /></Undertittel>
-      <VerticalSpacer sixteenPx />
-      <AlertStripeInfo><FormattedMessage id="LeggTilArbeidsforholdForm.Info" /></AlertStripeInfo>
-      <VerticalSpacer thirtyTwoPx />
+      {!arbeidsforhold && (
+        <>
+          <Undertittel><FormattedMessage id="LeggTilArbeidsforholdForm.LeggTilArbeidsforhold" /></Undertittel>
+          <VerticalSpacer sixteenPx />
+          <AlertStripeInfo><FormattedMessage id="LeggTilArbeidsforholdForm.Info" /></AlertStripeInfo>
+          <VerticalSpacer thirtyTwoPx />
+        </>
+      )}
       <Form formMethods={formMethods} onSubmit={(values) => lagreNyttArbeidsforhold(values, nyttArbeidsforholdId).then(() => avbryt())}>
         <FlexContainer>
           <FlexRow>
@@ -78,7 +89,7 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                 label={<FormattedMessage id="LeggTilArbeidsforholdForm.Arbeidsgiver" />}
                 validate={[required]}
                 bredde="XXL"
-                readOnly={isReadOnly}
+                readOnly={isReadOnly || !erOverstyrt}
               />
             </FlexColumn>
             <FlexColumn>
@@ -86,7 +97,7 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                 name="periodeFra"
                 label={<FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeFra" />}
                 validate={[required, hasValidDate]}
-                readOnly={isReadOnly}
+                readOnly={isReadOnly || !erOverstyrt}
               />
             </FlexColumn>
             <FlexColumn>
@@ -94,7 +105,7 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                 name="periodeTil"
                 label={<FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeTil" />}
                 validate={[required, hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
-                readOnly={isReadOnly}
+                readOnly={isReadOnly || !erOverstyrt}
               />
             </FlexColumn>
             <FlexColumn>
@@ -107,7 +118,7 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                 }}
                 validate={[required, hasValidInteger, minValue1, maxValue100]}
                 bredde="XS"
-                readOnly={isReadOnly}
+                readOnly={isReadOnly || !erOverstyrt}
               />
             </FlexColumn>
           </FlexRow>
@@ -118,34 +129,49 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
           name="begrunnelse"
           validate={[required, minLength3, maxLength1500, hasValidText]}
           maxLength={1500}
-          readOnly={isReadOnly}
+          readOnly={isReadOnly || !erOverstyrt}
         />
         <VerticalSpacer sixteenPx />
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <Knapp
-                mini
-                spinner={false}
-                disabled={false}
-                htmlType="submit"
-              >
-                <FormattedMessage id="LeggTilArbeidsforholdForm.Lagre" />
-              </Knapp>
-            </FlexColumn>
-            <FlexColumn>
-              <Flatknapp
-                mini
-                spinner={false}
-                disabled={false}
-                onClick={avbryt}
-                htmlType="button"
-              >
-                <FormattedMessage id="LeggTilArbeidsforholdForm.Avbryt" />
-              </Flatknapp>
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
+        {erOverstyrt && (
+          <FlexContainer>
+            <FlexRow>
+              <FlexColumn>
+                <Knapp
+                  mini
+                  spinner={formMethods.formState.isSubmitting}
+                  disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+                  htmlType="submit"
+                >
+                  <FormattedMessage id="LeggTilArbeidsforholdForm.Lagre" />
+                </Knapp>
+              </FlexColumn>
+              <FlexColumn>
+                <Flatknapp
+                  mini
+                  spinner={false}
+                  disabled={formMethods.formState.isSubmitting}
+                  onClick={avbryt}
+                  htmlType="button"
+                >
+                  <FormattedMessage id="LeggTilArbeidsforholdForm.Avbryt" />
+                </Flatknapp>
+              </FlexColumn>
+              {arbeidsforhold && (
+                <FlexColumn>
+                  <Flatknapp
+                    mini
+                    spinner={false}
+                    disabled={formMethods.formState.isSubmitting}
+                    onClick={slett}
+                    htmlType="button"
+                  >
+                    <FormattedMessage id="LeggTilArbeidsforholdForm.Slett" />
+                  </Flatknapp>
+                </FlexColumn>
+              )}
+            </FlexRow>
+          </FlexContainer>
+        )}
       </Form>
     </>
   );

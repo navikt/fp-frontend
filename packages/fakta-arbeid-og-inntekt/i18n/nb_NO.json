@@ -13,13 +13,13 @@
   "ArbeidOgInntektFaktaPanel.LeggTilArbeidsforhold": " Legg til arbeidsforhold",
 
   "ArbeidsforholdRad.Saksbehandler": "Saksbehandler",
-  "ArbeidsforholdRad.AaRegisteret": "AA-registeret",
+  "ArbeidsforholdRad.AaRegisteret": "A-inntekt",
   "ArbeidsforholdRad.Inntektsmelding": "Inntektsmelding",
   "ArbeidsforholdRad.Aksjonspunkt": "Aksjonspunkt",
   "ArbeidsforholdRad.Ok": "OK",
 
   "InntektsmeldingInnhentesForm.Stillingsprosent": "Stillingsprosent",
-  "InntektsmeldingInnhentesForm.Inntekter": "Inntekter (fra AA-registeret)",
+  "InntektsmeldingInnhentesForm.Inntekter": "Inntekter (fra A-inntekt)",
   "InntektsmeldingInnhentesForm.MåInnhentes": "Må inntektsmelding innhentes?",
   "InntektsmeldingInnhentesForm.TarKontakt": "Jeg tar kontakt med arbeidsgiver for å innhente inntektsmelding",
   "InntektsmeldingInnhentesForm.GåVidere": "Gå videre uten inntektsmelding",
@@ -41,6 +41,7 @@
   "InntektsmeldingInnhentesForm.TidligereManeder": "Tidligere måneder ",
   "InntektsmeldingInnhentesForm.FaerreManeder": "Siste måneder ",
   "InntektsmeldingInnhentesForm.Hjelpetekst": "Bla bla bla",
+  "InntektsmeldingInnhentesForm.IngenInntekt": "Ingen inntekt registrert på bruker i A-inntekt",
 
   "InntektsmeldingOpplysningerPanel.Stillingsprosent": "Stillingsprosent",
   "InntektsmeldingOpplysningerPanel.Inntektsmelding": "Inntektsmelding",
@@ -51,7 +52,7 @@
   "InntektsmeldingOpplysningerPanel.Kontaktinfo": "Kontaktinfo",
   "InntektsmeldingOpplysningerPanel.Tlf": "Tlf. {nr}",
 
-  "ManglendeOpplysningerForm.ErMottattMenIkkeReg": "Inntektsmelding er mottatt, men arbeidsforholdet er ikke registrert i AA-registeret",
+  "ManglendeOpplysningerForm.ErMottattMenIkkeReg": "Inntektsmelding er mottatt, men arbeidsforholdet er ikke registrert i A-inntekt",
   "ManglendeOpplysningerForm.SkalBrukeInntekstmelding": "Skal vi bruke denne inntektsmeldingen?",
   "ManglendeOpplysningerForm.TarKontakt": "Jeg kontakter arbeidsgiver",
   "ManglendeOpplysningerForm.GåVidere": "Se bort fra inntektsmeldingen",
@@ -73,6 +74,7 @@
   "LeggTilArbeidsforholdForm.Begrunn": "Begrunn endringene",
   "LeggTilArbeidsforholdForm.Lagre": "Lagre",
   "LeggTilArbeidsforholdForm.Avbryt": "Avbryt",
+  "LeggTilArbeidsforholdForm.Slett": "Slett",
 
   "ExpandableTableRow.Apne": "Åpne rad"
 }

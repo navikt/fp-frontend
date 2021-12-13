@@ -8,6 +8,7 @@ import Lenke from 'nav-frontend-lenker';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
+import { dateFormat } from '@fpsak-frontend/utils';
 import {
   Aksjonspunkt, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId,
 } from '@fpsak-frontend/types';
@@ -52,11 +53,12 @@ const byggStruktur = (
 ): ArbeidsforholdOgInntekt[] => {
   const { arbeidsforhold, inntektsmeldinger, inntekter } = arbeidOgInntekt;
 
-  const alleArbeidsforhold = arbeidsforhold.map((af) => ({
+  const alleArbeidsforhold = arbeidsforhold.map((af, index) => ({
     arbeidsforhold: af,
     arbeidsforholdNavn: arbeidsgiverOpplysningerPerId[af.arbeidsgiverIdent]?.navn,
     inntektsmelding: inntektsmeldinger.find((inntektsmelding) => inntektsmelding.arbeidsgiverIdent === af.arbeidsgiverIdent),
     inntektsposter: inntekter.find((inntekt) => inntekt.arbeidsgiverIdent === af.arbeidsgiverIdent)?.inntekter,
+    nyttArbeidsforholdId: af.arbeidsgiverIdent ? undefined : index,
   }));
   const alleInntektsmeldingerSomManglerArbeidsforhold = arbeidOgInntekt.inntektsmeldinger
     .filter((im) => !arbeidsforhold.some((af) => im.arbeidsgiverIdent === af.arbeidsgiverIdent))
@@ -65,6 +67,7 @@ const byggStruktur = (
       arbeidsforholdNavn: arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent]?.navn,
       inntektsmelding: im,
       inntektsposter: inntekter.find((inntekt) => inntekt.arbeidsgiverIdent === im.arbeidsgiverIdent)?.inntekter,
+      nyttArbeidsforholdId: undefined,
     }));
 
   return alleArbeidsforhold.concat(alleInntektsmeldingerSomManglerArbeidsforhold);
@@ -79,6 +82,7 @@ interface OwnProps {
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   lagreNyttArbeidsforhold: (formValues: NyttArbeidsforholdFormValues) => void;
+  slettNyttArbeidsforhold: (formValues: NyttArbeidsforholdFormValues) => void;
   lagreManglendeArbeidsforhold: (formValues: FormValuesForManglendeArbeidsforhold) => void;
   lagreManglendeInntekstmelding: (formValues: FormValuesForManglendeInntektsmelding) => void;
   erOverstyrer: boolean;
@@ -91,6 +95,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   arbeidOgInntekt,
   arbeidsgiverOpplysningerPerId,
   lagreNyttArbeidsforhold,
+  slettNyttArbeidsforhold,
   lagreManglendeArbeidsforhold,
   lagreManglendeInntekstmelding,
   formData,
@@ -154,12 +159,13 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
     return Promise.resolve();
   };
 
+  const slettNyttArbeidsforhold = () => {
+    slettNyttArbeidsforhold();
+  };
+
   const [antallÅpnedeRader, setÅpenRad] = useState(0);
   const oppdaterÅpenRad = (skalLukke: boolean) => {
-    setÅpenRad((antall) => {
-      debugger;
-      return (skalLukke ? antall + 1 : antall - 1);
-    });
+    setÅpenRad((antall) => (skalLukke ? antall + 1 : antall - 1));
   };
   const [erOverstyrt, toggleOverstyring] = useState(false);
   const [skalLeggeTilArbeidsforhold, toggleLeggTilArbeidsforhold] = useState(false);
@@ -183,7 +189,9 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
         </Column>
         <Column xs="4">
           <FloatRight>
-            <Normaltekst><FormattedMessage id="ArbeidOgInntektFaktaPanel.Skjaringstidspunkt" values={{ skjæringspunktDato }} /></Normaltekst>
+            <Normaltekst>
+              <FormattedMessage id="ArbeidOgInntektFaktaPanel.Skjaringstidspunkt" values={{ skjæringspunktDato: dateFormat(skjæringspunktDato) }} />
+            </Normaltekst>
           </FloatRight>
         </Column>
       </Row>
@@ -218,7 +226,9 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           <NyttArbeidsforholdForm
             isReadOnly={false}
             lagreNyttArbeidsforhold={lagreStateOgNyttArbeidsforhold}
+            slettNyttArbeidsforhold={slettNyttArbeidsforhold}
             avbrytEditering={() => toggleLeggTilArbeidsforhold(false)}
+            erOverstyrt
           />
           <VerticalSpacer fourtyPx />
         </>
@@ -227,12 +237,15 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
         <>
           {listeData.map((data) => (
             <ArbeidsforholdRad
+              skjæringspunktDato={skjæringspunktDato}
               arbeidsforholdOgInntekt={data}
               isReadOnly={isReadOnly}
               lagreNyttArbeidsforhold={lagreStateOgNyttArbeidsforhold}
+              slettNyttArbeidsforhold={slettNyttArbeidsforhold}
               lagreManglendeArbeidsforhold={lagreManglendeArbeidsforhold}
               lagreManglendeInntekstmelding={lagreManglendeInntekstmelding}
               oppdaterÅpenRad={oppdaterÅpenRad}
+              erOverstyrt={erOverstyrt}
             />
           ))}
         </>

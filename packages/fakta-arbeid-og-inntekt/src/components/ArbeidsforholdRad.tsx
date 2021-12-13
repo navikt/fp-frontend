@@ -2,6 +2,7 @@ import React, {
   FunctionComponent, useState,
 } from 'react';
 import { IntlShape, useIntl } from 'react-intl';
+import { Normaltekst, Element, Undertekst } from 'nav-frontend-typografi';
 
 import { AoIArbeidsforhold } from '@fpsak-frontend/types';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
@@ -9,6 +10,7 @@ import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
 import {
   Image, TableColumn, PeriodLabel, DateTimeLabel, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
+import { TIDENES_ENDE } from '@fpsak-frontend/utils';
 import ExpandableTableRow from './ExpandableTableRow';
 import NyttArbeidsforholdForm, { FormValues as NyttArbeidsforholdFormValues } from './NyttArbeidsforholdForm';
 import ManglendeOpplysningerForm, { FormValuesForManglendeArbeidsforhold } from './ManglendeOpplysningerForm';
@@ -31,21 +33,27 @@ const finnKilde = (
 };
 
 interface OwnProps {
+  skjæringspunktDato: string;
   arbeidsforholdOgInntekt: ArbeidsforholdOgInntekt;
   isReadOnly: boolean;
   lagreNyttArbeidsforhold: (formValues: NyttArbeidsforholdFormValues) => Promise<any>;
+  slettNyttArbeidsforhold: () => Promise<any>;
   lagreManglendeArbeidsforhold: (formValues: FormValuesForManglendeArbeidsforhold) => void;
   lagreManglendeInntekstmelding: (formValues: FormValuesForManglendeInntektsmelding) => void;
   oppdaterÅpenRad: (erÅpen: boolean) => void;
+  erOverstyrt: boolean;
 }
 
 const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
+  skjæringspunktDato,
   arbeidsforholdOgInntekt,
   isReadOnly,
   lagreNyttArbeidsforhold,
+  slettNyttArbeidsforhold,
   lagreManglendeArbeidsforhold,
   lagreManglendeInntekstmelding,
   oppdaterÅpenRad,
+  erOverstyrt,
 }) => {
   const intl = useIntl();
 
@@ -64,6 +72,8 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
   const manglerInntektsmelding = arbeidsforhold && !nyttArbeidsforholdId && !inntektsmelding;
   const manglerArbeidsforhold = !arbeidsforhold && inntektsmelding;
 
+  const aIdent = arbeidsforhold?.arbeidsgiverIdent || inntektsmelding?.arbeidsgiverIdent;
+
   return (
     <ExpandableTableRow
       content={(
@@ -72,10 +82,12 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
             <NyttArbeidsforholdForm
               isReadOnly={false}
               lagreNyttArbeidsforhold={lagreNyttArbeidsforhold}
+              slettNyttArbeidsforhold={slettNyttArbeidsforhold}
               arbeidsforhold={arbeidsforhold}
               arbeidsforholdNavn={arbeidsforholdNavn}
               avbrytEditering={() => toggleRad(false)}
               nyttArbeidsforholdId={nyttArbeidsforholdId}
+              erOverstyrt={erOverstyrt}
             />
           )}
           {harIngenAksjonspunkt && (
@@ -89,6 +101,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
           )}
           {manglerInntektsmelding && (
             <InntektsmeldingInnhentesForm
+              skjæringspunktDato={skjæringspunktDato}
               inntektsposter={inntektsposter}
               isReadOnly={isReadOnly}
               arbeidsforhold={arbeidsforhold}
@@ -119,22 +132,46 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
         )}
       </TableColumn>
       <TableColumn>
-        {arbeidsforholdNavn}
-      </TableColumn>
-      <TableColumn>
-        {arbeidsforhold && (
-        <PeriodLabel dateStringFom={arbeidsforhold.fom} dateStringTom={arbeidsforhold.tom} />
+        {erRadEkspandert && (
+          <>
+            <Element>
+              {arbeidsforholdNavn}
+            </Element>
+            {aIdent && (
+              <Undertekst>
+                (
+                {aIdent}
+                )
+              </Undertekst>
+            )}
+          </>
         )}
-        {!arbeidsforhold && '-'}
-      </TableColumn>
-      <TableColumn>
-        {finnKilde(intl, arbeidsforhold, nyttArbeidsforholdId)}
-      </TableColumn>
-      <TableColumn>
-        {inntektsmelding?.motattDato && (
-        <DateTimeLabel dateTimeString={inntektsmelding.motattDato} useNewFormat />
+        {!erRadEkspandert && (
+          <Normaltekst>
+            {arbeidsforholdNavn}
+          </Normaltekst>
         )}
-        {!inntektsmelding?.motattDato && '-'}
+      </TableColumn>
+      <TableColumn>
+        <Normaltekst>
+          {arbeidsforhold && (
+          <PeriodLabel dateStringFom={arbeidsforhold.fom} dateStringTom={arbeidsforhold.tom !== TIDENES_ENDE ? arbeidsforhold.tom : undefined} />
+          )}
+          {!arbeidsforhold && '-'}
+        </Normaltekst>
+      </TableColumn>
+      <TableColumn>
+        <Normaltekst>
+          {finnKilde(intl, arbeidsforhold, nyttArbeidsforholdId)}
+        </Normaltekst>
+      </TableColumn>
+      <TableColumn>
+        <Normaltekst>
+          {inntektsmelding?.motattDato && (
+          <DateTimeLabel dateTimeString={inntektsmelding.motattDato} useNewFormat />
+          )}
+          {!inntektsmelding?.motattDato && '-'}
+        </Normaltekst>
       </TableColumn>
     </ExpandableTableRow>
   );

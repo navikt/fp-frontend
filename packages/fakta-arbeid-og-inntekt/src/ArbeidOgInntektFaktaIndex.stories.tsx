@@ -29,7 +29,7 @@ const Template: Story<{
     behandling={{
       behandlingsresultat: {
         skjæringstidspunkt: {
-          dato: '10.10.2021',
+          dato: '2021-11-10',
         },
       },
     } as Behandling}
@@ -44,6 +44,7 @@ const Template: Story<{
     arbeidOgInntekt={arbeidOgInntekt}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     lagreNyttArbeidsforhold={action('button-click') as (data: any) => Promise<any>}
+    slettNyttArbeidsforhold={action('button-click') as (data: any) => Promise<any>}
     lagreManglendeArbeidsforhold={action('button-click') as (data: any) => Promise<any>}
     lagreManglendeInntekstmelding={action('button-click') as (data: any) => Promise<any>}
     erOverstyrer={erOverstyrer}
@@ -92,9 +93,9 @@ InnhentInntektsmelding.args = {
           kodeverk: 'INNTEKTSPOST_TYPE',
         },
       }, {
-        beløp: 40000,
-        fom: '2020-07-01',
-        tom: '2020-07-31',
+        beløp: 41000,
+        fom: '2021-07-01',
+        tom: '2021-07-31',
         type: {
           kode: 'LØNN',
           kodeverk: 'INNTEKTSPOST_TYPE',

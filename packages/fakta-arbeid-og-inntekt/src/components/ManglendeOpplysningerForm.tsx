@@ -133,43 +133,39 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
             <VerticalSpacer eightPx />
           </>
         )}
-        {(skalBrukeInntektsmelding === 'false' || skalBrukeInntektsmelding === 'opprett') && (
-          <TextAreaField
-            label={<FormattedMessage id="ManglendeOpplysningerForm.Begrunn" />}
-            name="begrunnelse"
-            validate={[required, minLength3, maxLength1500, hasValidText]}
-            maxLength={1500}
-            readOnly={isReadOnly}
-          />
-        )}
+        <TextAreaField
+          label={<FormattedMessage id="ManglendeOpplysningerForm.Begrunn" />}
+          name="begrunnelse"
+          validate={[required, minLength3, maxLength1500, hasValidText]}
+          maxLength={1500}
+          readOnly={isReadOnly}
+        />
         <VerticalSpacer sixteenPx />
-        {skalBrukeInntektsmelding !== undefined && (
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Knapp
-                  mini
-                  spinner={false}
-                  disabled={false}
-                  htmlType="submit"
-                >
-                  <FormattedMessage id="ManglendeOpplysningerForm.Lagre" />
-                </Knapp>
-              </FlexColumn>
-              <FlexColumn>
-                <Flatknapp
-                  mini
-                  spinner={false}
-                  disabled={false}
-                  onClick={avbryt}
-                  htmlType="button"
-                >
-                  <FormattedMessage id="ManglendeOpplysningerForm.Avbryt" />
-                </Flatknapp>
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
-        )}
+        <FlexContainer>
+          <FlexRow>
+            <FlexColumn>
+              <Knapp
+                mini
+                spinner={formMethods.formState.isSubmitting}
+                disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+                htmlType="submit"
+              >
+                <FormattedMessage id="ManglendeOpplysningerForm.Lagre" />
+              </Knapp>
+            </FlexColumn>
+            <FlexColumn>
+              <Flatknapp
+                mini
+                spinner={false}
+                disabled={formMethods.formState.isSubmitting}
+                onClick={avbryt}
+                htmlType="button"
+              >
+                <FormattedMessage id="ManglendeOpplysningerForm.Avbryt" />
+              </Flatknapp>
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
         <VerticalSpacer thirtyTwoPx />
       </Form>
     </>
