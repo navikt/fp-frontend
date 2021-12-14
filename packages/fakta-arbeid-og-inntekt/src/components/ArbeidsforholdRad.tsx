@@ -70,10 +70,10 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
   };
 
   const erManueltOpprettet = arbeidsforhold?.arbeidsgiverIdent === MANUELT_ORG_NR;
-  const harArbeidsforholdOgInntektsmelding = arbeidsforhold && inntektsmelding;
+  const harArbeidsforholdOgInntektsmelding = arbeidsforhold && inntektsmelding && !arbeidsforhold.begrunnelse && !inntektsmelding.begrunnelse;
   const manglerInntektsmelding = arbeidsforhold && !erManueltOpprettet && !inntektsmelding;
-  const manglerArbeidsforhold = !arbeidsforhold && inntektsmelding;
-  const harIngenAksjonspunkt = erManueltOpprettet || harArbeidsforholdOgInntektsmelding;
+  const manglerArbeidsforhold = inntektsmelding && (!arbeidsforhold || inntektsmelding.begrunnelse);
+  const harIngenAksjonspunkt = erManueltOpprettet || harArbeidsforholdOgInntektsmelding || inntektsmelding?.begrunnelse || arbeidsforhold?.begrunnelse;
 
   const aIdent = arbeidsforhold?.arbeidsgiverIdent || inntektsmelding?.arbeidsgiverIdent;
 
@@ -114,6 +114,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
           {manglerArbeidsforhold && (
             <ManglendeOpplysningerForm
               inntektsmelding={inntektsmelding}
+              arbeidsforhold={arbeidsforhold}
               isReadOnly={isReadOnly}
               lagreManglendeArbeidsforhold={lagreManglendeArbeidsforhold}
               avbrytEditering={() => toggleRad(false)}

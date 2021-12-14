@@ -178,7 +178,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
     lagreManglendeArbeidsforhold(formValues);
     setListeData((oldData) => oldData.map((data) => {
       if (data.inntektsmelding.arbeidsgiverIdent === formValues.arbeidsgiverIdent) {
-        const af = formValues.skalBrukeInntektsmelding === undefined ? {
+        const af = formValues.skalSeBortFraInntektsmelding === undefined ? {
           arbeidsgiverIdent: formValues.arbeidsgiverIdent,
           internArbeidsforholdId: formValues.internArbeidsforholdId,
           fom: formValues.periodeFra,
@@ -190,6 +190,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           inntektsmelding: {
             ...data.inntektsmelding,
             begrunnelse: formValues.begrunnelse,
+            skalSeBortFraInntektsmelding: formValues.skalSeBortFraInntektsmelding,
           },
           arbeidsforhold: af,
         };

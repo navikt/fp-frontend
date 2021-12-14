@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 import Lenke from 'nav-frontend-lenker';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { Column, Row } from 'nav-frontend-grid';
-import { Element } from 'nav-frontend-typografi';
+import { Element, Undertekst } from 'nav-frontend-typografi';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 
 import pilOppIkonUrl from '@fpsak-frontend/assets/images/pil_opp.svg';
@@ -53,14 +53,15 @@ const behandleInntektsposter = (
 };
 
 type FormValues = {
-  skalInnhenteInntektsmelding: boolean;
+  skalInnhenteInntektsmelding: string;
   begrunnelse: string;
 }
 
-export type FormValuesForManglendeInntektsmelding = {
+export type FormValuesForManglendeInntektsmelding = Omit<FormValues, 'skalInnhenteInntektsmelding'> & {
   arbeidsgiverIdent: string;
   internArbeidsforholdId: string;
-} & FormValues;
+  skalInnhenteInntektsmelding: boolean;
+};
 
 interface OwnProps {
   skjæringspunktDato: string;
@@ -80,11 +81,14 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
   avbrytEditering,
 }) => {
   const intl = useIntl();
+
+  const defaultValues = {
+    skalInnhenteInntektsmelding: arbeidsforhold.skalInnhenteInntektsmelding?.toString(),
+    begrunnelse: arbeidsforhold.begrunnelse,
+  };
+
   const formMethods = useForm<FormValues>({
-    defaultValues: arbeidsforhold.skalInnhenteInntektsmelding && arbeidsforhold.begrunnelse ? {
-      skalInnhenteInntektsmelding: arbeidsforhold.skalInnhenteInntektsmelding.toString(),
-      begrunnelse: arbeidsforhold.begrunnelse,
-    } : undefined,
+    defaultValues,
   });
 
   const [visAlleMåneder, toggleMånedvisning] = useState(false);
@@ -93,8 +97,8 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
 
   const avbryt = useCallback(() => {
     avbrytEditering();
-    formMethods.reset();
-  }, []);
+    formMethods.reset(defaultValues);
+  }, [defaultValues]);
 
   return (
     <>
@@ -150,12 +154,13 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
           ...values,
           arbeidsgiverIdent: arbeidsforhold.arbeidsgiverIdent,
           internArbeidsforholdId: arbeidsforhold.internArbeidsforholdId,
-        }).then(avbryt)}
+          skalInnhenteInntektsmelding: values.skalInnhenteInntektsmelding === 'true',
+        }).then(avbrytEditering)}
       >
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Element><FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" /></Element>
+              <Undertekst><FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" /></Undertekst>
             </FlexColumn>
             <FlexColumn>
               <Hjelpetekst><FormattedMessage id="InntektsmeldingInnhentesForm.Hjelpetekst" /></Hjelpetekst>

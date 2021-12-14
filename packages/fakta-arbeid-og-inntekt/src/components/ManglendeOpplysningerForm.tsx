@@ -1,7 +1,7 @@
-import React, { FunctionComponent } from 'react';
+import React, { useCallback, FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import { Element } from 'nav-frontend-typografi';
+import { Undertekst } from 'nav-frontend-typografi';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
@@ -12,7 +12,7 @@ import {
 import {
   TextAreaField, RadioGroupField, RadioOption, DatepickerField, InputField, Form,
 } from '@fpsak-frontend/form-hooks';
-import { Inntektsmelding } from '@fpsak-frontend/types';
+import { Inntektsmelding, AoIArbeidsforhold } from '@fpsak-frontend/types';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
@@ -26,21 +26,22 @@ const maxValue100 = maxValue(100);
 const OPPRETT_ARBEIDSFORHOLD = 'OPPRETT';
 
 type FormValues = {
-  skalBrukeInntektsmelding: string;
+  skalSeBortFraInntektsmelding: string;
   periodeFra?: string;
   periodeTil?: string;
   stillingsprosent?: number;
   begrunnelse: string;
 }
 
-export type FormValuesForManglendeArbeidsforhold = Omit<FormValues, 'skalBrukeInntektsmelding'> & {
+export type FormValuesForManglendeArbeidsforhold = Omit<FormValues, 'skalSeBortFraInntektsmelding'> & {
   arbeidsgiverIdent: string;
   internArbeidsforholdId: string;
-  skalBrukeInntektsmelding: boolean | undefined;
+  skalSeBortFraInntektsmelding: boolean | undefined;
 };
 
 interface OwnProps {
   inntektsmelding: Inntektsmelding;
+  arbeidsforhold: AoIArbeidsforhold;
   isReadOnly: boolean;
   lagreManglendeArbeidsforhold: (formValues: FormValuesForManglendeArbeidsforhold) => Promise<any>;
   avbrytEditering: () => void;
@@ -48,19 +49,32 @@ interface OwnProps {
 
 const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   inntektsmelding,
+  arbeidsforhold,
   isReadOnly,
   lagreManglendeArbeidsforhold,
   avbrytEditering,
 }) => {
   const intl = useIntl();
-  const formMethods = useForm<FormValues>();
 
-  const skalBrukeInntektsmelding = formMethods.watch('skalBrukeInntektsmelding');
-
-  const avbryt = () => {
-    avbrytEditering();
-    formMethods.reset();
+  const defaultValues = {
+    skalSeBortFraInntektsmelding: inntektsmelding.skalSeBortFraInntektsmelding === undefined && arbeidsforhold?.fom
+      ? OPPRETT_ARBEIDSFORHOLD : inntektsmelding.skalSeBortFraInntektsmelding?.toString(),
+    periodeFra: arbeidsforhold?.fom,
+    periodeTil: arbeidsforhold?.tom,
+    stillingsprosent: arbeidsforhold?.stillingsprosent,
+    begrunnelse: inntektsmelding.begrunnelse,
   };
+
+  const formMethods = useForm<FormValues>({
+    defaultValues,
+  });
+
+  const skalSeBortFraInntektsmelding = formMethods.watch('skalSeBortFraInntektsmelding');
+
+  const avbryt = useCallback(() => {
+    avbrytEditering();
+    formMethods.reset(defaultValues);
+  }, [defaultValues]);
 
   return (
     <>
@@ -74,15 +88,16 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
         formMethods={formMethods}
         onSubmit={(values) => lagreManglendeArbeidsforhold({
           ...values,
-          skalBrukeInntektsmelding: values.skalBrukeInntektsmelding === OPPRETT_ARBEIDSFORHOLD ? undefined : values.skalBrukeInntektsmelding === 'true',
+          skalSeBortFraInntektsmelding: values.skalSeBortFraInntektsmelding === OPPRETT_ARBEIDSFORHOLD
+            ? undefined : values.skalSeBortFraInntektsmelding === 'true',
           arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
           internArbeidsforholdId: inntektsmelding.innsendingstidspunkt,
-        }).then(avbryt)}
+        }).then(avbrytEditering)}
       >
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Element><FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" /></Element>
+              <Undertekst><FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" /></Undertekst>
             </FlexColumn>
             <FlexColumn>
               <Hjelpetekst><FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" /></Hjelpetekst>
@@ -90,16 +105,16 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
           </FlexRow>
         </FlexContainer>
         <RadioGroupField
-          name="skalBrukeInntektsmelding"
+          name="skalSeBortFraInntektsmelding"
           validate={[required]}
           readOnly={isReadOnly}
           direction="vertical"
         >
-          <RadioOption value="true" label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.TarKontakt' })} />
-          <RadioOption value="false" label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.GåVidere' })} />
+          <RadioOption value="false" label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.TarKontakt' })} />
+          <RadioOption value="true" label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.GåVidere' })} />
           <RadioOption value={OPPRETT_ARBEIDSFORHOLD} label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.OpprettArbeidsforhold' })} />
         </RadioGroupField>
-        {skalBrukeInntektsmelding === OPPRETT_ARBEIDSFORHOLD && (
+        {skalSeBortFraInntektsmelding === OPPRETT_ARBEIDSFORHOLD && (
           <>
             <FlexContainer>
               <FlexRow>

@@ -11,7 +11,7 @@ export type Inntektsmelding = Readonly<{
   motattDato: string;
   innsendingstidspunkt: string;
   begrunnelse?: string;
-  skalInnhenteInntektsmelding?: boolean;
+  skalSeBortFraInntektsmelding?: boolean;
 }>
 
 export type Arbeidsforhold = Readonly<{
