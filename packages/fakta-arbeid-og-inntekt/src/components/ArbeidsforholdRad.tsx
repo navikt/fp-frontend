@@ -18,12 +18,14 @@ import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel
 import InntektsmeldingInnhentesForm, { FormValuesForManglendeInntektsmelding } from './InntektsmeldingInnhentesForm';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
+export const MANUELT_ORG_NR = '342352362';
+
 const finnKilde = (
   intl: IntlShape,
+  erManueltOpprettet: boolean,
   arbeidsforhold?: AoIArbeidsforhold,
-  nyttArbeidsforholdId?: number,
 ) => {
-  if (nyttArbeidsforholdId) {
+  if (erManueltOpprettet) {
     return intl.formatMessage({ id: 'ArbeidsforholdRad.Saksbehandler' });
   }
   if (arbeidsforhold) {
@@ -58,7 +60,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
 
   const {
-    nyttArbeidsforholdId, arbeidsforhold, arbeidsforholdNavn, inntektsposter, inntektsmelding,
+    arbeidsforhold, arbeidsforholdNavn, inntektsposter, inntektsmelding,
   } = arbeidsforholdOgInntekt;
 
   const [erRadEkspandert, toggleEkspandertRad] = useState(false);
@@ -67,10 +69,11 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
     toggleEkspandertRad(erApen);
   };
 
-  const erArbeidsforholdLagetAvSaksbehandler = nyttArbeidsforholdId;
-  const harIngenAksjonspunkt = arbeidsforhold && inntektsmelding;
-  const manglerInntektsmelding = arbeidsforhold && !nyttArbeidsforholdId && !inntektsmelding;
+  const erManueltOpprettet = arbeidsforhold?.arbeidsgiverIdent === MANUELT_ORG_NR;
+  const harArbeidsforholdOgInntektsmelding = arbeidsforhold && inntektsmelding;
+  const manglerInntektsmelding = arbeidsforhold && !erManueltOpprettet && !inntektsmelding;
   const manglerArbeidsforhold = !arbeidsforhold && inntektsmelding;
+  const harIngenAksjonspunkt = erManueltOpprettet || harArbeidsforholdOgInntektsmelding;
 
   const aIdent = arbeidsforhold?.arbeidsgiverIdent || inntektsmelding?.arbeidsgiverIdent;
 
@@ -78,7 +81,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
     <ExpandableTableRow
       content={(
         <>
-          {erArbeidsforholdLagetAvSaksbehandler && (
+          {erManueltOpprettet && (
             <NyttArbeidsforholdForm
               isReadOnly={false}
               lagreNyttArbeidsforhold={lagreNyttArbeidsforhold}
@@ -86,11 +89,10 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               arbeidsforhold={arbeidsforhold}
               arbeidsforholdNavn={arbeidsforholdNavn}
               avbrytEditering={() => toggleRad(false)}
-              nyttArbeidsforholdId={nyttArbeidsforholdId}
               erOverstyrt={erOverstyrt}
             />
           )}
-          {harIngenAksjonspunkt && (
+          {harArbeidsforholdOgInntektsmelding && (
             <>
               <InntektsmeldingOpplysningerPanel
                 stillingsprosent={arbeidsforhold.stillingsprosent}
@@ -162,7 +164,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
       </TableColumn>
       <TableColumn>
         <Normaltekst>
-          {finnKilde(intl, arbeidsforhold, nyttArbeidsforholdId)}
+          {finnKilde(intl, erManueltOpprettet, arbeidsforhold)}
         </Normaltekst>
       </TableColumn>
       <TableColumn>

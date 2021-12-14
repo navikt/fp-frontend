@@ -44,7 +44,7 @@ const Template: Story<{
     arbeidOgInntekt={arbeidOgInntekt}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     lagreNyttArbeidsforhold={action('button-click') as (data: any) => Promise<any>}
-    slettNyttArbeidsforhold={action('button-click') as (data: any) => Promise<any>}
+    slettNyttArbeidsforhold={action('button-click') as () => Promise<any>}
     lagreManglendeArbeidsforhold={action('button-click') as (data: any) => Promise<any>}
     lagreManglendeInntekstmelding={action('button-click') as (data: any) => Promise<any>}
     erOverstyrer={erOverstyrer}
@@ -202,8 +202,8 @@ AvklarManglendeOpplysninger.args = {
   },
 };
 
-export const SkalKunneLeggTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnErOverstyrer = Template.bind({});
-SkalKunneLeggTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnErOverstyrer.args = {
+export const SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnErOverstyrer = Template.bind({});
+SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnErOverstyrer.args = {
   arbeidOgInntekt: {
     arbeidsforhold: [],
     inntektsmeldinger: [],
@@ -212,13 +212,38 @@ SkalKunneLeggTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerF
   erOverstyrer: true,
 };
 
-export const SkalIkkeKunneLeggTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnIkkeErOverstyrer = Template.bind({});
-SkalIkkeKunneLeggTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnIkkeErOverstyrer.args = {
+export const SkalIkkeKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnIkkeErOverstyrer = Template.bind({});
+SkalIkkeKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnIkkeErOverstyrer.args = {
   arbeidOgInntekt: {
     arbeidsforhold: [],
     inntektsmeldinger: [],
     inntekter: [],
   },
+};
+
+export const ArbeidsforholdErManueltLagtTilOgLagret = Template.bind({});
+ArbeidsforholdErManueltLagtTilOgLagret.args = {
+  arbeidsgiverOpplysningerPerId: {
+    342352362: {
+      erPrivatPerson: false,
+      fødselsdato: null,
+      identifikator: '342352362',
+      navn: 'Manuelt lagt til arbeidsforholdnavn',
+      referanse: '342352362',
+    },
+  },
+  arbeidOgInntekt: {
+    arbeidsforhold: [{
+      arbeidsgiverIdent: '342352362',
+      fom: '2019-12-06',
+      stillingsprosent: 100,
+      tom: '2022-12-31',
+      begrunnelse: 'Dette er en begrunnelse',
+    }],
+    inntektsmeldinger: [],
+    inntekter: [],
+  },
+  erOverstyrer: true,
 };
 
 export const ArbeidsforholdErOK = Template.bind({});

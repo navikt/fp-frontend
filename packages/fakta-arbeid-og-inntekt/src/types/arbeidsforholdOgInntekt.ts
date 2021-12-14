@@ -5,7 +5,6 @@ type ArbeidsforholdOgInntekt = {
   arbeidsforholdNavn: string | undefined;
   inntektsmelding: Inntektsmelding | undefined;
   inntektsposter: Inntektspost[] | undefined;
-  nyttArbeidsforholdId?: number;
 }
 
 export default ArbeidsforholdOgInntekt;

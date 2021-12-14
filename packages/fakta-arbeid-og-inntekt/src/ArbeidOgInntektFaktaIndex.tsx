@@ -14,7 +14,7 @@ interface OwnProps {
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   lagreNyttArbeidsforhold: (formValues: NyttArbeidsforholdFormValues) => void;
-  slettNyttArbeidsforhold: (formValues: NyttArbeidsforholdFormValues) => void;
+  slettNyttArbeidsforhold: () => void;
   lagreManglendeArbeidsforhold: (formValues: FormValuesForManglendeArbeidsforhold) => void;
   lagreManglendeInntekstmelding: (formValues: FormValuesForManglendeInntektsmelding) => void;
   erOverstyrer: boolean;
