@@ -10,6 +10,8 @@ export type Inntektsmelding = Readonly<{
   kontaktpersonNummer: string;
   motattDato: string;
   innsendingstidspunkt: string;
+  begrunnelse?: string;
+  skalInnhenteInntektsmelding?: boolean;
 }>
 
 export type Arbeidsforhold = Readonly<{
@@ -20,6 +22,7 @@ export type Arbeidsforhold = Readonly<{
   tom: string;
   stillingsprosent: number;
   begrunnelse?: string;
+  skalInnhenteInntektsmelding?: boolean;
 }>
 
 export type Inntektspost = Readonly<{

@@ -23,6 +23,8 @@ const maxLength1500 = maxLength(1500);
 const minValue1 = minValue(1);
 const maxValue100 = maxValue(100);
 
+const OPPRETT_ARBEIDSFORHOLD = 'OPPRETT';
+
 type FormValues = {
   skalBrukeInntektsmelding: string;
   periodeFra?: string;
@@ -31,15 +33,16 @@ type FormValues = {
   begrunnelse: string;
 }
 
-export type FormValuesForManglendeArbeidsforhold = {
+export type FormValuesForManglendeArbeidsforhold = Omit<FormValues, 'skalBrukeInntektsmelding'> & {
   arbeidsgiverIdent: string;
   internArbeidsforholdId: string;
-} & FormValues;
+  skalBrukeInntektsmelding: boolean | undefined;
+};
 
 interface OwnProps {
   inntektsmelding: Inntektsmelding;
   isReadOnly: boolean;
-  lagreManglendeArbeidsforhold: (formValues: FormValuesForManglendeArbeidsforhold) => void;
+  lagreManglendeArbeidsforhold: (formValues: FormValuesForManglendeArbeidsforhold) => Promise<any>;
   avbrytEditering: () => void;
 }
 
@@ -71,9 +74,10 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
         formMethods={formMethods}
         onSubmit={(values) => lagreManglendeArbeidsforhold({
           ...values,
+          skalBrukeInntektsmelding: values.skalBrukeInntektsmelding === OPPRETT_ARBEIDSFORHOLD ? undefined : values.skalBrukeInntektsmelding === 'true',
           arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
           internArbeidsforholdId: inntektsmelding.innsendingstidspunkt,
-        })}
+        }).then(avbryt)}
       >
         <FlexContainer>
           <FlexRow>
@@ -93,9 +97,9 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
         >
           <RadioOption value="true" label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.TarKontakt' })} />
           <RadioOption value="false" label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.GåVidere' })} />
-          <RadioOption value="opprett" label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.OpprettArbeidsforhold' })} />
+          <RadioOption value={OPPRETT_ARBEIDSFORHOLD} label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.OpprettArbeidsforhold' })} />
         </RadioGroupField>
-        {skalBrukeInntektsmelding === 'opprett' && (
+        {skalBrukeInntektsmelding === OPPRETT_ARBEIDSFORHOLD && (
           <>
             <FlexContainer>
               <FlexRow>
@@ -118,7 +122,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <InputField
                     name="stillingsprosent"
-                    label={<FormattedMessage id="ManglendeOpplysningerForm.Stillingsprosent" />}
+                    label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.Stillingsprosent' })}
                     parse={(value: string) => {
                       const parsedValue = parseInt(value, 10);
                       return Number.isNaN(parsedValue) ? value : parsedValue;

@@ -40,8 +40,8 @@ interface OwnProps {
   isReadOnly: boolean;
   lagreNyttArbeidsforhold: (formValues: NyttArbeidsforholdFormValues) => Promise<any>;
   slettNyttArbeidsforhold: () => Promise<any>;
-  lagreManglendeArbeidsforhold: (formValues: FormValuesForManglendeArbeidsforhold) => void;
-  lagreManglendeInntekstmelding: (formValues: FormValuesForManglendeInntektsmelding) => void;
+  lagreManglendeArbeidsforhold: (formValues: FormValuesForManglendeArbeidsforhold) => Promise<any>;
+  lagreManglendeInntekstmelding: (formValues: FormValuesForManglendeInntektsmelding) => Promise<any>;
   oppdaterÅpenRad: (erÅpen: boolean) => void;
   erOverstyrt: boolean;
 }

@@ -67,7 +67,7 @@ interface OwnProps {
   inntektsposter?: Inntektspost[];
   isReadOnly: boolean;
   arbeidsforhold: AoIArbeidsforhold;
-  lagreManglendeInntekstmelding: (formValues: FormValuesForManglendeInntektsmelding) => void;
+  lagreManglendeInntekstmelding: (formValues: FormValuesForManglendeInntektsmelding) => Promise<any>;
   avbrytEditering: () => void;
 }
 
@@ -80,7 +80,12 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
   avbrytEditering,
 }) => {
   const intl = useIntl();
-  const formMethods = useForm<FormValues>();
+  const formMethods = useForm<FormValues>({
+    defaultValues: arbeidsforhold.skalInnhenteInntektsmelding && arbeidsforhold.begrunnelse ? {
+      skalInnhenteInntektsmelding: arbeidsforhold.skalInnhenteInntektsmelding.toString(),
+      begrunnelse: arbeidsforhold.begrunnelse,
+    } : undefined,
+  });
 
   const [visAlleMåneder, toggleMånedvisning] = useState(false);
 
@@ -108,7 +113,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
           <Element><FormattedMessage id="InntektsmeldingInnhentesForm.Inntekter" /></Element>
           {sorterteInntektsposter.filter((_inntekt, index) => (visAlleMåneder ? true : index < 3)).map((inntekt) => (
             <Row key={inntekt.fom}>
-              <Column xs="2">
+              <Column xs="1">
                 {`${intl.formatMessage({ id: `InntektsmeldingInnhentesForm.${dayjs(inntekt.fom).month() + 1}` })} ${dayjs(inntekt.fom).year()}`}
               </Column>
               <Column xs="2">
@@ -145,7 +150,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
           ...values,
           arbeidsgiverIdent: arbeidsforhold.arbeidsgiverIdent,
           internArbeidsforholdId: arbeidsforhold.internArbeidsforholdId,
-        })}
+        }).then(avbryt)}
       >
         <FlexContainer>
           <FlexRow>

@@ -155,6 +155,51 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
     return Promise.resolve();
   };
 
+  const lagreStateOgManglendeInntekstmelding = (formValues: FormValuesForManglendeInntektsmelding) => {
+    lagreManglendeInntekstmelding(formValues);
+    setListeData((oldData) => oldData.map((data) => {
+      if (data.arbeidsforhold.arbeidsgiverIdent === formValues.arbeidsgiverIdent) {
+        return {
+          ...data,
+          arbeidsforhold: {
+            ...data.arbeidsforhold,
+            begrunnelse: formValues.begrunnelse,
+            skalInnhenteInntektsmelding: formValues.skalInnhenteInntektsmelding,
+          },
+        };
+      }
+      return data;
+    }));
+    // Kun returner om lagring har gått bra (putt setListData inni resolve òg)
+    return Promise.resolve();
+  };
+
+  const lagreStateOgManglendeArbeidsforhold = (formValues: FormValuesForManglendeArbeidsforhold) => {
+    lagreManglendeArbeidsforhold(formValues);
+    setListeData((oldData) => oldData.map((data) => {
+      if (data.inntektsmelding.arbeidsgiverIdent === formValues.arbeidsgiverIdent) {
+        const af = formValues.skalBrukeInntektsmelding === undefined ? {
+          arbeidsgiverIdent: formValues.arbeidsgiverIdent,
+          internArbeidsforholdId: formValues.internArbeidsforholdId,
+          fom: formValues.periodeFra,
+          tom: formValues.periodeTil,
+          stillingsprosent: formValues.stillingsprosent,
+        } : undefined;
+        return {
+          ...data,
+          inntektsmelding: {
+            ...data.inntektsmelding,
+            begrunnelse: formValues.begrunnelse,
+          },
+          arbeidsforhold: af,
+        };
+      }
+      return data;
+    }));
+    // Kun returner om lagring har gått bra (putt setListData inni resolve òg)
+    return Promise.resolve();
+  };
+
   const [antallÅpnedeRader, setÅpenRad] = useState(0);
   const oppdaterÅpenRad = (skalLukke: boolean) => {
     setÅpenRad((antall) => (skalLukke ? antall + 1 : antall - 1));
@@ -235,8 +280,8 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
               isReadOnly={isReadOnly}
               lagreNyttArbeidsforhold={lagreStateOgNyttArbeidsforhold}
               slettNyttArbeidsforhold={slettArbeidsforhold}
-              lagreManglendeArbeidsforhold={lagreManglendeArbeidsforhold}
-              lagreManglendeInntekstmelding={lagreManglendeInntekstmelding}
+              lagreManglendeArbeidsforhold={lagreStateOgManglendeArbeidsforhold}
+              lagreManglendeInntekstmelding={lagreStateOgManglendeInntekstmelding}
               oppdaterÅpenRad={oppdaterÅpenRad}
               erOverstyrt={erOverstyrt}
             />
