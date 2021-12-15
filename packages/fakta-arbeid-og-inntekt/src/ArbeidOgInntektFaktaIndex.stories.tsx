@@ -11,6 +11,11 @@ import ArbeidOgInntektFaktaIndex from './ArbeidOgInntektFaktaIndex';
 
 const MANUELT_ORG_NR = '342352362';
 
+const promiseAction = () => (...args: any): Promise<any> => {
+  action('button-click')(...args);
+  return Promise.resolve();
+};
+
 export default {
   title: 'fakta/fakta-arbeid-og-inntekter',
   component: ArbeidOgInntektFaktaIndex,
@@ -47,10 +52,10 @@ const Template: Story<{
     setFormData={() => undefined}
     arbeidOgInntekt={arbeidOgInntekt}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    lagreNyttArbeidsforhold={action('button-click') as (data: any) => Promise<any>}
-    slettNyttArbeidsforhold={action('button-click') as () => Promise<any>}
-    lagreManglendeArbeidsforhold={action('button-click') as (data: any) => Promise<any>}
-    lagreManglendeInntekstmelding={action('button-click') as (data: any) => Promise<any>}
+    lagreNyttArbeidsforhold={promiseAction()}
+    slettNyttArbeidsforhold={promiseAction()}
+    lagreManglendeArbeidsforhold={promiseAction()}
+    lagreManglendeInntekstmelding={promiseAction()}
     erOverstyrer={erOverstyrer}
   />
 );

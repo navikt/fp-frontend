@@ -3,7 +3,7 @@ import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerWrapper, Behandling, Beregningsgrunnlag, BeregningsresultatFp, FamilieHendelseSamling,
   Feriepengegrunnlag, FodselOgTilrettelegging, ForhåndsvisMeldingParams, InntektArbeidYtelse, Medlemskap, Opptjening, Personoversikt,
-  SimuleringResultat, Soknad, TilbakekrevingValg, UttakPeriodeGrense, Verge, Vilkar, Ytelsefordeling,
+  SimuleringResultat, Soknad, TilbakekrevingValg, UttakPeriodeGrense, Verge, Vilkar, Ytelsefordeling, ArbeidOgInntektsmelding,
 } from '@fpsak-frontend/types';
 import { NyBehandlendeEnhetParams, SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
@@ -42,6 +42,7 @@ export const SvpBehandlingApiKeys = {
   UTLAND_DOK_STATUS: new RestKey<{ dokStatus: string }, void>('UTLAND_DOK_STATUS'),
   ARBEIDSGIVERE_OVERSIKT: new RestKey<ArbeidsgiverOpplysningerWrapper, void>('ARBEIDSGIVERE_OVERSIKT'),
   BEHANDLING_PERSONOVERSIKT: new RestKey<Personoversikt, void>('BEHANDLING_PERSONOVERSIKT'),
+  ARBEID_OG_INNTEKT: new RestKey<ArbeidOgInntektsmelding, void>('ARBEID_OG_INNTEKT'),
 };
 
 const endpoints = new RestApiConfigBuilder()
@@ -68,6 +69,7 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('utland-dok-status', SvpBehandlingApiKeys.UTLAND_DOK_STATUS)
   .withRel('arbeidsgivere-oversikt', SvpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT)
   .withRel('behandling-personoversikt', SvpBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT)
+  .withRel('arbeidsforhold-inntektsmelding', SvpBehandlingApiKeys.ARBEID_OG_INNTEKT)
 
   // operasjoner
   .withRel('bytt-behandlende-enhet', SvpBehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET)

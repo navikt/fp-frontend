@@ -22,6 +22,7 @@ import { AoIArbeidsforhold, Inntektspost } from '@fpsak-frontend/types';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image,
 } from '@fpsak-frontend/shared-components';
+import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -70,6 +71,7 @@ interface OwnProps {
   arbeidsforhold: AoIArbeidsforhold;
   lagreManglendeInntekstmelding: (formValues: FormValuesForManglendeInntektsmelding) => Promise<any>;
   avbrytEditering: () => void;
+  oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
 }
 
 const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
@@ -79,13 +81,14 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
   isReadOnly,
   lagreManglendeInntekstmelding,
   avbrytEditering,
+  oppdaterTabell,
 }) => {
   const intl = useIntl();
 
-  const defaultValues = {
+  const defaultValues = useMemo(() => ({
     skalInnhenteInntektsmelding: arbeidsforhold.skalInnhenteInntektsmelding?.toString(),
     begrunnelse: arbeidsforhold.begrunnelse,
-  };
+  }), [arbeidsforhold]);
 
   const formMethods = useForm<FormValues>({
     defaultValues,
@@ -99,6 +102,25 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
     avbrytEditering();
     formMethods.reset(defaultValues);
   }, [defaultValues]);
+
+  const lagre = useCallback((formValues: FormValuesForManglendeInntektsmelding) => {
+    lagreManglendeInntekstmelding(formValues).then(() => {
+      oppdaterTabell((oldData) => oldData.map((data) => {
+        if (data.arbeidsforhold.arbeidsgiverIdent === formValues.arbeidsgiverIdent) {
+          return {
+            ...data,
+            arbeidsforhold: {
+              ...data.arbeidsforhold,
+              begrunnelse: formValues.begrunnelse,
+              skalInnhenteInntektsmelding: formValues.skalInnhenteInntektsmelding,
+            },
+          };
+        }
+        return data;
+      }));
+      avbrytEditering();
+    });
+  }, []);
 
   return (
     <>
@@ -147,12 +169,12 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
       <VerticalSpacer thirtyTwoPx />
       <Form
         formMethods={formMethods}
-        onSubmit={(values) => lagreManglendeInntekstmelding({
+        onSubmit={(values) => lagre({
           ...values,
           arbeidsgiverIdent: arbeidsforhold.arbeidsgiverIdent,
           internArbeidsforholdId: arbeidsforhold.internArbeidsforholdId,
           skalInnhenteInntektsmelding: values.skalInnhenteInntektsmelding === 'true',
-        }).then(avbrytEditering)}
+        })}
       >
         <FlexContainer>
           <FlexRow>

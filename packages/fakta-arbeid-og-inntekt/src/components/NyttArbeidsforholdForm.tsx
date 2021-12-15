@@ -1,4 +1,6 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, {
+  FunctionComponent, useCallback, useMemo,
+} from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
 import { Undertittel } from 'nav-frontend-typografi';
@@ -18,7 +20,11 @@ import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image, FloatRight,
 } from '@fpsak-frontend/shared-components';
 
+import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
+
 import styles from './nyttArbeidsforholdForm.less';
+
+export const MANUELT_ORG_NR = '342352362';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -43,6 +49,7 @@ interface OwnProps {
   arbeidsforholdNavn?: string;
   avbrytEditering?: () => void;
   erOverstyrt: boolean;
+  oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
 }
 
 const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
@@ -53,24 +60,64 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   arbeidsforholdNavn,
   avbrytEditering,
   erOverstyrt,
+  oppdaterTabell,
 }) => {
   const intl = useIntl();
+
+  const defaultValues = useMemo(() => (arbeidsforhold ? {
+    periodeFra: arbeidsforhold.fom,
+    periodeTil: arbeidsforhold.tom,
+    stillingsprosent: arbeidsforhold.stillingsprosent,
+    begrunnelse: arbeidsforhold.begrunnelse,
+    arbeidsgiver: arbeidsforholdNavn,
+  } : undefined), [arbeidsforhold, arbeidsforholdNavn]);
+
   const formMethods = useForm<FormValues>({
-    defaultValues: arbeidsforhold ? {
-      periodeFra: arbeidsforhold.fom,
-      periodeTil: arbeidsforhold.tom,
-      stillingsprosent: arbeidsforhold.stillingsprosent,
-      begrunnelse: arbeidsforhold.begrunnelse,
-      arbeidsgiver: arbeidsforholdNavn,
-    } : undefined,
+    defaultValues,
   });
 
   const avbryt = useCallback(() => {
     avbrytEditering();
     formMethods.reset();
   }, []);
+
+  const lagre = useCallback((formValues: FormValues) => {
+    lagreNyttArbeidsforhold(formValues).then(() => {
+      oppdaterTabell((oldData) => {
+        const index = oldData.findIndex((data) => data.arbeidsforhold?.arbeidsgiverIdent === MANUELT_ORG_NR);
+
+        const af = {
+          arbeidsforhold: {
+            arbeidsgiverIdent: MANUELT_ORG_NR,
+            fom: formValues.periodeFra,
+            tom: formValues.periodeTil,
+            stillingsprosent: formValues.stillingsprosent,
+            begrunnelse: formValues.begrunnelse,
+          },
+          arbeidsforholdNavn: formValues.arbeidsgiver,
+          inntektsmelding: undefined,
+          inntektsposter: undefined,
+        };
+
+        if (index === -1) {
+          return oldData.concat(af);
+        }
+        return oldData.map((data, i) => {
+          if (i === index) {
+            return af;
+          }
+          return data;
+        });
+      });
+      avbryt();
+    });
+  }, []);
+
   const slett = useCallback(() => {
-    slettNyttArbeidsforhold().then(() => avbrytEditering());
+    slettNyttArbeidsforhold().then(() => {
+      oppdaterTabell((oldData) => oldData.filter((data) => data.arbeidsforhold?.arbeidsgiverIdent !== MANUELT_ORG_NR));
+      avbrytEditering();
+    });
   }, []);
 
   return (
@@ -83,7 +130,7 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
           <VerticalSpacer thirtyTwoPx />
         </>
       )}
-      <Form formMethods={formMethods} onSubmit={(values) => lagreNyttArbeidsforhold(values).then(() => avbryt())}>
+      <Form formMethods={formMethods} onSubmit={(values) => lagre(values)}>
         <FlexContainer>
           <FlexRow>
             <FlexColumn>

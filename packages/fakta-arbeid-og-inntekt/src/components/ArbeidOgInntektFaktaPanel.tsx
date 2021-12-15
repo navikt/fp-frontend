@@ -17,10 +17,10 @@ import {
   FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import NyttArbeidsforholdForm, { FormValues as NyttArbeidsforholdFormValues } from './NyttArbeidsforholdForm';
+import NyttArbeidsforholdForm, { FormValues as NyttArbeidsforholdFormValues, MANUELT_ORG_NR } from './NyttArbeidsforholdForm';
 import { FormValuesForManglendeArbeidsforhold } from './ManglendeOpplysningerForm';
 import { FormValuesForManglendeInntektsmelding } from './InntektsmeldingInnhentesForm';
-import ArbeidsforholdRad, { MANUELT_ORG_NR } from './ArbeidsforholdRad';
+import ArbeidsforholdRad from './ArbeidsforholdRad';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
 const HEADER_TEXT_IDS = [
@@ -48,7 +48,7 @@ const finnApTekstKode = (
   return undefined;
 };
 
-const byggStruktur = (
+const byggTabellStruktur = (
   arbeidOgInntekt: ArbeidOgInntektsmelding,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ArbeidsforholdOgInntekt[] => {
@@ -80,10 +80,10 @@ interface OwnProps {
   setFormData: (data: ArbeidsforholdOgInntekt[]) => void,
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  lagreNyttArbeidsforhold: (formValues: NyttArbeidsforholdFormValues) => void;
-  slettNyttArbeidsforhold: () => void;
-  lagreManglendeArbeidsforhold: (formValues: FormValuesForManglendeArbeidsforhold) => void;
-  lagreManglendeInntekstmelding: (formValues: FormValuesForManglendeInntektsmelding) => void;
+  lagreNyttArbeidsforhold: (formValues: NyttArbeidsforholdFormValues) => Promise<any>;
+  slettNyttArbeidsforhold: () => Promise<any>;
+  lagreManglendeArbeidsforhold: (formValues: FormValuesForManglendeArbeidsforhold) => Promise<any>;
+  lagreManglendeInntekstmelding: (formValues: FormValuesForManglendeInntektsmelding) => Promise<any>;
   erOverstyrer: boolean;
 }
 
@@ -106,101 +106,16 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
 
   const { arbeidsforhold, inntektsmeldinger } = arbeidOgInntekt;
 
-  const [listeData, setListeData] = useState(formData || byggStruktur(arbeidOgInntekt, arbeidsgiverOpplysningerPerId));
+  const [tabellData, setTabellData] = useState(formData || byggTabellStruktur(arbeidOgInntekt, arbeidsgiverOpplysningerPerId));
 
   useEffect(() => () => {
-    setFormData(listeData);
-  }, [listeData]);
+    setFormData(tabellData);
+  }, [tabellData]);
 
   const harIngenArbeidsforholdEllerInntektsmeldinger = arbeidsforhold.length === 0 && inntektsmeldinger.length === 0;
   const aksjonspunktTekstKode = finnApTekstKode(aksjonspunkter, harIngenArbeidsforholdEllerInntektsmeldinger, erOverstyrer);
 
-  const kanBekrefte = listeData.length > 0 && listeData.every((d) => d.arbeidsforhold?.arbeidsgiverIdent === MANUELT_ORG_NR);
-
-  const lagreStateOgNyttArbeidsforhold = (formValues: NyttArbeidsforholdFormValues) => {
-    lagreNyttArbeidsforhold(formValues);
-    setListeData((oldData) => {
-      const index = oldData.findIndex((data) => data.arbeidsforhold?.arbeidsgiverIdent === MANUELT_ORG_NR);
-
-      const af = {
-        arbeidsforhold: {
-          arbeidsgiverIdent: MANUELT_ORG_NR,
-          fom: formValues.periodeFra,
-          tom: formValues.periodeTil,
-          stillingsprosent: formValues.stillingsprosent,
-          begrunnelse: formValues.begrunnelse,
-        },
-        arbeidsforholdNavn: formValues.arbeidsgiver,
-        inntektsmelding: undefined,
-        inntektsposter: undefined,
-      };
-
-      if (index === -1) {
-        return oldData.concat(af);
-      }
-      return oldData.map((data, i) => {
-        if (i === index) {
-          return af;
-        }
-        return data;
-      });
-    });
-    // Kun returner om lagring har gått bra (putt setListData inni resolve òg)
-    return Promise.resolve();
-  };
-
-  const slettArbeidsforhold = () => {
-    slettNyttArbeidsforhold();
-    setListeData((oldData) => oldData.filter((data) => data.arbeidsforhold?.arbeidsgiverIdent !== MANUELT_ORG_NR));
-    // Kun returner om lagring har gått bra (putt setListData inni resolve òg)
-    return Promise.resolve();
-  };
-
-  const lagreStateOgManglendeInntekstmelding = (formValues: FormValuesForManglendeInntektsmelding) => {
-    lagreManglendeInntekstmelding(formValues);
-    setListeData((oldData) => oldData.map((data) => {
-      if (data.arbeidsforhold.arbeidsgiverIdent === formValues.arbeidsgiverIdent) {
-        return {
-          ...data,
-          arbeidsforhold: {
-            ...data.arbeidsforhold,
-            begrunnelse: formValues.begrunnelse,
-            skalInnhenteInntektsmelding: formValues.skalInnhenteInntektsmelding,
-          },
-        };
-      }
-      return data;
-    }));
-    // Kun returner om lagring har gått bra (putt setListData inni resolve òg)
-    return Promise.resolve();
-  };
-
-  const lagreStateOgManglendeArbeidsforhold = (formValues: FormValuesForManglendeArbeidsforhold) => {
-    lagreManglendeArbeidsforhold(formValues);
-    setListeData((oldData) => oldData.map((data) => {
-      if (data.inntektsmelding.arbeidsgiverIdent === formValues.arbeidsgiverIdent) {
-        const af = formValues.skalSeBortFraInntektsmelding === undefined ? {
-          arbeidsgiverIdent: formValues.arbeidsgiverIdent,
-          internArbeidsforholdId: formValues.internArbeidsforholdId,
-          fom: formValues.periodeFra,
-          tom: formValues.periodeTil,
-          stillingsprosent: formValues.stillingsprosent,
-        } : undefined;
-        return {
-          ...data,
-          inntektsmelding: {
-            ...data.inntektsmelding,
-            begrunnelse: formValues.begrunnelse,
-            skalSeBortFraInntektsmelding: formValues.skalSeBortFraInntektsmelding,
-          },
-          arbeidsforhold: af,
-        };
-      }
-      return data;
-    }));
-    // Kun returner om lagring har gått bra (putt setListData inni resolve òg)
-    return Promise.resolve();
-  };
+  const kanBekrefte = tabellData.length > 0 && tabellData.every((d) => d.arbeidsforhold?.arbeidsgiverIdent === MANUELT_ORG_NR);
 
   const [antallÅpnedeRader, setÅpenRad] = useState(0);
   const oppdaterÅpenRad = (skalLukke: boolean) => {
@@ -208,7 +123,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   };
   const [erOverstyrt, toggleOverstyring] = useState(false);
   const [skalLeggeTilArbeidsforhold, toggleLeggTilArbeidsforhold] = useState(false);
-  const harManueltLagtTilArbeidsforhold = listeData.some((data) => data.arbeidsforhold?.arbeidsgiverIdent === MANUELT_ORG_NR);
+  const harManueltLagtTilArbeidsforhold = tabellData.some((data) => data.arbeidsforhold?.arbeidsgiverIdent === MANUELT_ORG_NR);
 
   return (
     <>
@@ -265,27 +180,29 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
         <>
           <NyttArbeidsforholdForm
             isReadOnly={false}
-            lagreNyttArbeidsforhold={lagreStateOgNyttArbeidsforhold}
-            slettNyttArbeidsforhold={slettArbeidsforhold}
+            lagreNyttArbeidsforhold={lagreNyttArbeidsforhold}
+            slettNyttArbeidsforhold={slettNyttArbeidsforhold}
             avbrytEditering={() => toggleLeggTilArbeidsforhold(false)}
             erOverstyrt
+            oppdaterTabell={setTabellData}
           />
           <VerticalSpacer fourtyPx />
         </>
       )}
       <Table headerTextCodes={headers} noHover>
         <>
-          {listeData.map((data) => (
+          {tabellData.map((data) => (
             <ArbeidsforholdRad
               skjæringspunktDato={skjæringspunktDato}
               arbeidsforholdOgInntekt={data}
               isReadOnly={isReadOnly}
-              lagreNyttArbeidsforhold={lagreStateOgNyttArbeidsforhold}
-              slettNyttArbeidsforhold={slettArbeidsforhold}
-              lagreManglendeArbeidsforhold={lagreStateOgManglendeArbeidsforhold}
-              lagreManglendeInntekstmelding={lagreStateOgManglendeInntekstmelding}
+              lagreNyttArbeidsforhold={lagreNyttArbeidsforhold}
+              slettNyttArbeidsforhold={slettNyttArbeidsforhold}
+              lagreManglendeArbeidsforhold={lagreManglendeArbeidsforhold}
+              lagreManglendeInntekstmelding={lagreManglendeInntekstmelding}
               oppdaterÅpenRad={oppdaterÅpenRad}
               erOverstyrt={erOverstyrt}
+              oppdaterTabell={setTabellData}
             />
           ))}
         </>

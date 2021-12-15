@@ -12,13 +12,11 @@ import {
 } from '@fpsak-frontend/shared-components';
 import { TIDENES_ENDE } from '@fpsak-frontend/utils';
 import ExpandableTableRow from './ExpandableTableRow';
-import NyttArbeidsforholdForm, { FormValues as NyttArbeidsforholdFormValues } from './NyttArbeidsforholdForm';
+import NyttArbeidsforholdForm, { FormValues as NyttArbeidsforholdFormValues, MANUELT_ORG_NR } from './NyttArbeidsforholdForm';
 import ManglendeOpplysningerForm, { FormValuesForManglendeArbeidsforhold } from './ManglendeOpplysningerForm';
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 import InntektsmeldingInnhentesForm, { FormValuesForManglendeInntektsmelding } from './InntektsmeldingInnhentesForm';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
-
-export const MANUELT_ORG_NR = '342352362';
 
 const finnKilde = (
   intl: IntlShape,
@@ -44,6 +42,7 @@ interface OwnProps {
   lagreManglendeInntekstmelding: (formValues: FormValuesForManglendeInntektsmelding) => Promise<any>;
   oppdaterÅpenRad: (erÅpen: boolean) => void;
   erOverstyrt: boolean;
+  oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
 }
 
 const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
@@ -56,6 +55,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
   lagreManglendeInntekstmelding,
   oppdaterÅpenRad,
   erOverstyrt,
+  oppdaterTabell,
 }) => {
   const intl = useIntl();
 
@@ -90,6 +90,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               arbeidsforholdNavn={arbeidsforholdNavn}
               avbrytEditering={() => toggleRad(false)}
               erOverstyrt={erOverstyrt}
+              oppdaterTabell={oppdaterTabell}
             />
           )}
           {harArbeidsforholdOgInntektsmelding && (
@@ -109,6 +110,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               arbeidsforhold={arbeidsforhold}
               lagreManglendeInntekstmelding={lagreManglendeInntekstmelding}
               avbrytEditering={() => toggleRad(false)}
+              oppdaterTabell={oppdaterTabell}
             />
           )}
           {manglerArbeidsforhold && (
@@ -118,6 +120,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               isReadOnly={isReadOnly}
               lagreManglendeArbeidsforhold={lagreManglendeArbeidsforhold}
               avbrytEditering={() => toggleRad(false)}
+              oppdaterTabell={oppdaterTabell}
             />
           )}
         </>

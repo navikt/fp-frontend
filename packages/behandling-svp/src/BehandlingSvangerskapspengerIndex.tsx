@@ -11,6 +11,7 @@ import {
 import { restApiSvpHooks, requestSvpApi, SvpBehandlingApiKeys } from './data/svpBehandlingApi';
 import SakenFaktaInitPanel from './faktaPaneler/SakenFaktaInitPanel';
 import ArbeidsforholdFaktaInitPanel from './faktaPaneler/ArbeidsforholdFaktaInitPanel';
+import ArbeidOgInntektFaktaInitPanel from './faktaPaneler/ArbeidOgInntektFaktaInitPanel';
 import YtelserFaktaInitPanel from './faktaPaneler/YtelserFaktaInitPanel';
 import VergeFaktaInitPanel from './faktaPaneler/VergeFaktaInitPanel';
 import FodseltilretteleggingFaktaInitPanel from './faktaPaneler/FodseltilretteleggingFaktaInitPanel';
@@ -103,6 +104,7 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<StandardBehandlingPro
           hentFaktaPaneler={(props) => (
             <>
               <SakenFaktaInitPanel {...props} />
+              <ArbeidOgInntektFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <YtelserFaktaInitPanel {...props} />
               <VergeFaktaInitPanel {...props} />

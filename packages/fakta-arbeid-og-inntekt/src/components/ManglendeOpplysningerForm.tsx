@@ -1,4 +1,6 @@
-import React, { useCallback, FunctionComponent } from 'react';
+import React, {
+  useCallback, FunctionComponent, useMemo,
+} from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Undertekst } from 'nav-frontend-typografi';
@@ -17,6 +19,7 @@ import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
+import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -45,6 +48,7 @@ interface OwnProps {
   isReadOnly: boolean;
   lagreManglendeArbeidsforhold: (formValues: FormValuesForManglendeArbeidsforhold) => Promise<any>;
   avbrytEditering: () => void;
+  oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
 }
 
 const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
@@ -53,17 +57,18 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   isReadOnly,
   lagreManglendeArbeidsforhold,
   avbrytEditering,
+  oppdaterTabell,
 }) => {
   const intl = useIntl();
 
-  const defaultValues = {
+  const defaultValues = useMemo(() => ({
     skalSeBortFraInntektsmelding: inntektsmelding.skalSeBortFraInntektsmelding === undefined && arbeidsforhold?.fom
       ? OPPRETT_ARBEIDSFORHOLD : inntektsmelding.skalSeBortFraInntektsmelding?.toString(),
     periodeFra: arbeidsforhold?.fom,
     periodeTil: arbeidsforhold?.tom,
     stillingsprosent: arbeidsforhold?.stillingsprosent,
     begrunnelse: inntektsmelding.begrunnelse,
-  };
+  }), [inntektsmelding, arbeidsforhold]);
 
   const formMethods = useForm<FormValues>({
     defaultValues,
@@ -76,6 +81,33 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
     formMethods.reset(defaultValues);
   }, [defaultValues]);
 
+  const lagre = useCallback((formValues: FormValuesForManglendeArbeidsforhold) => {
+    lagreManglendeArbeidsforhold(formValues).then(() => {
+      oppdaterTabell((oldData) => oldData.map((data) => {
+        if (data.inntektsmelding.arbeidsgiverIdent === formValues.arbeidsgiverIdent) {
+          const af = formValues.skalSeBortFraInntektsmelding === undefined ? {
+            arbeidsgiverIdent: formValues.arbeidsgiverIdent,
+            internArbeidsforholdId: formValues.internArbeidsforholdId,
+            fom: formValues.periodeFra,
+            tom: formValues.periodeTil,
+            stillingsprosent: formValues.stillingsprosent,
+          } : undefined;
+          return {
+            ...data,
+            inntektsmelding: {
+              ...data.inntektsmelding,
+              begrunnelse: formValues.begrunnelse,
+              skalSeBortFraInntektsmelding: formValues.skalSeBortFraInntektsmelding,
+            },
+            arbeidsforhold: af,
+          };
+        }
+        return data;
+      }));
+      avbrytEditering();
+    });
+  }, []);
+
   return (
     <>
       <InntektsmeldingOpplysningerPanel
@@ -86,13 +118,13 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
       <VerticalSpacer sixteenPx />
       <Form
         formMethods={formMethods}
-        onSubmit={(values) => lagreManglendeArbeidsforhold({
+        onSubmit={(values) => lagre({
           ...values,
           skalSeBortFraInntektsmelding: values.skalSeBortFraInntektsmelding === OPPRETT_ARBEIDSFORHOLD
             ? undefined : values.skalSeBortFraInntektsmelding === 'true',
           arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
           internArbeidsforholdId: inntektsmelding.innsendingstidspunkt,
-        }).then(avbrytEditering)}
+        })}
       >
         <FlexContainer>
           <FlexRow>
