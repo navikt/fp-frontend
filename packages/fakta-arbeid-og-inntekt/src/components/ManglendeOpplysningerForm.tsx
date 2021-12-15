@@ -84,7 +84,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   const lagre = useCallback((formValues: FormValuesForManglendeArbeidsforhold) => {
     lagreManglendeArbeidsforhold(formValues).then(() => {
       oppdaterTabell((oldData) => oldData.map((data) => {
-        if (data.inntektsmelding.arbeidsgiverIdent === formValues.arbeidsgiverIdent) {
+        if (data.inntektsmelding?.arbeidsgiverIdent === formValues.arbeidsgiverIdent) {
           const af = formValues.skalSeBortFraInntektsmelding === undefined ? {
             arbeidsgiverIdent: formValues.arbeidsgiverIdent,
             internArbeidsforholdId: formValues.internArbeidsforholdId,

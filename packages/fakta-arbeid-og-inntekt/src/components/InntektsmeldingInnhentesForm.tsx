@@ -106,7 +106,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
   const lagre = useCallback((formValues: FormValuesForManglendeInntektsmelding) => {
     lagreManglendeInntekstmelding(formValues).then(() => {
       oppdaterTabell((oldData) => oldData.map((data) => {
-        if (data.arbeidsforhold.arbeidsgiverIdent === formValues.arbeidsgiverIdent) {
+        if (data.arbeidsforhold?.arbeidsgiverIdent === formValues.arbeidsgiverIdent) {
           return {
             ...data,
             arbeidsforhold: {

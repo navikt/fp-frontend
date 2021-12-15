@@ -31,21 +31,23 @@ const HEADER_TEXT_IDS = [
   'ArbeidOgInntektFaktaPanel.InntektsmeldingMottatt',
 ];
 
-const finnApTekstKode = (
+const finnApTekstKoder = (
   aksjonspunkter: Aksjonspunkt[],
   harIngenArbeidsforholdEllerInntektsmeldinger: boolean,
   erOverstyrer: boolean,
-): string | undefined => {
+): string[] => {
   if (harIngenArbeidsforholdEllerInntektsmeldinger && erOverstyrer) {
-    return 'ArbeidOgInntektFaktaPanel.IngenArbeidsforhold';
+    return ['ArbeidOgInntektFaktaPanel.IngenArbeidsforhold'];
   }
+
+  const koder = [];
   if (aksjonspunkter.some((ap) => ap.definisjon.kode === '9998' && ap.status.kode === aksjonspunktStatus.OPPRETTET)) {
-    return 'ArbeidOgInntektFaktaPanel.InnhentManglendeInntektsmelding';
+    koder.push('ArbeidOgInntektFaktaPanel.InnhentManglendeInntektsmelding');
   }
   if (aksjonspunkter.some((ap) => ap.definisjon.kode === '9999' && ap.status.kode === aksjonspunktStatus.OPPRETTET)) {
-    return 'ArbeidOgInntektFaktaPanel.AvklarManglendeOpplysninger';
+    koder.push('ArbeidOgInntektFaktaPanel.AvklarManglendeOpplysninger');
   }
-  return undefined;
+  return koder;
 };
 
 const byggTabellStruktur = (
@@ -113,7 +115,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   }, [tabellData]);
 
   const harIngenArbeidsforholdEllerInntektsmeldinger = arbeidsforhold.length === 0 && inntektsmeldinger.length === 0;
-  const aksjonspunktTekstKode = finnApTekstKode(aksjonspunkter, harIngenArbeidsforholdEllerInntektsmeldinger, erOverstyrer);
+  const aksjonspunktTekstKoder = finnApTekstKoder(aksjonspunkter, harIngenArbeidsforholdEllerInntektsmeldinger, erOverstyrer);
 
   const kanBekrefte = tabellData.length > 0 && tabellData.every((d) => d.arbeidsforhold?.arbeidsgiverIdent === MANUELT_ORG_NR);
 
@@ -151,9 +153,11 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
         </Column>
       </Row>
       <VerticalSpacer thirtyTwoPx />
-      {aksjonspunktTekstKode && (
+      {aksjonspunktTekstKoder.length > 0 && (
         <AksjonspunktHelpTextHTML>
-          <FormattedMessage id={aksjonspunktTekstKode} />
+          {aksjonspunktTekstKoder.map((tekstKode) => (
+            <FormattedMessage id={tekstKode} />
+          ))}
         </AksjonspunktHelpTextHTML>
       )}
       <VerticalSpacer sixteenPx />
