@@ -166,50 +166,56 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
               <Hjelpetekst><FormattedMessage id="InntektsmeldingInnhentesForm.Hjelpetekst" /></Hjelpetekst>
             </FlexColumn>
           </FlexRow>
-        </FlexContainer>
-        <RadioGroupField
-          name="skalInnhenteInntektsmelding"
-          validate={[required]}
-          readOnly={isReadOnly}
-          parse={(value: string) => value === 'true'}
-          direction="vertical"
-        >
-          <RadioOption value="true" label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.TarKontakt' })} />
-          <RadioOption value="false" label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.GåVidere' })} />
-        </RadioGroupField>
-        <TextAreaField
-          label={<FormattedMessage id="InntektsmeldingInnhentesForm.Begrunn" />}
-          name="begrunnelse"
-          validate={[required, minLength3, maxLength1500, hasValidText]}
-          maxLength={1500}
-          readOnly={isReadOnly}
-        />
-        <VerticalSpacer twentyPx />
-        <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Knapp
-                mini
-                spinner={formMethods.formState.isSubmitting}
-                disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-                htmlType="submit"
+              <RadioGroupField
+                name="skalInnhenteInntektsmelding"
+                validate={[required]}
+                readOnly={isReadOnly}
+                direction="vertical"
               >
-                <FormattedMessage id="InntektsmeldingInnhentesForm.Lagre" />
-              </Knapp>
-            </FlexColumn>
-            <FlexColumn>
-              <Flatknapp
-                mini
-                spinner={false}
-                disabled={formMethods.formState.isSubmitting}
-                onClick={avbryt}
-                htmlType="button"
-              >
-                <FormattedMessage id="InntektsmeldingInnhentesForm.Avbryt" />
-              </Flatknapp>
+                <RadioOption value="true" label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.TarKontakt' })} />
+                <RadioOption value="false" label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.GåVidere' })} />
+              </RadioGroupField>
+              <FlexColumn />
+              <TextAreaField
+                label={<FormattedMessage id="InntektsmeldingInnhentesForm.Begrunn" />}
+                name="begrunnelse"
+                validate={[required, minLength3, maxLength1500, hasValidText]}
+                maxLength={1500}
+                readOnly={isReadOnly}
+              />
             </FlexColumn>
           </FlexRow>
         </FlexContainer>
+        <VerticalSpacer twentyPx />
+        {!isReadOnly && (
+          <FlexContainer>
+            <FlexRow>
+              <FlexColumn>
+                <Knapp
+                  mini
+                  spinner={formMethods.formState.isSubmitting}
+                  disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+                  htmlType="submit"
+                >
+                  <FormattedMessage id="InntektsmeldingInnhentesForm.Lagre" />
+                </Knapp>
+              </FlexColumn>
+              <FlexColumn>
+                <Flatknapp
+                  mini
+                  spinner={false}
+                  disabled={formMethods.formState.isSubmitting}
+                  onClick={avbryt}
+                  htmlType="button"
+                >
+                  <FormattedMessage id="InntektsmeldingInnhentesForm.Avbryt" />
+                </Flatknapp>
+              </FlexColumn>
+            </FlexRow>
+          </FlexContainer>
+        )}
         <VerticalSpacer thirtyTwoPx />
       </Form>
     </>

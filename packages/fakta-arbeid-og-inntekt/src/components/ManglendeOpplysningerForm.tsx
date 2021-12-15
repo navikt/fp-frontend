@@ -160,31 +160,33 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
           readOnly={isReadOnly}
         />
         <VerticalSpacer sixteenPx />
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn>
-              <Knapp
-                mini
-                spinner={formMethods.formState.isSubmitting}
-                disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-                htmlType="submit"
-              >
-                <FormattedMessage id="ManglendeOpplysningerForm.Lagre" />
-              </Knapp>
-            </FlexColumn>
-            <FlexColumn>
-              <Flatknapp
-                mini
-                spinner={false}
-                disabled={formMethods.formState.isSubmitting}
-                onClick={avbryt}
-                htmlType="button"
-              >
-                <FormattedMessage id="ManglendeOpplysningerForm.Avbryt" />
-              </Flatknapp>
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
+        {!isReadOnly && (
+          <FlexContainer>
+            <FlexRow>
+              <FlexColumn>
+                <Knapp
+                  mini
+                  spinner={formMethods.formState.isSubmitting}
+                  disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+                  htmlType="submit"
+                >
+                  <FormattedMessage id="ManglendeOpplysningerForm.Lagre" />
+                </Knapp>
+              </FlexColumn>
+              <FlexColumn>
+                <Flatknapp
+                  mini
+                  spinner={false}
+                  disabled={formMethods.formState.isSubmitting}
+                  onClick={avbryt}
+                  htmlType="button"
+                >
+                  <FormattedMessage id="ManglendeOpplysningerForm.Avbryt" />
+                </Flatknapp>
+              </FlexColumn>
+            </FlexRow>
+          </FlexContainer>
+        )}
         <VerticalSpacer thirtyTwoPx />
       </Form>
     </>

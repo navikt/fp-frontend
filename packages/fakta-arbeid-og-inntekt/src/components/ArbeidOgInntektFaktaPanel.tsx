@@ -16,6 +16,7 @@ import {
   VerticalSpacer, Image, AksjonspunktHelpTextHTML, FloatRight, Table, OverstyringKnapp,
   FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
+import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import NyttArbeidsforholdForm, { FormValues as NyttArbeidsforholdFormValues } from './NyttArbeidsforholdForm';
 import { FormValuesForManglendeArbeidsforhold } from './ManglendeOpplysningerForm';
 import { FormValuesForManglendeInntektsmelding } from './InntektsmeldingInnhentesForm';
@@ -38,10 +39,10 @@ const finnApTekstKode = (
   if (harIngenArbeidsforholdEllerInntektsmeldinger && erOverstyrer) {
     return 'ArbeidOgInntektFaktaPanel.IngenArbeidsforhold';
   }
-  if (aksjonspunkter.some((ap) => ap.definisjon.kode === '9998')) {
+  if (aksjonspunkter.some((ap) => ap.definisjon.kode === '9998' && ap.status.kode === aksjonspunktStatus.OPPRETTET)) {
     return 'ArbeidOgInntektFaktaPanel.InnhentManglendeInntektsmelding';
   }
-  if (aksjonspunkter.some((ap) => ap.definisjon.kode === '9999')) {
+  if (aksjonspunkter.some((ap) => ap.definisjon.kode === '9999' && ap.status.kode === aksjonspunktStatus.OPPRETTET)) {
     return 'ArbeidOgInntektFaktaPanel.AvklarManglendeOpplysninger';
   }
   return undefined;
@@ -218,7 +219,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
               <FlexColumn>
                 <Undertittel><FormattedMessage id="ArbeidOgInntektFaktaPanel.Overskrift" /></Undertittel>
               </FlexColumn>
-              {erOverstyrer && (
+              {erOverstyrer && !isReadOnly && (
                 <FlexColumn>
                   <OverstyringKnapp onClick={toggleOverstyring} />
                 </FlexColumn>
@@ -298,7 +299,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
         <FormattedMessage id="ArbeidOgInntektFaktaPanel.SettPaVent" />
       </Hovedknapp>
       )}
-      {kanBekrefte && antallÅpnedeRader === 0 && (
+      {!isReadOnly && kanBekrefte && antallÅpnedeRader === 0 && (
         <Hovedknapp
           mini
           autoFocus
