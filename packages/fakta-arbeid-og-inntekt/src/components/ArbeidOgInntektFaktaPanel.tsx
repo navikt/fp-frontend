@@ -50,6 +50,34 @@ const finnApTekstKoder = (
   return koder;
 };
 
+const sorterTabell = (d1: ArbeidsforholdOgInntekt, d2: ArbeidsforholdOgInntekt): number => {
+  const d1HarAp1 = !d1.inntektsmelding || d1.arbeidsforhold?.begrunnelse;
+  const d2HarAp1 = !d2.inntektsmelding || d2.arbeidsforhold?.begrunnelse;
+  if (d1HarAp1 && !d2HarAp1) {
+    return -1;
+  }
+  if (d2HarAp1 && !d1HarAp1) {
+    return 1;
+  }
+  if (d1HarAp1 && d2HarAp1) {
+    return d1.arbeidsforholdNavn.localeCompare(d2.arbeidsforholdNavn);
+  }
+
+  const d1HarAp2 = !d1.arbeidsforhold || d1.inntektsmelding?.begrunnelse;
+  const d2HarAp2 = !d2.arbeidsforhold || d2.inntektsmelding?.begrunnelse;
+  if (d1HarAp2 && !d2HarAp2) {
+    return -1;
+  }
+  if (d2HarAp2 && !d1HarAp2) {
+    return 1;
+  }
+  if (d1HarAp2 && d2HarAp2) {
+    return d1.arbeidsforholdNavn.localeCompare(d2.arbeidsforholdNavn);
+  }
+
+  return d1.arbeidsforholdNavn.localeCompare(d2.arbeidsforholdNavn);
+};
+
 const byggTabellStruktur = (
   arbeidOgInntekt: ArbeidOgInntektsmelding,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
@@ -71,7 +99,7 @@ const byggTabellStruktur = (
       inntektsposter: inntekter.find((inntekt) => inntekt.arbeidsgiverIdent === im.arbeidsgiverIdent)?.inntekter,
     }));
 
-  return alleArbeidsforhold.concat(alleInntektsmeldingerSomManglerArbeidsforhold);
+  return alleArbeidsforhold.concat(alleInntektsmeldingerSomManglerArbeidsforhold).sort(sorterTabell);
 };
 
 interface OwnProps {
@@ -117,7 +145,10 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   const harIngenArbeidsforholdEllerInntektsmeldinger = arbeidsforhold.length === 0 && inntektsmeldinger.length === 0;
   const aksjonspunktTekstKoder = finnApTekstKoder(aksjonspunkter, harIngenArbeidsforholdEllerInntektsmeldinger, erOverstyrer);
 
-  const kanBekrefte = tabellData.length > 0 && tabellData.every((d) => d.arbeidsforhold?.arbeidsgiverIdent === MANUELT_ORG_NR);
+  const harUløsteAksjonspunkt = tabellData
+    .some((d) => (!d.inntektsmelding && !d.arbeidsforhold?.begrunnelse) || (!d.arbeidsforhold && !d.inntektsmelding?.begrunnelse));
+  const kanSettePåVent = tabellData
+    .some((d) => d.arbeidsforhold?.skalInnhenteInntektsmelding === true || d.inntektsmelding?.skalSeBortFraInntektsmelding === false);
 
   const [antallÅpnedeRader, setÅpenRad] = useState(0);
   const oppdaterÅpenRad = (skalLukke: boolean) => {
@@ -212,15 +243,15 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
         </>
       </Table>
       <VerticalSpacer sixteenPx />
-      {false && (
-      <Hovedknapp
-        mini
-        autoFocus
-      >
-        <FormattedMessage id="ArbeidOgInntektFaktaPanel.SettPaVent" />
-      </Hovedknapp>
+      {kanSettePåVent && (
+        <Hovedknapp
+          mini
+          autoFocus
+        >
+          <FormattedMessage id="ArbeidOgInntektFaktaPanel.SettPaVent" />
+        </Hovedknapp>
       )}
-      {!isReadOnly && kanBekrefte && antallÅpnedeRader === 0 && (
+      {!isReadOnly && !harUløsteAksjonspunkt && !kanSettePåVent && antallÅpnedeRader === 0 && (
         <Hovedknapp
           mini
           autoFocus

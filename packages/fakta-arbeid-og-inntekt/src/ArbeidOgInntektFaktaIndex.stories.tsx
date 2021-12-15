@@ -444,6 +444,7 @@ ArbeidsforholdErOK.args = {
 
 export const FlereArbeidsforholdOgInntekstemeldinger = Template.bind({});
 FlereArbeidsforholdOgInntekstemeldinger.args = {
+  erOverstyrer: true,
   aksjonspunkter: [{
     definisjon: {
       kode: '9998',
