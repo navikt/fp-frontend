@@ -102,7 +102,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <VerticalSpacer sixteenPx />
+      <VerticalSpacer eightPx />
       <FlexRow>
         <FlexColumn>
           <Element><FormattedMessage id="InntektsmeldingInnhentesForm.Stillingsprosent" /></Element>
@@ -111,9 +111,9 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
           {`${arbeidsforhold.stillingsprosent}%`}
         </FlexColumn>
       </FlexRow>
+      <VerticalSpacer thirtyTwoPx />
       {inntektsposter.length > 0 && (
         <>
-          <VerticalSpacer sixteenPx />
           <Element><FormattedMessage id="InntektsmeldingInnhentesForm.Inntekter" /></Element>
           {sorterteInntektsposter.filter((_inntekt, index) => (visAlleMåneder ? true : index < 3)).map((inntekt) => (
             <Row key={inntekt.fom}>
@@ -140,12 +140,9 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
         </>
       )}
       {inntektsposter.length === 0 && (
-        <>
-          <VerticalSpacer sixteenPx />
-          <Element>
-            <FormattedMessage id="InntektsmeldingInnhentesForm.IngenInntekt" />
-          </Element>
-        </>
+        <Element>
+          <FormattedMessage id="InntektsmeldingInnhentesForm.IngenInntekt" />
+        </Element>
       )}
       <VerticalSpacer thirtyTwoPx />
       <Form

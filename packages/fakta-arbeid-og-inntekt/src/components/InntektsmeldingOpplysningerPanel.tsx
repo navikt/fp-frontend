@@ -19,7 +19,7 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
   inntektsmelding,
 }) => (
   <>
-    <VerticalSpacer sixteenPx />
+    <VerticalSpacer eightPx />
     <FlexContainer>
       {stillingsprosent && (
         <>

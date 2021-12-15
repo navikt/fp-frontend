@@ -257,7 +257,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
               <FormattedMessage id="ArbeidOgInntektFaktaPanel.LeggTilArbeidsforhold" />
             </span>
           </Lenke>
-          <VerticalSpacer thirtyTwoPx />
+          <VerticalSpacer fourtyPx />
         </>
       )}
       <VerticalSpacer thirtyTwoPx />

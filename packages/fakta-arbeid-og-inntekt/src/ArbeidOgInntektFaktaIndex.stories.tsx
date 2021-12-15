@@ -388,7 +388,7 @@ ArbeidsforholdErOK.args = {
       kontaktpersonNavn: 'Corpolarsen',
       kontaktpersonNummer: '41925090',
       motattDato: '2021-12-06',
-      refusjonPrMnd: null,
+      refusjonPrMnd: 20000,
     }],
     inntekter: [{
       arbeidsgiverIdent: '910909088',
