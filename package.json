@@ -144,9 +144,13 @@
     "webpack-merge": "^5.8.0"
   },
   "resolutions": {
+    "browserslist": "^4.19.1",
+    "glob-parent": "^6.0.2",
+    "immer": "^9.0.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-test-renderer": "^17.0.2"
+    "react-test-renderer": "^17.0.2",
+    "trim": "^1.0.1"
   },
   "version": "0.0.0"
 }
