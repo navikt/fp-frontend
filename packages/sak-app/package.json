@@ -5,8 +5,8 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@formatjs/intl-datetimeformat": "^4.2.5",
-    "@formatjs/intl-numberformat": "^7.2.5",
+    "@formatjs/intl-datetimeformat": "^4.2.6",
+    "@formatjs/intl-numberformat": "^7.2.6",
     "@fpsak-frontend/assets": "1.0.0",
     "@fpsak-frontend/behandling-anke": "1.0.0",
     "@fpsak-frontend/behandling-es": "1.0.0",
@@ -45,7 +45,7 @@
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/types-avklar-aksjonspunkter": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
-    "@sentry/browser": "^6.15.0",
+    "@sentry/browser": "^6.16.1",
     "axios": "0.24.0",
     "history": "^5.1.0",
     "moment": "^2.29.1",
@@ -55,14 +55,14 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-responsive": "^8.2.0",
-    "react-router": "^6.0.2",
-    "react-router-dom": "^6.0.2"
+    "react-router": "^6.1.1",
+    "react-router-dom": "^6.1.1"
   },
   "devDependencies": {
     "@fpsak-frontend/storybook-utils": "^1.0.0",
     "@fpsak-frontend/utils-test": "^1.0.0",
-    "@storybook/addon-actions": "^6.4.0",
-    "@storybook/testing-react": "^1.0.0",
+    "@storybook/addon-actions": "^6.4.9",
+    "@storybook/testing-react": "^1.2.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "axios-mock-adapter": "^1.20.0",
