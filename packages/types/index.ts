@@ -88,8 +88,6 @@ export type {
 } from './src/historikkinnslagTsType';
 export type { default as ArbeidsgiverOpplysningerPerId, ArbeidsgiverOpplysningerWrapper, ArbeidsgiverOpplysninger } from './src/arbeidsgiverOpplysningerTsType';
 export type { default as BeregningsresultatTilbakekreving, BeregningResultatPeriode } from './src/beregningsresultatTilbakekrevingTsType';
-export type { default as FeilutbetalingPerioderWrapper, FeilutbetalingPeriode } from './src/feilutbetalingPerioderTsType';
-export type { default as FeilutbetalingFakta } from './src/feilutbetalingFaktaTsType';
 export type { default as UttakKontrollerAktivitetskrav } from './src/uttakKontrollerAktivitetskravTsType';
 export type { default as Aktor } from './src/aktorTsType';
 export type { Kjønnkode } from './src/Kjonnkode';
@@ -102,11 +100,7 @@ export type { default as StandardFaktaPanelPropsTilbakekreving } from './src/sta
 export type { default as StandardProsessPanelProps } from './src/standardProsessPanelPropsTsType';
 export type { default as StandardProsessPanelPropsTilbakekreving } from './src/standardProsessPanelPropsTilbakekrevingTsType';
 export type { default as Verge } from './src/vergeTsType';
-export type { default as FeilutbetalingAarsak } from './src/feilutbetalingAarsakTsType';
-export type { default as DetaljerteFeilutbetalingsperioder, DetaljertFeilutbetalingPeriode } from './src/detaljerteFeilutbetalingsperioderTsType';
 export type { default as VilkarsVurdertePerioderWrapper, VilkarsVurdertPeriode, AktsomhetInfo } from './src/vilkarsVurdertePerioderTsType';
-export type { default as Vedtaksbrev } from './src/vedtaksbrevTsType';
-export type { default as VedtaksbrevAvsnitt } from './src/vedtaksbrevAvsnittTsType';
 export type {
   default as FodselOgTilrettelegging, ArbeidsforholdFodselOgTilrettelegging, ArbeidsforholdTilretteleggingDato, Permisjon,
 } from './src/fodselOgTilretteleggingTsType';
