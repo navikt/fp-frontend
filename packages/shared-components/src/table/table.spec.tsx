@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from './Table.stories';
 
+// @ts-ignore Fjern når fiksa
 const { TabellMedRadhoover } = composeStories(stories);
 
 describe('<Table>', () => {

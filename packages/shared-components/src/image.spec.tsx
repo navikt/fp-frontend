@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from './Image.stories';
 
+// @ts-ignore Fjern når fiksa
 const { Default, KlikkbartIkon } = composeStories(stories);
 
 describe('<Image>', () => {
