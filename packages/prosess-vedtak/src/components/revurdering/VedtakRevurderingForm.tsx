@@ -29,7 +29,6 @@ import VedtakAvslagArsakOgBegrunnelsePanel from './VedtakAvslagArsakOgBegrunnels
 import VedtakOpphorRevurderingPanel from './VedtakOpphorRevurderingPanel';
 import VedtakFellesPanel from '../felles/VedtakFellesPanel';
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
-import VedtakFritekstbrevModal from '../felles/svp/VedtakFritekstbrevModal';
 
 type RevurderingVedtakAksjonspunkter = ForeslaVedtakAp
   | ForeslaVedtakManueltAp
@@ -305,71 +304,63 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
   const forhåndsvisDefaultBrev = hentForhåndsvisManueltBrevCallback(begrunnelse, brødtekst, overskrift, false, previewCallback);
 
   return (
-    <>
-      {ytelseTypeKode === fagsakYtelseType.SVANGERSKAPSPENGER && (
-        <VedtakFritekstbrevModal
-          readOnly={readOnly}
-          behandlingsresultat={behandlingsresultat}
-        />
-      )}
-      <Form
-        formMethods={formMethods}
-        onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-        setDataOnUnmount={setFormData}
-      >
-        <VedtakFellesPanel
-          behandling={behandling}
-          vedtakstatusTekst={vedtakstatusTekst}
-          aksjonspunkter={aksjonspunkter}
-          readOnly={readOnly}
-          previewAutomatiskBrev={forhåndsvisDefaultBrev}
-          previewOverstyrtBrev={forhåndsvisOverstyrtBrev}
-          tilbakekrevingtekst={tilbakekrevingtekst}
-          erBehandlingEtterKlage={erBehandlingEtterKlage}
-          renderPanel={(skalBrukeOverstyrendeFritekstBrev, erInnvilget, erAvslatt, erOpphor) => {
-            if (erInnvilget) {
-              return (
-                <VedtakInnvilgetRevurderingPanel
-                  ytelseTypeKode={ytelseTypeKode}
-                  revurderingsÅrsakString={revurderingsÅrsakString}
-                  isReadOnly={readOnly}
-                  resultatstruktur={resultatstruktur}
-                  språkKode={sprakkode}
-                  behandlingsresultat={behandlingsresultat}
-                  beregningErManueltFastsatt={beregningErManueltFastsatt}
-                  skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
-                />
-              );
-            }
-
-            if (erAvslatt) {
-              return (
-                <VedtakAvslagArsakOgBegrunnelsePanel
-                  behandlingStatusKode={status.kode}
-                  vilkar={vilkar}
-                  behandlingsresultat={behandlingsresultat}
-                  språkKode={sprakkode}
-                  erReadOnly={readOnly}
-                  alleKodeverk={alleKodeverk}
-                  skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
-                />
-              );
-            }
-
-            return erOpphor ? (
-              <VedtakOpphorRevurderingPanel
+    <Form
+      formMethods={formMethods}
+      onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
+      setDataOnUnmount={setFormData}
+    >
+      <VedtakFellesPanel
+        behandling={behandling}
+        vedtakstatusTekst={vedtakstatusTekst}
+        aksjonspunkter={aksjonspunkter}
+        readOnly={readOnly}
+        previewAutomatiskBrev={forhåndsvisDefaultBrev}
+        previewOverstyrtBrev={forhåndsvisOverstyrtBrev}
+        tilbakekrevingtekst={tilbakekrevingtekst}
+        erBehandlingEtterKlage={erBehandlingEtterKlage}
+        renderPanel={(skalBrukeOverstyrendeFritekstBrev, erInnvilget, erAvslatt, erOpphor) => {
+          if (erInnvilget) {
+            return (
+              <VedtakInnvilgetRevurderingPanel
+                ytelseTypeKode={ytelseTypeKode}
                 revurderingsÅrsakString={revurderingsÅrsakString}
                 isReadOnly={readOnly}
-                behandlingsresultat={behandlingsresultat}
+                resultatstruktur={resultatstruktur}
                 språkKode={sprakkode}
+                behandlingsresultat={behandlingsresultat}
                 beregningErManueltFastsatt={beregningErManueltFastsatt}
                 skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
               />
-            ) : null;
-          }}
-        />
-      </Form>
-    </>
+            );
+          }
+
+          if (erAvslatt) {
+            return (
+              <VedtakAvslagArsakOgBegrunnelsePanel
+                behandlingStatusKode={status.kode}
+                vilkar={vilkar}
+                behandlingsresultat={behandlingsresultat}
+                språkKode={sprakkode}
+                erReadOnly={readOnly}
+                alleKodeverk={alleKodeverk}
+                skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
+              />
+            );
+          }
+
+          return erOpphor ? (
+            <VedtakOpphorRevurderingPanel
+              revurderingsÅrsakString={revurderingsÅrsakString}
+              isReadOnly={readOnly}
+              behandlingsresultat={behandlingsresultat}
+              språkKode={sprakkode}
+              beregningErManueltFastsatt={beregningErManueltFastsatt}
+              skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
+            />
+          ) : null;
+        }}
+      />
+    </Form>
   );
 };
 

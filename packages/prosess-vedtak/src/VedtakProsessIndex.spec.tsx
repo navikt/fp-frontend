@@ -11,7 +11,6 @@ const {
   AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring,
   TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil,
   InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOverstyring,
-  AvslåttSvangerskapspengerOgVisModal,
   InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUtenOverstyring,
   GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring,
 } = composeStories(stories);
@@ -253,28 +252,6 @@ describe('<VedtakProsessIndex>', () => {
       overskrift: undefined,
       skalBrukeOverstyrendeFritekstBrev: false,
     }]);
-  });
-
-  it('skal vise avslåtte svangerskapspenger og vise modal for at det ikke er automatisk vedtaksbrev', async () => {
-    const lagre = jest.fn();
-
-    render(<AvslåttSvangerskapspengerOgVisModal submitCallback={lagre} />);
-
-    expect(await screen.findByText('Vedtak')).toBeInTheDocument();
-    expect(screen.getByText('Svangerskapspenger er avslått')).toBeInTheDocument();
-    expect(screen.getByText('Automatisk vedtaksbrev')).toBeInTheDocument();
-    expect(screen.getByText('Rediger vedtaksbrev')).toBeInTheDocument();
-
-    expect(screen.getByText('Årsak til avslag')).toBeInTheDocument();
-    expect(screen.getByText('Søker har ikke noen gyldig uttaksperiode')).toBeInTheDocument();
-
-    expect(screen.getByText(
-      'I denne behandlingen er det ikke automatisk vedtaksbrev. Du må velge \'Overstyr automatisk brev\' og skrive fritekstbrev.',
-    )).toBeInTheDocument();
-
-    userEvent.click(screen.getByText('Ok'));
-
-    await waitFor(() => expect(screen.queryByText('Ok')).not.toBeInTheDocument());
   });
 
   it('skal vise revurdering av foreldrepenger', async () => {
