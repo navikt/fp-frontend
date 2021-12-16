@@ -28,9 +28,6 @@ import KontrollerRevurderingsBehandlingAp from './prosess/KontrollerRevurderings
 import KontrollAvManueltOpprettetRevurderingsbehandlingAp from './prosess/KontrollAvManueltOpprettetRevurderingsbehandlingAp';
 import VarselRevurderingAp from './prosess/VarselRevurderingAp';
 import UttakAp from './prosess/UttakAp';
-import ForeslaVedtakTilbakekrevingAp from './prosess/tilbakekreving/ForeslaVedtakTilbakekrevingAp';
-import VilkarsVurderingAp from './prosess/tilbakekreving/VilkarsVurderingAp';
-import VurderForeldelseAp from './prosess/tilbakekreving/VurderForeldelseAp';
 
 export type ProsessAksjonspunkt = AnkeVurderingResultatAp
   | BekreftSvangerskapspengervilkarAp
@@ -46,9 +43,6 @@ export type ProsessAksjonspunkt = AnkeVurderingResultatAp
   | ForeslaVedtakAp
   | BekreftVedtakUtenTotrinnskontrollAp
   | ForeslaVedtakManueltAp
-  | ForeslaVedtakTilbakekrevingAp
-  | VilkarsVurderingAp
-  | VurderForeldelseAp
   | VurderInnsynAp
   | AnkeMerknaderResultatAp
   | OverstyringBeregningAp

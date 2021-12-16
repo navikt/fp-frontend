@@ -17,7 +17,6 @@ export { default as AvklarFortsattMedlemskapAp } from './src/fakta/AvklarFortsat
 export { default as BekreftTerminbekreftelseAp } from './src/fakta/BekreftTerminbekreftelseAp';
 export { default as SjekkManglendeFodselAp } from './src/fakta/SjekkManglendeFodselAp';
 export { default as AvklarArbeidsforholdAp } from './src/fakta/AvklarArbeidsforholdAp';
-export { default as AvklartFaktaFeilutbetalingAp } from './src/fakta/tilbakekreving/AvklartFaktaFeilutbetalingAp';
 export { default as AvklarAnnenforelderHarRettAp } from './src/fakta/AvklarAnnenforelderHarRettAp';
 export { default as FaktaUttakAp } from './src/fakta/FaktaUttakAp';
 export { default as OverstyringAvklarStartdatoForPeriodenAp } from './src/fakta/OverstyringAvklarStartdatoForPeriodenAp';
@@ -44,9 +43,6 @@ export { default as AnkeMerknaderResultatAp } from './src/prosess/AnkeMerknaderR
 export { default as OverstyringBeregningAp } from './src/prosess/OverstyringBeregningAp';
 export { default as VurderFeilutbetalingAp } from './src/prosess/VurderFeilutbetalingAp';
 export { default as KlageFormkravAp } from './src/prosess/KlageFormkravAp';
-export { default as ForeslaVedtakTilbakekrevingAp } from './src/prosess/tilbakekreving/ForeslaVedtakTilbakekrevingAp';
-export { default as VilkarsVurderingAp } from './src/prosess/tilbakekreving/VilkarsVurderingAp';
-export { default as VurderForeldelseAp } from './src/prosess/tilbakekreving/VurderForeldelseAp';
 export { default as VurderInnsynAp } from './src/prosess/VurderInnsynAp';
 export { default as KlageVurderingResultatAp } from './src/prosess/KlageVurderingResultatAp';
 export { default as VurderSoknadsfristAp } from './src/prosess/VurderSoknadsfristAp';
