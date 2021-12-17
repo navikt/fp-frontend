@@ -13,6 +13,7 @@ import { SelectField, TextAreaField, Form } from '@fpsak-frontend/form-hooks';
 import { hasValidText, maxLength, required } from '@fpsak-frontend/utils';
 import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
 import styles from './henleggBehandlingModal.less';
 
@@ -30,7 +31,7 @@ const previewHenleggBehandlingDoc = (
   const data = {
     behandlingUuid,
     ytelseType,
-    dokumentMal: 'HENLEG',
+    dokumentMal: dokumentMalType.IOHENL,
     fritekst,
     mottaker: 'Søker',
   };

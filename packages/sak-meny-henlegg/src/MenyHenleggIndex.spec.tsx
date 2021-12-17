@@ -3,6 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import Modal from 'nav-frontend-modal';
+import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import * as stories from './MenyHenleggIndex.stories';
 
 const {
@@ -137,7 +138,7 @@ describe('<MenyHenleggIndex>', () => {
     await waitFor(() => expect(forhandsvisHenleggBehandling).toHaveBeenCalledTimes(1));
     expect(forhandsvisHenleggBehandling).toHaveBeenNthCalledWith(1, true, {
       behandlingUuid: '23r2323',
-      dokumentMal: 'HENLEG',
+      dokumentMal: dokumentMalType.IOHENL,
       fritekst: undefined,
       mottaker: 'Søker',
       ytelseType: {

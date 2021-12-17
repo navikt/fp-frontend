@@ -16,6 +16,7 @@ import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   BekreftVedtakUtenTotrinnskontrollAp, ForeslaVedtakAp, ForeslaVedtakManueltAp, VurdereAnnenYtelseForVedtakAp, VurdereDokumentForVedtakAp,
 } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
 import VedtakInnvilgetPanel from './VedtakInnvilgetPanel';
@@ -88,7 +89,7 @@ const hentForhåndsvisManueltBrevCallback = (
   if (!skalOverstyre || erFeltUtfylt) {
     const data = {
       fritekst: skalOverstyre ? brodtekst : begrunnelse,
-      dokumentMal: skalOverstyre ? 'FRITKS' : undefined,
+      dokumentMal: skalOverstyre ? dokumentMalType.FRITKS : undefined,
       tittel: skalOverstyre ? overskrift : undefined,
       gjelderVedtak: true,
       vedtaksbrev: !skalOverstyre ? {

@@ -16,6 +16,7 @@ import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus'
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import klageVurdering from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
 import { KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';
 import VurderingFellesProsessStegInitPanel from './VurderingFellesProsessStegInitPanel';
@@ -168,7 +169,7 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
     expect(axiosMock.history.post
       .find((a) => a.url === '/fpformidling/api/brev/forhaandsvis')?.data).toBe(JSON.stringify({
       fritekst: 'Dette er en fritekst',
-      dokumentMal: 'KOVKLA',
+      dokumentMal: dokumentMalType.KLAGE_OVERSENDT_KLAGEINSTANS,
       erOpphevetKlage: false,
       behandlingUuid: 'test-uuid',
       ytelseType: {
