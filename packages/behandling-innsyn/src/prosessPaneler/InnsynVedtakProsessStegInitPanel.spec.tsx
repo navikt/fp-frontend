@@ -12,6 +12,7 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
 import { requestInnsynApi, InnsynBehandlingApiKeys } from '../data/innsynBehandlingApi';
 import InnsynVedtakProsessStegInitPanel from './InnsynVedtakProsessStegInitPanel';
@@ -140,7 +141,7 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
       .find((a) => a.url === '/fpformidling/api/brev/forhaandsvis')?.data).toBe(JSON.stringify({
       fritekst: ' ',
       mottaker: '',
-      dokumentMal: 'INSSKR',
+      dokumentMal: dokumentMalType.INNSYN,
       gjelderVedtak: true,
       behandlingUuid: 'test-uuid',
       ytelseType: {

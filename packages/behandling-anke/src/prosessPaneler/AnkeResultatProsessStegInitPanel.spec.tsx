@@ -17,6 +17,7 @@ import {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
 import { AnkeBehandlingApiKeys, requestAnkeApi } from '../data/ankeBehandlingApi';
 import AnkeResultatProsessStegInitPanel from './AnkeResultatProsessStegInitPanel';
@@ -159,7 +160,7 @@ describe('<AnkeResultatProsessStegInitPanel>', () => {
       .find((a) => a.url === '/fpformidling/api/brev/forhaandsvis')?.data).toBe(JSON.stringify({
       fritekst: '',
       mottaker: '',
-      dokumentMal: 'ANKEBO',
+      dokumentMal: dokumentMalType.ANKE_BESLUTNING_OM_OPPHEVING,
       behandlingUuid: 'test-uuid',
       ytelseType: {
         kode: fagsakYtelseType.FORELDREPENGER,

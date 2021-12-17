@@ -12,6 +12,7 @@ import * as Felles from '@fpsak-frontend/behandling-felles/src/utils/prosess/use
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
 import { AnkeBehandlingApiKeys, requestAnkeApi } from '../data/ankeBehandlingApi';
 import AnkeBehandlingProsessStegInitPanel from './AnkeBehandlingProsessStegInitPanel';
@@ -117,7 +118,7 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
       .find((a) => a.url === '/fpformidling/api/brev/forhaandsvis')?.data).toBe(JSON.stringify({
       fritekst: 'Dette er en fritekst',
       mottaker: '',
-      dokumentMal: 'VEDOGA',
+      dokumentMal: dokumentMalType.ANKE_VEDTAK_OMGJORING,
       behandlingUuid: 'test-uuid',
       ytelseType: {
         kode: fagsakYtelseType.FORELDREPENGER,

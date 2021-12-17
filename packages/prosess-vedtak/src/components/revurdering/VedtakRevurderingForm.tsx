@@ -21,6 +21,7 @@ import {
 } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
 import VedtakResultType from '../../kodeverk/vedtakResultType';
 import VedtakInnvilgetRevurderingPanel from './VedtakInnvilgetRevurderingPanel';
@@ -60,7 +61,7 @@ const hentForhåndsvisManueltBrevCallback = (
   if (!skalOverstyre || erFeltUtfylt) {
     const data = {
       fritekst: skalOverstyre ? brodtekst : begrunnelse,
-      dokumentMal: skalOverstyre ? 'FRITKS' : undefined,
+      dokumentMal: skalOverstyre ? dokumentMalType.FRITKS : undefined,
       tittel: skalOverstyre ? overskrift : undefined,
       gjelderVedtak: true,
       vedtaksbrev: !skalOverstyre ? {

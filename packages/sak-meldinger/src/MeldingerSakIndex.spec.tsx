@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
+import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import * as stories from './MeldingerSakIndex.stories';
 
 const { Default, ForSvangerskapspenger } = composeStories(stories);
@@ -19,7 +20,7 @@ describe('<MeldingerSakIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      brevmalkode: 'INNHEN',
+      brevmalkode: dokumentMalType.INNHENT_DOK,
       fritekst: 'Dette er en begrunnelse',
       mottaker: 'Søker',
     });
@@ -41,7 +42,7 @@ describe('<MeldingerSakIndex>', () => {
     const utils = render(<Default lagre={lagre} />);
     expect(await screen.findByText('Mottaker')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Mal'), 'REVURD');
+    userEvent.selectOptions(utils.getByLabelText('Mal'), dokumentMalType.REVURDERING_DOK);
     userEvent.selectOptions(utils.getByLabelText('Årsak'), 'BARNIKKEREG');
 
     userEvent.click(screen.getByText('Send brev'));
@@ -49,7 +50,7 @@ describe('<MeldingerSakIndex>', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       arsakskode: 'BARNIKKEREG',
-      brevmalkode: 'REVURD',
+      brevmalkode: dokumentMalType.REVURDERING_DOK,
       fritekst: ' ',
       mottaker: 'Søker',
     });
@@ -60,7 +61,7 @@ describe('<MeldingerSakIndex>', () => {
     const utils = render(<Default lagre={lagre} />);
     expect(await screen.findByText('Mottaker')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Mal'), 'REVURD');
+    userEvent.selectOptions(utils.getByLabelText('Mal'), dokumentMalType.REVURDERING_DOK);
     userEvent.selectOptions(utils.getByLabelText('Årsak'), 'ANNET');
 
     const begrunnelseInput = utils.getByLabelText('Fritekst');
@@ -71,7 +72,7 @@ describe('<MeldingerSakIndex>', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       arsakskode: 'ANNET',
-      brevmalkode: 'REVURD',
+      brevmalkode: dokumentMalType.REVURDERING_DOK,
       fritekst: 'Dette er en begrunnelse',
       mottaker: 'Søker',
     });
@@ -82,7 +83,7 @@ describe('<MeldingerSakIndex>', () => {
     const utils = render(<ForSvangerskapspenger lagre={lagre} />);
     expect(await screen.findByText('Mottaker')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Mal'), 'REVURD');
+    userEvent.selectOptions(utils.getByLabelText('Mal'), dokumentMalType.REVURDERING_DOK);
 
     expect(await screen.findByText('Annet')).toBeInTheDocument();
     expect(screen.queryByText('Barn ikke registrert i folkeregisteret')).not.toBeInTheDocument();

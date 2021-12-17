@@ -10,6 +10,7 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import MeldingIndex from './MeldingIndex';
@@ -46,7 +47,7 @@ describe('<MeldingIndex>', () => {
     { kode: 'Mal1', navn: 'Mal 1', tilgjengelig: true },
     { kode: 'Mal2', navn: 'Mal 2', tilgjengelig: true },
     { kode: 'Mal3', navn: 'Mal 3', tilgjengelig: true },
-    { kode: 'INNHEN', navn: 'Innhent', tilgjengelig: true },
+    { kode: dokumentMalType.INNHENT_DOK, navn: 'Innhent', tilgjengelig: true },
   ];
 
   const assignMock = jest.fn();
@@ -206,7 +207,7 @@ describe('<MeldingIndex>', () => {
     expect(await screen.findByText('Send brev')).toBeInTheDocument();
 
     userEvent.selectOptions(utils.getByLabelText('Mottaker'), 'Søker');
-    userEvent.selectOptions(utils.getByLabelText('Mal'), 'INNHEN');
+    userEvent.selectOptions(utils.getByLabelText('Mal'), dokumentMalType.INNHENT_DOK);
 
     const begrunnelseInput = utils.getByLabelText('Liste over dokumenter (skriv ett dokument pr. linje)');
     userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
@@ -223,7 +224,7 @@ describe('<MeldingIndex>', () => {
       .find((a) => a.url === FpsakApiKeys.SUBMIT_MESSAGE.name).params).toStrictEqual({
       behandlingUuid: '1',
       arsakskode: undefined,
-      brevmalkode: 'INNHEN',
+      brevmalkode: dokumentMalType.INNHENT_DOK,
       fritekst: 'Dette er en begrunnelse',
       mottaker: 'Søker',
     }));
