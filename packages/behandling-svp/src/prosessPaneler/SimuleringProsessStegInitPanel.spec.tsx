@@ -20,6 +20,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
 import { requestSvpApi, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
 import SimuleringProsessStegInitPanel from './SimuleringProsessStegInitPanel';
@@ -227,7 +228,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
       saksnummer: '123',
       varseltekst: ' ',
       mottaker: '',
-      brevmalkode: 'TBKVAR',
+      brevmalkode: dokumentMalType.TBKVAR,
     }));
   });
 });

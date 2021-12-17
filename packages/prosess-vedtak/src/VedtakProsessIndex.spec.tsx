@@ -3,6 +3,7 @@ import Modal from 'nav-frontend-modal';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
+import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import * as stories from './VedtakProsessIndex.stories';
 
 const {
@@ -81,7 +82,7 @@ describe('<VedtakProsessIndex>', () => {
 
     await waitFor(() => expect(forhåndsvis).toHaveBeenCalledTimes(1));
     expect(forhåndsvis).toHaveBeenNthCalledWith(1, {
-      dokumentMal: 'FRITEK',
+      dokumentMal: dokumentMalType.FRITKS,
       fritekst: 'Dette er innhold',
       gjelderVedtak: true,
       tittel: 'Dette er en overskrift',

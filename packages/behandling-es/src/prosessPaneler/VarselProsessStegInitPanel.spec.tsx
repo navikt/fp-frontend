@@ -15,6 +15,7 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
 import { EsBehandlingApiKeys, requestEsApi } from '../data/esBehandlingApi';
 import VarselProsessStegInitPanel from './VarselProsessStegInitPanel';
@@ -169,7 +170,7 @@ describe('<VarselProsessStegInitPanel>', () => {
     expect(axiosMock.history.post
       .find((a) => a.url === '/fpformidling/api/brev/forhaandsvis')?.data).toBe(JSON.stringify({
       mottaker: '',
-      dokumentMal: 'VARREV',
+      dokumentMal: dokumentMalType.REVURDERING_DOK,
       fritekst: 'Dette er en fritekst',
       behandlingUuid: 'test-uuid',
       ytelseType: {
