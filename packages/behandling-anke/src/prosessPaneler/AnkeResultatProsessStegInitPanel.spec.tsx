@@ -159,7 +159,7 @@ describe('<AnkeResultatProsessStegInitPanel>', () => {
       .find((a) => a.url === '/fpformidling/api/brev/forhaandsvis')?.data).toBe(JSON.stringify({
       fritekst: '',
       mottaker: '',
-      dokumentMal: 'ANKEBO',
+      dokumentMal: 'ANKOPP',
       behandlingUuid: 'test-uuid',
       ytelseType: {
         kode: fagsakYtelseType.FORELDREPENGER,

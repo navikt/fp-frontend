@@ -137,7 +137,7 @@ describe('<MenyHenleggIndex>', () => {
     await waitFor(() => expect(forhandsvisHenleggBehandling).toHaveBeenCalledTimes(1));
     expect(forhandsvisHenleggBehandling).toHaveBeenNthCalledWith(1, true, {
       behandlingUuid: '23r2323',
-      dokumentMal: 'HENLEG',
+      dokumentMal: 'IOHENL',
       fritekst: undefined,
       mottaker: 'Søker',
       ytelseType: {

@@ -140,7 +140,7 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
       .find((a) => a.url === '/fpformidling/api/brev/forhaandsvis')?.data).toBe(JSON.stringify({
       fritekst: ' ',
       mottaker: '',
-      dokumentMal: 'INSSKR',
+      dokumentMal: 'INNSYN',
       gjelderVedtak: true,
       behandlingUuid: 'test-uuid',
       ytelseType: {

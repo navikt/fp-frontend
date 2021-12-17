@@ -168,7 +168,7 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
     expect(axiosMock.history.post
       .find((a) => a.url === '/fpformidling/api/brev/forhaandsvis')?.data).toBe(JSON.stringify({
       fritekst: 'Dette er en fritekst',
-      dokumentMal: 'KOVKLA',
+      dokumentMal: 'KGEOVE',
       erOpphevetKlage: false,
       behandlingUuid: 'test-uuid',
       ytelseType: {

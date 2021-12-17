@@ -81,7 +81,7 @@ describe('<VedtakProsessIndex>', () => {
 
     await waitFor(() => expect(forhåndsvis).toHaveBeenCalledTimes(1));
     expect(forhåndsvis).toHaveBeenNthCalledWith(1, {
-      dokumentMal: 'FRITKS',
+      dokumentMal: 'FRITEK',
       fritekst: 'Dette er innhold',
       gjelderVedtak: true,
       tittel: 'Dette er en overskrift',

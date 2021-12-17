@@ -169,7 +169,7 @@ describe('<VarselProsessStegInitPanel>', () => {
     expect(axiosMock.history.post
       .find((a) => a.url === '/fpformidling/api/brev/forhaandsvis')?.data).toBe(JSON.stringify({
       mottaker: '',
-      dokumentMal: 'REVURD',
+      dokumentMal: 'VARREV',
       fritekst: 'Dette er en fritekst',
       behandlingUuid: 'test-uuid',
       ytelseType: {

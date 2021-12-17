@@ -117,7 +117,7 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
       .find((a) => a.url === '/fpformidling/api/brev/forhaandsvis')?.data).toBe(JSON.stringify({
       fritekst: 'Dette er en fritekst',
       mottaker: '',
-      dokumentMal: 'VEDOGA',
+      dokumentMal: 'ANKOMG',
       behandlingUuid: 'test-uuid',
       ytelseType: {
         kode: fagsakYtelseType.FORELDREPENGER,

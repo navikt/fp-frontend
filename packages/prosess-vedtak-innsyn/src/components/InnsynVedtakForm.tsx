@@ -19,6 +19,7 @@ import {
   Aksjonspunkt, Dokument, InnsynDokument, Kodeverk,
 } from '@fpsak-frontend/types';
 import { ForeslaVedtakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
 import DocumentListVedtakInnsyn from './DocumentListVedtakInnsyn';
 
@@ -43,7 +44,7 @@ const getPreviewCallback = (
     const data = {
       fritekst: begrunnelse || ' ',
       mottaker: '',
-      dokumentMal: 'INSSKR',
+      dokumentMal: dokumentMalType.INNSYN,
       gjelderVedtak: true,
     };
     previewCallback(data);

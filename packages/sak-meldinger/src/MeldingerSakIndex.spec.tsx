@@ -41,7 +41,7 @@ describe('<MeldingerSakIndex>', () => {
     const utils = render(<Default lagre={lagre} />);
     expect(await screen.findByText('Mottaker')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Mal'), 'REVURD');
+    userEvent.selectOptions(utils.getByLabelText('Mal'), 'VARREV');
     userEvent.selectOptions(utils.getByLabelText('Årsak'), 'BARNIKKEREG');
 
     userEvent.click(screen.getByText('Send brev'));
@@ -49,7 +49,7 @@ describe('<MeldingerSakIndex>', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       arsakskode: 'BARNIKKEREG',
-      brevmalkode: 'REVURD',
+      brevmalkode: 'VARREV',
       fritekst: ' ',
       mottaker: 'Søker',
     });
@@ -60,7 +60,7 @@ describe('<MeldingerSakIndex>', () => {
     const utils = render(<Default lagre={lagre} />);
     expect(await screen.findByText('Mottaker')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Mal'), 'REVURD');
+    userEvent.selectOptions(utils.getByLabelText('Mal'), 'VARREV');
     userEvent.selectOptions(utils.getByLabelText('Årsak'), 'ANNET');
 
     const begrunnelseInput = utils.getByLabelText('Fritekst');
@@ -71,7 +71,7 @@ describe('<MeldingerSakIndex>', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       arsakskode: 'ANNET',
-      brevmalkode: 'REVURD',
+      brevmalkode: 'VARREV',
       fritekst: 'Dette er en begrunnelse',
       mottaker: 'Søker',
     });
@@ -82,7 +82,7 @@ describe('<MeldingerSakIndex>', () => {
     const utils = render(<ForSvangerskapspenger lagre={lagre} />);
     expect(await screen.findByText('Mottaker')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Mal'), 'REVURD');
+    userEvent.selectOptions(utils.getByLabelText('Mal'), 'VARREV');
 
     expect(await screen.findByText('Annet')).toBeInTheDocument();
     expect(screen.queryByText('Barn ikke registrert i folkeregisteret')).not.toBeInTheDocument();
