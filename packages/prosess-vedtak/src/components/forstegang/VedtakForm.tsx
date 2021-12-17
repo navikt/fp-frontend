@@ -22,7 +22,6 @@ import { getTilbakekrevingText } from '../felles/VedtakHelper';
 import VedtakInnvilgetPanel from './VedtakInnvilgetPanel';
 import VedtakAvslagPanel from './VedtakAvslagPanel';
 import VedtakFellesPanel from '../felles/VedtakFellesPanel';
-import VedtakFritekstbrevModal from '../felles/svp/VedtakFritekstbrevModal';
 
 export const finnAvslagResultatText = (behandlingResultatTypeKode: string, ytelseType: string): string => {
   if (behandlingResultatTypeKode === behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET) {
@@ -230,59 +229,51 @@ const VedtakForm: FunctionComponent<OwnProps> = ({
   const forhåndsvisDefaultBrev = hentForhåndsvisManueltBrevCallback(begrunnelse, brødtekst, overskrift, false, previewCallback, trigger);
 
   return (
-    <>
-      {ytelseTypeKode === fagsakYtelseType.SVANGERSKAPSPENGER && (
-        <VedtakFritekstbrevModal
-          readOnly={readOnly}
-          behandlingsresultat={behandlingsresultat}
-        />
-      )}
-      <Form
-        formMethods={formMethods}
-        onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
-        setDataOnUnmount={setFormData}
-      >
-        <VedtakFellesPanel
-          behandling={behandling}
-          vedtakstatusTekst={vedtakstatusTekst}
-          aksjonspunkter={aksjonspunkter}
-          readOnly={readOnly}
-          previewAutomatiskBrev={forhåndsvisDefaultBrev}
-          previewOverstyrtBrev={forhåndsvisOverstyrtBrev}
-          tilbakekrevingtekst={tilbakekrevingtekst}
-          erBehandlingEtterKlage={erBehandlingEtterKlage}
-          renderPanel={(skalBrukeOverstyrendeFritekstBrev, erInnvilget, erAvslatt) => {
-            if (erInnvilget) {
-              return (
-                <VedtakInnvilgetPanel
-                  behandlingsresultat={behandlingsresultat}
-                  isReadOnly={readOnly}
-                  skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
-                  ytelseTypeKode={ytelseTypeKode}
-                  språkKode={sprakkode}
-                  resultatstruktur={resultatstruktur}
-                  beregningErManueltFastsatt={beregningErManueltFastsatt}
-                />
-              );
-            }
-
-            return erAvslatt ? (
-              <VedtakAvslagPanel
-                behandlingStatusKode={status.kode}
+    <Form
+      formMethods={formMethods}
+      onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
+      setDataOnUnmount={setFormData}
+    >
+      <VedtakFellesPanel
+        behandling={behandling}
+        vedtakstatusTekst={vedtakstatusTekst}
+        aksjonspunkter={aksjonspunkter}
+        readOnly={readOnly}
+        previewAutomatiskBrev={forhåndsvisDefaultBrev}
+        previewOverstyrtBrev={forhåndsvisOverstyrtBrev}
+        tilbakekrevingtekst={tilbakekrevingtekst}
+        erBehandlingEtterKlage={erBehandlingEtterKlage}
+        renderPanel={(skalBrukeOverstyrendeFritekstBrev, erInnvilget, erAvslatt) => {
+          if (erInnvilget) {
+            return (
+              <VedtakInnvilgetPanel
                 behandlingsresultat={behandlingsresultat}
                 isReadOnly={readOnly}
+                skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
                 ytelseTypeKode={ytelseTypeKode}
                 språkKode={sprakkode}
-                alleKodeverk={alleKodeverk}
-                vilkar={vilkar}
+                resultatstruktur={resultatstruktur}
                 beregningErManueltFastsatt={beregningErManueltFastsatt}
-                skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
               />
-            ) : null;
-          }}
-        />
-      </Form>
-    </>
+            );
+          }
+
+          return erAvslatt ? (
+            <VedtakAvslagPanel
+              behandlingStatusKode={status.kode}
+              behandlingsresultat={behandlingsresultat}
+              isReadOnly={readOnly}
+              ytelseTypeKode={ytelseTypeKode}
+              språkKode={sprakkode}
+              alleKodeverk={alleKodeverk}
+              vilkar={vilkar}
+              beregningErManueltFastsatt={beregningErManueltFastsatt}
+              skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
+            />
+          ) : null;
+        }}
+      />
+    </Form>
   );
 };
 
