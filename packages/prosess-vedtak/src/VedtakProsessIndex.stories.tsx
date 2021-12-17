@@ -421,23 +421,6 @@ InnvilgetSvangerskapspengerTilGodkjenningForSaksbehandlerMedOverstyring.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
-export const AvslåttSvangerskapspengerOgVisModal = Template.bind({});
-AvslåttSvangerskapspengerOgVisModal.args = {
-  behandling: {
-    ...defaultBehandling,
-    behandlingsresultat: {
-      type: {
-        kode: behandlingResultatType.AVSLATT,
-        kodeverk: '',
-      },
-    },
-  } as Behandling,
-  beregningresultatForeldrepenger: defaultBeregningresultatForeldrepenger,
-  ytelseTypeKode: fagsakYtelseType.SVANGERSKAPSPENGER,
-  isReadOnly: false,
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-};
-
 /*
  * Revurdering - Foreldrepenger
  */
