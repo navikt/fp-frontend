@@ -4,7 +4,7 @@ import { FormattedMessage, IntlShape } from 'react-intl';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { Column, Row } from 'nav-frontend-grid';
-import { FieldArray, InjectedFormProps, reduxForm } from 'redux-form';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import { AksjonspunktHelpTextTemp, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
@@ -15,12 +15,8 @@ import { DatepickerField, TextAreaField } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse, Kodeverk, Soknad,
-} from '@fpsak-frontend/types';
+import { Aksjonspunkt, Kodeverk, Soknad } from '@fpsak-frontend/types';
 import { OverstyringAvklarStartdatoForPeriodenAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-
-import ArbeidsgiverInfo from './ArbeidsgiverInfo';
 
 import styles from './startdatoForForeldrepengerperiodenForm.less';
 
@@ -28,7 +24,6 @@ const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
 type FormValues = {
-  arbeidsgivere?: InntektArbeidYtelse['inntektsmeldinger'];
   startdatoFraSoknad?: string;
   opprinneligDato?: string;
   begrunnelse?: string;
@@ -39,14 +34,12 @@ interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];
   aksjonspunkt: Aksjonspunkt;
   soknad: Soknad;
-  inntektArbeidYtelse: InntektArbeidYtelse;
   submitCallback: (data: OverstyringAvklarStartdatoForPeriodenAp) => Promise<void>;
   readOnlyForStartdatoForForeldrepenger: boolean;
   behandlingStatus: Kodeverk;
   hasOpenMedlemskapAksjonspunkter: boolean;
   submittable: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 interface MappedOwnProps {
@@ -71,7 +64,6 @@ export const StartdatoForForeldrepengerperiodenForm: FunctionComponent<PureOwnPr
   submittable,
   overstyringDisabled,
   alleMerknaderFraBeslutter,
-  arbeidsgiverOpplysningerPerId,
   ...formProps
 }) => (
   <div className={hasOpenAksjonspunkt || !hasOpenMedlemskapAksjonspunkter ? undefined : styles.inactiveAksjonspunkt}>
@@ -105,13 +97,6 @@ export const StartdatoForForeldrepengerperiodenForm: FunctionComponent<PureOwnPr
               readOnly={overstyringDisabled}
             />
           </Column>
-          <Column xs="6">
-            <FieldArray
-              component={ArbeidsgiverInfo}
-              name="arbeidsgivere"
-              arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-            />
-          </Column>
         </Row>
       </FaktaGruppe>
       <VerticalSpacer twentyPx />
@@ -128,14 +113,12 @@ export const StartdatoForForeldrepengerperiodenForm: FunctionComponent<PureOwnPr
 
 const buildInitialValues = createSelector(
   [(ownProps: PureOwnProps) => ownProps.aksjonspunkter,
-    (ownProps: PureOwnProps) => ownProps.soknad.oppgittFordeling,
-    (ownProps: PureOwnProps) => ownProps.inntektArbeidYtelse],
-  (aksjonspunkter, oppgittFordeling = {}, inntektArbeidYtelse = {} as InntektArbeidYtelse): FormValues => {
+    (ownProps: PureOwnProps) => ownProps.soknad.oppgittFordeling],
+  (aksjonspunkter, oppgittFordeling = {}): FormValues => {
     const overstyringAp = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO);
     return {
       opprinneligDato: oppgittFordeling.startDatoForPermisjon,
       startdatoFraSoknad: oppgittFordeling.startDatoForPermisjon,
-      arbeidsgivere: inntektArbeidYtelse.inntektsmeldinger,
       begrunnelse: (overstyringAp && overstyringAp.begrunnelse) || '',
     };
   },

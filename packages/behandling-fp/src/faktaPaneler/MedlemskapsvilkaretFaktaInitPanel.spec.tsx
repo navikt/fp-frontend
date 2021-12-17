@@ -16,7 +16,6 @@ describe('<MedlemskapsvilkaretFaktaInitPanel>', () => {
     const wrapper = shallow(<MedlemskapsvilkaretFaktaInitPanel
       valgtFaktaSteg="default"
       registrerFaktaPanel={() => {}}
-      arbeidsgiverOpplysningerPerId={{}}
       rettigheter={{
         writeAccess: {
           isEnabled: true,

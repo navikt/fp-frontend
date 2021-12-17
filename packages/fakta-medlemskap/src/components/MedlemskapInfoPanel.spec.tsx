@@ -4,10 +4,7 @@ import sinon from 'sinon';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import {
-  AlleKodeverk,
-  InntektArbeidYtelse, Medlemskap, Soknad,
-} from '@fpsak-frontend/types';
+import { AlleKodeverk, Medlemskap, Soknad } from '@fpsak-frontend/types';
 import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import MedlemskapInfoPanel from './MedlemskapInfoPanel';
@@ -18,14 +15,6 @@ import messages from '../../i18n/nb_NO.json';
 const intlMock = getIntlMock(messages);
 
 describe('<MedlemskapInfoPanel>', () => {
-  const arbeidsgiverOpplysningerPerId = {
-    973861778: {
-      erPrivatPerson: false,
-      identifikator: '973861778',
-      navn: 'MYGG ROBUST',
-    },
-  };
-
   it('skal vise form for startdato for foreldrepengerperioden når en har overstyr-aksjonspunktet for dette', () => {
     const avklarStartdatoAksjonspunkt = {
       id: 1,
@@ -60,11 +49,9 @@ describe('<MedlemskapInfoPanel>', () => {
         kodeverk: '',
       }}
       soknad={{} as Soknad}
-      inntektArbeidYtelse={{} as InntektArbeidYtelse}
       alleKodeverk={{} as AlleKodeverk}
       medlemskap={{} as Medlemskap}
       readOnlyForStartdatoForForeldrepenger={false}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
 
     expect(wrapper.find(StartdatoForForeldrepengerperiodenForm)).toHaveLength(1);
@@ -105,11 +92,9 @@ describe('<MedlemskapInfoPanel>', () => {
         kodeverk: '',
       }}
       soknad={{} as Soknad}
-      inntektArbeidYtelse={{} as InntektArbeidYtelse}
       alleKodeverk={{} as AlleKodeverk}
       medlemskap={{} as Medlemskap}
       readOnlyForStartdatoForForeldrepenger={false}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
 
     expect(wrapper.find(StartdatoForForeldrepengerperiodenForm)).toHaveLength(1);
@@ -134,11 +119,9 @@ describe('<MedlemskapInfoPanel>', () => {
         kodeverk: '',
       }}
       soknad={{} as Soknad}
-      inntektArbeidYtelse={{} as InntektArbeidYtelse}
       alleKodeverk={{} as AlleKodeverk}
       medlemskap={{} as Medlemskap}
       readOnlyForStartdatoForForeldrepenger={false}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
 
     expect(wrapper.find(StartdatoForForeldrepengerperiodenForm)).toHaveLength(1);
