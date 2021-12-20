@@ -1,15 +1,16 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import moment from 'moment';
 import {
-  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+  FormattedMessage, useIntl, IntlShape,
 } from 'react-intl';
-import { InjectedFormProps } from 'redux-form';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { ProsessStegBegrunnelseTextField, ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
-import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form';
+import {
+  ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew,
+} from '@fpsak-frontend/prosess-felles';
+import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form-hooks';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { DATE_TIME_FORMAT, required, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -43,11 +44,12 @@ const getLovHjemmeler = (aksjonspunktCode: string): string => (aksjonspunktCode 
 
 interface OwnProps {
   avsluttedeBehandlinger: AvsluttetBehandling[];
-  formProps: InjectedFormProps;
   aksjonspunktCode: string;
   readOnly?: boolean;
   readOnlySubmitButton?: boolean;
   alleKodeverk: AlleKodeverk;
+  isSubmitting: boolean;
+  isDirty: boolean;
 }
 
 /**
@@ -55,15 +57,16 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for formkrav klage (NFP og KA).
  */
-export const FormkravKlageForm: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+export const FormkravKlageForm: FunctionComponent<OwnProps> = ({
   readOnly,
   readOnlySubmitButton,
   aksjonspunktCode,
   avsluttedeBehandlinger,
-  intl,
-  formProps,
   alleKodeverk,
+  isSubmitting,
+  isDirty,
 }) => {
+  const intl = useIntl();
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
   const klageBareVedtakOptions = getKlagBareVedtak(avsluttedeBehandlinger, intl, getKodeverknavn);
 
@@ -79,7 +82,7 @@ export const FormkravKlageForm: FunctionComponent<OwnProps & WrappedComponentPro
       <VerticalSpacer sixteenPx />
       <Row>
         <Column xs="6">
-          <ProsessStegBegrunnelseTextField
+          <ProsessStegBegrunnelseTextFieldNew
             readOnly={readOnly}
           />
         </Column>
@@ -100,9 +103,14 @@ export const FormkravKlageForm: FunctionComponent<OwnProps & WrappedComponentPro
                 {intl.formatMessage({ id: 'Klage.Formkrav.ErKlagerPart' })}
               </Undertekst>
               <VerticalSpacer sixteenPx />
-              <RadioGroupField name="erKlagerPart" validate={[required]} readOnly={readOnly}>
-                <RadioOption value label={{ id: 'Klage.Formkrav.Ja' }} />
-                <RadioOption value={false} label={{ id: 'Klage.Formkrav.Nei' }} />
+              <RadioGroupField
+                name="erKlagerPart"
+                validate={[required]}
+                readOnly={readOnly}
+                parse={(value) => value === 'true'}
+              >
+                <RadioOption value="true" label={intl.formatMessage({ id: 'Klage.Formkrav.Ja' })} />
+                <RadioOption value="false" label={intl.formatMessage({ id: 'Klage.Formkrav.Nei' })} />
               </RadioGroupField>
             </Column>
             <Column xs="8">
@@ -110,9 +118,14 @@ export const FormkravKlageForm: FunctionComponent<OwnProps & WrappedComponentPro
                 {intl.formatMessage({ id: 'Klage.Formkrav.ErKonkret' })}
               </Undertekst>
               <VerticalSpacer sixteenPx />
-              <RadioGroupField name="erKonkret" validate={[required]} readOnly={readOnly}>
-                <RadioOption value label={{ id: 'Klage.Formkrav.Ja' }} />
-                <RadioOption value={false} label={{ id: 'Klage.Formkrav.Nei' }} />
+              <RadioGroupField
+                name="erKonkret"
+                validate={[required]}
+                readOnly={readOnly}
+                parse={(value) => value === 'true'}
+              >
+                <RadioOption value="true" label={intl.formatMessage({ id: 'Klage.Formkrav.Ja' })} />
+                <RadioOption value="false" label={intl.formatMessage({ id: 'Klage.Formkrav.Nei' })} />
               </RadioGroupField>
             </Column>
           </Row>
@@ -122,9 +135,14 @@ export const FormkravKlageForm: FunctionComponent<OwnProps & WrappedComponentPro
                 {intl.formatMessage({ id: 'Klage.Formkrav.ErFristOverholdt' })}
               </Undertekst>
               <VerticalSpacer sixteenPx />
-              <RadioGroupField name="erFristOverholdt" validate={[required]} readOnly={readOnly}>
-                <RadioOption value label={{ id: 'Klage.Formkrav.Ja' }} />
-                <RadioOption value={false} label={{ id: 'Klage.Formkrav.Nei' }} />
+              <RadioGroupField
+                name="erFristOverholdt"
+                validate={[required]}
+                readOnly={readOnly}
+                parse={(value) => value === 'true'}
+              >
+                <RadioOption value="true" label={intl.formatMessage({ id: 'Klage.Formkrav.Ja' })} />
+                <RadioOption value="false" label={intl.formatMessage({ id: 'Klage.Formkrav.Nei' })} />
               </RadioGroupField>
             </Column>
             <Column xs="8">
@@ -132,19 +150,25 @@ export const FormkravKlageForm: FunctionComponent<OwnProps & WrappedComponentPro
                 {intl.formatMessage({ id: 'Klage.Formkrav.ErSignert' })}
               </Undertekst>
               <VerticalSpacer sixteenPx />
-              <RadioGroupField name="erSignert" validate={[required]} readOnly={readOnly}>
-                <RadioOption value label={{ id: 'Klage.Formkrav.Ja' }} />
-                <RadioOption value={false} label={{ id: 'Klage.Formkrav.Nei' }} />
+              <RadioGroupField
+                name="erSignert"
+                validate={[required]}
+                readOnly={readOnly}
+                parse={(value) => value === 'true'}
+              >
+                <RadioOption value="true" label={intl.formatMessage({ id: 'Klage.Formkrav.Ja' })} />
+                <RadioOption value="false" label={intl.formatMessage({ id: 'Klage.Formkrav.Nei' })} />
               </RadioGroupField>
             </Column>
           </Row>
         </Column>
       </Row>
       <div className={styles.confirmVilkarForm}>
-        <ProsessStegSubmitButton
-          formName={formProps.form}
+        <ProsessStegSubmitButtonNew
           isReadOnly={readOnly}
           isSubmittable={!readOnlySubmitButton}
+          isSubmitting={isSubmitting}
+          isDirty={isDirty}
         />
       </div>
 
@@ -152,9 +176,4 @@ export const FormkravKlageForm: FunctionComponent<OwnProps & WrappedComponentPro
   );
 };
 
-FormkravKlageForm.defaultProps = {
-  readOnly: true,
-  readOnlySubmitButton: true,
-};
-
-export default injectIntl(FormkravKlageForm);
+export default FormkravKlageForm;
