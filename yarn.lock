@@ -1355,11 +1355,12 @@
     tslib "^2.1.0"
 
 "@formatjs/intl-numberformat@^7.2.6":
-  version "7.2.6"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl-numberformat/-/intl-numberformat-7.2.6.tgz#84adf0d38bb50f19af6eaeaa9fdc48d85ee79762"
-  integrity sha512-7fgp5++ui30HzK89Aq9MxU8AfBJGzLzdGcabkJFt9g57YxqqneoDM/HSJ7IAASAAX/PLnsXzOgHgjSS5QDsBiQ==
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-numberformat/-/intl-numberformat-7.3.0.tgz#ce7d0ef8cf84d6863079265d2261a4401939d77e"
+  integrity sha512-hFWpeutgBtfTvFMMpUk4SNEGw0TPFtG5wMwcF+t/Rkas8aAQksN9ESpO311yisZ9xCKw9mAKF6q4k285Hsx6Pg==
   dependencies:
     "@formatjs/ecma402-abstract" "1.11.0"
+    "@formatjs/intl-localematcher" "0.2.21"
     tslib "^2.1.0"
 
 "@formatjs/intl@1.17.0":
