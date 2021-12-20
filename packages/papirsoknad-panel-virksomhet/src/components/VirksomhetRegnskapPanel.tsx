@@ -7,7 +7,7 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import { ArrowBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { InputField, RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { required } from '@fpsak-frontend/utils';
+import { required, hasValidInteger, hasValidText } from '@fpsak-frontend/utils';
 
 interface PureOwnProps {
   readOnly?: boolean;
@@ -45,13 +45,13 @@ export const VirksomhetRegnskapPanel: FunctionComponent<PureOwnProps & MappedOwn
               <InputField
                 name="navnRegnskapsforer"
                 readOnly={readOnly}
-                validate={[required]}
+                validate={[required, hasValidText]}
                 label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.AccountantName" />}
               />
               <InputField
                 name="tlfRegnskapsforer"
                 readOnly={readOnly}
-                validate={[required]}
+                validate={[required, hasValidInteger]}
                 label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.AccountantPhone" />}
               />
             </ArrowBox>
