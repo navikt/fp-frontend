@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { required } from '@fpsak-frontend/utils';
 import { ArrowBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form-hooks';
 import klageVurderingOmgjoerType from '@fpsak-frontend/kodeverk/src/klageVurderingOmgjoer';
 import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
@@ -16,12 +16,12 @@ interface OwnProps {
   klageVurdering?: Kodeverk;
 }
 
-export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
   readOnly,
   medholdReasons,
   klageVurdering,
-  intl,
 }) => {
+  const intl = useIntl();
   const medholdOptions = medholdReasons.map((mo: KodeverkMedNavn) => <option key={mo.kode} value={mo.kode}>{mo.navn}</option>);
   return (
     <div>
@@ -31,8 +31,8 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps & Wrapped
         readOnly={readOnly}
         className={readOnly ? styles.selectReadOnly : null}
       >
-        <RadioOption value={klageVurderingType.MEDHOLD_I_KLAGE} label={{ id: 'Klage.ResolveKlage.ChangeVedtak' }} />
-        <RadioOption value={klageVurderingType.STADFESTE_YTELSESVEDTAK} label={{ id: 'Klage.ResolveKlage.KeepVedtakNfp' }} />
+        <RadioOption value={klageVurderingType.MEDHOLD_I_KLAGE} label={intl.formatMessage({ id: 'Klage.ResolveKlage.ChangeVedtak' })} />
+        <RadioOption value={klageVurderingType.OPPHEVE_YTELSESVEDTAK} label={intl.formatMessage({ id: 'Klage.ResolveKlage.KeepVedtakNfp' })} />
       </RadioGroupField>
       {(klageVurdering?.kode === klageVurderingType.MEDHOLD_I_KLAGE)
       && (
@@ -54,32 +54,14 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps & Wrapped
             className={readOnly ? styles.selectReadOnly : null}
             direction="vertical"
           >
-            <RadioOption value={klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE} label={{ id: 'Klage.Behandle.Omgjort' }} />
-            <RadioOption value={klageVurderingOmgjoerType.UGUNST_MEDHOLD_I_KLAGE} label={{ id: 'Klage.Behandle.Ugunst' }} />
-            <RadioOption value={klageVurderingOmgjoerType.DELVIS_MEDHOLD_I_KLAGE} label={{ id: 'Klage.Behandle.DelvisOmgjort' }} />
+            <RadioOption value={klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE} label={intl.formatMessage({ id: 'Klage.Behandle.Omgjort' })} />
+            <RadioOption value={klageVurderingOmgjoerType.UGUNST_MEDHOLD_I_KLAGE} label={intl.formatMessage({ id: 'Klage.Behandle.Ugunst' })} />
+            <RadioOption value={klageVurderingOmgjoerType.DELVIS_MEDHOLD_I_KLAGE} label={intl.formatMessage({ id: 'Klage.Behandle.DelvisOmgjort' })} />
           </RadioGroupField>
-        </ArrowBox>
-      )}
-      {(klageVurdering?.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK)
-      && (
-        <ArrowBox>
-          <SelectField
-            readOnly={readOnly}
-            className={readOnly ? styles.selectReadOnly : null}
-            name="klageMedholdArsak.kode"
-            selectValues={medholdOptions}
-            label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
-            validate={[required]}
-            bredde="xl"
-          />
         </ArrowBox>
       )}
     </div>
   );
 };
 
-KlageVurderingRadioOptionsNfp.defaultProps = {
-  readOnly: true,
-};
-
-export default injectIntl(KlageVurderingRadioOptionsNfp);
+export default KlageVurderingRadioOptionsNfp;

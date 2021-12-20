@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { UseFormHandleSubmit } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
+import { Hovedknapp } from 'nav-frontend-knapper';
 
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { Kodeverk } from '@fpsak-frontend/types';
-import { InjectedFormProps } from 'redux-form';
 
 type FormValues = {
   klageVurdering?: Kodeverk;
@@ -41,7 +41,7 @@ interface OwnProps {
   saveKlage: (data: TransformedValues) => Promise<any>;
   spinner?: boolean;
   readOnly?: boolean;
-  handleSubmit: InjectedFormProps['handleSubmit'];
+  handleSubmit: UseFormHandleSubmit<any>;
 }
 
 const TempsaveKlageButton: FunctionComponent<OwnProps> = ({

@@ -21,6 +21,7 @@ interface OwnProps {
   hideValueOnDisable?: boolean;
   bredde?: 'fullbredde' | 'xxl' | 'xl' | 'l' | 'm' | 's' | 'xs';
   disabled?: boolean;
+  className?: string;
 }
 
 const SelectField: FunctionComponent<OwnProps> = ({
@@ -33,6 +34,7 @@ const SelectField: FunctionComponent<OwnProps> = ({
   hideValueOnDisable = false,
   bredde,
   onChange,
+  className,
   ...otherProps
 }) => {
   const { formState: { errors } } = useFormContext();
@@ -55,7 +57,7 @@ const SelectField: FunctionComponent<OwnProps> = ({
       selectValues={selectValues}
       placeholder={placeholder}
       hideValueOnDisable={hideValueOnDisable}
-      className={classNames('navSelect', { navSelectReadOnly: readOnly })}
+      className={classNames('navSelect', className, { navSelectReadOnly: readOnly })}
       label={label}
       feil={getError(errors, name)}
       bredde={bredde}

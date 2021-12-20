@@ -1,19 +1,18 @@
-import React, { FunctionComponent } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
-import {
-  Form, formValueSelector, InjectedFormProps, reduxForm,
-} from 'redux-form';
+import React, { FunctionComponent, useMemo } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Undertittel } from 'nav-frontend-typografi';
+import { useForm } from 'react-hook-form';
 
+import { Form } from '@fpsak-frontend/form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
-import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
+import { ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { KlageVurdering, Kodeverk, AlleKodeverk } from '@fpsak-frontend/types';
+import {
+  KlageVurdering, Kodeverk, AlleKodeverk, KlageVurderingResultat,
+} from '@fpsak-frontend/types';
 import { KlageVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import KlageVurderingRadioOptionsKa from './KlageVurderingRadioOptionsKa';
@@ -23,7 +22,7 @@ import TempsaveKlageButton, { TransformedValues } from '../felles/TempsaveKlageB
 
 import styles from './behandleKlageFormKa.less';
 
-export const transformValues = (values: FormValues): KlageVurderingResultatAp => ({
+const transformValues = (values: FormValues): KlageVurderingResultatAp => ({
   klageMedholdArsak: (values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE
     || values.klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? values.klageMedholdArsak : null,
   klageVurderingOmgjoer: values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
@@ -41,7 +40,15 @@ type FormValues = {
   klageMedholdArsak?: Kodeverk;
 };
 
-interface PureOwnProps {
+const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): FormValues => ({
+  klageMedholdArsak: klageVurderingResultat ? klageVurderingResultat.klageMedholdArsak : null,
+  klageVurderingOmgjoer: klageVurderingResultat ? klageVurderingResultat.klageVurderingOmgjoer : null,
+  klageVurdering: klageVurderingResultat ? klageVurderingResultat.klageVurdering : null,
+  begrunnelse: klageVurderingResultat ? klageVurderingResultat.begrunnelse : null,
+  fritekstTilBrev: klageVurderingResultat ? klageVurderingResultat.fritekstTilBrev : null,
+});
+
+interface OwnProps {
   previewCallback: (data: BrevData) => Promise<any>;
   saveKlage: (data: TransformedValues) => Promise<any>;
   readOnly?: boolean;
@@ -50,11 +57,8 @@ interface PureOwnProps {
   sprakkode: Kodeverk;
   submitCallback: (data: KlageVurderingResultatAp) => Promise<void>;
   klageVurdering: KlageVurdering;
-}
-
-interface MappedOwnProps {
-  initialValues: FormValues;
-  formValues: FormValues;
+  formData?: FormValues;
+  setFormData: (data: FormValues) => void;
 }
 
 /**
@@ -62,94 +66,82 @@ interface MappedOwnProps {
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for behandling av klage (KA).
  */
-export const BehandleKlageFormKaImpl: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
+export const BehandleKlageFormKa: FunctionComponent<OwnProps> = ({
   readOnly,
-  handleSubmit,
+  klageVurdering,
   saveKlage,
   previewCallback,
   readOnlySubmitButton,
   sprakkode,
-  formValues,
-  intl,
   alleKodeverk,
   submitCallback,
-  ...formProps
-}) => (
-  <Form onSubmit={handleSubmit((values: FormValues) => submitCallback(transformValues(values)))}>
-    <>
-      <Undertittel>{intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}</Undertittel>
-      <VerticalSpacer fourPx />
-      <AksjonspunktHelpTextTemp isAksjonspunktOpen={!readOnlySubmitButton}>
-        {[<FormattedMessage id="Klage.ResolveKlage.HelpText" key={aksjonspunktCodes.BEHANDLE_KLAGE_NK} />]}
-      </AksjonspunktHelpTextTemp>
-      <VerticalSpacer sixteenPx />
-      <KlageVurderingRadioOptionsKa
-        readOnly={readOnly}
-        klageVurdering={formValues.klageVurdering}
-        medholdReasons={alleKodeverk[kodeverkTyper.KLAGE_MEDHOLD_ARSAK]}
-      />
-      <div className={styles.confirmVilkarForm}>
-        <VerticalSpacer sixteenPx />
-        <FritekstBrevTextField
-          sprakkode={sprakkode}
-          readOnly={readOnly}
-        />
-        <VerticalSpacer sixteenPx />
-        <Row>
-          <Column xs="8">
-            <ProsessStegSubmitButton
-              formName={formProps.form}
-              isReadOnly={readOnly}
-              isSubmittable={!readOnlySubmitButton}
-            />
-            {!readOnly && formValues.klageVurdering && formValues.fritekstTilBrev && (formValues.fritekstTilBrev.length > 2)
-            && (
-              <PreviewKlageLink
-                previewCallback={previewCallback}
-                fritekstTilBrev={formValues.fritekstTilBrev}
-                klageVurdering={formValues.klageVurdering}
-                aksjonspunktCode={aksjonspunktCodes.BEHANDLE_KLAGE_NK}
-              />
-            )}
-          </Column>
-          <Column xs="2">
-            <TempsaveKlageButton
-              saveKlage={saveKlage}
-              readOnly={readOnly}
-              aksjonspunktCode={aksjonspunktCodes.BEHANDLE_KLAGE_NK}
-              handleSubmit={handleSubmit}
-            />
-          </Column>
-        </Row>
-      </div>
-    </>
-  </Form>
-);
+  formData,
+  setFormData,
+}) => {
+  const intl = useIntl();
+  const initialValues = useMemo(() => buildInitialValues(klageVurdering.klageVurderingResultatNK), [klageVurdering]);
+  const formMethods = useForm<FormValues>({
+    defaultValues: formData || initialValues,
+  });
 
-BehandleKlageFormKaImpl.defaultProps = {
-  readOnly: true,
-  readOnlySubmitButton: true,
+  const formValues = formMethods.watch();
+
+  return (
+    <Form
+      formMethods={formMethods}
+      onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
+      setDataOnUnmount={setFormData}
+    >
+      <>
+        <Undertittel>{intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}</Undertittel>
+        <VerticalSpacer fourPx />
+        <AksjonspunktHelpTextTemp isAksjonspunktOpen={!readOnlySubmitButton}>
+          {[<FormattedMessage id="Klage.ResolveKlage.HelpText" key={aksjonspunktCodes.BEHANDLE_KLAGE_NK} />]}
+        </AksjonspunktHelpTextTemp>
+        <VerticalSpacer sixteenPx />
+        <KlageVurderingRadioOptionsKa
+          readOnly={readOnly}
+          klageVurdering={formValues.klageVurdering}
+          medholdReasons={alleKodeverk[kodeverkTyper.KLAGE_MEDHOLD_ARSAK]}
+        />
+        <div className={styles.confirmVilkarForm}>
+          <VerticalSpacer sixteenPx />
+          <FritekstBrevTextField
+            sprakkode={sprakkode}
+            readOnly={readOnly}
+          />
+          <VerticalSpacer sixteenPx />
+          <Row>
+            <Column xs="8">
+              <ProsessStegSubmitButtonNew
+                isReadOnly={readOnly}
+                isSubmittable={!readOnlySubmitButton}
+                isSubmitting={formMethods.formState.isSubmitting}
+                isDirty={formMethods.formState.isDirty}
+              />
+              {!readOnly && formValues.klageVurdering && formValues.fritekstTilBrev && (formValues.fritekstTilBrev.length > 2)
+              && (
+                <PreviewKlageLink
+                  previewCallback={previewCallback}
+                  fritekstTilBrev={formValues.fritekstTilBrev}
+                  klageVurdering={formValues.klageVurdering}
+                  aksjonspunktCode={aksjonspunktCodes.BEHANDLE_KLAGE_NK}
+                />
+              )}
+            </Column>
+            <Column xs="2">
+              <TempsaveKlageButton
+                saveKlage={saveKlage}
+                readOnly={readOnly}
+                aksjonspunktCode={aksjonspunktCodes.BEHANDLE_KLAGE_NK}
+                handleSubmit={formMethods.handleSubmit}
+              />
+            </Column>
+          </Row>
+        </div>
+      </>
+    </Form>
+  );
 };
 
-export const buildInitialValues = createSelector([
-  (ownProps: PureOwnProps) => ownProps.klageVurdering.klageVurderingResultatNK], (klageVurderingResultat): FormValues => ({
-  klageMedholdArsak: klageVurderingResultat ? klageVurderingResultat.klageMedholdArsak : null,
-  klageVurderingOmgjoer: klageVurderingResultat ? klageVurderingResultat.klageVurderingOmgjoer : null,
-  klageVurdering: klageVurderingResultat ? klageVurderingResultat.klageVurdering : null,
-  begrunnelse: klageVurderingResultat ? klageVurderingResultat.begrunnelse : null,
-  fritekstTilBrev: klageVurderingResultat ? klageVurderingResultat.fritekstTilBrev : null,
-}));
-
-const formName = 'BehandleKlageKaForm';
-
-const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  initialValues: buildInitialValues(ownProps),
-  formValues: formValueSelector(formName)(
-    state, 'begrunnelse', 'fritekstTilBrev', 'klageVurdering', 'klageVurderingOmgjoer', 'klageMedholdArsak',
-  ) || {},
-});
-
-export default connect(mapStateToProps)(reduxForm({
-  form: formName,
-  destroyOnUnmount: false,
-})(injectIntl(BehandleKlageFormKaImpl)));
+export default BehandleKlageFormKa;
