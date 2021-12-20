@@ -1321,9 +1321,9 @@
     tslib "^2.1.0"
 
 "@formatjs/intl-datetimeformat@^4.2.6":
-  version "4.2.6"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl-datetimeformat/-/intl-datetimeformat-4.2.6.tgz#6eb86178c12aae9bf1c1ee55ef0ec71d8cd544e6"
-  integrity sha512-albFUNBwBvOKrWgjEr8I5oEzLZV2/EIpZC0BKIXRUmq3lmga6JsqUfeklrEkabjPYl+e+LyuUDceM/sxeEUF+Q==
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-datetimeformat/-/intl-datetimeformat-4.3.0.tgz#e82158adc19aee47c0c605c1b35d767aec97856d"
+  integrity sha512-bdFVUd2LdiBorJwdJQ17QYtB1xubLt2Z91jM4yYDAQW8UgCQfVT72J88ah3xHg+1yd0OmqUvrV26zcwJdDHFiw==
   dependencies:
     "@formatjs/ecma402-abstract" "1.11.0"
     "@formatjs/intl-localematcher" "0.2.21"
