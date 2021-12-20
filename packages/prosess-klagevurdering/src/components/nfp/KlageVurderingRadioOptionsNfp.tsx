@@ -32,7 +32,7 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
         className={readOnly ? styles.selectReadOnly : null}
       >
         <RadioOption value={klageVurderingType.MEDHOLD_I_KLAGE} label={intl.formatMessage({ id: 'Klage.ResolveKlage.ChangeVedtak' })} />
-        <RadioOption value={klageVurderingType.OPPHEVE_YTELSESVEDTAK} label={intl.formatMessage({ id: 'Klage.ResolveKlage.KeepVedtakNfp' })} />
+        <RadioOption value={klageVurderingType.STADFESTE_YTELSESVEDTAK} label={intl.formatMessage({ id: 'Klage.ResolveKlage.KeepVedtakNfp' })} />
       </RadioGroupField>
       {(klageVurdering?.kode === klageVurderingType.MEDHOLD_I_KLAGE)
       && (
