@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { required } from '@fpsak-frontend/utils';
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { ArrowBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form';
-import { ProsessStegBegrunnelseTextField } from '@fpsak-frontend/prosess-felles';
+import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form-hooks';
+import { ProsessStegBegrunnelseTextFieldNew } from '@fpsak-frontend/prosess-felles';
 import klageVurderingOmgjoerType from '@fpsak-frontend/kodeverk/src/klageVurderingOmgjoer';
 import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
@@ -18,16 +18,16 @@ interface OwnProps {
   klageVurdering?: Kodeverk;
 }
 
-export const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps> = ({
   readOnly,
   medholdReasons,
   klageVurdering,
-  intl,
 }) => {
+  const intl = useIntl();
   const medholdOptions = medholdReasons.map((mo: KodeverkMedNavn) => <option key={mo.kode} value={mo.kode}>{mo.navn}</option>);
   return (
     <div>
-      <ProsessStegBegrunnelseTextField
+      <ProsessStegBegrunnelseTextFieldNew
         readOnly={readOnly}
         text={intl.formatMessage({ id: 'KlageVurderingRadioOptionsKa.VurderingForKlage' })}
       />
@@ -40,8 +40,8 @@ export const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps & WrappedC
             direction="vertical"
             readOnly={readOnly}
           >
-            <RadioOption value={klageVurderingType.STADFESTE_YTELSESVEDTAK} label={{ id: 'Klage.ResolveKlage.KeepVedtakNk' }} />
-            <RadioOption value={klageVurderingType.MEDHOLD_I_KLAGE} label={{ id: 'Klage.ResolveKlage.ChangeVedtak' }} />
+            <RadioOption value={klageVurderingType.STADFESTE_YTELSESVEDTAK} label={intl.formatMessage({ id: 'Klage.ResolveKlage.KeepVedtakNk' })} />
+            <RadioOption value={klageVurderingType.MEDHOLD_I_KLAGE} label={intl.formatMessage({ id: 'Klage.ResolveKlage.ChangeVedtak' })} />
           </RadioGroupField>
         </Column>
         <Column xs="4">
@@ -52,8 +52,8 @@ export const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps & WrappedC
             className={readOnly ? styles.selectReadOnly : null}
             direction="vertical"
           >
-            <RadioOption value={klageVurderingType.HJEMSENDE_UTEN_Å_OPPHEVE} label={{ id: 'Klage.Behandle.Hjemsendt' }} />
-            <RadioOption value={klageVurderingType.OPPHEVE_YTELSESVEDTAK} label={{ id: 'Klage.ResolveKlage.NullifyVedtak' }} />
+            <RadioOption value={klageVurderingType.HJEMSENDE_UTEN_Å_OPPHEVE} label={intl.formatMessage({ id: 'Klage.Behandle.Hjemsendt' })} />
+            <RadioOption value={klageVurderingType.OPPHEVE_YTELSESVEDTAK} label={intl.formatMessage({ id: 'Klage.ResolveKlage.NullifyVedtak' })} />
           </RadioGroupField>
         </Column>
       </Row>
@@ -66,7 +66,6 @@ export const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps & WrappedC
               readOnly={readOnly}
               name="klageMedholdArsak.kode"
               selectValues={medholdOptions}
-              className={readOnly ? styles.selectReadOnly : null}
               label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
               validate={[required]}
               bredde="xl"
@@ -79,9 +78,9 @@ export const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps & WrappedC
               className={readOnly ? styles.selectReadOnly : null}
               direction="vertical"
             >
-              <RadioOption value={klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE} label={{ id: 'Klage.Behandle.Omgjort' }} />
-              <RadioOption value={klageVurderingOmgjoerType.UGUNST_MEDHOLD_I_KLAGE} label={{ id: 'Klage.Behandle.Ugunst' }} />
-              <RadioOption value={klageVurderingOmgjoerType.DELVIS_MEDHOLD_I_KLAGE} label={{ id: 'Klage.Behandle.DelvisOmgjort' }} />
+              <RadioOption value={klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE} label={intl.formatMessage({ id: 'Klage.Behandle.Omgjort' })} />
+              <RadioOption value={klageVurderingOmgjoerType.UGUNST_MEDHOLD_I_KLAGE} label={intl.formatMessage({ id: 'Klage.Behandle.Ugunst' })} />
+              <RadioOption value={klageVurderingOmgjoerType.DELVIS_MEDHOLD_I_KLAGE} label={intl.formatMessage({ id: 'Klage.Behandle.DelvisOmgjort' })} />
             </RadioGroupField>
           </ArrowBox>
         </Column>
@@ -110,8 +109,4 @@ export const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps & WrappedC
   );
 };
 
-KlageVurderingRadioOptionsKa.defaultProps = {
-  readOnly: true,
-};
-
-export default injectIntl(KlageVurderingRadioOptionsKa);
+export default KlageVurderingRadioOptionsKa;

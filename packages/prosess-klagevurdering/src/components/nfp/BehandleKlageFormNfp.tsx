@@ -1,19 +1,19 @@
-import React, { FunctionComponent } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import {
-  Form, formValueSelector, InjectedFormProps, reduxForm,
-} from 'redux-form';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
+import React, { FunctionComponent, useMemo } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useForm } from 'react-hook-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { Undertittel } from 'nav-frontend-typografi';
+
+import { Form } from '@fpsak-frontend/form-hooks';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { ProsessStegBegrunnelseTextField, ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
-import { KlageVurdering, Kodeverk, AlleKodeverk } from '@fpsak-frontend/types';
+import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
+import {
+  KlageVurdering, Kodeverk, AlleKodeverk, KlageVurderingResultat,
+} from '@fpsak-frontend/types';
 import { KlageVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import KlageVurderingRadioOptionsNfp from './KlageVurderingRadioOptionsNfp';
@@ -23,7 +23,7 @@ import TempsaveKlageButton, { TransformedValues } from '../felles/TempsaveKlageB
 
 import styles from './behandleKlageFormNfp.less';
 
-export const transformValues = (values: FormValues): KlageVurderingResultatAp => ({
+const transformValues = (values: FormValues): KlageVurderingResultatAp => ({
   klageMedholdArsak: (values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE
     || values.klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? values.klageMedholdArsak : null,
   klageVurderingOmgjoer: values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
@@ -41,7 +41,15 @@ type FormValues = {
   begrunnelse?: string;
 };
 
-interface PureOwnProps {
+const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): FormValues => ({
+  klageMedholdArsak: klageVurderingResultat ? klageVurderingResultat.klageMedholdArsak : null,
+  klageVurderingOmgjoer: klageVurderingResultat ? klageVurderingResultat.klageVurderingOmgjoer : null,
+  klageVurdering: klageVurderingResultat ? klageVurderingResultat.klageVurdering : null,
+  begrunnelse: klageVurderingResultat ? klageVurderingResultat.begrunnelse : null,
+  fritekstTilBrev: klageVurderingResultat ? klageVurderingResultat.fritekstTilBrev : null,
+});
+
+interface OwnProps {
   previewCallback: (data: BrevData) => Promise<any>;
   saveKlage: (data: TransformedValues) => Promise<any>;
   readOnly?: boolean;
@@ -50,11 +58,8 @@ interface PureOwnProps {
   alleKodeverk: AlleKodeverk;
   klageVurdering: KlageVurdering;
   submitCallback: (data: KlageVurderingResultatAp) => Promise<void>;
-}
-
-interface MappedOwnProps {
-  initialValues: FormValues;
-  formValues: FormValues;
+  formData?: FormValues;
+  setFormData: (data: FormValues) => void;
 }
 
 /**
@@ -62,51 +67,63 @@ interface MappedOwnProps {
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for behandling av klage (NFP).
  */
-export const BehandleKlageFormNfpImpl: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps & InjectedFormProps> = ({
+export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
   readOnly,
-  handleSubmit,
+  klageVurdering,
   previewCallback,
   saveKlage,
   readOnlySubmitButton,
   sprakkode,
-  formValues,
-  intl,
   alleKodeverk,
   submitCallback,
-  ...formProps
-}) => (
-  <Form onSubmit={handleSubmit((values: FormValues) => submitCallback(transformValues(values)))}>
-    <Undertittel>{intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}</Undertittel>
-    <VerticalSpacer fourPx />
-    <AksjonspunktHelpTextTemp isAksjonspunktOpen={!readOnlySubmitButton}>
-      {[<FormattedMessage id="Klage.ResolveKlage.HelpText" key={aksjonspunktCodes.BEHANDLE_KLAGE_NFP} />]}
-    </AksjonspunktHelpTextTemp>
-    <VerticalSpacer sixteenPx />
-    <KlageVurderingRadioOptionsNfp
-      readOnly={readOnly}
-      klageVurdering={formValues.klageVurdering}
-      medholdReasons={alleKodeverk[kodeverkTyper.KLAGE_MEDHOLD_ARSAK]}
-    />
-    <div className={styles.confirmVilkarForm}>
-      <ProsessStegBegrunnelseTextField
-        readOnly={readOnly}
-        text={intl.formatMessage({ id: 'BehandleKlageFormNfp.BegrunnelseForKlage' })}
-      />
+  formData,
+  setFormData,
+}) => {
+  const intl = useIntl();
+  const initialValues = useMemo(() => buildInitialValues(klageVurdering.klageVurderingResultatNFP), [klageVurdering]);
+  const formMethods = useForm<FormValues>({
+    defaultValues: formData || initialValues,
+  });
+
+  const formValues = formMethods.watch();
+
+  return (
+    <Form
+      formMethods={formMethods}
+      onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
+      setDataOnUnmount={setFormData}
+    >
+      <Undertittel>{intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}</Undertittel>
+      <VerticalSpacer fourPx />
+      <AksjonspunktHelpTextTemp isAksjonspunktOpen={!readOnlySubmitButton}>
+        {[<FormattedMessage id="Klage.ResolveKlage.HelpText" key={aksjonspunktCodes.BEHANDLE_KLAGE_NFP} />]}
+      </AksjonspunktHelpTextTemp>
       <VerticalSpacer sixteenPx />
-      <FritekstBrevTextField
-        sprakkode={sprakkode}
+      <KlageVurderingRadioOptionsNfp
         readOnly={readOnly}
+        klageVurdering={formValues.klageVurdering}
+        medholdReasons={alleKodeverk[kodeverkTyper.KLAGE_MEDHOLD_ARSAK]}
       />
-      <VerticalSpacer sixteenPx />
-      <Row>
-        <Column xs="8">
-          <ProsessStegSubmitButton
-            formName={formProps.form}
-            isReadOnly={readOnly}
-            isSubmittable={!readOnlySubmitButton}
-          />
-          {!readOnly && formValues.klageVurdering && formValues.fritekstTilBrev && (formValues.fritekstTilBrev.length > 2)
-            && (
+      <div className={styles.confirmVilkarForm}>
+        <ProsessStegBegrunnelseTextFieldNew
+          readOnly={readOnly}
+          text={intl.formatMessage({ id: 'BehandleKlageFormNfp.BegrunnelseForKlage' })}
+        />
+        <VerticalSpacer sixteenPx />
+        <FritekstBrevTextField
+          sprakkode={sprakkode}
+          readOnly={readOnly}
+        />
+        <VerticalSpacer sixteenPx />
+        <Row>
+          <Column xs="8">
+            <ProsessStegSubmitButtonNew
+              isReadOnly={readOnly}
+              isSubmittable={!readOnlySubmitButton}
+              isSubmitting={formMethods.formState.isSubmitting}
+              isDirty={formMethods.formState.isDirty}
+            />
+            {!readOnly && formValues.klageVurdering && formValues.fritekstTilBrev && (formValues.fritekstTilBrev.length > 2) && (
               <PreviewKlageLink
                 previewCallback={previewCallback}
                 fritekstTilBrev={formValues.fritekstTilBrev}
@@ -114,43 +131,19 @@ export const BehandleKlageFormNfpImpl: FunctionComponent<PureOwnProps & MappedOw
                 aksjonspunktCode={aksjonspunktCodes.BEHANDLE_KLAGE_NFP}
               />
             )}
-        </Column>
-        <Column xs="2">
-          <TempsaveKlageButton
-            saveKlage={saveKlage}
-            handleSubmit={handleSubmit}
-            readOnly={readOnly}
-            aksjonspunktCode={aksjonspunktCodes.BEHANDLE_KLAGE_NFP}
-          />
-        </Column>
-      </Row>
-    </div>
-  </Form>
-);
-
-BehandleKlageFormNfpImpl.defaultProps = {
-  readOnly: true,
-  readOnlySubmitButton: true,
+          </Column>
+          <Column xs="2">
+            <TempsaveKlageButton
+              saveKlage={saveKlage}
+              handleSubmit={formMethods.handleSubmit}
+              readOnly={readOnly}
+              aksjonspunktCode={aksjonspunktCodes.BEHANDLE_KLAGE_NFP}
+            />
+          </Column>
+        </Row>
+      </div>
+    </Form>
+  );
 };
 
-export const buildInitialValues = createSelector([
-  (ownProps: PureOwnProps) => ownProps.klageVurdering.klageVurderingResultatNFP], (klageVurderingResultat): FormValues => ({
-  klageMedholdArsak: klageVurderingResultat ? klageVurderingResultat.klageMedholdArsak : null,
-  klageVurderingOmgjoer: klageVurderingResultat ? klageVurderingResultat.klageVurderingOmgjoer : null,
-  klageVurdering: klageVurderingResultat ? klageVurderingResultat.klageVurdering : null,
-  begrunnelse: klageVurderingResultat ? klageVurderingResultat.begrunnelse : null,
-  fritekstTilBrev: klageVurderingResultat ? klageVurderingResultat.fritekstTilBrev : null,
-}));
-
-const formName = 'BehandleKlageNfpForm';
-
-const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  initialValues: buildInitialValues(ownProps),
-  formValues: formValueSelector(formName)(state,
-    'klageVurdering', 'begrunnelse', 'fritekstTilBrev', 'klageMedholdArsak', 'klageVurderingOmgjoer') || {},
-});
-
-export default connect(mapStateToProps)(reduxForm({
-  form: formName,
-  destroyOnUnmount: false,
-})(injectIntl(BehandleKlageFormNfpImpl)));
+export default BehandleKlageFormNfp;

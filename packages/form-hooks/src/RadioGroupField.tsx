@@ -24,6 +24,7 @@ interface OwnProps {
   isEdited?: boolean;
   validate?: ((value: string) => any)[];
   parse?: (value: string) => any;
+  className?: string;
 }
 
 const RadioGroupField: FunctionComponent<OwnProps> = ({
