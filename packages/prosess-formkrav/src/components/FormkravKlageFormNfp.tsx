@@ -1,8 +1,7 @@
-import React, { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { InjectedFormProps, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
+import React, { FunctionComponent, useMemo } from 'react';
+import { useForm } from 'react-hook-form';
 
+import { Form } from '@fpsak-frontend/form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { KlageVurdering, AlleKodeverk } from '@fpsak-frontend/types';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
@@ -20,47 +19,22 @@ type FormValues = {
   vedtak?: string;
 }
 
-interface PureOwnProps {
-  klageVurdering: KlageVurdering;
-  submitCallback: (data: KlageFormkravAp) => Promise<void>;
-  readOnlySubmitButton?: boolean;
-  alleKodeverk: AlleKodeverk;
-  avsluttedeBehandlinger: AvsluttetBehandling[];
-  readOnly?: boolean;
+type TilbakekrevingInfo = {
+  tilbakekrevingUuid?: string;
+  tilbakekrevingVedtakDato?: string;
+  tilbakekrevingBehandlingType?: string;
 }
 
-interface MappedOwnProps {
-  initialValues: FormValues;
-  onSubmit: (formValues: FormValues) => any;
-}
-
-/**
- * FormkravklageformNfp
- *
- * Presentasjonskomponent. Setter opp aksjonspunktet for formkrav klage (NFP).
- */
-export const FormkravKlageFormNfpImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
-  readOnly,
-  readOnlySubmitButton,
-  alleKodeverk,
-  avsluttedeBehandlinger,
-  ...formProps
-}) => (
-  <form onSubmit={formProps.handleSubmit}>
-    <FormkravKlageForm
-      readOnly={readOnly}
-      readOnlySubmitButton={readOnlySubmitButton}
-      aksjonspunktCode={aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP}
-      formProps={formProps}
-      alleKodeverk={alleKodeverk}
-      avsluttedeBehandlinger={avsluttedeBehandlinger}
-    />
-  </form>
-);
-
-FormkravKlageFormNfpImpl.defaultProps = {
-  readOnly: true,
-  readOnlySubmitButton: true,
+const buildInitialValues = (klageVurdering: KlageVurdering): FormValues => {
+  const klageFormkavResultatNfp = klageVurdering ? klageVurdering.klageFormkravResultatNFP : null;
+  return {
+    vedtak: klageFormkavResultatNfp ? getPaKlagdVedtak(klageFormkavResultatNfp) : null,
+    begrunnelse: klageFormkavResultatNfp ? klageFormkavResultatNfp.begrunnelse : null,
+    erKlagerPart: klageFormkavResultatNfp ? klageFormkavResultatNfp.erKlagerPart : null,
+    erKonkret: klageFormkavResultatNfp ? klageFormkavResultatNfp.erKlageKonkret : null,
+    erFristOverholdt: klageFormkavResultatNfp ? klageFormkavResultatNfp.erKlagefirstOverholdt : null,
+    erSignert: klageFormkavResultatNfp ? klageFormkavResultatNfp.erSignert : null,
+  };
 };
 
 const getPåklagdBehandling = (avsluttedeBehandlinger: AvsluttetBehandling[], påklagdVedtak: string): AvsluttetBehandling => avsluttedeBehandlinger
@@ -70,12 +44,6 @@ export const erTilbakekreving = (avsluttedeBehandlinger: AvsluttetBehandling[], 
   const behandling = getPåklagdBehandling(avsluttedeBehandlinger, påklagdVedtak);
   return behandling && (behandling.type.kode === BehandlingType.TILBAKEKREVING || behandling.type.kode === BehandlingType.TILBAKEKREVING_REVURDERING);
 };
-
-type TilbakekrevingInfo = {
-  tilbakekrevingUuid?: string;
-  tilbakekrevingVedtakDato?: string;
-  tilbakekrevingBehandlingType?: string;
-}
 
 export const påklagdTilbakekrevingInfo = (avsluttedeBehandlinger: AvsluttetBehandling[], påklagdVedtak: string): TilbakekrevingInfo | null => {
   const erTilbakekrevingVedtak = erTilbakekreving(avsluttedeBehandlinger, påklagdVedtak);
@@ -99,33 +67,53 @@ const transformValues = (values: FormValues, avsluttedeBehandlinger: AvsluttetBe
   tilbakekrevingInfo: påklagdTilbakekrevingInfo(avsluttedeBehandlinger, values.vedtak),
 });
 
-const formName = 'FormkravKlageFormNfp';
+interface OwnProps {
+  klageVurdering: KlageVurdering;
+  submitCallback: (data: KlageFormkravAp) => Promise<void>;
+  readOnlySubmitButton?: boolean;
+  alleKodeverk: AlleKodeverk;
+  avsluttedeBehandlinger: AvsluttetBehandling[];
+  readOnly?: boolean;
+  formData?: FormValues;
+  setFormData: (data: FormValues) => void;
+}
 
-const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.klageVurdering],
-  (klageVurdering): FormValues => {
-    const klageFormkavResultatNfp = klageVurdering ? klageVurdering.klageFormkravResultatNFP : null;
-    return {
-      vedtak: klageFormkavResultatNfp ? getPaKlagdVedtak(klageFormkavResultatNfp) : null,
-      begrunnelse: klageFormkavResultatNfp ? klageFormkavResultatNfp.begrunnelse : null,
-      erKlagerPart: klageFormkavResultatNfp ? klageFormkavResultatNfp.erKlagerPart : null,
-      erKonkret: klageFormkavResultatNfp ? klageFormkavResultatNfp.erKlageKonkret : null,
-      erFristOverholdt: klageFormkavResultatNfp ? klageFormkavResultatNfp.erKlagefirstOverholdt : null,
-      erSignert: klageFormkavResultatNfp ? klageFormkavResultatNfp.erSignert : null,
-    };
+/**
+ * FormkravklageformNfp
+ *
+ * Presentasjonskomponent. Setter opp aksjonspunktet for formkrav klage (NFP).
+ */
+const FormkravKlageFormNfp: FunctionComponent<OwnProps> = ({
+  readOnly,
+  klageVurdering,
+  readOnlySubmitButton,
+  alleKodeverk,
+  avsluttedeBehandlinger,
+  submitCallback,
+  formData,
+  setFormData,
+}) => {
+  const initialValues = useMemo(() => buildInitialValues(klageVurdering), [klageVurdering]);
+  const formMethods = useForm<FormValues>({
+    defaultValues: formData || initialValues,
   });
-
-const lagSubmitFn = createSelector([
-  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.avsluttedeBehandlinger],
-(submitCallback, avsluttedeBehandlinger) => (values: FormValues) => submitCallback(transformValues(values, avsluttedeBehandlinger)));
-
-const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => ({
-  initialValues: buildInitialValues(ownProps),
-  onSubmit: lagSubmitFn(ownProps),
-});
-
-const FormkravKlageFormNfp = connect(mapStateToProps)(reduxForm({
-  form: formName,
-  destroyOnUnmount: false,
-})(FormkravKlageFormNfpImpl));
+  return (
+    <Form
+      formMethods={formMethods}
+      onSubmit={(values: FormValues) => submitCallback(transformValues(values, avsluttedeBehandlinger))}
+      setDataOnUnmount={setFormData}
+    >
+      <FormkravKlageForm
+        readOnly={readOnly}
+        readOnlySubmitButton={readOnlySubmitButton}
+        aksjonspunktCode={aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP}
+        alleKodeverk={alleKodeverk}
+        avsluttedeBehandlinger={avsluttedeBehandlinger}
+        isSubmitting={formMethods.formState.isSubmitting}
+        isDirty={formMethods.formState.isDirty}
+      />
+    </Form>
+  );
+};
 
 export default FormkravKlageFormNfp;

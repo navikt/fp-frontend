@@ -1,7 +1,8 @@
-import React, { FunctionComponent } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import React, {
+  FunctionComponent, useCallback, KeyboardEvent, MouseEvent,
+} from 'react';
+import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import { InjectedFormProps } from 'redux-form';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -9,69 +10,58 @@ import { KlageVurdering } from '@fpsak-frontend/types';
 
 import styles from './vedtakKlageSubmitPanel.less';
 
-const getPreviewCallback = (
-  formProps: InjectedFormProps,
-  previewVedtakCallback: () => Promise<any>,
-) => (e: React.MouseEvent | React.KeyboardEvent): void => {
-  if (formProps.valid || formProps.pristine) {
-    previewVedtakCallback();
-  } else {
-    // @ts-ignore Fiks
-    formProps.submit();
-  }
-  e.preventDefault();
-};
-
 interface OwnProps {
   previewVedtakCallback: () => Promise<any>;
   behandlingPaaVent: boolean;
   begrunnelse?: string;
   klageResultat?: KlageVurdering['klageVurderingResultatNK'] | KlageVurdering['klageVurderingResultatNFP'];
   readOnly: boolean;
-  formProps: InjectedFormProps;
+  lagreVedtak: () => void;
+  isSubmitting: boolean;
 }
 
-export const VedtakKlageKaSubmitPanelImpl: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+export const VedtakKlageKaSubmitPanel: FunctionComponent<OwnProps> = ({
   behandlingPaaVent,
   previewVedtakCallback,
   klageResultat,
-  formProps,
   readOnly,
+  lagreVedtak,
+  isSubmitting,
 }) => {
-  const previewBrev = getPreviewCallback(formProps, previewVedtakCallback);
+  const forhåndsvis = useCallback((e: KeyboardEvent | MouseEvent) => {
+    e.preventDefault();
+    previewVedtakCallback();
+  }, []);
 
   return (
     <Row>
       <Column xs="8">
-        {!readOnly
-        && (
-        <Hovedknapp
-          mini
-          className={styles.mainButton}
-          onClick={formProps.handleSubmit}
-          disabled={behandlingPaaVent || formProps.submitting || klageResultat.godkjentAvMedunderskriver}
-          spinner={formProps.submitting}
-        >
-          {intl.formatMessage({ id: 'VedtakKlageForm.TilGodkjenningKa' })}
-        </Hovedknapp>
-        )}
-        {!readOnly
-        && (
+        {!readOnly && (
           <Hovedknapp
             mini
             className={styles.mainButton}
-            onClick={formProps.handleSubmit}
-            disabled={behandlingPaaVent || formProps.submitting || !klageResultat.godkjentAvMedunderskriver}
-            spinner={formProps.submitting}
+            onClick={lagreVedtak}
+            disabled={behandlingPaaVent || isSubmitting || klageResultat.godkjentAvMedunderskriver}
+            spinner={isSubmitting}
           >
-            {intl.formatMessage({ id: 'VedtakKlageForm.FerdigstillKlageKa' })}
+            <FormattedMessage id="VedtakKlageForm.TilGodkjenningKa" />
+          </Hovedknapp>
+        )}
+        {!readOnly && (
+          <Hovedknapp
+            mini
+            className={styles.mainButton}
+            onClick={lagreVedtak}
+            disabled={behandlingPaaVent || isSubmitting || !klageResultat.godkjentAvMedunderskriver}
+            spinner={isSubmitting}
+          >
+            <FormattedMessage id="VedtakKlageForm.FerdigstillKlageKa" />
           </Hovedknapp>
         )}
         <a
           href=""
-          onClick={previewBrev}
-          onKeyDown={(e) => (e.key === 'Enter' ? previewBrev(e) : null)}
+          onClick={forhåndsvis}
+          onKeyDown={(e) => (e.key === 'Enter' ? forhåndsvis(e) : null)}
           className={classNames('lenke lenke--frittstaende')}
         >
           <FormattedMessage id="VedtakKlageForm.ForhandvisBrev" />
@@ -81,4 +71,4 @@ export const VedtakKlageKaSubmitPanelImpl: FunctionComponent<OwnProps & WrappedC
   );
 };
 
-export default injectIntl(VedtakKlageKaSubmitPanelImpl);
+export default VedtakKlageKaSubmitPanel;
