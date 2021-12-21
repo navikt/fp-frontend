@@ -1,16 +1,18 @@
 import React from 'react';
+import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import InnsynProsessIndex from '@fpsak-frontend/prosess-innsyn';
 import {
   Aksjonspunkt, Behandling, Innsyn, InnsynDokument,
 } from '@fpsak-frontend/types';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
-import alleKodeverk from '../../mocks/alleKodeverk.json';
+import InnsynProsessIndex from './InnsynProsessIndex';
 
 const behandling = {
   uuid: '1',
@@ -30,28 +32,28 @@ const aksjonspunkter = [{
   begrunnelse: undefined,
 }] as Aksjonspunkt[];
 
-const standardProsessProps = {
-  behandling,
-  alleKodeverk: alleKodeverk as any,
-  aksjonspunkter,
-  submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: false,
-  isAksjonspunktOpen: true,
-  readOnlySubmitButton: false,
-  status: '',
-  vilkar: [],
-  alleMerknaderFraBeslutter: {},
-  setFormData: () => undefined,
-};
-
 export default {
   title: 'prosess/innsyn/prosess-innsyn',
   component: InnsynProsessIndex,
 };
 
-export const visPanelForVurderingAvInnsyn = () => (
+const Template: Story<{
+  submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
+}> = ({
+  submitCallback,
+}) => (
   <InnsynProsessIndex
-    {...standardProsessProps}
+    behandling={behandling}
+    alleKodeverk={alleKodeverk as any}
+    aksjonspunkter={aksjonspunkter}
+    submitCallback={submitCallback}
+    isReadOnly={false}
+    isAksjonspunktOpen
+    readOnlySubmitButton={false}
+    status=""
+    vilkar={[]}
+    alleMerknaderFraBeslutter={{}}
+    setFormData={() => undefined}
     innsyn={{
       dokumenter: [] as InnsynDokument[],
       vedtaksdokumentasjon: [{
@@ -70,3 +72,8 @@ export const visPanelForVurderingAvInnsyn = () => (
     }]}
   />
 );
+
+export const PanelForVurderingAvInnsyn = Template.bind({});
+PanelForVurderingAvInnsyn.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};
