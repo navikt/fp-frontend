@@ -9,6 +9,7 @@ type KlageVurderingResultatAp = {
   klageAvvistArsak?: Kodeverk | string;
   klageMedholdArsak?: Kodeverk | string;
   klageVurderingOmgjoer?: Kodeverk | string;
+  klageHjemmel?: Kodeverk | string;
   vedtaksdatoPaklagdBehandling?: string;
   erGodkjentAvMedunderskriver?: boolean;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.BEHANDLE_KLAGE_NFP | AksjonspunktKode.BEHANDLE_KLAGE_NK>;

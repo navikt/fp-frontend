@@ -57,6 +57,7 @@ const KlagevurderingProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
         previewCallback={previewCallback}
         readOnlySubmitButton={readOnlySubmitButton}
         alleKodeverk={alleKodeverk}
+        alleAktuelleHjemler={klageVurdering.aktuelleHjemler ? klageVurdering.aktuelleHjemler : []}
         formData={formData}
         setFormData={setFormData}
       />

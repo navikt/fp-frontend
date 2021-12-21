@@ -11,6 +11,7 @@ type FormValues = {
   fritekstTilBrev?: string;
   klageMedholdArsak?: Kodeverk;
   klageVurderingOmgjoer?: Kodeverk;
+  klageHjemmel?: Kodeverk;
   begrunnelse?: string;
 };
 
@@ -18,6 +19,7 @@ export type TransformedValues = {
   kode: string;
   klageMedholdArsak?: Kodeverk;
   klageVurderingOmgjoer?: Kodeverk;
+  klageHjemmel?: Kodeverk;
   fritekstTilBrev: string;
   begrunnelse: string;
   klageVurdering: Kodeverk;
@@ -31,6 +33,7 @@ const transformValues = (
   klageMedholdArsak: (values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE
     || values.klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? values.klageMedholdArsak : null,
   klageVurderingOmgjoer: values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
+  klageHjemmel: values.klageHjemmel,
   fritekstTilBrev: values.fritekstTilBrev,
   begrunnelse: values.begrunnelse,
   klageVurdering: values.klageVurdering,
