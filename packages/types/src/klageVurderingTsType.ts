@@ -14,9 +14,7 @@ type KlageVurdering = Readonly<{
   klageVurderingResultatNK?: KlageVurderingResultat;
   klageVurderingResultatNFP?: KlageVurderingResultat;
   klageFormkravResultatKA?: {
-    avvistArsaker: {
-      navn?: string;
-    }[];
+    avvistArsaker: Kodeverk[];
     paKlagdBehandlingUuid: string;
     paklagdBehandlingType: Kodeverk;
     begrunnelse: string;
@@ -26,9 +24,7 @@ type KlageVurdering = Readonly<{
     erSignert: boolean;
   };
   klageFormkravResultatNFP?: {
-    avvistArsaker: {
-      navn?: string;
-    }[];
+    avvistArsaker: Kodeverk[];
     paKlagdBehandlingUuid: string;
     paklagdBehandlingType: Kodeverk;
     begrunnelse: string;

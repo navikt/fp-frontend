@@ -50,7 +50,8 @@ const Template: Story<{
       },
       klageFormkravResultatKA: {
         avvistArsaker: [{
-          navn: 'Denne er avvist fordi...',
+          kode: 'TEST',
+          kodeverk: '',
         }],
       },
     } as KlageVurdering}
