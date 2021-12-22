@@ -9,7 +9,7 @@ import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
-import { Aksjonspunkt, Behandling, Fagsak } from '@fpsak-frontend/types';
+import {Aksjonspunkt, Behandling, Fagsak, KlageVurdering} from '@fpsak-frontend/types';
 import * as Felles from '@fpsak-frontend/behandling-felles/src/utils/prosess/useStandardProsessPanelProps';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -20,6 +20,7 @@ import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
 import { KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';
 import VurderingFellesProsessStegInitPanel from './VurderingFellesProsessStegInitPanel';
+import klageVurderingCodes from "@fpsak-frontend/kodeverk/src/klageVurdering";
 
 type INIT_DATA = {
   aksjonspunkter: Aksjonspunkt[];
@@ -180,9 +181,15 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
   });
 
   it('skal lagre klage', async () => {
+    const kv = {
+      aktuelleHjemler: [{
+        kode: '14-17',
+        kodeverk: 'KLAGE_HJEMMEL',
+      }],
+    } as KlageVurdering;
     const data = [
       { key: KlageBehandlingApiKeys.AKSJONSPUNKTER.name, data: [] },
-      { key: KlageBehandlingApiKeys.KLAGE_VURDERING.name, data: {} },
+      { key: KlageBehandlingApiKeys.KLAGE_VURDERING.name, data: kv },
       { key: KlageBehandlingApiKeys.SAVE_KLAGE_VURDERING.name, data: undefined },
     ];
 
@@ -206,6 +213,8 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
 
     userEvent.click(screen.getByText('Oppretthold vedtaket'));
 
+    userEvent.selectOptions(utils.getByLabelText('Hjemmel'), '14-17');
+
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
     userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
@@ -220,6 +229,9 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       begrunnelse: 'Dette er en begrunnelse',
       klageVurderingOmgjoer: null,
       fritekstTilBrev: 'Dette er en fritekst',
+      klageHjemmel: {
+        kode: '14-17',
+      },
       klageMedholdArsak: null,
       klageVurdering: {
         kode: klageVurdering.STADFESTE_YTELSESVEDTAK,
