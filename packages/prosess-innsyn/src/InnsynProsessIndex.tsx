@@ -31,7 +31,7 @@ const InnsynProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
   <RawIntlProvider value={intl}>
     <InnsynForm
       saksNr={saksnummer}
-      behandlingPaaVent={behandling.behandlingPaaVent}
+      fristBehandlingPåVent={behandling.fristBehandlingPåVent}
       innsynMottattDato={innsyn?.innsynMottattDato}
       innsynDokumenter={innsyn?.dokumenter}
       innsynResultatType={innsyn?.innsynResultatType}

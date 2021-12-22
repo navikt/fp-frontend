@@ -27,7 +27,7 @@ describe('<BehandlingPaVent>', () => {
     },
     behandlingPaaVent: false,
     behandlingHenlagt: false,
-    fristBehandlingPaaVent: '2030-10-10',
+    fristBehandlingPåVent: '2030-10-10',
     venteArsakKode: '',
   } as Behandling;
   const aksjonspunkter = [] as Aksjonspunkt[];

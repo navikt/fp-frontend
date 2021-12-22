@@ -49,14 +49,14 @@ const hentDokumenterMedNavnOgFikkInnsyn = (
 const buildInitialValues = (
   innsynMottattDato: string,
   innsynResultatType: Kodeverk,
-  fristBehandlingPaaVent: boolean,
   dokumenter: InnsynDokument[],
   aksjonspunkter: Aksjonspunkt[],
+  fristBehandlingPåVent?: string,
 ): FormValues => ({
   mottattDato: innsynMottattDato,
   innsynResultatType: innsynResultatType ? innsynResultatType.kode : undefined,
-  fristDato: moment().add(3, 'days').format(ISO_DATE_FORMAT),
-  sattPaVent: isAksjonspunktOpen(aksjonspunkter[0].status.kode) ? undefined : !!fristBehandlingPaaVent,
+  fristDato: fristBehandlingPåVent || moment().add(3, 'days').format(ISO_DATE_FORMAT),
+  sattPaVent: isAksjonspunktOpen(aksjonspunkter[0].status.kode) ? undefined : !!fristBehandlingPåVent,
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
   ...hentDokumenterMedNavnOgFikkInnsyn(dokumenter || []),
 });
@@ -95,7 +95,7 @@ const getFilteredReceivedDocuments = (allDocuments: Dokument[]): Dokument[] => {
 
 interface OwnProps {
   saksNr: string;
-  behandlingPaaVent: boolean;
+  fristBehandlingPåVent?: string;
   innsynMottattDato: string;
   innsynDokumenter: InnsynDokument[];
   innsynResultatType: Kodeverk;
@@ -122,7 +122,7 @@ export const InnsynForm: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   vedtaksdokumentasjon,
   innsynResultatType,
-  behandlingPaaVent,
+  fristBehandlingPåVent,
   innsynDokumenter,
   alleDokumenter,
   aksjonspunkter,
@@ -136,10 +136,10 @@ export const InnsynForm: FunctionComponent<OwnProps> = ({
   const initialValues = useMemo(() => buildInitialValues(
     innsynMottattDato,
     innsynResultatType,
-    behandlingPaaVent,
     innsynDokumenter,
-    aksjonspunkter),
-  [innsynMottattDato, innsynResultatType, behandlingPaaVent, innsynDokumenter, aksjonspunkter]);
+    aksjonspunkter,
+    fristBehandlingPåVent),
+  [innsynMottattDato, innsynResultatType, fristBehandlingPåVent, innsynDokumenter, aksjonspunkter]);
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,

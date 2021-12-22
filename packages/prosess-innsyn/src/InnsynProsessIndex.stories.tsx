@@ -11,16 +11,17 @@ import {
 } from '@fpsak-frontend/types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import innsynResultatType from '@fpsak-frontend/kodeverk/src/innsynResultatType';
 
 import InnsynProsessIndex from './InnsynProsessIndex';
 
-const behandling = {
+const defaultBehandling = {
   uuid: '1',
   versjon: 1,
   behandlingPaaVent: false,
 } as Behandling;
 
-const aksjonspunkter = [{
+const defaultAksjonspunkter = [{
   definisjon: {
     kode: aksjonspunktCodes.VURDER_INNSYN,
     kodeverk: '',
@@ -38,30 +39,31 @@ export default {
 };
 
 const Template: Story<{
+  behandling: Behandling;
+  aksjonspunkter: Aksjonspunkt[];
   submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
+  innsyn: Innsyn;
+  isReadOnly?: boolean;
 }> = ({
+  behandling,
+  aksjonspunkter,
   submitCallback,
+  innsyn,
+  isReadOnly = false,
 }) => (
   <InnsynProsessIndex
     behandling={behandling}
     alleKodeverk={alleKodeverk as any}
     aksjonspunkter={aksjonspunkter}
     submitCallback={submitCallback}
-    isReadOnly={false}
+    isReadOnly={isReadOnly}
     isAksjonspunktOpen
     readOnlySubmitButton={false}
     status=""
     vilkar={[]}
     alleMerknaderFraBeslutter={{}}
     setFormData={() => undefined}
-    innsyn={{
-      dokumenter: [] as InnsynDokument[],
-      vedtaksdokumentasjon: [{
-        dokumentId: '1',
-        tittel: behandlingType.FORSTEGANGSSOKNAD,
-        opprettetDato: '2019-01-01',
-      }],
-    } as Innsyn}
+    innsyn={innsyn}
     saksnummer="123434"
     alleDokumenter={[{
       journalpostId: '2',
@@ -75,5 +77,46 @@ const Template: Story<{
 
 export const PanelForVurderingAvInnsyn = Template.bind({});
 PanelForVurderingAvInnsyn.args = {
+  behandling: defaultBehandling,
+  aksjonspunkter: defaultAksjonspunkter,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
+  innsyn: {
+    dokumenter: [] as InnsynDokument[],
+    vedtaksdokumentasjon: [{
+      dokumentId: '1',
+      tittel: behandlingType.FORSTEGANGSSOKNAD,
+      opprettetDato: '2019-01-01',
+    }],
+  } as Innsyn,
+};
+
+export const InnsynSattPaVent = Template.bind({});
+InnsynSattPaVent.args = {
+  behandling: {
+    ...defaultBehandling,
+    fristBehandlingPåVent: '2021-12-25',
+  },
+  aksjonspunkter: [{
+    ...defaultAksjonspunkter[0],
+    status: {
+      kode: aksjonspunktStatus.UTFORT,
+      kodeverk: '',
+    },
+    begrunnelse: 'Dette er en begrunnelse',
+  }],
+  isReadOnly: true,
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  innsyn: {
+    dokumenter: [] as InnsynDokument[],
+    innsynResultatType: {
+      kode: innsynResultatType.INNVILGET,
+      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
+    },
+    innsynMottattDato: '2021-12-12',
+    vedtaksdokumentasjon: [{
+      dokumentId: '1',
+      tittel: behandlingType.FORSTEGANGSSOKNAD,
+      opprettetDato: '2019-01-01',
+    }],
+  } as Innsyn,
 };
