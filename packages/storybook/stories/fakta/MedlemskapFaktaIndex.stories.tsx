@@ -154,24 +154,8 @@ export const visAksjonspunktForOverstyringAvStartdatoForForeldrepengerperioden =
     behandling={behandling}
     medlemskap={medlemskap}
     soknad={soknad}
-    aksjonspunkter={[{
-      definisjon: {
-        kode: aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
-      begrunnelse: undefined,
-      kanLoses: true,
-      erAktivt: true,
-    }]}
     isForeldrepengerFagsak
     alleKodeverk={alleKodeverk as any}
-    alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO]: merknaderFraBeslutter,
-    }}
     readOnlyForStartdatoForForeldrepenger={false}
   />
 );

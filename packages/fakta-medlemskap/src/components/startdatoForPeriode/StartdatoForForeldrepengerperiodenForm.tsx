@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Column, Row } from 'nav-frontend-grid';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 
-import { AksjonspunktHelpTextTemp, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
   hasValidDate, hasValidText, maxLength, minLength, required,
@@ -66,13 +66,8 @@ export const StartdatoForForeldrepengerperiodenForm: FunctionComponent<PureOwnPr
   alleMerknaderFraBeslutter,
   ...formProps
 }) => (
-  <div className={hasOpenAksjonspunkt || !hasOpenMedlemskapAksjonspunkter ? undefined : styles.inactiveAksjonspunkt}>
-    <form className={hasOpenAksjonspunkt || !hasOpenMedlemskapAksjonspunkter ? undefined : styles.container} onSubmit={formProps.handleSubmit}>
-      {hasAksjonspunkt && (
-        <AksjonspunktHelpTextTemp isAksjonspunktOpen={submittable && hasOpenAksjonspunkt}>
-          {[<FormattedMessage key="PeriodenAvviker" id="StartdatoForForeldrepengerperiodenForm.PeriodenAvviker" />]}
-        </AksjonspunktHelpTextTemp>
-      )}
+  <div className={!hasOpenMedlemskapAksjonspunkter ? undefined : styles.inactiveAksjonspunkt}>
+    <form className={!hasOpenMedlemskapAksjonspunkter ? undefined : styles.container} onSubmit={formProps.handleSubmit}>
       <FaktaGruppe
         title={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.StartdatoForPerioden' })}
         merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO]}

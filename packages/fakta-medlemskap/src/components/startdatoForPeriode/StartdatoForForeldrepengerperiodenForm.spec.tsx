@@ -4,7 +4,6 @@ import { shallow } from 'enzyme';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { Aksjonspunkt, Soknad } from '@fpsak-frontend/types';
 
@@ -18,8 +17,8 @@ describe('<StartdatoForForeldrepengerperiodenForm>', () => {
     const wrapper = shallow(<StartdatoForForeldrepengerperiodenForm
       {...reduxFormPropsMock}
       intl={intlMock}
-      hasAksjonspunkt
-      hasOpenAksjonspunkt
+      hasAksjonspunkt={false}
+      hasOpenAksjonspunkt={false}
       hasOpenMedlemskapAksjonspunkter
       submittable
       overstyringDisabled={false}
@@ -36,10 +35,6 @@ describe('<StartdatoForForeldrepengerperiodenForm>', () => {
         kodeverk: '',
       }}
     />);
-
-    const helpText = wrapper.find(AksjonspunktHelpTextTemp);
-    expect(helpText).toHaveLength(1);
-    expect(helpText.prop('isAksjonspunktOpen')).toBe(true);
 
     const button = wrapper.find(FaktaSubmitButton);
     expect(button).toHaveLength(1);
