@@ -4,7 +4,6 @@ import { RawIntlProvider } from 'react-intl';
 import { Medlemskap, KodeverkMedNavn, StandardProsessPanelProps } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 import { OverstyringAksjonspunkter } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import VilkarresultatMedOverstyringForm from './components/VilkarresultatMedOverstyringForm';
 import messages from '../i18n/nb_NO.json';
@@ -46,26 +45,26 @@ const VilkarresultatMedOverstyringProsessIndex: FunctionComponent<OwnProps & Sta
   setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <ReduxWrapper formName="VilkarresultatMedOverstyringProsessIndex" formData={formData} setFormData={setFormData}>
-      <VilkarresultatMedOverstyringForm
-        behandlingType={behandling.type}
-        behandlingsresultat={behandling.behandlingsresultat}
-        medlemskapFom={medlemskap.fom}
-        aksjonspunkter={aksjonspunkter}
-        submitCallback={submitCallback}
-        overrideReadOnly={overrideReadOnly}
-        kanOverstyreAccess={kanOverstyreAccess}
-        toggleOverstyring={toggleOverstyring}
-        avslagsarsaker={avslagsarsaker}
-        status={status}
-        erOverstyrt={erOverstyrt}
-        panelTittelKode={panelTittelKode}
-        overstyringApKode={overstyringApKode}
-        lovReferanse={lovReferanse}
-        erMedlemskapsPanel={erMedlemskapsPanel}
-        erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon.kode]?.notAccepted)}
-      />
-    </ReduxWrapper>
+    <VilkarresultatMedOverstyringForm
+      behandlingType={behandling.type}
+      behandlingsresultat={behandling.behandlingsresultat}
+      medlemskapFom={medlemskap.fom}
+      aksjonspunkter={aksjonspunkter}
+      submitCallback={submitCallback}
+      overrideReadOnly={overrideReadOnly}
+      kanOverstyreAccess={kanOverstyreAccess}
+      toggleOverstyring={toggleOverstyring}
+      avslagsarsaker={avslagsarsaker}
+      status={status}
+      erOverstyrt={erOverstyrt}
+      panelTittelKode={panelTittelKode}
+      overstyringApKode={overstyringApKode}
+      lovReferanse={lovReferanse}
+      erMedlemskapsPanel={erMedlemskapsPanel}
+      erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon.kode]?.notAccepted)}
+      formData={formData}
+      setFormData={setFormData}
+    />
   </RawIntlProvider>
 );
 
