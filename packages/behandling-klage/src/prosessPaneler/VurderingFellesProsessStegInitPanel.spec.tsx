@@ -9,7 +9,9 @@ import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
-import {Aksjonspunkt, Behandling, Fagsak, KlageVurdering} from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, AlleKodeverk, Behandling, Fagsak, KlageVurdering,
+} from '@fpsak-frontend/types';
 import * as Felles from '@fpsak-frontend/behandling-felles/src/utils/prosess/useStandardProsessPanelProps';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -20,7 +22,6 @@ import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
 import { KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';
 import VurderingFellesProsessStegInitPanel from './VurderingFellesProsessStegInitPanel';
-import klageVurderingCodes from "@fpsak-frontend/kodeverk/src/klageVurdering";
 
 type INIT_DATA = {
   aksjonspunkter: Aksjonspunkt[];
