@@ -53,10 +53,10 @@
     "@fpsak-frontend/utils": "1.0.0",
     "@storybook/addon-actions": "^6.4.9",
     "@storybook/addons": "^6.4.9",
-    "history": "^5.1.0",
+    "history": "^5.2.0",
     "react": "^17.0.2",
-    "react-intl": "^5.23.0",
-    "react-router-dom": "^6.1.1",
+    "react-intl": "^5.24.1",
+    "react-router-dom": "^6.2.1",
     "redux": "^4.1.2"
   }
 }
