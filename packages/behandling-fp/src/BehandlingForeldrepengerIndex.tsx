@@ -121,7 +121,6 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
                 {...props}
                 rettigheter={rettigheter}
                 hasFetchError={behandlingState === RestApiState.ERROR}
-                arbeidsgiverOpplysningerPerId={arbeidsgivere}
               />
               <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <BeregningFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} />

@@ -108,7 +108,6 @@ const BehandlingEngangsstonadIndex: FunctionComponent<StandardBehandlingProps> =
               <FodselvilkaretFaktaInitPanel {...props} />
               <MedlemskapsvilkaretFaktaInitPanel
                 {...props}
-                arbeidsgiverOpplysningerPerId={arbeidsgivere}
                 rettigheter={rettigheter}
                 hasFetchError={behandlingState === RestApiState.ERROR}
               />

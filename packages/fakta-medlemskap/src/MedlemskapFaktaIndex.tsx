@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import {
-  StandardFaktaPanelProps, InntektArbeidYtelse, Soknad, Medlemskap, ArbeidsgiverOpplysningerPerId,
-} from '@fpsak-frontend/types';
+import { StandardFaktaPanelProps, Soknad, Medlemskap } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 import { ReduxWrapper } from '@fpsak-frontend/form';
 
@@ -15,16 +13,13 @@ const intl = createIntl(messages);
 interface OwnProps {
   medlemskap: Medlemskap;
   soknad: Soknad;
-  inntektArbeidYtelse: InntektArbeidYtelse;
   isForeldrepengerFagsak: boolean;
   readOnlyForStartdatoForForeldrepenger: boolean;
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 const MedlemskapFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
   behandling,
   soknad,
-  inntektArbeidYtelse,
   medlemskap,
   aksjonspunkter,
   harApneAksjonspunkter,
@@ -35,7 +30,6 @@ const MedlemskapFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps
   submitCallback,
   readOnly,
   readOnlyForStartdatoForForeldrepenger,
-  arbeidsgiverOpplysningerPerId,
   formData,
   setFormData,
 }) => (
@@ -45,7 +39,6 @@ const MedlemskapFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps
         behandlingType={behandling.type}
         behandlingStatus={behandling.status}
         soknad={soknad}
-        inntektArbeidYtelse={inntektArbeidYtelse}
         medlemskap={medlemskap}
         aksjonspunkter={aksjonspunkter}
         hasOpenAksjonspunkter={harApneAksjonspunkter}
@@ -56,7 +49,6 @@ const MedlemskapFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps
         submitCallback={submitCallback}
         readOnly={readOnly}
         readOnlyForStartdatoForForeldrepenger={readOnlyForStartdatoForForeldrepenger}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
     </ReduxWrapper>
   </RawIntlProvider>
