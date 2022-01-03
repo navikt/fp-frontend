@@ -3,6 +3,7 @@ export { default as ProsessStegBegrunnelseTextFieldNew } from './src/ProsessSteg
 export { default as ProsessStegSubmitButton } from './src/ProsessStegSubmitButton';
 export { default as ProsessStegSubmitButtonNew } from './src/ProsessStegSubmitButtonNew';
 export { default as VilkarResultPicker } from './src/vilkar/VilkarResultPicker';
+export { default as VilkarResultPickerNew } from './src/vilkar/VilkarResultPickerNew';
 export { default as ProsessPanelTemplate } from './src/vilkar/ProsessPanelTemplate';
 export { default as OverstyringPanel } from './src/vilkar/OverstyringPanel';
 export { default as OverstyringPanelNew } from './src/vilkar/OverstyringPanelNew';
