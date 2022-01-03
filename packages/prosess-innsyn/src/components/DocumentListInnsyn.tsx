@@ -1,11 +1,9 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import {
-  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
-} from 'react-intl';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
-import { CheckboxField } from '@fpsak-frontend/form';
+import { CheckboxField } from '@fpsak-frontend/form-hooks';
 import {
   DateTimeLabel, Image, Table, TableColumn, TableRow,
 } from '@fpsak-frontend/shared-components';
@@ -64,12 +62,12 @@ interface OwnProps {
  * trigget når saksbehandler velger et dokument. Finnes ingen dokumenter blir det kun vist en label
  * som viser at ingen dokumenter finnes på fagsak.
  */
-const DocumentListInnsyn: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const DocumentListInnsyn: FunctionComponent<OwnProps> = ({
   documents,
   saksNr,
   readOnly,
 }) => {
+  const intl = useIntl();
   if (documents.length === 0) {
     return <Normaltekst className={styles.noDocuments}><FormattedMessage id="DocumentListInnsyn.NoDocuments" /></Normaltekst>;
   }
@@ -128,4 +126,4 @@ DocumentListInnsyn.defaultProps = {
   readOnly: false,
 };
 
-export default injectIntl(DocumentListInnsyn);
+export default DocumentListInnsyn;
