@@ -6,6 +6,7 @@ enum KodeverkType {
   BEHANDLING_AARSAK = 'BehandlingÅrsakType',
   KLAGE_AVVIST_AARSAK = 'KlageAvvistÅrsak',
   KLAGE_MEDHOLD_ARSAK = 'KlageMedholdÅrsak',
+  KLAGE_HJEMMEL = 'KlageHjemmel',
   OMSORGSOVERTAKELSE_VILKAR_TYPE = 'OmsorgsovertakelseVilkårType',
   MEDLEMSKAP_MANUELL_VURDERING_TYPE = 'MedlemskapManuellVurderingType',
   VERGE_TYPE = 'VergeType',

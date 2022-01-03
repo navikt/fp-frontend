@@ -24,9 +24,9 @@ import TempsaveKlageButton, { TransformedValues } from '../felles/TempsaveKlageB
 import styles from './behandleKlageFormNfp.less';
 
 const transformValues = (values: FormValues): KlageVurderingResultatAp => ({
-  klageMedholdArsak: (values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE
-    || values.klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? values.klageMedholdArsak : null,
+  klageMedholdArsak: values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageMedholdArsak : null,
   klageVurderingOmgjoer: values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
+  klageHjemmel: values.klageHjemmel,
   klageVurdering: values.klageVurdering,
   fritekstTilBrev: values.fritekstTilBrev,
   begrunnelse: values.begrunnelse,
@@ -37,6 +37,7 @@ type FormValues = {
   klageVurdering?: Kodeverk;
   fritekstTilBrev?: string;
   klageMedholdArsak?: Kodeverk;
+  klageHjemmel?: Kodeverk;
   klageVurderingOmgjoer?: Kodeverk;
   begrunnelse?: string;
 };
@@ -44,6 +45,7 @@ type FormValues = {
 const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): FormValues => ({
   klageMedholdArsak: klageVurderingResultat ? klageVurderingResultat.klageMedholdArsak : null,
   klageVurderingOmgjoer: klageVurderingResultat ? klageVurderingResultat.klageVurderingOmgjoer : null,
+  klageHjemmel: klageVurderingResultat ? klageVurderingResultat.klageHjemmel : null,
   klageVurdering: klageVurderingResultat ? klageVurderingResultat.klageVurdering : null,
   begrunnelse: klageVurderingResultat ? klageVurderingResultat.begrunnelse : null,
   fritekstTilBrev: klageVurderingResultat ? klageVurderingResultat.fritekstTilBrev : null,
@@ -57,6 +59,7 @@ interface OwnProps {
   sprakkode: Kodeverk;
   alleKodeverk: AlleKodeverk;
   klageVurdering: KlageVurdering;
+  alleAktuelleHjemler: Kodeverk[];
   submitCallback: (data: KlageVurderingResultatAp) => Promise<void>;
   formData?: FormValues;
   setFormData: (data: FormValues) => void;
@@ -74,6 +77,7 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
   saveKlage,
   readOnlySubmitButton,
   sprakkode,
+  alleAktuelleHjemler,
   alleKodeverk,
   submitCallback,
   formData,
@@ -103,6 +107,8 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
         readOnly={readOnly}
         klageVurdering={formValues.klageVurdering}
         medholdReasons={alleKodeverk[kodeverkTyper.KLAGE_MEDHOLD_ARSAK]}
+        alleHjemler={alleKodeverk[kodeverkTyper.KLAGE_HJEMMEL]}
+        alleAktuelleHjemler={alleAktuelleHjemler}
       />
       <div className={styles.confirmVilkarForm}>
         <ProsessStegBegrunnelseTextFieldNew

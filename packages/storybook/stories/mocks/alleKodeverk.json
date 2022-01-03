@@ -3662,6 +3662,13 @@
       "kodeverk": "KLAGE_MEDHOLD_AARSAK"
     }
   ],
+  "KlageHjemmel": [
+    {
+      "kode": "14-17",
+      "navn": "Engangsstønad",
+      "kodeverk": "KLAGE_HJEMMEL"
+    }
+  ],
   "Region": [
     {
       "kode": "EOS",

@@ -25,6 +25,8 @@ describe('<KlagevurderingProsessIndex>', () => {
 
     userEvent.click(screen.getByText('Til gunst'));
 
+    userEvent.selectOptions(utils.getByLabelText('Hjemmel'), '14-17');
+
     const vurderingInput = utils.getByLabelText('Begrunnelse');
     userEvent.type(vurderingInput, 'Dette er en begrunnelse');
 
@@ -37,6 +39,9 @@ describe('<KlagevurderingProsessIndex>', () => {
     expect(mellomlagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
       fritekstTilBrev: 'Dette er en fritekst',
+      klageHjemmel: {
+        kode: '14-17',
+      },
       klageMedholdArsak: {
         kode: 'ULIK_VURDERING',
       },
@@ -64,6 +69,9 @@ describe('<KlagevurderingProsessIndex>', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
       fritekstTilBrev: 'Dette er en fritekst',
+      klageHjemmel: {
+        kode: '14-17',
+      },
       klageMedholdArsak: {
         kode: 'ULIK_VURDERING',
       },
