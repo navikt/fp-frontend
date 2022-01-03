@@ -2,8 +2,10 @@ import React from 'react';
 import {
   render, screen, waitFor, fireEvent,
 } from '@testing-library/react';
+import moment from 'moment';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
+import { ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import * as stories from './InnsynProsessIndex.stories';
 
 const {
@@ -40,7 +42,7 @@ describe('<InnsynProsessIndex>', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en vurdering',
-      fristDato: '2021-12-25',
+      fristDato: moment().add(3, 'days').format(ISO_DATE_FORMAT),
       innsynDokumenter: [{
         dokumentId: '3',
         fikkInnsyn: false,

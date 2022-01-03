@@ -29,7 +29,6 @@ describe('<VisittkortBarnInfoPanel>', () => {
     );
 
     expect(await screen.findByText(/Født 01.01.2020/)).toBeInTheDocument();
-    expect(screen.getByText(/(1 år)/)).toBeInTheDocument();
   });
 
   it('skal vise panel for omsorg', async () => {
