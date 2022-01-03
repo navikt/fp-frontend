@@ -5,8 +5,8 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@formatjs/intl-datetimeformat": "^4.2.6",
-    "@formatjs/intl-numberformat": "^7.2.6",
+    "@formatjs/intl-datetimeformat": "^4.4.1",
+    "@formatjs/intl-numberformat": "^7.3.1",
     "@fpsak-frontend/assets": "1.0.0",
     "@fpsak-frontend/behandling-anke": "1.0.0",
     "@fpsak-frontend/behandling-es": "1.0.0",
@@ -47,7 +47,7 @@
     "@fpsak-frontend/utils": "1.0.0",
     "@sentry/browser": "^6.16.1",
     "axios": "0.24.0",
-    "history": "^5.1.0",
+    "history": "^5.2.0",
     "moment": "^2.29.1",
     "nav-frontend-core": "6.0.1",
     "nav-frontend-modal": "2.0.1",
@@ -55,7 +55,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-responsive": "^8.2.0",
-    "react-router-dom": "^6.1.1"
+    "react-router-dom": "^6.2.1"
   },
   "devDependencies": {
     "@fpsak-frontend/storybook-utils": "^1.0.0",
