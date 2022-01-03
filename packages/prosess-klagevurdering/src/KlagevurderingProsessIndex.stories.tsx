@@ -57,6 +57,10 @@ const Template: Story<{
           kodeverk: 'KLAGE_AVVIST_AARSAK',
         }],
       },
+      aktuelleHjemler: [{
+        kode: '14-17',
+        kodeverk: 'KLAGE_HJEMMEL',
+      }],
     } as KlageVurdering}
     saveKlage={mellomlagre}
     previewCallback={forhandsvisCallback}

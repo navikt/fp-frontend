@@ -6,6 +6,7 @@ export type KlageVurderingResultat = Readonly<{
   fritekstTilBrev?: string;
   klageMedholdArsak?: Kodeverk;
   klageVurderingOmgjoer?: Kodeverk;
+  klageHjemmel?: Kodeverk;
   godkjentAvMedunderskriver: boolean;
   begrunnelse?: string;
 }>
@@ -33,6 +34,7 @@ type KlageVurdering = Readonly<{
     erKlagefirstOverholdt: boolean;
     erSignert: boolean;
   };
+  aktuelleHjemler?: Kodeverk[];
 }>
 
 export default KlageVurdering;
