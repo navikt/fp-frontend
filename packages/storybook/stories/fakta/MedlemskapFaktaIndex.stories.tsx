@@ -7,7 +7,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import MedlemskapFaktaIndex from '@fpsak-frontend/fakta-medlemskap';
 import {
-  Behandling, InntektArbeidYtelse, Medlemskap, Soknad, MedlemPeriode, PersonopplysningMedlem,
+  Behandling, Medlemskap, Soknad, MedlemPeriode, PersonopplysningMedlem,
 } from '@fpsak-frontend/types';
 
 import alleKodeverk from '../mocks/alleKodeverk.json';
@@ -46,17 +46,6 @@ const soknad = {
     }],
   },
 } as Soknad;
-
-const inntektArbeidYtelse = {
-  inntektsmeldinger: [{
-    arbeidsgiverStartdato: '2019-02-02',
-    arbeidsgiverReferanse: '973861778',
-  }, {
-    arbeidsgiverStartdato: '2019-02-03',
-    arbeidsgiverReferanse: '973861778',
-  }],
-  skalKunneLeggeTilNyeArbeidsforhold: false,
-} as InntektArbeidYtelse;
 
 const medlemskap = {
   opphold: [{
@@ -144,14 +133,6 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
-const arbeidsgiverOpplysningerPerId = {
-  973861778: {
-    erPrivatPerson: false,
-    identifikator: '973861778',
-    navn: 'MYGG ROBUST',
-  },
-};
-
 const standardFaktaProps = {
   aksjonspunkter: [],
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -173,27 +154,9 @@ export const visAksjonspunktForOverstyringAvStartdatoForForeldrepengerperioden =
     behandling={behandling}
     medlemskap={medlemskap}
     soknad={soknad}
-    inntektArbeidYtelse={inntektArbeidYtelse}
-    aksjonspunkter={[{
-      definisjon: {
-        kode: aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
-      begrunnelse: undefined,
-      kanLoses: true,
-      erAktivt: true,
-    }]}
     isForeldrepengerFagsak
     alleKodeverk={alleKodeverk as any}
-    alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO]: merknaderFraBeslutter,
-    }}
     readOnlyForStartdatoForForeldrepenger={false}
-    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );
 
@@ -203,7 +166,6 @@ export const visAksjonspunktForAlleAndreMedlemskapsaksjonspunkter = () => (
     behandling={behandling}
     medlemskap={medlemskap}
     soknad={soknad}
-    inntektArbeidYtelse={inntektArbeidYtelse}
     aksjonspunkter={[{
       definisjon: {
         kode: aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT,
@@ -262,6 +224,5 @@ export const visAksjonspunktForAlleAndreMedlemskapsaksjonspunkter = () => (
       [aksjonspunktCodes.AVKLAR_OPPHOLDSRETT]: merknaderFraBeslutter,
     }}
     readOnlyForStartdatoForForeldrepenger={false}
-    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );

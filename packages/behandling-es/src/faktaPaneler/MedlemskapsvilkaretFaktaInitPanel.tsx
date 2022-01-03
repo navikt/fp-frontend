@@ -6,8 +6,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import MedlemskapFaktaIndex from '@fpsak-frontend/fakta-medlemskap';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import {
-  AksessRettigheter,
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse, Medlemskap, Soknad,
+  AksessRettigheter, Aksjonspunkt, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
 import { FaktaDefaultInitPanel, FaktaPanelInitProps, harBehandlingReadOnlyStatus } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@fpsak-frontend/utils';
@@ -34,14 +33,12 @@ type EndepunktInitData = {
   soknad: Soknad;
 }
 
-const ENDEPUNKTER_PANEL_DATA = [EsBehandlingApiKeys.INNTEKT_ARBEID_YTELSE, EsBehandlingApiKeys.MEDLEMSKAP];
+const ENDEPUNKTER_PANEL_DATA = [EsBehandlingApiKeys.MEDLEMSKAP];
 type EndepunktPanelData = {
-  inntektArbeidYtelse: InntektArbeidYtelse;
   medlemskap: Medlemskap;
 }
 
 interface OwnProps {
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   rettigheter: AksessRettigheter;
   hasFetchError: boolean;
 }
@@ -50,7 +47,6 @@ interface OwnProps {
  * MedlemskapsvilkaretFaktaInitPanel
  */
 const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
-  arbeidsgiverOpplysningerPerId,
   rettigheter,
   hasFetchError,
   ...props
@@ -67,7 +63,6 @@ const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanel
     skalPanelVisesIMeny={(initData) => !!initData?.soknad}
     renderPanel={(data) => (
       <MedlemskapFaktaIndex
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         isForeldrepengerFagsak={false}
         readOnlyForStartdatoForForeldrepenger={!rettigheter.writeAccess.isEnabled
           || hasFetchError

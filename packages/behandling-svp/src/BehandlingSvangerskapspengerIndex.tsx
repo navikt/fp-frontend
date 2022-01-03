@@ -111,7 +111,6 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<StandardBehandlingPro
                 {...props}
                 rettigheter={rettigheter}
                 hasFetchError={behandlingState === RestApiState.ERROR}
-                arbeidsgiverOpplysningerPerId={arbeidsgivere}
               />
               <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <BeregningFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} rettigheter={rettigheter} />

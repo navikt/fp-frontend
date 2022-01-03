@@ -5,7 +5,7 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse, Kodeverk, AlleKodeverk, Medlemskap, Soknad,
+  Aksjonspunkt, Kodeverk, AlleKodeverk, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
 import {
   AvklarFortsattMedlemskapAp, BekreftBosattVurderingAp, BekreftErMedlemVurderingAp, BekreftLovligOppholdVurderingAp,
@@ -56,11 +56,9 @@ interface OwnProps {
   behandlingType: Kodeverk;
   behandlingStatus: Kodeverk;
   soknad: Soknad;
-  inntektArbeidYtelse: InntektArbeidYtelse;
   alleKodeverk: AlleKodeverk;
   medlemskap: Medlemskap;
   readOnlyForStartdatoForForeldrepenger: boolean;
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 /**
@@ -80,11 +78,9 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps & WrappedComponentProps> =
   behandlingType,
   behandlingStatus,
   soknad,
-  inntektArbeidYtelse,
   alleKodeverk,
   medlemskap,
   readOnlyForStartdatoForForeldrepenger,
-  arbeidsgiverOpplysningerPerId,
 }) => {
   const avklarStartdatoOverstyring = aksjonspunkter.find((ap) => ap.definisjon.kode === OVERSTYR_AVKLAR_STARTDATO);
   const aksjonspunkterMinusAvklarStartDato = useMemo(() => aksjonspunkter
@@ -104,9 +100,7 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps & WrappedComponentProps> =
             behandlingStatus={behandlingStatus}
             aksjonspunkter={aksjonspunkter}
             soknad={soknad}
-            inntektArbeidYtelse={inntektArbeidYtelse}
             readOnlyForStartdatoForForeldrepenger={readOnlyForStartdatoForForeldrepenger}
-            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           />
           <VerticalSpacer twentyPx />
         </>
