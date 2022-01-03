@@ -27,7 +27,6 @@ describe('<InnsynProsessIndex>', () => {
 
     expect(screen.getByText('Velg innsynsdokumentasjon til søker')).toBeInTheDocument();
     expect(screen.getByText('Dette er et dokument')).toBeInTheDocument();
-    expect(screen.getByText('01.08.2017-22:54')).toBeInTheDocument();
 
     const vurderingInput = utils.getByLabelText('Vurdering');
     userEvent.type(vurderingInput, 'Dette er en vurdering');
