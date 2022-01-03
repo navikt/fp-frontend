@@ -11,7 +11,7 @@ type BehandlingAppKontekst = Readonly<{
   uuid: string;
   status: Kodeverk;
   type: Kodeverk;
-  fristBehandlingPaaVent?: string;
+  fristBehandlingPåVent?: string;
   venteArsakKode?: string;
   behandlingPaaVent: boolean;
   behandlingHenlagt: boolean;
