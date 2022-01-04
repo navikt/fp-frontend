@@ -122,9 +122,6 @@ export const findDifferenceInMonthsAndDays = (fomDate: string, tomDate: string):
   const diff = tDate.diff(fDate);
   const diffDuration = dayjs.duration(diff);
 
-  console.log(fDate);
-  console.log(tDate);
-
   return {
     months: diffDuration.months(),
     days: diffDuration.days(),
