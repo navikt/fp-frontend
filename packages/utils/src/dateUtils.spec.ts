@@ -1,3 +1,6 @@
+import dayjs from 'dayjs';
+import timezone from 'dayjs/plugin/timezone';
+
 import {
   addDaysToDate,
   calcDaysAndWeeks,
@@ -7,7 +10,17 @@ import {
   timeFormat,
 } from './dateUtils';
 
+dayjs.extend(timezone);
+
 describe('dateutils', () => {
+  beforeEach(() => {
+    dayjs.tz.setDefault('Europe/Moscow');
+  });
+
+  afterEach(() => {
+    dayjs.tz.setDefault();
+  });
+
   describe('calcDaysAndWeeksWithWeekends', () => {
     it('Skal kalkulere antall dager mellom to datoer inkludert helger og skrive det ut som uker og dager', () => {
       const fom = '2018-04-17';
