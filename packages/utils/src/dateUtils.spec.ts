@@ -66,12 +66,12 @@ describe('dateutils', () => {
       });
     });
 
-    it('skal vise at perioden mellom to datoer er på 11 dager', () => {
+    it('skal vise at perioden mellom to datoer er på 10 dager', () => {
       const fomDate = '2018-04-20';
       const tomDate = '2018-04-30';
       expect(findDifferenceInMonthsAndDays(fomDate, tomDate)).toEqual({
         months: 0,
-        days: 11,
+        days: 10,
       });
     });
 
@@ -79,6 +79,15 @@ describe('dateutils', () => {
       const fomDate = '2018-04-30';
       const tomDate = '2018-04-10';
       expect(findDifferenceInMonthsAndDays(fomDate, tomDate)).toBeUndefined();
+    });
+
+    it('skal vise korrekt periode mellom to datoer', () => {
+      const fomDate = '2021-02-27';
+      const tomDate = '2021-05-20';
+      expect(findDifferenceInMonthsAndDays(fomDate, tomDate)).toEqual({
+        months: 2,
+        days: 22,
+      });
     });
   });
 });
