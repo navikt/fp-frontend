@@ -1,11 +1,13 @@
 import moment from 'moment/moment';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import duration from 'dayjs/plugin/duration';
 import 'moment/locale/nb';
 import {
   DDMMYYYY_DATE_FORMAT, HHMM_TIME_FORMAT, ISO_DATE_FORMAT, YYYY_MM_FORMAT,
 } from './formats';
 
+dayjs.extend(utc);
 dayjs.extend(duration);
 
 export const TIDENES_ENDE = '9999-12-31';
@@ -113,8 +115,8 @@ export const addDaysToDate = (dateString: string, nrOfDays: number): string => (
   : moment(dateString, ISO_DATE_FORMAT).add(nrOfDays, 'days').format(ISO_DATE_FORMAT));
 
 export const findDifferenceInMonthsAndDays = (fomDate: string, tomDate: string): { months: number; days: number; } | undefined => {
-  const fDate = dayjs(fomDate, ISO_DATE_FORMAT, true);
-  const tDate = dayjs(tomDate, ISO_DATE_FORMAT, true).add(1, 'days');
+  const fDate = dayjs(fomDate, ISO_DATE_FORMAT, true).utc(true);
+  const tDate = dayjs(tomDate, ISO_DATE_FORMAT, true).utc(true).add(1, 'days').utc(true);
   if (!fDate.isValid() || !tDate.isValid() || fDate.isAfter(tDate)) {
     return undefined;
   }
