@@ -7,15 +7,6 @@ import {
   timeFormat,
 } from './dateUtils';
 
-// Mocker timezone for å hindre feil på github
-jest.mock('dayjs', () => {
-  const dayjs = jest.requireActual('dayjs');
-  const timezone = jest.requireActual('dayjs/plugin/timezone');
-  dayjs.extend(timezone);
-  dayjs.tz.setDefault('Europe/Moscow');
-  return dayjs;
-});
-
 describe('dateutils', () => {
   describe('calcDaysAndWeeksWithWeekends', () => {
     it('Skal kalkulere antall dager mellom to datoer inkludert helger og skrive det ut som uker og dager', () => {
@@ -91,7 +82,6 @@ describe('dateutils', () => {
     });
 
     it('skal vise korrekt periode mellom to datoer', () => {
-      console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
       const fomDate = '2021-02-27';
       const tomDate = '2021-05-20';
       expect(findDifferenceInMonthsAndDays(fomDate, tomDate)).toEqual({
