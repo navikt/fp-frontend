@@ -116,7 +116,7 @@ export const addDaysToDate = (dateString: string, nrOfDays: number): string => (
 
 export const findDifferenceInMonthsAndDays = (fomDate: string, tomDate: string): { months: number; days: number; } | undefined => {
   const fDate = dayjs(fomDate, ISO_DATE_FORMAT, true).utc(true);
-  const tDate = dayjs(tomDate, ISO_DATE_FORMAT, true).utc(true).add(1, 'days').utc(true);
+  const tDate = dayjs(tomDate, ISO_DATE_FORMAT, true).utc(true);
   if (!fDate.isValid() || !tDate.isValid() || fDate.isAfter(tDate)) {
     return undefined;
   }
