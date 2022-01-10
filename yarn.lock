@@ -2194,9 +2194,9 @@
     tslib "^2.1.0"
 
 "@formatjs/intl-numberformat@^7.3.1":
-  version "7.3.1"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl-numberformat/-/intl-numberformat-7.3.1.tgz#9c49d1c41be6f02097f9b657eb8978a31b29f175"
-  integrity sha512-hYzG4Jr1rMRqkR6eb3nJ71myseQyiSLF8qC+/57Txz3RO5BUb8S6NuBkPuA+sepERs0WL1vs+Y4ZgzsORcVxZg==
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-numberformat/-/intl-numberformat-7.4.0.tgz#663cc281085d37ee7f16c9c87886104ba99a74a6"
+  integrity sha512-7ikPmjV94GeIGU4XfpYYiq11Jpv8+tOYYfvoAL49tYCSSvd0xhJsUUUgOL/Vs8ai1ou7ksJ73uXYSuAg79+rfg==
   dependencies:
     "@formatjs/ecma402-abstract" "1.11.1"
     "@formatjs/intl-localematcher" "0.2.22"
