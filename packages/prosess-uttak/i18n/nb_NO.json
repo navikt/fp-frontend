@@ -207,6 +207,7 @@
   "UttakPanel.NegativeSaldo": "Antall dager kan ikke overstige dagene som gjenstår på {periode}. Det er oppgitt {days} dager for mye.",
   "UttakPanel.InvalidTrekkDagerFlerbarnsdager": "Antall dager med flerbarnsdager kan ikke være høyere enn {maxDays}",
   "UttakPanel.InvalidStonadskonto": "Stønadskonto {konto} er ikke tilgjengelig",
+  "UttakActivity.UtsettelseUtenFullArbeid": "Søker har ikke 100% stilling, vurder om perioden kan utsettes.",
   "UttakActivity.MerEn100Prosent": "Samlet utbetalingsgrad og andel i arbeid bør ikke overskride 100%.",
   "UttakActivity.MerEn100ProsentOgOgyldigUtsettlse" : "Samlet utbetalingsgrad og andel i arbeid bør ikke overskride 100%. Søker har ikke 100% stilling, vurder om perioden kan utsettes."
 }

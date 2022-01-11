@@ -441,7 +441,7 @@ const warningUttakActivity = (values: FormValues): any => {
       _warning:
   <AlertStripe type="advarsel" className={styles.advarsel}>
     <FormattedMessage
-      id="ValidationMessage.UtsettelseUtenFullArbeid"
+      id="UttakActivity.UtsettelseUtenFullArbeid"
     />
   </AlertStripe>,
     };
