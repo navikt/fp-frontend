@@ -10,7 +10,7 @@ import { createIntl } from '@fpsak-frontend/utils';
 import avslattImage from '@fpsak-frontend/assets/images/avslaatt_hover.svg';
 import innvilgetImage from '@fpsak-frontend/assets/images/innvilget_hover.svg';
 
-import ProsessStegSubmitButton from '../ProsessStegSubmitButton';
+import ProsessStegSubmitButton from '../ProsessStegSubmitButtonNew';
 import messages from '../../i18n/nb_NO.json';
 
 import styles from './prosessPanelTemplate.less';
@@ -21,14 +21,13 @@ interface OwnProps {
   title: string;
   lovReferanse?: string;
   isAksjonspunktOpen: boolean;
-  handleSubmit: (data: any) => any;
-  formName: string;
   readOnlySubmitButton: boolean;
   originalErVilkarOk?: boolean;
   erIkkeGodkjentAvBeslutter: boolean;
   rendreFakta?: () => void;
   readOnly: boolean;
   isDirty?: boolean;
+  isSubmitting: boolean;
   children: ReactNode | ReactNode[];
 }
 
@@ -42,16 +41,15 @@ const ProsessPanelTemplate: FunctionComponent<OwnProps> = ({
   title,
   originalErVilkarOk,
   isAksjonspunktOpen,
-  handleSubmit,
-  formName,
   readOnlySubmitButton,
   readOnly,
   rendreFakta,
   isDirty,
   erIkkeGodkjentAvBeslutter,
+  isSubmitting,
   children,
 }) => (
-  <form onSubmit={handleSubmit}>
+  <>
     <FlexContainer>
       <FlexRow>
         {originalErVilkarOk !== undefined && (
@@ -97,10 +95,10 @@ const ProsessPanelTemplate: FunctionComponent<OwnProps> = ({
       {children}
       {!readOnly && <VerticalSpacer sixteenPx />}
       <ProsessStegSubmitButton
-        formName={formName}
         isReadOnly={readOnly}
         isSubmittable={!readOnlySubmitButton}
         isDirty={isDirty}
+        isSubmitting={isSubmitting}
       />
 
     </AksjonspunktBox>
@@ -110,7 +108,7 @@ const ProsessPanelTemplate: FunctionComponent<OwnProps> = ({
       {rendreFakta()}
     </>
     )}
-  </form>
+  </>
 );
 
 export default ProsessPanelTemplate;

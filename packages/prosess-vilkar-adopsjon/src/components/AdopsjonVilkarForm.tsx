@@ -1,17 +1,16 @@
-import React, { FunctionComponent } from 'react';
-import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
-import { createSelector } from 'reselect';
-import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import React, { FunctionComponent, useMemo } from 'react';
+import { useForm } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+import { Form } from '@fpsak-frontend/form-hooks';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
-  Aksjonspunkt, AlleKodeverk, Behandling, KodeverkMedNavn, Vilkar,
+  Aksjonspunkt, AlleKodeverk, Behandling, Vilkar,
 } from '@fpsak-frontend/types';
 import {
-  ProsessStegBegrunnelseTextField, VilkarResultPicker, ProsessPanelTemplate, validerApKodeOgHentApEnum,
+  ProsessStegBegrunnelseTextFieldNew, VilkarResultPickerNew, ProsessPanelTemplate, validerApKodeOgHentApEnum,
 } from '@fpsak-frontend/prosess-felles';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
@@ -25,7 +24,7 @@ type FormValues = {
   begrunnelse?: string;
 }
 
-interface PureOwnProps {
+interface OwnProps {
   behandlingsresultat?: Behandling['behandlingsresultat'];
   aksjonspunkter: Aksjonspunkt[];
   status: string;
@@ -36,108 +35,90 @@ interface PureOwnProps {
   isApOpen: boolean;
   alleKodeverk: AlleKodeverk;
   erIkkeGodkjentAvBeslutter: boolean;
+  formData?: FormValues;
+  setFormData: (data: FormValues) => void;
 }
 
-interface MappedOwnProps {
-  originalErVilkarOk?: boolean;
-  erVilkarOk?: boolean;
-  lovReferanse?: string;
-  avslagsarsaker: KodeverkMedNavn[];
-  initialValues: FormValues;
-  onSubmit: (formValues: FormValues) => any;
-}
+export const buildInitialValues = (
+  aksjonspunkter: Aksjonspunkt[],
+  status: string,
+  behandlingsresultat?: Behandling['behandlingsresultat'],
+): FormValues => ({
+  ...VilkarResultPickerNew.buildInitialValues(behandlingsresultat, aksjonspunkter, status),
+  ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
+});
 
-/**
- * AdopsjonVilkarForm
- *
- * Presentasjonskomponent. Setter opp aksjonspunktet for avklaring av Adopsjonsvilkåret.
- */
-export const AdopsjonVilkarFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps<FormValues> & WrappedComponentProps> = ({
-  intl,
-  avslagsarsaker,
-  lovReferanse,
-  readOnly,
-  readOnlySubmitButton,
-  erVilkarOk,
-  originalErVilkarOk,
-  isApOpen,
-  erIkkeGodkjentAvBeslutter,
-  ...formProps
-}) => (
-  <ProsessPanelTemplate
-    title={intl.formatMessage({ id: 'AdopsjonVilkarForm.Adopsjon' })}
-    isAksjonspunktOpen={isApOpen}
-    formName={formProps.form}
-    handleSubmit={formProps.handleSubmit}
-    readOnlySubmitButton={readOnlySubmitButton}
-    readOnly={readOnly}
-    lovReferanse={lovReferanse}
-    originalErVilkarOk={originalErVilkarOk}
-    erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
-  >
-    <Element><FormattedMessage id="AdopsjonVilkarForm.TidligereUtbetaltStonad" /></Element>
-    <VilkarResultPicker
-      avslagsarsaker={avslagsarsaker}
-      erVilkarOk={erVilkarOk}
-      readOnly={readOnly}
-      customVilkarOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.Oppfylt" />}
-      customVilkarIkkeOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.IkkeOppfylt" values={{ b: (chunks: any) => <b>{chunks}</b> }} />}
-    />
-    <ProsessStegBegrunnelseTextField readOnly={readOnly} />
-  </ProsessPanelTemplate>
-);
-
-const validate = ({
-  erVilkarOk,
-  avslagCode,
-}: FormValues): any => VilkarResultPicker.validate(erVilkarOk, avslagCode);
-
-export const buildInitialValues = createSelector(
-  [(ownProps: PureOwnProps) => ownProps.behandlingsresultat,
-    (ownProps: PureOwnProps) => ownProps.aksjonspunkter,
-    (ownProps: PureOwnProps) => ownProps.status],
-  (behandlingsresultat, aksjonspunkter, status): FormValues => ({
-    ...VilkarResultPicker.buildInitialValues(behandlingsresultat, aksjonspunkter, status),
-    ...ProsessStegBegrunnelseTextField.buildInitialValues(aksjonspunkter),
-  }),
-);
-
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp => ({
-  ...VilkarResultPicker.transformValues(values),
-  ...ProsessStegBegrunnelseTextField.transformValues(values),
+const transformValues = (
+  values: FormValues,
+  aksjonspunkter: Aksjonspunkt[],
+): VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp => ({
+  ...VilkarResultPickerNew.transformValues(values),
+  ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
   kode: validerApKodeOgHentApEnum(aksjonspunkter[0].definisjon.kode,
     AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
     AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN),
 });
 
-const lagSubmitFn = createSelector([
-  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback(transformValues(values, aksjonspunkter)));
+/**
+ * AdopsjonVilkarForm
+ *
+ * Setter opp aksjonspunktet for avklaring av Adopsjonsvilkåret.
+ */
+export const AdopsjonVilkarForm: FunctionComponent<OwnProps> = ({
+  vilkar,
+  readOnly,
+  readOnlySubmitButton,
+  status,
+  submitCallback,
+  behandlingsresultat,
+  alleKodeverk,
+  isApOpen,
+  aksjonspunkter,
+  erIkkeGodkjentAvBeslutter,
+  formData,
+  setFormData,
+}) => {
+  const intl = useIntl();
 
-const formName = 'AdopsjonVilkarForm';
+  const initialValues = useMemo(() => buildInitialValues(aksjonspunkter, status, behandlingsresultat), [behandlingsresultat, aksjonspunkter, status]);
+  const formMethods = useForm<FormValues>({
+    defaultValues: formData || initialValues,
+  });
 
-const mapStateToPropsFactory = (_initialState: any, staticOwnProps: PureOwnProps) => {
-  const { aksjonspunkter, status, alleKodeverk } = staticOwnProps;
   const avslagsarsaker = alleKodeverk[kodeverkTyper.AVSLAGSARSAK][vilkarType.ADOPSJONSVILKARET];
 
   const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
-  const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
+  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
+  const { lovReferanse } = vilkar[0];
 
-  return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
-    const { vilkar } = ownProps;
-    return {
-      originalErVilkarOk: erVilkarOk,
-      initialValues: buildInitialValues(ownProps),
-      erVilkarOk: formValueSelector(formName)(state, 'erVilkarOk'),
-      lovReferanse: vilkar[0].lovReferanse,
-      avslagsarsaker,
-      onSubmit: lagSubmitFn(ownProps),
-    };
-  };
+  return (
+    <Form
+      formMethods={formMethods}
+      onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkter))}
+      setDataOnUnmount={setFormData}
+    >
+      <ProsessPanelTemplate
+        title={intl.formatMessage({ id: 'AdopsjonVilkarForm.Adopsjon' })}
+        isAksjonspunktOpen={isApOpen}
+        readOnlySubmitButton={readOnlySubmitButton}
+        readOnly={readOnly}
+        lovReferanse={lovReferanse}
+        originalErVilkarOk={originalErVilkarOk}
+        erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
+        isDirty={formMethods.formState.isDirty}
+        isSubmitting={formMethods.formState.isSubmitting}
+      >
+        <Element><FormattedMessage id="AdopsjonVilkarForm.TidligereUtbetaltStonad" /></Element>
+        <VilkarResultPickerNew
+          avslagsarsaker={avslagsarsaker}
+          readOnly={readOnly}
+          customVilkarOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.Oppfylt" />}
+          customVilkarIkkeOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.IkkeOppfylt" values={{ b: (chunks: any) => <b>{chunks}</b> }} />}
+        />
+        <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />
+      </ProsessPanelTemplate>
+    </Form>
+  );
 };
 
-export default connect(mapStateToPropsFactory)(reduxForm({
-  form: formName,
-  validate,
-  destroyOnUnmount: false,
-})(injectIntl(AdopsjonVilkarFormImpl)));
+export default AdopsjonVilkarForm;

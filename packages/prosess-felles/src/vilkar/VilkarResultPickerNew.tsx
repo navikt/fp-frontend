@@ -33,7 +33,6 @@ type FormValues = {
 
 interface OwnProps {
   avslagsarsaker?: KodeverkMedNavn[];
-  erVilkarOk?: boolean;
   customVilkarIkkeOppfyltText: string | ReactElement;
   customVilkarOppfyltText: string | ReactElement;
   readOnly: boolean;
@@ -59,14 +58,15 @@ interface StaticFunctions {
  */
 const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
   avslagsarsaker,
-  erVilkarOk,
   customVilkarIkkeOppfyltText,
   customVilkarOppfyltText,
   readOnly,
   erMedlemskapsPanel = false,
   skalKunneInnvilge = true,
 }) => {
-  const { getValues } = useFormContext();
+  const { getValues, watch } = useFormContext();
+  const erVilkarOk = watch('erVilkarOk');
+
   return (
     <div className={styles.container}>
       <VerticalSpacer sixteenPx />

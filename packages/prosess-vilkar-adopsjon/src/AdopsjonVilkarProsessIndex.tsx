@@ -3,7 +3,6 @@ import { RawIntlProvider } from 'react-intl';
 
 import { StandardProsessPanelProps } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import AdopsjonVilkarForm from './components/AdopsjonVilkarForm';
 import messages from '../i18n/nb_NO.json';
@@ -25,20 +24,20 @@ const AdopsjonVilkarProsessIndex: FunctionComponent<StandardProsessPanelProps> =
   setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <ReduxWrapper formName="AdopsjonVilkarProsessIndex" formData={formData} setFormData={setFormData}>
-      <AdopsjonVilkarForm
-        behandlingsresultat={behandling.behandlingsresultat}
-        aksjonspunkter={aksjonspunkter}
-        status={status}
-        vilkar={vilkar}
-        submitCallback={submitCallback}
-        readOnly={isReadOnly}
-        readOnlySubmitButton={readOnlySubmitButton}
-        isApOpen={isAksjonspunktOpen}
-        alleKodeverk={alleKodeverk}
-        erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon.kode]?.notAccepted)}
-      />
-    </ReduxWrapper>
+    <AdopsjonVilkarForm
+      behandlingsresultat={behandling.behandlingsresultat}
+      aksjonspunkter={aksjonspunkter}
+      status={status}
+      vilkar={vilkar}
+      submitCallback={submitCallback}
+      readOnly={isReadOnly}
+      readOnlySubmitButton={readOnlySubmitButton}
+      isApOpen={isAksjonspunktOpen}
+      alleKodeverk={alleKodeverk}
+      erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon.kode]?.notAccepted)}
+      formData={formData}
+      setFormData={setFormData}
+    />
   </RawIntlProvider>
 );
 
