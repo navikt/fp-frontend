@@ -22,6 +22,7 @@ const maxLength4000 = maxLength(4000);
 type FormValues = {
   begrunnelse?: string;
   annenForelderHarRett?: boolean;
+  avklarAnnenforelderMottarUforetrygd?: boolean;
 }
 
 interface PureOwnProps {
@@ -57,9 +58,25 @@ export const AnnenForelderHarRettForm: FunctionComponent<PureOwnProps & MappedOw
       )}
       <VerticalSpacer twentyPx />
       <div className={styles.fauxColumn}>
-        <RadioGroupField name="annenForelderHarRett" validate={[required]} readOnly={readOnly} isEdited={!hasOpenAksjonspunkter}>
-          <RadioOption value label={{ id: 'UttakInfoPanel.AnnenForelderHarRett' }} />
-          <RadioOption value={false} label={{ id: 'UttakInfoPanel.AnnenForelderHarIkkeRett' }} />
+        <RadioGroupField
+          name="annenForelderHarRett"
+          label={{ id: 'UttakInfoPanel.HarRett' }}
+          validate={[required]}
+          readOnly={readOnly}
+          isEdited={!hasOpenAksjonspunkter}
+        >
+          <RadioOption value label={{ id: 'UttakInfoPanel.Ja' }} />
+          <RadioOption value={false} label={{ id: 'UttakInfoPanel.Nei' }} />
+        </RadioGroupField>
+        <RadioGroupField
+          name="avklarAnnenforelderMottarUforetrygd"
+          label={{ id: 'UttakInfoPanel.MottarUforetrygd' }}
+          validate={[required]}
+          readOnly={readOnly}
+          isEdited={!hasOpenAksjonspunkter}
+        >
+          <RadioOption value label={{ id: 'UttakInfoPanel.Ja' }} />
+          <RadioOption value={false} label={{ id: 'UttakInfoPanel.Nei' }} />
         </RadioGroupField>
 
         <div className={styles.textAreaStyle}>
@@ -93,6 +110,7 @@ const transformValues = (values: FormValues): AvklarAnnenforelderHarRettAp => ({
   kode: aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT,
   begrunnelse: values.begrunnelse,
   annenforelderHarRett: values.annenForelderHarRett,
+  annenforelderMottarUføretrygd: values.avklarAnnenforelderMottarUforetrygd,
 });
 
 const buildInitialValues = createSelector([(props: PureOwnProps) => props.ytelsefordeling], (ytelseFordeling): FormValues => {
@@ -100,6 +118,7 @@ const buildInitialValues = createSelector([(props: PureOwnProps) => props.ytelse
   if (ytelseFordeling) {
     return ({
       annenForelderHarRett: annenForelderHarRett ? annenForelderHarRett.annenforelderHarRett : undefined,
+      avklarAnnenforelderMottarUforetrygd: annenForelderHarRett ? annenForelderHarRett.avklarAnnenforelderMottarUføretrygd : undefined,
       begrunnelse: annenForelderHarRett ? annenForelderHarRett.begrunnelse : undefined,
     });
   }
