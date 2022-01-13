@@ -4341,9 +4341,9 @@
     yargs "^15.0.0"
 
 "@storybook/testing-react@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@storybook/testing-react/-/testing-react-1.2.2.tgz#1d178ad348c5f9282c784eb7dccefe236470ca46"
-  integrity sha512-4On7wsPv/ffGIyHqX0hkctSk1FDmZunkt12KGtozrM+p751AYjzAKrlL+MlPx/SgbPvwn0s4Yf0HzjUn+aGk3w==
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@storybook/testing-react/-/testing-react-1.2.3.tgz#60bd835f24a7ae34733e51e087aecd158958c542"
+  integrity sha512-4KK2cdux58bO5NToGdo/Y3HQXL26CsHSo3cqbrowrIZL5JW/gcFFUbYEAwjcn+Cf2vy+FnZAKOXfCZf+j1yRdQ==
   dependencies:
     "@storybook/csf" "0.0.2--canary.87bc651.0"
 
