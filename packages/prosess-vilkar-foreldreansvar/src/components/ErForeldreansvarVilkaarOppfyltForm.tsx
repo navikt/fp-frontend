@@ -73,7 +73,7 @@ const transformValues = (
  *
  * Setter opp aksjonspunkter for avklaring av foreldreansvarvilkåret 2 eller 4 ledd.
  */
-export const ErForeldreansvarVilkaarOppfyltForm: FunctionComponent<OwnProps> = ({
+const ErForeldreansvarVilkaarOppfyltForm: FunctionComponent<OwnProps> = ({
   readOnly,
   readOnlySubmitButton,
   isEngangsstonad,

@@ -75,7 +75,7 @@ const getFodselVilkarAvslagsarsaker = (
  *
  * Setter opp aksjonspunktet for avklaring av Fødselsvilkåret.
  */
-export const FodselVilkarForm: FunctionComponent<OwnProps> = ({
+const FodselVilkarForm: FunctionComponent<OwnProps> = ({
   isApOpen,
   readOnly,
   readOnlySubmitButton,

@@ -64,7 +64,7 @@ const transformValues = (
  *
  * Setter opp aksjonspunktet for avklaring av Adopsjonsvilkåret.
  */
-export const AdopsjonVilkarForm: FunctionComponent<OwnProps> = ({
+const AdopsjonVilkarForm: FunctionComponent<OwnProps> = ({
   vilkar,
   readOnly,
   readOnlySubmitButton,

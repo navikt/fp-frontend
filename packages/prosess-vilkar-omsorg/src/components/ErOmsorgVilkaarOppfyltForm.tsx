@@ -59,7 +59,7 @@ interface OwnProps {
  *
  * Setter opp aksjonspunkter for avklaring av omsorgsvilkåret.
  */
-export const ErOmsorgVilkaarOppfyltForm: FunctionComponent<OwnProps> = ({
+const ErOmsorgVilkaarOppfyltForm: FunctionComponent<OwnProps> = ({
   readOnly,
   readOnlySubmitButton,
   aksjonspunkter,

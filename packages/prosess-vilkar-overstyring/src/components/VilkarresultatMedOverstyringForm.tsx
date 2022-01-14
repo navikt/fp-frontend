@@ -272,7 +272,6 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
                 } : { b: (chunks: any) => <b>{chunks}</b> }}
               />
             )}
-            erVilkarOk={erVilkarOk}
             readOnly={overrideReadOnly || !erOverstyrt}
             erMedlemskapsPanel={erMedlemskapsPanel}
           />

@@ -4,9 +4,9 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import { Timeline, TimeLineNavigation } from '@fpsak-frontend/tidslinje';
-import opptjeningAktivitetKlassifisering from '@fpsak-frontend/prosess-vilkar-opptjening/src/kodeverk/opptjeningAktivitetKlassifisering';
 import { FastsattOpptjeningAktivitet } from '@fpsak-frontend/types';
 
+import opptjeningAktivitetKlassifisering from '../kodeverk/opptjeningAktivitetKlassifisering';
 import DateContainer from './DateContainer';
 import styles from './opptjeningTimeLineLight.less';
 import TimeLineData from './TimeLineData';
