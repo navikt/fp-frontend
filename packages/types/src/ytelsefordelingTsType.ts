@@ -14,6 +14,8 @@ type Ytelsefordeling = Readonly<{
       periodeFom: string;
       periodeTom: string;
     };
+    avklarAnnenforelderMottarUføretrygd: boolean;
+    annenforelderMottarUføretrygd?: boolean;
   };
   endringsdato?: string;
   gjeldendeDekningsgrad: number;
