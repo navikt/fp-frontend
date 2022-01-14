@@ -8,7 +8,7 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  VilkarResultPickerNew, ProsessStegBegrunnelseTextFieldNew, ProsessPanelTemplate, validerApKodeOgHentApEnum,
+  VilkarResultPicker, ProsessStegBegrunnelseTextFieldNew, ProsessPanelTemplate, validerApKodeOgHentApEnum,
 } from '@fpsak-frontend/prosess-felles';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
@@ -29,12 +29,12 @@ export const buildInitialValues = (
   status: string,
   behandlingsresultat?: Behandling['behandlingsresultat'],
 ): FormValues => ({
-  ...VilkarResultPickerNew.buildInitialValues(behandlingsresultat, aksjonspunkter, status),
+  ...VilkarResultPicker.buildInitialValues(behandlingsresultat, aksjonspunkter, status),
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
 });
 
 const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): AksjonspunktData => aksjonspunkter.map((ap) => ({
-  ...VilkarResultPickerNew.transformValues(values),
+  ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
   kode: validerApKodeOgHentApEnum(ap.definisjon.kode, AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
     AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
@@ -100,7 +100,7 @@ const ErOmsorgVilkaarOppfyltForm: FunctionComponent<OwnProps> = ({
         isSubmitting={formMethods.formState.isSubmitting}
       >
         <Element><FormattedMessage id="ErOmsorgVilkaarOppfyltForm.VilkaretOppfylt" /></Element>
-        <VilkarResultPickerNew
+        <VilkarResultPicker
           avslagsarsaker={avslagsarsaker}
           readOnly={readOnly}
           customVilkarOppfyltText={<FormattedMessage id="ErOmsorgVilkaarOppfyltForm.Oppfylt" />}

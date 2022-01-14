@@ -10,7 +10,7 @@ import {
   Aksjonspunkt, AlleKodeverk, Behandling, Vilkar,
 } from '@fpsak-frontend/types';
 import {
-  ProsessStegBegrunnelseTextFieldNew, VilkarResultPickerNew, ProsessPanelTemplate, validerApKodeOgHentApEnum,
+  ProsessStegBegrunnelseTextFieldNew, VilkarResultPicker, ProsessPanelTemplate, validerApKodeOgHentApEnum,
 } from '@fpsak-frontend/prosess-felles';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
@@ -44,7 +44,7 @@ const buildInitialValues = (
   status: string,
   behandlingsresultat?: Behandling['behandlingsresultat'],
 ): FormValues => ({
-  ...VilkarResultPickerNew.buildInitialValues(behandlingsresultat, aksjonspunkter, status),
+  ...VilkarResultPicker.buildInitialValues(behandlingsresultat, aksjonspunkter, status),
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
 });
 
@@ -52,7 +52,7 @@ const transformValues = (
   values: FormValues,
   aksjonspunkter: Aksjonspunkt[],
 ): VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp => ({
-  ...VilkarResultPickerNew.transformValues(values),
+  ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
   kode: validerApKodeOgHentApEnum(aksjonspunkter[0].definisjon.kode,
     AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
@@ -109,7 +109,7 @@ const AdopsjonVilkarForm: FunctionComponent<OwnProps> = ({
         isSubmitting={formMethods.formState.isSubmitting}
       >
         <Element><FormattedMessage id="AdopsjonVilkarForm.TidligereUtbetaltStonad" /></Element>
-        <VilkarResultPickerNew
+        <VilkarResultPicker
           avslagsarsaker={avslagsarsaker}
           readOnly={readOnly}
           customVilkarOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.Oppfylt" />}

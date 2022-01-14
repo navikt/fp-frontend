@@ -9,7 +9,7 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
-  ProsessStegBegrunnelseTextFieldNew, VilkarResultPickerNew, ProsessPanelTemplate,
+  ProsessStegBegrunnelseTextFieldNew, VilkarResultPicker, ProsessPanelTemplate,
 } from '@fpsak-frontend/prosess-felles';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
@@ -51,12 +51,12 @@ const buildInitialValues = (
   status: string,
   behandlingsresultat?: Behandling['behandlingsresultat'],
 ): FormValues => ({
-  ...VilkarResultPickerNew.buildInitialValues(behandlingsresultat, aksjonspunkter, status),
+  ...VilkarResultPicker.buildInitialValues(behandlingsresultat, aksjonspunkter, status),
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
 });
 
 const transformValues = (values: FormValues): BekreftSvangerskapspengervilkarAp => ({
-  ...VilkarResultPickerNew.transformValues(values),
+  ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
   kode: AksjonspunktKode.SVANGERSKAPSVILKARET,
 });
@@ -133,7 +133,7 @@ const SvangerskapVilkarForm: FunctionComponent<OwnProps> = ({
             <Element><FormattedMessage id="SvangerskapVilkarForm.IkkeInnvilgetUttak" /></Element>
           </>
         )}
-        <VilkarResultPickerNew
+        <VilkarResultPicker
           avslagsarsaker={avslagsarsaker}
           readOnly={readOnly}
           skalKunneInnvilge={finnesUttak}

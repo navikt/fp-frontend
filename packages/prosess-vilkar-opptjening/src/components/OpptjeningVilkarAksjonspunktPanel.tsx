@@ -8,7 +8,7 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import {
-  VilkarResultPickerNew, ProsessStegBegrunnelseTextFieldNew, ProsessPanelTemplate,
+  VilkarResultPicker, ProsessStegBegrunnelseTextFieldNew, ProsessPanelTemplate,
 } from '@fpsak-frontend/prosess-felles';
 import { Aksjonspunkt, Behandling, FastsattOpptjening } from '@fpsak-frontend/types';
 import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -28,12 +28,12 @@ export const buildInitialValues = (
   status: string,
   behandlingsresultat?: Behandling['behandlingsresultat'],
 ): FormValues => ({
-  ...VilkarResultPickerNew.buildInitialValues(behandlingsresultat, aksjonspunkter, status),
+  ...VilkarResultPicker.buildInitialValues(behandlingsresultat, aksjonspunkter, status),
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
 });
 
 const transformValues = (values: FormValues): AvklarOpptjeningsvilkaretAp => ({
-  ...VilkarResultPickerNew.transformValues(values),
+  ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
   kode: AksjonspunktKode.VURDER_OPPTJENINGSVILKARET,
 });
@@ -112,7 +112,7 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
         )}
       >
         <Element><FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.SokerHarVurdertOpptjentRettTilForeldrepenger" /></Element>
-        <VilkarResultPickerNew
+        <VilkarResultPicker
           readOnly={readOnly}
           customVilkarOppfyltText={<FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.ErOppfylt" />}
           customVilkarIkkeOppfyltText={<FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt" values={{ b: (chunks) => <b>{chunks}</b> }} />}
