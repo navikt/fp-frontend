@@ -3,7 +3,6 @@ import { RawIntlProvider } from 'react-intl';
 
 import { FamilieHendelseSamling, Soknad, StandardProsessPanelProps } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import ErSoknadsfristVilkaretOppfyltForm from './components/ErSoknadsfristVilkaretOppfyltForm';
 import messages from '../i18n/nb_NO.json';
@@ -30,20 +29,20 @@ const SoknadsfristVilkarProsessIndex: FunctionComponent<OwnProps & StandardProse
   setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <ReduxWrapper formName="SoknadsfristVilkarProsessIndex" formData={formData} setFormData={setFormData}>
-      <ErSoknadsfristVilkaretOppfyltForm
-        behandlingsresultat={behandling.behandlingsresultat}
-        vilkar={vilkar}
-        soknad={soknad}
-        gjeldendeFamiliehendelse={familiehendelse.gjeldende}
-        aksjonspunkter={aksjonspunkter}
-        status={status}
-        submitCallback={submitCallback}
-        readOnly={isReadOnly}
-        readOnlySubmitButton={readOnlySubmitButton}
-        alleKodeverk={alleKodeverk}
-      />
-    </ReduxWrapper>
+    <ErSoknadsfristVilkaretOppfyltForm
+      behandlingsresultat={behandling.behandlingsresultat}
+      vilkar={vilkar}
+      soknad={soknad}
+      gjeldendeFamiliehendelse={familiehendelse.gjeldende}
+      aksjonspunkter={aksjonspunkter}
+      status={status}
+      submitCallback={submitCallback}
+      readOnly={isReadOnly}
+      readOnlySubmitButton={readOnlySubmitButton}
+      alleKodeverk={alleKodeverk}
+      formData={formData}
+      setFormData={setFormData}
+    />
   </RawIntlProvider>
 );
 
