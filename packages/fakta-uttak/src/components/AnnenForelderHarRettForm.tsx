@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createSelector } from 'reselect';
-import { InjectedFormProps, reduxForm } from 'redux-form';
+import { InjectedFormProps, reduxForm, formValueSelector } from 'redux-form';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
@@ -22,7 +22,7 @@ const maxLength4000 = maxLength(4000);
 type FormValues = {
   begrunnelse?: string;
   annenForelderHarRett?: boolean;
-  avklarAnnenforelderMottarUforetrygd?: boolean;
+  annenforelderMottarUføretrygd?: boolean;
 }
 
 interface PureOwnProps {
@@ -37,6 +37,7 @@ interface PureOwnProps {
 interface MappedOwnProps {
   initialValues: FormValues;
   onSubmit: (values: any) => any;
+  annenForelderHarRett?: boolean;
 }
 
 export const AnnenForelderHarRettForm: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
@@ -44,6 +45,8 @@ export const AnnenForelderHarRettForm: FunctionComponent<PureOwnProps & MappedOw
   hasOpenUttakAksjonspunkter,
   aksjonspunkt,
   readOnly,
+  ytelsefordeling,
+  annenForelderHarRett,
   ...formProps
 }) => (
   <div className={hasOpenAksjonspunkter || !hasOpenUttakAksjonspunkter ? styles.solvedAksjonspunkt : styles.inactiveAksjonspunkt}>
@@ -68,17 +71,18 @@ export const AnnenForelderHarRettForm: FunctionComponent<PureOwnProps & MappedOw
           <RadioOption value label={{ id: 'UttakInfoPanel.Ja' }} />
           <RadioOption value={false} label={{ id: 'UttakInfoPanel.Nei' }} />
         </RadioGroupField>
-        <RadioGroupField
-          name="avklarAnnenforelderMottarUforetrygd"
-          label={{ id: 'UttakInfoPanel.MottarUforetrygd' }}
-          validate={[required]}
-          readOnly={readOnly}
-          isEdited={!hasOpenAksjonspunkter}
-        >
-          <RadioOption value label={{ id: 'UttakInfoPanel.Ja' }} />
-          <RadioOption value={false} label={{ id: 'UttakInfoPanel.Nei' }} />
-        </RadioGroupField>
-
+        {ytelsefordeling?.annenforelderHarRettDto?.avklarAnnenforelderMottarUføretrygd && annenForelderHarRett === false && (
+          <RadioGroupField
+            name="annenforelderMottarUføretrygd"
+            label={{ id: 'UttakInfoPanel.MottarUforetrygd' }}
+            validate={[required]}
+            readOnly={readOnly}
+            isEdited={!hasOpenAksjonspunkter}
+          >
+            <RadioOption value label={{ id: 'UttakInfoPanel.Ja' }} />
+            <RadioOption value={false} label={{ id: 'UttakInfoPanel.Nei' }} />
+          </RadioGroupField>
+        )}
         <div className={styles.textAreaStyle}>
           <TextAreaField
             name="begrunnelse"
@@ -110,7 +114,7 @@ const transformValues = (values: FormValues): AvklarAnnenforelderHarRettAp => ({
   kode: aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT,
   begrunnelse: values.begrunnelse,
   annenforelderHarRett: values.annenForelderHarRett,
-  annenforelderMottarUføretrygd: values.avklarAnnenforelderMottarUforetrygd,
+  annenforelderMottarUføretrygd: values.annenforelderMottarUføretrygd,
 });
 
 const buildInitialValues = createSelector([(props: PureOwnProps) => props.ytelsefordeling], (ytelseFordeling): FormValues => {
@@ -118,7 +122,7 @@ const buildInitialValues = createSelector([(props: PureOwnProps) => props.ytelse
   if (ytelseFordeling) {
     return ({
       annenForelderHarRett: annenForelderHarRett ? annenForelderHarRett.annenforelderHarRett : undefined,
-      avklarAnnenforelderMottarUforetrygd: annenForelderHarRett ? annenForelderHarRett.avklarAnnenforelderMottarUføretrygd : undefined,
+      annenforelderMottarUføretrygd: annenForelderHarRett ? annenForelderHarRett.annenforelderMottarUføretrygd : undefined,
       begrunnelse: annenForelderHarRett ? annenForelderHarRett.begrunnelse : undefined,
     });
   }
@@ -129,13 +133,16 @@ const buildInitialValues = createSelector([(props: PureOwnProps) => props.ytelse
 const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
   (submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
 
-const mapStateToProps = (_state: any, ownProps: PureOwnProps): MappedOwnProps => ({
+const FORM_NAME = 'AnnenForelderHarRettForm';
+
+const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   initialValues: buildInitialValues(ownProps),
   onSubmit: lagSubmitFn(ownProps),
+  annenForelderHarRett: formValueSelector(FORM_NAME)(state, 'annenForelderHarRett'),
 });
 
 export default connect(mapStateToProps)(reduxForm({
-  form: 'AnnenForelderHarRettForm',
+  form: FORM_NAME,
   enableReinitialize: true,
   destroyOnUnmount: false,
 })(AnnenForelderHarRettForm));
