@@ -71,7 +71,9 @@ export const AnnenForelderHarRettForm: FunctionComponent<PureOwnProps & MappedOw
           <RadioOption value label={{ id: 'UttakInfoPanel.Ja' }} />
           <RadioOption value={false} label={{ id: 'UttakInfoPanel.Nei' }} />
         </RadioGroupField>
-        {ytelsefordeling?.annenforelderHarRettDto?.avklarAnnenforelderMottarUføretrygd && annenForelderHarRett === false && (
+        {(ytelsefordeling?.annenforelderHarRettDto?.avklarAnnenforelderMottarUføretrygd
+          || ytelsefordeling?.annenforelderHarRettDto?.annenforelderMottarUføretrygd !== undefined)
+          && annenForelderHarRett === false && (
           <RadioGroupField
             name="annenforelderMottarUføretrygd"
             label={{ id: 'UttakInfoPanel.MottarUforetrygd' }}
@@ -114,7 +116,7 @@ const transformValues = (values: FormValues): AvklarAnnenforelderHarRettAp => ({
   kode: aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT,
   begrunnelse: values.begrunnelse,
   annenforelderHarRett: values.annenForelderHarRett,
-  annenforelderMottarUføretrygd: values.annenforelderMottarUføretrygd,
+  annenforelderMottarUføretrygd: values.annenForelderHarRett === false ? values.annenforelderMottarUføretrygd : undefined,
 });
 
 const buildInitialValues = createSelector([(props: PureOwnProps) => props.ytelsefordeling], (ytelseFordeling): FormValues => {
