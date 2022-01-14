@@ -418,6 +418,7 @@ const personoversikt = {
 
 const ytelsefordeling = {
   annenforelderHarRettDto: {
+    avklarAnnenforelderMottarUføretrygd: false,
   },
   endringsdato: '2019-10-14',
   gjeldendeDekningsgrad: 100,

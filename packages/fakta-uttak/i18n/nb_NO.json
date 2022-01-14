@@ -92,9 +92,10 @@
   "UttakInfoPanel.Frilans": "Frilanser",
   "UttakInfoPanel.Selvstendignæringsdrivende": "Selvstendig næringsdrivende",
   "UttakInfoPanel.IkkeOppgittUtsettelse": "<b>{årsak}:</b> Ikke oppgitt {årsakLowerCase}",
-  "UttakInfoPanel.AnnenForelderHarRett": "Annen forelder har rett",
-  "UttakInfoPanel.AnnenForelderHarIkkeRett": "Annen forelder har ikke rett",
-  "UttakInfoPanel.ManuellOverstyring": "Manuell overstyring",
+  "UttakInfoPanel.HarRett": "Har annen forelder rett?",
+  "UttakInfoPanel.MottarUforetrygd": "Mottar annen forelder uføretrygd, jfr 14-14 tredje ledd?",
+  "UttakInfoPanel.Ja": "Ja",
+  "UttakInfoPanel.Nei": "Nei",
   "UttakInfo.Uttaksdager": "Prosentandel samtidig uttak",
   "UttakInfo.SamtidigUttaksprosent": "Uttak",
   "UttakInfo.Opphold.AnnenForelder": "Opphold i uttak grunnet annen foreldres uttak"

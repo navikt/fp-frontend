@@ -76,6 +76,33 @@ export const vurderOmAnnenPartHarRett = () => {
   );
 };
 
+export const vurderOmAnnenPartHarRettOgHar = () => {
+  const readOnly = false;
+
+  return (
+    <UttakFaktaIndex
+      {...standardFaktaProps}
+      behandling={behandlingVurderAnnenPartHarRett}
+      aksjonspunkter={aksjonspunkterVurderAnnenPartHarRett}
+      ytelsefordeling={{
+        ...ytelsefordelingVurderAnnenPartHarRett,
+        annenforelderHarRettDto: {
+          ...ytelsefordelingVurderAnnenPartHarRett.annenforelderHarRettDto,
+          avklarAnnenforelderMottarUføretrygd: true,
+        },
+      }}
+      uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderVurderAnnenPartHarRett as UttakKontrollerFaktaPerioderWrapper}
+      alleKodeverk={alleKodeverk as any}
+      faktaArbeidsforhold={faktaArbeidsforholdVurderAnnenPartHarRett as FaktaArbeidsforhold[]}
+      personoversikt={personoversiktVurderAnnenPartHarRett as Personoversikt}
+      familiehendelse={familiehendelseVurderAnnenPartHarRett as FamilieHendelseSamling}
+      readOnly={readOnly}
+      kanOverstyre={false}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+    />
+  );
+};
+
 export const farSøkerFørsteSeksUker = () => {
   const readOnly = false;
 
