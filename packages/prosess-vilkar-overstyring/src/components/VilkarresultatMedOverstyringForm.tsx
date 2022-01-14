@@ -17,7 +17,7 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import {
   FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
-import { OverstyringPanelNew, VilkarResultPickerNew } from '@fpsak-frontend/prosess-felles';
+import { OverstyringPanel, VilkarResultPicker } from '@fpsak-frontend/prosess-felles';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { OverstyringAksjonspunkter } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { DDMMYYYY_DATE_FORMAT, decodeHtmlEntity } from '@fpsak-frontend/utils';
@@ -93,7 +93,7 @@ const buildInitialValues = (
   return {
     isOverstyrt: aksjonspunkt !== undefined,
     begrunnelse: decodeHtmlEntity(aksjonspunkt && aksjonspunkt.begrunnelse ? aksjonspunkt.begrunnelse : ''),
-    ...VilkarResultPickerNew.buildInitialValues(behandlingsresultat, aksjonspunkter, status),
+    ...VilkarResultPicker.buildInitialValues(behandlingsresultat, aksjonspunkter, status),
   };
 };
 
@@ -103,7 +103,7 @@ const transformValues = (
 ): OverstyringAp | OverstyringMedlemskapsvilkaretLopendeAp => ({
   kode: overstyringApKode,
   begrunnelse: values.begrunnelse,
-  ...VilkarResultPickerNew.transformValues(values),
+  ...VilkarResultPicker.transformValues(values),
 });
 
 interface OwnProps {
@@ -243,7 +243,7 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
       </FlexContainer>
       <VerticalSpacer eightPx />
       {(erOverstyrt || hasAksjonspunkt) && (
-        <OverstyringPanelNew
+        <OverstyringPanel
           erOverstyrt={erOverstyrt}
           isSolvable={erOverstyrt || isSolvable}
           erVilkarOk={erVilkarOk}
@@ -254,7 +254,7 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
           toggleAv={toggleAv}
           erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         >
-          <VilkarResultPickerNew
+          <VilkarResultPicker
             avslagsarsaker={avslagsarsaker}
             customVilkarOppfyltText={(
               <FormattedMessage
@@ -272,11 +272,10 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
                 } : { b: (chunks: any) => <b>{chunks}</b> }}
               />
             )}
-            erVilkarOk={erVilkarOk}
             readOnly={overrideReadOnly || !erOverstyrt}
             erMedlemskapsPanel={erMedlemskapsPanel}
           />
-        </OverstyringPanelNew>
+        </OverstyringPanel>
       )}
     </Form>
   );

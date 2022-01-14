@@ -3,7 +3,6 @@ import { RawIntlProvider } from 'react-intl';
 
 import { StandardProsessPanelProps } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import ErOmsorgVilkaarOppfyltForm from './components/ErOmsorgVilkaarOppfyltForm';
 import messages from '../i18n/nb_NO.json';
@@ -23,18 +22,18 @@ const OmsorgVilkarProsessIndex: FunctionComponent<StandardProsessPanelProps> = (
   setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <ReduxWrapper formName="OmsorgVilkarProsessIndex" formData={formData} setFormData={setFormData}>
-      <ErOmsorgVilkaarOppfyltForm
-        behandlingsresultat={behandling.behandlingsresultat}
-        aksjonspunkter={aksjonspunkter}
-        status={status}
-        submitCallback={submitCallback}
-        readOnly={isReadOnly}
-        readOnlySubmitButton={readOnlySubmitButton}
-        alleKodeverk={alleKodeverk}
-        erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon.kode]?.notAccepted)}
-      />
-    </ReduxWrapper>
+    <ErOmsorgVilkaarOppfyltForm
+      behandlingsresultat={behandling.behandlingsresultat}
+      aksjonspunkter={aksjonspunkter}
+      status={status}
+      submitCallback={submitCallback}
+      readOnly={isReadOnly}
+      readOnlySubmitButton={readOnlySubmitButton}
+      alleKodeverk={alleKodeverk}
+      erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon.kode]?.notAccepted)}
+      formData={formData}
+      setFormData={setFormData}
+    />
   </RawIntlProvider>
 );
 

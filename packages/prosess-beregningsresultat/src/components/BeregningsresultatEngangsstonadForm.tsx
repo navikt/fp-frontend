@@ -15,7 +15,7 @@ import {
 } from '@fpsak-frontend/utils';
 import { InputField, Form } from '@fpsak-frontend/form-hooks';
 import aksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { OverstyringPanelNew } from '@fpsak-frontend/prosess-felles';
+import { OverstyringPanel } from '@fpsak-frontend/prosess-felles';
 import { OverstyringBeregningAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import styles from './beregningsresultatEngangsstonadForm.less';
@@ -145,7 +145,7 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
       {(erIOverstyringsmodus || harOverstyringAksjonspunkt) && (
         <>
           <VerticalSpacer sixteenPx />
-          <OverstyringPanelNew
+          <OverstyringPanel
             erOverstyrt={erIOverstyringsmodus}
             isSolvable
             erVilkarOk
@@ -183,7 +183,7 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
                 </FlexColumn>
               </FlexRow>
             </FlexContainer>
-          </OverstyringPanelNew>
+          </OverstyringPanel>
         </>
       )}
     </Form>
