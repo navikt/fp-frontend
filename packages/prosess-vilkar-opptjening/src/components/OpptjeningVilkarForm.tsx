@@ -4,7 +4,7 @@ import { Aksjonspunkt, Behandling, FastsattOpptjening } from '@fpsak-frontend/ty
 import { AvklarOpptjeningsvilkaretAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import OpptjeningVilkarView from './OpptjeningVilkarView';
-import OpptjeningVilkarAksjonspunktPanel from './OpptjeningVilkarAksjonspunktPanel';
+import OpptjeningVilkarAksjonspunktPanel, { FormValues } from './OpptjeningVilkarAksjonspunktPanel';
 
 interface OwnProps {
   behandlingsresultat?: Behandling['behandlingsresultat'];
@@ -17,6 +17,8 @@ interface OwnProps {
   readOnlySubmitButton: boolean;
   submitCallback: (aksjonspunktData: AvklarOpptjeningsvilkaretAp) => Promise<void>;
   erIkkeGodkjentAvBeslutter: boolean;
+  formData?: FormValues;
+  setFormData: (data: FormValues) => void;
 }
 
 /**
@@ -35,6 +37,8 @@ const OpptjeningVilkarForm: FunctionComponent<OwnProps> = ({
   readOnly,
   submitCallback,
   erIkkeGodkjentAvBeslutter,
+  formData,
+  setFormData,
 }) => {
   if (aksjonspunkter.length > 0) {
     return (
@@ -49,6 +53,8 @@ const OpptjeningVilkarForm: FunctionComponent<OwnProps> = ({
         lovReferanse={lovReferanse}
         fastsattOpptjening={fastsattOpptjening}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
+        formData={formData}
+        setFormData={setFormData}
       />
     );
   }

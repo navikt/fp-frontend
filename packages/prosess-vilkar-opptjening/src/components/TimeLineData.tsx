@@ -8,9 +8,10 @@ import { Image } from '@fpsak-frontend/shared-components';
 import checkImg from '@fpsak-frontend/assets/images/check.svg';
 import advarselImg from '@fpsak-frontend/assets/images/remove.svg';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
-import opptjeningAktivitetKlassifisering from '@fpsak-frontend/prosess-vilkar-opptjening/src/kodeverk/opptjeningAktivitetKlassifisering';
 import { TimeLineButton } from '@fpsak-frontend/tidslinje';
 import { FastsattOpptjeningAktivitet, Kodeverk } from '@fpsak-frontend/types';
+
+import opptjeningAktivitetKlassifisering from '../kodeverk/opptjeningAktivitetKlassifisering';
 
 import styles from './timeLineData.less';
 
