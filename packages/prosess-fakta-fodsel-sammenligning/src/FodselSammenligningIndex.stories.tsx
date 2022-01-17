@@ -1,8 +1,9 @@
 import React from 'react';
 
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
 import { AvklartBarn, FamilieHendelse, Soknad } from '@fpsak-frontend/types';
+
+import FodselSammenligningIndex from './FodselSammenligningIndex';
 
 const avklartBarn = [{
   fodselsdato: '2019-01-10',

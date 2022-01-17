@@ -1,6 +1,9 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
+import { Column, Row } from 'nav-frontend-grid';
+import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
+
 import {
   ArbeidsgiverOpplysningerPerId,
   Feriepengegrunnlag,
@@ -8,8 +11,7 @@ import {
   AlleKodeverk,
 } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { Column, Row } from 'nav-frontend-grid';
-import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
+
 import FeriepengerPrAar from './FeriepengerPrAar';
 
 const finnListeMedOpptjeningsår = (andeler: FeriepengegrunnlagAndel[]): number[] => {
