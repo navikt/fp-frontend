@@ -102,29 +102,32 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
     defaultValues: formData || initialValues,
   });
 
-  const sendVarsel = formMethods.watch('sendVarsel');
-  const fritekst = formMethods.watch('fritekst');
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const formVerdier = formMethods.watch();
 
   const [skalVisePaVentModal, settSkalVisePaVentModal] = useState(false);
   const lukkModal = useCallback(() => settSkalVisePaVentModal(false), [settSkalVisePaVentModal]);
   const åpneModal = useCallback(() => settSkalVisePaVentModal(true), [settSkalVisePaVentModal]);
-  const håndterSubmitFraModal = useCallback((modalValues: ModalFormValues) => {
-    formMethods.handleSubmit((values) => submitCallback({
-      ...values,
-      ...modalValues,
-    }));
-    settSkalVisePaVentModal(false);
-  }, []);
+
+  const håndterSubmitFraModal = (modalValues: ModalFormValues) => {
+    formMethods.trigger().then((isValid) => {
+      if (isValid) {
+        submitCallback({
+          ...formVerdier,
+          ...modalValues,
+        });
+      }
+      settSkalVisePaVentModal(false);
+    });
+  };
 
   const forhåndsvisMelding = useCallback((e: MouseEvent) => {
     e.preventDefault();
     previewCallback({
       mottaker: '',
       dokumentMal: dokumentMalType.REVURDERING_DOK,
-      fritekst: fritekst || ' ',
+      fritekst: formVerdier.fritekst || ' ',
     });
-  }, [fritekst]);
+  }, [formVerdier.fritekst]);
 
   const { avklartBarn } = nullSafe(familiehendelse.register);
   const { termindato } = nullSafe(familiehendelse.gjeldende);
@@ -135,14 +138,15 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
   const language = getLanguageFromSprakkode(sprakkode);
 
   return (
-    <Form
-      formMethods={formMethods}
-      onSubmit={submitCallback}
-      setDataOnUnmount={setFormData}
-    >
-      <Undertittel><FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurdering" /></Undertittel>
-      <VerticalSpacer eightPx />
-      {(!readOnly && isAksjonspunktOpen(aksjonspunkter[0].status.kode)) && (
+    <>
+      <Form
+        formMethods={formMethods}
+        onSubmit={submitCallback}
+        setDataOnUnmount={setFormData}
+      >
+        <Undertittel><FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurdering" /></Undertittel>
+        <VerticalSpacer eightPx />
+        {(!readOnly && isAksjonspunktOpen(aksjonspunkter[0].status.kode)) && (
         <>
           <AksjonspunktHelpTextTemp isAksjonspunktOpen>
             {[<FormattedMessage key="1" id="VarselOmRevurderingForm.VarselOmRevurderingVurder" />]}
@@ -166,7 +170,7 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
             <RadioOption label={intl.formatMessage({ id: 'VarselOmRevurderingForm.SendVarsel' })} value="true" />
             <RadioOption label={intl.formatMessage({ id: 'VarselOmRevurderingForm.IkkeSendVarsel' })} value="false" />
           </RadioGroupField>
-          {sendVarsel && (
+          {formVerdier.sendVarsel && (
             <ArrowBox>
               <TextAreaField
                 badges={[{ text: language, type: 'fokus', titleText: intl.formatMessage({ id: 'Malform.Beskrivelse' }) }]}
@@ -193,21 +197,22 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
           <Hovedknapp
             mini
-            htmlType={sendVarsel ? 'button' : 'submit'}
-            onClick={sendVarsel ? åpneModal : undefined}
+            htmlType={formVerdier.sendVarsel ? 'button' : 'submit'}
+            onClick={formVerdier.sendVarsel ? åpneModal : undefined}
             spinner={formMethods.formState.isSubmitting}
             disabled={formMethods.formState.isSubmitting}
           >
             <FormattedMessage id="VarselOmRevurderingForm.Bekreft" />
           </Hovedknapp>
         </>
-      )}
-      {(readOnly || !isAksjonspunktOpen(aksjonspunkter[0].status.kode)) && (
+        )}
+        {(readOnly || !isAksjonspunktOpen(aksjonspunkter[0].status.kode)) && (
         <>
           <Undertekst><FormattedMessage id="VarselOmRevurderingForm.Begrunnelse" /></Undertekst>
-          <Normaltekst>{begrunnelse}</Normaltekst>
+          <Normaltekst>{formVerdier.begrunnelse}</Normaltekst>
         </>
-      )}
+        )}
+      </Form>
       <SettPaVentModalIndex
         showModal={skalVisePaVentModal}
         frist={moment().add(28, 'days').format(ISO_DATE_FORMAT)}
@@ -218,7 +223,7 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
         hasManualPaVent
         erTilbakekreving={behandlingType.kode === BehandlingType.TILBAKEKREVING || behandlingType.kode === BehandlingType.TILBAKEKREVING_REVURDERING}
       />
-    </Form>
+    </>
   );
 };
 
