@@ -1,4 +1,5 @@
 import React from 'react';
+import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { AvklartBarn, FamilieHendelse, Soknad } from '@fpsak-frontend/types';
@@ -31,37 +32,42 @@ export default {
   component: FodselSammenligningIndex,
 };
 
-export const visPanelForNårBehandlingstypeErRevurdering = () => (
+const Template: Story<{
+  behandlingsTypeKode: string;
+  vedtaksDatoSomSvangerskapsuke?: number;
+  familiehendelseOriginalBehandling?: FamilieHendelse;
+}> = ({
+  behandlingsTypeKode,
+  vedtaksDatoSomSvangerskapsuke,
+  familiehendelseOriginalBehandling,
+}) => (
   <FodselSammenligningIndex
-    behandlingsTypeKode={behandlingType.REVURDERING}
+    behandlingsTypeKode={behandlingsTypeKode}
     avklartBarn={avklartBarn}
     termindato="2019-01-01"
     soknad={soknad}
-    familiehendelseOriginalBehandling={familiehendelse}
+    familiehendelseOriginalBehandling={familiehendelseOriginalBehandling || familiehendelse}
+    vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
   />
 );
 
-export const visPanelForNårBehandlingstypeErFørstegangssoknad = () => (
-  <FodselSammenligningIndex
-    behandlingsTypeKode={behandlingType.FORSTEGANGSSOKNAD}
-    avklartBarn={avklartBarn}
-    termindato="2019-01-01"
-    soknad={soknad}
-    familiehendelseOriginalBehandling={familiehendelse}
-  />
-);
+export const PanelForNårBehandlingstypeErRevurdering = Template.bind({});
+PanelForNårBehandlingstypeErRevurdering.args = {
+  behandlingsTypeKode: behandlingType.REVURDERING,
+};
 
-export const visPanelForMedVisningAvSvangerskapsuke = () => (
-  <FodselSammenligningIndex
-    behandlingsTypeKode={behandlingType.REVURDERING}
-    avklartBarn={avklartBarn}
-    termindato="2019-01-01"
-    vedtaksDatoSomSvangerskapsuke={43}
-    soknad={soknad}
-    familiehendelseOriginalBehandling={{
-      avklartBarn: [] as AvklartBarn[],
-      termindato: '2019-01-01',
-      antallBarnTermin: 1,
-    } as FamilieHendelse}
-  />
-);
+export const PanelForNårBehandlingstypeErFørstegangssoknad = Template.bind({});
+PanelForNårBehandlingstypeErFørstegangssoknad.args = {
+  behandlingsTypeKode: behandlingType.FORSTEGANGSSOKNAD,
+};
+
+export const PanelForMedVisningAvSvangerskapsuke = Template.bind({});
+PanelForMedVisningAvSvangerskapsuke.args = {
+  behandlingsTypeKode: behandlingType.REVURDERING,
+  vedtaksDatoSomSvangerskapsuke: 43,
+  familiehendelseOriginalBehandling: {
+    avklartBarn: [] as AvklartBarn[],
+    termindato: '2019-01-01',
+    antallBarnTermin: 1,
+  } as FamilieHendelse,
+};
