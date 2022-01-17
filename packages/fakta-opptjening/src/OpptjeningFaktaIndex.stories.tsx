@@ -222,3 +222,46 @@ MedToLikePerioderForSammeAktivitetstype.args = {
     }],
   } as Opptjening,
 };
+
+export const MedAlleOpptjeningsaktiviteterFiltrertBort = Template.bind({});
+MedAlleOpptjeningsaktiviteterFiltrertBort.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  aksjonspunkter: [{
+    definisjon: {
+      kode: aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING,
+      kodeverk: '',
+    },
+    status: {
+      kode: aksjonspunktStatus.OPPRETTET,
+      kodeverk: '',
+    },
+    begrunnelse: undefined,
+    kanLoses: true,
+    erAktivt: true,
+  }],
+  opptjening: {
+    fastsattOpptjening: {
+      opptjeningFom: '2018-12-25',
+      opptjeningTom: '2019-10-24',
+      opptjeningperiode: {
+        måneder: 0,
+        dager: 0,
+      },
+      fastsattOpptjeningAktivitetList: [],
+    },
+    opptjeningAktivitetList: [{
+      aktivitetType: {
+        kode: opptjeningAktivitetType.ARBEID,
+        kodeverk: '',
+      },
+      opptjeningFom: '2020-12-25',
+      opptjeningTom: '2021-10-24',
+      arbeidsgiverReferanse: '3',
+      arbeidsforholdRef: 'e5ec2632-0e31-4c8f-8190-d942053f8474',
+      stillingsandel: 100,
+      naringRegistreringsdato: '1995-09-14',
+      erGodkjent: true,
+      erEndret: false,
+    }],
+  } as Opptjening,
+};

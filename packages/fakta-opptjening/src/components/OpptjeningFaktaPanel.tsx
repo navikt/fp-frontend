@@ -108,7 +108,9 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
   const førsteAktivitetSomIkkeErGodkjent = filtrerteOgSorterteOpptjeningsaktiviteter.findIndex((a) => !a.erGodkjent);
 
   const [formVerdierForAlleAktiviteter, oppdaterFormVerdier] = useState<FormValues[]>(formData || formValuesAktiviteter);
-  const [valgtAktivitetIndex, setValgtAktivitetIndex] = useState<number>(førsteAktivitetSomIkkeErGodkjent !== -1 ? førsteAktivitetSomIkkeErGodkjent : 0);
+  const defaultAktivitetIndex = filtrerteOgSorterteOpptjeningsaktiviteter.length > 0 ? 0 : undefined;
+  const [valgtAktivitetIndex, setValgtAktivitetIndex] = useState<number>(
+    førsteAktivitetSomIkkeErGodkjent !== -1 ? førsteAktivitetSomIkkeErGodkjent : defaultAktivitetIndex);
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
@@ -199,9 +201,11 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
         opptjeningFomDato={opptjeningFomDato}
         opptjeningTomDato={opptjeningTomDato}
       />
-      <TimeLineNavigation
-        openPeriodInfo={opneInfo}
-      />
+      {filtrerteOgSorterteOpptjeningsaktiviteter.length > 0 && (
+        <TimeLineNavigation
+          openPeriodInfo={opneInfo}
+        />
+      )}
       <VerticalSpacer eightPx />
       {valgtAktivitetIndex !== undefined && (
         <>
@@ -224,7 +228,7 @@ const OpptjeningFaktaPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer twentyPx />
         </>
       )}
-      {hasAksjonspunkt && (
+      {hasAksjonspunkt && filtrerteOgSorterteOpptjeningsaktiviteter.length > 0 && (
         <Hovedknapp
           mini
           htmlType="button"
