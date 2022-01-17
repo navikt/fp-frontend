@@ -1,12 +1,13 @@
 import React from 'react';
+import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VurderSoknadsfristForeldrepengerIndex from '@fpsak-frontend/prosess-soknadsfrist';
 import { Aksjonspunkt, Behandling, Soknad } from '@fpsak-frontend/types';
-
-import alleKodeverk from '../mocks/alleKodeverk.json';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 const behandling = {
   uuid: '1',
@@ -25,27 +26,27 @@ const uttakPeriodeGrense = {
   soknadsfristForForsteUttaksdato: '2019-10-01',
 };
 
-const standardProsessProps = {
-  behandling,
-  alleKodeverk: alleKodeverk as any,
-  aksjonspunkter: [],
-  submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: false,
-  isAksjonspunktOpen: true,
-  readOnlySubmitButton: true,
-  status: '',
-  vilkar: [],
-  alleMerknaderFraBeslutter: {},
-  setFormData: () => undefined,
-};
-
 export default {
   title: 'prosess/prosess-soknadsfrist',
   component: VurderSoknadsfristForeldrepengerIndex,
 };
-export const visPanelForSoknadsfrist = () => (
+
+const Template: Story<{
+  submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
+}> = ({
+  submitCallback,
+}) => (
   <VurderSoknadsfristForeldrepengerIndex
-    {...standardProsessProps}
+    behandling={behandling}
+    alleKodeverk={alleKodeverk as any}
+    submitCallback={submitCallback}
+    isReadOnly={false}
+    isAksjonspunktOpen
+    readOnlySubmitButton={false}
+    status=""
+    vilkar={[]}
+    alleMerknaderFraBeslutter={{}}
+    setFormData={() => undefined}
     uttakPeriodeGrense={uttakPeriodeGrense}
     soknad={soknad}
     aksjonspunkter={[{
@@ -59,3 +60,8 @@ export const visPanelForSoknadsfrist = () => (
     }] as Aksjonspunkt[]}
   />
 );
+
+export const PanelForSoknadsfrist = Template.bind({});
+PanelForSoknadsfrist.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};

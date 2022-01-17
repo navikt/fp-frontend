@@ -21,7 +21,7 @@ import {
 } from '@fpsak-frontend/types';
 import { VurderTilbaketrekkAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
-import Tilbaketrekkpanel from './tilbaketrekk/Tilbaketrekkpanel';
+import Tilbaketrekkpanel, { FormValues } from './tilbaketrekk/Tilbaketrekkpanel';
 import FeriepengerIndex from './feriepenger/FeriepengerIndex';
 import TilkjentYtelse, { PeriodeMedId } from './TilkjentYtelse';
 
@@ -65,6 +65,8 @@ interface PureOwnProps {
   readOnlySubmitButton: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   feriepengegrunnlag?: Feriepengegrunnlag;
+  formData?: FormValues;
+  setFormData: (data: FormValues) => void;
 }
 
 const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
@@ -80,6 +82,8 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
   personoversikt,
   soknad,
   aksjonspunkter,
+  formData,
+  setFormData,
 }) => {
   const familiehendelseDato = useMemo(() => getFamilieHendelseDato(familieHendelseSamling), [familieHendelseSamling]);
   const vurderTilbaketrekkAP = useMemo(() => finnTilbaketrekkAksjonspunkt(aksjonspunkter), [aksjonspunkter]);
@@ -114,6 +118,8 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
           submitCallback={submitCallback}
           readOnlySubmitButton={readOnlySubmitButton}
           beregningsresultat={beregningresultat}
+          formData={formData}
+          setFormData={setFormData}
         />
       )}
     </>

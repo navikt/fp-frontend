@@ -1,4 +1,5 @@
 import React from 'react';
+import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
 
 import arbeidsforholdHandlingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdHandlingType';
@@ -10,13 +11,14 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import TilkjentYtelseProsessIndex from '@fpsak-frontend/prosess-tilkjent-ytelse';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import {
   Aksjonspunkt,
   Behandling, BeregningsresultatFp, Fagsak, FamilieHendelse, FamilieHendelseSamling, Personoversikt, Soknad,
 } from '@fpsak-frontend/types';
+import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
-import alleKodeverk from '../mocks/alleKodeverk.json';
+import TilkjentYtelseProsessIndex from './TilkjentYtelseProsessIndex';
 
 const fagsak = {
   fagsakYtelseType: {
@@ -94,28 +96,30 @@ const arbeidsgiverOpplysningerPerId = {
   },
 };
 
-const standardProsessProps = {
-  behandling,
-  alleKodeverk: alleKodeverk as any,
-  aksjonspunkter: [],
-  submitCallback: action('button-click') as () => Promise<any>,
-  isReadOnly: false,
-  isAksjonspunktOpen: true,
-  readOnlySubmitButton: true,
-  status: '',
-  vilkar: [],
-  alleMerknaderFraBeslutter: {},
-  setFormData: () => undefined,
-};
-
 export default {
   title: 'prosess/prosess-tilkjent-ytelse',
   component: TilkjentYtelseProsessIndex,
 };
 
-export const visUtenAksjonspunkt = () => (
+const Template: Story<{
+  submitCallback: (aksjonspunktData: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
+  aksjonspunkter: Aksjonspunkt[];
+}> = ({
+  submitCallback,
+  aksjonspunkter,
+}) => (
   <TilkjentYtelseProsessIndex
-    {...standardProsessProps}
+    behandling={behandling}
+    alleKodeverk={alleKodeverk as any}
+    aksjonspunkter={aksjonspunkter}
+    submitCallback={submitCallback}
+    isReadOnly={false}
+    isAksjonspunktOpen
+    readOnlySubmitButton={false}
+    status=""
+    vilkar={[]}
+    alleMerknaderFraBeslutter={{}}
+    setFormData={() => undefined}
     beregningresultat={beregningresultat}
     familiehendelse={familiehendelse}
     personoversikt={personoversikt}
@@ -125,22 +129,21 @@ export const visUtenAksjonspunkt = () => (
   />
 );
 
-export const visÅpentAksjonspunkt = () => (
-  <TilkjentYtelseProsessIndex
-    {...standardProsessProps}
-    beregningresultat={beregningresultat}
-    familiehendelse={familiehendelse}
-    personoversikt={personoversikt}
-    soknad={soknad}
-    fagsak={fagsak}
-    aksjonspunkter={[{
-      definisjon: {
-        kode: aksjonspunktCodes.VURDER_TILBAKETREKK,
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-      },
-    }] as Aksjonspunkt[]}
-    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-  />
-);
+export const UtenAksjonspunkt = Template.bind({});
+UtenAksjonspunkt.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  aksjonspunkter: [],
+};
+
+export const ÅpentAksjonspunkt = Template.bind({});
+ÅpentAksjonspunkt.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  aksjonspunkter: [{
+    definisjon: {
+      kode: aksjonspunktCodes.VURDER_TILBAKETREKK,
+    },
+    status: {
+      kode: aksjonspunktStatus.OPPRETTET,
+    },
+  }] as Aksjonspunkt[],
+};

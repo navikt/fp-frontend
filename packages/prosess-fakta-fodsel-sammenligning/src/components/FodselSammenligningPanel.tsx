@@ -100,7 +100,6 @@ const FodselSammenligningPanel: FunctionComponent<OwnProps> = ({
             })}
           </Table>
         )}
-
         {avklartBarn.length === 0 && (
           <Row>
             <Column xs="12" className={styles.noChildrenInTps}>

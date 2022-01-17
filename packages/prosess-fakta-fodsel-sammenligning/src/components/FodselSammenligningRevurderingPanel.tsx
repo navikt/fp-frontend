@@ -9,7 +9,11 @@ import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 
 const formatDate = (date: string): string => (date ? moment(date, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
-export const getTermindatoEllerFodselsdato = (isTermin: boolean, originalSoknad?: Soknad, orginalFamiliehendelse?: FamilieHendelse): string => {
+const getTermindatoEllerFodselsdato = (
+  isTermin: boolean,
+  originalSoknad?: Soknad,
+  orginalFamiliehendelse?: FamilieHendelse,
+): string => {
   if (!originalSoknad && !orginalFamiliehendelse) {
     return '';
   }
@@ -24,7 +28,11 @@ export const getTermindatoEllerFodselsdato = (isTermin: boolean, originalSoknad?
     ? famHendelse.avklartBarn[0].fodselsdato : Object.values(originalSoknad.fodselsdatoer)[0]);
 };
 
-export const getAntallBarn = (isTermin: boolean, originalSoknad?: Soknad, orginalFamiliehendelse?: FamilieHendelse): number => {
+const getAntallBarn = (
+  isTermin: boolean,
+  originalSoknad?: Soknad,
+  orginalFamiliehendelse?: FamilieHendelse,
+): number => {
   if (!originalSoknad && !orginalFamiliehendelse) {
     return 0;
   }
@@ -47,7 +55,7 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Viser sammenligning av fødsel ved ytelsesvedtak/søknad og oppdatert informasjon fra TPS.
  */
-export const FodselSammenligningRevurderingPanel: FunctionComponent<OwnProps> = ({
+const FodselSammenligningRevurderingPanel: FunctionComponent<OwnProps> = ({
   vedtaksDatoSomSvangerskapsuke,
   soknadOriginalBehandling,
   familiehendelseOriginalBehandling,
