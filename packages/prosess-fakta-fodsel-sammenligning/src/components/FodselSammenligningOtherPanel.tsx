@@ -35,9 +35,9 @@ export const getTerminEllerFodselsdato = (
 /**
  * FodselSammenligningOtherPanel
  *
- * Presentasjonskomponent. Viser sammenligning av fødsel ved ytelsesvedtak/søknad og oppdatert informasjon fra TPS.
+ * Viser sammenligning av fødsel ved ytelsesvedtak/søknad og oppdatert informasjon fra TPS.
  */
-export const FodselSammenligningOtherPanel: FunctionComponent<OwnProps> = ({
+const FodselSammenligningOtherPanel: FunctionComponent<OwnProps> = ({
   soknad,
   termindato,
 }) => {

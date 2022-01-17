@@ -4,14 +4,14 @@ import { RawIntlProvider } from 'react-intl';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 
-import SettPaVentModal from './components/SettPaVentModal';
+import SettPaVentModal, { FormValues } from './components/SettPaVentModal';
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
 interface OwnProps {
   cancelEvent: () => void;
-  submitCallback: (formData: any) => void;
+  submitCallback: (formValues: FormValues) => void;
   showModal: boolean;
   ventearsaker: KodeverkMedNavn[];
   frist?: string;

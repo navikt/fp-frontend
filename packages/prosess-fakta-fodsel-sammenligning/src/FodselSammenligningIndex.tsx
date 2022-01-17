@@ -30,7 +30,7 @@ const FodselSammenligningIndex: FunctionComponent<OwnProps> = ({
   soknadOriginalBehandling,
   familiehendelseOriginalBehandling,
 }) => {
-  const nrOfDodfodteBarn = avklartBarn.reduce((ab: number, barn: AvklartBarn) => ab + (barn.dodsdato ? 1 : 0), 0);
+  const nrOfDodfodteBarn = avklartBarn.reduce((ab, barn) => ab + (barn.dodsdato ? 1 : 0), 0);
   return (
     <RawIntlProvider value={intl}>
       <FodselSammenligningPanel

@@ -17,6 +17,7 @@ import {
 } from '@fpsak-frontend/types';
 
 import { PeriodeMedId } from './TilkjentYtelse';
+
 import styles from './tilkjentYtelse.less';
 
 const getEndCharFromId = (id: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
@@ -196,13 +197,13 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
                   {!isSoknadSvangerskapspenger && (
                     <TableColumn><Normaltekst>{getGradering(andel)}</Normaltekst></TableColumn>
                   )}
-                  <TableColumn><Normaltekst>{andel.utbetalingsgrad}</Normaltekst></TableColumn>
+                  <TableColumn><Normaltekst>{andel.utbetalingsgrad ? andel.utbetalingsgrad : ''}</Normaltekst></TableColumn>
                   <TableColumn>
                     <Normaltekst>
-                      {andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER ? andel.refusjon : ''}
+                      {andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER && andel.refusjon ? andel.refusjon : ''}
                     </Normaltekst>
                   </TableColumn>
-                  <TableColumn><Normaltekst>{andel.tilSoker}</Normaltekst></TableColumn>
+                  <TableColumn><Normaltekst>{andel.tilSoker ? andel.tilSoker : ''}</Normaltekst></TableColumn>
                   <TableColumn>
                     <Normaltekst>
                       {andel.sisteUtbetalingsdato ? moment(andel.sisteUtbetalingsdato)

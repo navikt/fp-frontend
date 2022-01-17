@@ -78,7 +78,7 @@ const skalViseFristenTekst = (erTilbakekreving: boolean, frist?: string, origina
 const harEndretVenteårsak = (originalVentearsak?: string, ventearsak?: string) => !(originalVentearsak === ventearsak || (!ventearsak && !originalVentearsak));
 const harEndretFrist = (originalFrist?: string, frist?: string) => !(originalFrist === frist || (!frist && !originalFrist));
 
-type FormValues = {
+export type FormValues = {
   frist?: string;
   ventearsak?: string;
 }

@@ -1,8 +1,6 @@
-import React, { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { InjectedFormProps, reduxForm } from 'redux-form';
+import React, { FunctionComponent, useMemo } from 'react';
+import { useForm } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -14,9 +12,11 @@ import {
   hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
+import {
+  Form, RadioGroupField, RadioOption, TextAreaField,
+} from '@fpsak-frontend/form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
+import { ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
 import { Aksjonspunkt, BeregningsresultatFp } from '@fpsak-frontend/types';
 import { VurderTilbaketrekkAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -24,62 +24,92 @@ import styles from './tilbaketrekkpanel.less';
 
 const radioFieldName = 'radioVurderTilbaketrekk';
 const begrunnelseFieldName = 'begrunnelseVurderTilbaketrekk';
-const formName = 'vurderTilbaketrekkForm';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
 
-type FormValues = {
+export type FormValues = {
   radioVurderTilbaketrekk: boolean;
   begrunnelseVurderTilbaketrekk?: string;
 }
 
-interface PureOwnProps {
+const buildInitialValues = (ap?: Aksjonspunkt, beregningsresultat?: BeregningsresultatFp): FormValues => {
+  const tidligereValgt = beregningsresultat?.skalHindreTilbaketrekk;
+  if (tidligereValgt === undefined || tidligereValgt === null || !ap || !ap.begrunnelse) {
+    return undefined;
+  }
+  return {
+    radioVurderTilbaketrekk: tidligereValgt,
+    begrunnelseVurderTilbaketrekk: ap.begrunnelse,
+  };
+};
+
+const transformValues = (values: FormValues): VurderTilbaketrekkAp => {
+  const hindreTilbaketrekk = values[radioFieldName];
+  const begrunnelse = values[begrunnelseFieldName];
+  return {
+    kode: aksjonspunktCodes.VURDER_TILBAKETREKK,
+    begrunnelse,
+    hindreTilbaketrekk,
+  };
+};
+
+interface OwnProps {
   readOnly: boolean;
   vurderTilbaketrekkAP?: Aksjonspunkt;
   submitCallback: (data: VurderTilbaketrekkAp) => Promise<void>;
   readOnlySubmitButton: boolean;
   beregningsresultat?: BeregningsresultatFp;
+  formData?: FormValues;
+  setFormData: (data: FormValues) => void;
 }
 
-interface MappedOwnProps {
-  onSubmit: (formValues: FormValues) => any;
-  initialValues: FormValues;
-}
-
-export const Tilbaketrekkpanel: FunctionComponent<PureOwnProps & WrappedComponentProps & InjectedFormProps> = ({
-  intl,
+const Tilbaketrekkpanel: FunctionComponent<OwnProps> = ({
   readOnly,
   vurderTilbaketrekkAP,
   readOnlySubmitButton,
-  ...formProps
-}) => (
-  <div>
-    <div className={styles.container}>
-      <FlexContainer>
-        <FlexRow>
-          <FlexColumn>
-            <Image
-              className={styles.image}
-              alt={intl.formatMessage({ id: 'HelpText.Aksjonspunkt' })}
-              src={behandleImageURL}
-            />
-          </FlexColumn>
-          <FlexColumn>
-            <div className={styles.divider} />
-          </FlexColumn>
-          <FlexColumn className={styles.aksjonspunktText}>
-            <div className={styles.oneElement}>
-              <Element className={styles.wordwrap}>
-                <FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Aksjonspunkttekst" />
-              </Element>
-            </div>
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
-    </div>
-    <VerticalSpacer twentyPx />
-    <form onSubmit={formProps.handleSubmit}>
+  beregningsresultat,
+  submitCallback,
+  formData,
+  setFormData,
+}) => {
+  const intl = useIntl();
+
+  const initialValues = useMemo(() => buildInitialValues(vurderTilbaketrekkAP, beregningsresultat), [vurderTilbaketrekkAP, beregningsresultat]);
+  const formMethods = useForm<FormValues>({
+    defaultValues: formData || initialValues,
+  });
+
+  return (
+    <Form
+      formMethods={formMethods}
+      onSubmit={(formValues: FormValues) => submitCallback(transformValues(formValues))}
+      setDataOnUnmount={setFormData}
+    >
+      <div className={styles.container}>
+        <FlexContainer>
+          <FlexRow>
+            <FlexColumn>
+              <Image
+                className={styles.image}
+                alt={intl.formatMessage({ id: 'HelpText.Aksjonspunkt' })}
+                src={behandleImageURL}
+              />
+            </FlexColumn>
+            <FlexColumn>
+              <div className={styles.divider} />
+            </FlexColumn>
+            <FlexColumn className={styles.aksjonspunktText}>
+              <div className={styles.oneElement}>
+                <Element className={styles.wordwrap}>
+                  <FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Aksjonspunkttekst" />
+                </Element>
+              </div>
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
+      </div>
+      <VerticalSpacer twentyPx />
       <Row>
         <Column xs="9">
           <RadioGroupField
@@ -91,11 +121,11 @@ export const Tilbaketrekkpanel: FunctionComponent<PureOwnProps & WrappedComponen
           >
             <RadioOption
               label={<FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Utfør" />}
-              value={false}
+              value="false"
             />
             <RadioOption
               label={<FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Hindre" />}
-              value
+              value="true"
             />
           </RadioGroupField>
         </Column>
@@ -114,50 +144,16 @@ export const Tilbaketrekkpanel: FunctionComponent<PureOwnProps & WrappedComponen
       <Row>
         <Column xs="1">
           <VerticalSpacer eightPx />
-          <ProsessStegSubmitButton
-            formName={formProps.form}
+          <ProsessStegSubmitButtonNew
             isReadOnly={readOnly}
             isSubmittable={!readOnlySubmitButton}
+            isSubmitting={formMethods.formState.isSubmitting}
+            isDirty={formMethods.formState.isDirty}
           />
         </Column>
       </Row>
-    </form>
-  </div>
-
-);
-
-export const transformValues = (values: FormValues): VurderTilbaketrekkAp => {
-  const hindreTilbaketrekk = values[radioFieldName];
-  const begrunnelse = values[begrunnelseFieldName];
-  return {
-    kode: aksjonspunktCodes.VURDER_TILBAKETREKK,
-    begrunnelse,
-    hindreTilbaketrekk,
-  };
+    </Form>
+  );
 };
 
-export const buildInitialValues = createSelector([
-  (_state, ownProps: PureOwnProps) => ownProps.vurderTilbaketrekkAP,
-  (_state, ownProps: PureOwnProps) => ownProps.beregningsresultat], (ap, tilkjentYtelse): FormValues => {
-  const tidligereValgt = tilkjentYtelse?.skalHindreTilbaketrekk;
-  if (tidligereValgt === undefined || tidligereValgt === null || !ap || !ap.begrunnelse) {
-    return undefined;
-  }
-  return {
-    radioVurderTilbaketrekk: tidligereValgt,
-    begrunnelseVurderTilbaketrekk: ap.begrunnelse,
-  };
-});
-
-const lagSubmitFn = createSelector([(ownProps: PureOwnProps) => ownProps.submitCallback],
-  (submitCallback) => (values: FormValues) => submitCallback(transformValues(values)));
-
-const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  onSubmit: lagSubmitFn(ownProps),
-  initialValues: buildInitialValues(state, ownProps),
-});
-
-export default connect(mapStateToProps)(reduxForm({
-  form: formName,
-  destroyOnUnmount: false,
-})(injectIntl(Tilbaketrekkpanel)));
+export default Tilbaketrekkpanel;
