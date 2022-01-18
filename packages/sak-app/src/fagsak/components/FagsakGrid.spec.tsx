@@ -1,20 +1,19 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 import FagsakGrid from './FagsakGrid';
 
 describe('<FagsakGrid>', () => {
-  it('skal vise fagsakgrid med underkomponenter', () => {
-    const wrapper = shallow(<FagsakGrid
-      behandlingContent={<div id="behandlingContent" />}
-      profileAndNavigationContent={<div id="profileContent" />}
-      supportContent={<div id="supportContent" />}
-      visittkortContent={() => <div id="visittkort" />}
+  it('skal vise fagsakgrid med underkomponenter', async () => {
+    render(<FagsakGrid
+      behandlingContent={<div>behandlingContent</div>}
+      profileAndNavigationContent={<div>profileContent</div>}
+      supportContent={<div>supportContent</div>}
+      visittkortContent={() => <div>visittkort</div>}
     />);
 
-    expect(wrapper.find('#behandlingContent')).toHaveLength(1);
-    expect(wrapper.find('#profileContent')).toHaveLength(1);
-    expect(wrapper.find('#supportContent')).toHaveLength(1);
-    expect(wrapper.find('#visittkort')).toHaveLength(2);
+    expect(await screen.findByText('behandlingContent')).toBeInTheDocument();
+    expect(screen.getByText('profileContent')).toBeInTheDocument();
+    expect(screen.getByText('supportContent')).toBeInTheDocument();
   });
 });

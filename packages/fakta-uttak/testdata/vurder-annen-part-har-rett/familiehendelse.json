@@ -1,0 +1,41 @@
+{
+    "oppgitt": {
+        "@type": "AvklartDataFodselDto",
+        "skjaringstidspunkt": "2019-10-09",
+        "avklartBarn": [
+            {
+                "fodselsdato": "2019-10-09"
+            }
+        ],
+        "soknadType": {
+            "kode": "ST-001",
+            "kodeverk": "SOKNAD_TYPE"
+        }
+    },
+    "gjeldende": {
+        "@type": "AvklartDataFodselDto",
+        "skjaringstidspunkt": "2019-10-09",
+        "avklartBarn": [
+            {
+                "fodselsdato": "2019-10-09"
+            }
+        ],
+        "soknadType": {
+            "kode": "ST-001",
+            "kodeverk": "SOKNAD_TYPE"
+        }
+    },
+    "register": {
+        "@type": "AvklartDataFodselDto",
+        "skjaringstidspunkt": "2019-10-09",
+        "avklartBarn": [
+            {
+                "fodselsdato": "2019-10-09"
+            }
+        ],
+        "soknadType": {
+            "kode": "ST-001",
+            "kodeverk": "SOKNAD_TYPE"
+        }
+    }
+}

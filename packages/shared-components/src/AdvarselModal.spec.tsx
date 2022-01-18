@@ -1,34 +1,17 @@
 import React from 'react';
-import sinon from 'sinon';
-import { shallow } from 'enzyme';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { render, screen } from '@testing-library/react';
+import { composeStories } from '@storybook/testing-react';
 import Modal from 'nav-frontend-modal';
 
-import Image from './Image';
+import * as stories from './AdvarselModal.stories';
 
-import AdvarselModal from './AdvarselModal';
+const { Default } = composeStories(stories);
 
 describe('<AdvarselModal>', () => {
-  it('skal rendre modal', () => {
-    const wrapper = shallow(
-      <AdvarselModal
-        bodyText="Åpne behandling"
-        showModal
-        submit={sinon.spy()}
-      />,
-    );
-
-    const modal = wrapper.find(Modal);
-    expect(modal).toHaveLength(1);
-    expect(modal.prop('isOpen')).toBe(true);
-    expect(modal.prop('contentLabel')).toEqual('Åpne behandling');
-
-    const image = wrapper.find(Image);
-    expect(image).toHaveLength(1);
-    expect(image.prop('alt')).toEqual('Åpne behandling');
-
-    const knapp = wrapper.find(Hovedknapp);
-    expect(knapp).toHaveLength(1);
-    expect(knapp.childAt(0).text()).toEqual('OK');
+  Modal.setAppElement('body');
+  it('skal rendre modal', async () => {
+    render(<Default />);
+    expect(await screen.findByText('Dette er en advarsel')).toBeInTheDocument();
+    expect(screen.getByText('OK')).toBeInTheDocument();
   });
 });

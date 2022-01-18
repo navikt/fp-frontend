@@ -1,0 +1,54 @@
+[
+  {
+    "definisjon": {
+      "kode": "5070",
+      "kodeverk": "AKSJONSPUNKT_DEF"
+    },
+    "status": {
+      "kode": "OPPR",
+      "kodeverk": "AKSJONSPUNKT_STATUS"
+    },
+    "toTrinnsBehandling": false,
+    "aksjonspunktType": {
+      "kode": "MANU",
+      "kodeverk": "AKSJONSPUNKT_TYPE"
+    },
+    "kanLoses": true,
+    "erAktivt": true
+  },
+  {
+    "definisjon": {
+      "kode": "7003",
+      "kodeverk": "AKSJONSPUNKT_DEF"
+    },
+    "status": {
+      "kode": "UTFO",
+      "kodeverk": "AKSJONSPUNKT_STATUS"
+    },
+    "toTrinnsBehandling": false,
+    "aksjonspunktType": {
+      "kode": "AUTO",
+      "kodeverk": "AKSJONSPUNKT_TYPE"
+    },
+    "kanLoses": false,
+    "erAktivt": true,
+    "fristTid": "2019-12-11T00:00:00"
+  },
+  {
+    "definisjon": {
+      "kode": "5086",
+      "kodeverk": "AKSJONSPUNKT_DEF"
+    },
+    "status": {
+      "kode": "OPPR",
+      "kodeverk": "AKSJONSPUNKT_STATUS"
+    },
+    "toTrinnsBehandling": false,
+    "aksjonspunktType": {
+      "kode": "MANU",
+      "kodeverk": "AKSJONSPUNKT_TYPE"
+    },
+    "kanLoses": true,
+    "erAktivt": true
+  }
+]

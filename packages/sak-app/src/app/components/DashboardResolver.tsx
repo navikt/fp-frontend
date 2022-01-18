@@ -14,7 +14,7 @@ const isDevelopment = () => process.env.NODE_ENV === 'development' || process.en
  *
  * Komponent som redirecter til Fplos eller går til fremsiden til Fpsak. Går alltid til Fpsak på utviklingsmiljø eller når Fplos ikke kan nåes
  */
-export const DashboardResolver: FunctionComponent = () => {
+const DashboardResolver: FunctionComponent = () => {
   const [isLoading, setLoading] = useState(true);
 
   const { addErrorMessage } = useRestApiErrorDispatcher();

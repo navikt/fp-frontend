@@ -1,8 +1,12 @@
 import React from 'react';
+import moment from 'moment';
 import Modal from 'nav-frontend-modal';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
+
+import { ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
+
 import * as stories from './VarselOmRevurderingProsessIndex.stories';
 
 const { ForFørstegangsbehandling, ForRevurdering } = composeStories(stories);
@@ -78,7 +82,7 @@ describe('<VarselOmRevurderingProsessIndex>', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
-      frist: '2022-02-14',
+      frist: moment().add(28, 'days').format(ISO_DATE_FORMAT),
       fritekst: 'Dette er en fritekst',
       kode: '5026',
       sendVarsel: true,

@@ -1,37 +1,14 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { render, screen } from '@testing-library/react';
+import { composeStories } from '@storybook/testing-react';
+import * as stories from './AksjonspunktHelpTextHTML.stories';
 
-import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-
-import AksjonspunktHelpTextHTML from './AksjonspunktHelpTextHTML';
-import messages from '../i18n/nb_NO.json';
+const { Default } = composeStories(stories);
 
 describe('<AksjonspunktHelpTextHTML>', () => {
-  it('Skal teste at aksjonspunkt hjelp viser riktig', () => {
-    const wrapper = shallowWithIntl(
-      <AksjonspunktHelpTextHTML>
-        {[<FormattedMessage
-          key="1"
-          id="Beregningsgrunnlag.Helptext.Arbeidstaker2"
-          values={{ verdi: 23 }}
-        />]}
-      </AksjonspunktHelpTextHTML>, messages,
-    );
-    const flexContainer = wrapper.find('FlexContainer');
-    const allMessages = flexContainer.first().find(FormattedMessage);
-    expect(allMessages.at(0).prop('id')).toEqual('Beregningsgrunnlag.Helptext.Arbeidstaker2');
-    expect(allMessages.at(0).prop('values')).toEqual({ verdi: 23 });
-    const image = flexContainer.first().find('Image');
-    expect(image.length).toBe(1);
-  });
-
-  it('Skal teste at aksjonspunkt hjelp ikke vises når ikke aksjonspunkt', () => {
-    const wrapper = shallowWithIntl(
-      <AksjonspunktHelpTextHTML>
-        {[]}
-      </AksjonspunktHelpTextHTML>, messages,
-    );
-    const flexContainer = wrapper.find('FlexContainer');
-    expect(flexContainer.length).toBe(0);
+  it('Skal teste at aksjonspunkt-hjelpetekster viser riktig', async () => {
+    render(<Default />);
+    expect(await screen.findByText('Dette er en aksjonspunktmelding')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en annen aksjonspunktmelding')).toBeInTheDocument();
   });
 });

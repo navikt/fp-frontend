@@ -1,0 +1,84 @@
+{
+    "bruker": {
+        "fnr": "07029837435",
+        "aktoerId": "9907029837435",
+        "diskresjonskode": {
+            "kode": "UDEF",
+            "kodeverk": "DISKRESJONSKODE"
+        },
+        "kjønn": {
+            "kode": "M",
+            "kodeverk": "BRUKER_KJOENN"
+        },
+        "sivilstand": {
+            "kode": "UGIF",
+            "kodeverk": "SIVILSTAND_TYPE"
+        },
+        "navn": "Puma Pawel",
+        "fødselsdato": "1969-12-04",
+        "adresser": []
+    },
+    "annenPart": {
+        "fnr": "11018547211",
+        "aktoerId": "9911018547211",
+        "diskresjonskode": {
+            "kode": "UDEF",
+            "kodeverk": "DISKRESJONSKODE"
+        },
+        "kjønn": {
+            "kode": "K",
+            "kodeverk": "BRUKER_KJOENN"
+        },
+        "sivilstand": {
+            "kode": "GIFT",
+            "kodeverk": "SIVILSTAND_TYPE"
+        },
+        "navn": "Bever Bjørg",
+        "fødselsdato": "1969-12-04",
+        "adresser": [
+            {
+                "adresseType": {
+                    "kode": "BOSTEDSADRESSE",
+                    "kodeverk": "ADRESSE_TYPE"
+                },
+                "adresselinje1": "Fjordlandet 10 B",
+                "postNummer": "2500",
+                "poststed": "Tynset",
+                "land": "NOR"
+            }
+        ]
+    },
+    "barn": [
+        {
+            "fnr": "25041757569",
+            "aktoerId": "9925041757569",
+            "diskresjonskode": {
+                "kode": "UDEF",
+                "kodeverk": "DISKRESJONSKODE"
+            },
+            "kjønn": {
+                "kode": "M",
+                "kodeverk": "BRUKER_KJOENN"
+            },
+            "statsborgerskap": {
+                "kode": "NOR",
+                "kodeverk": "LANDKODER",
+                "navn": "Norge"
+            },
+            "sivilstand": {
+                "kode": "UGIF",
+                "kodeverk": "SIVILSTAND_TYPE"
+            },
+            "navn": "Duck Dole",
+            "fødselsdato": "2019-10-09",
+            "adresser": [
+                {
+                    "adresseType": {
+                        "kode": "UKJENT_ADRESSE",
+                        "kodeverk": "ADRESSE_TYPE"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
+import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import OkAvbrytModal from './OkAvbrytModal';
 
@@ -8,7 +9,7 @@ export default {
   component: OkAvbrytModal,
 };
 
-export const Default = () => (
+const Template: Story = () => (
   <OkAvbrytModal
     text="Dette er ein test"
     showModal
@@ -16,3 +17,5 @@ export const Default = () => (
     cancel={action('button-click')}
   />
 );
+
+export const Default = Template.bind({});

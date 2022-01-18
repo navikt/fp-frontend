@@ -1,0 +1,79 @@
+{
+    "bruker": {
+        "fnr": "13079726804",
+        "aktoerId": "9913079726804",
+        "diskresjonskode": {
+            "kode": "UDEF",
+            "kodeverk": "DISKRESJONSKODE"
+        },
+        "kjønn": {
+            "kode": "M",
+            "kodeverk": "BRUKER_KJOENN"
+        },
+        "sivilstand": {
+            "kode": "UGIF",
+            "kodeverk": "SIVILSTAND_TYPE"
+        },
+        "navn": "Påfugl Pawel",
+        "fødselsdato": "1969-12-04",
+        "adresser": []
+    },
+    "annenPart": {
+        "fnr": "31019446487",
+        "aktoerId": "9931019446487",
+        "diskresjonskode": {
+            "kode": "UDEF",
+            "kodeverk": "DISKRESJONSKODE"
+        },
+        "kjønn": {
+            "kode": "K",
+            "kodeverk": "BRUKER_KJOENN"
+        },
+        "sivilstand": {
+            "kode": "GIFT",
+            "kodeverk": "SIVILSTAND_TYPE"
+        },
+        "navn": "Harepus Hjørdis",
+        "fødselsdato": "1969-12-04",
+        "adresser": [
+            {
+                "adresseType": {
+                    "kode": "BOSTEDSADRESSE",
+                    "kodeverk": "ADRESSE_TYPE"
+                },
+                "adresselinje1": "Fjordlandet 10 B",
+                "postNummer": "2500",
+                "poststed": "Tynset",
+                "land": "NOR"
+            }
+        ]
+    },
+    "barn": [
+        {
+            "fnr": "18041769498",
+            "aktoerId": "9918041769498",
+            "diskresjonskode": {
+                "kode": "UDEF",
+                "kodeverk": "DISKRESJONSKODE"
+            },
+            "kjønn": {
+                "kode": "K",
+                "kodeverk": "BRUKER_KJOENN"
+            },
+            "sivilstand": {
+                "kode": "UGIF",
+                "kodeverk": "SIVILSTAND_TYPE"
+            },
+            "navn": "Duck Dole",
+            "fødselsdato": "2019-10-09",
+            "adresser": [
+                {
+                    "adresseType": {
+                        "kode": "UKJENT_ADRESSE",
+                        "kodeverk": "ADRESSE_TYPE"
+                    }
+                }
+            ]
+        }
+    ]
+}
