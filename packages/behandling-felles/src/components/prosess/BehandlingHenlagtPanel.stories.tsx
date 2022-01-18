@@ -2,8 +2,9 @@ import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@fpsak-frontend/utils';
-import { BehandlingHenlagtPanel } from '@fpsak-frontend/behandling-felles';
 import { Behandling } from '@fpsak-frontend/types';
+
+import BehandlingHenlagtPanel from './BehandlingHenlagtPanel';
 
 const messages = {
   'BehandlingHenlagtPanel.Henlagt': 'Behandling er henlagt',

@@ -6,10 +6,10 @@ import ankeOmgjorArsak from '@fpsak-frontend/kodeverk/src/ankeOmgjorArsak';
 import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import AnkeProsessIndex from '@fpsak-frontend/prosess-anke';
 import { Aksjonspunkt, AnkeVurdering, Behandling } from '@fpsak-frontend/types';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
-import alleKodeverk from '../../mocks/alleKodeverk.json';
+import AnkeProsessIndex from './AnkeProsessIndex';
 
 const behandling = {
   uuid: '1',

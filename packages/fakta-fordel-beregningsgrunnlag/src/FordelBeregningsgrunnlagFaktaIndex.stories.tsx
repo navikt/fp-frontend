@@ -9,16 +9,15 @@ import {
   Behandling, Beregningsgrunnlag, FaktaOmFordeling, ArbeidsforholdTilFordeling, BeregningsgrunnlagPeriodeProp, Kodeverk, BeregningsgrunnlagAndel,
   FordelBeregningsgrunnlagPeriode, FordelBeregningsgrunnlagAndel, BeregningsgrunnlagArbeidsforhold,
 } from '@fpsak-frontend/types';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
-import alleKodeverk from '../../mocks/alleKodeverk.json';
-
-import { beregningsgrunnlag as bgMedNaturalytelse, aksjonspunkt as apMedNaturalytelse } from './scenario/NyttArbeidOgNaturalytelse';
-import { beregningsgrunnlag as bgArbeidOgGradertNæring, aksjonspunkt as apArbeidOgGradertNæring } from './scenario/ArbeidOgGradertNaring';
+import { beregningsgrunnlag as bgMedNaturalytelse, aksjonspunkt as apMedNaturalytelse } from '../testdata/NyttArbeidOgNaturalytelse';
+import { beregningsgrunnlag as bgArbeidOgGradertNæring, aksjonspunkt as apArbeidOgGradertNæring } from '../testdata/ArbeidOgGradertNaring';
 import {
   bgUtenDelvisRefusjon as vurderRefusjonBG,
   bgMedDelvisRefusjon as vurderDelvisRefBG,
   aksjonspunkt as vurderRefusjonAP,
-} from './scenario/VurderRefusjon';
+} from '../testdata/VurderRefusjon';
 
 type Writeable<T> = { -readonly [P in keyof T]: T[P] };
 

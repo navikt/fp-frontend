@@ -1,9 +1,10 @@
-import React, { FunctionComponent, useEffect } from 'react';
-import { useState } from '@storybook/addons';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { Behandling } from '@fpsak-frontend/types';
-import { BehandlingContainer, FaktaPanelInitProps, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
+import BehandlingContainer from './BehandlingContainer';
+import FaktaPanelInitProps from '../types/faktaPanelInitProps';
+import ProsessPanelInitProps from '../types/prosessPanelInitProps';
 
 const FaktaPanelTest1: FunctionComponent<FaktaPanelInitProps> = ({
   registrerFaktaPanel,

@@ -5,12 +5,12 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import MedlemskapFaktaIndex from '@fpsak-frontend/fakta-medlemskap';
 import {
   Behandling, Medlemskap, Soknad, MedlemPeriode, PersonopplysningMedlem,
 } from '@fpsak-frontend/types';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
-import alleKodeverk from '../mocks/alleKodeverk.json';
+import MedlemskapFaktaIndex from './MedlemskapFaktaIndex';
 
 const behandling = {
   uuid: '1',

@@ -4,12 +4,12 @@ import { action } from '@storybook/addon-actions';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import sivilstandType from '@fpsak-frontend/kodeverk/src/sivilstandType';
-import OmsorgFaktaIndex from '@fpsak-frontend/fakta-omsorg';
 import {
   Behandling, KjønnkodeEnum, Personoversikt, Soknad, Ytelsefordeling,
 } from '@fpsak-frontend/types';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
-import alleKodeverk from '../mocks/alleKodeverk.json';
+import OmsorgFaktaIndex from './OmsorgFaktaIndex';
 
 const behandling = {
   uuid: '1',

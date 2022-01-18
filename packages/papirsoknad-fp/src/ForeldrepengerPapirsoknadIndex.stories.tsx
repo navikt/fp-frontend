@@ -5,42 +5,56 @@ import { Dispatch } from 'redux';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
-import SvangerskapspengerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-svp';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
-import alleKodeverk from '../mocks/alleKodeverk.json';
+import ForeldrepengerPapirsoknadIndex from './ForeldrepengerPapirsoknadIndex';
 
 export default {
-  title: 'papirsoknad/papirsoknad-svp',
-  component: SvangerskapspengerPapirsoknadIndex,
+  title: 'papirsoknad/papirsoknad-fp',
+  component: ForeldrepengerPapirsoknadIndex,
 };
 
 export const visPapirsoknadForMorVedFødsel = () => (
-  <SvangerskapspengerPapirsoknadIndex
+  <ForeldrepengerPapirsoknadIndex
     onSubmitUfullstendigsoknad={action('button-click') as () => Promise<any>}
     onSubmit={action('button-click') as (_formValues: any, _dispatch: Dispatch, values: any) => Promise<any>}
     readOnly={false}
-    soknadData={new SoknadData(fagsakYtelseType.SVANGERSKAPSPENGER, familieHendelseType.FODSEL, foreldreType.MOR)}
+    soknadData={new SoknadData(fagsakYtelseType.FORELDREPENGER, familieHendelseType.FODSEL, foreldreType.MOR)}
     alleKodeverk={alleKodeverk as any}
+    fagsakPersonnummer="1234567"
   />
 );
 
 export const visPapirsoknadForMorVedAdopsjon = () => (
-  <SvangerskapspengerPapirsoknadIndex
+  <ForeldrepengerPapirsoknadIndex
     onSubmitUfullstendigsoknad={action('button-click') as () => Promise<any>}
     onSubmit={action('button-click') as (_formValues: any, _dispatch: Dispatch, values: any) => Promise<any>}
     readOnly={false}
-    soknadData={new SoknadData(fagsakYtelseType.SVANGERSKAPSPENGER, familieHendelseType.ADOPSJON, foreldreType.MOR)}
+    soknadData={new SoknadData(fagsakYtelseType.FORELDREPENGER, familieHendelseType.ADOPSJON, foreldreType.MOR)}
     alleKodeverk={alleKodeverk as any}
+    fagsakPersonnummer="1234567"
   />
 );
 
-export const visPapirsoknadForFarVedFodsel = () => (
-  <SvangerskapspengerPapirsoknadIndex
+export const visPapirsoknadForMorVedOmsorg = () => (
+  <ForeldrepengerPapirsoknadIndex
     onSubmitUfullstendigsoknad={action('button-click') as () => Promise<any>}
     onSubmit={action('button-click') as (_formValues: any, _dispatch: Dispatch, values: any) => Promise<any>}
     readOnly={false}
-    soknadData={new SoknadData(fagsakYtelseType.SVANGERSKAPSPENGER, familieHendelseType.FODSEL, foreldreType.FAR)}
+    soknadData={new SoknadData(fagsakYtelseType.FORELDREPENGER, familieHendelseType.OMSORG, foreldreType.MOR)}
     alleKodeverk={alleKodeverk as any}
+    fagsakPersonnummer="1234567"
+  />
+);
+
+export const visPapirsoknadForFarVedFødsel = () => (
+  <ForeldrepengerPapirsoknadIndex
+    onSubmitUfullstendigsoknad={action('button-click') as () => Promise<any>}
+    onSubmit={action('button-click') as (_formValues: any, _dispatch: Dispatch, values: any) => Promise<any>}
+    readOnly={false}
+    soknadData={new SoknadData(fagsakYtelseType.FORELDREPENGER, familieHendelseType.FODSEL, foreldreType.FAR)}
+    alleKodeverk={alleKodeverk as any}
+    fagsakPersonnummer="1234567"
   />
 );

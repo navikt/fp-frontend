@@ -7,13 +7,15 @@ import opptjeningAktivitetType from '@fpsak-frontend/kodeverk/src/opptjeningAkti
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
-import BeregningFaktaIndex from '@fpsak-frontend/fakta-beregning';
 import {
   Kodeverk, Behandling, Beregningsgrunnlag, BeregningAktivitet, FaktaOmBeregning, AndelForFaktaOmBeregning, FaktaOmBeregningAndel,
 } from '@fpsak-frontend/types';
+import { alleKodeverk as alleKodeverkMock } from '@fpsak-frontend/storybook-utils';
 
-import alleKodeverkMock from '../../mocks/alleKodeverk.json';
-import { beregningsgrunnlag as bgMedArbeidOgDagpenger, aksjonspunkt as aksjonspunktArbeidOgDagpenger } from './scenario/ArbeidMedDagpengerIOpptjeningsperioden';
+import BeregningFaktaIndex from './BeregningFaktaIndex';
+import {
+  beregningsgrunnlag as bgMedArbeidOgDagpenger, aksjonspunkt as aksjonspunktArbeidOgDagpenger,
+} from '../testdata/ArbeidMedDagpengerIOpptjeningsperioden';
 
 const behandling = {
   uuid: '1',

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FatterVedtakStatusModal } from '@fpsak-frontend/behandling-felles';
+import FatterVedtakStatusModal from './FatterVedtakStatusModal';
 
 export default {
   title: 'behandling/vedtak/FatterVedtakStatusModal',

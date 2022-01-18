@@ -7,11 +7,11 @@ import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus'
 import {
   ArbeidsforholdFodselOgTilrettelegging, Arbeidsforhold, Behandling, InntektArbeidYtelse,
 } from '@fpsak-frontend/types';
-import FodselOgTilretteleggingFaktaIndex from '@fpsak-frontend/fakta-fodsel-og-tilrettelegging';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
-import { tilrettelegging as tilretteleggingPermisjon, inntektArbeidYtelse as iayPermisjon } from './scenario/tilretteleggningMedPermisjon';
+import { tilrettelegging as tilretteleggingPermisjon, inntektArbeidYtelse as iayPermisjon } from '../testdata/tilretteleggningMedPermisjon';
 
-import alleKodeverk from '../../mocks/alleKodeverk.json';
+import FodselOgTilretteleggingFaktaIndex from './FodselOgTilretteleggingFaktaIndex';
 
 const behandling = {
   uuid: '1',

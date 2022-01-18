@@ -2,7 +2,6 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import BeregningsgrunnlagProsessIndex from '@fpsak-frontend/prosess-beregningsgrunnlag';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
@@ -18,7 +17,9 @@ import {
 } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import inntektAktivitetType from '@fpsak-frontend/kodeverk/src/inntektAktivitetType';
-import alleKodeverk from '../../mocks/alleKodeverk.json';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+
+import BeregningsgrunnlagProsessIndex from './BeregningsgrunnlagProsessIndex';
 
 const standardFom = '2019-09-16';
 const standardTom = undefined;

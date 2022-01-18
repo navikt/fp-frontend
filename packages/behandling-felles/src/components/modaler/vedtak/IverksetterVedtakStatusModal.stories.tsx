@@ -3,7 +3,8 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@fpsak-frontend/utils';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
-import { IverksetterVedtakStatusModal } from '@fpsak-frontend/behandling-felles';
+
+import IverksetterVedtakStatusModal from './IverksetterVedtakStatusModal';
 
 const messages = {
   'IverksetterVedtakStatusModal.Avslatt': 'Avslått',

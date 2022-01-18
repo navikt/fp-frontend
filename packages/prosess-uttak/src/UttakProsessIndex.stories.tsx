@@ -5,8 +5,7 @@ import UttakProsessIndex from '@fpsak-frontend/prosess-uttak';
 import {
   Behandling, FamilieHendelseSamling, Personoversikt, Soknad, UttakStonadskontoer,
 } from '@fpsak-frontend/types';
-
-import alleKodeverk from '../mocks/alleKodeverk.json';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
 export default {
   title: 'prosess/prosess-uttak',

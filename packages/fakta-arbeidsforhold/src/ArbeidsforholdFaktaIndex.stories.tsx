@@ -3,13 +3,12 @@ import { action } from '@storybook/addon-actions';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import ArbeidsforholdFaktaIndex from '@fpsak-frontend/fakta-arbeidsforhold';
 import arbeidsforholdKilder from '@fpsak-frontend/fakta-arbeidsforhold/src/kodeverk/arbeidsforholdKilder';
 import { Behandling, InntektArbeidYtelse } from '@fpsak-frontend/types';
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
-import { iay as flereArbfor, ap as apFlereArbfor } from './scenario/FlereArbforMedAksjonspunkt';
-
-import alleKodeverk from '../../mocks/alleKodeverk.json';
+import ArbeidsforholdFaktaIndex from './ArbeidsforholdFaktaIndex';
+import { iay as flereArbfor, ap as apFlereArbfor } from '../testdata/FlereArbforMedAksjonspunkt';
 
 const behandling = {
   uuid: '1',
