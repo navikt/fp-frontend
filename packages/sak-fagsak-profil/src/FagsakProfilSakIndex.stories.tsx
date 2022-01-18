@@ -1,5 +1,6 @@
 import React from 'react';
 import { Knapp } from 'nav-frontend-knapper';
+import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
@@ -16,7 +17,7 @@ export default {
 const FAGSAK_STATUS_KODEVERK = 'FAGSAK_STATUS';
 const FAGSAK_YTELSE_KODEVERK = 'FAGSAK_YTELSE';
 
-export const Default = () => (
+const Template: Story = () => (
   <div style={{ width: '600px', backgroundColor: 'white', padding: '30px' }}>
     <FagsakProfilSakIndex
       saksnummer="232341251"
@@ -30,3 +31,5 @@ export const Default = () => (
     />
   </div>
 );
+
+export const Default = Template.bind({});

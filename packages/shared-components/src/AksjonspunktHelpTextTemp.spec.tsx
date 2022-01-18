@@ -1,29 +1,21 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { FormattedMessage } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { render, screen } from '@testing-library/react';
+import { composeStories } from '@storybook/testing-react';
+import * as stories from './AksjonspunktHelpTextTemp.stories';
 
-import AksjonspunktHelpTextHTML from './AksjonspunktHelpTextHTML';
-import AksjonspunktHelpTextTemp from './AksjonspunktHelpTextTemp';
+const { HjelpeteksterNårAksjonspunktetErÅpent, HjelpeteksterNårAksjonspunktetErLukket } = composeStories(stories);
 
 describe('<AksjonspunktHelpTextTemp>', () => {
-  it('skal vise komponent for åpent aksjonspunkt', () => {
-    const wrapper = shallow(
-      <AksjonspunktHelpTextTemp isAksjonspunktOpen>
-        {[<FormattedMessage key="1" id="HelpText.Aksjonspunkt" />]}
-      </AksjonspunktHelpTextTemp>,
-    );
-    expect(wrapper.find(AksjonspunktHelpTextHTML)).toHaveLength(1);
-    expect(wrapper.find(Normaltekst)).toHaveLength(0);
+  it('skal vise åpne aksjonspunkter', async () => {
+    render(<HjelpeteksterNårAksjonspunktetErÅpent />);
+    expect(await screen.findByText('Dette er en aksjonspunktmelding')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en annen aksjonspunktmelding')).toBeInTheDocument();
   });
 
-  it('skal tekst når aksjonspunkt er lukket', () => {
-    const wrapper = shallow(
-      <AksjonspunktHelpTextTemp isAksjonspunktOpen={false}>
-        {[<FormattedMessage key="1" id="HelpText.Aksjonspunkt" />]}
-      </AksjonspunktHelpTextTemp>,
-    );
-    expect(wrapper.find(AksjonspunktHelpTextHTML)).toHaveLength(0);
-    expect(wrapper.find(Normaltekst)).toHaveLength(1);
+  it('skal vise at aksjonspunktene er behandlet', async () => {
+    render(<HjelpeteksterNårAksjonspunktetErLukket />);
+    expect(await screen.findAllByText('Behandlet aksjonspunkt:')).toHaveLength(2);
+    expect(screen.getByText('Dette er en aksjonspunktmelding')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en annen aksjonspunktmelding')).toBeInTheDocument();
   });
 });

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
+import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 import questionNormalUrl from '@fpsak-frontend/assets/images/question_normal.svg';
@@ -11,22 +12,26 @@ export default {
   component: Image,
 };
 
-export const Default = () => (
-  <Image
-    alt="Alt-tekst"
-    src={innvilgetImageUrl}
-  />
-);
-
-export const KlikkbartIkon = () => {
+const Template: Story<{
+  src: string;
+  srcHover: string;
+  tooltip: ReactElement;
+  hasOnClick?: boolean;
+}> = ({
+  src,
+  srcHover,
+  tooltip,
+  hasOnClick = false,
+}) => {
   const [visModal, setVisModal] = useState(false);
-
   return (
     <>
       <Image
         alt="Alt-tekst"
-        src={innvilgetImageUrl}
-        onClick={() => setVisModal(true)}
+        src={src}
+        srcHover={srcHover}
+        tooltip={tooltip}
+        onClick={hasOnClick ? () => setVisModal(true) : undefined}
       />
       {visModal && (
         <AdvarselModal
@@ -39,18 +44,25 @@ export const KlikkbartIkon = () => {
   );
 };
 
-export const IkonMedTooltip = () => (
-  <Image
-    alt="Alt-tekst"
-    src={innvilgetImageUrl}
-    tooltip={<div><b>Dette er en tooltip-tekst</b></div>}
-  />
-);
+export const Default = Template.bind({});
+Default.args = {
+  src: innvilgetImageUrl,
+};
 
-export const AnnetIkonVedHoover = () => (
-  <Image
-    alt="Alt-tekst"
-    src={questionNormalUrl}
-    srcHover={questionHoverUrl}
-  />
-);
+export const IkonMedTooltip = Template.bind({});
+IkonMedTooltip.args = {
+  src: innvilgetImageUrl,
+  tooltip: <div><b>Dette er en tooltip-tekst</b></div>,
+};
+
+export const AnnetIkonVedHoover = Template.bind({});
+AnnetIkonVedHoover.args = {
+  src: questionNormalUrl,
+  srcHover: questionHoverUrl,
+};
+
+export const KlikkbartIkon = Template.bind({});
+KlikkbartIkon.args = {
+  src: innvilgetImageUrl,
+  hasOnClick: true,
+};

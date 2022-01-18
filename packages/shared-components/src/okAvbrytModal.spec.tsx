@@ -4,7 +4,6 @@ import { render, screen } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from './OkAvbrytModal.stories';
 
-// @ts-ignore Fjern når fiksa
 const { Default } = composeStories(stories);
 
 describe('<OkAvbrytModal>', () => {

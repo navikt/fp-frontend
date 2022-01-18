@@ -1,4 +1,5 @@
 import React from 'react';
+import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import FlexContainer from './FlexContainer';
 import FlexRow from './FlexRow';
@@ -9,7 +10,7 @@ export default {
   component: FlexContainer,
 };
 
-export const Default = () => (
+const Template: Story = () => (
   <FlexContainer>
     <FlexRow>
       <FlexColumn>
@@ -35,3 +36,5 @@ export const Default = () => (
     </FlexRow>
   </FlexContainer>
 );
+
+export const Default = Template.bind({});
