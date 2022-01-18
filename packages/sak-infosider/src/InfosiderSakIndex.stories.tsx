@@ -1,4 +1,5 @@
 import React from 'react';
+import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import {
   ForbiddenPage, NotFoundPage, UnauthorizedPage, IngenBehandlingValgtPanel,
@@ -11,22 +12,12 @@ export default {
   decorators: [withRouter],
 };
 
-export const HarIkkeTilgang = () => (
-  <ForbiddenPage />
-);
+export const HarIkkeTilgang: Story = () => <ForbiddenPage />;
 
-export const SideIkkeFunnet = () => (
-  <NotFoundPage />
-);
+export const SideIkkeFunnet: Story = () => <NotFoundPage />;
 
-export const IkkeInnloggetBruker = () => (
-  <UnauthorizedPage />
-);
+export const IkkeInnloggetBruker: Story = () => <UnauthorizedPage />;
 
-export const BehandlingErIkkeValgt = () => (
-  <IngenBehandlingValgtPanel numBehandlinger={2} />
-);
+export const BehandlingErIkkeValgt: Story = () => <IngenBehandlingValgtPanel numBehandlinger={2} />;
 
-export const BehandlingerFinnesIkke = () => (
-  <IngenBehandlingValgtPanel numBehandlinger={0} />
-);
+export const BehandlingerFinnesIkke: Story = () => <IngenBehandlingValgtPanel numBehandlinger={0} />;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import AksjonspunktHelpTextTemp from './AksjonspunktHelpTextTemp';
 
@@ -7,13 +8,13 @@ export default {
   component: AksjonspunktHelpTextTemp,
 };
 
-export const visHjelpeteksterNårAksjonspunktetErÅpent = () => (
+export const HjelpeteksterNårAksjonspunktetErÅpent: Story = () => (
   <AksjonspunktHelpTextTemp isAksjonspunktOpen>
     {['Dette er en aksjonspunktmelding', 'Dette er en annen aksjonspunktmelding']}
   </AksjonspunktHelpTextTemp>
 );
 
-export const visHjelpeteksterNårAksjonspunktetErLukket = () => (
+export const HjelpeteksterNårAksjonspunktetErLukket: Story = () => (
   <AksjonspunktHelpTextTemp isAksjonspunktOpen={false}>
     {['Dette er en aksjonspunktmelding', 'Dette er en annen aksjonspunktmelding']}
   </AksjonspunktHelpTextTemp>

@@ -16,6 +16,7 @@
     "@fpsak-frontend/papirsoknad-panel-opphold-i-norge": "1.0.0",
     "@fpsak-frontend/papirsoknad-panel-rettigheter": "1.0.0",
     "@fpsak-frontend/papirsoknad-panel-sprak": "1.0.0",
+    "@fpsak-frontend/storybook-utils": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
     "nav-frontend-grid": "2.0.1",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@fpsak-frontend/utils-test": "^1.0.0",
+    "@storybook/addon-actions": "^6.4.12",
     "enzyme": "^3.11.0",
     "sinon": "^12.0.1"
   }
