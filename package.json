@@ -41,7 +41,7 @@
     "@formatjs/intl-numberformat": "^7.4.0",
     "axios": "0.24.0",
     "core-js": "^3.20.2",
-    "dotenv": "^11.0.0",
+    "dotenv": "^14.2.0",
     "history": "^5.2.0",
     "nav-frontend-ikonknapper": "2.1.2",
     "nav-frontend-paneler": "3.0.1",
