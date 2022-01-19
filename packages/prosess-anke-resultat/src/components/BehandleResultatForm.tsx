@@ -7,7 +7,7 @@ import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -116,7 +116,7 @@ export const ResultatOmgjores: FunctionComponent<OwnPropsResultat & { alleKodeve
     {ankeVurderingResultat.ankeOmgjoerArsak && (
       <>
         <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Arsak" /></Undertekst>
-        <Undertekst>{getKodeverknavnFn(alleKodeverk, kodeverkTyper)(ankeVurderingResultat.ankeOmgjoerArsak)}</Undertekst>
+        <Undertekst>{getKodeverknavnFn(alleKodeverk, KodeverkType)(ankeVurderingResultat.ankeOmgjoerArsak, KodeverkType.ANKE_OMGJOER_AARSAK)}</Undertekst>
         <VerticalSpacer sixteenPx />
       </>
     )}

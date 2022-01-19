@@ -5,7 +5,7 @@ import HttpClientApi from '../HttpClientApiTsType';
 
 const konverterKodeverkTilKode = (data: any) => {
   Object.keys(data).forEach((key) => {
-    if (data[key]?.kode && data[key]?.kodeverk) {
+    if (data[key]?.kode && data[key]?.kodeverk && Object.keys(data).length === 2) {
       // eslint-disable-next-line no-param-reassign
       data[key] = data[key].kode;
     }
