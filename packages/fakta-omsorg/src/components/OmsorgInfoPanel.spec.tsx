@@ -18,42 +18,24 @@ describe('<OmsorgInfoPanel>', () => {
     bruker: {
       navn: 'Espen Utvikler',
       aktoerId: '1',
-      kjønn: {
-        kode: '',
-        kodeverk: '',
-      },
-      sivilstand: {
-        kode: 'UGIF',
-        kodeverk: '',
-      },
+      kjønn: '',
+      sivilstand: 'UGIF',
       adresser: [],
     },
   } as Personoversikt;
 
   const aleneomsorgAp = {
     id: 1,
-    definisjon: {
-      kode: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-      kodeverk: '',
-    },
-    status: {
-      kode: 's1',
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+    status: 's1',
     kanLoses: true,
     erAktivt: false,
   };
 
   const omsorgAp = {
     id: 1,
-    definisjon: {
-      kode: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
-      kodeverk: '',
-    },
-    status: {
-      kode: 's1',
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
+    status: 's1',
     kanLoses: true,
     erAktivt: false,
   };

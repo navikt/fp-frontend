@@ -14,14 +14,8 @@ import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 const behandling = {
   uuid: '1',
   versjon: 2,
-  status: {
-    kode: behandlingStatus.BEHANDLING_UTREDES,
-    kodeverk: 'BEHANDLING_STATUS',
-  },
-  type: {
-    kode: behandlingType.FORSTEGANGSSOKNAD,
-    kodeverk: 'BEHANDLING_TYPE',
-  },
+  status: behandlingStatus.BEHANDLING_UTREDES,
+  type: behandlingType.FORSTEGANGSSOKNAD,
   behandlingPaaVent: false,
   behandlingHenlagt: false,
 };
@@ -63,14 +57,8 @@ EndringAvUtland.args = {
 export const ApentAksjonspunktForInnhentingAvDokumentasjon = Template.bind({});
 ApentAksjonspunktForInnhentingAvDokumentasjon.args = {
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-      kodeverk: 'AP_DEF',
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: 'AP_STATUS',
-    },
+    definisjon: aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+    status: aksjonspunktStatus.OPPRETTET,
     kanLoses: true,
     erAktivt: true,
   }],
@@ -80,14 +68,8 @@ ApentAksjonspunktForInnhentingAvDokumentasjon.args = {
 export const AksjonspunktErIkkeGodkjentAvBeslutter = Template.bind({});
 AksjonspunktErIkkeGodkjentAvBeslutter.args = {
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-      kodeverk: 'AP_DEF',
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: 'AP_STATUS',
-    },
+    definisjon: aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+    status: aksjonspunktStatus.OPPRETTET,
     kanLoses: true,
     erAktivt: true,
   }],

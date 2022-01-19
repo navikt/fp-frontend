@@ -31,14 +31,8 @@ const soknad = {
   termindato: '2019-01-01',
   utstedtdato: '2019-01-02',
   antallBarn: 1,
-  soknadType: {
-    kode: soknadType.FODSEL,
-    kodeverk: '',
-  },
-  farSokerType: {
-    kode: 'ADOPTERER_ALENE',
-    kodeverk: 'FAR_SOEKER_TYPE',
-  },
+  soknadType: soknadType.FODSEL,
+  farSokerType: 'ADOPTERER_ALENE',
   omsorgsovertakelseDato: '2022-09-14',
   barnetsAnkomstTilNorgeDato: '2022-09-13',
 } as Soknad;
@@ -82,14 +76,8 @@ const Template: Story<{
 export const AksjonspunktForAdopsjonsvilkåret = Template.bind({});
 AksjonspunktForAdopsjonsvilkåret.args = {
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.ADOPSJONSDOKUMENTAJON,
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.ADOPSJONSDOKUMENTAJON,
+    status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
     erAktivt: true,
@@ -103,14 +91,8 @@ AksjonspunktForAdopsjonsvilkåret.args = {
 export const AksjonspunktForOmSøkerErMannSomAdoptererAlene = Template.bind({});
 AksjonspunktForOmSøkerErMannSomAdoptererAlene.args = {
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
+    status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
     erAktivt: true,
@@ -124,14 +106,8 @@ AksjonspunktForOmSøkerErMannSomAdoptererAlene.args = {
 export const AksjonspunktForOmAdopsjonGjelderEktefellesBarn = Template.bind({});
 AksjonspunktForOmAdopsjonGjelderEktefellesBarn.args = {
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+    status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
     erAktivt: true,
@@ -145,14 +121,8 @@ AksjonspunktForOmAdopsjonGjelderEktefellesBarn.args = {
 export const IkkeVisBarnetsAnkomstDatoForEngangsstønad = Template.bind({});
 IkkeVisBarnetsAnkomstDatoForEngangsstønad.args = {
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+    status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
     erAktivt: true,

@@ -146,10 +146,7 @@ describe('<PersonAksjonspunktText>', () => {
         mottattDatoInntektsmelding: undefined,
         permisjoner: [
           {
-            type: {
-              kode: 'PERMISJON',
-              kodeverk: '',
-            },
+            type: 'PERMISJON',
             permisjonFom: '2018-10-01',
             permisjonTom: undefined,
             permisjonsprosent: 100,
@@ -173,10 +170,7 @@ describe('<PersonAksjonspunktText>', () => {
         mottattDatoInntektsmelding: '2019-01-01',
         permisjoner: [
           {
-            type: {
-              kode: 'PERMISJON',
-              kodeverk: '',
-            },
+            type: 'PERMISJON',
             permisjonFom: '2018-10-01',
             permisjonTom: undefined,
             permisjonsprosent: 100,
@@ -200,19 +194,13 @@ describe('<PersonAksjonspunktText>', () => {
         mottattDatoInntektsmelding: '2019-01-01',
         permisjoner: [
           {
-            type: {
-              kode: 'PERMISJON',
-              kodeverk: '',
-            },
+            type: 'PERMISJON',
             permisjonFom: '2015-01-01',
             permisjonTom: '2016-01-01',
             permisjonsprosent: 100,
           },
           {
-            type: {
-              kode: 'PERMISJON',
-              kodeverk: '',
-            },
+            type: 'PERMISJON',
             permisjonFom: '2018-10-10',
             permisjonTom: undefined,
             permisjonsprosent: 100,

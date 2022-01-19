@@ -18,14 +18,8 @@ describe('<MedlemskapInfoPanel>', () => {
   it('skal vise form for startdato for foreldrepengerperioden når en har overstyr-aksjonspunktet for dette', () => {
     const avklarStartdatoAksjonspunkt = {
       id: 1,
-      definisjon: {
-        kode: aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO,
+      status: aksjonspunktStatus.OPPRETTET,
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
       kanLoses: true,
@@ -40,14 +34,8 @@ describe('<MedlemskapInfoPanel>', () => {
       readOnly
       submitCallback={sinon.spy()}
       alleMerknaderFraBeslutter={{}}
-      behandlingType={{
-        kode: 'TEst',
-        kodeverk: '',
-      }}
-      behandlingStatus={{
-        kode: behandlingStatus.BEHANDLING_UTREDES,
-        kodeverk: '',
-      }}
+      behandlingType="TEst"
+      behandlingStatus={behandlingStatus.BEHANDLING_UTREDES}
       soknad={{} as Soknad}
       alleKodeverk={{} as AlleKodeverk}
       medlemskap={{} as Medlemskap}
@@ -61,14 +49,8 @@ describe('<MedlemskapInfoPanel>', () => {
   it('skal vise begge medlemskapsformer når aksjonspunkt for overstyrt startdato for foreldrepengerperioden er avklart', () => {
     const avklarStartdatoAksjonspunkt = {
       id: 1,
-      definisjon: {
-        kode: aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.UTFORT,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO,
+      status: aksjonspunktStatus.UTFORT,
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
       kanLoses: false,
@@ -83,14 +65,8 @@ describe('<MedlemskapInfoPanel>', () => {
       readOnly
       submitCallback={sinon.spy()}
       alleMerknaderFraBeslutter={{}}
-      behandlingType={{
-        kode: 'TEst',
-        kodeverk: '',
-      }}
-      behandlingStatus={{
-        kode: behandlingStatus.BEHANDLING_UTREDES,
-        kodeverk: '',
-      }}
+      behandlingType="TEst"
+      behandlingStatus={behandlingStatus.BEHANDLING_UTREDES}
       soknad={{} as Soknad}
       alleKodeverk={{} as AlleKodeverk}
       medlemskap={{} as Medlemskap}
@@ -110,14 +86,8 @@ describe('<MedlemskapInfoPanel>', () => {
       readOnly
       submitCallback={sinon.spy()}
       alleMerknaderFraBeslutter={{}}
-      behandlingType={{
-        kode: 'TEst',
-        kodeverk: '',
-      }}
-      behandlingStatus={{
-        kode: behandlingStatus.BEHANDLING_UTREDES,
-        kodeverk: '',
-      }}
+      behandlingType="TEst"
+      behandlingStatus={behandlingStatus.BEHANDLING_UTREDES}
       soknad={{} as Soknad}
       alleKodeverk={{} as AlleKodeverk}
       medlemskap={{} as Medlemskap}

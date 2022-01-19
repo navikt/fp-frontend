@@ -233,14 +233,8 @@ export const iay = {
 };
 
 export const ap = {
-  definisjon: {
-    kode: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
-    kodeverk: '',
-  },
-  status: {
-    kode: aksjonspunktStatus.OPPRETTET,
-    kodeverk: '',
-  },
+  definisjon: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
+  status: aksjonspunktStatus.OPPRETTET,
   begrunnelse: undefined,
   kanLoses: true,
   erAktivt: true,

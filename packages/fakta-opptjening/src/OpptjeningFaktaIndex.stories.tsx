@@ -61,14 +61,8 @@ export const MedAksjonspunkt = Template.bind({});
 MedAksjonspunkt.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING,
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING,
+    status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
     erAktivt: true,
@@ -84,10 +78,7 @@ MedAksjonspunkt.args = {
       fastsattOpptjeningAktivitetList: [],
     },
     opptjeningAktivitetList: [{
-      aktivitetType: {
-        kode: opptjeningAktivitetType.ARBEID,
-        kodeverk: '',
-      },
+      aktivitetType: opptjeningAktivitetType.ARBEID,
       opptjeningFom: '1995-09-14',
       opptjeningTom: '9999-12-31',
       arbeidsgiverReferanse: '3',
@@ -140,10 +131,7 @@ UtenAksjonspunkt.args = {
     opptjeningAktivitetList: [{
       opptjeningFom: '2017-01-01',
       opptjeningTom: '9999-12-31',
-      aktivitetType: {
-        kode: opptjeningAktivitetType.ARBEID,
-        kodeverk: '',
-      },
+      aktivitetType: opptjeningAktivitetType.ARBEID,
       arbeidsgiverReferanse: '1',
       arbeidsforholdRef: 'bf623ff9-6ffb-4a81-b9f1-2648e5530a47',
       erEndret: false,
@@ -153,16 +141,12 @@ UtenAksjonspunkt.args = {
     }, {
       opptjeningFom: '2017-01-01',
       opptjeningTom: '9999-12-31',
-      aktivitetType: {
-        kode: opptjeningAktivitetType.DAGPENGER,
-        kodeverk: '',
-      },
+      aktivitetType: opptjeningAktivitetType.DAGPENGER,
       arbeidsgiverReferanse: '1',
       arbeidsforholdRef: 'bf623ff9-6ffb-4a81-b9f1-2648e5530a47',
       erEndret: false,
       erGodkjent: true,
       naringRegistreringsdato: '1995-09-14',
-      oppdragsgiverOrg: '973861778',
       stillingsandel: 50,
     }],
   } as Opptjening,
@@ -172,14 +156,8 @@ export const MedToLikePerioderForSammeAktivitetstype = Template.bind({});
 MedToLikePerioderForSammeAktivitetstype.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING,
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING,
+    status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
     erAktivt: true,
@@ -195,10 +173,7 @@ MedToLikePerioderForSammeAktivitetstype.args = {
       fastsattOpptjeningAktivitetList: [],
     },
     opptjeningAktivitetList: [{
-      aktivitetType: {
-        kode: opptjeningAktivitetType.NARING,
-        kodeverk: '',
-      },
+      aktivitetType: opptjeningAktivitetType.NARING,
       opptjeningFom: '1995-09-14',
       opptjeningTom: '9999-12-31',
       arbeidsgiverReferanse: '1',
@@ -207,10 +182,7 @@ MedToLikePerioderForSammeAktivitetstype.args = {
       naringRegistreringsdato: '1995-09-14',
       erEndret: false,
     }, {
-      aktivitetType: {
-        kode: opptjeningAktivitetType.NARING,
-        kodeverk: '',
-      },
+      aktivitetType: opptjeningAktivitetType.NARING,
       opptjeningFom: '1995-09-14',
       opptjeningTom: '9999-12-31',
       arbeidsgiverReferanse: '2',
@@ -227,14 +199,8 @@ export const MedAlleOpptjeningsaktiviteterFiltrertBort = Template.bind({});
 MedAlleOpptjeningsaktiviteterFiltrertBort.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING,
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING,
+    status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
     erAktivt: true,
@@ -250,10 +216,7 @@ MedAlleOpptjeningsaktiviteterFiltrertBort.args = {
       fastsattOpptjeningAktivitetList: [],
     },
     opptjeningAktivitetList: [{
-      aktivitetType: {
-        kode: opptjeningAktivitetType.ARBEID,
-        kodeverk: '',
-      },
+      aktivitetType: opptjeningAktivitetType.ARBEID,
       opptjeningFom: '2020-12-25',
       opptjeningTom: '2021-10-24',
       arbeidsgiverReferanse: '3',

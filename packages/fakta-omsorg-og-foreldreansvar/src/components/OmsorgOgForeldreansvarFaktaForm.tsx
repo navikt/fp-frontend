@@ -15,6 +15,7 @@ import { isFieldEdited, FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
 import {
   Aksjonspunkt, FamilieHendelse, InntektArbeidYtelse, KodeverkMedNavn, Personoversikt, RelatertTilgrensedYtelse, Soknad,
 } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { AvklarFaktaForForeldreansvarAksjonspunktAp, AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import OmsorgsovertakelseFaktaPanel, { FormValues as OmsorgFormValues } from './OmsorgsovertakelseFaktaPanel';
@@ -68,7 +69,7 @@ interface PureOwnProps {
 interface StaticFunctions {
   buildInitialValues?: (soknad: Soknad, familiehendelse: FamilieHendelse,
     innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],
-    getKodeverknavn: (kodeverk: string) => string) => FormValues,
+    getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string) => FormValues,
   transformValues?: (
     values: FormValues,
     aksjonspunkt: Aksjonspunkt,
@@ -177,7 +178,7 @@ const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<PureOwnProps> & StaticF
 
 OmsorgOgForeldreansvarFaktaForm.buildInitialValues = (soknad: Soknad, gjeldendeFamiliehendelse: FamilieHendelse,
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: InntektArbeidYtelse['innvilgetRelatertTilgrensendeYtelserForAnnenForelder'],
-  getKodeverknavn: (kodeverk: string) => string): FormValues => ({
+  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string): FormValues => ({
   vilkarType: gjeldendeFamiliehendelse.vilkarType ? gjeldendeFamiliehendelse.vilkarType : '',
   ...OmsorgsovertakelseFaktaPanel.buildInitialValues(soknad, gjeldendeFamiliehendelse),
   ...RettighetFaktaPanel.buildInitialValues(soknad, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, getKodeverknavn),

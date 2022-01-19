@@ -34,14 +34,8 @@ const soknad = {
   adopsjonFodelsedatoer: { 1: '2019-01-10', 2: '2019-01-11' } as { [key: number]: string },
   utstedtdato: '2019-01-02',
   antallBarn: 2,
-  soknadType: {
-    kode: soknadType.ADOPSJON,
-    kodeverk: '',
-  },
-  farSokerType: {
-    kode: 'ADOPTERER_ALENE',
-    kodeverk: 'FAR_SOEKER_TYPE',
-  },
+  soknadType: soknadType.ADOPSJON,
+  farSokerType: 'ADOPTERER_ALENE',
 } as Soknad;
 
 const personoversikt = {
@@ -49,24 +43,12 @@ const personoversikt = {
     fnr: '',
     navn: 'Olga Utvikler',
     aktoerId: '2',
-    diskresjonskode: {
-      kode: '',
-      kodeverk: '',
-    },
-    kjønn: {
-      kode: navBrukerKjonn.KVINNE,
-      kodeverk: '',
-    },
-    sivilstand: {
-      kode: '',
-      kodeverk: '',
-    },
+    diskresjonskode: '',
+    kjønn: navBrukerKjonn.KVINNE,
+    sivilstand: '',
     fødselsdato: '1979-01-01',
     adresser: [{
-      adresseType: {
-        kode: opplysningAdresseType.POSTADRESSE,
-        kodeverk: '',
-      },
+      adresseType: opplysningAdresseType.POSTADRESSE,
       adresselinje1: 'Gateadresse 1',
       postNummer: '1000',
       poststed: 'Oslo',
@@ -77,18 +59,9 @@ const personoversikt = {
     fnr: '',
     navn: 'Espen Utvikler',
     aktoerId: '1',
-    diskresjonskode: {
-      kode: '',
-      kodeverk: '',
-    },
-    kjønn: {
-      kode: navBrukerKjonn.MANN,
-      kodeverk: '',
-    },
-    sivilstand: {
-      kode: '',
-      kodeverk: '',
-    },
+    diskresjonskode: '',
+    kjønn: navBrukerKjonn.MANN,
+    sivilstand: '',
     fødselsdato: '1989-01-01',
     dødsdato: '2021-01-01',
     adresser: [],
@@ -146,14 +119,8 @@ const Template: Story<{
 export const ÅpentAksjonspunktForOmsorgovertakelse = Template.bind({});
 ÅpentAksjonspunktForOmsorgovertakelse.args = {
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.OMSORGSOVERTAKELSE,
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.OMSORGSOVERTAKELSE,
+    status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
     erAktivt: true,
@@ -167,14 +134,8 @@ export const ÅpentAksjonspunktForOmsorgovertakelse = Template.bind({});
 export const ÅpentAksjonspunktForAvklareVilkårForForeldreansvar = Template.bind({});
 ÅpentAksjonspunktForAvklareVilkårForForeldreansvar.args = {
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
+    status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
     erAktivt: true,

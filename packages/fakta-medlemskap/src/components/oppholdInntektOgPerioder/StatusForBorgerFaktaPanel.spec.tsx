@@ -73,14 +73,8 @@ describe('<StatusForBorgerFaktaPanel>', () => {
       aksjonspunkter: [aksjonspunktCodes.AVKLAR_OPPHOLDSRETT],
     };
     const aksjonspunkt = {
-      definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_OPPHOLDSRETT,
-        kodeverk: '',
-      },
-      status: {
-        kode: 'UTFO',
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.AVKLAR_OPPHOLDSRETT,
+      status: 'UTFO',
     } as Aksjonspunkt;
     const initialValues = StatusForBorgerFaktaPanel.buildInitialValues(periode as PeriodeMedId, [aksjonspunkt]);
 
@@ -118,14 +112,8 @@ describe('<StatusForBorgerFaktaPanel>', () => {
       aksjonspunkter: [aksjonspunktCodes.AVKLAR_OPPHOLDSRETT],
     };
     const aksjonspunkt = {
-      definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_OPPHOLDSRETT,
-        kodeverk: '',
-      },
-      status: {
-        kode: 'UTFO',
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.AVKLAR_OPPHOLDSRETT,
+      status: 'UTFO',
     } as Aksjonspunkt;
 
     const initialValues = StatusForBorgerFaktaPanel.buildInitialValues(periode as PeriodeMedId, [aksjonspunkt]);

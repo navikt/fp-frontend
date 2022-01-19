@@ -9,7 +9,7 @@ import {
   DateLabel, FlexColumn, FlexContainer, FlexRow, PeriodLabel, Table, TableColumn, TableRow, VerticalSpacer, FaktaGruppe,
 } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { DDMMYYYY_DATE_FORMAT, required } from '@fpsak-frontend/utils';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
@@ -68,7 +68,7 @@ interface MappedOwnProps {
 
 interface StaticFunctions {
   buildInitialValues?: (periode: PeriodeMedId, medlemskapPerioder: Medlemskap['medlemskapPerioder'], soknad: Soknad,
-  aksjonspunkter: Aksjonspunkt[], getKodeverknavn: (kodeverk: string) => string) => FormValues;
+  aksjonspunkter: Aksjonspunkt[], getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string) => FormValues;
   transformValues?: (values: FormValues, manuellVurderingTyper: string[]) => TransformedValues;
 }
 
@@ -174,7 +174,7 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
     state, 'fixedMedlemskapPerioder', 'fodselsdato', 'termindato',
     'omsorgsovertakelseDato', 'hasPeriodeAksjonspunkt', 'isPeriodAksjonspunktClosed',
   ),
-  vurderingTypes: ownProps.alleKodeverk[kodeverkTyper.MEDLEMSKAP_MANUELL_VURDERING_TYPE],
+  vurderingTypes: ownProps.alleKodeverk[KodeverkType.MEDLEMSKAP_MANUELL_VURDERING_TYPE],
 });
 
 const PerioderMedMedlemskapFaktaPanel = connect(mapStateToProps)(PerioderMedMedlemskapFaktaPanelImpl);
@@ -184,7 +184,7 @@ PerioderMedMedlemskapFaktaPanel.buildInitialValues = (
   medlemskapPerioder: Medlemskap['medlemskapPerioder'],
   soknad: Soknad,
   aksjonspunkter: Aksjonspunkt[],
-  getKodeverknavn: (kodeverk: string) => string,
+  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
 ): FormValues => {
   if (medlemskapPerioder === null) {
     return {};
@@ -193,8 +193,8 @@ PerioderMedMedlemskapFaktaPanel.buildInitialValues = (
   const fixedMedlemskapPerioder = medlemskapPerioder.map((i) => ({
     fom: i.fom,
     tom: i.tom,
-    dekning: getKodeverknavn(i.dekningType),
-    status: getKodeverknavn(i.medlemskapType),
+    dekning: getKodeverknavn(i.dekningType, KodeverkType.MEDLEMSKAP_DEKNING),
+    status: getKodeverknavn(i.medlemskapType, KodeverkType.MEDLEMSKAP_TYPE),
     beslutningsdato: i.beslutningsdato,
   }))
     .sort((p1, p2) => new Date(p1.fom).getTime() - new Date(p2.fom).getTime());

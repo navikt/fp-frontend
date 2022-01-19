@@ -37,10 +37,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
         arbeidsgiverReferanse: '111222333',
         eksternArbeidsforholdReferanse: 'ARB001-001',
         velferdspermisjoner: [],
-        uttakArbeidType: {
-          kode: 'FRILANS',
-          kodeverk: 'UTTAK_ARBEID_TYPE',
-        },
+        uttakArbeidType: 'FRILANS',
       } as ArbeidsforholdFodselOgTilrettelegging}
       formSectionName="ARB_NAVN"
       visTilrettelegginger
@@ -71,10 +68,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
         arbeidsgiverReferanse: '0',
         eksternArbeidsforholdReferanse: '',
         velferdspermisjoner: [],
-        uttakArbeidType: {
-          kode: 'FRILANS',
-          kodeverk: 'UTTAK_ARBEID_TYPE',
-        },
+        uttakArbeidType: 'FRILANS',
       } as ArbeidsforholdFodselOgTilrettelegging}
       formSectionName="ARB_NAVN"
       visTilrettelegginger={false}
@@ -104,10 +98,7 @@ describe('<TilretteleggingArbeidsforholdSection>', () => {
       arbeidsforhold={{
         eksternArbeidsforholdReferanse: '',
         velferdspermisjoner: [],
-        uttakArbeidType: {
-          kode: 'FRILANS',
-          kodeverk: 'UTTAK_ARBEID_TYPE',
-        },
+        uttakArbeidType: 'FRILANS',
       } as ArbeidsforholdFodselOgTilrettelegging}
       formSectionName="ARB_NAVN"
       visTilrettelegginger={false}

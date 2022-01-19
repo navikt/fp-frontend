@@ -19,16 +19,10 @@ const svangerskapspengerTilrettelegging: Partial<FodselOgTilrettelegging> = {
     tilretteleggingBehovFom: '2019-10-01',
     tilretteleggingDatoer: [{
       fom: '2019-10-01',
-      type: {
-        kode: tilretteleggingType.INGEN_TILRETTELEGGING,
-        kodeverk: 'test',
-      },
+      type: tilretteleggingType.INGEN_TILRETTELEGGING,
     }],
     arbeidsgiverReferanse: '1',
-    uttakArbeidType: {
-      kode: 'FRILANS',
-      kodeverk: 'UTTAK_ARBEID_TYPE',
-    },
+    uttakArbeidType: 'FRILANS',
     skalBrukes: true,
     kanTilrettelegges: true,
     velferdspermisjoner: [],

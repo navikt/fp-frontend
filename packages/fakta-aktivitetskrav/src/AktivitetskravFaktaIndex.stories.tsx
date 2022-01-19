@@ -15,34 +15,25 @@ const behandling = {
 } as Behandling;
 
 const uttakKontrollerAktivitetskravListe = [{
-  avklaring: { kode: 'I_AKTIVITET', kodeverk: 'AKTIVITETSKRAV_AVKLARING' },
+  avklaring: 'I_AKTIVITET',
   begrunnelse: 'Dette er en test',
   fom: '2021-01-01',
   tom: '2021-01-07',
-  morsAktivitet: {
-    kode: 'INNLAGT',
-    kodeverk: 'MORS_AKTIVITET',
-  },
+  morsAktivitet: 'INNLAGT',
   endret: false,
 }, {
   avklaring: null,
   begrunnelse: null,
   fom: '2021-01-08',
   tom: '2021-01-13',
-  morsAktivitet: {
-    kode: 'ARBEID_OG_UTDANNING',
-    kodeverk: 'MORS_AKTIVITET',
-  },
+  morsAktivitet: 'ARBEID_OG_UTDANNING',
   endret: false,
 }, {
   avklaring: null,
   begrunnelse: null,
   fom: '2021-01-15',
   tom: '2021-01-20',
-  morsAktivitet: {
-    kode: 'ARBEID_OG_UTDANNING',
-    kodeverk: 'MORS_AKTIVITET',
-  },
+  morsAktivitet: 'ARBEID_OG_UTDANNING',
   endret: false,
 }] as UttakKontrollerAktivitetskrav[];
 
@@ -87,14 +78,8 @@ const Template: Story<{
 export const AksjonspunktMedToUavklartePerioder = Template.bind({});
 AksjonspunktMedToUavklartePerioder.args = {
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
+    status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
     erAktivt: true,
@@ -108,14 +93,8 @@ AksjonspunktMedToUavklartePerioder.args = {
 export const AksjonspunktSomErBekreftet = Template.bind({});
 AksjonspunktSomErBekreftet.args = {
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.UTFORT,
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
+    status: aksjonspunktStatus.UTFORT,
     begrunnelse: undefined,
     kanLoses: false,
     erAktivt: false,
@@ -129,14 +108,8 @@ AksjonspunktSomErBekreftet.args = {
 export const AksjonspunktSomErReåpnetAvBeslutter = Template.bind({});
 AksjonspunktSomErReåpnetAvBeslutter.args = {
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
+    status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
     kanLoses: true,
     erAktivt: true,

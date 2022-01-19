@@ -21,14 +21,8 @@ jest.mock('react-intl', () => {
 describe('<OmsorgFaktaForm>', () => {
   const aleneomsorgAp = {
     id: 1,
-    definisjon: {
-      kode: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-      kodeverk: '',
-    },
-    status: {
-      kode: 'OPPRETTET',
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+    status: 'OPPRETTET',
     toTrinnsBehandling: false,
     toTrinnsBehandlingGodkjent: false,
     kanLoses: true,
@@ -36,14 +30,8 @@ describe('<OmsorgFaktaForm>', () => {
   };
   const omsorgAp = {
     id: 2,
-    definisjon: {
-      kode: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
-      kodeverk: '',
-    },
-    status: {
-      kode: 'OPPRETTET',
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
+    status: 'OPPRETTET',
     toTrinnsBehandling: false,
     toTrinnsBehandlingGodkjent: false,
     kanLoses: true,
