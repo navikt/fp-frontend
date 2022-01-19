@@ -54,10 +54,7 @@ const nyPeriode = {
 
 const andeler = [{
   arbeidsgiverReferanse: '973861778',
-  arbeidType: {
-    kode: 'ORDINÆRT_ARBEID',
-    kodeverk: 'UTTAK_ARBEID_TYPE',
-  },
+  arbeidType: 'ORDINÆRT_ARBEID',
 }];
 
 const arbeidsgiverOpplysningerPerId = {

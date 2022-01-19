@@ -5,6 +5,7 @@ import {
 import { BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import BesteberegningAP
   from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/KontrollerBesteberegningAP';
 import BesteMånederVisningPanel from './BesteManederVisningPanel';
@@ -15,7 +16,7 @@ import KontrollerBesteberegningPanelOld from './KontrollerBesteberegningPanelOld
 interface OwnProps {
   beregningsgrunnlag: Beregningsgrunnlag;
   arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId;
-  getKodeverkNavn: (kodeverk: string) => string;
+  getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType) => string;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
   behandling: Behandling;

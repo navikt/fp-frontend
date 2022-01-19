@@ -33,7 +33,7 @@ import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurd
 import {
   ArrowBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import overforingArsak from '@fpsak-frontend/kodeverk/src/overforingArsak';
@@ -84,7 +84,7 @@ const mapUtsettelseÅrsaker = (typer: KodeverkMedNavn[]): ReactElement[] => type
 
 const mapArbeidsforhold = (
   andeler: FaktaArbeidsforhold[],
-  getKodeverknavn: (kodeverk: string) => string,
+  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ReactElement[] => andeler.map((andel) => {
   const { arbeidType, arbeidsgiverReferanse } = andel;
@@ -93,13 +93,13 @@ const mapArbeidsforhold = (
 
   let periodeArbeidsforhold = '';
   if (arbeidType && arbeidType !== uttakArbeidType.ORDINÆRT_ARBEID) {
-    periodeArbeidsforhold = getKodeverknavn(arbeidType);
+    periodeArbeidsforhold = getKodeverknavn(arbeidType, KodeverkType.UTTAK_ARBEID_TYPE);
   } else {
     periodeArbeidsforhold = lagVisningsNavn(arbeidsgiverOpplysninger);
   }
 
   const identifikator = arbeidsgiverOpplysninger?.identifikator || '-';
-  const navn = arbeidsgiverOpplysninger?.navn || getKodeverknavn(arbeidType);
+  const navn = arbeidsgiverOpplysninger?.navn || getKodeverknavn(arbeidType, KodeverkType.UTTAK_ARBEID_TYPE);
   const fixedAktørId = arbeidsgiverOpplysninger?.referanse || '-';
   const virksomhet = !arbeidsgiverOpplysninger?.erPrivatPerson || '-';
 
@@ -143,7 +143,7 @@ type FormValues = {
 interface PureOwnProps {
   newPeriodeCallback: (values: FormValues) => void;
   uttakPeriodeVurderingTyper: KodeverkMedNavn[];
-  getKodeverknavn: (kodeverk: string) => string;
+  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
   personoversikt: Personoversikt;
   alleKodeverk: AlleKodeverk;
@@ -483,9 +483,9 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
     alleKodeverk,
   } = ownProps;
 
-  const periodeTyper = alleKodeverk[kodeverkTyper.UTTAK_PERIODE_TYPE] || null;
-  const utsettelseÅrsaker = alleKodeverk[kodeverkTyper.UTSETTELSE_AARSAK_TYPE];
-  const overføringÅrsaker = alleKodeverk[kodeverkTyper.OVERFOERING_AARSAK_TYPE];
+  const periodeTyper = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE] || null;
+  const utsettelseÅrsaker = alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE];
+  const overføringÅrsaker = alleKodeverk[KodeverkType.OVERFOERING_AARSAK_TYPE];
   const onSubmit = (values: FormValues) => newPeriodeCallback(
     transformValues(
       values,

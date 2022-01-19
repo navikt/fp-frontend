@@ -18,14 +18,8 @@ const periode = {
   openForm: false,
   tom: '2018-04-28',
   updated: false,
-  utsettelseÅrsak: {
-    kode: '-',
-    kodeverk: 'AARSAK_TYPE',
-  },
-  uttakPeriodeType: {
-    kode: 'FORELDREPENGER',
-    kodeverk: 'UTTAK_PERIODE_TYPE',
-  },
+  utsettelseÅrsak: '-',
+  uttakPeriodeType: 'FORELDREPENGER',
   isFromSøknad: true,
 };
 

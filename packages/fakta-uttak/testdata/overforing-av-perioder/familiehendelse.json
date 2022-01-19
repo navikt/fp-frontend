@@ -7,10 +7,7 @@
                 "fodselsdato": "2019-10-09"
             }
         ],
-        "soknadType": {
-            "kode": "ST-001",
-            "kodeverk": "SOKNAD_TYPE"
-        }
+        "soknadType": "ST-001"
     },
     "gjeldende": {
         "@type": "AvklartDataFodselDto",
@@ -20,10 +17,7 @@
                 "fodselsdato": "2019-10-09"
             }
         ],
-        "soknadType": {
-            "kode": "ST-001",
-            "kodeverk": "SOKNAD_TYPE"
-        }
+        "soknadType": "ST-001"
     },
     "register": {
         "@type": "AvklartDataFodselDto",
@@ -33,9 +27,6 @@
                 "fodselsdato": "2019-10-09"
             }
         ],
-        "soknadType": {
-            "kode": "ST-001",
-            "kodeverk": "SOKNAD_TYPE"
-        }
+        "soknadType": "ST-001"
     }
 }

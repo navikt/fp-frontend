@@ -20,14 +20,8 @@ describe('<FerieOgArbeidsPeriode>', () => {
       id="2018-06-02|2018-06-25"
       fraDato="2018-06-02"
       tilDato="2018-06-25"
-      uttakPeriodeType={{
-        kode: '',
-        kodeverk: '',
-      }}
-      originalResultat={{
-        kode: '',
-        kodeverk: '',
-      }}
+      uttakPeriodeType=""
+      originalResultat=""
       updated
       bekreftet
       readOnly={false}

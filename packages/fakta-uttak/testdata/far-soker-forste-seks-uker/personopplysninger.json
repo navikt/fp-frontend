@@ -2,18 +2,9 @@
     "bruker": {
         "fnr": "22118916038",
         "aktoerId": "9922118916038",
-        "diskresjonskode": {
-            "kode": "UDEF",
-            "kodeverk": "DISKRESJONSKODE"
-        },
-        "kjønn": {
-            "kode": "M",
-            "kodeverk": "BRUKER_KJOENN"
-        },
-        "sivilstand": {
-            "kode": "UGIF",
-            "kodeverk": "SIVILSTAND_TYPE"
-        },
+        "diskresjonskode": "UDEF",
+        "kjønn": "M",
+        "sivilstand": "UGIF",
         "navn": "Pitbull Pål",
         "fødselsdato": "1969-12-04",
         "adresser": []
@@ -21,26 +12,14 @@
     "annenPart": {
         "fnr": "07087028040",
         "aktoerId": "9907087028040",
-        "diskresjonskode": {
-            "kode": "UDEF",
-            "kodeverk": "DISKRESJONSKODE"
-        },
-        "kjønn": {
-            "kode": "K",
-            "kodeverk": "BRUKER_KJOENN"
-        },
-        "sivilstand": {
-            "kode": "GIFT",
-            "kodeverk": "SIVILSTAND_TYPE"
-        },
+        "diskresjonskode": "UDEF",
+        "kjønn": "K",
+        "sivilstand": "GIFT",
         "navn": "Tiur Turid",
         "fødselsdato": "1969-12-04",
         "adresser": [
             {
-                "adresseType": {
-                    "kode": "BOSTEDSADRESSE",
-                    "kodeverk": "ADRESSE_TYPE"
-                },
+                "adresseType": "BOSTEDSADRESSE",
                 "adresselinje1": "Fjordlandet 10 B",
                 "postNummer": "2500",
                 "poststed": "Tynset",
@@ -52,26 +31,14 @@
         {
             "fnr": "29071798672",
             "aktoerId": "9929071798672",
-            "diskresjonskode": {
-                "kode": "UDEF",
-                "kodeverk": "DISKRESJONSKODE"
-            },
-            "kjønn": {
-                "kode": "K",
-                "kodeverk": "BRUKER_KJOENN"
-            },
-            "sivilstand": {
-                "kode": "UGIF",
-                "kodeverk": "SIVILSTAND_TYPE"
-            },
+            "diskresjonskode": "UDEF",
+            "kjønn": "K",
+            "sivilstand": "UGIF",
             "navn": "Duck Dole",
             "fødselsdato": "2019-10-09",
             "adresser": [
                 {
-                    "adresseType": {
-                        "kode": "UKJENT_ADRESSE",
-                        "kodeverk": "ADRESSE_TYPE"
-                    }
+                    "adresseType": "UKJENT_ADRESSE"
                 }
             ]
         }

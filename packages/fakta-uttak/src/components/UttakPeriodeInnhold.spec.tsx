@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { FamilieHendelseSamling, Kodeverk } from '@fpsak-frontend/types';
+import { FamilieHendelseSamling } from '@fpsak-frontend/types';
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import { UttakPeriodeInnhold } from './UttakPeriodeInnhold';
@@ -19,7 +19,6 @@ const periode = {
 };
 
 describe('<UttakPeriodeInnhold>', () => {
-  const utsettelseArsak = {};
   const fieldId = '';
   const id = '';
   const updatePeriode = sinon.spy();
@@ -28,8 +27,8 @@ describe('<UttakPeriodeInnhold>', () => {
   it('skal vise UttakPeriodeInnhold', () => {
     const wrapper = shallow(<UttakPeriodeInnhold
       fieldId={fieldId}
-      utsettelseArsak={utsettelseArsak as Kodeverk}
-      overforingArsak={{} as Kodeverk}
+      utsettelseArsak=""
+      overforingArsak=""
       updatePeriode={updatePeriode}
       id={id}
       cancelEditPeriode={cancelEditPeriode}
@@ -38,7 +37,7 @@ describe('<UttakPeriodeInnhold>', () => {
       tilDato={periode.tom}
       bekreftet
       openForm
-      uttakPeriodeType={{} as Kodeverk}
+      uttakPeriodeType=""
       behandlingStatusKode={behandlingStatusKode}
       farSøkerFør6Uker={false}
       familiehendelse={{} as FamilieHendelseSamling}

@@ -31,9 +31,7 @@ const perioder = [{
   bekreftet: true,
   utsettelseÅrsak: {},
   overføringÅrsak: {},
-  oppholdÅrsak: {
-    kode: '-',
-  },
+  oppholdÅrsak: '-',
   openForm: false,
   isFromSøknad: true,
   erArbeidstaker: false,
@@ -48,9 +46,7 @@ const perioder = [{
   bekreftet: false,
   utsettelseÅrsak: {},
   overføringÅrsak: {},
-  oppholdÅrsak: {
-    kode: '-',
-  },
+  oppholdÅrsak: '-',
   openForm: true,
   isFromSøknad: true,
   erArbeidstaker: true,
@@ -86,10 +82,7 @@ describe('<UttakPeriode>', () => {
       vilkarForSykdomExists={false}
       endringsdato={endringsdato}
       getKodeverknavn={sinon.spy()}
-      behandlingStatus={{
-        kode: '1',
-        kodeverk: '1',
-      }}
+      behandlingStatus="1"
       familiehendelse={{} as FamilieHendelseSamling}
       sisteUttakdatoFørsteSeksUker={{} as moment.Moment}
       arbeidsgiverOpplysningerPerId={{}}
@@ -116,10 +109,7 @@ describe('<UttakPeriode>', () => {
       vilkarForSykdomExists={false}
       endringsdato={endringsdato}
       getKodeverknavn={sinon.spy()}
-      behandlingStatus={{
-        kode: '1',
-        kodeverk: '1',
-      }}
+      behandlingStatus="1"
       familiehendelse={{} as FamilieHendelseSamling}
       sisteUttakdatoFørsteSeksUker={{} as moment.Moment}
       arbeidsgiverOpplysningerPerId={{}}
@@ -145,10 +135,7 @@ describe('<UttakPeriode>', () => {
       vilkarForSykdomExists={false}
       endringsdato={endringsdato}
       getKodeverknavn={sinon.spy()}
-      behandlingStatus={{
-        kode: '1',
-        kodeverk: '1',
-      }}
+      behandlingStatus="1"
       familiehendelse={{} as FamilieHendelseSamling}
       sisteUttakdatoFørsteSeksUker={{} as moment.Moment}
       arbeidsgiverOpplysningerPerId={{}}
@@ -178,10 +165,7 @@ describe('<UttakPeriode>', () => {
       vilkarForSykdomExists={false}
       endringsdato={endringsdato}
       getKodeverknavn={sinon.spy()}
-      behandlingStatus={{
-        kode: '1',
-        kodeverk: '1',
-      }}
+      behandlingStatus="1"
       familiehendelse={{} as FamilieHendelseSamling}
       sisteUttakdatoFørsteSeksUker={{} as moment.Moment}
       arbeidsgiverOpplysningerPerId={{}}

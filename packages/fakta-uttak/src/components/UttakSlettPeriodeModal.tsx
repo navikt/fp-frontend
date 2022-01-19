@@ -8,6 +8,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
 
 import { TextAreaField } from '@fpsak-frontend/form';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   DDMMYYYY_DATE_FORMAT, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
@@ -15,7 +16,6 @@ import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg
 import {
   FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
-import { Kodeverk } from '@fpsak-frontend/types';
 
 import styles from './uttakSlettPeriodeModal.less';
 import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPerioderTsType';
@@ -28,7 +28,7 @@ interface PureOwnProps {
   closeEvent: (...args: any[]) => any;
   cancelEvent: (...args: any[]) => any;
   periode: CustomUttakKontrollerFaktaPerioder;
-  getKodeverknavn: (kodeverk: Kodeverk) => string;
+  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string;
 }
 
 interface MappedOwnProps {
@@ -47,7 +47,7 @@ export const UttakSlettPeriodeModalImpl: FunctionComponent<PureOwnProps & Wrappe
 }) => {
   const fom = moment(periode.fom).format(DDMMYYYY_DATE_FORMAT);
   const tom = moment(periode.tom).format(DDMMYYYY_DATE_FORMAT);
-  const uttakPeriodeType = periode.uttakPeriodeType !== undefined ? getKodeverknavn(periode.uttakPeriodeType) : null;
+  const uttakPeriodeType = periode.uttakPeriodeType !== undefined ? getKodeverknavn(periode.uttakPeriodeType, KodeverkType.UTTAK_PERIODE_TYPE) : null;
   return (
     <Modal
       className={styles.modal}
