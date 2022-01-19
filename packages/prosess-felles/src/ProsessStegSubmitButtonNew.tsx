@@ -13,7 +13,7 @@ const isDisabled = (
   isSubmittable: boolean,
   hasEmptyRequiredFields: boolean,
 ): boolean => {
-  if (!isSubmittable || isSubmitting) {
+  if ((!isDirty && !isSubmittable) || isSubmitting) {
     return true;
   }
   if (hasEmptyRequiredFields === undefined) {
