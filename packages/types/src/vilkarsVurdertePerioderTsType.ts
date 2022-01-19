@@ -1,7 +1,5 @@
-import { Kodeverk } from '@fpsak-frontend/types';
-
 export type AktsomhetInfo = {
-  sarligGrunner: Kodeverk[];
+  sarligGrunner: string[];
   harGrunnerTilReduksjon: boolean;
   andelTilbakekreves: number;
   ileggRenter: boolean;
@@ -13,7 +11,7 @@ export type AktsomhetInfo = {
 
 export type VilkarResultatInfo = {
   begrunnelse: string;
-  aktsomhet?: Kodeverk;
+  aktsomhet?: string;
   aktsomhetInfo?: AktsomhetInfo;
   erBelopetIBehold?: boolean;
   tilbakekrevesBelop?: number;
@@ -22,7 +20,7 @@ export type VilkarResultatInfo = {
 export type VilkarsVurdertPeriode = {
   fom: string;
   tom: string;
-  vilkarResultat: Kodeverk;
+  vilkarResultat: string;
   begrunnelse: string;
   vilkarResultatInfo: VilkarResultatInfo;
   feilutbetalingBelop?: number;

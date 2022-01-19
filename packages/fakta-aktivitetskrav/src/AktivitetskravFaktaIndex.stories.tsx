@@ -77,7 +77,7 @@ const Template: Story<{
     aksjonspunkter={aksjonspunkter}
     submitCallback={submitCallback}
     readOnly={readOnly}
-    harApneAksjonspunkter={aksjonspunkter.some((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET)}
+    harApneAksjonspunkter={aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET)}
     submittable={submittable}
     alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
     setFormData={() => undefined}

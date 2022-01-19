@@ -6,7 +6,6 @@ import {
   BehandlingContainer, StandardBehandlingProps, StandardPropsProvider, BehandlingPaVent,
   useInitRequestApi, useLagreAksjonspunkt, useBehandling, useInitBehandlingHandlinger,
 } from '@fpsak-frontend/behandling-felles';
-import { Kodeverk } from '@fpsak-frontend/types';
 
 import { requestKlageApi, KlageBehandlingApiKeys } from './data/klageBehandlingApi';
 import FormKravFamOgPensjonProsessStegInitPanel from './prosessPaneler/FormKravFamOgPensjonProsessStegInitPanel';
@@ -18,8 +17,8 @@ import KlageresultatProsessStegInitPanel from './prosessPaneler/KlageresultatPro
 interface OwnProps {
   alleBehandlinger: {
     uuid: string;
-    type: Kodeverk;
-    status: Kodeverk;
+    type: string;
+    status: string;
     opprettet: string;
     avsluttet?: string;
   }[];

@@ -1,5 +1,4 @@
 import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
@@ -8,11 +7,11 @@ type BekreftetSvpArbeidsforhold = {
   tilretteleggingBehovFom: string;
   tilretteleggingDatoer: {
     fom: string;
-    type: Kodeverk;
+    type: string;
     stillingsprosent: number;
     overstyrtUtbetalingsgrad: number;
   }[];
-  uttakArbeidType: Kodeverk;
+  uttakArbeidType: string;
   arbeidsgiverReferanse: string;
   opplysningerOmRisiko: string;
   opplysningerOmTilrettelegging: string;
@@ -25,7 +24,7 @@ type BekreftetSvpArbeidsforhold = {
     permisjonFom: string;
     permisjonTom: string;
     permisjonsprosent: number;
-    type: Kodeverk;
+    type: string;
     erGyldig: boolean;
   }[];
 }

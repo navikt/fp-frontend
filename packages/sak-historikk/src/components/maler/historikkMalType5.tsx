@@ -4,7 +4,7 @@ import {
 } from 'react-intl';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
-import { HistorikkinnslagDel, HistorikkinnslagEndretFelt, Kodeverk } from '@fpsak-frontend/types';
+import { HistorikkinnslagDel, HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
 import historikkEndretFeltTypeCodes from '../../kodeverk/historikkEndretFeltTypeCodes';
@@ -69,7 +69,7 @@ const lagGjeldendeFraInnslag = (historikkinnslagDel: HistorikkinnslagDel): React
   return undefined;
 };
 
-const lageElementInnhold = (historikkDel: HistorikkinnslagDel, intl: IntlShape, getKodeverknavn: (kodeverk: Kodeverk) => string): string[] => {
+const lageElementInnhold = (historikkDel: HistorikkinnslagDel, intl: IntlShape, getKodeverknavn: (kodeverk: string) => string): string[] => {
   const list = [] as string[];
   if (historikkDel.hendelse) {
     const tekst = findHendelseText(historikkDel.hendelse, getKodeverknavn);
@@ -91,7 +91,7 @@ const formatChangedField = (endretFelt: HistorikkinnslagEndretFelt, intl: IntlSh
   const fromValue = findEndretFeltVerdi(endretFelt, endretFelt.fraVerdi, intl);
   const toValue = findEndretFeltVerdi(endretFelt, endretFelt.tilVerdi, intl);
 
-  if (endretFelt.fraVerdi !== null && endretFelt.endretFeltNavn.kode !== historikkEndretFeltTypeCodes.FORDELING_FOR_NY_ANDEL.kode) {
+  if (endretFelt.fraVerdi !== null && endretFelt.endretFeltNavn !== historikkEndretFeltTypeCodes.FORDELING_FOR_NY_ANDEL.kode) {
     return (
       <FormattedMessage
         id="Historikk.Template.5.ChangedFromTo"
@@ -119,7 +119,7 @@ const formatChangedField = (endretFelt: HistorikkinnslagEndretFelt, intl: IntlSh
 const lagTemaHeadingId = (historikkinnslagDel: HistorikkinnslagDel): ReactNode => {
   const { tema } = historikkinnslagDel;
   if (tema) {
-    const heading = historikkEndretFeltTypeHeadingCodes[tema.endretFeltNavn.kode];
+    const heading = historikkEndretFeltTypeHeadingCodes[tema.endretFeltNavn];
     if (heading && tema.navnVerdi) {
       return <FormattedMessage id={heading.feltId} values={{ value: tema.navnVerdi, b: (chunks: any) => <b>{chunks}</b>, br: <br /> }} />;
     }

@@ -4,7 +4,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
-import { HistorikkInnslagOpplysning, Kodeverk, HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
+import { HistorikkInnslagOpplysning, HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
 
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
 import historikkEndretFeltTypeCodes from '../../kodeverk/historikkEndretFeltTypeCodes';
@@ -13,18 +13,18 @@ import Skjermlenke from './felles/Skjermlenke';
 import HistorikkMal from '../HistorikkMalTsType';
 
 const finnFomOpplysning = (opplysninger: HistorikkInnslagOpplysning[]): string => {
-  const found = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.PERIODE_FOM.kode);
+  const found = opplysninger.find((o) => o.opplysningType === historikkOpplysningTypeCodes.PERIODE_FOM.kode);
   return found?.tilVerdi ? found.tilVerdi : '';
 };
 
 const finnTomOpplysning = (opplysninger: HistorikkInnslagOpplysning[]): string => {
-  const found = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.PERIODE_TOM.kode);
+  const found = opplysninger.find((o) => o.opplysningType === historikkOpplysningTypeCodes.PERIODE_TOM.kode);
   return found?.tilVerdi ? found.tilVerdi : '';
 };
 
-const buildEndretFeltText = (endredeFelter: HistorikkinnslagEndretFelt[], getKodeverknavn: (kodeverk: Kodeverk) => string): ReactNode => {
-  const årsakFelt = endredeFelter.filter((felt) => felt.endretFeltNavn.kode === historikkEndretFeltTypeCodes.FAKTA_OM_FEILUTBETALING_AARSAK.kode)[0];
-  const underÅrsakFelt = endredeFelter.filter((felt) => felt.endretFeltNavn.kode === historikkEndretFeltTypeCodes.FAKTA_OM_FEILUTBETALING_UNDERAARSAK.kode)[0];
+const buildEndretFeltText = (endredeFelter: HistorikkinnslagEndretFelt[], getKodeverknavn: (kodeverk: string) => string): ReactNode => {
+  const årsakFelt = endredeFelter.filter((felt) => felt.endretFeltNavn === historikkEndretFeltTypeCodes.FAKTA_OM_FEILUTBETALING_AARSAK.kode)[0];
+  const underÅrsakFelt = endredeFelter.filter((felt) => felt.endretFeltNavn === historikkEndretFeltTypeCodes.FAKTA_OM_FEILUTBETALING_UNDERAARSAK.kode)[0];
   const underÅrsakFraVerdi = underÅrsakFelt?.klFraVerdi
     ? getKodeverknavn({ kode: underÅrsakFelt.fraVerdi as string, kodeverk: underÅrsakFelt.klFraVerdi }) : null;
   const underÅrsakTilVerdi = underÅrsakFelt?.klTilVerdi

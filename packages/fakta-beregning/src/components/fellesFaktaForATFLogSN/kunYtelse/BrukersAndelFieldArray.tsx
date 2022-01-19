@@ -16,7 +16,6 @@ import { createSelector } from 'reselect';
 import {
   Image, Table, TableColumn, TableRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
-import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 import styles from './brukersAndelFieldArray.less';
@@ -126,8 +125,8 @@ type OwnProps = {
     readOnly: boolean;
     fields: FieldArrayFieldsProps<any>;
     meta?: FieldArrayMetaProps;
-    inntektskategoriKoder: Kodeverk[]
-    aktivitetStatuser: Kodeverk[]
+    inntektskategoriKoder: string[]
+    aktivitetStatuser: string[]
     isAksjonspunktClosed: boolean;
     isBeregningFormDirty: boolean;
     alleKodeverk: AlleKodeverk;

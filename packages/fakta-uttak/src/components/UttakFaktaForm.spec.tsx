@@ -4,33 +4,24 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  AlleKodeverk,
-  FamilieHendelseSamling, Kodeverk, Personoversikt, UttakKontrollerFaktaPerioder, Ytelsefordeling,
+  AlleKodeverk, FamilieHendelseSamling, Personoversikt, UttakKontrollerFaktaPerioder, Ytelsefordeling,
 } from '@fpsak-frontend/types';
+import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 
 import { transformValues, UttakFaktaForm } from './UttakFaktaForm';
 import messages from '../../i18n/nb_NO.json';
 
 const ap5070 = {
-  aksjonspunktType: {
-    kode: 'MANU',
-    kodeverk: 'AKSJONSPUNKT_TYPE',
-  },
+  aksjonspunktType: 'MANU',
   kode: 'MANU',
   kodeverk: 'AKSJONSPUNKT_TYPE',
   navn: 'Manuell',
   begrunnelse: 'test2',
   besluttersBegrunnelse: null,
-  definisjon: {
-    kode: '5070',
-    kodeverk: '',
-  },
+  definisjon: '5070',
   erAktivt: true,
   kanLoses: true,
-  status: {
-    kode: 'UTFO',
-    kodeverk: 'AKSJONSPUNKT_STATUS',
-  },
+  status: 'UTFO',
   toTrinnsBehandling: true,
   toTrinnsBehandlingGodkjent: null,
   vilkarType: null,
@@ -38,25 +29,16 @@ const ap5070 = {
 };
 
 const ap6070 = {
-  aksjonspunktType: {
-    kode: 'MANU',
-    kodeverk: 'AKSJONSPUNKT_TYPE',
-  },
+  aksjonspunktType: 'MANU',
   kode: 'MANU',
   kodeverk: 'AKSJONSPUNKT_TYPE',
   navn: 'Manuell',
   begrunnelse: 'test2',
   besluttersBegrunnelse: null,
-  definisjon: {
-    kode: '6070',
-    kodeverk: '',
-  },
+  definisjon: '6070',
   erAktivt: true,
   kanLoses: true,
-  status: {
-    kode: 'UTFO',
-    kodeverk: 'AKSJONSPUNKT_STATUS',
-  },
+  status: 'UTFO',
   toTrinnsBehandling: true,
   toTrinnsBehandlingGodkjent: null,
   vilkarType: null,
@@ -64,25 +46,16 @@ const ap6070 = {
 };
 
 const ap6013 = {
-  aksjonspunktType: {
-    kode: 'MANU',
-    kodeverk: 'AKSJONSPUNKT_TYPE',
-  },
+  aksjonspunktType: 'MANU',
   kode: 'MANU',
   kodeverk: 'AKSJONSPUNKT_TYPE',
   navn: 'Manuell',
   begrunnelse: 'test2',
   besluttersBegrunnelse: null,
-  definisjon: {
-    kode: '6013',
-    kodeverk: '',
-  },
+  definisjon: '6013',
   erAktivt: true,
   kanLoses: true,
-  status: {
-    kode: 'OPPR',
-    kodeverk: 'AKSJONSPUNKT_STATUS',
-  },
+  status: 'OPPR',
   toTrinnsBehandling: true,
   toTrinnsBehandlingGodkjent: null,
   vilkarType: null,
@@ -107,7 +80,7 @@ describe('<UttakFaktaForm>', () => {
         kanOverstyre={false}
         faktaArbeidsforhold={[]}
         personoversikt={{} as Personoversikt}
-        behandlingStatus={{} as Kodeverk}
+        behandlingStatus={behandlingStatus.OPPRETTET}
         familiehendelse={{} as FamilieHendelseSamling}
         vilkarForSykdomExists
         uttakPerioder={{} as UttakKontrollerFaktaPerioder[]}
@@ -133,7 +106,7 @@ describe('<UttakFaktaForm>', () => {
     };
 
     const transformedValues = transformValues(values, {}, [ap6070, ap5070]);
-    expect(transformedValues.filter((ap: any) => ap.kode === aksjonspunktCodes.AVKLAR_UTTAK)).toHaveLength(1);
+    expect(transformedValues.filter((ap) => ap.kode === aksjonspunktCodes.AVKLAR_UTTAK)).toHaveLength(1);
   });
 
   it('skal sende 6013 hvis ingen andre aksjonspunkter og manuelloverstyrt', () => {
@@ -143,7 +116,7 @@ describe('<UttakFaktaForm>', () => {
     };
 
     const transformedValues = transformValues(values, {}, []);
-    expect(transformedValues.filter((ap: any) => ap.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK)).toHaveLength(1);
+    expect(transformedValues.filter((ap) => ap.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK)).toHaveLength(1);
   });
 
   it('skal sende 6013 hvis 6013 er OPPR og ikke 5070', () => {
@@ -153,6 +126,6 @@ describe('<UttakFaktaForm>', () => {
     };
 
     const transformedValues = transformValues(values, {}, [ap6013]);
-    expect(transformedValues.filter((ap: any) => ap.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK)).toHaveLength(1);
+    expect(transformedValues.filter((ap) => ap.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_FAKTA_UTTAK)).toHaveLength(1);
   });
 });

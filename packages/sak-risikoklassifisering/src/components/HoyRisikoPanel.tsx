@@ -31,7 +31,7 @@ const HoyRisikoPanel: FunctionComponent<OwnProps> = ({
   faresignalVurderinger,
 }) => (
   <Panel>
-    {aksjonspunkt && aksjonspunkt.status.kode === aksjonspunktStatus.OPPRETTET && (
+    {aksjonspunkt && aksjonspunkt.status === aksjonspunktStatus.OPPRETTET && (
       <>
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id="Risikopanel.Panel.Tittel" />

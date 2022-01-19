@@ -12,7 +12,7 @@ import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT, formatCurrencyNoKr } from '@fpsa
 import {
   BesteberegningInntekt,
   Månedsgrunnlag,
-  ArbeidsgiverOpplysningerPerId, Kodeverk,
+  ArbeidsgiverOpplysningerPerId,
 } from '@fpsak-frontend/types';
 
 const månedsnavn = {
@@ -41,7 +41,7 @@ const formatDate = (date: string): string => (date ? lagMånedVisning(moment(dat
 interface BesteMånederProps {
   besteMåneder: Månedsgrunnlag[];
   arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId;
-  getKodeverkNavn: (kodeverk: Kodeverk) => string;
+  getKodeverkNavn: (kodeverk: string) => string;
 }
 
 const headerColumnContent = [
@@ -60,7 +60,7 @@ const headerColumnContent = [
 interface InntekttabellProps {
     inntekter: BesteberegningInntekt[];
     arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId;
-    getKodeverkNavn: (kodeverk: Kodeverk) => string;
+    getKodeverkNavn: (kodeverk: string) => string;
 }
 
 const createKey = (inntekt: BesteberegningInntekt): string => {
@@ -68,11 +68,11 @@ const createKey = (inntekt: BesteberegningInntekt): string => {
   if (arbeidsgiverId != null) {
     return `${arbeidsgiverId} ${arbeidsforholdId}`;
   }
-  return opptjeningAktivitetType.kode;
+  return opptjeningAktivitetType;
 };
 
 const lagVisningsNavn = (inntekt: BesteberegningInntekt, arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId,
-  getKodeverkNavn: (kodeverk: Kodeverk) => string): string => {
+  getKodeverkNavn: (kodeverk: string) => string): string => {
   const agOpplysning = arbeidsgiverOpplysninger[inntekt.arbeidsgiverId];
   if (!agOpplysning) {
     return getKodeverkNavn(inntekt.opptjeningAktivitetType);
@@ -86,7 +86,7 @@ const lagVisningsNavn = (inntekt: BesteberegningInntekt, arbeidsgiverOpplysninge
 };
 
 const lagInntektRader = (inntekter: BesteberegningInntekt[], arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId,
-  getKodeverkNavn: (kodeverk: Kodeverk) => string): ReactElement[] => (
+  getKodeverkNavn: (kodeverk: string) => string): ReactElement[] => (
   inntekter.map((inntekt: BesteberegningInntekt) => (
     <TableRow key={createKey(inntekt)}>
       <TableColumn>
@@ -137,7 +137,7 @@ const Inntekttabell: FunctionComponent<InntekttabellProps> = ({
 
 const lagRadMedMåneder = (måneder: Månedsgrunnlag[],
   arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId,
-  getKodeverkNavn: (kodeverk: Kodeverk) => string): ReactElement => (
+  getKodeverkNavn: (kodeverk: string) => string): ReactElement => (
     <Row>
       {måneder.map((månedsgrunnlag: Månedsgrunnlag) => {
         const key = månedsgrunnlag.fom;

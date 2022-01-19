@@ -99,8 +99,8 @@ const AnkeResultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
             visModal={visModalAnkeBehandling}
             lukkModal={() => { toggleAnkeModal(false); opneSokeside(); }}
             erFerdigbehandlet={!!data?.aksjonspunkter && data.aksjonspunkter
-              .some((ap) => ap.definisjon.kode === aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL
-                && ap.status.kode === aksjonspunktStatus.UTFORT)}
+              .some((ap) => ap.definisjon === aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL
+                && ap.status === aksjonspunktStatus.UTFORT)}
             venterTrygderett={false}
           />
           <AnkeResultatProsessIndex

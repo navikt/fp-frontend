@@ -24,15 +24,15 @@ import { restApiSvpHooks, requestSvpApi, SvpBehandlingApiKeys } from '../data/sv
 const intl = createIntl(messages);
 
 const hasOnlyClosedAps = (aksjonspunkter: Aksjonspunkt[], vedtakAksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
-  .filter((ap) => !vedtakAksjonspunkter.some((vap) => vap.definisjon.kode === ap.definisjon.kode))
-  .every((ap) => !isAksjonspunktOpen(ap.status.kode));
+  .filter((ap) => !vedtakAksjonspunkter.some((vap) => vap.definisjon === ap.definisjon))
+  .every((ap) => !isAksjonspunktOpen(ap.status));
 
-const hasAksjonspunkt = (ap: Aksjonspunkt): boolean => (ap.definisjon.kode === aksjonspunktCodes.OVERSTYR_BEREGNING
-  || ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG
-  || ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG
-  || ap.definisjon.kode === aksjonspunktCodes.VURDER_SOKNADSFRIST_FORELDREPENGER);
+const hasAksjonspunkt = (ap: Aksjonspunkt): boolean => (ap.definisjon === aksjonspunktCodes.OVERSTYR_BEREGNING
+  || ap.definisjon === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG
+  || ap.definisjon === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG
+  || ap.definisjon === aksjonspunktCodes.VURDER_SOKNADSFRIST_FORELDREPENGER);
 
-const isAksjonspunktOpenAndOfType = (ap: Aksjonspunkt): boolean => hasAksjonspunkt(ap) && isAksjonspunktOpen(ap.status.kode);
+const isAksjonspunktOpenAndOfType = (ap: Aksjonspunkt): boolean => hasAksjonspunkt(ap) && isAksjonspunktOpen(ap.status);
 
 const findStatusForVedtak = (
   vilkar: Vilkar[],
@@ -44,11 +44,11 @@ const findStatusForVedtak = (
     return vilkarUtfallType.IKKE_VURDERT;
   }
 
-  if (hasOnlyClosedAps(aksjonspunkter, vedtakAksjonspunkter) && vilkar.some((v) => v.vilkarStatus.kode === vilkarUtfallType.IKKE_OPPFYLT)) {
+  if (hasOnlyClosedAps(aksjonspunkter, vedtakAksjonspunkter) && vilkar.some((v) => v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT)) {
     return vilkarUtfallType.IKKE_OPPFYLT;
   }
 
-  if (vilkar.some((v) => v.vilkarStatus.kode === vilkarUtfallType.IKKE_VURDERT) || aksjonspunkter.some(isAksjonspunktOpenAndOfType)) {
+  if (vilkar.some((v) => v.vilkarStatus === vilkarUtfallType.IKKE_VURDERT) || aksjonspunkter.some(isAksjonspunktOpenAndOfType)) {
     return vilkarUtfallType.IKKE_VURDERT;
   }
 
@@ -56,7 +56,7 @@ const findStatusForVedtak = (
     return vilkarUtfallType.IKKE_VURDERT;
   }
 
-  if (behandlingsresultat && isAvslag(behandlingsresultat.type.kode)) {
+  if (behandlingsresultat && isAvslag(behandlingsresultat.type)) {
     return vilkarUtfallType.IKKE_OPPFYLT;
   }
   return vilkarUtfallType.OPPFYLT;

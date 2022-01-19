@@ -7,9 +7,7 @@ import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import MeldingerSakIndex, { MessagesModalSakIndex, FormValues } from '@fpsak-frontend/sak-meldinger';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import {
-  BehandlingAppKontekst, Fagsak, Kodeverk, KodeverkMedNavn,
-} from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, Fagsak, KodeverkMedNavn } from '@fpsak-frontend/types';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 
 import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
@@ -63,7 +61,7 @@ const getSubmitCallback = (
 const getPreviewCallback = (
   behandlingTypeKode: string,
   behandlingUuid: string,
-  fagsakYtelseType: Kodeverk,
+  fagsakYtelseType: string,
   fetchPreview: ForhandsvisFunksjon,
 ) => (
   mottaker?: string,
@@ -128,7 +126,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
     window.location.reload();
   };
 
-  const submitCallback = useCallback(getSubmitCallback(setShowMessageModal, type.kode, valgtBehandling.uuid, submitMessage,
+  const submitCallback = useCallback(getSubmitCallback(setShowMessageModal, type, valgtBehandling.uuid, submitMessage,
     resetMessage, setShowSettPaVentModal, setSubmitCounter, setMeldingForData),
   [uuid, versjon]);
 
@@ -148,7 +146,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
 
   const fetchPreview = useVisForhandsvisningAvMelding(type);
 
-  const previewCallback = useCallback(getPreviewCallback(type.kode, valgtBehandling.uuid, fagsak.fagsakYtelseType, fetchPreview),
+  const previewCallback = useCallback(getPreviewCallback(type, valgtBehandling.uuid, fagsak.fagsakYtelseType, fetchPreview),
     [uuid, versjon]);
 
   const afterSubmit = useCallback(() => {
@@ -197,7 +195,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
           ventearsak={venteArsakType.AVV_DOK}
           ventearsaker={ventearsaker}
           hasManualPaVent={false}
-          erTilbakekreving={type.kode === BehandlingType.TILBAKEKREVING || type.kode === BehandlingType.TILBAKEKREVING_REVURDERING}
+          erTilbakekreving={type === BehandlingType.TILBAKEKREVING || type === BehandlingType.TILBAKEKREVING_REVURDERING}
         />
       )}
     </>

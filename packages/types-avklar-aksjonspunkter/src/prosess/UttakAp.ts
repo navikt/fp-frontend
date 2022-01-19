@@ -1,5 +1,4 @@
 import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Kodeverk } from '@fpsak-frontend/types';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
@@ -8,7 +7,7 @@ type UttakAp = {
     fom: string;
     tom: string;
     aktiviteter: {
-      stønadskontoType?: Kodeverk | string;
+      stønadskontoType?: string;
       trekkdagerDesimaler?: number;
       arbeidsgiver?: {
         identifikator?: string;
@@ -17,18 +16,17 @@ type UttakAp = {
       arbeidsgiverReferanse?: string;
       arbeidsforholdId?: string;
       utbetalingsgrad?: string | number;
-      uttakArbeidType?: Kodeverk | string;
+      uttakArbeidType?: string;
     }[];
     begrunnelse?: string;
-    periodeResultatType: Kodeverk | string;
-    periodeResultatÅrsak: Kodeverk | string;
-    oppholdÅrsak: Kodeverk | string;
+    periodeResultatType: string;
+    periodeResultatÅrsak: string;
+    oppholdÅrsak: string;
     flerbarnsdager?: boolean;
     samtidigUttak?: boolean;
     samtidigUttaksprosent?: number;
     graderingInnvilget?: boolean;
-    graderingAvslagÅrsak: Kodeverk | string;
-
+    graderingAvslagÅrsak: string;
   }[];
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.FASTSETT_UTTAKPERIODER
  | AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER

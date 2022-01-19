@@ -34,7 +34,7 @@ const IverksetterVedtakStatusModal: FunctionComponent<OwnProps> = ({
   visModal,
   behandlingsresultat,
 }) => {
-  const erVedtakAvslatt = behandlingsresultat && behandlingsresultat.type.kode === behandlingResultatType.AVSLATT;
+  const erVedtakAvslatt = behandlingsresultat && behandlingsresultat.type === behandlingResultatType.AVSLATT;
   const imageAltText = intl.formatMessage({ id: erVedtakAvslatt ? 'IverksetterVedtakStatusModal.Avslatt' : 'IverksetterVedtakStatusModal.Innvilget' });
 
   return (

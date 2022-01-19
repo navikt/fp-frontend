@@ -54,8 +54,8 @@ const OpptjeningsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanel
     faktaPanelKode={FaktaPanelCode.OPPTJENINGSVILKARET}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'OpptjeningInfoPanel.KontrollerFaktaForOpptjening' })}
     skalPanelVisesIMeny={(initData) => !!initData.vilkar
-      && initData.vilkar.some((v) => v.vilkarType.kode === vilkarType.OPPTJENINGSVILKARET)
-      && initData.vilkar.some((v) => v.vilkarType.kode === vilkarType.MEDLEMSKAPSVILKARET && v.vilkarStatus.kode === vilkarUtfallType.OPPFYLT)}
+      && initData.vilkar.some((v) => v.vilkarType === vilkarType.OPPTJENINGSVILKARET)
+      && initData.vilkar.some((v) => v.vilkarType === vilkarType.MEDLEMSKAPSVILKARET && v.vilkarstatus === vilkarUtfallType.OPPFYLT)}
     renderPanel={(data) => <OpptjeningFaktaIndex arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} {...data} />}
   />
 );

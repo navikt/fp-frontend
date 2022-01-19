@@ -16,7 +16,7 @@ import { required } from '@fpsak-frontend/utils';
 import ankeOmgjorArsak from '@fpsak-frontend/kodeverk/src/ankeOmgjorArsak';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 import {
-  Aksjonspunkt, AnkeVurdering, Kodeverk, KodeverkMedNavn,
+  Aksjonspunkt, AnkeVurdering, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import CheckboxField from '@fpsak-frontend/form/src/CheckboxField';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -37,9 +37,9 @@ type FormValues = {
   erMerknaderMottatt?: boolean;
   merknadKommentar?: string;
   avsluttBehandling?: boolean;
-  trygderettVurdering?: Kodeverk;
-  trygderettOmgjoerArsak?: Kodeverk;
-  trygderettVurderingOmgjoer?: Kodeverk;
+  trygderettVurdering?: string;
+  trygderettOmgjoerArsak?: string;
+  trygderettVurderingOmgjoer?: string;
 }
 
 interface PureOwnProps {
@@ -48,13 +48,13 @@ interface PureOwnProps {
   submitCallback: (data: AnkeMerknaderResultatAp) => Promise<void>;
   readOnly?: boolean;
   readOnlySubmitButton?: boolean;
-  sprakkode: Kodeverk;
+  sprakkode: string;
   ankeOmgorArsaker: KodeverkMedNavn[];
 }
 
 interface MappedOwnProps {
   aksjonspunktCode: string;
-  valgtTrygderettVurdering?: Kodeverk;
+  valgtTrygderettVurdering?: string;
   initialValues: FormValues;
   onSubmit: (formValues: FormValues) => any;
 }
@@ -101,7 +101,7 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
     <Normaltekst><FormattedMessage id="Ankebehandling.Resultat" /></Normaltekst>
     <VerticalSpacer fourPx />
     <RadioGroupField
-      name="trygderettVurdering.kode"
+      name="trygderettVurdering"
       validate={[required]}
       direction="horizontal"
       readOnly={readOnly}
@@ -112,13 +112,13 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
       <RadioOption value={ankeVurderingType.ANKE_AVVIS} label={{ id: 'Ankebehandling.Resultat.Avvis' }} />
       <RadioOption value={ankeVurderingType.ANKE_STADFESTE_YTELSESVEDTAK} label={{ id: 'Ankebehandling.Resultat.Stadfest' }} />
     </RadioGroupField>
-    {ankeVurderingType.ANKE_OMGJOER === valgtTrygderettVurdering?.kode && (
+    {ankeVurderingType.ANKE_OMGJOER === valgtTrygderettVurdering && (
       <Row>
         <Column xs="7">
           <ArrowBox>
             <SelectField
               readOnly={readOnly}
-              name="trygderettOmgjoerArsak.kode"
+              name="trygderettOmgjoerArsak"
               selectValues={ankeOmgjorArsakRekkefolge
                 .map((arsak) => <option key={arsak} value={arsak}>{ankeOmgorArsaker.find((aoa) => aoa.kode === arsak)?.navn}</option>)}
               className={readOnly ? styles.selectReadOnly : null}
@@ -128,7 +128,7 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
             />
             <VerticalSpacer sixteenPx />
             <RadioGroupField
-              name="trygderettVurderingOmgjoer.kode"
+              name="trygderettVurderingOmgjoer"
               validate={[required]}
               readOnly={readOnly}
               className={readOnly ? styles.selectReadOnly : null}
@@ -142,14 +142,14 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
         </Column>
       </Row>
     )}
-    {(ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE === valgtTrygderettVurdering?.kode
-      || ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV === valgtTrygderettVurdering?.kode) && (
+    {(ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE === valgtTrygderettVurdering
+      || ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV === valgtTrygderettVurdering) && (
       <Row>
         <Column xs="7">
           <ArrowBox alignOffset={180}>
             <SelectField
               readOnly={readOnly}
-              name="trygderettOmgjoerArsak.kode"
+              name="trygderettOmgjoerArsak"
               selectValues={ankeOmgjorArsakRekkefolge
                 .map((arsak) => <option key={arsak} value={arsak}>{ankeOmgorArsaker.find((aoa) => aoa.kode === arsak)?.navn}</option>)}
               className={readOnly ? styles.selectReadOnly : null}
@@ -187,11 +187,11 @@ TrygderettsbehandlingForm.defaultProps = {
 
 const ankeMerknaderFormName = 'ankeMerknaderForm';
 
-const lagreOmgjoerAarsak = (values: FormValues): Kodeverk | string => (ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE === values.trygderettVurdering?.kode
-    || ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV === values.trygderettVurdering?.kode
-    || ankeVurderingType.ANKE_OMGJOER === values.trygderettVurdering?.kode ? values.trygderettOmgjoerArsak : '-');
+const lagreOmgjoerAarsak = (values: FormValues): string | string => (ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE === values.trygderettVurdering
+    || ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV === values.trygderettVurdering
+    || ankeVurderingType.ANKE_OMGJOER === values.trygderettVurdering ? values.trygderettOmgjoerArsak : '-');
 
-const lagreVurderingOmgjoer = (values: FormValues): Kodeverk | string => (ankeVurderingType.ANKE_OMGJOER === values.trygderettVurdering?.kode
+const lagreVurderingOmgjoer = (values: FormValues): string | string => (ankeVurderingType.ANKE_OMGJOER === values.trygderettVurdering
   ? values.trygderettVurderingOmgjoer : '-');
 
 const transformValues = (values: FormValues): AnkeMerknaderResultatAp => ({

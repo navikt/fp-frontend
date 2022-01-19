@@ -23,7 +23,7 @@ const {
 } = aksjonspunktCodes;
 
 const finnAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]) : Aksjonspunkt | undefined => (aksjonspunkter
-  ? aksjonspunkter.find((ap) => ap.definisjon.kode === VURDER_REFUSJON_BERGRUNN) : undefined);
+  ? aksjonspunkter.find((ap) => ap.definisjon === VURDER_REFUSJON_BERGRUNN) : undefined);
 
 const lagRadNøkkel = (andel: RefusjonTilVurderingAndel): string => {
   if (andel.arbeidsgiver.arbeidsgiverAktørId) {
@@ -58,7 +58,7 @@ export const VurderEndringRefusjonFormImpl: FunctionComponent<OwnProps & MappedO
 }) => {
   const { andeler } = beregningsgrunnlag.refusjonTilVurdering;
   const ap = finnAksjonspunkt(aksjonspunkter);
-  const erAksjonspunktÅpent = ap ? isAksjonspunktOpen(ap.status.kode) : false;
+  const erAksjonspunktÅpent = ap ? isAksjonspunktOpen(ap.status) : false;
   return (
     <>
       <AksjonspunktHelpTextTemp isAksjonspunktOpen={erAksjonspunktÅpent}>

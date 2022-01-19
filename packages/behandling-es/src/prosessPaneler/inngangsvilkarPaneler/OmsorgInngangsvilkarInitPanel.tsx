@@ -22,7 +22,7 @@ const AKSJONSPUNKT_TEKST_PER_KODE = {
 } as Record<string, string>;
 
 const hentAksjonspunktTekst = (aksjonspunkter: Aksjonspunkt[] = []): string => (aksjonspunkter.length > 0
-  ? intl.formatMessage({ id: AKSJONSPUNKT_TEKST_PER_KODE[aksjonspunkter[0].definisjon.kode] })
+  ? intl.formatMessage({ id: AKSJONSPUNKT_TEKST_PER_KODE[aksjonspunkter[0].definisjon] })
   : '');
 
 const AKSJONSPUNKT_KODER = [

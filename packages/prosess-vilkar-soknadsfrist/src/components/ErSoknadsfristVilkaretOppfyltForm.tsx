@@ -46,7 +46,7 @@ const findTextCode = (
   soknad: Soknad,
   familiehendelse: FamilieHendelse,
 ): string => {
-  if (soknad.soknadType.kode === soknadType.FODSEL) {
+  if (soknad.soknadType === soknadType.FODSEL) {
     const soknadFodselsdato = soknad.fodselsdatoer ? Object.values(soknad.fodselsdatoer)[0] : undefined;
     const fodselsdato = familiehendelse && familiehendelse.avklartBarn && familiehendelse.avklartBarn.length > 0
       ? familiehendelse.avklartBarn[0].fodselsdato : soknadFodselsdato;
@@ -59,7 +59,7 @@ const findDate = (
   soknad: Soknad,
   familiehendelse: FamilieHendelse,
 ): string | undefined => {
-  if (soknad.soknadType.kode === soknadType.FODSEL) {
+  if (soknad.soknadType === soknadType.FODSEL) {
     const soknadFodselsdato = soknad.fodselsdatoer ? Object.values(soknad.fodselsdatoer)[0] : undefined;
     const fodselsdato = familiehendelse && familiehendelse.avklartBarn && familiehendelse.avklartBarn.length > 0
       ? familiehendelse.avklartBarn[0].fodselsdato : soknadFodselsdato;
@@ -70,7 +70,7 @@ const findDate = (
 };
 
 export const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: string): FormValues => ({
-  erVilkarOk: isAksjonspunktOpen(aksjonspunkter[0].status.kode) ? undefined : vilkarUtfallType.OPPFYLT === status,
+  erVilkarOk: isAksjonspunktOpen(aksjonspunkter[0].status) ? undefined : vilkarUtfallType.OPPFYLT === status,
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
 });
 
@@ -127,8 +127,8 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
 
   const erVilkarOk = formMethods.watch('erVilkarOk');
 
-  const vilkarCodes = aksjonspunkter.flatMap((a) => (a.vilkarType ? [a.vilkarType.kode] : []));
-  const funnetVilkar = vilkar.find((v) => vilkarCodes.includes(v.vilkarType.kode));
+  const vilkarCodes = aksjonspunkter.flatMap((a) => (a.vilkarType ? [a.vilkarType] : []));
+  const funnetVilkar = vilkar.find((v) => vilkarCodes.includes(v.vilkarType));
   const antallDagerSoknadLevertForSent = funnetVilkar?.merknadParametere.antallDagerSoeknadLevertForSent;
 
   const hasAksjonspunkt = aksjonspunkter.length > 0;

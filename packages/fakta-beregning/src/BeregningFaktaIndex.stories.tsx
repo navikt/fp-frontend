@@ -8,7 +8,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import {
-  Kodeverk, Behandling, Beregningsgrunnlag, BeregningAktivitet, FaktaOmBeregning, AndelForFaktaOmBeregning, FaktaOmBeregningAndel,
+  Behandling, Beregningsgrunnlag, BeregningAktivitet, FaktaOmBeregning, AndelForFaktaOmBeregning, FaktaOmBeregningAndel,
 } from '@fpsak-frontend/types';
 import { alleKodeverk as alleKodeverkMock } from '@fpsak-frontend/storybook-utils';
 
@@ -74,19 +74,11 @@ const lagBeregningsgrunnlag = (
   faktaOmBeregning,
 } as Beregningsgrunnlag);
 
-const mapTilKodeliste = (arrayOfCodes: string[]): Kodeverk[] => arrayOfCodes.map((kode) => ({ kode, kodeverk: '' }));
-
 const lagAndel = (andelsnr: number, aktivitetStatus: string, inntektskategori: string): FaktaOmBeregningAndel => (
   {
     andelsnr,
-    aktivitetStatus: {
-      kode: aktivitetStatus,
-      kodeverk: 'AKTIVITET_STATUS',
-    },
-    inntektskategori: {
-      kode: inntektskategori,
-      kodeverk: 'INNTEKTSKATEGORI',
-    },
+    aktivitetStatus,
+    inntektskategori,
   }
 );
 
@@ -99,7 +91,7 @@ const standardFaktaArbeidstakerAndel = {
     arbeidsgiverId: '12345678',
     arbeidsgiverIdent: '12345678',
     startdato: '01.01.2019',
-    arbeidsforholdType: { kode: opptjeningAktivitetType.ARBEID, kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+    arbeidsforholdType: opptjeningAktivitetType.ARBEID,
   },
 };
 const standardFaktaArbeidstakerAndel2 = {
@@ -112,7 +104,7 @@ const standardFaktaArbeidstakerAndel2 = {
     arbeidsgiverIdent: '12345679',
     startdato: '01.01.2019',
     opphoersdato: '01.01.2020',
-    arbeidsforholdType: { kode: opptjeningAktivitetType.ARBEID, kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+    arbeidsforholdType: opptjeningAktivitetType.ARBEID,
   },
 };
 const tidsbegrensetFaktaArbeidstakerAndel = {
@@ -125,7 +117,7 @@ const tidsbegrensetFaktaArbeidstakerAndel = {
     arbeidsgiverIdent: '12345671',
     startdato: '01.09.2019',
     opphoersdato: '01.01.2020',
-    arbeidsforholdType: { kode: opptjeningAktivitetType.ARBEID, kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+    arbeidsforholdType: opptjeningAktivitetType.ARBEID,
   },
 };
 const etterlønnSluttpakkeFaktaArbeidstakerAndel = {
@@ -137,7 +129,7 @@ const etterlønnSluttpakkeFaktaArbeidstakerAndel = {
     arbeidsgiverId: '795349533',
     arbeidsgiverIdent: '795349533',
     startdato: '01.09.2019',
-    arbeidsforholdType: { kode: opptjeningAktivitetType.ETTERLONN_SLUTTPAKKE, kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+    arbeidsforholdType: opptjeningAktivitetType.ETTERLONN_SLUTTPAKKE,
   },
 };
 const standardFaktaDagpengerAndel = {
@@ -229,7 +221,7 @@ export const ArbeidOgDagpenger = () => (
 
 export const AvklarAktiviteterFullAAPOgAndreAktiviteter = () => {
   const aapAktivitet = {
-    arbeidsforholdType: { kode: opptjeningAktivitetType.AAP, kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+    arbeidsforholdType: opptjeningAktivitetType.AAP,
     fom: '01-01-2019',
     tom: '01-04-2020',
   };
@@ -249,14 +241,8 @@ export const AvklarAktiviteterFullAAPOgAndreAktiviteter = () => {
       behandling={behandling}
       beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
-        definisjon: {
-          kode: aksjonspunktCodes.AVKLAR_AKTIVITETER,
-          kodeverk: 'test',
-        },
-        status: {
-          kode: aksjonspunktStatus.OPPRETTET,
-          kodeverk: 'test',
-        },
+        definisjon: aksjonspunktCodes.AVKLAR_AKTIVITETER,
+        status: aksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
@@ -278,7 +264,7 @@ export const AvklarAktiviteterFullAAPOgAndreAktiviteter = () => {
 
 export const AvklartAktiviteterMedAksjonspunktIFaktaAvklaring = () => {
   const aapAktivitet = {
-    arbeidsforholdType: { kode: opptjeningAktivitetType.AAP, kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+    arbeidsforholdType: opptjeningAktivitetType.AAP,
     fom: '01-01-2019',
     tom: '01-04-2020',
   };
@@ -316,7 +302,7 @@ export const AvklartAktiviteterMedAksjonspunktIFaktaAvklaring = () => {
     },
   ];
   const faktaOmBeregning = {
-    faktaOmBeregningTilfeller: mapTilKodeliste([VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT]),
+    faktaOmBeregningTilfeller: [VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT],
     refusjonskravSomKommerForSentListe,
     andelerForFaktaOmBeregning,
     avklarAktiviteter: {
@@ -334,27 +320,15 @@ export const AvklartAktiviteterMedAksjonspunktIFaktaAvklaring = () => {
       behandling={behandling}
       beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
-        definisjon: {
-          kode: aksjonspunktCodes.AVKLAR_AKTIVITETER,
-          kodeverk: 'test',
-        },
-        status: {
-          kode: aksjonspunktStatus.UTFORT,
-          kodeverk: 'test',
-        },
+        definisjon: aksjonspunktCodes.AVKLAR_AKTIVITETER,
+        status: aksjonspunktStatus.UTFORT,
         begrunnelse: 'En begrunnelse for at arbeidsforholdet var gyldig.',
         kanLoses: true,
         erAktivt: true,
       },
       {
-        definisjon: {
-          kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
-          kodeverk: 'test',
-        },
-        status: {
-          kode: aksjonspunktStatus.OPPRETTET,
-          kodeverk: 'test',
-        },
+        definisjon: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+        status: aksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
@@ -400,7 +374,7 @@ export const FrilansOgArbeidsforholdMedLønnendringOgNyoppstartet = () => {
     arbeidstakerAndelerUtenIM: [],
   };
   const faktaOmBeregning = {
-    faktaOmBeregningTilfeller: mapTilKodeliste([VURDER_LONNSENDRING, VURDER_NYOPPSTARTET_FL, VURDER_MOTTAR_YTELSE]),
+    faktaOmBeregningTilfeller: [VURDER_LONNSENDRING, VURDER_NYOPPSTARTET_FL, VURDER_MOTTAR_YTELSE],
     arbeidsforholdMedLønnsendringUtenIM: [arbeidstakerBeregningsgrunnlagAndel],
     vurderMottarYtelse,
     andelerForFaktaOmBeregning,
@@ -412,14 +386,8 @@ export const FrilansOgArbeidsforholdMedLønnendringOgNyoppstartet = () => {
       behandling={behandling}
       beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
-        definisjon: {
-          kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
-          kodeverk: 'test',
-        },
-        status: {
-          kode: aksjonspunktStatus.OPPRETTET,
-          kodeverk: 'test',
-        },
+        definisjon: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+        status: aksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
@@ -447,14 +415,8 @@ export const DagpengerOgArbeidstakerMedVurderingAvBesteberegning = () => {
   };
   const dagpengerBeregningsgrunnlagAndel = {
     andelsnr: standardFaktaDagpengerAndel.andelsnr,
-    aktivitetStatus: {
-      kode: standardFaktaDagpengerAndel.aktivitetStatus ? standardFaktaDagpengerAndel.aktivitetStatus.kode : '',
-      kodeverk: 'AKTIVITET_STATUS',
-    },
-    inntektskategori: {
-      kode: standardFaktaDagpengerAndel.inntektskategori ? standardFaktaDagpengerAndel.inntektskategori.kode : '',
-      kodeverk: 'INNTEKTSKATEGORI',
-    },
+    aktivitetStatus: standardFaktaDagpengerAndel.aktivitetStatus ? standardFaktaDagpengerAndel.aktivitetStatus : '',
+    inntektskategori: standardFaktaDagpengerAndel.inntektskategori ? standardFaktaDagpengerAndel.inntektskategori : '',
   };
   const andeler = [
     arbeidstakerBeregningsgrunnlagAndel,
@@ -468,7 +430,7 @@ export const DagpengerOgArbeidstakerMedVurderingAvBesteberegning = () => {
     andeler: [standardFaktaDagpengerAndel, standardFaktaArbeidstakerAndel],
   };
   const faktaOmBeregning = {
-    faktaOmBeregningTilfeller: mapTilKodeliste([VURDER_BESTEBEREGNING]),
+    faktaOmBeregningTilfeller: [VURDER_BESTEBEREGNING],
     vurderBesteberegning,
     andelerForFaktaOmBeregning,
   } as FaktaOmBeregning;
@@ -479,14 +441,8 @@ export const DagpengerOgArbeidstakerMedVurderingAvBesteberegning = () => {
       behandling={behandling}
       beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
-        definisjon: {
-          kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
-          kodeverk: 'test',
-        },
-        status: {
-          kode: aksjonspunktStatus.OPPRETTET,
-          kodeverk: 'test',
-        },
+        definisjon: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+        status: aksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
@@ -529,7 +485,7 @@ export const KunArbeidstakerMedVurderingAvBesteberegning = () => {
     andeler: [standardFaktaArbeidstakerAndel2, standardFaktaArbeidstakerAndel],
   };
   const faktaOmBeregning = {
-    faktaOmBeregningTilfeller: mapTilKodeliste([VURDER_BESTEBEREGNING]),
+    faktaOmBeregningTilfeller: [VURDER_BESTEBEREGNING],
     vurderBesteberegning,
     andelerForFaktaOmBeregning,
   } as FaktaOmBeregning;
@@ -539,14 +495,8 @@ export const KunArbeidstakerMedVurderingAvBesteberegning = () => {
       behandling={behandling}
       beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
-        definisjon: {
-          kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
-          kodeverk: 'test',
-        },
-        status: {
-          kode: aksjonspunktStatus.OPPRETTET,
-          kodeverk: 'test',
-        },
+        definisjon: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+        status: aksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
@@ -591,7 +541,7 @@ export const KunArbeidstakerMedVurderingSentRefusjonskrav = () => {
     },
   ];
   const faktaOmBeregning = {
-    faktaOmBeregningTilfeller: mapTilKodeliste([VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT]),
+    faktaOmBeregningTilfeller: [VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT],
     refusjonskravSomKommerForSentListe,
     andelerForFaktaOmBeregning,
   } as FaktaOmBeregning;
@@ -602,14 +552,8 @@ export const KunArbeidstakerMedVurderingSentRefusjonskrav = () => {
       behandling={behandling}
       beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
-        definisjon: {
-          kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
-          kodeverk: 'test',
-        },
-        status: {
-          kode: aksjonspunktStatus.OPPRETTET,
-          kodeverk: 'test',
-        },
+        definisjon: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+        status: aksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
@@ -656,7 +600,7 @@ export const FrilansOgArbeidsforholdISammeOrganisasjon = () => {
     arbeidstakerAndelerUtenIM: [],
   };
   const faktaOmBeregning = {
-    faktaOmBeregningTilfeller: mapTilKodeliste([VURDER_AT_OG_FL_I_SAMME_ORGANISASJON, VURDER_MOTTAR_YTELSE]),
+    faktaOmBeregningTilfeller: [VURDER_AT_OG_FL_I_SAMME_ORGANISASJON, VURDER_MOTTAR_YTELSE],
     arbeidstakerOgFrilanserISammeOrganisasjonListe: [arbeidstakerBeregningsgrunnlagAndel],
     vurderMottarYtelse,
     andelerForFaktaOmBeregning,
@@ -667,14 +611,8 @@ export const FrilansOgArbeidsforholdISammeOrganisasjon = () => {
       behandling={behandling}
       beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
-        definisjon: {
-          kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
-          kodeverk: 'test',
-        },
-        status: {
-          kode: aksjonspunktStatus.OPPRETTET,
-          kodeverk: 'test',
-        },
+        definisjon: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+        status: aksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
@@ -707,7 +645,7 @@ export const VurderingAvMilitær = () => {
     standardFaktaMilitærAndel,
   ];
   const faktaOmBeregning = {
-    faktaOmBeregningTilfeller: mapTilKodeliste([VURDER_MILITÆR_SIVILTJENESTE]),
+    faktaOmBeregningTilfeller: [VURDER_MILITÆR_SIVILTJENESTE],
     andelerForFaktaOmBeregning,
   };
   const beregningsgrunnlag = lagBeregningsgrunnlag(andeler, faktaOmBeregning);
@@ -716,14 +654,8 @@ export const VurderingAvMilitær = () => {
       behandling={behandling}
       beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
-        definisjon: {
-          kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
-          kodeverk: 'test',
-        },
-        status: {
-          kode: aksjonspunktStatus.OPPRETTET,
-          kodeverk: 'test',
-        },
+        definisjon: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+        status: aksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
@@ -769,7 +701,7 @@ export const FrilansOgTidsbegrensetArbeidsforholdISammeOrganisasjon = () => {
     arbeidstakerAndelerUtenIM: [],
   };
   const faktaOmBeregning = {
-    faktaOmBeregningTilfeller: mapTilKodeliste([VURDER_AT_OG_FL_I_SAMME_ORGANISASJON, VURDER_MOTTAR_YTELSE, VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD]),
+    faktaOmBeregningTilfeller: [VURDER_AT_OG_FL_I_SAMME_ORGANISASJON, VURDER_MOTTAR_YTELSE, VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD],
     arbeidstakerOgFrilanserISammeOrganisasjonListe: [arbeidstakerBeregningsgrunnlagAndel],
     kortvarigeArbeidsforhold: [arbeidstakerBeregningsgrunnlagAndel],
     vurderMottarYtelse,
@@ -781,14 +713,8 @@ export const FrilansOgTidsbegrensetArbeidsforholdISammeOrganisasjon = () => {
       behandling={behandling}
       beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
-        definisjon: {
-          kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
-          kodeverk: 'test',
-        },
-        status: {
-          kode: aksjonspunktStatus.OPPRETTET,
-          kodeverk: 'test',
-        },
+        definisjon: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+        status: aksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
@@ -822,7 +748,7 @@ export const KunTidsbegrensetArbeidsforhold = () => {
     tidsbegrensetFaktaArbeidstakerAndel,
   ];
   const faktaOmBeregning = {
-    faktaOmBeregningTilfeller: mapTilKodeliste([VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD]),
+    faktaOmBeregningTilfeller: [VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD],
     kortvarigeArbeidsforhold: [arbeidstakerBeregningsgrunnlagAndel],
     andelerForFaktaOmBeregning,
   } as FaktaOmBeregning;
@@ -832,14 +758,8 @@ export const KunTidsbegrensetArbeidsforhold = () => {
       behandling={behandling}
       beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
-        definisjon: {
-          kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
-          kodeverk: 'test',
-        },
-        status: {
-          kode: aksjonspunktStatus.OPPRETTET,
-          kodeverk: 'test',
-        },
+        definisjon: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+        status: aksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
@@ -873,7 +793,7 @@ export const VurderingAvEtterlønnSluttpakke = () => {
     etterlønnSluttpakkeFaktaArbeidstakerAndel,
   ];
   const faktaOmBeregning = {
-    faktaOmBeregningTilfeller: mapTilKodeliste([VURDER_ETTERLONN_SLUTTPAKKE]),
+    faktaOmBeregningTilfeller: [VURDER_ETTERLONN_SLUTTPAKKE],
     andelerForFaktaOmBeregning,
   };
   const beregningsgrunnlag = lagBeregningsgrunnlag(andeler, faktaOmBeregning);
@@ -882,14 +802,8 @@ export const VurderingAvEtterlønnSluttpakke = () => {
       behandling={behandling}
       beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
-        definisjon: {
-          kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
-          kodeverk: 'test',
-        },
-        status: {
-          kode: aksjonspunktStatus.OPPRETTET,
-          kodeverk: 'test',
-        },
+        definisjon: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+        status: aksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
@@ -926,7 +840,7 @@ export const FastsettingAvBeregningsgrunnlagForKunYtelse = () => {
     andeler,
   };
   const faktaOmBeregning = {
-    faktaOmBeregningTilfeller: mapTilKodeliste([FASTSETT_BG_KUN_YTELSE]),
+    faktaOmBeregningTilfeller: [FASTSETT_BG_KUN_YTELSE],
     andelerForFaktaOmBeregning,
     kunYtelse,
   } as FaktaOmBeregning;
@@ -936,14 +850,8 @@ export const FastsettingAvBeregningsgrunnlagForKunYtelse = () => {
       behandling={behandling}
       beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
-        definisjon: {
-          kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
-          kodeverk: 'test',
-        },
-        status: {
-          kode: aksjonspunktStatus.OPPRETTET,
-          kodeverk: 'test',
-        },
+        definisjon: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+        status: aksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
@@ -976,7 +884,7 @@ export const SelvstendigNæringNyIArbeidslivet = () => {
     standardFaktaNæringAndel,
   ];
   const faktaOmBeregning = {
-    faktaOmBeregningTilfeller: mapTilKodeliste([VURDER_SN_NY_I_ARBEIDSLIVET]),
+    faktaOmBeregningTilfeller: [VURDER_SN_NY_I_ARBEIDSLIVET],
     andelerForFaktaOmBeregning,
   };
   const beregningsgrunnlag = lagBeregningsgrunnlag(andeler, faktaOmBeregning);
@@ -985,14 +893,8 @@ export const SelvstendigNæringNyIArbeidslivet = () => {
       behandling={behandling}
       beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
-        definisjon: {
-          kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
-          kodeverk: 'test',
-        },
-        status: {
-          kode: aksjonspunktStatus.OPPRETTET,
-          kodeverk: 'test',
-        },
+        definisjon: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+        status: aksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
@@ -1151,9 +1053,9 @@ export const KombinasjonstestForFaktapanel = () => {
   };
 
   const faktaOmBeregning = {
-    faktaOmBeregningTilfeller: mapTilKodeliste([VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT, VURDER_SN_NY_I_ARBEIDSLIVET, VURDER_NYOPPSTARTET_FL,
+    faktaOmBeregningTilfeller: [VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT, VURDER_SN_NY_I_ARBEIDSLIVET, VURDER_NYOPPSTARTET_FL,
       VURDER_ETTERLONN_SLUTTPAKKE, VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD, VURDER_BESTEBEREGNING, VURDER_AT_OG_FL_I_SAMME_ORGANISASJON, VURDER_MOTTAR_YTELSE,
-      VURDER_MILITÆR_SIVILTJENESTE]),
+      VURDER_MILITÆR_SIVILTJENESTE],
     refusjonskravSomKommerForSentListe,
     arbeidstakerOgFrilanserISammeOrganisasjonListe: [arbeidstakerBeregningsgrunnlagAndel2],
     kortvarigeArbeidsforhold: [tidsbegrensetarbeidstakerBeregningsgrunnlagAndel],
@@ -1175,27 +1077,15 @@ export const KombinasjonstestForFaktapanel = () => {
       behandling={behandling}
       beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
-        definisjon: {
-          kode: aksjonspunktCodes.AVKLAR_AKTIVITETER,
-          kodeverk: 'test',
-        },
-        status: {
-          kode: aksjonspunktStatus.UTFORT,
-          kodeverk: 'test',
-        },
+        definisjon: aksjonspunktCodes.AVKLAR_AKTIVITETER,
+        status: aksjonspunktStatus.UTFORT,
         begrunnelse: 'En begrunnelse for at arbeidsforholdet var gyldig.',
         kanLoses: true,
         erAktivt: true,
       },
       {
-        definisjon: {
-          kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
-          kodeverk: 'test',
-        },
-        status: {
-          kode: aksjonspunktStatus.OPPRETTET,
-          kodeverk: 'test',
-        },
+        definisjon: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+        status: aksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
@@ -1270,14 +1160,8 @@ export const OverstyringAvInntekt = () => {
       behandling={behandling}
       beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
-        definisjon: {
-          kode: aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
-          kodeverk: 'test',
-        },
-        status: {
-          kode: aksjonspunktStatus.OPPRETTET,
-          kodeverk: 'test',
-        },
+        definisjon: aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
+        status: aksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,
@@ -1314,7 +1198,7 @@ export const VurderKunYtelseBesteberegning = () => {
     andeler,
   };
   const faktaOmBeregning = {
-    faktaOmBeregningTilfeller: mapTilKodeliste([FASTSETT_BG_KUN_YTELSE]),
+    faktaOmBeregningTilfeller: [FASTSETT_BG_KUN_YTELSE],
     andelerForFaktaOmBeregning,
     kunYtelse,
   } as FaktaOmBeregning;
@@ -1324,14 +1208,8 @@ export const VurderKunYtelseBesteberegning = () => {
       behandling={behandling}
       beregningsgrunnlag={beregningsgrunnlag}
       aksjonspunkter={[{
-        definisjon: {
-          kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
-          kodeverk: 'test',
-        },
-        status: {
-          kode: aksjonspunktStatus.OPPRETTET,
-          kodeverk: 'test',
-        },
+        definisjon: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+        status: aksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,

@@ -63,9 +63,9 @@ export const DekningsgradAksjonspunktPanelImpl: FunctionComponent<OwnProps & Wra
 );
 
 DekningsgradAksjonspunktPanelImpl.buildInitialValues = (beregningsgrunnlag: Beregningsgrunnlag, aksjonspunter: Aksjonspunkt[]): DekningsgradValues => {
-  const aksjonspunkt = aksjonspunter && aksjonspunter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.VURDER_DEKNINGSGRAD);
+  const aksjonspunkt = aksjonspunter && aksjonspunter.find((ap) => ap.definisjon === aksjonspunktCodes.VURDER_DEKNINGSGRAD);
   const begrunnelse = aksjonspunkt && aksjonspunkt.begrunnelse ? aksjonspunkt.begrunnelse : null;
-  const initialDekningsgrad = aksjonspunkt && !isAksjonspunktOpen(aksjonspunkt.status.kode) ? beregningsgrunnlag.dekningsgrad : null;
+  const initialDekningsgrad = aksjonspunkt && !isAksjonspunktOpen(aksjonspunkt.status) ? beregningsgrunnlag.dekningsgrad : null;
   if (initialDekningsgrad && begrunnelse) {
     return {
       [RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN]: initialDekningsgrad,

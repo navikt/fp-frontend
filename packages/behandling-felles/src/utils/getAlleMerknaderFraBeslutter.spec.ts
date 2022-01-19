@@ -41,7 +41,7 @@ describe('<getAlleMerknaderFraBeslutter>', () => {
     const merknader = getAlleMerknaderFraBeslutter(behandling as Behandling, aksjonspunkter);
 
     expect(merknader).toEqual({
-      [aksjonspunkter[0].definisjon.kode]: {
+      [aksjonspunkter[0].definisjon]: {
         notAccepted: true,
       },
     });

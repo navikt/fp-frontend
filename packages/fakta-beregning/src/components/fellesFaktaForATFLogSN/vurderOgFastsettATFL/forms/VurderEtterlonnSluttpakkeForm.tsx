@@ -63,11 +63,11 @@ VurderEtterlonnSluttpakkeForm.buildInitialValues = (beregningsgrunnlag: Beregnin
   if (!beregningsgrunnlag || !beregningsgrunnlag.beregningsgrunnlagPeriode || !faktaAksjonspunkt) {
     return {};
   }
-  const apErTidligereLost = !isAksjonspunktOpen(faktaAksjonspunkt.status.kode);
+  const apErTidligereLost = !isAksjonspunktOpen(faktaAksjonspunkt.status);
   const relevanteAndeler = beregningsgrunnlag.beregningsgrunnlagPeriode
     .flatMap((periode) => periode.beregningsgrunnlagPrStatusOgAndel)
     .filter(({ arbeidsforhold }) => arbeidsforhold
-  && arbeidsforhold.arbeidsforholdType.kode === OAType.ETTERLONN_SLUTTPAKKE);
+  && arbeidsforhold.arbeidsforholdType === OAType.ETTERLONN_SLUTTPAKKE);
   if (relevanteAndeler.length > 0) {
     initialValues[harEtterlonnSluttpakkeField] = apErTidligereLost ? relevanteAndeler[0].beregnetPrAar > 0 : undefined;
   }
@@ -80,7 +80,7 @@ const finnEtterlønnSluttpakkeAndelNr = (faktaOmBeregning: FaktaOmBeregning): nu
   }
   const etterlønnSluttpakkeAndel = faktaOmBeregning.andelerForFaktaOmBeregning
     .find((andel) => andel.arbeidsforhold && andel.arbeidsforhold.arbeidsforholdType
-    && andel.arbeidsforhold.arbeidsforholdType.kode === OAType.ETTERLONN_SLUTTPAKKE);
+    && andel.arbeidsforhold.arbeidsforholdType === OAType.ETTERLONN_SLUTTPAKKE);
 
   return etterlønnSluttpakkeAndel ? etterlønnSluttpakkeAndel.andelsnr : undefined;
 };
@@ -90,7 +90,7 @@ VurderEtterlonnSluttpakkeForm.transformValues = (values: FaktaOmBeregningAksjons
   faktaOmBeregning: FaktaOmBeregning,
   fastsatteAndelsnr: number[]): FaktaBeregningTransformedValues => {
   const tilfeller = faktaOmBeregning.faktaOmBeregningTilfeller ? faktaOmBeregning.faktaOmBeregningTilfeller : [];
-  if (!tilfeller.map(({ kode }) => kode).includes(faktaOmBeregningTilfelle.VURDER_ETTERLONN_SLUTTPAKKE)) {
+  if (!tilfeller.includes(faktaOmBeregningTilfelle.VURDER_ETTERLONN_SLUTTPAKKE)) {
     return {};
   }
   if (!inntektPrMnd || inntektPrMnd.length === 0) {

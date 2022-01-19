@@ -4,9 +4,7 @@ import moment from 'moment';
 import { WrappedComponentProps } from 'react-intl';
 import { Checkbox } from 'nav-frontend-skjema';
 
-import {
-  AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag, Kodeverk,
-} from '@fpsak-frontend/types';
+import { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@fpsak-frontend/types';
 import HistorikkAktor from '@fpsak-frontend/kodeverk/src/historikkAktor';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
@@ -122,8 +120,8 @@ import styles from './history.less';
 
  */
 
-const velgHistorikkMal = (histType: Kodeverk) => { // NOSONAR
-  switch (histType.kode) { // NOSONAR
+const velgHistorikkMal = (histType: string) => { // NOSONAR
+  switch (histType) { // NOSONAR
     case historikkinnslagType.BEH_GJEN:
     case historikkinnslagType.KOET_BEH_GJEN:
     case historikkinnslagType.BEH_MAN_GJEN:
@@ -270,9 +268,9 @@ const History: FunctionComponent<OwnProps & WrappedComponentProps> = ({
       <VerticalSpacer sixteenPx />
       {filtrerteInnslag.map((historikkinnslag) => {
         const HistorikkMal = velgHistorikkMal(historikkinnslag.type);
-        const aktorIsVL = historikkinnslag.aktoer.kode === HistorikkAktor.VEDTAKSLOSNINGEN;
-        const aktorIsSOKER = historikkinnslag.aktoer.kode === HistorikkAktor.SOKER;
-        const aktorIsArbeidsgiver = historikkinnslag.aktoer.kode === HistorikkAktor.ARBEIDSGIVER;
+        const aktorIsVL = historikkinnslag.aktoer === HistorikkAktor.VEDTAKSLOSNINGEN;
+        const aktorIsSOKER = historikkinnslag.aktoer === HistorikkAktor.SOKER;
+        const aktorIsArbeidsgiver = historikkinnslag.aktoer === HistorikkAktor.ARBEIDSGIVER;
 
         const getKodeverknavn = historikkinnslag.erTilbakekreving ? getKodeverknavnFpTilbake : getKodeverknavnFpSak;
 
@@ -282,7 +280,7 @@ const History: FunctionComponent<OwnProps & WrappedComponentProps> = ({
 
         return (
           <Snakkeboble
-            key={historikkinnslag.opprettetTidspunkt + historikkinnslag.type.kode}
+            key={historikkinnslag.opprettetTidspunkt + historikkinnslag.type}
             aktoer={historikkinnslag.aktoer}
             rolleNavn={getKodeverknavn(historikkinnslag.aktoer)}
             dato={historikkinnslag.opprettetTidspunkt}

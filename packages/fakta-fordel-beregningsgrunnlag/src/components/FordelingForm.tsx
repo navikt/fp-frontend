@@ -28,7 +28,7 @@ const {
 const FORM_NAME_FORDEL_BEREGNING = 'fordelBeregningsgrunnlagForm';
 
 const findAksjonspunktMedBegrunnelse = (aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt | undefined => aksjonspunkter
-  .find((ap) => ap.definisjon.kode === FORDEL_BEREGNINGSGRUNNLAG && ap.begrunnelse !== null);
+  .find((ap) => ap.definisjon === FORDEL_BEREGNINGSGRUNNLAG && ap.begrunnelse !== null);
 
 export const BEGRUNNELSE_FORDELING_NAME = 'begrunnelseFordeling';
 
@@ -176,8 +176,8 @@ const lagSubmitFn = createSelector([
   transformValuesFordelBeregningFn) => (values: FordelBeregningsgrunnlagMedAksjonspunktValues) => submitCallback(transformValuesFordelBeregningFn(values)));
 
 const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => {
-  const relevantAp = ownProps.aksjonspunkter.find((ap) => ap.definisjon.kode === FORDEL_BEREGNINGSGRUNNLAG);
-  const isAksjonspunktClosed = !isAksjonspunktOpen(relevantAp.status.kode);
+  const relevantAp = ownProps.aksjonspunkter.find((ap) => ap.definisjon === FORDEL_BEREGNINGSGRUNNLAG);
+  const isAksjonspunktClosed = !isAksjonspunktOpen(relevantAp.status);
   const initialValues = buildInitialValuesFordelBeregning(ownProps);
   const hasBegrunnelse = initialValues && !!initialValues[BEGRUNNELSE_FORDELING_NAME];
   return {

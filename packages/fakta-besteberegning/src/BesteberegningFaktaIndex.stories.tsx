@@ -87,7 +87,7 @@ const Template: Story<{
     behandling={behandling}
     beregningsgrunnlag={beregningsgrunnlag}
     arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
-    harApneAksjonspunkter={aksjonspunkter.some((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET)}
+    harApneAksjonspunkter={aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET)}
   />
 );
 

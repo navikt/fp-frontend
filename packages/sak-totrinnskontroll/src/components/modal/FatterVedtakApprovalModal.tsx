@@ -39,7 +39,7 @@ const getInfoTextCode = (
   if (harSammeResultatSomOriginalBehandling) {
     return 'FatterVedtakApprovalModal.UendretUtfall';
   }
-  if (behandlingsresultat && behandlingsresultat.type.kode === behandlingResultatType.AVSLATT) {
+  if (behandlingsresultat && behandlingsresultat.type === behandlingResultatType.AVSLATT) {
     return 'FatterVedtakApprovalModal.IkkeInnvilget';
   }
   if (isOpphor) {
@@ -132,7 +132,7 @@ const FatterVedtakApprovalModal: FunctionComponent<OwnProps & WrappedComponentPr
   harSammeResultatSomOriginalBehandling,
   erKlageWithKA,
 }) => {
-  const isBehandlingsresultatOpphor = !!behandlingsresultat && behandlingsresultat.type.kode === behandlingResultatType.OPPHOR;
+  const isBehandlingsresultatOpphor = !!behandlingsresultat && behandlingsresultat.type === behandlingResultatType.OPPHOR;
   const infoTextCode = utledInfoTextCode(
     allAksjonspunktApproved,
     behandlingStatusKode,

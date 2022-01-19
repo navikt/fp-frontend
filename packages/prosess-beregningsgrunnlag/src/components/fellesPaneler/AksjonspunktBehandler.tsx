@@ -54,7 +54,7 @@ const finnGjeldeneAksjonsPunkt = (aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt 
     aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
     aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
     aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE] as string[];
-  return aksjonspunkter.find((ap) => eksklusiveAksjonspunkter.includes(ap.definisjon.kode));
+  return aksjonspunkter.find((ap) => eksklusiveAksjonspunkter.includes(ap.definisjon));
 };
 
 const lagEndretTekst = (aksjonspunkter: Aksjonspunkt[], readOnly: boolean): ReactElement => {
@@ -81,7 +81,7 @@ const settOppKomponenterForNæring = (readOnly: boolean,
   aksjonspunkter: Aksjonspunkt[]): ReactElement => {
   const alleAndelerIForstePeriode = finnAlleAndelerIFørstePeriode(allePerioder);
   const snAndel = alleAndelerIForstePeriode.find(
-    (andel) => andel.aktivitetStatus && andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE,
+    (andel) => andel.aktivitetStatus && andel.aktivitetstatus === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE,
   );
   if (!snAndel) {
     return null;
@@ -132,10 +132,10 @@ const settOppKomponenterForATFL = (aksjonspunkter: Aksjonspunkt[],
   const erTidsbegrenset = harPerioderMedAvsluttedeArbeidsforhold(allePerioder);
   const alleAndelerIForstePeriode = finnAlleAndelerIFørstePeriode(allePerioder);
   const flAndel = alleAndelerIForstePeriode.find(
-    (andel) => andel.aktivitetStatus && andel.aktivitetStatus.kode === aktivitetStatus.FRILANSER,
+    (andel) => andel.aktivitetStatus && andel.aktivitetstatus === aktivitetStatus.FRILANSER,
   );
   const atAndel = alleAndelerIForstePeriode.find(
-    (andel) => andel.aktivitetStatus && andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER,
+    (andel) => andel.aktivitetStatus && andel.aktivitetstatus === aktivitetStatus.ARBEIDSTAKER,
   );
   const visFL = flAndel && flAndel.skalFastsetteGrunnlag;
   const visAT = atAndel && atAndel.skalFastsetteGrunnlag;
@@ -247,8 +247,8 @@ export const AksjonspunktBehandlerImpl: FunctionComponent<OwnProps & WrappedComp
   const atflAPKoder = [aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
     aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD] as string[];
 
-  const harATFLAP = aksjonspunkter.some((ap) => atflAPKoder.includes(ap.definisjon.kode));
-  const harDekningsgradAP = aksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktCodes.VURDER_DEKNINGSGRAD);
+  const harATFLAP = aksjonspunkter.some((ap) => atflAPKoder.includes(ap.definisjon));
+  const harDekningsgradAP = aksjonspunkter.some((ap) => ap.definisjon === aksjonspunktCodes.VURDER_DEKNINGSGRAD);
   return (
     <div className={readOnly ? '' : styles.aksjonspunktBehandlerContainer}>
       <Panel className={readOnly ? beregningStyles.panelRight : styles.aksjonspunktBehandlerBorder}>

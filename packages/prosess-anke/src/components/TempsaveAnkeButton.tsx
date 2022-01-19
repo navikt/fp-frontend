@@ -5,14 +5,13 @@ import { InjectedFormProps } from 'redux-form';
 
 import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AnkeVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import { Kodeverk } from '@fpsak-frontend/types';
 import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 
 type FormValuesUtrekk = {
-  ankeVurdering?: Kodeverk;
+  ankeVurdering?: string;
   erSubsidiartRealitetsbehandles?: boolean;
-  ankeOmgjoerArsak?: Kodeverk;
-  ankeVurderingOmgjoer?: Kodeverk;
+  ankeOmgjoerArsak?: string;
+  ankeVurderingOmgjoer?: string;
   vedtak?: string;
   begrunnelse?: string;
   fritekstTilBrev?: string;
@@ -26,12 +25,12 @@ type FormValues = {
   erIkkeSignert: boolean;
 } & FormValuesUtrekk
 
-const lagreVurderingOmgjoer = (values: FormValues): Kodeverk | string => (ankeVurdering.ANKE_OMGJOER === values.ankeVurdering?.kode
+const lagreVurderingOmgjoer = (values: FormValues): string => (ankeVurdering.ANKE_OMGJOER === values.ankeVurdering
   ? values.ankeVurderingOmgjoer : '-');
 
-const lagreOmgjoerAarsak = (values: FormValues): Kodeverk | string => (ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE === values.ankeVurdering?.kode
-  || ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV === values.ankeVurdering?.kode
-  || ankeVurdering.ANKE_OMGJOER === values.ankeVurdering?.kode ? values.ankeOmgjoerArsak : '-');
+const lagreOmgjoerAarsak = (values: FormValues): string => (ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE === values.ankeVurdering
+  || ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV === values.ankeVurdering
+  || ankeVurdering.ANKE_OMGJOER === values.ankeVurdering ? values.ankeOmgjoerArsak : '-');
 
 export const transformValues = (values: FormValues): AnkeVurderingResultatAp => ({
   påAnketKlageBehandlingUuid: values.vedtak === '0' || !values.vedtak ? null : values.vedtak,

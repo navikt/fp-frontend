@@ -24,7 +24,7 @@ const harFordelInfo = (bg: Beregningsgrunnlag): boolean => (bg && bg.faktaOmFord
 const harRefusjonInfo = (bg: Beregningsgrunnlag): boolean => !!(bg && bg.refusjonTilVurdering);
 
 const getAksjonspunkt = (aksjonspunkter: Aksjonspunkt[],
-  def: string): Aksjonspunkt | undefined => (aksjonspunkter && def ? aksjonspunkter.find((ap) => ap.definisjon.kode === def) : undefined);
+  def: string): Aksjonspunkt | undefined => (aksjonspunkter && def ? aksjonspunkter.find((ap) => ap.definisjon === def) : undefined);
 
 interface OwnProps {
   readOnly: boolean;

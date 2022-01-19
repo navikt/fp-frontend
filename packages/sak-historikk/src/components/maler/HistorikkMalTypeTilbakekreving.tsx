@@ -4,7 +4,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
-import { HistorikkinnslagEndretFelt, Kodeverk } from '@fpsak-frontend/types';
+import { HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
 
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
 import historikkEndretFeltType from '../../kodeverk/historikkEndretFeltType';
@@ -15,22 +15,22 @@ const lagBegrunnelseKomponent = (
   felt: HistorikkinnslagEndretFelt,
   index: number,
   endredeFelter: HistorikkinnslagEndretFelt[],
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kodeverk: string) => string,
   begrunnelse?: string,
   sarligGrunnerBegrunnelse?: string,
   begrunnelseFritekst?: string,
 ) => {
   const { endretFeltNavn, fraVerdi, tilVerdi } = felt;
 
-  const visProsentverdi = historikkEndretFeltType.ANDEL_TILBAKEKREVES === endretFeltNavn.kode;
-  const visBegrunnelse = historikkEndretFeltType.ER_VILKARENE_TILBAKEKREVING_OPPFYLT === endretFeltNavn.kode;
+  const visProsentverdi = historikkEndretFeltType.ANDEL_TILBAKEKREVES === endretFeltNavn;
+  const visBegrunnelse = historikkEndretFeltType.ER_VILKARENE_TILBAKEKREVING_OPPFYLT === endretFeltNavn;
   const formatertFraVerdi = visProsentverdi && fraVerdi ? `${fraVerdi}%` : fraVerdi;
   const formatertTilVerdi = visProsentverdi && tilVerdi ? `${tilVerdi}%` : tilVerdi;
   const visAktsomhetBegrunnelse = begrunnelseFritekst && index === endredeFelter.length - 1;
   const visSarligGrunnerBegrunnelse = sarligGrunnerBegrunnelse && index === endredeFelter.length - 1;
 
   return (
-    <React.Fragment key={endretFeltNavn.kode}>
+    <React.Fragment key={endretFeltNavn}>
       {visBegrunnelse && begrunnelse}
       {visBegrunnelse && <VerticalSpacer eightPx />}
       {visAktsomhetBegrunnelse && decodeHtmlEntity(begrunnelseFritekst)}
@@ -71,12 +71,12 @@ const HistorikkMalTypeTilbakekreving: FunctionComponent<HistorikkMal> = ({
       />
       {historikkinnslagDeler.map((historikkinnslagDel) => {
         const { opplysninger, endredeFelter, begrunnelseFritekst } = historikkinnslagDel;
-        const periodeFom = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.PERIODE_FOM.kode)?.tilVerdi;
-        const periodeTom = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.PERIODE_TOM.kode)?.tilVerdi;
+        const periodeFom = opplysninger.find((o) => o.opplysningType === historikkOpplysningTypeCodes.PERIODE_FOM.kode)?.tilVerdi;
+        const periodeTom = opplysninger.find((o) => o.opplysningType === historikkOpplysningTypeCodes.PERIODE_TOM.kode)?.tilVerdi;
         const begrunnelse = decodeHtmlEntity(opplysninger
-          .find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.TILBAKEKREVING_OPPFYLT_BEGRUNNELSE.kode)?.tilVerdi);
+          .find((o) => o.opplysningType === historikkOpplysningTypeCodes.TILBAKEKREVING_OPPFYLT_BEGRUNNELSE.kode)?.tilVerdi);
         const sarligGrunnerBegrunnelseFelt = opplysninger
-          .find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.SÆRLIG_GRUNNER_BEGRUNNELSE.kode);
+          .find((o) => o.opplysningType === historikkOpplysningTypeCodes.SÆRLIG_GRUNNER_BEGRUNNELSE.kode);
         const sarligGrunnerBegrunnelse = sarligGrunnerBegrunnelseFelt !== undefined
           ? decodeHtmlEntity(sarligGrunnerBegrunnelseFelt.tilVerdi) : undefined;
 
@@ -96,9 +96,9 @@ const HistorikkMalTypeTilbakekreving: FunctionComponent<HistorikkMal> = ({
             {endredeFelter && endredeFelter.map((felt, index) => {
               const { endretFeltNavn, tilVerdi } = felt;
 
-              const visBelopTilbakekreves = historikkEndretFeltType.BELOEP_TILBAKEKREVES === endretFeltNavn.kode;
-              const visProsentverdi = historikkEndretFeltType.ANDEL_TILBAKEKREVES === endretFeltNavn.kode;
-              const visIleggRenter = historikkEndretFeltType.ILEGG_RENTER === endretFeltNavn.kode;
+              const visBelopTilbakekreves = historikkEndretFeltType.BELOEP_TILBAKEKREVES === endretFeltNavn;
+              const visProsentverdi = historikkEndretFeltType.ANDEL_TILBAKEKREVES === endretFeltNavn;
+              const visIleggRenter = historikkEndretFeltType.ILEGG_RENTER === endretFeltNavn;
               if ((visBelopTilbakekreves || visProsentverdi || visIleggRenter) && !tilVerdi) {
                 return null;
               }

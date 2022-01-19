@@ -22,11 +22,11 @@ import { restApiInnsynHooks, requestInnsynApi, InnsynBehandlingApiKeys } from '.
 const intl = createIntl(messages);
 
 const getVedtakStatus = (innsyn: Innsyn, aksjonspunkter: Aksjonspunkt[]): string => {
-  const harApentAksjonpunkt = aksjonspunkter.some((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET);
+  const harApentAksjonpunkt = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET);
   if (aksjonspunkter.length === 0 || harApentAksjonpunkt) {
     return vilkarUtfallType.IKKE_VURDERT;
   }
-  return innsyn.innsynResultatType.kode === innsynResultatTypeKV.INNVILGET || innsyn.innsynResultatType.kode === innsynResultatTypeKV.DELVISTINNVILGET
+  return innsyn.innsynResultatType === innsynResultatTypeKV.INNVILGET || innsyn.innsynResultatType === innsynResultatTypeKV.DELVISTINNVILGET
     ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_OPPFYLT;
 };
 

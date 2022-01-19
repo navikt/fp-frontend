@@ -77,18 +77,18 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
     uuid, versjon, type, status,
   } = valgtBehandling;
 
-  const erInnsynBehandling = type.kode === BehandlingType.DOKUMENTINNSYN;
+  const erInnsynBehandling = type === BehandlingType.DOKUMENTINNSYN;
 
   const { data: totrinnArsaker } = restApiHooks.useRestApi(
     FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER, undefined, {
-      updateTriggers: [uuid, status.kode],
-      suspendRequest: !!erInnsynBehandling || status.kode !== BehandlingStatus.FATTER_VEDTAK,
+      updateTriggers: [uuid, status],
+      suspendRequest: !!erInnsynBehandling || status !== BehandlingStatus.FATTER_VEDTAK,
     },
   );
   const { data: totrinnArsakerReadOnly } = restApiHooks.useRestApi(
     FpsakApiKeys.TOTRINNSAKSJONSPUNKT_ARSAKER_READONLY, undefined, {
-      updateTriggers: [uuid, status.kode],
-      suspendRequest: !!erInnsynBehandling || status.kode !== BehandlingStatus.BEHANDLING_UTREDES,
+      updateTriggers: [uuid, status],
+      suspendRequest: !!erInnsynBehandling || status !== BehandlingStatus.BEHANDLING_UTREDES,
     },
   );
 

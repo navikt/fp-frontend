@@ -13,7 +13,7 @@ import vurderPaNyttArsakType from '@fpsak-frontend/kodeverk/src/vurderPaNyttArsa
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktCodesTilbakekreving from '@fpsak-frontend/kodeverk/src/aksjonspunktCodesTilbakekreving';
 import {
-  BehandlingAppKontekst, Kodeverk, AlleKodeverk, KlageVurdering, TotrinnskontrollSkjermlenkeContext, AlleKodeverkTilbakekreving, KodeverkMedNavn,
+  BehandlingAppKontekst, AlleKodeverk, KlageVurdering, TotrinnskontrollSkjermlenkeContext, AlleKodeverkTilbakekreving, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
 import { FatterVedtakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -59,7 +59,7 @@ interface OwnProps {
   behandling: BehandlingAppKontekst;
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   location: Location;
-  fagsakYtelseType: Kodeverk;
+  fagsakYtelseType: string;
   behandlingKlageVurdering?: KlageVurdering;
   alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
   readOnly: boolean;
@@ -89,7 +89,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
   beslutterFormData,
   setBeslutterForData,
 }) => {
-  const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandling.type.kode || BehandlingType.TILBAKEKREVING_REVURDERING === behandling.type.kode;
+  const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandling.type || BehandlingType.TILBAKEKREVING_REVURDERING === behandling.type;
 
   const submitHandler = useCallback((values: FormValues) => {
     const aksjonspunktGodkjenningDtos = values.aksjonspunktGodkjenning
@@ -116,8 +116,8 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
 
   const erBehandlingEtterKlage = useMemo(() => (behandling ? behandling.behandlingÅrsaker
     .map(({ behandlingArsakType }) => behandlingArsakType)
-    .some((bt: Kodeverk) => bt.kode === klageBehandlingArsakType.ETTER_KLAGE || bt.kode === klageBehandlingArsakType.KLAGE_U_INNTK
-    || bt.kode === klageBehandlingArsakType.KLAGE_M_INNTK) : false),
+    .some((bt) => bt === klageBehandlingArsakType.ETTER_KLAGE || bt === klageBehandlingArsakType.KLAGE_U_INNTK
+    || bt === klageBehandlingArsakType.KLAGE_M_INNTK) : false),
   [behandling]);
 
   const sorterteTotrinnskontrollSkjermlenkeContext = useMemo(() => (erTilbakekreving
@@ -131,7 +131,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
 
   const lagLenke = useCallback((skjermlenkeCode: string): Location | undefined => createLocationForSkjermlenke(location, skjermlenkeCode), [location]);
 
-  const erStatusFatterVedtak = behandling.status.kode === BehandlingStatus.FATTER_VEDTAK;
+  const erStatusFatterVedtak = behandling.status === BehandlingStatus.FATTER_VEDTAK;
   const skjemalenkeTyper = alleKodeverk[kodeverkTyper.SKJERMLENKE_TYPE];
   const vurderArsaker = alleKodeverk[kodeverkTyper.VURDER_AARSAK];
   const arbeidsforholdHandlingTyper = finnArbeidsforholdHandlingTyper(alleKodeverk);
@@ -146,7 +146,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
           readOnly={readOnly}
           onSubmit={submitHandler}
           forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
-          erForeldrepengerFagsak={fagsakYtelseType.kode === FagsakYtelseType.FORELDREPENGER}
+          erForeldrepengerFagsak={fagsakYtelseType === FagsakYtelseType.FORELDREPENGER}
           behandlingKlageVurdering={behandlingKlageVurdering}
           arbeidsforholdHandlingTyper={arbeidsforholdHandlingTyper}
           skjemalenkeTyper={skjemalenkeTyper}
@@ -161,7 +161,7 @@ const TotrinnskontrollSakIndex: FunctionComponent<OwnProps> = ({
       {!erStatusFatterVedtak && (
         <TotrinnskontrollSaksbehandlerPanel
           totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}
-          erForeldrepengerFagsak={fagsakYtelseType.kode === FagsakYtelseType.FORELDREPENGER}
+          erForeldrepengerFagsak={fagsakYtelseType === FagsakYtelseType.FORELDREPENGER}
           behandlingKlageVurdering={behandlingKlageVurdering}
           behandlingStatus={behandling.status}
           erTilbakekreving={erTilbakekreving}

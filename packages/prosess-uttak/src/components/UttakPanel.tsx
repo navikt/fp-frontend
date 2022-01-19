@@ -12,7 +12,7 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, FamilieHendelseSamling, Kodeverk, AlleKodeverk,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, FamilieHendelseSamling, AlleKodeverk,
   Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling, Stonadskonto, Personoversikt,
 } from '@fpsak-frontend/types';
 import { UttakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -25,8 +25,8 @@ import styles from './uttakPanel.less';
 const formName = 'UttakForm';
 
 const hentApTekst = (uttaksresultat: UttaksresultatPeriode, isApOpen: boolean, aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
-  const helptTextAksjonspunkter = aksjonspunkter.filter((ap) => ap.definisjon.kode !== AksjonspunktCode.FASTSETT_UTTAKPERIODER
-    && ap.definisjon.kode !== AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER);
+  const helptTextAksjonspunkter = aksjonspunkter.filter((ap) => ap.definisjon !== AksjonspunktCode.FASTSETT_UTTAKPERIODER
+    && ap.definisjon !== AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER);
 
   const uttakPanelAksjonsPunktKoder = {
     5072: 'UttakPanel.Aksjonspunkt.5072',
@@ -41,18 +41,18 @@ const hentApTekst = (uttaksresultat: UttaksresultatPeriode, isApOpen: boolean, a
   };
 
   const texts = [];
-  const helpText = uttaksresultat.perioderSøker.find((p) => p.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING);
+  const helpText = uttaksresultat.perioderSøker.find((p) => p.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING);
 
   const overstyrApHelpTextOpen = aksjonspunkter.length === 1
-    && aksjonspunkter[0].definisjon.kode === AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER
-    && aksjonspunkter[0].status.kode !== 'UTFO';
+    && aksjonspunkter[0].definisjon === AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER
+    && aksjonspunkter[0].status !== 'UTFO';
 
   const overstyrApHelpTextUtfort = aksjonspunkter.length === 1
-    && aksjonspunkter[0].definisjon.kode === AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER
-    && aksjonspunkter[0].status.kode === 'UTFO';
+    && aksjonspunkter[0].definisjon === AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER
+    && aksjonspunkter[0].status === 'UTFO';
 
   helptTextAksjonspunkter.forEach((ap) => {
-    const tekstkode = uttakPanelAksjonsPunktKoder[ap.definisjon.kode];
+    const tekstkode = uttakPanelAksjonsPunktKoder[ap.definisjon];
     if (tekstkode) {
       texts.push(<FormattedMessage key="aksjonspunktTekst" id={tekstkode} />);
     }
@@ -83,10 +83,10 @@ interface FormValues {
 
 interface PureOwnProps {
   behandlingUuid: string;
-  behandlingType: Kodeverk;
+  behandlingType: string;
   behandlingsresultat?: Behandling['behandlingsresultat'];
-  behandlingStatus: Kodeverk;
-  sprakkode: Kodeverk;
+  behandlingStatus: string;
+  sprakkode: string;
   uttaksresultat: UttaksresultatPeriode;
   stonadskonto: UttakStonadskontoer;
   aksjonspunkter: Aksjonspunkt[];
@@ -179,7 +179,7 @@ export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & W
           fodselsdatoer={soknad.fodselsdatoer}
           termindato={soknad.termindato}
           adopsjonFodelsedatoer={soknad.adopsjonFodelsedatoer}
-          soknadsType={soknad.soknadType.kode}
+          soknadsType={soknad.soknadType}
           omsorgsovertakelseDato={soknad.omsorgsovertakelseDato}
           tempUpdateStonadskontoer={tempUpdateStonadskontoer}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -206,16 +206,16 @@ const getResult = (uttaksresultatActivity: UttaksresultatActivity[]): UttakResul
         ? ((a.weeks * 5) + a.days)
         : a.trekkdagerDesimaler;
 
-      if ((`${a.stønadskontoType.kode}_${index}`) in uttakResult) {
-        const trekkdagerDesimaler = uttakResult[`${a.stønadskontoType.kode}_${index}`].trekkdagerDesimaler + aktivitetDays;
-        uttakResult[`${a.stønadskontoType.kode}_${index}`] = {
+      if ((`${a.stønadskontoType}_${index}`) in uttakResult) {
+        const trekkdagerDesimaler = uttakResult[`${a.stønadskontoType}_${index}`].trekkdagerDesimaler + aktivitetDays;
+        uttakResult[`${a.stønadskontoType}_${index}`] = {
           trekkdagerDesimaler,
-          konto: a.stønadskontoType.kode,
+          konto: a.stønadskontoType,
         };
       } else {
-        uttakResult[`${a.stønadskontoType.kode}_${index}`] = {
+        uttakResult[`${a.stønadskontoType}_${index}`] = {
           trekkdagerDesimaler: aktivitetDays,
-          konto: a.stønadskontoType.kode,
+          konto: a.stønadskontoType,
         };
       }
     });
@@ -301,7 +301,7 @@ const checkFlerbarnsMaksDager = (stonadskonto: UttakStonadskontoer['stonadskonto
 const checkValidStonadKonto = (uttakPerioder: UttaksresultatActivity[], stonadskontoer?: UttakStonadskontoer['stonadskontoer']): FormError => {
   let errors = null;
   uttakPerioder.forEach((periode) => {
-    const ikkeGyldigKonto = periode.aktiviteter.filter((a) => !(Object.prototype.hasOwnProperty.call(stonadskontoer, a.stønadskontoType.kode))
+    const ikkeGyldigKonto = periode.aktiviteter.filter((a) => !(Object.prototype.hasOwnProperty.call(stonadskontoer, a.stønadskontoType))
       && (a.days > 0 || a.weeks > 0));
     if (ikkeGyldigKonto && ikkeGyldigKonto.length > 0) {
       errors = {
@@ -310,7 +310,7 @@ const checkValidStonadKonto = (uttakPerioder: UttaksresultatActivity[], stonadsk
     <FormattedMessage
       id="UttakPanel.InvalidStonadskonto"
       values={{
-        konto: uttakPeriodeNavn[ikkeGyldigKonto[0].stønadskontoType.kode],
+        konto: uttakPeriodeNavn[ikkeGyldigKonto[0].stønadskontoType],
       }}
     />
   </AlertStripe>,
@@ -352,13 +352,13 @@ export const buildInitialValues = createSelector(
 
 export const transformValues = (values: FormValues, apCodes: string[], aksjonspunkter: Aksjonspunkt[]): UttakAp[] => {
   const overstyrErOpprettet = aksjonspunkter
-    .filter((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET && ap.definisjon.kode === AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER);
+    .filter((ap) => ap.status === aksjonspunktStatus.OPPRETTET && ap.definisjon === AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER);
   const removeOverstyrApCode = apCodes.filter((a) => a !== AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER);
   let aksjonspunkt = removeOverstyrApCode;
 
   const transformedResultat = values.uttaksresultatActivity.map((aktivitet: UttaksresultatActivity) => {
     const uta = omitOne(aktivitet, 'tilknyttetStortinget');
-    if (uta.oppholdÅrsak.kode !== '-') {
+    if (uta.oppholdÅrsak !== '-') {
       return {
         ...uta,
         aktiviteter: [],

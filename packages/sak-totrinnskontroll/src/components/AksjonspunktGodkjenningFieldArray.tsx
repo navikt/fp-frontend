@@ -7,7 +7,7 @@ import { Location } from 'history';
 import { Undertekst, Normaltekst } from 'nav-frontend-typografi';
 
 import {
-  Kodeverk, KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
+  KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 import {
   CheckboxField, TextAreaField, RadioGroupField, RadioOption, SkjemaGruppeMedFeilviser,
@@ -57,7 +57,7 @@ type OwnProps = {
   klageKA?: boolean;
   erForeldrepengerFagsak: boolean;
   klagebehandlingVurdering?: KlageVurdering,
-  behandlingStatus: Kodeverk,
+  behandlingStatus: string,
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
   erTilbakekreving: boolean,
   skjemalenkeTyper: KodeverkMedNavn[];

@@ -12,7 +12,7 @@ import { Knapp } from 'nav-frontend-knapper';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelse,
-  FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, Personoversikt, AlleKodeverk,
+  FamilieHendelseSamling, KodeverkMedNavn, Personoversikt, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import { CheckboxField } from '@fpsak-frontend/form';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
@@ -66,9 +66,9 @@ interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];
   hasRevurderingOvertyringAp: boolean;
   kanOverstyre: boolean;
-  getKodeverknavn: (kodeverk: Kodeverk) => string;
+  getKodeverknavn: (kodeverk: string) => string;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
-  behandlingStatus: Kodeverk;
+  behandlingStatus: string;
   familiehendelse: FamilieHendelseSamling;
   vilkarForSykdomExists?: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -299,7 +299,7 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
       newPeriodeObject.oppholdÅrsak = {
         kode: oppholdArsak,
         navn: getKodeverknavn(updatedPeriode.oppholdÅrsak),
-        kodeverk: updatedPeriode.oppholdÅrsak.kodeverk,
+        kodeverk: updatedPeriode.oppholdÅrsak,
       };
     }
 
@@ -358,11 +358,11 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
     const nyPeriodeDisabledDaysFom = førsteUttaksdato || (perioder[0] || {}).fom;
     const sisteUttakdatoFørsteSeksUker = moment(findFamiliehendelseDato(familiehendelse.gjeldende)).add(6, 'weeks');
     const farSøkerFør6Uker = (perioder[0] || {}).uttakPeriodeType
-      && (perioder[0] || {}).uttakPeriodeType.kode === 'FEDREKVOTE'
+      && (perioder[0] || {}).uttakPeriodeType === 'FEDREKVOTE'
       && moment((perioder[0] || {}).fom).isBefore(sisteUttakdatoFørsteSeksUker);
 
     const aksjonspunktTekster = aksjonspunkter
-      .filter((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET)
+      .filter((ap) => ap.status === aksjonspunktStatus.OPPRETTET)
       .map((ap) => {
         const førsteUttak = {
           value: moment(førsteUttaksdato).format(DDMMYYYY_DATE_FORMAT),
@@ -370,8 +370,8 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
 
         return (
           <FormattedMessage
-            key={`UttakInfoPanel.Aksjonspunkt.${ap.definisjon.kode}`}
-            id={`UttakInfoPanel.Aksjonspunkt.${ap.definisjon.kode}`}
+            key={`UttakInfoPanel.Aksjonspunkt.${ap.definisjon}`}
+            id={`UttakInfoPanel.Aksjonspunkt.${ap.definisjon}`}
             values={førsteUttak}
           />
         );

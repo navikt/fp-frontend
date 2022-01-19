@@ -7,9 +7,11 @@ import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-te
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import {
-  Aksjonspunkt, AlleKodeverk, FamilieHendelseSamling, Kodeverk, Personoversikt,
+  Aksjonspunkt, AlleKodeverk, FamilieHendelseSamling, Personoversikt,
   Soknad, Stonadskonto, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
+import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 
 import { buildInitialValues, transformValues, UttakPanelImpl as UttakPanel } from './UttakPanel';
 import Uttak, { UttaksresultatActivity } from './Uttak';
@@ -20,9 +22,7 @@ const intlMock = getIntlMock(messages);
 
 describe('<UttakPanel>', () => {
   const soknad = {
-    soknadType: {
-      kode: 'ST-001',
-    },
+    soknadType: 'ST-001',
     mottattDato: '2019-10-28',
     soknadDato: '2019-10-28',
     tilleggsopplysninger: null,
@@ -45,10 +45,7 @@ describe('<UttakPanel>', () => {
     oppgittFordeling: {
       startDatoForPermisjon: '2019-10-05',
     },
-    spraakkode: {
-      kode: '-',
-      kodeverk: 'SPRAAK_KODE',
-    },
+    spraakkode: '-',
     utstedtdato: null,
     termindato: null,
     farSokerType: null,
@@ -61,27 +58,15 @@ describe('<UttakPanel>', () => {
     perioderSøker: [{
       fom: '',
       tom: '',
-      periodeResultatType: {
-        kode: 'MANUELL_BEHANDLING',
-        kodeverk: '',
-      },
-      manuellBehandlingÅrsak: {
-        kode: 'test',
-        kodeverk: 'test',
-      },
+      periodeResultatType: 'MANUELL_BEHANDLING',
+      manuellBehandlingÅrsak: 'test',
       aktiviteter: [{
       }],
     }, {
       fom: '',
       tom: '',
-      periodeResultatType: {
-        kode: 'MANUELL_BEHANDLING',
-        kodeverk: '',
-      },
-      manuellBehandlingÅrsak: {
-        kode: 'test',
-        kodeverk: 'test',
-      },
+      periodeResultatType: 'MANUELL_BEHANDLING',
+      manuellBehandlingÅrsak: 'test',
       aktiviteter: [{
       }],
     }],
@@ -116,10 +101,7 @@ describe('<UttakPanel>', () => {
     ],
   } as AlleKodeverk;
 
-  const sprakkode = {
-    kode: 'NO',
-    kodeverk: '',
-  };
+  const sprakkode = 'NO';
 
   const arbeidsgiverOpplysningerPerId = {
     123: {
@@ -150,10 +132,10 @@ describe('<UttakPanel>', () => {
       person={{} as Personoversikt}
       uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}
-      behandlingType={{} as Kodeverk}
+      behandlingType={behandlingType.FORSTEGANGSSOKNAD}
       alleKodeverk={kodeverk}
       behandlingUuid="1"
-      behandlingStatus={{} as Kodeverk}
+      behandlingStatus={behandlingStatus.OPPRETTET}
       employeeHasAccess
       tempUpdateStonadskontoer={sinon.spy()}
       validate={sinon.spy()}
@@ -174,14 +156,8 @@ describe('<UttakPanel>', () => {
 
   it('skal rendre uttakpanel med aksjonspunkt', () => {
     const aksjonspunkter = [{
-      definisjon: {
-        kode: '',
-        kodeverk: '',
-      },
-      status: {
-        kode: 's1',
-        kodeverk: '',
-      },
+      definisjon: '',
+      status: 's1',
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
       kanLoses: true,
@@ -203,10 +179,10 @@ describe('<UttakPanel>', () => {
       person={{} as Personoversikt}
       uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}
-      behandlingType={{} as Kodeverk}
+      behandlingType={behandlingType.FORSTEGANGSSOKNAD}
       alleKodeverk={kodeverk}
       behandlingUuid="1"
-      behandlingStatus={{} as Kodeverk}
+      behandlingStatus={behandlingStatus.OPPRETTET}
       employeeHasAccess
       tempUpdateStonadskontoer={sinon.spy()}
       validate={sinon.spy()}
@@ -231,14 +207,8 @@ describe('<UttakPanel>', () => {
 
   it('transformValues gir korrekt trekkdager og aksjonspunkt 5071', () => {
     const aksjonspunkter = [{
-      definisjon: {
-        kode: '',
-        kodeverk: '',
-      },
-      status: {
-        kode: 's1',
-        kodeverk: '',
-      },
+      definisjon: '',
+      status: 's1',
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
       kanLoses: true,
@@ -254,9 +224,7 @@ describe('<UttakPanel>', () => {
     const values = {
       manuellOverstyring: false,
       uttaksresultatActivity: [{
-        oppholdÅrsak: {
-          kode: '-',
-        },
+        oppholdÅrsak: '-',
         aktiviteter: [{
           days: 4,
           weeks: 5,
@@ -272,14 +240,8 @@ describe('<UttakPanel>', () => {
 
   it('transformValues gir korrekt trekkdager og manuell overstyring', () => {
     const aksjonspunkter = [{
-      definisjon: {
-        kode: '',
-        kodeverk: '',
-      },
-      status: {
-        kode: 's1',
-        kodeverk: '',
-      },
+      definisjon: '',
+      status: 's1',
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
       kanLoses: true,
@@ -295,9 +257,7 @@ describe('<UttakPanel>', () => {
     const values = {
       manuellOverstyring: true,
       uttaksresultatActivity: [{
-        oppholdÅrsak: {
-          kode: '-',
-        },
+        oppholdÅrsak: '-',
         aktiviteter: [{
           days: 4,
           weeks: 6,

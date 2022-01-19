@@ -22,10 +22,7 @@ describe('<MenyNyBehandlingIndex>', () => {
     expect(lagNyBehandling).toHaveBeenNthCalledWith(1, false, {
       behandlingType: 'BT-008',
       eksternUuid: undefined,
-      fagsakYtelseType: {
-        kode: 'FP',
-        kodeverk: 'YTELSE_TYPE',
-      },
+      fagsakYtelseType: 'FP',
       saksnummer: '123',
     });
 
@@ -49,10 +46,7 @@ describe('<MenyNyBehandlingIndex>', () => {
     expect(lagNyBehandling).toHaveBeenNthCalledWith(1, false, {
       behandlingType: 'BT-002',
       eksternUuid: undefined,
-      fagsakYtelseType: {
-        kode: 'FP',
-        kodeverk: 'YTELSE_TYPE',
-      },
+      fagsakYtelseType: 'FP',
       nyBehandlingEtterKlage: true,
       saksnummer: '123',
     });
@@ -73,10 +67,7 @@ describe('<MenyNyBehandlingIndex>', () => {
     expect(lagNyBehandling).toHaveBeenNthCalledWith(1, false, {
       behandlingType: 'BT-002',
       eksternUuid: undefined,
-      fagsakYtelseType: {
-        kode: 'FP',
-        kodeverk: 'YTELSE_TYPE',
-      },
+      fagsakYtelseType: 'FP',
       nyBehandlingEtterKlage: undefined,
       saksnummer: '123',
     });
@@ -100,10 +91,7 @@ describe('<MenyNyBehandlingIndex>', () => {
       behandlingType: 'BT-004',
       behandlingArsakType: 'RE-KLAG-U-INNTK',
       eksternUuid: undefined,
-      fagsakYtelseType: {
-        kode: 'FP',
-        kodeverk: 'YTELSE_TYPE',
-      },
+      fagsakYtelseType: 'FP',
       saksnummer: '123',
     });
   });

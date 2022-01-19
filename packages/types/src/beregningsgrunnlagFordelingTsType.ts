@@ -1,4 +1,3 @@
-import Kodeverk from './kodeverkTsType';
 import BeregningsgrunnlagArbeidsforhold from './beregningsgrunnlagArbeidsforholdTsType';
 
 export type TidligereUtbetalinger = Readonly<{
@@ -8,7 +7,7 @@ export type TidligereUtbetalinger = Readonly<{
 }>;
 
 export type RefusjonTilVurderingAndel = Readonly<{
-  aktivitetStatus: Kodeverk;
+  aktivitetStatus: string;
   tidligereUtbetalinger?: TidligereUtbetalinger[];
   nyttRefusjonskravFom: string;
   fastsattNyttRefusjonskravFom?: string;
@@ -40,7 +39,7 @@ export type ArbeidsforholdTilFordeling = Readonly<{
   aktørId?: number;
   arbeidsforholdId?: string;
   arbeidsgiverIdent?: string;
-  arbeidsforholdType?: Kodeverk;
+  arbeidsforholdType?: string;
   arbeidsgiverId?: string;
   arbeidsgiverNavn?: string;
   belopFraInntektsmeldingPrMnd?: number;
@@ -48,7 +47,7 @@ export type ArbeidsforholdTilFordeling = Readonly<{
   naturalytelseBortfaltPrÅr?: number;
   naturalytelseTilkommetPrÅr?: number;
   opphoersdato?: string;
-  organisasjonstype?: Kodeverk;
+  organisasjonstype?: string;
   perioderMedGraderingEllerRefusjon?: PerioderMedGraderingEllerRefusjon[];
   permisjon?: {
     permisjonFom?: string;
@@ -59,20 +58,20 @@ export type ArbeidsforholdTilFordeling = Readonly<{
 }>
 
 export type FordelBeregningsgrunnlagAndel = Readonly<{
-  aktivitetStatus?: Kodeverk;
+  aktivitetStatus?: string;
   andelIArbeid?: number[];
   andelsnr?: number;
   arbeidsforhold?: BeregningsgrunnlagArbeidsforhold;
-  arbeidsforholdType?: Kodeverk;
+  arbeidsforholdType?: string;
   belopFraInntektsmeldingPrAar?: number;
   fordelingForrigeBehandlingPrAar?: number;
   fordeltPrAar?: number;
-  inntektskategori?: Kodeverk;
+  inntektskategori?: string;
   lagtTilAvSaksbehandler?: boolean;
   nyttArbeidsforhold?: boolean;
   refusjonskravFraInntektsmeldingPrAar?: number;
   refusjonskravPrAar?: number;
-  kilde?: Kodeverk;
+  kilde?: string;
 }>
 
 export type FordelBeregningsgrunnlagPeriode = Readonly<{

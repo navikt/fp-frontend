@@ -28,10 +28,7 @@ type INIT_DATA = {
 }
 
 const fagsak = {
-  fagsakYtelseType: {
-    kode: fagsakYtelseType.FORELDREPENGER,
-    kodeverk: '',
-  },
+  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
 } as Fagsak;
 
 const behandling = {
@@ -55,16 +52,10 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
     isReadOnly: false,
     readOnlySubmitButton: false,
     aksjonspunkter: [{
-      definisjon: {
-        kode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
       erAktivt: true,
       kanLoses: true,
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      status: aksjonspunktStatus.OPPRETTET,
     }] as Aksjonspunkt[],
     vilkar: [],
     isAksjonspunktOpen: true,
@@ -183,10 +174,7 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
 
   it('skal lagre klage', async () => {
     const kv = {
-      aktuelleHjemler: [{
-        kode: '14-17',
-        kodeverk: 'KLAGE_HJEMMEL',
-      }],
+      aktuelleHjemler: ['14-17'],
     } as KlageVurdering;
     const data = [
       { key: KlageBehandlingApiKeys.AKSJONSPUNKTER.name, data: [] },

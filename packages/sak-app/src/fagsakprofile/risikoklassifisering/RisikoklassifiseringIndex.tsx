@@ -74,10 +74,10 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
   }, [location, isRiskPanelOpen]);
 
   useEffect(() => {
-    if (!!risikoAksjonspunkt && risikoAksjonspunkt.status.kode === aksjonspunktStatus.OPPRETTET && !isRiskPanelOpen) {
+    if (!!risikoAksjonspunkt && risikoAksjonspunkt.status === aksjonspunktStatus.OPPRETTET && !isRiskPanelOpen) {
       navigate(getRiskPanelLocationCreator(location)(true));
     }
-    if (!!risikoAksjonspunkt && risikoAksjonspunkt.status.kode === aksjonspunktStatus.UTFORT) {
+    if (!!risikoAksjonspunkt && risikoAksjonspunkt.status === aksjonspunktStatus.UTFORT) {
       navigate(getRiskPanelLocationCreator(location)(false));
     }
   }, [!!risikoAksjonspunkt, behandlingUuid, behandlingVersjon]);

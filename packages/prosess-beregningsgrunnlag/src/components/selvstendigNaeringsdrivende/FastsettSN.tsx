@@ -60,10 +60,10 @@ export const FastsettSNImpl: FunctionComponent<OwnProps & WrappedComponentProps>
   readOnly, isAksjonspunktClosed, intl, gjeldendeAksjonspunkter, erNyArbLivet, endretTekst,
 }) => {
   const harGammeltAPFastsettBrutto = gjeldendeAksjonspunkter
-    ? gjeldendeAksjonspunkter.find((ap) => ap.definisjon.kode === FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE)
+    ? gjeldendeAksjonspunkter.find((ap) => ap.definisjon === FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE)
     : false;
   const harAPSNNyiArbLiv = gjeldendeAksjonspunkter
-    ? gjeldendeAksjonspunkter.find((ap) => ap.definisjon.kode === FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET)
+    ? gjeldendeAksjonspunkter.find((ap) => ap.definisjon === FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET)
     : false;
 
   return (
@@ -121,9 +121,9 @@ export const FastsettSNImpl: FunctionComponent<OwnProps & WrappedComponentProps>
 
 FastsettSNImpl.buildInitialValuesNyIArbeidslivet = (relevanteAndeler: BeregningsgrunnlagAndel[],
   gjeldendeAksjonspunkter: Aksjonspunkt[]): NyIArbeidslivetValues => {
-  const snAndel = relevanteAndeler.find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
+  const snAndel = relevanteAndeler.find((andel) => andel.aktivitetstatus === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
   const nyIArbeidslivetAP = gjeldendeAksjonspunkter
-    .find((ap) => ap.definisjon.kode === FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET);
+    .find((ap) => ap.definisjon === FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET);
   return {
     [fastsettInntektFieldname]: snAndel ? formatCurrencyNoKr(snAndel.overstyrtPrAar) : undefined,
     [begrunnelseFieldname]: nyIArbeidslivetAP && nyIArbeidslivetAP.begrunnelse ? nyIArbeidslivetAP.begrunnelse : undefined,

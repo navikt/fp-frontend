@@ -26,8 +26,8 @@ const agOpplysninger = {
 
 const arbeidstakerIkkeFastsatt = {
   lagtTilAvSaksbehandler: false,
-  aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER, kodeverk: 'test' },
-  inntektskategori: { kode: 'ARBEIDSTAKER', kodeverk: 'test' },
+  aktivitetStatus: aktivitetStatuser.ARBEIDSTAKER,
+  inntektskategori: 'ARBEIDSTAKER',
 };
 
 const getKodeverknavn = (kodeverk) => {
@@ -79,11 +79,11 @@ describe('<BgFordelingUtils>', () => {
         arbeidsforholdId: '321378huda7e2',
         eksternArbeidsforholdId: '345678',
       } as BeregningsgrunnlagArbeidsforhold,
-      aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER, kodeverk: 'test' },
+      aktivitetStatus: aktivitetStatuser.ARBEIDSTAKER,
       andelsnr: 3,
-      kilde: { kode: 'PROSESS_START', kodeverk: 'test' },
+      kilde: 'PROSESS_START',
       lagtTilAvSaksbehandler: false,
-      inntektskategori: { kode: 'ARBEIDSTAKER', kodeverk: 'test' },
+      inntektskategori: 'ARBEIDSTAKER',
     };
 
     const andelsInfo = setGenerellAndelsinfo(andelValueFromState, false, getKodeverknavn, agOpplysninger);
@@ -98,10 +98,10 @@ describe('<BgFordelingUtils>', () => {
 
   it('skal sette initial values for generell andelinfo uten arbeidsforhold', () => {
     const andelValueFromState = {
-      aktivitetStatus: { kode: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE, kodeverk: 'test' },
+      aktivitetStatus: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE,
       andelsnr: 2,
       lagtTilAvSaksbehandler: true,
-      inntektskategori: { kode: 'SN', kodeverk: 'test' },
+      inntektskategori: 'SN',
     };
     const andelsInfo = setGenerellAndelsinfo(andelValueFromState, false, getKodeverknavn, agOpplysninger);
     expect(andelsInfo.andel).toBe('Selvstendig næringsdrivende');
@@ -114,10 +114,10 @@ describe('<BgFordelingUtils>', () => {
 
   it('skal ikkje sette arbeidsforhold initial values for andel uten arbeidsforhold', () => {
     const andelValueFromState = {
-      aktivitetStatus: { kode: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE, kodeverk: 'test' },
+      aktivitetStatus: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE,
       andelsnr: 2,
       lagtTilAvSaksbehandler: true,
-      inntektskategori: { kode: 'SN', kodeverk: 'test' },
+      inntektskategori: 'SN',
     };
     const arbeidsforholdIV = setArbeidsforholdInitialValues(andelValueFromState);
     expect(arbeidsforholdIV.arbeidsforholdId).toBe('');

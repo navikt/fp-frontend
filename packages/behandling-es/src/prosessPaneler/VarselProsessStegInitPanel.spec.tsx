@@ -28,10 +28,7 @@ const behandling = {
   uuid: 'test-uuid',
   versjon: 1,
   behandlingÅrsaker: [],
-  type: {
-    kode: behandlingType.FORSTEGANGSSOKNAD,
-    kodeverk: '',
-  },
+  type: behandlingType.FORSTEGANGSSOKNAD,
 } as Behandling;
 
 // @ts-ignore Fiks
@@ -48,16 +45,10 @@ describe('<VarselProsessStegInitPanel>', () => {
     isReadOnly: false,
     readOnlySubmitButton: false,
     aksjonspunkter: [{
-      definisjon: {
-        kode: aksjonspunktCodes.VARSEL_REVURDERING_MANUELL,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.VARSEL_REVURDERING_MANUELL,
       erAktivt: true,
       kanLoses: true,
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      status: aksjonspunktStatus.OPPRETTET,
     }] as Aksjonspunkt[],
     vilkar: [],
     isAksjonspunktOpen: true,
@@ -142,10 +133,7 @@ describe('<VarselProsessStegInitPanel>', () => {
           registrerProsessPanel={() => {}}
           toggleSkalOppdatereFagsakContext={() => {}}
           fagsak={{
-            fagsakYtelseType: {
-              kode: fagsakYtelseType.ENGANGSSTONAD,
-              kodeverk: '',
-            },
+            fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
           } as Fagsak}
           opneSokeside={() => {}}
           behandling={behandling}

@@ -62,14 +62,14 @@ export const AktivitetskravFaktaDetailForm: FunctionComponent<OwnProps> = ({
             </Undertekst>
             <VerticalSpacer fourPx />
             <Normaltekst>
-              {morsAktiviteter.find((ma) => ma.kode === valgtAktivitetskrav.morsAktivitet.kode)?.navn}
+              {morsAktiviteter.find((ma) => ma.kode === valgtAktivitetskrav.morsAktivitet)?.navn}
             </Normaltekst>
           </Column>
         )}
       </Row>
       <VerticalSpacer sixteenPx />
       <RadioGroupField
-        name="avklaring.kode"
+        name="avklaring"
         label={<FormattedMessage id="AktivitetskravFaktaDetailForm.Avklaring" />}
         validate={[required]}
         readOnly={readOnly}

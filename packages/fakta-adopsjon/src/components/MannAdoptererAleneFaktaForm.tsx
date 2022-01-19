@@ -8,14 +8,14 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { required, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
-import { FamilieHendelse, Kodeverk, AlleKodeverk } from '@fpsak-frontend/types';
+import { FamilieHendelse, AlleKodeverk } from '@fpsak-frontend/types';
 import { BekreftMannAdoptererAksjonspunktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import styles from './mannAdoptererAleneFaktaForm.less';
 
 interface OwnProps {
   readOnly: boolean;
-  farSokerType?: Kodeverk;
+  farSokerType?: string;
   alleKodeverk: AlleKodeverk;
   mannAdoptererAlene: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};

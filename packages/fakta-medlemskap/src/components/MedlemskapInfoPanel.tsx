@@ -5,7 +5,7 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Aksjonspunkt, Kodeverk, AlleKodeverk, Medlemskap, Soknad,
+  Aksjonspunkt, AlleKodeverk, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
 import {
   AvklarFortsattMedlemskapAp, BekreftBosattVurderingAp, BekreftErMedlemVurderingAp, BekreftLovligOppholdVurderingAp,
@@ -19,7 +19,7 @@ const {
   OVERSTYR_AVKLAR_STARTDATO,
 } = aksjonspunktCodes;
 
-const hasOpen = (aksjonspunkt: Aksjonspunkt): boolean => aksjonspunkt && isAksjonspunktOpen(aksjonspunkt.status.kode);
+const hasOpen = (aksjonspunkt: Aksjonspunkt): boolean => aksjonspunkt && isAksjonspunktOpen(aksjonspunkt.status);
 
 const skalKunneLoseUtenAksjonpunkter = (
   aksjonspunkterMinusAvklarStartDato: Aksjonspunkt[],
@@ -28,7 +28,7 @@ const skalKunneLoseUtenAksjonpunkter = (
 ): boolean => (isForeldrepenger && (aksjonspunkterMinusAvklarStartDato.length === 0 || !hasOpenAksjonspunkter));
 
 const harAksjonspunkterForAvklarStartdato = (aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
-  .some((ap) => ap.definisjon.kode === OVERSTYR_AVKLAR_STARTDATO);
+  .some((ap) => ap.definisjon === OVERSTYR_AVKLAR_STARTDATO);
 
 const skalViseAvklarStartdatoPanel = (
   aksjonspunkter: Aksjonspunkt[],
@@ -53,8 +53,8 @@ interface OwnProps {
     | AksjonspunktData) => Promise<void>;
   isForeldrepenger?: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  behandlingType: Kodeverk;
-  behandlingStatus: Kodeverk;
+  behandlingType: string;
+  behandlingStatus: string;
   soknad: Soknad;
   alleKodeverk: AlleKodeverk;
   medlemskap: Medlemskap;
@@ -82,9 +82,9 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps & WrappedComponentProps> =
   medlemskap,
   readOnlyForStartdatoForForeldrepenger,
 }) => {
-  const avklarStartdatoOverstyring = aksjonspunkter.find((ap) => ap.definisjon.kode === OVERSTYR_AVKLAR_STARTDATO);
+  const avklarStartdatoOverstyring = aksjonspunkter.find((ap) => ap.definisjon === OVERSTYR_AVKLAR_STARTDATO);
   const aksjonspunkterMinusAvklarStartDato = useMemo(() => aksjonspunkter
-    .filter((ap) => ap.definisjon.kode !== OVERSTYR_AVKLAR_STARTDATO), [aksjonspunkter]);
+    .filter((ap) => ap.definisjon !== OVERSTYR_AVKLAR_STARTDATO), [aksjonspunkter]);
 
   return (
     <>

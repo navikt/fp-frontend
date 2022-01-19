@@ -41,7 +41,7 @@ const OppholdstillatelseTabell: FunctionComponent<OwnProps & WrappedComponentPro
             )}
           </TableColumn>
           <TableColumn>
-            {alleKodeverk[kodeverkTyper.OPPHOLDSTILLATELSE_TYPE].find((k) => k.kode === opphold.oppholdstillatelseType.kode)?.navn}
+            {alleKodeverk[kodeverkTyper.OPPHOLDSTILLATELSE_TYPE].find((k) => k.kode === opphold.oppholdstillatelseType)?.navn}
           </TableColumn>
         </TableRow>
       ))}

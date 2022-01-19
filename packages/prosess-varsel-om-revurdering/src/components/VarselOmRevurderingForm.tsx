@@ -23,7 +23,7 @@ import SettPaVentModalIndex, { FormValues as ModalFormValues } from '@fpsak-fron
 import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import {
-  Aksjonspunkt, FamilieHendelseSamling, Kodeverk, Soknad, FamilieHendelse, AlleKodeverk,
+  Aksjonspunkt, FamilieHendelseSamling, Soknad, FamilieHendelse, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import { VarselRevurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -47,7 +47,7 @@ type FormValues = {
 }
 
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
-  kode: validerApKodeOgHentApEnum(aksjonspunkter[0].definisjon.kode,
+  kode: validerApKodeOgHentApEnum(aksjonspunkter[0].definisjon,
     AksjonspunktCode.VARSEL_REVURDERING_ETTERKONTROLL, AksjonspunktCode.VARSEL_REVURDERING_MANUELL),
   begrunnelse: aksjonspunkter[0].begrunnelse,
   sendVarsel: undefined,
@@ -59,8 +59,8 @@ const EMPTY_ARRAY = [];
 
 interface OwnProps {
   behandlingArsaker: Behandling['behandlingÅrsaker'];
-  sprakkode: Kodeverk;
-  behandlingType: Kodeverk;
+  sprakkode: string;
+  behandlingType: string;
   familiehendelse: FamilieHendelseSamling;
   soknad: Soknad;
   soknadOriginalBehandling: Soknad;
@@ -146,7 +146,7 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
       >
         <Undertittel><FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurdering" /></Undertittel>
         <VerticalSpacer eightPx />
-        {(!readOnly && isAksjonspunktOpen(aksjonspunkter[0].status.kode)) && (
+        {(!readOnly && isAksjonspunktOpen(aksjonspunkter[0].status)) && (
         <>
           <AksjonspunktHelpTextTemp isAksjonspunktOpen>
             {[<FormattedMessage key="1" id="VarselOmRevurderingForm.VarselOmRevurderingVurder" />]}
@@ -155,7 +155,7 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
           {erAutomatiskRevurdering && (
             <>
               <FodselSammenligningIndex
-                behandlingsTypeKode={behandlingType.kode}
+                behandlingsTypeKode={behandlingType}
                 avklartBarn={avklartBarn}
                 termindato={termindato}
                 vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
@@ -206,7 +206,7 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
           </Hovedknapp>
         </>
         )}
-        {(readOnly || !isAksjonspunktOpen(aksjonspunkter[0].status.kode)) && (
+        {(readOnly || !isAksjonspunktOpen(aksjonspunkter[0].status)) && (
         <>
           <Undertekst><FormattedMessage id="VarselOmRevurderingForm.Begrunnelse" /></Undertekst>
           <Normaltekst>{formVerdier.begrunnelse}</Normaltekst>
@@ -221,7 +221,7 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
         ventearsaker={ventearsaker}
         visBrevErBestilt
         hasManualPaVent
-        erTilbakekreving={behandlingType.kode === BehandlingType.TILBAKEKREVING || behandlingType.kode === BehandlingType.TILBAKEKREVING_REVURDERING}
+        erTilbakekreving={behandlingType === BehandlingType.TILBAKEKREVING || behandlingType === BehandlingType.TILBAKEKREVING_REVURDERING}
       />
     </>
   );

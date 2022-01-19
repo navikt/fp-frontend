@@ -47,7 +47,7 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal & WrappedComponentProps>
             scrollUpOnClick
             createLocationForSkjermlenke={createLocationForSkjermlenke}
           />
-          {historikkinnslagDel.endredeFelter && historikkinnslag.type.kode === historikkinnslagType.OVST_UTTAK_SPLITT && (
+          {historikkinnslagDel.endredeFelter && historikkinnslag.type === historikkinnslagType.OVST_UTTAK_SPLITT && (
             <FormattedMessage
               id="Historikk.Template.9"
               values={{
@@ -60,7 +60,7 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal & WrappedComponentProps>
             />
           )}
 
-          {historikkinnslagDel.endredeFelter && historikkinnslag.type.kode === historikkinnslagType.FASTSATT_UTTAK_SPLITT && (
+          {historikkinnslagDel.endredeFelter && historikkinnslag.type === historikkinnslagType.FASTSATT_UTTAK_SPLITT && (
             <FormattedMessage
               id="Historikk.Template.9.ManuellVurdering"
               values={{
@@ -73,7 +73,7 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal & WrappedComponentProps>
             />
           )}
 
-          {(historikkinnslag.type.kode === historikkinnslagType.TILBAKEKR_VIDEREBEHANDLING && historikkinnslagDel.endredeFelter) && (
+          {(historikkinnslag.type === historikkinnslagType.TILBAKEKR_VIDEREBEHANDLING && historikkinnslagDel.endredeFelter) && (
             historikkinnslagDel.endredeFelter
               .filter((endretFelt) => endretFelt.tilVerdi !== tilbakekrevingVidereBehandling.TILBAKEKR_INNTREKK)
               .map((endretFelt, index) => (

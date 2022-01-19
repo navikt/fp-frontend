@@ -56,8 +56,8 @@ describe('BeregningsresultatPanel', () => {
     expect(sumText).toBe('Beregningsgrunnlag.BeregningTable.Dagsats.ikkeFastsatt');
   });
   it('Skal teste om tabellen får korrekt antall rader ved vilkarStatus:OPPFYLT', () => {
-    vilkaarBG.vilkarStatus.kode = vilkarUtfallType.OPPFYLT;
-    vilkaarBG.vilkarStatus.kodeverk = 'VILKAR_UTFALL_TYPE';
+    vilkaarBG.vilkarstatus = vilkarUtfallType.OPPFYLT;
+    vilkaarBG.vilkarstatusverk = 'VILKAR_UTFALL_TYPE';
     const wrapper = shallowWithIntl(<BeregningsresutatPanel.WrappedComponent
       intl={intlMock}
       periodeResultatTabeller={[tableData]}

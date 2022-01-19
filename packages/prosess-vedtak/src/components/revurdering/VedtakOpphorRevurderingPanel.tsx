@@ -2,13 +2,13 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
-import { Kodeverk, Behandlingsresultat } from '@fpsak-frontend/types';
+import { Behandlingsresultat } from '@fpsak-frontend/types';
 
 import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
 
 interface OwnProps {
   revurderingsÅrsakString?: string;
-  språkKode?: Kodeverk;
+  språkKode?: strings;
   isReadOnly: boolean;
   behandlingsresultat: Behandlingsresultat;
   beregningErManueltFastsatt: boolean;

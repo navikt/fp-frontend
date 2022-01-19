@@ -18,7 +18,7 @@ const harResultatkode = (resultatkode: string, risikoklassifisering?: Risikoklas
   if (!risikoklassifisering || !risikoklassifisering.kontrollresultat) {
     return false;
   }
-  return risikoklassifisering.kontrollresultat.kode === resultatkode;
+  return risikoklassifisering.kontrollresultat === resultatkode;
 };
 
 interface OwnProps {

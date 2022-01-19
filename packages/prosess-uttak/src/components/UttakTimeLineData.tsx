@@ -14,8 +14,7 @@ import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
-  ArbeidsgiverOpplysningerPerId,
-  Behandling, Kodeverk, AlleKodeverk, UttakStonadskontoer,
+  ArbeidsgiverOpplysningerPerId, Behandling, AlleKodeverk, UttakStonadskontoer,
 } from '@fpsak-frontend/types';
 import UttakActivity from './UttakActivity';
 import DelOppPeriodeModal, { DeltPeriodeData } from './DelOppPeriodeModal';
@@ -25,7 +24,7 @@ import styles from './uttakTimeLineData.less';
 import { AktivitetFieldArray } from './RenderUttakTable';
 
 const getCorrectEmptyArbeidsForhold = (
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kodeverk: string) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   periodeTypeKode?: string,
   stonadskonto?: UttakStonadskontoer,
@@ -53,8 +52,8 @@ const getCorrectEmptyArbeidsForhold = (
 };
 
 const hentApTekst = (
-  manuellBehandlingÅrsak: Kodeverk,
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  manuellBehandlingÅrsak: string,
+  getKodeverknavn: (kodeverk: string) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   stonadskonto?: UttakStonadskontoer,
   periodeTypeKode?: string,
@@ -62,7 +61,7 @@ const hentApTekst = (
   const texts = [];
 
   // Fix - ta bort 5001 med verdi fra kodeverk
-  if (manuellBehandlingÅrsak.kode === '5001') {
+  if (manuellBehandlingÅrsak === '5001') {
     const arbeidsForhold = getCorrectEmptyArbeidsForhold(getKodeverknavn, arbeidsgiverOpplysningerPerId, periodeTypeKode, stonadskonto);
     const arbeidsForholdMedNullDagerIgjen = arbeidsForhold.join();
     if (arbeidsForhold.length > 1) {
@@ -83,13 +82,13 @@ const hentApTekst = (
       );
     } else {
       texts.push(
-        <React.Fragment key={`kode-${manuellBehandlingÅrsak.kode}`}>
+        <React.Fragment key={`kode-${manuellBehandlingÅrsak}`}>
           {getKodeverknavn(manuellBehandlingÅrsak)}
         </React.Fragment>,
       );
     }
   } else {
-    texts.push(<React.Fragment key={`kode-${manuellBehandlingÅrsak.kode}`}>{getKodeverknavn(manuellBehandlingÅrsak)}</React.Fragment>);
+    texts.push(<React.Fragment key={`kode-${manuellBehandlingÅrsak}`}>{getKodeverknavn(manuellBehandlingÅrsak)}</React.Fragment>);
   }
 
   return texts;
@@ -288,12 +287,12 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
             </FloatRight>
           </Column>
         </Row>
-        {selectedItemData.manuellBehandlingÅrsak && selectedItemData.manuellBehandlingÅrsak.kode !== '-' && (
+        {selectedItemData.manuellBehandlingÅrsak && selectedItemData.manuellBehandlingÅrsak !== '-' && (
         <>
           <AksjonspunktHelpTextTemp isAksjonspunktOpen={selectedItemData.manuellBehandlingÅrsak !== null}>
             {selectedItemData.periodeType
               ? hentApTekst(selectedItemData.manuellBehandlingÅrsak, getKodeverknavn, arbeidsgiverOpplysningerPerId, stonadskonto,
-                selectedItemData.periodeType.kode)
+                selectedItemData.periodeType)
               : hentApTekst(selectedItemData.manuellBehandlingÅrsak, getKodeverknavn, arbeidsgiverOpplysningerPerId, stonadskonto)}
           </AksjonspunktHelpTextTemp>
           <VerticalSpacer twentyPx />

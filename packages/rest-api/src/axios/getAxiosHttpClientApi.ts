@@ -1,7 +1,19 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import initRestMethods from './initRestMethods';
 import HttpClientApi from '../HttpClientApiTsType';
+
+const konverterKodeverkTilKode = (data: any) => {
+  Object.keys(data).forEach((key) => {
+    if (data[key]?.kode && data[key]?.kodeverk) {
+      // eslint-disable-next-line no-param-reassign
+      data[key] = data[key].kode;
+    }
+    if (typeof data[key] === 'object' && data[key] !== null) {
+      konverterKodeverkTilKode(data[key]);
+    }
+  });
+};
 
 /**
  * getAxiosHttpClientApi
@@ -15,6 +27,14 @@ const getAxiosHttpClientApi = (): HttpClientApi => {
     const config = { ...c };
     config.headers['Nav-Callid'] = navCallId;
     return config;
+  });
+
+  // TODO Temp kode til backend returnerer string i staden for Kodeverk
+  axiosInstance.interceptors.response.use((response: AxiosResponse): any => {
+    if (response.status === 200 && response.config.url.includes('/api/') && !response.config.url.includes('/api/kodeverk')) {
+      konverterKodeverkTilKode(response.data);
+    }
+    return response;
   });
 
   const restMethods = initRestMethods(axiosInstance);

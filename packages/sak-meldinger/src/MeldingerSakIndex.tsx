@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 
 import Messages, { FormValues, Template } from './components/Messages';
@@ -13,11 +13,11 @@ interface OwnProps {
   submitCallback: (values: FormValues) => void;
   recipients: string[];
   templates?: Template[];
-  sprakKode: Kodeverk;
+  sprakKode: string;
   previewCallback: (mottaker?: string, brevmalkode?: string, fritekst?: string, arsakskode?: string) => void;
   isKontrollerRevurderingApOpen?: boolean;
   revurderingVarslingArsak: KodeverkMedNavn[];
-  fagsakYtelseType: Kodeverk;
+  fagsakYtelseType: string;
   kanVeilede: boolean;
   meldingFormData?: any,
   setMeldingForData: (data?: any) => void,

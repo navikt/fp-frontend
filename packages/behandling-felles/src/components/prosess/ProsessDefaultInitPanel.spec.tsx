@@ -16,10 +16,7 @@ import ProsessDefaultInitPanel from './ProsessDefaultInitPanel';
 const behandling = {
   uuid: '1',
   versjon: 2,
-  status: {
-    kode: behandlingStatus.OPPRETTET,
-    kodeverk: '',
-  },
+  status: behandlingStatus.OPPRETTET,
   behandlingPaaVent: false,
 } as Behandling;
 
@@ -35,10 +32,7 @@ const defaultProps = {
   isReadOnly: false,
   readOnlySubmitButton: false,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.VURDER_FEILUTBETALING,
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.VURDER_FEILUTBETALING,
     erAktivt: true,
     kanLoses: true,
   }] as Aksjonspunkt[],

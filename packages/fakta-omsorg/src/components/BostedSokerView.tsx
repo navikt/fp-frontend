@@ -59,7 +59,7 @@ export const BostedSokerView: FunctionComponent<OwnProps & WrappedComponentProps
                 type="fokus"
                 typo="undertekst"
               >
-                {sivilstandTypes.find((s) => s.kode === personopplysninger.sivilstand.kode).navn}
+                {sivilstandTypes.find((s) => s.kode === personopplysninger.sivilstand).navn}
               </Etikettfokus>
             </Tooltip>
           </div>

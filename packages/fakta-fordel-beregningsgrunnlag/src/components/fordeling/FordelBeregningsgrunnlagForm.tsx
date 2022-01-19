@@ -210,7 +210,7 @@ export class FordelBeregningsgrunnlagForm extends Component<OwnProps, OwnState> 
     if (!fordelBGPerioder) {
       return initialValues;
     }
-    const harKunYtelse = bg.aktivitetStatus.some((status) => status.kode === aktivitetStatuser.KUN_YTELSE);
+    const harKunYtelse = bg.aktivitetStatus.some((status) => status === aktivitetStatuser.KUN_YTELSE);
     const bgPerioder = bg.beregningsgrunnlagPeriode;
     slaaSammenPerioder(fordelBGPerioder, bgPerioder).forEach((periode, index) => {
       const bgPeriode = finnRiktigBgPeriode(periode, bgPerioder);

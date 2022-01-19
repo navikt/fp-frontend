@@ -1,5 +1,3 @@
-import Kodeverk from './kodeverkTsType';
-
 export type BeregningsresultatPeriodeAndel = Readonly<{
   arbeidsgiverReferanse: string;
   refusjon: number;
@@ -11,10 +9,10 @@ export type BeregningsresultatPeriodeAndel = Readonly<{
   };
   utbetalingsgrad: number;
   sisteUtbetalingsdato: string;
-  aktivitetStatus: Kodeverk;
+  aktivitetStatus: string;
   arbeidsforholdId: string;
   eksternArbeidsforholdId: string;
-  arbeidsforholdType: Kodeverk;
+  arbeidsforholdType: string;
   stillingsprosent: number;
 }>;
 

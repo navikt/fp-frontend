@@ -55,8 +55,8 @@ const OpplysningspliktProsessStegInitPanel: FunctionComponent<OwnProps & Prosess
     prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' })}
     skalPanelVisesIMeny={(data) => {
       const defaultSkalVises = skalViseProsessPanel(data.aksjonspunkter, VILKAR_KODER, data.vilkar);
-      const isRevurdering = behandlingType.REVURDERING === data.behandling.type.kode;
-      const hasAp = data.aksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU);
+      const isRevurdering = behandlingType.REVURDERING === data.behandling.type;
+      const hasAp = data.aksjonspunkter.some((ap) => ap.definisjon === aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU);
       return !(isRevurdering && !hasAp) || defaultSkalVises;
     }}
     renderPanel={(data) => (

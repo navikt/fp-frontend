@@ -11,32 +11,17 @@ import historikkinnslagType from './kodeverk/historikkinnslagType';
 
 const historikkInnslag = [{
   behandlingUuid: '999951',
-  type: {
-    kode: 'NYE_REGOPPLYSNINGER',
-    kodeverk: 'HISTORIKKINNSLAG_TYPE',
-  },
-  aktoer: {
-    kode: 'VL',
-    kodeverk: 'HISTORIKK_AKTOER',
-  },
-  kjoenn: {
-    kode: '-',
-    kodeverk: 'BRUKER_KJOENN',
-  },
+  type: 'NYE_REGOPPLYSNINGER',
+  aktoer: 'VL',
+  kjoenn: '-',
   opprettetAv: 'Srvengangsstonad',
   opprettetTidspunkt: '2019-09-19T12:16:14.499',
   dokumentLinks: [],
   historikkinnslagDeler: [
     {
-      begrunnelse: {
-        kode: 'SAKSBEH_START_PA_NYTT',
-        kodeverk: 'HISTORIKK_BEGRUNNELSE_TYPE',
-      },
+      begrunnelse: 'SAKSBEH_START_PA_NYTT',
       hendelse: {
-        navn: {
-          kode: 'NYE_REGOPPLYSNINGER',
-          kodeverk: 'HISTORIKKINNSLAG_TYPE',
-        },
+        navn: 'NYE_REGOPPLYSNINGER',
       },
       opplysninger: [],
       endredeFelter: [],
@@ -45,18 +30,9 @@ const historikkInnslag = [{
 },
 {
   behandlingUuid: '999951',
-  type: {
-    kode: 'INNSYN_OPPR',
-    kodeverk: 'HISTORIKKINNSLAG_TYPE',
-  },
-  aktoer: {
-    kode: 'SBH',
-    kodeverk: 'HISTORIKK_AKTOER',
-  },
-  kjoenn: {
-    kode: '-',
-    kodeverk: 'BRUKER_KJOENN',
-  },
+  type: 'INNSYN_OPPR',
+  aktoer: 'SBH',
+  kjoenn: '-',
   opprettetAv: 'Z991110',
   opprettetTidspunkt: '2019-09-18T15:25:31.291',
   dokumentLinks: [],
@@ -64,10 +40,7 @@ const historikkInnslag = [{
     {
       begrunnelseFritekst: 'Krav om innsyn mottatt 18.09.2019',
       hendelse: {
-        navn: {
-          kode: 'INNSYN_OPPR',
-          kodeverk: 'HISTORIKKINNSLAG_TYPE',
-        },
+        navn: 'INNSYN_OPPR',
       },
       opplysninger: [],
       endredeFelter: [],
@@ -76,18 +49,9 @@ const historikkInnslag = [{
 },
 {
   behandlingUuid: '999952',
-  type: {
-    kode: 'BEH_STARTET',
-    kodeverk: 'HISTORIKKINNSLAG_TYPE',
-  },
-  aktoer: {
-    kode: 'SOKER',
-    kodeverk: 'HISTORIKK_AKTOER',
-  },
-  kjoenn: {
-    kode: 'K',
-    kodeverk: 'BRUKER_KJOENN',
-  },
+  type: 'BEH_STARTET',
+  aktoer: 'SOKER',
+  kjoenn: 'K',
   opprettetAv: 'Srvengangsstonad',
   opprettetTidspunkt: '2019-09-18T13:12:48.874',
   dokumentLinks: [
@@ -102,10 +66,7 @@ const historikkInnslag = [{
   historikkinnslagDeler: [
     {
       hendelse: {
-        navn: {
-          kode: 'BEH_STARTET',
-          kodeverk: 'HISTORIKKINNSLAG_TYPE',
-        },
+        navn: 'BEH_STARTET',
       },
       opplysninger: [],
       endredeFelter: [],
@@ -168,45 +129,24 @@ export const HistorikkinnslagAktivitetskrav = Template.bind({});
 HistorikkinnslagAktivitetskrav.args = {
   historikkFpSak: [{
     behandlingUuid: '999951',
-    type: {
-      kode: historikkinnslagType.AVKLART_AKTIVITETSKRAV,
-      kodeverk: 'HISTORIKKINNSLAG_TYPE',
-    },
-    aktoer: {
-      kode: 'SOKER',
-      kodeverk: 'HISTORIKK_AKTOER',
-    },
-    kjoenn: {
-      kode: 'K',
-      kodeverk: 'BRUKER_KJOENN',
-    },
+    type: historikkinnslagType.AVKLART_AKTIVITETSKRAV,
+    aktoer: 'SOKER',
+    kjoenn: 'K',
     opprettetAv: 'Srvengangsstonad',
     opprettetTidspunkt: '2019-09-19T12:16:14.499',
     dokumentLinks: [],
     historikkinnslagDeler: [{
       begrunnelseFritekst: 'Dette er en begrunnelse',
       opplysninger: [{
-        opplysningType: {
-          kode: historikkOpplysningTypeCodes.UTTAK_PERIODE_FOM.kode,
-          kodeverk: 'HISTORIKK_OPPLYSNING_TYPE',
-        },
+        opplysningType: historikkOpplysningTypeCodes.UTTAK_PERIODE_FOM.kode,
         tilVerdi: '05.01.2021',
       }, {
-        opplysningType: {
-          kode: historikkOpplysningTypeCodes.UTTAK_PERIODE_TOM.kode,
-          kodeverk: 'HISTORIKK_OPPLYSNING_TYPE',
-        },
+        opplysningType: historikkOpplysningTypeCodes.UTTAK_PERIODE_TOM.kode,
         tilVerdi: '19.01.2021',
       }],
-      skjermlenke: {
-        kode: skjermlenkeCodes.FAKTA_OM_AKTIVITETSKRAV.kode,
-        kodeverk: 'SKJERMLENKE_TYPE',
-      },
+      skjermlenke: skjermlenkeCodes.FAKTA_OM_AKTIVITETSKRAV.kode,
       endredeFelter: [{
-        endretFeltNavn: {
-          kode: 'AKTIVITETSKRAV_AVKLARING',
-          kodeverk: 'HISTORIKK_ENDRET_FELT_TYPE',
-        },
+        endretFeltNavn: 'AKTIVITETSKRAV_AVKLARING',
         klNavn: 'HISTORIKK_ENDRET_FELT_TYPE',
         fraVerdi: undefined,
         tilVerdi: 'I_AKTIVITET',
@@ -221,48 +161,27 @@ export const HistorikkinnslagForeldelse = Template.bind({});
 HistorikkinnslagForeldelse.args = {
   historikkFpTilbake: [{
     behandlingUuid: '999951',
-    type: {
-      kode: historikkinnslagType.FORELDELSE,
-      kodeverk: 'HISTORIKKINNSLAG_TYPE',
-    },
-    aktoer: {
-      kode: 'SOKER',
-      kodeverk: 'HISTORIKK_AKTOER',
-    },
-    kjoenn: {
-      kode: 'K',
-      kodeverk: 'BRUKER_KJOENN',
-    },
+    type: historikkinnslagType.FORELDELSE,
+    aktoer: 'SOKER',
+    kjoenn: 'K',
     opprettetAv: 'Srvengangsstonad',
     opprettetTidspunkt: '2019-09-19T12:16:14.499',
     dokumentLinks: [],
     historikkinnslagDeler: [{
-      skjermlenke: {
-        kode: 'FORELDELSE',
-      },
+      skjermlenke: 'FORELDELSE',
       endredeFelter: [{
-        endretFeltNavn: {
-          kode: 'feltkode',
-        },
+        endretFeltNavn: 'feltkode',
         fraVerdi: 'Ja',
         tilVerdi: 'Nei',
       }, {
-        endretFeltNavn: {
-          kode: 'Anna feltkode',
-        },
+        endretFeltNavn: 'Anna feltkode',
         tilVerdi: 'Dette er en ny verdi',
       }],
       opplysninger: [{
-        opplysningType: {
-          kode: historikkOpplysningTypeCodes.PERIODE_FOM.kode,
-          kodeverk: '',
-        },
+        opplysningType: historikkOpplysningTypeCodes.PERIODE_FOM.kode,
         tilVerdi: '10.10.2018',
       }, {
-        opplysningType: {
-          kode: historikkOpplysningTypeCodes.PERIODE_TOM.kode,
-          tilVerdi: '10.12.2018',
-        },
+        opplysningType: historikkOpplysningTypeCodes.PERIODE_TOM.kode,
       }],
     }] as HistorikkinnslagDel[],
   }],
@@ -273,59 +192,32 @@ export const HistorikkinnslagTilbakekreving = Template.bind({});
 HistorikkinnslagTilbakekreving.args = {
   historikkFpTilbake: [{
     behandlingUuid: '999951',
-    type: {
-      kode: historikkinnslagType.TILBAKEKREVING,
-      kodeverk: 'HISTORIKKINNSLAG_TYPE',
-    },
-    aktoer: {
-      kode: 'SOKER',
-      kodeverk: 'HISTORIKK_AKTOER',
-    },
-    kjoenn: {
-      kode: 'K',
-      kodeverk: 'BRUKER_KJOENN',
-    },
+    type: historikkinnslagType.TILBAKEKREVING,
+    aktoer: 'SOKER',
+    kjoenn: 'K',
     opprettetAv: 'Srvengangsstonad',
     opprettetTidspunkt: '2019-09-19T12:16:14.499',
     dokumentLinks: [],
     historikkinnslagDeler: [{
-      skjermlenke: {
-        kode: 'TILBAKEKREVING',
-      },
+      skjermlenke: 'TILBAKEKREVING',
       endredeFelter: [{
-        endretFeltNavn: {
-          kode: historikkEndretFeltType.ER_VILKARENE_TILBAKEKREVING_OPPFYLT,
-        },
+        endretFeltNavn: historikkEndretFeltType.ER_VILKARENE_TILBAKEKREVING_OPPFYLT,
         fraVerdi: 'Ja',
         tilVerdi: 'Nei',
       }, {
-        endretFeltNavn: {
-          kode: 'Anna feltkode',
-        },
+        endretFeltNavn: 'Anna feltkode',
         tilVerdi: 'Dette er ny verdi',
       }],
       opplysninger: [{
-        opplysningType: {
-          kode: historikkOpplysningTypeCodes.PERIODE_FOM.kode,
-          kodeverk: '',
-        },
+        opplysningType: historikkOpplysningTypeCodes.PERIODE_FOM.kode,
         tilVerdi: '10.10.2018',
       }, {
-        opplysningType: {
-          kode: historikkOpplysningTypeCodes.PERIODE_TOM.kode,
-          tilVerdi: '10.12.2018',
-        },
+        opplysningType: historikkOpplysningTypeCodes.PERIODE_TOM.kode,
       }, {
-        opplysningType: {
-          kode: historikkOpplysningTypeCodes.TILBAKEKREVING_OPPFYLT_BEGRUNNELSE.kode,
-          tilVerdi: 'test',
-        },
+        opplysningType: historikkOpplysningTypeCodes.TILBAKEKREVING_OPPFYLT_BEGRUNNELSE.kode,
       },
       {
-        opplysningType: {
-          kode: historikkOpplysningTypeCodes.SÆRLIG_GRUNNER_BEGRUNNELSE.kode,
-          tilVerdi: 'test',
-        },
+        opplysningType: historikkOpplysningTypeCodes.SÆRLIG_GRUNNER_BEGRUNNELSE.kode,
       }],
     }] as HistorikkinnslagDel[],
   }],

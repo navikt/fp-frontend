@@ -65,7 +65,7 @@ LonnsendringForm.buildInitialValues = (beregningsgrunnlag: Beregningsgrunnlag): 
   if (!alleAndeler || alleAndeler.length < 1) {
     return initialValues;
   }
-  const alleATAndeler = alleAndeler.filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER);
+  const alleATAndeler = alleAndeler.filter((andel) => andel.aktivitetstatus === aktivitetStatus.ARBEIDSTAKER);
   if (!alleATAndeler || alleATAndeler.length < 1) {
     return initialValues;
   }

@@ -13,7 +13,7 @@ import { required } from '@fpsak-frontend/utils';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import bType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
-import { KodeverkMedNavn, Kodeverk } from '@fpsak-frontend/types';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import styles from './nyBehandlingModal.less';
 
@@ -69,7 +69,7 @@ const TilbakekrevingRevurderingArsaker = [
 ];
 
 export const getBehandlingAarsaker = (
-  ytelseType: Kodeverk,
+  ytelseType: string,
   alleRevurderingArsaker: KodeverkMedNavn[],
   alleTilbakekrevingRevurderingArsaker: KodeverkMedNavn[],
   valgtBehandlingType?: string,
@@ -83,8 +83,8 @@ export const getBehandlingAarsaker = (
   }
 
   if (valgtBehandlingType === bType.REVURDERING) {
-    const isForeldrepenger = ytelseType.kode === fagsakYtelseType.FORELDREPENGER;
-    const isSvangerskap = ytelseType.kode === fagsakYtelseType.SVANGERSKAPSPENGER;
+    const isForeldrepenger = ytelseType === fagsakYtelseType.FORELDREPENGER;
+    const isSvangerskap = ytelseType === fagsakYtelseType.SVANGERSKAPSPENGER;
     let manuelleRevurderingsArsaker = isForeldrepenger ? manuelleRevurderingsArsakerFP : manuelleRevurderingsArsakerES;
     if (isSvangerskap) {
       manuelleRevurderingsArsaker = manuelleRevurderingsArsakerSVP;
@@ -104,7 +104,7 @@ export const getBehandlingTyper = (
 const kanOppretteBehandlingstype = (
   behandlingOppretting: BehandlingOppretting[],
   behandlingTypeKode: string,
-): boolean => behandlingOppretting.some((bo) => bo.behandlingType.kode === behandlingTypeKode && bo.kanOppretteBehandling);
+): boolean => behandlingOppretting.some((bo) => bo.behandlingType === behandlingTypeKode && bo.kanOppretteBehandling);
 
 export const getEnabledBehandlingstyper = (
   behandlingstyper: KodeverkMedNavn[],
@@ -120,7 +120,7 @@ export const getEnabledBehandlingstyper = (
   .filter((b) => (b.kode === bType.REVURDERING ? kanOppretteBehandlingstype(behandlingOppretting, bType.REVURDERING) : true));
 
 export type BehandlingOppretting = Readonly<{
-  behandlingType: Kodeverk;
+  behandlingType: string;
   kanOppretteBehandling: boolean;
 }>
 
@@ -131,12 +131,12 @@ export type FormValues = {
 }
 
 interface OwnProps {
-  ytelseType: Kodeverk;
+  ytelseType: string;
   saksnummer: string;
   cancelEvent: () => void;
   submitCallback: (data: {
     eksternUuid?: string,
-    fagsakYtelseType: Kodeverk,
+    fagsakYtelseType: string,
   } & FormValues) => void;
   behandlingOppretting: BehandlingOppretting[];
   behandlingstyper: KodeverkMedNavn[];
@@ -146,7 +146,7 @@ interface OwnProps {
     kanBehandlingOpprettes: boolean;
     kanRevurderingOpprettes: boolean;
   };
-  behandlingType?: Kodeverk;
+  behandlingType?: string;
   behandlingUuid?: string;
   uuidForSistLukkede?: string;
   erTilbakekrevingAktivert: boolean;
@@ -184,7 +184,7 @@ export const NyBehandlingModal: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const erTilbakekreving = behandlingType?.kode === bType.TILBAKEKREVING || behandlingType?.kode === bType.TILBAKEKREVING_REVURDERING;
+  const erTilbakekreving = behandlingType === bType.TILBAKEKREVING || behandlingType === bType.TILBAKEKREVING_REVURDERING;
 
   useEffect(() => {
     if (erTilbakekrevingAktivert) {

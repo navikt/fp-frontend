@@ -18,8 +18,9 @@ import {
 import {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
-  BeregningsgrunnlagAndel, BeregningsgrunnlagArbeidsforhold,
-  BeregningsgrunnlagPeriodeProp, Kodeverk,
+  BeregningsgrunnlagAndel,
+  BeregningsgrunnlagArbeidsforhold,
+  BeregningsgrunnlagPeriodeProp,
 } from '@fpsak-frontend/types';
 import createVisningsnavnForAktivitet from '../../util/createVisningsnavnForAktivitet';
 import NaturalytelsePanel from './NaturalytelsePanel';
@@ -41,7 +42,7 @@ const finnAndelerSomSkalVises = (andeler: BeregningsgrunnlagAndel[]): Beregnings
     return [];
   }
   return andeler
-    .filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER)
+    .filter((andel) => andel.aktivitetStatus === aktivitetStatus.ARBEIDSTAKER)
     .filter((andel) => andelErIkkeTilkommetEllerLagtTilAvSBH(andel));
 };
 
@@ -75,7 +76,7 @@ const createArbeidsStillingsNavnOgProsent = (arbeidsforhold: BeregningsgrunnlagA
 
 const lagVisningForAndel = (andel: BeregningsgrunnlagAndel,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  getKodeverknavn: (kodeverk: Kodeverk) => string): string => {
+  getKodeverknavn: (kodeverk: string) => string): string => {
   const arbeidsforholdInfo = arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent];
   if (!arbeidsforholdInfo) {
     return andel.arbeidsforhold.arbeidsforholdType ? getKodeverknavn(andel.arbeidsforhold.arbeidsforholdType) : '';
@@ -84,7 +85,7 @@ const lagVisningForAndel = (andel: BeregningsgrunnlagAndel,
 };
 
 const createArbeidsIntektRows = (relevanteAndeler: BeregningsgrunnlagAndel[],
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kodeverk: string) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement[] => {
   const beregnetAarsinntekt = relevanteAndeler.reduce((acc, andel) => acc + andel.beregnetPrAar, 0);
   const beregnetMaanedsinntekt = beregnetAarsinntekt ? beregnetAarsinntekt / 12 : 0;
@@ -178,7 +179,7 @@ interface StaticFunctions {
 }
 
 type MappedOwnProps = {
-  getKodeverknavn: (kodeverk: Kodeverk) => string;
+  getKodeverknavn: (kodeverk: string) => string;
 }
 
 type OwnProps = {

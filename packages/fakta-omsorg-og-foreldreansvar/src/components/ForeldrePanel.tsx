@@ -19,7 +19,7 @@ const lagSøkerdata = (personopplysninger: PersonopplysningerBasis) => {
     navn: personopplysninger.navn,
     dodsdato: personopplysninger.dødsdato,
     adresse: addresses[opplysningAdresseType.POSTADRESSE] || addresses[opplysningAdresseType.BOSTEDSADRESSE],
-    erMor: personopplysninger.kjønn.kode === navBrukerKjonn.KVINNE,
+    erMor: personopplysninger.kjønn === navBrukerKjonn.KVINNE,
   };
 };
 

@@ -5,9 +5,7 @@ import moment from 'moment';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import {
-  AlleKodeverk, ArbeidsforholdPermisjon, Kodeverk,
-} from '@fpsak-frontend/types';
+import { AlleKodeverk, ArbeidsforholdPermisjon } from '@fpsak-frontend/types';
 
 import CustomArbeidsforhold from '../../typer/CustomArbeidsforholdTsType';
 import ArbeidsforholdKilder from '../../kodeverk/arbeidsforholdKilder';
@@ -19,7 +17,7 @@ type PermisjonValues = {
   permisjonType: string;
 }
 
-const utledPermisjonValues = (permisjon: ArbeidsforholdPermisjon, getKodeverknavn: (kodeverk: Kodeverk) => string): PermisjonValues => {
+const utledPermisjonValues = (permisjon: ArbeidsforholdPermisjon, getKodeverknavn: (kodeverk: string) => string): PermisjonValues => {
   const kodeverknavn = getKodeverknavn(permisjon.type);
   const permisjonType = kodeverknavn !== undefined && kodeverknavn !== null ? kodeverknavn.toLowerCase() : '';
   return {
@@ -38,7 +36,7 @@ const harPermisjonOgMottattIM = (arbeidsforhold: CustomArbeidsforhold): boolean 
   && arbeidsforhold.permisjoner.length === 1
   && (arbeidsforhold.mottattDatoInntektsmelding !== undefined && arbeidsforhold.mottattDatoInntektsmelding !== null);
 
-const lagAksjonspunktMessage = (arbeidsforhold: CustomArbeidsforhold, getKodeverknavn: (kodeverk: Kodeverk) => string): ReactElement | null => {
+const lagAksjonspunktMessage = (arbeidsforhold: CustomArbeidsforhold, getKodeverknavn: (kodeverk: string) => string): ReactElement | null => {
   if (!arbeidsforhold || (!arbeidsforhold.tilVurdering && !arbeidsforhold.erEndret)) {
     return undefined;
   }

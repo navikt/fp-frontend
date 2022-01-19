@@ -60,7 +60,7 @@ const createItems = (opptjeningPeriods: FastsattOpptjeningAktivitet[], opptjenin
   const items = opptjeningPeriods.map((ap): Item => ({
     start: moment(ap.fom),
     end: moment(ap.tom),
-    className: classNameGenerator(ap.klasse.kode),
+    className: classNameGenerator(ap.klasse),
     content: '',
     data: ap,
   }));

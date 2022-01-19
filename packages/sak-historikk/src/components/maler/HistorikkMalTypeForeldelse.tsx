@@ -30,8 +30,8 @@ const HistorikkMalTypeForeldelse: FunctionComponent<HistorikkMal> = ({
       />
       {historikkinnslagDeler.map((historikkinnslagDel) => {
         const { begrunnelseFritekst, opplysninger, endredeFelter } = historikkinnslagDel;
-        const periodeFom = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.PERIODE_FOM.kode)?.tilVerdi;
-        const periodeTom = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.PERIODE_TOM.kode)?.tilVerdi;
+        const periodeFom = opplysninger.find((o) => o.opplysningType === historikkOpplysningTypeCodes.PERIODE_FOM.kode)?.tilVerdi;
+        const periodeTom = opplysninger.find((o) => o.opplysningType === historikkOpplysningTypeCodes.PERIODE_TOM.kode)?.tilVerdi;
 
         return (
           <div key={periodeFom + periodeTom}>
@@ -49,7 +49,7 @@ const HistorikkMalTypeForeldelse: FunctionComponent<HistorikkMal> = ({
               const { endretFeltNavn, fraVerdi, tilVerdi } = felt;
 
               return (
-                <React.Fragment key={endretFeltNavn.kode}>
+                <React.Fragment key={endretFeltNavn}>
                   <Normaltekst>
                     <FormattedMessage
                       id={felt.fraVerdi ? 'Historikk.Template.Tilbakekreving.ChangedFromTo' : 'Historikk.Template.Tilbakekreving.FieldSetTo'}

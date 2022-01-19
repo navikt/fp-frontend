@@ -88,7 +88,7 @@ describe('<BeregningsresultatTable>', () => {
     const beregningsgrunnlagPerioder = mockPeriode();
     const dekningsgrad = 100;
     const aktivitetStatusList = [{ kode: 'AT', kodeverk: 'AKTIVITET_STATUS' }];
-    vilkaarBG.vilkarStatus.kode = vilkarUtfallType.OPPFYLT;
+    vilkaarBG.vilkarstatus = vilkarUtfallType.OPPFYLT;
     beregningsgrunnlagPerioder[0].beregningsgrunnlagPrStatusOgAndel[0].skalFastsetteGrunnlag = false;
     const selectorData = createBeregningTableData.resultFunc(
       beregningsgrunnlagPerioder,
@@ -107,11 +107,11 @@ describe('<BeregningsresultatTable>', () => {
     });
   });
   it('Skal teste at create table returnerer en at rad ved Brukers Andel', () => {
-    vilkaarBG.vilkarStatus.kode = vilkarUtfallType.IKKE_VURDERT;
+    vilkaarBG.vilkarstatus = vilkarUtfallType.IKKE_VURDERT;
     const beregningsgrunnlagPerioder = mockPeriode();
     const dekningsgrad = 80;
     const aktivitetStatusList = [{ kode: 'BA', kodeverk: 'AKTIVITET_STATUS' }];
-    beregningsgrunnlagPerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetStatus.kode = 'BA';
+    beregningsgrunnlagPerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetstatus = 'BA';
     const selectorData = createBeregningTableData.resultFunc(
       beregningsgrunnlagPerioder,
       aktivitetStatusList,
@@ -168,7 +168,7 @@ describe('<BeregningsresultatTable>', () => {
     });
   });
   it('Skal teste at create table returnerer riktig ved AT < SN', () => {
-    vilkaarBG.vilkarStatus.kode = vilkarUtfallType.IKKE_VURDERT;
+    vilkaarBG.vilkarstatus = vilkarUtfallType.IKKE_VURDERT;
     const beregningsgrunnlagPerioder = mockPeriode();
     const dekningsgrad = 80;
     const aktivitetStatusList = [{ kode: 'AT', kodeverk: 'AKTIVITET_STATUS' }, { kode: 'SN', kodeverk: 'AKTIVITET_STATUS' }];
@@ -268,7 +268,7 @@ describe('<BeregningsresultatTable>', () => {
     });
   });
   it('Skal teste at create table returnerer riktig data ved AT FL SN med redusert og avkortet', () => {
-    vilkaarBG.vilkarStatus.kode = vilkarUtfallType.OPPFYLT;
+    vilkaarBG.vilkarstatus = vilkarUtfallType.OPPFYLT;
     const beregningsgrunnlagPerioder = mockPeriode();
     const dekningsgrad = 80;
     const aktivitetStatusList = [
@@ -338,7 +338,7 @@ describe('<BeregningsresultatTable>', () => {
   });
 
   it('Skal teste at create table returnerer riktig data ved AT FL > SN med redusert og avkortet', () => {
-    vilkaarBG.vilkarStatus.kode = vilkarUtfallType.OPPFYLT;
+    vilkaarBG.vilkarstatus = vilkarUtfallType.OPPFYLT;
     const beregningsgrunnlagPerioder = mockPeriode();
     const dekningsgrad = 80;
     const aktivitetStatusList = [
@@ -443,7 +443,7 @@ describe('<BeregningsresultatTable>', () => {
     );
     beregningsgrunnlagPerioder[0].beregningsgrunnlagPrStatusOgAndel[0].bruttoPrAar = 123000;
     beregningsgrunnlagPerioder[0].beregningsgrunnlagPrStatusOgAndel[1].bruttoPrAar = 223000;
-    beregningsgrunnlagPerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetStatus.kode = aktivitetStatus.DAGPENGER;
+    beregningsgrunnlagPerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetstatus = aktivitetStatus.DAGPENGER;
     const selectorData = createBeregningTableData.resultFunc(
       beregningsgrunnlagPerioder,
       aktivitetStatusList,
@@ -504,7 +504,7 @@ describe('<BeregningsresultatTable>', () => {
     beregningsgrunnlagPerioder[0].beregningsgrunnlagPrStatusOgAndel.push(
       snAndel,
     );
-    beregningsgrunnlagPerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetStatus.kode = aktivitetStatus.DAGPENGER;
+    beregningsgrunnlagPerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetstatus = aktivitetStatus.DAGPENGER;
     const selectorData = createBeregningTableData.resultFunc(
       beregningsgrunnlagPerioder,
       aktivitetStatusList,

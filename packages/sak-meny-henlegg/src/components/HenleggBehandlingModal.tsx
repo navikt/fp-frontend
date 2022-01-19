@@ -11,7 +11,7 @@ import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import { SelectField, TextAreaField, Form } from '@fpsak-frontend/form-hooks';
 import { hasValidText, maxLength, required } from '@fpsak-frontend/utils';
-import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
@@ -23,7 +23,7 @@ const maxLength1500 = maxLength(1500);
 
 const previewHenleggBehandlingDoc = (
   previewHenleggBehandling: (erHenleggelse: boolean, data: any) => void,
-  ytelseType: Kodeverk,
+  ytelseType: string,
   fritekst?: string,
   behandlingUuid?: string,
 ) => (e: React.MouseEvent | React.KeyboardEvent): void => {
@@ -56,11 +56,11 @@ const disableHovedKnapp = (
   return !(årsakKode && begrunnelse);
 };
 
-const getShowLink = (behandlingType: Kodeverk, arsakKode?: string, fritekst?: string): boolean => {
-  if (behandlingType.kode === BehandlingType.TILBAKEKREVING) {
+const getShowLink = (behandlingType: string, arsakKode?: string, fritekst?: string): boolean => {
+  if (behandlingType === BehandlingType.TILBAKEKREVING) {
     return behandlingResultatType.HENLAGT_FEILOPPRETTET === arsakKode;
   }
-  if (behandlingType.kode === BehandlingType.TILBAKEKREVING_REVURDERING) {
+  if (behandlingType === BehandlingType.TILBAKEKREVING_REVURDERING) {
     return behandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV === arsakKode && !!fritekst;
   }
 
@@ -83,10 +83,10 @@ const henleggArsakerPerBehandlingType = {
     behandlingResultatType.HENLAGT_SOKNAD_MANGLER, behandlingResultatType.MANGLER_BEREGNINGSREGLER],
 };
 
-export const getHenleggArsaker = (behandlingResultatTyper: KodeverkMedNavn[], behandlingType: Kodeverk, ytelseType: Kodeverk): KodeverkMedNavn[] => {
-  const typerForBehandlingType = henleggArsakerPerBehandlingType[behandlingType.kode];
+export const getHenleggArsaker = (behandlingResultatTyper: KodeverkMedNavn[], behandlingType: string, ytelseType: string): KodeverkMedNavn[] => {
+  const typerForBehandlingType = henleggArsakerPerBehandlingType[behandlingType];
   return typerForBehandlingType
-    .filter((type) => ytelseType.kode !== fagsakYtelseType.ENGANGSSTONAD || (ytelseType.kode === fagsakYtelseType.ENGANGSSTONAD
+    .filter((type) => ytelseType !== fagsakYtelseType.ENGANGSSTONAD || (ytelseType === fagsakYtelseType.ENGANGSSTONAD
       && type !== behandlingResultatType.HENLAGT_SOKNAD_MANGLER
       && type !== behandlingResultatType.MANGLER_BEREGNINGSREGLER))
     .flatMap((type) => {
@@ -106,9 +106,9 @@ interface PureOwnProps {
   cancelEvent: () => void;
   previewHenleggBehandling: (erHenleggelse: boolean, data: any) => void;
   behandlingUuid?: string;
-  ytelseType: Kodeverk;
+  ytelseType: string;
   behandlingResultatTyper: KodeverkMedNavn[];
-  behandlingType: Kodeverk;
+  behandlingType: string;
 }
 
 /**
@@ -171,7 +171,7 @@ const HenleggBehandlingModal: FunctionComponent<PureOwnProps> = ({
               />
             </Column>
           </Row>
-          {showHenleggelseFritekst(behandlingType.kode, årsakKode) && (
+          {showHenleggelseFritekst(behandlingType, årsakKode) && (
             <Row>
               <Column xs="8">
                 <div className={styles.fritekstTilBrevTextArea}>
@@ -191,7 +191,7 @@ const HenleggBehandlingModal: FunctionComponent<PureOwnProps> = ({
                 <Hovedknapp
                   mini
                   className={styles.button}
-                  disabled={disableHovedKnapp(behandlingType.kode, årsakKode, begrunnelse, fritekst)}
+                  disabled={disableHovedKnapp(behandlingType, årsakKode, begrunnelse, fritekst)}
                 >
                   {intl.formatMessage({ id: 'HenleggBehandlingModal.HenleggBehandlingSubmit' })}
                 </Hovedknapp>

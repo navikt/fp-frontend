@@ -185,7 +185,7 @@ const transformValuesFrilans = (values: FaktaOmBeregningAksjonspunktValues,
   const skalFastsetteInntektFrilans = values.vurderMottarYtelseValues[finnFrilansFieldName()];
   if (skalFastsetteInntektFrilans) {
     const frilansAndel = beregningsgrunnlag.beregningsgrunnlagPeriode[0].beregningsgrunnlagPrStatusOgAndel
-      .find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.FRILANSER);
+      .find((andel) => andel.aktivitetstatus === aktivitetStatus.FRILANSER);
     if (!fastsatteAndelsnr.includes(frilansAndel.andelsnr) && frilansMottarYtelse(values)) {
       const frilansInntekt = inntektVerdier.find((field) => field.andelsnr === frilansAndel.andelsnr);
       fastsatteAndelsnr.push(frilansAndel.andelsnr);

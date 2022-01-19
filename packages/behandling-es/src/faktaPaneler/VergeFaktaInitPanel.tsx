@@ -38,7 +38,7 @@ const VergeFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) => (
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.VERGE}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'RegistrereVergeInfoPanel.Info' })}
-    skalPanelVisesIMeny={(initData) => !!initData?.aksjonspunkter?.some((ap) => ap.definisjon.kode === AKSJONSPUNKT_KODER[0])}
+    skalPanelVisesIMeny={(initData) => !!initData?.aksjonspunkter?.some((ap) => ap.definisjon === AKSJONSPUNKT_KODER[0])}
     renderPanel={(data) => <VergeFaktaIndex {...data} />}
   />
 );

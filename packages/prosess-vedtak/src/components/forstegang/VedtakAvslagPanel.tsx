@@ -2,9 +2,7 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
-import {
-  AlleKodeverk, Vilkar, Behandlingsresultat, Kodeverk,
-} from '@fpsak-frontend/types';
+import { AlleKodeverk, Vilkar, Behandlingsresultat } from '@fpsak-frontend/types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
@@ -18,21 +16,21 @@ import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
 export const getAvslagArsak = (
   vilkar: Vilkar[],
   behandlingsresultat: Behandlingsresultat,
-  getKodeverknavn: (kodeverk: Kodeverk, undertype?: string) => string,
+  getKodeverknavn: (kodeverk: string, undertype?: string) => string,
 ): ReactElement | string => {
-  const avslatteVilkar = vilkar.filter((v) => v.vilkarStatus.kode === vilkarUtfallType.IKKE_OPPFYLT);
+  const avslatteVilkar = vilkar.filter((v) => v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT);
   if (avslatteVilkar.length === 0) {
     return <FormattedMessage id="VedtakForm.UttaksperioderIkkeGyldig" />;
   }
 
-  return `${getKodeverknavn(avslatteVilkar[0].vilkarType)}: ${getKodeverknavn(behandlingsresultat.avslagsarsak, avslatteVilkar[0].vilkarType.kode)}`;
+  return `${getKodeverknavn(avslatteVilkar[0].vilkarType)}: ${getKodeverknavn(behandlingsresultat.avslagsarsak, avslatteVilkar[0].vilkarType)}`;
 };
 
 interface OwnProps {
   behandlingStatusKode: string;
   vilkar: Vilkar[];
   behandlingsresultat: Behandlingsresultat;
-  språkKode: Kodeverk;
+  språkKode: string;
   isReadOnly: boolean;
   ytelseTypeKode: string;
   alleKodeverk: AlleKodeverk;

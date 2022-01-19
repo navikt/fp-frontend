@@ -97,7 +97,7 @@ const createColumns = (
   ));
 };
 
-const tableTitle = (mottaker: Mottaker): ReactElement | null => (mottaker.mottakerType.kode === mottakerTyper.ARBG
+const tableTitle = (mottaker: Mottaker): ReactElement | null => (mottaker.mottakerType === mottakerTyper.ARBG
   ? (
     <Normaltekst className={styles.tableTitle}>
       {`${mottaker.mottakerNavn} (${mottaker.mottakerNummer})`}
@@ -119,7 +119,7 @@ const avvikBruker = (ingenPerioderMedAvvik: boolean, mottakerTypeKode: string): 
 const getPeriodeFom = (periodeFom: string, nesteUtbPeriodeFom: string): string => (periodeFom || nesteUtbPeriodeFom);
 
 const getPeriod = (ingenPerioderMedAvvik: boolean, periodeFom: string, mottaker: Mottaker): { month: string, year: string}[] => {
-  const fomDato = avvikBruker(ingenPerioderMedAvvik, mottaker.mottakerType.kode)
+  const fomDato = avvikBruker(ingenPerioderMedAvvik, mottaker.mottakerType)
     ? moment(mottaker.nestUtbPeriodeTom).subtract(1, 'months').format()
     : getPeriodeFom(periodeFom, mottaker.nesteUtbPeriodeFom);
   return getRangeOfMonths(fomDato, mottaker.nestUtbPeriodeTom);
@@ -179,7 +179,7 @@ const AvregningTable: FunctionComponent<OwnProps> = ({
                       key={`rowIndex${fagIndex + 1}${rowIndex + 1}`}
                     >
                       <TableColumn>
-                        <FormattedMessage id={`Avregning.${fagOmråde.fagOmrådeKode.kode}.${rad.feltnavn}`} />
+                        <FormattedMessage id={`Avregning.${fagOmråde.fagOmrådeKode}.${rad.feltnavn}`} />
                       </TableColumn>
                       {createColumns(rad.resultaterPerMåned, rangeOfMonths, nesteMåned)}
                     </TableRow>

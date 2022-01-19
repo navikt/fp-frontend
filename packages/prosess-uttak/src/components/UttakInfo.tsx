@@ -13,7 +13,7 @@ import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidTyp
 import oppholdArsakType, { oppholdArsakKontoNavn } from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
-  ArbeidsgiverOpplysningerPerId, Kodeverk, KodeverkMedNavn, AlleKodeverk,
+  ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, AlleKodeverk,
 } from '@fpsak-frontend/types';
 
 import uttakArbeidTypeTekstCodes from '../utils/uttakArbeidTypeCodes';
@@ -27,10 +27,10 @@ const periodeStatusClassName = (periode: PeriodeMedClassName): string => {
     return styles.redDetailsPeriod;
   }
   if (periode.erOppfylt
-    || (periode.periodeResultatType.kode === periodeResultatType.INNVILGET && !periode.tilknyttetStortinget)) {
+    || (periode.periodeResultatType === periodeResultatType.INNVILGET && !periode.tilknyttetStortinget)) {
     return styles.greenDetailsPeriod;
   }
-  if (periode.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING || periode.tilknyttetStortinget) {
+  if (periode.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING || periode.tilknyttetStortinget) {
     return styles.orangeDetailsPeriod;
   }
   return styles.redDetailsPeriod;
@@ -40,7 +40,7 @@ const periodeIsInnvilget = (periode: PeriodeMedClassName): boolean => {
   if (periode.erOppfylt === false) {
     return false;
   }
-  if (periode.erOppfylt || (periode.periodeResultatType.kode === periodeResultatType.INNVILGET)) {
+  if (periode.erOppfylt || (periode.periodeResultatType === periodeResultatType.INNVILGET)) {
     return true;
   }
   return false;
@@ -53,8 +53,8 @@ const gradertArbforhold = (selectedItem: PeriodeMedClassName, arbeidsgiverOpplys
       arbeidsgiverReferanse, uttakArbeidType,
     } = selectedItem.gradertAktivitet;
 
-    if (uttakArbeidType && uttakArbeidType.kode !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
-      return <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType.kode]} />;
+    if (uttakArbeidType && uttakArbeidType !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
+      return <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType]} />;
     }
     if (arbeidsgiverReferanse && arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse]) {
       const {
@@ -69,13 +69,13 @@ const gradertArbforhold = (selectedItem: PeriodeMedClassName, arbeidsgiverOpplys
 
 const typePeriode = (
   selectedItem: PeriodeMedClassName,
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kodeverk: string) => string,
   kontoIkkeSatt?: boolean,
 ): ReactElement | string => {
-  if (selectedItem.utsettelseType.kode === '-' && !kontoIkkeSatt) {
+  if (selectedItem.utsettelseType === '-' && !kontoIkkeSatt) {
     return <FormattedMessage id="UttakActivity.Uttak" />;
   }
-  if (selectedItem.utsettelseType.kode !== '-') {
+  if (selectedItem.utsettelseType !== '-') {
     return <FormattedMessage id="UttakActivity.Utsettelse" values={{ utsettelseType: getKodeverknavn(selectedItem.utsettelseType) }} />;
   }
   if (kontoIkkeSatt) {
@@ -84,7 +84,7 @@ const typePeriode = (
   return '';
 };
 
-const isInnvilgetText = (selectedItemData: PeriodeMedClassName, getKodeverknavn: (kodeverk: Kodeverk) => string): ReactElement => {
+const isInnvilgetText = (selectedItemData: PeriodeMedClassName, getKodeverknavn: (kodeverk: string) => string): ReactElement => {
   if (periodeIsInnvilget(selectedItemData)) {
     return (
       <FormattedMessage
@@ -101,7 +101,7 @@ const isInnvilgetText = (selectedItemData: PeriodeMedClassName, getKodeverknavn:
   );
 };
 
-const stonadskonto = (selectedItem: PeriodeMedClassName, getKodeverknavn: (kodeverk: Kodeverk) => string, kontoIkkeSatt?: boolean): string => {
+const stonadskonto = (selectedItem: PeriodeMedClassName, getKodeverknavn: (kodeverk: string) => string, kontoIkkeSatt?: boolean): string => {
   let returnText = '';
   if (!kontoIkkeSatt) {
     returnText = getKodeverknavn(selectedItem.aktiviteter[0].stønadskontoType);
@@ -124,7 +124,7 @@ const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] => typer
   }) => <option value={kode} key={kode}>{oppholdArsakKontoNavn[kode]}</option>);
 
 const visGraderingIkkeInnvilget = (selectedItem: PeriodeMedClassName, readOnly: boolean, graderingInnvilget?: boolean): boolean => (
-  selectedItem.periodeResultatType.kode === periodeResultatType.INNVILGET
+  selectedItem.periodeResultatType === periodeResultatType.INNVILGET
     && selectedItem.gradertAktivitet
     && graderingInnvilget === false
     && readOnly
@@ -161,7 +161,7 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
 
   return (
     <div className={periodeStatusClassName(selectedItemData)}>
-      {selectedItemData.oppholdÅrsak.kode === '-'
+      {selectedItemData.oppholdÅrsak === '-'
           && (
             <Row>
               <Column xs="4">
@@ -256,7 +256,7 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
               </Element>
             </Column>
           </Row>
-          {selectedItemData.oppholdÅrsak.kode === '-'
+          {selectedItemData.oppholdÅrsak === '-'
               && (
                 <Row>
                   <Column xs="12">
@@ -280,7 +280,7 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
                       <FormattedMessage id="UttakActivity.Gradering" />
                     </Undertekst>
                   )}
-              {selectedItemData.oppholdÅrsak.kode !== '-'
+              {selectedItemData.oppholdÅrsak !== '-'
                   && (
                     <FormattedMessage
                       id={calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom).id}
@@ -310,7 +310,7 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
           )}
         </Column>
       </Row>
-      {selectedItemData.oppholdÅrsak.kode !== '-' && (
+      {selectedItemData.oppholdÅrsak !== '-' && (
         <div>
           <Row>
             <Column xs="12">
@@ -325,7 +325,7 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
                 label=""
                 bredde="m"
                 readOnly={readOnly}
-                value={selectedItemData.oppholdÅrsak.kode}
+                value={selectedItemData.oppholdÅrsak}
                 validate={[required, notDash]}
               />
             </Column>

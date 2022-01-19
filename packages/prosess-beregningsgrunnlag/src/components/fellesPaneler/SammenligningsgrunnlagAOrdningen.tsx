@@ -27,13 +27,13 @@ const GRAF_FARGE_YTELSE = '#C6C2BF';
 
 const lagSumRad = (månederMedInntekter: InntektsgrunnlagMåned[], relevanteStatuser: Inntektstyper): ReactElement => {
   const sumATAndeler = månederMedInntekter.flatMap((måned) => måned.inntekter)
-    .filter((innt) => innt.inntektAktivitetType.kode === inntektAktivitetType.ARBEID)
+    .filter((innt) => innt.inntektAktivitetType === inntektAktivitetType.ARBEID)
     .map(({ beløp }) => beløp).reduce((i1, i2) => i1 + i2, 0);
   const sumFLAndeler = månederMedInntekter.flatMap((måned) => måned.inntekter)
-    .filter((innt) => innt.inntektAktivitetType.kode === inntektAktivitetType.FRILANS)
+    .filter((innt) => innt.inntektAktivitetType === inntektAktivitetType.FRILANS)
     .map(({ beløp }) => beløp).reduce((i1, i2) => i1 + i2, 0);
   const sumYtelseAndeler = månederMedInntekter.flatMap((måned) => måned.inntekter)
-    .filter((innt) => innt.inntektAktivitetType.kode === inntektAktivitetType.YTELSE)
+    .filter((innt) => innt.inntektAktivitetType === inntektAktivitetType.YTELSE)
     .map(({ beløp }) => beløp).reduce((i1, i2) => i1 + i2, 0);
   return (
     <>
@@ -96,7 +96,7 @@ const finnInntektForStatus = (andeler: InntektsgrunnlagInntekt[], status?: strin
     return 0;
   }
   if (status) {
-    return andeler.filter((andel) => andel.inntektAktivitetType.kode === status).reduce((acc, atAndel) => acc + atAndel.beløp, 0);
+    return andeler.filter((andel) => andel.inntektAktivitetType === status).reduce((acc, atAndel) => acc + atAndel.beløp, 0);
   }
   return andeler.reduce((acc, atAndel) => acc + atAndel.beløp, 0);
 };
@@ -132,7 +132,7 @@ const lagOverskrift = (): ReactElement => (
 );
 
 const finnesInntektAvType = (måneder: InntektsgrunnlagMåned[], status: string): boolean => måneder.flatMap(((p) => p.inntekter))
-  .some((innt) => innt.inntektAktivitetType.kode === status);
+  .some((innt) => innt.inntektAktivitetType === status);
 
 type OwnProps = {
   sammenligningsGrunnlagInntekter: Inntektsgrunnlag;

@@ -42,7 +42,7 @@ const getP책klagdBehandling = (avsluttedeBehandlinger: AvsluttetBehandling[], p�
 
 export const erTilbakekreving = (avsluttedeBehandlinger: AvsluttetBehandling[], p책klagdVedtak: string): boolean => {
   const behandling = getP책klagdBehandling(avsluttedeBehandlinger, p책klagdVedtak);
-  return behandling && (behandling.type.kode === BehandlingType.TILBAKEKREVING || behandling.type.kode === BehandlingType.TILBAKEKREVING_REVURDERING);
+  return behandling && (behandling.type === BehandlingType.TILBAKEKREVING || behandling.type === BehandlingType.TILBAKEKREVING_REVURDERING);
 };
 
 export const p책klagdTilbakekrevingInfo = (avsluttedeBehandlinger: AvsluttetBehandling[], p책klagdVedtak: string): TilbakekrevingInfo | null => {
@@ -51,7 +51,7 @@ export const p책klagdTilbakekrevingInfo = (avsluttedeBehandlinger: AvsluttetBeha
   return erTilbakekrevingVedtak ? {
     tilbakekrevingUuid: behandling.uuid,
     tilbakekrevingVedtakDato: behandling.avsluttet,
-    tilbakekrevingBehandlingType: behandling.type.kode,
+    tilbakekrevingBehandlingType: behandling.type,
   } : null;
 };
 

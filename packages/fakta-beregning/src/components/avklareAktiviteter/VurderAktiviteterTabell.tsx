@@ -62,7 +62,7 @@ export const lagAktivitetFieldId = (aktivitet: BeregningAktivitet): string => {
     const aktivitetPrefiks = aktivitetFieldIdPrefiks(aktivitet, aktivitet.arbeidsgiverIdent ? aktivitet.arbeidsgiverIdent : aktivitet.aktørIdString);
     return appendAktivitetFieldIdSuffiks(aktivitetPrefiks, aktivitet);
   }
-  return appendAktivitetFieldIdSuffiks(aktivitet.arbeidsforholdType.kode, aktivitet);
+  return appendAktivitetFieldIdSuffiks(aktivitet.arbeidsforholdType, aktivitet);
 };
 
 /**
@@ -94,7 +94,7 @@ export const skalVurdereAktivitet = (aktivitet: BeregningAktivitet,
   if (!skalOverstyre && !harAksjonspunkt) {
     return false;
   }
-  if (aktivitet.arbeidsforholdType && aktivitet.arbeidsforholdType.kode === opptjeningAktivitetTyper.AAP) {
+  if (aktivitet.arbeidsforholdType && aktivitet.arbeidsforholdType === opptjeningAktivitetTyper.AAP) {
     return false;
   }
   if (skalOverstyre) {
@@ -207,9 +207,9 @@ const finnHeading = (aktiviteter: BeregningAktivitet[], erOverstyrt: boolean, sk
       />
     );
   }
-  const harAAP = aktiviteter.some((a) => a.arbeidsforholdType && a.arbeidsforholdType.kode === opptjeningAktivitetTyper.AAP);
+  const harAAP = aktiviteter.some((a) => a.arbeidsforholdType && a.arbeidsforholdType === opptjeningAktivitetTyper.AAP);
   const harVentelonnVartpenger = aktiviteter.some((aktivitet) => aktivitet.arbeidsforholdType
-    && aktivitet.arbeidsforholdType.kode === opptjeningAktivitetTyper.VENTELØNN_VARTPENGER);
+    && aktivitet.arbeidsforholdType === opptjeningAktivitetTyper.VENTELØNN_VARTPENGER);
   if (harAAP) {
     return (
       <FormattedMessage
@@ -312,7 +312,7 @@ export class VurderAktiviteterTabell extends Component<OwnProps & MappedOwnProps
         tom: values.aktiviteterValues[lagAktivitetFieldId(aktivitet)].tom != null
           ? values.aktiviteterValues[lagAktivitetFieldId(aktivitet)].tom
           : aktivitet.tom,
-        opptjeningAktivitetType: aktivitet.arbeidsforholdType ? aktivitet.arbeidsforholdType.kode : null,
+        opptjeningAktivitetType: aktivitet.arbeidsforholdType ? aktivitet.arbeidsforholdType : null,
         arbeidsgiverIdentifikator: aktivitet.aktørIdString ? aktivitet.aktørIdString : null,
         skalBrukes: erValgtSkjæringstidspunktLikEllerFørTomDato ? values.aktiviteterValues[lagAktivitetFieldId(aktivitet)].skalBrukes : true,
       }));

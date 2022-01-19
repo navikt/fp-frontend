@@ -37,7 +37,7 @@ const finnAndelerSomSkalVises = (andeler: BeregningsgrunnlagAndel[], statuser: s
   }
 
   return andeler
-    .filter((andel) => statuser.includes(andel.aktivitetStatus.kode))
+    .filter((andel) => statuser.includes(andel.aktivitetstatus))
     .filter((andel) => andelErIkkeTilkommetEllerLagtTilAvSBH(andel));
 };
 const beregnAarsintektForAktivitetStatuser = (alleAndelerIForstePeriode: BeregningsgrunnlagAndel[], statuser: string[]): number => {

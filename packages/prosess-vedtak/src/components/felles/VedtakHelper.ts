@@ -20,7 +20,7 @@ export const getTilbakekrevingText = (
   tilbakekrevingvalg?: TilbakekrevingValg,
 ): string => {
   if (tilbakekrevingvalg !== null && tilbakekrevingvalg !== undefined) {
-    if (tilbakekrevingMedInntrekk(tilbakekrevingvalg.videreBehandling.kode, simuleringResultat)) {
+    if (tilbakekrevingMedInntrekk(tilbakekrevingvalg.videreBehandling, simuleringResultat)) {
       return 'VedtakForm.TilbakekrInfotrygdOgInntrekk';
     }
     const getKodeverkNavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
@@ -31,5 +31,5 @@ export const getTilbakekrevingText = (
 
 export const hasIkkeOppfyltSoknadsfristvilkar = (
   vilkar: Vilkar[],
-): boolean => vilkar.some((v) => v.vilkarType.kode === vilkarType.SOKNADFRISTVILKARET
-  && v.vilkarStatus.kode === vilkarUtfallType.IKKE_OPPFYLT);
+): boolean => vilkar.some((v) => v.vilkarType === vilkarType.SOKNADFRISTVILKARET
+  && v.vilkarstatus === vilkarUtfallType.IKKE_OPPFYLT);

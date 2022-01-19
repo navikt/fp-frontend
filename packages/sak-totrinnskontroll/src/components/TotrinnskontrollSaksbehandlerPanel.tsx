@@ -9,7 +9,7 @@ import checkImg from '@fpsak-frontend/assets/images/check.svg';
 import avslattImg from '@fpsak-frontend/assets/images/avslaatt.svg';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 import {
-  Kodeverk, KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
+  KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 
 import getAksjonspunkttekst from './aksjonspunktTekster/aksjonspunktTekstUtleder';
@@ -20,7 +20,7 @@ interface OwnProps {
   totrinnskontrollSkjermlenkeContext: TotrinnskontrollSkjermlenkeContext[];
   erForeldrepengerFagsak: boolean;
   behandlingKlageVurdering?: KlageVurdering,
-  behandlingStatus: Kodeverk,
+  behandlingStatus: string,
   erTilbakekreving: boolean,
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
   skjemalenkeTyper: KodeverkMedNavn[];
@@ -92,14 +92,14 @@ const TotrinnskontrollSaksbehandlerPanel: FunctionComponent<OwnProps> = ({
                     ) : (
                       <div className={styles.approvalItem}>
                         {aksjonspunkt.vurderPaNyttArsaker && aksjonspunkt.vurderPaNyttArsaker.map((item) => (
-                          <div key={`${item.kode}${aksjonspunkt.aksjonspunktKode}`}>
+                          <div key={`${item}${aksjonspunkt.aksjonspunktKode}`}>
                             <span>
                               <Image
                                 src={avslattImg}
                                 className={styles.image}
                               />
                             </span>
-                            <span>{vurderArsaker.find((arsak) => item.kode === arsak.kode)?.navn}</span>
+                            <span>{vurderArsaker.find((arsak) => item === arsak.kode)?.navn}</span>
                           </div>
                         ))}
                       </div>

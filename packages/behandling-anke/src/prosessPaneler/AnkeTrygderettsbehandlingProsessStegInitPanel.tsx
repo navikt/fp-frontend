@@ -88,8 +88,8 @@ const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<OwnProps 
             lukkModal={() => { toggleAnkeModal(false); opneSokeside(); }}
             erFerdigbehandlet={false}
             venterTrygderett={!!data?.aksjonspunkter
-              && data.aksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktCodes.AUTO_VENT_ANKE_MERKNADER_FRA_BRUKER
-              && ap.status.kode === aksjonspunktStatus.OPPRETTET)}
+              && data.aksjonspunkter.some((ap) => ap.definisjon === aksjonspunktCodes.AUTO_VENT_ANKE_MERKNADER_FRA_BRUKER
+              && ap.status === aksjonspunktStatus.OPPRETTET)}
           />
           <AnkeTrygderettsbehandlingProsessIndex
             {...data}

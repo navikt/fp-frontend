@@ -2,7 +2,7 @@ import React, { FunctionComponent, useCallback } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 
 import NyBehandlingModal, { BehandlingOppretting, FormValues } from './components/NyBehandlingModal';
@@ -16,11 +16,11 @@ const intl = createIntl(messages);
 export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyNyBehandlingIndex.NyForstegangsbehandling' });
 
 interface OwnProps {
-  ytelseType: Kodeverk;
+  ytelseType: string;
   saksnummer: string;
   behandlingUuid?: string;
   behandlingVersjon?: number;
-  behandlingType?: Kodeverk;
+  behandlingType?: string;
   lagNyBehandling: (isTilbakekreving: boolean, data: {
     saksnummer: string;
     behandlingUuid?: string;

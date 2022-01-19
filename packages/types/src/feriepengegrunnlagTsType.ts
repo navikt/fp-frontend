@@ -1,7 +1,5 @@
-import Kodeverk from './kodeverkTsType';
-
 export type FeriepengegrunnlagAndel = Readonly<{
-  aktivitetStatus: Kodeverk;
+  aktivitetStatus: string;
   opptjeningsår: number;
   årsbeløp: number;
   erBrukerMottaker: boolean;

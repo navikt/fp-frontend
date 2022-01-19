@@ -8,7 +8,7 @@ import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { Normaltekst } from 'nav-frontend-typografi';
 import AlertStripe from 'nav-frontend-alertstriper';
 
-import { ArbeidsgiverOpplysningerPerId, FamilieHendelseSamling, Kodeverk } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, FamilieHendelseSamling } from '@fpsak-frontend/types';
 import { calcDays } from '@fpsak-frontend/utils';
 import {
   FlexColumn, FlexContainer, FlexRow, Image,
@@ -56,7 +56,7 @@ const renderValidationGraphic = (perioder: CustomUttakKontrollerFaktaPerioder[],
 };
 
 const getClassName = (periode: CustomUttakKontrollerFaktaPerioder, readOnly: boolean): string => {
-  if (periode.oppholdÅrsak && periode.oppholdÅrsak.kode !== '-') {
+  if (periode.oppholdÅrsak && periode.oppholdÅrsak !== '-') {
     return classNames('oppholdPeriodeContainer', { active: !periode.bekreftet && !readOnly });
   }
   return classNames('periodeContainer', { active: !periode.bekreftet && !readOnly });
@@ -75,7 +75,7 @@ interface OwnProps {
   isNyPeriodeFormOpen: boolean;
   vilkarForSykdomExists: boolean;
   getKodeverknavn: (...args: any[]) => any;
-  behandlingStatus: Kodeverk;
+  behandlingStatus: string;
   familiehendelse: FamilieHendelseSamling;
   sisteUttakdatoFørsteSeksUker: moment.Moment;
   endringsdato?: string;
@@ -156,7 +156,7 @@ const UttakPeriode: FunctionComponent<OwnProps & WrappedComponentProps> = ({
                     updatePeriode={updatePeriode}
                     cancelEditPeriode={cancelEditPeriode}
                     readOnly={readOnly}
-                    behandlingStatusKode={behandlingStatus.kode}
+                    behandlingStatusKode={behandlingStatus}
                     farSøkerFør6Uker={farSøkerFør6Uker}
                     sisteUttakdatoFørsteSeksUker={sisteUttakdatoFørsteSeksUker}
                     familiehendelse={familiehendelse}

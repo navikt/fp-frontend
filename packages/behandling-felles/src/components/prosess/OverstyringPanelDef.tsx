@@ -50,7 +50,7 @@ const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
   kanOverstyreAccess,
   overrideReadOnly,
 }) => {
-  const overstyrteAksjonspunkter = useMemo(() => aksjonspunkter.filter((ap) => aksjonspunktKode === ap.definisjon.kode),
+  const overstyrteAksjonspunkter = useMemo(() => aksjonspunkter.filter((ap) => aksjonspunktKode === ap.definisjon),
     [aksjonspunkter]);
 
   const standardProps = useStandardProsessPanelProps({
@@ -61,7 +61,7 @@ const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
   const skalVises = skalViseProsessPanel(overstyrteAksjonspunkter, vilkarKoder, vilkar);
 
   // @ts-ignore Avslagsårsaker er ikkje støtta i kodeverk-typen. Fiks!
-  const avslagsarsaker = filtrerAvslagsarsaker(standardProps.alleKodeverk[kodeverkTyper.AVSLAGSARSAK], vilkar[0].vilkarType.kode);
+  const avslagsarsaker = filtrerAvslagsarsaker(standardProps.alleKodeverk[kodeverkTyper.AVSLAGSARSAK], vilkar[0].vilkarType);
 
   if (!skalVises) {
     return null;

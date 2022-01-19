@@ -57,18 +57,18 @@ export const MedlemskapBostedSokerView: FunctionComponent<OwnProps & WrappedComp
           <div className={styles.etikettMargin}>
             <Tooltip content={intl.formatMessage({ id: 'Personstatus.Hjelpetekst' })} alignBottom>
               <Etikettfokus
-                className={personopplysninger.personstatus.kode === personstatusType.DOD ? styles.dodEtikett : ''}
+                className={personopplysninger.personstatus === personstatusType.DOD ? styles.dodEtikett : ''}
                 type="fokus"
                 typo="undertekst"
               >
-                {personopplysninger.personstatus.kode === personstatusType.UDEFINERT
+                {personopplysninger.personstatus === personstatusType.UDEFINERT
                   ? intl.formatMessage({ id: 'Personstatus.Ukjent' })
-                  : personstatusTypes.find((s) => s.kode === personopplysninger.personstatus.kode)?.navn}
+                  : personstatusTypes.find((s) => s.kode === personopplysninger.personstatus)?.navn}
               </Etikettfokus>
             </Tooltip>
           </div>
         )}
-        {(personopplysninger.region && personopplysninger.region.kode !== Region.UDEFINERT)
+        {(personopplysninger.region && personopplysninger.region !== Region.UDEFINERT)
           && (
           <div className={styles.etikettMargin}>
             <Tooltip content={intl.formatMessage({ id: 'BostedSokerView.Region' })} alignBottom>
@@ -76,7 +76,7 @@ export const MedlemskapBostedSokerView: FunctionComponent<OwnProps & WrappedComp
                 type="fokus"
                 typo="undertekst"
               >
-                {regionTypes.find((r) => r.kode === personopplysninger.region.kode).navn}
+                {regionTypes.find((r) => r.kode === personopplysninger.region).navn}
               </Etikettfokus>
             </Tooltip>
           </div>

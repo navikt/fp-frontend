@@ -342,7 +342,7 @@ export const transformValuesFaktaForATFLOgSN = (values: FaktaOmBeregningAksjonsp
 };
 
 const getVurderFaktaAksjonspunkt = createSelector([(ownProps: OwnProps) => ownProps.aksjonspunkter], (aksjonspunkter) => (aksjonspunkter
-  ? aksjonspunkter.find((ap) => ap.definisjon.kode === VURDER_FAKTA_FOR_ATFL_SN) : undefined));
+  ? aksjonspunkter.find((ap) => ap.definisjon === VURDER_FAKTA_FOR_ATFL_SN) : undefined));
 
 const buildInitialValuesForTilfeller = (props: FaktaStateProps): TilfellerValues => ({
   tidsbegrensetValues: TidsbegrensetArbeidsforholdForm.buildInitialValues(props.kortvarigeArbeidsforhold),

@@ -18,10 +18,7 @@ import { AnkeBehandlingApiKeys, requestAnkeApi } from '../data/ankeBehandlingApi
 import AnkeBehandlingProsessStegInitPanel from './AnkeBehandlingProsessStegInitPanel';
 
 const fagsak = {
-  fagsakYtelseType: {
-    kode: fagsakYtelseType.FORELDREPENGER,
-    kodeverk: '',
-  },
+  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
 } as Fagsak;
 
 const behandling = {
@@ -45,10 +42,7 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
     isReadOnly: false,
     readOnlySubmitButton: false,
     aksjonspunkter: [{
-      definisjon: {
-        kode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
       erAktivt: true,
       kanLoses: true,
     }] as Aksjonspunkt[],

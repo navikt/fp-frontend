@@ -18,14 +18,8 @@ const location = {
 const defaultBehandling = {
   uuid: '1',
   versjon: 2,
-  status: {
-    kode: behandlingStatus.FATTER_VEDTAK,
-    kodeverk: '',
-  },
-  type: {
-    kode: behandlingType.FORSTEGANGSSOKNAD,
-    kodeverk: '',
-  },
+  status: behandlingStatus.FATTER_VEDTAK,
+  type: behandlingType.FORSTEGANGSSOKNAD,
   behandlingÅrsaker: [] as BehandlingÅrsak[],
   toTrinnsBehandling: true,
 } as Behandling;
@@ -58,16 +52,10 @@ const Template: Story<{
       readOnly={readOnly}
       onSubmit={lagre}
       forhandsvisVedtaksbrev={action('button-click')}
-      fagsakYtelseType={{
-        kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: '',
-      }}
+      fagsakYtelseType={fagsakYtelseType.FORELDREPENGER}
       behandlingKlageVurdering={{
         klageVurderingResultatNFP: {
-          klageVurdering: {
-            kode: 'STADFESTE_YTELSESVEDTAK',
-            kodeverk: '',
-          },
+          klageVurdering: 'STADFESTE_YTELSESVEDTAK',
         },
       } as KlageVurdering}
       alleKodeverk={alleKodeverk as any}
@@ -88,10 +76,7 @@ ForBeslutter.args = {
       opptjeningAktiviteter: [],
       beregningDto: {
         fastsattVarigEndringNaering: false,
-        faktaOmBeregningTilfeller: [{
-          kode: '',
-          kodeverk: '',
-        }],
+        faktaOmBeregningTilfeller: [''],
       },
       vurderPaNyttArsaker: [],
       uttakPerioder: [],
@@ -104,10 +89,7 @@ ForBeslutter.args = {
       opptjeningAktiviteter: [],
       beregningDto: {
         fastsattVarigEndringNaering: false,
-        faktaOmBeregningTilfeller: [{
-          kode: '',
-          kodeverk: '',
-        }],
+        faktaOmBeregningTilfeller: [''],
       },
       vurderPaNyttArsaker: [],
       uttakPerioder: [],
@@ -122,10 +104,7 @@ ForSaksbehandler.args = {
   lagre: action('button-click') as any,
   behandling: {
     ...defaultBehandling,
-    status: {
-      kode: behandlingStatus.BEHANDLING_UTREDES,
-      kodeverk: '',
-    },
+    status: behandlingStatus.BEHANDLING_UTREDES,
   },
   totrinnskontrollSkjermlenkeContext: [{
     skjermlenkeType: 'FORMKRAV_KLAGE_NFP',
@@ -134,23 +113,11 @@ ForSaksbehandler.args = {
       opptjeningAktiviteter: [],
       beregningDto: {
         fastsattVarigEndringNaering: false,
-        faktaOmBeregningTilfeller: [{
-          kode: '',
-          kodeverk: '',
-        }],
+        faktaOmBeregningTilfeller: [''],
       },
       besluttersBegrunnelse: 'Denne er ikke godkjent fordi...',
       totrinnskontrollGodkjent: false,
-      vurderPaNyttArsaker: [
-        {
-          kode: 'FEIL_REGEL',
-          kodeverk: '',
-        },
-        {
-          kode: 'FEIL_FAKTA',
-          kodeverk: '',
-        },
-      ],
+      vurderPaNyttArsaker: ['FEIL_REGEL', 'FEIL_FAKTA'],
       uttakPerioder: [],
       arbeidforholdDtos: [],
     }],

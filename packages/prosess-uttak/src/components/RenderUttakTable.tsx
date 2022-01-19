@@ -14,7 +14,7 @@ import {
   hasValidDecimal, hasValidInteger, maxLength, maxValue, minValue, notDash, required,
 } from '@fpsak-frontend/utils';
 import {
-  ArbeidsgiverOpplysningerPerId, Kodeverk, KodeverkMedNavn, PeriodeSokerAktivitet,
+  ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSokerAktivitet,
 } from '@fpsak-frontend/types';
 
 import uttakArbeidTypeTekstCodes from '../utils/uttakArbeidTypeCodes';
@@ -60,9 +60,9 @@ const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] => typer
     navn,
   }) => <option value={kode} key={kode}>{navn}</option>);
 
-const utsettelse = (erOppfylt: boolean, utsettelseType: Kodeverk): boolean => {
+const utsettelse = (erOppfylt: boolean, utsettelseType: string): boolean => {
   if (!erOppfylt) {
-    if (!utsettelseType || utsettelseType.kode === '-') {
+    if (!utsettelseType || utsettelseType === '-') {
       return true;
     }
   }
@@ -83,8 +83,8 @@ const createTextStrings = (fields: AktivitetFieldArray, arbeidsgiverOpplysninger
 
   const prosentArbeidText = (typeof prosentArbeid !== 'undefined') ? `${prosentArbeid}%` : '';
   let arbeidsforhold;
-  if (uttakArbeidType && uttakArbeidType.kode !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
-    arbeidsforhold = <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType.kode]} />;
+  if (uttakArbeidType && uttakArbeidType !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
+    arbeidsforhold = <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType]} />;
   }
   if (arbeidsgiverReferanse) {
     const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];

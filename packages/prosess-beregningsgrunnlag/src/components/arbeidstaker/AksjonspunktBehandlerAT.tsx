@@ -12,7 +12,8 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
-  BeregningsgrunnlagAndel, BeregningsgrunnlagArbeidsforhold, Kodeverk,
+  BeregningsgrunnlagAndel,
+  BeregningsgrunnlagArbeidsforhold,
 } from '@fpsak-frontend/types';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 import createVisningsnavnForAktivitet from '../../util/createVisningsnavnForAktivitet';
@@ -36,13 +37,13 @@ const finnAndelerSomSkalVisesAT = (andeler: BeregningsgrunnlagAndel[]): Beregnin
     return [];
   }
   return andeler
-    .filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER)
+    .filter((andel) => andel.aktivitetStatus === aktivitetStatus.ARBEIDSTAKER)
     .filter((andel) => andel.skalFastsetteGrunnlag === true)
     .filter((andel) => andelErIkkeTilkommetEllerLagtTilAvSBH(andel));
 };
 
 const lagVisningsnavn = (arbeidsforhold: BeregningsgrunnlagArbeidsforhold,
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kodeverk: string) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
   const arbeidsgiverInformasjon = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
   if (!arbeidsgiverInformasjon) {
@@ -52,7 +53,7 @@ const lagVisningsnavn = (arbeidsforhold: BeregningsgrunnlagArbeidsforhold,
 };
 
 const createRows = (relevanteAndelerAT: BeregningsgrunnlagAndel[],
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kodeverk: string) => string,
   readOnly: boolean,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement[] => relevanteAndelerAT.map((andel, index) => (
     <Row key={`index${index + 1}`} className={styles.verticalAlignMiddle}>

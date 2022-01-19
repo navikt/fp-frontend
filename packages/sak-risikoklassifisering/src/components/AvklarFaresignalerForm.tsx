@@ -33,7 +33,7 @@ export const IKKE_REELLE_VURDERINGER_UNDERKATEGORI = 'ikkeReelleVurderingerUnder
 
 export const buildInitialValues = (aksjonspunkt: Aksjonspunkt, risikoklassifisering?: Risikoklassifisering): Values | undefined => {
   if (aksjonspunkt && aksjonspunkt.begrunnelse && risikoklassifisering && risikoklassifisering.faresignalVurdering) {
-    const { kode } = risikoklassifisering.faresignalVurdering;
+    const kode = risikoklassifisering.faresignalVurdering;
     return {
       [begrunnelseFieldName]: aksjonspunkt.begrunnelse,
       [VURDERING_HOVEDKATEGORI]: kode === faresignalVurdering.INGEN_INNVIRKNING ? faresignalVurdering.INGEN_INNVIRKNING : faresignalVurdering.INNVIRKNING,
@@ -119,7 +119,7 @@ export const AvklarFaresignalerForm: FunctionComponent<OwnProps> = ({
               validate={[required]}
               direction="vertical"
               readOnly={readOnly}
-              isEdited={!isAksjonspunktOpen(aksjonspunkt.status.kode)}
+              isEdited={!isAksjonspunktOpen(aksjonspunkt.status)}
             >
               <RadioOption
                 label={faresignalVurderinger.find((vurdering) => vurdering.kode === faresignalVurdering.INNVIRKNING)?.navn || ''}

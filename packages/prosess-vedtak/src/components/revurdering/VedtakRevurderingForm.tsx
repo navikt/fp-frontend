@@ -12,7 +12,7 @@ import BehandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakTyp
 import { Form } from '@fpsak-frontend/form-hooks';
 import {
   AlleKodeverk, Behandling, BeregningsresultatFp, BeregningsresultatEs, Vilkar,
-  Aksjonspunkt, SimuleringResultat, Kodeverk, TilbakekrevingValg,
+  Aksjonspunkt, SimuleringResultat, TilbakekrevingValg,
 } from '@fpsak-frontend/types';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import {
@@ -76,22 +76,22 @@ const erÅrsakTypeBehandlingEtterKlage = (
   behandlingArsakTyper: Behandling['behandlingÅrsaker'] = [],
 ): boolean => behandlingArsakTyper
   .map(({ behandlingArsakType }) => behandlingArsakType)
-  .some((bt) => bt.kode === BehandlingArsakType.ETTER_KLAGE
-    || bt.kode === BehandlingArsakType.KLAGE_U_INNTK
-    || bt.kode === BehandlingArsakType.KLAGE_M_INNTK);
+  .some((bt) => bt === BehandlingArsakType.ETTER_KLAGE
+    || bt === BehandlingArsakType.KLAGE_U_INNTK
+    || bt === BehandlingArsakType.KLAGE_M_INNTK);
 
 const lagÅrsakString = (
-  revurderingAarsaker: Kodeverk[],
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  revurderingAarsaker: string[],
+  getKodeverknavn: (kodeverk: string) => string,
 ): string | undefined => {
   if (revurderingAarsaker === undefined || revurderingAarsaker.length < 1) {
     return undefined;
   }
   const aarsakTekstList = [];
   const endringFraBrukerAarsak = revurderingAarsaker
-    .find((aarsak) => aarsak.kode === BehandlingArsakType.RE_ENDRING_FRA_BRUKER);
+    .find((aarsak) => aarsak === BehandlingArsakType.RE_ENDRING_FRA_BRUKER);
   const alleAndreAarsakerNavn = revurderingAarsaker
-    .filter((aarsak) => aarsak.kode !== BehandlingArsakType.RE_ENDRING_FRA_BRUKER)
+    .filter((aarsak) => aarsak !== BehandlingArsakType.RE_ENDRING_FRA_BRUKER)
     .map((aarsak) => getKodeverknavn(aarsak));
   // Dersom en av årsakene er "RE_ENDRING_FRA_BRUKER" skal alltid denne vises først
   if (endringFraBrukerAarsak !== undefined) {
@@ -111,7 +111,7 @@ const erNyttBehandlingResult = (
 };
 
 export const lagKonsekvensForYtelsenTekst = (
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kodeverk: string) => string,
   konsekvenser?: Behandling['behandlingsresultat']['konsekvenserForYtelsen'],
 ): string => {
   if (!konsekvenser || konsekvenser.length < 1) {
@@ -167,7 +167,7 @@ const hentResultattekst = (
 const finnInvilgetRevurderingTekst = (
   intl: IntlShape,
   ytelseTypeKode: string,
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kodeverk: string) => string,
   tilbakekrevingText: string,
   konsekvenserForYtelsen?: Behandling['behandlingsresultat']['konsekvenserForYtelsen'],
   beregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
@@ -215,7 +215,7 @@ const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   behandling: Behandling,
 ): FormValues => ({
-  aksjonspunktKoder: aksjonspunkter.filter((ap) => ap.kanLoses).map((ap) => ap.definisjon.kode),
+  aksjonspunktKoder: aksjonspunkter.filter((ap) => ap.kanLoses).map((ap) => ap.definisjon),
   overskrift: decodeHtmlEntity(behandling.behandlingsresultat.overskrift),
   brødtekst: decodeHtmlEntity(behandling.behandlingsresultat.fritekstbrev),
 });
@@ -285,15 +285,15 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
     simuleringResultat, tilbakekrevingvalg]);
 
   let vedtakstatusTekst = '';
-  if (isInnvilget(behandlingsresultat.type.kode)) {
+  if (isInnvilget(behandlingsresultat.type)) {
     const konsekvenserForYtelsen = behandlingsresultat !== undefined ? behandlingsresultat.konsekvenserForYtelsen : undefined;
     vedtakstatusTekst = finnInvilgetRevurderingTekst(intl, ytelseTypeKode, getKodeverknavnFn(alleKodeverk, kodeverkTyper), tilbakekrevingtekst,
       konsekvenserForYtelsen, resultatstruktur, resultatstrukturOriginalBehandling);
   }
-  if (isAvslag(behandlingsresultat.type.kode)) {
+  if (isAvslag(behandlingsresultat.type)) {
     vedtakstatusTekst = intl.formatMessage({ id: hentResultattekst(false, resultatstruktur, resultatstrukturOriginalBehandling) });
   }
-  if (isOpphor(behandlingsresultat.type.kode)) {
+  if (isOpphor(behandlingsresultat.type)) {
     vedtakstatusTekst = intl.formatMessage({
       id: ytelseTypeKode === fagsakYtelseType.SVANGERSKAPSPENGER
         ? 'VedtakForm.RevurderingSVP.SvangerskapspengerOpphoerer' : 'VedtakForm.RevurderingFP.ForeldrepengerOpphoerer',
@@ -337,7 +337,7 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
           if (erAvslatt) {
             return (
               <VedtakAvslagArsakOgBegrunnelsePanel
-                behandlingStatusKode={status.kode}
+                behandlingStatusKode={status}
                 vilkar={vilkar}
                 behandlingsresultat={behandlingsresultat}
                 språkKode={sprakkode}

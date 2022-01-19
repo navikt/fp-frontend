@@ -13,7 +13,6 @@ import {
   ArbeidsgiverOpplysningerPerId, BeregningsgrunnlagAndel,
   BeregningsgrunnlagPeriodeProp, FordelBeregningsgrunnlagAndel,
   FordelBeregningsgrunnlagPeriode,
-  Kodeverk,
   AlleKodeverk,
 } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
@@ -63,7 +62,7 @@ type OwnProps = {
     showPanel: (...args: any[]) => any;
     beregningsgrunnlag: Beregningsgrunnlag;
     alleKodeverk: AlleKodeverk;
-    behandlingType: Kodeverk;
+    behandlingType: string;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 };
 
@@ -71,7 +70,7 @@ interface StaticFunctions {
   validate: (intl: IntlShape,
              values: FordelBeregningsgrunnlagAndelValues[],
              sumIPeriode: number,
-             getKodeverknavn: (kodeverk: Kodeverk) => string,
+             getKodeverknavn: (kodeverk: string) => string,
              grunnbeløp: number,
              periodeDato: PeriodeTsType,
              skalValidereRefusjon: boolean,
@@ -81,7 +80,7 @@ interface StaticFunctions {
                        bgPeriode: BeregningsgrunnlagPeriodeProp,
                        skjaeringstidspunktBeregning: string,
                        harKunYtelse: boolean,
-                       getKodeverknavn: (kodeverk: Kodeverk) => string,
+                       getKodeverknavn: (kodeverk: string) => string,
                        arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => FordelBeregningsgrunnlagAndelValues[];
 }
 
@@ -164,7 +163,7 @@ FordelBeregningsgrunnlagPeriodePanel.buildInitialValues = (periode: FordelBeregn
   bgPeriode: BeregningsgrunnlagPeriodeProp,
   skjaeringstidspunktBeregning: string,
   harKunYtelse: boolean,
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kodeverk: string) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): FordelBeregningsgrunnlagAndelValues[] => {
   if (!periode || !periode.fordelBeregningsgrunnlagAndeler) {
     return [];

@@ -13,7 +13,7 @@ import { required } from '@fpsak-frontend/utils';
 import VilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { isFieldEdited, FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
 import {
-  Aksjonspunkt, FamilieHendelse, InntektArbeidYtelse, Kodeverk, KodeverkMedNavn, Personoversikt, RelatertTilgrensedYtelse, Soknad,
+  Aksjonspunkt, FamilieHendelse, InntektArbeidYtelse, KodeverkMedNavn, Personoversikt, RelatertTilgrensedYtelse, Soknad,
 } from '@fpsak-frontend/types';
 import { AvklarFaktaForForeldreansvarAksjonspunktAp, AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -68,7 +68,7 @@ interface PureOwnProps {
 interface StaticFunctions {
   buildInitialValues?: (soknad: Soknad, familiehendelse: FamilieHendelse,
     innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],
-    getKodeverknavn: (kodeverk: Kodeverk) => string) => FormValues,
+    getKodeverknavn: (kodeverk: string) => string) => FormValues,
   transformValues?: (
     values: FormValues,
     aksjonspunkt: Aksjonspunkt,
@@ -177,8 +177,8 @@ const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<PureOwnProps> & StaticF
 
 OmsorgOgForeldreansvarFaktaForm.buildInitialValues = (soknad: Soknad, gjeldendeFamiliehendelse: FamilieHendelse,
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: InntektArbeidYtelse['innvilgetRelatertTilgrensendeYtelserForAnnenForelder'],
-  getKodeverknavn: (kodeverk: Kodeverk) => string): FormValues => ({
-  vilkarType: gjeldendeFamiliehendelse.vilkarType ? gjeldendeFamiliehendelse.vilkarType.kode : '',
+  getKodeverknavn: (kodeverk: string) => string): FormValues => ({
+  vilkarType: gjeldendeFamiliehendelse.vilkarType ? gjeldendeFamiliehendelse.vilkarType : '',
   ...OmsorgsovertakelseFaktaPanel.buildInitialValues(soknad, gjeldendeFamiliehendelse),
   ...RettighetFaktaPanel.buildInitialValues(soknad, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, getKodeverknavn),
 });
@@ -187,7 +187,7 @@ OmsorgOgForeldreansvarFaktaForm.transformValues = (
   values: FormValues,
   aksjonspunkt: Aksjonspunkt,
 ): AvklarFaktaForForeldreansvarAksjonspunktAp | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp => (
-  aksjonspunkt.definisjon.kode === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR
+  aksjonspunkt.definisjon === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR
     ? {
       omsorgsovertakelseDato: values.omsorgsovertakelseDato,
       foreldreansvarDato: values.foreldreansvarDato,

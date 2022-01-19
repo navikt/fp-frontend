@@ -11,7 +11,7 @@ import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components'
 const finnAlleAndelerForOpptjeningsår = (andeler: FeriepengegrunnlagAndel[],
   opptjeningsår: number): FeriepengegrunnlagAndel[] => andeler.filter((andel) => andel.opptjeningsår === opptjeningsår);
 
-const lagIdentifikator = (andel: FeriepengegrunnlagAndel) : string => andel.aktivitetStatus.kode + andel.arbeidsgiverId;
+const lagIdentifikator = (andel: FeriepengegrunnlagAndel) : string => andel.aktivitetstatus + andel.arbeidsgiverId;
 
 const lagVisningsnavn = (ferieAndel: FeriepengegrunnlagAndel,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,

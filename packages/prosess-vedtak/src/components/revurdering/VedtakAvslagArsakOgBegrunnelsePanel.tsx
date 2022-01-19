@@ -5,7 +5,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
 import {
-  AlleKodeverk, Vilkar, Kodeverk, Behandlingsresultat,
+  AlleKodeverk, Vilkar, Behandlingsresultat,
 } from '@fpsak-frontend/types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
@@ -26,14 +26,14 @@ const minLength3 = minLength(3);
 const getAvslagArsak = (
   vilkar: Vilkar[],
   behandlingsresultat: Behandlingsresultat,
-  getKodeverknavn: (kodeverk: Kodeverk, undertype?: string) => string,
+  getKodeverknavn: (kodeverk: string, undertype?: string) => string,
 ): string | ReactElement => {
-  const avslatteVilkar = vilkar.filter((v) => v.vilkarStatus.kode === vilkarUtfallType.IKKE_OPPFYLT);
+  const avslatteVilkar = vilkar.filter((v) => v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT);
   if (avslatteVilkar.length === 0) {
     return <FormattedMessage id="VedtakForm.UttaksperioderIkkeGyldig" />;
   }
 
-  return `${getKodeverknavn(avslatteVilkar[0].vilkarType)}: ${getKodeverknavn(behandlingsresultat.avslagsarsak, avslatteVilkar[0].vilkarType.kode)}`;
+  return `${getKodeverknavn(avslatteVilkar[0].vilkarType)}: ${getKodeverknavn(behandlingsresultat.avslagsarsak, avslatteVilkar[0].vilkarType)}`;
 };
 
 const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) => value !== undefined || isDirty;
@@ -42,7 +42,7 @@ interface OwnProps {
   behandlingStatusKode: string;
   vilkar?: Vilkar[];
   behandlingsresultat: Behandlingsresultat;
-  språkKode: Kodeverk;
+  språkKode: string;
   erReadOnly: boolean;
   alleKodeverk: AlleKodeverk;
   skalBrukeOverstyrendeFritekstBrev: boolean;

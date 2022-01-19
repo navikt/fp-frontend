@@ -50,7 +50,7 @@ const Template: Story<{
     alleKodeverk={alleKodeverk}
     setFormData={() => undefined}
     behandling={behandling as Behandling}
-    harApneAksjonspunkter={aksjonspunkter.some((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET)}
+    harApneAksjonspunkter={aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET)}
   />
 );
 

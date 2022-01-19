@@ -42,7 +42,7 @@ const visningForManglendeBG = () => (
 );
 
 const getAksjonspunkterForBeregning = (aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt[] => (aksjonspunkter
-  ? aksjonspunkter.filter((ap) => isBeregningAksjonspunkt(ap.definisjon.kode))
+  ? aksjonspunkter.filter((ap) => isBeregningAksjonspunkt(ap.definisjon))
   : []);
 
 const getRelevanteStatuser = (bg: Beregningsgrunnlag): RelevanteStatuserProp => (bg.aktivitetStatus ? ({
@@ -59,11 +59,11 @@ const getRelevanteStatuser = (bg: Beregningsgrunnlag): RelevanteStatuserProp => 
 }) : null);
 
 const getBGVilkar = (vilkar: Vilkar[]): Vilkar => (vilkar
-  ? vilkar.find((v) => v.vilkarType && v.vilkarType.kode === vilkarType.BEREGNINGSGRUNNLAGVILKARET)
+  ? vilkar.find((v) => v.vilkarType && v.vilkarType === vilkarType.BEREGNINGSGRUNNLAGVILKARET)
   : undefined);
 
 const getAksjonspunktForGraderingPaaAndelUtenBG = (aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt => (aksjonspunkter
-  ? aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.VURDER_GRADERING_UTEN_BEREGNINGSGRUNNLAG)
+  ? aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.VURDER_GRADERING_UTEN_BEREGNINGSGRUNNLAG)
   : undefined);
 
 type OwnProps = {

@@ -70,7 +70,7 @@ const createItems = (
     id: index,
     start: moment(finnOpptjeningFom(ap.opptjeningFom, opptjeningFomDato, opptjeningTomDato)),
     end: moment(finnOpptjeningTom(ap.opptjeningTom, opptjeningFomDato, opptjeningTomDato)),
-    group: groups.find((g) => g.aktivitetTypeKode === ap.aktivitetType.kode
+    group: groups.find((g) => g.aktivitetTypeKode === ap.aktivitetType
       && g.arbeidsforholdRef === ap.arbeidsforholdRef && g.arbeidsgiverReferanse === ap.arbeidsgiverReferanse).id,
     className: classNameGenerator(formVerdierForAlleAktiviteter[index].erGodkjent),
     content: '',
@@ -81,15 +81,15 @@ const createItems = (
 
 const createGroups = (opptjeningPeriods: OpptjeningAktivitet[], opptjeningAktivitetTypes: KodeverkMedNavn[]) => {
   const duplicatesRemoved = opptjeningPeriods.reduce((accPeriods, period): Group[] => {
-    const hasPeriod = accPeriods.some((p) => p.aktivitetType.kode === period.aktivitetType.kode
+    const hasPeriod = accPeriods.some((p) => p.aktivitetType === period.aktivitetType
       && p.arbeidsforholdRef === period.arbeidsforholdRef && p.oppdragsgiverOrg === period.arbeidsgiverReferanse);
     if (!hasPeriod) accPeriods.push(period);
     return accPeriods;
   }, []);
   return duplicatesRemoved.map((activity: OpptjeningAktivitet, index: number) => ({
     id: index + 1,
-    content: opptjeningAktivitetTypes.find((oat) => oat.kode === activity.aktivitetType.kode).navn,
-    aktivitetTypeKode: activity.aktivitetType.kode,
+    content: opptjeningAktivitetTypes.find((oat) => oat.kode === activity.aktivitetType).navn,
+    aktivitetTypeKode: activity.aktivitetType,
     arbeidsforholdRef: activity.arbeidsforholdRef,
     arbeidsgiverReferanse: activity.arbeidsgiverReferanse,
   }));

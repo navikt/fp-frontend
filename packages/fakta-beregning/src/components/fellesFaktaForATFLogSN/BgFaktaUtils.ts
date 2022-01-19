@@ -29,8 +29,8 @@ import { FaktaOmBeregningAksjonspunktValues, GenerellAndelInfo } from '../../typ
 
 export const INNTEKT_FIELD_ARRAY_NAME = 'inntektFieldArray';
 
-const preutfyllInntektskategori = (andel) => (andel.inntektskategori
-&& andel.inntektskategori.kode !== inntektskategorier.UDEFINERT ? andel.inntektskategori.kode : '');
+const preutfyllInntektskategori = (andel: AndelForFaktaOmBeregning) => (andel.inntektskategori
+&& andel.inntektskategori !== inntektskategorier.UDEFINERT ? andel.inntektskategori : '');
 
 export const setArbeidsforholdInitialValues = (andel: AndelForFaktaOmBeregning) => ({
   arbeidsgiverId: andel.arbeidsforhold ? andel.arbeidsforhold.arbeidsgiverIdent : null,
@@ -56,7 +56,7 @@ export const setGenerellAndelsinfo = (andel: AndelForFaktaOmBeregning,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   alleKodeverk: AlleKodeverk): GenerellAndelInfo => ({
   andel: lagVisningsnavn(andel, arbeidsgiverOpplysningerPerId, alleKodeverk),
-  aktivitetStatus: andel.aktivitetStatus.kode,
+  aktivitetStatus: andel.aktivitetStatus,
   andelsnr: andel.andelsnr,
   nyAndel: false,
   inntektskategori: preutfyllInntektskategori(andel),
@@ -64,7 +64,7 @@ export const setGenerellAndelsinfo = (andel: AndelForFaktaOmBeregning,
 });
 
 export const mapAndelFieldIdentifikator = (andel: AndelForFaktaOmBeregning): AndelFieldIdentifikator => ({
-  aktivitetStatus: andel.aktivitetStatus.kode,
+  aktivitetStatus: andel.aktivitetStatus,
   andelsnr: andel.andelsnr,
   arbeidsgiverId: andel.arbeidsforhold ? andel.arbeidsforhold.arbeidsgiverIdent : null,
   arbeidsforholdType: andel.arbeidsforhold ? andel.arbeidsforhold.arbeidsforholdType : null,
@@ -137,7 +137,7 @@ const sokerMottarYtelseForAndel = (values: FaktaOmBeregningAksjonspunktValues,
 
 // Etterlønn / sluttpakke
 const andelErEtterlønnSluttpakkeOgSkalFastsettes = (andel: AndelFieldIdentifikator, values: any): boolean => {
-  if (andel.arbeidsforholdType && andel.arbeidsforholdType.kode === OAType.ETTERLONN_SLUTTPAKKE) {
+  if (andel.arbeidsforholdType && andel.arbeidsforholdType === OAType.ETTERLONN_SLUTTPAKKE) {
     return values[harEtterlonnSluttpakkeField];
   }
   return false;
@@ -150,13 +150,13 @@ const erAndelKunstigArbeidsforhold = (andel: AndelFieldIdentifikator,
   const lagtTilAvBruker = firstBgPeriod.beregningsgrunnlagPrStatusOgAndel.find((a) => a.arbeidsforhold
   && a.arbeidsforhold.arbeidsgiverIdent === andel.arbeidsgiverId
   && a.arbeidsforhold.organisasjonstype
-  && a.arbeidsforhold.organisasjonstype.kode === organisasjonstyper.KUNSTIG);
+  && a.arbeidsforhold.organisasjonstype === organisasjonstyper.KUNSTIG);
   return lagtTilAvBruker !== undefined;
 };
 
 // Kun Ytelse
 const harKunYtelse = (faktaOmBeregning: FaktaOmBeregning): boolean => !!faktaOmBeregning.faktaOmBeregningTilfeller && faktaOmBeregning.faktaOmBeregningTilfeller
-  .find(({ kode }) => kode === faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE) !== undefined;
+  .find((kode) => kode === faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE) !== undefined;
 
 const skalKunneOverstigeRapportertInntektOgTotaltBeregningsgrunnlag = (values: FaktaOmBeregningAksjonspunktValues,
   faktaOmBeregning: FaktaOmBeregning,
@@ -206,7 +206,7 @@ export const erOverstyring = (values: FaktaOmBeregningAksjonspunktValues): boole
   && values[MANUELL_OVERSTYRING_BEREGNINGSGRUNNLAG_FIELD] === true);
 
 const harOverstyringsAP = (aksjonspuntker: Aksjonspunkt[]): boolean => aksjonspuntker
-  && aksjonspuntker.some((ap) => ap.definisjon.kode === aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG);
+  && aksjonspuntker.some((ap) => ap.definisjon === aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG);
 
 export const erOverstyringAvBeregningsgrunnlag = createSelector<any, any>([
   getFormValuesForBeregning,

@@ -1,8 +1,6 @@
-import Kodeverk from './kodeverkTsType';
-
 type Vilkar = Readonly<{
-  vilkarType: Kodeverk;
-  vilkarStatus: Kodeverk;
+  vilkarType: string;
+  vilkarStatus: string;
   merknadParametere: {
     antallDagerSoeknadLevertForSent?: string;
   };

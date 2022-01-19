@@ -20,7 +20,7 @@ export const buildInitialValues = (venteårsak: string, aksjonspunkt: Aksjonspun
   if (!aksjonspunkt) {
     return null;
   }
-  const apErLøst = aksjonspunkt.status.kode === aksjonspunktStatus.UTFORT;
+  const apErLøst = aksjonspunkt.status === aksjonspunktStatus.UTFORT;
   return {
     ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkt),
     besteberegningErKorrektValg: apErLøst ? venteårsak !== venteArsakType.VENT_PÅ_KORRIGERT_BESTEBEREGNING : null,
@@ -72,7 +72,7 @@ const KontrollerBesteberegningPanelOld: FunctionComponent<OwnProps> = ({
   const begrunnelse = formMethods.watch('begrunnelse');
   return (
     <>
-      <AksjonspunktHelpTextTemp isAksjonspunktOpen={isAksjonspunktOpen(aksjonspunkt.status.kode)}>
+      <AksjonspunktHelpTextTemp isAksjonspunktOpen={isAksjonspunktOpen(aksjonspunkt.status)}>
         {[<FormattedMessage key="BesteberegningAksjonspunktTekst" id="BesteberegningProsessPanel.Aksjonspunkt.HelpText" />]}
       </AksjonspunktHelpTextTemp>
       <VerticalSpacer twentyPx />

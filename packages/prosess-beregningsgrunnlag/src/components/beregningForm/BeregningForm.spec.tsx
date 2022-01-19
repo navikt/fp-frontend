@@ -24,72 +24,34 @@ import BeregningsresultatTable from '../beregningsresultatPanel/Beregningsresult
 import messages from '../../../i18n/nb_NO.json';
 
 const apVurderDekningsgrad = {
-  definisjon: {
-    kode: aksjonspunktCodes.VURDER_DEKNINGSGRAD,
-    kodeverk: 'test',
-    navn: 'apNavn2',
-  },
-  status: {
-    kode: 'OPPR',
-    kodeverk: 'test',
-    navn: 'statusNavn2',
-  },
+  definisjon: aksjonspunktCodes.VURDER_DEKNINGSGRAD,
+  status: 'OPPR',
   kanLoses: true,
   erAktivt: true,
 };
 const apFastsettBgATFL = {
-  definisjon: {
-    kode: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
-    kodeverk: 'test',
-    navn: 'apNavn1',
-  },
-  status: {
-    kode: 'UTFO',
-    kodeverk: 'test',
-    navn: 'statusNavn1',
-  },
+  definisjon: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
+  status: 'UTFO',
   kanLoses: false,
   erAktivt: false,
 };
 
 const apVurderVarigEndretEllerNyoppstartetSN = {
-  definisjon: {
-    kode: aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
-    kodeverk: 'test',
-    navn: 'apNavn3',
-  },
-  status: {
-    kode: 'OPPR',
-    kodeverk: 'test',
-    navn: 'statusNavn3',
-  },
+  definisjon: aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
+  status: 'OPPR',
   kanLoses: true,
   erAktivt: true,
 };
 
 const apFastsettBgSnNyIArbeidslivet = {
-  definisjon: {
-    kode: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
-    kodeverk: 'test',
-    navn: 'apNavn4',
-  },
-  status: {
-    kode: 'OPPR',
-    kodeverk: 'test',
-    navn: 'statusNavn4',
-  },
+  definisjon: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
+  status: 'OPPR',
   kanLoses: true,
   erAktivt: true,
 };
 const apFastsettBgTidsbegrensetArbeidsforhold = {
-  definisjon: {
-    kode: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
-    kodeverk: 'test',
-  },
-  status: {
-    kode: 'OPPR',
-    kodeverk: 'test',
-  },
+  definisjon: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
+  status: 'OPPR',
   kanLoses: true,
   erAktivt: true,
 };
@@ -97,10 +59,7 @@ const apFastsettBgTidsbegrensetArbeidsforhold = {
 const apEttLukketOgEttApent = [apFastsettBgATFL, apVurderDekningsgrad];
 
 const allAndeler = [{
-  aktivitetStatus: {
-    kode: aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE,
-    kodeverk: 'test',
-  },
+  aktivitetStatus: aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE,
   beregnetPrAar: 200000,
   overstyrtPrAar: 100,
 }];
@@ -131,10 +90,7 @@ const lagPeriode = (): BeregningsgrunnlagPeriodeProp => ({
   avkortetPrAar: 360000,
   redusertPrAar: 360000,
   beregningsgrunnlagPrStatusOgAndel: [{
-    aktivitetStatus: {
-      kode: 'AT',
-      kodeverk: 'AKTIVITET_STATUS',
-    },
+    aktivitetStatus: 'AT',
   }],
 });
 const lagBeregningsgrunnlag = (avvikPromille: number, årsinntektVisningstall: number,
@@ -148,29 +104,18 @@ const lagBeregningsgrunnlag = (avvikPromille: number, årsinntektVisningstall: n
     sammenligningsgrunnlagFom: '2018-09-01',
     sammenligningsgrunnlagTom: '2019-10-31',
     avvikProsent: 27.5,
-    sammenligningsgrunnlagType: {
-      kode: 'SAMMENLIGNING_AT',
-      kodeverk: 'test',
-    },
+    sammenligningsgrunnlagType: 'SAMMENLIGNING_AT',
     differanseBeregnet: 12100,
     rapportertPrAar: sammenligningSum,
     avvikPromille,
   },
   dekningsgrad,
   årsinntektVisningstall,
-  aktivitetStatus: [{
-    kode: 'UDEFINERT',
-    kodeverk: 'test',
-  }],
+  aktivitetStatus: ['UDEFINERT'],
 } as BeregningsgrunnlagProp);
 const mockVilkar = [{
-  vilkarType: {
-    kode: 'FP_VK_41',
-    kodeverk: 'test',
-  },
-  vilkarStatus: {
-    kode: vilkarUtfallType.OPPFYLT,
-  },
+  vilkarType: 'FP_VK_41',
+  vilkarStatus: vilkarUtfallType.OPPFYLT,
 }];
 const sammenligningsgrunnlag = (kode: string): SammenligningsgrunlagProp => ({
   sammenligningsgrunnlagFom: '2018-09-01',
@@ -178,14 +123,11 @@ const sammenligningsgrunnlag = (kode: string): SammenligningsgrunlagProp => ({
   rapportertPrAar: 330000,
   avvikPromille: 275,
   avvikProsent: 27.5,
-  sammenligningsgrunnlagType: {
-    kode,
-    kodeverk: 'test',
-  },
+  sammenligningsgrunnlagType: kode,
   differanseBeregnet: 12100,
 });
 
-const getBGVilkar = (vilkar) => (vilkar ? vilkar.find((v) => v.vilkarType && v.vilkarType.kode === vilkarType.BEREGNINGSGRUNNLAGVILKARET) : undefined);
+const getBGVilkar = (vilkar) => (vilkar ? vilkar.find((v) => v.vilkarType && v.vilkarType === vilkarType.BEREGNINGSGRUNNLAGVILKARET) : undefined);
 describe('<BeregningForm>', () => {
   it('skal teste at AvviksopplysningerPanel får korrekte props fra BeregningFP', () => {
     const sg = sammenligningsgrunnlag('SAMMENLIGNING_ATFL_SN');

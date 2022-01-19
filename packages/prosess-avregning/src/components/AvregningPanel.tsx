@@ -25,7 +25,7 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import questionNormalUrl from '@fpsak-frontend/assets/images/question_normal.svg';
 import questionHoverUrl from '@fpsak-frontend/assets/images/question_hover.svg';
 import {
-  Aksjonspunkt, Fagsak, Kodeverk, SimuleringResultat, TilbakekrevingValg,
+  Aksjonspunkt, Fagsak, SimuleringResultat, TilbakekrevingValg,
 } from '@fpsak-frontend/types';
 import { VurderFeilutbetalingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -113,10 +113,10 @@ const buildInitialValues = (
   }
 
   const harTypeIkkeSendt = !tilbakekrevingvalg.varseltekst
-    && tilbakekrevingvalg.videreBehandling.kode === tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD;
+    && tilbakekrevingvalg.videreBehandling === tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD;
 
   return {
-    videreBehandling: harTypeIkkeSendt ? tilbakekrevingvalg.videreBehandling.kode + IKKE_SEND : tilbakekrevingvalg.videreBehandling.kode,
+    videreBehandling: harTypeIkkeSendt ? tilbakekrevingvalg.videreBehandling + IKKE_SEND : tilbakekrevingvalg.videreBehandling,
     varseltekst: tilbakekrevingvalg.varseltekst,
     begrunnelse: aksjonspunkt.begrunnelse,
   };
@@ -124,7 +124,7 @@ const buildInitialValues = (
 
 interface OwnProps {
   fagsak: Fagsak;
-  sprakkode: Kodeverk;
+  sprakkode: string;
   aksjonspunkter: Aksjonspunkt[];
   simuleringResultat?: SimuleringResultat;
   tilbakekrevingvalg?: TilbakekrevingValg;
@@ -152,7 +152,7 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === AksjonspunktCode.VURDER_FEILUTBETALING);
+  const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon === AksjonspunktCode.VURDER_FEILUTBETALING);
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || buildInitialValues(aksjonspunkt, tilbakekrevingvalg),
@@ -164,10 +164,10 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
 
   const [showDetails, setShowDetails] = useState<Details[]>([]);
 
-  const isForeldrepenger = fagsak.fagsakYtelseType.kode === fagsakYtelseType.FORELDREPENGER;
+  const isForeldrepenger = fagsak.fagsakYtelseType === fagsakYtelseType.FORELDREPENGER;
 
   const hasOpenTilbakekrevingsbehandling = tilbakekrevingvalg !== undefined
-    && tilbakekrevingvalg.videreBehandling.kode === tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER;
+    && tilbakekrevingvalg.videreBehandling === tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER;
 
   const previewMessage = useCallback((e: React.MouseEvent): void => {
     previewCallback('', dokumentMalType.TBKVAR, varseltekst || ' ');

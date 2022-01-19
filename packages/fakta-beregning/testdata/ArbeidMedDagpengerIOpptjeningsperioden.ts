@@ -3,7 +3,7 @@ import { Beregningsgrunnlag, BeregningsgrunnlagAndel } from '@fpsak-frontend/typ
 export const beregningsgrunnlag = {
   skjaeringstidspunktBeregning: '2020-01-13',
   skjæringstidspunkt: '2020-01-13',
-  aktivitetStatus: [{ kode: 'AT', kodeverk: 'AKTIVITET_STATUS' }],
+  aktivitetStatus: ['AT'],
   beregningsgrunnlagPeriode: [{
     beregningsgrunnlagPeriodeFom: '2020-01-13',
     beregnetPrAar: 0,
@@ -12,20 +12,20 @@ export const beregningsgrunnlag = {
     avkortetPrAar: 0,
     periodeAarsaker: [],
     beregningsgrunnlagPrStatusOgAndel: [{
-      aktivitetStatus: { kode: 'AT', kodeverk: 'AKTIVITET_STATUS' },
+      aktivitetStatus: 'AT',
       beregningsperiodeFom: '2019-10-01',
       beregningsperiodeTom: '2019-12-31',
       andelsnr: 1,
-      inntektskategori: { kode: 'ARBEIDSTAKER', kodeverk: 'INNTEKTSKATEGORI' },
+      inntektskategori: 'ARBEIDSTAKER',
       arbeidsforhold: {
         arbeidsgiverNavn: 'BEDRIFT AS',
         arbeidsgiverId: '910909088',
         arbeidsgiverIdent: '910909088',
         startdato: '2019-02-03',
         opphoersdato: '2020-02-03',
-        arbeidsforholdType: { kode: 'ARBEID', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+        arbeidsforholdType: 'ARBEID',
         belopFraInntektsmeldingPrMnd: 30000.00,
-        organisasjonstype: { kode: 'VIRKSOMHET', kodeverk: 'ORGANISASJONSTYPE' },
+        organisasjonstype: 'VIRKSOMHET',
       },
       fastsattAvSaksbehandler: false,
       lagtTilAvSaksbehandler: false,
@@ -42,7 +42,7 @@ export const beregningsgrunnlag = {
   halvG: 49929.0,
   grunnbeløp: 99858,
   faktaOmBeregning: {
-    faktaOmBeregningTilfeller: [{ kode: 'VURDER_BESTEBEREGNING', kodeverk: 'FAKTA_OM_BEREGNING_TILFELLE' }],
+    faktaOmBeregningTilfeller: ['VURDER_BESTEBEREGNING'],
     avklarAktiviteter: {
       skjæringstidspunktOpptjening: '2020-01-13',
       aktiviteterTomDatoMapping: [{
@@ -51,22 +51,22 @@ export const beregningsgrunnlag = {
           arbeidsgiverIdent: '910909088',
           fom: '2019-02-03',
           tom: '2020-02-03',
-          arbeidsforholdType: { kode: 'ARBEID', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+          arbeidsforholdType: 'ARBEID',
         }],
       }, {
         tom: '2019-11-12',
         aktiviteter: [{
           fom: '2019-02-03',
           tom: '2019-11-11',
-          arbeidsforholdType: { kode: 'DAGPENGER', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+          arbeidsforholdType: 'DAGPENGER',
         }],
       }],
     },
     vurderBesteberegning: { skalHaBesteberegning: undefined },
     andelerForFaktaOmBeregning: [{
       belopReadOnly: 30000.00,
-      inntektskategori: { kode: 'ARBEIDSTAKER', kodeverk: 'INNTEKTSKATEGORI' },
-      aktivitetStatus: { kode: 'AT', kodeverk: 'AKTIVITET_STATUS' },
+      inntektskategori: 'ARBEIDSTAKER',
+      aktivitetStatus: 'AT',
       visningsnavn: 'BEDRIFT AS (910909088)',
       arbeidsforhold: {
         arbeidsgiverNavn: 'BEDRIFT AS',
@@ -74,9 +74,9 @@ export const beregningsgrunnlag = {
         arbeidsgiverIdent: '910909088',
         startdato: '2019-02-03',
         opphoersdato: '2020-02-03',
-        arbeidsforholdType: { kode: 'ARBEID', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+        arbeidsforholdType: 'ARBEID',
         belopFraInntektsmeldingPrMnd: 30000.00,
-        organisasjonstype: { kode: 'VIRKSOMHET', kodeverk: 'ORGANISASJONSTYPE' },
+        organisasjonstype: 'VIRKSOMHET',
       },
       andelsnr: 1,
       skalKunneEndreAktivitet: false,
@@ -84,7 +84,7 @@ export const beregningsgrunnlag = {
     }],
     vurderMilitaer: { harMilitaer: undefined },
   },
-  hjemmel: { kode: '-', kodeverk: 'BG_HJEMMEL' },
+  hjemmel: '-',
   årsinntektVisningstall: 0,
   dekningsgrad: 100,
   erOverstyrtInntekt: false,
@@ -92,10 +92,10 @@ export const beregningsgrunnlag = {
 
 export const aksjonspunkt = [
   {
-    definisjon: { kode: '5058', kodeverk: 'AKSJONSPUNKT_DEF' },
-    status: { kode: 'OPPR', kodeverk: 'AKSJONSPUNKT_STATUS' },
+    definisjon: '5058',
+    status: 'OPPR',
     toTrinnsBehandling: true,
-    aksjonspunktType: { kode: 'MANU', kodeverk: 'AKSJONSPUNKT_TYPE' },
+    aksjonspunktType: 'MANU',
     kanLoses: true,
     erAktivt: true,
   }];

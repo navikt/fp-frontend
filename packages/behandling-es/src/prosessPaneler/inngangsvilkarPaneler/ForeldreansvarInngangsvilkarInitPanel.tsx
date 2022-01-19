@@ -30,7 +30,7 @@ const AKSJONSPUNKT_TEKST_PER_KODE = {
 } as Record<string, string>;
 
 const hentAksjonspunktTekst = (aksjonspunkter: Aksjonspunkt[] = []): string => (aksjonspunkter.length > 0
-  ? intl.formatMessage({ id: AKSJONSPUNKT_TEKST_PER_KODE[aksjonspunkter[0].definisjon.kode] })
+  ? intl.formatMessage({ id: AKSJONSPUNKT_TEKST_PER_KODE[aksjonspunkter[0].definisjon] })
   : '');
 
 const VILKAR_KODER = [
@@ -65,7 +65,7 @@ const ForeldreansvarInngangsvilkarInitPanel: FunctionComponent<OwnProps & Inngan
       <>
         <ForeldreansvarVilkarProsessIndex
           isEngangsstonad
-          isForeldreansvar2Ledd={data.vilkar.some((v) => v.vilkarType.kode === vilkarType.FORELDREANSVARSVILKARET_2_LEDD)}
+          isForeldreansvar2Ledd={data.vilkar.some((v) => v.vilkarType === vilkarType.FORELDREANSVARSVILKARET_2_LEDD)}
           {...data}
         />
         <VerticalSpacer thirtyTwoPx />

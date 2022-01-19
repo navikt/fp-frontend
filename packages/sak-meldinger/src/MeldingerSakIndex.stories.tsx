@@ -5,7 +5,6 @@ import { action } from '@storybook/addon-actions';
 import ugunstAarsakTyper from '@fpsak-frontend/kodeverk/src/ugunstAarsakTyper';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import { Kodeverk } from '@fpsak-frontend/types';
 
 import MeldingerSakIndex from './MeldingerSakIndex';
 
@@ -17,7 +16,7 @@ export default {
 const Template: Story<{
   recipients: string[],
   templates: { kode: string, navn: string, tilgjengelig: boolean }[],
-  sprakKode: Kodeverk,
+  sprakKode: string,
   fagsakYtelseType: string,
   lagre: () => Promise<any>,
 }> = ({
@@ -39,10 +38,7 @@ const Template: Story<{
       previewCallback={action('button-click')}
       isKontrollerRevurderingApOpen={false}
       kanVeilede={false}
-      fagsakYtelseType={{
-        kode: fagsakYtelseType,
-        kodeverk: '',
-      }}
+      fagsakYtelseType={fagsakYtelseType}
       revurderingVarslingArsak={[{
         kode: ugunstAarsakTyper.BARN_IKKE_REGISTRERT_FOLKEREGISTER,
         navn: 'Barn ikke registrert i folkeregisteret',
@@ -69,10 +65,7 @@ Default.args = {
     navn: 'Revurderingsdokumentasjon',
     tilgjengelig: true,
   }],
-  sprakKode: {
-    kode: '',
-    kodeverk: '',
-  },
+  sprakKode: '',
   fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
   lagre: action('button-click') as () => Promise<any>,
 };
@@ -89,10 +82,7 @@ ForSvangerskapspenger.args = {
     navn: 'Revurderingsdokumentasjon',
     tilgjengelig: true,
   }],
-  sprakKode: {
-    kode: '',
-    kodeverk: '',
-  },
+  sprakKode: '',
   fagsakYtelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
   lagre: action('button-click') as () => Promise<any>,
 };

@@ -40,7 +40,7 @@ const buildInitialValues = (
 ): FormValues => {
   const upgMottattDato = uttaksperiodegrense ? uttaksperiodegrense.mottattDato : undefined;
   return {
-    gyldigSenFremsetting: isAksjonspunktOpen(aksjonspunkter[0].status.kode) ? undefined : upgMottattDato !== mottattDato,
+    gyldigSenFremsetting: isAksjonspunktOpen(aksjonspunkter[0].status) ? undefined : upgMottattDato !== mottattDato,
     ansesMottatt: upgMottattDato,
     ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
   };

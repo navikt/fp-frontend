@@ -2,7 +2,7 @@ import { RestApiConfigBuilder, createRequestApi, RestKey } from '@fpsak-frontend
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerWrapper, Behandling, Beregningsgrunnlag, BeregningsresultatFp, FamilieHendelseSamling,
-  Feriepengegrunnlag, FodselOgTilrettelegging, InntektArbeidYtelse, Kodeverk, Medlemskap, Opptjening, Personoversikt,
+  Feriepengegrunnlag, FodselOgTilrettelegging, InntektArbeidYtelse, Medlemskap, Opptjening, Personoversikt,
   SimuleringResultat, Soknad, TilbakekrevingValg, UttakPeriodeGrense, Verge, Vilkar, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { NyBehandlendeEnhetParams, SettPaVentParams } from '@fpsak-frontend/behandling-felles';
@@ -35,7 +35,7 @@ export const SvpBehandlingApiKeys = {
   BEHANDLING_NY_BEHANDLENDE_ENHET: new RestKey<void, NyBehandlendeEnhetParams>('BEHANDLING_NY_BEHANDLENDE_ENHET'),
   HENLEGG_BEHANDLING: new RestKey<void, { behandlingUuid: string, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>('HENLEGG_BEHANDLING'),
   RESUME_BEHANDLING: new RestKey<Behandling, { behandlingUuid: string, behandlingVersjon: number }>('RESUME_BEHANDLING'),
-  BEHANDLING_ON_HOLD: new RestKey<void, { behandlingUuid: string, behandlingVersjon: number, frist: string, ventearsak: Kodeverk }>('BEHANDLING_ON_HOLD'),
+  BEHANDLING_ON_HOLD: new RestKey<void, { behandlingUuid: string, behandlingVersjon: number, frist: string, ventearsak: string }>('BEHANDLING_ON_HOLD'),
   OPEN_BEHANDLING_FOR_CHANGES: new RestKey<Behandling, { behandlingUuid: string, behandlingVersjon: number }>('OPEN_BEHANDLING_FOR_CHANGES'),
   VERGE_OPPRETT: new RestKey<Behandling, any>('VERGE_OPPRETT'),
   VERGE_FJERN: new RestKey<Behandling, any>('VERGE_FJERN'),

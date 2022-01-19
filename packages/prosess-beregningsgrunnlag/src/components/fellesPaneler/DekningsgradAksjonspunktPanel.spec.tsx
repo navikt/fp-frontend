@@ -27,8 +27,8 @@ describe('<DekningsgradAksjonspunktPanel>', () => {
 
   it('Skal teste buildInitialValues når aksjonspunkt ikke er løst før', () => {
     const ap = {
-      definisjon: { kode: aksjonspunktCodes.VURDER_DEKNINGSGRAD, kodeverk: 'test' },
-      status: { kode: aksjonspunktStatus.OPPRETTET, kodeverk: 'test' },
+      definisjon: aksjonspunktCodes.VURDER_DEKNINGSGRAD,
+      status: aksjonspunktStatus.OPPRETTET,
     } as Aksjonspunkt;
     const bg = {
       dekningsgrad: 100,
@@ -39,8 +39,8 @@ describe('<DekningsgradAksjonspunktPanel>', () => {
 
   it('Skal teste buildInitialValues når aksjonspunkt er løst', () => {
     const ap = {
-      definisjon: { kode: aksjonspunktCodes.VURDER_DEKNINGSGRAD, kodeverk: 'test' },
-      status: { kode: aksjonspunktStatus.UTFORT, kodeverk: 'test' },
+      definisjon: aksjonspunktCodes.VURDER_DEKNINGSGRAD,
+      status: aksjonspunktStatus.UTFORT,
       begrunnelse: 'Testing testing',
     } as Aksjonspunkt;
     const bg = {

@@ -13,7 +13,7 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { DDMMYYYY_DATE_FORMAT, required } from '@fpsak-frontend/utils';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
-  Aksjonspunkt, Kodeverk, KodeverkMedNavn, MedlemPeriode, Medlemskap, Soknad, AlleKodeverk,
+  Aksjonspunkt, KodeverkMedNavn, MedlemPeriode, Medlemskap, Soknad, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import { formValueSelector } from 'redux-form';
 
@@ -36,7 +36,7 @@ type FixedMedlemskapPeriode = {
 
 export type FormValues = {
   fixedMedlemskapPerioder?: FixedMedlemskapPeriode[];
-  medlemskapManuellVurderingType?: Kodeverk;
+  medlemskapManuellVurderingType?: string;
   fodselsdato?: string;
   termindato?: string;
   omsorgsovertakelseDato?: string;
@@ -46,7 +46,7 @@ export type FormValues = {
 
 type TransformedValues = {
   kode: string;
-  medlemskapManuellVurderingType: Kodeverk;
+  medlemskapManuellVurderingType: string;
 }
 
 interface PureOwnProps {
@@ -68,8 +68,8 @@ interface MappedOwnProps {
 
 interface StaticFunctions {
   buildInitialValues?: (periode: PeriodeMedId, medlemskapPerioder: Medlemskap['medlemskapPerioder'], soknad: Soknad,
-  aksjonspunkter: Aksjonspunkt[], getKodeverknavn: (kodeverk: Kodeverk) => string) => FormValues;
-  transformValues?: (values: FormValues, manuellVurderingTyper: Kodeverk[]) => TransformedValues;
+  aksjonspunkter: Aksjonspunkt[], getKodeverknavn: (kodeverk: string) => string) => FormValues;
+  transformValues?: (values: FormValues, manuellVurderingTyper: string[]) => TransformedValues;
 }
 
 /**
@@ -131,7 +131,7 @@ export const PerioderMedMedlemskapFaktaPanelImpl: FunctionComponent<PureOwnProps
         {hasPeriodeAksjonspunkt && (
           <FlexRow>
             <FlexColumn>
-              <RadioGroupField name="medlemskapManuellVurderingType.kode" validate={[required]} readOnly={readOnly} isEdited={isPeriodAksjonspunktClosed}>
+              <RadioGroupField name="medlemskapManuellVurderingType" validate={[required]} readOnly={readOnly} isEdited={isPeriodAksjonspunktClosed}>
                 {sorterteVurderingstyper.map((type) => <RadioOption key={type.kode} value={type.kode} label={type.navn} />)}
               </RadioGroupField>
             </FlexColumn>
@@ -184,7 +184,7 @@ PerioderMedMedlemskapFaktaPanel.buildInitialValues = (
   medlemskapPerioder: Medlemskap['medlemskapPerioder'],
   soknad: Soknad,
   aksjonspunkter: Aksjonspunkt[],
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kodeverk: string) => string,
 ): FormValues => {
   if (medlemskapPerioder === null) {
     return {};
@@ -198,10 +198,10 @@ PerioderMedMedlemskapFaktaPanel.buildInitialValues = (
     beslutningsdato: i.beslutningsdato,
   }))
     .sort((p1, p2) => new Date(p1.fom).getTime() - new Date(p2.fom).getTime());
-  const filteredAp = aksjonspunkter.filter((ap) => periode.aksjonspunkter.includes(ap.definisjon.kode)
+  const filteredAp = aksjonspunkter.filter((ap) => periode.aksjonspunkter.includes(ap.definisjon)
       || (periode.aksjonspunkter.length > 0
         && periode.aksjonspunkter.includes(aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE)
-        && ap.definisjon.kode === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP));
+        && ap.definisjon === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP));
 
   return {
     fixedMedlemskapPerioder,
@@ -210,13 +210,13 @@ PerioderMedMedlemskapFaktaPanel.buildInitialValues = (
     termindato: soknad.termindato,
     omsorgsovertakelseDato: soknad.omsorgsovertakelseDato,
     hasPeriodeAksjonspunkt: filteredAp.length > 0,
-    isPeriodAksjonspunktClosed: filteredAp.some((ap) => !isAksjonspunktOpen(ap.status.kode)),
+    isPeriodAksjonspunktClosed: filteredAp.some((ap) => !isAksjonspunktOpen(ap.status)),
   };
 };
 
-PerioderMedMedlemskapFaktaPanel.transformValues = (values: FormValues, manuellVurderingTyper: Kodeverk[]): TransformedValues => ({
+PerioderMedMedlemskapFaktaPanel.transformValues = (values: FormValues, manuellVurderingTyper: string[]): TransformedValues => ({
   kode: aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
-  medlemskapManuellVurderingType: manuellVurderingTyper.find((m: Kodeverk) => m.kode === values.medlemskapManuellVurderingType.kode),
+  medlemskapManuellVurderingType: manuellVurderingTyper.find((m: string) => m === values.medlemskapManuellVurderingType),
 });
 
 export default PerioderMedMedlemskapFaktaPanel;

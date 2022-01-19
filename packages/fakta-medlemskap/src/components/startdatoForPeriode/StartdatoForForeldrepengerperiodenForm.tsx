@@ -15,7 +15,7 @@ import { DatepickerField, TextAreaField } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import { Aksjonspunkt, Kodeverk, Soknad } from '@fpsak-frontend/types';
+import { Aksjonspunkt, Soknad } from '@fpsak-frontend/types';
 import { OverstyringAvklarStartdatoForPeriodenAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import styles from './startdatoForForeldrepengerperiodenForm.less';
@@ -36,7 +36,7 @@ interface PureOwnProps {
   soknad: Soknad;
   submitCallback: (data: OverstyringAvklarStartdatoForPeriodenAp) => Promise<void>;
   readOnlyForStartdatoForForeldrepenger: boolean;
-  behandlingStatus: Kodeverk;
+  behandlingStatus: string;
   hasOpenMedlemskapAksjonspunkter: boolean;
   submittable: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
@@ -110,7 +110,7 @@ const buildInitialValues = createSelector(
   [(ownProps: PureOwnProps) => ownProps.aksjonspunkter,
     (ownProps: PureOwnProps) => ownProps.soknad.oppgittFordeling],
   (aksjonspunkter, oppgittFordeling = {}): FormValues => {
-    const overstyringAp = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO);
+    const overstyringAp = aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO);
     return {
       opprinneligDato: oppgittFordeling.startDatoForPermisjon,
       startdatoFraSoknad: oppgittFordeling.startDatoForPermisjon,
@@ -153,13 +153,13 @@ const lagValidateFn = createSelector([(ownProps: PureOwnProps) => ownProps.intl]
 const mapStateToProps = (_state, ownProps: PureOwnProps): MappedOwnProps => {
   const { aksjonspunkt } = ownProps;
   const hasAksjonspunkt = aksjonspunkt !== undefined;
-  const hasOpenAksjonspunkt = hasAksjonspunkt && isAksjonspunktOpen(aksjonspunkt.status.kode);
+  const hasOpenAksjonspunkt = hasAksjonspunkt && isAksjonspunktOpen(aksjonspunkt.status);
   return {
     hasAksjonspunkt,
     hasOpenAksjonspunkt,
     onSubmit: lagSubmitFn(ownProps),
     validate: lagValidateFn(ownProps),
-    overstyringDisabled: ownProps.readOnlyForStartdatoForForeldrepenger || ownProps.behandlingStatus.kode !== behandlingStatus.BEHANDLING_UTREDES,
+    overstyringDisabled: ownProps.readOnlyForStartdatoForForeldrepenger || ownProps.behandlingStatus !== behandlingStatus.BEHANDLING_UTREDES,
     initialValues: buildInitialValues(ownProps),
   };
 };

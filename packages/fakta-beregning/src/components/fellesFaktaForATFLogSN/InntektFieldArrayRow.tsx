@@ -7,12 +7,11 @@ import { parseCurrencyInput } from '@fpsak-frontend/utils';
 import { TableColumn, TableRow } from '@fpsak-frontend/shared-components';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { FieldArrayFieldsProps } from 'redux-form';
-import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
-import { AlleKodeverk } from '@fpsak-frontend/types';
+import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 import styles from './inntektFieldArray.less';
 import { getKanRedigereInntekt, getSkalRedigereInntektskategori } from './BgFaktaUtils';
 
-export const getHeaderTextCodes = (skalVisePeriode, skalViseRefusjon) => {
+export const getHeaderTextCodes = (skalVisePeriode: boolean, skalViseRefusjon: boolean) => {
   const headerCodes = [];
   headerCodes.push('BeregningInfoPanel.FordelingBG.Andel');
   if (skalVisePeriode) {
@@ -27,7 +26,7 @@ export const getHeaderTextCodes = (skalVisePeriode, skalViseRefusjon) => {
   return headerCodes;
 };
 
-const inntektskategoriSelectValues = (kategorier) => kategorier.map((ik) => (
+const inntektskategoriSelectValues = (kategorier: KodeverkMedNavn[]) => kategorier.map((ik) => (
   <option value={ik.kode} key={ik.kode}>
     {ik.navn}
   </option>
@@ -36,7 +35,7 @@ const inntektskategoriSelectValues = (kategorier) => kategorier.map((ik) => (
 type OwnProps = {
     readOnly: boolean;
     fields: FieldArrayFieldsProps<any>;
-    inntektskategoriKoder: Kodeverk[];
+    inntektskategoriKoder: KodeverkMedNavn[];
     isAksjonspunktClosed: boolean;
     skalVisePeriode: boolean;
     skalViseRefusjon: boolean;

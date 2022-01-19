@@ -24,7 +24,7 @@ import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import {
-  ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Kodeverk, KodeverkMedNavn, AlleKodeverk,
+  ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, KodeverkMedNavn, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import LabelType from '@fpsak-frontend/form/src/LabelType';
 import finnUnikeArbeidsforhold from '../FinnUnikeArbeidsforhold';
@@ -55,7 +55,7 @@ const fieldLabel = (index: number, labelId: string): LabelType => {
 };
 
 const lagVisningsnavn = (arbeidsforhold: BGFordelArbeidsforhold,
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kodeverk: string) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
   const agOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverId];
   if (!agOpplysninger) {
@@ -65,7 +65,7 @@ const lagVisningsnavn = (arbeidsforhold: BGFordelArbeidsforhold,
 };
 
 const arbeidsgiverSelectValues = (arbeidsforholdList: BGFordelArbeidsforhold[],
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kodeverk: string) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement[] => (arbeidsforholdList
   .map((arbeidsforhold) => (
     <option value={arbeidsforhold.andelsnr.toString()} key={arbeidsforhold.andelsnr}>
@@ -75,7 +75,7 @@ const arbeidsgiverSelectValues = (arbeidsforholdList: BGFordelArbeidsforhold[],
 
 const arbeidsgiverSelectValuesForKunYtelse = (arbeidsforholdList: BGFordelArbeidsforhold[],
   intl: IntlShape,
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kodeverk: string) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement[] => {
   const nedtrekksvalgListe = arbeidsforholdList
     .map((arbeidsforhold) => (
@@ -396,7 +396,7 @@ const getHeaderTextCodes = (erRevurdering: boolean): string[] => {
 type MappedOwnProps = {
   erRevurdering: boolean;
   inntektskategoriKoder: KodeverkMedNavn[];
-  getKodeverknavn: (kodeverk: Kodeverk) => string;
+  getKodeverknavn: (kodeverk: string) => string;
   arbeidsforholdList: BGFordelArbeidsforhold[];
   harKunYtelse: boolean;
 }
@@ -408,7 +408,7 @@ type OwnProps = {
     isAksjonspunktClosed: boolean;
     skalIkkeRedigereInntekt: boolean;
     alleKodeverk: AlleKodeverk;
-    behandlingType: Kodeverk;
+    behandlingType: string;
     beregningsgrunnlag: Beregningsgrunnlag;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 };
@@ -417,7 +417,7 @@ interface StaticFunctions {
   validate: (intl: IntlShape,
              values: FordelBeregningsgrunnlagAndelValues[],
              sumIPeriode: number,
-             getKodeverknavn: (kodeverk: Kodeverk) => string,
+             getKodeverknavn: (kodeverk: string) => string,
              grunnbeløp: number,
              periode: PeriodeTsType,
              skalValidereRefusjon: boolean,
@@ -532,7 +532,7 @@ RenderFordelBGFieldArrayImpl.validate = (intl, values, sumIPeriode, getKodeverkn
 
 const mapStateToPropsFactory = (initialState: any, initialOwnProps: OwnProps) => {
   const { behandlingType } = initialOwnProps;
-  const erRevurdering = behandlingType ? behandlingType.kode === bt.REVURDERING : false;
+  const erRevurdering = behandlingType ? behandlingType === bt.REVURDERING : false;
   const inntektskategoriKoder = initialOwnProps.alleKodeverk[kodeverkTyper.INNTEKTSKATEGORI];
   const getKodeverknavn = getKodeverknavnFn(initialOwnProps.alleKodeverk, kodeverkTyper);
   return (state: any, ownProps: OwnProps): MappedOwnProps => ({
@@ -541,7 +541,7 @@ const mapStateToPropsFactory = (initialState: any, initialOwnProps: OwnProps) =>
     getKodeverknavn,
     arbeidsforholdList: finnUnikeArbeidsforhold(ownProps),
     harKunYtelse: initialOwnProps.beregningsgrunnlag.aktivitetStatus
-      .some((status) => status.kode === aktivitetStatuser.KUN_YTELSE),
+      .some((status) => status === aktivitetStatuser.KUN_YTELSE),
   });
 };
 

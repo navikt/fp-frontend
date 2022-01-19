@@ -40,12 +40,12 @@ const getVedtakStatus = (
   behandlingsresultat?: Behandlingsresultat,
   aksjonspunkter: Aksjonspunkt[] = [],
 ) => {
-  const harApentAksjonpunkt = aksjonspunkter.some((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET);
+  const harApentAksjonpunkt = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET);
   if (aksjonspunkter.length === 0 || harApentAksjonpunkt) {
     return vilkarUtfallType.IKKE_VURDERT;
   }
 
-  const resultatTypeCode = behandlingsresultat?.type.kode;
+  const resultatTypeCode = behandlingsresultat?.type;
   if (resultatTypeCode === behandlingResultatType.KLAGE_AVVIST || resultatTypeCode === behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET) {
     return vilkarUtfallType.IKKE_OPPFYLT;
   }

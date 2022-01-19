@@ -39,7 +39,7 @@ export const BEGRUNNELSE_AVKLARE_AKTIVITETER_NAME = 'begrunnelseAvklareAktivitet
 export const MANUELL_OVERSTYRING_FIELD = 'manuellOverstyringBeregningAktiviteter';
 
 const findAksjonspunktMedBegrunnelse = (aksjonspunkter: Aksjonspunkt[], kode: string): Aksjonspunkt => aksjonspunkter
-  .filter((ap) => ap.definisjon.kode === kode && ap.begrunnelse !== null)[0];
+  .filter((ap) => ap.definisjon === kode && ap.begrunnelse !== null)[0];
 
 const getAvklarAktiviteter = createSelector(
   [(ownProps: OwnProps) => ownProps.beregningsgrunnlag.faktaOmBeregning],
@@ -107,8 +107,8 @@ const buildInitialValues = (aksjonspunkter: Aksjonspunkt[],
   };
 };
 
-const hasOpenAksjonspunkt = (kode: string, aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter.some((ap) => ap.definisjon.kode === kode
-  && isAksjonspunktOpen(ap.status.kode));
+const hasOpenAksjonspunkt = (kode: string, aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter.some((ap) => ap.definisjon === kode
+  && isAksjonspunktOpen(ap.status));
 
 const hasOpenAvklarAksjonspunkter = (aksjonspunkter: Aksjonspunkt[]): boolean => hasOpenAksjonspunkt(AVKLAR_AKTIVITETER, aksjonspunkter)
 || hasOpenAksjonspunkt(OVERSTYRING_AV_BEREGNINGSAKTIVITETER, aksjonspunkter);
@@ -408,9 +408,9 @@ const skalKunneOverstyre = (erOverstyrer: boolean,
 
 const getIsAksjonspunktClosed = createSelector([(ownProps: OwnProps) => ownProps.aksjonspunkter],
   (alleAp): boolean => {
-    const relevantOpenAps = alleAp.filter((ap) => ap.definisjon.kode === aksjonspunktCodes.AVKLAR_AKTIVITETER
-    || ap.definisjon.kode === aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSAKTIVITETER)
-      .filter((ap) => isAksjonspunktOpen(ap.status.kode));
+    const relevantOpenAps = alleAp.filter((ap) => ap.definisjon === aksjonspunktCodes.AVKLAR_AKTIVITETER
+    || ap.definisjon === aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSAKTIVITETER)
+      .filter((ap) => isAksjonspunktOpen(ap.status));
     return relevantOpenAps.length === 0;
   });
 

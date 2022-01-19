@@ -59,7 +59,7 @@ const alleKodeverk = {
 describe('<UnwrappedForm>', () => {
   it('Skal teste at riktig componenter blir renderet for FL readOnly', () => {
     relevanteStatuser.isFrilanser = true;
-    allePerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetStatus.kode = 'FL';
+    allePerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetstatus = 'FL';
     const readOnly = true;
     const wrapper = shallowWithIntl(<UnwrappedForm
       intl={intlMock}
@@ -90,7 +90,7 @@ describe('<UnwrappedForm>', () => {
 
   it('Skal teste at submitButton blir rendret riktig når readOnly=false', () => {
     relevanteStatuser.isFrilanser = true;
-    allePerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetStatus.kode = 'FL';
+    allePerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetstatus = 'FL';
     const readOnly = false;
     const wrapper = shallowWithIntl(<UnwrappedForm
       readOnly={readOnly}
@@ -122,7 +122,7 @@ describe('<UnwrappedForm>', () => {
     relevanteStatuser.isFrilanser = false;
     relevanteStatuser.isSelvstendigNaeringsdrivende = false;
     relevanteStatuser.isArbeidstaker = true;
-    allePerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetStatus.kode = 'AT';
+    allePerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetstatus = 'AT';
     const readOnly = true;
     const wrapper = shallowWithIntl(<UnwrappedForm
       readOnly={readOnly}
@@ -154,7 +154,7 @@ describe('<UnwrappedForm>', () => {
     relevanteStatuser.isFrilanser = false;
     relevanteStatuser.isSelvstendigNaeringsdrivende = false;
     relevanteStatuser.isArbeidstaker = true;
-    allePerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetStatus.kode = 'AT';
+    allePerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetstatus = 'AT';
     allePerioder[0].periodeAarsaker.push({ kode: periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET, kodeverk: 'test' });
     const readOnly = true;
     const wrapper = shallowWithIntl(<UnwrappedForm

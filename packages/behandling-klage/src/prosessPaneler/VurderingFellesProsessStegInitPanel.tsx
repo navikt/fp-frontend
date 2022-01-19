@@ -5,7 +5,7 @@ import React, {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import KlagevurderingProsessIndex, { AksjonspunktVerdier, KlageVurderingBrevData } from '@fpsak-frontend/prosess-klagevurdering';
 import {
-  Aksjonspunkt, Behandling, Fagsak, KlageVurdering, Kodeverk,
+  Aksjonspunkt, Behandling, Fagsak, KlageVurdering,
 } from '@fpsak-frontend/types';
 import klageVurderingKodeverk from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { useStandardProsessPanelProps, ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
@@ -46,10 +46,10 @@ const getLagringSideeffekter = (
   toggleKlageModal: (skalViseModal: boolean) => void,
   toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
   oppdaterProsessStegOgFaktaPanelIUrl?: (punktnavn?: string, faktanavn?: string) => void,
-) => (aksjonspunktModels: { kode: string, klageVurdering?: Kodeverk }[]) => {
+) => (aksjonspunktModels: { kode: string, klageVurdering?: string }[]) => {
   const skalByttTilKlageinstans = aksjonspunktModels
     .some((apValue) => apValue.kode === aksjonspunktCodes.BEHANDLE_KLAGE_NFP
-    && apValue.klageVurdering?.kode === klageVurderingKodeverk.STADFESTE_YTELSESVEDTAK);
+    && apValue.klageVurdering === klageVurderingKodeverk.STADFESTE_YTELSESVEDTAK);
 
   if (skalByttTilKlageinstans) {
     toggleOppdatereFagsakContext(false);

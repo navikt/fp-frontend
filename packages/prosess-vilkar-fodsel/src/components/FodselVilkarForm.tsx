@@ -58,7 +58,7 @@ const transformValues = (
 ): VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
-  kode: validerApKodeOgHentApEnum(aksjonspunkter[0].definisjon.kode,
+  kode: validerApKodeOgHentApEnum(aksjonspunkter[0].definisjon,
     AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
     AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN),
 });
@@ -100,7 +100,7 @@ const FodselVilkarForm: FunctionComponent<OwnProps> = ({
   const alleAvslagsarsaker = alleKodeverk[kodeverkTyper.AVSLAGSARSAK][vilkarType.FODSELSVILKARET_MOR];
   const avslagsarsaker = getFodselVilkarAvslagsarsaker(ytelseTypeKode === fagsakYtelseType.FORELDREPENGER, alleAvslagsarsaker);
 
-  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
+  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status));
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
   const { lovReferanse } = vilkar[0];
 

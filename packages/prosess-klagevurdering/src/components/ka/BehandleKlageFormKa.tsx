@@ -11,7 +11,7 @@ import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import {
-  KlageVurdering, Kodeverk, AlleKodeverk, KlageVurderingResultat,
+  KlageVurdering, AlleKodeverk, KlageVurderingResultat,
 } from '@fpsak-frontend/types';
 import { KlageVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -23,9 +23,9 @@ import TempsaveKlageButton, { TransformedValues } from '../felles/TempsaveKlageB
 import styles from './behandleKlageFormKa.less';
 
 const transformValues = (values: FormValues): KlageVurderingResultatAp => ({
-  klageMedholdArsak: (values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE
-    || values.klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? values.klageMedholdArsak : null,
-  klageVurderingOmgjoer: values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
+  klageMedholdArsak: (values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE
+    || values.klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? values.klageMedholdArsak : null,
+  klageVurderingOmgjoer: values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
   klageVurdering: values.klageVurdering,
   fritekstTilBrev: values.fritekstTilBrev,
   begrunnelse: values.begrunnelse,
@@ -35,9 +35,9 @@ const transformValues = (values: FormValues): KlageVurderingResultatAp => ({
 type FormValues = {
   begrunnelse?: string;
   fritekstTilBrev?: string;
-  klageVurdering?: Kodeverk;
-  klageVurderingOmgjoer?: Kodeverk;
-  klageMedholdArsak?: Kodeverk;
+  klageVurdering?: string;
+  klageVurderingOmgjoer?: string;
+  klageMedholdArsak?: string;
 };
 
 const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): FormValues => ({
@@ -54,7 +54,7 @@ interface OwnProps {
   readOnly?: boolean;
   readOnlySubmitButton?: boolean;
   alleKodeverk: AlleKodeverk;
-  sprakkode: Kodeverk;
+  sprakkode: string;
   submitCallback: (data: KlageVurderingResultatAp) => Promise<void>;
   klageVurdering: KlageVurdering;
   formData?: FormValues;
