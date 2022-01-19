@@ -60,7 +60,7 @@ NyoppstartetFLForm.buildInitialValues = (beregningsgrunnlag: Beregningsgrunnlag)
   }
   const alleAndeler = beregningsgrunnlag.beregningsgrunnlagPeriode
     .map((periode) => periode.beregningsgrunnlagPrStatusOgAndel);
-  const flAndeler = alleAndeler.flat().filter((andel) => andel.aktivitetstatus === aktivitetStatus.FRILANSER);
+  const flAndeler = alleAndeler.flat().filter((andel) => andel.aktivitetStatus === aktivitetStatus.FRILANSER);
   if (flAndeler.length > 0) {
     initialValues[erNyoppstartetFLField] = flAndeler[0].erNyoppstartet;
   }
@@ -72,7 +72,7 @@ NyoppstartetFLForm.transformValues = (values: FaktaOmBeregningAksjonspunktValues
   faktaOmBeregning: FaktaOmBeregning,
   fastsatteAndelsnr: number[]): FaktaBeregningTransformedValues => {
   const tilfeller = faktaOmBeregning.faktaOmBeregningTilfeller ? faktaOmBeregning.faktaOmBeregningTilfeller : [];
-  if (!tilfeller.map(({ kode }) => kode).includes(faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL)) {
+  if (!tilfeller.map((kode) => kode).includes(faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL)) {
     return {};
   }
   if (!inntektPrMnd || inntektPrMnd.length === 0) {

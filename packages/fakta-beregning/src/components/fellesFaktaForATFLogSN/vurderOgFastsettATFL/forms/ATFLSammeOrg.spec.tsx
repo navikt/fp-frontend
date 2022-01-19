@@ -13,7 +13,7 @@ describe('<ATFLSammeOrg>', () => {
     const wrapper = shallow(<ATFLSammeOrgTekst
       beregningsgrunnlag={{
         faktaOmBeregning: {
-          faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE, kodeverk: 'test' }],
+          faktaOmBeregningTilfeller: [faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE],
           andelerForFaktaOmBeregning: [],
         },
       } as Beregningsgrunnlag}
@@ -26,8 +26,8 @@ describe('<ATFLSammeOrg>', () => {
     const beregningsgrunnlag = {
       faktaOmBeregning: {
         faktaOmBeregningTilfeller:
-      [{ kode: faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE, kodeverk: 'test' },
-        { kode: faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON, kodeverk: 'test' }],
+      [faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE,
+        faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON],
         andelerForFaktaOmBeregning: [],
       },
     };
@@ -44,8 +44,8 @@ describe('<ATFLSammeOrg>', () => {
     const beregningsgrunnlag = {
       faktaOmBeregning: {
         faktaOmBeregningTilfeller:
-          [{ kode: faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE, kodeverk: 'test' },
-            { kode: faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON, kodeverk: 'test' }],
+          [faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE,
+            faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON],
         andelerForFaktaOmBeregning: [],
       },
     };
@@ -68,8 +68,8 @@ describe('<ATFLSammeOrg>', () => {
   const faktaOmBeregningFrilansAndel = {
     andelsnr: 1,
     arbeidsforhold: null,
-    inntektskategori: { kode: inntektskategorier.FRILANSER, kodeverk: 'test' },
-    aktivitetStatus: { kode: aktivitetStatus.FRILANSER, kodeverk: 'test' },
+    inntektskategori: inntektskategorier.FRILANSER,
+    aktivitetStatus: aktivitetStatus.FRILANSER,
     lagtTilAvSaksbehandler: false,
     andelIArbeid: [],
   };
@@ -77,8 +77,8 @@ describe('<ATFLSammeOrg>', () => {
   const faktaOmBeregningATAndel = {
     andelsnr: 2,
     arbeidsforhold,
-    inntektskategori: { kode: inntektskategorier.ARBEIDSTAKER, kodeverk: 'test' },
-    aktivitetStatus: { kode: aktivitetStatus.ARBEIDSTAKER, kodeverk: 'test' },
+    inntektskategori: inntektskategorier.ARBEIDSTAKER,
+    aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
     lagtTilAvSaksbehandler: false,
     andelIArbeid: [],
   };
@@ -106,7 +106,7 @@ describe('<ATFLSammeOrg>', () => {
   it('skal ikkje transform values uten tilfelle', () => {
     const faktaOmBeregning = {
       andelerForFaktaOmBeregning: [],
-      faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_LONNSENDRING, kodeverk: 'test' }],
+      faktaOmBeregningTilfeller: [faktaOmBeregningTilfelle.VURDER_LONNSENDRING],
       arbeidstakerOgFrilanserISammeOrganisasjonListe: [{ ...faktaOmBeregningATAndel, inntektPrMnd: 10000 }],
       frilansAndel: faktaOmBeregningFrilansAndel,
     };
@@ -118,7 +118,7 @@ describe('<ATFLSammeOrg>', () => {
   it('skal transform values', () => {
     const faktaOmBeregning = {
       andelerForFaktaOmBeregning: [],
-      faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON, kodeverk: 'test' }],
+      faktaOmBeregningTilfeller: [faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON],
       arbeidstakerOgFrilanserISammeOrganisasjonListe: [{ ...faktaOmBeregningATAndel, inntektPrMnd: 10000 }],
       frilansAndel: faktaOmBeregningFrilansAndel,
     };
@@ -140,7 +140,7 @@ describe('<ATFLSammeOrg>', () => {
   it('skal ikkje transform values når andelsnr har blitt submittet fra før', () => {
     const faktaOmBeregning = {
       andelerForFaktaOmBeregning: [],
-      faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON, kodeverk: 'test' }],
+      faktaOmBeregningTilfeller: [faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON],
       arbeidstakerOgFrilanserISammeOrganisasjonListe: [{ ...faktaOmBeregningATAndel, inntektPrMnd: 10000 }],
       frilansAndel: faktaOmBeregningFrilansAndel,
     };

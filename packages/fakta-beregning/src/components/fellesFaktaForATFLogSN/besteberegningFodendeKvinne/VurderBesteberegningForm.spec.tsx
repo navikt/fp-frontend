@@ -34,14 +34,8 @@ describe('<VurderBesteberegning>', () => {
       andeler: [{ andelsnr: 1, aktivitetStatus: { kode: 'AT' } }],
     };
     const ap = {
-      definisjon: {
-        kode: OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
-        kodeverk: 'test',
-      },
-      status: {
-        kode: 'OPPR',
-        kodeverk: 'test',
-      },
+      definisjon: OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
+      status: 'OPPR',
       kanLoses: true,
       erAktivt: true,
     };

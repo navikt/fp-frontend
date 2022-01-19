@@ -30,7 +30,7 @@ const arbeidsforhold3 = {
 } as BeregningsgrunnlagArbeidsforhold;
 
 const andel = {
-  aktivitetStatus: { kode: aktivitetStatus.ARBEIDSTAKER, kodeverk: 'test' },
+  aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
   andelsnr: 1,
   inntektPrMnd: 25000,
   lagtTilAvSaksbehandler: false,
@@ -38,7 +38,7 @@ const andel = {
 };
 
 const andel2 = {
-  aktivitetStatus: { kode: aktivitetStatus.ARBEIDSTAKER, kodeverk: 'test' },
+  aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
   andelsnr: 2,
   inntektPrMnd: 25000,
   lagtTilAvSaksbehandler: false,
@@ -46,7 +46,7 @@ const andel2 = {
 };
 
 const andel3 = {
-  aktivitetStatus: { kode: aktivitetStatus.ARBEIDSTAKER, kodeverk: 'test' },
+  aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
   andelsnr: 3,
   inntektPrMnd: 25000,
   lagtTilAvSaksbehandler: false,
@@ -54,7 +54,7 @@ const andel3 = {
 };
 
 const frilansAndel = {
-  aktivitetStatus: { kode: aktivitetStatus.FRILANSER, kodeverk: 'test' },
+  aktivitetStatus: aktivitetStatus.FRILANSER,
   andelsnr: 4,
 };
 

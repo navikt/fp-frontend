@@ -57,7 +57,7 @@ export const getKunYtelse = createSelector(
 export const getFaktaOmBeregningTilfellerKoder = createSelector(
   [(ownProps: OwnProps) => getFaktaOmBeregning(ownProps)],
   (faktaOmBeregning = {} as FaktaOmBeregning) => (faktaOmBeregning && faktaOmBeregning.faktaOmBeregningTilfeller
-    ? faktaOmBeregning.faktaOmBeregningTilfeller.map(({ kode }) => kode) : []),
+    ? faktaOmBeregning.faktaOmBeregningTilfeller : []),
 );
 export const getVurderMottarYtelse = createSelector(
   [getFaktaOmBeregning],

@@ -11,7 +11,7 @@ const aktivitet1 = {
   fom: '2019-01-01',
   tom: null,
   skalBrukes: null,
-  arbeidsforholdType: { kode: 'ARBEID', navn: 'Arbeid', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+  arbeidsforholdType: 'ARBEID',
 };
 
 const aktivitet2 = {
@@ -20,7 +20,7 @@ const aktivitet2 = {
   fom: '2019-01-01',
   tom: '2019-02-02',
   skalBrukes: true,
-  arbeidsforholdType: { kode: 'ARBEID', navn: 'Arbeid', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+  arbeidsforholdType: 'ARBEID',
 };
 
 const aktivitet3 = {
@@ -30,11 +30,11 @@ const aktivitet3 = {
   fom: '2019-01-01',
   tom: '2019-02-02',
   skalBrukes: false,
-  arbeidsforholdType: { kode: 'ARBEID', navn: 'Arbeid', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+  arbeidsforholdType: 'ARBEID',
 };
 
 const aktivitetAAP = {
-  arbeidsforholdType: { kode: 'AAP', navn: 'Arbeidsavklaringspenger', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+  arbeidsforholdType: 'AAP',
   fom: '2019-01-01',
   tom: '2020-02-02',
   skalBrukes: null,
@@ -81,7 +81,7 @@ describe('<VurderAktiviteterPanel>', () => {
       fom: '2019-01-01',
       tom: '2019-01-01',
       skalBrukes: null,
-      arbeidsforholdType: { kode: 'ARBEID', navn: 'Arbeid', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+      arbeidsforholdType: 'ARBEID',
     };
     const aktivitet2STP2 = {
       arbeidsgiverIdent: '334534623342',
@@ -89,7 +89,7 @@ describe('<VurderAktiviteterPanel>', () => {
       fom: '2019-01-01',
       tom: '2019-01-01',
       skalBrukes: true,
-      arbeidsforholdType: { kode: 'ARBEID', navn: 'Arbeid', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+      arbeidsforholdType: 'ARBEID',
     };
 
     const aktiviteterTomDatoMapping = [
@@ -120,7 +120,7 @@ describe('<VurderAktiviteterPanel>', () => {
       fom: '2019-01-01',
       tom: '2019-01-01',
       skalBrukes: null,
-      arbeidsforholdType: { kode: 'ARBEID', navn: 'Arbeid', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+      arbeidsforholdType: 'ARBEID',
     };
     const aktivitetStp3 = {
       aktørIdString: '324234234234',
@@ -129,7 +129,7 @@ describe('<VurderAktiviteterPanel>', () => {
       fom: '2018-01-01',
       tom: '2018-12-31',
       skalBrukes: false,
-      arbeidsforholdType: { kode: 'ARBEID', navn: 'Arbeid', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+      arbeidsforholdType: 'ARBEID',
     };
     const aktiviteterTomDatoMapping = [
       { tom: '2019-02-02', aktiviteter: [aktivitet3, aktivitetAAP] },
@@ -162,7 +162,7 @@ describe('<VurderAktiviteterPanel>', () => {
       fom: '2019-01-01',
       tom: '2019-01-01',
       skalBrukes: null,
-      arbeidsforholdType: { kode: 'ARBEID', navn: 'Arbeid', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+      arbeidsforholdType: 'ARBEID',
     };
     const aktivitet2STP2 = {
       arbeidsgiverIdent: '334534623342',
@@ -170,7 +170,7 @@ describe('<VurderAktiviteterPanel>', () => {
       fom: '2019-01-01',
       tom: '2019-01-01',
       skalBrukes: true,
-      arbeidsforholdType: { kode: 'ARBEID', navn: 'Arbeid', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+      arbeidsforholdType: 'ARBEID',
     };
 
     const aktiviteterTomDatoMapping = [

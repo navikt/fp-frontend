@@ -14,7 +14,7 @@ import {
   ATFLSammeOrgAndel,
   AlleKodeverk, Aksjonspunkt,
 } from '@fpsak-frontend/types';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { lonnsendringField } from './vurderOgFastsettATFL/forms/LonnsendringForm';
 import { erNyoppstartetFLField } from './vurderOgFastsettATFL/forms/NyoppstartetFLForm';
 import { harEtterlonnSluttpakkeField } from './vurderOgFastsettATFL/forms/VurderEtterlonnSluttpakkeForm';
@@ -46,8 +46,8 @@ const lagVisningsnavn = (andel: AndelForFaktaOmBeregning,
   const agOpplysning = andel.arbeidsforhold ? arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent] : undefined;
   if (!agOpplysning) {
     return andel.arbeidsforhold && andel.arbeidsforhold.arbeidsforholdType
-      ? getKodeverknavnFn(alleKodeverk, kodeverkTyper)(andel.arbeidsforhold.arbeidsforholdType)
-      : getKodeverknavnFn(alleKodeverk, kodeverkTyper)(andel.aktivitetStatus);
+      ? getKodeverknavnFn(alleKodeverk, KodeverkType)(andel.arbeidsforhold.arbeidsforholdType, KodeverkType.OPPTJENING_AKTIVITET_TYPE)
+      : getKodeverknavnFn(alleKodeverk, KodeverkType)(andel.aktivitetStatus, KodeverkType.AKTIVITET_STATUS);
   }
   return createVisningsnavnFakta(agOpplysning, andel.arbeidsforhold.eksternArbeidsforholdId);
 };

@@ -29,8 +29,8 @@ const arbeidsgiver = {
 
 const arbeidstakerIkkeFastsatt = {
   lagtTilAvSaksbehandler: false,
-  aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER, kodeverk: 'test' },
-  inntektskategori: { kode: 'ARBEIDSTAKER', kodeverk: 'test' },
+  aktivitetStatus: aktivitetStatuser.ARBEIDSTAKER,
+  inntektskategori: 'ARBEIDSTAKER',
 };
 
 const arbeidstakerAndel1 = {
@@ -67,11 +67,11 @@ const alleKodeverk = {
 
 describe('<BgFaktaUtils>', () => {
   const dagpengerAndel = {
-    aktivitetStatus: { kode: aktivitetStatuser.DAGPENGER, kodeverk: 'test' },
+    aktivitetStatus: aktivitetStatuser.DAGPENGER,
     andelsnr: 1,
     skalKunneEndreAktivitet: false,
     lagtTilAvSaksbehandler: true,
-    inntektskategori: { kode: 'DAGPENGER', kodeverk: 'test' },
+    inntektskategori: 'DAGPENGER',
     beregnetPrAar: 240000,
     fastsattBelop: 20000,
     belopReadOnly: 0,
@@ -94,11 +94,11 @@ describe('<BgFaktaUtils>', () => {
 
   it('skal mappe AAP-andel til feltverdier', () => {
     const AAPAndel = {
-      aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSAVKLARINGSPENGER, kodeverk: 'test' },
+      aktivitetStatus: aktivitetStatuser.ARBEIDSAVKLARINGSPENGER,
       andelsnr: 1,
       skalKunneEndreAktivitet: false,
       lagtTilAvSaksbehandler: false,
-      inntektskategori: { kode: 'AAP', kodeverk: 'test' },
+      inntektskategori: 'AAP',
       beregnetPrAar: null,
       fastsattBelop: null,
       belopReadOnly: 10000,
@@ -118,11 +118,11 @@ describe('<BgFaktaUtils>', () => {
 
   it('skal mappe AT uten inntektsmelding med FL i samme org til feltverdier', () => {
     const ATAndel = {
-      aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER, kodeverk: 'test' },
+      aktivitetStatus: aktivitetStatuser.ARBEIDSTAKER,
       andelsnr: 1,
       skalKunneEndreAktivitet: false,
       lagtTilAvSaksbehandler: false,
-      inntektskategori: { kode: 'AT', kodeverk: 'test' },
+      inntektskategori: 'AT',
       beregnetPrAar: null,
       belopFraMeldekortPrMnd: null,
     };
@@ -140,11 +140,11 @@ describe('<BgFaktaUtils>', () => {
 
   it('skal mappe FL med AT i samme org til feltverdier', () => {
     const ATAndel = {
-      aktivitetStatus: { kode: aktivitetStatuser.FRILANSER, kodeverk: 'test' },
+      aktivitetStatus: aktivitetStatuser.FRILANSER,
       andelsnr: 1,
       skalKunneEndreAktivitet: false,
       lagtTilAvSaksbehandler: false,
-      inntektskategori: { kode: 'FL', kodeverk: 'test' },
+      inntektskategori: 'FL',
       beregnetPrAar: null,
       belopFraMeldekortPrMnd: null,
     };
@@ -162,11 +162,11 @@ describe('<BgFaktaUtils>', () => {
 
   it('skal mappe AT med inntektsmelding til feltverdier', () => {
     const ATAndel = {
-      aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER, kodeverk: 'AKTIVITET_STATUS' },
+      aktivitetStatus: aktivitetStatuser.ARBEIDSTAKER,
       andelsnr: 1,
       skalKunneEndreAktivitet: false,
       lagtTilAvSaksbehandler: false,
-      inntektskategori: { kode: 'AT', kodeverk: 'test' },
+      inntektskategori: 'AT',
       beregnetPrAar: null,
       belopFraMeldekortPrMnd: null,
       fastsattBelop: null,
@@ -192,10 +192,10 @@ describe('<BgFaktaUtils>', () => {
         arbeidsforholdId: '321378huda7e2',
         eksternArbeidsforholdId: 'sdfgsdfgda7e2',
       } as BeregningsgrunnlagArbeidsforhold,
-      aktivitetStatus: { kode: aktivitetStatuser.ARBEIDSTAKER, kodeverk: 'test' },
+      aktivitetStatus: aktivitetStatuser.ARBEIDSTAKER,
       andelsnr: 3,
       lagtTilAvSaksbehandler: false,
-      inntektskategori: { kode: 'ARBEIDSTAKER', kodeverk: 'test' },
+      inntektskategori: 'ARBEIDSTAKER',
     };
 
     const agOpplysning = {
@@ -217,10 +217,10 @@ describe('<BgFaktaUtils>', () => {
 
   it('skal sette initial values for generell andelinfo uten arbeidsforhold', () => {
     const andelValueFromState = {
-      aktivitetStatus: { kode: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE, kodeverk: 'AKTIVITET_STATUS' },
+      aktivitetStatus: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE,
       andelsnr: 2,
       lagtTilAvSaksbehandler: true,
-      inntektskategori: { kode: 'SN', kodeverk: 'test' },
+      inntektskategori: 'SN',
     };
     const andelsInfo = setGenerellAndelsinfo(andelValueFromState, {}, alleKodeverk);
     expect(andelsInfo.andel).toBe('Selvstendig næringsdrivende');
@@ -233,10 +233,10 @@ describe('<BgFaktaUtils>', () => {
 
   it('skal ikkje sette arbeidsforhold initial values for andel uten arbeidsforhold', () => {
     const andelValueFromState = {
-      aktivitetStatus: { kode: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE, kodeverk: 'test' },
+      aktivitetStatus: aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE,
       andelsnr: 2,
       lagtTilAvSaksbehandler: true,
-      inntektskategori: { kode: 'SN', kodeverk: 'test' },
+      inntektskategori: 'SN',
     };
     const arbeidsforholdIV = setArbeidsforholdInitialValues(andelValueFromState);
     expect(arbeidsforholdIV.arbeidsforholdId).toBe(null);
@@ -250,7 +250,7 @@ describe('<BgFaktaUtils>', () => {
     arbeidsgiverIdent: '42672364432',
     startdato: '2017-01-01',
     opphoersdato: '2018-01-01',
-    organisasjonstype: { kode: organisasjonstyper.KUNSTIG, kodeverk: 'test' },
+    organisasjonstype: organisasjonstyper.KUNSTIG,
   };
 
   const kunstigArbeidstakerAndel = {
@@ -289,7 +289,7 @@ describe('<BgFaktaUtils>', () => {
   };
 
   const frilansAndel = {
-    aktivitetStatus: { kode: aktivitetStatuser.FRILANSER, kodeverk: 'AKTIVITET_STATUS' },
+    aktivitetStatus: aktivitetStatuser.FRILANSER,
     andelsnr: 2,
     lagtTilAvSaksbehandler: false,
   };
@@ -416,7 +416,7 @@ describe('<BgFaktaUtils>', () => {
     };
     const fakta = {
       ...faktaOmBeregning,
-      faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE, kodeverk: 'test' }],
+      faktaOmBeregningTilfeller: [faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE],
     };
     const skalRedigereInntekt = skalFastsetteInntektForAndel(values, fakta, beregningsgrunnlag)(brukersAndel);
     expect(skalRedigereInntekt).toBe(true);

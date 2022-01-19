@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { RadioGroupField, RadioOption, DatepickerField } from '@fpsak-frontend/form';
 import {
   required, getKodeverknavnFn, DDMMYYYY_DATE_FORMAT, hasValidDate,
@@ -108,7 +108,8 @@ const lagVisningsnavn = (aktivitet: BeregningAktivitet,
   alleKodeverk: AlleKodeverk): string => {
   const agOpplysning = arbeidsgiverOpplysningerPerId[aktivitet.arbeidsgiverIdent];
   if (!agOpplysning) {
-    return aktivitet.arbeidsforholdType ? getKodeverknavnFn(alleKodeverk, kodeverkTyper)(aktivitet.arbeidsforholdType) : '';
+    return aktivitet.arbeidsforholdType
+      ? getKodeverknavnFn(alleKodeverk, KodeverkType)(aktivitet.arbeidsforholdType, KodeverkType.OPPTJENING_AKTIVITET_TYPE) : '';
   }
   return createVisningsnavnFakta(agOpplysning, aktivitet.eksternArbeidsforholdId);
 };

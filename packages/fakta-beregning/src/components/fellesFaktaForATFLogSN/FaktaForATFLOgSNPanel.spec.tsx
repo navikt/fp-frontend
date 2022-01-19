@@ -28,12 +28,8 @@ const {
 } = aksjonspunktCodes;
 
 const aksjonspunkter = [{
-  definisjon:
-  {
-    kode: VURDER_FAKTA_FOR_ATFL_SN,
-    kodeverk: 'test',
-  },
-  status: { kode: 'OPPR', kodeverk: 'test' },
+  definisjon: VURDER_FAKTA_FOR_ATFL_SN,
+  status: 'OPPR',
   kanLoses: true,
   erAktivt: true,
 }];
@@ -44,8 +40,8 @@ const lagBeregningsgrunnlag = (andeler) => ({
       beregningsgrunnlagPrStatusOgAndel: andeler.map((andel) => (
         {
           andelsnr: andel.andelsnr,
-          aktivitetStatus: { kode: andel.aktivitetStatus },
-          inntektskategori: { kode: andel.inntektskategori },
+          aktivitetStatus: andel.aktivitetStatus,
+          inntektskategori: andel.inntektskategori,
           erNyoppstartet: andel.erNyoppstartet,
         }
       )),
@@ -107,11 +103,11 @@ describe('<FaktaForATFLOgSNPanel>', () => {
 
   it('skal kunne transform values for kun besteberegning', () => {
     const aktivePaneler = [faktaOmBeregningTilfelle.FASTSETT_BESTEBEREGNING_FODENDE_KVINNE];
-    const andel1 = { andelsnr: 1, aktivitetStatus: { kode: 'ATFL', kodeverk: 'test' } } as BeregningsgrunnlagAndel;
-    const andel2 = { andelsnr: 2, aktivitetStatus: { kode: 'SN', kodeverk: 'test' } } as BeregningsgrunnlagAndel;
+    const andel1 = { andelsnr: 1, aktivitetStatus: 'ATFL' } as BeregningsgrunnlagAndel;
+    const andel2 = { andelsnr: 2, aktivitetStatus: 'SN' } as BeregningsgrunnlagAndel;
     const faktaOmBeregning = {
       andelerForFaktaOmBeregning: [],
-      faktaOmBeregningTilfeller: aktivePaneler.map((kode) => ({ kode, kodeverk: 'test' })),
+      faktaOmBeregningTilfeller: aktivePaneler,
       besteberegningAndeler: [andel1, andel2],
       vurderBesteberegning: { skalHaBesteberegning: true },
     };
@@ -158,10 +154,7 @@ describe('<FaktaForATFLOgSNPanel>', () => {
     const aktivePaneler = [faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL, faktaOmBeregningTilfelle.VURDER_LONNSENDRING];
     const forholdMedAtOgFl = {
       andelsnr: 2,
-      inntektskategori: {
-        kode: 'Arbeidstaker',
-        kodeverk: 'test',
-      },
+      inntektskategori: 'Arbeidstaker',
       arbeidsforhold: {
         arbeidsgiverNavn: 'bedrift',
         arbeidsgiverId: '123',
@@ -172,10 +165,7 @@ describe('<FaktaForATFLOgSNPanel>', () => {
 
     const forholdMedLonnsendringUtenIM = {
       andelsnr: 2,
-      inntektskategori: {
-        kode: 'ARBEIDSTAKER',
-        kodeverk: 'test',
-      },
+      inntektskategori: 'ARBEIDSTAKER',
       arbeidsforhold: {
         arbeidsgiverNavn: 'bedrift',
         arbeidsgiverId: '123',
@@ -185,25 +175,19 @@ describe('<FaktaForATFLOgSNPanel>', () => {
     };
 
     const frilansAndel = {
-      inntektskategori: {
-        kode: 'Frilans',
-        kodeverk: 'test',
-      },
+      inntektskategori: 'Frilans',
       arbeidsforhold: {
         startdato: '2018-01-01',
         opphoersdato: '2018-06-01',
       } as BeregningsgrunnlagArbeidsforhold,
       andelsnr: 1,
-      arbeidsforholdType: {
-        navn: 'Frilans',
-        kodeverk: 'test',
-      },
-      aktivitetStatus: { kode: aktivitetStatus.FRILANSER, kodeverk: 'test' },
+      arbeidsforholdType: 'Frilans',
+      aktivitetStatus: aktivitetStatus.FRILANSER,
     } as FaktaOmBeregningAndel;
 
     const faktaOmBeregning = {
       andelerForFaktaOmBeregning: [],
-      faktaOmBeregningTilfeller: aktivePaneler.map((kode) => ({ kode, kodeverk: 'test' })),
+      faktaOmBeregningTilfeller: aktivePaneler,
       arbeidsforholdMedLønnsendringUtenIM: [forholdMedLonnsendringUtenIM],
       arbeidstakerOgFrilanserISammeOrganisasjonListe: [forholdMedAtOgFl],
       frilansAndel,

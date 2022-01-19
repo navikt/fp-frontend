@@ -19,7 +19,7 @@ describe('<NyoppstartetFLForm>', () => {
   });
 
   const faktaOmBeregning = {
-    faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL, kodeverk: 'test' }],
+    faktaOmBeregningTilfeller: [faktaOmBeregningTilfelle.VURDER_NYOPPSTARTET_FL],
     andelerForFaktaOmBeregning: [],
   };
 
@@ -71,10 +71,7 @@ describe('<NyoppstartetFLForm>', () => {
         {
           beregningsgrunnlagPrStatusOgAndel: [
             {
-              aktivitetStatus: {
-                kode: aktivitetStatus.FRILANSER,
-                kodeverk: 'test',
-              },
+              aktivitetStatus: aktivitetStatus.FRILANSER,
               erNyoppstartet: true,
             },
           ],

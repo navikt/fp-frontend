@@ -33,7 +33,7 @@ export const andelsnrMottarYtelseMap = (values: FaktaOmBeregningAksjonspunktValu
   }
   const frilansAndel = beregningsgrunnlag.beregningsgrunnlagPeriode[0]
     .beregningsgrunnlagPrStatusOgAndel
-    .find((andel) => andel.aktivitetstatus === aktivitetStatus.FRILANSER);
+    .find((andel) => andel.aktivitetStatus === aktivitetStatus.FRILANSER);
   if (frilansAndel) {
     mottarYtelseMap[frilansAndel.andelsnr] = frilansMottarYtelse(values);
   }

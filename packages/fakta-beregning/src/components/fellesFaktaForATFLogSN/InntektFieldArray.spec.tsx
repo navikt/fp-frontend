@@ -127,7 +127,7 @@ describe('<InntektFieldArray>', () => {
   });
 
   const faktaOmBeregning = {
-    faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING, kodeverk: 'test' }],
+    faktaOmBeregningTilfeller: [faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING],
     andelerForFaktaOmBeregning: [],
   } as FaktaOmBeregning;
   const initial = {

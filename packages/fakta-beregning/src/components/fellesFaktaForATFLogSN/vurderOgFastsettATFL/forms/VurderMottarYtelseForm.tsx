@@ -12,7 +12,7 @@ import {
   ArbeidstakerUtenIMAndel, BeregningsgrunnlagArbeidsforhold, FaktaOmBeregning, AlleKodeverk, VurderMottarYtelse,
 } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { FaktaBeregningTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
 import {
   andelsnrMottarYtelseMap,
@@ -38,7 +38,8 @@ const utledArbeidsforholdUtenIMRadioTekst = (arbeidsforhold: BeregningsgrunnlagA
   const agOpplysning = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
   let radioNavn;
   if (!agOpplysning) {
-    radioNavn = arbeidsforhold.arbeidsforholdType ? getKodeverknavnFn(alleKodeverk, kodeverkTyper)(arbeidsforhold.arbeidsforholdType) : '';
+    radioNavn = arbeidsforhold.arbeidsforholdType
+      ? getKodeverknavnFn(alleKodeverk, KodeverkType)(arbeidsforhold.arbeidsforholdType, KodeverkType.OPPTJENING_AKTIVITET_TYPE) : '';
   } else {
     radioNavn = createVisningsnavnFakta(agOpplysning, arbeidsforhold.eksternArbeidsforholdId);
   }
@@ -185,7 +186,7 @@ const transformValuesFrilans = (values: FaktaOmBeregningAksjonspunktValues,
   const skalFastsetteInntektFrilans = values.vurderMottarYtelseValues[finnFrilansFieldName()];
   if (skalFastsetteInntektFrilans) {
     const frilansAndel = beregningsgrunnlag.beregningsgrunnlagPeriode[0].beregningsgrunnlagPrStatusOgAndel
-      .find((andel) => andel.aktivitetstatus === aktivitetStatus.FRILANSER);
+      .find((andel) => andel.aktivitetStatus === aktivitetStatus.FRILANSER);
     if (!fastsatteAndelsnr.includes(frilansAndel.andelsnr) && frilansMottarYtelse(values)) {
       const frilansInntekt = inntektVerdier.find((field) => field.andelsnr === frilansAndel.andelsnr);
       fastsatteAndelsnr.push(frilansAndel.andelsnr);
@@ -242,7 +243,7 @@ VurderMottarYtelseForm.transformValues = (values: FaktaOmBeregningAksjonspunktVa
   fastsatteAndelsnr: number[]): FaktaBeregningTransformedValues => {
   const faktaOmBeregningTilfeller = [];
   const aktiveTilfeller = faktaOmBeregning.faktaOmBeregningTilfeller ? faktaOmBeregning.faktaOmBeregningTilfeller : [];
-  if (!aktiveTilfeller.map(({ kode }) => kode).includes(faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE)) {
+  if (!aktiveTilfeller.map((kode) => kode).includes(faktaOmBeregningTilfelle.VURDER_MOTTAR_YTELSE)) {
     return {};
   }
   return ({
