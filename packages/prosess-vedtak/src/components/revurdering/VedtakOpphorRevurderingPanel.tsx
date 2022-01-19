@@ -8,7 +8,7 @@ import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
 
 interface OwnProps {
   revurderingsÅrsakString?: string;
-  språkKode?: strings;
+  språkKode?: string;
   isReadOnly: boolean;
   behandlingsresultat: Behandlingsresultat;
   beregningErManueltFastsatt: boolean;

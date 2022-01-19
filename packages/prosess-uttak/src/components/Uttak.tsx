@@ -11,7 +11,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import oppholdArsakType, { oppholdArsakMapper } from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import {
@@ -612,11 +612,7 @@ const lagUttakMedOpphold = createSelector(
     if (uttak.oppholdÅrsak !== oppholdArsakType.UDEFINERT) {
       const stonadskonto = oppholdArsakMapper[uttak.oppholdÅrsak];
       const oppholdInfo = {
-        stønadskontoType: {
-          kode: stonadskonto,
-          kodeverk: uttak.oppholdÅrsak.kodeverk,
-          navn: uttakPeriodeNavn[stonadskonto],
-        },
+        stønadskontoType: stonadskonto,
         trekkdagerDesimaler: calcDays(uttak.fom, uttak.tom),
       };
       uttakPerioder.aktiviteter = [oppholdInfo];
@@ -679,13 +675,15 @@ const createTooltipContent = (periodeType: string | ReactElement, intl: IntlShap
      </p>
   `);
 
-const getCorrectPeriodName = (item: UttaksresultatActivity | PeriodeSoker, getKodeverknavn: (kodeverk: string) => string): ReactElement | string => {
+const getCorrectPeriodName = (
+  item: UttaksresultatActivity | PeriodeSoker,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string): ReactElement | string => {
   if (item.utsettelseType && item.utsettelseType !== '-') {
     return (<FormattedMessage id="Timeline.tooltip.slutt" />);
   }
 
   if (item.aktiviteter.length > 0 && item.aktiviteter[0].stønadskontoType) {
-    return getKodeverknavn(item.aktiviteter[0].stønadskontoType);
+    return getKodeverknavn(item.aktiviteter[0].stønadskontoType, KodeverkType.STOENADSKONTOTYPE);
   }
 
   if (item.oppholdÅrsak !== oppholdArsakType.UDEFINERT) {
@@ -706,7 +704,7 @@ const addClassNameGroupIdToPerioder = (
 ): PeriodeMedClassName[] => { // NOSONAR Blir fiksa ved refaktorering av Uttak
   const behandlingStatusKode = bStatus;
   const annenForelderPerioder = uttakResultatPerioder.perioderAnnenpart;
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, KodeverkType);
   const perioderMedClassName: PeriodeMedClassName[] = [];
   const perioder = hovedsoker ? hovedsokerPerioder : annenForelderPerioder;
 

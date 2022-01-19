@@ -10,7 +10,7 @@ import {
   ProsessStegBegrunnelseTextFieldNew, ProsessPanelTemplate,
 } from '@fpsak-frontend/prosess-felles';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   Table, TableColumn, TableRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
@@ -188,7 +188,7 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
 
   const sorterteManglendeVedlegg = useMemo(() => getSortedManglendeVedlegg(soknad), [soknad]);
   const hasSoknad = harSoknad(soknad);
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, KodeverkType);
 
   const initialValues = useMemo(() => buildInitialValues(sorterteManglendeVedlegg, hasSoknad, status, aksjonspunkter, arbeidsgiverOpplysningerPerId),
     [sorterteManglendeVedlegg, hasSoknad, aksjonspunkter, status, arbeidsgiverOpplysningerPerId]);
@@ -203,7 +203,7 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
   const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status));
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
 
-  const dokumentTypeIds = alleKodeverk[kodeverkTyper.DOKUMENT_TYPE_ID];
+  const dokumentTypeIds = alleKodeverk[KodeverkType.DOKUMENT_TYPE_ID];
 
   return (
     <Form
@@ -273,7 +273,7 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
             {originalErVilkarOk === false && behandlingsresultat?.avslagsarsak && (
               <>
                 <VerticalSpacer sixteenPx />
-                <Normaltekst>{getKodeverknavn(behandlingsresultat.avslagsarsak, vilkarType.SOKERSOPPLYSNINGSPLIKT)}</Normaltekst>
+                <Normaltekst>{getKodeverknavn(behandlingsresultat.avslagsarsak, KodeverkType.AVSLAGSARSAK, vilkarType.SOKERSOPPLYSNINGSPLIKT)}</Normaltekst>
               </>
             )}
           </div>

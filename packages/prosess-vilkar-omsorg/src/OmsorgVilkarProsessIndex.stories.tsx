@@ -58,12 +58,8 @@ export const ÅpentAksjonspunkt = Template.bind({});
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.MANUELL_VURDERING_AV_OMSORGSVILKARET,
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-    },
+    definisjon: aksjonspunktCodes.MANUELL_VURDERING_AV_OMSORGSVILKARET,
+    status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
   }] as Aksjonspunkt[],
   isReadOnly: false,
@@ -76,12 +72,8 @@ OppfyltVilkår.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.MANUELL_VURDERING_AV_OMSORGSVILKARET,
-    },
-    status: {
-      kode: aksjonspunktStatus.UTFORT,
-    },
+    definisjon: aksjonspunktCodes.MANUELL_VURDERING_AV_OMSORGSVILKARET,
+    status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette vilkåret er godkjent',
   }] as Aksjonspunkt[],
   isReadOnly: true,
@@ -96,18 +88,12 @@ AvslåttVilkår.args = {
     uuid: '1',
     versjon: 1,
     behandlingsresultat: {
-      avslagsarsak: {
-        kode: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
-      },
+      avslagsarsak: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
     },
   } as Behandling,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.MANUELL_VURDERING_AV_OMSORGSVILKARET,
-    },
-    status: {
-      kode: aksjonspunktStatus.UTFORT,
-    },
+    definisjon: aksjonspunktCodes.MANUELL_VURDERING_AV_OMSORGSVILKARET,
+    status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette vilkåret er avslått',
   }] as Aksjonspunkt[],
   isReadOnly: true,

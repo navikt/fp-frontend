@@ -2,7 +2,7 @@ import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   AlleKodeverk, SimuleringResultat, TilbakekrevingValg, Vilkar,
 } from '@fpsak-frontend/types';
@@ -23,8 +23,8 @@ export const getTilbakekrevingText = (
     if (tilbakekrevingMedInntrekk(tilbakekrevingvalg.videreBehandling, simuleringResultat)) {
       return 'VedtakForm.TilbakekrInfotrygdOgInntrekk';
     }
-    const getKodeverkNavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
-    return getKodeverkNavn(tilbakekrevingvalg.videreBehandling);
+    const getKodeverkNavn = getKodeverknavnFn(alleKodeverk, KodeverkType);
+    return getKodeverkNavn(tilbakekrevingvalg.videreBehandling, KodeverkType.TILBAKEKR_VIDERE_BEH);
   }
   return '';
 };
@@ -32,4 +32,4 @@ export const getTilbakekrevingText = (
 export const hasIkkeOppfyltSoknadsfristvilkar = (
   vilkar: Vilkar[],
 ): boolean => vilkar.some((v) => v.vilkarType === vilkarType.SOKNADFRISTVILKARET
-  && v.vilkarstatus === vilkarUtfallType.IKKE_OPPFYLT);
+  && v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT);

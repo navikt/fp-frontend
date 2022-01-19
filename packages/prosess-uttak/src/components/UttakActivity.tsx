@@ -51,9 +51,6 @@ const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 const IKKE_OPPFYLT_AARSAK = 'IKKE_OPPFYLT_AARSAK';
 const INNVILGET_AARSAK = 'INNVILGET_AARSAK';
-const PERIODE_RESULTAT_TYPE = 'PERIODE_RESULTAT_TYPE';
-const innvilgetTekst = 'Innvilget';
-const avlsattTekst = 'Avslått';
 
 function sortAlphabetically(a: KodeverkMedNavn, b: KodeverkMedNavn): number {
   if (a.navn < b.navn) {

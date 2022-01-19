@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
 
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
@@ -54,13 +54,13 @@ const getOmgjortAarsak = (
   klageVurderingResultat: KlageVurdering,
   alleKodeverk: AlleKodeverk,
 ): string | null => {
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, KodeverkType);
   if (klageVurderingResultat) {
     if (klageVurderingResultat.klageVurderingResultatNK) {
-      return getKodeverknavn(klageVurderingResultat.klageVurderingResultatNK.klageMedholdArsak);
+      return getKodeverknavn(klageVurderingResultat.klageVurderingResultatNK.klageMedholdArsak, KodeverkType.KLAGE_MEDHOLD_ARSAK);
     }
     if (klageVurderingResultat.klageVurderingResultatNFP) {
-      return getKodeverknavn(klageVurderingResultat.klageVurderingResultatNFP.klageMedholdArsak);
+      return getKodeverknavn(klageVurderingResultat.klageVurderingResultatNFP.klageMedholdArsak, KodeverkType.KLAGE_MEDHOLD_ARSAK);
     }
   }
   return null;
@@ -131,7 +131,7 @@ const VedtakKlageForm: FunctionComponent<OwnProps> = ({
     submitCallback(input).then(() => setSubmitting(false));
   }, [aksjonspunkter]);
 
-  const kodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+  const kodeverknavn = getKodeverknavnFn(alleKodeverk, KodeverkType);
   return (
     <>
       <Undertittel><FormattedMessage id="VedtakKlageForm.Header" /></Undertittel>
@@ -142,7 +142,7 @@ const VedtakKlageForm: FunctionComponent<OwnProps> = ({
       {behandlingsresultat.type === behandlingResultatType.KLAGE_AVVIST && (
         <>
           <Undertekst><FormattedMessage id="VedtakKlageForm.ArsakTilAvvisning" /></Undertekst>
-          { avvistArsaker.map((arsak) => <Normaltekst key={arsak}>{kodeverknavn(arsak)}</Normaltekst>) }
+          { avvistArsaker.map((arsak) => <Normaltekst key={arsak}>{kodeverknavn(arsak, KodeverkType.KLAGE_AVVIST_AARSAK)}</Normaltekst>) }
           <VerticalSpacer sixteenPx />
         </>
       )}

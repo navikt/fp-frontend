@@ -6,7 +6,7 @@ import moment from 'moment';
 import {
   DDMMYYYY_DATE_FORMAT, decodeHtmlEntity, getKodeverknavnFn,
 } from '@fpsak-frontend/utils';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { isAvslag, isInnvilget, isOpphor } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import BehandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 import { Form } from '@fpsak-frontend/form-hooks';
@@ -82,7 +82,7 @@ const erÅrsakTypeBehandlingEtterKlage = (
 
 const lagÅrsakString = (
   revurderingAarsaker: string[],
-  getKodeverknavn: (kodeverk: string) => string,
+  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
 ): string | undefined => {
   if (revurderingAarsaker === undefined || revurderingAarsaker.length < 1) {
     return undefined;
@@ -92,10 +92,10 @@ const lagÅrsakString = (
     .find((aarsak) => aarsak === BehandlingArsakType.RE_ENDRING_FRA_BRUKER);
   const alleAndreAarsakerNavn = revurderingAarsaker
     .filter((aarsak) => aarsak !== BehandlingArsakType.RE_ENDRING_FRA_BRUKER)
-    .map((aarsak) => getKodeverknavn(aarsak));
+    .map((aarsak) => getKodeverknavn(aarsak, KodeverkType.BEHANDLING_AARSAK));
   // Dersom en av årsakene er "RE_ENDRING_FRA_BRUKER" skal alltid denne vises først
   if (endringFraBrukerAarsak !== undefined) {
-    aarsakTekstList.push(getKodeverknavn(endringFraBrukerAarsak));
+    aarsakTekstList.push(getKodeverknavn(endringFraBrukerAarsak, KodeverkType.BEHANDLING_AARSAK));
   }
   aarsakTekstList.push(...alleAndreAarsakerNavn);
   return aarsakTekstList.join(', ');
@@ -111,13 +111,13 @@ const erNyttBehandlingResult = (
 };
 
 export const lagKonsekvensForYtelsenTekst = (
-  getKodeverknavn: (kodeverk: string) => string,
+  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
   konsekvenser?: Behandling['behandlingsresultat']['konsekvenserForYtelsen'],
 ): string => {
   if (!konsekvenser || konsekvenser.length < 1) {
     return '';
   }
-  return konsekvenser.map((k) => getKodeverknavn(k)).join(' og ');
+  return konsekvenser.map((k) => getKodeverknavn(k, KodeverkType.KONSEKVENS_FOR_YTELSEN)).join(' og ');
 };
 
 const erTilkjentYtelseEllerAntallBarnEndret = (
@@ -167,7 +167,7 @@ const hentResultattekst = (
 const finnInvilgetRevurderingTekst = (
   intl: IntlShape,
   ytelseTypeKode: string,
-  getKodeverknavn: (kodeverk: string) => string,
+  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
   tilbakekrevingText: string,
   konsekvenserForYtelsen?: Behandling['behandlingsresultat']['konsekvenserForYtelsen'],
   beregningResultat?: BeregningsresultatFp | BeregningsresultatEs,
@@ -280,14 +280,14 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
 
   const erBehandlingEtterKlage = useMemo(() => erÅrsakTypeBehandlingEtterKlage(behandling.behandlingÅrsaker), [behandling.behandlingÅrsaker]);
   const revurderingsÅrsakString = useMemo(() => lagÅrsakString(behandlingÅrsaker
-    .map((arsak) => arsak.behandlingArsakType), getKodeverknavnFn(alleKodeverk, kodeverkTyper)), [behandlingÅrsaker]);
+    .map((arsak) => arsak.behandlingArsakType), getKodeverknavnFn(alleKodeverk, KodeverkType)), [behandlingÅrsaker]);
   const tilbakekrevingtekst = useMemo(() => getTilbakekrevingText(alleKodeverk, simuleringResultat, tilbakekrevingvalg), [
     simuleringResultat, tilbakekrevingvalg]);
 
   let vedtakstatusTekst = '';
   if (isInnvilget(behandlingsresultat.type)) {
     const konsekvenserForYtelsen = behandlingsresultat !== undefined ? behandlingsresultat.konsekvenserForYtelsen : undefined;
-    vedtakstatusTekst = finnInvilgetRevurderingTekst(intl, ytelseTypeKode, getKodeverknavnFn(alleKodeverk, kodeverkTyper), tilbakekrevingtekst,
+    vedtakstatusTekst = finnInvilgetRevurderingTekst(intl, ytelseTypeKode, getKodeverknavnFn(alleKodeverk, KodeverkType), tilbakekrevingtekst,
       konsekvenserForYtelsen, resultatstruktur, resultatstrukturOriginalBehandling);
   }
   if (isAvslag(behandlingsresultat.type)) {

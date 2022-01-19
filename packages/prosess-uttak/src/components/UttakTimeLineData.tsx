@@ -12,7 +12,7 @@ import {
 import splitPeriodImageHoverUrl from '@fpsak-frontend/assets/images/splitt_hover.svg';
 import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   ArbeidsgiverOpplysningerPerId, Behandling, AlleKodeverk, UttakStonadskontoer,
 } from '@fpsak-frontend/types';
@@ -24,7 +24,7 @@ import styles from './uttakTimeLineData.less';
 import { AktivitetFieldArray } from './RenderUttakTable';
 
 const getCorrectEmptyArbeidsForhold = (
-  getKodeverknavn: (kodeverk: string) => string,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   periodeTypeKode?: string,
   stonadskonto?: UttakStonadskontoer,
@@ -38,7 +38,7 @@ const getCorrectEmptyArbeidsForhold = (
           const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[item.aktivitetIdentifikator.arbeidsgiverReferanse];
           arbeidsForholdMedNullDagerIgjenArray.push(arbeidsgiverOpplysninger.navn);
         } else {
-          arbeidsForholdMedNullDagerIgjenArray.push(getKodeverknavn(item.aktivitetIdentifikator.uttakArbeidType));
+          arbeidsForholdMedNullDagerIgjenArray.push(getKodeverknavn(item.aktivitetIdentifikator.uttakArbeidType, KodeverkType.UTTAK_ARBEID_TYPE));
         }
       } else {
         arbeidsforholdMedPositivSaldoFinnes = true;
@@ -53,7 +53,7 @@ const getCorrectEmptyArbeidsForhold = (
 
 const hentApTekst = (
   manuellBehandlingÅrsak: string,
-  getKodeverknavn: (kodeverk: string) => string,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   stonadskonto?: UttakStonadskontoer,
   periodeTypeKode?: string,
@@ -83,12 +83,15 @@ const hentApTekst = (
     } else {
       texts.push(
         <React.Fragment key={`kode-${manuellBehandlingÅrsak}`}>
-          {getKodeverknavn(manuellBehandlingÅrsak)}
+          {getKodeverknavn(manuellBehandlingÅrsak, KodeverkType.MANUELL_BEHANDLING_AARSAK)}
         </React.Fragment>,
       );
     }
   } else {
-    texts.push(<React.Fragment key={`kode-${manuellBehandlingÅrsak}`}>{getKodeverknavn(manuellBehandlingÅrsak)}</React.Fragment>);
+    texts.push(
+      <React.Fragment key={`kode-${manuellBehandlingÅrsak}`}>
+        {getKodeverknavn(manuellBehandlingÅrsak, KodeverkType.MANUELL_BEHANDLING_AARSAK)}
+      </React.Fragment>);
   }
 
   return texts;
@@ -242,7 +245,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
     } = this.props;
     const { showDelPeriodeModal } = this.state;
     const isEdited = !!selectedItemData.begrunnelse && !isApOpen;
-    const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+    const getKodeverknavn = getKodeverknavnFn(alleKodeverk, KodeverkType);
 
     return (
       <TimeLineDataContainer key={`selectedItemData_${selectedItemData.id}`}>

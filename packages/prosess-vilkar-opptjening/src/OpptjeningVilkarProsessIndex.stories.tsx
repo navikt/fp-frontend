@@ -27,9 +27,7 @@ const opptjening = {
     fastsattOpptjeningAktivitetList: [{
       fom: '2018-01-01',
       tom: '2018-04-04',
-      klasse: {
-        kode: opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT,
-      },
+      klasse: opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT,
     }],
     opptjeningFom: '2018-01-01',
     opptjeningTom: '2018-10-01',
@@ -69,12 +67,8 @@ export const ÅpentAksjonspunkt = Template.bind({});
 ÅpentAksjonspunkt.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.SVANGERSKAPSVILKARET,
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-    },
+    definisjon: aksjonspunktCodes.SVANGERSKAPSVILKARET,
+    status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
   }] as Aksjonspunkt[],
 };

@@ -5,7 +5,6 @@ import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import Alertstripe from 'nav-frontend-alertstriper';
 
-import { Kodeverk } from '@fpsak-frontend/types';
 import popOutPilSvg from '@fpsak-frontend/assets/images/pop-out-pil.svg';
 import { TextAreaField } from '@fpsak-frontend/form-hooks';
 import {
@@ -24,7 +23,7 @@ const minLength3 = minLength(3);
 interface OwnProps {
   forhåndsvisOverstyrtBrev: (e: MouseEvent) => void;
   isReadOnly: boolean;
-  språkKode: Kodeverk;
+  språkKode: string;
   skalViseLink: boolean;
 }
 

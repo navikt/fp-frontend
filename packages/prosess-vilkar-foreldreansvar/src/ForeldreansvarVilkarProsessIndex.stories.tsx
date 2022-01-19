@@ -62,12 +62,8 @@ export const ÅpentAksjonspunkt2Ledd = Template.bind({});
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-    },
+    definisjon: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+    status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
   }] as Aksjonspunkt[],
   isReadOnly: false,
@@ -81,12 +77,8 @@ OppfyltVilkår2Ledd.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
-    },
-    status: {
-      kode: aksjonspunktStatus.UTFORT,
-    },
+    definisjon: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+    status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette vilkåret er godkjent',
   }] as Aksjonspunkt[],
   isReadOnly: true,
@@ -102,18 +94,12 @@ AvslåttVilkår2Ledd.args = {
     uuid: '1',
     versjon: 1,
     behandlingsresultat: {
-      avslagsarsak: {
-        kode: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
-      },
+      avslagsarsak: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
     },
   } as Behandling,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
-    },
-    status: {
-      kode: aksjonspunktStatus.UTFORT,
-    },
+    definisjon: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+    status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette vilkåret er avslått',
   }] as Aksjonspunkt[],
   isReadOnly: true,
@@ -127,12 +113,8 @@ export const ÅpentAksjonspunkt4Ledd = Template.bind({});
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-    },
+    definisjon: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
+    status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
   }] as Aksjonspunkt[],
   isReadOnly: false,
@@ -146,12 +128,8 @@ OppfyltVilkår4Ledd.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
-    },
-    status: {
-      kode: aksjonspunktStatus.UTFORT,
-    },
+    definisjon: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
+    status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette vilkåret er godkjent',
   }] as Aksjonspunkt[],
   isReadOnly: true,
@@ -167,18 +145,12 @@ AvslåttVilkår4Ledd.args = {
     uuid: '1',
     versjon: 1,
     behandlingsresultat: {
-      avslagsarsak: {
-        kode: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
-      },
+      avslagsarsak: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
     },
   } as Behandling,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
-    },
-    status: {
-      kode: aksjonspunktStatus.UTFORT,
-    },
+    definisjon: aksjonspunktCodes.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
+    status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette vilkåret er avslått',
   }] as Aksjonspunkt[],
   isReadOnly: true,

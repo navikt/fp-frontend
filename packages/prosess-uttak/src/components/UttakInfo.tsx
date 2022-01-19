@@ -11,7 +11,7 @@ import {
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
 import oppholdArsakType, { oppholdArsakKontoNavn } from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, AlleKodeverk,
 } from '@fpsak-frontend/types';
@@ -69,14 +69,19 @@ const gradertArbforhold = (selectedItem: PeriodeMedClassName, arbeidsgiverOpplys
 
 const typePeriode = (
   selectedItem: PeriodeMedClassName,
-  getKodeverknavn: (kodeverk: string) => string,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   kontoIkkeSatt?: boolean,
 ): ReactElement | string => {
   if (selectedItem.utsettelseType === '-' && !kontoIkkeSatt) {
     return <FormattedMessage id="UttakActivity.Uttak" />;
   }
   if (selectedItem.utsettelseType !== '-') {
-    return <FormattedMessage id="UttakActivity.Utsettelse" values={{ utsettelseType: getKodeverknavn(selectedItem.utsettelseType) }} />;
+    return (
+      <FormattedMessage
+        id="UttakActivity.Utsettelse"
+        values={{ utsettelseType: getKodeverknavn(selectedItem.utsettelseType, KodeverkType.UTTAK_UTSETTELSE_TYPE) }}
+      />
+    );
   }
   if (kontoIkkeSatt) {
     return <FormattedMessage id="UttakActivity.IngenKonto" />;
@@ -84,27 +89,37 @@ const typePeriode = (
   return '';
 };
 
-const isInnvilgetText = (selectedItemData: PeriodeMedClassName, getKodeverknavn: (kodeverk: string) => string): ReactElement => {
+const isInnvilgetText = (selectedItemData: PeriodeMedClassName, getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string): ReactElement => {
   if (periodeIsInnvilget(selectedItemData)) {
     return (
       <FormattedMessage
         id="UttakActivity.InnvilgelseAarsak"
-        values={{ innvilgelseAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak), b: (chunks: any) => <b>{chunks}</b> }}
+        values={{
+          innvilgelseAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak.kode, KodeverkType.PERIODE_RESULTAT_AARSAK),
+          b: (chunks: any) => <b>{chunks}</b>,
+        }}
       />
     );
   }
   return (
     <FormattedMessage
       id="UttakActivity.IkkeOppfyltAarsak"
-      values={{ avslagAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak), b: (chunks: any) => <b>{chunks}</b> }}
+      values={{
+        avslagAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak.kode, KodeverkType.PERIODE_RESULTAT_AARSAK),
+        b: (chunks: any) => <b>{chunks}</b>,
+      }}
     />
   );
 };
 
-const stonadskonto = (selectedItem: PeriodeMedClassName, getKodeverknavn: (kodeverk: string) => string, kontoIkkeSatt?: boolean): string => {
+const stonadskonto = (
+  selectedItem: PeriodeMedClassName,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
+  kontoIkkeSatt?: boolean,
+): string => {
   let returnText = '';
   if (!kontoIkkeSatt) {
-    returnText = getKodeverknavn(selectedItem.aktiviteter[0].stønadskontoType);
+    returnText = getKodeverknavn(selectedItem.aktiviteter[0].stønadskontoType, KodeverkType.STOENADSKONTOTYPE);
   }
   return returnText;
 };
@@ -157,7 +172,7 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
 }) => {
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, KodeverkType);
 
   return (
     <div className={periodeStatusClassName(selectedItemData)}>
@@ -304,7 +319,7 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
                 <FormattedMessage id="UttakActivity.GraderingIkkeOppfylt" />
                 :
               </b>
-              {getKodeverknavn(selectedItemData.graderingAvslagÅrsak)}
+              {getKodeverknavn(selectedItemData.graderingAvslagÅrsak.kode, KodeverkType.GRADERING_AVSLAG_AARSAK)}
             </Column>
           </Row>
           )}

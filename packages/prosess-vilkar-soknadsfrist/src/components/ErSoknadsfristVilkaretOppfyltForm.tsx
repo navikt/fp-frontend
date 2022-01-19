@@ -8,7 +8,7 @@ import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
 
 import { Form, RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { ISO_DATE_FORMAT, required, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import { DateLabel, VerticalSpacer } from '@fpsak-frontend/shared-components';
@@ -121,7 +121,7 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
     defaultValues: formData || initialValues,
   });
 
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, KodeverkType);
   const dato = useMemo(() => findDate(soknad, gjeldendeFamiliehendelse), [soknad, gjeldendeFamiliehendelse]);
   const textCode = useMemo(() => findTextCode(soknad, gjeldendeFamiliehendelse), [soknad, gjeldendeFamiliehendelse]);
 
@@ -238,7 +238,7 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
             />]}
           </RadioGroupField>
           {erVilkarOk === false && !!behandlingsresultat?.avslagsarsak && (
-            <Normaltekst>{getKodeverknavn(behandlingsresultat.avslagsarsak, vilkarType.SOKNADFRISTVILKARET)}</Normaltekst>
+            <Normaltekst>{getKodeverknavn(behandlingsresultat.avslagsarsak, KodeverkType.AVSLAGSARSAK, vilkarType.SOKNADFRISTVILKARET)}</Normaltekst>
           )}
         </>
       )}

@@ -15,9 +15,7 @@ import VilkarresultatMedOverstyringProsessIndex from './VilkarresultatMedOversty
 const defaultBehandling = {
   uuid: '1',
   versjon: 1,
-  type: {
-    kode: behandlingType.FORSTEGANGSSOKNAD,
-  },
+  type: behandlingType.FORSTEGANGSSOKNAD,
 } as Behandling;
 
 const avslagsarsaker = [{
@@ -105,21 +103,12 @@ OverstyrtAksjonspunktSomErBekreftet.args = {
   behandling: {
     ...defaultBehandling,
     behandlingsresultat: {
-      avslagsarsak: {
-        kode: 'AVSLAG_TEST_1',
-        kodeverk: '',
-      },
+      avslagsarsak: 'AVSLAG_TEST_1',
     },
   } as Behandling,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCode.OVERSTYR_FODSELSVILKAR,
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.UTFORT,
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCode.OVERSTYR_FODSELSVILKAR,
+    status: aksjonspunktStatus.UTFORT,
     kanLoses: false,
     begrunnelse: 'Dette er en begrunnelse',
   } as Aksjonspunkt],

@@ -47,8 +47,8 @@ const createTextStrings = (arbforhold: AktivitetIdentifikator, arbeidsgiverOpply
     arbeidsgiverReferanse, uttakArbeidType,
   } = arbforhold;
 
-  if (uttakArbeidType && uttakarbeidType !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
-    return <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakarbeidType]} />;
+  if (uttakArbeidType && uttakArbeidType !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
+    return <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType]} />;
   }
   if (arbeidsgiverReferanse) {
     const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
@@ -137,7 +137,7 @@ class TimeLineInfo extends Component<OwnProps, OwnState> {
     const createKey = (arbeidsforhold: AktivitetSaldo) => {
       const { uttakArbeidType, arbeidsgiverReferanse, arbeidsforholdId } = arbeidsforhold.aktivitetIdentifikator;
       const arbeidsgiverOpplysninger = arbeidsgiverReferanse ? arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse] : undefined;
-      let arbKey = uttakarbeidType;
+      let arbKey = uttakArbeidType;
       arbKey = arbeidsgiverOpplysninger ? `${arbKey} ${arbeidsgiverOpplysninger.navn}` : arbKey;
       arbKey = arbeidsforholdId ? `${arbKey} ${arbeidsforholdId}` : arbKey;
       arbKey = arbeidsgiverOpplysninger ? `${arbKey} ${arbeidsgiverOpplysninger.identifikator}` : arbKey;

@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Undertekst } from 'nav-frontend-typografi';
 
-import { Behandlingsresultat, Kodeverk } from '@fpsak-frontend/types';
+import { Behandlingsresultat } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { TextAreaField } from '@fpsak-frontend/form-hooks';
 import {
@@ -17,7 +17,7 @@ const minLength3 = minLength(3);
 
 interface OwnProps {
   behandlingsresultat: Behandlingsresultat;
-  språkKode: Kodeverk;
+  språkKode: string;
   isReadOnly: boolean;
   labelTextCode: string;
 }
