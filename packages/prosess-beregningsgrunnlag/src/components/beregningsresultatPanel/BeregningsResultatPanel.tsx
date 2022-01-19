@@ -190,8 +190,8 @@ const createPeriodeResultat = (vilkaarBG: Vilkar,
   grunnbeløp: number,
   periodeIndex: number): ReactElement => {
   const key = lagKeyForPeriode(periodeData.headers[0]);
-  const ikkeOppfylt = !!(vilkaarBG && vilkaarBG.vilkarstatus === vilkarUtfallType.IKKE_OPPFYLT);
-  const ikkeVurdert = !!(vilkaarBG && vilkaarBG.vilkarstatus === vilkarUtfallType.IKKE_VURDERT);
+  const ikkeOppfylt = !!(vilkaarBG && vilkaarBG.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT);
+  const ikkeVurdert = !!(vilkaarBG && vilkaarBG.vilkarStatus === vilkarUtfallType.IKKE_VURDERT);
   const halvG = Math.round(grunnbeløp / 2);
   return (
     <React.Fragment key={`Wr${key}`}>

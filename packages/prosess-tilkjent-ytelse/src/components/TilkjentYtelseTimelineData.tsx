@@ -4,7 +4,7 @@ import moment from 'moment';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   Table, TableColumn, TableRow, VerticalSpacer, FloatRight,
 } from '@fpsak-frontend/shared-components';
@@ -22,12 +22,12 @@ const getEndCharFromId = (id: string): string => (id ? `...${id.substring(id.len
 
 const createVisningNavnForUttakArbeidstaker = (
   andel: BeregningsresultatPeriodeAndel,
-  getKodeverknavn: (kodeverk: string) => string,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ReactElement | string => {
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[andel.arbeidsgiverReferanse];
   if (!arbeidsgiverOpplysninger || !arbeidsgiverOpplysninger.navn) {
-    return andel.arbeidsforholdType ? getKodeverknavn(andel.arbeidsforholdType) : '';
+    return andel.arbeidsforholdType ? getKodeverknavn(andel.arbeidsforholdType, KodeverkType.OPPTJENING_AKTIVITET_TYPE) : '';
   }
   return arbeidsgiverOpplysninger.erPrivatPerson
     ? `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.fødselsdato})`
@@ -57,7 +57,7 @@ const tableHeaderTextCodes = (isFagsakSVP = false): string[] => {
 
 const findAndelsnavn = (
   andel: BeregningsresultatPeriodeAndel,
-  getKodeverknavn: (kodeverk: string) => string,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ReactElement | string => {
   switch (andel.aktivitetStatus) {
@@ -123,7 +123,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
 }) => {
   const numberOfDaysAndWeeks = calcDaysAndWeeks(selectedItemStartDate, selectedItemEndDate);
   const intl = useIntl();
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, KodeverkType);
 
   return (
     <TimeLineDataContainer>

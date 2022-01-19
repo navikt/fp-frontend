@@ -8,7 +8,7 @@ import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import {
   DateLabel, FlexContainer, FlexColumn, FlexRow, VerticalSpacer, AvsnittSkiller,
 } from '@fpsak-frontend/shared-components';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import styles from './skjeringspunktOgStatusPanel.less';
@@ -16,12 +16,12 @@ import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less'
 
 export const RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN = 'dekningsgrad';
 
-const createStatusEtiketter = (listeMedStatuser: string[], getKodeverknavn: (kodeverk: string) => string): ReactElement => {
+const createStatusEtiketter = (listeMedStatuser: string[], getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string): ReactElement => {
   const statusList = [];
   const unikeStatuser = listeMedStatuser.filter((status, index, self) => index === self.findIndex((t) => (
     t === status)));
   unikeStatuser.forEach((status) => {
-    const statusName = getKodeverknavn(status);
+    const statusName = getKodeverknavn(status, KodeverkType.AKTIVITET_STATUS);
     statusList.push({ visningsNavn: statusName, kode: status, className: `statusFarge${status}` });
   });
   statusList.sort((a, b) => ((a.visningsNavn > b.visningsNavn) ? 1 : -1));
@@ -35,7 +35,7 @@ const createStatusEtiketter = (listeMedStatuser: string[], getKodeverknavn: (kod
 };
 
 type MappedOwnProps = {
-  getKodeverknavn: (kodeverk: string) => string;
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string;
 }
 
 type OwnProps = {
@@ -79,7 +79,7 @@ export const SkjeringspunktOgStatusPanelImpl: FunctionComponent<OwnProps & Mappe
 );
 
 const mapStateToProps = (state, ownProps: OwnProps): MappedOwnProps => {
-  const getKodeverknavn = getKodeverknavnFn(ownProps.alleKodeverk, kodeverkTyper);
+  const getKodeverknavn = getKodeverknavnFn(ownProps.alleKodeverk, KodeverkType);
   return {
     getKodeverknavn,
   };

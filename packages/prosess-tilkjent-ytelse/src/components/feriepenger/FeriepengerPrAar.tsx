@@ -5,13 +5,13 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import { ArbeidsgiverOpplysningerPerId, FeriepengegrunnlagAndel, AlleKodeverk } from '@fpsak-frontend/types';
 import { DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@fpsak-frontend/utils';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
 
 const finnAlleAndelerForOpptjeningsår = (andeler: FeriepengegrunnlagAndel[],
   opptjeningsår: number): FeriepengegrunnlagAndel[] => andeler.filter((andel) => andel.opptjeningsår === opptjeningsår);
 
-const lagIdentifikator = (andel: FeriepengegrunnlagAndel) : string => andel.aktivitetstatus + andel.arbeidsgiverId;
+const lagIdentifikator = (andel: FeriepengegrunnlagAndel) : string => andel.aktivitetStatus + andel.arbeidsgiverId;
 
 const lagVisningsnavn = (ferieAndel: FeriepengegrunnlagAndel,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
@@ -27,7 +27,7 @@ const lagVisningsnavn = (ferieAndel: FeriepengegrunnlagAndel,
       ? `${agOpplysning.navn} (${agOpplysning.identifikator})`
       : agOpplysning.navn;
   }
-  return ferieAndel.aktivitetStatus ? getKodeverknavnFn(alleKodeverk, kodeverkTyper)(ferieAndel.aktivitetStatus) : '';
+  return ferieAndel.aktivitetStatus ? getKodeverknavnFn(alleKodeverk, KodeverkType)(ferieAndel.aktivitetStatus, KodeverkType.AKTIVITET_STATUS) : '';
 };
 
 type AndelerPrId = {

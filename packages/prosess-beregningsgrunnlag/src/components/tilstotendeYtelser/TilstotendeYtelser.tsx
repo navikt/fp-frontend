@@ -11,10 +11,10 @@ import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less'
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 
 export const getTekstForAndelBruktIBeregning = (andel: BeregningsgrunnlagAndel): string => {
-  if (andel.aktivitetstatus === aktivitetStatus.DAGPENGER) {
+  if (andel.aktivitetStatus === aktivitetStatus.DAGPENGER) {
     return 'Beregningsgrunnlag.TilstottendeYtelse.Dagpenger';
   }
-  if (andel.aktivitetstatus === aktivitetStatus.ARBEIDSAVKLARINGSPENGER) {
+  if (andel.aktivitetStatus === aktivitetStatus.ARBEIDSAVKLARINGSPENGER) {
     return 'Beregningsgrunnlag.TilstottendeYtelse.AAP';
   }
   return '';
@@ -28,7 +28,7 @@ type OwnProps = {
 };
 
 const TilstotendeYtelser: FunctionComponent<OwnProps> = ({ alleAndeler, relevanteStatuser, gjelderBesteberegning }) => {
-  const relevanteAndeler = alleAndeler.filter((andel) => isStatusDagpengerOrAAP(andel.aktivitetstatus));
+  const relevanteAndeler = alleAndeler.filter((andel) => isStatusDagpengerOrAAP(andel.aktivitetStatus));
   const harFlereYtelser = relevanteAndeler.length > 1;
   return (
     <>
@@ -59,7 +59,7 @@ const TilstotendeYtelser: FunctionComponent<OwnProps> = ({ alleAndeler, relevant
 
       <>
         {relevanteAndeler.map((andel: BeregningsgrunnlagAndel) => (
-          <div key={andel.aktivitetstatus}>
+          <div key={andel.aktivitetStatus}>
             <Row>
               <Column xs="4">
                 <Element>
@@ -77,7 +77,7 @@ const TilstotendeYtelser: FunctionComponent<OwnProps> = ({ alleAndeler, relevant
               </Column>
               <Column xs="2" />
             </Row>
-            {gjelderBesteberegning && isAktivitetKodeDagpenger(andel.aktivitetstatus) && (
+            {gjelderBesteberegning && isAktivitetKodeDagpenger(andel.aktivitetStatus) && (
               <Row>
                 <Column xs="12">
                   <Normaltekst>

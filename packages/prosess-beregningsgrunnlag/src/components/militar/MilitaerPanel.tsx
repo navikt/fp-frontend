@@ -19,7 +19,7 @@ type OwnProps = {
  * Presentasjonskomponent. Viser beregningsgrunnlag for militær og sivilforsvarstjeneste.
  */
 export const MilitaerPanel: FunctionComponent<OwnProps> = ({ alleAndeler }) => {
-  const relevanteAndeler = alleAndeler.filter((andel) => andel.aktivitetstatus === aktivitetStatus.MILITAER_ELLER_SIVIL);
+  const relevanteAndeler = alleAndeler.filter((andel) => andel.aktivitetStatus === aktivitetStatus.MILITAER_ELLER_SIVIL);
   const beregnetAarsinntekt = relevanteAndeler && relevanteAndeler.length > 0 ? relevanteAndeler[0].beregnetPrAar : '';
   return (
     <>

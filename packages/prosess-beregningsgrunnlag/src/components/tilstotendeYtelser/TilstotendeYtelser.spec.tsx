@@ -16,28 +16,19 @@ const aapNavn = 'Beregningsgrunnlag.TilstottendeYtelse.AAP';
 const dagpengerNavn = 'Beregningsgrunnlag.TilstottendeYtelse.Dagpenger';
 
 const dpAndel = {
-  aktivitetStatus: {
-    kode: aktivitetStatus.DAGPENGER,
-    kodeverk: 'test',
-  },
+  aktivitetStatus: aktivitetStatus.DAGPENGER,
   beregnetPrAar: dagpengerInntekt,
   elementNavn: dagpengerNavn,
 } as BeregningsgrunnlagAndel;
 
 const aapAndel = {
-  aktivitetStatus: {
-    kode: aktivitetStatus.ARBEIDSAVKLARINGSPENGER,
-    kodeverk: 'test',
-  },
+  aktivitetStatus: aktivitetStatus.ARBEIDSAVKLARINGSPENGER,
   beregnetPrAar: aapInntekt,
   elementNavn: aapNavn,
 } as BeregningsgrunnlagAndel;
 
 const urelatertAndel = {
-  aktivitetStatus: {
-    kode: aktivitetStatus.FRILANSER,
-    kodeverk: 'test',
-  },
+  aktivitetStatus: aktivitetStatus.FRILANSER,
   beregnetPrAar: aapInntekt,
 } as BeregningsgrunnlagAndel;
 

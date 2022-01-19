@@ -121,7 +121,7 @@ export const FastsettSNImpl: FunctionComponent<OwnProps & WrappedComponentProps>
 
 FastsettSNImpl.buildInitialValuesNyIArbeidslivet = (relevanteAndeler: BeregningsgrunnlagAndel[],
   gjeldendeAksjonspunkter: Aksjonspunkt[]): NyIArbeidslivetValues => {
-  const snAndel = relevanteAndeler.find((andel) => andel.aktivitetstatus === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
+  const snAndel = relevanteAndeler.find((andel) => andel.aktivitetStatus === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
   const nyIArbeidslivetAP = gjeldendeAksjonspunkter
     .find((ap) => ap.definisjon === FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET);
   return {

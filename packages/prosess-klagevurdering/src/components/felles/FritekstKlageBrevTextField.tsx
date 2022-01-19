@@ -3,12 +3,11 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import { getLanguageFromSprakkode, hasValidText, required } from '@fpsak-frontend/utils';
 import { TextAreaField } from '@fpsak-frontend/form-hooks';
-import { Kodeverk } from '@fpsak-frontend/types';
 
 import styles from './fritekstKlageBrevTextField.less';
 
 interface OwnProps {
-  sprakkode: Kodeverk;
+  sprakkode: string;
   readOnly?: boolean;
 }
 

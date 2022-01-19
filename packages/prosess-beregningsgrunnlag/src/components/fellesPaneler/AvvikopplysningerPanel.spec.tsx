@@ -19,10 +19,7 @@ const sammenligningsgrunnlag = (kode) => ({
   rapportertPrAar: 330000,
   avvikPromille: 275,
   avvikProsent: 27.5,
-  sammenligningsgrunnlagType: {
-    kode,
-    kodeverk: 'test',
-  },
+  sammenligningsgrunnlagType: kode,
   differanseBeregnet: 12100,
 });
 const relevanteStatuser = {
@@ -39,10 +36,7 @@ const allePerioder = [
     beregningsgrunnlagPrStatusOgAndel: [
       {
         beregnetPrAar: 360000,
-        aktivitetStatus: {
-          kode: 'AT',
-          kodeverk: 'AKTIVITET_STATUS',
-        },
+        aktivitetStatus: 'AT',
       }],
   }];
 describe('<Avviksopplysninger>', () => {
@@ -83,11 +77,7 @@ describe('<Avviksopplysninger>', () => {
     relevanteStatuser.isArbeidstaker = false;
     relevanteStatuser.isSelvstendigNaeringsdrivende = true;
     const snPeriode = {
-      aktivitetStatus:
-        {
-          kode: aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE,
-          kodeverk: 'test',
-        },
+      aktivitetStatus: aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE,
       næringer: [
         {
           erVarigEndret: false,

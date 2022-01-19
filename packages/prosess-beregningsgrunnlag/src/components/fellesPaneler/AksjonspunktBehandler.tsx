@@ -74,14 +74,14 @@ const lagEndretTekst = (aksjonspunkter: Aksjonspunkt[], readOnly: boolean): Reac
 
 const harPerioderMedAvsluttedeArbeidsforhold = (allePerioder: BeregningsgrunnlagPeriodeProp[]): boolean => allePerioder
   .some(({ periodeAarsaker }) => periodeAarsaker
-    && periodeAarsaker.some(({ kode }) => kode === periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET));
+    && periodeAarsaker.some((kode) => kode === periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET));
 
 const settOppKomponenterForNæring = (readOnly: boolean,
   allePerioder: BeregningsgrunnlagPeriodeProp[],
   aksjonspunkter: Aksjonspunkt[]): ReactElement => {
   const alleAndelerIForstePeriode = finnAlleAndelerIFørstePeriode(allePerioder);
   const snAndel = alleAndelerIForstePeriode.find(
-    (andel) => andel.aktivitetStatus && andel.aktivitetstatus === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE,
+    (andel) => andel.aktivitetStatus && andel.aktivitetStatus === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE,
   );
   if (!snAndel) {
     return null;
@@ -132,10 +132,10 @@ const settOppKomponenterForATFL = (aksjonspunkter: Aksjonspunkt[],
   const erTidsbegrenset = harPerioderMedAvsluttedeArbeidsforhold(allePerioder);
   const alleAndelerIForstePeriode = finnAlleAndelerIFørstePeriode(allePerioder);
   const flAndel = alleAndelerIForstePeriode.find(
-    (andel) => andel.aktivitetStatus && andel.aktivitetstatus === aktivitetStatus.FRILANSER,
+    (andel) => andel.aktivitetStatus && andel.aktivitetStatus === aktivitetStatus.FRILANSER,
   );
   const atAndel = alleAndelerIForstePeriode.find(
-    (andel) => andel.aktivitetStatus && andel.aktivitetstatus === aktivitetStatus.ARBEIDSTAKER,
+    (andel) => andel.aktivitetStatus && andel.aktivitetStatus === aktivitetStatus.ARBEIDSTAKER,
   );
   const visFL = flAndel && flAndel.skalFastsetteGrunnlag;
   const visAT = atAndel && atAndel.skalFastsetteGrunnlag;

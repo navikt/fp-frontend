@@ -11,11 +11,7 @@ import NaeringsopplysningsPanel from './NaeringsOpplysningsPanel';
 const intlMock = getIntlMock(messages);
 
 const andelerForstePeriode = {
-  aktivitetStatus:
-    {
-      kode: aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE,
-      kodeverk: 'AKTIVITET_STATUS',
-    },
+  aktivitetStatus: aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE,
   næringer: [{
     begrunnelse: 'Endringsbeskrivelse',
     endringsdato: '2019-11-22',
@@ -28,11 +24,7 @@ const andelerForstePeriode = {
     orgnr: '910909088',
     regnskapsførerNavn: 'Regnar Regnskap',
     regnskapsførerTlf: '99999999',
-    virksomhetType:
-    {
-      kode: 'ANNEN',
-      kodeverk: 'VIRKSOMHET_TYPE',
-    },
+    virksomhetType: 'ANNEN',
   }],
 };
 

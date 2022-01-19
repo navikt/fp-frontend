@@ -10,10 +10,7 @@ import GrunnlagForAarsinntektPanelFL from './GrunnlagForAarsinntektPanelFL';
 import messages from '../../../i18n/nb_NO.json';
 
 const lagAndel = (startdato?: string): BeregningsgrunnlagAndel => ({
-  aktivitetStatus: {
-    kode: aktivitetStatus.FRILANSER,
-    kodeverk: 'test',
-  },
+  aktivitetStatus: aktivitetStatus.FRILANSER,
   elementNavn: 'arbeidsgiver 1',
   beregnetPrAar: 200000,
   overstyrtPrAar: 100,

@@ -46,16 +46,16 @@ const getAksjonspunkterForBeregning = (aksjonspunkter: Aksjonspunkt[]): Aksjonsp
   : []);
 
 const getRelevanteStatuser = (bg: Beregningsgrunnlag): RelevanteStatuserProp => (bg.aktivitetStatus ? ({
-  isArbeidstaker: bg.aktivitetStatus.some(({ kode }) => isStatusArbeidstakerOrKombinasjon(kode)),
-  isFrilanser: bg.aktivitetStatus.some(({ kode }) => isStatusFrilanserOrKombinasjon(kode)),
-  isSelvstendigNaeringsdrivende: bg.aktivitetStatus.some(({ kode }) => isStatusSNOrKombinasjon(kode)),
-  harAndreTilstotendeYtelser: bg.aktivitetStatus.some(({ kode }) => isStatusTilstotendeYtelse(kode)),
-  harDagpengerEllerAAP: bg.aktivitetStatus.some(({ kode }) => isStatusDagpengerOrAAP(kode)),
-  isAAP: bg.aktivitetStatus.some(({ kode }) => kode === aktivitetStatus.ARBEIDSAVKLARINGSPENGER),
-  isDagpenger: bg.aktivitetStatus.some(({ kode }) => kode === aktivitetStatus.DAGPENGER),
+  isArbeidstaker: bg.aktivitetStatus.some((kode) => isStatusArbeidstakerOrKombinasjon(kode)),
+  isFrilanser: bg.aktivitetStatus.some((kode) => isStatusFrilanserOrKombinasjon(kode)),
+  isSelvstendigNaeringsdrivende: bg.aktivitetStatus.some((kode) => isStatusSNOrKombinasjon(kode)),
+  harAndreTilstotendeYtelser: bg.aktivitetStatus.some((kode) => isStatusTilstotendeYtelse(kode)),
+  harDagpengerEllerAAP: bg.aktivitetStatus.some((kode) => isStatusDagpengerOrAAP(kode)),
+  isAAP: bg.aktivitetStatus.some((kode) => kode === aktivitetStatus.ARBEIDSAVKLARINGSPENGER),
+  isDagpenger: bg.aktivitetStatus.some((kode) => kode === aktivitetStatus.DAGPENGER),
   skalViseBeregningsgrunnlag: bg.aktivitetStatus && bg.aktivitetStatus.length > 0,
-  isKombinasjonsstatus: bg.aktivitetStatus.some(({ kode }) => isStatusKombinasjon(kode)) || bg.aktivitetStatus.length > 1,
-  isMilitaer: bg.aktivitetStatus.some(({ kode }) => isStatusMilitaer(kode)),
+  isKombinasjonsstatus: bg.aktivitetStatus.some((kode) => isStatusKombinasjon(kode)) || bg.aktivitetStatus.length > 1,
+  isMilitaer: bg.aktivitetStatus.some((kode) => isStatusMilitaer(kode)),
 }) : null);
 
 const getBGVilkar = (vilkar: Vilkar[]): Vilkar => (vilkar

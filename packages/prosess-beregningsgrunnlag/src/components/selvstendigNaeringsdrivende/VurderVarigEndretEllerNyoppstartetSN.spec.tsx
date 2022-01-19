@@ -21,20 +21,13 @@ const {
 } = aksjonspunktCodes;
 
 const mockAksjonspunktMedKodeOgStatus = (apKode, begrunnelse, status) => ({
-  definisjon: {
-    kode: apKode,
-  },
-  status: {
-    kode: status,
-  },
+  definisjon: apKode,
+  status,
   begrunnelse,
 } as Aksjonspunkt);
 
 const lagAndel = (status, fastsattBelop) => ({
-  aktivitetStatus: {
-    kode: status,
-    kodeverk: 'test',
-  },
+  aktivitetStatus: status,
   beregnetPrAar: 200000,
   overstyrtPrAar: fastsattBelop,
   beregningsperiodeFom: '2015-01-01',

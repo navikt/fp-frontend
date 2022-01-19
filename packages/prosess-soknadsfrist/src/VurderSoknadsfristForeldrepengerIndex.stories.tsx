@@ -50,12 +50,8 @@ const Template: Story<{
     uttakPeriodeGrense={uttakPeriodeGrense}
     soknad={soknad}
     aksjonspunkter={[{
-      definisjon: {
-        kode: aksjonspunktCodes.VURDER_SOKNADSFRIST_FORELDREPENGER,
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-      },
+      definisjon: aksjonspunktCodes.VURDER_SOKNADSFRIST_FORELDREPENGER,
+      status: aksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
     }] as Aksjonspunkt[]}
   />

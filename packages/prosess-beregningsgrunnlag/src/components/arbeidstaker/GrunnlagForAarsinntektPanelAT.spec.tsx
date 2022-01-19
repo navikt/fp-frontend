@@ -15,10 +15,7 @@ const mockAndel = (arbeidsgiverIdent: string,
   beregnetPrAar: number,
   erTilkommetAndel: boolean,
   opphørsdato?: string): BeregningsgrunnlagAndel => ({
-  aktivitetStatus: {
-    kode: aktivitetStatus.ARBEIDSTAKER,
-    kodeverk: 'test',
-  },
+  aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
   arbeidsforhold: {
     arbeidsgiverIdent,
     eksternArbeidsforholdId: '345678',

@@ -10,7 +10,7 @@ import {
   getKodeverknavnFn, dateFormat, formatCurrencyNoKr,
 } from '@fpsak-frontend/utils';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   FlexColumn, FlexRow, VerticalSpacer, AvsnittSkiller,
 } from '@fpsak-frontend/shared-components';
@@ -76,16 +76,16 @@ const createArbeidsStillingsNavnOgProsent = (arbeidsforhold: BeregningsgrunnlagA
 
 const lagVisningForAndel = (andel: BeregningsgrunnlagAndel,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  getKodeverknavn: (kodeverk: string) => string): string => {
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string): string => {
   const arbeidsforholdInfo = arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent];
   if (!arbeidsforholdInfo) {
-    return andel.arbeidsforhold.arbeidsforholdType ? getKodeverknavn(andel.arbeidsforhold.arbeidsforholdType) : '';
+    return andel.arbeidsforhold.arbeidsforholdType ? getKodeverknavn(andel.arbeidsforhold.arbeidsforholdType, KodeverkType.OVERFOERING_AARSAK_TYPE) : '';
   }
   return createVisningsnavnForAktivitet(arbeidsforholdInfo, andel.arbeidsforhold.eksternArbeidsforholdId);
 };
 
 const createArbeidsIntektRows = (relevanteAndeler: BeregningsgrunnlagAndel[],
-  getKodeverknavn: (kodeverk: string) => string,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement[] => {
   const beregnetAarsinntekt = relevanteAndeler.reduce((acc, andel) => acc + andel.beregnetPrAar, 0);
   const beregnetMaanedsinntekt = beregnetAarsinntekt ? beregnetAarsinntekt / 12 : 0;
@@ -179,7 +179,7 @@ interface StaticFunctions {
 }
 
 type MappedOwnProps = {
-  getKodeverknavn: (kodeverk: string) => string;
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string;
 }
 
 type OwnProps = {
@@ -242,7 +242,7 @@ GrunnlagForAarsinntektPanelATImpl.defaultProps = {
 };
 
 const mapStateToProps = (state: any, initialProps: OwnProps): MappedOwnProps => {
-  const getKodeverknavn = getKodeverknavnFn(initialProps.alleKodeverk, kodeverkTyper);
+  const getKodeverknavn = getKodeverknavnFn(initialProps.alleKodeverk, KodeverkType);
   return {
     getKodeverknavn,
   };
