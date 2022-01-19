@@ -14,26 +14,14 @@ describe('<FormKravKlageInstansProsessStegInitPanel>', () => {
   it('skal rendre komponent og filtrere avslutte behandlinger', () => {
     const alleBehandlinger = [{
       uuid: 'test',
-      type: {
-        kode: behandlingType.FORSTEGANGSSOKNAD,
-        kodeverk: '',
-      },
-      status: {
-        kode: behandlingStatus.AVSLUTTET,
-        kodeverk: '',
-      },
+      type: behandlingType.FORSTEGANGSSOKNAD,
+      status: behandlingStatus.AVSLUTTET,
       opprettet: '2020-01-01',
     }, {
       id: 2,
       uuid: 'test',
-      type: {
-        kode: behandlingType.KLAGE,
-        kodeverk: '',
-      },
-      status: {
-        kode: behandlingStatus.AVSLUTTET,
-        kodeverk: '',
-      },
+      type: behandlingType.KLAGE,
+      status: behandlingStatus.AVSLUTTET,
       opprettet: '2020-01-01',
     }] as Behandling[];
 

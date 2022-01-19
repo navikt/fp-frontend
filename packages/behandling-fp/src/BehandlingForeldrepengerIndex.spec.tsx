@@ -20,14 +20,8 @@ describe('<BehandlingForeldrepengerIndex>', () => {
         data: {
           uuid: 'test-uuid',
           versjon: 1,
-          status: {
-            kode: behandlingStatus.OPPRETTET,
-            kodeverk: '',
-          },
-          type: {
-            kode: behandlingType.FORSTEGANGSSOKNAD,
-            kodeverk: '',
-          },
+          status: behandlingStatus.OPPRETTET,
+          type: behandlingType.FORSTEGANGSSOKNAD,
           links: [{
             href: FpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT.name,
             rel: 'arbeidsgivere-oversikt',
@@ -56,10 +50,7 @@ describe('<BehandlingForeldrepengerIndex>', () => {
           // @ts-ignore
           kodeverk={alleKodeverk as AlleKodeverk}
           fagsak={{
-            fagsakYtelseType: {
-              kode: fagsakYtelseType.FORELDREPENGER,
-              kodeverk: '',
-            },
+            fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
           } as Fagsak}
           rettigheter={{
             writeAccess: {

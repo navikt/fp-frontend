@@ -12,27 +12,15 @@ describe('<readOnlyUtils>', () => {
   const behandling = {
     uuid: '1',
     versjon: 1,
-    status: {
-      kode: behandlingStatus.BEHANDLING_UTREDES,
-      kodeverk: 'BEHANDLING_STATUS',
-    },
-    type: {
-      kode: behandlingType.FORSTEGANGSSOKNAD,
-      kodeverk: 'BEHANDLING_TYPE',
-    },
+    status: behandlingStatus.BEHANDLING_UTREDES,
+    type: behandlingType.FORSTEGANGSSOKNAD,
     behandlingPaaVent: false,
     behandlingHenlagt: false,
   };
 
   const aksjonspunkter = [{
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: 'AKSJONSPUNKT_STATUS',
-    },
-    definisjon: {
-      kode: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-      kodeverk: 'AKSJONSPUNKT_KODE',
-    },
+    status: aksjonspunktStatus.OPPRETTET,
+    definisjon: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
     kanLoses: true,
     erAktivt: true,
     toTrinnsBehandling: true,
@@ -40,8 +28,8 @@ describe('<readOnlyUtils>', () => {
   }];
 
   const vilkar = [{
-    vilkarType: { kode: vilkarType.FODSELSVILKARET_MOR, kodeverk: 'test' },
-    vilkarStatus: { kode: vilkarUtfallType.OPPFYLT, kodeverk: 'test' },
+    vilkarType: vilkarType.FODSELSVILKARET_MOR,
+    vilkarStatus: vilkarUtfallType.OPPFYLT,
     overstyrbar: true,
     merknadParametere: {},
   }];

@@ -28,10 +28,7 @@ describe('<FodseltilretteleggingFaktaInitPanel>', () => {
     const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any> & FaktaPanelInitProps>(FaktaDefaultInitPanel);
 
     const aksjonspunkter = [{
-      definisjon: {
-        kode: aksjonspunktCodes.FODSELTILRETTELEGGING,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.FODSELTILRETTELEGGING,
     }] as Aksjonspunkt[];
 
     expect(panel.props().skalPanelVisesIMeny({ aksjonspunkter })).toBe(true);

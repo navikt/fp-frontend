@@ -18,19 +18,13 @@ import { requestInnsynApi, InnsynBehandlingApiKeys } from '../data/innsynBehandl
 import InnsynVedtakProsessStegInitPanel from './InnsynVedtakProsessStegInitPanel';
 
 const fagsak = {
-  fagsakYtelseType: {
-    kode: fagsakYtelseType.FORELDREPENGER,
-    kodeverk: '',
-  },
+  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
 } as Fagsak;
 
 const behandling = {
   uuid: 'test-uuid',
   versjon: 1,
-  status: {
-    kode: behandlingStatus.OPPRETTET,
-    kodeverk: '',
-  },
+  status: behandlingStatus.OPPRETTET,
   behandlingPaaVent: false,
 } as Behandling;
 
@@ -38,35 +32,20 @@ const behandling = {
 const kodeverk = alleKodeverk as AlleKodeverk;
 
 const aksjonspunkter = [{
-  definisjon: {
-    kode: aksjonspunktCodes.FORESLA_VEDTAK,
-    kodeverk: '',
-  },
+  definisjon: aksjonspunktCodes.FORESLA_VEDTAK,
   erAktivt: true,
   kanLoses: true,
-  status: {
-    kode: aksjonspunktStatus.OPPRETTET,
-    kodeverk: '',
-  },
+  status: aksjonspunktStatus.OPPRETTET,
 }, {
-  definisjon: {
-    kode: aksjonspunktCodes.VURDER_INNSYN,
-    kodeverk: '',
-  },
+  definisjon: aksjonspunktCodes.VURDER_INNSYN,
   erAktivt: false,
   kanLoses: false,
-  status: {
-    kode: aksjonspunktStatus.UTFORT,
-    kodeverk: '',
-  },
+  status: aksjonspunktStatus.UTFORT,
   begrunnelse: 'Dette er en begrunnelse',
 }] as Aksjonspunkt[];
 
 const innsyn = {
-  innsynResultatType: {
-    kode: '',
-    kodeverk: '',
-  },
+  innsynResultatType: '',
 };
 
 describe('<InnsynVedtakProsessStegInitPanel>', () => {

@@ -12,10 +12,7 @@ import RisikoklassifiseringIndex from './RisikoklassifiseringIndex';
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 
 const lagRisikoklassifisering = (kode: string) => ({
-  kontrollresultat: {
-    kode,
-    kodeverk: 'Kontrollresultat',
-  },
+  kontrollresultat: kode,
   medlFaresignaler: undefined,
   iayFaresignaler: undefined,
 });

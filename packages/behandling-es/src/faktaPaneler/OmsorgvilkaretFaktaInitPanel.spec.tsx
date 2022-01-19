@@ -23,10 +23,7 @@ describe('<OmsorgvilkaretFaktaInitPanel>', () => {
     const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any> & FaktaPanelInitProps>(FaktaDefaultInitPanel);
 
     const aksjonspunkter = [{
-      definisjon: {
-        kode: aksjonspunktCodes.OMSORGSOVERTAKELSE,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.OMSORGSOVERTAKELSE,
     }] as Aksjonspunkt[];
 
     expect(panel.props().skalPanelVisesIMeny({ aksjonspunkter })).toBe(true);

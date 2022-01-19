@@ -64,17 +64,11 @@ describe('<OpptjeningInngangsvilkarInitPanel>', () => {
     const toggleOverstyring = () => {};
 
     const vilkar = [{
-      vilkarType: {
-        kode: vilkarType.OPPTJENINGSPERIODE,
-        kodeverk: '',
-      },
+      vilkarType: vilkarType.OPPTJENINGSPERIODE,
       lovReferanse: 'test',
     } as Vilkar];
     const aksjonspunkter = [{
-      definisjon: {
-        kode: aksjonspunktCodes.VURDER_OPPTJENINGSVILKARET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.VURDER_OPPTJENINGSVILKARET,
     }] as Aksjonspunkt[];
 
     const innerElement = panel.renderProp('renderPanel')({

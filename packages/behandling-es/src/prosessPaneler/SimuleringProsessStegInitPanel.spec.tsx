@@ -29,18 +29,13 @@ const behandling = {
   uuid: 'test-uuid',
   versjon: 1,
   behandlingÅrsaker: [],
-  type: {
-    kode: behandlingType.FORSTEGANGSSOKNAD,
-    kodeverk: '',
-  },
+  type: behandlingType.FORSTEGANGSSOKNAD,
 } as Behandling;
 
 const mottaker = {
   mottakerNavn: '',
   mottakerNummer: '',
-  mottakerType: {
-    kode: '',
-  },
+  mottakerType: '',
   resultatPerFagområde: [],
   resultatOgMotregningRader: [],
 };
@@ -72,16 +67,10 @@ describe('<SimuleringProsessStegInitPanel>', () => {
     isReadOnly: false,
     readOnlySubmitButton: false,
     aksjonspunkter: [{
-      definisjon: {
-        kode: aksjonspunktCodes.VURDER_FEILUTBETALING,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.VURDER_FEILUTBETALING,
       erAktivt: true,
       kanLoses: true,
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      status: aksjonspunktStatus.OPPRETTET,
     }] as Aksjonspunkt[],
     vilkar: [],
     isAksjonspunktOpen: true,
@@ -120,10 +109,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
           }]}
           fagsak={{
             saksnummer: '123',
-            fagsakYtelseType: {
-              kode: fagsakYtelseType.ENGANGSSTONAD,
-              kodeverk: '',
-            },
+            fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
           } as Fagsak}
           behandling={behandling}
         />
@@ -160,10 +146,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
       {
         key: EsBehandlingApiKeys.AKSJONSPUNKTER.name,
         data: [{
-          definisjon: {
-            kode: aksjonspunktCodes.VURDER_FEILUTBETALING,
-            kodeverk: '',
-          },
+          definisjon: aksjonspunktCodes.VURDER_FEILUTBETALING,
         }] as Aksjonspunkt[],
       },
       {
@@ -173,10 +156,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
       {
         key: EsBehandlingApiKeys.TILBAKEKREVINGVALG.name,
         data: {
-          videreBehandling: {
-            kode: tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
-            kodeverk: '',
-          },
+          videreBehandling: tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
         },
       },
       { key: EsBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE.name, noRelLink: true, data: undefined },
@@ -198,10 +178,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
           }]}
           fagsak={{
             saksnummer: '123',
-            fagsakYtelseType: {
-              kode: fagsakYtelseType.ENGANGSSTONAD,
-              kodeverk: '',
-            },
+            fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
           } as Fagsak}
           behandling={behandling}
         />

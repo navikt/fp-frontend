@@ -44,11 +44,11 @@ const findStatusForVedtak = (
     return vilkarUtfallType.IKKE_VURDERT;
   }
 
-  if (hasOnlyClosedAps(aksjonspunkter, vedtakAksjonspunkter) && vilkar.some((v) => v.vilkarstatus === vilkarUtfallType.IKKE_OPPFYLT)) {
+  if (hasOnlyClosedAps(aksjonspunkter, vedtakAksjonspunkter) && vilkar.some((v) => v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT)) {
     return vilkarUtfallType.IKKE_OPPFYLT;
   }
 
-  if (vilkar.some((v) => v.vilkarstatus === vilkarUtfallType.IKKE_VURDERT) || aksjonspunkter.some(isAksjonspunktOpenAndOfType)) {
+  if (vilkar.some((v) => v.vilkarStatus === vilkarUtfallType.IKKE_VURDERT) || aksjonspunkter.some(isAksjonspunktOpenAndOfType)) {
     return vilkarUtfallType.IKKE_VURDERT;
   }
 

@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import Lenkepanel from 'nav-frontend-lenkepanel';
 
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import VisittkortSakIndex from '@fpsak-frontend/sak-visittkort';
 import { Fagsak, FagsakPerson, AlleKodeverk } from '@fpsak-frontend/types';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import styles from './aktoerGrid.less';
 
@@ -25,7 +25,7 @@ const AktoerGrid: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   finnPathToFagsak,
 }) => {
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, KodeverkType);
   const vFagsak = aktorInfo.fagsaker.length > 0 ? aktorInfo.fagsaker[0] : { relasjonsRolleType: { kode: relasjonsRolleType.MOR } };
 
   return (
@@ -48,9 +48,9 @@ const AktoerGrid: FunctionComponent<OwnProps> = ({
             href="#"
             tittelProps="normaltekst"
           >
-            {getKodeverknavn(fagsak.fagsakYtelseType)}
+            {getKodeverknavn(fagsak.fagsakYtelseType, KodeverkType.FAGSAK_YTELSE)}
             {` (${fagsak.saksnummer}) `}
-            {getKodeverknavn(fagsak.status)}
+            {getKodeverknavn(fagsak.status, KodeverkType.FAGSAK_STATUS)}
           </Lenkepanel>
         )) : <FormattedMessage id="AktoerGrid.IngenFagsaker" />}
       </div>

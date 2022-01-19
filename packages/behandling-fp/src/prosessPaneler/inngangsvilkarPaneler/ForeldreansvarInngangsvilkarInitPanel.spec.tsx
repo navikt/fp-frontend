@@ -28,10 +28,7 @@ describe('<ForeldreansvarInngangsvilkarInitPanel>', () => {
     const toggleOverstyring = () => {};
 
     const vilkar = [{
-      vilkarType: {
-        kode: vilkarType.FORELDREANSVARSVILKARET_2_LEDD,
-        kodeverk: '',
-      },
+      vilkarType: vilkarType.FORELDREANSVARSVILKARET_2_LEDD,
     } as Vilkar];
 
     const innerElement = panel.renderProp('renderPanel')({ vilkar }, erOverstyrt, toggleOverstyring);

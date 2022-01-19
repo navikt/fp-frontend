@@ -18,27 +18,15 @@ import messages from '../../i18n/nb_NO.json';
 
 const fagsak = {
   saksnummer: '123456',
-  fagsakYtelseType: {
-    kode: fagsakYtelseType.FORELDREPENGER,
-    kodeverk: 'YTELSE_TYPE',
-  },
-  status: {
-    kode: fagsakStatus.UNDER_BEHANDLING,
-    kodeverk: 'FAGSAK_STATUS',
-  },
+  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+  status: fagsakStatus.UNDER_BEHANDLING,
 } as Fagsak;
 
 const behandling = {
   uuid: '1',
   versjon: 2,
-  status: {
-    kode: behandlingStatus.BEHANDLING_UTREDES,
-    kodeverk: 'BEHANDLING_STATUS',
-  },
-  type: {
-    kode: behandlingType.FORSTEGANGSSOKNAD,
-    kodeverk: 'BEHANDLING_TYPE',
-  },
+  status: behandlingStatus.BEHANDLING_UTREDES,
+  type: behandlingType.FORSTEGANGSSOKNAD,
   behandlingPaaVent: false,
   behandlingHenlagt: false,
 } as Behandling;

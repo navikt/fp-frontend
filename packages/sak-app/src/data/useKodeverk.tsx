@@ -1,5 +1,5 @@
 import { KodeverkMedNavn, AlleKodeverk, AlleKodeverkTilbakekreving } from '@fpsak-frontend/types';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 
 import { FpsakApiKeys, restApiHooks } from './fpsakApi';
@@ -37,15 +37,15 @@ export function useFpTilbakeKodeverk<T = KodeverkMedNavn>(kodeverkType: string):
  * Hook som brukes når en har behov for å slå opp navn-attributtet til et bestemt kodeverk. For å kunne bruke denne
  * må @see useGlobalStateRestApi først brukes for å hente data fra backend
  */
-export function useFpSakKodeverkMedNavn(kodeverkOjekt: string): KodeverkMedNavn {
-  const kodeverkType = kodeverkTyper[kodeverkOjekt.kodeverk];
+export function useFpSakKodeverkMedNavn(kode: string, kodeverk: KodeverkType): KodeverkMedNavn {
+  const kodeverkType = KodeverkType[kodeverk];
   const kodeverkForType = useFpSakKodeverk<KodeverkMedNavn>(kodeverkType);
 
   if (!kodeverkForType || kodeverkForType.length === 0) {
-    throw Error(`Det finnes ingen kodeverk for type ${kodeverkType} med kode ${kodeverkOjekt}`);
+    throw Error(`Det finnes ingen kodeverk for type ${kodeverkType} med kode ${kode}`);
   }
 
-  return kodeverkForType.find((k) => k.kode === kodeverkOjekt);
+  return kodeverkForType.find((k) => k.kode === kode);
 }
 
 /**
@@ -56,13 +56,13 @@ export function useGetKodeverkFn() {
   const alleFpSakKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK);
   const alleFpTilbakeKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
 
-  return (kodeverkOjekt: string, behandlingType: string = BehandlingType.FORSTEGANGSSOKNAD) => {
-    const kodeverkType = kodeverkTyper[kodeverkOjekt];
+  return (kode: string, kodeverk: KodeverkType, behandlingType: string = BehandlingType.FORSTEGANGSSOKNAD) => {
+    const kodeverkType = KodeverkType[kodeverk];
     const kodeverkForType = behandlingType === BehandlingType.TILBAKEKREVING || behandlingType === BehandlingType.TILBAKEKREVING_REVURDERING
       ? alleFpTilbakeKodeverk[kodeverkType] : alleFpSakKodeverk[kodeverkType];
     if (!kodeverkForType || kodeverkForType.length === 0) {
-      throw Error(`Det finnes ingen kodeverk for type ${kodeverkType} med kode ${kodeverkOjekt}`);
+      throw Error(`Det finnes ingen kodeverk for type ${kodeverkType} med kode ${kode}`);
     }
-    return kodeverkForType.find((k) => k.kode === kodeverkOjekt);
+    return kodeverkForType.find((k) => k.kode === kode);
   };
 }

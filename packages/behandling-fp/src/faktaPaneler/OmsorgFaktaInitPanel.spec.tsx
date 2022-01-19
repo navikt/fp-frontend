@@ -23,10 +23,7 @@ describe('<OmsorgFaktaInitPanel>', () => {
     const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any> & FaktaPanelInitProps>(FaktaDefaultInitPanel);
 
     const aksjonspunkter = [{
-      definisjon: {
-        kode: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
     }] as Aksjonspunkt[];
 
     expect(panel.props().skalPanelVisesIMeny({ aksjonspunkter })).toBe(true);

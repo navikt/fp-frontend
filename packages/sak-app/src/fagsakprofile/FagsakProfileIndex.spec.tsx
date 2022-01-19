@@ -17,14 +17,8 @@ import { FagsakProfileIndex } from './FagsakProfileIndex';
 describe('<FagsakProfileIndex>', () => {
   const fagsak = {
     saksnummer: '123',
-    fagsakYtelseType: {
-      kode: fagsakYtelseType.FORELDREPENGER,
-      kodeverk: 'FAGSAK_YTELSE',
-    },
-    status: {
-      kode: fagsakStatus.OPPRETTET,
-      kodeverk: 'FAGSAK_STATUS',
-    },
+    fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+    status: fagsakStatus.OPPRETTET,
   };
 
   const navAnsatt = {
@@ -41,14 +35,8 @@ describe('<FagsakProfileIndex>', () => {
 
   const behandling = {
     uuid: 'test',
-    type: {
-      kode: behandlingType.FORSTEGANGSSOKNAD,
-      kodeverk: 'BEHANDLING_TYPE',
-    },
-    status: {
-      kode: behandlingStatus.OPPRETTET,
-      kodeverk: 'BEHANDLING_STATUS',
-    },
+    type: behandlingType.FORSTEGANGSSOKNAD,
+    status: behandlingStatus.OPPRETTET,
     behandlendeEnhetId: 'test',
     behandlendeEnhetNavn: 'NAV Viken',
     opprettet: '2017-08-02T00:54:25.455',

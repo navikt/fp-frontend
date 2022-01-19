@@ -36,10 +36,7 @@ export const visIverksetterVedtakAvslatt = () => (
       visModal
       lukkModal={() => undefined}
       behandlingsresultat={{
-        type: {
-          kode: behandlingResultatType.AVSLATT,
-          kodeverk: '',
-        },
+        type: behandlingResultatType.AVSLATT,
       }}
     />
   </RawIntlProvider>
