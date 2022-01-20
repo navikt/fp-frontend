@@ -9,7 +9,6 @@ import {
   dateFormat, guid, getKodeverknavnFn, omitMany,
 } from '@fpsak-frontend/utils';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelseSamling,
   AlleKodeverk, Personoversikt, UttakKontrollerFaktaPerioder, Ytelsefordeling,

@@ -6,9 +6,12 @@ import HttpClientApi from '../HttpClientApiTsType';
 const konverterKodeverkTilKode = (data: any, erTilbakekreving: boolean) => {
   const lengdeKodeverkObjekt = erTilbakekreving ? 3 : 2;
   Object.keys(data).forEach((key) => {
-    if (data[key]?.kode && data[key]?.kodeverk && Object.keys(data[key]).length === lengdeKodeverkObjekt) {
-      // eslint-disable-next-line no-param-reassign
-      data[key] = data[key].kode;
+    if (data[key]?.kode) {
+      const antallAttr = Object.keys(data[key]).length;
+      if ((data[key]?.kodeverk && antallAttr === lengdeKodeverkObjekt) || antallAttr === 1) {
+        // eslint-disable-next-line no-param-reassign
+        data[key] = data[key].kode;
+      }
     }
     if (typeof data[key] === 'object' && data[key] !== null) {
       konverterKodeverkTilKode(data[key], erTilbakekreving);
