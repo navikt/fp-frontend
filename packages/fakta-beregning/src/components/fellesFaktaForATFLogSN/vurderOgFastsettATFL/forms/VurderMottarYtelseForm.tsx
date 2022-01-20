@@ -39,7 +39,7 @@ const utledArbeidsforholdUtenIMRadioTekst = (arbeidsforhold: BeregningsgrunnlagA
   let radioNavn;
   if (!agOpplysning) {
     radioNavn = arbeidsforhold.arbeidsforholdType
-      ? getKodeverknavnFn(alleKodeverk, KodeverkType)(arbeidsforhold.arbeidsforholdType, KodeverkType.OPPTJENING_AKTIVITET_TYPE) : '';
+      ? getKodeverknavnFn(alleKodeverk)(arbeidsforhold.arbeidsforholdType, KodeverkType.OPPTJENING_AKTIVITET_TYPE) : '';
   } else {
     radioNavn = createVisningsnavnFakta(agOpplysning, arbeidsforhold.eksternArbeidsforholdId);
   }

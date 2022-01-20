@@ -75,7 +75,7 @@ export const UttakFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps & I
   submittable,
   ...formProps
 }) => {
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
   return (
     <form onSubmit={formProps.handleSubmit}>

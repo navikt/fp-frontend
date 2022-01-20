@@ -156,7 +156,7 @@ const buildInitialValues = createSelector([
     const valgtPeriodeAps = aksjonspunkter.filter((ap) => valgtPeriode.aksjonspunkter.some((vpap) => vpap === ap.definisjon));
     confirmValues = FaktaBegrunnelseTextField.buildInitialValues(valgtPeriodeAps);
   }
-  const kodeverkFn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+  const kodeverkFn = getKodeverknavnFn(alleKodeverk);
   return {
     ...valgtPeriode,
     ...OppholdINorgeOgAdresserFaktaPanel.buildInitialValues(soknad, valgtPeriode, aksjonspunkter),

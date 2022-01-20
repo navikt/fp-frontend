@@ -93,7 +93,7 @@ const AksjonspunktBehandlerAT: FunctionComponent<OwnProps> & StaticFunctions = (
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
 }) => {
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, KodeverkType);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
   const relevanteAndelerAT = finnAndelerSomSkalVisesAT(alleAndelerIForstePeriode);
   return (
     <>

@@ -245,7 +245,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
     } = this.props;
     const { showDelPeriodeModal } = this.state;
     const isEdited = !!selectedItemData.begrunnelse && !isApOpen;
-    const getKodeverknavn = getKodeverknavnFn(alleKodeverk, KodeverkType);
+    const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
     return (
       <TimeLineDataContainer key={`selectedItemData_${selectedItemData.id}`}>

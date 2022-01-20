@@ -6,7 +6,7 @@ import { Checkbox } from 'nav-frontend-skjema';
 
 import { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@fpsak-frontend/types';
 import HistorikkAktor from '@fpsak-frontend/kodeverk/src/historikkAktor';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import {
   FlexContainer, FlexRow, FlexColumn, VerticalSpacer,
@@ -247,9 +247,9 @@ const History: FunctionComponent<OwnProps & WrappedComponentProps> = ({
     ? alleHistorikkInnslag.filter((i) => i.behandlingUuid === valgtBehandlingUuid) : alleHistorikkInnslag),
   [alleHistorikkInnslag, valgtBehandlingUuid, skalSortertePaValgtBehandling]);
 
-  const getKodeverknavnFpSak = useMemo(() => getKodeverknavnFn(alleKodeverkFpSak, kodeverkTyper), [alleKodeverkFpSak]);
+  const getKodeverknavnFpSak = useMemo(() => getKodeverknavnFn(alleKodeverkFpSak), [alleKodeverkFpSak]);
   const getKodeverknavnFpTilbake = useMemo(() => (alleKodeverkFpTilbake
-    ? getKodeverknavnFn(alleKodeverkFpTilbake, kodeverkTyper) : undefined), [alleKodeverkFpTilbake]);
+    ? getKodeverknavnFn(alleKodeverkFpTilbake) : undefined), [alleKodeverkFpTilbake]);
 
   return (
     <>
@@ -282,7 +282,7 @@ const History: FunctionComponent<OwnProps & WrappedComponentProps> = ({
           <Snakkeboble
             key={historikkinnslag.opprettetTidspunkt + historikkinnslag.type}
             aktoer={historikkinnslag.aktoer}
-            rolleNavn={getKodeverknavn(historikkinnslag.aktoer)}
+            rolleNavn={getKodeverknavn(historikkinnslag.aktoer, KodeverkType.HISTORIKK_AKTOER)}
             dato={historikkinnslag.opprettetTidspunkt}
             kjoenn={historikkinnslag.kjoenn}
             opprettetAv={(aktorIsSOKER || aktorIsArbeidsgiver || aktorIsVL) ? '' : historikkinnslag.opprettetAv}

@@ -2,6 +2,7 @@ import React from 'react';
 import { IntlShape } from 'react-intl';
 
 import { HistorikkinnslagDel, HistorikkInnslagOpplysning, HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import historikkResultatTypeCodes from '../../../kodeverk/historikkResultatTypeCodes';
 import historikkEndretFeltVerdiTypeCodes from '../../../kodeverk/historikkEndretFeltVerdiTypeCodes';
@@ -45,14 +46,17 @@ export const findResultatText = (resultat: string, intl: IntlShape): string | un
   return intl.formatMessage({ id: fieldId }, { b: (chunks) => <b>{chunks}</b>, br: <br /> }) as string;
 };
 
-export const findHendelseText = (hendelse: HistorikkinnslagDel['hendelse'], getKodeverknavn: (kodeverk: string) => string): string | undefined => {
+export const findHendelseText = (
+  hendelse: HistorikkinnslagDel['hendelse'],
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
+): string | undefined => {
   if (!hendelse || !hendelse.navn) {
     return undefined;
   }
   if (hendelse.verdi === null) {
-    return getKodeverknavn(hendelse.navn);
+    return getKodeverknavn(hendelse.navn, KodeverkType.HISTORIKKINNSLAG_TYPE);
   }
-  return `${getKodeverknavn(hendelse.navn)} ${hendelse.verdi}`;
+  return `${getKodeverknavn(hendelse.navn, KodeverkType.HISTORIKKINNSLAG_TYPE)} ${hendelse.verdi}`;
 };
 
 const convertToBoolean = (verdi: boolean): string => (verdi === true ? 'Ja' : 'Nei');

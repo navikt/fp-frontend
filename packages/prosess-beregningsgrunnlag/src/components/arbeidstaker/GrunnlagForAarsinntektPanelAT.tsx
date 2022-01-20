@@ -242,7 +242,7 @@ GrunnlagForAarsinntektPanelATImpl.defaultProps = {
 };
 
 const mapStateToProps = (state: any, initialProps: OwnProps): MappedOwnProps => {
-  const getKodeverknavn = getKodeverknavnFn(initialProps.alleKodeverk, KodeverkType);
+  const getKodeverknavn = getKodeverknavnFn(initialProps.alleKodeverk);
   return {
     getKodeverknavn,
   };

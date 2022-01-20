@@ -85,8 +85,8 @@ const HistorikkMalType8: FunctionComponent<HistorikkMal & WrappedComponentProps>
             />
           ))}
 
-          {historikkinnslagDel.aarsak && <Normaltekst>{getKodeverknavn(historikkinnslagDel.aarsak)}</Normaltekst>}
-          {historikkinnslagDel.begrunnelse && <BubbleText bodyText={getKodeverknavn(historikkinnslagDel.begrunnelse)} />}
+          {historikkinnslagDel.aarsak && <Normaltekst>{historikkinnslagDel.aarsak}</Normaltekst>}
+          {historikkinnslagDel.begrunnelse && <BubbleText bodyText={historikkinnslagDel.begrunnelse} />}
           {historikkinnslagDel.begrunnelseFritekst && <BubbleText bodyText={historikkinnslagDel.begrunnelseFritekst} />}
           {dokumentLinks && dokumentLinks.map((dokumentLenke) => (
             <HistorikkDokumentLenke

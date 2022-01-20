@@ -23,7 +23,7 @@ export const getTilbakekrevingText = (
     if (tilbakekrevingMedInntrekk(tilbakekrevingvalg.videreBehandling, simuleringResultat)) {
       return 'VedtakForm.TilbakekrInfotrygdOgInntrekk';
     }
-    const getKodeverkNavn = getKodeverknavnFn(alleKodeverk, KodeverkType);
+    const getKodeverkNavn = getKodeverknavnFn(alleKodeverk);
     return getKodeverkNavn(tilbakekrevingvalg.videreBehandling, KodeverkType.TILBAKEKR_VIDERE_BEH);
   }
   return '';

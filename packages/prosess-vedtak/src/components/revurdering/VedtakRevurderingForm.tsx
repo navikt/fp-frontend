@@ -280,14 +280,14 @@ const VedtakRevurderingForm: FunctionComponent<OwnProps> = ({
 
   const erBehandlingEtterKlage = useMemo(() => erÅrsakTypeBehandlingEtterKlage(behandling.behandlingÅrsaker), [behandling.behandlingÅrsaker]);
   const revurderingsÅrsakString = useMemo(() => lagÅrsakString(behandlingÅrsaker
-    .map((arsak) => arsak.behandlingArsakType), getKodeverknavnFn(alleKodeverk, KodeverkType)), [behandlingÅrsaker]);
+    .map((arsak) => arsak.behandlingArsakType), getKodeverknavnFn(alleKodeverk)), [behandlingÅrsaker]);
   const tilbakekrevingtekst = useMemo(() => getTilbakekrevingText(alleKodeverk, simuleringResultat, tilbakekrevingvalg), [
     simuleringResultat, tilbakekrevingvalg]);
 
   let vedtakstatusTekst = '';
   if (isInnvilget(behandlingsresultat.type)) {
     const konsekvenserForYtelsen = behandlingsresultat !== undefined ? behandlingsresultat.konsekvenserForYtelsen : undefined;
-    vedtakstatusTekst = finnInvilgetRevurderingTekst(intl, ytelseTypeKode, getKodeverknavnFn(alleKodeverk, KodeverkType), tilbakekrevingtekst,
+    vedtakstatusTekst = finnInvilgetRevurderingTekst(intl, ytelseTypeKode, getKodeverknavnFn(alleKodeverk), tilbakekrevingtekst,
       konsekvenserForYtelsen, resultatstruktur, resultatstrukturOriginalBehandling);
   }
   if (isAvslag(behandlingsresultat.type)) {

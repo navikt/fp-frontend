@@ -123,7 +123,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
 }) => {
   const numberOfDaysAndWeeks = calcDaysAndWeeks(selectedItemStartDate, selectedItemEndDate);
   const intl = useIntl();
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, KodeverkType);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
   return (
     <TimeLineDataContainer>

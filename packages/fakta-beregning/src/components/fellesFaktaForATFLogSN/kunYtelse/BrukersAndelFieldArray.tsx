@@ -17,14 +17,14 @@ import {
   Image, Table, TableColumn, TableRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
-import { AlleKodeverk } from '@fpsak-frontend/types';
+import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 import styles from './brukersAndelFieldArray.less';
 import { SortedAndelInfo, validateUlikeAndelerWithGroupingFunction } from '../ValidateAndelerUtils';
 import { isBeregningFormDirty as isFormDirty } from '../../BeregningFormUtils';
 import { BrukersAndelValues } from '../../../typer/FaktaBeregningTypes';
 
 const defaultBGFordeling = (aktivitetStatuser: string[], alleKodeverk) => ({
-  andel: getKodeverknavnFn(alleKodeverk, KodeverkType)(
+  andel: getKodeverknavnFn(alleKodeverk)(
     aktivitetStatuser.filter((kode) => kode === aktivitetStatus.BRUKERS_ANDEL)[0],
     KodeverkType.AKTIVITET_STATUS),
   fastsattBelop: '',
@@ -33,7 +33,7 @@ const defaultBGFordeling = (aktivitetStatuser: string[], alleKodeverk) => ({
   lagtTilAvSaksbehandler: true,
 });
 
-const inntektskategoriSelectValues = (kategorier) => kategorier.map((ik) => (
+const inntektskategoriSelectValues = (kategorier: KodeverkMedNavn[]) => kategorier.map((ik) => (
   <option value={ik.kode} key={ik.kode}>
     {ik.navn}
   </option>
@@ -64,7 +64,7 @@ const onKeyDown = (fields, aktivitetStatuser, alleKodeverk) => ({ key }) => {
 };
 
 const createAndelerTableRows = (fields, isAksjonspunktClosed, readOnly,
-  inntektskategoriKoder, intl) => fields.map((andelElementFieldId, index) => (
+  inntektskategoriKoder: KodeverkMedNavn[], intl) => fields.map((andelElementFieldId, index) => (
     <TableRow key={andelElementFieldId}>
       <TableColumn>
         <FormattedMessage id="BeregningInfoPanel.FordelingBG.Ytelse" />
@@ -127,7 +127,7 @@ type OwnProps = {
     readOnly: boolean;
     fields: FieldArrayFieldsProps<any>;
     meta?: FieldArrayMetaProps;
-    inntektskategoriKoder: string[]
+    inntektskategoriKoder: KodeverkMedNavn[]
     aktivitetStatuser: string[]
     isAksjonspunktClosed: boolean;
     isBeregningFormDirty: boolean;

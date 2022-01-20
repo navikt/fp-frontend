@@ -3,14 +3,15 @@ import axios, { AxiosResponse } from 'axios';
 import initRestMethods from './initRestMethods';
 import HttpClientApi from '../HttpClientApiTsType';
 
-const konverterKodeverkTilKode = (data: any) => {
+const konverterKodeverkTilKode = (data: any, erTilbakekreving: boolean) => {
+  const lengdeKodeverkObjekt = erTilbakekreving ? 3 : 2;
   Object.keys(data).forEach((key) => {
-    if (data[key]?.kode && data[key]?.kodeverk && Object.keys(data).length === 2) {
+    if (data[key]?.kode && data[key]?.kodeverk && Object.keys(data[key]).length === lengdeKodeverkObjekt) {
       // eslint-disable-next-line no-param-reassign
       data[key] = data[key].kode;
     }
     if (typeof data[key] === 'object' && data[key] !== null) {
-      konverterKodeverkTilKode(data[key]);
+      konverterKodeverkTilKode(data[key], erTilbakekreving);
     }
   });
 };
@@ -32,7 +33,8 @@ const getAxiosHttpClientApi = (): HttpClientApi => {
   // TODO Temp kode til backend returnerer string i staden for Kodeverk
   axiosInstance.interceptors.response.use((response: AxiosResponse): any => {
     if (response.status === 200 && response.config.url.includes('/api/') && !response.config.url.includes('/api/kodeverk')) {
-      konverterKodeverkTilKode(response.data);
+      const erTilbakekreving = response.config.url.includes('/fptilbake/api/');
+      konverterKodeverkTilKode(response.data, erTilbakekreving);
     }
     return response;
   });

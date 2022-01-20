@@ -19,6 +19,7 @@ import { PeriodeMedClassName } from './Uttak';
 const intlMock = getIntlMock(messages);
 
 describe('<UttakTimeLineData>', () => {
+  // @ts-ignore
   const selectedItem = {
     id: 1,
     fom: '',
@@ -29,6 +30,7 @@ describe('<UttakTimeLineData>', () => {
       stønadskontoType: '',
     }],
   } as PeriodeMedClassName;
+  // @ts-ignore
   const selectedItem2 = {
     id: 1,
     fom: '',

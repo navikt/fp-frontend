@@ -3,6 +3,7 @@ import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl'
 
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
 import { HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import historikkinnslagType from '../../kodeverk/historikkinnslagType';
 import { findEndretFeltVerdi } from './felles/historikkUtils';
@@ -81,7 +82,7 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal & WrappedComponentProps>
                   <FormattedMessage
                     id="Historikk.Template.9.TilbakekrViderebehandling"
                     values={{
-                      felt: getKodeverknavn(endretFelt.endretFeltNavn),
+                      felt: getKodeverknavn(endretFelt.endretFeltNavn, KodeverkType.HISTORIKK_ENDRET_FELT_TYPE),
                       verdi: findEndretFeltVerdi(endretFelt, endretFelt.tilVerdi, intl),
                       b: (chunks: any) => <b>{chunks}</b>,
                     }}
@@ -89,7 +90,9 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal & WrappedComponentProps>
                 </div>
               ))
           )}
-          {historikkinnslagDel.begrunnelse && <BubbleText bodyText={getKodeverknavn(historikkinnslagDel.begrunnelse)} />}
+          {historikkinnslagDel.begrunnelse && (
+            <BubbleText bodyText={historikkinnslagDel.begrunnelse} />
+          )}
           {historikkinnslagDel.begrunnelseFritekst && <BubbleText bodyText={historikkinnslagDel.begrunnelseFritekst} />}
         </div>
       </div>

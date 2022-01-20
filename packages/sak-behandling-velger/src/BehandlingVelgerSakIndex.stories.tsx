@@ -16,11 +16,10 @@ const locationMock = {
   hash: 'test',
 };
 
-const getKodeverkFn = (kodeverk: string) => {
-  const kodeverkType = KodeverkType[kodeverk.kodeverk as keyof typeof KodeverkType];
-  // @ts-ignore
+const getKodeverkFn = (kode: string, kodeverk: KodeverkType) => {
+  const kodeverkType = KodeverkType[kodeverk];
   const kodeverkForType = alleKodeverk[kodeverkType];
-  return kodeverkForType.find((k: string) => k.kode === kodeverk.kode);
+  return kodeverkForType.find((k: string) => k === kode);
 };
 
 export default {

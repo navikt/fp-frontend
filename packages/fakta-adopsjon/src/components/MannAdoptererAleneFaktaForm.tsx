@@ -52,7 +52,7 @@ const MannAdoptererAleneFaktaForm: FunctionComponent<OwnProps> & StaticFunctions
         <Undertekst><FormattedMessage id="MannAdoptererAleneFaktaForm.Opplysninger" /></Undertekst>
         <VerticalSpacer fourPx />
         {farSokerType
-          && <Normaltekst>{getKodeverknavnFn(alleKodeverk, KodeverkType)(farSokerType, KodeverkType.FAR_SOEKER_TYPE)}</Normaltekst>}
+          && <Normaltekst>{getKodeverknavnFn(alleKodeverk)(farSokerType, KodeverkType.FAR_SOEKER_TYPE)}</Normaltekst>}
         <VerticalSpacer sixteenPx />
         <hr className={styles.hr} />
         <RadioGroupField

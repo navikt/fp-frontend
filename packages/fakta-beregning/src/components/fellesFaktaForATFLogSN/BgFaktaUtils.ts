@@ -46,8 +46,8 @@ const lagVisningsnavn = (andel: AndelForFaktaOmBeregning,
   const agOpplysning = andel.arbeidsforhold ? arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent] : undefined;
   if (!agOpplysning) {
     return andel.arbeidsforhold && andel.arbeidsforhold.arbeidsforholdType
-      ? getKodeverknavnFn(alleKodeverk, KodeverkType)(andel.arbeidsforhold.arbeidsforholdType, KodeverkType.OPPTJENING_AKTIVITET_TYPE)
-      : getKodeverknavnFn(alleKodeverk, KodeverkType)(andel.aktivitetStatus, KodeverkType.AKTIVITET_STATUS);
+      ? getKodeverknavnFn(alleKodeverk)(andel.arbeidsforhold.arbeidsforholdType, KodeverkType.OPPTJENING_AKTIVITET_TYPE)
+      : getKodeverknavnFn(alleKodeverk)(andel.aktivitetStatus, KodeverkType.AKTIVITET_STATUS);
   }
   return createVisningsnavnFakta(agOpplysning, andel.arbeidsforhold.eksternArbeidsforholdId);
 };

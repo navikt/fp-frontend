@@ -109,7 +109,7 @@ const lagVisningsnavn = (aktivitet: BeregningAktivitet,
   const agOpplysning = arbeidsgiverOpplysningerPerId[aktivitet.arbeidsgiverIdent];
   if (!agOpplysning) {
     return aktivitet.arbeidsforholdType
-      ? getKodeverknavnFn(alleKodeverk, KodeverkType)(aktivitet.arbeidsforholdType, KodeverkType.OPPTJENING_AKTIVITET_TYPE) : '';
+      ? getKodeverknavnFn(alleKodeverk)(aktivitet.arbeidsforholdType, KodeverkType.OPPTJENING_AKTIVITET_TYPE) : '';
   }
   return createVisningsnavnFakta(agOpplysning, aktivitet.eksternArbeidsforholdId);
 };

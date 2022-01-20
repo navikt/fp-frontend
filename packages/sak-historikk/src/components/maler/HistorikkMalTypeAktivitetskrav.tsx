@@ -5,6 +5,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { AvsnittSkiller, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 import { HistorikkinnslagDel } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
 import BubbleText from './felles/bubbleText';
@@ -21,15 +22,18 @@ const finnTomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): s
   return found?.tilVerdi ? found.tilVerdi : '';
 };
 
-const buildEndretFeltText = (historikkinnslagDel: HistorikkinnslagDel, getKodeverknavn: (kodeverk: string) => string): ReactNode => {
+const buildEndretFeltText = (
+  historikkinnslagDel: HistorikkinnslagDel,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
+): ReactNode => {
   const { opplysninger, endredeFelter } = historikkinnslagDel;
   const felt = endredeFelter[0];
   const erEndret = felt.fraVerdi !== null && felt.fraVerdi !== undefined;
 
-  const tilVerdiNavn = getKodeverknavn({ kode: felt.tilVerdi as string, kodeverk: felt.klTilVerdi ? felt.klTilVerdi : '' });
+  const tilVerdiNavn = felt.klTilVerdi ? getKodeverknavn(felt.tilVerdi as string, felt.klTilVerdi as KodeverkType) : '';
   if (erEndret) {
     const årsakVerdi = felt.fraVerdi ? felt.fraVerdi as string : felt.tilVerdi as string;
-    const fraVerdi = `${getKodeverknavn({ kode: årsakVerdi, kodeverk: felt.klFraVerdi ? felt.klFraVerdi : '' })}`;
+    const fraVerdi = felt.klFraVerdi ? `${getKodeverknavn(årsakVerdi, felt.klFraVerdi as KodeverkType)}` : '';
     return (
       <FormattedMessage
         id="Historikk.Template.Aktivitetskrav.endretFelt"

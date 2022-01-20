@@ -19,7 +19,7 @@ const HistorikkMalType1: FunctionComponent<HistorikkMal> = ({
       )}
       {historikkinnslagDeler[0].begrunnelse && (
         <BubbleText
-          bodyText={getKodeverknavn(historikkinnslagDeler[0].begrunnelse)}
+          bodyText={historikkinnslagDeler[0].begrunnelse}
           cutOffLength={70}
         />
       )}

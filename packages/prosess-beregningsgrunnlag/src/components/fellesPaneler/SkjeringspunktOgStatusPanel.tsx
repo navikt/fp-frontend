@@ -79,7 +79,7 @@ export const SkjeringspunktOgStatusPanelImpl: FunctionComponent<OwnProps & Mappe
 );
 
 const mapStateToProps = (state, ownProps: OwnProps): MappedOwnProps => {
-  const getKodeverknavn = getKodeverknavnFn(ownProps.alleKodeverk, KodeverkType);
+  const getKodeverknavn = getKodeverknavnFn(ownProps.alleKodeverk);
   return {
     getKodeverknavn,
   };

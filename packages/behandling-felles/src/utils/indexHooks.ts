@@ -2,7 +2,7 @@ import {
   useEffect, useState, useCallback, useMemo,
 } from 'react';
 
-import { Behandling, Kodeverk } from '@fpsak-frontend/types';
+import { Behandling } from '@fpsak-frontend/types';
 import { RestApiHooks, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import { RequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { usePrevious } from '@fpsak-frontend/shared-components';
@@ -134,7 +134,7 @@ export const useInitBehandlingHandlinger = (
 
   const { startRequest: nyBehandlendeEnhet } = useRestApiRunner<void, NyBehandlendeEnhetParams>(keys.BEHANDLING_NY_BEHANDLENDE_ENHET);
   const { startRequest: settBehandlingPaVent } = useRestApiRunner<void,
-    { behandlingUuid: string, behandlingVersjon: number, frist: string, ventearsak: Kodeverk }>(keys.BEHANDLING_ON_HOLD);
+    { behandlingUuid: string, behandlingVersjon: number, frist: string, ventearsak: string }>(keys.BEHANDLING_ON_HOLD);
   const { startRequest: taBehandlingAvVent } = useRestApiRunner<Behandling, { behandlingUuid: string, behandlingVersjon: number }>(keys.RESUME_BEHANDLING);
   const { startRequest: henleggBehandling } = useRestApiRunner<void,
     { behandlingUuid: string, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>(keys.HENLEGG_BEHANDLING);

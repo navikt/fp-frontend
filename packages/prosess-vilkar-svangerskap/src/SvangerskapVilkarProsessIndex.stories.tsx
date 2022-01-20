@@ -66,12 +66,8 @@ export const ÅpentAksjonspunktSkalIkkeKunneInnvilge = Template.bind({});
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.SVANGERSKAPSVILKARET,
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-    },
+    definisjon: aksjonspunktCodes.SVANGERSKAPSVILKARET,
+    status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
   }] as Aksjonspunkt[],
   isReadOnly: false,
@@ -84,12 +80,8 @@ export const ÅpentAksjonspunktSkalKunneInnvilge = Template.bind({});
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.SVANGERSKAPSVILKARET,
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-    },
+    definisjon: aksjonspunktCodes.SVANGERSKAPSVILKARET,
+    status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
   }] as Aksjonspunkt[],
   isReadOnly: false,
@@ -98,9 +90,7 @@ export const ÅpentAksjonspunktSkalKunneInnvilge = Template.bind({});
   svangerskapspengerTilrettelegging: {
     arbeidsforholdListe: [{
       tilretteleggingDatoer: [{
-        type: {
-          kode: tilretteleggingType.DELVIS_TILRETTELEGGING,
-        },
+        type: tilretteleggingType.DELVIS_TILRETTELEGGING,
       }],
     } as ArbeidsforholdFodselOgTilrettelegging],
   } as FodselOgTilrettelegging,
@@ -111,12 +101,8 @@ OppfyltVilkår.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.SVANGERSKAPSVILKARET,
-    },
-    status: {
-      kode: aksjonspunktStatus.UTFORT,
-    },
+    definisjon: aksjonspunktCodes.SVANGERSKAPSVILKARET,
+    status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette vilkåret er godkjent',
   }] as Aksjonspunkt[],
   isReadOnly: true,
@@ -131,18 +117,12 @@ AvslåttVilkår.args = {
     uuid: '1',
     versjon: 1,
     behandlingsresultat: {
-      avslagsarsak: {
-        kode: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
-      },
+      avslagsarsak: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
     },
   } as Behandling,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.SVANGERSKAPSVILKARET,
-    },
-    status: {
-      kode: aksjonspunktStatus.UTFORT,
-    },
+    definisjon: aksjonspunktCodes.SVANGERSKAPSVILKARET,
+    status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette vilkåret er avslått',
   }] as Aksjonspunkt[],
   isReadOnly: true,

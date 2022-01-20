@@ -172,7 +172,7 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
 }) => {
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, KodeverkType);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
   return (
     <div className={periodeStatusClassName(selectedItemData)}>

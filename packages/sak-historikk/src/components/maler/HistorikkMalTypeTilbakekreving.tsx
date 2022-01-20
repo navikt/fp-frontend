@@ -5,6 +5,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 import { HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
 import historikkEndretFeltType from '../../kodeverk/historikkEndretFeltType';
@@ -15,7 +16,7 @@ const lagBegrunnelseKomponent = (
   felt: HistorikkinnslagEndretFelt,
   index: number,
   endredeFelter: HistorikkinnslagEndretFelt[],
-  getKodeverknavn: (kodeverk: string) => string,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   begrunnelse?: string,
   sarligGrunnerBegrunnelse?: string,
   begrunnelseFritekst?: string,
@@ -39,7 +40,10 @@ const lagBegrunnelseKomponent = (
         <FormattedMessage
           id={felt.fraVerdi ? 'Historikk.Template.Tilbakekreving.ChangedFromTo' : 'Historikk.Template.Tilbakekreving.FieldSetTo'}
           values={{
-            navn: getKodeverknavn(endretFeltNavn), fraVerdi: formatertFraVerdi, tilVerdi: formatertTilVerdi, b: (chunks: any) => <b>{chunks}</b>,
+            navn: getKodeverknavn(endretFeltNavn, KodeverkType.HISTORIKK_ENDRET_FELT_TYPE),
+            fraVerdi: formatertFraVerdi,
+            tilVerdi: formatertTilVerdi,
+            b: (chunks: any) => <b>{chunks}</b>,
           }}
         />
       </Normaltekst>

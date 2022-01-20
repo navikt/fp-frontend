@@ -2,16 +2,21 @@ import React, { FunctionComponent } from 'react';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import { HistorikkInnslagOpplysning } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import { findHendelseText } from './felles/historikkUtils';
 import HistorikkMal from '../HistorikkMalTsType';
 
 import styles from './historikkMalType.less';
 
-const formaterOpplysning = (opplysning: HistorikkInnslagOpplysning, index: number, getKodeverknavn: (kodeverk: string) => string) => (
+const formaterOpplysning = (
+  opplysning: HistorikkInnslagOpplysning,
+  index: number,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
+) => (
   <div key={`opplysning${index}`}>
     <Normaltekst className={styles.keyValuePair}>
-      {getKodeverknavn(opplysning.opplysningType)}
+      {getKodeverknavn(opplysning.opplysningType, KodeverkType.HISTORIKK_OPPLYSNING_TYPE)}
       :
     </Normaltekst>
     &ensp;

@@ -54,7 +54,7 @@ const getOmgjortAarsak = (
   klageVurderingResultat: KlageVurdering,
   alleKodeverk: AlleKodeverk,
 ): string | null => {
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, KodeverkType);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
   if (klageVurderingResultat) {
     if (klageVurderingResultat.klageVurderingResultatNK) {
       return getKodeverknavn(klageVurderingResultat.klageVurderingResultatNK.klageMedholdArsak, KodeverkType.KLAGE_MEDHOLD_ARSAK);
@@ -131,7 +131,7 @@ const VedtakKlageForm: FunctionComponent<OwnProps> = ({
     submitCallback(input).then(() => setSubmitting(false));
   }, [aksjonspunkter]);
 
-  const kodeverknavn = getKodeverknavnFn(alleKodeverk, KodeverkType);
+  const kodeverknavn = getKodeverknavnFn(alleKodeverk);
   return (
     <>
       <Undertittel><FormattedMessage id="VedtakKlageForm.Header" /></Undertittel>

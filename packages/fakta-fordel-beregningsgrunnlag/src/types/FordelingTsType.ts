@@ -1,5 +1,3 @@
-import { Kodeverk } from '@fpsak-frontend/types';
-
 export type FordelBeregningsgrunnlagGenerellAndelValues = {
   andel?: string;
   aktivitetStatus?: string;
@@ -20,7 +18,7 @@ export type FordelBeregningsgrunnlagArbeidAndelValues = {
   arbeidsperiodeFom?: string;
   arbeidsperiodeTom?: string;
   eksternArbeidsforholdId?: string;
-  arbeidsforholdType?: Kodeverk;
+  arbeidsforholdType?: string;
 }
 
 export type BGFordelArbeidsforhold = {
@@ -34,13 +32,13 @@ export type BGFordelArbeidsforhold = {
   eksternArbeidsforholdId?: string;
   refusjonPrAar?: number;
   belopFraInntektsmeldingPrMnd?: number;
-  organisasjonstype?: Kodeverk;
+  organisasjonstype?: string;
   naturalytelseBortfaltPrÅr?: number;
   naturalytelseTilkommetPrÅr?: number;
   startdato?: string;
   opphoersdato?: string;
   arbeidsforholdId?: string;
-  arbeidsforholdType?: Kodeverk;
+  arbeidsforholdType?: string;
 }
 
 export type FordelBeregningsgrunnlagAndelValues = FordelBeregningsgrunnlagGenerellAndelValues & FordelBeregningsgrunnlagArbeidAndelValues & {

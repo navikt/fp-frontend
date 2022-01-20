@@ -27,7 +27,7 @@ const lagVisningsnavn = (ferieAndel: FeriepengegrunnlagAndel,
       ? `${agOpplysning.navn} (${agOpplysning.identifikator})`
       : agOpplysning.navn;
   }
-  return ferieAndel.aktivitetStatus ? getKodeverknavnFn(alleKodeverk, KodeverkType)(ferieAndel.aktivitetStatus, KodeverkType.AKTIVITET_STATUS) : '';
+  return ferieAndel.aktivitetStatus ? getKodeverknavnFn(alleKodeverk)(ferieAndel.aktivitetStatus, KodeverkType.AKTIVITET_STATUS) : '';
 };
 
 type AndelerPrId = {

@@ -178,10 +178,7 @@ describe('<FordelBeregningsgrunnlagForm>', () => {
     const perioder = [periode1, periode2, periode3];
     const bgPerioder = [bgPeriode1, bgPeriode2, bgPeriode3];
 
-    const bt = {
-      kode: 'BT-003',
-      kodeverk: 'test',
-    };
+    const bt = 'BT-003';
 
     const wrapper = shallow(<FordelBeregningsgrunnlagForm
       perioder={perioder}

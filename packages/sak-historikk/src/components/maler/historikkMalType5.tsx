@@ -6,6 +6,7 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import { HistorikkinnslagDel, HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import historikkEndretFeltTypeCodes from '../../kodeverk/historikkEndretFeltTypeCodes';
 import historikkEndretFeltTypeHeadingCodes from '../../kodeverk/historikkEndretFeltTypeHeadingCodes';
@@ -69,7 +70,11 @@ const lagGjeldendeFraInnslag = (historikkinnslagDel: HistorikkinnslagDel): React
   return undefined;
 };
 
-const lageElementInnhold = (historikkDel: HistorikkinnslagDel, intl: IntlShape, getKodeverknavn: (kodeverk: string) => string): string[] => {
+const lageElementInnhold = (
+  historikkDel: HistorikkinnslagDel,
+  intl: IntlShape,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
+): string[] => {
   const list = [] as string[];
   if (historikkDel.hendelse) {
     const tekst = findHendelseText(historikkDel.hendelse, getKodeverknavn);
@@ -188,12 +193,12 @@ const HistorikkMalType5: FunctionComponent<HistorikkMal & WrappedComponentProps>
           <FormattedMessage
             id={findIdForOpplysningCode(opplysning)}
             values={{ antallBarn: opplysning.tilVerdi, b: (chunks: any) => <b>{chunks}</b>, br: <br /> }}
-            key={`${getKodeverknavn(opplysning.opplysningType)}@${opplysning.tilVerdi}`}
+            key={`${getKodeverknavn(opplysning.opplysningType, KodeverkType.HISTORIKK_OPPLYSNING_TYPE)}@${opplysning.tilVerdi}`}
           />
         ))}
 
-        {historikkinnslagDel.aarsak && <Normaltekst>{getKodeverknavn(historikkinnslagDel.aarsak)}</Normaltekst>}
-        {historikkinnslagDel.begrunnelse && <BubbleText bodyText={getKodeverknavn(historikkinnslagDel.begrunnelse)} />}
+        {historikkinnslagDel.aarsak && <Normaltekst>{historikkinnslagDel.aarsak}</Normaltekst>}
+        {historikkinnslagDel.begrunnelse && <BubbleText bodyText={historikkinnslagDel.begrunnelse} />}
         {historikkinnslagDel.begrunnelseFritekst && <BubbleText bodyText={historikkinnslagDel.begrunnelseFritekst} />}
         {historikkinnslag.dokumentLinks && historikkinnslag.dokumentLinks.map((dokumentLenke) => (
           <HistorikkDokumentLenke

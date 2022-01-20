@@ -59,7 +59,7 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
   const { formState: { isDirty } } = useFormContext();
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
   const isRequiredFn = getIsBegrunnelseRequired(isDirty);
   const avslagsårsak = getAvslagArsak(vilkar, behandlingsresultat, getKodeverknavn);

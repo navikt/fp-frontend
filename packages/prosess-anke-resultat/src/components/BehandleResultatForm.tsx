@@ -116,7 +116,7 @@ export const ResultatOmgjores: FunctionComponent<OwnPropsResultat & { alleKodeve
     {ankeVurderingResultat.ankeOmgjoerArsak && (
       <>
         <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Arsak" /></Undertekst>
-        <Undertekst>{getKodeverknavnFn(alleKodeverk, KodeverkType)(ankeVurderingResultat.ankeOmgjoerArsak, KodeverkType.ANKE_OMGJOER_AARSAK)}</Undertekst>
+        <Undertekst>{getKodeverknavnFn(alleKodeverk)(ankeVurderingResultat.ankeOmgjoerArsak, KodeverkType.ANKE_OMGJOER_AARSAK)}</Undertekst>
         <VerticalSpacer sixteenPx />
       </>
     )}

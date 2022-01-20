@@ -38,11 +38,10 @@ export function useFpTilbakeKodeverk<T = KodeverkMedNavn>(kodeverkType: string):
  * må @see useGlobalStateRestApi først brukes for å hente data fra backend
  */
 export function useFpSakKodeverkMedNavn(kode: string, kodeverk: KodeverkType): KodeverkMedNavn {
-  const kodeverkType = KodeverkType[kodeverk];
-  const kodeverkForType = useFpSakKodeverk<KodeverkMedNavn>(kodeverkType);
+  const kodeverkForType = useFpSakKodeverk<KodeverkMedNavn>(kodeverk);
 
   if (!kodeverkForType || kodeverkForType.length === 0) {
-    throw Error(`Det finnes ingen kodeverk for type ${kodeverkType} med kode ${kode}`);
+    throw Error(`Det finnes ingen kodeverk for type ${kodeverk} med kode ${kode}`);
   }
 
   return kodeverkForType.find((k) => k.kode === kode);
@@ -57,11 +56,10 @@ export function useGetKodeverkFn() {
   const alleFpTilbakeKodeverk = restApiHooks.useGlobalStateRestApiData(FpsakApiKeys.KODEVERK_FPTILBAKE);
 
   return (kode: string, kodeverk: KodeverkType, behandlingType: string = BehandlingType.FORSTEGANGSSOKNAD) => {
-    const kodeverkType = KodeverkType[kodeverk];
     const kodeverkForType = behandlingType === BehandlingType.TILBAKEKREVING || behandlingType === BehandlingType.TILBAKEKREVING_REVURDERING
-      ? alleFpTilbakeKodeverk[kodeverkType] : alleFpSakKodeverk[kodeverkType];
+      ? alleFpTilbakeKodeverk[kodeverk] : alleFpSakKodeverk[kodeverk];
     if (!kodeverkForType || kodeverkForType.length === 0) {
-      throw Error(`Det finnes ingen kodeverk for type ${kodeverkType} med kode ${kode}`);
+      throw Error(`Det finnes ingen kodeverk for type ${kodeverk} med kode ${kode}`);
     }
     return kodeverkForType.find((k) => k.kode === kode);
   };

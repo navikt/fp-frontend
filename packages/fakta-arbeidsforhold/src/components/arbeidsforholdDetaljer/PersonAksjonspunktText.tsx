@@ -94,7 +94,7 @@ export const PersonAksjonspunktTextImpl: FunctionComponent<OwnProps> = ({
   arbeidsforhold,
   alleKodeverk,
 }) => {
-  const msg = lagAksjonspunktMessage(arbeidsforhold, getKodeverknavnFn(alleKodeverk, KodeverkType));
+  const msg = lagAksjonspunktMessage(arbeidsforhold, getKodeverknavnFn(alleKodeverk));
   if (msg === undefined) {
     return null;
   }

@@ -4,6 +4,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
 import HistorikkMal from '../HistorikkMalTsType';
@@ -54,7 +55,7 @@ const HistorikkMalTypeForeldelse: FunctionComponent<HistorikkMal> = ({
                     <FormattedMessage
                       id={felt.fraVerdi ? 'Historikk.Template.Tilbakekreving.ChangedFromTo' : 'Historikk.Template.Tilbakekreving.FieldSetTo'}
                       values={{
-                        navn: getKodeverknavn(endretFeltNavn),
+                        navn: getKodeverknavn(endretFeltNavn, KodeverkType.HISTORIKK_ENDRET_FELT_TYPE),
                         fraVerdi,
                         tilVerdi,
                         b: (chunks: any) => <b>{chunks}</b>,

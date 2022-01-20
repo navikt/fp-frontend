@@ -39,7 +39,7 @@ const BesteberegningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelP
     <BesteberegningPanel
       beregningsgrunnlag={beregningsgrunnlag}
       arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
-      getKodeverkNavn={getKodeverknavnFn(alleKodeverk, kodeverkTyper)}
+      getKodeverkNavn={getKodeverknavnFn(alleKodeverk)}
       aksjonspunkter={aksjonspunkter}
       behandling={behandling}
       readOnly={readOnly}

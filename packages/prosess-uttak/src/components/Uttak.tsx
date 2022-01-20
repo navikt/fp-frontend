@@ -704,7 +704,7 @@ const addClassNameGroupIdToPerioder = (
 ): PeriodeMedClassName[] => { // NOSONAR Blir fiksa ved refaktorering av Uttak
   const behandlingStatusKode = bStatus;
   const annenForelderPerioder = uttakResultatPerioder.perioderAnnenpart;
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, KodeverkType);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
   const perioderMedClassName: PeriodeMedClassName[] = [];
   const perioder = hovedsoker ? hovedsokerPerioder : annenForelderPerioder;
 

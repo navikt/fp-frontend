@@ -38,7 +38,7 @@ const buildInitialValues = (
     || ap.definisjon === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR);
   return {
     ...OmsorgOgForeldreansvarFaktaForm.buildInitialValues(soknad, gjeldendeFamiliehendelse,
-      innvilgetRelatertTilgrensendeYtelserForAnnenForelder, getKodeverknavnFn(alleKodeverk, kodeverkTyper)),
+      innvilgetRelatertTilgrensendeYtelserForAnnenForelder, getKodeverknavnFn(alleKodeverk)),
     ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkt),
   };
 };

@@ -67,7 +67,7 @@ export const FormkravKlageForm: FunctionComponent<OwnProps> = ({
   isDirty,
 }) => {
   const intl = useIntl();
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, KodeverkType);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
   const klageBareVedtakOptions = getKlagBareVedtak(avsluttedeBehandlinger, intl, getKodeverknavn);
 
   return (
