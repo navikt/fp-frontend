@@ -87,7 +87,7 @@ describe('<BehandleAnkeForm>', () => {
     expect(wrapper.find(RadioGroupField)).toHaveLength(2);
     const select = wrapper.find(SelectField);
     expect(select).toHaveLength(2);
-    expect(select.at(1).props().name).toEqual('ankeOmgjoerArsak.kode');
+    expect(select.at(1).props().name).toEqual('ankeOmgjoerArsak');
   });
 
   it('skal vise komponent for opphevet og hjemsendt anke', () => {
@@ -102,7 +102,7 @@ describe('<BehandleAnkeForm>', () => {
     expect(wrapper.find(RadioGroupField)).toHaveLength(1);
     const select = wrapper.find(SelectField);
     expect(select).toHaveLength(2);
-    expect(select.at(1).props().name).toEqual('ankeOmgjoerArsak.kode');
+    expect(select.at(1).props().name).toEqual('ankeOmgjoerArsak');
   });
 
   it('skal lage verdier til dropdown', () => {

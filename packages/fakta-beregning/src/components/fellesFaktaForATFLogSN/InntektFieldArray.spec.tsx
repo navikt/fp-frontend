@@ -21,8 +21,8 @@ const intlMock = getIntlMock(messages);
 
 const aksjonspunkter = [
   {
-    definisjon: { kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN },
-    status: { kode: 'OPPR' },
+    definisjon: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+    status: 'OPPR',
   },
 ];
 
@@ -93,7 +93,7 @@ describe('<InntektFieldArray>', () => {
     const fields = new MockFieldsWithContent('fieldArrayName', [andelField]);
 
     const faktaOmBeregning = {
-      faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING }],
+      faktaOmBeregningTilfeller: [faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING],
     };
     const bg = {
       beregningsgrunnlagPeriode: [
@@ -112,7 +112,7 @@ describe('<InntektFieldArray>', () => {
     const fields = new MockFieldsWithContent('fieldArrayName', [andelField]);
 
     const faktaOmBeregning = {
-      faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE, kodeverk: 'test' }],
+      faktaOmBeregningTilfeller: [faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE],
       andelerForFaktaOmBeregning: [],
     };
     const bg = {

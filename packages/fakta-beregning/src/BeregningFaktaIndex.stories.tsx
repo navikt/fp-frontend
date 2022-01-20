@@ -916,7 +916,7 @@ export const SelvstendigNæringNyIArbeidslivet = () => {
 
 export const KombinasjonstestForFaktapanel = () => {
   const aapAktivitet = {
-    arbeidsforholdType: { kode: opptjeningAktivitetType.AAP, kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+    arbeidsforholdType: opptjeningAktivitetType.AAP,
     fom: '01-01-2019',
     tom: '01-04-2020',
   };
@@ -939,7 +939,7 @@ export const KombinasjonstestForFaktapanel = () => {
     skalBrukes: true,
   };
   const næringAktivitet = {
-    arbeidsforholdType: { kode: opptjeningAktivitetType.NARING, kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+    arbeidsforholdType: opptjeningAktivitetType.NARING,
     fom: '01-01-2019',
     tom: '01-04-2020',
     skalBrukes: true,
@@ -951,13 +951,13 @@ export const KombinasjonstestForFaktapanel = () => {
     skalBrukes: true,
   };
   const frilansAktivitet = {
-    arbeidsforholdType: { kode: opptjeningAktivitetType.FRILANS, kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+    arbeidsforholdType: opptjeningAktivitetType.FRILANS,
     fom: '01-01-2019',
     tom: '01-04-2020',
     skalBrukes: true,
   };
   const militærAktivitet = {
-    arbeidsforholdType: { kode: opptjeningAktivitetType.MILITAR_ELLER_SIVILTJENESTE, kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+    arbeidsforholdType: opptjeningAktivitetType.MILITAR_ELLER_SIVILTJENESTE,
     fom: '01-01-2019',
     tom: '01-04-2020',
     skalBrukes: true,

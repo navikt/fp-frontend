@@ -3,7 +3,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
 import { AlleKodeverk, Vilkar, Behandlingsresultat } from '@fpsak-frontend/types';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';

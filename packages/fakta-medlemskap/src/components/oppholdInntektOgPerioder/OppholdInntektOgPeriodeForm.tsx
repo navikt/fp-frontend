@@ -5,7 +5,6 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { FaktaBegrunnelseTextField } from '@fpsak-frontend/fakta-felles';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';

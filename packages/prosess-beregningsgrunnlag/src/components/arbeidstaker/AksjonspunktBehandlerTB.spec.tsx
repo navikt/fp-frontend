@@ -80,9 +80,7 @@ const beregningsgrunnlagPerioder = [
         andelsnr: 1,
       },
       {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-        },
+        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
         erTidsbegrensetArbeidsforhold: true,
         beregnetPrAar: beregnetPrAarAndelTo,
         overstyrtPrAar: overstyrtPrAarAndelTo,
@@ -113,9 +111,7 @@ const beregningsgrunnlagPerioder = [
         andelsnr: 1,
       },
       {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-        },
+        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
         erTidsbegrensetArbeidsforhold: true,
         beregnetPrAar: beregnetPrAarAndelTo,
         overstyrtPrAar: overstyrtPrAarAndelTo,
@@ -145,9 +141,7 @@ const beregningsgrunnlagPerioder = [
         andelsnr: 1,
       },
       {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-        },
+        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
         erTidsbegrensetArbeidsforhold: true,
         beregnetPrAar: beregnetPrAarAndelTo,
         overstyrtPrAar: overstyrtPrAarAndelTo,
@@ -177,9 +171,7 @@ const beregningsgrunnlagPerioder = [
         andelsnr: 1,
       },
       {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-        },
+        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
         erTidsbegrensetArbeidsforhold: true,
         beregnetPrAar: beregnetPrAarAndelTo,
         overstyrtPrAar: overstyrtPrAarAndelTo,

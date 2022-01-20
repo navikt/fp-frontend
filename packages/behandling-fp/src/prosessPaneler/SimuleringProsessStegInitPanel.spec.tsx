@@ -88,10 +88,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
       {
         key: FpBehandlingApiKeys.TILBAKEKREVINGVALG.name,
         data: {
-          videreBehandling: {
-            kode: tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
-            kodeverk: '',
-          },
+          videreBehandling: tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
         },
       },
       { key: FpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE.name, noRelLink: true, data: undefined },
@@ -201,10 +198,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
     expect(axiosMock.history.post
       .find((a) => a.url === '/fptilbake/api/dokument/forhandsvis-varselbrev')?.data).toBe(JSON.stringify({
       behandlingUuid: 'test-uuid',
-      fagsakYtelseType: {
-        kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: '',
-      },
+      fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
       saksnummer: '123',
       varseltekst: ' ',
       mottaker: '',

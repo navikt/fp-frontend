@@ -148,7 +148,7 @@ describe('<UnwrappedForm>', () => {
     relevanteStatuser.isSelvstendigNaeringsdrivende = false;
     relevanteStatuser.isArbeidstaker = true;
     allePerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetStatus = 'AT';
-    allePerioder[0].periodeAarsaker.push({ kode: periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET, kodeverk: 'test' });
+    allePerioder[0].periodeAarsaker.push(periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET);
     const readOnly = true;
     const wrapper = shallowWithIntl(<UnwrappedForm
       readOnly={readOnly}

@@ -18,8 +18,8 @@ const intlMock = getIntlMock(messages);
 
 const aksjonspunkter = [
   {
-    definisjon: { kode: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN },
-    status: { kode: 'OPPR' },
+    definisjon: aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN,
+    status: 'OPPR',
   },
 ];
 
@@ -74,7 +74,7 @@ const andelField = {
 const fields = new MockFieldsWithContent('fieldArrayName', [andelField]);
 
 const faktaOmBeregning = {
-  faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING }],
+  faktaOmBeregningTilfeller: [faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING],
 };
 const initial = {
   fieldArrayName: null,

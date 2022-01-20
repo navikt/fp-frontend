@@ -26,7 +26,7 @@ const AktoerGrid: FunctionComponent<OwnProps> = ({
   finnPathToFagsak,
 }) => {
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
-  const vFagsak = aktorInfo.fagsaker.length > 0 ? aktorInfo.fagsaker[0] : { relasjonsRolleType: { kode: relasjonsRolleType.MOR } };
+  const vFagsak = aktorInfo.fagsaker.length > 0 ? aktorInfo.fagsaker[0] : { relasjonsRolleType: relasjonsRolleType.MOR };
 
   return (
     <>

@@ -128,10 +128,7 @@ ForSaksbehandler.args = {
       opptjeningAktiviteter: [],
       beregningDto: {
         fastsattVarigEndringNaering: false,
-        faktaOmBeregningTilfeller: [{
-          kode: '',
-          kodeverk: '',
-        }],
+        faktaOmBeregningTilfeller: [''],
       },
       totrinnskontrollGodkjent: true,
       uttakPerioder: [],

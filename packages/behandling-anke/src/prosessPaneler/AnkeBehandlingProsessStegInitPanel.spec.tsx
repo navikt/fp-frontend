@@ -114,10 +114,7 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
       mottaker: '',
       dokumentMal: dokumentMalType.ANKE_VEDTAK_OMGJORING,
       behandlingUuid: 'test-uuid',
-      ytelseType: {
-        kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: '',
-      },
+      ytelseType: fagsakYtelseType.FORELDREPENGER,
     }));
   });
 
@@ -149,9 +146,7 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
     await waitFor(() => expect(submitCallback).toHaveBeenCalledTimes(1));
     expect(submitCallback).toHaveBeenNthCalledWith(1, {
       ankeOmgjoerArsak: '-',
-      ankeVurdering: {
-        kode: 'ANKE_STADFESTE_YTELSESVEDTAK',
-      },
+      ankeVurdering: 'ANKE_STADFESTE_YTELSESVEDTAK',
       ankeVurderingOmgjoer: '-',
       begrunnelse: 'Dette er en begrunnelse',
       erAnkerIkkePart: false,
@@ -163,7 +158,6 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
       fritekstTilBrev: 'Dette er en fritekst',
       kode: '5093',
       påAnketKlageBehandlingUuid: null,
-
     });
   });
 });

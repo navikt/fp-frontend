@@ -223,17 +223,17 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       definisjon: aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
       status: aksjonspunktStatus.OPPRETTET,
     } as Aksjonspunkt;
-    const getKodeverknavn = (kodeverk: any) => {
-      if (kodeverk.kode === 'DEK_TYPE') {
+    const getKodeverknavn = (kode: string) => {
+      if (kode === 'DEK_TYPE') {
         return 'testdekning';
       }
-      if (kodeverk.kode === 'DEK_TYPE2') {
+      if (kode === 'DEK_TYPE2') {
         return 'testdekning2017';
       }
-      if (kodeverk.kode === 'M_STATUS') {
+      if (kode === 'M_STATUS') {
         return 'testStatus';
       }
-      if (kodeverk.kode === 'M_STATUS2') {
+      if (kode === 'M_STATUS2') {
         return 'testStatus2017';
       }
       return '';
@@ -262,10 +262,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
         beslutningsdato: '2017-10-16',
       }],
       isPeriodAksjonspunktClosed: false,
-      medlemskapManuellVurderingType: {
-        kode: 'manuellType',
-        kodeverk: '',
-      },
+      medlemskapManuellVurderingType: 'manuellType',
       fodselsdato: '2017-10-15',
       termindato: undefined,
       omsorgsovertakelseDato: undefined,

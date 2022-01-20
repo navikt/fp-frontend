@@ -88,10 +88,7 @@ MedAksjonspunkt.args = {
       erGodkjent: true,
       erEndret: false,
     }, {
-      aktivitetType: {
-        kode: opptjeningAktivitetType.NARING,
-        kodeverk: '',
-      },
+      aktivitetType: opptjeningAktivitetType.NARING,
       opptjeningFom: '1995-09-14',
       opptjeningTom: '9999-12-31',
       arbeidsgiverReferanse: '1',
@@ -99,10 +96,7 @@ MedAksjonspunkt.args = {
       naringRegistreringsdato: '1995-09-14',
       erEndret: false,
     }, {
-      aktivitetType: {
-        kode: opptjeningAktivitetType.ARBEID,
-        kodeverk: '',
-      },
+      aktivitetType: opptjeningAktivitetType.ARBEID,
       opptjeningFom: '2018-01-01',
       opptjeningTom: '2018-11-01',
       arbeidsgiverReferanse: '1',

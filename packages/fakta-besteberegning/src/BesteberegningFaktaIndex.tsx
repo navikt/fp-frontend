@@ -5,7 +5,6 @@ import {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, AlleKodeverk, StandardFaktaPanelProps,
 } from '@fpsak-frontend/types';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { createIntl, getKodeverknavnFn } from '@fpsak-frontend/utils';
 
 import messages from '../i18n/nb_NO.json';

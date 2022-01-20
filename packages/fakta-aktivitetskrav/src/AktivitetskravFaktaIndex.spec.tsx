@@ -42,42 +42,26 @@ describe('<AktivitetskravFaktaIndex>', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       avklartePerioder: [{
-        avklaring: {
-          kode: 'I_AKTIVITET',
-          kodeverk: 'AKTIVITETSKRAV_AVKLARING',
-        },
+        avklaring: 'I_AKTIVITET',
         begrunnelse: 'Dette er en test',
         endret: false,
         fom: '2021-01-01',
-        morsAktivitet: {
-          kode: 'INNLAGT',
-          kodeverk: 'MORS_AKTIVITET',
-        },
+        morsAktivitet: 'INNLAGT',
         tom: '2021-01-07',
       }, {
-        avklaring: {
-          kode: 'IKKE_I_AKTIVITET_IKKE_DOKUMENTERT',
-        },
+        avklaring: 'IKKE_I_AKTIVITET_IKKE_DOKUMENTERT',
         begrunnelse: 'Dette er en begrunnelse',
         endret: false,
         fom: '2021-01-08',
-        morsAktivitet: {
-          kode: 'ARBEID_OG_UTDANNING',
-          kodeverk: 'MORS_AKTIVITET',
-        },
+        morsAktivitet: 'ARBEID_OG_UTDANNING',
         tom: '2021-01-13',
       },
       {
-        avklaring: {
-          kode: 'IKKE_I_AKTIVITET_DOKUMENTERT',
-        },
+        avklaring: 'IKKE_I_AKTIVITET_DOKUMENTERT',
         begrunnelse: 'Dette er en begrunnelse på andre periode',
         endret: false,
         fom: '2021-01-15',
-        morsAktivitet: {
-          kode: 'ARBEID_OG_UTDANNING',
-          kodeverk: 'MORS_AKTIVITET',
-        },
+        morsAktivitet: 'ARBEID_OG_UTDANNING',
         tom: '2021-01-20',
       }],
       kode: '5099',

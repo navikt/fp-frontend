@@ -105,10 +105,7 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
 
     const aksjonspunktModels = [{
       kode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
-      klageVurdering: {
-        kode: klageVurdering.STADFESTE_YTELSESVEDTAK,
-        kodeverk: '',
-      },
+      klageVurdering: klageVurdering.STADFESTE_YTELSESVEDTAK,
     }];
 
     panel.props().lagringSideEffekter(aksjonspunktModels);
@@ -165,10 +162,7 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       dokumentMal: dokumentMalType.KLAGE_OVERSENDT_KLAGEINSTANS,
       erOpphevetKlage: false,
       behandlingUuid: 'test-uuid',
-      ytelseType: {
-        kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: '',
-      },
+      ytelseType: fagsakYtelseType.FORELDREPENGER,
     }));
   });
 
@@ -218,13 +212,9 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       begrunnelse: 'Dette er en begrunnelse',
       klageVurderingOmgjoer: null,
       fritekstTilBrev: 'Dette er en fritekst',
-      klageHjemmel: {
-        kode: '14-17',
-      },
+      klageHjemmel: '14-17',
       klageMedholdArsak: null,
-      klageVurdering: {
-        kode: klageVurdering.STADFESTE_YTELSESVEDTAK,
-      },
+      klageVurdering: klageVurdering.STADFESTE_YTELSESVEDTAK,
     });
   });
 });

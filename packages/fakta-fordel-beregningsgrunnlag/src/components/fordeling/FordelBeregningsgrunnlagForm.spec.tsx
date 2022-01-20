@@ -20,7 +20,7 @@ import { FordelBeregningsgrunnlagAndelValues } from '../../types/FordelingTsType
 
 const intlMock = getIntlMock(messages);
 
-const getKodeverknavn = (kodeverk) => (kodeverk.kode === 'A' ? 'Arbeidstaker' : '');
+const getKodeverknavn = (kode) => (kode === 'A' ? 'Arbeidstaker' : '');
 
 const andel1 = {
   andelsnr: 1,

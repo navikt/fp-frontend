@@ -47,14 +47,14 @@ const lagArbeidstakerAndelEtterStp = (andelsnr, lagtTilAvSaksbehandler, fordelin
   nyttArbeidsforhold: true,
 });
 
-const getKodeverknavn = (kodeverk) => {
-  if (kodeverk.kode === aktivitetStatuser.ARBEIDSTAKER) {
+const getKodeverknavn = (kode) => {
+  if (kode === aktivitetStatuser.ARBEIDSTAKER) {
     return 'Arbeidstaker';
   }
-  if (kodeverk.kode === aktivitetStatuser.FRILANSER) {
+  if (kode === aktivitetStatuser.FRILANSER) {
     return 'Frilanser';
   }
-  if (kodeverk.kode === aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE) {
+  if (kode === aktivitetStatuser.SELVSTENDIG_NAERINGSDRIVENDE) {
     return 'Selvstendig næringsdrivende';
   }
   return '';

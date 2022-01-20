@@ -7,7 +7,6 @@ import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import {
   AlleKodeverk, Vilkar, Behandlingsresultat,
 } from '@fpsak-frontend/types';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { TextAreaField } from '@fpsak-frontend/form-hooks';

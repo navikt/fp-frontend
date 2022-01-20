@@ -113,10 +113,7 @@ describe('<MeldingIndex>', () => {
     await waitFor(() => expect(axiosMock.history.post
       .find((a) => a.url === '/fpformidling/api/brev/forhaandsvis').data).toBe(JSON.stringify({
       behandlingUuid: '1',
-      ytelseType: {
-        kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: 'FAGSAK_YTELSE_TYPE',
-      },
+      ytelseType: fagsakYtelseType.FORELDREPENGER,
       fritekst: ' ',
       arsakskode: null,
       mottaker: 'Søker',

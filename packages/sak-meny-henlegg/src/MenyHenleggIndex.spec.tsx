@@ -141,10 +141,7 @@ describe('<MenyHenleggIndex>', () => {
       dokumentMal: dokumentMalType.IOHENL,
       fritekst: undefined,
       mottaker: 'Søker',
-      ytelseType: {
-        kode: 'FP',
-        kodeverk: 'YTELSE_TYPE',
-      },
+      ytelseType: 'FP',
     });
   });
 

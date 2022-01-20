@@ -279,28 +279,16 @@ describe('<UttakPanel>', () => {
         fom: '',
         tom: '',
         id: 1,
-        periodeResultatType: {
-          kode: 'MANUELL_BEHANDLING',
-          kodeverk: '',
-        },
-        manuellBehandlingÅrsak: {
-          kode: 'test',
-          kodeverk: 'test',
-        },
+        periodeResultatType: 'MANUELL_BEHANDLING',
+        manuellBehandlingÅrsak: 'test',
         aktiviteter: [{
         }],
       }, {
         fom: '',
         tom: '',
         id: 2,
-        periodeResultatType: {
-          kode: 'MANUELL_BEHANDLING',
-          kodeverk: '',
-        },
-        manuellBehandlingÅrsak: {
-          kode: 'test',
-          kodeverk: 'test',
-        },
+        periodeResultatType: 'MANUELL_BEHANDLING',
+        manuellBehandlingÅrsak: 'test',
         aktiviteter: [{
         }],
       }],

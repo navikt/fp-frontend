@@ -77,10 +77,7 @@ const lagBG = (perioder: BeregningsgrunnlagPeriodeProp[], faktaOmFordeling: Fakt
   ledetekstAvkortet: 'Avkortet beregningsgrunnlag (6G=599148)',
   ledetekstRedusert: 'Redusert beregningsgrunnlag (100%)',
   halvG: 49929,
-  hjemmel: {
-    kode: 'F_14_7_8_30',
-    kodeverk: 'BG_HJEMMEL',
-  },
+  hjemmel: 'F_14_7_8_30',
   faktaOmFordeling,
   årsinntektVisningstall: 360000,
 } as Beregningsgrunnlag);

@@ -39,18 +39,10 @@ describe('<KlagevurderingProsessIndex>', () => {
     expect(mellomlagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
       fritekstTilBrev: 'Dette er en fritekst',
-      klageHjemmel: {
-        kode: '14-17',
-      },
-      klageMedholdArsak: {
-        kode: 'ULIK_VURDERING',
-      },
-      klageVurdering: {
-        kode: 'MEDHOLD_I_KLAGE',
-      },
-      klageVurderingOmgjoer: {
-        kode: 'GUNST_MEDHOLD_I_KLAGE',
-      },
+      klageHjemmel: '14-17',
+      klageMedholdArsak: 'ULIK_VURDERING',
+      klageVurdering: 'MEDHOLD_I_KLAGE',
+      klageVurderingOmgjoer: 'GUNST_MEDHOLD_I_KLAGE',
       kode: '5035',
     });
 
@@ -69,18 +61,10 @@ describe('<KlagevurderingProsessIndex>', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       begrunnelse: 'Dette er en begrunnelse',
       fritekstTilBrev: 'Dette er en fritekst',
-      klageHjemmel: {
-        kode: '14-17',
-      },
-      klageMedholdArsak: {
-        kode: 'ULIK_VURDERING',
-      },
-      klageVurdering: {
-        kode: 'MEDHOLD_I_KLAGE',
-      },
-      klageVurderingOmgjoer: {
-        kode: 'GUNST_MEDHOLD_I_KLAGE',
-      },
+      klageHjemmel: '14-17',
+      klageMedholdArsak: 'ULIK_VURDERING',
+      klageVurdering: 'MEDHOLD_I_KLAGE',
+      klageVurderingOmgjoer: 'GUNST_MEDHOLD_I_KLAGE',
       kode: '5035',
     });
   });

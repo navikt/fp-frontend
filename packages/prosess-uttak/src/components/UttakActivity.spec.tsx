@@ -277,10 +277,7 @@ describe('<UttakActivity>', () => {
       days: 3.5,
       fom: '2018-01-01',
       tom: '2018-02-01',
-      stønadskontoType: {
-        kode: '',
-        kodeverk: '',
-      },
+      stønadskontoType: '',
       trekkdagerDesimaler: 28.5,
       utbetalingsgrad: 100,
       weeks: 5,

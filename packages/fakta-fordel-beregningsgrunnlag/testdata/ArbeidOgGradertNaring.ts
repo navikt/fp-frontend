@@ -304,10 +304,7 @@ export const beregningsgrunnlag = {
       lagtTilAvSaksbehandler: false,
     }],
   },
-  hjemmel: {
-    kodeverk: 'BG_HJEMMEL',
-    kode: 'F_14_7_8_41',
-  },
+  hjemmel: 'F_14_7_8_41',
   faktaOmFordeling: {
     fordelBeregningsgrunnlag: {
       fordelBeregningsgrunnlagPerioder: [{

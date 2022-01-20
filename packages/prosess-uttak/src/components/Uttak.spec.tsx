@@ -28,10 +28,7 @@ describe('<Uttak>', () => {
     id: 1,
     fom: '',
     tom: '',
-    periodeResultatType: {
-      kode: '',
-      kodeverk: '',
-    },
+    periodeResultatType: '',
     aktiviteter: [{
       stønadskontoType: '',
     }] as PeriodeSokerAktivitet[],

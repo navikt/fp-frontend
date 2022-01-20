@@ -10,11 +10,11 @@ import { SkjeringspunktOgStatusPanelImpl } from './SkjeringspunktOgStatusPanel';
 const skjeringstidspunktDato = '2017-12-12';
 const aktivitetstatusList = [aktivitetStatus.ARBEIDSTAKER, aktivitetStatus.FRILANSER];
 
-const getKodeverknavn = (kodeverk) => {
-  if (kodeverk.kode === aktivitetStatus.ARBEIDSTAKER) {
+const getKodeverknavn = (kode) => {
+  if (kode === aktivitetStatus.ARBEIDSTAKER) {
     return 'Arbeidstaker';
   }
-  if (kodeverk.kode === aktivitetStatus.FRILANSER) {
+  if (kode === aktivitetStatus.FRILANSER) {
     return 'Frilanser';
   }
 

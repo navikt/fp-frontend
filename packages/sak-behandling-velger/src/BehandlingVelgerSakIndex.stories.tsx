@@ -17,8 +17,7 @@ const locationMock = {
 };
 
 const getKodeverkFn = (kode: string, kodeverk: KodeverkType) => {
-  const kodeverkType = KodeverkType[kodeverk];
-  const kodeverkForType = alleKodeverk[kodeverkType];
+  const kodeverkForType = alleKodeverk[kodeverk];
   return kodeverkForType.find((k: string) => k === kode);
 };
 
