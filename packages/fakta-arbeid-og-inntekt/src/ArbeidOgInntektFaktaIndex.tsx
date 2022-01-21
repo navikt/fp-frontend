@@ -1,22 +1,19 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps } from '@fpsak-frontend/types';
+import {
+  ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold, StandardFaktaPanelProps,
+} from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 
-import { FormValuesForManglendeArbeidsforhold } from './components/ManglendeOpplysningerForm';
-import { FormValues as NyttArbeidsforholdFormValues } from './components/NyttArbeidsforholdForm';
-import { FormValuesForManglendeInntektsmelding } from './components/InntektsmeldingInnhentesForm';
 import ArbeidOgInntektFaktaPanel from './components/ArbeidOgInntektFaktaPanel';
 import messages from '../i18n/nb_NO.json';
 
 interface OwnProps {
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  lagreNyttArbeidsforhold: (formValues: NyttArbeidsforholdFormValues) => Promise<any>;
-  slettNyttArbeidsforhold: () => Promise<any>;
-  lagreManglendeArbeidsforhold: (formValues: FormValuesForManglendeArbeidsforhold) => Promise<any>;
-  lagreManglendeInntekstmelding: (formValues: FormValuesForManglendeInntektsmelding) => Promise<any>;
+  registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
+  lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   erOverstyrer: boolean;
 }
 
@@ -30,14 +27,13 @@ const ArbeidOgInntektFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanel
   setFormData,
   arbeidOgInntekt,
   arbeidsgiverOpplysningerPerId,
-  lagreNyttArbeidsforhold,
-  slettNyttArbeidsforhold,
-  lagreManglendeArbeidsforhold,
-  lagreManglendeInntekstmelding,
+  registrerArbeidsforhold,
+  lagreVurdering,
   erOverstyrer,
 }) => (
   <RawIntlProvider value={intl}>
     <ArbeidOgInntektFaktaPanel
+      behandlingUuid={behandling.uuid}
       skjæringspunktDato={behandling.behandlingsresultat.skjæringstidspunkt.dato}
       aksjonspunkter={aksjonspunkter}
       isReadOnly={readOnly}
@@ -45,10 +41,8 @@ const ArbeidOgInntektFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanel
       setFormData={setFormData}
       arbeidOgInntekt={arbeidOgInntekt}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      lagreNyttArbeidsforhold={lagreNyttArbeidsforhold}
-      slettNyttArbeidsforhold={slettNyttArbeidsforhold}
-      lagreManglendeArbeidsforhold={lagreManglendeArbeidsforhold}
-      lagreManglendeInntekstmelding={lagreManglendeInntekstmelding}
+      registrerArbeidsforhold={registrerArbeidsforhold}
+      lagreVurdering={lagreVurdering}
       erOverstyrer={erOverstyrer}
     />
   </RawIntlProvider>

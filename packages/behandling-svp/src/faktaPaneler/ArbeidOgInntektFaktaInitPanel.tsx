@@ -12,7 +12,7 @@ import { FaktaDefaultInitPanel, FaktaPanelInitProps } from '@fpsak-frontend/beha
 import { createIntl } from '@fpsak-frontend/utils';
 
 import messages from '../../i18n/nb_NO.json';
-import { SvpBehandlingApiKeys, requestSvpApi } from '../data/svpBehandlingApi';
+import { SvpBehandlingApiKeys, restApiSvpHooks, requestSvpApi } from '../data/svpBehandlingApi';
 
 const intl = createIntl(messages);
 
@@ -33,23 +33,29 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
   arbeidsgiverOpplysningerPerId,
   rettigheter,
   ...props
-}) => (
-  <FaktaDefaultInitPanel<EndepunktInitData>
-    {...props}
-    requestApi={requestSvpApi}
-    initEndepunkter={ENDEPUNKTER_INIT_DATA}
-    aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    faktaPanelKode={FaktaPanelCode.ARBEID_OG_INNTEKT}
-    faktaPanelMenyTekst={intl.formatMessage({ id: 'ArbeidOgInntektInfoPanel.Title' })}
-    skalPanelVisesIMeny={({ arbeidOgInntekt }) => !!arbeidOgInntekt}
-    renderPanel={(data) => (
-      <ArbeidOgInntektFaktaIndex
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
-        {...data}
-      />
-    )}
-  />
-);
+}) => {
+  const { startRequest: registrerArbeidsforhold } = restApiSvpHooks.useRestApiRunner(SvpBehandlingApiKeys.ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD);
+  const { startRequest: lagreVurdering } = restApiSvpHooks.useRestApiRunner(SvpBehandlingApiKeys.ARBEID_OG_INNTEKT_LAGRE_VURDERING);
+  return (
+    <FaktaDefaultInitPanel<EndepunktInitData>
+      {...props}
+      requestApi={requestSvpApi}
+      initEndepunkter={ENDEPUNKTER_INIT_DATA}
+      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      faktaPanelKode={FaktaPanelCode.ARBEID_OG_INNTEKT}
+      faktaPanelMenyTekst={intl.formatMessage({ id: 'ArbeidOgInntektInfoPanel.Title' })}
+      skalPanelVisesIMeny={({ arbeidOgInntekt }) => !!arbeidOgInntekt}
+      renderPanel={(data) => (
+        <ArbeidOgInntektFaktaIndex
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
+          registrerArbeidsforhold={registrerArbeidsforhold}
+          lagreVurdering={lagreVurdering}
+          {...data}
+        />
+      )}
+    />
+  );
+};
 
 export default ArbeidOgInntektFaktaInitPanel;

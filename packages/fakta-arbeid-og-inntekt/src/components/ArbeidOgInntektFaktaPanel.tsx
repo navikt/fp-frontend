@@ -10,16 +10,14 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import { dateFormat } from '@fpsak-frontend/utils';
 import {
-  Aksjonspunkt, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId,
+  Aksjonspunkt, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold,
 } from '@fpsak-frontend/types';
 import {
   VerticalSpacer, Image, AksjonspunktHelpTextHTML, FloatRight, Table, OverstyringKnapp,
   FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import NyttArbeidsforholdForm, { FormValues as NyttArbeidsforholdFormValues, MANUELT_ORG_NR } from './NyttArbeidsforholdForm';
-import { FormValuesForManglendeArbeidsforhold } from './ManglendeOpplysningerForm';
-import { FormValuesForManglendeInntektsmelding } from './InntektsmeldingInnhentesForm';
+import NyttArbeidsforholdForm, { MANUELT_ORG_NR } from './NyttArbeidsforholdForm';
 import ArbeidsforholdRad from './ArbeidsforholdRad';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
@@ -103,6 +101,7 @@ const byggTabellStruktur = (
 };
 
 interface OwnProps {
+  behandlingUuid: string;
   skjæringspunktDato: string;
   aksjonspunkter: Aksjonspunkt[];
   isReadOnly: boolean;
@@ -110,23 +109,20 @@ interface OwnProps {
   setFormData: (data: ArbeidsforholdOgInntekt[]) => void,
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  lagreNyttArbeidsforhold: (formValues: NyttArbeidsforholdFormValues) => Promise<any>;
-  slettNyttArbeidsforhold: () => Promise<any>;
-  lagreManglendeArbeidsforhold: (formValues: FormValuesForManglendeArbeidsforhold) => Promise<any>;
-  lagreManglendeInntekstmelding: (formValues: FormValuesForManglendeInntektsmelding) => Promise<any>;
+  registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
+  lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   erOverstyrer: boolean;
 }
 
 const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
+  behandlingUuid,
   skjæringspunktDato,
   aksjonspunkter,
   isReadOnly,
   arbeidOgInntekt,
   arbeidsgiverOpplysningerPerId,
-  lagreNyttArbeidsforhold,
-  slettNyttArbeidsforhold,
-  lagreManglendeArbeidsforhold,
-  lagreManglendeInntekstmelding,
+  registrerArbeidsforhold,
+  lagreVurdering,
   formData,
   setFormData,
   erOverstyrer,
@@ -214,9 +210,9 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
       {skalLeggeTilArbeidsforhold && (
         <>
           <NyttArbeidsforholdForm
+            behandlingUuid={behandlingUuid}
             isReadOnly={false}
-            lagreNyttArbeidsforhold={lagreNyttArbeidsforhold}
-            slettNyttArbeidsforhold={slettNyttArbeidsforhold}
+            registrerArbeidsforhold={registrerArbeidsforhold}
             avbrytEditering={() => toggleLeggTilArbeidsforhold(false)}
             erOverstyrt
             oppdaterTabell={setTabellData}
@@ -228,13 +224,12 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
         <>
           {tabellData.map((data) => (
             <ArbeidsforholdRad
+              behandlingUuid={behandlingUuid}
               skjæringspunktDato={skjæringspunktDato}
               arbeidsforholdOgInntekt={data}
               isReadOnly={isReadOnly}
-              lagreNyttArbeidsforhold={lagreNyttArbeidsforhold}
-              slettNyttArbeidsforhold={slettNyttArbeidsforhold}
-              lagreManglendeArbeidsforhold={lagreManglendeArbeidsforhold}
-              lagreManglendeInntekstmelding={lagreManglendeInntekstmelding}
+              registrerArbeidsforhold={registrerArbeidsforhold}
+              lagreVurdering={lagreVurdering}
               oppdaterÅpenRad={oppdaterÅpenRad}
               erOverstyrt={erOverstyrt}
               oppdaterTabell={setTabellData}

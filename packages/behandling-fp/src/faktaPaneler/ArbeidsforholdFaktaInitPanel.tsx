@@ -6,7 +6,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import ArbeidsforholdFaktaIndex from '@fpsak-frontend/fakta-arbeidsforhold';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse,
+  Aksjonspunkt, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse,
 } from '@fpsak-frontend/types';
 import { FaktaDefaultInitPanel, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@fpsak-frontend/utils';
@@ -18,9 +18,10 @@ const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD];
 
-const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER];
+const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.ARBEID_OG_INNTEKT];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
+  arbeidOgInntekt: ArbeidOgInntektsmelding;
 }
 
 const ENDEPUNKTER_PANEL_DATA = [FpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE];
@@ -49,7 +50,7 @@ const ArbeidsforholdFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.ARBEIDSFORHOLD}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'ArbeidsforholdInfoPanel.Title' })}
-    skalPanelVisesIMeny={() => true}
+    skalPanelVisesIMeny={({ arbeidOgInntekt }) => !arbeidOgInntekt}
     renderPanel={(data) => (
       <ArbeidsforholdFaktaIndex
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

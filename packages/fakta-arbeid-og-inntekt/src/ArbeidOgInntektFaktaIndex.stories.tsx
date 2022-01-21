@@ -36,6 +36,7 @@ const Template: Story<{
 }) => (
   <ArbeidOgInntektFaktaIndex
     behandling={{
+      uuid: '1223-2323-2323-22332',
       behandlingsresultat: {
         skjæringstidspunkt: {
           dato: '2021-11-10',
@@ -52,10 +53,8 @@ const Template: Story<{
     setFormData={() => undefined}
     arbeidOgInntekt={arbeidOgInntekt}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    lagreNyttArbeidsforhold={promiseAction()}
-    slettNyttArbeidsforhold={promiseAction()}
-    lagreManglendeArbeidsforhold={promiseAction()}
-    lagreManglendeInntekstmelding={promiseAction()}
+    registrerArbeidsforhold={promiseAction()}
+    lagreVurdering={promiseAction()}
     erOverstyrer={erOverstyrer}
   />
 );

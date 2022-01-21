@@ -4,7 +4,7 @@ import React, {
 import { IntlShape, useIntl } from 'react-intl';
 import { Normaltekst, Element, Undertekst } from 'nav-frontend-typografi';
 
-import { AoIArbeidsforhold } from '@fpsak-frontend/types';
+import { AoIArbeidsforhold, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold } from '@fpsak-frontend/types';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
 import {
@@ -12,10 +12,10 @@ import {
 } from '@fpsak-frontend/shared-components';
 import { TIDENES_ENDE } from '@fpsak-frontend/utils';
 import ExpandableTableRow from './ExpandableTableRow';
-import NyttArbeidsforholdForm, { FormValues as NyttArbeidsforholdFormValues, MANUELT_ORG_NR } from './NyttArbeidsforholdForm';
-import ManglendeOpplysningerForm, { FormValuesForManglendeArbeidsforhold } from './ManglendeOpplysningerForm';
+import NyttArbeidsforholdForm, { MANUELT_ORG_NR } from './NyttArbeidsforholdForm';
+import ManglendeOpplysningerForm from './ManglendeOpplysningerForm';
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
-import InntektsmeldingInnhentesForm, { FormValuesForManglendeInntektsmelding } from './InntektsmeldingInnhentesForm';
+import InntektsmeldingInnhentesForm from './InntektsmeldingInnhentesForm';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
 const finnKilde = (
@@ -33,26 +33,24 @@ const finnKilde = (
 };
 
 interface OwnProps {
+  behandlingUuid: string;
   skjæringspunktDato: string;
   arbeidsforholdOgInntekt: ArbeidsforholdOgInntekt;
   isReadOnly: boolean;
-  lagreNyttArbeidsforhold: (formValues: NyttArbeidsforholdFormValues) => Promise<any>;
-  slettNyttArbeidsforhold: () => Promise<any>;
-  lagreManglendeArbeidsforhold: (formValues: FormValuesForManglendeArbeidsforhold) => Promise<any>;
-  lagreManglendeInntekstmelding: (formValues: FormValuesForManglendeInntektsmelding) => Promise<any>;
+  registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
+  lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   oppdaterÅpenRad: (erÅpen: boolean) => void;
   erOverstyrt: boolean;
   oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
 }
 
 const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
+  behandlingUuid,
   skjæringspunktDato,
   arbeidsforholdOgInntekt,
   isReadOnly,
-  lagreNyttArbeidsforhold,
-  slettNyttArbeidsforhold,
-  lagreManglendeArbeidsforhold,
-  lagreManglendeInntekstmelding,
+  registrerArbeidsforhold,
+  lagreVurdering,
   oppdaterÅpenRad,
   erOverstyrt,
   oppdaterTabell,
@@ -83,9 +81,9 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
         <>
           {erManueltOpprettet && (
             <NyttArbeidsforholdForm
+              behandlingUuid={behandlingUuid}
               isReadOnly={false}
-              lagreNyttArbeidsforhold={lagreNyttArbeidsforhold}
-              slettNyttArbeidsforhold={slettNyttArbeidsforhold}
+              registrerArbeidsforhold={registrerArbeidsforhold}
               arbeidsforhold={arbeidsforhold}
               arbeidsforholdNavn={arbeidsforholdNavn}
               avbrytEditering={() => toggleRad(false)}
@@ -104,21 +102,25 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
           )}
           {manglerInntektsmelding && (
             <InntektsmeldingInnhentesForm
+              behandlingUuid={behandlingUuid}
               skjæringspunktDato={skjæringspunktDato}
               inntektsposter={inntektsposter}
               isReadOnly={isReadOnly}
               arbeidsforhold={arbeidsforhold}
-              lagreManglendeInntekstmelding={lagreManglendeInntekstmelding}
+              lagreVurdering={lagreVurdering}
               avbrytEditering={() => toggleRad(false)}
               oppdaterTabell={oppdaterTabell}
             />
           )}
           {manglerArbeidsforhold && (
             <ManglendeOpplysningerForm
+              behandlingUuid={behandlingUuid}
+              arbeidsforholdNavn={arbeidsforholdNavn}
               inntektsmelding={inntektsmelding}
               arbeidsforhold={arbeidsforhold}
               isReadOnly={isReadOnly}
-              lagreManglendeArbeidsforhold={lagreManglendeArbeidsforhold}
+              registrerArbeidsforhold={registrerArbeidsforhold}
+              lagreVurdering={lagreVurdering}
               avbrytEditering={() => toggleRad(false)}
               oppdaterTabell={oppdaterTabell}
             />

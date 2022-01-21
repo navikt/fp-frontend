@@ -2,22 +2,26 @@ import React, {
   useCallback, FunctionComponent, useMemo,
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { useForm } from 'react-hook-form';
+import { useForm, UseFormGetValues } from 'react-hook-form';
 import { Undertekst } from 'nav-frontend-typografi';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 
 import {
-  hasValidText, maxLength, minLength, hasValidDate, hasValidInteger, required, minValue, maxValue,
+  hasValidText, maxLength, minLength, hasValidDate, hasValidInteger, required, minValue, maxValue, dateAfterOrEqual,
 } from '@fpsak-frontend/utils';
 import {
   TextAreaField, RadioGroupField, RadioOption, DatepickerField, InputField, Form,
 } from '@fpsak-frontend/form-hooks';
-import { Inntektsmelding, AoIArbeidsforhold } from '@fpsak-frontend/types';
+import {
+  Inntektsmelding, AoIArbeidsforhold, ManueltArbeidsforhold, ManglendeInntektsmeldingVurdering,
+} from '@fpsak-frontend/types';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
+import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
+
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
@@ -30,42 +34,44 @@ const OPPRETT_ARBEIDSFORHOLD = 'OPPRETT';
 
 type FormValues = {
   skalSeBortFraInntektsmelding: string;
-  periodeFra?: string;
-  periodeTil?: string;
+  fom?: string;
+  tom?: string;
   stillingsprosent?: number;
   begrunnelse: string;
 }
 
-export type FormValuesForManglendeArbeidsforhold = Omit<FormValues, 'skalSeBortFraInntektsmelding'> & {
-  arbeidsgiverIdent: string;
-  internArbeidsforholdId: string;
-  skalSeBortFraInntektsmelding: boolean | undefined;
-};
+const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (tom: string) => dateAfterOrEqual(getValues('fom'))(tom);
 
 interface OwnProps {
+  behandlingUuid: string;
+  arbeidsforholdNavn: string;
   inntektsmelding: Inntektsmelding;
   arbeidsforhold: AoIArbeidsforhold;
   isReadOnly: boolean;
-  lagreManglendeArbeidsforhold: (formValues: FormValuesForManglendeArbeidsforhold) => Promise<any>;
+  registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
+  lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   avbrytEditering: () => void;
   oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
 }
 
 const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
+  behandlingUuid,
+  arbeidsforholdNavn,
   inntektsmelding,
   arbeidsforhold,
   isReadOnly,
-  lagreManglendeArbeidsforhold,
+  registrerArbeidsforhold,
+  lagreVurdering,
   avbrytEditering,
   oppdaterTabell,
 }) => {
   const intl = useIntl();
 
-  const defaultValues = useMemo(() => ({
+  const defaultValues = useMemo<FormValues>(() => ({
     skalSeBortFraInntektsmelding: inntektsmelding.skalSeBortFraInntektsmelding === undefined && arbeidsforhold?.fom
       ? OPPRETT_ARBEIDSFORHOLD : inntektsmelding.skalSeBortFraInntektsmelding?.toString(),
-    periodeFra: arbeidsforhold?.fom,
-    periodeTil: arbeidsforhold?.tom,
+    fom: arbeidsforhold?.fom,
+    tom: arbeidsforhold?.tom,
     stillingsprosent: arbeidsforhold?.stillingsprosent,
     begrunnelse: inntektsmelding.begrunnelse,
   }), [inntektsmelding, arbeidsforhold]);
@@ -81,15 +87,17 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
     formMethods.reset(defaultValues);
   }, [defaultValues]);
 
-  const lagre = useCallback((formValues: FormValuesForManglendeArbeidsforhold) => {
-    lagreManglendeArbeidsforhold(formValues).then(() => {
+  const lagre = useCallback((formValues: FormValues) => {
+    const oppdater = (() => {
       oppdaterTabell((oldData) => oldData.map((data) => {
-        if (data.inntektsmelding?.arbeidsgiverIdent === formValues.arbeidsgiverIdent) {
-          const af = formValues.skalSeBortFraInntektsmelding === undefined ? {
-            arbeidsgiverIdent: formValues.arbeidsgiverIdent,
-            internArbeidsforholdId: formValues.internArbeidsforholdId,
-            fom: formValues.periodeFra,
-            tom: formValues.periodeTil,
+        if (data.inntektsmelding?.arbeidsgiverIdent === inntektsmelding.arbeidsgiverIdent) {
+          const seBortFraInntektsmelding = formValues.skalSeBortFraInntektsmelding === OPPRETT_ARBEIDSFORHOLD
+            ? undefined : formValues.skalSeBortFraInntektsmelding === 'true';
+          const af = seBortFraInntektsmelding === undefined ? {
+            arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
+            internArbeidsforholdId: inntektsmelding.internArbeidsforholdId,
+            fom: formValues.fom,
+            tom: formValues.tom,
             stillingsprosent: formValues.stillingsprosent,
           } : undefined;
           return {
@@ -97,7 +105,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
             inntektsmelding: {
               ...data.inntektsmelding,
               begrunnelse: formValues.begrunnelse,
-              skalSeBortFraInntektsmelding: formValues.skalSeBortFraInntektsmelding,
+              skalSeBortFraInntektsmelding: seBortFraInntektsmelding,
             },
             arbeidsforhold: af,
           };
@@ -106,7 +114,29 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
       }));
       avbrytEditering();
     });
-  }, []);
+
+    if (formValues.skalSeBortFraInntektsmelding === OPPRETT_ARBEIDSFORHOLD) {
+      registrerArbeidsforhold({
+        behandlingUuid,
+        begrunnelse: formValues.begrunnelse,
+        arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
+        arbeidsgiverNavn: arbeidsforholdNavn,
+        fom: formValues.fom,
+        tom: formValues.tom,
+        stillingsprosent: formValues.stillingsprosent,
+        vurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+      }).then(oppdater);
+    } else {
+      lagreVurdering({
+        behandlingUuid,
+        vurdering: formValues.skalSeBortFraInntektsmelding === 'true'
+          ? ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING : ArbeidsforholdKomplettVurderingType.VENT_PÅ_INNTEKTSMELDING,
+        begrunnelse: formValues.begrunnelse,
+        arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
+        internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
+      }).then(oppdater);
+    }
+  }, [inntektsmelding]);
 
   return (
     <>
@@ -116,16 +146,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
       <VerticalSpacer thirtyTwoPx />
       <AlertStripeInfo><FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" /></AlertStripeInfo>
       <VerticalSpacer sixteenPx />
-      <Form
-        formMethods={formMethods}
-        onSubmit={(values) => lagre({
-          ...values,
-          skalSeBortFraInntektsmelding: values.skalSeBortFraInntektsmelding === OPPRETT_ARBEIDSFORHOLD
-            ? undefined : values.skalSeBortFraInntektsmelding === 'true',
-          arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
-          internArbeidsforholdId: inntektsmelding.innsendingstidspunkt,
-        })}
-      >
+      <Form formMethods={formMethods} onSubmit={lagre}>
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
@@ -152,7 +173,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
               <FlexRow>
                 <FlexColumn>
                   <DatepickerField
-                    name="periodeFra"
+                    name="fom"
                     label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeFra" />}
                     validate={[required, hasValidDate]}
                     readOnly={isReadOnly}
@@ -160,9 +181,9 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
                 </FlexColumn>
                 <FlexColumn>
                   <DatepickerField
-                    name="periodeTil"
+                    name="tom"
                     label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeTil" />}
-                    validate={[required, hasValidDate]}
+                    validate={[required, hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
                     readOnly={isReadOnly}
                   />
                 </FlexColumn>
