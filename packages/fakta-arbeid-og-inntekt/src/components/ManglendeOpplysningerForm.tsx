@@ -30,8 +30,6 @@ const maxLength1500 = maxLength(1500);
 const minValue1 = minValue(1);
 const maxValue100 = maxValue(100);
 
-const OPPRETT_ARBEIDSFORHOLD = 'OPPRETT';
-
 type FormValues = {
   saksbehandlersVurdering: string;
   fom?: string;
@@ -112,7 +110,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
       avbrytEditering();
     });
 
-    if (formValues.saksbehandlersVurdering === OPPRETT_ARBEIDSFORHOLD) {
+    if (formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER) {
       registrerArbeidsforhold({
         behandlingUuid,
         arbeidsgiverNavn: arbeidsforholdNavn,
@@ -126,7 +124,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
     } else {
       lagreVurdering({
         behandlingUuid,
-        vurdering: saksbehandlersVurdering,
+        vurdering: formValues.saksbehandlersVurdering,
         begrunnelse: formValues.begrunnelse,
         arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
         internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,

@@ -1,8 +1,8 @@
 import { Kodeverk } from '@fpsak-frontend/types';
 
 export enum AksjonspunktÅrsak {
-  MANGLENDE_INNTEKTSMELDING,
-  INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
+  MANGLENDE_INNTEKTSMELDING = 'MANGLENDE_INNTEKTSMELDING',
+  INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD = 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD',
 }
 
 export type Inntektsmelding = Readonly<{

@@ -4,15 +4,18 @@ import React, {
 import { IntlShape, useIntl } from 'react-intl';
 import { Normaltekst, Element, Undertekst } from 'nav-frontend-typografi';
 
-import { AoIArbeidsforhold, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold } from '@fpsak-frontend/types';
+import {
+  AoIArbeidsforhold, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold, AksjonspunktÅrsak,
+} from '@fpsak-frontend/types';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
 import {
   Image, TableColumn, PeriodLabel, DateTimeLabel, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
+import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 import { TIDENES_ENDE } from '@fpsak-frontend/utils';
 import ExpandableTableRow from './ExpandableTableRow';
-import NyttArbeidsforholdForm, { MANUELT_ORG_NR } from './NyttArbeidsforholdForm';
+import NyttArbeidsforholdForm from './NyttArbeidsforholdForm';
 import ManglendeOpplysningerForm from './ManglendeOpplysningerForm';
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 import InntektsmeldingInnhentesForm from './InntektsmeldingInnhentesForm';
@@ -67,11 +70,12 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
     toggleEkspandertRad(erApen);
   };
 
-  const erManueltOpprettet = arbeidsforhold?.arbeidsgiverIdent === MANUELT_ORG_NR;
-  const harArbeidsforholdOgInntektsmelding = arbeidsforhold && inntektsmelding && !arbeidsforhold.begrunnelse && !inntektsmelding.begrunnelse;
-  const manglerInntektsmelding = arbeidsforhold && !erManueltOpprettet && !inntektsmelding;
-  const manglerArbeidsforhold = inntektsmelding && (!arbeidsforhold || inntektsmelding.begrunnelse);
-  const harIngenAksjonspunkt = erManueltOpprettet || harArbeidsforholdOgInntektsmelding || inntektsmelding?.begrunnelse || arbeidsforhold?.begrunnelse;
+  const erManueltOpprettet = arbeidsforhold?.saksbehandlersVurdering?.kode === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER;
+  const harArbeidsforholdOgInntektsmelding = arbeidsforhold && inntektsmelding && !arbeidsforhold.årsak && !inntektsmelding.årsak;
+  const manglerInntektsmelding = arbeidsforhold?.årsak === AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING;
+  const manglerArbeidsforhold = inntektsmelding?.årsak === AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD;
+  const harÅpentAksjonspunkt = ((manglerInntektsmelding && !arbeidsforhold?.saksbehandlersVurdering)
+    || (manglerArbeidsforhold && !inntektsmelding?.saksbehandlersVurdering));
 
   const aIdent = arbeidsforhold?.arbeidsgiverIdent || inntektsmelding?.arbeidsgiverIdent;
 
@@ -129,13 +133,13 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
       )}
       showContent={erRadEkspandert}
       toggleContent={toggleRad}
-      isApLeftBorder={!harIngenAksjonspunkt}
+      isApLeftBorder={harÅpentAksjonspunkt}
     >
       <TableColumn>
-        {harIngenAksjonspunkt && (
+        {!harÅpentAksjonspunkt && (
           <Image alt={intl.formatMessage({ id: 'ArbeidsforholdRad.Aksjonspunkt' })} src={okIkonUrl} />
         )}
-        {!harIngenAksjonspunkt && (
+        {harÅpentAksjonspunkt && (
           <Image alt={intl.formatMessage({ id: 'ArbeidsforholdRad.Ok' })} src={advarselIkonUrl} />
         )}
       </TableColumn>
