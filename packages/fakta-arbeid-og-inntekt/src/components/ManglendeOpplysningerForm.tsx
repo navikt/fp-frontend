@@ -33,7 +33,7 @@ const maxValue100 = maxValue(100);
 const OPPRETT_ARBEIDSFORHOLD = 'OPPRETT';
 
 type FormValues = {
-  skalSeBortFraInntektsmelding: string;
+  saksbehandlersVurdering: string;
   fom?: string;
   tom?: string;
   stillingsprosent?: number;
@@ -68,8 +68,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
 
   const defaultValues = useMemo<FormValues>(() => ({
-    skalSeBortFraInntektsmelding: inntektsmelding.skalSeBortFraInntektsmelding === undefined && arbeidsforhold?.fom
-      ? OPPRETT_ARBEIDSFORHOLD : inntektsmelding.skalSeBortFraInntektsmelding?.toString(),
+    saksbehandlersVurdering: inntektsmelding.saksbehandlersVurdering?.kode,
     fom: arbeidsforhold?.fom,
     tom: arbeidsforhold?.tom,
     stillingsprosent: arbeidsforhold?.stillingsprosent,
@@ -80,7 +79,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
     defaultValues,
   });
 
-  const skalSeBortFraInntektsmelding = formMethods.watch('skalSeBortFraInntektsmelding');
+  const saksbehandlersVurdering = formMethods.watch('saksbehandlersVurdering');
 
   const avbryt = useCallback(() => {
     avbrytEditering();
@@ -91,9 +90,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
     const oppdater = (() => {
       oppdaterTabell((oldData) => oldData.map((data) => {
         if (data.inntektsmelding?.arbeidsgiverIdent === inntektsmelding.arbeidsgiverIdent) {
-          const seBortFraInntektsmelding = formValues.skalSeBortFraInntektsmelding === OPPRETT_ARBEIDSFORHOLD
-            ? undefined : formValues.skalSeBortFraInntektsmelding === 'true';
-          const af = seBortFraInntektsmelding === undefined ? {
+          const af = formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER ? {
             arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
             internArbeidsforholdId: inntektsmelding.internArbeidsforholdId,
             fom: formValues.fom,
@@ -105,7 +102,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
             inntektsmelding: {
               ...data.inntektsmelding,
               begrunnelse: formValues.begrunnelse,
-              skalSeBortFraInntektsmelding: seBortFraInntektsmelding,
+              saksbehandlersVurdering: { kode: formValues.saksbehandlersVurdering, kodeverk: '' },
             },
             arbeidsforhold: af,
           };
@@ -115,22 +112,21 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
       avbrytEditering();
     });
 
-    if (formValues.skalSeBortFraInntektsmelding === OPPRETT_ARBEIDSFORHOLD) {
+    if (formValues.saksbehandlersVurdering === OPPRETT_ARBEIDSFORHOLD) {
       registrerArbeidsforhold({
         behandlingUuid,
-        begrunnelse: formValues.begrunnelse,
-        arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
         arbeidsgiverNavn: arbeidsforholdNavn,
+        arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
+        vurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+        begrunnelse: formValues.begrunnelse,
         fom: formValues.fom,
         tom: formValues.tom,
         stillingsprosent: formValues.stillingsprosent,
-        vurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
       }).then(oppdater);
     } else {
       lagreVurdering({
         behandlingUuid,
-        vurdering: formValues.skalSeBortFraInntektsmelding === 'true'
-          ? ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING : ArbeidsforholdKomplettVurderingType.VENT_PÅ_INNTEKTSMELDING,
+        vurdering: saksbehandlersVurdering,
         begrunnelse: formValues.begrunnelse,
         arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
         internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
@@ -158,16 +154,25 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
           </FlexRow>
         </FlexContainer>
         <RadioGroupField
-          name="skalSeBortFraInntektsmelding"
+          name="saksbehandlersVurdering"
           validate={[required]}
           readOnly={isReadOnly}
           direction="vertical"
         >
-          <RadioOption value="false" label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.TarKontakt' })} />
-          <RadioOption value="true" label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.GåVidere' })} />
-          <RadioOption value={OPPRETT_ARBEIDSFORHOLD} label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.OpprettArbeidsforhold' })} />
+          <RadioOption
+            value={ArbeidsforholdKomplettVurderingType.VENT_PÅ_ARBEIDSFORHOLD}
+            label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.TarKontakt' })}
+          />
+          <RadioOption
+            value={ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING}
+            label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.GåVidere' })}
+          />
+          <RadioOption
+            value={ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER}
+            label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.OpprettArbeidsforhold' })}
+          />
         </RadioGroupField>
-        {skalSeBortFraInntektsmelding === OPPRETT_ARBEIDSFORHOLD && (
+        {saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER && (
           <>
             <FlexContainer>
               <FlexRow>

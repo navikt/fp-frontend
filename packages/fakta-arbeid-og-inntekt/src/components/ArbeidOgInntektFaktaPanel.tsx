@@ -16,6 +16,7 @@ import {
   VerticalSpacer, Image, AksjonspunktHelpTextHTML, FloatRight, Table, OverstyringKnapp,
   FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
+import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import NyttArbeidsforholdForm, { MANUELT_ORG_NR } from './NyttArbeidsforholdForm';
 import ArbeidsforholdRad from './ArbeidsforholdRad';
@@ -31,6 +32,8 @@ const HEADER_TEXT_IDS = [
 
 const finnApTekstKoder = (
   aksjonspunkter: Aksjonspunkt[],
+  harUløsteManglendeInntektsmeldinger: boolean,
+  harUløsteManglandeOpplysninger: boolean,
   harIngenArbeidsforholdEllerInntektsmeldinger: boolean,
   erOverstyrer: boolean,
 ): string[] => {
@@ -38,11 +41,13 @@ const finnApTekstKoder = (
     return ['ArbeidOgInntektFaktaPanel.IngenArbeidsforhold'];
   }
 
+  const erApÅpent = aksjonspunkter.some((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET);
+
   const koder = [];
-  if (aksjonspunkter.some((ap) => ap.definisjon.kode === '9998' && ap.status.kode === aksjonspunktStatus.OPPRETTET)) {
+  if (erApÅpent && harUløsteManglendeInntektsmeldinger) {
     koder.push('ArbeidOgInntektFaktaPanel.InnhentManglendeInntektsmelding');
   }
-  if (aksjonspunkter.some((ap) => ap.definisjon.kode === '9999' && ap.status.kode === aksjonspunktStatus.OPPRETTET)) {
+  if (erApÅpent && harUløsteManglandeOpplysninger) {
     koder.push('ArbeidOgInntektFaktaPanel.AvklarManglendeOpplysninger');
   }
   return koder;
@@ -137,12 +142,17 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   }, [tabellData]);
 
   const harIngenArbeidsforholdEllerInntektsmeldinger = arbeidsforhold.length === 0 && inntektsmeldinger.length === 0;
-  const aksjonspunktTekstKoder = finnApTekstKoder(aksjonspunkter, harIngenArbeidsforholdEllerInntektsmeldinger, erOverstyrer);
 
-  const harUløsteAksjonspunkt = tabellData
-    .some((d) => (!d.inntektsmelding && !d.arbeidsforhold?.begrunnelse) || (!d.arbeidsforhold && !d.inntektsmelding?.begrunnelse));
+  const harUløsteManglendeInntektsmeldinger = tabellData.some((d) => d.arbeidsforhold?.årsak && !d.arbeidsforhold?.saksbehandlersVurdering);
+  const harUløsteManglandeOpplysninger = tabellData.some((d) => d.inntektsmelding?.årsak && !d.inntektsmelding?.saksbehandlersVurdering);
+
+  const aksjonspunktTekstKoder = finnApTekstKoder(
+    aksjonspunkter, harUløsteManglendeInntektsmeldinger, harUløsteManglandeOpplysninger, harIngenArbeidsforholdEllerInntektsmeldinger, erOverstyrer);
+
+  const harUløsteAksjonspunkt = harUløsteManglendeInntektsmeldinger || harUløsteManglandeOpplysninger;
   const kanSettePåVent = tabellData
-    .some((d) => d.arbeidsforhold?.skalInnhenteInntektsmelding === true || d.inntektsmelding?.skalSeBortFraInntektsmelding === false);
+    .some((d) => d.arbeidsforhold?.saksbehandlersVurdering?.kode === ArbeidsforholdKomplettVurderingType.VENT_PÅ_INNTEKTSMELDING
+      || d.inntektsmelding?.saksbehandlersVurdering?.kode === ArbeidsforholdKomplettVurderingType.VENT_PÅ_INNTEKTSMELDING);
 
   const [antallÅpnedeRader, setÅpenRad] = useState(0);
   const oppdaterÅpenRad = (skalLukke: boolean) => {

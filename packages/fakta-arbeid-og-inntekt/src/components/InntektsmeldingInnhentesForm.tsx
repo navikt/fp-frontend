@@ -18,7 +18,9 @@ import {
 import {
   TextAreaField, RadioGroupField, RadioOption, Form,
 } from '@fpsak-frontend/form-hooks';
-import { AoIArbeidsforhold, Inntektspost, ManglendeInntektsmeldingVurdering } from '@fpsak-frontend/types';
+import {
+  AoIArbeidsforhold, Inntektspost, Kodeverk, ManglendeInntektsmeldingVurdering,
+} from '@fpsak-frontend/types';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image,
 } from '@fpsak-frontend/shared-components';
@@ -56,7 +58,7 @@ const behandleInntektsposter = (
 };
 
 type FormValues = {
-  skalInnhenteInntektsmelding: string;
+  saksbehandlersVurdering: Kodeverk;
   begrunnelse: string;
 }
 
@@ -84,7 +86,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
 
   const defaultValues = useMemo<FormValues>(() => ({
-    skalInnhenteInntektsmelding: arbeidsforhold.skalInnhenteInntektsmelding?.toString(),
+    saksbehandlersVurdering: arbeidsforhold.saksbehandlersVurdering,
     begrunnelse: arbeidsforhold.begrunnelse,
   }), [arbeidsforhold]);
 
@@ -104,8 +106,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
   const lagre = useCallback((formValues: FormValues) => {
     const params = {
       behandlingUuid,
-      vurdering: formValues.skalInnhenteInntektsmelding === 'true'
-        ? ArbeidsforholdKomplettVurderingType.VENT_PÅ_INNTEKTSMELDING : ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING,
+      vurdering: formValues.saksbehandlersVurdering.kode,
       arbeidsgiverIdent: arbeidsforhold.arbeidsgiverIdent,
       internArbeidsforholdRef: arbeidsforhold.internArbeidsforholdId,
       begrunnelse: formValues.begrunnelse,
@@ -118,7 +119,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
             arbeidsforhold: {
               ...data.arbeidsforhold,
               begrunnelse: formValues.begrunnelse,
-              skalInnhenteInntektsmelding: formValues.skalInnhenteInntektsmelding === 'true',
+              saksbehandlersVurdering: formValues.saksbehandlersVurdering,
             },
           };
         }
@@ -186,13 +187,19 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
           <FlexRow>
             <FlexColumn>
               <RadioGroupField
-                name="skalInnhenteInntektsmelding"
+                name="saksbehandlersVurdering.kode"
                 validate={[required]}
                 readOnly={isReadOnly}
                 direction="vertical"
               >
-                <RadioOption value="true" label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.TarKontakt' })} />
-                <RadioOption value="false" label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.GåVidere' })} />
+                <RadioOption
+                  value={ArbeidsforholdKomplettVurderingType.VENT_PÅ_INNTEKTSMELDING}
+                  label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.TarKontakt' })}
+                />
+                <RadioOption
+                  value={ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING}
+                  label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.GåVidere' })}
+                />
               </RadioGroupField>
               <FlexColumn />
               <TextAreaField
