@@ -106,6 +106,7 @@ export type { default as VilkarsVurdertePerioderWrapper, VilkarsVurdertPeriode, 
 export type {
   default as ArbeidOgInntektsmelding, Inntekt, Arbeidsforhold as AoIArbeidsforhold, Inntektsmelding, Inntektspost,
 } from './src/arbeidOgInntektsmeldingTsType';
+export { AksjonspunktÅrsak } from './src/arbeidOgInntektsmeldingTsType';
 export type {
   default as FodselOgTilrettelegging, ArbeidsforholdFodselOgTilrettelegging, ArbeidsforholdTilretteleggingDato, Permisjon,
 } from './src/fodselOgTilretteleggingTsType';

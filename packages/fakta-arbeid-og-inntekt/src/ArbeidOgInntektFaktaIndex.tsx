@@ -34,7 +34,6 @@ const ArbeidOgInntektFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanel
   <RawIntlProvider value={intl}>
     <ArbeidOgInntektFaktaPanel
       behandlingUuid={behandling.uuid}
-      skjæringspunktDato={behandling.behandlingsresultat.skjæringstidspunkt.dato}
       aksjonspunkter={aksjonspunkter}
       isReadOnly={readOnly}
       formData={formData}

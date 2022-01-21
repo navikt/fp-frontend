@@ -102,7 +102,6 @@ const byggTabellStruktur = (
 
 interface OwnProps {
   behandlingUuid: string;
-  skjæringspunktDato: string;
   aksjonspunkter: Aksjonspunkt[];
   isReadOnly: boolean;
   formData?: ArbeidsforholdOgInntekt[],
@@ -116,7 +115,6 @@ interface OwnProps {
 
 const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   behandlingUuid,
-  skjæringspunktDato,
   aksjonspunkter,
   isReadOnly,
   arbeidOgInntekt,
@@ -174,7 +172,10 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
         <Column xs="4">
           <FloatRight>
             <Normaltekst>
-              <FormattedMessage id="ArbeidOgInntektFaktaPanel.Skjaringstidspunkt" values={{ skjæringspunktDato: dateFormat(skjæringspunktDato) }} />
+              <FormattedMessage
+                id="ArbeidOgInntektFaktaPanel.Skjaringstidspunkt"
+                values={{ skjæringspunktDato: dateFormat(arbeidOgInntekt.skjæringstidspunkt) }}
+              />
             </Normaltekst>
           </FloatRight>
         </Column>
@@ -225,7 +226,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           {tabellData.map((data) => (
             <ArbeidsforholdRad
               behandlingUuid={behandlingUuid}
-              skjæringspunktDato={skjæringspunktDato}
+              skjæringspunktDato={arbeidOgInntekt.skjæringstidspunkt}
               arbeidsforholdOgInntekt={data}
               isReadOnly={isReadOnly}
               registrerArbeidsforhold={registrerArbeidsforhold}

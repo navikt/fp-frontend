@@ -3,10 +3,11 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import {
-  Aksjonspunkt, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, Behandling,
+  Aksjonspunkt, AksjonspunktÅrsak, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, Behandling,
 } from '@fpsak-frontend/types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 import ArbeidOgInntektFaktaIndex from './ArbeidOgInntektFaktaIndex';
 
 const MANUELT_ORG_NR = '342352362';
@@ -37,11 +38,6 @@ const Template: Story<{
   <ArbeidOgInntektFaktaIndex
     behandling={{
       uuid: '1223-2323-2323-22332',
-      behandlingsresultat: {
-        skjæringstidspunkt: {
-          dato: '2021-11-10',
-        },
-      },
     } as Behandling}
     aksjonspunkter={aksjonspunkter}
     submittable
@@ -83,11 +79,12 @@ InnhentInntektsmelding.args = {
   arbeidOgInntekt: {
     arbeidsforhold: [{
       arbeidsgiverIdent: '910909088',
+      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
       eksternArbeidsforholdId: 'ARB001-001',
       fom: '2019-12-06',
-      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
-      stillingsprosent: 100,
       tom: '9999-12-31',
+      stillingsprosent: 100,
+      årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
     }],
     inntektsmeldinger: [],
     inntekter: [{
@@ -134,6 +131,7 @@ InnhentInntektsmelding.args = {
         },
       }],
     }],
+    skjæringstidspunkt: '2021-11-10',
   },
 };
 
@@ -161,14 +159,16 @@ InnhentInntektsmeldingDerEnIkkeHarInntekterFraAAregisteret.args = {
   arbeidOgInntekt: {
     arbeidsforhold: [{
       arbeidsgiverIdent: '910909088',
+      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
       eksternArbeidsforholdId: 'ARB001-001',
       fom: '2019-12-06',
-      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
-      stillingsprosent: 100,
       tom: '9999-12-31',
+      stillingsprosent: 100,
+      årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
     }],
     inntektsmeldinger: [],
     inntekter: [],
+    skjæringstidspunkt: '2021-11-10',
   },
 };
 
@@ -201,11 +201,16 @@ InnhentInntektsmeldingDerBehandlingErAvsluttet.args = {
       internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
       stillingsprosent: 100,
       tom: '9999-12-31',
+      årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
+      saksbehandlersVurdering: {
+        kode: ArbeidsforholdKomplettVurderingType.VENT_PÅ_INNTEKTSMELDING,
+        kodeverk: '',
+      },
       begrunnelse: 'Vil innehente inntektsmelding fordi...',
-      skalInnhenteInntektsmelding: true,
     }],
     inntektsmeldinger: [],
     inntekter: [],
+    skjæringstidspunkt: '2021-11-10',
   },
   readOnly: true,
 };
@@ -234,17 +239,21 @@ AvklarManglendeOpplysninger.args = {
   arbeidOgInntekt: {
     arbeidsforhold: [],
     inntektsmeldinger: [{
+      inntektPrMnd: 30000,
+      refusjonPrMnd: null,
       arbeidsgiverIdent: '910909088',
       eksternArbeidsforholdId: 'ARB001-001',
-      innsendingstidspunkt: '2021-12-06T10:52:13.377',
-      inntektPrMnd: 30000,
       internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
       kontaktpersonNavn: 'Corpolarsen',
       kontaktpersonNummer: '41925090',
+      journalpostId: '1',
+      dokumentId: '2',
       motattDato: '2021-12-06',
-      refusjonPrMnd: null,
+      innsendingstidspunkt: '2021-12-06T10:52:13.377',
+      årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
     }],
     inntekter: [],
+    skjæringstidspunkt: '2021-11-10',
   },
 };
 
@@ -271,7 +280,9 @@ AvklarManglendeOpplysningerDerBehandlingErAvsluttet.args = {
   },
   arbeidOgInntekt: {
     arbeidsforhold: [{
-      arbeidsgiverIdent: '910909088',
+      arbeidsgiverIdent: '342352362',
+      internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
+      eksternArbeidsforholdId: 'ARB001-001',
       fom: '2021-10-06',
       tom: '2021-12-12',
       stillingsprosent: 100,
@@ -286,9 +297,17 @@ AvklarManglendeOpplysningerDerBehandlingErAvsluttet.args = {
       kontaktpersonNummer: '41925090',
       motattDato: '2021-12-06',
       refusjonPrMnd: null,
+      journalpostId: '1',
+      dokumentId: '2',
+      årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
+      saksbehandlersVurdering: {
+        kode: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+        kodeverk: '',
+      },
       begrunnelse: 'Jeg opprettet arbeidsforhold fordi...',
     }],
     inntekter: [],
+    skjæringstidspunkt: '2021-11-10',
   },
   readOnly: true,
 };
@@ -299,6 +318,7 @@ SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldinger
     arbeidsforhold: [],
     inntektsmeldinger: [],
     inntekter: [],
+    skjæringstidspunkt: '2021-11-10',
   },
   erOverstyrer: true,
 };
@@ -309,6 +329,7 @@ SkalIkkeKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldi
     arbeidsforhold: [],
     inntektsmeldinger: [],
     inntekter: [],
+    skjæringstidspunkt: '2021-11-10',
   },
 };
 
@@ -330,9 +351,14 @@ ArbeidsforholdErManueltLagtTilOgLagret.args = {
       stillingsprosent: 100,
       tom: '2022-12-31',
       begrunnelse: 'Dette er en begrunnelse',
+      saksbehandlersVurdering: {
+        kode: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+        kodeverk: '',
+      },
     }],
     inntektsmeldinger: [],
     inntekter: [],
+    skjæringstidspunkt: '2021-11-10',
   },
   erOverstyrer: true,
 };
@@ -355,9 +381,14 @@ ArbeidsforholdErManueltLagtTilOgBehandlingErAvsluttet.args = {
       stillingsprosent: 100,
       tom: '2022-12-31',
       begrunnelse: 'Dette er en begrunnelse',
+      saksbehandlersVurdering: {
+        kode: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+        kodeverk: '',
+      },
     }],
     inntektsmeldinger: [],
     inntekter: [],
+    skjæringstidspunkt: '2021-11-10',
   },
   erOverstyrer: true,
   readOnly: true,
@@ -393,6 +424,8 @@ ArbeidsforholdErOK.args = {
       kontaktpersonNummer: '41925090',
       motattDato: '2021-12-06',
       refusjonPrMnd: 20000,
+      journalpostId: '1',
+      dokumentId: '2',
     }],
     inntekter: [{
       arbeidsgiverIdent: '910909088',
@@ -438,6 +471,7 @@ ArbeidsforholdErOK.args = {
         },
       }],
     }],
+    skjæringstidspunkt: '2021-11-10',
   },
 };
 
@@ -501,6 +535,7 @@ FlereArbeidsforholdOgInntekstemeldinger.args = {
       internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d',
       stillingsprosent: 80,
       tom: '2021-12-31',
+      årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
     }],
     inntektsmeldinger: [{
       arbeidsgiverIdent: '910909088',
@@ -512,6 +547,8 @@ FlereArbeidsforholdOgInntekstemeldinger.args = {
       kontaktpersonNummer: '41925090',
       motattDato: '2021-12-06',
       refusjonPrMnd: 20000,
+      journalpostId: '1',
+      dokumentId: '2',
     }, {
       arbeidsgiverIdent: '910909092',
       eksternArbeidsforholdId: 'ARB001-003',
@@ -522,6 +559,9 @@ FlereArbeidsforholdOgInntekstemeldinger.args = {
       kontaktpersonNummer: '55599999',
       motattDato: '2021-12-06',
       refusjonPrMnd: 5000,
+      journalpostId: '1',
+      dokumentId: '2',
+      årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
     }],
     inntekter: [{
       arbeidsgiverIdent: '910909088',
@@ -610,5 +650,6 @@ FlereArbeidsforholdOgInntekstemeldinger.args = {
         },
       }],
     }],
+    skjæringstidspunkt: '2021-11-10',
   },
 };
