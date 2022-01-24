@@ -44,6 +44,7 @@ const Template: Story<{
   readOnly = false,
 }) => (
   <ArbeidOgInntektFaktaIndex
+    saksnummer="1234567"
     behandling={{
       uuid: '1223-2323-2323-22332',
     } as Behandling}
@@ -299,7 +300,7 @@ AvklarManglendeOpplysningerDerBehandlingErAvsluttet.args = {
   },
   arbeidOgInntekt: {
     arbeidsforhold: [{
-      arbeidsgiverIdent: '342352362',
+      arbeidsgiverIdent: '910909088',
       internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
       eksternArbeidsforholdId: 'ARB001-001',
       fom: '2021-10-06',
