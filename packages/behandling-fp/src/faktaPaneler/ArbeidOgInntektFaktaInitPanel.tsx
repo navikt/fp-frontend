@@ -25,6 +25,7 @@ type EndepunktInitData = {
 }
 
 interface OwnProps {
+  saksnummer: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   rettigheter: AksessRettigheter;
   settBehandlingPåVentCallback: (params: {
@@ -34,6 +35,7 @@ interface OwnProps {
 }
 
 const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
+  saksnummer,
   arbeidsgiverOpplysningerPerId,
   rettigheter,
   settBehandlingPåVentCallback,
@@ -52,6 +54,7 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
       skalPanelVisesIMeny={({ arbeidOgInntekt }) => !!arbeidOgInntekt}
       renderPanel={(data) => (
         <ArbeidOgInntektFaktaIndex
+          saksnummer={saksnummer}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
           registrerArbeidsforhold={registrerArbeidsforhold}
