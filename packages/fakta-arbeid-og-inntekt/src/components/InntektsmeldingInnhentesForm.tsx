@@ -127,7 +127,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
       }));
       avbrytEditering();
     });
-  }, [arbeidsforhold]);
+  }, [arbeidsforhold, oppdaterTabell]);
 
   return (
     <>

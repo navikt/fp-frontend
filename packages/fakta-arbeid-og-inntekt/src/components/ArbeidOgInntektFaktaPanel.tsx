@@ -163,6 +163,8 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   const updateTabellData = useCallback((data: ArbeidsforholdOgInntekt[]) => {
     setDirty(true);
     setTabellData(data);
+    // @ts-ignore Fiks
+    setAutoÅpenRadIndex(finnUløstArbeidsforholdIndex(data(tabellData)));
   }, [tabellData]);
 
   useEffect(() => () => {
@@ -182,10 +184,9 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
     .some((d) => d.arbeidsforhold?.saksbehandlersVurdering?.kode === ArbeidsforholdKomplettVurderingType.VENT_PÅ_INNTEKTSMELDING
       || d.inntektsmelding?.saksbehandlersVurdering?.kode === ArbeidsforholdKomplettVurderingType.VENT_PÅ_ARBEIDSFORHOLD);
 
-  const [antallÅpnedeRader, setÅpenRad] = useState(0);
-  const oppdaterÅpenRad = (skalLukke: boolean) => {
-    // setAutoÅpenRadIndex(undefined);
-    setÅpenRad((antall) => (skalLukke ? antall + 1 : antall - 1));
+  const [antallÅpnedeRader, oppdaterAntallÅpneRader] = useState(0);
+  const oppdaterÅpneRader = (skalLukke: boolean) => {
+    oppdaterAntallÅpneRader((antall) => (skalLukke ? antall + 1 : antall - 1));
   };
   const [erOverstyrt, toggleOverstyring] = useState(false);
   const [skalLeggeTilArbeidsforhold, toggleLeggTilArbeidsforhold] = useState(false);
@@ -282,7 +283,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
               isReadOnly={isReadOnly}
               registrerArbeidsforhold={registrerArbeidsforhold}
               lagreVurdering={lagreVurdering}
-              oppdaterÅpenRad={oppdaterÅpenRad}
+              oppdaterÅpenRad={oppdaterÅpneRader}
               erOverstyrt={erOverstyrt}
               oppdaterTabell={updateTabellData}
               erRadÅpen={index === autoÅpneRadIndex}

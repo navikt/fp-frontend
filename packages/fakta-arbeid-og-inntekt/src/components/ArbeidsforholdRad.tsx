@@ -71,8 +71,6 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
     if (erRadÅpen) {
       oppdaterÅpenRad(true);
     }
-  }, []);
-  useEffect(() => {
     toggleEkspandertRad(erRadÅpen);
   }, [erRadÅpen]);
 

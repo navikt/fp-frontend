@@ -100,6 +100,7 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
             tom: formValues.tom,
             stillingsprosent: formValues.stillingsprosent,
             begrunnelse: formValues.begrunnelse,
+            saksbehandlersVurdering: { kode: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER, kodeverk: '' },
           },
           arbeidsforholdNavn: formValues.arbeidsgiverNavn,
           inntektsmelding: undefined,
@@ -118,7 +119,7 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
       });
       avbryt();
     });
-  }, [behandlingUuid]);
+  }, [behandlingUuid, oppdaterTabell]);
 
   const slett = useCallback(() => {
     const formValues = formMethods.getValues();

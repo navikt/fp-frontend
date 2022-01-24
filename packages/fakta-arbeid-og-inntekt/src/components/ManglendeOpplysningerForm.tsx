@@ -130,7 +130,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
         internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
       }).then(oppdater);
     }
-  }, [inntektsmelding]);
+  }, [inntektsmelding, oppdaterTabell]);
 
   return (
     <>
