@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
 import Lenke from 'nav-frontend-lenker';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
-import { Column, Row } from 'nav-frontend-grid';
 import { Element, Undertekst } from 'nav-frontend-typografi';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 
@@ -27,6 +26,8 @@ import {
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
+
+import styles from './inntektsmeldingInnhentesForm.less';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -144,16 +145,18 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
       {inntektsposter.length > 0 && (
         <>
           <Element><FormattedMessage id="InntektsmeldingInnhentesForm.Inntekter" /></Element>
-          {sorterteInntektsposter.filter((_inntekt, index) => (visAlleMåneder ? true : index < 3)).map((inntekt) => (
-            <Row key={inntekt.fom}>
-              <Column xs="1">
-                {`${intl.formatMessage({ id: `InntektsmeldingInnhentesForm.${dayjs(inntekt.fom).month() + 1}` })} ${dayjs(inntekt.fom).year()}`}
-              </Column>
-              <Column xs="2">
-                {formatCurrencyNoKr(inntekt.beløp)}
-              </Column>
-            </Row>
-          ))}
+          <FlexContainer>
+            {sorterteInntektsposter.filter((_inntekt, index) => (visAlleMåneder ? true : index < 3)).map((inntekt) => (
+              <FlexRow key={inntekt.fom}>
+                <FlexColumn className={styles.kolonneBredde}>
+                  {`${intl.formatMessage({ id: `InntektsmeldingInnhentesForm.${dayjs(inntekt.fom).month() + 1}` })} ${dayjs(inntekt.fom).year()}`}
+                </FlexColumn>
+                <FlexColumn>
+                  {formatCurrencyNoKr(inntekt.beløp)}
+                </FlexColumn>
+              </FlexRow>
+            ))}
+          </FlexContainer>
           <Lenke
             onClick={(e) => {
               e.preventDefault();

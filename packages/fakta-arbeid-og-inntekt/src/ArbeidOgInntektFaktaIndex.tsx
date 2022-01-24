@@ -10,6 +10,7 @@ import ArbeidOgInntektFaktaPanel from './components/ArbeidOgInntektFaktaPanel';
 import messages from '../i18n/nb_NO.json';
 
 interface OwnProps {
+  saksnummer: string;
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
@@ -24,6 +25,7 @@ interface OwnProps {
 const intl = createIntl(messages);
 
 const ArbeidOgInntektFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
+  saksnummer,
   behandling,
   submitCallback,
   aksjonspunkter,
@@ -40,6 +42,7 @@ const ArbeidOgInntektFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanel
 }) => (
   <RawIntlProvider value={intl}>
     <ArbeidOgInntektFaktaPanel
+      saksnummer={saksnummer}
       behandling={behandling}
       aksjonspunkter={aksjonspunkter}
       isReadOnly={readOnly}

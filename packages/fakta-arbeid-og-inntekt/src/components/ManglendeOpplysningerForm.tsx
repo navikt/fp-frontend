@@ -41,6 +41,7 @@ type FormValues = {
 const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (tom: string) => dateAfterOrEqual(getValues('fom'))(tom);
 
 interface OwnProps {
+  saksnummer: string;
   behandlingUuid: string;
   arbeidsforholdNavn: string;
   inntektsmelding: Inntektsmelding;
@@ -53,6 +54,7 @@ interface OwnProps {
 }
 
 const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
+  saksnummer,
   behandlingUuid,
   arbeidsforholdNavn,
   inntektsmelding,
@@ -135,6 +137,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   return (
     <>
       <InntektsmeldingOpplysningerPanel
+        saksnummer={saksnummer}
         inntektsmelding={inntektsmelding}
       />
       <VerticalSpacer thirtyTwoPx />

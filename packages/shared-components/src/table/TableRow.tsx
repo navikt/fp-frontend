@@ -64,6 +64,7 @@ interface OwnProps<ID, MODEL = void> {
   id?: ID;
   model?: MODEL;
   isHeader?: boolean;
+  hasGrayHeader?: boolean;
   onMouseDown?: (e: React.MouseEvent, id?: ID, model?: MODEL) => void;
   onKeyDown?: (e: React.KeyboardEvent, id?: ID, model?: MODEL) => void;
   children: ReactNode | ReactNode[];
@@ -87,6 +88,7 @@ const TableRow = <ID, MODEL = void, >({
   id,
   model,
   isHeader = false,
+  hasGrayHeader = false,
   onMouseDown,
   onKeyDown,
   children,
@@ -103,6 +105,7 @@ const TableRow = <ID, MODEL = void, >({
   <tr
     className={classNames(className, styles.column, {
       rowHeader: isHeader,
+      grayHeader: hasGrayHeader,
       rowContent: (!isHeader && !noHover),
       selected: isSelected,
       bold: isBold,

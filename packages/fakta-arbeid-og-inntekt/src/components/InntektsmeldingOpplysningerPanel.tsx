@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Element, Undertekst } from 'nav-frontend-typografi';
+import Lenke from 'nav-frontend-lenker';
 
 import telefonImageUrl from '@fpsak-frontend/assets/images/phone-3.svg';
 import { Inntektsmelding } from '@fpsak-frontend/types';
@@ -8,13 +9,17 @@ import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image,
 } from '@fpsak-frontend/shared-components';
+import { hentDokumentLenke } from '@fpsak-frontend/konstanter';
+import dokumentSvg from '@fpsak-frontend/assets/images/dokument_filled.svg';
 
 interface OwnProps {
+  saksnummer: string;
   stillingsprosent?: number;
   inntektsmelding: Inntektsmelding;
 }
 
 const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
+  saksnummer,
   stillingsprosent,
   inntektsmelding,
 }) => (
@@ -51,6 +56,13 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
           <FormattedMessage id={inntektsmelding.refusjonPrMnd ? 'InntektsmeldingOpplysningerPanel.Ja' : 'InntektsmeldingOpplysningerPanel.Nei'} />
         </FlexColumn>
       </FlexRow>
+      <VerticalSpacer eightPx />
+      <Lenke href={hentDokumentLenke(saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId)} target="_blank">
+        <span>
+          <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
+        </span>
+        <Image src={dokumentSvg} />
+      </Lenke>
       <VerticalSpacer eightPx />
       {inntektsmelding.refusjonPrMnd && (
         <>

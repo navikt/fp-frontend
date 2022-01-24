@@ -17,6 +17,7 @@ interface OwnProps {
   children: ReactElement | ReactElement[];
   classNameTable?: string;
   noHover?: boolean;
+  hasGrayHeader?: boolean;
 }
 
 /**
@@ -29,11 +30,12 @@ const Table: FunctionComponent<OwnProps> = ({
   headerColumnContent = [],
   classNameTable = '',
   noHover = false,
+  hasGrayHeader = false,
   children,
 }) => (
   <table className={classNames('table', { [classNameTable]: classNameTable, noHover })}>
     <thead>
-      <TableRow isHeader noHover={noHover}>
+      <TableRow isHeader noHover={noHover} hasGrayHeader={hasGrayHeader}>
         {headerTextCodes.map((headerElement) => (typeof headerElement === 'string' && headerElement.startsWith(EMPTY_STRING)
           ? <TableColumn key={headerElement}>&nbsp;</TableColumn>
           : (

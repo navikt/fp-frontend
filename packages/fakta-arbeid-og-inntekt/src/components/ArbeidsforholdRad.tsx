@@ -36,6 +36,7 @@ const finnKilde = (
 };
 
 interface OwnProps {
+  saksnummer: string;
   behandlingUuid: string;
   skjæringspunktDato: string;
   arbeidsforholdOgInntekt: ArbeidsforholdOgInntekt;
@@ -49,6 +50,7 @@ interface OwnProps {
 }
 
 const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
+  saksnummer,
   behandlingUuid,
   skjæringspunktDato,
   arbeidsforholdOgInntekt,
@@ -110,6 +112,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
           {harArbeidsforholdOgInntektsmelding && (
             <>
               <InntektsmeldingOpplysningerPanel
+                saksnummer={saksnummer}
                 stillingsprosent={arbeidsforhold.stillingsprosent}
                 inntektsmelding={inntektsmelding}
               />
@@ -130,6 +133,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
           )}
           {manglerArbeidsforhold && (
             <ManglendeOpplysningerForm
+              saksnummer={saksnummer}
               behandlingUuid={behandlingUuid}
               arbeidsforholdNavn={arbeidsforholdNavn}
               inntektsmelding={inntektsmelding}

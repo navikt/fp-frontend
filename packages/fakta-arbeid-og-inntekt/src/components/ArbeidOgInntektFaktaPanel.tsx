@@ -32,6 +32,7 @@ const HEADER_TEXT_IDS = [
   'ArbeidOgInntektFaktaPanel.Periode',
   'ArbeidOgInntektFaktaPanel.Kilde',
   'ArbeidOgInntektFaktaPanel.InntektsmeldingMottatt',
+  'EMPTY',
 ];
 
 const finnApTekstKoder = (
@@ -110,6 +111,7 @@ const byggTabellStruktur = (
 };
 
 interface OwnProps {
+  saksnummer: string;
   behandling: Behandling;
   aksjonspunkter: Aksjonspunkt[];
   isReadOnly: boolean;
@@ -133,6 +135,7 @@ const finnUløstArbeidsforholdIndex = (tabellData: ArbeidsforholdOgInntekt[]) =>
     || (d.inntektsmelding?.årsak && !d.inntektsmelding?.saksbehandlersVurdering));
 
 const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
+  saksnummer,
   behandling,
   aksjonspunkter,
   isReadOnly,
@@ -273,10 +276,11 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer fourtyPx />
         </>
       )}
-      <Table headerTextCodes={headers} noHover>
+      <Table headerTextCodes={headers} noHover hasGrayHeader>
         <>
           {tabellData.map((data, index) => (
             <ArbeidsforholdRad
+              saksnummer={saksnummer}
               behandlingUuid={behandling.uuid}
               skjæringspunktDato={arbeidOgInntekt.skjæringstidspunkt}
               arbeidsforholdOgInntekt={data}
