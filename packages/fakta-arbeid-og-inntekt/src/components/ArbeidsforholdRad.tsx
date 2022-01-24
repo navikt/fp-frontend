@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useState,
+  FunctionComponent, useCallback, useEffect, useState,
 } from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 import { Normaltekst, Element, Undertekst } from 'nav-frontend-typografi';
@@ -45,6 +45,7 @@ interface OwnProps {
   oppdaterÅpenRad: (erÅpen: boolean) => void;
   erOverstyrt: boolean;
   oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
+  erRadÅpen: boolean;
 }
 
 const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
@@ -57,6 +58,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
   oppdaterÅpenRad,
   erOverstyrt,
   oppdaterTabell,
+  erRadÅpen,
 }) => {
   const intl = useIntl();
 
@@ -64,11 +66,23 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
     arbeidsforhold, arbeidsforholdNavn, inntektsposter, inntektsmelding,
   } = arbeidsforholdOgInntekt;
 
-  const [erRadEkspandert, toggleEkspandertRad] = useState(false);
+  const [erRadEkspandert, toggleEkspandertRad] = useState(erRadÅpen);
+  useEffect(() => {
+    if (erRadÅpen) {
+      oppdaterÅpenRad(true);
+    }
+  }, []);
+  useEffect(() => {
+    toggleEkspandertRad(erRadÅpen);
+  }, [erRadÅpen]);
+
   const toggleRad = (erApen: boolean) => {
     oppdaterÅpenRad(erApen);
     toggleEkspandertRad(erApen);
   };
+  const avbrytEditering = useCallback(() => {
+    toggleRad(false);
+  }, []);
 
   const erManueltOpprettet = arbeidsforhold?.saksbehandlersVurdering?.kode === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER;
   const harArbeidsforholdOgInntektsmelding = arbeidsforhold && inntektsmelding && !arbeidsforhold.årsak && !inntektsmelding.årsak;
@@ -90,7 +104,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               registrerArbeidsforhold={registrerArbeidsforhold}
               arbeidsforhold={arbeidsforhold}
               arbeidsforholdNavn={arbeidsforholdNavn}
-              avbrytEditering={() => toggleRad(false)}
+              avbrytEditering={avbrytEditering}
               erOverstyrt={erOverstyrt}
               oppdaterTabell={oppdaterTabell}
             />
@@ -112,7 +126,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               isReadOnly={isReadOnly}
               arbeidsforhold={arbeidsforhold}
               lagreVurdering={lagreVurdering}
-              avbrytEditering={() => toggleRad(false)}
+              avbrytEditering={avbrytEditering}
               oppdaterTabell={oppdaterTabell}
             />
           )}
@@ -125,7 +139,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               isReadOnly={isReadOnly}
               registrerArbeidsforhold={registrerArbeidsforhold}
               lagreVurdering={lagreVurdering}
-              avbrytEditering={() => toggleRad(false)}
+              avbrytEditering={avbrytEditering}
               oppdaterTabell={oppdaterTabell}
             />
           )}

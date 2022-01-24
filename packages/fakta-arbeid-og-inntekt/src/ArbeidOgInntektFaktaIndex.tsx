@@ -15,12 +15,17 @@ interface OwnProps {
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   erOverstyrer: boolean;
+  settBehandlingPåVentCallback: (params: {
+    frist: string;
+    ventearsak: string;
+  }) => Promise<any>
 }
 
 const intl = createIntl(messages);
 
 const ArbeidOgInntektFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
   behandling,
+  submitCallback,
   aksjonspunkter,
   readOnly,
   formData,
@@ -30,19 +35,24 @@ const ArbeidOgInntektFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanel
   registrerArbeidsforhold,
   lagreVurdering,
   erOverstyrer,
+  settBehandlingPåVentCallback,
+  alleKodeverk,
 }) => (
   <RawIntlProvider value={intl}>
     <ArbeidOgInntektFaktaPanel
-      behandlingUuid={behandling.uuid}
+      behandling={behandling}
       aksjonspunkter={aksjonspunkter}
       isReadOnly={readOnly}
       formData={formData}
+      lagreCallback={submitCallback}
       setFormData={setFormData}
       arbeidOgInntekt={arbeidOgInntekt}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       registrerArbeidsforhold={registrerArbeidsforhold}
       lagreVurdering={lagreVurdering}
       erOverstyrer={erOverstyrer}
+      settBehandlingPåVentCallback={settBehandlingPåVentCallback}
+      alleKodeverk={alleKodeverk}
     />
   </RawIntlProvider>
 );

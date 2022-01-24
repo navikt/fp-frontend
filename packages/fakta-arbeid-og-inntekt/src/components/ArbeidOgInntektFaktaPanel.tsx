@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useState, useEffect,
+  FunctionComponent, useState, useEffect, useCallback,
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
@@ -10,14 +10,18 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import { dateFormat } from '@fpsak-frontend/utils';
 import {
-  Aksjonspunkt, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold,
+  Aksjonspunkt, AlleKodeverk, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, Behandling, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold,
 } from '@fpsak-frontend/types';
+import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 import {
   VerticalSpacer, Image, AksjonspunktHelpTextHTML, FloatRight, Table, OverstyringKnapp,
   FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import NyttArbeidsforholdForm, { MANUELT_ORG_NR } from './NyttArbeidsforholdForm';
 import ArbeidsforholdRad from './ArbeidsforholdRad';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
@@ -106,7 +110,7 @@ const byggTabellStruktur = (
 };
 
 interface OwnProps {
-  behandlingUuid: string;
+  behandling: Behandling;
   aksjonspunkter: Aksjonspunkt[];
   isReadOnly: boolean;
   formData?: ArbeidsforholdOgInntekt[],
@@ -115,11 +119,21 @@ interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
+  lagreCallback: (aksjonspunktData: FaktaAksjonspunkt) => Promise<void>;
+  settBehandlingPåVentCallback: (params: {
+    frist: string;
+    ventearsak: string;
+  }) => Promise<any>
   erOverstyrer: boolean;
+  alleKodeverk: AlleKodeverk;
 }
 
+const finnUløstArbeidsforholdIndex = (tabellData: ArbeidsforholdOgInntekt[]) => tabellData
+  .findIndex((d) => (d.arbeidsforhold?.årsak && !d.arbeidsforhold?.saksbehandlersVurdering)
+    || (d.inntektsmelding?.årsak && !d.inntektsmelding?.saksbehandlersVurdering));
+
 const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
-  behandlingUuid,
+  behandling,
   aksjonspunkter,
   isReadOnly,
   arbeidOgInntekt,
@@ -129,13 +143,27 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   formData,
   setFormData,
   erOverstyrer,
+  lagreCallback,
+  settBehandlingPåVentCallback,
+  alleKodeverk,
 }) => {
   const intl = useIntl();
+  const [erKnappTrykket, setsKnappTrykket] = useState(false);
+  const [visSettPåVentModal, settVisSettPåVentModal] = useState(false);
+  const [isDirty, setDirty] = useState(false);
+
   const headers = HEADER_TEXT_IDS.map((textId) => (textId !== 'EMPTY' ? intl.formatMessage({ id: textId }) : textId));
 
   const { arbeidsforhold, inntektsmeldinger } = arbeidOgInntekt;
 
   const [tabellData, setTabellData] = useState(formData || byggTabellStruktur(arbeidOgInntekt, arbeidsgiverOpplysningerPerId));
+
+  const [autoÅpneRadIndex, setAutoÅpenRadIndex] = useState(finnUløstArbeidsforholdIndex(tabellData));
+
+  const updateTabellData = useCallback((data: ArbeidsforholdOgInntekt[]) => {
+    setDirty(true);
+    setTabellData(data);
+  }, [tabellData]);
 
   useEffect(() => () => {
     setFormData(tabellData);
@@ -152,15 +180,28 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   const harUløsteAksjonspunkt = harUløsteManglendeInntektsmeldinger || harUløsteManglandeOpplysninger;
   const kanSettePåVent = tabellData
     .some((d) => d.arbeidsforhold?.saksbehandlersVurdering?.kode === ArbeidsforholdKomplettVurderingType.VENT_PÅ_INNTEKTSMELDING
-      || d.inntektsmelding?.saksbehandlersVurdering?.kode === ArbeidsforholdKomplettVurderingType.VENT_PÅ_INNTEKTSMELDING);
+      || d.inntektsmelding?.saksbehandlersVurdering?.kode === ArbeidsforholdKomplettVurderingType.VENT_PÅ_ARBEIDSFORHOLD);
 
   const [antallÅpnedeRader, setÅpenRad] = useState(0);
   const oppdaterÅpenRad = (skalLukke: boolean) => {
+    // setAutoÅpenRadIndex(undefined);
     setÅpenRad((antall) => (skalLukke ? antall + 1 : antall - 1));
   };
   const [erOverstyrt, toggleOverstyring] = useState(false);
   const [skalLeggeTilArbeidsforhold, toggleLeggTilArbeidsforhold] = useState(false);
   const harManueltLagtTilArbeidsforhold = tabellData.some((data) => data.arbeidsforhold?.arbeidsgiverIdent === MANUELT_ORG_NR);
+
+  const lagre = useCallback(() => {
+    setsKnappTrykket(true);
+    lagreCallback({
+      kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
+    });
+  }, []);
+  const settPaVent = useCallback((params: { frist: string; ventearsak: string; }) => {
+    setsKnappTrykket(true);
+    settVisSettPåVentModal(false);
+    settBehandlingPåVentCallback(params);
+  }, [behandling.versjon]);
 
   return (
     <>
@@ -221,21 +262,21 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
       {skalLeggeTilArbeidsforhold && (
         <>
           <NyttArbeidsforholdForm
-            behandlingUuid={behandlingUuid}
+            behandlingUuid={behandling.uuid}
             isReadOnly={false}
             registrerArbeidsforhold={registrerArbeidsforhold}
             avbrytEditering={() => toggleLeggTilArbeidsforhold(false)}
             erOverstyrt
-            oppdaterTabell={setTabellData}
+            oppdaterTabell={updateTabellData}
           />
           <VerticalSpacer fourtyPx />
         </>
       )}
       <Table headerTextCodes={headers} noHover>
         <>
-          {tabellData.map((data) => (
+          {tabellData.map((data, index) => (
             <ArbeidsforholdRad
-              behandlingUuid={behandlingUuid}
+              behandlingUuid={behandling.uuid}
               skjæringspunktDato={arbeidOgInntekt.skjæringstidspunkt}
               arbeidsforholdOgInntekt={data}
               isReadOnly={isReadOnly}
@@ -243,24 +284,40 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
               lagreVurdering={lagreVurdering}
               oppdaterÅpenRad={oppdaterÅpenRad}
               erOverstyrt={erOverstyrt}
-              oppdaterTabell={setTabellData}
+              oppdaterTabell={updateTabellData}
+              erRadÅpen={index === autoÅpneRadIndex}
             />
           ))}
         </>
       </Table>
       <VerticalSpacer sixteenPx />
-      {kanSettePåVent && (
-        <Hovedknapp
-          mini
-          autoFocus
-        >
-          <FormattedMessage id="ArbeidOgInntektFaktaPanel.SettPaVent" />
-        </Hovedknapp>
+      {!isReadOnly && isDirty && !harUløsteAksjonspunkt && kanSettePåVent && antallÅpnedeRader === 0 && (
+        <>
+          <Hovedknapp
+            mini
+            disabled={erKnappTrykket}
+            onClick={() => settVisSettPåVentModal(true)}
+          >
+            <FormattedMessage id="ArbeidOgInntektFaktaPanel.SettPaVent" />
+          </Hovedknapp>
+          <SettPaVentModalIndex
+            submitCallback={settPaVent}
+            cancelEvent={() => settVisSettPåVentModal(false)}
+            frist={behandling.fristBehandlingPåVent}
+            ventearsak={behandling.venteArsakKode}
+            hasManualPaVent
+            ventearsaker={alleKodeverk[KodeverkType.VENT_AARSAK]}
+            erTilbakekreving={false}
+            showModal={visSettPåVentModal}
+          />
+        </>
       )}
-      {!isReadOnly && !harUløsteAksjonspunkt && !kanSettePåVent && antallÅpnedeRader === 0 && (
+      {!isReadOnly && isDirty && !harUløsteAksjonspunkt && !kanSettePåVent && antallÅpnedeRader === 0 && (
         <Hovedknapp
           mini
-          autoFocus
+          disabled={erKnappTrykket}
+          spinner={erKnappTrykket}
+          onClick={lagre}
         >
           <FormattedMessage id="ArbeidOgInntektFaktaPanel.Bekreft" />
         </Hovedknapp>

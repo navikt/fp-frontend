@@ -84,7 +84,7 @@ export type FormValues = {
 }
 
 interface PureOwnProps {
-  submitCallback: (formData: any) => void;
+  submitCallback: (formData: FormValues) => void;
   cancelEvent: () => void;
   showModal: boolean;
   ventearsaker: KodeverkMedNavn[];

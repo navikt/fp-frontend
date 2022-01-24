@@ -8,6 +8,7 @@ import {
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
+import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import ArbeidOgInntektFaktaIndex from './ArbeidOgInntektFaktaIndex';
 
 const MANUELT_ORG_NR = '342352362';
@@ -26,12 +27,19 @@ const Template: Story<{
   aksjonspunkter?: Aksjonspunkt[];
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
+  settBehandlingPåVentCallback: (params: {
+    frist: string;
+    ventearsak: string;
+  }) => Promise<any>;
   erOverstyrer?: boolean;
   readOnly?: boolean;
 }> = ({
   aksjonspunkter = [],
   arbeidOgInntekt,
   arbeidsgiverOpplysningerPerId,
+  submitCallback,
+  settBehandlingPåVentCallback,
   erOverstyrer = false,
   readOnly = false,
 }) => (
@@ -44,7 +52,6 @@ const Template: Story<{
     harApneAksjonspunkter
     alleMerknaderFraBeslutter={{}}
     readOnly={readOnly}
-    submitCallback={() => undefined}
     alleKodeverk={alleKodeverk as any}
     setFormData={() => undefined}
     arbeidOgInntekt={arbeidOgInntekt}
@@ -52,11 +59,15 @@ const Template: Story<{
     registrerArbeidsforhold={promiseAction()}
     lagreVurdering={promiseAction()}
     erOverstyrer={erOverstyrer}
+    submitCallback={submitCallback}
+    settBehandlingPåVentCallback={settBehandlingPåVentCallback}
   />
 );
 
 export const InnhentInntektsmelding = Template.bind({});
 InnhentInntektsmelding.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
     definisjon: {
       kode: '9998',
@@ -137,6 +148,8 @@ InnhentInntektsmelding.args = {
 
 export const InnhentInntektsmeldingDerEnIkkeHarInntekterFraAAregisteret = Template.bind({});
 InnhentInntektsmeldingDerEnIkkeHarInntekterFraAAregisteret.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
     definisjon: {
       kode: '9998',
@@ -174,6 +187,8 @@ InnhentInntektsmeldingDerEnIkkeHarInntekterFraAAregisteret.args = {
 
 export const InnhentInntektsmeldingDerBehandlingErAvsluttet = Template.bind({});
 InnhentInntektsmeldingDerBehandlingErAvsluttet.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
     definisjon: {
       kode: '9998',
@@ -217,6 +232,8 @@ InnhentInntektsmeldingDerBehandlingErAvsluttet.args = {
 
 export const AvklarManglendeOpplysninger = Template.bind({});
 AvklarManglendeOpplysninger.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
     definisjon: {
       kode: '9999',
@@ -259,6 +276,8 @@ AvklarManglendeOpplysninger.args = {
 
 export const AvklarManglendeOpplysningerDerBehandlingErAvsluttet = Template.bind({});
 AvklarManglendeOpplysningerDerBehandlingErAvsluttet.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
     definisjon: {
       kode: '9999',
@@ -314,6 +333,8 @@ AvklarManglendeOpplysningerDerBehandlingErAvsluttet.args = {
 
 export const SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnErOverstyrer = Template.bind({});
 SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnErOverstyrer.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   arbeidOgInntekt: {
     arbeidsforhold: [],
     inntektsmeldinger: [],
@@ -325,6 +346,8 @@ SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldinger
 
 export const SkalIkkeKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnIkkeErOverstyrer = Template.bind({});
 SkalIkkeKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnIkkeErOverstyrer.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   arbeidOgInntekt: {
     arbeidsforhold: [],
     inntektsmeldinger: [],
@@ -335,6 +358,8 @@ SkalIkkeKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldi
 
 export const ArbeidsforholdErManueltLagtTilOgLagret = Template.bind({});
 ArbeidsforholdErManueltLagtTilOgLagret.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   arbeidsgiverOpplysningerPerId: {
     [MANUELT_ORG_NR]: {
       erPrivatPerson: false,
@@ -365,6 +390,8 @@ ArbeidsforholdErManueltLagtTilOgLagret.args = {
 
 export const ArbeidsforholdErManueltLagtTilOgBehandlingErAvsluttet = Template.bind({});
 ArbeidsforholdErManueltLagtTilOgBehandlingErAvsluttet.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   arbeidsgiverOpplysningerPerId: {
     [MANUELT_ORG_NR]: {
       erPrivatPerson: false,
@@ -396,6 +423,8 @@ ArbeidsforholdErManueltLagtTilOgBehandlingErAvsluttet.args = {
 
 export const ArbeidsforholdErOK = Template.bind({});
 ArbeidsforholdErOK.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   arbeidsgiverOpplysningerPerId: {
     910909088: {
       erPrivatPerson: false,
@@ -477,6 +506,8 @@ ArbeidsforholdErOK.args = {
 
 export const FlereArbeidsforholdOgInntekstemeldinger = Template.bind({});
 FlereArbeidsforholdOgInntekstemeldinger.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   erOverstyrer: true,
   aksjonspunkter: [{
     definisjon: {

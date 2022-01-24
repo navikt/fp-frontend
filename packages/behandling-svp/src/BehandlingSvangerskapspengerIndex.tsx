@@ -104,7 +104,12 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<StandardBehandlingPro
           hentFaktaPaneler={(props) => (
             <>
               <SakenFaktaInitPanel {...props} />
-              <ArbeidOgInntektFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+              <ArbeidOgInntektFaktaInitPanel
+                {...props}
+                rettigheter={rettigheter}
+                arbeidsgiverOpplysningerPerId={arbeidsgivere}
+                settBehandlingPåVentCallback={behandlingEventHandler.settBehandlingPaVent}
+              />
               <ArbeidsforholdFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <YtelserFaktaInitPanel {...props} />
               <VergeFaktaInitPanel {...props} />

@@ -27,11 +27,16 @@ type EndepunktInitData = {
 interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   rettigheter: AksessRettigheter;
+  settBehandlingPåVentCallback: (params: {
+    frist: string;
+    ventearsak: string;
+  }) => Promise<any>
 }
 
 const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
   arbeidsgiverOpplysningerPerId,
   rettigheter,
+  settBehandlingPåVentCallback,
   ...props
 }) => {
   const { startRequest: registrerArbeidsforhold } = restApiSvpHooks.useRestApiRunner(SvpBehandlingApiKeys.ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD);
@@ -51,6 +56,7 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
           erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
           registrerArbeidsforhold={registrerArbeidsforhold}
           lagreVurdering={lagreVurdering}
+          settBehandlingPåVentCallback={settBehandlingPåVentCallback}
           {...data}
         />
       )}
