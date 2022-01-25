@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Element, Undertekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 
 import telefonImageUrl from '@fpsak-frontend/assets/images/phone-3.svg';
@@ -11,6 +11,8 @@ import {
 } from '@fpsak-frontend/shared-components';
 import { hentDokumentLenke } from '@fpsak-frontend/konstanter';
 import dokumentSvg from '@fpsak-frontend/assets/images/dokument_filled.svg';
+
+import styles from './inntektsmeldingOpplysningerPanel.less';
 
 interface OwnProps {
   saksnummer: string;
@@ -33,7 +35,7 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
               <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Stillingsprosent" /></Element>
             </FlexColumn>
             <FlexColumn>
-              {`${stillingsprosent}%`}
+              <Normaltekst>{`${stillingsprosent}%`}</Normaltekst>
             </FlexColumn>
           </FlexRow>
           <VerticalSpacer eightPx />
@@ -44,7 +46,7 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
           <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" /></Element>
         </FlexColumn>
         <FlexColumn>
-          {formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}
+          <Normaltekst>{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</Normaltekst>
         </FlexColumn>
       </FlexRow>
       <VerticalSpacer eightPx />
@@ -53,7 +55,9 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
           <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" /></Element>
         </FlexColumn>
         <FlexColumn>
-          <FormattedMessage id={inntektsmelding.refusjonPrMnd ? 'InntektsmeldingOpplysningerPanel.Ja' : 'InntektsmeldingOpplysningerPanel.Nei'} />
+          <Normaltekst>
+            <FormattedMessage id={inntektsmelding.refusjonPrMnd ? 'InntektsmeldingOpplysningerPanel.Ja' : 'InntektsmeldingOpplysningerPanel.Nei'} />
+          </Normaltekst>
         </FlexColumn>
       </FlexRow>
       <VerticalSpacer eightPx />
@@ -64,7 +68,7 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
               <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" /></Element>
             </FlexColumn>
             <FlexColumn>
-              {formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)}
+              <Normaltekst>{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)}</Normaltekst>
             </FlexColumn>
           </FlexRow>
           <VerticalSpacer eightPx />
@@ -72,7 +76,9 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
       )}
       <Lenke href={hentDokumentLenke(saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId)} target="_blank">
         <span>
-          <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
+          <Normaltekst className={styles.inline}>
+            <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
+          </Normaltekst>
         </span>
         <Image src={dokumentSvg} />
       </Lenke>

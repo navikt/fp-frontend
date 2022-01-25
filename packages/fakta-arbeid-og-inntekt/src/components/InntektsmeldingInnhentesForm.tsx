@@ -169,7 +169,9 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
             href=""
           >
             <span>
-              <FormattedMessage id={visAlleMåneder ? 'InntektsmeldingInnhentesForm.FaerreManeder' : 'InntektsmeldingInnhentesForm.TidligereManeder'} />
+              <Normaltekst className={styles.inline}>
+                <FormattedMessage id={visAlleMåneder ? 'InntektsmeldingInnhentesForm.FaerreManeder' : 'InntektsmeldingInnhentesForm.TidligereManeder'} />
+              </Normaltekst>
             </span>
             <Image src={visAlleMåneder ? pilOppIkonUrl : pilNedIkonUrl} />
           </Lenke>
