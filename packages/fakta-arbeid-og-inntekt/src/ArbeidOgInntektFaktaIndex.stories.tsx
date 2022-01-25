@@ -219,7 +219,7 @@ InnhentInntektsmeldingDerBehandlingErAvsluttet.args = {
       tom: '9999-12-31',
       årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
       saksbehandlersVurdering: {
-        kode: ArbeidsforholdKomplettVurderingType.VENT_PÅ_INNTEKTSMELDING,
+        kode: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING,
         kodeverk: '',
       },
       begrunnelse: 'Vil innehente inntektsmelding fordi...',
@@ -321,7 +321,7 @@ AvklarManglendeOpplysningerDerBehandlingErAvsluttet.args = {
       dokumentId: '2',
       årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
       saksbehandlersVurdering: {
-        kode: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+        kode: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
         kodeverk: '',
       },
       begrunnelse: 'Jeg opprettet arbeidsforhold fordi...',

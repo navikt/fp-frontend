@@ -184,8 +184,8 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
 
   const harUløsteAksjonspunkt = harUløsteManglendeInntektsmeldinger || harUløsteManglandeOpplysninger;
   const kanSettePåVent = tabellData
-    .some((d) => d.arbeidsforhold?.saksbehandlersVurdering?.kode === ArbeidsforholdKomplettVurderingType.VENT_PÅ_INNTEKTSMELDING
-      || d.inntektsmelding?.saksbehandlersVurdering?.kode === ArbeidsforholdKomplettVurderingType.VENT_PÅ_ARBEIDSFORHOLD);
+    .some((d) => d.arbeidsforhold?.saksbehandlersVurdering?.kode === ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING
+      || d.inntektsmelding?.saksbehandlersVurdering?.kode === ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD);
 
   const [antallÅpnedeRader, oppdaterAntallÅpneRader] = useState(0);
   const oppdaterÅpneRader = (skalLukke: boolean) => {

@@ -196,7 +196,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
                 direction="vertical"
               >
                 <RadioOption
-                  value={ArbeidsforholdKomplettVurderingType.VENT_PÅ_INNTEKTSMELDING}
+                  value={ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING}
                   label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.TarKontakt' })}
                 />
                 <RadioOption

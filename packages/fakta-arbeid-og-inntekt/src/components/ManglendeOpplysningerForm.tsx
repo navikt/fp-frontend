@@ -90,7 +90,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
     const oppdater = (() => {
       oppdaterTabell((oldData) => oldData.map((data) => {
         if (data.inntektsmelding?.arbeidsgiverIdent === inntektsmelding.arbeidsgiverIdent) {
-          const af = formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER ? {
+          const af = formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING ? {
             arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
             internArbeidsforholdId: inntektsmelding.internArbeidsforholdId,
             fom: formValues.fom,
@@ -112,12 +112,12 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
       avbrytEditering();
     });
 
-    if (formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER) {
+    if (formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING) {
       registrerArbeidsforhold({
         behandlingUuid,
         arbeidsgiverNavn: arbeidsforholdNavn,
         arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
-        vurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+        vurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
         begrunnelse: formValues.begrunnelse,
         fom: formValues.fom,
         tom: formValues.tom,
@@ -161,19 +161,19 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
           direction="vertical"
         >
           <RadioOption
-            value={ArbeidsforholdKomplettVurderingType.VENT_PÅ_ARBEIDSFORHOLD}
+            value={ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD}
             label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.TarKontakt' })}
           />
           <RadioOption
-            value={ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING}
+            value={ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING}
             label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.GåVidere' })}
           />
           <RadioOption
-            value={ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER}
+            value={ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING}
             label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.OpprettArbeidsforhold' })}
           />
         </RadioGroupField>
-        {saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER && (
+        {saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING && (
           <>
             <FlexContainer>
               <FlexRow>
