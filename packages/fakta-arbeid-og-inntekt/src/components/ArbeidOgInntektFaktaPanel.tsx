@@ -7,6 +7,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import Lenke from 'nav-frontend-lenker';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
+import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import { dateFormat } from '@fpsak-frontend/utils';
 import {
@@ -21,7 +22,9 @@ import {
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+
 import NyttArbeidsforholdForm, { MANUELT_ORG_NR } from './NyttArbeidsforholdForm';
 import ArbeidsforholdRad from './ArbeidsforholdRad';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
@@ -39,13 +42,7 @@ const finnApTekstKoder = (
   aksjonspunkter: Aksjonspunkt[],
   harUløsteManglendeInntektsmeldinger: boolean,
   harUløsteManglandeOpplysninger: boolean,
-  harIngenArbeidsforholdEllerInntektsmeldinger: boolean,
-  erOverstyrer: boolean,
 ): string[] => {
-  if (harIngenArbeidsforholdEllerInntektsmeldinger && erOverstyrer) {
-    return ['ArbeidOgInntektFaktaPanel.IngenArbeidsforhold'];
-  }
-
   const erApÅpent = aksjonspunkter.some((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET);
 
   const koder = [];
@@ -179,8 +176,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   const harUløsteManglendeInntektsmeldinger = tabellData.some((d) => d.arbeidsforhold?.årsak && !d.arbeidsforhold?.saksbehandlersVurdering);
   const harUløsteManglandeOpplysninger = tabellData.some((d) => d.inntektsmelding?.årsak && !d.inntektsmelding?.saksbehandlersVurdering);
 
-  const aksjonspunktTekstKoder = finnApTekstKoder(
-    aksjonspunkter, harUløsteManglendeInntektsmeldinger, harUløsteManglandeOpplysninger, harIngenArbeidsforholdEllerInntektsmeldinger, erOverstyrer);
+  const aksjonspunktTekstKoder = finnApTekstKoder(aksjonspunkter, harUløsteManglendeInntektsmeldinger, harUløsteManglandeOpplysninger);
 
   const harUløsteAksjonspunkt = harUløsteManglendeInntektsmeldinger || harUløsteManglandeOpplysninger;
   const kanSettePåVent = tabellData
@@ -242,6 +238,9 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
             <FormattedMessage id={tekstKode} />
           ))}
         </AksjonspunktHelpTextHTML>
+      )}
+      {harIngenArbeidsforholdEllerInntektsmeldinger && erOverstyrer && (
+        <AlertStripeInfo><FormattedMessage id="ArbeidOgInntektFaktaPanel.IngenArbeidsforhold" /></AlertStripeInfo>
       )}
       <VerticalSpacer sixteenPx />
       {!harManueltLagtTilArbeidsforhold && erOverstyrt && !skalLeggeTilArbeidsforhold && (
@@ -308,8 +307,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           <SettPaVentModalIndex
             submitCallback={settPaVent}
             cancelEvent={() => settVisSettPåVentModal(false)}
-            frist={behandling.fristBehandlingPåVent}
-            ventearsak={behandling.venteArsakKode}
+            ventearsak={venteArsakType.VENT_OPDT_INNTEKTSMELDING}
             hasManualPaVent
             ventearsaker={alleKodeverk[KodeverkType.VENT_AARSAK]}
             erTilbakekreving={false}

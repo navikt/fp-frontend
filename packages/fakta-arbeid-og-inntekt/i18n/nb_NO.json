@@ -6,7 +6,7 @@
   "ArbeidOgInntektFaktaPanel.InntektsmeldingMottatt": "Inntektsmelding mottatt",
   "ArbeidOgInntektFaktaPanel.InnhentManglendeInntektsmelding": "Innhent manglende inntektsmeldinger",
   "ArbeidOgInntektFaktaPanel.AvklarManglendeOpplysninger": "Avklar manglende opplysninger",
-  "ArbeidOgInntektFaktaPanel.IngenArbeidsforhold": "Ingen arbeidsforhold eller inntektsmeldinger registrert på bruker. Vurder om det er dokumentert andre arbeidsforhold",
+  "ArbeidOgInntektFaktaPanel.IngenArbeidsforhold": "Ingen arbeidsforhold eller inntektsmeldinger registrert på bruker. Vurder om det er dokumentert andre arbeidsforhold. Arbeidsforholdet må kun opprettes dersom...",
   "ArbeidOgInntektFaktaPanel.Skjaringstidspunkt": "Skjæringstidspunkt for opptjening: {skjæringspunktDato}",
   "ArbeidOgInntektFaktaPanel.SettPaVent": "Sett på vent",
   "ArbeidOgInntektFaktaPanel.Bekreft": "Bekreft og fortsett",
@@ -67,7 +67,6 @@
   "ManglendeOpplysningerForm.Hjelpetekst": "Bla bla bla",
 
   "LeggTilArbeidsforholdForm.LeggTilArbeidsforhold": "Legg til arbeidsforhold",
-  "LeggTilArbeidsforholdForm.Info": "Arbeidsforholdet må kun opprettes dersom...",
   "LeggTilArbeidsforholdForm.Arbeidsgiver": "Arbeidsgiver",
   "LeggTilArbeidsforholdForm.PeriodeFra": "Periode fra",
   "LeggTilArbeidsforholdForm.PeriodeTil": "Periode til",
@@ -76,6 +75,8 @@
   "LeggTilArbeidsforholdForm.Lagre": "Lagre",
   "LeggTilArbeidsforholdForm.Avbryt": "Avbryt",
   "LeggTilArbeidsforholdForm.Slett": "Slett",
+
+  "NyttArbeidsforholdForm.VilDuSlette": "Vil du slette arbeidsforholdet?",
 
   "ExpandableTableRow.Apne": "Åpne rad"
 }

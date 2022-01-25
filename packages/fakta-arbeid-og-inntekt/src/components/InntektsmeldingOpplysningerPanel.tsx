@@ -57,13 +57,6 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
         </FlexColumn>
       </FlexRow>
       <VerticalSpacer eightPx />
-      <Lenke href={hentDokumentLenke(saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId)} target="_blank">
-        <span>
-          <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
-        </span>
-        <Image src={dokumentSvg} />
-      </Lenke>
-      <VerticalSpacer eightPx />
       {inntektsmelding.refusjonPrMnd && (
         <>
           <FlexRow>
@@ -77,6 +70,12 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer eightPx />
         </>
       )}
+      <Lenke href={hentDokumentLenke(saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId)} target="_blank">
+        <span>
+          <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
+        </span>
+        <Image src={dokumentSvg} />
+      </Lenke>
       <VerticalSpacer sixteenPx />
       <FlexRow>
         <FlexColumn>

@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
-import { Undertekst } from 'nav-frontend-typografi';
+import { Element } from 'nav-frontend-typografi';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
@@ -147,7 +147,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Undertekst><FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" /></Undertekst>
+              <Element><FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" /></Element>
             </FlexColumn>
             <FlexColumn>
               <Hjelpetekst><FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" /></Hjelpetekst>
@@ -180,7 +180,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <DatepickerField
                     name="fom"
-                    label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeFra" />}
+                    label={<Element><FormattedMessage id="ManglendeOpplysningerForm.PeriodeFra" /></Element>}
                     validate={[required, hasValidDate]}
                     readOnly={isReadOnly}
                   />
@@ -188,7 +188,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <DatepickerField
                     name="tom"
-                    label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeTil" />}
+                    label={<Element><FormattedMessage id="ManglendeOpplysningerForm.PeriodeTil" /></Element>}
                     validate={[required, hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
                     readOnly={isReadOnly}
                   />
@@ -196,7 +196,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <InputField
                     name="stillingsprosent"
-                    label={intl.formatMessage({ id: 'ManglendeOpplysningerForm.Stillingsprosent' })}
+                    label={<Element><FormattedMessage id="ManglendeOpplysningerForm.Stillingsprosent" /></Element>}
                     parse={(value: string) => {
                       const parsedValue = parseInt(value, 10);
                       return Number.isNaN(parsedValue) ? value : parsedValue;
@@ -212,7 +212,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
           </>
         )}
         <TextAreaField
-          label={<FormattedMessage id="ManglendeOpplysningerForm.Begrunn" />}
+          label={<Element><FormattedMessage id="ManglendeOpplysningerForm.Begrunn" /></Element>}
           name="begrunnelse"
           validate={[required, minLength3, maxLength1500, hasValidText]}
           maxLength={1500}

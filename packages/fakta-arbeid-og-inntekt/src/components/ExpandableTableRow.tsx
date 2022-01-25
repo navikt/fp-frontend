@@ -27,7 +27,12 @@ const ExpandableTableRow: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
   return (
     <>
-      <TableRow onMouseDown={() => toggleContent(!showContent)} hasNoBottomBorder={showContent} isApLeftBorder={isApLeftBorder}>
+      <TableRow
+        onMouseDown={() => toggleContent(!showContent)}
+        onKeyDown={() => toggleContent(!showContent)}
+        hasNoBottomBorder={showContent}
+        isApLeftBorder={isApLeftBorder}
+      >
         {children}
         <TableColumn>
           <Image alt={intl.formatMessage({ id: 'ExpandableTableRow.Apne' })} src={showContent ? pilOppIkonUrl : pilNedIkonUrl} />

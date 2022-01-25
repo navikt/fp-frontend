@@ -1,11 +1,10 @@
 import React, {
-  FunctionComponent, useCallback, useMemo,
+  FunctionComponent, useCallback, useMemo, useState,
 } from 'react';
-import { useIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Element, Undertittel } from 'nav-frontend-typografi';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
-import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import { Column, Row } from 'nav-frontend-grid';
 
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
@@ -18,7 +17,7 @@ import {
   TextAreaField, DatepickerField, InputField, Form,
 } from '@fpsak-frontend/form-hooks';
 import {
-  VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image, FloatRight,
+  VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image, FloatRight, OkAvbrytModal,
 } from '@fpsak-frontend/shared-components';
 
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
@@ -64,6 +63,7 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   oppdaterTabell,
 }) => {
   const intl = useIntl();
+  const [skalViseSletteDialog, visSletteDialog] = useState(false);
 
   const defaultValues = useMemo<FormValues>(() => (arbeidsforhold ? {
     fom: arbeidsforhold.fom,
@@ -141,8 +141,6 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
         <>
           <Undertittel><FormattedMessage id="LeggTilArbeidsforholdForm.LeggTilArbeidsforhold" /></Undertittel>
           <VerticalSpacer sixteenPx />
-          <AlertStripeInfo><FormattedMessage id="LeggTilArbeidsforholdForm.Info" /></AlertStripeInfo>
-          <VerticalSpacer thirtyTwoPx />
         </>
       )}
       <Form formMethods={formMethods} onSubmit={(values) => lagre(values)}>
@@ -151,32 +149,36 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
             <FlexColumn>
               <InputField
                 name="arbeidsgiverNavn"
-                label={intl.formatMessage({ id: 'LeggTilArbeidsforholdForm.Arbeidsgiver' })}
+                label={<Element><FormattedMessage id="LeggTilArbeidsforholdForm.Arbeidsgiver" /></Element>}
                 validate={[required]}
                 bredde="XXL"
                 readOnly={isReadOnly || !erOverstyrt}
               />
             </FlexColumn>
-            <FlexColumn>
-              <DatepickerField
-                name="fom"
-                label={<FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeFra" />}
-                validate={[required, hasValidDate]}
-                readOnly={isReadOnly || !erOverstyrt}
-              />
-            </FlexColumn>
-            <FlexColumn>
-              <DatepickerField
-                name="tom"
-                label={<FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeTil" />}
-                validate={[required, hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
-                readOnly={isReadOnly || !erOverstyrt}
-              />
-            </FlexColumn>
+            {erOverstyrt && (
+              <>
+                <FlexColumn>
+                  <DatepickerField
+                    name="fom"
+                    label={<Element><FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeFra" /></Element>}
+                    validate={[required, hasValidDate]}
+                    readOnly={isReadOnly || !erOverstyrt}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <DatepickerField
+                    name="tom"
+                    label={<Element><FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeTil" /></Element>}
+                    validate={[required, hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
+                    readOnly={isReadOnly || !erOverstyrt}
+                  />
+                </FlexColumn>
+              </>
+            )}
             <FlexColumn>
               <InputField
                 name="stillingsprosent"
-                label={intl.formatMessage({ id: 'LeggTilArbeidsforholdForm.Stillingsprosent' })}
+                label={<Element><FormattedMessage id="LeggTilArbeidsforholdForm.Stillingsprosent" /></Element>}
                 parse={(value: string) => {
                   const parsedValue = parseInt(value, 10);
                   return Number.isNaN(parsedValue) ? value : parsedValue;
@@ -190,7 +192,7 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
         </FlexContainer>
         <VerticalSpacer sixteenPx />
         <TextAreaField
-          label={<FormattedMessage id="LeggTilArbeidsforholdForm.Begrunn" />}
+          label={<Element><FormattedMessage id="LeggTilArbeidsforholdForm.Begrunn" /></Element>}
           name="begrunnelse"
           validate={[required, minLength3, maxLength1500, hasValidText]}
           maxLength={1500}
@@ -233,7 +235,7 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                     mini
                     spinner={false}
                     disabled={formMethods.formState.isSubmitting}
-                    onClick={slett}
+                    onClick={() => visSletteDialog(true)}
                     htmlType="button"
                   >
                     <Image src={binIcon} className={styles.buttonImage} />
@@ -245,6 +247,14 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
           </Row>
         )}
       </Form>
+      {skalViseSletteDialog && (
+        <OkAvbrytModal
+          text={intl.formatMessage({ id: 'NyttArbeidsforholdForm.VilDuSlette' })}
+          submit={slett}
+          cancel={() => visSletteDialog(false)}
+          showModal
+        />
+      )}
     </>
   );
 };

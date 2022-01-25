@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
 import Lenke from 'nav-frontend-lenker';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
-import { Element, Undertekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 
 import pilOppIkonUrl from '@fpsak-frontend/assets/images/pil_opp.svg';
@@ -138,7 +138,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
           <Element><FormattedMessage id="InntektsmeldingInnhentesForm.Stillingsprosent" /></Element>
         </FlexColumn>
         <FlexColumn>
-          {`${arbeidsforhold.stillingsprosent}%`}
+          <Normaltekst>{`${arbeidsforhold.stillingsprosent}%`}</Normaltekst>
         </FlexColumn>
       </FlexRow>
       <VerticalSpacer thirtyTwoPx />
@@ -149,10 +149,14 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
             {sorterteInntektsposter.filter((_inntekt, index) => (visAlleMåneder ? true : index < 3)).map((inntekt) => (
               <FlexRow key={inntekt.fom}>
                 <FlexColumn className={styles.kolonneBredde}>
-                  {`${intl.formatMessage({ id: `InntektsmeldingInnhentesForm.${dayjs(inntekt.fom).month() + 1}` })} ${dayjs(inntekt.fom).year()}`}
+                  <Normaltekst>
+                    {`${intl.formatMessage({ id: `InntektsmeldingInnhentesForm.${dayjs(inntekt.fom).month() + 1}` })} ${dayjs(inntekt.fom).year()}`}
+                  </Normaltekst>
                 </FlexColumn>
                 <FlexColumn>
-                  {formatCurrencyNoKr(inntekt.beløp)}
+                  <Normaltekst>
+                    {formatCurrencyNoKr(inntekt.beløp)}
+                  </Normaltekst>
                 </FlexColumn>
               </FlexRow>
             ))}
@@ -181,7 +185,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
-              <Undertekst><FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" /></Undertekst>
+              <Element><FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" /></Element>
             </FlexColumn>
             <FlexColumn>
               <Hjelpetekst><FormattedMessage id="InntektsmeldingInnhentesForm.Hjelpetekst" /></Hjelpetekst>
@@ -204,17 +208,16 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
                   label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.GåVidere' })}
                 />
               </RadioGroupField>
-              <FlexColumn />
-              <TextAreaField
-                label={<FormattedMessage id="InntektsmeldingInnhentesForm.Begrunn" />}
-                name="begrunnelse"
-                validate={[required, minLength3, maxLength1500, hasValidText]}
-                maxLength={1500}
-                readOnly={isReadOnly}
-              />
             </FlexColumn>
           </FlexRow>
         </FlexContainer>
+        <TextAreaField
+          label={<Element><FormattedMessage id="InntektsmeldingInnhentesForm.Begrunn" /></Element>}
+          name="begrunnelse"
+          validate={[required, minLength3, maxLength1500, hasValidText]}
+          maxLength={1500}
+          readOnly={isReadOnly}
+        />
         <VerticalSpacer twentyPx />
         {!isReadOnly && (
           <FlexContainer>
