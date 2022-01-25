@@ -21,7 +21,7 @@ import {
   AoIArbeidsforhold, Inntektspost, Kodeverk, ManglendeInntektsmeldingVurdering,
 } from '@fpsak-frontend/types';
 import {
-  VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image,
+  VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image, FloatRight,
 } from '@fpsak-frontend/shared-components';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 
@@ -148,15 +148,22 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
           <FlexContainer>
             {sorterteInntektsposter.filter((_inntekt, index) => (visAlleMåneder ? true : index < 3)).map((inntekt) => (
               <FlexRow key={inntekt.fom}>
-                <FlexColumn className={styles.kolonneBredde}>
+                <FlexColumn className={styles.maanedBredde}>
                   <Normaltekst>
-                    {`${intl.formatMessage({ id: `InntektsmeldingInnhentesForm.${dayjs(inntekt.fom).month() + 1}` })} ${dayjs(inntekt.fom).year()}`}
+                    {intl.formatMessage({ id: `InntektsmeldingInnhentesForm.${dayjs(inntekt.fom).month() + 1}` })}
                   </Normaltekst>
                 </FlexColumn>
-                <FlexColumn>
+                <FlexColumn className={styles.aarBredde}>
                   <Normaltekst>
-                    {formatCurrencyNoKr(inntekt.beløp)}
+                    {dayjs(inntekt.fom).year()}
                   </Normaltekst>
+                </FlexColumn>
+                <FlexColumn className={styles.belopBredde}>
+                  <FloatRight>
+                    <Normaltekst>
+                      {formatCurrencyNoKr(inntekt.beløp)}
+                    </Normaltekst>
+                  </FloatRight>
                 </FlexColumn>
               </FlexRow>
             ))}
