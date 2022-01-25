@@ -173,12 +173,13 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
 
   const harIngenArbeidsforholdEllerInntektsmeldinger = arbeidsforhold.length === 0 && inntektsmeldinger.length === 0;
 
-  const harUløsteManglendeInntektsmeldinger = tabellData.some((d) => d.arbeidsforhold?.årsak && !d.arbeidsforhold?.saksbehandlersVurdering);
-  const harUløsteManglandeOpplysninger = tabellData.some((d) => d.inntektsmelding?.årsak && !d.inntektsmelding?.saksbehandlersVurdering);
-
+  const harUløsteManglendeInntektsmeldinger = tabellData.some((d) => d.arbeidsforhold?.årsak);
+  const harUløsteManglandeOpplysninger = tabellData.some((d) => d.inntektsmelding?.årsak);
   const aksjonspunktTekstKoder = finnApTekstKoder(aksjonspunkter, harUløsteManglendeInntektsmeldinger, harUløsteManglandeOpplysninger);
 
-  const harUløsteAksjonspunkt = harUløsteManglendeInntektsmeldinger || harUløsteManglandeOpplysninger;
+  const harUbehandledeAksjonspunkt = tabellData.some((d) => (d.arbeidsforhold?.årsak && !d.arbeidsforhold?.saksbehandlersVurdering)
+    || (d.inntektsmelding?.årsak && !d.inntektsmelding?.saksbehandlersVurdering));
+
   const kanSettePåVent = tabellData
     .some((d) => d.arbeidsforhold?.saksbehandlersVurdering?.kode === ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING
       || d.inntektsmelding?.saksbehandlersVurdering?.kode === ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD);
@@ -190,6 +191,14 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   const [erOverstyrt, toggleOverstyring] = useState(false);
   const [skalLeggeTilArbeidsforhold, toggleLeggTilArbeidsforhold] = useState(false);
   const harManueltLagtTilArbeidsforhold = tabellData.some((data) => data.arbeidsforhold?.arbeidsgiverIdent === MANUELT_ORG_NR);
+
+  useEffect(() => {
+    if (erOverstyrt) {
+      const indexForManueltLagtTil = tabellData
+        .findIndex((t) => t.arbeidsforhold?.saksbehandlersVurdering?.kode === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER);
+      setAutoÅpenRadIndex(indexForManueltLagtTil);
+    }
+  }, [erOverstyrt]);
 
   const lagre = useCallback(() => {
     setsKnappTrykket(true);
@@ -295,7 +304,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
         </>
       </Table>
       <VerticalSpacer sixteenPx />
-      {!isReadOnly && isDirty && !harUløsteAksjonspunkt && kanSettePåVent && antallÅpnedeRader === 0 && (
+      {!isReadOnly && isDirty && !harUbehandledeAksjonspunkt && kanSettePåVent && antallÅpnedeRader === 0 && (
         <>
           <Hovedknapp
             mini
@@ -315,7 +324,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           />
         </>
       )}
-      {!isReadOnly && isDirty && !harUløsteAksjonspunkt && !kanSettePåVent && antallÅpnedeRader === 0 && (
+      {!isReadOnly && isDirty && !harUbehandledeAksjonspunkt && !kanSettePåVent && antallÅpnedeRader === 0 && (
         <Hovedknapp
           mini
           disabled={erKnappTrykket}

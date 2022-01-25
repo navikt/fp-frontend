@@ -122,7 +122,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
         fom: formValues.fom,
         tom: formValues.tom,
         stillingsprosent: formValues.stillingsprosent,
-      }).then(oppdater);
+      }).then(oppdater).finally(() => formMethods.reset(formValues));
     } else {
       lagreVurdering({
         behandlingUuid,
@@ -130,7 +130,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
         begrunnelse: formValues.begrunnelse,
         arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
         internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
-      }).then(oppdater);
+      }).then(oppdater).finally(() => formMethods.reset(formValues));
     }
   }, [inntektsmelding, oppdaterTabell]);
 
