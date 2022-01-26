@@ -71,6 +71,7 @@ export const AnnenForelderHarRettForm: FunctionComponent<PureOwnProps & MappedOw
           <RadioOption value label={{ id: 'UttakInfoPanel.Ja' }} />
           <RadioOption value={false} label={{ id: 'UttakInfoPanel.Nei' }} />
         </RadioGroupField>
+        <VerticalSpacer fourPx />
         {(ytelsefordeling?.annenforelderHarRettDto?.avklarAnnenforelderMottarUføretrygd
           || ytelsefordeling?.annenforelderHarRettDto?.annenforelderMottarUføretrygd !== undefined)
           && annenForelderHarRett === false && (
