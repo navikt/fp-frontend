@@ -47,7 +47,6 @@ describe('<VisittkortBarnInfoFodselPanel>', () => {
     );
 
     expect(await screen.findByText(/Født 21.01.2020/)).toBeInTheDocument();
-    expect(screen.getByText(/(1 år)/)).toBeInTheDocument();
   });
 
   it('skal etikett for dødfødt barn', async () => {
