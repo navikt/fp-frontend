@@ -1,2 +1,2 @@
 export { default } from './src/SettPaVentModalIndex';
-export { FormValues } from './src/components/SettPaVentModal';
+export type { FormValues } from './src/components/SettPaVentModal';

@@ -97,7 +97,7 @@ const FagsakIndex: FunctionComponent = () => {
 
   const behandling = alleBehandlinger.find((b) => b.uuid === behandlingUuid);
 
-  const { data: behandlingRettigheter } = restApiHooks.useRestApi(FpsakApiKeys.BEHANDLING_RETTIGHETER, { uuid: behandling?.uuid }, {
+  const { data: behandlingRettigheter } = restApiHooks.useRestApi(FpsakApiKeys.BEHANDLING_RETTIGHETER, undefined, {
     updateTriggers: [skalIkkeHenteData, behandlingUuid, behandlingVersjon],
     suspendRequest: skalIkkeHenteData,
     keepData: true,
