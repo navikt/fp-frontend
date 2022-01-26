@@ -18,8 +18,8 @@ const HistorikkMalType4: FunctionComponent<HistorikkMal & WrappedComponentProps>
       }
       >
         <Element className="snakkeboble-panel__tekst">{findHendelseText(del.hendelse, getKodeverknavn)}</Element>
-        {del.aarsak && <Normaltekst>{del.aarsak}</Normaltekst>}
-        {del.begrunnelse && <BubbleText bodyText={del.begrunnelse} />}
+        {del.årsaktekst && <Normaltekst>{del.årsaktekst}</Normaltekst>}
+        {del.begrunnelsetekst && <BubbleText bodyText={del.begrunnelsetekst} />}
         {del.begrunnelseFritekst && <BubbleText bodyText={decodeHtmlEntity(del.begrunnelseFritekst)} />}
       </div>
     ))}

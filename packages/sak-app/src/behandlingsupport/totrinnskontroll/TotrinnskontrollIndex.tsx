@@ -108,6 +108,7 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
     forhandsvisMelding(false, {
       behandlingUuid: uuid,
       ytelseType: fagsak.fagsakYtelseType,
+      fagsakYtelseType: fagsak.fagsakYtelseType,
       gjelderVedtak: true,
     });
   }, []);

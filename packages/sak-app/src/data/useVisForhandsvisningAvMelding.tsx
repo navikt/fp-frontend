@@ -3,23 +3,24 @@ import { forhandsvisDokument } from '@fpsak-frontend/utils';
 
 import { FpsakApiKeys, restApiHooks } from './fpsakApi';
 
-type ForhandsvisDataFormidling = {
-  ytelseType: string;
-  arsakskode?: string | null;
-  mottaker?: string;
-  dokumentMal?: string
-}
-type ForhandsvisDataTilbakekreving = {
-  brevmalkode: string;
-}
-
 type ForhandsvisData = {
   behandlingUuid: string;
   fritekst?: string;
   gjelderVedtak?: boolean;
-} & (ForhandsvisDataFormidling | ForhandsvisDataTilbakekreving)
+}
 
-export type ForhandsvisFunksjon = (erHenleggelse: boolean, data: ForhandsvisData) => void;
+type ForhandsvisDataFormidling = ForhandsvisData & {
+  ytelseType: string;
+  fagsakYtelseType: string;
+  arsakskode?: string | null;
+  mottaker?: string;
+  dokumentMal?: string
+}
+type ForhandsvisDataTilbakekreving = ForhandsvisData & {
+  brevmalkode: string;
+}
+
+export type ForhandsvisFunksjon = (erHenleggelse: boolean, data: ForhandsvisDataFormidling | ForhandsvisDataTilbakekreving) => void;
 
 const useVisForhandsvisningAvMelding = (behandlingType?: string): ForhandsvisFunksjon => {
   const { startRequest: forhandsvisTilbakekrevingHenleggelse } = restApiHooks.useRestApiRunner(FpsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE);
@@ -28,13 +29,13 @@ const useVisForhandsvisningAvMelding = (behandlingType?: string): ForhandsvisFun
 
   const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandlingType || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType;
 
-  return (erHenleggelse: boolean, data: ForhandsvisData): void => {
+  return (erHenleggelse: boolean, data: ForhandsvisDataFormidling | ForhandsvisDataTilbakekreving): void => {
     if (erTilbakekreving && erHenleggelse) {
       forhandsvisTilbakekrevingHenleggelse(data).then((response) => forhandsvisDokument(response));
     } else if (erTilbakekreving) {
       forhandsvisTilbakekreving(data).then((response) => forhandsvisDokument(response));
     } else {
-      forhandsvisMelding(data).then((response) => forhandsvisDokument(response));
+      forhandsvisMelding(data as ForhandsvisDataFormidling).then((response) => forhandsvisDokument(response));
     }
   };
 };

@@ -20,7 +20,7 @@ export type HistorikkInnslagAksjonspunkt = {
 }
 
 export type HistorikkinnslagDel = {
-  begrunnelse?: string;
+  begrunnelsetekst?: string;
   begrunnelseFritekst?: string;
   hendelse?: {
     navn?: string;
@@ -33,7 +33,7 @@ export type HistorikkinnslagDel = {
     tilVerdi?: string;
   };
   skjermlenke?: string;
-  aarsak?: string;
+  årsaktekst?: string;
   tema?: {
     endretFeltNavn: string;
     klNavn: string;

@@ -2,7 +2,7 @@ import { RestApiConfigBuilder, createRequestApi, RestKey } from '@fpsak-frontend
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import { SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 import {
-  Aksjonspunkt, Behandling, KlageVurdering, Vilkar,
+  Aksjonspunkt, Behandling, ForhåndsvisMeldingParams, KlageVurdering, Vilkar,
 } from '@fpsak-frontend/types';
 
 export const KlageBehandlingApiKeys = {
@@ -18,7 +18,7 @@ export const KlageBehandlingApiKeys = {
   BEHANDLING_ON_HOLD: new RestKey<void, { behandlingUuid: string, behandlingVersjon: number, frist: string, ventearsak: string }>('BEHANDLING_ON_HOLD'),
   UPDATE_ON_HOLD: new RestKey<void, SettPaVentParams>('UPDATE_ON_HOLD'),
   SAVE_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_AKSJONSPUNKT'),
-  PREVIEW_MESSAGE: new RestKey<any, any>('PREVIEW_MESSAGE'),
+  PREVIEW_MESSAGE: new RestKey<any, ForhåndsvisMeldingParams>('PREVIEW_MESSAGE'),
 };
 
 const endpoints = new RestApiConfigBuilder()

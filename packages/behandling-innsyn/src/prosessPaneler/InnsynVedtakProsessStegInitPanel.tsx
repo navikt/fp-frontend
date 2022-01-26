@@ -10,7 +10,7 @@ import VedtakInnsynProsessIndex, { InnsynBrevData } from '@fpsak-frontend/proses
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { createIntl, forhandsvisDokument } from '@fpsak-frontend/utils';
 import {
-  Aksjonspunkt, Behandling, Dokument, Fagsak, Innsyn,
+  Aksjonspunkt, Behandling, Dokument, Fagsak, ForhåndsvisMeldingParams, Innsyn,
 } from '@fpsak-frontend/types';
 import {
   IverksetterVedtakStatusModal, ProsessPanelInitProps, useStandardProsessPanelProps, ProsessDefaultInitPanel,
@@ -31,7 +31,7 @@ const getVedtakStatus = (innsyn: Innsyn, aksjonspunkter: Aksjonspunkt[]): string
 };
 
 const hentForhandsvisCallback = (
-  forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<unknown>,
+  forhandsvisMelding: (params?: ForhåndsvisMeldingParams, keepData?: boolean) => Promise<unknown>,
   fagsak: Fagsak,
   behandling: Behandling,
 ) => (data: InnsynBrevData) => {
@@ -39,6 +39,7 @@ const hentForhandsvisCallback = (
     ...data,
     behandlingUuid: behandling.uuid,
     ytelseType: fagsak.fagsakYtelseType,
+    fagsakYtelseType: fagsak.fagsakYtelseType,
   };
   return forhandsvisMelding(brevData).then((response) => forhandsvisDokument(response));
 };

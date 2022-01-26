@@ -19,7 +19,7 @@ const historikkInnslag = [{
   dokumentLinks: [],
   historikkinnslagDeler: [
     {
-      begrunnelse: 'SAKSBEH_START_PA_NYTT',
+      begrunnelsetekst: 'Dette er en tekst',
       hendelse: {
         navn: 'NYE_REGOPPLYSNINGER',
       },

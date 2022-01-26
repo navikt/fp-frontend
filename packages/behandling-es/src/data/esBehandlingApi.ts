@@ -1,8 +1,9 @@
 import { RestApiConfigBuilder, createRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerWrapper, Behandling, BeregningsresultatEs, FamilieHendelse, FamilieHendelseSamling, InntektArbeidYtelse,
-  Medlemskap, Personoversikt, SimuleringResultat, Soknad, TilbakekrevingValg, Verge, Vilkar,
+  Aksjonspunkt, ArbeidsgiverOpplysningerWrapper, Behandling, BeregningsresultatEs, FamilieHendelse,
+  FamilieHendelseSamling, ForhåndsvisMeldingParams, InntektArbeidYtelse, Medlemskap, Personoversikt,
+  SimuleringResultat, Soknad, TilbakekrevingValg, Verge, Vilkar,
 } from '@fpsak-frontend/types';
 import { NyBehandlendeEnhetParams, SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
@@ -11,7 +12,7 @@ export const EsBehandlingApiKeys = {
   UPDATE_ON_HOLD: new RestKey<void, SettPaVentParams>('UPDATE_ON_HOLD'),
   SAVE_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_AKSJONSPUNKT'),
   SAVE_OVERSTYRT_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_OVERSTYRT_AKSJONSPUNKT'),
-  PREVIEW_MESSAGE: new RestKey<any, any>('PREVIEW_MESSAGE'),
+  PREVIEW_MESSAGE: new RestKey<any, ForhåndsvisMeldingParams>('PREVIEW_MESSAGE'),
   PREVIEW_TILBAKEKREVING_MESSAGE: new RestKey<Behandling, any>('PREVIEW_TILBAKEKREVING_MESSAGE'),
   AKSJONSPUNKTER: new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER'),
   VILKAR: new RestKey<Vilkar[], void>('VILKAR'),

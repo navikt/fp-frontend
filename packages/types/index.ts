@@ -99,6 +99,7 @@ export type { default as StandardFaktaPanelPropsTilbakekreving } from './src/sta
 export type { default as StandardProsessPanelProps } from './src/standardProsessPanelPropsTsType';
 export type { default as StandardProsessPanelPropsTilbakekreving } from './src/standardProsessPanelPropsTilbakekrevingTsType';
 export type { default as Verge } from './src/vergeTsType';
+export type { default as ForhåndsvisMeldingParams } from './src/forhåndsvisMeldingParamsTsType';
 export type { default as VilkarsVurdertePerioderWrapper, VilkarsVurdertPeriode, AktsomhetInfo } from './src/vilkarsVurdertePerioderTsType';
 export type {
   default as FodselOgTilrettelegging, ArbeidsforholdFodselOgTilrettelegging, ArbeidsforholdTilretteleggingDato, Permisjon,

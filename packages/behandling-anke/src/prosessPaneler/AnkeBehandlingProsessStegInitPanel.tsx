@@ -7,7 +7,7 @@ import AnkeProsessIndex, { AnkeProsessBrevData } from '@fpsak-frontend/prosess-a
 import { AnkeVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import {
-  Aksjonspunkt, AnkeVurdering, Behandling, Fagsak,
+  Aksjonspunkt, AnkeVurdering, Behandling, Fagsak, ForhåndsvisMeldingParams,
 } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps, useStandardProsessPanelProps } from '@fpsak-frontend/behandling-felles';
 import { createIntl, forhandsvisDokument } from '@fpsak-frontend/utils';
@@ -18,7 +18,7 @@ import { restApiAnkeHooks, requestAnkeApi, AnkeBehandlingApiKeys } from '../data
 const intl = createIntl(messages);
 
 const lagForhandsvisCallback = (
-  forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<any>,
+  forhandsvisMelding: (params: ForhåndsvisMeldingParams, keepData?: boolean) => Promise<any>,
   fagsak: Fagsak,
   behandling: Behandling,
 ) => (data: AnkeProsessBrevData) => {
@@ -26,6 +26,7 @@ const lagForhandsvisCallback = (
     ...data,
     behandlingUuid: behandling.uuid,
     ytelseType: fagsak.fagsakYtelseType,
+    fagsakYtelseType: fagsak.fagsakYtelseType,
   };
   return forhandsvisMelding(brevData).then((response) => forhandsvisDokument(response));
 };

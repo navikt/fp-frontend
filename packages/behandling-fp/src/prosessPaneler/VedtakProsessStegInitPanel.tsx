@@ -6,11 +6,12 @@ import { isAvslag } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import VedtakProsessIndex from '@fpsak-frontend/prosess-vedtak';
+import VedtakProsessIndex, { ForhandsvisData } from '@fpsak-frontend/prosess-vedtak';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
-  Aksjonspunkt, Behandling, Behandlingsresultat, Beregningsgrunnlag, BeregningsresultatFp, Fagsak, Medlemskap, SimuleringResultat, TilbakekrevingValg, Vilkar,
+  Aksjonspunkt, Behandling, Behandlingsresultat, Beregningsgrunnlag, BeregningsresultatFp, Fagsak,
+  ForhåndsvisMeldingParams, Medlemskap, SimuleringResultat, TilbakekrevingValg, Vilkar,
 } from '@fpsak-frontend/types';
 import {
   ProsessDefaultInitPanel, IverksetterVedtakStatusModal, FatterVedtakStatusModal, ProsessPanelInitProps, useStandardProsessPanelProps,
@@ -63,14 +64,15 @@ const findStatusForVedtak = (
 };
 
 const getForhandsvisCallback = (
-  forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<unknown>,
+  forhandsvisMelding: (params?: ForhåndsvisMeldingParams, keepData?: boolean) => Promise<unknown>,
   fagsak: Fagsak,
   behandling: Behandling,
-) => (data: any) => {
+) => (data: ForhandsvisData) => {
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
     ytelseType: fagsak.fagsakYtelseType,
+    fagsakYtelseType: fagsak.fagsakYtelseType,
   };
 
   return forhandsvisMelding(brevData).then((response) => forhandsvisDokument(response));

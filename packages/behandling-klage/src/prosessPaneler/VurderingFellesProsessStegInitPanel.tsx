@@ -5,7 +5,7 @@ import React, {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import KlagevurderingProsessIndex, { AksjonspunktVerdier, KlageVurderingBrevData } from '@fpsak-frontend/prosess-klagevurdering';
 import {
-  Aksjonspunkt, Behandling, Fagsak, KlageVurdering,
+  Aksjonspunkt, Behandling, Fagsak, ForhåndsvisMeldingParams, KlageVurdering,
 } from '@fpsak-frontend/types';
 import klageVurderingKodeverk from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { useStandardProsessPanelProps, ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
@@ -16,7 +16,7 @@ import { restApiKlageHooks, KlageBehandlingApiKeys, requestKlageApi } from '../d
 import KlageBehandlingModal from '../modaler/KlageBehandlingModal';
 
 const lagForhandsvisCallback = (
-  forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<any>,
+  forhandsvisMelding: (params?: ForhåndsvisMeldingParams, keepData?: boolean) => Promise<any>,
   fagsak: Fagsak,
   behandling: Behandling,
 ) => (
@@ -26,6 +26,7 @@ const lagForhandsvisCallback = (
     ...data,
     behandlingUuid: behandling.uuid,
     ytelseType: fagsak.fagsakYtelseType,
+    fagsakYtelseType: fagsak.fagsakYtelseType,
   };
   return forhandsvisMelding(brevData).then((response) => forhandsvisDokument(response));
 };

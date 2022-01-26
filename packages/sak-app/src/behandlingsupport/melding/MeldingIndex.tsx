@@ -77,6 +77,7 @@ const getPreviewCallback = (
   } : {
     behandlingUuid,
     ytelseType: fagsakYtelseType,
+    fagsakYtelseType,
     fritekst: fritekst || ' ',
     arsakskode: aarsakskode || null,
     mottaker,

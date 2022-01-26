@@ -30,10 +30,10 @@ const buildEndretFeltText = (
   const felt = endredeFelter[0];
   const erEndret = felt.fraVerdi !== null && felt.fraVerdi !== undefined;
 
-  const tilVerdiNavn = felt.klTilVerdi ? getKodeverknavn(felt.tilVerdi as string, felt.klTilVerdi as KodeverkType) : '';
+  const tilVerdiNavn = felt.klTilVerdi ? getKodeverknavn(felt.tilVerdi as string, felt.klTilVerdi) : '';
   if (erEndret) {
     const årsakVerdi = felt.fraVerdi ? felt.fraVerdi as string : felt.tilVerdi as string;
-    const fraVerdi = felt.klFraVerdi ? `${getKodeverknavn(årsakVerdi, felt.klFraVerdi as KodeverkType)}` : '';
+    const fraVerdi = felt.klFraVerdi ? `${getKodeverknavn(årsakVerdi, felt.klFraVerdi)}` : '';
     return (
       <FormattedMessage
         id="Historikk.Template.Aktivitetskrav.endretFelt"

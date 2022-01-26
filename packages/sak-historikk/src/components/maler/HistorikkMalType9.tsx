@@ -90,8 +90,8 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal & WrappedComponentProps>
                 </div>
               ))
           )}
-          {historikkinnslagDel.begrunnelse && (
-            <BubbleText bodyText={historikkinnslagDel.begrunnelse} />
+          {historikkinnslagDel.begrunnelsetekst && (
+            <BubbleText bodyText={historikkinnslagDel.begrunnelsetekst} />
           )}
           {historikkinnslagDel.begrunnelseFritekst && <BubbleText bodyText={historikkinnslagDel.begrunnelseFritekst} />}
         </div>
