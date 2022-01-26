@@ -55,53 +55,71 @@ export default {
   component: UttakFaktaIndex,
 };
 
-export const vurderOmAnnenPartHarRett = () => {
-  const readOnly = false;
+export const vurderOmAnnenPartHarRett = () => (
+  <UttakFaktaIndex
+    {...standardFaktaProps}
+    behandling={behandlingVurderAnnenPartHarRett}
+    aksjonspunkter={aksjonspunkterVurderAnnenPartHarRett}
+    ytelsefordeling={ytelsefordelingVurderAnnenPartHarRett}
+    uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderVurderAnnenPartHarRett as UttakKontrollerFaktaPerioderWrapper}
+    alleKodeverk={alleKodeverk as any}
+    faktaArbeidsforhold={faktaArbeidsforholdVurderAnnenPartHarRett as FaktaArbeidsforhold[]}
+    personoversikt={personoversiktVurderAnnenPartHarRett as Personoversikt}
+    familiehendelse={familiehendelseVurderAnnenPartHarRett as FamilieHendelseSamling}
+    readOnly={false}
+    kanOverstyre={false}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+  />
+);
 
-  return (
-    <UttakFaktaIndex
-      {...standardFaktaProps}
-      behandling={behandlingVurderAnnenPartHarRett}
-      aksjonspunkter={aksjonspunkterVurderAnnenPartHarRett}
-      ytelsefordeling={ytelsefordelingVurderAnnenPartHarRett}
-      uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderVurderAnnenPartHarRett as UttakKontrollerFaktaPerioderWrapper}
-      alleKodeverk={alleKodeverk as any}
-      faktaArbeidsforhold={faktaArbeidsforholdVurderAnnenPartHarRett as FaktaArbeidsforhold[]}
-      personoversikt={personoversiktVurderAnnenPartHarRett as Personoversikt}
-      familiehendelse={familiehendelseVurderAnnenPartHarRett as FamilieHendelseSamling}
-      readOnly={readOnly}
-      kanOverstyre={false}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />
-  );
-};
+export const vurderOmAnnenPartHarRettOgAvklarAnnenForelderMottarUføretrygd = () => (
+  <UttakFaktaIndex
+    {...standardFaktaProps}
+    behandling={behandlingVurderAnnenPartHarRett}
+    aksjonspunkter={aksjonspunkterVurderAnnenPartHarRett}
+    ytelsefordeling={{
+      ...ytelsefordelingVurderAnnenPartHarRett,
+      annenforelderHarRettDto: {
+        ...ytelsefordelingVurderAnnenPartHarRett.annenforelderHarRettDto,
+        avklarAnnenforelderMottarUføretrygd: true,
+      },
+    }}
+    uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderVurderAnnenPartHarRett as UttakKontrollerFaktaPerioderWrapper}
+    alleKodeverk={alleKodeverk as any}
+    faktaArbeidsforhold={faktaArbeidsforholdVurderAnnenPartHarRett as FaktaArbeidsforhold[]}
+    personoversikt={personoversiktVurderAnnenPartHarRett as Personoversikt}
+    familiehendelse={familiehendelseVurderAnnenPartHarRett as FamilieHendelseSamling}
+    readOnly={false}
+    kanOverstyre={false}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+  />
+);
 
-export const vurderOmAnnenPartHarRettOgHar = () => {
-  const readOnly = false;
-
-  return (
-    <UttakFaktaIndex
-      {...standardFaktaProps}
-      behandling={behandlingVurderAnnenPartHarRett}
-      aksjonspunkter={aksjonspunkterVurderAnnenPartHarRett}
-      ytelsefordeling={{
-        ...ytelsefordelingVurderAnnenPartHarRett,
-        annenforelderHarRettDto: {
-          ...ytelsefordelingVurderAnnenPartHarRett.annenforelderHarRettDto,
-          avklarAnnenforelderMottarUføretrygd: true,
-        },
-      }}
-      uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderVurderAnnenPartHarRett as UttakKontrollerFaktaPerioderWrapper}
-      alleKodeverk={alleKodeverk as any}
-      faktaArbeidsforhold={faktaArbeidsforholdVurderAnnenPartHarRett as FaktaArbeidsforhold[]}
-      personoversikt={personoversiktVurderAnnenPartHarRett as Personoversikt}
-      familiehendelse={familiehendelseVurderAnnenPartHarRett as FamilieHendelseSamling}
-      readOnly={readOnly}
-      kanOverstyre={false}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    />
-  );
-};
+export const vurderOmAnnenPartHarRettOgAvklarAnnenForelderMottarUføretrygdReadOnly = () => (
+  <UttakFaktaIndex
+    {...standardFaktaProps}
+    behandling={behandlingVurderAnnenPartHarRett}
+    aksjonspunkter={aksjonspunkterVurderAnnenPartHarRett}
+    ytelsefordeling={{
+      ...ytelsefordelingVurderAnnenPartHarRett,
+      annenforelderHarRettDto: {
+        ...ytelsefordelingVurderAnnenPartHarRett.annenforelderHarRettDto,
+        avklarAnnenforelderMottarUføretrygd: true,
+        annenforelderMottarUføretrygd: false,
+        begrunnelse: 'Dette er en begrunnelse',
+        annenforelderHarRett: false,
+      },
+    }}
+    uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderVurderAnnenPartHarRett as UttakKontrollerFaktaPerioderWrapper}
+    alleKodeverk={alleKodeverk as any}
+    faktaArbeidsforhold={faktaArbeidsforholdVurderAnnenPartHarRett as FaktaArbeidsforhold[]}
+    personoversikt={personoversiktVurderAnnenPartHarRett as Personoversikt}
+    familiehendelse={familiehendelseVurderAnnenPartHarRett as FamilieHendelseSamling}
+    readOnly
+    kanOverstyre={false}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+  />
+);
 
 export const farSøkerFørsteSeksUker = () => {
   const readOnly = false;
