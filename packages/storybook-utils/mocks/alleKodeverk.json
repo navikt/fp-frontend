@@ -6330,6 +6330,11 @@
       "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
     },
     {
+      "kode": "MOR_MOTTAR_UFØRETRYGD",
+      "navn": "Mor mottar uføretrygd",
+      "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
+    },
+    {
       "kode": "ANKE_RESULTAT",
       "navn": "Anke resultat",
       "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
