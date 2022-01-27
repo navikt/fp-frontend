@@ -1,5 +1,8 @@
 type ForhåndsvisMeldingParams = Readonly<{
-  ytelseType: string;
+  ytelseType: {
+    kode: string,
+    kodeverk: string,
+  };
   fagsakYtelseType: string;
   behandlingUuid: string;
   vedtaksbrev?: string;

@@ -162,7 +162,10 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       dokumentMal: dokumentMalType.KLAGE_OVERSENDT_KLAGEINSTANS,
       erOpphevetKlage: false,
       behandlingUuid: 'test-uuid',
-      ytelseType: fagsakYtelseType.FORELDREPENGER,
+      ytelseType: {
+        kode: fagsakYtelseType.FORELDREPENGER,
+        kodeverk: 'FAGSAK_YTELSE',
+      },
       fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
     }));
   });

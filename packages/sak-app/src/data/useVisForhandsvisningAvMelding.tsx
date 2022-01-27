@@ -10,7 +10,10 @@ type ForhandsvisData = {
 }
 
 type ForhandsvisDataFormidling = ForhandsvisData & {
-  ytelseType: string;
+  ytelseType: {
+    kode: string;
+    kodeverk: string;
+  },
   fagsakYtelseType: string;
   arsakskode?: string | null;
   mottaker?: string;

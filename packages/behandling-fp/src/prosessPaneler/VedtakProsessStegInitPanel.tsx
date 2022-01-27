@@ -71,7 +71,10 @@ const getForhandsvisCallback = (
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
-    ytelseType: fagsak.fagsakYtelseType,
+    ytelseType: {
+      kode: fagsak.fagsakYtelseType,
+      kodeverk: 'FAGSAK_YTELSE',
+    },
     fagsakYtelseType: fagsak.fagsakYtelseType,
   };
 
