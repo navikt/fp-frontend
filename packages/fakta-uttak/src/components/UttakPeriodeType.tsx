@@ -12,6 +12,7 @@ import editPeriodeDisabledIcon from '@fpsak-frontend/assets/images/endre_disable
 import removePeriod from '@fpsak-frontend/assets/images/remove.svg';
 import removePeriodDisabled from '@fpsak-frontend/assets/images/remove_disabled.svg';
 import { ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import lagVisningsNavn from './utils/lagVisningsNavn';
 
@@ -28,8 +29,13 @@ export const overforingArsakTexts = {
   [overforingArsakCodes.UDEFINERT]: '-',
 };
 
-const getUttakTypeTitle = (getKodeverknavn: (kodeverk: string) => string, utsettelseArsak?: string, overforingArsak?: string,
-  arbeidstidprosent?: number, oppholdArsak?: string): ReactElement => {
+const getUttakTypeTitle = (
+  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
+  utsettelseArsak?: string,
+  overforingArsak?: string,
+  arbeidstidprosent?: number,
+  oppholdArsak?: string,
+): ReactElement => {
   if (overforingArsak !== overforingArsakCodes.UDEFINERT) {
     return (
       <FormattedMessage
@@ -43,7 +49,7 @@ const getUttakTypeTitle = (getKodeverknavn: (kodeverk: string) => string, utsett
     return (
       <FormattedMessage
         id="UttakInfoPanel.UtsettelseMedÅrsak"
-        values={{ årsak: getKodeverknavn(utsettelseArsak) }}
+        values={{ årsak: getKodeverknavn(utsettelseArsak, KodeverkType.UTSETTELSE_AARSAK_TYPE) }}
       />
     );
   }
@@ -61,12 +67,16 @@ const getUttakTypeTitle = (getKodeverknavn: (kodeverk: string) => string, utsett
   return <FormattedMessage id="UttakInfoPanel.Uttak" />;
 };
 
-const getUttakPeriode = (getKodeverknavn: (kodeverk: string) => string, uttakPeriodeType: string, oppholdArsak?: string): string => {
+const getUttakPeriode = (
+  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
+  uttakPeriodeType: string,
+  oppholdArsak?: string,
+): string => {
   if (oppholdArsak !== oppholdArsakType.UDEFINERT) {
-    return getKodeverknavn(oppholdArsak);
+    return getKodeverknavn(oppholdArsak, KodeverkType.OPPHOLD_ARSAK);
   }
 
-  return getKodeverknavn(uttakPeriodeType);
+  return getKodeverknavn(uttakPeriodeType, KodeverkType.UTTAK_PERIODE_TYPE);
 };
 
 const finnesArbeidstidsprosent = (arbeidstidprosent?: number) => arbeidstidprosent === 0 || arbeidstidprosent;
@@ -86,7 +96,7 @@ interface OwnProps {
   erSelvstendig?: boolean;
   flerbarnsdager: boolean;
   fraDato: string;
-  getKodeverknavn: (kodeverk: string) => string;
+  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string;
   id: string;
   isAnyFormOpen: () => boolean;
   isFromSøknad: boolean;

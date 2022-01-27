@@ -21,7 +21,10 @@ describe('<UttakActivity>', () => {
     fom: '2018-01-01',
     tom: '2018-02-01',
     periodeResultatType: '',
-    periodeResultatÅrsak: '',
+    periodeResultatÅrsak: {
+      kode: '',
+      kodeverk: '',
+    },
     flerbarnsdager: false,
     utsettelseType: '-',
     periodeType: '-',

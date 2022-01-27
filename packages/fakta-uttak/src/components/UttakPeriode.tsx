@@ -13,6 +13,7 @@ import { calcDays } from '@fpsak-frontend/utils';
 import {
   FlexColumn, FlexContainer, FlexRow, Image,
 } from '@fpsak-frontend/shared-components';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import overlapp from '@fpsak-frontend/assets/images/overlapp.svg';
 import tomPeriode from '@fpsak-frontend/assets/images/tom_periode.svg';
 import UttakPeriodeType from './UttakPeriodeType';
@@ -74,7 +75,7 @@ interface OwnProps {
   perioder: CustomUttakKontrollerFaktaPerioder[];
   isNyPeriodeFormOpen: boolean;
   vilkarForSykdomExists: boolean;
-  getKodeverknavn: (...args: any[]) => any;
+  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string;
   behandlingStatus: string;
   familiehendelse: FamilieHendelseSamling;
   sisteUttakdatoFørsteSeksUker: moment.Moment;
@@ -161,7 +162,6 @@ const UttakPeriode: FunctionComponent<OwnProps & WrappedComponentProps> = ({
                     sisteUttakdatoFørsteSeksUker={sisteUttakdatoFørsteSeksUker}
                     familiehendelse={familiehendelse}
                     vilkarForSykdomExists={vilkarForSykdomExists}
-                    getKodeverknavn={getKodeverknavn}
                   />
                 </div>
                 {perioder.length === fields.length

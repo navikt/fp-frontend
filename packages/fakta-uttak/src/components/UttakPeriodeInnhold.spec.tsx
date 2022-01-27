@@ -42,7 +42,6 @@ describe('<UttakPeriodeInnhold>', () => {
       farSøkerFør6Uker={false}
       familiehendelse={{} as FamilieHendelseSamling}
       vilkarForSykdomExists={false}
-      getKodeverknavn={sinon.spy()}
       sisteUttakdatoFørsteSeksUker={{} as moment.Moment}
       intl={getIntlMock(messages)}
     />);

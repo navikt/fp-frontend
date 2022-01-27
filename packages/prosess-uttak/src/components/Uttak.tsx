@@ -761,7 +761,7 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
     ytelsefordeling,
   } = props;
   const periodeGrenseMottatDato = uttakPeriodeGrense.mottattDato;
-  const hovedsokerKjonnKode = person ? person.bruker : undefined;
+  const hovedsokerKjonnKode = person ? person.bruker.kjønn : undefined;
   const annenForelderUttak = uttaksresultat.perioderAnnenpart;
   const viseUttakMedsoker = annenForelderUttak.length > 0;
   const getMedsokerKjonnKode = (viseUttakMedsoker && person && person.annenPart) ? person.annenPart : undefined;

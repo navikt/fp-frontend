@@ -30,7 +30,6 @@ export const renderPeriode = (
   farSøkerFør6Uker: boolean,
   gjeldendeFamiliehendelse: FamilieHendelse,
   vilkarForSykdomExists: boolean,
-  getKodeverknavn: (kodeverk: string) => string,
   sisteUttakdatoFørsteSeksUker: moment.Moment,
   intl: IntlShape,
 ) => { // NOSONAR Det er planlagt å laga nye uttakskomponentar
@@ -182,7 +181,6 @@ interface OwnProps {
   familiehendelse: FamilieHendelseSamling;
   vilkarForSykdomExists: boolean;
   arbeidstidprosent?: number;
-  getKodeverknavn: (kodeverk: string) => string;
   sisteUttakdatoFørsteSeksUker: moment.Moment;
 }
 
@@ -204,7 +202,6 @@ export const UttakPeriodeInnhold: FunctionComponent<OwnProps & WrappedComponentP
   farSøkerFør6Uker,
   familiehendelse,
   vilkarForSykdomExists,
-  getKodeverknavn,
   sisteUttakdatoFørsteSeksUker,
   intl,
 }) => {
@@ -230,7 +227,6 @@ export const UttakPeriodeInnhold: FunctionComponent<OwnProps & WrappedComponentP
         farSøkerFør6Uker,
         familiehendelse.gjeldende,
         vilkarForSykdomExists,
-        getKodeverknavn,
         sisteUttakdatoFørsteSeksUker,
         intl,
       )}
