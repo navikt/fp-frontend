@@ -35,6 +35,7 @@ describe('<VedtakProsessIndex>', () => {
       fritekst: undefined,
       gjelderVedtak: true,
       tittel: undefined,
+      automatiskVedtaksbrev: true,
       vedtaksbrev: 'AUTOMATISK',
     });
 

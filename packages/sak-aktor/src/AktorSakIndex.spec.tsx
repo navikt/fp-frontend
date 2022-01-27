@@ -9,8 +9,8 @@ describe('<AktorSakIndex>', () => {
   it('skal vise to fagsaker til aktør', async () => {
     render(<Default />);
     expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
-    expect(screen.getByText('(35425245)')).toBeInTheDocument();
-    expect(screen.getByText('(123)')).toBeInTheDocument();
+    expect(screen.getByText(/(35425245)/)).toBeInTheDocument();
+    expect(screen.getByText(/(123)/)).toBeInTheDocument();
   });
 
   it('skal vise ugyldig aktør', async () => {

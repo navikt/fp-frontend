@@ -54,14 +54,9 @@ describe('<kodeverkUtils>', () => {
       },
     };
 
-    const kodeverk = {
-      kodeverk: 'AVSLAGSARSAK',
-      kode: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
-    };
-
     // @ts-ignore (Kodeverket for avslagsårsak er anleis enn alle andre. Bør nok flyttast til eigen resttjeneste,
     // evt. må typen til alle-kodeverk endrast i heile appen)
-    const navn = getKodeverknavnFn(alleKodeverk)(kodeverk, vilkarType.FODSELSVILKARET_MOR);
+    const navn = getKodeverknavnFn(alleKodeverk)(avslagsarsakCodes.INGEN_BEREGNINGSREGLER, 'AVSLAGSARSAK', vilkarType.FODSELSVILKARET_MOR);
 
     expect(navn).toBe('Ingen beregningsregler');
   });

@@ -41,7 +41,7 @@ export const transformValuesForATFLISammeOrg = (inntektVerdier: InntektTransform
 
 const harRiktigTilfelle = (beregningsgrunnlag) => (
   beregningsgrunnlag.faktaOmBeregning.faktaOmBeregningTilfeller ? beregningsgrunnlag.faktaOmBeregning.faktaOmBeregningTilfeller
-    .map(({ kode }) => kode).includes(faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON) : false
+    .map((kode) => kode).includes(faktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON) : false
 );
 
 type OwnProps = {

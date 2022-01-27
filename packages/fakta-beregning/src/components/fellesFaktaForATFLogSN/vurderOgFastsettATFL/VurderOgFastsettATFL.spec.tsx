@@ -39,7 +39,7 @@ const lagBeregningsgrunnlag = (andeler) => ({
 const lagFaktaOmBeregning = (tilfeller, arbeidsforholdMedLønnsendringUtenIM,
   arbeidstakerOgFrilanserISammeOrganisasjonListe,
   vurderMottarYtelse = {}) => ({
-  faktaOmBeregningTilfeller: tilfeller.map((kode) => ({ kode })),
+  faktaOmBeregningTilfeller: tilfeller,
   vurderBesteberegning: {},
   arbeidsforholdMedLønnsendringUtenIM,
   arbeidstakerOgFrilanserISammeOrganisasjonListe,

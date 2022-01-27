@@ -320,7 +320,7 @@ export const mapStateToProps = (state, ownProps) => {
   const skalHaBesteberegning = skalHaBesteberegningSelector(state) === true;
   const skalHaMilitær = getFormValuesForBeregning(state)[vurderMilitaerField];
   const tilfeller = ownProps.beregningsgrunnlag.faktaOmBeregning.faktaOmBeregningTilfeller
-    ? ownProps.beregningsgrunnlag.faktaOmBeregning.faktaOmBeregningTilfeller.map(({ kode }) => kode) : [];
+    ? ownProps.beregningsgrunnlag.faktaOmBeregning.faktaOmBeregningTilfeller.map((kode) => kode) : [];
   fjernEllerLeggTilMilitær(ownProps.fields, skalHaMilitær, aktivitetStatuser);
   leggTilDagpengerOmBesteberegning(ownProps.fields, skalHaBesteberegning, aktivitetStatuser, ownProps.skalKunneLeggeTilDagpengerManuelt);
   return {

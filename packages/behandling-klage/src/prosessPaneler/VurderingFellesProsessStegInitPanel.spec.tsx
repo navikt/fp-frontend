@@ -163,6 +163,7 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       erOpphevetKlage: false,
       behandlingUuid: 'test-uuid',
       ytelseType: fagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
     }));
   });
 

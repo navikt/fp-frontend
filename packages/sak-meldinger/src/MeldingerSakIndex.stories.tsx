@@ -65,7 +65,7 @@ Default.args = {
     navn: 'Revurderingsdokumentasjon',
     tilgjengelig: true,
   }],
-  sprakKode: '',
+  sprakKode: 'NO',
   fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
   lagre: action('button-click') as () => Promise<any>,
 };
@@ -82,7 +82,7 @@ ForSvangerskapspenger.args = {
     navn: 'Revurderingsdokumentasjon',
     tilgjengelig: true,
   }],
-  sprakKode: '',
+  sprakKode: 'NO',
   fagsakYtelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
   lagre: action('button-click') as () => Promise<any>,
 };
