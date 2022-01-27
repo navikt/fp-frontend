@@ -13,6 +13,8 @@ import BubbleText from './felles/bubbleText';
 import Skjermlenke from './felles/Skjermlenke';
 import HistorikkMal from '../HistorikkMalTsType';
 
+const finnKodeverkType = (kodeverk: string): KodeverkType => KodeverkType[kodeverk];
+
 const finnFomOpplysning = (opplysninger: HistorikkInnslagOpplysning[]): string => {
   const found = opplysninger.find((o) => o.opplysningType === historikkOpplysningTypeCodes.PERIODE_FOM.kode);
   return found?.tilVerdi ? found.tilVerdi : '';
@@ -30,15 +32,15 @@ const buildEndretFeltText = (
   const årsakFelt = endredeFelter.filter((felt) => felt.endretFeltNavn === historikkEndretFeltTypeCodes.FAKTA_OM_FEILUTBETALING_AARSAK.kode)[0];
   const underÅrsakFelt = endredeFelter.filter((felt) => felt.endretFeltNavn === historikkEndretFeltTypeCodes.FAKTA_OM_FEILUTBETALING_UNDERAARSAK.kode)[0];
   const underÅrsakFraVerdi = underÅrsakFelt?.klFraVerdi
-    ? getKodeverknavn(underÅrsakFelt.fraVerdi as string, underÅrsakFelt.klFraVerdi as KodeverkType) : null;
+    ? getKodeverknavn(underÅrsakFelt.fraVerdi as string, finnKodeverkType(underÅrsakFelt.klFraVerdi)) : null;
   const underÅrsakTilVerdi = underÅrsakFelt?.klTilVerdi
-    ? getKodeverknavn(underÅrsakFelt.tilVerdi as string, underÅrsakFelt.klTilVerdi as KodeverkType) : null;
+    ? getKodeverknavn(underÅrsakFelt.tilVerdi as string, finnKodeverkType(underÅrsakFelt.klTilVerdi)) : null;
   const endret = endredeFelter.filter((felt) => felt.fraVerdi !== null).length > 0;
 
-  const tilVerdiNavn = årsakFelt?.klTilVerdi ? getKodeverknavn(årsakFelt.tilVerdi as string, årsakFelt.klTilVerdi as KodeverkType) : '';
+  const tilVerdiNavn = årsakFelt?.klTilVerdi ? getKodeverknavn(årsakFelt.tilVerdi as string, finnKodeverkType(årsakFelt.klTilVerdi)) : '';
   if (endret) {
     const årsakVerdi = årsakFelt.fraVerdi ? årsakFelt.fraVerdi as string : årsakFelt.tilVerdi as string;
-    const årsakNavn = årsakFelt?.klFraVerdi ? getKodeverknavn(årsakVerdi, årsakFelt.klFraVerdi as KodeverkType) : '';
+    const årsakNavn = årsakFelt?.klFraVerdi ? getKodeverknavn(årsakVerdi, finnKodeverkType(årsakFelt.klFraVerdi)) : '';
     const fraVerdi = underÅrsakFraVerdi ? `${årsakNavn} (${underÅrsakFraVerdi})` : årsakNavn;
     const tilVerdi = underÅrsakTilVerdi ? `${tilVerdiNavn} (${underÅrsakTilVerdi})` : tilVerdiNavn;
     return <FormattedMessage id="Historikk.Template.Feilutbetaling.endretFelt" values={{ fraVerdi, tilVerdi, b: (chunks: any) => <b>{chunks}</b> }} />;

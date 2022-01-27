@@ -12,6 +12,8 @@ import BubbleText from './felles/bubbleText';
 import Skjermlenke from './felles/Skjermlenke';
 import HistorikkMal from '../HistorikkMalTsType';
 
+const finnKodeverkType = (kodeverk: string): KodeverkType => KodeverkType[kodeverk];
+
 const finnFomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): string => {
   const found = opplysninger.find((o) => o.opplysningType === historikkOpplysningTypeCodes.UTTAK_PERIODE_FOM.kode);
   return found?.tilVerdi ? found.tilVerdi : '';
@@ -30,10 +32,10 @@ const buildEndretFeltText = (
   const felt = endredeFelter[0];
   const erEndret = felt.fraVerdi !== null && felt.fraVerdi !== undefined;
 
-  const tilVerdiNavn = felt.klTilVerdi ? getKodeverknavn(felt.tilVerdi as string, felt.klTilVerdi as KodeverkType) : '';
+  const tilVerdiNavn = felt.klTilVerdi ? getKodeverknavn(felt.tilVerdi as string, finnKodeverkType(felt.klTilVerdi)) : '';
   if (erEndret) {
     const årsakVerdi = felt.fraVerdi ? felt.fraVerdi as string : felt.tilVerdi as string;
-    const fraVerdi = felt.klFraVerdi ? `${getKodeverknavn(årsakVerdi, felt.klFraVerdi as KodeverkType)}` : '';
+    const fraVerdi = felt.klFraVerdi ? `${getKodeverknavn(årsakVerdi, finnKodeverkType(felt.klFraVerdi))}` : '';
     return (
       <FormattedMessage
         id="Historikk.Template.Aktivitetskrav.endretFelt"
