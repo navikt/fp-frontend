@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { BehandlingAppKontekst, Behandlingsresultat } from '@fpsak-frontend/types';
 import { withRouter, alleKodeverk } from '@fpsak-frontend/storybook-utils';
@@ -16,9 +16,13 @@ const locationMock = {
   hash: 'test',
 };
 
-const getKodeverkFn = (kode: string, kodeverk: KodeverkType) => {
-  const kodeverkForType = alleKodeverk[kodeverk];
-  return kodeverkForType.find((k: string) => k === kode);
+const getKodeverkFn = (kode: string, kodeverk: KodeverkType, behandlingType: string = BehandlingType.FORSTEGANGSSOKNAD) => {
+  const kodeverkForType = behandlingType === BehandlingType.TILBAKEKREVING || behandlingType === BehandlingType.TILBAKEKREVING_REVURDERING
+    ? alleKodeverk[kodeverk] : alleKodeverk[kodeverk];
+  if (!kodeverkForType || kodeverkForType.length === 0) {
+    throw Error(`Det finnes ingen kodeverk for type ${kodeverk} med kode ${kode}`);
+  }
+  return kodeverkForType.find((k) => k.kode === kode);
 };
 
 export default {
@@ -55,7 +59,7 @@ Default.args = {
   behandlinger: [{
     versjon: 2,
     uuid: '1',
-    type: behandlingType.FORSTEGANGSSOKNAD,
+    type: BehandlingType.FORSTEGANGSSOKNAD,
     status: behandlingStatus.AVSLUTTET,
     sprakkode: 'NB',
     erAktivPapirsoknad: false,
@@ -76,7 +80,7 @@ Default.args = {
   }, {
     versjon: 2,
     uuid: '2',
-    type: behandlingType.DOKUMENTINNSYN,
+    type: BehandlingType.DOKUMENTINNSYN,
     status: behandlingStatus.OPPRETTET,
     sprakkode: 'NB',
     erAktivPapirsoknad: false,
@@ -97,7 +101,7 @@ Default.args = {
   }, {
     versjon: 2,
     uuid: '3',
-    type: behandlingType.REVURDERING,
+    type: BehandlingType.REVURDERING,
     status: behandlingStatus.OPPRETTET,
     sprakkode: 'NB',
     erAktivPapirsoknad: false,
@@ -114,7 +118,7 @@ Default.args = {
   }, {
     versjon: 2,
     uuid: '4',
-    type: behandlingType.FORSTEGANGSSOKNAD,
+    type: BehandlingType.FORSTEGANGSSOKNAD,
     status: behandlingStatus.AVSLUTTET,
     sprakkode: 'NB',
     erAktivPapirsoknad: false,

@@ -124,6 +124,7 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
       gjelderVedtak: true,
       behandlingUuid: 'test-uuid',
       ytelseType: fagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
     }));
   });
 });

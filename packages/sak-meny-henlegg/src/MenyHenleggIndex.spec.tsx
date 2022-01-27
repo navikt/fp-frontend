@@ -142,6 +142,7 @@ describe('<MenyHenleggIndex>', () => {
       fritekst: undefined,
       mottaker: 'Søker',
       ytelseType: 'FP',
+      fagsakYtelseType: 'FP',
     });
   });
 

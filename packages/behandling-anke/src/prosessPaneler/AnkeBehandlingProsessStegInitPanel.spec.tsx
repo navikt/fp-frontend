@@ -115,6 +115,7 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
       dokumentMal: dokumentMalType.ANKE_VEDTAK_OMGJORING,
       behandlingUuid: 'test-uuid',
       ytelseType: fagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
     }));
   });
 

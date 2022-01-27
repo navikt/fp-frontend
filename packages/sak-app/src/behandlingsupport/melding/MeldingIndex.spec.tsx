@@ -114,6 +114,7 @@ describe('<MeldingIndex>', () => {
       .find((a) => a.url === '/fpformidling/api/brev/forhaandsvis').data).toBe(JSON.stringify({
       behandlingUuid: '1',
       ytelseType: fagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
       fritekst: ' ',
       arsakskode: null,
       mottaker: 'Søker',

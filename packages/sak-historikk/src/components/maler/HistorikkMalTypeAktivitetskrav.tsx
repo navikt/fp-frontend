@@ -5,6 +5,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { AvsnittSkiller, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 import { HistorikkinnslagDel } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
 import BubbleText from './felles/bubbleText';
@@ -23,14 +24,16 @@ const finnTomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): s
 
 const buildEndretFeltText = (
   historikkinnslagDel: HistorikkinnslagDel,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType, undertype?: string) => string,
 ): ReactNode => {
   const { opplysninger, endredeFelter } = historikkinnslagDel;
   const felt = endredeFelter[0];
   const erEndret = felt.fraVerdi !== null && felt.fraVerdi !== undefined;
 
-  const tilVerdiNavn = felt.tilVerdiTekst || '';
+  const tilVerdiNavn = felt.klTilVerdi ? getKodeverknavn(felt.tilVerdi as string, felt.klTilVerdi as KodeverkType) : '';
   if (erEndret) {
-    const fraVerdi = felt.fraVerdiTekst || '';
+    const årsakVerdi = felt.fraVerdi ? felt.fraVerdi as string : felt.tilVerdi as string;
+    const fraVerdi = felt.klFraVerdi ? `${getKodeverknavn(årsakVerdi, felt.klFraVerdi as KodeverkType)}` : '';
     return (
       <FormattedMessage
         id="Historikk.Template.Aktivitetskrav.endretFelt"
@@ -77,7 +80,7 @@ const HistorikkMalTypeAktivitetskrav: FunctionComponent<HistorikkMal> = ({
         <div key={`historikkinnslagDel${index + 1}`}>
           <VerticalSpacer fourPx />
           <Normaltekst>
-            { buildEndretFeltText(historikkinnslagDel) }
+            { buildEndretFeltText(historikkinnslagDel, getKodeverknavn) }
           </Normaltekst>
           <VerticalSpacer fourPx />
           <BubbleText

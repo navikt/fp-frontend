@@ -162,6 +162,7 @@ describe('<VarselProsessStegInitPanel>', () => {
       fritekst: 'Dette er en fritekst',
       behandlingUuid: 'test-uuid',
       ytelseType: fagsakYtelseType.ENGANGSSTONAD,
+      fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
     }));
   });
 });

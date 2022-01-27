@@ -10,7 +10,7 @@ describe('<AktorSakIndex>', () => {
     render(<Default />);
     expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
     expect(screen.getByText(/(35425245)/)).toBeInTheDocument();
-    expect(screen.getByText(/(123)/)).toBeInTheDocument();
+    expect(screen.getAllByText(/(123)/)).toHaveLength(2);
   });
 
   it('skal vise ugyldig aktør', async () => {

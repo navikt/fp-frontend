@@ -4,6 +4,9 @@ import initRestMethods from './initRestMethods';
 import HttpClientApi from '../HttpClientApiTsType';
 
 const konverterKodeverkTilKode = (data: any, erTilbakekreving: boolean) => {
+  if (data === undefined || data === null) {
+    return;
+  }
   const lengdeKodeverkObjekt = erTilbakekreving ? 3 : 2;
   Object.keys(data).forEach((key) => {
     if (data[key]?.kode) {
