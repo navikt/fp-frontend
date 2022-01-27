@@ -135,7 +135,7 @@ const RenderUttakTable: FunctionComponent<OwnProps & WrappedComponentProps> = ({
               <TableColumn>
                 <div className={styles.selectStonad}>
                   <SelectField
-                    name={`${uttakElementFieldId}.stønadskontoType.kode`}
+                    name={`${uttakElementFieldId}.stønadskontoType`}
                     selectValues={mapPeriodeTyper(periodeTyper)}
                     label=""
                     readOnly={readOnly}

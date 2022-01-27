@@ -518,13 +518,12 @@ const transformValues = (
   const [innvilgelseAarsakObject] = innvilgelseAarsakKoder.filter((a) => a.kode === values.innvilgelseAarsak);
   const [graderingAvslagAarsakObject] = graderingAvslagAarsakKoder.filter((a) => a.kode === values.graderingAvslagAarsak);
   if (values.oppholdArsak !== oppholdArsakType.UDEFINERT) {
-    nyeVerdier.UttakFieldArray[0].stønadskontoType.kode = oppholdArsakMapper[values.oppholdArsak];
+    nyeVerdier.UttakFieldArray[0].stønadskontoType = oppholdArsakMapper[values.oppholdArsak];
   }
   const aktiviteter = nyeVerdier.UttakFieldArray.map((a) => {
     const { ...bekreftetAktivitet } = a;
-    const kode = a.stønadskontoType.kode === '' ? uttakPeriodeNavn.UDEFINERT : a.stønadskontoType.kode;
-    bekreftetAktivitet.stønadskontoType.kode = kode;
-    bekreftetAktivitet.stønadskontoType.navn = uttakPeriodeNavn[kode];
+    const kode = a.stønadskontoType === '' ? uttakPeriodeNavn.UDEFINERT : a.stønadskontoType;
+    bekreftetAktivitet.stønadskontoType = kode;
     return bekreftetAktivitet;
   });
 
