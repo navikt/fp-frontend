@@ -383,8 +383,8 @@ export const transformValues = (values: FormValues, apCodes: string[], aksjonspu
     return {
       ...uta,
       aktiviteter: transformAktiviteter,
-      periodeResultatÅrsak: aktivitet.periodeResultatÅrsak.kode,
-      graderingAvslagÅrsak: aktivitet.graderingAvslagÅrsak.kode,
+      periodeResultatÅrsak: aktivitet.periodeResultatÅrsak?.kode,
+      graderingAvslagÅrsak: aktivitet.graderingAvslagÅrsak?.kode,
     };
   });
 
