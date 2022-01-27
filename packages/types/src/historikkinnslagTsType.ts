@@ -4,6 +4,8 @@ export type HistorikkinnslagEndretFelt = {
   klNavn?: string;
   fraVerdi?: string | number | boolean;
   tilVerdi?: string | number | boolean;
+  fraVerdiTekst?: string;
+  tilVerdiTekst?: string;
   klFraVerdi?: string;
   klTilVerdi?: string;
 };
