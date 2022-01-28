@@ -16,7 +16,7 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
-  hasValidText, ISO_DATE_FORMAT, minLength, required, getLanguageFromSprakkode,
+  hasValidText, ISO_DATE_FORMAT, minLength, maxLength, required, getLanguageFromSprakkode,
 } from '@fpsak-frontend/utils';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
 import SettPaVentModalIndex, { FormValues as ModalFormValues } from '@fpsak-frontend/modal-sett-pa-vent';
@@ -32,6 +32,7 @@ import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
 import styles from './varselOmRevurderingForm.less';
 
 const minLength3 = minLength(3);
+const maxLength6000 = maxLength(6000);
 
 export type ForhandsvisData = {
   mottaker: string;
@@ -176,7 +177,8 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
                 badges={[{ text: language, type: 'fokus', titleText: intl.formatMessage({ id: 'Malform.Beskrivelse' }) }]}
                 name="fritekst"
                 label={intl.formatMessage({ id: 'VarselOmRevurderingForm.FritekstIBrev' })}
-                validate={[required, minLength3, hasValidText]}
+                validate={[required, minLength3, maxLength6000, hasValidText]}
+                maxLength={6000}
               />
               <a
                 href=""
