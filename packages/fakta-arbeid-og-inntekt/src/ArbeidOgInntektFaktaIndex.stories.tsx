@@ -9,6 +9,7 @@ import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import ArbeidOgInntektFaktaIndex from './ArbeidOgInntektFaktaIndex';
 
 const MANUELT_ORG_NR = '342352362';
@@ -59,6 +60,7 @@ const Template: Story<{
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     registrerArbeidsforhold={promiseAction()}
     lagreVurdering={promiseAction()}
+    åpneForNyVurdering={promiseAction()}
     erOverstyrer={erOverstyrer}
     submitCallback={submitCallback}
     settBehandlingPåVentCallback={settBehandlingPåVentCallback}
@@ -71,7 +73,7 @@ InnhentInntektsmelding.args = {
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
     definisjon: {
-      kode: '9998',
+      kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
       kodeverk: '',
     },
     status: {
@@ -153,7 +155,7 @@ InnhentInntektsmeldingDerEnIkkeHarInntekterFraAAregisteret.args = {
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
     definisjon: {
-      kode: '9998',
+      kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
       kodeverk: '',
     },
     status: {
@@ -192,7 +194,7 @@ InnhentInntektsmeldingDerBehandlingErAvsluttet.args = {
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
     definisjon: {
-      kode: '9998',
+      kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
       kodeverk: '',
     },
     status: {
@@ -237,7 +239,7 @@ AvklarManglendeOpplysninger.args = {
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
     definisjon: {
-      kode: '9999',
+      kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
       kodeverk: '',
     },
     status: {
@@ -281,7 +283,7 @@ AvklarManglendeOpplysningerDerBehandlingErAvsluttet.args = {
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
     definisjon: {
-      kode: '9999',
+      kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
       kodeverk: '',
     },
     status: {
@@ -330,6 +332,63 @@ AvklarManglendeOpplysningerDerBehandlingErAvsluttet.args = {
     skjæringstidspunkt: '2021-11-10',
   },
   readOnly: true,
+};
+
+export const AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppMulig = Template.bind({});
+AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppMulig.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
+  aksjonspunkter: [{
+    definisjon: {
+      kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
+      kodeverk: '',
+    },
+    status: {
+      kode: aksjonspunktStatus.UTFORT,
+      kodeverk: '',
+    },
+  } as Aksjonspunkt],
+  arbeidsgiverOpplysningerPerId: {
+    910909088: {
+      erPrivatPerson: false,
+      fødselsdato: null,
+      identifikator: '910909088',
+      navn: 'BEDRIFT AS',
+      referanse: '910909088',
+    },
+  },
+  arbeidOgInntekt: {
+    arbeidsforhold: [{
+      arbeidsgiverIdent: '910909088',
+      internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
+      eksternArbeidsforholdId: 'ARB001-001',
+      fom: '2021-10-06',
+      tom: '2021-12-12',
+      stillingsprosent: 100,
+    }],
+    inntektsmeldinger: [{
+      arbeidsgiverIdent: '910909088',
+      eksternArbeidsforholdId: 'ARB001-001',
+      innsendingstidspunkt: '2021-12-06T10:52:13.377',
+      inntektPrMnd: 30000,
+      internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
+      kontaktpersonNavn: 'Corpolarsen',
+      kontaktpersonNummer: '41925090',
+      motattDato: '2021-12-06',
+      refusjonPrMnd: null,
+      journalpostId: '1',
+      dokumentId: '2',
+      årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
+      saksbehandlersVurdering: {
+        kode: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+        kodeverk: '',
+      },
+      begrunnelse: 'Jeg opprettet arbeidsforhold fordi...',
+    }],
+    inntekter: [],
+    skjæringstidspunkt: '2021-11-10',
+  },
+  readOnly: false,
 };
 
 export const SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnErOverstyrer = Template.bind({});
@@ -512,7 +571,7 @@ FlereArbeidsforholdOgInntekstemeldinger.args = {
   erOverstyrer: true,
   aksjonspunkter: [{
     definisjon: {
-      kode: '9998',
+      kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
       kodeverk: '',
     },
     status: {

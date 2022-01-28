@@ -208,9 +208,10 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
                 </FlexColumn>
               </FlexRow>
             </FlexContainer>
-            <VerticalSpacer eightPx />
+            <VerticalSpacer fourPx />
           </>
         )}
+        <VerticalSpacer fourPx />
         <TextAreaField
           label={<Element><FormattedMessage id="ManglendeOpplysningerForm.Begrunn" /></Element>}
           name="begrunnelse"

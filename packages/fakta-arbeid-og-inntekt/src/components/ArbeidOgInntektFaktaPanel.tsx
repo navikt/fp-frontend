@@ -111,7 +111,7 @@ interface OwnProps {
   saksnummer: string;
   behandling: Behandling;
   aksjonspunkter: Aksjonspunkt[];
-  isReadOnly: boolean;
+  readOnly: boolean;
   formData?: ArbeidsforholdOgInntekt[],
   setFormData: (data: ArbeidsforholdOgInntekt[]) => void,
   arbeidOgInntekt: ArbeidOgInntektsmelding;
@@ -125,6 +125,7 @@ interface OwnProps {
   }) => Promise<any>
   erOverstyrer: boolean;
   alleKodeverk: AlleKodeverk;
+  åpneForNyVurdering: () => void;
 }
 
 const finnUløstArbeidsforholdIndex = (tabellData: ArbeidsforholdOgInntekt[]) => tabellData
@@ -135,7 +136,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   saksnummer,
   behandling,
   aksjonspunkter,
-  isReadOnly,
+  readOnly,
   arbeidOgInntekt,
   arbeidsgiverOpplysningerPerId,
   registrerArbeidsforhold,
@@ -146,8 +147,11 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   lagreCallback,
   settBehandlingPåVentCallback,
   alleKodeverk,
+  åpneForNyVurdering,
 }) => {
   const intl = useIntl();
+  const erAksjonspunktAvsluttet = aksjonspunkter.some((ap) => ap.status.kode === aksjonspunktStatus.UTFORT);
+  const isReadOnly = readOnly || erAksjonspunktAvsluttet;
   const [erKnappTrykket, setsKnappTrykket] = useState(false);
   const [visSettPåVentModal, settVisSettPåVentModal] = useState(false);
   const [isDirty, setDirty] = useState(false);
@@ -206,6 +210,10 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
       kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
     });
   }, []);
+  const gjenåpneAksjonspunkt = useCallback(() => {
+    setsKnappTrykket(true);
+    åpneForNyVurdering();
+  }, []);
   const settPaVent = useCallback((params: { frist: string; ventearsak: string; }) => {
     setsKnappTrykket(true);
     settVisSettPåVentModal(false);
@@ -215,7 +223,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   return (
     <>
       <Row>
-        <Column xs="8">
+        <Column xs="6">
           <FlexContainer>
             <FlexRow>
               <FlexColumn>
@@ -229,7 +237,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
             </FlexRow>
           </FlexContainer>
         </Column>
-        <Column xs="4">
+        <Column xs="6">
           <FloatRight>
             <Normaltekst>
               <FormattedMessage
@@ -332,6 +340,16 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           onClick={lagre}
         >
           <FormattedMessage id="ArbeidOgInntektFaktaPanel.Bekreft" />
+        </Hovedknapp>
+      )}
+      {(!readOnly && erAksjonspunktAvsluttet) && (
+        <Hovedknapp
+          mini
+          disabled={erKnappTrykket}
+          spinner={erKnappTrykket}
+          onClick={gjenåpneAksjonspunkt}
+        >
+          <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyVurdering" />
         </Hovedknapp>
       )}
     </>

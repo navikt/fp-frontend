@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent,
+  FunctionComponent, useCallback,
 } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -26,23 +26,35 @@ type EndepunktInitData = {
 
 interface OwnProps {
   saksnummer: string;
+  behandlingUuid: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   rettigheter: AksessRettigheter;
   settBehandlingPåVentCallback: (params: {
     frist: string;
     ventearsak: string;
   }) => Promise<any>
+  hentBehandling: (keepData: boolean) => Promise<any>;
 }
 
 const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
   saksnummer,
+  behandlingUuid,
   arbeidsgiverOpplysningerPerId,
   rettigheter,
   settBehandlingPåVentCallback,
+  hentBehandling,
   ...props
 }) => {
   const { startRequest: registrerArbeidsforhold } = restApiSvpHooks.useRestApiRunner(SvpBehandlingApiKeys.ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD);
   const { startRequest: lagreVurdering } = restApiSvpHooks.useRestApiRunner(SvpBehandlingApiKeys.ARBEID_OG_INNTEKT_LAGRE_VURDERING);
+  const { startRequest: åpneForNyVurdering } = restApiSvpHooks.useRestApiRunner(SvpBehandlingApiKeys.ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING);
+  const åpneForNyVurderingOgOppfriskBehandling = useCallback(() => {
+    åpneForNyVurdering({
+      behandlingUuid,
+      behandlingVersjon: props.behandlingVersjon,
+    }).then(() => hentBehandling(false));
+  }, [props.behandlingVersjon]);
+
   return (
     <FaktaDefaultInitPanel<EndepunktInitData>
       {...props}
@@ -60,6 +72,7 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
           registrerArbeidsforhold={registrerArbeidsforhold}
           lagreVurdering={lagreVurdering}
           settBehandlingPåVentCallback={settBehandlingPåVentCallback}
+          åpneForNyVurdering={åpneForNyVurderingOgOppfriskBehandling}
           {...data}
         />
       )}

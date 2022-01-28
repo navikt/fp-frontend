@@ -20,6 +20,7 @@ interface OwnProps {
     frist: string;
     ventearsak: string;
   }) => Promise<any>
+  åpneForNyVurdering: () => void;
 }
 
 const intl = createIntl(messages);
@@ -39,13 +40,14 @@ const ArbeidOgInntektFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanel
   erOverstyrer,
   settBehandlingPåVentCallback,
   alleKodeverk,
+  åpneForNyVurdering,
 }) => (
   <RawIntlProvider value={intl}>
     <ArbeidOgInntektFaktaPanel
       saksnummer={saksnummer}
       behandling={behandling}
       aksjonspunkter={aksjonspunkter}
-      isReadOnly={readOnly}
+      readOnly={readOnly}
       formData={formData}
       lagreCallback={submitCallback}
       setFormData={setFormData}
@@ -56,6 +58,7 @@ const ArbeidOgInntektFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanel
       erOverstyrer={erOverstyrer}
       settBehandlingPåVentCallback={settBehandlingPåVentCallback}
       alleKodeverk={alleKodeverk}
+      åpneForNyVurdering={åpneForNyVurdering}
     />
   </RawIntlProvider>
 );
