@@ -1,7 +1,7 @@
 import React, {
   FunctionComponent, useState, useEffect, useCallback,
 } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import Lenke from 'nav-frontend-lenker';
@@ -30,12 +30,12 @@ import ArbeidsforholdRad from './ArbeidsforholdRad';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
 const HEADER_TEXT_IDS = [
-  'EMPTY',
+  'EMPTY1',
   'ArbeidOgInntektFaktaPanel.Arbeidsforhold',
   'ArbeidOgInntektFaktaPanel.Periode',
   'ArbeidOgInntektFaktaPanel.Kilde',
   'ArbeidOgInntektFaktaPanel.InntektsmeldingMottatt',
-  'EMPTY',
+  'EMPTY2',
 ];
 
 const finnApTekstKoder = (
@@ -107,6 +107,10 @@ const byggTabellStruktur = (
   return alleArbeidsforhold.concat(alleInntektsmeldingerSomManglerArbeidsforhold).sort(sorterTabell);
 };
 
+const finnUløstArbeidsforholdIndex = (tabellData: ArbeidsforholdOgInntekt[]) => tabellData
+  .findIndex((d) => (d.arbeidsforhold?.årsak && !d.arbeidsforhold?.saksbehandlersVurdering)
+    || (d.inntektsmelding?.årsak && !d.inntektsmelding?.saksbehandlersVurdering));
+
 interface OwnProps {
   saksnummer: string;
   behandling: Behandling;
@@ -128,10 +132,6 @@ interface OwnProps {
   åpneForNyVurdering: () => void;
 }
 
-const finnUløstArbeidsforholdIndex = (tabellData: ArbeidsforholdOgInntekt[]) => tabellData
-  .findIndex((d) => (d.arbeidsforhold?.årsak && !d.arbeidsforhold?.saksbehandlersVurdering)
-    || (d.inntektsmelding?.årsak && !d.inntektsmelding?.saksbehandlersVurdering));
-
 const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   saksnummer,
   behandling,
@@ -149,14 +149,11 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   åpneForNyVurdering,
 }) => {
-  const intl = useIntl();
   const erAksjonspunktAvsluttet = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.UTFORT);
   const isReadOnly = readOnly || erAksjonspunktAvsluttet;
   const [erKnappTrykket, setsKnappTrykket] = useState(false);
   const [visSettPåVentModal, settVisSettPåVentModal] = useState(false);
   const [isDirty, setDirty] = useState(false);
-
-  const headers = HEADER_TEXT_IDS.map((textId) => (textId !== 'EMPTY' ? intl.formatMessage({ id: textId }) : textId));
 
   const { arbeidsforhold, inntektsmeldinger } = arbeidOgInntekt;
 
@@ -252,7 +249,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
       {aksjonspunktTekstKoder.length > 0 && (
         <AksjonspunktHelpTextHTML>
           {aksjonspunktTekstKoder.map((tekstKode) => (
-            <FormattedMessage id={tekstKode} />
+            <FormattedMessage key={tekstKode} id={tekstKode} />
           ))}
         </AksjonspunktHelpTextHTML>
       )}
@@ -292,10 +289,11 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer fourtyPx />
         </>
       )}
-      <Table headerTextCodes={headers} noHover hasGrayHeader>
+      <Table headerTextCodes={HEADER_TEXT_IDS} noHover hasGrayHeader>
         <>
           {tabellData.map((data, index) => (
             <ArbeidsforholdRad
+              key={data.arbeidsforholdNavn}
               saksnummer={saksnummer}
               behandlingUuid={behandling.uuid}
               skjæringspunktDato={arbeidOgInntekt.skjæringstidspunkt}
