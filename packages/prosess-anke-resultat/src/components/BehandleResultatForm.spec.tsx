@@ -75,10 +75,7 @@ describe('<BehandleResultatForm>', () => {
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
-      ankeVurderingVerdi={{
-        kode: ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE,
-        kodeverk: '',
-      }}
+      ankeVurderingVerdi={ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE}
     />);
 
     expect(wrapper.find(PreviewAnkeLink)).toHaveLength(1);
@@ -87,10 +84,7 @@ describe('<BehandleResultatForm>', () => {
   it('skal bruke ResultatEnkel når en stadfester ytelsesvedtak', () => {
     const wrapper = shallow(<AnkeResultat
       ankeVurderingResultat={{
-        ankeVurdering: {
-          kode: ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK,
-          kodeverk: '',
-        },
+        ankeVurdering: ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK,
       } as AnkeVurdering['ankeVurderingResultat']}
       alleKodeverk={{} as AlleKodeverk}
     />);
@@ -101,10 +95,7 @@ describe('<BehandleResultatForm>', () => {
   it('skal bruke ResultatOpphev når en opphever ytelsesvedtak', () => {
     const wrapper = shallow(<AnkeResultat
       ankeVurderingResultat={{
-        ankeVurdering: {
-          kode: ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE,
-          kodeverk: '',
-        },
+        ankeVurdering: ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE,
       } as AnkeVurdering['ankeVurderingResultat']}
       alleKodeverk={{} as AlleKodeverk}
     />);
@@ -115,10 +106,7 @@ describe('<BehandleResultatForm>', () => {
   it('skal bruke ResultatHjemsend når hjemsendt uten opphav', () => {
     const wrapper = shallow(<AnkeResultat
       ankeVurderingResultat={{
-        ankeVurdering: {
-          kode: ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV,
-          kodeverk: '',
-        },
+        ankeVurdering: ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV,
       } as AnkeVurdering['ankeVurderingResultat']}
       alleKodeverk={{} as AlleKodeverk}
     />);
@@ -129,10 +117,7 @@ describe('<BehandleResultatForm>', () => {
   it('skal bruke ResultatOmgjores når en omgjør ytelsesvedtak', () => {
     const wrapper = shallow(<AnkeResultat
       ankeVurderingResultat={{
-        ankeVurdering: {
-          kode: ankeVurdering.ANKE_OMGJOER,
-          kodeverk: '',
-        },
+        ankeVurdering: ankeVurdering.ANKE_OMGJOER,
       } as AnkeVurdering['ankeVurderingResultat']}
       alleKodeverk={{} as AlleKodeverk}
     />);
@@ -143,10 +128,7 @@ describe('<BehandleResultatForm>', () => {
   it('skal bruke ResultatAvvise når en avviser ytelsesvedtak', () => {
     const wrapper = shallow(<AnkeResultat
       ankeVurderingResultat={{
-        ankeVurdering: {
-          kode: ankeVurdering.ANKE_AVVIS,
-          kodeverk: '',
-        },
+        ankeVurdering: ankeVurdering.ANKE_AVVIS,
       } as AnkeVurdering['ankeVurderingResultat']}
       alleKodeverk={{} as AlleKodeverk}
     />);
@@ -206,10 +188,7 @@ describe('<BehandleResultatForm>', () => {
     const wrapper = shallow(<ResultatOmgjores
       ankeVurderingResultat={{
         begrunnelse: 'test',
-        ankeVurderingOmgjoer: {
-          kode: ankeVurderingOmgjoer.ANKE_TIL_UGUNST,
-          kodeverk: '',
-        },
+        ankeVurderingOmgjoer: ankeVurderingOmgjoer.ANKE_TIL_UGUNST,
       } as AnkeVurdering['ankeVurderingResultat']}
       alleKodeverk={{} as AlleKodeverk}
     />);
@@ -223,14 +202,8 @@ describe('<BehandleResultatForm>', () => {
     const wrapper = shallow(<ResultatOmgjores
       ankeVurderingResultat={{
         begrunnelse: 'test',
-        ankeVurderingOmgjoer: {
-          kode: ankeVurderingOmgjoer.ANKE_TIL_UGUNST,
-          kodeverk: '',
-        },
-        ankeOmgjoerArsak: {
-          kode: ankeOmgjorArsak.NYE_OPPLYSNINGER,
-          kodeverk: 'ANKE_OMGJOER_AARSAK',
-        },
+        ankeVurderingOmgjoer: ankeVurderingOmgjoer.ANKE_TIL_UGUNST,
+        ankeOmgjoerArsak: ankeOmgjorArsak.NYE_OPPLYSNINGER,
       } as AnkeVurdering['ankeVurderingResultat']}
       alleKodeverk={{
         AnkeOmgjørÅrsak: [{

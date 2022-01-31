@@ -16,10 +16,7 @@ import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 const behandling = {
   uuid: '1',
   versjon: 1,
-  type: {
-    kode: behandlingType.FORSTEGANGSSOKNAD,
-    kodeverk: '',
-  },
+  type: behandlingType.FORSTEGANGSSOKNAD,
 } as Behandling;
 
 const familieHendelse = {
@@ -48,10 +45,7 @@ const soknad = {
   termindato: '2019-01-01',
   utstedtdato: '2019-01-02',
   antallBarn: 1,
-  soknadType: {
-    kode: soknadType.FODSEL,
-    kodeverk: '',
-  },
+  soknadType: soknadType.FODSEL,
 } as Soknad;
 
 const soknadOriginalBehandling = {
@@ -67,14 +61,8 @@ const familiehendelseOriginalBehandling = {
 } as FamilieHendelse;
 
 const defaultAksjonspunkter = [{
-  definisjon: {
-    kode: aksjonspunktCodes.TERMINBEKREFTELSE,
-    kodeverk: '',
-  },
-  status: {
-    kode: aksjonspunktStatus.OPPRETTET,
-    kodeverk: '',
-  },
+  definisjon: aksjonspunktCodes.TERMINBEKREFTELSE,
+  status: aksjonspunktStatus.OPPRETTET,
   begrunnelse: undefined,
   kanLoses: true,
   erAktivt: true,
@@ -128,10 +116,7 @@ export const AksjonspunktSjekkManglendeFødsel = Template.bind({});
 AksjonspunktSjekkManglendeFødsel.args = {
   aksjonspunkter: defaultAksjonspunkter.map((a) => ({
     ...a,
-    definisjon: {
-      kode: aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL,
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL,
   })),
   alleMerknaderFraBeslutter: {
     [aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL]: merknaderFraBeslutter,
@@ -143,10 +128,7 @@ export const AksjonspunktVurderOmVilkårForSykdomErOppfylt = Template.bind({});
 AksjonspunktVurderOmVilkårForSykdomErOppfylt.args = {
   aksjonspunkter: defaultAksjonspunkter.map((a) => ({
     ...a,
-    definisjon: {
-      kode: aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT,
   })),
   alleMerknaderFraBeslutter: {
     [aksjonspunktCodes.VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT]: merknaderFraBeslutter,

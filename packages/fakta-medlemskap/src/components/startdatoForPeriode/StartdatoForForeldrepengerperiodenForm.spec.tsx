@@ -30,10 +30,7 @@ describe('<StartdatoForForeldrepengerperiodenForm>', () => {
       onSubmit={() => undefined}
       validate={() => undefined}
       readOnlyForStartdatoForForeldrepenger={false}
-      behandlingStatus={{
-        kode: behandlingStatus.BEHANDLING_UTREDES,
-        kodeverk: '',
-      }}
+      behandlingStatus={behandlingStatus.BEHANDLING_UTREDES}
     />);
 
     const button = wrapper.find(FaktaSubmitButton);

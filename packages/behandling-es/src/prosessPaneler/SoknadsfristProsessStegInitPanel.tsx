@@ -62,7 +62,7 @@ const SoknadsfristProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
       skalPanelVisesIMeny={(data) => skalViseProsessPanel(data?.aksjonspunkter, VILKAR_KODER, data?.vilkar)}
       erOverstyrt={erOverstyrt}
       renderPanel={(data) => {
-        const harSoknadsfristAp = data.aksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktCodes.SOKNADSFRISTVILKARET);
+        const harSoknadsfristAp = data.aksjonspunkter.some((ap) => ap.definisjon === aksjonspunktCodes.SOKNADSFRISTVILKARET);
         return (
           <>
             {!harSoknadsfristAp && (

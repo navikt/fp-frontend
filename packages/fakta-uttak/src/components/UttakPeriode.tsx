@@ -8,11 +8,12 @@ import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { Normaltekst } from 'nav-frontend-typografi';
 import AlertStripe from 'nav-frontend-alertstriper';
 
-import { ArbeidsgiverOpplysningerPerId, FamilieHendelseSamling, Kodeverk } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, FamilieHendelseSamling } from '@fpsak-frontend/types';
 import { calcDays } from '@fpsak-frontend/utils';
 import {
   FlexColumn, FlexContainer, FlexRow, Image,
 } from '@fpsak-frontend/shared-components';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import overlapp from '@fpsak-frontend/assets/images/overlapp.svg';
 import tomPeriode from '@fpsak-frontend/assets/images/tom_periode.svg';
 import UttakPeriodeType from './UttakPeriodeType';
@@ -56,7 +57,7 @@ const renderValidationGraphic = (perioder: CustomUttakKontrollerFaktaPerioder[],
 };
 
 const getClassName = (periode: CustomUttakKontrollerFaktaPerioder, readOnly: boolean): string => {
-  if (periode.oppholdÅrsak && periode.oppholdÅrsak.kode !== '-') {
+  if (periode.oppholdÅrsak && periode.oppholdÅrsak !== '-') {
     return classNames('oppholdPeriodeContainer', { active: !periode.bekreftet && !readOnly });
   }
   return classNames('periodeContainer', { active: !periode.bekreftet && !readOnly });
@@ -74,8 +75,8 @@ interface OwnProps {
   perioder: CustomUttakKontrollerFaktaPerioder[];
   isNyPeriodeFormOpen: boolean;
   vilkarForSykdomExists: boolean;
-  getKodeverknavn: (...args: any[]) => any;
-  behandlingStatus: Kodeverk;
+  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string;
+  behandlingStatus: string;
   familiehendelse: FamilieHendelseSamling;
   sisteUttakdatoFørsteSeksUker: moment.Moment;
   endringsdato?: string;
@@ -156,12 +157,11 @@ const UttakPeriode: FunctionComponent<OwnProps & WrappedComponentProps> = ({
                     updatePeriode={updatePeriode}
                     cancelEditPeriode={cancelEditPeriode}
                     readOnly={readOnly}
-                    behandlingStatusKode={behandlingStatus.kode}
+                    behandlingStatusKode={behandlingStatus}
                     farSøkerFør6Uker={farSøkerFør6Uker}
                     sisteUttakdatoFørsteSeksUker={sisteUttakdatoFørsteSeksUker}
                     familiehendelse={familiehendelse}
                     vilkarForSykdomExists={vilkarForSykdomExists}
-                    getKodeverknavn={getKodeverknavn}
                   />
                 </div>
                 {perioder.length === fields.length

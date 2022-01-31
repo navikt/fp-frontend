@@ -60,8 +60,8 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
     ...formData, behandlingUuid: behandling.uuid, behandlingVersjon: behandling.versjon,
   }).then(() => hentBehandling(false)), [behandling.versjon]);
 
-  const erManueltSattPaVent = useMemo(() => aksjonspunkter.filter((ap) => isAksjonspunktOpen(ap.status.kode))
-    .some((ap) => ap.definisjon.kode === aksjonspunktCodes.AUTO_MANUELT_SATT_PÅ_VENT), [aksjonspunkter]);
+  const erManueltSattPaVent = useMemo(() => aksjonspunkter.filter((ap) => isAksjonspunktOpen(ap.status))
+    .some((ap) => ap.definisjon === aksjonspunktCodes.AUTO_MANUELT_SATT_PÅ_VENT), [aksjonspunkter]);
 
   return (
     <SettPaVentModalIndex

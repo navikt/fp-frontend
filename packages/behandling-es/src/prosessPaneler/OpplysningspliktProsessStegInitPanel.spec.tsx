@@ -21,10 +21,7 @@ type INIT_DATA = {
 describe('<OpplysningspliktProsessStegInitPanel>', () => {
   it('skal rendre komponent', () => {
     const behandling = {
-      type: {
-        kode: behandlingType.REVURDERING,
-        kodeverk: '',
-      },
+      type: behandlingType.REVURDERING,
     } as Behandling;
 
     const wrapper = shallow(<OpplysningspliktProsessStegInitPanel
@@ -37,16 +34,10 @@ describe('<OpplysningspliktProsessStegInitPanel>', () => {
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const vilkar = [{
-      vilkarType: {
-        kode: vilkarType.SOKERSOPPLYSNINGSPLIKT,
-        kodeverk: '',
-      },
+      vilkarType: vilkarType.SOKERSOPPLYSNINGSPLIKT,
     } as Vilkar];
     const aksjonspunkter = [{
-      definisjon: {
-        kode: aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU,
     }] as Aksjonspunkt[];
 
     expect(panel.props().skalPanelVisesIMeny({

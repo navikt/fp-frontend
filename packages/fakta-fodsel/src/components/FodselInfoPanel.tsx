@@ -8,7 +8,7 @@ import { FaktaSubmitButtonNew } from '@fpsak-frontend/fakta-felles';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
 import {
-  Aksjonspunkt, FamilieHendelseSamling, FamilieHendelse, Kodeverk, Soknad,
+  Aksjonspunkt, FamilieHendelseSamling, FamilieHendelse, Soknad,
 } from '@fpsak-frontend/types';
 import {
   BekreftTerminbekreftelseAp, SjekkManglendeFodselAp, VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp,
@@ -85,7 +85,7 @@ interface OwnProps {
   soknadOriginalBehandling?: Soknad;
   familiehendelseOriginalBehandling?: FamilieHendelse;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  behandlingType: Kodeverk;
+  behandlingType: string;
   formData?: FormValues,
   setFormData: (data: FormValues) => void,
 }
@@ -114,9 +114,9 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
   const termindato = familiehendelse?.gjeldende?.termindato;
   const vedtaksDatoSomSvangerskapsuke = familiehendelse?.gjeldende?.vedtaksDatoSomSvangerskapsuke;
 
-  const sykdomAp = aksjonspunkter.find((ap) => ap.definisjon.kode === VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT);
-  const terminbekreftelseAp = aksjonspunkter.find((ap) => ap.definisjon.kode === TERMINBEKREFTELSE);
-  const manglendeFødselAp = aksjonspunkter.find((ap) => ap.definisjon.kode === SJEKK_MANGLENDE_FODSEL);
+  const sykdomAp = aksjonspunkter.find((ap) => ap.definisjon === VURDER_OM_VILKAR_FOR_SYKDOM_ER_OPPFYLT);
+  const terminbekreftelseAp = aksjonspunkter.find((ap) => ap.definisjon === TERMINBEKREFTELSE);
+  const manglendeFødselAp = aksjonspunkter.find((ap) => ap.definisjon === SJEKK_MANGLENDE_FODSEL);
 
   const formMethods = useForm<FormValues>({
     defaultValues: formData || buildInitialValues(sykdomAp, terminbekreftelseAp, manglendeFødselAp, soknad, familiehendelse),
@@ -140,7 +140,7 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
         )}
         {hasAksjonspunkt(TERMINBEKREFTELSE, aksjonspunkter) && (
           <TermindatoFaktaForm
-            aksjonspunkt={aksjonspunkter.find((ap: any) => ap.definisjon.kode === TERMINBEKREFTELSE)}
+            aksjonspunkt={aksjonspunkter.find((ap: any) => ap.definisjon === TERMINBEKREFTELSE)}
             readOnly={readOnly}
             submittable={submittable}
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
@@ -151,7 +151,7 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
         {hasAksjonspunkt(SJEKK_MANGLENDE_FODSEL, aksjonspunkter) && (
           <SjekkFodselDokForm
             behandlingType={behandlingType}
-            aksjonspunkt={aksjonspunkter.find((ap: any) => ap.definisjon.kode === SJEKK_MANGLENDE_FODSEL)}
+            aksjonspunkt={aksjonspunkter.find((ap: any) => ap.definisjon === SJEKK_MANGLENDE_FODSEL)}
             readOnly={readOnly}
             submittable={submittable}
             soknadOriginalBehandling={soknadOriginalBehandling}
@@ -175,7 +175,7 @@ const FodselInfoPanel: FunctionComponent<OwnProps> = ({
         )}
         {aksjonspunkter.length === 0 && (
           <FodselSammenligningIndex
-            behandlingsTypeKode={behandlingType.kode}
+            behandlingsTypeKode={behandlingType}
             avklartBarn={avklartBarn}
             termindato={termindato}
             vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}

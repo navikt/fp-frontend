@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { BehandlingAppKontekst, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 
 import HenleggBehandlingModal, { FormValues } from './components/HenleggBehandlingModal';
@@ -21,7 +21,7 @@ interface OwnProps {
     fritekst: string;
   }) => Promise<any>;
   forhandsvisHenleggBehandling: (erHenleggelse: boolean, data: any) => void;
-  ytelseType: Kodeverk;
+  ytelseType: string;
   behandlingResultatTyper: KodeverkMedNavn[];
   gaaTilSokeside: () => void;
   lukkModal: () => void;

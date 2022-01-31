@@ -132,7 +132,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     oppdaterProsessStegOgFaktaPanelIUrl,
     valgtProsessSteg: query.punkt,
   };
-  const behandlingTypeKode = behandling?.type?.kode;
+  const behandlingTypeKode = behandling?.type;
 
   const fagsakBehandlingerInfo = useMemo(() => alleBehandlinger
     .filter((b) => !b.behandlingHenlagt)
@@ -203,7 +203,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingTilbakekrevingIndex
             harApenRevurdering={fagsakBehandlingerInfo
-              .some((b) => b.type.kode === BehandlingType.REVURDERING && b.status.kode !== BehandlingStatus.AVSLUTTET)}
+              .some((b) => b.type === BehandlingType.REVURDERING && b.status !== BehandlingStatus.AVSLUTTET)}
             valgtFaktaSteg={query.fakta}
             fagsakKjønn={fagsakPersoner.bruker.kjønn}
             {...defaultProps}
@@ -213,7 +213,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     );
   }
 
-  if (!!behandling && fagsak.fagsakYtelseType.kode === FagsakYtelseType.ENGANGSSTONAD) {
+  if (!!behandling && fagsak.fagsakYtelseType === FagsakYtelseType.ENGANGSSTONAD) {
     return (
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
@@ -226,7 +226,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     );
   }
 
-  if (!!behandling && fagsak.fagsakYtelseType.kode === FagsakYtelseType.FORELDREPENGER) {
+  if (!!behandling && fagsak.fagsakYtelseType === FagsakYtelseType.FORELDREPENGER) {
     return (
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
@@ -239,7 +239,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     );
   }
 
-  if (!!behandling && fagsak.fagsakYtelseType.kode === FagsakYtelseType.SVANGERSKAPSPENGER) {
+  if (!!behandling && fagsak.fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER) {
     return (
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>

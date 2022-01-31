@@ -48,8 +48,8 @@ const AvvikopplysningerAT: FunctionComponent<OwnProps> = ({
     return viserIkkeAvviksvurdering(erKombinasjonsstatusATSN, erKombinasjonsstatusATFLSN);
   }
   const sammenligningsGrunnlagAT = sammenligningsgrunnlagPrStatus
-    ? sammenligningsgrunnlagPrStatus.find((status) => status.sammenligningsgrunnlagType.kode === sammenligningType.AT
-    || status.sammenligningsgrunnlagType.kode === sammenligningType.ATFLSN)
+    ? sammenligningsgrunnlagPrStatus.find((status) => status.sammenligningsgrunnlagType === sammenligningType.AT
+    || status.sammenligningsgrunnlagType === sammenligningType.ATFLSN)
     : undefined;
   if (!sammenligningsGrunnlagAT) {
     return null;

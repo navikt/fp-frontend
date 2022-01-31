@@ -94,6 +94,7 @@
   "UttakInfoPanel.IkkeOppgittUtsettelse": "<b>{årsak}:</b> Ikke oppgitt {årsakLowerCase}",
   "UttakInfoPanel.HarRett": "Har annen forelder rett?",
   "UttakInfoPanel.MottarUforetrygd": "Mottar annen forelder uføretrygd, jfr 14-14 tredje ledd?",
+  "UttakInfoPanel.ManuellOverstyring": "Manuell overstyring",
   "UttakInfoPanel.Ja": "Ja",
   "UttakInfoPanel.Nei": "Nei",
   "UttakInfo.Uttaksdager": "Prosentandel samtidig uttak",

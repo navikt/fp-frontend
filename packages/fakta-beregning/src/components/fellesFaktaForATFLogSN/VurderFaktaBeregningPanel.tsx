@@ -34,12 +34,12 @@ const {
 } = aksjonspunktCodes;
 
 const findAksjonspunktMedBegrunnelse = (aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt => {
-  if (aksjonspunkter.some((ap) => ap.definisjon.kode === OVERSTYRING_AV_BEREGNINGSGRUNNLAG)) {
+  if (aksjonspunkter.some((ap) => ap.definisjon === OVERSTYRING_AV_BEREGNINGSGRUNNLAG)) {
     return aksjonspunkter
-      .find((ap) => ap.definisjon.kode === OVERSTYRING_AV_BEREGNINGSGRUNNLAG && ap.begrunnelse !== null);
+      .find((ap) => ap.definisjon === OVERSTYRING_AV_BEREGNINGSGRUNNLAG && ap.begrunnelse !== null);
   }
   return aksjonspunkter
-    .find((ap) => ap.definisjon.kode === VURDER_FAKTA_FOR_ATFL_SN && ap.begrunnelse !== null);
+    .find((ap) => ap.definisjon === VURDER_FAKTA_FOR_ATFL_SN && ap.begrunnelse !== null);
 };
 
 export const BEGRUNNELSE_FAKTA_TILFELLER_NAME = 'begrunnelseFaktaTilfeller';
@@ -52,9 +52,9 @@ export const harIkkeEndringerIAvklarMedFlereAksjonspunkter = (verdiForAvklarAkti
 };
 
 const isAksjonspunktClosed = (alleAp: Aksjonspunkt[]): boolean => {
-  const relevantAp = alleAp.filter((ap) => ap.definisjon.kode === aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN
-    || ap.definisjon.kode === aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG);
-  return relevantAp.length === 0 ? false : relevantAp.some((ap) => !isAksjonspunktOpen(ap.status.kode));
+  const relevantAp = alleAp.filter((ap) => ap.definisjon === aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN
+    || ap.definisjon === aksjonspunktCodes.OVERSTYRING_AV_BEREGNINGSGRUNNLAG);
+  return relevantAp.length === 0 ? false : relevantAp.some((ap) => !isAksjonspunktOpen(ap.status));
 };
 
 const lagHelpTextsForFakta = (): ReactElement[] => {
@@ -63,8 +63,8 @@ const lagHelpTextsForFakta = (): ReactElement[] => {
   return helpTexts;
 };
 
-const hasOpenAksjonspunkt = (kode: string, aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter.some((ap) => ap.definisjon.kode === kode
-  && isAksjonspunktOpen(ap.status.kode));
+const hasOpenAksjonspunkt = (kode: string, aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter.some((ap) => ap.definisjon === kode
+  && isAksjonspunktOpen(ap.status));
 
 type OwnProps = {
     intl: IntlShape,

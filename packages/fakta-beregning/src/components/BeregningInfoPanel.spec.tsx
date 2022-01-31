@@ -34,18 +34,10 @@ describe('<BeregningInfoPanel>', () => {
   it('skal vise VurderFaktaBeregning panel', () => {
     const tidsbegrensetAP = {
       id: 1,
-      definisjon: {
-        kode: VURDER_FAKTA_FOR_ATFL_SN,
-        navn: 'ap1',
-        kodeverk: 'test',
-      },
+      definisjon: VURDER_FAKTA_FOR_ATFL_SN,
       kanLoses: true,
       erAktivt: true,
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        navn: 's1',
-        kodeverk: 'test',
-      },
+      status: aksjonspunktStatus.OPPRETTET,
     };
 
     const wrapper = shallowWithIntl(<BeregningInfoPanel
@@ -67,18 +59,10 @@ describe('<BeregningInfoPanel>', () => {
   it('skal vise VurderFaktaBeregning panel med readonly for vanlig saksbehandler uten overstyrerrolle med overstyringsaksjonspunkt', () => {
     const overstyringAP = {
       id: 1,
-      definisjon: {
-        kode: OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
-        navn: 'ap1',
-        kodeverk: 'test',
-      },
+      definisjon: OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
       kanLoses: true,
       erAktivt: true,
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        navn: 's1',
-        kodeverk: 'test',
-      },
+      status: aksjonspunktStatus.OPPRETTET,
     };
     const wrapper = shallowWithIntl(<BeregningInfoPanel
       intl={intlMock}
@@ -100,16 +84,8 @@ describe('<BeregningInfoPanel>', () => {
   it('skal vise AvklareAktiviteterPanel panel med readonly for vanlig saksbehandler uten overstyrerrolle med overstyringsaksjonspunkt', () => {
     const overstyringAP = {
       id: 1,
-      definisjon: {
-        kode: OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
-        navn: 'ap1',
-        kodeverk: 'test',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        navn: 's1',
-        kodeverk: 'test',
-      },
+      definisjon: OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
+      status: aksjonspunktStatus.OPPRETTET,
       kanLoses: true,
       erAktivt: true,
     };
@@ -133,16 +109,8 @@ describe('<BeregningInfoPanel>', () => {
   it('skal vise AvklareAktiviteterPanel panel', () => {
     const tidsbegrensetAP = {
       id: 1,
-      definisjon: {
-        kode: AVKLAR_AKTIVITETER,
-        navn: 'ap1',
-        kodeverk: 'test',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        navn: 's1',
-        kodeverk: 'test',
-      },
+      definisjon: AVKLAR_AKTIVITETER,
+      status: aksjonspunktStatus.OPPRETTET,
       kanLoses: true,
       erAktivt: true,
     };

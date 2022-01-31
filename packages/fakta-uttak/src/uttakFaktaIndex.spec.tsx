@@ -14,30 +14,15 @@ describe('<UttakFaktaIndex>', () => {
   const behandling = {
     uuid: '1',
     versjon: 1,
-    sprakkode: {
-      kode: 'NO',
-      kodeverk: '',
-    },
-    type: {
-      kode: '1',
-      kodeverk: '1',
-    },
-    status: {
-      kode: '1',
-      kodeverk: '1',
-    },
+    sprakkode: 'NO',
+    type: '1',
+    status: '1',
     behandlingÅrsaker: [],
   };
 
   const aksjonspunkter = [{
-    definisjon: {
-      kode: aksjonspunktCodes.VURDER_FEILUTBETALING,
-      kodeverk: '',
-    },
-    status: {
-      kode: '1',
-      kodeverk: '1',
-    },
+    definisjon: aksjonspunktCodes.VURDER_FEILUTBETALING,
+    status: '1',
     kanLoses: true,
     erAktivt: true,
   }];

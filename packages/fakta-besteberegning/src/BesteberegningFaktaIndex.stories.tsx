@@ -31,14 +31,8 @@ const arbeidsgiverOpplysninger = {
 };
 
 const lagAksjonspunkt = (apKode: string, status: string, begrunnelse?: string) => ({
-  definisjon: {
-    kode: apKode,
-    kodeverk: 'test',
-  },
-  status: {
-    kode: status,
-    kodeverk: 'test',
-  },
+  definisjon: apKode,
+  status,
   kanLoses: true,
   erAktivt: true,
   begrunnelse,
@@ -47,14 +41,8 @@ const lagAksjonspunkt = (apKode: string, status: string, begrunnelse?: string) =
 const behandlingMal = {
   uuid: '1',
   versjon: 2,
-  status: {
-    kode: behandlingStatus.BEHANDLING_UTREDES,
-    kodeverk: 'BEHANDLING_STATUS',
-  },
-  type: {
-    kode: behandlingType.FORSTEGANGSSOKNAD,
-    kodeverk: 'BEHANDLING_TYPE',
-  },
+  status: behandlingStatus.BEHANDLING_UTREDES,
+  type: behandlingType.FORSTEGANGSSOKNAD,
   behandlingPaaVent: false,
   behandlingHenlagt: false,
   venteArsakKode: null,
@@ -87,7 +75,7 @@ const Template: Story<{
     behandling={behandling}
     beregningsgrunnlag={beregningsgrunnlag}
     arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
-    harApneAksjonspunkter={aksjonspunkter.some((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET)}
+    harApneAksjonspunkter={aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET)}
   />
 );
 

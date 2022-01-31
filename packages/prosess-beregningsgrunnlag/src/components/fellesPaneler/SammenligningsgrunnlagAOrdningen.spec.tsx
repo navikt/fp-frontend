@@ -18,10 +18,7 @@ const inntektsgrunnlagAT = {
       tom: '2020-01-31',
       inntekter: [
         {
-          inntektAktivitetType: {
-            kode: inntektAktivitetType.ARBEID,
-            kodeverk: 'INNTEKTTYPE',
-          },
+          inntektAktivitetType: inntektAktivitetType.ARBEID,
           beløp: 5000,
         },
       ],
@@ -31,10 +28,7 @@ const inntektsgrunnlagAT = {
       tom: '2020-02-28',
       inntekter: [
         {
-          inntektAktivitetType: {
-            kode: inntektAktivitetType.ARBEID,
-            kodeverk: 'INNTEKTTYPE',
-          },
+          inntektAktivitetType: inntektAktivitetType.ARBEID,
           beløp: 5000,
         },
       ],
@@ -49,10 +43,7 @@ const inntektsgrunnlagATFL = {
       tom: '2020-01-31',
       inntekter: [
         {
-          inntektAktivitetType: {
-            kode: inntektAktivitetType.ARBEID,
-            kodeverk: 'INNTEKTTYPE',
-          },
+          inntektAktivitetType: inntektAktivitetType.ARBEID,
           beløp: 5000,
         },
       ],
@@ -62,10 +53,7 @@ const inntektsgrunnlagATFL = {
       tom: '2020-02-28',
       inntekter: [
         {
-          inntektAktivitetType: {
-            kode: inntektAktivitetType.FRILANS,
-            kodeverk: 'INNTEKTTYPE',
-          },
+          inntektAktivitetType: inntektAktivitetType.FRILANS,
           beløp: 5000,
         },
       ],

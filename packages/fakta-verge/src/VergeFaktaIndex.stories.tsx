@@ -9,14 +9,8 @@ import { Behandling } from '@fpsak-frontend/types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
 const aksjonspunkter = [{
-  definisjon: {
-    kode: aksjonspunktCodes.AVKLAR_VERGE,
-    kodeverk: '',
-  },
-  status: {
-    kode: aksjonspunktStatus.OPPRETTET,
-    kodeverk: '',
-  },
+  definisjon: aksjonspunktCodes.AVKLAR_VERGE,
+  status: aksjonspunktStatus.OPPRETTET,
   begrunnelse: undefined,
   kanLoses: true,
   erAktivt: true,

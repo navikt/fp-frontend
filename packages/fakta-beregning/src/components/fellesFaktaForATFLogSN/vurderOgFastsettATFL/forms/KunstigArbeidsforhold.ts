@@ -5,7 +5,7 @@ import { InntektTransformed } from '../../../../typer/FieldValues';
 
 const harAndelKunstigArbeidsforhold = (andel) => andel.arbeidsforhold
 && andel.arbeidsforhold.organisasjonstype
-&& andel.arbeidsforhold.organisasjonstype.kode === organisasjonstyper.KUNSTIG;
+&& andel.arbeidsforhold.organisasjonstype === organisasjonstyper.KUNSTIG;
 
 export const harKunstigArbeidsforhold = (tilfeller, beregningsgrunnlag) => {
   if (tilfeller.includes(faktaOmBeregningTilfelle.FASTSETT_MAANEDSLONN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING)) {
@@ -20,4 +20,4 @@ export const harFieldKunstigArbeidsforhold = (field: InntektTransformed,
   .find((andel) => (andel.andelsnr === field.andelsnr)
 && andel.arbeidsforhold
 && andel.arbeidsforhold.organisasjonstype
-&& andel.arbeidsforhold.organisasjonstype.kode === organisasjonstyper.KUNSTIG) !== undefined;
+&& andel.arbeidsforhold.organisasjonstype === organisasjonstyper.KUNSTIG) !== undefined;

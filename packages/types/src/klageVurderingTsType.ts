@@ -1,12 +1,10 @@
-import Kodeverk from './kodeverkTsType';
-
 export type KlageVurderingResultat = Readonly<{
   klageVurdertAv: string;
-  klageVurdering?: Kodeverk;
+  klageVurdering?: string;
   fritekstTilBrev?: string;
-  klageMedholdArsak?: Kodeverk;
-  klageVurderingOmgjoer?: Kodeverk;
-  klageHjemmel?: Kodeverk;
+  klageMedholdArsak?: string;
+  klageVurderingOmgjoer?: string;
+  klageHjemmel?: string;
   godkjentAvMedunderskriver: boolean;
   begrunnelse?: string;
 }>
@@ -15,9 +13,9 @@ type KlageVurdering = Readonly<{
   klageVurderingResultatNK?: KlageVurderingResultat;
   klageVurderingResultatNFP?: KlageVurderingResultat;
   klageFormkravResultatKA?: {
-    avvistArsaker: Kodeverk[];
+    avvistArsaker: string[];
     paKlagdBehandlingUuid: string;
-    paklagdBehandlingType: Kodeverk;
+    paklagdBehandlingType: string;
     begrunnelse: string;
     erKlagerPart: boolean;
     erKlageKonkret: boolean;
@@ -25,16 +23,16 @@ type KlageVurdering = Readonly<{
     erSignert: boolean;
   };
   klageFormkravResultatNFP?: {
-    avvistArsaker: Kodeverk[];
+    avvistArsaker: string[];
     paKlagdBehandlingUuid: string;
-    paklagdBehandlingType: Kodeverk;
+    paklagdBehandlingType: string;
     begrunnelse: string;
     erKlagerPart: boolean;
     erKlageKonkret: boolean;
     erKlagefirstOverholdt: boolean;
     erSignert: boolean;
   };
-  aktuelleHjemler?: Kodeverk[];
+  aktuelleHjemler?: string[];
 }>
 
 export default KlageVurdering;

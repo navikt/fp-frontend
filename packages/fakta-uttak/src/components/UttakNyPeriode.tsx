@@ -33,13 +33,13 @@ import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurd
 import {
   ArrowBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import overforingArsak from '@fpsak-frontend/kodeverk/src/overforingArsak';
 import utsettelseArsakCodes from '@fpsak-frontend/kodeverk/src/utsettelseArsakCodes';
 import {
-  ArbeidsgiverOpplysningerPerId, AlleKodeverk, FaktaArbeidsforhold, Kodeverk, KodeverkMedNavn, Personoversikt,
+  ArbeidsgiverOpplysningerPerId, AlleKodeverk, FaktaArbeidsforhold, KodeverkMedNavn, Personoversikt,
 } from '@fpsak-frontend/types';
 
 import lagVisningsNavn from './utils/lagVisningsNavn';
@@ -84,7 +84,7 @@ const mapUtsettelseÅrsaker = (typer: KodeverkMedNavn[]): ReactElement[] => type
 
 const mapArbeidsforhold = (
   andeler: FaktaArbeidsforhold[],
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ReactElement[] => andeler.map((andel) => {
   const { arbeidType, arbeidsgiverReferanse } = andel;
@@ -92,19 +92,19 @@ const mapArbeidsforhold = (
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
 
   let periodeArbeidsforhold = '';
-  if (arbeidType && arbeidType.kode !== uttakArbeidType.ORDINÆRT_ARBEID) {
-    periodeArbeidsforhold = getKodeverknavn(arbeidType);
+  if (arbeidType && arbeidType !== uttakArbeidType.ORDINÆRT_ARBEID) {
+    periodeArbeidsforhold = getKodeverknavn(arbeidType, KodeverkType.UTTAK_ARBEID_TYPE);
   } else {
     periodeArbeidsforhold = lagVisningsNavn(arbeidsgiverOpplysninger);
   }
 
   const identifikator = arbeidsgiverOpplysninger?.identifikator || '-';
-  const navn = arbeidsgiverOpplysninger?.navn || getKodeverknavn(arbeidType);
+  const navn = arbeidsgiverOpplysninger?.navn || getKodeverknavn(arbeidType, KodeverkType.UTTAK_ARBEID_TYPE);
   const fixedAktørId = arbeidsgiverOpplysninger?.referanse || '-';
   const virksomhet = !arbeidsgiverOpplysninger?.erPrivatPerson || '-';
 
   return (
-    <option value={`${identifikator}|${navn}|${fixedAktørId}|${virksomhet}|${arbeidType.kode}`} key={guid()}>
+    <option value={`${identifikator}|${navn}|${fixedAktørId}|${virksomhet}|${arbeidType}`} key={guid()}>
       {periodeArbeidsforhold}
     </option>
   );
@@ -117,8 +117,8 @@ export type NyPeriode = {
   fom: string;
   tom: string;
   periodeType: string;
-  periodeOverforingArsak: Kodeverk;
-  periodeArsak: Kodeverk;
+  periodeOverforingArsak: string;
+  periodeArsak: string;
   samtidigUttakNyPeriode: boolean;
   arbeidsForhold: string;
   arbeidstidprosent: number;
@@ -143,7 +143,7 @@ type FormValues = {
 interface PureOwnProps {
   newPeriodeCallback: (values: FormValues) => void;
   uttakPeriodeVurderingTyper: KodeverkMedNavn[];
-  getKodeverknavn: (kodeverk: Kodeverk) => string;
+  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
   personoversikt: Personoversikt;
   alleKodeverk: AlleKodeverk;
@@ -389,7 +389,6 @@ const transformValues = (
   utsettelseÅrsaker: KodeverkMedNavn[],
   overføringÅrsaker: KodeverkMedNavn[],
   uttakPeriodeVurderingTyper: KodeverkMedNavn[],
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
   periodeTyper?: KodeverkMedNavn[],
 ): any => {
   const periodeObjekt = getPeriodeData(values.periodeType, periodeTyper)[0] || null;
@@ -400,14 +399,14 @@ const transformValues = (
     ? {
       kode: utsettelseÅrsakObjekt.kode,
       kodeverk: utsettelseÅrsakObjekt.kodeverk,
-      navn: getKodeverknavn(utsettelseÅrsakObjekt),
+      navn: utsettelseÅrsakObjekt.navn,
     }
     : undefined;
   const overføringÅrsak = overføringÅrsakObjekt !== undefined
     ? {
       kode: overføringÅrsakObjekt.kode,
       kodeverk: overføringÅrsakObjekt.kodeverk,
-      navn: getKodeverknavn(overføringÅrsakObjekt),
+      navn: overføringÅrsakObjekt.navn,
     }
     : undefined;
 
@@ -446,7 +445,7 @@ const transformValues = (
       ? {
         kode: periodeObjekt.kode,
         kodeverk: periodeObjekt.kodeverk,
-        navn: getKodeverknavn(periodeObjekt),
+        navn: periodeObjekt.navn,
       }
       : { kode: '-' },
     arbeidsgiver,
@@ -479,22 +478,20 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
   const {
     newPeriodeCallback,
     uttakPeriodeVurderingTyper,
-    getKodeverknavn,
     faktaArbeidsforhold,
     personoversikt,
     alleKodeverk,
   } = ownProps;
 
-  const periodeTyper = alleKodeverk[kodeverkTyper.UTTAK_PERIODE_TYPE] || null;
-  const utsettelseÅrsaker = alleKodeverk[kodeverkTyper.UTSETTELSE_AARSAK_TYPE];
-  const overføringÅrsaker = alleKodeverk[kodeverkTyper.OVERFOERING_AARSAK_TYPE];
+  const periodeTyper = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE] || null;
+  const utsettelseÅrsaker = alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE];
+  const overføringÅrsaker = alleKodeverk[KodeverkType.OVERFOERING_AARSAK_TYPE];
   const onSubmit = (values: FormValues) => newPeriodeCallback(
     transformValues(
       values,
       utsettelseÅrsaker,
       overføringÅrsaker,
       uttakPeriodeVurderingTyper,
-      getKodeverknavn,
       periodeTyper,
     ),
   );
@@ -504,7 +501,7 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
     utsettelseÅrsaker,
     overføringÅrsaker,
     andeler: faktaArbeidsforhold || EMPTY_ARRAY,
-    sokerKjonn: personoversikt.bruker.kjønn.kode,
+    sokerKjonn: personoversikt.bruker.kjønn,
     initialValues: {
       fom: null,
       tom: null,

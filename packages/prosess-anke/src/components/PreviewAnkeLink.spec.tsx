@@ -13,10 +13,7 @@ describe('<PreviewAnkeLink>', () => {
     const wrapper = shallow(<PreviewAnkeLink
       previewCallback={previewCallback}
       fritekstTilBrev="Fritekst"
-      ankeVurdering={{
-        kode: ankeVurdering.ANKE_OMGJOER,
-        kodeverk: '',
-      }}
+      ankeVurdering={ankeVurdering.ANKE_OMGJOER}
       readOnly={false}
     />);
 
@@ -38,10 +35,7 @@ describe('<PreviewAnkeLink>', () => {
     const wrapper = shallow(<PreviewAnkeLink
       previewCallback={previewCallback}
       fritekstTilBrev="Fritekst"
-      ankeVurdering={{
-        kode: ankeVurdering.ANKE_OMGJOER,
-        kodeverk: '',
-      }}
+      ankeVurdering={ankeVurdering.ANKE_OMGJOER}
       readOnly
     />);
 

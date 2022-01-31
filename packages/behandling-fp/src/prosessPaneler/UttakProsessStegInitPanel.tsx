@@ -26,7 +26,7 @@ const getStatusFromUttakresultat = (uttaksresultat?: UttaksresultatPeriode): str
   }
   if (uttaksresultat.perioderSøker && uttaksresultat.perioderSøker.length > 0) {
     const oppfylt = uttaksresultat.perioderSøker.some((p) => (
-      p.periodeResultatType.kode !== periodeResultatType.AVSLATT
+      p.periodeResultatType !== periodeResultatType.AVSLATT
     ));
     if (oppfylt) {
       return vilkarUtfallType.OPPFYLT;

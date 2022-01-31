@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
-import { KodeverkMedNavn, Kodeverk } from '@fpsak-frontend/types';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import {
   ariaCheck, getLanguageFromSprakkode, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
@@ -44,12 +44,12 @@ const showFritekst = (brevmalkode?: string, arsakskode?: string): boolean => (br
   || brevmalkode === dokumentMalType.VARSEL_OM_TILBAKEKREVING
   || (brevmalkode === dokumentMalType.REVURDERING_DOK && arsakskode === ugunstAarsakTyper.ANNET));
 
-const getfiltrerteRevurderingVarslingArsaker = (revurderingVarslingArsaker: KodeverkMedNavn[], fagsakYtelseType: Kodeverk): KodeverkMedNavn[] => {
-  if (fagsakYtelseType.kode === FagsakYtelseType.ENGANGSSTONAD) {
+const getfiltrerteRevurderingVarslingArsaker = (revurderingVarslingArsaker: KodeverkMedNavn[], fagsakYtelseType: string): KodeverkMedNavn[] => {
+  if (fagsakYtelseType === FagsakYtelseType.ENGANGSSTONAD) {
     return revurderingVarslingArsaker.filter((arsak) => arsak.kode === ugunstAarsakTyper.BARN_IKKE_REGISTRERT_FOLKEREGISTER
       || arsak.kode === ugunstAarsakTyper.ANNET);
   }
-  if (fagsakYtelseType.kode === FagsakYtelseType.SVANGERSKAPSPENGER) {
+  if (fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER) {
     return revurderingVarslingArsaker.filter((arsak) => arsak.kode !== ugunstAarsakTyper.BARN_IKKE_REGISTRERT_FOLKEREGISTER
       && arsak.kode !== ugunstAarsakTyper.MORS_AKTIVITETSKRAV_ER_IKKE_OPPFYLT);
   }
@@ -82,10 +82,10 @@ interface OwnProps {
   previewCallback: (mottaker?: string, brevmalkode?: string, fritekst?: string, arsakskode?: string) => void;
   recipients: string[];
   templates: Template[];
-  sprakKode?: Kodeverk;
+  sprakKode?: string;
   revurderingVarslingArsak: KodeverkMedNavn[];
   isKontrollerRevurderingApOpen?: boolean;
-  fagsakYtelseType: Kodeverk;
+  fagsakYtelseType: string;
   kanVeilede: boolean;
   meldingFormData?: any,
   setMeldingForData: (data?: any) => void,

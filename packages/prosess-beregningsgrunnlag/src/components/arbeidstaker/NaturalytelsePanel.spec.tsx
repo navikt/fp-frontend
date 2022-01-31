@@ -8,10 +8,7 @@ const lagBGPeriode = (fom, tom, andeler) => ({
 });
 
 const lagAndel = (orgnr, natYtelse) => ({
-  aktivitetStatus: {
-    kode: aktivitetStatus.ARBEIDSTAKER,
-    kodeverk: 'AKTIVITET_STATUS',
-  },
+  aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
   arbeidsforhold: {
     arbeidsgiverIdent: orgnr,
     naturalytelseBortfaltPrÅr: natYtelse,

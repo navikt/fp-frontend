@@ -18,7 +18,6 @@ const behandling = {
 const arbeidsforhold = {
   kilde: {
     navn: arbeidsforholdKilder.INNTEKTSMELDING,
-    kodeverk: '',
   },
   id: '1',
   arbeidsgiverReferanse: '11212',
@@ -80,7 +79,6 @@ export const visAksjonspunktForAvklaringAvArbeidsforhold = () => (
         mottattDatoInntektsmelding: undefined,
       }, {
         ...arbeidsforhold,
-        navn: 'NSB',
         id: '2',
         arbeidsforholdId: '999999998',
         tilVurdering: true,
@@ -89,14 +87,8 @@ export const visAksjonspunktForAvklaringAvArbeidsforhold = () => (
       skalKunneLeggeTilNyeArbeidsforhold: false,
     } as InntektArbeidYtelse}
     aksjonspunkter={[{
-      definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
+      status: aksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,
@@ -118,14 +110,8 @@ export const visAksjonspunktForIngenArbeidsforholdRegistrert = () => (
       skalKunneLeggeTilNyeArbeidsforhold: true,
     }}
     aksjonspunkter={[{
-      definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
+      status: aksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,
@@ -163,10 +149,7 @@ export const visPanelForPermisjon = () => (
         mottattDatoInntektsmelding: undefined,
         tilVurdering: true,
         permisjoner: [{
-          type: {
-            kode: 'PERMISJON',
-            kodeverk: '',
-          },
+          type: 'PERMISJON',
           permisjonFom: '2018-10-10',
           permisjonTom: '2019-10-10',
           permisjonsprosent: 100,
@@ -175,14 +158,8 @@ export const visPanelForPermisjon = () => (
       skalKunneLeggeTilNyeArbeidsforhold: false,
     } as InntektArbeidYtelse}
     aksjonspunkter={[{
-      definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
+      status: aksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,
@@ -204,19 +181,13 @@ export const visPanelForFlerePermisjoner = () => (
         ...arbeidsforhold,
         tilVurdering: true,
         permisjoner: [{
-          type: {
-            kode: 'PERMISJON',
-            kodeverk: '',
-          },
+          type: 'PERMISJON',
           permisjonFom: '2015-01-01',
           permisjonTom: undefined,
           permisjonsprosent: 100,
           permisjonsÅrsak: 'aarsak',
         }, {
-          type: {
-            kode: 'PERMISJON',
-            kodeverk: '',
-          },
+          type: 'PERMISJON',
           permisjonFom: '2017-01-01',
           permisjonTom: '2019-01-01',
           permisjonsprosent: 100,
@@ -225,14 +196,8 @@ export const visPanelForFlerePermisjoner = () => (
       skalKunneLeggeTilNyeArbeidsforhold: false,
     } as InntektArbeidYtelse}
     aksjonspunkter={[{
-      definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
+      status: aksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,

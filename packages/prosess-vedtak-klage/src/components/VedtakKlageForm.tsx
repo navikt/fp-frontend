@@ -5,12 +5,12 @@ import { FormattedMessage } from 'react-intl';
 import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
 
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import {
-  Aksjonspunkt, Behandling, KlageVurdering, AlleKodeverk, Kodeverk,
+  Aksjonspunkt, Behandling, KlageVurdering, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import { BekreftVedtakUtenTotrinnskontrollAp, ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
@@ -38,7 +38,7 @@ const getPreviewVedtakCallback = (previewVedtakCallback: (data: ForhandsvisData)
 
 type AksjonspunktData = Array<ForeslaVedtakAp | ForeslaVedtakManueltAp | BekreftVedtakUtenTotrinnskontrollAp>;
 
-const getAvvisningsAarsaker = (klageVurderingResultat: KlageVurdering): Kodeverk[] => {
+const getAvvisningsAarsaker = (klageVurderingResultat: KlageVurdering): string[] => {
   if (klageVurderingResultat) {
     if (klageVurderingResultat.klageFormkravResultatKA && klageVurderingResultat.klageVurderingResultatNK) {
       return klageVurderingResultat.klageFormkravResultatKA.avvistArsaker;
@@ -54,13 +54,13 @@ const getOmgjortAarsak = (
   klageVurderingResultat: KlageVurdering,
   alleKodeverk: AlleKodeverk,
 ): string | null => {
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
   if (klageVurderingResultat) {
     if (klageVurderingResultat.klageVurderingResultatNK) {
-      return getKodeverknavn(klageVurderingResultat.klageVurderingResultatNK.klageMedholdArsak);
+      return getKodeverknavn(klageVurderingResultat.klageVurderingResultatNK.klageMedholdArsak, KodeverkType.KLAGE_MEDHOLD_ARSAK);
     }
     if (klageVurderingResultat.klageVurderingResultatNFP) {
-      return getKodeverknavn(klageVurderingResultat.klageVurderingResultatNFP.klageMedholdArsak);
+      return getKodeverknavn(klageVurderingResultat.klageVurderingResultatNFP.klageMedholdArsak, KodeverkType.KLAGE_MEDHOLD_ARSAK);
     }
   }
   return null;
@@ -69,7 +69,7 @@ const getOmgjortAarsak = (
 const getResultatText = (behandlingKlageVurdering: KlageVurdering): string | null => {
   const klageResultat = behandlingKlageVurdering.klageVurderingResultatNK
     ? behandlingKlageVurdering.klageVurderingResultatNK : behandlingKlageVurdering.klageVurderingResultatNFP;
-  switch (klageResultat.klageVurdering.kode) {
+  switch (klageResultat.klageVurdering) {
     case klageVurderingCodes.AVVIS_KLAGE:
       return 'VedtakKlageForm.KlageAvvist';
     case klageVurderingCodes.STADFESTE_YTELSESVEDTAK:
@@ -79,7 +79,7 @@ const getResultatText = (behandlingKlageVurdering: KlageVurdering): string | nul
     case klageVurderingCodes.HJEMSENDE_UTEN_Å_OPPHEVE:
       return 'VedtakKlageForm.HjemmsendUtenOpphev';
     case klageVurderingCodes.MEDHOLD_I_KLAGE:
-      return OMGJOER_TEKST_MAP[klageResultat.klageVurderingOmgjoer.kode];
+      return OMGJOER_TEKST_MAP[klageResultat.klageVurderingOmgjoer];
     default:
       return null;
   }
@@ -120,8 +120,8 @@ const VedtakKlageForm: FunctionComponent<OwnProps> = ({
     setSubmitting(true);
 
     const behandlingAksjonspunktCodes = aksjonspunkter
-      .filter((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET)
-      .map((ap) => ap.definisjon.kode);
+      .filter((ap) => ap.status === aksjonspunktStatus.OPPRETTET)
+      .map((ap) => ap.definisjon);
     const input = behandlingAksjonspunktCodes.map((apCode) => ({
       kode: validerApKodeOgHentApEnum(apCode, AksjonspunktCode.FORESLA_VEDTAK,
         AksjonspunktCode.FORESLA_VEDTAK_MANUELT,
@@ -131,7 +131,7 @@ const VedtakKlageForm: FunctionComponent<OwnProps> = ({
     submitCallback(input).then(() => setSubmitting(false));
   }, [aksjonspunkter]);
 
-  const kodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+  const kodeverknavn = getKodeverknavnFn(alleKodeverk);
   return (
     <>
       <Undertittel><FormattedMessage id="VedtakKlageForm.Header" /></Undertittel>
@@ -139,21 +139,21 @@ const VedtakKlageForm: FunctionComponent<OwnProps> = ({
       <Undertekst><FormattedMessage id="VedtakKlageForm.Resultat" /></Undertekst>
       <Normaltekst><FormattedMessage id={behandlingsResultatTekst} /></Normaltekst>
       <VerticalSpacer sixteenPx />
-      {behandlingsresultat.type.kode === behandlingResultatType.KLAGE_AVVIST && (
+      {behandlingsresultat.type === behandlingResultatType.KLAGE_AVVIST && (
         <>
           <Undertekst><FormattedMessage id="VedtakKlageForm.ArsakTilAvvisning" /></Undertekst>
-          { avvistArsaker.map((arsak) => <Normaltekst key={arsak.kode}>{kodeverknavn(arsak)}</Normaltekst>) }
+          { avvistArsaker.map((arsak) => <Normaltekst key={arsak}>{kodeverknavn(arsak, KodeverkType.KLAGE_AVVIST_AARSAK)}</Normaltekst>) }
           <VerticalSpacer sixteenPx />
         </>
       )}
-      {behandlingsresultat.type.kode === behandlingResultatType.KLAGE_MEDHOLD && (
+      {behandlingsresultat.type === behandlingResultatType.KLAGE_MEDHOLD && (
         <>
           <Undertekst><FormattedMessage id="VedtakKlageForm.ArsakTilOmgjoring" /></Undertekst>
           { omgjortAarsak }
           <VerticalSpacer sixteenPx />
         </>
       )}
-      {behandlingsresultat.type.kode === behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET && (
+      {behandlingsresultat.type === behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET && (
         <>
           <Undertekst><FormattedMessage id="VedtakKlageForm.ArsakTilOppheving" /></Undertekst>
           { omgjortAarsak }

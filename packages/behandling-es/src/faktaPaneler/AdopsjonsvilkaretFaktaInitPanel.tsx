@@ -50,7 +50,7 @@ const AdopsjonsvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = 
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.ADOPSJONSVILKARET}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'AdopsjonInfoPanel.Adopsjon' })}
-    skalPanelVisesIMeny={(initData) => !!initData?.vilkar && initData.vilkar.some((v) => adopsjonsvilkarene.some((av) => av === v.vilkarType.kode))}
+    skalPanelVisesIMeny={(initData) => !!initData?.vilkar && initData.vilkar.some((v) => adopsjonsvilkarene.some((av) => av === v.vilkarType))}
     renderPanel={(data) => (
       <AdopsjonFaktaIndex
         isForeldrepengerFagsak={false}

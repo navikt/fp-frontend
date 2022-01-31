@@ -10,27 +10,15 @@ describe('<getAlleMerknaderFraBeslutter>', () => {
   const behandling = {
     uuid: '1',
     versjon: 1,
-    status: {
-      kode: behandlingStatus.BEHANDLING_UTREDES,
-      kodeverk: 'BEHANDLING_STATUS',
-    },
-    type: {
-      kode: behandlingType.FORSTEGANGSSOKNAD,
-      kodeverk: 'BEHANDLING_TYPE',
-    },
+    status: behandlingStatus.BEHANDLING_UTREDES,
+    type: behandlingType.FORSTEGANGSSOKNAD,
     behandlingPaaVent: false,
     behandlingHenlagt: false,
   };
 
   const aksjonspunkter = [{
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: 'AKSJONSPUNKT_STATUS',
-    },
-    definisjon: {
-      kode: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-      kodeverk: 'AKSJONSPUNKT_KODE',
-    },
+    status: aksjonspunktStatus.OPPRETTET,
+    definisjon: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
     kanLoses: true,
     erAktivt: true,
     toTrinnsBehandling: true,
@@ -41,7 +29,7 @@ describe('<getAlleMerknaderFraBeslutter>', () => {
     const merknader = getAlleMerknaderFraBeslutter(behandling as Behandling, aksjonspunkter);
 
     expect(merknader).toEqual({
-      [aksjonspunkter[0].definisjon.kode]: {
+      [aksjonspunkter[0].definisjon]: {
         notAccepted: true,
       },
     });
@@ -50,10 +38,7 @@ describe('<getAlleMerknaderFraBeslutter>', () => {
   it('skal ikke hente merknader  behandlingstatus er ulik BEHANDLING_UTREDER', () => {
     const behandlingMedAnnenStatus = {
       ...behandling,
-      status: {
-        kode: behandlingStatus.AVSLUTTET,
-        kodeverk: 'BEHANDLING_STATUS',
-      },
+      status: behandlingStatus.AVSLUTTET,
     };
     const merknader = getAlleMerknaderFraBeslutter(behandlingMedAnnenStatus as Behandling, aksjonspunkter);
 

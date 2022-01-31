@@ -27,10 +27,7 @@ type INIT_DATA = {
 }
 
 const fagsak = {
-  fagsakYtelseType: {
-    kode: fagsakYtelseType.FORELDREPENGER,
-    kodeverk: '',
-  },
+  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
 } as Fagsak;
 
 const behandling = {
@@ -52,16 +49,10 @@ describe('<AnkeResultatProsessStegInitPanel>', () => {
     isReadOnly: false,
     readOnlySubmitButton: false,
     aksjonspunkter: [{
-      definisjon: {
-        kode: aksjonspunktCodes.FORESLA_VEDTAK,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.FORESLA_VEDTAK,
       erAktivt: true,
       kanLoses: true,
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      status: aksjonspunktStatus.OPPRETTET,
     }] as Aksjonspunkt[],
     vilkar: [],
     isAksjonspunktOpen: true,
@@ -124,10 +115,7 @@ describe('<AnkeResultatProsessStegInitPanel>', () => {
         key: AnkeBehandlingApiKeys.ANKE_VURDERING.name,
         data: {
           ankeVurderingResultat: {
-            ankeVurdering: {
-              kode: ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV,
-              kodeverk: '',
-            },
+            ankeVurdering: ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV,
             begrunnelse: 'test',
           },
         } as AnkeVurdering,
@@ -164,8 +152,9 @@ describe('<AnkeResultatProsessStegInitPanel>', () => {
       behandlingUuid: 'test-uuid',
       ytelseType: {
         kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: '',
+        kodeverk: 'FAGSAK_YTELSE',
       },
+      fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
     }));
   });
 });

@@ -1,19 +1,18 @@
-import Kodeverk from './kodeverkTsType';
 import Personadresse from './personadresseTsType';
 
 export type MedlemskapPeriode = Readonly<{
   fom: string;
   tom: string;
-  medlemskapType: Kodeverk;
-  dekningType: Kodeverk;
-  kildeType: Kodeverk;
+  medlemskapType: string;
+  dekningType: string;
+  kildeType: string;
   beslutningsdato?: string;
 }>
 
 export type PersonopplysningMedlem = Readonly<{
   navn: string;
-  personstatus: Kodeverk;
-  region: Kodeverk;
+  personstatus: string;
+  region: string;
   adresser: Personadresse[];
 }>
 
@@ -27,14 +26,14 @@ export type MedlemPeriode = Readonly<{
   erEosBorger: boolean;
   lovligOppholdVurdering: boolean;
   bosattVurdering: boolean;
-  medlemskapManuellVurderingType: Kodeverk;
+  medlemskapManuellVurderingType: string;
   begrunnelse: string;
 }>
 
 export type Oppholdstillatelse = Readonly<{
   fom?: string;
   tom: string;
-  oppholdstillatelseType: Kodeverk;
+  oppholdstillatelseType: string;
 }>
 
 type Medlemskap = Readonly<{

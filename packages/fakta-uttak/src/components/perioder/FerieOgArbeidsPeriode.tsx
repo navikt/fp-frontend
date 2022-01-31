@@ -15,7 +15,6 @@ import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/for
 import {
   hasValidPeriod, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
-import { Kodeverk } from '@fpsak-frontend/types';
 
 import EndreSoknadsperiode from '../EndreSoknadsperiode';
 import PerioderKnapper from './PerioderKnapper';
@@ -42,7 +41,7 @@ interface PureOwnProps {
   tilDato: string;
   fraDato: string;
   arbeidstidprosent: number;
-  uttakPeriodeType: Kodeverk;
+  uttakPeriodeType: string;
   updatePeriode: (...args: any[]) => any;
   readOnly: boolean;
   cancelEditPeriode: (...args: any[]) => any;
@@ -55,9 +54,9 @@ interface MappedOwnProps {
   resultat?: string;
   updated: boolean;
   skalViseResultat: boolean;
-  oppholdArsak?: Kodeverk;
+  oppholdArsak?: string;
   førsteUttaksdato?: string;
-  originalResultat: Kodeverk;
+  originalResultat: string;
   initialValues: FormValues;
   form: string;
 }
@@ -87,7 +86,7 @@ export const FerieOgArbeidsPeriode: FunctionComponent<PureOwnProps & MappedOwnPr
   };
 
   const withGradering = arbeidstidprosent !== null && arbeidstidprosent !== undefined && arbeidstidprosent > 0;
-  const periodeOkDisabled = !bekreftet || originalResultat.kode !== uttakPeriodeVurdering.PERIODE_OK;
+  const periodeOkDisabled = !bekreftet || originalResultat !== uttakPeriodeVurdering.PERIODE_OK;
 
   return (
     <div>
@@ -186,9 +185,9 @@ const buildInitialValues = createSelector([
   (state: any, ownProps: PureOwnProps) => formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.oppholdÅrsak`),
   (state: any, ownProps: PureOwnProps) => formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.resultat`),
   (_state: any, ownProps: PureOwnProps) => ownProps],
-(begrunnelse, saksebehandlersBegrunnelse, oppholdArsak, initialResultat, ownProps): FormValues => {
+(begrunnelse, saksebehandlersBegrunnelse, oppholdArsak: string, initialResultat, ownProps): FormValues => {
   let initialResultatValue = initialResultat ? initialResultat.kode : undefined;
-  if (oppholdArsak && oppholdArsak.kode !== oppholdArsakType.UDEFINERT && !begrunnelse) {
+  if (oppholdArsak && oppholdArsak !== oppholdArsakType.UDEFINERT && !begrunnelse) {
     initialResultatValue = undefined;
   }
   return {
@@ -198,8 +197,8 @@ const buildInitialValues = createSelector([
     nyTom: ownProps.tilDato,
     nyFom: ownProps.fraDato,
     nyArbeidstidsprosent: ownProps.arbeidstidprosent,
-    kontoType: ownProps.uttakPeriodeType.kode,
-    oppholdArsak: oppholdArsak ? oppholdArsak.kode : '',
+    kontoType: ownProps.uttakPeriodeType,
+    oppholdArsak: oppholdArsak || '',
   };
 });
 
@@ -212,9 +211,9 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
     const førsteUttaksdato = formValueSelector('UttakFaktaForm')(state, 'førsteUttaksdato');
     const originalResultat = formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.originalResultat`) || {};
     const begrunnelse = formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.begrunnelse`);
-    const oppholdArsak = formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.oppholdÅrsak`);
+    const oppholdArsak = formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.oppholdÅrsak`) as string;
 
-    const skalViseResultat = !(ownProps.readOnly && oppholdArsak && oppholdArsak.kode !== oppholdArsakType.UDEFINERT && !begrunnelse);
+    const skalViseResultat = !(ownProps.readOnly && oppholdArsak && oppholdArsak !== oppholdArsakType.UDEFINERT && !begrunnelse);
 
     return {
       onSubmit,

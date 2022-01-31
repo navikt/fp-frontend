@@ -17,7 +17,7 @@ describe('<LonnsendringForm>', () => {
   });
 
   const faktaOmBeregning = {
-    faktaOmBeregningTilfeller: [{ kode: faktaOmBeregningTilfelle.VURDER_LONNSENDRING, kodeverk: 'test' }],
+    faktaOmBeregningTilfeller: [faktaOmBeregningTilfelle.VURDER_LONNSENDRING],
     arbeidsforholdMedLønnsendringUtenIM: [{ andelsnr: 1 }],
     andelerForFaktaOmBeregning: [],
   };
@@ -42,10 +42,7 @@ describe('<LonnsendringForm>', () => {
         {
           beregningsgrunnlagPrStatusOgAndel: [
             {
-              aktivitetStatus: {
-                kode: aktivitetStatus.ARBEIDSTAKER,
-                kodeverk: 'test',
-              },
+              aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
               lonnsendringIBeregningsperioden: true,
             },
           ],

@@ -1,8 +1,6 @@
-import Kodeverk from './kodeverkTsType';
-
 type FaktaArbeidsforhold = Readonly<{
   arbeidsgiverReferanse: string;
-  arbeidType: Kodeverk;
+  arbeidType: string;
 }>
 
 export default FaktaArbeidsforhold;

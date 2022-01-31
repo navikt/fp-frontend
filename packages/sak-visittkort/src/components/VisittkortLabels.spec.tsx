@@ -12,7 +12,7 @@ const intlMock = getIntlMock(messages);
 describe('<VisittkortSakIndex>', () => {
   const fagsakPerson = {
     navn: 'Olga Utvikler',
-    kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
+    kjønn: KjønnkodeEnum.KVINNE,
     fødselsdato: '1979-01-01',
     fødselsnummer: '1234567',
   };

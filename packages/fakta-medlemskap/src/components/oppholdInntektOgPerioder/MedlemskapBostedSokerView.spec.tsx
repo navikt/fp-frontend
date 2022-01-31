@@ -16,22 +16,13 @@ const intlMock = getIntlMock(messages);
 describe('<MedlemskapBostedSokerView>', () => {
   const soker = {
     navn: 'Espen Utvikler',
-    personstatus: {
-      kode: 'BOSA',
-      kodeverk: '',
-    },
-    region: {
-      kode: 'NORDEN',
-      kodeverk: '',
-    },
+    personstatus: 'BOSA',
+    region: 'NORDEN',
     adresser: [{
       adresselinje1: 'Vei 1',
       postNummer: '1000',
       poststed: 'Oslo',
-      adresseType: {
-        kode: opplysningAdresseType.POSTADRESSE,
-        kodeverk: '',
-      },
+      adresseType: opplysningAdresseType.POSTADRESSE,
     }],
   } as PersonopplysningMedlem;
 
@@ -100,10 +91,7 @@ describe('<MedlemskapBostedSokerView>', () => {
       intl={intlMock}
       personopplysninger={{
         ...soker,
-        personstatus: {
-          kode: '-',
-          kodeverk: '',
-        },
+        personstatus: '-',
       }}
       regionTypes={regionTypes}
       personstatusTypes={personstatusTypes}

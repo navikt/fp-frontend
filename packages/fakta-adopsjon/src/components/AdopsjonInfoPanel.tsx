@@ -44,7 +44,7 @@ const buildInitialValues = (
   familiehendelse: FamilieHendelse,
   allAksjonspunkter: Aksjonspunkt[],
 ): FormValues => {
-  const aksjonspunkter = allAksjonspunkter.filter((ap) => adopsjonAksjonspunkter.some((kode) => kode === ap.definisjon.kode));
+  const aksjonspunkter = allAksjonspunkter.filter((ap) => adopsjonAksjonspunkter.some((kode) => kode === ap.definisjon));
 
   let mannAdoptererAleneValues = {};
   if (hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkter)) {

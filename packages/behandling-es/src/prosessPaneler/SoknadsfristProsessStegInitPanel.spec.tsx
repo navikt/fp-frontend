@@ -38,10 +38,7 @@ describe('<SoknadsfristProsessStegInitPanel>', () => {
     const aksjonspunkter = [] as Aksjonspunkt[];
 
     const vilkar = [{
-      vilkarType: {
-        kode: vilkarType.SOKNADFRISTVILKARET,
-        kodeverk: '',
-      },
+      vilkarType: vilkarType.SOKNADFRISTVILKARET,
     }] as Vilkar[];
 
     expect(panel.props().skalPanelVisesIMeny({ aksjonspunkter, vilkar } as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(true);
@@ -62,10 +59,7 @@ describe('<SoknadsfristProsessStegInitPanel>', () => {
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const aksjonspunkter = [{
-      definisjon: {
-        kode: aksjonspunktCodes.SOKNADSFRISTVILKARET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.SOKNADSFRISTVILKARET,
     }] as Aksjonspunkt[];
 
     const innerElement = panel.renderProp('renderPanel')({ aksjonspunkter }, { aksjonspunkter, vilkar: [] });

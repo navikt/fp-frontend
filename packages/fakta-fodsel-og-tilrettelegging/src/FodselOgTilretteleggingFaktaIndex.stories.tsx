@@ -26,10 +26,7 @@ const svangerskapspengerTilretteleggingForArbeidsgiver = {
     tilretteleggingBehovFom: '2019-09-16',
     tilretteleggingDatoer: [{
       fom: '2019-09-16',
-      type: {
-        kode: tilretteleggingType.DELVIS_TILRETTELEGGING,
-        kodeverk: '',
-      },
+      type: tilretteleggingType.DELVIS_TILRETTELEGGING,
       stillingsprosent: 30,
     }],
     velferdspermisjoner: [
@@ -37,14 +34,11 @@ const svangerskapspengerTilretteleggingForArbeidsgiver = {
         permisjonFom: '2019-09-10',
         permisjonTom: null,
         permisjonsprosent: 50,
-        type: { kode: 'VELFERDSPERMISJON', kodeverk: 'PERMISJONSBESKRIVELSE_TYPE' },
+        type: 'VELFERDSPERMISJON',
       },
     ],
     arbeidsgiverReferanse: '3',
-    uttakArbeidType: {
-      kode: 'FRILANS',
-      kodeverk: 'UTTAK_ARBEID_TYPE',
-    },
+    uttakArbeidType: 'FRILANS',
     internArbeidsforholdReferanse: 'c5534-6e55-4112-9645-fe52ee4950c2',
     eksternArbeidsforholdReferanse: 'T555864629R5021761S1103L5555',
     skalBrukes: true,
@@ -53,17 +47,11 @@ const svangerskapspengerTilretteleggingForArbeidsgiver = {
     tilretteleggingBehovFom: '2019-09-16',
     tilretteleggingDatoer: [{
       fom: '2019-09-16',
-      type: {
-        kode: tilretteleggingType.INGEN_TILRETTELEGGING,
-        kodeverk: '',
-      },
+      type: tilretteleggingType.INGEN_TILRETTELEGGING,
     }],
     velferdspermisjoner: [],
     arbeidsgiverReferanse: '3',
-    uttakArbeidType: {
-      kode: 'FRILANS',
-      kodeverk: 'UTTAK_ARBEID_TYPE',
-    },
+    uttakArbeidType: 'FRILANS',
     internArbeidsforholdReferanse: '5gb912b7-4187-45a0-8c44-02322887d0ad',
     eksternArbeidsforholdReferanse: 'H555864629R5021761S1100L5555',
     skalBrukes: true,
@@ -78,10 +66,7 @@ const svangerskapspengerTilretteleggingForFrilanser = {
     tilretteleggingBehovFom: '2019-10-01',
     tilretteleggingDatoer: [{
       fom: '2019-10-01',
-      type: {
-        kode: tilretteleggingType.INGEN_TILRETTELEGGING,
-        kodeverk: '',
-      },
+      type: tilretteleggingType.INGEN_TILRETTELEGGING,
     }],
     arbeidsgiverReferanse: '1',
     skalBrukes: true,
@@ -91,16 +76,10 @@ const svangerskapspengerTilretteleggingForFrilanser = {
     tilretteleggingBehovFom: '2019-10-01',
     tilretteleggingDatoer: [{
       fom: '2019-10-01',
-      type: {
-        kode: tilretteleggingType.INGEN_TILRETTELEGGING,
-        kodeverk: '',
-      },
+      type: tilretteleggingType.INGEN_TILRETTELEGGING,
     }],
     arbeidsgiverReferanse: '2',
-    uttakArbeidType: {
-      kode: 'ORDINÆRT_ARBEID',
-      kodeverk: 'UTTAK_ARBEID_TYPE',
-    },
+    uttakArbeidType: 'ORDINÆRT_ARBEID',
     skalBrukes: true,
     velferdspermisjoner: [],
   }] as ArbeidsforholdFodselOgTilrettelegging[],
@@ -182,14 +161,8 @@ export const tilretteleggingMedVelferdspermisjon = () => (
     behandling={behandling}
     svangerskapspengerTilrettelegging={tilretteleggingPermisjon}
     aksjonspunkter={[{
-      definisjon: {
-        kode: aksjonspunktCodes.FODSELTILRETTELEGGING,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.FODSELTILRETTELEGGING,
+      status: aksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,
@@ -207,14 +180,8 @@ export const visAksjonspunktForFødselstilretteleggingForArbeidsgiver = () => (
     behandling={behandling}
     svangerskapspengerTilrettelegging={svangerskapspengerTilretteleggingForArbeidsgiver}
     aksjonspunkter={[{
-      definisjon: {
-        kode: aksjonspunktCodes.FODSELTILRETTELEGGING,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.FODSELTILRETTELEGGING,
+      status: aksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,
@@ -232,14 +199,8 @@ export const visAksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigN
     behandling={behandling}
     svangerskapspengerTilrettelegging={svangerskapspengerTilretteleggingForFrilanser}
     aksjonspunkter={[{
-      definisjon: {
-        kode: aksjonspunktCodes.FODSELTILRETTELEGGING,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.FODSELTILRETTELEGGING,
+      status: aksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,
@@ -267,14 +228,8 @@ export const visInfoDialogForVarIkkeAnsattDaBehovetForTilretteleggingOppstod = (
       behandling={behandling}
       svangerskapspengerTilrettelegging={svangerskapspengerTilretteleggingForArbeidsgiver}
       aksjonspunkter={[{
-        definisjon: {
-          kode: aksjonspunktCodes.FODSELTILRETTELEGGING,
-          kodeverk: '',
-        },
-        status: {
-          kode: aksjonspunktStatus.OPPRETTET,
-          kodeverk: '',
-        },
+        definisjon: aksjonspunktCodes.FODSELTILRETTELEGGING,
+        status: aksjonspunktStatus.OPPRETTET,
         begrunnelse: undefined,
         kanLoses: true,
         erAktivt: true,

@@ -19,8 +19,8 @@ interface OwnProps {
 const VisittkortBarnInfoPanel: FunctionComponent<OwnProps> = ({
   familiehendelse,
 }) => {
-  const erFodselEllerTerminSoknad = familiehendelse.hendelseType.kode === familieHendelseType.FODSEL
-    || familiehendelse.hendelseType.kode === familieHendelseType.TERMIN;
+  const erFodselEllerTerminSoknad = familiehendelse.hendelseType === familieHendelseType.FODSEL
+    || familiehendelse.hendelseType === familieHendelseType.TERMIN;
 
   return (
     <div className={styles.container}>

@@ -21,9 +21,7 @@ const beregningsresultat = {
 };
 
 const defaultAksjonspunkter = [{
-  definisjon: {
-    kode: aksjonspunktCodes.VURDER_FEILUTBETALING,
-  },
+  definisjon: aksjonspunktCodes.VURDER_FEILUTBETALING,
   begrunnelse: 'test',
 }] as Aksjonspunkt[];
 
@@ -77,9 +75,7 @@ SaksbehandlerKanOverstyre.args = {
 export const OverstyrtReadonlyPanel = Template.bind({});
 OverstyrtReadonlyPanel.args = {
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.OVERSTYR_BEREGNING,
-    },
+    definisjon: aksjonspunktCodes.OVERSTYR_BEREGNING,
     begrunnelse: 'Dette er en begrunnelse',
   }] as Aksjonspunkt[],
   kanOverstyreAccess: { isEnabled: true },

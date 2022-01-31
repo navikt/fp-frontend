@@ -23,20 +23,14 @@ const behandling = {
   uuid: '1',
   versjon: 1,
   behandlingsresultat: {
-    type: {
-      kode: behandlingResultatType.KLAGE_AVVIST,
-    },
+    type: behandlingResultatType.KLAGE_AVVIST,
   },
   behandlingPaaVent: false,
 } as Behandling;
 
 const aksjonspunkter = [{
-  definisjon: {
-    kode: aksjonspunktCodes.FORESLA_VEDTAK,
-  },
-  status: {
-    kode: aksjonspunktStatus.OPPRETTET,
-  },
+  definisjon: aksjonspunktCodes.FORESLA_VEDTAK,
+  status: aksjonspunktStatus.OPPRETTET,
   begrunnelse: undefined,
 }] as Aksjonspunkt[];
 
@@ -78,21 +72,12 @@ VedtakspanelDerKlageErVurdertAvNk.args = {
   klageVurdering: {
     klageVurderingResultatNK: {
       klageVurdertAv: 'NK',
-      klageVurdering: {
-        kode: klageVurderingCodes.AVVIS_KLAGE,
-        kodeverk: 'KLAGEVURDERING',
-      },
-      klageMedholdArsak: {
-        kode: 'PROSESSUELL_FEIL',
-        kodeverk: 'KLAGE_MEDHOLD_AARSAK',
-      },
+      klageVurdering: klageVurderingCodes.AVVIS_KLAGE,
+      klageMedholdArsak: 'PROSESSUELL_FEIL',
       fritekstTilBrev: 'test',
     } as KlageVurderingResultat,
     klageFormkravResultatKA: {
-      avvistArsaker: [{
-        kode: 'IKKE_KONKRET',
-        kodeverk: 'KLAGE_AVVIST_AARSAK',
-      }],
+      avvistArsaker: ['IKKE_KONKRET'],
     },
   } as KlageVurdering,
 };
@@ -104,21 +89,12 @@ VedtakspanelDerKlageErVurdertAvNfp.args = {
   klageVurdering: {
     klageVurderingResultatNK: {
       klageVurdertAv: 'NFP',
-      klageVurdering: {
-        kode: klageVurderingCodes.AVVIS_KLAGE,
-        kodeverk: '',
-      },
-      klageMedholdArsak: {
-        kode: 'PROSESSUELL_FEIL',
-        kodeverk: 'KLAGE_MEDHOLD_AARSAK',
-      },
+      klageVurdering: klageVurderingCodes.AVVIS_KLAGE,
+      klageMedholdArsak: 'PROSESSUELL_FEIL',
       fritekstTilBrev: 'test',
     } as KlageVurderingResultat,
     klageFormkravResultatKA: {
-      avvistArsaker: [{
-        kode: 'IKKE_KONKRET',
-        kodeverk: 'KLAGE_AVVIST_AARSAK',
-      }],
+      avvistArsaker: ['IKKE_KONKRET'],
     },
   } as KlageVurdering,
 };

@@ -1,5 +1,4 @@
 import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Kodeverk } from '@fpsak-frontend/types';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
@@ -8,11 +7,11 @@ type FaktaUttakAp = {
     bekreftetPeriode: {
       tom: string;
       fom: string;
-      uttakPeriodeType: Kodeverk;
-      utsettelseÅrsak: Kodeverk;
-      overføringÅrsak: Kodeverk;
-      oppholdÅrsak: Kodeverk;
-      resultat: Kodeverk | string;
+      uttakPeriodeType: string;
+      utsettelseÅrsak: string;
+      overføringÅrsak: string;
+      oppholdÅrsak: string;
+      resultat: string;
       dokumentertePerioder: {
         fom: string;
         tom: string;
@@ -32,20 +31,20 @@ type FaktaUttakAp = {
       samtidigUttak: boolean;
       samtidigUttaksprosent: string;
       flerbarnsdager: boolean;
-      morsAktivitet: Kodeverk;
-      periodeKilde?: Kodeverk;
+      morsAktivitet: string;
+      periodeKilde?: string;
       mottattDato: string;
     };
     orginalFom?: string;
     orginalTom?: string;
-    originalResultat?: Kodeverk;
+    originalResultat?: string;
     originalArbeidstidsprosent?: number;
     originalBegrunnelse?: string;
   }[];
   slettedePerioder: {
     fom: string;
     tom: string;
-    uttakPeriodeType: Kodeverk;
+    uttakPeriodeType: string;
     begrunnelse?: string;
   }[];
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_UTTAK

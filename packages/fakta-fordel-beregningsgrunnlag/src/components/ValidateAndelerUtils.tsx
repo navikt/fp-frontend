@@ -5,8 +5,9 @@ import AktivitetStatus, { aktivitetstatusTilAndeltypeMap } from '@fpsak-frontend
 import {
   dateIsAfter, formatCurrencyNoKr, removeSpacesFromNumber, required,
 } from '@fpsak-frontend/utils';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 
-import { ArbeidsgiverOpplysningerPerId, Kodeverk } from '@fpsak-frontend/types';
 import { GRADERING_RANGE_DENOMINATOR, mapToBelop } from './BgFordelingUtils';
 import { createVisningsnavnForAktivitetFordeling } from './util/visningsnavnHelper';
 import {
@@ -133,7 +134,7 @@ export const skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding = (arbeidsgiver: 
   .formatMessage({ id: 'BeregningInfoPanel.FordelBG.Validation.IkkjeHogereRefusjonEnnInntektsmelding' }, { arbeidsgiver });
 
 export const validateTotalRefusjonPrArbeidsforhold = (andelList: FordelBeregningsgrunnlagAndelValues[],
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   intl: IntlShape): string => {
   const arbeidsforholdRefusjonsinfo = finnArbeidsforholdRefusjonsinfoListe(andelList);
@@ -264,8 +265,10 @@ export const validateSumRefusjon = (values: FordelBeregningsgrunnlagAndelValues[
   return harGraderingUtenRefusjon ? totalRefusjonSkalVereLavereEnn(sumRefusjon, seksG, intl) : null;
 };
 
-const lagBeskrivendeStringAvStatuser = (statuser: string[], getKodeverknavn: (kodeverk: Kodeverk) => string): string => {
-  const liste = statuser.map((status) => getKodeverknavn({ kode: status, kodeverk: 'AKTIVITET_STATUS' }));
+const lagBeskrivendeStringAvStatuser = (
+  statuser: string[],
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string): string => {
+  const liste = statuser.map((status) => getKodeverknavn(status, KodeverkType.AKTIVITET_STATUS));
   liste.sort((a, b) => a.localeCompare(b));
   const unikListe = [...new Set(liste)];
   return unikListe.join(', ');
@@ -278,7 +281,7 @@ const finnFastsattBeløpForStatus = (values: FordelBeregningsgrunnlagAndelValues
 
 const validateSumFastsattArbeidstaker = (values: FordelBeregningsgrunnlagAndelValues[],
   seksG: number,
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   intl: IntlShape): string => {
   const statuserSomValideres = [AktivitetStatus.ARBEIDSTAKER];
   const sumFastsattBelop = finnFastsattBeløpForStatus(values, statuserSomValideres);
@@ -288,7 +291,7 @@ const validateSumFastsattArbeidstaker = (values: FordelBeregningsgrunnlagAndelVa
 
 const validateSumFastsattArbeidstakerOgFrilanser = (values: FordelBeregningsgrunnlagAndelValues[],
   seksG: number,
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   intl: IntlShape): string => {
   const statuserSomPrioriteresOverSN = [AktivitetStatus.ARBEIDSTAKER,
     AktivitetStatus.FRILANSER,
@@ -302,7 +305,7 @@ const validateSumFastsattArbeidstakerOgFrilanser = (values: FordelBeregningsgrun
 
 export const validateSumFastsattForUgraderteAktiviteter = (values: FordelBeregningsgrunnlagAndelValues[],
   grunnbeløp: number,
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   intl: IntlShape): string => {
   const skalGradereFL = !!values.find((v) => v.andelIArbeid !== '0.00' && v.aktivitetStatus === AktivitetStatus.FRILANSER);
   const seksG = 6 * grunnbeløp;

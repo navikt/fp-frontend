@@ -24,7 +24,6 @@ describe('<PersonArbeidsforholdPanel>', () => {
     fomDato: '2018-01-01',
     tomDato: '2018-10-10',
     kilde: {
-      kode: 'INNTEKT',
       navn: '',
     },
     brukArbeidsforholdet: true,

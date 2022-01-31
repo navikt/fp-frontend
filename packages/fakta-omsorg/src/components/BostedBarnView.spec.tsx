@@ -12,26 +12,14 @@ describe('<BostedBarnView>', () => {
     navn: 'Espen Barn',
     aktoerId: '1',
     fødselsdato: '2016-02-03',
-    kjønn: {
-      kode: '',
-      kodeverk: '',
-    },
-    diskresjonskode: {
-      kode: '',
-      kodeverk: '',
-    },
-    sivilstand: {
-      kode: 'UGIF',
-      kodeverk: '',
-    },
+    kjønn: '',
+    diskresjonskode: '',
+    sivilstand: 'UGIF',
     adresser: [{
       adresselinje1: 'Ringeriksveien 182',
       postNummer: '1339',
       poststed: 'Vøyenenga',
-      adresseType: {
-        kode: opplysningAdresseType.POSTADRESSE,
-        kodeverk: '',
-      },
+      adresseType: opplysningAdresseType.POSTADRESSE,
     }],
   } as PersonopplysningerBasis;
 

@@ -62,10 +62,7 @@ describe('<FodselInngangsvilkarInitPanel>', () => {
     const toggleOverstyring = () => {};
 
     const aksjonspunkter = [{
-      definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
     }] as Aksjonspunkt[];
 
     const innerElement = panel.renderProp('renderPanel')({

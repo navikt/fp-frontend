@@ -6,7 +6,7 @@ import {
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew,
 } from '@fpsak-frontend/prosess-felles';
@@ -14,7 +14,7 @@ import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form-
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { DATE_TIME_FORMAT, required, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { AlleKodeverk, KlageVurdering, Kodeverk } from '@fpsak-frontend/types';
+import { AlleKodeverk, KlageVurdering } from '@fpsak-frontend/types';
 
 import AvsluttetBehandling from '../types/avsluttetBehandlingTsType';
 import styles from './formkravKlageForm.less';
@@ -27,14 +27,14 @@ export const getPaKlagdVedtak = (klageFormkavResultat?: KlageVurdering['klageFor
 const getKlagBareVedtak = (
   avsluttedeBehandlinger: AvsluttetBehandling[],
   intl: IntlShape,
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
 ): ReactElement[] => {
   const klagBareVedtak = [<option key="formkrav" value={IKKE_PA_KLAGD_VEDTAK}>{intl.formatMessage({ id: 'Klage.Formkrav.IkkePåklagdVedtak' })}</option>];
   return klagBareVedtak.concat([...avsluttedeBehandlinger]
     .sort((b1, b2) => moment(b1.avsluttet).diff(moment(b2.avsluttet)))
     .map((behandling) => (
       <option key={behandling.uuid} value={`${behandling.uuid}`}>
-        {`${getKodeverknavn(behandling.type)} ${moment(behandling.avsluttet).format(DATE_TIME_FORMAT)}`}
+        {`${getKodeverknavn(behandling.type, KodeverkType.BEHANDLING_TYPE)} ${moment(behandling.avsluttet).format(DATE_TIME_FORMAT)}`}
       </option>
     )));
 };
@@ -67,7 +67,7 @@ export const FormkravKlageForm: FunctionComponent<OwnProps> = ({
   isDirty,
 }) => {
   const intl = useIntl();
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
   const klageBareVedtakOptions = getKlagBareVedtak(avsluttedeBehandlinger, intl, getKodeverknavn);
 
   return (

@@ -24,25 +24,13 @@ describe('<OpptjeningsvilkaretFaktaInitPanel>', () => {
     const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any> & FaktaPanelInitProps>(FaktaDefaultInitPanel);
 
     const vilkarSkalVises = [{
-      vilkarType: {
-        kode: vilkarType.OPPTJENINGSVILKARET,
-        kodeverk: '',
-      },
+      vilkarType: vilkarType.OPPTJENINGSVILKARET,
     }, {
-      vilkarType: {
-        kode: vilkarType.MEDLEMSKAPSVILKARET,
-        kodeverk: '',
-      },
-      vilkarStatus: {
-        kode: vilkarUtfallType.OPPFYLT,
-        kodeverk: '',
-      },
+      vilkarType: vilkarType.MEDLEMSKAPSVILKARET,
+      vilkarStatus: vilkarUtfallType.OPPFYLT,
     }] as Vilkar[];
     const vilkarSkalIkkeVises = [{
-      vilkarType: {
-        kode: vilkarType.OPPTJENINGSVILKARET,
-        kodeverk: '',
-      },
+      vilkarType: vilkarType.OPPTJENINGSVILKARET,
     }] as Vilkar[];
 
     expect(panel.props().skalPanelVisesIMeny({ vilkar: vilkarSkalVises })).toBe(true);

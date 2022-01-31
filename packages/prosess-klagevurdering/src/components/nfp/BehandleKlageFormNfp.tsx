@@ -11,9 +11,7 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
-import {
-  KlageVurdering, Kodeverk, AlleKodeverk, KlageVurderingResultat,
-} from '@fpsak-frontend/types';
+import { KlageVurdering, AlleKodeverk, KlageVurderingResultat } from '@fpsak-frontend/types';
 import { KlageVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import KlageVurderingRadioOptionsNfp from './KlageVurderingRadioOptionsNfp';
@@ -24,8 +22,8 @@ import TempsaveKlageButton, { TransformedValues } from '../felles/TempsaveKlageB
 import styles from './behandleKlageFormNfp.less';
 
 const transformValues = (values: FormValues): KlageVurderingResultatAp => ({
-  klageMedholdArsak: values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageMedholdArsak : null,
-  klageVurderingOmgjoer: values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
+  klageMedholdArsak: values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageMedholdArsak : null,
+  klageVurderingOmgjoer: values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
   klageHjemmel: values.klageHjemmel,
   klageVurdering: values.klageVurdering,
   fritekstTilBrev: values.fritekstTilBrev,
@@ -34,11 +32,11 @@ const transformValues = (values: FormValues): KlageVurderingResultatAp => ({
 });
 
 type FormValues = {
-  klageVurdering?: Kodeverk;
+  klageVurdering?: string;
   fritekstTilBrev?: string;
-  klageMedholdArsak?: Kodeverk;
-  klageHjemmel?: Kodeverk;
-  klageVurderingOmgjoer?: Kodeverk;
+  klageMedholdArsak?: string;
+  klageHjemmel?: string;
+  klageVurderingOmgjoer?: string;
   begrunnelse?: string;
 };
 
@@ -56,10 +54,10 @@ interface OwnProps {
   saveKlage: (data: TransformedValues) => Promise<any>;
   readOnly?: boolean;
   readOnlySubmitButton?: boolean;
-  sprakkode: Kodeverk;
+  sprakkode: string;
   alleKodeverk: AlleKodeverk;
   klageVurdering: KlageVurdering;
-  alleAktuelleHjemler: Kodeverk[];
+  alleAktuelleHjemler: string[];
   submitCallback: (data: KlageVurderingResultatAp) => Promise<void>;
   formData?: FormValues;
   setFormData: (data: FormValues) => void;

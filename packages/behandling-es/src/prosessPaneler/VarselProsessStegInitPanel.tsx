@@ -6,7 +6,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VarselOmRevurderingProsessIndex from '@fpsak-frontend/prosess-varsel-om-revurdering';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import {
-  Aksjonspunkt, Behandling, Fagsak, FamilieHendelse, FamilieHendelseSamling, Soknad, Vilkar,
+  Aksjonspunkt, Behandling, Fagsak, FamilieHendelse, FamilieHendelseSamling, ForhåndsvisMeldingParams, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
 import {
   ProsessDefaultInitPanel, skalViseProsessPanel, ProsessPanelInitProps, useStandardProsessPanelProps,
@@ -19,7 +19,7 @@ import { restApiEsHooks, EsBehandlingApiKeys, requestEsApi } from '../data/esBeh
 const intl = createIntl(messages);
 
 const getForhandsvisCallback = (
-  forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<unknown>,
+  forhandsvisMelding: (params: ForhåndsvisMeldingParams, keepData?: boolean) => Promise<unknown>,
   fagsak: Fagsak,
   behandling: Behandling,
 ) => (data: {
@@ -30,7 +30,11 @@ const getForhandsvisCallback = (
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
-    ytelseType: fagsak.fagsakYtelseType,
+    ytelseType: {
+      kode: fagsak.fagsakYtelseType,
+      kodeverk: 'FAGSAK_YTELSE',
+    },
+    fagsakYtelseType: fagsak.fagsakYtelseType,
   };
 
   return forhandsvisMelding(brevData).then((response) => forhandsvisDokument(response));

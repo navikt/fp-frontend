@@ -1,5 +1,4 @@
 import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Kodeverk } from '@fpsak-frontend/types';
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
 export type FordelBeregningsgrunnlagFastsatteVerdierTransformedValues = {
@@ -16,7 +15,7 @@ export type FordelBeregningsgrunnlagAndelTransformedValues = {
   nyAndel: boolean;
   kilde: string;
   lagtTilAvSaksbehandler: boolean;
-  arbeidsforholdType: Kodeverk;
+  arbeidsforholdType: string;
   beregningsperiodeTom: string;
   beregningsperiodeFom: string;
   forrigeArbeidsinntektPrÅr: number;

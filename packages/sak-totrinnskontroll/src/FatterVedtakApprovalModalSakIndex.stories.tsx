@@ -38,14 +38,8 @@ EtterFatterVedtakOgGodkjent.args = {
   closeEvent: action('button-click'),
   behandling: {
     uuid: '1',
-    status: {
-      kode: behandlingStatus.FATTER_VEDTAK,
-      kodeverk: '',
-    },
-    type: {
-      kode: behandlingType.FORSTEGANGSSOKNAD,
-      kodeverk: '',
-    },
+    status: behandlingStatus.FATTER_VEDTAK,
+    type: behandlingType.FORSTEGANGSSOKNAD,
   } as Behandling,
   allAksjonspunktApproved: true,
   erKlageWithKA: true,
@@ -56,18 +50,10 @@ EtterGodkjenning.args = {
   closeEvent: action('button-click'),
   behandling: {
     uuid: '1',
-    status: {
-      kode: behandlingStatus.FATTER_VEDTAK,
-      kodeverk: '',
-    },
-    type: {
-      kode: behandlingType.FORSTEGANGSSOKNAD,
-      kodeverk: '',
-    },
+    status: behandlingStatus.FATTER_VEDTAK,
+    type: behandlingType.FORSTEGANGSSOKNAD,
     behandlingsresultat: {
-      type: {
-        kode: behandlingResultatType.OPPHOR,
-      },
+      type: behandlingResultatType.OPPHOR,
     },
   } as Behandling,
   allAksjonspunktApproved: true,
@@ -78,18 +64,10 @@ EtterGodkjenningAvKlage.args = {
   closeEvent: action('button-click'),
   behandling: {
     uuid: '1',
-    status: {
-      kode: behandlingStatus.FATTER_VEDTAK,
-      kodeverk: '',
-    },
-    type: {
-      kode: behandlingType.KLAGE,
-      kodeverk: '',
-    },
+    status: behandlingStatus.FATTER_VEDTAK,
+    type: behandlingType.KLAGE,
     behandlingsresultat: {
-      type: {
-        kode: behandlingResultatType.OPPHOR,
-      },
+      type: behandlingResultatType.OPPHOR,
     },
   } as Behandling,
   allAksjonspunktApproved: true,
@@ -100,18 +78,10 @@ EtterTilbakesendingTilSaksbehandler.args = {
   closeEvent: action('button-click'),
   behandling: {
     uuid: '1',
-    status: {
-      kode: behandlingStatus.FATTER_VEDTAK,
-      kodeverk: '',
-    },
-    type: {
-      kode: behandlingType.FORSTEGANGSSOKNAD,
-      kodeverk: '',
-    },
+    status: behandlingStatus.FATTER_VEDTAK,
+    type: behandlingType.FORSTEGANGSSOKNAD,
     behandlingsresultat: {
-      type: {
-        kode: behandlingResultatType.OPPHOR,
-      },
+      type: behandlingResultatType.OPPHOR,
     },
   } as Behandling,
   allAksjonspunktApproved: false,
@@ -122,14 +92,8 @@ EtterTilbakesendingTilSaksbehandlerNårKlageKa.args = {
   closeEvent: action('button-click'),
   behandling: {
     uuid: '1',
-    status: {
-      kode: behandlingStatus.FATTER_VEDTAK,
-      kodeverk: '',
-    },
-    type: {
-      kode: behandlingType.KLAGE,
-      kodeverk: '',
-    },
+    status: behandlingStatus.FATTER_VEDTAK,
+    type: behandlingType.KLAGE,
   } as Behandling,
   allAksjonspunktApproved: true,
   erKlageWithKA: true,

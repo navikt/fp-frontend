@@ -29,7 +29,7 @@ const FormkravProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPro
   setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    {aksjonspunkter.some((a) => a.definisjon.kode === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP) && (
+    {aksjonspunkter.some((a) => a.definisjon === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP) && (
       <FormkravKlageFormNfp
         klageVurdering={klageVurdering}
         submitCallback={submitCallback}
@@ -41,7 +41,7 @@ const FormkravProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPro
         setFormData={setFormData}
       />
     )}
-    {aksjonspunkter.some((a) => a.definisjon.kode === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_KA) && (
+    {aksjonspunkter.some((a) => a.definisjon === aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_KA) && (
       <FormkravKlageFormKa
         klageVurdering={klageVurdering}
         submitCallback={submitCallback}

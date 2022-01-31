@@ -50,7 +50,7 @@ const TilkjentYtelseProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
       familieHendelseSamling={familiehendelse}
       personoversikt={personoversikt}
       soknad={soknad}
-      fagsakYtelseTypeKode={fagsak.fagsakYtelseType.kode}
+      fagsakYtelseTypeKode={fagsak.fagsakYtelseType}
       aksjonspunkter={aksjonspunkter}
       alleKodeverk={alleKodeverk}
       readOnly={isReadOnly}

@@ -12,7 +12,8 @@ import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakTyp
 import chevronUp from '@fpsak-frontend/assets/images/pil_opp.svg';
 import chevronDown from '@fpsak-frontend/assets/images/pil_ned.svg';
 import stjerneImg from '@fpsak-frontend/assets/images/stjerne.svg';
-import { BehandlingAppKontekst, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, KodeverkMedNavn } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import styles from './behandlingPickerItemContent.less';
 
@@ -21,7 +22,7 @@ const tilbakekrevingÅrsakTyperKlage = [
   behandlingArsakType.RE_KLAGE_NFP,
 ];
 
-const erTilbakekrevingÅrsakKlage = (årsak?: Kodeverk): boolean => !!årsak && tilbakekrevingÅrsakTyperKlage.includes(årsak.kode);
+const erTilbakekrevingÅrsakKlage = (årsak?: string): boolean => !!årsak && tilbakekrevingÅrsakTyperKlage.includes(årsak);
 
 const renderChevron = (chevron: string, messageId: string): ReactElement => {
   const intl = useIntl();
@@ -31,7 +32,7 @@ const renderChevron = (chevron: string, messageId: string): ReactElement => {
 interface OwnProps {
   withChevronDown?: boolean;
   withChevronUp?: boolean;
-  getKodeverkFn: (kodeverk: Kodeverk, behandlingType: Kodeverk) => KodeverkMedNavn | undefined;
+  getKodeverkFn: (kode: string, kodeverk: KodeverkType, behandlingType?: string) => KodeverkMedNavn | undefined;
   behandlendeEnhetId?: string;
   behandlendeEnhetNavn?: string;
   opprettetDato: string;
@@ -77,7 +78,7 @@ const BehandlingPickerItemContent: FunctionComponent<OwnProps> = ({
             <FlexColumn className={styles.arsakPadding}>-</FlexColumn>
             <FlexColumn>
               <Normaltekst>
-                {getKodeverkFn(førsteÅrsak.behandlingArsakType, { kode: behandlingType.REVURDERING, kodeverk: '' })?.navn || ''}
+                {getKodeverkFn(førsteÅrsak.behandlingArsakType, KodeverkType.BEHANDLING_AARSAK, behandlingType.REVURDERING)?.navn || ''}
               </Normaltekst>
             </FlexColumn>
           </>

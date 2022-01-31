@@ -7,10 +7,7 @@ import messages from '../../i18n/nb_NO.json';
 import FritekstAnkeMerknaderTextField from './FritekstAnkeMerknaderTextField';
 
 describe('<TrygderettsbehandlingForm>', () => {
-  const sprakkode = {
-    kode: 'NB',
-    kodeverk: '',
-  };
+  const sprakkode = 'NB';
 
   it('skal rendre komponent korrekt', () => {
     const wrapper = shallowWithIntl(

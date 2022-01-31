@@ -19,43 +19,26 @@ import { PeriodeMedClassName } from './Uttak';
 const intlMock = getIntlMock(messages);
 
 describe('<UttakTimeLineData>', () => {
+  // @ts-ignore
   const selectedItem = {
     id: 1,
     fom: '',
     tom: '',
-    periodeResultatType: {
-      kode: '',
-      kodeverk: '',
-    },
-    periodeResultatÅrsak: {
-      kode: '',
-      kodeverk: '',
-    },
+    periodeResultatType: '',
+    periodeResultatÅrsak: '',
     aktiviteter: [{
-      stønadskontoType: {
-        kode: '',
-        kodeverk: '',
-      },
+      stønadskontoType: '',
     }],
   } as PeriodeMedClassName;
+  // @ts-ignore
   const selectedItem2 = {
     id: 1,
     fom: '',
     tom: '',
-    periodeResultatType: {
-      kode: 'MANUELL_BEHANDLING',
-      kodeverk: '',
-    },
-    periodeResultatÅrsak: {
-      kode: '4002',
-    },
-    manuellBehandlingÅrsak: {
-      kode: '5001',
-      kodeverk: '',
-    },
-    periodeType: {
-      kode: 'MØDREKVOTE',
-    },
+    periodeResultatType: 'MANUELL_BEHANDLING',
+    periodeResultatÅrsak: '4002',
+    manuellBehandlingÅrsak: '5001',
+    periodeType: 'MØDREKVOTE',
     aktiviteter: [{
     }],
   } as PeriodeMedClassName;

@@ -10,29 +10,30 @@ import {
   formatCurrencyNoKr, isArrayEmpty, parseCurrencyInput, removeSpacesFromNumber, required, getKodeverknavnFn,
 } from '@fpsak-frontend/utils';
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { createSelector } from 'reselect';
 import {
   Image, Table, TableColumn, TableRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
-import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
-import { AlleKodeverk } from '@fpsak-frontend/types';
+import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 import styles from './brukersAndelFieldArray.less';
 import { SortedAndelInfo, validateUlikeAndelerWithGroupingFunction } from '../ValidateAndelerUtils';
 import { isBeregningFormDirty as isFormDirty } from '../../BeregningFormUtils';
 import { BrukersAndelValues } from '../../../typer/FaktaBeregningTypes';
 
-const defaultBGFordeling = (aktivitetStatuser, alleKodeverk) => ({
-  andel: getKodeverknavnFn(alleKodeverk, kodeverkTyper)(aktivitetStatuser.filter(({ kode }) => kode === aktivitetStatus.BRUKERS_ANDEL)[0]),
+const defaultBGFordeling = (aktivitetStatuser: string[], alleKodeverk) => ({
+  andel: getKodeverknavnFn(alleKodeverk)(
+    aktivitetStatuser.filter((kode) => kode === aktivitetStatus.BRUKERS_ANDEL)[0],
+    KodeverkType.AKTIVITET_STATUS),
   fastsattBelop: '',
   inntektskategori: '',
   nyAndel: true,
   lagtTilAvSaksbehandler: true,
 });
 
-const inntektskategoriSelectValues = (kategorier) => kategorier.map((ik) => (
+const inntektskategoriSelectValues = (kategorier: KodeverkMedNavn[]) => kategorier.map((ik) => (
   <option value={ik.kode} key={ik.kode}>
     {ik.navn}
   </option>
@@ -63,7 +64,7 @@ const onKeyDown = (fields, aktivitetStatuser, alleKodeverk) => ({ key }) => {
 };
 
 const createAndelerTableRows = (fields, isAksjonspunktClosed, readOnly,
-  inntektskategoriKoder, intl) => fields.map((andelElementFieldId, index) => (
+  inntektskategoriKoder: KodeverkMedNavn[], intl) => fields.map((andelElementFieldId, index) => (
     <TableRow key={andelElementFieldId}>
       <TableColumn>
         <FormattedMessage id="BeregningInfoPanel.FordelingBG.Ytelse" />
@@ -126,8 +127,8 @@ type OwnProps = {
     readOnly: boolean;
     fields: FieldArrayFieldsProps<any>;
     meta?: FieldArrayMetaProps;
-    inntektskategoriKoder: Kodeverk[]
-    aktivitetStatuser: Kodeverk[]
+    inntektskategoriKoder: KodeverkMedNavn[]
+    aktivitetStatuser: string[]
     isAksjonspunktClosed: boolean;
     isBeregningFormDirty: boolean;
     alleKodeverk: AlleKodeverk;
@@ -232,13 +233,13 @@ BrukersAndelFieldArrayImpl.validate = (values: BrukersAndelValues[], intl: IntlS
 };
 
 const getInntektskategorierAlfabetiskSortert = createSelector(
-  [(ownProps: OwnProps) => ownProps.alleKodeverk[kodeverkTyper.INNTEKTSKATEGORI]],
+  [(ownProps: OwnProps) => ownProps.alleKodeverk[KodeverkType.INNTEKTSKATEGORI]],
   (kodeverkListe) => kodeverkListe.slice().sort((a, b) => a.navn.localeCompare(b.navn)),
 );
 
 const mapStateToProps = (state, ownProps) => {
   const isBeregningFormDirty = isFormDirty(state);
-  const aktivitetStatuser = ownProps.alleKodeverk[kodeverkTyper.AKTIVITET_STATUS];
+  const aktivitetStatuser = ownProps.alleKodeverk[KodeverkType.AKTIVITET_STATUS];
   return {
     isBeregningFormDirty,
     aktivitetStatuser,

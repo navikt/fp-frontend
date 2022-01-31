@@ -32,14 +32,8 @@ describe('<BehandlingSupportIndex>', () => {
 
   const behandling = {
     uuid: '1',
-    type: {
-      kode: behandlingType.FORSTEGANGSSOKNAD,
-      kodeverk: '',
-    },
-    status: {
-      kode: behandlingStatus.OPPRETTET,
-      kodeverk: '',
-    },
+    type: behandlingType.FORSTEGANGSSOKNAD,
+    status: behandlingStatus.OPPRETTET,
   };
 
   const location = {

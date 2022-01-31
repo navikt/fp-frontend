@@ -26,15 +26,9 @@ describe('<BehandleAnkeForm>', () => {
     previewCallback: Sinon.spy(),
     readOnlySubmitButton: false,
     aksjonspunkter: [{
-      definisjon: {
-        kode: AksjonspunktCode.MANUELL_VURDERING_AV_ANKE,
-        kodeverk: '',
-      },
+      definisjon: AksjonspunktCode.MANUELL_VURDERING_AV_ANKE,
     } as Aksjonspunkt],
-    sprakkode: {
-      kode: 'nb',
-      kodeverk: '',
-    },
+    sprakkode: 'nb',
     behandlinger: [],
     ankeOmgorArsaker: [],
     behandlingTyper: [{
@@ -68,10 +62,7 @@ describe('<BehandleAnkeForm>', () => {
       {...reduxFormPropsMock}
       {...fellesProps}
       formValues={{
-        ankeVurdering: {
-          kode: ankeVurdering.ANKE_AVVIS,
-          kodeverk: '',
-        },
+        ankeVurdering: ankeVurdering.ANKE_AVVIS,
       }}
     />);
 
@@ -87,10 +78,7 @@ describe('<BehandleAnkeForm>', () => {
       {...reduxFormPropsMock}
       {...fellesProps}
       formValues={{
-        ankeVurdering: {
-          kode: ankeVurdering.ANKE_OMGJOER,
-          kodeverk: '',
-        },
+        ankeVurdering: ankeVurdering.ANKE_OMGJOER,
       }}
     />);
 
@@ -99,7 +87,7 @@ describe('<BehandleAnkeForm>', () => {
     expect(wrapper.find(RadioGroupField)).toHaveLength(2);
     const select = wrapper.find(SelectField);
     expect(select).toHaveLength(2);
-    expect(select.at(1).props().name).toEqual('ankeOmgjoerArsak.kode');
+    expect(select.at(1).props().name).toEqual('ankeOmgjoerArsak');
   });
 
   it('skal vise komponent for opphevet og hjemsendt anke', () => {
@@ -107,17 +95,14 @@ describe('<BehandleAnkeForm>', () => {
       {...reduxFormPropsMock}
       {...fellesProps}
       formValues={{
-        ankeVurdering: {
-          kode: ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE,
-          kodeverk: '',
-        },
+        ankeVurdering: ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE,
       }}
     />);
 
     expect(wrapper.find(RadioGroupField)).toHaveLength(1);
     const select = wrapper.find(SelectField);
     expect(select).toHaveLength(2);
-    expect(select.at(1).props().name).toEqual('ankeOmgjoerArsak.kode');
+    expect(select.at(1).props().name).toEqual('ankeOmgjoerArsak');
   });
 
   it('skal lage verdier til dropdown', () => {
@@ -125,33 +110,18 @@ describe('<BehandleAnkeForm>', () => {
       {...reduxFormPropsMock}
       {...fellesProps}
       formValues={{
-        ankeVurdering: {
-          kode: ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE,
-          kodeverk: '',
-        },
+        ankeVurdering: ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE,
       }}
       behandlinger={[{
         uuid: '1',
         opprettet: '2021-08-02T00:54:25.455',
-        type: {
-          kode: behandlingType.FORSTEGANGSSOKNAD,
-          kodeverk: '',
-        },
-        status: {
-          kode: behandlingStatus.OPPRETTET,
-          kodeverk: '',
-        },
+        type: behandlingType.FORSTEGANGSSOKNAD,
+        status: behandlingStatus.OPPRETTET,
       }, {
         uuid: '2',
         opprettet: '2021-10-10T00:54:25.455',
-        type: {
-          kode: behandlingType.KLAGE,
-          kodeverk: '',
-        },
-        status: {
-          kode: behandlingStatus.OPPRETTET,
-          kodeverk: '',
-        },
+        type: behandlingType.KLAGE,
+        status: behandlingStatus.OPPRETTET,
       }]}
     />);
     const select = wrapper.find(SelectField);

@@ -123,7 +123,7 @@ InntektstabellPanelImpl.defaultProps = {
 const getSkalKunneOverstyre = createSelector([(ownProps: OwnProps) => ownProps.erOverstyrer,
   (ownProps) => ownProps.aksjonspunkter],
 (erOverstyrer, aksjonspunkter) => erOverstyrer
-&& !aksjonspunkter.some((ap) => ap.definisjon.kode === AVKLAR_AKTIVITETER && isAksjonspunktOpen(ap.status.kode)));
+&& !aksjonspunkter.some((ap) => ap.definisjon === AVKLAR_AKTIVITETER && isAksjonspunktOpen(ap.status)));
 
 const mapStateToProps = (state, ownProps) => ({
   kanOverstyre: getSkalKunneOverstyre(ownProps),

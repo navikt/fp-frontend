@@ -20,14 +20,8 @@ describe('<BehandlingEngangsstonadIndex>', () => {
         data: {
           uuid: 'test-uuid',
           versjon: 1,
-          status: {
-            kode: behandlingStatus.OPPRETTET,
-            kodeverk: '',
-          },
-          type: {
-            kode: behandlingType.FORSTEGANGSSOKNAD,
-            kodeverk: '',
-          },
+          status: behandlingStatus.OPPRETTET,
+          type: behandlingType.FORSTEGANGSSOKNAD,
           links: [{
             href: EsBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT.name,
             rel: 'arbeidsgivere-oversikt',
@@ -56,10 +50,7 @@ describe('<BehandlingEngangsstonadIndex>', () => {
           // @ts-ignore
           kodeverk={alleKodeverk as AlleKodeverk}
           fagsak={{
-            fagsakYtelseType: {
-              kode: fagsakYtelseType.ENGANGSSTONAD,
-              kodeverk: '',
-            },
+            fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
           } as Fagsak}
           rettigheter={{
             writeAccess: {

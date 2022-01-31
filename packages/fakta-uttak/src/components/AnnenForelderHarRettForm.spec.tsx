@@ -8,25 +8,16 @@ import { Ytelsefordeling } from '@fpsak-frontend/types';
 import { AnnenForelderHarRettForm } from './AnnenForelderHarRettForm';
 
 const avklarAnnenforelderHarRettAp = {
-  aksjonspunktType: {
-    kode: 'MANU',
-    kodeverk: 'AKSJONSPUNKT_TYPE',
-  },
+  aksjonspunktType: 'MANU',
   kode: 'MANU',
   kodeverk: 'AKSJONSPUNKT_TYPE',
   navn: 'Manuell',
   begrunnelse: 'test2',
   besluttersBegrunnelse: null,
-  definisjon: {
-    kode: '5086',
-    kodeverk: '',
-  },
+  definisjon: '5086',
   erAktivt: true,
   kanLoses: true,
-  status: {
-    kode: 'UTFO',
-    kodeverk: 'AKSJONSPUNKT_STATUS',
-  },
+  status: 'UTFO',
   toTrinnsBehandling: true,
   toTrinnsBehandlingGodkjent: null,
   vilkarType: null,

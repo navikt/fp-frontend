@@ -15,9 +15,9 @@ const transformValuesArbeidUtenInntektsmelding = (values: FaktaOmBeregningAksjon
   fastsatteAndelsnr: number[]): FaktaBeregningTransformedValues => {
   const tilfeller = faktaOmBeregning.faktaOmBeregningTilfeller ? faktaOmBeregning.faktaOmBeregningTilfeller : [];
 
-  if (!tilfeller.map(({ kode }) => kode)
+  if (!tilfeller.map((kode) => kode)
     .includes(faktaOmBeregningTilfelle.FASTSETT_MAANEDSLONN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING)
-    && !tilfeller.map(({ kode }) => kode)
+    && !tilfeller.map((kode) => kode)
       .includes(faktaOmBeregningTilfelle.VURDER_LONNSENDRING)) {
     return {};
   }

@@ -25,7 +25,7 @@ describe('<SoknadTypePickerForm>', () => {
       foreldreTyper={foreldreTyper}
       ytelseErSatt={ytelseErSatt}
       setSoknadData={sinon.spy()}
-      fagsakYtelseType={fagsakYtelseTyper[0]}
+      fagsakYtelseType={fagsakYtelseTyper[0].kode}
       alleKodeverk={{} as AlleKodeverk}
       onSubmit={sinon.spy()}
     />);
@@ -60,7 +60,7 @@ describe('<SoknadTypePickerForm>', () => {
       selectedFagsakYtelseType={selectedFagsakYtelseType}
       ytelseErSatt
       setSoknadData={sinon.spy()}
-      fagsakYtelseType={fagsakYtelseTyper[0]}
+      fagsakYtelseType={fagsakYtelseTyper[0].kode}
       alleKodeverk={{} as AlleKodeverk}
       onSubmit={sinon.spy()}
     />);
@@ -85,7 +85,7 @@ describe('<SoknadTypePickerForm>', () => {
       selectedFagsakYtelseType={selectedFagsakYtelseType}
       ytelseErSatt
       setSoknadData={sinon.spy()}
-      fagsakYtelseType={fagsakYtelseTyper[0]}
+      fagsakYtelseType={fagsakYtelseTyper[0].kode}
       alleKodeverk={{} as AlleKodeverk}
       onSubmit={sinon.spy()}
     />);
@@ -114,7 +114,7 @@ describe('<SoknadTypePickerForm>', () => {
       selectedFagsakYtelseType={selectedFagsakYtelseType}
       ytelseErSatt={false}
       setSoknadData={sinon.spy()}
-      fagsakYtelseType={fagsakYtelseTyper[0]}
+      fagsakYtelseType={fagsakYtelseTyper[0].kode}
       alleKodeverk={{} as AlleKodeverk}
       onSubmit={sinon.spy()}
     />);

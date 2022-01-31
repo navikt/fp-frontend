@@ -30,7 +30,7 @@ const AvvikopplysningerSN: FunctionComponent<OwnProps> = ({
   alleAndelerIForstePeriode,
   relevanteStatuser,
 }) => {
-  const snAndel = alleAndelerIForstePeriode.find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
+  const snAndel = alleAndelerIForstePeriode.find((andel) => andel.aktivitetStatus === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
   const erNyArbLivet = snAndel?.erNyIArbeidslivet;
   const erVarigEndring = snAndel?.næringer && snAndel.næringer.some((naring) => naring.erVarigEndret === true);
   const erNyoppstartet = snAndel?.næringer && snAndel.næringer.some((naring) => naring.erNyoppstartet === true);
@@ -41,8 +41,8 @@ const AvvikopplysningerSN: FunctionComponent<OwnProps> = ({
     return ingenAvviksvurdering('Beregningsgrunnlag.Avviksopplysninger.SN.IkkeVarigEndring');
   }
   const sammenligningsGrunnlagSN = sammenligningsgrunnlagPrStatus
-    ? sammenligningsgrunnlagPrStatus.find((status) => status.sammenligningsgrunnlagType.kode === sammenligningType.SN
-      || status.sammenligningsgrunnlagType.kode === sammenligningType.ATFLSN)
+    ? sammenligningsgrunnlagPrStatus.find((status) => status.sammenligningsgrunnlagType === sammenligningType.SN
+      || status.sammenligningsgrunnlagType === sammenligningType.ATFLSN)
     : undefined;
   if (!sammenligningsGrunnlagSN || !snAndel) {
     return null;

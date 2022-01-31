@@ -6,9 +6,7 @@ import {
   FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
-import {
-  Kodeverk, Fagsak, KjønnkodeEnum, FagsakPersoner,
-} from '@fpsak-frontend/types';
+import { Fagsak, KjønnkodeEnum, FagsakPersoner } from '@fpsak-frontend/types';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';
 
 import VisittkortLabels from './VisittkortLabels';
@@ -16,11 +14,11 @@ import VisittkortBarnInfoPanel from './VisittkortBarnInfoPanel';
 
 import styles from './visittkortPanel.less';
 
-const utledKjonn = (kjonn: Kodeverk): Gender => {
-  if (kjonn.kode === navBrukerKjonn.KVINNE) {
+const utledKjonn = (kjonn: string): Gender => {
+  if (kjonn === navBrukerKjonn.KVINNE) {
     return Gender.female;
   }
-  return kjonn.kode === navBrukerKjonn.MANN ? Gender.male : Gender.unknown;
+  return kjonn === navBrukerKjonn.MANN ? Gender.male : Gender.unknown;
 };
 
 interface OwnProps {
@@ -40,14 +38,14 @@ const VisittkortPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   erTilbakekreving,
 }) => {
   const fagsakPerson = fagsakPersoner.bruker;
-  const erMor = fagsak.relasjonsRolleType.kode === relasjonsRolleType.MOR;
+  const erMor = fagsak.relasjonsRolleType === relasjonsRolleType.MOR;
   if (erTilbakekreving && harVerge) {
     return (
       <div className={styles.container}>
         <PersonCard
           name={fagsakPerson.navn}
           fodselsnummer={fagsakPerson.fødselsnummer}
-          gender={fagsakPerson.kjønn.kode === KjønnkodeEnum.KVINNE ? Gender.female : Gender.male}
+          gender={fagsakPerson.kjønn === KjønnkodeEnum.KVINNE ? Gender.female : Gender.male}
           renderLabelContent={(): JSX.Element => <VisittkortLabels fagsakPerson={fagsakPerson} harVerge={harVerge} />}
         />
       </div>

@@ -30,9 +30,7 @@ const arbeidsgiverOpplysningerPerId = {
 
 const soknad = {
   manglendeVedlegg: [{
-    dokumentType: {
-      kode: dokumentTypeId.INNTEKTSMELDING,
-    },
+    dokumentType: dokumentTypeId.INNTEKTSMELDING,
     arbeidsgiverReferanse: '1234',
   }],
 } as Soknad;
@@ -79,12 +77,8 @@ export const ÅpentAksjonspunkt = Template.bind({});
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU,
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-    },
+    definisjon: aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU,
+    status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
   }] as Aksjonspunkt[],
   isReadOnly: false,
@@ -97,12 +91,8 @@ OppfyltVilkår.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU,
-    },
-    status: {
-      kode: aksjonspunktStatus.UTFORT,
-    },
+    definisjon: aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU,
+    status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette vilkåret er godkjent',
   }] as Aksjonspunkt[],
   isReadOnly: true,
@@ -117,18 +107,12 @@ AvslåttVilkår.args = {
     uuid: '1',
     versjon: 1,
     behandlingsresultat: {
-      avslagsarsak: {
-        kode: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
-      },
+      avslagsarsak: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
     },
   } as Behandling,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU,
-    },
-    status: {
-      kode: aksjonspunktStatus.UTFORT,
-    },
+    definisjon: aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU,
+    status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette vilkåret er avslått',
   }] as Aksjonspunkt[],
   isReadOnly: true,

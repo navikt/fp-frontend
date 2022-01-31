@@ -142,7 +142,7 @@ RegistrereVergeFaktaForm.buildInitialValues = (verge: Verge): FormValues => ({
   gyldigTom: verge.gyldigTom,
   fnr: verge.fnr,
   organisasjonsnummer: verge.organisasjonsnummer,
-  vergeType: verge.vergeType ? verge.vergeType.kode : undefined,
+  vergeType: verge.vergeType || undefined,
 });
 
 RegistrereVergeFaktaForm.transformValues = (values: FormValues): TransformedValues => ({

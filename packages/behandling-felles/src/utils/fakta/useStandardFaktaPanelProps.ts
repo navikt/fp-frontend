@@ -68,7 +68,7 @@ const useStandardFaktaPanelProps = (
   }, [value.behandling.versjon]);
 
   const aksjonspunkterForSteg = useMemo(() => (data?.aksjonspunkter && aksjonspunktKoder
-    ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : []),
+    ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon)) : []),
   [data?.aksjonspunkter, aksjonspunktKoder]);
 
   const readOnly = erReadOnly(value.behandling, aksjonspunkterForSteg, [], value.rettigheter, value.hasFetchError);
@@ -86,8 +86,8 @@ const useStandardFaktaPanelProps = (
 
   return {
     behandling: value.behandling,
-    submittable: !aksjonspunkterForSteg.some((ap) => isAksjonspunktOpen(ap.status.kode)) || aksjonspunkterForSteg.some((ap) => ap.kanLoses),
-    harApneAksjonspunkter: aksjonspunkterForSteg.some((ap) => isAksjonspunktOpen(ap.status.kode) && ap.kanLoses),
+    submittable: !aksjonspunkterForSteg.some((ap) => isAksjonspunktOpen(ap.status)) || aksjonspunkterForSteg.some((ap) => ap.kanLoses),
+    harApneAksjonspunkter: aksjonspunkterForSteg.some((ap) => isAksjonspunktOpen(ap.status) && ap.kanLoses),
     alleKodeverk: value.alleKodeverk,
     aksjonspunkter: aksjonspunkterForSteg,
     readOnly,

@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { createSelector } from 'reselect';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
@@ -12,7 +12,6 @@ import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import {
   ArbeidsforholdTilFordeling,
   ArbeidsgiverOpplysningerPerId,
-  Kodeverk,
   AlleKodeverk, PerioderMedGraderingEllerRefusjon,
 } from '@fpsak-frontend/types';
 import { createVisningsnavnForAktivitetFordeling } from './util/visningsnavnHelper';
@@ -64,10 +63,10 @@ type ArbeidsforholdInfo = {
 
 const finnVisningsnavn = (arbeidsforhold: ArbeidsforholdTilFordeling,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  getKodeverknavn: (kodeverk: Kodeverk) => string): string => {
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string): string => {
   const agOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
   if (!agOpplysninger) {
-    return arbeidsforhold.arbeidsforholdType ? getKodeverknavn(arbeidsforhold.arbeidsforholdType) : '';
+    return arbeidsforhold.arbeidsforholdType ? getKodeverknavn(arbeidsforhold.arbeidsforholdType, KodeverkType.OPPTJENING_AKTIVITET_TYPE) : '';
   }
   return createVisningsnavnForAktivitetFordeling(agOpplysninger, arbeidsforhold.eksternArbeidsforholdId);
 };
@@ -75,7 +74,7 @@ const finnVisningsnavn = (arbeidsforhold: ArbeidsforholdTilFordeling,
 export const createFordelArbeidsforholdString = (listOfArbeidsforhold: ArbeidsforholdTilFordeling[],
   mTextCase: string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  getKodeverknavn: (kodeverk: Kodeverk) => string): string | ArbeidsforholdInfo => {
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string): string | ArbeidsforholdInfo => {
   const listOfStrings = listOfArbeidsforhold.map((arbeidsforhold) => {
     const visningsnavn = finnVisningsnavn(arbeidsforhold, arbeidsgiverOpplysningerPerId, getKodeverknavn);
     if (mTextCase === textCase.GRADERING) {
@@ -100,7 +99,7 @@ const createGraderingOrRefusjonString = (
   refusjonArbeidsforhold: ArbeidsforholdTilFordeling[],
   permisjonMedGraderingEllerRefusjon: ArbeidsforholdTilFordeling[],
   endringYtelse: ArbeidsforholdTilFordeling[],
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ReactElement[] => {
   const text = [];
@@ -154,7 +153,7 @@ const harGraderingEllerRefusjon = (perioderMedGraderingEllerRefusjon: PerioderMe
     || perioderMedGraderingEllerRefusjon.map(({ erGradering }) => erGradering).includes(true);
 
 const lagHelpTextsFordelBG = (endredeArbeidsforhold: ArbeidsforholdTilFordeling[],
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement[] => {
   const gradering = endredeArbeidsforhold
     .filter(({ perioderMedGraderingEllerRefusjon }) => perioderMedGraderingEllerRefusjon.map(({ erGradering }) => erGradering).includes(true));
@@ -213,7 +212,7 @@ export const getHelpTextsFordelBG = createSelector(
     const fordelBG = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag;
     const endredeArbeidsforhold = fordelBG ? fordelBG.arbeidsforholdTilFordeling : [];
     return hasAksjonspunkt(FORDEL_BEREGNINGSGRUNNLAG, aksjonspunkter)
-      ? lagHelpTextsFordelBG(endredeArbeidsforhold, getKodeverknavnFn(alleKodeverk, kodeverkTyper), arbeidsgiverOpplysningerPerId)
+      ? lagHelpTextsFordelBG(endredeArbeidsforhold, getKodeverknavnFn(alleKodeverk), arbeidsgiverOpplysningerPerId)
       : [];
   },
 );

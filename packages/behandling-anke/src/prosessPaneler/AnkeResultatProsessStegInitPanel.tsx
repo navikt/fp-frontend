@@ -6,7 +6,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AnkeResultatProsessIndex, { AnkeResultatBrevData } from '@fpsak-frontend/prosess-anke-resultat';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import {
-  Aksjonspunkt, AnkeVurdering, Behandling, Fagsak,
+  Aksjonspunkt, AnkeVurdering, Behandling, Fagsak, ForhåndsvisMeldingParams,
 } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps, useStandardProsessPanelProps } from '@fpsak-frontend/behandling-felles';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -19,14 +19,18 @@ import { restApiAnkeHooks, requestAnkeApi, AnkeBehandlingApiKeys } from '../data
 const intl = createIntl(messages);
 
 const lagForhandsvisCallback = (
-  forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<any>,
+  forhandsvisMelding: (params: ForhåndsvisMeldingParams, keepData?: boolean) => Promise<any>,
   fagsak: Fagsak,
   behandling: Behandling,
 ) => (data: AnkeResultatBrevData) => {
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
-    ytelseType: fagsak.fagsakYtelseType,
+    ytelseType: {
+      kode: fagsak.fagsakYtelseType,
+      kodeverk: 'FAGSAK_YTELSE',
+    },
+    fagsakYtelseType: fagsak.fagsakYtelseType,
   };
   return forhandsvisMelding(brevData).then((response) => forhandsvisDokument(response));
 };
@@ -99,8 +103,8 @@ const AnkeResultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
             visModal={visModalAnkeBehandling}
             lukkModal={() => { toggleAnkeModal(false); opneSokeside(); }}
             erFerdigbehandlet={!!data?.aksjonspunkter && data.aksjonspunkter
-              .some((ap) => ap.definisjon.kode === aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL
-                && ap.status.kode === aksjonspunktStatus.UTFORT)}
+              .some((ap) => ap.definisjon === aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL
+                && ap.status === aksjonspunktStatus.UTFORT)}
             venterTrygderett={false}
           />
           <AnkeResultatProsessIndex

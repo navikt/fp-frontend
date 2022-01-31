@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
 import { Fagsak, AlleKodeverk } from '@fpsak-frontend/types';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import styles from './fagsakList.less';
 
@@ -29,7 +29,7 @@ const FagsakList: FunctionComponent<OwnProps> = ({
   selectFagsakCallback,
   alleKodeverk,
 }) => {
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
   return (
     <Table headerTextCodes={headerTextCodes} classNameTable={styles.table}>
@@ -41,8 +41,8 @@ const FagsakList: FunctionComponent<OwnProps> = ({
           onKeyDown={selectFagsakCallback}
         >
           <TableColumn>{fagsak.saksnummer}</TableColumn>
-          <TableColumn>{getKodeverknavn(fagsak.fagsakYtelseType)}</TableColumn>
-          <TableColumn>{getKodeverknavn(fagsak.status)}</TableColumn>
+          <TableColumn>{getKodeverknavn(fagsak.fagsakYtelseType, KodeverkType.FAGSAK_YTELSE)}</TableColumn>
+          <TableColumn>{getKodeverknavn(fagsak.status, KodeverkType.FAGSAK_STATUS)}</TableColumn>
         </TableRow>
       ))}
     </Table>

@@ -17,9 +17,9 @@ const HistorikkMalType1: FunctionComponent<HistorikkMal> = ({
       {historikkinnslagDeler[0] && historikkinnslagDeler[0].hendelse && (
         <Element className="snakkeboble-panel__tekst">{findHendelseText(historikkinnslagDeler[0].hendelse, getKodeverknavn)}</Element>
       )}
-      {historikkinnslagDeler[0].begrunnelse && (
+      {historikkinnslagDeler[0].begrunnelsetekst && (
         <BubbleText
-          bodyText={getKodeverknavn(historikkinnslagDeler[0].begrunnelse)}
+          bodyText={historikkinnslagDeler[0].begrunnelsetekst}
           cutOffLength={70}
         />
       )}

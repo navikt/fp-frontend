@@ -1,5 +1,3 @@
-import { Kodeverk } from '@fpsak-frontend/types';
-
 import createIntl from './createIntl';
 import messages from '../i18n/nb_NO.json';
 
@@ -11,12 +9,12 @@ export const replaceNorwegianCharacters = (str: string): string => {
   return result.split('å').join('aa');
 };
 
-export const getLanguageFromSprakkode = (sprakkode?: Kodeverk): string => {
+export const getLanguageFromSprakkode = (sprakkode?: string): string => {
   if (!sprakkode) {
     return intl.formatMessage({ id: 'Malform.Bokmal' });
   }
 
-  switch (sprakkode.kode) {
+  switch (sprakkode) {
     case 'NN':
       return intl.formatMessage({ id: 'Malform.Nynorsk' });
     case 'EN':

@@ -6,7 +6,7 @@ const erAndelUtenReferanseOgGrunnlagHarAndelForSammeArbeidsgiverMedReferanse = (
   beregningsgrunnlag: Beregningsgrunnlag, arbeidsforholdId?: string): boolean => {
   if (arbeidsforholdId === null) {
     const antallAndelerISammeVirksomhetMedReferanse = beregningsgrunnlag.beregningsgrunnlagPeriode[0].beregningsgrunnlagPrStatusOgAndel
-      .filter((a) => a.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER)
+      .filter((a) => a.aktivitetStatus === aktivitetStatus.ARBEIDSTAKER)
       .filter((a) => a.arbeidsforhold && a.arbeidsforhold.arbeidsgiverIdent === andel.arbeidsgiverId)
       .filter((a) => a.arbeidsforhold && a.arbeidsforhold.arbeidsforholdId != null)
       .length;

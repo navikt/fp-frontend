@@ -20,14 +20,8 @@ describe('<BehandlingKlageIndex>', () => {
         data: {
           uuid: 'test-uuid',
           versjon: 1,
-          status: {
-            kode: behandlingStatus.OPPRETTET,
-            kodeverk: '',
-          },
-          type: {
-            kode: behandlingType.KLAGE,
-            kodeverk: '',
-          },
+          status: behandlingStatus.OPPRETTET,
+          type: behandlingType.KLAGE,
           links: [{
             href: KlageBehandlingApiKeys.UPDATE_ON_HOLD.name,
             rel: 'update',
@@ -56,10 +50,7 @@ describe('<BehandlingKlageIndex>', () => {
           // @ts-ignore
           kodeverk={alleKodeverk as AlleKodeverk}
           fagsak={{
-            fagsakYtelseType: {
-              kode: fagsakYtelseType.FORELDREPENGER,
-              kodeverk: '',
-            },
+            fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
           } as Fagsak}
           rettigheter={{
             writeAccess: {

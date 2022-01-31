@@ -27,33 +27,22 @@ type INIT_DATA = {
 }
 
 const fagsak = {
-  fagsakYtelseType: {
-    kode: fagsakYtelseType.FORELDREPENGER,
-    kodeverk: '',
-  },
+  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
 } as Fagsak;
 
 const behandling = {
   uuid: 'test-uuid',
   versjon: 1,
   behandlingsresultat: {
-    type: {
-      kode: behandlingResultatType.KLAGE_AVVIST,
-    },
+    type: behandlingResultatType.KLAGE_AVVIST,
   },
 } as Behandling;
 
 const klageVurdering = {
   klageVurderingResultatNK: {
     fritekstTilBrev: '',
-    klageMedholdArsak: {
-      kode: '',
-      kodeverk: '',
-    },
-    klageVurdering: {
-      kode: klageVurderingCodes.AVVIS_KLAGE,
-      kodeverk: '',
-    },
+    klageMedholdArsak: '',
+    klageVurdering: klageVurderingCodes.AVVIS_KLAGE,
     avvistArsaker: [],
     klageVurdertAv: 'NK',
   },
@@ -71,16 +60,10 @@ const defaultProps = {
   isReadOnly: false,
   readOnlySubmitButton: false,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.FORESLA_VEDTAK,
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.FORESLA_VEDTAK,
     erAktivt: true,
     kanLoses: true,
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: '',
-    },
+    status: aksjonspunktStatus.OPPRETTET,
   }] as Aksjonspunkt[],
   vilkar: [],
   isAksjonspunktOpen: true,
@@ -144,19 +127,13 @@ describe('<KlageresultatProsessStegInitPanel>', () => {
     const panel = wrapper.find<Required<ProsessDefaultInitPanelProps<INIT_DATA, any>> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const aksjonspunkter = [{
-      status: {
-        kode: aksjonspunktStatus.UTFORT,
-        kodeverk: '',
-      },
+      status: aksjonspunktStatus.UTFORT,
     }] as Aksjonspunkt[];
 
     const behandlingMedBeregningsresultat = {
       ...behandling,
       behandlingsresultat: {
-        type: {
-          kode: behandlingResultatType.INNVILGET,
-          kodeverk: '',
-        },
+        type: behandlingResultatType.INNVILGET,
       },
     };
 
@@ -178,19 +155,13 @@ describe('<KlageresultatProsessStegInitPanel>', () => {
     const panel = wrapper.find<Required<ProsessDefaultInitPanelProps<INIT_DATA, any>> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const aksjonspunkter = [{
-      status: {
-        kode: aksjonspunktStatus.UTFORT,
-        kodeverk: '',
-      },
+      status: aksjonspunktStatus.UTFORT,
     }] as Aksjonspunkt[];
 
     const behandlingMedBeregningsresultat = {
       ...behandling,
       behandlingsresultat: {
-        type: {
-          kode: behandlingResultatType.KLAGE_AVVIST,
-          kodeverk: '',
-        },
+        type: behandlingResultatType.KLAGE_AVVIST,
       },
     };
 
@@ -260,8 +231,9 @@ describe('<KlageresultatProsessStegInitPanel>', () => {
       behandlingUuid: 'test-uuid',
       ytelseType: {
         kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: '',
+        kodeverk: 'FAGSAK_YTELSE',
       },
+      fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
     }));
   });
 });

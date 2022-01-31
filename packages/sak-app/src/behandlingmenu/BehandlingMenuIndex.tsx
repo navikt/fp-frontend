@@ -43,8 +43,8 @@ const findNewBehandlingUuid = (alleBehandlinger: BehandlingAppKontekst[]): strin
 };
 
 const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKontekst[] = []): string | undefined => {
-  const behandling = behandlinger.find((b) => b.gjeldendeVedtak && b.status.kode === BehandlingStatus.AVSLUTTET
-    && (b.type.kode === BehandlingType.FORSTEGANGSSOKNAD || b.type.kode === BehandlingType.REVURDERING));
+  const behandling = behandlinger.find((b) => b.gjeldendeVedtak && b.status === BehandlingStatus.AVSLUTTET
+    && (b.type === BehandlingType.FORSTEGANGSSOKNAD || b.type === BehandlingType.REVURDERING));
   return behandling ? behandling.uuid : undefined;
 };
 
@@ -127,7 +127,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   }
 
   const erPaVent = behandling ? behandling.behandlingPaaVent : false;
-  const behandlingTypeKode = behandling ? behandling.type.kode : undefined;
+  const behandlingTypeKode = behandling ? behandling.type : undefined;
 
   const vergeMenyvalg = behandlingRettigheter?.vergeBehandlingsmeny;
   const setLocation = () => {

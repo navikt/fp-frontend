@@ -28,29 +28,17 @@ describe('<Uttak>', () => {
     id: 1,
     fom: '',
     tom: '',
-    periodeResultatType: {
-      kode: '',
-      kodeverk: '',
-    },
+    periodeResultatType: '',
     aktiviteter: [{
-      stønadskontoType: {
-        kode: '',
-        kodeverk: '',
-      },
+      stønadskontoType: '',
     }] as PeriodeSokerAktivitet[],
   }, {
     id: 2,
     fom: '',
     tom: '',
-    periodeResultatType: {
-      kode: '',
-      kodeverk: '',
-    },
+    periodeResultatType: '',
     aktiviteter: [{
-      stønadskontoType: {
-        kode: '',
-        kodeverk: '',
-      },
+      stønadskontoType: '',
     }] as PeriodeSokerAktivitet[],
   }];
 
@@ -88,14 +76,8 @@ describe('<Uttak>', () => {
       familiehendelse={{} as FamilieHendelseSamling}
       uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}
-      behandlingType={{
-        kode: behandlingType.FORSTEGANGSSOKNAD,
-        kodeverk: '',
-      }}
-      behandlingStatus={{
-        kode: behandlingStatus.OPPRETTET,
-        kodeverk: '',
-      }}
+      behandlingType={behandlingType.FORSTEGANGSSOKNAD}
+      behandlingStatus={behandlingStatus.OPPRETTET}
       employeeHasAccess
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
@@ -146,14 +128,8 @@ describe('<Uttak>', () => {
       familiehendelse={{} as FamilieHendelseSamling}
       uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}
-      behandlingType={{
-        kode: behandlingType.FORSTEGANGSSOKNAD,
-        kodeverk: '',
-      }}
-      behandlingStatus={{
-        kode: behandlingStatus.OPPRETTET,
-        kodeverk: '',
-      }}
+      behandlingType={behandlingType.FORSTEGANGSSOKNAD}
+      behandlingStatus={behandlingStatus.OPPRETTET}
       employeeHasAccess
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
@@ -210,14 +186,8 @@ describe('<Uttak>', () => {
       familiehendelse={{} as FamilieHendelseSamling}
       uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}
-      behandlingType={{
-        kode: behandlingType.FORSTEGANGSSOKNAD,
-        kodeverk: '',
-      }}
-      behandlingStatus={{
-        kode: behandlingStatus.OPPRETTET,
-        kodeverk: '',
-      }}
+      behandlingType={behandlingType.FORSTEGANGSSOKNAD}
+      behandlingStatus={behandlingStatus.OPPRETTET}
       employeeHasAccess={false}
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
@@ -245,14 +215,8 @@ describe('<Uttak>', () => {
 
   it('skal rendre uttak, med aksjonspunkt', () => {
     const aksjonspunkter = [{
-      definisjon: {
-        kode: aksjonspunktCodes.FASTSETT_UTTAKPERIODER,
-        kodeverk: '',
-      },
-      status: {
-        kode: 'OPPR',
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.FASTSETT_UTTAKPERIODER,
+      status: 'OPPR',
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
       kanLoses: true,
@@ -288,14 +252,8 @@ describe('<Uttak>', () => {
       familiehendelse={{} as FamilieHendelseSamling}
       uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}
-      behandlingType={{
-        kode: behandlingType.FORSTEGANGSSOKNAD,
-        kodeverk: '',
-      }}
-      behandlingStatus={{
-        kode: behandlingStatus.OPPRETTET,
-        kodeverk: '',
-      }}
+      behandlingType={behandlingType.FORSTEGANGSSOKNAD}
+      behandlingStatus={behandlingStatus.OPPRETTET}
       employeeHasAccess={false}
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
@@ -323,14 +281,8 @@ describe('<Uttak>', () => {
 
   it('skal rendre uttak, med uttakTimeLineData', () => {
     const aksjonspunkter = [{
-      definisjon: {
-        kode: aksjonspunktCodes.FASTSETT_UTTAKPERIODER,
-        kodeverk: '',
-      },
-      status: {
-        kode: 'UTFO',
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.FASTSETT_UTTAKPERIODER,
+      status: 'UTFO',
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
       kanLoses: true,
@@ -366,14 +318,8 @@ describe('<Uttak>', () => {
       familiehendelse={{} as FamilieHendelseSamling}
       uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}
-      behandlingType={{
-        kode: behandlingType.FORSTEGANGSSOKNAD,
-        kodeverk: '',
-      }}
-      behandlingStatus={{
-        kode: behandlingStatus.OPPRETTET,
-        kodeverk: '',
-      }}
+      behandlingType={behandlingType.FORSTEGANGSSOKNAD}
+      behandlingStatus={behandlingStatus.OPPRETTET}
       employeeHasAccess
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"

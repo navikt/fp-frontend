@@ -10,10 +10,7 @@ import { GrunnlagForAarsinntektPanelSN } from './GrunnlagForAarsinntektPanelSN';
 import messages from '../../../i18n/nb_NO.json';
 
 const andel = {
-  aktivitetStatus: {
-    kode: aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE,
-    kodeverk: 'test',
-  },
+  aktivitetStatus: aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE,
   elementNavn: 'arbeidsgiver 1',
   beregnetPrAar: 200000,
   overstyrtPrAar: 100,

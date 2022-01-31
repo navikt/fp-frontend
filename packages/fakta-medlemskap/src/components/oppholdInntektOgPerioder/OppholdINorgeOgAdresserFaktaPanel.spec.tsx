@@ -42,20 +42,14 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
     personopplysning: {
       navn: 'Espen Utvikler',
       adresser: [],
-      personstatus: {
-        kode: 'UTVANDRET',
-        kodeverk: '',
-      },
+      personstatus: 'UTVANDRET',
     } as PersonopplysningMedlem,
   }, {
     isApplicant: false,
     personopplysning: {
       navn: 'Petra Tester',
       adresser: [],
-      personstatus: {
-        kode: 'UTVANDRET',
-        kodeverk: 'Utvandret',
-      },
+      personstatus: 'UTVANDRET',
     } as PersonopplysningMedlem,
   }];
 
@@ -99,20 +93,14 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
       personopplysning: {
         navn: 'Espen Utvikler',
         adresser: [],
-        personstatus: {
-          kode: 'UTVANDRET',
-          kodeverk: '',
-        },
+        personstatus: 'UTVANDRET',
       } as PersonopplysningMedlem,
     }, {
       isApplicant: false,
       personopplysning: {
         navn: 'Petra Tester',
         adresser: [],
-        personstatus: {
-          kode: 'UTVANDRET',
-          kodeverk: '',
-        },
+        personstatus: 'UTVANDRET',
       } as PersonopplysningMedlem,
     }];
 
@@ -138,75 +126,42 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
       fnr: '',
       navn: 'Espen Utvikler',
       aktoerId: '',
-      diskresjonskode: {
-        kode: '',
-        kodeverk: '',
-      },
-      navBrukerKjonn: {
-        kode: '',
-        kodeverk: '',
-      },
-      region: {
-        kode: '',
-        kodeverk: '',
-      },
+      diskresjonskode: '',
+      navBrukerKjonn: '',
+      region: '',
       fodselsdato: '1979-01-01',
-      personstatus: {
-        kode: 'UTVANDRET',
-        kodeverk: '',
-      },
+      personstatus: 'UTVANDRET',
       avklartPersonstatus: {
-        overstyrtPersonstatus: {
-          kode: personstatusType.BOSATT,
-          kodeverk: '',
-        },
-        orginalPersonstatus: {
-          kode: personstatusType.BOSATT,
-          kodeverk: '',
-        },
+        overstyrtPersonstatus: personstatusType.BOSATT,
+        orginalPersonstatus: personstatusType.BOSATT,
       },
       adresser: [{
         adresselinje1: 'Vei 1',
         postNummer: '1000',
         poststed: 'Oslo',
-        adresseType: {
-          kode: opplysningAdresseType.POSTADRESSE,
-          kodeverk: '',
-        },
+        adresseType: opplysningAdresseType.POSTADRESSE,
       }],
       annenPart: {
         fnr: '',
         navn: 'Petra Tester',
         aktoerId: '',
-        personstatus: {
-          kode: 'UTVANDRET',
-          kodeverk: '',
-        },
+        personstatus: 'UTVANDRET',
         adresser: [{
           adresselinje1: 'Vei 2',
           postNummer: '2000',
           poststed: 'Stockholm',
-          adresseType: {
-            kode: opplysningAdresseType.UTENLANDSK_POSTADRESSE,
-            kodeverk: '',
-          },
+          adresseType: opplysningAdresseType.UTENLANDSK_POSTADRESSE,
         }],
       },
     } as PersonopplysningMedlem;
     const personopplysningAnnenPart = {
       navn: 'Petra Tester',
-      personstatus: {
-        kode: 'UTVANDRET',
-        kodeverk: '',
-      },
+      personstatus: 'UTVANDRET',
       adresser: [{
         adresselinje1: 'Vei 2',
         postNummer: '2000',
         poststed: 'Stockholm',
-        adresseType: {
-          kode: opplysningAdresseType.UTENLANDSK_POSTADRESSE,
-          kodeverk: '',
-        },
+        adresseType: opplysningAdresseType.UTENLANDSK_POSTADRESSE,
       }],
     } as PersonopplysningMedlem;
 
@@ -218,14 +173,8 @@ describe('<OppholdINorgeOgAdresserFaktaPanel>', () => {
     } as PeriodeMedId;
 
     const aksjonspunkt = {
-      definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT,
+      status: aksjonspunktStatus.OPPRETTET,
     } as Aksjonspunkt;
     const soknad = {
       oppgittTilknytning: opphold,

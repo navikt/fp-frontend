@@ -3,6 +3,7 @@ import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl'
 
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
 import { HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import historikkinnslagType from '../../kodeverk/historikkinnslagType';
 import { findEndretFeltVerdi } from './felles/historikkUtils';
@@ -47,7 +48,7 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal & WrappedComponentProps>
             scrollUpOnClick
             createLocationForSkjermlenke={createLocationForSkjermlenke}
           />
-          {historikkinnslagDel.endredeFelter && historikkinnslag.type.kode === historikkinnslagType.OVST_UTTAK_SPLITT && (
+          {historikkinnslagDel.endredeFelter && historikkinnslag.type === historikkinnslagType.OVST_UTTAK_SPLITT && (
             <FormattedMessage
               id="Historikk.Template.9"
               values={{
@@ -60,7 +61,7 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal & WrappedComponentProps>
             />
           )}
 
-          {historikkinnslagDel.endredeFelter && historikkinnslag.type.kode === historikkinnslagType.FASTSATT_UTTAK_SPLITT && (
+          {historikkinnslagDel.endredeFelter && historikkinnslag.type === historikkinnslagType.FASTSATT_UTTAK_SPLITT && (
             <FormattedMessage
               id="Historikk.Template.9.ManuellVurdering"
               values={{
@@ -73,7 +74,7 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal & WrappedComponentProps>
             />
           )}
 
-          {(historikkinnslag.type.kode === historikkinnslagType.TILBAKEKR_VIDEREBEHANDLING && historikkinnslagDel.endredeFelter) && (
+          {(historikkinnslag.type === historikkinnslagType.TILBAKEKR_VIDEREBEHANDLING && historikkinnslagDel.endredeFelter) && (
             historikkinnslagDel.endredeFelter
               .filter((endretFelt) => endretFelt.tilVerdi !== tilbakekrevingVidereBehandling.TILBAKEKR_INNTREKK)
               .map((endretFelt, index) => (
@@ -81,7 +82,7 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal & WrappedComponentProps>
                   <FormattedMessage
                     id="Historikk.Template.9.TilbakekrViderebehandling"
                     values={{
-                      felt: getKodeverknavn(endretFelt.endretFeltNavn),
+                      felt: getKodeverknavn(endretFelt.endretFeltNavn, KodeverkType.HISTORIKK_ENDRET_FELT_TYPE),
                       verdi: findEndretFeltVerdi(endretFelt, endretFelt.tilVerdi, intl),
                       b: (chunks: any) => <b>{chunks}</b>,
                     }}
@@ -89,7 +90,9 @@ const HistorikkMalType9: FunctionComponent<HistorikkMal & WrappedComponentProps>
                 </div>
               ))
           )}
-          {historikkinnslagDel.begrunnelse && <BubbleText bodyText={getKodeverknavn(historikkinnslagDel.begrunnelse)} />}
+          {historikkinnslagDel.begrunnelsetekst && (
+            <BubbleText bodyText={historikkinnslagDel.begrunnelsetekst} />
+          )}
           {historikkinnslagDel.begrunnelseFritekst && <BubbleText bodyText={historikkinnslagDel.begrunnelseFritekst} />}
         </div>
       </div>

@@ -11,7 +11,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import oppholdArsakType, { oppholdArsakMapper } from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import {
@@ -26,7 +26,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import { Tidslinje, EventProps } from '@fpsak-frontend/tidslinje';
 import {
-  Aksjonspunkt, Behandling, FamilieHendelseSamling, Kodeverk,
+  Aksjonspunkt, Behandling, FamilieHendelseSamling,
   Soknad, UttakPeriodeGrense, UttaksresultatPeriode, Ytelsefordeling, Kjønnkode, AlleKodeverk,
   AvklartBarn, UttakStonadskontoer, PeriodeSoker, ArbeidsgiverOpplysningerPerId, Personoversikt,
 } from '@fpsak-frontend/types';
@@ -94,7 +94,7 @@ const getCustomTimes = (
 };
 
 const isInnvilget = (uttaksresultatActivity: UttaksresultatActivity): boolean => uttaksresultatActivity
-  .periodeResultatType.kode === periodeResultatType.INNVILGET;
+  .periodeResultatType === periodeResultatType.INNVILGET;
 
 interface PureOwnProps {
   intl: IntlShape;
@@ -107,8 +107,8 @@ interface PureOwnProps {
   uttakPeriodeGrense: UttakPeriodeGrense;
   ytelsefordeling: Ytelsefordeling;
   behandlingUuid: string;
-  behandlingType: Kodeverk;
-  behandlingStatus: Kodeverk;
+  behandlingType: string;
+  behandlingStatus: string;
   alleKodeverk: AlleKodeverk;
   readOnly: boolean;
   isApOpen: boolean;
@@ -214,7 +214,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
   setSelectedDefaultPeriod(): void {
     const { selectedItem } = this.state;
     const { uttakPerioder } = this.props;
-    const defaultSelectedElement = uttakPerioder.find((period) => period.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING);
+    const defaultSelectedElement = uttakPerioder.find((period) => period.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING);
     const defaultSelectedElementIfNoAP = uttakPerioder.find((period) => period.hovedsoker);
     if (!selectedItem) {
       this.setState({ selectedItem: defaultSelectedElement || defaultSelectedElementIfNoAP });
@@ -245,7 +245,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { tilknyttetStortinget, ...uta } = periode; // NOSONAR destruct er bedre enn delete, immutable
       const { ...transformActivity } = uta;
-      if (uta.oppholdÅrsak.kode !== '-') {
+      if (uta.oppholdÅrsak !== '-') {
         uta.aktiviteter = [];
       }
 
@@ -294,7 +294,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     sortedActivities.sort((a, b) => a.id - b.id);
     this.updateStonadskontoer(sortedActivities);
     this.setFormField(ACTIVITY_PANEL_NAME, sortedActivities);
-    const uttakActivity = otherThanUpdated.find((o) => o.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING
+    const uttakActivity = otherThanUpdated.find((o) => o.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING
         || (o.tilknyttetStortinget && !Object.prototype.hasOwnProperty.call(o, 'erOppfylt')));
     this.setSelectedUttakActivity(uttakActivity || undefined);
   }
@@ -352,14 +352,14 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
   testForReadOnly(aksjonspunkter: Aksjonspunkt[], kanOverstyre: boolean): boolean {
     const { manuellOverstyring } = this.props;
     const kunOverStyrAp = aksjonspunkter.length === 1
-        && aksjonspunkter[0].definisjon.kode === aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER
-        && aksjonspunkter[0].status.kode === 'OPPR';
+        && aksjonspunkter[0].definisjon === aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER
+        && aksjonspunkter[0].status === 'OPPR';
     if (kunOverStyrAp && kanOverstyre) {
       return false;
     }
 
-    const activeUttakAp = aksjonspunkter.filter((ap) => ap.definisjon.kode !== aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER);
-    return (activeUttakAp.length < 1 || (activeUttakAp[0].toTrinnsBehandlingGodkjent === true && activeUttakAp[0].status.kode === 'UTFO'))
+    const activeUttakAp = aksjonspunkter.filter((ap) => ap.definisjon !== aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER);
+    return (activeUttakAp.length < 1 || (activeUttakAp[0].toTrinnsBehandlingGodkjent === true && activeUttakAp[0].status === 'UTFO'))
         && !manuellOverstyring;
   }
 
@@ -394,7 +394,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
       return true;
     }
     const ikkeOppfylt = uttaksresultatActivity.some((ac) => (!Object.prototype.hasOwnProperty.call(ac, 'erOppfylt') && ac.tilknyttetStortinget)
-        || ac.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING);
+        || ac.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING);
 
     if (!isDirty || ikkeOppfylt) {
       return true;
@@ -414,9 +414,9 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
   skalViseCheckbox(): boolean {
     const { aksjonspunkter } = this.props;
     const kunOverStyrAp = aksjonspunkter.length === 1
-        && aksjonspunkter[0].definisjon.kode === aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER
-        && aksjonspunkter[0].status.kode === 'OPPR';
-    const apUtenOverstyre = aksjonspunkter.filter((a) => a.definisjon.kode !== aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER);
+        && aksjonspunkter[0].definisjon === aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER
+        && aksjonspunkter[0].status === 'OPPR';
+    const apUtenOverstyre = aksjonspunkter.filter((a) => a.definisjon !== aksjonspunktCodes.OVERSTYRING_AV_UTTAKPERIODER);
     return apUtenOverstyre.length > 0 || kunOverStyrAp;
   }
 
@@ -609,14 +609,10 @@ const lagUttakMedOpphold = createSelector(
   (uttaksresultatActivity: UttaksresultatActivity[]): UttaksresultatActivity[] => uttaksresultatActivity.map((uttak): UttaksresultatActivity => {
     const { ...uttakPerioder } = uttak;
 
-    if (uttak.oppholdÅrsak.kode !== oppholdArsakType.UDEFINERT) {
-      const stonadskonto = oppholdArsakMapper[uttak.oppholdÅrsak.kode];
+    if (uttak.oppholdÅrsak !== oppholdArsakType.UDEFINERT) {
+      const stonadskonto = oppholdArsakMapper[uttak.oppholdÅrsak];
       const oppholdInfo = {
-        stønadskontoType: {
-          kode: stonadskonto,
-          kodeverk: uttak.oppholdÅrsak.kodeverk,
-          navn: uttakPeriodeNavn[stonadskonto],
-        },
+        stønadskontoType: stonadskonto,
         trekkdagerDesimaler: calcDays(uttak.fom, uttak.tom),
       };
       uttakPerioder.aktiviteter = [oppholdInfo];
@@ -630,7 +626,7 @@ const lagUttaksresultatActivity = createSelector(
     (_state, props: PureOwnProps) => props.aksjonspunkter,
     (_state, props: PureOwnProps) => props.isApOpen],
   (uttakMedOpphold, aksjonspunkter, isApOpen): UttaksresultatActivity[] => {
-    const tilknyttetStortinget = !!aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.TILKNYTTET_STORTINGET && isApOpen);
+    const tilknyttetStortinget = !!aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.TILKNYTTET_STORTINGET && isApOpen);
     return uttakMedOpphold.map((periode: UttaksresultatActivity): UttaksresultatActivity => ({
       tilknyttetStortinget,
       ...periode,
@@ -642,12 +638,12 @@ const getStatusPeriodeHoved = (periode: UttaksresultatActivity | PeriodeSoker): 
   if ('erOppfylt' in periode && periode.erOppfylt === false) {
     return avvistKlassenavn;
   }
-  if (('erOppfylt' in periode && periode.erOppfylt === true) || (periode.periodeResultatType.kode === periodeResultatType.INNVILGET
+  if (('erOppfylt' in periode && periode.erOppfylt === true) || (periode.periodeResultatType === periodeResultatType.INNVILGET
     // @ts-ignore Fiks
     && !periode.tilknyttetStortinget)) {
     return godkjentKlassenavn;
   }
-  if (periode.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING
+  if (periode.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING
     // @ts-ignore Fiks
     || periode.tilknyttetStortinget
   ) {
@@ -658,7 +654,7 @@ const getStatusPeriodeHoved = (periode: UttaksresultatActivity | PeriodeSoker): 
 
 const getStatusPeriodeMed = (periode: UttaksresultatActivity | PeriodeSoker): string => {
   // @ts-ignore Fiks
-  if (periode.periodeResultatType.kode === periodeResultatType.INNVILGET && !periode.tilknyttetStortinget) {
+  if (periode.periodeResultatType === periodeResultatType.INNVILGET && !periode.tilknyttetStortinget) {
     return godkjentKlassenavn;
   }
   return avvistKlassenavn;
@@ -674,22 +670,24 @@ const createTooltipContent = (periodeType: string | ReactElement, intl: IntlShap
       days: calcDaysAndWeeks(item.fom, item.tom).days,
     })}
       </br>
-      ${item.utsettelseType && item.utsettelseType.kode !== '-'
+      ${item.utsettelseType && item.utsettelseType !== '-'
     ? intl.formatMessage({ id: 'Timeline.tooltip.utsettelsePeriode' }) : periodeType}
      </p>
   `);
 
-const getCorrectPeriodName = (item: UttaksresultatActivity | PeriodeSoker, getKodeverknavn: (kodeverk: Kodeverk) => string): ReactElement | string => {
-  if (item.utsettelseType && item.utsettelseType.kode !== '-') {
+const getCorrectPeriodName = (
+  item: UttaksresultatActivity | PeriodeSoker,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string): ReactElement | string => {
+  if (item.utsettelseType && item.utsettelseType !== '-') {
     return (<FormattedMessage id="Timeline.tooltip.slutt" />);
   }
 
   if (item.aktiviteter.length > 0 && item.aktiviteter[0].stønadskontoType) {
-    return getKodeverknavn(item.aktiviteter[0].stønadskontoType);
+    return getKodeverknavn(item.aktiviteter[0].stønadskontoType, KodeverkType.STOENADSKONTOTYPE);
   }
 
-  if (item.oppholdÅrsak?.kode !== oppholdArsakType.UDEFINERT) {
-    const stonadskonto = oppholdArsakMapper[item.oppholdÅrsak.kode];
+  if (item.oppholdÅrsak !== oppholdArsakType.UDEFINERT) {
+    const stonadskonto = oppholdArsakMapper[item.oppholdÅrsak];
     return uttakPeriodeNavn[stonadskonto];
   }
 
@@ -700,19 +698,19 @@ const addClassNameGroupIdToPerioder = (
   hovedsokerPerioder: UttaksresultatActivity[],
   uttakResultatPerioder: UttaksresultatPeriode,
   intl: IntlShape,
-  bStatus: Kodeverk,
+  bStatus: string,
   alleKodeverk: AlleKodeverk,
   hovedsoker: boolean,
 ): PeriodeMedClassName[] => { // NOSONAR Blir fiksa ved refaktorering av Uttak
-  const behandlingStatusKode = bStatus.kode;
+  const behandlingStatusKode = bStatus;
   const annenForelderPerioder = uttakResultatPerioder.perioderAnnenpart;
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
   const perioderMedClassName: PeriodeMedClassName[] = [];
   const perioder = hovedsoker ? hovedsokerPerioder : annenForelderPerioder;
 
   perioder.forEach((item: UttaksresultatActivity | PeriodeSoker, index: number) => {
     const stonadskontoType = getCorrectPeriodName(item, getKodeverknavn);
-    const opphold = item.oppholdÅrsak.kode !== oppholdArsakType.UDEFINERT;
+    const opphold = item.oppholdÅrsak !== oppholdArsakType.UDEFINERT;
     const status = hovedsoker ? getStatusPeriodeHoved(item) : getStatusPeriodeMed(item);
     const gradert = (item.gradertAktivitet && item.graderingInnvilget) ? 'gradert' : '';
     const copyOfItem = { ...item } as PeriodeMedClassName;
@@ -763,10 +761,10 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
     ytelsefordeling,
   } = props;
   const periodeGrenseMottatDato = uttakPeriodeGrense.mottattDato;
-  const hovedsokerKjonnKode = person ? person.bruker.kjønn.kode : undefined;
+  const hovedsokerKjonnKode = person ? person.bruker.kjønn : undefined;
   const annenForelderUttak = uttaksresultat.perioderAnnenpart;
   const viseUttakMedsoker = annenForelderUttak.length > 0;
-  const getMedsokerKjonnKode = (viseUttakMedsoker && person && person.annenPart) ? person.annenPart.kjønn.kode : undefined;
+  const getMedsokerKjonnKode = (viseUttakMedsoker && person && person.annenPart) ? person.annenPart : undefined;
   // hvis ukjent annenpart og annenpart uttak, vis ukjent ikon
   const medsokerKjonnKode = viseUttakMedsoker && getMedsokerKjonnKode === undefined ? navBrukerKjonn.UDEFINERT : getMedsokerKjonnKode;
 
@@ -791,7 +789,7 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
     familiehendelseDate: getFodselTerminDato(props),
     harSoktOmFlerbarnsdager: hovedsokerPerioder.filter((p) => p.flerbarnsdager === true).length > 0,
     hovedsokerKjonnKode,
-    isRevurdering: props.behandlingType.kode === behandlingType.REVURDERING,
+    isRevurdering: props.behandlingType === behandlingType.REVURDERING,
     medsokerKjonnKode,
     person,
     soknadDate: determineMottatDato(periodeGrenseMottatDato, mottattDato),

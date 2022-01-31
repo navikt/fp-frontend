@@ -68,9 +68,7 @@ const beregningsgrunnlagPerioder = [
     beregningsgrunnlagPeriodeTom: '2018-06-30',
     beregningsgrunnlagPrStatusOgAndel: [
       {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-        },
+        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
         erTidsbegrensetArbeidsforhold: true,
         beregnetPrAar: beregnetPrAarAndelEn,
         overstyrtPrAar: overstyrtPrAarAndelEn,
@@ -82,9 +80,7 @@ const beregningsgrunnlagPerioder = [
         andelsnr: 1,
       },
       {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-        },
+        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
         erTidsbegrensetArbeidsforhold: true,
         beregnetPrAar: beregnetPrAarAndelTo,
         overstyrtPrAar: overstyrtPrAarAndelTo,
@@ -98,14 +94,12 @@ const beregningsgrunnlagPerioder = [
     ],
   } as BeregningsgrunnlagPeriodeProp,
   {
-    periodeAarsaker: [{ kode: periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET }],
+    periodeAarsaker: [periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET],
     beregningsgrunnlagPeriodeFom: '2018-07-01',
     beregningsgrunnlagPeriodeTom: '2018-07-31',
     beregningsgrunnlagPrStatusOgAndel: [
       {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-        },
+        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
         erTidsbegrensetArbeidsforhold: true,
         beregnetPrAar: beregnetPrAarAndelEn,
         overstyrtPrAar: overstyrtPrAarAndelEn,
@@ -117,9 +111,7 @@ const beregningsgrunnlagPerioder = [
         andelsnr: 1,
       },
       {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-        },
+        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
         erTidsbegrensetArbeidsforhold: true,
         beregnetPrAar: beregnetPrAarAndelTo,
         overstyrtPrAar: overstyrtPrAarAndelTo,
@@ -133,13 +125,11 @@ const beregningsgrunnlagPerioder = [
     ],
   } as BeregningsgrunnlagPeriodeProp,
   {
-    periodeAarsaker: [{ kode: periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET }],
+    periodeAarsaker: [periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET],
     beregningsgrunnlagPeriodeFom: '2018-08-01',
     beregningsgrunnlagPrStatusOgAndel: [
       {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-        },
+        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
         erTidsbegrensetArbeidsforhold: true,
         beregnetPrAar: beregnetPrAarAndelEn,
         overstyrtPrAar: overstyrtPrAarAndelEn,
@@ -151,9 +141,7 @@ const beregningsgrunnlagPerioder = [
         andelsnr: 1,
       },
       {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-        },
+        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
         erTidsbegrensetArbeidsforhold: true,
         beregnetPrAar: beregnetPrAarAndelTo,
         overstyrtPrAar: overstyrtPrAarAndelTo,
@@ -167,13 +155,11 @@ const beregningsgrunnlagPerioder = [
     ],
   } as BeregningsgrunnlagPeriodeProp,
   {
-    periodeAarsaker: [{ kode: periodeAarsak.REFUSJON_OPPHOERER }],
+    periodeAarsaker: [periodeAarsak.REFUSJON_OPPHOERER],
     beregningsgrunnlagPeriodeFom: '2019-01-01',
     beregningsgrunnlagPrStatusOgAndel: [
       {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-        },
+        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
         erTidsbegrensetArbeidsforhold: true,
         beregnetPrAar: beregnetPrAarAndelEn,
         overstyrtPrAar: overstyrtPrAarAndelEn,
@@ -185,9 +171,7 @@ const beregningsgrunnlagPerioder = [
         andelsnr: 1,
       },
       {
-        aktivitetStatus: {
-          kode: aktivitetStatus.ARBEIDSTAKER,
-        },
+        aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
         erTidsbegrensetArbeidsforhold: true,
         beregnetPrAar: beregnetPrAarAndelTo,
         overstyrtPrAar: overstyrtPrAarAndelTo,
@@ -321,26 +305,14 @@ describe('<AksjonspunktBehandlerTB>', () => {
     const korrektApLukket = [{
       kanLoses: false,
       erAktivt: true,
-      definisjon: {
-        kode: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
-        kodeverk: 'test',
-      },
-      status: {
-        kode: aksjonspunktStatus.UTFORT,
-        kodeverk: 'test',
-      },
+      definisjon: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
+      status: aksjonspunktStatus.UTFORT,
     }];
     const korrektApApent = [{
       kanLoses: true,
       erAktivt: true,
-      definisjon: {
-        kode: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
-        kodeverk: 'test',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: 'test',
-      },
+      definisjon: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
+      status: aksjonspunktStatus.OPPRETTET,
     }];
     const selectorDataLukket = getIsAksjonspunktClosed.resultFunc(korrektApLukket);
     expect(selectorDataLukket).toBe(true);

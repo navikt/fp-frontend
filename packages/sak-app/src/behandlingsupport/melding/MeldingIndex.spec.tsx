@@ -20,23 +20,14 @@ describe('<MeldingIndex>', () => {
 
   const fagsak = {
     saksnummer: '123456',
-    fagsakYtelseType: {
-      kode: fagsakYtelseType.FORELDREPENGER,
-      kodeverk: 'FAGSAK_YTELSE_TYPE',
-    },
+    fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
   };
 
   const valgtBehandling = {
     uuid: '1',
     versjon: 123,
-    type: {
-      kode: BehandlingType.FORSTEGANGSSOKNAD,
-      kodeverk: '',
-    },
-    sprakkode: {
-      kode: 'nb',
-      kodeverk: 'SPRÅK',
-    },
+    type: BehandlingType.FORSTEGANGSSOKNAD,
+    sprakkode: 'nb',
   };
 
   const kodeverk = {
@@ -124,8 +115,9 @@ describe('<MeldingIndex>', () => {
       behandlingUuid: '1',
       ytelseType: {
         kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: 'FAGSAK_YTELSE_TYPE',
+        kodeverk: 'FAGSAK_YTELSE',
       },
+      fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
       fritekst: ' ',
       arsakskode: null,
       mottaker: 'Søker',

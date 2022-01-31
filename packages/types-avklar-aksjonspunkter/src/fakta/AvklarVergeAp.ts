@@ -1,4 +1,3 @@
-import { Kodeverk } from '@fpsak-frontend/types';
 import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
@@ -8,7 +7,7 @@ type AvklarVergeAp = {
   fnr: string;
   gyldigFom: string;
   gyldigTom: string;
-  vergeType: Kodeverk | string;
+  vergeType: string;
   organisasjonsnummer: string;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_VERGE>;
 

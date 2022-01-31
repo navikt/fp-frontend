@@ -15,18 +15,9 @@ export default {
 
 const defaultFagsak = {
   saksnummer: '123456',
-  fagsakYtelseType: {
-    kode: fagsakYtelseType.FORELDREPENGER,
-    kodeverk: 'FAGSAK_YTELSE_TYPE',
-  },
-  relasjonsRolleType: {
-    kode: relasjonsRolleType.MOR,
-    kodeverk: 'RELASJONS_ROLLE_TYPE',
-  },
-  status: {
-    kode: fagsakStatus.LOPENDE,
-    kodeverk: 'STATUS',
-  },
+  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+  relasjonsRolleType: relasjonsRolleType.MOR,
+  status: fagsakStatus.LOPENDE,
   dekningsgrad: 100,
 };
 
@@ -34,23 +25,17 @@ const fagsakPerson = {
   navn: 'Espen Utvikler',
   fødselsdato: '1979-01-01',
   fødselsnummer: '1234567',
-  kjønn: { kode: KjønnkodeEnum.MANN, kodeverk: '' },
+  kjønn: KjønnkodeEnum.MANN,
   aktørId: '234',
-  personstatusType: {
-    kode: personstatusType.BOSATT,
-    kodeverk: 'PERSONSTATUS_TYPE',
-  },
+  personstatusType: personstatusType.BOSATT,
 };
 
 const fagsakPersonAnnenPart = {
   navn: 'Klara Ku',
   fødselsdato: '1980-01-01',
   fødselsnummer: '6565656',
-  kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
-  personstatusType: {
-    kode: personstatusType.BOSATT,
-    kodeverk: 'PERSONSTATUS_TYPE',
-  },
+  kjønn: KjønnkodeEnum.KVINNE,
+  personstatusType: personstatusType.BOSATT,
   aktørId: 'test',
 };
 
@@ -58,11 +43,8 @@ const fagsakPersonAnnenPartUkjent = {
   navn: 'Klara Ku',
   fødselsdato: '1980-01-01',
   fødselsnummer: '6565656',
-  kjønn: { kode: KjønnkodeEnum.KVINNE, kodeverk: '' },
-  personstatusType: {
-    kode: personstatusType.BOSATT,
-    kodeverk: 'PERSONSTATUS_TYPE',
-  },
+  kjønn: KjønnkodeEnum.KVINNE,
+  personstatusType: personstatusType.BOSATT,
 };
 
 const fagsakPersonerUtenAnnenPart = {

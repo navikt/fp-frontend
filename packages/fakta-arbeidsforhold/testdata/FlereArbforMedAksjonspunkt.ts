@@ -22,18 +22,12 @@ export const iay = {
         {
           fom: '2019-06-03',
           tom: '2019-10-11',
-          utsettelseArsak: {
-            kode: 'ARBEID',
-            kodeverk: 'UTSETTELSE_AARSAK_TYPE',
-          },
+          utsettelseArsak: 'ARBEID',
         },
         {
           fom: '2019-10-14',
           tom: '2020-02-14',
-          utsettelseArsak: {
-            kode: 'ARBEID',
-            kodeverk: 'UTSETTELSE_AARSAK_TYPE',
-          },
+          utsettelseArsak: 'ARBEID',
         },
       ],
       graderingPerioder: [
@@ -233,14 +227,8 @@ export const iay = {
 };
 
 export const ap = {
-  definisjon: {
-    kode: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
-    kodeverk: '',
-  },
-  status: {
-    kode: aksjonspunktStatus.OPPRETTET,
-    kodeverk: '',
-  },
+  definisjon: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
+  status: aksjonspunktStatus.OPPRETTET,
   begrunnelse: undefined,
   kanLoses: true,
   erAktivt: true,

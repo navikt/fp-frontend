@@ -9,9 +9,8 @@ import {
   dateFormat, guid, getKodeverknavnFn, omitMany,
 } from '@fpsak-frontend/utils';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelseSamling, Kodeverk,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelseSamling,
   AlleKodeverk, Personoversikt, UttakKontrollerFaktaPerioder, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { FaktaUttakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -44,7 +43,7 @@ interface PureOwnProps {
   kanOverstyre: boolean;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
   personoversikt: Personoversikt;
-  behandlingStatus: Kodeverk;
+  behandlingStatus: string;
   familiehendelse: FamilieHendelseSamling;
   vilkarForSykdomExists: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -75,7 +74,7 @@ export const UttakFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps & I
   submittable,
   ...formProps
 }) => {
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
   return (
     <form onSubmit={formProps.handleSubmit}>
@@ -241,12 +240,12 @@ const lagBekreftedePerioder = (
 
 export const transformValues = (values: FormValues, initialValues: FormValues, aksjonspunkter: Aksjonspunkt[]): FaktaUttakAp[] => { // NOSONAR
   const erManuellOverstyrApErOpprettet = aksjonspunkter
-    .some((ap) => ap.definisjon.kode === AksjonspunktCode.OVERSTYR_AVKLAR_FAKTA_UTTAK);
-  const aksjonspunktUtenOverstyr = aksjonspunkter.filter((ap) => ap.definisjon.kode !== AksjonspunktCode.MANUELL_AVKLAR_FAKTA_UTTAK
-    && ap.definisjon.kode !== AksjonspunktCode.OVERSTYR_AVKLAR_FAKTA_UTTAK);
+    .some((ap) => ap.definisjon === AksjonspunktCode.OVERSTYR_AVKLAR_FAKTA_UTTAK);
+  const aksjonspunktUtenOverstyr = aksjonspunkter.filter((ap) => ap.definisjon !== AksjonspunktCode.MANUELL_AVKLAR_FAKTA_UTTAK
+    && ap.definisjon !== AksjonspunktCode.OVERSTYR_AVKLAR_FAKTA_UTTAK);
 
   const apCodes = aksjonspunktUtenOverstyr.length
-    ? aksjonspunktUtenOverstyr.map((ap) => ap.definisjon.kode)
+    ? aksjonspunktUtenOverstyr.map((ap) => ap.definisjon)
     : [manueltEllerOverstyring(values.faktaUttakManuellOverstyring, erManuellOverstyrApErOpprettet)];
   return apCodes.map((ap) => ({
     kode: ap as any,
@@ -279,7 +278,7 @@ const mapStateToPropsFactory = (_initialState: any, props: PureOwnProps) => {
   const warn = (values: FormValues) => warningsUttakForm(values);
 
   return (_state, ownProps: PureOwnProps): MappedOwnProps => {
-    const hasRevurderingOvertyringAp = props.aksjonspunkter.some((ap) => ap.definisjon.kode === AksjonspunktCode.MANUELL_AVKLAR_FAKTA_UTTAK);
+    const hasRevurderingOvertyringAp = props.aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.MANUELL_AVKLAR_FAKTA_UTTAK);
     return {
       initialValues,
       hasRevurderingOvertyringAp,

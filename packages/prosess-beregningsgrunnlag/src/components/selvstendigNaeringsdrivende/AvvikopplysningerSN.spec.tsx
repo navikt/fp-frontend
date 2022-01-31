@@ -15,18 +15,12 @@ const sammenligningsgrunnlag = (kode: string): SammenligningsgrunlagProp => ({
   rapportertPrAar: 330000,
   avvikPromille: 275,
   avvikProsent: 27.5,
-  sammenligningsgrunnlagType: {
-    kodeverk: 'test',
-    kode,
-  },
+  sammenligningsgrunnlagType: kode,
   differanseBeregnet: 12100,
 });
 const andel = {
   pgiSnitt: 100,
-  aktivitetStatus:
-      {
-        kode: aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE,
-      },
+  aktivitetStatus: aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE,
   næringer: [
     {
       erVarigEndret: false,

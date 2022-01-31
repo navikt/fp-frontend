@@ -8,16 +8,16 @@ const faktaOmBeregningAndel1 = {
   andelsnr: 1,
   fastsattBelopPrMnd: null,
   lagtTilAvSaksbehandler: false,
-  inntektskategori: { kode: inntektskategorier.UDEFINERT, kodeverk: 'test' },
-  aktivitetStatus: { kode: 'BA', kodeverk: 'AKTIVITET_STATUS' },
+  inntektskategori: inntektskategorier.UDEFINERT,
+  aktivitetStatus: 'BA',
 };
 
 const faktaOmBeregningAndel2 = {
   andelsnr: 2,
   fastsattBelopPrMnd: 10000,
   lagtTilAvSaksbehandler: true,
-  inntektskategori: { kode: inntektskategorier.ARBEIDSTAKER, kodeverk: 'test' },
-  aktivitetStatus: { kode: 'BA', kodeverk: 'AKTIVITET_STATUS' },
+  inntektskategori: inntektskategorier.ARBEIDSTAKER,
+  aktivitetStatus: 'BA',
 };
 
 const alleKodeverk = {
@@ -71,15 +71,15 @@ describe('<KunYtelsePanel>', () => {
       andelsnr: 1,
       fastsattBelopPrMnd: null,
       lagtTilAvSaksbehandler: false,
-      inntektskategori: { kode: inntektskategorier.UDEFINERT, kodeverk: 'test' },
-      aktivitetStatus: { kode: 'BA', kodeverk: 'AKTIVITET_STATUS' },
+      inntektskategori: inntektskategorier.UDEFINERT,
+      aktivitetStatus: 'BA',
     };
     const andel2 = {
       andelsnr: 2,
       fastsattBelopPrMnd: 10000,
       lagtTilAvSaksbehandler: true,
-      inntektskategori: { kode: inntektskategorier.ARBEIDSTAKER, kodeverk: 'test' },
-      aktivitetStatus: { kode: 'BA', kodeverk: 'AKTIVITET_STATUS' },
+      inntektskategori: inntektskategorier.ARBEIDSTAKER,
+      aktivitetStatus: 'BA',
     };
     const kunYtelse = {
       fodendeKvinneMedDP: false,
@@ -110,15 +110,15 @@ describe('<KunYtelsePanel>', () => {
       andelsnr: 1,
       fastsattBelopPrMnd: null,
       lagtTilAvSaksbehandler: false,
-      inntektskategori: { kode: inntektskategorier.UDEFINERT, kodeverk: 'test' },
-      aktivitetStatus: { kode: 'BA', kodeverk: 'test' },
+      inntektskategori: inntektskategorier.UDEFINERT,
+      aktivitetStatus: 'BA',
     };
     const andel2 = {
       andelsnr: 2,
       fastsattBelopPrMnd: 10000,
       lagtTilAvSaksbehandler: true,
-      inntektskategori: { kode: inntektskategorier.ARBEIDSTAKER, kodeverk: 'test' },
-      aktivitetStatus: { kode: 'BA', kodeverk: 'test' },
+      inntektskategori: inntektskategorier.ARBEIDSTAKER,
+      aktivitetStatus: 'BA',
     };
     const kunYtelse = {
       andeler: [andel1, andel2],
@@ -153,15 +153,15 @@ describe('<KunYtelsePanel>', () => {
       andelsnr: 1,
       fastsattBelopPrMnd: null,
       lagtTilAvSaksbehandler: false,
-      inntektskategori: { kode: inntektskategorier.UDEFINERT, kodeverk: 'test' },
-      aktivitetStatus: { kode: 'BA', kodeverk: 'AKTIVITET_STATUS' },
+      inntektskategori: inntektskategorier.UDEFINERT,
+      aktivitetStatus: 'BA',
     };
     const andel2 = {
       andelsnr: 2,
       fastsattBelopPrMnd: 10000,
       lagtTilAvSaksbehandler: true,
-      inntektskategori: { kode: inntektskategorier.ARBEIDSTAKER, kodeverk: 'test' },
-      aktivitetStatus: { kode: 'BA', kodeverk: 'AKTIVITET_STATUS' },
+      inntektskategori: inntektskategorier.ARBEIDSTAKER,
+      aktivitetStatus: 'BA',
     };
     const kunYtelse = {
       andeler: [andel1, andel2],

@@ -17,7 +17,7 @@ import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/for
 import {
   hasValidPeriod, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
-import { FamilieHendelse, Kodeverk } from '@fpsak-frontend/types';
+import { FamilieHendelse } from '@fpsak-frontend/types';
 
 import PerioderKnapper from './PerioderKnapper';
 import DokumentertePerioderPeriodePicker from './DokumentertePerioderPeriodePicker';
@@ -53,7 +53,7 @@ interface PureOwnProps {
   fieldId: string;
   gjeldendeFamiliehendelse: FamilieHendelse;
   vilkarForSykdomExists: boolean;
-  overforingArsak?: Kodeverk;
+  overforingArsak?: string;
   updatePeriode: (...args: any[]) => any;
   resultat?: string;
   cancelEditPeriode: (...args: any[]) => any;
@@ -201,7 +201,7 @@ SykdomOgSkadePeriode.defaultProps = {
 const validateSykdomOgSkadeForm = (
   values: FormValues,
   familieHendelse: FamilieHendelse,
-  overforingArsak: Kodeverk,
+  overforingArsak: string,
   vilkarForSykdomOppfyltExists: boolean,
   intl: IntlShape,
 ) => {
@@ -212,7 +212,7 @@ const validateSykdomOgSkadeForm = (
     ? [uttakPeriodeVurdering.PERIODE_OK, uttakPeriodeVurdering.PERIODE_OK_ENDRET]
     : [uttakPeriodeVurdering.PERIODE_KAN_IKKE_AVKLARES];
 
-  if (overforingArsak && overforingArsak.kode === overforingArsakCodes.SYKDOM_ANNEN_FORELDER
+  if (overforingArsak === overforingArsakCodes.SYKDOM_ANNEN_FORELDER
     && !morForSykVedFodsel.includes(values.resultat)
     && vilkarForSykdomOppfyltExists) {
     return {

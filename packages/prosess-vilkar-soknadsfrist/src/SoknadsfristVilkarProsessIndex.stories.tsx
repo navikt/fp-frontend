@@ -24,18 +24,14 @@ const defaultBehandling = {
 } as Behandling;
 
 const vilkar = [{
-  vilkarType: {
-    kode: vilkarType.SOKNADFRISTVILKARET,
-  },
+  vilkarType: vilkarType.SOKNADFRISTVILKARET,
   merknadParametere: {
     antallDagerSoeknadLevertForSent: '2',
   },
 }] as Vilkar[];
 
 const soknad = {
-  soknadType: {
-    kode: soknadType.FODSEL,
-  },
+  soknadType: soknadType.FODSEL,
   mottattDato: '2019-01-01',
   fodselsdatoer: { 1: '2019-01-01' } as {[key: number]: string},
   begrunnelseForSenInnsending: 'Dette er en begrunnelse',
@@ -91,16 +87,10 @@ export const ÅpentAksjonspunkt = Template.bind({});
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.SOKNADSFRISTVILKARET,
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-    },
+    definisjon: aksjonspunktCodes.SOKNADSFRISTVILKARET,
+    status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
-    vilkarType: {
-      kode: vilkarType.SOKNADFRISTVILKARET,
-    },
+    vilkarType: vilkarType.SOKNADFRISTVILKARET,
   }] as Aksjonspunkt[],
   isReadOnly: false,
   readOnlySubmitButton: false,
@@ -112,16 +102,10 @@ OppfyltVilkår.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   behandling: defaultBehandling,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.SOKNADSFRISTVILKARET,
-    },
-    status: {
-      kode: aksjonspunktStatus.UTFORT,
-    },
+    definisjon: aksjonspunktCodes.SOKNADSFRISTVILKARET,
+    status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette vilkåret er godkjent',
-    vilkarType: {
-      kode: vilkarType.SOKNADFRISTVILKARET,
-    },
+    vilkarType: vilkarType.SOKNADFRISTVILKARET,
   }] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,
@@ -135,22 +119,14 @@ AvslåttVilkår.args = {
     uuid: '1',
     versjon: 1,
     behandlingsresultat: {
-      avslagsarsak: {
-        kode: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
-      },
+      avslagsarsak: avslagsarsakCodes.INGEN_BEREGNINGSREGLER,
     },
   } as Behandling,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.SOKNADSFRISTVILKARET,
-    },
-    status: {
-      kode: aksjonspunktStatus.UTFORT,
-    },
+    definisjon: aksjonspunktCodes.SOKNADSFRISTVILKARET,
+    status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette vilkåret er avslått',
-    vilkarType: {
-      kode: vilkarType.SOKNADFRISTVILKARET,
-    },
+    vilkarType: vilkarType.SOKNADFRISTVILKARET,
   }] as Aksjonspunkt[],
   isReadOnly: true,
   readOnlySubmitButton: true,

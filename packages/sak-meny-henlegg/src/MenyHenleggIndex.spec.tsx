@@ -143,8 +143,9 @@ describe('<MenyHenleggIndex>', () => {
       mottaker: 'Søker',
       ytelseType: {
         kode: 'FP',
-        kodeverk: 'YTELSE_TYPE',
+        kodeverk: 'FAGSAK_YTELSE',
       },
+      fagsakYtelseType: 'FP',
     });
   });
 

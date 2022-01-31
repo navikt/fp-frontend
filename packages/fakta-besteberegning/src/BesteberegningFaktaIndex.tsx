@@ -5,7 +5,6 @@ import {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, AlleKodeverk, StandardFaktaPanelProps,
 } from '@fpsak-frontend/types';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { createIntl, getKodeverknavnFn } from '@fpsak-frontend/utils';
 
 import messages from '../i18n/nb_NO.json';
@@ -39,7 +38,7 @@ const BesteberegningFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelP
     <BesteberegningPanel
       beregningsgrunnlag={beregningsgrunnlag}
       arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
-      getKodeverkNavn={getKodeverknavnFn(alleKodeverk, kodeverkTyper)}
+      getKodeverkNavn={getKodeverknavnFn(alleKodeverk)}
       aksjonspunkter={aksjonspunkter}
       behandling={behandling}
       readOnly={readOnly}

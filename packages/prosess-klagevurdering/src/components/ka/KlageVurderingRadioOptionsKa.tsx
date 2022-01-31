@@ -8,14 +8,14 @@ import { ArrowBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form-hooks';
 import { ProsessStegBegrunnelseTextFieldNew } from '@fpsak-frontend/prosess-felles';
 import klageVurderingOmgjoerType from '@fpsak-frontend/kodeverk/src/klageVurderingOmgjoer';
-import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import styles from './klageVurderingRadioOptionsKa.less';
 
 interface OwnProps {
   readOnly?: boolean;
   medholdReasons: KodeverkMedNavn[];
-  klageVurdering?: Kodeverk;
+  klageVurdering?: string;
 }
 
 const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps> = ({
@@ -35,7 +35,7 @@ const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps> = ({
       <Row>
         <Column xs="4">
           <RadioGroupField
-            name="klageVurdering.kode"
+            name="klageVurdering"
             validate={[required]}
             direction="vertical"
             readOnly={readOnly}
@@ -46,7 +46,7 @@ const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps> = ({
         </Column>
         <Column xs="4">
           <RadioGroupField
-            name="klageVurdering.kode"
+            name="klageVurdering"
             validate={[required]}
             readOnly={readOnly}
             className={readOnly ? styles.selectReadOnly : null}
@@ -57,14 +57,14 @@ const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps> = ({
           </RadioGroupField>
         </Column>
       </Row>
-      {(klageVurdering?.kode === klageVurderingType.MEDHOLD_I_KLAGE)
+      {(klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE)
     && (
       <Row>
         <Column xs="4">
           <ArrowBox>
             <SelectField
               readOnly={readOnly}
-              name="klageMedholdArsak.kode"
+              name="klageMedholdArsak"
               selectValues={medholdOptions}
               label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
               validate={[required]}
@@ -72,7 +72,7 @@ const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps> = ({
             />
             <VerticalSpacer sixteenPx />
             <RadioGroupField
-              name="klageVurderingOmgjoer.kode"
+              name="klageVurderingOmgjoer"
               validate={[required]}
               readOnly={readOnly}
               className={readOnly ? styles.selectReadOnly : null}
@@ -86,7 +86,7 @@ const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps> = ({
         </Column>
       </Row>
     )}
-      {(klageVurdering?.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK || klageVurdering?.kode === klageVurderingType.HJEMSENDE_UTEN_Å_OPPHEVE)
+      {(klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK || klageVurdering === klageVurderingType.HJEMSENDE_UTEN_Å_OPPHEVE)
       && (
         <Row>
           <Column xs="4" />
@@ -94,7 +94,7 @@ const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps> = ({
             <ArrowBox>
               <SelectField
                 readOnly={readOnly}
-                name="klageMedholdArsak.kode"
+                name="klageMedholdArsak"
                 className={readOnly ? styles.selectReadOnly : null}
                 selectValues={medholdOptions}
                 label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}

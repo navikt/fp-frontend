@@ -12,7 +12,7 @@ import { RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
 import { required } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Kodeverk, Soknad, AvklartBarn,
+  Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad, AvklartBarn,
 } from '@fpsak-frontend/types';
 import { SjekkManglendeFodselAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -37,7 +37,7 @@ interface OwnProps {
   readOnly: boolean;
   submittable: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  behandlingType: Kodeverk;
+  behandlingType: string;
   soknadOriginalBehandling?: Soknad;
   familiehendelseOriginalBehandling?: FamilieHendelse;
 }
@@ -75,7 +75,7 @@ export const SjekkFodselDokForm: FunctionComponent<OwnProps> & StaticFunctions =
   return (
     <>
       <FodselSammenligningIndex
-        behandlingsTypeKode={behandlingType.kode}
+        behandlingsTypeKode={behandlingType}
         avklartBarn={register?.avklartBarn}
         termindato={termindato}
         vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}

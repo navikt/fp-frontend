@@ -132,12 +132,12 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
 };
 
 VilkarResultPicker.buildInitialValues = (behandlingsresultat: Behandlingsresultat, aksjonspunkter: Aksjonspunkt[], status: string): FormValues => {
-  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
+  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status));
   const erVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
   return {
     erVilkarOk,
     avslagCode: erVilkarOk === false && behandlingsresultat && behandlingsresultat.avslagsarsak
-      ? behandlingsresultat.avslagsarsak.kode
+      ? behandlingsresultat.avslagsarsak
       : undefined,
   };
 };

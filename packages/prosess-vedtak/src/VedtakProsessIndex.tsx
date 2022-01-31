@@ -24,8 +24,8 @@ const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
   if (!beregningsgrunnlag || !aksjonspunkter) {
     return false;
   }
-  const behandlingHarLøstBGAP = aksjonspunkter.find((ap) => isBGAksjonspunktSomGirFritekstfelt(ap.definisjon.kode)
-    && ap.status.kode === aksjonspunktStatus.UTFORT);
+  const behandlingHarLøstBGAP = aksjonspunkter.find((ap) => isBGAksjonspunktSomGirFritekstfelt(ap.definisjon)
+    && ap.status === aksjonspunktStatus.UTFORT);
   const førstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode[0];
   const andelSomErManueltFastsatt = førstePeriode.beregningsgrunnlagPrStatusOgAndel.find((andel) => andel.overstyrtPrAar || andel.overstyrtPrAar === 0);
   return (!!behandlingHarLøstBGAP || !!andelSomErManueltFastsatt);
@@ -78,7 +78,7 @@ const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
 
   return (
     <RawIntlProvider value={intl}>
-      {behandling.type.kode !== behandlingType.REVURDERING && (
+      {behandling.type !== behandlingType.REVURDERING && (
         <VedtakForm
           behandling={behandling}
           submitCallback={submitCallback}
@@ -96,7 +96,7 @@ const VedtakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps
           setFormData={setFormData}
         />
       )}
-      {behandling.type.kode === behandlingType.REVURDERING && (
+      {behandling.type === behandlingType.REVURDERING && (
         <VedtakRevurderingForm
           behandling={behandling}
           submitCallback={submitCallback}

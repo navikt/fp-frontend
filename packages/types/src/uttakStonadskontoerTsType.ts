@@ -1,7 +1,5 @@
-import Kodeverk from './kodeverkTsType';
-
 export type AktivitetIdentifikator = Readonly<{
-  uttakArbeidType: Kodeverk;
+  uttakArbeidType: string;
   arbeidsforholdId?: string;
   arbeidsgiverReferanse: string;
 }>

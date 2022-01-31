@@ -11,7 +11,8 @@ import editPeriodeIcon from '@fpsak-frontend/assets/images/endre.svg';
 import editPeriodeDisabledIcon from '@fpsak-frontend/assets/images/endre_disablet.svg';
 import removePeriod from '@fpsak-frontend/assets/images/remove.svg';
 import removePeriodDisabled from '@fpsak-frontend/assets/images/remove_disabled.svg';
-import { ArbeidsgiverOpplysningerPerId, Kodeverk } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import lagVisningsNavn from './utils/lagVisningsNavn';
 
@@ -28,27 +29,32 @@ export const overforingArsakTexts = {
   [overforingArsakCodes.UDEFINERT]: '-',
 };
 
-const getUttakTypeTitle = (getKodeverknavn: (kodeverk: Kodeverk) => string, utsettelseArsak?: Kodeverk, overforingArsak?: Kodeverk,
-  arbeidstidprosent?: number, oppholdArsak?: Kodeverk): ReactElement => {
-  if (overforingArsak && overforingArsak.kode !== overforingArsakCodes.UDEFINERT) {
+const getUttakTypeTitle = (
+  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
+  utsettelseArsak?: string,
+  overforingArsak?: string,
+  arbeidstidprosent?: number,
+  oppholdArsak?: string,
+): ReactElement => {
+  if (overforingArsak !== overforingArsakCodes.UDEFINERT) {
     return (
       <FormattedMessage
         id="UttakInfoPanel.OverføringMedÅrsak"
-        values={{ årsak: overforingArsakTexts[overforingArsak.kode] }}
+        values={{ årsak: overforingArsakTexts[overforingArsak] }}
       />
     );
   }
 
-  if (utsettelseArsak && utsettelseArsak.kode !== utsettelseArsakCodes.UDEFINERT) {
+  if (utsettelseArsak !== utsettelseArsakCodes.UDEFINERT) {
     return (
       <FormattedMessage
         id="UttakInfoPanel.UtsettelseMedÅrsak"
-        values={{ årsak: getKodeverknavn(utsettelseArsak) }}
+        values={{ årsak: getKodeverknavn(utsettelseArsak, KodeverkType.UTSETTELSE_AARSAK_TYPE) }}
       />
     );
   }
 
-  if (oppholdArsak && oppholdArsak.kode !== oppholdArsakType.UDEFINERT) {
+  if (oppholdArsak !== oppholdArsakType.UDEFINERT) {
     return (
       <FormattedMessage id="UttakInfoPanel.OppholdMedÅrsak" />
     );
@@ -61,12 +67,16 @@ const getUttakTypeTitle = (getKodeverknavn: (kodeverk: Kodeverk) => string, utse
   return <FormattedMessage id="UttakInfoPanel.Uttak" />;
 };
 
-const getUttakPeriode = (getKodeverknavn: (kodeverk: Kodeverk) => string, uttakPeriodeType: Kodeverk, oppholdArsak?: Kodeverk): string => {
-  if (oppholdArsak && oppholdArsak.kode !== oppholdArsakType.UDEFINERT) {
-    return getKodeverknavn(oppholdArsak);
+const getUttakPeriode = (
+  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
+  uttakPeriodeType: string,
+  oppholdArsak?: string,
+): string => {
+  if (oppholdArsak !== oppholdArsakType.UDEFINERT) {
+    return getKodeverknavn(oppholdArsak, KodeverkType.OPPHOLD_ARSAK);
   }
 
-  return getKodeverknavn(uttakPeriodeType);
+  return getKodeverknavn(uttakPeriodeType, KodeverkType.UTTAK_PERIODE_TYPE);
 };
 
 const finnesArbeidstidsprosent = (arbeidstidprosent?: number) => arbeidstidprosent === 0 || arbeidstidprosent;
@@ -86,20 +96,20 @@ interface OwnProps {
   erSelvstendig?: boolean;
   flerbarnsdager: boolean;
   fraDato: string;
-  getKodeverknavn: (kodeverk: Kodeverk) => string;
+  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string;
   id: string;
   isAnyFormOpen: () => boolean;
   isFromSøknad: boolean;
   isNyPeriodeFormOpen: boolean;
   openSlettPeriodeModalCallback: (...args: any[]) => any;
-  oppholdArsak?: Kodeverk;
-  overforingArsak?: Kodeverk;
+  oppholdArsak?: string;
+  overforingArsak?: string;
   readOnly: boolean;
   samtidigUttak: boolean;
   samtidigUttaksprosent?: string;
   tilDato: string;
-  utsettelseArsak?: Kodeverk;
-  uttakPeriodeType: Kodeverk;
+  utsettelseArsak?: string;
+  uttakPeriodeType: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 

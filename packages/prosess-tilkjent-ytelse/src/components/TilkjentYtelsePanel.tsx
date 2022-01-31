@@ -38,7 +38,7 @@ const parseDateString = (dateString: string): Date => moment(dateString, ISO_DAT
 
 const getFamilieHendelseDato = (familieHendelseSamling: FamilieHendelseSamling): Date => {
   const familieHendelse = familieHendelseSamling.gjeldende || familieHendelseSamling.oppgitt;
-  if (familieHendelse.soknadType.kode === soknadType.FODSEL) {
+  if (familieHendelse.soknadType === soknadType.FODSEL) {
     if (familieHendelse.avklartBarn && familieHendelse.avklartBarn.length > 0) {
       return parseDateString(familieHendelse.avklartBarn[0].fodselsdato);
     }
@@ -49,7 +49,7 @@ const getFamilieHendelseDato = (familieHendelseSamling: FamilieHendelseSamling):
 };
 
 const finnTilbaketrekkAksjonspunkt = (alleAksjonspunkter: Aksjonspunkt[]): Aksjonspunkt | undefined => (alleAksjonspunkter
-  ? alleAksjonspunkter.find((ap) => ap.definisjon?.kode === aksjonspunktCodes.VURDER_TILBAKETREKK)
+  ? alleAksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.VURDER_TILBAKETREKK)
   : undefined);
 
 interface PureOwnProps {
@@ -98,7 +98,7 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
           groups={groups}
           soknadDate={soknad.mottattDato}
           familiehendelseDate={familiehendelseDato}
-          hovedsokerKjonnKode={personoversikt?.bruker ? personoversikt.bruker.kjønn.kode as Kjønnkode : undefined}
+          hovedsokerKjonnKode={personoversikt?.bruker ? personoversikt.bruker.kjønn as Kjønnkode : undefined}
           isSoknadSvangerskapspenger={fagsakYtelseTypeKode === fagsakYtelseType.SVANGERSKAPSPENGER}
           alleKodeverk={alleKodeverk}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

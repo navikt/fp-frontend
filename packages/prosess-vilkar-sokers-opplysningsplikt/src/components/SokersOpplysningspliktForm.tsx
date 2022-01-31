@@ -10,7 +10,7 @@ import {
   ProsessStegBegrunnelseTextFieldNew, ProsessPanelTemplate,
 } from '@fpsak-frontend/prosess-felles';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   Table, TableColumn, TableRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
@@ -72,7 +72,7 @@ const formatArbeidsgiver = (arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysnin
 };
 
 export const getSortedManglendeVedlegg = (soknad: Soknad): ManglendeVedleggSoknad[] => (soknad && soknad.manglendeVedlegg
-  ? soknad.manglendeVedlegg.slice().sort((mv1) => (mv1.dokumentType.kode === dokumentTypeId.DOKUMENTASJON_AV_TERMIN_ELLER_FØDSEL ? 1 : -1))
+  ? soknad.manglendeVedlegg.slice().sort((mv1) => (mv1.dokumentType === dokumentTypeId.DOKUMENTASJON_AV_TERMIN_ELLER_FØDSEL ? 1 : -1))
   : []);
 
 const harSoknad = (soknad: Soknad): boolean => soknad !== null && isObject(soknad);
@@ -92,13 +92,13 @@ const buildInitialValues = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): FormValues => {
   const aksjonspunkt = aksjonspunkter.length > 0 ? aksjonspunkter[0] : undefined;
-  const isOpenAksjonspunkt = aksjonspunkt && isAksjonspunktOpen(aksjonspunkt.status.kode);
+  const isOpenAksjonspunkt = aksjonspunkt && isAksjonspunktOpen(aksjonspunkt.status);
   const isVilkarGodkjent = soknadExists && vilkarUtfallType.OPPFYLT === status;
 
   // TODO Mogleg inntektsmeldingerSomIkkeKommer kan fjernast, men trur fjerning av bruken av denne i render er ein midlertidig
   // fiks og at dette derfor skal brukast etterkvart. Sjå TFP-3076
   const inntektsmeldingerSomIkkeKommer = sorterteManglendeVedlegg
-    .filter((mv) => mv.dokumentType.kode === dokumentTypeId.INNTEKTSMELDING)
+    .filter((mv) => mv.dokumentType === dokumentTypeId.INNTEKTSMELDING)
     .reduce((acc, mv) => ({
       ...acc,
       [lagArbeidsgiverKey(arbeidsgiverOpplysningerPerId[mv.arbeidsgiverReferanse])]: mv.brukerHarSagtAtIkkeKommer,
@@ -119,11 +119,11 @@ const transformValues = (
   aksjonspunkter: Aksjonspunkt[],
 ): BekreftSokersOpplysningspliktManuAp | OverstyringSokersOpplysingspliktAp => {
   const arbeidsgiverReferanser = manglendeVedlegg
-    .filter((mv) => mv.dokumentType.kode === dokumentTypeId.INNTEKTSMELDING)
+    .filter((mv) => mv.dokumentType === dokumentTypeId.INNTEKTSMELDING)
     .map((mv) => mv.arbeidsgiverReferanse);
 
   const aksjonspunkt = aksjonspunkter.length > 0 ? aksjonspunkter[0] : undefined;
-  const kode = aksjonspunkt && aksjonspunkt.definisjon.kode === aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU
+  const kode = aksjonspunkt && aksjonspunkt.definisjon === aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU
     ? aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_MANU
     : aksjonspunktCodes.SOKERS_OPPLYSNINGSPLIKT_OVST;
 
@@ -188,7 +188,7 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
 
   const sorterteManglendeVedlegg = useMemo(() => getSortedManglendeVedlegg(soknad), [soknad]);
   const hasSoknad = harSoknad(soknad);
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
   const initialValues = useMemo(() => buildInitialValues(sorterteManglendeVedlegg, hasSoknad, status, aksjonspunkter, arbeidsgiverOpplysningerPerId),
     [sorterteManglendeVedlegg, hasSoknad, aksjonspunkter, status, arbeidsgiverOpplysningerPerId]);
@@ -200,10 +200,10 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
   const hasAksjonspunkt = formMethods.watch('hasAksjonspunkt');
   const erVilkarOk = formMethods.watch('erVilkarOk');
 
-  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
+  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status));
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
 
-  const dokumentTypeIds = alleKodeverk[kodeverkTyper.DOKUMENT_TYPE_ID];
+  const dokumentTypeIds = alleKodeverk[KodeverkType.DOKUMENT_TYPE_ID];
 
   return (
     <Form
@@ -231,12 +231,12 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
               <Column xs="11">
                 <Table noHover>
                   {sorterteManglendeVedlegg.map((vedlegg) => (
-                    <TableRow key={vedlegg.dokumentType.kode + (vedlegg.arbeidsgiverReferanse ? vedlegg.arbeidsgiverReferanse : '')}>
+                    <TableRow key={vedlegg.dokumentType + (vedlegg.arbeidsgiverReferanse ? vedlegg.arbeidsgiverReferanse : '')}>
                       <TableColumn>
-                        {dokumentTypeIds.find((dti) => dti.kode === vedlegg.dokumentType.kode)?.navn}
+                        {dokumentTypeIds.find((dti) => dti.kode === vedlegg.dokumentType)?.navn}
                       </TableColumn>
                       <TableColumn>
-                        {vedlegg.dokumentType.kode === dokumentTypeId.INNTEKTSMELDING
+                        {vedlegg.dokumentType === dokumentTypeId.INNTEKTSMELDING
                       && formatArbeidsgiver(arbeidsgiverOpplysningerPerId, vedlegg.arbeidsgiverReferanse)}
                       </TableColumn>
                     </TableRow>
@@ -273,7 +273,7 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
             {originalErVilkarOk === false && behandlingsresultat?.avslagsarsak && (
               <>
                 <VerticalSpacer sixteenPx />
-                <Normaltekst>{getKodeverknavn(behandlingsresultat.avslagsarsak, vilkarType.SOKERSOPPLYSNINGSPLIKT)}</Normaltekst>
+                <Normaltekst>{getKodeverknavn(behandlingsresultat.avslagsarsak, KodeverkType.AVSLAGSARSAK, vilkarType.SOKERSOPPLYSNINGSPLIKT)}</Normaltekst>
               </>
             )}
           </div>

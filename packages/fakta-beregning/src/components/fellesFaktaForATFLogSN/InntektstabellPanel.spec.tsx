@@ -38,7 +38,7 @@ describe('<InntektstabellPanel>', () => {
         tabell={<span> tabell </span>}
         kanOverstyre
         aksjonspunkter={[{
-          definisjon: { kode: OVERSTYRING_AV_BEREGNINGSGRUNNLAG, kodeverk: 'test' }, status: { kode: 'OPPR', kodeverk: 'test' }, erAktivt: true, kanLoses: true,
+          definisjon: OVERSTYRING_AV_BEREGNINGSGRUNNLAG, status: 'OPPR', erAktivt: true, kanLoses: true,
         }]}
         readOnly={false}
         erOverstyrer={false}

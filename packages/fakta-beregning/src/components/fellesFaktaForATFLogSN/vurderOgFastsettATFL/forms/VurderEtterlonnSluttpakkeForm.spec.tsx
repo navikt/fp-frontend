@@ -17,14 +17,8 @@ describe('<VurderEtterlonnSluttpakkeForm>', () => {
   });
   it('Skal teste at buildInitialvalues bygges korrekt når det er tidligere fastsatt etterlønn eller sluttpakke', () => {
     const ap = {
-      status: {
-        kode: 'OPPRETTET',
-        kodeverk: 'test',
-      },
-      definisjon: {
-        kode: '5058',
-        kodeverk: 'test',
-      },
+      status: 'OPPRETTET',
+      definisjon: '5058',
       kanLoses: true,
       erAktivt: true,
     };
@@ -34,10 +28,7 @@ describe('<VurderEtterlonnSluttpakkeForm>', () => {
           beregningsgrunnlagPrStatusOgAndel: [
             {
               arbeidsforhold: {
-                arbeidsforholdType: {
-                  kode: 'ETTERLØNN_SLUTTPAKKE',
-                  kodeverk: 'test',
-                },
+                arbeidsforholdType: 'ETTERLØNN_SLUTTPAKKE',
               },
               beregnetPrAar: 120000,
             } as BeregningsgrunnlagAndel,
@@ -54,14 +45,8 @@ describe('<VurderEtterlonnSluttpakkeForm>', () => {
 
   it('Skal teste at buildInitialvalues bygges korrekt når det ikke er tidligere fastsatt etterlønn eller sluttpakke', () => {
     const ap = {
-      status: {
-        kode: 'OPPRETTET',
-        kodeverk: 'test',
-      },
-      definisjon: {
-        kode: '5058',
-        kodeverk: 'test',
-      },
+      status: 'OPPRETTET',
+      definisjon: '5058',
       kanLoses: true,
       erAktivt: true,
 
@@ -72,10 +57,7 @@ describe('<VurderEtterlonnSluttpakkeForm>', () => {
           beregningsgrunnlagPrStatusOgAndel: [
             {
               arbeidsforhold: {
-                arbeidsforholdType: {
-                  kode: 'ETTERLØNN_SLUTTPAKKE',
-                  kodeverk: 'test',
-                },
+                arbeidsforholdType: 'ETTERLØNN_SLUTTPAKKE',
               },
               beregnetPrAar: null,
             } as BeregningsgrunnlagAndel,

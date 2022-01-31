@@ -18,12 +18,8 @@ const defaultBehandling = {
   behandlingÅrsaker: [{
     erAutomatiskRevurdering: true,
   }],
-  sprakkode: {
-    kode: 'NN',
-  },
-  type: {
-    kode: behandlingType.FORSTEGANGSSOKNAD,
-  },
+  sprakkode: 'NN',
+  type: behandlingType.FORSTEGANGSSOKNAD,
 } as Behandling;
 
 const familieHendelse = {
@@ -59,12 +55,8 @@ const familiehendelseOriginalBehandling = {
 } as FamilieHendelse;
 
 const aksjonspunkter = [{
-  definisjon: {
-    kode: aksjonspunktCodes.VARSEL_REVURDERING_MANUELL,
-  },
-  status: {
-    kode: aksjonspunktStatus.OPPRETTET,
-  },
+  definisjon: aksjonspunktCodes.VARSEL_REVURDERING_MANUELL,
+  status: aksjonspunktStatus.OPPRETTET,
   begrunnelse: undefined,
 }] as Aksjonspunkt[];
 
@@ -115,9 +107,6 @@ ForRevurdering.args = {
   previewCallback: action('button-click') as any,
   behandling: {
     ...defaultBehandling,
-    type: {
-      kode: behandlingType.REVURDERING,
-      kodeverk: '',
-    },
+    type: behandlingType.REVURDERING,
   },
 };

@@ -10,7 +10,7 @@ import VedtakInnsynProsessIndex, { InnsynBrevData } from '@fpsak-frontend/proses
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { createIntl, forhandsvisDokument } from '@fpsak-frontend/utils';
 import {
-  Aksjonspunkt, Behandling, Dokument, Fagsak, Innsyn,
+  Aksjonspunkt, Behandling, Dokument, Fagsak, ForhåndsvisMeldingParams, Innsyn,
 } from '@fpsak-frontend/types';
 import {
   IverksetterVedtakStatusModal, ProsessPanelInitProps, useStandardProsessPanelProps, ProsessDefaultInitPanel,
@@ -22,23 +22,27 @@ import { restApiInnsynHooks, requestInnsynApi, InnsynBehandlingApiKeys } from '.
 const intl = createIntl(messages);
 
 const getVedtakStatus = (innsyn: Innsyn, aksjonspunkter: Aksjonspunkt[]): string => {
-  const harApentAksjonpunkt = aksjonspunkter.some((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET);
+  const harApentAksjonpunkt = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET);
   if (aksjonspunkter.length === 0 || harApentAksjonpunkt) {
     return vilkarUtfallType.IKKE_VURDERT;
   }
-  return innsyn.innsynResultatType.kode === innsynResultatTypeKV.INNVILGET || innsyn.innsynResultatType.kode === innsynResultatTypeKV.DELVISTINNVILGET
+  return innsyn.innsynResultatType === innsynResultatTypeKV.INNVILGET || innsyn.innsynResultatType === innsynResultatTypeKV.DELVISTINNVILGET
     ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_OPPFYLT;
 };
 
 const hentForhandsvisCallback = (
-  forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<unknown>,
+  forhandsvisMelding: (params?: ForhåndsvisMeldingParams, keepData?: boolean) => Promise<unknown>,
   fagsak: Fagsak,
   behandling: Behandling,
 ) => (data: InnsynBrevData) => {
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
-    ytelseType: fagsak.fagsakYtelseType,
+    ytelseType: {
+      kode: fagsak.fagsakYtelseType,
+      kodeverk: 'FAGSAK_YTELSE',
+    },
+    fagsakYtelseType: fagsak.fagsakYtelseType,
   };
   return forhandsvisMelding(brevData).then((response) => forhandsvisDokument(response));
 };

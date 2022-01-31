@@ -17,14 +17,8 @@ const {
 } = aksjonspunktCodes;
 
 const mockAksjonspunktMedKodeOgStatus = (apKode: string, status: string, begrunnelse?: string): Aksjonspunkt => ({
-  definisjon: {
-    kode: apKode,
-    kodeverk: 'test',
-  },
-  status: {
-    kode: status,
-    kodeverk: 'test',
-  },
+  definisjon: apKode,
+  status,
   begrunnelse,
   kanLoses: true,
   erAktivt: true,

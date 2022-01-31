@@ -5,7 +5,7 @@ import React, {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import KlagevurderingProsessIndex, { AksjonspunktVerdier, KlageVurderingBrevData } from '@fpsak-frontend/prosess-klagevurdering';
 import {
-  Aksjonspunkt, Behandling, Fagsak, KlageVurdering, Kodeverk,
+  Aksjonspunkt, Behandling, Fagsak, ForhåndsvisMeldingParams, KlageVurdering,
 } from '@fpsak-frontend/types';
 import klageVurderingKodeverk from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { useStandardProsessPanelProps, ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
@@ -16,7 +16,7 @@ import { restApiKlageHooks, KlageBehandlingApiKeys, requestKlageApi } from '../d
 import KlageBehandlingModal from '../modaler/KlageBehandlingModal';
 
 const lagForhandsvisCallback = (
-  forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<any>,
+  forhandsvisMelding: (params?: ForhåndsvisMeldingParams, keepData?: boolean) => Promise<any>,
   fagsak: Fagsak,
   behandling: Behandling,
 ) => (
@@ -25,7 +25,11 @@ const lagForhandsvisCallback = (
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
-    ytelseType: fagsak.fagsakYtelseType,
+    ytelseType: {
+      kode: fagsak.fagsakYtelseType,
+      kodeverk: 'FAGSAK_YTELSE',
+    },
+    fagsakYtelseType: fagsak.fagsakYtelseType,
   };
   return forhandsvisMelding(brevData).then((response) => forhandsvisDokument(response));
 };
@@ -46,10 +50,10 @@ const getLagringSideeffekter = (
   toggleKlageModal: (skalViseModal: boolean) => void,
   toggleOppdatereFagsakContext: (skalHenteFagsak: boolean) => void,
   oppdaterProsessStegOgFaktaPanelIUrl?: (punktnavn?: string, faktanavn?: string) => void,
-) => (aksjonspunktModels: { kode: string, klageVurdering?: Kodeverk }[]) => {
+) => (aksjonspunktModels: { kode: string, klageVurdering?: string }[]) => {
   const skalByttTilKlageinstans = aksjonspunktModels
     .some((apValue) => apValue.kode === aksjonspunktCodes.BEHANDLE_KLAGE_NFP
-    && apValue.klageVurdering?.kode === klageVurderingKodeverk.STADFESTE_YTELSESVEDTAK);
+    && apValue.klageVurdering === klageVurderingKodeverk.STADFESTE_YTELSESVEDTAK);
 
   if (skalByttTilKlageinstans) {
     toggleOppdatereFagsakContext(false);

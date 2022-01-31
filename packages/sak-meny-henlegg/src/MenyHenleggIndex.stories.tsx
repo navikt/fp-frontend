@@ -34,10 +34,7 @@ const Template: Story<{
     valgtBehandling={behandling}
     henleggBehandling={henleggBehandling}
     forhandsvisHenleggBehandling={forhandsvisHenleggBehandling}
-    ytelseType={{
-      kode: fagsakYtelseType.FORELDREPENGER,
-      kodeverk: 'YTELSE_TYPE',
-    }}
+    ytelseType={fagsakYtelseType.FORELDREPENGER}
     behandlingResultatTyper={[{
       kode: behandlingResultatType.HENLAGT_KLAGE_TRUKKET,
       kodeverk: 'BEHANDLING_RESULT_TYPE',
@@ -81,10 +78,7 @@ ForFørstegangssøknad.args = {
   behandling: {
     versjon: 2,
     uuid: '23r2323',
-    type: {
-      kode: behandlingType.FORSTEGANGSSOKNAD,
-      kodeverk: 'BEHANDLING_TYPE',
-    },
+    type: behandlingType.FORSTEGANGSSOKNAD,
   } as BehandlingAppKontekst,
   henleggBehandling: action('button-click') as (params: HenleggParams) => Promise<any>,
   lukkModal: action('button-click'),
@@ -96,10 +90,7 @@ ForKlage.args = {
   behandling: {
     versjon: 2,
     uuid: '23r2323',
-    type: {
-      kode: behandlingType.KLAGE,
-      kodeverk: 'BEHANDLING_TYPE',
-    },
+    type: behandlingType.KLAGE,
   } as BehandlingAppKontekst,
   henleggBehandling: action('button-click') as (params: HenleggParams) => Promise<any>,
   lukkModal: action('button-click'),
@@ -111,10 +102,7 @@ ForInnsyn.args = {
   behandling: {
     versjon: 2,
     uuid: '23r2323',
-    type: {
-      kode: behandlingType.DOKUMENTINNSYN,
-      kodeverk: 'BEHANDLING_TYPE',
-    },
+    type: behandlingType.DOKUMENTINNSYN,
   } as BehandlingAppKontekst,
   henleggBehandling: action('button-click') as (params: HenleggParams) => Promise<any>,
   lukkModal: action('button-click'),
@@ -126,10 +114,7 @@ ForTilbakekreving.args = {
   behandling: {
     versjon: 2,
     uuid: '23r2323',
-    type: {
-      kode: behandlingType.TILBAKEKREVING,
-      kodeverk: 'BEHANDLING_TYPE',
-    },
+    type: behandlingType.TILBAKEKREVING,
   } as BehandlingAppKontekst,
   henleggBehandling: action('button-click') as (params: HenleggParams) => Promise<any>,
   lukkModal: action('button-click'),
@@ -141,10 +126,7 @@ ForTilbakekrevingRevurdering.args = {
   behandling: {
     versjon: 2,
     uuid: '23r2323',
-    type: {
-      kode: behandlingType.TILBAKEKREVING_REVURDERING,
-      kodeverk: 'BEHANDLING_TYPE',
-    },
+    type: behandlingType.TILBAKEKREVING_REVURDERING,
   } as BehandlingAppKontekst,
   henleggBehandling: action('button-click') as (params: HenleggParams) => Promise<any>,
   lukkModal: action('button-click'),
@@ -156,10 +138,7 @@ ForRevurdering.args = {
   behandling: {
     versjon: 2,
     uuid: '23r2323',
-    type: {
-      kode: behandlingType.REVURDERING,
-      kodeverk: 'BEHANDLING_TYPE',
-    },
+    type: behandlingType.REVURDERING,
   } as BehandlingAppKontekst,
   henleggBehandling: action('button-click') as (params: HenleggParams) => Promise<any>,
   lukkModal: action('button-click'),

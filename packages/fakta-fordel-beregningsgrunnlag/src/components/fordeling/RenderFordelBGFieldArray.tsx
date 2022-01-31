@@ -17,15 +17,15 @@ import bt from '@fpsak-frontend/kodeverk/src/behandlingType';
 import {
   DecimalField, InputField, NavFieldGroup, PeriodpickerField, SelectField,
 } from '@fpsak-frontend/form';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import beregningsgrunnlagAndeltyper from '@fpsak-frontend/kodeverk/src/beregningsgrunnlagAndeltyper';
 import inntektskategorier, { isSelvstendigNæringsdrivende } from '@fpsak-frontend/kodeverk/src/inntektskategorier';
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import {
-  ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Kodeverk, KodeverkMedNavn, AlleKodeverk,
+  ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, KodeverkMedNavn, AlleKodeverk,
 } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import LabelType from '@fpsak-frontend/form/src/LabelType';
 import finnUnikeArbeidsforhold from '../FinnUnikeArbeidsforhold';
 import {
@@ -55,17 +55,17 @@ const fieldLabel = (index: number, labelId: string): LabelType => {
 };
 
 const lagVisningsnavn = (arbeidsforhold: BGFordelArbeidsforhold,
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
   const agOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverId];
   if (!agOpplysninger) {
-    return arbeidsforhold.arbeidsforholdType ? getKodeverknavn(arbeidsforhold.arbeidsforholdType) : '';
+    return arbeidsforhold.arbeidsforholdType ? getKodeverknavn(arbeidsforhold.arbeidsforholdType, KodeverkType.OPPTJENING_AKTIVITET_TYPE) : '';
   }
   return createVisningsnavnForAktivitetFordeling(agOpplysninger, arbeidsforhold.eksternArbeidsforholdId);
 };
 
 const arbeidsgiverSelectValues = (arbeidsforholdList: BGFordelArbeidsforhold[],
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement[] => (arbeidsforholdList
   .map((arbeidsforhold) => (
     <option value={arbeidsforhold.andelsnr.toString()} key={arbeidsforhold.andelsnr}>
@@ -75,7 +75,7 @@ const arbeidsgiverSelectValues = (arbeidsforholdList: BGFordelArbeidsforhold[],
 
 const arbeidsgiverSelectValuesForKunYtelse = (arbeidsforholdList: BGFordelArbeidsforhold[],
   intl: IntlShape,
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): ReactElement[] => {
   const nedtrekksvalgListe = arbeidsforholdList
     .map((arbeidsforhold) => (
@@ -396,7 +396,7 @@ const getHeaderTextCodes = (erRevurdering: boolean): string[] => {
 type MappedOwnProps = {
   erRevurdering: boolean;
   inntektskategoriKoder: KodeverkMedNavn[];
-  getKodeverknavn: (kodeverk: Kodeverk) => string;
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string;
   arbeidsforholdList: BGFordelArbeidsforhold[];
   harKunYtelse: boolean;
 }
@@ -408,7 +408,7 @@ type OwnProps = {
     isAksjonspunktClosed: boolean;
     skalIkkeRedigereInntekt: boolean;
     alleKodeverk: AlleKodeverk;
-    behandlingType: Kodeverk;
+    behandlingType: string;
     beregningsgrunnlag: Beregningsgrunnlag;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 };
@@ -417,7 +417,7 @@ interface StaticFunctions {
   validate: (intl: IntlShape,
              values: FordelBeregningsgrunnlagAndelValues[],
              sumIPeriode: number,
-             getKodeverknavn: (kodeverk: Kodeverk) => string,
+             getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
              grunnbeløp: number,
              periode: PeriodeTsType,
              skalValidereRefusjon: boolean,
@@ -532,16 +532,16 @@ RenderFordelBGFieldArrayImpl.validate = (intl, values, sumIPeriode, getKodeverkn
 
 const mapStateToPropsFactory = (initialState: any, initialOwnProps: OwnProps) => {
   const { behandlingType } = initialOwnProps;
-  const erRevurdering = behandlingType ? behandlingType.kode === bt.REVURDERING : false;
-  const inntektskategoriKoder = initialOwnProps.alleKodeverk[kodeverkTyper.INNTEKTSKATEGORI];
-  const getKodeverknavn = getKodeverknavnFn(initialOwnProps.alleKodeverk, kodeverkTyper);
+  const erRevurdering = behandlingType ? behandlingType === bt.REVURDERING : false;
+  const inntektskategoriKoder = initialOwnProps.alleKodeverk[KodeverkType.INNTEKTSKATEGORI];
+  const getKodeverknavn = getKodeverknavnFn(initialOwnProps.alleKodeverk);
   return (state: any, ownProps: OwnProps): MappedOwnProps => ({
     erRevurdering,
     inntektskategoriKoder,
     getKodeverknavn,
     arbeidsforholdList: finnUnikeArbeidsforhold(ownProps),
     harKunYtelse: initialOwnProps.beregningsgrunnlag.aktivitetStatus
-      .some((status) => status.kode === aktivitetStatuser.KUN_YTELSE),
+      .some((status) => status === aktivitetStatuser.KUN_YTELSE),
   });
 };
 

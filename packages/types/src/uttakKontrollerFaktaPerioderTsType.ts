@@ -1,24 +1,22 @@
-import Kodeverk from './kodeverkTsType';
-
 export type UttakKontrollerFaktaPerioder = Readonly<{
   fom: string;
   tom: string;
   bekreftet: boolean;
   begrunnelse?: string;
-  uttakPeriodeType: Kodeverk;
+  uttakPeriodeType: string;
   arbeidstidsprosent?: number;
   arbeidsgiverReferanse?: string;
-  utsettelseÅrsak: Kodeverk;
-  overføringÅrsak: Kodeverk;
+  utsettelseÅrsak: string;
+  overføringÅrsak: string;
   erSelvstendig: boolean;
   erFrilanser: boolean;
   flerbarnsdager: boolean;
   samtidigUttak: boolean;
   samtidigUttaksprosent?: string;
-  oppholdÅrsak: Kodeverk;
+  oppholdÅrsak: string;
   erArbeidstaker: boolean;
-  morsAktivitet: Kodeverk;
-  resultat: Kodeverk;
+  morsAktivitet: string;
+  resultat: string;
 }>
 
 type UttakKontrollerFaktaPerioderWrapper = Readonly<{

@@ -4,12 +4,11 @@ import classNames from 'classnames';
 
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import ankeVurderingType from '@fpsak-frontend/kodeverk/src/ankeVurdering';
-import { Kodeverk } from '@fpsak-frontend/types';
 
 import styles from './previewAnkeLink.less';
 
-const getBrevKode = (ankeVurdering?: Kodeverk): string | null => {
-  switch (ankeVurdering.kode) {
+const getBrevKode = (ankeVurdering?: string): string | null => {
+  switch (ankeVurdering) {
     case ankeVurderingType.ANKE_OMGJOER:
       return dokumentMalType.ANKE_VEDTAK_OMGJORING;
     case ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE:
@@ -27,7 +26,7 @@ export type BrevData = {
   dokumentMal?: string;
 }
 
-const getBrevData = (ankeVurdering?: Kodeverk, fritekstTilBrev?: string): BrevData => ({
+const getBrevData = (ankeVurdering?: string, fritekstTilBrev?: string): BrevData => ({
   fritekst: fritekstTilBrev || '',
   mottaker: '',
   dokumentMal: getBrevKode(ankeVurdering),
@@ -36,7 +35,7 @@ const getBrevData = (ankeVurdering?: Kodeverk, fritekstTilBrev?: string): BrevDa
 interface OwnProps {
   previewCallback: (data: BrevData) => Promise<any>;
   fritekstTilBrev?: string;
-  ankeVurdering?: Kodeverk;
+  ankeVurdering?: string;
   readOnly?: boolean;
 }
 

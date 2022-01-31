@@ -15,14 +15,8 @@ const behandling = {
 } as Behandling;
 
 const aksjonspunkter = [{
-  definisjon: {
-    kode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER,
-    kodeverk: '',
-  },
-  status: {
-    kode: aksjonspunktStatus.OPPRETTET,
-    kodeverk: '',
-  },
+  definisjon: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER,
+  status: aksjonspunktStatus.OPPRETTET,
   begrunnelse: undefined,
 }] as Aksjonspunkt[];
 
@@ -51,10 +45,7 @@ export const visPanelForResultatVedStadfestYtelsesvedtak = () => (
     {...standardProsessProps}
     ankeVurdering={{
       ankeVurderingResultat: {
-        ankeVurdering: {
-          kode: ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK,
-          kodeverk: '',
-        },
+        ankeVurdering: ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK,
         begrunnelse: 'Dette er en begrunnelse',
       },
     } as AnkeVurdering}

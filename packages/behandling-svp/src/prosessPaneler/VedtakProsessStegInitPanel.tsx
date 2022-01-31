@@ -6,11 +6,12 @@ import { isAvslag } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import VedtakProsessIndex from '@fpsak-frontend/prosess-vedtak';
+import VedtakProsessIndex, { ForhandsvisData } from '@fpsak-frontend/prosess-vedtak';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
-  Aksjonspunkt, Behandling, Behandlingsresultat, Beregningsgrunnlag, BeregningsresultatFp, Fagsak, Medlemskap, SimuleringResultat, TilbakekrevingValg, Vilkar,
+  Aksjonspunkt, Behandling, Behandlingsresultat, Beregningsgrunnlag, BeregningsresultatFp, Fagsak,
+  ForhåndsvisMeldingParams, Medlemskap, SimuleringResultat, TilbakekrevingValg, Vilkar,
 } from '@fpsak-frontend/types';
 import {
   ProsessDefaultInitPanel, IverksetterVedtakStatusModal, FatterVedtakStatusModal, ProsessPanelInitProps, useStandardProsessPanelProps,
@@ -24,15 +25,15 @@ import { restApiSvpHooks, requestSvpApi, SvpBehandlingApiKeys } from '../data/sv
 const intl = createIntl(messages);
 
 const hasOnlyClosedAps = (aksjonspunkter: Aksjonspunkt[], vedtakAksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
-  .filter((ap) => !vedtakAksjonspunkter.some((vap) => vap.definisjon.kode === ap.definisjon.kode))
-  .every((ap) => !isAksjonspunktOpen(ap.status.kode));
+  .filter((ap) => !vedtakAksjonspunkter.some((vap) => vap.definisjon === ap.definisjon))
+  .every((ap) => !isAksjonspunktOpen(ap.status));
 
-const hasAksjonspunkt = (ap: Aksjonspunkt): boolean => (ap.definisjon.kode === aksjonspunktCodes.OVERSTYR_BEREGNING
-  || ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG
-  || ap.definisjon.kode === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG
-  || ap.definisjon.kode === aksjonspunktCodes.VURDER_SOKNADSFRIST_FORELDREPENGER);
+const hasAksjonspunkt = (ap: Aksjonspunkt): boolean => (ap.definisjon === aksjonspunktCodes.OVERSTYR_BEREGNING
+  || ap.definisjon === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG
+  || ap.definisjon === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG
+  || ap.definisjon === aksjonspunktCodes.VURDER_SOKNADSFRIST_FORELDREPENGER);
 
-const isAksjonspunktOpenAndOfType = (ap: Aksjonspunkt): boolean => hasAksjonspunkt(ap) && isAksjonspunktOpen(ap.status.kode);
+const isAksjonspunktOpenAndOfType = (ap: Aksjonspunkt): boolean => hasAksjonspunkt(ap) && isAksjonspunktOpen(ap.status);
 
 const findStatusForVedtak = (
   vilkar: Vilkar[],
@@ -44,11 +45,11 @@ const findStatusForVedtak = (
     return vilkarUtfallType.IKKE_VURDERT;
   }
 
-  if (hasOnlyClosedAps(aksjonspunkter, vedtakAksjonspunkter) && vilkar.some((v) => v.vilkarStatus.kode === vilkarUtfallType.IKKE_OPPFYLT)) {
+  if (hasOnlyClosedAps(aksjonspunkter, vedtakAksjonspunkter) && vilkar.some((v) => v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT)) {
     return vilkarUtfallType.IKKE_OPPFYLT;
   }
 
-  if (vilkar.some((v) => v.vilkarStatus.kode === vilkarUtfallType.IKKE_VURDERT) || aksjonspunkter.some(isAksjonspunktOpenAndOfType)) {
+  if (vilkar.some((v) => v.vilkarStatus === vilkarUtfallType.IKKE_VURDERT) || aksjonspunkter.some(isAksjonspunktOpenAndOfType)) {
     return vilkarUtfallType.IKKE_VURDERT;
   }
 
@@ -56,21 +57,25 @@ const findStatusForVedtak = (
     return vilkarUtfallType.IKKE_VURDERT;
   }
 
-  if (behandlingsresultat && isAvslag(behandlingsresultat.type.kode)) {
+  if (behandlingsresultat && isAvslag(behandlingsresultat.type)) {
     return vilkarUtfallType.IKKE_OPPFYLT;
   }
   return vilkarUtfallType.OPPFYLT;
 };
 
 const getForhandsvisCallback = (
-  forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<unknown>,
+  forhandsvisMelding: (params: ForhåndsvisMeldingParams, keepData?: boolean) => Promise<unknown>,
   fagsak: Fagsak,
   behandling: Behandling,
-) => (data: any) => {
+) => (data: ForhandsvisData) => {
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
-    ytelseType: fagsak.fagsakYtelseType,
+    ytelseType: {
+      kode: fagsak.fagsakYtelseType,
+      kodeverk: 'FAGSAK_YTELSE',
+    },
+    fagsakYtelseType: fagsak.fagsakYtelseType,
   };
 
   return forhandsvisMelding(brevData).then((response) => forhandsvisDokument(response));

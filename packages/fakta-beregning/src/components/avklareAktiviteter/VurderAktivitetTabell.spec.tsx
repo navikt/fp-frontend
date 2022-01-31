@@ -16,7 +16,7 @@ const aktivitet1 = {
   fom: '2019-01-01',
   tom: null,
   skalBrukes: null,
-  arbeidsforholdType: { kode: 'ARBEID', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+  arbeidsforholdType: 'ARBEID',
 };
 
 const aktivitet2 = {
@@ -26,7 +26,7 @@ const aktivitet2 = {
   fom: '2019-01-01',
   tom: '2019-02-02',
   skalBrukes: true,
-  arbeidsforholdType: { kode: 'ARBEID', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+  arbeidsforholdType: 'ARBEID',
 };
 
 const aktivitet3 = {
@@ -37,13 +37,13 @@ const aktivitet3 = {
   fom: '2019-01-01',
   tom: '2019-02-02',
   skalBrukes: false,
-  arbeidsforholdType: { kode: 'ARBEID', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+  arbeidsforholdType: 'ARBEID',
 };
 
 const aktivitetAAP = {
   arbeidsgiverNavn: null,
   arbeidsgiverIdent: null,
-  arbeidsforholdType: { kode: opptjeningAktivitetType.AAP, kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+  arbeidsforholdType: opptjeningAktivitetType.AAP,
   fom: '2019-01-01',
   tom: '2020-02-02',
   skalBrukes: null,
@@ -52,7 +52,7 @@ const aktivitetAAP = {
 const aktivitetVentelonnVartpenger = {
   arbeidsgiverNavn: null,
   arbeidsgiverIdent: null,
-  arbeidsforholdType: { kode: 'VENTELØNN_VARTPENGER', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+  arbeidsforholdType: 'VENTELØNN_VARTPENGER',
   fom: '2019-01-01',
   tom: '2020-02-02',
   skalBrukes: null,

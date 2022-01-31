@@ -2,8 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { Location } from 'history';
 
-import { BehandlingAppKontekst, KodeverkMedNavn, Kodeverk } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import BehandlingPicker from './components/BehandlingPicker';
 import messages from '../i18n/nb_NO.json';
@@ -17,7 +18,7 @@ interface OwnProps {
   behandlingUuid?: string;
   showAll: boolean;
   toggleShowAll: () => void;
-  getKodeverkFn: (kodeverk: Kodeverk, behandlingType: Kodeverk) => KodeverkMedNavn | undefined;
+  getKodeverkFn: (kode: string, kodeverk: KodeverkType, behandlingType?: string) => KodeverkMedNavn | undefined;
 }
 
 const BehandlingVelgerSakIndex: FunctionComponent<OwnProps> = ({

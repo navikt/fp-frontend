@@ -37,10 +37,7 @@ describe('<AnkeTrygderettsbehandlingProsessStegInitPanel>', () => {
     isReadOnly: false,
     readOnlySubmitButton: false,
     aksjonspunkter: [{
-      definisjon: {
-        kode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
       erAktivt: true,
       kanLoses: true,
     }] as Aksjonspunkt[],

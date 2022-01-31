@@ -27,10 +27,10 @@ const requiredMessage = isRequiredMessage();
 const beregningsgrunnlag = {
   beregningsgrunnlagPeriode: [{
     beregningsgrunnlagPrStatusOgAndel: [
-      { andelsnr: 1, aktivitetStatus: { kode: 'AT', kodeverk: 'test' } },
-      { andelsnr: 2, aktivitetStatus: { kode: 'AT', kodeverk: 'test' } },
-      { andelsnr: 3, aktivitetStatus: { kode: 'AT', kodeverk: 'test' } },
-      { andelsnr: 4, aktivitetStatus: { kode: 'FL', kodeverk: 'test' } },
+      { andelsnr: 1, aktivitetStatus: 'AT' },
+      { andelsnr: 2, aktivitetStatus: 'AT' },
+      { andelsnr: 3, aktivitetStatus: 'AT' },
+      { andelsnr: 4, aktivitetStatus: 'FL' },
     ],
   }],
 } as Beregningsgrunnlag;
@@ -268,7 +268,7 @@ describe('<VurderMottarYtelseForm>', () => {
       { andelsnr: andel3.andelsnr, fastsattBelop: 20000 } as InntektTransformed,
     ];
     const faktaOmBeregning = {
-      faktaOmBeregningTilfeller: tilfeller.map((kode) => ({ kode, kodeverk: 'test' })),
+      faktaOmBeregningTilfeller: tilfeller,
       vurderMottarYtelse: {
         erFrilanser: false,
         arbeidstakerAndelerUtenIM,
@@ -305,7 +305,7 @@ describe('<VurderMottarYtelseForm>', () => {
       { andelsnr: andel3.andelsnr, fastsattBelop: 0 } as InntektTransformed,
     ];
     const faktaOmBeregning = {
-      faktaOmBeregningTilfeller: tilfeller.map((kode) => ({ kode, kodeverk: 'test' })),
+      faktaOmBeregningTilfeller: tilfeller,
       vurderMottarYtelse: {
         erFrilanser: false,
         arbeidstakerAndelerUtenIM,
@@ -341,7 +341,7 @@ describe('<VurderMottarYtelseForm>', () => {
       { andelsnr: 4, fastsattBelop: 10000, aktivitetStatus: 'FL' } as InntektTransformed,
     ];
     const faktaOmBeregning = {
-      faktaOmBeregningTilfeller: tilfeller.map((kode) => ({ kode, kodeverk: 'test' })),
+      faktaOmBeregningTilfeller: tilfeller,
       vurderMottarYtelse: {
         erFrilanser: true,
         arbeidstakerAndelerUtenIM: [],
@@ -370,7 +370,7 @@ describe('<VurderMottarYtelseForm>', () => {
       { andelsnr: 4, fastsattBelop: 10000, aktivitetStatus: 'FL' } as InntektTransformed,
     ];
     const faktaOmBeregning = {
-      faktaOmBeregningTilfeller: tilfeller.map((kode) => ({ kode, kodeverk: 'test' })),
+      faktaOmBeregningTilfeller: tilfeller,
       vurderMottarYtelse: {
         erFrilanser: true,
         arbeidstakerAndelerUtenIM,
@@ -412,7 +412,7 @@ describe('<VurderMottarYtelseForm>', () => {
       { andelsnr: andel3.andelsnr, fastsattBelop: 20000 } as InntektTransformed,
     ];
     const faktaOmBeregning = {
-      faktaOmBeregningTilfeller: tilfeller.map((kode) => ({ kode, kodeverk: 'test' })),
+      faktaOmBeregningTilfeller: tilfeller,
       vurderMottarYtelse: {
         erFrilanser: false,
         arbeidstakerAndelerUtenIM,
@@ -436,7 +436,7 @@ describe('<VurderMottarYtelseForm>', () => {
       { andelsnr: 4, fastsattBelop: 10000, aktivitetStatus: 'FL' } as InntektTransformed,
     ];
     const faktaOmBeregning = {
-      faktaOmBeregningTilfeller: tilfeller.map((kode) => ({ kode, kodeverk: 'test' })),
+      faktaOmBeregningTilfeller: tilfeller,
       vurderMottarYtelse: {
         erFrilanser: true,
         arbeidstakerAndelerUtenIM: [],

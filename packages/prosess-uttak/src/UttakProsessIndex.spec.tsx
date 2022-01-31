@@ -19,27 +19,18 @@ describe('<UttakProsessIndex>', () => {
         tom: '2019-10-25',
         aktiviteter: [
           {
-            stønadskontoType: {
-              kode: 'FORELDREPENGER_FØR_FØDSEL',
-              kodeverk: 'STOENADSKONTOTYPE',
-            },
+            stønadskontoType: 'FORELDREPENGER_FØR_FØDSEL',
             prosentArbeid: 0,
             arbeidsforholdId: null,
             eksternArbeidsforholdId: null,
             arbeidsgiverReferanse: '910909088',
             utbetalingsgrad: 100,
-            uttakArbeidType: {
-              kode: 'ORDINÆRT_ARBEID',
-              kodeverk: 'UTTAK_ARBEID_TYPE',
-            },
+            uttakArbeidType: 'ORDINÆRT_ARBEID',
             gradering: false,
             trekkdagerDesimaler: 15,
           },
         ],
-        periodeResultatType: {
-          kode: 'INNVILGET',
-          kodeverk: 'PERIODE_RESULTAT_TYPE',
-        },
+        periodeResultatType: 'INNVILGET',
         begrunnelse: null,
         periodeResultatÅrsak: {
           kode: '2006',
@@ -48,10 +39,7 @@ describe('<UttakProsessIndex>', () => {
           gyldigFom: '2000-01-01',
           gyldigTom: '9999-12-31',
         },
-        manuellBehandlingÅrsak: {
-          kode: '-',
-          kodeverk: 'MANUELL_BEHANDLING_AARSAK',
-        },
+        manuellBehandlingÅrsak: '-',
         graderingAvslagÅrsak: {
           kode: '-',
           navn: 'Ikke definert',
@@ -63,18 +51,9 @@ describe('<UttakProsessIndex>', () => {
         samtidigUttak: false,
         samtidigUttaksprosent: null,
         graderingInnvilget: false,
-        periodeType: {
-          kode: 'FORELDREPENGER_FØR_FØDSEL',
-          kodeverk: 'UTTAK_PERIODE_TYPE',
-        },
-        utsettelseType: {
-          kode: '-',
-          kodeverk: 'UTTAK_UTSETTELSE_TYPE',
-        },
-        oppholdÅrsak: {
-          kode: '-',
-          kodeverk: 'OPPHOLD_AARSAK_TYPE',
-        },
+        periodeType: 'FORELDREPENGER_FØR_FØDSEL',
+        utsettelseType: '-',
+        oppholdÅrsak: '-',
         gradertAktivitet: null,
         graderingsAvslagÅrsakLovhjemmel: null,
       },
@@ -87,29 +66,16 @@ describe('<UttakProsessIndex>', () => {
   const behandling = {
     uuid: '1',
     versjon: 1,
-    sprakkode: {
-      kode: 'NO',
-    },
-    type: {
-      kode: '1',
-      kodeverk: '1',
-    },
+    sprakkode: 'NO',
+    type: '1',
     behandlingsresultat: {
     } as Behandling['behandlingsresultat'],
-    status: {
-      kode: '1',
-      kodeverk: '1',
-    },
+    status: '1',
   } as Behandling;
 
   const aksjonspunkter = [{
-    definisjon: {
-      kode: aksjonspunktCodes.VURDER_FEILUTBETALING,
-    },
-    status: {
-      kode: '1',
-      kodeverk: '1',
-    },
+    definisjon: aksjonspunktCodes.VURDER_FEILUTBETALING,
+    status: '1',
   }] as Aksjonspunkt[];
 
   const arbeidsgiverOpplysningerPerId = {

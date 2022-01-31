@@ -6,7 +6,7 @@ import { required } from '@fpsak-frontend/utils';
 import { ArrowBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form-hooks';
 import klageVurderingOmgjoerType from '@fpsak-frontend/kodeverk/src/klageVurderingOmgjoer';
-import { Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import styles from './klageVurderingRadioOptionsNfp.less';
 
@@ -14,14 +14,14 @@ interface OwnProps {
   readOnly?: boolean;
   medholdReasons: KodeverkMedNavn[];
   alleHjemler: KodeverkMedNavn[];
-  alleAktuelleHjemler: Kodeverk[];
-  klageVurdering?: Kodeverk;
+  alleAktuelleHjemler: string[];
+  klageVurdering?: string;
 }
 
 const lagHjemler = (kodeverkNavn: KodeverkMedNavn[], kodeverkVerdier: string[]): KodeverkMedNavn[] => kodeverkNavn
   .filter(({ kode }) => kodeverkVerdier.includes(kode))
   .sort((a, b) => a.kode.localeCompare(b.kode));
-const lagHjemmelsKoder = (kodeverkVerdier: Kodeverk[]): string[] => kodeverkVerdier.map(({ kode }) => kode);
+const lagHjemmelsKoder = (kodeverkVerdier: string[]): string[] => kodeverkVerdier.map((kode) => kode);
 
 export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
   readOnly,
@@ -37,7 +37,7 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
   return (
     <div>
       <RadioGroupField
-        name="klageVurdering.kode"
+        name="klageVurdering"
         validate={[required]}
         readOnly={readOnly}
         className={readOnly ? styles.selectReadOnly : null}
@@ -45,12 +45,12 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
         <RadioOption value={klageVurderingType.MEDHOLD_I_KLAGE} label={intl.formatMessage({ id: 'Klage.ResolveKlage.ChangeVedtak' })} />
         <RadioOption value={klageVurderingType.STADFESTE_YTELSESVEDTAK} label={intl.formatMessage({ id: 'Klage.ResolveKlage.KeepVedtakNfp' })} />
       </RadioGroupField>
-      {(klageVurdering?.kode === klageVurderingType.MEDHOLD_I_KLAGE)
+      {(klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE)
       && (
         <ArrowBox>
           <SelectField
             readOnly={readOnly}
-            name="klageMedholdArsak.kode"
+            name="klageMedholdArsak"
             selectValues={medholdOptions}
             className={readOnly ? styles.selectReadOnly : null}
             label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
@@ -59,7 +59,7 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
           />
           <VerticalSpacer sixteenPx />
           <RadioGroupField
-            name="klageVurderingOmgjoer.kode"
+            name="klageVurderingOmgjoer"
             validate={[required]}
             readOnly={readOnly}
             className={readOnly ? styles.selectReadOnly : null}
@@ -73,7 +73,7 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
       )}
       <SelectField
         readOnly={readOnly}
-        name="klageHjemmel.kode"
+        name="klageHjemmel"
         selectValues={hjemmelOptions}
         className={readOnly ? styles.selectReadOnly : null}
         label={intl.formatMessage({ id: 'Klage.ResolveKlage.Hjemmel' })}

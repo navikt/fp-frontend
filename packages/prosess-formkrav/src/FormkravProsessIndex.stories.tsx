@@ -13,17 +13,12 @@ import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter
 const behandling = {
   uuid: '1',
   versjon: 1,
-  sprakkode: {
-    kode: 'NO',
-  },
+  sprakkode: 'NO',
 } as Behandling;
 
 const avsluttedeBehandlinger = [{
   uuid: '1',
-  type: {
-    kode: behandlingType.FORSTEGANGSSOKNAD,
-    kodeverk: '',
-  },
+  type: behandlingType.FORSTEGANGSSOKNAD,
   avsluttet: '2017-08-02T00:54:25.455',
 }];
 
@@ -44,15 +39,12 @@ const Template: Story<{
     klageVurdering={{
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
-        klageVurdering: { kode: klageVurderingCodes.AVVIS_KLAGE, kodeverk: '' },
+        klageVurdering: klageVurderingCodes.AVVIS_KLAGE,
         fritekstTilBrev: 'test',
         godkjentAvMedunderskriver: false,
       },
       klageFormkravResultatKA: {
-        avvistArsaker: [{
-          kode: 'TEST',
-          kodeverk: '',
-        }],
+        avvistArsaker: ['TEST'],
       },
     } as KlageVurdering}
     submitCallback={submitCallback}
@@ -73,9 +65,7 @@ export const FormkravPanelForAksjonspunktNfp = Template.bind({});
 FormkravPanelForAksjonspunktNfp.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP,
-    },
+    definisjon: aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_NFP,
   }] as Aksjonspunkt[],
 };
 
@@ -83,8 +73,6 @@ export const FormkravPanelForAksjonspunktKa = Template.bind({});
 FormkravPanelForAksjonspunktKa.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_KA,
-    },
+    definisjon: aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_KA,
   }] as Aksjonspunkt[],
 };

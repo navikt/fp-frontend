@@ -1,13 +1,11 @@
-import Kodeverk from './kodeverkTsType';
-
 type Behandlingsresultat = Readonly<{
   id: number;
-  type: Kodeverk;
-  avslagsarsak?: Kodeverk;
+  type: string;
+  avslagsarsak?: string;
   avslagsarsakFritekst?: string;
-  rettenTil?: Kodeverk;
-  konsekvenserForYtelsen?: Kodeverk[];
-  vedtaksbrev?: Kodeverk;
+  rettenTil?: string;
+  konsekvenserForYtelsen?: string[];
+  vedtaksbrev?: string;
   overskrift?: string;
   fritekstbrev?: string;
   erRevurderingMedUendretUtfall?: boolean;
