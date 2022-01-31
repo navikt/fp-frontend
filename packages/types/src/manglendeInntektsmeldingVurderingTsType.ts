@@ -1,8 +1,6 @@
-import Kodeverk from './kodeverkTsType';
-
 type ManglendeInntektsmeldingVurdering = Readonly<{
   behandlingUuid: string;
-  vurdering: Kodeverk | string;
+  vurdering: string;
   begrunnelse: string;
   arbeidsgiverIdent: string;
   internArbeidsforholdRef: string;

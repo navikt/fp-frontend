@@ -1,5 +1,3 @@
-import Kodeverk from './kodeverkTsType';
-
 type ManueltArbeidsforhold = Readonly<{
   behandlingUuid: string;
   begrunnelse: string;
@@ -9,7 +7,7 @@ type ManueltArbeidsforhold = Readonly<{
   fom: string;
   tom: string;
   stillingsprosent: number;
-  vurdering: Kodeverk | string;
+  vurdering: string;
 }>
 
 export default ManueltArbeidsforhold;

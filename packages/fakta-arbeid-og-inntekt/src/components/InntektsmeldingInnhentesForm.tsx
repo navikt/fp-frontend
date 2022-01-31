@@ -18,7 +18,7 @@ import {
   TextAreaField, RadioGroupField, RadioOption, Form,
 } from '@fpsak-frontend/form-hooks';
 import {
-  AoIArbeidsforhold, Inntektspost, Kodeverk, ManglendeInntektsmeldingVurdering,
+  AoIArbeidsforhold, Inntektspost, ManglendeInntektsmeldingVurdering,
 } from '@fpsak-frontend/types';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image, FloatRight,
@@ -59,7 +59,7 @@ const behandleInntektsposter = (
 };
 
 type FormValues = {
-  saksbehandlersVurdering: Kodeverk;
+  saksbehandlersVurdering: string;
   begrunnelse: string;
 }
 
@@ -107,7 +107,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
   const lagre = useCallback((formValues: FormValues) => {
     const params = {
       behandlingUuid,
-      vurdering: formValues.saksbehandlersVurdering.kode,
+      vurdering: formValues.saksbehandlersVurdering,
       arbeidsgiverIdent: arbeidsforhold.arbeidsgiverIdent,
       internArbeidsforholdRef: arbeidsforhold.internArbeidsforholdId,
       begrunnelse: formValues.begrunnelse,
@@ -203,7 +203,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
           <FlexRow>
             <FlexColumn>
               <RadioGroupField
-                name="saksbehandlersVurdering.kode"
+                name="saksbehandlersVurdering"
                 validate={[required]}
                 readOnly={isReadOnly}
                 direction="vertical"

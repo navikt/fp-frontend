@@ -1,5 +1,3 @@
-import { Kodeverk } from '@fpsak-frontend/types';
-
 export enum AksjonspunktÅrsak {
   MANGLENDE_INNTEKTSMELDING = 'MANGLENDE_INNTEKTSMELDING',
   INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD = 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD',
@@ -18,7 +16,7 @@ export type Inntektsmelding = Readonly<{
   motattDato: string;
   innsendingstidspunkt: string;
   årsak?: AksjonspunktÅrsak;
-  saksbehandlersVurdering?: Kodeverk;
+  saksbehandlersVurdering?: string;
   begrunnelse?: string;
 }>
 
@@ -30,7 +28,7 @@ export type Arbeidsforhold = Readonly<{
   tom: string;
   stillingsprosent: number;
   årsak?: AksjonspunktÅrsak;
-  saksbehandlersVurdering?: Kodeverk;
+  saksbehandlersVurdering?: string;
   begrunnelse?: string;
 }>
 
@@ -38,7 +36,7 @@ export type Inntektspost = Readonly<{
   beløp: number;
   fom: string;
   tom: string;
-  type: Kodeverk;
+  type: string;
 }>
 
 export type Inntekt = Readonly<{

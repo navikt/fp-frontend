@@ -84,7 +84,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
     toggleRad(false);
   }, []);
 
-  const erManueltOpprettet = arbeidsforhold?.saksbehandlersVurdering?.kode === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER;
+  const erManueltOpprettet = arbeidsforhold?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER;
   const harArbeidsforholdOgInntektsmelding = arbeidsforhold && inntektsmelding && !arbeidsforhold.årsak && !inntektsmelding.årsak;
   const manglerInntektsmelding = arbeidsforhold?.årsak === AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING;
   const manglerArbeidsforhold = inntektsmelding?.årsak === AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD;

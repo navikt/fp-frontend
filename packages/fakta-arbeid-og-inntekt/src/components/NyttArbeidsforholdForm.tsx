@@ -100,7 +100,7 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
             tom: formValues.tom,
             stillingsprosent: formValues.stillingsprosent,
             begrunnelse: formValues.begrunnelse,
-            saksbehandlersVurdering: { kode: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER, kodeverk: '' },
+            saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
           },
           arbeidsforholdNavn: formValues.arbeidsgiverNavn,
           inntektsmelding: undefined,

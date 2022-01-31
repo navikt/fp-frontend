@@ -25,7 +25,7 @@ describe('<OpptjeningVilkarProsessIndex>', () => {
     expect(screen.getByText('Opptjent rett til foreldrepenger')).toBeInTheDocument();
 
     expect(screen.getByText('2 måneder og 3 dager aktivitet i opptjeningsperioden')).toBeInTheDocument();
-    expect(screen.getByText('01.01.2018-01.10.2018')).toBeInTheDocument();
+    expect(screen.getByText('01.01.2018 - 01.10.2018')).toBeInTheDocument();
 
     userEvent.click(screen.getByText('Søker har oppfylt krav om 6 mnd opptjening, vilkåret er oppfylt.'));
 
@@ -46,7 +46,7 @@ describe('<OpptjeningVilkarProsessIndex>', () => {
     render(<HarIkkeAksjonspunkt />);
 
     expect(await screen.findByText('2 måneder og 3 dager aktivitet i opptjeningsperioden')).toBeInTheDocument();
-    expect(screen.getByText('01.01.2018-01.10.2018')).toBeInTheDocument();
+    expect(screen.getByText('01.01.2018 - 01.10.2018')).toBeInTheDocument();
 
     expect(screen.queryByText('Opptjent rett til foreldrepenger')).not.toBeInTheDocument();
     expect(screen.queryByText('Søker har oppfylt krav om 6 mnd opptjening, vilkåret er oppfylt.')).not.toBeInTheDocument();

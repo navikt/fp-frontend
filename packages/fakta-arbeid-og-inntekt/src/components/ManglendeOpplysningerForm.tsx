@@ -68,7 +68,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
 
   const defaultValues = useMemo<FormValues>(() => ({
-    saksbehandlersVurdering: inntektsmelding.saksbehandlersVurdering?.kode,
+    saksbehandlersVurdering: inntektsmelding.saksbehandlersVurdering,
     fom: arbeidsforhold?.fom,
     tom: arbeidsforhold?.tom,
     stillingsprosent: arbeidsforhold?.stillingsprosent,
@@ -102,7 +102,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
             inntektsmelding: {
               ...data.inntektsmelding,
               begrunnelse: formValues.begrunnelse,
-              saksbehandlersVurdering: { kode: formValues.saksbehandlersVurdering, kodeverk: '' },
+              saksbehandlersVurdering: formValues.saksbehandlersVurdering,
             },
             arbeidsforhold: af,
           };

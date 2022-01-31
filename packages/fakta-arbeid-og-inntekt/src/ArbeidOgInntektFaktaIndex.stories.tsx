@@ -72,14 +72,8 @@ InnhentInntektsmelding.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: {
-      kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: '',
-    },
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
+    status: aksjonspunktStatus.OPPRETTET,
   } as Aksjonspunkt],
   arbeidsgiverOpplysningerPerId: {
     910909088: {
@@ -107,42 +101,27 @@ InnhentInntektsmelding.args = {
         beløp: 40000,
         fom: '2020-06-01',
         tom: '2020-06-30',
-        type: {
-          kode: 'LØNN',
-          kodeverk: 'INNTEKTSPOST_TYPE',
-        },
+        type: 'LØNN',
       }, {
         beløp: 41000,
         fom: '2021-07-01',
         tom: '2021-07-31',
-        type: {
-          kode: 'LØNN',
-          kodeverk: 'INNTEKTSPOST_TYPE',
-        },
+        type: 'LØNN',
       }, {
         beløp: 40000,
         fom: '2020-08-01',
         tom: '2020-08-31',
-        type: {
-          kode: 'LØNN',
-          kodeverk: 'INNTEKTSPOST_TYPE',
-        },
+        type: 'LØNN',
       }, {
         beløp: 40000,
         fom: '2020-09-01',
         tom: '2020-09-30',
-        type: {
-          kode: 'LØNN',
-          kodeverk: 'INNTEKTSPOST_TYPE',
-        },
+        type: 'LØNN',
       }, {
         beløp: 40000,
         fom: '2021-11-01',
         tom: '2021-11-30',
-        type: {
-          kode: 'LØNN',
-          kodeverk: 'INNTEKTSPOST_TYPE',
-        },
+        type: 'LØNN',
       }],
     }],
     skjæringstidspunkt: '2021-11-10',
@@ -154,14 +133,8 @@ InnhentInntektsmeldingDerEnIkkeHarInntekterFraAAregisteret.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: {
-      kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: '',
-    },
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
+    status: aksjonspunktStatus.OPPRETTET,
   } as Aksjonspunkt],
   arbeidsgiverOpplysningerPerId: {
     910909088: {
@@ -193,14 +166,8 @@ InnhentInntektsmeldingDerBehandlingErAvsluttet.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: {
-      kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.UTFORT,
-      kodeverk: '',
-    },
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
+    status: aksjonspunktStatus.UTFORT,
   } as Aksjonspunkt],
   arbeidsgiverOpplysningerPerId: {
     910909088: {
@@ -220,10 +187,7 @@ InnhentInntektsmeldingDerBehandlingErAvsluttet.args = {
       stillingsprosent: 100,
       tom: '9999-12-31',
       årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
-      saksbehandlersVurdering: {
-        kode: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING,
-        kodeverk: '',
-      },
+      saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING,
       begrunnelse: 'Vil innehente inntektsmelding fordi...',
     }],
     inntektsmeldinger: [],
@@ -238,14 +202,8 @@ AvklarManglendeOpplysninger.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: {
-      kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: '',
-    },
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
+    status: aksjonspunktStatus.OPPRETTET,
   } as Aksjonspunkt],
   arbeidsgiverOpplysningerPerId: {
     910909088: {
@@ -282,14 +240,8 @@ AvklarManglendeOpplysningerDerBehandlingErAvsluttet.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: {
-      kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.UTFORT,
-      kodeverk: '',
-    },
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
+    status: aksjonspunktStatus.UTFORT,
   } as Aksjonspunkt],
   arbeidsgiverOpplysningerPerId: {
     910909088: {
@@ -322,10 +274,7 @@ AvklarManglendeOpplysningerDerBehandlingErAvsluttet.args = {
       journalpostId: '1',
       dokumentId: '2',
       årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
-      saksbehandlersVurdering: {
-        kode: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
-        kodeverk: '',
-      },
+      saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
       begrunnelse: 'Jeg opprettet arbeidsforhold fordi...',
     }],
     inntekter: [],
@@ -339,14 +288,8 @@ AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppMulig.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: {
-      kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.UTFORT,
-      kodeverk: '',
-    },
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
+    status: aksjonspunktStatus.UTFORT,
   } as Aksjonspunkt],
   arbeidsgiverOpplysningerPerId: {
     910909088: {
@@ -379,10 +322,7 @@ AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppMulig.args = {
       journalpostId: '1',
       dokumentId: '2',
       årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
-      saksbehandlersVurdering: {
-        kode: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
-        kodeverk: '',
-      },
+      saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
       begrunnelse: 'Jeg opprettet arbeidsforhold fordi...',
     }],
     inntekter: [],
@@ -436,10 +376,7 @@ ArbeidsforholdErManueltLagtTilOgLagret.args = {
       stillingsprosent: 100,
       tom: '2022-12-31',
       begrunnelse: 'Dette er en begrunnelse',
-      saksbehandlersVurdering: {
-        kode: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
-        kodeverk: '',
-      },
+      saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
     }],
     inntektsmeldinger: [],
     inntekter: [],
@@ -468,10 +405,7 @@ ArbeidsforholdErManueltLagtTilOgBehandlingErAvsluttet.args = {
       stillingsprosent: 100,
       tom: '2022-12-31',
       begrunnelse: 'Dette er en begrunnelse',
-      saksbehandlersVurdering: {
-        kode: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
-        kodeverk: '',
-      },
+      saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
     }],
     inntektsmeldinger: [],
     inntekter: [],
@@ -522,42 +456,27 @@ ArbeidsforholdErOK.args = {
         beløp: 40000,
         fom: '2020-06-01',
         tom: '2020-06-30',
-        type: {
-          kode: 'LØNN',
-          kodeverk: 'INNTEKTSPOST_TYPE',
-        },
+        type: 'LØNN',
       }, {
         beløp: 40000,
         fom: '2020-07-01',
         tom: '2020-07-31',
-        type: {
-          kode: 'LØNN',
-          kodeverk: 'INNTEKTSPOST_TYPE',
-        },
+        type: 'LØNN',
       }, {
         beløp: 40000,
         fom: '2020-08-01',
         tom: '2020-08-31',
-        type: {
-          kode: 'LØNN',
-          kodeverk: 'INNTEKTSPOST_TYPE',
-        },
+        type: 'LØNN',
       }, {
         beløp: 40000,
         fom: '2020-09-01',
         tom: '2020-09-30',
-        type: {
-          kode: 'LØNN',
-          kodeverk: 'INNTEKTSPOST_TYPE',
-        },
+        type: 'LØNN',
       }, {
         beløp: 40000,
         fom: '2021-11-01',
         tom: '2021-11-30',
-        type: {
-          kode: 'LØNN',
-          kodeverk: 'INNTEKTSPOST_TYPE',
-        },
+        type: 'LØNN',
       }],
     }],
     skjæringstidspunkt: '2021-11-10',
@@ -570,23 +489,8 @@ FlereArbeidsforholdOgInntekstemeldinger.args = {
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   erOverstyrer: true,
   aksjonspunkter: [{
-    definisjon: {
-      kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: '',
-    },
-  }, {
-    definisjon: {
-      kode: '9999',
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: '',
-    },
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
+    status: aksjonspunktStatus.OPPRETTET,
   }] as Aksjonspunkt[],
   arbeidsgiverOpplysningerPerId: {
     910909088: {
@@ -660,42 +564,27 @@ FlereArbeidsforholdOgInntekstemeldinger.args = {
         beløp: 40000,
         fom: '2020-06-01',
         tom: '2020-06-30',
-        type: {
-          kode: 'LØNN',
-          kodeverk: 'INNTEKTSPOST_TYPE',
-        },
+        type: 'LØNN',
       }, {
         beløp: 40000,
         fom: '2020-07-01',
         tom: '2020-07-31',
-        type: {
-          kode: 'LØNN',
-          kodeverk: 'INNTEKTSPOST_TYPE',
-        },
+        type: 'LØNN',
       }, {
         beløp: 40000,
         fom: '2020-08-01',
         tom: '2020-08-31',
-        type: {
-          kode: 'LØNN',
-          kodeverk: 'INNTEKTSPOST_TYPE',
-        },
+        type: 'LØNN',
       }, {
         beløp: 40000,
         fom: '2020-09-01',
         tom: '2020-09-30',
-        type: {
-          kode: 'LØNN',
-          kodeverk: 'INNTEKTSPOST_TYPE',
-        },
+        type: 'LØNN',
       }, {
         beløp: 40000,
         fom: '2021-11-01',
         tom: '2021-11-30',
-        type: {
-          kode: 'LØNN',
-          kodeverk: 'INNTEKTSPOST_TYPE',
-        },
+        type: 'LØNN',
       }],
     }, {
       arbeidsgiverIdent: '910909090',
@@ -703,42 +592,27 @@ FlereArbeidsforholdOgInntekstemeldinger.args = {
         beløp: 30000,
         fom: '2020-06-01',
         tom: '2020-06-30',
-        type: {
-          kode: 'LØNN',
-          kodeverk: 'INNTEKTSPOST_TYPE',
-        },
+        type: 'LØNN',
       }, {
         beløp: 31000,
         fom: '2021-07-01',
         tom: '2021-07-31',
-        type: {
-          kode: 'LØNN',
-          kodeverk: 'INNTEKTSPOST_TYPE',
-        },
+        type: 'LØNN',
       }, {
         beløp: 30000,
         fom: '2020-08-01',
         tom: '2020-08-31',
-        type: {
-          kode: 'LØNN',
-          kodeverk: 'INNTEKTSPOST_TYPE',
-        },
+        type: 'LØNN',
       }, {
         beløp: 30000,
         fom: '2020-09-01',
         tom: '2020-09-30',
-        type: {
-          kode: 'LØNN',
-          kodeverk: 'INNTEKTSPOST_TYPE',
-        },
+        type: 'LØNN',
       }, {
         beløp: 30000,
         fom: '2021-11-01',
         tom: '2021-11-30',
-        type: {
-          kode: 'LØNN',
-          kodeverk: 'INNTEKTSPOST_TYPE',
-        },
+        type: 'LØNN',
       }],
     }],
     skjæringstidspunkt: '2021-11-10',

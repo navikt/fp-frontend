@@ -43,7 +43,7 @@ const finnApTekstKoder = (
   harUløsteManglendeInntektsmeldinger: boolean,
   harUløsteManglandeOpplysninger: boolean,
 ): string[] => {
-  const erApÅpent = aksjonspunkter.some((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET);
+  const erApÅpent = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET);
 
   const koder = [];
   if (erApÅpent && harUløsteManglendeInntektsmeldinger) {
@@ -150,7 +150,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   åpneForNyVurdering,
 }) => {
   const intl = useIntl();
-  const erAksjonspunktAvsluttet = aksjonspunkter.some((ap) => ap.status.kode === aksjonspunktStatus.UTFORT);
+  const erAksjonspunktAvsluttet = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.UTFORT);
   const isReadOnly = readOnly || erAksjonspunktAvsluttet;
   const [erKnappTrykket, setsKnappTrykket] = useState(false);
   const [visSettPåVentModal, settVisSettPåVentModal] = useState(false);
@@ -185,8 +185,8 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
     || (d.inntektsmelding?.årsak && !d.inntektsmelding?.saksbehandlersVurdering));
 
   const kanSettePåVent = tabellData
-    .some((d) => d.arbeidsforhold?.saksbehandlersVurdering?.kode === ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING
-      || d.inntektsmelding?.saksbehandlersVurdering?.kode === ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD);
+    .some((d) => d.arbeidsforhold?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING
+      || d.inntektsmelding?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD);
 
   const [antallÅpnedeRader, oppdaterAntallÅpneRader] = useState(0);
   const oppdaterÅpneRader = (skalLukke: boolean) => {
@@ -199,7 +199,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   useEffect(() => {
     if (erOverstyrt) {
       const indexForManueltLagtTil = tabellData
-        .findIndex((t) => t.arbeidsforhold?.saksbehandlersVurdering?.kode === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER);
+        .findIndex((t) => t.arbeidsforhold?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER);
       setAutoÅpenRadIndex(indexForManueltLagtTil);
     }
   }, [erOverstyrt]);
