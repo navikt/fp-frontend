@@ -115,6 +115,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
     if (formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING) {
       registrerArbeidsforhold({
         behandlingUuid,
+        internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
         arbeidsgiverNavn: arbeidsforholdNavn,
         arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
         vurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
