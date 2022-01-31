@@ -186,7 +186,7 @@ const buildInitialValues = createSelector([
   (state: any, ownProps: PureOwnProps) => formValueSelector('UttakFaktaForm')(state, `${ownProps.fieldId}.resultat`),
   (_state: any, ownProps: PureOwnProps) => ownProps],
 (begrunnelse, saksebehandlersBegrunnelse, oppholdArsak: string, initialResultat, ownProps): FormValues => {
-  let initialResultatValue = initialResultat ? initialResultat.kode : undefined;
+  let initialResultatValue = initialResultat;
   if (oppholdArsak && oppholdArsak !== oppholdArsakType.UDEFINERT && !begrunnelse) {
     initialResultatValue = undefined;
   }

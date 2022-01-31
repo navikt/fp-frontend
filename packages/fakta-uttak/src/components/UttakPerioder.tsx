@@ -18,7 +18,6 @@ import { CheckboxField } from '@fpsak-frontend/form';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
 import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import {
   FlexColumn,
   FlexContainer,
@@ -250,7 +249,6 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
       perioder,
       uttakPeriodeVurderingTyper,
       reduxFormChange: formChange,
-      getKodeverknavn,
     } = this.props;
     const {
       resultat, dokumentertePerioder, id, kontoType, nyFom, nyTom, nyArbeidstidsprosent, oppholdArsak,
@@ -287,20 +285,12 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
 
     if (kontoType) {
       // @ts-ignore Fiks
-      newPeriodeObject.uttakPeriodeType = {
-        kode: kontoType,
-        navn: uttakPeriodeNavn[kontoType],
-        kodeverk: 'UTTAK_PERIODE_TYPE',
-      };
+      newPeriodeObject.uttakPeriodeType = kontoType;
     }
 
     if (oppholdArsak) {
       // @ts-ignore Fiks
-      newPeriodeObject.oppholdÅrsak = {
-        kode: oppholdArsak,
-        navn: getKodeverknavn(updatedPeriode.oppholdÅrsak, KodeverkType.OPPHOLD_ARSAK),
-        kodeverk: updatedPeriode.oppholdÅrsak,
-      };
+      newPeriodeObject.oppholdÅrsak = oppholdArsak;
     }
 
     const newPerioder = createNewPerioder(perioder, id, newPeriodeObject);

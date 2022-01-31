@@ -396,18 +396,10 @@ const transformValues = (
   const overføringÅrsakObjekt = getPeriodeData(values.periodeOverforingArsak, overføringÅrsaker)[0];
 
   const utsettelseÅrsak = utsettelseÅrsakObjekt !== undefined
-    ? {
-      kode: utsettelseÅrsakObjekt.kode,
-      kodeverk: utsettelseÅrsakObjekt.kodeverk,
-      navn: utsettelseÅrsakObjekt.navn,
-    }
+    ? utsettelseÅrsakObjekt.kode
     : undefined;
   const overføringÅrsak = overføringÅrsakObjekt !== undefined
-    ? {
-      kode: overføringÅrsakObjekt.kode,
-      kodeverk: overføringÅrsakObjekt.kodeverk,
-      navn: overføringÅrsakObjekt.navn,
-    }
+    ? overføringÅrsakObjekt.kode
     : undefined;
 
   const resultat = uttakPeriodeVurderingTyper.find((type: any) => type.kode === uttakPeriodeVurdering.PERIODE_OK);
@@ -442,11 +434,7 @@ const transformValues = (
     begrunnelse: values.begrunnelse,
     saksebehandlersBegrunnelse: values.begrunnelse,
     uttakPeriodeType: periodeObjekt
-      ? {
-        kode: periodeObjekt.kode,
-        kodeverk: periodeObjekt.kodeverk,
-        navn: periodeObjekt.navn,
-      }
+      ? periodeObjekt.kode
       : { kode: '-' },
     arbeidsgiver,
     utsettelseÅrsak,
