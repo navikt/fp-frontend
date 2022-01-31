@@ -17,14 +17,8 @@ const behandling = {
 } as Behandling;
 
 const aksjonspunkter = [{
-  definisjon: {
-    kode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
-    kodeverk: '',
-  },
-  status: {
-    kode: aksjonspunktStatus.OPPRETTET,
-    kodeverk: '',
-  },
+  definisjon: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
+  status: aksjonspunktStatus.OPPRETTET,
   begrunnelse: undefined,
 }] as Aksjonspunkt[];
 
@@ -54,19 +48,10 @@ export const visPanelForResultatVedStadfestYtelsesvedtak = () => (
     isReadOnly={false}
     ankeVurdering={{
       ankeVurderingResultat: {
-        ankeVurdering: {
-          kode: ankeVurdering.ANKE_OMGJOER,
-          kodeverk: '',
-        },
+        ankeVurdering: ankeVurdering.ANKE_OMGJOER,
         begrunnelse: 'Dette er en begrunnelse',
-        ankeOmgjoerArsak: {
-          kode: ankeOmgjorArsak.ULIK_VURDERING,
-          kodeverk: '',
-        },
-        ankeVurderingOmgjoer: {
-          kode: ankeVurderingOmgjoer.ANKE_TIL_UGUNST,
-          kodeverk: '',
-        },
+        ankeOmgjoerArsak: ankeOmgjorArsak.ULIK_VURDERING,
+        ankeVurderingOmgjoer: ankeVurderingOmgjoer.ANKE_TIL_UGUNST,
       },
     } as AnkeVurdering}
     saveAnke={action('button-click') as (data: any) => Promise<any>}

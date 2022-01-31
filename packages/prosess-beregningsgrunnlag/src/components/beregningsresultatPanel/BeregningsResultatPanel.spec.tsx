@@ -27,14 +27,8 @@ const tableData = {
   rowsForklaringer: [],
 } as BeregningsresultatPeriodeTabellType;
 const vilkaarBG = {
-  vilkarStatus: {
-    kode: vilkarUtfallType.IKKE_VURDERT,
-    kodeverk: 'VILKAR_UTFALL_TYPE',
-  },
-  vilkarType: {
-    kode: 'FP_VK_41',
-    kodeverk: 'vilkarType',
-  },
+  vilkarStatus: vilkarUtfallType.IKKE_VURDERT,
+  vilkarType: 'FP_VK_41',
 };
 describe('BeregningsresultatPanel', () => {
   it('Skal teste om tabellen får korrekt antall rader ved vilkarStatus:IKKE VURDERT', () => {
@@ -56,8 +50,7 @@ describe('BeregningsresultatPanel', () => {
     expect(sumText).toBe('Beregningsgrunnlag.BeregningTable.Dagsats.ikkeFastsatt');
   });
   it('Skal teste om tabellen får korrekt antall rader ved vilkarStatus:OPPFYLT', () => {
-    vilkaarBG.vilkarStatus.kode = vilkarUtfallType.OPPFYLT;
-    vilkaarBG.vilkarStatus.kodeverk = 'VILKAR_UTFALL_TYPE';
+    vilkaarBG.vilkarStatus = vilkarUtfallType.OPPFYLT;
     const wrapper = shallowWithIntl(<BeregningsresutatPanel.WrappedComponent
       intl={intlMock}
       periodeResultatTabeller={[tableData]}

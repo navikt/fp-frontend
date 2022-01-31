@@ -17,8 +17,8 @@ import { FordelBeregningsgrunnlagAndelValues } from '../types/FordelingTsType';
 
 const intlMock = getIntlMock(messages);
 
-const getKodeverknavn = (kodeverk) => {
-  if (kodeverk.kode === 'AAP') {
+const getKodeverknavn = (kode) => {
+  if (kode === 'AAP') {
     return 'Arbeidsavklaringspenger';
   }
   return '';

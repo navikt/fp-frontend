@@ -32,20 +32,14 @@ const lagBeregningsgrunnlag = (ferdigstilt: boolean,
   årsinntektVisningstall: beregnetPrAar,
   andelerMedGraderingUtenBG: gradering,
   sammenligningsgrunnlag: {
-    sammenligningsgrunnlagType: {
-      kode: 'AT',
-      kodeverk: 'test',
-    },
+    sammenligningsgrunnlagType: 'AT',
     differanseBeregnet: null,
     avvikProsent: avvikPromille ? avvikPromille * 100 : null,
     rapportertPrAar: sammenligningSum,
     avvikPromille,
   } as SammenligningsgrunlagProp,
   aktivitetStatus: [
-    {
-      kode: aktivitetStatus.KOMBINERT_AT_SN,
-      kodeverk: 'test',
-    },
+    aktivitetStatus.KOMBINERT_AT_SN,
   ],
   beregningsgrunnlagPeriode: [
     {
@@ -55,32 +49,22 @@ const lagBeregningsgrunnlag = (ferdigstilt: boolean,
 } as Beregningsgrunnlag);
 
 const vilkar = [{
-  vilkarType: {
-    kode: 'FP_VK_41',
-  },
-  vilkarStatus: {
-    kode: vilkarUtfallType.OPPFYLT,
-  },
+  vilkarType: 'FP_VK_41',
+  vilkarStatus: vilkarUtfallType.OPPFYLT,
 }];
 
 const graderingAP = [{
   erAktivt: true,
-  definisjon: {
-    kode: '5050',
-    kodeverk: 'Fastsett varig brutto beregning ATFL',
-  },
+  definisjon: '5050',
   toTrinnsBehandling: false,
-  status: {
-    kode: 'OPPR',
-    kodeverk: 'Opprettet',
-  },
+  status: 'OPPR',
   begrunnelse: 'begrunnelse arbeidstaker/frilans',
   vilkarType: null,
   kanLoses: true,
 } as Aksjonspunkt];
 
 const gjeldendeAksjonspunkter = [{
-  definisjon: { kode: '5038' }, status: { kode: 'OPPR' }, erAktivt: true, toTrinnsBehandling: false,
+  definisjon: '5038', status: 'OPPR', erAktivt: true, toTrinnsBehandling: false,
 } as Aksjonspunkt];
 
 describe('<BeregningFP>', () => {
@@ -145,7 +129,7 @@ describe('<BeregningFP>', () => {
       submitCallback={sinon.spy}
       beregningsgrunnlag={lagBeregningsgrunnlag(true, 250000,
         250000, undefined,
-        [{ aktivitetStatus: { kode: 'test', kodeverk: 'test' } } as BeregningsgrunnlagAndel]) as Beregningsgrunnlag}
+        [{ aktivitetStatus: 'test' } as BeregningsgrunnlagAndel]) as Beregningsgrunnlag}
       vilkar={vilkar as Vilkar[]}
       aksjonspunkter={graderingAP}
       alleKodeverk={{} as AlleKodeverk}

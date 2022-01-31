@@ -16,10 +16,7 @@ type INIT_DATA = {
 describe('<AdopsjonsvilkaretFaktaInitPanel>', () => {
   it('skal rendre komponent', () => {
     const fagsak = {
-      fagsakYtelseType: {
-        kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: '',
-      },
+      fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
     } as Fagsak;
 
     const wrapper = shallow(<AdopsjonsvilkaretFaktaInitPanel
@@ -31,16 +28,10 @@ describe('<AdopsjonsvilkaretFaktaInitPanel>', () => {
     const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any> & FaktaPanelInitProps>(FaktaDefaultInitPanel);
 
     const adopsjonsVilkar = [{
-      vilkarType: {
-        kode: vilkarType.ADOPSJONSVILKARET,
-        kodeverk: '',
-      },
+      vilkarType: vilkarType.ADOPSJONSVILKARET,
     } as Vilkar];
     const annetVilkar = [{
-      vilkarType: {
-        kode: vilkarType.FODSELSVILKARET_FAR,
-        kodeverk: '',
-      },
+      vilkarType: vilkarType.FODSELSVILKARET_FAR,
     } as Vilkar];
 
     expect(panel.props().skalPanelVisesIMeny({ vilkar: adopsjonsVilkar })).toBe(true);

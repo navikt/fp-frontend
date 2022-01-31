@@ -12,61 +12,60 @@ import mannImg from '@fpsak-frontend/assets/images/mann.svg';
 import beslutterImg from '@fpsak-frontend/assets/images/beslutter.svg';
 import { Image } from '@fpsak-frontend/shared-components';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
-import { Kodeverk } from '@fpsak-frontend/types';
 
 import styles from './snakkeboble.less';
 
 const cx = classNames.bind(styles);
 
-const snakkebobleCls = (aktoer: Kodeverk): string => cx('snakkeboble', {
-  'snakkeboble--hoyre': aktoer.kode !== HistorikkAktor.SOKER && aktoer.kode !== HistorikkAktor.ARBEIDSGIVER,
-  'snakkeboble--venstre': aktoer.kode === HistorikkAktor.SOKER || aktoer.kode === HistorikkAktor.ARBEIDSGIVER,
+const snakkebobleCls = (aktoer: string): string => cx('snakkeboble', {
+  'snakkeboble--hoyre': aktoer !== HistorikkAktor.SOKER && aktoer !== HistorikkAktor.ARBEIDSGIVER,
+  'snakkeboble--venstre': aktoer === HistorikkAktor.SOKER || aktoer === HistorikkAktor.ARBEIDSGIVER,
 });
 
 const formatDate = (date: string): string => (`${date.substring(8, 10)}.${date.substring(5, 7)}.${date.substring(0, 4)} - ${date.substring(11, 16)}`);
 
-const snakkeboblePilCls = (aktoer: Kodeverk): string => cx('snakkeboble__snakkebole-pil', {
-  'snakkeboble__snakkebole-pil--hoyre--saksbehandler': aktoer.kode === HistorikkAktor.SAKSBEHANDLER,
-  'snakkeboble__snakkebole-pil--hoyre--beslutter': aktoer.kode === HistorikkAktor.BESLUTTER,
-  'snakkeboble__snakkebole-pil--hoyre--losningen': aktoer.kode === HistorikkAktor.VEDTAKSLOSNINGEN,
-  'snakkeboble__snakkebole-pil--venstre--bruker': aktoer.kode === HistorikkAktor.SOKER,
-  'snakkeboble__snakkebole-pil--venstre--ekstern': aktoer.kode === HistorikkAktor.ARBEIDSGIVER,
+const snakkeboblePilCls = (aktoer: string): string => cx('snakkeboble__snakkebole-pil', {
+  'snakkeboble__snakkebole-pil--hoyre--saksbehandler': aktoer === HistorikkAktor.SAKSBEHANDLER,
+  'snakkeboble__snakkebole-pil--hoyre--beslutter': aktoer === HistorikkAktor.BESLUTTER,
+  'snakkeboble__snakkebole-pil--hoyre--losningen': aktoer === HistorikkAktor.VEDTAKSLOSNINGEN,
+  'snakkeboble__snakkebole-pil--venstre--bruker': aktoer === HistorikkAktor.SOKER,
+  'snakkeboble__snakkebole-pil--venstre--ekstern': aktoer === HistorikkAktor.ARBEIDSGIVER,
 });
 
-const snakkeboblePanelCls = (aktoer: Kodeverk): string => cx('snakkeboble__panel snakkeboble-panel', {
-  'snakkeboble__snakkebole-panel--saksbehandler': aktoer.kode === HistorikkAktor.SAKSBEHANDLER,
-  'snakkeboble__snakkebole-panel--beslutter': aktoer.kode === HistorikkAktor.BESLUTTER,
-  'snakkeboble__snakkebole-panel--losningen': aktoer.kode === HistorikkAktor.VEDTAKSLOSNINGEN,
-  'snakkeboble__snakkebole-panel--bruker': aktoer.kode === HistorikkAktor.SOKER,
-  'snakkeboble__snakkebole-panel--ekstern': aktoer.kode === HistorikkAktor.ARBEIDSGIVER,
+const snakkeboblePanelCls = (aktoer: string): string => cx('snakkeboble__panel snakkeboble-panel', {
+  'snakkeboble__snakkebole-panel--saksbehandler': aktoer === HistorikkAktor.SAKSBEHANDLER,
+  'snakkeboble__snakkebole-panel--beslutter': aktoer === HistorikkAktor.BESLUTTER,
+  'snakkeboble__snakkebole-panel--losningen': aktoer === HistorikkAktor.VEDTAKSLOSNINGEN,
+  'snakkeboble__snakkebole-panel--bruker': aktoer === HistorikkAktor.SOKER,
+  'snakkeboble__snakkebole-panel--ekstern': aktoer === HistorikkAktor.ARBEIDSGIVER,
 });
 
-const utledIkon = (aktoer: Kodeverk, kjoenn?: Kodeverk) => {
-  if (aktoer.kode === HistorikkAktor.SAKSBEHANDLER) {
+const utledIkon = (aktoer: string, kjoenn?: string) => {
+  if (aktoer === HistorikkAktor.SAKSBEHANDLER) {
     return navAnsattHistorikkImg;
   }
-  if (aktoer.kode === HistorikkAktor.SOKER && kjoenn?.kode === navBrukerKjonn.MANN) {
+  if (aktoer === HistorikkAktor.SOKER && kjoenn === navBrukerKjonn.MANN) {
     return mannImg;
   }
-  if (aktoer.kode === HistorikkAktor.SOKER && kjoenn?.kode === navBrukerKjonn.KVINNE) {
+  if (aktoer === HistorikkAktor.SOKER && kjoenn === navBrukerKjonn.KVINNE) {
     return kvinneImg;
   }
-  if (aktoer.kode === HistorikkAktor.BESLUTTER) {
+  if (aktoer === HistorikkAktor.BESLUTTER) {
     return beslutterImg;
   }
-  if (aktoer.kode === HistorikkAktor.VEDTAKSLOSNINGEN) {
+  if (aktoer === HistorikkAktor.VEDTAKSLOSNINGEN) {
     return maskinImg;
   }
   return arbeidsgiverImg;
 };
 
-const utledTooltipPlassering = (aktoer: Kodeverk): boolean => aktoer.kode === HistorikkAktor.SAKSBEHANDLER
-|| aktoer.kode === HistorikkAktor.VEDTAKSLOSNINGEN || aktoer.kode === HistorikkAktor.BESLUTTER;
+const utledTooltipPlassering = (aktoer: string): boolean => aktoer === HistorikkAktor.SAKSBEHANDLER
+|| aktoer === HistorikkAktor.VEDTAKSLOSNINGEN || aktoer === HistorikkAktor.BESLUTTER;
 
 interface OwnProps {
   dato: string;
-  aktoer: Kodeverk;
-  kjoenn?: Kodeverk;
+  aktoer: string;
+  kjoenn?: string;
   rolleNavn?: string;
   opprettetAv?: string;
   children: React.ReactElement;

@@ -6,9 +6,8 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import relatertYtelseTilstand from '@fpsak-frontend/kodeverk/src/relatertYtelseTilstand';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { DateLabel, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
-import {
-  Kodeverk, KodeverkMedNavn, RelatertTilgrensedYtelse, Soknad,
-} from '@fpsak-frontend/types';
+import { KodeverkMedNavn, RelatertTilgrensedYtelse, Soknad } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import styles from './rettighetFaktaPanel.less';
 
@@ -27,7 +26,7 @@ interface PureOwnProps {
 
 interface StaticFunctions {
   buildInitialValues?: (soknad: Soknad, innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],
-    getKodeverknavn: (kodeverk: Kodeverk) => string) => FormValues;
+    getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string) => FormValues;
 }
 
 /**
@@ -70,9 +69,9 @@ const RettighetFaktaPanel: FunctionComponent<PureOwnProps> & StaticFunctions = (
 
 RettighetFaktaPanel.buildInitialValues = (soknad: Soknad,
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],
-  getKodeverknavn: (kodeverk: Kodeverk) => string): FormValues => ({
+  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string): FormValues => ({
   ytelser: innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
-  farSokerType: getKodeverknavn(soknad.farSokerType),
+  farSokerType: getKodeverknavn(soknad.farSokerType, KodeverkType.FAR_SOEKER_TYPE),
 });
 
 export default RettighetFaktaPanel;

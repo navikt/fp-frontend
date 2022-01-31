@@ -26,7 +26,7 @@ const utledArbeidsforholdTittel = (
   if (arbeidsforhold.arbeidsgiverReferanse && arbeidsgiverOpplysninger) {
     tittel = `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.identifikator})`;
   } else {
-    const arbeidType = uttakArbeidTyper.find((type) => type.kode === arbeidsforhold.uttakArbeidType.kode);
+    const arbeidType = uttakArbeidTyper.find((type) => type.kode === arbeidsforhold.uttakArbeidType);
     tittel = arbeidType?.navn;
   }
   if (arbeidsforhold.eksternArbeidsforholdReferanse) {

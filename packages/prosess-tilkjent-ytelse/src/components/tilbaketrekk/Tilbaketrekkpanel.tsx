@@ -117,7 +117,7 @@ const Tilbaketrekkpanel: FunctionComponent<OwnProps> = ({
             validate={[required]}
             direction="horizontal"
             readOnly={readOnly}
-            isEdited={!isAksjonspunktOpen(vurderTilbaketrekkAP.status.kode)}
+            isEdited={!isAksjonspunktOpen(vurderTilbaketrekkAP.status)}
           >
             <RadioOption
               label={<FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Utfør" />}

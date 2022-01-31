@@ -9,9 +9,6 @@ import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
 import { Fagsak } from '@fpsak-frontend/types';
 
-const FAGSAK_STATUS_KODEVERK = 'FAGSAK_STATUS';
-const FAGSAK_YTELSE_KODEVERK = 'FAGSAK_YTELSE';
-
 export default {
   title: 'sak/sak-sok',
   component: FagsakSokSakIndex,
@@ -42,28 +39,13 @@ export const Default = Template.bind({});
 Default.args = {
   fagsaker: [{
     saksnummer: '1',
-    fagsakYtelseType: {
-      kode: fagsakYtelseType.FORELDREPENGER,
-      kodeverk: FAGSAK_YTELSE_KODEVERK,
-    },
-    relasjonsRolleType: {
-      kode: '',
-      kodeverk: '',
-    },
-    status: {
-      kode: fagsakStatus.OPPRETTET,
-      kodeverk: FAGSAK_STATUS_KODEVERK,
-    },
+    fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+    relasjonsRolleType: '',
+    status: fagsakStatus.OPPRETTET,
   }, {
     saksnummer: '2',
-    fagsakYtelseType: {
-      kode: fagsakYtelseType.ENGANGSSTONAD,
-      kodeverk: FAGSAK_YTELSE_KODEVERK,
-    },
-    status: {
-      kode: fagsakStatus.OPPRETTET,
-      kodeverk: FAGSAK_STATUS_KODEVERK,
-    },
+    fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
+    status: fagsakStatus.OPPRETTET,
   }] as Fagsak[],
 };
 

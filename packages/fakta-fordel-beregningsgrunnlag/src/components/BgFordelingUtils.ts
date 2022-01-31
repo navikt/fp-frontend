@@ -4,8 +4,8 @@ import { formatCurrencyNoKr, removeSpacesFromNumber } from '@fpsak-frontend/util
 import {
   ArbeidsgiverOpplysningerPerId,
   FordelBeregningsgrunnlagAndel,
-  Kodeverk,
 } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { createVisningsnavnForAktivitetFordeling } from './util/visningsnavnHelper';
 import {
   FordelBeregningsgrunnlagAndelValues,
@@ -31,26 +31,26 @@ export const settAndelIArbeid = (andelerIArbeid: number[]): string => {
 };
 
 const finnnInntektskategorikode = (andel: FordelBeregningsgrunnlagAndel): string => (andel.inntektskategori
-&& andel.inntektskategori.kode !== inntektskategorier.UDEFINERT ? andel.inntektskategori.kode : '');
+&& andel.inntektskategori !== inntektskategorier.UDEFINERT ? andel.inntektskategori : '');
 
 const createAndelnavn = (andel: FordelBeregningsgrunnlagAndel,
   harKunYtelse: boolean,
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
-  if (!andel.aktivitetStatus || andel.aktivitetStatus.kode === aktivitetStatus.UDEFINERT) {
+  if (!andel.aktivitetStatus || andel.aktivitetStatus === aktivitetStatus.UDEFINERT) {
     return '';
   }
-  if (andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER && andel.arbeidsforhold) {
+  if (andel.aktivitetStatus === aktivitetStatus.ARBEIDSTAKER && andel.arbeidsforhold) {
     const agOpplysninger = arbeidsgiverOpplysningerPerId[andel.arbeidsforhold.arbeidsgiverIdent];
     if (!agOpplysninger) {
-      return andel.arbeidsforhold.arbeidsforholdType ? getKodeverknavn(andel.arbeidsforhold.arbeidsforholdType) : '';
+      return andel.arbeidsforhold.arbeidsforholdType ? getKodeverknavn(andel.arbeidsforhold.arbeidsforholdType, KodeverkType.OPPTJENING_AKTIVITET_TYPE) : '';
     }
     return createVisningsnavnForAktivitetFordeling(agOpplysninger, andel.arbeidsforhold.eksternArbeidsforholdId);
   }
-  if (harKunYtelse && andel.aktivitetStatus.kode === aktivitetStatus.BRUKERS_ANDEL) {
+  if (harKunYtelse && andel.aktivitetStatus === aktivitetStatus.BRUKERS_ANDEL) {
     return 'Ytelse';
   }
-  return getKodeverknavn(andel.aktivitetStatus);
+  return getKodeverknavn(andel.aktivitetStatus, KodeverkType.AKTIVITET_STATUS);
 };
 
 export const finnFastsattPrAar = (fordeltPrAar: number): number | null => (nullOrUndefined(fordeltPrAar) ? null : fordeltPrAar);
@@ -77,16 +77,16 @@ export const setArbeidsforholdInitialValues = (andel: FordelBeregningsgrunnlagAn
 
 export const setGenerellAndelsinfo = (andel: FordelBeregningsgrunnlagAndel,
   harKunYtelse: boolean,
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): FordelBeregningsgrunnlagGenerellAndelValues => ({
   andel: createAndelnavn(andel, harKunYtelse, getKodeverknavn, arbeidsgiverOpplysningerPerId),
-  aktivitetStatus: andel.aktivitetStatus.kode,
+  aktivitetStatus: andel.aktivitetStatus,
   andelsnr: andel.andelsnr,
   nyAndel: false,
-  kilde: andel.kilde == null ? null : andel.kilde.kode,
+  kilde: andel.kilde == null ? null : andel.kilde,
   lagtTilAvSaksbehandler: andel.lagtTilAvSaksbehandler === true,
   inntektskategori: finnnInntektskategorikode(andel),
-  forrigeInntektskategori: !andel.inntektskategori || andel.inntektskategori.kode === inntektskategorier.UDEFINERT ? null : andel.inntektskategori.kode,
+  forrigeInntektskategori: !andel.inntektskategori || andel.inntektskategori === inntektskategorier.UDEFINERT ? null : andel.inntektskategori,
 });
 
 export const mapToBelop = (andel: FordelBeregningsgrunnlagAndelValues): number => {

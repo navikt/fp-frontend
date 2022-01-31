@@ -5,7 +5,7 @@ import sinon from 'sinon';
 
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { AlleKodeverk, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import { lagAktiviteter, UttakActivity } from './UttakActivity';
 import { PeriodeMedClassName } from './Uttak';
@@ -20,31 +20,19 @@ describe('<UttakActivity>', () => {
     id: 1,
     fom: '2018-01-01',
     tom: '2018-02-01',
-    periodeResultatType: {
-      kode: '',
-      kodeverk: '',
-    },
+    periodeResultatType: '',
     periodeResultatÅrsak: {
       kode: '',
       kodeverk: '',
     },
     flerbarnsdager: false,
-    utsettelseType: {
-      kode: '-',
-    },
-    periodeType: {
-      kode: '-',
-    },
-    oppholdÅrsak: {
-      kode: '-',
-    },
+    utsettelseType: '-',
+    periodeType: '-',
+    oppholdÅrsak: '-',
     aktiviteter: [{
       trekkdagerDesimaler: 28.5,
       utbetalingsgrad: 100,
-      stønadskontoType: {
-        kode: '',
-        kodeverk: '',
-      },
+      stønadskontoType: '',
     }] as AktivitetFieldArray[],
   } as PeriodeMedClassName;
   it('skal rendre uttakactivity med oppfylt periode', () => {
@@ -74,7 +62,7 @@ describe('<UttakActivity>', () => {
       kontoIkkeSatt={false}
       utsettelseAarsak={{} as KodeverkMedNavn[]}
       uttakFieldArray="test"
-      currentlySelectedStønadskonto={{} as Kodeverk}
+      currentlySelectedStønadskonto=""
       graderingInnvilget
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
@@ -123,7 +111,7 @@ describe('<UttakActivity>', () => {
       kontoIkkeSatt={false}
       utsettelseAarsak={{} as KodeverkMedNavn[]}
       uttakFieldArray="test"
-      currentlySelectedStønadskonto={{} as Kodeverk}
+      currentlySelectedStønadskonto=""
       graderingInnvilget
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
@@ -166,7 +154,7 @@ describe('<UttakActivity>', () => {
       kontoIkkeSatt={false}
       utsettelseAarsak={{} as KodeverkMedNavn[]}
       uttakFieldArray="test"
-      currentlySelectedStønadskonto={{} as Kodeverk}
+      currentlySelectedStønadskonto=""
       graderingInnvilget
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
@@ -215,7 +203,7 @@ describe('<UttakActivity>', () => {
       kontoIkkeSatt={false}
       utsettelseAarsak={{} as KodeverkMedNavn[]}
       uttakFieldArray="test"
-      currentlySelectedStønadskonto={{} as Kodeverk}
+      currentlySelectedStønadskonto=""
       graderingInnvilget
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
@@ -264,7 +252,7 @@ describe('<UttakActivity>', () => {
       kontoIkkeSatt={false}
       utsettelseAarsak={{} as KodeverkMedNavn[]}
       uttakFieldArray="test"
-      currentlySelectedStønadskonto={{} as Kodeverk}
+      currentlySelectedStønadskonto=""
       graderingInnvilget
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
@@ -292,10 +280,7 @@ describe('<UttakActivity>', () => {
       days: 3.5,
       fom: '2018-01-01',
       tom: '2018-02-01',
-      stønadskontoType: {
-        kode: '',
-        kodeverk: '',
-      },
+      stønadskontoType: '',
       trekkdagerDesimaler: 28.5,
       utbetalingsgrad: 100,
       weeks: 5,

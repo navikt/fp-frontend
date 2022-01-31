@@ -6,9 +6,8 @@ import { Knapp } from 'nav-frontend-knapper';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
-import {
-  AlleKodeverk, FamilieHendelseSamling, Kodeverk, Personoversikt,
-} from '@fpsak-frontend/types';
+import { AlleKodeverk, FamilieHendelseSamling, Personoversikt } from '@fpsak-frontend/types';
+import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 
 import { UttakPerioder } from './UttakPerioder';
 import UttakSlettPeriodeModal from './UttakSlettPeriodeModal';
@@ -56,7 +55,7 @@ describe('<UttakPerioder>', () => {
         kanOverstyre={false}
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
-        behandlingStatus={{} as Kodeverk}
+        behandlingStatus={behandlingStatus.OPPRETTET}
         alleKodeverk={{} as AlleKodeverk}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
@@ -99,7 +98,7 @@ describe('<UttakPerioder>', () => {
         kanOverstyre={false}
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
-        behandlingStatus={{} as Kodeverk}
+        behandlingStatus={behandlingStatus.OPPRETTET}
         alleKodeverk={{} as AlleKodeverk}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
@@ -141,7 +140,7 @@ describe('<UttakPerioder>', () => {
         kanOverstyre={false}
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
-        behandlingStatus={{} as Kodeverk}
+        behandlingStatus={behandlingStatus.OPPRETTET}
         alleKodeverk={{} as AlleKodeverk}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
@@ -179,7 +178,7 @@ describe('<UttakPerioder>', () => {
         kanOverstyre={false}
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
-        behandlingStatus={{} as Kodeverk}
+        behandlingStatus={behandlingStatus.OPPRETTET}
         alleKodeverk={{} as AlleKodeverk}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
@@ -212,7 +211,7 @@ describe('<UttakPerioder>', () => {
         kanOverstyre={false}
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
-        behandlingStatus={{} as Kodeverk}
+        behandlingStatus={behandlingStatus.OPPRETTET}
         alleKodeverk={{} as AlleKodeverk}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
@@ -245,7 +244,7 @@ describe('<UttakPerioder>', () => {
         kanOverstyre={false}
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
-        behandlingStatus={{} as Kodeverk}
+        behandlingStatus={behandlingStatus.OPPRETTET}
         alleKodeverk={{} as AlleKodeverk}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
@@ -275,22 +274,13 @@ describe('<UttakPerioder>', () => {
         uttakPeriodeVurderingTyper={[]}
         aksjonspunkter={[
           {
-            aksjonspunktType: {
-              kode: 'MANU',
-              kodeverk: 'AKSJONSPUNKT_TYPE',
-            },
+            aksjonspunktType: 'MANU',
             begrunnelse: null,
             besluttersBegrunnelse: null,
-            definisjon: {
-              kode: '5071',
-              kodeverk: '',
-            },
+            definisjon: '5071',
             erAktivt: true,
             kanLoses: true,
-            status: {
-              kode: 'OPPR',
-              kodeverk: 'AKSJONSPUNKT_STATUS',
-            },
+            status: 'OPPR',
             toTrinnsBehandling: true,
             toTrinnsBehandlingGodkjent: null,
             vilkarType: null,
@@ -301,7 +291,7 @@ describe('<UttakPerioder>', () => {
         kanOverstyre={false}
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
-        behandlingStatus={{} as Kodeverk}
+        behandlingStatus={behandlingStatus.OPPRETTET}
         alleKodeverk={{} as AlleKodeverk}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"
@@ -335,7 +325,7 @@ describe('<UttakPerioder>', () => {
         kanOverstyre={false}
         getKodeverknavn={getKodeverknavn}
         faktaArbeidsforhold={[]}
-        behandlingStatus={{} as Kodeverk}
+        behandlingStatus={behandlingStatus.OPPRETTET}
         alleKodeverk={{} as AlleKodeverk}
         familiehendelse={familiehendelse}
         førsteUttaksdato="2018-01-12"

@@ -28,10 +28,7 @@ type INIT_DATA = {
 }
 
 const fagsak = {
-  fagsakYtelseType: {
-    kode: fagsakYtelseType.FORELDREPENGER,
-    kodeverk: '',
-  },
+  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
 } as Fagsak;
 
 const behandling = {
@@ -55,16 +52,10 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
     isReadOnly: false,
     readOnlySubmitButton: false,
     aksjonspunkter: [{
-      definisjon: {
-        kode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
       erAktivt: true,
       kanLoses: true,
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      status: aksjonspunktStatus.OPPRETTET,
     }] as Aksjonspunkt[],
     vilkar: [],
     isAksjonspunktOpen: true,
@@ -114,10 +105,7 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
 
     const aksjonspunktModels = [{
       kode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
-      klageVurdering: {
-        kode: klageVurdering.STADFESTE_YTELSESVEDTAK,
-        kodeverk: '',
-      },
+      klageVurdering: klageVurdering.STADFESTE_YTELSESVEDTAK,
     }];
 
     panel.props().lagringSideEffekter(aksjonspunktModels);
@@ -176,17 +164,15 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       behandlingUuid: 'test-uuid',
       ytelseType: {
         kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: '',
+        kodeverk: 'FAGSAK_YTELSE',
       },
+      fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
     }));
   });
 
   it('skal lagre klage', async () => {
     const kv = {
-      aktuelleHjemler: [{
-        kode: '14-17',
-        kodeverk: 'KLAGE_HJEMMEL',
-      }],
+      aktuelleHjemler: ['14-17'],
     } as KlageVurdering;
     const data = [
       { key: KlageBehandlingApiKeys.AKSJONSPUNKTER.name, data: [] },
@@ -230,13 +216,9 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
       begrunnelse: 'Dette er en begrunnelse',
       klageVurderingOmgjoer: null,
       fritekstTilBrev: 'Dette er en fritekst',
-      klageHjemmel: {
-        kode: '14-17',
-      },
+      klageHjemmel: '14-17',
       klageMedholdArsak: null,
-      klageVurdering: {
-        kode: klageVurdering.STADFESTE_YTELSESVEDTAK,
-      },
+      klageVurdering: klageVurdering.STADFESTE_YTELSESVEDTAK,
     });
   });
 });

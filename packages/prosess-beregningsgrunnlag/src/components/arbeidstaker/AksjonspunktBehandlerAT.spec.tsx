@@ -7,10 +7,7 @@ import AksjonspunktBehandlerAT from './AksjonspunktBehandlerAT';
 import messages from '../../../i18n/nb_NO.json';
 
 const mockAndel = (arbeidsgiverIdent, overstyrtPrAar, beregnetPrAar, skalFastsetteGrunnlag) => ({
-  aktivitetStatus: {
-    kode: aktivitetStatus.ARBEIDSTAKER,
-    kodeverk: 'test',
-  },
+  aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
   arbeidsforhold: {
     arbeidsgiverIdent,
     eksternArbeidsforholdId: '345678',

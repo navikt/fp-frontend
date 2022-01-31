@@ -28,10 +28,7 @@ const allePerioder = [
     beregningsgrunnlagPrStatusOgAndel: [
       {
         beregnetPrAar: 360000,
-        aktivitetStatus: {
-          kode: 'AT',
-          kodeverk: 'AKTIVITET_STATUS',
-        },
+        aktivitetStatus: 'AT',
         skalFastsetteGrunnlag: true,
       }],
   }];
@@ -39,12 +36,8 @@ const formName = 'BeregningForm';
 const aksjonspunkter = [
   {
     begrunnelse: null,
-    definisjon: {
-      kode: '5038',
-    },
-    status: {
-      kode: 'OPPR',
-    },
+    definisjon: '5038',
+    status: 'OPPR',
   } as Aksjonspunkt,
 ];
 
@@ -59,7 +52,7 @@ const alleKodeverk = {
 describe('<UnwrappedForm>', () => {
   it('Skal teste at riktig componenter blir renderet for FL readOnly', () => {
     relevanteStatuser.isFrilanser = true;
-    allePerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetStatus.kode = 'FL';
+    allePerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetStatus = 'FL';
     const readOnly = true;
     const wrapper = shallowWithIntl(<UnwrappedForm
       intl={intlMock}
@@ -90,7 +83,7 @@ describe('<UnwrappedForm>', () => {
 
   it('Skal teste at submitButton blir rendret riktig når readOnly=false', () => {
     relevanteStatuser.isFrilanser = true;
-    allePerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetStatus.kode = 'FL';
+    allePerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetStatus = 'FL';
     const readOnly = false;
     const wrapper = shallowWithIntl(<UnwrappedForm
       readOnly={readOnly}
@@ -122,7 +115,7 @@ describe('<UnwrappedForm>', () => {
     relevanteStatuser.isFrilanser = false;
     relevanteStatuser.isSelvstendigNaeringsdrivende = false;
     relevanteStatuser.isArbeidstaker = true;
-    allePerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetStatus.kode = 'AT';
+    allePerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetStatus = 'AT';
     const readOnly = true;
     const wrapper = shallowWithIntl(<UnwrappedForm
       readOnly={readOnly}
@@ -154,8 +147,8 @@ describe('<UnwrappedForm>', () => {
     relevanteStatuser.isFrilanser = false;
     relevanteStatuser.isSelvstendigNaeringsdrivende = false;
     relevanteStatuser.isArbeidstaker = true;
-    allePerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetStatus.kode = 'AT';
-    allePerioder[0].periodeAarsaker.push({ kode: periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET, kodeverk: 'test' });
+    allePerioder[0].beregningsgrunnlagPrStatusOgAndel[0].aktivitetStatus = 'AT';
+    allePerioder[0].periodeAarsaker.push(periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET);
     const readOnly = true;
     const wrapper = shallowWithIntl(<UnwrappedForm
       readOnly={readOnly}
@@ -188,11 +181,7 @@ describe('<UnwrappedForm>', () => {
     relevanteStatuser.isSelvstendigNaeringsdrivende = true;
     relevanteStatuser.isArbeidstaker = false;
     const snAndel = {
-      aktivitetStatus:
-     {
-       kode: aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE,
-       kodeverk: 'test',
-     },
+      aktivitetStatus: aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE,
       næringer: [
         {
           erVarigEndret: false,

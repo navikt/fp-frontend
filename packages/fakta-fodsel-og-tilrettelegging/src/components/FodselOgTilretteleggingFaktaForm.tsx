@@ -18,7 +18,7 @@ import {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
-  Arbeidsforhold as IayArbeidsforhold, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Kodeverk, KodeverkMedNavn, FodselOgTilrettelegging,
+  Arbeidsforhold as IayArbeidsforhold, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, FodselOgTilrettelegging,
   ArbeidsforholdFodselOgTilrettelegging, ArbeidsforholdTilretteleggingDato,
 } from '@fpsak-frontend/types';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel_ny.svg';
@@ -35,7 +35,7 @@ const FODSEL_TILRETTELEGGING_FORM = 'FodselOgTilretteleggingForm';
 const maxLength1500 = maxLength(1500);
 const EMPTY_LIST = [];
 const getAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]): string => aksjonspunkter
-  .filter((ap) => ap.definisjon.kode === aksjonspunktCodes.FODSELTILRETTELEGGING)[0].begrunnelse;
+  .filter((ap) => ap.definisjon === aksjonspunktCodes.FODSELTILRETTELEGGING)[0].begrunnelse;
 
 const utledFormSectionName = (
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging,
@@ -50,7 +50,7 @@ const utledFormSectionName = (
     }
     navn += arbeidsforhold.arbeidsgiverReferanse;
   } else {
-    const arbeidType = uttakArbeidTyper.find((type) => type.kode === arbeidsforhold.uttakArbeidType.kode);
+    const arbeidType = uttakArbeidTyper.find((type) => type.kode === arbeidsforhold.uttakArbeidType);
     navn = arbeidType?.navn;
   }
   if (arbeidsforhold.internArbeidsforholdReferanse) {
@@ -261,19 +261,19 @@ FodselOgTilretteleggingFaktaForm.defaultProps = {
 };
 
 const finnOverstyrtUtbetalingsgrad = (
-  type: Kodeverk,
+  type: string,
   stillingsprosent: number,
   stillingsprosentArbeidsforhold: number,
   overstyrtUtbetalingsgrad: string,
   oldOverstyrtUtbetalingsgrad: number,
   velferdspermisjonprosent: number,
 ): string => {
-  if (oldOverstyrtUtbetalingsgrad || type.kode === tilretteleggingType.HEL_TILRETTELEGGING) {
+  if (oldOverstyrtUtbetalingsgrad || type === tilretteleggingType.HEL_TILRETTELEGGING) {
     return overstyrtUtbetalingsgrad;
   }
 
-  let erLikOverstyrtVerdi = type.kode === tilretteleggingType.INGEN_TILRETTELEGGING && parseFloat(overstyrtUtbetalingsgrad) === 100;
-  if (type.kode === tilretteleggingType.DELVIS_TILRETTELEGGING) {
+  let erLikOverstyrtVerdi = type === tilretteleggingType.INGEN_TILRETTELEGGING && parseFloat(overstyrtUtbetalingsgrad) === 100;
+  if (type === tilretteleggingType.DELVIS_TILRETTELEGGING) {
     erLikOverstyrtVerdi = parseFloat(overstyrtUtbetalingsgrad) === parseFloat(finnUtbetalingsgradForTilrettelegging(
       stillingsprosentArbeidsforhold, velferdspermisjonprosent, stillingsprosent,
     ));
@@ -410,13 +410,13 @@ const utledUtbetalingsgrad = (
   stillingsprosentArbeidsforhold: number,
   velferdspermisjonprosent: number,
 ): number | string | null => {
-  if (tilretteleggingsdato.type.kode === tilretteleggingType.HEL_TILRETTELEGGING) {
+  if (tilretteleggingsdato.type === tilretteleggingType.HEL_TILRETTELEGGING) {
     return null;
   }
   if (tilretteleggingsdato.overstyrtUtbetalingsgrad) {
     return tilretteleggingsdato.overstyrtUtbetalingsgrad;
   }
-  return tilretteleggingsdato.type.kode === tilretteleggingType.INGEN_TILRETTELEGGING ? 100
+  return tilretteleggingsdato.type === tilretteleggingType.INGEN_TILRETTELEGGING ? 100
     : finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold, velferdspermisjonprosent, tilretteleggingsdato.stillingsprosent);
 };
 

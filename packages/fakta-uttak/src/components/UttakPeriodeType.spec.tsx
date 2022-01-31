@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 
 import { Image } from '@fpsak-frontend/shared-components';
 import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { Kodeverk } from '@fpsak-frontend/types';
 
 import { UttakPeriodeType } from './UttakPeriodeType';
 import messages from '../../i18n/nb_NO.json';
@@ -16,16 +15,14 @@ describe('<UttakPeriodeType>', () => {
   const fraDato = '2018-02-31';
   const id = '7845345-34324-324234-342';
   const arbeidstidprosent = 50;
-  const uttakPeriodeType = {} as Kodeverk;
-  const utsettelseArsak = {} as Kodeverk;
+  const uttakPeriodeType = '';
+  const utsettelseArsak = '';
   const openSlettPeriodeModalCallback = sinon.spy();
   const editPeriode = sinon.spy();
   const isAnyFormOpen = sinon.spy();
   const flerbarnsdager = false;
   const samtidigUttak = false;
-  const oppholdArsak = {
-    kode: '-',
-  } as Kodeverk;
+  const oppholdArsak = '-';
   const getKodeverknavn = () => undefined;
 
   it('skal vise redigere og slett periode hvis manuellOverstyring er true og readOnly er false', () => {
@@ -41,7 +38,7 @@ describe('<UttakPeriodeType>', () => {
       isNyPeriodeFormOpen={false}
       openSlettPeriodeModalCallback={openSlettPeriodeModalCallback}
       oppholdArsak={oppholdArsak}
-      overforingArsak={{} as Kodeverk}
+      overforingArsak=""
       readOnly={false}
       samtidigUttak={samtidigUttak}
       tilDato={tilDato}
@@ -67,7 +64,7 @@ describe('<UttakPeriodeType>', () => {
       isNyPeriodeFormOpen={false}
       openSlettPeriodeModalCallback={openSlettPeriodeModalCallback}
       oppholdArsak={oppholdArsak}
-      overforingArsak={{} as Kodeverk}
+      overforingArsak=""
       readOnly
       samtidigUttak={samtidigUttak}
       tilDato={tilDato}
@@ -96,7 +93,7 @@ describe('<UttakPeriodeType>', () => {
       isNyPeriodeFormOpen={false}
       openSlettPeriodeModalCallback={openSlettPeriodeModalCallback}
       oppholdArsak={oppholdArsak}
-      overforingArsak={{} as Kodeverk}
+      overforingArsak=""
       readOnly
       samtidigUttak={samtidigUttak}
       tilDato={tilDato}

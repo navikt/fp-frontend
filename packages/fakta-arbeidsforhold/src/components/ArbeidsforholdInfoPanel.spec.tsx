@@ -17,14 +17,8 @@ const intlMock = getIntlMock(messages);
 
 const ap5080 = {
   id: 0,
-  definisjon: {
-    kodeverk: '',
-    kode: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
-  },
-  status: {
-    kodeverk: '',
-    kode: '',
-  },
+  definisjon: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
+  status: '',
   kanLoses: true,
   erAktivt: true,
 };

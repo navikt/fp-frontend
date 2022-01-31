@@ -1,14 +1,13 @@
 import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Kodeverk } from '@fpsak-frontend/types';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
 type AnkeVurderingResultatAp = {
-  ankeVurdering: Kodeverk;
+  ankeVurdering: string;
   erSubsidiartRealitetsbehandles?: boolean;
-  fritekstTilBrev: Kodeverk | string;
-  ankeOmgjoerArsak: Kodeverk | string;
-  ankeVurderingOmgjoer: Kodeverk | string;
+  fritekstTilBrev: string;
+  ankeOmgjoerArsak: string;
+  ankeVurderingOmgjoer: string;
   erGodkjentAvMedunderskriver?: boolean;
   påAnketKlageBehandlingUuid?: string;
   erAnkerIkkePart?: boolean;

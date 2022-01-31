@@ -13,9 +13,7 @@ import {
   decodeHtmlEntity, getLanguageFromSprakkode, hasValidText, maxLength, minLength,
 } from '@fpsak-frontend/utils';
 import InnsynResultatType from '@fpsak-frontend/kodeverk/src/innsynResultatType';
-import {
-  Aksjonspunkt, Dokument, InnsynDokument, Kodeverk,
-} from '@fpsak-frontend/types';
+import { Aksjonspunkt, Dokument, InnsynDokument } from '@fpsak-frontend/types';
 import { ForeslaVedtakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
@@ -89,7 +87,7 @@ const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
 ): FormValues => ({
   mottattDato: innsynMottattDato,
-  begrunnelse: aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.FORESLA_VEDTAK).begrunnelse,
+  begrunnelse: aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.FORESLA_VEDTAK).begrunnelse,
 });
 
 const transformValues = (values: FormValues): ForeslaVedtakAp => ({
@@ -98,10 +96,10 @@ const transformValues = (values: FormValues): ForeslaVedtakAp => ({
 });
 
 interface OwnProps {
-  sprakkode: Kodeverk;
+  sprakkode: string;
   innsynDokumenter: InnsynDokument[];
   innsynMottattDato: string;
-  innsynResultatType: Kodeverk;
+  innsynResultatType: string;
   alleDokumenter: Dokument[];
   saksNr: string;
   aksjonspunkter: Aksjonspunkt[];
@@ -141,7 +139,7 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
   const documents = useMemo(() => getDocumenterMedFikkInnsynVerdi(getFilteredReceivedDocuments(alleDokumenter), innsynDokumenter),
     [alleDokumenter, innsynDokumenter]);
 
-  const apBegrunnelse = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.VURDER_INNSYN)?.begrunnelse;
+  const apBegrunnelse = aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.VURDER_INNSYN)?.begrunnelse;
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
@@ -156,12 +154,12 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
       <Undertittel><FormattedMessage id={readOnly ? 'InnsynVedtakForm.Vedtak' : 'InnsynVedtakForm.ForslagVedtak'} /></Undertittel>
       <VerticalSpacer eightPx />
       <Undertekst><FormattedMessage id="InnsynVedtakForm.Resultat" /></Undertekst>
-      <Normaltekst><FormattedMessage id={findResultTypeMessage(innsynResultatType.kode)} /></Normaltekst>
+      <Normaltekst><FormattedMessage id={findResultTypeMessage(innsynResultatType)} /></Normaltekst>
       <VerticalSpacer eightPx />
       <Undertekst><FormattedMessage id="InnsynVedtakForm.Vurdering" /></Undertekst>
       <Normaltekst className={styles.wordwrap}>{decodeHtmlEntity(apBegrunnelse)}</Normaltekst>
       <VerticalSpacer twentyPx />
-      {(innsynResultatType.kode !== InnsynResultatType.INNVILGET) && (
+      {(innsynResultatType !== InnsynResultatType.INNVILGET) && (
         <Row>
           <Column xs="8">
             <TextAreaField
@@ -180,7 +178,7 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
         </Row>
       )}
       <VerticalSpacer twentyPx />
-      {innsynResultatType.kode !== InnsynResultatType.AVVIST && (
+      {innsynResultatType !== InnsynResultatType.AVVIST && (
         <DocumentListVedtakInnsyn saksNr={saksNr} documents={documents.filter((document) => document.fikkInnsyn === true)} />
       )}
       <VerticalSpacer twentyPx />

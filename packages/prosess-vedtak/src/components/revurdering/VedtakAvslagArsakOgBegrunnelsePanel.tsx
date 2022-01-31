@@ -5,15 +5,15 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
 import {
-  AlleKodeverk, Vilkar, Kodeverk, Behandlingsresultat,
+  AlleKodeverk, Vilkar, Behandlingsresultat,
 } from '@fpsak-frontend/types';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { TextAreaField } from '@fpsak-frontend/form-hooks';
 import {
   decodeHtmlEntity, getLanguageFromSprakkode, hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew, getKodeverknavnFn,
 } from '@fpsak-frontend/utils';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
 import { hasIkkeOppfyltSoknadsfristvilkar } from '../felles/VedtakHelper';
@@ -26,14 +26,15 @@ const minLength3 = minLength(3);
 const getAvslagArsak = (
   vilkar: Vilkar[],
   behandlingsresultat: Behandlingsresultat,
-  getKodeverknavn: (kodeverk: Kodeverk, undertype?: string) => string,
+  getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType, undertype?: string) => string,
 ): string | ReactElement => {
-  const avslatteVilkar = vilkar.filter((v) => v.vilkarStatus.kode === vilkarUtfallType.IKKE_OPPFYLT);
+  const avslatteVilkar = vilkar.filter((v) => v.vilkarStatus === vilkarUtfallType.IKKE_OPPFYLT);
   if (avslatteVilkar.length === 0) {
     return <FormattedMessage id="VedtakForm.UttaksperioderIkkeGyldig" />;
   }
 
-  return `${getKodeverknavn(avslatteVilkar[0].vilkarType)}: ${getKodeverknavn(behandlingsresultat.avslagsarsak, avslatteVilkar[0].vilkarType.kode)}`;
+  const vilkarType = getKodeverkNavn(avslatteVilkar[0].vilkarType, KodeverkType.VILKAR_TYPE);
+  return `${vilkarType}: ${getKodeverkNavn(behandlingsresultat.avslagsarsak, KodeverkType.AVSLAGSARSAK, avslatteVilkar[0].vilkarType)}`;
 };
 
 const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) => value !== undefined || isDirty;
@@ -42,7 +43,7 @@ interface OwnProps {
   behandlingStatusKode: string;
   vilkar?: Vilkar[];
   behandlingsresultat: Behandlingsresultat;
-  språkKode: Kodeverk;
+  språkKode: string;
   erReadOnly: boolean;
   alleKodeverk: AlleKodeverk;
   skalBrukeOverstyrendeFritekstBrev: boolean;
@@ -59,7 +60,7 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
   const { formState: { isDirty } } = useFormContext();
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
   const isRequiredFn = getIsBegrunnelseRequired(isDirty);
   const avslagsårsak = getAvslagArsak(vilkar, behandlingsresultat, getKodeverknavn);

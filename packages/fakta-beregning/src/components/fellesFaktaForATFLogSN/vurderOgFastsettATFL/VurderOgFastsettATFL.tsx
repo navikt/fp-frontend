@@ -302,7 +302,7 @@ const transformValuesForAksjonspunkt = (values: FaktaOmBeregningAksjonspunktValu
   faktaOmBeregning: FaktaOmBeregning,
   beregningsgrunnlag: Beregningsgrunnlag): FaktaBeregningTransformedValues => {
   const tilfeller = faktaOmBeregning.faktaOmBeregningTilfeller
-    ? faktaOmBeregning.faktaOmBeregningTilfeller.map(({ kode }) => kode) : [];
+    ? faktaOmBeregning.faktaOmBeregningTilfeller.map((kode) => kode) : [];
   let transformed = { faktaOmBeregningTilfeller: [] } as FaktaBeregningTransformedValues;
   if (tilfeller.length > 0) {
     // Besteberegning

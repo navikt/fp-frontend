@@ -7,16 +7,16 @@ import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import OAType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
-import { ArbeidsgiverOpplysningerPerId, Kodeverk } from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 
 const YTELSE_TYPER = [OAType.SYKEPENGER, OAType.FORELDREPENGER, OAType.PLEIEPENGER, OAType.SVANGERSKAPSPENGER, OAType.UTENLANDSK_ARBEIDSFORHOLD];
 
-const erAvType = (valgtAktivitetstype?: Kodeverk, ...opptjeningAktivitetType: string[]): boolean => valgtAktivitetstype
-  && opptjeningAktivitetType.includes(valgtAktivitetstype.kode);
+const erAvType = (valgtAktivitetstype?: string, ...opptjeningAktivitetType: string[]): boolean => valgtAktivitetstype
+  && opptjeningAktivitetType.includes(valgtAktivitetstype);
 
 const formatDato = (dato: string): string => (dato ? dayjs(dato, ISO_DATE_FORMAT).format(DDMMYYYY_DATE_FORMAT) : '-');
 
-const getOppdragsgiverIntlId = (valgtAktivitetstype?: Kodeverk): string => (erAvType(valgtAktivitetstype, OAType.FRILANS)
+const getOppdragsgiverIntlId = (valgtAktivitetstype?: string): string => (erAvType(valgtAktivitetstype, OAType.FRILANS)
   ? 'ActivityPanel.Oppdragsgiver' : 'ActivityPanel.Arbeidsgiver');
 
 const finnArbeidsgivertekst = (
@@ -40,7 +40,7 @@ const finnArbeidsgivertekst = (
 };
 
 interface OwnProps {
-  valgtAktivitetstype?: Kodeverk;
+  valgtAktivitetstype?: string;
   arbeidsgiverReferanse: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   stillingsandel: number;

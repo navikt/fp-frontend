@@ -7,7 +7,6 @@ import Modal from 'nav-frontend-modal';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import { Image } from '@fpsak-frontend/shared-components';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
-import { Kodeverk } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 
 import messages from '../../../../i18n/nb_NO.json';
@@ -19,7 +18,7 @@ interface OwnProps {
   lukkModal: () => void;
   visModal: boolean;
   behandlingsresultat?: {
-    type: Kodeverk;
+    type: string;
   };
 }
 
@@ -34,7 +33,7 @@ const IverksetterVedtakStatusModal: FunctionComponent<OwnProps> = ({
   visModal,
   behandlingsresultat,
 }) => {
-  const erVedtakAvslatt = behandlingsresultat && behandlingsresultat.type.kode === behandlingResultatType.AVSLATT;
+  const erVedtakAvslatt = behandlingsresultat && behandlingsresultat.type === behandlingResultatType.AVSLATT;
   const imageAltText = intl.formatMessage({ id: erVedtakAvslatt ? 'IverksetterVedtakStatusModal.Avslatt' : 'IverksetterVedtakStatusModal.Innvilget' });
 
   return (

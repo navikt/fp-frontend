@@ -29,18 +29,13 @@ const behandling = {
   uuid: 'test-uuid',
   versjon: 1,
   behandlingÅrsaker: [],
-  type: {
-    kode: behandlingType.FORSTEGANGSSOKNAD,
-    kodeverk: '',
-  },
+  type: behandlingType.FORSTEGANGSSOKNAD,
 } as Behandling;
 
 const mottaker = {
   mottakerNavn: '',
   mottakerNummer: '',
-  mottakerType: {
-    kode: '',
-  },
+  mottakerType: '',
   resultatPerFagområde: [],
   resultatOgMotregningRader: [],
 };
@@ -72,16 +67,10 @@ describe('<SimuleringProsessStegInitPanel>', () => {
     isReadOnly: false,
     readOnlySubmitButton: false,
     aksjonspunkter: [{
-      definisjon: {
-        kode: aksjonspunktCodes.VURDER_FEILUTBETALING,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.VURDER_FEILUTBETALING,
       erAktivt: true,
       kanLoses: true,
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      status: aksjonspunktStatus.OPPRETTET,
     }] as Aksjonspunkt[],
     vilkar: [],
     isAksjonspunktOpen: true,
@@ -99,10 +88,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
       {
         key: FpBehandlingApiKeys.TILBAKEKREVINGVALG.name,
         data: {
-          videreBehandling: {
-            kode: tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
-            kodeverk: '',
-          },
+          videreBehandling: tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
         },
       },
       { key: FpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE.name, noRelLink: true, data: undefined },
@@ -120,10 +106,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
           }]}
           fagsak={{
             saksnummer: '123',
-            fagsakYtelseType: {
-              kode: fagsakYtelseType.FORELDREPENGER,
-              kodeverk: '',
-            },
+            fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
           } as Fagsak}
           behandling={behandling}
         />
@@ -146,10 +129,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
       }]}
       fagsak={{
         saksnummer: '123',
-        fagsakYtelseType: {
-          kode: fagsakYtelseType.FORELDREPENGER,
-          kodeverk: '',
-        },
+        fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
       } as Fagsak}
       behandling={behandling}
     />);
@@ -166,10 +146,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
       {
         key: FpBehandlingApiKeys.AKSJONSPUNKTER.name,
         data: [{
-          definisjon: {
-            kode: aksjonspunktCodes.VURDER_FEILUTBETALING,
-            kodeverk: '',
-          },
+          definisjon: aksjonspunktCodes.VURDER_FEILUTBETALING,
         }] as Aksjonspunkt[],
       },
       {
@@ -179,10 +156,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
       {
         key: FpBehandlingApiKeys.TILBAKEKREVINGVALG.name,
         data: {
-          videreBehandling: {
-            kode: tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
-            kodeverk: '',
-          },
+          videreBehandling: tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
         },
       },
       { key: FpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE.name, noRelLink: true, data: undefined },
@@ -204,10 +178,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
           }]}
           fagsak={{
             saksnummer: '123',
-            fagsakYtelseType: {
-              kode: fagsakYtelseType.FORELDREPENGER,
-              kodeverk: '',
-            },
+            fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
           } as Fagsak}
           behandling={behandling}
         />
@@ -227,10 +198,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
     expect(axiosMock.history.post
       .find((a) => a.url === '/fptilbake/api/dokument/forhandsvis-varselbrev')?.data).toBe(JSON.stringify({
       behandlingUuid: 'test-uuid',
-      fagsakYtelseType: {
-        kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: '',
-      },
+      fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
       saksnummer: '123',
       varseltekst: ' ',
       mottaker: '',

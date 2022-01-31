@@ -21,7 +21,7 @@ describe('<VurderBesteberegning>', () => {
   it('skal bygge initial values', () => {
     const vurderBesteberegning = {
       skalHaBesteberegning: false,
-      andeler: [{ andelsnr: 1, aktivitetStatus: { kode: 'AT' } }],
+      andeler: [{ andelsnr: 1, aktivitetStatus: 'AT' }],
     };
     const initialValues = VurderBesteberegningForm.buildInitialValues([],
       vurderBesteberegning, [faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING], false);
@@ -31,17 +31,11 @@ describe('<VurderBesteberegning>', () => {
   it('skal bygge initial values med overstyrt aksjonspunkt', () => {
     const vurderBesteberegning = {
       skalHaBesteberegning: null,
-      andeler: [{ andelsnr: 1, aktivitetStatus: { kode: 'AT' } }],
+      andeler: [{ andelsnr: 1, aktivitetStatus: 'AT' }],
     };
     const ap = {
-      definisjon: {
-        kode: OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
-        kodeverk: 'test',
-      },
-      status: {
-        kode: 'OPPR',
-        kodeverk: 'test',
-      },
+      definisjon: OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
+      status: 'OPPR',
       kanLoses: true,
       erAktivt: true,
     };
@@ -53,7 +47,7 @@ describe('<VurderBesteberegning>', () => {
   it('skal bygge initial values om det er overstyrt', () => {
     const vurderBesteberegning = {
       skalHaBesteberegning: null,
-      andeler: [{ andelsnr: 1, aktivitetStatus: { kode: 'AT' } }],
+      andeler: [{ andelsnr: 1, aktivitetStatus: 'AT' }],
     };
     const initialValues = VurderBesteberegningForm.buildInitialValues([], vurderBesteberegning,
       [faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING], true);

@@ -1,34 +1,32 @@
 import behandlingStatusCode from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import fagsakStatusCode from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import {
-  NavAnsatt, Kodeverk, AksessRettigheter, Aksess,
-} from '@fpsak-frontend/types';
+import { NavAnsatt, AksessRettigheter, Aksess } from '@fpsak-frontend/types';
 
 const kanVeilede = (navAnsatt: NavAnsatt): boolean => navAnsatt && navAnsatt.kanVeilede;
 const kanSaksbehandle = (navAnsatt: NavAnsatt): boolean => navAnsatt && navAnsatt.kanSaksbehandle;
 const kanOverstyre = (navAnsatt: NavAnsatt): boolean => kanSaksbehandle(navAnsatt) && navAnsatt.kanOverstyre;
-const isBehandlingAvTilbakekreving = (type?: Kodeverk): boolean => (type
-  ? (type.kode === BehandlingType.TILBAKEKREVING || type.kode === BehandlingType.TILBAKEKREVING_REVURDERING) : false);
+const isBehandlingAvTilbakekreving = (type?: string): boolean => (type
+  ? (type === BehandlingType.TILBAKEKREVING || type === BehandlingType.TILBAKEKREVING_REVURDERING) : false);
 
 const accessibleFor = (validNavAnsattPredicates: ((navAnsatt: NavAnsatt) => boolean)[]) => (
   navAnsatt: NavAnsatt,
 ): boolean => validNavAnsattPredicates.some((predicate) => predicate(navAnsatt));
 
 const enabledFor = (validFagsakStauses: string[], validBehandlingStatuses: string[]) => (
-  fagsakStatus: Kodeverk,
+  fagsakStatus: string,
   isTilbakekrevingBehandling: boolean,
-  behandlingStatus?: Kodeverk,
+  behandlingStatus?: string,
 ): boolean => (
-  (isTilbakekrevingBehandling || (fagsakStatus && validFagsakStauses.includes(fagsakStatus.kode)))
-  && (!!behandlingStatus && validBehandlingStatuses.includes(behandlingStatus.kode))
+  (isTilbakekrevingBehandling || (fagsakStatus && validFagsakStauses.includes(fagsakStatus)))
+  && (!!behandlingStatus && validBehandlingStatuses.includes(behandlingStatus))
 );
 
 const accessSelector = (validNavAnsattPredicates: ((navAnsatt: NavAnsatt) => boolean)[], validFagsakStatuses: string[], validBehandlingStatuses: string[]) => (
   navAnsatt: NavAnsatt,
-  fagsakStatus: Kodeverk,
-  behandlingStatus?: Kodeverk,
-  behandlingType?: Kodeverk,
+  fagsakStatus: string,
+  behandlingStatus?: string,
+  behandlingType?: string,
 ): Aksess => {
   if (kanVeilede(navAnsatt)) {
     return {
@@ -56,9 +54,9 @@ export const kanOverstyreAccess = accessSelector(
 
 const getAccessRights = (
   navAnsatt: NavAnsatt,
-  fagsakStatus: Kodeverk,
-  behandlingStatus?: Kodeverk,
-  behandlingType?: Kodeverk,
+  fagsakStatus: string,
+  behandlingStatus?: string,
+  behandlingType?: string,
 ): AksessRettigheter => ({
   writeAccess: writeAccess(navAnsatt, fagsakStatus, behandlingStatus, behandlingType),
   kanOverstyreAccess: kanOverstyreAccess(navAnsatt, fagsakStatus, behandlingStatus, behandlingType),

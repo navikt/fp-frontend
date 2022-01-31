@@ -1,9 +1,7 @@
-import Kodeverk from './kodeverkTsType';
-
 export type FagsakPerson = Readonly<{
   navn: string;
   fødselsnummer: string;
-  kjønn: Kodeverk;
+  kjønn: string;
   diskresjonskode?: string;
   fødselsdato: string;
   dodsdato?: string;
@@ -11,7 +9,7 @@ export type FagsakPerson = Readonly<{
 }>
 
 export type FagsakHendelse = Readonly<{
-  hendelseType: Kodeverk;
+  hendelseType: string;
   hendelseDato?: string;
   antallBarn: number;
   dødfødsel: boolean;

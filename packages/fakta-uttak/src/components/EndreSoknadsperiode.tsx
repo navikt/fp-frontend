@@ -7,7 +7,6 @@ import {
   hasValidDecimal, maxValue, minValue, required,
 } from '@fpsak-frontend/utils';
 import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
-import { Kodeverk } from '@fpsak-frontend/types';
 
 import styles from './perioder/periodeTyper.less';
 
@@ -29,7 +28,7 @@ const mapPeriodeTyper = (): ReactElement[] => Object.keys(oppholdArsakType)
 
 interface OwnProps {
   withGradering?: boolean;
-  oppholdArsak?: Kodeverk;
+  oppholdArsak?: string;
   førsteUttaksdato?: string;
 }
 
@@ -50,7 +49,7 @@ export const EndreSoknadsperiode: FunctionComponent<OwnProps> = ({
     </FlexRow>
     <FlexRow>
       <FlexColumn>
-        {(!oppholdArsak || oppholdArsak.kode === oppholdArsakType.UDEFINERT)
+        {(!oppholdArsak || oppholdArsak === oppholdArsakType.UDEFINERT)
         && (
         <SelectField
           name="kontoType"
@@ -58,7 +57,7 @@ export const EndreSoknadsperiode: FunctionComponent<OwnProps> = ({
           label={{ id: 'UttakInfoPanel.StonadsKonto' }}
         />
         )}
-        {oppholdArsak && oppholdArsak.kode !== oppholdArsakType.UDEFINERT
+        {oppholdArsak && oppholdArsak !== oppholdArsakType.UDEFINERT
         && (
         <SelectField
           name="oppholdArsak"

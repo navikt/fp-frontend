@@ -1,9 +1,8 @@
 import React from 'react';
 import { IntlShape } from 'react-intl';
 
-import {
-  HistorikkinnslagDel, HistorikkInnslagOpplysning, HistorikkinnslagEndretFelt, Kodeverk,
-} from '@fpsak-frontend/types';
+import { HistorikkinnslagDel, HistorikkInnslagOpplysning, HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import historikkResultatTypeCodes from '../../../kodeverk/historikkResultatTypeCodes';
 import historikkEndretFeltVerdiTypeCodes from '../../../kodeverk/historikkEndretFeltVerdiTypeCodes';
@@ -15,7 +14,7 @@ export const findIdForOpplysningCode = (opplysning: HistorikkInnslagOpplysning):
   if (!opplysning) {
     return undefined;
   }
-  const typeKode = opplysning.opplysningType.kode;
+  const typeKode = opplysning.opplysningType;
   const opplysningCode = historikkOpplysningTypeCodes[typeKode];
   if (!opplysningCode) {
     return (`OpplysningTypeCode ${typeKode} finnes ikke-LEGG DET INN`);
@@ -27,7 +26,7 @@ export const findIdForSoeknadsperiodeCode = (soeknadsperiode: HistorikkinnslagDe
   if (!soeknadsperiode) {
     return undefined;
   }
-  const typeKode = soeknadsperiode.soeknadsperiodeType ? soeknadsperiode.soeknadsperiodeType.kode : '';
+  const typeKode = soeknadsperiode.soeknadsperiodeType || '';
   const soeknadsperiodeCode = historikkSoeknadsperiodeTypeCodes[typeKode];
   if (!soeknadsperiodeCode) {
     return (`SoeknadsperiodeTypeCode ${typeKode} finnes ikke-LEGG DET INN`);
@@ -47,14 +46,17 @@ export const findResultatText = (resultat: string, intl: IntlShape): string | un
   return intl.formatMessage({ id: fieldId }, { b: (chunks) => <b>{chunks}</b>, br: <br /> }) as string;
 };
 
-export const findHendelseText = (hendelse: HistorikkinnslagDel['hendelse'], getKodeverknavn: (kodeverk: Kodeverk) => string): string | undefined => {
+export const findHendelseText = (
+  hendelse: HistorikkinnslagDel['hendelse'],
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
+): string | undefined => {
   if (!hendelse || !hendelse.navn) {
     return undefined;
   }
   if (hendelse.verdi === null) {
-    return getKodeverknavn(hendelse.navn);
+    return getKodeverknavn(hendelse.navn, KodeverkType.HISTORIKKINNSLAG_TYPE);
   }
-  return `${getKodeverknavn(hendelse.navn)} ${hendelse.verdi}`;
+  return `${getKodeverknavn(hendelse.navn, KodeverkType.HISTORIKKINNSLAG_TYPE)} ${hendelse.verdi}`;
 };
 
 const convertToBoolean = (verdi: boolean): string => (verdi === true ? 'Ja' : 'Nei');
@@ -81,7 +83,7 @@ export const findEndretFeltVerdi = (
 };
 
 export const findEndretFeltNavn = (endretFelt: HistorikkinnslagEndretFelt, intl: IntlShape): string => {
-  const navnCode = endretFelt.endretFeltNavn.kode;
+  const navnCode = endretFelt.endretFeltNavn;
   const endretFeltNavnType = historikkEndretFeltTypeCodes[navnCode];
   if (!endretFeltNavnType) {
     return (`EndretFeltTypeCode ${navnCode} finnes ikke-LEGG DET INN`);

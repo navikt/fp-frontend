@@ -19,7 +19,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import innsynResultatTyperKV from '@fpsak-frontend/kodeverk/src/innsynResultatType';
 import {
-  Aksjonspunkt, Dokument, InnsynDokument, InnsynVedtaksdokument, Kodeverk, AlleKodeverk,
+  Aksjonspunkt, Dokument, InnsynDokument, InnsynVedtaksdokument, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import { VurderInnsynAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -48,15 +48,15 @@ const hentDokumenterMedNavnOgFikkInnsyn = (
 
 const buildInitialValues = (
   innsynMottattDato: string,
-  innsynResultatType: Kodeverk,
+  innsynResultatType: string,
   dokumenter: InnsynDokument[],
   aksjonspunkter: Aksjonspunkt[],
   fristBehandlingPåVent?: string,
 ): FormValues => ({
   mottattDato: innsynMottattDato,
-  innsynResultatType: innsynResultatType ? innsynResultatType.kode : undefined,
+  innsynResultatType: innsynResultatType || undefined,
   fristDato: fristBehandlingPåVent || moment().add(3, 'days').format(ISO_DATE_FORMAT),
-  sattPaVent: isAksjonspunktOpen(aksjonspunkter[0].status.kode) ? undefined : !!fristBehandlingPåVent,
+  sattPaVent: isAksjonspunktOpen(aksjonspunkter[0].status) ? undefined : !!fristBehandlingPåVent,
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
   ...hentDokumenterMedNavnOgFikkInnsyn(dokumenter || []),
 });
@@ -98,7 +98,7 @@ interface OwnProps {
   fristBehandlingPåVent?: string;
   innsynMottattDato: string;
   innsynDokumenter: InnsynDokument[];
-  innsynResultatType: Kodeverk;
+  innsynResultatType: string;
   vedtaksdokumentasjon: InnsynVedtaksdokument[];
   alleDokumenter: Dokument[];
   aksjonspunkter: Aksjonspunkt[];
@@ -152,7 +152,7 @@ export const InnsynForm: FunctionComponent<OwnProps> = ({
     .sort((t1, t2) => t1.navn.localeCompare(t2.navn))
     .reverse(), [alleKodeverk]);
 
-  const isApOpen = isAksjonspunktOpen(aksjonspunkter[0].status.kode);
+  const isApOpen = isAksjonspunktOpen(aksjonspunkter[0].status);
 
   const innsynResultatTypeKode = formMethods.watch('innsynResultatType');
   const sattPaVent = formMethods.watch('sattPaVent');

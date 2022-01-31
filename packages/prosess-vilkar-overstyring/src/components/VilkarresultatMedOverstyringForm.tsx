@@ -9,9 +9,7 @@ import {
 } from 'nav-frontend-typografi';
 
 import { Form } from '@fpsak-frontend/form-hooks';
-import {
-  KodeverkMedNavn, Kodeverk, Aksjonspunkt, Behandling,
-} from '@fpsak-frontend/types';
+import { KodeverkMedNavn, Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import {
@@ -38,7 +36,7 @@ type TextValues = {
 }
 
 const isOverridden = (aksjonspunkter: Aksjonspunkt[], aksjonspunktCode: string): boolean => aksjonspunkter
-  .some((ap) => ap.definisjon.kode === aksjonspunktCode);
+  .some((ap) => ap.definisjon === aksjonspunktCode);
 const isHidden = (
   kanOverstyre: boolean,
   aksjonspunkter: Aksjonspunkt[],
@@ -52,10 +50,10 @@ const hentErIkkeOppfyltTekstkode = (customVilkarIkkeOppfyltText?: TextValues) =>
 
 const getCustomVilkarText = (
   medlemskapFom: string,
-  behandlingType: Kodeverk,
+  behandlingType: string,
   erOppfylt: boolean,
 ): TextValues | undefined => {
-  const isBehandlingRevurderingFortsattMedlemskap = behandlingType.kode === BehandlingType.REVURDERING && !!medlemskapFom;
+  const isBehandlingRevurderingFortsattMedlemskap = behandlingType === BehandlingType.REVURDERING && !!medlemskapFom;
   if (isBehandlingRevurderingFortsattMedlemskap) {
     return {
       id: erOppfylt ? 'VilkarresultatMedOverstyringForm.VilkarOppfyltRevurderingFom' : 'VilkarresultatMedOverstyringForm.VilkarIkkeOppfyltRevurderingFom',
@@ -67,12 +65,12 @@ const getCustomVilkarText = (
 
 const getCustomVilkarTextForOppfylt = (
   medlemskapFom: string,
-  behandlingType: Kodeverk,
+  behandlingType: string,
 ): TextValues | undefined => getCustomVilkarText(medlemskapFom, behandlingType, true);
 
 const getCustomVilkarTextForIkkeOppfylt = (
   medlemskapFom: string,
-  behandlingType: Kodeverk,
+  behandlingType: string,
 ): TextValues | undefined => getCustomVilkarText(medlemskapFom, behandlingType, false);
 
 type FormValues = {
@@ -89,7 +87,7 @@ const buildInitialValues = (
   overstyringApKode: OverstyringAksjonspunkter,
   behandlingsresultat?: Behandling['behandlingsresultat'],
 ): FormValues => {
-  const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === overstyringApKode);
+  const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon === overstyringApKode);
   return {
     isOverstyrt: aksjonspunkt !== undefined,
     begrunnelse: decodeHtmlEntity(aksjonspunkt && aksjonspunkt.begrunnelse ? aksjonspunkt.begrunnelse : ''),
@@ -107,7 +105,7 @@ const transformValues = (
 });
 
 interface OwnProps {
-  behandlingType: Kodeverk;
+  behandlingType: string;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   medlemskapFom: string;
   aksjonspunkter: Aksjonspunkt[];
@@ -172,10 +170,10 @@ const VilkarresultatMedOverstyringForm: FunctionComponent<OwnProps> = ({
   const customVilkarOppfyltText = useMemo(() => getCustomVilkarTextForOppfylt(medlemskapFom, behandlingType), [medlemskapFom, behandlingType]);
   const customVilkarIkkeOppfyltText = useMemo(() => getCustomVilkarTextForIkkeOppfylt(medlemskapFom, behandlingType), [medlemskapFom, behandlingType]);
 
-  const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === overstyringApKode);
+  const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon === overstyringApKode);
   const hasAksjonspunkt = aksjonspunkt !== undefined;
   const isSolvable = aksjonspunkt !== undefined
-    ? !(aksjonspunkt.status.kode === aksjonspunktStatus.OPPRETTET && !aksjonspunkt.kanLoses) : false;
+    ? !(aksjonspunkt.status === aksjonspunktStatus.OPPRETTET && !aksjonspunkt.kanLoses) : false;
 
   const erOppfylt = vilkarUtfallType.OPPFYLT === status;
   const originalErVilkarOk = vilkarUtfallType.IKKE_VURDERT !== status ? erOppfylt : undefined;

@@ -27,9 +27,9 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
 const finnesUttakPåArbfor = (arbfor: ArbeidsforholdFodselOgTilrettelegging): boolean => {
   const finnesAnnenTilretteleggingEnnHel = arbfor.tilretteleggingDatoer
-    .some((dato: ArbeidsforholdTilretteleggingDato) => dato.type.kode !== tilretteleggingType.HEL_TILRETTELEGGING);
+    .some((dato: ArbeidsforholdTilretteleggingDato) => dato.type !== tilretteleggingType.HEL_TILRETTELEGGING);
   const finnesHelTilretteleggingEtterBehovOppstår = arbfor.tilretteleggingDatoer
-    .some((dato: ArbeidsforholdTilretteleggingDato) => dato.type.kode === tilretteleggingType.HEL_TILRETTELEGGING
+    .some((dato: ArbeidsforholdTilretteleggingDato) => dato.type === tilretteleggingType.HEL_TILRETTELEGGING
     && moment(dato.fom).isAfter(moment(arbfor.tilretteleggingBehovFom)));
   return finnesAnnenTilretteleggingEnnHel || finnesHelTilretteleggingEtterBehovOppstår;
 };
@@ -107,7 +107,7 @@ const SvangerskapVilkarForm: FunctionComponent<OwnProps> = ({
 
   const avslagsarsaker = alleKodeverk[kodeverkTyper.AVSLAGSARSAK][vilkarType.SVANGERSKAPVILKARET];
 
-  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
+  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status));
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
 
   return (

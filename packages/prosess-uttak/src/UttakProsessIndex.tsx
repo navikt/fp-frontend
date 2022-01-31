@@ -74,7 +74,7 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
         submitCallback={submitCallback}
         readOnly={isReadOnly}
         readOnlySubmitButton={readOnlySubmitButton}
-        apCodes={aksjonspunkter.map((a) => a.definisjon.kode)}
+        apCodes={aksjonspunkter.map((a) => a.definisjon)}
         isApOpen={isAksjonspunktOpen}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         kreverSammenhengendeUttak={kreverSammenhengendeUttak.kreverSammenhengendeUttak}

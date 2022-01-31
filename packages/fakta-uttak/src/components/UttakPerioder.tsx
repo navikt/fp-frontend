@@ -12,12 +12,12 @@ import { Knapp } from 'nav-frontend-knapper';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelse,
-  FamilieHendelseSamling, Kodeverk, KodeverkMedNavn, Personoversikt, AlleKodeverk,
+  FamilieHendelseSamling, KodeverkMedNavn, Personoversikt, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import { CheckboxField } from '@fpsak-frontend/form';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
 import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import {
   FlexColumn,
@@ -66,9 +66,9 @@ interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];
   hasRevurderingOvertyringAp: boolean;
   kanOverstyre: boolean;
-  getKodeverknavn: (kodeverk: Kodeverk) => string;
+  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string;
   faktaArbeidsforhold: FaktaArbeidsforhold[];
-  behandlingStatus: Kodeverk;
+  behandlingStatus: string;
   familiehendelse: FamilieHendelseSamling;
   vilkarForSykdomExists?: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -298,8 +298,8 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
       // @ts-ignore Fiks
       newPeriodeObject.oppholdÅrsak = {
         kode: oppholdArsak,
-        navn: getKodeverknavn(updatedPeriode.oppholdÅrsak),
-        kodeverk: updatedPeriode.oppholdÅrsak.kodeverk,
+        navn: getKodeverknavn(updatedPeriode.oppholdÅrsak, KodeverkType.OPPHOLD_ARSAK),
+        kodeverk: updatedPeriode.oppholdÅrsak,
       };
     }
 
@@ -358,11 +358,11 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
     const nyPeriodeDisabledDaysFom = førsteUttaksdato || (perioder[0] || {}).fom;
     const sisteUttakdatoFørsteSeksUker = moment(findFamiliehendelseDato(familiehendelse.gjeldende)).add(6, 'weeks');
     const farSøkerFør6Uker = (perioder[0] || {}).uttakPeriodeType
-      && (perioder[0] || {}).uttakPeriodeType.kode === 'FEDREKVOTE'
+      && (perioder[0] || {}).uttakPeriodeType === 'FEDREKVOTE'
       && moment((perioder[0] || {}).fom).isBefore(sisteUttakdatoFørsteSeksUker);
 
     const aksjonspunktTekster = aksjonspunkter
-      .filter((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET)
+      .filter((ap) => ap.status === aksjonspunktStatus.OPPRETTET)
       .map((ap) => {
         const førsteUttak = {
           value: moment(førsteUttaksdato).format(DDMMYYYY_DATE_FORMAT),
@@ -370,8 +370,8 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
 
         return (
           <FormattedMessage
-            key={`UttakInfoPanel.Aksjonspunkt.${ap.definisjon.kode}`}
-            id={`UttakInfoPanel.Aksjonspunkt.${ap.definisjon.kode}`}
+            key={`UttakInfoPanel.Aksjonspunkt.${ap.definisjon}`}
+            id={`UttakInfoPanel.Aksjonspunkt.${ap.definisjon}`}
             values={førsteUttak}
           />
         );
@@ -492,7 +492,7 @@ const mapStateToProps = (state: any, props: PureOwnProps): MappedOwnProps => {
     openForms: !!getPerioder(state).find((periode: CustomUttakKontrollerFaktaPerioder) => periode.openForm === true),
     førsteUttaksdato: getFørsteUttaksdato(state),
     endringsdato: getEndringsdato(state),
-    uttakPeriodeVurderingTyper: alleKodeverk[kodeverkTyper.UTTAK_PERIODE_VURDERING_TYPE],
+    uttakPeriodeVurderingTyper: alleKodeverk[KodeverkType.UTTAK_PERIODE_VURDERING_TYPE],
     initialValues: getFormInitialValues('UttakFaktaForm')(state),
     slettedePerioder: getSlettedePerioder(state) || EMPTY_ARRAY,
     perioder: getPerioder(state) || EMPTY_ARRAY,

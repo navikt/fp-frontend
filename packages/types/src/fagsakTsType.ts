@@ -1,10 +1,8 @@
-import Kodeverk from './kodeverkTsType';
-
 type Fagsak = Readonly<{
   saksnummer: string;
-  fagsakYtelseType: Kodeverk;
-  relasjonsRolleType: Kodeverk;
-  status: Kodeverk;
+  fagsakYtelseType: string;
+  relasjonsRolleType: string;
+  status: string;
   dekningsgrad: number;
 }>
 

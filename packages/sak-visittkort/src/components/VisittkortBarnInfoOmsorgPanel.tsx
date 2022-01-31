@@ -19,7 +19,7 @@ const VisittkortBarnInfoOmsorgPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const { hendelseType, hendelseDato, antallBarn } = familiehendelse;
 
-  const erAdopsjon = hendelseType.kode === familieHendelseType.ADOPSJON;
+  const erAdopsjon = hendelseType === familieHendelseType.ADOPSJON;
 
   const foreldreansvarTekstkode = antallBarn === 1 ? 'VisittkortBarnInfoOmsorgPanel.Foreldreansvar' : 'VisittkortBarnInfoOmsorgPanel.ForeldreansvarAntallBarn';
   const adopsjonTekstkode = antallBarn === 1 ? 'VisittkortBarnInfoOmsorgPanel.Adopsjon' : 'VisittkortBarnInfoOmsorgPanel.AdopsjonAntallBarn';

@@ -2,14 +2,8 @@
     "id": 1000602,
     "uuid": "55013b8a-ee7c-4fe7-8673-273af29c1bbb",
     "versjon": 32,
-    "type": {
-        "kode": "BT-002",
-        "kodeverk": "BEHANDLING_TYPE"
-    },
-    "status": {
-        "kode": "UTRED",
-        "kodeverk": "BEHANDLING_STATUS"
-    },
+    "type": "BT-002",
+    "status": "UTRED",
     "fagsakId": 1000602,
     "opprettet": "2019-12-04T13:32:27",
     "endret": "2019-12-04T13:32:33.532",
@@ -19,10 +13,7 @@
     "erAktivPapirsoknad": false,
     "førsteÅrsak": {
         "erAutomatiskRevurdering": false,
-        "behandlingArsakType": {
-            "kode": "RE-END-INNTEKTSMELD",
-            "kodeverk": "BEHANDLING_AARSAK"
-        },
+        "behandlingArsakType": "RE-END-INNTEKTSMELD",
         "manueltOpprettet": false
     },
     "behandlingsfristTid": "2020-01-15",
@@ -31,19 +22,10 @@
     "behandlingKøet": false,
     "behandlingsresultat": {
         "id": 1000552,
-        "type": {
-            "kode": "IKKE_FASTSATT",
-            "kodeverk": "BEHANDLING_RESULTAT_TYPE"
-        },
-        "rettenTil": {
-            "kode": "-",
-            "kodeverk": "RETTEN_TIL"
-        },
+        "type": "IKKE_FASTSATT",
+        "rettenTil": "-",
         "konsekvenserForYtelsen": [],
-        "vedtaksbrev": {
-            "kode": "-",
-            "kodeverk": "VEDTAKSBREV"
-        },
+        "vedtaksbrev": "-",
         "skjaeringstidspunktForeldrepenger": "2019-10-23",
         "skjæringstidspunkt": {
             "dato": "2019-10-23"
@@ -156,18 +138,12 @@
         }
     ],
     "behandlingPaaVent": false,
-    "sprakkode": {
-        "kode": "-",
-        "kodeverk": "SPRAAK_KODE"
-    },
+    "sprakkode": "-",
     "toTrinnsBehandling": false,
     "behandlingÅrsaker": [
         {
             "erAutomatiskRevurdering": false,
-            "behandlingArsakType": {
-                "kode": "RE-END-INNTEKTSMELD",
-                "kodeverk": "BEHANDLING_AARSAK"
-            },
+            "behandlingArsakType": "RE-END-INNTEKTSMELD",
             "manueltOpprettet": false
         }
     ],

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
 
-import { FamilieHendelse, FamilieHendelseSamling, Kodeverk } from '@fpsak-frontend/types';
+import { FamilieHendelse, FamilieHendelseSamling } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import utsettelseArsakCodes from '@fpsak-frontend/kodeverk/src/utsettelseArsakCodes';
 import overforingArsakCodes from '@fpsak-frontend/kodeverk/src/overforingArsakCodes';
@@ -22,20 +22,19 @@ export const renderPeriode = (
   readOnly: boolean,
   fraDato: string,
   tilDato: string,
-  utsettelseArsak: Kodeverk,
-  overforingArsak: Kodeverk,
+  utsettelseArsak: string,
+  overforingArsak: string,
   bekreftet: boolean,
-  uttakPeriodeType: Kodeverk,
+  uttakPeriodeType: string,
   behandlingStatusKode: string,
   farSøkerFør6Uker: boolean,
   gjeldendeFamiliehendelse: FamilieHendelse,
   vilkarForSykdomExists: boolean,
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
   sisteUttakdatoFørsteSeksUker: moment.Moment,
   intl: IntlShape,
 ) => { // NOSONAR Det er planlagt å laga nye uttakskomponentar
-  const utsettelseSwitch = utsettelseArsak ? utsettelseArsak.kode : utsettelseArsakCodes.UDEFINERT;
-  const overforingSwitch = overforingArsak ? overforingArsak.kode : overforingArsakCodes.UDEFINERT;
+  const utsettelseSwitch = utsettelseArsak || utsettelseArsakCodes.UDEFINERT;
+  const overforingSwitch = overforingArsak || overforingArsakCodes.UDEFINERT;
   const farHarSøktFørsteSeksUkerOgPeriodeFomErInnenfor = farSøkerFør6Uker && moment(fraDato).isBefore(sisteUttakdatoFørsteSeksUker);
 
   switch (utsettelseSwitch) {
@@ -166,8 +165,8 @@ export const renderPeriode = (
 
 interface OwnProps {
   fieldId: string;
-  utsettelseArsak?: Kodeverk;
-  overforingArsak?: Kodeverk;
+  utsettelseArsak?: string;
+  overforingArsak?: string;
   updatePeriode: (...args: any[]) => any;
   id: string;
   cancelEditPeriode: (...args: any[]) => any;
@@ -176,13 +175,12 @@ interface OwnProps {
   tilDato: string;
   bekreftet: boolean;
   openForm: boolean;
-  uttakPeriodeType: Kodeverk;
+  uttakPeriodeType: string;
   behandlingStatusKode: string;
   farSøkerFør6Uker: boolean;
   familiehendelse: FamilieHendelseSamling;
   vilkarForSykdomExists: boolean;
   arbeidstidprosent?: number;
-  getKodeverknavn: (kodeverk: Kodeverk) => string;
   sisteUttakdatoFørsteSeksUker: moment.Moment;
 }
 
@@ -204,7 +202,6 @@ export const UttakPeriodeInnhold: FunctionComponent<OwnProps & WrappedComponentP
   farSøkerFør6Uker,
   familiehendelse,
   vilkarForSykdomExists,
-  getKodeverknavn,
   sisteUttakdatoFørsteSeksUker,
   intl,
 }) => {
@@ -230,7 +227,6 @@ export const UttakPeriodeInnhold: FunctionComponent<OwnProps & WrappedComponentP
         farSøkerFør6Uker,
         familiehendelse.gjeldende,
         vilkarForSykdomExists,
-        getKodeverknavn,
         sisteUttakdatoFørsteSeksUker,
         intl,
       )}

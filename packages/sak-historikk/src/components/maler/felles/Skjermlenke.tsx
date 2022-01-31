@@ -2,13 +2,15 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Location } from 'history';
 import { Element } from 'nav-frontend-typografi';
-import { Kodeverk } from '@fpsak-frontend/types';
+
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+
 import { scrollUp } from './historikkUtils';
 
 interface SkjermlenkeProps {
-  skjermlenke?: Kodeverk;
+  skjermlenke?: string;
   behandlingLocation: Location;
-  getKodeverknavn: (kodeverkObjekt: Kodeverk, undertype?: string) => string;
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType, undertype?: string) => string;
   scrollUpOnClick?: boolean;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeKode: string) => Location | undefined;
 }
@@ -24,7 +26,7 @@ const Skjermlenke: React.FunctionComponent<SkjermlenkeProps> = ({
     return null;
   }
 
-  const location = createLocationForSkjermlenke(behandlingLocation, skjermlenke.kode);
+  const location = createLocationForSkjermlenke(behandlingLocation, skjermlenke);
   if (!location) {
     return null;
   }
@@ -35,7 +37,7 @@ const Skjermlenke: React.FunctionComponent<SkjermlenkeProps> = ({
         to={location}
         onClick={scrollUpOnClick ? scrollUp : undefined}
       >
-        {getKodeverknavn(skjermlenke)}
+        {getKodeverknavn(skjermlenke, KodeverkType.SKJERMLENKE_TYPE)}
       </NavLink>
     </Element>
   );

@@ -12,9 +12,7 @@ import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter
 const behandling = {
   uuid: '1',
   versjon: 1,
-  sprakkode: {
-    kode: 'NO',
-  },
+  sprakkode: 'NO',
 } as Behandling;
 
 export default {
@@ -47,20 +45,14 @@ const Template: Story<{
     klageVurdering={{
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
-        klageVurdering: { kode: klageVurderingCodes.AVVIS_KLAGE, kodeverk: '' },
+        klageVurdering: klageVurderingCodes.AVVIS_KLAGE,
         fritekstTilBrev: 'test',
         godkjentAvMedunderskriver: false,
       },
       klageFormkravResultatKA: {
-        avvistArsaker: [{
-          kode: 'IKKE_KONKRET',
-          kodeverk: 'KLAGE_AVVIST_AARSAK',
-        }],
+        avvistArsaker: ['IKKE_KONKRET'],
       },
-      aktuelleHjemler: [{
-        kode: '14-17',
-        kodeverk: 'KLAGE_HJEMMEL',
-      }],
+      aktuelleHjemler: ['14-17'],
     } as KlageVurdering}
     saveKlage={mellomlagre}
     previewCallback={forhandsvisCallback}
@@ -74,9 +66,7 @@ KlagevurderingMedAksjonspunktNk.args = {
   mellomlagre: action('button-click') as (data: any) => Promise<any>,
   forhandsvisCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
-    },
+    definisjon: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
   }] as Aksjonspunkt[],
 };
 
@@ -86,8 +76,6 @@ KlagevurderingMedAksjonspunktNfp.args = {
   mellomlagre: action('button-click') as (data: any) => Promise<any>,
   forhandsvisCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
-    },
+    definisjon: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
   }] as Aksjonspunkt[],
 };

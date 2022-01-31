@@ -1,10 +1,9 @@
 import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Kodeverk } from '@fpsak-frontend/types';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
 type VurderInnsynAp = {
-  innsynResultatType: Kodeverk | string;
+  innsynResultatType: string;
   mottattDato: string;
   innsynDokumenter: {
     fikkInnsyn?: boolean;

@@ -41,9 +41,9 @@ const getBekreftAksjonspunktProsessCallback = (
   const etterLagringCallback = lagringSideEffectsCallback(apListe);
 
   if (lagreOverstyrteAksjonspunkter) {
-    const aksjonspunkterTilLagring = aksjonspunkter.filter((ap) => apListe.some((apModel) => apModel.kode === ap.definisjon.kode));
+    const aksjonspunkterTilLagring = aksjonspunkter.filter((ap) => apListe.some((apModel) => apModel.kode === ap.definisjon));
     const erOverstyringsaksjonspunkter = aksjonspunkterTilLagring
-      .some((ap) => ap.aksjonspunktType?.kode === aksjonspunktType.OVERSTYRING || ap.aksjonspunktType?.kode === aksjonspunktType.SAKSBEHANDLEROVERSTYRING);
+      .some((ap) => ap.aksjonspunktType === aksjonspunktType.OVERSTYRING || ap.aksjonspunktType === aksjonspunktType.SAKSBEHANDLEROVERSTYRING);
 
     if (aksjonspunkterTilLagring.length === 0 || erOverstyringsaksjonspunkter) {
       return lagreOverstyrteAksjonspunkter({
@@ -61,7 +61,7 @@ const getBekreftAksjonspunktProsessCallback = (
 
 const finnStatus = (vilkar: Vilkar[], aksjonspunkter: Aksjonspunkt[]) => {
   if (vilkar.length > 0) {
-    const vilkarStatusCodes = vilkar.map((v) => v.vilkarStatus.kode);
+    const vilkarStatusCodes = vilkar.map((v) => v.vilkarStatus);
     if (vilkarStatusCodes.some((vsc) => vsc === vilkarUtfallType.IKKE_VURDERT)) {
       return vilkarUtfallType.IKKE_VURDERT;
     }
@@ -69,7 +69,7 @@ const finnStatus = (vilkar: Vilkar[], aksjonspunkter: Aksjonspunkt[]) => {
   }
 
   if (aksjonspunkter.length > 0) {
-    return aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode)) ? vilkarUtfallType.IKKE_VURDERT : vilkarUtfallType.OPPFYLT;
+    return aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status)) ? vilkarUtfallType.IKKE_VURDERT : vilkarUtfallType.OPPFYLT;
   }
   return vilkarUtfallType.IKKE_VURDERT;
 };
@@ -95,11 +95,11 @@ const useStandardProsessPanelProps = (
   }, [value.behandling.versjon]);
 
   const aksjonspunkterForSteg = useMemo(() => (data?.aksjonspunkter && aksjonspunktKoder
-    ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon.kode)) : []),
+    ? data.aksjonspunkter.filter((ap) => aksjonspunktKoder.includes(ap.definisjon)) : []),
   [data?.aksjonspunkter, aksjonspunktKoder]);
 
   const vilkarForSteg = useMemo(() => (data?.vilkar && vilkarKoder
-    ? data.vilkar.filter((v) => vilkarKoder.includes(v.vilkarType.kode)) : []),
+    ? data.vilkar.filter((v) => vilkarKoder.includes(v.vilkarType)) : []),
   [data?.vilkar, vilkarKoder]);
 
   const isReadOnly = erReadOnly(value.behandling, aksjonspunkterForSteg, vilkarForSteg, value.rettigheter, value.hasFetchError);
@@ -107,7 +107,7 @@ const useStandardProsessPanelProps = (
   const alleMerknaderFraBeslutter = useMemo(() => getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkterForSteg),
     [value.behandling.versjon, aksjonspunkterForSteg]);
 
-  const harApneAksjonspunkter = aksjonspunkterForSteg.some((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET && ap.kanLoses);
+  const harApneAksjonspunkter = aksjonspunkterForSteg.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET && ap.kanLoses);
 
   const status = useMemo(() => finnStatus(vilkarForSteg, aksjonspunkterForSteg), [vilkarForSteg, aksjonspunkterForSteg]);
 

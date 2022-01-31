@@ -76,9 +76,7 @@ describe('<TimeLineInfo>', () => {
               navn: 'Statoil',
               identifikator: '987',
             },
-            uttakArbeidType: {
-              kode: 'FRILANS',
-            },
+            uttakArbeidType: 'FRILANS',
           },
         },
         ],

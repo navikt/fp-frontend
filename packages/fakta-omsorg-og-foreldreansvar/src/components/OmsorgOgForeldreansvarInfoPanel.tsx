@@ -34,11 +34,11 @@ const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   alleKodeverk: AlleKodeverk,
 ): FormValues => {
-  const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.OMSORGSOVERTAKELSE
-    || ap.definisjon.kode === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR);
+  const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.OMSORGSOVERTAKELSE
+    || ap.definisjon === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR);
   return {
     ...OmsorgOgForeldreansvarFaktaForm.buildInitialValues(soknad, gjeldendeFamiliehendelse,
-      innvilgetRelatertTilgrensendeYtelserForAnnenForelder, getKodeverknavnFn(alleKodeverk, kodeverkTyper)),
+      innvilgetRelatertTilgrensendeYtelserForAnnenForelder, getKodeverknavnFn(alleKodeverk)),
     ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkt),
   };
 };
@@ -87,7 +87,7 @@ export const OmsorgOgForeldreansvarInfoPanel: FunctionComponent<PureOwnProps> = 
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
-  const erAksjonspunktForeldreansvar = aksjonspunkter[0].definisjon.kode === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR;
+  const erAksjonspunktForeldreansvar = aksjonspunkter[0].definisjon === aksjonspunktCodes.AVKLAR_VILKAR_FOR_FORELDREANSVAR;
 
   return (
     <Form formMethods={formMethods} onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkter[0]))}>

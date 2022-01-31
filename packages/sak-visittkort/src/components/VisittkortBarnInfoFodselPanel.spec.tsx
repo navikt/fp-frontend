@@ -10,10 +10,7 @@ const intlMock = getIntlMock(messages);
 
 describe('<VisittkortBarnInfoFodselPanel>', () => {
   const familiehendelse = {
-    hendelseType: {
-      kode: familieHendelseType.TERMIN,
-      kodeverk: '',
-    },
+    hendelseType: familieHendelseType.TERMIN,
     hendelseDato: '2020-01-21',
     antallBarn: 1,
     dødfødsel: false,
@@ -37,10 +34,7 @@ describe('<VisittkortBarnInfoFodselPanel>', () => {
         <VisittkortBarnInfoFodselPanel
           familiehendelse={{
             ...familiehendelse,
-            hendelseType: {
-              kode: familieHendelseType.FODSEL,
-              kodeverk: '',
-            },
+            hendelseType: familieHendelseType.FODSEL,
           }}
         />
       </RawIntlProvider>,
@@ -55,10 +49,7 @@ describe('<VisittkortBarnInfoFodselPanel>', () => {
         <VisittkortBarnInfoFodselPanel
           familiehendelse={{
             ...familiehendelse,
-            hendelseType: {
-              kode: familieHendelseType.FODSEL,
-              kodeverk: '',
-            },
+            hendelseType: familieHendelseType.FODSEL,
             dødfødsel: true,
           }}
         />
@@ -74,10 +65,7 @@ describe('<VisittkortBarnInfoFodselPanel>', () => {
       <RawIntlProvider value={intlMock}>
         <VisittkortBarnInfoFodselPanel
           familiehendelse={{
-            hendelseType: {
-              kode: familieHendelseType.FODSEL,
-              kodeverk: '',
-            },
+            hendelseType: familieHendelseType.FODSEL,
             antallBarn: 0,
             dødfødsel: false,
           }}

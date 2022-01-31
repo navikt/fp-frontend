@@ -1,5 +1,3 @@
-import { Kodeverk } from '@fpsak-frontend/types';
-
 type MedlemskapBekreftetPeriode = {
   vurderingsdato: string;
   aksjonspunkter: string[];
@@ -8,7 +6,7 @@ type MedlemskapBekreftetPeriode = {
   oppholdsrettVurdering: boolean;
   lovligOppholdVurdering: boolean;
   fodselsdato?: string;
-  medlemskapManuellVurderingType: Kodeverk;
+  medlemskapManuellVurderingType: string;
   omsorgsovertakelseDato?: string;
   begrunnelse: string;
 };

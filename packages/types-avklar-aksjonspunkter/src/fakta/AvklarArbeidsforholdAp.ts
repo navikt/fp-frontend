@@ -1,5 +1,4 @@
 import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Kodeverk } from '@fpsak-frontend/types';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
@@ -7,7 +6,7 @@ type ArbeidsforholdPermisjon = Readonly<{
   permisjonFom?: string;
   permisjonTom?: string;
   permisjonsprosent?: number;
-  type?: Kodeverk;
+  type?: string;
 }>
 
 type AvklarArbeidsforholdAp = {

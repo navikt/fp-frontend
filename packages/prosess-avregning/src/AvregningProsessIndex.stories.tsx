@@ -15,17 +15,13 @@ import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter
 
 const fagsak = {
   saksnummer: '123',
-  fagsakYtelseType: {
-    kode: fagsakYtelseType.FORELDREPENGER,
-  },
+  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
 } as Fagsak;
 
 const behandling = {
   uuid: '1',
   versjon: 1,
-  sprakkode: {
-    kode: 'NO',
-  },
+  sprakkode: 'NO',
 } as Behandling;
 
 const simuleringResultat = {
@@ -37,18 +33,12 @@ const simuleringResultat = {
     sumInntrekk: -10899,
     ingenPerioderMedAvvik: false,
     perioderPerMottaker: [{
-      mottakerType: {
-        kode: mottakerTyper.ARBG,
-        kodeverk: 'MOTTAKER_TYPE',
-      },
+      mottakerType: mottakerTyper.ARBG,
       mottakerIdentifikator: '123',
       mottakerNummer: 'test',
       mottakerNavn: 'test',
       resultatPerFagområde: [{
-        fagOmrådeKode: {
-          kode: 'FP',
-          kodeverk: 'FAG_OMRAADE_KODE',
-        },
+        fagOmrådeKode: 'FP',
         rader: [{
           feltnavn: 'nyttBeløp',
           resultaterPerMåned: [{
@@ -142,9 +132,7 @@ const Template: Story<{
 export const AksjonspunktVurderFeilutbetaling = Template.bind({});
 AksjonspunktVurderFeilutbetaling.args = {
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.VURDER_FEILUTBETALING,
-    },
+    definisjon: aksjonspunktCodes.VURDER_FEILUTBETALING,
     begrunnelse: undefined,
   }] as Aksjonspunkt[],
   isAksjonspunktOpen: true,
@@ -157,10 +145,7 @@ SimuleringspanelUtenAksjonspunkt.args = {
   isAksjonspunktOpen: false,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   tilbakekrevingvalg: {
-    videreBehandling: {
-      kode: tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
-      kodeverk: '',
-    },
+    videreBehandling: tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
     varseltekst: 'varsel-eksempel',
   } as TilbakekrevingValg,
 };

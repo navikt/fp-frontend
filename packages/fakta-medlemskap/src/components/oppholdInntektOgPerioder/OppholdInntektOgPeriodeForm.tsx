@@ -5,7 +5,6 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { FaktaBegrunnelseTextField } from '@fpsak-frontend/fakta-felles';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -146,17 +145,17 @@ const buildInitialValues = createSelector([
 (valgtPeriode, alleAksjonspunkter, soknad, medlemskapPerioder, alleKodeverk): FormValues => {
   const aksjonspunkter = alleAksjonspunkter
     .filter((ap) => valgtPeriode.aksjonspunkter
-      .includes(ap.definisjon.kode) || ap.definisjon.kode === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP);
+      .includes(ap.definisjon) || ap.definisjon === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP);
   let oppholdValues = {};
   let confirmValues = {};
   if (hasAksjonspunkt(AVKLAR_OPPHOLDSRETT, valgtPeriode.aksjonspunkter) || hasAksjonspunkt(AVKLAR_LOVLIG_OPPHOLD, valgtPeriode.aksjonspunkter)) {
     oppholdValues = StatusForBorgerFaktaPanel.buildInitialValues(valgtPeriode, aksjonspunkter);
   }
   if (valgtPeriode.aksjonspunkter.length > 0) {
-    const valgtPeriodeAps = aksjonspunkter.filter((ap) => valgtPeriode.aksjonspunkter.some((vpap) => vpap === ap.definisjon.kode));
+    const valgtPeriodeAps = aksjonspunkter.filter((ap) => valgtPeriode.aksjonspunkter.some((vpap) => vpap === ap.definisjon));
     confirmValues = FaktaBegrunnelseTextField.buildInitialValues(valgtPeriodeAps);
   }
-  const kodeverkFn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+  const kodeverkFn = getKodeverknavnFn(alleKodeverk);
   return {
     ...valgtPeriode,
     ...OppholdINorgeOgAdresserFaktaPanel.buildInitialValues(soknad, valgtPeriode, aksjonspunkter),

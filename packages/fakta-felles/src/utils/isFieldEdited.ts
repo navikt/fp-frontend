@@ -1,9 +1,7 @@
-import {
-  FamilieHendelse, Kodeverk, Soknad,
-} from '@fpsak-frontend/types';
+import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 import { diff } from '@fpsak-frontend/utils';
 
-const hasValue = (value: string | number | boolean | Kodeverk): boolean => value !== null && value !== undefined;
+const hasValue = (value: string | number | boolean): boolean => value !== null && value !== undefined;
 
 const isNotEqual = (value1: number | string, value2: number | string): boolean => hasValue(value2) && value1 !== value2;
 

@@ -4,7 +4,7 @@ import { Element, Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
 import {
-  Behandlingsresultat, BeregningsresultatFp, BeregningsresultatEs, Kodeverk,
+  Behandlingsresultat, BeregningsresultatFp, BeregningsresultatEs,
 } from '@fpsak-frontend/types';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { formatCurrencyWithKr } from '@fpsak-frontend/utils';
@@ -16,7 +16,7 @@ interface OwnProps {
   resultatstruktur?: BeregningsresultatFp | BeregningsresultatEs;
   behandlingsresultat: Behandlingsresultat;
   ytelseTypeKode: string;
-  språkKode?: Kodeverk;
+  språkKode?: string;
   isReadOnly: boolean;
   skalBrukeOverstyrendeFritekstBrev: boolean;
   beregningErManueltFastsatt: boolean;

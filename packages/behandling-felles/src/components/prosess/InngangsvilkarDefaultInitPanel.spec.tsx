@@ -17,10 +17,7 @@ import InngangsvilkarDefaultInitPanel from './InngangsvilkarDefaultInitPanel';
 const behandling = {
   uuid: '1',
   versjon: 2,
-  status: {
-    kode: behandlingStatus.OPPRETTET,
-    kodeverk: '',
-  },
+  status: behandlingStatus.OPPRETTET,
   behandlingPaaVent: false,
 } as Behandling;
 
@@ -36,10 +33,7 @@ const defaultProps = {
   isReadOnly: false,
   readOnlySubmitButton: false,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
     erAktivt: true,
     kanLoses: true,
   }] as Aksjonspunkt[],
@@ -92,20 +86,11 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
   it('skal vise panel', async () => {
     jest.spyOn(Felles, 'default').mockImplementation(() => defaultProps);
     const vilkar = [{
-      vilkarType: {
-        kode: vilkarType.MEDLEMSKAPSVILKARET,
-        kodeverk: '',
-      },
+      vilkarType: vilkarType.MEDLEMSKAPSVILKARET,
     } as Vilkar];
     const aksjonspunkter = [{
-      definisjon: {
-        kode: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+      status: aksjonspunktStatus.OPPRETTET,
       kanLoses: true,
       erAktivt: true,
     }] as Aksjonspunkt[];

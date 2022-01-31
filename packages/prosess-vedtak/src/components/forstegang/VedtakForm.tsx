@@ -69,7 +69,8 @@ export type ForhandsvisData = {
   dokumentMal?: string;
   tittel?: string;
   gjelderVedtak: boolean;
-  vedtaksbrev?: { kode: string };
+  vedtaksbrev?: string;
+  automatiskVedtaksbrev?: boolean;
 }
 
 const hentForhåndsvisManueltBrevCallback = (
@@ -91,9 +92,8 @@ const hentForhåndsvisManueltBrevCallback = (
       dokumentMal: skalOverstyre ? dokumentMalType.FRITKS : undefined,
       tittel: skalOverstyre ? overskrift : undefined,
       gjelderVedtak: true,
-      vedtaksbrev: !skalOverstyre ? {
-        kode: 'AUTOMATISK',
-      } : undefined,
+      vedtaksbrev: !skalOverstyre ? 'AUTOMATISK' : undefined,
+      automatiskVedtaksbrev: !skalOverstyre ? true : undefined,
     };
     forhåndsvisCallback(data);
   }
@@ -103,19 +103,19 @@ const erÅrsakTypeBehandlingEtterKlage = (
   behandlingArsakTyper: Behandling['behandlingÅrsaker'] = [],
 ): boolean => behandlingArsakTyper
   .map(({ behandlingArsakType }) => behandlingArsakType)
-  .some((bt) => bt.kode === klageBehandlingArsakType.ETTER_KLAGE
-    || bt.kode === klageBehandlingArsakType.KLAGE_U_INNTK
-    || bt.kode === klageBehandlingArsakType.KLAGE_M_INNTK);
+  .some((bt) => bt === klageBehandlingArsakType.ETTER_KLAGE
+    || bt === klageBehandlingArsakType.KLAGE_U_INNTK
+    || bt === klageBehandlingArsakType.KLAGE_M_INNTK);
 
 const finnVedtakstatusTekst = (behandlingsresultat: Behandling['behandlingsresultat'], intl: IntlShape, ytelseTypeKode: string): string => {
-  const erInnvilget = isInnvilget(behandlingsresultat.type.kode);
-  const erAvslatt = isAvslag(behandlingsresultat.type.kode);
+  const erInnvilget = isInnvilget(behandlingsresultat.type);
+  const erAvslatt = isAvslag(behandlingsresultat.type);
 
   if (erInnvilget) {
-    return intl.formatMessage({ id: finnInnvilgetResultatText(behandlingsresultat.type.kode, ytelseTypeKode) });
+    return intl.formatMessage({ id: finnInnvilgetResultatText(behandlingsresultat.type, ytelseTypeKode) });
   }
   if (erAvslatt) {
-    return intl.formatMessage({ id: finnAvslagResultatText(behandlingsresultat.type.kode, ytelseTypeKode) });
+    return intl.formatMessage({ id: finnAvslagResultatText(behandlingsresultat.type, ytelseTypeKode) });
   }
   return '';
 };
@@ -151,7 +151,7 @@ const buildInitialValues = (
   beregningErManueltFastsatt: boolean,
 ): FormValues => ({
   beregningErManueltFastsatt,
-  aksjonspunktKoder: aksjonspunkter.filter((ap) => ap.kanLoses).map((ap) => ap.definisjon.kode),
+  aksjonspunktKoder: aksjonspunkter.filter((ap) => ap.kanLoses).map((ap) => ap.definisjon),
   overskrift: decodeHtmlEntity(behandling.behandlingsresultat.overskrift),
   brødtekst: decodeHtmlEntity(behandling.behandlingsresultat.fritekstbrev),
   begrunnelse: finnBegrunnelse(behandling, beregningErManueltFastsatt),
@@ -260,7 +260,7 @@ const VedtakForm: FunctionComponent<OwnProps> = ({
 
           return erAvslatt ? (
             <VedtakAvslagPanel
-              behandlingStatusKode={status.kode}
+              behandlingStatusKode={status}
               behandlingsresultat={behandlingsresultat}
               isReadOnly={readOnly}
               ytelseTypeKode={ytelseTypeKode}

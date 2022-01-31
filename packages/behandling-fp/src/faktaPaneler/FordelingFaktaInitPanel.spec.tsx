@@ -23,16 +23,10 @@ describe('<FordelingFaktaInitPanel>', () => {
     const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any> & FaktaPanelInitProps>(FaktaDefaultInitPanel);
 
     const fordelingAp = [{
-      definisjon: {
-        kode: aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG,
     } as Aksjonspunkt];
     const annetAp = [{
-      definisjon: {
-        kode: aksjonspunktCodes.ADOPSJONSDOKUMENTAJON,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.ADOPSJONSDOKUMENTAJON,
     } as Aksjonspunkt];
 
     expect(panel.props().skalPanelVisesIMeny({ aksjonspunkter: fordelingAp })).toBe(true);

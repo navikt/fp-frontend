@@ -14,14 +14,8 @@ describe('<BostedFaktaView>', () => {
   const barn = {
     navn: 'Barn Utvikler',
     aktoerId: '1',
-    kjønn: {
-      kode: '',
-      kodeverk: '',
-    },
-    sivilstand: {
-      kode: 'UGIF',
-      kodeverk: '',
-    },
+    kjønn: '',
+    sivilstand: 'UGIF',
     adresser: [],
   } as PersonopplysningerBasis;
 
@@ -29,14 +23,8 @@ describe('<BostedFaktaView>', () => {
     bruker: {
       navn: 'Kari Utvikler',
       aktoerId: '1',
-      kjønn: {
-        kode: '',
-        kodeverk: '',
-      },
-      sivilstand: {
-        kode: 'UGIF',
-        kodeverk: 'Ugift',
-      },
+      kjønn: '',
+      sivilstand: 'UGIF',
       adresser: [],
     },
     barn: [
@@ -73,14 +61,8 @@ describe('<BostedFaktaView>', () => {
     const ektefelle = {
       navn: 'Ola Utvikler',
       aktoerId: '1',
-      kjønn: {
-        kode: '',
-        kodeverk: '',
-      },
-      sivilstand: {
-        kode: 'UGIF',
-        kodeverk: '',
-      },
+      kjønn: '',
+      sivilstand: 'UGIF',
       adresser: [],
     } as PersonopplysningerBasis;
     const wrapper = shallow(<BostedFaktaView.WrappedComponent

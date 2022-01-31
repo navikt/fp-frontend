@@ -16,10 +16,7 @@ const lagPeriode = () => ({
   redusertPrAar: 360000,
   beregningsgrunnlagPrStatusOgAndel: [{
     erNyIArbeidslivet: true,
-    aktivitetStatus: {
-      kode: 'SN',
-      kodeverk: 'AKTIVITET_STATUS',
-    },
+    aktivitetStatus: 'SN',
   }],
   andelerLagtTilManueltIForrige: [],
 });
@@ -33,26 +30,15 @@ const lagBG = (avvikPromille?: number): Beregningsgrunnlag => ({
     sammenligningsgrunnlagFom: '2018-09-01',
     sammenligningsgrunnlagTom: '2019-10-31',
     avvikProsent: 27.5,
-    sammenligningsgrunnlagType: {
-      kode: 'SAMMENLIGNING_AT',
-      kodeverk: 'test',
-    },
+    sammenligningsgrunnlagType: 'SAMMENLIGNING_AT',
     differanseBeregnet: 12100,
     avvikPromille,
   } as SammenligningsgrunlagProp] : null,
 } as Beregningsgrunnlag);
 
 const lagAP = (kode: string) => ({
-  definisjon: {
-    kode,
-    kodeverk: 'test',
-    navn: 'apNavn2',
-  },
-  status: {
-    kode: 'OPPR',
-    kodeverk: 'test',
-    navn: 'statusNavn2',
-  },
+  definisjon: kode,
+  status: 'OPPR',
   kanLoses: true,
   erAktivt: true,
 });

@@ -1,8 +1,9 @@
 import { RestApiConfigBuilder, createRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerWrapper, Behandling, BeregningsresultatEs, FamilieHendelse, FamilieHendelseSamling, InntektArbeidYtelse,
-  Kodeverk, Medlemskap, Personoversikt, SimuleringResultat, Soknad, TilbakekrevingValg, Verge, Vilkar,
+  Aksjonspunkt, ArbeidsgiverOpplysningerWrapper, Behandling, BeregningsresultatEs, FamilieHendelse,
+  FamilieHendelseSamling, ForhåndsvisMeldingParams, InntektArbeidYtelse, Medlemskap, Personoversikt,
+  SimuleringResultat, Soknad, TilbakekrevingValg, Verge, Vilkar,
 } from '@fpsak-frontend/types';
 import { NyBehandlendeEnhetParams, SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
@@ -11,7 +12,7 @@ export const EsBehandlingApiKeys = {
   UPDATE_ON_HOLD: new RestKey<void, SettPaVentParams>('UPDATE_ON_HOLD'),
   SAVE_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_AKSJONSPUNKT'),
   SAVE_OVERSTYRT_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_OVERSTYRT_AKSJONSPUNKT'),
-  PREVIEW_MESSAGE: new RestKey<any, any>('PREVIEW_MESSAGE'),
+  PREVIEW_MESSAGE: new RestKey<any, ForhåndsvisMeldingParams>('PREVIEW_MESSAGE'),
   PREVIEW_TILBAKEKREVING_MESSAGE: new RestKey<Behandling, any>('PREVIEW_TILBAKEKREVING_MESSAGE'),
   AKSJONSPUNKTER: new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER'),
   VILKAR: new RestKey<Vilkar[], void>('VILKAR'),
@@ -30,7 +31,7 @@ export const EsBehandlingApiKeys = {
   BEHANDLING_NY_BEHANDLENDE_ENHET: new RestKey<void, NyBehandlendeEnhetParams>('BEHANDLING_NY_BEHANDLENDE_ENHET'),
   HENLEGG_BEHANDLING: new RestKey<void, { behandlingUuid: string, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>('HENLEGG_BEHANDLING'),
   RESUME_BEHANDLING: new RestKey<Behandling, { behandlingUuid: string, behandlingVersjon: number }>('RESUME_BEHANDLING'),
-  BEHANDLING_ON_HOLD: new RestKey<void, { behandlingUuid: string, behandlingVersjon: number, frist: string, ventearsak: Kodeverk }>('BEHANDLING_ON_HOLD'),
+  BEHANDLING_ON_HOLD: new RestKey<void, { behandlingUuid: string, behandlingVersjon: number, frist: string, ventearsak: string }>('BEHANDLING_ON_HOLD'),
   OPEN_BEHANDLING_FOR_CHANGES: new RestKey<Behandling, { behandlingUuid: string, behandlingVersjon: number }>('OPEN_BEHANDLING_FOR_CHANGES'),
   VERGE_OPPRETT: new RestKey<Behandling, any>('VERGE_OPPRETT'),
   VERGE_FJERN: new RestKey<Behandling, any>('VERGE_FJERN'),

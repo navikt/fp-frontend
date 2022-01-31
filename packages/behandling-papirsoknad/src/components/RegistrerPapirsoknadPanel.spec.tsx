@@ -16,14 +16,8 @@ import SoknadTypePickerForm from './SoknadTypePickerForm';
 
 const fagsak = {
   saksnummer: '123456',
-  fagsakYtelseType: {
-    kode: fagsakYtelseType.FORELDREPENGER,
-    kodeverk: 'YTELSE_TYPE',
-  },
-  status: {
-    kode: fagsakStatus.UNDER_BEHANDLING,
-    kodeverk: 'FAGSAK_STATUS',
-  },
+  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+  status: fagsakStatus.UNDER_BEHANDLING,
 } as Fagsak;
 
 describe('<RegistrerPapirsoknadPanel>', () => {
@@ -65,10 +59,7 @@ describe('<RegistrerPapirsoknadPanel>', () => {
     const wrapper = shallow(<RegistrerPapirsoknadPanel
       fagsak={{
         ...fagsak,
-        fagsakYtelseType: {
-          kode: fagsakYtelseType.SVANGERSKAPSPENGER,
-          kodeverk: 'YTELSE_TYPE',
-        },
+        fagsakYtelseType: fagsakYtelseType.SVANGERSKAPSPENGER,
       }}
       fagsakPersonnummer="12343541"
       kodeverk={{} as AlleKodeverk}

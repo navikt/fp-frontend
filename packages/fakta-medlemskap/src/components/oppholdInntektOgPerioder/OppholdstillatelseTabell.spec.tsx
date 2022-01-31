@@ -20,16 +20,10 @@ describe('<OppholdstillatelseTabell>', () => {
       oppholdstillatelse={[{
         fom: '2019-01-01',
         tom: '2021-10-13',
-        oppholdstillatelseType: {
-          kode: 'MIDLERTIDIG',
-          kodeverk: '',
-        },
+        oppholdstillatelseType: 'MIDLERTIDIG',
       }, {
         tom: '2021-01-13',
-        oppholdstillatelseType: {
-          kode: 'MIDLERTIDIG',
-          kodeverk: '',
-        },
+        oppholdstillatelseType: 'MIDLERTIDIG',
       }]}
       alleKodeverk={{
         [kodeverkTyper.OPPHOLDSTILLATELSE_TYPE]: [{

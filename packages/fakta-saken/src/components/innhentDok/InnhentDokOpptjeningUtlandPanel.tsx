@@ -75,7 +75,7 @@ const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps> = ({
       <AksjonspunktBox
         className={styles.aksjonspunktMargin}
         erAksjonspunktApent={harApneAksjonspunkter}
-        erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[aksjonspunkt.definisjon.kode]?.notAccepted}
+        erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted}
       >
         <Element>
           <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentelseDok" />

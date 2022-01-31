@@ -3,8 +3,9 @@ import {
 } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
-  Aksjonspunkt, Aktor, AlleKodeverk, AlleKodeverkTilbakekreving, Behandling, BehandlingAppKontekst, Dokument, Fagsak, FagsakPersoner, Historikkinnslag,
-  KlageVurdering, NavAnsatt, Risikoklassifisering, TotrinnskontrollSkjermlenkeContext,
+  Aksjonspunkt, Aktor, AlleKodeverk, AlleKodeverkTilbakekreving, Behandling, BehandlingAppKontekst, Dokument,
+  Fagsak, FagsakPersoner, ForhåndsvisMeldingParams, Historikkinnslag, KlageVurdering, NavAnsatt,
+  Risikoklassifisering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
 import SakRettigheter from '../fagsak/sakRettigheterTsType';
@@ -82,7 +83,7 @@ export const FpsakApiKeys = {
   KAN_TILBAKEKREVING_OPPRETTES: new RestKey<boolean, { saksnummer: string; uuid: string; }>('KAN_TILBAKEKREVING_OPPRETTES'),
   KAN_TILBAKEKREVING_REVURDERING_OPPRETTES: new RestKey<boolean, { uuid: string; }>('KAN_TILBAKEKREVING_REVURDERING_OPPRETTES'),
   PREVIEW_MESSAGE_TILBAKEKREVING: new RestKey<any, any>('PREVIEW_MESSAGE_TILBAKEKREVING'),
-  PREVIEW_MESSAGE_FORMIDLING: new RestKey<any, any>('PREVIEW_MESSAGE_FORMIDLING'),
+  PREVIEW_MESSAGE_FORMIDLING: new RestKey<any, ForhåndsvisMeldingParams>('PREVIEW_MESSAGE_FORMIDLING'),
   PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE: new RestKey<any, any>('PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE'),
 };
 

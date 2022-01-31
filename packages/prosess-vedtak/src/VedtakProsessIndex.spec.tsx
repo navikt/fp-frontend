@@ -35,9 +35,8 @@ describe('<VedtakProsessIndex>', () => {
       fritekst: undefined,
       gjelderVedtak: true,
       tittel: undefined,
-      vedtaksbrev: {
-        kode: 'AUTOMATISK',
-      },
+      automatiskVedtaksbrev: true,
+      vedtaksbrev: 'AUTOMATISK',
     });
 
     userEvent.click(screen.getByText('Fatt vedtak'));

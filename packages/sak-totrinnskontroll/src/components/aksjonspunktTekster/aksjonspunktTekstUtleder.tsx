@@ -9,7 +9,7 @@ import klageVurderingOmgjoerCodes from '@fpsak-frontend/kodeverk/src/klageVurder
 import aksjonspunktCodes, { isUttakAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import arbeidsforholdHandlingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdHandlingType';
 import {
-  Kodeverk, KodeverkMedNavn, KlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollArbeidsforhold,
+  KodeverkMedNavn, KlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollArbeidsforhold,
 } from '@fpsak-frontend/types';
 
 import totrinnskontrollaksjonspunktTextCodes, { totrinnsTilbakekrevingkontrollaksjonspunktTextCodes } from '../../totrinnskontrollaksjonspunktTextCodes';
@@ -35,7 +35,6 @@ export const getFaktaOmArbeidsforholdMessages = (
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
 ): ReactElement[] => {
   const formattedMessages = [];
-  const { kode } = arbeidforholdDto.arbeidsforholdHandlingType;
   if (arbeidforholdDto.brukPermisjon === true) {
     formattedMessages.push(<FormattedMessage
       id="ToTrinnsForm.FaktaOmArbeidsforhold.SoekerErIPermisjon"
@@ -52,11 +51,11 @@ export const getFaktaOmArbeidsforholdMessages = (
         b: (chunks: any) => <b>{chunks}</b>,
       }}
     />);
-    if (kode === arbeidsforholdHandlingType.BRUK) {
+    if (arbeidforholdDto.arbeidsforholdHandlingType === arbeidsforholdHandlingType.BRUK) {
       return formattedMessages;
     }
   }
-  const type = arbeidsforholdHandlingTyper.find((t) => t.kode === kode);
+  const type = arbeidsforholdHandlingTyper.find((t) => t.kode === arbeidforholdDto.arbeidsforholdHandlingType);
   const melding = type !== undefined && type !== null ? type.navn : '';
   formattedMessages.push(<FormattedMessage id="ToTrinnsForm.FaktaOmArbeidsforhold.Melding" values={{ melding, b: (chunks: any) => <b>{chunks}</b> }} />);
   return formattedMessages;
@@ -166,7 +165,7 @@ const getFaktaOmBeregningText = (
     return [];
   }
 
-  return beregningDto.faktaOmBeregningTilfeller.flatMap(({ kode }) => {
+  return beregningDto.faktaOmBeregningTilfeller.flatMap((kode) => {
     const t = faktaOmBeregningTilfeller.find((tilfelle) => tilfelle.kode === kode);
     return t ? [<div>{t.navn}</div>] : [];
   });
@@ -182,7 +181,7 @@ const getTextForKlageHelper = (
   klageVurderingResultat: KlageVurdering['klageVurderingResultatNK'] | KlageVurdering['klageVurderingResultatNFP'],
 ): ReactElement => {
   let aksjonspunktTextId = '';
-  switch (klageVurderingResultat?.klageVurdering?.kode) {
+  switch (klageVurderingResultat?.klageVurdering) {
     case klageVurderingCodes.STADFESTE_YTELSESVEDTAK:
       aksjonspunktTextId = 'ToTrinnsForm.Klage.StadfesteYtelsesVedtak';
       break;
@@ -197,8 +196,8 @@ const getTextForKlageHelper = (
       break;
     case klageVurderingCodes.MEDHOLD_I_KLAGE:
       if (klageVurderingResultat.klageVurderingOmgjoer
-        && klageVurderingResultat.klageVurderingOmgjoer.kode !== klageVurderingOmgjoerCodes.UDEFINERT) {
-        aksjonspunktTextId = omgjoerTekstMap[klageVurderingResultat.klageVurderingOmgjoer.kode];
+        && klageVurderingResultat.klageVurderingOmgjoer !== klageVurderingOmgjoerCodes.UDEFINERT) {
+        aksjonspunktTextId = omgjoerTekstMap[klageVurderingResultat.klageVurderingOmgjoer];
         break;
       }
       aksjonspunktTextId = 'VedtakForm.ResultatKlageMedhold';
@@ -209,8 +208,8 @@ const getTextForKlageHelper = (
   return <FormattedMessage id={aksjonspunktTextId} />;
 };
 
-const getTextForKlage = (behandlingStaus: Kodeverk, klagebehandlingVurdering?: KlageVurdering): ReactElement[] => {
-  if (behandlingStaus.kode === behandlingStatusCode.FATTER_VEDTAK) {
+const getTextForKlage = (behandlingStaus: string, klagebehandlingVurdering?: KlageVurdering): ReactElement[] => {
+  if (behandlingStaus === behandlingStatusCode.FATTER_VEDTAK) {
     if (klagebehandlingVurdering?.klageVurderingResultatNK) {
       return [getTextForKlageHelper(klagebehandlingVurdering.klageVurderingResultatNK)];
     }
@@ -231,7 +230,7 @@ const erKlageAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt): boolea
 
 const getAksjonspunkttekst = (
   isForeldrepenger: boolean,
-  behandlingStatus: Kodeverk,
+  behandlingStatus: string,
   arbeidsforholdHandlingTyper: KodeverkMedNavn[],
   faktaOmBeregningTilfeller: KodeverkMedNavn[],
   erTilbakekreving: boolean,

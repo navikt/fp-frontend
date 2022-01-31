@@ -27,7 +27,7 @@ import styles from './omsorgFaktaForm.less';
 const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG, MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = aksjonspunktCodes;
 
 const getAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt[] => aksjonspunkter
-  .filter((ap) => ap.definisjon.kode === aksjonspunktCode);
+  .filter((ap) => ap.definisjon === aksjonspunktCode);
 
 export type FormValues = {
   aleneomsorg?: boolean;
@@ -174,10 +174,10 @@ OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonsp
   let aleneomsorg = null;
   let omsorg = null;
 
-  if (aleneomsorgAp.length > 0 && !isAksjonspunktOpen(aleneomsorgAp[0].status.kode)) {
+  if (aleneomsorgAp.length > 0 && !isAksjonspunktOpen(aleneomsorgAp[0].status)) {
     aleneomsorg = ytelsefordeling.aleneOmsorgPerioder && ytelsefordeling.aleneOmsorgPerioder.length > 0;
   }
-  if (omsorgAp.length > 0 && !isAksjonspunktOpen(omsorgAp[0].status.kode)) {
+  if (omsorgAp.length > 0 && !isAksjonspunktOpen(omsorgAp[0].status)) {
     omsorg = !(ytelsefordeling.ikkeOmsorgPerioder && ytelsefordeling.ikkeOmsorgPerioder.length > 0);
   }
 

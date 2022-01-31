@@ -53,10 +53,7 @@ export const LavRisikoklassifisering = Template.bind({});
 LavRisikoklassifisering.args = {
   isPanelOpen: false,
   risikoklassifisering: {
-    kontrollresultat: {
-      kode: kontrollresultatKode.IKKE_HOY,
-      kodeverk: '',
-    },
+    kontrollresultat: kontrollresultatKode.IKKE_HOY,
   },
   submitAksjonspunkt: action('button-click') as () => Promise<any>,
 };
@@ -65,21 +62,12 @@ export const HøyRisikoklassifisering = Template.bind({});
 HøyRisikoklassifisering.args = {
   isPanelOpen: true,
   aksjonspunkt: {
-    definisjon: {
-      kode: aksjonspunktCodes.VURDER_FARESIGNALER,
-      kodeverk: '',
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-      kodeverk: '',
-    },
+    definisjon: aksjonspunktCodes.VURDER_FARESIGNALER,
+    status: aksjonspunktStatus.OPPRETTET,
     begrunnelse: undefined,
   } as Aksjonspunkt,
   risikoklassifisering: {
-    kontrollresultat: {
-      kode: kontrollresultatKode.HOY,
-      kodeverk: '',
-    },
+    kontrollresultat: kontrollresultatKode.HOY,
     medlFaresignaler: {
       faresignaler: ['Faresignal 1'],
     },

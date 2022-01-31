@@ -133,12 +133,12 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
 const StatusForBorgerFaktaPanel = connect(mapStateToProps)(StatusForBorgerFaktaPanelImpl);
 
 const getApKode = (aksjonspunkter: Aksjonspunkt[]): string => aksjonspunkter
-  .map((ap) => ap.definisjon.kode)
+  .map((ap) => ap.definisjon)
   .filter((kode) => kode === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT || kode === aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD)[0];
 
 const getEosBorger = (periode: PeriodeMedId, aksjonspunkter: Aksjonspunkt[]): boolean => (periode.erEosBorger || periode.erEosBorger === false
   ? periode.erEosBorger
-  : aksjonspunkter.some((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT));
+  : aksjonspunkter.some((ap: Aksjonspunkt) => ap.definisjon === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT));
 
 const getOppholdsrettVurdering = (periode: PeriodeMedId): boolean | undefined => (periode.oppholdsrettVurdering
 || periode.oppholdsrettVurdering === false ? periode.oppholdsrettVurdering : undefined);
@@ -150,12 +150,12 @@ StatusForBorgerFaktaPanel.buildInitialValues = (periode: PeriodeMedId, aksjonspu
   const erEosBorger = getEosBorger(periode, aksjonspunkter);
 
   const closedAp = aksjonspunkter
-    .filter((ap) => periode.aksjonspunkter.includes(ap.definisjon.kode)
+    .filter((ap) => periode.aksjonspunkter.includes(ap.definisjon)
       || (periode.aksjonspunkter.length > 0
         && periode.aksjonspunkter.some((pap) => pap === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT
           || pap === aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD)
-        && ap.definisjon.kode === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP))
-    .filter((ap) => !isAksjonspunktOpen(ap.status.kode));
+        && ap.definisjon === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP))
+    .filter((ap) => !isAksjonspunktOpen(ap.status));
 
   return {
     erEosBorger,

@@ -32,7 +32,7 @@ const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   behandlingResultatstruktur?: BeregningsresultatEs,
 ): FormValues => {
-  const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCode.OVERSTYR_BEREGNING);
+  const aksjonspunkt = aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCode.OVERSTYR_BEREGNING);
   return {
     begrunnelse: decodeHtmlEntity(aksjonspunkt && aksjonspunkt.begrunnelse ? aksjonspunkt.begrunnelse : ''),
     beregnetTilkjentYtelse: behandlingResultatstruktur.beregnetTilkjentYtelse,
@@ -88,7 +88,7 @@ const BeregningsresultatEngangsstonadForm: FunctionComponent<OwnProps> = ({
     toggleOverstyring((oldArray) => [...oldArray, aksjonspunktCode.OVERSTYR_BEREGNING]);
   }, []);
 
-  const harOverstyringAksjonspunkt = aksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktCode.OVERSTYR_BEREGNING) || false;
+  const harOverstyringAksjonspunkt = aksjonspunkter.some((ap) => ap.definisjon === aksjonspunktCode.OVERSTYR_BEREGNING) || false;
 
   return (
     <Form

@@ -12,30 +12,18 @@ describe('<UttakInfo>', () => {
     id: 1,
     fom: '2018-01-01',
     tom: '2018-02-01',
-    periodeResultatType: {
-      kode: '',
-      kodeverk: '',
-    },
+    periodeResultatType: '',
     periodeResultatÅrsak: {
       kode: '',
       kodeverk: '',
     },
     flerbarnsdager: false,
-    utsettelseType: {
-      kode: '-',
-    },
-    periodeType: {
-      kode: '-',
-    },
-    oppholdÅrsak: {
-      kode: '-',
-    },
+    utsettelseType: '-',
+    periodeType: '-',
+    oppholdÅrsak: '-',
     aktiviteter: [{
       utbetalingsgrad: 100,
-      stønadskontoType: {
-        kode: '',
-        kodeverk: '',
-      },
+      stønadskontoType: '',
     }] as PeriodeSokerAktivitet[],
   } as PeriodeMedClassName;
 

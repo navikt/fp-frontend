@@ -29,8 +29,8 @@ const FatterVedtakTotrinnskontrollModalSakIndex: FunctionComponent<OwnProps> = (
       allAksjonspunktApproved={allAksjonspunktApproved}
       erKlageWithKA={erKlageWithKA}
       behandlingsresultat={behandling.behandlingsresultat}
-      behandlingStatusKode={behandling.status.kode}
-      behandlingTypeKode={behandling.type.kode}
+      behandlingStatusKode={behandling.status}
+      behandlingTypeKode={behandling.type}
       harSammeResultatSomOriginalBehandling={harSammeResultatSomOriginalBehandling}
     />
   </RawIntlProvider>

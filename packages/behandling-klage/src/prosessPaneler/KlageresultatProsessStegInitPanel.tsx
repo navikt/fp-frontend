@@ -6,7 +6,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VedtakKlageProsessIndex, { VedtakKlageBrevData } from '@fpsak-frontend/prosess-vedtak-klage';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import {
-  Aksjonspunkt, Behandling, Behandlingsresultat, Fagsak, KlageVurdering,
+  Aksjonspunkt, Behandling, Behandlingsresultat, Fagsak, ForhåndsvisMeldingParams, KlageVurdering,
 } from '@fpsak-frontend/types';
 import {
   FatterVedtakStatusModal, useStandardProsessPanelProps, ProsessDefaultInitPanel, ProsessPanelInitProps,
@@ -22,7 +22,7 @@ import { restApiKlageHooks, KlageBehandlingApiKeys, requestKlageApi } from '../d
 const intl = createIntl(messages);
 
 const lagForhandsvisCallback = (
-  forhandsvisMelding: (params?: any, keepData?: boolean) => Promise<any>,
+  forhandsvisMelding: (params: ForhåndsvisMeldingParams, keepData?: boolean) => Promise<any>,
   fagsak: Fagsak,
   behandling: Behandling,
 ) => (
@@ -31,7 +31,11 @@ const lagForhandsvisCallback = (
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
-    ytelseType: fagsak.fagsakYtelseType,
+    ytelseType: {
+      kode: fagsak.fagsakYtelseType,
+      kodeverk: 'FAGSAK_YTELSE',
+    },
+    fagsakYtelseType: fagsak.fagsakYtelseType,
   };
   return forhandsvisMelding(brevData).then((response) => forhandsvisDokument(response));
 };
@@ -40,12 +44,12 @@ const getVedtakStatus = (
   behandlingsresultat?: Behandlingsresultat,
   aksjonspunkter: Aksjonspunkt[] = [],
 ) => {
-  const harApentAksjonpunkt = aksjonspunkter.some((ap) => ap.status.kode === aksjonspunktStatus.OPPRETTET);
+  const harApentAksjonpunkt = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET);
   if (aksjonspunkter.length === 0 || harApentAksjonpunkt) {
     return vilkarUtfallType.IKKE_VURDERT;
   }
 
-  const resultatTypeCode = behandlingsresultat?.type.kode;
+  const resultatTypeCode = behandlingsresultat?.type;
   if (resultatTypeCode === behandlingResultatType.KLAGE_AVVIST || resultatTypeCode === behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET) {
     return vilkarUtfallType.IKKE_OPPFYLT;
   }

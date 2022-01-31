@@ -37,10 +37,7 @@ describe('<FodselInngangsvilkarInitPanel>', () => {
     const aksjonspunkter = [] as Aksjonspunkt[];
 
     const vilkar = [{
-      vilkarType: {
-        kode: vilkarType.FODSELSVILKARET_MOR,
-        kodeverk: '',
-      },
+      vilkarType: vilkarType.FODSELSVILKARET_MOR,
     }] as Vilkar[];
 
     const innerElement = panel.renderProp('renderPanel')({
@@ -71,17 +68,11 @@ describe('<FodselInngangsvilkarInitPanel>', () => {
     const toggleOverstyring = () => {};
 
     const aksjonspunkter = [{
-      definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
     }] as Aksjonspunkt[];
 
     const vilkar = [{
-      vilkarType: {
-        kode: vilkarType.FODSELSVILKARET_MOR,
-        kodeverk: '',
-      },
+      vilkarType: vilkarType.FODSELSVILKARET_MOR,
     }] as Vilkar[];
 
     const innerElement = panel.renderProp('renderPanel')({

@@ -4,32 +4,38 @@ import { Normaltekst } from 'nav-frontend-typografi';
 
 import { AvsnittSkiller, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
-import { HistorikkinnslagDel, Kodeverk } from '@fpsak-frontend/types';
+import { HistorikkinnslagDel } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import historikkOpplysningTypeCodes from '../../kodeverk/historikkOpplysningTypeCodes';
 import BubbleText from './felles/bubbleText';
 import Skjermlenke from './felles/Skjermlenke';
 import HistorikkMal from '../HistorikkMalTsType';
 
+const finnKodeverkType = (kodeverk: string): KodeverkType => KodeverkType[kodeverk];
+
 const finnFomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): string => {
-  const found = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.UTTAK_PERIODE_FOM.kode);
+  const found = opplysninger.find((o) => o.opplysningType === historikkOpplysningTypeCodes.UTTAK_PERIODE_FOM.kode);
   return found?.tilVerdi ? found.tilVerdi : '';
 };
 
 const finnTomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): string => {
-  const found = opplysninger.find((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.UTTAK_PERIODE_TOM.kode);
+  const found = opplysninger.find((o) => o.opplysningType === historikkOpplysningTypeCodes.UTTAK_PERIODE_TOM.kode);
   return found?.tilVerdi ? found.tilVerdi : '';
 };
 
-const buildEndretFeltText = (historikkinnslagDel: HistorikkinnslagDel, getKodeverknavn: (kodeverk: Kodeverk) => string): ReactNode => {
+const buildEndretFeltText = (
+  historikkinnslagDel: HistorikkinnslagDel,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType, undertype?: string) => string,
+): ReactNode => {
   const { opplysninger, endredeFelter } = historikkinnslagDel;
   const felt = endredeFelter[0];
   const erEndret = felt.fraVerdi !== null && felt.fraVerdi !== undefined;
 
-  const tilVerdiNavn = getKodeverknavn({ kode: felt.tilVerdi as string, kodeverk: felt.klTilVerdi ? felt.klTilVerdi : '' });
+  const tilVerdiNavn = felt.klTilVerdi ? getKodeverknavn(felt.tilVerdi as string, finnKodeverkType(felt.klTilVerdi)) : '';
   if (erEndret) {
     const årsakVerdi = felt.fraVerdi ? felt.fraVerdi as string : felt.tilVerdi as string;
-    const fraVerdi = `${getKodeverknavn({ kode: årsakVerdi, kodeverk: felt.klFraVerdi ? felt.klFraVerdi : '' })}`;
+    const fraVerdi = felt.klFraVerdi ? `${getKodeverknavn(årsakVerdi, finnKodeverkType(felt.klFraVerdi))}` : '';
     return (
       <FormattedMessage
         id="Historikk.Template.Aktivitetskrav.endretFelt"

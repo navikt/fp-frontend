@@ -48,7 +48,7 @@ const finnKnappetekstkode = (
 const finnSkalViseLink = (
   behandlingsresultat: Behandlingsresultat,
 ): boolean => !behandlingsresultat.avslagsarsak
-  || (behandlingsresultat.avslagsarsak && behandlingsresultat.avslagsarsak.kode !== avslagsarsakCodes.INGEN_BEREGNINGSREGLER);
+  || (behandlingsresultat.avslagsarsak && behandlingsresultat.avslagsarsak !== avslagsarsakCodes.INGEN_BEREGNINGSREGLER);
 
 const harIkkeKonsekvenserForYtelsen = (
   konsekvenserForYtelsenKoder: string[],
@@ -61,7 +61,7 @@ const harIkkeKonsekvenserForYtelsen = (
   if (!Array.isArray(konsekvenserForYtelsen) || konsekvenserForYtelsen.length !== 1) {
     return true;
   }
-  return !konsekvenserForYtelsenKoder.some((kode) => kode === konsekvenserForYtelsen[0].kode);
+  return !konsekvenserForYtelsenKoder.some((kode) => kode === konsekvenserForYtelsen[0]);
 };
 
 interface OwnProps {
@@ -95,7 +95,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
     behandlingsresultat, behandlingPaaVent, sprakkode, status,
   } = behandling;
 
-  const [skalBrukeManueltBrev, toggleSkalBrukeManueltBrev] = useState(behandlingsresultat.vedtaksbrev && behandlingsresultat.vedtaksbrev.kode === 'FRITEKST');
+  const [skalBrukeManueltBrev, toggleSkalBrukeManueltBrev] = useState(behandlingsresultat.vedtaksbrev && behandlingsresultat.vedtaksbrev === 'FRITEKST');
   const [skalViseModal, toggleVisModal] = useState(false);
   const onToggleOverstyring = useCallback((e) => {
     toggleSkalBrukeManueltBrev(true);
@@ -108,9 +108,9 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
     setValue('brødtekst', undefined);
   }, []);
 
-  const erInnvilget = isInnvilget(behandlingsresultat.type.kode);
-  const erAvslatt = isAvslag(behandlingsresultat.type.kode);
-  const erOpphor = isOpphor(behandlingsresultat.type.kode);
+  const erInnvilget = isInnvilget(behandlingsresultat.type);
+  const erAvslatt = isAvslag(behandlingsresultat.type);
+  const erOpphor = isOpphor(behandlingsresultat.type);
 
   const skalViseLink = finnSkalViseLink(behandlingsresultat);
 
@@ -129,13 +129,13 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
       />
       <FlexContainer>
         <FlexRow>
-          {(status.kode === behandlingStatusCode.AVSLUTTET) && (
+          {(status === behandlingStatusCode.AVSLUTTET) && (
             <FlexColumn>
               <Image className={styles.status} src={erInnvilget ? innvilgetImage : avslattImage} />
             </FlexColumn>
           )}
           <FlexColumn>
-            <Undertittel><FormattedMessage id={finnTekstkodeFraBehandlingstatus(status.kode)} /></Undertittel>
+            <Undertittel><FormattedMessage id={finnTekstkodeFraBehandlingstatus(status)} /></Undertittel>
           </FlexColumn>
         </FlexRow>
       </FlexContainer>
@@ -191,7 +191,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
           skalViseLink={skalViseLink}
         />
       )}
-      {kanSendesTilGodkjenning(status.kode) && (
+      {kanSendesTilGodkjenning(status) && (
         <>
           <VerticalSpacer twentyPx />
           <FlexContainer>

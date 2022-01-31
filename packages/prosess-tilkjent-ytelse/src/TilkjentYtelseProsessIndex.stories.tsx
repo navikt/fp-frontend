@@ -9,7 +9,6 @@ import stonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import {
@@ -21,9 +20,7 @@ import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter
 import TilkjentYtelseProsessIndex from './TilkjentYtelseProsessIndex';
 
 const fagsak = {
-  fagsakYtelseType: {
-    kode: fagsakYtelseType.FORELDREPENGER,
-  },
+  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
 } as Fagsak;
 
 const behandling = {
@@ -37,18 +34,13 @@ const familiehendelse = {
       fodselsdato: '2019-01-01',
     }],
     omsorgsovertakelseDato: '2019-01-01',
-    soknadType: {
-      kode: soknadType.FODSEL,
-      kodeverk: '',
-    },
+    soknadType: soknadType.FODSEL,
   } as FamilieHendelse,
 } as FamilieHendelseSamling;
 
 const personoversikt = {
   bruker: {
-    kjønn: {
-      kode: navBrukerKjonn.KVINNE,
-    },
+    kjønn: navBrukerKjonn.KVINNE,
   },
 } as Personoversikt;
 
@@ -59,13 +51,8 @@ const beregningresultat = {
       uttak: {
         stonadskontoType: stonadskontoType.FELLESPERIODE,
       },
-      aktivitetStatus: {
-        kode: aktivitetStatus.ARBEIDSTAKER,
-      },
-      arbeidsforholdType: {
-        kode: arbeidsforholdHandlingType.NYTT_ARBEIDSFORHOLD,
-        kodeverk: kodeverkTyper.ARBEIDSFORHOLD_HANDLING_TYPE,
-      },
+      aktivitetStatus: aktivitetStatus.ARBEIDSTAKER,
+      arbeidsforholdType: arbeidsforholdHandlingType.NYTT_ARBEIDSFORHOLD,
     }],
     fom: '2019-01-01',
     tom: '2019-01-10',
@@ -75,9 +62,7 @@ const beregningresultat = {
 
 const soknad = {
   mottattDato: '2019-01-01',
-  soknadType: {
-    kode: soknadType.FODSEL,
-  },
+  soknadType: soknadType.FODSEL,
   omsorgsovertakelseDato: '2019-01-10',
   fodselsdatoer: {
     1: '2019-01-01',
@@ -139,11 +124,7 @@ export const ÅpentAksjonspunkt = Template.bind({});
 ÅpentAksjonspunkt.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: {
-      kode: aksjonspunktCodes.VURDER_TILBAKETREKK,
-    },
-    status: {
-      kode: aksjonspunktStatus.OPPRETTET,
-    },
+    definisjon: aksjonspunktCodes.VURDER_TILBAKETREKK,
+    status: aksjonspunktStatus.OPPRETTET,
   }] as Aksjonspunkt[],
 };

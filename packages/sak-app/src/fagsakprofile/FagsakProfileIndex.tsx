@@ -8,6 +8,7 @@ import { LoadingPanel } from '@fpsak-frontend/shared-components';
 import BehandlingVelgerSakIndex from '@fpsak-frontend/sak-behandling-velger';
 import FagsakProfilSakIndex from '@fpsak-frontend/sak-fagsak-profil';
 import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import {
   getLocationWithDefaultProsessStegAndFakta,
@@ -59,8 +60,8 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
 
   const getKodeverkFn = useGetKodeverkFn();
 
-  const fagsakStatusMedNavn = useFpSakKodeverkMedNavn(fagsak.status);
-  const fagsakYtelseTypeMedNavn = useFpSakKodeverkMedNavn(fagsak.fagsakYtelseType);
+  const fagsakStatusMedNavn = useFpSakKodeverkMedNavn(fagsak.status, KodeverkType.FAGSAK_STATUS);
+  const fagsakYtelseTypeMedNavn = useFpSakKodeverkMedNavn(fagsak.fagsakYtelseType, KodeverkType.FAGSAK_YTELSE);
 
   const { data: risikoAksjonspunkt } = restApiHooks.useRestApi(FpsakApiKeys.RISIKO_AKSJONSPUNKT, undefined, {
     updateTriggers: [behandlingUuid, behandlingVersjon],

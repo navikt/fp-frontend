@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import { IntlShape } from 'react-intl';
+
 import { removeSpacesFromNumber } from '@fpsak-frontend/utils';
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
@@ -11,8 +13,7 @@ import {
   AlleKodeverk,
 } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
-import Kodeverk from '@fpsak-frontend/types/src/kodeverkTsType';
-import { IntlShape } from 'react-intl';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   FordelBeregningsgrunnlagPerioderTransformedValues,
   FordelBeregningsgrunnlagAndelTransformedValues,
@@ -73,13 +74,13 @@ const harPeriodeSomKanKombineresMedForrige = (periode: BeregningsgrunnlagPeriode
   if (fordelPeriode.skalRedigereInntekt !== forrigeEndringPeriode.skalRedigereInntekt) {
     return false;
   }
-  if (periode.periodeAarsaker.map(({ kode }) => kode).includes(periodeAarsak.ENDRING_I_REFUSJONSKRAV)
-  || periode.periodeAarsaker.map(({ kode }) => kode).includes(periodeAarsak.REFUSJON_OPPHOERER)
-  || periode.periodeAarsaker.map(({ kode }) => kode).includes(periodeAarsak.GRADERING)
-  || periode.periodeAarsaker.map(({ kode }) => kode).includes(periodeAarsak.GRADERING_OPPHOERER)) {
+  if (periode.periodeAarsaker.map((kode) => kode).includes(periodeAarsak.ENDRING_I_REFUSJONSKRAV)
+  || periode.periodeAarsaker.map((kode) => kode).includes(periodeAarsak.REFUSJON_OPPHOERER)
+  || periode.periodeAarsaker.map((kode) => kode).includes(periodeAarsak.GRADERING)
+  || periode.periodeAarsaker.map((kode) => kode).includes(periodeAarsak.GRADERING_OPPHOERER)) {
     return false;
   }
-  if (periode.periodeAarsaker.map(({ kode }) => kode).includes(periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET)) {
+  if (periode.periodeAarsaker.map((kode) => kode).includes(periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET)) {
     const periodeIndex = bgPerioder.indexOf(periode);
     const forrigePeriode = bgPerioder[periodeIndex - 1];
     return forrigePeriode.bruttoPrAar === periode.bruttoPrAar;
@@ -156,7 +157,7 @@ type OwnProps = {
     bgPerioder: BeregningsgrunnlagPeriodeProp[];
     beregningsgrunnlag: Beregningsgrunnlag;
     alleKodeverk: AlleKodeverk;
-    behandlingType: Kodeverk;
+    behandlingType: string;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
@@ -176,7 +177,7 @@ export class FordelBeregningsgrunnlagForm extends Component<OwnProps, OwnState> 
     values: FordelBeregningsgrunnlagMedAksjonspunktValues,
     fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
     beregningsgrunnlag: Beregningsgrunnlag,
-    getKodeverknavn: (kodeverk: Kodeverk) => string,
+    getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   ) => {
     const errors = {};
@@ -204,13 +205,13 @@ export class FordelBeregningsgrunnlagForm extends Component<OwnProps, OwnState> 
 
   static buildInitialValues = (fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
     bg: Beregningsgrunnlag,
-    getKodeverknavn: (kodeverk: Kodeverk) => string,
+    getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): FordelBeregningsgrunnlagValues => {
     const initialValues = {} as FordelBeregningsgrunnlagValues;
     if (!fordelBGPerioder) {
       return initialValues;
     }
-    const harKunYtelse = bg.aktivitetStatus.some((status) => status.kode === aktivitetStatuser.KUN_YTELSE);
+    const harKunYtelse = bg.aktivitetStatus.some((status) => status === aktivitetStatuser.KUN_YTELSE);
     const bgPerioder = bg.beregningsgrunnlagPeriode;
     slaaSammenPerioder(fordelBGPerioder, bgPerioder).forEach((periode, index) => {
       const bgPeriode = finnRiktigBgPeriode(periode, bgPerioder);

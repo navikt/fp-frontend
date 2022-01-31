@@ -1,36 +1,18 @@
 [
     {
-        "definisjon": {
-            "kode": "7003",
-            "kodeverk": "AKSJONSPUNKT_DEF"
-        },
-        "status": {
-            "kode": "UTFO",
-            "kodeverk": "AKSJONSPUNKT_STATUS"
-        },
+        "definisjon": "7003",
+        "status": "UTFO",
         "toTrinnsBehandling": false,
-        "aksjonspunktType": {
-            "kode": "AUTO",
-            "kodeverk": "AKSJONSPUNKT_TYPE"
-        },
+        "aksjonspunktType": "AUTO",
         "kanLoses": false,
         "erAktivt": true,
         "fristTid": "2019-12-11T00:00:00"
     },
     {
-        "definisjon": {
-            "kode": "5070",
-            "kodeverk": "AKSJONSPUNKT_DEF"
-        },
-        "status": {
-            "kode": "OPPR",
-            "kodeverk": "AKSJONSPUNKT_STATUS"
-        },
+        "definisjon": "5070",
+        "status": "OPPR",
         "toTrinnsBehandling": false,
-        "aksjonspunktType": {
-            "kode": "MANU",
-            "kodeverk": "AKSJONSPUNKT_TYPE"
-        },
+        "aksjonspunktType": "MANU",
         "kanLoses": true,
         "erAktivt": true
     }

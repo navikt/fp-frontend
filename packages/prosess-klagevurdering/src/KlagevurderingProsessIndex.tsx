@@ -33,7 +33,7 @@ const KlagevurderingProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
   setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    {aksjonspunkter.some((a) => a.definisjon.kode === aksjonspunktCodes.BEHANDLE_KLAGE_NK) && (
+    {aksjonspunkter.some((a) => a.definisjon === aksjonspunktCodes.BEHANDLE_KLAGE_NK) && (
       <BehandleKlageFormKa
         sprakkode={behandling.sprakkode}
         klageVurdering={klageVurdering}
@@ -47,7 +47,7 @@ const KlagevurderingProsessIndex: FunctionComponent<OwnProps & StandardProsessPa
         setFormData={setFormData}
       />
     )}
-    {aksjonspunkter.some((a) => a.definisjon.kode === aksjonspunktCodes.BEHANDLE_KLAGE_NFP) && (
+    {aksjonspunkter.some((a) => a.definisjon === aksjonspunktCodes.BEHANDLE_KLAGE_NFP) && (
       <BehandleKlageFormNfp
         sprakkode={behandling.sprakkode}
         klageVurdering={klageVurdering}

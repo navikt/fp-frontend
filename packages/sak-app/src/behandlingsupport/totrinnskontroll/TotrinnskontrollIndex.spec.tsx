@@ -21,24 +21,15 @@ describe('<TotrinnskontrollIndex>', () => {
   Modal.setAppElement('body');
   const fagsak = {
     saksnummer: '1',
-    fagsakYtelseType: {
-      kode: fagsakYtelseType.FORELDREPENGER,
-      kodeverk: '',
-    },
+    fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
   };
 
   const valgtBehandling = {
     uuid: '1234',
     versjon: 123,
-    type: {
-      kode: behandlingType.FORSTEGANGSSOKNAD,
-      kodeverk: '',
-    },
+    type: behandlingType.FORSTEGANGSSOKNAD,
     opprettet: '‎29.08.‎2017‎ ‎09‎:‎54‎:‎22',
-    status: {
-      kode: 'FVED',
-      kodeverk: 'BEHANDLING_STATUS',
-    },
+    status: 'FVED',
     toTrinnsBehandling: true,
     ansvarligSaksbehandler: 'Espen Utvikler',
     behandlingÅrsaker: [] as BehandlingÅrsak[],

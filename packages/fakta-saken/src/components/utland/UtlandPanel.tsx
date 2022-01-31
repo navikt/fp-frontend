@@ -31,7 +31,7 @@ const getUtlandSakstype = (aksjonspunkter: Aksjonspunkt[]): string => {
     return UtlandSakstypeKode.EØS_BOSATT_NORGE;
   }
   if (hasAksjonspunkt(MANUELL_MARKERING_AV_UTLAND_SAKSTYPE, aksjonspunkter)) {
-    return aksjonspunkter.find((ap) => ap.definisjon.kode === MANUELL_MARKERING_AV_UTLAND_SAKSTYPE).begrunnelse;
+    return aksjonspunkter.find((ap) => ap.definisjon === MANUELL_MARKERING_AV_UTLAND_SAKSTYPE).begrunnelse;
   }
   return UtlandSakstypeKode.NASJONAL;
 };

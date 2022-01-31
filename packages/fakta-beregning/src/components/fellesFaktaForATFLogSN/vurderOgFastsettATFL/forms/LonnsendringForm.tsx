@@ -65,7 +65,7 @@ LonnsendringForm.buildInitialValues = (beregningsgrunnlag: Beregningsgrunnlag): 
   if (!alleAndeler || alleAndeler.length < 1) {
     return initialValues;
   }
-  const alleATAndeler = alleAndeler.filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER);
+  const alleATAndeler = alleAndeler.filter((andel) => andel.aktivitetStatus === aktivitetStatus.ARBEIDSTAKER);
   if (!alleATAndeler || alleATAndeler.length < 1) {
     return initialValues;
   }
@@ -81,7 +81,7 @@ export const harFieldLønnsendring = (field: InntektTransformed,
 LonnsendringForm.transformValues = (values: FaktaOmBeregningAksjonspunktValues,
   faktaOmBeregning: FaktaOmBeregning): FaktaBeregningTransformedValues => {
   const tilfeller = faktaOmBeregning.faktaOmBeregningTilfeller ? faktaOmBeregning.faktaOmBeregningTilfeller : [];
-  if (!tilfeller.map(({ kode }) => kode).includes(faktaOmBeregningTilfelle.VURDER_LONNSENDRING)) {
+  if (!tilfeller.map((kode) => kode).includes(faktaOmBeregningTilfelle.VURDER_LONNSENDRING)) {
     return {};
   }
   return ({

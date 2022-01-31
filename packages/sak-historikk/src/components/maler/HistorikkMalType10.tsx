@@ -18,22 +18,22 @@ const historikkFromToValues = (endretFelt: HistorikkinnslagEndretFelt, fieldName
   const fromValue = findEndretFeltVerdi(endretFelt, endretFelt.fraVerdi, intl);
   const toValue = findEndretFeltVerdi(endretFelt, endretFelt.tilVerdi, intl);
   let messageId = fromValue ? 'Historikk.Template.10.ChangedFromTo' : 'Historikk.Template.10.FieldSetTo';
-  if ((endretFelt.endretFeltNavn.kode === historikkEndretFeltTypeCodes.UTTAK_PROSENT_UTBETALING.kode) && fromValue) {
+  if ((endretFelt.endretFeltNavn === historikkEndretFeltTypeCodes.UTTAK_PROSENT_UTBETALING.kode) && fromValue) {
     messageId = 'Historikk.Template.10.ChangedFromToProsentUtbetaling';
-  } else if (endretFelt.endretFeltNavn.kode === historikkEndretFeltTypeCodes.UTTAK_PROSENT_UTBETALING.kode) {
+  } else if (endretFelt.endretFeltNavn === historikkEndretFeltTypeCodes.UTTAK_PROSENT_UTBETALING.kode) {
     messageId = 'Historikk.Template.10.ChangedFromToProsentUtbetalingFromNothing';
-  } else if ((endretFelt.endretFeltNavn.kode === historikkEndretFeltTypeCodes.UTTAK_PERIODE_RESULTAT_TYPE.kode)
+  } else if ((endretFelt.endretFeltNavn === historikkEndretFeltTypeCodes.UTTAK_PERIODE_RESULTAT_TYPE.kode)
     && endretFelt.fraVerdi === 'MANUELL_BEHANDLING') {
     messageId = 'Historikk.Template.10.FieldSetTo';
-  } else if (endretFelt.endretFeltNavn.kode === historikkEndretFeltTypeCodes.UTTAK_PERIODE_RESULTAT_ÅRSAK.kode
-    || endretFelt.endretFeltNavn.kode === historikkEndretFeltTypeCodes.UTTAK_GRADERING_AVSLAG_ÅRSAK.kode) {
+  } else if (endretFelt.endretFeltNavn === historikkEndretFeltTypeCodes.UTTAK_PERIODE_RESULTAT_ÅRSAK.kode
+    || endretFelt.endretFeltNavn === historikkEndretFeltTypeCodes.UTTAK_GRADERING_AVSLAG_ÅRSAK.kode) {
     if (endretFelt.tilVerdi === '-') {
       return '';
     }
     if (endretFelt.fraVerdi === '-') {
       messageId = 'Historikk.Template.10.FieldSetTo';
     }
-  } else if (endretFelt.endretFeltNavn.kode === historikkEndretFeltTypeCodes.UTTAK_STØNADSKONTOTYPE.kode && endretFelt.fraVerdi === '-') {
+  } else if (endretFelt.endretFeltNavn === historikkEndretFeltTypeCodes.UTTAK_STØNADSKONTOTYPE.kode && endretFelt.fraVerdi === '-') {
     messageId = 'Historikk.Template.10.FieldSetTo';
   }
   return (
@@ -52,7 +52,7 @@ const historikkFromToValues = (endretFelt: HistorikkinnslagEndretFelt, fieldName
 
 const formatChangedField = (endretFelt: HistorikkinnslagEndretFelt, intl: IntlShape): ReactNode => {
   const fieldName = findEndretFeltNavn(endretFelt, intl);
-  if (endretFelt.endretFeltNavn.kode === historikkEndretFeltTypeCodes.UTTAK_TREKKDAGER.kode
+  if (endretFelt.endretFeltNavn === historikkEndretFeltTypeCodes.UTTAK_TREKKDAGER.kode
     && typeof (endretFelt.fraVerdi) === 'number' && typeof (endretFelt.tilVerdi) === 'number') {
     const fromValueWeeks = Math.floor(endretFelt.fraVerdi / 5);
     const fromValueDays = (endretFelt.fraVerdi % 1 === 0) ? endretFelt.fraVerdi % 5 : (endretFelt.fraVerdi % 5).toFixed(1);
@@ -77,20 +77,20 @@ const formatChangedField = (endretFelt: HistorikkinnslagEndretFelt, intl: IntlSh
 };
 
 const finnFomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): string => {
-  const [found] = opplysninger.filter((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.UTTAK_PERIODE_FOM.kode);
+  const [found] = opplysninger.filter((o) => o.opplysningType === historikkOpplysningTypeCodes.UTTAK_PERIODE_FOM.kode);
   return found.tilVerdi || '';
 };
 
 const finnTomOpplysning = (opplysninger: HistorikkinnslagDel['opplysninger']): string => {
-  const [found] = opplysninger.filter((o) => o.opplysningType.kode === historikkOpplysningTypeCodes.UTTAK_PERIODE_TOM.kode);
+  const [found] = opplysninger.filter((o) => o.opplysningType === historikkOpplysningTypeCodes.UTTAK_PERIODE_TOM.kode);
   return found.tilVerdi || '';
 };
 
 const sortArray = ((endredeFelter: HistorikkinnslagEndretFelt[]): HistorikkinnslagEndretFelt[] => {
   if (endredeFelter.length > 1) {
-    const resultatFelt = endredeFelter.filter((e) => e.endretFeltNavn.kode === 'UTTAK_PERIODE_RESULTAT_TYPE');
+    const resultatFelt = endredeFelter.filter((e) => e.endretFeltNavn === 'UTTAK_PERIODE_RESULTAT_TYPE');
     if (resultatFelt.length > 0) {
-      const andreFelt = endredeFelter.filter((e) => e.endretFeltNavn.kode !== 'UTTAK_PERIODE_RESULTAT_TYPE');
+      const andreFelt = endredeFelter.filter((e) => e.endretFeltNavn !== 'UTTAK_PERIODE_RESULTAT_TYPE');
       return andreFelt.concat(resultatFelt);
     }
   }
@@ -125,7 +125,7 @@ const HistorikkMalType10: FunctionComponent<HistorikkMal & WrappedComponentProps
             createLocationForSkjermlenke={createLocationForSkjermlenke}
           />
 
-          {historikkinnslagDel.opplysninger && originType.kode === historikkinnslagType.OVST_UTTAK && (
+          {historikkinnslagDel.opplysninger && originType === historikkinnslagType.OVST_UTTAK && (
             <FormattedMessage
               id="Historikk.Template.10.OverstyrtVurderingPeriode"
               values={{
@@ -136,7 +136,7 @@ const HistorikkMalType10: FunctionComponent<HistorikkMal & WrappedComponentProps
             />
           )}
 
-          {historikkinnslagDel.opplysninger && originType.kode === historikkinnslagType.FASTSATT_UTTAK && (
+          {historikkinnslagDel.opplysninger && originType === historikkinnslagType.FASTSATT_UTTAK && (
             <FormattedMessage
               id="Historikk.Template.10.ManuellVurderingPeriode"
               values={{

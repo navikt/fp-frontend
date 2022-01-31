@@ -150,7 +150,7 @@ export const ValgtAktivitetForm: FunctionComponent<OwnProps> = ({
               <FormattedMessage id="ActivityPanel.Activity" />
             </Undertekst>
             <Normaltekst>
-              {opptjeningAktivitetTyper.find((oat) => oat.kode === aktivitetType.kode)?.navn}
+              {opptjeningAktivitetTyper.find((oat) => oat.kode === aktivitetType)?.navn}
             </Normaltekst>
           </Column>
         </Row>

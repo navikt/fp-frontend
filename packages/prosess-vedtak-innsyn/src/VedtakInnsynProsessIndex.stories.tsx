@@ -16,30 +16,16 @@ import VedtakInnsynProsessIndex from './VedtakInnsynProsessIndex';
 const behandling = {
   uuid: '1',
   versjon: 1,
-  sprakkode: {
-    kode: 'NO',
-  },
+  sprakkode: 'NO',
 } as Behandling;
 
 const defaultAksjonspunkter = [{
-  definisjon: {
-    kode: aksjonspunktCodes.VURDER_INNSYN,
-    kodeverk: '',
-  },
-  status: {
-    kode: aksjonspunktStatus.UTFORT,
-    kodeverk: '',
-  },
+  definisjon: aksjonspunktCodes.VURDER_INNSYN,
+  status: aksjonspunktStatus.UTFORT,
   begrunnelse: 'Dette er utført',
 }, {
-  definisjon: {
-    kode: aksjonspunktCodes.FORESLA_VEDTAK,
-    kodeverk: '',
-  },
-  status: {
-    kode: aksjonspunktStatus.OPPRETTET,
-    kodeverk: '',
-  },
+  definisjon: aksjonspunktCodes.FORESLA_VEDTAK,
+  status: aksjonspunktStatus.OPPRETTET,
   begrunnelse: undefined,
 }] as Aksjonspunkt[];
 
@@ -101,10 +87,7 @@ PanelForInnvilgetVedtak.args = {
       tittel: behandlingType.FORSTEGANGSSOKNAD,
       opprettetDato: '2019-01-01',
     }],
-    innsynResultatType: {
-      kode: innsynResultatType.INNVILGET,
-      kodeverk: '',
-    },
+    innsynResultatType: innsynResultatType.INNVILGET,
     innsynMottattDato: '2019-01-01',
   },
 };
@@ -124,10 +107,7 @@ PanelForAvvistVedtak.args = {
       tittel: behandlingType.FORSTEGANGSSOKNAD,
       opprettetDato: '2019-01-01',
     }],
-    innsynResultatType: {
-      kode: innsynResultatType.AVVIST,
-      kodeverk: '',
-    },
+    innsynResultatType: innsynResultatType.AVVIST,
     innsynMottattDato: '2019-01-01',
   },
 };
@@ -139,10 +119,7 @@ PanelForAvvistVedtakReadonly.args = {
   readOnly: true,
   aksjonspunkter: [defaultAksjonspunkter[0], {
     ...defaultAksjonspunkter[1],
-    status: {
-      kode: aksjonspunktStatus.UTFORT,
-      kodeverk: '',
-    },
+    status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette er en vurdering',
   }],
   innsyn: {
@@ -156,10 +133,7 @@ PanelForAvvistVedtakReadonly.args = {
       tittel: behandlingType.FORSTEGANGSSOKNAD,
       opprettetDato: '2019-01-01',
     }],
-    innsynResultatType: {
-      kode: innsynResultatType.AVVIST,
-      kodeverk: '',
-    },
+    innsynResultatType: innsynResultatType.AVVIST,
     innsynMottattDato: '2019-01-01',
   },
 };

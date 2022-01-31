@@ -23,9 +23,7 @@ import {
 import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import ankeOmgjorArsak from '@fpsak-frontend/kodeverk/src/ankeOmgjorArsak';
-import {
-  Aksjonspunkt, AnkeVurdering, Kodeverk, KodeverkMedNavn,
-} from '@fpsak-frontend/types';
+import { Aksjonspunkt, AnkeVurdering, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { AnkeVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import PreviewAnkeLink, { BrevData } from './PreviewAnkeLink';
@@ -44,15 +42,15 @@ const ankeOmgjorArsakRekkefolge = [
 export type BehandlingInfo = {
   uuid?: string;
   opprettet?: string;
-  type?: Kodeverk;
-  status?: Kodeverk;
+  type?: string;
+  status?: string;
 }
 
 type FormValuesUtrekk = {
-  ankeVurdering?: Kodeverk;
+  ankeVurdering?: string;
   erSubsidiartRealitetsbehandles?: boolean;
-  ankeOmgjoerArsak?: Kodeverk;
-  ankeVurderingOmgjoer?: Kodeverk;
+  ankeOmgjoerArsak?: string;
+  ankeVurderingOmgjoer?: string;
   vedtak?: string;
   begrunnelse?: string;
   fritekstTilBrev?: string;
@@ -66,8 +64,8 @@ type FormValues = {
   erIkkeSignert: boolean;
 } & FormValuesUtrekk
 
-const skalViseForhaandlenke = (avr: Kodeverk): boolean => avr?.kode === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE
-  || avr?.kode === ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV || avr?.kode === ankeVurdering.ANKE_OMGJOER;
+const skalViseForhaandlenke = (avr?: string): boolean => avr === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE
+  || avr === ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV || avr === ankeVurdering.ANKE_OMGJOER;
 
 const IKKE_PAA_ANKET_BEHANDLING_ID = '0';
 
@@ -79,8 +77,8 @@ const formatBehandling = (
   b: BehandlingInfo,
   behandlingTyper: KodeverkMedNavn[],
   behandlingStatuser: KodeverkMedNavn[],
-): string => `${formatDate(b.opprettet)} - ${behandlingTyper.find((bt) => bt.kode === b.type.kode)?.navn} `
-  + `- ${behandlingStatuser.find((bs) => bs.kode === b.status.kode)?.navn}`;
+): string => `${formatDate(b.opprettet)} - ${behandlingTyper.find((bt) => bt.kode === b.type)?.navn} `
+  + `- ${behandlingStatuser.find((bs) => bs.kode === b.status)?.navn}`;
 
 const formatId = (id?: string): string => {
   if (id === null || id === undefined || id === '-') {
@@ -120,7 +118,7 @@ const SKAL_REALITETSBEHANDLES = {
   NEI: false,
 };
 
-const filtrerKlage = (behandlinger: BehandlingInfo[] = []): BehandlingInfo[] => behandlinger.filter((b) => b.type.kode === behandlingType.KLAGE);
+const filtrerKlage = (behandlinger: BehandlingInfo[] = []): BehandlingInfo[] => behandlinger.filter((b) => b.type === behandlingType.KLAGE);
 
 interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];
@@ -130,7 +128,7 @@ interface PureOwnProps {
   saveAnke: (data: AnkeVurderingResultatAp) => Promise<any>;
   readOnly?: boolean;
   readOnlySubmitButton?: boolean;
-  sprakkode: Kodeverk;
+  sprakkode: string;
   behandlinger: BehandlingInfo[];
   ankeOmgorArsaker: KodeverkMedNavn[];
   behandlingTyper: KodeverkMedNavn[],
@@ -186,7 +184,7 @@ export const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps &
     <VerticalSpacer sixteenPx />
     <Normaltekst><FormattedMessage id="Ankebehandling.Resultat" /></Normaltekst>
     <RadioGroupField
-      name="ankeVurdering.kode"
+      name="ankeVurdering"
       validate={[required]}
       direction="horizontal"
       readOnly={readOnly}
@@ -197,7 +195,7 @@ export const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps &
       <RadioOption value={ankeVurdering.ANKE_AVVIS} label={{ id: 'Ankebehandling.Resultat.Avvis' }} />
       <RadioOption value={ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK} label={{ id: 'Ankebehandling.Resultat.Stadfest' }} />
     </RadioGroupField>
-    {ankeVurdering.ANKE_AVVIS === formValues.ankeVurdering?.kode
+    {ankeVurdering.ANKE_AVVIS === formValues.ankeVurdering
       && (
         <Row>
           <Column xs="7">
@@ -228,14 +226,14 @@ export const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps &
           </Column>
         </Row>
       )}
-    {ankeVurdering.ANKE_OMGJOER === formValues.ankeVurdering?.kode
+    {ankeVurdering.ANKE_OMGJOER === formValues.ankeVurdering
       && (
         <Row>
           <Column xs="7">
             <ArrowBox>
               <SelectField
                 readOnly={readOnly}
-                name="ankeOmgjoerArsak.kode"
+                name="ankeOmgjoerArsak"
                 selectValues={ankeOmgjorArsakRekkefolge
                   .map((arsak) => <option key={arsak} value={arsak}>{ankeOmgorArsaker.find((aoa) => aoa.kode === arsak)?.navn}</option>)}
                 className={readOnly ? styles.selectReadOnly : null}
@@ -245,7 +243,7 @@ export const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps &
               />
               <VerticalSpacer sixteenPx />
               <RadioGroupField
-                name="ankeVurderingOmgjoer.kode"
+                name="ankeVurderingOmgjoer"
                 validate={[required]}
                 readOnly={readOnly}
                 className={readOnly ? styles.selectReadOnly : null}
@@ -259,14 +257,14 @@ export const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps &
           </Column>
         </Row>
       )}
-    {(ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE === formValues.ankeVurdering?.kode
-      || ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV === formValues.ankeVurdering?.kode) && (
+    {(ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE === formValues.ankeVurdering
+      || ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV === formValues.ankeVurdering) && (
       <Row>
         <Column xs="7">
-          <ArrowBox alignOffset={ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE === formValues.ankeVurdering?.kode ? 98 : 198}>
+          <ArrowBox alignOffset={ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE === formValues.ankeVurdering ? 98 : 198}>
             <SelectField
               readOnly={readOnly}
-              name="ankeOmgjoerArsak.kode"
+              name="ankeOmgjoerArsak"
               selectValues={ankeOmgjorArsakRekkefolge
                 .map((arsak) => <option key={arsak} value={arsak}>{ankeOmgorArsaker.find((aoa) => aoa.kode === arsak)?.navn}</option>)}
               className={readOnly ? styles.selectReadOnly : null}
@@ -344,7 +342,7 @@ export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ow
 const formName = 'BehandleAnkeForm';
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  aksjonspunktCode: ownProps.aksjonspunkter[0].definisjon.kode,
+  aksjonspunktCode: ownProps.aksjonspunkter[0].definisjon,
   initialValues: buildInitialValues(ownProps),
   formValues: formValueSelector(formName)(state,
     'vedtak',

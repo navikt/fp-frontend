@@ -4,25 +4,24 @@ import { FormattedMessage } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
-import { Kodeverk } from '@fpsak-frontend/types';
 
 type FormValues = {
-  klageVurdering?: Kodeverk;
+  klageVurdering?: string;
   fritekstTilBrev?: string;
-  klageMedholdArsak?: Kodeverk;
-  klageVurderingOmgjoer?: Kodeverk;
-  klageHjemmel?: Kodeverk;
+  klageMedholdArsak?: string;
+  klageVurderingOmgjoer?: string;
+  klageHjemmel?: string;
   begrunnelse?: string;
 };
 
 export type TransformedValues = {
   kode: string;
-  klageMedholdArsak?: Kodeverk;
-  klageVurderingOmgjoer?: Kodeverk;
-  klageHjemmel?: Kodeverk;
+  klageMedholdArsak?: string;
+  klageVurderingOmgjoer?: string;
+  klageHjemmel?: string;
   fritekstTilBrev: string;
   begrunnelse: string;
-  klageVurdering: Kodeverk;
+  klageVurdering: string;
 }
 
 const transformValues = (
@@ -30,9 +29,9 @@ const transformValues = (
   aksjonspunktCode: string,
 ): TransformedValues => ({
   kode: aksjonspunktCode,
-  klageMedholdArsak: (values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE
-    || values.klageVurdering.kode === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? values.klageMedholdArsak : null,
-  klageVurderingOmgjoer: values.klageVurdering.kode === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
+  klageMedholdArsak: (values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE
+    || values.klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? values.klageMedholdArsak : null,
+  klageVurderingOmgjoer: values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
   klageHjemmel: values.klageHjemmel,
   fritekstTilBrev: values.fritekstTilBrev,
   begrunnelse: values.begrunnelse,

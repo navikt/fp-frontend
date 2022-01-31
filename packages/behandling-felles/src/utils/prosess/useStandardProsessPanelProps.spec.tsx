@@ -28,10 +28,7 @@ const fagsak = {
 const behandling = {
   uuid: '1',
   versjon: 2,
-  status: {
-    kode: behandlingStatus.OPPRETTET,
-    kodeverk: '',
-  },
+  status: behandlingStatus.OPPRETTET,
   behandlingPaaVent: false,
 } as Behandling;
 const rettigheter = {
@@ -53,43 +50,22 @@ describe('useStandardProsessPanelProps.spec', () => {
 
   it('skal kalkulere data som skal brukes av prosess-paneler', () => {
     const aksjonspunkter = [{
-      definisjon: {
-        kode: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+      status: aksjonspunktStatus.OPPRETTET,
       kanLoses: true,
       erAktivt: true,
     }, {
-      definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_AKTIVITETER,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.AVKLAR_AKTIVITETER,
+      status: aksjonspunktStatus.OPPRETTET,
       kanLoses: false,
       erAktivt: true,
     }] as Aksjonspunkt[];
     const vilkar = [{
-      vilkarType: {
-        kode: vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
-        kodeverk: '',
-      },
-      vilkarStatus: {
-        kode: vilkarUtfallType.IKKE_VURDERT,
-        kodeverk: '',
-      },
+      vilkarType: vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
+      vilkarStatus: vilkarUtfallType.IKKE_VURDERT,
       overstyrbar: true,
     }, {
-      vilkarType: {
-        kode: vilkarType.ADOPSJONSVILKARET,
-        kodeverk: '',
-      },
+      vilkarType: vilkarType.ADOPSJONSVILKARET,
     }] as Vilkar[];
 
     const data = {
@@ -126,26 +102,14 @@ describe('useStandardProsessPanelProps.spec', () => {
 
   it('skal har status oppfylt og være readonly', () => {
     const aksjonspunkter = [{
-      definisjon: {
-        kode: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+      status: aksjonspunktStatus.OPPRETTET,
       kanLoses: false,
       erAktivt: true,
     }] as Aksjonspunkt[];
     const vilkar = [{
-      vilkarType: {
-        kode: vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
-        kodeverk: '',
-      },
-      vilkarStatus: {
-        kode: vilkarUtfallType.OPPFYLT,
-        kodeverk: '',
-      },
+      vilkarType: vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
+      vilkarStatus: vilkarUtfallType.OPPFYLT,
       overstyrbar: false,
     }] as Vilkar[];
 
@@ -177,26 +141,14 @@ describe('useStandardProsessPanelProps.spec', () => {
 
   it('skal lagre aksjonspunkt', () => {
     const aksjonspunkter = [{
-      definisjon: {
-        kode: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+      status: aksjonspunktStatus.OPPRETTET,
       kanLoses: true,
       erAktivt: true,
     }] as Aksjonspunkt[];
     const vilkar = [{
-      vilkarType: {
-        kode: vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
-        kodeverk: '',
-      },
-      vilkarStatus: {
-        kode: vilkarUtfallType.IKKE_VURDERT,
-        kodeverk: '',
-      },
+      vilkarType: vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
+      vilkarStatus: vilkarUtfallType.IKKE_VURDERT,
       overstyrbar: false,
     }] as Vilkar[];
 
@@ -246,30 +198,15 @@ describe('useStandardProsessPanelProps.spec', () => {
 
   it('skal lagre overstyrt aksjonspunkt', () => {
     const aksjonspunkter = [{
-      definisjon: {
-        kode: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
-      aksjonspunktType: {
-        kode: aksjonspunktType.OVERSTYRING,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+      status: aksjonspunktStatus.OPPRETTET,
+      aksjonspunktType: aksjonspunktType.OVERSTYRING,
       kanLoses: true,
       erAktivt: true,
     }] as Aksjonspunkt[];
     const vilkar = [{
-      vilkarType: {
-        kode: vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
-        kodeverk: '',
-      },
-      vilkarStatus: {
-        kode: vilkarUtfallType.IKKE_VURDERT,
-        kodeverk: '',
-      },
+      vilkarType: vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
+      vilkarStatus: vilkarUtfallType.IKKE_VURDERT,
       overstyrbar: false,
     }] as Vilkar[];
 

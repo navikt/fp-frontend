@@ -3,10 +3,7 @@ import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 import isFieldEdited from './isFieldEdited';
 
 const soknad = {
-  soknadType: {
-    kode: 'ST-001',
-    kodeverk: '',
-  },
+  soknadType: 'ST-001',
   mottattDato: '2018-07-05',
   tilleggsopplysninger: null,
   begrunnelseForSenInnsending: null,
@@ -106,10 +103,7 @@ describe('isFieldEdited', () => {
   describe('vilkarType', () => {
     it('skal vise endret vilkarType', () => {
       const familiehendelse = {
-        vilkarType: {
-          kode: 'Test',
-          kodeverk: '',
-        },
+        vilkarType: 'Test',
       };
 
       const isVilkarTypeEdited = isFieldEdited(soknad, familiehendelse as FamilieHendelse).vilkarType;

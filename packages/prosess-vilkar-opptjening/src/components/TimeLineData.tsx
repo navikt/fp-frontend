@@ -9,7 +9,7 @@ import checkImg from '@fpsak-frontend/assets/images/check.svg';
 import advarselImg from '@fpsak-frontend/assets/images/remove.svg';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import { TimeLineButton } from '@fpsak-frontend/tidslinje';
-import { FastsattOpptjeningAktivitet, Kodeverk } from '@fpsak-frontend/types';
+import { FastsattOpptjeningAktivitet } from '@fpsak-frontend/types';
 
 import opptjeningAktivitetKlassifisering from '../kodeverk/opptjeningAktivitetKlassifisering';
 
@@ -29,9 +29,9 @@ const backgroundStyle = (kode: string): string => ((kode === MELLOMLIGGENDE_PERI
 const periodStatus = (periodState: string): string => (periodState === opptjeningAktivitetKlassifisering.BEKREFTET_AVVIST
 || periodState === opptjeningAktivitetKlassifisering.ANTATT_AVVIST ? 'OpptjeningVilkarView.Avslatt' : 'OpptjeningVilkarView.Godkjent');
 
-const isPeriodGodkjent = (period: Kodeverk): boolean => !!(period.kode === opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT
-  || period.kode === opptjeningAktivitetKlassifisering.ANTATT_GODKJENT
-  || period.kode === MELLOMLIGGENDE_PERIODE);
+const isPeriodGodkjent = (period: string): boolean => !!(period === opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT
+  || period === opptjeningAktivitetKlassifisering.ANTATT_GODKJENT
+  || period === MELLOMLIGGENDE_PERIODE);
 
 interface OwnProps {
   fastsattOpptjeningAktivitet: FastsattOpptjeningAktivitet;
@@ -53,7 +53,7 @@ const TimeLineData: FunctionComponent<OwnProps> = ({
         </Element>
       </Row>
       <Row>
-        <Column xs="6" className={backgroundStyle(fastsattOpptjeningAktivitet.klasse.kode)}>
+        <Column xs="6" className={backgroundStyle(fastsattOpptjeningAktivitet.klasse)}>
           <Row className={styles.timeLineDataContainer}>
             <Column xs="6">
               <div>
@@ -81,7 +81,7 @@ const TimeLineData: FunctionComponent<OwnProps> = ({
               />
             </span>
             )}
-              <FormattedMessage id={periodStatus(fastsattOpptjeningAktivitet.klasse.kode)} />
+              <FormattedMessage id={periodStatus(fastsattOpptjeningAktivitet.klasse)} />
             </Column>
           </Row>
         </Column>

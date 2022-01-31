@@ -14,21 +14,15 @@ const {
 
 const avklarAktiviteterAp = {
   id: 1,
-  definisjon: {
-    kode: AVKLAR_AKTIVITETER,
-    kodeverk: 'test',
-  },
-  status: {
-    kode: aksjonspunktStatus.OPPRETTET,
-    kodeverk: 'test',
-  },
+  definisjon: AVKLAR_AKTIVITETER,
+  status: aksjonspunktStatus.OPPRETTET,
   kanLoses: true,
   erAktivt: true,
 } as Aksjonspunkt;
 
 const aksjonspunkter = [{
-  definisjon: { kode: VURDER_FAKTA_FOR_ATFL_SN, kodeverk: 'test' },
-  status: { kode: 'OPPR', kodeverk: 'test' },
+  definisjon: VURDER_FAKTA_FOR_ATFL_SN,
+  status: 'OPPR',
   erAktivt: true,
   kanLoses: true,
 }];
@@ -60,25 +54,25 @@ describe('<VurderFaktaBeregningPanel>', () => {
   });
 
   it('skal returnere true for endring i avklar med kun avklar aksjonspunkt', () => {
-    const aps = [{ definisjon: { kode: AVKLAR_AKTIVITETER, kodeverk: 'test' } }];
+    const aps = [{ definisjon: AVKLAR_AKTIVITETER }];
     const knappSkalKunneTrykkes = harIkkeEndringerIAvklarMedFlereAksjonspunkter(true, aps as Aksjonspunkt[]);
     expect(knappSkalKunneTrykkes).toBe(true);
   });
 
   it('skal returnere false for endring i avklar med to aksjonspunkter', () => {
-    const aps = [{ definisjon: { kode: AVKLAR_AKTIVITETER } }, { definisjon: { kode: VURDER_FAKTA_FOR_ATFL_SN } }];
+    const aps = [{ definisjon: AVKLAR_AKTIVITETER }, { definisjon: VURDER_FAKTA_FOR_ATFL_SN }];
     const knappSkalKunneTrykkes = harIkkeEndringerIAvklarMedFlereAksjonspunkter(true, aps as Aksjonspunkt[]);
     expect(knappSkalKunneTrykkes).toBe(false);
   });
 
   it('skal returnere true for ingen endring i avklar med VURDER_FAKTA_FOR_ATFL_SN', () => {
-    const aps = [{ definisjon: { kode: VURDER_FAKTA_FOR_ATFL_SN } }];
+    const aps = [{ definisjon: VURDER_FAKTA_FOR_ATFL_SN }];
     const knappSkalKunneTrykkes = harIkkeEndringerIAvklarMedFlereAksjonspunkter(false, aps as Aksjonspunkt[]);
     expect(knappSkalKunneTrykkes).toBe(true);
   });
 
   it('skal returnere true for ingen endring i avklar med to aksjonspunkter', () => {
-    const aps = [{ definisjon: { kode: AVKLAR_AKTIVITETER } }, { definisjon: { kode: VURDER_FAKTA_FOR_ATFL_SN } }];
+    const aps = [{ definisjon: AVKLAR_AKTIVITETER }, { definisjon: VURDER_FAKTA_FOR_ATFL_SN }];
     const knappSkalKunneTrykkes = harIkkeEndringerIAvklarMedFlereAksjonspunkter(false, aps as Aksjonspunkt[]);
     expect(knappSkalKunneTrykkes).toBe(true);
   });

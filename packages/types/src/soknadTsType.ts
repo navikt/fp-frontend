@@ -1,7 +1,5 @@
-import Kodeverk from './kodeverkTsType';
-
 export type ManglendeVedleggSoknad = Readonly<{
-  dokumentType: Kodeverk;
+  dokumentType: string;
   arbeidsgiverReferanse: string;
   brukerHarSagtAtIkkeKommer: boolean;
 }>
@@ -13,7 +11,7 @@ export type UtlandsoppholdPeriode = Readonly<{
 }>
 
 type Soknad = Readonly<{
-  soknadType: Kodeverk;
+  soknadType: string;
   mottattDato: string;
   soknadDato: string;
   tilleggsopplysninger: string;
@@ -36,14 +34,14 @@ type Soknad = Readonly<{
   oppgittFordeling: {
     startDatoForPermisjon?: string;
   };
-  spraakkode: Kodeverk;
+  spraakkode: string;
   utstedtdato?: string;
   termindato?: string;
   fodselsdatoer?: Record<number, string>;
   omsorgsovertakelseDato?: string;
   barnetsAnkomstTilNorgeDato?: string;
   adopsjonFodelsedatoer?: Record<number, string>;
-  farSokerType?: Kodeverk;
+  farSokerType?: string;
 }>
 
 export default Soknad;

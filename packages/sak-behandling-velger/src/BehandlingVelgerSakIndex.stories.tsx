@@ -2,14 +2,11 @@ import React, { useState } from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import { BehandlingAppKontekst, Behandlingsresultat, Kodeverk } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, Behandlingsresultat } from '@fpsak-frontend/types';
 import { withRouter, alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import BehandlingVelgerSakIndex from './BehandlingVelgerSakIndex';
-
-const BEHANDLING_TYPE_KODEVERK = 'BEHANDLING_TYPE';
-const BEHANDLING_STATUS_KODEVERK = 'BEHANDLING_STATUS';
 
 const locationMock = {
   key: '1',
@@ -19,11 +16,13 @@ const locationMock = {
   hash: 'test',
 };
 
-const getKodeverkFn = (kodeverk: Kodeverk) => {
-  const kodeverkType = KodeverkType[kodeverk.kodeverk as keyof typeof KodeverkType];
-  // @ts-ignore
-  const kodeverkForType = alleKodeverk[kodeverkType];
-  return kodeverkForType.find((k: Kodeverk) => k.kode === kodeverk.kode);
+const getKodeverkFn = (kode: string, kodeverk: KodeverkType, behandlingType: string = BehandlingType.FORSTEGANGSSOKNAD) => {
+  const kodeverkForType = behandlingType === BehandlingType.TILBAKEKREVING || behandlingType === BehandlingType.TILBAKEKREVING_REVURDERING
+    ? alleKodeverk[kodeverk] : alleKodeverk[kodeverk];
+  if (!kodeverkForType || kodeverkForType.length === 0) {
+    throw Error(`Det finnes ingen kodeverk for type ${kodeverk} med kode ${kode}`);
+  }
+  return kodeverkForType.find((k) => k.kode === kode);
 };
 
 export default {
@@ -60,18 +59,9 @@ Default.args = {
   behandlinger: [{
     versjon: 2,
     uuid: '1',
-    type: {
-      kode: behandlingType.FORSTEGANGSSOKNAD,
-      kodeverk: BEHANDLING_TYPE_KODEVERK,
-    },
-    status: {
-      kode: behandlingStatus.AVSLUTTET,
-      kodeverk: BEHANDLING_STATUS_KODEVERK,
-    },
-    sprakkode: {
-      kode: 'NB',
-      kodeverk: '',
-    },
+    type: BehandlingType.FORSTEGANGSSOKNAD,
+    status: behandlingStatus.AVSLUTTET,
+    sprakkode: 'NB',
     erAktivPapirsoknad: false,
     opprettet: '2017-08-02T02:04:25.455',
     avsluttet: '2017-08-03T02:04:25.455',
@@ -84,27 +74,15 @@ Default.args = {
     behandlingKoet: false,
     toTrinnsBehandling: false,
     behandlingsresultat: {
-      type: {
-        kode: 'AVSLÅTT',
-        kodeverk: 'BEHANDLING_RESULTAT_TYPE',
-      },
+      type: 'AVSLÅTT',
     } as Behandlingsresultat,
     behandlingÅrsaker: [],
   }, {
     versjon: 2,
     uuid: '2',
-    type: {
-      kode: behandlingType.DOKUMENTINNSYN,
-      kodeverk: BEHANDLING_TYPE_KODEVERK,
-    },
-    status: {
-      kode: behandlingStatus.OPPRETTET,
-      kodeverk: BEHANDLING_STATUS_KODEVERK,
-    },
-    sprakkode: {
-      kode: 'NB',
-      kodeverk: '',
-    },
+    type: BehandlingType.DOKUMENTINNSYN,
+    status: behandlingStatus.OPPRETTET,
+    sprakkode: 'NB',
     erAktivPapirsoknad: false,
     opprettet: '2017-08-01T02:04:25.455',
     avsluttet: '2017-08-01T02:04:25.455',
@@ -117,27 +95,15 @@ Default.args = {
     behandlingKoet: false,
     toTrinnsBehandling: false,
     behandlingsresultat: {
-      type: {
-        kode: 'INNVILGET',
-        kodeverk: 'BEHANDLING_RESULTAT_TYPE',
-      },
+      type: 'INNVILGET',
     } as Behandlingsresultat,
     behandlingÅrsaker: [],
   }, {
     versjon: 2,
     uuid: '3',
-    type: {
-      kode: behandlingType.REVURDERING,
-      kodeverk: BEHANDLING_TYPE_KODEVERK,
-    },
-    status: {
-      kode: behandlingStatus.OPPRETTET,
-      kodeverk: BEHANDLING_STATUS_KODEVERK,
-    },
-    sprakkode: {
-      kode: 'NB',
-      kodeverk: '',
-    },
+    type: BehandlingType.REVURDERING,
+    status: behandlingStatus.OPPRETTET,
+    sprakkode: 'NB',
     erAktivPapirsoknad: false,
     opprettet: '2017-10-02T02:04:25.455',
     behandlendeEnhetId: '4812',
@@ -152,18 +118,9 @@ Default.args = {
   }, {
     versjon: 2,
     uuid: '4',
-    type: {
-      kode: behandlingType.FORSTEGANGSSOKNAD,
-      kodeverk: BEHANDLING_TYPE_KODEVERK,
-    },
-    status: {
-      kode: behandlingStatus.AVSLUTTET,
-      kodeverk: BEHANDLING_STATUS_KODEVERK,
-    },
-    sprakkode: {
-      kode: 'NB',
-      kodeverk: '',
-    },
+    type: BehandlingType.FORSTEGANGSSOKNAD,
+    status: behandlingStatus.AVSLUTTET,
+    sprakkode: 'NB',
     erAktivPapirsoknad: false,
     opprettet: '2017-07-12T02:04:25.455',
     avsluttet: '2017-07-13T02:04:25.455',
@@ -177,10 +134,7 @@ Default.args = {
     toTrinnsBehandling: false,
     behandlingÅrsaker: [],
     behandlingsresultat: {
-      type: {
-        kode: 'HENLAGT_SØKNAD_TRUKKET',
-        kodeverk: 'BEHANDLING_RESULTAT_TYPE',
-      },
+      type: 'HENLAGT_SØKNAD_TRUKKET',
     } as Behandlingsresultat,
   }],
   noExistingBehandlinger: false,

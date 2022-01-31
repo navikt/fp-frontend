@@ -1,9 +1,7 @@
-import Kodeverk from './kodeverkTsType';
-
 type TilbakekrevingValg = Readonly<{
   erTilbakekrevingVilkårOppfylt: boolean;
   grunnerTilReduksjon: boolean;
-  videreBehandling: Kodeverk;
+  videreBehandling: string;
   varseltekst: string;
 }>
 

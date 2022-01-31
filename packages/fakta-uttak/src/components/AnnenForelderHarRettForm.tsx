@@ -54,8 +54,8 @@ export const AnnenForelderHarRettForm: FunctionComponent<PureOwnProps & MappedOw
       {!readOnly && (
         <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
           {[<FormattedMessage
-            key={`UttakInfoPanel.Aksjonspunkt.${aksjonspunkt.definisjon.kode}`}
-            id={`UttakInfoPanel.Aksjonspunkt.${aksjonspunkt.definisjon.kode}`}
+            key={`UttakInfoPanel.Aksjonspunkt.${aksjonspunkt.definisjon}`}
+            id={`UttakInfoPanel.Aksjonspunkt.${aksjonspunkt.definisjon}`}
           />]}
         </AksjonspunktHelpTextTemp>
       )}

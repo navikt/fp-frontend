@@ -51,27 +51,18 @@ const uttaksresultatPerioder = {
       tom: '2019-10-25',
       aktiviteter: [
         {
-          stønadskontoType: {
-            kode: 'FORELDREPENGER_FØR_FØDSEL',
-            kodeverk: 'STOENADSKONTOTYPE',
-          },
+          stønadskontoType: 'FORELDREPENGER_FØR_FØDSEL',
           prosentArbeid: 0,
           arbeidsforholdId: null,
           eksternArbeidsforholdId: null,
           arbeidsgiverReferanse: '910909088',
           utbetalingsgrad: 100,
-          uttakArbeidType: {
-            kode: 'ORDINÆRT_ARBEID',
-            kodeverk: 'UTTAK_ARBEID_TYPE',
-          },
+          uttakArbeidType: 'ORDINÆRT_ARBEID',
           gradering: false,
           trekkdagerDesimaler: 15,
         },
       ],
-      periodeResultatType: {
-        kode: 'INNVILGET',
-        kodeverk: 'PERIODE_RESULTAT_TYPE',
-      },
+      periodeResultatType: 'INNVILGET',
       begrunnelse: null,
       periodeResultatÅrsak: {
         kode: '2006',
@@ -80,10 +71,7 @@ const uttaksresultatPerioder = {
         gyldigFom: '2000-01-01',
         gyldigTom: '9999-12-31',
       },
-      manuellBehandlingÅrsak: {
-        kode: '-',
-        kodeverk: 'MANUELL_BEHANDLING_AARSAK',
-      },
+      manuellBehandlingÅrsak: '-',
       graderingAvslagÅrsak: {
         kode: '-',
         navn: 'Ikke definert',
@@ -95,18 +83,9 @@ const uttaksresultatPerioder = {
       samtidigUttak: false,
       samtidigUttaksprosent: null,
       graderingInnvilget: false,
-      periodeType: {
-        kode: 'FORELDREPENGER_FØR_FØDSEL',
-        kodeverk: 'UTTAK_PERIODE_TYPE',
-      },
-      utsettelseType: {
-        kode: '-',
-        kodeverk: 'UTTAK_UTSETTELSE_TYPE',
-      },
-      oppholdÅrsak: {
-        kode: '-',
-        kodeverk: 'OPPHOLD_AARSAK_TYPE',
-      },
+      periodeType: 'FORELDREPENGER_FØR_FØDSEL',
+      utsettelseType: '-',
+      oppholdÅrsak: '-',
       gradertAktivitet: null,
       graderingsAvslagÅrsakLovhjemmel: null,
     },
@@ -120,17 +99,9 @@ const behandling = {
   uuid: 'test-uuid',
   versjon: 1,
   behandlingÅrsaker: [],
-  sprakkode: {
-    kode: 'NO',
-  },
-  type: {
-    kode: behandlingType.FORSTEGANGSSOKNAD,
-    kodeverk: '',
-  },
-  status: {
-    kode: behandlingStatus.OPPRETTET,
-    kodeverk: '',
-  },
+  sprakkode: 'NO',
+  type: behandlingType.FORSTEGANGSSOKNAD,
+  status: behandlingStatus.OPPRETTET,
   behandlingsresultat: {
   } as Behandling['behandlingsresultat'],
 } as Behandling;
@@ -181,16 +152,10 @@ describe('<UttakProsessStegInitPanel>', () => {
     isReadOnly: false,
     readOnlySubmitButton: false,
     aksjonspunkter: [{
-      definisjon: {
-        kode: aksjonspunktCodes.FASTSETT_UTTAKPERIODER,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.FASTSETT_UTTAKPERIODER,
       erAktivt: true,
       kanLoses: true,
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      status: aksjonspunktStatus.OPPRETTET,
     }] as Aksjonspunkt[],
     vilkar: [],
     isAksjonspunktOpen: true,
@@ -207,10 +172,7 @@ describe('<UttakProsessStegInitPanel>', () => {
           arbeidsgiverOpplysningerPerId={{}}
           personoversikt={{
             bruker: {
-              kjønn: {
-                kode: KjønnkodeEnum.KVINNE,
-                kodeverk: '',
-              },
+              kjønn: KjønnkodeEnum.KVINNE,
             },
           } as Personoversikt}
           rettigheter={{

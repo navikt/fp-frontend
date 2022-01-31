@@ -23,7 +23,7 @@ interface OwnProps {
 }
 
 const UTENLANDSSAK_AKSJONSPUNKTER = [aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK];
-const erMarkertUtenlandssak = (aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter.some((ap) => ap.definisjon.kode === UTENLANDSSAK_AKSJONSPUNKTER[0]);
+const erMarkertUtenlandssak = (aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter.some((ap) => ap.definisjon === UTENLANDSSAK_AKSJONSPUNKTER[0]);
 
 const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
   aksjonspunkter,
@@ -59,7 +59,7 @@ const SakenFaktaPanel: FunctionComponent<OwnProps> = ({
             dokStatus={dokStatus}
             readOnly={readOnly}
             harApneAksjonspunkter={harApneAksjonspunkter}
-            aksjonspunkt={aksjonspunkter.find((ap) => ap.definisjon.kode === UTENLANDSSAK_AKSJONSPUNKTER[0])}
+            aksjonspunkt={aksjonspunkter.find((ap) => ap.definisjon === UTENLANDSSAK_AKSJONSPUNKTER[0])}
             submittable={submittable}
             submitCallback={submitCallback}
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}

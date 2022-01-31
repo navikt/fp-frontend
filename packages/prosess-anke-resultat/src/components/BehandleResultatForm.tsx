@@ -7,16 +7,14 @@ import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { ProsessStegSubmitButton, validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
 import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
-import {
-  Aksjonspunkt, AlleKodeverk, AnkeVurdering, Kodeverk,
-} from '@fpsak-frontend/types';
+import { Aksjonspunkt, AlleKodeverk, AnkeVurdering } from '@fpsak-frontend/types';
 import { BekreftVedtakUtenTotrinnskontrollAp, ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import PreviewAnkeLink, { BrevData } from './PreviewAnkeLink';
@@ -24,8 +22,8 @@ import PreviewAnkeLink, { BrevData } from './PreviewAnkeLink';
 const isVedtakUtenToTrinn = (apCode: string): boolean => apCode === AksjonspunktCode.VEDTAK_UTEN_TOTRINNSKONTROLL;
 const isMedUnderskriver = (apCode: string): boolean => apCode === AksjonspunktCode.FORESLA_VEDTAK;
 const isFatterVedtak = (apCode: string): boolean => apCode === AksjonspunktCode.FATTER_VEDTAK;
-const skalViseForhaandlenke = (avr?: Kodeverk): boolean => avr?.kode === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE
-  || avr?.kode === ankeVurdering.ANKE_OMGJOER || avr?.kode === ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV;
+const skalViseForhaandlenke = (avr?: string): boolean => avr === ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE
+  || avr === ankeVurdering.ANKE_OMGJOER || avr === ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV;
 
 interface OwnPropsResultat {
   ankeVurderingResultat?: AnkeVurdering['ankeVurderingResultat'];
@@ -99,8 +97,8 @@ export const ResultatAvvise: FunctionComponent<OwnPropsResultat> = ({
   </>
 );
 
-const hentSprakKode = (ankeOmgjoerArsak: Kodeverk): string => {
-  switch (ankeOmgjoerArsak.kode) {
+const hentSprakKode = (ankeOmgjoerArsak: string): string => {
+  switch (ankeOmgjoerArsak) {
     case ankeVurderingOmgjoer.ANKE_TIL_UGUNST: return 'Ankebehandling.Resultat.Innstilling.Omgjores.TilUgunst';
     case ankeVurderingOmgjoer.ANKE_TIL_GUNST: return 'Ankebehandling.Resultat.Innstilling.Omgjores.TilGunst';
     case ankeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST: return 'Ankebehandling.Resultat.Innstilling.Omgjores.Delvis';
@@ -118,7 +116,7 @@ export const ResultatOmgjores: FunctionComponent<OwnPropsResultat & { alleKodeve
     {ankeVurderingResultat.ankeOmgjoerArsak && (
       <>
         <Undertekst><FormattedMessage id="Ankebehandling.Resultat.Innstilling.Arsak" /></Undertekst>
-        <Undertekst>{getKodeverknavnFn(alleKodeverk, kodeverkTyper)(ankeVurderingResultat.ankeOmgjoerArsak)}</Undertekst>
+        <Undertekst>{getKodeverknavnFn(alleKodeverk)(ankeVurderingResultat.ankeOmgjoerArsak, KodeverkType.ANKE_OMGJOER_AARSAK)}</Undertekst>
         <VerticalSpacer sixteenPx />
       </>
     )}
@@ -134,7 +132,7 @@ export const AnkeResultat: FunctionComponent<OwnPropsResultat & { alleKodeverk: 
   if (!ankeVurderingResultat) {
     return null;
   }
-  switch (ankeVurderingResultat.ankeVurdering.kode) {
+  switch (ankeVurderingResultat.ankeVurdering) {
     case ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK: return (<ResultatEnkel ankeVurderingResultat={ankeVurderingResultat} />);
     case ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE: return (<ResultatOpphev ankeVurderingResultat={ankeVurderingResultat} />);
     case ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV: return (<ResultatHjemsend ankeVurderingResultat={ankeVurderingResultat} />);
@@ -160,7 +158,7 @@ interface PureOwnProps {
 
 interface MappedOwnProps {
   aksjonspunktCode: string;
-  ankeVurderingVerdi?: Kodeverk;
+  ankeVurderingVerdi?: string;
   fritekstTilBrev?: string;
   initialValues: FormValues;
   onSubmit: (formValues: FormValues) => any;
@@ -236,9 +234,9 @@ const finnAksjonspunktKode = createSelector([
   (ownProps: PureOwnProps) => ownProps.aksjonspunkter, (ownProps: PureOwnProps) => ownProps.readOnly],
 (aksjonspunkter, readOnly): string => {
   const vedtaksaksjonspunkt = aksjonspunkter
-    .filter((ap: Aksjonspunkt) => readOnly || ap.status.kode === aksjonspunktStatus.OPPRETTET)
-    .filter((ap: Aksjonspunkt) => isVedtakUtenToTrinn(ap.definisjon.kode) || isMedUnderskriver(ap.definisjon.kode) || isFatterVedtak(ap.definisjon.kode));
-  return !vedtaksaksjonspunkt || vedtaksaksjonspunkt.length === 0 ? AksjonspunktCode.FATTER_VEDTAK : vedtaksaksjonspunkt[0].definisjon.kode;
+    .filter((ap: Aksjonspunkt) => readOnly || ap.status === aksjonspunktStatus.OPPRETTET)
+    .filter((ap: Aksjonspunkt) => isVedtakUtenToTrinn(ap.definisjon) || isMedUnderskriver(ap.definisjon) || isFatterVedtak(ap.definisjon));
+  return !vedtaksaksjonspunkt || vedtaksaksjonspunkt.length === 0 ? AksjonspunktCode.FATTER_VEDTAK : vedtaksaksjonspunkt[0].definisjon;
 });
 
 const lagSubmitFn = createSelector([

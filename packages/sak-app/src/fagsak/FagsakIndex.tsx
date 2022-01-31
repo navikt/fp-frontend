@@ -8,7 +8,6 @@ import { Location } from 'history';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import VisittkortSakIndex from '@fpsak-frontend/sak-visittkort';
-import { Kodeverk } from '@fpsak-frontend/types';
 
 import { LoadingPanel, DataFetchPendingModal } from '@fpsak-frontend/shared-components';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
@@ -32,8 +31,8 @@ const finnLenkeTilAnnenPart = (annenPartBehandling: AnnenPartBehandling): string
   annenPartBehandling.saksnummer, annenPartBehandling.behandlingUuid,
 );
 
-const erTilbakekreving = (behandlingType?: Kodeverk): boolean => !!behandlingType
-  && (BehandlingType.TILBAKEKREVING === behandlingType.kode || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType.kode);
+const erTilbakekreving = (behandlingType?: string): boolean => !!behandlingType
+  && (BehandlingType.TILBAKEKREVING === behandlingType || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType);
 
 const henterData = (state: RestApiState): boolean => state === RestApiState.NOT_STARTED || state === RestApiState.LOADING;
 

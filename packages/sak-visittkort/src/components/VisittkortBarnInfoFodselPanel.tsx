@@ -53,7 +53,7 @@ const VisittkortBarnInfoFodselPanel: FunctionComponent<OwnProps & WrappedCompone
     hendelseType, hendelseDato, antallBarn, dødfødsel,
   } = familiehendelse;
 
-  const visFødselsdato = hendelseType.kode === familieHendelseType.FODSEL;
+  const visFødselsdato = hendelseType === familieHendelseType.FODSEL;
 
   return (
     <>

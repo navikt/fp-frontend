@@ -39,25 +39,25 @@ const APTekster = {
 } as Record<string, string>;
 
 const findAksjonspunktHelpTekst = (gjeldendeAksjonspunkt: Aksjonspunkt, erVarigEndring: boolean): string => {
-  if (gjeldendeAksjonspunkt.definisjon.kode === VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE) {
+  if (gjeldendeAksjonspunkt.definisjon === VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE) {
     return erVarigEndring
       ? 'Beregningsgrunnlag.Helptext.SelvstendigNaeringsdrivende.VarigEndring'
       : 'Beregningsgrunnlag.Helptext.SelvstendigNaeringsdrivende.Nyoppstartet';
   }
-  return APTekster[gjeldendeAksjonspunkt.definisjon.kode];
+  return APTekster[gjeldendeAksjonspunkt.definisjon];
 };
 
 const lagAksjonspunktHelpText = (åpneAksjonspunkter: Aksjonspunkt[],
   avvikProsent: number,
   alleAndelerIForstePeriode: BeregningsgrunnlagAndel[]): ReactElement => {
-  const snAndel = alleAndelerIForstePeriode.find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
+  const snAndel = alleAndelerIForstePeriode.find((andel) => andel.aktivitetStatus === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
   const erVarigEndring = !!(snAndel?.næringer?.some((naring) => naring.erVarigEndret === true));
   return (
     <div>
       <AksjonspunktHelpTextHTML>
         {åpneAksjonspunkter.map((ap) => (
           <FormattedMessage
-            key={ap.definisjon.kode}
+            key={ap.definisjon}
             id={findAksjonspunktHelpTekst(ap, erVarigEndring)}
             values={{ verdi: avvikProsent, b: (chunks: any) => <b>{chunks}</b>, br: <br /> }}
           />
@@ -79,7 +79,7 @@ const AksjonspunktTittel: FunctionComponent<OwnProps> = ({
 }) => {
   const førstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode ? beregningsgrunnlag.beregningsgrunnlagPeriode[0] : undefined;
   const andelerIFørstePeriode = førstePeriode && førstePeriode.beregningsgrunnlagPrStatusOgAndel ? førstePeriode.beregningsgrunnlagPrStatusOgAndel : [];
-  const åpneAksjonspunkter = aksjonspunkter.filter((ap) => isAksjonspunktOpen(ap.status.kode));
+  const åpneAksjonspunkter = aksjonspunkter.filter((ap) => isAksjonspunktOpen(ap.status));
   const harGrunnTilÅViseKomponent = definertOgIkkeTom(åpneAksjonspunkter) && definertOgIkkeTom(andelerIFørstePeriode);
   if (!harGrunnTilÅViseKomponent) {
     return null;

@@ -28,10 +28,7 @@ describe('<SvangerskapInngangsvilkarInitPanel>', () => {
     const toggleOverstyring = () => {};
 
     const vilkar = [{
-      vilkarType: {
-        kode: vilkarType.SVANGERSKAPVILKARET,
-        kodeverk: '',
-      },
+      vilkarType: vilkarType.SVANGERSKAPVILKARET,
     } as Vilkar];
 
     const innerElement = panel.renderProp('renderPanel')({ vilkar }, erOverstyrt, toggleOverstyring);

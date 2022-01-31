@@ -16,22 +16,13 @@ const behandling = {
 } as Behandling;
 
 const aksjonspunkter = [{
-  definisjon: {
-    kode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER,
-    kodeverk: '',
-  },
-  status: {
-    kode: aksjonspunktStatus.OPPRETTET,
-    kodeverk: '',
-  },
+  definisjon: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE_MERKNADER,
+  status: aksjonspunktStatus.OPPRETTET,
   begrunnelse: undefined,
 }] as Aksjonspunkt[];
 
 const ankeVurderingResultat = {
-  ankeVurdering: {
-    kode: ankeVurdering.ANKE_AVVIS,
-    kodeverk: '',
-  },
+  ankeVurdering: ankeVurdering.ANKE_AVVIS,
   påAnketKlageBehandlingUuid: '1',
   erAnkerIkkePart: true,
   erIkkeKonkret: true,
@@ -67,10 +58,7 @@ export const visPanelForResultatVedStadfestYtelsesvedtak = () => (
     ankeVurdering={{
       ankeVurderingResultat: {
         ...ankeVurderingResultat,
-        ankeVurdering: {
-          kode: ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK,
-          kodeverk: '',
-        },
+        ankeVurdering: ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK,
       },
     } as AnkeVurdering}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
@@ -83,10 +71,7 @@ export const visPanelForResultatVedOppheveOgHjemsende = () => (
     ankeVurdering={{
       ankeVurderingResultat: {
         ...ankeVurderingResultat,
-        ankeVurdering: {
-          kode: ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE,
-          kodeverk: '',
-        },
+        ankeVurdering: ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE,
       },
     } as AnkeVurdering}
     previewCallback={action('button-click') as (data: any) => Promise<any>}
@@ -99,14 +84,8 @@ export const visPanelForResultatVedOmgjør = () => (
     ankeVurdering={{
       ankeVurderingResultat: {
         ...ankeVurderingResultat,
-        ankeVurdering: {
-          kode: ankeVurdering.ANKE_OMGJOER,
-          kodeverk: '',
-        },
-        ankeVurderingOmgjoer: {
-          kode: ankeVurderingOmgjoer.ANKE_TIL_UGUNST,
-          kodeverk: '',
-        },
+        ankeVurdering: ankeVurdering.ANKE_OMGJOER,
+        ankeVurderingOmgjoer: ankeVurderingOmgjoer.ANKE_TIL_UGUNST,
         ankeOmgjoerArsakNavn: 'Testårsak',
       },
     } as AnkeVurdering}

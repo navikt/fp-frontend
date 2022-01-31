@@ -11,18 +11,9 @@ import AktorSakIndex from './AktorSakIndex';
 
 const fagsak = {
   saksnummer: '35425245',
-  fagsakYtelseType: {
-    kode: fagsakYtelseType.FORELDREPENGER,
-    kodeverk: '',
-  },
-  relasjonsRolleType: {
-    kode: relasjonsRolleType.MOR,
-    kodeverk: '',
-  },
-  status: {
-    kode: fagsakStatus.UNDER_BEHANDLING,
-    kodeverk: '',
-  },
+  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+  relasjonsRolleType: relasjonsRolleType.MOR,
+  status: fagsakStatus.UNDER_BEHANDLING,
   barnFodt: '2020-01-01',
   opprettet: '2020-01-01',
   endret: '2020-01-01',
@@ -60,7 +51,7 @@ Default.args = {
     }],
     person: {
       navn: 'Espen Utvikler',
-      kjønn: { kode: KjønnkodeEnum.MANN, kodeverk: '' },
+      kjønn: KjønnkodeEnum.MANN,
       fødselsdato: '1979-01-01',
       fødselsnummer: '123456233',
       aktørId: '2323',

@@ -17,7 +17,7 @@ import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less'
 import styles from './naeringsOpplysningsPanel.less';
 
 const finnvirksomhetsTypeKode = (næring: Næring): string => {
-  const kode = næring?.virksomhetType?.kode;
+  const kode = næring?.virksomhetType;
   return kode || 'UDEFINERT';
 };
 const virksomhetsDatoer = (næring: Næring): string | undefined => {
@@ -95,7 +95,7 @@ export const NaeringsopplysningsPanel: FunctionComponent<OwnProps & WrappedCompo
   arbeidsgiverOpplysningerPerId,
   intl,
 }) => {
-  const snAndel = alleAndelerIForstePeriode.find((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
+  const snAndel = alleAndelerIForstePeriode.find((andel) => andel.aktivitetStatus === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
   if (!snAndel?.næringer) {
     return null;
   }

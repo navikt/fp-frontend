@@ -48,7 +48,7 @@ const alleKodeverk = {
 } as AlleKodeverk;
 
 const apsAvklarAktiviteter = [{
-  definisjon: { kode: AVKLAR_AKTIVITETER, kodeverk: 'test' }, status: { kode: 'OPPR', kodeverk: 'test' }, erAktivt: true, kanLoses: true,
+  definisjon: AVKLAR_AKTIVITETER, status: 'OPPR', erAktivt: true, kanLoses: true,
 }];
 
 const aktivitet1 = {
@@ -56,7 +56,7 @@ const aktivitet1 = {
   fom: '2019-01-01',
   tom: null,
   skalBrukes: null,
-  arbeidsforholdType: { kode: 'ARBEID', navn: 'Arbeid', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+  arbeidsforholdType: 'ARBEID',
 };
 
 const aktivitet2 = {
@@ -65,7 +65,7 @@ const aktivitet2 = {
   fom: '2019-01-01',
   tom: '2019-02-02',
   skalBrukes: true,
-  arbeidsforholdType: { kode: 'ARBEID', navn: 'Arbeid', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+  arbeidsforholdType: 'ARBEID',
 };
 
 const aktivitet3 = {
@@ -75,12 +75,12 @@ const aktivitet3 = {
   fom: '2019-01-01',
   tom: '2019-02-02',
   skalBrukes: false,
-  arbeidsforholdType: { kode: 'ARBEID', navn: 'Arbeid', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+  arbeidsforholdType: 'ARBEID',
 };
 
 const aktivitetAAP = {
   arbeidsgiverIdent: null,
-  arbeidsforholdType: { kode: 'AAP', navn: 'Arbeidsavklaringspenger', kodeverk: 'OPPTJENING_AKTIVITET_TYPE' },
+  arbeidsforholdType: 'AAP',
   fom: '2019-01-01',
   tom: '2020-02-02',
   skalBrukes: null,
@@ -125,8 +125,8 @@ describe('<AvklareAktiviteterPanel>', () => {
       ],
     };
     const aksjonspunkter = [{
-      definisjon: { kode: AVKLAR_AKTIVITETER, kodeverk: 'test' },
-      status: { kode: 'OPPR', kodeverk: 'test' },
+      definisjon: AVKLAR_AKTIVITETER,
+      status: 'OPPR',
       kanLoses: true,
       erAktivt: true,
     }];
@@ -194,7 +194,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       ],
     };
     const aksjonspunkter = [{
-      definisjon: { kode: OVERSTYRING_AV_BEREGNINGSAKTIVITETER, kodeverk: 'test' }, status: { kode: 'OPPR', kodeverk: 'test' }, erAktivt: true, kanLoses: true,
+      definisjon: OVERSTYRING_AV_BEREGNINGSAKTIVITETER, status: 'OPPR', erAktivt: true, kanLoses: true,
     }];
 
     const wrapper = shallowWithIntl(<AvklareAktiviteterPanelImpl
@@ -229,7 +229,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       ],
     };
     const aksjonspunkter = [{
-      definisjon: { kode: OVERSTYRING_AV_BEREGNINGSAKTIVITETER, kodeverk: 'test' }, status: { kode: 'OPPR', kodeverk: 'test' }, erAktivt: true, kanLoses: true,
+      definisjon: OVERSTYRING_AV_BEREGNINGSAKTIVITETER, status: 'OPPR', erAktivt: true, kanLoses: true,
     }];
 
     const wrapper = shallowWithIntl(<AvklareAktiviteterPanelImpl
@@ -309,7 +309,7 @@ describe('<AvklareAktiviteterPanel>', () => {
       ],
     };
     const aps = [{
-      definisjon: { kode: OVERSTYRING_AV_BEREGNINGSAKTIVITETER, kodeverk: 'test' }, status: { kode: 'OPPR', kodeverk: 'test' }, erAktivt: true, kanLoses: true,
+      definisjon: OVERSTYRING_AV_BEREGNINGSAKTIVITETER, status: 'OPPR', erAktivt: true, kanLoses: true,
     }];
     const initialValues = buildInitialValuesAvklarAktiviteter({
       alleKodeverk,

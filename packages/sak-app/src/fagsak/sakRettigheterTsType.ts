@@ -1,7 +1,5 @@
-import { Kodeverk } from '@fpsak-frontend/types';
-
 type BehandlingOppretting = Readonly<{
-  behandlingType: Kodeverk;
+  behandlingType: string;
   kanOppretteBehandling: boolean;
 }>
 

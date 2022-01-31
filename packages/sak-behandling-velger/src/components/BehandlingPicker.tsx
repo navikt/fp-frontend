@@ -4,7 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { Location } from 'history';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import { BehandlingAppKontekst, KodeverkMedNavn, Kodeverk } from '@fpsak-frontend/types';
+import { BehandlingAppKontekst, KodeverkMedNavn } from '@fpsak-frontend/types';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import BehandlingPickerItem from './BehandlingPickerItem';
 
@@ -28,7 +29,7 @@ const renderListItems = (
   getBehandlingLocation: (behandlingUuid: string) => Location,
   showAll: boolean,
   toggleShowAll: () => void,
-  getKodeverkFn: (kodeverk: Kodeverk, behandlingType: Kodeverk) => KodeverkMedNavn | undefined,
+  getKodeverkFn: (kode: string, kodeverk: KodeverkType, behandlingType?: string) => KodeverkMedNavn | undefined,
   behandlingUuid?: string,
 ): ReactElement[] => (
   sortBehandlinger(behandlinger)
@@ -55,7 +56,7 @@ interface OwnProps {
   behandlingUuid?: string;
   showAll: boolean;
   toggleShowAll: () => void;
-  getKodeverkFn: (kodeverk: Kodeverk, behandlingType: Kodeverk) => KodeverkMedNavn | undefined;
+  getKodeverkFn: (kode: string, kodeverk: KodeverkType, behandlingType?: string) => KodeverkMedNavn | undefined;
 }
 
 /**

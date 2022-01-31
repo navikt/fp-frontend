@@ -18,10 +18,7 @@ import { AnkeBehandlingApiKeys, requestAnkeApi } from '../data/ankeBehandlingApi
 import AnkeBehandlingProsessStegInitPanel from './AnkeBehandlingProsessStegInitPanel';
 
 const fagsak = {
-  fagsakYtelseType: {
-    kode: fagsakYtelseType.FORELDREPENGER,
-    kodeverk: '',
-  },
+  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
 } as Fagsak;
 
 const behandling = {
@@ -45,10 +42,7 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
     isReadOnly: false,
     readOnlySubmitButton: false,
     aksjonspunkter: [{
-      definisjon: {
-        kode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
       erAktivt: true,
       kanLoses: true,
     }] as Aksjonspunkt[],
@@ -122,8 +116,9 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
       behandlingUuid: 'test-uuid',
       ytelseType: {
         kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: '',
+        kodeverk: 'FAGSAK_YTELSE',
       },
+      fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
     }));
   });
 
@@ -155,9 +150,7 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
     await waitFor(() => expect(submitCallback).toHaveBeenCalledTimes(1));
     expect(submitCallback).toHaveBeenNthCalledWith(1, {
       ankeOmgjoerArsak: '-',
-      ankeVurdering: {
-        kode: 'ANKE_STADFESTE_YTELSESVEDTAK',
-      },
+      ankeVurdering: 'ANKE_STADFESTE_YTELSESVEDTAK',
       ankeVurderingOmgjoer: '-',
       begrunnelse: 'Dette er en begrunnelse',
       erAnkerIkkePart: false,
@@ -169,7 +162,6 @@ describe('<AnkeBehandlingProsessStegInitPanel>', () => {
       fritekstTilBrev: 'Dette er en fritekst',
       kode: '5093',
       påAnketKlageBehandlingUuid: null,
-
     });
   });
 });

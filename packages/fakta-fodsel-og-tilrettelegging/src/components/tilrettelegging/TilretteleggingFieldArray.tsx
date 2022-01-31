@@ -16,7 +16,7 @@ import {
   hasValidDecimal, maxValue, minValue, required, hasValidDate,
 } from '@fpsak-frontend/utils';
 import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
-import { Kodeverk, Permisjon } from '@fpsak-frontend/types';
+import { Permisjon } from '@fpsak-frontend/types';
 
 import TilretteleggingUtbetalingsgrad, { OVERSTYRT_UTBETALINGSGRAD_FIELDNAME } from './TilretteleggingUtbetalingsgrad';
 import { finnSkalTaHensynTilPermisjon, finnPermisjonFieldName } from './VelferdspermisjonSection';
@@ -37,7 +37,7 @@ export const finnUtbetalingsgradForTilrettelegging = (
 };
 
 interface TilretteleggingDato {
-  type: Kodeverk;
+  type: string;
   stillingsprosent: number;
 }
 
@@ -86,7 +86,7 @@ export const TilretteleggingFieldArray: FunctionComponent<PureOwnProps & MappedO
   >
     {(fieldId: string, index, getRemoveButton: () => ReactNode) => {
       const data = tilretteleggingDatoer[index];
-      const tilretteleggingKode = data?.type?.kode;
+      const tilretteleggingKode = data?.type;
       return (
         <Row key={fieldId} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
           <Column xs="12">

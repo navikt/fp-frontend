@@ -14,9 +14,7 @@ const sammenligningsgrunnlag = (kode) => ({
   rapportertPrAar: 330000,
   avvikPromille: 275,
   avvikProsent: 27.5,
-  sammenligningsgrunnlagType: {
-    kode,
-  },
+  sammenligningsgrunnlagType: kode,
   differanseBeregnet: 12100,
 });
 

@@ -7,14 +7,8 @@ import { hasIkkeOppfyltSoknadsfristvilkar } from './VedtakHelper';
 describe('<VedtakHelper>', () => {
   it('hasIkkeOppfyltSoknadsfristvilkar skal returnere true når søknadfristvilkår ikkje er oppfylt', () => {
     const vilkarListe = [{
-      vilkarType: {
-        kode: vilkarType.SOKNADFRISTVILKARET,
-        kodeverk: '',
-      },
-      vilkarStatus: {
-        kode: vilkarUtfallType.IKKE_OPPFYLT,
-        kodeverk: '',
-      },
+      vilkarType: vilkarType.SOKNADFRISTVILKARET,
+      vilkarStatus: vilkarUtfallType.IKKE_OPPFYLT,
       lovReferanse: '§ 22-13, 2. ledd',
     }] as Vilkar[];
 

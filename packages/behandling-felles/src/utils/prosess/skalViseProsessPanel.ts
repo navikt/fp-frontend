@@ -10,7 +10,7 @@ const skalViseProsessPanel = (
     return harAksjonspunkter;
   }
 
-  const harVilkar = vilkarKoder.some((vc) => vilkar.some((v) => v.vilkarType.kode === vc));
+  const harVilkar = vilkarKoder.some((vc) => vilkar.some((v) => v.vilkarType === vc));
   if (harVilkar && !harAksjonspunkter) {
     return true;
   }

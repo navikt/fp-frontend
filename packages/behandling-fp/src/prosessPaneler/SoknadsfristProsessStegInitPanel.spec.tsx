@@ -29,10 +29,7 @@ describe('<SoknadsfristProsessStegInitPanel>', () => {
     const panel = wrapper.find<ProsessDefaultInitPanelProps<INIT_DATA, any> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     const aksjonspunkter = [{
-      definisjon: {
-        kode: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
     }] as Aksjonspunkt[];
 
     expect(panel.props().skalPanelVisesIMeny({

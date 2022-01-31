@@ -38,7 +38,7 @@ export const fjernIdFraArbeidsforholdLagtTilAvSaksbehandler = (arbeidsforhold: C
   });
 
 const harAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
-  .some((ap: Aksjonspunkt) => ap.definisjon.kode === aksjonspunktCode);
+  .some((ap: Aksjonspunkt) => ap.definisjon === aksjonspunktCode);
 
 interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];

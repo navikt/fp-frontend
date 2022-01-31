@@ -5,10 +5,7 @@ import { lagNøkkelDelvisRefusjon, lagNøkkelRefusjonsstart } from './VurderEndr
 const BEGRUNNELSE_FIELD = 'VURDER_REFUSJON_BERGRUNN_BEGRUNNELSE';
 
 const lagAndel = (agNavn: string, agOrgnr: string, arbId?: string, dato?: string) => ({
-  aktivitetStatus: {
-    kode: 'AT',
-    kodeverk: 'test',
-  },
+  aktivitetStatus: 'AT',
   nyttRefusjonskravFom: dato,
   arbeidsgiver: {
     arbeidsgiverOrgnr: agOrgnr,

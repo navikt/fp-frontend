@@ -22,14 +22,8 @@ const defaultBehandling = {
 } as Behandling;
 
 const defaultAksjonspunkter = [{
-  definisjon: {
-    kode: aksjonspunktCodes.VURDER_INNSYN,
-    kodeverk: '',
-  },
-  status: {
-    kode: aksjonspunktStatus.OPPRETTET,
-    kodeverk: '',
-  },
+  definisjon: aksjonspunktCodes.VURDER_INNSYN,
+  status: aksjonspunktStatus.OPPRETTET,
   begrunnelse: undefined,
 }] as Aksjonspunkt[];
 
@@ -98,20 +92,14 @@ InnsynSattPaVent.args = {
   },
   aksjonspunkter: [{
     ...defaultAksjonspunkter[0],
-    status: {
-      kode: aksjonspunktStatus.UTFORT,
-      kodeverk: '',
-    },
+    status: aksjonspunktStatus.UTFORT,
     begrunnelse: 'Dette er en begrunnelse',
   }],
   isReadOnly: true,
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   innsyn: {
     dokumenter: [] as InnsynDokument[],
-    innsynResultatType: {
-      kode: innsynResultatType.INNVILGET,
-      kodeverk: 'BEHANDLING_RESULTAT_TYPE',
-    },
+    innsynResultatType: innsynResultatType.INNVILGET,
     innsynMottattDato: '2021-12-12',
     vedtaksdokumentasjon: [{
       dokumentId: '1',

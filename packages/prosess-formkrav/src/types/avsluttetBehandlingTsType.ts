@@ -1,7 +1,5 @@
-import { Kodeverk } from '@fpsak-frontend/types';
-
 type AvsluttetBehandling = {
-  type: Kodeverk;
+  type: string;
   avsluttet?: string;
   uuid: string;
 };

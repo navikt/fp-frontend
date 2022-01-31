@@ -4,7 +4,7 @@ import moment from 'moment';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   Table, TableColumn, TableRow, VerticalSpacer, FloatRight,
 } from '@fpsak-frontend/shared-components';
@@ -12,9 +12,7 @@ import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@fpsa
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
-import {
-  ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriodeAndel, Kodeverk, AlleKodeverk,
-} from '@fpsak-frontend/types';
+import { ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriodeAndel, AlleKodeverk } from '@fpsak-frontend/types';
 
 import { PeriodeMedId } from './TilkjentYtelse';
 
@@ -24,12 +22,12 @@ const getEndCharFromId = (id: string): string => (id ? `...${id.substring(id.len
 
 const createVisningNavnForUttakArbeidstaker = (
   andel: BeregningsresultatPeriodeAndel,
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ReactElement | string => {
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[andel.arbeidsgiverReferanse];
   if (!arbeidsgiverOpplysninger || !arbeidsgiverOpplysninger.navn) {
-    return andel.arbeidsforholdType ? getKodeverknavn(andel.arbeidsforholdType) : '';
+    return andel.arbeidsforholdType ? getKodeverknavn(andel.arbeidsforholdType, KodeverkType.OPPTJENING_AKTIVITET_TYPE) : '';
   }
   return arbeidsgiverOpplysninger.erPrivatPerson
     ? `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.fødselsdato})`
@@ -59,10 +57,10 @@ const tableHeaderTextCodes = (isFagsakSVP = false): string[] => {
 
 const findAndelsnavn = (
   andel: BeregningsresultatPeriodeAndel,
-  getKodeverknavn: (kodeverk: Kodeverk) => string,
+  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ReactElement | string => {
-  switch (andel.aktivitetStatus.kode) {
+  switch (andel.aktivitetStatus) {
     case aktivitetStatus.ARBEIDSTAKER:
       return createVisningNavnForUttakArbeidstaker(andel, getKodeverknavn, arbeidsgiverOpplysningerPerId);
     case aktivitetStatus.FRILANSER:
@@ -125,7 +123,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
 }) => {
   const numberOfDaysAndWeeks = calcDaysAndWeeks(selectedItemStartDate, selectedItemEndDate);
   const intl = useIntl();
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk, kodeverkTyper);
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
   return (
     <TimeLineDataContainer>
@@ -200,7 +198,7 @@ const TilkjentYtelseTimeLineData: FunctionComponent<OwnProps> = ({
                   <TableColumn><Normaltekst>{andel.utbetalingsgrad ? andel.utbetalingsgrad : ''}</Normaltekst></TableColumn>
                   <TableColumn>
                     <Normaltekst>
-                      {andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER && andel.refusjon ? andel.refusjon : ''}
+                      {andel.aktivitetStatus === aktivitetStatus.ARBEIDSTAKER && andel.refusjon ? andel.refusjon : ''}
                     </Normaltekst>
                   </TableColumn>
                   <TableColumn><Normaltekst>{andel.tilSoker ? andel.tilSoker : ''}</Normaltekst></TableColumn>

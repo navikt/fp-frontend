@@ -6,7 +6,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { formatCurrencyWithKr } from '@fpsak-frontend/utils';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import {
-  Behandlingsresultat, BeregningsresultatFp, BeregningsresultatEs, Kodeverk,
+  Behandlingsresultat, BeregningsresultatFp, BeregningsresultatEs,
 } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
@@ -17,7 +17,7 @@ interface OwnProps {
   revurderingsÅrsakString?: string;
   isReadOnly: boolean;
   resultatstruktur?: BeregningsresultatFp | BeregningsresultatEs;
-  språkKode: Kodeverk;
+  språkKode: string;
   behandlingsresultat: Behandlingsresultat;
   beregningErManueltFastsatt: boolean;
   skalBrukeOverstyrendeFritekstBrev: boolean;

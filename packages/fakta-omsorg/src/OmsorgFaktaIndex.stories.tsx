@@ -27,14 +27,8 @@ const personoversikt = {
   bruker: {
     navn: 'Espen Utvikler',
     aktoerId: '1',
-    kjønn: {
-      kode: KjønnkodeEnum.MANN,
-      kodeverk: '',
-    },
-    sivilstand: {
-      kode: sivilstandType.SAMBOER,
-      kodeverk: '',
-    },
+    kjønn: KjønnkodeEnum.MANN,
+    sivilstand: sivilstandType.SAMBOER,
     fødselsdato: '1989-01-01',
     adresser: [],
   },
@@ -42,14 +36,8 @@ const personoversikt = {
     navn: 'Petra Utvikler',
     adresser: [],
     aktoerId: '2',
-    kjønn: {
-      kode: KjønnkodeEnum.KVINNE,
-      kodeverk: '',
-    },
-    sivilstand: {
-      kode: sivilstandType.SAMBOER,
-      kodeverk: '',
-    },
+    kjønn: KjønnkodeEnum.KVINNE,
+    sivilstand: sivilstandType.SAMBOER,
     fødselsdato: '1989-01-01',
   },
   barn: [{
@@ -58,14 +46,8 @@ const personoversikt = {
     fødselsdato: '2018-01-01',
     adresser: [],
     aktoerId: '3',
-    kjønn: {
-      kode: KjønnkodeEnum.KVINNE,
-      kodeverk: '',
-    },
-    sivilstand: {
-      kode: sivilstandType.UGIFT,
-      kodeverk: '',
-    },
+    kjønn: KjønnkodeEnum.KVINNE,
+    sivilstand: sivilstandType.UGIFT,
   }],
 } as Personoversikt;
 
@@ -98,14 +80,8 @@ export const visÅpentAksjonspunktForKontrollAvOmBrukerHarAleneomsorg = () => (
     soknad={soknad}
     personoversikt={personoversikt}
     aksjonspunkter={[{
-      definisjon: {
-        kode: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+      status: aksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,
@@ -125,14 +101,8 @@ export const visÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg = () => (
     soknad={soknad}
     personoversikt={personoversikt}
     aksjonspunkter={[{
-      definisjon: {
-        kode: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
+      status: aksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,

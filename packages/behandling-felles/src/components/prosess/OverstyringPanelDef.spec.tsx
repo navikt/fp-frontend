@@ -21,10 +21,7 @@ const fagsak = {
 const behandling = {
   uuid: '1',
   versjon: 2,
-  status: {
-    kode: behandlingStatus.OPPRETTET,
-    kodeverk: '',
-  },
+  status: behandlingStatus.OPPRETTET,
   behandlingPaaVent: false,
 } as Behandling;
 const rettigheter = {
@@ -60,20 +57,11 @@ describe('<OverstyringPanelDef>', () => {
     });
 
     const vilkar = [{
-      vilkarType: {
-        kode: vilkarType.MEDLEMSKAPSVILKARET,
-        kodeverk: '',
-      },
+      vilkarType: vilkarType.MEDLEMSKAPSVILKARET,
     } as Vilkar];
     const aksjonspunkter = [{
-      definisjon: {
-        kode: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+      status: aksjonspunktStatus.OPPRETTET,
       kanLoses: true,
     }] as Aksjonspunkt[];
 

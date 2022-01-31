@@ -1,7 +1,5 @@
-import Kodeverk from './kodeverkTsType';
-
 export type OpptjeningAktivitet = {
-  aktivitetType: Kodeverk;
+  aktivitetType: string;
   opptjeningFom: string;
   opptjeningTom: string;
   arbeidsgiverReferanse: string;
@@ -16,8 +14,8 @@ export type OpptjeningAktivitet = {
 export type FastsattOpptjeningAktivitet = {
   fom: string;
   tom: string;
-  type: Kodeverk;
-  klasse: Kodeverk;
+  type: string;
+  klasse: string;
   aktivitetReferanse: string;
   arbeidsgiverNavn: string;
 };

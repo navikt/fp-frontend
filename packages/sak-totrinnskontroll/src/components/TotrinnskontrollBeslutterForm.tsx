@@ -11,7 +11,7 @@ import konsekvensForYtelsen from '@fpsak-frontend/kodeverk/src/konsekvensForYtel
 import { ariaCheck, decodeHtmlEntity } from '@fpsak-frontend/utils';
 import { VerticalSpacer, AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
 import {
-  Behandling, Kodeverk, KodeverkMedNavn, KlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,
+  Behandling, KodeverkMedNavn, KlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 
 import AksjonspunktGodkjenningFieldArray, { AksjonspunktGodkjenningData } from './AksjonspunktGodkjenningFieldArray';
@@ -32,20 +32,20 @@ const harIkkeKonsekvenserForYtelsen = (konsekvenserForYtelsenKoder: string[], be
   if (!Array.isArray(konsekvenserForYtelsen) || konsekvenserForYtelsen.length !== 1) {
     return true;
   }
-  return !konsekvenserForYtelsenKoder.some((kode) => kode === konsekvenserForYtelsen[0].kode);
+  return !konsekvenserForYtelsenKoder.some((kode) => kode === konsekvenserForYtelsen[0]);
 };
 
-const finnArsaker = (vurderPaNyttArsaker: Kodeverk[]) => vurderPaNyttArsaker.reduce((acc, arsak) => {
-  if (arsak.kode === vurderPaNyttArsakType.FEIL_FAKTA) {
+const finnArsaker = (vurderPaNyttArsaker: string[]) => vurderPaNyttArsaker.reduce((acc, arsak) => {
+  if (arsak === vurderPaNyttArsakType.FEIL_FAKTA) {
     return { ...acc, feilFakta: true };
   }
-  if (arsak.kode === vurderPaNyttArsakType.FEIL_LOV) {
+  if (arsak === vurderPaNyttArsakType.FEIL_LOV) {
     return { ...acc, feilLov: true };
   }
-  if (arsak.kode === vurderPaNyttArsakType.FEIL_REGEL) {
+  if (arsak === vurderPaNyttArsakType.FEIL_REGEL) {
     return { ...acc, feilRegel: true };
   }
-  if (arsak.kode === vurderPaNyttArsakType.ANNET) {
+  if (arsak === vurderPaNyttArsakType.ANNET) {
     return { ...acc, annet: true };
   }
   return {};
@@ -108,7 +108,7 @@ export const TotrinnskontrollBeslutterForm: FunctionComponent<OwnProps> = ({
   setBeslutterForData,
 }) => {
   const erKlage = behandlingKlageVurdering && (!!behandlingKlageVurdering.klageVurderingResultatNFP || !!behandlingKlageVurdering.klageVurderingResultatNK);
-  const erAnke = behandling && behandling.type.kode === BehandlingType.ANKE;
+  const erAnke = behandling && behandling.type === BehandlingType.ANKE;
   const harIkkeKonsekvensForYtelse = useMemo(() => harIkkeKonsekvenserForYtelsen([
     konsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, konsekvensForYtelsen.INGEN_ENDRING,
   ], behandling.behandlingsresultat), [behandling.behandlingsresultat]);

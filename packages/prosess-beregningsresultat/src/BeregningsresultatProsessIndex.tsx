@@ -37,7 +37,7 @@ const BeregningsresultatProsessIndex: FunctionComponent<OwnProps & StandardProse
       submitCallback={submitCallback}
       kanOverstyre={kanOverstyreAccess.isEnabled}
       toggleOverstyring={toggleOverstyring}
-      erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon.kode]?.notAccepted)}
+      erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted)}
       formData={formData}
       setFormData={setFormData}
     />

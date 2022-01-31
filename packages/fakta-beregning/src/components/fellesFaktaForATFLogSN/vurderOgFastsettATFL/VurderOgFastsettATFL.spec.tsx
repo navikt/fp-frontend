@@ -27,8 +27,8 @@ const lagBeregningsgrunnlag = (andeler) => ({
       beregningsgrunnlagPrStatusOgAndel: andeler.map((andel) => (
         {
           andelsnr: andel.andelsnr,
-          aktivitetStatus: { kode: andel.aktivitetStatus },
-          inntektskategori: { kode: andel.inntektskategori },
+          aktivitetStatus: andel.aktivitetStatus,
+          inntektskategori: andel.inntektskategori,
           erNyoppstartet: andel.erNyoppstartet,
         }
       )),
@@ -39,7 +39,7 @@ const lagBeregningsgrunnlag = (andeler) => ({
 const lagFaktaOmBeregning = (tilfeller, arbeidsforholdMedLønnsendringUtenIM,
   arbeidstakerOgFrilanserISammeOrganisasjonListe,
   vurderMottarYtelse = {}) => ({
-  faktaOmBeregningTilfeller: tilfeller.map((kode) => ({ kode })),
+  faktaOmBeregningTilfeller: tilfeller,
   vurderBesteberegning: {},
   arbeidsforholdMedLønnsendringUtenIM,
   arbeidstakerOgFrilanserISammeOrganisasjonListe,
@@ -49,8 +49,8 @@ const lagFaktaOmBeregning = (tilfeller, arbeidsforholdMedLønnsendringUtenIM,
 const lagAndel = (andelsnr, aktivitetStatus, inntektskategori) => (
   {
     andelsnr,
-    aktivitetStatus: { kode: aktivitetStatus, kodeverk: 'AKTIVITET_STATUS' },
-    inntektskategori: { kode: inntektskategori, kodeverk: 'INNTEKTSKATEGORI' },
+    aktivitetStatus,
+    inntektskategori,
   }
 );
 

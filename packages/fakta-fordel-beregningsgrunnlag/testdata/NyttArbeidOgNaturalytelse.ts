@@ -3,10 +3,7 @@ import { Beregningsgrunnlag, BeregningsgrunnlagAndel, FordelBeregningsgrunnlagAn
 export const beregningsgrunnlag = {
   skjaeringstidspunktBeregning: '2019-12-14',
   skjæringstidspunkt: '2019-12-14',
-  aktivitetStatus: [{
-    kodeverk: 'AKTIVITET_STATUS',
-    kode: 'AT_FL',
-  }],
+  aktivitetStatus: ['AT_FL'],
   beregningsgrunnlagPeriode: [{
     beregningsgrunnlagPeriodeFom: '2019-12-14',
     beregningsgrunnlagPeriodeTom: '2019-12-15',
@@ -18,28 +15,19 @@ export const beregningsgrunnlag = {
       dtoType: 'GENERELL',
       beregningsgrunnlagFom: '2019-09-01',
       beregningsgrunnlagTom: '2019-11-30',
-      aktivitetStatus: {
-        kodeverk: 'AKTIVITET_STATUS',
-        kode: 'AT',
-      },
+      aktivitetStatus: 'AT',
       beregningsperiodeFom: '2019-09-01',
       beregningsperiodeTom: '2019-11-30',
       beregnetPrAar: 456120.0,
       bruttoPrAar: 456120.0,
       andelsnr: 2,
-      inntektskategori: {
-        kodeverk: 'INNTEKTSKATEGORI',
-        kode: 'ARBEIDSTAKER',
-      },
+      inntektskategori: 'ARBEIDSTAKER',
       arbeidsforhold: {
         arbeidsgiverIdent: '922745943',
         arbeidsgiverIdVisning: '922745943',
         startdato: '2019-08-01',
         opphoersdato: '2020-01-31',
-        arbeidsforholdType: {
-          kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-          kode: 'ARBEID',
-        },
+        arbeidsforholdType: 'ARBEID',
         refusjonPrAar: 0.0,
         belopFraInntektsmeldingPrMnd: 38010,
       },
@@ -53,24 +41,15 @@ export const beregningsgrunnlag = {
       dtoType: 'FL',
       beregningsgrunnlagFom: '2019-09-01',
       beregningsgrunnlagTom: '2019-11-30',
-      aktivitetStatus: {
-        kodeverk: 'AKTIVITET_STATUS',
-        kode: 'FL',
-      },
+      aktivitetStatus: 'FL',
       beregningsperiodeFom: '2019-09-01',
       beregningsperiodeTom: '2019-11-30',
       beregnetPrAar: 0.0,
       bruttoPrAar: 0.0,
       andelsnr: 1,
-      inntektskategori: {
-        kodeverk: 'INNTEKTSKATEGORI',
-        kode: 'FRILANSER',
-      },
+      inntektskategori: 'FRILANSER',
       arbeidsforhold: {
-        arbeidsforholdType: {
-          kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-          kode: 'FRILANS',
-        },
+        arbeidsforholdType: 'FRILANS',
       },
       fastsattAvSaksbehandler: false,
       lagtTilAvSaksbehandler: false,
@@ -92,28 +71,19 @@ export const beregningsgrunnlag = {
       dtoType: 'AT',
       beregningsgrunnlagFom: '2019-09-01',
       beregningsgrunnlagTom: '2019-11-30',
-      aktivitetStatus: {
-        kodeverk: 'AKTIVITET_STATUS',
-        kode: 'AT',
-      },
+      aktivitetStatus: 'AT',
       beregningsperiodeFom: '2019-09-01',
       beregningsperiodeTom: '2019-11-30',
       beregnetPrAar: 456120.0,
       bruttoPrAar: 456120.0,
       andelsnr: 2,
-      inntektskategori: {
-        kodeverk: 'INNTEKTSKATEGORI',
-        kode: 'ARBEIDSTAKER',
-      },
+      inntektskategori: 'ARBEIDSTAKER',
       arbeidsforhold: {
         arbeidsgiverIdent: '922745943',
         arbeidsgiverIdVisning: '922745943',
         startdato: '2019-08-01',
         opphoersdato: '2020-01-31',
-        arbeidsforholdType: {
-          kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-          kode: 'ARBEID',
-        },
+        arbeidsforholdType: 'ARBEID',
         refusjonPrAar: 0.0,
         belopFraInntektsmeldingPrMnd: 38010,
         naturalytelseBortfaltPrÅr: 6000.0,
@@ -129,24 +99,15 @@ export const beregningsgrunnlag = {
       dtoType: 'FL',
       beregningsgrunnlagFom: '2019-09-01',
       beregningsgrunnlagTom: '2019-11-30',
-      aktivitetStatus: {
-        kodeverk: 'AKTIVITET_STATUS',
-        kode: 'FL',
-      },
+      aktivitetStatus: 'FL',
       beregningsperiodeFom: '2019-09-01',
       beregningsperiodeTom: '2019-11-30',
       beregnetPrAar: 0.0,
       bruttoPrAar: 0.0,
       andelsnr: 1,
-      inntektskategori: {
-        kodeverk: 'INNTEKTSKATEGORI',
-        kode: 'FRILANSER',
-      },
+      inntektskategori: 'FRILANSER',
       arbeidsforhold: {
-        arbeidsforholdType: {
-          kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-          kode: 'FRILANS',
-        },
+        arbeidsforholdType: 'FRILANS',
       },
       fastsattAvSaksbehandler: false,
       lagtTilAvSaksbehandler: false,
@@ -160,36 +121,24 @@ export const beregningsgrunnlag = {
     beregnetPrAar: 456120.0,
     bruttoPrAar: 456120.0,
     bruttoInkludertBortfaltNaturalytelsePrAar: 462120.0,
-    periodeAarsaker: [{
-      kodeverk: 'PERIODE_AARSAK',
-      kode: 'ENDRING_I_REFUSJONSKRAV',
-    }],
+    periodeAarsaker: ['ENDRING_I_REFUSJONSKRAV'],
     beregningsgrunnlagPrStatusOgAndel: [{
       dtoType: 'AT',
       beregningsgrunnlagFom: '2019-09-01',
       beregningsgrunnlagTom: '2019-11-30',
-      aktivitetStatus: {
-        kodeverk: 'AKTIVITET_STATUS',
-        kode: 'AT',
-      },
+      aktivitetStatus: 'AT',
       beregningsperiodeFom: '2019-09-01',
       beregningsperiodeTom: '2019-11-30',
       beregnetPrAar: 456120.0,
       bruttoPrAar: 456120.0,
       andelsnr: 2,
-      inntektskategori: {
-        kodeverk: 'INNTEKTSKATEGORI',
-        kode: 'ARBEIDSTAKER',
-      },
+      inntektskategori: 'ARBEIDSTAKER',
       arbeidsforhold: {
         arbeidsgiverIdent: '922745943',
         arbeidsgiverIdVisning: '922745943',
         startdato: '2019-08-01',
         opphoersdato: '2020-01-31',
-        arbeidsforholdType: {
-          kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-          kode: 'ARBEID',
-        },
+        arbeidsforholdType: 'ARBEID',
         refusjonPrAar: 0.0,
         belopFraInntektsmeldingPrMnd: 38010,
         naturalytelseBortfaltPrÅr: 6000.0,
@@ -205,25 +154,16 @@ export const beregningsgrunnlag = {
       dtoType: 'GENERELL',
       beregningsgrunnlagFom: '2019-09-01',
       beregningsgrunnlagTom: '2019-11-30',
-      aktivitetStatus: {
-        kodeverk: 'AKTIVITET_STATUS',
-        kode: 'AT',
-      },
+      aktivitetStatus: 'AT',
       beregningsperiodeFom: '2019-09-01',
       beregningsperiodeTom: '2019-11-30',
       andelsnr: 3,
-      inntektskategori: {
-        kodeverk: 'INNTEKTSKATEGORI',
-        kode: '-',
-      },
+      inntektskategori: '-',
       arbeidsforhold: {
         arbeidsgiverIdent: '883551222',
         arbeidsgiverIdVisning: '883551222',
         startdato: '2020-01-01',
-        arbeidsforholdType: {
-          kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-          kode: 'ARBEID',
-        },
+        arbeidsforholdType: 'ARBEID',
         refusjonPrAar: 470238.0,
         belopFraInntektsmeldingPrMnd: 39186.5,
       },
@@ -234,24 +174,15 @@ export const beregningsgrunnlag = {
       erTilkommetAndel: true,
       skalFastsetteGrunnlag: false,
     }, {
-      aktivitetStatus: {
-        kodeverk: 'AKTIVITET_STATUS',
-        kode: 'FL',
-      },
+      aktivitetStatus: 'FL',
       beregningsperiodeFom: '2019-09-01',
       beregningsperiodeTom: '2019-11-30',
       beregnetPrAar: 0.0,
       bruttoPrAar: 0.0,
       andelsnr: 1,
-      inntektskategori: {
-        kodeverk: 'INNTEKTSKATEGORI',
-        kode: 'FRILANSER',
-      },
+      inntektskategori: 'FRILANSER',
       arbeidsforhold: {
-        arbeidsforholdType: {
-          kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-          kode: 'FRILANS',
-        },
+        arbeidsforholdType: 'FRILANS',
       },
       fastsattAvSaksbehandler: false,
       lagtTilAvSaksbehandler: false,
@@ -266,10 +197,7 @@ export const beregningsgrunnlag = {
     rapportertPrAar: 461946.28,
     avvikPromille: 12.6124622,
     avvikProsent: 1.26124622,
-    sammenligningsgrunnlagType: {
-      kodeverk: 'SAMMENLIGNINGSGUNNLAG_TYPE',
-      kode: 'SAMMENLIGNING_ATFL_SN',
-    },
+    sammenligningsgrunnlagType: 'SAMMENLIGNING_ATFL_SN',
     differanseBeregnet: -5826.28,
   },
   sammenligningsgrunnlagPrStatus: [{
@@ -278,10 +206,7 @@ export const beregningsgrunnlag = {
     rapportertPrAar: 461946.28,
     avvikPromille: 12.6124622,
     avvikProsent: 1.26124622,
-    sammenligningsgrunnlagType: {
-      kodeverk: 'SAMMENLIGNINGSGUNNLAG_TYPE',
-      kode: 'SAMMENLIGNING_ATFL_SN',
-    },
+    sammenligningsgrunnlagType: 'SAMMENLIGNING_ATFL_SN',
     differanseBeregnet: -5826.28,
   }],
   ledetekstBrutto: 'Brutto beregningsgrunnlag',
@@ -293,23 +218,14 @@ export const beregningsgrunnlag = {
     frilansAndel: {
       andelsnr: 1,
       arbeidsforhold: {
-        arbeidsforholdType: {
-          kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-          kode: 'FRILANS',
-        },
+        arbeidsforholdType: 'FRILANS',
       },
-      inntektskategori: {
-        kodeverk: 'INNTEKTSKATEGORI',
-        kode: 'FRILANSER',
-      },
+      inntektskategori: 'FRILANSER',
       lagtTilAvSaksbehandler: false,
       fastsattAvSaksbehandler: false,
       andelIArbeid: [],
     },
-    faktaOmBeregningTilfeller: [{
-      kodeverk: 'FAKTA_OM_BEREGNING_TILFELLE',
-      kode: 'VURDER_MOTTAR_YTELSE',
-    }],
+    faktaOmBeregningTilfeller: ['VURDER_MOTTAR_YTELSE'],
     vurderMottarYtelse: {
       erFrilans: true,
       frilansMottarYtelse: true,
@@ -322,25 +238,16 @@ export const beregningsgrunnlag = {
         aktiviteter: [{
           fom: '2013-04-01',
           tom: '9999-12-31',
-          arbeidsforholdType: {
-            kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-            kode: 'FRILANS',
-          },
+          arbeidsforholdType: 'FRILANS',
         }, {
           fom: '2019-06-12',
           tom: '2019-12-15',
-          arbeidsforholdType: {
-            kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-            kode: 'SYKEPENGER',
-          },
+          arbeidsforholdType: 'SYKEPENGER',
         }, {
           arbeidsgiverIdent: '922745943',
           fom: '2019-08-01',
           tom: '2020-01-31',
-          arbeidsforholdType: {
-            kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-            kode: 'ARBEID',
-          },
+          arbeidsforholdType: 'ARBEID',
         }],
       }, {
         tom: '2019-08-01',
@@ -348,29 +255,17 @@ export const beregningsgrunnlag = {
           arbeidsgiverIdent: '991945970',
           fom: '2018-02-01',
           tom: '2019-07-31',
-          arbeidsforholdType: {
-            kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-            kode: 'ARBEID',
-          },
+          arbeidsforholdType: 'ARBEID',
         }],
       }],
     },
     andelerForFaktaOmBeregning: [{
       belopReadOnly: 0.0,
       fastsattBelop: 0.0,
-      inntektskategori: {
-        kodeverk: 'INNTEKTSKATEGORI',
-        kode: 'FRILANSER',
-      },
-      aktivitetStatus: {
-        kodeverk: 'AKTIVITET_STATUS',
-        kode: 'FL',
-      },
+      inntektskategori: 'FRILANSER',
+      aktivitetStatus: 'FL',
       arbeidsforhold: {
-        arbeidsforholdType: {
-          kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-          kode: 'FRILANS',
-        },
+        arbeidsforholdType: 'FRILANS',
       },
       andelsnr: 1,
       skalKunneEndreAktivitet: false,
@@ -378,23 +273,14 @@ export const beregningsgrunnlag = {
     }, {
       belopReadOnly: 38010,
       fastsattBelop: 38010.0,
-      inntektskategori: {
-        kodeverk: 'INNTEKTSKATEGORI',
-        kode: 'ARBEIDSTAKER',
-      },
-      aktivitetStatus: {
-        kodeverk: 'AKTIVITET_STATUS',
-        kode: 'AT',
-      },
+      inntektskategori: 'ARBEIDSTAKER',
+      aktivitetStatus: 'AT',
       arbeidsforhold: {
         arbeidsgiverIdent: '922745943',
         arbeidsgiverIdVisning: '922745943',
         startdato: '2019-08-01',
         opphoersdato: '2020-01-31',
-        arbeidsforholdType: {
-          kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-          kode: 'ARBEID',
-        },
+        arbeidsforholdType: 'ARBEID',
         refusjonPrAar: 0.0,
         belopFraInntektsmeldingPrMnd: 38010,
       },
@@ -406,10 +292,7 @@ export const beregningsgrunnlag = {
       harMilitaer: false,
     },
   },
-  hjemmel: {
-    kodeverk: 'BG_HJEMMEL',
-    kode: 'F_14_7_8_40',
-  },
+  hjemmel: 'F_14_7_8_40',
   faktaOmFordeling: {
     fordelBeregningsgrunnlag: {
       fordelBeregningsgrunnlagPerioder: [{
@@ -418,28 +301,16 @@ export const beregningsgrunnlag = {
         fordelBeregningsgrunnlagAndeler: [{
           andelsnr: 1,
           arbeidsforhold: {
-            arbeidsforholdType: {
-              kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-              kode: 'FRILANS',
-            },
+            arbeidsforholdType: 'FRILANS',
           },
-          inntektskategori: {
-            kodeverk: 'INNTEKTSKATEGORI',
-            kode: 'FRILANSER',
-          },
-          aktivitetStatus: {
-            kodeverk: 'AKTIVITET_STATUS',
-            kode: 'FL',
-          },
+          inntektskategori: 'FRILANSER',
+          aktivitetStatus: 'FL',
           lagtTilAvSaksbehandler: false,
           fastsattAvSaksbehandler: false,
           andelIArbeid: [0],
           refusjonskravPrAar: 0,
           nyttArbeidsforhold: false,
-          arbeidsforholdType: {
-            kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-            kode: 'FRILANS',
-          },
+          arbeidsforholdType: 'FRILANS',
         }, {
           andelsnr: 2,
           arbeidsforhold: {
@@ -447,20 +318,11 @@ export const beregningsgrunnlag = {
             arbeidsgiverIdVisning: '922745943',
             startdato: '2019-08-01',
             opphoersdato: '2020-01-31',
-            arbeidsforholdType: {
-              kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-              kode: 'ARBEID',
-            },
+            arbeidsforholdType: 'ARBEID',
             refusjonPrAar: 0.0,
           },
-          inntektskategori: {
-            kodeverk: 'INNTEKTSKATEGORI',
-            kode: 'ARBEIDSTAKER',
-          },
-          aktivitetStatus: {
-            kodeverk: 'AKTIVITET_STATUS',
-            kode: 'AT',
-          },
+          inntektskategori: 'ARBEIDSTAKER',
+          aktivitetStatus: 'AT',
           lagtTilAvSaksbehandler: false,
           fastsattAvSaksbehandler: false,
           andelIArbeid: [0],
@@ -468,10 +330,7 @@ export const beregningsgrunnlag = {
           belopFraInntektsmeldingPrAar: 456120,
           refusjonskravFraInntektsmeldingPrAar: 0,
           nyttArbeidsforhold: false,
-          arbeidsforholdType: {
-            kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-            kode: 'ARBEID',
-          },
+          arbeidsforholdType: 'ARBEID',
         }],
         skalRedigereInntekt: false,
         skalPreutfyllesMedBeregningsgrunnlag: false,
@@ -482,28 +341,16 @@ export const beregningsgrunnlag = {
         fordelBeregningsgrunnlagAndeler: [{
           andelsnr: 1,
           arbeidsforhold: {
-            arbeidsforholdType: {
-              kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-              kode: 'FRILANS',
-            },
+            arbeidsforholdType: 'FRILANS',
           },
-          inntektskategori: {
-            kodeverk: 'INNTEKTSKATEGORI',
-            kode: 'FRILANSER',
-          },
-          aktivitetStatus: {
-            kodeverk: 'AKTIVITET_STATUS',
-            kode: 'FL',
-          },
+          inntektskategori: 'FRILANSER',
+          aktivitetStatus: 'FL',
           lagtTilAvSaksbehandler: false,
           fastsattAvSaksbehandler: false,
           andelIArbeid: [0],
           refusjonskravPrAar: 0,
           nyttArbeidsforhold: false,
-          arbeidsforholdType: {
-            kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-            kode: 'FRILANS',
-          },
+          arbeidsforholdType: 'FRILANS',
         }, {
           andelsnr: 2,
           arbeidsforhold: {
@@ -511,21 +358,12 @@ export const beregningsgrunnlag = {
             arbeidsgiverIdVisning: '922745943',
             startdato: '2019-08-01',
             opphoersdato: '2020-01-31',
-            arbeidsforholdType: {
-              kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-              kode: 'ARBEID',
-            },
+            arbeidsforholdType: 'ARBEID',
             refusjonPrAar: 0.0,
             naturalytelseBortfaltPrÅr: 6000.0,
           },
-          inntektskategori: {
-            kodeverk: 'INNTEKTSKATEGORI',
-            kode: 'ARBEIDSTAKER',
-          },
-          aktivitetStatus: {
-            kodeverk: 'AKTIVITET_STATUS',
-            kode: 'AT',
-          },
+          inntektskategori: 'ARBEIDSTAKER',
+          aktivitetStatus: 'AT',
           lagtTilAvSaksbehandler: false,
           fastsattAvSaksbehandler: false,
           andelIArbeid: [0],
@@ -533,10 +371,7 @@ export const beregningsgrunnlag = {
           belopFraInntektsmeldingPrAar: 456120,
           refusjonskravFraInntektsmeldingPrAar: 0,
           nyttArbeidsforhold: false,
-          arbeidsforholdType: {
-            kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-            kode: 'ARBEID',
-          },
+          arbeidsforholdType: 'ARBEID',
         }],
         skalRedigereInntekt: false,
         skalPreutfyllesMedBeregningsgrunnlag: false,
@@ -547,28 +382,16 @@ export const beregningsgrunnlag = {
         fordelBeregningsgrunnlagAndeler: [{
           andelsnr: 1,
           arbeidsforhold: {
-            arbeidsforholdType: {
-              kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-              kode: 'FRILANS',
-            },
+            arbeidsforholdType: 'FRILANS',
           },
-          inntektskategori: {
-            kodeverk: 'INNTEKTSKATEGORI',
-            kode: 'FRILANSER',
-          },
-          aktivitetStatus: {
-            kodeverk: 'AKTIVITET_STATUS',
-            kode: 'FL',
-          },
+          inntektskategori: 'FRILANSER',
+          aktivitetStatus: 'FL',
           lagtTilAvSaksbehandler: false,
           fastsattAvSaksbehandler: false,
           andelIArbeid: [0],
           refusjonskravPrAar: 0,
           nyttArbeidsforhold: false,
-          arbeidsforholdType: {
-            kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-            kode: 'FRILANS',
-          },
+          arbeidsforholdType: 'FRILANS',
         }, {
           andelsnr: 2,
           arbeidsforhold: {
@@ -576,21 +399,12 @@ export const beregningsgrunnlag = {
             arbeidsgiverIdVisning: '922745943',
             startdato: '2019-08-01',
             opphoersdato: '2020-01-31',
-            arbeidsforholdType: {
-              kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-              kode: 'ARBEID',
-            },
+            arbeidsforholdType: 'ARBEID',
             refusjonPrAar: 0.0,
             naturalytelseBortfaltPrÅr: 6000.0,
           },
-          inntektskategori: {
-            kodeverk: 'INNTEKTSKATEGORI',
-            kode: 'ARBEIDSTAKER',
-          },
-          aktivitetStatus: {
-            kodeverk: 'AKTIVITET_STATUS',
-            kode: 'AT',
-          },
+          inntektskategori: 'ARBEIDSTAKER',
+          aktivitetStatus: 'AT',
           lagtTilAvSaksbehandler: false,
           fastsattAvSaksbehandler: false,
           andelIArbeid: [0],
@@ -598,30 +412,18 @@ export const beregningsgrunnlag = {
           belopFraInntektsmeldingPrAar: 456120,
           refusjonskravFraInntektsmeldingPrAar: 0,
           nyttArbeidsforhold: false,
-          arbeidsforholdType: {
-            kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-            kode: 'ARBEID',
-          },
+          arbeidsforholdType: 'ARBEID',
         }, {
           andelsnr: 3,
           arbeidsforhold: {
             arbeidsgiverIdent: '883551222',
             arbeidsgiverIdVisning: '883551222',
             startdato: '2020-01-01',
-            arbeidsforholdType: {
-              kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-              kode: 'ARBEID',
-            },
+            arbeidsforholdType: 'ARBEID',
             refusjonPrAar: 470238.0,
           },
-          inntektskategori: {
-            kodeverk: 'INNTEKTSKATEGORI',
-            kode: '-',
-          },
-          aktivitetStatus: {
-            kodeverk: 'AKTIVITET_STATUS',
-            kode: 'AT',
-          },
+          inntektskategori: '-',
+          aktivitetStatus: 'AT',
           lagtTilAvSaksbehandler: false,
           fastsattAvSaksbehandler: false,
           andelIArbeid: [0],
@@ -629,10 +431,7 @@ export const beregningsgrunnlag = {
           belopFraInntektsmeldingPrAar: 470238,
           refusjonskravFraInntektsmeldingPrAar: 470238,
           nyttArbeidsforhold: true,
-          arbeidsforholdType: {
-            kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-            kode: 'ARBEID',
-          },
+          arbeidsforholdType: 'ARBEID',
         } as FordelBeregningsgrunnlagAndel],
         skalRedigereInntekt: true,
         skalPreutfyllesMedBeregningsgrunnlag: false,
@@ -641,10 +440,7 @@ export const beregningsgrunnlag = {
       arbeidsforholdTilFordeling: [{
         arbeidsgiverIdent: '883551222',
         startdato: '2020-01-01',
-        arbeidsforholdType: {
-          kodeverk: 'OPPTJENING_AKTIVITET_TYPE',
-          kode: 'ARBEID',
-        },
+        arbeidsforholdType: 'ARBEID',
         refusjonPrAar: 470238.0,
         perioderMedGraderingEllerRefusjon: [{
           erRefusjon: true,
@@ -662,10 +458,10 @@ export const beregningsgrunnlag = {
 
 export const aksjonspunkt = [
   {
-    definisjon: { kode: '5046', kodeverk: 'AKSJONSPUNKT_DEF' },
-    status: { kode: 'OPPR', kodeverk: 'AKSJONSPUNKT_STATUS' },
+    definisjon: '5046',
+    status: 'OPPR',
     toTrinnsBehandling: true,
-    aksjonspunktType: { kode: 'MANU', kodeverk: 'AKSJONSPUNKT_TYPE' },
+    aksjonspunktType: 'MANU',
     kanLoses: true,
     erAktivt: true,
   }];

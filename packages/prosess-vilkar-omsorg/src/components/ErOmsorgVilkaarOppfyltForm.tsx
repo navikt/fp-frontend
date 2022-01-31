@@ -36,7 +36,7 @@ export const buildInitialValues = (
 const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): AksjonspunktData => aksjonspunkter.map((ap) => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
-  kode: validerApKodeOgHentApEnum(ap.definisjon.kode, AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
+  kode: validerApKodeOgHentApEnum(ap.definisjon, AksjonspunktCode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
     AksjonspunktCode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
     AksjonspunktCode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN),
 }));
@@ -80,7 +80,7 @@ const ErOmsorgVilkaarOppfyltForm: FunctionComponent<OwnProps> = ({
 
   const avslagsarsaker = alleKodeverk[kodeverkTyper.AVSLAGSARSAK][vilkarType.OMSORGSVILKARET];
 
-  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
+  const isOpenAksjonspunkt = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status));
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : vilkarUtfallType.OPPFYLT === status;
 
   return (

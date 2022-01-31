@@ -13,10 +13,7 @@ const intlMock = getIntlMock(messages);
 describe('<FritekstAnkeBrevTextField>', () => {
   it('skal rendre komponent korrekt', () => {
     const wrapper = shallow(<FritekstAnkeBrevTextField.WrappedComponent
-      sprakkode={{
-        kode: 'nb',
-        kodeverk: '',
-      }}
+      sprakkode="nb"
       readOnly={false}
       intl={intlMock}
     />);

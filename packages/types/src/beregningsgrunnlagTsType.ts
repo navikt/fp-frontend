@@ -1,11 +1,10 @@
-import Kodeverk from './kodeverkTsType';
 import RefusjonTilVurdering, { FaktaOmFordeling } from './beregningsgrunnlagFordelingTsType';
 import { Besteberegninggrunnlag } from './besteberegningTsTypes';
 import BeregningsgrunnlagArbeidsforhold from './beregningsgrunnlagArbeidsforholdTsType';
 import FaktaOmBeregning from './beregningsgrunnlagFaktaTsType';
 
 export type InntektsgrunnlagInntekt = Readonly<{
-  inntektAktivitetType: Kodeverk,
+  inntektAktivitetType: string,
   beløp: number;
 }>
 
@@ -21,7 +20,7 @@ export type Inntektsgrunnlag = Readonly<{
 
 export type Næring = Readonly <{
   orgnr: string;
-  virksomhetType: Kodeverk;
+  virksomhetType: string;
   utenlandskvirksomhetsnavn?: string;
   erVarigEndret?: boolean;
   erNyoppstartet?: boolean;
@@ -42,11 +41,11 @@ export type PgiVerdier = Readonly <{
 }>
 
 export type BeregningsgrunnlagAndel = Readonly <{
-  aktivitetStatus: Kodeverk;
-  arbeidsforholdType?: Kodeverk;
+  aktivitetStatus: string;
+  arbeidsforholdType?: string;
   arbeidsforhold?: BeregningsgrunnlagArbeidsforhold;
   avkortetPrAar?: number;
-  inntektskategori?: Kodeverk;
+  inntektskategori?: string;
 
   // Fjern disse to da er flyttet inn i arbeidsforhold objektet over her
   bortfaltNaturalytelse?: number;
@@ -82,7 +81,7 @@ export type YtelseGrunnlag = Readonly<{
 }>;
 
 export type SammenligningsgrunlagProp = Readonly<{
-  sammenligningsgrunnlagType: Kodeverk;
+  sammenligningsgrunnlagType: string;
   differanseBeregnet: number;
   avvikProsent: number;
   avvikPromille: number;
@@ -104,7 +103,7 @@ export type BeregningsgrunnlagPeriodeProp = Readonly<{
   ledetekstRedusert?: string;
   overstyrtPrAar?: number;
   redusertPrAar?: number;
-  periodeAarsaker?: Kodeverk[];
+  periodeAarsaker?: string[];
   beregningsgrunnlagPrStatusOgAndel?: BeregningsgrunnlagAndel[];
 }>
 
@@ -113,7 +112,7 @@ type Beregningsgrunnlag = Readonly<{
   dekningsgrad: number;
   grunnbeløp: number;
   erOverstyrtInntekt: boolean;
-  aktivitetStatus?: Kodeverk[];
+  aktivitetStatus?: string[];
   beregningsgrunnlagPeriode: BeregningsgrunnlagPeriodeProp[];
   sammenligningsgrunnlag?: SammenligningsgrunlagProp;
   sammenligningsgrunnlagPrStatus?: SammenligningsgrunlagProp[];

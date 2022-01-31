@@ -13,7 +13,7 @@ import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktSta
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { guid, omitMany } from '@fpsak-frontend/utils';
 import {
-  Aksjonspunkt, Kodeverk, AlleKodeverk, Medlemskap, MedlemPeriode, Soknad, MedlemskapPeriode,
+  Aksjonspunkt, AlleKodeverk, Medlemskap, MedlemPeriode, Soknad, MedlemskapPeriode,
 } from '@fpsak-frontend/types';
 import {
   AvklarFortsattMedlemskapAp,
@@ -83,7 +83,7 @@ interface PureOwnProps {
   soknad: Soknad;
   medlemskap: Medlemskap;
   aksjonspunkter: Aksjonspunkt[];
-  behandlingType: Kodeverk;
+  behandlingType: string;
   submitCallback: (data: AksjonspunktData) => Promise<void>;
   submittable: boolean;
   readOnly: boolean;
@@ -272,18 +272,18 @@ const mapOgFiltrerPerioder = (ap: Aksjonspunkt, perioder: OppholdFormValues[]) =
     'termindato',
     'årsaker']));
 
-  return perioderTilLagring.filter((periode: PeriodeMedId) => periode.aksjonspunkter.includes(ap.definisjon.kode)
-    || (periode.aksjonspunkter.length > 0 && ap.definisjon.kode === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP));
+  return perioderTilLagring.filter((periode: PeriodeMedId) => periode.aksjonspunkter.includes(ap.definisjon)
+    || (periode.aksjonspunkter.length > 0 && ap.definisjon === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP));
 };
 
 export const transformValues = (perioder: OppholdFormValues[], aksjonspunkter: Aksjonspunkt[]): AksjonspunktData => {
   const aktiveMedlemAksjonspunkter = aksjonspunkter
-    .filter((ap) => medlemAksjonspunkter.some((kode) => kode === ap.definisjon.kode))
+    .filter((ap) => medlemAksjonspunkter.some((kode) => kode === ap.definisjon))
     .filter((ap) => ap.erAktivt);
 
   // @ts-ignore Fiks
   return aktiveMedlemAksjonspunkter.map((ap) => ({
-    kode: ap.definisjon.kode,
+    kode: ap.definisjon,
     begrunnelse: '',
     bekreftedePerioder: mapOgFiltrerPerioder(ap, perioder),
   }));
@@ -308,7 +308,7 @@ const lagSubmitFn = createSelector([
 (submitCallback, aksjonspunkter) => (values: any) => submitCallback(transformValues(values.perioder, aksjonspunkter)));
 
 const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
-  const hasOpenAksjonspunkter = ownProps.aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status.kode));
+  const hasOpenAksjonspunkter = ownProps.aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status));
   return {
     hasOpenAksjonspunkter,
     onSubmit: lagSubmitFn(ownProps),

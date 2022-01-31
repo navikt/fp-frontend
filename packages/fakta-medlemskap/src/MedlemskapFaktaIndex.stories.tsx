@@ -15,15 +15,9 @@ import MedlemskapFaktaIndex from './MedlemskapFaktaIndex';
 const behandling = {
   uuid: '1',
   versjon: 1,
-  type: {
-    kode: behandlingType.FORSTEGANGSSOKNAD,
-    kodeverk: '',
-  },
+  type: behandlingType.FORSTEGANGSSOKNAD,
   behandlingPaaVent: false,
-  status: {
-    kode: behandlingStatus.BEHANDLING_UTREDES,
-    kodeverk: '',
-  },
+  status: behandlingStatus.BEHANDLING_UTREDES,
 } as Behandling;
 
 const soknad = {
@@ -51,54 +45,30 @@ const medlemskap = {
   opphold: [{
     fom: '2019-01-01',
     tom: '2021-10-13',
-    oppholdstillatelseType: {
-      kode: 'MIDLERTIDIG',
-      kodeverk: '',
-    },
+    oppholdstillatelseType: 'MIDLERTIDIG',
   }, {
     tom: '2021-01-13',
-    oppholdstillatelseType: {
-      kode: 'MIDLERTIDIG',
-      kodeverk: '',
-    },
+    oppholdstillatelseType: 'MIDLERTIDIG',
   }],
   medlemskapPerioder: [{
     fom: '2019-01-01',
     tom: '2021-10-13',
-    medlemskapType: {
-      kode: 'AVKLARES',
-      kodeverk: 'MEDLEMSKAP_TYPE',
-    },
-    dekningType: {
-      kode: 'OPPHOR',
-      kodeverk: 'MEDLEMSKAP_DEKNING',
-    },
-    kildeType: {
-      kode: 'FS22',
-      kodeverk: 'MEDLEMSKAP_KILDE',
-    },
+    medlemskapType: 'AVKLARES',
+    dekningType: 'OPPHOR',
+    kildeType: 'FS22',
   }],
   perioder: [{
     vurderingsdato: '2019-11-07',
     personopplysningBruker: {
-      personstatus: {
-        kode: 'BOSA',
-        kodeverk: 'PERSONSTATUS_TYPE',
-      },
+      personstatus: 'BOSA',
       adresser: [{
-        adresseType: {
-          kode: 'BOSTEDSADRESSE',
-          kodeverk: 'ADRESSE_TYPE',
-        },
+        adresseType: 'BOSTEDSADRESSE',
         adresselinje1: 'Skogvegen 3',
         postNummer: '4353',
         poststed: 'Klepp Stasjon',
         land: 'NOR',
       }],
-      region: {
-        kode: 'NORDEN',
-        kodeverk: 'REGION',
-      },
+      region: 'NORDEN',
     } as PersonopplysningMedlem,
     aksjonspunkter: [
       '5021',
@@ -109,16 +79,10 @@ const medlemskap = {
   }, {
     vurderingsdato: '2018-11-07',
     personopplysningBruker: {
-      personstatus: {
-        kode: 'BOSA',
-        kodeverk: 'PERSONSTATUS_TYPE',
-      },
+      personstatus: 'BOSA',
       navn: 'Mygg Robust',
       adresser: [],
-      region: {
-        kode: 'NORDEN',
-        kodeverk: 'REGION',
-      },
+      region: 'NORDEN',
     } as PersonopplysningMedlem,
     aksjonspunkter: [
       '5021',
@@ -167,50 +131,26 @@ export const visAksjonspunktForAlleAndreMedlemskapsaksjonspunkter = () => (
     medlemskap={medlemskap}
     soknad={soknad}
     aksjonspunkter={[{
-      definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT,
+      status: aksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,
     }, {
-      definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP,
+      status: aksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,
     }, {
-      definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
+      status: aksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,
     }, {
-      definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_OPPHOLDSRETT,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.AVKLAR_OPPHOLDSRETT,
+      status: aksjonspunktStatus.OPPRETTET,
       begrunnelse: undefined,
       kanLoses: true,
       erAktivt: true,

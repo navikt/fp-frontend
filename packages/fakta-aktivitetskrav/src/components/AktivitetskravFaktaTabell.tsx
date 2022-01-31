@@ -44,8 +44,8 @@ const AktivitetskravFaktaTabell: FunctionComponent<PureOwnProps & WrappedCompone
         onKeyDown={velgAktivitetskrav}
       >
         <TableColumn>{`${dateFormat(krav.fom)} - ${dateFormat(krav.tom)}`}</TableColumn>
-        <TableColumn>{krav.morsAktivitet ? morsAktiviteter.find((aktivtet) => aktivtet.kode === krav.morsAktivitet?.kode)?.navn : ''}</TableColumn>
-        <TableColumn>{krav.avklaring ? aktivitetskravAvklaringer.find((avklaring) => avklaring.kode === krav.avklaring?.kode)?.navn : ''}</TableColumn>
+        <TableColumn>{krav.morsAktivitet ? morsAktiviteter.find((aktivtet) => aktivtet.kode === krav.morsAktivitet)?.navn : ''}</TableColumn>
+        <TableColumn>{krav.avklaring ? aktivitetskravAvklaringer.find((avklaring) => avklaring.kode === krav.avklaring)?.navn : ''}</TableColumn>
         <TableColumn>
           {krav.endret && (
             <Image

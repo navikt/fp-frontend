@@ -40,7 +40,7 @@ const FodselVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsessPane
       readOnlySubmitButton={readOnlySubmitButton}
       isApOpen={isAksjonspunktOpen}
       alleKodeverk={alleKodeverk}
-      erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon.kode]?.notAccepted)}
+      erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted)}
       formData={formData}
       setFormData={setFormData}
     />

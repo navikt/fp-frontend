@@ -11,10 +11,7 @@ import messages from '../i18n/nb_NO.json';
 const behandling = {
   uuid: '1',
   versjon: 1,
-  sprakkode: {
-    kode: '-',
-    kodeverk: 'SPRAAK_KODE',
-  },
+  sprakkode: '-',
 };
 describe('<BeregningsgrunnlagProsessIndex>', () => {
   it('skal teste at BeregningsgrunnlagProsessIndex rendrer beregningFP', () => {

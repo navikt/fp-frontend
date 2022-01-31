@@ -15,10 +15,7 @@ import messages from '../../i18n/nb_NO.json';
 const intlMock = getIntlMock(messages);
 
 describe('<TrygderettsbehandlingForm>', () => {
-  const sprakkode = {
-    kode: 'NB',
-    kodeverk: '',
-  };
+  const sprakkode = 'NB';
 
   it('skal vise radioknapper og dropdown når omgjøring er valgt', () => {
     const wrapper = shallow(
@@ -34,10 +31,7 @@ describe('<TrygderettsbehandlingForm>', () => {
         aksjonspunkter={[]}
         submitCallback={sinon.spy()}
         onSubmit={sinon.spy()}
-        valgtTrygderettVurdering={{
-          kode: ankeVurderingType.ANKE_OMGJOER,
-          kodeverk: '',
-        }}
+        valgtTrygderettVurdering={ankeVurderingType.ANKE_OMGJOER}
       />,
     );
 
@@ -61,10 +55,7 @@ describe('<TrygderettsbehandlingForm>', () => {
         aksjonspunkter={[]}
         submitCallback={sinon.spy()}
         onSubmit={sinon.spy()}
-        valgtTrygderettVurdering={{
-          kode: ankeVurderingType.ANKE_STADFESTE_YTELSESVEDTAK,
-          kodeverk: '',
-        }}
+        valgtTrygderettVurdering={ankeVurderingType.ANKE_STADFESTE_YTELSESVEDTAK}
       />,
     );
 

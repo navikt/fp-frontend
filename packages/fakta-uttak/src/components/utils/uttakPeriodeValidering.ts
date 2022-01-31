@@ -6,9 +6,9 @@ import { Aksjonspunkt } from '@fpsak-frontend/types';
 import CustomUttakKontrollerFaktaPerioder from '../../CustomUttakKontrollerFaktaPerioderTsType';
 
 export const sjekkOmfaktaOmUttakAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
-  .some((ap: Aksjonspunkt) => aksjonspunktCodes.AVKLAR_UTTAK === ap.definisjon.kode
-  || aksjonspunktCodes.ANNEN_FORELDER_IKKE_RETT_OG_LØPENDE_VEDTAK === ap.definisjon.kode
-  || aksjonspunktCodes.AVKLAR_FØRSTE_UTTAKSDATO === ap.definisjon.kode);
+  .some((ap: Aksjonspunkt) => aksjonspunktCodes.AVKLAR_UTTAK === ap.definisjon
+  || aksjonspunktCodes.ANNEN_FORELDER_IKKE_RETT_OG_LØPENDE_VEDTAK === ap.definisjon
+  || aksjonspunktCodes.AVKLAR_FØRSTE_UTTAKSDATO === ap.definisjon);
 
 export const sjekkArbeidsprosentOver100 = (periode: CustomUttakKontrollerFaktaPerioder): boolean => periode.arbeidstidsprosent > 100;
 

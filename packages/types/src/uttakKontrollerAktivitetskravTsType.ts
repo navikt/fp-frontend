@@ -1,11 +1,9 @@
-import Kodeverk from './kodeverkTsType';
-
 type UttakKontrollerAktivitetskrav = Readonly<{
   fom: string;
   tom: string;
-  avklaring?: Kodeverk;
+  avklaring?: string;
   begrunnelse?: string;
-  morsAktivitet?: Kodeverk;
+  morsAktivitet?: string;
   endret: boolean;
 }>
 

@@ -12,24 +12,15 @@ import { FastsettSNImpl, begrunnelseFieldname, fastsettInntektFieldname } from '
 const intlMock = getIntlMock(messages);
 
 const mockAksjonspunktMedKodeOgStatus = (apKode: string, begrunnelse?: string): Aksjonspunkt => ({
-  definisjon: {
-    kode: apKode,
-    kodeverk: 'AKSJONSPUNKT_DEFINISJON',
-  },
-  status: {
-    kode: 'OPPR',
-    kodeverk: 'AKSJONSPUNKT_STATUS',
-  },
+  definisjon: apKode,
+  status: 'OPPR',
   kanLoses: true,
   erAktivt: true,
   begrunnelse,
 });
 
 const lagAndel = (status: string, fastsattBelop?: number): BeregningsgrunnlagAndel => ({
-  aktivitetStatus: {
-    kode: status,
-    kodeverk: 'test',
-  },
+  aktivitetStatus: status,
   beregnetPrAar: 200000,
   overstyrtPrAar: fastsattBelop,
   beregningsperiodeFom: '2015-01-01',

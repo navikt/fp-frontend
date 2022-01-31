@@ -23,11 +23,11 @@ describe('access', () => {
 
   describe('writeAccess', () => {
     const validFagsakStatuser = [fagsakStatusCode.OPPRETTET, fagsakStatusCode.UNDER_BEHANDLING];
-    const validFagsakStatus = { kode: validFagsakStatuser[0], kodeverk: '' };
+    const validFagsakStatus = validFagsakStatuser[0];
 
     const validBehandlingStatuser = [behandlingStatusCode.OPPRETTET, behandlingStatusCode.BEHANDLING_UTREDES];
-    const validBehandlingStatus = { kode: validBehandlingStatuser[0], kodeverk: '' };
-    const validBehandlingTyper = { kode: BehandlingType.FORSTEGANGSSOKNAD, kodeverk: '' };
+    const validBehandlingStatus = validBehandlingStatuser[0];
+    const validBehandlingTyper = BehandlingType.FORSTEGANGSSOKNAD;
 
     it('saksbehandler skal ha skrivetilgang', () => {
       const accessForSaksbehandler = writeAccess(saksbehandlerAnsatt, validFagsakStatus, validBehandlingStatus, validBehandlingTyper);
@@ -46,7 +46,7 @@ describe('access', () => {
     forEachFagsakAndBehandlingStatus((fagsakStatus: string, behandlingStatus: string) => {
       const expected = validFagsakStatuser.includes(fagsakStatus) && validBehandlingStatuser.includes(behandlingStatus);
       it(`${getTestName('skrivetilgang', expected, fagsakStatus, behandlingStatus)}`, () => {
-        const access = writeAccess(saksbehandlerAnsatt, { kode: fagsakStatus, kodeverk: '' }, { kode: behandlingStatus, kodeverk: '' },
+        const access = writeAccess(saksbehandlerAnsatt, fagsakStatus, behandlingStatus,
           validBehandlingTyper);
 
         expect(access).toHaveProperty('isEnabled', expected);
@@ -56,11 +56,11 @@ describe('access', () => {
 
   describe('kanOverstyreAccess', () => {
     const validFagsakStatuser = [fagsakStatusCode.UNDER_BEHANDLING];
-    const validFagsakStatus = { kode: validFagsakStatuser[0], kodeverk: '' };
+    const validFagsakStatus = validFagsakStatuser[0];
 
     const validBehandlingStatuser = [behandlingStatusCode.BEHANDLING_UTREDES];
-    const validBehandlingStatus = { kode: validBehandlingStatuser[0], kodeverk: '' };
-    const validBehandlingTyper = { kode: BehandlingType.FORSTEGANGSSOKNAD, kodeverk: '' };
+    const validBehandlingStatus = validBehandlingStatuser[0];
+    const validBehandlingTyper = BehandlingType.FORSTEGANGSSOKNAD;
 
     const saksbehandlerOgOverstyrerAnsatt = { ...saksbehandlerAnsatt, kanOverstyre: true };
     const veilederOgOverstyrerAnsatt = { ...veilederAnsatt, kanOverstyre: false };
@@ -97,7 +97,7 @@ describe('access', () => {
       const expected = validFagsakStatuser.includes(fagsakStatus) && validBehandlingStatuser.includes(behandlingStatus);
       // eslint-disable-next-line jest/valid-title
       it(getTestName('tilgang til å overstyre', expected, fagsakStatus, behandlingStatus), () => {
-        const access = kanOverstyreAccess(saksbehandlerOgOverstyrerAnsatt, { kode: fagsakStatus, kodeverk: '' }, { kode: behandlingStatus, kodeverk: '' },
+        const access = kanOverstyreAccess(saksbehandlerOgOverstyrerAnsatt, fagsakStatus, behandlingStatus,
           validBehandlingTyper);
 
         expect(access).toHaveProperty('isEnabled', expected);

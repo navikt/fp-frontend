@@ -4,18 +4,18 @@ import { Container } from 'nav-frontend-grid';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { required, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
-import { FamilieHendelse, Kodeverk, AlleKodeverk } from '@fpsak-frontend/types';
+import { FamilieHendelse, AlleKodeverk } from '@fpsak-frontend/types';
 import { BekreftMannAdoptererAksjonspunktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import styles from './mannAdoptererAleneFaktaForm.less';
 
 interface OwnProps {
   readOnly: boolean;
-  farSokerType?: Kodeverk;
+  farSokerType?: string;
   alleKodeverk: AlleKodeverk;
   mannAdoptererAlene: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
@@ -52,7 +52,7 @@ const MannAdoptererAleneFaktaForm: FunctionComponent<OwnProps> & StaticFunctions
         <Undertekst><FormattedMessage id="MannAdoptererAleneFaktaForm.Opplysninger" /></Undertekst>
         <VerticalSpacer fourPx />
         {farSokerType
-          && <Normaltekst>{getKodeverknavnFn(alleKodeverk, kodeverkTyper)(farSokerType)}</Normaltekst>}
+          && <Normaltekst>{getKodeverknavnFn(alleKodeverk)(farSokerType, KodeverkType.FAR_SOEKER_TYPE)}</Normaltekst>}
         <VerticalSpacer sixteenPx />
         <hr className={styles.hr} />
         <RadioGroupField

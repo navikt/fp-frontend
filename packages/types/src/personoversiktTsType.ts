@@ -1,11 +1,10 @@
-import Kodeverk from './kodeverkTsType';
 import Personadresse from './personadresseTsType';
 
 export type PersonopplysningerBasis = Readonly<{
   navn: string;
   aktoerId: string;
-  kjønn: Kodeverk;
-  sivilstand: Kodeverk;
+  kjønn: string;
+  sivilstand: string;
   dødsdato?: string;
   fødselsdato: string;
   adresser: Personadresse[];

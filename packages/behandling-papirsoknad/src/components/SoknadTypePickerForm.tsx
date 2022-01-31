@@ -16,7 +16,7 @@ import { BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
-import { AlleKodeverk, Kodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import styles from './soknadTypePickerForm.less';
 
@@ -35,7 +35,7 @@ interface FormValues {
 interface PureOwnProps {
   setSoknadData: (soknadData: SoknadData) => SoknadData;
   soknadData?: SoknadData;
-  fagsakYtelseType: Kodeverk;
+  fagsakYtelseType: string;
   alleKodeverk: AlleKodeverk;
 }
 
@@ -136,7 +136,7 @@ const buildInitialValues = createSelector(
   [(_state: any, ownProps: PureOwnProps) => ownProps.fagsakYtelseType, getFormValues(SOKNAD_TYPE_PICKER_FORM)],
   (sakstype, formValues: FormValues) => {
     const { ...selectedValues } = formValues;
-    const initialFagsakYtelseType = selectedValues.fagsakYtelseType ? selectedValues.fagsakYtelseType : sakstype.kode;
+    const initialFagsakYtelseType = selectedValues.fagsakYtelseType ? selectedValues.fagsakYtelseType : sakstype;
 
     const initialValues = {
       ...selectedValues,
@@ -160,7 +160,7 @@ const mapStateToPropsFactory = (_initialState: any, initialOwnProps: PureOwnProp
     .setSoknadData(new SoknadData(values.fagsakYtelseType, values.familieHendelseType, values.foreldreType));
   return (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
     selectedFagsakYtelseType: formValueSelector(SOKNAD_TYPE_PICKER_FORM)(state, 'fagsakYtelseType'),
-    ytelseErSatt: !!ownProps.fagsakYtelseType.kode,
+    ytelseErSatt: !!ownProps.fagsakYtelseType,
     // @ts-ignore
     initialValues: buildInitialValues(state, ownProps),
     fagsakYtelseTyper: ownProps.alleKodeverk[kodeverkTyper.FAGSAK_YTELSE],

@@ -43,7 +43,7 @@ const SvangerskapVilkarProsessIndex: FunctionComponent<StandardProsessPanelProps
       isApOpen={isAksjonspunktOpen}
       alleKodeverk={alleKodeverk}
       svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
-      erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon.kode]?.notAccepted)}
+      erIkkeGodkjentAvBeslutter={aksjonspunkter.some((a) => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted)}
       formData={formData}
       setFormData={setFormData}
     />

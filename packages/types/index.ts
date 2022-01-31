@@ -47,7 +47,6 @@ export type { default as BeregningsresultatFp, BeregningsresultatPeriode, Beregn
 export type { default as Dokument } from './src/dokumentTsType';
 export type { default as FaktaArbeidsforhold } from './src/faktaArbeidsforholdTsType';
 export type { default as InntektArbeidYtelse, IAYInntektsmelding, RelatertTilgrensedYtelse } from './src/inntektArbeidYtelseTsType';
-export type { default as Kodeverk } from './src/kodeverkTsType';
 export type { default as KodeverkMedNavn } from './src/kodeverkMedNavnTsType';
 export type { default as AlleKodeverk } from './src/kodeverkAlleTsType';
 export type { default as AlleKodeverkTilbakekreving } from './src/kodeverkAlleTilbakekrevingTsType';
@@ -100,6 +99,7 @@ export type { default as StandardFaktaPanelPropsTilbakekreving } from './src/sta
 export type { default as StandardProsessPanelProps } from './src/standardProsessPanelPropsTsType';
 export type { default as StandardProsessPanelPropsTilbakekreving } from './src/standardProsessPanelPropsTilbakekrevingTsType';
 export type { default as Verge } from './src/vergeTsType';
+export type { default as ForhåndsvisMeldingParams } from './src/forhåndsvisMeldingParamsTsType';
 export type { default as VilkarsVurdertePerioderWrapper, VilkarsVurdertPeriode, AktsomhetInfo } from './src/vilkarsVurdertePerioderTsType';
 export type {
   default as FodselOgTilrettelegging, ArbeidsforholdFodselOgTilrettelegging, ArbeidsforholdTilretteleggingDato, Permisjon,

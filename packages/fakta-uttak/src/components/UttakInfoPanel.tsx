@@ -7,7 +7,7 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import behandlingTyper from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatuser from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, FaktaArbeidsforhold, FamilieHendelseSamling, Kodeverk, AlleKodeverk,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, FaktaArbeidsforhold, FamilieHendelseSamling, AlleKodeverk,
   Personoversikt,
   UttakKontrollerFaktaPerioder, Ytelsefordeling,
 } from '@fpsak-frontend/types';
@@ -16,7 +16,7 @@ import { AvklarAnnenforelderHarRettAp, FaktaUttakAp } from '@fpsak-frontend/type
 import AnnenForelderHarRettForm from './AnnenForelderHarRettForm';
 import UttakFaktaForm from './UttakFaktaForm';
 
-const getBehandlingArsakTyper = (behandlingArsaker: Behandling['behandlingÅrsaker']): Kodeverk[] | undefined => {
+const getBehandlingArsakTyper = (behandlingArsaker: Behandling['behandlingÅrsaker']): string[] | undefined => {
   if (behandlingArsaker) {
     return behandlingArsaker.map(({
       behandlingArsakType,
@@ -29,7 +29,7 @@ const getBehandlingArsakTyper = (behandlingArsaker: Behandling['behandlingÅrsak
 const getErManueltOpprettet = (behandlingArsaker: Behandling['behandlingÅrsaker'] = []): boolean => behandlingArsaker
   .some((ba) => ba.manueltOpprettet === true);
 
-const getErArsakTypeHendelseFodsel = (behandlingArsakTyper: Kodeverk[] = []): boolean => behandlingArsakTyper.some((bt) => bt.kode === 'RE-HENDELSE-FØDSEL');
+const getErArsakTypeHendelseFodsel = (behandlingArsakTyper: string[] = []): boolean => behandlingArsakTyper.some((bt) => bt === 'RE-HENDELSE-FØDSEL');
 
 const sortUttaksperioder = (p1: UttakKontrollerFaktaPerioder, p2: UttakKontrollerFaktaPerioder): number => moment(p1.tom).diff(moment(p2.tom));
 
@@ -37,9 +37,9 @@ interface OwnProps {
   submitCallback: (data: AvklarAnnenforelderHarRettAp | FaktaUttakAp[]) => Promise<void>;
   readOnly: boolean;
   aksjonspunkter: Aksjonspunkt[];
-  behandlingType: Kodeverk;
+  behandlingType: string;
   behandlingArsaker: Behandling['behandlingÅrsaker'];
-  behandlingStatus: Kodeverk;
+  behandlingStatus: string;
   ytelsefordeling: Ytelsefordeling;
   uttakPerioder: UttakKontrollerFaktaPerioder[];
   alleKodeverk: AlleKodeverk;
@@ -70,17 +70,17 @@ const UttakInfoPanel: FunctionComponent<OwnProps> = ({
   arbeidsgiverOpplysningerPerId,
   submittable,
 }) => {
-  const avklarAnnenForelderRettAp = aksjonspunkter.find((ap) => ap.definisjon.kode === aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT);
-  const uttakAp = aksjonspunkter.filter((ap) => ap.definisjon.kode !== aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT);
-  const vilkarForSykdomExists = aksjonspunkter.filter((ap) => isVilkarForSykdomOppfylt(ap.definisjon.kode)).length > 0;
-  const uttakApOpen = uttakAp.some((ap) => isAksjonspunktOpen(ap.status.kode));
+  const avklarAnnenForelderRettAp = aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT);
+  const uttakAp = aksjonspunkter.filter((ap) => ap.definisjon !== aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT);
+  const vilkarForSykdomExists = aksjonspunkter.filter((ap) => isVilkarForSykdomOppfylt(ap.definisjon)).length > 0;
+  const uttakApOpen = uttakAp.some((ap) => isAksjonspunktOpen(ap.status));
   const overrideReadOnly = readOnly || (!uttakAp.length && !uttakAp.some((ap: Aksjonspunkt) => ap.kanLoses));
   const behandlingArsakTyper = getBehandlingArsakTyper(behandlingArsaker);
-  const behandlingIsRevurdering = behandlingType.kode === behandlingTyper.REVURDERING;
+  const behandlingIsRevurdering = behandlingType === behandlingTyper.REVURDERING;
   const erManueltOpprettet = getErManueltOpprettet(behandlingArsaker);
   const erArsakTypeHendelseFodsel = getErArsakTypeHendelseFodsel(behandlingArsakTyper);
   const isRevurdering = behandlingIsRevurdering && (erManueltOpprettet || erArsakTypeHendelseFodsel);
-  const behandlingUtredes = behandlingStatus.kode === behandlingStatuser.BEHANDLING_UTREDES;
+  const behandlingUtredes = behandlingStatus === behandlingStatuser.BEHANDLING_UTREDES;
   const sortedUttakPerioder = [...uttakPerioder].sort(sortUttaksperioder);
 
   return (
@@ -88,7 +88,7 @@ const UttakInfoPanel: FunctionComponent<OwnProps> = ({
       {avklarAnnenForelderRettAp && (
         <>
           <AnnenForelderHarRettForm
-            hasOpenAksjonspunkter={isAksjonspunktOpen(avklarAnnenForelderRettAp.status.kode)}
+            hasOpenAksjonspunkter={isAksjonspunktOpen(avklarAnnenForelderRettAp.status)}
             hasOpenUttakAksjonspunkter={uttakApOpen}
             readOnly={readOnly}
             aksjonspunkt={avklarAnnenForelderRettAp}
@@ -99,7 +99,7 @@ const UttakInfoPanel: FunctionComponent<OwnProps> = ({
         </>
       )}
 
-      {(!avklarAnnenForelderRettAp || !isAksjonspunktOpen(avklarAnnenForelderRettAp.status.kode)) && (
+      {(!avklarAnnenForelderRettAp || !isAksjonspunktOpen(avklarAnnenForelderRettAp.status)) && (
         <UttakFaktaForm
           hasOpenAksjonspunkter={uttakApOpen}
           readOnly={(overrideReadOnly && (!isRevurdering || !behandlingUtredes || behandlingPaaVent)) || !ytelsefordeling.endringsdato}

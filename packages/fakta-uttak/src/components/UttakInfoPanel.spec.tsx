@@ -3,34 +3,26 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import {
-  AlleKodeverk,
-  FamilieHendelseSamling, Kodeverk, Personoversikt, Ytelsefordeling,
+  AlleKodeverk, FamilieHendelseSamling, Personoversikt, Ytelsefordeling,
 } from '@fpsak-frontend/types';
+import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 
 import UttakFaktaForm from './UttakFaktaForm';
 import UttakInfoPanel from './UttakInfoPanel';
 import AnnenForelderHarRettForm from './AnnenForelderHarRettForm';
 
 const avklarAnnenforelderHarRettAp = [{
-  aksjonspunktType: {
-    kode: 'MANU',
-    kodeverk: 'AKSJONSPUNKT_TYPE',
-  },
+  aksjonspunktType: 'MANU',
   kode: 'MANU',
   kodeverk: 'AKSJONSPUNKT_TYPE',
   navn: 'Manuell',
   begrunnelse: 'test2',
   besluttersBegrunnelse: null,
-  definisjon: {
-    kode: '5086',
-    kodeverk: '',
-  },
+  definisjon: '5086',
   erAktivt: true,
   kanLoses: true,
-  status: {
-    kode: 'UTFO',
-    kodeverk: 'AKSJONSPUNKT_STATUS',
-  },
+  status: 'UTFO',
   toTrinnsBehandling: true,
   toTrinnsBehandlingGodkjent: null,
   vilkarType: null,
@@ -43,9 +35,9 @@ describe('<UttakInfoPanel>', () => {
       submitCallback={sinon.spy()}
       readOnly
       aksjonspunkter={[]}
-      behandlingType={{} as Kodeverk}
+      behandlingType={behandlingType.FORSTEGANGSSOKNAD}
       behandlingArsaker={[]}
-      behandlingStatus={{} as Kodeverk}
+      behandlingStatus={behandlingStatus.OPPRETTET}
       ytelsefordeling={{} as Ytelsefordeling}
       uttakPerioder={[]}
       alleKodeverk={{} as AlleKodeverk}
@@ -66,9 +58,9 @@ describe('<UttakInfoPanel>', () => {
       submitCallback={sinon.spy()}
       readOnly
       aksjonspunkter={avklarAnnenforelderHarRettAp}
-      behandlingType={{} as Kodeverk}
+      behandlingType={behandlingType.FORSTEGANGSSOKNAD}
       behandlingArsaker={[]}
-      behandlingStatus={{} as Kodeverk}
+      behandlingStatus={behandlingStatus.OPPRETTET}
       ytelsefordeling={{} as Ytelsefordeling}
       uttakPerioder={[]}
       alleKodeverk={{} as AlleKodeverk}

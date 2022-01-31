@@ -15,10 +15,7 @@ import FaktaDefaultInitPanel from './FaktaDefaultInitPanel';
 const behandling = {
   uuid: '1',
   versjon: 2,
-  status: {
-    kode: behandlingStatus.OPPRETTET,
-    kodeverk: '',
-  },
+  status: behandlingStatus.OPPRETTET,
   behandlingPaaVent: false,
 } as Behandling;
 
@@ -33,10 +30,7 @@ describe('<FaktaDefaultInitPanel>', () => {
     alleKodeverk: kodeverk,
     readOnly: false,
     aksjonspunkter: [{
-      definisjon: {
-        kode: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.MANUELL_VURDERING_AV_ANKE,
       erAktivt: true,
       kanLoses: true,
     }] as Aksjonspunkt[],

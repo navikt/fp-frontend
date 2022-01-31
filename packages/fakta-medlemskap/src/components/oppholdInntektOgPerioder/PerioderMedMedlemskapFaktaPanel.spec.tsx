@@ -195,35 +195,20 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
   it('skal sette opp initielle verdier og sorterte perioder etter periodestart', () => {
     const periode = {
       aksjonspunkter: [aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE],
-      medlemskapManuellVurderingType: {
-        kode: 'manuellType',
-        kodeverk: '',
-      },
+      medlemskapManuellVurderingType: 'manuellType',
     };
     const medlemskapPerioder = [
       {
         fom: '2016-01-15',
         tom: '2016-10-15',
-        dekningType: {
-          kode: 'DEK_TYPE',
-          kodeverk: '',
-        },
-        medlemskapType: {
-          kode: 'M_STATUS',
-          kodeverk: '',
-        },
+        dekningType: 'DEK_TYPE',
+        medlemskapType: 'M_STATUS',
         beslutningsdato: '2016-10-16',
       }, {
         fom: '2017-01-15',
         tom: '2017-10-15',
-        dekningType: {
-          kode: 'DEK_TYPE2',
-          kodeverk: '',
-        },
-        medlemskapType: {
-          kode: 'M_STATUS2',
-          kodeverk: '',
-        },
+        dekningType: 'DEK_TYPE2',
+        medlemskapType: 'M_STATUS2',
         beslutningsdato: '2017-10-16',
       },
     ];
@@ -235,26 +220,20 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
     };
 
     const aksjonspunkt = {
-      definisjon: {
-        kode: aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
-        kodeverk: '',
-      },
-      status: {
-        kode: aksjonspunktStatus.OPPRETTET,
-        kodeverk: '',
-      },
+      definisjon: aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
+      status: aksjonspunktStatus.OPPRETTET,
     } as Aksjonspunkt;
-    const getKodeverknavn = (kodeverk: any) => {
-      if (kodeverk.kode === 'DEK_TYPE') {
+    const getKodeverknavn = (kode: string) => {
+      if (kode === 'DEK_TYPE') {
         return 'testdekning';
       }
-      if (kodeverk.kode === 'DEK_TYPE2') {
+      if (kode === 'DEK_TYPE2') {
         return 'testdekning2017';
       }
-      if (kodeverk.kode === 'M_STATUS') {
+      if (kode === 'M_STATUS') {
         return 'testStatus';
       }
-      if (kodeverk.kode === 'M_STATUS2') {
+      if (kode === 'M_STATUS2') {
         return 'testStatus2017';
       }
       return '';
@@ -283,10 +262,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
         beslutningsdato: '2017-10-16',
       }],
       isPeriodAksjonspunktClosed: false,
-      medlemskapManuellVurderingType: {
-        kode: 'manuellType',
-        kodeverk: '',
-      },
+      medlemskapManuellVurderingType: 'manuellType',
       fodselsdato: '2017-10-15',
       termindato: undefined,
       omsorgsovertakelseDato: undefined,

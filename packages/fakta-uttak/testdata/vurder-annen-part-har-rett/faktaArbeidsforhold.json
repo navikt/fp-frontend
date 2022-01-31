@@ -1,9 +1,6 @@
 [
     {
         "arbeidsgiverReferanse": "910909088",
-        "arbeidType": {
-            "kode": "ORDINÆRT_ARBEID",
-            "kodeverk": "UTTAK_ARBEID_TYPE"
-        }
+        "arbeidType": "ORDINÆRT_ARBEID"
     }
 ]

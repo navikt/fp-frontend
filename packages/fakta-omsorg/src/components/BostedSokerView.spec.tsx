@@ -17,22 +17,13 @@ describe('<BostedsokerView>', () => {
   const soker = {
     navn: 'Espen Utvikler',
     aktoerId: '1',
-    kjønn: {
-      kode: '',
-      kodeverk: '',
-    },
-    sivilstand: {
-      kode: sivilstandType.UGIFT,
-      kodeverk: '',
-    },
+    kjønn: '',
+    sivilstand: sivilstandType.UGIFT,
     adresser: [{
       adresselinje1: 'Vei 1',
       postNummer: '1000',
       poststed: 'Oslo',
-      adresseType: {
-        kode: opplysningAdresseType.POSTADRESSE,
-        kodeverk: '',
-      },
+      adresseType: opplysningAdresseType.POSTADRESSE,
     }],
   } as PersonopplysningerBasis;
 

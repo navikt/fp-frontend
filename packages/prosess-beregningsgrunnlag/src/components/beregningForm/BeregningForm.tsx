@@ -18,7 +18,6 @@ import {
   BeregningsgrunnlagAndel,
   BeregningsgrunnlagPeriodeProp,
   FaktaOmBeregning,
-  Kodeverk,
   SammenligningsgrunlagProp,
   Vilkar,
   YtelseGrunnlag,
@@ -60,7 +59,7 @@ const {
 // ------------------------------------------------------------------------------------------ //
 
 const gjelderBehandlingenBesteberegning = (faktaOmBeregning: FaktaOmBeregning): boolean => (faktaOmBeregning && faktaOmBeregning.faktaOmBeregningTilfeller
-  ? faktaOmBeregning.faktaOmBeregningTilfeller.some((tilfelle) => tilfelle.kode === faktaOmBeregningTilfelle.FASTSETT_BESTEBEREGNING_FODENDE_KVINNE)
+  ? faktaOmBeregning.faktaOmBeregningTilfeller.some((tilfelle) => tilfelle === faktaOmBeregningTilfelle.FASTSETT_BESTEBEREGNING_FODENDE_KVINNE)
   : false);
 
 const erAutomatiskBesteberegnet = (ytelsesspesifiktGrunnlag: YtelseGrunnlag): boolean => !!ytelsesspesifiktGrunnlag?.besteberegninggrunnlag;
@@ -74,9 +73,9 @@ export const buildInitialValues = createSelector(
     }
     const allePerioder = beregningsgrunnlag.beregningsgrunnlagPeriode;
     const alleAndelerIForstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode[0].beregningsgrunnlagPrStatusOgAndel;
-    const arbeidstakerAndeler = alleAndelerIForstePeriode.filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.ARBEIDSTAKER);
-    const frilanserAndeler = alleAndelerIForstePeriode.filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.FRILANSER);
-    const selvstendigNaeringAndeler = alleAndelerIForstePeriode.filter((andel) => andel.aktivitetStatus.kode === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
+    const arbeidstakerAndeler = alleAndelerIForstePeriode.filter((andel) => andel.aktivitetStatus === aktivitetStatus.ARBEIDSTAKER);
+    const frilanserAndeler = alleAndelerIForstePeriode.filter((andel) => andel.aktivitetStatus === aktivitetStatus.FRILANSER);
+    const selvstendigNaeringAndeler = alleAndelerIForstePeriode.filter((andel) => andel.aktivitetStatus === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
     return {
       ...Beregningsgrunnlag.buildInitialValues(gjeldendeAksjonspunkter),
       ...AksjonspunktBehandlerTidsbegrensetImpl.buildInitialValues(allePerioder),
@@ -90,7 +89,7 @@ export const buildInitialValues = createSelector(
 
 const harAksjonspunkt = (aksjonspunktKode: string, gjeldendeAksjonspunkter: Aksjonspunkt[]): boolean => gjeldendeAksjonspunkter !== undefined
   && gjeldendeAksjonspunkter !== null
-  && gjeldendeAksjonspunkter.some((ap) => ap.definisjon.kode === aksjonspunktKode);
+  && gjeldendeAksjonspunkter.some((ap) => ap.definisjon === aksjonspunktKode);
 
 export const transformValues = (values: BeregningsgrunnlagValues,
   relevanteStatuser: RelevanteStatuserProp,
@@ -118,7 +117,7 @@ const getSammenligningsgrunnlagsPrStatus = (bg: BeregningsgrunnlagProp): Sammenl
   ? bg.sammenligningsgrunnlagPrStatus
   : undefined);
 
-const getStatusList = (beregningsgrunnlagPerioder: BeregningsgrunnlagPeriodeProp[]): Kodeverk[] => beregningsgrunnlagPerioder[0]
+const getStatusList = (beregningsgrunnlagPerioder: BeregningsgrunnlagPeriodeProp[]): string[] => beregningsgrunnlagPerioder[0]
   .beregningsgrunnlagPrStatusOgAndel
   .filter((statusAndel) => statusAndel.erTilkommetAndel !== true)
   .map((statusAndel) => statusAndel.aktivitetStatus);
