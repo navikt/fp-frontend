@@ -73,7 +73,7 @@ export const AnnenForelderHarRettForm: FunctionComponent<PureOwnProps & MappedOw
         </RadioGroupField>
         <VerticalSpacer fourPx />
         {(ytelsefordeling?.annenforelderHarRettDto?.avklarAnnenforelderMottarUføretrygd
-          || ytelsefordeling?.annenforelderHarRettDto?.annenforelderMottarUføretrygd !== undefined)
+          || ytelsefordeling?.annenforelderHarRettDto?.annenforelderMottarUføretrygd !== null)
           && annenForelderHarRett === false && (
           <RadioGroupField
             name="annenforelderMottarUføretrygd"
