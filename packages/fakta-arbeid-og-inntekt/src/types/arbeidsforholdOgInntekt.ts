@@ -2,7 +2,7 @@ import { AoIArbeidsforhold, Inntektsmelding, Inntektspost } from '@fpsak-fronten
 
 type ArbeidsforholdOgInntekt = {
   arbeidsforhold: AoIArbeidsforhold | undefined;
-  arbeidsforholdNavn: string | undefined;
+  arbeidsgiverNavn: string | undefined;
   inntektsmelding: Inntektsmelding | undefined;
   inntektsposter: Inntektspost[] | undefined;
 }

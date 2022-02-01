@@ -43,26 +43,26 @@ const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (
 interface OwnProps {
   saksnummer: string;
   behandlingUuid: string;
-  arbeidsforholdNavn: string;
+  arbeidsgiverNavn: string;
   inntektsmelding: Inntektsmelding;
   arbeidsforhold: AoIArbeidsforhold;
   isReadOnly: boolean;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
-  avbrytEditering: () => void;
+  lukkArbeidsforholdRad: () => void;
   oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
 }
 
 const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   saksnummer,
   behandlingUuid,
-  arbeidsforholdNavn,
+  arbeidsgiverNavn,
   inntektsmelding,
   arbeidsforhold,
   isReadOnly,
   registrerArbeidsforhold,
   lagreVurdering,
-  avbrytEditering,
+  lukkArbeidsforholdRad,
   oppdaterTabell,
 }) => {
   const intl = useIntl();
@@ -82,7 +82,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   const saksbehandlersVurdering = formMethods.watch('saksbehandlersVurdering');
 
   const avbryt = useCallback(() => {
-    avbrytEditering();
+    lukkArbeidsforholdRad();
     formMethods.reset(defaultValues);
   }, [defaultValues]);
 
@@ -109,14 +109,15 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
         }
         return data;
       }));
-      avbrytEditering();
+
+      lukkArbeidsforholdRad();
     });
 
     if (formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING) {
       registrerArbeidsforhold({
         behandlingUuid,
         internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
-        arbeidsgiverNavn: arbeidsforholdNavn,
+        arbeidsgiverNavn,
         arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
         vurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
         begrunnelse: formValues.begrunnelse,
@@ -137,10 +138,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <InntektsmeldingOpplysningerPanel
-        saksnummer={saksnummer}
-        inntektsmelding={inntektsmelding}
-      />
+      <InntektsmeldingOpplysningerPanel saksnummer={saksnummer} inntektsmelding={inntektsmelding} />
       <VerticalSpacer thirtyTwoPx />
       <AlertStripeInfo><FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" /></AlertStripeInfo>
       <VerticalSpacer sixteenPx />

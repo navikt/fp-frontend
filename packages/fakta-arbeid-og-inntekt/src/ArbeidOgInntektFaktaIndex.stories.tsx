@@ -29,6 +29,8 @@ const Template: Story<{
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
+  lagreVurdering: (data: any) => Promise<void>;
+  registrerArbeidsforhold: (data: any) => Promise<void>;
   settBehandlingPåVentCallback: (params: {
     frist: string;
     ventearsak: string;
@@ -43,6 +45,8 @@ const Template: Story<{
   settBehandlingPåVentCallback,
   erOverstyrer = false,
   readOnly = false,
+  lagreVurdering = promiseAction(),
+  registrerArbeidsforhold = promiseAction(),
 }) => (
   <ArbeidOgInntektFaktaIndex
     saksnummer="1234567"
@@ -58,8 +62,8 @@ const Template: Story<{
     setFormData={() => undefined}
     arbeidOgInntekt={arbeidOgInntekt}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    registrerArbeidsforhold={promiseAction()}
-    lagreVurdering={promiseAction()}
+    registrerArbeidsforhold={registrerArbeidsforhold}
+    lagreVurdering={lagreVurdering}
     åpneForNyVurdering={promiseAction()}
     erOverstyrer={erOverstyrer}
     submitCallback={submitCallback}

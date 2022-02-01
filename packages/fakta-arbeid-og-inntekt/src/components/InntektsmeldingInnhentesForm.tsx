@@ -70,7 +70,7 @@ interface OwnProps {
   isReadOnly: boolean;
   arbeidsforhold: AoIArbeidsforhold;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
-  avbrytEditering: () => void;
+  lukkArbeidsforholdRad: () => void;
   oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
 }
 
@@ -81,7 +81,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
   arbeidsforhold,
   isReadOnly,
   lagreVurdering,
-  avbrytEditering,
+  lukkArbeidsforholdRad,
   oppdaterTabell,
 }) => {
   const intl = useIntl();
@@ -100,7 +100,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
   const sorterteInntektsposter = useMemo(() => behandleInntektsposter(skjæringspunktDato, inntektsposter), [inntektsposter]);
 
   const avbryt = useCallback(() => {
-    avbrytEditering();
+    lukkArbeidsforholdRad();
     formMethods.reset(defaultValues);
   }, [defaultValues]);
 
@@ -126,7 +126,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
         }
         return data;
       }));
-      avbrytEditering();
+      lukkArbeidsforholdRad();
     }).finally(() => formMethods.reset(formValues));
   }, [arbeidsforhold, oppdaterTabell]);
 
@@ -150,7 +150,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
               <FlexRow key={inntekt.fom}>
                 <FlexColumn className={styles.maanedBredde}>
                   <Normaltekst>
-                    {intl.formatMessage({ id: `InntektsmeldingInnhentesForm.${dayjs(inntekt.fom).month() + 1}` })}
+                    <FormattedMessage id={`InntektsmeldingInnhentesForm.${dayjs(inntekt.fom).month() + 1}`} />
                   </Normaltekst>
                 </FlexColumn>
                 <FlexColumn className={styles.aarBredde}>

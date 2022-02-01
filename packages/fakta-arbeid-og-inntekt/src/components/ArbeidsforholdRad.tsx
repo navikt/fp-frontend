@@ -1,7 +1,7 @@
 import React, {
   FunctionComponent, useCallback, useEffect, useState,
 } from 'react';
-import { IntlShape, useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Normaltekst, Element, Undertekst } from 'nav-frontend-typografi';
 
 import {
@@ -10,7 +10,7 @@ import {
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
 import {
-  Image, TableColumn, PeriodLabel, DateTimeLabel, VerticalSpacer,
+  Image, TableColumn, PeriodLabel, DateTimeLabel,
 } from '@fpsak-frontend/shared-components';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 import { TIDENES_ENDE } from '@fpsak-frontend/utils';
@@ -21,18 +21,14 @@ import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel
 import InntektsmeldingInnhentesForm from './InntektsmeldingInnhentesForm';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
-const finnKilde = (
-  intl: IntlShape,
+const finnKildekode = (
   erManueltOpprettet: boolean,
   arbeidsforhold?: AoIArbeidsforhold,
-) => {
+): string => {
   if (erManueltOpprettet) {
-    return intl.formatMessage({ id: 'ArbeidsforholdRad.Saksbehandler' });
+    return 'ArbeidsforholdRad.Saksbehandler';
   }
-  if (arbeidsforhold) {
-    return intl.formatMessage({ id: 'ArbeidsforholdRad.AaRegisteret' });
-  }
-  return intl.formatMessage({ id: 'ArbeidsforholdRad.Inntektsmelding' });
+  return arbeidsforhold ? 'ArbeidsforholdRad.AaRegisteret' : 'ArbeidsforholdRad.Inntektsmelding';
 };
 
 interface OwnProps {
@@ -41,12 +37,12 @@ interface OwnProps {
   skjæringspunktDato: string;
   arbeidsforholdOgInntekt: ArbeidsforholdOgInntekt;
   isReadOnly: boolean;
+  erOverstyrt: boolean;
+  erRadÅpen: boolean;
+  oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   oppdaterÅpenRad: (erÅpen: boolean) => void;
-  erOverstyrt: boolean;
-  oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
-  erRadÅpen: boolean;
 }
 
 const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
@@ -55,17 +51,17 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
   skjæringspunktDato,
   arbeidsforholdOgInntekt,
   isReadOnly,
+  erOverstyrt,
+  erRadÅpen,
+  oppdaterTabell,
   registrerArbeidsforhold,
   lagreVurdering,
   oppdaterÅpenRad,
-  erOverstyrt,
-  oppdaterTabell,
-  erRadÅpen,
 }) => {
   const intl = useIntl();
 
   const {
-    arbeidsforhold, arbeidsforholdNavn, inntektsposter, inntektsmelding,
+    arbeidsforhold, arbeidsgiverNavn, inntektsposter, inntektsmelding,
   } = arbeidsforholdOgInntekt;
 
   const [erRadEkspandert, toggleEkspandertRad] = useState(erRadÅpen);
@@ -80,7 +76,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
     oppdaterÅpenRad(erApen);
     toggleEkspandertRad(erApen);
   };
-  const avbrytEditering = useCallback(() => {
+  const lukkArbeidsforholdRad = useCallback(() => {
     toggleRad(false);
   }, []);
 
@@ -103,21 +99,18 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               isReadOnly={false}
               registrerArbeidsforhold={registrerArbeidsforhold}
               arbeidsforhold={arbeidsforhold}
-              arbeidsforholdNavn={arbeidsforholdNavn}
-              avbrytEditering={avbrytEditering}
+              arbeidsgiverNavn={arbeidsgiverNavn}
+              lukkArbeidsforholdRad={lukkArbeidsforholdRad}
               erOverstyrt={erOverstyrt}
               oppdaterTabell={oppdaterTabell}
             />
           )}
           {harArbeidsforholdOgInntektsmelding && (
-            <>
-              <InntektsmeldingOpplysningerPanel
-                saksnummer={saksnummer}
-                stillingsprosent={arbeidsforhold.stillingsprosent}
-                inntektsmelding={inntektsmelding}
-              />
-              <VerticalSpacer thirtyTwoPx />
-            </>
+            <InntektsmeldingOpplysningerPanel
+              saksnummer={saksnummer}
+              stillingsprosent={arbeidsforhold.stillingsprosent}
+              inntektsmelding={inntektsmelding}
+            />
           )}
           {manglerInntektsmelding && (
             <InntektsmeldingInnhentesForm
@@ -127,7 +120,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               isReadOnly={isReadOnly}
               arbeidsforhold={arbeidsforhold}
               lagreVurdering={lagreVurdering}
-              avbrytEditering={avbrytEditering}
+              lukkArbeidsforholdRad={lukkArbeidsforholdRad}
               oppdaterTabell={oppdaterTabell}
             />
           )}
@@ -135,13 +128,13 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
             <ManglendeOpplysningerForm
               saksnummer={saksnummer}
               behandlingUuid={behandlingUuid}
-              arbeidsforholdNavn={arbeidsforholdNavn}
+              arbeidsgiverNavn={arbeidsgiverNavn}
               inntektsmelding={inntektsmelding}
               arbeidsforhold={arbeidsforhold}
               isReadOnly={isReadOnly}
               registrerArbeidsforhold={registrerArbeidsforhold}
               lagreVurdering={lagreVurdering}
-              avbrytEditering={avbrytEditering}
+              lukkArbeidsforholdRad={lukkArbeidsforholdRad}
               oppdaterTabell={oppdaterTabell}
             />
           )}
@@ -163,7 +156,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
         {erRadEkspandert && (
           <>
             <Element>
-              {arbeidsforholdNavn}
+              {arbeidsgiverNavn}
             </Element>
             {aIdent && (
               <Undertekst>
@@ -176,27 +169,27 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
         )}
         {!erRadEkspandert && (
           <Normaltekst>
-            {arbeidsforholdNavn}
+            {arbeidsgiverNavn}
           </Normaltekst>
         )}
       </TableColumn>
       <TableColumn>
         <Normaltekst>
           {arbeidsforhold && (
-          <PeriodLabel dateStringFom={arbeidsforhold.fom} dateStringTom={arbeidsforhold.tom !== TIDENES_ENDE ? arbeidsforhold.tom : undefined} />
+            <PeriodLabel dateStringFom={arbeidsforhold.fom} dateStringTom={arbeidsforhold.tom !== TIDENES_ENDE ? arbeidsforhold.tom : undefined} />
           )}
           {!arbeidsforhold && '-'}
         </Normaltekst>
       </TableColumn>
       <TableColumn>
         <Normaltekst>
-          {finnKilde(intl, erManueltOpprettet, arbeidsforhold)}
+          <FormattedMessage id={finnKildekode(erManueltOpprettet, arbeidsforhold)} />
         </Normaltekst>
       </TableColumn>
       <TableColumn>
         <Normaltekst>
           {inntektsmelding?.motattDato && (
-          <DateTimeLabel dateTimeString={inntektsmelding.motattDato} useNewFormat />
+            <DateTimeLabel dateTimeString={inntektsmelding.motattDato} useNewFormat />
           )}
           {!inntektsmelding?.motattDato && '-'}
         </Normaltekst>

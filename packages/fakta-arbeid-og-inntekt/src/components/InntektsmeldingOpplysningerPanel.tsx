@@ -108,6 +108,7 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
         </FlexColumn>
       </FlexRow>
     </FlexContainer>
+    <VerticalSpacer thirtyTwoPx />
   </>
 );
 

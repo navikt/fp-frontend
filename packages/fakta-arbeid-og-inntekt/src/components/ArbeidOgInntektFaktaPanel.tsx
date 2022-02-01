@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useState, useEffect, useCallback,
+  FunctionComponent, useState, useEffect, useCallback, useMemo,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
@@ -40,16 +40,16 @@ const HEADER_TEXT_IDS = [
 
 const finnApTekstKoder = (
   aksjonspunkter: Aksjonspunkt[],
-  harUløsteManglendeInntektsmeldinger: boolean,
-  harUløsteManglandeOpplysninger: boolean,
+  harManglendeInntektsmeldinger: boolean,
+  harManglandeOpplysninger: boolean,
 ): string[] => {
   const erApÅpent = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET);
 
   const koder = [];
-  if (erApÅpent && harUløsteManglendeInntektsmeldinger) {
+  if (erApÅpent && harManglendeInntektsmeldinger) {
     koder.push('ArbeidOgInntektFaktaPanel.InnhentManglendeInntektsmelding');
   }
-  if (erApÅpent && harUløsteManglandeOpplysninger) {
+  if (erApÅpent && harManglandeOpplysninger) {
     koder.push('ArbeidOgInntektFaktaPanel.AvklarManglendeOpplysninger');
   }
   return koder;
@@ -65,7 +65,7 @@ const sorterTabell = (d1: ArbeidsforholdOgInntekt, d2: ArbeidsforholdOgInntekt):
     return 1;
   }
   if (d1HarAp1 && d2HarAp1) {
-    return d1.arbeidsforholdNavn.localeCompare(d2.arbeidsforholdNavn);
+    return d1.arbeidsgiverNavn.localeCompare(d2.arbeidsgiverNavn);
   }
 
   const d1HarAp2 = !d1.arbeidsforhold || d1.inntektsmelding?.begrunnelse;
@@ -77,10 +77,10 @@ const sorterTabell = (d1: ArbeidsforholdOgInntekt, d2: ArbeidsforholdOgInntekt):
     return 1;
   }
   if (d1HarAp2 && d2HarAp2) {
-    return d1.arbeidsforholdNavn.localeCompare(d2.arbeidsforholdNavn);
+    return d1.arbeidsgiverNavn.localeCompare(d2.arbeidsgiverNavn);
   }
 
-  return d1.arbeidsforholdNavn.localeCompare(d2.arbeidsforholdNavn);
+  return d1.arbeidsgiverNavn.localeCompare(d2.arbeidsgiverNavn);
 };
 
 const byggTabellStruktur = (
@@ -91,7 +91,7 @@ const byggTabellStruktur = (
 
   const alleArbeidsforhold = arbeidsforhold.map((af) => ({
     arbeidsforhold: af,
-    arbeidsforholdNavn: arbeidsgiverOpplysningerPerId[af.arbeidsgiverIdent]?.navn,
+    arbeidsgiverNavn: arbeidsgiverOpplysningerPerId[af.arbeidsgiverIdent]?.navn,
     inntektsmelding: inntektsmeldinger.find((inntektsmelding) => inntektsmelding.arbeidsgiverIdent === af.arbeidsgiverIdent),
     inntektsposter: inntekter.find((inntekt) => inntekt.arbeidsgiverIdent === af.arbeidsgiverIdent)?.inntekter,
   }));
@@ -99,7 +99,7 @@ const byggTabellStruktur = (
     .filter((im) => !arbeidsforhold.some((af) => im.arbeidsgiverIdent === af.arbeidsgiverIdent))
     .map((im) => ({
       arbeidsforhold: undefined,
-      arbeidsforholdNavn: arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent]?.navn,
+      arbeidsgiverNavn: arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent]?.navn,
       inntektsmelding: im,
       inntektsposter: inntekter.find((inntekt) => inntekt.arbeidsgiverIdent === im.arbeidsgiverIdent)?.inntekter,
     }));
@@ -149,34 +149,39 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   åpneForNyVurdering,
 }) => {
-  const erAksjonspunktAvsluttet = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.UTFORT);
-  const isReadOnly = readOnly || erAksjonspunktAvsluttet;
-  const [erKnappTrykket, setsKnappTrykket] = useState(false);
-  const [visSettPåVentModal, settVisSettPåVentModal] = useState(false);
-  const [isDirty, setDirty] = useState(false);
-
   const { arbeidsforhold, inntektsmeldinger } = arbeidOgInntekt;
 
+  const erAksjonspunktAvsluttet = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.UTFORT);
+  const erReadOnlyEllerHarAvsluttetAksjonspunkt = readOnly || erAksjonspunktAvsluttet;
+
+  const [erKnappTrykket, settKnappTrykket] = useState(false);
+  const [visSettPåVentModal, settVisSettPåVentModal] = useState(false);
+  const [isDirty, setDirty] = useState(false);
+  const [erOverstyrt, toggleOverstyring] = useState(false);
+  const [skalLeggeTilArbeidsforhold, toggleLeggTilArbeidsforhold] = useState(false);
+
   const [tabellData, setTabellData] = useState(formData || byggTabellStruktur(arbeidOgInntekt, arbeidsgiverOpplysningerPerId));
-
-  const [autoÅpneRadIndex, setAutoÅpenRadIndex] = useState(finnUløstArbeidsforholdIndex(tabellData));
-
-  const updateTabellData = useCallback((data: ArbeidsforholdOgInntekt[]) => {
-    setDirty(true);
-    setTabellData(data);
-    // @ts-ignore Fiks
-    setAutoÅpenRadIndex(finnUløstArbeidsforholdIndex(data(tabellData)));
-  }, [tabellData]);
+  const [åpenRadIndex, settÅpenRadIndex] = useState(finnUløstArbeidsforholdIndex(tabellData));
+  const [antallÅpnedeRader, oppdaterAntallÅpneRader] = useState(0);
 
   useEffect(() => () => {
     setFormData(tabellData);
   }, [tabellData]);
 
-  const harIngenArbeidsforholdEllerInntektsmeldinger = arbeidsforhold.length === 0 && inntektsmeldinger.length === 0;
+  useEffect(() => {
+    if (erOverstyrt) {
+      const indexForManueltLagtTil = tabellData
+        .findIndex((t) => t.arbeidsforhold?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER);
+      if (indexForManueltLagtTil !== -1) {
+        settÅpenRadIndex(indexForManueltLagtTil);
+      }
+    }
+  }, [erOverstyrt]);
 
-  const harUløsteManglendeInntektsmeldinger = tabellData.some((d) => d.arbeidsforhold?.årsak);
-  const harUløsteManglandeOpplysninger = tabellData.some((d) => d.inntektsmelding?.årsak);
-  const aksjonspunktTekstKoder = finnApTekstKoder(aksjonspunkter, harUløsteManglendeInntektsmeldinger, harUløsteManglandeOpplysninger);
+  const harIngenArbeidsforholdEllerInntektsmeldinger = arbeidsforhold.length === 0 && inntektsmeldinger.length === 0;
+  const harManglendeInntektsmeldinger = tabellData.some((d) => d.arbeidsforhold?.årsak);
+  const harManglandeOpplysninger = tabellData.some((d) => d.inntektsmelding?.årsak);
+  const aksjonspunktTekstKoder = useMemo(() => finnApTekstKoder(aksjonspunkter, harManglendeInntektsmeldinger, harManglandeOpplysninger), [behandling.versjon]);
 
   const harUbehandledeAksjonspunkt = tabellData.some((d) => (d.arbeidsforhold?.årsak && !d.arbeidsforhold?.saksbehandlersVurdering)
     || (d.inntektsmelding?.årsak && !d.inntektsmelding?.saksbehandlersVurdering));
@@ -185,34 +190,31 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
     .some((d) => d.arbeidsforhold?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING
       || d.inntektsmelding?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD);
 
-  const [antallÅpnedeRader, oppdaterAntallÅpneRader] = useState(0);
+  const harManueltLagtTilArbeidsforhold = tabellData.some((data) => data.arbeidsforhold?.arbeidsgiverIdent === MANUELT_ORG_NR);
+
   const oppdaterÅpneRader = (skalLukke: boolean) => {
     oppdaterAntallÅpneRader((antall) => (skalLukke ? antall + 1 : antall - 1));
   };
-  const [erOverstyrt, toggleOverstyring] = useState(false);
-  const [skalLeggeTilArbeidsforhold, toggleLeggTilArbeidsforhold] = useState(false);
-  const harManueltLagtTilArbeidsforhold = tabellData.some((data) => data.arbeidsforhold?.arbeidsgiverIdent === MANUELT_ORG_NR);
 
-  useEffect(() => {
-    if (erOverstyrt) {
-      const indexForManueltLagtTil = tabellData
-        .findIndex((t) => t.arbeidsforhold?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER);
-      setAutoÅpenRadIndex(indexForManueltLagtTil);
-    }
-  }, [erOverstyrt]);
+  const oppdaterTabellData = useCallback((data: ArbeidsforholdOgInntekt[]) => {
+    setDirty(true);
+    setTabellData(data);
+    // @ts-ignore Fiks
+    settÅpenRadIndex(finnUløstArbeidsforholdIndex(data(tabellData)));
+  }, [tabellData]);
 
   const lagre = useCallback(() => {
-    setsKnappTrykket(true);
+    settKnappTrykket(true);
     lagreCallback({
       kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
     });
-  }, []);
+  }, [behandling.versjon]);
   const gjenåpneAksjonspunkt = useCallback(() => {
-    setsKnappTrykket(true);
+    settKnappTrykket(true);
     åpneForNyVurdering();
-  }, []);
+  }, [behandling.versjon]);
   const settPaVent = useCallback((params: { frist: string; ventearsak: string; }) => {
-    setsKnappTrykket(true);
+    settKnappTrykket(true);
     settVisSettPåVentModal(false);
     settBehandlingPåVentCallback(params);
   }, [behandling.versjon]);
@@ -226,7 +228,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
               <FlexColumn>
                 <Undertittel><FormattedMessage id="ArbeidOgInntektFaktaPanel.Overskrift" /></Undertittel>
               </FlexColumn>
-              {erOverstyrer && !isReadOnly && (
+              {erOverstyrer && !erReadOnlyEllerHarAvsluttetAksjonspunkt && (
                 <FlexColumn>
                   <OverstyringKnapp onClick={toggleOverstyring} />
                 </FlexColumn>
@@ -282,9 +284,9 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
             behandlingUuid={behandling.uuid}
             isReadOnly={false}
             registrerArbeidsforhold={registrerArbeidsforhold}
-            avbrytEditering={() => toggleLeggTilArbeidsforhold(false)}
+            lukkArbeidsforholdRad={() => toggleLeggTilArbeidsforhold(false)}
             erOverstyrt
-            oppdaterTabell={updateTabellData}
+            oppdaterTabell={oppdaterTabellData}
           />
           <VerticalSpacer fourtyPx />
         </>
@@ -293,24 +295,24 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
         <>
           {tabellData.map((data, index) => (
             <ArbeidsforholdRad
-              key={data.arbeidsforholdNavn}
+              key={data.arbeidsgiverNavn}
               saksnummer={saksnummer}
               behandlingUuid={behandling.uuid}
               skjæringspunktDato={arbeidOgInntekt.skjæringstidspunkt}
               arbeidsforholdOgInntekt={data}
-              isReadOnly={isReadOnly}
+              isReadOnly={erReadOnlyEllerHarAvsluttetAksjonspunkt}
               registrerArbeidsforhold={registrerArbeidsforhold}
               lagreVurdering={lagreVurdering}
               oppdaterÅpenRad={oppdaterÅpneRader}
               erOverstyrt={erOverstyrt}
-              oppdaterTabell={updateTabellData}
-              erRadÅpen={index === autoÅpneRadIndex}
+              oppdaterTabell={oppdaterTabellData}
+              erRadÅpen={index === åpenRadIndex}
             />
           ))}
         </>
       </Table>
       <VerticalSpacer sixteenPx />
-      {!isReadOnly && isDirty && !harUbehandledeAksjonspunkt && kanSettePåVent && antallÅpnedeRader === 0 && (
+      {!erReadOnlyEllerHarAvsluttetAksjonspunkt && isDirty && kanSettePåVent && antallÅpnedeRader === 0 && (
         <>
           <Hovedknapp
             mini
@@ -330,7 +332,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           />
         </>
       )}
-      {!isReadOnly && isDirty && !harUbehandledeAksjonspunkt && !kanSettePåVent && antallÅpnedeRader === 0 && (
+      {!erReadOnlyEllerHarAvsluttetAksjonspunkt && !harUbehandledeAksjonspunkt && isDirty && !kanSettePåVent && antallÅpnedeRader === 0 && (
         <Hovedknapp
           mini
           disabled={erKnappTrykket}

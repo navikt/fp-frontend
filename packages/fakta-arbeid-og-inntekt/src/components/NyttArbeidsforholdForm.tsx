@@ -46,8 +46,8 @@ interface OwnProps {
   isReadOnly: boolean;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   arbeidsforhold?: AoIArbeidsforhold;
-  arbeidsforholdNavn?: string;
-  avbrytEditering?: () => void;
+  arbeidsgiverNavn?: string;
+  lukkArbeidsforholdRad?: () => void;
   erOverstyrt: boolean;
   oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
 }
@@ -57,32 +57,32 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   isReadOnly,
   registrerArbeidsforhold,
   arbeidsforhold,
-  arbeidsforholdNavn,
-  avbrytEditering,
+  arbeidsgiverNavn,
+  lukkArbeidsforholdRad,
   erOverstyrt,
   oppdaterTabell,
 }) => {
   const intl = useIntl();
-  const [skalViseSletteDialog, visSletteDialog] = useState(false);
+  const [visSletteDialog, settVisSletteDialog] = useState(false);
 
   const defaultValues = useMemo<FormValues>(() => (arbeidsforhold ? {
     fom: arbeidsforhold.fom,
     tom: arbeidsforhold.tom,
     stillingsprosent: arbeidsforhold.stillingsprosent,
     begrunnelse: arbeidsforhold.begrunnelse,
-    arbeidsgiverNavn: arbeidsforholdNavn,
-  } : undefined), [arbeidsforhold, arbeidsforholdNavn]);
+    arbeidsgiverNavn,
+  } : undefined), [arbeidsforhold, arbeidsgiverNavn]);
 
   const formMethods = useForm<FormValues>({
     defaultValues,
   });
 
-  const avbryt = useCallback(() => {
-    avbrytEditering();
+  const lukkRadOgResetForm = useCallback(() => {
+    lukkArbeidsforholdRad();
     formMethods.reset();
   }, []);
 
-  const lagre = useCallback((formValues: FormValues) => {
+  const lagreArbeidsforhold = useCallback((formValues: FormValues) => {
     const params = {
       behandlingUuid,
       arbeidsgiverIdent: MANUELT_ORG_NR,
@@ -90,9 +90,7 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
       ...formValues,
     };
     registrerArbeidsforhold(params).then(() => {
-      oppdaterTabell((oldData) => {
-        const index = oldData.findIndex((data) => data.arbeidsforhold?.arbeidsgiverIdent === MANUELT_ORG_NR);
-
+      oppdaterTabell((gammelData) => {
         const af = {
           arbeidsforhold: {
             arbeidsgiverIdent: MANUELT_ORG_NR,
@@ -102,26 +100,23 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
             begrunnelse: formValues.begrunnelse,
             saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
           },
-          arbeidsforholdNavn: formValues.arbeidsgiverNavn,
+          arbeidsgiverNavn: formValues.arbeidsgiverNavn,
           inntektsmelding: undefined,
           inntektsposter: undefined,
         };
 
-        if (index === -1) {
-          return oldData.concat(af);
+        const gammelIndex = gammelData.findIndex((data) => data.arbeidsforhold?.arbeidsgiverIdent === MANUELT_ORG_NR);
+        if (gammelIndex === -1) {
+          return gammelData.concat(af);
         }
-        return oldData.map((data, i) => {
-          if (i === index) {
-            return af;
-          }
-          return data;
-        });
+        return gammelData.map((data, i) => (i === gammelIndex ? af : data));
       });
-      avbryt();
+
+      lukkRadOgResetForm();
     });
   }, [behandlingUuid, oppdaterTabell]);
 
-  const slett = useCallback(() => {
+  const slettArbeidsforhold = useCallback(() => {
     const formValues = formMethods.getValues();
     const params = {
       behandlingUuid,
@@ -131,7 +126,7 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
     };
     registrerArbeidsforhold(params).then(() => {
       oppdaterTabell((oldData) => oldData.filter((data) => data.arbeidsforhold?.arbeidsgiverIdent !== MANUELT_ORG_NR));
-      avbrytEditering();
+      lukkArbeidsforholdRad();
     });
   }, [formMethods]);
 
@@ -143,7 +138,7 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
         </>
       )}
-      <Form formMethods={formMethods} onSubmit={(values) => lagre(values)}>
+      <Form formMethods={formMethods} onSubmit={lagreArbeidsforhold}>
         <FlexContainer>
           <FlexRow>
             <FlexColumn>
@@ -219,7 +214,7 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                       mini
                       spinner={false}
                       disabled={formMethods.formState.isSubmitting}
-                      onClick={avbryt}
+                      onClick={lukkRadOgResetForm}
                       htmlType="button"
                     >
                       <FormattedMessage id="LeggTilArbeidsforholdForm.Avbryt" />
@@ -235,7 +230,7 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                     mini
                     spinner={false}
                     disabled={formMethods.formState.isSubmitting}
-                    onClick={() => visSletteDialog(true)}
+                    onClick={() => settVisSletteDialog(true)}
                     htmlType="button"
                   >
                     <Image src={binIcon} className={styles.buttonImage} />
@@ -247,11 +242,11 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
           </Row>
         )}
       </Form>
-      {skalViseSletteDialog && (
+      {visSletteDialog && (
         <OkAvbrytModal
           text={intl.formatMessage({ id: 'NyttArbeidsforholdForm.VilDuSlette' })}
-          submit={slett}
-          cancel={() => visSletteDialog(false)}
+          submit={slettArbeidsforhold}
+          cancel={() => settVisSletteDialog(false)}
           showModal
         />
       )}
