@@ -8,7 +8,12 @@ import userEvent from '@testing-library/user-event';
 import Modal from 'nav-frontend-modal';
 import * as stories from './ArbeidOgInntektFaktaIndex.stories';
 
-const { InnhentInntektsmelding, AvklarManglendeOpplysninger } = composeStories(stories);
+const {
+  InnhentInntektsmelding,
+  AvklarManglendeOpplysninger,
+  AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppMulig,
+  SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnErOverstyrer,
+} = composeStories(stories);
 
 describe('<ArbeidOgInntektFaktaIndex>', () => {
   Modal.setAppElement('body');
@@ -200,6 +205,79 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       stillingsprosent: 100,
       tom: '2022-02-01',
       vurdering: 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
+    });
+
+    userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(bekrefteAksjonspunkt).toHaveBeenCalledTimes(1));
+    expect(bekrefteAksjonspunkt).toHaveBeenNthCalledWith(1, {
+      kode: '5085',
+    });
+  });
+
+  it('skal kunne åpne for ny vurdering når aksjonspunkt er løst men behandling er åpen', async () => {
+    const åpneForNyVurdering = jest.fn(() => Promise.resolve());
+
+    render(
+      <AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppMulig
+        åpneForNyVurdering={åpneForNyVurdering}
+      />,
+    );
+
+    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+
+    userEvent.click(screen.getByText('Åpne for ny vurdering'));
+
+    await waitFor(() => expect(åpneForNyVurdering).toHaveBeenCalledTimes(1));
+  });
+
+  it('skal legge til nytt arbeidsforhold (Har overstyringsrettighet)', async () => {
+    const bekrefteAksjonspunkt = jest.fn(() => Promise.resolve());
+    const registrerArbeidsforhold = jest.fn(() => Promise.resolve());
+
+    const utils = render(
+      <SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnErOverstyrer
+        submitCallback={bekrefteAksjonspunkt}
+        registrerArbeidsforhold={registrerArbeidsforhold}
+      />,
+    );
+
+    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(screen.getByText(
+      'Ingen arbeidsforhold eller inntektsmeldinger registrert på bruker. Vurder om det er dokumentert andre arbeidsforhold. '
+      + 'Arbeidsforholdet må kun opprettes dersom...',
+    )).toBeInTheDocument();
+    expect(screen.queryByText('Legg til arbeidsforhold')).not.toBeInTheDocument();
+
+    userEvent.click(screen.getByAltText('Overstyr'));
+
+    userEvent.click(screen.getByText('Legg til arbeidsforhold'));
+
+    userEvent.type(utils.getByLabelText('Arbeidsgiver'), 'Telenor');
+
+    const periodeFra = screen.getByText('Periode fra');
+    userEvent.type(periodeFra, '01.02.2020');
+    fireEvent.blur(periodeFra);
+
+    const periodeTil = screen.getByText('Periode til');
+    userEvent.type(periodeTil, '01.02.2022');
+    fireEvent.blur(periodeTil);
+
+    userEvent.type(utils.getByLabelText('Stillingsprosent'), '100');
+    userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+
+    userEvent.click(screen.getByText('Lagre'));
+
+    await waitFor(() => expect(registrerArbeidsforhold).toHaveBeenCalledTimes(1));
+    expect(registrerArbeidsforhold).toHaveBeenNthCalledWith(1, {
+      arbeidsgiverIdent: '342352362',
+      arbeidsgiverNavn: 'Telenor',
+      begrunnelse: 'Dette er en begrunnelse',
+      behandlingUuid: '1223-2323-2323-22332',
+      fom: '2020-02-01',
+      stillingsprosent: 100,
+      tom: '2022-02-01',
+      vurdering: 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER',
     });
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
