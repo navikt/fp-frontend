@@ -5,7 +5,7 @@ type ForhåndsvisMeldingParams = Readonly<{
   };
   fagsakYtelseType: string;
   behandlingUuid: string;
-  vedtaksbrev?: string;
+  vedtaksbrev?: { kode: string };
   automatiskVedtaksbrev?: boolean;
   fritekst?: string;
   dokumentMal?: string;
