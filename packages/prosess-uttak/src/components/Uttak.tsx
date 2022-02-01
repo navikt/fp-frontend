@@ -764,7 +764,7 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
   const hovedsokerKjonnKode = person ? person.bruker.kjønn : undefined;
   const annenForelderUttak = uttaksresultat.perioderAnnenpart;
   const viseUttakMedsoker = annenForelderUttak.length > 0;
-  const getMedsokerKjonnKode = (viseUttakMedsoker && person && person.annenPart) ? person.annenPart : undefined;
+  const getMedsokerKjonnKode = (viseUttakMedsoker && person && person.annenPart) ? person.annenPart.kjønn : undefined;
   // hvis ukjent annenpart og annenpart uttak, vis ukjent ikon
   const medsokerKjonnKode = viseUttakMedsoker && getMedsokerKjonnKode === undefined ? navBrukerKjonn.UDEFINERT : getMedsokerKjonnKode;
 
