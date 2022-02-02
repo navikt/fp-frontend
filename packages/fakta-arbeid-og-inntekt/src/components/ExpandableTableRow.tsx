@@ -12,7 +12,7 @@ import styles from './expandableTableRow.less';
 interface OwnProps {
   showContent: boolean;
   content: ReactNode;
-  toggleContent: (isOpen: boolean) => void;
+  toggleContent: () => void;
   children: ReactNode | ReactNode[];
   isApLeftBorder?: boolean;
 }
@@ -28,8 +28,8 @@ const ExpandableTableRow: FunctionComponent<OwnProps> = ({
   return (
     <>
       <TableRow
-        onMouseDown={() => toggleContent(!showContent)}
-        onKeyDown={() => toggleContent(!showContent)}
+        onMouseDown={toggleContent}
+        onKeyDown={toggleContent}
         hasNoBottomBorder={showContent}
         isApLeftBorder={isApLeftBorder}
       >

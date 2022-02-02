@@ -1,6 +1,4 @@
-import React, {
-  FunctionComponent, useCallback, useEffect, useState,
-} from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Normaltekst, Element, Undertekst } from 'nav-frontend-typografi';
 
@@ -15,7 +13,7 @@ import {
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 import { TIDENES_ENDE } from '@fpsak-frontend/utils';
 import ExpandableTableRow from './ExpandableTableRow';
-import NyttArbeidsforholdForm from './NyttArbeidsforholdForm';
+import ManueltLagtTilArbeidsforholdForm from './ManueltLagtTilArbeidsforholdForm';
 import ManglendeOpplysningerForm from './ManglendeOpplysningerForm';
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 import InntektsmeldingInnhentesForm from './InntektsmeldingInnhentesForm';
@@ -38,11 +36,11 @@ interface OwnProps {
   arbeidsforholdOgInntekt: ArbeidsforholdOgInntekt;
   isReadOnly: boolean;
   erOverstyrt: boolean;
-  erRadÅpen: boolean;
   oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
-  oppdaterÅpenRad: (erÅpen: boolean) => void;
+  toggleÅpenRad: () => void;
+  erRadÅpen: boolean;
 }
 
 const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
@@ -52,33 +50,17 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
   arbeidsforholdOgInntekt,
   isReadOnly,
   erOverstyrt,
-  erRadÅpen,
   oppdaterTabell,
   registrerArbeidsforhold,
   lagreVurdering,
-  oppdaterÅpenRad,
+  toggleÅpenRad,
+  erRadÅpen,
 }) => {
   const intl = useIntl();
 
   const {
     arbeidsforhold, arbeidsgiverNavn, inntektsposter, inntektsmelding,
   } = arbeidsforholdOgInntekt;
-
-  const [erRadEkspandert, toggleEkspandertRad] = useState(erRadÅpen);
-  useEffect(() => {
-    if (erRadÅpen) {
-      oppdaterÅpenRad(true);
-    }
-    toggleEkspandertRad(erRadÅpen);
-  }, [erRadÅpen]);
-
-  const toggleRad = (erApen: boolean) => {
-    oppdaterÅpenRad(erApen);
-    toggleEkspandertRad(erApen);
-  };
-  const lukkArbeidsforholdRad = useCallback(() => {
-    toggleRad(false);
-  }, []);
 
   const erManueltOpprettet = arbeidsforhold?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER;
   const harArbeidsforholdOgInntektsmelding = arbeidsforhold && inntektsmelding && !arbeidsforhold.årsak && !inntektsmelding.årsak;
@@ -94,13 +76,13 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
       content={(
         <>
           {erManueltOpprettet && (
-            <NyttArbeidsforholdForm
+            <ManueltLagtTilArbeidsforholdForm
               behandlingUuid={behandlingUuid}
               isReadOnly={false}
               registrerArbeidsforhold={registrerArbeidsforhold}
               arbeidsforhold={arbeidsforhold}
               arbeidsgiverNavn={arbeidsgiverNavn}
-              lukkArbeidsforholdRad={lukkArbeidsforholdRad}
+              lukkArbeidsforholdRad={toggleÅpenRad}
               erOverstyrt={erOverstyrt}
               oppdaterTabell={oppdaterTabell}
             />
@@ -120,7 +102,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               isReadOnly={isReadOnly}
               arbeidsforhold={arbeidsforhold}
               lagreVurdering={lagreVurdering}
-              lukkArbeidsforholdRad={lukkArbeidsforholdRad}
+              lukkArbeidsforholdRad={toggleÅpenRad}
               oppdaterTabell={oppdaterTabell}
             />
           )}
@@ -134,14 +116,14 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               isReadOnly={isReadOnly}
               registrerArbeidsforhold={registrerArbeidsforhold}
               lagreVurdering={lagreVurdering}
-              lukkArbeidsforholdRad={lukkArbeidsforholdRad}
+              lukkArbeidsforholdRad={toggleÅpenRad}
               oppdaterTabell={oppdaterTabell}
             />
           )}
         </>
       )}
-      showContent={erRadEkspandert}
-      toggleContent={toggleRad}
+      showContent={erRadÅpen}
+      toggleContent={toggleÅpenRad}
       isApLeftBorder={harÅpentAksjonspunkt}
     >
       <TableColumn>
@@ -153,7 +135,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
         )}
       </TableColumn>
       <TableColumn>
-        {erRadEkspandert && (
+        {erRadÅpen && (
           <>
             <Element>
               {arbeidsgiverNavn}
@@ -167,7 +149,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
             )}
           </>
         )}
-        {!erRadEkspandert && (
+        {!erRadÅpen && (
           <Normaltekst>
             {arbeidsgiverNavn}
           </Normaltekst>

@@ -25,7 +25,7 @@ import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus'
 import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
-import NyttArbeidsforholdForm, { MANUELT_ORG_NR } from './NyttArbeidsforholdForm';
+import ManueltLagtTilArbeidsforholdForm, { MANUELT_ORG_NR } from './ManueltLagtTilArbeidsforholdForm';
 import ArbeidsforholdRad from './ArbeidsforholdRad';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
@@ -107,9 +107,12 @@ const byggTabellStruktur = (
   return alleArbeidsforhold.concat(alleInntektsmeldingerSomManglerArbeidsforhold).sort(sorterTabell);
 };
 
-const finnUløstArbeidsforholdIndex = (tabellData: ArbeidsforholdOgInntekt[]) => tabellData
-  .findIndex((d) => (d.arbeidsforhold?.årsak && !d.arbeidsforhold?.saksbehandlersVurdering)
+const finnUløstArbeidsforholdIndex = (tabellData: ArbeidsforholdOgInntekt[]): number[] => {
+  const index = tabellData
+    .findIndex((d) => (d.arbeidsforhold?.årsak && !d.arbeidsforhold?.saksbehandlersVurdering)
     || (d.inntektsmelding?.årsak && !d.inntektsmelding?.saksbehandlersVurdering));
+  return index !== -1 ? [index] : [];
+};
 
 interface OwnProps {
   saksnummer: string;
@@ -157,26 +160,15 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   const [erKnappTrykket, settKnappTrykket] = useState(false);
   const [visSettPåVentModal, settVisSettPåVentModal] = useState(false);
   const [isDirty, setDirty] = useState(false);
-  const [erOverstyrt, toggleOverstyring] = useState(false);
+  const [erOverstyrt, setErOverstyrt] = useState(false);
   const [skalLeggeTilArbeidsforhold, toggleLeggTilArbeidsforhold] = useState(false);
 
   const [tabellData, setTabellData] = useState(formData || byggTabellStruktur(arbeidOgInntekt, arbeidsgiverOpplysningerPerId));
-  const [åpenRadIndex, settÅpenRadIndex] = useState(finnUløstArbeidsforholdIndex(tabellData));
-  const [antallÅpnedeRader, oppdaterAntallÅpneRader] = useState(0);
+  const [åpneRadIndexer, settÅpneRadIndexer] = useState(finnUløstArbeidsforholdIndex(tabellData));
 
   useEffect(() => () => {
     setFormData(tabellData);
   }, [tabellData]);
-
-  useEffect(() => {
-    if (erOverstyrt) {
-      const indexForManueltLagtTil = tabellData
-        .findIndex((t) => t.arbeidsforhold?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER);
-      if (indexForManueltLagtTil !== -1) {
-        settÅpenRadIndex(indexForManueltLagtTil);
-      }
-    }
-  }, [erOverstyrt]);
 
   const harIngenArbeidsforholdEllerInntektsmeldinger = arbeidsforhold.length === 0 && inntektsmeldinger.length === 0;
   const harManglendeInntektsmeldinger = tabellData.some((d) => d.arbeidsforhold?.årsak);
@@ -192,27 +184,42 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
 
   const harManueltLagtTilArbeidsforhold = tabellData.some((data) => data.arbeidsforhold?.arbeidsgiverIdent === MANUELT_ORG_NR);
 
-  const oppdaterÅpneRader = (skalLukke: boolean) => {
-    oppdaterAntallÅpneRader((antall) => (skalLukke ? antall + 1 : antall - 1));
-  };
+  const toggleÅpenRad = useCallback((index: number) => {
+    if (åpneRadIndexer.some((radIndex) => radIndex === index)) {
+      settÅpneRadIndexer(åpneRadIndexer.filter((i) => i !== index));
+    } else {
+      settÅpneRadIndexer(åpneRadIndexer.concat(index));
+    }
+  }, [åpneRadIndexer, settÅpneRadIndexer]);
+
+  const toggleOverstyring = useCallback(() => {
+    setErOverstyrt(true);
+    const indexForManueltLagtTil = tabellData
+      .findIndex((t) => t.arbeidsforhold?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER);
+    if (indexForManueltLagtTil !== -1) {
+      settÅpneRadIndexer([indexForManueltLagtTil]);
+    }
+  }, [tabellData, settÅpneRadIndexer]);
 
   const oppdaterTabellData = useCallback((data: ArbeidsforholdOgInntekt[]) => {
     setDirty(true);
     setTabellData(data);
     // @ts-ignore Fiks
-    settÅpenRadIndex(finnUløstArbeidsforholdIndex(data(tabellData)));
+    settÅpneRadIndexer(finnUløstArbeidsforholdIndex(data(tabellData)));
   }, [tabellData]);
 
-  const lagre = useCallback(() => {
+  const lagreOgFortsett = useCallback(() => {
     settKnappTrykket(true);
     lagreCallback({
       kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
     });
   }, [behandling.versjon]);
+
   const gjenåpneAksjonspunkt = useCallback(() => {
     settKnappTrykket(true);
     åpneForNyVurdering();
   }, [behandling.versjon]);
+
   const settPaVent = useCallback((params: { frist: string; ventearsak: string; }) => {
     settKnappTrykket(true);
     settVisSettPåVentModal(false);
@@ -280,13 +287,14 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
       <VerticalSpacer thirtyTwoPx />
       {skalLeggeTilArbeidsforhold && (
         <>
-          <NyttArbeidsforholdForm
+          <ManueltLagtTilArbeidsforholdForm
             behandlingUuid={behandling.uuid}
             isReadOnly={false}
             registrerArbeidsforhold={registrerArbeidsforhold}
             lukkArbeidsforholdRad={() => toggleLeggTilArbeidsforhold(false)}
-            erOverstyrt
             oppdaterTabell={oppdaterTabellData}
+            erOverstyrt
+            erNyttArbeidsforhold
           />
           <VerticalSpacer fourtyPx />
         </>
@@ -303,16 +311,16 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
               isReadOnly={erReadOnlyEllerHarAvsluttetAksjonspunkt}
               registrerArbeidsforhold={registrerArbeidsforhold}
               lagreVurdering={lagreVurdering}
-              oppdaterÅpenRad={oppdaterÅpneRader}
+              toggleÅpenRad={() => toggleÅpenRad(index)}
               erOverstyrt={erOverstyrt}
               oppdaterTabell={oppdaterTabellData}
-              erRadÅpen={index === åpenRadIndex}
+              erRadÅpen={åpneRadIndexer.includes(index)}
             />
           ))}
         </>
       </Table>
       <VerticalSpacer sixteenPx />
-      {!erReadOnlyEllerHarAvsluttetAksjonspunkt && isDirty && kanSettePåVent && antallÅpnedeRader === 0 && (
+      {!erReadOnlyEllerHarAvsluttetAksjonspunkt && isDirty && kanSettePåVent && åpneRadIndexer.length === 0 && (
         <>
           <Hovedknapp
             mini
@@ -332,12 +340,12 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           />
         </>
       )}
-      {!erReadOnlyEllerHarAvsluttetAksjonspunkt && !harUbehandledeAksjonspunkt && isDirty && !kanSettePåVent && antallÅpnedeRader === 0 && (
+      {!erReadOnlyEllerHarAvsluttetAksjonspunkt && !harUbehandledeAksjonspunkt && isDirty && !kanSettePåVent && åpneRadIndexer.length === 0 && (
         <Hovedknapp
           mini
           disabled={erKnappTrykket}
           spinner={erKnappTrykket}
-          onClick={lagre}
+          onClick={lagreOgFortsett}
         >
           <FormattedMessage id="ArbeidOgInntektFaktaPanel.Bekreft" />
         </Hovedknapp>

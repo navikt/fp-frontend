@@ -126,7 +126,6 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
         }
         return data;
       }));
-      lukkArbeidsforholdRad();
     }).finally(() => formMethods.reset(formValues));
   }, [arbeidsforhold, oppdaterTabell]);
 

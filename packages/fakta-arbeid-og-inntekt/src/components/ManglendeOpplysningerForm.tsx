@@ -109,8 +109,6 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
         }
         return data;
       }));
-
-      lukkArbeidsforholdRad();
     });
 
     if (formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING) {

@@ -22,7 +22,7 @@ import {
 
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
-import styles from './nyttArbeidsforholdForm.less';
+import styles from './manueltLagtTilArbeidsforholdForm.less';
 
 export const MANUELT_ORG_NR = '342352362';
 
@@ -50,9 +50,10 @@ interface OwnProps {
   lukkArbeidsforholdRad?: () => void;
   erOverstyrt: boolean;
   oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
+  erNyttArbeidsforhold?: boolean;
 }
 
-const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
+const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   behandlingUuid,
   isReadOnly,
   registrerArbeidsforhold,
@@ -61,6 +62,7 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   lukkArbeidsforholdRad,
   erOverstyrt,
   oppdaterTabell,
+  erNyttArbeidsforhold = false,
 }) => {
   const intl = useIntl();
   const [visSletteDialog, settVisSletteDialog] = useState(false);
@@ -80,7 +82,7 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   const lukkRadOgResetForm = useCallback(() => {
     lukkArbeidsforholdRad();
     formMethods.reset();
-  }, []);
+  }, [lukkArbeidsforholdRad]);
 
   const lagreArbeidsforhold = useCallback((formValues: FormValues) => {
     const params = {
@@ -112,7 +114,10 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
         return gammelData.map((data, i) => (i === gammelIndex ? af : data));
       });
 
-      lukkRadOgResetForm();
+      formMethods.reset();
+      if (erNyttArbeidsforhold) {
+        lukkArbeidsforholdRad();
+      }
     });
   }, [behandlingUuid, oppdaterTabell]);
 
@@ -126,7 +131,9 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
     };
     registrerArbeidsforhold(params).then(() => {
       oppdaterTabell((oldData) => oldData.filter((data) => data.arbeidsforhold?.arbeidsgiverIdent !== MANUELT_ORG_NR));
-      lukkArbeidsforholdRad();
+      if (erNyttArbeidsforhold) {
+        lukkArbeidsforholdRad();
+      }
     });
   }, [formMethods]);
 
@@ -254,4 +261,4 @@ const NyttArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default NyttArbeidsforholdForm;
+export default ManueltLagtTilArbeidsforholdForm;
