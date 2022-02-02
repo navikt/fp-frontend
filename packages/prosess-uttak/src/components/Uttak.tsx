@@ -40,6 +40,8 @@ import { AktivitetFieldArray } from './RenderUttakTable';
 
 import styles from './uttak.less';
 
+const finnKodeverkType = (kodeverk: string): KodeverkType => KodeverkType[kodeverk];
+
 type Overwrite<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;
 export type UttaksresultatActivity = Overwrite<PeriodeSoker, {
   id: number;
@@ -94,7 +96,7 @@ const getCustomTimes = (
 };
 
 const isInnvilget = (uttaksresultatActivity: UttaksresultatActivity): boolean => uttaksresultatActivity
-  .periodeResultatType === periodeResultatType.INNVILGET;
+  .periodeResultatType.kode === periodeResultatType.INNVILGET;
 
 interface PureOwnProps {
   intl: IntlShape;
@@ -214,7 +216,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
   setSelectedDefaultPeriod(): void {
     const { selectedItem } = this.state;
     const { uttakPerioder } = this.props;
-    const defaultSelectedElement = uttakPerioder.find((period) => period.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING);
+    const defaultSelectedElement = uttakPerioder.find((period) => period.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING);
     const defaultSelectedElementIfNoAP = uttakPerioder.find((period) => period.hovedsoker);
     if (!selectedItem) {
       this.setState({ selectedItem: defaultSelectedElement || defaultSelectedElementIfNoAP });
@@ -245,7 +247,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { tilknyttetStortinget, ...uta } = periode; // NOSONAR destruct er bedre enn delete, immutable
       const { ...transformActivity } = uta;
-      if (uta.oppholdÅrsak !== '-') {
+      if (uta.oppholdÅrsak.kode !== '-') {
         uta.aktiviteter = [];
       }
 
@@ -294,7 +296,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     sortedActivities.sort((a, b) => a.id - b.id);
     this.updateStonadskontoer(sortedActivities);
     this.setFormField(ACTIVITY_PANEL_NAME, sortedActivities);
-    const uttakActivity = otherThanUpdated.find((o) => o.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING
+    const uttakActivity = otherThanUpdated.find((o) => o.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING
         || (o.tilknyttetStortinget && !Object.prototype.hasOwnProperty.call(o, 'erOppfylt')));
     this.setSelectedUttakActivity(uttakActivity || undefined);
   }
@@ -394,7 +396,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
       return true;
     }
     const ikkeOppfylt = uttaksresultatActivity.some((ac) => (!Object.prototype.hasOwnProperty.call(ac, 'erOppfylt') && ac.tilknyttetStortinget)
-        || ac.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING);
+        || ac.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING);
 
     if (!isDirty || ikkeOppfylt) {
       return true;
@@ -609,10 +611,14 @@ const lagUttakMedOpphold = createSelector(
   (uttaksresultatActivity: UttaksresultatActivity[]): UttaksresultatActivity[] => uttaksresultatActivity.map((uttak): UttaksresultatActivity => {
     const { ...uttakPerioder } = uttak;
 
-    if (uttak.oppholdÅrsak !== oppholdArsakType.UDEFINERT) {
-      const stonadskonto = oppholdArsakMapper[uttak.oppholdÅrsak];
+    if (uttak.oppholdÅrsak.kode !== oppholdArsakType.UDEFINERT) {
+      const stonadskonto = oppholdArsakMapper[uttak.oppholdÅrsak.kode];
       const oppholdInfo = {
-        stønadskontoType: stonadskonto,
+        stønadskontoType: {
+          kode: stonadskonto,
+          kodeverk: uttak.oppholdÅrsak.kodeverk,
+          navn: uttakPeriodeNavn[stonadskonto],
+        },
         trekkdagerDesimaler: calcDays(uttak.fom, uttak.tom),
       };
       uttakPerioder.aktiviteter = [oppholdInfo];
@@ -638,12 +644,12 @@ const getStatusPeriodeHoved = (periode: UttaksresultatActivity | PeriodeSoker): 
   if ('erOppfylt' in periode && periode.erOppfylt === false) {
     return avvistKlassenavn;
   }
-  if (('erOppfylt' in periode && periode.erOppfylt === true) || (periode.periodeResultatType === periodeResultatType.INNVILGET
+  if (('erOppfylt' in periode && periode.erOppfylt === true) || (periode.periodeResultatType.kode === periodeResultatType.INNVILGET
     // @ts-ignore Fiks
     && !periode.tilknyttetStortinget)) {
     return godkjentKlassenavn;
   }
-  if (periode.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING
+  if (periode.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING
     // @ts-ignore Fiks
     || periode.tilknyttetStortinget
   ) {
@@ -654,7 +660,7 @@ const getStatusPeriodeHoved = (periode: UttaksresultatActivity | PeriodeSoker): 
 
 const getStatusPeriodeMed = (periode: UttaksresultatActivity | PeriodeSoker): string => {
   // @ts-ignore Fiks
-  if (periode.periodeResultatType === periodeResultatType.INNVILGET && !periode.tilknyttetStortinget) {
+  if (periode.periodeResultatType.kode === periodeResultatType.INNVILGET && !periode.tilknyttetStortinget) {
     return godkjentKlassenavn;
   }
   return avvistKlassenavn;
@@ -670,7 +676,7 @@ const createTooltipContent = (periodeType: string | ReactElement, intl: IntlShap
       days: calcDaysAndWeeks(item.fom, item.tom).days,
     })}
       </br>
-      ${item.utsettelseType && item.utsettelseType !== '-'
+      ${item.utsettelseType && item.utsettelseType.kode !== '-'
     ? intl.formatMessage({ id: 'Timeline.tooltip.utsettelsePeriode' }) : periodeType}
      </p>
   `);
@@ -678,16 +684,16 @@ const createTooltipContent = (periodeType: string | ReactElement, intl: IntlShap
 const getCorrectPeriodName = (
   item: UttaksresultatActivity | PeriodeSoker,
   getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string): ReactElement | string => {
-  if (item.utsettelseType && item.utsettelseType !== '-') {
+  if (item.utsettelseType && item.utsettelseType.kode !== '-') {
     return (<FormattedMessage id="Timeline.tooltip.slutt" />);
   }
 
   if (item.aktiviteter.length > 0 && item.aktiviteter[0].stønadskontoType) {
-    return getKodeverknavn(item.aktiviteter[0].stønadskontoType, KodeverkType.STOENADSKONTOTYPE);
+    return getKodeverknavn(item.aktiviteter[0].stønadskontoType.kode, finnKodeverkType(item.aktiviteter[0].stønadskontoType.kodeverk));
   }
 
-  if (item.oppholdÅrsak !== oppholdArsakType.UDEFINERT) {
-    const stonadskonto = oppholdArsakMapper[item.oppholdÅrsak];
+  if (item.oppholdÅrsak?.kode !== oppholdArsakType.UDEFINERT) {
+    const stonadskonto = oppholdArsakMapper[item.oppholdÅrsak.kode];
     return uttakPeriodeNavn[stonadskonto];
   }
 
@@ -710,7 +716,7 @@ const addClassNameGroupIdToPerioder = (
 
   perioder.forEach((item: UttaksresultatActivity | PeriodeSoker, index: number) => {
     const stonadskontoType = getCorrectPeriodName(item, getKodeverknavn);
-    const opphold = item.oppholdÅrsak !== oppholdArsakType.UDEFINERT;
+    const opphold = item.oppholdÅrsak.kode !== oppholdArsakType.UDEFINERT;
     const status = hovedsoker ? getStatusPeriodeHoved(item) : getStatusPeriodeMed(item);
     const gradert = (item.gradertAktivitet && item.graderingInnvilget) ? 'gradert' : '';
     const copyOfItem = { ...item } as PeriodeMedClassName;

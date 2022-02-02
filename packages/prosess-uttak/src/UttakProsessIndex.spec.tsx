@@ -19,18 +19,27 @@ describe('<UttakProsessIndex>', () => {
         tom: '2019-10-25',
         aktiviteter: [
           {
-            stønadskontoType: 'FORELDREPENGER_FØR_FØDSEL',
+            stønadskontoType: {
+              kode: 'FORELDREPENGER_FØR_FØDSEL',
+              kodeverk: 'STOENADSKONTOTYPE',
+            },
             prosentArbeid: 0,
             arbeidsforholdId: null,
             eksternArbeidsforholdId: null,
             arbeidsgiverReferanse: '910909088',
             utbetalingsgrad: 100,
-            uttakArbeidType: 'ORDINÆRT_ARBEID',
+            uttakArbeidType: {
+              kode: 'ORDINÆRT_ARBEID',
+              kodeverk: 'UTTAK_ARBEID_TYPE',
+            },
             gradering: false,
             trekkdagerDesimaler: 15,
           },
         ],
-        periodeResultatType: 'INNVILGET',
+        periodeResultatType: {
+          kode: 'INNVILGET',
+          kodeverk: 'PERIODE_RESULTAT_TYPE',
+        },
         begrunnelse: null,
         periodeResultatÅrsak: {
           kode: '2006',
@@ -39,7 +48,10 @@ describe('<UttakProsessIndex>', () => {
           gyldigFom: '2000-01-01',
           gyldigTom: '9999-12-31',
         },
-        manuellBehandlingÅrsak: '-',
+        manuellBehandlingÅrsak: {
+          kode: '-',
+          kodeverk: 'MANUELL_BEHANDLING_AARSAK',
+        },
         graderingAvslagÅrsak: {
           kode: '-',
           navn: 'Ikke definert',
@@ -51,9 +63,18 @@ describe('<UttakProsessIndex>', () => {
         samtidigUttak: false,
         samtidigUttaksprosent: null,
         graderingInnvilget: false,
-        periodeType: 'FORELDREPENGER_FØR_FØDSEL',
-        utsettelseType: '-',
-        oppholdÅrsak: '-',
+        periodeType: {
+          kode: 'FORELDREPENGER_FØR_FØDSEL',
+          kodeverk: 'UTTAK_PERIODE_TYPE',
+        },
+        utsettelseType: {
+          kode: '-',
+          kodeverk: 'UTTAK_UTSETTELSE_TYPE',
+        },
+        oppholdÅrsak: {
+          kode: '-',
+          kodeverk: 'OPPHOLD_AARSAK_TYPE',
+        },
         gradertAktivitet: null,
         graderingsAvslagÅrsakLovhjemmel: null,
       },

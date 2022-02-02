@@ -120,16 +120,25 @@ const uttaksresultatPerioder = {
       tom: '2019-11-03',
       aktiviteter: [
         {
-          stønadskontoType: 'FORELDREPENGER_FØR_FØDSEL',
+          stønadskontoType: {
+            kode: 'FORELDREPENGER_FØR_FØDSEL',
+            kodeverk: 'STOENADSKONTOTYPE',
+          },
           prosentArbeid: 0,
           arbeidsgiverReferanse: '910909088',
           utbetalingsgrad: 100,
-          uttakArbeidType: 'ORDINÆRT_ARBEID',
+          uttakArbeidType: {
+            kode: 'ORDINÆRT_ARBEID',
+            kodeverk: 'UTTAK_ARBEID_TYPE',
+          },
           gradering: false,
           trekkdagerDesimaler: 15,
         },
       ],
-      periodeResultatType: 'INNVILGET',
+      periodeResultatType: {
+        kode: 'INNVILGET',
+        kodeverk: 'PERIODE_RESULTAT_TYPE',
+      },
       periodeResultatÅrsak: {
         kode: '2006',
         navn: '§14-10: Innvilget foreldrepenger før fødsel',
@@ -137,7 +146,10 @@ const uttaksresultatPerioder = {
         gyldigFom: '2000-01-01',
         gyldigTom: '9999-12-31',
       },
-      manuellBehandlingÅrsak: '-',
+      manuellBehandlingÅrsak: {
+        kode: '-',
+        kodeverk: 'MANUELL_BEHANDLING_AARSAK',
+      },
       graderingAvslagÅrsak: {
         kode: '-',
         navn: 'Ikke definert',
@@ -148,9 +160,18 @@ const uttaksresultatPerioder = {
       flerbarnsdager: false,
       samtidigUttak: false,
       graderingInnvilget: false,
-      periodeType: 'FORELDREPENGER_FØR_FØDSEL',
-      utsettelseType: '-',
-      oppholdÅrsak: '-',
+      periodeType: {
+        kode: 'FORELDREPENGER_FØR_FØDSEL',
+        kodeverk: 'UTTAK_PERIODE_TYPE',
+      },
+      utsettelseType: {
+        kode: '-',
+        kodeverk: 'UTTAK_UTSETTELSE_TYPE',
+      },
+      oppholdÅrsak: {
+        kode: '-',
+        kodeverk: 'OPPHOLD_AARSAK_TYPE',
+      },
       periodeResultatÅrsakLovhjemmel: '{"fagsakYtelseType": {"FP": {"lovreferanse": "14-10"}}}',
     },
     {
@@ -158,16 +179,25 @@ const uttaksresultatPerioder = {
       tom: '2019-12-15',
       aktiviteter: [
         {
-          stønadskontoType: 'MØDREKVOTE',
+          stønadskontoType: {
+            kode: 'MØDREKVOTE',
+            kodeverk: 'STOENADSKONTOTYPE',
+          },
           prosentArbeid: 0,
           arbeidsgiverReferanse: '910909088',
           utbetalingsgrad: 100,
-          uttakArbeidType: 'ORDINÆRT_ARBEID',
+          uttakArbeidType: {
+            kode: 'ORDINÆRT_ARBEID',
+            kodeverk: 'UTTAK_ARBEID_TYPE',
+          },
           gradering: false,
           trekkdagerDesimaler: 30,
         },
       ],
-      periodeResultatType: 'INNVILGET',
+      periodeResultatType: {
+        kode: 'INNVILGET',
+        kodeverk: 'PERIODE_RESULTAT_TYPE',
+      },
       periodeResultatÅrsak: {
         kode: '2003',
         navn: '§14-12: Innvilget uttak av kvote',
@@ -175,7 +205,10 @@ const uttaksresultatPerioder = {
         gyldigFom: '2000-01-01',
         gyldigTom: '9999-12-31',
       },
-      manuellBehandlingÅrsak: '-',
+      manuellBehandlingÅrsak: {
+        kode: '-',
+        kodeverk: 'MANUELL_BEHANDLING_AARSAK',
+      },
       graderingAvslagÅrsak: {
         kode: '-',
         navn: 'Ikke definert',
@@ -186,9 +219,18 @@ const uttaksresultatPerioder = {
       flerbarnsdager: false,
       samtidigUttak: false,
       graderingInnvilget: false,
-      periodeType: 'MØDREKVOTE',
-      utsettelseType: '-',
-      oppholdÅrsak: '-',
+      periodeType: {
+        kode: 'MØDREKVOTE',
+        kodeverk: 'UTTAK_PERIODE_TYPE',
+      },
+      utsettelseType: {
+        kode: '-',
+        kodeverk: 'UTTAK_UTSETTELSE_TYPE',
+      },
+      oppholdÅrsak: {
+        kode: '-',
+        kodeverk: 'OPPHOLD_AARSAK_TYPE',
+      },
       periodeResultatÅrsakLovhjemmel: '{"fagsakYtelseType": {"FP": {"lovreferanse": "14-12"}}}',
     },
     {
@@ -196,16 +238,25 @@ const uttaksresultatPerioder = {
       tom: '2019-12-29',
       aktiviteter: [
         {
-          stønadskontoType: 'MØDREKVOTE',
+          stønadskontoType: {
+            kode: 'MØDREKVOTE',
+            kodeverk: 'STOENADSKONTOTYPE',
+          },
           prosentArbeid: 0,
           arbeidsgiverReferanse: '910909088',
           utbetalingsgrad: 100,
-          uttakArbeidType: 'ORDINÆRT_ARBEID',
+          uttakArbeidType: {
+            kode: 'ORDINÆRT_ARBEID',
+            kodeverk: 'UTTAK_ARBEID_TYPE',
+          },
           gradering: false,
           trekkdagerDesimaler: 10,
         },
       ],
-      periodeResultatType: 'INNVILGET',
+      periodeResultatType: {
+        kode: 'INNVILGET',
+        kodeverk: 'PERIODE_RESULTAT_TYPE',
+      },
       periodeResultatÅrsak: {
         kode: '2003',
         navn: '§14-12: Innvilget uttak av kvote',
@@ -213,7 +264,10 @@ const uttaksresultatPerioder = {
         gyldigFom: '2000-01-01',
         gyldigTom: '9999-12-31',
       },
-      manuellBehandlingÅrsak: '-',
+      manuellBehandlingÅrsak: {
+        kode: '-',
+        kodeverk: 'MANUELL_BEHANDLING_AARSAK',
+      },
       graderingAvslagÅrsak: {
         kode: '-',
         navn: 'Ikke definert',
@@ -224,9 +278,18 @@ const uttaksresultatPerioder = {
       flerbarnsdager: false,
       samtidigUttak: false,
       graderingInnvilget: false,
-      periodeType: 'MØDREKVOTE',
-      utsettelseType: '-',
-      oppholdÅrsak: '-',
+      periodeType: {
+        kode: 'MØDREKVOTE',
+        kodeverk: 'UTTAK_PERIODE_TYPE',
+      },
+      utsettelseType: {
+        kode: '-',
+        kodeverk: 'UTTAK_UTSETTELSE_TYPE',
+      },
+      oppholdÅrsak: {
+        kode: '-',
+        kodeverk: 'OPPHOLD_AARSAK_TYPE',
+      },
       periodeResultatÅrsakLovhjemmel: '{"fagsakYtelseType": {"FP": {"lovreferanse": "14-12"}}}',
     },
     {
@@ -234,15 +297,25 @@ const uttaksresultatPerioder = {
       tom: '2020-02-02',
       aktiviteter: [
         {
-          stønadskontoType: 'FEDREKVOTE',
+          stønadskontoType: {
+            kode: 'FEDREKVOTE',
+            kodeverk: 'STOENADSKONTOTYPE',
+            navn: 'Fedrekvote',
+          },
           prosentArbeid: 0,
           arbeidsgiverReferanse: '910909088',
-          uttakArbeidType: 'ORDINÆRT_ARBEID',
+          uttakArbeidType: {
+            kode: 'ORDINÆRT_ARBEID',
+            kodeverk: 'UTTAK_ARBEID_TYPE',
+          },
           gradering: false,
           trekkdagerDesimaler: 25,
         },
       ],
-      periodeResultatType: 'MANUELL_BEHANDLING',
+      periodeResultatType: {
+        kode: 'MANUELL_BEHANDLING',
+        kodeverk: 'PERIODE_RESULTAT_TYPE',
+      },
       periodeResultatÅrsak: {
         kode: '4007',
         navn: '§14-12 tredje ledd: Den andre part syk/skadet ikke oppfylt',
@@ -250,7 +323,10 @@ const uttaksresultatPerioder = {
         gyldigFom: '2000-01-01',
         gyldigTom: '9999-12-31',
       },
-      manuellBehandlingÅrsak: '5002',
+      manuellBehandlingÅrsak: {
+        kode: '5002',
+        kodeverk: 'MANUELL_BEHANDLING_AARSAK',
+      },
       graderingAvslagÅrsak: {
         kode: '-',
         navn: 'Ikke definert',
@@ -261,9 +337,18 @@ const uttaksresultatPerioder = {
       flerbarnsdager: false,
       samtidigUttak: false,
       graderingInnvilget: false,
-      periodeType: 'FEDREKVOTE',
-      utsettelseType: '-',
-      oppholdÅrsak: '-',
+      periodeType: {
+        kode: 'FEDREKVOTE',
+        kodeverk: 'UTTAK_PERIODE_TYPE',
+      },
+      utsettelseType: {
+        kode: '-',
+        kodeverk: 'UTTAK_UTSETTELSE_TYPE',
+      },
+      oppholdÅrsak: {
+        kode: '-',
+        kodeverk: 'OPPHOLD_AARSAK_TYPE',
+      },
       periodeResultatÅrsakLovhjemmel: '{"fagsakYtelseType": {"FP": {"lovreferanse": "14-12"}}}',
     },
   ],

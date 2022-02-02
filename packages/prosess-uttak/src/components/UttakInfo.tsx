@@ -22,15 +22,17 @@ import styles from './uttakActivity.less';
 
 const maxValue100 = maxValue(100);
 
+const finnKodeverkType = (kodeverk: string): KodeverkType => KodeverkType[kodeverk];
+
 const periodeStatusClassName = (periode: PeriodeMedClassName): string => {
   if (periode.erOppfylt === false) {
     return styles.redDetailsPeriod;
   }
   if (periode.erOppfylt
-    || (periode.periodeResultatType === periodeResultatType.INNVILGET && !periode.tilknyttetStortinget)) {
+    || (periode.periodeResultatType.kode === periodeResultatType.INNVILGET && !periode.tilknyttetStortinget)) {
     return styles.greenDetailsPeriod;
   }
-  if (periode.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING || periode.tilknyttetStortinget) {
+  if (periode.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING || periode.tilknyttetStortinget) {
     return styles.orangeDetailsPeriod;
   }
   return styles.redDetailsPeriod;
@@ -40,7 +42,7 @@ const periodeIsInnvilget = (periode: PeriodeMedClassName): boolean => {
   if (periode.erOppfylt === false) {
     return false;
   }
-  if (periode.erOppfylt || (periode.periodeResultatType === periodeResultatType.INNVILGET)) {
+  if (periode.erOppfylt || (periode.periodeResultatType.kode === periodeResultatType.INNVILGET)) {
     return true;
   }
   return false;
@@ -53,8 +55,8 @@ const gradertArbforhold = (selectedItem: PeriodeMedClassName, arbeidsgiverOpplys
       arbeidsgiverReferanse, uttakArbeidType,
     } = selectedItem.gradertAktivitet;
 
-    if (uttakArbeidType && uttakArbeidType !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
-      return <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType]} />;
+    if (uttakArbeidType && uttakArbeidType.kode !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
+      return <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType.kode]} />;
     }
     if (arbeidsgiverReferanse && arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse]) {
       const {
@@ -72,14 +74,14 @@ const typePeriode = (
   getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   kontoIkkeSatt?: boolean,
 ): ReactElement | string => {
-  if (selectedItem.utsettelseType === '-' && !kontoIkkeSatt) {
+  if (selectedItem.utsettelseType.kode === '-' && !kontoIkkeSatt) {
     return <FormattedMessage id="UttakActivity.Uttak" />;
   }
-  if (selectedItem.utsettelseType !== '-') {
+  if (selectedItem.utsettelseType.kode !== '-') {
     return (
       <FormattedMessage
         id="UttakActivity.Utsettelse"
-        values={{ utsettelseType: getKodeverknavn(selectedItem.utsettelseType, KodeverkType.UTTAK_UTSETTELSE_TYPE) }}
+        values={{ utsettelseType: getKodeverknavn(selectedItem.utsettelseType.kode, finnKodeverkType(selectedItem.utsettelseType.kodeverk)) }}
       />
     );
   }
@@ -95,7 +97,7 @@ const isInnvilgetText = (selectedItemData: PeriodeMedClassName, getKodeverknavn:
       <FormattedMessage
         id="UttakActivity.InnvilgelseAarsak"
         values={{
-          innvilgelseAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak.kode, KodeverkType.INNVILGET_AARSAK),
+          innvilgelseAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak.kode, finnKodeverkType(selectedItemData.periodeResultatÅrsak.kodeverk)),
           b: (chunks: any) => <b>{chunks}</b>,
         }}
       />
@@ -105,7 +107,7 @@ const isInnvilgetText = (selectedItemData: PeriodeMedClassName, getKodeverknavn:
     <FormattedMessage
       id="UttakActivity.IkkeOppfyltAarsak"
       values={{
-        avslagAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak.kode, KodeverkType.UTTAK_AVSLAG_ARSAK),
+        avslagAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak.kode, finnKodeverkType(selectedItemData.periodeResultatÅrsak.kodeverk)),
         b: (chunks: any) => <b>{chunks}</b>,
       }}
     />
@@ -118,8 +120,8 @@ const stonadskonto = (
   kontoIkkeSatt?: boolean,
 ): string => {
   let returnText = '';
-  if (!kontoIkkeSatt) {
-    returnText = getKodeverknavn(selectedItem.aktiviteter[0].stønadskontoType, KodeverkType.STOENADSKONTOTYPE);
+  if (!kontoIkkeSatt && selectedItem.aktiviteter[0].stønadskontoType) {
+    returnText = getKodeverknavn(selectedItem.aktiviteter[0].stønadskontoType.kode, finnKodeverkType(selectedItem.aktiviteter[0].stønadskontoType.kodeverk));
   }
   return returnText;
 };
@@ -139,7 +141,7 @@ const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] => typer
   }) => <option value={kode} key={kode}>{oppholdArsakKontoNavn[kode]}</option>);
 
 const visGraderingIkkeInnvilget = (selectedItem: PeriodeMedClassName, readOnly: boolean, graderingInnvilget?: boolean): boolean => (
-  selectedItem.periodeResultatType === periodeResultatType.INNVILGET
+  selectedItem.periodeResultatType.kode === periodeResultatType.INNVILGET
     && selectedItem.gradertAktivitet
     && graderingInnvilget === false
     && readOnly
@@ -176,7 +178,7 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
 
   return (
     <div className={periodeStatusClassName(selectedItemData)}>
-      {selectedItemData.oppholdÅrsak === '-'
+      {selectedItemData.oppholdÅrsak.kode === '-'
           && (
             <Row>
               <Column xs="4">
@@ -271,7 +273,7 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
               </Element>
             </Column>
           </Row>
-          {selectedItemData.oppholdÅrsak === '-'
+          {selectedItemData.oppholdÅrsak.kode === '-'
               && (
                 <Row>
                   <Column xs="12">
@@ -295,7 +297,7 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
                       <FormattedMessage id="UttakActivity.Gradering" />
                     </Undertekst>
                   )}
-              {selectedItemData.oppholdÅrsak !== '-'
+              {selectedItemData.oppholdÅrsak.kode !== '-'
                   && (
                     <FormattedMessage
                       id={calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom).id}
@@ -319,13 +321,14 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
                 <FormattedMessage id="UttakActivity.GraderingIkkeOppfylt" />
                 :
               </b>
-              {getKodeverknavn(selectedItemData.graderingAvslagÅrsak.kode, KodeverkType.GRADERING_AVSLAG_AARSAK)}
+              {selectedItemData.graderingAvslagÅrsak
+                ? getKodeverknavn(selectedItemData.graderingAvslagÅrsak.kode, finnKodeverkType(selectedItemData.graderingAvslagÅrsak.kodeverk)) : ''}
             </Column>
           </Row>
           )}
         </Column>
       </Row>
-      {selectedItemData.oppholdÅrsak !== '-' && (
+      {selectedItemData.oppholdÅrsak.kode !== '-' && (
         <div>
           <Row>
             <Column xs="12">
@@ -340,7 +343,7 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
                 label=""
                 bredde="m"
                 readOnly={readOnly}
-                value={selectedItemData.oppholdÅrsak}
+                value={selectedItemData.oppholdÅrsak.kode}
                 validate={[required, notDash]}
               />
             </Column>

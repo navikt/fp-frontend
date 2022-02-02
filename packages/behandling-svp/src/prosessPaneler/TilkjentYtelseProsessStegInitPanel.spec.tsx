@@ -103,7 +103,10 @@ describe('<TilkjentYtelseProsessStegInitPanel>', () => {
 
     const uttaksresultatPerioder = {
       perioderSøker: [{
-        periodeResultatType: periodeResultatType.GYLDIG_UTSETTELSE,
+        periodeResultatType: {
+          kode: periodeResultatType.GYLDIG_UTSETTELSE,
+          kodeverk: '',
+        },
       }],
     } as UttaksresultatPeriode;
 

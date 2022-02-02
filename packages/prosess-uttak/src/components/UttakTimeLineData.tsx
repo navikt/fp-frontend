@@ -52,7 +52,7 @@ const getCorrectEmptyArbeidsForhold = (
 };
 
 const hentApTekst = (
-  manuellBehandlingÅrsak: string,
+  manuellBehandlingÅrsak: { kode: string, kodeverk: string },
   getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   stonadskonto?: UttakStonadskontoer,
@@ -61,7 +61,7 @@ const hentApTekst = (
   const texts = [];
 
   // Fix - ta bort 5001 med verdi fra kodeverk
-  if (manuellBehandlingÅrsak === '5001') {
+  if (manuellBehandlingÅrsak.kode === '5001') {
     const arbeidsForhold = getCorrectEmptyArbeidsForhold(getKodeverknavn, arbeidsgiverOpplysningerPerId, periodeTypeKode, stonadskonto);
     const arbeidsForholdMedNullDagerIgjen = arbeidsForhold.join();
     if (arbeidsForhold.length > 1) {
@@ -82,15 +82,15 @@ const hentApTekst = (
       );
     } else {
       texts.push(
-        <React.Fragment key={`kode-${manuellBehandlingÅrsak}`}>
-          {getKodeverknavn(manuellBehandlingÅrsak, KodeverkType.MANUELL_BEHANDLING_AARSAK)}
+        <React.Fragment key={`kode-${manuellBehandlingÅrsak.kode}`}>
+          {getKodeverknavn(manuellBehandlingÅrsak.kode, KodeverkType.MANUELL_BEHANDLING_AARSAK)}
         </React.Fragment>,
       );
     }
   } else {
     texts.push(
-      <React.Fragment key={`kode-${manuellBehandlingÅrsak}`}>
-        {getKodeverknavn(manuellBehandlingÅrsak, KodeverkType.MANUELL_BEHANDLING_AARSAK)}
+      <React.Fragment key={`kode-${manuellBehandlingÅrsak.kode}`}>
+        {getKodeverknavn(manuellBehandlingÅrsak.kode, KodeverkType.MANUELL_BEHANDLING_AARSAK)}
       </React.Fragment>);
   }
 
@@ -289,12 +289,12 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
             </FloatRight>
           </Column>
         </Row>
-        {selectedItemData.manuellBehandlingÅrsak && selectedItemData.manuellBehandlingÅrsak !== '-' && (
+        {selectedItemData.manuellBehandlingÅrsak && selectedItemData.manuellBehandlingÅrsak.kode !== '-' && (
         <>
           <AksjonspunktHelpTextTemp isAksjonspunktOpen={selectedItemData.manuellBehandlingÅrsak !== null}>
             {selectedItemData.periodeType
               ? hentApTekst(selectedItemData.manuellBehandlingÅrsak, getKodeverknavn, arbeidsgiverOpplysningerPerId, stonadskonto,
-                selectedItemData.periodeType)
+                selectedItemData.periodeType.kode)
               : hentApTekst(selectedItemData.manuellBehandlingÅrsak, getKodeverknavn, arbeidsgiverOpplysningerPerId, stonadskonto)}
           </AksjonspunktHelpTextTemp>
           <VerticalSpacer twentyPx />

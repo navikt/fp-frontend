@@ -41,7 +41,7 @@ const hentApTekst = (uttaksresultat: UttaksresultatPeriode, isApOpen: boolean, a
   };
 
   const texts = [];
-  const helpText = uttaksresultat.perioderSøker.find((p) => p.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING);
+  const helpText = uttaksresultat.perioderSøker.find((p) => p.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING);
 
   const overstyrApHelpTextOpen = aksjonspunkter.length === 1
     && aksjonspunkter[0].definisjon === AksjonspunktCode.OVERSTYRING_AV_UTTAKPERIODER
@@ -206,16 +206,16 @@ const getResult = (uttaksresultatActivity: UttaksresultatActivity[]): UttakResul
         ? ((a.weeks * 5) + a.days)
         : a.trekkdagerDesimaler;
 
-      if ((`${a.stønadskontoType}_${index}`) in uttakResult) {
-        const trekkdagerDesimaler = uttakResult[`${a.stønadskontoType}_${index}`].trekkdagerDesimaler + aktivitetDays;
-        uttakResult[`${a.stønadskontoType}_${index}`] = {
+      if ((`${a.stønadskontoType.kode}_${index}`) in uttakResult) {
+        const trekkdagerDesimaler = uttakResult[`${a.stønadskontoType.kode}_${index}`].trekkdagerDesimaler + aktivitetDays;
+        uttakResult[`${a.stønadskontoType.kode}_${index}`] = {
           trekkdagerDesimaler,
-          konto: a.stønadskontoType,
+          konto: a.stønadskontoType.kode,
         };
       } else {
-        uttakResult[`${a.stønadskontoType}_${index}`] = {
+        uttakResult[`${a.stønadskontoType.kode}_${index}`] = {
           trekkdagerDesimaler: aktivitetDays,
-          konto: a.stønadskontoType,
+          konto: a.stønadskontoType.kode,
         };
       }
     });
@@ -301,7 +301,7 @@ const checkFlerbarnsMaksDager = (stonadskonto: UttakStonadskontoer['stonadskonto
 const checkValidStonadKonto = (uttakPerioder: UttaksresultatActivity[], stonadskontoer?: UttakStonadskontoer['stonadskontoer']): FormError => {
   let errors = null;
   uttakPerioder.forEach((periode) => {
-    const ikkeGyldigKonto = periode.aktiviteter.filter((a) => !(Object.prototype.hasOwnProperty.call(stonadskontoer, a.stønadskontoType))
+    const ikkeGyldigKonto = periode.aktiviteter.filter((a) => !(Object.prototype.hasOwnProperty.call(stonadskontoer, a.stønadskontoType.kode))
       && (a.days > 0 || a.weeks > 0));
     if (ikkeGyldigKonto && ikkeGyldigKonto.length > 0) {
       errors = {
@@ -310,7 +310,7 @@ const checkValidStonadKonto = (uttakPerioder: UttaksresultatActivity[], stonadsk
     <FormattedMessage
       id="UttakPanel.InvalidStonadskonto"
       values={{
-        konto: uttakPeriodeNavn[ikkeGyldigKonto[0].stønadskontoType],
+        konto: uttakPeriodeNavn[ikkeGyldigKonto[0].stønadskontoType.kode],
       }}
     />
   </AlertStripe>,
@@ -358,12 +358,10 @@ export const transformValues = (values: FormValues, apCodes: string[], aksjonspu
 
   const transformedResultat = values.uttaksresultatActivity.map((aktivitet: UttaksresultatActivity) => {
     const uta = omitOne(aktivitet, 'tilknyttetStortinget');
-    if (uta.oppholdÅrsak !== '-') {
+    if (uta.oppholdÅrsak.kode !== '-') {
       return {
         ...uta,
         aktiviteter: [],
-        periodeResultatÅrsak: aktivitet.periodeResultatÅrsak,
-        graderingAvslagÅrsak: aktivitet.graderingAvslagÅrsak,
       };
     }
 
@@ -383,8 +381,6 @@ export const transformValues = (values: FormValues, apCodes: string[], aksjonspu
     return {
       ...uta,
       aktiviteter: transformAktiviteter,
-      periodeResultatÅrsak: aktivitet.periodeResultatÅrsak,
-      graderingAvslagÅrsak: aktivitet.graderingAvslagÅrsak,
     };
   });
 

@@ -58,15 +58,27 @@ describe('<UttakPanel>', () => {
     perioderSøker: [{
       fom: '',
       tom: '',
-      periodeResultatType: 'MANUELL_BEHANDLING',
-      manuellBehandlingÅrsak: 'test',
+      periodeResultatType: {
+        kode: 'MANUELL_BEHANDLING',
+        kodeverk: '',
+      },
+      manuellBehandlingÅrsak: {
+        kode: 'test',
+        kodeverk: 'test',
+      },
       aktiviteter: [{
       }],
     }, {
       fom: '',
       tom: '',
-      periodeResultatType: 'MANUELL_BEHANDLING',
-      manuellBehandlingÅrsak: 'test',
+      periodeResultatType: {
+        kode: 'MANUELL_BEHANDLING',
+        kodeverk: '',
+      },
+      manuellBehandlingÅrsak: {
+        kode: 'test',
+        kodeverk: 'test',
+      },
       aktiviteter: [{
       }],
     }],
@@ -224,7 +236,9 @@ describe('<UttakPanel>', () => {
     const values = {
       manuellOverstyring: false,
       uttaksresultatActivity: [{
-        oppholdÅrsak: '-',
+        oppholdÅrsak: {
+          kode: '-',
+        },
         aktiviteter: [{
           days: 4,
           weeks: 5,
@@ -257,7 +271,9 @@ describe('<UttakPanel>', () => {
     const values = {
       manuellOverstyring: true,
       uttaksresultatActivity: [{
-        oppholdÅrsak: '-',
+        oppholdÅrsak: {
+          kode: '-',
+        },
         aktiviteter: [{
           days: 4,
           weeks: 6,
@@ -279,16 +295,28 @@ describe('<UttakPanel>', () => {
         fom: '',
         tom: '',
         id: 1,
-        periodeResultatType: 'MANUELL_BEHANDLING',
-        manuellBehandlingÅrsak: 'test',
+        periodeResultatType: {
+          kode: 'MANUELL_BEHANDLING',
+          kodeverk: '',
+        },
+        manuellBehandlingÅrsak: {
+          kode: 'test',
+          kodeverk: 'test',
+        },
         aktiviteter: [{
         }],
       }, {
         fom: '',
         tom: '',
         id: 2,
-        periodeResultatType: 'MANUELL_BEHANDLING',
-        manuellBehandlingÅrsak: 'test',
+        periodeResultatType: {
+          kode: 'MANUELL_BEHANDLING',
+          kodeverk: '',
+        },
+        manuellBehandlingÅrsak: {
+          kode: 'test',
+          kodeverk: 'test',
+        },
         aktiviteter: [{
         }],
       }],

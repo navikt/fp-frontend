@@ -3,12 +3,17 @@ import { ArsakKodeverk } from '@fpsak-frontend/types/src/uttaksresultatPeriodeTs
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
+type Kodeverk = {
+  kode: string;
+  kodeverk: string;
+}
+
 type UttakAp = {
-  perioder: {
+    perioder: {
     fom: string;
     tom: string;
     aktiviteter: {
-      stønadskontoType?: string;
+      stønadskontoType?: Kodeverk | string;
       trekkdagerDesimaler?: number;
       arbeidsgiver?: {
         identifikator?: string;
@@ -17,17 +22,17 @@ type UttakAp = {
       arbeidsgiverReferanse?: string;
       arbeidsforholdId?: string;
       utbetalingsgrad?: string | number;
-      uttakArbeidType?: string;
+      uttakArbeidType?: Kodeverk | string;
     }[];
     begrunnelse?: string;
-    periodeResultatType: string;
-    periodeResultatÅrsak: ArsakKodeverk;
-    oppholdÅrsak: string;
+    periodeResultatType: Kodeverk | string;
+    periodeResultatÅrsak: ArsakKodeverk | string;
+    oppholdÅrsak: Kodeverk | string;
     flerbarnsdager?: boolean;
     samtidigUttak?: boolean;
     samtidigUttaksprosent?: number;
     graderingInnvilget?: boolean;
-    graderingAvslagÅrsak: ArsakKodeverk;
+    graderingAvslagÅrsak: ArsakKodeverk | string;
   }[];
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.FASTSETT_UTTAKPERIODER
  | AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER

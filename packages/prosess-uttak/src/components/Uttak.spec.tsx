@@ -28,17 +28,29 @@ describe('<Uttak>', () => {
     id: 1,
     fom: '',
     tom: '',
-    periodeResultatType: '',
+    periodeResultatType: {
+      kode: '',
+      kodeverk: '',
+    },
     aktiviteter: [{
-      stønadskontoType: '',
+      stønadskontoType: {
+        kode: '',
+        kodeverk: '',
+      },
     }] as PeriodeSokerAktivitet[],
   }, {
     id: 2,
     fom: '',
     tom: '',
-    periodeResultatType: '',
+    periodeResultatType: {
+      kode: '',
+      kodeverk: '',
+    },
     aktiviteter: [{
-      stønadskontoType: '',
+      stønadskontoType: {
+        kode: '',
+        kodeverk: '',
+      },
     }] as PeriodeSokerAktivitet[],
   }];
 

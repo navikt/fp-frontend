@@ -51,6 +51,9 @@ const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 const IKKE_OPPFYLT_AARSAK = 'IKKE_OPPFYLT_AARSAK';
 const INNVILGET_AARSAK = 'INNVILGET_AARSAK';
+const PERIODE_RESULTAT_TYPE = 'PERIODE_RESULTAT_TYPE';
+const innvilgetTekst = 'Innvilget';
+const avlsattTekst = 'Avslått';
 
 function sortAlphabetically(a: KodeverkMedNavn, b: KodeverkMedNavn): number {
   if (a.navn < b.navn) {
@@ -74,8 +77,8 @@ const mapAarsak = (
   årsakKoder: ArsakKodeverk[],
   starttidspunktForeldrepenger: string,
   kreverSammenhengendeUttak: boolean,
-  utsettelseType?: string,
-  periodeType?: string,
+  utsettelseType?: { kode: string; kodeverk: string },
+  periodeType?: { kode: string; kodeverk: string },
   skalFiltrere?: boolean,
 ): ReactElement[] => {
   årsakKoder.sort(sortAlphabetically);
@@ -98,14 +101,14 @@ const mapAarsak = (
       }) => <option value={kode} key={kode}>{navn}</option>);
   }
 
-  if (utsettelseType && utsettelseType !== utsettelseArsakCodes.UDEFINERT) {
+  if (utsettelseType && utsettelseType.kode !== utsettelseArsakCodes.UDEFINERT) {
     filteredNyKodeArray = filteredNyKodeArray.filter((kv) => kv.uttakTyper.includes('UTSETTELSE'));
   }
 
-  if (periodeType && utsettelseType && utsettelseType === utsettelseArsakCodes.UDEFINERT) {
+  if (periodeType && utsettelseType && utsettelseType.kode === utsettelseArsakCodes.UDEFINERT) {
     filteredNyKodeArray = filteredNyKodeArray
       .filter((kv) => kv.uttakTyper.includes('UTTAK'))
-      .filter((kv) => kv.valgbarForKonto.includes(periodeType));
+      .filter((kv) => kv.valgbarForKonto.includes(periodeType.kode));
   }
 
   return filteredNyKodeArray
@@ -126,7 +129,7 @@ export type FormValues = {
   graderingInnvilget?: boolean;
   graderingAvslagAarsak?: string;
   oppholdArsak?: string;
-  utsettelseType?: string;
+  utsettelseType?: { kode: string; kodeverk: string };
   erOppfylt?: boolean;
   selectedItem?: PeriodeMedClassName;
 }
@@ -152,7 +155,7 @@ interface MappedOwnProps {
   utsettelseAarsak: KodeverkMedNavn[];
   uttakFieldArray: string;
   erOppfylt: boolean;
-  currentlySelectedStønadskonto: string;
+  currentlySelectedStønadskonto: { kode: string, kodeverk: string };
   avslagAarsakKoder: ArsakKodeverk[];
   innvilgelseAarsakKoder: ArsakKodeverk[];
   graderingInnvilget: boolean;
@@ -201,7 +204,7 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
     </Row>
-    {selectedItemData.oppholdÅrsak === oppholdArsakType.UDEFINERT
+    {selectedItemData.oppholdÅrsak.kode === oppholdArsakType.UDEFINERT
         && (
           <Row className={readOnly ? null : styles.marginTop}>
             <Column xs="12">
@@ -227,7 +230,7 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
     {!readOnly
           && (
             <div>
-              {selectedItemData.oppholdÅrsak === oppholdArsakType.UDEFINERT
+              {selectedItemData.oppholdÅrsak.kode === oppholdArsakType.UDEFINERT
                 && (
                   <div className={styles.marginBottom}>
                     <RadioGroupField validate={[required]} name="erOppfylt" readOnly={readOnly}>
@@ -333,14 +336,14 @@ const erPeriodeOppfylt = (periode: PeriodeMedClassName, kontoIkkeSatt: boolean):
   if (periode.erOppfylt === false) {
     return false;
   }
-  if (periode.erOppfylt || (periode.periodeResultatType && periode.periodeResultatType === periodeResultatType.INNVILGET)) {
+  if (periode.erOppfylt || (periode.periodeResultatType && periode.periodeResultatType.kode === periodeResultatType.INNVILGET)) {
     return true;
   }
   if (kontoIkkeSatt) {
     return false;
   }
-  if (periode.periodeResultatType && periode.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING) {
-    if (periode.periodeResultatÅrsak.kodeverk === INNVILGET_AARSAK || periode.oppholdÅrsak !== oppholdArsakType.UDEFINERT) {
+  if (periode.periodeResultatType && periode.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING) {
+    if (periode.periodeResultatÅrsak.kodeverk === INNVILGET_AARSAK || periode.oppholdÅrsak.kode !== oppholdArsakType.UDEFINERT) {
       return true;
     }
     if (periode.periodeResultatÅrsak.kodeverk === IKKE_OPPFYLT_AARSAK) {
@@ -351,11 +354,19 @@ const erPeriodeOppfylt = (periode: PeriodeMedClassName, kontoIkkeSatt: boolean):
   return false;
 };
 
-const resultatTypeObject = (erOppfylt: boolean, oppholdArsak: string): string => {
+const resultatTypeObject = (erOppfylt: boolean, oppholdArsak: string): KodeverkMedNavn => {
   if (erOppfylt || oppholdArsak !== oppholdArsakType.UDEFINERT) {
-    return periodeResultatType.INNVILGET;
+    return ({
+      kode: periodeResultatType.INNVILGET,
+      navn: innvilgetTekst,
+      kodeverk: PERIODE_RESULTAT_TYPE,
+    });
   }
-  return periodeResultatType.AVSLATT;
+  return ({
+    kode: periodeResultatType.AVSLATT,
+    navn: avlsattTekst,
+    kodeverk: PERIODE_RESULTAT_TYPE,
+  });
 };
 
 const isutbetalingPlusArbeidsprosentMerEn100 = (utbetalingsgrad: number, prosentArbeid: number): string => {
@@ -384,7 +395,7 @@ const lagFeilmeldinger = (values: FormValues, rowArray: number[], invalidArbeids
         aktiviteter[item + 1].classList.add('tableRowHighlight');
       });
     }
-    if (invalidArbeidsProsentVidUsettelse && values.utsettelseType === utsettelseArsakCodes.ARBEID) {
+    if (invalidArbeidsProsentVidUsettelse && values.utsettelseType.kode === utsettelseArsakCodes.ARBEID) {
       return (
         <AlertStripe type="advarsel" className={styles.advarsel}>
           <FormattedMessage id="UttakActivity.MerEn100ProsentOgOgyldigUtsettlse" />
@@ -424,7 +435,7 @@ const warningUttakActivity = (values: FormValues): any => {
   const rowArray: number[] = [];
   const touchedaktiviteter = document.getElementsByClassName('tableRowHighlight');
   const invalidArbeidsProsentVidUsettelse = isArbeidsProsentVidUtsettelse100(values, values.UttakFieldArray);
-  if (invalidArbeidsProsentVidUsettelse && values.utsettelseType === utsettelseArsakCodes.ARBEID) {
+  if (invalidArbeidsProsentVidUsettelse && values.utsettelseType.kode === utsettelseArsakCodes.ARBEID) {
     warnings = {
       _warning:
   <AlertStripe type="advarsel" className={styles.advarsel}>
@@ -474,7 +485,7 @@ const validateUttakActivity = (values: FormValues): any => {
         };
       }
     });
-    if (values.utsettelseType && values.utsettelseType !== '-' && values.erOppfylt) {
+    if (values.utsettelseType && values.utsettelseType.kode !== '-' && values.erOppfylt) {
       values.UttakFieldArray.forEach((aktivitet, index: number) => {
         const daysInvalid = isTrekkdagerMerEnnNullUtsettelse(aktivitet.days);
         const weeksInvalid = isTrekkdagerMerEnnNullUtsettelse(aktivitet.weeks);
@@ -518,12 +529,13 @@ const transformValues = (
   const [innvilgelseAarsakObject] = innvilgelseAarsakKoder.filter((a) => a.kode === values.innvilgelseAarsak);
   const [graderingAvslagAarsakObject] = graderingAvslagAarsakKoder.filter((a) => a.kode === values.graderingAvslagAarsak);
   if (values.oppholdArsak !== oppholdArsakType.UDEFINERT) {
-    nyeVerdier.UttakFieldArray[0].stønadskontoType = oppholdArsakMapper[values.oppholdArsak];
+    nyeVerdier.UttakFieldArray[0].stønadskontoType.kode = oppholdArsakMapper[values.oppholdArsak];
   }
   const aktiviteter = nyeVerdier.UttakFieldArray.map((a) => {
     const { ...bekreftetAktivitet } = a;
-    const kode = a.stønadskontoType === '' ? uttakPeriodeNavn.UDEFINERT : a.stønadskontoType;
-    bekreftetAktivitet.stønadskontoType = kode;
+    const kode = a.stønadskontoType.kode === '' ? uttakPeriodeNavn.UDEFINERT : a.stønadskontoType.kode;
+    bekreftetAktivitet.stønadskontoType.kode = kode;
+    bekreftetAktivitet.stønadskontoType.navn = uttakPeriodeNavn[kode];
     return bekreftetAktivitet;
   });
 
@@ -536,7 +548,10 @@ const transformValues = (
     samtidigUttaksprosent: values.samtidigUttaksprosent ? parseFloat(values.samtidigUttaksprosent) : null,
     erOppfylt: values.erOppfylt,
     graderingInnvilget: values.erOppfylt ? values.graderingInnvilget : false,
-    oppholdÅrsak: values.oppholdArsak,
+    oppholdÅrsak: {
+      kode: values.oppholdArsak,
+      kodeverk: values.selectedItem.oppholdÅrsak.kodeverk,
+    },
     periodeResultatType: resultatTypeObject(values.erOppfylt, values.oppholdArsak),
     periodeResultatÅrsak: getPeriodeResultatÅrsak(values.erOppfylt, avslagAarsakObject, innvilgelseAarsakObject),
     graderingAvslagÅrsak: values.erOppfylt && !values.graderingInnvilget && graderingAvslagAarsakObject ? graderingAvslagAarsakObject : {
@@ -549,7 +564,7 @@ const transformValues = (
 
 // https://jira.adeo.no/browse/PFP-7937
 const calculateCorrectWeeks = (aktivitet: AktivitetFieldArray, item: PeriodeMedClassName): number => {
-  if (item.periodeResultatType && !aktivitet.trekkdagerDesimaler && (item.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING)) {
+  if (item.periodeResultatType && !aktivitet.trekkdagerDesimaler && (item.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING)) {
     return 0;
   }
   if (aktivitet.trekkdagerDesimaler && aktivitet.trekkdagerDesimaler < 0) {
@@ -559,7 +574,7 @@ const calculateCorrectWeeks = (aktivitet: AktivitetFieldArray, item: PeriodeMedC
 };
 
 const calculateCorrectDays = (aktivitet: AktivitetFieldArray, item: PeriodeMedClassName): number => {
-  if (item.periodeResultatType && !aktivitet.trekkdagerDesimaler && (item.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING)) {
+  if (item.periodeResultatType && !aktivitet.trekkdagerDesimaler && (item.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING)) {
     return 0;
   }
   if (aktivitet.trekkdagerDesimaler && aktivitet.trekkdagerDesimaler < 0) {
@@ -570,7 +585,7 @@ const calculateCorrectDays = (aktivitet: AktivitetFieldArray, item: PeriodeMedCl
 
 const finnUker = (aktivitet: AktivitetFieldArray, selectedItem: PeriodeMedClassName): number => {
   let weeks = typeof aktivitet.weeks !== 'undefined' ? aktivitet.weeks : calculateCorrectWeeks(aktivitet, selectedItem);
-  if (aktivitet.weeks === 0 && aktivitet.days === 0 && selectedItem.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING) {
+  if (aktivitet.weeks === 0 && aktivitet.days === 0 && selectedItem.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING) {
     weeks = undefined;
   }
   if (aktivitet.weeks < 0) {
@@ -581,7 +596,7 @@ const finnUker = (aktivitet: AktivitetFieldArray, selectedItem: PeriodeMedClassN
 
 const finnDager = (aktivitet: AktivitetFieldArray, selectedItem: PeriodeMedClassName): number => {
   let dager = typeof aktivitet.weeks !== 'undefined' ? aktivitet.days : calculateCorrectDays(aktivitet, selectedItem);
-  if (aktivitet.weeks === 0 && aktivitet.days === 0 && selectedItem.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING) {
+  if (aktivitet.weeks === 0 && aktivitet.days === 0 && selectedItem.periodeResultatType.kode === periodeResultatType.MANUELL_BEHANDLING) {
     dager = undefined;
   }
   if (aktivitet.days < 0) {
@@ -605,7 +620,7 @@ const buildInitialValues = createSelector(
   [(props: PureOwnProps) => props.selectedItemData],
   (selectedItem): FormValues => {
     const kontoIkkeSatt = !selectedItem.periodeType
-      && (selectedItem.aktiviteter[0].stønadskontoType === '-');
+      && (selectedItem.aktiviteter[0].stønadskontoType.kode === '-');
     const erOppfylt = erPeriodeOppfylt(selectedItem, kontoIkkeSatt);
     return {
       UttakFieldArray: lagAktiviteter(selectedItem, kontoIkkeSatt),
@@ -617,7 +632,7 @@ const buildInitialValues = createSelector(
       innvilgelseAarsak: erOppfylt ? selectedItem.periodeResultatÅrsak.kode : undefined,
       graderingInnvilget: selectedItem.graderingInnvilget,
       graderingAvslagAarsak: selectedItem.graderingAvslagÅrsak ? selectedItem.graderingAvslagÅrsak.kode : '-',
-      oppholdArsak: selectedItem.oppholdÅrsak,
+      oppholdArsak: selectedItem.oppholdÅrsak.kode,
       utsettelseType: selectedItem.utsettelseType,
       erOppfylt,
       selectedItem,
@@ -657,7 +672,7 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
       validate,
       warn,
       onSubmit,
-      kontoIkkeSatt: !ownProps.selectedItemData.periodeType && (ownProps.selectedItemData.aktiviteter[0].stønadskontoType === '-'),
+      kontoIkkeSatt: !ownProps.selectedItemData.periodeType && (ownProps.selectedItemData.aktiviteter[0].stønadskontoType.kode === '-'),
       periodeTyper,
       oppholdArsakTyper,
       graderingAvslagAarsakKoder,

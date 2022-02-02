@@ -20,19 +20,31 @@ describe('<UttakActivity>', () => {
     id: 1,
     fom: '2018-01-01',
     tom: '2018-02-01',
-    periodeResultatType: '',
+    periodeResultatType: {
+      kode: '',
+      kodeverk: '',
+    },
     periodeResultatÅrsak: {
       kode: '',
       kodeverk: '',
     },
     flerbarnsdager: false,
-    utsettelseType: '-',
-    periodeType: '-',
-    oppholdÅrsak: '-',
+    utsettelseType: {
+      kode: '-',
+    },
+    periodeType: {
+      kode: '-',
+    },
+    oppholdÅrsak: {
+      kode: '-',
+    },
     aktiviteter: [{
       trekkdagerDesimaler: 28.5,
       utbetalingsgrad: 100,
-      stønadskontoType: '',
+      stønadskontoType: {
+        kode: '',
+        kodeverk: '',
+      },
     }] as AktivitetFieldArray[],
   } as PeriodeMedClassName;
   it('skal rendre uttakactivity med oppfylt periode', () => {
@@ -62,7 +74,7 @@ describe('<UttakActivity>', () => {
       kontoIkkeSatt={false}
       utsettelseAarsak={{} as KodeverkMedNavn[]}
       uttakFieldArray="test"
-      currentlySelectedStønadskonto=""
+      currentlySelectedStønadskonto={{ kode: '', kodeverk: '' }}
       graderingInnvilget
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
@@ -111,7 +123,7 @@ describe('<UttakActivity>', () => {
       kontoIkkeSatt={false}
       utsettelseAarsak={{} as KodeverkMedNavn[]}
       uttakFieldArray="test"
-      currentlySelectedStønadskonto=""
+      currentlySelectedStønadskonto={{ kode: '', kodeverk: '' }}
       graderingInnvilget
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
@@ -154,7 +166,7 @@ describe('<UttakActivity>', () => {
       kontoIkkeSatt={false}
       utsettelseAarsak={{} as KodeverkMedNavn[]}
       uttakFieldArray="test"
-      currentlySelectedStønadskonto=""
+      currentlySelectedStønadskonto={{ kode: '', kodeverk: '' }}
       graderingInnvilget
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
@@ -203,7 +215,7 @@ describe('<UttakActivity>', () => {
       kontoIkkeSatt={false}
       utsettelseAarsak={{} as KodeverkMedNavn[]}
       uttakFieldArray="test"
-      currentlySelectedStønadskonto=""
+      currentlySelectedStønadskonto={{ kode: '', kodeverk: '' }}
       graderingInnvilget
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
@@ -252,7 +264,7 @@ describe('<UttakActivity>', () => {
       kontoIkkeSatt={false}
       utsettelseAarsak={{} as KodeverkMedNavn[]}
       uttakFieldArray="test"
-      currentlySelectedStønadskonto=""
+      currentlySelectedStønadskonto={{ kode: '', kodeverk: '' }}
       graderingInnvilget
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
@@ -280,7 +292,10 @@ describe('<UttakActivity>', () => {
       days: 3.5,
       fom: '2018-01-01',
       tom: '2018-02-01',
-      stønadskontoType: '',
+      stønadskontoType: {
+        kode: '',
+        kodeverk: '',
+      },
       trekkdagerDesimaler: 28.5,
       utbetalingsgrad: 100,
       weeks: 5,

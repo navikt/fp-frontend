@@ -60,9 +60,9 @@ const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] => typer
     navn,
   }) => <option value={kode} key={kode}>{navn}</option>);
 
-const utsettelse = (erOppfylt: boolean, utsettelseType: string): boolean => {
+const utsettelse = (erOppfylt: boolean, utsettelseType: { kode: string, kodeverk: string }): boolean => {
   if (!erOppfylt) {
-    if (!utsettelseType || utsettelseType === '-') {
+    if (!utsettelseType || utsettelseType.kode === '-') {
       return true;
     }
   }
@@ -83,8 +83,8 @@ const createTextStrings = (fields: AktivitetFieldArray, arbeidsgiverOpplysninger
 
   const prosentArbeidText = (typeof prosentArbeid !== 'undefined') ? `${prosentArbeid}%` : '';
   let arbeidsforhold;
-  if (uttakArbeidType && uttakArbeidType !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
-    arbeidsforhold = <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType]} />;
+  if (uttakArbeidType && uttakArbeidType.kode !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
+    arbeidsforhold = <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType.kode]} />;
   }
   if (arbeidsgiverReferanse) {
     const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
@@ -135,7 +135,7 @@ const RenderUttakTable: FunctionComponent<OwnProps & WrappedComponentProps> = ({
               <TableColumn>
                 <div className={styles.selectStonad}>
                   <SelectField
-                    name={`${uttakElementFieldId}.stønadskontoType`}
+                    name={`${uttakElementFieldId}.stønadskontoType.kode`}
                     selectValues={mapPeriodeTyper(periodeTyper)}
                     label=""
                     readOnly={readOnly}

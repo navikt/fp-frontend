@@ -38,7 +38,10 @@ const getAxiosHttpClientApi = (): HttpClientApi => {
 
   // TODO Temp kode til backend returnerer string i staden for Kodeverk
   axiosInstance.interceptors.response.use((response: AxiosResponse): any => {
-    if (response.status === 200 && response.config.url.includes('/api/') && !response.config.url.includes('/api/kodeverk')) {
+    if (response.status === 200
+      && response.config.url.includes('/api/')
+      && !response.config.url.includes('/api/kodeverk')
+      && !response.config.url.includes('/api/behandling/uttak/resultat-perioder')) {
       const erTilbakekreving = response.config.url.includes('/fptilbake/api/');
       konverterKodeverkTilKode(response.data, erTilbakekreving);
     }

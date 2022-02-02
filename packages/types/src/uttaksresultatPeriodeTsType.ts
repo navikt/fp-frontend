@@ -1,5 +1,10 @@
 import KodeverkMedNavn from './kodeverkMedNavnTsType';
 
+type Kodeverk = {
+  kode: string;
+  kodeverk: string;
+}
+
 export type ArsakKodeverk = {
   gyldigFom?: string;
   gyldigTom?: string;
@@ -8,13 +13,13 @@ export type ArsakKodeverk = {
 } & KodeverkMedNavn;
 
 export type PeriodeSokerAktivitet = Readonly<{
-  stønadskontoType?: string;
+  stønadskontoType?: Kodeverk;
   prosentArbeid?: number;
   arbeidsforholdId?: string;
   eksternArbeidsforholdId?: string;
   arbeidsgiverReferanse?: string;
   utbetalingsgrad?: number;
-  uttakArbeidType?: string;
+  uttakArbeidType?: Kodeverk;
   gradering?: boolean;
   trekkdagerDesimaler?: number;
 }>
@@ -23,12 +28,12 @@ export type PeriodeSoker = Readonly<{
   fom: string;
   tom: string;
   aktiviteter: PeriodeSokerAktivitet[];
-  periodeResultatType: string;
+  periodeResultatType: Kodeverk;
   begrunnelse?: string;
   periodeResultatÅrsak: ArsakKodeverk;
   periodeResultatÅrsakLovhjemmel?: string;
   mottattDato?: string;
-  manuellBehandlingÅrsak: string;
+  manuellBehandlingÅrsak: Kodeverk;
   graderingAvslagÅrsak: ArsakKodeverk;
   flerbarnsdager: boolean;
   samtidigUttak?: boolean;
@@ -36,9 +41,9 @@ export type PeriodeSoker = Readonly<{
   graderingInnvilget: boolean;
   graderingsAvslagÅrsakLovhjemmel?: string;
   gradertAktivitet?: PeriodeSokerAktivitet;
-  periodeType: string;
-  utsettelseType: string;
-  oppholdÅrsak: string;
+  periodeType: Kodeverk;
+  utsettelseType: Kodeverk;
+  oppholdÅrsak: Kodeverk;
 }>
 
 type UttaksresultatPeriode = Readonly<{
