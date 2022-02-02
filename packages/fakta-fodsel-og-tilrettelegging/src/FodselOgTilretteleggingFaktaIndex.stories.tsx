@@ -123,6 +123,11 @@ const arbeidsgiverOpplysningerPerId = {
     identifikator: '973861779',
     navn: 'Selvstendig næringsdrivende',
   },
+  3: {
+    erPrivatPerson: false,
+    identifikator: '973861779',
+    navn: 'Test',
+  },
   555864629: {
     erPrivatPerson: false,
     identifikator: '555864629',

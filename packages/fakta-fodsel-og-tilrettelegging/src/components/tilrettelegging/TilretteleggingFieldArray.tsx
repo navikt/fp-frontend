@@ -95,7 +95,7 @@ export const TilretteleggingFieldArray: FunctionComponent<PureOwnProps & MappedO
                 <FlexColumn>
                   <SelectField
                     readOnly={readOnly}
-                    name={`${fieldId}.type.kode`}
+                    name={`${fieldId}.type`}
                     label={intl.formatMessage({ id: 'TilretteleggingFieldArray.Tilretteleggingsbehov' })}
                     validate={[required]}
                     placeholder={intl.formatMessage({ id: 'TilretteleggingFieldArray.VelgTilretteleggingPlaceholder' })}
