@@ -47,7 +47,7 @@ interface OwnProps {
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   arbeidsforhold?: AoIArbeidsforhold;
   arbeidsgiverNavn?: string;
-  lukkArbeidsforholdRad?: () => void;
+  lukkArbeidsforholdRad: () => void;
   erOverstyrt: boolean;
   oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
   erNyttArbeidsforhold?: boolean;

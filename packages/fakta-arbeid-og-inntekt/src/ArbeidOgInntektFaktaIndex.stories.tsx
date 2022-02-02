@@ -84,7 +84,7 @@ InnhentInntektsmelding.args = {
   arbeidsgiverOpplysningerPerId: {
     910909088: {
       erPrivatPerson: false,
-      fødselsdato: null,
+      fødselsdato: undefined,
       identifikator: '910909088',
       navn: 'BEDRIFT AS',
       referanse: '910909088',
@@ -145,7 +145,7 @@ InnhentInntektsmeldingDerEnIkkeHarInntekterFraAAregisteret.args = {
   arbeidsgiverOpplysningerPerId: {
     910909088: {
       erPrivatPerson: false,
-      fødselsdato: null,
+      fødselsdato: undefined,
       identifikator: '910909088',
       navn: 'BEDRIFT AS',
       referanse: '910909088',
@@ -178,7 +178,7 @@ InnhentInntektsmeldingDerBehandlingErAvsluttet.args = {
   arbeidsgiverOpplysningerPerId: {
     910909088: {
       erPrivatPerson: false,
-      fødselsdato: null,
+      fødselsdato: undefined,
       identifikator: '910909088',
       navn: 'BEDRIFT AS',
       referanse: '910909088',
@@ -214,7 +214,7 @@ AvklarManglendeOpplysninger.args = {
   arbeidsgiverOpplysningerPerId: {
     910909088: {
       erPrivatPerson: false,
-      fødselsdato: null,
+      fødselsdato: undefined,
       identifikator: '910909088',
       navn: 'BEDRIFT AS',
       referanse: '910909088',
@@ -224,7 +224,7 @@ AvklarManglendeOpplysninger.args = {
     arbeidsforhold: [],
     inntektsmeldinger: [{
       inntektPrMnd: 30000,
-      refusjonPrMnd: null,
+      refusjonPrMnd: undefined,
       arbeidsgiverIdent: '910909088',
       eksternArbeidsforholdId: 'ARB001-001',
       internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
@@ -252,7 +252,7 @@ AvklarManglendeOpplysningerDerBehandlingErAvsluttet.args = {
   arbeidsgiverOpplysningerPerId: {
     910909088: {
       erPrivatPerson: false,
-      fødselsdato: null,
+      fødselsdato: undefined,
       identifikator: '910909088',
       navn: 'BEDRIFT AS',
       referanse: '910909088',
@@ -276,7 +276,7 @@ AvklarManglendeOpplysningerDerBehandlingErAvsluttet.args = {
       kontaktpersonNavn: 'Corpolarsen',
       kontaktpersonNummer: '41925090',
       motattDato: '2021-12-06',
-      refusjonPrMnd: null,
+      refusjonPrMnd: undefined,
       journalpostId: '1',
       dokumentId: '2',
       årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
@@ -300,7 +300,7 @@ AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppMulig.args = {
   arbeidsgiverOpplysningerPerId: {
     910909088: {
       erPrivatPerson: false,
-      fødselsdato: null,
+      fødselsdato: undefined,
       identifikator: '910909088',
       navn: 'BEDRIFT AS',
       referanse: '910909088',
@@ -324,7 +324,7 @@ AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppMulig.args = {
       kontaktpersonNavn: 'Corpolarsen',
       kontaktpersonNummer: '41925090',
       motattDato: '2021-12-06',
-      refusjonPrMnd: null,
+      refusjonPrMnd: undefined,
       journalpostId: '1',
       dokumentId: '2',
       årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
@@ -369,7 +369,7 @@ ArbeidsforholdErManueltLagtTilOgLagret.args = {
   arbeidsgiverOpplysningerPerId: {
     [MANUELT_ORG_NR]: {
       erPrivatPerson: false,
-      fødselsdato: null,
+      fødselsdato: undefined,
       identifikator: MANUELT_ORG_NR,
       navn: 'Telenor',
       referanse: MANUELT_ORG_NR,
@@ -398,7 +398,7 @@ ArbeidsforholdErManueltLagtTilOgBehandlingErAvsluttet.args = {
   arbeidsgiverOpplysningerPerId: {
     [MANUELT_ORG_NR]: {
       erPrivatPerson: false,
-      fødselsdato: null,
+      fødselsdato: undefined,
       identifikator: MANUELT_ORG_NR,
       navn: 'Telenor',
       referanse: MANUELT_ORG_NR,
@@ -428,7 +428,7 @@ ArbeidsforholdErOK.args = {
   arbeidsgiverOpplysningerPerId: {
     910909088: {
       erPrivatPerson: false,
-      fødselsdato: null,
+      fødselsdato: undefined,
       identifikator: '910909088',
       navn: 'BEDRIFT AS',
       referanse: '910909088',
@@ -501,21 +501,21 @@ FlereArbeidsforholdOgInntekstemeldinger.args = {
   arbeidsgiverOpplysningerPerId: {
     910909088: {
       erPrivatPerson: false,
-      fødselsdato: null,
+      fødselsdato: undefined,
       identifikator: '910909088',
       navn: 'BEDRIFT AS',
       referanse: '910909088',
     },
     910909090: {
       erPrivatPerson: false,
-      fødselsdato: null,
+      fødselsdato: undefined,
       identifikator: '910909090',
       navn: 'Autoservice AS',
       referanse: '910909090',
     },
     910909092: {
       erPrivatPerson: false,
-      fødselsdato: null,
+      fødselsdato: undefined,
       identifikator: '910909092',
       navn: 'DNB',
       referanse: '910909092',

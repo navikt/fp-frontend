@@ -5,7 +5,7 @@ export enum AksjonspunktÅrsak {
 
 export type Inntektsmelding = Readonly<{
   inntektPrMnd: number;
-  refusjonPrMnd: number;
+  refusjonPrMnd?: number;
   arbeidsgiverIdent: string;
   eksternArbeidsforholdId: string;
   internArbeidsforholdId: string;
