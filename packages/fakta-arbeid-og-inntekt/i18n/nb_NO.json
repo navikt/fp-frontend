@@ -16,8 +16,8 @@
   "ArbeidsforholdRad.Saksbehandler": "Saksbehandler",
   "ArbeidsforholdRad.AaRegisteret": "A-inntekt",
   "ArbeidsforholdRad.Inntektsmelding": "Inntektsmelding",
-  "ArbeidsforholdRad.Aksjonspunkt": "Aksjonspunkt",
-  "ArbeidsforholdRad.Ok": "OK",
+  "ArbeidsforholdRad.Aksjonspunkt": "Åpent aksjonspunkt",
+  "ArbeidsforholdRad.Ok": "Arbeidsforhold er OK",
 
   "InntektsmeldingInnhentesForm.Stillingsprosent": "Stillingsprosent",
   "InntektsmeldingInnhentesForm.Inntekter": "Inntekter (fra A-inntekt)",
@@ -79,5 +79,6 @@
 
   "NyttArbeidsforholdForm.VilDuSlette": "Vil du slette arbeidsforholdet?",
 
-  "ExpandableTableRow.Apne": "Åpne rad"
+  "ExpandableTableRow.Apne": "Åpne rad",
+  "ExpandableTableRow.Lukke": "Lukk rad"
 }

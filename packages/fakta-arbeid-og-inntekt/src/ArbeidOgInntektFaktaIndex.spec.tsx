@@ -3,9 +3,11 @@ import {
   fireEvent,
   render, screen, waitFor,
 } from '@testing-library/react';
+import dayjs from 'dayjs';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import Modal from 'nav-frontend-modal';
+import { ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import * as stories from './ArbeidOgInntektFaktaIndex.stories';
 
 const {
@@ -13,7 +15,12 @@ const {
   AvklarManglendeOpplysninger,
   AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppMulig,
   SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnErOverstyrer,
+  SkalIkkeKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnIkkeErOverstyrer,
+  ArbeidsforholdErManueltLagtTilOgLagret,
+  ArbeidsforholdErOK,
 } = composeStories(stories);
+
+const frist = dayjs().add(28, 'days').format(ISO_DATE_FORMAT);
 
 describe('<ArbeidOgInntektFaktaIndex>', () => {
   Modal.setAppElement('body');
@@ -56,7 +63,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     await waitFor(() => expect(settPåVent).toHaveBeenCalledTimes(1));
     expect(settPåVent).toHaveBeenNthCalledWith(1, {
-      frist: '2022-03-01',
+      frist,
       ventearsak: 'VENT_OPDT_INNTEKTSMELDING',
     });
   });
@@ -135,7 +142,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     await waitFor(() => expect(settPåVent).toHaveBeenCalledTimes(1));
     expect(settPåVent).toHaveBeenNthCalledWith(1, {
-      frist: '2022-03-01',
+      frist,
       ventearsak: 'VENT_OPDT_INNTEKTSMELDING',
     });
   });
@@ -286,5 +293,94 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(bekrefteAksjonspunkt).toHaveBeenNthCalledWith(1, {
       kode: '5085',
     });
+  });
+
+  it('skal ikke kunne legge til nytt arbeidsforhold når en ikke har overstyringsrettighet', async () => {
+    render(<SkalIkkeKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnIkkeErOverstyrer />);
+
+    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(screen.queryByText(
+      'Ingen arbeidsforhold eller inntektsmeldinger registrert på bruker. Vurder om det er dokumentert andre arbeidsforhold. '
+      + 'Arbeidsforholdet må kun opprettes dersom...',
+    )).not.toBeInTheDocument();
+    expect(screen.queryByText('Legg til arbeidsforhold')).not.toBeInTheDocument();
+    expect(screen.queryByText('Overstyr')).not.toBeInTheDocument();
+  });
+
+  it('skal slette manuelt lagt til arbeidsforhold (Har overstyringsrettighet)', async () => {
+    const bekrefteAksjonspunkt = jest.fn(() => Promise.resolve());
+    const registrerArbeidsforhold = jest.fn(() => Promise.resolve());
+
+    render(
+      <ArbeidsforholdErManueltLagtTilOgLagret
+        submitCallback={bekrefteAksjonspunkt}
+        registrerArbeidsforhold={registrerArbeidsforhold}
+      />,
+    );
+
+    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(screen.queryByText(
+      'Ingen arbeidsforhold eller inntektsmeldinger registrert på bruker. Vurder om det er dokumentert andre arbeidsforhold. '
+      + 'Arbeidsforholdet må kun opprettes dersom...',
+    )).not.toBeInTheDocument();
+
+    userEvent.click(screen.getByAltText('Overstyr'));
+
+    expect(await screen.findByText('Slett')).toBeInTheDocument();
+    expect(screen.queryByText('Legg til arbeidsforhold')).not.toBeInTheDocument();
+
+    userEvent.click(screen.getByText('Slett'));
+
+    userEvent.click(screen.getAllByText('Avbryt')[1]);
+
+    userEvent.click(screen.getByText('Slett'));
+
+    userEvent.click(screen.getByText('OK'));
+
+    await waitFor(() => expect(registrerArbeidsforhold).toHaveBeenCalledTimes(1));
+    expect(registrerArbeidsforhold).toHaveBeenNthCalledWith(1, {
+      arbeidsgiverIdent: '342352362',
+      arbeidsgiverNavn: 'Telenor',
+      begrunnelse: 'Dette er en begrunnelse',
+      behandlingUuid: '1223-2323-2323-22332',
+      fom: '2019-12-06',
+      stillingsprosent: 100,
+      tom: '2022-12-31',
+      vurdering: 'FJERN_FRA_BEHANDLINGEN',
+    });
+
+    expect(screen.getByText('Legg til arbeidsforhold')).toBeInTheDocument();
+
+    userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(bekrefteAksjonspunkt).toHaveBeenCalledTimes(1));
+    expect(bekrefteAksjonspunkt).toHaveBeenNthCalledWith(1, {
+      kode: '5085',
+    });
+  });
+
+  it('skal vise arbeidsforhold som er komplett', async () => {
+    render(<ArbeidsforholdErOK />);
+
+    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+    expect(screen.getByAltText('Arbeidsforhold er OK')).toBeInTheDocument();
+    expect(screen.queryByAltText('Åpent aksjonspunkt')).not.toBeInTheDocument();
+    expect(screen.queryByAltText('Lukk rad')).not.toBeInTheDocument();
+
+    userEvent.click(screen.getByAltText('Åpne rad'));
+
+    expect(await screen.findByAltText('Lukk rad')).toBeInTheDocument();
+
+    expect(screen.getByText('Stillingsprosent')).toBeInTheDocument();
+    expect(screen.getByText('100%')).toBeInTheDocument();
+    expect(screen.getByText('Inntektsmelding')).toBeInTheDocument();
+    expect(screen.getByText('30 000')).toBeInTheDocument();
+    expect(screen.getByText('Refusjon')).toBeInTheDocument();
+    expect(screen.getByText('Ja')).toBeInTheDocument();
+    expect(screen.getByText('Refusjonsbeløp')).toBeInTheDocument();
+    expect(screen.getByText('20 000')).toBeInTheDocument();
+    expect(screen.getByText('Kontaktinfo')).toBeInTheDocument();
+    expect(screen.getByText('Corpolarsen')).toBeInTheDocument();
+    expect(screen.getByText('Tlf. 41925090')).toBeInTheDocument();
   });
 });

@@ -35,7 +35,10 @@ const ExpandableTableRow: FunctionComponent<OwnProps> = ({
       >
         {children}
         <TableColumn>
-          <Image alt={intl.formatMessage({ id: 'ExpandableTableRow.Apne' })} src={showContent ? pilOppIkonUrl : pilNedIkonUrl} />
+          <Image
+            alt={intl.formatMessage({ id: showContent ? 'ExpandableTableRow.Lukke' : 'ExpandableTableRow.Apne' })}
+            src={showContent ? pilOppIkonUrl : pilNedIkonUrl}
+          />
         </TableColumn>
       </TableRow>
       <TableRow noHover isApLeftBorder={isApLeftBorder} className={!showContent ? styles.hidden : undefined}>

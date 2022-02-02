@@ -146,10 +146,10 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
     >
       <TableColumn>
         {!harÅpentAksjonspunkt && (
-          <Image alt={intl.formatMessage({ id: 'ArbeidsforholdRad.Aksjonspunkt' })} src={okIkonUrl} />
+          <Image alt={intl.formatMessage({ id: 'ArbeidsforholdRad.Ok' })} src={okIkonUrl} />
         )}
         {harÅpentAksjonspunkt && (
-          <Image alt={intl.formatMessage({ id: 'ArbeidsforholdRad.Ok' })} src={advarselIkonUrl} />
+          <Image alt={intl.formatMessage({ id: 'ArbeidsforholdRad.Aksjonspunkt' })} src={advarselIkonUrl} />
         )}
       </TableColumn>
       <TableColumn>
