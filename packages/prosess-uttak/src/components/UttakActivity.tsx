@@ -337,7 +337,7 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
   </div>
 );
 
-const erPeriodeOppfylt = (periode: PeriodeMedClassName, kontoIkkeSatt: boolean): boolean => {
+const erPeriodeOppfylt = (periode: PeriodeMedClassName, utfallKoder: ArsakKodeverk[], kontoIkkeSatt: boolean): boolean => {
   if (periode.erOppfylt === false) {
     return false;
   }
@@ -348,10 +348,12 @@ const erPeriodeOppfylt = (periode: PeriodeMedClassName, kontoIkkeSatt: boolean):
     return false;
   }
   if (periode.periodeResultatType && periode.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING) {
-    if (periode.periodeUtfallÅrsak < '4000' || periode.oppholdÅrsak !== oppholdArsakType.UDEFINERT) {
+    // Litt flaky. Bør sende med kodeverket og slå opp utfallType
+    const kodeverkKode = utfallKoder.find((kodeItem) => kodeItem.kode === periode.periodeUtfallÅrsak);
+    if ((kodeverkKode && kodeverkKode.utfallType === 'INNVILGET') || periode.oppholdÅrsak !== oppholdArsakType.UDEFINERT) {
       return true;
     }
-    if (periode.periodeUtfallÅrsak > '4000') {
+    if (kodeverkKode && kodeverkKode.utfallType === 'AVSLÅTT') {
       return false;
     }
     return undefined;
@@ -609,11 +611,11 @@ export const lagAktiviteter = (selectedItem: PeriodeMedClassName, kontoIkkeSatt:
   .sort((a1, a2) => (a1.arbeidsgiverReferanse && a2.arbeidsgiverReferanse ? a1.arbeidsgiverReferanse.localeCompare(a2.arbeidsgiverReferanse) : 0));
 
 const buildInitialValues = createSelector(
-  [(props: PureOwnProps) => props.selectedItemData],
-  (selectedItem): FormValues => {
+  [(props: PureOwnProps) => props.selectedItemData, (props: PureOwnProps) => props.alleKodeverk[kodeverkTyper.PERIODE_UTFALL_AARSAK] as ArsakKodeverk[]],
+  (selectedItem, utfallKoder): FormValues => {
     const kontoIkkeSatt = !selectedItem.periodeType
       && (selectedItem.aktiviteter[0].stønadskontoType === '-');
-    const erOppfylt = erPeriodeOppfylt(selectedItem, kontoIkkeSatt);
+    const erOppfylt = erPeriodeOppfylt(selectedItem, utfallKoder, kontoIkkeSatt);
     return {
       UttakFieldArray: lagAktiviteter(selectedItem, kontoIkkeSatt),
       begrunnelse: selectedItem.begrunnelse,

@@ -32,7 +32,6 @@ enum KodeverkType {
   MANUELL_BEHANDLING_AARSAK = 'ManuellBehandlingÅrsak',
   UTTAK_PERIODE_VURDERING_TYPE = 'UttakPeriodeVurderingType',
   IKKE_OPPFYLT_AARSAK = 'IkkeOppfyltÅrsak',
-  UTTAK_AVSLAG_ARSAK = 'IkkeOppfyltÅrsak',
   PERIODE_UTFALL_AARSAK = 'PeriodeUtfallÅrsak',
   INNTEKTSKATEGORI = 'Inntektskategori',
   BEREGNINGSGRUNNLAG_ANDELTYPER = 'BeregningsgrunnlagAndeltype',

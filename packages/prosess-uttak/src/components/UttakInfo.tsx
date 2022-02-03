@@ -95,7 +95,7 @@ const isInnvilgetText = (selectedItemData: PeriodeMedClassName, getKodeverknavn:
       <FormattedMessage
         id="UttakActivity.InnvilgelseAarsak"
         values={{
-          innvilgelseAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak.kode, KodeverkType.INNVILGET_AARSAK),
+          innvilgelseAarsak: getKodeverknavn(selectedItemData.periodeUtfallÅrsak, KodeverkType.PERIODE_UTFALL_AARSAK),
           b: (chunks: any) => <b>{chunks}</b>,
         }}
       />
@@ -105,7 +105,7 @@ const isInnvilgetText = (selectedItemData: PeriodeMedClassName, getKodeverknavn:
     <FormattedMessage
       id="UttakActivity.IkkeOppfyltAarsak"
       values={{
-        avslagAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak.kode, KodeverkType.IKKE_OPPFYLT_AARSAK),
+        avslagAarsak: getKodeverknavn(selectedItemData.periodeUtfallÅrsak, KodeverkType.PERIODE_UTFALL_AARSAK),
         b: (chunks: any) => <b>{chunks}</b>,
       }}
     />
