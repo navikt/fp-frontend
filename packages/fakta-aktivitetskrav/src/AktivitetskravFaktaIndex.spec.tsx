@@ -15,7 +15,7 @@ describe('<AktivitetskravFaktaIndex>', () => {
     const utils = render(<AksjonspunktMedToUavklartePerioder submitCallback={lagre} />);
 
     expect(await screen.findByText('Kontroller kravet til mors aktivitet')).toBeInTheDocument();
-    expect(screen.getByText('08.01.2021-13.01.2021')).toBeInTheDocument();
+    expect(screen.getAllByText('08.01.2021 - 13.01.2021')).toHaveLength(2);
     expect(screen.getByText('Oppdater')).toBeDisabled();
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
@@ -25,7 +25,7 @@ describe('<AktivitetskravFaktaIndex>', () => {
 
     userEvent.click(screen.getByText('Oppdater'));
 
-    expect(await screen.findByText('15.01.2021-20.01.2021')).toBeInTheDocument();
+    expect(await screen.findByText('15.01.2021 - 20.01.2021')).toBeInTheDocument();
     expect(screen.getByText('Oppdater')).toBeDisabled();
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 

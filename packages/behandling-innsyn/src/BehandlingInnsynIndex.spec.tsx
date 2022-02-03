@@ -44,6 +44,7 @@ describe('<BehandlingInnsynIndex>', () => {
           behandlingEventHandler={{
             setHandler: () => {},
             clear: () => {},
+            settBehandlingPaVent: () => undefined,
           }}
           behandlingUuid="test-uuid"
           oppdaterBehandlingVersjon={() => {}}

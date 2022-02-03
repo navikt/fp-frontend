@@ -64,6 +64,7 @@ interface OwnProps<ID, MODEL = void> {
   id?: ID;
   model?: MODEL;
   isHeader?: boolean;
+  hasGrayHeader?: boolean;
   onMouseDown?: (e: React.MouseEvent, id?: ID, model?: MODEL) => void;
   onKeyDown?: (e: React.KeyboardEvent, id?: ID, model?: MODEL) => void;
   children: ReactNode | ReactNode[];
@@ -75,6 +76,7 @@ interface OwnProps<ID, MODEL = void> {
   isApLeftBorder?: boolean;
   className?: string;
   useMultiselect?: boolean;
+  hasNoBottomBorder?: boolean;
 }
 
 /**
@@ -86,6 +88,7 @@ const TableRow = <ID, MODEL = void, >({
   id,
   model,
   isHeader = false,
+  hasGrayHeader = false,
   onMouseDown,
   onKeyDown,
   children,
@@ -97,15 +100,18 @@ const TableRow = <ID, MODEL = void, >({
   isApLeftBorder = false,
   className,
   useMultiselect = false,
+  hasNoBottomBorder = false,
 }: OwnProps<ID, MODEL>) => (
   <tr
-    className={classNames(className, {
+    className={classNames(className, styles.column, {
       rowHeader: isHeader,
+      grayHeader: hasGrayHeader,
       rowContent: (!isHeader && !noHover),
       selected: isSelected,
       bold: isBold,
       dashedBottomBorder: isDashedBottomBorder,
       solidBottomBorder: isSolidBottomBorder,
+      noBottomBorder: hasNoBottomBorder,
       apLeftBorder: isApLeftBorder,
     })}
     onMouseDown={createMouseDownHandler<ID, MODEL>(onMouseDown, id, model)}

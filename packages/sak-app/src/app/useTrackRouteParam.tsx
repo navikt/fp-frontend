@@ -17,7 +17,6 @@ interface Config {
 
 const mapMatchToParam = (params: Params, location: Location, trackingConfig: Config) => {
   const newParams = trackingConfig.isQueryParam ? parseQueryString(location.search) : params;
-  // @ts-ignore Fiks
   return trackingConfig.parse(newParams[trackingConfig.paramName]);
 };
 
