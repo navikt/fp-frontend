@@ -105,7 +105,7 @@ const isInnvilgetText = (selectedItemData: PeriodeMedClassName, getKodeverknavn:
     <FormattedMessage
       id="UttakActivity.IkkeOppfyltAarsak"
       values={{
-        avslagAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak.kode, KodeverkType.UTTAK_AVSLAG_ARSAK),
+        avslagAarsak: getKodeverknavn(selectedItemData.periodeResultatÅrsak.kode, KodeverkType.IKKE_OPPFYLT_AARSAK),
         b: (chunks: any) => <b>{chunks}</b>,
       }}
     />
@@ -319,7 +319,7 @@ export const UttakInfo: FunctionComponent<OwnProps> = ({
                 <FormattedMessage id="UttakActivity.GraderingIkkeOppfylt" />
                 :
               </b>
-              {getKodeverknavn(selectedItemData.graderingAvslagÅrsak.kode, KodeverkType.GRADERING_AVSLAG_AARSAK)}
+              {getKodeverknavn(selectedItemData.graderingAvslagÅrsak, KodeverkType.GRADERING_AVSLAG_AARSAK)}
             </Column>
           </Row>
           )}

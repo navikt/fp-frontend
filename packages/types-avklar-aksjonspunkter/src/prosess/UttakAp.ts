@@ -22,12 +22,13 @@ type UttakAp = {
     begrunnelse?: string;
     periodeResultatType: string;
     periodeResultatÅrsak: ArsakKodeverk;
+    periodeUtfallÅrsak: string;
     oppholdÅrsak: string;
     flerbarnsdager?: boolean;
     samtidigUttak?: boolean;
     samtidigUttaksprosent?: number;
     graderingInnvilget?: boolean;
-    graderingAvslagÅrsak: ArsakKodeverk;
+    graderingAvslagÅrsak: string;
   }[];
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.FASTSETT_UTTAKPERIODER
  | AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER

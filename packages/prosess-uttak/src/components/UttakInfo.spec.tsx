@@ -17,6 +17,7 @@ describe('<UttakInfo>', () => {
       kode: '',
       kodeverk: '',
     },
+    periodeUtfallÅrsak: '',
     flerbarnsdager: false,
     utsettelseType: '-',
     periodeType: '-',

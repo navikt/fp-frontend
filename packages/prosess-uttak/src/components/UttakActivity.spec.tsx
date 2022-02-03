@@ -25,6 +25,7 @@ describe('<UttakActivity>', () => {
       kode: '',
       kodeverk: '',
     },
+    periodeUtfallÅrsak: '-',
     flerbarnsdager: false,
     utsettelseType: '-',
     periodeType: '-',
@@ -52,9 +53,12 @@ describe('<UttakActivity>', () => {
         {
           kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [],
         }]}
+      periodeAarsakKoder={[
+        {
+          kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [], utfallType: 'AVSLÅTT',
+        }]}
       innvilgelseAarsakKoder={[]}
       graderingAvslagAarsakKoder={[]}
-      starttidspunktForeldrepenger=""
       harSoktOmFlerbarnsdager={false}
       hasValidationError={false}
       alleKodeverk={{} as AlleKodeverk}
@@ -101,9 +105,12 @@ describe('<UttakActivity>', () => {
         {
           kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [],
         }]}
+      periodeAarsakKoder={[
+        {
+          kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [], utfallType: 'AVSLÅTT',
+        }]}
       innvilgelseAarsakKoder={[]}
       graderingAvslagAarsakKoder={[]}
-      starttidspunktForeldrepenger=""
       harSoktOmFlerbarnsdager={false}
       hasValidationError={false}
       alleKodeverk={{} as AlleKodeverk}
@@ -144,9 +151,12 @@ describe('<UttakActivity>', () => {
         {
           kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [],
         }]}
+      periodeAarsakKoder={[
+        {
+          kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [], utfallType: 'AVSLÅTT',
+        }]}
       innvilgelseAarsakKoder={[]}
       graderingAvslagAarsakKoder={[]}
-      starttidspunktForeldrepenger=""
       harSoktOmFlerbarnsdager={false}
       hasValidationError={false}
       alleKodeverk={{} as AlleKodeverk}
@@ -194,8 +204,11 @@ describe('<UttakActivity>', () => {
         {
           kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [],
         }]}
+      periodeAarsakKoder={[
+        {
+          kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [], utfallType: 'AVSLÅTT',
+        }]}
       graderingAvslagAarsakKoder={[]}
-      starttidspunktForeldrepenger=""
       harSoktOmFlerbarnsdager={false}
       hasValidationError={false}
       alleKodeverk={{} as AlleKodeverk}
@@ -242,9 +255,12 @@ describe('<UttakActivity>', () => {
         {
           kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [],
         }]}
+      periodeAarsakKoder={[
+        {
+          kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [],
+        }]}
       innvilgelseAarsakKoder={[]}
       graderingAvslagAarsakKoder={[]}
-      starttidspunktForeldrepenger=""
       harSoktOmFlerbarnsdager={false}
       hasValidationError={false}
       alleKodeverk={{} as AlleKodeverk}
