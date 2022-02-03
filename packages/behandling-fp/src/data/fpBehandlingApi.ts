@@ -4,7 +4,7 @@ import {
   Aksjonspunkt, ArbeidsgiverOpplysningerWrapper, Behandling, Beregningsgrunnlag, BeregningsresultatFp, FaktaArbeidsforhold,
   FamilieHendelse, FamilieHendelseSamling, Feriepengegrunnlag, ForhåndsvisMeldingParams, InntektArbeidYtelse, Medlemskap, Opptjening, Personoversikt,
   SimuleringResultat, Soknad, TilbakekrevingValg, UttakKontrollerAktivitetskrav, UttakKontrollerFaktaPerioderWrapper, UttakPeriodeGrense,
-  UttaksresultatPeriode, UttakStonadskontoer, Verge, Vilkar, Ytelsefordeling,
+  UttaksresultatPeriode, UttakStonadskontoer, Verge, Vilkar, Ytelsefordeling, ArbeidOgInntektsmelding, ManueltArbeidsforhold, ManglendeInntektsmeldingVurdering,
 } from '@fpsak-frontend/types';
 import { NyBehandlendeEnhetParams, SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
@@ -56,6 +56,10 @@ export const FpBehandlingApiKeys = {
   ARBEIDSGIVERE_OVERSIKT: new RestKey<ArbeidsgiverOpplysningerWrapper, void>('ARBEIDSGIVERE_OVERSIKT'),
   UTTAK_KONTROLLER_AKTIVITETSKRAV: new RestKey<UttakKontrollerAktivitetskrav[], void>('UTTAK_KONTROLLER_AKTIVITETSKRAV'),
   BEHANDLING_PERSONOVERSIKT: new RestKey<Personoversikt, void>('BEHANDLING_PERSONOVERSIKT'),
+  ARBEID_OG_INNTEKT: new RestKey<ArbeidOgInntektsmelding, void>('ARBEID_OG_INNTEKT'),
+  ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD: new RestKey<void, ManueltArbeidsforhold>('ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD'),
+  ARBEID_OG_INNTEKT_LAGRE_VURDERING: new RestKey<void, ManglendeInntektsmeldingVurdering>('ARBEID_OG_INNTEKT_LAGRE_VURDERING'),
+  ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING: new RestKey<void, { behandlingUuid: string, behandlingVersjon: number }>('ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING'),
 };
 
 const endpoints = new RestApiConfigBuilder()
@@ -89,6 +93,7 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('arbeidsgivere-oversikt', FpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT)
   .withRel('uttak-kontroller-aktivitetskrav', FpBehandlingApiKeys.UTTAK_KONTROLLER_AKTIVITETSKRAV)
   .withRel('behandling-personoversikt', FpBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT)
+  .withRel('arbeidsforhold-inntektsmelding', FpBehandlingApiKeys.ARBEID_OG_INNTEKT)
 
   // operasjoner
   .withRel('lagre-stonadskontoer-gitt-uttaksperioder', FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER)
@@ -102,6 +107,9 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('lagre-overstyr-aksjonspunkter', FpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT)
   .withRel('opprett-verge', FpBehandlingApiKeys.VERGE_OPPRETT)
   .withRel('fjern-verge', FpBehandlingApiKeys.VERGE_FJERN)
+  .withRel('arbeidsforhold-inntektsmelding-registrer', FpBehandlingApiKeys.ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD)
+  .withRel('arbeidsforhold-inntektsmelding-vurder', FpBehandlingApiKeys.ARBEID_OG_INNTEKT_LAGRE_VURDERING)
+  .withRel('arbeidsforhold-inntektsmelding-apne-for-ny-vurdering', FpBehandlingApiKeys.ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING)
 
   /* FPTILBAKE */
   .withPost('/fptilbake/api/dokument/forhandsvis-varselbrev', FpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE, { isResponseBlob: true })

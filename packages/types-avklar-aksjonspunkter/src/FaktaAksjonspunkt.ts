@@ -28,6 +28,7 @@ import FordelBeregningsgrunnlagAP from './fakta/FordelBeregningsgrunnlagAP';
 import VurderRefusjonBeregningsgrunnlagAP from './fakta/VurderRefusjonBeregningsgrunnlagAP';
 import BeregningAktivitetAP from './fakta/BeregningAktivitetAP';
 import BeregningFaktaAP, { BeregningOverstyringAP } from './fakta/BeregningFaktaAP';
+import VurderArbeidsforholdInntektsmeldingAp from './fakta/VurderArbeidsforholdInntektsmeldingAp';
 
 export type FaktaAksjonspunkt = AvklarVergeAp
   | MerkOpptjeningUtlandAp
@@ -59,6 +60,7 @@ export type FaktaAksjonspunkt = AvklarVergeAp
   | BeregningAktivitetAP
   | BeregningFaktaAP
   | BeregningOverstyringAP
-  | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp;
+  | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp
+  | VurderArbeidsforholdInntektsmeldingAp;
 
 export default FaktaAksjonspunkt;

@@ -3,7 +3,8 @@ import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerWrapper, Behandling, Beregningsgrunnlag, BeregningsresultatFp, FamilieHendelseSamling,
   Feriepengegrunnlag, FodselOgTilrettelegging, ForhåndsvisMeldingParams, InntektArbeidYtelse, Medlemskap, Opptjening, Personoversikt,
-  SimuleringResultat, Soknad, TilbakekrevingValg, UttakPeriodeGrense, Verge, Vilkar, Ytelsefordeling,
+  SimuleringResultat, Soknad, TilbakekrevingValg, UttakPeriodeGrense, Verge, Vilkar, Ytelsefordeling, ArbeidOgInntektsmelding,
+  ManueltArbeidsforhold, ManglendeInntektsmeldingVurdering,
 } from '@fpsak-frontend/types';
 import { NyBehandlendeEnhetParams, SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
@@ -42,6 +43,10 @@ export const SvpBehandlingApiKeys = {
   UTLAND_DOK_STATUS: new RestKey<{ dokStatus: string }, void>('UTLAND_DOK_STATUS'),
   ARBEIDSGIVERE_OVERSIKT: new RestKey<ArbeidsgiverOpplysningerWrapper, void>('ARBEIDSGIVERE_OVERSIKT'),
   BEHANDLING_PERSONOVERSIKT: new RestKey<Personoversikt, void>('BEHANDLING_PERSONOVERSIKT'),
+  ARBEID_OG_INNTEKT: new RestKey<ArbeidOgInntektsmelding, void>('ARBEID_OG_INNTEKT'),
+  ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD: new RestKey<void, ManueltArbeidsforhold>('ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD'),
+  ARBEID_OG_INNTEKT_LAGRE_VURDERING: new RestKey<void, ManglendeInntektsmeldingVurdering>('ARBEID_OG_INNTEKT_LAGRE_VURDERING'),
+  ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING: new RestKey<void, { behandlingUuid: string, behandlingVersjon: number }>('ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING'),
 };
 
 const endpoints = new RestApiConfigBuilder()
@@ -68,6 +73,7 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('utland-dok-status', SvpBehandlingApiKeys.UTLAND_DOK_STATUS)
   .withRel('arbeidsgivere-oversikt', SvpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT)
   .withRel('behandling-personoversikt', SvpBehandlingApiKeys.BEHANDLING_PERSONOVERSIKT)
+  .withRel('arbeidsforhold-inntektsmelding', SvpBehandlingApiKeys.ARBEID_OG_INNTEKT)
 
   // operasjoner
   .withRel('bytt-behandlende-enhet', SvpBehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET)
@@ -80,6 +86,9 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('lagre-overstyr-aksjonspunkter', SvpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT)
   .withRel('opprett-verge', SvpBehandlingApiKeys.VERGE_OPPRETT)
   .withRel('fjern-verge', SvpBehandlingApiKeys.VERGE_FJERN)
+  .withRel('arbeidsforhold-inntektsmelding-registrer', SvpBehandlingApiKeys.ARBEID_OG_INNTEKT_REGISTRER_ARBEIDSFORHOLD)
+  .withRel('arbeidsforhold-inntektsmelding-vurder', SvpBehandlingApiKeys.ARBEID_OG_INNTEKT_LAGRE_VURDERING)
+  .withRel('arbeidsforhold-inntektsmelding-apne-for-ny-vurdering', SvpBehandlingApiKeys.ARBEID_OG_INNTEKT_ÅPNE_FOR_NY_VURDERING)
 
   /* FPTILBAKE */
   .withPost('/fptilbake/api/dokument/forhandsvis-varselbrev', SvpBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE, { isResponseBlob: true })

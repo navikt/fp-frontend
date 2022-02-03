@@ -5,6 +5,10 @@ import {
 export type BehandlingEventHandler = {
   setHandler: (events: {[key: string]: (params: any) => Promise<any> }) => void;
   clear: () => void;
+  settBehandlingPaVent: (params: {
+    frist: string;
+    ventearsak: string;
+  }) => Promise<any>
 };
 
 type StandardBehandlingProps = {

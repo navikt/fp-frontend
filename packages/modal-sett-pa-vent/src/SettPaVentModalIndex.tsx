@@ -11,7 +11,7 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   cancelEvent: () => void;
-  submitCallback: (formValues: FormValues) => void;
+  submitCallback: (formData: FormValues) => void;
   showModal: boolean;
   ventearsaker: KodeverkMedNavn[];
   frist?: string;

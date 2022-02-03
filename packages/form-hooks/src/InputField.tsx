@@ -1,22 +1,22 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import { Input as NavInput } from 'nav-frontend-skjema';
-import Label from './Label';
+import Label, { LabelType } from './Label';
 import ReadOnlyField from './ReadOnlyField';
 import { getError, getValidationRules } from './formUtils';
 
 interface OwnProps {
   name: string;
-  label?: string;
+  label?: LabelType;
   bredde?: 'fullbredde' | 'XXL' | 'XL' | 'L' | 'M' | 'S' | 'XS' | 'XXS';
-  validate?: ((value: string | number) => any)[];
+  validate?: ((value: string) => any)[] | ((value: number) => any)[];
   readOnly?: boolean;
   className?: string;
   placeholder?: string;
   onBlur?: (value: any) => void;
   shouldValidateOnBlur?: boolean;
   autoFocus?: boolean;
-  parse?: (value: string | number) => string | number;
+  parse?: (value: string) => string | number;
   isEdited?: boolean;
 }
 

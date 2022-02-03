@@ -1,4 +1,4 @@
-export const getValidationRules = (validate: ((value: string) => any)[]) => validate.reduce((acc, fn, index) => ({
+export const getValidationRules = (validate: ((value: any) => any)[]) => validate.reduce((acc, fn, index) => ({
   ...acc,
   [index]: (value: any) => fn(value) || true,
 }), {});
