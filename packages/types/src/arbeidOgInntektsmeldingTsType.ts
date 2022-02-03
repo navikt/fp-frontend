@@ -21,7 +21,7 @@ export type Inntektsmelding = Readonly<{
 }>
 
 export type Arbeidsforhold = Readonly<{
-  arbeidsgiverIdent?: string;
+  arbeidsgiverIdent: string;
   internArbeidsforholdId?: string;
   eksternArbeidsforholdId?: string;
   fom: string;

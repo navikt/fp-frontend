@@ -9,14 +9,14 @@ interface OwnProps {
   name: string;
   label?: LabelType;
   bredde?: 'fullbredde' | 'XXL' | 'XL' | 'L' | 'M' | 'S' | 'XS' | 'XXS';
-  validate?: ((value: string | number) => any)[];
+  validate?: ((value: string) => any)[] | ((value: number) => any)[];
   readOnly?: boolean;
   className?: string;
   placeholder?: string;
   onBlur?: (value: any) => void;
   shouldValidateOnBlur?: boolean;
   autoFocus?: boolean;
-  parse?: (value: string | number) => string | number;
+  parse?: (value: string) => string | number;
   isEdited?: boolean;
 }
 

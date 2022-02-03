@@ -89,17 +89,17 @@ const byggTabellStruktur = (
 ): ArbeidsforholdOgInntekt[] => {
   const { arbeidsforhold, inntektsmeldinger, inntekter } = arbeidOgInntekt;
 
-  const alleArbeidsforhold = arbeidsforhold.map((af) => ({
+  const alleArbeidsforhold = arbeidsforhold.map<ArbeidsforholdOgInntekt>((af) => ({
     arbeidsforhold: af,
-    arbeidsgiverNavn: arbeidsgiverOpplysningerPerId[af.arbeidsgiverIdent]?.navn,
+    arbeidsgiverNavn: arbeidsgiverOpplysningerPerId[af.arbeidsgiverIdent].navn,
     inntektsmelding: inntektsmeldinger.find((inntektsmelding) => inntektsmelding.arbeidsgiverIdent === af.arbeidsgiverIdent),
     inntektsposter: inntekter.find((inntekt) => inntekt.arbeidsgiverIdent === af.arbeidsgiverIdent)?.inntekter,
   }));
   const alleInntektsmeldingerSomManglerArbeidsforhold = arbeidOgInntekt.inntektsmeldinger
     .filter((im) => !arbeidsforhold.some((af) => im.arbeidsgiverIdent === af.arbeidsgiverIdent))
-    .map((im) => ({
+    .map<ArbeidsforholdOgInntekt>((im) => ({
       arbeidsforhold: undefined,
-      arbeidsgiverNavn: arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent]?.navn,
+      arbeidsgiverNavn: arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent].navn,
       inntektsmelding: im,
       inntektsposter: inntekter.find((inntekt) => inntekt.arbeidsgiverIdent === im.arbeidsgiverIdent)?.inntekter,
     }));
@@ -127,7 +127,7 @@ interface OwnProps {
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   lagreCallback: (aksjonspunktData: FaktaAksjonspunkt) => Promise<void>;
   settBehandlingPåVentCallback: (params: {
-    frist: string;
+    frist?: string;
     ventearsak: string;
   }) => Promise<any>
   erOverstyrer: boolean;
@@ -220,7 +220,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
     åpneForNyVurdering();
   }, [behandling.versjon]);
 
-  const settPaVent = useCallback((params: { frist: string; ventearsak: string; }) => {
+  const settPaVent = useCallback((params: { frist?: string; ventearsak: string; }) => {
     settKnappTrykket(true);
     settVisSettPåVentModal(false);
     settBehandlingPåVentCallback(params);

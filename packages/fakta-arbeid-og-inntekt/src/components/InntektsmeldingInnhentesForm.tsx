@@ -39,7 +39,7 @@ type ForenkletInntektspost = {
 
 const behandleInntektsposter = (
   skjæringspunktDato: string,
-  inntektsposter?: Inntektspost[],
+  inntektsposter: Inntektspost[],
 ): ForenkletInntektspost[] => {
   const skjæringstidspunkt = dayjs(skjæringspunktDato);
   const sluttPeriode = skjæringstidspunkt.startOf('month');
@@ -59,8 +59,8 @@ const behandleInntektsposter = (
 };
 
 type FormValues = {
-  saksbehandlersVurdering: string;
-  begrunnelse: string;
+  saksbehandlersVurdering?: string;
+  begrunnelse?: string;
 }
 
 interface OwnProps {

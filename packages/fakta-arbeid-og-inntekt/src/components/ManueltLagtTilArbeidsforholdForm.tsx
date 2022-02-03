@@ -67,7 +67,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
   const [visSletteDialog, settVisSletteDialog] = useState(false);
 
-  const defaultValues = useMemo<FormValues>(() => (arbeidsforhold ? {
+  const defaultValues = useMemo<FormValues | undefined>(() => (arbeidsforhold?.begrunnelse && arbeidsgiverNavn ? {
     fom: arbeidsforhold.fom,
     tom: arbeidsforhold.tom,
     stillingsprosent: arbeidsforhold.stillingsprosent,

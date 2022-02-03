@@ -31,11 +31,11 @@ const minValue1 = minValue(1);
 const maxValue100 = maxValue(100);
 
 type FormValues = {
-  saksbehandlersVurdering: string;
+  saksbehandlersVurdering?: string;
   fom?: string;
   tom?: string;
   stillingsprosent?: number;
-  begrunnelse: string;
+  begrunnelse?: string;
 }
 
 const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (tom: string) => dateAfterOrEqual(getValues('fom'))(tom);
@@ -45,7 +45,7 @@ interface OwnProps {
   behandlingUuid: string;
   arbeidsgiverNavn: string;
   inntektsmelding: Inntektsmelding;
-  arbeidsforhold: AoIArbeidsforhold;
+  arbeidsforhold?: AoIArbeidsforhold;
   isReadOnly: boolean;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
