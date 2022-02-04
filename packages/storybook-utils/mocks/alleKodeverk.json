@@ -1644,7 +1644,522 @@
       "kodeverk": "KLAGEVURDERING"
     }
   ],
-  "IkkeOppfyltÅrsak": [
+  "PeriodeUtfallÅrsak": [
+    {
+      "kode": "2020",
+      "navn": "§14-9 første ledd: Overføring oppfylt, annen part har ikke rett til foreldrepenger",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "MØDREKVOTE",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2016",
+      "navn": "§14-11 første ledd bokstav b, jf. §14-14, jf. §14-13: Utsettelse pga. 100% arbeid, kun far har rett",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTSETTELSE"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2038",
+      "navn": "§14-10 sjette ledd: Samtidig uttak",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2005",
+      "navn": "§14-15: Innvilget foreldrepenger ved aleneomsorg",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER"
+      ]
+    },
+    {
+      "kode": "2022",
+      "navn": "§14-12: Overføring oppfylt, annen part er innlagt i helseinstitusjon",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "MØDREKVOTE",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2007",
+      "navn": "§14-10: Innvilget foreldrepenger, kun mor har rett",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER"
+      ]
+    },
+    {
+      "kode": "2002",
+      "navn": "§14-9: Innvilget fellesperiode/foreldrepenger",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FELLESPERIODE",
+        "FORELDREPENGER"
+      ]
+    },
+    {
+      "kode": "2012",
+      "navn": "§14-11 første ledd bokstav c: Gyldig utsettelse pga. innleggelse",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTSETTELSE"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2019",
+      "navn": "§14-11 første ledd bokstav d, jf. §14-14, jf. §14-13: Utsettelse pga. barnets innleggelse på helseinstitusjon, kun far har rett",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTSETTELSE"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2031",
+      "navn": "§14-12, jf. §14-16: Gradering av kvote/overført kvote",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "MØDREKVOTE",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2030",
+      "navn": "§14-9, jf. §14-16: Gradering av fellesperiode/foreldrepenger",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FELLESPERIODE",
+        "FORELDREPENGER"
+      ]
+    },
+    {
+      "kode": "2034",
+      "navn": "§14-10, jf. §14-16: Gradering foreldrepenger, kun mor har rett",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER"
+      ]
+    },
+    {
+      "kode": "2011",
+      "navn": "§14-11 første ledd bokstav b: Gyldig utsettelse pga. 100% arbeid",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTSETTELSE"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2033",
+      "navn": "§14-14, jf. §14-13, jf. §14-16: Gradering foreldrepenger, kun far har rett",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER"
+      ]
+    },
+    {
+      "kode": "2013",
+      "navn": "§14-11 første ledd bokstav d: Gyldig utsettelse pga. barn innlagt",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTSETTELSE"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2021",
+      "navn": "§14-12: Overføring oppfylt, annen part er helt avhengig av hjelp til å ta seg av barnet",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "MØDREKVOTE",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2037",
+      "navn": "§14-9, jf. §14-13: Innvilget fellesperiode til far",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FELLESPERIODE"
+      ]
+    },
+    {
+      "kode": "2018",
+      "navn": "§14-11 første ledd bokstav c, jf. §14-14, jf. §14-13: Utsettelse pga. egen innleggelse på helseinstiusjon, kun far har rett",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTSETTELSE"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2006",
+      "navn": "§14-10: Innvilget foreldrepenger før fødsel",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL"
+      ]
+    },
+    {
+      "kode": "2017",
+      "navn": "§14-11 første ledd bokstav c, jf. §14-14, jf. §14-13: Utsettelse pga. sykdom, skade, kun far har rett",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTSETTELSE"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2023",
+      "navn": "§14-15 første ledd: Overføring oppfylt, søker har aleneomsorg for barnet",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "MØDREKVOTE",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2014",
+      "navn": "§14-11 første ledd bokstav c: Gyldig utsettelse pga. sykdom",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTSETTELSE"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2001",
+      "navn": "§14-6: Uttak er oppfylt",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2003",
+      "navn": "§14-12: Innvilget uttak av kvote",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "MØDREKVOTE",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2032",
+      "navn": "§14-15, jf. §14-16: Gradering foreldrepenger ved aleneomsorg",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER"
+      ]
+    },
+    {
+      "kode": "2004",
+      "navn": "§14-14, jf. §14-13 : Innvilget foreldrepenger, kun far har rett",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER"
+      ]
+    },
+    {
+      "kode": "2010",
+      "navn": "§14-11 første ledd bokstav a: Gyldig utsettelse pga. ferie",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTSETTELSE"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2015",
+      "navn": "§14-11 første ledd bokstav a, jf. §14-14, jf. §14-13: Utsettelse pga. ferie, kun far har rett",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTSETTELSE"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2036",
+      "navn": "§14-14 tredje ledd: Innvilget foreldrepenger, kun far har rett og mor er ufør",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER"
+      ]
+    },
     {
       "kode": "4020",
       "navn": "§22-13 tredje ledd: Brudd på søknadsfrist",
@@ -3649,523 +4164,6 @@
       "kode": "VUR_KONS_YTE_FOR",
       "navn": "Vurder konsekvens for ytelse foreldrepenger",
       "kodeverk": "OPPGAVE_AARSAK"
-    }
-  ],
-  "InnvilgetÅrsak": [
-    {
-      "kode": "2020",
-      "navn": "§14-9 første ledd: Overføring oppfylt, annen part har ikke rett til foreldrepenger",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2016",
-      "navn": "§14-11 første ledd bokstav b, jf. §14-14, jf. §14-13: Utsettelse pga. 100% arbeid, kun far har rett",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2038",
-      "navn": "§14-10 sjette ledd: Samtidig uttak",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2005",
-      "navn": "§14-15: Innvilget foreldrepenger ved aleneomsorg",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ]
-    },
-    {
-      "kode": "2022",
-      "navn": "§14-12: Overføring oppfylt, annen part er innlagt i helseinstitusjon",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2007",
-      "navn": "§14-10: Innvilget foreldrepenger, kun mor har rett",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ]
-    },
-    {
-      "kode": "2002",
-      "navn": "§14-9: Innvilget fellesperiode/foreldrepenger",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ]
-    },
-    {
-      "kode": "2012",
-      "navn": "§14-11 første ledd bokstav c: Gyldig utsettelse pga. innleggelse",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2019",
-      "navn": "§14-11 første ledd bokstav d, jf. §14-14, jf. §14-13: Utsettelse pga. barnets innleggelse på helseinstitusjon, kun far har rett",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2031",
-      "navn": "§14-12, jf. §14-16: Gradering av kvote/overført kvote",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2030",
-      "navn": "§14-9, jf. §14-16: Gradering av fellesperiode/foreldrepenger",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ]
-    },
-    {
-      "kode": "2034",
-      "navn": "§14-10, jf. §14-16: Gradering foreldrepenger, kun mor har rett",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ]
-    },
-    {
-      "kode": "2011",
-      "navn": "§14-11 første ledd bokstav b: Gyldig utsettelse pga. 100% arbeid",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2033",
-      "navn": "§14-14, jf. §14-13, jf. §14-16: Gradering foreldrepenger, kun far har rett",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ]
-    },
-    {
-      "kode": "2013",
-      "navn": "§14-11 første ledd bokstav d: Gyldig utsettelse pga. barn innlagt",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2021",
-      "navn": "§14-12: Overføring oppfylt, annen part er helt avhengig av hjelp til å ta seg av barnet",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2037",
-      "navn": "§14-9, jf. §14-13: Innvilget fellesperiode til far",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE"
-      ]
-    },
-    {
-      "kode": "2018",
-      "navn": "§14-11 første ledd bokstav c, jf. §14-14, jf. §14-13: Utsettelse pga. egen innleggelse på helseinstiusjon, kun far har rett",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2006",
-      "navn": "§14-10: Innvilget foreldrepenger før fødsel",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL"
-      ]
-    },
-    {
-      "kode": "2017",
-      "navn": "§14-11 første ledd bokstav c, jf. §14-14, jf. §14-13: Utsettelse pga. sykdom, skade, kun far har rett",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2023",
-      "navn": "§14-15 første ledd: Overføring oppfylt, søker har aleneomsorg for barnet",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2014",
-      "navn": "§14-11 første ledd bokstav c: Gyldig utsettelse pga. sykdom",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2001",
-      "navn": "§14-6: Uttak er oppfylt",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2003",
-      "navn": "§14-12: Innvilget uttak av kvote",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2032",
-      "navn": "§14-15, jf. §14-16: Gradering foreldrepenger ved aleneomsorg",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ]
-    },
-    {
-      "kode": "2004",
-      "navn": "§14-14, jf. §14-13 : Innvilget foreldrepenger, kun far har rett",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ]
-    },
-    {
-      "kode": "2010",
-      "navn": "§14-11 første ledd bokstav a: Gyldig utsettelse pga. ferie",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2015",
-      "navn": "§14-11 første ledd bokstav a, jf. §14-14, jf. §14-13: Utsettelse pga. ferie, kun far har rett",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2036",
-      "navn": "§14-14 tredje ledd: Innvilget foreldrepenger, kun far har rett og mor er ufør",
-      "kodeverk": "PERIODE_UTFALL_AARSAK",
-      "utfallType": "INNVILGET",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ]
     }
   ],
   "OmsorgsovertakelseVilkårType": [
