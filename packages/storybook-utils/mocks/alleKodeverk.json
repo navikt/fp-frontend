@@ -996,37 +996,27 @@
     {
       "kode": "4503",
       "navn": "§14-16 fjerde ledd: Avslag gradering – ikke rett til gradert uttak pga. redusert oppfylt aktivitetskrav på mor",
-      "kodeverk": "GRADERING_AVSLAG_AARSAK",
-      "gyldigFom": "2001-01-01",
-      "gyldigTom": "9999-12-31"
+      "kodeverk": "GRADERING_AVSLAG_AARSAK"
     },
     {
       "kode": "4502",
       "navn": "§14-16 femte ledd, jf §21-3: Avslag graderingsavtale mangler - ikke dokumentert",
-      "kodeverk": "GRADERING_AVSLAG_AARSAK",
-      "gyldigFom": "2001-01-01",
-      "gyldigTom": "9999-12-31"
+      "kodeverk": "GRADERING_AVSLAG_AARSAK"
     },
     {
       "kode": "4504",
       "navn": "§14-16 andre ledd: Avslag gradering - gradering før uke 7",
-      "kodeverk": "GRADERING_AVSLAG_AARSAK",
-      "gyldigFom": "2001-01-01",
-      "gyldigTom": "9999-12-31"
+      "kodeverk": "GRADERING_AVSLAG_AARSAK"
     },
     {
       "kode": "4523",
       "navn": "Avslag gradering - arbeid 100% eller mer",
-      "kodeverk": "GRADERING_AVSLAG_AARSAK",
-      "gyldigFom": "2001-01-01",
-      "gyldigTom": "9999-12-31"
+      "kodeverk": "GRADERING_AVSLAG_AARSAK"
     },
     {
       "kode": "4501",
       "navn": "§14-16: Ikke gradering pga. for sen søknad",
-      "kodeverk": "GRADERING_AVSLAG_AARSAK",
-      "gyldigFom": "2001-01-01",
-      "gyldigTom": "9999-12-31"
+      "kodeverk": "GRADERING_AVSLAG_AARSAK"
     }
   ],
   "AktivitetStatus": [
@@ -1654,13 +1644,527 @@
       "kodeverk": "KLAGEVURDERING"
     }
   ],
-  "IkkeOppfyltÅrsak": [
+  "PeriodeUtfallÅrsak": [
+    {
+      "kode": "2020",
+      "navn": "§14-9 første ledd: Overføring oppfylt, annen part har ikke rett til foreldrepenger",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "MØDREKVOTE",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2016",
+      "navn": "§14-11 første ledd bokstav b, jf. §14-14, jf. §14-13: Utsettelse pga. 100% arbeid, kun far har rett",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTSETTELSE"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2038",
+      "navn": "§14-10 sjette ledd: Samtidig uttak",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2005",
+      "navn": "§14-15: Innvilget foreldrepenger ved aleneomsorg",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER"
+      ]
+    },
+    {
+      "kode": "2022",
+      "navn": "§14-12: Overføring oppfylt, annen part er innlagt i helseinstitusjon",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "MØDREKVOTE",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2007",
+      "navn": "§14-10: Innvilget foreldrepenger, kun mor har rett",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER"
+      ]
+    },
+    {
+      "kode": "2002",
+      "navn": "§14-9: Innvilget fellesperiode/foreldrepenger",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FELLESPERIODE",
+        "FORELDREPENGER"
+      ]
+    },
+    {
+      "kode": "2012",
+      "navn": "§14-11 første ledd bokstav c: Gyldig utsettelse pga. innleggelse",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTSETTELSE"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2019",
+      "navn": "§14-11 første ledd bokstav d, jf. §14-14, jf. §14-13: Utsettelse pga. barnets innleggelse på helseinstitusjon, kun far har rett",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTSETTELSE"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2031",
+      "navn": "§14-12, jf. §14-16: Gradering av kvote/overført kvote",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "MØDREKVOTE",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2030",
+      "navn": "§14-9, jf. §14-16: Gradering av fellesperiode/foreldrepenger",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FELLESPERIODE",
+        "FORELDREPENGER"
+      ]
+    },
+    {
+      "kode": "2034",
+      "navn": "§14-10, jf. §14-16: Gradering foreldrepenger, kun mor har rett",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER"
+      ]
+    },
+    {
+      "kode": "2011",
+      "navn": "§14-11 første ledd bokstav b: Gyldig utsettelse pga. 100% arbeid",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTSETTELSE"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2033",
+      "navn": "§14-14, jf. §14-13, jf. §14-16: Gradering foreldrepenger, kun far har rett",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER"
+      ]
+    },
+    {
+      "kode": "2013",
+      "navn": "§14-11 første ledd bokstav d: Gyldig utsettelse pga. barn innlagt",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTSETTELSE"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2021",
+      "navn": "§14-12: Overføring oppfylt, annen part er helt avhengig av hjelp til å ta seg av barnet",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "MØDREKVOTE",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2037",
+      "navn": "§14-9, jf. §14-13: Innvilget fellesperiode til far",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FELLESPERIODE"
+      ]
+    },
+    {
+      "kode": "2018",
+      "navn": "§14-11 første ledd bokstav c, jf. §14-14, jf. §14-13: Utsettelse pga. egen innleggelse på helseinstiusjon, kun far har rett",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTSETTELSE"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2006",
+      "navn": "§14-10: Innvilget foreldrepenger før fødsel",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL"
+      ]
+    },
+    {
+      "kode": "2017",
+      "navn": "§14-11 første ledd bokstav c, jf. §14-14, jf. §14-13: Utsettelse pga. sykdom, skade, kun far har rett",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTSETTELSE"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2023",
+      "navn": "§14-15 første ledd: Overføring oppfylt, søker har aleneomsorg for barnet",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "MØDREKVOTE",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2014",
+      "navn": "§14-11 første ledd bokstav c: Gyldig utsettelse pga. sykdom",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTSETTELSE"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2001",
+      "navn": "§14-6: Uttak er oppfylt",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2003",
+      "navn": "§14-12: Innvilget uttak av kvote",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "MØDREKVOTE",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2032",
+      "navn": "§14-15, jf. §14-16: Gradering foreldrepenger ved aleneomsorg",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER"
+      ]
+    },
+    {
+      "kode": "2004",
+      "navn": "§14-14, jf. §14-13 : Innvilget foreldrepenger, kun far har rett",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER"
+      ]
+    },
+    {
+      "kode": "2010",
+      "navn": "§14-11 første ledd bokstav a: Gyldig utsettelse pga. ferie",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTSETTELSE"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2015",
+      "navn": "§14-11 første ledd bokstav a, jf. §14-14, jf. §14-13: Utsettelse pga. ferie, kun far har rett",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTSETTELSE"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER_FØR_FØDSEL",
+        "MØDREKVOTE",
+        "FELLESPERIODE",
+        "FORELDREPENGER",
+        "FEDREKVOTE"
+      ]
+    },
+    {
+      "kode": "2036",
+      "navn": "§14-14 tredje ledd: Innvilget foreldrepenger, kun far har rett og mor er ufør",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER"
+      ]
+    },
     {
       "kode": "4020",
       "navn": "§22-13 tredje ledd: Brudd på søknadsfrist",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -1680,9 +2184,8 @@
     {
       "kode": "4041",
       "navn": "§14-11 første ledd bokstav a: Avslag utsettelse ferie på bevegelig helligdag",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK"
       ],
@@ -1700,9 +2203,8 @@
     {
       "kode": "4032",
       "navn": "§14-11 første ledd bokstav a: Ferie - selvstendig næringsdrivende/frilanser",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK"
       ],
@@ -1720,9 +2222,8 @@
     {
       "kode": "4090",
       "navn": "§14-10 sjuende ledd: Ikke sammenhengende perioder",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "2001-01-01",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -1741,9 +2242,8 @@
     {
       "kode": "4073",
       "navn": "§14-12 første ledd: Ikke rett til kvote fordi mor ikke har rett til foreldrepenger",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -1760,9 +2260,8 @@
     {
       "kode": "4066",
       "navn": "§14-13 første ledd bokstav a, jf §21-3: Aktivitetskrav - arbeid ikke dokumentert",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -1779,9 +2278,8 @@
     {
       "kode": "4006",
       "navn": "§14-10 sjuende ledd: Ikke sammenhengende perioder",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "2001-01-01",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -1800,9 +2298,8 @@
     {
       "kode": "4097",
       "navn": "§14-5: Adopsjonsvilkåret er ikke oppfylt",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -1821,9 +2318,8 @@
     {
       "kode": "4086",
       "navn": "§14-10 sjette ledd og §14-11: Annen part har overlappende uttaksperioder som er innvilget utsettelse",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -1843,9 +2339,8 @@
     {
       "kode": "4018",
       "navn": "§14-10 andre ledd: Søkt uttak/utsettelse før omsorgsovertakelse",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "2001-01-01",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -1865,9 +2360,8 @@
     {
       "kode": "4003",
       "navn": "§14-10 fjerde ledd: Mor har ikke omsorg",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -1886,9 +2380,8 @@
     {
       "kode": "4035",
       "navn": "§14-11 første ledd bokstav b, jf. §14-14: Bare far har rett, mor fyller ikke aktivitetskravet",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK"
       ],
@@ -1906,9 +2399,8 @@
     {
       "kode": "4056",
       "navn": "§14-13 første ledd bokstav g: Aktivitetskravet mors deltakelse på kvalifiseringsprogram ikke oppfylt",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -1925,9 +2417,8 @@
     {
       "kode": "4054",
       "navn": "§14-13 første ledd bokstav e: Aktivitetskravet mors innleggelse ikke oppfylt",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -1944,9 +2435,8 @@
     {
       "kode": "4081",
       "navn": "§14-11 første ledd bokstav a: Avslag utsettelse pga ferie tilbake i tid",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK"
       ],
@@ -1964,9 +2454,8 @@
     {
       "kode": "4030",
       "navn": "§14-9: Avslag utsettelse før termin/fødsel",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -1985,9 +2474,8 @@
     {
       "kode": "4040",
       "navn": "§14-11 første ledd bokstav d: Barnets innleggelse ikke oppfylt",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK"
       ],
@@ -2005,9 +2493,8 @@
     {
       "kode": "4067",
       "navn": "§14-13 første ledd bokstav b, jf §21-3: Aktivitetskrav – utdanning ikke dokumentert",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2024,9 +2511,8 @@
     {
       "kode": "4038",
       "navn": "§14-11 første ledd bokstav c: Søkers sykdom/skade ikke oppfylt",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK"
       ],
@@ -2044,9 +2530,8 @@
     {
       "kode": "4064",
       "navn": "§14-11 første ledd bokstav c og tredje ledd, jf §21-3: Utsettelse søkers innleggelse ikke dokumentert",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK"
       ],
@@ -2064,9 +2549,8 @@
     {
       "kode": "4100",
       "navn": "§14-10 andre ledd: Uttak før omsorgsovertakelse",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2085,9 +2569,8 @@
     {
       "kode": "4069",
       "navn": "§14-13 første ledd bokstav d og femte ledd, jf §21-3: Aktivitetskrav – sykdom/skade ikke dokumentert",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2104,9 +2587,8 @@
     {
       "kode": "4055",
       "navn": "§14-13 første ledd bokstav f: Aktivitetskravet mors deltakelse på introduksjonsprogram ikke oppfylt",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2123,9 +2605,8 @@
     {
       "kode": "4077",
       "navn": "§14-10 a: Innvilget prematuruker, med fratrekk pleiepenger",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2144,9 +2625,8 @@
     {
       "kode": "4093",
       "navn": "§14-16: Avslag gradering - søker er ikke i arbeid",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2165,9 +2645,8 @@
     {
       "kode": "4062",
       "navn": "§14-11 første ledd bokstav b, jf §21-3: Utsettelse arbeid ikke dokumentert",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK"
       ],
@@ -2185,9 +2664,8 @@
     {
       "kode": "4025",
       "navn": "§14-16 første ledd: Avslag gradering - arbeid 100% eller mer",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2206,9 +2684,8 @@
     {
       "kode": "4033",
       "navn": "§14-11 første ledd bokstav a: Ikke lovbestemt ferie",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK"
       ],
@@ -2226,9 +2703,8 @@
     {
       "kode": "4023",
       "navn": "§14-10 femte ledd: Arbeider i uttaksperioden mer enn 0%",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2247,9 +2723,8 @@
     {
       "kode": "4065",
       "navn": "§14-11 første ledd bokstav d, jf §21-3: Utsettelse barnets innleggelse - ikke dokumentert",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK"
       ],
@@ -2267,9 +2742,8 @@
     {
       "kode": "4084",
       "navn": "§14-10 sjette ledd: Annen part har overlappende uttak, det er ikke søkt/innvilget samtidig uttak",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2289,9 +2763,8 @@
     {
       "kode": "4092",
       "navn": "§14-12: Avslag overføring - har ikke aleneomsorg for barnet",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2307,9 +2780,8 @@
     {
       "kode": "4091",
       "navn": "§14-10 sjuende ledd: Ikke sammenhengende perioder",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "2001-01-01",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2328,9 +2800,8 @@
     {
       "kode": "4098",
       "navn": "§14-5: Foreldreansvarsvilkåret er ikke oppfylt",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2349,9 +2820,8 @@
     {
       "kode": "4059",
       "navn": "§14-13 sjette ledd, jf. §14-9 fjerde ledd: Unntak for Aktivitetskravet, flerbarnsfødsel - ikke nok dager",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2368,9 +2838,8 @@
     {
       "kode": "4034",
       "navn": "§14-11, jf §14-9: Avslag utsettelse - ingen stønadsdager igjen",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2389,9 +2858,8 @@
     {
       "kode": "4060",
       "navn": "§14-10 sjette ledd: Samtidig uttak - ikke gyldig kombinasjon",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2410,9 +2878,8 @@
     {
       "kode": "4096",
       "navn": "§14-5: Fødselsvilkåret er ikke oppfylt",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2431,9 +2898,8 @@
     {
       "kode": "4013",
       "navn": "§14-10 første ledd: Mor søker uttak før 12 uker før termin/fødsel",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2449,9 +2915,8 @@
     {
       "kode": "4095",
       "navn": "§14-10 første ledd: Mor tar ikke alle 3 ukene før termin",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2466,9 +2931,8 @@
     {
       "kode": "4087",
       "navn": "§14-2: Opphør medlemskap",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2487,9 +2951,8 @@
     {
       "kode": "4022",
       "navn": "§14-10 tredje ledd: Barnet er over 3 år",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2509,9 +2972,8 @@
     {
       "kode": "4005",
       "navn": "§14-10 sjuende ledd: Ikke sammenhengende perioder",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2530,9 +2992,8 @@
     {
       "kode": "4080",
       "navn": "§14-16: Ikke gradering pga. for sen søknad",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "2001-01-01",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2551,9 +3012,8 @@
     {
       "kode": "4012",
       "navn": "§14-10 fjerde ledd: Far/medmor har ikke omsorg",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2572,9 +3032,8 @@
     {
       "kode": "4008",
       "navn": "§14-12 tredje ledd: Den andre part innleggelse ikke oppfylt",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2591,9 +3050,8 @@
     {
       "kode": "4057",
       "navn": "§14-14 tredje ledd: Unntak for aktivitetskravet, mors mottak av uføretrygd ikke oppfylt",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2609,9 +3067,8 @@
     {
       "kode": "4089",
       "navn": "§14-13 første ledd bokstav g, jf §21-3: Aktivitetskrav – KVP ikke dokumentert",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2628,9 +3085,8 @@
     {
       "kode": "4099",
       "navn": "§14-6: Opptjeningsvilkåret er ikke oppfylt",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2649,9 +3105,8 @@
     {
       "kode": "4058",
       "navn": "§14-5 tredje ledd: Unntak for Aktivitetskravet, stebarnsadopsjon - ikke nok dager",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2668,9 +3123,8 @@
     {
       "kode": "4085",
       "navn": "§14-10 sjette ledd: Det er ikke samtykke mellom partene",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2689,9 +3143,8 @@
     {
       "kode": "4075",
       "navn": "§14-9 første ledd: Ikke rett til fellesperiode fordi mor ikke har rett til foreldrepenger",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2706,9 +3159,8 @@
     {
       "kode": "4082",
       "navn": "§14-11 første ledd bokstav b: Avslag utsettelse pga arbeid tilbake i tid",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK"
       ],
@@ -2726,9 +3178,8 @@
     {
       "kode": "4094",
       "navn": "§14-16 femte ledd, jf §21-3: Avslag graderingsavtale mangler - ikke dokumentert",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "2001-01-01",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2747,9 +3198,8 @@
     {
       "kode": "4061",
       "navn": "§14-11 første ledd bokstav a, jf §21-3: Utsettelse ferie ikke dokumentert",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK"
       ],
@@ -2767,9 +3217,8 @@
     {
       "kode": "4037",
       "navn": "§14-11 første ledd bokstav b: Ikke heltidsarbeid",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK"
       ],
@@ -2787,9 +3236,8 @@
     {
       "kode": "4072",
       "navn": "§14-9 sjuende ledd: Barnet er dødt",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2809,9 +3257,8 @@
     {
       "kode": "4031",
       "navn": "§14-9: Ferie/arbeid innenfor de første 6 ukene",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2830,9 +3277,8 @@
     {
       "kode": "4063",
       "navn": "§14-11 første ledd bokstav c og tredje ledd, jf §21-3: Utsettelse søkers sykdom/skade ikke dokumentert",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK"
       ],
@@ -2850,9 +3296,8 @@
     {
       "kode": "4053",
       "navn": "§14-13 første ledd bokstav d: Aktivitetskravet mors sykdom/skade ikke oppfylt",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2869,9 +3314,8 @@
     {
       "kode": "4088",
       "navn": "§14-13 første ledd bokstav f, jf §21-3: Aktivitetskrav – introprogram ikke dokumentert",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2888,9 +3332,8 @@
     {
       "kode": "4070",
       "navn": "§14-13 første ledd bokstav e og femte ledd, jf §21-3: Aktivitetskrav – innleggelse ikke dokumentert",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2910,9 +3353,8 @@
     {
       "kode": "4076",
       "navn": "§14-9 femte ledd: Avslag overføring - annen forelder har rett til foreldrepenger",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2928,9 +3370,8 @@
     {
       "kode": "4039",
       "navn": "§14-11 første ledd bokstav c: Søkers innleggelse ikke oppfylt",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK"
       ],
@@ -2948,9 +3389,8 @@
     {
       "kode": "4002",
       "navn": "§14-9: Ikke stønadsdager igjen på stønadskonto",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2969,9 +3409,8 @@
     {
       "kode": "4050",
       "navn": "§14-13 første ledd bokstav a: Aktivitetskravet arbeid ikke oppfylt",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -2988,9 +3427,8 @@
     {
       "kode": "4074",
       "navn": "§14-12 tredje ledd, jf §21-3: Avslag overføring kvote pga. sykdom/skade/innleggelse ikke dokumentert",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -3006,9 +3444,8 @@
     {
       "kode": "4071",
       "navn": "§14-10: Bruker er død",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -3028,9 +3465,8 @@
     {
       "kode": "4051",
       "navn": "§14-13 første ledd bokstav b: Aktivitetskravet offentlig godkjent utdanning ikke oppfylt",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -3047,9 +3483,8 @@
     {
       "kode": "4068",
       "navn": "§14-13 første ledd bokstav c, jf §21-3: Aktivitetskrav – arbeid i komb utdanning ikke dokumentert",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -3066,9 +3501,8 @@
     {
       "kode": "4007",
       "navn": "§14-12 tredje ledd: Den andre part syk/skadet ikke oppfylt",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -3085,9 +3519,8 @@
     {
       "kode": "4052",
       "navn": "§14-13 første ledd bokstav c: Aktivitetskravet offentlig godkjent utdanning i kombinasjon med arbeid ikke oppfylt",
-      "kodeverk": "IKKE_OPPFYLT_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
+      "kodeverk": "PERIODE_UTFALL_AARSAK",
+      "utfallType": "AVSLÅTT",
       "gyldigForLovendringer": [
         "KREVER_SAMMENHENGENDE_UTTAK",
         "FRITT_UTTAK"
@@ -3731,552 +4164,6 @@
       "kode": "VUR_KONS_YTE_FOR",
       "navn": "Vurder konsekvens for ytelse foreldrepenger",
       "kodeverk": "OPPGAVE_AARSAK"
-    }
-  ],
-  "InnvilgetÅrsak": [
-    {
-      "kode": "2020",
-      "navn": "§14-9 første ledd: Overføring oppfylt, annen part har ikke rett til foreldrepenger",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2016",
-      "navn": "§14-11 første ledd bokstav b, jf. §14-14, jf. §14-13: Utsettelse pga. 100% arbeid, kun far har rett",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2038",
-      "navn": "§14-10 sjette ledd: Samtidig uttak",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2005",
-      "navn": "§14-15: Innvilget foreldrepenger ved aleneomsorg",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ]
-    },
-    {
-      "kode": "2022",
-      "navn": "§14-12: Overføring oppfylt, annen part er innlagt i helseinstitusjon",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2007",
-      "navn": "§14-10: Innvilget foreldrepenger, kun mor har rett",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ]
-    },
-    {
-      "kode": "2002",
-      "navn": "§14-9: Innvilget fellesperiode/foreldrepenger",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ]
-    },
-    {
-      "kode": "2012",
-      "navn": "§14-11 første ledd bokstav c: Gyldig utsettelse pga. innleggelse",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2019",
-      "navn": "§14-11 første ledd bokstav d, jf. §14-14, jf. §14-13: Utsettelse pga. barnets innleggelse på helseinstitusjon, kun far har rett",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2031",
-      "navn": "§14-12, jf. §14-16: Gradering av kvote/overført kvote",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2030",
-      "navn": "§14-9, jf. §14-16: Gradering av fellesperiode/foreldrepenger",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE",
-        "FORELDREPENGER"
-      ]
-    },
-    {
-      "kode": "2034",
-      "navn": "§14-10, jf. §14-16: Gradering foreldrepenger, kun mor har rett",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ]
-    },
-    {
-      "kode": "2011",
-      "navn": "§14-11 første ledd bokstav b: Gyldig utsettelse pga. 100% arbeid",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2033",
-      "navn": "§14-14, jf. §14-13, jf. §14-16: Gradering foreldrepenger, kun far har rett",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ]
-    },
-    {
-      "kode": "2013",
-      "navn": "§14-11 første ledd bokstav d: Gyldig utsettelse pga. barn innlagt",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2021",
-      "navn": "§14-12: Overføring oppfylt, annen part er helt avhengig av hjelp til å ta seg av barnet",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2037",
-      "navn": "§14-9, jf. §14-13: Innvilget fellesperiode til far",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FELLESPERIODE"
-      ]
-    },
-    {
-      "kode": "2018",
-      "navn": "§14-11 første ledd bokstav c, jf. §14-14, jf. §14-13: Utsettelse pga. egen innleggelse på helseinstiusjon, kun far har rett",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2006",
-      "navn": "§14-10: Innvilget foreldrepenger før fødsel",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL"
-      ]
-    },
-    {
-      "kode": "2017",
-      "navn": "§14-11 første ledd bokstav c, jf. §14-14, jf. §14-13: Utsettelse pga. sykdom, skade, kun far har rett",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2023",
-      "navn": "§14-15 første ledd: Overføring oppfylt, søker har aleneomsorg for barnet",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2014",
-      "navn": "§14-11 første ledd bokstav c: Gyldig utsettelse pga. sykdom",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2001",
-      "navn": "§14-6: Uttak er oppfylt",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "2001-01-01",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2003",
-      "navn": "§14-12: Innvilget uttak av kvote",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "MØDREKVOTE",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2032",
-      "navn": "§14-15, jf. §14-16: Gradering foreldrepenger ved aleneomsorg",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ]
-    },
-    {
-      "kode": "2004",
-      "navn": "§14-14, jf. §14-13 : Innvilget foreldrepenger, kun far har rett",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ]
-    },
-    {
-      "kode": "2010",
-      "navn": "§14-11 første ledd bokstav a: Gyldig utsettelse pga. ferie",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2015",
-      "navn": "§14-11 første ledd bokstav a, jf. §14-14, jf. §14-13: Utsettelse pga. ferie, kun far har rett",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTSETTELSE"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER_FØR_FØDSEL",
-        "MØDREKVOTE",
-        "FELLESPERIODE",
-        "FORELDREPENGER",
-        "FEDREKVOTE"
-      ]
-    },
-    {
-      "kode": "2036",
-      "navn": "§14-14 tredje ledd: Innvilget foreldrepenger, kun far har rett og mor er ufør",
-      "kodeverk": "INNVILGET_AARSAK",
-      "gyldigFom": "2000-01-01",
-      "gyldigTom": "9999-12-31",
-      "gyldigForLovendringer": [
-        "KREVER_SAMMENHENGENDE_UTTAK",
-        "FRITT_UTTAK"
-      ],
-      "uttakTyper": [
-        "UTTAK"
-      ],
-      "valgbarForKonto": [
-        "FORELDREPENGER"
-      ]
     }
   ],
   "OmsorgsovertakelseVilkårType": [
