@@ -1,10 +1,9 @@
 import KodeverkMedNavn from './kodeverkMedNavnTsType';
 
 export type ArsakKodeverk = {
-  gyldigFom?: string;
-  gyldigTom?: string;
   uttakTyper?: string[];
   valgbarForKonto?: string[];
+  utfallType?: string;
 } & KodeverkMedNavn;
 
 export type PeriodeSokerAktivitet = Readonly<{
@@ -26,15 +25,14 @@ export type PeriodeSoker = Readonly<{
   periodeResultatType: string;
   begrunnelse?: string;
   periodeResultatÅrsak: ArsakKodeverk;
-  periodeResultatÅrsakLovhjemmel?: string;
+  periodeUtfallÅrsak: string;
   mottattDato?: string;
   manuellBehandlingÅrsak: string;
-  graderingAvslagÅrsak: ArsakKodeverk;
+  graderingAvslagÅrsak: string;
   flerbarnsdager: boolean;
   samtidigUttak?: boolean;
   samtidigUttaksprosent?: number;
   graderingInnvilget: boolean;
-  graderingsAvslagÅrsakLovhjemmel?: string;
   gradertAktivitet?: PeriodeSokerAktivitet;
   periodeType: string;
   utsettelseType: string;

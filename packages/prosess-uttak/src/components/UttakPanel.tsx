@@ -363,6 +363,7 @@ export const transformValues = (values: FormValues, apCodes: string[], aksjonspu
         ...uta,
         aktiviteter: [],
         periodeResultatÅrsak: aktivitet.periodeResultatÅrsak,
+        periodeUtfallÅrsak: aktivitet.periodeUtfallÅrsak,
         graderingAvslagÅrsak: aktivitet.graderingAvslagÅrsak,
       };
     }
@@ -384,6 +385,7 @@ export const transformValues = (values: FormValues, apCodes: string[], aksjonspu
       ...uta,
       aktiviteter: transformAktiviteter,
       periodeResultatÅrsak: aktivitet.periodeResultatÅrsak,
+      periodeUtfallÅrsak: aktivitet.periodeUtfallÅrsak,
       graderingAvslagÅrsak: aktivitet.graderingAvslagÅrsak,
     };
   });
