@@ -32,10 +32,10 @@
     "nav-frontend-popover-style": "2.0.1",
     "nav-frontend-typografi": "4.0.1",
     "nav-frontend-typografi-style": "2.0.1",
-    "nav-frontend-tabell-style": "2.0.1",
+    "nav-frontend-tabell-style": "2.1.1",
     "react": "^17.0.2",
-    "react-hook-form": "7.25.3",
-    "react-intl": "^5.24.4"
+    "react-hook-form": "7.26.1",
+    "react-intl": "^5.24.6"
   },
   "devDependencies": {
     "@fpsak-frontend/storybook-utils": "^1.0.0",
