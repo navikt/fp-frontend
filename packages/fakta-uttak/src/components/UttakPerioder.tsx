@@ -261,7 +261,7 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
       tom,
       fom,
       kontoType,
-      resultat: uttakPeriodeVurderingTyper.find((type) => type.kode === this.overrideResultat(resultat)),
+      resultat: uttakPeriodeVurderingTyper.find((type) => type.kode === this.overrideResultat(resultat))?.kode,
       begrunnelse: values.begrunnelse,
       dokumentertePerioder:
         resultat && resultat !== uttakPeriodeVurdering.PERIODE_KAN_IKKE_AVKLARES ? dokumentertePerioder : null,
