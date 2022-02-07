@@ -122,7 +122,7 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
   }
 
   // eslint-disable-next-line class-methods-use-this
-  overrideResultat = (resultat: any) => {
+  overrideResultat = (resultat: string): string => {
     if (
       [uttakPeriodeVurdering.PERIODE_KAN_IKKE_AVKLARES, uttakPeriodeVurdering.PERIODE_OK].some(
         (type) => type === resultat,
@@ -247,7 +247,6 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
   async updatePeriode(values: any) {
     const {
       perioder,
-      uttakPeriodeVurderingTyper,
       reduxFormChange: formChange,
     } = this.props;
     const {
@@ -261,7 +260,7 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
       tom,
       fom,
       kontoType,
-      resultat: uttakPeriodeVurderingTyper.find((type) => type.kode === this.overrideResultat(resultat))?.kode,
+      resultat: this.overrideResultat(resultat),
       begrunnelse: values.begrunnelse,
       dokumentertePerioder:
         resultat && resultat !== uttakPeriodeVurdering.PERIODE_KAN_IKKE_AVKLARES ? dokumentertePerioder : null,
