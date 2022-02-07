@@ -402,7 +402,7 @@ const transformValues = (
     ? overføringÅrsakObjekt.kode
     : undefined;
 
-  const resultat = uttakPeriodeVurderingTyper.find((type: any) => type.kode === uttakPeriodeVurdering.PERIODE_OK);
+  const harTypePeriodeOk = uttakPeriodeVurderingTyper.some((type) => type.kode === uttakPeriodeVurdering.PERIODE_OK);
   const arbeidsForhold = values.arbeidsForhold ? values.arbeidsForhold.split('|') : null;
 
   const arbeidsgiver = lagArbeidsgiver(arbeidsForhold);
@@ -426,8 +426,7 @@ const transformValues = (
     erArbeidstaker: arbeidsForhold && arbeidsForhold[4] === uttakArbeidType.ORDINÆRT_ARBEID,
     erFrilanser: arbeidsForhold && arbeidsForhold[4] === uttakArbeidType.FRILANS,
     erSelvstendig: arbeidsForhold && arbeidsForhold[4] === uttakArbeidType.SELVSTENDIG_NÆRINGSDRIVENDE,
-    dokumentertePerioder:
-      resultat && resultat.kode !== uttakPeriodeVurdering.PERIODE_IKKE_VURDERT ? dokumentertePerioder : null,
+    dokumentertePerioder: harTypePeriodeOk ? dokumentertePerioder : null,
     fom: values.fom,
     tom: values.tom,
     isFromSøknad: false,
@@ -439,7 +438,7 @@ const transformValues = (
     arbeidsgiver,
     utsettelseÅrsak,
     overføringÅrsak,
-    resultat,
+    resultat: harTypePeriodeOk ? uttakPeriodeVurdering.PERIODE_OK : undefined,
   };
 };
 
