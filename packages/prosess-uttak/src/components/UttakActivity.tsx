@@ -517,6 +517,17 @@ const getPeriodeResultatÅrsak = (erOppfylt: boolean, avslagAarsakObject: ArsakK
   };
 };
 
+const getPeriodeUtfallÅrsak = (erOppfylt: boolean, avslagAarsakObject: ArsakKodeverk, innvilgelseAarsakObject: ArsakKodeverk): string => {
+  if (!erOppfylt && avslagAarsakObject) {
+    return avslagAarsakObject.kode;
+  }
+  if (erOppfylt && innvilgelseAarsakObject) {
+    return innvilgelseAarsakObject.kode;
+  }
+
+  return '-';
+};
+
 const transformValues = (
   values: FormValues,
   avslagAarsakKoder: ArsakKodeverk[],
@@ -527,7 +538,6 @@ const transformValues = (
   const { ...nyeVerdier } = omit(values, 'selectedItem');
   const [avslagAarsakObject] = avslagAarsakKoder.filter((a) => a.kode === values.avslagAarsak);
   const [innvilgelseAarsakObject] = innvilgelseAarsakKoder.filter((a) => a.kode === values.innvilgelseAarsak);
-  const [periodeAarsakObject] = periodeAarsakKoder.filter((a) => a.kode === values.avslagAarsak || a.kode === values.innvilgelseAarsak);
   const [graderingAvslagAarsakObject] = graderingAvslagAarsakKoder.filter((a) => a.kode === values.graderingAvslagAarsak);
   if (values.oppholdArsak !== oppholdArsakType.UDEFINERT) {
     nyeVerdier.UttakFieldArray[0].stønadskontoType = oppholdArsakMapper[values.oppholdArsak];
@@ -551,7 +561,7 @@ const transformValues = (
     oppholdÅrsak: values.oppholdArsak,
     periodeResultatType: resultatTypeObject(values.erOppfylt, values.oppholdArsak),
     periodeResultatÅrsak: getPeriodeResultatÅrsak(values.erOppfylt, avslagAarsakObject, innvilgelseAarsakObject),
-    periodeUtfallÅrsak: periodeAarsakObject ? periodeAarsakObject.kode : '-',
+    periodeUtfallÅrsak: getPeriodeUtfallÅrsak(values.erOppfylt, avslagAarsakObject, innvilgelseAarsakObject),
     graderingAvslagÅrsak: values.erOppfylt && !values.graderingInnvilget && graderingAvslagAarsakObject ? graderingAvslagAarsakObject.kode : '-',
   };
 };
