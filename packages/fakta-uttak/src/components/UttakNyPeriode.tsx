@@ -434,7 +434,7 @@ const transformValues = (
     saksebehandlersBegrunnelse: values.begrunnelse,
     uttakPeriodeType: periodeObjekt
       ? periodeObjekt.kode
-      : { kode: '-' },
+      : '-',
     arbeidsgiver,
     utsettelseÅrsak,
     overføringÅrsak,
