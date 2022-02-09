@@ -8,11 +8,10 @@ import {
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
 import {
-  Image, TableColumn, PeriodLabel, DateTimeLabel,
+  Image, TableColumn, PeriodLabel, DateTimeLabel, ExpandableTableRow,
 } from '@fpsak-frontend/shared-components';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 import { TIDENES_ENDE } from '@fpsak-frontend/utils';
-import ExpandableTableRow from './ExpandableTableRow';
 import ManueltLagtTilArbeidsforholdForm from './ManueltLagtTilArbeidsforholdForm';
 import ManglendeOpplysningerForm from './ManglendeOpplysningerForm';
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';

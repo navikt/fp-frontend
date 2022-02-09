@@ -1,5 +1,5 @@
 {
-  "PermisjonFaktaPanel.Overskrift": "Fakta om arbeid og inntekt",
+  "PermisjonFaktaPanel.Overskrift": "Fakta om permisjon",
   "PermisjonFaktaPanel.Arbeidsforhold": "Arbeidsforhold",
   "PermisjonFaktaPanel.Periode": "Periode",
   "PermisjonFaktaPanel.Kilde": "Kilde",
@@ -30,8 +30,5 @@
   "VurderArbeidsforholdForm.Begrunn": "Begrunn valget",
   "VurderArbeidsforholdForm.Oppdater": "Oppdater",
   "VurderArbeidsforholdForm.Avbryt": "Avbryt",
-  "VurderArbeidsforholdForm.Hjelpetekst": "Bla bla bla",
-
-  "ExpandableTableRow.Apne": "Åpne rad",
-  "ExpandableTableRow.Lukke": "Lukk rad"
+  "VurderArbeidsforholdForm.Hjelpetekst": "Bla bla bla"
 }

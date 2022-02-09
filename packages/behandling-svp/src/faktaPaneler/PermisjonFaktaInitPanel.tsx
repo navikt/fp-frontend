@@ -14,7 +14,7 @@ import { SvpBehandlingApiKeys, requestSvpApi } from '../data/svpBehandlingApi';
 
 const intl = createIntl(messages);
 
-const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_ARBEIDSFORHOLD_PERMISJON_KODE];
+const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_ARBEIDSFORHOLD_PERMISJON];
 
 const ENDEPUNKTER_INIT_DATA = [SvpBehandlingApiKeys.AKSJONSPUNKTER];
 type EndepunktInitData = {

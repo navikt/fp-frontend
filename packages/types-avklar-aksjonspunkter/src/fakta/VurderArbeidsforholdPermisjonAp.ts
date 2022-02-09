@@ -8,6 +8,6 @@ type VurderArbeidsforholdPermisjonAp = {
     permisjonStatus: string;
     begrunnelse: string;
   }[];
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_ARBEIDSFORHOLD_PERMISJON_KODE>
+} & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_ARBEIDSFORHOLD_PERMISJON>
 
 export default VurderArbeidsforholdPermisjonAp;

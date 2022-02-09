@@ -20,15 +20,6 @@ import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import ArbeidsforholdRad from './ArbeidsforholdRad';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
-const HEADER_TEXT_IDS = [
-  'EMPTY1',
-  'PermisjonFaktaPanel.Arbeidsforhold',
-  'PermisjonFaktaPanel.Periode',
-  'PermisjonFaktaPanel.Kilde',
-  'PermisjonFaktaPanel.InntektsmeldingMottatt',
-  'EMPTY2',
-];
-
 const sorterTabell = (d1: ArbeidsforholdOgInntekt, d2: ArbeidsforholdOgInntekt): number => d1.arbeidsgiverNavn.localeCompare(d2.arbeidsgiverNavn);
 
 const byggTabellStruktur = (
@@ -147,8 +138,8 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           <FormattedMessage id="PermisjonFaktaPanel.PermisjonUtenSluttdato" />
         </AksjonspunktHelpTextHTML>
       )}
-      <VerticalSpacer sixteenPx />
-      <Table headerTextCodes={HEADER_TEXT_IDS} noHover hasGrayHeader>
+      <VerticalSpacer thirtyTwoPx />
+      <Table noHover>
         <>
           {tabellData.map((data, index) => (
             <ArbeidsforholdRad

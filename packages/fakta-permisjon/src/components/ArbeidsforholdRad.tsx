@@ -5,10 +5,9 @@ import { Normaltekst, Element, Undertekst } from 'nav-frontend-typografi';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
 import {
-  Image, TableColumn, PeriodLabel, DateTimeLabel,
+  Image, TableColumn, PeriodLabel, DateTimeLabel, ExpandableTableRow,
 } from '@fpsak-frontend/shared-components';
 import { TIDENES_ENDE } from '@fpsak-frontend/utils';
-import ExpandableTableRow from './ExpandableTableRow';
 import VurderArbeidsforholdForm from './VurderArbeidsforholdForm';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
@@ -62,24 +61,15 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
         )}
       </TableColumn>
       <TableColumn>
-        {erRadÅpen && (
-          <>
-            <Element>
-              {arbeidsgiverNavn}
-            </Element>
-            {arbeidsforhold.arbeidsgiverIdent && (
-              <Undertekst>
-                (
-                {arbeidsforhold.arbeidsgiverIdent}
-                )
-              </Undertekst>
-            )}
-          </>
-        )}
-        {!erRadÅpen && (
-          <Normaltekst>
-            {arbeidsgiverNavn}
-          </Normaltekst>
+        <Element>
+          {arbeidsgiverNavn}
+        </Element>
+        {arbeidsforhold.arbeidsgiverIdent && (
+          <Undertekst>
+            (
+            {arbeidsforhold.arbeidsgiverIdent}
+            )
+          </Undertekst>
         )}
       </TableColumn>
       <TableColumn>

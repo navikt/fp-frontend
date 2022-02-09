@@ -14,7 +14,7 @@ import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
 const intl = createIntl(messages);
 
-const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_ARBEIDSFORHOLD_PERMISJON_KODE];
+const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_ARBEIDSFORHOLD_PERMISJON];
 
 const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER];
 type EndepunktInitData = {
