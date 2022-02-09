@@ -16,9 +16,13 @@ const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_ARBEIDSFORHOLD_PERMISJON_KODE];
 
-const ENDEPUNKTER_INIT_DATA = [SvpBehandlingApiKeys.AKSJONSPUNKTER, SvpBehandlingApiKeys.ARBEID_OG_INNTEKT];
+const ENDEPUNKTER_INIT_DATA = [SvpBehandlingApiKeys.AKSJONSPUNKTER];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
+}
+
+const ENDEPUNKTER_PANEL_DATA = [SvpBehandlingApiKeys.ARBEID_OG_INNTEKT];
+type EndepunktPanelData = {
   arbeidOgInntekt: ArbeidOgInntektsmelding;
 }
 
@@ -32,14 +36,15 @@ const PermisjonFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
   arbeidsgiverOpplysningerPerId,
   ...props
 }) => (
-  <FaktaDefaultInitPanel<EndepunktInitData>
+  <FaktaDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
     {...props}
     requestApi={requestSvpApi}
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
+    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.PERMISJON}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'PermisjonFaktaInitPanel.Title' })}
-    skalPanelVisesIMeny={({ arbeidOgInntekt }) => !!arbeidOgInntekt}
+    skalPanelVisesIMeny={(initData) => !!initData?.aksjonspunkter?.some((ap) => ap.definisjon === AKSJONSPUNKT_KODER[0])}
     renderPanel={(data) => (
       <PermisjonFaktaIndex
         saksnummer={saksnummer}
