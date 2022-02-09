@@ -106,7 +106,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   const lagreOgFortsett = useCallback(() => {
     settKnappTrykket(true);
     lagreCallback({
-      kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_PERMISJON_KODE,
+      kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_PERMISJON,
       arbeidsforhold: tabellData.map((d) => ({
         internArbeidsforholdId: d.arbeidsforhold.internArbeidsforholdId,
         permisjonStatus: d.arbeidsforhold.permisjonUtenSluttdatoDto.permisjonStatus,
