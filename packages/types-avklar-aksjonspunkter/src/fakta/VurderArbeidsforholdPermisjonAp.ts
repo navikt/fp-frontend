@@ -6,8 +6,8 @@ type VurderArbeidsforholdPermisjonAp = {
   arbeidsforhold: {
     internArbeidsforholdId: string;
     permisjonStatus: string;
-    begrunnelse: string;
   }[];
+  begrunnelse: string;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_ARBEIDSFORHOLD_PERMISJON>
 
 export default VurderArbeidsforholdPermisjonAp;

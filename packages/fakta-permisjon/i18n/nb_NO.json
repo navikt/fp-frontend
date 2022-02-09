@@ -1,20 +1,26 @@
 {
   "PermisjonFaktaPanel.Overskrift": "Fakta om permisjon",
   "PermisjonFaktaPanel.Arbeidsforhold": "Arbeidsforhold",
-  "PermisjonFaktaPanel.Periode": "Periode",
-  "PermisjonFaktaPanel.Kilde": "Kilde",
-  "PermisjonFaktaPanel.InntektsmeldingMottatt": "Inntektsmelding mottatt",
   "PermisjonFaktaPanel.Skjaringstidspunkt": "Skjæringstidspunkt for opptjening: {skjæringspunktDato}",
   "PermisjonFaktaPanel.Bekreft": "Bekreft og fortsett",
   "PermisjonFaktaPanel.PermisjonUtenSluttdato": "Vi fant en permisjon uten sluttdato. Vurder om arbeidsforholdet skal tas med.",
+  "PermisjonFaktaPanel.Begrunn": "Begrunn valget",
+  
+  "ArbeidsforholdFieldArray.Periode": "Periode",
+  "ArbeidsforholdFieldArray.Kilde": "Kilde",
+  "ArbeidsforholdFieldArray.InntektsmeldingMottatt": "Inntektsmelding mottatt",
+  "ArbeidsforholdFieldArray.Saksbehandler": "Saksbehandler",
+  "ArbeidsforholdFieldArray.AaRegisteret": "A-inntekt",
+  "ArbeidsforholdFieldArray.Permisjon": "Permisjon",
+  "ArbeidsforholdFieldArray.Inntektsmelding": "Inntektsmelding",
+  "ArbeidsforholdFieldArray.Aksjonspunkt": "Åpent aksjonspunkt",
+  "ArbeidsforholdFieldArray.Ok": "Arbeidsforhold er OK",
+  "ArbeidsforholdFieldArray.Hjelpetekst": "Bla bla bla",
+  "ArbeidsforholdFieldArray.Stillingsprosent": "Stillingsprosent",
+  "ArbeidsforholdFieldArray.SkalArbeidsforholdetTasMed": "Skal arbeidsforholdet tas med?",
+  "ArbeidsforholdFieldArray.TaMedArbeidsforhold": "Fjern permisjonen og ta med arbeidsforholdet",
+  "ArbeidsforholdFieldArray.IkkeTaMedArbeidsforhold": "Ikke ta med arbeidsforholdet",
 
-  "ArbeidsforholdRad.Saksbehandler": "Saksbehandler",
-  "ArbeidsforholdRad.AaRegisteret": "A-inntekt",
-  "ArbeidsforholdRad.Inntektsmelding": "Inntektsmelding",
-  "ArbeidsforholdRad.Aksjonspunkt": "Åpent aksjonspunkt",
-  "ArbeidsforholdRad.Ok": "Arbeidsforhold er OK",
-
-  "InntektsmeldingOpplysningerPanel.Stillingsprosent": "Stillingsprosent",
   "InntektsmeldingOpplysningerPanel.Inntektsmelding": "Inntektsmelding",
   "InntektsmeldingOpplysningerPanel.Refusjon": "Refusjon",
   "InntektsmeldingOpplysningerPanel.Ja": "Ja",
@@ -22,13 +28,6 @@
   "InntektsmeldingOpplysningerPanel.Refusjonsbeløp": "Refusjonsbeløp",
   "InntektsmeldingOpplysningerPanel.Kontaktinfo": "Kontaktinfo",
   "InntektsmeldingOpplysningerPanel.Tlf": "Tlf. {nr}",
-  "InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding": "Åpne inntektsmelding (PDF)",
+  "InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding": "Åpne inntektsmelding (PDF)"
 
-  "VurderArbeidsforholdForm.SkalArbeidsforholdetTasMed": "Skal arbeidsforholdet tas med?",
-  "VurderArbeidsforholdForm.TaMedArbeidsforhold": "Fjern permisjonen og ta med arbeidsforholdet",
-  "VurderArbeidsforholdForm.IkkeTaMedArbeidsforhold": "Ikke ta med arbeidsforholdet",
-  "VurderArbeidsforholdForm.Begrunn": "Begrunn valget",
-  "VurderArbeidsforholdForm.Oppdater": "Oppdater",
-  "VurderArbeidsforholdForm.Avbryt": "Avbryt",
-  "VurderArbeidsforholdForm.Hjelpetekst": "Bla bla bla"
 }
