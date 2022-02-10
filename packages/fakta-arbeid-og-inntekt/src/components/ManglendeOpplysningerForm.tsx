@@ -25,6 +25,8 @@ import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/ar
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
+import styles from './manglendeOpplysningerForm.less';
+
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 const minValue1 = minValue(1);
@@ -147,7 +149,12 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
               <Element><FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" /></Element>
             </FlexColumn>
             <FlexColumn>
-              <Hjelpetekst><FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" /></Hjelpetekst>
+              <Hjelpetekst
+                /* @ts-ignore */
+                popoverProps={{ className: styles.hjelpetekst }}
+              >
+                <FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" />
+              </Hjelpetekst>
             </FlexColumn>
           </FlexRow>
         </FlexContainer>

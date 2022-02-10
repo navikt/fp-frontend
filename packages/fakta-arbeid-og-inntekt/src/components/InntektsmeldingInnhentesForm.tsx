@@ -196,7 +196,16 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
               <Element><FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" /></Element>
             </FlexColumn>
             <FlexColumn>
-              <Hjelpetekst><FormattedMessage id="InntektsmeldingInnhentesForm.Hjelpetekst" /></Hjelpetekst>
+              <Hjelpetekst
+                /* @ts-ignore */
+                popoverProps={{ className: styles.hjelpetekst }}
+              >
+                <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel1" />
+                <VerticalSpacer eightPx />
+                <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel2" />
+                <VerticalSpacer eightPx />
+                <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel3" />
+              </Hjelpetekst>
             </FlexColumn>
           </FlexRow>
           <FlexRow>

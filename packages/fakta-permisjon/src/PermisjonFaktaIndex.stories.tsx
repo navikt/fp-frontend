@@ -47,8 +47,8 @@ const Template: Story<{
   />
 );
 
-export const InnhentInntektsmelding = Template.bind({});
-InnhentInntektsmelding.args = {
+export const EttArbeidsforholdUtenSluttdatoForPermisjon = Template.bind({});
+EttArbeidsforholdUtenSluttdatoForPermisjon.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
     definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_PERMISJON,
@@ -73,7 +73,7 @@ InnhentInntektsmelding.args = {
       stillingsprosent: 100,
       årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
       permisjonUtenSluttdatoDto: {
-        permisjonFom: '2019-12-06',
+        permisjonFom: '2022-10-01',
       },
     }],
     inntektsmeldinger: [],
@@ -110,8 +110,8 @@ InnhentInntektsmelding.args = {
   },
 };
 
-export const FlereArbeidsforholdOgInntekstemeldinger = Template.bind({});
-FlereArbeidsforholdOgInntekstemeldinger.args = {
+export const FlereArbeidsforhold = Template.bind({});
+FlereArbeidsforhold.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
     definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
@@ -149,7 +149,7 @@ FlereArbeidsforholdOgInntekstemeldinger.args = {
       stillingsprosent: 100,
       tom: '9999-12-31',
       permisjonUtenSluttdatoDto: {
-        permisjonFom: '2019-12-06',
+        permisjonFom: '2022-10-02',
       },
     }, {
       arbeidsgiverIdent: '910909090',
@@ -160,7 +160,7 @@ FlereArbeidsforholdOgInntekstemeldinger.args = {
       tom: '2021-12-31',
       årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
       permisjonUtenSluttdatoDto: {
-        permisjonFom: '2019-12-06',
+        permisjonFom: '2021-11-07',
       },
     }],
     inntektsmeldinger: [{

@@ -19,6 +19,7 @@ import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel
 import ArbeidsforholdBoks from './ArbeidsforholdBoks';
 
 import styles from './arbeidsforholdFieldArray.less';
+import InntektsposterPanel from './InntektsposterPanel';
 
 const FIELD_ARRAY_NAME = 'arbeidsforhold';
 
@@ -35,6 +36,7 @@ interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   isReadOnly: boolean;
   harÅpentAksjonspunkt: boolean;
+  skjæringstidspunkt: string;
 }
 
 const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
@@ -44,9 +46,10 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
   arbeidsgiverOpplysningerPerId,
   isReadOnly,
   harÅpentAksjonspunkt,
+  skjæringstidspunkt,
 }) => {
   const intl = useIntl();
-  const { inntektsmeldinger } = arbeidOgInntekt;
+  const { inntektsmeldinger, inntekter } = arbeidOgInntekt;
 
   const { control } = useFormContext<FormValues>();
   const { fields } = useFieldArray({
@@ -59,8 +62,9 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
       {fields.map((field, index) => {
         const arbeidsforhold = sorterteArbeidsforhold[index];
         const inntektsmelding = inntektsmeldinger.find((i) => i.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent);
+        const inntektsposter = inntekter.find((inntekt) => inntekt.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent)?.inntekter;
         return (
-          <ArbeidsforholdBoks key={field.id} harÅpentAksjonspunkt={harÅpentAksjonspunkt}>
+          <ArbeidsforholdBoks key={field.id} harÅpentAksjonspunkt={harÅpentAksjonspunkt} harBorderTop={index === 0}>
             <FlexContainer>
               <FlexRow>
                 <FlexColumn>
@@ -138,6 +142,16 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                           inntektsmelding={inntektsmelding}
                         />
                       )}
+                      {!inntektsmelding && inntekter && (
+                        <>
+                          <VerticalSpacer thirtyTwoPx />
+                          <InntektsposterPanel
+                            inntektsposter={inntektsposter}
+                            skjæringstidspunkt={skjæringstidspunkt}
+                          />
+                          <VerticalSpacer thirtyTwoPx />
+                        </>
+                      )}
                     </Column>
                     <Column xs="3">
                       <Element>
@@ -148,14 +162,24 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                       </Normaltekst>
                     </Column>
                   </Row>
-                  <VerticalSpacer sixteenPx />
                   <FlexContainer>
                     <FlexRow>
                       <FlexColumn>
                         <Element><FormattedMessage id="ArbeidsforholdFieldArray.SkalArbeidsforholdetTasMed" /></Element>
                       </FlexColumn>
                       <FlexColumn>
-                        <Hjelpetekst><FormattedMessage id="ArbeidsforholdFieldArray.Hjelpetekst" /></Hjelpetekst>
+                        <Hjelpetekst
+                          /* @ts-ignore */
+                          popoverProps={{ className: styles.hjelpetekst }}
+                        >
+                          <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel1" />
+                          <VerticalSpacer eightPx />
+                          <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel2" />
+                          <VerticalSpacer eightPx />
+                          <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel3" />
+                          <VerticalSpacer eightPx />
+                          <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel4" />
+                        </Hjelpetekst>
                       </FlexColumn>
                     </FlexRow>
                   </FlexContainer>
@@ -167,7 +191,10 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                   >
                     <RadioOption
                       value={BekreftetPermisjonStatus.IKKE_BRUK_PERMISJON}
-                      label={intl.formatMessage({ id: 'ArbeidsforholdFieldArray.TaMedArbeidsforhold' })}
+                      label={intl.formatMessage({
+                        id: inntektsmelding
+                          ? 'ArbeidsforholdFieldArray.TaMedArbeidsforhold' : 'ArbeidsforholdFieldArray.TaMedArbeidsforholdIkkeInntektsmelding',
+                      })}
                     />
                     <RadioOption
                       value={BekreftetPermisjonStatus.BRUK_PERMISJON}

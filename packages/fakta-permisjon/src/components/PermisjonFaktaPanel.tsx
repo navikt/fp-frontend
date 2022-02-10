@@ -61,7 +61,14 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
   setFormData,
   lagreCallback,
 }) => {
-  const { arbeidsforhold } = arbeidOgInntekt;
+  const arbeidOgInntektMedPermisjon = useMemo(() => ({
+    inntektsmeldinger: arbeidOgInntekt.inntektsmeldinger,
+    arbeidsforhold: arbeidOgInntekt.arbeidsforhold.filter((a) => a.permisjonUtenSluttdatoDto),
+    inntekter: arbeidOgInntekt.inntekter,
+    skjæringstidspunkt: arbeidOgInntekt.skjæringstidspunkt,
+  }), [arbeidOgInntekt]);
+
+  const { arbeidsforhold } = arbeidOgInntektMedPermisjon;
 
   const sorterteArbeidsforhold = useMemo(() => [...arbeidsforhold].sort(getSorterArbeidsforhold(arbeidsgiverOpplysningerPerId)),
     [arbeidsforhold, arbeidsgiverOpplysningerPerId]);
@@ -94,7 +101,7 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
             <Normaltekst>
               <FormattedMessage
                 id="PermisjonFaktaPanel.Skjaringstidspunkt"
-                values={{ skjæringspunktDato: dateFormat(arbeidOgInntekt.skjæringstidspunkt) }}
+                values={{ skjæringspunktDato: dateFormat(arbeidOgInntektMedPermisjon.skjæringstidspunkt) }}
               />
             </Normaltekst>
           </FloatRight>
@@ -121,12 +128,13 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
         <ArbeidsforholdFieldArray
           saksnummer={saksnummer}
           sorterteArbeidsforhold={sorterteArbeidsforhold}
-          arbeidOgInntekt={arbeidOgInntekt}
+          arbeidOgInntekt={arbeidOgInntektMedPermisjon}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           isReadOnly={readOnly}
           harÅpentAksjonspunkt={harÅpentAksjonspunkt}
+          skjæringstidspunkt={arbeidOgInntektMedPermisjon.skjæringstidspunkt}
         />
-        <VerticalSpacer sixteenPx />
+        <VerticalSpacer thirtyTwoPx />
         <TextAreaField
           label={<Element><FormattedMessage id="PermisjonFaktaPanel.Begrunn" /></Element>}
           name="begrunnelse"
@@ -134,7 +142,7 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
           maxLength={1500}
           readOnly={readOnly}
         />
-        <VerticalSpacer thirtyTwoPx />
+        <VerticalSpacer sixteenPx />
         {!readOnly && (
           <Hovedknapp
             mini
