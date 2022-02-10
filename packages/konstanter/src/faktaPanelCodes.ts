@@ -14,6 +14,7 @@ enum FaktaPanelCode {
   OMSORG = 'omsorg',
   OMSORGSVILKARET = 'omsorgsvilkaaret',
   OPPTJENINGSVILKARET = 'opptjeningsvilkaaret',
+  PERMISJON = 'permisjon',
   SAKEN = 'saken',
   UTTAK = 'uttak',
   VERGE = 'verge',

@@ -23,6 +23,7 @@ export { default as Periodpicker } from './src/periodpicker/Periodpicker';
 export { default as Table } from './src/table/Table';
 export { default as TableColumn } from './src/table/TableColumn';
 export { default as TableRow } from './src/table/TableRow';
+export { default as ExpandableTableRow } from './src/table/ExpandableTableRow';
 export { default as Tooltip } from './src/Tooltip';
 export { default as VerticalSpacer } from './src/VerticalSpacer';
 export { default as DataFetchPendingModal } from './src/DataFetchPendingModal';

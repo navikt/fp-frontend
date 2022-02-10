@@ -19,6 +19,7 @@ export { default as SjekkManglendeFodselAp } from './src/fakta/SjekkManglendeFod
 export { default as AvklarArbeidsforholdAp } from './src/fakta/AvklarArbeidsforholdAp';
 export { default as AvklarAnnenforelderHarRettAp } from './src/fakta/AvklarAnnenforelderHarRettAp';
 export { default as FaktaUttakAp } from './src/fakta/FaktaUttakAp';
+export { default as VurderArbeidsforholdPermisjonAp } from './src/fakta/VurderArbeidsforholdPermisjonAp';
 export { default as OverstyringAvklarStartdatoForPeriodenAp } from './src/fakta/OverstyringAvklarStartdatoForPeriodenAp';
 export { default as VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp } from './src/fakta/VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp';
 export { default as AvklarFaktaForForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForForeldreansvarAksjonspunktAp';

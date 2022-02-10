@@ -92,11 +92,11 @@ const byggTabellStruktur = (
   const alleArbeidsforhold = arbeidsforhold.map<ArbeidsforholdOgInntekt>((af) => ({
     arbeidsforhold: af,
     arbeidsgiverNavn: arbeidsgiverOpplysningerPerId[af.arbeidsgiverIdent].navn,
-    inntektsmelding: inntektsmeldinger.find((inntektsmelding) => inntektsmelding.arbeidsgiverIdent === af.arbeidsgiverIdent),
+    inntektsmelding: inntektsmeldinger.find((inntektsmelding) => inntektsmelding.internArbeidsforholdId === af.internArbeidsforholdId),
     inntektsposter: inntekter.find((inntekt) => inntekt.arbeidsgiverIdent === af.arbeidsgiverIdent)?.inntekter,
   }));
   const alleInntektsmeldingerSomManglerArbeidsforhold = arbeidOgInntekt.inntektsmeldinger
-    .filter((im) => !arbeidsforhold.some((af) => im.arbeidsgiverIdent === af.arbeidsgiverIdent))
+    .filter((im) => !arbeidsforhold.some((af) => im.internArbeidsforholdId === af.internArbeidsforholdId))
     .map<ArbeidsforholdOgInntekt>((im) => ({
       arbeidsforhold: undefined,
       arbeidsgiverNavn: arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent].navn,
@@ -105,6 +105,17 @@ const byggTabellStruktur = (
     }));
 
   return alleArbeidsforhold.concat(alleInntektsmeldingerSomManglerArbeidsforhold).sort(sorterTabell);
+};
+
+const finnArbeidsforholdIdentDetErFlereAv = (data: ArbeidsforholdOgInntekt[]) => {
+  const alleArbeidsgiverIdenter = data.reduce((prev, value) => {
+    const ident = value.arbeidsforhold?.arbeidsgiverIdent || value.inntektsmelding?.arbeidsgiverIdent;
+    return {
+      ...prev,
+      [ident]: prev[ident] ? prev[ident] + 1 : 1,
+    };
+  }, {});
+  return Object.keys(alleArbeidsgiverIdenter).filter((key) => alleArbeidsgiverIdenter[key] > 1);
 };
 
 const finnUløstArbeidsforholdIndex = (tabellData: ArbeidsforholdOgInntekt[]): number[] => {
@@ -165,6 +176,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
 
   const [tabellData, setTabellData] = useState(formData || byggTabellStruktur(arbeidOgInntekt, arbeidsgiverOpplysningerPerId));
   const [åpneRadIndexer, settÅpneRadIndexer] = useState(finnUløstArbeidsforholdIndex(tabellData));
+  const identerDetErFlereAv = finnArbeidsforholdIdentDetErFlereAv(tabellData);
 
   useEffect(() => () => {
     setFormData(tabellData);
@@ -315,6 +327,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
               erOverstyrt={erOverstyrt}
               oppdaterTabell={oppdaterTabellData}
               erRadÅpen={åpneRadIndexer.includes(index)}
+              skalViseArbeidsforholdId={identerDetErFlereAv.includes(data.arbeidsforhold?.arbeidsgiverIdent || data.inntektsmelding?.arbeidsgiverIdent)}
             />
           ))}
         </>

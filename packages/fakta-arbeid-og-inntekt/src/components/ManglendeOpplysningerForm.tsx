@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
-import { Element } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
@@ -24,6 +24,8 @@ import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/ar
 
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
+
+import styles from './manglendeOpplysningerForm.less';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -51,6 +53,7 @@ interface OwnProps {
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   lukkArbeidsforholdRad: () => void;
   oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
+  skalViseArbeidsforholdId: boolean;
 }
 
 const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
@@ -64,6 +67,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   lagreVurdering,
   lukkArbeidsforholdRad,
   oppdaterTabell,
+  skalViseArbeidsforholdId,
 }) => {
   const intl = useIntl();
 
@@ -89,7 +93,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   const lagre = useCallback((formValues: FormValues) => {
     const oppdater = (() => {
       oppdaterTabell((oldData) => oldData.map((data) => {
-        if (data.inntektsmelding?.arbeidsgiverIdent === inntektsmelding.arbeidsgiverIdent) {
+        if (data.inntektsmelding?.internArbeidsforholdId === inntektsmelding.internArbeidsforholdId) {
           const af = formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING ? {
             arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
             internArbeidsforholdId: inntektsmelding.internArbeidsforholdId,
@@ -136,6 +140,19 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
 
   return (
     <>
+      {skalViseArbeidsforholdId && (
+        <>
+          <FlexRow>
+            <FlexColumn>
+              <Element><FormattedMessage id="ManglendeOpplysningerForm.ArbeidsforholdId" /></Element>
+            </FlexColumn>
+            <FlexColumn>
+              <Normaltekst>{inntektsmelding.eksternArbeidsforholdId}</Normaltekst>
+            </FlexColumn>
+          </FlexRow>
+          <VerticalSpacer eightPx />
+        </>
+      )}
       <InntektsmeldingOpplysningerPanel saksnummer={saksnummer} inntektsmelding={inntektsmelding} />
       <VerticalSpacer thirtyTwoPx />
       <AlertStripeInfo><FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" /></AlertStripeInfo>
@@ -147,7 +164,12 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
               <Element><FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" /></Element>
             </FlexColumn>
             <FlexColumn>
-              <Hjelpetekst><FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" /></Hjelpetekst>
+              <Hjelpetekst
+                /* @ts-ignore */
+                popoverProps={{ className: styles.hjelpetekst }}
+              >
+                <FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" />
+              </Hjelpetekst>
             </FlexColumn>
           </FlexRow>
         </FlexContainer>

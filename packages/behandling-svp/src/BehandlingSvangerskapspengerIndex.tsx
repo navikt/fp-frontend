@@ -27,6 +27,7 @@ import FortsattMedlemskapProsessStegInitPanel from './prosessPaneler/FortsattMed
 import TilkjentYtelseProsessStegInitPanel from './prosessPaneler/TilkjentYtelseProsessStegInitPanel';
 import SimuleringProsessStegInitPanel from './prosessPaneler/SimuleringProsessStegInitPanel';
 import VedtakProsessStegInitPanel from './prosessPaneler/VedtakProsessStegInitPanel';
+import PermisjonFaktaInitPanel from './faktaPaneler/PermisjonFaktaInitPanel';
 
 const endepunkterSomSkalHentesEnGang = [
   { key: SvpBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT },
@@ -123,6 +124,7 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<StandardBehandlingPro
                 hasFetchError={behandlingState === RestApiState.ERROR}
               />
               <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+              <PermisjonFaktaInitPanel {...props} saksnummer={fagsak.saksnummer} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <BeregningFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} rettigheter={rettigheter} />
               <FordelingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
             </>
