@@ -40,6 +40,7 @@ interface OwnProps {
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   toggleÅpenRad: () => void;
   erRadÅpen: boolean;
+  skalViseArbeidsforholdId: boolean;
 }
 
 const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
@@ -54,6 +55,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
   lagreVurdering,
   toggleÅpenRad,
   erRadÅpen,
+  skalViseArbeidsforholdId,
 }) => {
   const intl = useIntl();
 
@@ -103,6 +105,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               lagreVurdering={lagreVurdering}
               lukkArbeidsforholdRad={toggleÅpenRad}
               oppdaterTabell={oppdaterTabell}
+              skalViseArbeidsforholdId={skalViseArbeidsforholdId}
             />
           )}
           {manglerArbeidsforhold && (
@@ -117,6 +120,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               lagreVurdering={lagreVurdering}
               lukkArbeidsforholdRad={toggleÅpenRad}
               oppdaterTabell={oppdaterTabell}
+              skalViseArbeidsforholdId={skalViseArbeidsforholdId}
             />
           )}
         </>

@@ -72,6 +72,7 @@ interface OwnProps {
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   lukkArbeidsforholdRad: () => void;
   oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
+  skalViseArbeidsforholdId: boolean;
 }
 
 const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
@@ -83,6 +84,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
   lagreVurdering,
   lukkArbeidsforholdRad,
   oppdaterTabell,
+  skalViseArbeidsforholdId,
 }) => {
   const intl = useIntl();
 
@@ -114,7 +116,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
     };
     lagreVurdering(params).then(() => {
       oppdaterTabell((oldData) => oldData.map((data) => {
-        if (data.arbeidsforhold?.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent) {
+        if (data.arbeidsforhold?.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId) {
           return {
             ...data,
             arbeidsforhold: {
@@ -131,6 +133,19 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
 
   return (
     <>
+      {skalViseArbeidsforholdId && (
+        <>
+          <FlexRow>
+            <FlexColumn>
+              <Element><FormattedMessage id="ManglendeOpplysningerForm.ArbeidsforholdId" /></Element>
+            </FlexColumn>
+            <FlexColumn>
+              <Normaltekst>{arbeidsforhold.eksternArbeidsforholdId}</Normaltekst>
+            </FlexColumn>
+          </FlexRow>
+          <VerticalSpacer eightPx />
+        </>
+      )}
       <VerticalSpacer eightPx />
       <FlexRow>
         <FlexColumn>

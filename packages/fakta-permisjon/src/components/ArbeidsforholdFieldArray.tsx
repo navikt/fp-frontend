@@ -61,7 +61,7 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
     <>
       {fields.map((field, index) => {
         const arbeidsforhold = sorterteArbeidsforhold[index];
-        const inntektsmelding = inntektsmeldinger.find((i) => i.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent);
+        const inntektsmelding = inntektsmeldinger.find((i) => i.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);
         const inntektsposter = inntekter.find((inntekt) => inntekt.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent)?.inntekter;
         return (
           <ArbeidsforholdBoks key={field.id} harÅpentAksjonspunkt={harÅpentAksjonspunkt} harBorderTop={index === 0}>

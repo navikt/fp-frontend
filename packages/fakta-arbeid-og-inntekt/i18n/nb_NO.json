@@ -68,6 +68,7 @@
   "ManglendeOpplysningerForm.Lagre": "Lagre",
   "ManglendeOpplysningerForm.Avbryt": "Avbryt",
   "ManglendeOpplysningerForm.Hjelpetekst": "Det er kun unntaksvis at det skal opprettes manuelle arbeidsforhold basert på en inntektsmelding. Det kan være i saker hvor søker er ambassadepersonell, utenlandske ansatte eller fisker. Hvis det er andre arbeidsforhold må du kontakte arbeidsgiver eller søker for riktig registrering i AA-reg.",
+  "ManglendeOpplysningerForm.ArbeidsforholdId": "Arbeidsforhold-ID",
 
   "LeggTilArbeidsforholdForm.LeggTilArbeidsforhold": "Legg til arbeidsforhold",
   "LeggTilArbeidsforholdForm.Arbeidsgiver": "Arbeidsgiver",

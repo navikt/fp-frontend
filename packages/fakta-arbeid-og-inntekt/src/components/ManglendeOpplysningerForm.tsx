@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
-import { Element } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
@@ -53,6 +53,7 @@ interface OwnProps {
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   lukkArbeidsforholdRad: () => void;
   oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
+  skalViseArbeidsforholdId: boolean;
 }
 
 const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
@@ -66,6 +67,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   lagreVurdering,
   lukkArbeidsforholdRad,
   oppdaterTabell,
+  skalViseArbeidsforholdId,
 }) => {
   const intl = useIntl();
 
@@ -91,7 +93,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   const lagre = useCallback((formValues: FormValues) => {
     const oppdater = (() => {
       oppdaterTabell((oldData) => oldData.map((data) => {
-        if (data.inntektsmelding?.arbeidsgiverIdent === inntektsmelding.arbeidsgiverIdent) {
+        if (data.inntektsmelding?.internArbeidsforholdId === inntektsmelding.internArbeidsforholdId) {
           const af = formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING ? {
             arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
             internArbeidsforholdId: inntektsmelding.internArbeidsforholdId,
@@ -138,6 +140,19 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
 
   return (
     <>
+      {skalViseArbeidsforholdId && (
+        <>
+          <FlexRow>
+            <FlexColumn>
+              <Element><FormattedMessage id="ManglendeOpplysningerForm.ArbeidsforholdId" /></Element>
+            </FlexColumn>
+            <FlexColumn>
+              <Normaltekst>{inntektsmelding.eksternArbeidsforholdId}</Normaltekst>
+            </FlexColumn>
+          </FlexRow>
+          <VerticalSpacer eightPx />
+        </>
+      )}
       <InntektsmeldingOpplysningerPanel saksnummer={saksnummer} inntektsmelding={inntektsmelding} />
       <VerticalSpacer thirtyTwoPx />
       <AlertStripeInfo><FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" /></AlertStripeInfo>
