@@ -251,8 +251,9 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
     expect(screen.getByText(
-      'Ingen arbeidsforhold eller inntektsmeldinger registrert på bruker. Vurder om det er dokumentert andre arbeidsforhold. '
-      + 'Arbeidsforholdet må kun opprettes dersom...',
+      'Ingen arbeidsforhold eller inntektsmeldinger registrert på bruker. Det er kun unntaksvis at det skal '
+      + 'opprettes manuelle arbeidsforhold. Det kan være i saker søker er ambassadepersonell, utenlandske '
+      + 'ansatte eller fisker. Hvis det er andre arbeidsforhold må du kontakte arbeidsgiver eller søker for riktig registrering i AA-reg.',
     )).toBeInTheDocument();
     expect(screen.queryByText('Legg til arbeidsforhold')).not.toBeInTheDocument();
 

@@ -19,6 +19,9 @@
   "PeriodFieldArray.LeggTilPeriode": "Legg til periode",
 
   "DateTimeLabel.Kl": " Kl.",
+  
+  "ExpandableTableRow.Apne": "Åpne rad",
+  "ExpandableTableRow.Lukke": "Lukk rad",
 
   "Calendar.Day.0": "søndag",
   "Calendar.Day.1": "mandag",

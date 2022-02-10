@@ -24,6 +24,7 @@ import OpptjeningsvilkaretFaktaInitPanel from './faktaPaneler/Opptjeningsvilkare
 import BeregningFaktaInitPanel from './faktaPaneler/BeregningFaktaInitPanel';
 import OmsorgFaktaInitPanel from './faktaPaneler/OmsorgFaktaInitPanel';
 import UttakFaktaInitPanel from './faktaPaneler/UttakFaktaInitPanel';
+import PermisjonFaktaInitPanel from './faktaPaneler/PermisjonFaktaInitPanel';
 import AktivitetskravFaktaInitPanel from './faktaPaneler/AktivitetskravFaktaInitPanel';
 import VarselProsessStegInitPanel from './prosessPaneler/VarselProsessStegInitPanel';
 import OpplysningspliktProsessStegInitPanel from './prosessPaneler/OpplysningspliktProsessStegInitPanel';
@@ -133,6 +134,7 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
                 hasFetchError={behandlingState === RestApiState.ERROR}
               />
               <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+              <PermisjonFaktaInitPanel {...props} saksnummer={fagsak.saksnummer} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <BeregningFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <BesteberegningFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <FordelingFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />

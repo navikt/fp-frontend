@@ -8,11 +8,10 @@ import {
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
 import {
-  Image, TableColumn, PeriodLabel, DateTimeLabel,
+  Image, TableColumn, PeriodLabel, DateTimeLabel, ExpandableTableRow,
 } from '@fpsak-frontend/shared-components';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 import { TIDENES_ENDE } from '@fpsak-frontend/utils';
-import ExpandableTableRow from './ExpandableTableRow';
 import ManueltLagtTilArbeidsforholdForm from './ManueltLagtTilArbeidsforholdForm';
 import ManglendeOpplysningerForm from './ManglendeOpplysningerForm';
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
@@ -41,6 +40,7 @@ interface OwnProps {
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   toggleÅpenRad: () => void;
   erRadÅpen: boolean;
+  skalViseArbeidsforholdId: boolean;
 }
 
 const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
@@ -55,6 +55,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
   lagreVurdering,
   toggleÅpenRad,
   erRadÅpen,
+  skalViseArbeidsforholdId,
 }) => {
   const intl = useIntl();
 
@@ -104,6 +105,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               lagreVurdering={lagreVurdering}
               lukkArbeidsforholdRad={toggleÅpenRad}
               oppdaterTabell={oppdaterTabell}
+              skalViseArbeidsforholdId={skalViseArbeidsforholdId}
             />
           )}
           {manglerArbeidsforhold && (
@@ -118,6 +120,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               lagreVurdering={lagreVurdering}
               lukkArbeidsforholdRad={toggleÅpenRad}
               oppdaterTabell={oppdaterTabell}
+              skalViseArbeidsforholdId={skalViseArbeidsforholdId}
             />
           )}
         </>
