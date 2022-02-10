@@ -17,7 +17,6 @@ const intl = createIntl(messages);
 
 const PermisjonFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
   saksnummer,
-  behandling,
   submitCallback,
   aksjonspunkter,
   readOnly,
@@ -29,7 +28,6 @@ const PermisjonFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps>
   <RawIntlProvider value={intl}>
     <PermisjonFaktaPanel
       saksnummer={saksnummer}
-      behandling={behandling}
       aksjonspunkter={aksjonspunkter}
       readOnly={readOnly}
       formData={formData}
