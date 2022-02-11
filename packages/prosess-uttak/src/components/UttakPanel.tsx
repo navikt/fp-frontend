@@ -362,7 +362,6 @@ export const transformValues = (values: FormValues, apCodes: string[], aksjonspu
       return {
         ...uta,
         aktiviteter: [],
-        periodeResultatÅrsak: aktivitet.periodeResultatÅrsak,
         periodeUtfallÅrsak: aktivitet.periodeUtfallÅrsak,
         graderingAvslagÅrsak: aktivitet.graderingAvslagÅrsak,
       };
@@ -384,7 +383,6 @@ export const transformValues = (values: FormValues, apCodes: string[], aksjonspu
     return {
       ...uta,
       aktiviteter: transformAktiviteter,
-      periodeResultatÅrsak: aktivitet.periodeResultatÅrsak,
       periodeUtfallÅrsak: aktivitet.periodeUtfallÅrsak,
       graderingAvslagÅrsak: aktivitet.graderingAvslagÅrsak,
     };

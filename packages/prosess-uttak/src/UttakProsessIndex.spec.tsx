@@ -32,11 +32,6 @@ describe('<UttakProsessIndex>', () => {
         ],
         periodeResultatType: 'INNVILGET',
         begrunnelse: null,
-        periodeResultatÅrsak: {
-          kode: '2006',
-          navn: '§14-10: Innvilget foreldrepenger før fødsel',
-          kodeverk: 'INNVILGET_AARSAK',
-        },
         periodeUtfallÅrsak: '2006',
         manuellBehandlingÅrsak: '-',
         graderingAvslagÅrsak: '-',
