@@ -13,7 +13,6 @@ describe('<UttakInfo>', () => {
     fom: '2018-01-01',
     tom: '2018-02-01',
     periodeResultatType: '',
-    periodeUtfallÅrsak: '',
     periodeResultatÅrsak: '',
     flerbarnsdager: false,
     utsettelseType: '-',

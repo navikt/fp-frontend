@@ -25,7 +25,6 @@ describe('<UttakTimeLineData>', () => {
     fom: '',
     tom: '',
     periodeResultatType: '',
-    periodeUtfallÅrsak: '',
     periodeResultatÅrsak: '',
     aktiviteter: [{
       stønadskontoType: '',
@@ -37,7 +36,6 @@ describe('<UttakTimeLineData>', () => {
     fom: '',
     tom: '',
     periodeResultatType: 'MANUELL_BEHANDLING',
-    periodeUtfallÅrsak: '4002',
     periodeResultatÅrsak: '4002',
     manuellBehandlingÅrsak: '5001',
     periodeType: 'MØDREKVOTE',

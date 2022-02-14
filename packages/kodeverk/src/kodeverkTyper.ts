@@ -30,7 +30,6 @@ enum KodeverkType {
   REVURDERING_VARSLING_ÅRSAK = 'RevurderingVarslingÅrsak',
   MANUELL_BEHANDLING_AARSAK = 'ManuellBehandlingÅrsak',
   UTTAK_PERIODE_VURDERING_TYPE = 'UttakPeriodeVurderingType',
-  PERIODE_UTFALL_AARSAK = 'PeriodeUtfallÅrsak',
   PERIODE_RESULTAT_AARSAK = 'PeriodeResultatÅrsak',
   INNTEKTSKATEGORI = 'Inntektskategori',
   BEREGNINGSGRUNNLAG_ANDELTYPER = 'BeregningsgrunnlagAndeltype',
