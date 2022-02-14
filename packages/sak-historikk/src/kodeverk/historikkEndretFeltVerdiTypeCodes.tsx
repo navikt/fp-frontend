@@ -330,303 +330,303 @@ const historikkEndretFeltVerdiTypeCodes = {
     verdiId: 'HistorikkEndretFelt.ManuellBehandling',
   },
   '-': {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.ingenAvslagÅrsak',
   },
   4002: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.ingeStonadsDagarIgjen',
   },
   4005: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.hullMellomStønadsperioder',
   },
   4011: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.farForTidligSoktPeriode',
   },
   4020: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.bruddPaSoknadsfrist',
   },
   4022: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.barnOverTreÅr',
   },
   4012: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.farHarIkkeOmsorg',
   },
   4003: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.morHarIkkeOmsorg',
   },
   4001: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.mødrekvoteFørTerminFodsel',
   },
   4013: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.morSokerFellesPeriodeFørTolvUker',
   },
   4018: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.soktUttakForOmsorgsovertakelse',
   },
   4010: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.farSøkerFørTerminFodsel',
   },
   4060: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.samtidligUttakIkkeGyldigKombinasjon',
   },
   4014: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.morSokerFellesPeriodeFørUkeSyv',
   },
   4007: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.andrePartSykSkadetIkkeOppfylt',
   },
   4008: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.andrePartInnleggelseIkkeOppfylt',
   },
   4033: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.ikkeLovbestemtFerie',
   },
   4032: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.ferieSelvstendigNæringsdrivandeFrilanser',
   },
   4037: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.ikkeHeltidsArbeid',
   },
   4038: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.søkersSkadeSykdomIkkeOppfylt',
   },
   4039: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.søkerInleggelseIkkeOppfylt',
   },
   4040: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.barnetsInleggelseIkkeOppfylt',
   },
   4031: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.ferieInnenforDeFørsteSeksUkerne',
   },
   4034: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.ingenStønadsdagarIgjen',
   },
   4035: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.farAlenaomsorgMorFyllesIkkeAktivitetskravet',
   },
   4030: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.utsettelseFørTerminFødsel',
   },
   4041: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.utsettelseFeriePåBevegeligHelligdag',
   },
   4050: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.aktivitetskravetArbeidIkkeOppfylt',
   },
   4051: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.aktivitetskravetOffentligGodkjentUtdanning',
   },
   4052: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.aktivitetskravetOffentligGodkjentUtdanningIKombinasjonMedArbeid',
   },
   4053: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.aktivitetskravetMorsSkadeSykdom',
   },
   4054: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.aktivitetskravetMorsInleggelse',
   },
   4055: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.aktivitetskravetMorsDeltakelseIntro',
   },
   4056: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.unntakForAktivitetskravetMorsDeltakelseKvalifisering',
   },
   4057: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.unntakForAktivitetskravetMorsMottakAvUføretrygd',
   },
   4058: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.unntakForAktivitetskravetStebarnsadopsjon',
   },
   4059: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.unntakForAktivitetskravetFlerBarnsfødsel',
   },
   4006: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.påkrevdStønadsperiodeMangler',
   },
   4015: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.morSøkerFFFødselTidlig',
   },
   4017: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.farEllerMedmorSøkerFFFødsel',
   },
   4061: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.UtsettelseIkkeDokumentert',
   },
   4081: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AvslagUtsettelseFerieTilbakeTid',
   },
   4082: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AvslagUtsettelseArbeidTilbakeTid',
   },
   4062: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.UtsettelseArbIkkeDok',
   },
   4063: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.UtsettelseSykdomIkkeDok',
   },
   4064: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.UtsettelseInnleggelseIkkeDok',
   },
   4065: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.UtsettelseBarnetsInnleggelseIkkeDok',
   },
   4072: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.BarnetErDødt',
   },
   4071: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AktivitetskravIntroprogramIkkeDok',
   },
   4070: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AktivitetskravInleggelseIkkeDok',
   },
   4069: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AktivitetskravSykdomIkkeDok',
   },
   4068: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AktivitetskravArbeidUtdanningIkkeDok',
   },
   4067: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AktivitetskravUtdanningIkkeDok',
   },
   4066: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AktivitetskravArbeidIkkeDok',
   },
   4074: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AvslagOverforingKvoteSykdomIkkeDok',
   },
   4076: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AvslagOverforingAnnenForelderRett',
   },
   4077: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.FratrekkPleiepenger',
   },
   4073: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.IkkeRettTilKvoteFordiMorIkkeHarRettForeldrepenger',
   },
   4086: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AnnenPartOverlappendeUttaksperioder',
   },
   4085: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.IkkeSamtykkeMellomPartene',
   },
   4084: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AnnenPartOverlappendeUttakSamtidigUttak',
   },
   4080: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.IkkeGraderingForSenSoknad',
   },
   4019: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AvslagGraderingForTermin',
   },
   4504: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AvslagGraderingForUke7',
   },
   4519: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AvslagGraderingForTermin',
   },
   4025: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AvslagGraderingArbeidOver100',
   },
   4023: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.ArbeiderIUtaksperiodenMerEnn0',
   },
   4088: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AktivitetskravIntroprogramIkkeDok',
   },
   4089: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AktivitetskravKVPIkkeDok',
   },
   4090: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.hullMellomSøknadsperioderEtterSisteUttak',
   },
   4091: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.hullMellomSøknadsperioderEtterSisteUtsettelse',
   },
   4092: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AvslagOverforingIkkeAleneomsorg',
   },
   4093: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AvslagGraderingSøkerErIkkeIArbeid',
   },
   4094: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AvslagGraderingsavtaleManglerIkkeDok',
   },
   4095: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.AvslagMorTarIkkeAlleUker',
   },
   4502: {
@@ -634,31 +634,31 @@ const historikkEndretFeltVerdiTypeCodes = {
     verdiId: 'HistorikkEndretFelt.AvslagGraderingsavtaleManglerIkkeDok',
   },
   4501: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.IkkeGraderingForSenSoknad',
   },
   4087: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.medlemskapvilkarOpphor',
   },
   4096: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.fodselsvilkarOpphor',
   },
   4097: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.adopsjonsvilkarOpphor',
   },
   4098: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.foreldreansvarvilkarOpphor',
   },
   4099: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.opptjeningsvilkarOpphor',
   },
   4100: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFelt.UttakForOmsorgovertakelse',
   },
   MØDREKVOTE: {
@@ -682,119 +682,119 @@ const historikkEndretFeltVerdiTypeCodes = {
     verdiId: 'HistorikkEndretFeltVerdiType.ForeldrepengerForFodsel',
   },
   2001: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.UttakInnvilget',
   },
   2010: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.GyldigUtsettelsePgaFerie',
   },
   2011: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.GyldigUtsettelsePgaArbeid',
   },
   2012: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.GyldigUtsettelsePgaInnleggelse',
   },
   2013: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.GyldigUtsettelsePgaBarnInnlagt',
   },
   2014: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.GyldigUtsettelsePgaSykdom',
   },
   2020: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.OverforingOppfyltAnnePartIkkeRett',
   },
   2023: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.OverforingOppfyltAleneomsorg',
   },
   2037: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.InnvilgetFellesperiodeTilFar',
   },
   2038: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.RedusertUttaksgradPgaAndreForeldresUttak',
   },
   2022: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.OverforingOppfyltAnnenPartInnlagt',
   },
   2021: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.OverforingOppfyltAnnePartHjelp',
   },
   2003: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.InnvilgetUttakKvote',
   },
   2002: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.InnvilgetFellesEllerFP',
   },
   2004: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.InnvilgetFPKunFarHarRett',
   },
   2005: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.InnvilgetFPVedAleneomsorg',
   },
   2006: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.InnvilgetFPFF',
   },
   2007: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.InnvilgetFPKunMorHarRett',
   },
   2015: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.UtsetFerieKunFarHarRett',
   },
   2016: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.UtsetArbeidKunFarHarRett',
   },
   2017: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.UtsetSykdomSkadeKunFarHarRett',
   },
   2018: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.UtsetInnleggelseKunFarHarRett',
   },
   2019: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.UtsetBarnetsInnleggelseKunFarHarRett',
   },
   2030: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.GraderingFellesEllerFP',
   },
   2031: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.GraderingKvote',
   },
   2032: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.GraderingFPAleneomsorg',
   },
   2033: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.GraderingFPKunFarRett',
   },
   2034: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.GraderingFPMorFarRett',
   },
   2036: {
-    kode: 'PERIODE_UTFALL_AARSAK',
+    kode: 'PERIODE_RESULTAT_AARSAK',
     verdiId: 'HistorikkEndretFeltVerdiType.KunFarHarRettOgMorErUfor',
   },
   VERGE: {
