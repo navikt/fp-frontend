@@ -16,6 +16,7 @@ export type PeriodeSoker = Readonly<{
   aktiviteter: PeriodeSokerAktivitet[];
   periodeResultatType: string;
   begrunnelse?: string;
+  periodeResultatÅrsak: string;
   periodeUtfallÅrsak: string;
   mottattDato?: string;
   manuellBehandlingÅrsak: string;

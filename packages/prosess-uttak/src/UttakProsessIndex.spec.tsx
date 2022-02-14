@@ -33,6 +33,7 @@ describe('<UttakProsessIndex>', () => {
         periodeResultatType: 'INNVILGET',
         begrunnelse: null,
         periodeUtfallÅrsak: '2006',
+        periodeResultatÅrsak: '2006',
         manuellBehandlingÅrsak: '-',
         graderingAvslagÅrsak: '-',
         flerbarnsdager: false,

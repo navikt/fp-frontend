@@ -324,7 +324,7 @@ const erPeriodeOppfylt = (periode: PeriodeMedClassName, utfallKoder: ArsakKodeve
   }
   if (periode.periodeResultatType && periode.periodeResultatType === periodeResultatType.MANUELL_BEHANDLING) {
     // Litt flaky. Bør sende med kodeverket og slå opp utfallType
-    const kodeverkKode = utfallKoder.find((kodeItem) => kodeItem.kode === periode.periodeUtfallÅrsak);
+    const kodeverkKode = utfallKoder.find((kodeItem) => kodeItem.kode === periode.periodeResultatÅrsak);
     if ((kodeverkKode && kodeverkKode.utfallType === 'INNVILGET') || periode.oppholdÅrsak !== oppholdArsakType.UDEFINERT) {
       return true;
     }
@@ -507,6 +507,7 @@ const transformValues = (
     oppholdÅrsak: values.oppholdArsak,
     periodeResultatType: resultatTypeObject(values.erOppfylt, values.oppholdArsak),
     periodeUtfallÅrsak: periodeAarsakObject ? periodeAarsakObject.kode : '-',
+    periodeResultatÅrsak: periodeAarsakObject ? periodeAarsakObject.kode : '-',
     graderingAvslagÅrsak: values.erOppfylt && !values.graderingInnvilget && graderingAvslagAarsakObject ? graderingAvslagAarsakObject.kode : '-',
   };
 };
@@ -566,7 +567,7 @@ export const lagAktiviteter = (selectedItem: PeriodeMedClassName, kontoIkkeSatt:
   .sort((a1, a2) => (a1.arbeidsgiverReferanse && a2.arbeidsgiverReferanse ? a1.arbeidsgiverReferanse.localeCompare(a2.arbeidsgiverReferanse) : 0));
 
 const buildInitialValues = createSelector(
-  [(props: PureOwnProps) => props.selectedItemData, (props: PureOwnProps) => props.alleKodeverk[kodeverkTyper.PERIODE_UTFALL_AARSAK] as ArsakKodeverk[]],
+  [(props: PureOwnProps) => props.selectedItemData, (props: PureOwnProps) => props.alleKodeverk[kodeverkTyper.PERIODE_RESULTAT_AARSAK] as ArsakKodeverk[]],
   (selectedItem, utfallKoder): FormValues => {
     const kontoIkkeSatt = !selectedItem.periodeType
       && (selectedItem.aktiviteter[0].stønadskontoType === '-');
@@ -577,7 +578,7 @@ const buildInitialValues = createSelector(
       flerbarnsdager: selectedItem.flerbarnsdager,
       samtidigUttak: selectedItem.samtidigUttak,
       samtidigUttaksprosent: selectedItem.samtidigUttaksprosent ? selectedItem.samtidigUttaksprosent.toString() : undefined,
-      periodeAarsak: selectedItem.periodeUtfallÅrsak,
+      periodeAarsak: selectedItem.periodeResultatÅrsak,
       graderingInnvilget: selectedItem.graderingInnvilget,
       graderingAvslagAarsak: selectedItem.graderingAvslagÅrsak ? selectedItem.graderingAvslagÅrsak : '-',
       oppholdArsak: selectedItem.oppholdÅrsak,
@@ -590,7 +591,7 @@ const buildInitialValues = createSelector(
 
 const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const { alleKodeverk } = initialOwnProps;
-  const periodeUtfallAarsaker = alleKodeverk[kodeverkTyper.PERIODE_UTFALL_AARSAK] as ArsakKodeverk[];
+  const periodeAarsaker = alleKodeverk[kodeverkTyper.PERIODE_RESULTAT_AARSAK] as ArsakKodeverk[];
   const graderingAvslagAarsakKoder = alleKodeverk[kodeverkTyper.GRADERING_AVSLAG_AARSAK] as ArsakKodeverk[];
   const utsettelseAarsak = alleKodeverk[kodeverkTyper.UTSETTELSE_AARSAK_TYPE];
   const periodeTyper = alleKodeverk[kodeverkTyper.UTTAK_PERIODE_TYPE];
@@ -600,7 +601,7 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
   const warn = (values: FormValues) => warningUttakActivity(values);
   const onSubmit = (values: FormValues) => initialOwnProps.updateActivity(transformValues(
     values,
-    periodeUtfallAarsaker,
+    periodeAarsaker,
     graderingAvslagAarsakKoder,
   ));
 
@@ -627,7 +628,7 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
       erOppfylt,
       currentlySelectedStønadskonto,
       initialValues: buildInitialValues(ownProps),
-      periodeAarsakKoder: periodeUtfallAarsaker,
+      periodeAarsakKoder: periodeAarsaker,
       graderingInnvilget: formValueSelector(uttakActivityForm)(state, 'graderingInnvilget'),
       erSamtidigUttak: formValueSelector(uttakActivityForm)(state, 'samtidigUttak'),
       samtidigUttaksprosent: formValueSelector(uttakActivityForm)(state, 'samtidigUttaksprosent'),
