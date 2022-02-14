@@ -20,7 +20,6 @@ type UttakAp = {
     }[];
     begrunnelse?: string;
     periodeResultatType: string;
-    periodeUtfallÅrsak: string;
     periodeResultatÅrsak: string;
     oppholdÅrsak: string;
     flerbarnsdager?: boolean;
