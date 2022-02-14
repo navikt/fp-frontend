@@ -21,10 +21,6 @@ describe('<UttakActivity>', () => {
     fom: '2018-01-01',
     tom: '2018-02-01',
     periodeResultatType: '',
-    periodeResultatÅrsak: {
-      kode: '',
-      kodeverk: '',
-    },
     periodeUtfallÅrsak: '-',
     flerbarnsdager: false,
     utsettelseType: '-',
@@ -49,15 +45,10 @@ describe('<UttakActivity>', () => {
       validate={sinon.spy()}
       warn={sinon.spy()}
       onSubmit={sinon.spy()}
-      avslagAarsakKoder={[
-        {
-          kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [],
-        }]}
       periodeAarsakKoder={[
         {
           kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [], utfallType: 'AVSLÅTT',
         }]}
-      innvilgelseAarsakKoder={[]}
       graderingAvslagAarsakKoder={[]}
       harSoktOmFlerbarnsdager={false}
       hasValidationError={false}
@@ -101,15 +92,10 @@ describe('<UttakActivity>', () => {
       validate={sinon.spy()}
       warn={sinon.spy()}
       onSubmit={sinon.spy()}
-      avslagAarsakKoder={[
-        {
-          kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [],
-        }]}
       periodeAarsakKoder={[
         {
           kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [], utfallType: 'AVSLÅTT',
         }]}
-      innvilgelseAarsakKoder={[]}
       graderingAvslagAarsakKoder={[]}
       harSoktOmFlerbarnsdager={false}
       hasValidationError={false}
@@ -147,15 +133,10 @@ describe('<UttakActivity>', () => {
       validate={sinon.spy()}
       warn={sinon.spy()}
       onSubmit={sinon.spy()}
-      avslagAarsakKoder={[
-        {
-          kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [],
-        }]}
       periodeAarsakKoder={[
         {
           kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [], utfallType: 'AVSLÅTT',
         }]}
-      innvilgelseAarsakKoder={[]}
       graderingAvslagAarsakKoder={[]}
       harSoktOmFlerbarnsdager={false}
       hasValidationError={false}
@@ -199,11 +180,6 @@ describe('<UttakActivity>', () => {
       validate={sinon.spy()}
       warn={sinon.spy()}
       onSubmit={sinon.spy()}
-      avslagAarsakKoder={[]}
-      innvilgelseAarsakKoder={[
-        {
-          kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [],
-        }]}
       periodeAarsakKoder={[
         {
           kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [], utfallType: 'AVSLÅTT',
@@ -251,15 +227,10 @@ describe('<UttakActivity>', () => {
       validate={sinon.spy()}
       warn={sinon.spy()}
       onSubmit={sinon.spy()}
-      avslagAarsakKoder={[
-        {
-          kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [],
-        }]}
       periodeAarsakKoder={[
         {
           kode: '4011', navn: 'mitt navn', kodeverk: 'MITT_KODEVERK', gyldigForLovendringer: [],
         }]}
-      innvilgelseAarsakKoder={[]}
       graderingAvslagAarsakKoder={[]}
       harSoktOmFlerbarnsdager={false}
       hasValidationError={false}

@@ -1,11 +1,3 @@
-import KodeverkMedNavn from './kodeverkMedNavnTsType';
-
-export type ArsakKodeverk = {
-  uttakTyper?: string[];
-  valgbarForKonto?: string[];
-  utfallType?: string;
-} & KodeverkMedNavn;
-
 export type PeriodeSokerAktivitet = Readonly<{
   stønadskontoType?: string;
   prosentArbeid?: number;
@@ -24,7 +16,6 @@ export type PeriodeSoker = Readonly<{
   aktiviteter: PeriodeSokerAktivitet[];
   periodeResultatType: string;
   begrunnelse?: string;
-  periodeResultatÅrsak: ArsakKodeverk;
   periodeUtfallÅrsak: string;
   mottattDato?: string;
   manuellBehandlingÅrsak: string;

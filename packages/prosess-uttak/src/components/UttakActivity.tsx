@@ -130,9 +130,7 @@ export type FormValues = {
   flerbarnsdager?: boolean;
   samtidigUttak?: boolean;
   samtidigUttaksprosent?: string;
-  avslagAarsak?: string;
-  innvilgelseAarsak?: string;
-  periodeUtfallAarsak?: string;
+  periodeAarsak?: string;
   graderingInnvilget?: boolean;
   graderingAvslagAarsak?: string;
   oppholdArsak?: string;
@@ -163,8 +161,6 @@ interface MappedOwnProps {
   uttakFieldArray: string;
   erOppfylt: boolean;
   currentlySelectedStønadskonto: string;
-  avslagAarsakKoder: ArsakKodeverk[];
-  innvilgelseAarsakKoder: ArsakKodeverk[];
   periodeAarsakKoder: ArsakKodeverk[];
   graderingInnvilget: boolean;
   erSamtidigUttak: boolean;
@@ -246,44 +242,23 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
                       && (
                         <div className={styles.marginBottom20}>
                           <ArrowBox alignOffset={erOppfylt ? 0 : 98}>
-                            {erOppfylt && (
-                              <SelectField
-                                name="innvilgelseAarsak"
-                                selectValues={
-                                  mapAarsak(
-                                    periodeAarsakKoder,
-                                    'INNVILGET',
-                                    kreverSammenhengendeUttak,
-                                    selectedItemData.utsettelseType,
-                                    currentlySelectedStønadskonto || selectedItemData.periodeType,
-                                    selectedItemData.aktiviteter.length === 1,
-                                  )
-                                }
-                                validate={[required, notDash]}
-                                label={{ id: 'UttakActivity.InnvilgelseAarsaker' }}
-                                readOnly={readOnly}
-                                bredde="fullbredde"
-                              />
-                            )}
-                            {!erOppfylt && (
-                              <SelectField
-                                name="avslagAarsak"
-                                selectValues={
-                                  mapAarsak(
-                                    periodeAarsakKoder,
-                                    'AVSLÅTT',
-                                    kreverSammenhengendeUttak,
-                                    selectedItemData.utsettelseType,
-                                    currentlySelectedStønadskonto || selectedItemData.periodeType,
-                                    selectedItemData.aktiviteter.length === 1,
-                                  )
-                                }
-                                validate={[required, notDash]}
-                                label={{ id: 'UttakActivity.AvslagAarsak' }}
-                                readOnly={readOnly}
-                                bredde="fullbredde"
-                              />
-                            )}
+                            <SelectField
+                              name="periodeAarsak"
+                              selectValues={
+                                mapAarsak(
+                                  periodeAarsakKoder,
+                                  erOppfylt ? 'INNVILGET' : 'AVSLÅTT',
+                                  kreverSammenhengendeUttak,
+                                  selectedItemData.utsettelseType,
+                                  currentlySelectedStønadskonto || selectedItemData.periodeType,
+                                  selectedItemData.aktiviteter.length === 1,
+                                )
+                              }
+                              validate={[required, notDash]}
+                              label={erOppfylt ? { id: 'UttakActivity.InnvilgelseAarsaker' } : { id: 'UttakActivity.AvslagAarsak' }}
+                              readOnly={readOnly}
+                              bredde="fullbredde"
+                            />
                             {(selectedItemData.gradertAktivitet && erOppfylt) && (
                               <div className={styles.marginTop30}>
                                 <Undertekst>
@@ -502,42 +477,13 @@ const validateUttakActivity = (values: FormValues): any => {
   return errors;
 };
 
-const getPeriodeResultatÅrsak = (erOppfylt: boolean, avslagAarsakObject: ArsakKodeverk, innvilgelseAarsakObject: ArsakKodeverk): KodeverkMedNavn => {
-  if (!erOppfylt && avslagAarsakObject) {
-    return avslagAarsakObject;
-  }
-  if (erOppfylt && innvilgelseAarsakObject) {
-    return innvilgelseAarsakObject;
-  }
-
-  return {
-    kode: '-',
-    kodeverk: '',
-    navn: '',
-  };
-};
-
-const getPeriodeUtfallÅrsak = (erOppfylt: boolean, avslagAarsakObject: ArsakKodeverk, innvilgelseAarsakObject: ArsakKodeverk): string => {
-  if (!erOppfylt && avslagAarsakObject) {
-    return avslagAarsakObject.kode;
-  }
-  if (erOppfylt && innvilgelseAarsakObject) {
-    return innvilgelseAarsakObject.kode;
-  }
-
-  return '-';
-};
-
 const transformValues = (
   values: FormValues,
-  avslagAarsakKoder: ArsakKodeverk[],
-  innvilgelseAarsakKoder: ArsakKodeverk[],
   periodeAarsakKoder: ArsakKodeverk[],
   graderingAvslagAarsakKoder: KodeverkMedNavn[],
 ): PeriodeMedClassName => {
   const { ...nyeVerdier } = omit(values, 'selectedItem');
-  const [avslagAarsakObject] = avslagAarsakKoder.filter((a) => a.kode === values.avslagAarsak);
-  const [innvilgelseAarsakObject] = innvilgelseAarsakKoder.filter((a) => a.kode === values.innvilgelseAarsak);
+  const [periodeAarsakObject] = periodeAarsakKoder.filter((a) => a.kode === values.periodeAarsak);
   const [graderingAvslagAarsakObject] = graderingAvslagAarsakKoder.filter((a) => a.kode === values.graderingAvslagAarsak);
   if (values.oppholdArsak !== oppholdArsakType.UDEFINERT) {
     nyeVerdier.UttakFieldArray[0].stønadskontoType = oppholdArsakMapper[values.oppholdArsak];
@@ -560,8 +506,7 @@ const transformValues = (
     graderingInnvilget: values.erOppfylt ? values.graderingInnvilget : false,
     oppholdÅrsak: values.oppholdArsak,
     periodeResultatType: resultatTypeObject(values.erOppfylt, values.oppholdArsak),
-    periodeResultatÅrsak: getPeriodeResultatÅrsak(values.erOppfylt, avslagAarsakObject, innvilgelseAarsakObject),
-    periodeUtfallÅrsak: getPeriodeUtfallÅrsak(values.erOppfylt, avslagAarsakObject, innvilgelseAarsakObject),
+    periodeUtfallÅrsak: periodeAarsakObject ? periodeAarsakObject.kode : '-',
     graderingAvslagÅrsak: values.erOppfylt && !values.graderingInnvilget && graderingAvslagAarsakObject ? graderingAvslagAarsakObject.kode : '-',
   };
 };
@@ -632,8 +577,7 @@ const buildInitialValues = createSelector(
       flerbarnsdager: selectedItem.flerbarnsdager,
       samtidigUttak: selectedItem.samtidigUttak,
       samtidigUttaksprosent: selectedItem.samtidigUttaksprosent ? selectedItem.samtidigUttaksprosent.toString() : undefined,
-      avslagAarsak: erOppfylt ? undefined : selectedItem.periodeUtfallÅrsak,
-      innvilgelseAarsak: erOppfylt ? selectedItem.periodeUtfallÅrsak : undefined,
+      periodeAarsak: selectedItem.periodeUtfallÅrsak,
       graderingInnvilget: selectedItem.graderingInnvilget,
       graderingAvslagAarsak: selectedItem.graderingAvslagÅrsak ? selectedItem.graderingAvslagÅrsak : '-',
       oppholdArsak: selectedItem.oppholdÅrsak,
@@ -646,8 +590,6 @@ const buildInitialValues = createSelector(
 
 const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) => {
   const { alleKodeverk } = initialOwnProps;
-  const avslagAarsaker = alleKodeverk[kodeverkTyper.IKKE_OPPFYLT_AARSAK] as ArsakKodeverk[];
-  const innvilgelseAarsaker = alleKodeverk[kodeverkTyper.INNVILGET_AARSAK] as ArsakKodeverk[];
   const periodeUtfallAarsaker = alleKodeverk[kodeverkTyper.PERIODE_UTFALL_AARSAK] as ArsakKodeverk[];
   const graderingAvslagAarsakKoder = alleKodeverk[kodeverkTyper.GRADERING_AVSLAG_AARSAK] as ArsakKodeverk[];
   const utsettelseAarsak = alleKodeverk[kodeverkTyper.UTSETTELSE_AARSAK_TYPE];
@@ -658,8 +600,6 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
   const warn = (values: FormValues) => warningUttakActivity(values);
   const onSubmit = (values: FormValues) => initialOwnProps.updateActivity(transformValues(
     values,
-    avslagAarsaker,
-    innvilgelseAarsaker,
     periodeUtfallAarsaker,
     graderingAvslagAarsakKoder,
   ));
@@ -667,7 +607,7 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
   return (state: any, ownProps: PureOwnProps): MappedOwnProps => {
     const erOppfylt = formValueSelector(uttakActivityForm)(state, 'erOppfylt');
     const begrunnelse = formValueSelector(uttakActivityForm)(state, 'begrunnelse');
-    const arsak = formValueSelector(uttakActivityForm)(state, erOppfylt ? 'innvilgelseAarsak' : 'avslagAarsak');
+    const arsak = formValueSelector(uttakActivityForm)(state, 'periodeAarsak');
     const uttakFieldArray = formValueSelector(uttakActivityForm)(state, 'UttakFieldArray');
     const hasValidationError = erOppfylt === undefined || !begrunnelse || !arsak;
     const currentlySelectedActivity = uttakFieldArray && uttakFieldArray.length > 0 ? uttakFieldArray[0] : undefined;
@@ -687,8 +627,6 @@ const mapStateToPropsFactory = (_initialState, initialOwnProps: PureOwnProps) =>
       erOppfylt,
       currentlySelectedStønadskonto,
       initialValues: buildInitialValues(ownProps),
-      avslagAarsakKoder: avslagAarsaker,
-      innvilgelseAarsakKoder: innvilgelseAarsaker,
       periodeAarsakKoder: periodeUtfallAarsaker,
       graderingInnvilget: formValueSelector(uttakActivityForm)(state, 'graderingInnvilget'),
       erSamtidigUttak: formValueSelector(uttakActivityForm)(state, 'samtidigUttak'),

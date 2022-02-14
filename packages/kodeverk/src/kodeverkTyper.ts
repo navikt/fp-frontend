@@ -1,7 +1,6 @@
 enum KodeverkType {
   ARBEID_TYPE = 'ArbeidType',
   AVSLAGSARSAK = 'Avslagsårsak',
-  INNVILGET_AARSAK = 'InnvilgetÅrsak',
   VENT_AARSAK = 'Venteårsak',
   BEHANDLING_AARSAK = 'BehandlingÅrsakType',
   KLAGE_AVVIST_AARSAK = 'KlageAvvistÅrsak',
@@ -31,7 +30,6 @@ enum KodeverkType {
   REVURDERING_VARSLING_ÅRSAK = 'RevurderingVarslingÅrsak',
   MANUELL_BEHANDLING_AARSAK = 'ManuellBehandlingÅrsak',
   UTTAK_PERIODE_VURDERING_TYPE = 'UttakPeriodeVurderingType',
-  IKKE_OPPFYLT_AARSAK = 'IkkeOppfyltÅrsak',
   PERIODE_UTFALL_AARSAK = 'PeriodeUtfallÅrsak',
   INNTEKTSKATEGORI = 'Inntektskategori',
   BEREGNINGSGRUNNLAG_ANDELTYPER = 'BeregningsgrunnlagAndeltype',
@@ -58,7 +56,6 @@ enum KodeverkType {
   KONSEKVENS_FOR_YTELSEN = 'KonsekvensForYtelsen',
   UTTAK_ARBEID_TYPE = 'UttakArbeidType',
   UTTAK_UTSETTELSE_TYPE = 'UttakUtsettelseType',
-  PERIODE_RESULTAT_AARSAK = 'PeriodeResultatÅrsak',
   VILKAR_TYPE = 'VilkårType',
   AKTSOMHET = 'Aktsomhet',
   VURDERING = 'AnnenVurdering',
