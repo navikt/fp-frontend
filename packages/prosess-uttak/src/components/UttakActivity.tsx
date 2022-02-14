@@ -506,7 +506,6 @@ const transformValues = (
     graderingInnvilget: values.erOppfylt ? values.graderingInnvilget : false,
     oppholdÅrsak: values.oppholdArsak,
     periodeResultatType: resultatTypeObject(values.erOppfylt, values.oppholdArsak),
-    periodeUtfallÅrsak: periodeAarsakObject ? periodeAarsakObject.kode : '-',
     periodeResultatÅrsak: periodeAarsakObject ? periodeAarsakObject.kode : '-',
     graderingAvslagÅrsak: values.erOppfylt && !values.graderingInnvilget && graderingAvslagAarsakObject ? graderingAvslagAarsakObject.kode : '-',
   };
