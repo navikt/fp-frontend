@@ -120,6 +120,7 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
           kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_PERMISJON,
           arbeidsforhold: values.arbeidsforhold.map((a, index) => ({
             internArbeidsforholdId: sorterteArbeidsforhold[index].internArbeidsforholdId,
+            arbeidsgiverIdent: sorterteArbeidsforhold[index].arbeidsgiverIdent,
             permisjonStatus: a.permisjonStatus,
           })),
           begrunnelse: values.begrunnelse,
