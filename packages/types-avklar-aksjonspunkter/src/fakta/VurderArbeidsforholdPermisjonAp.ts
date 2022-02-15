@@ -4,7 +4,7 @@ import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
 type VurderArbeidsforholdPermisjonAp = {
   arbeidsforhold: {
-    internArbeidsforholdRef: string;
+    internArbeidsforholdId: string;
     arbeidsgiverIdent: string;
     permisjonStatus: string;
   }[];

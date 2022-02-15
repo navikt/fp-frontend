@@ -38,7 +38,7 @@ describe('<PermisjonFaktaIndex>', () => {
       kode: '5041',
       begrunnelse: 'Dette er en begrunnelse',
       arbeidsforhold: [{
-        internArbeidsforholdRef: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
+        internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
         arbeidsgiverIdent: '910909088',
         permisjonStatus: 'IKKE_BRUK_PERMISJON',
       }],
@@ -70,11 +70,11 @@ describe('<PermisjonFaktaIndex>', () => {
       kode: '5041',
       begrunnelse: 'Dette er en begrunnelse',
       arbeidsforhold: [{
-        internArbeidsforholdRef: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d',
+        internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d',
         arbeidsgiverIdent: '910909090',
         permisjonStatus: 'IKKE_BRUK_PERMISJON',
       }, {
-        internArbeidsforholdRef: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
+        internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
         arbeidsgiverIdent: '910909088',
         permisjonStatus: 'BRUK_PERMISJON',
       }],

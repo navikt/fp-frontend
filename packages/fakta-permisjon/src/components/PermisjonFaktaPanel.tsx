@@ -119,7 +119,7 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
         onSubmit={(values) => lagreCallback({
           kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_PERMISJON,
           arbeidsforhold: values.arbeidsforhold.map((a, index) => ({
-            internArbeidsforholdRef: sorterteArbeidsforhold[index].internArbeidsforholdId,
+            internArbeidsforholdId: sorterteArbeidsforhold[index].internArbeidsforholdId,
             arbeidsgiverIdent: sorterteArbeidsforhold[index].arbeidsgiverIdent,
             permisjonStatus: a.permisjonStatus,
           })),
