@@ -40,7 +40,9 @@ type FormValues = {
   begrunnelse?: string;
 }
 
-const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (tom: string) => dateAfterOrEqual(getValues('fom'))(tom);
+const validerPeriodeRekkefølge = (
+  getValues: UseFormGetValues<FormValues>,
+) => (tom?: string) => (tom ? dateAfterOrEqual(getValues('fom'))(tom) : null);
 
 interface OwnProps {
   saksnummer: string;
@@ -208,7 +210,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
                   <DatepickerField
                     name="tom"
                     label={<Element><FormattedMessage id="ManglendeOpplysningerForm.PeriodeTil" /></Element>}
-                    validate={[required, hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
+                    validate={[hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
                     readOnly={isReadOnly}
                   />
                 </FlexColumn>
