@@ -15,6 +15,7 @@ import { TIDENES_ENDE } from '@fpsak-frontend/utils';
 import ManueltLagtTilArbeidsforholdForm from './ManueltLagtTilArbeidsforholdForm';
 import ManglendeOpplysningerForm from './ManglendeOpplysningerForm';
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
+import ArbeidsforholdInformasjonPanel from './ArbeidsforholdInformasjonPanel';
 import InntektsmeldingInnhentesForm from './InntektsmeldingInnhentesForm';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
@@ -69,6 +70,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
   const manglerArbeidsforhold = inntektsmelding?.årsak === AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD;
   const harÅpentAksjonspunkt = ((manglerInntektsmelding && !arbeidsforhold?.saksbehandlersVurdering)
     || (manglerArbeidsforhold && !inntektsmelding?.saksbehandlersVurdering));
+  const harArbeidsforholdUtenInntektsmeldingMenIngenÅrsak = arbeidsforhold && !inntektsmelding && !arbeidsforhold.årsak;
 
   const aIdent = arbeidsforhold?.arbeidsgiverIdent || inntektsmelding?.arbeidsgiverIdent;
 
@@ -120,6 +122,14 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               lagreVurdering={lagreVurdering}
               lukkArbeidsforholdRad={toggleÅpenRad}
               oppdaterTabell={oppdaterTabell}
+              skalViseArbeidsforholdId={skalViseArbeidsforholdId}
+            />
+          )}
+          {harArbeidsforholdUtenInntektsmeldingMenIngenÅrsak && (
+            <ArbeidsforholdInformasjonPanel
+              skjæringspunktDato={skjæringspunktDato}
+              inntektsposter={inntektsposter}
+              arbeidsforhold={arbeidsforhold}
               skalViseArbeidsforholdId={skalViseArbeidsforholdId}
             />
           )}

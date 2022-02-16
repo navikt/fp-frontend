@@ -727,3 +727,74 @@ ArbeidsforholdMedSammeOrgNr.args = {
     skjæringstidspunkt: '2021-11-10',
   },
 };
+
+export const FoerRegisterinnhenting = Template.bind({});
+FoerRegisterinnhenting.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
+  erOverstyrer: true,
+  aksjonspunkter: [] as Aksjonspunkt[],
+  arbeidsgiverOpplysningerPerId: {
+    947064649: {
+      erPrivatPerson: false,
+      fødselsdato: undefined,
+      identifikator: '947064649',
+      navn: 'BEDRIFT AS',
+      referanse: '947064649',
+    },
+  },
+  arbeidOgInntekt: {
+    inntektsmeldinger: [{
+      inntektPrMnd: 40000.00,
+      refusjonPrMnd: null,
+      arbeidsgiverIdent: '947064649',
+      eksternArbeidsforholdId: null,
+      internArbeidsforholdId: null,
+      kontaktpersonNavn: 'Dolly Dollesen',
+      kontaktpersonNummer: '99999999',
+      journalpostId: '524975324',
+      dokumentId: '549168225',
+      motattDato: '2022-02-15',
+      innsendingstidspunkt: '2022-02-15T15:29:53',
+      årsak: null,
+      begrunnelse: null,
+      saksbehandlersVurdering: null,
+    }],
+    arbeidsforhold: [],
+    inntekter: [],
+    skjæringstidspunkt: '2022-02-16',
+  },
+};
+
+export const AutomatiskIgnorertInntektsmelding = Template.bind({});
+AutomatiskIgnorertInntektsmelding.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
+  erOverstyrer: true,
+  aksjonspunkter: [] as Aksjonspunkt[],
+  arbeidsgiverOpplysningerPerId: {
+    947064649: {
+      erPrivatPerson: false,
+      fødselsdato: undefined,
+      identifikator: '947064649',
+      navn: 'BEDRIFT AS',
+      referanse: '947064649',
+    },
+  },
+  arbeidOgInntekt: {
+    inntektsmeldinger: [],
+    arbeidsforhold: [{
+      arbeidsgiverIdent: '947064649',
+      internArbeidsforholdId: 'f98840f3-e74b-4255-ac33-b1cdcdb60311',
+      eksternArbeidsforholdId: '2',
+      fom: '2002-02-16',
+      tom: '9999-12-31',
+      stillingsprosent: 20.00,
+      årsak: null,
+      saksbehandlersVurdering: null,
+      begrunnelse: null,
+    }],
+    inntekter: [],
+    skjæringstidspunkt: '2022-02-05',
+  },
+};

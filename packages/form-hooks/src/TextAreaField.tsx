@@ -63,6 +63,7 @@ const TextAreaField: FunctionComponent<OwnProps> = ({
       )}
       <NavTextarea
         label={<Label input={label} readOnly={false} />}
+        autoComplete="off"
         feil={getError(errors, name)}
         {...field}
         onChange={(event) => field.onChange(event.currentTarget.value !== '' ? parse(event.currentTarget.value) : undefined)}

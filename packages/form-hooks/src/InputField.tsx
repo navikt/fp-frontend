@@ -56,6 +56,7 @@ const InputField: FunctionComponent<OwnProps> = ({
       {...field}
       value={field.value ? field.value : ''}
       autoFocus={autoFocus}
+      autoComplete="off"
       onChange={(event) => field.onChange(event.currentTarget.value ? parse(event.currentTarget.value) : undefined)}
       onBlur={async (event) => {
         field.onBlur();
