@@ -223,7 +223,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   const lagreOgFortsett = useCallback(() => {
     settKnappTrykket(true);
     lagreCallback({
-      kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
+      kode: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
     });
   }, [behandling.versjon]);
 

@@ -210,6 +210,11 @@ const skjermlenkeCodes = {
     faktaNavn: FaktaPanelCode.DEFAULT,
     punktNavn: ProsessStegCode.FORTSATTMEDLEMSKAP,
   },
+  FAKTA_OM_ARBEIDSFORHOLD_INNTEKTSMELDING: {
+    kode: 'FAKTA_OM_ARBEIDSFORHOLD_INNTEKTSMELDING',
+    faktaNavn: FaktaPanelCode.ARBEID_OG_INNTEKT,
+    punktNavn: ProsessStegCode.DEFAULT,
+  },
 } as SkjermlenkeData;
 
 export default skjermlenkeCodes;
