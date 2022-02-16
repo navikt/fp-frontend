@@ -96,7 +96,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   const avbryt = useCallback(() => {
     lukkArbeidsforholdRad();
     formMethods.reset(defaultValues);
-  }, [defaultValues]);
+  }, [defaultValues, lukkArbeidsforholdRad]);
 
   const lagre = useCallback((formValues: FormValues) => {
     const oppdater = (() => {

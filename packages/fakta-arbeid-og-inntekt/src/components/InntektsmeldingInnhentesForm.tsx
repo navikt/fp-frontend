@@ -1,18 +1,14 @@
 import React, {
-  FunctionComponent, useState, useMemo, useCallback,
+  FunctionComponent, useMemo, useCallback,
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
-import dayjs from 'dayjs';
-import Lenke from 'nav-frontend-lenker';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Element } from 'nav-frontend-typografi';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 
-import pilOppIkonUrl from '@fpsak-frontend/assets/images/pil_opp.svg';
-import pilNedIkonUrl from '@fpsak-frontend/assets/images/pil_ned.svg';
 import {
-  required, hasValidText, maxLength, minLength, formatCurrencyNoKr, ISO_DATE_FORMAT,
+  required, hasValidText, maxLength, minLength,
 } from '@fpsak-frontend/utils';
 import {
   TextAreaField, RadioGroupField, RadioOption, Form,
@@ -21,42 +17,17 @@ import {
   AoIArbeidsforhold, Inntektspost, ManglendeInntektsmeldingVurdering,
 } from '@fpsak-frontend/types';
 import {
-  VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image, FloatRight,
+  VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@fpsak-frontend/shared-components';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
 import styles from './inntektsmeldingInnhentesForm.less';
+import ArbeidsforholdInformasjonPanel from './ArbeidsforholdInformasjonPanel';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
-
-type ForenkletInntektspost = {
-  beløp: number;
-  fom: string;
-}
-
-const behandleInntektsposter = (
-  skjæringspunktDato: string,
-  inntektsposter: Inntektspost[],
-): ForenkletInntektspost[] => {
-  const skjæringstidspunkt = dayjs(skjæringspunktDato);
-  const sluttPeriode = skjæringstidspunkt.startOf('month');
-  const startPeriode = sluttPeriode.subtract(12, 'month');
-
-  const poster = [];
-  for (let måned = sluttPeriode; måned.isAfter(startPeriode); måned = måned.subtract(1, 'month')) {
-    const månedString = måned.format(ISO_DATE_FORMAT);
-    const inntekt = inntektsposter.find((inn) => dayjs(inn.fom).startOf('month').format(ISO_DATE_FORMAT) === månedString);
-    poster.push({
-      beløp: inntekt?.beløp || 0,
-      fom: månedString,
-    });
-  }
-
-  return poster;
-};
 
 type FormValues = {
   saksbehandlersVurdering?: string;
@@ -97,14 +68,10 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
     defaultValues,
   });
 
-  const [visAlleMåneder, toggleMånedvisning] = useState(false);
-
-  const sorterteInntektsposter = useMemo(() => behandleInntektsposter(skjæringspunktDato, inntektsposter), [inntektsposter]);
-
   const avbryt = useCallback(() => {
     lukkArbeidsforholdRad();
     formMethods.reset(defaultValues);
-  }, [defaultValues]);
+  }, [lukkArbeidsforholdRad, defaultValues]);
 
   const lagre = useCallback((formValues: FormValues) => {
     const params = {
@@ -133,77 +100,12 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      {skalViseArbeidsforholdId && (
-        <>
-          <FlexRow>
-            <FlexColumn>
-              <Element><FormattedMessage id="ManglendeOpplysningerForm.ArbeidsforholdId" /></Element>
-            </FlexColumn>
-            <FlexColumn>
-              <Normaltekst>{arbeidsforhold.eksternArbeidsforholdId}</Normaltekst>
-            </FlexColumn>
-          </FlexRow>
-          <VerticalSpacer eightPx />
-        </>
-      )}
-      <VerticalSpacer eightPx />
-      <FlexRow>
-        <FlexColumn>
-          <Element><FormattedMessage id="InntektsmeldingInnhentesForm.Stillingsprosent" /></Element>
-        </FlexColumn>
-        <FlexColumn>
-          <Normaltekst>{`${arbeidsforhold.stillingsprosent}%`}</Normaltekst>
-        </FlexColumn>
-      </FlexRow>
-      <VerticalSpacer thirtyTwoPx />
-      {inntektsposter.length > 0 && (
-        <>
-          <Element><FormattedMessage id="InntektsmeldingInnhentesForm.Inntekter" /></Element>
-          <FlexContainer>
-            {sorterteInntektsposter.filter((_inntekt, index) => (visAlleMåneder ? true : index < 3)).map((inntekt) => (
-              <FlexRow key={inntekt.fom}>
-                <FlexColumn className={styles.maanedBredde}>
-                  <Normaltekst>
-                    <FormattedMessage id={`InntektsmeldingInnhentesForm.${dayjs(inntekt.fom).month() + 1}`} />
-                  </Normaltekst>
-                </FlexColumn>
-                <FlexColumn className={styles.aarBredde}>
-                  <Normaltekst>
-                    {dayjs(inntekt.fom).year()}
-                  </Normaltekst>
-                </FlexColumn>
-                <FlexColumn className={styles.belopBredde}>
-                  <FloatRight>
-                    <Normaltekst>
-                      {formatCurrencyNoKr(inntekt.beløp)}
-                    </Normaltekst>
-                  </FloatRight>
-                </FlexColumn>
-              </FlexRow>
-            ))}
-          </FlexContainer>
-          <Lenke
-            onClick={(e) => {
-              e.preventDefault();
-              toggleMånedvisning(!visAlleMåneder);
-            }}
-            href=""
-          >
-            <span>
-              <Normaltekst className={styles.inline}>
-                <FormattedMessage id={visAlleMåneder ? 'InntektsmeldingInnhentesForm.FaerreManeder' : 'InntektsmeldingInnhentesForm.TidligereManeder'} />
-              </Normaltekst>
-            </span>
-            <Image src={visAlleMåneder ? pilOppIkonUrl : pilNedIkonUrl} />
-          </Lenke>
-        </>
-      )}
-      {inntektsposter.length === 0 && (
-        <Element>
-          <FormattedMessage id="InntektsmeldingInnhentesForm.IngenInntekt" />
-        </Element>
-      )}
-      <VerticalSpacer thirtyTwoPx />
+      <ArbeidsforholdInformasjonPanel
+        skjæringspunktDato={skjæringspunktDato}
+        inntektsposter={inntektsposter}
+        arbeidsforhold={arbeidsforhold}
+        skalViseArbeidsforholdId={skalViseArbeidsforholdId}
+      />
       <Form formMethods={formMethods} onSubmit={lagre}>
         <FlexContainer>
           <FlexRow>
