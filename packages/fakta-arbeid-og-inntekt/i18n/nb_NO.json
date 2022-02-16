@@ -14,13 +14,13 @@
   "ArbeidOgInntektFaktaPanel.ApneForNyVurdering": "Åpne for ny vurdering",
 
   "ArbeidsforholdRad.Saksbehandler": "Saksbehandler",
-  "ArbeidsforholdRad.AaRegisteret": "A-inntekt",
+  "ArbeidsforholdRad.AaRegisteret": "A-ordningen",
   "ArbeidsforholdRad.Inntektsmelding": "Inntektsmelding",
   "ArbeidsforholdRad.Aksjonspunkt": "Åpent aksjonspunkt",
   "ArbeidsforholdRad.Ok": "Arbeidsforhold er OK",
 
   "InntektsmeldingInnhentesForm.Stillingsprosent": "Stillingsprosent",
-  "InntektsmeldingInnhentesForm.Inntekter": "Inntekter (fra A-inntekt)",
+  "InntektsmeldingInnhentesForm.Inntekter": "Inntekter (fra A-ordningen)",
   "InntektsmeldingInnhentesForm.MåInnhentes": "Må inntektsmelding innhentes?",
   "InntektsmeldingInnhentesForm.TarKontakt": "Jeg tar kontakt med arbeidsgiver for å innhente inntektsmelding",
   "InntektsmeldingInnhentesForm.GåVidere": "Gå videre uten inntektsmelding",
@@ -44,7 +44,7 @@
   "InntektsmeldingInnhentesForm.HjelpetekstDel1": "Vi trenger inntektsmelding for å behandle saken. Kontakt arbeidsgiveren per telefon. Hvis kontaktinformasjonen til arbeidsgiver er vanskelig å finne, kontakt bruker først.",
   "InntektsmeldingInnhentesForm.HjelpetekstDel2": "Det er kun unntaksvis at en sak skal behandles uten inntektsmelding, f.eks. at man etter gjentatte ganger ikke oppnår kontakt. Refusjon til arbeidsgiver er ikke mulig uten en inntektsmelding.",
   "InntektsmeldingInnhentesForm.HjelpetekstDel3": "Dersom det er flere arbeidsforhold i samme virksomhet må det sendes en inntektsmelding som gjelder samlet for alle, eller én per arbeidsforhold med arbeidsforholdsID.",
-  "InntektsmeldingInnhentesForm.IngenInntekt": "Ingen inntekt registrert på bruker i A-inntekt",
+  "InntektsmeldingInnhentesForm.IngenInntekt": "Ingen inntekt registrert på bruker i A-ordningen",
 
   "InntektsmeldingOpplysningerPanel.Stillingsprosent": "Stillingsprosent",
   "InntektsmeldingOpplysningerPanel.Inntektsmelding": "Inntektsmelding",
@@ -56,7 +56,7 @@
   "InntektsmeldingOpplysningerPanel.Tlf": "Tlf. {nr}",
   "InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding": "Åpne inntektsmelding (PDF)",
 
-  "ManglendeOpplysningerForm.ErMottattMenIkkeReg": "Inntektsmelding er mottatt, men arbeidsforholdet er ikke registrert i A-inntekt",
+  "ManglendeOpplysningerForm.ErMottattMenIkkeReg": "Inntektsmelding er mottatt, men arbeidsforholdet er ikke registrert i A-ordningen",
   "ManglendeOpplysningerForm.SkalBrukeInntekstmelding": "Skal vi bruke denne inntektsmeldingen?",
   "ManglendeOpplysningerForm.TarKontakt": "Jeg kontakter arbeidsgiver",
   "ManglendeOpplysningerForm.GåVidere": "Se bort fra inntektsmeldingen",

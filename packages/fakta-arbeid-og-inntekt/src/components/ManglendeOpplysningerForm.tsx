@@ -44,6 +44,12 @@ const validerPeriodeRekkefølge = (
   getValues: UseFormGetValues<FormValues>,
 ) => (tom?: string) => (tom ? dateAfterOrEqual(getValues('fom'))(tom) : null);
 
+const erMatch = (
+  inntektsmelding1: Inntektsmelding,
+  inntektsmelding2?: Inntektsmelding,
+) => inntektsmelding1.arbeidsgiverIdent === inntektsmelding2?.arbeidsgiverIdent
+  && inntektsmelding2.internArbeidsforholdId === inntektsmelding2?.internArbeidsforholdId;
+
 interface OwnProps {
   saksnummer: string;
   behandlingUuid: string;
@@ -95,7 +101,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   const lagre = useCallback((formValues: FormValues) => {
     const oppdater = (() => {
       oppdaterTabell((oldData) => oldData.map((data) => {
-        if (data.inntektsmelding?.internArbeidsforholdId === inntektsmelding.internArbeidsforholdId) {
+        if (erMatch(inntektsmelding, data.inntektsmelding)) {
           const af = formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING ? {
             arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
             internArbeidsforholdId: inntektsmelding.internArbeidsforholdId,
