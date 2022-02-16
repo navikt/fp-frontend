@@ -11,7 +11,8 @@ import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import { dateFormat } from '@fpsak-frontend/utils';
 import {
-  Aksjonspunkt, AlleKodeverk, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, Behandling, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold,
+  Aksjonspunkt, AlleKodeverk, AoIArbeidsforhold, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId,
+  Behandling, Inntektsmelding, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold,
 } from '@fpsak-frontend/types';
 import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
@@ -83,6 +84,12 @@ const sorterTabell = (d1: ArbeidsforholdOgInntekt, d2: ArbeidsforholdOgInntekt):
   return d1.arbeidsgiverNavn.localeCompare(d2.arbeidsgiverNavn);
 };
 
+const erMatch = (
+  arbeidsforhold: AoIArbeidsforhold,
+  inntektsmelding: Inntektsmelding,
+) => inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent
+  && (!inntektsmelding.internArbeidsforholdId || inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);
+
 const byggTabellStruktur = (
   arbeidOgInntekt: ArbeidOgInntektsmelding,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
@@ -92,11 +99,11 @@ const byggTabellStruktur = (
   const alleArbeidsforhold = arbeidsforhold.map<ArbeidsforholdOgInntekt>((af) => ({
     arbeidsforhold: af,
     arbeidsgiverNavn: arbeidsgiverOpplysningerPerId[af.arbeidsgiverIdent].navn,
-    inntektsmelding: inntektsmeldinger.find((inntektsmelding) => inntektsmelding.internArbeidsforholdId === af.internArbeidsforholdId),
+    inntektsmelding: inntektsmeldinger.find((inntektsmelding) => erMatch(af, inntektsmelding)),
     inntektsposter: inntekter.find((inntekt) => inntekt.arbeidsgiverIdent === af.arbeidsgiverIdent)?.inntekter,
   }));
   const alleInntektsmeldingerSomManglerArbeidsforhold = arbeidOgInntekt.inntektsmeldinger
-    .filter((im) => !arbeidsforhold.some((af) => im.internArbeidsforholdId === af.internArbeidsforholdId))
+    .filter((im) => !arbeidsforhold.some((af) => erMatch(af, im)))
     .map<ArbeidsforholdOgInntekt>((im) => ({
       arbeidsforhold: undefined,
       arbeidsgiverNavn: arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent].navn,

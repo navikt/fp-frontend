@@ -37,7 +37,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(screen.getByText('Stillingsprosent')).toBeInTheDocument();
     expect(screen.getByText('100%')).toBeInTheDocument();
-    expect(screen.getByText('Inntekter (fra A-inntekt)')).toBeInTheDocument();
+    expect(screen.getByText('Inntekter (fra A-ordningen)')).toBeInTheDocument();
 
     expect(screen.getByText('Lagre')).toBeDisabled();
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
@@ -116,7 +116,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(screen.getByText('Kontaktinfo')).toBeInTheDocument();
     expect(screen.getByText('Corpolarsen')).toBeInTheDocument();
     expect(screen.getByText('Tlf. 41925090')).toBeInTheDocument();
-    expect(screen.getByText('Inntektsmelding er mottatt, men arbeidsforholdet er ikke registrert i A-inntekt')).toBeInTheDocument();
+    expect(screen.getByText('Inntektsmelding er mottatt, men arbeidsforholdet er ikke registrert i A-ordningen')).toBeInTheDocument();
 
     expect(screen.getByText('Lagre')).toBeDisabled();
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
