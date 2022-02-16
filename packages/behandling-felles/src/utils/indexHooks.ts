@@ -129,8 +129,10 @@ export const useInitBehandlingHandlinger = (
   hentBehandling: (keepData: boolean) => Promise<Behandling | undefined>,
   setBehandling: (behandling: Behandling) => void,
   behandling?: Behandling,
-): void => {
+): boolean => {
   const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
+
+  const [harSattPåVent, settPåVent] = useState(false);
 
   const { startRequest: nyBehandlendeEnhet } = useRestApiRunner<void, NyBehandlendeEnhetParams>(keys.BEHANDLING_NY_BEHANDLENDE_ENHET);
   const { startRequest: settBehandlingPaVent } = useRestApiRunner<void,
@@ -150,7 +152,7 @@ export const useInitBehandlingHandlinger = (
         endreBehandlendeEnhet: (params) => nyBehandlendeEnhet(leggTilBehandlingIdentifikator(behandling, params))
           .then(() => hentBehandling(true)),
         settBehandlingPaVent: (params) => settBehandlingPaVent(leggTilBehandlingIdentifikator(behandling, params))
-          .then(() => hentBehandling(true)),
+          .then(() => { settPåVent(true); hentBehandling(true); }),
         taBehandlingAvVent: () => taBehandlingAvVent(leggTilBehandlingIdentifikator(behandling, {}))
           .then((behandlingResTaAvVent?: Behandling) => behandlingResTaAvVent && setBehandling(behandlingResTaAvVent)),
         henleggBehandling: (params) => henleggBehandling(leggTilBehandlingIdentifikator(behandling, params)),
@@ -168,4 +170,5 @@ export const useInitBehandlingHandlinger = (
       behandlingEventHandler.clear();
     };
   }, [behandling?.versjon]);
+  return harSattPåVent;
 };

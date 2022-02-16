@@ -59,7 +59,7 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<StandardBehandlingPro
     requestSvpApi, setBehandling, SvpBehandlingApiKeys.SAVE_AKSJONSPUNKT, SvpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT,
   );
 
-  useInitBehandlingHandlinger(requestSvpApi, SvpBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling, behandling);
+  const skalIkkeViseModal = useInitBehandlingHandlinger(requestSvpApi, SvpBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling, behandling);
 
   const { data: opplysningsdata, state: opplysningsdataState } = restApiSvpHooks.useMultipleRestApi<{
     arbeidsgivereOversikt: ArbeidsgiverOpplysningerWrapper,
@@ -86,6 +86,7 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<StandardBehandlingPro
         requestApi={requestSvpApi}
         oppdaterPaVentKey={SvpBehandlingApiKeys.UPDATE_ON_HOLD}
         aksjonspunktKey={SvpBehandlingApiKeys.AKSJONSPUNKTER}
+        skalIkkeViseModal={skalIkkeViseModal}
       />
       <StandardPropsProvider
         behandling={behandling}

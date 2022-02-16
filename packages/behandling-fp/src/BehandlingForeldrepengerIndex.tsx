@@ -67,7 +67,7 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
     requestFpApi, setBehandling, FpBehandlingApiKeys.SAVE_AKSJONSPUNKT, FpBehandlingApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT,
   );
 
-  useInitBehandlingHandlinger(requestFpApi, FpBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling, behandling);
+  const skalIkkeViseModal = useInitBehandlingHandlinger(requestFpApi, FpBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling, behandling);
 
   const { data: opplysningsdata, state: opplysningsdataState } = restApiFpHooks.useMultipleRestApi<{
     arbeidsgivereOversikt: ArbeidsgiverOpplysningerWrapper,
@@ -94,6 +94,7 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
         requestApi={requestFpApi}
         oppdaterPaVentKey={FpBehandlingApiKeys.UPDATE_ON_HOLD}
         aksjonspunktKey={FpBehandlingApiKeys.AKSJONSPUNKTER}
+        skalIkkeViseModal={skalIkkeViseModal}
       />
       <StandardPropsProvider
         behandling={behandling}
