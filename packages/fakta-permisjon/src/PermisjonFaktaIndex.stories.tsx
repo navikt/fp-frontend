@@ -114,7 +114,7 @@ export const FlereArbeidsforhold = Template.bind({});
 FlereArbeidsforhold.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
     status: aksjonspunktStatus.OPPRETTET,
   }] as Aksjonspunkt[],
   arbeidsgiverOpplysningerPerId: {

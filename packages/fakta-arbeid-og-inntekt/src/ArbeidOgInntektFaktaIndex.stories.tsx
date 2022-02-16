@@ -78,7 +78,7 @@ InnhentInntektsmelding.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
     status: aksjonspunktStatus.OPPRETTET,
   } as Aksjonspunkt],
   arbeidsgiverOpplysningerPerId: {
@@ -139,7 +139,7 @@ InnhentInntektsmeldingDerEnIkkeHarInntekterFraAAregisteret.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
     status: aksjonspunktStatus.OPPRETTET,
   } as Aksjonspunkt],
   arbeidsgiverOpplysningerPerId: {
@@ -172,7 +172,7 @@ InnhentInntektsmeldingDerBehandlingErAvsluttet.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
     status: aksjonspunktStatus.UTFORT,
   } as Aksjonspunkt],
   arbeidsgiverOpplysningerPerId: {
@@ -208,7 +208,7 @@ AvklarManglendeOpplysninger.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
     status: aksjonspunktStatus.OPPRETTET,
   } as Aksjonspunkt],
   arbeidsgiverOpplysningerPerId: {
@@ -246,7 +246,7 @@ AvklarManglendeOpplysningerDerBehandlingErAvsluttet.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
     status: aksjonspunktStatus.UTFORT,
   } as Aksjonspunkt],
   arbeidsgiverOpplysningerPerId: {
@@ -294,7 +294,7 @@ AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppMulig.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
-    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
     status: aksjonspunktStatus.UTFORT,
   } as Aksjonspunkt],
   arbeidsgiverOpplysningerPerId: {
@@ -495,7 +495,7 @@ FlereArbeidsforholdOgInntekstemeldinger.args = {
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   erOverstyrer: true,
   aksjonspunkter: [{
-    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
     status: aksjonspunktStatus.OPPRETTET,
   }] as Aksjonspunkt[],
   arbeidsgiverOpplysningerPerId: {
@@ -631,7 +631,7 @@ ArbeidsforholdMedSammeOrgNr.args = {
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   erOverstyrer: true,
   aksjonspunkter: [{
-    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING_KODE,
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
     status: aksjonspunktStatus.OPPRETTET,
   }] as Aksjonspunkt[],
   arbeidsgiverOpplysningerPerId: {
