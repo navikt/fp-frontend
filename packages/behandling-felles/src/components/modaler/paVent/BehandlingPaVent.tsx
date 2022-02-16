@@ -29,6 +29,7 @@ interface BehandlingPaVentProps {
   aksjonspunktKey: RestKey<Aksjonspunkt[], void>;
   hentBehandling: (keepData: boolean) => Promise<any>;
   erTilbakekreving?: boolean;
+  skalIkkeViseModal?: boolean;
 }
 
 const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
@@ -39,10 +40,11 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
   aksjonspunktKey,
   hentBehandling,
   erTilbakekreving = false,
+  skalIkkeViseModal = false,
 }) => {
   const restApiHooks = RestApiHooks.initHooks(requestApi);
 
-  const [skalViseModal, setVisModal] = useState(behandling.behandlingPaaVent);
+  const [skalViseModal, setVisModal] = useState(!skalIkkeViseModal && behandling.behandlingPaaVent);
   const skjulModal = useCallback(() => setVisModal(false), []);
 
   const { data: aksjonspunkter = EMPTY_ARRAY } = restApiHooks.useRestApi(aksjonspunktKey, undefined, {
@@ -53,8 +55,10 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
   const { startRequest: settPaVent } = restApiHooks.useRestApiRunner(oppdaterPaVentKey);
 
   useEffect(() => {
-    setVisModal(behandling.behandlingPaaVent);
-  }, [behandling.versjon]);
+    if (!skalIkkeViseModal) {
+      setVisModal(behandling.behandlingPaaVent);
+    }
+  }, [behandling.versjon, skalIkkeViseModal]);
 
   const oppdaterPaVentData = useCallback((formData: { ventearsak: string; frist?: string; }) => settPaVent({
     ...formData, behandlingUuid: behandling.uuid, behandlingVersjon: behandling.versjon,
