@@ -39,7 +39,9 @@ export type FormValues = {
   begrunnelse: string;
 }
 
-const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (tom: string) => dateAfterOrEqual(getValues('fom'))(tom);
+const validerPeriodeRekkefølge = (
+  getValues: UseFormGetValues<FormValues>,
+) => (tom?: string) => (tom ? dateAfterOrEqual(getValues('fom'))(tom) : null);
 
 interface OwnProps {
   behandlingUuid: string;
@@ -171,7 +173,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                   <DatepickerField
                     name="tom"
                     label={<Element><FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeTil" /></Element>}
-                    validate={[required, hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
+                    validate={[hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
                     readOnly={isReadOnly || !erOverstyrt}
                   />
                 </FlexColumn>
