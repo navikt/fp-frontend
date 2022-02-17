@@ -274,7 +274,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
             </FlexRow>
           </FlexContainer>
         )}
-        <VerticalSpacer thirtyTwoPx />
+        <VerticalSpacer fourtyPx />
       </Form>
     </>
   );

@@ -147,6 +147,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
         </>
       )}
+      <VerticalSpacer eightPx />
       <Form formMethods={formMethods} onSubmit={lagreArbeidsforhold}>
         <FlexContainer>
           <FlexRow>
@@ -194,7 +195,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
             </FlexColumn>
           </FlexRow>
         </FlexContainer>
-        <VerticalSpacer sixteenPx />
+        <VerticalSpacer twentyPx />
         <TextAreaField
           label={<Element><FormattedMessage id="LeggTilArbeidsforholdForm.Begrunn" /></Element>}
           name="begrunnelse"
@@ -202,7 +203,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
           maxLength={1500}
           readOnly={isReadOnly || !erOverstyrt}
         />
-        <VerticalSpacer sixteenPx />
+        <VerticalSpacer twentyPx />
         {erOverstyrt && (
           <Row>
             <Column xs="8">
@@ -250,6 +251,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
             )}
           </Row>
         )}
+        <VerticalSpacer fourtyPx />
       </Form>
       {visSletteDialog && (
         <OkAvbrytModal

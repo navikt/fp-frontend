@@ -180,7 +180,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
             </FlexRow>
           </FlexContainer>
         )}
-        <VerticalSpacer thirtyTwoPx />
+        <VerticalSpacer fourtyPx />
       </Form>
     </>
   );

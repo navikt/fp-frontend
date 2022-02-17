@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import classnames from 'classnames/bind';
 import { Normaltekst, Element, Undertekst } from 'nav-frontend-typografi';
 
 import {
@@ -19,6 +20,10 @@ import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel
 import ArbeidsforholdInformasjonPanel from './ArbeidsforholdInformasjonPanel';
 import InntektsmeldingInnhentesForm from './InntektsmeldingInnhentesForm';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
+
+import styles from './arbeidsforholdRad.less';
+
+const classNames = classnames.bind(styles);
 
 const finnKildekode = (
   erManueltOpprettet: boolean,
@@ -71,7 +76,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
   const manglerArbeidsforhold = inntektsmelding?.årsak === AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD;
   const harÅpentAksjonspunkt = ((manglerInntektsmelding && !arbeidsforhold?.saksbehandlersVurdering)
     || (manglerArbeidsforhold && !inntektsmelding?.saksbehandlersVurdering));
-  const harArbeidsforholdUtenInntektsmeldingMenIngenÅrsak = arbeidsforhold && !inntektsmelding && !arbeidsforhold.årsak;
+  const harArbeidsforholdUtenInntektsmeldingMenIngenÅrsak = arbeidsforhold && !inntektsmelding && !arbeidsforhold.årsak && !erManueltOpprettet;
   const førRegisterInnhenting = !arbeidsforhold && inntektsmelding && !inntektsmelding.årsak;
 
   const aIdent = arbeidsforhold?.arbeidsgiverIdent || inntektsmelding?.arbeidsgiverIdent;
@@ -141,7 +146,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
       toggleContent={toggleÅpenRad}
       isApLeftBorder={harÅpentAksjonspunkt}
     >
-      <TableColumn>
+      <TableColumn className={classNames('ikon', erRadÅpen ? 'colTopPadding' : undefined)}>
         {!førRegisterInnhenting && !harÅpentAksjonspunkt && (
           <Image alt={intl.formatMessage({ id: 'ArbeidsforholdRad.Ok' })} src={okIkonUrl} />
         )}
@@ -152,7 +157,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
           <Image alt={intl.formatMessage({ id: 'ArbeidsforholdRad.KanIkkeLøses' })} src={utropstegnIkonUrl} />
         )}
       </TableColumn>
-      <TableColumn>
+      <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
         {erRadÅpen && (
           <>
             <Element>
@@ -173,7 +178,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
           </Normaltekst>
         )}
       </TableColumn>
-      <TableColumn>
+      <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
         <Normaltekst>
           {arbeidsforhold && (
             <PeriodLabel dateStringFom={arbeidsforhold.fom} dateStringTom={arbeidsforhold.tom !== TIDENES_ENDE ? arbeidsforhold.tom : undefined} />
@@ -181,12 +186,12 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
           {!arbeidsforhold && '-'}
         </Normaltekst>
       </TableColumn>
-      <TableColumn>
+      <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
         <Normaltekst>
           <FormattedMessage id={finnKildekode(erManueltOpprettet, arbeidsforhold)} />
         </Normaltekst>
       </TableColumn>
-      <TableColumn>
+      <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
         <Normaltekst>
           {inntektsmelding?.motattDato && (
             <DateTimeLabel dateTimeString={inntektsmelding.motattDato} useNewFormat />
