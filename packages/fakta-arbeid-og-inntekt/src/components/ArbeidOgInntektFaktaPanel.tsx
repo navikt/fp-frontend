@@ -173,6 +173,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   const { arbeidsforhold, inntektsmeldinger } = arbeidOgInntekt;
 
   const erAksjonspunktAvsluttet = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.UTFORT);
+  const erOverstyrerOgIngenAksjonspunkt = aksjonspunkter.length === 0 && erOverstyrer;
   const erReadOnlyEllerHarAvsluttetAksjonspunkt = readOnly || erAksjonspunktAvsluttet;
 
   const [erKnappTrykket, settKnappTrykket] = useState(false);
@@ -254,7 +255,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
               <FlexColumn>
                 <Undertittel><FormattedMessage id="ArbeidOgInntektFaktaPanel.Overskrift" /></Undertittel>
               </FlexColumn>
-              {erOverstyrer && !erReadOnlyEllerHarAvsluttetAksjonspunkt && (
+              {erOverstyrer && !erReadOnlyEllerHarAvsluttetAksjonspunkt && !erOverstyrerOgIngenAksjonspunkt && (
                 <FlexColumn>
                   <OverstyringKnapp onClick={toggleOverstyring} />
                 </FlexColumn>
@@ -370,7 +371,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           <FormattedMessage id="ArbeidOgInntektFaktaPanel.Bekreft" />
         </Hovedknapp>
       )}
-      {(!readOnly && erAksjonspunktAvsluttet) && (
+      {(!readOnly && (erAksjonspunktAvsluttet || erOverstyrerOgIngenAksjonspunkt)) && (
         <Hovedknapp
           mini
           disabled={erKnappTrykket}

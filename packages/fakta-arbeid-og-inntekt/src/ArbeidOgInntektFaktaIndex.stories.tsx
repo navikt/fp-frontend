@@ -335,12 +335,60 @@ AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppMulig.args = {
     skjæringstidspunkt: '2021-11-10',
   },
   readOnly: false,
+  erOverstyrer: true,
 };
 
-export const SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnErOverstyrer = Template.bind({});
-SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnErOverstyrer.args = {
+export const IngenAksjonspunktMenTilbakehoppMuligForOverstyrer = Template.bind({});
+IngenAksjonspunktMenTilbakehoppMuligForOverstyrer.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
+  aksjonspunkter: [],
+  arbeidsgiverOpplysningerPerId: {
+    910909088: {
+      erPrivatPerson: false,
+      fødselsdato: undefined,
+      identifikator: '910909088',
+      navn: 'BEDRIFT AS',
+      referanse: '910909088',
+    },
+  },
+  arbeidOgInntekt: {
+    arbeidsforhold: [{
+      arbeidsgiverIdent: '910909088',
+      internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
+      eksternArbeidsforholdId: 'ARB001-001',
+      fom: '2021-10-06',
+      tom: '2021-12-12',
+      stillingsprosent: 100,
+    }],
+    inntektsmeldinger: [{
+      arbeidsgiverIdent: '910909088',
+      eksternArbeidsforholdId: 'ARB001-001',
+      innsendingstidspunkt: '2021-12-06T10:52:13.377',
+      inntektPrMnd: 30000,
+      internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
+      kontaktpersonNavn: 'Corpolarsen',
+      kontaktpersonNummer: '41925090',
+      motattDato: '2021-12-06',
+      refusjonPrMnd: undefined,
+      journalpostId: '1',
+      dokumentId: '2',
+    }],
+    inntekter: [],
+    skjæringstidspunkt: '2021-11-10',
+  },
+  readOnly: false,
+  erOverstyrer: true,
+};
+
+export const SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnHarReåpnetOgEnErOverstyrer = Template.bind({});
+SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnHarReåpnetOgEnErOverstyrer.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
+  aksjonspunkter: [{
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+    status: aksjonspunktStatus.OPPRETTET,
+  } as Aksjonspunkt],
   arbeidOgInntekt: {
     arbeidsforhold: [],
     inntektsmeldinger: [],
@@ -362,10 +410,14 @@ SkalIkkeKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldi
   },
 };
 
-export const ArbeidsforholdErManueltLagtTilOgLagret = Template.bind({});
-ArbeidsforholdErManueltLagtTilOgLagret.args = {
+export const ArbeidsforholdErManueltLagtTilOgLagretOgReåpnet = Template.bind({});
+ArbeidsforholdErManueltLagtTilOgLagretOgReåpnet.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
+  aksjonspunkter: [{
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+    status: aksjonspunktStatus.OPPRETTET,
+  } as Aksjonspunkt],
   arbeidsgiverOpplysningerPerId: {
     [MANUELT_ORG_NR]: {
       erPrivatPerson: false,
@@ -733,6 +785,7 @@ FoerRegisterinnhenting.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
   erOverstyrer: true,
+  readOnly: true,
   aksjonspunkter: [] as Aksjonspunkt[],
   arbeidsgiverOpplysningerPerId: {
     947064649: {
@@ -770,7 +823,7 @@ export const AutomatiskIgnorertInntektsmelding = Template.bind({});
 AutomatiskIgnorertInntektsmelding.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
-  erOverstyrer: true,
+  erOverstyrer: false,
   aksjonspunkter: [] as Aksjonspunkt[],
   arbeidsgiverOpplysningerPerId: {
     947064649: {
@@ -880,62 +933,8 @@ EtterAtEtterspurtInntektsmeldingErKommet.args = {
         inntekter: [
           {
             beløp: 15000.00,
-            fom: '2021-02-01',
-            tom: '2021-02-28',
-            type: 'LØNN',
-          },
-          {
-            beløp: 15000.00,
-            fom: '2021-03-01',
-            tom: '2021-03-31',
-            type: 'LØNN',
-          },
-          {
-            beløp: 15000.00,
-            fom: '2021-04-01',
-            tom: '2021-04-30',
-            type: 'LØNN',
-          },
-          {
-            beløp: 15000.00,
-            fom: '2021-05-01',
-            tom: '2021-05-31',
-            type: 'LØNN',
-          },
-          {
-            beløp: 15000.00,
-            fom: '2021-06-01',
-            tom: '2021-06-30',
-            type: 'LØNN',
-          },
-          {
-            beløp: 15000.00,
-            fom: '2021-07-01',
-            tom: '2021-07-31',
-            type: 'LØNN',
-          },
-          {
-            beløp: 15000.00,
-            fom: '2021-08-01',
-            tom: '2021-08-31',
-            type: 'LØNN',
-          },
-          {
-            beløp: 15000.00,
-            fom: '2021-09-01',
-            tom: '2021-09-30',
-            type: 'LØNN',
-          },
-          {
-            beløp: 15000.00,
             fom: '2021-10-01',
-            tom: '2021-10-31',
-            type: 'LØNN',
-          },
-          {
-            beløp: 15000.00,
-            fom: '2021-11-01',
-            tom: '2021-11-30',
+            tom: '2021-02-28',
             type: 'LØNN',
           },
         ],
@@ -945,64 +944,11 @@ EtterAtEtterspurtInntektsmeldingErKommet.args = {
         inntekter: [
           {
             beløp: 20000.00,
-            fom: '2021-02-01',
+            fom: '2021-10-01',
             tom: '2021-02-28',
             type: 'LØNN',
           },
-          {
-            beløp: 20000.00,
-            fom: '2021-03-01',
-            tom: '2021-03-31',
-            type: 'LØNN',
-          },
-          {
-            beløp: 20000.00,
-            fom: '2021-04-01',
-            tom: '2021-04-30',
-            type: 'LØNN',
-          },
-          {
-            beløp: 20000.00,
-            fom: '2021-05-01',
-            tom: '2021-05-31',
-            type: 'LØNN',
-          },
-          {
-            beløp: 20000.00,
-            fom: '2021-06-01',
-            tom: '2021-06-30',
-            type: 'LØNN',
-          },
-          {
-            beløp: 20000.00,
-            fom: '2021-07-01',
-            tom: '2021-07-31',
-            type: 'LØNN',
-          },
-          {
-            beløp: 20000.00,
-            fom: '2021-08-01',
-            tom: '2021-08-31',
-            type: 'LØNN',
-          },
-          {
-            beløp: 20000.00,
-            fom: '2021-09-01',
-            tom: '2021-09-30',
-            type: 'LØNN',
-          },
-          {
-            beløp: 20000.00,
-            fom: '2021-10-01',
-            tom: '2021-10-31',
-            type: 'LØNN',
-          },
-          {
-            beløp: 20000.00,
-            fom: '2021-11-01',
-            tom: '2021-11-30',
-            type: 'LØNN',
-          },
+
         ],
       },
     ],
