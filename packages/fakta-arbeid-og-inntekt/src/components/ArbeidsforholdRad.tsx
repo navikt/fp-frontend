@@ -6,6 +6,7 @@ import {
   AoIArbeidsforhold, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold, AksjonspunktÅrsak,
 } from '@fpsak-frontend/types';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
+import utropstegnIkonUrl from '@fpsak-frontend/assets/images/utropstegn.svg';
 import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
 import {
   Image, TableColumn, PeriodLabel, DateTimeLabel, ExpandableTableRow,
@@ -71,6 +72,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
   const harÅpentAksjonspunkt = ((manglerInntektsmelding && !arbeidsforhold?.saksbehandlersVurdering)
     || (manglerArbeidsforhold && !inntektsmelding?.saksbehandlersVurdering));
   const harArbeidsforholdUtenInntektsmeldingMenIngenÅrsak = arbeidsforhold && !inntektsmelding && !arbeidsforhold.årsak;
+  const førRegisterInnhenting = !arbeidsforhold && inntektsmelding && !inntektsmelding.årsak;
 
   const aIdent = arbeidsforhold?.arbeidsgiverIdent || inntektsmelding?.arbeidsgiverIdent;
 
@@ -90,10 +92,10 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               oppdaterTabell={oppdaterTabell}
             />
           )}
-          {harArbeidsforholdOgInntektsmelding && (
+          {(harArbeidsforholdOgInntektsmelding || førRegisterInnhenting) && (
             <InntektsmeldingOpplysningerPanel
               saksnummer={saksnummer}
-              stillingsprosent={arbeidsforhold.stillingsprosent}
+              stillingsprosent={arbeidsforhold?.stillingsprosent}
               inntektsmelding={inntektsmelding}
             />
           )}
@@ -140,11 +142,14 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
       isApLeftBorder={harÅpentAksjonspunkt}
     >
       <TableColumn>
-        {!harÅpentAksjonspunkt && (
+        {!førRegisterInnhenting && !harÅpentAksjonspunkt && (
           <Image alt={intl.formatMessage({ id: 'ArbeidsforholdRad.Ok' })} src={okIkonUrl} />
         )}
-        {harÅpentAksjonspunkt && (
+        {!førRegisterInnhenting && harÅpentAksjonspunkt && (
           <Image alt={intl.formatMessage({ id: 'ArbeidsforholdRad.Aksjonspunkt' })} src={advarselIkonUrl} />
+        )}
+        {førRegisterInnhenting && (
+          <Image alt={intl.formatMessage({ id: 'ArbeidsforholdRad.KanIkkeLøses' })} src={utropstegnIkonUrl} />
         )}
       </TableColumn>
       <TableColumn>

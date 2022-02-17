@@ -18,6 +18,7 @@
   "ArbeidsforholdRad.Inntektsmelding": "Inntektsmelding",
   "ArbeidsforholdRad.Aksjonspunkt": "Åpent aksjonspunkt",
   "ArbeidsforholdRad.Ok": "Arbeidsforhold er OK",
+  "ArbeidsforholdRad.KanIkkeLøses": "Arbeidsforhold kan ikke løses nå",
 
   "InntektsmeldingInnhentesForm.MåInnhentes": "Må inntektsmelding innhentes?",
   "InntektsmeldingInnhentesForm.TarKontakt": "Jeg tar kontakt med arbeidsgiver for å innhente inntektsmelding",

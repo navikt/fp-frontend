@@ -14,9 +14,9 @@ const {
   InnhentInntektsmelding,
   AvklarManglendeOpplysninger,
   AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppMulig,
-  SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnErOverstyrer,
+  SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnHarReåpnetOgEnErOverstyrer,
   SkalIkkeKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnIkkeErOverstyrer,
-  ArbeidsforholdErManueltLagtTilOgLagret,
+  ArbeidsforholdErManueltLagtTilOgLagretOgReåpnet,
   ArbeidsforholdErOK,
 } = composeStories(stories);
 
@@ -243,7 +243,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     const registrerArbeidsforhold = jest.fn(() => Promise.resolve());
 
     const utils = render(
-      <SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnErOverstyrer
+      <SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInntektsmeldingerFinnesOgEnHarReåpnetOgEnErOverstyrer
         submitCallback={bekrefteAksjonspunkt}
         registrerArbeidsforhold={registrerArbeidsforhold}
       />,
@@ -313,7 +313,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     const registrerArbeidsforhold = jest.fn(() => Promise.resolve());
 
     render(
-      <ArbeidsforholdErManueltLagtTilOgLagret
+      <ArbeidsforholdErManueltLagtTilOgLagretOgReåpnet
         submitCallback={bekrefteAksjonspunkt}
         registrerArbeidsforhold={registrerArbeidsforhold}
       />,
