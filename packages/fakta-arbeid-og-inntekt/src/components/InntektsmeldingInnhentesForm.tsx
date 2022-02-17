@@ -109,12 +109,12 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
       <Form formMethods={formMethods} onSubmit={lagre}>
         <FlexContainer>
           <FlexRow>
-            <FlexColumn>
+            <FlexColumn className={styles.radioHeader}>
               <Element><FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" /></Element>
             </FlexColumn>
             <FlexColumn>
               <Hjelpetekst
-                /* @ts-ignore */
+              /* @ts-ignore */
                 popoverProps={{ className: styles.hjelpetekst }}
               >
                 <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel1" />
@@ -125,26 +125,22 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
               </Hjelpetekst>
             </FlexColumn>
           </FlexRow>
-          <FlexRow>
-            <FlexColumn>
-              <RadioGroupField
-                name="saksbehandlersVurdering"
-                validate={[required]}
-                readOnly={isReadOnly}
-                direction="vertical"
-              >
-                <RadioOption
-                  value={ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING}
-                  label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.TarKontakt' })}
-                />
-                <RadioOption
-                  value={ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING}
-                  label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.GåVidere' })}
-                />
-              </RadioGroupField>
-            </FlexColumn>
-          </FlexRow>
         </FlexContainer>
+        <RadioGroupField
+          name="saksbehandlersVurdering"
+          validate={[required]}
+          readOnly={isReadOnly}
+          direction="vertical"
+        >
+          <RadioOption
+            value={ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING}
+            label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.TarKontakt' })}
+          />
+          <RadioOption
+            value={ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING}
+            label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.GåVidere' })}
+          />
+        </RadioGroupField>
         <TextAreaField
           label={<Element><FormattedMessage id="InntektsmeldingInnhentesForm.Begrunn" /></Element>}
           name="begrunnelse"
