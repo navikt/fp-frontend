@@ -1,7 +1,7 @@
 import React, {
   FunctionComponent, useState, useEffect, useCallback, useMemo,
 } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import Lenke from 'nav-frontend-lenker';
@@ -170,6 +170,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   åpneForNyVurdering,
 }) => {
+  const intl = useIntl();
   const { arbeidsforhold, inntektsmeldinger } = arbeidOgInntekt;
 
   const erAksjonspunktAvsluttet = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.UTFORT);
@@ -277,9 +278,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
       <VerticalSpacer thirtyTwoPx />
       {aksjonspunktTekstKoder.length > 0 && (
         <AksjonspunktHelpTextHTML>
-          {aksjonspunktTekstKoder.map((tekstKode) => (
-            <FormattedMessage key={tekstKode} id={tekstKode} />
-          ))}
+          {aksjonspunktTekstKoder.map((kode) => intl.formatMessage({ id: kode })).join(' ')}
         </AksjonspunktHelpTextHTML>
       )}
       {harIngenArbeidsforholdEllerInntektsmeldinger && erOverstyrer && (

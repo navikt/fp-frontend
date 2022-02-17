@@ -87,6 +87,7 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
       {inntektsposter.length > 0 && (
         <>
           <Element><FormattedMessage id="ArbeidsforholdInformasjonPanel.Inntekter" /></Element>
+          <VerticalSpacer fourPx />
           <FlexContainer>
             {sorterteInntektsposter.filter((_inntekt, index) => (visAlleMåneder ? true : index < 3)).map((inntekt) => (
               <FlexRow key={inntekt.fom}>
@@ -110,6 +111,7 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
               </FlexRow>
             ))}
           </FlexContainer>
+          <VerticalSpacer fourPx />
           <Lenke
             onClick={(e) => {
               e.preventDefault();
@@ -122,7 +124,7 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
                 <FormattedMessage id={visAlleMåneder ? 'ArbeidsforholdInformasjonPanel.FaerreManeder' : 'ArbeidsforholdInformasjonPanel.TidligereManeder'} />
               </Normaltekst>
             </span>
-            <Image src={visAlleMåneder ? pilOppIkonUrl : pilNedIkonUrl} />
+            <Image className={styles.arrow} src={visAlleMåneder ? pilOppIkonUrl : pilNedIkonUrl} />
           </Lenke>
         </>
       )}

@@ -162,9 +162,9 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
         </>
       )}
       <InntektsmeldingOpplysningerPanel saksnummer={saksnummer} inntektsmelding={inntektsmelding} />
-      <VerticalSpacer thirtyTwoPx />
+      <VerticalSpacer fourtyPx />
       <AlertStripeInfo><FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" /></AlertStripeInfo>
-      <VerticalSpacer sixteenPx />
+      <VerticalSpacer thirtyTwoPx />
       <Form formMethods={formMethods} onSubmit={lagre}>
         <FlexContainer>
           <FlexRow>
@@ -238,7 +238,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
             <VerticalSpacer fourPx />
           </>
         )}
-        <VerticalSpacer fourPx />
+        <VerticalSpacer sixteenPx />
         <TextAreaField
           label={<Element><FormattedMessage id="ManglendeOpplysningerForm.Begrunn" /></Element>}
           name="begrunnelse"
@@ -246,7 +246,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
           maxLength={1500}
           readOnly={isReadOnly}
         />
-        <VerticalSpacer sixteenPx />
+        <VerticalSpacer twentyPx />
         {!isReadOnly && (
           <FlexContainer>
             <FlexRow>
