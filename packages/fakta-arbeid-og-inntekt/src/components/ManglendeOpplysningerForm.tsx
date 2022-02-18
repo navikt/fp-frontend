@@ -163,7 +163,9 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
       )}
       <InntektsmeldingOpplysningerPanel saksnummer={saksnummer} inntektsmelding={inntektsmelding} />
       <VerticalSpacer fourtyPx />
-      <AlertStripeInfo><FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" /></AlertStripeInfo>
+      <div className={styles.alertStripe}>
+        <AlertStripeInfo><FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" /></AlertStripeInfo>
+      </div>
       <VerticalSpacer thirtyTwoPx />
       <Form formMethods={formMethods} onSubmit={lagre}>
         <FlexContainer>

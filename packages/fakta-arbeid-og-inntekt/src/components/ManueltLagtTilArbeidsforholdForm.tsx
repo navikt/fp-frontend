@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
-import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { Element, Undertittel } from 'nav-frontend-typografi';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -151,17 +151,17 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
       <Form formMethods={formMethods} onSubmit={lagreArbeidsforhold}>
         <FlexContainer>
           <FlexRow>
-            <FlexColumn>
-              <InputField
-                name="arbeidsgiverNavn"
-                label={<Element><FormattedMessage id="LeggTilArbeidsforholdForm.Arbeidsgiver" /></Element>}
-                validate={[required]}
-                bredde="XXL"
-                readOnly={isReadOnly || !erOverstyrt}
-              />
-            </FlexColumn>
             {erOverstyrt && (
               <>
+                <FlexColumn>
+                  <InputField
+                    name="arbeidsgiverNavn"
+                    label={<Element><FormattedMessage id="LeggTilArbeidsforholdForm.Arbeidsgiver" /></Element>}
+                    validate={[required]}
+                    bredde="XXL"
+                    readOnly={isReadOnly || !erOverstyrt}
+                  />
+                </FlexColumn>
                 <FlexColumn>
                   <DatepickerField
                     name="fom"
@@ -193,11 +193,6 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                 readOnly={isReadOnly || !erOverstyrt}
                 maxLength={3}
               />
-            </FlexColumn>
-            <FlexColumn>
-              <div className={isReadOnly ? styles.prosentReadOnly : styles.prosent}>
-                <Normaltekst>%</Normaltekst>
-              </div>
             </FlexColumn>
           </FlexRow>
         </FlexContainer>
