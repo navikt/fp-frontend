@@ -141,6 +141,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
             label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.GåVidere' })}
           />
         </RadioGroupField>
+        <VerticalSpacer sixteenPx />
         <TextAreaField
           label={<Element><FormattedMessage id="InntektsmeldingInnhentesForm.Begrunn" /></Element>}
           name="begrunnelse"

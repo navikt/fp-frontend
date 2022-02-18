@@ -284,7 +284,11 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
         </AksjonspunktHelpTextHTML>
       )}
       {harIngenArbeidsforholdEllerInntektsmeldinger && erOverstyrer && (
-        <AlertStripeInfo><FormattedMessage id="ArbeidOgInntektFaktaPanel.IngenArbeidsforhold" /></AlertStripeInfo>
+        <div className={styles.alertStripe}>
+          <AlertStripeInfo>
+            <FormattedMessage id="ArbeidOgInntektFaktaPanel.IngenArbeidsforhold" />
+          </AlertStripeInfo>
+        </div>
       )}
       <VerticalSpacer sixteenPx />
       {!harManueltLagtTilArbeidsforhold && erOverstyrt && !skalLeggeTilArbeidsforhold && (
