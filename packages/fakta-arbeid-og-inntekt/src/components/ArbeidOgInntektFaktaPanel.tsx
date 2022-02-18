@@ -30,6 +30,8 @@ import ManueltLagtTilArbeidsforholdForm, { MANUELT_ORG_NR } from './ManueltLagtT
 import ArbeidsforholdRad from './ArbeidsforholdRad';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
+import styles from './arbeidOgInntektFaktaPanel.less';
+
 const HEADER_TEXT_IDS = [
   'EMPTY1',
   'ArbeidOgInntektFaktaPanel.Arbeidsforhold',
@@ -295,7 +297,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
             }}
             href=""
           >
-            <Image src={addCircleIcon} />
+            <Image src={addCircleIcon} className={styles.leggTilImage} />
             <span>
               <FormattedMessage id="ArbeidOgInntektFaktaPanel.LeggTilArbeidsforhold" />
             </span>
@@ -352,7 +354,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           <SettPaVentModalIndex
             submitCallback={settPaVent}
             cancelEvent={() => settVisSettPåVentModal(false)}
-            ventearsak={venteArsakType.VENT_OPDT_INNTEKTSMELDING}
+            defaultVenteårsak={venteArsakType.VENT_OPDT_INNTEKTSMELDING}
             hasManualPaVent
             ventearsaker={alleKodeverk[KodeverkType.VENT_AARSAK]}
             erTilbakekreving={false}

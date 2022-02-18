@@ -4,7 +4,7 @@ import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Column, Container, Row } from 'nav-frontend-grid';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
 
 import { Image, VerticalSpacer } from '@fpsak-frontend/shared-components';
@@ -93,6 +93,7 @@ interface PureOwnProps {
   hasManualPaVent: boolean;
   frist?: string;
   ventearsak?: string;
+  defaultVenteårsak?: string;
 }
 
 const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
@@ -105,11 +106,12 @@ const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
   ventearsak,
   visBrevErBestilt = false,
   hasManualPaVent,
+  defaultVenteårsak,
 }) => {
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: buildInitialValues(hasManualPaVent, ventearsak, frist),
+    defaultValues: buildInitialValues(hasManualPaVent, ventearsak || defaultVenteårsak, frist),
   });
 
   const fristFraFelt = formMethods.watch('frist');
@@ -135,7 +137,6 @@ const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
           <Row>
             <Column xs="1">
               <Image className={styles.image} alt={intl.formatMessage({ id: 'SettPaVentModal.PaVent' })} src={innvilgetImageUrl} />
-              <div className={styles.divider} />
             </Column>
             <Column xs="7">
               <div className={styles.label}>
@@ -160,7 +161,7 @@ const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
             <Column xs="11">
               <SelectField
                 name="ventearsak"
-                label={intl.formatMessage({ id: 'SettPaVentModal.Arsak' })}
+                label={<Element><FormattedMessage id="SettPaVentModal.Arsak" /></Element>}
                 placeholder={intl.formatMessage({ id: 'SettPaVentModal.SelectPlaceholder' })}
                 validate={[required]}
                 selectValues={ventearsaker.filter((va) => (erTilbakekreving
@@ -170,6 +171,7 @@ const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
                 bredde="xxl"
                 readOnly={!hasManualPaVent}
               />
+              <VerticalSpacer sixteenPx />
             </Column>
           </Row>
           {visBrevErBestilt && (
@@ -201,7 +203,7 @@ const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
               )}
             </Column>
           </Row>
-          <VerticalSpacer eightPx />
+          <VerticalSpacer sixteenPx />
           <Row>
             <Column xs="6" />
             <Column>

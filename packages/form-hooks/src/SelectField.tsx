@@ -2,6 +2,7 @@ import React, { useMemo, FunctionComponent, ReactNode } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import classnames from 'classnames/bind';
 
+import { LabelType } from './Label';
 import CustomNavSelect from './CustomNavSelect';
 import styles from './selectField.less';
 import ReadOnlyField from './ReadOnlyField';
@@ -11,7 +12,7 @@ const classNames = classnames.bind(styles);
 
 interface OwnProps {
   name: string;
-  label: string;
+  label: LabelType;
   onClick?: (event: any) => void;
   onChange?: (event: any) => void;
   validate?: ((value: string) => any)[];

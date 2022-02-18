@@ -146,7 +146,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
       toggleContent={toggleÅpenRad}
       isApLeftBorder={harÅpentAksjonspunkt}
     >
-      <TableColumn className={classNames('ikon', erRadÅpen ? 'colTopPadding' : undefined)}>
+      <TableColumn className={classNames('ikon', erRadÅpen ? 'imageColTopPadding' : undefined)}>
         {!førRegisterInnhenting && !harÅpentAksjonspunkt && (
           <Image alt={intl.formatMessage({ id: 'ArbeidsforholdRad.Ok' })} src={okIkonUrl} />
         )}

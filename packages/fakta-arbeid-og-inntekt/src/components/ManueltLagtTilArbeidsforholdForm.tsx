@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
-import { Element, Undertittel } from 'nav-frontend-typografi';
+import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -191,7 +191,13 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                 validate={[required, hasValidInteger, minValue1, maxValue100]}
                 bredde="XS"
                 readOnly={isReadOnly || !erOverstyrt}
+                maxLength={3}
               />
+            </FlexColumn>
+            <FlexColumn>
+              <div className={isReadOnly ? styles.prosentReadOnly : styles.prosent}>
+                <Normaltekst>%</Normaltekst>
+              </div>
             </FlexColumn>
           </FlexRow>
         </FlexContainer>

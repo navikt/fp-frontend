@@ -19,6 +19,7 @@ interface OwnProps {
   visBrevErBestilt?: boolean;
   hasManualPaVent: boolean;
   erTilbakekreving: boolean;
+  defaultVenteårsak?: string;
 }
 
 const SettPaVentModalIndex: FunctionComponent<OwnProps> = ({
@@ -31,6 +32,7 @@ const SettPaVentModalIndex: FunctionComponent<OwnProps> = ({
   visBrevErBestilt,
   hasManualPaVent,
   erTilbakekreving,
+  defaultVenteårsak,
 }) => (
   <RawIntlProvider value={intl}>
     <SettPaVentModal
@@ -43,6 +45,7 @@ const SettPaVentModalIndex: FunctionComponent<OwnProps> = ({
       visBrevErBestilt={visBrevErBestilt}
       hasManualPaVent={hasManualPaVent}
       erTilbakekreving={erTilbakekreving}
+      defaultVenteårsak={defaultVenteårsak}
     />
   </RawIntlProvider>
 );

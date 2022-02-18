@@ -1,6 +1,6 @@
 import React, { Component, ReactNode } from 'react';
 import { Select as NavSelect } from 'nav-frontend-skjema';
-import Label from './Label';
+import Label, { LabelType } from './Label';
 
 interface OwnProps {
   selectValues: React.ReactElement[];
@@ -10,7 +10,7 @@ interface OwnProps {
   disabled?: boolean;
   bredde?: 'fullbredde' | 'xxl' | 'xl' | 'l' | 'm' | 's' | 'xs';
   className?: string;
-  label?: string;
+  label?: LabelType;
   feil?: string;
   onChange?: (event: any) => void;
 }
