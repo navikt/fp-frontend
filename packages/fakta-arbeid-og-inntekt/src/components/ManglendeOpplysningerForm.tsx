@@ -231,7 +231,13 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
                     validate={[required, hasValidInteger, minValue1, maxValue100]}
                     bredde="XS"
                     readOnly={isReadOnly}
+                    maxLength={3}
                   />
+                </FlexColumn>
+                <FlexColumn>
+                  <div className={isReadOnly ? styles.prosentReadOnly : styles.prosent}>
+                    <Normaltekst>%</Normaltekst>
+                  </div>
                 </FlexColumn>
               </FlexRow>
             </FlexContainer>

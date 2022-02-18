@@ -18,6 +18,7 @@ interface OwnProps {
   autoFocus?: boolean;
   parse?: (value: string) => string | number;
   isEdited?: boolean;
+  maxLength?: number;
 }
 
 const InputField: FunctionComponent<OwnProps> = ({
@@ -33,6 +34,7 @@ const InputField: FunctionComponent<OwnProps> = ({
   autoFocus,
   parse = (value) => value,
   isEdited,
+  maxLength,
 }) => {
   const { formState: { errors }, trigger } = useFormContext();
   const { field } = useController({
@@ -57,6 +59,7 @@ const InputField: FunctionComponent<OwnProps> = ({
       value={field.value ? field.value : ''}
       autoFocus={autoFocus}
       autoComplete="off"
+      maxLength={maxLength}
       onChange={(event) => field.onChange(event.currentTarget.value ? parse(event.currentTarget.value) : undefined)}
       onBlur={async (event) => {
         field.onBlur();
