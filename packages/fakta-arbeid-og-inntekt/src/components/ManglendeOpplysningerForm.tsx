@@ -236,11 +236,6 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
                     maxLength={3}
                   />
                 </FlexColumn>
-                <FlexColumn>
-                  <div className={isReadOnly ? styles.prosentReadOnly : styles.prosent}>
-                    <Normaltekst>%</Normaltekst>
-                  </div>
-                </FlexColumn>
               </FlexRow>
             </FlexContainer>
             <VerticalSpacer fourPx />
