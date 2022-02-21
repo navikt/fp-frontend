@@ -11,5 +11,5 @@ export const hentDokumentLenke = (
 ): string => (`/fpsak/api/dokument/hent-dokument?saksnummer=${saksnummer}&journalpostId=${journalpostId}&dokumentId=${dokumentId}`);
 
 export const hentVedtakDokumentLenke = (
-  dokumentId: string,
-): string => (`/fpsak/api/vedtak/hent-vedtaksdokument?behandlingId=${dokumentId}`);
+  behandlingUuid: string,
+): string => (`/fpsak/api/vedtak/hent-vedtaksdokument?behandlingId=${behandlingUuid}`);

@@ -5,7 +5,7 @@ export type InnsynDokument = Readonly<{
 }>
 
 export type InnsynVedtaksdokument = Readonly<{
-  dokumentId: string;
+  behandlingUuid: string;
   tittel: string;
   opprettetDato: string;
 }>

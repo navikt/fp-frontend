@@ -77,7 +77,7 @@ PanelForVurderingAvInnsyn.args = {
   innsyn: {
     dokumenter: [] as InnsynDokument[],
     vedtaksdokumentasjon: [{
-      dokumentId: '1',
+      behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
       tittel: behandlingType.FORSTEGANGSSOKNAD,
       opprettetDato: '2019-01-01',
     }],
@@ -102,7 +102,7 @@ InnsynSattPaVent.args = {
     innsynResultatType: innsynResultatType.INNVILGET,
     innsynMottattDato: '2021-12-12',
     vedtaksdokumentasjon: [{
-      dokumentId: '1',
+      behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
       tittel: behandlingType.FORSTEGANGSSOKNAD,
       opprettetDato: '2019-01-01',
     }],

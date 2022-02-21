@@ -83,7 +83,7 @@ PanelForInnvilgetVedtak.args = {
       fikkInnsyn: true,
     }],
     vedtaksdokumentasjon: [{
-      dokumentId: '1',
+      behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
       tittel: behandlingType.FORSTEGANGSSOKNAD,
       opprettetDato: '2019-01-01',
     }],
@@ -103,7 +103,7 @@ PanelForAvvistVedtak.args = {
       fikkInnsyn: true,
     }],
     vedtaksdokumentasjon: [{
-      dokumentId: '1',
+      behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
       tittel: behandlingType.FORSTEGANGSSOKNAD,
       opprettetDato: '2019-01-01',
     }],
@@ -129,7 +129,7 @@ PanelForAvvistVedtakReadonly.args = {
       fikkInnsyn: true,
     }],
     vedtaksdokumentasjon: [{
-      dokumentId: '1',
+      behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
       tittel: behandlingType.FORSTEGANGSSOKNAD,
       opprettetDato: '2019-01-01',
     }],
