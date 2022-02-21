@@ -130,7 +130,7 @@ const finnArbeidsforholdIdentDetErFlereAv = (data: ArbeidsforholdOgInntekt[]) =>
 const finnUløstArbeidsforholdIndex = (tabellData: ArbeidsforholdOgInntekt[]): number[] => {
   const index = tabellData
     .findIndex((d) => (d.arbeidsforhold?.årsak && !d.arbeidsforhold?.saksbehandlersVurdering)
-    || (d.inntektsmelding?.årsak && !d.inntektsmelding?.saksbehandlersVurdering));
+    || (d.inntektsmelding?.årsak && !d.inntektsmelding?.saksbehandlersVurdering && !d.arbeidsforhold?.saksbehandlersVurdering));
   return index !== -1 ? [index] : [];
 };
 
@@ -199,7 +199,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   const aksjonspunktTekstKoder = useMemo(() => finnApTekstKoder(aksjonspunkter, harManglendeInntektsmeldinger, harManglandeOpplysninger), [behandling.versjon]);
 
   const harUbehandledeAksjonspunkt = tabellData.some((d) => (d.arbeidsforhold?.årsak && !d.arbeidsforhold?.saksbehandlersVurdering)
-    || (d.inntektsmelding?.årsak && !d.inntektsmelding?.saksbehandlersVurdering));
+    || (d.inntektsmelding?.årsak && !d.inntektsmelding?.saksbehandlersVurdering && !d.arbeidsforhold?.saksbehandlersVurdering));
 
   const kanSettePåVent = tabellData
     .some((d) => d.arbeidsforhold?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING

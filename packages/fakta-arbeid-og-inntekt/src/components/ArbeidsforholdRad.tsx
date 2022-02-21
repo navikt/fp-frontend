@@ -75,7 +75,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
   const manglerInntektsmelding = arbeidsforhold?.årsak === AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING;
   const manglerArbeidsforhold = inntektsmelding?.årsak === AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD;
   const harÅpentAksjonspunkt = ((manglerInntektsmelding && !arbeidsforhold?.saksbehandlersVurdering)
-    || (manglerArbeidsforhold && !inntektsmelding?.saksbehandlersVurdering));
+    || (manglerArbeidsforhold && !inntektsmelding?.saksbehandlersVurdering && !arbeidsforhold?.saksbehandlersVurdering));
   const harArbeidsforholdUtenInntektsmeldingMenIngenÅrsak = arbeidsforhold && !inntektsmelding && !arbeidsforhold.årsak && !erManueltOpprettet;
   const førRegisterInnhenting = !arbeidsforhold && inntektsmelding && !inntektsmelding.årsak;
 

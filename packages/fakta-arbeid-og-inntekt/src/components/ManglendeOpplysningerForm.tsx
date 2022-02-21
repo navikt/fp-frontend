@@ -80,11 +80,11 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
 
   const defaultValues = useMemo<FormValues>(() => ({
-    saksbehandlersVurdering: inntektsmelding.saksbehandlersVurdering,
+    saksbehandlersVurdering: arbeidsforhold ? arbeidsforhold.saksbehandlersVurdering : inntektsmelding.saksbehandlersVurdering,
+    begrunnelse: arbeidsforhold ? arbeidsforhold.begrunnelse : inntektsmelding.begrunnelse,
     fom: arbeidsforhold?.fom,
     tom: arbeidsforhold?.tom,
     stillingsprosent: arbeidsforhold?.stillingsprosent,
-    begrunnelse: inntektsmelding.begrunnelse,
   }), [inntektsmelding, arbeidsforhold]);
 
   const formMethods = useForm<FormValues>({
@@ -102,16 +102,19 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
     const oppdater = (() => {
       oppdaterTabell((oldData) => oldData.map((data) => {
         if (erMatch(inntektsmelding, data.inntektsmelding)) {
-          const af = formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING ? {
+          const opprettArbeidsforhold = formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING;
+          const af = opprettArbeidsforhold ? {
             arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
             internArbeidsforholdId: inntektsmelding.internArbeidsforholdId,
             fom: formValues.fom,
             tom: formValues.tom,
             stillingsprosent: formValues.stillingsprosent,
+            begrunnelse: formValues.begrunnelse,
+            saksbehandlersVurdering: formValues.saksbehandlersVurdering,
           } : undefined;
           return {
             ...data,
-            inntektsmelding: {
+            inntektsmelding: opprettArbeidsforhold ? data.inntektsmelding : {
               ...data.inntektsmelding,
               begrunnelse: formValues.begrunnelse,
               saksbehandlersVurdering: formValues.saksbehandlersVurdering,
