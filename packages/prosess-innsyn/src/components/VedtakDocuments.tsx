@@ -42,12 +42,12 @@ const VedtakDocuments: FunctionComponent<OwnProps> = ({
         <>
           <VerticalSpacer fourPx />
           {vedtaksdokumenter.map((document) => (
-            <Row key={document.dokumentId}>
+            <Row key={document.behandlingUuid}>
               <Column xs="2">
                 <DateLabel dateString={document.opprettetDato} />
               </Column>
               <Column xs="10">
-                <Lenke href={hentVedtakDokumentLenke(document.dokumentId)} target="_blank">
+                <Lenke href={hentVedtakDokumentLenke(document.behandlingUuid)} target="_blank">
                   {behandlingTypes.find((bt) => bt.kode === document.tittel).navn}
                 </Lenke>
               </Column>
