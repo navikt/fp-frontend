@@ -1,10 +1,9 @@
 import React, { useState, useEffect, FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
+import { FlexColumn, Image } from '@navikt/fp-react-components';
 
 import { DecimalField } from '@fpsak-frontend/form';
-
-import { FlexColumn, Image } from '@fpsak-frontend/shared-components';
 import {
   hasValidDecimal, maxValue, minValue, required,
 } from '@fpsak-frontend/utils';

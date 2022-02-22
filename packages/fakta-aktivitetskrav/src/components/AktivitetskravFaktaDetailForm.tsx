@@ -4,11 +4,12 @@ import { useForm } from 'react-hook-form';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Column, Row } from 'nav-frontend-grid';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import { FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
 import { RadioGroupField, RadioOption, Form } from '@fpsak-frontend/form-hooks';
 import {
-  FlexColumn, FlexContainer, FlexRow, PeriodLabel, VerticalSpacer,
+  PeriodLabel, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import { KodeverkMedNavn, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
 import { required } from '@fpsak-frontend/utils';

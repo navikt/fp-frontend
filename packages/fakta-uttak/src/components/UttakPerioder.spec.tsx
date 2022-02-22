@@ -2,6 +2,7 @@ import React from 'react';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 import { Knapp } from 'nav-frontend-knapper';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
@@ -65,9 +66,9 @@ describe('<UttakPerioder>', () => {
     );
 
     const fieldArray = wrapper.find('FieldArray');
-    const flexContainer = wrapper.find('FlexContainer');
-    const flexRow = wrapper.find('FlexRow');
-    const flexColumn = wrapper.find('FlexColumn');
+    const flexContainer = wrapper.find(FlexContainer);
+    const flexRow = wrapper.find(FlexRow);
+    const flexColumn = wrapper.find(FlexColumn);
     const element = wrapper.find('Element');
     const uttakNyPeriode = wrapper.find('UttakNyPeriode');
     const uttakSlettPeriodeModal = wrapper.find('UttakSlettPeriodeModal');
@@ -109,7 +110,7 @@ describe('<UttakPerioder>', () => {
 
     wrapper.setState({ isNyPeriodeFormOpen: true });
     const fieldArray = wrapper.find('FieldArray');
-    const flexContainer = wrapper.find('FlexContainer');
+    const flexContainer = wrapper.find(FlexContainer);
     const uttakSlettPeriodeModal = wrapper.find('UttakSlettPeriodeModal');
     const uttakNyPeriode = wrapper.find(UttakNyPeriode);
     const hovedknapp = wrapper.find(FaktaSubmitButton);
@@ -151,7 +152,7 @@ describe('<UttakPerioder>', () => {
 
     wrapper.setState({ showModalSlettPeriode: true });
     const fieldArray = wrapper.find('FieldArray');
-    const flexContainer = wrapper.find('FlexContainer');
+    const flexContainer = wrapper.find(FlexContainer);
     const uttakNyPeriode = wrapper.find('UttakNyPeriode');
     const uttakSlettPeriodeModal = wrapper.find(UttakSlettPeriodeModal);
     expect(fieldArray).toHaveLength(1);

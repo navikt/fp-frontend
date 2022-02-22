@@ -2,11 +2,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
+import { EditedIcon } from '@navikt/fp-react-components';
+
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import opptjeningAktivitetType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
 import { RadioGroupField } from '@fpsak-frontend/form';
 import {
-  Table, TableRow, TableColumn, EditedIcon,
+  Table, TableRow, TableColumn,
 } from '@fpsak-frontend/shared-components';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 import { VurderAktiviteterTabell, lagAktivitetFieldId, skalVurdereAktivitet } from './VurderAktiviteterTabell';

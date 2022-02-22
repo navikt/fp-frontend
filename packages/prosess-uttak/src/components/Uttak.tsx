@@ -7,6 +7,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { FormattedMessage, IntlShape, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Hovedknapp } from 'nav-frontend-knapper';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import oppholdArsakType, { oppholdArsakMapper } from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
@@ -15,7 +16,7 @@ import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import {
-  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+  VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import {
   ISO_DATE_FORMAT, getKodeverknavnFn, calcDays, calcDaysAndWeeks, DDMMYY_DATE_FORMAT,

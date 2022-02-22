@@ -4,8 +4,10 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 
 import {
-  FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer, AksjonspunktBox, EditedIcon,
-} from '@fpsak-frontend/shared-components';
+  EditedIcon, FlexContainer, FlexRow, FlexColumn, Image,
+} from '@navikt/fp-react-components';
+
+import { VerticalSpacer, AksjonspunktBox } from '@fpsak-frontend/shared-components';
 import { TextAreaField } from '@fpsak-frontend/form-hooks';
 import {
   hasValidText, maxLength, minLength, createIntl,

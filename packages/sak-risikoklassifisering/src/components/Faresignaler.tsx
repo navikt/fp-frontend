@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
-import { FlexColumn, FlexContainer, FlexRow } from '@fpsak-frontend/shared-components';
 import { Risikoklassifisering } from '@fpsak-frontend/types';
 
 export const FarePanel: FunctionComponent<{

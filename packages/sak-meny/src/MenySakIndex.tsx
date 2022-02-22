@@ -4,11 +4,10 @@ import React, {
 import {
   FormattedMessage, RawIntlProvider,
 } from 'react-intl';
-import { Popover, BoxedListWithSelection } from '@navikt/fp-react-components';
+import { Popover, BoxedListWithSelection, Image } from '@navikt/fp-react-components';
 import { Knapp } from 'nav-frontend-knapper';
 
 import { createIntl } from '@fpsak-frontend/utils';
-import { Image } from '@fpsak-frontend/shared-components';
 import openImage from '@fpsak-frontend/assets/images/pil_opp.svg';
 import closedImage from '@fpsak-frontend/assets/images/pil_ned.svg';
 

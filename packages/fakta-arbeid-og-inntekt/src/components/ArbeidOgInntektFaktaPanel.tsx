@@ -6,6 +6,9 @@ import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import Lenke from 'nav-frontend-lenker';
 import { Hovedknapp } from 'nav-frontend-knapper';
+import {
+  Image, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/fp-react-components';
 
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
@@ -17,8 +20,7 @@ import {
 import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 import {
-  VerticalSpacer, Image, AksjonspunktHelpTextHTML, FloatRight, Table, OverstyringKnapp,
-  FlexColumn, FlexContainer, FlexRow,
+  VerticalSpacer, AksjonspunktHelpTextHTML, FloatRight, Table, OverstyringKnapp,
 } from '@fpsak-frontend/shared-components';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';

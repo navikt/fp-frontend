@@ -1,12 +1,14 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Image } from '@navikt/fp-react-components';
+
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import {
   FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
 } from 'react-intl';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import { Image, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
 import avslaatIkonUrl from '@fpsak-frontend/assets/images/avslaatt_mini.svg';
 import Panel from 'nav-frontend-paneler';

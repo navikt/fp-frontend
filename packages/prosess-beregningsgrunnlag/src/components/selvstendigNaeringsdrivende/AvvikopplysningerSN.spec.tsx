@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { FlexRow } from '@navikt/fp-react-components';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -30,7 +31,7 @@ const andel = {
   erNyIArbeidslivet: false,
 };
 
-describe('<AvviksopplysningerSN>', () => {
+describe('<AvvikopplysningerSN>', () => {
   it('Skal teste komponenten ved erNyArbLivet', () => {
     andel.erNyIArbeidslivet = true;
     const sammenligningsgrunnlagPrStatus = sammenligningsgrunnlag('SAMMENLIGNING_SN') as SammenligningsgrunlagProp;
@@ -39,7 +40,7 @@ describe('<AvviksopplysningerSN>', () => {
       alleAndelerIForstePeriode={[andel as BeregningsgrunnlagAndel]}
       relevanteStatuser={{ isKombinasjonsstatus: false } as RelevanteStatuserProp}
     />, messages);
-    const rows = wrapper.find('FlexRow');
+    const rows = wrapper.find(FlexRow);
     expect(rows).toHaveLength(1);
     const omregnetAarsinntektText = rows.first().find(FormattedMessage);
     expect(omregnetAarsinntektText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.SN.NyIArbeidslivet');
@@ -54,7 +55,7 @@ describe('<AvviksopplysningerSN>', () => {
       alleAndelerIForstePeriode={[andel as BeregningsgrunnlagAndel]}
       relevanteStatuser={{ isKombinasjonsstatus: false } as RelevanteStatuserProp}
     />, messages);
-    const rows = wrapper.find('FlexRow');
+    const rows = wrapper.find(FlexRow);
     expect(rows).toHaveLength(1);
     const omregnetAarsinntektText = rows.first().find(FormattedMessage);
     expect(omregnetAarsinntektText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.SN.IkkeVarigEndring');

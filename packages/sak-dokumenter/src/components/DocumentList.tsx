@@ -3,9 +3,10 @@ import React, {
 } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
+import { Image, Tooltip } from '@navikt/fp-react-components';
 
 import {
-  DateTimeLabel, Image, Table, TableColumn, TableRow, Tooltip,
+  DateTimeLabel, Table, TableColumn, TableRow,
 } from '@fpsak-frontend/shared-components';
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
 import sendDokumentImageUrl from '@fpsak-frontend/assets/images/send_dokument.svg';

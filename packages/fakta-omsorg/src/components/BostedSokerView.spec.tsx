@@ -1,9 +1,9 @@
 import React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 import EtikettBase from 'nav-frontend-etiketter';
+import { Tooltip } from '@navikt/fp-react-components';
 
 import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { Tooltip } from '@fpsak-frontend/shared-components';
 import sivilstandType from '@fpsak-frontend/kodeverk/src/sivilstandType';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
 import { PersonopplysningerBasis } from '@fpsak-frontend/types';

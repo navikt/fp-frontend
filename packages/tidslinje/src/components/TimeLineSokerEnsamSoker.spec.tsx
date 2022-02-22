@@ -1,8 +1,8 @@
 import React from 'react';
 import { Row } from 'nav-frontend-grid';
+import { Image } from '@navikt/fp-react-components';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import Image from '@fpsak-frontend/shared-components/src/Image';
 
 import TimeLineSokerEnsamSoker from './TimeLineSokerEnsamSoker';
 import messages from '../../i18n/nb_NO.json';

@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import {
   FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
 } from 'react-intl';
+import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
+import { createSelector } from 'reselect';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
+import { Image } from '@navikt/fp-react-components';
+
 import { InputField, NavFieldGroup, SelectField } from '@fpsak-frontend/form';
 import {
   formatCurrencyNoKr, isArrayEmpty, parseCurrencyInput, removeSpacesFromNumber, required, getKodeverknavnFn,
@@ -12,16 +16,16 @@ import {
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import { createSelector } from 'reselect';
 import {
-  Image, Table, TableColumn, TableRow, VerticalSpacer,
+  Table, TableColumn, TableRow, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
-import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
-import styles from './brukersAndelFieldArray.less';
+
 import { SortedAndelInfo, validateUlikeAndelerWithGroupingFunction } from '../ValidateAndelerUtils';
 import { isBeregningFormDirty as isFormDirty } from '../../BeregningFormUtils';
 import { BrukersAndelValues } from '../../../typer/FaktaBeregningTypes';
+
+import styles from './brukersAndelFieldArray.less';
 
 const defaultBGFordeling = (aktivitetStatuser: string[], alleKodeverk) => ({
   andel: getKodeverknavnFn(alleKodeverk)(

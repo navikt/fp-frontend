@@ -6,6 +6,9 @@ import { useForm, UseFormGetValues } from 'react-hook-form';
 import { Element, Undertittel } from 'nav-frontend-typografi';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { Column, Row } from 'nav-frontend-grid';
+import {
+  Image, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/fp-react-components';
 
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 import binIcon from '@fpsak-frontend/assets/images/bin.svg';
@@ -17,7 +20,7 @@ import {
   TextAreaField, DatepickerField, InputField, Form,
 } from '@fpsak-frontend/form-hooks';
 import {
-  VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image, FloatRight, OkAvbrytModal,
+  VerticalSpacer, FloatRight, OkAvbrytModal,
 } from '@fpsak-frontend/shared-components';
 
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';

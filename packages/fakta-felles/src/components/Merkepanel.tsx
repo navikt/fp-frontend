@@ -3,10 +3,10 @@ import { RawIntlProvider, FormattedMessage } from 'react-intl';
 import {
   EtikettAdvarsel, EtikettFokus, EtikettInfo, EtikettSuksess,
 } from 'nav-frontend-etiketter';
+import { Tooltip } from '@navikt/fp-react-components';
 
 import { createIntl } from '@fpsak-frontend/utils';
 import diskresjonskodeType from '@fpsak-frontend/kodeverk/src/diskresjonskodeType';
-import { Tooltip } from '@fpsak-frontend/shared-components';
 
 import styles from './merkepanel.less';
 import messages from '../../i18n/nb_NO.json';

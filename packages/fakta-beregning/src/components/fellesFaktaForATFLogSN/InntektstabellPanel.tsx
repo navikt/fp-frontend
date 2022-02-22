@@ -6,9 +6,10 @@ import { bindActionCreators } from 'redux';
 import { change, FormAction } from 'redux-form';
 import { Knapp } from 'nav-frontend-knapper';
 import { Element } from 'nav-frontend-typografi';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import {
-  VerticalSpacer, OverstyringKnapp, FlexColumn, FlexContainer, FlexRow,
+  VerticalSpacer, OverstyringKnapp,
 } from '@fpsak-frontend/shared-components';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 

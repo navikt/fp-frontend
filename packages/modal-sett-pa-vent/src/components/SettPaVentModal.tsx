@@ -6,8 +6,9 @@ import { Column, Container, Row } from 'nav-frontend-grid';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
+import { Image } from '@navikt/fp-react-components';
 
-import { Image, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 import { DatepickerField, SelectField, Form } from '@fpsak-frontend/form-hooks';
 import {

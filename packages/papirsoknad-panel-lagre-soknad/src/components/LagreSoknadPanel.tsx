@@ -4,10 +4,11 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import { ariaCheck, hasValidText, maxLength } from '@fpsak-frontend/utils';
 import {
-  BorderBox, FlexColumn, FlexContainer, FlexRow,
+  BorderBox,
 } from '@fpsak-frontend/shared-components';
 import { CheckboxField, TextAreaField } from '@fpsak-frontend/form';
 

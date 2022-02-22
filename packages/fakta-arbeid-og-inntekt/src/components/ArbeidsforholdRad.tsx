@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import classnames from 'classnames/bind';
 import { Normaltekst, Element, Undertekst } from 'nav-frontend-typografi';
+import { Image } from '@navikt/fp-react-components';
 
 import {
   AoIArbeidsforhold, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold, AksjonspunktÅrsak,
@@ -10,7 +11,7 @@ import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import utropstegnIkonUrl from '@fpsak-frontend/assets/images/utropstegn.svg';
 import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
 import {
-  Image, TableColumn, PeriodLabel, DateTimeLabel, ExpandableTableRow,
+  TableColumn, PeriodLabel, DateTimeLabel, ExpandableTableRow,
 } from '@fpsak-frontend/shared-components';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 import { TIDENES_ENDE } from '@fpsak-frontend/utils';
