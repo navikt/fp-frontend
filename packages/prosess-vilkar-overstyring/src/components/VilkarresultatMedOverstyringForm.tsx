@@ -7,13 +7,16 @@ import { useForm } from 'react-hook-form';
 import {
   Undertittel, Element, Undertekst, Normaltekst,
 } from 'nav-frontend-typografi';
+import {
+  FlexContainer, FlexRow, FlexColumn, Image,
+} from '@navikt/fp-react-components';
 
 import { Form } from '@fpsak-frontend/form-hooks';
 import { KodeverkMedNavn, Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import {
-  FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer,
+  VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import { OverstyringPanel, VilkarResultPicker } from '@fpsak-frontend/prosess-felles';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';

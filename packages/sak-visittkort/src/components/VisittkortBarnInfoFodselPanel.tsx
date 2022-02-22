@@ -3,9 +3,9 @@ import moment from 'moment';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { EtikettInfo } from 'nav-frontend-etiketter';
 import { Normaltekst } from 'nav-frontend-typografi';
+import { FlexColumn } from '@navikt/fp-react-components';
 
 import { FagsakHendelse } from '@fpsak-frontend/types';
-import { FlexColumn } from '@fpsak-frontend/shared-components';
 import { dateFormat, DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 

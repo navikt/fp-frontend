@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
+import { Image } from '@navikt/fp-react-components';
 
 import {
-  DateLabel, Image, PeriodLabel, Table, TableColumn, TableRow,
+  DateLabel, PeriodLabel, Table, TableColumn, TableRow,
 } from '@fpsak-frontend/shared-components';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 import erIBrukImageUrl from '@fpsak-frontend/assets/images/stjerne.svg';

@@ -3,9 +3,10 @@ import { FormattedMessage } from 'react-intl';
 import { Normaltekst, Element, Undertittel } from 'nav-frontend-typografi';
 import moment from 'moment';
 import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { FlexColumn, FlexRow } from '@navikt/fp-react-components';
 
 import {
-  AvsnittSkiller, FlexColumn, FlexRow, VerticalSpacer,
+  AvsnittSkiller, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import { ArbeidsforholdFodselOgTilrettelegging, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 

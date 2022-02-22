@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { FlexRow } from '@navikt/fp-react-components';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { SammenligningsgrunlagProp } from '@fpsak-frontend/types';
@@ -18,7 +19,7 @@ const sammenligningsgrunnlag = (kode) => ({
   differanseBeregnet: 12100,
 });
 
-describe('<AvviksopplysningerAT>', () => {
+describe('<AvvikopplysningerAT>', () => {
   it('Skal teste tabellen får korrekte rader med innhold når kombinasjonsstatus=KOMBINERT_AT_SN', () => {
     const sammenligningsgrunnlagPrStatus = sammenligningsgrunnlag('SAMMENLIGNING_ATFL_SN') as SammenligningsgrunlagProp;
     const wrapper = shallowWithIntl(<AvviksopplysningerAT
@@ -26,7 +27,7 @@ describe('<AvviksopplysningerAT>', () => {
       sammenligningsgrunnlagPrStatus={[sammenligningsgrunnlagPrStatus]}
       relevanteStatuser={{ isKombinasjonsstatus: true, isArbeidstaker: true, isSelvstendigNaeringsdrivende: true } as RelevanteStatuserProp}
     />, messages);
-    const rows = wrapper.find('FlexRow');
+    const rows = wrapper.find(FlexRow);
     expect(rows).toHaveLength(1);
     const infoText = rows.first().find(FormattedMessage);
     expect(infoText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.AT.KobinasjonsStatusATSN');
@@ -40,7 +41,7 @@ describe('<AvviksopplysningerAT>', () => {
         isKombinasjonsstatus: true, isArbeidstaker: true, isSelvstendigNaeringsdrivende: true, isFrilanser: true,
       } as RelevanteStatuserProp}
     />, messages);
-    const rows = wrapper.find('FlexRow');
+    const rows = wrapper.find(FlexRow);
     expect(rows).toHaveLength(1);
     const infoText = rows.first().find(FormattedMessage);
     expect(infoText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.AT.KobinasjonsStatusATFLSN');
@@ -72,7 +73,7 @@ describe('<AvviksopplysningerAT>', () => {
       sammenligningsgrunnlagPrStatus={[sammenligningsgrunnlagPrStatus]}
       relevanteStatuser={{ isKombinasjonsstatus: false, isFrilanser: true } as RelevanteStatuserProp}
     />, messages);
-    const rows = wrapper.find('FlexRow');
+    const rows = wrapper.find(FlexRow);
     expect(rows.length).toBe(0);
   });
 });

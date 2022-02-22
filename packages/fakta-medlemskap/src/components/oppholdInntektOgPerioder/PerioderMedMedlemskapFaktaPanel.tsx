@@ -3,10 +3,11 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Normaltekst } from 'nav-frontend-typografi';
 import moment from 'moment';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import {
-  DateLabel, FlexColumn, FlexContainer, FlexRow, PeriodLabel, Table, TableColumn, TableRow, VerticalSpacer, FaktaGruppe,
+  DateLabel, PeriodLabel, Table, TableColumn, TableRow, VerticalSpacer, FaktaGruppe,
 } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';

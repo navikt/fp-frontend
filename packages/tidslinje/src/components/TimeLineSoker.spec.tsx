@@ -1,6 +1,7 @@
 import React from 'react';
+import { Image } from '@navikt/fp-react-components';
+
 import { mountWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import Image from '@fpsak-frontend/shared-components/src/Image';
 // eslint-disable-next-line import/extensions
 import TimeLineSoker from './TimeLineSoker';
 import messages from '../../i18n/nb_NO.json';

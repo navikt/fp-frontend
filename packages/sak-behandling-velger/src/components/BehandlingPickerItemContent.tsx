@@ -3,9 +3,12 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import classNames from 'classnames';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Panel from 'nav-frontend-paneler';
+import {
+  FlexContainer, FlexRow, FlexColumn, Image, Tooltip,
+} from '@navikt/fp-react-components';
 
 import {
-  FlexContainer, FlexRow, FlexColumn, DateLabel, TimeLabel, Image, VerticalSpacer, Tooltip,
+  DateLabel, TimeLabel, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';

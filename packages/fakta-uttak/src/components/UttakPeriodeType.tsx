@@ -1,11 +1,11 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { Image } from '@navikt/fp-react-components';
 
 import overforingArsakCodes from '@fpsak-frontend/kodeverk/src/overforingArsakCodes';
 import utsettelseArsakCodes from '@fpsak-frontend/kodeverk/src/utsettelseArsakCodes';
 import oppholdArsakType from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
-import { Image } from '@fpsak-frontend/shared-components';
 import { calcDaysAndWeeks, dateFormat } from '@fpsak-frontend/utils';
 import editPeriodeIcon from '@fpsak-frontend/assets/images/endre.svg';
 import editPeriodeDisabledIcon from '@fpsak-frontend/assets/images/endre_disablet.svg';

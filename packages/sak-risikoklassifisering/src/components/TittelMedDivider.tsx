@@ -1,10 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
-
 import {
   FlexColumn, FlexContainer, FlexRow, Image,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/fp-react-components';
 
 import styles from './tittelMedDivider.less';
 

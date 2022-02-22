@@ -2,9 +2,10 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { FieldArray, FieldArrayFieldsProps } from 'redux-form';
 import { Knapp } from 'nav-frontend-knapper';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import {
-  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+  VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import { DatepickerField, InputField } from '@fpsak-frontend/form';
 import { required, hasValidOrgNumberOrFodselsnr, hasNoWhiteSpace } from '@fpsak-frontend/utils';

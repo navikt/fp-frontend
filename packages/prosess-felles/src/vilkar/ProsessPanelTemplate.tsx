@@ -2,9 +2,12 @@ import React, { ReactNode, FunctionComponent } from 'react';
 import {
   Undertittel, Undertekst, Element, Normaltekst,
 } from 'nav-frontend-typografi';
+import {
+  FlexContainer, FlexRow, FlexColumn, Image,
+} from '@navikt/fp-react-components';
 
 import {
-  VerticalSpacer, FlexContainer, FlexRow, FlexColumn, AksjonspunktBox, Image,
+  VerticalSpacer, AksjonspunktBox,
 } from '@fpsak-frontend/shared-components';
 import { createIntl } from '@fpsak-frontend/utils';
 import avslattImage from '@fpsak-frontend/assets/images/avslaatt_hover.svg';

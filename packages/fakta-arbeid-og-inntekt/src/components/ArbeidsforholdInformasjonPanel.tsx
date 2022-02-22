@@ -5,13 +5,16 @@ import { FormattedMessage } from 'react-intl';
 import dayjs from 'dayjs';
 import Lenke from 'nav-frontend-lenker';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
+import {
+  Image, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/fp-react-components';
 
 import pilOppIkonUrl from '@fpsak-frontend/assets/images/pil_opp.svg';
 import pilNedIkonUrl from '@fpsak-frontend/assets/images/pil_ned.svg';
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import { AoIArbeidsforhold, Inntektspost } from '@fpsak-frontend/types';
 import {
-  VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image, FloatRight,
+  VerticalSpacer, FloatRight,
 } from '@fpsak-frontend/shared-components';
 
 import styles from './arbeidsforholdInformasjonPanel.less';

@@ -7,12 +7,12 @@ import classnames from 'classnames/bind';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { Normaltekst } from 'nav-frontend-typografi';
 import AlertStripe from 'nav-frontend-alertstriper';
+import {
+  FlexColumn, FlexContainer, FlexRow, Image,
+} from '@navikt/fp-react-components';
 
 import { ArbeidsgiverOpplysningerPerId, FamilieHendelseSamling } from '@fpsak-frontend/types';
 import { calcDays } from '@fpsak-frontend/utils';
-import {
-  FlexColumn, FlexContainer, FlexRow, Image,
-} from '@fpsak-frontend/shared-components';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import overlapp from '@fpsak-frontend/assets/images/overlapp.svg';
 import tomPeriode from '@fpsak-frontend/assets/images/tom_periode.svg';

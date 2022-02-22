@@ -2,13 +2,11 @@ import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import {
   dateAfterOrEqual, hasValidDate, isArrayEmpty, ISO_DATE_FORMAT, maxLength, required,
 } from '@fpsak-frontend/utils';
-import {
-  FlexColumn, FlexContainer, FlexRow,
-} from '@fpsak-frontend/shared-components';
 import { DatepickerField, InputField, PeriodFieldArray } from '@fpsak-frontend/form';
 
 import { useIntl } from 'react-intl';

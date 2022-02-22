@@ -3,10 +3,13 @@ import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl'
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
+import {
+  FlexColumn, FlexContainer, FlexRow, Image,
+} from '@navikt/fp-react-components';
 
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 import {
-  FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
+  VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 
 import styles from './utlandEndretModal.less';

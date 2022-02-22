@@ -1,13 +1,13 @@
 import React, {
   FunctionComponent, useEffect, useCallback, useState,
 } from 'react';
+import { Image } from '@navikt/fp-react-components';
 
 import keyImage from '@fpsak-frontend/assets/images/key-1-rotert.svg';
 import keyUtgraetImage from '@fpsak-frontend/assets/images/key-1-rotert-utgraet.svg';
 import { createIntl } from '@fpsak-frontend/utils';
 
 import messages from '../i18n/nb_NO.json';
-import Image from './Image';
 
 import styles from './overstyringKnapp.less';
 

@@ -2,9 +2,9 @@ import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
+import { FlexColumn } from '@navikt/fp-react-components';
 
 import { FagsakHendelse } from '@fpsak-frontend/types';
-import { FlexColumn } from '@fpsak-frontend/shared-components';
 import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 

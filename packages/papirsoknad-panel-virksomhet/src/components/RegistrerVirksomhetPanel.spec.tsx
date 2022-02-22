@@ -3,9 +3,9 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import { FieldArrayMetaProps } from 'redux-form';
 import { Undertekst } from 'nav-frontend-typografi';
+import { Image } from '@navikt/fp-react-components';
 
 import { MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import Image from '@fpsak-frontend/shared-components/src/Image';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import { RegistrerVirksomhetPanel } from './RegistrerVirksomhetPanel';

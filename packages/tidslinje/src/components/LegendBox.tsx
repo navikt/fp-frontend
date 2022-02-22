@@ -1,6 +1,5 @@
 import React from 'react';
-
-import { Image } from '@fpsak-frontend/shared-components';
+import { Image } from '@navikt/fp-react-components';
 
 import TimeLineButton from './TimeLineButton';
 

@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
-
 import {
   EditedIcon, FlexColumn, FlexContainer, FlexRow,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/fp-react-components';
+
 import { range } from '@fpsak-frontend/utils';
 
 import styles from './optionGrid.less';

@@ -3,9 +3,9 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import ModalWrapper from 'nav-frontend-modal';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { Image } from '@navikt/fp-react-components';
 
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import Image from '@fpsak-frontend/shared-components/src/Image';
 
 import messages from '../../i18n/nb_NO.json';
 import { LukkPapirSoknadModal } from './LukkPapirsoknadModal';

@@ -6,10 +6,13 @@ import { FormattedMessage, IntlShape } from 'react-intl';
 import { createSelector } from 'reselect';
 import { Element, Undertittel } from 'nav-frontend-typografi';
 import { AlertStripeInfo, AlertStripeFeil } from 'nav-frontend-alertstriper';
+import {
+  Image, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/fp-react-components';
 
 import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
 import {
-  FlexColumn, FlexContainer, FlexRow, VerticalSpacer, AvsnittSkiller, Image,
+  VerticalSpacer, AvsnittSkiller,
 } from '@fpsak-frontend/shared-components';
 import { DatepickerField, TextAreaField } from '@fpsak-frontend/form';
 import {

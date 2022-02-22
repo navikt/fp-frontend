@@ -5,10 +5,11 @@ import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import dayjs from 'dayjs';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  FlexColumn, FlexContainer, FlexRow, VerticalSpacer, FaktaGruppe,
+  VerticalSpacer, FaktaGruppe,
 } from '@fpsak-frontend/shared-components';
 import {
   findDifferenceInMonthsAndDays,

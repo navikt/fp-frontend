@@ -1,7 +1,7 @@
 import React from 'react';
+import { Image } from '@navikt/fp-react-components';
 
 import { DecimalField } from '@fpsak-frontend/form';
-import { Image } from '@fpsak-frontend/shared-components';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import TilretteleggingUtbetalingsgrad from './TilretteleggingUtbetalingsgrad';

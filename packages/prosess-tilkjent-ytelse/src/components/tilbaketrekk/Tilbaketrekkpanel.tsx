@@ -3,10 +3,13 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
+import {
+  FlexColumn, FlexContainer, FlexRow, Image,
+} from '@navikt/fp-react-components';
 
 import behandleImageURL from '@fpsak-frontend/assets/images/advarsel.svg';
 import {
-  FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
+  VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import {
   hasValidText, maxLength, minLength, required,

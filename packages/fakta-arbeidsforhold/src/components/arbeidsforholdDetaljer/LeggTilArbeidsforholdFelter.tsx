@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { IntlShape } from 'react-intl';
 import moment from 'moment';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import {
   DDMMYYYY_DATE_FORMAT, hasValidDate, hasValidInteger, maxValue, minValue, required,
 } from '@fpsak-frontend/utils';
 import { DatepickerField, InputField } from '@fpsak-frontend/form';
-import { FlexColumn, FlexContainer, FlexRow } from '@fpsak-frontend/shared-components';
 
 import BehandlingFormFieldCleaner from '../../util/BehandlingFormFieldCleaner';
 import CustomArbeidsforhold from '../../typer/CustomArbeidsforholdTsType';
