@@ -3449,7 +3449,7 @@
   resolved "https://npm.pkg.github.com/download/@navikt/fp-array-utils/1.0.3/0a0a799990076f48ef653ed550eebed4b1a623a7bb380a6d6d823610d48666ee#97f980564aa1b1b818f188d4991fea4f680a041b"
   integrity sha512-6o9jq0724TM2WevBRpQYFxzCSxFT4hy01M6SAc9OqWF2dvUxYKwjs3D1+3O9eYgUyEbLYNobhiK4xKr2eP+fhA==
 
-"@navikt/fp-bem-utils@^1.0.2":
+"@navikt/fp-bem-utils@^1.0.3":
   version "1.0.3"
   resolved "https://npm.pkg.github.com/download/@navikt/fp-bem-utils/1.0.3/76c2932b20b0472d08f4d5ab0ec01c06d3241eb33715937970024b602747a2de#efd272e3619f1ea18e5db7c467a0b5ea7997295d"
   integrity sha512-G266VuNca7V7Es7TGYRqICGzcr8hzdlIhN3NNpWEPHhWtjtJQ/nGZMabGnTPCmthgS6iBcca9EimUGlafvRESQ==
@@ -3459,7 +3459,7 @@
   resolved "https://npm.pkg.github.com/download/@navikt/fp-date-utils/1.0.3/ecb0059c88560d6730aba24433d56e35d14b0323fe8cc54e6f5937693d892ddd#edf278b6d4dcd31f4687144fd4d31194620034bb"
   integrity sha512-34GugYzI1R2p5XoU099LlTgYzJHUP6Io3jE6e8/ylt7RoVZMTPJ9CAFNzQaRZw/nNkGHD6VuSnWBHQDZImUSlQ==
 
-"@navikt/fp-period-utils@^1.0.2":
+"@navikt/fp-period-utils@^1.0.3":
   version "1.0.3"
   resolved "https://npm.pkg.github.com/download/@navikt/fp-period-utils/1.0.3/767d056680c147d21d2e82c6aee3b8d794b68c14ab6abd32308b266b93b83116#a042f055a33021efb1a01b1263cd582502a04876"
   integrity sha512-vvUjnJZ2KSWUwmadzZNETraXG3B5pM9IaBHQrpujEbEoqMj0RvBizvVHZCEZHYK8pkNxgdOCV8WDIIeTuKkzVw==
@@ -3467,13 +3467,13 @@
     "@navikt/fp-array-utils" "^1.0.3"
     "@navikt/fp-date-utils" "^1.0.3"
 
-"@navikt/fp-react-components@1.0.4":
-  version "1.0.4"
-  resolved "https://npm.pkg.github.com/download/@navikt/fp-react-components/1.0.4/44c275a71e1e45b658c1b24183a03446c0799fcc5676200b15269804e1ec0c63#d7dc41139b4b05bdee049b619a7391cc5ebf0edd"
-  integrity sha512-tQ6DLG4Pff6ViJyTcCYGtuefMiHRq+QU1dRE++m58Fh8Ap1IsYIPGK4fkDqmEkvv0FFXvVF9bxRgm+JNZKbZnA==
+"@navikt/fp-react-components@1.0.12":
+  version "1.0.12"
+  resolved "https://npm.pkg.github.com/download/@navikt/fp-react-components/1.0.12/48543b5b0676aebe99f3a13b6a2d422c2b075538dd4d4dc5b5620bc1ab28c593#490b1c986f70ea48112a0c58bf29975c6aab061c"
+  integrity sha512-a8XEqcfXEvYxk1XSXJAG7iusW8pumpDgcEX352MH1yrcCvXK0tcsPwJWKLuFDGMkXL6c0praC51ZWR25hvGiWg==
   dependencies:
-    "@navikt/fp-bem-utils" "^1.0.2"
-    "@navikt/fp-period-utils" "^1.0.2"
+    "@navikt/fp-bem-utils" "^1.0.3"
+    "@navikt/fp-period-utils" "^1.0.3"
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"

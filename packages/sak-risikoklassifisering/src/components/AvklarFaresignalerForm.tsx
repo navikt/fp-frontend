@@ -3,9 +3,10 @@ import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import {
-  ArrowBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+  ArrowBox, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import {
   ariaCheck, hasValidText, maxLength, minLength, required,

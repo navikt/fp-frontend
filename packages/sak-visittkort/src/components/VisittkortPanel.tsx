@@ -1,10 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
-import { PersonCard, EmptyPersonCard, Gender } from '@navikt/fp-react-components';
-
 import {
-  FlexColumn, FlexContainer, FlexRow,
-} from '@fpsak-frontend/shared-components';
+  PersonCard, EmptyPersonCard, Gender, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/fp-react-components';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import { Fagsak, KjønnkodeEnum, FagsakPersoner } from '@fpsak-frontend/types';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';

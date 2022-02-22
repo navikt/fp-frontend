@@ -1,10 +1,7 @@
 import React, {
   FunctionComponent, ReactElement, useState, useCallback, useMemo, useRef, useEffect,
 } from 'react';
-
-import {
-  FlexColumn, FlexContainer, FlexRow,
-} from '@fpsak-frontend/shared-components';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import FaktaMeny from './FaktaMeny';
 import FaktaPanelMenyData from '../../types/faktaPanelMenyData';

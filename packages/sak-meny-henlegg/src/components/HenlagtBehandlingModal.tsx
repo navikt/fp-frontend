@@ -4,8 +4,8 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
+import { Image } from '@navikt/fp-react-components';
 
-import { Image } from '@fpsak-frontend/shared-components';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 
 import styles from './henlagtBehandlingModal.less';

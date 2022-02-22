@@ -5,6 +5,7 @@ import {
   Element, Normaltekst, Undertekst,
 } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
+import { FlexColumn, FlexRow } from '@navikt/fp-react-components';
 
 import {
   getKodeverknavnFn, dateFormat, formatCurrencyNoKr,
@@ -12,7 +13,7 @@ import {
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
-  FlexColumn, FlexRow, VerticalSpacer, AvsnittSkiller,
+  VerticalSpacer, AvsnittSkiller,
 } from '@fpsak-frontend/shared-components';
 
 import {

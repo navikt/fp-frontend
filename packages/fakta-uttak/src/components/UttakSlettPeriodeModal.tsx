@@ -6,6 +6,9 @@ import { InjectedFormProps, reduxForm } from 'redux-form';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
+import {
+  FlexColumn, FlexContainer, FlexRow, Image,
+} from '@navikt/fp-react-components';
 
 import { TextAreaField } from '@fpsak-frontend/form';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
@@ -13,9 +16,7 @@ import {
   DDMMYYYY_DATE_FORMAT, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
-import {
-  FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 
 import styles from './uttakSlettPeriodeModal.less';
 import CustomUttakKontrollerFaktaPerioder from '../CustomUttakKontrollerFaktaPerioderTsType';

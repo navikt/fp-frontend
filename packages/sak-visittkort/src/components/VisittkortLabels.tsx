@@ -4,11 +4,11 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import {
   EtikettInfo, EtikettAdvarsel, EtikettFokus,
 } from 'nav-frontend-etiketter';
+import { Tooltip } from '@navikt/fp-react-components';
 
 import diskresjonskodeType from '@fpsak-frontend/kodeverk/src/diskresjonskodeType';
 import { FagsakPerson } from '@fpsak-frontend/types';
 import { dateFormat } from '@fpsak-frontend/utils';
-import { Tooltip } from '@fpsak-frontend/shared-components';
 
 import styles from './visittkortLabels.less';
 

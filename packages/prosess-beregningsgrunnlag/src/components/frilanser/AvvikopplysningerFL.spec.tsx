@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { FlexRow } from '@navikt/fp-react-components';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { SammenligningsgrunlagProp } from '@fpsak-frontend/types';
@@ -18,7 +19,7 @@ const sammenligningsgrunnlag = (kode) => ({
   differanseBeregnet: 12100,
 });
 
-describe('<AvviksopplysningerFL>', () => {
+describe('<AvvikopplysningerFL>', () => {
   it('Skal teste kombinasjonsStatus:FNSN', () => {
     const sammenligningsgrunnlagPrStatus = sammenligningsgrunnlag('SAMMENLIGNING_ATFL_SN') as SammenligningsgrunlagProp;
     const wrapper = shallowWithIntl(<AvviksopplysningerFL
@@ -33,7 +34,7 @@ describe('<AvviksopplysningerFL>', () => {
         } as RelevanteStatuserProp
       }
     />, messages);
-    const rows = wrapper.find('FlexRow');
+    const rows = wrapper.find(FlexRow);
     expect(rows.length).toBe(1);
     const text = rows.first().find(FormattedMessage);
     expect(text.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.FL.KobinasjonsStatusFLSN');
@@ -66,7 +67,7 @@ describe('<AvviksopplysningerFL>', () => {
       sammenligningsgrunnlagPrStatus={[sammenligningsgrunnlagPrStatus]}
       relevanteStatuser={{ isKombinasjonsstatus: false } as RelevanteStatuserProp}
     />, messages);
-    const rows = wrapper.find('FlexRow');
+    const rows = wrapper.find(FlexRow);
     expect(rows.length).toBe(0);
   });
   it('Skal teste tabellen IKKE rendres med feil status:SAMMENLIGNING_AT', () => {
@@ -76,7 +77,7 @@ describe('<AvviksopplysningerFL>', () => {
       sammenligningsgrunnlagPrStatus={[sammenligningsgrunnlagPrStatus]}
       relevanteStatuser={{ isKombinasjonsstatus: false } as RelevanteStatuserProp}
     />, messages);
-    const rows = wrapper.find('FlexRow');
+    const rows = wrapper.find(FlexRow);
     expect(rows.length).toBe(0);
   });
 });

@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
+import { Image } from '@navikt/fp-react-components';
+
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import inntektskategorier from '@fpsak-frontend/kodeverk/src/inntektskategorier';
-import { Image } from '@fpsak-frontend/shared-components';
 import { FieldArrayFieldsProps } from 'redux-form';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import styles from './addAndelButton.less';

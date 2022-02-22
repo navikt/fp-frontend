@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
+import {
+  FlexColumn, FlexContainer, FlexRow, Image,
+} from '@navikt/fp-react-components';
 
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import { FagsakHendelse } from '@fpsak-frontend/types';
-import {
-  FlexColumn, FlexContainer, FlexRow, Image,
-} from '@fpsak-frontend/shared-components';
 import barnevognImage from '@fpsak-frontend/assets/images/barnevogn.svg';
 
 import VisittkortBarnInfoFodselPanel from './VisittkortBarnInfoFodselPanel';

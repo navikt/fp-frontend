@@ -2,9 +2,9 @@ import React, { FunctionComponent, useEffect } from 'react';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import { required, maxValue } from '@fpsak-frontend/utils';
-import { FlexColumn, FlexContainer, FlexRow } from '@fpsak-frontend/shared-components';
 import {
   DatepickerField, InputField, SelectField, PeriodFieldArray,
 } from '@fpsak-frontend/form';

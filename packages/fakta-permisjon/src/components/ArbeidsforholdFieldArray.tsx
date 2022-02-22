@@ -3,13 +3,16 @@ import { useFormContext, useFieldArray } from 'react-hook-form';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
+import {
+  FlexColumn, FlexContainer, FlexRow, Image,
+} from '@navikt/fp-react-components';
 
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
 import { required, TIDENES_ENDE } from '@fpsak-frontend/utils';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
 import {
-  VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image, PeriodLabel, DateTimeLabel,
+  VerticalSpacer, PeriodLabel, DateTimeLabel,
 } from '@fpsak-frontend/shared-components';
 import { ArbeidOgInntektsmelding, AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 

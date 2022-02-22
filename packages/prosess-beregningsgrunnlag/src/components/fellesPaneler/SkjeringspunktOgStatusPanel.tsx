@@ -1,12 +1,12 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { EtikettInfo } from 'nav-frontend-etiketter';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import {
-  DateLabel, FlexContainer, FlexColumn, FlexRow, VerticalSpacer, AvsnittSkiller,
+  DateLabel, VerticalSpacer, AvsnittSkiller,
 } from '@fpsak-frontend/shared-components';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { AlleKodeverk } from '@fpsak-frontend/types';

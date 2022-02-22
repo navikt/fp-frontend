@@ -6,9 +6,10 @@ import moment from 'moment';
 import { Undertekst, Element } from 'nav-frontend-typografi';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import Alertstripe from 'nav-frontend-alertstriper';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import {
-  FlexColumn, FlexContainer, FlexRow, ArrowBox, BorderBox, VerticalSpacer,
+  ArrowBox, BorderBox, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import {
   DatepickerField, InputField, NavFieldGroup, RadioGroupField, RadioOption,

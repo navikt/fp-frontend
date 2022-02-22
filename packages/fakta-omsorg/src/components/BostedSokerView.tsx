@@ -3,10 +3,10 @@ import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl'
 import { Column, Row } from 'nav-frontend-grid';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Etikettfokus from 'nav-frontend-etiketter';
+import { Tooltip } from '@navikt/fp-react-components';
 
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
 import { getAddresses } from '@fpsak-frontend/utils';
-import { Tooltip } from '@fpsak-frontend/shared-components';
 import {
   KodeverkMedNavn, Personadresse, PersonopplysningerBasis,
 } from '@fpsak-frontend/types';

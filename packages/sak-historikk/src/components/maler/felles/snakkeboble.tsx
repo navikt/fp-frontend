@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import classNames from 'classnames/bind';
 import Panel from 'nav-frontend-paneler';
 import { Undertekst } from 'nav-frontend-typografi';
+import { Image } from '@navikt/fp-react-components';
 
 import HistorikkAktor from '@fpsak-frontend/kodeverk/src/historikkAktor';
 import navAnsattHistorikkImg from '@fpsak-frontend/assets/images/nav_ansatt_historikk.svg';
@@ -10,7 +11,6 @@ import maskinImg from '@fpsak-frontend/assets/images/maskin.svg';
 import arbeidsgiverImg from '@fpsak-frontend/assets/images/arbeidsgiver.svg';
 import mannImg from '@fpsak-frontend/assets/images/mann.svg';
 import beslutterImg from '@fpsak-frontend/assets/images/beslutter.svg';
-import { Image } from '@fpsak-frontend/shared-components';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 
 import styles from './snakkeboble.less';

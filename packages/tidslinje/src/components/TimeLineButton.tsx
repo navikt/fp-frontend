@@ -1,7 +1,8 @@
 import React, { KeyboardEvent, MouseEvent } from 'react';
+import { Image } from '@navikt/fp-react-components';
+
 import arrowRightImageUrl from '@fpsak-frontend/assets/images/arrow_right.svg';
 import arrowRightFilledImageUrl from '@fpsak-frontend/assets/images/arrow_right_filled.svg';
-import { Image } from '@fpsak-frontend/shared-components';
 import arrowLeftImageUrl from '@fpsak-frontend/assets/images/arrow_left.svg';
 import arrowLeftFilledImageUrl from '@fpsak-frontend/assets/images/arrow_left_filled.svg';
 import zoomInImageUrl from '@fpsak-frontend/assets/images/zoom_in.svg';

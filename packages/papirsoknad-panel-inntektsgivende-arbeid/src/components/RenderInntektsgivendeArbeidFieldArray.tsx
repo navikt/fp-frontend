@@ -1,13 +1,11 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import landkoder from '@fpsak-frontend/kodeverk/src/landkoder';
 import { maxLength } from '@fpsak-frontend/utils';
-import {
-  FlexColumn, FlexContainer, FlexRow,
-} from '@fpsak-frontend/shared-components';
 import {
   DatepickerField, InputField, SelectField, PeriodFieldArray,
 } from '@fpsak-frontend/form';

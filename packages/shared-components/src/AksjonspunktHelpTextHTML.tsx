@@ -1,11 +1,11 @@
 import React, { ReactNode, FunctionComponent } from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
+import {
+  Image, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/fp-react-components';
 
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import { isObject, createIntl } from '@fpsak-frontend/utils';
-
-import { FlexColumn, FlexContainer, FlexRow } from './flexGrid';
-import Image from './Image';
 
 import messages from '../i18n/nb_NO.json';
 import styles from './aksjonspunktHelpTextHTML.less';

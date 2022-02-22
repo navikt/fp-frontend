@@ -13,6 +13,7 @@
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/types-avklar-aksjonspunkter": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
+    "@navikt/fp-react-components": "1.0.12",
     "moment": "^2.29.1",
     "nav-frontend-alertstriper": "4.0.1",
     "nav-frontend-alertstriper-style": "3.0.1",

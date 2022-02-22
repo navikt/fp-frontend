@@ -5,6 +5,7 @@ import { useFormContext, useFieldArray, UseFormGetValues } from 'react-hook-form
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { Location } from 'history';
 import { Undertekst, Normaltekst } from 'nav-frontend-typografi';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import {
   KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
@@ -13,7 +14,7 @@ import {
   CheckboxField, TextAreaField, RadioGroupField, RadioOption, SkjemaGruppeMedFeilviser,
 } from '@fpsak-frontend/form-hooks';
 import {
-  ArrowBox, FlexColumn, FlexContainer, FlexRow,
+  ArrowBox,
 } from '@fpsak-frontend/shared-components';
 import {
   hasValidText, maxLength, minLength, required, isRequiredMessage,

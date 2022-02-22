@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Normaltekst } from 'nav-frontend-typografi';
+import { EditedIcon } from '@navikt/fp-react-components';
 
-import { EditedIcon } from '@fpsak-frontend/shared-components';
 import Label from './Label';
 import ReadOnlyField from './ReadOnlyField';
 

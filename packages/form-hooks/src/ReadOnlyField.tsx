@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
+import { EditedIcon } from '@navikt/fp-react-components';
 
-import { EditedIcon } from '@fpsak-frontend/shared-components';
 import Label, { LabelType } from './Label';
 
 import styles from './readOnlyField.less';

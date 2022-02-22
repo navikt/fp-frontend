@@ -3,6 +3,8 @@ import { change as reduxChange } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { FormattedMessage } from 'react-intl';
+import { EditedIcon } from '@navikt/fp-react-components';
+
 import moment from 'moment';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { RadioGroupField, RadioOption, DatepickerField } from '@fpsak-frontend/form';
@@ -13,7 +15,7 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 import opptjeningAktivitetTyper from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
 
 import {
-  Table, TableRow, TableColumn, PeriodLabel, EditedIcon, DateLabel,
+  Table, TableRow, TableColumn, PeriodLabel, DateLabel,
 } from '@fpsak-frontend/shared-components';
 import {
   ArbeidsgiverOpplysningerPerId, BeregningAktivitet, AlleKodeverk,

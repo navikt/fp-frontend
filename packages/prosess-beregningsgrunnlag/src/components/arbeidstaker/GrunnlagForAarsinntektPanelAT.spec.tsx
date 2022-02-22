@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { FlexRow } from '@navikt/fp-react-components';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -58,7 +59,7 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
     />, messages);
     const rows = wrapper.find('Row');
     expect(rows).toHaveLength(7);
-    const rowsFlex = wrapper.find('FlexRow');
+    const rowsFlex = wrapper.find(FlexRow);
     expect(rowsFlex).toHaveLength(3);
   });
 
@@ -72,7 +73,7 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
       alleKodeverk={{} as AlleKodeverk}
     />, messages);
     const rows = wrapper.find('Row');
-    const rowsFlex = wrapper.find('FlexRow');
+    const rowsFlex = wrapper.find(FlexRow);
     expect(rows).toHaveLength(3);
     let rowNr = 1;
     let rowNrFlex = 1;
@@ -107,7 +108,7 @@ describe('<GrunnlagForAarsinntektPanelAT>', () => {
     />, messages);
 
     const rows = wrapper.find('Row');
-    const rowsFlex = wrapper.find('FlexRow');
+    const rowsFlex = wrapper.find(FlexRow);
     let rowNr = 1;
     let rowNrFlex = 1;
     andeler.forEach((andel) => {

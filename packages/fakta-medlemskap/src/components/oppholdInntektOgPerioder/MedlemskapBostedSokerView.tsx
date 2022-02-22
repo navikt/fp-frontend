@@ -3,12 +3,12 @@ import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl'
 import { Column, Row } from 'nav-frontend-grid';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Etikettfokus from 'nav-frontend-etiketter';
+import { Tooltip } from '@navikt/fp-react-components';
 
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
 import { getAddresses } from '@fpsak-frontend/utils';
 import personstatusType from '@fpsak-frontend/kodeverk/src/personstatusType';
 import Region from '@fpsak-frontend/kodeverk/src/region';
-import { Tooltip } from '@fpsak-frontend/shared-components';
 import { KodeverkMedNavn, Personadresse, PersonopplysningMedlem } from '@fpsak-frontend/types';
 
 import styles from './medlemskapBostedSokerView.less';

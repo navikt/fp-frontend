@@ -1,7 +1,9 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
+import { FlexRow } from '@navikt/fp-react-components';
+
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
-import { FormattedMessage } from 'react-intl';
 import AvvikopplysningerATFLSN from './AvvikopplysningerATFLSN';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 import messages from '../../../i18n/nb_NO.json';
@@ -25,7 +27,7 @@ const visPaneler = {
 };
 const avvikRounded = 27.5;
 const sammenligningsgrunnlagSum = 23466;
-describe('<AvviksOpplysningerATFLSN>', () => {
+describe('<AvvikopplysningerATFLSN>', () => {
   it('Skal teste tabellen får korrekte rader for frilanser og kombinasjonsstatus', () => {
     const sammenligningsgrunnlagPrStatus = sammenligningsgrunnlag('SAMMENLIGNING_FL');
     const wrapper = shallowWithIntl(<AvvikopplysningerATFLSN
@@ -37,7 +39,7 @@ describe('<AvviksOpplysningerATFLSN>', () => {
       sammenligningsgrunnlagSum={sammenligningsgrunnlagSum}
     />, messages);
 
-    const rows = wrapper.find('FlexRow');
+    const rows = wrapper.find(FlexRow);
     expect(rows).toHaveLength(4);
     const omregnetAarsinntektText = rows.first().find(FormattedMessage);
     expect(omregnetAarsinntektText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.OmregnetAarsinntekt.Frilans');
@@ -75,7 +77,7 @@ describe('<AvviksOpplysningerATFLSN>', () => {
       visPanel={visPaneler}
       sammenligningsgrunnlagSum={sammenligningsgrunnlagSum}
     />, messages);
-    const rows = wrapper.find('FlexRow');
+    const rows = wrapper.find(FlexRow);
     expect(rows).toHaveLength(4);
     const omregnetAarsinntektText = rows.first().find(FormattedMessage);
     expect(omregnetAarsinntektText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.OmregnetAarsinntekt.Arbeid');
@@ -116,7 +118,7 @@ describe('<AvviksOpplysningerATFLSN>', () => {
       sammenligningsgrunnlagSum={sammenligningsgrunnlagSum}
     />, messages);
 
-    const rows = wrapper.find('FlexRow');
+    const rows = wrapper.find(FlexRow);
     expect(rows).toHaveLength(4);
     const omregnetAarsinntektText = rows.first().find(FormattedMessage);
     expect(omregnetAarsinntektText.first().prop('id')).toEqual('Beregningsgrunnlag.Avviksopplysninger.OmregnetAarsinntekt');

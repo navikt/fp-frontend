@@ -9,6 +9,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Undertekst } from 'nav-frontend-typografi';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import {
   RadioGroupField, RadioOption, SelectField, TextAreaField,
@@ -34,7 +35,7 @@ import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType'
 import utsettelseArsakCodes from '@fpsak-frontend/kodeverk/src/utsettelseArsakCodes';
 import oppholdArsakType, { oppholdArsakMapper } from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
 import {
-  ArrowBox, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+  ArrowBox, VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 
 import {
