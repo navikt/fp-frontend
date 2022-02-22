@@ -102,6 +102,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               saksnummer={saksnummer}
               stillingsprosent={arbeidsforhold?.stillingsprosent}
               inntektsmelding={inntektsmelding}
+              skalViseArbeidsforholdId={skalViseArbeidsforholdId}
             />
           )}
           {manglerInntektsmelding && (

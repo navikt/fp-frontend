@@ -780,6 +780,96 @@ ArbeidsforholdMedSammeOrgNr.args = {
   },
 };
 
+export const ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAndre = Template.bind({});
+ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAndre.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
+  erOverstyrer: true,
+  aksjonspunkter: [{
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+    status: aksjonspunktStatus.OPPRETTET,
+  }] as Aksjonspunkt[],
+  arbeidsgiverOpplysningerPerId: {
+    910909088: {
+      erPrivatPerson: false,
+      fødselsdato: undefined,
+      identifikator: '910909088',
+      navn: 'BEDRIFT AS',
+      referanse: '910909088',
+    },
+    910909090: {
+      erPrivatPerson: false,
+      fødselsdato: undefined,
+      identifikator: '910909090',
+      navn: 'Autoservice AS',
+      referanse: '910909090',
+    },
+  },
+  arbeidOgInntekt: {
+    arbeidsforhold: [{
+      arbeidsgiverIdent: '910909088',
+      eksternArbeidsforholdId: '937454638267484645345272024132738483735636363535424253y4847478465423hdydt36378478393893847474783',
+      fom: '2019-06-06',
+      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d3',
+      stillingsprosent: 80,
+      tom: '2021-12-31',
+      årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
+    }, {
+      arbeidsgiverIdent: '910909088',
+      eksternArbeidsforholdId: '2433453225',
+      fom: '2019-06-06',
+      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d',
+      stillingsprosent: 80,
+      tom: '2021-12-31',
+      årsak: undefined,
+    }],
+    inntektsmeldinger: [{
+      inntektPrMnd: 30000,
+      refusjonPrMnd: undefined,
+      arbeidsgiverIdent: '910909088',
+      eksternArbeidsforholdId: '2433453225',
+      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d',
+      kontaktpersonNavn: 'Corpolarsen',
+      kontaktpersonNummer: '41925090',
+      journalpostId: '1',
+      dokumentId: '2',
+      motattDato: '2021-12-06',
+      innsendingstidspunkt: '2021-12-06T10:52:13.377',
+      årsak: undefined,
+    }],
+    inntekter: [{
+      arbeidsgiverIdent: '910909088',
+      inntekter: [{
+        beløp: 40000,
+        fom: '2020-06-01',
+        tom: '2020-06-30',
+        type: 'LØNN',
+      }, {
+        beløp: 40000,
+        fom: '2020-07-01',
+        tom: '2020-07-31',
+        type: 'LØNN',
+      }, {
+        beløp: 40000,
+        fom: '2020-08-01',
+        tom: '2020-08-31',
+        type: 'LØNN',
+      }, {
+        beløp: 40000,
+        fom: '2020-09-01',
+        tom: '2020-09-30',
+        type: 'LØNN',
+      }, {
+        beløp: 40000,
+        fom: '2021-11-01',
+        tom: '2021-11-30',
+        type: 'LØNN',
+      }],
+    }],
+    skjæringstidspunkt: '2021-11-10',
+  },
+};
+
 export const FoerRegisterinnhenting = Template.bind({});
 FoerRegisterinnhenting.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,

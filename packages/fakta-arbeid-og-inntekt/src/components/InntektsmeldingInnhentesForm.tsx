@@ -83,7 +83,8 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
     };
     lagreVurdering(params).then(() => {
       oppdaterTabell((oldData) => oldData.map((data) => {
-        if (data.arbeidsforhold?.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId) {
+        if (data.arbeidsforhold?.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent
+          && data.arbeidsforhold?.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId) {
           return {
             ...data,
             arbeidsforhold: {
