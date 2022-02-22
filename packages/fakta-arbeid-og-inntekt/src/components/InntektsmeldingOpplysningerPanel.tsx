@@ -18,16 +18,31 @@ interface OwnProps {
   saksnummer: string;
   stillingsprosent?: number;
   inntektsmelding: Inntektsmelding;
+  skalViseArbeidsforholdId: boolean;
 }
 
 const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
   saksnummer,
   stillingsprosent,
   inntektsmelding,
+  skalViseArbeidsforholdId,
 }) => (
   <>
     <VerticalSpacer eightPx />
     <FlexContainer>
+      {skalViseArbeidsforholdId && (
+        <>
+          <FlexRow>
+            <FlexColumn>
+              <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.ArbeidsforholdId" /></Element>
+            </FlexColumn>
+            <FlexColumn>
+              <Normaltekst>{inntektsmelding.eksternArbeidsforholdId}</Normaltekst>
+            </FlexColumn>
+          </FlexRow>
+          <VerticalSpacer eightPx />
+        </>
+      )}
       {stillingsprosent && (
         <>
           <FlexRow>

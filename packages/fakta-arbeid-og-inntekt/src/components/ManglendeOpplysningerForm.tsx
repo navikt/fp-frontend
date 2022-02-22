@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm, UseFormGetValues } from 'react-hook-form';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Element } from 'nav-frontend-typografi';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
@@ -151,20 +151,11 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      {skalViseArbeidsforholdId && (
-        <>
-          <FlexRow>
-            <FlexColumn>
-              <Element><FormattedMessage id="ManglendeOpplysningerForm.ArbeidsforholdId" /></Element>
-            </FlexColumn>
-            <FlexColumn>
-              <Normaltekst>{inntektsmelding.eksternArbeidsforholdId}</Normaltekst>
-            </FlexColumn>
-          </FlexRow>
-          <VerticalSpacer eightPx />
-        </>
-      )}
-      <InntektsmeldingOpplysningerPanel saksnummer={saksnummer} inntektsmelding={inntektsmelding} />
+      <InntektsmeldingOpplysningerPanel
+        saksnummer={saksnummer}
+        inntektsmelding={inntektsmelding}
+        skalViseArbeidsforholdId={skalViseArbeidsforholdId}
+      />
       <VerticalSpacer fourtyPx />
       <div className={styles.alertStripe}>
         <AlertStripeInfo><FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" /></AlertStripeInfo>
