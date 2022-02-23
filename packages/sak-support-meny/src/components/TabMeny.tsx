@@ -1,6 +1,8 @@
 import React, { FunctionComponent, useRef, useEffect } from 'react';
 import classnames from 'classnames/bind';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
+import FlexColumn from './FlexColumn';
+import FlexContainer from './FlexContainer';
+import FlexRow from './FlexRow';
 
 import styles from './tabMeny.less';
 
