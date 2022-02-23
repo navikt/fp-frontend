@@ -261,7 +261,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     userEvent.click(screen.getByText('Legg til arbeidsforhold'));
 
-    userEvent.type(utils.getByLabelText('Arbeidsgiver'), 'Telenor');
+    userEvent.type(utils.getByLabelText('Navn på arbeidsgiver'), 'Telenor');
 
     const periodeFra = screen.getByText('Periode fra');
     userEvent.type(periodeFra, '01.02.2020');

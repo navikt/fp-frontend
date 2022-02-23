@@ -73,7 +73,7 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
     arbeidsgivereOversikt: ArbeidsgiverOpplysningerWrapper,
     behandlingPersonoversikt: Personoversikt,
   }, void>(endepunkterSomSkalHentesEnGang, {
-    updateTriggers: [!behandling],
+    updateTriggers: [behandling?.versjon],
     suspendRequest: !behandling,
   });
 

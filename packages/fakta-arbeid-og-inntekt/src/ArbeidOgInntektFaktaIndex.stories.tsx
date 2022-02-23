@@ -266,6 +266,8 @@ AvklarManglendeOpplysningerDerBehandlingErAvsluttet.args = {
       fom: '2021-10-06',
       tom: '2021-12-12',
       stillingsprosent: 100,
+      saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+      begrunnelse: 'Jeg opprettet arbeidsforhold fordi...',
     }],
     inntektsmeldinger: [{
       arbeidsgiverIdent: '910909088',
@@ -280,8 +282,6 @@ AvklarManglendeOpplysningerDerBehandlingErAvsluttet.args = {
       journalpostId: '1',
       dokumentId: '2',
       årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
-      saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
-      begrunnelse: 'Jeg opprettet arbeidsforhold fordi...',
     }],
     inntekter: [],
     skjæringstidspunkt: '2021-11-10',
@@ -314,6 +314,8 @@ AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppMulig.args = {
       fom: '2021-10-06',
       tom: '2021-12-12',
       stillingsprosent: 100,
+      saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+      begrunnelse: 'Jeg opprettet arbeidsforhold fordi...',
     }],
     inntektsmeldinger: [{
       arbeidsgiverIdent: '910909088',
@@ -328,8 +330,6 @@ AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppMulig.args = {
       journalpostId: '1',
       dokumentId: '2',
       årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
-      saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
-      begrunnelse: 'Jeg opprettet arbeidsforhold fordi...',
     }],
     inntekter: [],
     skjæringstidspunkt: '2021-11-10',
@@ -946,7 +946,7 @@ export const EtterAtEtterspurtInntektsmeldingErKommet = Template.bind({});
 EtterAtEtterspurtInntektsmeldingErKommet.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
-  erOverstyrer: true,
+  erOverstyrer: false,
   aksjonspunkter: [{
     definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
     status: aksjonspunktStatus.OPPRETTET,
@@ -1013,8 +1013,6 @@ EtterAtEtterspurtInntektsmeldingErKommet.args = {
         tom: '9999-12-31',
         stillingsprosent: 100.00,
         årsak: null,
-        saksbehandlersVurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
-        begrunnelse: 'her vil jeg mase på AG',
       },
     ],
     inntekter: [
