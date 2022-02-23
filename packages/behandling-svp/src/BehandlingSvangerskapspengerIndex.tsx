@@ -65,7 +65,7 @@ const BehandlingSvangerskapspengerIndex: FunctionComponent<StandardBehandlingPro
     arbeidsgivereOversikt: ArbeidsgiverOpplysningerWrapper,
     behandlingPersonoversikt: Personoversikt,
   }, void>(endepunkterSomSkalHentesEnGang, {
-    updateTriggers: [!behandling],
+    updateTriggers: [behandling?.versjon],
     suspendRequest: !behandling,
   });
 

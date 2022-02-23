@@ -178,6 +178,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   const { arbeidsforhold, inntektsmeldinger } = arbeidOgInntekt;
 
   const erAksjonspunktAvsluttet = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.UTFORT);
+  const erAksjonspunktApent = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET);
   const erOverstyrerOgIngenAksjonspunkt = aksjonspunkter.length === 0 && erOverstyrer;
   const erReadOnlyEllerHarAvsluttetAksjonspunkt = readOnly || erAksjonspunktAvsluttet;
 
@@ -189,7 +190,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
 
   const [tabellData, setTabellData] = useState(formData || byggTabellStruktur(arbeidOgInntekt, arbeidsgiverOpplysningerPerId));
   const [åpneRadIndexer, settÅpneRadIndexer] = useState(finnUløstArbeidsforholdIndex(tabellData));
-  const identerDetErFlereAv = finnArbeidsforholdIdentDetErFlereAv(tabellData);
+  const identerDetErFlereAv = useMemo(() => finnArbeidsforholdIdentDetErFlereAv(tabellData), [tabellData]);
 
   useEffect(() => () => {
     setFormData(tabellData);
@@ -250,6 +251,11 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
     settVisSettPåVentModal(false);
     settBehandlingPåVentCallback(params);
   }, [behandling.versjon]);
+
+  const skalViseÅpneForNyVurderingKnapp = !readOnly && (erAksjonspunktAvsluttet || erOverstyrerOgIngenAksjonspunkt);
+  const skalViseSettPåVentKnapp = !erReadOnlyEllerHarAvsluttetAksjonspunkt && isDirty && kanSettePåVent && åpneRadIndexer.length === 0;
+  const skalViseBekrefteKnapp = !erReadOnlyEllerHarAvsluttetAksjonspunkt
+    && (erAksjonspunktApent || isDirty) && !harUbehandledeAksjonspunkt && !kanSettePåVent && åpneRadIndexer.length === 0;
 
   return (
     <>
@@ -348,7 +354,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
         </>
       </Table>
       <VerticalSpacer sixteenPx />
-      {!erReadOnlyEllerHarAvsluttetAksjonspunkt && isDirty && kanSettePåVent && åpneRadIndexer.length === 0 && (
+      {skalViseSettPåVentKnapp && (
         <>
           <Hovedknapp
             mini
@@ -368,7 +374,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           />
         </>
       )}
-      {!erReadOnlyEllerHarAvsluttetAksjonspunkt && !harUbehandledeAksjonspunkt && isDirty && !kanSettePåVent && åpneRadIndexer.length === 0 && (
+      {skalViseBekrefteKnapp && (
         <Hovedknapp
           mini
           disabled={erKnappTrykket}
@@ -378,7 +384,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
           <FormattedMessage id="ArbeidOgInntektFaktaPanel.Bekreft" />
         </Hovedknapp>
       )}
-      {(!readOnly && (erAksjonspunktAvsluttet || erOverstyrerOgIngenAksjonspunkt)) && (
+      {skalViseÅpneForNyVurderingKnapp && (
         <Hovedknapp
           mini
           disabled={erKnappTrykket}
