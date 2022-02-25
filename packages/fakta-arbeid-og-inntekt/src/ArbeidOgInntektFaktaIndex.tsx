@@ -46,7 +46,7 @@ const ArbeidOgInntektFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanel
     <ArbeidOgInntektFaktaPanel
       saksnummer={saksnummer}
       behandling={behandling}
-      aksjonspunkter={aksjonspunkter}
+      aksjonspunkt={aksjonspunkter.length > 0 ? aksjonspunkter[0] : undefined}
       readOnly={readOnly}
       formData={formData}
       lagreCallback={submitCallback}

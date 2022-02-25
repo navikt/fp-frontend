@@ -1,38 +1,25 @@
 import React, {
   FunctionComponent, useState, useEffect, useCallback, useMemo,
 } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import { Column, Row } from 'nav-frontend-grid';
-import Lenke from 'nav-frontend-lenker';
+import { FormattedMessage } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import {
-  Image, FlexColumn, FlexContainer, FlexRow,
-} from '@navikt/fp-react-components';
 
-import { AlertStripeInfo } from 'nav-frontend-alertstriper';
-import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
-import { dateFormat } from '@fpsak-frontend/utils';
 import {
   Aksjonspunkt, AlleKodeverk, AoIArbeidsforhold, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId,
   Behandling, Inntektsmelding, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold,
 } from '@fpsak-frontend/types';
 import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
-import {
-  VerticalSpacer, AksjonspunktHelpTextHTML, FloatRight, Table, OverstyringKnapp,
-} from '@fpsak-frontend/shared-components';
+import { VerticalSpacer, Table } from '@fpsak-frontend/shared-components';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
-import ManueltLagtTilArbeidsforholdForm, { MANUELT_ORG_NR } from './ManueltLagtTilArbeidsforholdForm';
 import ArbeidsforholdRad from './ArbeidsforholdRad';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
-
-import styles from './arbeidOgInntektFaktaPanel.less';
+import ArbeidsOgInntektOverstyrPanel from './ArbeidsOgInntektOverstyrPanel';
 
 const HEADER_TEXT_IDS = [
   'EMPTY1',
@@ -43,24 +30,10 @@ const HEADER_TEXT_IDS = [
   'EMPTY2',
 ];
 
-const finnApTekstKoder = (
-  aksjonspunkter: Aksjonspunkt[],
-  harManglendeInntektsmeldinger: boolean,
-  harManglandeOpplysninger: boolean,
-): string[] => {
-  const erApÅpent = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET);
-
-  const koder = [];
-  if (erApÅpent && harManglendeInntektsmeldinger) {
-    koder.push('ArbeidOgInntektFaktaPanel.InnhentManglendeInntektsmelding');
-  }
-  if (erApÅpent && harManglandeOpplysninger) {
-    koder.push('ArbeidOgInntektFaktaPanel.AvklarManglendeOpplysninger');
-  }
-  return koder;
-};
-
-const sorterTabell = (d1: ArbeidsforholdOgInntekt, d2: ArbeidsforholdOgInntekt): number => {
+const sorterTabell = (
+  d1: ArbeidsforholdOgInntekt,
+  d2: ArbeidsforholdOgInntekt,
+): number => {
   const d1HarAp1 = !d1.inntektsmelding || d1.arbeidsforhold?.begrunnelse;
   const d2HarAp1 = !d2.inntektsmelding || d2.arbeidsforhold?.begrunnelse;
   if (d1HarAp1 && !d2HarAp1) {
@@ -91,7 +64,7 @@ const sorterTabell = (d1: ArbeidsforholdOgInntekt, d2: ArbeidsforholdOgInntekt):
 const erMatch = (
   arbeidsforhold: AoIArbeidsforhold,
   inntektsmelding: Inntektsmelding,
-) => inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent
+): boolean => inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent
   && (!inntektsmelding.internArbeidsforholdId || inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);
 
 const byggTabellStruktur = (
@@ -118,7 +91,9 @@ const byggTabellStruktur = (
   return alleArbeidsforhold.concat(alleInntektsmeldingerSomManglerArbeidsforhold).sort(sorterTabell);
 };
 
-const finnArbeidsforholdIdentDetErFlereAv = (data: ArbeidsforholdOgInntekt[]) => {
+const finnArbeidsforholdIdentDetErFlereAv = (
+  data: ArbeidsforholdOgInntekt[],
+): string[] => {
   const alleArbeidsgiverIdenter = data.reduce((prev, value) => {
     const ident = value.arbeidsforhold?.arbeidsgiverIdent || value.inntektsmelding?.arbeidsgiverIdent;
     return {
@@ -129,7 +104,9 @@ const finnArbeidsforholdIdentDetErFlereAv = (data: ArbeidsforholdOgInntekt[]) =>
   return Object.keys(alleArbeidsgiverIdenter).filter((key) => alleArbeidsgiverIdenter[key] > 1);
 };
 
-const finnUløstArbeidsforholdIndex = (tabellData: ArbeidsforholdOgInntekt[]): number[] => {
+const finnUløstArbeidsforholdIndex = (
+  tabellData: ArbeidsforholdOgInntekt[],
+): number[] => {
   const index = tabellData
     .findIndex((d) => (d.arbeidsforhold?.årsak && !d.arbeidsforhold?.saksbehandlersVurdering)
     || (d.inntektsmelding?.årsak && !d.inntektsmelding?.saksbehandlersVurdering && !d.arbeidsforhold?.saksbehandlersVurdering));
@@ -139,7 +116,7 @@ const finnUløstArbeidsforholdIndex = (tabellData: ArbeidsforholdOgInntekt[]): n
 interface OwnProps {
   saksnummer: string;
   behandling: Behandling;
-  aksjonspunkter: Aksjonspunkt[];
+  aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
   formData?: ArbeidsforholdOgInntekt[],
   setFormData: (data: ArbeidsforholdOgInntekt[]) => void,
@@ -160,7 +137,7 @@ interface OwnProps {
 const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   saksnummer,
   behandling,
-  aksjonspunkter,
+  aksjonspunkt,
   readOnly,
   arbeidOgInntekt,
   arbeidsgiverOpplysningerPerId,
@@ -174,19 +151,10 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   åpneForNyVurdering,
 }) => {
-  const intl = useIntl();
-  const { arbeidsforhold, inntektsmeldinger } = arbeidOgInntekt;
-
-  const erAksjonspunktAvsluttet = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.UTFORT);
-  const erAksjonspunktApent = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET);
-  const erOverstyrerOgIngenAksjonspunkt = aksjonspunkter.length === 0 && erOverstyrer;
-  const erReadOnlyEllerHarAvsluttetAksjonspunkt = readOnly || erAksjonspunktAvsluttet;
-
   const [erKnappTrykket, settKnappTrykket] = useState(false);
   const [visSettPåVentModal, settVisSettPåVentModal] = useState(false);
   const [isDirty, setDirty] = useState(false);
   const [erOverstyrt, setErOverstyrt] = useState(false);
-  const [skalLeggeTilArbeidsforhold, toggleLeggTilArbeidsforhold] = useState(false);
 
   const [tabellData, setTabellData] = useState(formData || byggTabellStruktur(arbeidOgInntekt, arbeidsgiverOpplysningerPerId));
   const [åpneRadIndexer, settÅpneRadIndexer] = useState(finnUløstArbeidsforholdIndex(tabellData));
@@ -196,20 +164,6 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
     setFormData(tabellData);
   }, [tabellData]);
 
-  const harIngenArbeidsforholdEllerInntektsmeldinger = arbeidsforhold.length === 0 && inntektsmeldinger.length === 0;
-  const harManglendeInntektsmeldinger = tabellData.some((d) => d.arbeidsforhold?.årsak);
-  const harManglandeOpplysninger = tabellData.some((d) => d.inntektsmelding?.årsak);
-  const aksjonspunktTekstKoder = useMemo(() => finnApTekstKoder(aksjonspunkter, harManglendeInntektsmeldinger, harManglandeOpplysninger), [behandling.versjon]);
-
-  const harUbehandledeAksjonspunkt = tabellData.some((d) => (d.arbeidsforhold?.årsak && !d.arbeidsforhold?.saksbehandlersVurdering)
-    || (d.inntektsmelding?.årsak && !d.inntektsmelding?.saksbehandlersVurdering && !d.arbeidsforhold?.saksbehandlersVurdering));
-
-  const kanSettePåVent = tabellData
-    .some((d) => d.arbeidsforhold?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING
-      || d.inntektsmelding?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD);
-
-  const harManueltLagtTilArbeidsforhold = tabellData.some((data) => data.arbeidsforhold?.arbeidsgiverIdent === MANUELT_ORG_NR);
-
   const toggleÅpenRad = useCallback((index: number) => {
     if (åpneRadIndexer.some((radIndex) => radIndex === index)) {
       settÅpneRadIndexer(åpneRadIndexer.filter((i) => i !== index));
@@ -217,15 +171,6 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
       settÅpneRadIndexer(åpneRadIndexer.concat(index));
     }
   }, [åpneRadIndexer, settÅpneRadIndexer]);
-
-  const toggleOverstyring = useCallback(() => {
-    setErOverstyrt(true);
-    const indexForManueltLagtTil = tabellData
-      .findIndex((t) => t.arbeidsforhold?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER);
-    if (indexForManueltLagtTil !== -1) {
-      settÅpneRadIndexer([indexForManueltLagtTil]);
-    }
-  }, [tabellData, settÅpneRadIndexer]);
 
   const oppdaterTabellData = useCallback((data: ArbeidsforholdOgInntekt[]) => {
     setDirty(true);
@@ -252,86 +197,35 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
     settBehandlingPåVentCallback(params);
   }, [behandling.versjon]);
 
-  const skalViseÅpneForNyVurderingKnapp = !readOnly && (erAksjonspunktAvsluttet || erOverstyrerOgIngenAksjonspunkt);
-  const skalViseSettPåVentKnapp = !erReadOnlyEllerHarAvsluttetAksjonspunkt && isDirty && kanSettePåVent && åpneRadIndexer.length === 0;
-  const skalViseBekrefteKnapp = !erReadOnlyEllerHarAvsluttetAksjonspunkt
-    && (erAksjonspunktApent || isDirty) && !harUbehandledeAksjonspunkt && !kanSettePåVent && åpneRadIndexer.length === 0;
+  const kanSettePåVent = tabellData
+    .some((d) => d.arbeidsforhold?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING
+    || d.inntektsmelding?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD);
+  const harBehandletAllePerioder = !tabellData.some((d) => (d.arbeidsforhold?.årsak && !d.arbeidsforhold?.saksbehandlersVurdering)
+    || (d.inntektsmelding?.årsak && !d.inntektsmelding?.saksbehandlersVurdering && !d.arbeidsforhold?.saksbehandlersVurdering));
+
+  const erAksjonspunktAvsluttet = aksjonspunkt?.status === aksjonspunktStatus.UTFORT;
+  const erAksjonspunktApent = aksjonspunkt?.status === aksjonspunktStatus.OPPRETTET;
+  const erOverstyrerOgHarIngenAksjonspunkt = erOverstyrer && aksjonspunkt === undefined;
+  const isDirtyEllerAlleRaderErLukket = isDirty || åpneRadIndexer.length === 0;
+
+  const skalViseÅpneForNyVurderingKnapp = !readOnly && (erAksjonspunktAvsluttet || erOverstyrerOgHarIngenAksjonspunkt);
+  const skalViseSettPåVentKnapp = !readOnly && erAksjonspunktApent && harBehandletAllePerioder && isDirtyEllerAlleRaderErLukket && kanSettePåVent;
+  const skalViseBekrefteKnapp = !readOnly && erAksjonspunktApent && harBehandletAllePerioder && isDirtyEllerAlleRaderErLukket && !kanSettePåVent;
 
   return (
     <>
-      <Row>
-        <Column xs="6">
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Undertittel><FormattedMessage id="ArbeidOgInntektFaktaPanel.Overskrift" /></Undertittel>
-              </FlexColumn>
-              {erOverstyrer && !erReadOnlyEllerHarAvsluttetAksjonspunkt && !erOverstyrerOgIngenAksjonspunkt && (
-                <FlexColumn>
-                  <OverstyringKnapp onClick={toggleOverstyring} />
-                </FlexColumn>
-              )}
-            </FlexRow>
-          </FlexContainer>
-        </Column>
-        <Column xs="6">
-          <FloatRight>
-            <Normaltekst>
-              <FormattedMessage
-                id="ArbeidOgInntektFaktaPanel.Skjaringstidspunkt"
-                values={{ skjæringspunktDato: dateFormat(arbeidOgInntekt.skjæringstidspunkt) }}
-              />
-            </Normaltekst>
-          </FloatRight>
-        </Column>
-      </Row>
-      <VerticalSpacer thirtyTwoPx />
-      {aksjonspunktTekstKoder.length > 0 && (
-        <AksjonspunktHelpTextHTML>
-          {aksjonspunktTekstKoder.map((kode) => intl.formatMessage({ id: kode })).join(' ')}
-        </AksjonspunktHelpTextHTML>
-      )}
-      {harIngenArbeidsforholdEllerInntektsmeldinger && erOverstyrer && (
-        <div className={styles.alertStripe}>
-          <AlertStripeInfo>
-            <FormattedMessage id="ArbeidOgInntektFaktaPanel.IngenArbeidsforhold" />
-          </AlertStripeInfo>
-        </div>
-      )}
-      <VerticalSpacer sixteenPx />
-      {!harManueltLagtTilArbeidsforhold && erOverstyrt && !skalLeggeTilArbeidsforhold && (
-        <>
-          <VerticalSpacer thirtyTwoPx />
-          <Lenke
-            onClick={(e) => {
-              e.preventDefault();
-              toggleLeggTilArbeidsforhold(true);
-            }}
-            href=""
-          >
-            <Image src={addCircleIcon} className={styles.leggTilImage} />
-            <span>
-              <FormattedMessage id="ArbeidOgInntektFaktaPanel.LeggTilArbeidsforhold" />
-            </span>
-          </Lenke>
-          <VerticalSpacer fourtyPx />
-        </>
-      )}
-      <VerticalSpacer thirtyTwoPx />
-      {skalLeggeTilArbeidsforhold && (
-        <>
-          <ManueltLagtTilArbeidsforholdForm
-            behandlingUuid={behandling.uuid}
-            isReadOnly={false}
-            registrerArbeidsforhold={registrerArbeidsforhold}
-            lukkArbeidsforholdRad={() => toggleLeggTilArbeidsforhold(false)}
-            oppdaterTabell={oppdaterTabellData}
-            erOverstyrt
-            erNyttArbeidsforhold
-          />
-          <VerticalSpacer fourtyPx />
-        </>
-      )}
+      <ArbeidsOgInntektOverstyrPanel
+        behandling={behandling}
+        aksjonspunkt={aksjonspunkt}
+        readOnly={readOnly}
+        arbeidOgInntekt={arbeidOgInntekt}
+        registrerArbeidsforhold={registrerArbeidsforhold}
+        erOverstyrer={erOverstyrer}
+        tabellData={tabellData}
+        settÅpneRadIndexer={settÅpneRadIndexer}
+        setErOverstyrt={setErOverstyrt}
+        oppdaterTabell={oppdaterTabellData}
+      />
       <Table headerTextCodes={HEADER_TEXT_IDS} noHover hasGrayHeader>
         <>
           {tabellData.map((data, index) => (
@@ -341,7 +235,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
               behandlingUuid={behandling.uuid}
               skjæringspunktDato={arbeidOgInntekt.skjæringstidspunkt}
               arbeidsforholdOgInntekt={data}
-              isReadOnly={erReadOnlyEllerHarAvsluttetAksjonspunkt}
+              isReadOnly={readOnly || erAksjonspunktAvsluttet}
               registrerArbeidsforhold={registrerArbeidsforhold}
               lagreVurdering={lagreVurdering}
               toggleÅpenRad={() => toggleÅpenRad(index)}
