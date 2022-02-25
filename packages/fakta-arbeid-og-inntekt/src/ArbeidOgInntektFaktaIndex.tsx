@@ -8,6 +8,7 @@ import { createIntl } from '@fpsak-frontend/utils';
 
 import ArbeidOgInntektFaktaPanel from './components/ArbeidOgInntektFaktaPanel';
 import messages from '../i18n/nb_NO.json';
+import { DirtyFormProvider } from './DirtyFormProvider';
 
 interface OwnProps {
   saksnummer: string;
@@ -43,23 +44,25 @@ const ArbeidOgInntektFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanel
   åpneForNyVurdering,
 }) => (
   <RawIntlProvider value={intl}>
-    <ArbeidOgInntektFaktaPanel
-      saksnummer={saksnummer}
-      behandling={behandling}
-      aksjonspunkt={aksjonspunkter.length > 0 ? aksjonspunkter[0] : undefined}
-      readOnly={readOnly}
-      formData={formData}
-      lagreCallback={submitCallback}
-      setFormData={setFormData}
-      arbeidOgInntekt={arbeidOgInntekt}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      registrerArbeidsforhold={registrerArbeidsforhold}
-      lagreVurdering={lagreVurdering}
-      erOverstyrer={erOverstyrer}
-      settBehandlingPåVentCallback={settBehandlingPåVentCallback}
-      alleKodeverk={alleKodeverk}
-      åpneForNyVurdering={åpneForNyVurdering}
-    />
+    <DirtyFormProvider>
+      <ArbeidOgInntektFaktaPanel
+        saksnummer={saksnummer}
+        behandling={behandling}
+        aksjonspunkt={aksjonspunkter.length > 0 ? aksjonspunkter[0] : undefined}
+        readOnly={readOnly}
+        formData={formData}
+        lagreCallback={submitCallback}
+        setFormData={setFormData}
+        arbeidOgInntekt={arbeidOgInntekt}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        registrerArbeidsforhold={registrerArbeidsforhold}
+        lagreVurdering={lagreVurdering}
+        erOverstyrer={erOverstyrer}
+        settBehandlingPåVentCallback={settBehandlingPåVentCallback}
+        alleKodeverk={alleKodeverk}
+        åpneForNyVurdering={åpneForNyVurdering}
+      />
+    </DirtyFormProvider>
   </RawIntlProvider>
 );
 

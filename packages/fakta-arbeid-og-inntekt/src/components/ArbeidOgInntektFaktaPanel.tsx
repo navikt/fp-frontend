@@ -20,6 +20,7 @@ import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import ArbeidsforholdRad from './ArbeidsforholdRad';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 import ArbeidsOgInntektOverstyrPanel from './ArbeidsOgInntektOverstyrPanel';
+import { useIsFormDirty } from '../DirtyFormProvider';
 
 const HEADER_TEXT_IDS = [
   'EMPTY1',
@@ -153,12 +154,13 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const [erKnappTrykket, settKnappTrykket] = useState(false);
   const [visSettPåVentModal, settVisSettPåVentModal] = useState(false);
-  const [isDirty, setDirty] = useState(false);
   const [erOverstyrt, setErOverstyrt] = useState(false);
 
   const [tabellData, setTabellData] = useState(formData || byggTabellStruktur(arbeidOgInntekt, arbeidsgiverOpplysningerPerId));
   const [åpneRadIndexer, settÅpneRadIndexer] = useState(finnUløstArbeidsforholdIndex(tabellData));
   const identerDetErFlereAv = useMemo(() => finnArbeidsforholdIdentDetErFlereAv(tabellData), [tabellData]);
+
+  const isDirty = useIsFormDirty();
 
   useEffect(() => () => {
     setFormData(tabellData);
@@ -173,7 +175,6 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   }, [åpneRadIndexer, settÅpneRadIndexer]);
 
   const oppdaterTabellData = useCallback((data: ArbeidsforholdOgInntekt[]) => {
-    setDirty(true);
     setTabellData(data);
     // @ts-ignore Fiks
     settÅpneRadIndexer(finnUløstArbeidsforholdIndex(data(tabellData)));
@@ -206,11 +207,10 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   const erAksjonspunktAvsluttet = aksjonspunkt?.status === aksjonspunktStatus.UTFORT;
   const erAksjonspunktApent = aksjonspunkt?.status === aksjonspunktStatus.OPPRETTET;
   const erOverstyrerOgHarIngenAksjonspunkt = erOverstyrer && aksjonspunkt === undefined;
-  const isDirtyEllerAlleRaderErLukket = isDirty || åpneRadIndexer.length === 0;
 
   const skalViseÅpneForNyVurderingKnapp = !readOnly && (erAksjonspunktAvsluttet || erOverstyrerOgHarIngenAksjonspunkt);
-  const skalViseSettPåVentKnapp = !readOnly && erAksjonspunktApent && harBehandletAllePerioder && isDirtyEllerAlleRaderErLukket && kanSettePåVent;
-  const skalViseBekrefteKnapp = !readOnly && erAksjonspunktApent && harBehandletAllePerioder && isDirtyEllerAlleRaderErLukket && !kanSettePåVent;
+  const skalViseSettPåVentKnapp = !readOnly && erAksjonspunktApent && harBehandletAllePerioder && !isDirty && kanSettePåVent;
+  const skalViseBekrefteKnapp = !readOnly && erAksjonspunktApent && harBehandletAllePerioder && !isDirty && !kanSettePåVent;
 
   return (
     <>
