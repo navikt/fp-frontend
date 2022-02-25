@@ -293,6 +293,13 @@
   "HistorikkEndretFelt.PeriodeTOM": "Periode t.o.m.",
   "HistorikkEndretFelt.TypeVerge": "Type verge",
   "HistorikkEndretFelt.BrukerErUnderTvungenForvaltning": "Søker er under tvungen forvaltning",
+  "HistorikkEndretFelt.KontaktArbeidsgiverVedManglendeInntektsmelding": "Arbeidsgiver kontaktes",
+  "HistorikkEndretFelt.FortsettUtenInntektsmelding": "Gå videre uten inntektsmelding",
+  "HistorikkEndretFelt.KontaktArbeidsgiverVedManglendeArbeidsforhold": "Arbeidsgiver kontaktes",
+  "HistorikkEndretFelt.IkkeOpprettBasertPåInntektsmelding": "Ikke opprett arbeidsforhold",
+  "HistorikkEndretFelt.OpprettBasertPåInntektsmelding": "Opprettet basert på inntektsmeldingen",
+  "HistorikkEndretfelt.ManueltOpprettetAvSaksbehandler": "Opprettet av saksbehandler",
+  "HistorikkEndretFelt.FjernFraBehandlingen": "Fjernet fra behandlingen",
 
   "HistorikkEndretFeltVerdiType.AdoptererAlene": "adopterer alene",
   "HistorikkEndretFeltVerdiType.AdoptererIkkeAlene": "adopterer ikke alene",

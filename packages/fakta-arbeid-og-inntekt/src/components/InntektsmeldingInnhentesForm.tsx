@@ -26,6 +26,7 @@ import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
 import styles from './inntektsmeldingInnhentesForm.less';
 import ArbeidsforholdInformasjonPanel from './ArbeidsforholdInformasjonPanel';
+import { useSetDirtyForm } from '../DirtyFormProvider';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -68,6 +69,8 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
   const formMethods = useForm<FormValues>({
     defaultValues,
   });
+
+  useSetDirtyForm(formMethods.formState.isDirty);
 
   const avbryt = useCallback(() => {
     lukkArbeidsforholdRad();
