@@ -849,7 +849,34 @@ const historikkEndretFeltVerdiTypeCodes = {
     kode: 'INGEN_INNVIRKNING',
     verdiId: 'HistorikkEndretFeltVerdiType.IngenInnvirkning',
   },
-
+  KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING: {
+    kode: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
+    verdiId: 'HistorikkEndretFelt.KontaktArbeidsgiverVedManglendeInntektsmelding',
+  },
+  FORTSETT_UTEN_INNTEKTSMELDING: {
+    kode: 'FORTSETT_UTEN_INNTEKTSMELDING',
+    verdiId: 'HistorikkEndretFelt.FortsettUtenInntektsmelding',
+  },
+  KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD: {
+    kode: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD',
+    verdiId: 'HistorikkEndretFelt.KontaktArbeidsgiverVedManglendeArbeidsforhold',
+  },
+  IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING: {
+    kode: 'IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
+    verdiId: 'HistorikkEndretFelt.IkkeOpprettBasertPåInntektsmelding',
+  },
+  OPPRETT_BASERT_PÅ_INNTEKTSMELDING: {
+    kode: 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
+    verdiId: 'HistorikkEndretFelt.OpprettBasertPåInntektsmelding',
+  },
+  MANUELT_OPPRETTET_AV_SAKSBEHANDLER: {
+    kode: 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER',
+    verdiId: 'HistorikkEndretFelt.ManueltOpprettetAvSaksbehandler',
+  },
+  FJERN_FRA_BEHANDLINGEN: {
+    kode: 'FJERN_FRA_BEHANDLINGEN',
+    verdiId: 'HistorikkEndretFelt.FjernFraBehandlingen',
+  },
 } as Record<string, { kode: string, verdiId: string }>;
 
 export default historikkEndretFeltVerdiTypeCodes;
