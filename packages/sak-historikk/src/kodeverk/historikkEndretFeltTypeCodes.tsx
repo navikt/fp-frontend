@@ -477,6 +477,34 @@ const historikkEndretFeltTypeCodes = {
     kode: 'KONTROLL_AV_BESTEBEREGNING',
     feltId: 'HistorikkEndretFelt.Kontroll.Besteberegning',
   },
+  KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING: {
+    kode: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
+    feltId: 'HistorikkEndretFelt.KontaktArbeidsgiverVedManglendeInntektsmelding',
+  },
+  FORTSETT_UTEN_INNTEKTSMELDING: {
+    kode: 'FORTSETT_UTEN_INNTEKTSMELDING',
+    feltId: 'HistorikkEndretFelt.FortsettUtenInntektsmelding',
+  },
+  KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD: {
+    kode: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD',
+    feltId: 'HistorikkEndretFelt.KontaktArbeidsgiverVedManglendeArbeidsforhold',
+  },
+  IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING: {
+    kode: 'IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
+    feltId: 'HistorikkEndretFelt.IkkeOpprettBasertPåInntektsmelding',
+  },
+  OPPRETT_BASERT_PÅ_INNTEKTSMELDING: {
+    kode: 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
+    feltId: 'HistorikkEndretFelt.OpprettBasertPåInntektsmelding',
+  },
+  MANUELT_OPPRETTET_AV_SAKSBEHANDLER: {
+    kode: 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER',
+    feltId: 'HistorikkEndretFelt.ManueltOpprettetAvSaksbehandler',
+  },
+  FJERN_FRA_BEHANDLINGEN: {
+    kode: 'FJERN_FRA_BEHANDLINGEN',
+    feltId: 'HistorikkEndretFelt.FjernFraBehandlingen',
+  },
 } as Record<string, { kode: string, feltId?: string, verdiId?: string }>;
 
 export default historikkEndretFeltTypeCodes;

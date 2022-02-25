@@ -27,6 +27,7 @@ import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
 import styles from './manglendeOpplysningerForm.less';
+import { useSetDirtyForm } from '../DirtyFormProvider';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -91,6 +92,8 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   const formMethods = useForm<FormValues>({
     defaultValues,
   });
+
+  useSetDirtyForm(formMethods.formState.isDirty);
 
   const saksbehandlersVurdering = formMethods.watch('saksbehandlersVurdering');
 
