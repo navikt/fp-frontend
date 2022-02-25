@@ -7,7 +7,7 @@ import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { Image } from '@navikt/fp-react-components';
 
 import { FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
-import { DatepickerField } from '@fpsak-frontend/form-hooks';
+import { Datepicker } from '@fpsak-frontend/form-hooks';
 import { hasValidDate, required } from '@fpsak-frontend/utils';
 import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -81,22 +81,22 @@ const DokumentasjonFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
       merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.ADOPSJONSDOKUMENTAJON]}
     >
       <Container className={styles.container}>
-        <DatepickerField
+        <Datepicker
           name="omsorgsovertakelseDato"
           label={intl.formatMessage({
             id: erForeldrepengerFagsak && hasEktefellesBarnAksjonspunkt
               ? 'DokumentasjonFaktaForm.Stebarnsadopsjon' : 'DokumentasjonFaktaForm.Omsorgsovertakelsesdato',
           })}
           validate={[required, hasValidDate]}
-          readOnly={readOnly}
+          isReadOnly={readOnly}
           isEdited={editedStatus.omsorgsovertakelseDato}
         />
         {erForeldrepengerFagsak && barnetsAnkomstTilNorgeDato && (
-          <DatepickerField
+          <Datepicker
             name="barnetsAnkomstTilNorgeDato"
             label={intl.formatMessage({ id: 'DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge' })}
             validate={[hasValidDate]}
-            readOnly={readOnly}
+            isReadOnly={readOnly}
             isEdited={editedStatus.barnetsAnkomstTilNorgeDato}
           />
         )}
@@ -106,13 +106,13 @@ const DokumentasjonFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
             <VerticalSpacer eightPx />
             <Row>
               <Column xs="6">
-                <DatepickerField
+                <Datepicker
                   name={`fodselsdatoer.${id}`}
                   label={intl.formatMessage({
                     id: 'DokumentasjonFaktaForm.Fodselsdato',
                   }, { number: i + 1 })}
                   validate={[required, hasValidDate]}
-                  readOnly={readOnly}
+                  isReadOnly={readOnly}
                   isEdited={editedStatus.adopsjonFodelsedatoer[id]}
                 />
               </Column>

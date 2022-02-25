@@ -17,7 +17,7 @@ import {
   hasValidText, maxLength, minLength, hasValidDate, hasValidInteger, required, minValue, maxValue, dateAfterOrEqual,
 } from '@fpsak-frontend/utils';
 import {
-  TextAreaField, DatepickerField, InputField, Form,
+  TextAreaField, Datepicker, InputField, Form,
 } from '@fpsak-frontend/form-hooks';
 import {
   VerticalSpacer, FloatRight, OkAvbrytModal,
@@ -169,19 +169,19 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                   />
                 </FlexColumn>
                 <FlexColumn>
-                  <DatepickerField
+                  <Datepicker
                     name="fom"
                     label={<Element><FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeFra" /></Element>}
                     validate={[required, hasValidDate]}
-                    readOnly={isReadOnly || !erOverstyrt}
+                    isReadOnly={isReadOnly || !erOverstyrt}
                   />
                 </FlexColumn>
                 <FlexColumn>
-                  <DatepickerField
+                  <Datepicker
                     name="tom"
                     label={<Element><FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeTil" /></Element>}
                     validate={[hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
-                    readOnly={isReadOnly || !erOverstyrt}
+                    isReadOnly={isReadOnly || !erOverstyrt}
                   />
                 </FlexColumn>
               </>
