@@ -16,7 +16,7 @@ import { SvpBehandlingApiKeys, restApiSvpHooks, requestSvpApi } from '../data/sv
 
 const intl = createIntl(messages);
 
-const AKSJONSPUNKT_KODER = [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD];
+const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING];
 
 const ENDEPUNKTER_INIT_DATA = [SvpBehandlingApiKeys.AKSJONSPUNKTER, SvpBehandlingApiKeys.ARBEID_OG_INNTEKT];
 type EndepunktInitData = {
