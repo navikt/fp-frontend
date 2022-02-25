@@ -10,7 +10,7 @@ import { Image } from '@navikt/fp-react-components';
 
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
-import { DatepickerField, SelectField, Form } from '@fpsak-frontend/form-hooks';
+import { Datepicker, SelectField, Form } from '@fpsak-frontend/form-hooks';
 import {
   ariaCheck, dateAfterOrEqualToToday, hasValidDate, required, dateBeforeToday,
 } from '@fpsak-frontend/utils';
@@ -149,7 +149,7 @@ const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
             {(hasManualPaVent || fristFraFelt) && (
               <Column xs="2">
                 <div className={styles.datePicker}>
-                  <DatepickerField
+                  <Datepicker
                     name="frist"
                     validate={[required, hasValidDate, dateAfterOrEqualToToday]}
                   />

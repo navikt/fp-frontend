@@ -11,7 +11,7 @@ import {
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
-  DatepickerField, RadioGroupField, RadioOption, SelectField,
+  Datepicker, RadioGroupField, RadioOption, SelectField,
 } from '@fpsak-frontend/form-hooks';
 import {
   hasValidDate, required, createIntl, requiredIfCustomFunctionIsTrueNew,
@@ -120,10 +120,10 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
             validate={[requiredIfCustomFunctionIsTrueNew(getIsAvslagCodeRequired(erVilkarOk, getValues('avslagCode')))]}
           />
           {erMedlemskapsPanel && (
-            <DatepickerField
+            <Datepicker
               name="avslagDato"
               label={intl.formatMessage({ id: 'VilkarResultPicker.VilkarDato' })}
-              readOnly={readOnly}
+              isReadOnly={readOnly}
               validate={[required, hasValidDate]}
             />
           )}

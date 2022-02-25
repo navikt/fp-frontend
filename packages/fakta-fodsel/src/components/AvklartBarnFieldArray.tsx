@@ -6,7 +6,7 @@ import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components'
 
 import { hasValidDate, required, dateBeforeOrEqualToToday } from '@fpsak-frontend/utils';
 import { AvklartBarn } from '@fpsak-frontend/types';
-import { DatepickerField, PeriodFieldArray } from '@fpsak-frontend/form-hooks';
+import { Datepicker, PeriodFieldArray } from '@fpsak-frontend/form-hooks';
 
 const FIELD_ARRAY_NAME = 'avklartBarn';
 
@@ -54,19 +54,19 @@ export const AvklartBarnFieldArray: FunctionComponent<OwnProps> = ({
             <FlexContainer>
               <FlexRow>
                 <FlexColumn>
-                  <DatepickerField
+                  <Datepicker
                     name={`${FIELD_ARRAY_NAME}.${index}.fodselsdato`}
                     label={intl.formatMessage({ id: 'AvklartBarnFieldArray.Title' })}
                     validate={[hasValidDate, required, dateBeforeOrEqualToToday]}
-                    readOnly={readOnly}
+                    isReadOnly={readOnly}
                   />
                 </FlexColumn>
                 <FlexColumn>
-                  <DatepickerField
+                  <Datepicker
                     name={`${FIELD_ARRAY_NAME}.${index}.dodsdato`}
                     label={intl.formatMessage({ id: 'AvklartBarnFieldArray.Dodsdato' })}
                     validate={[hasValidDate, dateBeforeOrEqualToToday]}
-                    readOnly={readOnly}
+                    isReadOnly={readOnly}
                   />
                 </FlexColumn>
                 <FlexColumn>

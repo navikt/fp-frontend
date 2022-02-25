@@ -13,7 +13,7 @@ import {
   hasValidText, maxLength, minLength, hasValidDate, hasValidInteger, required, minValue, maxValue, dateAfterOrEqual,
 } from '@fpsak-frontend/utils';
 import {
-  TextAreaField, RadioGroupField, RadioOption, DatepickerField, InputField, Form,
+  TextAreaField, RadioGroupField, RadioOption, Datepicker, InputField, Form,
 } from '@fpsak-frontend/form-hooks';
 import {
   Inntektsmelding, AoIArbeidsforhold, ManueltArbeidsforhold, ManglendeInntektsmeldingVurdering,
@@ -205,19 +205,19 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
             <FlexContainer>
               <FlexRow>
                 <FlexColumn>
-                  <DatepickerField
+                  <Datepicker
                     name="fom"
                     label={<Element><FormattedMessage id="ManglendeOpplysningerForm.PeriodeFra" /></Element>}
                     validate={[required, hasValidDate]}
-                    readOnly={isReadOnly}
+                    isReadOnly={isReadOnly}
                   />
                 </FlexColumn>
                 <FlexColumn>
-                  <DatepickerField
+                  <Datepicker
                     name="tom"
                     label={<Element><FormattedMessage id="ManglendeOpplysningerForm.PeriodeTil" /></Element>}
                     validate={[hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
-                    readOnly={isReadOnly}
+                    isReadOnly={isReadOnly}
                   />
                 </FlexColumn>
                 <FlexColumn>

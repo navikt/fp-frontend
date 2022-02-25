@@ -9,7 +9,7 @@ import {
 import Panel from 'nav-frontend-paneler';
 
 import {
-  Form, DatepickerField, RadioGroupField, RadioOption,
+  Form, Datepicker, RadioGroupField, RadioOption,
 } from '@fpsak-frontend/form-hooks';
 import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
@@ -157,9 +157,9 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
           <Row>
             <Column xs="4">
               <ArrowBox>
-                <DatepickerField
+                <Datepicker
                   name="ansesMottatt"
-                  readOnly={readOnly}
+                  isReadOnly={readOnly}
                   label={<FormattedMessage id="VurderSoknadsfristForeldrepengerForm.NyMottattDato" />}
                   validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
                 />

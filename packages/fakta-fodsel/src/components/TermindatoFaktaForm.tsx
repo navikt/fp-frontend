@@ -7,7 +7,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import AlertStripe from 'nav-frontend-alertstriper';
 
 import { DateLabel, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
-import { DatepickerField, InputField } from '@fpsak-frontend/form-hooks';
+import { Datepicker, InputField } from '@fpsak-frontend/form-hooks';
 import {
   hasValidDate, hasValidInteger, maxValue, minValue, required,
 } from '@fpsak-frontend/utils';
@@ -81,20 +81,20 @@ export const TermindatoFaktaForm: FunctionComponent<OwnProps> & StaticFunctions 
       >
         <Row>
           <Column xs="3">
-            <DatepickerField
+            <Datepicker
               name="utstedtdato"
               label={intl.formatMessage({ id: 'TermindatoFaktaForm.UtstedtDato' })}
               validate={[required, hasValidDate]}
-              readOnly={readOnly}
+              isReadOnly={readOnly}
               isEdited={editedStatus.utstedtdato}
             />
           </Column>
           <Column xs="3">
-            <DatepickerField
+            <Datepicker
               name="termindato"
               label={intl.formatMessage({ id: 'TermindatoFaktaForm.Termindato' })}
               validate={[required, hasValidDate]}
-              readOnly={readOnly}
+              isReadOnly={readOnly}
               isEdited={editedStatus.termindato}
             />
           </Column>

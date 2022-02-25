@@ -8,7 +8,7 @@ import { Row } from 'nav-frontend-grid';
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
-  Form, DatepickerField, RadioGroupField, RadioOption,
+  Form, Datepicker, RadioGroupField, RadioOption,
 } from '@fpsak-frontend/form-hooks';
 import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
@@ -169,10 +169,10 @@ export const InnsynForm: FunctionComponent<OwnProps> = ({
         {[<FormattedMessage id="InnsynForm.VurderKravetOmInnsyn" key="1" />]}
       </AksjonspunktHelpTextTemp>
       <VerticalSpacer twentyPx />
-      <DatepickerField
+      <Datepicker
         name="mottattDato"
         label={intl.formatMessage({ id: 'InnsynForm.DatoMottattKrav' })}
-        readOnly={readOnly}
+        isReadOnly={readOnly}
         isEdited={!isApOpen}
         validate={[required, hasValidDate]}
       />
@@ -207,10 +207,10 @@ export const InnsynForm: FunctionComponent<OwnProps> = ({
           </RadioGroupField>
           <Row>
             {sattPaVent && (
-            <DatepickerField
+            <Datepicker
               name="fristDato"
               label={intl.formatMessage({ id: 'InnsynForm.FristDato' })}
-              readOnly={readOnly}
+              isReadOnly={readOnly}
               isEdited={!isApOpen}
               validate={[required, hasValidDate]}
             />

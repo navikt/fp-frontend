@@ -3,7 +3,7 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Undertekst, Normaltekst } from 'nav-frontend-typografi';
 
-import { DatepickerField } from '@fpsak-frontend/form-hooks';
+import { Datepicker } from '@fpsak-frontend/form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { hasValidDate, required } from '@fpsak-frontend/utils';
 import { FaktaGruppe } from '@fpsak-frontend/shared-components';
@@ -56,22 +56,22 @@ const OmsorgsovertakelseFaktaPanel: FunctionComponent<OwnProps> & StaticFunction
     >
       <Row>
         <Column xs={erAksjonspunktForeldreansvar ? '4' : '8'}>
-          <DatepickerField
+          <Datepicker
             name="omsorgsovertakelseDato"
             label={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.OmsorgsovertakelseDate' })}
             validate={[required, hasValidDate]}
-            readOnly={readOnly}
+            isReadOnly={readOnly}
             isEdited={editedStatus.omsorgsovertakelseDato}
           />
         </Column>
         {erAksjonspunktForeldreansvar
           && (
           <Column xs="4">
-            <DatepickerField
+            <Datepicker
               name="foreldreansvarDato"
               label={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.ForeldreansvarDato' })}
               validate={[required, hasValidDate]}
-              readOnly={readOnly}
+              isReadOnly={readOnly}
             />
           </Column>
           )}
