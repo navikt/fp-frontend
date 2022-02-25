@@ -26,6 +26,7 @@ import {
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
 import styles from './manueltLagtTilArbeidsforholdForm.less';
+import { useSetDirtyForm } from '../DirtyFormProvider';
 
 export const MANUELT_ORG_NR = '342352362';
 
@@ -72,21 +73,23 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
   const [visSletteDialog, settVisSletteDialog] = useState(false);
 
-  const defaultValues = useMemo<FormValues | undefined>(() => (arbeidsforhold?.begrunnelse && arbeidsgiverNavn ? {
-    fom: arbeidsforhold.fom,
-    tom: arbeidsforhold.tom,
-    stillingsprosent: arbeidsforhold.stillingsprosent,
-    begrunnelse: arbeidsforhold.begrunnelse,
+  const defaultValues = useMemo<FormValues>(() => ({
+    fom: arbeidsforhold?.fom,
+    tom: arbeidsforhold?.tom,
+    stillingsprosent: arbeidsforhold?.stillingsprosent,
+    begrunnelse: arbeidsforhold?.begrunnelse,
     arbeidsgiverNavn,
-  } : undefined), [arbeidsforhold, arbeidsgiverNavn]);
+  }), [arbeidsforhold, arbeidsgiverNavn]);
 
   const formMethods = useForm<FormValues>({
     defaultValues,
   });
 
+  useSetDirtyForm(formMethods.formState.isDirty);
+
   const lukkRadOgResetForm = useCallback(() => {
     lukkArbeidsforholdRad();
-    formMethods.reset();
+    formMethods.reset(defaultValues);
   }, [lukkArbeidsforholdRad]);
 
   const lagreArbeidsforhold = useCallback((formValues: FormValues) => {
@@ -119,7 +122,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
         return gammelData.map((data, i) => (i === gammelIndex ? af : data));
       });
 
-      formMethods.reset();
+      formMethods.reset(formValues);
       if (erNyttArbeidsforhold) {
         lukkArbeidsforholdRad();
       }
