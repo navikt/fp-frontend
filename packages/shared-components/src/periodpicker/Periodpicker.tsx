@@ -3,7 +3,7 @@ import moment from 'moment';
 import { Input } from 'nav-frontend-skjema';
 import { DateUtils, Modifier } from 'react-day-picker';
 import { DDMMYYYY_DATE_FORMAT, haystack } from '@fpsak-frontend/utils';
-import CalendarToggleButton from '../datepicker/CalendarToggleButton';
+import CalendarToggleButton from './CalendarToggleButton';
 import PeriodCalendarOverlay from './PeriodCalendarOverlay';
 
 import styles from './periodpicker.less';

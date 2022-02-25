@@ -3,8 +3,8 @@ import { BaseFieldProps, Field } from 'redux-form';
 import moment from 'moment';
 
 import { ACCEPTED_DATE_INPUT_FORMATS, DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
-import { Datepicker } from '@fpsak-frontend/shared-components';
 
+import PureDatepicker from './pure/PureDatepicker';
 import renderNavField from './renderNavField';
 import ReadOnlyField from './ReadOnlyField';
 import LabelType from './LabelType';
@@ -19,7 +19,6 @@ interface DatepickerFieldProps {
     after?: Date;
   };
   initialMonth?: Date;
-  numberOfMonths?: number;
   format?: (value) => string;
   parse?: (value) => string;
 }
@@ -42,7 +41,7 @@ const acceptedFormatToIso = (string: string): string => {
   return string;
 };
 
-export const RenderDatepickerField = renderNavField(Datepicker);
+export const RenderDatepickerField = renderNavField(PureDatepicker);
 
 const DatepickerField: FunctionComponent<BaseFieldProps & DatepickerFieldProps> = ({
   name,

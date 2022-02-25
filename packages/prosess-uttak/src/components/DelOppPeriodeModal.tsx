@@ -95,7 +95,6 @@ export const DelOppPeriodeModal: FunctionComponent<PureOwnProps & MappedOwnProps
                   className={styles.datePicker}
                   validate={[required, hasValidDate]}
                   initialMonth={new Date(periodeData.fom)}
-                  numberOfMonths={2}
                   disabledDays={{ before: moment(periodeData.fom).toDate(), after: moment(periodeData.tom).toDate() }}
                 />
               </FlexColumn>
