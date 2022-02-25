@@ -21,8 +21,7 @@ const mountFieldInForm = (field, initialValues) => mount(
 describe('<DatepickerField>', () => {
   it('skal formatere fra ISO-format til norsk datoformat', () => {
     const wrapper = mountFieldInForm(<DatepickerField name="testDato" />, { testDato: '2017-02-01' });
-
-    const input = wrapper.find('Input');
+    const input = wrapper.find('PureDatepicker');
     expect(input).toHaveLength(1);
     expect(input.props().value).toEqual('01.02.2017');
   });
