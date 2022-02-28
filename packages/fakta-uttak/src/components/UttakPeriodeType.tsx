@@ -36,7 +36,7 @@ const getUttakTypeTitle = (
   arbeidstidprosent?: number,
   oppholdArsak?: string,
 ): ReactElement => {
-  if (overforingArsak !== overforingArsakCodes.UDEFINERT) {
+  if (overforingArsak !== overforingArsakCodes.UDEFINERT && overforingArsak !== undefined) {
     return (
       <FormattedMessage
         id="UttakInfoPanel.OverføringMedÅrsak"
@@ -45,7 +45,7 @@ const getUttakTypeTitle = (
     );
   }
 
-  if (utsettelseArsak !== utsettelseArsakCodes.UDEFINERT) {
+  if (utsettelseArsak !== utsettelseArsakCodes.UDEFINERT && utsettelseArsak !== undefined) {
     return (
       <FormattedMessage
         id="UttakInfoPanel.UtsettelseMedÅrsak"
@@ -54,7 +54,7 @@ const getUttakTypeTitle = (
     );
   }
 
-  if (oppholdArsak !== oppholdArsakType.UDEFINERT) {
+  if (oppholdArsak !== oppholdArsakType.UDEFINERT && oppholdArsakType !== undefined) {
     return (
       <FormattedMessage id="UttakInfoPanel.OppholdMedÅrsak" />
     );
