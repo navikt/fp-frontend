@@ -38,10 +38,6 @@ const hentForhandsvisCallback = (
   const brevData = {
     ...data,
     behandlingUuid: behandling.uuid,
-    ytelseType: {
-      kode: fagsak.fagsakYtelseType,
-      kodeverk: 'FAGSAK_YTELSE',
-    },
     fagsakYtelseType: fagsak.fagsakYtelseType,
   };
   return forhandsvisMelding(brevData).then((response) => forhandsvisDokument(response));

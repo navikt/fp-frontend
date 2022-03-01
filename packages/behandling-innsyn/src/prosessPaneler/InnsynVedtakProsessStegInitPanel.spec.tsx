@@ -123,10 +123,6 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
       dokumentMal: dokumentMalType.INNSYN,
       gjelderVedtak: true,
       behandlingUuid: 'test-uuid',
-      ytelseType: {
-        kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: 'FAGSAK_YTELSE',
-      },
       fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
     }));
   });

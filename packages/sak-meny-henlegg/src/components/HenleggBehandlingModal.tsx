@@ -30,10 +30,6 @@ const previewHenleggBehandlingDoc = (
   // TODO Hardkoda verdiar. Er dette eit kodeverk?
   const data = {
     behandlingUuid,
-    ytelseType: {
-      kode: ytelseType,
-      kodeverk: 'FAGSAK_YTELSE',
-    },
     fagsakYtelseType: ytelseType,
     dokumentMal: dokumentMalType.IOHENL,
     fritekst,

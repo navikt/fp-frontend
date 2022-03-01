@@ -43,7 +43,6 @@ type ForhandsvisData = {
   dokumentMal?: string;
   tittel?: string;
   gjelderVedtak: boolean;
-  vedtaksbrev?: { kode: string };
   automatiskVedtaksbrev?: boolean;
 }
 
@@ -64,9 +63,6 @@ const hentForhåndsvisManueltBrevCallback = (
       dokumentMal: skalOverstyre ? dokumentMalType.FRITKS : undefined,
       tittel: skalOverstyre ? overskrift : undefined,
       gjelderVedtak: true,
-      vedtaksbrev: !skalOverstyre ? {
-        kode: 'AUTOMATISK',
-      } : undefined,
       automatiskVedtaksbrev: !skalOverstyre ? true : undefined,
     };
 

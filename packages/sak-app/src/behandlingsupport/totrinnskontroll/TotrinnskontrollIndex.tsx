@@ -107,10 +107,6 @@ const TotrinnskontrollIndex: FunctionComponent<OwnProps> = ({
   const forhandsvisVedtaksbrev = useCallback(() => {
     forhandsvisMelding(false, {
       behandlingUuid: uuid,
-      ytelseType: {
-        kode: fagsak.fagsakYtelseType,
-        kodeverk: 'FAGSAK_YTELSE',
-      },
       fagsakYtelseType: fagsak.fagsakYtelseType,
       gjelderVedtak: true,
     });

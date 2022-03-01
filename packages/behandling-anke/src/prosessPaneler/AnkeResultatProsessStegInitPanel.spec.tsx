@@ -150,10 +150,6 @@ describe('<AnkeResultatProsessStegInitPanel>', () => {
       mottaker: '',
       dokumentMal: dokumentMalType.ANKE_BESLUTNING_OM_OPPHEVING,
       behandlingUuid: 'test-uuid',
-      ytelseType: {
-        kode: fagsakYtelseType.FORELDREPENGER,
-        kodeverk: 'FAGSAK_YTELSE',
-      },
       fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
     }));
   });

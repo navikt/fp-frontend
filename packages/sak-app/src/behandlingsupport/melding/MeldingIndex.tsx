@@ -76,10 +76,6 @@ const getPreviewCallback = (
     brevmalkode: dokumentMal,
   } : {
     behandlingUuid,
-    ytelseType: {
-      kode: fagsakYtelseType,
-      kodeverk: 'FAGSAK_YTELSE',
-    },
     fagsakYtelseType,
     fritekst: fritekst || ' ',
     arsakskode: aarsakskode || null,
