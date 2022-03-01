@@ -28,7 +28,7 @@ const isoToDdMmYyyy = (string: string): string => {
   if (parsedDate.isValid()) {
     return parsedDate.format(DDMMYYYY_DATE_FORMAT);
   }
-  return string;
+  return string === null ? undefined : string;
 };
 
 const acceptedFormatToIso = (string: string): string => {
