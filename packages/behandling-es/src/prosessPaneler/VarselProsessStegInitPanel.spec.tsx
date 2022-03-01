@@ -161,10 +161,6 @@ describe('<VarselProsessStegInitPanel>', () => {
       dokumentMal: dokumentMalType.REVURDERING_DOK,
       fritekst: 'Dette er en fritekst',
       behandlingUuid: 'test-uuid',
-      ytelseType: {
-        kode: fagsakYtelseType.ENGANGSSTONAD,
-        kodeverk: 'FAGSAK_YTELSE',
-      },
       fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
     }));
   });
