@@ -12,10 +12,10 @@ import {
   required, hasValidText, maxLength, minLength,
 } from '@fpsak-frontend/utils';
 import {
-  TextAreaField, RadioGroupField, RadioOption, Form,
+  TextAreaField, RadioGroupField, RadioOption, Form, CheckboxField,
 } from '@fpsak-frontend/form-hooks';
 import {
-  AoIArbeidsforhold, Inntektspost, ManglendeInntektsmeldingVurdering,
+  AoIArbeidsforhold, Inntektsmelding, Inntektspost, ManglendeInntektsmeldingVurdering,
 } from '@fpsak-frontend/types';
 import {
   VerticalSpacer,
@@ -37,34 +37,38 @@ type FormValues = {
 }
 
 interface OwnProps {
+  saksnummer: string;
   behandlingUuid: string;
   skjæringspunktDato: string;
   inntektsposter?: Inntektspost[];
   isReadOnly: boolean;
-  arbeidsforhold: AoIArbeidsforhold;
+  arbeidsforholdForRad: AoIArbeidsforhold[];
+  inntektsmeldingerForRad: Inntektsmelding[];
+  radData: ArbeidsforholdOgInntekt;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   lukkArbeidsforholdRad: () => void;
   oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
-  skalViseArbeidsforholdId: boolean;
 }
 
 const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
+  saksnummer,
   behandlingUuid,
   skjæringspunktDato,
   inntektsposter = [],
-  arbeidsforhold,
+  arbeidsforholdForRad,
+  inntektsmeldingerForRad,
+  radData,
   isReadOnly,
   lagreVurdering,
   lukkArbeidsforholdRad,
   oppdaterTabell,
-  skalViseArbeidsforholdId,
 }) => {
   const intl = useIntl();
 
   const defaultValues = useMemo<FormValues>(() => ({
-    saksbehandlersVurdering: arbeidsforhold.saksbehandlersVurdering,
-    begrunnelse: arbeidsforhold.begrunnelse,
-  }), [arbeidsforhold]);
+    saksbehandlersVurdering: radData.avklaring?.saksbehandlersVurdering,
+    begrunnelse: radData.avklaring?.begrunnelse,
+  }), [radData]);
 
   const formMethods = useForm<FormValues>({
     defaultValues,
@@ -72,83 +76,100 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
 
   useSetDirtyForm(formMethods.formState.isDirty);
 
+  const erEttArbeidsforhold = arbeidsforholdForRad.length === 1;
+
   const avbryt = useCallback(() => {
     lukkArbeidsforholdRad();
     formMethods.reset(defaultValues);
   }, [lukkArbeidsforholdRad, defaultValues]);
 
   const lagre = useCallback((formValues: FormValues) => {
+    const vurdering = erEttArbeidsforhold
+      ? formValues.saksbehandlersVurdering : ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING;
     const params = {
       behandlingUuid,
-      vurdering: formValues.saksbehandlersVurdering,
-      arbeidsgiverIdent: arbeidsforhold.arbeidsgiverIdent,
-      internArbeidsforholdRef: arbeidsforhold.internArbeidsforholdId,
+      vurdering,
+      arbeidsgiverIdent: radData.arbeidsgiverIdent,
+      internArbeidsforholdRef: erEttArbeidsforhold ? arbeidsforholdForRad[0].internArbeidsforholdId : undefined,
       begrunnelse: formValues.begrunnelse,
     };
     lagreVurdering(params).then(() => {
       oppdaterTabell((oldData) => oldData.map((data) => {
-        if (data.arbeidsforhold?.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent
-          && data.arbeidsforhold?.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId) {
+        if (data.arbeidsgiverIdent === radData.arbeidsgiverIdent) {
           return {
-            ...data,
-            arbeidsforhold: {
-              ...data.arbeidsforhold,
+            ...radData,
+            avklaring: {
               begrunnelse: formValues.begrunnelse,
-              saksbehandlersVurdering: formValues.saksbehandlersVurdering,
+              saksbehandlersVurdering: vurdering,
             },
           };
         }
         return data;
       }));
     }).finally(() => formMethods.reset(formValues));
-  }, [arbeidsforhold, oppdaterTabell]);
+  }, [arbeidsforholdForRad, radData, oppdaterTabell]);
 
   return (
     <>
       <ArbeidsforholdInformasjonPanel
+        saksnummer={saksnummer}
         skjæringspunktDato={skjæringspunktDato}
         inntektsposter={inntektsposter}
-        arbeidsforhold={arbeidsforhold}
-        skalViseArbeidsforholdId={skalViseArbeidsforholdId}
+        arbeidsforholdForRad={arbeidsforholdForRad}
+        inntektsmeldingerForRad={inntektsmeldingerForRad}
       />
       <Form formMethods={formMethods} onSubmit={lagre}>
-        <FlexContainer>
-          <FlexRow>
-            <FlexColumn className={styles.radioHeader}>
-              <Element><FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" /></Element>
-            </FlexColumn>
-            <FlexColumn>
-              <Hjelpetekst
-              /* @ts-ignore */
-                popoverProps={{ className: styles.hjelpetekst }}
-              >
-                <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel1" />
-                <VerticalSpacer eightPx />
-                <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel2" />
-                <VerticalSpacer eightPx />
-                <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel3" />
-              </Hjelpetekst>
-            </FlexColumn>
-          </FlexRow>
-        </FlexContainer>
-        <RadioGroupField
-          name="saksbehandlersVurdering"
-          validate={[required]}
-          readOnly={isReadOnly}
-          direction="vertical"
-        >
-          <RadioOption
-            value={ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING}
-            label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.TarKontakt' })}
+        {erEttArbeidsforhold && (
+          <>
+            <FlexContainer>
+              <FlexRow>
+                <FlexColumn className={styles.radioHeader}>
+                  <Element><FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" /></Element>
+                </FlexColumn>
+                <FlexColumn>
+                  <Hjelpetekst
+                  /* @ts-ignore */
+                    popoverProps={{ className: styles.hjelpetekst }}
+                  >
+                    <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel1" />
+                    <VerticalSpacer eightPx />
+                    <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel2" />
+                    <VerticalSpacer eightPx />
+                    <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel3" />
+                  </Hjelpetekst>
+                </FlexColumn>
+              </FlexRow>
+            </FlexContainer>
+            <RadioGroupField
+              name="saksbehandlersVurdering"
+              validate={[required]}
+              readOnly={isReadOnly}
+              direction="vertical"
+            >
+              <RadioOption
+                value={ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING}
+                label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.TarKontakt' })}
+              />
+              <RadioOption
+                value={ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING}
+                label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.GåVidere' })}
+              />
+            </RadioGroupField>
+          </>
+        )}
+        {!erEttArbeidsforhold && (
+          <CheckboxField
+            name="saksbehandlersVurdering"
+            readOnly={isReadOnly}
+            validate={[required]}
+            label={<FormattedMessage id="InntektsmeldingInnhentesForm.TarKontakt" />}
           />
-          <RadioOption
-            value={ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING}
-            label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.GåVidere' })}
-          />
-        </RadioGroupField>
+        )}
         <VerticalSpacer sixteenPx />
         <TextAreaField
-          label={<Element><FormattedMessage id="InntektsmeldingInnhentesForm.Begrunn" /></Element>}
+          label={(
+            <Element><FormattedMessage id={erEttArbeidsforhold ? 'InntektsmeldingInnhentesForm.Begrunn' : 'InntektsmeldingInnhentesForm.Kommentar'} /></Element>
+          )}
           name="begrunnelse"
           validate={[required, minLength3, maxLength1500, hasValidText]}
           maxLength={1500}

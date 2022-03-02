@@ -51,8 +51,8 @@ interface OwnProps {
   behandlingUuid: string;
   isReadOnly: boolean;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
+  radData?: ArbeidsforholdOgInntekt;
   arbeidsforhold?: AoIArbeidsforhold;
-  arbeidsgiverNavn?: string;
   lukkArbeidsforholdRad: () => void;
   erOverstyrt: boolean;
   oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
@@ -63,8 +63,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   behandlingUuid,
   isReadOnly,
   registrerArbeidsforhold,
-  arbeidsforhold,
-  arbeidsgiverNavn,
+  radData,
   lukkArbeidsforholdRad,
   erOverstyrt,
   oppdaterTabell,
@@ -74,12 +73,12 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   const [visSletteDialog, settVisSletteDialog] = useState(false);
 
   const defaultValues = useMemo<FormValues>(() => ({
-    fom: arbeidsforhold?.fom,
-    tom: arbeidsforhold?.tom,
-    stillingsprosent: arbeidsforhold?.stillingsprosent,
-    begrunnelse: arbeidsforhold?.begrunnelse,
-    arbeidsgiverNavn,
-  }), [arbeidsforhold, arbeidsgiverNavn]);
+    fom: radData?.avklaring?.fom,
+    tom: radData?.avklaring?.tom,
+    stillingsprosent: radData?.avklaring?.stillingsprosent,
+    begrunnelse: radData?.avklaring?.begrunnelse,
+    arbeidsgiverNavn: radData?.avklaring?.arbeidsgiverNavn,
+  }), [radData]);
 
   const formMethods = useForm<FormValues>({
     defaultValues,
@@ -101,25 +100,24 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
     };
     registrerArbeidsforhold(params).then(() => {
       oppdaterTabell((gammelData) => {
-        const af = {
-          arbeidsforhold: {
-            arbeidsgiverIdent: MANUELT_ORG_NR,
+        const rad = {
+          arbeidsgiverIdent: MANUELT_ORG_NR,
+          arbeidsgiverNavn: formValues.arbeidsgiverNavn,
+          avklaring: {
             fom: formValues.fom,
             tom: formValues.tom,
             stillingsprosent: formValues.stillingsprosent,
+            arbeidsgiverNavn: formValues.arbeidsgiverNavn,
             begrunnelse: formValues.begrunnelse,
             saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
           },
-          arbeidsgiverNavn: formValues.arbeidsgiverNavn,
-          inntektsmelding: undefined,
-          inntektsposter: undefined,
         };
 
-        const gammelIndex = gammelData.findIndex((data) => data.arbeidsforhold?.arbeidsgiverIdent === MANUELT_ORG_NR);
+        const gammelIndex = gammelData.findIndex((data) => data.arbeidsgiverIdent === MANUELT_ORG_NR);
         if (gammelIndex === -1) {
-          return gammelData.concat(af);
+          return gammelData.concat(rad);
         }
-        return gammelData.map((data, i) => (i === gammelIndex ? af : data));
+        return gammelData.map((data, i) => (i === gammelIndex ? rad : data));
       });
 
       formMethods.reset(formValues);
@@ -138,7 +136,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
       ...formValues,
     };
     registrerArbeidsforhold(params).then(() => {
-      oppdaterTabell((oldData) => oldData.filter((data) => data.arbeidsforhold?.arbeidsgiverIdent !== MANUELT_ORG_NR));
+      oppdaterTabell((oldData) => oldData.filter((data) => data.arbeidsgiverIdent !== MANUELT_ORG_NR));
       if (erNyttArbeidsforhold) {
         lukkArbeidsforholdRad();
       }
@@ -147,7 +145,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      {!arbeidsforhold && (
+      {!radData && (
         <>
           <Undertittel><FormattedMessage id="LeggTilArbeidsforholdForm.LeggTilArbeidsforhold" /></Undertittel>
           <VerticalSpacer sixteenPx />
@@ -240,7 +238,7 @@ const ManueltLagtTilArbeidsforholdForm: FunctionComponent<OwnProps> = ({
                 </FlexRow>
               </FlexContainer>
             </Column>
-            {arbeidsforhold && (
+            {radData && (
               <Column xs="4">
                 <FloatRight>
                   <Flatknapp
