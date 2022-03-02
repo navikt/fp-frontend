@@ -18547,9 +18547,9 @@ vis-data@^7.1.2:
   integrity sha512-RPSegFxEcnp3HUEJSzhS2vBdbJ2PSsrYYuhRlpHp2frO/MfRtTYbIkkLZmPkA/Sg3pPfBlR235gcoKbtdm4mbw==
 
 vis-timeline@^7.5.0:
-  version "7.5.0"
-  resolved "https://registry.yarnpkg.com/vis-timeline/-/vis-timeline-7.5.0.tgz#d2fc2b84d0c32769fd287cd17616541229e55be3"
-  integrity sha512-h5V2tuwKuiznhZ+5dgx5qYmi/kwsrHeYxT1rPUTyCzhVwI3uggpsE4Gjd2sbFoP4zjPCRz6blKbR0N4JuU92+w==
+  version "7.5.1"
+  resolved "https://registry.yarnpkg.com/vis-timeline/-/vis-timeline-7.5.1.tgz#c15d14ccec40c3fc4cc0936cd363aa228daf6dd7"
+  integrity sha512-XZMHHbA8xm9/Y/iu3mE9MT7J5tfWgbdsW+PmqrgINU2QRX24AiqifNHZHV4YYzeJstiTSOg9Gs5qRkxQ0BvZJw==
 
 vm-browserify@^1.0.1:
   version "1.1.2"
