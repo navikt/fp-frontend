@@ -41,12 +41,8 @@ const erMatch = (
   inntektsmelding: Inntektsmelding,
   arbeidsgiverIdent?: string,
   internArbeidsforholdId?: string,
-) => {
-  const test = inntektsmelding.arbeidsgiverIdent === arbeidsgiverIdent
-    && inntektsmelding.internArbeidsforholdId === internArbeidsforholdId;
-  debugger;
-  return test;
-};
+) => inntektsmelding.arbeidsgiverIdent === arbeidsgiverIdent
+  && inntektsmelding.internArbeidsforholdId === internArbeidsforholdId;
 
 const finnPeriode = (
   arbeidsforhold: AoIArbeidsforhold[],
