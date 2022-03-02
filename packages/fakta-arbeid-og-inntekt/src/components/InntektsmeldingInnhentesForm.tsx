@@ -119,7 +119,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
         inntektsmeldingerForRad={inntektsmeldingerForRad}
       />
       <Form formMethods={formMethods} onSubmit={lagre}>
-        {erEttArbeidsforhold && (
+        {(erEttArbeidsforhold || inntektsmeldingerForRad.length === 0) && (
           <>
             <FlexContainer>
               <FlexRow>
@@ -157,7 +157,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
             </RadioGroupField>
           </>
         )}
-        {!erEttArbeidsforhold && (
+        {(!erEttArbeidsforhold && inntektsmeldingerForRad.length > 0) && (
           <CheckboxField
             name="saksbehandlersVurdering"
             readOnly={isReadOnly}
