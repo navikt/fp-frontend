@@ -1,10 +1,17 @@
-import { AoIArbeidsforhold, Inntektsmelding, Inntektspost } from '@fpsak-frontend/types';
-
-type ArbeidsforholdOgInntekt = {
-  arbeidsforhold: AoIArbeidsforhold | undefined;
-  arbeidsgiverNavn: string;
-  inntektsmelding: Inntektsmelding | undefined;
-  inntektsposter: Inntektspost[] | undefined;
+export type Avklaring = {
+  saksbehandlersVurdering: string;
+  begrunnelse: string;
+  arbeidsgiverNavn?: string;
+  fom?: string;
+  tom?: string;
+  stillingsprosent?: number;
 }
 
-export default ArbeidsforholdOgInntekt;
+type ArbeidsforholdOgInntektRadData = {
+  arbeidsgiverIdent: string;
+  arbeidsgiverNavn: string;
+  årsak?: string;
+  avklaring?: Avklaring;
+}
+
+export default ArbeidsforholdOgInntektRadData;

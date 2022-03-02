@@ -13,7 +13,7 @@ import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import { dateFormat } from '@fpsak-frontend/utils';
 import {
-  Aksjonspunkt, ArbeidOgInntektsmelding, Behandling, ManueltArbeidsforhold,
+  Aksjonspunkt, ArbeidOgInntektsmelding, Behandling, ManueltArbeidsforhold, AksjonspunktÅrsak,
 } from '@fpsak-frontend/types';
 import {
   VerticalSpacer, AksjonspunktHelpTextHTML, FloatRight, OverstyringKnapp,
@@ -30,8 +30,8 @@ const finnAksjonspunktTekstKoder = (
   tabellData: ArbeidsforholdOgInntekt[],
   aksjonspunkt?: Aksjonspunkt,
 ): string[] => {
-  const harManglendeInntektsmeldinger = tabellData.some((d) => d.arbeidsforhold?.årsak);
-  const harManglandeOpplysninger = tabellData.some((d) => d.inntektsmelding?.årsak);
+  const harManglendeInntektsmeldinger = tabellData.some((d) => d.årsak === AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING);
+  const harManglandeOpplysninger = tabellData.some((d) => d.årsak === AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD);
   const erApÅpent = aksjonspunkt?.status === aksjonspunktStatus.OPPRETTET;
 
   const koder = [];
@@ -80,7 +80,7 @@ const ArbeidsOgInntektOverstyrPanel: FunctionComponent<OwnProps> = ({
     setLokalErOverstyrt(true);
 
     const indexForManueltLagtTil = tabellData
-      .findIndex((t) => t.arbeidsforhold?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER);
+      .findIndex((t) => t.avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER);
     if (indexForManueltLagtTil !== -1) {
       settÅpneRadIndexer([indexForManueltLagtTil]);
     }
@@ -88,7 +88,7 @@ const ArbeidsOgInntektOverstyrPanel: FunctionComponent<OwnProps> = ({
 
   const aksjonspunktTekstKoder = useMemo(() => finnAksjonspunktTekstKoder(tabellData, aksjonspunkt), [behandling.versjon]);
 
-  const harIngenArbeidsforholdSomErManueltLagtTil = tabellData.every((data) => data.arbeidsforhold?.arbeidsgiverIdent !== MANUELT_ORG_NR);
+  const harIngenArbeidsforholdSomErManueltLagtTil = tabellData.every((data) => data.arbeidsgiverIdent !== MANUELT_ORG_NR);
 
   const erAksjonspunktÅpent = aksjonspunkt?.status === aksjonspunktStatus.OPPRETTET;
 

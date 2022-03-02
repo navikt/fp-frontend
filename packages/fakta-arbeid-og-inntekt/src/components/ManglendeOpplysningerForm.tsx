@@ -16,7 +16,7 @@ import {
   TextAreaField, RadioGroupField, RadioOption, Datepicker, InputField, Form,
 } from '@fpsak-frontend/form-hooks';
 import {
-  Inntektsmelding, AoIArbeidsforhold, ManueltArbeidsforhold, ManglendeInntektsmeldingVurdering,
+  Inntektsmelding, ManueltArbeidsforhold, ManglendeInntektsmeldingVurdering,
 } from '@fpsak-frontend/types';
 import {
   VerticalSpacer,
@@ -46,18 +46,12 @@ const validerPeriodeRekkefølge = (
   getValues: UseFormGetValues<FormValues>,
 ) => (tom?: string) => (tom ? dateAfterOrEqual(getValues('fom'))(tom) : null);
 
-const erMatch = (
-  inntektsmelding1: Inntektsmelding,
-  inntektsmelding2?: Inntektsmelding,
-) => inntektsmelding1.arbeidsgiverIdent === inntektsmelding2?.arbeidsgiverIdent
-  && inntektsmelding2.internArbeidsforholdId === inntektsmelding2?.internArbeidsforholdId;
-
 interface OwnProps {
   saksnummer: string;
   behandlingUuid: string;
   arbeidsgiverNavn: string;
   inntektsmelding: Inntektsmelding;
-  arbeidsforhold?: AoIArbeidsforhold;
+  radData: ArbeidsforholdOgInntekt;
   isReadOnly: boolean;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
@@ -71,7 +65,7 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   behandlingUuid,
   arbeidsgiverNavn,
   inntektsmelding,
-  arbeidsforhold,
+  radData,
   isReadOnly,
   registrerArbeidsforhold,
   lagreVurdering,
@@ -82,12 +76,12 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
 
   const defaultValues = useMemo<FormValues>(() => ({
-    saksbehandlersVurdering: arbeidsforhold ? arbeidsforhold.saksbehandlersVurdering : inntektsmelding.saksbehandlersVurdering,
-    begrunnelse: arbeidsforhold ? arbeidsforhold.begrunnelse : inntektsmelding.begrunnelse,
-    fom: arbeidsforhold?.fom,
-    tom: arbeidsforhold?.tom,
-    stillingsprosent: arbeidsforhold?.stillingsprosent,
-  }), [inntektsmelding, arbeidsforhold]);
+    saksbehandlersVurdering: radData.avklaring?.saksbehandlersVurdering,
+    begrunnelse: radData.avklaring?.begrunnelse,
+    fom: radData.avklaring?.fom,
+    tom: radData.avklaring?.tom,
+    stillingsprosent: radData.avklaring?.stillingsprosent,
+  }), [radData]);
 
   const formMethods = useForm<FormValues>({
     defaultValues,
@@ -105,11 +99,10 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   const lagre = useCallback((formValues: FormValues) => {
     const oppdater = (() => {
       oppdaterTabell((oldData) => oldData.map((data) => {
-        if (erMatch(inntektsmelding, data.inntektsmelding)) {
+        if (inntektsmelding.arbeidsgiverIdent === data.arbeidsgiverIdent) {
           const opprettArbeidsforhold = formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING;
-          const af = opprettArbeidsforhold ? {
+          const avklaringOpprett = opprettArbeidsforhold ? {
             arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
-            internArbeidsforholdId: inntektsmelding.internArbeidsforholdId,
             fom: formValues.fom,
             tom: formValues.tom,
             stillingsprosent: formValues.stillingsprosent,
@@ -117,13 +110,11 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
             saksbehandlersVurdering: formValues.saksbehandlersVurdering,
           } : undefined;
           return {
-            ...data,
-            inntektsmelding: opprettArbeidsforhold ? data.inntektsmelding : {
-              ...data.inntektsmelding,
+            ...radData,
+            avklaring: avklaringOpprett || {
               begrunnelse: formValues.begrunnelse,
               saksbehandlersVurdering: formValues.saksbehandlersVurdering,
             },
-            arbeidsforhold: af,
           };
         }
         return data;

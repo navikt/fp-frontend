@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useState, useEffect, useCallback, useMemo,
+  FunctionComponent, useState, useEffect, useCallback,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -18,7 +18,7 @@ import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import ArbeidsforholdRad from './ArbeidsforholdRad';
-import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
+import ArbeidsforholdOgInntektRadData, { Avklaring } from '../types/arbeidsforholdOgInntekt';
 import ArbeidsOgInntektOverstyrPanel from './ArbeidsOgInntektOverstyrPanel';
 import { useIsFormDirty } from '../DirtyFormProvider';
 
@@ -32,34 +32,18 @@ const HEADER_TEXT_IDS = [
 ];
 
 const sorterTabell = (
-  d1: ArbeidsforholdOgInntekt,
-  d2: ArbeidsforholdOgInntekt,
+  radX: ArbeidsforholdOgInntektRadData,
+  radY: ArbeidsforholdOgInntektRadData,
 ): number => {
-  const d1HarAp1 = !d1.inntektsmelding || d1.arbeidsforhold?.begrunnelse;
-  const d2HarAp1 = !d2.inntektsmelding || d2.arbeidsforhold?.begrunnelse;
-  if (d1HarAp1 && !d2HarAp1) {
+  const radXHarAp = radX.årsak;
+  const radYHarAp = radY.årsak;
+  if (radXHarAp && !radYHarAp) {
     return -1;
   }
-  if (d2HarAp1 && !d1HarAp1) {
+  if (radYHarAp && !radXHarAp) {
     return 1;
   }
-  if (d1HarAp1 && d2HarAp1) {
-    return d1.arbeidsgiverNavn.localeCompare(d2.arbeidsgiverNavn);
-  }
-
-  const d1HarAp2 = !d1.arbeidsforhold || d1.inntektsmelding?.begrunnelse;
-  const d2HarAp2 = !d2.arbeidsforhold || d2.inntektsmelding?.begrunnelse;
-  if (d1HarAp2 && !d2HarAp2) {
-    return -1;
-  }
-  if (d2HarAp2 && !d1HarAp2) {
-    return 1;
-  }
-  if (d1HarAp2 && d2HarAp2) {
-    return d1.arbeidsgiverNavn.localeCompare(d2.arbeidsgiverNavn);
-  }
-
-  return d1.arbeidsgiverNavn.localeCompare(d2.arbeidsgiverNavn);
+  return radX.arbeidsgiverNavn.localeCompare(radY.arbeidsgiverNavn);
 };
 
 const erMatch = (
@@ -68,49 +52,65 @@ const erMatch = (
 ): boolean => inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent
   && (!inntektsmelding.internArbeidsforholdId || inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);
 
+const lagAvklaring = (
+  arbeidsforhold: AoIArbeidsforhold,
+  arbeidsgiverNavn: string,
+): Avklaring => {
+  const avklaring = {
+    saksbehandlersVurdering: arbeidsforhold.saksbehandlersVurdering,
+    begrunnelse: arbeidsforhold.begrunnelse,
+  };
+  if (arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER) {
+    return {
+      ...avklaring,
+      arbeidsgiverNavn,
+      fom: arbeidsforhold.fom,
+      tom: arbeidsforhold.tom,
+      stillingsprosent: arbeidsforhold.stillingsprosent,
+    };
+  }
+  return avklaring;
+};
+
 const byggTabellStruktur = (
   arbeidOgInntekt: ArbeidOgInntektsmelding,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-): ArbeidsforholdOgInntekt[] => {
-  const { arbeidsforhold, inntektsmeldinger, inntekter } = arbeidOgInntekt;
+): ArbeidsforholdOgInntektRadData[] => {
+  const { arbeidsforhold, inntektsmeldinger } = arbeidOgInntekt;
 
-  const alleArbeidsforhold = arbeidsforhold.map<ArbeidsforholdOgInntekt>((af) => ({
-    arbeidsforhold: af,
-    arbeidsgiverNavn: arbeidsgiverOpplysningerPerId[af.arbeidsgiverIdent].navn,
-    inntektsmelding: inntektsmeldinger.find((inntektsmelding) => erMatch(af, inntektsmelding)),
-    inntektsposter: inntekter.find((inntekt) => inntekt.arbeidsgiverIdent === af.arbeidsgiverIdent)?.inntekter,
-  }));
-  const alleInntektsmeldingerSomManglerArbeidsforhold = arbeidOgInntekt.inntektsmeldinger
+  const alleArbeidsforhold = arbeidsforhold.reduce<ArbeidsforholdOgInntektRadData[]>((acc, af) => {
+    const tidligereIndex = acc.findIndex((a) => a.arbeidsgiverIdent === af.arbeidsgiverIdent);
+    if (tidligereIndex !== -1) {
+      return acc;
+    }
+    const arbeidsgiverNavn = arbeidsgiverOpplysningerPerId[af.arbeidsgiverIdent].navn;
+    return acc.concat({
+      arbeidsgiverIdent: af.arbeidsgiverIdent,
+      arbeidsgiverNavn,
+      årsak: af.årsak,
+      avklaring: af.saksbehandlersVurdering ? lagAvklaring(af, arbeidsgiverNavn) : undefined,
+    });
+  }, []);
+
+  const alleInntektsmeldingerSomManglerArbeidsforhold = inntektsmeldinger
     .filter((im) => !arbeidsforhold.some((af) => erMatch(af, im)))
-    .map<ArbeidsforholdOgInntekt>((im) => ({
-      arbeidsforhold: undefined,
+    .map<ArbeidsforholdOgInntektRadData>((im) => ({
+      arbeidsgiverIdent: im.arbeidsgiverIdent,
       arbeidsgiverNavn: arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent].navn,
-      inntektsmelding: im,
-      inntektsposter: inntekter.find((inntekt) => inntekt.arbeidsgiverIdent === im.arbeidsgiverIdent)?.inntekter,
+      årsak: im.årsak,
+      avklaring: im.saksbehandlersVurdering ? {
+        saksbehandlersVurdering: im.saksbehandlersVurdering,
+        begrunnelse: im.begrunnelse,
+      } : undefined,
     }));
 
   return alleArbeidsforhold.concat(alleInntektsmeldingerSomManglerArbeidsforhold).sort(sorterTabell);
 };
 
-const finnArbeidsforholdIdentDetErFlereAv = (
-  data: ArbeidsforholdOgInntekt[],
-): string[] => {
-  const alleArbeidsgiverIdenter = data.reduce((prev, value) => {
-    const ident = value.arbeidsforhold?.arbeidsgiverIdent || value.inntektsmelding?.arbeidsgiverIdent;
-    return {
-      ...prev,
-      [ident]: prev[ident] ? prev[ident] + 1 : 1,
-    };
-  }, {});
-  return Object.keys(alleArbeidsgiverIdenter).filter((key) => alleArbeidsgiverIdenter[key] > 1);
-};
-
 const finnUløstArbeidsforholdIndex = (
-  tabellData: ArbeidsforholdOgInntekt[],
+  tabellData: ArbeidsforholdOgInntektRadData[],
 ): number[] => {
-  const index = tabellData
-    .findIndex((d) => (d.arbeidsforhold?.årsak && !d.arbeidsforhold?.saksbehandlersVurdering)
-    || (d.inntektsmelding?.årsak && !d.inntektsmelding?.saksbehandlersVurdering && !d.arbeidsforhold?.saksbehandlersVurdering));
+  const index = tabellData.findIndex((d) => d.årsak && !d.avklaring);
   return index !== -1 ? [index] : [];
 };
 
@@ -119,8 +119,8 @@ interface OwnProps {
   behandling: Behandling;
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
-  formData?: ArbeidsforholdOgInntekt[],
-  setFormData: (data: ArbeidsforholdOgInntekt[]) => void,
+  formData?: ArbeidsforholdOgInntektRadData[],
+  setFormData: (data: ArbeidsforholdOgInntektRadData[]) => void,
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
@@ -156,15 +156,14 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
   const [visSettPåVentModal, settVisSettPåVentModal] = useState(false);
   const [erOverstyrt, setErOverstyrt] = useState(false);
 
-  const [tabellData, setTabellData] = useState(formData || byggTabellStruktur(arbeidOgInntekt, arbeidsgiverOpplysningerPerId));
-  const [åpneRadIndexer, settÅpneRadIndexer] = useState(finnUløstArbeidsforholdIndex(tabellData));
-  const identerDetErFlereAv = useMemo(() => finnArbeidsforholdIdentDetErFlereAv(tabellData), [tabellData]);
+  const [tabellRader, setTabellData] = useState(formData || byggTabellStruktur(arbeidOgInntekt, arbeidsgiverOpplysningerPerId));
+  const [åpneRadIndexer, settÅpneRadIndexer] = useState(finnUløstArbeidsforholdIndex(tabellRader));
 
   const isDirty = useIsFormDirty();
 
   useEffect(() => () => {
-    setFormData(tabellData);
-  }, [tabellData]);
+    setFormData(tabellRader);
+  }, [tabellRader]);
 
   const toggleÅpenRad = useCallback((index: number) => {
     if (åpneRadIndexer.some((radIndex) => radIndex === index)) {
@@ -174,11 +173,11 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
     }
   }, [åpneRadIndexer, settÅpneRadIndexer]);
 
-  const oppdaterTabellData = useCallback((data: ArbeidsforholdOgInntekt[]) => {
+  const oppdaterTabellData = useCallback((data: ArbeidsforholdOgInntektRadData[]) => {
     setTabellData(data);
     // @ts-ignore Fiks
-    settÅpneRadIndexer(finnUløstArbeidsforholdIndex(data(tabellData)));
-  }, [tabellData]);
+    settÅpneRadIndexer(finnUløstArbeidsforholdIndex(data(tabellRader)));
+  }, [tabellRader]);
 
   const lagreOgFortsett = useCallback(() => {
     settKnappTrykket(true);
@@ -198,11 +197,10 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
     settBehandlingPåVentCallback(params);
   }, [behandling.versjon]);
 
-  const kanSettePåVent = tabellData
-    .some((d) => d.arbeidsforhold?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING
-    || d.inntektsmelding?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD);
-  const harBehandletAllePerioder = !tabellData.some((d) => (d.arbeidsforhold?.årsak && !d.arbeidsforhold?.saksbehandlersVurdering)
-    || (d.inntektsmelding?.årsak && !d.inntektsmelding?.saksbehandlersVurdering && !d.arbeidsforhold?.saksbehandlersVurdering));
+  const kanSettePåVent = tabellRader
+    .some((d) => d.avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING
+    || d.avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD);
+  const harBehandletAllePerioder = tabellRader.every((d) => (!d.årsak || (d.årsak && d.avklaring)));
 
   const erAksjonspunktAvsluttet = aksjonspunkt?.status === aksjonspunktStatus.UTFORT;
   const erAksjonspunktApent = aksjonspunkt?.status === aksjonspunktStatus.OPPRETTET;
@@ -221,20 +219,20 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
         arbeidOgInntekt={arbeidOgInntekt}
         registrerArbeidsforhold={registrerArbeidsforhold}
         erOverstyrer={erOverstyrer}
-        tabellData={tabellData}
+        tabellData={tabellRader}
         settÅpneRadIndexer={settÅpneRadIndexer}
         setErOverstyrt={setErOverstyrt}
         oppdaterTabell={oppdaterTabellData}
       />
       <Table headerTextCodes={HEADER_TEXT_IDS} noHover hasGrayHeader>
         <>
-          {tabellData.map((data, index) => (
+          {tabellRader.map((radData, index) => (
             <ArbeidsforholdRad
-              key={data.arbeidsgiverNavn}
+              key={radData.arbeidsgiverNavn}
+              arbeidOgInntekt={arbeidOgInntekt}
               saksnummer={saksnummer}
               behandlingUuid={behandling.uuid}
-              skjæringspunktDato={arbeidOgInntekt.skjæringstidspunkt}
-              arbeidsforholdOgInntekt={data}
+              radData={radData}
               isReadOnly={readOnly || erAksjonspunktAvsluttet}
               registrerArbeidsforhold={registrerArbeidsforhold}
               lagreVurdering={lagreVurdering}
@@ -242,7 +240,6 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
               erOverstyrt={erOverstyrt}
               oppdaterTabell={oppdaterTabellData}
               erRadÅpen={åpneRadIndexer.includes(index)}
-              skalViseArbeidsforholdId={identerDetErFlereAv.includes(data.arbeidsforhold?.arbeidsgiverIdent || data.inntektsmelding?.arbeidsgiverIdent)}
             />
           ))}
         </>
