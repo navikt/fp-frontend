@@ -6,7 +6,7 @@ import { Normaltekst, Element, Undertekst } from 'nav-frontend-typografi';
 import { Image } from '@navikt/fp-react-components';
 
 import {
-  AoIArbeidsforhold, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold, AksjonspunktÅrsak, ArbeidOgInntektsmelding,
+  AoIArbeidsforhold, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold, AksjonspunktÅrsak, ArbeidOgInntektsmelding, Inntektsmelding,
 } from '@fpsak-frontend/types';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import utropstegnIkonUrl from '@fpsak-frontend/assets/images/utropstegn.svg';
@@ -21,7 +21,7 @@ import ManglendeOpplysningerForm from './ManglendeOpplysningerForm';
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 import ArbeidsforholdInformasjonPanel from './ArbeidsforholdInformasjonPanel';
 import InntektsmeldingInnhentesForm from './InntektsmeldingInnhentesForm';
-import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
+import ArbeidsforholdOgInntekt, { Avklaring } from '../types/arbeidsforholdOgInntekt';
 
 import styles from './arbeidsforholdRad.less';
 
@@ -37,9 +37,29 @@ const finnKildekode = (
   return harArbeidsforhold ? 'ArbeidsforholdRad.AaRegisteret' : 'ArbeidsforholdRad.Inntektsmelding';
 };
 
+const erMatch = (
+  inntektsmelding: Inntektsmelding,
+  arbeidsgiverIdent?: string,
+  internArbeidsforholdId?: string,
+) => {
+  const test = inntektsmelding.arbeidsgiverIdent === arbeidsgiverIdent
+    && inntektsmelding.internArbeidsforholdId === internArbeidsforholdId;
+  debugger;
+  return test;
+};
+
 const finnPeriode = (
   arbeidsforhold: AoIArbeidsforhold[],
+  avklaring?: Avklaring,
 ): { fom: string, tom?: string } => {
+  if (avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER
+    || avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING) {
+    return {
+      fom: avklaring?.fom,
+      tom: avklaring?.tom,
+    };
+  }
+
   const periode = arbeidsforhold.reduce((res, a) => ({
     fom: res.fom && dayjs(res.fom).isBefore(a.fom) ? res.fom : a.fom,
     tom: res.tom && dayjs(res.tom).isAfter(a.tom) ? res.tom : a.tom,
@@ -95,7 +115,8 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
     && inntektsmeldingerForRad.length === 0 && !årsak && !erManueltOpprettet;
   const førRegisterInnhenting = arbeidsforholdForRad.length === 0 && inntektsmeldingerForRad.length > 0 && !årsak;
 
-  const periode = useMemo(() => finnPeriode(arbeidsforholdForRad), [arbeidsforholdForRad]);
+  const periode = useMemo(() => finnPeriode(arbeidsforholdForRad, radData.avklaring),
+    [erManueltOpprettet, arbeidsforholdForRad, radData.avklaring]);
   const inntektsposter = arbeidOgInntekt.inntekter.find((inntekt) => inntekt.arbeidsgiverIdent === arbeidsgiverIdent)?.inntekter;
 
   return (
@@ -118,7 +139,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
             <InntektsmeldingOpplysningerPanel
               saksnummer={saksnummer}
               stillingsprosent={arbeidsforholdForRad.length > 0 ? arbeidsforholdForRad[0].stillingsprosent : undefined}
-              inntektsmelding={inntektsmeldingerForRad.find((i) => i.internArbeidsforholdId === radData.internArbeidsforholdId)}
+              inntektsmelding={inntektsmeldingerForRad.find((i) => erMatch(i, radData.arbeidsgiverIdent, radData.internArbeidsforholdId))}
               skalViseArbeidsforholdId={false}
             />
           )}
@@ -142,7 +163,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               saksnummer={saksnummer}
               behandlingUuid={behandlingUuid}
               arbeidsgiverNavn={arbeidsgiverNavn}
-              inntektsmelding={inntektsmeldingerForRad.find((i) => i.internArbeidsforholdId === radData.internArbeidsforholdId)}
+              inntektsmelding={inntektsmeldingerForRad.find((i) => erMatch(i, radData.arbeidsgiverIdent, radData.internArbeidsforholdId))}
               radData={radData}
               isReadOnly={isReadOnly}
               registrerArbeidsforhold={registrerArbeidsforhold}

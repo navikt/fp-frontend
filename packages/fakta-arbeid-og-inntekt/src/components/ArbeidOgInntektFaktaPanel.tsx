@@ -60,7 +60,8 @@ const lagAvklaring = (
     saksbehandlersVurdering: arbeidsforhold.saksbehandlersVurdering,
     begrunnelse: arbeidsforhold.begrunnelse,
   };
-  if (arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER) {
+  if (arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER
+    || arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING) {
     return {
       ...avklaring,
       arbeidsgiverNavn,
@@ -84,11 +85,13 @@ const byggTabellStruktur = (
       return acc;
     }
     const arbeidsgiverNavn = arbeidsgiverOpplysningerPerId[af.arbeidsgiverIdent].navn;
+    const årsak = af.årsak ? af.årsak : inntektsmeldinger.find((i) => erMatch(af, i))?.årsak;
+
     return acc.concat({
       arbeidsgiverIdent: af.arbeidsgiverIdent,
       internArbeidsforholdId: af.internArbeidsforholdId,
       arbeidsgiverNavn,
-      årsak: af.årsak,
+      årsak,
       avklaring: af.saksbehandlersVurdering ? lagAvklaring(af, arbeidsgiverNavn) : undefined,
     });
   }, []);
