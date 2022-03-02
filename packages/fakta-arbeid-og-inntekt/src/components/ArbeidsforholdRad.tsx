@@ -118,7 +118,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
             <InntektsmeldingOpplysningerPanel
               saksnummer={saksnummer}
               stillingsprosent={arbeidsforholdForRad.length > 0 ? arbeidsforholdForRad[0].stillingsprosent : undefined}
-              inntektsmelding={inntektsmeldingerForRad[0]}
+              inntektsmelding={inntektsmeldingerForRad.find((i) => i.internArbeidsforholdId === radData.internArbeidsforholdId)}
               skalViseArbeidsforholdId={false}
             />
           )}
@@ -142,7 +142,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               saksnummer={saksnummer}
               behandlingUuid={behandlingUuid}
               arbeidsgiverNavn={arbeidsgiverNavn}
-              inntektsmelding={inntektsmeldingerForRad[0]}
+              inntektsmelding={inntektsmeldingerForRad.find((i) => i.internArbeidsforholdId === radData.internArbeidsforholdId)}
               radData={radData}
               isReadOnly={isReadOnly}
               registrerArbeidsforhold={registrerArbeidsforhold}

@@ -86,6 +86,7 @@ const byggTabellStruktur = (
     const arbeidsgiverNavn = arbeidsgiverOpplysningerPerId[af.arbeidsgiverIdent].navn;
     return acc.concat({
       arbeidsgiverIdent: af.arbeidsgiverIdent,
+      internArbeidsforholdId: af.internArbeidsforholdId,
       arbeidsgiverNavn,
       årsak: af.årsak,
       avklaring: af.saksbehandlersVurdering ? lagAvklaring(af, arbeidsgiverNavn) : undefined,
@@ -96,6 +97,7 @@ const byggTabellStruktur = (
     .filter((im) => !arbeidsforhold.some((af) => erMatch(af, im)))
     .map<ArbeidsforholdOgInntektRadData>((im) => ({
       arbeidsgiverIdent: im.arbeidsgiverIdent,
+      internArbeidsforholdId: im.internArbeidsforholdId,
       arbeidsgiverNavn: arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent].navn,
       årsak: im.årsak,
       avklaring: im.saksbehandlersVurdering ? {

@@ -9,6 +9,7 @@ export type Avklaring = {
 
 type ArbeidsforholdOgInntektRadData = {
   arbeidsgiverIdent: string;
+  internArbeidsforholdId?: string;
   arbeidsgiverNavn: string;
   årsak?: string;
   avklaring?: Avklaring;
