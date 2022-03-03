@@ -14,7 +14,7 @@
     "@fpsak-frontend/types-avklar-aksjonspunkter": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
     "@navikt/fp-react-components": "1.0.12",
-    "moment": "^2.29.1",
+    "moment": "2.29.1",
     "nav-frontend-core": "6.0.1",
     "nav-frontend-etiketter": "3.0.1",
     "nav-frontend-etiketter-style": "2.0.1",
@@ -22,17 +22,17 @@
     "nav-frontend-grid-style": "1.0.2",
     "nav-frontend-typografi": "4.0.1",
     "nav-frontend-typografi-style": "2.0.1",
-    "react": "^17.0.2",
-    "react-intl": "^5.24.6",
-    "react-redux": "^7.2.6",
-    "redux": "^4.1.2",
-    "redux-form": "^8.3.8",
-    "reselect": "^4.1.5"
+    "react": "17.0.2",
+    "react-intl": "5.24.6",
+    "react-redux": "7.2.6",
+    "redux": "4.1.2",
+    "redux-form": "8.3.8",
+    "reselect": "4.1.5"
   },
   "devDependencies": {
     "@fpsak-frontend/utils-test": "1.0.0",
-    "@storybook/addon-actions": "^6.4.19",
-    "enzyme": "^3.11.0",
-    "sinon": "^13.0.1"
+    "@storybook/addon-actions": "6.4.19",
+    "enzyme": "3.11.0",
+    "sinon": "13.0.1"
   }
 }
