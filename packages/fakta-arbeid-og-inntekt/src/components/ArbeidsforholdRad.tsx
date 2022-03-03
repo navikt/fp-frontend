@@ -37,13 +37,6 @@ const finnKildekode = (
   return harArbeidsforhold ? 'ArbeidsforholdRad.AaRegisteret' : 'ArbeidsforholdRad.Inntektsmelding';
 };
 
-const erMatch = (
-  inntektsmelding: Inntektsmelding,
-  arbeidsgiverIdent?: string,
-  internArbeidsforholdId?: string,
-) => inntektsmelding.arbeidsgiverIdent === arbeidsgiverIdent
-  && inntektsmelding.internArbeidsforholdId === internArbeidsforholdId;
-
 const finnPeriode = (
   arbeidsforhold: AoIArbeidsforhold[],
   avklaring?: Avklaring,
@@ -62,6 +55,19 @@ const finnPeriode = (
   }), { fom: undefined, tom: undefined });
 
   return periode.fom ? periode : undefined;
+};
+
+const finnInntektsmelding = (
+  inntektsmeldinger: Inntektsmelding[],
+  internArbeidsforholdId?: string,
+) => {
+  const harImMedId = inntektsmeldinger.some((i) => i.internArbeidsforholdId);
+  const harImUtenId = inntektsmeldinger.some((i) => !i.internArbeidsforholdId);
+  if (harImMedId && harImUtenId) {
+    throw Error('Har inntektsmelding både med og uten id');
+  }
+
+  return inntektsmeldinger.find((i) => !i.internArbeidsforholdId || i.internArbeidsforholdId === internArbeidsforholdId);
 };
 
 interface OwnProps {
@@ -135,7 +141,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
             <InntektsmeldingOpplysningerPanel
               saksnummer={saksnummer}
               stillingsprosent={arbeidsforholdForRad.length > 0 ? arbeidsforholdForRad[0].stillingsprosent : undefined}
-              inntektsmelding={inntektsmeldingerForRad.find((i) => erMatch(i, radData.arbeidsgiverIdent, radData.internArbeidsforholdId))}
+              inntektsmelding={finnInntektsmelding(inntektsmeldingerForRad, radData.internArbeidsforholdId)}
               skalViseArbeidsforholdId={false}
             />
           )}
@@ -159,7 +165,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               saksnummer={saksnummer}
               behandlingUuid={behandlingUuid}
               arbeidsgiverNavn={arbeidsgiverNavn}
-              inntektsmelding={inntektsmeldingerForRad.find((i) => erMatch(i, radData.arbeidsgiverIdent, radData.internArbeidsforholdId))}
+              inntektsmelding={finnInntektsmelding(inntektsmeldingerForRad, radData.internArbeidsforholdId)}
               radData={radData}
               isReadOnly={isReadOnly}
               registrerArbeidsforhold={registrerArbeidsforhold}
