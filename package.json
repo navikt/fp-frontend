@@ -143,18 +143,10 @@
     "webpack-merge": "^5.8.0"
   },
   "resolutions": {
-    "browserslist": "^4.19.3",
-    "follow-redirects": "^1.14.9",
-    "glob-parent": "^6.0.2",
-    "immer": "^9.0.12",
-    "nanoid": "^3.3.1",
-    "node-fetch": "^2.6.7",
-    "postcss": "^8.4.7",
+    "prismjs": "1.27.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-test-renderer": "^17.0.2",
-    "shelljs": "^0.8.5",
-    "trim": "^1.0.1"
+    "react-test-renderer": "^17.0.2"
   },
   "version": "0.0.0"
 }
