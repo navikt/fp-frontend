@@ -7,6 +7,7 @@ import {
   Aksjonspunkt, AlleKodeverk, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
+import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
 
 import PerioderMedMedlemskapFaktaPanel, { PerioderMedMedlemskapFaktaPanelImpl as UndecoratedForm, PeriodeMedId } from './PerioderMedMedlemskapFaktaPanel';
 import messages from '../../../i18n/nb_NO.json';
@@ -51,11 +52,11 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       alleKodeverk={{} as AlleKodeverk}
     />, messages);
 
-    const table = wrapper.find('Table');
+    const table = wrapper.find(Table);
     expect(table).toHaveLength(1);
-    const tableRows = table.find('TableRow');
+    const tableRows = table.find(TableRow);
     expect(tableRows).toHaveLength(1);
-    const tableColumns = table.find('TableColumn');
+    const tableColumns = table.find(TableColumn);
     expect(tableColumns).toHaveLength(4);
     expect(tableColumns.at(1).html()).toEqual('<td class="columnStyle">testdekning</td>');
     expect(tableColumns.at(2).html()).toEqual('<td class="columnStyle">testStatus</td>');
@@ -169,9 +170,9 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       alleKodeverk={{} as AlleKodeverk}
     />, messages);
 
-    const table = wrapper.find('Table');
+    const table = wrapper.find(Table);
     expect(table).toHaveLength(1);
-    expect(table.find('TableRow')).toHaveLength(1);
+    expect(table.find(TableRow)).toHaveLength(1);
   });
 
   it('skal ikke vise tabell når det ikke finnes medlemskapsperioder', () => {
@@ -188,7 +189,7 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
       alleKodeverk={{} as AlleKodeverk}
     />, messages);
 
-    const table = wrapper.find('Table');
+    const table = wrapper.find(Table);
     expect(table).toHaveLength(0);
   });
 

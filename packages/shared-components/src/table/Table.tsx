@@ -1,4 +1,4 @@
-import React, { ReactElement, FunctionComponent } from 'react';
+import React, { ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classnames from 'classnames/bind';
 
@@ -25,15 +25,15 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Definerer en tabell med rader og kolonner.
  */
-const Table: FunctionComponent<OwnProps> = ({
+const Table = React.forwardRef<HTMLTableElement, OwnProps>(({
   headerTextCodes = [],
   headerColumnContent = [],
   classNameTable = '',
   noHover = false,
   hasGrayHeader = false,
   children,
-}) => (
-  <table className={classNames('table', { [classNameTable]: classNameTable, noHover })}>
+}, ref) => (
+  <table ref={ref} className={classNames('table', { [classNameTable]: classNameTable, noHover })}>
     <thead>
       <TableRow isHeader noHover={noHover} hasGrayHeader={hasGrayHeader}>
         {headerTextCodes.map((headerElement) => (typeof headerElement === 'string' && headerElement.startsWith(EMPTY_STRING)
@@ -56,6 +56,6 @@ const Table: FunctionComponent<OwnProps> = ({
         : React.cloneElement(children, { noHover })}
     </tbody>
   </table>
-);
+));
 
 export default Table;
