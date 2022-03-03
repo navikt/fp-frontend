@@ -42,10 +42,20 @@ const finnAndelerSomSkalVises = (andeler: BeregningsgrunnlagAndel[], statuser: s
     .filter((andel) => statuser.includes(andel.aktivitetStatus))
     .filter((andel) => andelErIkkeTilkommetEllerLagtTilAvSBH(andel));
 };
+
+const beløpEller0 = (beløp: number | undefined): number => {
+  if (!beløp) {
+    return 0;
+  } return beløp;
+};
+
 const beregnAarsintektForAktivitetStatuser = (alleAndelerIForstePeriode: BeregningsgrunnlagAndel[], statuser: string[]): number => {
   const relevanteAndeler = finnAndelerSomSkalVises(alleAndelerIForstePeriode, statuser);
   if (relevanteAndeler) {
-    return relevanteAndeler.reduce((acc, andel) => acc + andel.beregnetPrAar, 0);
+    const brutto = relevanteAndeler.reduce((acc, andel) => acc + andel.beregnetPrAar, 0);
+    const bortfaltNaturalytelse = relevanteAndeler.reduce((acc, andel) => acc + beløpEller0(andel?.arbeidsforhold?.naturalytelseBortfaltPrÅr), 0);
+    const tilkommetNaturalytelse = relevanteAndeler.reduce((acc, andel) => acc + beløpEller0(andel?.arbeidsforhold?.naturalytelseTilkommetPrÅr), 0);
+    return brutto + bortfaltNaturalytelse - tilkommetNaturalytelse;
   }
   return null;
 };
