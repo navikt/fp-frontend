@@ -20,8 +20,8 @@ interface OwnProps {
   className: string;
   dayPickerClassName: string;
   elementIsCalendarButton: (target: EventTarget) => boolean;
-  startDate: Date | null;
-  endDate: Date | null;
+  startDate?: Date | null;
+  endDate?: Date | null;
   disabled?: boolean;
   onClose?: () => void;
   disabledDays?: Modifier | Modifier[];
