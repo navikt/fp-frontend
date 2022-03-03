@@ -83,7 +83,7 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
         <>
           <VerticalSpacer eightPx />
           <AvsnittSkiller dividerParagraf />
-          <VerticalSpacer eightPx />
+          <VerticalSpacer sixteenPx />
           {arbeidsforholdForRad.map((a) => {
             const inntektsmelding = inntektsmeldingerForRad.find((i) => erMatch(a, i));
             return (
@@ -161,9 +161,9 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
                     </Column>
                   )}
                 </Row>
-                <VerticalSpacer eightPx />
+                <VerticalSpacer sixteenPx />
                 <AvsnittSkiller dividerParagraf />
-                <VerticalSpacer eightPx />
+                <VerticalSpacer sixteenPx />
               </>
             );
           })}

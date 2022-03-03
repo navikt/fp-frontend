@@ -27,6 +27,7 @@ interface OwnProps {
   textareaClass?: string;
   placeholder?: string;
   parse?: (value: string | number) => string | number;
+  autoFocus?: boolean;
 }
 
 const TextAreaField: FunctionComponent<OwnProps> = ({
