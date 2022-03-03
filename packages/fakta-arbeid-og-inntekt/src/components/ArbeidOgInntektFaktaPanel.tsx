@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useState, useEffect, useCallback,
+  FunctionComponent, useState, useEffect, useCallback, useRef,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -178,10 +178,12 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
     }
   }, [åpneRadIndexer, settÅpneRadIndexer]);
 
+  const tableRef = useRef<HTMLTableElement>(null);
   const oppdaterTabellData = useCallback((data: ArbeidsforholdOgInntektRadData[]) => {
     setTabellData(data);
     // @ts-ignore Fiks
     settÅpneRadIndexer(finnUløstArbeidsforholdIndex(data(tabellRader)));
+    tableRef?.current?.scrollIntoView();
   }, [tabellRader]);
 
   const lagreOgFortsett = useCallback(() => {
@@ -229,25 +231,23 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
         setErOverstyrt={setErOverstyrt}
         oppdaterTabell={oppdaterTabellData}
       />
-      <Table headerTextCodes={HEADER_TEXT_IDS} noHover hasGrayHeader>
-        <>
-          {tabellRader.map((radData, index) => (
-            <ArbeidsforholdRad
-              key={radData.arbeidsgiverNavn}
-              arbeidOgInntekt={arbeidOgInntekt}
-              saksnummer={saksnummer}
-              behandlingUuid={behandling.uuid}
-              radData={radData}
-              isReadOnly={readOnly || erAksjonspunktAvsluttet}
-              registrerArbeidsforhold={registrerArbeidsforhold}
-              lagreVurdering={lagreVurdering}
-              toggleÅpenRad={() => toggleÅpenRad(index)}
-              erOverstyrt={erOverstyrt}
-              oppdaterTabell={oppdaterTabellData}
-              erRadÅpen={åpneRadIndexer.includes(index)}
-            />
-          ))}
-        </>
+      <Table ref={tableRef} headerTextCodes={HEADER_TEXT_IDS} noHover hasGrayHeader>
+        {tabellRader.map((radData, index) => (
+          <ArbeidsforholdRad
+            key={`${radData.arbeidsgiverNavn}${radData.arbeidsgiverIdent}${radData.internArbeidsforholdId}`}
+            arbeidOgInntekt={arbeidOgInntekt}
+            saksnummer={saksnummer}
+            behandlingUuid={behandling.uuid}
+            radData={radData}
+            isReadOnly={readOnly || erAksjonspunktAvsluttet}
+            registrerArbeidsforhold={registrerArbeidsforhold}
+            lagreVurdering={lagreVurdering}
+            toggleÅpenRad={() => toggleÅpenRad(index)}
+            erOverstyrt={erOverstyrt}
+            oppdaterTabell={oppdaterTabellData}
+            erRadÅpen={åpneRadIndexer.includes(index)}
+          />
+        ))}
       </Table>
       <VerticalSpacer sixteenPx />
       {skalViseSettPåVentKnapp && (

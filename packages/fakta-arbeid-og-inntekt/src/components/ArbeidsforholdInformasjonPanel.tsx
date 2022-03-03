@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useState, useMemo,
+  FunctionComponent, useState, useMemo, Fragment,
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
@@ -33,6 +33,12 @@ const erMatch = (
   inntektsmelding: Inntektsmelding,
 ): boolean => inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent
   && (!inntektsmelding.internArbeidsforholdId || inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);
+
+const delOppAId = (eksternArbeidsforholdId: string) => {
+  const lengde = Math.ceil(eksternArbeidsforholdId.length / 25);
+  const oppdeltId = Array.from({ length: lengde }, (_x, i) => eksternArbeidsforholdId.slice(i * 25, (i * 25) + 25));
+  return <p>{oppdeltId.join('-')}</p>;
+};
 
 const behandleInntektsposter = (
   skjæringspunktDato: string,
@@ -87,7 +93,7 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
           {arbeidsforholdForRad.map((a) => {
             const inntektsmelding = inntektsmeldingerForRad.find((i) => erMatch(a, i));
             return (
-              <>
+              <React.Fragment key={`${a.arbeidsgiverIdent}${a.internArbeidsforholdId}`}>
                 <Row>
                   <Column xs="8">
                     <FlexRow>
@@ -100,7 +106,7 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
                         )}
                         {a.eksternArbeidsforholdId.length >= 50 && (
                           <Tooltip
-                            content={a.eksternArbeidsforholdId}
+                            content={delOppAId(a.eksternArbeidsforholdId)}
                             alignTop
                           >
                             <Normaltekst>{`${a.eksternArbeidsforholdId.substring(0, 50)}...`}</Normaltekst>
@@ -164,7 +170,7 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
                 <VerticalSpacer sixteenPx />
                 <AvsnittSkiller dividerParagraf />
                 <VerticalSpacer sixteenPx />
-              </>
+              </React.Fragment>
             );
           })}
         </>

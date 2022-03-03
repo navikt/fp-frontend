@@ -22,6 +22,9 @@ const {
 
 const frist = dayjs().add(28, 'days').format(ISO_DATE_FORMAT);
 
+const scrollIntoViewMock = jest.fn();
+window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
+
 describe('<ArbeidOgInntektFaktaIndex>', () => {
   Modal.setAppElement('body');
 
