@@ -541,6 +541,92 @@ ArbeidsforholdErOK.args = {
   },
 };
 
+export const ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet = Template.bind({});
+ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
+  arbeidsgiverOpplysningerPerId: {
+    910909088: {
+      erPrivatPerson: false,
+      fødselsdato: undefined,
+      identifikator: '910909088',
+      navn: 'BEDRIFT AS',
+      referanse: '910909088',
+    },
+  },
+  arbeidOgInntekt: {
+    arbeidsforhold: [{
+      arbeidsgiverIdent: '910909088',
+      eksternArbeidsforholdId: 'ARB001-001',
+      fom: '2019-12-06',
+      internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
+      stillingsprosent: 100,
+      tom: '9999-12-31',
+    }, {
+      arbeidsgiverIdent: '910909088',
+      eksternArbeidsforholdId: 'ARB001-002',
+      fom: '2021-12-01',
+      internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa85',
+      stillingsprosent: 80,
+      tom: '9999-12-31',
+    }],
+    inntektsmeldinger: [{
+      arbeidsgiverIdent: '910909088',
+      eksternArbeidsforholdId: 'ARB001-001',
+      innsendingstidspunkt: '2021-12-06T10:52:13.377',
+      inntektPrMnd: 30000,
+      internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
+      kontaktpersonNavn: 'Corpolarsen',
+      kontaktpersonNummer: '41925090',
+      motattDato: '2021-12-06',
+      refusjonPrMnd: 20000,
+      journalpostId: '1',
+      dokumentId: '2',
+    }, {
+      arbeidsgiverIdent: '910909088',
+      eksternArbeidsforholdId: 'ARB001-002',
+      innsendingstidspunkt: '2021-12-06T10:52:13.377',
+      inntektPrMnd: 10000,
+      internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa85',
+      kontaktpersonNavn: 'Espen Utvikler',
+      kontaktpersonNummer: '41925090',
+      motattDato: '2021-11-06',
+      journalpostId: '1',
+      dokumentId: '2',
+    }],
+    inntekter: [{
+      arbeidsgiverIdent: '910909088',
+      inntekter: [{
+        beløp: 40000,
+        fom: '2020-06-01',
+        tom: '2020-06-30',
+        type: 'LØNN',
+      }, {
+        beløp: 40000,
+        fom: '2020-07-01',
+        tom: '2020-07-31',
+        type: 'LØNN',
+      }, {
+        beløp: 40000,
+        fom: '2020-08-01',
+        tom: '2020-08-31',
+        type: 'LØNN',
+      }, {
+        beløp: 40000,
+        fom: '2020-09-01',
+        tom: '2020-09-30',
+        type: 'LØNN',
+      }, {
+        beløp: 40000,
+        fom: '2021-11-01',
+        tom: '2021-11-30',
+        type: 'LØNN',
+      }],
+    }],
+    skjæringstidspunkt: '2021-11-10',
+  },
+};
+
 export const FlereArbeidsforholdOgInntekstemeldinger = Template.bind({});
 FlereArbeidsforholdOgInntekstemeldinger.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,

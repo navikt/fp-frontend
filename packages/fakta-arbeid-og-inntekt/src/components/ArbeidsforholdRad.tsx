@@ -18,12 +18,13 @@ import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/ar
 import { TIDENES_ENDE } from '@fpsak-frontend/utils';
 import ManueltLagtTilArbeidsforholdForm from './ManueltLagtTilArbeidsforholdForm';
 import ManglendeOpplysningerForm from './ManglendeOpplysningerForm';
-import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 import ArbeidsforholdInformasjonPanel from './ArbeidsforholdInformasjonPanel';
 import InntektsmeldingInnhentesForm from './InntektsmeldingInnhentesForm';
 import ArbeidsforholdOgInntekt, { Avklaring } from '../types/arbeidsforholdOgInntekt';
 
 import styles from './arbeidsforholdRad.less';
+import InntektsmeldingerTest from './InntektsmeldingerTest';
+import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 
 const classNames = classnames.bind(styles);
 
@@ -137,7 +138,14 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               oppdaterTabell={oppdaterTabell}
             />
           )}
-          {(harArbeidsforholdOgInntektsmelding || førRegisterInnhenting) && (
+          {(harArbeidsforholdOgInntektsmelding) && (
+            <InntektsmeldingerTest
+              saksnummer={saksnummer}
+              arbeidsforholdForRad={arbeidsforholdForRad}
+              inntektsmeldingerForRad={inntektsmeldingerForRad}
+            />
+          )}
+          {førRegisterInnhenting && (
             <InntektsmeldingOpplysningerPanel
               saksnummer={saksnummer}
               stillingsprosent={arbeidsforholdForRad.length > 0 ? arbeidsforholdForRad[0].stillingsprosent : undefined}
@@ -181,7 +189,6 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               skjæringspunktDato={arbeidOgInntekt.skjæringstidspunkt}
               inntektsposter={inntektsposter}
               arbeidsforholdForRad={arbeidsforholdForRad}
-              inntektsmeldingerForRad={inntektsmeldingerForRad}
             />
           )}
         </>
@@ -239,7 +246,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
             <DateTimeLabel dateTimeString={inntektsmeldingerForRad[0].motattDato} useNewFormat />
           )}
           {erManueltOpprettet && '-'}
-          {manglerInntektsmelding && inntektsmeldingerForRad.length === arbeidsforholdForRad.length && (
+          {!manglerInntektsmelding && arbeidsforholdForRad.length > 1 && inntektsmeldingerForRad.length === arbeidsforholdForRad.length && (
             <FormattedMessage id="ArbeidsforholdRad.Mottatt" />
           )}
           {manglerInntektsmelding && inntektsmeldingerForRad.length < arbeidsforholdForRad.length && (

@@ -80,6 +80,8 @@
   "ArbeidsforholdInformasjonPanel.FaerreManeder": "Siste måneder ",
   "ArbeidsforholdInformasjonPanel.IngenInntekt": "Ingen inntekt registrert på bruker i A-ordningen",
   "ArbeidsforholdInformasjonPanel.ÅpneInntektsmelding": "Åpne inntektsmelding (PDF)",
+  "ArbeidsforholdInformasjonPanel.ApneImInfo": "Vis mer",
+  "ArbeidsforholdInformasjonPanel.LukkeImInfo": "Vis mindre",
 
   "LeggTilArbeidsforholdForm.LeggTilArbeidsforhold": "Legg til arbeidsforhold",
   "LeggTilArbeidsforholdForm.Arbeidsgiver": "Navn på arbeidsgiver",
