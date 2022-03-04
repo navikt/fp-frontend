@@ -298,7 +298,7 @@
   "HistorikkEndretFelt.KontaktArbeidsgiverVedManglendeArbeidsforhold": "Arbeidsgiver kontaktes",
   "HistorikkEndretFelt.IkkeOpprettBasertPåInntektsmelding": "Ikke opprett arbeidsforhold",
   "HistorikkEndretFelt.OpprettBasertPåInntektsmelding": "Opprettet basert på inntektsmeldingen",
-  "HistorikkEndretfelt.ManueltOpprettetAvSaksbehandler": "Opprettet av saksbehandler",
+  "HistorikkEndretFelt.ManueltOpprettetAvSaksbehandler": "Opprettet av saksbehandler",
   "HistorikkEndretFelt.FjernFraBehandlingen": "Fjernet fra behandlingen",
 
   "HistorikkEndretFeltVerdiType.AdoptererAlene": "adopterer alene",
