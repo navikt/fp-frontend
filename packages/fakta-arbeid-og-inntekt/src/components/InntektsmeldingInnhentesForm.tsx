@@ -84,7 +84,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
   }, [lukkArbeidsforholdRad, defaultValues]);
 
   const lagre = useCallback((formValues: FormValues) => {
-    const vurdering = erEttArbeidsforhold
+    const vurdering = erEttArbeidsforhold || inntektsmeldingerForRad.length === 0
       ? formValues.saksbehandlersVurdering : ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING;
     const params = {
       behandlingUuid,
