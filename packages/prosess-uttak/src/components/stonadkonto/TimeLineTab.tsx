@@ -25,6 +25,8 @@ const findKorrektLabelForKvote = (stonadtype: string): string => {
       return 'TimeLineTab.Stonadinfo.Flerbarnsdager';
     case stonadskontoType.FORELDREPENGER:
       return 'TimeLineTab.Stonadinfo.ForeldrePenger';
+    case stonadskontoType.UTEN_AKTIVITETSKRAV:
+      return 'TimeLineTab.Stonadinfo.UtenAktivitetskrav';
     default:
       return 'TimeLineTab.Stonadinfo.Empty';
   }
