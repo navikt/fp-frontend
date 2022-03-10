@@ -20,6 +20,6 @@
   "devDependencies": {
     "@fpsak-frontend/storybook-utils": "1.0.0",
     "@storybook/testing-react": "1.2.3",
-    "@testing-library/react": "12.1.3"
+    "@testing-library/react": "12.1.4"
   }
 }
