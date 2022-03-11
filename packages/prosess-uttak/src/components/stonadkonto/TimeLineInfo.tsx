@@ -118,6 +118,7 @@ class TimeLineInfo extends Component<OwnProps, OwnState> {
       stonadskontoType.MODREKVOTE,
       stonadskontoType.FEDREKVOTE,
       stonadskontoType.FORELDREPENGER,
+      stonadskontoType.UTEN_AKTIVITETSKRAV,
       stonadskontoType.FLERBARNSDAGER];
 
     const stonadArray = Object.keys(stonadskonto).map((key): CustomStonadskonto => ({
