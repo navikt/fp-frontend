@@ -26,7 +26,7 @@ const headerTextCodes = [
 const findTilgjengeligeUker = (stonadskontoer: UttakStonadskontoer['stonadskontoer']): number => {
   let sumDager = 0;
   Object.keys(stonadskontoer).forEach((key) => {
-    if (key !== stonadskontoType.FLERBARNSDAGER) {
+    if (key !== stonadskontoType.FLERBARNSDAGER && key !== stonadskontoType.UTEN_AKTIVITETSKRAV) {
       sumDager += stonadskontoer[key].maxDager ? stonadskontoer[key].maxDager : 0;
     }
   });
