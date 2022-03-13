@@ -33,6 +33,7 @@ type KlageVurdering = Readonly<{
     erSignert: boolean;
   };
   aktuelleHjemler?: string[];
+  enableKabal: boolean;
 }>
 
 export default KlageVurdering;

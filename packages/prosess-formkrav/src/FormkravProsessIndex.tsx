@@ -48,6 +48,7 @@ const FormkravProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelPro
         readOnly={isReadOnly}
         readOnlySubmitButton={readOnlySubmitButton}
         alleKodeverk={alleKodeverk}
+        alleAktuelleHjemler={klageVurdering.aktuelleHjemler ? klageVurdering.aktuelleHjemler : []}
         avsluttedeBehandlinger={avsluttedeBehandlinger}
         formData={formData}
         setFormData={setFormData}
