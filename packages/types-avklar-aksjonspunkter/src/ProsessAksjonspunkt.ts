@@ -15,7 +15,7 @@ import ForeslaVedtakManueltAp from './prosess/ForeslaVedtakManueltAp';
 import VurderFeilutbetalingAp from './prosess/VurderFeilutbetalingAp';
 import AnkeMerknaderResultatAp from './prosess/AnkeMerknaderResultatAp';
 import OverstyringBeregningAp from './prosess/OverstyringBeregningAp';
-import KlageFormkravAp from './prosess/KlageFormkravAp';
+import KlageFormkravAp, { KlageFormkravKaAp } from './prosess/KlageFormkravAp';
 import VurderInnsynAp from './prosess/VurderInnsynAp';
 import KlageVurderingResultatAp from './prosess/KlageVurderingResultatAp';
 import VurderSoknadsfristAp from './prosess/VurderSoknadsfristAp';
@@ -48,6 +48,7 @@ export type ProsessAksjonspunkt = AnkeVurderingResultatAp
   | OverstyringBeregningAp
   | VurderFeilutbetalingAp
   | KlageFormkravAp
+  | KlageFormkravKaAp
   | KlageVurderingResultatAp
   | VurderSoknadsfristAp
   | VurderTilbaketrekkAp
