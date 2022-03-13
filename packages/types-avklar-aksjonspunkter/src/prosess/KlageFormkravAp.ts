@@ -2,7 +2,7 @@ import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import AksjonspunktTilBekreftelse from '../AksjonspunktTilBekreftelse';
 
-type KlageFormkravAp = {
+type KlageFormkravBasic = {
   erKlagerPart: boolean;
   erFristOverholdt: boolean;
   erKonkret: boolean;
@@ -14,6 +14,13 @@ type KlageFormkravAp = {
     tilbakekrevingBehandlingType?: string;
   };
   vedtakBehandlingUuid?: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP | AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_KA>;
+};
+
+type KlageFormkravAp = KlageFormkravBasic & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP>;
+
+export type KlageFormkravKaAp = KlageFormkravBasic & {
+  sendTilKabal?: boolean;
+  klageHjemmel?: string;
+} & AksjonspunktTilBekreftelse<AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_KA>;
 
 export default KlageFormkravAp;

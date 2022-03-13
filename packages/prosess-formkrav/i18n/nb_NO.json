@@ -11,6 +11,9 @@
   "Klage.Formkrav.ErFristOverholdt": "Er klagefristen overholdt?",
   "Klage.Formkrav.ErSignert": "Er klagen signert?",
   "Klage.Formkrav.SelectVedtakPlaceholder": "Velg vedtak",
+  "Klage.Formkrav.KabalText": "Fortsett klagebehandlingen i KABAL: Kryss av, velg hjemmel og trykk send",
+  "Klage.Formkrav.SendTilKabal": "Send til KABAL",
+  "Klage.Formkrav.Hjemmel": "Hjemmel",
   "Klage.Formkrav.Ja": "Ja",
   "Klage.Formkrav.Nei": "Nei",
 
