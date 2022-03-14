@@ -52,10 +52,12 @@ const ExpandableTableRow: FunctionComponent<OwnProps> = ({
         </FloatRight>
       </TableColumn>
     </TableRow>
-    <TableRow noHover isApLeftBorder={isApLeftBorder} className={!showContent ? styles.hidden : undefined}>
-      <TableColumn />
-      <TableColumn colspanAll>
-        {content}
+    <TableRow noHover isApLeftBorder={isApLeftBorder} className={showContent ? styles.activeRow : styles.hidden}>
+      <TableColumn className={showContent ? styles.active : styles.hidden} />
+      <TableColumn colspanAll className={showContent ? styles.active : styles.hidden}>
+        <div className={showContent ? styles.active : styles.hidden}>
+          {content}
+        </div>
       </TableColumn>
     </TableRow>
   </>
