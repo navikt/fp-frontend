@@ -50,7 +50,8 @@ const ArbeidsforholdFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.ARBEIDSFORHOLD}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'ArbeidsforholdInfoPanel.Title' })}
-    skalPanelVisesIMeny={({ arbeidOgInntekt }) => !arbeidOgInntekt}
+    skalPanelVisesIMeny={({ aksjonspunkter, arbeidOgInntekt }) => !arbeidOgInntekt
+      || aksjonspunkter.some((ap) => AKSJONSPUNKT_KODER.some((kode) => kode === ap.definisjon))}
     renderPanel={(data) => (
       <ArbeidsforholdFaktaIndex
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
