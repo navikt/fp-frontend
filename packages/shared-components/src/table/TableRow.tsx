@@ -103,7 +103,7 @@ const TableRow = <ID, MODEL = void, >({
   hasNoBottomBorder = false,
 }: OwnProps<ID, MODEL>) => (
   <tr
-    className={classNames(className, styles.column, {
+    className={classNames(className, styles.row, {
       rowHeader: isHeader,
       grayHeader: hasGrayHeader,
       rowContent: (!isHeader && !noHover),

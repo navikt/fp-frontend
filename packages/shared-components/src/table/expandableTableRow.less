@@ -1,5 +1,25 @@
+@import '@{coreModulePath}nav-frontend-core/less/_variabler';
+
 .hidden {
-  display: none;
+  border-bottom: none;
+  box-sizing: border-box;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 4px;
+  transition: max-height 0.3s;
+}
+
+.active {
+  border-bottom: none;
+  max-height: 800px;
+  overflow: hidden;
+  padding: 0 4px;
+  transition: max-height 1s;
+}
+
+.activeRow {
+  border-bottom: 1px solid @navGra40;
+  composes: active;
 }
 
 .toggleIcon {
