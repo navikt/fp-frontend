@@ -63,7 +63,8 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
       aksjonspunktKoder={AKSJONSPUNKT_KODER}
       faktaPanelKode={FaktaPanelCode.ARBEID_OG_INNTEKT}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'ArbeidOgInntektInfoPanel.Title' })}
-      skalPanelVisesIMeny={({ arbeidOgInntekt }) => !!arbeidOgInntekt}
+      skalPanelVisesIMeny={({ aksjonspunkter, arbeidOgInntekt }) => !!arbeidOgInntekt
+        && !aksjonspunkter.some((ap) => aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD === ap.definisjon)}
       renderPanel={(data) => (
         <ArbeidOgInntektFaktaIndex
           saksnummer={saksnummer}
