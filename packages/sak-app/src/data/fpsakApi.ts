@@ -42,7 +42,6 @@ type InitLinks = {
 
 export enum LinkCategory {
   INIT_DATA = 'INIT_DATA',
-  FEATURE_TOGGLE = 'FEATURE_TOGGLE',
   FAGSAK = 'FAGSAK',
   BEHANDLING = 'BEHANDLING',
 }
@@ -54,7 +53,6 @@ export const FpsakApiKeys = {
   KODEVERK_FPTILBAKE: new RestKey<AlleKodeverkTilbakekreving, void>('KODEVERK_FPTILBAKE'),
   NAV_ANSATT: new RestKey<NavAnsatt, void>('NAV_ANSATT'),
   BEHANDLENDE_ENHETER: new RestKey<BehandlendeEnheter, void>('BEHANDLENDE_ENHETER'),
-  FEATURE_TOGGLE: new RestKey<{ featureToggles: {[key: string]: boolean} }, { toggles: { navn: string }[]}>('FEATURE_TOGGLE'),
   SEARCH_FAGSAK: new RestKey<Fagsak[], { searchString: string }>('SEARCH_FAGSAK'),
   FETCH_FAGSAK: new RestKey<Fagsak, { saksnummer: string }>('FETCH_FAGSAK'),
   SAK_PERSONER: new RestKey<FagsakPersoner, { saksnummer: string }>('SAK_PERSONER'),
@@ -96,9 +94,6 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('kodeverk', FpsakApiKeys.KODEVERK)
   .withRel('tilbake-kodeverk', FpsakApiKeys.KODEVERK_FPTILBAKE)
   .withRel('behandlende-enheter', FpsakApiKeys.BEHANDLENDE_ENHETER)
-
-  // Feature toggles
-  .withRel('feature-toggle', FpsakApiKeys.FEATURE_TOGGLE)
 
   // Fagsak
   .withRel('fagsak', FpsakApiKeys.FETCH_FAGSAK)
