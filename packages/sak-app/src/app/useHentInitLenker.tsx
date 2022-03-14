@@ -16,11 +16,9 @@ const useHentInitLenker = (): boolean[] => {
     if (initFetchLinksFpTilbake) {
       requestApi.setLinks(initFetchLinksFpSak.links.concat(initFetchLinksFpTilbake.links), LinkCategory.INIT_DATA);
       requestApi.setLinks(initFetchLinksFpSak.sakLinks.concat(initFetchLinksFpTilbake.sakLinks), LinkCategory.FAGSAK);
-      requestApi.setLinks(initFetchLinksFpSak.toggleLinks, LinkCategory.FEATURE_TOGGLE);
     } else {
       requestApi.setLinks(initFetchLinksFpSak.links, LinkCategory.INIT_DATA);
       requestApi.setLinks(initFetchLinksFpSak.sakLinks, LinkCategory.FAGSAK);
-      requestApi.setLinks(initFetchLinksFpSak.toggleLinks, LinkCategory.FEATURE_TOGGLE);
     }
   }
 
