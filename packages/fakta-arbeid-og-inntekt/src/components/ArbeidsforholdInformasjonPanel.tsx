@@ -30,11 +30,11 @@ const behandleInntektsposter = (
   inntektsposter: Inntektspost[],
 ): ForenkletInntektspost[] => {
   const skjæringstidspunkt = dayjs(skjæringspunktDato);
-  const sluttPeriode = skjæringstidspunkt.startOf('month');
-  const startPeriode = sluttPeriode.subtract(12, 'month');
+  const månedenFørSkjæringspunktet = skjæringstidspunkt.subtract(1, 'month').startOf('month');
+  const tolvMånederFørSkjæringspunktet = månedenFørSkjæringspunktet.subtract(12, 'month');
 
   const poster = [];
-  for (let måned = sluttPeriode; måned.isAfter(startPeriode); måned = måned.subtract(1, 'month')) {
+  for (let måned = månedenFørSkjæringspunktet; måned.isAfter(tolvMånederFørSkjæringspunktet); måned = måned.subtract(1, 'month')) {
     const månedString = måned.format(ISO_DATE_FORMAT);
     const inntekt = inntektsposter.find((inn) => dayjs(inn.fom).startOf('month').format(ISO_DATE_FORMAT) === månedString);
     poster.push({
