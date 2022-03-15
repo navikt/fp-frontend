@@ -1,5 +1,5 @@
 import moment from 'moment/moment';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import duration from 'dayjs/plugin/duration';
 import 'moment/locale/nb';
@@ -114,19 +114,53 @@ export const addDaysToDate = (dateString: string, nrOfDays: number): string => (
   ? dateString
   : moment(dateString, ISO_DATE_FORMAT).add(nrOfDays, 'days').format(ISO_DATE_FORMAT));
 
-export const findDifferenceInMonthsAndDays = (fomDate: string, tomDate: string): { months: number; days: number; } | undefined => {
+const hentMånederMellom = (
+  fomDate: Dayjs,
+  tomDate: Dayjs,
+) => {
+  const diff = tomDate.startOf('month').diff(fomDate.endOf('month'));
+  const diffDuration = dayjs.duration(diff);
+  return diffDuration.months();
+};
+
+export const findDifferenceInMonthsAndDays = (
+  fomDate: string,
+  tomDate: string,
+): { months: number; days: number; } | undefined => {
   const fDate = dayjs(fomDate, ISO_DATE_FORMAT, true).utc(true);
   const tDate = dayjs(tomDate, ISO_DATE_FORMAT, true).utc(true);
   if (!fDate.isValid() || !tDate.isValid() || fDate.isAfter(tDate)) {
     return undefined;
   }
 
-  const diff = tDate.diff(fDate);
-  const diffDuration = dayjs.duration(diff);
+  // Datoer i samme måned
+  if (fDate.startOf('month').isSame(tDate.startOf('month'))) {
+    const diff = tDate.add(1, 'day').diff(fDate);
+    const diffDuration = dayjs.duration(diff);
+
+    return {
+      months: diffDuration.months(),
+      days: diffDuration.days(),
+    };
+  }
+
+  let antallMåneder = hentMånederMellom(fDate, tDate);
+  let antallDager = 0;
+
+  if (tDate.date() === tDate.daysInMonth()) {
+    antallMåneder += 1;
+  } else {
+    antallDager = tDate.date();
+  }
+  if (fDate.startOf('month').isSame(fDate)) {
+    antallMåneder += 1;
+  } else {
+    antallDager += 1 + fDate.daysInMonth() - fDate.date();
+  }
 
   return {
-    months: diffDuration.months(),
-    days: diffDuration.days(),
+    months: antallMåneder,
+    days: antallDager,
   };
 };
 

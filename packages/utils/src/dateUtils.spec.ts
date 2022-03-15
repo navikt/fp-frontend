@@ -57,6 +57,51 @@ describe('dateutils', () => {
   });
 
   describe('findDifferenceInMonthsAndDays', () => {
+    it('skal vise korrekt periode mellom to datoer inkludert sluttdato', () => {
+      const fomDate = '2021-02-01';
+      const tomDate = '2021-02-17';
+      expect(findDifferenceInMonthsAndDays(fomDate, tomDate)).toEqual({
+        months: 0,
+        days: 17,
+      });
+    });
+
+    it('Skal ikke være måneder i mellom datoer', () => {
+      const fomDate = '2021-04-30';
+      const tomDate = '2021-05-31';
+      expect(findDifferenceInMonthsAndDays(fomDate, tomDate)).toEqual({
+        months: 1,
+        days: 1,
+      });
+    });
+
+    it('Skal være måned i mellom datoer i tillegg til at hele siste måned er valgt', () => {
+      const fomDate = '2021-04-30';
+      const tomDate = '2021-06-30';
+      expect(findDifferenceInMonthsAndDays(fomDate, tomDate)).toEqual({
+        months: 2,
+        days: 1,
+      });
+    });
+
+    it('Skal være måned i mellom datoer i tillegg til at hele første måned er valgt', () => {
+      const fomDate = '2021-04-01';
+      const tomDate = '2021-06-24';
+      expect(findDifferenceInMonthsAndDays(fomDate, tomDate)).toEqual({
+        months: 2,
+        days: 24,
+      });
+    });
+
+    it('Skal være måned i mellom datoer', () => {
+      const fomDate = '2021-04-30';
+      const tomDate = '2021-06-24';
+      expect(findDifferenceInMonthsAndDays(fomDate, tomDate)).toEqual({
+        months: 1,
+        days: 25,
+      });
+    });
+
     it('skal vise at perioden mellom to datoer er på 5 måneder og 0 dager', () => {
       const fomDate = '2017-12-01';
       const tomDate = '2018-04-30';
@@ -71,7 +116,7 @@ describe('dateutils', () => {
       const tomDate = '2018-04-30';
       expect(findDifferenceInMonthsAndDays(fomDate, tomDate)).toEqual({
         months: 0,
-        days: 10,
+        days: 11,
       });
     });
 
