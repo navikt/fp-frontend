@@ -102,6 +102,8 @@ export const FormkravKlageFormKa: FunctionComponent<OwnProps> = ({
   const hjemmelOptions = lagHjemler(alleHjemler, lagHjemmelsKoder(alleAktuelleHjemler))
     .map((mo: KodeverkMedNavn) => <option key={mo.kode} value={mo.kode}>{mo.navn}</option>);
   const kabalEnabled = klageVurdering.enableKabal;
+  const behandlesKabal = klageVurdering.underBehandlingKabal;
+  const behandletKabal = klageVurdering.behandletAvKabal;
 
   return (
     <Form
@@ -109,6 +111,14 @@ export const FormkravKlageFormKa: FunctionComponent<OwnProps> = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, avsluttedeBehandlinger))}
       setDataOnUnmount={setFormData}
     >
+      {behandlesKabal && readOnly && (
+        <Row>
+          <Column xs="6">
+            <Undertittel>{intl.formatMessage({ id: 'Klage.Formkrav.SeKabalText' })}</Undertittel>
+            <VerticalSpacer sixteenPx />
+          </Column>
+        </Row>
+      )}
       {kabalEnabled && !readOnly && (
         <Row>
           <Column xs="6">
@@ -147,7 +157,7 @@ export const FormkravKlageFormKa: FunctionComponent<OwnProps> = ({
           />
         </div>
       )}
-      {!formValues.sendTilKabal && (
+      {!formValues.sendTilKabal && !behandlesKabal && !behandletKabal && (
         <FormkravKlageForm
           readOnly={readOnly}
           readOnlySubmitButton={readOnlySubmitButton}

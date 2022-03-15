@@ -18,6 +18,7 @@ interface OwnProps {
   readOnly: boolean;
   lagreVedtak: () => void;
   isSubmitting: boolean;
+  kabalisert: boolean;
 }
 
 export const VedtakKlageKaSubmitPanel: FunctionComponent<OwnProps> = ({
@@ -27,6 +28,7 @@ export const VedtakKlageKaSubmitPanel: FunctionComponent<OwnProps> = ({
   readOnly,
   lagreVedtak,
   isSubmitting,
+  kabalisert,
 }) => {
   const forhåndsvis = useCallback((e: KeyboardEvent | MouseEvent) => {
     e.preventDefault();
@@ -58,14 +60,16 @@ export const VedtakKlageKaSubmitPanel: FunctionComponent<OwnProps> = ({
             <FormattedMessage id="VedtakKlageForm.FerdigstillKlageKa" />
           </Hovedknapp>
         )}
-        <a
-          href=""
-          onClick={forhåndsvis}
-          onKeyDown={(e) => (e.key === 'Enter' ? forhåndsvis(e) : null)}
-          className={classNames('lenke lenke--frittstaende')}
-        >
-          <FormattedMessage id="VedtakKlageForm.ForhandvisBrev" />
-        </a>
+        {!kabalisert && (
+          <a
+            href=""
+            onClick={forhåndsvis}
+            onKeyDown={(e) => (e.key === 'Enter' ? forhåndsvis(e) : null)}
+            className={classNames('lenke lenke--frittstaende')}
+          >
+            <FormattedMessage id="VedtakKlageForm.ForhandvisBrev" />
+          </a>
+        )}
       </Column>
     </Row>
   );
