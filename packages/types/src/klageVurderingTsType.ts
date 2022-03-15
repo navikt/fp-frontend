@@ -34,6 +34,8 @@ type KlageVurdering = Readonly<{
   };
   aktuelleHjemler?: string[];
   enableKabal?: boolean;
+  underBehandlingKabal?: boolean;
+  behandletAvKabal?: boolean;
 }>
 
 export default KlageVurdering;
