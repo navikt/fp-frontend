@@ -117,9 +117,9 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                       </Element>
                       <Normaltekst>
                         {inntektsmelding?.motattDato && (
-                        <DateTimeLabel dateTimeString={inntektsmelding.motattDato} useNewFormat />
+                          <DateTimeLabel dateTimeString={inntektsmelding.motattDato} useNewFormat />
                         )}
-                        {!inntektsmelding?.motattDato && '-'}
+                        {!inntektsmelding?.motattDato && <FormattedMessage id="ArbeidsforholdFieldArray.IkkeMottatt" />}
                       </Normaltekst>
                     </Column>
                   </Row>
