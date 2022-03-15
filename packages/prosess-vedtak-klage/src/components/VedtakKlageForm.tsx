@@ -168,6 +168,7 @@ const VedtakKlageForm: FunctionComponent<OwnProps> = ({
           behandlingPaaVent={behandlingPaaVent}
           lagreVedtak={lagreVedtak}
           isSubmitting={isSubmitting}
+          kabalisert={klageVurdering.behandletAvKabal}
         />
       )}
       {klageVurderingResultat.klageVurdertAv === 'NFP' && (
