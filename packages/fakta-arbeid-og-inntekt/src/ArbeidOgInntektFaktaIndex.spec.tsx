@@ -112,7 +112,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(screen.getByText('Skjæringstidspunkt for opptjening: 10.11.2021')).toBeInTheDocument();
     expect(screen.getByText('Avklar manglende opplysninger.')).toBeInTheDocument();
 
-    expect(screen.getAllByText('Inntektsmelding')).toHaveLength(2);
+    expect(screen.getAllByText('Inntektsmelding')).toHaveLength(3);
     expect(screen.getByText('30 000')).toBeInTheDocument();
     expect(screen.getByText('Refusjon')).toBeInTheDocument();
     expect(screen.getByText('Nei')).toBeInTheDocument();
@@ -377,7 +377,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(screen.getByText('Stillingsprosent')).toBeInTheDocument();
     expect(screen.getByText('100%')).toBeInTheDocument();
-    expect(screen.getByText('Inntektsmelding')).toBeInTheDocument();
+    expect(screen.getAllByText('Inntektsmelding')).toHaveLength(2);
     expect(screen.getByText('30 000')).toBeInTheDocument();
     expect(screen.getByText('Refusjon')).toBeInTheDocument();
     expect(screen.getByText('Ja')).toBeInTheDocument();

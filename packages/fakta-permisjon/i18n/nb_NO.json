@@ -8,7 +8,7 @@
   
   "ArbeidsforholdFieldArray.Periode": "Periode",
   "ArbeidsforholdFieldArray.Kilde": "Kilde",
-  "ArbeidsforholdFieldArray.InntektsmeldingMottatt": "Inntektsmelding mottatt",
+  "ArbeidsforholdFieldArray.InntektsmeldingMottatt": "Inntektsmelding",
   "ArbeidsforholdFieldArray.Saksbehandler": "Saksbehandler",
   "ArbeidsforholdFieldArray.AaRegisteret": "A-inntekt",
   "ArbeidsforholdFieldArray.Permisjon": "Permisjon",
@@ -24,6 +24,7 @@
   "ArbeidsforholdFieldArray.TaMedArbeidsforhold": "Fjern permisjonen og ta med arbeidsforholdet",
   "ArbeidsforholdFieldArray.TaMedArbeidsforholdIkkeInntektsmelding": "Fjern permisjonen og ta med arbeidsforholdet. Vurder om inntektsmelding må innhentes",
   "ArbeidsforholdFieldArray.IkkeTaMedArbeidsforhold": "Ikke ta med arbeidsforholdet",
+  "ArbeidsforholdFieldArray.IkkeMottatt": "Ikke mottatt",
 
   "InntektsmeldingOpplysningerPanel.Inntektsmelding": "Inntektsmelding",
   "InntektsmeldingOpplysningerPanel.Refusjon": "Refusjon",

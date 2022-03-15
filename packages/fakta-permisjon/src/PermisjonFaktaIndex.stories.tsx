@@ -145,7 +145,7 @@ FlereArbeidsforhold.args = {
       arbeidsgiverIdent: '910909088',
       eksternArbeidsforholdId: 'ARB001-001',
       fom: '2019-12-06',
-      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
+      internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
       stillingsprosent: 100,
       tom: '9999-12-31',
       permisjonUtenSluttdatoDto: {

@@ -74,7 +74,7 @@ describe('<PermisjonFaktaIndex>', () => {
         arbeidsgiverIdent: '910909090',
         permisjonStatus: 'IKKE_BRUK_PERMISJON',
       }, {
-        internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
+        internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
         arbeidsgiverIdent: '910909088',
         permisjonStatus: 'BRUK_PERMISJON',
       }],

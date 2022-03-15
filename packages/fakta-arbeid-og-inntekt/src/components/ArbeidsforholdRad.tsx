@@ -245,11 +245,10 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
           {arbeidsforholdForRad.length < 2 && inntektsmeldingerForRad.length === 1 && (
             <DateTimeLabel dateTimeString={inntektsmeldingerForRad[0].motattDato} useNewFormat />
           )}
-          {erManueltOpprettet && '-'}
           {!manglerInntektsmelding && arbeidsforholdForRad.length > 1 && inntektsmeldingerForRad.length === arbeidsforholdForRad.length && (
             <FormattedMessage id="ArbeidsforholdRad.Mottatt" />
           )}
-          {manglerInntektsmelding && inntektsmeldingerForRad.length < arbeidsforholdForRad.length && (
+          {(erManueltOpprettet || (manglerInntektsmelding && inntektsmeldingerForRad.length < arbeidsforholdForRad.length)) && (
             <FormattedMessage id="ArbeidsforholdRad.IkkeMottatt" />
           )}
         </Normaltekst>
