@@ -14,7 +14,9 @@ import { RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
 import {
   VerticalSpacer, PeriodLabel, DateTimeLabel,
 } from '@fpsak-frontend/shared-components';
-import { ArbeidOgInntektsmelding, AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
+import {
+  ArbeidOgInntektsmelding, AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding,
+} from '@fpsak-frontend/types';
 
 import { Column, Row } from 'nav-frontend-grid';
 import BekreftetPermisjonStatus from '../kodeverk/BekreftetPermisjonStatus';
@@ -31,6 +33,12 @@ type FormValues = {
     permisjonStatus: string;
   }[],
 }
+
+const erMatch = (
+  arbeidsforhold: AoIArbeidsforhold,
+  inntektsmelding: Inntektsmelding,
+): boolean => inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent
+  && (!inntektsmelding.internArbeidsforholdId || inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);
 
 interface OwnProps {
   saksnummer: string;
@@ -64,7 +72,7 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
     <>
       {fields.map((field, index) => {
         const arbeidsforhold = sorterteArbeidsforhold[index];
-        const inntektsmelding = inntektsmeldinger.find((i) => i.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);
+        const inntektsmelding = inntektsmeldinger.find((i) => erMatch(arbeidsforhold, i));
         const inntektsposter = inntekter.find((inntekt) => inntekt.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent)?.inntekter;
         return (
           <ArbeidsforholdBoks key={field.id} harÅpentAksjonspunkt={harÅpentAksjonspunkt} harBorderTop={index === 0}>
