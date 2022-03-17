@@ -23,7 +23,7 @@ import InntektsmeldingInnhentesForm from './InntektsmeldingInnhentesForm';
 import ArbeidsforholdOgInntekt, { Avklaring } from '../types/arbeidsforholdOgInntekt';
 
 import styles from './arbeidsforholdRad.less';
-import InntektsmeldingerTest from './InntektsmeldingerTest';
+import InntektsmeldingerPanel from './InntektsmeldingerPanel';
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 
 const classNames = classnames.bind(styles);
@@ -139,7 +139,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
             />
           )}
           {(harArbeidsforholdOgInntektsmelding) && (
-            <InntektsmeldingerTest
+            <InntektsmeldingerPanel
               saksnummer={saksnummer}
               arbeidsforholdForRad={arbeidsforholdForRad}
               inntektsmeldingerForRad={inntektsmeldingerForRad}

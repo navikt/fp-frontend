@@ -16,7 +16,7 @@ import { AoIArbeidsforhold, Inntektsmelding, Inntektspost } from '@fpsak-fronten
 import { VerticalSpacer, FloatRight } from '@fpsak-frontend/shared-components';
 
 import styles from './arbeidsforholdInformasjonPanel.less';
-import InntektsmeldingerTest from './InntektsmeldingerTest';
+import InntektsmeldingerPanel from './InntektsmeldingerPanel';
 
 type ForenkletInntektspost = {
   beløp: number;
@@ -69,7 +69,7 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <InntektsmeldingerTest
+      <InntektsmeldingerPanel
         saksnummer={saksnummer}
         arbeidsforholdForRad={arbeidsforholdForRad}
         inntektsmeldingerForRad={inntektsmeldingerForRad}

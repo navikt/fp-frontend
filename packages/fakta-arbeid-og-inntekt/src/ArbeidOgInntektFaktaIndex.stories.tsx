@@ -1129,3 +1129,116 @@ EtterAtEtterspurtInntektsmeldingErKommet.args = {
     skjæringstidspunkt: '2022-02-15',
   },
 };
+
+export const ArbeidsforholdMedSammeOrgNrDerArbeidsforholdNr2ManglerInntektsmelding = Template.bind({});
+ArbeidsforholdMedSammeOrgNrDerArbeidsforholdNr2ManglerInntektsmelding.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  settBehandlingPåVentCallback: action('button-click') as (data: any) => Promise<any>,
+  erOverstyrer: false,
+  aksjonspunkter: [{
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+    status: aksjonspunktStatus.OPPRETTET,
+  }] as Aksjonspunkt[],
+  arbeidsgiverOpplysningerPerId: {
+    805824352: {
+      referanse: '805824352',
+      identifikator: '805824352',
+      navn: 'Lagt til av saksbehandler',
+      fødselsdato: null,
+      erPrivatPerson: false,
+    },
+    907670201: {
+      referanse: '907670201',
+      identifikator: '907670201',
+      navn: 'SJOKKERENDE ELEKTRIKER',
+      fødselsdato: null,
+      erPrivatPerson: false,
+    },
+  },
+  arbeidOgInntekt: {
+    inntektsmeldinger: [
+      {
+        inntektPrMnd: 5000.00,
+        refusjonPrMnd: 5000.00,
+        arbeidsgiverIdent: '805824352',
+        eksternArbeidsforholdId: null,
+        internArbeidsforholdId: null,
+        kontaktpersonNavn: 'Dolly Dollesen',
+        kontaktpersonNummer: '99999999',
+        journalpostId: '524986883',
+        dokumentId: '549180589',
+        motattDato: '2022-03-15',
+        innsendingstidspunkt: '2022-03-15T12:55:22',
+      },
+      {
+        inntektPrMnd: 15000.00,
+        arbeidsgiverIdent: '907670201',
+        eksternArbeidsforholdId: '1',
+        internArbeidsforholdId: '50fd8de2-5e84-4234-b0bf-b2ef28303ae8',
+        kontaktpersonNavn: 'Dolly Dollesen',
+        kontaktpersonNummer: '99999999',
+        journalpostId: '524988988',
+        dokumentId: '549182744',
+        motattDato: '2022-03-16',
+        innsendingstidspunkt: '2022-03-16T15:18:16',
+      },
+    ],
+    arbeidsforhold: [
+      {
+        arbeidsgiverIdent: '805824352',
+        internArbeidsforholdId: '35437b66-cda9-45c9-a702-936e5c46ff34',
+        eksternArbeidsforholdId: '2',
+        fom: '2018-03-15',
+        tom: '9999-12-31',
+        stillingsprosent: 20.00,
+      },
+      {
+        arbeidsgiverIdent: '907670201',
+        internArbeidsforholdId: '50fd8de2-5e84-4234-b0bf-b2ef28303ae8',
+        eksternArbeidsforholdId: '1',
+        fom: '2002-03-07',
+        tom: '9999-12-31',
+        stillingsprosent: 40.00,
+      },
+      {
+        arbeidsgiverIdent: '907670201',
+        internArbeidsforholdId: '58a9aa05-d90b-40e4-a05a-70b152abc3a5',
+        eksternArbeidsforholdId: '3',
+        fom: '2012-02-08',
+        tom: '9999-12-31',
+        stillingsprosent: 20.00,
+        årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
+      },
+    ],
+    inntekter: [
+      {
+        arbeidsgiverIdent: '805824352',
+        inntekter: [{
+          beløp: 5000.00,
+          fom: '2021-03-01',
+          tom: '2021-03-31',
+          type: 'LØNN',
+        }],
+      },
+      {
+        arbeidsgiverIdent: '907670201',
+        inntekter: [{
+          beløp: 25000.00,
+          fom: '2021-03-01',
+          tom: '2021-03-31',
+          type: 'LØNN',
+        }],
+      },
+      {
+        arbeidsgiverIdent: '972674818',
+        inntekter: [{
+          beløp: 73000.00,
+          fom: '2021-03-01',
+          tom: '2021-03-31',
+          type: 'LØNN',
+        }],
+      },
+    ],
+    skjæringstidspunkt: '2022-03-11',
+  },
+};

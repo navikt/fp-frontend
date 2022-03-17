@@ -73,28 +73,34 @@ const lagAvklaring = (
   return avklaring;
 };
 
+const sorterGittÅrsak = (
+  arbeidsforhold1: AoIArbeidsforhold,
+) => (arbeidsforhold1.årsak ? -1 : 1);
+
 const byggTabellStruktur = (
   arbeidOgInntekt: ArbeidOgInntektsmelding,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ArbeidsforholdOgInntektRadData[] => {
   const { arbeidsforhold, inntektsmeldinger } = arbeidOgInntekt;
 
-  const alleArbeidsforhold = arbeidsforhold.reduce<ArbeidsforholdOgInntektRadData[]>((acc, af) => {
-    const tidligereIndex = acc.findIndex((a) => a.arbeidsgiverIdent === af.arbeidsgiverIdent);
-    if (tidligereIndex !== -1) {
-      return acc;
-    }
-    const arbeidsgiverNavn = arbeidsgiverOpplysningerPerId[af.arbeidsgiverIdent].navn;
-    const årsak = af.årsak ? af.årsak : inntektsmeldinger.find((i) => erMatch(af, i))?.årsak;
+  const alleArbeidsforhold = [...arbeidsforhold.sort(sorterGittÅrsak)]
+    .reduce<ArbeidsforholdOgInntektRadData[]>((acc, af) => {
+      const tidligereAf = acc.find((a) => a.arbeidsgiverIdent === af.arbeidsgiverIdent);
 
-    return acc.concat({
-      arbeidsgiverIdent: af.arbeidsgiverIdent,
-      internArbeidsforholdId: af.internArbeidsforholdId,
-      arbeidsgiverNavn,
-      årsak,
-      avklaring: af.saksbehandlersVurdering ? lagAvklaring(af, arbeidsgiverNavn) : undefined,
-    });
-  }, []);
+      if (tidligereAf) {
+        return acc;
+      }
+      const arbeidsgiverNavn = arbeidsgiverOpplysningerPerId[af.arbeidsgiverIdent].navn;
+      const årsak = af.årsak ? af.årsak : inntektsmeldinger.find((i) => erMatch(af, i))?.årsak;
+
+      return acc.concat({
+        arbeidsgiverIdent: af.arbeidsgiverIdent,
+        internArbeidsforholdId: af.internArbeidsforholdId,
+        arbeidsgiverNavn,
+        årsak,
+        avklaring: af.saksbehandlersVurdering ? lagAvklaring(af, arbeidsgiverNavn) : undefined,
+      });
+    }, []);
 
   const alleInntektsmeldingerSomManglerArbeidsforhold = inntektsmeldinger
     .filter((im) => !arbeidsforhold.some((af) => erMatch(af, im)))
