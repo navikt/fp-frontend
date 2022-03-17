@@ -18,7 +18,7 @@ import {
 } from '@fpsak-frontend/shared-components';
 
 import { Column, Row } from 'nav-frontend-grid';
-import styles from './inntektsmeldingerTest.less';
+import styles from './inntektsmeldingerPanel.less';
 import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 
 const erMatch = (
@@ -52,7 +52,7 @@ interface OwnProps {
   inntektsmeldingerForRad: Inntektsmelding[];
 }
 
-const InntektsmeldingerTest: FunctionComponent<OwnProps> = ({
+const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
   saksnummer,
   arbeidsforholdForRad,
   inntektsmeldingerForRad,
@@ -201,4 +201,4 @@ const InntektsmeldingerTest: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default InntektsmeldingerTest;
+export default InntektsmeldingerPanel;
