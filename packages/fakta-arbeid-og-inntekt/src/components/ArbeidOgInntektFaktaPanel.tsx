@@ -95,7 +95,6 @@ const byggTabellStruktur = (
 
       return acc.concat({
         arbeidsgiverIdent: af.arbeidsgiverIdent,
-        internArbeidsforholdId: af.internArbeidsforholdId,
         arbeidsgiverNavn,
         årsak,
         avklaring: af.saksbehandlersVurdering ? lagAvklaring(af, arbeidsgiverNavn) : undefined,
@@ -240,7 +239,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
       <Table ref={tableRef} headerTextCodes={HEADER_TEXT_IDS} noHover hasGrayHeader>
         {tabellRader.map((radData, index) => (
           <ArbeidsforholdRad
-            key={`${radData.arbeidsgiverNavn}${radData.arbeidsgiverIdent}${radData.internArbeidsforholdId}`}
+            key={`${radData.arbeidsgiverNavn}${radData.arbeidsgiverIdent}`}
             arbeidOgInntekt={arbeidOgInntekt}
             saksnummer={saksnummer}
             behandlingUuid={behandling.uuid}
