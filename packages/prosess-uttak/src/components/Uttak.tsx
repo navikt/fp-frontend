@@ -484,7 +484,6 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
         <div>
           <Row>
             <TimeLineInfo
-              maksDatoUttak={stonadskonto.maksDatoUttak}
               stonadskonto={stonadskonto.stonadskontoer}
               arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             />

@@ -46,12 +46,11 @@ describe('<TimeLineInfo>', () => {
   it('skal vise max-uker tilgjengelig lik summen av alle kontoers max dager delt på fem', () => {
     const wrapper = shallowWithIntl(<TimeLineInfo
       stonadskonto={stonadskonto}
-      maksDatoUttak="2018-12-01"
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
 
     const fMessages = wrapper.find(FormattedMessage);
-    expect(fMessages).toHaveLength(3);
+    expect(fMessages).toHaveLength(2);
     // @ts-ignore
     expect(fMessages.at(1).props().values.ukerVerdi).toBe(24);
   });
@@ -59,7 +58,6 @@ describe('<TimeLineInfo>', () => {
   it('skal vise tabell med disponible dager', () => {
     const wrapper = shallowWithIntl(<TimeLineInfo
       stonadskonto={stonadskonto}
-      maksDatoUttak="2018-12-01"
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
 
@@ -85,9 +83,7 @@ describe('<TimeLineInfo>', () => {
 
     wrapper.setState({ aktiv: 1, visKonto: konto });
     const fMessages = wrapper.find(FormattedMessage);
-    expect(fMessages).toHaveLength(3);
-    // @ts-ignore
-    expect(fMessages.at(2).prop('values').dato).toBe('01.12.2018');
+    expect(fMessages).toHaveLength(2);
     // @ts-ignore
     expect(fMessages.at(1).prop('values').ukerVerdi).toBe(24);
   });
@@ -95,7 +91,6 @@ describe('<TimeLineInfo>', () => {
   it('skal vise tabs', () => {
     const wrapper = shallowWithIntl(<TimeLineInfo
       stonadskonto={stonadskonto}
-      maksDatoUttak="2018-12-01"
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
     wrapper.setState({ aktiv: 1 });
