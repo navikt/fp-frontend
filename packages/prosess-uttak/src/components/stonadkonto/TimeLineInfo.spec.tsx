@@ -46,7 +46,6 @@ describe('<TimeLineInfo>', () => {
   it('skal vise max-uker tilgjengelig lik summen av alle kontoers max dager delt på fem', () => {
     const wrapper = shallowWithIntl(<TimeLineInfo
       stonadskonto={stonadskonto}
-      maksDatoUttak="2018-12-01"
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
 
@@ -59,7 +58,6 @@ describe('<TimeLineInfo>', () => {
   it('skal vise tabell med disponible dager', () => {
     const wrapper = shallowWithIntl(<TimeLineInfo
       stonadskonto={stonadskonto}
-      maksDatoUttak="2018-12-01"
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
 
@@ -95,7 +93,6 @@ describe('<TimeLineInfo>', () => {
   it('skal vise tabs', () => {
     const wrapper = shallowWithIntl(<TimeLineInfo
       stonadskonto={stonadskonto}
-      maksDatoUttak="2018-12-01"
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />, messages);
     wrapper.setState({ aktiv: 1 });
