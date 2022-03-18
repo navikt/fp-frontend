@@ -4,11 +4,11 @@ import React, {
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element } from 'nav-frontend-typografi';
-import { EditedIcon, Image } from '@navikt/fp-react-components';
+import { Image } from '@navikt/fp-react-components';
 
 import { calcDays, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import {
-  AksjonspunktHelpTextTemp, VerticalSpacer, FloatRight,
+  AksjonspunktHelpTextTemp, VerticalSpacer, FloatRight, EditedIcon,
 } from '@fpsak-frontend/shared-components';
 import splitPeriodImageHoverUrl from '@fpsak-frontend/assets/images/splitt_hover.svg';
 import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
