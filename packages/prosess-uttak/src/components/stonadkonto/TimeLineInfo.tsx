@@ -1,5 +1,4 @@
 import React, { Component, ReactNode } from 'react';
-import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
@@ -7,7 +6,6 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
 import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
 import stonadskontoType from '@fpsak-frontend/kodeverk/src/stonadskontoType';
-import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
 import {
   AktivitetIdentifikator, AktivitetSaldo, ArbeidsgiverOpplysningerPerId, UttakStonadskontoer,
 } from '@fpsak-frontend/types';
@@ -60,7 +58,6 @@ const createTextStrings = (arbforhold: AktivitetIdentifikator, arbeidsgiverOpply
 
 interface OwnProps {
   stonadskonto?: UttakStonadskontoer['stonadskontoer'];
-  maksDatoUttak?: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
@@ -102,7 +99,6 @@ class TimeLineInfo extends Component<OwnProps, OwnState> {
   render() {
     const {
       stonadskonto,
-      maksDatoUttak = '',
       arbeidsgiverOpplysningerPerId,
     } = this.props;
     const {
@@ -166,16 +162,6 @@ class TimeLineInfo extends Component<OwnProps, OwnState> {
                       />
                     </Normaltekst>
                   </Column>
-                  {maksDatoUttak && (
-                    <Column xs="3">
-                      <Normaltekst>
-                        <FormattedMessage
-                          id="TimeLineInfo.Stonadinfo.MaksDato"
-                          values={{ dato: moment(maksDatoUttak).format(DDMMYYYY_DATE_FORMAT), b: (chunks: any) => <b>{chunks}</b> }}
-                        />
-                      </Normaltekst>
-                    </Column>
-                  )}
                 </Row>
                 <Row>
                   <div className={styles.tabs}>
