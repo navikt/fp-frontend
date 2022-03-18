@@ -3,10 +3,9 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useFormContext } from 'react-hook-form';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
-import { EditedIcon } from '@navikt/fp-react-components';
 
 import {
-  AksjonspunktHelpTextTemp, VerticalSpacer, FaktaGruppe,
+  AksjonspunktHelpTextTemp, VerticalSpacer, FaktaGruppe, EditedIcon,
 } from '@fpsak-frontend/shared-components';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { SelectField } from '@fpsak-frontend/form-hooks';

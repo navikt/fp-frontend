@@ -21,5 +21,6 @@ export { default as VerticalSpacer } from './src/VerticalSpacer';
 export { default as DataFetchPendingModal } from './src/DataFetchPendingModal';
 export { default as FaktaGruppe } from './src/FaktaGruppe';
 export { default as AvsnittSkiller } from './src/AvsnittSkiller';
+export { default as EditedIcon } from './src/EditedIcon';
 export { default as usePrevious } from './src/hooks/usePrevious';
 export { default as ReactECharts } from './src/echart/ReactECharts';

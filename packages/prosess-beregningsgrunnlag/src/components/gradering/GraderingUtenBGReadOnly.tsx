@@ -1,10 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
-import { EditedIcon } from '@navikt/fp-react-components';
 
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
-import { AvsnittSkiller, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { AvsnittSkiller, VerticalSpacer, EditedIcon } from '@fpsak-frontend/shared-components';
 import styles from './graderingUtenBGReadOnly.less';
 
 type OwnProps = {
