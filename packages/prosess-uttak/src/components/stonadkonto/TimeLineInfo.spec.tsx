@@ -50,7 +50,7 @@ describe('<TimeLineInfo>', () => {
     />, messages);
 
     const fMessages = wrapper.find(FormattedMessage);
-    expect(fMessages).toHaveLength(3);
+    expect(fMessages).toHaveLength(2);
     // @ts-ignore
     expect(fMessages.at(1).props().values.ukerVerdi).toBe(24);
   });
@@ -83,9 +83,7 @@ describe('<TimeLineInfo>', () => {
 
     wrapper.setState({ aktiv: 1, visKonto: konto });
     const fMessages = wrapper.find(FormattedMessage);
-    expect(fMessages).toHaveLength(3);
-    // @ts-ignore
-    expect(fMessages.at(2).prop('values').dato).toBe('01.12.2018');
+    expect(fMessages).toHaveLength(2);
     // @ts-ignore
     expect(fMessages.at(1).prop('values').ukerVerdi).toBe(24);
   });
