@@ -12,6 +12,7 @@
   "ArbeidOgInntektFaktaPanel.Bekreft": "Bekreft og fortsett",
   "ArbeidOgInntektFaktaPanel.LeggTilArbeidsforhold": " Legg til arbeidsforhold",
   "ArbeidOgInntektFaktaPanel.ApneForNyVurdering": "Åpne for ny vurdering",
+  "ArbeidOgInntektFaktaPanel.ApneForNyRevurderingForklaring": "Ved å bruke \"Åpne for ny vurdering\" kan du endre valg som er gjort i dette panelet. Det som er gjort senere i saken, må gjøres på ny.",
 
   "ArbeidsforholdRad.Saksbehandler": "Saksbehandler",
   "ArbeidsforholdRad.AaRegisteret": "A-ordningen",
@@ -78,7 +79,7 @@
   "ArbeidsforholdInformasjonPanel.12": "Des",
   "ArbeidsforholdInformasjonPanel.TidligereManeder": "Tidligere måneder ",
   "ArbeidsforholdInformasjonPanel.FaerreManeder": "Siste måneder ",
-  "ArbeidsforholdInformasjonPanel.IngenInntekt": "Ingen inntekt registrert på bruker i A-ordningen",
+  "ArbeidsforholdInformasjonPanel.IngenInntekt": "Ingen inntekt registrert på bruker i A-ordningen siste ti mnd.",
   "ArbeidsforholdInformasjonPanel.ÅpneInntektsmelding": "Åpne inntektsmelding (PDF)",
   "ArbeidsforholdInformasjonPanel.ApneImInfo": "Vis mer",
   "ArbeidsforholdInformasjonPanel.LukkeImInfo": "Vis mindre",

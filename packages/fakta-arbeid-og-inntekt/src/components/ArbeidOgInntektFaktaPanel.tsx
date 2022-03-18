@@ -2,7 +2,8 @@ import React, {
   FunctionComponent, useState, useEffect, useCallback, useRef,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 
 import {
   Aksjonspunkt, AlleKodeverk, AoIArbeidsforhold, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId,
@@ -21,6 +22,8 @@ import ArbeidsforholdRad from './ArbeidsforholdRad';
 import ArbeidsforholdOgInntektRadData, { Avklaring } from '../types/arbeidsforholdOgInntekt';
 import ArbeidsOgInntektOverstyrPanel from './ArbeidsOgInntektOverstyrPanel';
 import { useIsFormDirty } from '../DirtyFormProvider';
+
+import styles from './arbeidOgInntektFaktaPanel.less';
 
 const HEADER_TEXT_IDS = [
   'EMPTY1',
@@ -286,14 +289,20 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
         </Hovedknapp>
       )}
       {skalViseÅpneForNyVurderingKnapp && (
-        <Hovedknapp
-          mini
-          disabled={erKnappTrykket}
-          spinner={erKnappTrykket}
-          onClick={gjenåpneAksjonspunkt}
-        >
-          <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyVurdering" />
-        </Hovedknapp>
+        <>
+          <div className={styles.alertStripe}>
+            <AlertStripeInfo><FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyRevurderingForklaring" /></AlertStripeInfo>
+          </div>
+          <VerticalSpacer sixteenPx />
+          <Knapp
+            mini
+            disabled={erKnappTrykket}
+            spinner={erKnappTrykket}
+            onClick={gjenåpneAksjonspunkt}
+          >
+            <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyVurdering" />
+          </Knapp>
+        </>
       )}
     </>
   );

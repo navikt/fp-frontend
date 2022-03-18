@@ -41,6 +41,8 @@ const ExpandableTableRow: FunctionComponent<OwnProps> = ({
       onKeyDown={toggleContent}
       hasNoBottomBorder={showContent}
       isApLeftBorder={isApLeftBorder}
+      noHover={showContent}
+      isSelected={showContent}
     >
       {children}
       <TableColumn className={classNames('toggleIcon', showContent ? 'colTopPadding' : undefined)}>
@@ -52,7 +54,12 @@ const ExpandableTableRow: FunctionComponent<OwnProps> = ({
         </FloatRight>
       </TableColumn>
     </TableRow>
-    <TableRow noHover isApLeftBorder={isApLeftBorder} className={showContent ? styles.activeRow : styles.hidden}>
+    <TableRow
+      noHover
+      isApLeftBorder={isApLeftBorder}
+      className={showContent ? styles.activeRow : styles.hidden}
+      isSelected={showContent}
+    >
       <TableColumn className={showContent ? styles.active : styles.hidden} />
       <TableColumn colspanAll className={showContent ? styles.active : styles.hidden}>
         <div className={showContent ? styles.active : styles.hidden}>
