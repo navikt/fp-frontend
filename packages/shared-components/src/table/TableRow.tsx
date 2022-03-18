@@ -108,6 +108,7 @@ const TableRow = <ID, MODEL = void, >({
       grayHeader: hasGrayHeader,
       rowContent: (!isHeader && !noHover),
       selected: isSelected,
+      harHover: !noHover,
       bold: isBold,
       dashedBottomBorder: isDashedBottomBorder,
       solidBottomBorder: isSolidBottomBorder,

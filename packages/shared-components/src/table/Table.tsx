@@ -33,7 +33,7 @@ const Table = React.forwardRef<HTMLTableElement, OwnProps>(({
   hasGrayHeader = false,
   children,
 }, ref) => (
-  <table ref={ref} className={classNames('table', { [classNameTable]: classNameTable, noHover })}>
+  <table ref={ref} className={classNames('table', { [classNameTable]: classNameTable, rowHover: !noHover })}>
     <thead>
       <TableRow isHeader noHover={noHover} hasGrayHeader={hasGrayHeader}>
         {headerTextCodes.map((headerElement) => (typeof headerElement === 'string' && headerElement.startsWith(EMPTY_STRING)

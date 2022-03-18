@@ -30,8 +30,8 @@ const finnAksjonspunktTekstKoder = (
   tabellData: ArbeidsforholdOgInntekt[],
   aksjonspunkt?: Aksjonspunkt,
 ): string[] => {
-  const harManglendeInntektsmeldinger = tabellData.some((d) => d.årsak === AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING && !d.avklaring);
-  const harManglandeOpplysninger = tabellData.some((d) => d.årsak === AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD && !d.avklaring);
+  const harManglendeInntektsmeldinger = tabellData.some((d) => d.årsak === AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING);
+  const harManglandeOpplysninger = tabellData.some((d) => d.årsak === AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD);
   const erApÅpent = aksjonspunkt?.status === aksjonspunktStatus.OPPRETTET;
 
   const koder = [];
