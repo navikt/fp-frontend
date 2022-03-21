@@ -18,6 +18,11 @@ type AnkeVurdering = Readonly<{
     erMerknaderMottatt?: boolean;
     avsluttBehandling?: boolean;
  };
+  klageHjemmel?: string;
+  aktuelleHjemler?: string[];
+  enableKabal?: boolean;
+  underBehandlingKabal?: boolean;
+  behandletAvKabal?: boolean;
 }>;
 
 export default AnkeVurdering;

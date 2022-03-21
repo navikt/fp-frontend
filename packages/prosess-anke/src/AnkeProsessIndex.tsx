@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { AnkeVurdering, StandardProsessPanelProps } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
 import { ReduxWrapper } from '@fpsak-frontend/form';
@@ -38,7 +37,7 @@ const AnkeProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> 
     <ReduxWrapper formName="AnkeProsessIndex" formData={formData} setFormData={setFormData}>
       <BehandleAnkeForm
         sprakkode={behandling.sprakkode}
-        ankeVurderingResultat={ankeVurdering ? ankeVurdering.ankeVurderingResultat : undefined}
+        ankeVurderingInput={ankeVurdering}
         behandlinger={behandlinger}
         aksjonspunkter={aksjonspunkter}
         submitCallback={submitCallback}
@@ -46,9 +45,8 @@ const AnkeProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> 
         readOnlySubmitButton={readOnlySubmitButton}
         saveAnke={saveAnke}
         previewCallback={previewCallback}
-        ankeOmgorArsaker={alleKodeverk[kodeverkTyper.ANKE_OMGJOER_AARSAK]}
-        behandlingTyper={alleKodeverk[kodeverkTyper.BEHANDLING_TYPE]}
-        behandlingStatuser={alleKodeverk[kodeverkTyper.BEHANDLING_STATUS]}
+        alleKodeverk={alleKodeverk}
+        alleAktuelleHjemler={ankeVurdering.aktuelleHjemler ? ankeVurdering.aktuelleHjemler : []}
       />
     </ReduxWrapper>
   </RawIntlProvider>
