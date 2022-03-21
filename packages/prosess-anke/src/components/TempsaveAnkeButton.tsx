@@ -15,6 +15,8 @@ type FormValuesUtrekk = {
   vedtak?: string;
   begrunnelse?: string;
   fritekstTilBrev?: string;
+  sendTilKabal?: boolean;
+  klageHjemmel?: string;
 };
 
 type FormValues = {
@@ -34,6 +36,8 @@ const lagreOmgjoerAarsak = (values: FormValues): string => (ankeVurdering.ANKE_O
 
 export const transformValues = (values: FormValues): AnkeVurderingResultatAp => ({
   påAnketKlageBehandlingUuid: values.vedtak === '0' || !values.vedtak ? null : values.vedtak,
+  sendTilKabal: values.sendTilKabal,
+  klageHjemmel: values.klageHjemmel,
   ankeVurdering: values.ankeVurdering,
   begrunnelse: values.begrunnelse,
   fritekstTilBrev: values.fritekstTilBrev,
