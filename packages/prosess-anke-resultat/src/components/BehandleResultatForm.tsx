@@ -154,6 +154,7 @@ interface PureOwnProps {
   previewCallback: (data: BrevData) => Promise<any>;
   readOnlySubmitButton?: boolean;
   alleKodeverk: AlleKodeverk;
+  kabalisert: boolean;
 }
 
 interface MappedOwnProps {
@@ -174,6 +175,7 @@ export const AnkeResultatForm: FunctionComponent<PureOwnProps & MappedOwnProps &
   ankeVurderingResultat,
   readOnly = true,
   alleKodeverk,
+  kabalisert,
   ...formProps
 }) => (
   <form onSubmit={handleSubmit}>
@@ -204,7 +206,7 @@ export const AnkeResultatForm: FunctionComponent<PureOwnProps & MappedOwnProps &
             : intl.formatMessage({ id: 'Ankebehandling.Resultat.VentMerknader' })}
         />
         <span>&nbsp;</span>
-        {skalViseForhaandlenke(ankeVurderingVerdi)
+        {skalViseForhaandlenke(ankeVurderingVerdi) && !kabalisert
           && (
           <PreviewAnkeLink
             previewCallback={previewCallback}

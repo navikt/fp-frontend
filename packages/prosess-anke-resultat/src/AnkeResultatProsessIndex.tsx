@@ -37,6 +37,7 @@ const AnkeResultatProsessIndex: FunctionComponent<OwnProps & StandardProsessPane
         readOnlySubmitButton={readOnlySubmitButton}
         previewCallback={previewCallback}
         alleKodeverk={alleKodeverk}
+        kabalisert={ankeVurdering.behandletAvKabal}
       />
     </ReduxWrapper>
   </RawIntlProvider>
