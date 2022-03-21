@@ -67,14 +67,14 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
       {!harEttArbeidsforhold && (
         <>
           <VerticalSpacer eightPx />
-          <AvsnittSkiller dividerParagraf />
+          <AvsnittSkiller dividerParagraf className={styles.skiller} />
           <VerticalSpacer sixteenPx />
           {arbeidsforholdForRad.map((a) => {
             const inntektsmelding = inntektsmeldingerForRad.find((i) => erMatch(a, i));
             return (
               <React.Fragment key={`${a.arbeidsgiverIdent}${a.internArbeidsforholdId}`}>
                 <Row>
-                  <Column xs="8">
+                  <Column xs="7" className={styles.forsteKolonne}>
                     <FlexRow>
                       <FlexColumn>
                         <Element><FormattedMessage id="ArbeidsforholdInformasjonPanel.ArbeidsforholdId" /></Element>
@@ -86,7 +86,7 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                         {a.eksternArbeidsforholdId.length >= 50 && (
                           <Tooltip
                             content={delOppAId(a.eksternArbeidsforholdId)}
-                            alignTop
+                            alignBottom
                           >
                             <Normaltekst>{`${a.eksternArbeidsforholdId.substring(0, 50)}...`}</Normaltekst>
                           </Tooltip>
@@ -150,7 +150,7 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                     )}
                   </Column>
                   {inntektsmelding && (
-                    <Column xs="4">
+                    <Column xs="5" className={styles.sisteKolonne}>
                       <FloatRight>
                         <Element><FormattedMessage id="ArbeidsforholdInformasjonPanel.ImMottatt" /></Element>
                       </FloatRight>
@@ -160,7 +160,7 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                     </Column>
                   )}
                   {!inntektsmelding && (
-                    <Column xs="4">
+                    <Column xs="5" className={styles.sisteKolonne}>
                       <FloatRight>
                         <Image className={styles.aksjonpunktImage} alt={intl.formatMessage({ id: 'ArbeidsforholdRad.Aksjonspunkt' })} src={advarselIkonUrl} />
                         <div className={styles.ikkeMottatt}>
@@ -171,7 +171,7 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                   )}
                 </Row>
                 <VerticalSpacer sixteenPx />
-                <AvsnittSkiller dividerParagraf />
+                <AvsnittSkiller dividerParagraf className={styles.skiller} />
                 <VerticalSpacer sixteenPx />
               </React.Fragment>
             );

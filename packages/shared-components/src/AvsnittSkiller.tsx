@@ -13,10 +13,16 @@ type OwnProps = {
   leftPanel?: boolean;
   rightPanel?: boolean;
   dividerParagraf?: boolean;
+  className?: string;
 };
 
 const AvsnittSkiller:FunctionComponent<OwnProps> = ({
-  spaceUnder, spaceAbove, leftPanel, rightPanel, dividerParagraf,
+  spaceUnder,
+  spaceAbove,
+  leftPanel,
+  rightPanel,
+  dividerParagraf,
+  className,
 }) => (
   <>
     {spaceAbove && (
@@ -24,7 +30,7 @@ const AvsnittSkiller:FunctionComponent<OwnProps> = ({
     )}
     <Row>
       <Column xs="12">
-        <div className={classNames(
+        <div className={classNames(className,
           {
             leftPanel,
             rightPanel,
