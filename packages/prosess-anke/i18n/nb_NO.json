@@ -1,6 +1,10 @@
 {
   "Ankebehandling.Title": "Ankebehandling",
   "Ankebehandling.HelpText": "Fastsett resultatet av ankebehandlingen",
+  "Ankebehandling.KabalText": "Fortsett ankebehandlingen i KABAL: Kryss av, velg hjemmel og klagebehandling, trykk deretter send",
+  "Ankebehandling.SeKabalText": "Anken behandles i KABAL",
+  "Ankebehandling.SendTilKabal": "Send til KABAL",
+  "Ankebehandling.Hjemmel": "Hjemmel",
   "Ankebehandling.Resultat": "Resultat",
   "Ankebehandling.Resultat.Stadfest": "Stadfest",
   "Ankebehandling.Resultat.Omgjør": "Omgjør",
@@ -24,7 +28,7 @@
   "Ankebehandling.Resultat.IkkePaaAnketVedtak": "Ikke påanket vedtak",
 
   "FritekstAnkeBrevTextField.Fritekst": "Fritekst til brev",
-  
+
   "PreviewAnkeLink.ForhandvisBrev": "Forhåndsvis brev",
 
   "Malform.Beskrivelse": "Foretrukket språk"

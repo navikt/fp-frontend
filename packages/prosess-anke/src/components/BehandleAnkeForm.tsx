@@ -23,9 +23,12 @@ import {
 import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import ankeOmgjorArsak from '@fpsak-frontend/kodeverk/src/ankeOmgjorArsak';
-import { Aksjonspunkt, AnkeVurdering, KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  Aksjonspunkt, AlleKodeverk, AnkeVurdering, KodeverkMedNavn,
+} from '@fpsak-frontend/types';
 import { AnkeVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
+import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import PreviewAnkeLink, { BrevData } from './PreviewAnkeLink';
 import FritekstBrevTextField from './FritekstAnkeBrevTextField';
 import TempsaveAnkeButton, { transformValues } from './TempsaveAnkeButton';
@@ -54,6 +57,8 @@ type FormValuesUtrekk = {
   vedtak?: string;
   begrunnelse?: string;
   fritekstTilBrev?: string;
+  sendTilKabal?: boolean;
+  klageHjemmel?: string;
 };
 
 type FormValues = {
@@ -123,16 +128,15 @@ const filtrerKlage = (behandlinger: BehandlingInfo[] = []): BehandlingInfo[] => 
 interface PureOwnProps {
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: AnkeVurderingResultatAp) => Promise<void>;
-  ankeVurderingResultat: AnkeVurdering['ankeVurderingResultat'];
+  ankeVurderingInput?: AnkeVurdering;
   previewCallback: (data: BrevData) => Promise<any>;
   saveAnke: (data: AnkeVurderingResultatAp) => Promise<any>;
   readOnly?: boolean;
   readOnlySubmitButton?: boolean;
   sprakkode: string;
   behandlinger: BehandlingInfo[];
-  ankeOmgorArsaker: KodeverkMedNavn[];
-  behandlingTyper: KodeverkMedNavn[],
-  behandlingStatuser: KodeverkMedNavn[],
+  alleKodeverk: AlleKodeverk;
+  alleAktuelleHjemler: string[];
 }
 
 interface MappedOwnProps {
@@ -140,6 +144,11 @@ interface MappedOwnProps {
   formValues?: FormValuesUtrekk;
   initialValues: FormValues;
 }
+
+const lagHjemler = (kodeverkNavn: KodeverkMedNavn[], kodeverkVerdier: string[]): KodeverkMedNavn[] => kodeverkNavn
+  .filter(({ kode }) => kodeverkVerdier.includes(kode))
+  .sort((a, b) => a.kode.localeCompare(b.kode));
+const lagHjemmelsKoder = (kodeverkVerdier: string[]): string[] => kodeverkVerdier.map((kode) => kode);
 
 /**
  * Presentasjonskomponent. Setter opp aksjonspunktet for behandling.
@@ -155,47 +164,110 @@ export const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps &
   formValues,
   behandlinger,
   intl,
-  ankeOmgorArsaker,
-  behandlingTyper,
-  behandlingStatuser,
+  ankeVurderingInput,
+  alleKodeverk,
+  alleAktuelleHjemler,
   submitCallback,
   ...formProps
-}) => (
-  <Form onSubmit={handleSubmit((values: FormValues) => submitCallback(transformValues(values)))}>
-    <Undertittel><FormattedMessage id="Ankebehandling.Title" /></Undertittel>
-    <VerticalSpacer fourPx />
-    <AksjonspunktHelpTextTemp isAksjonspunktOpen={!readOnlySubmitButton}>
-      {[<FormattedMessage id="Ankebehandling.HelpText" key={aksjonspunktCode} />]}
-    </AksjonspunktHelpTextTemp>
-    <VerticalSpacer sixteenPx />
-    <Row>
-      <Column xs="7">
-        <SelectField
-          readOnly={readOnly}
-          name="vedtak"
-          selectValues={leggTilUkjent(filtrerKlage(behandlinger)).map((b) => buildOption(b, intl, behandlingTyper, behandlingStatuser))}
-          className={readOnly ? styles.selectReadOnly : null}
-          label={intl.formatMessage({ id: 'Ankebehandling.Resultat.Vedtak' })}
-          validate={[required]}
-          bredde="xl"
-        />
-      </Column>
-    </Row>
-    <VerticalSpacer sixteenPx />
-    <Normaltekst><FormattedMessage id="Ankebehandling.Resultat" /></Normaltekst>
-    <RadioGroupField
-      name="ankeVurdering"
-      validate={[required]}
-      direction="horizontal"
-      readOnly={readOnly}
-    >
-      <RadioOption value={ankeVurdering.ANKE_OMGJOER} label={{ id: 'Ankebehandling.Resultat.Omgjør' }} />
-      <RadioOption value={ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE} label={{ id: 'Ankebehandling.Resultat.OpphevHjemsend' }} />
-      <RadioOption value={ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV} label={{ id: 'Ankebehandling.Resultat.Hjemsend' }} />
-      <RadioOption value={ankeVurdering.ANKE_AVVIS} label={{ id: 'Ankebehandling.Resultat.Avvis' }} />
-      <RadioOption value={ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK} label={{ id: 'Ankebehandling.Resultat.Stadfest' }} />
-    </RadioGroupField>
-    {ankeVurdering.ANKE_AVVIS === formValues.ankeVurdering
+}) => {
+  const alleHjemler = alleKodeverk[kodeverkTyper.KLAGE_HJEMMEL];
+  const ankeOmgorArsaker = alleKodeverk[kodeverkTyper.ANKE_OMGJOER_AARSAK];
+  const behandlingTyper = alleKodeverk[kodeverkTyper.BEHANDLING_TYPE];
+  const behandlingStatuser = alleKodeverk[kodeverkTyper.BEHANDLING_STATUS];
+  const hjemmelOptions = lagHjemler(alleHjemler, lagHjemmelsKoder(alleAktuelleHjemler))
+    .map((mo: KodeverkMedNavn) => <option key={mo.kode} value={mo.kode}>{mo.navn}</option>);
+  const kabalEnabled = ankeVurderingInput && ankeVurderingInput.enableKabal ? ankeVurderingInput.enableKabal : false;
+  const behandlesKabal = ankeVurderingInput && ankeVurderingInput.underBehandlingKabal ? ankeVurderingInput.underBehandlingKabal : false;
+  const behandletKabal = ankeVurderingInput && ankeVurderingInput.behandletAvKabal ? ankeVurderingInput.behandletAvKabal : false;
+
+  return (
+    <Form onSubmit={handleSubmit((values: FormValues) => submitCallback(transformValues(values)))}>
+      {behandlesKabal && readOnly && (
+        <Row>
+          <Column xs="6">
+            <Undertittel>{intl.formatMessage({ id: 'Ankebehandling.SeKabalText' })}</Undertittel>
+            <VerticalSpacer sixteenPx />
+          </Column>
+        </Row>
+      )}
+      {kabalEnabled && !readOnly && (
+        <Row>
+          <Column xs="6">
+            <Undertittel>{intl.formatMessage({ id: 'Ankebehandling.SendTilKabal' })}</Undertittel>
+            <VerticalSpacer fourPx />
+            <CheckboxField name="sendTilKabal" label={<FormattedMessage id="Ankebehandling.KabalText" />} />
+            <VerticalSpacer sixteenPx />
+          </Column>
+        </Row>
+      )}
+      {kabalEnabled && !readOnly && formValues.sendTilKabal && (
+        <Row>
+          <Column xs="6">
+            <SelectField
+              readOnly={readOnly}
+              name="klageHjemmel"
+              selectValues={hjemmelOptions}
+              className={readOnly ? styles.selectReadOnly : null}
+              label={intl.formatMessage({ id: 'Ankebehandling.Hjemmel' })}
+              validate={[required]}
+              bredde="xl"
+            />
+            <VerticalSpacer sixteenPx />
+          </Column>
+        </Row>
+      )}
+      {!formValues.sendTilKabal && !behandlesKabal && !behandletKabal && (
+        <Row>
+          <Undertittel><FormattedMessage id="Ankebehandling.Title" /></Undertittel>
+          <VerticalSpacer fourPx />
+          <AksjonspunktHelpTextTemp isAksjonspunktOpen={!readOnlySubmitButton}>
+            {[<FormattedMessage id="Ankebehandling.HelpText" key={aksjonspunktCode} />]}
+          </AksjonspunktHelpTextTemp>
+          <VerticalSpacer sixteenPx />
+        </Row>
+      )}
+      <Row>
+        <Column xs="7">
+          <SelectField
+            readOnly={readOnly}
+            name="vedtak"
+            selectValues={leggTilUkjent(filtrerKlage(behandlinger)).map((b) => buildOption(b, intl, behandlingTyper, behandlingStatuser))}
+            className={readOnly ? styles.selectReadOnly : null}
+            label={intl.formatMessage({ id: 'Ankebehandling.Resultat.Vedtak' })}
+            validate={[required]}
+            bredde="xl"
+          />
+        </Column>
+      </Row>
+      <VerticalSpacer sixteenPx />
+      {kabalEnabled && !readOnly && formValues.sendTilKabal && (
+        <div className={styles.confirmVilkarForm}>
+          <ProsessStegSubmitButton
+            formName={formProps.form}
+            isReadOnly={readOnly}
+            isSubmittable={!readOnly && !readOnlySubmitButton}
+            text={intl.formatMessage({ id: 'Ankebehandling.SendTilKabal' })}
+          />
+        </div>
+      )}
+      {!formValues.sendTilKabal && !behandlesKabal && !behandletKabal && (
+        <Row>
+          <Normaltekst><FormattedMessage id="Ankebehandling.Resultat" /></Normaltekst>
+          <RadioGroupField
+            name="ankeVurdering"
+            validate={[required]}
+            direction="horizontal"
+            readOnly={readOnly}
+          >
+            <RadioOption value={ankeVurdering.ANKE_OMGJOER} label={{ id: 'Ankebehandling.Resultat.Omgjør' }} />
+            <RadioOption value={ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE} label={{ id: 'Ankebehandling.Resultat.OpphevHjemsend' }} />
+            <RadioOption value={ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV} label={{ id: 'Ankebehandling.Resultat.Hjemsend' }} />
+            <RadioOption value={ankeVurdering.ANKE_AVVIS} label={{ id: 'Ankebehandling.Resultat.Avvis' }} />
+            <RadioOption value={ankeVurdering.ANKE_STADFESTE_YTELSESVEDTAK} label={{ id: 'Ankebehandling.Resultat.Stadfest' }} />
+          </RadioGroupField>
+        </Row>
+      )}
+      {ankeVurdering.ANKE_AVVIS === formValues.ankeVurdering && !formValues.sendTilKabal && !behandlesKabal && !behandletKabal
       && (
         <Row>
           <Column xs="7">
@@ -226,7 +298,7 @@ export const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps &
           </Column>
         </Row>
       )}
-    {ankeVurdering.ANKE_OMGJOER === formValues.ankeVurdering
+      {ankeVurdering.ANKE_OMGJOER === formValues.ankeVurdering && !formValues.sendTilKabal && !behandlesKabal && !behandletKabal
       && (
         <Row>
           <Column xs="7">
@@ -257,87 +329,97 @@ export const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps &
           </Column>
         </Row>
       )}
-    {(ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE === formValues.ankeVurdering
-      || ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV === formValues.ankeVurdering) && (
-      <Row>
-        <Column xs="7">
-          <ArrowBox alignOffset={ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE === formValues.ankeVurdering ? 98 : 198}>
-            <SelectField
+      {(ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE === formValues.ankeVurdering
+        || ankeVurdering.ANKE_HJEMSENDE_UTEN_OPPHEV === formValues.ankeVurdering) && !formValues.sendTilKabal && !behandlesKabal && !behandletKabal && (
+        <Row>
+          <Column xs="7">
+            <ArrowBox alignOffset={ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE === formValues.ankeVurdering ? 98 : 198}>
+              <SelectField
+                readOnly={readOnly}
+                name="ankeOmgjoerArsak"
+                selectValues={ankeOmgjorArsakRekkefolge
+                  .map((arsak) => <option key={arsak} value={arsak}>{ankeOmgorArsaker.find((aoa) => aoa.kode === arsak)?.navn}</option>)}
+                className={readOnly ? styles.selectReadOnly : null}
+                label={intl.formatMessage({ id: 'Ankebehandling.OmgjoeringArsak' })}
+                validate={[required]}
+                bredde="xl"
+              />
+            </ArrowBox>
+          </Column>
+        </Row>
+      )}
+
+      {!formValues.sendTilKabal && !behandlesKabal && !behandletKabal && (
+        <Row>
+          <Column xs="7">
+            <TextAreaField label="Begrunnelse" name="begrunnelse" readOnly={readOnly} />
+          </Column>
+        </Row>
+      )}
+
+      {!formValues.sendTilKabal && !behandlesKabal && !behandletKabal && (
+      <div className={styles.confirmVilkarForm}>
+        <VerticalSpacer sixteenPx />
+        <FritekstBrevTextField
+          sprakkode={sprakkode}
+          readOnly={readOnly}
+        />
+        <VerticalSpacer sixteenPx />
+        <Row>
+          <Column xs="8">
+            <ProsessStegSubmitButton
+              formName={formProps.form}
+              isReadOnly={readOnly}
+              isSubmittable={!readOnly && !readOnlySubmitButton}
+            />
+            {skalViseForhaandlenke(formValues.ankeVurdering)
+            && (
+              <PreviewAnkeLink
+                readOnly={!canPreview(formValues.begrunnelse, formValues.fritekstTilBrev)}
+                previewCallback={previewCallback}
+                fritekstTilBrev={formValues.fritekstTilBrev}
+                ankeVurdering={formValues.ankeVurdering}
+              />
+            )}
+          </Column>
+          <Column xs="2">
+            <TempsaveAnkeButton
+              saveAnke={saveAnke}
               readOnly={readOnly}
-              name="ankeOmgjoerArsak"
-              selectValues={ankeOmgjorArsakRekkefolge
-                .map((arsak) => <option key={arsak} value={arsak}>{ankeOmgorArsaker.find((aoa) => aoa.kode === arsak)?.navn}</option>)}
-              className={readOnly ? styles.selectReadOnly : null}
-              label={intl.formatMessage({ id: 'Ankebehandling.OmgjoeringArsak' })}
-              validate={[required]}
-              bredde="xl"
+              handleSubmit={handleSubmit}
+              spinner={formProps.submitting}
             />
-          </ArrowBox>
-        </Column>
-      </Row>
-    )}
-
-    <Row>
-      <Column xs="7">
-        <TextAreaField label="Begrunnelse" name="begrunnelse" readOnly={readOnly} />
-      </Column>
-    </Row>
-
-    <div className={styles.confirmVilkarForm}>
-      <VerticalSpacer sixteenPx />
-      <FritekstBrevTextField
-        sprakkode={sprakkode}
-        readOnly={readOnly}
-      />
-      <VerticalSpacer sixteenPx />
-      <Row>
-        <Column xs="8">
-          <ProsessStegSubmitButton
-            formName={formProps.form}
-            isReadOnly={readOnly}
-            isSubmittable={!readOnly && !readOnlySubmitButton}
-          />
-          {skalViseForhaandlenke(formValues.ankeVurdering)
-          && (
-            <PreviewAnkeLink
-              readOnly={!canPreview(formValues.begrunnelse, formValues.fritekstTilBrev)}
-              previewCallback={previewCallback}
-              fritekstTilBrev={formValues.fritekstTilBrev}
-              ankeVurdering={formValues.ankeVurdering}
-            />
-          )}
-        </Column>
-        <Column xs="2">
-          <TempsaveAnkeButton
-            saveAnke={saveAnke}
-            readOnly={readOnly}
-            handleSubmit={handleSubmit}
-            spinner={formProps.submitting}
-          />
-        </Column>
-      </Row>
-    </div>
-  </Form>
-);
+          </Column>
+        </Row>
+      </div>
+      )}
+    </Form>
+  );
+};
 
 BehandleAnkeForm.defaultProps = {
   readOnly: true,
   readOnlySubmitButton: true,
 };
 
-export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.ankeVurderingResultat], (resultat): FormValues => ({
-  vedtak: resultat ? formatId(resultat.påAnketKlageBehandlingUuid) : null,
-  ankeVurdering: resultat ? resultat.ankeVurdering : null,
-  begrunnelse: resultat ? resultat.begrunnelse : null,
-  fritekstTilBrev: resultat ? resultat.fritekstTilBrev : null,
-  erAnkerIkkePart: resultat ? resultat.erAnkerIkkePart : false,
-  erIkkeKonkret: resultat ? resultat.erIkkeKonkret : false,
-  erFristIkkeOverholdt: resultat ? resultat.erFristIkkeOverholdt : false,
-  erIkkeSignert: resultat ? resultat.erIkkeSignert : false,
-  erSubsidiartRealitetsbehandles: resultat ? resultat.erSubsidiartRealitetsbehandles : null,
-  ankeOmgjoerArsak: resultat ? resultat.ankeOmgjoerArsak : null,
-  ankeVurderingOmgjoer: resultat ? resultat.ankeVurderingOmgjoer : null,
-}));
+export const buildInitialValues = createSelector([(ownProps: PureOwnProps) => ownProps.ankeVurderingInput], (resultat): FormValues => {
+  const avr = resultat ? resultat.ankeVurderingResultat : null;
+  return {
+    vedtak: avr ? formatId(avr.påAnketKlageBehandlingUuid) : null,
+    ankeVurdering: avr ? avr.ankeVurdering : null,
+    begrunnelse: avr ? avr.begrunnelse : null,
+    fritekstTilBrev: avr ? avr.fritekstTilBrev : null,
+    erAnkerIkkePart: avr ? avr.erAnkerIkkePart : false,
+    erIkkeKonkret: avr ? avr.erIkkeKonkret : false,
+    erFristIkkeOverholdt: avr ? avr.erFristIkkeOverholdt : false,
+    erIkkeSignert: avr ? avr.erIkkeSignert : false,
+    erSubsidiartRealitetsbehandles: avr ? avr.erSubsidiartRealitetsbehandles : null,
+    ankeOmgjoerArsak: avr ? avr.ankeOmgjoerArsak : null,
+    ankeVurderingOmgjoer: avr ? avr.ankeVurderingOmgjoer : null,
+    klageHjemmel: resultat && resultat.klageHjemmel !== '-' ? resultat.klageHjemmel : null,
+    sendTilKabal: false,
+  };
+});
 
 const formName = 'BehandleAnkeForm';
 
@@ -346,6 +428,8 @@ const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => 
   initialValues: buildInitialValues(ownProps),
   formValues: formValueSelector(formName)(state,
     'vedtak',
+    'sendTilKabal',
+    'klageHjemmel',
     'ankeVurdering',
     'begrunnelse',
     'fritekstTilBrev',

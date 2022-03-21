@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import Sinon from 'sinon';
 
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Aksjonspunkt, AnkeVurdering } from '@fpsak-frontend/types';
+import { Aksjonspunkt, AlleKodeverk, AnkeVurdering } from '@fpsak-frontend/types';
 import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
@@ -12,12 +12,16 @@ import { SelectField, RadioGroupField } from '@fpsak-frontend/form';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 
+import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import messages from '../../i18n/nb_NO.json';
 
 import PreviewAnkeLink from './PreviewAnkeLink';
 import { BehandleAnkeForm } from './BehandleAnkeForm';
 
 const intlMock = getIntlMock(messages);
+
+// @ts-ignore Fiks
+const kodeverk = alleKodeverk as AlleKodeverk;
 
 describe('<BehandleAnkeForm>', () => {
   const fellesProps = {
@@ -31,20 +35,8 @@ describe('<BehandleAnkeForm>', () => {
     sprakkode: 'nb',
     behandlinger: [],
     ankeOmgorArsaker: [],
-    behandlingTyper: [{
-      kode: behandlingType.FORSTEGANGSSOKNAD,
-      navn: 'Førstegangsbehandling',
-      kodeverk: '',
-    }, {
-      kode: behandlingType.KLAGE,
-      navn: 'Klage',
-      kodeverk: '',
-    }],
-    behandlingStatuser: [{
-      kode: behandlingStatus.OPPRETTET,
-      navn: 'Opprettet',
-      kodeverk: '',
-    }],
+    alleKodeverk: kodeverk,
+    alleAktuelleHjemler: [],
     submitCallback: Sinon.spy(),
     ankeVurderingResultat: {} as AnkeVurdering['ankeVurderingResultat'],
     aksjonspunktCode: AksjonspunktCode.MANUELL_VURDERING_AV_ANKE,
@@ -59,6 +51,7 @@ describe('<BehandleAnkeForm>', () => {
 
   it('skal vise komponent for avvist anke', () => {
     const wrapper = shallow(<BehandleAnkeForm
+      ankeVurderingInput={undefined}
       {...reduxFormPropsMock}
       {...fellesProps}
       formValues={{
@@ -75,6 +68,7 @@ describe('<BehandleAnkeForm>', () => {
 
   it('skal vise komponent for omgjort anke', () => {
     const wrapper = shallow(<BehandleAnkeForm
+      ankeVurderingInput={undefined}
       {...reduxFormPropsMock}
       {...fellesProps}
       formValues={{

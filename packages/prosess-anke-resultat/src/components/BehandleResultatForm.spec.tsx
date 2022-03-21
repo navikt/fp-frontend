@@ -34,6 +34,7 @@ describe('<BehandleResultatForm>', () => {
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
+      kabalisert={false}
     />);
 
     expect(wrapper.find(PreviewAnkeLink)).toHaveLength(0);
@@ -54,6 +55,7 @@ describe('<BehandleResultatForm>', () => {
       aksjonspunkter={[]}
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
+      kabalisert={false}
     />);
 
     expect(wrapper.find(PreviewAnkeLink)).toHaveLength(0);
@@ -76,6 +78,7 @@ describe('<BehandleResultatForm>', () => {
       submitCallback={sinon.spy()}
       onSubmit={sinon.spy()}
       ankeVurderingVerdi={ankeVurdering.ANKE_OPPHEVE_OG_HJEMSENDE}
+      kabalisert={false}
     />);
 
     expect(wrapper.find(PreviewAnkeLink)).toHaveLength(1);
