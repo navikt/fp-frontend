@@ -16,15 +16,15 @@ import {
 } from '@fpsak-frontend/shared-components';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 import { TIDENES_ENDE } from '@fpsak-frontend/utils';
-import ManueltLagtTilArbeidsforholdForm from './ManueltLagtTilArbeidsforholdForm';
-import ManglendeOpplysningerForm from './ManglendeOpplysningerForm';
-import ArbeidsforholdInformasjonPanel from './ArbeidsforholdInformasjonPanel';
-import InntektsmeldingInnhentesForm from './InntektsmeldingInnhentesForm';
+import ManueltLagtTilArbeidsforholdForm from './manuelt/ManueltLagtTilArbeidsforholdForm';
+import ManglendeArbeidsforholdForm from './manglendeArbeidsforhold/ManglendeArbeidsforholdForm';
+import ArbeidsforholdInformasjonPanel from './felles/ArbeidsforholdInformasjonPanel';
+import InntektsmeldingerPanel from './felles/InntektsmeldingerPanel';
+import InntektsmeldingOpplysningerPanel from './felles/InntektsmeldingOpplysningerPanel';
+import ManglendeInntektsmeldingForm from './manglendeInntektsmelding/ManglendeInntektsmeldingForm';
 import ArbeidsforholdOgInntekt, { Avklaring } from '../types/arbeidsforholdOgInntekt';
 
 import styles from './arbeidsforholdRad.less';
-import InntektsmeldingerPanel from './InntektsmeldingerPanel';
-import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
 
 const classNames = classnames.bind(styles);
 
@@ -159,7 +159,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
             />
           )}
           {manglerInntektsmelding && (
-            <InntektsmeldingInnhentesForm
+            <ManglendeInntektsmeldingForm
               saksnummer={saksnummer}
               behandlingUuid={behandlingUuid}
               skjæringspunktDato={arbeidOgInntekt.skjæringstidspunkt}
@@ -175,7 +175,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
             />
           )}
           {manglerArbeidsforhold && (
-            <ManglendeOpplysningerForm
+            <ManglendeArbeidsforholdForm
               saksnummer={saksnummer}
               behandlingUuid={behandlingUuid}
               arbeidsgiverNavn={arbeidsgiverNavn}

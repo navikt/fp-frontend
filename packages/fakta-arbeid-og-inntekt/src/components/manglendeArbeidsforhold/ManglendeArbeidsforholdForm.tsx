@@ -23,11 +23,11 @@ import {
 } from '@fpsak-frontend/shared-components';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 
-import InntektsmeldingOpplysningerPanel from './InntektsmeldingOpplysningerPanel';
-import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
+import InntektsmeldingOpplysningerPanel from '../felles/InntektsmeldingOpplysningerPanel';
+import ArbeidsforholdOgInntekt from '../../types/arbeidsforholdOgInntekt';
 
-import styles from './manglendeOpplysningerForm.less';
-import { useSetDirtyForm } from '../DirtyFormProvider';
+import styles from './manglendeArbeidsforholdForm.less';
+import { useSetDirtyForm } from '../../DirtyFormProvider';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -60,7 +60,7 @@ interface OwnProps {
   skalViseArbeidsforholdId: boolean;
 }
 
-const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
+const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   saksnummer,
   behandlingUuid,
   arbeidsgiverNavn,
@@ -272,4 +272,4 @@ const ManglendeOpplysningerForm: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default ManglendeOpplysningerForm;
+export default ManglendeArbeidsforholdForm;

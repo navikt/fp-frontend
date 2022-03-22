@@ -21,7 +21,7 @@ import {
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
-import ManueltLagtTilArbeidsforholdForm, { MANUELT_ORG_NR } from './ManueltLagtTilArbeidsforholdForm';
+import ManueltLagtTilArbeidsforholdForm, { MANUELT_ORG_NR } from './manuelt/ManueltLagtTilArbeidsforholdForm';
 import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
 
 import styles from './arbeidsOgInntektOverstyrPanel.less';
