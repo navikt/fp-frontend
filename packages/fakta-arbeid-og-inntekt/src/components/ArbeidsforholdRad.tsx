@@ -151,10 +151,11 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
           {førRegisterInnhenting && (
             <InntektsmeldingOpplysningerPanel
               saksnummer={saksnummer}
-              stillingsprosent={arbeidsforholdForRad.length > 0 ? arbeidsforholdForRad[0].stillingsprosent : undefined}
+              arbeidsforhold={arbeidsforholdForRad.length > 0 ? arbeidsforholdForRad[0] : undefined}
               inntektsmelding={finnInntektsmelding(
                 inntektsmeldingerForRad, arbeidsforholdForRad.length > 0 ? arbeidsforholdForRad[0].internArbeidsforholdId : undefined)}
               skalViseArbeidsforholdId={false}
+              alleKodeverk={alleKodeverk}
             />
           )}
           {manglerInntektsmelding && (

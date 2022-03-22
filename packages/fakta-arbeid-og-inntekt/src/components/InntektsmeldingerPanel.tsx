@@ -123,7 +123,7 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                         <FlexRow>
                           <FlexColumn>
                             <Element>
-                              {`${getKodeverknavnFraKode(alleKodeverk, KodeverkType.PERMISJONSBESKRIVELSE_TYPE, a.permisjonOgMangel.type)} (100%)`}
+                              {getKodeverknavnFraKode(alleKodeverk, KodeverkType.PERMISJONSBESKRIVELSE_TYPE, a.permisjonOgMangel.type)}
                             </Element>
                           </FlexColumn>
                           <FlexColumn>
@@ -203,20 +203,44 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
       {harEttArbeidsforhold && inntektsmeldingerForRad.length > 0 && (
         <InntektsmeldingOpplysningerPanel
           saksnummer={saksnummer}
-          stillingsprosent={arbeidsforholdForRad[0].stillingsprosent}
+          arbeidsforhold={arbeidsforholdForRad[0]}
           inntektsmelding={finnInntektsmelding(inntektsmeldingerForRad, arbeidsforholdForRad[0].internArbeidsforholdId)}
           skalViseArbeidsforholdId={inntektsmeldingerForRad.length > 1}
+          alleKodeverk={alleKodeverk}
         />
       )}
       {harEttArbeidsforhold && inntektsmeldingerForRad.length === 0 && (
-        <FlexRow>
-          <FlexColumn>
-            <Element><FormattedMessage id="ArbeidsforholdInformasjonPanel.Stillingsprosent" /></Element>
-          </FlexColumn>
-          <FlexColumn>
-            <Normaltekst>{`${arbeidsforholdForRad[0].stillingsprosent}%`}</Normaltekst>
-          </FlexColumn>
-        </FlexRow>
+        <>
+          <FlexRow>
+            <FlexColumn>
+              <Element><FormattedMessage id="ArbeidsforholdInformasjonPanel.Stillingsprosent" /></Element>
+            </FlexColumn>
+            <FlexColumn>
+              <Normaltekst>{`${arbeidsforholdForRad[0].stillingsprosent}%`}</Normaltekst>
+            </FlexColumn>
+          </FlexRow>
+          {arbeidsforholdForRad[0].permisjonOgMangel && (
+            <>
+              <VerticalSpacer eightPx />
+              <FlexRow>
+                <FlexColumn>
+                  <Element>
+                    {getKodeverknavnFraKode(alleKodeverk,
+                      KodeverkType.PERMISJONSBESKRIVELSE_TYPE, arbeidsforholdForRad[0].permisjonOgMangel.type)}
+                  </Element>
+                </FlexColumn>
+                <FlexColumn>
+                  <Normaltekst>
+                    <PeriodLabel
+                      dateStringFom={arbeidsforholdForRad[0].permisjonOgMangel.permisjonFom}
+                      dateStringTom={arbeidsforholdForRad[0].permisjonOgMangel.permisjonTom}
+                    />
+                  </Normaltekst>
+                </FlexColumn>
+              </FlexRow>
+            </>
+          )}
+        </>
       )}
     </>
   );
