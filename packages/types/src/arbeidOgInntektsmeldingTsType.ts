@@ -1,10 +1,14 @@
 export enum AksjonspunktÅrsak {
   MANGLENDE_INNTEKTSMELDING = 'MANGLENDE_INNTEKTSMELDING',
   INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD = 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD',
+  PERMISJON_UTEN_SLUTTDATO = 'PERMISJON_UTEN_SLUTTDATO',
 }
 
-type PermisjonUtenSluttdato = Readonly<{
+type PermisjonOgMangel = Readonly<{
   permisjonFom: string;
+  permisjonTom?: string;
+  type: string;
+  årsak?: AksjonspunktÅrsak;
   permisjonStatus?: string;
 }>
 
@@ -33,7 +37,7 @@ export type Arbeidsforhold = Readonly<{
   tom: string;
   stillingsprosent: number;
   årsak?: AksjonspunktÅrsak;
-  permisjonUtenSluttdatoDto?: PermisjonUtenSluttdato;
+  permisjonOgMangel?: PermisjonOgMangel;
   saksbehandlersVurdering?: string;
   begrunnelse?: string;
 }>

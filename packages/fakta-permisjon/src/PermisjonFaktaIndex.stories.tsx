@@ -71,9 +71,22 @@ EttArbeidsforholdUtenSluttdatoForPermisjon.args = {
       fom: '2019-12-06',
       tom: '9999-12-31',
       stillingsprosent: 100,
-      årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
-      permisjonUtenSluttdatoDto: {
+      permisjonOgMangel: {
         permisjonFom: '2022-10-01',
+        type: 'PERMITTERING',
+        årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
+      },
+    }, {
+      arbeidsgiverIdent: '91090909+',
+      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5',
+      eksternArbeidsforholdId: 'ARB001-002',
+      fom: '2019-12-06',
+      tom: '9999-12-31',
+      stillingsprosent: 100,
+      permisjonOgMangel: {
+        permisjonFom: '2022-10-01',
+        permisjonTom: '2022-12-01',
+        type: 'PERMITTERING',
       },
     }],
     inntektsmeldinger: [],
@@ -148,8 +161,10 @@ FlereArbeidsforhold.args = {
       internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
       stillingsprosent: 100,
       tom: '9999-12-31',
-      permisjonUtenSluttdatoDto: {
+      permisjonOgMangel: {
         permisjonFom: '2022-10-02',
+        type: 'PERMITTERING',
+        årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
       },
     }, {
       arbeidsgiverIdent: '910909090',
@@ -159,8 +174,10 @@ FlereArbeidsforhold.args = {
       stillingsprosent: 80,
       tom: '2021-12-31',
       årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
-      permisjonUtenSluttdatoDto: {
+      permisjonOgMangel: {
         permisjonFom: '2021-11-07',
+        type: 'PERMITTERING',
+        årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
       },
     }],
     inntektsmeldinger: [{
@@ -261,8 +278,10 @@ FlereArbeidsforholdFraSammeArbeidsgiver.args = {
       internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
       stillingsprosent: 100,
       tom: '9999-12-31',
-      permisjonUtenSluttdatoDto: {
+      permisjonOgMangel: {
         permisjonFom: '2022-10-02',
+        type: 'VELFERDSPERMISJON',
+        årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
       },
     }, {
       arbeidsgiverIdent: '910909088',
@@ -271,8 +290,10 @@ FlereArbeidsforholdFraSammeArbeidsgiver.args = {
       internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d',
       stillingsprosent: 80,
       tom: '2021-12-31',
-      permisjonUtenSluttdatoDto: {
+      permisjonOgMangel: {
         permisjonFom: '2021-11-07',
+        type: 'PERMITTERING',
+        årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
       },
     }],
     inntektsmeldinger: [{

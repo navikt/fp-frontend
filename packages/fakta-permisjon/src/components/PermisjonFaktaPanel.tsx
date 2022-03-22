@@ -12,7 +12,7 @@ import {
 } from '@fpsak-frontend/utils';
 import { Form, TextAreaField } from '@fpsak-frontend/form-hooks';
 import {
-  Aksjonspunkt, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, AoIArbeidsforhold,
+  Aksjonspunkt, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, AoIArbeidsforhold, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import {
   VerticalSpacer, AksjonspunktHelpTextHTML, FloatRight,
@@ -49,6 +49,7 @@ interface OwnProps {
   arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   lagreCallback: (aksjonspunktData: VurderArbeidsforholdPermisjonAp) => Promise<void>;
+  alleKodeverk: AlleKodeverk;
 }
 
 const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
@@ -60,10 +61,11 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
   formData,
   setFormData,
   lagreCallback,
+  alleKodeverk,
 }) => {
   const arbeidOgInntektMedPermisjon = useMemo(() => ({
     inntektsmeldinger: arbeidOgInntekt.inntektsmeldinger,
-    arbeidsforhold: arbeidOgInntekt.arbeidsforhold.filter((a) => a.permisjonUtenSluttdatoDto),
+    arbeidsforhold: arbeidOgInntekt.arbeidsforhold.filter((a) => a.permisjonOgMangel?.årsak),
     inntekter: arbeidOgInntekt.inntekter,
     skjæringstidspunkt: arbeidOgInntekt.skjæringstidspunkt,
   }), [arbeidOgInntekt]);
@@ -75,7 +77,7 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
 
   const defaultValues = useMemo(() => ({
     arbeidsforhold: sorterteArbeidsforhold.map((a) => ({
-      permisjonStatus: a.permisjonUtenSluttdatoDto.permisjonStatus,
+      permisjonStatus: a.permisjonOgMangel.permisjonStatus,
     })),
     begrunnelse: aksjonspunkter[0].begrunnelse,
   }), [sorterteArbeidsforhold]);
@@ -134,6 +136,7 @@ const PermisjonFaktaPanel: FunctionComponent<OwnProps> = ({
           isReadOnly={readOnly}
           harÅpentAksjonspunkt={harÅpentAksjonspunkt}
           skjæringstidspunkt={arbeidOgInntektMedPermisjon.skjæringstidspunkt}
+          alleKodeverk={alleKodeverk}
         />
         <VerticalSpacer thirtyTwoPx />
         <TextAreaField
