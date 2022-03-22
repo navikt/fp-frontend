@@ -254,6 +254,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
             erOverstyrt={erOverstyrt}
             oppdaterTabell={oppdaterTabellData}
             erRadÅpen={åpneRadIndexer.includes(index)}
+            alleKodeverk={alleKodeverk}
           />
         ))}
       </Table>

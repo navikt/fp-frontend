@@ -24,6 +24,7 @@ const PermisjonFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps>
   setFormData,
   arbeidOgInntekt,
   arbeidsgiverOpplysningerPerId,
+  alleKodeverk,
 }) => (
   <RawIntlProvider value={intl}>
     <PermisjonFaktaPanel
@@ -35,6 +36,7 @@ const PermisjonFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps>
       setFormData={setFormData}
       arbeidOgInntekt={arbeidOgInntekt}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      alleKodeverk={alleKodeverk}
     />
   </RawIntlProvider>
 );

@@ -15,6 +15,7 @@ import {
   TextAreaField, RadioGroupField, RadioOption, Form, CheckboxField,
 } from '@fpsak-frontend/form-hooks';
 import {
+  AlleKodeverk,
   AoIArbeidsforhold, Inntektsmelding, Inntektspost, ManglendeInntektsmeldingVurdering,
 } from '@fpsak-frontend/types';
 import {
@@ -48,6 +49,7 @@ interface OwnProps {
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   lukkArbeidsforholdRad: () => void;
   oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
+  alleKodeverk: AlleKodeverk;
 }
 
 const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
@@ -62,6 +64,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
   lagreVurdering,
   lukkArbeidsforholdRad,
   oppdaterTabell,
+  alleKodeverk,
 }) => {
   const intl = useIntl();
 
@@ -117,6 +120,7 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
         inntektsposter={inntektsposter}
         arbeidsforholdForRad={arbeidsforholdForRad}
         inntektsmeldingerForRad={inntektsmeldingerForRad}
+        alleKodeverk={alleKodeverk}
       />
       <Form formMethods={formMethods} onSubmit={lagre}>
         {(erEttArbeidsforhold || inntektsmeldingerForRad.length === 0) && (

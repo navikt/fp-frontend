@@ -99,6 +99,11 @@ InnhentInntektsmelding.args = {
       tom: '9999-12-31',
       stillingsprosent: 100,
       årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
+      permisjonOgMangel: {
+        permisjonFom: '2022-10-01',
+        permisjonTom: '2022-12-01',
+        type: 'VELFERDSPERMISJON',
+      },
     }],
     inntektsmeldinger: [],
     inntekter: [{
@@ -494,6 +499,11 @@ ArbeidsforholdErOK.args = {
       internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
       stillingsprosent: 100,
       tom: '9999-12-31',
+      permisjonOgMangel: {
+        permisjonFom: '2022-10-01',
+        permisjonTom: '2022-12-01',
+        type: 'VELFERDSPERMISJON',
+      },
     }],
     inntektsmeldinger: [{
       arbeidsgiverIdent: '910909088',
@@ -900,6 +910,11 @@ ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAndre.args = {
       stillingsprosent: 80,
       tom: '2021-12-31',
       årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
+      permisjonOgMangel: {
+        permisjonFom: '2022-10-01',
+        permisjonTom: '2022-12-01',
+        type: 'VELFERDSPERMISJON',
+      },
     }, {
       arbeidsgiverIdent: '910909088',
       eksternArbeidsforholdId: '2433453225',
@@ -908,6 +923,10 @@ ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAndre.args = {
       stillingsprosent: 80,
       tom: '2021-12-31',
       årsak: undefined,
+      permisjonOgMangel: {
+        permisjonFom: '2022-10-01',
+        type: 'PERMITTERING',
+      },
     }],
     inntektsmeldinger: [{
       inntektPrMnd: 30000,

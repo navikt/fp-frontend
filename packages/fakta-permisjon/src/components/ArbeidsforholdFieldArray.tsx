@@ -15,8 +15,10 @@ import {
   VerticalSpacer, PeriodLabel, DateTimeLabel,
 } from '@fpsak-frontend/shared-components';
 import {
-  ArbeidOgInntektsmelding, AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding,
+  ArbeidOgInntektsmelding, AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding, AlleKodeverk,
 } from '@fpsak-frontend/types';
+import { getKodeverknavnFraKode } from '@fpsak-frontend/utils/src/kodeverkUtils';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import { Column, Row } from 'nav-frontend-grid';
 import BekreftetPermisjonStatus from '../kodeverk/BekreftetPermisjonStatus';
@@ -54,6 +56,7 @@ interface OwnProps {
   isReadOnly: boolean;
   harÅpentAksjonspunkt: boolean;
   skjæringstidspunkt: string;
+  alleKodeverk: AlleKodeverk;
 }
 
 const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
@@ -64,6 +67,7 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
   isReadOnly,
   harÅpentAksjonspunkt,
   skjæringstidspunkt,
+  alleKodeverk,
 }) => {
   const intl = useIntl();
   const { inntektsmeldinger, inntekter } = arbeidOgInntekt;
@@ -196,10 +200,10 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                     </Column>
                     <Column xs="3">
                       <Element>
-                        <FormattedMessage id="ArbeidsforholdFieldArray.Permisjon" />
+                        {`${getKodeverknavnFraKode(alleKodeverk, KodeverkType.PERMISJONSBESKRIVELSE_TYPE, arbeidsforhold.permisjonOgMangel.type)} 100%`}
                       </Element>
                       <Normaltekst>
-                        <PeriodLabel dateStringFom={arbeidsforhold.permisjonUtenSluttdatoDto.permisjonFom} dateStringTom={undefined} />
+                        <PeriodLabel dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom} dateStringTom={undefined} />
                       </Normaltekst>
                     </Column>
                   </Row>
