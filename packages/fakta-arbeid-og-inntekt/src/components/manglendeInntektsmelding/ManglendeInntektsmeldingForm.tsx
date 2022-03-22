@@ -23,11 +23,11 @@ import {
 } from '@fpsak-frontend/shared-components';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 
-import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
+import ArbeidsforholdOgInntekt from '../../types/arbeidsforholdOgInntekt';
+import ArbeidsforholdInformasjonPanel from '../felles/ArbeidsforholdInformasjonPanel';
+import { useSetDirtyForm } from '../../DirtyFormProvider';
 
-import styles from './inntektsmeldingInnhentesForm.less';
-import ArbeidsforholdInformasjonPanel from './ArbeidsforholdInformasjonPanel';
-import { useSetDirtyForm } from '../DirtyFormProvider';
+import styles from './manglendeInntektsmeldingForm.less';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
@@ -52,7 +52,7 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
 }
 
-const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
+const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
   saksnummer,
   behandlingUuid,
   skjæringspunktDato,
@@ -213,4 +213,4 @@ const InntektsmeldingInnhentesForm: FunctionComponent<OwnProps> = ({
   );
 };
 
-export default InntektsmeldingInnhentesForm;
+export default ManglendeInntektsmeldingForm;

@@ -23,10 +23,10 @@ import {
   VerticalSpacer, FloatRight, OkAvbrytModal,
 } from '@fpsak-frontend/shared-components';
 
-import ArbeidsforholdOgInntekt from '../types/arbeidsforholdOgInntekt';
+import ArbeidsforholdOgInntekt from '../../types/arbeidsforholdOgInntekt';
 
 import styles from './manueltLagtTilArbeidsforholdForm.less';
-import { useSetDirtyForm } from '../DirtyFormProvider';
+import { useSetDirtyForm } from '../../DirtyFormProvider';
 
 export const MANUELT_ORG_NR = '342352362';
 
