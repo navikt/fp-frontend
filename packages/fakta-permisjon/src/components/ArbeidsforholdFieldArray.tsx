@@ -4,7 +4,7 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import {
-  FlexColumn, FlexContainer, FlexRow, Image,
+  FlexColumn, FlexContainer, FlexRow, Image, Tooltip,
 } from '@navikt/fp-react-components';
 
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
@@ -40,6 +40,12 @@ const erMatch = (
 ): boolean => inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent
   && (!inntektsmelding.internArbeidsforholdId || inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);
 
+const delOppAId = (eksternArbeidsforholdId: string) => {
+  const lengde = Math.ceil(eksternArbeidsforholdId.length / 25);
+  const oppdeltId = Array.from({ length: lengde }, (_x, i) => eksternArbeidsforholdId.slice(i * 25, (i * 25) + 25));
+  return <p>{oppdeltId.join('-')}</p>;
+};
+
 interface OwnProps {
   saksnummer: string;
   sorterteArbeidsforhold: AoIArbeidsforhold[];
@@ -74,6 +80,7 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
         const arbeidsforhold = sorterteArbeidsforhold[index];
         const inntektsmelding = inntektsmeldinger.find((i) => erMatch(arbeidsforhold, i));
         const inntektsposter = inntekter.find((inntekt) => inntekt.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent)?.inntekter;
+        const visArbeidsforholdId = sorterteArbeidsforhold.filter((a) => a.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent).length > 1;
         return (
           <ArbeidsforholdBoks key={field.id} harÅpentAksjonspunkt={harÅpentAksjonspunkt} harBorderTop={index === 0}>
             <FlexContainer>
@@ -134,6 +141,29 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                   <VerticalSpacer sixteenPx />
                   <Row>
                     <Column xs="4">
+                      {visArbeidsforholdId && (
+                        <>
+                          <FlexRow>
+                            <FlexColumn>
+                              <Element><FormattedMessage id="ArbeidsforholdFieldArray.Id" /></Element>
+                            </FlexColumn>
+                            <FlexColumn>
+                              {arbeidsforhold.eksternArbeidsforholdId.length < 50 && (
+                                <Normaltekst>{arbeidsforhold.eksternArbeidsforholdId}</Normaltekst>
+                              )}
+                              {arbeidsforhold.eksternArbeidsforholdId.length >= 50 && (
+                                <Tooltip
+                                  content={delOppAId(arbeidsforhold.eksternArbeidsforholdId)}
+                                  alignBottom
+                                >
+                                  <Normaltekst>{`${arbeidsforhold.eksternArbeidsforholdId.substring(0, 50)}...`}</Normaltekst>
+                                </Tooltip>
+                              )}
+                            </FlexColumn>
+                          </FlexRow>
+                          <VerticalSpacer eightPx />
+                        </>
+                      )}
                       {arbeidsforhold.stillingsprosent && (
                         <>
                           <FlexRow>

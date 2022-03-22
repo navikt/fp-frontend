@@ -236,3 +236,86 @@ FlereArbeidsforhold.args = {
     skjæringstidspunkt: '2021-11-10',
   },
 };
+
+export const FlereArbeidsforholdFraSammeArbeidsgiver = Template.bind({});
+FlereArbeidsforholdFraSammeArbeidsgiver.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  aksjonspunkter: [{
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+    status: aksjonspunktStatus.OPPRETTET,
+  }] as Aksjonspunkt[],
+  arbeidsgiverOpplysningerPerId: {
+    910909088: {
+      erPrivatPerson: false,
+      fødselsdato: undefined,
+      identifikator: '910909088',
+      navn: 'BEDRIFT AS',
+      referanse: '910909088',
+    },
+  },
+  arbeidOgInntekt: {
+    arbeidsforhold: [{
+      arbeidsgiverIdent: '910909088',
+      eksternArbeidsforholdId: 'ARB001-001-asdfasdfasdf-asdfadsfertbrtynet65y454hrthfdsgfbdsfgb',
+      fom: '2019-12-06',
+      internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
+      stillingsprosent: 100,
+      tom: '9999-12-31',
+      permisjonUtenSluttdatoDto: {
+        permisjonFom: '2022-10-02',
+      },
+    }, {
+      arbeidsgiverIdent: '910909088',
+      eksternArbeidsforholdId: 'ARB001-002',
+      fom: '2019-06-06',
+      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d',
+      stillingsprosent: 80,
+      tom: '2021-12-31',
+      permisjonUtenSluttdatoDto: {
+        permisjonFom: '2021-11-07',
+      },
+    }],
+    inntektsmeldinger: [{
+      arbeidsgiverIdent: '910909088',
+      eksternArbeidsforholdId: 'ARB001-001-asdfasdfasdf-asdfadsfertbrtynet65y454hrthfdsgfbdsfgb',
+      innsendingstidspunkt: '2021-12-06T10:52:13.377',
+      inntektPrMnd: 30000,
+      internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
+      kontaktpersonNavn: 'Corpolarsen',
+      kontaktpersonNummer: '41925090',
+      motattDato: '2021-12-06',
+      refusjonPrMnd: 20000,
+      journalpostId: '1',
+      dokumentId: '2',
+    }, {
+      arbeidsgiverIdent: '910909088',
+      eksternArbeidsforholdId: 'ARB001-002',
+      innsendingstidspunkt: '2021-12-06T10:52:13.377',
+      inntektPrMnd: 10000,
+      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d',
+      kontaktpersonNavn: 'Corpolarsen',
+      kontaktpersonNummer: '41925090',
+      motattDato: '2021-12-06',
+      journalpostId: '1',
+      dokumentId: '2',
+    }],
+    inntekter: [{
+      arbeidsgiverIdent: '910909088',
+      inntekter: [{
+        beløp: 40000,
+        fom: '2020-06-01',
+        tom: '2020-06-30',
+        type: 'LØNN',
+      }],
+    }, {
+      arbeidsgiverIdent: '910909090',
+      inntekter: [{
+        beløp: 30000,
+        fom: '2020-06-01',
+        tom: '2020-06-30',
+        type: 'LØNN',
+      }],
+    }],
+    skjæringstidspunkt: '2021-11-10',
+  },
+};

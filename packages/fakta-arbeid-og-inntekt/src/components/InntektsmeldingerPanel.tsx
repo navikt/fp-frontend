@@ -153,9 +153,9 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                     <Column xs="5" className={styles.sisteKolonne}>
                       <FloatRight>
                         <Element><FormattedMessage id="ArbeidsforholdInformasjonPanel.ImMottatt" /></Element>
-                      </FloatRight>
-                      <FloatRight>
-                        <Normaltekst><DateTimeLabel dateTimeString={inntektsmelding.motattDato} useNewFormat /></Normaltekst>
+                        <FloatRight>
+                          <Normaltekst><DateTimeLabel dateTimeString={inntektsmelding.motattDato} useNewFormat /></Normaltekst>
+                        </FloatRight>
                       </FloatRight>
                     </Column>
                   )}
