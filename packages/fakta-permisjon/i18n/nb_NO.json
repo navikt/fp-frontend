@@ -19,6 +19,7 @@
   "ArbeidsforholdFieldArray.HjelpetekstDel2": "Dersom arbeidsforholdet tas med og det trengs inntektsmelding, må dette innhentes.",
   "ArbeidsforholdFieldArray.HjelpetekstDel3": "Permisjoner eller permitteringer med en sluttdato tas automatisk med. Du trenger ikke etterspørre inntektsmeldinger.",
   "ArbeidsforholdFieldArray.HjelpetekstDel4": "Mottas det inntektsmelding med refusjonskrav vil denne brukes i behandlingen.",
+  "ArbeidsforholdFieldArray.Id": "ID",
   "ArbeidsforholdFieldArray.Stillingsprosent": "Stillingsprosent",
   "ArbeidsforholdFieldArray.SkalArbeidsforholdetTasMed": "Skal arbeidsforholdet tas med?",
   "ArbeidsforholdFieldArray.TaMedArbeidsforhold": "Fjern permisjonen og ta med arbeidsforholdet",
