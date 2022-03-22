@@ -12,7 +12,9 @@ import {
 import pilOppIkonUrl from '@fpsak-frontend/assets/images/pil_opp.svg';
 import pilNedIkonUrl from '@fpsak-frontend/assets/images/pil_ned.svg';
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
-import { AoIArbeidsforhold, Inntektsmelding, Inntektspost } from '@fpsak-frontend/types';
+import {
+  AlleKodeverk, AoIArbeidsforhold, Inntektsmelding, Inntektspost,
+} from '@fpsak-frontend/types';
 import { VerticalSpacer, FloatRight } from '@fpsak-frontend/shared-components';
 
 import styles from './arbeidsforholdInformasjonPanel.less';
@@ -52,6 +54,7 @@ interface OwnProps {
   inntektsposter?: Inntektspost[];
   arbeidsforholdForRad: AoIArbeidsforhold[];
   inntektsmeldingerForRad?: Inntektsmelding[];
+  alleKodeverk: AlleKodeverk;
 }
 
 const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
@@ -60,6 +63,7 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
   inntektsposter = [],
   arbeidsforholdForRad,
   inntektsmeldingerForRad = EMPTY_ARRAY,
+  alleKodeverk,
 }) => {
   const [visAlleMåneder, toggleMånedvisning] = useState(false);
 
@@ -73,6 +77,7 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
         saksnummer={saksnummer}
         arbeidsforholdForRad={arbeidsforholdForRad}
         inntektsmeldingerForRad={inntektsmeldingerForRad}
+        alleKodeverk={alleKodeverk}
       />
       <VerticalSpacer thirtyTwoPx />
       {inntektsposter.length > 0 && (

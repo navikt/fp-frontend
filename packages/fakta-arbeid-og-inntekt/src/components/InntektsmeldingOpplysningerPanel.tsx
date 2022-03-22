@@ -7,9 +7,12 @@ import {
 } from '@navikt/fp-react-components';
 
 import telefonImageUrl from '@fpsak-frontend/assets/images/phone-3.svg';
-import { Inntektsmelding } from '@fpsak-frontend/types';
+import { Inntektsmelding, AoIArbeidsforhold, AlleKodeverk } from '@fpsak-frontend/types';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
+import { getKodeverknavnFraKode } from '@fpsak-frontend/utils/src/kodeverkUtils';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
+  PeriodLabel,
   VerticalSpacer,
 } from '@fpsak-frontend/shared-components';
 import { hentDokumentLenke } from '@fpsak-frontend/konstanter';
@@ -19,16 +22,18 @@ import styles from './inntektsmeldingOpplysningerPanel.less';
 
 interface OwnProps {
   saksnummer: string;
-  stillingsprosent?: number;
+  arbeidsforhold?: AoIArbeidsforhold;
   inntektsmelding: Inntektsmelding;
   skalViseArbeidsforholdId: boolean;
+  alleKodeverk?: AlleKodeverk;
 }
 
 const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
   saksnummer,
-  stillingsprosent,
+  arbeidsforhold,
   inntektsmelding,
   skalViseArbeidsforholdId,
+  alleKodeverk,
 }) => (
   <>
     <VerticalSpacer eightPx />
@@ -46,16 +51,37 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
           <VerticalSpacer eightPx />
         </>
       )}
-      {stillingsprosent && (
+      {arbeidsforhold && (
         <>
           <FlexRow>
             <FlexColumn>
               <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Stillingsprosent" /></Element>
             </FlexColumn>
             <FlexColumn>
-              <Normaltekst>{`${stillingsprosent}%`}</Normaltekst>
+              <Normaltekst>{`${arbeidsforhold.stillingsprosent}%`}</Normaltekst>
             </FlexColumn>
           </FlexRow>
+          {arbeidsforhold.permisjonOgMangel && (
+            <>
+              <VerticalSpacer eightPx />
+              <FlexRow>
+                <FlexColumn>
+                  <Element>
+                    {getKodeverknavnFraKode(alleKodeverk,
+                      KodeverkType.PERMISJONSBESKRIVELSE_TYPE, arbeidsforhold.permisjonOgMangel.type)}
+                  </Element>
+                </FlexColumn>
+                <FlexColumn>
+                  <Normaltekst>
+                    <PeriodLabel
+                      dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom}
+                      dateStringTom={arbeidsforhold.permisjonOgMangel.permisjonTom}
+                    />
+                  </Normaltekst>
+                </FlexColumn>
+              </FlexRow>
+            </>
+          )}
           <VerticalSpacer eightPx />
         </>
       )}
