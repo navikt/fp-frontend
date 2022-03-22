@@ -6,7 +6,7 @@ import { Normaltekst, Element, Undertekst } from 'nav-frontend-typografi';
 import { Image } from '@navikt/fp-react-components';
 
 import {
-  AoIArbeidsforhold, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold, AksjonspunktÅrsak, ArbeidOgInntektsmelding, Inntektsmelding,
+  AoIArbeidsforhold, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold, AksjonspunktÅrsak, ArbeidOgInntektsmelding, Inntektsmelding, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import utropstegnIkonUrl from '@fpsak-frontend/assets/images/utropstegn.svg';
@@ -83,6 +83,7 @@ interface OwnProps {
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   toggleÅpenRad: () => void;
   erRadÅpen: boolean;
+  alleKodeverk: AlleKodeverk;
 }
 
 const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
@@ -97,6 +98,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
   lagreVurdering,
   toggleÅpenRad,
   erRadÅpen,
+  alleKodeverk,
 }) => {
   const intl = useIntl();
 
@@ -143,6 +145,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               saksnummer={saksnummer}
               arbeidsforholdForRad={arbeidsforholdForRad}
               inntektsmeldingerForRad={inntektsmeldingerForRad}
+              alleKodeverk={alleKodeverk}
             />
           )}
           {førRegisterInnhenting && (
@@ -167,6 +170,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               lagreVurdering={lagreVurdering}
               lukkArbeidsforholdRad={toggleÅpenRad}
               oppdaterTabell={oppdaterTabell}
+              alleKodeverk={alleKodeverk}
             />
           )}
           {manglerArbeidsforhold && (
@@ -190,6 +194,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               skjæringspunktDato={arbeidOgInntekt.skjæringstidspunkt}
               inntektsposter={inntektsposter}
               arbeidsforholdForRad={arbeidsforholdForRad}
+              alleKodeverk={alleKodeverk}
             />
           )}
         </>

@@ -8,11 +8,13 @@ import {
   Image, FlexColumn, FlexRow, Tooltip,
 } from '@navikt/fp-react-components';
 
+import { getKodeverknavnFraKode } from '@fpsak-frontend/utils/src/kodeverkUtils';
+import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import pilOppIkonUrl from '@fpsak-frontend/assets/images/pil_opp.svg';
 import pilNedIkonUrl from '@fpsak-frontend/assets/images/pil_ned.svg';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import { TIDENES_ENDE } from '@fpsak-frontend/utils';
-import { AoIArbeidsforhold, Inntektsmelding } from '@fpsak-frontend/types';
+import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@fpsak-frontend/types';
 import {
   VerticalSpacer, FloatRight, PeriodLabel, AvsnittSkiller, DateTimeLabel,
 } from '@fpsak-frontend/shared-components';
@@ -50,12 +52,14 @@ interface OwnProps {
   saksnummer: string;
   arbeidsforholdForRad: AoIArbeidsforhold[];
   inntektsmeldingerForRad: Inntektsmelding[];
+  alleKodeverk: AlleKodeverk;
 }
 
 const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
   saksnummer,
   arbeidsforholdForRad,
   inntektsmeldingerForRad,
+  alleKodeverk,
 }) => {
   const intl = useIntl();
   const [visInfoOmIm, toggleInfoOmIm] = useState({});
@@ -113,6 +117,23 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                         <Normaltekst>{`${a.stillingsprosent}%`}</Normaltekst>
                       </FlexColumn>
                     </FlexRow>
+                    {a.permisjonOgMangel && (
+                      <>
+                        <VerticalSpacer fourPx />
+                        <FlexRow>
+                          <FlexColumn>
+                            <Element>
+                              {`${getKodeverknavnFraKode(alleKodeverk, KodeverkType.PERMISJONSBESKRIVELSE_TYPE, a.permisjonOgMangel.type)} (100%)`}
+                            </Element>
+                          </FlexColumn>
+                          <FlexColumn>
+                            <Normaltekst>
+                              <PeriodLabel dateStringFom={a.permisjonOgMangel.permisjonFom} dateStringTom={a.permisjonOgMangel.permisjonTom} />
+                            </Normaltekst>
+                          </FlexColumn>
+                        </FlexRow>
+                      </>
+                    )}
                     {inntektsmelding && (
                       <>
                         {visInfoOmIm[inntektsmelding.internArbeidsforholdId] && (
