@@ -32,7 +32,7 @@
   "devDependencies": {
     "@fpsak-frontend/utils-test": "1.0.0",
     "@storybook/addon-actions": "6.4.19",
-    "@storybook/testing-react": "1.2.3",
+    "@storybook/testing-react": "1.2.4",
     "@testing-library/react": "12.1.4",
     "@testing-library/user-event": "13.5.0"
   }
