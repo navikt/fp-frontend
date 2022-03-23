@@ -40,7 +40,7 @@ const getPreviewCallback = (
   const data = {
     fritekst: begrunnelse || ' ',
     mottaker: '',
-    dokumentMal: dokumentMalType.INNSYN,
+    dokumentMal: dokumentMalType.INNSYN_SVAR,
     gjelderVedtak: true,
   };
   previewCallback(data);

@@ -10,11 +10,11 @@ import styles from './previewAnkeLink.less';
 const getBrevKode = (ankeVurdering?: string): string | null => {
   switch (ankeVurdering) {
     case ankeVurderingType.ANKE_OMGJOER:
-      return dokumentMalType.ANKE_VEDTAK_OMGJORING;
+      return dokumentMalType.ANKE_OMGJORT;
     case ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE:
-      return dokumentMalType.ANKE_BESLUTNING_OM_OPPHEVING;
+      return dokumentMalType.ANKE_OPPHEVET;
     case ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV:
-      return dokumentMalType.ANKE_BESLUTNING_OM_OPPHEVING;
+      return dokumentMalType.ANKE_OPPHEVET;
     default:
       return null;
   }

@@ -11,11 +11,11 @@ import styles from './previewKlageLink.less';
 const getBrevKode = (klageVurdering: string, klageVurdertAvKa: boolean): string | null => {
   switch (klageVurdering) {
     case klageVurderingType.STADFESTE_YTELSESVEDTAK:
-      return klageVurdertAvKa ? dokumentMalType.KLAGE_STADFESTET : dokumentMalType.KLAGE_OVERSENDT_KLAGEINSTANS;
+      return klageVurdertAvKa ? dokumentMalType.KLAGE_STADFESTET : dokumentMalType.KLAGE_OVERSENDT;
     case klageVurderingType.OPPHEVE_YTELSESVEDTAK:
-      return dokumentMalType.KLAGE_YTELSESVEDTAK_OPPHEVET;
+      return dokumentMalType.KLAGE_HJEMSENDT;
     case klageVurderingType.HJEMSENDE_UTEN_Å_OPPHEVE:
-      return dokumentMalType.KLAGE_YTELSESVEDTAK_OPPHEVET;
+      return dokumentMalType.KLAGE_HJEMSENDT;
     case klageVurderingType.MEDHOLD_I_KLAGE:
       return dokumentMalType.KLAGE_OMGJORING;
     default:

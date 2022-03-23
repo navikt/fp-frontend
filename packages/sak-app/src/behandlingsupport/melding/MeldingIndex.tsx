@@ -29,9 +29,7 @@ const getSubmitCallback = (
   setMeldingForData: (data?: any) => void,
 ) => (values: FormValues) => {
   const isInnhentEllerForlenget = values.brevmalkode === dokumentMalType.INNHENTE_OPPLYSNINGER
-    || values.brevmalkode === dokumentMalType.FORLENGET_DOK
     || values.brevmalkode === dokumentMalType.FORLENGET_SAKSBEHANDLINGSTID
-    || values.brevmalkode === dokumentMalType.FORLENGET_MEDL_DOK
     || values.brevmalkode === dokumentMalType.FORLENGET_SAKSBEHANDLINGSTID_MEDL;
   const erTilbakekreving = BehandlingType.TILBAKEKREVING === behandlingTypeKode || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingTypeKode;
 
