@@ -147,7 +147,8 @@
     "prismjs": "1.27.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-test-renderer": "17.0.2"
+    "react-test-renderer": "17.0.2",
+    "trim": "^1.0.1"
   },
   "version": "0.0.0"
 }
