@@ -21,7 +21,6 @@ import {
 } from '@fpsak-frontend/utils';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
-import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import questionNormalUrl from '@fpsak-frontend/assets/images/question_normal.svg';
 import questionHoverUrl from '@fpsak-frontend/assets/images/question_hover.svg';
@@ -133,7 +132,7 @@ interface OwnProps {
   readOnly: boolean;
   readOnlySubmitButton: boolean;
   isApOpen: boolean;
-  previewCallback: (mottaker: string, brevmalkode: string, fritekst: string) => Promise<any>;
+  previewCallback: (mottaker: string, fritekst: string) => Promise<any>;
   formData?: FormValues;
   setFormData: (data: FormValues) => void;
 }
@@ -171,7 +170,7 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
     && tilbakekrevingvalg.videreBehandling === tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER;
 
   const previewMessage = useCallback((e: React.MouseEvent): void => {
-    previewCallback('', dokumentMalType.TBKVAR, varseltekst || ' ');
+    previewCallback('', varseltekst || ' ');
     e.preventDefault();
   }, [varseltekst]);
 

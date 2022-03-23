@@ -19,7 +19,6 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
 
 import { EsBehandlingApiKeys, requestEsApi } from '../data/esBehandlingApi';
@@ -196,10 +195,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
       .find((a) => a.url === '/fptilbake/api/dokument/forhandsvis-varselbrev')?.data).toBe(JSON.stringify({
       behandlingUuid: 'test-uuid',
       fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
-      saksnummer: '123',
       varseltekst: ' ',
-      mottaker: '',
-      brevmalkode: dokumentMalType.TBKVAR,
     }));
   });
 });

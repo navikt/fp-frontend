@@ -15,7 +15,6 @@ const dokumentMalType = {
   INFO_OM_HENLEGGELSE: 'IOHENL',
   KORRIGERT_VARSEL_OM_TILBAKEKREVING: 'KORRIGVARS',
   VARSEL_OM_TILBAKEKREVING: 'VARS',
-  TBKVAR: 'TBKVAR',
 };
 
 export default dokumentMalType;
