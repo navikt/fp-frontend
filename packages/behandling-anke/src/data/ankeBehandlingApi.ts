@@ -19,6 +19,8 @@ export const AnkeBehandlingApiKeys = {
   SAVE_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_AKSJONSPUNKT'),
   PREVIEW_MESSAGE: new RestKey<any, ForhåndsvisMeldingParams>('PREVIEW_MESSAGE'),
   SAVE_ANKE_VURDERING: new RestKey<AnkeVurdering, void>('SAVE_ANKE_VURDERING'),
+  VERGE_OPPRETT: new RestKey<Behandling, any>('VERGE_OPPRETT'),
+  VERGE_FJERN: new RestKey<Behandling, any>('VERGE_FJERN'),
 };
 
 const endpoints = new RestApiConfigBuilder()
@@ -37,6 +39,8 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('endre-pa-vent', AnkeBehandlingApiKeys.UPDATE_ON_HOLD)
   .withRel('lagre-aksjonspunkter', AnkeBehandlingApiKeys.SAVE_AKSJONSPUNKT)
   .withRel('mellomlagre-anke', AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING)
+  .withRel('opprett-verge', AnkeBehandlingApiKeys.VERGE_OPPRETT)
+  .withRel('fjern-verge', AnkeBehandlingApiKeys.VERGE_FJERN)
 
   /* FPFORMIDLING */
   .withPost('/fpformidling/api/brev/forhaandsvis', AnkeBehandlingApiKeys.PREVIEW_MESSAGE, { isResponseBlob: true })

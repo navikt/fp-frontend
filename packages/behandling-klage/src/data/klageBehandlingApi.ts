@@ -19,6 +19,8 @@ export const KlageBehandlingApiKeys = {
   UPDATE_ON_HOLD: new RestKey<void, SettPaVentParams>('UPDATE_ON_HOLD'),
   SAVE_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_AKSJONSPUNKT'),
   PREVIEW_MESSAGE: new RestKey<any, ForhåndsvisMeldingParams>('PREVIEW_MESSAGE'),
+  VERGE_OPPRETT: new RestKey<Behandling, any>('VERGE_OPPRETT'),
+  VERGE_FJERN: new RestKey<Behandling, any>('VERGE_FJERN'),
 };
 
 const endpoints = new RestApiConfigBuilder()
@@ -37,6 +39,8 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('endre-pa-vent', KlageBehandlingApiKeys.UPDATE_ON_HOLD)
   .withRel('lagre-aksjonspunkter', KlageBehandlingApiKeys.SAVE_AKSJONSPUNKT)
   .withRel('mellomlagre-klage', KlageBehandlingApiKeys.SAVE_KLAGE_VURDERING)
+  .withRel('opprett-verge', KlageBehandlingApiKeys.VERGE_OPPRETT)
+  .withRel('fjern-verge', KlageBehandlingApiKeys.VERGE_FJERN)
 
   /* FPFORMIDLING */
   .withPost('/fpformidling/api/brev/forhaandsvis', KlageBehandlingApiKeys.PREVIEW_MESSAGE, { isResponseBlob: true })
