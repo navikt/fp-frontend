@@ -20,7 +20,7 @@ describe('<MeldingerSakIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      brevmalkode: dokumentMalType.INNHENT_DOK,
+      brevmalkode: dokumentMalType.INNHENTE_OPPLYSNINGER,
       fritekst: 'Dette er en begrunnelse',
       mottaker: 'Søker',
     });

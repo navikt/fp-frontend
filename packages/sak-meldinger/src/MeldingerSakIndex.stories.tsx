@@ -57,7 +57,7 @@ export const Default = Template.bind({});
 Default.args = {
   recipients: ['Søker'],
   templates: [{
-    kode: dokumentMalType.INNHENT_DOK,
+    kode: dokumentMalType.INNHENTE_OPPLYSNINGER,
     navn: 'Innhent dokumentasjon',
     tilgjengelig: true,
   }, {
@@ -74,7 +74,7 @@ export const ForSvangerskapspenger = Template.bind({});
 ForSvangerskapspenger.args = {
   recipients: ['Søker'],
   templates: [{
-    kode: dokumentMalType.INNHENT_DOK,
+    kode: dokumentMalType.INNHENTE_OPPLYSNINGER,
     navn: 'Innhent dokumentasjon',
     tilgjengelig: true,
   }, {

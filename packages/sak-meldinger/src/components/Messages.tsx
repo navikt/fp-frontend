@@ -33,14 +33,13 @@ export type Template = {
   tilgjengelig: boolean;
 }
 
-const getFritekstMessage = (brevmalkode?: string): string => (brevmalkode === dokumentMalType.INNHENT_DOK || brevmalkode === dokumentMalType.INNOPP
+const getFritekstMessage = (brevmalkode?: string): string => (brevmalkode === dokumentMalType.INNHENTE_OPPLYSNINGER
   ? 'Messages.DocumentList' : 'Messages.Fritekst');
 
 // TODO (TOR) Bør erstattast av ein markør fra backend
-const showFritekst = (brevmalkode?: string, arsakskode?: string): boolean => (brevmalkode === dokumentMalType.INNHENT_DOK
-  || brevmalkode === dokumentMalType.INNOPP
+const showFritekst = (brevmalkode?: string, arsakskode?: string): boolean => (brevmalkode === dokumentMalType.INNHENTE_OPPLYSNINGER
   || brevmalkode === dokumentMalType.KORRIGVARS
-  || brevmalkode === dokumentMalType.FRITKS
+  || brevmalkode === dokumentMalType.FRITEKST
   || brevmalkode === dokumentMalType.VARSEL_OM_TILBAKEKREVING
   || (brevmalkode === dokumentMalType.REVURDERING_DOK && arsakskode === ugunstAarsakTyper.ANNET));
 

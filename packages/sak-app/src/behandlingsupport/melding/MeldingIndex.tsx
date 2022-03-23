@@ -28,8 +28,7 @@ const getSubmitCallback = (
   setSubmitCounter: (fn: (prevValue: number) => number) => void,
   setMeldingForData: (data?: any) => void,
 ) => (values: FormValues) => {
-  const isInnhentEllerForlenget = values.brevmalkode === dokumentMalType.INNHENT_DOK
-    || values.brevmalkode === dokumentMalType.INNOPP
+  const isInnhentEllerForlenget = values.brevmalkode === dokumentMalType.INNHENTE_OPPLYSNINGER
     || values.brevmalkode === dokumentMalType.FORLENGET_DOK
     || values.brevmalkode === dokumentMalType.FORLENGET_SAKSBEHANDLINGSTID
     || values.brevmalkode === dokumentMalType.FORLENGET_MEDL_DOK
