@@ -61,7 +61,7 @@ Default.args = {
     navn: 'Innhent dokumentasjon',
     tilgjengelig: true,
   }, {
-    kode: dokumentMalType.REVURDERING_DOK,
+    kode: dokumentMalType.VARSEL_OM_REVURDERING,
     navn: 'Revurderingsdokumentasjon',
     tilgjengelig: true,
   }],
@@ -78,7 +78,7 @@ ForSvangerskapspenger.args = {
     navn: 'Innhent dokumentasjon',
     tilgjengelig: true,
   }, {
-    kode: dokumentMalType.REVURDERING_DOK,
+    kode: dokumentMalType.VARSEL_OM_REVURDERING,
     navn: 'Revurderingsdokumentasjon',
     tilgjengelig: true,
   }],
