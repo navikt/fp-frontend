@@ -24,6 +24,7 @@ const {
   ArbeidsforholdErOK,
   ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet,
   FlereArbeidsforholdOgInntekstemeldinger,
+  ArbeidsforholdMedSammeOrgNr,
   ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAndre,
   FoerRegisterinnhenting,
   AutomatiskIgnorertInntektsmelding,
@@ -48,6 +49,9 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(screen.getByText('Skjæringstidspunkt for opptjening: 10.11.2021')).toBeInTheDocument();
     expect(screen.getByText('Innhent manglende inntektsmeldinger.')).toBeInTheDocument();
 
+    expect(screen.getByText('06.12.2019 -')).toBeInTheDocument();
+    expect(screen.getByText('A-ordningen')).toBeInTheDocument();
+    expect(screen.getByText('Ikke mottatt')).toBeInTheDocument();
     expect(screen.getByText('Stillingsprosent')).toBeInTheDocument();
     expect(screen.getByText('100%')).toBeInTheDocument();
     expect(screen.getByText('Velferdspermisjon')).toBeInTheDocument();
@@ -144,6 +148,8 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(screen.getByText('Skjæringstidspunkt for opptjening: 10.11.2021')).toBeInTheDocument();
     expect(screen.getByText('Avklar manglende opplysninger.')).toBeInTheDocument();
 
+    expect(screen.getByText('-')).toBeInTheDocument();
+    expect(screen.getByText('06.12.2021 Kl.00:00:00')).toBeInTheDocument();
     expect(screen.getAllByText('Inntektsmelding')).toHaveLength(3);
     expect(screen.getByText('30 000')).toBeInTheDocument();
     expect(screen.getByText('Refusjon')).toBeInTheDocument();
@@ -399,6 +405,10 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       + 'Arbeidsforholdet må kun opprettes dersom...',
     )).not.toBeInTheDocument();
 
+    expect(screen.getByText('06.12.2019 - 31.12.2022')).toBeInTheDocument();
+    expect(screen.getByText('Saksbehandler')).toBeInTheDocument();
+    expect(screen.getByText('Ikke mottatt')).toBeInTheDocument();
+
     userEvent.click(screen.getByAltText('Overstyr'));
 
     expect(await screen.findByText('Slett')).toBeInTheDocument();
@@ -446,6 +456,10 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(await screen.findByAltText('Lukk rad')).toBeInTheDocument();
 
+    expect(screen.getByText('06.12.2019 -')).toBeInTheDocument();
+    expect(screen.getByText('A-ordningen')).toBeInTheDocument();
+    expect(screen.getByText('06.12.2021 Kl.00:00:00')).toBeInTheDocument();
+
     expect(screen.getByText('Stillingsprosent')).toBeInTheDocument();
     expect(screen.getByText('100%')).toBeInTheDocument();
     expect(screen.getByText('Velferdspermisjon')).toBeInTheDocument();
@@ -472,6 +486,10 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     userEvent.click(screen.getByAltText('Åpne rad'));
 
     expect(await screen.findByAltText('Lukk rad')).toBeInTheDocument();
+
+    expect(screen.getAllByText('06.12.2019 -')).toHaveLength(2);
+    expect(screen.getByText('A-ordningen')).toBeInTheDocument();
+    expect(screen.getByText('Mottatt')).toBeInTheDocument();
 
     expect(screen.getAllByText('ID')).toHaveLength(2);
     expect(screen.getByText('ARB001-001')).toBeInTheDocument();
@@ -549,6 +567,77 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     });
   });
 
+  it('skal ha aksjonspunkt og vise flere arbeidsforhold med samme org nr', async () => {
+    const settPåVent = jest.fn(() => Promise.resolve());
+    const lagreVurdering = jest.fn(() => Promise.resolve());
+
+    const utils = render(<ArbeidsforholdMedSammeOrgNr settBehandlingPåVentCallback={settPåVent} lagreVurdering={lagreVurdering} />);
+
+    expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
+
+    expect(screen.getAllByAltText('Åpent aksjonspunkt')).toHaveLength(5);
+    expect(screen.getAllByText('-')).toHaveLength(2);
+    expect(screen.getAllByText('Inntektsmelding')).toHaveLength(5);
+    expect(screen.getByText('06.12.2021 Kl.00:00:00')).toBeInTheDocument();
+    expect(screen.getByText('06.11.2021 Kl.00:00:00')).toBeInTheDocument();
+    expect(screen.getByText('A-ordningen')).toBeInTheDocument();
+    expect(screen.getByText('Ikke mottatt')).toBeInTheDocument();
+
+    userEvent.click(screen.getAllByText('Jeg kontakter arbeidsgiver')[0]);
+
+    userEvent.type(utils.getAllByLabelText('Begrunn valget')[0], 'Dette er en begrunnelse');
+
+    userEvent.click(screen.getAllByText('Lagre')[0]);
+
+    await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
+    expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
+      arbeidsgiverIdent: '910909090',
+      begrunnelse: 'Dette er en begrunnelse',
+      behandlingUuid: '1223-2323-2323-22332',
+      internArbeidsforholdRef: '8ff2c608-6bab-4f83-9732-d26f8cwds',
+      vurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD',
+    });
+
+    userEvent.click(screen.getAllByText('Se bort fra inntektsmeldingen')[1]);
+
+    userEvent.type(utils.getAllByLabelText('Begrunn valget')[1], 'Dette er en begrunnelse 2');
+
+    userEvent.click(screen.getAllByText('Lagre')[1]);
+
+    await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(2));
+    expect(lagreVurdering).toHaveBeenNthCalledWith(2, {
+      arbeidsgiverIdent: '910909090',
+      begrunnelse: 'Dette er en begrunnelse 2',
+      behandlingUuid: '1223-2323-2323-22332',
+      internArbeidsforholdRef: '8ff2c608-6bab-4f83-9732-d26f8c8wew',
+      vurdering: 'IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
+    });
+
+    userEvent.click(screen.getByText('Gå videre uten inntektsmelding'));
+
+    userEvent.type(utils.getByLabelText('Kommentar'), 'Dette er en kommentar');
+
+    userEvent.click(screen.getAllByText('Lagre')[2]);
+
+    await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(3));
+    expect(lagreVurdering).toHaveBeenNthCalledWith(3, {
+      arbeidsgiverIdent: '910909088',
+      begrunnelse: 'Dette er en kommentar',
+      behandlingUuid: '1223-2323-2323-22332',
+      internArbeidsforholdRef: undefined,
+      vurdering: 'FORTSETT_UTEN_INNTEKTSMELDING',
+    });
+
+    userEvent.click(screen.getByText('Sett på vent'));
+    userEvent.click(screen.getByText('OK'));
+
+    await waitFor(() => expect(settPåVent).toHaveBeenCalledTimes(1));
+    expect(settPåVent).toHaveBeenNthCalledWith(1, {
+      frist,
+      ventearsak: 'VENT_OPDT_INNTEKTSMELDING',
+    });
+  });
+
   it('skal vise to arbeidsforhold fra samme virksomhet der kun ett har fått inntektsmelding', async () => {
     const settPåVent = jest.fn(() => Promise.resolve());
     const lagreVurdering = jest.fn(() => Promise.resolve());
@@ -611,6 +700,10 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(screen.queryByAltText('Åpent aksjonspunkt')).not.toBeInTheDocument();
     expect(screen.getByAltText('Arbeidsforhold kan ikke løses nå')).toBeInTheDocument();
 
+    expect(screen.getByText('-')).toBeInTheDocument();
+    expect(screen.getAllByText('Inntektsmelding')).toHaveLength(3);
+    expect(screen.getByText('15.02.2022 Kl.00:00:00')).toBeInTheDocument();
+
     expect(screen.getByAltText('Åpne rad')).toBeInTheDocument();
   });
 
@@ -624,6 +717,10 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     userEvent.click(screen.getByAltText('Åpne rad'));
     expect(await screen.findByAltText('Lukk rad')).toBeInTheDocument();
 
+    expect(screen.getByText('16.02.2002 -')).toBeInTheDocument();
+    expect(screen.getByText('A-ordningen')).toBeInTheDocument();
+    expect(screen.getByText('Ikke mottatt')).toBeInTheDocument();
+
     expect(screen.getByText('Stillingsprosent')).toBeInTheDocument();
     expect(screen.getByText('20%')).toBeInTheDocument();
     expect(screen.getByText('Ingen inntekt registrert på bruker i A-ordningen siste ti mnd.')).toBeInTheDocument();
@@ -636,6 +733,12 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(screen.getByText('Innhent manglende inntektsmeldinger.')).toBeInTheDocument();
     expect(screen.getAllByAltText('Arbeidsforhold er OK')).toHaveLength(2);
+
+    expect(screen.getByText('01.10.2018 -')).toBeInTheDocument();
+    expect(screen.getByText('13.05.2000 -')).toBeInTheDocument();
+    expect(screen.getAllByText('A-ordningen')).toHaveLength(2);
+    expect(screen.getByText('Ikke mottatt')).toBeInTheDocument();
+    expect(screen.getByText('16.02.2022 Kl.00:00:00')).toBeInTheDocument();
 
     expect(screen.getByText('Bekreft og fortsett')).toBeInTheDocument();
   });

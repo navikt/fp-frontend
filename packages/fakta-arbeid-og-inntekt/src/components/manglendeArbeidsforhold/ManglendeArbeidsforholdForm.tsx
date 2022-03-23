@@ -50,30 +50,31 @@ interface OwnProps {
   saksnummer: string;
   behandlingUuid: string;
   arbeidsgiverNavn: string;
-  inntektsmelding: Inntektsmelding;
+  inntektsmeldinger: Inntektsmelding[];
   radData: ArbeidsforholdOgInntekt;
   isReadOnly: boolean;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   lukkArbeidsforholdRad: () => void;
   oppdaterTabell: React.Dispatch<React.SetStateAction<ArbeidsforholdOgInntekt[]>>
-  skalViseArbeidsforholdId: boolean;
 }
 
 const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   saksnummer,
   behandlingUuid,
   arbeidsgiverNavn,
-  inntektsmelding,
+  inntektsmeldinger,
   radData,
   isReadOnly,
   registrerArbeidsforhold,
   lagreVurdering,
   lukkArbeidsforholdRad,
   oppdaterTabell,
-  skalViseArbeidsforholdId,
 }) => {
   const intl = useIntl();
+
+  const inntektsmelding = inntektsmeldinger.length === 1
+    ? inntektsmeldinger[0] : inntektsmeldinger.find((i) => i.internArbeidsforholdId === radData.internArbeidsforholdId);
 
   const defaultValues = useMemo<FormValues>(() => ({
     saksbehandlersVurdering: radData.avklaring?.saksbehandlersVurdering,
@@ -99,7 +100,7 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
   const lagre = useCallback((formValues: FormValues) => {
     const oppdater = (() => {
       oppdaterTabell((oldData) => oldData.map((data) => {
-        if (inntektsmelding.arbeidsgiverIdent === data.arbeidsgiverIdent) {
+        if (inntektsmelding.arbeidsgiverIdent === data.arbeidsgiverIdent && inntektsmelding.internArbeidsforholdId === data.internArbeidsforholdId) {
           const opprettArbeidsforhold = formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING;
           const avklaringOpprett = opprettArbeidsforhold ? {
             arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
@@ -149,7 +150,7 @@ const ManglendeArbeidsforholdForm: FunctionComponent<OwnProps> = ({
       <InntektsmeldingOpplysningerPanel
         saksnummer={saksnummer}
         inntektsmelding={inntektsmelding}
-        skalViseArbeidsforholdId={skalViseArbeidsforholdId}
+        skalViseArbeidsforholdId={inntektsmeldinger.length > 1}
       />
       <VerticalSpacer fourtyPx />
       <div className={styles.alertStripe}>

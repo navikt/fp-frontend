@@ -179,14 +179,13 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               saksnummer={saksnummer}
               behandlingUuid={behandlingUuid}
               arbeidsgiverNavn={arbeidsgiverNavn}
-              inntektsmelding={inntektsmeldingerForRad[0]}
+              inntektsmeldinger={inntektsmeldingerForRad}
               radData={radData}
               isReadOnly={isReadOnly}
               registrerArbeidsforhold={registrerArbeidsforhold}
               lagreVurdering={lagreVurdering}
               lukkArbeidsforholdRad={toggleÅpenRad}
               oppdaterTabell={oppdaterTabell}
-              skalViseArbeidsforholdId={inntektsmeldingerForRad.length > 1}
             />
           )}
           {harArbeidsforholdUtenInntektsmeldingMenIngenÅrsak && (
@@ -252,10 +251,18 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
           {arbeidsforholdForRad.length < 2 && inntektsmeldingerForRad.length === 1 && (
             <DateTimeLabel dateTimeString={inntektsmeldingerForRad[0].motattDato} useNewFormat />
           )}
+          {manglerArbeidsforhold && inntektsmeldingerForRad.length > 1 && (
+            <DateTimeLabel
+              dateTimeString={inntektsmeldingerForRad.find((i) => i.internArbeidsforholdId === radData.internArbeidsforholdId).motattDato}
+              useNewFormat
+            />
+          )}
           {!manglerInntektsmelding && arbeidsforholdForRad.length > 1 && inntektsmeldingerForRad.length === arbeidsforholdForRad.length && (
             <FormattedMessage id="ArbeidsforholdRad.Mottatt" />
           )}
-          {(erManueltOpprettet || (manglerInntektsmelding && inntektsmeldingerForRad.length < arbeidsforholdForRad.length)) && (
+          {(erManueltOpprettet
+            || harArbeidsforholdUtenInntektsmeldingMenIngenÅrsak
+            || (manglerInntektsmelding && inntektsmeldingerForRad.length < arbeidsforholdForRad.length)) && (
             <FormattedMessage id="ArbeidsforholdRad.IkkeMottatt" />
           )}
         </Normaltekst>

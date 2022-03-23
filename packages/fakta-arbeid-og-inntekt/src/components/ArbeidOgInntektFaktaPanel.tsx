@@ -242,7 +242,7 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
       <Table ref={tableRef} headerTextCodes={HEADER_TEXT_IDS} noHover hasGrayHeader>
         {tabellRader.map((radData, index) => (
           <ArbeidsforholdRad
-            key={`${radData.arbeidsgiverNavn}${radData.arbeidsgiverIdent}`}
+            key={`${radData.arbeidsgiverNavn}${radData.arbeidsgiverIdent}${radData.internArbeidsforholdId}`}
             arbeidOgInntekt={arbeidOgInntekt}
             saksnummer={saksnummer}
             behandlingUuid={behandling.uuid}

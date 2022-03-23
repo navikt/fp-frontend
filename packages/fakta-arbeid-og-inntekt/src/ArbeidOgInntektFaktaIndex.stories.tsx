@@ -817,7 +817,7 @@ ArbeidsforholdMedSammeOrgNr.args = {
       årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
     }],
     inntektsmeldinger: [{
-      inntektPrMnd: 30000,
+      inntektPrMnd: 20000,
       refusjonPrMnd: undefined,
       arbeidsgiverIdent: '910909090',
       eksternArbeidsforholdId: 'ARB001-001sdsfdsdfsdfwer',
@@ -839,7 +839,7 @@ ArbeidsforholdMedSammeOrgNr.args = {
       kontaktpersonNummer: '41925090',
       journalpostId: '1',
       dokumentId: '2',
-      motattDato: '2021-12-06',
+      motattDato: '2021-11-06',
       innsendingstidspunkt: '2021-12-06T10:52:13.377',
       årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
     }],
