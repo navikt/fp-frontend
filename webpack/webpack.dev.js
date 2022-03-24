@@ -1,7 +1,9 @@
 const webpack = require('webpack');
 const path = require('path');
 const { merge } = require('webpack-merge');
+const { ModuleFederationPlugin } = require('webpack').container;
 const commonDevAndProd = require('./webpack.common');
+const deps = require('../package.json').dependencies;
 
 const ROOT_DIR = path.resolve(__dirname, '../public/client');
 const PACKAGES_DIR = path.join(__dirname, '../packages');
@@ -22,6 +24,23 @@ const config = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new ModuleFederationPlugin({
+      name: "ft_frontend_saksbehandling",
+      remotes: {
+        ft_frontend_saksbehandling: 'ft_frontend_saksbehandling@[getFtFrontendSaksbehandlingUrl()]/remoteEntry.js?[(new Date).getTime()]',
+      },
+      shared: {
+        ...deps,
+        react: {
+          singleton: true,
+          requiredVersion: deps.react,
+        },
+        "react-dom": {
+          singleton: true,
+          requiredVersion: deps["react-dom"],
+        },
+      },
+    }),
   ],
   optimization: {
     moduleIds: 'named',

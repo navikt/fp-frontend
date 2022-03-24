@@ -18,5 +18,9 @@ window.getFpTilbakeUrl = () => {
   return getPathToFpTilbakeFrontend(window.location.href);
 };
 
+// @ts-ignore
+window.getFtFrontendSaksbehandlingUrl = () => (process.env.NODE_ENV === 'development'
+  ? 'http://localhost:9006' : '');
+
 // Use dynamic import here to allow webpack to interface with module federation code
 import('./bootstrap');

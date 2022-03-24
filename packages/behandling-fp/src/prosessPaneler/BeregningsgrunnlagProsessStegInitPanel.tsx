@@ -1,10 +1,9 @@
 import React, {
-  FunctionComponent,
+  FunctionComponent, Suspense,
 } from 'react';
 
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import BeregningsgrunnlagProsessIndex from '@fpsak-frontend/prosess-beregningsgrunnlag';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
@@ -12,9 +11,21 @@ import {
 } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@fpsak-frontend/utils';
+import { LoadingPanel } from '@fpsak-frontend/shared-components';
 
 import messages from '../../i18n/nb_NO.json';
 import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
+
+let BeregningsgrunnlagProsessIndex;
+if (process.env.NODE_ENV === 'development') {
+  BeregningsgrunnlagProsessIndex = React.lazy(() => import(
+    // @ts-ignore
+    'ft_frontend_saksbehandling/ProsessBeregningsgrunnlag' // eslint-disable-line import/no-unresolved
+  ));
+}
+if (process.env.NODE_ENV !== 'development') {
+  BeregningsgrunnlagProsessIndex = React.lazy(() => import('@fpsak-frontend/prosess-beregningsgrunnlag'));
+}
 
 const intl = createIntl(messages);
 
@@ -60,10 +71,12 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
     prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Beregning' })}
     skalPanelVisesIMeny={(_initData, initState) => initState === RestApiState.SUCCESS}
     renderPanel={(data) => (
-      <BeregningsgrunnlagProsessIndex
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        {...data}
-      />
+      <Suspense fallback={<LoadingPanel />}>
+        <BeregningsgrunnlagProsessIndex
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          {...data}
+        />
+      </Suspense>
     )}
   />
 );
