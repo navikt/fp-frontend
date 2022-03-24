@@ -187,7 +187,7 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                           inntektsmelding={inntektsmelding}
                         />
                       )}
-                      {!inntektsmelding && inntekter && (
+                      {!inntektsmelding && inntektsposter && (
                         <>
                           <VerticalSpacer thirtyTwoPx />
                           <InntektsposterPanel
