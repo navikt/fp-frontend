@@ -38,7 +38,7 @@ describe('<MeldingIndex>', () => {
     { kode: 'Mal1', navn: 'Mal 1', tilgjengelig: true },
     { kode: 'Mal2', navn: 'Mal 2', tilgjengelig: true },
     { kode: 'Mal3', navn: 'Mal 3', tilgjengelig: true },
-    { kode: dokumentMalType.INNHENT_DOK, navn: 'Innhent', tilgjengelig: true },
+    { kode: dokumentMalType.INNHENTE_OPPLYSNINGER, navn: 'Innhent', tilgjengelig: true },
   ];
 
   const assignMock = jest.fn();
@@ -195,7 +195,7 @@ describe('<MeldingIndex>', () => {
     expect(await screen.findByText('Send brev')).toBeInTheDocument();
 
     userEvent.selectOptions(utils.getByLabelText('Mottaker'), 'Søker');
-    userEvent.selectOptions(utils.getByLabelText('Mal'), dokumentMalType.INNHENT_DOK);
+    userEvent.selectOptions(utils.getByLabelText('Mal'), dokumentMalType.INNHENTE_OPPLYSNINGER);
 
     const begrunnelseInput = utils.getByLabelText('Liste over dokumenter (skriv ett dokument pr. linje)');
     userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
@@ -212,7 +212,7 @@ describe('<MeldingIndex>', () => {
       .find((a) => a.url === FpsakApiKeys.SUBMIT_MESSAGE.name).params).toStrictEqual({
       behandlingUuid: '1',
       arsakskode: undefined,
-      brevmalkode: dokumentMalType.INNHENT_DOK,
+      brevmalkode: dokumentMalType.INNHENTE_OPPLYSNINGER,
       fritekst: 'Dette er en begrunnelse',
       mottaker: 'Søker',
     }));

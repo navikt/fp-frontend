@@ -33,16 +33,15 @@ export type Template = {
   tilgjengelig: boolean;
 }
 
-const getFritekstMessage = (brevmalkode?: string): string => (brevmalkode === dokumentMalType.INNHENT_DOK || brevmalkode === dokumentMalType.INNOPP
+const getFritekstMessage = (brevmalkode?: string): string => (brevmalkode === dokumentMalType.INNHENTE_OPPLYSNINGER
   ? 'Messages.DocumentList' : 'Messages.Fritekst');
 
 // TODO (TOR) Bør erstattast av ein markør fra backend
-const showFritekst = (brevmalkode?: string, arsakskode?: string): boolean => (brevmalkode === dokumentMalType.INNHENT_DOK
-  || brevmalkode === dokumentMalType.INNOPP
-  || brevmalkode === dokumentMalType.KORRIGVARS
-  || brevmalkode === dokumentMalType.FRITKS
+const showFritekst = (brevmalkode?: string, arsakskode?: string): boolean => (brevmalkode === dokumentMalType.INNHENTE_OPPLYSNINGER
+  || brevmalkode === dokumentMalType.FRITEKST
+  || brevmalkode === dokumentMalType.KORRIGERT_VARSEL_OM_TILBAKEKREVING
   || brevmalkode === dokumentMalType.VARSEL_OM_TILBAKEKREVING
-  || (brevmalkode === dokumentMalType.REVURDERING_DOK && arsakskode === ugunstAarsakTyper.ANNET));
+  || (brevmalkode === dokumentMalType.VARSEL_OM_REVURDERING && arsakskode === ugunstAarsakTyper.ANNET));
 
 const getfiltrerteRevurderingVarslingArsaker = (revurderingVarslingArsaker: KodeverkMedNavn[], fagsakYtelseType: string): KodeverkMedNavn[] => {
   if (fagsakYtelseType === FagsakYtelseType.ENGANGSSTONAD) {
@@ -64,14 +63,14 @@ const buildInitalValues = (recipients: string[], templates: Template[], isKontro
   };
 
   if (isKontrollerRevurderingApOpen) {
-    return { ...initialValues, brevmalkode: dokumentMalType.REVURDERING_DOK };
+    return { ...initialValues, brevmalkode: dokumentMalType.VARSEL_OM_REVURDERING };
   }
   return { ...initialValues };
 };
 
 const transformValues = (values: FormValues) => {
   const newValues = values;
-  if (values.brevmalkode === dokumentMalType.REVURDERING_DOK && newValues.arsakskode !== ugunstAarsakTyper.ANNET) {
+  if (values.brevmalkode === dokumentMalType.VARSEL_OM_REVURDERING && newValues.arsakskode !== ugunstAarsakTyper.ANNET) {
     newValues.fritekst = ' ';
   }
   return newValues;
@@ -137,7 +136,7 @@ export const Messages: FunctionComponent<OwnProps> = ({
 
   const language = getLanguageFromSprakkode(sprakKode);
 
-  const erVarselOmRevurdering = brevmalkode === dokumentMalType.REVURDERING_DOK;
+  const erVarselOmRevurdering = brevmalkode === dokumentMalType.VARSEL_OM_REVURDERING;
 
   return (
     <Form

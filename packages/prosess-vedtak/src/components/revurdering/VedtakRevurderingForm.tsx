@@ -60,7 +60,7 @@ const hentForhåndsvisManueltBrevCallback = (
   if (!skalOverstyre || erFeltUtfylt) {
     const data = {
       fritekst: skalOverstyre ? brodtekst : begrunnelse,
-      dokumentMal: skalOverstyre ? dokumentMalType.FRITKS : undefined,
+      dokumentMal: skalOverstyre ? dokumentMalType.FRITEKST : undefined,
       tittel: skalOverstyre ? overskrift : undefined,
       gjelderVedtak: true,
       automatiskVedtaksbrev: !skalOverstyre ? true : undefined,
