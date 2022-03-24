@@ -31,7 +31,7 @@ const previewHenleggBehandlingDoc = (
   const data = {
     behandlingUuid,
     fagsakYtelseType: ytelseType,
-    dokumentMal: dokumentMalType.IOHENL,
+    dokumentMal: dokumentMalType.INFO_OM_HENLEGGELSE,
     fritekst,
     mottaker: 'Søker',
   };

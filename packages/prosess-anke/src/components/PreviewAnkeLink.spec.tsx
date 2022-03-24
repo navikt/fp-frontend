@@ -24,7 +24,7 @@ describe('<PreviewAnkeLink>', () => {
 
     expect(previewCallback.calledOnce).toBe(true);
     expect(previewCallback.getCalls()[0].args[0]).toEqual({
-      dokumentMal: dokumentMalType.ANKE_VEDTAK_OMGJORING,
+      dokumentMal: dokumentMalType.ANKE_OMGJORT,
       fritekst: 'Fritekst',
       mottaker: '',
     });

@@ -125,7 +125,7 @@ const VarselOmRevurderingForm: FunctionComponent<OwnProps> = ({
     e.preventDefault();
     previewCallback({
       mottaker: '',
-      dokumentMal: dokumentMalType.REVURDERING_DOK,
+      dokumentMal: dokumentMalType.VARSEL_OM_REVURDERING,
       fritekst: formVerdier.fritekst || ' ',
     });
   }, [formVerdier.fritekst]);

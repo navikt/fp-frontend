@@ -1,4 +1,5 @@
 import React from 'react';
+import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
@@ -29,7 +30,7 @@ describe('<VedtakInnsynProsessIndex>', () => {
 
     await waitFor(() => expect(forhåndsvise).toHaveBeenCalledTimes(1));
     expect(forhåndsvise).toHaveBeenNthCalledWith(1, {
-      dokumentMal: 'INNSYN',
+      dokumentMal: dokumentMalType.INNSYN_SVAR,
       fritekst: ' ',
       gjelderVedtak: true,
       mottaker: '',
@@ -64,7 +65,7 @@ describe('<VedtakInnsynProsessIndex>', () => {
 
     await waitFor(() => expect(forhåndsvise).toHaveBeenCalledTimes(1));
     expect(forhåndsvise).toHaveBeenNthCalledWith(1, {
-      dokumentMal: 'INNSYN',
+      dokumentMal: dokumentMalType.INNSYN_SVAR,
       fritekst: 'Dette er en fritekst',
       gjelderVedtak: true,
       mottaker: '',
@@ -97,7 +98,7 @@ describe('<VedtakInnsynProsessIndex>', () => {
 
     await waitFor(() => expect(forhåndsvise).toHaveBeenCalledTimes(1));
     expect(forhåndsvise).toHaveBeenNthCalledWith(1, {
-      dokumentMal: 'INNSYN',
+      dokumentMal: dokumentMalType.INNSYN_SVAR,
       fritekst: 'Dette er en vurdering',
       gjelderVedtak: true,
       mottaker: '',
