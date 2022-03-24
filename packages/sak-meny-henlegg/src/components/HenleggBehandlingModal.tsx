@@ -80,15 +80,14 @@ const henleggArsakerPerBehandlingType = {
   [BehandlingType.REVURDERING]: [behandlingResultatType.HENLAGT_SOKNAD_TRUKKET, behandlingResultatType.HENLAGT_FEILOPPRETTET,
     behandlingResultatType.HENLAGT_SOKNAD_MANGLER],
   [BehandlingType.FORSTEGANGSSOKNAD]: [behandlingResultatType.HENLAGT_SOKNAD_TRUKKET, behandlingResultatType.HENLAGT_FEILOPPRETTET,
-    behandlingResultatType.HENLAGT_SOKNAD_MANGLER, behandlingResultatType.MANGLER_BEREGNINGSREGLER],
+    behandlingResultatType.HENLAGT_SOKNAD_MANGLER],
 };
 
 export const getHenleggArsaker = (behandlingResultatTyper: KodeverkMedNavn[], behandlingType: string, ytelseType: string): KodeverkMedNavn[] => {
   const typerForBehandlingType = henleggArsakerPerBehandlingType[behandlingType];
   return typerForBehandlingType
-    .filter((type) => ytelseType !== fagsakYtelseType.ENGANGSSTONAD || (ytelseType === fagsakYtelseType.ENGANGSSTONAD
-      && type !== behandlingResultatType.HENLAGT_SOKNAD_MANGLER
-      && type !== behandlingResultatType.MANGLER_BEREGNINGSREGLER))
+    .filter((type) => ytelseType !== fagsakYtelseType.ENGANGSSTONAD
+      || (ytelseType === fagsakYtelseType.ENGANGSSTONAD && type !== behandlingResultatType.HENLAGT_SOKNAD_MANGLER))
     .flatMap((type) => {
       const typer = behandlingResultatTyper.find((brt) => brt.kode === type);
       return typer ? [typer] : [];

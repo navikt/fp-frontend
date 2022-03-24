@@ -63,10 +63,6 @@ const Template: Story<{
       kode: behandlingResultatType.HENLAGT_SOKNAD_MANGLER,
       kodeverk: 'RESULTAT_TYPE',
       navn: 'Henlagt soknad mangler',
-    }, {
-      kode: behandlingResultatType.MANGLER_BEREGNINGSREGLER,
-      kodeverk: 'RESULTAT_TYPE',
-      navn: 'Mangler beregningsregler',
     }]}
     gaaTilSokeside={action('button-click')}
     lukkModal={lukkModal}

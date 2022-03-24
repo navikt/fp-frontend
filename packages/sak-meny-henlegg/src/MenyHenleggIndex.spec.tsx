@@ -22,9 +22,7 @@ describe('<MenyHenleggIndex>', () => {
     expect(screen.getByText('Søknaden er trukket')).toBeInTheDocument();
     expect(screen.getByText('Behandlingen er feilaktig opprettet')).toBeInTheDocument();
     expect(screen.getByText('Søknad mangler')).toBeInTheDocument();
-    expect(screen.getByText('Mangler beregningsregler (1. jan 2019)')).toBeInTheDocument();
     expect(screen.queryByText('Henlagt feilopprettet')).not.toBeInTheDocument();
-    expect(screen.queryByText('Mangler beregningsregler')).not.toBeInTheDocument();
     expect(screen.queryByText('Klagen er trukket')).not.toBeInTheDocument();
     expect(screen.queryByText('Innsynskrav er trukket')).not.toBeInTheDocument();
 
@@ -63,7 +61,6 @@ describe('<MenyHenleggIndex>', () => {
     expect(screen.queryByText('Henlagt soknad trukket')).not.toBeInTheDocument();
     expect(screen.queryByText('Henlagt feilopprettet')).not.toBeInTheDocument();
     expect(screen.queryByText('Henlagt soknad mangler')).not.toBeInTheDocument();
-    expect(screen.queryByText('Mangler beregningsregler')).not.toBeInTheDocument();
     expect(screen.queryByText('Innsynskrav er trukket')).not.toBeInTheDocument();
     expect(screen.getByText('Klagen er trukket')).toBeInTheDocument();
     expect(screen.getByText('Behandlingen er feilaktig opprettet')).toBeInTheDocument();
@@ -76,7 +73,6 @@ describe('<MenyHenleggIndex>', () => {
     expect(screen.queryByText('Henlagt soknad trukket')).not.toBeInTheDocument();
     expect(screen.queryByText('Henlagt feilopprettet')).not.toBeInTheDocument();
     expect(screen.queryByText('Henlagt soknad mangler')).not.toBeInTheDocument();
-    expect(screen.queryByText('Mangler beregningsregler')).not.toBeInTheDocument();
     expect(screen.queryByText('Klagen er trukket')).not.toBeInTheDocument();
     expect(screen.getByText('Innsynskrav er trukket')).toBeInTheDocument();
     expect(screen.getByText('Behandlingen er feilaktig opprettet')).toBeInTheDocument();
@@ -89,7 +85,6 @@ describe('<MenyHenleggIndex>', () => {
     expect(screen.queryByText('Henlagt soknad trukket')).not.toBeInTheDocument();
     expect(screen.queryByText('Henlagt feilopprettet')).not.toBeInTheDocument();
     expect(screen.queryByText('Henlagt soknad mangler')).not.toBeInTheDocument();
-    expect(screen.queryByText('Mangler beregningsregler')).not.toBeInTheDocument();
     expect(screen.queryByText('Klagen er trukket')).not.toBeInTheDocument();
     expect(screen.queryByText('Innsynskrav er trukket')).not.toBeInTheDocument();
     expect(screen.getByText('Behandlingen er feilaktig opprettet')).toBeInTheDocument();
@@ -102,7 +97,6 @@ describe('<MenyHenleggIndex>', () => {
     expect(screen.queryByText('Henlagt soknad trukket')).not.toBeInTheDocument();
     expect(screen.queryByText('Henlagt feilopprettet')).not.toBeInTheDocument();
     expect(screen.queryByText('Henlagt soknad mangler')).not.toBeInTheDocument();
-    expect(screen.queryByText('Mangler beregningsregler')).not.toBeInTheDocument();
     expect(screen.queryByText('Klagen er trukket')).not.toBeInTheDocument();
     expect(screen.queryByText('Innsynskrav er trukket')).not.toBeInTheDocument();
     expect(screen.queryByText('Behandlingen er feilaktig opprettet')).not.toBeInTheDocument();
@@ -118,7 +112,6 @@ describe('<MenyHenleggIndex>', () => {
     expect(screen.getByText('Søknad mangler')).toBeInTheDocument();
     expect(screen.getByText('Behandlingen er feilaktig opprettet')).toBeInTheDocument();
     expect(screen.queryByText('Henlagt feilopprettet')).not.toBeInTheDocument();
-    expect(screen.queryByText('Mangler beregningsregler')).not.toBeInTheDocument();
     expect(screen.queryByText('Klagen er trukket')).not.toBeInTheDocument();
     expect(screen.queryByText('Innsynskrav er trukket')).not.toBeInTheDocument();
     expect(screen.queryByText('Feilaktig opprettet - med henleggelsesbrev')).not.toBeInTheDocument();

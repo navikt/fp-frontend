@@ -3725,11 +3725,6 @@
       "kodeverk": "BEHANDLING_RESULTAT_TYPE"
     },
     {
-      "kode": "MANGLER_BEREGNINGSREGLER",
-      "navn": "Mangler beregningsregler",
-      "kodeverk": "BEHANDLING_RESULTAT_TYPE"
-    },
-    {
       "kode": "HENLAGT_SØKNAD_MANGLER",
       "navn": "Henlagt søknad mangler",
       "kodeverk": "BEHANDLING_RESULTAT_TYPE"
