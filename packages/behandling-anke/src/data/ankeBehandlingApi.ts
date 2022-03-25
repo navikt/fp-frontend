@@ -1,7 +1,7 @@
 import { RestApiConfigBuilder, createRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
-  Aksjonspunkt, AnkeVurdering, Behandling, ForhåndsvisMeldingParams, Vilkar,
+  Aksjonspunkt, AnkeVurdering, Behandling, ForhåndsvisMeldingParams, Vilkar, Verge,
 } from '@fpsak-frontend/types';
 import { SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
@@ -10,6 +10,7 @@ export const AnkeBehandlingApiKeys = {
   AKSJONSPUNKTER: new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER'),
   VILKAR: new RestKey<Vilkar[], void>('VILKAR'),
   ANKE_VURDERING: new RestKey<AnkeVurdering, void>('ANKE_VURDERING'),
+  VERGE: new RestKey<Verge, void>('VERGE'),
   BEHANDLING_NY_BEHANDLENDE_ENHET: new RestKey<void,
     { behandlingUuid: string, enhetNavn: string, enhetId: string, begrunnelse: string, behandlingVersjon: string }>('BEHANDLING_NY_BEHANDLENDE_ENHET'),
   HENLEGG_BEHANDLING: new RestKey<void, { behandlingUuid: string, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>('HENLEGG_BEHANDLING'),
@@ -30,6 +31,7 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('aksjonspunkter', AnkeBehandlingApiKeys.AKSJONSPUNKTER)
   .withRel('vilkar', AnkeBehandlingApiKeys.VILKAR)
   .withRel('anke-vurdering', AnkeBehandlingApiKeys.ANKE_VURDERING)
+  .withRel('soeker-verge', AnkeBehandlingApiKeys.VERGE)
 
   // operasjoner
   .withRel('bytt-behandlende-enhet', AnkeBehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET)

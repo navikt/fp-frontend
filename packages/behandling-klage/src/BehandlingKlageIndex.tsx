@@ -13,6 +13,7 @@ import VurderingFamOgPensjonProsessStegInitPanel from './prosessPaneler/Vurderin
 import FormKravKlageInstansProsessStegInitPanel from './prosessPaneler/FormKravKlageInstansProsessStegInitPanel';
 import VurderingKlageInstansProsessStegInitPanel from './prosessPaneler/VurderingKlageInstansProsessStegInitPanel';
 import KlageresultatProsessStegInitPanel from './prosessPaneler/KlageresultatProsessStegInitPanel';
+import VergeFaktaInitPanel from './faktaPaneler/VergeFaktaInitPanel';
 
 interface OwnProps {
   alleBehandlinger: {
@@ -80,6 +81,9 @@ const BehandlingKlageIndex: FunctionComponent<OwnProps & StandardBehandlingProps
           valgtProsessSteg={valgtProsessSteg}
           valgtFaktaSteg={valgtFaktaSteg}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+          hentFaktaPaneler={(props) => (
+            <VergeFaktaInitPanel {...props} />
+          )}
           hentProsessPaneler={(props) => (
             <>
               <FormKravFamOgPensjonProsessStegInitPanel {...props} alleBehandlinger={alleBehandlinger} />
