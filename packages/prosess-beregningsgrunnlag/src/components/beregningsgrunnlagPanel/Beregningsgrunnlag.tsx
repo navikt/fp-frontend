@@ -15,7 +15,7 @@ import TilstotendeYtelser from '../tilstotendeYtelser/TilstotendeYtelser';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 
 import MilitaerPanel from '../militar/MilitaerPanel';
-import { AksjonspunktBehandlerTidsbegrensetImpl } from '../arbeidstaker/AksjonspunktBehandlerTB';
+import AksjonspunktBehandlerTidsbegrenset from '../arbeidstaker/AksjonspunktBehandlerTB';
 import AksjonspunktBehandlerAT from '../arbeidstaker/AksjonspunktBehandlerAT';
 
 import GrunnlagForAarsinntektPanelFL from '../frilanser/GrunnlagForAarsinntektPanelFL';
@@ -197,7 +197,7 @@ Beregningsgrunnlag.transformATFLTidsbegrensetValues = (values: ATFLTidsbegrenset
   allePerioder: BeregningsgrunnlagPeriodeProp[]): ATFLTidsbegrensetTransformedValues => ({
   kode: FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
   begrunnelse: values.ATFLVurdering,
-  fastsatteTidsbegrensedePerioder: AksjonspunktBehandlerTidsbegrensetImpl.transformValues(values, allePerioder),
+  fastsatteTidsbegrensedePerioder: AksjonspunktBehandlerTidsbegrenset.transformValues(values, allePerioder),
   frilansInntekt: values.inntektFrilanser !== undefined ? removeSpacesFromNumber(values.inntektFrilanser) : null,
 });
 

@@ -3,7 +3,7 @@ import {
   Element, Normaltekst, Undertekst,
 } from 'nav-frontend-typografi';
 import {
-  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+  FormattedMessage, IntlShape, useIntl,
 } from 'react-intl';
 import { FlexColumn, FlexRow } from '@navikt/fp-react-components';
 import { VerticalSpacer, AvsnittSkiller } from '@fpsak-frontend/shared-components';
@@ -89,11 +89,11 @@ type OwnProps = {
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
-export const NaeringsopplysningsPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+export const NaeringsopplysningsPanel: FunctionComponent<OwnProps> = ({
   alleAndelerIForstePeriode,
   arbeidsgiverOpplysningerPerId,
-  intl,
 }) => {
+  const intl = useIntl();
   const snAndel = alleAndelerIForstePeriode.find((andel) => andel.aktivitetStatus === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
   if (!snAndel?.næringer) {
     return null;
@@ -179,4 +179,4 @@ export const NaeringsopplysningsPanel: FunctionComponent<OwnProps & WrappedCompo
   );
 };
 
-export default injectIntl(NaeringsopplysningsPanel);
+export default NaeringsopplysningsPanel;

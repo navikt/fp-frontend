@@ -1,21 +1,19 @@
 import React, { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { InjectedFormProps, reduxForm } from 'redux-form';
+import { useForm } from 'react-hook-form';
 
-import { createSelector } from 'reselect';
+import { Form } from '@fpsak-frontend/form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AvsnittSkiller, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { Column, Row } from 'nav-frontend-grid';
-import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 
+import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import { Undertittel } from 'nav-frontend-typografi';
 import {
   Aksjonspunkt,
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
   Beregningsgrunnlag as BeregningsgrunnlagProp,
-  BeregningsgrunnlagAndel,
   BeregningsgrunnlagPeriodeProp,
   FaktaOmBeregning,
   SammenligningsgrunlagProp,
@@ -26,9 +24,9 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import BesteberegningResultatGrunnlagPanel from '../besteberegning/BesteberegningResultatGrunnlagPanel';
 import AvviksopplysningerPanel from '../fellesPaneler/AvvikopplysningerPanel';
 import SkjeringspunktOgStatusPanel from '../fellesPaneler/SkjeringspunktOgStatusPanel';
-import VurderOgFastsettSN from '../selvstendigNaeringsdrivende/VurderOgFastsettSN';
-import { GrunnlagForAarsinntektPanelATImpl } from '../arbeidstaker/GrunnlagForAarsinntektPanelAT';
-import { AksjonspunktBehandlerTidsbegrensetImpl } from '../arbeidstaker/AksjonspunktBehandlerTB';
+import AksjonspunktBehandlerSN from '../selvstendigNaeringsdrivende/AksjonspunktsbehandlerSN';
+import { GrunnlagForAarsinntektPanelAT } from '../arbeidstaker/GrunnlagForAarsinntektPanelAT';
+import AksjonspunktBehandlerTidsbegrenset from '../arbeidstaker/AksjonspunktBehandlerTB';
 import Beregningsgrunnlag from '../beregningsgrunnlagPanel/Beregningsgrunnlag';
 import AksjonspunktBehandler from '../fellesPaneler/AksjonspunktBehandler';
 import BeregningsresultatTable from '../beregningsresultatPanel/BeregningsresultatTable';
@@ -39,7 +37,7 @@ import { ATFLTidsbegrensetValues, ATFLValues } from '../../types/ATFLAksjonspunk
 import { VurderOgFastsettValues } from '../../types/NaringAksjonspunktTsType';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 import AksjonspunktTittel from '../fellesPaneler/AksjonspunktTittel';
-import { DekningsgradAksjonspunktPanelImpl } from '../fellesPaneler/DekningsgradAksjonspunktPanel';
+import { DekningsgradAksjonspunktPanel } from '../fellesPaneler/DekningsgradAksjonspunktPanel';
 import { DekningsgradValues } from '../../types/DekningsgradAksjonspunktTsType';
 
 // ------------------------------------------------------------------------------------------ //
@@ -64,28 +62,25 @@ const gjelderBehandlingenBesteberegning = (faktaOmBeregning: FaktaOmBeregning): 
 
 const erAutomatiskBesteberegnet = (ytelsesspesifiktGrunnlag: YtelseGrunnlag): boolean => !!ytelsesspesifiktGrunnlag?.besteberegninggrunnlag;
 
-export const buildInitialValues = createSelector(
-  [(ownProps: OwnProps) => ownProps.beregningsgrunnlag,
-    (ownProps: OwnProps) => ownProps.gjeldendeAksjonspunkter],
-  (beregningsgrunnlag: BeregningsgrunnlagProp, gjeldendeAksjonspunkter: Aksjonspunkt[]): BeregningsgrunnlagValues => {
-    if (!beregningsgrunnlag || !beregningsgrunnlag.beregningsgrunnlagPeriode) {
-      return undefined;
-    }
-    const allePerioder = beregningsgrunnlag.beregningsgrunnlagPeriode;
-    const alleAndelerIForstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode[0].beregningsgrunnlagPrStatusOgAndel;
-    const arbeidstakerAndeler = alleAndelerIForstePeriode.filter((andel) => andel.aktivitetStatus === aktivitetStatus.ARBEIDSTAKER);
-    const frilanserAndeler = alleAndelerIForstePeriode.filter((andel) => andel.aktivitetStatus === aktivitetStatus.FRILANSER);
-    const selvstendigNaeringAndeler = alleAndelerIForstePeriode.filter((andel) => andel.aktivitetStatus === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
-    return {
-      ...Beregningsgrunnlag.buildInitialValues(gjeldendeAksjonspunkter),
-      ...AksjonspunktBehandlerTidsbegrensetImpl.buildInitialValues(allePerioder),
-      ...AksjonspunktBehandlerFL.buildInitialValues((frilanserAndeler)),
-      ...VurderOgFastsettSN.buildInitialValues(selvstendigNaeringAndeler, gjeldendeAksjonspunkter),
-      ...GrunnlagForAarsinntektPanelATImpl.buildInitialValues(arbeidstakerAndeler),
-      ...DekningsgradAksjonspunktPanelImpl.buildInitialValues(beregningsgrunnlag, gjeldendeAksjonspunkter),
-    };
-  },
-);
+export const buildInitialValues = (beregningsgrunnlag: BeregningsgrunnlagProp,
+  gjeldendeAksjonspunkter: Aksjonspunkt[]): BeregningsgrunnlagValues => {
+  if (!beregningsgrunnlag || !beregningsgrunnlag.beregningsgrunnlagPeriode) {
+    return undefined;
+  }
+  const allePerioder = beregningsgrunnlag.beregningsgrunnlagPeriode;
+  const alleAndelerIForstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode[0].beregningsgrunnlagPrStatusOgAndel;
+  const arbeidstakerAndeler = alleAndelerIForstePeriode.filter((andel) => andel.aktivitetStatus === aktivitetStatus.ARBEIDSTAKER);
+  const frilanserAndeler = alleAndelerIForstePeriode.filter((andel) => andel.aktivitetStatus === aktivitetStatus.FRILANSER);
+  const selvstendigNaeringAndeler = alleAndelerIForstePeriode.filter((andel) => andel.aktivitetStatus === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
+  return {
+    ...Beregningsgrunnlag.buildInitialValues(gjeldendeAksjonspunkter),
+    ...AksjonspunktBehandlerTidsbegrenset.buildInitialValues(allePerioder),
+    ...AksjonspunktBehandlerFL.buildInitialValues((frilanserAndeler)),
+    ...AksjonspunktBehandlerSN.buildInitialValues(selvstendigNaeringAndeler, gjeldendeAksjonspunkter),
+    ...GrunnlagForAarsinntektPanelAT.buildInitialValues(arbeidstakerAndeler),
+    ...DekningsgradAksjonspunktPanel.buildInitialValues(beregningsgrunnlag, gjeldendeAksjonspunkter),
+  };
+};
 
 const harAksjonspunkt = (aksjonspunktKode: string, gjeldendeAksjonspunkter: Aksjonspunkt[]): boolean => gjeldendeAksjonspunkter !== undefined
   && gjeldendeAksjonspunkter !== null
@@ -93,19 +88,21 @@ const harAksjonspunkt = (aksjonspunktKode: string, gjeldendeAksjonspunkter: Aksj
 
 export const transformValues = (values: BeregningsgrunnlagValues,
   relevanteStatuser: RelevanteStatuserProp,
-  alleAndelerIForstePeriode: BeregningsgrunnlagAndel[],
   gjeldendeAksjonspunkter: Aksjonspunkt[],
   allePerioder: BeregningsgrunnlagPeriodeProp[]) => {
+  allePerioder.sort((p1, p2) => p1.beregningsgrunnlagPeriodeFom.localeCompare(p2.beregningsgrunnlagPeriodeFom));
+  const alleAndelerIFørstePeriode = allePerioder.length > 0 ? allePerioder[0].beregningsgrunnlagPrStatusOgAndel : [];
+
   const aksjonspunkter = [];
   if (harAksjonspunkt(VURDER_DEKNINGSGRAD, gjeldendeAksjonspunkter)) {
-    aksjonspunkter.push(DekningsgradAksjonspunktPanelImpl.transformValues(values as Required<DekningsgradValues>));
+    aksjonspunkter.push(DekningsgradAksjonspunktPanel.transformValues(values as Required<DekningsgradValues>));
   }
   if (harAksjonspunkt(FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS, gjeldendeAksjonspunkter)) {
-    return aksjonspunkter.concat(Beregningsgrunnlag.transformATFLValues(values as ATFLValues, relevanteStatuser, alleAndelerIForstePeriode));
+    return aksjonspunkter.concat(Beregningsgrunnlag.transformATFLValues(values as ATFLValues, relevanteStatuser, alleAndelerIFørstePeriode));
   }
   if (harAksjonspunkt(VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE, gjeldendeAksjonspunkter)
     || harAksjonspunkt(FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET, gjeldendeAksjonspunkter)) {
-    return aksjonspunkter.concat([VurderOgFastsettSN.transformValues(values as VurderOgFastsettValues, gjeldendeAksjonspunkter)]);
+    return aksjonspunkter.concat([AksjonspunktBehandlerSN.transformValues(values as VurderOgFastsettValues, gjeldendeAksjonspunkter)]);
   }
   if (harAksjonspunkt(FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD, gjeldendeAksjonspunkter)) {
     return aksjonspunkter.concat(Beregningsgrunnlag.transformATFLTidsbegrensetValues(values as ATFLTidsbegrensetValues, allePerioder));
@@ -123,15 +120,17 @@ const getStatusList = (beregningsgrunnlagPerioder: BeregningsgrunnlagPeriodeProp
   .map((statusAndel) => statusAndel.aktivitetStatus);
 
 type OwnProps = {
-    readOnly: boolean;
-    gjeldendeAksjonspunkter: Aksjonspunkt[];
-    relevanteStatuser: RelevanteStatuserProp;
-    submitCallback: (...args: any[]) => any;
-    readOnlySubmitButton: boolean;
-    beregningsgrunnlag: BeregningsgrunnlagProp;
-    alleKodeverk: AlleKodeverk;
-    vilkaarBG: Vilkar;
-    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  readOnly: boolean;
+  gjeldendeAksjonspunkter: Aksjonspunkt[];
+  relevanteStatuser: RelevanteStatuserProp;
+  submitCallback: (...args: any[]) => any;
+  readOnlySubmitButton: boolean;
+  beregningsgrunnlag: BeregningsgrunnlagProp;
+  alleKodeverk: AlleKodeverk;
+  vilkaarBG: Vilkar;
+  formData?: BeregningsgrunnlagValues;
+  setFormData: (data: BeregningsgrunnlagValues) => void,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
 // ------------------------------------------------------------------------------------------ //
@@ -145,7 +144,7 @@ type OwnProps = {
  * relatert til beregning.
  *
  */
-export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> = ({
+const BeregningForm: FunctionComponent<OwnProps> = ({
   readOnly,
   beregningsgrunnlag,
   gjeldendeAksjonspunkter,
@@ -153,13 +152,19 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
   readOnlySubmitButton,
   alleKodeverk,
   vilkaarBG,
+  formData,
+  setFormData,
+  submitCallback,
   arbeidsgiverOpplysningerPerId,
-  ...formProps
 }) => {
   const {
     dekningsgrad, skjaeringstidspunktBeregning, beregningsgrunnlagPeriode, faktaOmBeregning,
     ytelsesspesifiktGrunnlag,
   } = beregningsgrunnlag;
+  const formMethods = useForm<BeregningsgrunnlagValues>({
+    defaultValues: formData || buildInitialValues(beregningsgrunnlag, gjeldendeAksjonspunkter),
+  });
+
   const gjelderBesteberegning = gjelderBehandlingenBesteberegning(faktaOmBeregning);
   const gjelderAutomatiskBesteberegning = erAutomatiskBesteberegnet(ytelsesspesifiktGrunnlag);
 
@@ -167,15 +172,18 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
   const aktivitetStatusList = getStatusList(beregningsgrunnlagPeriode);
   const harAksjonspunkter = gjeldendeAksjonspunkter && gjeldendeAksjonspunkter.length > 0;
   return (
-    <form onSubmit={formProps.handleSubmit} className={beregningStyles.beregningForm}>
+    <Form
+      formMethods={formMethods}
+      onSubmit={(values) => submitCallback(transformValues(values, relevanteStatuser, gjeldendeAksjonspunkter, beregningsgrunnlag.beregningsgrunnlagPeriode))}
+      setDataOnUnmount={setFormData}
+    >
       { harAksjonspunkter
-        && (
-          <>
-            <VerticalSpacer eightPx />
-            <AksjonspunktTittel aksjonspunkter={gjeldendeAksjonspunkter} beregningsgrunnlag={beregningsgrunnlag} />
-          </>
-
-        )}
+      && (
+        <>
+          <VerticalSpacer eightPx />
+          <AksjonspunktTittel aksjonspunkter={gjeldendeAksjonspunkter} beregningsgrunnlag={beregningsgrunnlag} />
+        </>
+      )}
       <Row>
         <Column xs="12" md="6">
           <Undertittel className={beregningStyles.panelLeft}>
@@ -235,6 +243,8 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
                 aksjonspunkter={gjeldendeAksjonspunkter}
                 relevanteStatuser={relevanteStatuser}
                 arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+                isSubmitting={formMethods.formState.isSubmitting}
+                isDirty={formMethods.formState.isDirty}
               />
             </>
           )}
@@ -249,35 +259,10 @@ export const BeregningFormImpl: FunctionComponent<OwnProps & InjectedFormProps> 
               ytelseGrunnlag={beregningsgrunnlag.ytelsesspesifiktGrunnlag}
             />
           </>
-
         </Column>
       </Row>
-    </form>
+    </Form>
   );
 };
-
-const lagSubmitFn = createSelector([
-  (ownProps: OwnProps) => ownProps.gjeldendeAksjonspunkter,
-  (ownProps: OwnProps) => ownProps.relevanteStatuser,
-  (ownProps: OwnProps) => ownProps.submitCallback,
-  (ownProps: OwnProps) => ownProps.beregningsgrunnlag],
-(gjeldendeAksjonspunkter, relevanteStatuser, submitCallback, beregningsgrunnlag) => {
-  const allePerioder = beregningsgrunnlag ? beregningsgrunnlag.beregningsgrunnlagPeriode : [];
-  const alleAndelerIForstePeriode = allePerioder && allePerioder.length > 0
-    ? allePerioder[0].beregningsgrunnlagPrStatusOgAndel : [];
-
-  return (values) => submitCallback(transformValues(values, relevanteStatuser, alleAndelerIForstePeriode, gjeldendeAksjonspunkter,
-    allePerioder));
-});
-
-const mapStateToProps = (state, ownProps) => ({
-  onSubmit: lagSubmitFn(ownProps),
-  initialValues: buildInitialValues(ownProps),
-});
-
-const BeregningForm = connect(mapStateToProps)(reduxForm({
-  form: formName,
-  destroyOnUnmount: false,
-})(BeregningFormImpl));
 
 export default BeregningForm;

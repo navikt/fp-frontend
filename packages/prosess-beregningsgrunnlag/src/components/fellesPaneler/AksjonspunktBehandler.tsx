@@ -3,16 +3,16 @@ import Panel from 'nav-frontend-paneler';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element } from 'nav-frontend-typografi';
 import {
-  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+  FormattedMessage, IntlShape,
+  useIntl,
 } from 'react-intl';
 
 import {
-  dateFormat,
   hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
-import { TextAreaField } from '@fpsak-frontend/form';
+import { ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
+import { TextAreaField } from '@fpsak-frontend/form-hooks';
 
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -48,28 +48,6 @@ const finnATFLVurderingLabel = (gjeldendeAksjonspunkter: Aksjonspunkt[]): ReactE
     return <FormattedMessage id="Beregningsgrunnlag.Forms.VurderingAvFastsattBeregningsgrunnlag" />;
   }
   return <FormattedMessage id="Beregningsgrunnlag.Forms.Vurdering" />;
-};
-const finnGjeldeneAksjonsPunkt = (aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt => {
-  const eksklusiveAksjonspunkter = [aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
-    aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
-    aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
-    aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE] as string[];
-  return aksjonspunkter.find((ap) => eksklusiveAksjonspunkter.includes(ap.definisjon));
-};
-
-const lagEndretTekst = (aksjonspunkter: Aksjonspunkt[], readOnly: boolean): ReactElement => {
-  if (!aksjonspunkter || !readOnly) return null;
-  const aksjonspunkt = finnGjeldeneAksjonsPunkt(aksjonspunkter);
-  if (!aksjonspunkt) return null;
-  const { endretAv, endretTidspunkt } = aksjonspunkt;
-  if (!endretTidspunkt) return null;
-  const godkjentEndretAv = /[a-zA-Z]{1}[0-9]{6}/.test(endretAv) ? endretAv : '';
-  return (
-    <FormattedMessage
-      id="Beregningsgrunnlag.Forms.EndretTekst"
-      values={{ endretAv: godkjentEndretAv, endretDato: dateFormat(endretTidspunkt) }}
-    />
-  );
 };
 
 const harPerioderMedAvsluttedeArbeidsforhold = (allePerioder: BeregningsgrunnlagPeriodeProp[]): boolean => allePerioder
@@ -116,7 +94,6 @@ const settOppKomponenterForNæring = (readOnly: boolean,
         erNyArbLivet={erNyArbLivet}
         erVarigEndring={erVarigEndring}
         erNyoppstartet={erNyoppstartet}
-        endretTekst={lagEndretTekst(aksjonspunkter, readOnly)}
       />
     </>
   );
@@ -183,7 +160,6 @@ const settOppKomponenterForATFL = (aksjonspunkter: Aksjonspunkt[],
             readOnly={readOnly}
             textareaClass={styles.textAreaStyle}
             placeholder={intl.formatMessage({ id: 'Beregningsgrunnlag.Forms.VurderingAvFastsattBeregningsgrunnlag.Placeholder' })}
-            endrettekst={lagEndretTekst(aksjonspunkter, readOnly)}
           />
         </Column>
       </Row>
@@ -205,10 +181,11 @@ type OwnProps = {
     allePerioder?: BeregningsgrunnlagPeriodeProp[];
     relevanteStatuser: RelevanteStatuserProp;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+    isSubmitting: boolean;
+    isDirty: boolean;
 };
 
-export const AksjonspunktBehandlerImpl: FunctionComponent<OwnProps & WrappedComponentProps> & StaticFunctions = ({
-  intl,
+export const AksjonspunktBehandler: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   aksjonspunkter,
   formName,
@@ -217,17 +194,21 @@ export const AksjonspunktBehandlerImpl: FunctionComponent<OwnProps & WrappedComp
   alleKodeverk,
   relevanteStatuser,
   arbeidsgiverOpplysningerPerId,
+  isDirty,
+  isSubmitting,
 }) => {
+  const intl = useIntl();
   if (!aksjonspunkter || aksjonspunkter.length === 0) {
     return null;
   }
   const submittKnapp = (
     <Row>
       <Column xs="12">
-        <ProsessStegSubmitButton
-          formName={formName}
+        <ProsessStegSubmitButtonNew
           isReadOnly={readOnly}
           isSubmittable={!readOnlySubmitButton}
+          isDirty={isDirty}
+          isSubmitting={isSubmitting}
         />
       </Column>
     </Row>
@@ -281,10 +262,10 @@ export const AksjonspunktBehandlerImpl: FunctionComponent<OwnProps & WrappedComp
   );
 };
 
-AksjonspunktBehandlerImpl.defaultProps = {
+AksjonspunktBehandler.defaultProps = {
   allePerioder: undefined,
 };
 
-AksjonspunktBehandlerImpl.transformValues = (values: ArbeidstakerFrilansValues): string => values.ATFLVurdering;
+AksjonspunktBehandler.transformValues = (values: ArbeidstakerFrilansValues): string => values.ATFLVurdering;
 
-export default injectIntl(AksjonspunktBehandlerImpl);
+export default AksjonspunktBehandler;
