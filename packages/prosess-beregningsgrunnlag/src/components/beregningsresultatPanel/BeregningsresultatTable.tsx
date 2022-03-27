@@ -13,7 +13,7 @@ import {
   BeregningsgrunnlagAndel, BeregningsgrunnlagPeriodeProp, Vilkar, YtelseGrunnlag,
 } from '@fpsak-frontend/types';
 import { andelErIkkeTilkommetEllerLagtTilAvSBH } from '../arbeidstaker/GrunnlagForAarsinntektPanelAT';
-import BeregningsresutatPanel from './BeregningsResultatPanel';
+import BeregningsresutatPanel from './BeregningsresutatPanel';
 import BeregningsresultatPeriodeTabellType, {
   AvkortetRadType,
   BeregningsresultatAndelElementType,
