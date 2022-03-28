@@ -435,8 +435,8 @@ SelvstendigNæringsdrivendeMedAksjonspunkt.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
-export const TidsbegrensetArbeidsforholdMedAvvik = Template.bind({});
-TidsbegrensetArbeidsforholdMedAvvik.args = {
+export const MangeTidsbegrensetArbeidsforholdMedAvvik = Template.bind({});
+MangeTidsbegrensetArbeidsforholdMedAvvik.args = {
   aksjonspunkter: [lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD)],
   readOnly: false,
   beregningsgrunnlag: {
@@ -453,6 +453,22 @@ TidsbegrensetArbeidsforholdMedAvvik.args = {
     skjaeringstidspunktBeregning: STP,
     dekningsgrad: 100,
     aktivitetStatus: ['AT_FL'],
+  } as Beregningsgrunnlag,
+  vilkar: vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT),
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};
+
+export const TidsbegrensetArbeidsforholdMedAvvik = Template.bind({});
+TidsbegrensetArbeidsforholdMedAvvik.args = {
+  aksjonspunkter: [lagAPMedKode(aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD)],
+  readOnly: false,
+  beregningsgrunnlag: {
+    beregningsgrunnlagPeriode: [lagPeriode([lagTBAndel(1, '999999999', 100000)], [], STP, etterSTP(20)),
+      lagPeriode([lagTBAndel(1, '999999999', 100000)], [periodeAarsak.ARBEIDSFORHOLD_AVSLUTTET], etterSTP(21), etterSTP(35))],
+    sammenligningsgrunnlagPrStatus: [malSGGrunnlagAvvik()],
+    skjaeringstidspunktBeregning: STP,
+    dekningsgrad: 100,
+    aktivitetStatus: ['AT'],
   } as Beregningsgrunnlag,
   vilkar: vilkarMedUtfall(vilkarUtfallType.IKKE_VURDERT),
   submitCallback: action('button-click') as (data: any) => Promise<any>,
