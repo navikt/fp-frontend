@@ -58,7 +58,7 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
               <Element><FormattedMessage id="InntektsmeldingOpplysningerPanel.Stillingsprosent" /></Element>
             </FlexColumn>
             <FlexColumn>
-              <Normaltekst>{`${arbeidsforhold.stillingsprosent}%`}</Normaltekst>
+              <Normaltekst>{arbeidsforhold.stillingsprosent ? `${arbeidsforhold.stillingsprosent}%` : '-'}</Normaltekst>
             </FlexColumn>
           </FlexRow>
           {arbeidsforhold.permisjonOgMangel && (

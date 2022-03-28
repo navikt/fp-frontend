@@ -103,7 +103,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
 
   const {
-    arbeidsgiverNavn, arbeidsgiverIdent, årsak, avklaring,
+    arbeidsgiverNavn, arbeidsgiverIdent, årsak, avklaring, arbeidsgiverFødselsdato,
   } = radData;
 
   const arbeidsforholdForRad = useMemo(() => arbeidOgInntekt.arbeidsforhold.filter((a) => a.arbeidsgiverIdent === arbeidsgiverIdent),
@@ -223,7 +223,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
             </Element>
             <Undertekst>
               (
-              {arbeidsgiverIdent}
+              {arbeidsgiverFødselsdato ? <DateLabel dateString={arbeidsgiverFødselsdato} /> : arbeidsgiverIdent}
               )
             </Undertekst>
           </>

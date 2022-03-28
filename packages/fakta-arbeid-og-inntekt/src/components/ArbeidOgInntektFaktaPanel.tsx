@@ -93,12 +93,14 @@ const byggTabellStruktur = (
       if (tidligereAf) {
         return acc;
       }
-      const arbeidsgiverNavn = arbeidsgiverOpplysningerPerId[af.arbeidsgiverIdent].navn;
+      const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[af.arbeidsgiverIdent];
+      const arbeidsgiverNavn = arbeidsgiverOpplysninger.navn;
       const årsak = af.årsak ? af.årsak : inntektsmeldinger.find((i) => erMatch(af, i))?.årsak;
 
       return acc.concat({
         arbeidsgiverIdent: af.arbeidsgiverIdent,
         arbeidsgiverNavn,
+        arbeidsgiverFødselsdato: arbeidsgiverOpplysninger.erPrivatPerson ? arbeidsgiverOpplysninger.fødselsdato : undefined,
         årsak,
         avklaring: af.saksbehandlersVurdering ? lagAvklaring(af, arbeidsgiverNavn) : undefined,
       });
@@ -110,6 +112,8 @@ const byggTabellStruktur = (
       arbeidsgiverIdent: im.arbeidsgiverIdent,
       internArbeidsforholdId: im.internArbeidsforholdId,
       arbeidsgiverNavn: arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent].navn,
+      arbeidsgiverFødselsdato: arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent].erPrivatPerson
+        ? arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent].fødselsdato : undefined,
       årsak: im.årsak,
       avklaring: im.saksbehandlersVurdering ? {
         saksbehandlersVurdering: im.saksbehandlersVurdering,
