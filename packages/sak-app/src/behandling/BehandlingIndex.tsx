@@ -131,6 +131,7 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
     setRequestPendingMessage,
     oppdaterProsessStegOgFaktaPanelIUrl,
     valgtProsessSteg: query.punkt,
+    valgtFaktaSteg: query.fakta,
   };
   const behandlingTypeKode = behandling?.type;
 
@@ -204,7 +205,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
           <BehandlingTilbakekrevingIndex
             harApenRevurdering={fagsakBehandlingerInfo
               .some((b) => b.type === BehandlingType.REVURDERING && b.status !== BehandlingStatus.AVSLUTTET)}
-            valgtFaktaSteg={query.fakta}
             fagsakKjønn={fagsakPersoner.bruker.kjønn}
             {...defaultProps}
           />
@@ -218,7 +218,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingEngangsstonadIndex
-            valgtFaktaSteg={query.fakta}
             {...defaultProps}
           />
         </ErrorBoundary>
@@ -231,7 +230,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingForeldrepengerIndex
-            valgtFaktaSteg={query.fakta}
             {...defaultProps}
           />
         </ErrorBoundary>
@@ -244,7 +242,6 @@ const BehandlingIndex: FunctionComponent<OwnProps> = ({
       <Suspense fallback={<LoadingPanel />}>
         <ErrorBoundary errorMessageCallback={addErrorMessage}>
           <BehandlingSvangerskapspengerIndex
-            valgtFaktaSteg={query.fakta}
             {...defaultProps}
           />
         </ErrorBoundary>

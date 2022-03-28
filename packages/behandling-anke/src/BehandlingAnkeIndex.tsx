@@ -11,6 +11,7 @@ import { requestAnkeApi, AnkeBehandlingApiKeys } from './data/ankeBehandlingApi'
 import AnkeBehandlingProsessStegInitPanel from './prosessPaneler/AnkeBehandlingProsessStegInitPanel';
 import AnkeResultatProsessStegInitPanel from './prosessPaneler/AnkeResultatProsessStegInitPanel';
 import AnkeTrygderettsbehandlingProsessStegInitPanel from './prosessPaneler/AnkeTrygderettsbehandlingProsessStegInitPanel';
+import VergeFaktaInitPanel from './faktaPaneler/VergeFaktaInitPanel';
 
 interface OwnProps {
   alleBehandlinger: {
@@ -76,6 +77,9 @@ const BehandlingAnkeIndex: FunctionComponent<OwnProps & StandardBehandlingProps>
           valgtProsessSteg={valgtProsessSteg}
           valgtFaktaSteg={valgtFaktaSteg}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+          hentFaktaPaneler={(props) => (
+            <VergeFaktaInitPanel {...props} />
+          )}
           hentProsessPaneler={(props) => (
             <>
               <AnkeBehandlingProsessStegInitPanel {...props} fagsak={fagsak} alleBehandlinger={alleBehandlinger} />

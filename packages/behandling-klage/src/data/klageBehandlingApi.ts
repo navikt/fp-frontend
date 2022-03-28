@@ -2,13 +2,14 @@ import { RestApiConfigBuilder, createRequestApi, RestKey } from '@fpsak-frontend
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import { SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 import {
-  Aksjonspunkt, Behandling, ForhåndsvisMeldingParams, KlageVurdering, Vilkar,
+  Aksjonspunkt, Behandling, ForhåndsvisMeldingParams, KlageVurdering, Vilkar, Verge,
 } from '@fpsak-frontend/types';
 
 export const KlageBehandlingApiKeys = {
   BEHANDLING_KLAGE: new RestKey<Behandling, { behandlingUuid: string }>('BEHANDLING_KLAGE'),
   AKSJONSPUNKTER: new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER'),
   VILKAR: new RestKey<Vilkar[], void>('VILKAR'),
+  VERGE: new RestKey<Verge, void>('VERGE'),
   KLAGE_VURDERING: new RestKey<KlageVurdering[], void>('KLAGE_VURDERING'),
   SAVE_KLAGE_VURDERING: new RestKey<any, any>('SAVE_KLAGE_VURDERING'),
   BEHANDLING_NY_BEHANDLENDE_ENHET: new RestKey<void,
@@ -19,6 +20,8 @@ export const KlageBehandlingApiKeys = {
   UPDATE_ON_HOLD: new RestKey<void, SettPaVentParams>('UPDATE_ON_HOLD'),
   SAVE_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_AKSJONSPUNKT'),
   PREVIEW_MESSAGE: new RestKey<any, ForhåndsvisMeldingParams>('PREVIEW_MESSAGE'),
+  VERGE_OPPRETT: new RestKey<Behandling, any>('VERGE_OPPRETT'),
+  VERGE_FJERN: new RestKey<Behandling, any>('VERGE_FJERN'),
 };
 
 const endpoints = new RestApiConfigBuilder()
@@ -28,6 +31,7 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('aksjonspunkter', KlageBehandlingApiKeys.AKSJONSPUNKTER)
   .withRel('vilkar', KlageBehandlingApiKeys.VILKAR)
   .withRel('klage-vurdering', KlageBehandlingApiKeys.KLAGE_VURDERING)
+  .withRel('soeker-verge', KlageBehandlingApiKeys.VERGE)
 
   // operasjoner
   .withRel('bytt-behandlende-enhet', KlageBehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET)
@@ -37,6 +41,8 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('endre-pa-vent', KlageBehandlingApiKeys.UPDATE_ON_HOLD)
   .withRel('lagre-aksjonspunkter', KlageBehandlingApiKeys.SAVE_AKSJONSPUNKT)
   .withRel('mellomlagre-klage', KlageBehandlingApiKeys.SAVE_KLAGE_VURDERING)
+  .withRel('opprett-verge', KlageBehandlingApiKeys.VERGE_OPPRETT)
+  .withRel('fjern-verge', KlageBehandlingApiKeys.VERGE_FJERN)
 
   /* FPFORMIDLING */
   .withPost('/fpformidling/api/brev/forhaandsvis', KlageBehandlingApiKeys.PREVIEW_MESSAGE, { isResponseBlob: true })

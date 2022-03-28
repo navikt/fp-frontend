@@ -1,7 +1,7 @@
 import { RestApiConfigBuilder, createRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
-  Aksjonspunkt, AnkeVurdering, Behandling, ForhåndsvisMeldingParams, Vilkar,
+  Aksjonspunkt, AnkeVurdering, Behandling, ForhåndsvisMeldingParams, Vilkar, Verge,
 } from '@fpsak-frontend/types';
 import { SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
@@ -10,6 +10,7 @@ export const AnkeBehandlingApiKeys = {
   AKSJONSPUNKTER: new RestKey<Aksjonspunkt[], void>('AKSJONSPUNKTER'),
   VILKAR: new RestKey<Vilkar[], void>('VILKAR'),
   ANKE_VURDERING: new RestKey<AnkeVurdering, void>('ANKE_VURDERING'),
+  VERGE: new RestKey<Verge, void>('VERGE'),
   BEHANDLING_NY_BEHANDLENDE_ENHET: new RestKey<void,
     { behandlingUuid: string, enhetNavn: string, enhetId: string, begrunnelse: string, behandlingVersjon: string }>('BEHANDLING_NY_BEHANDLENDE_ENHET'),
   HENLEGG_BEHANDLING: new RestKey<void, { behandlingUuid: string, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>('HENLEGG_BEHANDLING'),
@@ -19,6 +20,8 @@ export const AnkeBehandlingApiKeys = {
   SAVE_AKSJONSPUNKT: new RestKey<Behandling, any>('SAVE_AKSJONSPUNKT'),
   PREVIEW_MESSAGE: new RestKey<any, ForhåndsvisMeldingParams>('PREVIEW_MESSAGE'),
   SAVE_ANKE_VURDERING: new RestKey<AnkeVurdering, void>('SAVE_ANKE_VURDERING'),
+  VERGE_OPPRETT: new RestKey<Behandling, any>('VERGE_OPPRETT'),
+  VERGE_FJERN: new RestKey<Behandling, any>('VERGE_FJERN'),
 };
 
 const endpoints = new RestApiConfigBuilder()
@@ -28,6 +31,7 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('aksjonspunkter', AnkeBehandlingApiKeys.AKSJONSPUNKTER)
   .withRel('vilkar', AnkeBehandlingApiKeys.VILKAR)
   .withRel('anke-vurdering', AnkeBehandlingApiKeys.ANKE_VURDERING)
+  .withRel('soeker-verge', AnkeBehandlingApiKeys.VERGE)
 
   // operasjoner
   .withRel('bytt-behandlende-enhet', AnkeBehandlingApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET)
@@ -37,6 +41,8 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('endre-pa-vent', AnkeBehandlingApiKeys.UPDATE_ON_HOLD)
   .withRel('lagre-aksjonspunkter', AnkeBehandlingApiKeys.SAVE_AKSJONSPUNKT)
   .withRel('mellomlagre-anke', AnkeBehandlingApiKeys.SAVE_ANKE_VURDERING)
+  .withRel('opprett-verge', AnkeBehandlingApiKeys.VERGE_OPPRETT)
+  .withRel('fjern-verge', AnkeBehandlingApiKeys.VERGE_FJERN)
 
   /* FPFORMIDLING */
   .withPost('/fpformidling/api/brev/forhaandsvis', AnkeBehandlingApiKeys.PREVIEW_MESSAGE, { isResponseBlob: true })
