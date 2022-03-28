@@ -21,7 +21,7 @@ const getSubmitCallback = (
   setShowMessageModal: (showModal: boolean) => void,
   behandlingTypeKode: string,
   behandlingUuid: string,
-  submitMessage: (params?: { behandlingUuid?: string, mottaker?: string; brevmalkode: string; fritekst: string; arsakskode?: string; },
+  submitMessage: (params?: { behandlingUuid?: string, brevmalkode: string; fritekst: string; arsakskode?: string; },
     keepData?: boolean) => Promise<void>,
   resetMessage: () => void,
   setShowSettPaVentModal: (erInnhentetEllerForlenget: boolean) => void,
@@ -41,7 +41,6 @@ const getSubmitCallback = (
     brevmalkode: values.brevmalkode,
   } : {
     behandlingUuid,
-    mottaker: values.mottaker,
     brevmalkode: values.brevmalkode,
     fritekst: values.fritekst,
     arsakskode: values.arsakskode,
@@ -61,7 +60,6 @@ const getPreviewCallback = (
   fagsakYtelseType: string,
   fetchPreview: ForhandsvisFunksjon,
 ) => (
-  mottaker?: string,
   dokumentMal?: string,
   fritekst?: string,
   aarsakskode?: string,
@@ -76,7 +74,6 @@ const getPreviewCallback = (
     fagsakYtelseType,
     fritekst: fritekst || ' ',
     arsakskode: aarsakskode || null,
-    mottaker,
     dokumentMal,
   };
   fetchPreview(false, data);
@@ -90,7 +87,6 @@ interface OwnProps {
 }
 
 const EMPTY_ARRAY = [] as KodeverkMedNavn[];
-const RECIPIENTS = ['Søker'];
 
 /**
  * MeldingIndex
@@ -172,7 +168,6 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
 
       <MeldingerSakIndex
         submitCallback={submitCallback}
-        recipients={RECIPIENTS}
         sprakKode={valgtBehandling.sprakkode}
         previewCallback={previewCallback}
         revurderingVarslingArsak={revurderingVarslingArsak}

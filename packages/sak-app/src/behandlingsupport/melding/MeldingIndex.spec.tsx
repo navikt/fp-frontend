@@ -71,9 +71,7 @@ describe('<MeldingIndex>', () => {
         </MemoryRouter>
       </RestApiMock>,
     );
-    expect(await screen.findByText('Mottaker')).toBeInTheDocument();
-    expect(screen.getByText('Søker')).toBeInTheDocument();
-    expect(screen.getByText('Mal 1')).toBeInTheDocument();
+    expect(await screen.findByText('Mal 1')).toBeInTheDocument();
     expect(screen.getByText('Mal 2')).toBeInTheDocument();
     expect(screen.getByText('Mal 3')).toBeInTheDocument();
   });
@@ -104,7 +102,6 @@ describe('<MeldingIndex>', () => {
 
     expect(await screen.findByText('Forhåndsvis')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Mottaker'), 'Søker');
     userEvent.selectOptions(utils.getByLabelText('Mal'), 'Mal1');
 
     userEvent.click(screen.getByText('Forhåndsvis'));
@@ -116,7 +113,6 @@ describe('<MeldingIndex>', () => {
       fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
       fritekst: ' ',
       arsakskode: null,
-      mottaker: 'Søker',
       dokumentMal: 'Mal1',
     })));
   });
@@ -147,7 +143,6 @@ describe('<MeldingIndex>', () => {
 
     expect(await screen.findByText('Send brev')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Mottaker'), 'Søker');
     userEvent.selectOptions(utils.getByLabelText('Mal'), 'Mal1');
 
     userEvent.click(screen.getByText('Send brev'));
@@ -162,7 +157,6 @@ describe('<MeldingIndex>', () => {
       .find((a) => a.url === FpsakApiKeys.SUBMIT_MESSAGE.name).params).toStrictEqual({
       behandlingUuid: '1',
       arsakskode: undefined,
-      mottaker: 'Søker',
       fritekst: '',
       brevmalkode: 'Mal1',
     }));
@@ -194,7 +188,6 @@ describe('<MeldingIndex>', () => {
 
     expect(await screen.findByText('Send brev')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Mottaker'), 'Søker');
     userEvent.selectOptions(utils.getByLabelText('Mal'), dokumentMalType.INNHENTE_OPPLYSNINGER);
 
     const begrunnelseInput = utils.getByLabelText('Liste over dokumenter (skriv ett dokument pr. linje)');
@@ -214,7 +207,6 @@ describe('<MeldingIndex>', () => {
       arsakskode: undefined,
       brevmalkode: dokumentMalType.INNHENTE_OPPLYSNINGER,
       fritekst: 'Dette er en begrunnelse',
-      mottaker: 'Søker',
     }));
   });
 });
