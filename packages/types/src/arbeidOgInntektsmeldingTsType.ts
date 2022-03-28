@@ -23,7 +23,6 @@ export type Inntektsmelding = Readonly<{
   journalpostId: string;
   dokumentId: string;
   motattDato: string;
-  innsendingstidspunkt: string;
   årsak?: AksjonspunktÅrsak;
   saksbehandlersVurdering?: string;
   begrunnelse?: string;

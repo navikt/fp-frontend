@@ -12,7 +12,7 @@ import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
 import { required, TIDENES_ENDE } from '@fpsak-frontend/utils';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
 import {
-  VerticalSpacer, PeriodLabel, DateTimeLabel,
+  VerticalSpacer, PeriodLabel, DateLabel,
 } from '@fpsak-frontend/shared-components';
 import {
   ArbeidOgInntektsmelding, AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding, AlleKodeverk,
@@ -136,7 +136,7 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                       </Element>
                       <Normaltekst>
                         {inntektsmelding?.motattDato && (
-                          <DateTimeLabel dateTimeString={inntektsmelding.motattDato} useNewFormat />
+                          <DateLabel dateString={inntektsmelding.motattDato} />
                         )}
                         {!inntektsmelding?.motattDato && <FormattedMessage id="ArbeidsforholdFieldArray.IkkeMottatt" />}
                       </Normaltekst>

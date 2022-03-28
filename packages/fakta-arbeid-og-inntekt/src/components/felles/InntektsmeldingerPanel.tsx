@@ -16,7 +16,7 @@ import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import { TIDENES_ENDE } from '@fpsak-frontend/utils';
 import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@fpsak-frontend/types';
 import {
-  VerticalSpacer, FloatRight, PeriodLabel, AvsnittSkiller, DateTimeLabel,
+  VerticalSpacer, FloatRight, PeriodLabel, AvsnittSkiller, DateLabel,
 } from '@fpsak-frontend/shared-components';
 
 import { Column, Row } from 'nav-frontend-grid';
@@ -175,7 +175,7 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                       <FloatRight>
                         <Element><FormattedMessage id="ArbeidsforholdInformasjonPanel.ImMottatt" /></Element>
                         <FloatRight>
-                          <Normaltekst><DateTimeLabel dateTimeString={inntektsmelding.motattDato} useNewFormat /></Normaltekst>
+                          <Normaltekst><DateLabel dateString={inntektsmelding.motattDato} /></Normaltekst>
                         </FloatRight>
                       </FloatRight>
                     </Column>

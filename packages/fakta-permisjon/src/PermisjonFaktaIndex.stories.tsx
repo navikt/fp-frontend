@@ -183,7 +183,6 @@ FlereArbeidsforhold.args = {
     inntektsmeldinger: [{
       arbeidsgiverIdent: '910909088',
       eksternArbeidsforholdId: 'ARB001-001',
-      innsendingstidspunkt: '2021-12-06T10:52:13.377',
       inntektPrMnd: 30000,
       internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
       kontaktpersonNavn: 'Corpolarsen',
@@ -299,7 +298,6 @@ FlereArbeidsforholdFraSammeArbeidsgiver.args = {
     inntektsmeldinger: [{
       arbeidsgiverIdent: '910909088',
       eksternArbeidsforholdId: 'ARB001-001-asdfasdfasdf-asdfadsfertbrtynet65y454hrthfdsgfbdsfgb',
-      innsendingstidspunkt: '2021-12-06T10:52:13.377',
       inntektPrMnd: 30000,
       internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
       kontaktpersonNavn: 'Corpolarsen',
@@ -311,7 +309,6 @@ FlereArbeidsforholdFraSammeArbeidsgiver.args = {
     }, {
       arbeidsgiverIdent: '910909088',
       eksternArbeidsforholdId: 'ARB001-002',
-      innsendingstidspunkt: '2021-12-06T10:52:13.377',
       inntektPrMnd: 10000,
       internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d',
       kontaktpersonNavn: 'Corpolarsen',
