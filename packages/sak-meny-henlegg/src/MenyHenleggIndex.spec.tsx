@@ -29,7 +29,7 @@ describe('<MenyHenleggIndex>', () => {
     userEvent.selectOptions(utils.getByLabelText('Velg årsak'), 'HENLAGT_SØKNAD_TRUKKET');
 
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
-    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    userEvent.paste(begrunnelseInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getAllByText('Henlegg behandling')[1]);
 

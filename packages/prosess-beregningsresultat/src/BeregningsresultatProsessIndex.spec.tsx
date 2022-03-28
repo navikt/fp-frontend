@@ -35,7 +35,7 @@ describe('<BeregningsresultatProsessIndex>', () => {
 
     expect(screen.getByText('Bekreft overstyring')).toBeDisabled();
 
-    userEvent.type(utils.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
+    userEvent.paste(utils.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
 
     expect(await screen.findByText('Bekreft overstyring')).toBeEnabled();
 
@@ -45,7 +45,7 @@ describe('<BeregningsresultatProsessIndex>', () => {
 
     userEvent.click(screen.getByAltText('Overstyr'));
 
-    userEvent.type(utils.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
+    userEvent.paste(utils.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Bekreft overstyring'));
 

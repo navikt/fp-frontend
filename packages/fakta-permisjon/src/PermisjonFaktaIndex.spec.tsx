@@ -29,7 +29,7 @@ describe('<PermisjonFaktaIndex>', () => {
 
     userEvent.click(screen.getByText('Fjern permisjonen og ta med arbeidsforholdet. Vurder om inntektsmelding må innhentes'));
 
-    userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    userEvent.paste(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -61,7 +61,7 @@ describe('<PermisjonFaktaIndex>', () => {
     userEvent.click(screen.getAllByText('Fjern permisjonen og ta med arbeidsforholdet. Vurder om inntektsmelding må innhentes')[0]);
     userEvent.click(screen.getAllByText('Ikke ta med arbeidsforholdet')[1]);
 
-    userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    userEvent.paste(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 

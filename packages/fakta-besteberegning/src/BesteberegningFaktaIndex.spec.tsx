@@ -43,7 +43,7 @@ describe('<BesteberegningFaktaIndex>', () => {
     expect(screen.getByText('Saken er riktig beregnet, fortsett behandlingen')).toBeEnabled();
     expect(screen.getByText('Saken er ikke riktig beregnet, sett saken på vent')).toBeEnabled();
     userEvent.click(screen.getByLabelText('Saken er riktig beregnet, fortsett behandlingen'));
-    userEvent.type(utils.getByLabelText('Vurdering'), 'Min begrunnelse for vurdering av besteberegning');
+    userEvent.paste(utils.getByLabelText('Vurdering'), 'Min begrunnelse for vurdering av besteberegning');
 
     expect(screen.getByText('Bekreft og fortsett')).toBeEnabled();
     userEvent.click(screen.getByText('Bekreft og fortsett'));

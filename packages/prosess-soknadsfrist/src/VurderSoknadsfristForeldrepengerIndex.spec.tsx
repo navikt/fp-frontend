@@ -22,7 +22,7 @@ describe('<VurderSoknadsfristForeldrepengerIndex>', () => {
     expect(screen.getByText('01.01.2019 - 10.01.2019')).toBeInTheDocument();
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.type(vurderingInput, 'Dette er en vurdering');
+    userEvent.paste(vurderingInput, 'Dette er en vurdering');
 
     userEvent.click(screen.getByText('Ingen gyldig grunn for sen fremsetting av søknaden'));
 
@@ -50,7 +50,7 @@ describe('<VurderSoknadsfristForeldrepengerIndex>', () => {
     expect(screen.getByText('01.01.2019 - 10.01.2019')).toBeInTheDocument();
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.type(vurderingInput, 'Dette er en vurdering');
+    userEvent.paste(vurderingInput, 'Dette er en vurdering');
 
     userEvent.click(screen.getByText('Gyldig grunn for sen fremsetting av søknaden'));
 

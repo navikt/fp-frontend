@@ -184,7 +184,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
     expect(await screen.findByText('Simulering')).toBeInTheDocument();
 
     const begrunnelseInput = utils.getByLabelText('Begrunn hvordan feilutbetalingen skal behandles videre');
-    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    userEvent.paste(begrunnelseInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Opprett tilbakekreving, send varsel'));
     userEvent.click(screen.getByText('Forhåndsvis varselbrev'));

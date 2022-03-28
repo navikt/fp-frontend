@@ -30,7 +30,7 @@ describe('<OpptjeningVilkarProsessIndex>', () => {
     userEvent.click(screen.getByText('Søker har oppfylt krav om 6 mnd opptjening, vilkåret er oppfylt.'));
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.type(vurderingInput, 'Dette er en vurdering');
+    userEvent.paste(vurderingInput, 'Dette er en vurdering');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 

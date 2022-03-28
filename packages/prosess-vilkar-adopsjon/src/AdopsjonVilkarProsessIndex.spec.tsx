@@ -21,7 +21,7 @@ describe('<AdopsjonVilkarProsessIndex>', () => {
     userEvent.click(screen.getByText('Er utbetalt for et annet barn, vilkåret er oppfylt'));
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.type(vurderingInput, 'Dette er en vurdering');
+    userEvent.paste(vurderingInput, 'Dette er en vurdering');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -43,7 +43,7 @@ describe('<AdopsjonVilkarProsessIndex>', () => {
     userEvent.click(screen.getByText(/ikke/));
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.type(vurderingInput, 'Dette er en vurdering');
+    userEvent.paste(vurderingInput, 'Dette er en vurdering');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 

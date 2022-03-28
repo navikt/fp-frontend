@@ -22,7 +22,7 @@ describe('<AvregningProsessIndex>', () => {
     expect(screen.getByText('−26 486')).toBeInTheDocument();
 
     const begrunnelseInput = utils.getByLabelText('Begrunn hvordan feilutbetalingen skal behandles videre');
-    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    userEvent.paste(begrunnelseInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Avvent samordning, ingen tilbakekreving'));
 
@@ -45,14 +45,14 @@ describe('<AvregningProsessIndex>', () => {
     expect(await screen.findByText('Simulering')).toBeInTheDocument();
 
     const begrunnelseInput = utils.getByLabelText('Begrunn hvordan feilutbetalingen skal behandles videre');
-    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    userEvent.paste(begrunnelseInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Opprett tilbakekreving, send varsel'));
 
     expect(await screen.findByText('Send varsel om tilbakekreving')).toBeInTheDocument();
 
     const fritekstVarselInput = utils.getByLabelText('Fritekst i varselet');
-    userEvent.type(fritekstVarselInput, 'Dette er en fritekst');
+    userEvent.paste(fritekstVarselInput, 'Dette er en fritekst');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 

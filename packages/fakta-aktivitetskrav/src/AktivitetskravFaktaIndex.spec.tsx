@@ -21,7 +21,7 @@ describe('<AktivitetskravFaktaIndex>', () => {
 
     userEvent.click(screen.getByText('Aktiviteten er ikke dokumentert'));
 
-    userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    userEvent.paste(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Oppdater'));
 
@@ -31,7 +31,7 @@ describe('<AktivitetskravFaktaIndex>', () => {
 
     userEvent.click(screen.getByText('Mor er ikke i aktivitet'));
 
-    userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse på andre periode');
+    userEvent.paste(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse på andre periode');
 
     userEvent.click(screen.getByText('Oppdater'));
 

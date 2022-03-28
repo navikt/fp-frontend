@@ -27,7 +27,7 @@ describe('<FodselFaktaIndex>', () => {
 
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    userEvent.paste(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
@@ -121,7 +121,7 @@ describe('<FodselFaktaIndex>', () => {
 
     userEvent.click(screen.getByText('Dokumentasjon foreligger ikke, bruk opplysningene i folkeregisteret'));
 
-    userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    userEvent.paste(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
@@ -150,7 +150,7 @@ describe('<FodselFaktaIndex>', () => {
 
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    userEvent.paste(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
@@ -174,7 +174,7 @@ describe('<FodselFaktaIndex>', () => {
 
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    userEvent.paste(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText(/ikke/));
 

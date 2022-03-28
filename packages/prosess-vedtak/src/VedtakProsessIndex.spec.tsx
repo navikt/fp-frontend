@@ -68,10 +68,10 @@ describe('<VedtakProsessIndex>', () => {
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
 
     const overskriftInput = utils.getByLabelText('Overskrift');
-    userEvent.type(overskriftInput, 'Dette er en overskrift');
+    userEvent.paste(overskriftInput, 'Dette er en overskrift');
 
     const innholdInput = utils.getByLabelText('Innhold i brev til søker');
-    userEvent.type(innholdInput, 'Dette er innhold');
+    userEvent.paste(innholdInput, 'Dette er innhold');
 
     await waitFor(() => expect(screen.queryByText('Feltet må fylles ut')).not.toBeInTheDocument());
 
@@ -114,10 +114,10 @@ describe('<VedtakProsessIndex>', () => {
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
 
     const overskriftInput = utils.getByLabelText('Overskrift');
-    userEvent.type(overskriftInput, 'Dette er en overskrift');
+    userEvent.paste(overskriftInput, 'Dette er en overskrift');
 
     const innholdInput = utils.getByLabelText('Innhold i brev til søker');
-    userEvent.type(innholdInput, 'Dette er innhold');
+    userEvent.paste(innholdInput, 'Dette er innhold');
 
     await waitFor(() => expect(screen.queryByText('Feltet må fylles ut')).not.toBeInTheDocument());
 
@@ -175,13 +175,13 @@ describe('<VedtakProsessIndex>', () => {
     expect(screen.getByText('Årsak til avslag')).toBeInTheDocument();
     expect(screen.getByText('Søker har ikke noen gyldig uttaksperiode')).toBeInTheDocument();
 
-    userEvent.type(utils.getByLabelText('Fritekst i brev til søker'), 'D');
+    userEvent.paste(utils.getByLabelText('Fritekst i brev til søker'), 'D');
 
     userEvent.click(screen.getByText('Fatt vedtak'));
 
     expect(await screen.findByText('Du må skrive minst 3 tegn')).toBeInTheDocument();
 
-    userEvent.type(utils.getByLabelText('Fritekst i brev til søker'), 'ette er en tekst');
+    userEvent.paste(utils.getByLabelText('Fritekst i brev til søker'), 'ette er en tekst');
 
     userEvent.click(screen.getByText('Fatt vedtak'));
 
@@ -211,7 +211,7 @@ describe('<VedtakProsessIndex>', () => {
     expect(screen.getByText('Beregningsgrunnlaget er endret til ugunst for søker. Skal det sendes varsel?')).toBeInTheDocument();
 
     const fritekstInput = utils.getByLabelText('Fritekst i brev til søker som handler om fastsettelse av beregningsgrunnlaget');
-    userEvent.type(fritekstInput, 'Dette er en tekst');
+    userEvent.paste(fritekstInput, 'Dette er en tekst');
 
     userEvent.click(screen.getByText('Til godkjenning'));
 

@@ -32,7 +32,7 @@ describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
     userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), 'AVSLAG_TEST_1');
 
     const vurderingInput = utils.getByLabelText('Begrunnelse');
-    userEvent.type(vurderingInput, 'Dette er en begrunnelse');
+    userEvent.paste(vurderingInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Bekreft overstyring'));
 
@@ -81,11 +81,11 @@ describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
     userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), 'AVSLAG_TEST_1');
 
     const opphørDatoInput = utils.getByLabelText('Dato for opphør av medlemskapet');
-    userEvent.type(opphørDatoInput, '20.12.2021');
+    userEvent.paste(opphørDatoInput, '20.12.2021');
     fireEvent.blur(opphørDatoInput);
 
     const vurderingInput = utils.getByLabelText('Begrunnelse');
-    userEvent.type(vurderingInput, 'Dette er en begrunnelse');
+    userEvent.paste(vurderingInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Bekreft overstyring'));
 
