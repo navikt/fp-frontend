@@ -20,7 +20,7 @@ describe('<OmsorgVilkarProsessIndex>', () => {
     userEvent.click(screen.getByText('Far har rett til engangsstønad, vilkåret er oppfylt'));
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.type(vurderingInput, 'Dette er en vurdering');
+    userEvent.paste(vurderingInput, 'Dette er en vurdering');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -42,7 +42,7 @@ describe('<OmsorgVilkarProsessIndex>', () => {
     userEvent.click(screen.getByText(/Far har ikke rett til engangsstønad, vilkåret er/));
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.type(vurderingInput, 'Dette er en vurdering');
+    userEvent.paste(vurderingInput, 'Dette er en vurdering');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 

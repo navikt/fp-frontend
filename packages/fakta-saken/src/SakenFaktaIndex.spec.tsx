@@ -55,7 +55,7 @@ describe('<SakenFaktaIndex>', () => {
     userEvent.click(screen.getAllByText('Dokumentasjon vil bli innhentet')[0]);
 
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
-    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    userEvent.paste(begrunnelseInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -77,7 +77,7 @@ describe('<SakenFaktaIndex>', () => {
     )).toBeInTheDocument();
 
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
-    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    userEvent.paste(begrunnelseInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 

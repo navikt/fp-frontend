@@ -32,7 +32,7 @@ describe('<AdopsjonFaktaIndex>', () => {
     expect(screen.getByText('1')).toBeInTheDocument();
 
     const begrunnValgInput = utils.getByLabelText('Begrunn endringene');
-    userEvent.type(begrunnValgInput, 'Dette er en begrunnelse');
+    userEvent.paste(begrunnValgInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -63,7 +63,7 @@ describe('<AdopsjonFaktaIndex>', () => {
     userEvent.click(screen.getByText('Adopterer alene'));
 
     const begrunnValgInput = utils.getByLabelText('Begrunn endringene');
-    userEvent.type(begrunnValgInput, 'Dette er en begrunnelse');
+    userEvent.paste(begrunnValgInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -98,7 +98,7 @@ describe('<AdopsjonFaktaIndex>', () => {
     userEvent.click(screen.getByText('Ikke ektefelles/samboers barn'));
 
     const begrunnValgInput = utils.getByLabelText('Begrunn endringene');
-    userEvent.type(begrunnValgInput, 'Dette er en begrunnelse');
+    userEvent.paste(begrunnValgInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 

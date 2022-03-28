@@ -18,7 +18,7 @@ describe('<MenyEndreBehandlendeEnhetIndex>', () => {
     expect(screen.getByText('OK')).toBeDisabled();
 
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
-    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    userEvent.paste(begrunnelseInput, 'Dette er en begrunnelse');
 
     userEvent.selectOptions(utils.getByLabelText('Ny enhet'), '0');
 

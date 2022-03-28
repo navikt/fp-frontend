@@ -23,7 +23,7 @@ describe('<SvangerskapVilkarProsessIndex>', () => {
     userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), '1065');
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.type(vurderingInput, 'Dette er en vurdering');
+    userEvent.paste(vurderingInput, 'Dette er en vurdering');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 

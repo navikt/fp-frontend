@@ -60,7 +60,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     userEvent.click(screen.getByText('Jeg tar kontakt med arbeidsgiver for å innhente inntektsmelding'));
 
-    userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    userEvent.paste(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Lagre'));
 
@@ -93,7 +93,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     userEvent.click(screen.getByText('Gå videre uten inntektsmelding'));
 
-    userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    userEvent.paste(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Lagre'));
 
@@ -159,7 +159,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     userEvent.click(screen.getByText('Jeg kontakter arbeidsgiver'));
 
-    userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    userEvent.paste(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Lagre'));
 
@@ -192,7 +192,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     userEvent.click(screen.getByText('Se bort fra inntektsmeldingen'));
 
-    userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    userEvent.paste(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Lagre'));
 
@@ -231,8 +231,8 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     userEvent.type(periodeTil, '01.02.2022');
     fireEvent.blur(periodeTil);
 
-    userEvent.type(utils.getByLabelText('Stillingsprosent'), '100');
-    userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    userEvent.paste(utils.getByLabelText('Stillingsprosent'), '100');
+    userEvent.paste(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Lagre'));
 
@@ -335,7 +335,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     userEvent.click(screen.getByText('Legg til arbeidsforhold'));
 
-    userEvent.type(utils.getByLabelText('Navn på arbeidsgiver'), 'Telenor');
+    userEvent.paste(utils.getByLabelText('Navn på arbeidsgiver'), 'Telenor');
 
     const periodeFra = screen.getByText('Periode fra');
     userEvent.type(periodeFra, '01.02.2020');
@@ -345,8 +345,8 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     userEvent.type(periodeTil, '01.02.2022');
     fireEvent.blur(periodeTil);
 
-    userEvent.type(utils.getByLabelText('Stillingsprosent'), '100');
-    userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    userEvent.paste(utils.getByLabelText('Stillingsprosent'), '100');
+    userEvent.paste(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Lagre'));
 
@@ -511,7 +511,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     userEvent.click(screen.getByText('Jeg tar kontakt med arbeidsgiver for å innhente inntektsmelding'));
 
-    userEvent.type(utils.getAllByLabelText('Begrunn valget')[0], 'Dette er en begrunnelse');
+    userEvent.paste(utils.getAllByLabelText('Begrunn valget')[0], 'Dette er en begrunnelse');
 
     userEvent.click(screen.getAllByText('Lagre')[0]);
 
@@ -526,7 +526,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     userEvent.click(screen.getByText('Jeg kontakter arbeidsgiver'));
 
-    userEvent.type(utils.getAllByLabelText('Begrunn valget')[1], 'Dette er begrunnelse nr 2');
+    userEvent.paste(utils.getAllByLabelText('Begrunn valget')[1], 'Dette er begrunnelse nr 2');
 
     userEvent.click(screen.getAllByText('Lagre')[1]);
 
@@ -579,7 +579,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     userEvent.click(screen.getByText('Jeg tar kontakt med arbeidsgiver for å innhente inntektsmelding'));
 
-    userEvent.type(utils.getByLabelText('Kommentar'), 'Dette er en kommentar');
+    userEvent.paste(utils.getByLabelText('Kommentar'), 'Dette er en kommentar');
 
     userEvent.click(screen.getByText('Lagre'));
 

@@ -20,7 +20,7 @@ describe('<ForeldreansvarVilkarProsessIndex>', () => {
     userEvent.click(screen.getByText('Far har rett til foreldrepenger, vilkåret er oppfylt'));
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.type(vurderingInput, 'Dette er en vurdering');
+    userEvent.paste(vurderingInput, 'Dette er en vurdering');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -42,7 +42,7 @@ describe('<ForeldreansvarVilkarProsessIndex>', () => {
     userEvent.click(screen.getByText(/Far har ikke rett til foreldrepenger, vilkåret er/));
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.type(vurderingInput, 'Dette er en vurdering');
+    userEvent.paste(vurderingInput, 'Dette er en vurdering');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -73,7 +73,7 @@ describe('<ForeldreansvarVilkarProsessIndex>', () => {
     userEvent.click(screen.getByText('Far har rett til foreldrepenger, vilkåret er oppfylt'));
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.type(vurderingInput, 'Dette er en vurdering');
+    userEvent.paste(vurderingInput, 'Dette er en vurdering');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -95,7 +95,7 @@ describe('<ForeldreansvarVilkarProsessIndex>', () => {
     userEvent.click(screen.getByText(/Far har ikke rett til foreldrepenger, vilkåret er/));
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.type(vurderingInput, 'Dette er en vurdering');
+    userEvent.paste(vurderingInput, 'Dette er en vurdering');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 

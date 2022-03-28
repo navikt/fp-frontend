@@ -46,7 +46,7 @@ describe('<FagsakSearchIndex>', () => {
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
 
     const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
-    userEvent.type(nrInput, '123');
+    userEvent.paste(nrInput, '123');
 
     expect(await screen.findByText('Søk')).toBeEnabled();
 
@@ -74,7 +74,7 @@ describe('<FagsakSearchIndex>', () => {
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
 
     const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
-    userEvent.type(nrInput, '123');
+    userEvent.paste(nrInput, '123');
 
     expect(await screen.findByText('Søk')).toBeEnabled();
 

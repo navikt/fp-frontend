@@ -198,7 +198,7 @@ describe('<MeldingIndex>', () => {
     userEvent.selectOptions(utils.getByLabelText('Mal'), dokumentMalType.INNHENTE_OPPLYSNINGER);
 
     const begrunnelseInput = utils.getByLabelText('Liste over dokumenter (skriv ett dokument pr. linje)');
-    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    userEvent.paste(begrunnelseInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Send brev'));
 

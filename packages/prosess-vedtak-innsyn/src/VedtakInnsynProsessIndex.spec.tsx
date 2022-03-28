@@ -59,7 +59,7 @@ describe('<VedtakInnsynProsessIndex>', () => {
     expect(screen.getByText('Dette er utført')).toBeInTheDocument();
 
     const vurderingInput = utils.getByLabelText('Fritekst i brev');
-    userEvent.type(vurderingInput, 'Dette er en fritekst');
+    userEvent.paste(vurderingInput, 'Dette er en fritekst');
 
     userEvent.click(screen.getByText('Forhåndsvis brev'));
 

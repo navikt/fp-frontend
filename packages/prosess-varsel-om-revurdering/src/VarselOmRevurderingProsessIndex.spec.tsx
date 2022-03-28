@@ -34,7 +34,7 @@ describe('<VarselOmRevurderingProsessIndex>', () => {
     userEvent.click(screen.getByText('Ikke send varsel til søker'));
 
     const vurderingInput = utils.getByLabelText('Begrunnelse');
-    userEvent.type(vurderingInput, 'Dette er en begrunnelse');
+    userEvent.paste(vurderingInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -57,10 +57,10 @@ describe('<VarselOmRevurderingProsessIndex>', () => {
     userEvent.click(screen.getByText('Send varsel til søker'));
 
     const fritekstInput = utils.getByLabelText('Fritekst i brev');
-    userEvent.type(fritekstInput, 'Dette er en fritekst');
+    userEvent.paste(fritekstInput, 'Dette er en fritekst');
 
     const vurderingInput = utils.getByLabelText('Begrunnelse');
-    userEvent.type(vurderingInput, 'Dette er en begrunnelse');
+    userEvent.paste(vurderingInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Forhåndsvis'));
 
@@ -113,7 +113,7 @@ describe('<VarselOmRevurderingProsessIndex>', () => {
     userEvent.click(screen.getByText('Ikke send varsel til søker'));
 
     const vurderingInput = utils.getByLabelText('Begrunnelse');
-    userEvent.type(vurderingInput, 'Dette er en begrunnelse');
+    userEvent.paste(vurderingInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 

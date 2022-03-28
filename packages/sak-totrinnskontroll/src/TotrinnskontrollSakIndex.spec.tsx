@@ -70,7 +70,7 @@ describe('<TotrinnskontrollSakIndex>', () => {
     userEvent.click(screen.getByText('Feil lovanvendelse'));
 
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
-    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    userEvent.paste(begrunnelseInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Send til saksbehandler'));
 

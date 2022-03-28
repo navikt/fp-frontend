@@ -14,7 +14,7 @@ describe('<MeldingerSakIndex>', () => {
     expect(await screen.findByText('Mottaker')).toBeInTheDocument();
 
     const begrunnelseInput = utils.getByLabelText('Liste over dokumenter (skriv ett dokument pr. linje)');
-    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    userEvent.paste(begrunnelseInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Send brev'));
 
@@ -65,7 +65,7 @@ describe('<MeldingerSakIndex>', () => {
     userEvent.selectOptions(utils.getByLabelText('Årsak'), 'ANNET');
 
     const begrunnelseInput = utils.getByLabelText('Fritekst');
-    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    userEvent.paste(begrunnelseInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Send brev'));
 
