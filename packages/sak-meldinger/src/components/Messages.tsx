@@ -21,7 +21,6 @@ const maxLength6000 = maxLength(6000);
 const minLength3 = minLength(3);
 
 export type FormValues = {
-  mottaker?: string;
   brevmalkode?: string;
   fritekst?: string;
   arsakskode?: string;
@@ -55,9 +54,8 @@ const getfiltrerteRevurderingVarslingArsaker = (revurderingVarslingArsaker: Kode
   return revurderingVarslingArsaker;
 };
 
-const buildInitalValues = (recipients: string[], templates: Template[], isKontrollerRevurderingApOpen?: boolean): FormValues => {
+const buildInitalValues = (templates: Template[], isKontrollerRevurderingApOpen?: boolean): FormValues => {
   const initialValues = {
-    mottaker: recipients[0] ? recipients[0] : undefined,
     brevmalkode: templates && templates[0] ? templates[0].kode : undefined,
     fritekst: '',
   };
@@ -78,8 +76,7 @@ const transformValues = (values: FormValues) => {
 
 interface OwnProps {
   submitCallback: (values: FormValues) => void;
-  previewCallback: (mottaker?: string, brevmalkode?: string, fritekst?: string, arsakskode?: string) => void;
-  recipients: string[];
+  previewCallback: (brevmalkode?: string, fritekst?: string, arsakskode?: string) => void;
   templates: Template[];
   sprakKode?: string;
   revurderingVarslingArsak: KodeverkMedNavn[];
@@ -97,7 +94,6 @@ interface OwnProps {
  * og fritekst som skal flettes inn i brevet skrives inn i et eget felt.
  */
 export const Messages: FunctionComponent<OwnProps> = ({
-  recipients,
   templates,
   previewCallback,
   submitCallback,
@@ -111,10 +107,9 @@ export const Messages: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
   const formMethods = useForm<FormValues>({
-    defaultValues: meldingFormData || buildInitalValues(recipients, templates, isKontrollerRevurderingApOpen),
+    defaultValues: meldingFormData || buildInitalValues(templates, isKontrollerRevurderingApOpen),
   });
 
-  const mottaker = formMethods.watch('mottaker');
   const brevmalkode = formMethods.watch('brevmalkode');
   const fritekst = formMethods.watch('fritekst');
   const arsakskode = formMethods.watch('arsakskode');
@@ -128,8 +123,8 @@ export const Messages: FunctionComponent<OwnProps> = ({
   const { formState } = formMethods;
 
   const previewMessage = (e: React.MouseEvent | React.KeyboardEvent) => {
-    if (mottaker && brevmalkode) {
-      previewCallback(mottaker, brevmalkode, fritekst, arsakskode);
+    if (brevmalkode) {
+      previewCallback(brevmalkode, fritekst, arsakskode);
     }
     e.preventDefault();
   };
@@ -144,15 +139,6 @@ export const Messages: FunctionComponent<OwnProps> = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setMeldingForData}
     >
-      <SelectField
-        name="mottaker"
-        label={intl.formatMessage({ id: 'Messages.Recipient' })}
-        validate={[required]}
-        placeholder={intl.formatMessage({ id: 'Messages.ChooseRecipient' })}
-        selectValues={recipients.map((recipient) => <option key={recipient} value={recipient}>{recipient}</option>)}
-        bredde="xxl"
-      />
-      <VerticalSpacer eightPx />
       <SelectField
         name="brevmalkode"
         label={intl.formatMessage({ id: 'Messages.Template' })}
