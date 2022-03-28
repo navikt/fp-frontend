@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import {
+  FormattedMessage, useIntl,
+} from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 
 import {
@@ -14,7 +16,7 @@ import {
 import {
   InputField,
   RadioGroupField, RadioOption, TextAreaField,
-} from '@fpsak-frontend/form';
+} from '@fpsak-frontend/form-hooks';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -23,8 +25,10 @@ import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
+import { useFormContext } from 'react-hook-form';
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
 import VurderVarigEndretTransformed, { VurderOgFastsettValues } from '../../types/NaringAksjonspunktTsType';
+import BeregningsgrunnlagValues from '../../types/BeregningsgrunnlagAksjonspunktTsType';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
@@ -54,8 +58,8 @@ interface StaticFunctions {
  * Presentasjonskomponent. Setter opp radioknapper som lar saksbehandler vurdere
  * aksjonspunkt om søker har hatt varig endret eller nyoppstaret næring.
  */
-export const VurderVarigEndretEllerNyoppstartetSNImpl: FunctionComponent<OwnProps & WrappedComponentProps> & StaticFunctions = ({
-  intl, readOnly, erVarigEndring, erNyoppstartet, erVarigEndretNaering, endretTekst,
+const VurderVarigEndretEllerNyoppstartetSN: FunctionComponent<OwnProps> & StaticFunctions = ({
+  readOnly, erVarigEndring, erNyoppstartet,
 }) => {
   let radioLabel1 = (<FormattedMessage id="Beregningsgrunnlag.FastsettSelvstendigNaeringForm.IngenEndring" />);
   let radioLabel2 = (<FormattedMessage id="Beregningsgrunnlag.FastsettSelvstendigNaeringForm.EndretNaering" />);
@@ -67,6 +71,9 @@ export const VurderVarigEndretEllerNyoppstartetSNImpl: FunctionComponent<OwnProp
     radioLabel1 = (<FormattedMessage id="Beregningsgrunnlag.FastsettSelvstendigNaeringForm.IkkeVarigEndring" />);
     radioLabel2 = (<FormattedMessage id="Beregningsgrunnlag.FastsettSelvstendigNaeringForm.VarigEndring" />);
   }
+  const intl = useIntl();
+  const formMethods = useFormContext<BeregningsgrunnlagValues>();
+  const erVarigEndretNaering = formMethods.watch('erVarigEndretNaering');
   return (
     <>
       {!readOnly && (
@@ -77,14 +84,15 @@ export const VurderVarigEndretEllerNyoppstartetSNImpl: FunctionComponent<OwnProp
             validate={[required]}
             direction="vertical"
             readOnly={readOnly}
+            parse={(value: string) => value === 'true'}
           >
             <RadioOption
               label={radioLabel1}
-              value={false}
+              value="false"
             />
             <RadioOption
               label={radioLabel2}
-              value
+              value="true"
             />
           </RadioGroupField>
         </Column>
@@ -141,7 +149,6 @@ export const VurderVarigEndretEllerNyoppstartetSNImpl: FunctionComponent<OwnProp
             maxLength={1500}
             readOnly={readOnly}
             placeholder={intl.formatMessage({ id: 'Beregningsgrunnlag.Forms.VurderingAvFastsattBeregningsgrunnlag.Placeholder' })}
-            endrettekst={endretTekst}
           />
         </Column>
       </Row>
@@ -149,11 +156,11 @@ export const VurderVarigEndretEllerNyoppstartetSNImpl: FunctionComponent<OwnProp
   );
 };
 
-VurderVarigEndretEllerNyoppstartetSNImpl.defaultProps = {
+VurderVarigEndretEllerNyoppstartetSN.defaultProps = {
   erVarigEndretNaering: false,
 };
 
-VurderVarigEndretEllerNyoppstartetSNImpl.buildInitialValues = (relevanteAndeler: BeregningsgrunnlagAndel[],
+VurderVarigEndretEllerNyoppstartetSN.buildInitialValues = (relevanteAndeler: BeregningsgrunnlagAndel[],
   gjeldendeAksjonspunkter: Aksjonspunkt[]): VurderOgFastsettValues => {
   const snAndel = relevanteAndeler.find((andel) => andel.aktivitetStatus === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
   const varigEndretNaeringAP = gjeldendeAksjonspunkter
@@ -169,7 +176,7 @@ VurderVarigEndretEllerNyoppstartetSNImpl.buildInitialValues = (relevanteAndeler:
   return {};
 };
 
-VurderVarigEndretEllerNyoppstartetSNImpl.transformValues = (values: Required<VurderOgFastsettValues>): VurderVarigEndretTransformed => {
+VurderVarigEndretEllerNyoppstartetSN.transformValues = (values: Required<VurderOgFastsettValues>): VurderVarigEndretTransformed => {
   const erVarigEndring = values[varigEndringRadioname];
   return {
     kode: VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
@@ -179,4 +186,4 @@ VurderVarigEndretEllerNyoppstartetSNImpl.transformValues = (values: Required<Vur
   };
 };
 
-export default injectIntl(VurderVarigEndretEllerNyoppstartetSNImpl);
+export default VurderVarigEndretEllerNyoppstartetSN;

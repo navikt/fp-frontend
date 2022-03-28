@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import {
+  FormattedMessage, useIntl,
+} from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 
 import {
@@ -13,7 +15,7 @@ import {
 } from '@fpsak-frontend/utils';
 import {
   InputField, TextAreaField,
-} from '@fpsak-frontend/form';
+} from '@fpsak-frontend/form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -56,8 +58,8 @@ interface StaticFunctions {
  * Presentasjonskomponent. Setter opp inputfelt som lar saksbehandler fastsette
  * næringsinntekt for selvstendig næringsdrivende. Opprettes enten hvis det er varig endret / nyoppstartet næring eller søker er ny i arbeidslivet.
  */
-export const FastsettSNImpl: FunctionComponent<OwnProps & WrappedComponentProps> & StaticFunctions = ({
-  readOnly, isAksjonspunktClosed, intl, gjeldendeAksjonspunkter, erNyArbLivet, endretTekst,
+const FastsettSNNyIArbeid: FunctionComponent<OwnProps> & StaticFunctions = ({
+  readOnly, isAksjonspunktClosed, gjeldendeAksjonspunkter, erNyArbLivet,
 }) => {
   const harGammeltAPFastsettBrutto = gjeldendeAksjonspunkter
     ? gjeldendeAksjonspunkter.find((ap) => ap.definisjon === FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE)
@@ -65,6 +67,7 @@ export const FastsettSNImpl: FunctionComponent<OwnProps & WrappedComponentProps>
   const harAPSNNyiArbLiv = gjeldendeAksjonspunkter
     ? gjeldendeAksjonspunkter.find((ap) => ap.definisjon === FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET)
     : false;
+  const intl = useIntl();
 
   return (
     <>
@@ -108,7 +111,6 @@ export const FastsettSNImpl: FunctionComponent<OwnProps & WrappedComponentProps>
                   maxLength={1500}
                   readOnly={readOnly}
                   placeholder={intl.formatMessage({ id: 'Beregningsgrunnlag.Forms.VurderingAvFastsattBeregningsgrunnlag.Placeholder' })}
-                  endrettekst={endretTekst}
                 />
               </div>
             </Column>
@@ -119,7 +121,7 @@ export const FastsettSNImpl: FunctionComponent<OwnProps & WrappedComponentProps>
   );
 };
 
-FastsettSNImpl.buildInitialValuesNyIArbeidslivet = (relevanteAndeler: BeregningsgrunnlagAndel[],
+FastsettSNNyIArbeid.buildInitialValuesNyIArbeidslivet = (relevanteAndeler: BeregningsgrunnlagAndel[],
   gjeldendeAksjonspunkter: Aksjonspunkt[]): NyIArbeidslivetValues => {
   const snAndel = relevanteAndeler.find((andel) => andel.aktivitetStatus === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
   const nyIArbeidslivetAP = gjeldendeAksjonspunkter
@@ -130,10 +132,10 @@ FastsettSNImpl.buildInitialValuesNyIArbeidslivet = (relevanteAndeler: Beregnings
   };
 };
 
-FastsettSNImpl.transformValuesNyIArbeidslivet = (values:Required<NyIArbeidslivetValues>): NyIArbeidslivetruttoNæringTransformed => ({
+FastsettSNNyIArbeid.transformValuesNyIArbeidslivet = (values:Required<NyIArbeidslivetValues>): NyIArbeidslivetruttoNæringTransformed => ({
   kode: FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
   begrunnelse: values[begrunnelseFieldname],
   bruttoBeregningsgrunnlag: removeSpacesFromNumber(values[fastsettInntektFieldname]),
 });
 
-export default injectIntl(FastsettSNImpl);
+export default FastsettSNNyIArbeid;

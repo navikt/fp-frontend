@@ -1,9 +1,7 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { connect } from 'react-redux';
 import moment from 'moment';
-import { createSelector } from 'reselect';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 
 import { DDMMYYYY_DATE_FORMAT, formatCurrencyNoKr, removeSpacesFromNumber } from '@fpsak-frontend/utils';
@@ -15,7 +13,7 @@ import {
   BeregningsgrunnlagAndel, BeregningsgrunnlagPeriodeProp, Vilkar, YtelseGrunnlag,
 } from '@fpsak-frontend/types';
 import { andelErIkkeTilkommetEllerLagtTilAvSBH } from '../arbeidstaker/GrunnlagForAarsinntektPanelAT';
-import BeregningsresutatPanel from './BeregningsResultatPanel';
+import BeregningsresutatPanel from './BeregningsresutatPanel';
 import BeregningsresultatPeriodeTabellType, {
   AvkortetRadType,
   BeregningsresultatAndelElementType,
@@ -438,113 +436,101 @@ const sjekkHarBortfaltNaturalYtelse = (periode: BeregningsgrunnlagPeriodeProp): 
       && andel.arbeidsforhold?.naturalytelseBortfaltPrÅr !== 0);
 };
 
-export const createBeregningTableData = createSelector(
-  [(ownProps: OwnProps) => ownProps.beregningsgrunnlagPerioder,
-    (ownProps: OwnProps) => ownProps.aktivitetStatusList,
-    (ownProps: OwnProps) => ownProps.dekningsgrad,
-    (ownProps: OwnProps) => ownProps.grunnbelop,
-    (ownProps: OwnProps) => ownProps.vilkaarBG.vilkarStatus,
-    (ownProps: OwnProps) => ownProps.ytelseGrunnlag],
-  (allePerioder: BeregningsgrunnlagPeriodeProp[],
-    aktivitetStatusList: string[],
-    dekningsgrad: number,
-    grunnbelop: number,
-    vilkarStatus: string,
-    ytelseGrunnlag: YtelseGrunnlag): BeregningsresultatPeriodeTabellType[] => {
-    const perioderSomSkalVises = allePerioder.filter((periode) => periodeHarAarsakSomTilsierVisning(periode.periodeAarsaker));
-    if (perioderSomSkalVises.length < 1) {
-      // Alle perioder har periodeårsak som egentlig ikke trengs vises, velger første periode som den eneste som blir vist.
-      perioderSomSkalVises.push(allePerioder[0]);
+export const createBeregningTableData = (allePerioder: BeregningsgrunnlagPeriodeProp[],
+  aktivitetStatusList: string[],
+  dekningsgrad: number,
+  grunnbelop: number,
+  vilkar: Vilkar,
+  ytelseGrunnlag: YtelseGrunnlag): BeregningsresultatPeriodeTabellType[] => {
+  const perioderSomSkalVises = allePerioder.filter((periode) => periodeHarAarsakSomTilsierVisning(periode.periodeAarsaker));
+  if (perioderSomSkalVises.length < 1) {
+    // Alle perioder har periodeårsak som egentlig ikke trengs vises, velger første periode som den eneste som blir vist.
+    perioderSomSkalVises.push(allePerioder[0]);
+  }
+  const periodeResultatTabeller = [];
+  const seksG = grunnbelop * 6;
+  perioderSomSkalVises.forEach((periode) => {
+    const headers = [];
+    const bruttoRad = {
+      ledetekst: <FormattedMessage id="Beregningsgrunnlag.BeregningTable.BruttoTotalt" />,
+      verdi: null,
+      display: null,
+      grunnlag: null,
+    };
+    const avkortetRad = {
+      ledetekst: <FormattedMessage id="Beregningsgrunnlag.BeregningTable.Avkortet6g" />,
+      verdi: null,
+      display: null,
+    };
+    const redusertRad = {
+      ledetekst: <FormattedMessage id="Beregningsgrunnlag.BeregningTable.RedusertProsent" values={{ redusert: dekningsgrad }} />,
+      verdi: null,
+      display: null,
+    };
+    const dagsatserRad = {
+      verdi: null,
+      grunnlag: null,
+    };
+    const harBortfallNaturalYtelse = sjekkHarBortfaltNaturalYtelse(periode);
+    headers.push(lagPeriodeHeader(periode.beregningsgrunnlagPeriodeFom, periode.beregningsgrunnlagPeriodeTom));
+    bruttoRad.verdi = formatCurrencyNoKr(periode.bruttoInkludertBortfaltNaturalytelsePrAar);
+    avkortetRad.verdi = formatCurrencyNoKr(periode.avkortetPrAar);
+    if (dekningsgrad !== dekningsgradKode.HUNDRE) {
+      redusertRad.verdi = formatCurrencyNoKr(periode.redusertPrAar);
     }
-    const periodeResultatTabeller = [];
-    const seksG = grunnbelop * 6;
-    perioderSomSkalVises.forEach((periode) => {
-      const headers = [];
-      const bruttoRad = {
-        ledetekst: <FormattedMessage id="Beregningsgrunnlag.BeregningTable.BruttoTotalt" />,
-        verdi: null,
-        display: null,
-        grunnlag: null,
-      };
-      const avkortetRad = {
-        ledetekst: <FormattedMessage id="Beregningsgrunnlag.BeregningTable.Avkortet6g" />,
-        verdi: null,
-        display: null,
-      };
-      const redusertRad = {
-        ledetekst: <FormattedMessage id="Beregningsgrunnlag.BeregningTable.RedusertProsent" values={{ redusert: dekningsgrad }} />,
-        verdi: null,
-        display: null,
-      };
-      const dagsatserRad = {
-        verdi: null,
-        grunnlag: null,
-      };
-      const harBortfallNaturalYtelse = sjekkHarBortfaltNaturalYtelse(periode);
-      headers.push(lagPeriodeHeader(periode.beregningsgrunnlagPeriodeFom, periode.beregningsgrunnlagPeriodeTom));
-      bruttoRad.verdi = formatCurrencyNoKr(periode.bruttoInkludertBortfaltNaturalytelsePrAar);
-      avkortetRad.verdi = formatCurrencyNoKr(periode.avkortetPrAar);
-      if (dekningsgrad !== dekningsgradKode.HUNDRE) {
-        redusertRad.verdi = formatCurrencyNoKr(periode.redusertPrAar);
+    dagsatserRad.verdi = formatCurrencyNoKr(finnDagsats(periode, ytelseGrunnlag));
+    const rowsAndeler = [];
+    const rowsForklaringer = [];
+    aktivitetStatusList.sort((a, b) => ((a > b) ? 1 : -1)); // sorter alfabetisk
+    const aktivitetStatusKodeKombo = aktivitetStatusList.map((andelKode) => andelKode).join('_');
+    switch (aktivitetStatusKodeKombo) {
+      case 'AT_SN': {
+        settVisningsRaderForATSN(periode, rowsAndeler, rowsForklaringer, vilkar.vilkarStatus);
+        break;
       }
-      dagsatserRad.verdi = formatCurrencyNoKr(finnDagsats(periode, ytelseGrunnlag));
-      const rowsAndeler = [];
-      const rowsForklaringer = [];
-      aktivitetStatusList.sort((a, b) => ((a > b) ? 1 : -1)); // sorter alfabetisk
-      const aktivitetStatusKodeKombo = aktivitetStatusList.map((andelKode) => andelKode).join('_');
-      switch (aktivitetStatusKodeKombo) {
-        case 'AT_SN': {
-          settVisningsRaderForATSN(periode, rowsAndeler, rowsForklaringer, vilkarStatus);
-          break;
-        }
-        case 'AT_FL_SN': {
-          settVisningsRaderForATFLSN(periode, rowsAndeler, rowsForklaringer, vilkarStatus);
-          break;
-        }
-        case 'DP_FL_SN': {
-          settVisningsRaderForDPFLSN(periode, rowsAndeler, rowsForklaringer, vilkarStatus);
-          break;
-        }
-        case 'AT_DP_SN': {
-          settVisningsRaderForATDPSN(periode, rowsAndeler, rowsForklaringer, vilkarStatus);
-          break;
-        }
-        default: {
-          settVisningsRaderForDefault(periode, rowsAndeler, rowsForklaringer, vilkarStatus, harBortfallNaturalYtelse);
-        }
+      case 'AT_FL_SN': {
+        settVisningsRaderForATFLSN(periode, rowsAndeler, rowsForklaringer, vilkar.vilkarStatus);
+        break;
       }
+      case 'DP_FL_SN': {
+        settVisningsRaderForDPFLSN(periode, rowsAndeler, rowsForklaringer, vilkar.vilkarStatus);
+        break;
+      }
+      case 'AT_DP_SN': {
+        settVisningsRaderForATDPSN(periode, rowsAndeler, rowsForklaringer, vilkar.vilkarStatus);
+        break;
+      }
+      default: {
+        settVisningsRaderForDefault(periode, rowsAndeler, rowsForklaringer, vilkar.vilkarStatus, harBortfallNaturalYtelse);
+      }
+    }
 
-      // sjekk om spesialrader skul vises
-      // IKKE vis avkortet rad hvis mindre en 6G
-      if (removeSpacesFromNumber(bruttoRad.verdi) < seksG) {
-        avkortetRad.display = false;
-      }
-      dagsatserRad.grunnlag = finnDagsatsGrunnlag(bruttoRad, avkortetRad, redusertRad);
-      if (rowsAndeler.length < 2) {
-        bruttoRad.display = false;
-      }
-      if (bruttoRad.display !== false && bruttoRad.verdi === redusertRad.verdi) {
-        redusertRad.display = false;
-      }
+    // sjekk om spesialrader skul vises
+    // IKKE vis avkortet rad hvis mindre en 6G
+    if (removeSpacesFromNumber(bruttoRad.verdi) < seksG) {
+      avkortetRad.display = false;
+    }
+    dagsatserRad.grunnlag = finnDagsatsGrunnlag(bruttoRad, avkortetRad, redusertRad);
+    if (rowsAndeler.length < 2) {
+      bruttoRad.display = false;
+    }
+    if (bruttoRad.display !== false && bruttoRad.verdi === redusertRad.verdi) {
+      redusertRad.display = false;
+    }
 
-      periodeResultatTabeller.push(
-        {
-          headers,
-          rowsAndeler,
-          avkortetRad,
-          redusertRad,
-          bruttoRad,
-          dagsatser: dagsatserRad,
-          rowsForklaringer,
-        },
-      );
-    });
-    return periodeResultatTabeller;
-  },
-);
-
-type MappedOwnProps = {
-  periodeResultatTabeller: BeregningsresultatPeriodeTabellType[];
+    periodeResultatTabeller.push(
+      {
+        headers,
+        rowsAndeler,
+        avkortetRad,
+        redusertRad,
+        bruttoRad,
+        dagsatser: dagsatserRad,
+        rowsForklaringer,
+      },
+    );
+  });
+  return periodeResultatTabeller;
 };
 
 type OwnProps = {
@@ -563,14 +549,14 @@ type OwnProps = {
  * beregningen og hva dagsatsen ble.
  * Dersom vilkåret ble avslått vil grunnen til dette vises istedenfor tabellen
  */
-const BeregningsresultatTable: FunctionComponent<OwnProps & MappedOwnProps> = ({
-  vilkaarBG, periodeResultatTabeller, grunnbelop,
-}) => (
-  <BeregningsresutatPanel grunnbeløp={grunnbelop} periodeResultatTabeller={periodeResultatTabeller} vilkaarBG={vilkaarBG} />
-);
+const BeregningsresultatTable: FunctionComponent<OwnProps> = ({
+  vilkaarBG, beregningsgrunnlagPerioder, aktivitetStatusList, grunnbelop, dekningsgrad, ytelseGrunnlag,
+}) => {
+  const periodeResultatTabeller = createBeregningTableData(beregningsgrunnlagPerioder, aktivitetStatusList,
+    dekningsgrad, grunnbelop, vilkaarBG, ytelseGrunnlag);
+  return (
+    <BeregningsresutatPanel grunnbeløp={grunnbelop} periodeResultatTabeller={periodeResultatTabeller} vilkaarBG={vilkaarBG} />
+  );
+};
 
-const mapStateToProps = (state, ownProps: OwnProps): MappedOwnProps => ({
-  periodeResultatTabeller: createBeregningTableData(ownProps),
-});
-
-export default connect(mapStateToProps)(BeregningsresultatTable);
+export default BeregningsresultatTable;

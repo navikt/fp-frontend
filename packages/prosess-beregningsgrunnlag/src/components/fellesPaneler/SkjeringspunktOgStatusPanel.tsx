@@ -1,5 +1,4 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -34,10 +33,6 @@ const createStatusEtiketter = (listeMedStatuser: string[], getKodeverknavn: (kod
   );
 };
 
-type MappedOwnProps = {
-  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string;
-}
-
 type OwnProps = {
     skjeringstidspunktDato: string;
     aktivitetStatusList: string[];
@@ -50,41 +45,35 @@ type OwnProps = {
  * Viser skjæringstidspunkt for beregningen og en liste med aktivitetsstatuser.
  */
 
-export const SkjeringspunktOgStatusPanelImpl: FunctionComponent<OwnProps & MappedOwnProps> = ({
+export const SkjeringspunktOgStatusPanel: FunctionComponent<OwnProps> = ({
   skjeringstidspunktDato,
   aktivitetStatusList,
-  getKodeverknavn,
-}) => (
-  <>
-    <AvsnittSkiller spaceUnder leftPanel />
-    <div className={beregningStyles.panelLeft}>
-      {createStatusEtiketter(aktivitetStatusList, getKodeverknavn)}
-      <VerticalSpacer sixteenPx />
-      <FlexContainer>
-        <FlexRow>
-          <FlexColumn>
-            <Normaltekst>
-              <FormattedMessage id="Beregningsgrunnlag.Skjeringstidspunkt.SkjeringForBeregning" />
-            </Normaltekst>
-          </FlexColumn>
-          <FlexColumn>
-            <Normaltekst className={beregningStyles.semiBoldText}>
-              <DateLabel dateString={skjeringstidspunktDato} />
-            </Normaltekst>
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
-    </div>
-  </>
-);
-
-const mapStateToProps = (state, ownProps: OwnProps): MappedOwnProps => {
-  const getKodeverknavn = getKodeverknavnFn(ownProps.alleKodeverk);
-  return {
-    getKodeverknavn,
-  };
+  alleKodeverk,
+}) => {
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
+  return (
+    <>
+      <AvsnittSkiller spaceUnder leftPanel />
+      <div className={beregningStyles.panelLeft}>
+        {createStatusEtiketter(aktivitetStatusList, getKodeverknavn)}
+        <VerticalSpacer sixteenPx />
+        <FlexContainer>
+          <FlexRow>
+            <FlexColumn>
+              <Normaltekst>
+                <FormattedMessage id="Beregningsgrunnlag.Skjeringstidspunkt.SkjeringForBeregning" />
+              </Normaltekst>
+            </FlexColumn>
+            <FlexColumn>
+              <Normaltekst className={beregningStyles.semiBoldText}>
+                <DateLabel dateString={skjeringstidspunktDato} />
+              </Normaltekst>
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
+      </div>
+    </>
+  );
 };
-
-const SkjeringspunktOgStatusPanel = connect(mapStateToProps)(SkjeringspunktOgStatusPanelImpl);
 
 export default SkjeringspunktOgStatusPanel;

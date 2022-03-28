@@ -21,6 +21,7 @@ import Vilkar from '@fpsak-frontend/types/src/vilkarTsType';
 import GraderingUtenBGReadOnly from './gradering/GraderingUtenBGReadOnly';
 import BeregningForm from './beregningForm/BeregningForm';
 import RelevanteStatuserProp from '../types/RelevanteStatuserTsType';
+import BeregningsgrunnlagValues from '../types/BeregningsgrunnlagAksjonspunktTsType';
 
 const visningForManglendeBG = () => (
   <>
@@ -75,6 +76,8 @@ type OwnProps = {
     beregningsgrunnlag: Beregningsgrunnlag;
     vilkar: Vilkar[];
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+    formData?: BeregningsgrunnlagValues;
+    setFormData: (data: BeregningsgrunnlagValues) => void,
 };
 
 /**
@@ -92,6 +95,8 @@ const BeregningFP: FunctionComponent<OwnProps> = ({
   vilkar,
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
+  formData,
+  setFormData,
 }) => {
   if (!beregningsgrunnlag) {
     return visningForManglendeBG();
@@ -112,6 +117,8 @@ const BeregningFP: FunctionComponent<OwnProps> = ({
         alleKodeverk={alleKodeverk}
         vilkaarBG={vilkaarBG}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        setFormData={setFormData}
+        formData={formData}
       />
 
       {aksjonspunktGraderingPaaAndelUtenBG
