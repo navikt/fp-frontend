@@ -23,7 +23,6 @@ type Brevmal = {
 
 type SubmitMessageParams = {
   behandlingUuid?: string,
-  mottaker?: string;
   brevmalkode: string;
   fritekst: string;
   arsakskode?: string;

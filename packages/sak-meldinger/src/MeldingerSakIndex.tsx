@@ -11,10 +11,9 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   submitCallback: (values: FormValues) => void;
-  recipients: string[];
   templates?: Template[];
   sprakKode: string;
-  previewCallback: (mottaker?: string, brevmalkode?: string, fritekst?: string, arsakskode?: string) => void;
+  previewCallback: (brevmalkode?: string, fritekst?: string, arsakskode?: string) => void;
   isKontrollerRevurderingApOpen?: boolean;
   revurderingVarslingArsak: KodeverkMedNavn[];
   fagsakYtelseType: string;
@@ -25,7 +24,6 @@ interface OwnProps {
 
 const MeldingerSakIndex: FunctionComponent<OwnProps> = ({
   submitCallback,
-  recipients,
   templates = [],
   sprakKode,
   previewCallback,
@@ -39,7 +37,6 @@ const MeldingerSakIndex: FunctionComponent<OwnProps> = ({
   <RawIntlProvider value={intl}>
     <Messages
       submitCallback={submitCallback}
-      recipients={recipients}
       templates={templates}
       sprakKode={sprakKode}
       previewCallback={previewCallback}

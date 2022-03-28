@@ -14,13 +14,11 @@ export default {
 };
 
 const Template: Story<{
-  recipients: string[],
   templates: { kode: string, navn: string, tilgjengelig: boolean }[],
   sprakKode: string,
   fagsakYtelseType: string,
   lagre: () => Promise<any>,
 }> = ({
-  recipients,
   templates,
   sprakKode,
   fagsakYtelseType,
@@ -32,7 +30,6 @@ const Template: Story<{
   >
     <MeldingerSakIndex
       submitCallback={lagre}
-      recipients={recipients}
       templates={templates}
       sprakKode={sprakKode}
       previewCallback={action('button-click')}
@@ -55,7 +52,6 @@ const Template: Story<{
 
 export const Default = Template.bind({});
 Default.args = {
-  recipients: ['Søker'],
   templates: [{
     kode: dokumentMalType.INNHENTE_OPPLYSNINGER,
     navn: 'Innhent dokumentasjon',
@@ -72,7 +68,6 @@ Default.args = {
 
 export const ForSvangerskapspenger = Template.bind({});
 ForSvangerskapspenger.args = {
-  recipients: ['Søker'],
   templates: [{
     kode: dokumentMalType.INNHENTE_OPPLYSNINGER,
     navn: 'Innhent dokumentasjon',
