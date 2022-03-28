@@ -173,7 +173,7 @@ const BeregningForm: FunctionComponent<OwnProps> = ({
   const harAksjonspunkter = gjeldendeAksjonspunkter && gjeldendeAksjonspunkter.length > 0;
   return (
     <Form
-      formMethods={formMethods}
+      formMethods={formMethods} // @ts-ignore Fiks
       onSubmit={(values) => submitCallback(transformValues(values, relevanteStatuser, gjeldendeAksjonspunkter, beregningsgrunnlag.beregningsgrunnlagPeriode))}
       setDataOnUnmount={setFormData}
     >
