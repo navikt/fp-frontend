@@ -238,7 +238,6 @@ AvklarManglendeArbeidsforhold.args = {
       journalpostId: '1',
       dokumentId: '2',
       motattDato: '2021-12-06',
-      innsendingstidspunkt: '2021-12-06T10:52:13.377',
       årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
     }],
     inntekter: [],
@@ -277,7 +276,6 @@ AvklarManglendeArbeidsforholdDerBehandlingErAvsluttet.args = {
     inntektsmeldinger: [{
       arbeidsgiverIdent: '910909088',
       eksternArbeidsforholdId: 'ARB001-001',
-      innsendingstidspunkt: '2021-12-06T10:52:13.377',
       inntektPrMnd: 30000,
       internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
       kontaktpersonNavn: 'Corpolarsen',
@@ -325,7 +323,6 @@ AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppMulig.args = {
     inntektsmeldinger: [{
       arbeidsgiverIdent: '910909088',
       eksternArbeidsforholdId: 'ARB001-001',
-      innsendingstidspunkt: '2021-12-06T10:52:13.377',
       inntektPrMnd: 30000,
       internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
       kontaktpersonNavn: 'Corpolarsen',
@@ -369,7 +366,6 @@ IngenAksjonspunktMenTilbakehoppMuligForOverstyrer.args = {
     inntektsmeldinger: [{
       arbeidsgiverIdent: '910909088',
       eksternArbeidsforholdId: 'ARB001-001',
-      innsendingstidspunkt: '2021-12-06T10:52:13.377',
       inntektPrMnd: 30000,
       internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
       kontaktpersonNavn: 'Corpolarsen',
@@ -508,7 +504,6 @@ ArbeidsforholdErOK.args = {
     inntektsmeldinger: [{
       arbeidsgiverIdent: '910909088',
       eksternArbeidsforholdId: 'ARB001-001',
-      innsendingstidspunkt: '2021-12-06T10:52:13.377',
       inntektPrMnd: 30000,
       internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
       kontaktpersonNavn: 'Corpolarsen',
@@ -583,7 +578,6 @@ ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet.args = {
     inntektsmeldinger: [{
       arbeidsgiverIdent: '910909088',
       eksternArbeidsforholdId: 'ARB001-001',
-      innsendingstidspunkt: '2021-12-06T10:52:13.377',
       inntektPrMnd: 30000,
       internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
       kontaktpersonNavn: 'Corpolarsen',
@@ -595,7 +589,6 @@ ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet.args = {
     }, {
       arbeidsgiverIdent: '910909088',
       eksternArbeidsforholdId: 'ARB001-002',
-      innsendingstidspunkt: '2021-12-06T10:52:13.377',
       inntektPrMnd: 10000,
       internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa85',
       kontaktpersonNavn: 'Espen Utvikler',
@@ -689,7 +682,6 @@ FlereArbeidsforholdOgInntekstemeldinger.args = {
     inntektsmeldinger: [{
       arbeidsgiverIdent: '910909088',
       eksternArbeidsforholdId: 'ARB001-001',
-      innsendingstidspunkt: '2021-12-06T10:52:13.377',
       inntektPrMnd: 30000,
       internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
       kontaktpersonNavn: 'Corpolarsen',
@@ -701,7 +693,6 @@ FlereArbeidsforholdOgInntekstemeldinger.args = {
     }, {
       arbeidsgiverIdent: '910909092',
       eksternArbeidsforholdId: undefined,
-      innsendingstidspunkt: '2021-12-02T10:52:13.377',
       inntektPrMnd: 10000,
       internArbeidsforholdId: undefined,
       kontaktpersonNavn: 'Espen Utvikler',
@@ -827,7 +818,6 @@ ArbeidsforholdMedSammeOrgNr.args = {
       journalpostId: '1',
       dokumentId: '2',
       motattDato: '2021-12-06',
-      innsendingstidspunkt: '2021-12-06T10:52:13.377',
       årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
     }, {
       inntektPrMnd: 30000,
@@ -840,7 +830,6 @@ ArbeidsforholdMedSammeOrgNr.args = {
       journalpostId: '1',
       dokumentId: '2',
       motattDato: '2021-12-06',
-      innsendingstidspunkt: '2021-12-06T10:52:13.377',
       årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
     }],
     inntekter: [{
@@ -939,7 +928,6 @@ ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAndre.args = {
       journalpostId: '1',
       dokumentId: '2',
       motattDato: '2021-12-06',
-      innsendingstidspunkt: '2021-12-06T10:52:13.377',
       årsak: undefined,
     }],
     inntekter: [{
@@ -1003,7 +991,6 @@ FoerRegisterinnhenting.args = {
       journalpostId: '524975324',
       dokumentId: '549168225',
       motattDato: '2022-02-15',
-      innsendingstidspunkt: '2022-02-15T15:29:53',
       årsak: null,
       begrunnelse: null,
       saksbehandlersVurdering: null,
@@ -1092,7 +1079,6 @@ EtterAtEtterspurtInntektsmeldingErKommet.args = {
         journalpostId: '524975527',
         dokumentId: '549168458',
         motattDato: '2022-02-16',
-        innsendingstidspunkt: '2022-02-16T15:33:32',
         årsak: null,
         begrunnelse: 'her vil jeg mase på AG',
         saksbehandlersVurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',

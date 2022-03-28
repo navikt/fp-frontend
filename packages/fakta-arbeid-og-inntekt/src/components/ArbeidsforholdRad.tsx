@@ -12,7 +12,7 @@ import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import utropstegnIkonUrl from '@fpsak-frontend/assets/images/utropstegn.svg';
 import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
 import {
-  TableColumn, PeriodLabel, DateTimeLabel, ExpandableTableRow,
+  TableColumn, PeriodLabel, DateLabel, ExpandableTableRow,
 } from '@fpsak-frontend/shared-components';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 import { TIDENES_ENDE } from '@fpsak-frontend/utils';
@@ -250,7 +250,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
       <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>
         <Normaltekst>
           {arbeidsforholdForRad.length < 2 && inntektsmeldingerForRad.length === 1 && (
-            <DateTimeLabel dateTimeString={inntektsmeldingerForRad[0].motattDato} useNewFormat />
+            <DateLabel dateString={inntektsmeldingerForRad[0].motattDato} />
           )}
           {!manglerInntektsmelding && arbeidsforholdForRad.length > 1 && inntektsmeldingerForRad.length === arbeidsforholdForRad.length && (
             <FormattedMessage id="ArbeidsforholdRad.Mottatt" />
