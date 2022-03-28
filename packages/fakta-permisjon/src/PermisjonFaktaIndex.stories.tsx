@@ -337,3 +337,39 @@ FlereArbeidsforholdFraSammeArbeidsgiver.args = {
     skjæringstidspunkt: '2021-11-10',
   },
 };
+
+export const VisFødselsdatoNårPrivatperson = Template.bind({});
+VisFødselsdatoNårPrivatperson.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  aksjonspunkter: [{
+    definisjon: AksjonspunktCode.VURDER_ARBEIDSFORHOLD_PERMISJON,
+    status: aksjonspunktStatus.OPPRETTET,
+  } as Aksjonspunkt],
+  arbeidsgiverOpplysningerPerId: {
+    910909088: {
+      erPrivatPerson: true,
+      fødselsdato: '2000-01-01',
+      identifikator: '910909088',
+      navn: 'Bettan',
+      referanse: '910909088',
+    },
+  },
+  arbeidOgInntekt: {
+    arbeidsforhold: [{
+      arbeidsgiverIdent: '910909088',
+      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
+      eksternArbeidsforholdId: 'ARB001-001',
+      fom: '2019-12-06',
+      tom: '9999-12-31',
+      stillingsprosent: 100,
+      permisjonOgMangel: {
+        permisjonFom: '2022-10-01',
+        type: 'PERMITTERING',
+        årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
+      },
+    }],
+    inntektsmeldinger: [],
+    inntekter: [],
+    skjæringstidspunkt: '2021-11-10',
+  },
+};

@@ -85,6 +85,7 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
         const inntektsmelding = inntektsmeldinger.find((i) => erMatch(arbeidsforhold, i));
         const inntektsposter = inntekter.find((inntekt) => inntekt.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent)?.inntekter;
         const visArbeidsforholdId = sorterteArbeidsforhold.filter((a) => a.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent).length > 1;
+        const arbeidsgiverOpplysinger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
         return (
           <ArbeidsforholdBoks key={field.id} harÅpentAksjonspunkt={harÅpentAksjonspunkt} harBorderTop={index === 0}>
             <FlexContainer>
@@ -101,12 +102,13 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
                   <Row>
                     <Column xs="4">
                       <Element>
-                        {arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent].navn}
+                        {arbeidsgiverOpplysinger.navn}
                       </Element>
                       {arbeidsforhold.arbeidsgiverIdent && (
                       <Undertekst>
                         (
-                        {arbeidsforhold.arbeidsgiverIdent}
+                        {arbeidsgiverOpplysinger.erPrivatPerson
+                          ? <DateLabel dateString={arbeidsgiverOpplysinger.fødselsdato} /> : arbeidsforhold.arbeidsgiverIdent}
                         )
                       </Undertekst>
                       )}
