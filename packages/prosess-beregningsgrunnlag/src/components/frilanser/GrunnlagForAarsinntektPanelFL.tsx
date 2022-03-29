@@ -4,7 +4,7 @@ import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import { DateLabel, VerticalSpacer, AvsnittSkiller } from '@fpsak-frontend/shared-components';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import { dateFormat, formatCurrencyNoKr } from '@fpsak-frontend/utils';
+import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 
@@ -38,7 +38,7 @@ const GrunnlagForAarsinntektPanelFL: FunctionComponent<OwnProps> = ({ alleAndele
           <Normaltekst>
             <FormattedMessage id="Beregningsgrunnlag.AarsinntektPanel.FrilansStartDato2" />
             <span className={beregningStyles.semiBoldText}>
-              <DateLabel dateString={dateFormat(startDato)} />
+              <DateLabel dateString={startDato} />
             </span>
           </Normaltekst>
         </Column>

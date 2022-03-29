@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import { InputField } from '@fpsak-frontend/form';
+import { InputField } from '@fpsak-frontend/form-hooks';
 import {
   getKodeverknavnFn, parseCurrencyInput, removeSpacesFromNumber, required,
 } from '@fpsak-frontend/utils';
@@ -15,12 +15,12 @@ import {
   BeregningsgrunnlagAndel,
   BeregningsgrunnlagArbeidsforhold,
 } from '@fpsak-frontend/types';
+import { ArbeidsinntektResultat } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/prosess/BeregningsgrunnlagAP';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 import createVisningsnavnForAktivitet from '../../util/createVisningsnavnForAktivitet';
 
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
 import {
-  ArbeidsinntektTransformedValues,
   ArbeidstakerInntektValues,
 } from '../../types/ATFLAksjonspunktTsType';
 
@@ -78,7 +78,7 @@ const createRows = (relevanteAndelerAT: BeregningsgrunnlagAndel[],
 
 interface StaticFunctions {
   transformValues?: (values: ArbeidstakerInntektValues, relevanteStatuser: RelevanteStatuserProp,
-                     alleAndelerIForstePeriode: BeregningsgrunnlagAndel[],) => ArbeidsinntektTransformedValues[];
+                     alleAndelerIForstePeriode: BeregningsgrunnlagAndel[],) => ArbeidsinntektResultat[];
 }
 
 type OwnProps = {
@@ -104,7 +104,7 @@ const AksjonspunktBehandlerAT: FunctionComponent<OwnProps> & StaticFunctions = (
 
 AksjonspunktBehandlerAT.transformValues = (values: ArbeidstakerInntektValues,
   relevanteStatuser: RelevanteStatuserProp,
-  alleAndelerIForstePeriode: BeregningsgrunnlagAndel[]): ArbeidsinntektTransformedValues[] => {
+  alleAndelerIForstePeriode: BeregningsgrunnlagAndel[]): ArbeidsinntektResultat[] => {
   let inntektPrAndelList = null;
   if (relevanteStatuser.isArbeidstaker) {
     inntektPrAndelList = finnAndelerSomSkalVisesAT(alleAndelerIForstePeriode)

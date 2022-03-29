@@ -18,9 +18,11 @@ import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import { AlleKodeverk, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Vilkar from '@fpsak-frontend/types/src/vilkarTsType';
+import BeregningsgrunnlagResultatAP from '@fpsak-frontend/types-avklar-aksjonspunkter/src/prosess/BeregningsgrunnlagAP';
 import GraderingUtenBGReadOnly from './gradering/GraderingUtenBGReadOnly';
 import BeregningForm from './beregningForm/BeregningForm';
 import RelevanteStatuserProp from '../types/RelevanteStatuserTsType';
+import BeregningsgrunnlagValues from '../types/BeregningsgrunnlagAksjonspunktTsType';
 
 const visningForManglendeBG = () => (
   <>
@@ -67,7 +69,7 @@ const getAksjonspunktForGraderingPaaAndelUtenBG = (aksjonspunkter: Aksjonspunkt[
   : undefined);
 
 type OwnProps = {
-    submitCallback: (...args: any[]) => any;
+    submitCallback: (aksjonspunktData: BeregningsgrunnlagResultatAP[]) => Promise<void>;
     readOnly: boolean;
     readOnlySubmitButton: boolean;
     aksjonspunkter: Aksjonspunkt[];
@@ -75,6 +77,8 @@ type OwnProps = {
     beregningsgrunnlag: Beregningsgrunnlag;
     vilkar: Vilkar[];
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+    formData?: BeregningsgrunnlagValues;
+    setFormData: (data: BeregningsgrunnlagValues) => void,
 };
 
 /**
@@ -92,6 +96,8 @@ const BeregningFP: FunctionComponent<OwnProps> = ({
   vilkar,
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
+  formData,
+  setFormData,
 }) => {
   if (!beregningsgrunnlag) {
     return visningForManglendeBG();
@@ -112,6 +118,8 @@ const BeregningFP: FunctionComponent<OwnProps> = ({
         alleKodeverk={alleKodeverk}
         vilkaarBG={vilkaarBG}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        setFormData={setFormData}
+        formData={formData}
       />
 
       {aksjonspunktGraderingPaaAndelUtenBG

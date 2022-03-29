@@ -79,7 +79,7 @@ type OwnProps = {
  * Presentasjonskomponent. Viser PGI-verdier for selvstendig næringsdrivende.
  * Vises også hvis status er en kombinasjonsstatus som inkluderer selvstendig næringsdrivende.
  */
-export const GrunnlagForAarsinntektPanelSN: FunctionComponent<OwnProps> = ({ alleAndeler }) => {
+const GrunnlagForAarsinntektPanelSN: FunctionComponent<OwnProps> = ({ alleAndeler }) => {
   const snAndel = alleAndeler.find((andel) => andel.aktivitetStatus === aktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE);
   if (!snAndel) {
     return null;

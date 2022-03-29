@@ -33,42 +33,12 @@ export type TidsbegrenseArbeidsforholdTabellData = {
   [key: string]: TidsbegrenseArbeidsforholdTabellCelle[];
 }
 
-export type TidsbegrensetArbeidsforholdInntektTransformedValues = {
-  andelsnr: number;
-  bruttoFastsattInntekt: number;
-}
-
-export type TidsbegrensetArbeidsforholdPeriodeTransformedValues = {
-  periodeFom: string;
-  periodeTom: string;
-  fastsatteTidsbegrensedeAndeler: TidsbegrensetArbeidsforholdInntektTransformedValues[];
-}
-
 export type ArbeidstakerFrilansValues = FrilansInntektValues & {
   ATFLVurdering?: string;
 };
 
 export type ATFLDekningsgradBegrunnelseValues = {
   ATFLVurdering: string;
-};
-
-export type ArbeidsinntektTransformedValues = {
-  andelsnr: number;
-  inntekt: number;
-}
-
-export type ATFLTransformedValues = {
-  begrunnelse: string;
-  kode: string;
-  inntektPrAndelList: ArbeidsinntektTransformedValues[];
-  inntektFrilanser: number;
-};
-
-export type ATFLTidsbegrensetTransformedValues = {
-  begrunnelse: string;
-  kode: string;
-  fastsatteTidsbegrensedePerioder: TidsbegrensetArbeidsforholdPeriodeTransformedValues[];
-  frilansInntekt: number;
 };
 
 export default ArbeidstakerFrilansValues;

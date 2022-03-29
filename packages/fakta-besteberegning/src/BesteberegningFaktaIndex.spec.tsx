@@ -38,7 +38,7 @@ describe('<BesteberegningFaktaIndex>', () => {
     const utils = render(<BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt submitCallback={lagre} />);
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeInTheDocument();
-    expect(await screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
     expect(screen.getByText('Saken er riktig beregnet, fortsett behandlingen')).toBeEnabled();
     expect(screen.getByText('Saken er ikke riktig beregnet, sett saken på vent')).toBeEnabled();
