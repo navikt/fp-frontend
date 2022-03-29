@@ -28,7 +28,7 @@ import KontrollerRevurderingsBehandlingAp from './prosess/KontrollerRevurderings
 import KontrollAvManueltOpprettetRevurderingsbehandlingAp from './prosess/KontrollAvManueltOpprettetRevurderingsbehandlingAp';
 import VarselRevurderingAp from './prosess/VarselRevurderingAp';
 import UttakAp from './prosess/UttakAp';
-import BeregningsgrunnlagResultatAP from "./prosess/BeregningsgrunnlagAP";
+import BeregningsgrunnlagResultatAP from './prosess/BeregningsgrunnlagAP';
 
 export type ProsessAksjonspunkt = AnkeVurderingResultatAp
   | BekreftSvangerskapspengervilkarAp
