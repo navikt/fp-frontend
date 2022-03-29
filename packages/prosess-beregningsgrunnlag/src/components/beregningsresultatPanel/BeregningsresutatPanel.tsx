@@ -5,7 +5,7 @@ import { Image } from '@navikt/fp-react-components';
 
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import {
-  FormattedMessage, injectIntl, IntlShape, WrappedComponentProps,
+  FormattedMessage, IntlShape, useIntl,
 } from 'react-intl';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
@@ -20,10 +20,10 @@ import BeregningsresultatPeriodeTabellType, {
   BruttoRadType, DagsatsRadType, RedusertRadType,
 } from '../../types/BeregningsresultatPeriodeTabellType';
 
-const lagSpesialRaderRad = (visningsObjekt: BruttoRadType | AvkortetRadType | RedusertRadType): ReactElement => {
+const lagSpesialRaderRad = (visningsObjekt: BruttoRadType | AvkortetRadType | RedusertRadType, radNøkkel: string): ReactElement => {
   if (!visningsObjekt || !visningsObjekt.verdi || visningsObjekt.display === false) return null;
   return (
-    <Row key={`SpesialRad_${visningsObjekt.verdi}`}>
+    <Row key={`SpesialRad_${radNøkkel}_${visningsObjekt.verdi}`}>
       <Column xs="10">
         <Normaltekst>
           {visningsObjekt.ledetekst}
@@ -138,10 +138,10 @@ const lagTabellRader = (periodeData: BeregningsresultatPeriodeTabellType, ikkeVu
   if (!ikkeVurdert) {
     if (rowsAndeler.length > 1) {
       rows.push(lineRad('andelLinje'));
-      rows.push(lagSpesialRaderRad(bruttoRad));
+      rows.push(lagSpesialRaderRad(bruttoRad, 'brutto'));
     }
-    rows.push(lagSpesialRaderRad(avkortetRad));
-    rows.push(lagSpesialRaderRad(redusertRad));
+    rows.push(lagSpesialRaderRad(avkortetRad, 'avkortet'));
+    rows.push(lagSpesialRaderRad(redusertRad, 'redusert'));
   }
   rows.push(lagDagsatsRad(dagsatser, ikkeVurdert));
   return rows;
@@ -209,9 +209,10 @@ type OwnProps = {
     vilkaarBG: Vilkar;
     periodeResultatTabeller: BeregningsresultatPeriodeTabellType[];
 };
-const BeregningsresutatPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl, vilkaarBG, periodeResultatTabeller, grunnbeløp,
+const BeregningsresutatPanel: FunctionComponent<OwnProps> = ({
+  vilkaarBG, periodeResultatTabeller, grunnbeløp,
 }) => {
+  const intl = useIntl();
   const skalLagePeriodeHeaders = periodeResultatTabeller.length > 1;
   return (
     <Panel className={beregningStyles.panelRight}>
@@ -223,4 +224,4 @@ const BeregningsresutatPanel: FunctionComponent<OwnProps & WrappedComponentProps
     </Panel>
   );
 };
-export default (injectIntl(BeregningsresutatPanel));
+export default BeregningsresutatPanel;

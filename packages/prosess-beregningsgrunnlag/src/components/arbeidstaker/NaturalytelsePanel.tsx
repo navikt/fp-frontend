@@ -123,7 +123,7 @@ const slåSammenEndringerSomHengerSammen = (endringer: NaturalytelseEndring[]): 
   return sammenslåtteEndringer;
 };
 
-export const lagNaturalytelseTabelldata = (allePerioder: BeregningsgrunnlagPeriodeProp[],
+const lagNaturalytelseTabelldata = (allePerioder: BeregningsgrunnlagPeriodeProp[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): NaturalytelseTabellData => {
   const alleNatAndeler = finnAlleArbeidstakernøkkler(allePerioder, arbeidsgiverOpplysningerPerId);
   alleNatAndeler.forEach((natAndel) => {

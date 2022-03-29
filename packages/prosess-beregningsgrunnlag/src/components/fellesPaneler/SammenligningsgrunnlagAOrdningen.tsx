@@ -5,7 +5,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { FlexColumn, FlexRow } from '@navikt/fp-react-components';
 
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import {
   VerticalSpacer, AvsnittSkiller, ReactECharts,
@@ -146,9 +146,10 @@ type Inntektstyper = {
   harYtelseinntekt: boolean;
 }
 
-export const SammenligningsgrunnlagAOrdningenImpl: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  sammenligningsGrunnlagInntekter, skjeringstidspunktDato, intl,
+const SammenligningsgrunnlagAOrdningen: FunctionComponent<OwnProps> = ({
+  sammenligningsGrunnlagInntekter, skjeringstidspunktDato,
 }) => {
+  const intl = useIntl();
   const måneder = sammenligningsGrunnlagInntekter?.måneder;
   if (!måneder || måneder.length === 0 || !skjeringstidspunktDato) {
     return null;
@@ -300,4 +301,4 @@ export const SammenligningsgrunnlagAOrdningenImpl: FunctionComponent<OwnProps & 
   );
 };
 
-export default injectIntl(SammenligningsgrunnlagAOrdningenImpl);
+export default SammenligningsgrunnlagAOrdningen;

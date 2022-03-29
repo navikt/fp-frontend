@@ -1,5 +1,4 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import {
   Element, Normaltekst, Undertekst,
@@ -179,10 +178,6 @@ interface StaticFunctions {
   buildInitialValues?: (alleAndeler: BeregningsgrunnlagAndel[]) => ArbeidstakerInntektValues;
 }
 
-type MappedOwnProps = {
-  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string;
-}
-
 type OwnProps = {
     alleAndelerIFørstePeriode: BeregningsgrunnlagAndel[];
     allePerioder?: BeregningsgrunnlagPeriodeProp[];
@@ -196,12 +191,13 @@ type OwnProps = {
  * Presentasjonskomponent. Viser beregningsgrunnlagstabellen for arbeidstakere.
  * Vises også hvis status er en kombinasjonsstatus som inkluderer arbeidstaker.
  */
-export const GrunnlagForAarsinntektPanelATImpl: FunctionComponent<OwnProps & MappedOwnProps> & StaticFunctions = ({
+const GrunnlagForAarsinntektPanelAT: FunctionComponent<OwnProps> & StaticFunctions = ({
   alleAndelerIFørstePeriode,
   allePerioder,
-  getKodeverknavn,
   arbeidsgiverOpplysningerPerId,
+  alleKodeverk,
 }) => {
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
   const relevanteAndeler = finnAndelerSomSkalVises(alleAndelerIFørstePeriode);
   if (!relevanteAndeler || relevanteAndeler.length === 0) return null;
   return (
@@ -238,18 +234,11 @@ export const GrunnlagForAarsinntektPanelATImpl: FunctionComponent<OwnProps & Map
   );
 };
 
-GrunnlagForAarsinntektPanelATImpl.defaultProps = {
+GrunnlagForAarsinntektPanelAT.defaultProps = {
   allePerioder: undefined,
 };
 
-const mapStateToProps = (state: any, initialProps: OwnProps): MappedOwnProps => {
-  const getKodeverknavn = getKodeverknavnFn(initialProps.alleKodeverk);
-  return {
-    getKodeverknavn,
-  };
-};
-
-GrunnlagForAarsinntektPanelATImpl.buildInitialValues = (alleAndeler: BeregningsgrunnlagAndel[]): ArbeidstakerInntektValues => {
+GrunnlagForAarsinntektPanelAT.buildInitialValues = (alleAndeler: BeregningsgrunnlagAndel[]): ArbeidstakerInntektValues => {
   const relevanteAndeler = finnAndelerSomSkalVises(alleAndeler);
   const initialValues = { };
   relevanteAndeler.forEach((inntekt, index) => {
@@ -257,4 +246,4 @@ GrunnlagForAarsinntektPanelATImpl.buildInitialValues = (alleAndeler: Beregningsg
   });
   return initialValues;
 };
-export default connect(mapStateToProps)(GrunnlagForAarsinntektPanelATImpl);
+export default GrunnlagForAarsinntektPanelAT;

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';
-import { InputField } from '@fpsak-frontend/form';
+import { InputField } from '@fpsak-frontend/form-hooks';
 import {
   formatCurrencyNoKr, parseCurrencyInput, removeSpacesFromNumber, required,
 } from '@fpsak-frontend/utils';

@@ -57,9 +57,6 @@ export type BeregningsgrunnlagAndel = Readonly <{
   bruttoPrAar?: number;
   overstyrtPrAar?: number;
   redusertPrAar?: number;
-  pgi1?: number;
-  pgi2?: number;
-  pgi3?: number;
   pgiSnitt?: number;
   pgiVerdier?: PgiVerdier[],
   aarsbeloepFraTilstoetendeYtelse?: number;
