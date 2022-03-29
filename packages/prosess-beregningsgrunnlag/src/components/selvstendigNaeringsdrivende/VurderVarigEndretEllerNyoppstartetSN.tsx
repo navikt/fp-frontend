@@ -26,8 +26,9 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import { useFormContext } from 'react-hook-form';
+import { VurderVarigEndretNyoppstartetResultatAP } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/prosess/BeregningsgrunnlagAP';
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
-import VurderVarigEndretTransformed, { VurderOgFastsettValues } from '../../types/NaringAksjonspunktTsType';
+import { VurderOgFastsettValues } from '../../types/NaringAksjonspunktTsType';
 import BeregningsgrunnlagValues from '../../types/BeregningsgrunnlagAksjonspunktTsType';
 
 const maxLength1500 = maxLength(1500);
@@ -47,7 +48,7 @@ type OwnProps = {
 
 interface StaticFunctions {
   buildInitialValues: (relevanteAndeler: BeregningsgrunnlagAndel[], gjeldendeAksjonspunkter: Aksjonspunkt[]) => VurderOgFastsettValues;
-  transformValues: (values: Required<VurderOgFastsettValues>) => VurderVarigEndretTransformed;
+  transformValues: (values: Required<VurderOgFastsettValues>) => VurderVarigEndretNyoppstartetResultatAP;
 }
 
 /**
@@ -176,7 +177,7 @@ VurderVarigEndretEllerNyoppstartetSN.buildInitialValues = (relevanteAndeler: Ber
   return {};
 };
 
-VurderVarigEndretEllerNyoppstartetSN.transformValues = (values: Required<VurderOgFastsettValues>): VurderVarigEndretTransformed => {
+VurderVarigEndretEllerNyoppstartetSN.transformValues = (values: Required<VurderOgFastsettValues>): VurderVarigEndretNyoppstartetResultatAP => {
   const erVarigEndring = values[varigEndringRadioname];
   return {
     kode: VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,

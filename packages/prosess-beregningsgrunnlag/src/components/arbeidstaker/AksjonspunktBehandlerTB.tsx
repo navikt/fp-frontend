@@ -26,6 +26,7 @@ import {
   BeregningsgrunnlagPeriodeProp,
 } from '@fpsak-frontend/types';
 import { useFormContext, UseFormReturn } from 'react-hook-form';
+import { TidsbegrensetArbeidsforholdPeriodeResultat } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/prosess/BeregningsgrunnlagAP';
 import createVisningsnavnForAktivitet from '../../util/createVisningsnavnForAktivitet';
 
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
@@ -35,7 +36,6 @@ import {
   TidsbegrenseArbeidsforholdTabellCelle,
   TidsbegrenseArbeidsforholdTabellData,
   TidsbegrenseArbeidsforholdValues,
-  TidsbegrensetArbeidsforholdPeriodeTransformedValues,
 } from '../../types/ATFLAksjonspunktTsType';
 import BeregningsgrunnlagValues from '../../types/BeregningsgrunnlagAksjonspunktTsType';
 
@@ -271,7 +271,7 @@ export const getIsAksjonspunktClosed = (gjeldendeAksjonspunkter: Aksjonspunkt[])
 interface StaticFunctions {
   buildInitialValues?: (allePerioder: BeregningsgrunnlagPeriodeProp[]) => TidsbegrenseArbeidsforholdValues;
   transformValues?: (values: TidsbegrenseArbeidsforholdValues,
-                     perioder: BeregningsgrunnlagPeriodeProp[]) => TidsbegrensetArbeidsforholdPeriodeTransformedValues[];
+                     perioder: BeregningsgrunnlagPeriodeProp[]) => TidsbegrensetArbeidsforholdPeriodeResultat[];
 }
 
 type BruttoPrPeriode = {
@@ -347,7 +347,7 @@ AksjonspunktBehandlerTidsbegrenset.buildInitialValues = (allePerioder: Beregning
 };
 
 AksjonspunktBehandlerTidsbegrenset.transformValues = (values: TidsbegrenseArbeidsforholdValues,
-  perioder: BeregningsgrunnlagPeriodeProp[]): TidsbegrensetArbeidsforholdPeriodeTransformedValues[] => {
+  perioder: BeregningsgrunnlagPeriodeProp[]): TidsbegrensetArbeidsforholdPeriodeResultat[] => {
   const fastsattePerioder = [];
   const relevantePerioder = finnPerioderMedAvsluttetArbeidsforhold(perioder);
   relevantePerioder.forEach((periode) => {

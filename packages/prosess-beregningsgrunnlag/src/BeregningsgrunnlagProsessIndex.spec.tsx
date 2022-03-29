@@ -66,8 +66,8 @@ describe('<BeregningsgrunnlagProsessIndex>', () => {
     const alleInputfelt = utils.getAllByRole('textbox', { hidden: true });
     const bruttoFelt = alleInputfelt[0];
     const begrunnelseFelt = alleInputfelt[1];
-    userEvent.type(bruttoFelt, '260 000');
-    userEvent.type(begrunnelseFelt, 'Min begrunnelse for inntekt');
+    userEvent.paste(bruttoFelt, '260 000');
+    userEvent.paste(begrunnelseFelt, 'Min begrunnelse for inntekt');
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
     userEvent.click(screen.getByText('Bekreft og fortsett'));
@@ -112,15 +112,16 @@ describe('<BeregningsgrunnlagProsessIndex>', () => {
       + ' Jeg jobbet opprinnelig alene men har ansatt to stykker i løpet av det siste året')).toBeInTheDocument();
 
     // Aksjonspunkt
-    userEvent.click(screen.getByLabelText('Ingen varig endring'));
     expect(screen.queryByText('Næringsinntekt fastsettes til')).not.toBeInTheDocument();
+    userEvent.click(screen.getByLabelText('Ingen varig endring'));
+    await waitFor(() => expect(screen.queryByText('Næringsinntekt fastsettes til')).not.toBeInTheDocument());
     userEvent.click(screen.getByLabelText('Varig endring - Årsinntekt må fastsettes.'));
     expect(await screen.findByText('Næringsinntekt fastsettes til')).toBeInTheDocument();
     const alleInputfelt = utils.getAllByRole('textbox', { hidden: true });
     const bruttoFelt = alleInputfelt[0];
     const begrunnelseFelt = alleInputfelt[1];
-    userEvent.type(bruttoFelt, '260 000');
-    userEvent.type(begrunnelseFelt, 'Min begrunnelse for vurdering av varig endring');
+    userEvent.paste(bruttoFelt, '260 000');
+    userEvent.paste(begrunnelseFelt, 'Min begrunnelse for vurdering av varig endring');
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
     userEvent.click(screen.getByText('Bekreft og fortsett'));
@@ -153,8 +154,8 @@ describe('<BeregningsgrunnlagProsessIndex>', () => {
     const alleInputfelt = utils.getAllByRole('textbox', { hidden: true });
     const bruttoFelt = alleInputfelt[0];
     const begrunnelseFelt = alleInputfelt[1];
-    userEvent.type(bruttoFelt, '500 000');
-    userEvent.type(begrunnelseFelt, 'Min begrunnelse for inntekt');
+    userEvent.paste(bruttoFelt, '500 000');
+    userEvent.paste(begrunnelseFelt, 'Min begrunnelse for inntekt');
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
     userEvent.click(screen.getByText('Bekreft og fortsett'));

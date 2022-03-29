@@ -18,6 +18,7 @@ import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import { AlleKodeverk, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Vilkar from '@fpsak-frontend/types/src/vilkarTsType';
+import BeregningsgrunnlagResultatAP from '@fpsak-frontend/types-avklar-aksjonspunkter/src/prosess/BeregningsgrunnlagAP';
 import GraderingUtenBGReadOnly from './gradering/GraderingUtenBGReadOnly';
 import BeregningForm from './beregningForm/BeregningForm';
 import RelevanteStatuserProp from '../types/RelevanteStatuserTsType';
@@ -68,7 +69,7 @@ const getAksjonspunktForGraderingPaaAndelUtenBG = (aksjonspunkter: Aksjonspunkt[
   : undefined);
 
 type OwnProps = {
-    submitCallback: (...args: any[]) => any;
+    submitCallback: (aksjonspunktData: BeregningsgrunnlagResultatAP[]) => Promise<void>;
     readOnly: boolean;
     readOnlySubmitButton: boolean;
     aksjonspunkter: Aksjonspunkt[];

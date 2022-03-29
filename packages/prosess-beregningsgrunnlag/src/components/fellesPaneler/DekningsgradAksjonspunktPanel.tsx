@@ -12,9 +12,8 @@ import {
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { Column, Row } from 'nav-frontend-grid';
 import dekningsgrad from '@fpsak-frontend/kodeverk/src/dekningsgrad';
-import DekningsgradTransformedValues, {
-  DekningsgradValues,
-} from '../../types/DekningsgradAksjonspunktTsType';
+import { DekningsgradResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/prosess/BeregningsgrunnlagAP';
+import DekningsgradValues from '../../types/DekningsgradAksjonspunktTsType';
 import styles from './aksjonspunktBehandler.less';
 
 const RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN = 'dekningsgrad';
@@ -25,7 +24,7 @@ const maxLength1500 = maxLength(1500);
 
 interface StaticFunctions {
   buildInitialValues: (beregningsgrunnlag: Beregningsgrunnlag, aksjonspunkter: Aksjonspunkt[]) => DekningsgradValues;
-  transformValues: (values: Required<DekningsgradValues>) => DekningsgradTransformedValues
+  transformValues: (values: Required<DekningsgradValues>) => DekningsgradResultatAp
 }
 
 type OwnProps = {
@@ -77,7 +76,7 @@ DekningsgradAksjonspunktPanel.buildInitialValues = (beregningsgrunnlag: Beregnin
   return {};
 };
 
-DekningsgradAksjonspunktPanel.transformValues = (values: Required<DekningsgradValues>): DekningsgradTransformedValues => ({
+DekningsgradAksjonspunktPanel.transformValues = (values: Required<DekningsgradValues>): DekningsgradResultatAp => ({
   kode: aksjonspunktCodes.VURDER_DEKNINGSGRAD,
   begrunnelse: values[TEKSTFELTNAVN_BEGRUNN_DEKNINGSGRAD_ENDRING],
   dekningsgrad: values[RADIO_GROUP_FIELD_DEKNINGSGRAD_NAVN],

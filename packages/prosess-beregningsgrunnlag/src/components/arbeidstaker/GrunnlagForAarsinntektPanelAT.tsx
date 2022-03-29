@@ -191,7 +191,7 @@ type OwnProps = {
  * Presentasjonskomponent. Viser beregningsgrunnlagstabellen for arbeidstakere.
  * Vises også hvis status er en kombinasjonsstatus som inkluderer arbeidstaker.
  */
-export const GrunnlagForAarsinntektPanelAT: FunctionComponent<OwnProps> & StaticFunctions = ({
+const GrunnlagForAarsinntektPanelAT: FunctionComponent<OwnProps> & StaticFunctions = ({
   alleAndelerIFørstePeriode,
   allePerioder,
   arbeidsgiverOpplysningerPerId,

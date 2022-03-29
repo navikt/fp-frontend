@@ -3,10 +3,13 @@ import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
+import {
+  NyIArbeidslivetruttoNæringResultatAP,
+  VurderVarigEndretNyoppstartetResultatAP,
+} from '@fpsak-frontend/types-avklar-aksjonspunkter/src/prosess/BeregningsgrunnlagAP';
 import FastsettSNNyIArbeid from './FastsettSNNyIArbeid';
 import VurderVarigEndretEllerNyoppstartetSN from './VurderVarigEndretEllerNyoppstartetSN';
-import VurderVarigEndretTransformed, {
-  NyIArbeidslivetruttoNæringTransformed,
+import {
   NyIArbeidslivetValues,
   VurderOgFastsettValues,
 } from '../../types/NaringAksjonspunktTsType';
@@ -37,7 +40,7 @@ type OwnProps = {
 interface StaticFunctions {
   buildInitialValues: (relevanteAndeler: BeregningsgrunnlagAndel[], gjeldendeAksjonspunkter: Aksjonspunkt[]) => VurderOgFastsettValues | NyIArbeidslivetValues;
   transformValues: (values: VurderOgFastsettValues | NyIArbeidslivetValues, gjeldendeAksjonspunkter: Aksjonspunkt[])
-    => VurderVarigEndretTransformed | NyIArbeidslivetruttoNæringTransformed;
+    => VurderVarigEndretNyoppstartetResultatAP | NyIArbeidslivetruttoNæringResultatAP;
 }
 
 const AksjonspunktsbehandlerSN: FunctionComponent<OwnProps> & StaticFunctions = ({
@@ -88,7 +91,7 @@ AksjonspunktsbehandlerSN.buildInitialValues = (relevanteAndeler: Beregningsgrunn
 };
 
 AksjonspunktsbehandlerSN.transformValues = (values: VurderOgFastsettValues | NyIArbeidslivetValues, gjeldendeAksjonspunkter: Aksjonspunkt[]):
-  VurderVarigEndretTransformed | NyIArbeidslivetruttoNæringTransformed => {
+  VurderVarigEndretNyoppstartetResultatAP | NyIArbeidslivetruttoNæringResultatAP => {
   if (hasAksjonspunkt(FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET, gjeldendeAksjonspunkter)) {
     return FastsettSNNyIArbeid.transformValuesNyIArbeidslivet(values as Required<NyIArbeidslivetValues>);
   }

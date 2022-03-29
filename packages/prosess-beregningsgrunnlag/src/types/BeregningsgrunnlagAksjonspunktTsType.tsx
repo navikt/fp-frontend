@@ -5,7 +5,7 @@ import {
   FrilansInntektValues,
 } from './ATFLAksjonspunktTsType';
 import { NyIArbeidslivetValues, VurderOgFastsettValues } from './NaringAksjonspunktTsType';
-import { DekningsgradValues } from './DekningsgradAksjonspunktTsType';
+import DekningsgradValues from './DekningsgradAksjonspunktTsType';
 
 type BeregningsgrunnlagValues = ATFLDekningsgradBegrunnelseValues
   | ATFLTidsbegrensetValues

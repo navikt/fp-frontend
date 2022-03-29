@@ -22,9 +22,9 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
+import { NyIArbeidslivetruttoNæringResultatAP } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/prosess/BeregningsgrunnlagAP';
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
 import {
-  NyIArbeidslivetruttoNæringTransformed,
   NyIArbeidslivetValues,
 } from '../../types/NaringAksjonspunktTsType';
 
@@ -47,7 +47,7 @@ type OwnProps = {
 
 interface StaticFunctions {
   buildInitialValuesNyIArbeidslivet: (relevanteAndeler: BeregningsgrunnlagAndel[], gjeldendeAksjonspunkter: Aksjonspunkt[]) => NyIArbeidslivetValues;
-  transformValuesNyIArbeidslivet: (values: Required<NyIArbeidslivetValues>) => NyIArbeidslivetruttoNæringTransformed
+  transformValuesNyIArbeidslivet: (values: Required<NyIArbeidslivetValues>) => NyIArbeidslivetruttoNæringResultatAP
 }
 
 /**
@@ -132,7 +132,7 @@ FastsettSNNyIArbeid.buildInitialValuesNyIArbeidslivet = (relevanteAndeler: Bereg
   };
 };
 
-FastsettSNNyIArbeid.transformValuesNyIArbeidslivet = (values:Required<NyIArbeidslivetValues>): NyIArbeidslivetruttoNæringTransformed => ({
+FastsettSNNyIArbeid.transformValuesNyIArbeidslivet = (values:Required<NyIArbeidslivetValues>): NyIArbeidslivetruttoNæringResultatAP => ({
   kode: FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
   begrunnelse: values[begrunnelseFieldname],
   bruttoBeregningsgrunnlag: removeSpacesFromNumber(values[fastsettInntektFieldname]),

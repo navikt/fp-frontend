@@ -21,11 +21,12 @@ import {
   YtelseGrunnlag,
 } from '@fpsak-frontend/types';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
+import BeregningsgrunnlagResultatAP from '@fpsak-frontend/types-avklar-aksjonspunkter/src/prosess/BeregningsgrunnlagAP';
 import BesteberegningResultatGrunnlagPanel from '../besteberegning/BesteberegningResultatGrunnlagPanel';
 import AvviksopplysningerPanel from '../fellesPaneler/AvvikopplysningerPanel';
 import SkjeringspunktOgStatusPanel from '../fellesPaneler/SkjeringspunktOgStatusPanel';
 import AksjonspunktBehandlerSN from '../selvstendigNaeringsdrivende/AksjonspunktsbehandlerSN';
-import { GrunnlagForAarsinntektPanelAT } from '../arbeidstaker/GrunnlagForAarsinntektPanelAT';
+import GrunnlagForAarsinntektPanelAT from '../arbeidstaker/GrunnlagForAarsinntektPanelAT';
 import AksjonspunktBehandlerTidsbegrenset from '../arbeidstaker/AksjonspunktBehandlerTB';
 import Beregningsgrunnlag from '../beregningsgrunnlagPanel/Beregningsgrunnlag';
 import AksjonspunktBehandler from '../fellesPaneler/AksjonspunktBehandler';
@@ -38,7 +39,7 @@ import { VurderOgFastsettValues } from '../../types/NaringAksjonspunktTsType';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 import AksjonspunktTittel from '../fellesPaneler/AksjonspunktTittel';
 import { DekningsgradAksjonspunktPanel } from '../fellesPaneler/DekningsgradAksjonspunktPanel';
-import { DekningsgradValues } from '../../types/DekningsgradAksjonspunktTsType';
+import DekningsgradValues from '../../types/DekningsgradAksjonspunktTsType';
 
 // ------------------------------------------------------------------------------------------ //
 // Variables
@@ -89,7 +90,7 @@ const harAksjonspunkt = (aksjonspunktKode: string, gjeldendeAksjonspunkter: Aksj
 export const transformValues = (values: BeregningsgrunnlagValues,
   relevanteStatuser: RelevanteStatuserProp,
   gjeldendeAksjonspunkter: Aksjonspunkt[],
-  allePerioder: BeregningsgrunnlagPeriodeProp[]) => {
+  allePerioder: BeregningsgrunnlagPeriodeProp[]): BeregningsgrunnlagResultatAP[] => {
   allePerioder.sort((p1, p2) => p1.beregningsgrunnlagPeriodeFom.localeCompare(p2.beregningsgrunnlagPeriodeFom));
   const alleAndelerIFørstePeriode = allePerioder.length > 0 ? allePerioder[0].beregningsgrunnlagPrStatusOgAndel : [];
 
@@ -123,7 +124,7 @@ type OwnProps = {
   readOnly: boolean;
   gjeldendeAksjonspunkter: Aksjonspunkt[];
   relevanteStatuser: RelevanteStatuserProp;
-  submitCallback: (...args: any[]) => any;
+  submitCallback: (aksjonspunktData: BeregningsgrunnlagResultatAP[]) => Promise<void>;
   readOnlySubmitButton: boolean;
   beregningsgrunnlag: BeregningsgrunnlagProp;
   alleKodeverk: AlleKodeverk;
