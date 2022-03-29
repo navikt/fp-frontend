@@ -52,7 +52,7 @@ describe('<BeregningsgrunnlagProsessIndex>', () => {
     const utils = render(<ArbeidstakerMedAvvik submitCallback={lagre} />);
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeInTheDocument();
-    expect(await screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
     // Årsgrunnlag arbeid
     expect(screen.getByText('Arbeidsinntekt')).toBeInTheDocument();
@@ -62,15 +62,15 @@ describe('<BeregningsgrunnlagProsessIndex>', () => {
     expect(screen.getByText('16 667')).toBeInTheDocument();
 
     // Aksjonspunkt avvik
-    expect(await screen.getByText('Skjønnsmessig fastsettelse av årsinntekt ved avvik')).toBeInTheDocument();
+    expect(screen.getByText('Skjønnsmessig fastsettelse av årsinntekt ved avvik')).toBeInTheDocument();
     const alleInputfelt = utils.getAllByRole('textbox', { hidden: true });
     const bruttoFelt = alleInputfelt[0];
     const begrunnelseFelt = alleInputfelt[1];
     userEvent.type(bruttoFelt, '260 000');
     userEvent.type(begrunnelseFelt, 'Min begrunnelse for inntekt');
 
-    expect(await screen.getByText('Bekreft og fortsett')).toBeEnabled();
-    userEvent.click(await screen.getByText('Bekreft og fortsett'));
+    expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
+    userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
@@ -92,7 +92,7 @@ describe('<BeregningsgrunnlagProsessIndex>', () => {
     const utils = render(<SelvstendigNæringsdrivendeMedAksjonspunkt submitCallback={lagre} />);
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeInTheDocument();
-    expect(await screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
     // Årsgrunnlag næring
     expect(screen.getByText('3 siste ferdigliknede år fra skatteetaten')).toBeInTheDocument();
@@ -115,15 +115,15 @@ describe('<BeregningsgrunnlagProsessIndex>', () => {
     userEvent.click(screen.getByLabelText('Ingen varig endring'));
     expect(screen.queryByText('Næringsinntekt fastsettes til')).not.toBeInTheDocument();
     userEvent.click(screen.getByLabelText('Varig endring - Årsinntekt må fastsettes.'));
-    expect(await screen.getByText('Næringsinntekt fastsettes til')).toBeInTheDocument();
+    expect(await screen.findByText('Næringsinntekt fastsettes til')).toBeInTheDocument();
     const alleInputfelt = utils.getAllByRole('textbox', { hidden: true });
     const bruttoFelt = alleInputfelt[0];
     const begrunnelseFelt = alleInputfelt[1];
     userEvent.type(bruttoFelt, '260 000');
     userEvent.type(begrunnelseFelt, 'Min begrunnelse for vurdering av varig endring');
 
-    expect(await screen.getByText('Bekreft og fortsett')).toBeEnabled();
-    userEvent.click(await screen.getByText('Bekreft og fortsett'));
+    expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
+    userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
@@ -140,7 +140,7 @@ describe('<BeregningsgrunnlagProsessIndex>', () => {
     const utils = render(<SelvstendigNæringsdrivendNyIArbeidslivet submitCallback={lagre} />);
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeInTheDocument();
-    expect(await screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
     // Næringsopplysinger
     expect(screen.getByText('Ukjent bedriftsnavn')).toBeInTheDocument();
@@ -156,8 +156,8 @@ describe('<BeregningsgrunnlagProsessIndex>', () => {
     userEvent.type(bruttoFelt, '500 000');
     userEvent.type(begrunnelseFelt, 'Min begrunnelse for inntekt');
 
-    expect(await screen.getByText('Bekreft og fortsett')).toBeEnabled();
-    userEvent.click(await screen.getByText('Bekreft og fortsett'));
+    expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
+    userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
@@ -195,7 +195,7 @@ describe('<BeregningsgrunnlagProsessIndex>', () => {
     const utils = render(<TidsbegrensetArbeidsforholdMedAvvik submitCallback={lagre} />);
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeInTheDocument();
-    expect(await screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
     // Årsgrunnlag arbeid
     expect(screen.getAllByText('Andeby bank (999999999)')).toHaveLength(2);
@@ -212,8 +212,8 @@ describe('<BeregningsgrunnlagProsessIndex>', () => {
 
     userEvent.paste(begrunnelseFelt, 'Min begrunnelse for tidsbegrenset inntekt');
 
-    expect(await screen.queryByText('222 000')).toBeInTheDocument();
-    expect(screen.queryByText('333 000')).toBeInTheDocument();
+    expect(await screen.findByText('222 000')).toBeInTheDocument();
+    expect(screen.getByText('333 000')).toBeInTheDocument();
 
     expect(screen.getByText('Bekreft og fortsett')).toBeEnabled();
     userEvent.click(screen.getByText('Bekreft og fortsett'));
