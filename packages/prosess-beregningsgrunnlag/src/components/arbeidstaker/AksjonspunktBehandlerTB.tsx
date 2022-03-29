@@ -71,7 +71,7 @@ const finnPerioderMedAvsluttetArbeidsforhold = (allePerioder: Beregningsgrunnlag
 };
 
 // Nøkkelen til et inputfield konstrueres utifra navnet på andelen og perioden den er i samt en fast prefix
-export const createInputFieldKey = (andel: BeregningsgrunnlagAndel, periode: BeregningsgrunnlagPeriodeProp): string => {
+const createInputFieldKey = (andel: BeregningsgrunnlagAndel, periode: BeregningsgrunnlagPeriodeProp): string => {
   if (!andel.arbeidsforhold) {
     return undefined;
   }
@@ -142,7 +142,7 @@ const initializeMap = (perioder: BeregningsgrunnlagPeriodeProp[],
   return mapMedAndeler;
 };
 
-export const createTableData = (allePerioder: BeregningsgrunnlagPeriodeProp[],
+const createTableData = (allePerioder: BeregningsgrunnlagPeriodeProp[],
   alleKodeverk: AlleKodeverk,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): TidsbegrenseArbeidsforholdTabellData => {
   // Vi er ikke interessert i perioder som oppstår grunnet naturalytelse
@@ -263,7 +263,7 @@ const createRows = (tableData: TidsbegrenseArbeidsforholdTabellData,
   return rows;
 };
 
-export const getIsAksjonspunktClosed = (gjeldendeAksjonspunkter: Aksjonspunkt[]): boolean => {
+const getIsAksjonspunktClosed = (gjeldendeAksjonspunkter: Aksjonspunkt[]): boolean => {
   const aksjonspunkt = finnAksjonspunktForFastsettBgTidsbegrensetAT(gjeldendeAksjonspunkter);
   return aksjonspunkt ? !isAksjonspunktOpen(aksjonspunkt.status) : false;
 };

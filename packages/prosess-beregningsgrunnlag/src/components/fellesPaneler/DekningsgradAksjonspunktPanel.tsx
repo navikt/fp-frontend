@@ -36,7 +36,7 @@ type OwnProps = {
  *
  * Viser skjæringstidspunkt for beregningen og en liste med aktivitetsstatuser.
  */
-export const DekningsgradAksjonspunktPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
+const DekningsgradAksjonspunktPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
 }) => {
   const intl = useIntl();

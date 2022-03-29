@@ -146,7 +146,7 @@ type Inntektstyper = {
   harYtelseinntekt: boolean;
 }
 
-export const SammenligningsgrunnlagAOrdningen: FunctionComponent<OwnProps> = ({
+const SammenligningsgrunnlagAOrdningen: FunctionComponent<OwnProps> = ({
   sammenligningsGrunnlagInntekter, skjeringstidspunktDato,
 }) => {
   const intl = useIntl();

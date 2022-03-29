@@ -89,7 +89,7 @@ type OwnProps = {
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 };
 
-export const NaeringsopplysningsPanel: FunctionComponent<OwnProps> = ({
+const NaeringsopplysningsPanel: FunctionComponent<OwnProps> = ({
   alleAndelerIForstePeriode,
   arbeidsgiverOpplysningerPerId,
 }) => {

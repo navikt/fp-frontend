@@ -185,7 +185,7 @@ type OwnProps = {
     isDirty: boolean;
 };
 
-export const AksjonspunktBehandler: FunctionComponent<OwnProps> & StaticFunctions = ({
+const AksjonspunktBehandler: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   aksjonspunkter,
   formName,

@@ -38,7 +38,7 @@ import { ATFLTidsbegrensetValues, ATFLValues } from '../../types/ATFLAksjonspunk
 import { VurderOgFastsettValues } from '../../types/NaringAksjonspunktTsType';
 import RelevanteStatuserProp from '../../types/RelevanteStatuserTsType';
 import AksjonspunktTittel from '../fellesPaneler/AksjonspunktTittel';
-import { DekningsgradAksjonspunktPanel } from '../fellesPaneler/DekningsgradAksjonspunktPanel';
+import DekningsgradAksjonspunktPanel from '../fellesPaneler/DekningsgradAksjonspunktPanel';
 import DekningsgradValues from '../../types/DekningsgradAksjonspunktTsType';
 
 // ------------------------------------------------------------------------------------------ //

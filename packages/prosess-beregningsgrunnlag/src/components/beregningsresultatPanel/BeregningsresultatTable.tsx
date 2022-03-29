@@ -436,7 +436,7 @@ const sjekkHarBortfaltNaturalYtelse = (periode: BeregningsgrunnlagPeriodeProp): 
       && andel.arbeidsforhold?.naturalytelseBortfaltPrÅr !== 0);
 };
 
-export const createBeregningTableData = (allePerioder: BeregningsgrunnlagPeriodeProp[],
+const createBeregningTableData = (allePerioder: BeregningsgrunnlagPeriodeProp[],
   aktivitetStatusList: string[],
   dekningsgrad: number,
   grunnbelop: number,

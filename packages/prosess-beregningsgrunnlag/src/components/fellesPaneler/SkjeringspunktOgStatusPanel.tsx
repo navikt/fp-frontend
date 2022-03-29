@@ -45,7 +45,7 @@ type OwnProps = {
  * Viser skjæringstidspunkt for beregningen og en liste med aktivitetsstatuser.
  */
 
-export const SkjeringspunktOgStatusPanel: FunctionComponent<OwnProps> = ({
+const SkjeringspunktOgStatusPanel: FunctionComponent<OwnProps> = ({
   skjeringstidspunktDato,
   aktivitetStatusList,
   alleKodeverk,
