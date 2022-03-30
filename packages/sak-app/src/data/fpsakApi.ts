@@ -117,7 +117,7 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('har-samme-resultat', FpsakApiKeys.HAR_REVURDERING_SAMME_RESULTAT)
   .withRel('bekreft-totrinnsaksjonspunkt', FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT)
   .withRel('har-apent-kontroller-revurdering-aksjonspunkt', FpsakApiKeys.HAR_APENT_KONTROLLER_REVURDERING_AP)
-  .withRel('brev-maler', FpsakApiKeys.BREVMALER)
+  .withRel('fpsak-brev-maler', FpsakApiKeys.BREVMALER)
   .withRel('brev-bestill', FpsakApiKeys.SUBMIT_MESSAGE)
   .withRel('behandling-rettigheter', FpsakApiKeys.BEHANDLING_RETTIGHETER)
 
