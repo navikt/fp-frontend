@@ -105,7 +105,7 @@ const InntektsmeldingOpplysningerPanel: FunctionComponent<OwnProps> = ({
         </FlexColumn>
       </FlexRow>
       <VerticalSpacer eightPx />
-      {inntektsmelding.refusjonPrMnd && (
+      {inntektsmelding.refusjonPrMnd !== undefined && inntektsmelding.refusjonPrMnd !== null && (
         <>
           <FlexRow>
             <FlexColumn>
