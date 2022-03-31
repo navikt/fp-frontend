@@ -9,7 +9,6 @@ import {
   AoIArbeidsforhold, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold, AksjonspunktÅrsak, ArbeidOgInntektsmelding, Inntektsmelding, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
-import utropstegnIkonUrl from '@fpsak-frontend/assets/images/utropstegn.svg';
 import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
 import {
   TableColumn, PeriodLabel, DateLabel, ExpandableTableRow,
@@ -68,7 +67,7 @@ const finnInntektsmelding = (
     throw Error('Har inntektsmelding både med og uten id');
   }
 
-  return inntektsmeldinger.find((i) => !i.internArbeidsforholdId || i.internArbeidsforholdId === internArbeidsforholdId);
+  return inntektsmeldinger.find((i) => !i.internArbeidsforholdId || !internArbeidsforholdId || i.internArbeidsforholdId === internArbeidsforholdId);
 };
 
 interface OwnProps {
@@ -118,7 +117,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
   const harÅpentAksjonspunkt = årsak && !avklaring?.saksbehandlersVurdering;
   const harArbeidsforholdUtenInntektsmeldingMenIngenÅrsak = arbeidsforholdForRad.length > 0
     && inntektsmeldingerForRad.length === 0 && !årsak && !erManueltOpprettet;
-  const førRegisterInnhenting = arbeidsforholdForRad.length === 0 && inntektsmeldingerForRad.length > 0 && !årsak;
+  const harKunInntektsmeldingOgIkkeÅrsak = arbeidsforholdForRad.length === 0 && inntektsmeldingerForRad.length > 0 && !årsak;
 
   const periode = useMemo(() => finnPeriode(arbeidsforholdForRad, radData.avklaring),
     [erManueltOpprettet, arbeidsforholdForRad, radData.avklaring]);
@@ -148,7 +147,7 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
               alleKodeverk={alleKodeverk}
             />
           )}
-          {førRegisterInnhenting && (
+          {harKunInntektsmeldingOgIkkeÅrsak && (
             <InntektsmeldingOpplysningerPanel
               saksnummer={saksnummer}
               arbeidsforhold={arbeidsforholdForRad.length > 0 ? arbeidsforholdForRad[0] : undefined}
@@ -205,14 +204,11 @@ const ArbeidsforholdRad: FunctionComponent<OwnProps> = ({
       isApLeftBorder={harÅpentAksjonspunkt}
     >
       <TableColumn className={classNames('ikon', erRadÅpen ? 'imageColTopPadding' : undefined)}>
-        {!førRegisterInnhenting && !harÅpentAksjonspunkt && (
+        {!harÅpentAksjonspunkt && (
           <Image alt={intl.formatMessage({ id: 'ArbeidsforholdRad.Ok' })} src={okIkonUrl} />
         )}
-        {!førRegisterInnhenting && harÅpentAksjonspunkt && (
+        {harÅpentAksjonspunkt && (
           <Image alt={intl.formatMessage({ id: 'ArbeidsforholdRad.Aksjonspunkt' })} src={advarselIkonUrl} />
-        )}
-        {førRegisterInnhenting && (
-          <Image alt={intl.formatMessage({ id: 'ArbeidsforholdRad.KanIkkeLøses' })} src={utropstegnIkonUrl} />
         )}
       </TableColumn>
       <TableColumn className={erRadÅpen ? styles.colTopPadding : undefined}>

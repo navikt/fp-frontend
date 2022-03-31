@@ -607,9 +607,8 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
 
-    expect(screen.queryByAltText('Arbeidsforhold er OK')).not.toBeInTheDocument();
+    expect(screen.getByAltText('Arbeidsforhold er OK')).toBeInTheDocument();
     expect(screen.queryByAltText('Åpent aksjonspunkt')).not.toBeInTheDocument();
-    expect(screen.getByAltText('Arbeidsforhold kan ikke løses nå')).toBeInTheDocument();
 
     expect(screen.getByAltText('Åpne rad')).toBeInTheDocument();
   });

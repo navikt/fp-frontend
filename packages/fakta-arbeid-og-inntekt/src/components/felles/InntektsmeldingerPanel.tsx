@@ -136,7 +136,7 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                     )}
                     {inntektsmelding && (
                       <>
-                        {visInfoOmIm[inntektsmelding.internArbeidsforholdId] && (
+                        {visInfoOmIm[a.internArbeidsforholdId] && (
                           <InntektsmeldingOpplysningerPanel
                             saksnummer={saksnummer}
                             inntektsmelding={inntektsmelding}
@@ -148,10 +148,10 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                           onClick={(e) => {
                             e.preventDefault();
                             toggleInfoOmIm((info) => {
-                              const status = info[inntektsmelding.internArbeidsforholdId];
+                              const status = info[a.internArbeidsforholdId];
                               return {
                                 ...info,
-                                [inntektsmelding.internArbeidsforholdId]: status === undefined || status === false,
+                                [a.internArbeidsforholdId]: status === undefined || status === false,
                               };
                             });
                           }}
@@ -160,12 +160,12 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                           <span>
                             <Normaltekst className={styles.inline}>
                               <FormattedMessage
-                                id={!visInfoOmIm[inntektsmelding.internArbeidsforholdId]
+                                id={!visInfoOmIm[a.internArbeidsforholdId]
                                   ? 'ArbeidsforholdInformasjonPanel.ApneImInfo' : 'ArbeidsforholdInformasjonPanel.LukkeImInfo'}
                               />
                             </Normaltekst>
                           </span>
-                          <Image className={styles.arrow} src={visInfoOmIm[inntektsmelding.internArbeidsforholdId] ? pilOppIkonUrl : pilNedIkonUrl} />
+                          <Image className={styles.arrow} src={visInfoOmIm[a.internArbeidsforholdId] ? pilOppIkonUrl : pilNedIkonUrl} />
                         </Lenke>
                       </>
                     )}
