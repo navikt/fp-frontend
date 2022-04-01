@@ -29,7 +29,7 @@
     "react": "17.0.2",
     "react-hook-form": "7.28.1",
     "react-intl": "5.24.7",
-    "react-router-dom": "6.2.2"
+    "react-router-dom": "6.3.0"
   },
   "devDependencies": {
     "@fpsak-frontend/storybook-utils": "1.0.0",
