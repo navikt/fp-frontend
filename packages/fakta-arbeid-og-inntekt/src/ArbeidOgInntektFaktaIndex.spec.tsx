@@ -58,7 +58,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
     expect(screen.queryByText('Sett på vent')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Jeg tar kontakt med arbeidsgiver for å innhente inntektsmelding'));
+    userEvent.click(screen.getByText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'));
 
     userEvent.paste(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
@@ -509,7 +509,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Jeg tar kontakt med arbeidsgiver for å innhente inntektsmelding'));
+    userEvent.click(screen.getByText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'));
 
     userEvent.paste(utils.getAllByLabelText('Begrunn valget')[0], 'Dette er en begrunnelse');
 
@@ -577,7 +577,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(screen.getByText('Inntekter totalt fra virksomheten (fra A-ordningen)')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Jeg tar kontakt med arbeidsgiver for å innhente inntektsmelding'));
+    userEvent.click(screen.getByText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'));
 
     userEvent.paste(utils.getByLabelText('Kommentar'), 'Dette er en kommentar');
 
