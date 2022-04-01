@@ -12,7 +12,7 @@
     "@navikt/fnrvalidator": "1.1.4",
     "@navikt/fp-react-components": "1.0.12",
     "classnames": "2.3.1",
-    "echarts": "5.3.1",
+    "echarts": "5.3.2",
     "moment": "2.29.1",
     "nav-frontend-core": "6.0.1",
     "nav-frontend-grid": "2.0.1",
