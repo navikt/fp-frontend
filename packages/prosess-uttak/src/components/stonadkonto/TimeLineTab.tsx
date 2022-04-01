@@ -27,6 +27,8 @@ const findKorrektLabelForKvote = (stonadtype: string): string => {
       return 'TimeLineTab.Stonadinfo.ForeldrePenger';
     case stonadskontoType.UTEN_AKTIVITETSKRAV:
       return 'TimeLineTab.Stonadinfo.UtenAktivitetskrav';
+    case stonadskontoType.MINSTERETT:
+      return 'TimeLineTab.Stonadinfo.Minsterett';
     default:
       return 'TimeLineTab.Stonadinfo.Empty';
   }
