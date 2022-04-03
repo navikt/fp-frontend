@@ -5,7 +5,6 @@ import {
   ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, Beregningsgrunnlag,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@fpsak-frontend/utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import FordelBeregningsgrunnlagAP
   from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/FordelBeregningsgrunnlagAP';
@@ -35,18 +34,18 @@ const FordelBeregningsgrunnlagFaktaIndex:FunctionComponent<OwnProps & StandardFa
   setFormData,
 }) => (
   <RawIntlProvider value={intl}>
-    <ReduxWrapper formName="FordelBeregningsgrunnlagFaktaIndex" formData={formData} setFormData={setFormData}>
-      <FordelBeregningsgrunnlagPanel
-        behandlingType={behandling.type}
-        alleKodeverk={alleKodeverk}
-        aksjonspunkter={aksjonspunkter}
-        submitCallback={submitCallback}
-        readOnly={readOnly}
-        beregningsgrunnlag={beregningsgrunnlag}
-        submittable={submittable}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      />
-    </ReduxWrapper>
+    <FordelBeregningsgrunnlagPanel
+      behandlingType={behandling.type}
+      alleKodeverk={alleKodeverk}
+      aksjonspunkter={aksjonspunkter}
+      submitCallback={submitCallback}
+      readOnly={readOnly}
+      beregningsgrunnlag={beregningsgrunnlag}
+      submittable={submittable}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      formData={formData}
+      setFormData={setFormData}
+    />
   </RawIntlProvider>
 );
 

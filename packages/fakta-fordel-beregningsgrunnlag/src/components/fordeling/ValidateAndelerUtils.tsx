@@ -9,12 +9,12 @@ import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 
 import { GRADERING_RANGE_DENOMINATOR, mapToBelop } from './BgFordelingUtils';
-import { createVisningsnavnForAktivitetFordeling } from './util/visningsnavnHelper';
+import { createVisningsnavnForAktivitetFordeling } from '../util/visningsnavnHelper';
 import {
   FordelBeregningsgrunnlagAndelValues,
   FordelingFieldError,
   PeriodeTsType,
-} from '../types/FordelingTsType';
+} from '../../types/FordelBeregningsgrunnlagPanelValues';
 
 const convertToNumber = (n: string): number => (n === null || n === undefined ? null : Number(removeSpacesFromNumber(n)));
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
@@ -11,7 +10,11 @@ import FordelBeregningsgrunnlagAP
 import VurderRefusjonBeregningsgrunnlagAP
   from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/VurderRefusjonBeregningsgrunnlagAP';
 import VurderEndringRefusjonForm from './refusjon/VurderEndringRefusjonForm';
-import FordelingForm from './FordelingForm';
+import FordelingForm from './fordeling/FordelingForm';
+import {
+  FordelBeregningsgrunnlagMedAksjonspunktValues,
+  VurderRefusjonValues,
+} from '../types/FordelBeregningsgrunnlagPanelValues';
 
 const {
   FORDEL_BEREGNINGSGRUNNLAG,
@@ -34,6 +37,8 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
   behandlingType: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  formData?: FordelBeregningsgrunnlagMedAksjonspunktValues | VurderRefusjonValues;
+  setFormData: (data: FordelBeregningsgrunnlagMedAksjonspunktValues | VurderRefusjonValues) => void,
 }
 
 interface OwnState {
@@ -45,8 +50,8 @@ interface OwnState {
  *
  * Har ansvar for å sette opp Redux Formen for "avklar fakta om fordeling" panel.
  */
-export class FordelBeregningsgrunnlagPanel extends Component<OwnProps & WrappedComponentProps, OwnState> {
-  constructor(props: OwnProps & WrappedComponentProps) {
+export class FordelBeregningsgrunnlagPanel extends Component<OwnProps, OwnState> {
+  constructor(props: OwnProps) {
     super(props);
     this.state = {
       submitEnabled: false,
@@ -65,7 +70,6 @@ export class FordelBeregningsgrunnlagPanel extends Component<OwnProps & WrappedC
   render() {
     const {
       props: {
-        intl,
         readOnly,
         aksjonspunkter,
         submitCallback,
@@ -74,6 +78,8 @@ export class FordelBeregningsgrunnlagPanel extends Component<OwnProps & WrappedC
         behandlingType,
         submittable,
         arbeidsgiverOpplysningerPerId,
+        formData,
+        setFormData,
       },
       state: {
         submitEnabled,
@@ -85,22 +91,20 @@ export class FordelBeregningsgrunnlagPanel extends Component<OwnProps & WrappedC
     const skalViseRefusjon = refusjonAP && harRefusjonInfo(beregningsgrunnlag);
     return (
       <>
-        {skalViseRefusjon
-      && (
-      <VurderEndringRefusjonForm
-        submitEnabled={submitEnabled}
-        submittable={submittable}
-        readOnly={readOnly}
-        submitCallback={submitCallback}
-        beregningsgrunnlag={beregningsgrunnlag}
-        aksjonspunkter={aksjonspunkter}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      />
-      )}
+        {skalViseRefusjon && (
+        <VurderEndringRefusjonForm
+          submittable={submittable}
+          readOnly={readOnly}
+          submitCallback={submitCallback}
+          beregningsgrunnlag={beregningsgrunnlag}
+          aksjonspunkter={aksjonspunkter}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          formData={formData as VurderRefusjonValues}
+          setFormData={setFormData}
+        />
+        )}
         {skalViseFordeling && (
           <FordelingForm
-            intl={intl}
-            submitEnabled={submitEnabled}
             submittable={submittable}
             readOnly={readOnly}
             submitCallback={submitCallback}
@@ -109,6 +113,8 @@ export class FordelBeregningsgrunnlagPanel extends Component<OwnProps & WrappedC
             behandlingType={behandlingType}
             aksjonspunkter={aksjonspunkter}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+            formData={formData as FordelBeregningsgrunnlagMedAksjonspunktValues}
+            setFormData={setFormData}
           />
         )}
       </>
@@ -116,4 +122,4 @@ export class FordelBeregningsgrunnlagPanel extends Component<OwnProps & WrappedC
   }
 }
 
-export default injectIntl(FordelBeregningsgrunnlagPanel);
+export default FordelBeregningsgrunnlagPanel;

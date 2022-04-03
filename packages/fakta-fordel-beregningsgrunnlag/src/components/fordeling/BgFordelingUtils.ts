@@ -6,12 +6,12 @@ import {
   FordelBeregningsgrunnlagAndel,
 } from '@fpsak-frontend/types';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { createVisningsnavnForAktivitetFordeling } from './util/visningsnavnHelper';
+import { createVisningsnavnForAktivitetFordeling } from '../util/visningsnavnHelper';
 import {
   FordelBeregningsgrunnlagAndelValues,
   FordelBeregningsgrunnlagArbeidAndelValues,
   FordelBeregningsgrunnlagGenerellAndelValues,
-} from '../types/FordelingTsType';
+} from '../../types/FordelBeregningsgrunnlagPanelValues';
 
 export const GRADERING_RANGE_DENOMINATOR = ' - ';
 

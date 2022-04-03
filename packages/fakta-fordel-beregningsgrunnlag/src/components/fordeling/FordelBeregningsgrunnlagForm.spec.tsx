@@ -16,7 +16,7 @@ import {
 } from './FordelBeregningsgrunnlagForm';
 import FordelBeregningsgrunnlagPeriodePanel from './FordelBeregningsgrunnlagPeriodePanel';
 import messages from '../../../i18n/nb_NO.json';
-import { FordelBeregningsgrunnlagAndelValues } from '../../types/FordelingTsType';
+import { FordelBeregningsgrunnlagAndelValues } from '../../types/FordelBeregningsgrunnlagPanelValues';
 
 const intlMock = getIntlMock(messages);
 

@@ -1,8 +1,6 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { createSelector } from 'reselect';
 import moment from 'moment';
-import { connect } from 'react-redux';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -14,7 +12,7 @@ import {
   ArbeidsgiverOpplysningerPerId,
   AlleKodeverk, PerioderMedGraderingEllerRefusjon,
 } from '@fpsak-frontend/types';
-import { createVisningsnavnForAktivitetFordeling } from './util/visningsnavnHelper';
+import { createVisningsnavnForAktivitetFordeling } from '../util/visningsnavnHelper';
 
 const {
   FORDEL_BEREGNINGSGRUNNLAG,
@@ -71,7 +69,7 @@ const finnVisningsnavn = (arbeidsforhold: ArbeidsforholdTilFordeling,
   return createVisningsnavnForAktivitetFordeling(agOpplysninger, arbeidsforhold.eksternArbeidsforholdId);
 };
 
-export const createFordelArbeidsforholdString = (listOfArbeidsforhold: ArbeidsforholdTilFordeling[],
+const createFordelArbeidsforholdString = (listOfArbeidsforhold: ArbeidsforholdTilFordeling[],
   mTextCase: string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string): string | ArbeidsforholdInfo => {
@@ -181,44 +179,36 @@ const lagHelpTextsFordelBG = (endredeArbeidsforhold: ArbeidsforholdTilFordeling[
   return helpTexts;
 };
 
-type MappedOwnProps = {
-  helpText: React.ReactElement[];
-}
+export const getHelpTextsFordelBG = (beregningsgrunnlag: Beregningsgrunnlag,
+  alleKodeverk: AlleKodeverk,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+  aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
+  const fordelBG = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag;
+  const endredeArbeidsforhold = fordelBG ? fordelBG.arbeidsforholdTilFordeling : [];
+  return hasAksjonspunkt(FORDEL_BEREGNINGSGRUNNLAG, aksjonspunkter)
+    ? lagHelpTextsFordelBG(endredeArbeidsforhold, getKodeverknavnFn(alleKodeverk), arbeidsgiverOpplysningerPerId)
+    : [];
+};
 
 type OwnProps = {
     isAksjonspunktClosed: boolean;
-};
-
-type OwnInitialProps = {
   beregningsgrunnlag: Beregningsgrunnlag;
   alleKodeverk: AlleKodeverk;
   aksjonspunkter: Aksjonspunkt[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-}
+};
 
-export const FordelingHelpTextImpl: FunctionComponent<OwnProps & MappedOwnProps & OwnInitialProps> = ({ helpText, isAksjonspunktClosed }) => (
-  <AksjonspunktHelpTextTemp isAksjonspunktOpen={!isAksjonspunktClosed}>{helpText}</AksjonspunktHelpTextTemp>
-);
+const FordelingHelpText: FunctionComponent<OwnProps> = ({
+  isAksjonspunktClosed,
+  beregningsgrunnlag,
+  alleKodeverk,
+  aksjonspunkter,
+  arbeidsgiverOpplysningerPerId,
+}) => {
+  const helpText = getHelpTextsFordelBG(beregningsgrunnlag, alleKodeverk, arbeidsgiverOpplysningerPerId, aksjonspunkter);
+  return (
+    <AksjonspunktHelpTextTemp isAksjonspunktOpen={!isAksjonspunktClosed}>{helpText}</AksjonspunktHelpTextTemp>
+  );
+};
 
-export const getHelpTextsFordelBG = createSelector(
-  [(ownProps: OwnInitialProps) => ownProps.beregningsgrunnlag,
-    (ownProps: OwnInitialProps) => ownProps.alleKodeverk,
-    (ownProps: OwnInitialProps) => ownProps.arbeidsgiverOpplysningerPerId,
-    (ownProps: OwnInitialProps) => ownProps.aksjonspunkter],
-  (beregningsgrunnlag,
-    alleKodeverk,
-    arbeidsgiverOpplysningerPerId,
-    aksjonspunkter): ReactElement[] => {
-    const fordelBG = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag;
-    const endredeArbeidsforhold = fordelBG ? fordelBG.arbeidsforholdTilFordeling : [];
-    return hasAksjonspunkt(FORDEL_BEREGNINGSGRUNNLAG, aksjonspunkter)
-      ? lagHelpTextsFordelBG(endredeArbeidsforhold, getKodeverknavnFn(alleKodeverk), arbeidsgiverOpplysningerPerId)
-      : [];
-  },
-);
-
-const mapStateToProps = (state: any, ownProps: OwnInitialProps): MappedOwnProps => ({
-  helpText: getHelpTextsFordelBG(ownProps),
-});
-
-export default connect(mapStateToProps)(FordelingHelpTextImpl);
+export default FordelingHelpText;

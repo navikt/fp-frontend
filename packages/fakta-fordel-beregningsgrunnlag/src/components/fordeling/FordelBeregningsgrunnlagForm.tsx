@@ -27,7 +27,7 @@ import styles from './fordelBeregningsgrunnlagForm.less';
 import FordelBeregningsgrunnlagMedAksjonspunktValues, {
   FordelBeregningsgrunnlagAndelValues,
   FordelBeregningsgrunnlagValues,
-} from '../../types/FordelingTsType';
+} from '../../types/FordelBeregningsgrunnlagPanelValues';
 
 const fordelBGFieldArrayNamePrefix = 'fordelBGPeriode';
 

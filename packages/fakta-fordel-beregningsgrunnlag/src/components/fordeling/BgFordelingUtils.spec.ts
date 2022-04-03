@@ -8,7 +8,7 @@ import {
   settAndelIArbeid,
   settFastsattBelop,
 } from './BgFordelingUtils';
-import { FordelBeregningsgrunnlagAndelValues } from '../types/FordelingTsType';
+import { FordelBeregningsgrunnlagAndelValues } from '../../types/FordelBeregningsgrunnlagPanelValues';
 
 const arbeidsgiver = {
   arbeidsgiverIdent: '3284788923',

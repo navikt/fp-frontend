@@ -5,7 +5,7 @@ import Beregningsgrunnlag, {
 } from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import { FordelBeregningsgrunnlagAndel, FordelBeregningsgrunnlagPeriode } from '@fpsak-frontend/types';
 import BeregningsgrunnlagArbeidsforhold from '@fpsak-frontend/types/src/beregningsgrunnlagArbeidsforholdTsType';
-import { BGFordelArbeidsforhold } from '../types/FordelingTsType';
+import { BGFordelArbeidsforhold } from '../../types/FordelBeregningsgrunnlagPanelValues';
 
 const arbeidsforholdEksistererIListen = (arbeidsforhold: BeregningsgrunnlagArbeidsforhold, arbeidsgiverList: BGFordelArbeidsforhold[]): boolean => {
   if (arbeidsforhold.arbeidsforholdId === null) {
@@ -55,17 +55,10 @@ const getUniqueListOfArbeidsforholdFromPerioder = (fordelPerioder: FordelBeregni
   finnAndelerFraBgperioder(bgPerioder),
 );
 
-type SelectorProps = {
-  beregningsgrunnlag: Beregningsgrunnlag;
-}
-
-const finnUnikeArbeidsforhold = createSelector(
-  [(props: SelectorProps) => props.beregningsgrunnlag],
-  (beregningsgrunnlag): BGFordelArbeidsforhold[] => {
-    const fordelBGPerioder = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag.fordelBeregningsgrunnlagPerioder;
-    const bgPerioder = beregningsgrunnlag.beregningsgrunnlagPeriode;
-    return getUniqueListOfArbeidsforholdFromPerioder(fordelBGPerioder, bgPerioder);
-  },
-);
+const finnUnikeArbeidsforhold = (beregningsgrunnlag: Beregningsgrunnlag): BGFordelArbeidsforhold[] => {
+  const fordelBGPerioder = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag.fordelBeregningsgrunnlagPerioder;
+  const bgPerioder = beregningsgrunnlag.beregningsgrunnlagPeriode;
+  return getUniqueListOfArbeidsforholdFromPerioder(fordelBGPerioder, bgPerioder);
+};
 
 export default finnUnikeArbeidsforhold;

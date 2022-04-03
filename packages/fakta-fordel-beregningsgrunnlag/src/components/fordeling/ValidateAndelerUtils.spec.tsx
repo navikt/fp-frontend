@@ -12,8 +12,8 @@ import {
   validateTotalRefusjonPrArbeidsforhold,
   validateUlikeAndeler,
 } from './ValidateAndelerUtils';
-import messages from '../../i18n/nb_NO.json';
-import { FordelBeregningsgrunnlagAndelValues } from '../types/FordelingTsType';
+import messages from '../../../i18n/nb_NO.json';
+import { FordelBeregningsgrunnlagAndelValues } from '../../types/FordelBeregningsgrunnlagPanelValues';
 
 const intlMock = getIntlMock(messages);
 
