@@ -14,7 +14,7 @@
     "@fpsak-frontend/utils": "1.0.0",
     "@navikt/fp-react-components": "1.0.12",
     "classnames": "2.3.1",
-    "moment": "2.29.1",
+    "moment": "2.29.2",
     "nav-frontend-chevron": "1.0.30",
     "nav-frontend-chevron-style": "1.0.4",
     "nav-frontend-core": "6.0.1",
