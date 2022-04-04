@@ -118,7 +118,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     render(<InnhentInntektsmeldingDerEnIkkeHarInntekterFraAAregisteret />);
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
-    expect(screen.getByText('Ingen inntekt registrert på bruker i A-ordningen siste ti mnd.')).toBeInTheDocument();
+    expect(screen.getByText('Ingen inntekt registrert på bruker i A-ordningen siste seks mnd.')).toBeInTheDocument();
     expect(screen.queryByText('Inntekter (fra A-ordningen)')).not.toBeInTheDocument();
   });
 
@@ -625,7 +625,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(screen.getByText('Stillingsprosent')).toBeInTheDocument();
     expect(screen.getByText('20%')).toBeInTheDocument();
-    expect(screen.getByText('Ingen inntekt registrert på bruker i A-ordningen siste ti mnd.')).toBeInTheDocument();
+    expect(screen.getByText('Ingen inntekt registrert på bruker i A-ordningen siste seks mnd.')).toBeInTheDocument();
   });
 
   it('skal ha mottatt etterspurt innnteksmelding og kan da gå videre', async () => {
