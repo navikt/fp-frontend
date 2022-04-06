@@ -7,7 +7,6 @@ import CustomUttakKontrollerFaktaPerioder from '../../CustomUttakKontrollerFakta
 
 export const sjekkOmfaktaOmUttakAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
   .some((ap: Aksjonspunkt) => aksjonspunktCodes.AVKLAR_UTTAK === ap.definisjon
-  || aksjonspunktCodes.ANNEN_FORELDER_IKKE_RETT_OG_LØPENDE_VEDTAK === ap.definisjon
   || aksjonspunktCodes.AVKLAR_FØRSTE_UTTAKSDATO === ap.definisjon);
 
 export const sjekkArbeidsprosentOver100 = (periode: CustomUttakKontrollerFaktaPerioder): boolean => periode.arbeidstidsprosent > 100;

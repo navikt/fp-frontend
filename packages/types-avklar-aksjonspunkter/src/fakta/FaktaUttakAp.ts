@@ -48,7 +48,6 @@ type FaktaUttakAp = {
     begrunnelse?: string;
   }[];
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_UTTAK
-  | AksjonspunktKode.ANNEN_FORELDER_IKKE_RETT_OG_LØPENDE_VEDTAK
   | AksjonspunktKode.AVKLAR_FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET
   | AksjonspunktKode.AVKLAR_FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG
   | AksjonspunktKode.AVKLAR_FØRSTE_UTTAKSDATO
