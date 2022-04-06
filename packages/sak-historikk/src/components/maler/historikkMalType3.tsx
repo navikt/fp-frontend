@@ -56,7 +56,6 @@ const aksjonspunktCodesToTextCode = {
     'Historikk.Aleneomsorg.ApplicationInformation',
   [aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: 'Historikk.Omsorg.ApplicationInformation',
   [aksjonspunktCodes.AVKLAR_UTTAK]: 'Historikk.FaktaUttak',
-  [aksjonspunktCodes.ANNEN_FORELDER_IKKE_RETT_OG_LØPENDE_VEDTAK]: 'Historikk.FaktaUttak',
   [aksjonspunktCodes.FASTSETT_UTTAKPERIODER]: 'Historikk.Fastsett.Manuelt',
   [aksjonspunktCodes.KONTROLLER_OPPLYSNINGER_OM_DØD]: 'Historikk.OpplysningerOmDod',
   [aksjonspunktCodes.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST]: 'Historikk.OpplysningerOmSoknadsfrist',
