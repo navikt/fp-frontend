@@ -11,7 +11,7 @@
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
     "@navikt/fp-react-components": "1.0.12",
-    "moment": "2.29.1",
+    "moment": "2.29.2",
     "nav-frontend-etiketter": "3.0.1",
     "nav-frontend-etiketter-style": "2.0.1",
     "nav-frontend-typografi": "4.0.1",
