@@ -15,6 +15,6 @@
   },
   "devDependencies": {
     "@storybook/testing-react": "1.2.4",
-    "@testing-library/react": "12.1.4"
+    "@testing-library/react": "13.0.0"
   }
 }

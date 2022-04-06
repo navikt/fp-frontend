@@ -9,6 +9,6 @@
     "@fpsak-frontend/rest-api": "1.0.0"
   },
   "devDependencies": {
-    "@testing-library/react": "12.1.4"
+    "@testing-library/react": "13.0.0"
   }
 }
