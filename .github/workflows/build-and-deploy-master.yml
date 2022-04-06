@@ -24,7 +24,7 @@ jobs:
       - name: Sette opp Node
         uses: actions/setup-node@v2.5.1
         with:
-          node-version: 17.x
+          node-version: 17.8.0
           registry-url: https://npm.pkg.github.com/
           scope: '@navikt'
           cache: 'yarn'
