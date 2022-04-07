@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, Suspense,
+  FunctionComponent,
 } from 'react';
 
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
@@ -11,21 +11,10 @@ import {
 } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@fpsak-frontend/utils';
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
 
 import messages from '../../i18n/nb_NO.json';
 import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
-
-let BeregningsgrunnlagProsessIndex;
-if (process.env.NODE_ENV === 'development') {
-  BeregningsgrunnlagProsessIndex = React.lazy(() => import(
-    // @ts-ignore
-    'ft_frontend_saksbehandling/ProsessBeregningsgrunnlag' // eslint-disable-line import/no-unresolved
-  ));
-}
-if (process.env.NODE_ENV !== 'development') {
-  BeregningsgrunnlagProsessIndex = React.lazy(() => import('@fpsak-frontend/prosess-beregningsgrunnlag'));
-}
+import DynamicLoader from '../DynamicLoader';
 
 const intl = createIntl(messages);
 
@@ -71,12 +60,13 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
     prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Beregning' })}
     skalPanelVisesIMeny={(_initData, initState) => initState === RestApiState.SUCCESS}
     renderPanel={(data) => (
-      <Suspense fallback={<LoadingPanel />}>
-        <BeregningsgrunnlagProsessIndex
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          {...data}
-        />
-      </Suspense>
+      <DynamicLoader
+        // @ts-ignore
+        altComp1={() => import('ft_prosess_beregningsgrunnlag/ProsessBeregningsgrunnlag')}// eslint-disable-line import/no-unresolved
+        altComp2={() => import('@fpsak-frontend/prosess-beregningsgrunnlag')}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        {...data}
+      />
     )}
   />
 );

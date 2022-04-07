@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, Suspense,
+  FunctionComponent,
 } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -9,21 +9,10 @@ import {
 } from '@fpsak-frontend/types';
 import { FaktaDefaultInitPanel, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@fpsak-frontend/utils';
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
 
 import messages from '../../i18n/nb_NO.json';
 import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
-
-let BeregningFaktaIndex;
-if (process.env.NODE_ENV === 'development') {
-  BeregningFaktaIndex = React.lazy(() => import(
-    // @ts-ignore
-    'ft_frontend_saksbehandling/FaktaBeregning' // eslint-disable-line import/no-unresolved
-  ));
-}
-if (process.env.NODE_ENV !== 'development') {
-  BeregningFaktaIndex = React.lazy(() => import('@fpsak-frontend/fakta-beregning'));
-}
+import DynamicLoader from '../DynamicLoader';
 
 const intl = createIntl(messages);
 
@@ -65,13 +54,14 @@ const BeregningFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
     faktaPanelMenyTekst={intl.formatMessage({ id: 'BeregningInfoPanel.Title' })}
     skalPanelVisesIMeny={(initData) => !!initData?.beregningsgrunnlag}
     renderPanel={(data) => (
-      <Suspense fallback={<LoadingPanel />}>
-        <BeregningFaktaIndex
-          erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          {...data}
-        />
-      </Suspense>
+      <DynamicLoader
+        // @ts-ignore
+        altComp1={() => import('ft_fakta_beregning/FaktaBeregning')}// eslint-disable-line import/no-unresolved
+        altComp2={() => import('@fpsak-frontend/fakta-beregning')}
+        erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        {...data}
+      />
     )}
   />
 );

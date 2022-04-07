@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, Suspense,
+  FunctionComponent,
 } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -7,21 +7,10 @@ import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@fpsak-frontend/utils';
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
 
-import messages from '../../i18n/nb_NO.json';
 import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
-
-let FordelBeregningsgrunnlagFaktaIndex;
-if (process.env.NODE_ENV === 'development') {
-  FordelBeregningsgrunnlagFaktaIndex = React.lazy(() => import(
-    // @ts-ignore
-    'ft_frontend_saksbehandling/FaktaFordelBeregningsgrunnlag' // eslint-disable-line import/no-unresolved
-  ));
-}
-if (process.env.NODE_ENV !== 'development') {
-  FordelBeregningsgrunnlagFaktaIndex = React.lazy(() => import('@fpsak-frontend/fakta-fordel-beregningsgrunnlag'));
-}
+import DynamicLoader from '../DynamicLoader';
+import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
@@ -59,9 +48,13 @@ const FordelingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
     skalPanelVisesIMeny={(initData) => !!initData.aksjonspunkter
       && !!initData.aksjonspunkter.some((ap) => AKSJONSPUNKT_KODER.some((kode) => kode === ap.definisjon))}
     renderPanel={(data) => (
-      <Suspense fallback={<LoadingPanel />}>
-        <FordelBeregningsgrunnlagFaktaIndex arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} {...data} />
-      </Suspense>
+      <DynamicLoader
+        // @ts-ignore
+        altComp1={() => import('ft_fakta_fordel_beregningsgrunnlag/FaktaFordelBeregningsgrunnlag')}// eslint-disable-line import/no-unresolved
+        altComp2={() => import('@fpsak-frontend/fakta-fordel-beregningsgrunnlag')}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        {...data}
+      />
     )}
   />
 );
