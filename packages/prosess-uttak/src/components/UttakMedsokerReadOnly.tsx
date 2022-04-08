@@ -4,7 +4,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Element } from 'nav-frontend-typografi';
 
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
-import { FloatRight } from '@fpsak-frontend/shared-components';
+import { FloatRight } from '@navikt/ft-ui-komponenter';
 import { ArbeidsgiverOpplysningerPerId, Behandling, AlleKodeverk } from '@fpsak-frontend/types';
 
 import UttakActivity from './UttakActivity';

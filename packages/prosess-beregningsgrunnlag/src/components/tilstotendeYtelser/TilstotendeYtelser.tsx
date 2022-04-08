@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
 import { Column, Row } from 'nav-frontend-grid';
-import { VerticalSpacer, AvsnittSkiller } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer, AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import aktivitetStatus, { isStatusDagpengerOrAAP } from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';

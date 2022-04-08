@@ -6,7 +6,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import {
   dateFormat, formatCurrencyNoKr, ISO_DATE_FORMAT, TIDENES_ENDE,
 } from '@fpsak-frontend/utils';
-import { VerticalSpacer, AvsnittSkiller } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer, AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 import {
   ArbeidsgiverOpplysningerPerId, BeregningsgrunnlagAndel,
   BeregningsgrunnlagPeriodeProp,

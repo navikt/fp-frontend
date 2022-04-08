@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
-import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
+import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { Dokument } from '@fpsak-frontend/types';
 import { hentDokumentLenke } from '@fpsak-frontend/konstanter';
 

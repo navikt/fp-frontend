@@ -9,7 +9,7 @@ import {
   dateAfterOrEqual, hasValidDate, required, dateIsBefore,
 } from '@fpsak-frontend/utils';
 import { DatepickerField, RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { ArrowBox } from '@fpsak-frontend/shared-components';
+import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import AktivtArbeidsforholdHandling from '../../kodeverk/aktivtArbeidsforholdHandling';
 import CustomArbeidsforhold from '../../typer/CustomArbeidsforholdTsType';

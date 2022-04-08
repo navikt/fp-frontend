@@ -5,12 +5,11 @@ import { Column, Row } from 'nav-frontend-grid';
 import {
   Element, Undertekst, Undertittel, Normaltekst,
 } from 'nav-frontend-typografi';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { Aksjonspunkt, BeregningsresultatEs } from '@fpsak-frontend/types';
 import {
-  VerticalSpacer, OverstyringKnapp,
-} from '@fpsak-frontend/shared-components';
+  VerticalSpacer, OverstyringKnapp, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import {
   formatCurrencyWithKr, hasValidInteger, maxValue, minValue, required, decodeHtmlEntity,
 } from '@fpsak-frontend/utils';

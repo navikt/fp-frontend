@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 
 import { Form } from '@fpsak-frontend/form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { AvsnittSkiller, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { AvsnittSkiller, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Column, Row } from 'nav-frontend-grid';
 
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';

@@ -5,12 +5,11 @@ import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import Alertstripe from 'nav-frontend-alertstriper';
 import {
-  Image, FlexContainer, FlexRow, FlexColumn,
+  Image, FlexContainer, FlexRow, FlexColumn, EditedIcon, AvsnittSkiller, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
 import popOutPilSvg from '@fpsak-frontend/assets/images/pop-out-pil.svg';
 import { TextAreaField } from '@fpsak-frontend/form-hooks';
-import { EditedIcon, AvsnittSkiller, VerticalSpacer } from '@fpsak-frontend/shared-components';
 import {
   getLanguageFromSprakkode, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';

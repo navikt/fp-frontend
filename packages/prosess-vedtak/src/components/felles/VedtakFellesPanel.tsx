@@ -7,7 +7,7 @@ import { Element, Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import {
-  FlexColumn, FlexContainer, FlexRow, Image,
+  FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer, OkAvbrytModal,
 } from '@navikt/ft-ui-komponenter';
 
 import avslagsarsakCodes from '@fpsak-frontend/kodeverk/src/avslagsarsakCodes';
@@ -17,9 +17,6 @@ import popOutPilSvg from '@fpsak-frontend/assets/images/pop-out-pil.svg';
 import endreSvg from '@fpsak-frontend/assets/images/endre.svg';
 import endreDisabletSvg from '@fpsak-frontend/assets/images/endre_disablet.svg';
 import { Behandling, Aksjonspunkt, Behandlingsresultat } from '@fpsak-frontend/types';
-import {
-  VerticalSpacer, OkAvbrytModal,
-} from '@fpsak-frontend/shared-components';
 import behandlingStatusCode from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import avslattImage from '@fpsak-frontend/assets/images/avslaatt_hover.svg';
 import innvilgetImage from '@fpsak-frontend/assets/images/innvilget_hover.svg';

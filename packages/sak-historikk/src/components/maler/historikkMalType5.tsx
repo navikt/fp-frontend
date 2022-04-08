@@ -5,7 +5,7 @@ import {
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import { HistorikkinnslagDel, HistorikkinnslagEndretFelt } from '@fpsak-frontend/types';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import historikkEndretFeltTypeCodes from '../../kodeverk/historikkEndretFeltTypeCodes';

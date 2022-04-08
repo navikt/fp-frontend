@@ -6,7 +6,7 @@ import { Element } from 'nav-frontend-typografi';
 import { Form } from '@fpsak-frontend/form-hooks';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
   VilkarResultPicker, ProsessStegBegrunnelseTextFieldNew, ProsessPanelTemplate,
 } from '@fpsak-frontend/prosess-felles';

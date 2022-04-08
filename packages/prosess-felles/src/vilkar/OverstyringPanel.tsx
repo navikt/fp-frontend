@@ -4,10 +4,9 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 
 import {
-  FlexContainer, FlexRow, FlexColumn, Image,
+  FlexContainer, FlexRow, FlexColumn, Image, EditedIcon, VerticalSpacer, AksjonspunktBox,
 } from '@navikt/ft-ui-komponenter';
 
-import { EditedIcon, VerticalSpacer, AksjonspunktBox } from '@fpsak-frontend/shared-components';
 import { TextAreaField } from '@fpsak-frontend/form-hooks';
 import {
   hasValidText, maxLength, minLength, createIntl,

@@ -7,7 +7,7 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   Table, TableColumn, TableRow, VerticalSpacer, FloatRight,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';

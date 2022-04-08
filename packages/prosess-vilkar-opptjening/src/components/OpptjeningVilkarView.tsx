@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { FastsattOpptjeningAktivitet } from '@fpsak-frontend/types';
-import { PeriodLabel, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { PeriodLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import OpptjeningTimeLineLight from './OpptjeningTimeLineLight';
 

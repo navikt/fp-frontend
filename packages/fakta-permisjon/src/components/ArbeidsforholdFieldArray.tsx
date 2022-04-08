@@ -4,16 +4,13 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import {
-  FlexColumn, FlexContainer, FlexRow, Image, Tooltip,
+  FlexColumn, FlexContainer, FlexRow, Image, Tooltip, VerticalSpacer, PeriodLabel, DateLabel,
 } from '@navikt/ft-ui-komponenter';
 
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
 import { required, TIDENES_ENDE } from '@fpsak-frontend/utils';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
-import {
-  VerticalSpacer, PeriodLabel, DateLabel,
-} from '@fpsak-frontend/shared-components';
 import {
   ArbeidOgInntektsmelding, AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding, AlleKodeverk,
 } from '@fpsak-frontend/types';

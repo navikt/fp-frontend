@@ -4,13 +4,10 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import {
-  FlexColumn, FlexContainer, FlexRow, Image,
+  VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image,
 } from '@navikt/ft-ui-komponenter';
 
 import behandleImageURL from '@fpsak-frontend/assets/images/advarsel.svg';
-import {
-  VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
 import {
   hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';

@@ -5,11 +5,10 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
-import { Image } from '@navikt/ft-ui-komponenter';
 
 import { SelectField, TextAreaField, Form } from '@fpsak-frontend/form-hooks';
 import { hasValidText, maxLength, required } from '@fpsak-frontend/utils';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer, Image } from '@navikt/ft-ui-komponenter';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 
 import styles from './endreBehandlendeEnhetModal.less';

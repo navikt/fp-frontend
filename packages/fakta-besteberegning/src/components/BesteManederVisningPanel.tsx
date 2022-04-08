@@ -7,7 +7,7 @@ import {
 import { Row, Column } from 'nav-frontend-grid';
 import {
   Table, TableColumn, TableRow, VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT, formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import {
   BesteberegningInntekt,

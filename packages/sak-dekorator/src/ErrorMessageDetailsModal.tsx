@@ -4,9 +4,8 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Knapp } from 'nav-frontend-knapper';
 import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
-import { Image } from '@navikt/ft-ui-komponenter';
 
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer, Image } from '@navikt/ft-ui-komponenter';
 import infoImageUrl from '@fpsak-frontend/assets/images/behandle.svg';
 
 import Feilmelding from './feilmeldingTsType';

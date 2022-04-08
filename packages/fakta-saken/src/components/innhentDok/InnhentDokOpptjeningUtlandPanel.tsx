@@ -5,7 +5,7 @@ import { Undertittel, Element } from 'nav-frontend-typografi';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@fpsak-frontend/fakta-felles';
-import { AksjonspunktBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { AksjonspunktBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required } from '@fpsak-frontend/utils';
 import { RadioGroupField, RadioOption, Form } from '@fpsak-frontend/form-hooks';
 import { Aksjonspunkt } from '@fpsak-frontend/types';

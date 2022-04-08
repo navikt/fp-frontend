@@ -3,7 +3,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 import classnames from 'classnames/bind';
 import { Normaltekst, Element, Undertekst } from 'nav-frontend-typografi';
-import { Image } from '@navikt/ft-ui-komponenter';
 
 import {
   AoIArbeidsforhold, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold, AksjonspunktÅrsak, ArbeidOgInntektsmelding, Inntektsmelding, AlleKodeverk,
@@ -11,8 +10,8 @@ import {
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
 import {
-  TableColumn, PeriodLabel, DateLabel, ExpandableTableRow,
-} from '@fpsak-frontend/shared-components';
+  TableColumn, PeriodLabel, DateLabel, ExpandableTableRow, Image,
+} from '@navikt/ft-ui-komponenter';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 import { TIDENES_ENDE } from '@fpsak-frontend/utils';
 import ManueltLagtTilArbeidsforholdForm from './manuelt/ManueltLagtTilArbeidsforholdForm';

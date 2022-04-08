@@ -8,7 +8,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
-import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { Aksjonspunkt, Ytelsefordeling } from '@fpsak-frontend/types';

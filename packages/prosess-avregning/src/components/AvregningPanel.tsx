@@ -8,14 +8,13 @@ import {
   Element, Normaltekst, Undertekst, Undertittel,
 } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Image } from '@navikt/ft-ui-komponenter';
 
 import {
   RadioGroupField, RadioOption, TextAreaField, Form,
 } from '@fpsak-frontend/form-hooks';
 import {
-  AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+  AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer, Image,
+} from '@navikt/ft-ui-komponenter';
 import {
   getLanguageFromSprakkode, hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';

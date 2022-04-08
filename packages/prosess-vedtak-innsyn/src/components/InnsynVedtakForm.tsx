@@ -6,7 +6,7 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
 import { ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Form, TextAreaField } from '@fpsak-frontend/form-hooks';
 import {

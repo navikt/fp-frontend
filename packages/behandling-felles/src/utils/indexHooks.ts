@@ -5,7 +5,7 @@ import {
 import { Behandling } from '@fpsak-frontend/types';
 import { RestApiHooks, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import { RequestApi, RestKey } from '@fpsak-frontend/rest-api';
-import { usePrevious } from '@fpsak-frontend/shared-components';
+import { usePrevious } from '@navikt/ft-ui-komponenter';
 
 import { BehandlingEventHandler } from '../types/standardBehandlingProps';
 

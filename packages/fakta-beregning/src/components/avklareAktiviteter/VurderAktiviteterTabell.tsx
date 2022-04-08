@@ -15,7 +15,7 @@ import opptjeningAktivitetTyper from '@fpsak-frontend/kodeverk/src/opptjeningAkt
 
 import {
   Table, TableRow, TableColumn, PeriodLabel, DateLabel, EditedIcon,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import {
   ArbeidsgiverOpplysningerPerId, BeregningAktivitet, AlleKodeverk,
 } from '@fpsak-frontend/types';

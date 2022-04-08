@@ -4,7 +4,7 @@ import { SkjemaGruppe } from 'nav-frontend-skjema';
 
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
-import { BorderBox } from '@fpsak-frontend/shared-components';
+import { BorderBox } from '@navikt/ft-ui-komponenter';
 
 import styles from './dekningsgradPanel.less';
 

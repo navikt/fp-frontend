@@ -5,7 +5,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import opptjeningAktivitetType from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { AksjonspunktHelpTextTemp, OverstyringKnapp } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextTemp, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import { FaktaOmBeregning, AlleKodeverk, Beregningsgrunnlag } from '@fpsak-frontend/types';
 
 import sinon from 'sinon';

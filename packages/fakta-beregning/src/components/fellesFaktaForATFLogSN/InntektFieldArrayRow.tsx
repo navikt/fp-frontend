@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { InputField, PeriodpickerField, SelectField } from '@fpsak-frontend/form';
 import { parseCurrencyInput } from '@fpsak-frontend/utils';
-import { TableColumn, TableRow } from '@fpsak-frontend/shared-components';
+import { TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { FieldArrayFieldsProps } from 'redux-form';
 import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';

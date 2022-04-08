@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextTemp } from '@navikt/ft-ui-komponenter';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
   Aksjonspunkt, AlleKodeverk, Personoversikt, Soknad, Ytelsefordeling,

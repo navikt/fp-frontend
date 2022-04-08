@@ -5,14 +5,13 @@ import { injectIntl, FormattedMessage, WrappedComponentProps } from 'react-intl'
 import { FieldArrayFieldsProps, FieldArrayMetaProps, formValueSelector } from 'redux-form';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Element } from 'nav-frontend-typografi';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import {
   DatepickerField, SelectField, DecimalField, PeriodFieldArray,
 } from '@fpsak-frontend/form';
 import {
-  VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+  VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import {
   hasValidDecimal, maxValue, minValue, required, hasValidDate,
 } from '@fpsak-frontend/utils';

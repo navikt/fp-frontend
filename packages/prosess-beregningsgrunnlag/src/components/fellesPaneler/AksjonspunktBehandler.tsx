@@ -10,7 +10,7 @@ import {
 import {
   hasValidText, maxLength, minLength, required,
 } from '@fpsak-frontend/utils';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
 import { TextAreaField } from '@fpsak-frontend/form-hooks';
 

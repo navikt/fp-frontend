@@ -4,14 +4,13 @@ import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { createSelector } from 'reselect';
 import { Undertekst } from 'nav-frontend-typografi';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import oppholdArsakType from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
 import {
-  VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+  VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
 import {
   hasValidPeriod, hasValidText, maxLength, minLength, required,

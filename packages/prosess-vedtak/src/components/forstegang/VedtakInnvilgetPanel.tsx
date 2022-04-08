@@ -8,7 +8,7 @@ import {
 } from '@fpsak-frontend/types';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { formatCurrencyWithKr } from '@fpsak-frontend/utils';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
 

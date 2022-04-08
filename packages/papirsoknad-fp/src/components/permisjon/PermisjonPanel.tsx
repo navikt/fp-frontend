@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Element, Undertittel } from 'nav-frontend-typografi';
 
-import { BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import { dateRangesNotOverlappingCrossTypes } from '@fpsak-frontend/utils';
 import { CheckboxField } from '@fpsak-frontend/form';

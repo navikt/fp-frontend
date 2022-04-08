@@ -11,7 +11,7 @@ import {
 } from '@fpsak-frontend/types';
 import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
-import { VerticalSpacer, Table } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer, Table } from '@navikt/ft-ui-komponenter';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';

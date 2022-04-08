@@ -4,14 +4,13 @@ import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField } from '@fpsak-frontend/fakta-felles';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  BorderBox, VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+  BorderBox, VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import {
   Aksjonspunkt, AlleKodeverk, MedlemPeriode, Medlemskap,
 } from '@fpsak-frontend/types';

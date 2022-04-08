@@ -6,7 +6,7 @@ import { RawIntlProvider } from 'react-intl';
 import {
   StandardBehandlingProps, useBehandling, useInitBehandlingHandlinger, useInitRequestApi, useLagreAksjonspunkt,
 } from '@fpsak-frontend/behandling-felles';
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@fpsak-frontend/utils';
 
 import RegistrerPapirsoknad from './components/RegistrerPapirsoknad';

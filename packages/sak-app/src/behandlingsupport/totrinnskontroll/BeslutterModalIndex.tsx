@@ -4,7 +4,7 @@ import React, {
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { BehandlingAppKontekst } from '@fpsak-frontend/types';
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { FatterVedtakTotrinnskontrollModalSakIndex } from '@fpsak-frontend/sak-totrinnskontroll';
 
 import { FpsakApiKeys, restApiHooks, requestApi } from '../../data/fpsakApi';

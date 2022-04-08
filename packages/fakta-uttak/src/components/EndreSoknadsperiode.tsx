@@ -1,8 +1,7 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import moment from 'moment';
-import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
+import { FlexColumn, FlexRow, ArrowBox } from '@navikt/ft-ui-komponenter';
 
-import { ArrowBox } from '@fpsak-frontend/shared-components';
 import { DecimalField, PeriodpickerField, SelectField } from '@fpsak-frontend/form';
 import oppholdArsakType, { oppholdArsakKontoNavn } from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
 import {

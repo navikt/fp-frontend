@@ -6,7 +6,7 @@ import moment from 'moment';
 import { DDMMYYYY_DATE_FORMAT, required } from '@fpsak-frontend/utils';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Permisjon } from '@fpsak-frontend/types';
 
 import { formValueSelector } from 'redux-form';

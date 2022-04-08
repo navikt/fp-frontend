@@ -6,7 +6,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 import AlertStripe from 'nav-frontend-alertstriper';
 
-import { DateLabel, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
+import { DateLabel, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { Datepicker, InputField } from '@fpsak-frontend/form-hooks';
 import {
   hasValidDate, hasValidInteger, maxValue, minValue, required,

@@ -8,7 +8,7 @@ import inntektskategorier from '@fpsak-frontend/kodeverk/src/inntektskategorier'
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
-import { Table, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { Table, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import {
   AndelForFaktaOmBeregning, ArbeidsgiverOpplysningerPerId,

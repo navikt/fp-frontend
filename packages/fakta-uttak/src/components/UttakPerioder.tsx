@@ -8,7 +8,6 @@ import { bindActionCreators, Dispatch } from 'redux';
 import moment from 'moment';
 import { Element } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
@@ -20,9 +19,8 @@ import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurd
 import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
-  VerticalSpacer,
-  AksjonspunktHelpTextHTML,
-} from '@fpsak-frontend/shared-components';
+  VerticalSpacer, FlexColumn, FlexContainer, FlexRow, AksjonspunktHelpTextHTML,
+} from '@navikt/ft-ui-komponenter';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
 import UttakPeriode from './UttakPeriode';

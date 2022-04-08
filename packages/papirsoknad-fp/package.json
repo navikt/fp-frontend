@@ -20,7 +20,6 @@
     "@fpsak-frontend/papirsoknad-panel-rettigheter": "1.0.0",
     "@fpsak-frontend/papirsoknad-panel-sprak": "1.0.0",
     "@fpsak-frontend/papirsoknad-panel-virksomhet": "1.0.0",
-    "@fpsak-frontend/shared-components": "1.0.0",
     "@fpsak-frontend/storybook-utils": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",

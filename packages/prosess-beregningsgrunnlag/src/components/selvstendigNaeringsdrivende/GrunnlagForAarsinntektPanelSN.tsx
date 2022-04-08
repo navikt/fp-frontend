@@ -4,7 +4,7 @@ import {
   Element, Normaltekst, Undertekst,
 } from 'nav-frontend-typografi';
 
-import { VerticalSpacer, AvsnittSkiller } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer, AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 

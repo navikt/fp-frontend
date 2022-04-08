@@ -6,11 +6,10 @@ import moment from 'moment';
 import { Undertekst, Element } from 'nav-frontend-typografi';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import Alertstripe from 'nav-frontend-alertstriper';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import {
-  ArrowBox, BorderBox, VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+  ArrowBox, BorderBox, VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import {
   DatepickerField, InputField, NavFieldGroup, RadioGroupField, RadioOption,
 } from '@fpsak-frontend/form';

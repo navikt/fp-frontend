@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import {
   Beregningsgrunnlag as BeregningsgrunnlagProp,

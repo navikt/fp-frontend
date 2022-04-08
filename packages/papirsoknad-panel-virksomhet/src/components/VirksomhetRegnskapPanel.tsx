@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
-import { ArrowBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { InputField, RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { required, hasValidInteger, hasValidText } from '@fpsak-frontend/utils';
 

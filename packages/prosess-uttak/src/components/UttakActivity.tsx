@@ -9,7 +9,6 @@ import { Column, Row } from 'nav-frontend-grid';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Undertekst } from 'nav-frontend-typografi';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import {
   RadioGroupField, RadioOption, SelectField, TextAreaField,
@@ -35,8 +34,8 @@ import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType'
 import utsettelseArsakCodes from '@fpsak-frontend/kodeverk/src/utsettelseArsakCodes';
 import oppholdArsakType, { oppholdArsakMapper } from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
 import {
-  ArrowBox, VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+  ArrowBox, VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 
 import {
   ArbeidsgiverOpplysningerPerId, AlleKodeverk, Behandling, KodeverkMedNavn,

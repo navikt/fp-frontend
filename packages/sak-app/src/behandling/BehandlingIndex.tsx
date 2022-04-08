@@ -8,7 +8,7 @@ import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { replaceNorwegianCharacters, parseQueryString } from '@fpsak-frontend/utils';
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
 

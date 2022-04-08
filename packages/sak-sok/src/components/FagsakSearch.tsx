@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { Fagsak, AlleKodeverk } from '@fpsak-frontend/types';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import SearchForm from './SearchForm';
 import FagsakList from './FagsakList';

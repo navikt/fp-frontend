@@ -7,7 +7,7 @@ import { Column, Container, Row } from 'nav-frontend-grid';
 import { Undertekst } from 'nav-frontend-typografi';
 
 import fht from '@fpsak-frontend/kodeverk/src/familieHendelseType';
-import { BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
   DatepickerField, InputField, RadioGroupField, RadioOption,
 } from '@fpsak-frontend/form';

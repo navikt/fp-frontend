@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { Element } from 'nav-frontend-typografi';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import {
   required, hasValidText, maxLength, minLength,
@@ -19,8 +18,8 @@ import {
   AoIArbeidsforhold, Inntektsmelding, Inntektspost, ManglendeInntektsmeldingVurdering,
 } from '@fpsak-frontend/types';
 import {
-  VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+  VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 
 import ArbeidsforholdOgInntekt from '../../types/arbeidsforholdOgInntekt';

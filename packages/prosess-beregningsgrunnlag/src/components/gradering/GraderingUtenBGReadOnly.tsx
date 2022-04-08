@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
-import { AvsnittSkiller, VerticalSpacer, EditedIcon } from '@fpsak-frontend/shared-components';
+import { AvsnittSkiller, VerticalSpacer, EditedIcon } from '@navikt/ft-ui-komponenter';
 import styles from './graderingUtenBGReadOnly.less';
 
 type OwnProps = {

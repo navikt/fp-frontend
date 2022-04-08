@@ -6,7 +6,7 @@ import { Column } from 'nav-frontend-grid';
 import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@fpsak-frontend/fakta-felles';
 import {
   ArrowBox, VerticalSpacer, FaktaGruppe,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
 import { required } from '@fpsak-frontend/utils';

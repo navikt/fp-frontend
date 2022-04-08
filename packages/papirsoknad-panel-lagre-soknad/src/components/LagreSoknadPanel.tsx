@@ -4,12 +4,11 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { ariaCheck, hasValidText, maxLength } from '@fpsak-frontend/utils';
 import {
-  BorderBox,
-} from '@fpsak-frontend/shared-components';
+  BorderBox, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import { CheckboxField, TextAreaField } from '@fpsak-frontend/form';
 
 import LukkPapirsoknadModal from './LukkPapirsoknadModal';

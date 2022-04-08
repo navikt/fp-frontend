@@ -6,7 +6,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
-import { VerticalSpacer, AvsnittSkiller } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer, AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';
 
 type OwnProps = {

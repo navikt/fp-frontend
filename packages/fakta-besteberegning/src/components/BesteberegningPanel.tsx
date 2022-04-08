@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag,
 } from '@fpsak-frontend/types';
-import { BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import Behandling from '@fpsak-frontend/types/src/behandlingTsType';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';

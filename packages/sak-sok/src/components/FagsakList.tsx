@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 
-import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
+import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { Fagsak, AlleKodeverk } from '@fpsak-frontend/types';
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';

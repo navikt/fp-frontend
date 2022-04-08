@@ -8,7 +8,7 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import {
   Behandlingsresultat, BeregningsresultatFp, BeregningsresultatEs,
 } from '@fpsak-frontend/types';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import VedtakFritekstPanel from '../felles/VedtakFritekstPanel';
 

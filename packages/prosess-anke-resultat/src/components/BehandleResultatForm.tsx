@@ -8,7 +8,7 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import { getKodeverknavnFn } from '@fpsak-frontend/utils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { ProsessStegSubmitButton, validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';

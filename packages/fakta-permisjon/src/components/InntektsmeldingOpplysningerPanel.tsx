@@ -3,15 +3,12 @@ import { FormattedMessage } from 'react-intl';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import {
-  FlexColumn, FlexContainer, FlexRow, Image,
+  FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
 import telefonImageUrl from '@fpsak-frontend/assets/images/phone-3.svg';
 import { Inntektsmelding } from '@fpsak-frontend/types';
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
-import {
-  VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
 import { hentDokumentLenke } from '@fpsak-frontend/konstanter';
 import dokumentSvg from '@fpsak-frontend/assets/images/dokument_filled.svg';
 

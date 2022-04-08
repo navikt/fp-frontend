@@ -2,11 +2,12 @@ import React from 'react';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 import { Knapp } from 'nav-frontend-knapper';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import {
+  AksjonspunktHelpTextHTML, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
 import { AlleKodeverk, FamilieHendelseSamling, Personoversikt } from '@fpsak-frontend/types';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 

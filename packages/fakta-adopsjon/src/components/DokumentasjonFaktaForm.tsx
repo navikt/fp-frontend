@@ -4,12 +4,11 @@ import { useFormContext } from 'react-hook-form';
 import moment from 'moment';
 import { Column, Container, Row } from 'nav-frontend-grid';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
-import { Image } from '@navikt/ft-ui-komponenter';
 
 import { FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
 import { Datepicker } from '@fpsak-frontend/form-hooks';
 import { hasValidDate, required } from '@fpsak-frontend/utils';
-import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer, FaktaGruppe, Image } from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 import { BekreftDokumentertDatoAksjonspunktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';

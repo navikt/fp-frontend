@@ -10,7 +10,7 @@ import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgj
 import ankeVurderingType from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import {
   AksjonspunktHelpTextTemp, VerticalSpacer, ArrowBox,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form';
 import { required } from '@fpsak-frontend/utils';
 import ankeOmgjorArsak from '@fpsak-frontend/kodeverk/src/ankeOmgjorArsak';

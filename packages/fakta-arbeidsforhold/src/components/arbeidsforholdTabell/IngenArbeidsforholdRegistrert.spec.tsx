@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import TableColumn from '@fpsak-frontend/shared-components/src/table/TableColumn';
+import { TableColumn } from '@navikt/ft-ui-komponenter';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import IngenArbeidsforholdRegistrert from './IngenArbeidsforholdRegistrert';

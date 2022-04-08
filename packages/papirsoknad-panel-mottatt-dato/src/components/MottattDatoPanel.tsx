@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 
-import { BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DatepickerField } from '@fpsak-frontend/form';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@fpsak-frontend/utils';
 

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Column, Row } from 'nav-frontend-grid';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 
-import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
   hasValidDate, hasValidText, maxLength, minLength, required,

@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import { AvsnittSkiller, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { AvsnittSkiller, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@fpsak-frontend/utils';
 import { HistorikkinnslagDel } from '@fpsak-frontend/types';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';

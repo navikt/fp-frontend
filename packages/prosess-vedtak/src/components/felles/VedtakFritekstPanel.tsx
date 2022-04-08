@@ -4,7 +4,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Undertekst } from 'nav-frontend-typografi';
 
 import { Behandlingsresultat } from '@fpsak-frontend/types';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { TextAreaField } from '@fpsak-frontend/form-hooks';
 import {
   decodeHtmlEntity, getLanguageFromSprakkode, hasValidText, maxLength, minLength,

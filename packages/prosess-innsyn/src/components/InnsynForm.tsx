@@ -12,7 +12,7 @@ import {
 } from '@fpsak-frontend/form-hooks';
 import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import { hasValidDate, ISO_DATE_FORMAT, required } from '@fpsak-frontend/utils';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';

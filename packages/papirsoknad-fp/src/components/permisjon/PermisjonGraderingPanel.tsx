@@ -5,7 +5,7 @@ import { FieldArray, formValueSelector } from 'redux-form';
 import { Element } from 'nav-frontend-typografi';
 
 import { CheckboxField } from '@fpsak-frontend/form';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   hasValidFodselsnummer,

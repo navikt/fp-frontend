@@ -7,9 +7,8 @@ import {
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
-import { Image } from '@navikt/ft-ui-komponenter';
+import { Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { NavFieldGroup } from '@fpsak-frontend/form';
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import removeIcon from '@fpsak-frontend/assets/images/remove.svg';

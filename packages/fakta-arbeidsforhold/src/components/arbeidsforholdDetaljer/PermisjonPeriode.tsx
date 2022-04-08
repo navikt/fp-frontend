@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import { VerticalSpacer, PeriodLabel } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import CustomArbeidsforhold from '../../typer/CustomArbeidsforholdTsType';
 

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { TableColumn, TableRow } from '@fpsak-frontend/shared-components';
+import { TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr, removeSpacesFromNumber } from '@fpsak-frontend/utils';
 import { getKanRedigereInntekt } from './BgFaktaUtils';
 

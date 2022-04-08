@@ -4,7 +4,7 @@ import { IntlShape } from 'react-intl';
 
 import { removeSpacesFromNumber } from '@fpsak-frontend/utils';
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import { BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';
 import {
   ArbeidsgiverOpplysningerPerId,

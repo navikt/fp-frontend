@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import {
-  Image, FlexColumn, FlexContainer, FlexRow,
+  Image, FlexColumn, FlexContainer, FlexRow, PeriodLabel, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
 import telefonImageUrl from '@fpsak-frontend/assets/images/phone-3.svg';
@@ -11,10 +11,6 @@ import { Inntektsmelding, AoIArbeidsforhold, AlleKodeverk } from '@fpsak-fronten
 import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import { getKodeverknavnFraKode } from '@fpsak-frontend/utils/src/kodeverkUtils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import {
-  PeriodLabel,
-  VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
 import { hentDokumentLenke } from '@fpsak-frontend/konstanter';
 import dokumentSvg from '@fpsak-frontend/assets/images/dokument_filled.svg';
 

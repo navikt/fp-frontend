@@ -7,13 +7,10 @@ import { createSelector } from 'reselect';
 import { Element, Undertittel } from 'nav-frontend-typografi';
 import { AlertStripeInfo, AlertStripeFeil } from 'nav-frontend-alertstriper';
 import {
-  Image, FlexColumn, FlexContainer, FlexRow,
+  Image, FlexColumn, FlexContainer, FlexRow, VerticalSpacer, AvsnittSkiller,
 } from '@navikt/ft-ui-komponenter';
 
 import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
-import {
-  VerticalSpacer, AvsnittSkiller,
-} from '@fpsak-frontend/shared-components';
 import { DatepickerField, TextAreaField } from '@fpsak-frontend/form';
 import {
   hasValidDate, hasValidText, maxLength, required, requiredIfNotPristine, DDMMYYYY_DATE_FORMAT,

@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import { AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';

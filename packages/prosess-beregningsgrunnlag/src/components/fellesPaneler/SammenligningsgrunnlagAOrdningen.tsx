@@ -3,13 +3,12 @@ import React, {
 } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
-import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { FormattedMessage, useIntl } from 'react-intl';
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import {
-  VerticalSpacer, AvsnittSkiller, ReactECharts,
-} from '@fpsak-frontend/shared-components';
+  VerticalSpacer, AvsnittSkiller, ReactECharts, FlexColumn, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import moment from 'moment';
 
 import {

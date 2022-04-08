@@ -8,7 +8,7 @@ import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl'
 import { bindActionCreators, Dispatch } from 'redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
-import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { guid, omitMany } from '@fpsak-frontend/utils';

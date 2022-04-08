@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Table } from '@fpsak-frontend/shared-components';
+import { Table } from '@navikt/ft-ui-komponenter';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { Beregningsgrunnlag, RefusjonTilVurderingAndel, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types/';

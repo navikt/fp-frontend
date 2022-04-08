@@ -1,10 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import {
-  FlexColumn, FlexContainer, FlexRow,
+  FlexColumn, FlexContainer, FlexRow, EditedIcon,
 } from '@navikt/ft-ui-komponenter';
-
-import { EditedIcon } from '@fpsak-frontend/shared-components';
 
 import Label from './Label';
 import LabelType from './LabelType';

@@ -7,7 +7,7 @@ import {
   Aksjonspunkt, AlleKodeverk, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
+import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 
 import PerioderMedMedlemskapFaktaPanel, { PerioderMedMedlemskapFaktaPanelImpl as UndecoratedForm, PeriodeMedId } from './PerioderMedMedlemskapFaktaPanel';
 import messages from '../../../i18n/nb_NO.json';

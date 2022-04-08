@@ -7,7 +7,6 @@ import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { createSelector } from 'reselect';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
-import { Image } from '@navikt/ft-ui-komponenter';
 
 import { InputField, NavFieldGroup, SelectField } from '@fpsak-frontend/form';
 import {
@@ -17,8 +16,8 @@ import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import {
-  Table, TableColumn, TableRow, VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+  Table, TableColumn, TableRow, VerticalSpacer, Image,
+} from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import { SortedAndelInfo, validateUlikeAndelerWithGroupingFunction } from '../ValidateAndelerUtils';

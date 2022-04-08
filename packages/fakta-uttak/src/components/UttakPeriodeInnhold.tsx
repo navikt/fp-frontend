@@ -3,7 +3,7 @@ import moment from 'moment';
 import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
 
 import { FamilieHendelse, FamilieHendelseSamling } from '@fpsak-frontend/types';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import utsettelseArsakCodes from '@fpsak-frontend/kodeverk/src/utsettelseArsakCodes';
 import overforingArsakCodes from '@fpsak-frontend/kodeverk/src/overforingArsakCodes';
 import FerieOgArbeidsPeriode from './perioder/FerieOgArbeidsPeriode';

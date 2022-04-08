@@ -6,7 +6,7 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { ArbeidsgiverOpplysningerPerId, FeriepengegrunnlagAndel, AlleKodeverk } from '@fpsak-frontend/types';
 import { DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
+import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 
 const finnAlleAndelerForOpptjeningsår = (andeler: FeriepengegrunnlagAndel[],
   opptjeningsår: number): FeriepengegrunnlagAndel[] => andeler.filter((andel) => andel.opptjeningsår === opptjeningsår);

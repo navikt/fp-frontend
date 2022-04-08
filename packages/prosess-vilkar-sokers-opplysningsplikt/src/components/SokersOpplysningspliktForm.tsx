@@ -13,7 +13,7 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   Table, TableColumn, TableRow, VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import {
   DDMMYYYY_DATE_FORMAT, isObject, required, getKodeverknavnFn,
 } from '@fpsak-frontend/utils';

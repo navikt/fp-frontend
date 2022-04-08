@@ -5,8 +5,9 @@ import {
 import {
   FormattedMessage, IntlShape, useIntl,
 } from 'react-intl';
-import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
-import { VerticalSpacer, AvsnittSkiller } from '@fpsak-frontend/shared-components';
+import {
+  VerticalSpacer, AvsnittSkiller, FlexColumn, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import { Column, Row } from 'nav-frontend-grid';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { dateFormat, formatCurrencyNoKr } from '@fpsak-frontend/utils';

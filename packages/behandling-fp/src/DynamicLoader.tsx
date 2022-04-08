@@ -4,7 +4,7 @@ import React, {
 import { Element } from 'nav-frontend-typografi';
 
 import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import ErrorBoundary from './ErrorBoundary';
 

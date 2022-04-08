@@ -12,7 +12,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ISO_DATE_FORMAT, addDaysToDate } from '@fpsak-frontend/utils';
 import {
   AksjonspunktHelpTextTemp, DateLabel, VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import { TimeLineNavigation } from '@fpsak-frontend/tidslinje';
 import {
   ArbeidsgiverOpplysningerPerId, AlleKodeverk, OpptjeningAktivitet, Opptjening,

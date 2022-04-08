@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextTemp } from '@navikt/ft-ui-komponenter';
 import {
   Aksjonspunkt, AlleKodeverk, FamilieHendelseSamling, Personoversikt,
   Soknad, Stonadskonto, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,

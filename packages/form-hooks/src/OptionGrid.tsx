@@ -1,9 +1,8 @@
 import React, { ElementType, FunctionComponent } from 'react';
 import {
-  FlexContainer, FlexRow, FlexColumn,
+  FlexContainer, FlexRow, FlexColumn, EditedIcon,
 } from '@navikt/ft-ui-komponenter';
 import { range } from '@fpsak-frontend/utils';
-import { EditedIcon } from '@fpsak-frontend/shared-components';
 import styles from './optionGrid.less';
 
 export type Direction = 'horizontal' | 'vertical';

@@ -8,7 +8,7 @@ import opptjeningAktivitetType from '@fpsak-frontend/kodeverk/src/opptjeningAkti
 import { RadioGroupField } from '@fpsak-frontend/form';
 import {
   Table, TableRow, TableColumn, EditedIcon,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 import { VurderAktiviteterTabell, lagAktivitetFieldId, skalVurdereAktivitet } from './VurderAktiviteterTabell';
 

@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Lenke from 'nav-frontend-lenker';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import {
-  Image, FlexColumn, FlexRow, Tooltip,
+  Image, FlexColumn, FlexRow, Tooltip, VerticalSpacer, FloatRight, PeriodLabel, AvsnittSkiller, DateLabel,
 } from '@navikt/ft-ui-komponenter';
 
 import { getKodeverknavnFraKode } from '@fpsak-frontend/utils/src/kodeverkUtils';
@@ -15,9 +15,6 @@ import pilNedIkonUrl from '@fpsak-frontend/assets/images/pil_ned.svg';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import { TIDENES_ENDE } from '@fpsak-frontend/utils';
 import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@fpsak-frontend/types';
-import {
-  VerticalSpacer, FloatRight, PeriodLabel, AvsnittSkiller, DateLabel,
-} from '@fpsak-frontend/shared-components';
 
 import { Column, Row } from 'nav-frontend-grid';
 import styles from './inntektsmeldingerPanel.less';

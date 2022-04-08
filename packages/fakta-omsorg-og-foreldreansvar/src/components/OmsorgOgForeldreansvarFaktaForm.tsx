@@ -6,7 +6,7 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import {
   AksjonspunktHelpTextTemp, VerticalSpacer, FaktaGruppe, EditedIcon,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { SelectField } from '@fpsak-frontend/form-hooks';
 import { required } from '@fpsak-frontend/utils';

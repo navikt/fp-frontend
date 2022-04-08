@@ -6,7 +6,7 @@ import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import {
   VerticalSpacer,
   Table, TableColumn, TableRow,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 
 import { FormattedMessage } from 'react-intl';
 import { Månedsgrunnlag } from '@fpsak-frontend/types/src/besteberegningTsTypes';

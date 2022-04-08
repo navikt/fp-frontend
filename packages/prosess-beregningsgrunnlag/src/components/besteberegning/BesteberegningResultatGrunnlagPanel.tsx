@@ -11,7 +11,7 @@ import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
 import {
   VerticalSpacer,
   Table, TableColumn, TableRow,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 
 interface OwnProps {
   periode: BeregningsgrunnlagPeriodeProp;

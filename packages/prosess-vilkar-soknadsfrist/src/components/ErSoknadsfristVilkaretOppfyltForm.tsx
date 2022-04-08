@@ -11,7 +11,7 @@ import { Form, RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { ISO_DATE_FORMAT, required, getKodeverknavnFn } from '@fpsak-frontend/utils';
-import { DateLabel, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';

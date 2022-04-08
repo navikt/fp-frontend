@@ -3,7 +3,7 @@ import {
 } from 'react';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { usePrevious } from '@fpsak-frontend/shared-components';
+import { usePrevious } from '@navikt/ft-ui-komponenter';
 
 import FaktaPanelMenyData from '../../types/faktaPanelMenyData';
 

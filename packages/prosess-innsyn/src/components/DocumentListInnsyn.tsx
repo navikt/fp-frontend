@@ -2,12 +2,11 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
-import { Image } from '@navikt/ft-ui-komponenter';
 
 import { CheckboxField } from '@fpsak-frontend/form-hooks';
 import {
-  DateTimeLabel, Table, TableColumn, TableRow,
-} from '@fpsak-frontend/shared-components';
+  DateTimeLabel, Table, TableColumn, TableRow, Image,
+} from '@navikt/ft-ui-komponenter';
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
 import { Dokument } from '@fpsak-frontend/types';
 import sendDokumentImageUrl from '@fpsak-frontend/assets/images/send_dokument.svg';

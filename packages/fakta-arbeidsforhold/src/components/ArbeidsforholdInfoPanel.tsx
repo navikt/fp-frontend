@@ -5,7 +5,7 @@ import { InjectedFormProps, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextTemp } from '@navikt/ft-ui-komponenter';
 import { omitMany } from '@fpsak-frontend/utils';
 import {
   Aksjonspunkt, Arbeidsforhold, ArbeidsgiverOpplysningerPerId, AlleKodeverk,

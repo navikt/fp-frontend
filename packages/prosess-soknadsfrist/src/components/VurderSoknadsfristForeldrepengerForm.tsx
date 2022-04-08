@@ -13,7 +13,7 @@ import {
 } from '@fpsak-frontend/form-hooks';
 import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import {
   dateBeforeOrEqualToToday, DDMMYYYY_DATE_FORMAT, hasValidDate, required,
 } from '@fpsak-frontend/utils';

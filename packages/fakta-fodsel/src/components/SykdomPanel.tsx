@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form-hooks';
 import {
   hasValidText, maxLength, minLength, required,

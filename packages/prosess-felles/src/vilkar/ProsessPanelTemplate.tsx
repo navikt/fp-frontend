@@ -3,12 +3,9 @@ import {
   Undertittel, Undertekst, Element, Normaltekst,
 } from 'nav-frontend-typografi';
 import {
-  FlexContainer, FlexRow, FlexColumn, Image,
+  FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer, AksjonspunktBox,
 } from '@navikt/ft-ui-komponenter';
 
-import {
-  VerticalSpacer, AksjonspunktBox,
-} from '@fpsak-frontend/shared-components';
 import { createIntl } from '@fpsak-frontend/utils';
 import avslattImage from '@fpsak-frontend/assets/images/avslaatt_hover.svg';
 import innvilgetImage from '@fpsak-frontend/assets/images/innvilget_hover.svg';

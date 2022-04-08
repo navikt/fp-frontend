@@ -9,12 +9,11 @@ import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl'
 import { Element } from 'nav-frontend-typografi';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Knapp } from 'nav-frontend-knapper';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
-  AksjonspunktHelpTextTemp, VerticalSpacer, OverstyringKnapp,
-} from '@fpsak-frontend/shared-components';
+  AksjonspunktHelpTextTemp, VerticalSpacer, OverstyringKnapp, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';

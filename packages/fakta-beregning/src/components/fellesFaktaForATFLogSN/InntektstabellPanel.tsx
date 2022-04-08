@@ -6,11 +6,10 @@ import { bindActionCreators } from 'redux';
 import { change, FormAction } from 'redux-form';
 import { Knapp } from 'nav-frontend-knapper';
 import { Element } from 'nav-frontend-typografi';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import {
-  VerticalSpacer, OverstyringKnapp,
-} from '@fpsak-frontend/shared-components';
+  VerticalSpacer, OverstyringKnapp, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';

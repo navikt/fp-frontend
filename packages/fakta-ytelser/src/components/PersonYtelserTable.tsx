@@ -4,7 +4,7 @@ import moment from 'moment';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
-import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
+import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { KodeverkMedNavn, RelatertTilgrensedYtelse } from '@fpsak-frontend/types';
 
 import styles from './personYtelserTable.less';

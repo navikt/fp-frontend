@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import {
   AksjonspunktHelpTextTemp, VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import { required } from '@fpsak-frontend/utils';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import {

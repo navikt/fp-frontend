@@ -10,7 +10,7 @@ import { KlageFormkravKaAp } from '@fpsak-frontend/types-avklar-aksjonspunkter/s
 import { Column, Row } from 'nav-frontend-grid';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { required } from '@fpsak-frontend/utils';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
 import { Undertittel } from 'nav-frontend-typografi';
 import styles from './formkravKlageForm.less';

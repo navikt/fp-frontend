@@ -5,7 +5,7 @@ import { formValueSelector, FieldArray } from 'redux-form';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 
 import { RadioGroupField, RadioOption, DatepickerField } from '@fpsak-frontend/form';
-import { BorderBox, ArrowBox } from '@fpsak-frontend/shared-components';
+import { BorderBox, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { required } from '@fpsak-frontend/utils';
 
 import BehovForTilrettteleggingFieldArray from './BehovForTilrettteleggingFieldArray';
