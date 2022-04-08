@@ -27,18 +27,16 @@ const {
 const findAksjonspunktMedBegrunnelse = (aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt | undefined => aksjonspunkter
   .find((ap) => ap.definisjon === FORDEL_BEREGNINGSGRUNNLAG && ap.begrunnelse !== null);
 
-export const BEGRUNNELSE_FORDELING_NAME = 'begrunnelseFordeling';
+export const BEGRUNNELSE_FORDELING_NAME = 'begrunnelse';
 
 export const transformValuesFordelBeregning = (beregningsgrunnlag: Beregningsgrunnlag,
   aksjonspunkter: Aksjonspunkt[], values: FordelBeregningsgrunnlagMedAksjonspunktValues): FordelBeregningsgrunnlagAP => {
   const bgPerioder = beregningsgrunnlag.beregningsgrunnlagPeriode;
   const fordelBGPerioder = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag.fordelBeregningsgrunnlagPerioder;
   if (hasAksjonspunkt(FORDEL_BEREGNINGSGRUNNLAG, aksjonspunkter)) {
-    // eslint-disable-next-line react/destructuring-assignment
-    const begrunnelse = values[BEGRUNNELSE_FORDELING_NAME];
     return {
       kode: FORDEL_BEREGNINGSGRUNNLAG,
-      begrunnelse: begrunnelse as string,
+      begrunnelse: values.begrunnelse,
       ...FastsettFordeltBeregningsgrunnlag.transformValues(values, fordelBGPerioder, bgPerioder),
     };
   }
@@ -92,7 +90,6 @@ const FordelingForm: FunctionComponent<PureOwnProps> = ({
   formData,
   setFormData,
 }) => {
-  const s = buildInitialValuesFordelBeregning(beregningsgrunnlag, arbeidsgiverOpplysningerPerId, alleKodeverk, aksjonspunkter);
   const formMethods = useForm<FordelBeregningsgrunnlagMedAksjonspunktValues>({
     defaultValues: formData || buildInitialValuesFordelBeregning(beregningsgrunnlag, arbeidsgiverOpplysningerPerId, alleKodeverk, aksjonspunkter),
   });

@@ -27,7 +27,7 @@ export type BGFordelArbeidsforhold = {
   beregningsperiodeTom: string;
   beregningsperiodeFom: string;
   arbeidsgiverNavn?: string;
-  arbeidsgiverId?: string;
+  arbeidsgiverIdent?: string;
   arbeidsgiverIdVisning?: string;
   eksternArbeidsforholdId?: string;
   refusjonPrAar?: number;
@@ -60,7 +60,7 @@ export type FordelBeregningsgrunnlagAndelValues = FordelBeregningsgrunnlagGenere
 }
 
 export type AksjonspunktValues = {
-  begrunnelseFordeling?: string;
+  begrunnelse?: string;
 }
 
 export type FordelErrorMessageLabel = {
@@ -73,7 +73,7 @@ export type FordelBeregningsgrunnlagValues = {
   [key: string]: FordelBeregningsgrunnlagAndelValues[];
 }
 
-export type FordelBeregningsgrunnlagMedAksjonspunktValues = AksjonspunktValues | FordelBeregningsgrunnlagValues;
+export type FordelBeregningsgrunnlagMedAksjonspunktValues = AksjonspunktValues & FordelBeregningsgrunnlagValues;
 
 export type PeriodeTsType = {
   fom: string;

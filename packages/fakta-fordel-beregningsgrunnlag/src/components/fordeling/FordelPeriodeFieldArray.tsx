@@ -6,7 +6,13 @@ import { Element, Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import { Image } from '@navikt/fp-react-components';
 import {
-  formatCurrencyNoKr, isArrayEmpty, parseCurrencyInput, removeSpacesFromNumber, getKodeverknavnFn, isRequiredMessage,
+  formatCurrencyNoKr,
+  isArrayEmpty,
+  parseCurrencyInput,
+  removeSpacesFromNumber,
+  getKodeverknavnFn,
+  isRequiredMessage,
+  required,
 } from '@fpsak-frontend/utils';
 import {
   Table, TableColumn, TableRow,
@@ -59,7 +65,7 @@ const fieldLabel = (index: number, labelId: string): LabelType => {
 const lagVisningsnavn = (arbeidsforhold: BGFordelArbeidsforhold,
   getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
-  const agOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverId];
+  const agOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
   if (!agOpplysninger) {
     return arbeidsforhold.arbeidsforholdType ? getKodeverknavn(arbeidsforhold.arbeidsforholdType, KodeverkType.OPPTJENING_AKTIVITET_TYPE) : '';
   }
@@ -178,7 +184,7 @@ const setArbeidsforholdInfo = (fields: any,
   if (arbeidsforhold) {
     field.arbeidsforholdId = arbeidsforhold.arbeidsforholdId;
     field.arbeidsgiverNavn = arbeidsforhold.arbeidsgiverNavn;
-    field.arbeidsgiverId = arbeidsforhold.arbeidsgiverId;
+    field.arbeidsgiverId = arbeidsforhold.arbeidsgiverIdent;
     field.arbeidsperiodeFom = arbeidsforhold.startdato;
     field.arbeidsperiodeTom = arbeidsforhold.opphoersdato;
     field.andelsnrRef = arbeidsforhold.andelsnr;
@@ -215,6 +221,7 @@ const arbeidsforholdReadOnlyOrSelect = (fields: any,
         label=""
         selectValues={selectVals}
         readOnly={isReadOnly}
+        validate={[required]}
         onChange={(event) => setArbeidsforholdInfo(fields, index, arbeidsforholdList, event.target.value, updateFieldMethod)}
       />
       )}
@@ -246,6 +253,7 @@ export const lagBelopKolonne = (fieldname: string,
         bredde="XS"
         parse={parseCurrencyInput}
         readOnly={readOnly}
+        validate={[required]}
         isEdited={isAksjonspunktClosed && !skalIkkeRedigereInntekt}
       />
     </TableColumn>
@@ -269,6 +277,7 @@ const createAndelerTableRows = (fields: any,
   removeFromFieldsMethod: any,
   updateFieldMethod: any): ReactElement[] => {
   const skalIkkeEndres = readOnly || skalIkkeRedigereInntekt;
+  const test = fields[0].skalKunneEndreRefusjon;
   return fields.map((field, index) => (
     <TableRow key={field.id}>
       <TableColumn>
@@ -311,6 +320,7 @@ const createAndelerTableRows = (fields: any,
           bredde="XS"
           readOnly={skalIkkeEndres || !fields[index].skalKunneEndreRefusjon}
           parse={parseCurrencyInput}
+          validate={fields[index].skalKunneEndreRefusjon ? [required] : []}
         />
       </TableColumn>
       <TableColumn>
@@ -327,6 +337,7 @@ const createAndelerTableRows = (fields: any,
           label=""
           name={`${fieldname}.${index}.inntektskategori`}
           bredde="s"
+          validate={[required]}
           selectValues={inntektskategoriSelectValues(inntektskategoriKoder)}
           readOnly={skalIkkeEndres}
         />
@@ -406,6 +417,57 @@ const getHeaderTextCodes = (erRevurdering: boolean): string[] => {
   return headerCodes;
 };
 
+const validerFordeling = (getValues: UseFormGetValues<any>,
+  intl: IntlShape,
+  fieldName: string,
+  getKodeverknavn: any,
+  grunnbeløp: any,
+  periodeDato: any,
+  skalValidereRefusjon: any,
+  arbeidsgiverOpplysningerPerId: any) => () => {
+  if (true) {
+    return undefined;
+    // return intl.formatMessage({ id: 'BeregningInfoPanel.FordelBG.Inntektskategori' });
+  }
+  return '1';
+};
+
+// FordelPeriodeFieldArray.validate = (intl, values, sumIPeriode, getKodeverknavn,
+//   grunnbeløp, periodeDato, skalValidereRefusjon, arbeidsgiverOpplysningerPerId) => {
+//   const fieldErrors = validateAndeler(intl, values, periodeDato);
+//   if (fieldErrors != null) {
+//     return fieldErrors;
+//   }
+//   if (isArrayEmpty(values)) {
+//     return null;
+//   }
+//   const ulikeAndelerFeilmelding = validateUlikeAndeler(values, intl);
+//   if (ulikeAndelerFeilmelding) {
+//     return { _error: ulikeAndelerFeilmelding };
+//   }
+//   const fastsattForUgraderteAktiviteterFeilmelding = validateSumFastsattForUgraderteAktiviteter(values, grunnbeløp, getKodeverknavn, intl);
+//   if (fastsattForUgraderteAktiviteterFeilmelding) {
+//     return { _error: fastsattForUgraderteAktiviteterFeilmelding };
+//   }
+//   if (skalValidereRefusjon) {
+//     const totalRefusjonFeilmelding = validateSumRefusjon(values, grunnbeløp, intl);
+//     if (totalRefusjonFeilmelding) {
+//       return { _error: totalRefusjonFeilmelding };
+//     }
+//     const refusjonPrArbeidsforholdFeilmelding = validateTotalRefusjonPrArbeidsforhold(values, getKodeverknavn, arbeidsgiverOpplysningerPerId, intl);
+//     if (refusjonPrArbeidsforholdFeilmelding) {
+//       return { _error: refusjonPrArbeidsforholdFeilmelding };
+//     }
+//   }
+//   if (sumIPeriode !== undefined && sumIPeriode !== null && values.some((andel) => andel.skalRedigereInntekt === true)) {
+//     const fastsattBelopFeilmelding = validateSumFastsattBelop(values, sumIPeriode, intl);
+//     if (fastsattBelopFeilmelding) {
+//       return { _error: fastsattBelopFeilmelding };
+//     }
+//   }
+//   return null;
+// };
+
 type OwnProps = {
     readOnly: boolean;
     isAksjonspunktClosed: boolean;
@@ -415,6 +477,8 @@ type OwnProps = {
     beregningsgrunnlag: Beregningsgrunnlag;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
     fieldName: string;
+    skalKunneEndreRefusjon: boolean;
+    sumIPeriode: number;
 };
 
 interface StaticFunctions {
@@ -443,6 +507,8 @@ const FordelPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunctions = (
   arbeidsgiverOpplysningerPerId,
   alleKodeverk,
   beregningsgrunnlag,
+  skalKunneEndreRefusjon,
+  sumIPeriode,
 }) => {
   const {
     control, watch, getValues,
@@ -469,17 +535,26 @@ const FordelPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunctions = (
   const tablerows = createAndelerTableRows(fields, isAksjonspunktClosed, readOnly, inntektskategoriKoder, skalIkkeRedigereInntekt,
     arbeidsforholdList, selectVals, erRevurdering, fieldName, remove, update);
   tablerows.push(createBruttoBGSummaryRow(sumFordelingForrigeBehandling, sumFordeling, sumBeregningsgrunnlagPrAar, erRevurdering));
-  // const error = getErrorMessage(meta, intl);
+
+  // Valideringer
+  const valideringer = [];
+  valideringer.push(validateUlikeAndeler(getValues, fieldName, fields, intl));
+  valideringer.push(validateSumFastsattForUgraderteAktiviteter(getValues, fieldName, fields, intl, beregningsgrunnlag.grunnbeløp, getKodeverknavn));
+  if (skalKunneEndreRefusjon) {
+    valideringer.push(validateSumRefusjon(fields, fieldName, getValues, beregningsgrunnlag.grunnbeløp, intl));
+    valideringer.push(validateTotalRefusjonPrArbeidsforhold(fields, fieldName, getValues, getKodeverknavn, arbeidsgiverOpplysningerPerId, intl));
+  }
+  valideringer.push(validateSumFastsattBelop(getValues, fieldName, fields, sumIPeriode, intl));
+
   return (
-    <SkjemaGruppe className={styles.dividerTop}>
-      {/* <SkjemaGruppeMedFeilviser */}
-      {/*  name={`${fieldName}`} */}
-      {/*  validate={[]} */}
-      {/* > */}
+    <SkjemaGruppeMedFeilviser
+      className={styles.dividerTop}
+      name={`${fieldName}.skjemagruppe`}
+      validate={valideringer}
+    >
       <Table headerTextCodes={getHeaderTextCodes(erRevurdering)} noHover classNameTable={styles.inntektTable}>
         {tablerows}
       </Table>
-      {/* </SkjemaGruppeMedFeilviser> */}
       {!readOnly && !skalIkkeRedigereInntekt
       && (
       <Row className={styles.buttonRow}>
@@ -507,44 +582,8 @@ const FordelPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunctions = (
         </Column>
       </Row>
       )}
-    </SkjemaGruppe>
+    </SkjemaGruppeMedFeilviser>
   );
-};
-
-FordelPeriodeFieldArray.validate = (intl, values, sumIPeriode, getKodeverknavn,
-  grunnbeløp, periodeDato, skalValidereRefusjon, arbeidsgiverOpplysningerPerId) => {
-  const fieldErrors = validateAndeler(intl, values, periodeDato);
-  if (fieldErrors != null) {
-    return fieldErrors;
-  }
-  if (isArrayEmpty(values)) {
-    return null;
-  }
-  const ulikeAndelerFeilmelding = validateUlikeAndeler(values, intl);
-  if (ulikeAndelerFeilmelding) {
-    return { _error: ulikeAndelerFeilmelding };
-  }
-  const fastsattForUgraderteAktiviteterFeilmelding = validateSumFastsattForUgraderteAktiviteter(values, grunnbeløp, getKodeverknavn, intl);
-  if (fastsattForUgraderteAktiviteterFeilmelding) {
-    return { _error: fastsattForUgraderteAktiviteterFeilmelding };
-  }
-  if (skalValidereRefusjon) {
-    const totalRefusjonFeilmelding = validateSumRefusjon(values, grunnbeløp, intl);
-    if (totalRefusjonFeilmelding) {
-      return { _error: totalRefusjonFeilmelding };
-    }
-    const refusjonPrArbeidsforholdFeilmelding = validateTotalRefusjonPrArbeidsforhold(values, getKodeverknavn, arbeidsgiverOpplysningerPerId, intl);
-    if (refusjonPrArbeidsforholdFeilmelding) {
-      return { _error: refusjonPrArbeidsforholdFeilmelding };
-    }
-  }
-  if (sumIPeriode !== undefined && sumIPeriode !== null && values.some((andel) => andel.skalRedigereInntekt === true)) {
-    const fastsattBelopFeilmelding = validateSumFastsattBelop(values, sumIPeriode, intl);
-    if (fastsattBelopFeilmelding) {
-      return { _error: fastsattBelopFeilmelding };
-    }
-  }
-  return null;
 };
 
 export default FordelPeriodeFieldArray;

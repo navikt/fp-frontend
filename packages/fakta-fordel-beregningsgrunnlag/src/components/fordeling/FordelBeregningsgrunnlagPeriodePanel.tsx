@@ -52,18 +52,21 @@ const renderDateHeading = (fom: string, tom: string): ReactElement => {
   );
 };
 
+const finnSumIPeriode = (bgPerioder: BeregningsgrunnlagPeriodeProp[], fom: string): number => {
+  const periode = bgPerioder.find((p) => p.beregningsgrunnlagPeriodeFom === fom);
+  return periode.bruttoInkludertBortfaltNaturalytelsePrAar;
+};
+
 type OwnProps = {
     readOnly: boolean;
     fordelBGFieldArrayName: string;
-    fom: string;
-    tom?: string;
     open?: boolean;
-    skalRedigereInntekt: boolean;
     isAksjonspunktClosed: boolean;
     showPanel: (...args: any[]) => any;
     beregningsgrunnlag: Beregningsgrunnlag;
     alleKodeverk: AlleKodeverk;
     behandlingType: string;
+    fordelingsperiode: FordelBeregningsgrunnlagPeriode;
     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 };
 
@@ -93,9 +96,6 @@ interface StaticFunctions {
 
 const FordelBeregningsgrunnlagPeriodePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
-  fom,
-  tom,
-  skalRedigereInntekt,
   isAksjonspunktClosed,
   open,
   showPanel,
@@ -104,17 +104,20 @@ const FordelBeregningsgrunnlagPeriodePanel: FunctionComponent<OwnProps> & Static
   behandlingType,
   arbeidsgiverOpplysningerPerId,
   fordelBGFieldArrayName,
+  fordelingsperiode,
 }) => (
   <EkspanderbartpanelBase
-    className={readOnly ? styles.statusOk : classNames(`fordelBeregningsgrunnlagPeriode--${fom}`)}
-    tittel={renderDateHeading(fom, tom)}
+    className={readOnly ? styles.statusOk : classNames(`fordelBeregningsgrunnlagPeriode--${fordelingsperiode.fom}`)}
+    tittel={renderDateHeading(fordelingsperiode.fom, fordelingsperiode.tom)}
     apen={open}
-    onClick={() => showPanel(fom)}
+    onClick={() => showPanel(fordelingsperiode.fom)}
   >
     <FordelPeriodeFieldArray
       fieldName={fordelBGFieldArrayName}
       readOnly={readOnly}
-      skalIkkeRedigereInntekt={!skalRedigereInntekt}
+      sumIPeriode={finnSumIPeriode(beregningsgrunnlag.beregningsgrunnlagPeriode, fordelingsperiode.fom)}
+      skalIkkeRedigereInntekt={!fordelingsperiode.skalRedigereInntekt}
+      skalKunneEndreRefusjon={fordelingsperiode.skalKunneEndreRefusjon}
       isAksjonspunktClosed={isAksjonspunktClosed}
       alleKodeverk={alleKodeverk}
       beregningsgrunnlag={beregningsgrunnlag}
@@ -126,7 +129,6 @@ const FordelBeregningsgrunnlagPeriodePanel: FunctionComponent<OwnProps> & Static
 
 FordelBeregningsgrunnlagPeriodePanel.defaultProps = {
   open: null,
-  tom: null,
 };
 
 FordelBeregningsgrunnlagPeriodePanel.validate = (intl, values, sumIPeriode,

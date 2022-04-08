@@ -89,10 +89,13 @@ export const setGenerellAndelsinfo = (andel: FordelBeregningsgrunnlagAndel,
   forrigeInntektskategori: !andel.inntektskategori || andel.inntektskategori === inntektskategorier.UDEFINERT ? null : andel.inntektskategori,
 });
 
-export const mapToBelop = (andel: FordelBeregningsgrunnlagAndelValues): number => {
-  const { fastsattBelop, readOnlyBelop } = andel;
-  if (andel.skalRedigereInntekt) {
-    return fastsattBelop ? removeSpacesFromNumber(fastsattBelop) : 0;
+export const mapToBelop = (field: any,
+  fieldname: string,
+  getValues: any,
+  index: number): number => {
+  if (field.skalRedigereInntekt) {
+    const fastsattBeløp = getValues(`${fieldname}.${index}.fastsattBelop`);
+    return fastsattBeløp ? removeSpacesFromNumber(fastsattBeløp) : 0;
   }
-  return readOnlyBelop ? removeSpacesFromNumber(readOnlyBelop) : 0;
+  return field.readOnlyBelop ? removeSpacesFromNumber(field.readOnlyBelop) : 0;
 };

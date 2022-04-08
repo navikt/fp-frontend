@@ -127,7 +127,7 @@ export const lagPerioderForSubmit = (values: FordelBeregningsgrunnlagMedAksjonsp
     tom: p.tom,
   }));
 
-export const finnSumIPeriode = (bgPerioder: BeregningsgrunnlagPeriodeProp[], fom: string): number => {
+const finnSumIPeriode = (bgPerioder: BeregningsgrunnlagPeriodeProp[], fom: string): number => {
   const periode = bgPerioder.find((p) => p.beregningsgrunnlagPeriodeFom === fom);
   return periode.bruttoInkludertBortfaltNaturalytelsePrAar;
 };
@@ -258,11 +258,9 @@ export class FordelBeregningsgrunnlagForm extends Component<OwnProps, OwnState> 
             <VerticalSpacer eightPx />
             <FordelBeregningsgrunnlagPeriodePanel
               readOnly={readOnly}
+              fordelingsperiode={periode}
               fordelBGFieldArrayName={getFieldNameKey(index)}
-              fom={periode.fom}
-              tom={periode.tom}
               open={openPanels ? openPanels.filter((panel) => panel === periode.fom).length > 0 : false}
-              skalRedigereInntekt={periode.skalRedigereInntekt}
               isAksjonspunktClosed={isAksjonspunktClosed}
               showPanel={this.showPanel}
               beregningsgrunnlag={beregningsgrunnlag}
