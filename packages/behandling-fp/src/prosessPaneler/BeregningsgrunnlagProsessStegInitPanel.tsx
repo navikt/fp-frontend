@@ -63,7 +63,7 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
       <DynamicLoader
         // @ts-ignore
         altComp1={() => import('ft_prosess_beregningsgrunnlag/ProsessBeregningsgrunnlag')}// eslint-disable-line import/no-unresolved
-        altComp2={() => import('@fpsak-frontend/prosess-beregningsgrunnlag')}
+        altComp2={() => import('@navikt/ft-prosess-beregningsgrunnlag')}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...data}
       />

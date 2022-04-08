@@ -2477,7 +2477,7 @@
     "@navikt/fp-bem-utils" "^1.0.3"
     "@navikt/fp-period-utils" "^1.0.3"
 
-"@navikt/ft-form-hooks@1.0.1-beta.0":
+"@navikt/ft-form-hooks@1.0.1-beta.0", "@navikt/ft-form-hooks@^1.0.1-beta.0":
   version "1.0.1-beta.0"
   resolved "https://npm.pkg.github.com/download/@navikt/ft-form-hooks/1.0.1-beta.0/fb0f51b320a926326c955cb244a13a12e68d2a0ca2da45cb27f56a6e5676af3a#31c196ee6c1622e2099c459948f3996d920de3f9"
   integrity sha512-LFc8vYEBL1J94xQLjb7MjwcgC2ZBbqtvjLRWCD45N6vQ/10dUtYCd2PvTh4Szv7/kadyvM441p2JfQNNsmbSrg==
@@ -2520,6 +2520,43 @@
   version "1.0.1-beta.0"
   resolved "https://npm.pkg.github.com/download/@navikt/ft-kodeverk/1.0.1-beta.0/67c219ba755c89bad3c3958e50c5b78dd7aff1c0fbebdf670a9e6d58cdac254c#b709380a91dc839973f60cf36e49be0219d215e8"
   integrity sha512-up0ZNQjO7mFiZU2ueuShnBuzWJVwj0AxI/ELvsRNO4kvaA7btCq0YF3s8WhGfy/Nidt0RSk8SVVQo2I2icqncQ==
+
+"@navikt/ft-prosess-beregningsgrunnlag@1.0.1-beta.0":
+  version "1.0.1-beta.0"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-beregningsgrunnlag/1.0.1-beta.0/4eb15413b33d8853a757819c8b51d145fec157b2f267addf91a447c6e41e1a23#b31b0b0c297937eec00008fc9a17682ee674f824"
+  integrity sha512-usszEhmvJbu/bOluDiV3TJ9n5FtzKQBjhSLXNd5SjGh9Usfg6HMeohWZ0eRGX7qlKyn4O7ttdJrGnHqnQ0JovA==
+  dependencies:
+    "@navikt/ft-form-hooks" "^1.0.1-beta.0"
+    "@navikt/ft-kodeverk" "^1.0.1-beta.0"
+    "@navikt/ft-types" "^1.0.1-beta.0"
+    "@navikt/ft-types-aksjonspunkter" "^1.0.1-beta.0"
+    "@navikt/ft-ui-komponenter" "^1.0.1-beta.0"
+    "@navikt/ft-utils" "^1.0.1-beta.0"
+    classnames "2.3.1"
+    moment "2.29.2"
+    nav-frontend-chevron "1.0.30"
+    nav-frontend-chevron-style "1.0.4"
+    nav-frontend-core "6.0.1"
+    nav-frontend-etiketter "3.0.1"
+    nav-frontend-grid "2.0.1"
+    nav-frontend-grid-style "1.0.2"
+    nav-frontend-js-utils "1.0.20"
+    nav-frontend-knapper "3.1.2"
+    nav-frontend-knapper-style "2.1.1"
+    nav-frontend-lesmerpanel "2.0.2"
+    nav-frontend-lesmerpanel-style "2.0.1"
+    nav-frontend-modal "2.0.1"
+    nav-frontend-modal-style "2.0.1"
+    nav-frontend-paneler "3.0.1"
+    nav-frontend-paneler-style "2.0.1"
+    nav-frontend-skjema "4.0.5"
+    nav-frontend-skjema-style "3.0.2"
+    nav-frontend-typografi "4.0.1"
+    nav-frontend-typografi-style "2.0.1"
+    react "17.0.2"
+    react-collapse "5.1.1"
+    react-hook-form "7.29.0"
+    react-intl "5.24.8"
 
 "@navikt/ft-types-aksjonspunkter@1.0.0-beta.4":
   version "1.0.0-beta.4"
