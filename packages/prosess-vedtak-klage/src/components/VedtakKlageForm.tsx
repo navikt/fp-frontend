@@ -4,7 +4,7 @@ import React, {
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
 
-import { getKodeverknavnFn } from '@fpsak-frontend/utils';
+import { getKodeverknavnFn } from '@navikt/ft-utils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';

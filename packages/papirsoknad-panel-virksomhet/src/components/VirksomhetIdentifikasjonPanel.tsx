@@ -11,7 +11,7 @@ import {
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
   dateBeforeOrEqualToToday, hasValidDate, hasValidInteger, hasValidOrgNumber, required, validPeriodeFomTom,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 

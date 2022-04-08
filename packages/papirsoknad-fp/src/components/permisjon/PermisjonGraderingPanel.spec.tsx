@@ -2,7 +2,7 @@ import moment from 'moment';
 
 import {
   dateRangesOverlappingMessage, invalidDateMessage, invalidDecimalMessage, ISO_DATE_FORMAT,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 
 import { PermisjonGraderingPanel } from './PermisjonGraderingPanel';
 

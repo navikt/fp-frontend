@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
-import { ariaCheck, createIntl } from '@fpsak-frontend/utils';
+import { ariaCheck, createIntl } from '@navikt/ft-utils';
 
 import messages from '../i18n/nb_NO.json';
 

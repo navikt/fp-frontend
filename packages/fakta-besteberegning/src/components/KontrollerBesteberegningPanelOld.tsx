@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import {
   AksjonspunktHelpTextTemp, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import { required } from '@fpsak-frontend/utils';
+import { required } from '@navikt/ft-utils';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import {
   FaktaBegrunnelseTextFieldNew,

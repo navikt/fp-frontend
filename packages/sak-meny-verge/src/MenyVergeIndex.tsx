@@ -2,7 +2,7 @@ import React, { FunctionComponent, useCallback } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import messages from '../i18n/nb_NO.json';
 

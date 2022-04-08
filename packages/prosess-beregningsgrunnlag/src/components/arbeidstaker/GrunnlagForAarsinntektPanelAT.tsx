@@ -7,7 +7,7 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import {
   getKodeverknavnFn, dateFormat, formatCurrencyNoKr,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {

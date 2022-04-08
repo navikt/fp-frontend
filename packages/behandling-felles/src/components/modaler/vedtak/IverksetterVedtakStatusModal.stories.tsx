@@ -1,7 +1,7 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 
 import IverksetterVedtakStatusModal from './IverksetterVedtakStatusModal';

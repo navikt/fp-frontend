@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { removeSpacesFromNumber } from '@fpsak-frontend/utils';
+import { removeSpacesFromNumber } from '@navikt/ft-utils';
 
 import {
   ArbeidsgiverOpplysningerPerId,

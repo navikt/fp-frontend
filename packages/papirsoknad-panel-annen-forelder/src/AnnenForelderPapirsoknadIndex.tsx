@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { AlleKodeverk } from '@fpsak-frontend/types';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import AnnenForelderPanel, { FormValues } from './components/AnnenForelderPanel';
 import messages from '../i18n/nb_NO.json';

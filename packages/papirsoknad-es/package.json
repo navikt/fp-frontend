@@ -18,7 +18,7 @@
     "@fpsak-frontend/papirsoknad-panel-sprak": "1.0.0",
     "@fpsak-frontend/storybook-utils": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
-    "@fpsak-frontend/utils": "1.0.0",
+    "@navikt/ft-utils": "1.0.0-beta.3",
     "nav-frontend-grid": "2.0.1",
     "nav-frontend-grid-style": "1.0.2",
     "react": "17.0.2",

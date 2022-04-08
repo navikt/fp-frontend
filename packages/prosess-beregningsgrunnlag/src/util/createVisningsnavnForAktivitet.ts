@@ -1,6 +1,6 @@
 import { ArbeidsgiverOpplysninger } from '@fpsak-frontend/types';
 import moment from 'moment';
-import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 
 const getEndCharFromId = (id: string | undefined): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 

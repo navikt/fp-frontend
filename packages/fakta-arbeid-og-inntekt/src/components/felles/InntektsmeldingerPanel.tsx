@@ -8,12 +8,11 @@ import {
   Image, FlexColumn, FlexRow, Tooltip, VerticalSpacer, FloatRight, PeriodLabel, AvsnittSkiller, DateLabel,
 } from '@navikt/ft-ui-komponenter';
 
-import { getKodeverknavnFraKode } from '@fpsak-frontend/utils/src/kodeverkUtils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import pilOppIkonUrl from '@fpsak-frontend/assets/images/pil_opp.svg';
 import pilNedIkonUrl from '@fpsak-frontend/assets/images/pil_ned.svg';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
-import { TIDENES_ENDE } from '@fpsak-frontend/utils';
+import { TIDENES_ENDE, getKodeverknavnFraKode } from '@navikt/ft-utils';
 import { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@fpsak-frontend/types';
 
 import { Column, Row } from 'nav-frontend-grid';

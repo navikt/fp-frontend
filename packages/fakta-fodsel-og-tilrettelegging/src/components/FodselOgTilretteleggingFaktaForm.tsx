@@ -14,7 +14,7 @@ import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingTyp
 import { DatepickerField, TextAreaField } from '@fpsak-frontend/form';
 import {
   hasValidDate, hasValidText, maxLength, required, requiredIfNotPristine, DDMMYYYY_DATE_FORMAT,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {

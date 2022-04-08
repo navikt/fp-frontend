@@ -8,7 +8,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { TextAreaField } from '@fpsak-frontend/form-hooks';
 import {
   decodeHtmlEntity, getLanguageFromSprakkode, hasValidText, maxLength, minLength,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 
 import styles from './vedtakFritekstPanel.less';
 

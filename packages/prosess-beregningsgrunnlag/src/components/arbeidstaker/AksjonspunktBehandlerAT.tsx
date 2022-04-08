@@ -5,7 +5,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { InputField } from '@fpsak-frontend/form-hooks';
 import {
   getKodeverknavnFn, parseCurrencyInput, removeSpacesFromNumber, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 

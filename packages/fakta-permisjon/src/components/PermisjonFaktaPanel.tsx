@@ -9,7 +9,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 
 import {
   hasValidText, maxLength, minLength, required, dateFormat,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { Form, TextAreaField } from '@fpsak-frontend/form-hooks';
 import {
   Aksjonspunkt, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, AoIArbeidsforhold, AlleKodeverk,

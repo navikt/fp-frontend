@@ -8,7 +8,7 @@ import {
 
 import telefonImageUrl from '@fpsak-frontend/assets/images/phone-3.svg';
 import { Inntektsmelding } from '@fpsak-frontend/types';
-import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
+import { formatCurrencyNoKr } from '@navikt/ft-utils';
 import { hentDokumentLenke } from '@fpsak-frontend/konstanter';
 import dokumentSvg from '@fpsak-frontend/assets/images/dokument_filled.svg';
 

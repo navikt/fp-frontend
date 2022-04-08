@@ -12,7 +12,7 @@ import {
 } from '@fpsak-frontend/form-hooks';
 import {
   hasValidDate, required, createIntl, requiredIfCustomFunctionIsTrueNew,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import avslattImage from '@fpsak-frontend/assets/images/avslaatt.svg';
 import innvilgetImage from '@fpsak-frontend/assets/images/check.svg';
 import { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@fpsak-frontend/types';

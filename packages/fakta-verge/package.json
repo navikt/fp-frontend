@@ -10,7 +10,7 @@
     "@fpsak-frontend/kodeverk": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/types-avklar-aksjonspunkter": "1.0.0",
-    "@fpsak-frontend/utils": "1.0.0",
+    "@navikt/ft-utils": "1.0.0-beta.3",
     "@navikt/ft-ui-komponenter": "1.0.0-beta.4",
     "nav-frontend-grid": "2.0.1",
     "nav-frontend-grid-style": "1.0.2",

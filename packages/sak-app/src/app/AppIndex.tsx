@@ -8,7 +8,7 @@ import Modal from 'nav-frontend-modal';
 import { useRestApiError } from '@fpsak-frontend/rest-api-hooks';
 import EventType from '@fpsak-frontend/rest-api/src/requestApi/eventType';
 import { ForbiddenPage, UnauthorizedPage } from '@fpsak-frontend/sak-infosider';
-import { parseQueryString } from '@fpsak-frontend/utils';
+import { parseQueryString } from '@navikt/ft-utils';
 
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 import ErrorBoundary from './ErrorBoundary';

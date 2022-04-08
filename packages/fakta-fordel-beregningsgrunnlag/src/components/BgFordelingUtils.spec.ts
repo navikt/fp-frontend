@@ -1,4 +1,4 @@
-import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
+import { formatCurrencyNoKr } from '@navikt/ft-utils';
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { BeregningsgrunnlagArbeidsforhold } from '@fpsak-frontend/types';
 import {

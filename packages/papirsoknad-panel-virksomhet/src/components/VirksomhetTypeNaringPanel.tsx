@@ -9,7 +9,7 @@ import { CheckboxField, NavFieldGroup } from '@fpsak-frontend/form';
 import naringsvirksomhetType from '@fpsak-frontend/kodeverk/src/naringsvirksomhetType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
-import { isRequiredMessage } from '@fpsak-frontend/utils';
+import { isRequiredMessage } from '@navikt/ft-utils';
 
 const naringsvirksomhetTypeOrder = {
   [naringsvirksomhetType.DAGMAMMA]: 1,

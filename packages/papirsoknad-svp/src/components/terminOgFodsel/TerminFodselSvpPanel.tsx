@@ -9,7 +9,7 @@ import {
   dateBeforeOrEqualToToday,
   hasValidDate,
   required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 
 interface OwnProps {
   readOnly: boolean;

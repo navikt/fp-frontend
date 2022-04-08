@@ -8,7 +8,7 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import pilOppIkonUrl from '@fpsak-frontend/assets/images/pil_opp.svg';
 import pilNedIkonUrl from '@fpsak-frontend/assets/images/pil_ned.svg';
-import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import {
   AlleKodeverk, AoIArbeidsforhold, Inntektsmelding, Inntektspost,
 } from '@fpsak-frontend/types';

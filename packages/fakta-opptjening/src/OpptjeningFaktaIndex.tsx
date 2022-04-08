@@ -4,7 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 import {
   ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, Opptjening,
 } from '@fpsak-frontend/types';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import OpptjeningFaktaPanel from './components/OpptjeningFaktaPanel';
 import messages from '../i18n/nb_NO.json';

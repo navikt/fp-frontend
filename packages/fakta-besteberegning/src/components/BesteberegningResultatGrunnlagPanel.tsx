@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { BeregningsgrunnlagAndel, BeregningsgrunnlagPeriodeProp } from '@fpsak-frontend/types';
 import { Normaltekst, Element } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
-import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
+import { formatCurrencyNoKr } from '@navikt/ft-utils';
 import {
   VerticalSpacer,
   Table, TableColumn, TableRow,

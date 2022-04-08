@@ -6,7 +6,7 @@ import {
   Table, TableColumn, TableRow, Image,
 } from '@navikt/ft-ui-komponenter';
 import { KodeverkMedNavn, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
-import { dateFormat } from '@fpsak-frontend/utils';
+import { dateFormat } from '@navikt/ft-utils';
 
 import styles from './aktivitetskravFaktaTabell.less';
 

@@ -2,7 +2,7 @@ import React, { Component, RefObject } from 'react';
 import moment from 'moment';
 import { Column, Row } from 'nav-frontend-grid';
 
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Timeline, TimeLineNavigation } from '@fpsak-frontend/tidslinje';
 import { FastsattOpptjeningAktivitet } from '@fpsak-frontend/types';
 

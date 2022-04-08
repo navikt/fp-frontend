@@ -6,7 +6,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { DatepickerField, SelectField, PeriodFieldArray } from '@fpsak-frontend/form';
 import {
   hasValidPeriodIncludingOtherErrors, hasValidValue, isRequiredMessage, required, Options,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import landkoder from '@fpsak-frontend/kodeverk/src/landkoder';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 

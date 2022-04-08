@@ -5,7 +5,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import {
   DateLabel, PeriodLabel, Table, TableColumn, TableRow, Image,
 } from '@navikt/ft-ui-komponenter';
-import { decodeHtmlEntity } from '@fpsak-frontend/utils';
+import { decodeHtmlEntity } from '@navikt/ft-utils';
 import erIBrukImageUrl from '@fpsak-frontend/assets/images/stjerne.svg';
 import { ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 import CustomArbeidsforhold from '../../typer/CustomArbeidsforholdTsType';

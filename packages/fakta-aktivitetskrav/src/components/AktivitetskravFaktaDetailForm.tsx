@@ -11,7 +11,7 @@ import {
   PeriodLabel, VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
 import { KodeverkMedNavn, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
-import { required } from '@fpsak-frontend/utils';
+import { required } from '@navikt/ft-utils';
 
 type FormValues = UttakKontrollerAktivitetskrav;
 

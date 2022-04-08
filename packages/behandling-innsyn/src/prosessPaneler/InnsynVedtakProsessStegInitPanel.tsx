@@ -8,7 +8,7 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VedtakInnsynProsessIndex, { InnsynBrevData } from '@fpsak-frontend/prosess-vedtak-innsyn';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { createIntl, forhandsvisDokument } from '@fpsak-frontend/utils';
+import { createIntl, forhandsvisDokument } from '@navikt/ft-utils';
 import {
   Aksjonspunkt, Behandling, Dokument, Fagsak, ForhåndsvisMeldingParams, Innsyn,
 } from '@fpsak-frontend/types';

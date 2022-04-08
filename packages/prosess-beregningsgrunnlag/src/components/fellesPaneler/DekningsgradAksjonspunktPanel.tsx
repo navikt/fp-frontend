@@ -8,7 +8,7 @@ import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form-hooks';
 import {
   hasValidText, maxLength, minLength, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { Column, Row } from 'nav-frontend-grid';
 import dekningsgrad from '@fpsak-frontend/kodeverk/src/dekningsgrad';

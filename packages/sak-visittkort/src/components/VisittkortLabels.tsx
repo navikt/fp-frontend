@@ -8,7 +8,7 @@ import { Tooltip } from '@navikt/ft-ui-komponenter';
 
 import diskresjonskodeType from '@fpsak-frontend/kodeverk/src/diskresjonskodeType';
 import { FagsakPerson } from '@fpsak-frontend/types';
-import { dateFormat } from '@fpsak-frontend/utils';
+import { dateFormat } from '@navikt/ft-utils';
 
 import styles from './visittkortLabels.less';
 

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { BaseFieldProps, Field } from 'redux-form';
 import moment from 'moment';
 
-import { ACCEPTED_DATE_INPUT_FORMATS, DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { ACCEPTED_DATE_INPUT_FORMATS, DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 import PureDatepicker from './pure/PureDatepicker';
 import renderNavField from './renderNavField';

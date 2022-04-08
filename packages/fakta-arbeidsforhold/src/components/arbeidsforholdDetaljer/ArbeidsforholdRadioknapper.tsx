@@ -7,7 +7,7 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import {
   dateAfterOrEqual, hasValidDate, required, dateIsBefore,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { DatepickerField, RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 

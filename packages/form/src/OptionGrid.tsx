@@ -3,7 +3,7 @@ import {
   FlexColumn, FlexContainer, FlexRow, EditedIcon,
 } from '@navikt/ft-ui-komponenter';
 
-import { range } from '@fpsak-frontend/utils';
+import { range } from '@navikt/ft-utils';
 
 import styles from './optionGrid.less';
 

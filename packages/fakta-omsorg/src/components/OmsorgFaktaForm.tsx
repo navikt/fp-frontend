@@ -12,7 +12,7 @@ import {
   dateRangesOverlappingMessage,
   invalidPeriodMessage,
   required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';

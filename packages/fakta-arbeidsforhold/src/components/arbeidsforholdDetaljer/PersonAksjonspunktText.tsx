@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@fpsak-frontend/utils';
+import { DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@navikt/ft-utils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { AlleKodeverk, ArbeidsforholdPermisjon } from '@fpsak-frontend/types';
 

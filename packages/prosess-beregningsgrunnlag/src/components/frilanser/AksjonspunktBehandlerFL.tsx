@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { InputField } from '@fpsak-frontend/form-hooks';
 import {
   formatCurrencyNoKr, parseCurrencyInput, removeSpacesFromNumber, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
 import ArbeidstakerFrilansValues, { FrilansInntektValues } from '../../types/ATFLAksjonspunktTsType';

@@ -13,7 +13,7 @@ import {
 } from '@fpsak-frontend/form';
 import {
   dateBeforeOrEqualToToday, hasValidDate, hasValidInteger, isDatesEqual, maxValue, minValue, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 
 import styles from './omsorgOgAdopsjonPanel.less';
 

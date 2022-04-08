@@ -7,7 +7,7 @@ import {
   StandardBehandlingProps, useBehandling, useInitBehandlingHandlinger, useInitRequestApi, useLagreAksjonspunkt,
 } from '@fpsak-frontend/behandling-felles';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import RegistrerPapirsoknad from './components/RegistrerPapirsoknad';
 import { requestPapirsoknadApi, PapirsoknadApiKeys } from './data/papirsoknadApi';

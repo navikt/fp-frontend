@@ -5,7 +5,7 @@ import React, {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import InnsynProsessIndex from '@fpsak-frontend/prosess-innsyn';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 import {
   Aksjonspunkt, Dokument, Fagsak, Innsyn,
 } from '@fpsak-frontend/types';

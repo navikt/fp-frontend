@@ -7,7 +7,7 @@ import { DatepickerField, PeriodFieldArray } from '@fpsak-frontend/form';
 import {
   hasValidDate,
   required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 
 type Periode = {
   periodeFom: string;

@@ -4,7 +4,7 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
-import { required, maxValue } from '@fpsak-frontend/utils';
+import { required, maxValue } from '@navikt/ft-utils';
 import {
   DatepickerField, InputField, SelectField, PeriodFieldArray,
 } from '@fpsak-frontend/form';

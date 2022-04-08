@@ -5,7 +5,7 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import NavFieldGroup from '@fpsak-frontend/form/src/NavFieldGroup';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 import { VerticalSpacer, Image } from '@navikt/ft-ui-komponenter';
 
 import messages from '../i18n/nb_NO.json';

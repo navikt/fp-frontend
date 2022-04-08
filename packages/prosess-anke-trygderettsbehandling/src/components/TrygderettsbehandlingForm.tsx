@@ -12,7 +12,7 @@ import {
   AksjonspunktHelpTextTemp, VerticalSpacer, ArrowBox,
 } from '@navikt/ft-ui-komponenter';
 import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form';
-import { required } from '@fpsak-frontend/utils';
+import { required } from '@navikt/ft-utils';
 import ankeOmgjorArsak from '@fpsak-frontend/kodeverk/src/ankeOmgjorArsak';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 import {

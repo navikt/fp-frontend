@@ -5,7 +5,7 @@ import {
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 
-import { omit } from '@fpsak-frontend/utils';
+import { omit } from '@navikt/ft-utils';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { SoknadData, getRegisteredFields } from '@fpsak-frontend/papirsoknad-felles';

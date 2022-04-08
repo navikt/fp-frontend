@@ -13,7 +13,7 @@ import {
   TableColumn, PeriodLabel, DateLabel, ExpandableTableRow, Image,
 } from '@navikt/ft-ui-komponenter';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
-import { TIDENES_ENDE } from '@fpsak-frontend/utils';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
 import ManueltLagtTilArbeidsforholdForm from './manuelt/ManueltLagtTilArbeidsforholdForm';
 import ManglendeArbeidsforholdForm from './manglendeArbeidsforhold/ManglendeArbeidsforholdForm';
 import ArbeidsforholdInformasjonPanel from './felles/ArbeidsforholdInformasjonPanel';

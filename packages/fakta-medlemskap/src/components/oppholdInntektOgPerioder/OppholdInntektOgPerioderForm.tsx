@@ -11,7 +11,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { guid, omitMany } from '@fpsak-frontend/utils';
+import { guid, omitMany } from '@navikt/ft-utils';
 import {
   Aksjonspunkt, AlleKodeverk, Medlemskap, MedlemPeriode, Soknad, MedlemskapPeriode,
 } from '@fpsak-frontend/types';

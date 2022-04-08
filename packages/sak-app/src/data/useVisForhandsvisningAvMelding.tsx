@@ -1,5 +1,5 @@
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { forhandsvisDokument } from '@fpsak-frontend/utils';
+import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import { FpsakApiKeys, restApiHooks } from './fpsakApi';
 

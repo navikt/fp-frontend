@@ -9,7 +9,7 @@ import {
   parseCurrencyInput,
   removeSpacesFromNumber,
   required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { InputField } from '@fpsak-frontend/form-hooks';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';

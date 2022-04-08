@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 import { Location } from 'history';
 
 import { BehandlingAppKontekst, KodeverkMedNavn } from '@fpsak-frontend/types';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import BehandlingPicker from './components/BehandlingPicker';

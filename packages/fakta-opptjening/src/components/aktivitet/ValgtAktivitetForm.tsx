@@ -17,7 +17,7 @@ import {
   minLength,
   required,
   DDMMYYYY_DATE_FORMAT,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import {
   RadioGroupField, RadioOption, TextAreaField, Form,
 } from '@fpsak-frontend/form-hooks';

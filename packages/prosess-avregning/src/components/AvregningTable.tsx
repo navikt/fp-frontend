@@ -5,7 +5,7 @@ import moment from 'moment/moment';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
-import { formatCurrencyNoKr, getRangeOfMonths } from '@fpsak-frontend/utils';
+import { formatCurrencyNoKr, getRangeOfMonths } from '@navikt/ft-utils';
 import mottakerTyper from '@fpsak-frontend/kodeverk/src/mottakerTyper';
 import {
   DetaljertSimuleringResultat, Mottaker, SimuleringResultatPerFagområde, SimuleringResultatRad,

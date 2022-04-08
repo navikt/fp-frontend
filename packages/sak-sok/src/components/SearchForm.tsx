@@ -7,7 +7,7 @@ import { Undertittel } from 'nav-frontend-typografi';
 
 import { VerticalSpacer, Image } from '@navikt/ft-ui-komponenter';
 import advarselIcon from '@fpsak-frontend/assets/images/advarsel.svg';
-import { hasValidSaksnummerOrFodselsnummerFormat } from '@fpsak-frontend/utils';
+import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-utils';
 import { Form, InputField } from '@fpsak-frontend/form-hooks';
 import { Fagsak } from '@fpsak-frontend/types';
 

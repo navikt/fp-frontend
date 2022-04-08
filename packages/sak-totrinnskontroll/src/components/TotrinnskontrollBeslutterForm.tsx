@@ -8,7 +8,7 @@ import { Form } from '@fpsak-frontend/form-hooks';
 import vurderPaNyttArsakType from '@fpsak-frontend/kodeverk/src/vurderPaNyttArsakType';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import konsekvensForYtelsen from '@fpsak-frontend/kodeverk/src/konsekvensForYtelsen';
-import { ariaCheck, decodeHtmlEntity } from '@fpsak-frontend/utils';
+import { ariaCheck, decodeHtmlEntity } from '@navikt/ft-utils';
 import { VerticalSpacer, AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import {
   Behandling, KodeverkMedNavn, KlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollSkjermlenkeContext,

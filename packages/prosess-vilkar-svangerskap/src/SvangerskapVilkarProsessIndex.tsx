@@ -5,7 +5,7 @@ import {
   FodselOgTilrettelegging,
   StandardProsessPanelProps,
 } from '@fpsak-frontend/types';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import SvangerskapVilkarForm from './components/SvangerskapVilkarForm';
 import messages from '../i18n/nb_NO.json';

@@ -20,7 +20,7 @@ import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import moment from 'moment';
-import { ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import BeregningsgrunnlagProsessIndex from './BeregningsgrunnlagProsessIndex';
 
 const STP = '2021-01-01';

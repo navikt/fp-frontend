@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
-import { formatCurrencyWithKr } from '@fpsak-frontend/utils';
+import { formatCurrencyWithKr } from '@navikt/ft-utils';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import {
   Behandlingsresultat, BeregningsresultatFp, BeregningsresultatEs,

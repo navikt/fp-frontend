@@ -12,7 +12,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import {
   formatCurrencyWithKr, hasValidInteger, maxValue, minValue, required, decodeHtmlEntity,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { InputField, Form } from '@fpsak-frontend/form-hooks';
 import aksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { OverstyringPanel } from '@fpsak-frontend/prosess-felles';

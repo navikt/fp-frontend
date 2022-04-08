@@ -4,7 +4,7 @@ import { SkjemaGruppe } from 'nav-frontend-skjema';
 
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { required } from '@fpsak-frontend/utils';
+import { required } from '@navikt/ft-utils';
 
 const sprakvalg = {
   BOKMAL: 'NB',

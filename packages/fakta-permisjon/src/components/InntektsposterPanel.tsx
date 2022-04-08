@@ -11,7 +11,7 @@ import {
 
 import pilOppIkonUrl from '@fpsak-frontend/assets/images/pil_opp.svg';
 import pilNedIkonUrl from '@fpsak-frontend/assets/images/pil_ned.svg';
-import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Inntektspost } from '@fpsak-frontend/types';
 
 import styles from './inntektsposterPanel.less';

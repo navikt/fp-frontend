@@ -6,7 +6,7 @@ import { Image } from '@navikt/ft-ui-komponenter';
 import overforingArsakCodes from '@fpsak-frontend/kodeverk/src/overforingArsakCodes';
 import utsettelseArsakCodes from '@fpsak-frontend/kodeverk/src/utsettelseArsakCodes';
 import oppholdArsakType from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
-import { calcDaysAndWeeks, dateFormat } from '@fpsak-frontend/utils';
+import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
 import editPeriodeIcon from '@fpsak-frontend/assets/images/endre.svg';
 import editPeriodeDisabledIcon from '@fpsak-frontend/assets/images/endre_disablet.svg';
 import removePeriod from '@fpsak-frontend/assets/images/remove.svg';

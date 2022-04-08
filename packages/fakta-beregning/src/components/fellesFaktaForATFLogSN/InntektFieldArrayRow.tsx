@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { InputField, PeriodpickerField, SelectField } from '@fpsak-frontend/form';
-import { parseCurrencyInput } from '@fpsak-frontend/utils';
+import { parseCurrencyInput } from '@navikt/ft-utils';
 import { TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { FieldArrayFieldsProps } from 'redux-form';

@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import { dateRangesOverlappingMessage, invalidDateMessage, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { dateRangesOverlappingMessage, invalidDateMessage, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 import { PermisjonUtsettelsePanel } from './PermisjonUtsettelsePanel';
 

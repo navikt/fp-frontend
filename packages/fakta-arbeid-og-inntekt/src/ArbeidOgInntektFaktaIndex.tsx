@@ -4,7 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 import {
   ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold, StandardFaktaPanelProps,
 } from '@fpsak-frontend/types';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import ArbeidOgInntektFaktaPanel from './components/ArbeidOgInntektFaktaPanel';
 import messages from '../i18n/nb_NO.json';

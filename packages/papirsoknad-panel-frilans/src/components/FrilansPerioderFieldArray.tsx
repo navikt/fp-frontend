@@ -6,7 +6,7 @@ import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import {
   dateAfterOrEqual, hasValidDate, ISO_DATE_FORMAT, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { DatepickerField, PeriodFieldArray } from '@fpsak-frontend/form';
 
 import styles from './frilansPerioderFieldArray.less';

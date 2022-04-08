@@ -8,7 +8,7 @@ import Lenke from 'nav-frontend-lenker';
 
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
-import { dateFormat } from '@fpsak-frontend/utils';
+import { dateFormat } from '@navikt/ft-utils';
 import {
   Aksjonspunkt, ArbeidOgInntektsmelding, Behandling, ManueltArbeidsforhold, AksjonspunktÅrsak,
 } from '@fpsak-frontend/types';

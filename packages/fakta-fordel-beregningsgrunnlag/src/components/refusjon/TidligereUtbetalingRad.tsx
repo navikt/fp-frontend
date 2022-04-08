@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
-import { dateFormat, TIDENES_ENDE } from '@fpsak-frontend/utils';
+import { dateFormat, TIDENES_ENDE } from '@navikt/ft-utils';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { ArbeidsgiverOpplysningerPerId, RefusjonTilVurderingAndel, TidligereUtbetalinger } from '@fpsak-frontend/types';

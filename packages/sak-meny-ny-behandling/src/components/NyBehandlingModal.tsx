@@ -9,7 +9,7 @@ import Modal from 'nav-frontend-modal';
 import { VerticalSpacer, Image } from '@navikt/ft-ui-komponenter';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 import { CheckboxField, SelectField, Form } from '@fpsak-frontend/form-hooks';
-import { required } from '@fpsak-frontend/utils';
+import { required } from '@navikt/ft-utils';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import bType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';

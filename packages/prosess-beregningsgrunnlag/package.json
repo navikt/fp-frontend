@@ -10,7 +10,7 @@
     "@fpsak-frontend/prosess-felles": "1.0.0",
     "@fpsak-frontend/storybook-utils": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
-    "@fpsak-frontend/utils": "1.0.0",
+    "@navikt/ft-utils": "1.0.0-beta.3",
     "@fpsak-frontend/form-hooks": "1.0.0",
     "@fpsak-frontend/types-avklar-aksjonspunkter": "1.0.0",
     "@navikt/ft-ui-komponenter": "1.0.0-beta.4",

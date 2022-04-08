@@ -10,7 +10,7 @@ import {
   Aksjonspunkt, FodselOgTilrettelegging, Vilkar,
 } from '@fpsak-frontend/types';
 import { InngangsvilkarDefaultInitPanel, InngangsvilkarPanelInitProps } from '@fpsak-frontend/behandling-felles';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import { requestSvpApi, SvpBehandlingApiKeys } from '../../data/svpBehandlingApi';
 import messages from '../../../i18n/nb_NO.json';

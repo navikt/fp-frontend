@@ -7,7 +7,7 @@ import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
 import { DatepickerField, InputField } from '@fpsak-frontend/form';
-import { required, hasValidOrgNumberOrFodselsnr, hasNoWhiteSpace } from '@fpsak-frontend/utils';
+import { required, hasValidOrgNumberOrFodselsnr, hasNoWhiteSpace } from '@navikt/ft-utils';
 
 import BehovForTilrettteleggingFieldArray from './BehovForTilrettteleggingFieldArray';
 

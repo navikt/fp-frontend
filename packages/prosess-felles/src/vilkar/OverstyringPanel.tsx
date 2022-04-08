@@ -10,7 +10,7 @@ import {
 import { TextAreaField } from '@fpsak-frontend/form-hooks';
 import {
   hasValidText, maxLength, minLength, createIntl,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel_ny.svg';
 
 import messages from '../../i18n/nb_NO.json';

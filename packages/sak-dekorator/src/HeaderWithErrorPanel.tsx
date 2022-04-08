@@ -6,7 +6,7 @@ import {
   BoxedListWithLinks, Header, Popover, SystemButton, UserPanel,
 } from '@navikt/fp-react-components';
 
-import { decodeHtmlEntity, createIntl } from '@fpsak-frontend/utils';
+import { decodeHtmlEntity, createIntl } from '@navikt/ft-utils';
 import { RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@fpsak-frontend/konstanter';
 import rettskildeneIkonUrl from '@fpsak-frontend/assets/images/rettskildene.svg';
 import systemrutineIkonUrl from '@fpsak-frontend/assets/images/rutine.svg';

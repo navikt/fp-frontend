@@ -27,7 +27,7 @@ import {
   omit,
   required,
   requiredIfNotPristine,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';

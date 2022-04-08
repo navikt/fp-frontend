@@ -10,7 +10,7 @@ import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Form, RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import { ISO_DATE_FORMAT, required, getKodeverknavnFn } from '@fpsak-frontend/utils';
+import { ISO_DATE_FORMAT, required, getKodeverknavnFn } from '@navikt/ft-utils';
 import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';

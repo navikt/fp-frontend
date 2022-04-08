@@ -9,12 +9,11 @@ import {
 
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
-import { required, TIDENES_ENDE } from '@fpsak-frontend/utils';
+import { required, TIDENES_ENDE, getKodeverknavnFraKode } from '@navikt/ft-utils';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
 import {
   ArbeidOgInntektsmelding, AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding, AlleKodeverk,
 } from '@fpsak-frontend/types';
-import { getKodeverknavnFraKode } from '@fpsak-frontend/utils/src/kodeverkUtils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
 import { Column, Row } from 'nav-frontend-grid';

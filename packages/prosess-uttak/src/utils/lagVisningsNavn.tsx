@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { ArbeidsgiverOpplysninger } from '@fpsak-frontend/types';
 
 // vanlig arbeidsgivernavn (orgnr)...arbeidsforholdid

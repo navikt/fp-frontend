@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 import TerminFodselDatoPanel, { FormValues } from './components/TerminFodselDatoPanel';
 import messages from '../i18n/nb_NO.json';
 

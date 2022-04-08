@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { Innholdstittel } from 'nav-frontend-typografi';
 
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import styles from './errorPageWrapper.less';
 import messages from '../../i18n/nb_NO.json';

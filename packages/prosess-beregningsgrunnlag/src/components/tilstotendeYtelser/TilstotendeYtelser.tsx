@@ -4,7 +4,7 @@ import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
 import { Column, Row } from 'nav-frontend-grid';
 import { VerticalSpacer, AvsnittSkiller } from '@navikt/ft-ui-komponenter';
-import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
+import { formatCurrencyNoKr } from '@navikt/ft-utils';
 import aktivitetStatus, { isStatusDagpengerOrAAP } from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import beregningStyles from '../beregningsgrunnlagPanel/beregningsgrunnlag.less';

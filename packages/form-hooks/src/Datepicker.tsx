@@ -3,7 +3,7 @@ import { DatepickerLimitations } from 'nav-datovelger';
 import { useFormContext, useController } from 'react-hook-form';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import PureDatepicker from './pure/PureDatepicker';
 import { getError, getValidationRules } from './formUtils';
 import Label, { LabelType } from './Label';

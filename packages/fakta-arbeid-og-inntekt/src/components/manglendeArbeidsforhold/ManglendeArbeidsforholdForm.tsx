@@ -10,7 +10,7 @@ import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 
 import {
   hasValidText, maxLength, minLength, hasValidDate, hasValidInteger, required, minValue, maxValue, dateAfterOrEqual,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import {
   TextAreaField, RadioGroupField, RadioOption, Datepicker, InputField, Form,
 } from '@fpsak-frontend/form-hooks';

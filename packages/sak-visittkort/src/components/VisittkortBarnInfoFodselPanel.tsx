@@ -6,7 +6,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { FlexColumn } from '@navikt/ft-ui-komponenter';
 
 import { FagsakHendelse } from '@fpsak-frontend/types';
-import { dateFormat, DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { dateFormat, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 
 import styles from './visittkortBarnInfoFodselPanel.less';

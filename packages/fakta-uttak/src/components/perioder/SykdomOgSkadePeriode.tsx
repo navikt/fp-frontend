@@ -16,7 +16,7 @@ import {
 import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
 import {
   hasValidPeriod, hasValidText, maxLength, minLength, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { FamilieHendelse } from '@fpsak-frontend/types';
 
 import PerioderKnapper from './PerioderKnapper';

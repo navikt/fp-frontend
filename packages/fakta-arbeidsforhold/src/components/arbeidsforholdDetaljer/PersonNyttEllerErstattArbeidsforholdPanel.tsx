@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 
-import { required } from '@fpsak-frontend/utils';
+import { required } from '@navikt/ft-utils';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form';
 import { Arbeidsforhold, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';

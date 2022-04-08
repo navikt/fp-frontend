@@ -9,7 +9,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import {
   formatCurrencyNoKr, isArrayEmpty, parseCurrencyInput, removeSpacesFromNumber, getKodeverknavnFn,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import {
   Table, TableColumn, TableRow, Image,
 } from '@navikt/ft-ui-komponenter';

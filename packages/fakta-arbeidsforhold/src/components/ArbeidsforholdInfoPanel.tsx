@@ -6,7 +6,7 @@ import { createSelector } from 'reselect';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@navikt/ft-ui-komponenter';
-import { omitMany } from '@fpsak-frontend/utils';
+import { omitMany } from '@navikt/ft-utils';
 import {
   Aksjonspunkt, Arbeidsforhold, ArbeidsgiverOpplysningerPerId, AlleKodeverk,
 } from '@fpsak-frontend/types';

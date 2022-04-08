@@ -7,7 +7,7 @@ import { Element } from 'nav-frontend-typografi';
 import { CheckboxField } from '@fpsak-frontend/form';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { hasValidPeriodIncludingOtherErrors, isRequiredMessage, required } from '@fpsak-frontend/utils';
+import { hasValidPeriodIncludingOtherErrors, isRequiredMessage, required } from '@navikt/ft-utils';
 import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import RenderUtsettelsePeriodeFieldArray from './RenderUtsettelsePeriodeFieldArray';

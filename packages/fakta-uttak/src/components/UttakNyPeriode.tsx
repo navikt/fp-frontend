@@ -27,7 +27,7 @@ import {
   minLength,
   required,
   requiredIfNotPristine,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import uttakArbeidType from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
 import {

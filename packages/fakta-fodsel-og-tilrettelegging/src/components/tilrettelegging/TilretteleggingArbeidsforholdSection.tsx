@@ -5,7 +5,7 @@ import { FieldArray, FormSection, formValueSelector } from 'redux-form';
 import { Normaltekst, Element } from 'nav-frontend-typografi';
 
 import { DatepickerField, CheckboxField } from '@fpsak-frontend/form';
-import { hasValidDate, required } from '@fpsak-frontend/utils';
+import { hasValidDate, required } from '@navikt/ft-utils';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';

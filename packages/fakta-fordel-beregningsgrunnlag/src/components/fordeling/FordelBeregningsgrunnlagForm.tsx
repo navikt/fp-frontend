@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { IntlShape } from 'react-intl';
 
-import { removeSpacesFromNumber } from '@fpsak-frontend/utils';
+import { removeSpacesFromNumber } from '@navikt/ft-utils';
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import periodeAarsak from '@fpsak-frontend/kodeverk/src/periodeAarsak';

@@ -8,7 +8,7 @@ import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { required } from '@fpsak-frontend/utils';
+import { required } from '@navikt/ft-utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   PeriodLabel, VerticalSpacer, FaktaGruppe, Image,

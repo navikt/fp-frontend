@@ -17,7 +17,7 @@ import {
 } from '@fpsak-frontend/form-hooks';
 import {
   hasValidText, maxLength, minLength, required, isRequiredMessage,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import getAksjonspunkttekst from './aksjonspunktTekster/aksjonspunktTekstUtleder';

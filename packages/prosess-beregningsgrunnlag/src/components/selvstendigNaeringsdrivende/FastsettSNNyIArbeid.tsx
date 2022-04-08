@@ -12,7 +12,7 @@ import {
   removeSpacesFromNumber,
   required,
   formatCurrencyNoKr,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import {
   InputField, TextAreaField,
 } from '@fpsak-frontend/form-hooks';

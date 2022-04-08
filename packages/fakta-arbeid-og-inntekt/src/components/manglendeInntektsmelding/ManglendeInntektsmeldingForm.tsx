@@ -9,7 +9,7 @@ import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 
 import {
   required, hasValidText, maxLength, minLength,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import {
   TextAreaField, RadioGroupField, RadioOption, Form, CheckboxField,
 } from '@fpsak-frontend/form-hooks';

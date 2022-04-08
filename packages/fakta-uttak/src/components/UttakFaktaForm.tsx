@@ -7,7 +7,7 @@ import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import {
   dateFormat, guid, getKodeverknavnFn, omitMany,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelseSamling,

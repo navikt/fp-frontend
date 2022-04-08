@@ -22,7 +22,7 @@ import {
   maxValue,
   minValue,
   required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 
 import styles from './terminFodselDatoPanel.less';
 

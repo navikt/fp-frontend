@@ -11,7 +11,7 @@ import {
 import {
   ProsessDefaultInitPanel, skalViseProsessPanel, ProsessPanelInitProps, useStandardProsessPanelProps,
 } from '@fpsak-frontend/behandling-felles';
-import { createIntl, forhandsvisDokument } from '@fpsak-frontend/utils';
+import { createIntl, forhandsvisDokument } from '@navikt/ft-utils';
 
 import messages from '../../i18n/nb_NO.json';
 import { restApiEsHooks, EsBehandlingApiKeys, requestEsApi } from '../data/esBehandlingApi';

@@ -11,7 +11,7 @@ import {
 } from '@fpsak-frontend/form';
 import {
   hasValidFodselsnummer, hasValidFodselsnummerFormat, hasValidName, required, sammeFodselsnummerSomSokerMessage,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import landkoder from '@fpsak-frontend/kodeverk/src/landkoder';

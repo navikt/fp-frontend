@@ -9,7 +9,7 @@ import {
   maxValueFormatted,
   removeSpacesFromNumber,
   formatCurrencyNoKr,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { Column, Row } from 'nav-frontend-grid';
 import { DatepickerField, InputField } from '@fpsak-frontend/form';
 import { FormattedMessage } from 'react-intl';

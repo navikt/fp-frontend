@@ -4,7 +4,7 @@ import { WrappedComponentProps } from 'react-intl';
 
 import {
   hasValidDate, hasValidFodselsnummer, hasValidName, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import {
   VerticalSpacer, FaktaGruppe, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';

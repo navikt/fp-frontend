@@ -8,7 +8,7 @@ import {
 } from '@fpsak-frontend/types';
 import klageBehandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import { decodeHtmlEntity } from '@fpsak-frontend/utils';
+import { decodeHtmlEntity } from '@navikt/ft-utils';
 import behandlingResultatType, { isAvslag, isInnvilget } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
 import { Form } from '@fpsak-frontend/form-hooks';

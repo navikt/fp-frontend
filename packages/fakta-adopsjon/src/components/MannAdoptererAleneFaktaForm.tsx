@@ -5,7 +5,7 @@ import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { required, getKodeverknavnFn } from '@fpsak-frontend/utils';
+import { required, getKodeverknavnFn } from '@navikt/ft-utils';
 import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
 import { FamilieHendelse, AlleKodeverk } from '@fpsak-frontend/types';

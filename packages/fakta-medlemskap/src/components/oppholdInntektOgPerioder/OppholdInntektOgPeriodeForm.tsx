@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 
 import { FaktaBegrunnelseTextField } from '@fpsak-frontend/fakta-felles';
-import { getKodeverknavnFn } from '@fpsak-frontend/utils';
+import { getKodeverknavnFn } from '@navikt/ft-utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   BorderBox, VerticalSpacer, FlexColumn, FlexContainer, FlexRow,

@@ -6,7 +6,7 @@ import {
 
 import { VerticalSpacer, AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import { formatCurrencyNoKr } from '@fpsak-frontend/utils';
+import { formatCurrencyNoKr } from '@navikt/ft-utils';
 
 import { Column, Row } from 'nav-frontend-grid';
 import { BeregningsgrunnlagAndel, PgiVerdier } from '@fpsak-frontend/types';

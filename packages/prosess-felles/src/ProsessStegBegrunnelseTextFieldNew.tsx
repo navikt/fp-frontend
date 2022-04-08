@@ -4,7 +4,7 @@ import { useFormContext } from 'react-hook-form';
 import { TextAreaField } from '@fpsak-frontend/form-hooks';
 import {
   decodeHtmlEntity, hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew, createIntl,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 
 import messages from '../i18n/nb_NO.json';

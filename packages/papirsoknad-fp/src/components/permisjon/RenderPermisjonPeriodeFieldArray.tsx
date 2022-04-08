@@ -20,7 +20,7 @@ import {
   isRequiredMessage,
   maxValue,
   required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import {

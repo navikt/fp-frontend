@@ -12,7 +12,7 @@ import {
   parseCurrencyInput,
   formatCurrencyNoKr,
   removeSpacesFromNumber,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import {
   InputField,
   RadioGroupField, RadioOption, TextAreaField,

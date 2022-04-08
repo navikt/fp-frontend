@@ -4,7 +4,7 @@ import beregningsgrunnlagAndeltyper from '@fpsak-frontend/kodeverk/src/beregning
 import AktivitetStatus, { aktivitetstatusTilAndeltypeMap } from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import {
   dateIsAfter, formatCurrencyNoKr, removeSpacesFromNumber, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 

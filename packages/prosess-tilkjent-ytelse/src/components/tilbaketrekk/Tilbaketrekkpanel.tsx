@@ -10,7 +10,7 @@ import {
 import behandleImageURL from '@fpsak-frontend/assets/images/advarsel.svg';
 import {
   hasValidText, maxLength, minLength, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
   Form, RadioGroupField, RadioOption, TextAreaField,

@@ -7,7 +7,7 @@ import SakenFaktaIndex from '@fpsak-frontend/fakta-saken';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import messages from '../../i18n/nb_NO.json';
 import { requestSvpApi, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';

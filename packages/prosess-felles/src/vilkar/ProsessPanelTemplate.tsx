@@ -6,7 +6,7 @@ import {
   FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer, AksjonspunktBox,
 } from '@navikt/ft-ui-komponenter';
 
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 import avslattImage from '@fpsak-frontend/assets/images/avslaatt_hover.svg';
 import innvilgetImage from '@fpsak-frontend/assets/images/innvilget_hover.svg';
 

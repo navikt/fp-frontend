@@ -4,7 +4,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Undertekst } from 'nav-frontend-typografi';
 import Lukknapp from 'nav-frontend-lukknapp';
 
-import { decodeHtmlEntity } from '@fpsak-frontend/utils';
+import { decodeHtmlEntity } from '@navikt/ft-utils';
 
 import ErrorMessageDetailsModal from './ErrorMessageDetailsModal';
 import Feilmelding from './feilmeldingTsType';

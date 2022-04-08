@@ -4,7 +4,7 @@ import { Dispatch } from 'redux';
 
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import { AlleKodeverk } from '@fpsak-frontend/types';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import SvangerskapspengerForm from './components/SvangerskapspengerForm';

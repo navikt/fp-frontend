@@ -5,7 +5,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import { FormattedMessage, useIntl } from 'react-intl';
-import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import {
   VerticalSpacer, AvsnittSkiller, ReactECharts, FlexColumn, FlexRow,
 } from '@navikt/ft-ui-komponenter';

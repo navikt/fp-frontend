@@ -5,7 +5,7 @@ import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl'
 import { Column, Row } from 'nav-frontend-grid';
 import { Element } from 'nav-frontend-typografi';
 
-import { calcDays, getKodeverknavnFn } from '@fpsak-frontend/utils';
+import { calcDays, getKodeverknavnFn } from '@navikt/ft-utils';
 import {
   AksjonspunktHelpTextTemp, VerticalSpacer, FloatRight, EditedIcon, Image,
 } from '@navikt/ft-ui-komponenter';

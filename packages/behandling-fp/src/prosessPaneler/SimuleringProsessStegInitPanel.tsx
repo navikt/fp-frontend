@@ -13,7 +13,7 @@ import {
   ProsessDefaultInitPanel, useStandardProsessPanelProps, ProsessPanelMenyData, ProsessPanelInitProps,
 } from '@fpsak-frontend/behandling-felles';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import { createIntl, forhandsvisDokument } from '@fpsak-frontend/utils';
+import { createIntl, forhandsvisDokument } from '@navikt/ft-utils';
 
 import messages from '../../i18n/nb_NO.json';
 import { requestFpApi, restApiFpHooks, FpBehandlingApiKeys } from '../data/fpBehandlingApi';
