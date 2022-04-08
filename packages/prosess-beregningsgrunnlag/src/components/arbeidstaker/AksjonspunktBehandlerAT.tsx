@@ -2,7 +2,7 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import { InputField } from '@fpsak-frontend/form-hooks';
+import { InputField } from '@navikt/ft-form-hooks';
 import {
   getKodeverknavnFn, parseCurrencyInput, removeSpacesFromNumber, required,
 } from '@navikt/ft-utils';

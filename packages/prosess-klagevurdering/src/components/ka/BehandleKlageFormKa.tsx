@@ -4,7 +4,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Undertittel } from 'nav-frontend-typografi';
 import { useForm } from 'react-hook-form';
 
-import { Form } from '@fpsak-frontend/form-hooks';
+import { Form } from '@navikt/ft-form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';

@@ -9,7 +9,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 
 import popOutPilSvg from '@fpsak-frontend/assets/images/pop-out-pil.svg';
-import { TextAreaField } from '@fpsak-frontend/form-hooks';
+import { TextAreaField } from '@navikt/ft-form-hooks';
 import {
   getLanguageFromSprakkode, hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-utils';

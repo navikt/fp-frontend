@@ -18,7 +18,7 @@ import {
 } from '@navikt/ft-utils';
 import {
   TextAreaField, Datepicker, InputField, Form,
-} from '@fpsak-frontend/form-hooks';
+} from '@navikt/ft-form-hooks';
 
 import ArbeidsforholdOgInntekt from '../../types/arbeidsforholdOgInntekt';
 

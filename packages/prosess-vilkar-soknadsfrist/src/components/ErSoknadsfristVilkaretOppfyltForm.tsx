@@ -7,7 +7,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
 
-import { Form, RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
+import { Form, RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { ISO_DATE_FORMAT, required, getKodeverknavnFn } from '@navikt/ft-utils';

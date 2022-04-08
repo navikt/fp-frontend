@@ -10,7 +10,7 @@ import {
   ariaCheck, getLanguageFromSprakkode, hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-utils';
 import ugunstAarsakTyper from '@fpsak-frontend/kodeverk/src/ugunstAarsakTyper';
-import { SelectField, TextAreaField, Form } from '@fpsak-frontend/form-hooks';
+import { SelectField, TextAreaField, Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 

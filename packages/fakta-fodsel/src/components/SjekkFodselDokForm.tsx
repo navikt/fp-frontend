@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { useFormContext } from 'react-hook-form';
 import { Column } from 'nav-frontend-grid';
 
 import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@fpsak-frontend/fakta-felles';
@@ -8,7 +7,7 @@ import {
   ArrowBox, VerticalSpacer, FaktaGruppe,
 } from '@navikt/ft-ui-komponenter';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
-import { RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
+import { RadioGroupField, RadioOption, formHooks } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
@@ -63,7 +62,7 @@ export const SjekkFodselDokForm: FunctionComponent<OwnProps> & StaticFunctions =
   familiehendelse,
 }) => {
   const intl = useIntl();
-  const { watch } = useFormContext<FormValues>();
+  const { watch } = formHooks.useFormContext<FormValues>();
   const { gjeldende, register } = familiehendelse;
 
   const dokumentasjonForeligger = watch('dokumentasjonForeligger') || false;

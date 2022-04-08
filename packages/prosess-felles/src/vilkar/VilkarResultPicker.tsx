@@ -1,6 +1,5 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { useFormContext } from 'react-hook-form';
 import {
   FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -8,8 +7,8 @@ import {
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
-  Datepicker, RadioGroupField, RadioOption, SelectField,
-} from '@fpsak-frontend/form-hooks';
+  Datepicker, RadioGroupField, RadioOption, SelectField, formHooks,
+} from '@navikt/ft-form-hooks';
 import {
   hasValidDate, required, createIntl, requiredIfCustomFunctionIsTrueNew,
 } from '@navikt/ft-utils';
@@ -64,7 +63,7 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
   erMedlemskapsPanel = false,
   skalKunneInnvilge = true,
 }) => {
-  const { getValues, watch } = useFormContext();
+  const { getValues, watch } = formHooks.useFormContext();
   const erVilkarOk = watch('erVilkarOk');
 
   return (

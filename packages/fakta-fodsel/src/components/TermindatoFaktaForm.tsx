@@ -1,13 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { useFormContext } from 'react-hook-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 import AlertStripe from 'nav-frontend-alertstriper';
 
 import { DateLabel, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { Datepicker, InputField } from '@fpsak-frontend/form-hooks';
+import { Datepicker, InputField, formHooks } from '@navikt/ft-form-hooks';
 import {
   hasValidDate, hasValidInteger, maxValue, minValue, required,
 } from '@navikt/ft-utils';
@@ -61,7 +60,7 @@ export const TermindatoFaktaForm: FunctionComponent<OwnProps> & StaticFunctions 
   const intl = useIntl();
   const editedStatus = isFieldEdited(soknad, gjeldendeFamiliehendelse);
 
-  const { watch } = useFormContext<FormValues>();
+  const { watch } = formHooks.useFormContext<FormValues>();
 
   const termindato = watch('termindato');
   const utstedtdato = watch('utstedtdato');

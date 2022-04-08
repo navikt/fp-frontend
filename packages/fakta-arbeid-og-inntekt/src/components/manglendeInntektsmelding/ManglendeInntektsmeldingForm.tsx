@@ -12,7 +12,7 @@ import {
 } from '@navikt/ft-utils';
 import {
   TextAreaField, RadioGroupField, RadioOption, Form, CheckboxField,
-} from '@fpsak-frontend/form-hooks';
+} from '@navikt/ft-form-hooks';
 import {
   AlleKodeverk,
   AoIArbeidsforhold, Inntektsmelding, Inntektspost, ManglendeInntektsmeldingVurdering,

@@ -12,7 +12,7 @@ import {
 } from '@navikt/ft-utils';
 import {
   RadioGroupField, RadioOption, TextAreaField, Form,
-} from '@fpsak-frontend/form-hooks';
+} from '@navikt/ft-form-hooks';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {

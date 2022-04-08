@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 
-import { Form } from '@fpsak-frontend/form-hooks';
+import { Form } from '@navikt/ft-form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AvsnittSkiller, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Column, Row } from 'nav-frontend-grid';

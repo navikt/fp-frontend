@@ -10,7 +10,7 @@ import Panel from 'nav-frontend-paneler';
 
 import {
   Form, Datepicker, RadioGroupField, RadioOption,
-} from '@fpsak-frontend/form-hooks';
+} from '@navikt/ft-form-hooks';
 import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';

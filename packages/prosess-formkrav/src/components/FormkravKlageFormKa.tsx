@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { CheckboxField, Form, SelectField } from '@fpsak-frontend/form-hooks';
+import { CheckboxField, Form, SelectField } from '@navikt/ft-form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AlleKodeverk, KlageVurdering, KodeverkMedNavn } from '@fpsak-frontend/types';
 

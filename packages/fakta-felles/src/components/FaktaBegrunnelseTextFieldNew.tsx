@@ -4,7 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 import {
   decodeHtmlEntity, hasValidText, maxLength, minLength, required, createIntl,
 } from '@navikt/ft-utils';
-import { TextAreaField } from '@fpsak-frontend/form-hooks';
+import { TextAreaField } from '@navikt/ft-form-hooks';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 
 import styles from './faktaBegrunnelseTextField.less';

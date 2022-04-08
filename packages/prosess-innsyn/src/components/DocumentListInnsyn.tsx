@@ -3,7 +3,7 @@ import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
-import { CheckboxField } from '@fpsak-frontend/form-hooks';
+import { CheckboxField } from '@navikt/ft-form-hooks';
 import {
   DateTimeLabel, Table, TableColumn, TableRow, Image,
 } from '@navikt/ft-ui-komponenter';

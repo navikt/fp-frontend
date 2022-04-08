@@ -12,7 +12,7 @@ import {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import aksjonspunktStatus, { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { Form, CheckboxField } from '@fpsak-frontend/form-hooks';
+import { Form, CheckboxField } from '@navikt/ft-form-hooks';
 import { ManuellKontrollBesteberegningAP }
   from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/KontrollerBesteberegningAP';
 

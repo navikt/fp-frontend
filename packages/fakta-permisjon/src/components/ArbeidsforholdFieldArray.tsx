@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { useFormContext, useFieldArray } from 'react-hook-form';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
@@ -10,7 +9,7 @@ import {
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
 import { required, TIDENES_ENDE, getKodeverknavnFraKode } from '@navikt/ft-utils';
-import { RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
+import { RadioGroupField, RadioOption, formHooks } from '@navikt/ft-form-hooks';
 import {
   ArbeidOgInntektsmelding, AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding, AlleKodeverk,
 } from '@fpsak-frontend/types';
@@ -68,8 +67,8 @@ const ArbeidsforholdFieldArray: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
   const { inntektsmeldinger, inntekter } = arbeidOgInntekt;
 
-  const { control } = useFormContext<FormValues>();
-  const { fields } = useFieldArray({
+  const { control } = formHooks.useFormContext<FormValues>();
+  const { fields } = formHooks.useFieldArray({
     control,
     name: FIELD_ARRAY_NAME,
   });

@@ -11,7 +11,7 @@ import {
   FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 
-import { Form } from '@fpsak-frontend/form-hooks';
+import { Form } from '@navikt/ft-form-hooks';
 import { KodeverkMedNavn, Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';

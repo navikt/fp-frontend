@@ -11,7 +11,7 @@ import {
 
 import editUtlandIcon from '@fpsak-frontend/assets/images/endre.svg';
 import editUtlandDisabledIcon from '@fpsak-frontend/assets/images/endre_disablet.svg';
-import { RadioGroupField, RadioOption, Form } from '@fpsak-frontend/form-hooks';
+import { RadioGroupField, RadioOption, Form } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-utils';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt } from '@fpsak-frontend/types';

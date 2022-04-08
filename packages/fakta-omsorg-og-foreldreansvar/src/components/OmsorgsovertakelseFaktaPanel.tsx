@@ -3,7 +3,7 @@ import { useIntl, FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Undertekst, Normaltekst } from 'nav-frontend-typografi';
 
-import { Datepicker } from '@fpsak-frontend/form-hooks';
+import { Datepicker } from '@navikt/ft-form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { hasValidDate, required } from '@navikt/ft-utils';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';

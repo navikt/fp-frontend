@@ -5,7 +5,7 @@ import { Undertekst } from 'nav-frontend-typografi';
 
 import { Behandlingsresultat } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { TextAreaField } from '@fpsak-frontend/form-hooks';
+import { TextAreaField } from '@navikt/ft-form-hooks';
 import {
   decodeHtmlEntity, getLanguageFromSprakkode, hasValidText, maxLength, minLength,
 } from '@navikt/ft-utils';

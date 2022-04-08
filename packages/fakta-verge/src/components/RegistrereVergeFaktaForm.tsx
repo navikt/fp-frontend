@@ -10,7 +10,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import {
   Datepicker, InputField, SelectField,
-} from '@fpsak-frontend/form-hooks';
+} from '@navikt/ft-form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { KodeverkMedNavn, Verge } from '@fpsak-frontend/types';
 

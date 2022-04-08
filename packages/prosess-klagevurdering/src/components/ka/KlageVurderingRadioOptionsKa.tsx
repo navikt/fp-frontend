@@ -5,7 +5,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { required } from '@navikt/ft-utils';
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form-hooks';
+import { RadioGroupField, RadioOption, SelectField } from '@navikt/ft-form-hooks';
 import { ProsessStegBegrunnelseTextFieldNew } from '@fpsak-frontend/prosess-felles';
 import klageVurderingOmgjoerType from '@fpsak-frontend/kodeverk/src/klageVurderingOmgjoer';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';

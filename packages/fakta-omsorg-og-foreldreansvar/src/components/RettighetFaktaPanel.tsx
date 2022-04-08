@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { useFormContext } from 'react-hook-form';
 import { Normaltekst } from 'nav-frontend-typografi';
+import { formHooks } from '@navikt/ft-form-hooks';
 
 import relatertYtelseTilstand from '@fpsak-frontend/kodeverk/src/relatertYtelseTilstand';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -37,7 +37,7 @@ const RettighetFaktaPanel: FunctionComponent<PureOwnProps> & StaticFunctions = (
   alleMerknaderFraBeslutter,
 }) => {
   const intl = useIntl();
-  const { watch } = useFormContext();
+  const { watch } = formHooks.useFormContext();
 
   const farSokerType = watch('farSokerType');
   const ytelser = watch('ytelser');

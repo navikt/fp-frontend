@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Location } from 'history';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
-import { Form } from '@fpsak-frontend/form-hooks';
+import { Form } from '@navikt/ft-form-hooks';
 import vurderPaNyttArsakType from '@fpsak-frontend/kodeverk/src/vurderPaNyttArsakType';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import konsekvensForYtelsen from '@fpsak-frontend/kodeverk/src/konsekvensForYtelsen';

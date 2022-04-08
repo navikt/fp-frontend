@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import moment from 'moment';
 import { Element } from 'nav-frontend-typografi';
 
-import { Form } from '@fpsak-frontend/form-hooks';
+import { Form } from '@navikt/ft-form-hooks';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';

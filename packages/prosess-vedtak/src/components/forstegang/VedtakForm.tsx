@@ -11,7 +11,7 @@ import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import behandlingResultatType, { isAvslag, isInnvilget } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
-import { Form } from '@fpsak-frontend/form-hooks';
+import { Form } from '@navikt/ft-form-hooks';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   BekreftVedtakUtenTotrinnskontrollAp, ForeslaVedtakAp, ForeslaVedtakManueltAp, VurdereAnnenYtelseForVedtakAp, VurdereDokumentForVedtakAp,

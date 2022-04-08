@@ -13,7 +13,7 @@ import {
 } from '@navikt/ft-utils';
 import {
   TextAreaField, RadioGroupField, RadioOption, Datepicker, InputField, Form,
-} from '@fpsak-frontend/form-hooks';
+} from '@navikt/ft-form-hooks';
 import {
   Inntektsmelding, ManueltArbeidsforhold, ManglendeInntektsmeldingVurdering,
 } from '@fpsak-frontend/types';

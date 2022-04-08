@@ -9,7 +9,7 @@ import Modal from 'nav-frontend-modal';
 import { Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
-import { Datepicker, SelectField, Form } from '@fpsak-frontend/form-hooks';
+import { Datepicker, SelectField, Form } from '@navikt/ft-form-hooks';
 import {
   ariaCheck, dateAfterOrEqualToToday, hasValidDate, required, dateBeforeToday,
 } from '@navikt/ft-utils';

@@ -13,7 +13,7 @@ import {
 import {
   formatCurrencyWithKr, hasValidInteger, maxValue, minValue, required, decodeHtmlEntity,
 } from '@navikt/ft-utils';
-import { InputField, Form } from '@fpsak-frontend/form-hooks';
+import { InputField, Form } from '@navikt/ft-form-hooks';
 import aksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { OverstyringPanel } from '@fpsak-frontend/prosess-felles';
 import { OverstyringBeregningAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';

@@ -13,7 +13,7 @@ import {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import aksjonspunktStatus, { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { RadioGroupField, RadioOption, Form } from '@fpsak-frontend/form-hooks';
+import { RadioGroupField, RadioOption, Form } from '@navikt/ft-form-hooks';
 import { KontrollerBesteberegningAP } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/KontrollerBesteberegningAP';
 
 export const buildInitialValues = (venteårsak: string, aksjonspunkt: Aksjonspunkt): FormValues => {

@@ -6,7 +6,7 @@ import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
-import { RadioGroupField, RadioOption, Form } from '@fpsak-frontend/form-hooks';
+import { RadioGroupField, RadioOption, Form } from '@navikt/ft-form-hooks';
 import {
   PeriodLabel, VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import { getLanguageFromSprakkode, hasValidText, required } from '@navikt/ft-utils';
-import { TextAreaField } from '@fpsak-frontend/form-hooks';
+import { TextAreaField } from '@navikt/ft-form-hooks';
 
 import styles from './fritekstKlageBrevTextField.less';
 

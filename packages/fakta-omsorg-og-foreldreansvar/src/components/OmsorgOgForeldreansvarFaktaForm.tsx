@@ -1,6 +1,5 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { useFormContext } from 'react-hook-form';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
@@ -8,7 +7,7 @@ import {
   AksjonspunktHelpTextTemp, VerticalSpacer, FaktaGruppe, EditedIcon,
 } from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { SelectField } from '@fpsak-frontend/form-hooks';
+import { SelectField, formHooks } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-utils';
 import VilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { isFieldEdited, FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
@@ -94,7 +93,7 @@ const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<PureOwnProps> & StaticF
 }) => {
   const intl = useIntl();
 
-  const { watch } = useFormContext<FormValues>();
+  const { watch } = formHooks.useFormContext<FormValues>();
 
   const editedStatus = getEditedStatus(soknad, gjeldendeFamiliehendelse);
   const vilkarType = watch('vilkarType');

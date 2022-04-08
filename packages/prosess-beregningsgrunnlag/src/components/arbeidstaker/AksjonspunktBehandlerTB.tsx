@@ -10,7 +10,7 @@ import {
   removeSpacesFromNumber,
   required,
 } from '@navikt/ft-utils';
-import { InputField } from '@fpsak-frontend/form-hooks';
+import { InputField, formHooks } from '@navikt/ft-form-hooks';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -25,7 +25,7 @@ import {
   BeregningsgrunnlagArbeidsforhold,
   BeregningsgrunnlagPeriodeProp,
 } from '@fpsak-frontend/types';
-import { useFormContext, UseFormReturn } from 'react-hook-form';
+import { UseFormReturn } from 'react-hook-form';
 import { TidsbegrensetArbeidsforholdPeriodeResultat } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/prosess/BeregningsgrunnlagAP';
 import createVisningsnavnForAktivitet from '../../util/createVisningsnavnForAktivitet';
 
@@ -321,7 +321,7 @@ const AksjonspunktBehandlerTidsbegrenset: FunctionComponent<OwnProps> & StaticFu
 }) => {
   const tabellData = createTableData(allePerioder, alleKodeverk, arbeidsgiverOpplysningerPerId);
   const isAksjonspunktClosed = getIsAksjonspunktClosed(aksjonspunkter);
-  const formMethods = useFormContext<BeregningsgrunnlagValues>();
+  const formMethods = formHooks.useFormContext<BeregningsgrunnlagValues>();
   const bruttoPrPeriodeList = lagBruttoPrPeriodeListe(allePerioder, formMethods);
   const perioder = bruttoPrPeriodeList.slice(1);
   return (

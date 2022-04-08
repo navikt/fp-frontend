@@ -19,6 +19,7 @@ import Dekorator from './components/Dekorator';
 
 import '@fpsak-frontend/assets/styles/global.less';
 import '@navikt/ft-ui-komponenter/dist/style.css';
+import '@navikt/ft-form-hooks/dist/style.css';
 
 const EMPTY_ARRAY = [] as any[];
 

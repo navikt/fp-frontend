@@ -9,7 +9,7 @@ import {
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { isAvslag, isInnvilget, isOpphor } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import BehandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
-import { Form } from '@fpsak-frontend/form-hooks';
+import { Form } from '@navikt/ft-form-hooks';
 import {
   AlleKodeverk, Behandling, BeregningsresultatFp, BeregningsresultatEs, Vilkar,
   Aksjonspunkt, SimuleringResultat, TilbakekrevingValg,

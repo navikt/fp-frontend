@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { useFormContext } from 'react-hook-form';
 
-import { TextAreaField } from '@fpsak-frontend/form-hooks';
+import { TextAreaField, formHooks } from '@navikt/ft-form-hooks';
 import {
   decodeHtmlEntity, hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew, createIntl,
 } from '@navikt/ft-utils';
@@ -49,7 +48,7 @@ const ProsessStegBegrunnelseTextField: FunctionComponent<OwnProps> & StaticFunct
   text,
   useAllWidth = false,
 }) => {
-  const { formState: { isDirty } } = useFormContext();
+  const { formState: { isDirty } } = formHooks.useFormContext();
   const isRequiredFn = getIsBegrunnelseRequired(isDirty);
   return (
     <div className={!useAllWidth ? styles.begrunnelseTextField : ''}>

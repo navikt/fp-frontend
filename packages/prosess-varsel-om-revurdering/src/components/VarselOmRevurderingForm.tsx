@@ -10,7 +10,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 
 import {
   Form, RadioGroupField, RadioOption, TextAreaField,
-} from '@fpsak-frontend/form-hooks';
+} from '@navikt/ft-form-hooks';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';

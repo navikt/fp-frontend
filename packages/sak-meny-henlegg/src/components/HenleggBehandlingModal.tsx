@@ -9,7 +9,7 @@ import { Undertekst } from 'nav-frontend-typografi';
 
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
-import { SelectField, TextAreaField, Form } from '@fpsak-frontend/form-hooks';
+import { SelectField, TextAreaField, Form } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-utils';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';

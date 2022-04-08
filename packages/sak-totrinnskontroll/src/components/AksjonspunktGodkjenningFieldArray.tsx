@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { NavLink } from 'react-router-dom';
-import { useFormContext, useFieldArray, UseFormGetValues } from 'react-hook-form';
+import { UseFormGetValues } from 'react-hook-form';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { Location } from 'history';
 import { Undertekst, Normaltekst } from 'nav-frontend-typografi';
@@ -13,8 +13,8 @@ import {
   KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 import {
-  CheckboxField, TextAreaField, RadioGroupField, RadioOption, SkjemaGruppeMedFeilviser,
-} from '@fpsak-frontend/form-hooks';
+  CheckboxField, TextAreaField, RadioGroupField, RadioOption, SkjemaGruppeMedFeilviser, formHooks,
+} from '@navikt/ft-form-hooks';
 import {
   hasValidText, maxLength, minLength, required, isRequiredMessage,
 } from '@navikt/ft-utils';
@@ -81,8 +81,8 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
 }) => {
   const {
     control, watch, getValues,
-  } = useFormContext();
-  const { fields } = useFieldArray({
+  } = formHooks.useFormContext();
+  const { fields } = formHooks.useFieldArray({
     control,
     name: FIELD_ARRAY_NAME,
   });

@@ -14,7 +14,7 @@ import {
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
   Form, RadioGroupField, RadioOption, TextAreaField,
-} from '@fpsak-frontend/form-hooks';
+} from '@navikt/ft-form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
 import { Aksjonspunkt, BeregningsresultatFp } from '@fpsak-frontend/types';

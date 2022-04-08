@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
-import { Form } from '@fpsak-frontend/form-hooks';
+import { Form } from '@navikt/ft-form-hooks';
 import {
   Aksjonspunkt, Verge, AlleKodeverk, AlleKodeverkTilbakekreving,
 } from '@fpsak-frontend/types';

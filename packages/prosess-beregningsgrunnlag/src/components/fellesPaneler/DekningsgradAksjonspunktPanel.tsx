@@ -5,7 +5,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import { Beregningsgrunnlag } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
-import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form-hooks';
+import { RadioGroupField, RadioOption, TextAreaField } from '@navikt/ft-form-hooks';
 import {
   hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-utils';

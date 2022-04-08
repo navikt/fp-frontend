@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import { Form, RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
+import { Form, RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
 import {
   ProsessStegBegrunnelseTextFieldNew, ProsessPanelTemplate,
 } from '@fpsak-frontend/prosess-felles';

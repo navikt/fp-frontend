@@ -15,7 +15,7 @@ import {
 } from '@navikt/ft-utils';
 import {
   InputField, TextAreaField,
-} from '@fpsak-frontend/form-hooks';
+} from '@navikt/ft-form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { Normaltekst } from 'nav-frontend-typografi';

@@ -11,7 +11,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 
 import {
   RadioGroupField, RadioOption, TextAreaField, Form,
-} from '@fpsak-frontend/form-hooks';
+} from '@navikt/ft-form-hooks';
 import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer, Image,
 } from '@navikt/ft-ui-komponenter';

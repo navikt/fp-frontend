@@ -7,7 +7,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@fpsak-frontend/fakta-felles';
 import { AksjonspunktBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-utils';
-import { RadioGroupField, RadioOption, Form } from '@fpsak-frontend/form-hooks';
+import { RadioGroupField, RadioOption, Form } from '@navikt/ft-form-hooks';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import { MerkOpptjeningUtlandAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 

@@ -14,9 +14,8 @@ import {
   removeSpacesFromNumber,
 } from '@navikt/ft-utils';
 import {
-  InputField,
-  RadioGroupField, RadioOption, TextAreaField,
-} from '@fpsak-frontend/form-hooks';
+  InputField, RadioGroupField, RadioOption, TextAreaField, formHooks,
+} from '@navikt/ft-form-hooks';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -25,7 +24,6 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { BeregningsgrunnlagAndel } from '@fpsak-frontend/types';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
-import { useFormContext } from 'react-hook-form';
 import { VurderVarigEndretNyoppstartetResultatAP } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/prosess/BeregningsgrunnlagAP';
 import styles from '../fellesPaneler/aksjonspunktBehandler.less';
 import { VurderOgFastsettValues } from '../../types/NaringAksjonspunktTsType';
@@ -73,7 +71,7 @@ const VurderVarigEndretEllerNyoppstartetSN: FunctionComponent<OwnProps> & Static
     radioLabel2 = (<FormattedMessage id="Beregningsgrunnlag.FastsettSelvstendigNaeringForm.VarigEndring" />);
   }
   const intl = useIntl();
-  const formMethods = useFormContext<BeregningsgrunnlagValues>();
+  const formMethods = formHooks.useFormContext<BeregningsgrunnlagValues>();
   const erVarigEndretNaering = formMethods.watch('erVarigEndretNaering');
   return (
     <>

@@ -8,7 +8,7 @@ import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsre
 import { ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Form, TextAreaField } from '@fpsak-frontend/form-hooks';
+import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import {
   decodeHtmlEntity, getLanguageFromSprakkode, hasValidText, maxLength, minLength,
 } from '@navikt/ft-utils';

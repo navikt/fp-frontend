@@ -12,7 +12,7 @@ import {
 } from '@navikt/ft-utils';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
-import { TextAreaField } from '@fpsak-frontend/form-hooks';
+import { TextAreaField } from '@navikt/ft-form-hooks';
 
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Form } from '@fpsak-frontend/form-hooks';
+import { Form } from '@navikt/ft-form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { KlageVurdering, AlleKodeverk } from '@fpsak-frontend/types';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
