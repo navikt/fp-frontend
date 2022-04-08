@@ -5,7 +5,7 @@ import { useFormContext, useFieldArray, UseFormGetValues } from 'react-hook-form
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { Location } from 'history';
 import { Undertekst, Normaltekst } from 'nav-frontend-typografi';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import {
   KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,

@@ -12,7 +12,7 @@
     "@fpsak-frontend/storybook-utils": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
-    "@navikt/fp-react-components": "1.0.12",
+    "@navikt/ft-ui-komponenter": "1.0.0-beta.4",
     "classnames": "2.3.1",
     "history": "5.3.0",
     "moment": "2.29.3",

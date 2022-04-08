@@ -4,7 +4,7 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { ariaCheck, hasValidText, maxLength } from '@fpsak-frontend/utils';
 import {

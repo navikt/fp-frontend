@@ -9,7 +9,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import AlertStripe from 'nav-frontend-alertstriper';
 import {
   FlexColumn, FlexContainer, FlexRow, Image,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-ui-komponenter';
 
 import { ArbeidsgiverOpplysningerPerId, FamilieHendelseSamling } from '@fpsak-frontend/types';
 import { calcDays } from '@fpsak-frontend/utils';

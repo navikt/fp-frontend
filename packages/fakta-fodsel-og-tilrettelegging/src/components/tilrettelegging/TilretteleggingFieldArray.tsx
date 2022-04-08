@@ -5,7 +5,7 @@ import { injectIntl, FormattedMessage, WrappedComponentProps } from 'react-intl'
 import { FieldArrayFieldsProps, FieldArrayMetaProps, formValueSelector } from 'redux-form';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Element } from 'nav-frontend-typografi';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import {
   DatepickerField, SelectField, DecimalField, PeriodFieldArray,

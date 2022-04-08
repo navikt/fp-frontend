@@ -5,7 +5,7 @@ import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Panel from 'nav-frontend-paneler';
 import {
   FlexContainer, FlexRow, FlexColumn, Image, Tooltip,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-ui-komponenter';
 
 import {
   DateLabel, TimeLabel, VerticalSpacer,

@@ -6,7 +6,7 @@ import Lenke from 'nav-frontend-lenker';
 import Alertstripe from 'nav-frontend-alertstriper';
 import {
   Image, FlexContainer, FlexRow, FlexColumn,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-ui-komponenter';
 
 import popOutPilSvg from '@fpsak-frontend/assets/images/pop-out-pil.svg';
 import { TextAreaField } from '@fpsak-frontend/form-hooks';

@@ -10,7 +10,7 @@
     "@fpsak-frontend/kodeverk": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
     "@navikt/fnrvalidator": "1.1.4",
-    "@navikt/fp-react-components": "1.0.12",
+    "@navikt/ft-ui-komponenter": "1.0.0-beta.4",
     "classnames": "2.3.1",
     "echarts": "5.3.2",
     "moment": "2.29.3",

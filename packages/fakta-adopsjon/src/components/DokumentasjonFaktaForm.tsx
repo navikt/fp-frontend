@@ -4,7 +4,7 @@ import { useFormContext } from 'react-hook-form';
 import moment from 'moment';
 import { Column, Container, Row } from 'nav-frontend-grid';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
-import { Image } from '@navikt/fp-react-components';
+import { Image } from '@navikt/ft-ui-komponenter';
 
 import { FieldEditedInfo } from '@fpsak-frontend/fakta-felles';
 import { Datepicker } from '@fpsak-frontend/form-hooks';

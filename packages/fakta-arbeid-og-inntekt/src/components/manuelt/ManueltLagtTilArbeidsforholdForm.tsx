@@ -8,7 +8,7 @@ import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { Column, Row } from 'nav-frontend-grid';
 import {
   Image, FlexColumn, FlexContainer, FlexRow,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-ui-komponenter';
 
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 import binIcon from '@fpsak-frontend/assets/images/bin.svg';

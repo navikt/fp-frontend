@@ -3,7 +3,7 @@ import { RawIntlProvider, FormattedMessage } from 'react-intl';
 import {
   EtikettAdvarsel, EtikettFokus, EtikettInfo, EtikettSuksess,
 } from 'nav-frontend-etiketter';
-import { Tooltip } from '@navikt/fp-react-components';
+import { Tooltip } from '@navikt/ft-ui-komponenter';
 
 import { createIntl } from '@fpsak-frontend/utils';
 import diskresjonskodeType from '@fpsak-frontend/kodeverk/src/diskresjonskodeType';

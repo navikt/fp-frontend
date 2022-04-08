@@ -1,6 +1,6 @@
 import React from 'react';
 import sinon from 'sinon';
-import { Image } from '@navikt/fp-react-components';
+import { Image } from '@navikt/ft-ui-komponenter';
 
 import {
   DateLabel, PeriodLabel, Table, TableColumn, TableRow,

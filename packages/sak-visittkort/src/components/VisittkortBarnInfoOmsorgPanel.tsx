@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { FlexColumn } from '@navikt/fp-react-components';
+import { FlexColumn } from '@navikt/ft-ui-komponenter';
 
 import { FagsakHendelse } from '@fpsak-frontend/types';
 import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';

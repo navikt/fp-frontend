@@ -7,7 +7,7 @@ import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { createSelector } from 'reselect';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
-import { Image } from '@navikt/fp-react-components';
+import { Image } from '@navikt/ft-ui-komponenter';
 
 import { InputField, NavFieldGroup, SelectField } from '@fpsak-frontend/form';
 import {

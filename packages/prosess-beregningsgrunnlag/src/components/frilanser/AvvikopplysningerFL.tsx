@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { FlexRow } from '@navikt/fp-react-components';
+import { FlexRow } from '@navikt/ft-ui-komponenter';
 import { Column } from 'nav-frontend-grid';
 import sammenligningType from '@fpsak-frontend/kodeverk/src/sammenligningType';
 import { SammenligningsgrunlagProp } from '@fpsak-frontend/types';

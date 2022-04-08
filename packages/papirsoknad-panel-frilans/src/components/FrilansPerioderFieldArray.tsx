@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import moment from 'moment';
 import { Column, Row } from 'nav-frontend-grid';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import {
   dateAfterOrEqual, hasValidDate, ISO_DATE_FORMAT, required,

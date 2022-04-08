@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { IntlShape } from 'react-intl';
 import moment from 'moment';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import {
   DDMMYYYY_DATE_FORMAT, hasValidDate, hasValidInteger, maxValue, minValue, required,

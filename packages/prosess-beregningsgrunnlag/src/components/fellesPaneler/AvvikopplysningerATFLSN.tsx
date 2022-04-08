@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { FlexColumn, FlexRow } from '@navikt/fp-react-components';
+import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { FormattedMessage } from 'react-intl';

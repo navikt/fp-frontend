@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 import { useFormContext, useFieldArray } from 'react-hook-form';
 import { useIntl } from 'react-intl';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { hasValidDate, required, dateBeforeOrEqualToToday } from '@fpsak-frontend/utils';
 import { AvklartBarn } from '@fpsak-frontend/types';

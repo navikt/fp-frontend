@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Row } from 'nav-frontend-grid';
-import { Image } from '@navikt/fp-react-components';
+import { Image } from '@navikt/ft-ui-komponenter';
 
 import { Kjønnkode } from '@fpsak-frontend/types';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';

@@ -7,7 +7,7 @@ import {
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
-import { Image } from '@navikt/fp-react-components';
+import { Image } from '@navikt/ft-ui-komponenter';
 
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { NavFieldGroup } from '@fpsak-frontend/form';

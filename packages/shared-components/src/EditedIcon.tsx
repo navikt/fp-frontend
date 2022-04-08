@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import classnames from 'classnames/bind';
 
 import endretFelt from '@fpsak-frontend/assets/images/endret_felt.svg';
-import { Image } from '@navikt/fp-react-components';
+import { Image } from '@navikt/ft-ui-komponenter';
 
 import styles from './editedIcon.less';
 

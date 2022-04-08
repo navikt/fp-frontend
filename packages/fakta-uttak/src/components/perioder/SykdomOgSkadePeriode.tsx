@@ -6,7 +6,7 @@ import {
 import { createSelector } from 'reselect';
 import { FormattedMessage, IntlShape } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import overforingArsakCodes from '@fpsak-frontend/kodeverk/src/overforingArsakCodes';

@@ -5,7 +5,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import {
   Element, Undertekst, Undertittel, Normaltekst,
 } from 'nav-frontend-typografi';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { Aksjonspunkt, BeregningsresultatEs } from '@fpsak-frontend/types';
 import {

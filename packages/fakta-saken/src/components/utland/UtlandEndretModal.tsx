@@ -5,7 +5,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
 import {
   FlexColumn, FlexContainer, FlexRow, Image,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-ui-komponenter';
 
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 import {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row } from 'nav-frontend-grid';
-import { Image } from '@navikt/fp-react-components';
+import { Image } from '@navikt/ft-ui-komponenter';
 
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import urlMann from '@fpsak-frontend/assets/images/mann.svg';

@@ -7,7 +7,7 @@ import Lenke from 'nav-frontend-lenker';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import {
   Image, FlexColumn, FlexContainer, FlexRow,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-ui-komponenter';
 
 import pilOppIkonUrl from '@fpsak-frontend/assets/images/pil_opp.svg';
 import pilNedIkonUrl from '@fpsak-frontend/assets/images/pil_ned.svg';

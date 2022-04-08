@@ -8,7 +8,7 @@ import {
   Element, Normaltekst, Undertekst, Undertittel,
 } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Image } from '@navikt/fp-react-components';
+import { Image } from '@navikt/ft-ui-komponenter';
 
 import {
   RadioGroupField, RadioOption, TextAreaField, Form,

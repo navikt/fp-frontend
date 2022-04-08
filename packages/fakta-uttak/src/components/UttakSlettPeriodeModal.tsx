@@ -8,7 +8,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
 import {
   FlexColumn, FlexContainer, FlexRow, Image,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-ui-komponenter';
 
 import { TextAreaField } from '@fpsak-frontend/form';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';

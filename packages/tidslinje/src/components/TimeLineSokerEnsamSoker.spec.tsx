@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row } from 'nav-frontend-grid';
-import { Image } from '@navikt/fp-react-components';
+import { Image } from '@navikt/ft-ui-komponenter';
 
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 

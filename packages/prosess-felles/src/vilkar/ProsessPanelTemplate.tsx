@@ -4,7 +4,7 @@ import {
 } from 'nav-frontend-typografi';
 import {
   FlexContainer, FlexRow, FlexColumn, Image,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-ui-komponenter';
 
 import {
   VerticalSpacer, AksjonspunktBox,

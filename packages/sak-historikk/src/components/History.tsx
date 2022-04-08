@@ -3,7 +3,7 @@ import { Location } from 'history';
 import moment from 'moment';
 import { WrappedComponentProps } from 'react-intl';
 import { Checkbox } from 'nav-frontend-skjema';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@fpsak-frontend/types';
 import HistorikkAktor from '@fpsak-frontend/kodeverk/src/historikkAktor';

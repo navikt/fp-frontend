@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { Element, Undertekst } from 'nav-frontend-typografi';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import {
   CheckboxField,

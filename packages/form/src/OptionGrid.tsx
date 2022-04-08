@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import {
   FlexColumn, FlexContainer, FlexRow,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-ui-komponenter';
 
 import { range } from '@fpsak-frontend/utils';
 import { EditedIcon } from '@fpsak-frontend/shared-components';

@@ -7,7 +7,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import Lenke from 'nav-frontend-lenker';
 import {
   Image, FlexColumn, FlexContainer, FlexRow,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-ui-komponenter';
 
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';

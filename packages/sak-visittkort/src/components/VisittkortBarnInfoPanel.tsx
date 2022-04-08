@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import {
   FlexColumn, FlexContainer, FlexRow, Image,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-ui-komponenter';
 
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import { FagsakHendelse } from '@fpsak-frontend/types';

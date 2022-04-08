@@ -4,7 +4,7 @@ import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { EtikettInfo } from 'nav-frontend-etiketter';
 import {
   FlexColumn, FlexContainer, FlexRow, Tooltip,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-ui-komponenter';
 
 import {
   VerticalSpacer,

@@ -5,7 +5,7 @@ import { Element } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import {
   FlexColumn, FlexContainer, FlexRow, Image,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-ui-komponenter';
 
 import behandleImageURL from '@fpsak-frontend/assets/images/advarsel.svg';
 import {

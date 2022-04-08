@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Column, Row } from 'nav-frontend-grid';
 import { Undertittel } from 'nav-frontend-typografi';
-import { Image } from '@navikt/fp-react-components';
+import { Image } from '@navikt/ft-ui-komponenter';
 
 import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import advarselIcon from '@fpsak-frontend/assets/images/advarsel.svg';

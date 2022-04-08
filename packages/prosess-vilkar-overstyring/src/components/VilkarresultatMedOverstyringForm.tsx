@@ -9,7 +9,7 @@ import {
 } from 'nav-frontend-typografi';
 import {
   FlexContainer, FlexRow, FlexColumn, Image,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-ui-komponenter';
 
 import { Form } from '@fpsak-frontend/form-hooks';
 import { KodeverkMedNavn, Aksjonspunkt, Behandling } from '@fpsak-frontend/types';

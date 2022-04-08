@@ -2477,6 +2477,79 @@
     "@navikt/fp-bem-utils" "^1.0.3"
     "@navikt/fp-period-utils" "^1.0.3"
 
+"@navikt/ft-kodeverk@1.0.0-beta.1":
+  version "1.0.0-beta.1"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-kodeverk/1.0.0-beta.1/6901af597ab9fec176ebf3800a5a4acf46389f17a2dc3aec56ddaf6182516ae1#d49a77f6598578bbbe84a96cc7e28744b260ab33"
+  integrity sha512-kEgp3Szdudw2BsyXs7CCS7YXMYb/W/ZCG/Ynmm+YmHrvQJHKHrX7bcz29WK5hMbAyY0FFUH5nmfW+d6K9BsGzw==
+
+"@navikt/ft-kodeverk@1.0.0-beta.2":
+  version "1.0.0-beta.2"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-kodeverk/1.0.0-beta.2/b646f265100f45d9e765dcabd759d6ced0bf6d4a23ad4b55b07f96a23fa6a59a#1d0eb54c0c392b57ac8c066704d6cacf94ce2ba7"
+  integrity sha512-WRs1t7Tmymy8NeCi8qFj4WcRcnzd7t/xGV94m4ZtxqFkAwN3osT3PpV3irTN7CNQuQyTaQnkIlJSobMEenUwTA==
+
+"@navikt/ft-types-aksjonspunkter@1.0.0-beta.4":
+  version "1.0.0-beta.4"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-types-aksjonspunkter/1.0.0-beta.4/276b981c46f07e3e6849712babbb66b66eb41df9d8300b35089866982fc530bd#8df722695d42c2978e794a9f94f7cbd76616f50e"
+  integrity sha512-NeQdvO+ziDMNySJDUuv0YuXj8RoXBiw2LOfhWpAZA5Fhk3zM3sF5KEqJ6UZZswZO/psbKQo+OxxFFbHtoYDNcA==
+  dependencies:
+    "@navikt/ft-kodeverk" "1.0.0-beta.1"
+
+"@navikt/ft-types@1.0.0-beta.4":
+  version "1.0.0-beta.4"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-types/1.0.0-beta.4/c528c57e35106821d249fc80a9a4a9959ed944c4539942ef66408f0bcc67f3e1#19732138ee9716059dab5bbb048f18d0f11ccb18"
+  integrity sha512-qVKCQjjY4TqhWbbmQZNTxzEtNpL9Mesjv7AQ2omjAz6B7NsgapnCCI2kFDY21sX/Yxgjr8yMb6dDq9ih+6Ybew==
+  dependencies:
+    "@navikt/ft-kodeverk" "1.0.0-beta.2"
+    "@navikt/ft-types-aksjonspunkter" "1.0.0-beta.4"
+
+"@navikt/ft-ui-komponenter@1.0.0-beta.4":
+  version "1.0.0-beta.4"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-ui-komponenter/1.0.0-beta.4/8143feaec5e10af2838d793b82f59fd0bf8104bd67636c4609a3eeab71f30e65#a290d95d9f41916fa193ec9080fb4bd8991e448c"
+  integrity sha512-Qr4WFjhExBd9DAWIaqMDi+Qad0bEZ5OMzjivtPk1oXeKNCpiPmRbdB8aSmW5n3acQs270lrEBaj3vtzxEkDY6w==
+  dependencies:
+    "@navikt/fnrvalidator" "1.1.4"
+    "@navikt/ft-types" "1.0.0-beta.4"
+    "@navikt/ft-utils" "1.0.0-beta.3"
+    classnames "2.3.1"
+    echarts "5.3.2"
+    moment "2.29.2"
+    nav-frontend-core "6.0.1"
+    nav-frontend-grid "2.0.1"
+    nav-frontend-grid-style "1.0.2"
+    nav-frontend-ikoner-assets "3.0.1"
+    nav-frontend-js-utils "^1.0.20"
+    nav-frontend-knapper "3.1.2"
+    nav-frontend-knapper-style "2.1.1"
+    nav-frontend-lenker "2.0.1"
+    nav-frontend-lenker-style "2.0.1"
+    nav-frontend-lukknapp "2.0.1"
+    nav-frontend-lukknapp-style "2.0.1"
+    nav-frontend-modal "2.0.1"
+    nav-frontend-modal-style "2.0.1"
+    nav-frontend-paneler "3.0.1"
+    nav-frontend-paneler-style "2.0.1"
+    nav-frontend-skjema "4.0.5"
+    nav-frontend-skjema-style "3.0.2"
+    nav-frontend-spinner "3.0.1"
+    nav-frontend-spinner-style "1.0.2"
+    nav-frontend-typografi "4.0.1"
+    nav-frontend-typografi-style "2.0.1"
+    react "17.0.2"
+    react-day-picker "7.4.10"
+    react-intl "5.24.8"
+    react-modal "3.14.4"
+
+"@navikt/ft-utils@1.0.0-beta.3":
+  version "1.0.0-beta.3"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-utils/1.0.0-beta.3/1b1c2dd1abf81d4a37dfa9a662cd9bdc393f1c1b22d4f3dd3be0b0e98b71a381#cdb6dd1e1eacca0c9d1ecb71d55c5e235cf4a831"
+  integrity sha512-m5/thzFe7XhJSwxUfMQCB/FbnRKXh19Qk1uRUQP8DIBcCfqudON6wiIogdhf3BTg1rA9HlYxh2ivz4EmQfeGNQ==
+  dependencies:
+    "@navikt/ft-kodeverk" "1.0.0-beta.2"
+    "@navikt/ft-types" "1.0.0-beta.4"
+    dayjs "1.11.0"
+    moment "2.29.2"
+    react-intl "5.24.8"
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
@@ -12436,7 +12509,7 @@ nav-frontend-ikonknapper@2.1.2:
   resolved "https://registry.yarnpkg.com/nav-frontend-ikonknapper/-/nav-frontend-ikonknapper-2.1.2.tgz#f1fa791487a8f445b9af7853a2c4ea16e305e4c9"
   integrity sha512-LO8fHsLsL49HFatyzJb3eaAC5j/RfQ4EimJ04sropaTwX4EXlQuQ+yh7Nztms8zBqJ5DzuDAwRjjgq4/z8/3RQ==
 
-nav-frontend-js-utils@1.0.20:
+nav-frontend-js-utils@1.0.20, nav-frontend-js-utils@^1.0.20:
   version "1.0.20"
   resolved "https://registry.yarnpkg.com/nav-frontend-js-utils/-/nav-frontend-js-utils-1.0.20.tgz#fac829adb801d66275ac273255d5102b73d5805e"
   integrity sha512-rCEbgtLmk/95TJeke3Njgm0lBJuBa0N8p8h5Oqhxjov529UjTT2Vx4XJzjQd7/ApgeCkdc5DB9GW5jGTEFoYTA==

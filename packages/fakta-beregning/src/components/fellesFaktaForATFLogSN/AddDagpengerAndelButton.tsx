@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
-import { Image } from '@navikt/fp-react-components';
+import { Image } from '@navikt/ft-ui-komponenter';
 
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';

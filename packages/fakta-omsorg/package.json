@@ -13,7 +13,7 @@
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/types-avklar-aksjonspunkter": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
-    "@navikt/fp-react-components": "1.0.12",
+    "@navikt/ft-ui-komponenter": "1.0.0-beta.4",
     "moment": "2.29.3",
     "nav-frontend-core": "6.0.1",
     "nav-frontend-etiketter": "3.0.1",

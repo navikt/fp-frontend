@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Normaltekst, Element, Undertittel } from 'nav-frontend-typografi';
 import moment from 'moment';
 import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
-import { FlexColumn, FlexRow } from '@navikt/fp-react-components';
+import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import {
   AvsnittSkiller, VerticalSpacer,

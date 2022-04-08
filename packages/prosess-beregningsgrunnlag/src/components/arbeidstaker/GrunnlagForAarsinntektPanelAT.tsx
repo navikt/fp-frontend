@@ -4,7 +4,7 @@ import {
   Element, Normaltekst, Undertekst,
 } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
-import { FlexColumn, FlexRow } from '@navikt/fp-react-components';
+import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import {
   getKodeverknavnFn, dateFormat, formatCurrencyNoKr,

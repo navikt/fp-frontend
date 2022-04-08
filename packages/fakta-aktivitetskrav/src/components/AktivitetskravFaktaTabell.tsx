@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
-import { Image } from '@navikt/fp-react-components';
+import { Image } from '@navikt/ft-ui-komponenter';
 
 import endretFelt from '@fpsak-frontend/assets/images/endret_felt.svg';
 import {

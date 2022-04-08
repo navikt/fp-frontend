@@ -5,7 +5,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import ModalWrapper from 'nav-frontend-modal';
-import { Image } from '@navikt/fp-react-components';
+import { Image } from '@navikt/ft-ui-komponenter';
 
 import advarselImageUrl from '@fpsak-frontend/assets/images/advarsel.svg';
 

@@ -4,7 +4,7 @@ import React, {
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element } from 'nav-frontend-typografi';
-import { Image } from '@navikt/fp-react-components';
+import { Image } from '@navikt/ft-ui-komponenter';
 
 import { calcDays, getKodeverknavnFn } from '@fpsak-frontend/utils';
 import {

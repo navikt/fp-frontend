@@ -6,7 +6,7 @@ import Lenke from 'nav-frontend-lenker';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import {
   Image, FlexColumn, FlexRow, Tooltip,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-ui-komponenter';
 
 import { getKodeverknavnFraKode } from '@fpsak-frontend/utils/src/kodeverkUtils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';

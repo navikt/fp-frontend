@@ -8,7 +8,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import moment from 'moment';
 import { Element } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {

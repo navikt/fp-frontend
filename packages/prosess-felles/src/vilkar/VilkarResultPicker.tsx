@@ -3,7 +3,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import { useFormContext } from 'react-hook-form';
 import {
   FlexContainer, FlexRow, FlexColumn, Image,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-ui-komponenter';
 
 import {
   VerticalSpacer,

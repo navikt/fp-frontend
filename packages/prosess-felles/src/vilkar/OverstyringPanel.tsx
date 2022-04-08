@@ -5,7 +5,7 @@ import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 
 import {
   FlexContainer, FlexRow, FlexColumn, Image,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-ui-komponenter';
 
 import { EditedIcon, VerticalSpacer, AksjonspunktBox } from '@fpsak-frontend/shared-components';
 import { TextAreaField } from '@fpsak-frontend/form-hooks';

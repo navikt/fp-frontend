@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { Image, Tooltip } from '@navikt/fp-react-components';
+import { Image, Tooltip } from '@navikt/ft-ui-komponenter';
 
 import {
   DateTimeLabel, Table, TableColumn, TableRow,

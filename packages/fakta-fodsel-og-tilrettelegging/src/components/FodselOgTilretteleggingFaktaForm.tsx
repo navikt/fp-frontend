@@ -8,7 +8,7 @@ import { Element, Undertittel } from 'nav-frontend-typografi';
 import { AlertStripeInfo, AlertStripeFeil } from 'nav-frontend-alertstriper';
 import {
   Image, FlexColumn, FlexContainer, FlexRow,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-ui-komponenter';
 
 import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
 import {

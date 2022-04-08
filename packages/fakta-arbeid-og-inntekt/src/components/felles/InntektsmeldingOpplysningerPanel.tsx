@@ -4,7 +4,7 @@ import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import {
   Image, FlexColumn, FlexContainer, FlexRow,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-ui-komponenter';
 
 import telefonImageUrl from '@fpsak-frontend/assets/images/phone-3.svg';
 import { Inntektsmelding, AoIArbeidsforhold, AlleKodeverk } from '@fpsak-frontend/types';

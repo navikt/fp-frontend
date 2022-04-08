@@ -5,7 +5,7 @@ import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import {
   FlexColumn, FlexContainer, FlexRow, Image, Tooltip,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-ui-komponenter';
 
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
