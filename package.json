@@ -67,7 +67,7 @@
     "@storybook/addons": "6.4.20",
     "@storybook/builder-webpack5": "6.4.20",
     "@storybook/cli": "6.4.20",
-    "@storybook/manager-webpack5": "6.4.20",
+    "@storybook/manager-webpack5": "6.4.21",
     "@storybook/react": "6.4.20",
     "@storybook/storybook-deployer": "2.8.11",
     "@storybook/testing-react": "1.2.4",
