@@ -108,6 +108,7 @@ export const TilretteleggingArbeidsforholdSection: FunctionComponent<PureOwnProp
           <FlexColumn>
             <FieldArray
               name="tilretteleggingDatoer"
+              // @ts-ignore
               component={TilrettteleggingFieldArray}
               readOnly={readOnly}
               formSectionName={formSectionName}

@@ -88,6 +88,7 @@ const finnInntektstabell = (readOnly, beregningsgrunnlag,
   isAksjonspunktClosed, alleKodeverk, erOverstyrt, arbeidsgiverOpplysningerPerId) => (
     <FieldArray
       name={INNTEKT_FIELD_ARRAY_NAME}
+      // @ts-ignore
       component={InntektFieldArray}
       readOnly={readOnly}
       skalKunneLeggeTilDagpengerManuelt={erOverstyrt}

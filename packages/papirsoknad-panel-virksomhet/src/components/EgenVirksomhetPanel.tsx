@@ -55,6 +55,7 @@ export const EgenVirksomhetPanel: FunctionComponent<PureOwnProps & MappedOwnProp
         {harArbeidetIEgenVirksomhet && (
           <FieldArray
             name={virksomhetsFieldArrayName}
+            // @ts-ignore
             component={RegistrerVirksomhetPanel}
             form={form}
             namePrefix={EGEN_VIRKSOMHET_FORM_NAME_PREFIX}

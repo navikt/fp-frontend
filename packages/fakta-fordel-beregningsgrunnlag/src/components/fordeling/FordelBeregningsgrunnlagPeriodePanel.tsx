@@ -113,6 +113,7 @@ const FordelBeregningsgrunnlagPeriodePanel: FunctionComponent<OwnProps> & Static
   >
     <FieldArray
       name={fordelBGFieldArrayName}
+      // @ts-ignore
       component={RenderFordelBGFieldArray}
       readOnly={readOnly}
       skalIkkeRedigereInntekt={!skalRedigereInntekt}

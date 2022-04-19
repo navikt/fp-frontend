@@ -94,6 +94,7 @@ export const PermisjonGraderingPanel: FunctionComponent<PureOwnProps & MappedOwn
     && (
     <FieldArray
       name={GRADERING_PERIODE_FIELD_ARRAY_NAME}
+      // @ts-ignore
       component={RenderGraderingPeriodeFieldArray}
       graderingKvoter={graderingKvoter}
       form={form}
