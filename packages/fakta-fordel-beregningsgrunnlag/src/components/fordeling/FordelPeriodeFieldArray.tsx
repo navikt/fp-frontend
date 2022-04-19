@@ -417,21 +417,6 @@ const getHeaderTextCodes = (erRevurdering: boolean): string[] => {
   return headerCodes;
 };
 
-const validerFordeling = (getValues: UseFormGetValues<any>,
-  intl: IntlShape,
-  fieldName: string,
-  getKodeverknavn: any,
-  grunnbeløp: any,
-  periodeDato: any,
-  skalValidereRefusjon: any,
-  arbeidsgiverOpplysningerPerId: any) => () => {
-  if (true) {
-    return undefined;
-    // return intl.formatMessage({ id: 'BeregningInfoPanel.FordelBG.Inntektskategori' });
-  }
-  return '1';
-};
-
 // FordelPeriodeFieldArray.validate = (intl, values, sumIPeriode, getKodeverknavn,
 //   grunnbeløp, periodeDato, skalValidereRefusjon, arbeidsgiverOpplysningerPerId) => {
 //   const fieldErrors = validateAndeler(intl, values, periodeDato);
