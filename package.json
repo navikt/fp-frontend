@@ -142,6 +142,7 @@
     "webpack-merge": "5.8.0"
   },
   "resolutions": {
+    "async": "2.6.4",
     "glob-parent": "5.1.2",
     "prismjs": "1.28.0",
     "react": "17.0.2",
