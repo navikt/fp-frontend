@@ -90,6 +90,7 @@ const KunYtelseBesteberegningImpl: FunctionComponent<OwnProps> & StaticFunctions
           <Column xs="12">
             <FieldArray
               name={brukersAndelFieldArrayName}
+              // @ts-ignore
               component={BrukersAndelFieldArray}
               readOnly={readOnly}
               alleKodeverk={alleKodeverk}

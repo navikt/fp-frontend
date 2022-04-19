@@ -99,6 +99,7 @@ export const PermisjonPanel: FunctionComponent<PureOwnProps & MappedOwnProps> & 
           && (
             <FieldArray
               name={PERMISJON_PERIODE_FIELD_ARRAY_NAME}
+              // @ts-ignore
               component={RenderPermisjonPeriodeFieldArray}
               periodePrefix={PERMISJON_PERIODE_FIELD_ARRAY_NAME}
               namePrefix={TIDSROM_PERMISJON_FORM_NAME_PREFIX}

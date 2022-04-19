@@ -37,6 +37,7 @@ const KunYtelseUtenBesteberegningPanel: FunctionComponent<OwnProps> = ({
     </Row>
     <FieldArray
       name={brukersAndelFieldArrayName}
+      // @ts-ignore
       component={BrukersAndelFieldArray}
       readOnly={readOnly}
       isAksjonspunktClosed={isAksjonspunktClosed}
