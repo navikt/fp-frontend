@@ -9,7 +9,7 @@
     "@fpsak-frontend/shared-components": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/utils": "1.0.0",
-    "moment": "2.29.2",
+    "moment": "2.29.3",
     "nav-frontend-core": "6.0.1",
     "nav-frontend-etiketter": "3.0.1",
     "nav-frontend-etiketter-style": "2.0.1",
@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@fpsak-frontend/storybook-utils": "1.0.0",
-    "@storybook/addon-actions": "6.4.20",
+    "@storybook/addon-actions": "6.4.22",
     "@storybook/testing-react": "1.2.4",
     "@testing-library/react": "12.1.4",
     "@testing-library/user-event": "13.5.0"
