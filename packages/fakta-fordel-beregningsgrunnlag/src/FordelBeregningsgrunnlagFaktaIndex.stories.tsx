@@ -33,6 +33,11 @@ import { beregningsgrunnlag as bgMedNaturalytelse, aksjonspunkt as apMedNaturaly
 type Writeable<T> = { -readonly [P in keyof T]: T[P] };
 
 const agOpplysninger = {
+  874652202: {
+    navn: 'NAV Innlandet',
+    identifikator: '874652202',
+    erPrivatPerson: false,
+  },
   123456789: {
     navn: 'Arbeidsgiveren',
     identifikator: '123456789',
@@ -124,7 +129,7 @@ const Template: Story<{
   />
 );
 
-const lagBGAndel = (andelsnr: number, aktivitetstatuskode: string, beregnet: number): Writeable<BeregningsgrunnlagAndel> => ({
+const lagBGAndel = (andelsnr: number, aktivitetstatuskode: string, beregnet: number, arbeidsforhold?: BeregningsgrunnlagArbeidsforhold): Writeable<BeregningsgrunnlagAndel> => ({
   aktivitetStatus: aktivitetstatuskode,
   beregningsperiodeFom: '2019-06-01',
   beregningsperiodeTom: '2019-08-31',
@@ -132,6 +137,7 @@ const lagBGAndel = (andelsnr: number, aktivitetstatuskode: string, beregnet: num
   bruttoPrAar: beregnet,
   andelsnr,
   erTilkommetAndel: false,
+  arbeidsforhold,
 });
 
 const lagBGPeriode = (andelsliste: BeregningsgrunnlagAndel[], periodeAarsaker: string[], fom: string, tom?: string): BeregningsgrunnlagPeriodeProp => {
@@ -203,10 +209,11 @@ const mapIKKode = (bgStatus: string): string => {
   }
 };
 
-const lagFordelingsandel = (andelsnr: number, status: string, ref: number, fordelt: number): Writeable<FordelBeregningsgrunnlagAndel> => ({
+const lagFordelingsandel = (andelsnr: number, status: string, ref: number, fordelt: number, arbeidsforhold?: BeregningsgrunnlagArbeidsforhold): Writeable<FordelBeregningsgrunnlagAndel> => ({
   aktivitetStatus: status,
   andelsnr,
   arbeidsforholdType: '-',
+  arbeidsforhold,
   andelIArbeid: [0],
   fordeltPrAar: fordelt,
   inntektskategori: mapIKKode(status),
@@ -248,180 +255,76 @@ ArbeidOgGradertNæringUtenBeregningsgrunnlag.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
-// export const tilkommetArbeidMedFlyttingAvNaturalytelse = () => (
-//   <FordelBeregningsgrunnlagFaktaIndex
-//     behandling={behandling}
-//     alleKodeverk={alleKodeverk as any}
-//     alleMerknaderFraBeslutter={{
-//       [aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG]: merknaderFraBeslutter,
-//     }}
-//     submitCallback={action('button-click') as (data: any) => Promise<any>}
-//     readOnly={false}
-//     beregningsgrunnlag={bgMedNaturalytelse}
-//     aksjonspunkter={apMedNaturalytelse}
-//     harApneAksjonspunkter
-//     submittable
-//     arbeidsgiverOpplysningerPerId={agOpplysninger}
-//     setFormData={() => undefined}
-//   />
-// );
-//
-// export const aapOgRefusjon = () => {
-//   const førsteAndeler = [lagFordelingsandel(1, 'AAP', 0, 0)];
-//   const førstePeriode = lagFordelPeriode(førsteAndeler, false, false, '2019-08-05', '2019-11-26');
-//   const andreAndeler = [lagFordelingsandel(2, 'AAP', 0, 0), lagFordelingsandel(1, 'AT', 0, 0)];
-//   const arbeidsforhold = lagArbeidsforhold('999999999', 'AD-ASD-ADF-SADGF-ASGASDF-SDFASDF', 300000);
-//   andreAndeler[1].arbeidsforhold = arbeidsforhold;
-//   const andrePeriode = lagFordelPeriode(andreAndeler, true, false, '2019-11-27');
-//   const arbfor = lagArbforTilFordeling('999999999', 'AD-ASD-ADF-SADGF-ASGASDF-SDFASDF', 300000, '2019-11-27');
-//   const faktaOmFordeling = lagFaktaOmFordeling([arbfor], [førstePeriode, andrePeriode]);
-//
-//   const førsteBGPeriode = lagBGPeriode([lagBGAndel(1, 'AAP', 100000)], [], '2019-08-05', '2019-11-26');
-//   const atAndel = lagBGAndel(1, 'AT', 300000);
-//   atAndel.arbeidsforhold = arbeidsforhold;
-//   const aapAndel = lagBGAndel(2, 'AAP', 100000);
-//   const andreBGPperiode = lagBGPeriode([aapAndel, atAndel], [periodeAarsak.ENDRING_I_REFUSJONSKRAV], '2019-11-27');
-//   const bg = lagBG([førsteBGPeriode, andreBGPperiode], faktaOmFordeling);
-//   return (
-//     <FordelBeregningsgrunnlagFaktaIndex
-//       behandling={behandling}
-//       alleKodeverk={alleKodeverk as any}
-//       alleMerknaderFraBeslutter={{
-//         [aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG]: merknaderFraBeslutter,
-//       }}
-//       submitCallback={action('button-click') as (data: any) => Promise<any>}
-//       readOnly={false}
-//       beregningsgrunnlag={bg}
-//       aksjonspunkter={fordelAP}
-//       harApneAksjonspunkter
-//       submittable
-//       arbeidsgiverOpplysningerPerId={agOpplysninger}
-//       setFormData={() => undefined}
-//     />
-//   );
-// };
-//
-// export const kanEndreRefusjonskrav = () => {
-//   const førsteAndeler = [lagFordelingsandel(1, 'AAP', 0, 0)];
-//   const førstePeriode = lagFordelPeriode(førsteAndeler, false, false, '2019-08-05', '2019-11-26');
-//   const andreAndeler = [lagFordelingsandel(2, 'AAP', 0, 0), lagFordelingsandel(1, 'AT', 300000, 0)];
-//   const arbeidsforhold = lagArbeidsforhold('999999999', 'AD-ASD-ADF-SADGF-ASGASDF-SDFASDF', 300000);
-//   andreAndeler[1].arbeidsforhold = arbeidsforhold;
-//   const andrePeriode = lagFordelPeriode(andreAndeler, true, true, '2019-11-27');
-//   const arbfor = lagArbforTilFordeling('999999999', 'AD-ASD-ADF-SADGF-ASGASDF-SDFASDF', 300000, '2019-11-27');
-//   const faktaOmFordeling = lagFaktaOmFordeling([arbfor], [førstePeriode, andrePeriode]);
-//
-//   const førsteBGPeriode = lagBGPeriode([lagBGAndel(1, 'AAP', 100000)], [], '2019-08-05', '2019-11-26');
-//   const atAndel = lagBGAndel(1, 'AT', 300000);
-//   atAndel.arbeidsforhold = arbeidsforhold;
-//   const aapAndel = lagBGAndel(2, 'AAP', 100000);
-//   const andreBGPperiode = lagBGPeriode([aapAndel, atAndel], [periodeAarsak.ENDRING_I_REFUSJONSKRAV], '2019-11-27');
-//   const bg = lagBG([førsteBGPeriode, andreBGPperiode], faktaOmFordeling);
-//   return (
-//     <FordelBeregningsgrunnlagFaktaIndex
-//       behandling={behandling}
-//       alleKodeverk={alleKodeverk as any}
-//       alleMerknaderFraBeslutter={{
-//         [aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG]: merknaderFraBeslutter,
-//       }}
-//       submitCallback={action('button-click') as (data: any) => Promise<any>}
-//       readOnly={false}
-//       beregningsgrunnlag={bg}
-//       aksjonspunkter={fordelAP}
-//       harApneAksjonspunkter
-//       submittable
-//       arbeidsgiverOpplysningerPerId={agOpplysninger}
-//       setFormData={() => undefined}
-//     />
-//   );
-// };
-//
-// export const skalSlåSammenNaturalytelseperioder = () => {
-//   const arbeidsforholdEn = lagArbeidsforhold('965847123', 'AD-ASD-ADF-SADGF-ASGASDF-ÅTYIUOH', 500000);
-//   const arbeidsforholdTo = lagArbeidsforhold('999999999', 'AD-ASD-ADF-SADGF-ASGASDF-SDFASDF', 300000);
-//
-//   // Første periode
-//   const førsteFordelAndel = lagFordelingsandel(1, 'AT', 0, 0);
-//   førsteFordelAndel.arbeidsforhold = arbeidsforholdEn;
-//   const førstePeriode = lagFordelPeriode([førsteFordelAndel], false, false, '2019-08-05', '2019-11-26');
-//   const førsteBGAndel = lagBGAndel(1, 'AT', 100000);
-//   førsteBGAndel.arbeidsforhold = arbeidsforholdEn;
-//   const førsteBGPeriode = lagBGPeriode([førsteBGAndel], [], '2019-08-05', '2019-11-26');
-//
-//   // Andre periode
-//   const andreFordelAndel = lagFordelingsandel(1, 'AT', 0, 0);
-//   andreFordelAndel.arbeidsforhold = arbeidsforholdEn;
-//   const andrePeriode = lagFordelPeriode([andreFordelAndel], false, false, '2019-11-27', '2019-12-05');
-//   const andreBGAndel = lagBGAndel(1, 'AT', 100000);
-//   andreBGAndel.arbeidsforhold = arbeidsforholdEn;
-//   const andreBGPperiode = lagBGPeriode([andreBGAndel], [periodeAarsak.NATURALYTELSE_BORTFALT], '2019-11-27', '2019-12-05');
-//
-//   // Tredje periode
-//   const tredjeAndeler = [lagFordelingsandel(1, 'AT', 0, 0), lagFordelingsandel(2, 'AT', 300000, 0)];
-//   tredjeAndeler[0].arbeidsforhold = arbeidsforholdEn;
-//   tredjeAndeler[1].arbeidsforhold = arbeidsforholdTo;
-//   const tredjePeriode = lagFordelPeriode(tredjeAndeler, true, true, '2019-12-06');
-//   const atAndel = lagBGAndel(1, 'AT', 100000);
-//   atAndel.arbeidsforhold = arbeidsforholdEn;
-//   const atAndelTo = lagBGAndel(2, 'AT', 300000);
-//   atAndelTo.arbeidsforhold = arbeidsforholdTo;
-//   const tredjeBGPeriode = lagBGPeriode([atAndel, atAndelTo], [periodeAarsak.ENDRING_I_REFUSJONSKRAV], '2019-12-06');
-//
-//   const arbfor = lagArbforTilFordeling('999999999', 'AD-ASD-ADF-SADGF-ASGASDF-SDFASDF', 300000, '2019-12-06');
-//   const faktaOmFordeling = lagFaktaOmFordeling([arbfor], [førstePeriode, andrePeriode, tredjePeriode]);
-//
-//   const bg = lagBG([førsteBGPeriode, andreBGPperiode, tredjeBGPeriode], faktaOmFordeling);
-//   return (
-//     <FordelBeregningsgrunnlagFaktaIndex
-//       behandling={behandling}
-//       alleKodeverk={alleKodeverk as any}
-//       alleMerknaderFraBeslutter={{
-//         [aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG]: merknaderFraBeslutter,
-//       }}
-//       submitCallback={action('button-click') as (data: any) => Promise<any>}
-//       readOnly={false}
-//       beregningsgrunnlag={bg}
-//       aksjonspunkter={fordelAP}
-//       harApneAksjonspunkter
-//       submittable
-//       arbeidsgiverOpplysningerPerId={agOpplysninger}
-//       setFormData={() => undefined}
-//     />
-//   );
-// };
-//
-// export const viseVurderTilkommetRefusjonskrav = () => (
-//   <FordelBeregningsgrunnlagFaktaIndex
-//     behandling={behandling}
-//     alleKodeverk={alleKodeverk as any}
-//     alleMerknaderFraBeslutter={{
-//       [aksjonspunktCodes.VURDER_REFUSJON_BERGRUNN]: merknaderFraBeslutter,
-//     }}
-//     submitCallback={action('button-click') as (data: any) => Promise<any>}
-//     readOnly={false}
-//     beregningsgrunnlag={vurderRefusjonBG}
-//     aksjonspunkter={vurderRefusjonAP}
-//     harApneAksjonspunkter
-//     submittable
-//     arbeidsgiverOpplysningerPerId={agOpplysninger}
-//     setFormData={() => undefined}
-//   />
-// );
-//
-// export const skalVurdereTilkommetØktRefusjonPåTidligereInnvilgetDelvisRefusjon = () => (
-//   <FordelBeregningsgrunnlagFaktaIndex
-//     behandling={behandling}
-//     alleKodeverk={alleKodeverk as any}
-//     alleMerknaderFraBeslutter={{
-//       [aksjonspunktCodes.VURDER_REFUSJON_BERGRUNN]: merknaderFraBeslutter,
-//     }}
-//     submitCallback={action('button-click') as (data: any) => Promise<any>}
-//     readOnly={false}
-//     beregningsgrunnlag={vurderDelvisRefBG}
-//     aksjonspunkter={vurderRefusjonAP}
-//     harApneAksjonspunkter
-//     submittable
-//     arbeidsgiverOpplysningerPerId={agOpplysninger}
-//     setFormData={() => undefined}
-//   />
-// );
+export const TilkommetArbeidMedFlyttingAvNaturalytelse = Template.bind({});
+TilkommetArbeidMedFlyttingAvNaturalytelse.args = {
+  aksjonspunkter: apMedNaturalytelse,
+  readOnly: false,
+  beregningsgrunnlag: bgMedNaturalytelse,
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};
+
+export const ViseVurderTilkommetRefusjonskrav = Template.bind({});
+ViseVurderTilkommetRefusjonskrav.args = {
+  aksjonspunkter: vurderRefusjonAP,
+  readOnly: false,
+  beregningsgrunnlag: vurderRefusjonBG,
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};
+
+export const SkalVurdereTilkommetØktRefusjonPåTidligereInnvilgetDelvisRefusjon = Template.bind({});
+SkalVurdereTilkommetØktRefusjonPåTidligereInnvilgetDelvisRefusjon.args = {
+  aksjonspunkter: vurderRefusjonAP,
+  readOnly: false,
+  beregningsgrunnlag: vurderDelvisRefBG,
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};
+
+export const AapOgRefusjon = Template.bind({});
+AapOgRefusjon.args = {
+  aksjonspunkter: fordelAP,
+  readOnly: false,
+  beregningsgrunnlag: lagBG([lagBGPeriode([lagBGAndel(1, 'AAP', 100000)], [], '2019-08-05', '2019-11-26'),
+    lagBGPeriode([lagBGAndel(2, 'AAP', 100000),
+      lagBGAndel(1, 'AT', 300000, lagArbeidsforhold('999999999', 'AD-ASD-ADF-SADGF-ASGASDF-SDFASDF', 300000))],
+    [periodeAarsak.ENDRING_I_REFUSJONSKRAV], '2019-11-27')],
+  lagFaktaOmFordeling([lagArbforTilFordeling('999999999', 'AD-ASD-ADF-SADGF-ASGASDF-SDFASDF', 300000, '2019-11-27')],
+    [lagFordelPeriode([lagFordelingsandel(1, 'AAP', 0, 0)], false, false, '2019-08-05', '2019-11-26'),
+      lagFordelPeriode([lagFordelingsandel(2, 'AAP', 0, 0),
+        lagFordelingsandel(1, 'AT', 0, 0, lagArbeidsforhold('999999999', 'AD-ASD-ADF-SADGF-ASGASDF-SDFASDF', 300000))],
+      true, false, '2019-11-27')])),
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};
+
+export const FordelingKanEndreRefusjonskrav = Template.bind({});
+FordelingKanEndreRefusjonskrav.args = {
+  aksjonspunkter: fordelAP,
+  readOnly: false,
+  beregningsgrunnlag: lagBG([lagBGPeriode([lagBGAndel(1, 'AAP', 100000)], [], '2019-08-05', '2019-11-26'),
+    lagBGPeriode([lagBGAndel(2, 'AAP', 100000),
+      lagBGAndel(1, 'AT', 300000, lagArbeidsforhold('999999999', 'AD-ASD-ADF-SADGF-ASGASDF-SDFASDF', 300000))],
+    [periodeAarsak.ENDRING_I_REFUSJONSKRAV], '2019-11-27')],
+  lagFaktaOmFordeling([lagArbforTilFordeling('999999999', 'AD-ASD-ADF-SADGF-ASGASDF-SDFASDF', 300000, '2019-11-27')],
+    [lagFordelPeriode([lagFordelingsandel(1, 'AAP', 0, 0)], false, false, '2019-08-05', '2019-11-26'),
+      lagFordelPeriode([lagFordelingsandel(2, 'AAP', 0, 0),
+        lagFordelingsandel(1, 'AT', 300000, 0, lagArbeidsforhold('999999999', 'AD-ASD-ADF-SADGF-ASGASDF-SDFASDF', 300000))],
+      true, true, '2019-11-27')])),
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};
+
+export const SkalSlåSammenNaturalytelseperioder = Template.bind({});
+SkalSlåSammenNaturalytelseperioder.args = {
+  aksjonspunkter: fordelAP,
+  readOnly: false,
+  beregningsgrunnlag: lagBG([lagBGPeriode([lagBGAndel(1, 'AT', 100000, lagArbeidsforhold('874652202', 'AD-ASD-ADF-SADGF-ASGASDF-ÅTYIUOH', 500000))], [], '2019-08-05', '2019-11-26'),
+    lagBGPeriode([lagBGAndel(1, 'AT', 100000, lagArbeidsforhold('874652202', 'AD-ASD-ADF-SADGF-ASGASDF-ÅTYIUOH', 500000))],
+      [periodeAarsak.NATURALYTELSE_BORTFALT], '2019-11-27', '2019-12-05'),
+    lagBGPeriode([lagBGAndel(1, 'AT', 100000, lagArbeidsforhold('874652202', 'AD-ASD-ADF-SADGF-ASGASDF-ÅTYIUOH', 500000)),
+      lagBGAndel(2, 'AT', 300000, lagArbeidsforhold('999999999', 'AD-ASD-ADF-SADGF-ASGASDF-SDFASDF', 300000))], [periodeAarsak.ENDRING_I_REFUSJONSKRAV], '2019-12-06')],
+  lagFaktaOmFordeling([lagArbforTilFordeling('999999999', 'AD-ASD-ADF-SADGF-ASGASDF-SDFASDF', 300000, '2019-12-06')],
+    [lagFordelPeriode([lagFordelingsandel(1, 'AT', 0, 0, lagArbeidsforhold('874652202', 'AD-ASD-ADF-SADGF-ASGASDF-ÅTYIUOH', 500000))],
+      false, false, '2019-08-05', '2019-11-26'),
+    lagFordelPeriode([lagFordelingsandel(1, 'AT', 0, 0, lagArbeidsforhold('874652202', 'AD-ASD-ADF-SADGF-ASGASDF-ÅTYIUOH', 500000))], false, false, '2019-11-27', '2019-12-05'),
+    lagFordelPeriode([lagFordelingsandel(1, 'AT', 0, 0, lagArbeidsforhold('874652202', 'AD-ASD-ADF-SADGF-ASGASDF-ÅTYIUOH', 500000)), lagFordelingsandel(2, 'AT', 300000, 0, lagArbeidsforhold('999999999', 'AD-ASD-ADF-SADGF-ASGASDF-SDFASDF', 300000))],
+      true, true, '2019-12-06')])),
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};

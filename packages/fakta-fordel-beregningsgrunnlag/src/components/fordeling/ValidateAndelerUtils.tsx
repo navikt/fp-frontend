@@ -202,9 +202,9 @@ const finnArbeidsforholdRefusjonsinfoListe = (getValues: any,
 export const skalIkkjeVereHoegereEnnRefusjonFraInntektsmelding = (arbeidsgiver: string, intl: IntlShape): string => intl
   .formatMessage({ id: 'BeregningInfoPanel.FordelBG.Validation.IkkjeHogereRefusjonEnnInntektsmelding' }, { arbeidsgiver });
 
-export const validateTotalRefusjonPrArbeidsforhold = (getValues: any,
+export const validateTotalRefusjonPrArbeidsforhold = (fields: any,
   fieldname: string,
-  fields: any,
+  getValues: any,
   getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   intl: IntlShape) => () => {

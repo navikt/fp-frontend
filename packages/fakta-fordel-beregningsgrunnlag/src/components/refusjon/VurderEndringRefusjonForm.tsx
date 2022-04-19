@@ -53,7 +53,7 @@ const transformValues = (values: VurderRefusjonValues, bg: Beregningsgrunnlag): 
   const { andeler } = bg.refusjonTilVurdering;
   const transformedAndeler = andeler.map((andel) => VurderEndringRefusjonRad.transformValues(values, andel, bg.skjaeringstidspunktBeregning));
   return {
-    begrunnelse: values[BEGRUNNELSE_FIELD],
+    begrunnelse: values.begrunnelse,
     kode: VURDER_REFUSJON_BERGRUNN,
     fastsatteAndeler: transformedAndeler,
   };
