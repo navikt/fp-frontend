@@ -75,7 +75,7 @@ const agOpplysninger = {
     fødselsdato: '2000-01-01',
   },
   910909088: {
-    navn: 'BEDRIFT AS',
+    navn: 'BEDRIFT A/S',
     identifikator: '910909088',
     erPrivatPerson: false,
   },
