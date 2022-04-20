@@ -7,18 +7,15 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Image } from '@navikt/fp-react-components';
 import {
   formatCurrencyNoKr,
-  isArrayEmpty,
   parseCurrencyInput,
   removeSpacesFromNumber,
   getKodeverknavnFn,
-  isRequiredMessage,
   required,
 } from '@fpsak-frontend/utils';
 import {
   Table, TableColumn, TableRow,
 } from '@fpsak-frontend/shared-components';
 import bt from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { SkjemaGruppe } from 'nav-frontend-skjema';
 import {
   InputField, SelectField, SkjemaGruppeMedFeilviser,
 } from '@fpsak-frontend/form-hooks';
@@ -29,12 +26,11 @@ import {
   ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, KodeverkMedNavn, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import LabelType from '@fpsak-frontend/form/src/LabelType';
-import { useFieldArray, useFormContext, UseFormGetValues } from 'react-hook-form';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import {
-  validateAndeler, validateSumFastsattBelop, validateTotalRefusjonPrArbeidsforhold, validateUlikeAndeler,
-  validateSumRefusjon, validateSumFastsattForUgraderteAktiviteter,
+  validateSumFastsattBelop, validateTotalRefusjonPrArbeidsforhold, validateUlikeAndeler,
+  validateSumRefusjon, validateSumFastsattForUgraderteAktiviteter, validerBGGraderteAndeler,
 } from './ValidateAndelerUtils';
 import styles from './renderFordelBGFieldArray.less';
 import { createVisningsnavnForAktivitetFordeling } from '../util/visningsnavnHelper';
@@ -54,13 +50,6 @@ const defaultBGFordeling = (periodeUtenAarsak: boolean): any => ({
   belopFraInntektsmelding: null,
   skalRedigereInntekt: !periodeUtenAarsak,
 });
-
-const fieldLabel = (index: number, labelId: string): LabelType => {
-  if (index === 0) {
-    return { id: labelId };
-  }
-  return '';
-};
 
 const lagVisningsnavn = (arbeidsforhold: BGFordelArbeidsforhold,
   getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
@@ -145,12 +134,6 @@ const summerBeregningsgrunnlagPrAar = (fields: any): string => {
 
 const isSelvstendigOrFrilanser = (fieldVal: FordelBeregningsgrunnlagAndelValues): boolean => (isSelvstendigNæringsdrivende(fieldVal.inntektskategori)
   || inntektskategorier.FRILANSER === fieldVal.inntektskategori);
-
-// @ts-ignore Sender inn FieldArrayMetaProps.error, som har en any shape, så slipper ikke unna any her
-const renderMessage = (intl: IntlShape, error: any): string => (error[0] && error[0].id ? intl.formatMessage(...error) : error);
-
-const getErrorMessage = (meta: any, intl: IntlShape): string => (meta.error
-&& meta.submitFailed ? renderMessage(intl, meta.error) : null);
 
 const onKeyDown = (fields: any,
   periodeUtenAarsak: boolean): (arg: React.KeyboardEvent) => void => ({ key }) => {
@@ -277,7 +260,6 @@ const createAndelerTableRows = (fields: any,
   removeFromFieldsMethod: any,
   updateFieldMethod: any): ReactElement[] => {
   const skalIkkeEndres = readOnly || skalIkkeRedigereInntekt;
-  const test = fields[0].skalKunneEndreRefusjon;
   return fields.map((field, index) => (
     <TableRow key={field.id}>
       <TableColumn>
@@ -389,20 +371,6 @@ const createBruttoBGSummaryRow = (sumFordelingForrigeBehandling: string,
     </TableRow>
 );
 
-const validerValgtFakta = (getValues: UseFormGetValues<any>, fieldIndex: number, fieldname: string) => () => {
-  if (true) {
-    return undefined;
-  }
-  if (!getValues(`${fieldIndex}.feilFakta`)
-    && !getValues(`${fieldIndex}.feilLov`)
-    && !getValues(`${fieldIndex}.feilRegel`)
-    && !getValues(`${fieldIndex}.annet`)
-  ) {
-    return isRequiredMessage();
-  }
-  return undefined;
-};
-
 const getHeaderTextCodes = (erRevurdering: boolean): string[] => {
   const headerCodes = [];
   headerCodes.push('BeregningInfoPanel.FordelBG.Andel');
@@ -464,6 +432,7 @@ type OwnProps = {
     fieldName: string;
     skalKunneEndreRefusjon: boolean;
     sumIPeriode: number;
+    periodeFom: string;
 };
 
 interface StaticFunctions {
@@ -494,6 +463,7 @@ const FordelPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunctions = (
   beregningsgrunnlag,
   skalKunneEndreRefusjon,
   sumIPeriode,
+  periodeFom,
 }) => {
   const {
     control, watch, getValues,
@@ -521,15 +491,19 @@ const FordelPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunctions = (
     arbeidsforholdList, selectVals, erRevurdering, fieldName, remove, update);
   tablerows.push(createBruttoBGSummaryRow(sumFordelingForrigeBehandling, sumFordeling, sumBeregningsgrunnlagPrAar, erRevurdering));
 
-  // Valideringer
+  // Valideringer, fields settes også opp for perioder om ikke skal endres, disse trenger vi ikke validere.
   const valideringer = [];
-  valideringer.push(validateUlikeAndeler(getValues, fieldName, fields, intl));
-  valideringer.push(validateSumFastsattForUgraderteAktiviteter(getValues, fieldName, fields, intl, beregningsgrunnlag.grunnbeløp, getKodeverknavn));
-  if (skalKunneEndreRefusjon) {
-    valideringer.push(validateSumRefusjon(fields, fieldName, getValues, beregningsgrunnlag.grunnbeløp, intl));
-    valideringer.push(validateTotalRefusjonPrArbeidsforhold(fields, fieldName, getValues, getKodeverknavn, arbeidsgiverOpplysningerPerId, intl));
+  const fieldsMåValideres = fields.some((field: FordelBeregningsgrunnlagAndelValues) => !!field.skalRedigereInntekt || !!field.skalKunneEndreRefusjon);
+  if (fieldsMåValideres) {
+    valideringer.push(validateUlikeAndeler(getValues, fieldName, fields, intl));
+    valideringer.push(validateSumFastsattForUgraderteAktiviteter(getValues, fieldName, fields, intl, beregningsgrunnlag.grunnbeløp, getKodeverknavn));
+    valideringer.push(validateSumFastsattBelop(getValues, fieldName, fields, sumIPeriode, intl));
+    valideringer.push(validerBGGraderteAndeler(getValues, fieldName, fields, periodeFom, intl));
+    if (skalKunneEndreRefusjon) {
+      valideringer.push(validateSumRefusjon(fields, fieldName, getValues, beregningsgrunnlag.grunnbeløp, intl));
+      valideringer.push(validateTotalRefusjonPrArbeidsforhold(fields, fieldName, getValues, getKodeverknavn, arbeidsgiverOpplysningerPerId, intl));
+    }
   }
-  valideringer.push(validateSumFastsattBelop(getValues, fieldName, fields, sumIPeriode, intl));
 
   return (
     <SkjemaGruppeMedFeilviser

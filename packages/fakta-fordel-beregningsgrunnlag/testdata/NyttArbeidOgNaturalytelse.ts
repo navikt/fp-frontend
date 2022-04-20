@@ -23,8 +23,8 @@ export const beregningsgrunnlag = {
       andelsnr: 2,
       inntektskategori: 'ARBEIDSTAKER',
       arbeidsforhold: {
-        arbeidsgiverIdent: '922745943',
-        arbeidsgiverIdVisning: '922745943',
+        arbeidsgiverIdent: '999999997',
+        arbeidsgiverIdVisning: '999999997',
         startdato: '2019-08-01',
         opphoersdato: '2020-01-31',
         arbeidsforholdType: 'ARBEID',
@@ -79,8 +79,8 @@ export const beregningsgrunnlag = {
       andelsnr: 2,
       inntektskategori: 'ARBEIDSTAKER',
       arbeidsforhold: {
-        arbeidsgiverIdent: '922745943',
-        arbeidsgiverIdVisning: '922745943',
+        arbeidsgiverIdent: '999999997',
+        arbeidsgiverIdVisning: '999999997',
         startdato: '2019-08-01',
         opphoersdato: '2020-01-31',
         arbeidsforholdType: 'ARBEID',
@@ -134,8 +134,8 @@ export const beregningsgrunnlag = {
       andelsnr: 2,
       inntektskategori: 'ARBEIDSTAKER',
       arbeidsforhold: {
-        arbeidsgiverIdent: '922745943',
-        arbeidsgiverIdVisning: '922745943',
+        arbeidsgiverIdent: '999999997',
+        arbeidsgiverIdVisning: '999999997',
         startdato: '2019-08-01',
         opphoersdato: '2020-01-31',
         arbeidsforholdType: 'ARBEID',
@@ -160,8 +160,8 @@ export const beregningsgrunnlag = {
       andelsnr: 3,
       inntektskategori: '-',
       arbeidsforhold: {
-        arbeidsgiverIdent: '883551222',
-        arbeidsgiverIdVisning: '883551222',
+        arbeidsgiverIdent: '974652293',
+        arbeidsgiverIdVisning: '974652293',
         startdato: '2020-01-01',
         arbeidsforholdType: 'ARBEID',
         refusjonPrAar: 470238.0,
@@ -244,7 +244,7 @@ export const beregningsgrunnlag = {
           tom: '2019-12-15',
           arbeidsforholdType: 'SYKEPENGER',
         }, {
-          arbeidsgiverIdent: '922745943',
+          arbeidsgiverIdent: '999999997',
           fom: '2019-08-01',
           tom: '2020-01-31',
           arbeidsforholdType: 'ARBEID',
@@ -252,7 +252,7 @@ export const beregningsgrunnlag = {
       }, {
         tom: '2019-08-01',
         aktiviteter: [{
-          arbeidsgiverIdent: '991945970',
+          arbeidsgiverIdent: '974239965',
           fom: '2018-02-01',
           tom: '2019-07-31',
           arbeidsforholdType: 'ARBEID',
@@ -276,8 +276,8 @@ export const beregningsgrunnlag = {
       inntektskategori: 'ARBEIDSTAKER',
       aktivitetStatus: 'AT',
       arbeidsforhold: {
-        arbeidsgiverIdent: '922745943',
-        arbeidsgiverIdVisning: '922745943',
+        arbeidsgiverIdent: '999999997',
+        arbeidsgiverIdVisning: '999999997',
         startdato: '2019-08-01',
         opphoersdato: '2020-01-31',
         arbeidsforholdType: 'ARBEID',
@@ -314,8 +314,8 @@ export const beregningsgrunnlag = {
         }, {
           andelsnr: 2,
           arbeidsforhold: {
-            arbeidsgiverIdent: '922745943',
-            arbeidsgiverIdVisning: '922745943',
+            arbeidsgiverIdent: '999999997',
+            arbeidsgiverIdVisning: '999999997',
             startdato: '2019-08-01',
             opphoersdato: '2020-01-31',
             arbeidsforholdType: 'ARBEID',
@@ -354,8 +354,8 @@ export const beregningsgrunnlag = {
         }, {
           andelsnr: 2,
           arbeidsforhold: {
-            arbeidsgiverIdent: '922745943',
-            arbeidsgiverIdVisning: '922745943',
+            arbeidsgiverIdent: '999999997',
+            arbeidsgiverIdVisning: '999999997',
             startdato: '2019-08-01',
             opphoersdato: '2020-01-31',
             arbeidsforholdType: 'ARBEID',
@@ -395,8 +395,8 @@ export const beregningsgrunnlag = {
         }, {
           andelsnr: 2,
           arbeidsforhold: {
-            arbeidsgiverIdent: '922745943',
-            arbeidsgiverIdVisning: '922745943',
+            arbeidsgiverIdent: '999999997',
+            arbeidsgiverIdVisning: '999999997',
             startdato: '2019-08-01',
             opphoersdato: '2020-01-31',
             arbeidsforholdType: 'ARBEID',
@@ -416,8 +416,8 @@ export const beregningsgrunnlag = {
         }, {
           andelsnr: 3,
           arbeidsforhold: {
-            arbeidsgiverIdent: '883551222',
-            arbeidsgiverIdVisning: '883551222',
+            arbeidsgiverIdent: '974652293',
+            arbeidsgiverIdVisning: '974652293',
             startdato: '2020-01-01',
             arbeidsforholdType: 'ARBEID',
             refusjonPrAar: 470238.0,
@@ -438,7 +438,7 @@ export const beregningsgrunnlag = {
         skalKunneEndreRefusjon: false,
       }],
       arbeidsforholdTilFordeling: [{
-        arbeidsgiverIdent: '883551222',
+        arbeidsgiverIdent: '974652293',
         startdato: '2020-01-01',
         arbeidsforholdType: 'ARBEID',
         refusjonPrAar: 470238.0,

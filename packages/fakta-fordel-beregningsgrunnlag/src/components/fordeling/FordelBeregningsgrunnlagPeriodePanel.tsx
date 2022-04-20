@@ -118,6 +118,7 @@ const FordelBeregningsgrunnlagPeriodePanel: FunctionComponent<OwnProps> & Static
       sumIPeriode={finnSumIPeriode(beregningsgrunnlag.beregningsgrunnlagPeriode, fordelingsperiode.fom)}
       skalIkkeRedigereInntekt={!fordelingsperiode.skalRedigereInntekt}
       skalKunneEndreRefusjon={fordelingsperiode.skalKunneEndreRefusjon}
+      periodeFom={fordelingsperiode.fom}
       isAksjonspunktClosed={isAksjonspunktClosed}
       alleKodeverk={alleKodeverk}
       beregningsgrunnlag={beregningsgrunnlag}

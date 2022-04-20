@@ -6,6 +6,7 @@ import {
   FordelBeregningsgrunnlagAndel,
 } from '@fpsak-frontend/types';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { UseFormGetValues } from 'react-hook-form';
 import { createVisningsnavnForAktivitetFordeling } from '../util/visningsnavnHelper';
 import {
   FordelBeregningsgrunnlagAndelValues,
@@ -89,9 +90,9 @@ export const setGenerellAndelsinfo = (andel: FordelBeregningsgrunnlagAndel,
   forrigeInntektskategori: !andel.inntektskategori || andel.inntektskategori === inntektskategorier.UDEFINERT ? null : andel.inntektskategori,
 });
 
-export const mapToBelop = (field: any,
+export const mapToBelop = (field: FordelBeregningsgrunnlagAndelValues,
   fieldname: string,
-  getValues: any,
+  getValues: UseFormGetValues<FordelBeregningsgrunnlagAndelValues>,
   index: number): number => {
   if (field.skalRedigereInntekt) {
     const fastsattBeløp = getValues(`${fieldname}.${index}.fastsattBelop`);

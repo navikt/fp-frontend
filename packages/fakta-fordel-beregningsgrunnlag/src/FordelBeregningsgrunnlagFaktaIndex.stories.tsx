@@ -20,8 +20,7 @@ import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
 import { Story } from '@storybook/react';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
-import FaktaAksjonspunkt, { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import {
   bgUtenDelvisRefusjon as vurderRefusjonBG,
   bgMedDelvisRefusjon as vurderDelvisRefBG,
@@ -29,8 +28,6 @@ import {
 } from '../testdata/VurderRefusjon';
 import { beregningsgrunnlag as bgArbeidOgGradertNæring, aksjonspunkt as apArbeidOgGradertNæring } from '../testdata/ArbeidOgGradertNaring';
 import { beregningsgrunnlag as bgMedNaturalytelse, aksjonspunkt as apMedNaturalytelse } from '../testdata/NyttArbeidOgNaturalytelse';
-
-type Writeable<T> = { -readonly [P in keyof T]: T[P] };
 
 const agOpplysninger = {
   874652202: {
@@ -48,19 +45,19 @@ const agOpplysninger = {
     identifikator: '123456700',
     erPrivatPerson: false,
   },
-  922745943: {
+  999999997: {
     navn: 'Arbeidsgiveren',
-    identifikator: '922745943',
+    identifikator: '999999997',
     erPrivatPerson: false,
   },
-  883551222: {
-    navn: 'Arbeidsgiveren',
-    identifikator: '883551222',
+  974652293: {
+    navn: 'NAV Troms og Finnmark',
+    identifikator: '974652293',
     erPrivatPerson: false,
   },
-  991945970: {
-    navn: 'Arbeidsgiveren',
-    identifikator: '991945970',
+  974239965: {
+    navn: 'NAV Trøndelag',
+    identifikator: '974239965',
     erPrivatPerson: false,
   },
   999999999: {
@@ -86,10 +83,6 @@ const behandling = {
   versjon: 1,
   type: 'BT-003',
 } as Behandling;
-
-const merknaderFraBeslutter = {
-  notAccepted: false,
-};
 
 const fordelAP = ([{
   definisjon: aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG,
@@ -129,7 +122,7 @@ const Template: Story<{
   />
 );
 
-const lagBGAndel = (andelsnr: number, aktivitetstatuskode: string, beregnet: number, arbeidsforhold?: BeregningsgrunnlagArbeidsforhold): Writeable<BeregningsgrunnlagAndel> => ({
+const lagBGAndel = (andelsnr: number, aktivitetstatuskode: string, beregnet: number, arbeidsforhold?: BeregningsgrunnlagArbeidsforhold): BeregningsgrunnlagAndel => ({
   aktivitetStatus: aktivitetstatuskode,
   beregningsperiodeFom: '2019-06-01',
   beregningsperiodeTom: '2019-08-31',
@@ -209,7 +202,8 @@ const mapIKKode = (bgStatus: string): string => {
   }
 };
 
-const lagFordelingsandel = (andelsnr: number, status: string, ref: number, fordelt: number, arbeidsforhold?: BeregningsgrunnlagArbeidsforhold): Writeable<FordelBeregningsgrunnlagAndel> => ({
+const lagFordelingsandel = (andelsnr: number, status: string, ref: number, fordelt: number,
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforhold): FordelBeregningsgrunnlagAndel => ({
   aktivitetStatus: status,
   andelsnr,
   arbeidsforholdType: '-',
@@ -315,16 +309,24 @@ export const SkalSlåSammenNaturalytelseperioder = Template.bind({});
 SkalSlåSammenNaturalytelseperioder.args = {
   aksjonspunkter: fordelAP,
   readOnly: false,
-  beregningsgrunnlag: lagBG([lagBGPeriode([lagBGAndel(1, 'AT', 100000, lagArbeidsforhold('874652202', 'AD-ASD-ADF-SADGF-ASGASDF-ÅTYIUOH', 500000))], [], '2019-08-05', '2019-11-26'),
-    lagBGPeriode([lagBGAndel(1, 'AT', 100000, lagArbeidsforhold('874652202', 'AD-ASD-ADF-SADGF-ASGASDF-ÅTYIUOH', 500000))],
-      [periodeAarsak.NATURALYTELSE_BORTFALT], '2019-11-27', '2019-12-05'),
-    lagBGPeriode([lagBGAndel(1, 'AT', 100000, lagArbeidsforhold('874652202', 'AD-ASD-ADF-SADGF-ASGASDF-ÅTYIUOH', 500000)),
-      lagBGAndel(2, 'AT', 300000, lagArbeidsforhold('999999999', 'AD-ASD-ADF-SADGF-ASGASDF-SDFASDF', 300000))], [periodeAarsak.ENDRING_I_REFUSJONSKRAV], '2019-12-06')],
+  beregningsgrunnlag: lagBG([lagBGPeriode([lagBGAndel(1, 'AT', 100000,
+    lagArbeidsforhold('874652202', 'AD-ASD-ADF-SADGF-ASGASDF-ÅTYIUOH', 500000))], [], '2019-08-05', '2019-11-26'),
+  lagBGPeriode([lagBGAndel(1, 'AT', 100000,
+    lagArbeidsforhold('874652202', 'AD-ASD-ADF-SADGF-ASGASDF-ÅTYIUOH', 500000))],
+  [periodeAarsak.NATURALYTELSE_BORTFALT], '2019-11-27', '2019-12-05'),
+  lagBGPeriode([lagBGAndel(1, 'AT', 100000,
+    lagArbeidsforhold('874652202', 'AD-ASD-ADF-SADGF-ASGASDF-ÅTYIUOH', 500000)),
+  lagBGAndel(2, 'AT', 300000,
+    lagArbeidsforhold('999999999', 'AD-ASD-ADF-SADGF-ASGASDF-SDFASDF', 300000))], [periodeAarsak.ENDRING_I_REFUSJONSKRAV], '2019-12-06')],
   lagFaktaOmFordeling([lagArbforTilFordeling('999999999', 'AD-ASD-ADF-SADGF-ASGASDF-SDFASDF', 300000, '2019-12-06')],
-    [lagFordelPeriode([lagFordelingsandel(1, 'AT', 0, 0, lagArbeidsforhold('874652202', 'AD-ASD-ADF-SADGF-ASGASDF-ÅTYIUOH', 500000))],
-      false, false, '2019-08-05', '2019-11-26'),
-    lagFordelPeriode([lagFordelingsandel(1, 'AT', 0, 0, lagArbeidsforhold('874652202', 'AD-ASD-ADF-SADGF-ASGASDF-ÅTYIUOH', 500000))], false, false, '2019-11-27', '2019-12-05'),
-    lagFordelPeriode([lagFordelingsandel(1, 'AT', 0, 0, lagArbeidsforhold('874652202', 'AD-ASD-ADF-SADGF-ASGASDF-ÅTYIUOH', 500000)), lagFordelingsandel(2, 'AT', 300000, 0, lagArbeidsforhold('999999999', 'AD-ASD-ADF-SADGF-ASGASDF-SDFASDF', 300000))],
-      true, true, '2019-12-06')])),
+    [lagFordelPeriode([lagFordelingsandel(1, 'AT', 0, 0,
+      lagArbeidsforhold('874652202', 'AD-ASD-ADF-SADGF-ASGASDF-ÅTYIUOH', 500000))],
+    false, false, '2019-08-05', '2019-11-26'),
+    lagFordelPeriode([lagFordelingsandel(1, 'AT', 0, 0,
+      lagArbeidsforhold('874652202', 'AD-ASD-ADF-SADGF-ASGASDF-ÅTYIUOH', 500000))], false, false, '2019-11-27', '2019-12-05'),
+    lagFordelPeriode([lagFordelingsandel(1, 'AT', 0, 0,
+      lagArbeidsforhold('874652202', 'AD-ASD-ADF-SADGF-ASGASDF-ÅTYIUOH', 500000)),
+    lagFordelingsandel(2, 'AT', 300000, 0, lagArbeidsforhold('999999999', 'AD-ASD-ADF-SADGF-ASGASDF-SDFASDF', 300000))],
+    true, true, '2019-12-06')])),
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
