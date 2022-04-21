@@ -2,15 +2,16 @@ import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT, getKodeverknavnFn } from '@fpsak-frontend/utils';
+import { DDMMYYYY_DATE_FORMAT, getKodeverknavnFn, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
 import {
+  AlleKodeverk,
   ArbeidsforholdTilFordeling,
   ArbeidsgiverOpplysningerPerId,
-  AlleKodeverk, PerioderMedGraderingEllerRefusjon,
+  PerioderMedGraderingEllerRefusjon,
 } from '@fpsak-frontend/types';
 import { createVisningsnavnForAktivitetFordeling } from '../util/visningsnavnHelper';
 
@@ -162,21 +163,12 @@ const lagHelpTextsFordelBG = (endredeArbeidsforhold: ArbeidsforholdTilFordeling[
     .filter(({ perioderMedGraderingEllerRefusjon }) => harGraderingEllerRefusjon(perioderMedGraderingEllerRefusjon));
   const endringYtelse = endredeArbeidsforhold
     .filter(({ perioderMedGraderingEllerRefusjon }) => perioderMedGraderingEllerRefusjon.map(({ erSøktYtelse }) => erSøktYtelse).includes(true));
-  const helpTexts = createGraderingOrRefusjonString(gradering,
+  return createGraderingOrRefusjonString(gradering,
     refusjon,
     permisjonMedGraderingEllerRefusjon,
     endringYtelse,
     getKodeverknavn,
     arbeidsgiverOpplysningerPerId);
-  if (helpTexts.length === 2) {
-    return [
-      <div key="HjelpeTextDiv">
-        {helpTexts[0]}
-        <VerticalSpacer key="fordelingSpacer" eightPx />
-        {helpTexts[1]}
-      </div>];
-  }
-  return helpTexts;
 };
 
 export const getHelpTextsFordelBG = (beregningsgrunnlag: Beregningsgrunnlag,
