@@ -141,16 +141,6 @@ describe('<BgFordelingUtils>', () => {
     expect(arbeidsforholdIV.arbeidsperiodeTom).toBe('2018-01-01');
   });
 
-  it('skal mappe fastsattBeløp til beløp om inntekt skal redigeres', () => {
-    const andel = {
-      skalRedigereInntekt: true,
-      fastsattBelop: '10 000',
-      readOnlyBelop: '20 000',
-    };
-    const belop = mapToBelop(andel as FordelBeregningsgrunnlagAndelValues);
-    expect(belop).toBe(10000);
-  });
-
   it('skal mappe readOnlyBelop til beløp om inntekt ikke skal redigeres', () => {
     const andel = {
       skalRedigereInntekt: false,

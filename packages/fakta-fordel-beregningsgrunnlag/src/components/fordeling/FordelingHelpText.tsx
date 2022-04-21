@@ -69,7 +69,7 @@ const finnVisningsnavn = (arbeidsforhold: ArbeidsforholdTilFordeling,
   return createVisningsnavnForAktivitetFordeling(agOpplysninger, arbeidsforhold.eksternArbeidsforholdId);
 };
 
-const createFordelArbeidsforholdString = (listOfArbeidsforhold: ArbeidsforholdTilFordeling[],
+export const createFordelArbeidsforholdString = (listOfArbeidsforhold: ArbeidsforholdTilFordeling[],
   mTextCase: string,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string): string | ArbeidsforholdInfo => {

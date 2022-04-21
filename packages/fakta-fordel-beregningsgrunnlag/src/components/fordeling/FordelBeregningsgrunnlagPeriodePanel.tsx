@@ -16,7 +16,6 @@ import {
 } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import RenderFordelBGFieldArray from './RenderFordelBGFieldArray';
 import {
   settAndelIArbeid, setGenerellAndelsinfo, setArbeidsforholdInitialValues, settFastsattBelop, finnFastsattPrAar,
 } from './BgFordelingUtils';
@@ -131,10 +130,6 @@ const FordelBeregningsgrunnlagPeriodePanel: FunctionComponent<OwnProps> & Static
 FordelBeregningsgrunnlagPeriodePanel.defaultProps = {
   open: null,
 };
-
-FordelBeregningsgrunnlagPeriodePanel.validate = (intl, values, sumIPeriode,
-  getKodeverknavn, grunnbeløp, periode, skalValidereRefusjon, arbeidsgiverOpplysningerPerId) => RenderFordelBGFieldArray
-  .validate(intl, values, sumIPeriode, getKodeverknavn, grunnbeløp, periode, skalValidereRefusjon, arbeidsgiverOpplysningerPerId);
 
 const finnRiktigAndel = (andel: FordelBeregningsgrunnlagAndel,
   bgPeriode: BeregningsgrunnlagPeriodeProp): BeregningsgrunnlagAndel => bgPeriode.beregningsgrunnlagPrStatusOgAndel

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { FunctionComponent } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
@@ -41,57 +41,30 @@ interface OwnProps {
   setFormData: (data: FordelBeregningsgrunnlagMedAksjonspunktValues | VurderRefusjonValues) => void,
 }
 
-interface OwnState {
-  submitEnabled: boolean;
-}
-
 /**
  * FordelBeregningsgrunnlagPanel
  *
  * Har ansvar for å sette opp Redux Formen for "avklar fakta om fordeling" panel.
  */
-export class FordelBeregningsgrunnlagPanel extends Component<OwnProps, OwnState> {
-  constructor(props: OwnProps) {
-    super(props);
-    this.state = {
-      submitEnabled: false,
-    };
-  }
-
-  componentDidMount() {
-    const { submitEnabled } = this.state;
-    if (!submitEnabled) {
-      this.setState({
-        submitEnabled: true,
-      });
-    }
-  }
-
-  render() {
-    const {
-      props: {
-        readOnly,
-        aksjonspunkter,
-        submitCallback,
-        beregningsgrunnlag,
-        alleKodeverk,
-        behandlingType,
-        submittable,
-        arbeidsgiverOpplysningerPerId,
-        formData,
-        setFormData,
-      },
-      state: {
-        submitEnabled,
-      },
-    } = this;
-    const fordelAP = getAksjonspunkt(aksjonspunkter, FORDEL_BEREGNINGSGRUNNLAG);
-    const refusjonAP = getAksjonspunkt(aksjonspunkter, VURDER_REFUSJON_BERGRUNN);
-    const skalViseFordeling = fordelAP && harFordelInfo(beregningsgrunnlag);
-    const skalViseRefusjon = refusjonAP && harRefusjonInfo(beregningsgrunnlag);
-    return (
-      <>
-        {skalViseRefusjon && (
+const FordelBeregningsgrunnlagPanel:FunctionComponent<OwnProps> = ({
+  readOnly,
+  aksjonspunkter,
+  submitCallback,
+  beregningsgrunnlag,
+  alleKodeverk,
+  behandlingType,
+  submittable,
+  arbeidsgiverOpplysningerPerId,
+  formData,
+  setFormData,
+}) => {
+  const fordelAP = getAksjonspunkt(aksjonspunkter, FORDEL_BEREGNINGSGRUNNLAG);
+  const refusjonAP = getAksjonspunkt(aksjonspunkter, VURDER_REFUSJON_BERGRUNN);
+  const skalViseFordeling = fordelAP && harFordelInfo(beregningsgrunnlag);
+  const skalViseRefusjon = refusjonAP && harRefusjonInfo(beregningsgrunnlag);
+  return (
+    <>
+      {skalViseRefusjon && (
         <VurderEndringRefusjonForm
           submittable={submittable}
           readOnly={readOnly}
@@ -102,24 +75,23 @@ export class FordelBeregningsgrunnlagPanel extends Component<OwnProps, OwnState>
           formData={formData as VurderRefusjonValues}
           setFormData={setFormData}
         />
-        )}
-        {skalViseFordeling && (
-          <FordelingForm
-            submittable={submittable}
-            readOnly={readOnly}
-            submitCallback={submitCallback}
-            alleKodeverk={alleKodeverk}
-            beregningsgrunnlag={beregningsgrunnlag}
-            behandlingType={behandlingType}
-            aksjonspunkter={aksjonspunkter}
-            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-            formData={formData as FordelBeregningsgrunnlagMedAksjonspunktValues}
-            setFormData={setFormData}
-          />
-        )}
-      </>
-    );
-  }
-}
+      )}
+      {skalViseFordeling && (
+      <FordelingForm
+        submittable={submittable}
+        readOnly={readOnly}
+        submitCallback={submitCallback}
+        alleKodeverk={alleKodeverk}
+        beregningsgrunnlag={beregningsgrunnlag}
+        behandlingType={behandlingType}
+        aksjonspunkter={aksjonspunkter}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        formData={formData as FordelBeregningsgrunnlagMedAksjonspunktValues}
+        setFormData={setFormData}
+      />
+      )}
+    </>
+  );
+};
 
 export default FordelBeregningsgrunnlagPanel;

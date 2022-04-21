@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { IntlShape } from 'react-intl';
 
 import {
   ArbeidsgiverOpplysningerPerId,
@@ -41,12 +40,6 @@ interface StaticFunctions {
   transformValues: (values: FordelBeregningsgrunnlagMedAksjonspunktValues,
                     fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
                     bgPerioder: BeregningsgrunnlagPeriodeProp[]) => FordelBeregningsgrunnlagPerioderTransformedValues;
-  validate: (intl: IntlShape,
-             values: FordelBeregningsgrunnlagMedAksjonspunktValues,
-             fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
-             beregningsgrunnlag: Beregningsgrunnlag,
-             getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
-             arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => any;
 }
 
 const FastsettFordeltBeregningsgrunnlag: FunctionComponent<OwnProps> & StaticFunctions = ({
@@ -83,16 +76,5 @@ FastsettFordeltBeregningsgrunnlag.transformValues = (values: FordelBeregningsgru
   fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
   bgPerioder: BeregningsgrunnlagPeriodeProp[]): FordelBeregningsgrunnlagPerioderTransformedValues => FordelBeregningsgrunnlagForm.transformValues(values,
   fordelBGPerioder, bgPerioder);
-
-FastsettFordeltBeregningsgrunnlag.validate = (intl: IntlShape,
-  values: FordelBeregningsgrunnlagMedAksjonspunktValues,
-  fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
-  beregningsgrunnlag: Beregningsgrunnlag,
-  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) => (
-  FordelBeregningsgrunnlagForm
-    .validate(intl, values, fordelBGPerioder, beregningsgrunnlag, getKodeverknavn, arbeidsgiverOpplysningerPerId));
-
-const emptyArray = [];
 
 export default FastsettFordeltBeregningsgrunnlag;

@@ -11,7 +11,6 @@ import { GRADERING_RANGE_DENOMINATOR, mapToBelop } from './BgFordelingUtils';
 import { createVisningsnavnForAktivitetFordeling } from '../util/visningsnavnHelper';
 import {
   FordelBeregningsgrunnlagAndelValues,
-  FordelingFieldError,
   PeriodeTsType,
 } from '../../types/FordelBeregningsgrunnlagPanelValues';
 
@@ -31,42 +30,8 @@ type Refusjonsinfo = {
   totalRefusjon: number;
 }
 
-type FieldErrors = {
-  refusjonskrav: string;
-  fastsattBelop: string;
-  andel: string;
-  inntektskategori: string;
-
-}
-
-export const compareAndeler = (andel1: SortertAndelInfo, andel2: SortertAndelInfo): number => {
-  if (andel1.andelsinfo === andel2.andelsinfo) {
-    if (andel1.inntektskategori === andel2.inntektskategori) {
-      return 0;
-    }
-    return andel1.inntektskategori > andel2.inntektskategori ? 1 : -1;
-  }
-  return andel1.andelsinfo > andel2.andelsinfo ? 1 : -1;
-};
-
 export const ulikeAndelerErrorMessage = (intl: IntlShape): string => intl
   .formatMessage({ id: 'BeregningInfoPanel.FordelBG.Validation.UlikeAndeler' });
-
-const erAndelerLike = (andel1: SortertAndelInfo, andel2: SortertAndelInfo): boolean => andel2.andelsinfo === andel1.andelsinfo
-  && andel2.inntektskategori === andel1.inntektskategori;
-
-export const validateUlikeAndelerWithGroupingFunction = (andelList: FordelBeregningsgrunnlagAndelValues[],
-  mapToSort: (value: FordelBeregningsgrunnlagAndelValues, andelList: FordelBeregningsgrunnlagAndelValues[]) => SortertAndelInfo,
-  intl: IntlShape) => {
-  const mappedAndeler = andelList.map((value) => (mapToSort(value, andelList)));
-  const sortedAndeler = mappedAndeler.slice().sort((andel1, andel2) => compareAndeler(andel1, andel2));
-  for (let i = 0; i < sortedAndeler.length - 1; i += 1) {
-    if (erAndelerLike(sortedAndeler[i], sortedAndeler[i + 1])) {
-      return ulikeAndelerErrorMessage(intl);
-    }
-  }
-  return null;
-};
 
 type Andelsnøkkel = {
   erNyAndel: boolean;
@@ -99,7 +64,7 @@ const lagAndelsnøkler = (getValues: UseFormGetValues<FordelBeregningsgrunnlagAn
   const liste = [];
   for (let fieldIndex = 0; fieldIndex < fields.length; fieldIndex += 1) {
     const field = fields[fieldIndex];
-    if (!!field.nyAndel && field.aktivitetStatus === AktivitetStatus.ARBEIDSTAKER) {
+    if (field.nyAndel) {
       const eksisterendeField = finnEksisterendeField(fields, field.andelsnrRef);
       liste.push({
         erNyAndel: field.nyAndel,
@@ -123,7 +88,8 @@ const lagAndelsnøkler = (getValues: UseFormGetValues<FordelBeregningsgrunnlagAn
 
 export const validateUlikeAndeler = (getValues: UseFormGetValues<FordelBeregningsgrunnlagAndelValues>,
   fieldname: string,
-  fields: FordelBeregningsgrunnlagAndelValues[], intl: IntlShape) => () => {
+  fields: FordelBeregningsgrunnlagAndelValues[],
+  intl: IntlShape) => () => {
   const nøklerAvAndeler = lagAndelsnøkler(getValues, fieldname, fields);
   const andelerSomErSjekket = [];
   for (let i = 0; i < nøklerAvAndeler.length; i += 1) {
@@ -224,14 +190,6 @@ export const likFordeling = (
   value: number, fordeling: number, intl: IntlShape,
 ): string => ((value !== Math.round(fordeling)) ? skalVereLikFordelingMessage(formatCurrencyNoKr(Math.round(fordeling)), intl) : null);
 
-const validateRefusjonsbelop = (refusjonskrav: string, skalKunneEndreRefusjon: boolean): string | undefined => {
-  let refusjonskravError;
-  if (skalKunneEndreRefusjon) {
-    refusjonskravError = required(refusjonskrav);
-  }
-  return refusjonskravError;
-};
-
 const validateFordelingForGradertAndel = (intl: IntlShape, andel: FordelBeregningsgrunnlagAndelValues, periodeFom: string,
   getValues: UseFormGetValues<FordelBeregningsgrunnlagAndelValues>, fieldname: string, index: number): boolean => {
   const arbeidsforholdIkkeOpphørt = !andel.arbeidsperiodeTom || dateIsAfter(andel.arbeidsperiodeTom, periodeFom);
@@ -257,7 +215,7 @@ export const validerBGGraderteAndeler = (getValues: UseFormGetValues<FordelBereg
   periodeFom: string,
   intl: IntlShape) => () => {
   const finnesUgyldigAndel = fields.some((field, index) => validateFordelingForGradertAndel(intl, field, periodeFom, getValues, fieldname, index));
-  return finnesUgyldigAndel ? kanIkkjeHaNullBeregningsgrunnlagError(intl) : undefined;
+  return finnesUgyldigAndel ? kanIkkjeHaNullBeregningsgrunnlagError(intl) : null;
 };
 
 export const validateFastsattBelop = (intl: IntlShape, andelFieldValues: FordelBeregningsgrunnlagAndelValues, periode: PeriodeTsType): string | null => {

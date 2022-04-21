@@ -31,7 +31,7 @@ import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import {
   validateSumFastsattBelop, validateTotalRefusjonPrArbeidsforhold, validateUlikeAndeler,
   validateSumRefusjon, validateSumFastsattForUgraderteAktiviteter, validerBGGraderteAndeler,
-} from './ValidateAndelerUtils';
+} from './ValidateFordelteAndelerUtils';
 import styles from './renderFordelBGFieldArray.less';
 import { createVisningsnavnForAktivitetFordeling } from '../util/visningsnavnHelper';
 import { BGFordelArbeidsforhold, FordelBeregningsgrunnlagAndelValues, PeriodeTsType } from '../../types/FordelBeregningsgrunnlagPanelValues';
@@ -384,42 +384,6 @@ const getHeaderTextCodes = (erRevurdering: boolean): string[] => {
   headerCodes.push('BeregningInfoPanel.FordelBG.Inntektskategori');
   return headerCodes;
 };
-
-// FordelPeriodeFieldArray.validate = (intl, values, sumIPeriode, getKodeverknavn,
-//   grunnbeløp, periodeDato, skalValidereRefusjon, arbeidsgiverOpplysningerPerId) => {
-//   const fieldErrors = validateAndeler(intl, values, periodeDato);
-//   if (fieldErrors != null) {
-//     return fieldErrors;
-//   }
-//   if (isArrayEmpty(values)) {
-//     return null;
-//   }
-//   const ulikeAndelerFeilmelding = validateUlikeAndeler(values, intl);
-//   if (ulikeAndelerFeilmelding) {
-//     return { _error: ulikeAndelerFeilmelding };
-//   }
-//   const fastsattForUgraderteAktiviteterFeilmelding = validateSumFastsattForUgraderteAktiviteter(values, grunnbeløp, getKodeverknavn, intl);
-//   if (fastsattForUgraderteAktiviteterFeilmelding) {
-//     return { _error: fastsattForUgraderteAktiviteterFeilmelding };
-//   }
-//   if (skalValidereRefusjon) {
-//     const totalRefusjonFeilmelding = validateSumRefusjon(values, grunnbeløp, intl);
-//     if (totalRefusjonFeilmelding) {
-//       return { _error: totalRefusjonFeilmelding };
-//     }
-//     const refusjonPrArbeidsforholdFeilmelding = validateTotalRefusjonPrArbeidsforhold(values, getKodeverknavn, arbeidsgiverOpplysningerPerId, intl);
-//     if (refusjonPrArbeidsforholdFeilmelding) {
-//       return { _error: refusjonPrArbeidsforholdFeilmelding };
-//     }
-//   }
-//   if (sumIPeriode !== undefined && sumIPeriode !== null && values.some((andel) => andel.skalRedigereInntekt === true)) {
-//     const fastsattBelopFeilmelding = validateSumFastsattBelop(values, sumIPeriode, intl);
-//     if (fastsattBelopFeilmelding) {
-//       return { _error: fastsattBelopFeilmelding };
-//     }
-//   }
-//   return null;
-// };
 
 type OwnProps = {
     readOnly: boolean;

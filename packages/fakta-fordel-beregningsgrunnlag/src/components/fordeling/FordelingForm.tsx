@@ -135,26 +135,4 @@ const FordelingForm: FunctionComponent<PureOwnProps> = ({
   );
 };
 
-// export const getValidationFordelBeregning = createSelector(
-//   [(ownProps: PureOwnProps) => ownProps.beregningsgrunnlag,
-//     (ownProps: PureOwnProps) => ownProps.arbeidsgiverOpplysningerPerId,
-//     (ownProps: PureOwnProps) => ownProps.alleKodeverk,
-//     (ownProps: PureOwnProps) => ownProps.intl,
-//     (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-//   (beregningsgrunnlag: Beregningsgrunnlag,
-//     arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-//     alleKodeverk: AlleKodeverk,
-//     intl: IntlShape,
-//     aksjonspunkter: Aksjonspunkt[]) => (values: FordelBeregningsgrunnlagMedAksjonspunktValues) => {
-//     const fordelBGPerioder = beregningsgrunnlag.faktaOmFordeling.fordelBeregningsgrunnlag.fordelBeregningsgrunnlagPerioder;
-//     if (hasAksjonspunkt(FORDEL_BEREGNINGSGRUNNLAG, aksjonspunkter)) {
-//       return {
-//         ...FastsettFordeltBeregningsgrunnlagImpl.validate(intl, values, fordelBGPerioder,
-//           beregningsgrunnlag, getKodeverknavnFn(alleKodeverk), arbeidsgiverOpplysningerPerId),
-//       };
-//     }
-//     return null;
-//   },
-// );
-
 export default FordelingForm;

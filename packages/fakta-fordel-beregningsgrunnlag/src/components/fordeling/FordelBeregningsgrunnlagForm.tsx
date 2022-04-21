@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { IntlShape } from 'react-intl';
 
 import { removeSpacesFromNumber } from '@fpsak-frontend/utils';
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
@@ -127,11 +126,6 @@ export const lagPerioderForSubmit = (values: FordelBeregningsgrunnlagMedAksjonsp
     tom: p.tom,
   }));
 
-const finnSumIPeriode = (bgPerioder: BeregningsgrunnlagPeriodeProp[], fom: string): number => {
-  const periode = bgPerioder.find((p) => p.beregningsgrunnlagPeriodeFom === fom);
-  return periode.bruttoInkludertBortfaltNaturalytelsePrAar;
-};
-
 export const slaaSammenPerioder = (perioder: FordelBeregningsgrunnlagPeriode[],
   bgPerioder: BeregningsgrunnlagPeriodeProp[]): FordelBeregningsgrunnlagPeriode[] => perioder.reduce(sjekkOmPeriodeSkalLeggesTil(bgPerioder), []);
 
@@ -172,31 +166,6 @@ interface OwnState {
  */
 
 export class FordelBeregningsgrunnlagForm extends Component<OwnProps, OwnState> {
-  static validate = (
-    intl: IntlShape,
-    values: FordelBeregningsgrunnlagMedAksjonspunktValues,
-    fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
-    beregningsgrunnlag: Beregningsgrunnlag,
-    getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
-    arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  ) => {
-    const errors = {};
-    if (fordelBGPerioder && fordelBGPerioder.length > 0) {
-      const perioderSlattSammen = slaaSammenPerioder(fordelBGPerioder, beregningsgrunnlag.beregningsgrunnlagPeriode);
-      const grunnbeløp = Number(beregningsgrunnlag.grunnbeløp);
-      for (let i = 0; i < perioderSlattSammen.length; i += 1) {
-        const sumIPeriode = finnSumIPeriode(beregningsgrunnlag.beregningsgrunnlagPeriode, perioderSlattSammen[i].fom);
-        const periode = values[getFieldNameKey(i)];
-        const fordelPeriode = perioderSlattSammen[i];
-        const skalValidereRefusjon = fordelPeriode && fordelPeriode.skalKunneEndreRefusjon;
-        const periodeDato = { fom: fordelPeriode.fom, tom: fordelPeriode.tom };
-        errors[getFieldNameKey(i)] = FordelBeregningsgrunnlagPeriodePanel.validate(intl, periode, sumIPeriode,
-          getKodeverknavn, grunnbeløp, periodeDato, skalValidereRefusjon, arbeidsgiverOpplysningerPerId);
-      }
-    }
-    return errors;
-  };
-
   static transformValues = (values: FordelBeregningsgrunnlagMedAksjonspunktValues,
     fordelBGPerioder: FordelBeregningsgrunnlagPeriode[],
     bgPerioder: BeregningsgrunnlagPeriodeProp[]): FordelBeregningsgrunnlagPerioderTransformedValues => ({
