@@ -16,7 +16,7 @@
     "nav-frontend-modal": "2.0.1",
     "nav-frontend-modal-style": "2.0.1",
     "react": "17.0.2",
-    "react-intl": "5.24.8"
+    "react-intl": "5.25.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "6.4.22",
