@@ -135,6 +135,7 @@ export const InnleggelsePeriode: FunctionComponent<PureOwnProps & MappedOwnProps
               <ArrowBox>
                 <FieldArray
                   name="dokumentertePerioder"
+                  /* @ts-ignore Fiks cannot be used as a JSX component */
                   component={DokumentertePerioderPeriodePicker}
                   props={{ fraDato, tilDato, readOnly }}
                 />

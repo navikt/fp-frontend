@@ -180,6 +180,7 @@ export const TilretteleggingFieldArray: FunctionComponent<PureOwnProps & MappedO
                 )}
                 {((data && data.stillingsprosent && tilretteleggingKode === tilretteleggingType.DELVIS_TILRETTELEGGING)
                     || tilretteleggingKode === tilretteleggingType.INGEN_TILRETTELEGGING) && (
+                    /* @ts-ignore Fiks cannot be used as a JSX component */
                     <TilretteleggingUtbetalingsgrad
                       fieldId={fieldId}
                       erOverstyrer={erOverstyrer}

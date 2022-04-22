@@ -79,6 +79,7 @@ const utledRadioOptionForArbeidsforholdSomIkkeErAktive = (
         disabled={skalDisableOverstyrTom(arbeidsforhold)}
         manualHideChildren
       >
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <BehandlingFormFieldCleaner formName={formName} fieldNames={['overstyrtTom']}>
           { arbeidsforholdHandlingVerdi === arbeidsforholdHandling.OVERSTYR_TOM && (
             <ArrowBox>
@@ -163,6 +164,7 @@ const ArbeidsforholdRadioknapper: FunctionComponent<OwnProps & WrappedComponentP
       value={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       manualHideChildren
     >
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <BehandlingFormFieldCleaner
         formName={formName}
         fieldNames={['aktivtArbeidsforholdHandlingField']}

@@ -191,6 +191,7 @@ export const FodselOgTilretteleggingFaktaForm: FunctionComponent<PureOwnProps & 
                   <VerticalSpacer sixteenPx />
                   <AvsnittSkiller />
                   <VerticalSpacer twentyPx />
+                  { /* @ts-ignore Fiks cannot be used as a JSX component */ }
                   <TilretteleggingArbeidsforholdSection
                     key={formSectionName}
                     readOnly={readOnly}
@@ -243,6 +244,7 @@ export const FodselOgTilretteleggingFaktaForm: FunctionComponent<PureOwnProps & 
         <VerticalSpacer sixteenPx />
         <FlexRow>
           <FlexColumn>
+            { /* @ts-ignore Fiks cannot be used as a JSX component */ }
             <FaktaSubmitButton
               formName={FODSEL_TILRETTELEGGING_FORM}
               isSubmittable={submittable && !formProps.error}

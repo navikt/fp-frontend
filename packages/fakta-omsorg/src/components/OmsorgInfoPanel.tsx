@@ -77,6 +77,7 @@ export const OmsorgInfoPanel: FunctionComponent<PureOwnProps & MappedOwnProps & 
     <BostedFaktaView personoversikt={personoversikt} alleKodeverk={alleKodeverk} />
     <form onSubmit={formProps.handleSubmit}>
       <FaktaBegrunnelseTextField isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse hasVurderingText />
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <OmsorgFaktaForm
         readOnly={readOnly}
         omsorg={omsorg}
@@ -85,6 +86,7 @@ export const OmsorgInfoPanel: FunctionComponent<PureOwnProps & MappedOwnProps & 
         soknad={soknad}
         alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
       />
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <FaktaSubmitButton
         formName={formProps.form}
         isSubmittable={submittable}

@@ -125,6 +125,7 @@ export class ForeldrepengerForm extends React.Component<PureOwnProps & MappedOwn
             alleKodeverk={alleKodeverk}
           />
         </FormSection>
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <PermisjonPanel
           soknadData={soknadData}
           form={form}
@@ -228,4 +229,5 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
 
 export default connect(mapStateToPropsFactory)(reduxForm({
   form: FORELDREPENGER_FORM_NAME,
+/* @ts-ignore Fiks */
 })(ForeldrepengerForm));

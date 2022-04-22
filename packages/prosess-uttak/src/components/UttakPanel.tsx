@@ -155,6 +155,7 @@ export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & W
     )}
     {uttaksresultat && (
       <form onSubmit={formProps.handleSubmit}>
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <Uttak
           intl={intl}
           submitting={formProps.submitting}

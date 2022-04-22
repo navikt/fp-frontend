@@ -31,6 +31,7 @@ export const ArbeidsforholdBegrunnelse: FunctionComponent<PureOwnProps & MappedO
   harBegrunnelse,
   skalAvslaaYtelse,
 }) => (
+  /* @ts-ignore Fiks cannot be used as a JSX component */
   <BehandlingFormFieldCleaner formName={formName} fieldNames={['begrunnelse']}>
     { (isDirty || harBegrunnelse) && !skalAvslaaYtelse && (
       <TextAreaField

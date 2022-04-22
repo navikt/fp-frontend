@@ -143,4 +143,5 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
 
 export default connect(mapStateToPropsFactory)(reduxForm({
   form: ENGANGSSTONAD_FORM_NAME,
+/* @ts-ignore Fiks */
 })(EngangsstonadForm));

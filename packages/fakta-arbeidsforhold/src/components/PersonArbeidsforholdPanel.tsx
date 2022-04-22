@@ -420,6 +420,7 @@ export class PersonArbeidsforholdPanelImpl extends Component<Props, OwnState> {
             </button>
           )}
           { hasArbeidsforholdAksjonspunkt(selectedArbeidsforhold) && (
+            /* @ts-ignore Fiks cannot be used as a JSX component */
             <PersonArbeidsforholdDetailForm
               key={selectedArbeidsforhold.id}
               intl={intl}

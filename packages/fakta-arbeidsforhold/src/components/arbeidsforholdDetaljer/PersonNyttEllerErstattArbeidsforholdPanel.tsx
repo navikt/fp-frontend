@@ -31,6 +31,7 @@ const PersonNyttEllerErstattArbeidsforholdPanel: FunctionComponent<OwnProps & Wr
   formName,
   arbeidsgiverOpplysningerPerId,
 }) => (
+  /* @ts-ignore Fiks cannot be used as a JSX component */
   <BehandlingFormFieldCleaner
     formName={formName}
     fieldNames={['erNyttArbeidsforhold', 'erstatterArbeidsforholdId']}

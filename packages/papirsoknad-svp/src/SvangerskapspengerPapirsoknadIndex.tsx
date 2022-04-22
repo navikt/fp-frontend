@@ -29,6 +29,7 @@ const SvangerskapspengerPapirsoknadIndex: FunctionComponent<OwnProps> = ({
 }) => (
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="SvangerskapspengerPapirsoknadIndex">
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <SvangerskapspengerForm
         onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
         submitCallback={onSubmit}

@@ -47,6 +47,7 @@ const arbeidsgiverOpplysningerPerId = {
 describe('<RenderUttakTable>', () => {
   it('render uttakstable 1 rad', () => {
     const fields = new MockFieldsWithContent('UttakFieldArray', uttakFields1);
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallow(<RenderUttakTable.WrappedComponent
       intl={intlMock}
       readOnly={false}
@@ -67,6 +68,7 @@ describe('<RenderUttakTable>', () => {
   });
   it('render uttakstable 2 rader', () => {
     const fields = new MockFieldsWithContent('UttakFieldArray', uttakFields2);
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallow(<RenderUttakTable.WrappedComponent
       intl={intlMock}
       readOnly={false}

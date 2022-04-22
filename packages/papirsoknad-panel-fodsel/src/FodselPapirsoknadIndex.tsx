@@ -23,6 +23,7 @@ const FodselPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = ({
   erForeldrepenger,
 }) => (
   <RawIntlProvider value={intl}>
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <TerminFodselDatoPanel
       readOnly={readOnly}
       form={form}

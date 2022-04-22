@@ -32,6 +32,7 @@ const AnnenForelderPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctio
   permisjonRettigheterPanel,
 }) => (
   <RawIntlProvider value={intl}>
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <AnnenForelderPanel
       readOnly={readOnly}
       form={form}

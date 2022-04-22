@@ -68,6 +68,7 @@ export const OppholdInntektOgPeriodeForm: FunctionComponent<PureOwnProps & Mappe
   ...formProps
 }) => (
   <BorderBox>
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <OppholdINorgeOgAdresserFaktaPanel
       readOnly={readOnly}
       id={valgtPeriode.id}
@@ -81,6 +82,7 @@ export const OppholdInntektOgPeriodeForm: FunctionComponent<PureOwnProps & Mappe
         <VerticalSpacer twentyPx />
       </>
     )}
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <PerioderMedMedlemskapFaktaPanel
       readOnly={readOnly}
       id={valgtPeriode.id}
@@ -88,6 +90,7 @@ export const OppholdInntektOgPeriodeForm: FunctionComponent<PureOwnProps & Mappe
       alleKodeverk={alleKodeverk}
     />
     { (hasAksjonspunkt(AVKLAR_OPPHOLDSRETT, valgtPeriode.aksjonspunkter) || hasAksjonspunkt(AVKLAR_LOVLIG_OPPHOLD, valgtPeriode.aksjonspunkter)) && (
+      /* @ts-ignore Fiks cannot be used as a JSX component */
       <StatusForBorgerFaktaPanel
         readOnly={readOnly}
         id={valgtPeriode.id}

@@ -90,6 +90,7 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps & WrappedComponentProps> =
     <>
       {skalViseAvklarStartdatoPanel(aksjonspunkter, aksjonspunkterMinusAvklarStartDato, hasOpenAksjonspunkter, isForeldrepenger) && (
         <>
+          { /* @ts-ignore Fiks cannot be used as a JSX component */ }
           <StartdatoForForeldrepengerperiodenForm
             intl={intl}
             aksjonspunkt={avklarStartdatoOverstyring}
@@ -106,6 +107,7 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps & WrappedComponentProps> =
         </>
       )}
       {(!hasOpen(avklarStartdatoOverstyring)) && (
+        /* @ts-ignore Fiks cannot be used as a JSX component */
         <OppholdInntektOgPerioderForm
           soknad={soknad}
           readOnly={readOnly}

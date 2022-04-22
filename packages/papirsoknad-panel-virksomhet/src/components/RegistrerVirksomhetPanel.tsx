@@ -238,6 +238,7 @@ export class RegistrerVirksomhetPanel extends Component<PureOwnProps & MappedOwn
             <Undertekst className={styles.imageText}><FormattedMessage id="Registrering.RegistrerVirksomhetPanel.Add" /></Undertekst>
           </div>
         </NavFieldGroup>
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <RegistrerVirksomhetModalForm
           showModal={!!editVirksomhet}
           // @ts-ignore Fiks

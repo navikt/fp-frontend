@@ -70,6 +70,7 @@ export const VurderEndringRefusjonFormImpl: FunctionComponent<OwnProps & MappedO
         <VerticalSpacer sixteenPx />
         <TidligereUtbetalinger beregningsgrunnlag={beregningsgrunnlag} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} />
         { andeler.map((andel) => (
+          /* @ts-ignore Fiks cannot be used as a JSX component */
           <VurderEndringRefusjonRad
             refusjonAndel={andel}
             readOnly={readOnly}
@@ -89,6 +90,7 @@ export const VurderEndringRefusjonFormImpl: FunctionComponent<OwnProps & MappedO
         />
 
         <VerticalSpacer twentyPx />
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <FaktaSubmitButton
           formName={formProps.form}
           isSubmittable={submittable && submitEnabled}

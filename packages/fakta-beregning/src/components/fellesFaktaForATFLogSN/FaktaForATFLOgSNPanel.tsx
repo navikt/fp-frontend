@@ -174,6 +174,7 @@ const getFaktaPanels = (
   faktaPanels.push(
     <React.Fragment key="VurderOgFastsettATFL">
       {spacer(true)}
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <VurderOgFastsettATFL
         readOnly={readOnly}
         isAksjonspunktClosed={isAksjonspunktClosed}

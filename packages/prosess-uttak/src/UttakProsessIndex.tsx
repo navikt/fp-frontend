@@ -54,6 +54,7 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
 }) => (
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="UttakProsessIndex" formData={formData} setFormData={setFormData}>
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <UttakPanel
         behandlingUuid={behandling.uuid}
         behandlingType={behandling.type}

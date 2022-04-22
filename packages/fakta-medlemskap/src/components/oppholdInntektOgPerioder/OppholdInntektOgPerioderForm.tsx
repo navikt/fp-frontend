@@ -218,12 +218,14 @@ export class OppholdInntektOgPerioderForm extends Component<Props, OwnState> {
           {getHelpTexts(aksjonspunkter)}
         </AksjonspunktHelpTextTemp>
         { hasAksjonspunkt(AVKLAR_FORTSATT_MEDLEMSKAP, aksjonspunkter) && (
+        /* @ts-ignore Fiks cannot be used as a JSX component */
         <MedlemskapEndringerTabell
           selectedId={valgtPeriode ? valgtPeriode.id : undefined}
           velgPeriodeCallback={this.velgPeriodeCallback}
         />
         )}
         {valgtPeriode && (
+        /* @ts-ignore Fiks cannot be used as a JSX component */
         <OppholdInntektOgPeriodeForm
           key={valgtPeriode.id}
           readOnly={readOnly}

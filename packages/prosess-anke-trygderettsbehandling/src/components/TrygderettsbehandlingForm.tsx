@@ -164,6 +164,7 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
     <VerticalSpacer sixteenPx />
     <Row>
       <Column xs="8">
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <ProsessStegSubmitButton
           formName={formProps.form}
           isReadOnly={readOnly}

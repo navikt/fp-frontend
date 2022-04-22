@@ -15,6 +15,7 @@ const intlMock = getIntlMock(messages);
 
 describe('<OppholdstillatelseTabell>', () => {
   it('skal vise tabeller med oppholdstillatelser', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallow(<OppholdstillatelseTabell.WrappedComponent
       intl={intlMock}
       oppholdstillatelse={[{

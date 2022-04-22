@@ -43,6 +43,7 @@ const LeggTilArbeidsforholdFelter: FunctionComponent<OwnProps> & StaticFunctions
   readOnly,
   formName,
 }) => (
+  /* @ts-ignore Fiks cannot be used as a JSX component */
   <BehandlingFormFieldCleaner
     formName={formName}
     fieldNames={['arbeidsgiverNavn', 'startdato', 'sluttdato', 'stillingsprosent']}

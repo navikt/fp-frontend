@@ -50,6 +50,7 @@ const BeregningInfoPanel: FunctionComponent<OwnProps> = ({
   arbeidsgiverOpplysningerPerId,
 }) => (
   <div>
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <AvklareAktiviteterPanel
       readOnly={readOnly || (hasAksjonspunkt(OVERSTYRING_AV_BEREGNINGSAKTIVITETER, aksjonspunkter) && !erOverstyrer)}
       harAndreAksjonspunkterIPanel={hasAksjonspunkt(VURDER_FAKTA_FOR_ATFL_SN, aksjonspunkter)}
@@ -62,6 +63,7 @@ const BeregningInfoPanel: FunctionComponent<OwnProps> = ({
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
     <VerticalSpacer thirtyTwoPx />
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <VurderFaktaBeregningPanel
       intl={intl}
       readOnly={readOnly || ((hasAksjonspunkt(OVERSTYRING_AV_BEREGNINGSGRUNNLAG, aksjonspunkter) || beregningsgrunnlag.erOverstyrtInntekt) && !erOverstyrer)}

@@ -34,6 +34,7 @@ const OmsorgFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = 
 }) => (
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="OmsorgFaktaIndex" formData={formData} setFormData={setFormData}>
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <OmsorgInfoPanel
         aksjonspunkter={aksjonspunkter}
         ytelsefordeling={ytelsefordeling}

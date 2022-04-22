@@ -109,6 +109,7 @@ export const PermisjonPanel: FunctionComponent<PureOwnProps & MappedOwnProps> & 
             />
           )}
         <VerticalSpacer twentyPx />
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <PermisjonOverforingAvKvoterPanel
           visFeilMelding={visFeilMelding}
           form={form}
@@ -118,6 +119,7 @@ export const PermisjonPanel: FunctionComponent<PureOwnProps & MappedOwnProps> & 
           alleKodeverk={alleKodeverk}
         />
         <VerticalSpacer twentyPx />
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <PermisjonUtsettelsePanel
           visFeilMelding={visFeilMelding}
           form={form}
@@ -126,6 +128,7 @@ export const PermisjonPanel: FunctionComponent<PureOwnProps & MappedOwnProps> & 
           alleKodeverk={alleKodeverk}
         />
         <VerticalSpacer twentyPx />
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <PermisjonGraderingPanel
           visFeilMelding={visFeilMelding}
           form={form}
@@ -134,6 +137,7 @@ export const PermisjonPanel: FunctionComponent<PureOwnProps & MappedOwnProps> & 
           alleKodeverk={alleKodeverk}
         />
         <VerticalSpacer twentyPx />
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <PermisjonOppholdPanel form={form} readOnly={readOnly} namePrefix={TIDSROM_PERMISJON_FORM_NAME_PREFIX} alleKodeverk={alleKodeverk} />
       </div>
     </BorderBox>

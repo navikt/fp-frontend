@@ -29,6 +29,7 @@ const AndreYtelserPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunction
   kunMiliterEllerSiviltjeneste,
 }) => (
   <RawIntlProvider value={intl}>
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <AndreYtelserPanel
       readOnly={readOnly}
       form={form}

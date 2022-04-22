@@ -52,6 +52,7 @@ const KunYtelsePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   <div>
     {skalSjekkeBesteberegning
     && (
+      /* @ts-ignore Fiks cannot be used as a JSX component */
       <KunYtelseBesteberegningPanel
         readOnly={readOnly}
         isAksjonspunktClosed={isAksjonspunktClosed}

@@ -51,6 +51,7 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
       <VerticalSpacer sixteenPx />
       <VerticalSpacer sixteenPx />
       <ReduxWrapper formName="RegistrerPapirsoknadPanel">
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <SoknadTypePickerForm
           setSoknadData={setSoknadData}
           soknadData={soknadData}

@@ -71,6 +71,7 @@ const FrilansPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
                 <RadioOption label={<FormattedMessage id="Registrering.Frilans.Yes" />} value />
                 <RadioOption label={<FormattedMessage id="Registrering.Frilans.No" />} value={false} />
               </RadioGroupField>
+              { /* @ts-ignore Fiks cannot be used as a JSX component */ }
               <FrilansOppdragForFamiliePanel readOnly={readOnly} formName={formName} namePrefix={FRILANS_FORM_NAME_PREFIX} />
             </ArrowBox>
           </RadioOption>

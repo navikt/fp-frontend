@@ -112,6 +112,7 @@ export const PersonArbeidsforholdDetailForm: FunctionComponent<Props> = ({
           arbeidsforholdHandlingVerdi={arbeidsforholdHandlingVerdi}
         />
         <VerticalSpacer twentyPx />
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <ArbeidsforholdBegrunnelse
           readOnly={readOnly}
           formName={PERSON_ARBEIDSFORHOLD_DETAIL_FORM}

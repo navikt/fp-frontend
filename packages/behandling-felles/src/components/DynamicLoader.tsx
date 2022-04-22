@@ -22,6 +22,7 @@ const DynamicLoader = <COMPONENT_PROPS, >({
   if (process.env.NODE_ENV !== 'development') {
     const BeregningFaktaIndex = React.lazy(importPackageComp);
     return (
+      // @ts-ignore Fiks cannot be used as a JSX component
       <ErrorBoundary errorMessageCallback={addErrorMessage}>
         <Suspense fallback={<LoadingPanel />}>
           <BeregningFaktaIndex
@@ -35,6 +36,7 @@ const DynamicLoader = <COMPONENT_PROPS, >({
   const BeregningFaktaIndex = React.lazy(importModuleFederationComp);
 
   return (
+    // @ts-ignore Fiks cannot be used as a JSX component
     <ErrorBoundary
       errorMessageCallback={(error: any) => {
         addErrorMessage(error);

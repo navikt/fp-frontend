@@ -29,6 +29,7 @@ const OppholdINorgePapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctio
   alleKodeverk,
 }) => (
   <RawIntlProvider value={intl}>
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <OppholdINorgePanel
       readOnly={readOnly}
       form={form}

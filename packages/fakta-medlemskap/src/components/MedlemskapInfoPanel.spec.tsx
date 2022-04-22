@@ -26,6 +26,7 @@ describe('<MedlemskapInfoPanel>', () => {
       erAktivt: true,
     };
 
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<MedlemskapInfoPanel.WrappedComponent
       intl={intlMock}
       aksjonspunkter={[avklarStartdatoAksjonspunkt]}
@@ -57,6 +58,7 @@ describe('<MedlemskapInfoPanel>', () => {
       erAktivt: true,
     };
 
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<MedlemskapInfoPanel.WrappedComponent
       intl={intlMock}
       aksjonspunkter={[avklarStartdatoAksjonspunkt]}
@@ -78,6 +80,7 @@ describe('<MedlemskapInfoPanel>', () => {
   });
 
   it('skal vise panel for avklaring av startdato for foreldrepengerperioden, for å tilate manuell korrigering selvom aksjonspunktet ikke finnes', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<MedlemskapInfoPanel.WrappedComponent
       intl={intlMock}
       aksjonspunkter={[]}

@@ -31,6 +31,7 @@ const ArbeidsforholdFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelP
 }) => (
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="ArbeidsforholdFaktaIndex" formData={formData} setFormData={setFormData}>
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <ArbeidsforholdInfoPanel
         arbeidsforhold={inntektArbeidYtelse.arbeidsforhold}
         skalKunneLeggeTilNyeArbeidsforhold={inntektArbeidYtelse.skalKunneLeggeTilNyeArbeidsforhold}

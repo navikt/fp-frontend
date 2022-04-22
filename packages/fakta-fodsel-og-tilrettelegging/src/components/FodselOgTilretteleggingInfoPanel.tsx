@@ -47,6 +47,7 @@ const FodselOgTilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
       {[<FormattedMessage id="FodselOgTilretteleggingInfoPanel.Aksjonspunkt" key="svangerskapspengerAp" />]}
     </AksjonspunktHelpTextTemp>
     <VerticalSpacer eightPx />
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <FodselOgTilretteleggingFaktaForm
       behandlingVersjon={behandlingVersjon}
       svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}

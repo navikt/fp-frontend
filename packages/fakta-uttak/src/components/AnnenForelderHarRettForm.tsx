@@ -96,6 +96,7 @@ export const AnnenForelderHarRettForm: FunctionComponent<PureOwnProps & MappedOw
           />
         </div>
         <VerticalSpacer sixteenPx />
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <FaktaSubmitButton
           formName={formProps.form}
           isSubmittable={!readOnly}

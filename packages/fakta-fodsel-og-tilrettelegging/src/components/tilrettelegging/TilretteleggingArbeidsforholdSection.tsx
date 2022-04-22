@@ -123,6 +123,7 @@ export const TilretteleggingArbeidsforholdSection: FunctionComponent<PureOwnProp
       </FlexContainer>
     )}
     {arbeidsforhold.velferdspermisjoner.map((permisjon) => (
+      /* @ts-ignore Fiks cannot be used as a JSX component */
       <VelferdspermisjonSection
         permisjon={permisjon}
         readOnly={readOnly}

@@ -95,6 +95,7 @@ export const StartdatoForForeldrepengerperiodenForm: FunctionComponent<PureOwnPr
         </Row>
       </FaktaGruppe>
       <VerticalSpacer twentyPx />
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <FaktaSubmitButton
         buttonText={!hasOpenAksjonspunkt ? intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.Oppdater' }) : undefined}
         formName={formProps.form}

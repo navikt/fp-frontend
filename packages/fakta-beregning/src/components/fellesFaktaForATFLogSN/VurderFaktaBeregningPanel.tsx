@@ -142,6 +142,7 @@ export class VurderFaktaBeregningPanelImpl extends Component<OwnProps & Injected
             </AksjonspunktHelpTextTemp>
           )}
           <VerticalSpacer twentyPx />
+          { /* @ts-ignore Fiks cannot be used as a JSX component */ }
           <FaktaForATFLOgSNPanel
             readOnly={readOnly}
             isAksjonspunktClosed={isAksjonspunktClosed(aksjonspunkter)}
@@ -161,6 +162,7 @@ export class VurderFaktaBeregningPanelImpl extends Component<OwnProps & Injected
                 hasBegrunnelse={hasBegrunnelse}
               />
               <VerticalSpacer twentyPx />
+              { /* @ts-ignore Fiks cannot be used as a JSX component */ }
               <FaktaSubmitButton
                 formName={formProps.form}
                 isSubmittable={submittable && submitEnabled && harIkkeEndringerIAvklarMedFlereAksjonspunkter(verdiForAvklarAktivitetErEndret, aksjonspunkter)}
@@ -236,4 +238,5 @@ export default connect(mapStateToPropsFactory)(reduxForm({
   enableReinitialize: true,
   destroyOnUnmount: false,
   keepDirtyOnReinitialize: true,
+/* @ts-ignore Fiks cannot be used as a JSX component */
 })(VurderFaktaBeregningPanelImpl));

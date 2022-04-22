@@ -28,6 +28,7 @@ const OmsorgOgAdopsjonPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunc
   isForeldrepengerFagsak,
 }) => (
   <RawIntlProvider value={intl}>
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <OmsorgOgAdopsjonPanel
       readOnly={readOnly}
       form={form}

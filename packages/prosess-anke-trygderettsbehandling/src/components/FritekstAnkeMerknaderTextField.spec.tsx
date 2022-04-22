@@ -11,6 +11,7 @@ describe('<TrygderettsbehandlingForm>', () => {
 
   it('skal rendre komponent korrekt', () => {
     const wrapper = shallowWithIntl(
+      /* @ts-ignore Fiks cannot be used as a JSX component */
       <FritekstAnkeMerknaderTextField.WrappedComponent
         intl={getIntlMock(messages)}
         sprakkode={sprakkode}

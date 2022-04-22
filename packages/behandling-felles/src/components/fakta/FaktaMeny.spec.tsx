@@ -9,6 +9,7 @@ import FaktaMeny from './FaktaMeny';
 
 describe('<FaktaMeny>', () => {
   it('skal vise data i meny', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallow(<FaktaMeny.WrappedComponent
       intl={getIntlMock(messages)}
       menyData={[{

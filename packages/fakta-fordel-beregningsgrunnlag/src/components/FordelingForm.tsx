@@ -70,6 +70,7 @@ const FordelingFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Injec
   ...formProps
 }) => (
   <form onSubmit={formProps.handleSubmit}>
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <FordelingHelpText
       isAksjonspunktClosed={isAksjonspunktClosed}
       alleKodeverk={alleKodeverk}
@@ -78,6 +79,7 @@ const FordelingFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Injec
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
     <VerticalSpacer twentyPx />
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <FastsettFordeltBeregningsgrunnlag
       readOnly={readOnly}
       isAksjonspunktClosed={isAksjonspunktClosed}
@@ -94,6 +96,7 @@ const FordelingFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Injec
       hasBegrunnelse={hasBegrunnelse}
     />
     <VerticalSpacer twentyPx />
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <FaktaSubmitButton
       formName={formProps.form}
       isSubmittable={submittable && submitEnabled}

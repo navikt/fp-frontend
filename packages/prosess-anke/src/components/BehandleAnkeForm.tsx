@@ -242,6 +242,7 @@ export const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps &
       <VerticalSpacer sixteenPx />
       {kabalEnabled && !readOnly && formValues.sendTilKabal && (
         <div className={styles.confirmVilkarForm}>
+          { /* @ts-ignore Fiks cannot be used as a JSX component */ }
           <ProsessStegSubmitButton
             formName={formProps.form}
             isReadOnly={readOnly}
@@ -367,6 +368,7 @@ export const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps &
         <VerticalSpacer sixteenPx />
         <Row>
           <Column xs="8">
+            { /* @ts-ignore Fiks cannot be used as a JSX component */ }
             <ProsessStegSubmitButton
               formName={formProps.form}
               isReadOnly={readOnly}

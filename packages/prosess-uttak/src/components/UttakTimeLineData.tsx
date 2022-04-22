@@ -273,6 +273,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
                 )}
             {showDelPeriodeModal
                 && (
+                  /* @ts-ignore Fiks cannot be used as a JSX component */
                   <DelOppPeriodeModal
                     cancelEvent={this.hideModal}
                     showModal={showDelPeriodeModal}
@@ -300,6 +301,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
           <VerticalSpacer twentyPx />
         </>
         )}
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <UttakActivity
           cancelSelectedActivity={callbackCancelSelectedActivity}
           updateActivity={callbackUpdateActivity}

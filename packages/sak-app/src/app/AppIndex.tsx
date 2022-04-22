@@ -73,6 +73,7 @@ const AppIndex: FunctionComponent = () => {
   const shouldRenderHome = (!crashMessage && !hasForbiddenOrUnauthorizedErrors);
 
   return (
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} doNotShowErrorPage>
       <AppConfigResolver>
         <>

@@ -54,6 +54,7 @@ const DatepickerField: FunctionComponent<BaseFieldProps & DatepickerFieldProps> 
 }) => (
   <Field
     name={name}
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     component={readOnly ? ReadOnlyField : RenderDatepickerField}
     label={label}
     {...otherProps}

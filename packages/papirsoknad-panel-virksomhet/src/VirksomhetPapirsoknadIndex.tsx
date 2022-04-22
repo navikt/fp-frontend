@@ -21,6 +21,7 @@ const VirksomhetPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   alleKodeverk,
 }) => (
   <RawIntlProvider value={intl}>
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <EgenVirksomhetPanel
       readOnly={readOnly}
       form={form}

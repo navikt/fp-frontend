@@ -190,6 +190,7 @@ export const AnkeResultatForm: FunctionComponent<PureOwnProps & MappedOwnProps &
     <VerticalSpacer sixteenPx />
     <Row>
       <Column xs="12">
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <ProsessStegSubmitButton
           formName={formProps.form}
           isReadOnly={readOnly}
@@ -197,6 +198,7 @@ export const AnkeResultatForm: FunctionComponent<PureOwnProps & MappedOwnProps &
           text={intl.formatMessage({ id: 'Ankebehandling.Resultat.SendTilMedunderskriver' })}
         />
         <span>&nbsp;</span>
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <ProsessStegSubmitButton
           formName={formProps.form}
           isReadOnly={readOnly}

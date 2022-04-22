@@ -84,6 +84,7 @@ export const UttakFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps & I
             {formProps.warning}
           </span>
         )}
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <UttakPerioder
         hasOpenAksjonspunkter={hasOpenAksjonspunkter}
         readOnly={readOnly}

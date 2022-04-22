@@ -78,6 +78,7 @@ export const ArbeidsforholdInfoPanelImpl: FunctionComponent<PureOwnProps & Injec
       </AksjonspunktHelpTextTemp>
     )}
     <form onSubmit={formProps.handleSubmit}>
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <PersonArbeidsforholdPanel
         intl={intl}
         readOnly={readOnly}
@@ -87,6 +88,7 @@ export const ArbeidsforholdInfoPanelImpl: FunctionComponent<PureOwnProps & Injec
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
       { harAksjonspunkt(aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD, aksjonspunkter) && (
+      /* @ts-ignore Fiks cannot be used as a JSX component */
       <BekreftOgForsettKnapp
         readOnly={readOnly || (!hasOpenAksjonspunkter && formProps.pristine)}
         isSubmitting={formProps.submitting}

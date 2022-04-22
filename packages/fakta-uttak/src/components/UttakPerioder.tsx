@@ -418,6 +418,7 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
         <FlexContainer wrap>
           <FlexRow>
             <FlexColumn>
+              { /* @ts-ignore Fiks cannot be used as a JSX component */ }
               <FaktaSubmitButton
                 formName="UttakFaktaForm"
                 isSubmittable={submittable}
@@ -435,6 +436,7 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
         <VerticalSpacer eightPx />
 
         {isNyPeriodeFormOpen && (
+          /* @ts-ignore Fiks cannot be used as a JSX component */
           <UttakNyPeriode
             newPeriodeCallback={this.newPeriodeCallback}
             newPeriodeResetCallback={this.newPeriodeResetCallback}
@@ -448,6 +450,7 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
           />
         )}
         {periodeSlett && (
+          /* @ts-ignore Fiks cannot be used as a JSX component */
           <UttakSlettPeriodeModal
             showModal={showModalSlettPeriode}
             periode={periodeSlett}

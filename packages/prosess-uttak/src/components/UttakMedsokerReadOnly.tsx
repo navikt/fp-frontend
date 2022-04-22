@@ -54,6 +54,7 @@ const UttakMedsokerReadOnly: FunctionComponent<OwnProps> = ({
           </FloatRight>
         </Column>
       </Row>
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <UttakActivity
         cancelSelectedActivity={callbackCancelSelectedActivity}
         updateActivity={callbackUpdateActivity}

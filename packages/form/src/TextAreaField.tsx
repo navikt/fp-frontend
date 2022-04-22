@@ -67,6 +67,7 @@ const TextAreaField: FunctionComponent<BaseFieldProps & TextAreaFieldProps> = ({
   <Field
     name={name}
     validate={validate}
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     component={readOnly ? ReadOnlyField : renderNavTextArea}
     label={label}
     {...otherProps}
