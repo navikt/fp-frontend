@@ -40,7 +40,6 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
         name="klageVurdering"
         validate={[required]}
         readOnly={readOnly}
-        className={readOnly ? styles.selectReadOnly : null}
       >
         <RadioOption value={klageVurderingType.MEDHOLD_I_KLAGE} label={intl.formatMessage({ id: 'Klage.ResolveKlage.ChangeVedtak' })} />
         <RadioOption value={klageVurderingType.STADFESTE_YTELSESVEDTAK} label={intl.formatMessage({ id: 'Klage.ResolveKlage.KeepVedtakNfp' })} />
@@ -62,7 +61,6 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
             name="klageVurderingOmgjoer"
             validate={[required]}
             readOnly={readOnly}
-            className={readOnly ? styles.selectReadOnly : null}
             direction="vertical"
           >
             <RadioOption value={klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE} label={intl.formatMessage({ id: 'Klage.Behandle.Omgjort' })} />

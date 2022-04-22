@@ -223,7 +223,7 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
       )}
       {readOnly && (
         <>
-          <RadioGroupField name="dummy" className={styles.text} readOnly={readOnly} isEdited={isEdited(hasAksjonspunkt, erVilkarOk)}>
+          <RadioGroupField name="dummy" readOnly={readOnly} isEdited={isEdited(hasAksjonspunkt, erVilkarOk)}>
             {[<RadioOption
               key="dummy"
               label={(

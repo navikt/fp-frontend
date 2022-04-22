@@ -9,18 +9,18 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import ErrorBoundary from './ErrorBoundary';
 
 interface OwnProps {
-  altComp1: () => Promise<any>;
-  altComp2: () => Promise<any>;
+  importModuleFederationComp: () => Promise<any>;
+  importPackageComp: () => Promise<any>;
 }
 
 const DynamicLoader = <COMPONENT_PROPS, >({
-  altComp1,
-  altComp2,
+  importModuleFederationComp,
+  importPackageComp,
   ...props
 }: OwnProps & COMPONENT_PROPS) => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
   if (process.env.NODE_ENV !== 'development') {
-    const BeregningFaktaIndex = React.lazy(altComp2);
+    const BeregningFaktaIndex = React.lazy(importPackageComp);
     return (
       <ErrorBoundary errorMessageCallback={addErrorMessage}>
         <Suspense fallback={<LoadingPanel />}>
@@ -32,7 +32,7 @@ const DynamicLoader = <COMPONENT_PROPS, >({
     );
   }
 
-  const BeregningFaktaIndex = React.lazy(altComp1);
+  const BeregningFaktaIndex = React.lazy(importModuleFederationComp);
 
   return (
     <ErrorBoundary
@@ -41,7 +41,7 @@ const DynamicLoader = <COMPONENT_PROPS, >({
       }}
       doNotShowErrorMessageWhenScriptLoadError
       fallback={() => {
-        const Test = React.lazy(altComp2);
+        const Test = React.lazy(importPackageComp);
         return (
           <Suspense fallback={<LoadingPanel />}>
             <Test

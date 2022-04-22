@@ -49,7 +49,6 @@ const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps> = ({
             name="klageVurdering"
             validate={[required]}
             readOnly={readOnly}
-            className={readOnly ? styles.selectReadOnly : null}
             direction="vertical"
           >
             <RadioOption value={klageVurderingType.HJEMSENDE_UTEN_Å_OPPHEVE} label={intl.formatMessage({ id: 'Klage.Behandle.Hjemsendt' })} />
@@ -75,7 +74,6 @@ const KlageVurderingRadioOptionsKa: FunctionComponent<OwnProps> = ({
               name="klageVurderingOmgjoer"
               validate={[required]}
               readOnly={readOnly}
-              className={readOnly ? styles.selectReadOnly : null}
               direction="vertical"
             >
               <RadioOption value={klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE} label={intl.formatMessage({ id: 'Klage.Behandle.Omgjort' })} />

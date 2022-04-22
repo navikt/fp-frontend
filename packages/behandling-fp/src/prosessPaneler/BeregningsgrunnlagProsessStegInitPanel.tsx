@@ -9,12 +9,11 @@ import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar,
 } from '@fpsak-frontend/types';
-import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
+import { ProsessDefaultInitPanel, ProsessPanelInitProps, DynamicLoader } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@navikt/ft-utils';
 
 import messages from '../../i18n/nb_NO.json';
 import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
-import DynamicLoader from '../DynamicLoader';
 
 const intl = createIntl(messages);
 
@@ -62,8 +61,8 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
     renderPanel={(data) => (
       <DynamicLoader
         // @ts-ignore
-        altComp1={() => import('ft_prosess_beregningsgrunnlag/ProsessBeregningsgrunnlag')}// eslint-disable-line import/no-unresolved
-        altComp2={() => import('@navikt/ft-prosess-beregningsgrunnlag')}
+        importModuleFederationComp={() => import('ft_prosess_beregningsgrunnlag/ProsessBeregningsgrunnlag')}// eslint-disable-line import/no-unresolved
+        importPackageComp={() => import('@navikt/ft-prosess-beregningsgrunnlag')}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...data}
       />

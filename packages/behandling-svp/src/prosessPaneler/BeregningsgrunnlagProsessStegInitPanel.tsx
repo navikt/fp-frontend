@@ -4,13 +4,12 @@ import React, {
 
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import BeregningsgrunnlagProsessIndex from '@navikt/ft-prosess-beregningsgrunnlag';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar,
 } from '@fpsak-frontend/types';
-import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
+import { ProsessDefaultInitPanel, ProsessPanelInitProps, DynamicLoader } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@navikt/ft-utils';
 
 import messages from '../../i18n/nb_NO.json';
@@ -60,7 +59,10 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
     prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Beregning' })}
     skalPanelVisesIMeny={(_initData, initState) => initState === RestApiState.SUCCESS}
     renderPanel={(data) => (
-      <BeregningsgrunnlagProsessIndex
+      <DynamicLoader
+        // @ts-ignore
+        importModuleFederationComp={() => import('ft_prosess_beregningsgrunnlag/ProsessBeregningsgrunnlag')}// eslint-disable-line import/no-unresolved
+        importPackageComp={() => import('@navikt/ft-prosess-beregningsgrunnlag')}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...data}
       />

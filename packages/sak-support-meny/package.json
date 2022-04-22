@@ -7,9 +7,9 @@
   "dependencies": {
     "@fpsak-frontend/assets": "1.0.0",
     "@navikt/ft-kodeverk": "^1.0.0",
-    "@navikt/ft-types": "^1.0.0",
-    "@navikt/ft-ui-komponenter": "1.0.0",
-    "@navikt/ft-utils": "1.0.0",
+    "@navikt/ft-types": "^1.0.1",
+    "@navikt/ft-ui-komponenter": "1.0.1",
+    "@navikt/ft-utils": "1.0.1",
     "classnames": "2.3.1",
     "react": "17.0.2",
     "react-intl": "5.24.8"

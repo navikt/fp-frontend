@@ -1,3 +1,4 @@
+export { default as DynamicLoader } from './src/components/DynamicLoader';
 export { default as BehandlingContainer } from './src/components/BehandlingContainer';
 export { default as OverstyringPanelDef } from './src/components/prosess/OverstyringPanelDef';
 export { default as FatterVedtakStatusModal } from './src/components/modaler/vedtak/FatterVedtakStatusModal';

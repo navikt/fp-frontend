@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 
 import { Arbeidsforhold } from '@fpsak-frontend/types';
+import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import PermisjonPeriode from './PermisjonPeriode';
 
@@ -40,7 +41,7 @@ describe('<PermisjonPeriode>', () => {
     const msg = wrapper.find(FormattedMessage);
     expect(msg).toHaveLength(1);
     expect(msg.props().id).toEqual('PersonArbeidsforholdDetailForm.Permisjon');
-    const periode = wrapper.find('PeriodLabel');
+    const periode = wrapper.find(PeriodLabel);
     expect(periode).toHaveLength(1);
     // @ts-ignore
     expect(periode.props().dateStringFom).toEqual('2018-10-10');
@@ -67,7 +68,7 @@ describe('<PermisjonPeriode>', () => {
     const msg = wrapper.find(FormattedMessage);
     expect(msg).toHaveLength(1);
     expect(msg.prop('id')).toEqual('PersonArbeidsforholdDetailForm.Permisjoner');
-    const perioder = wrapper.find('PeriodLabel');
+    const perioder = wrapper.find(PeriodLabel);
     expect(perioder.get(0).props.dateStringFom).toEqual('2015-01-01');
     expect(perioder.get(0).props.dateStringTom).toEqual('');
     expect(perioder.get(1).props.dateStringFom).toEqual('2017-01-01');

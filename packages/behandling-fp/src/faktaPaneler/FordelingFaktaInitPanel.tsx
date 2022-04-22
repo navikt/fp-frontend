@@ -1,16 +1,16 @@
 import React, {
   FunctionComponent,
 } from 'react';
+import { createIntl } from '@navikt/ft-utils';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import FordelBeregningsgrunnlagFaktaIndex from '@fpsak-frontend/fakta-fordel-beregningsgrunnlag';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
-import { createIntl } from '@navikt/ft-utils';
 
-import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
-import DynamicLoader from '../DynamicLoader';
 import messages from '../../i18n/nb_NO.json';
+import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
 const intl = createIntl(messages);
 
@@ -48,13 +48,7 @@ const FordelingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
     skalPanelVisesIMeny={(initData) => !!initData.aksjonspunkter
       && !!initData.aksjonspunkter.some((ap) => AKSJONSPUNKT_KODER.some((kode) => kode === ap.definisjon))}
     renderPanel={(data) => (
-      <DynamicLoader
-        // @ts-ignore
-        altComp1={() => import('ft_fakta_fordel_beregningsgrunnlag/FaktaFordelBeregningsgrunnlag')}// eslint-disable-line import/no-unresolved
-        altComp2={() => import('@fpsak-frontend/fakta-fordel-beregningsgrunnlag')}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        {...data}
-      />
+      <FordelBeregningsgrunnlagFaktaIndex arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} {...data} />
     )}
   />
 );
