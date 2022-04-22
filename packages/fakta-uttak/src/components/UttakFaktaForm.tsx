@@ -7,7 +7,7 @@ import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import {
   dateFormat, guid, getKodeverknavnFn, omitMany,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold, FamilieHendelseSamling,
@@ -84,6 +84,7 @@ export const UttakFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps & I
             {formProps.warning}
           </span>
         )}
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <UttakPerioder
         hasOpenAksjonspunkter={hasOpenAksjonspunkter}
         readOnly={readOnly}

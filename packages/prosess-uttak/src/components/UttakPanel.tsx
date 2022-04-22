@@ -5,8 +5,8 @@ import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl'
 import { createSelector } from 'reselect';
 import { Undertittel } from 'nav-frontend-typografi';
 
-import { omitOne } from '@fpsak-frontend/utils';
-import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { omitOne } from '@navikt/ft-utils';
+import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
@@ -155,6 +155,7 @@ export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & W
     )}
     {uttaksresultat && (
       <form onSubmit={formProps.handleSubmit}>
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <Uttak
           intl={intl}
           submitting={formProps.submitting}

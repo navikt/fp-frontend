@@ -4,8 +4,8 @@ import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
-import { getAddresses } from '@fpsak-frontend/utils';
-import { DateLabel, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
+import { getAddresses } from '@navikt/ft-utils';
+import { DateLabel, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { PersonopplysningerBasis, Personoversikt } from '@fpsak-frontend/types';
 

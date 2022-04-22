@@ -9,13 +9,13 @@ import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { RadioGroupField, RadioOption, DatepickerField } from '@fpsak-frontend/form';
 import {
   required, getKodeverknavnFn, DDMMYYYY_DATE_FORMAT, hasValidDate,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import opptjeningAktivitetTyper from '@fpsak-frontend/kodeverk/src/opptjeningAktivitetType';
 
 import {
   Table, TableRow, TableColumn, PeriodLabel, DateLabel, EditedIcon,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import {
   ArbeidsgiverOpplysningerPerId, BeregningAktivitet, AlleKodeverk,
 } from '@fpsak-frontend/types';

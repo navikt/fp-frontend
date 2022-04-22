@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
@@ -90,6 +90,7 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps & WrappedComponentProps> =
     <>
       {skalViseAvklarStartdatoPanel(aksjonspunkter, aksjonspunkterMinusAvklarStartDato, hasOpenAksjonspunkter, isForeldrepenger) && (
         <>
+          { /* @ts-ignore Fiks cannot be used as a JSX component */ }
           <StartdatoForForeldrepengerperiodenForm
             intl={intl}
             aksjonspunkt={avklarStartdatoOverstyring}
@@ -106,6 +107,7 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps & WrappedComponentProps> =
         </>
       )}
       {(!hasOpen(avklarStartdatoOverstyring)) && (
+        /* @ts-ignore Fiks cannot be used as a JSX component */
         <OppholdInntektOgPerioderForm
           soknad={soknad}
           readOnly={readOnly}

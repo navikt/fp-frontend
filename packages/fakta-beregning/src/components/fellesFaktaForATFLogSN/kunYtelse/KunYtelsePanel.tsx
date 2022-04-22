@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
-import { formatCurrencyNoKr, removeSpacesFromNumber } from '@fpsak-frontend/utils';
+import { formatCurrencyNoKr, removeSpacesFromNumber } from '@navikt/ft-utils';
 import {
   AndelForFaktaOmBeregning,
   ArbeidsgiverOpplysningerPerId,
@@ -52,6 +52,7 @@ const KunYtelsePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   <div>
     {skalSjekkeBesteberegning
     && (
+      /* @ts-ignore Fiks cannot be used as a JSX component */
       <KunYtelseBesteberegningPanel
         readOnly={readOnly}
         isAksjonspunktClosed={isAksjonspunktClosed}

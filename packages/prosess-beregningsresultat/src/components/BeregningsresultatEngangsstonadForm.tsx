@@ -5,16 +5,15 @@ import { Column, Row } from 'nav-frontend-grid';
 import {
   Element, Undertekst, Undertittel, Normaltekst,
 } from 'nav-frontend-typografi';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import { Aksjonspunkt, BeregningsresultatEs } from '@fpsak-frontend/types';
 import {
-  VerticalSpacer, OverstyringKnapp,
-} from '@fpsak-frontend/shared-components';
+  VerticalSpacer, OverstyringKnapp, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import {
   formatCurrencyWithKr, hasValidInteger, maxValue, minValue, required, decodeHtmlEntity,
-} from '@fpsak-frontend/utils';
-import { InputField, Form } from '@fpsak-frontend/form-hooks';
+} from '@navikt/ft-utils';
+import { InputField, Form } from '@navikt/ft-form-hooks';
 import aksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { OverstyringPanel } from '@fpsak-frontend/prosess-felles';
 import { OverstyringBeregningAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';

@@ -1,14 +1,16 @@
 import React, {
   FunctionComponent, useMemo, useState, useCallback, ReactNode, MouseEvent,
 } from 'react';
-import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Element, Undertittel, Normaltekst } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import {
-  FlexColumn, FlexContainer, FlexRow, Image,
-} from '@navikt/fp-react-components';
+  FlexColumn, FlexContainer, FlexRow, Image, VerticalSpacer, OkAvbrytModal,
+} from '@navikt/ft-ui-komponenter';
+import {
+  formHooks,
+} from '@navikt/ft-form-hooks';
 
 import avslagsarsakCodes from '@fpsak-frontend/kodeverk/src/avslagsarsakCodes';
 import konsekvensForYtelsen from '@fpsak-frontend/kodeverk/src/konsekvensForYtelsen';
@@ -17,9 +19,6 @@ import popOutPilSvg from '@fpsak-frontend/assets/images/pop-out-pil.svg';
 import endreSvg from '@fpsak-frontend/assets/images/endre.svg';
 import endreDisabletSvg from '@fpsak-frontend/assets/images/endre_disablet.svg';
 import { Behandling, Aksjonspunkt, Behandlingsresultat } from '@fpsak-frontend/types';
-import {
-  VerticalSpacer, OkAvbrytModal,
-} from '@fpsak-frontend/shared-components';
 import behandlingStatusCode from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import avslattImage from '@fpsak-frontend/assets/images/avslaatt_hover.svg';
 import innvilgetImage from '@fpsak-frontend/assets/images/innvilget_hover.svg';
@@ -92,7 +91,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const { setValue, formState: { isSubmitting } } = useFormContext();
+  const { setValue, formState: { isSubmitting } } = formHooks.useFormContext();
 
   const {
     behandlingsresultat, behandlingPaaVent, sprakkode, status,

@@ -164,6 +164,7 @@ export const VurderAktiviteterPanel:FunctionComponent<OwnProps> & StaticFunction
   return (
     <>
       {listeSomSkalVurderes.map((aktivitetMap) => (
+        /* @ts-ignore Fiks cannot be used as a JSX component */
         <VurderAktiviteterTabell
           readOnly={readOnly}
           isAksjonspunktClosed={isAksjonspunktClosed}

@@ -3,8 +3,8 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { required } from '@fpsak-frontend/utils';
-import { BorderBox } from '@fpsak-frontend/shared-components';
+import { required } from '@navikt/ft-utils';
+import { BorderBox } from '@navikt/ft-ui-komponenter';
 
 import styles from './dekningsgradPanel.less';
 

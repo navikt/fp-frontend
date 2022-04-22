@@ -31,6 +31,7 @@ const arbeidsforhold = {
 
 describe('<ArbeidsforholdRadioknapper>', () => {
   it('Skal ikke vise radioknapper for aktivt arbeidsforhold når mottatt IM', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
       intl={intlMock}
       readOnly={false}
@@ -44,6 +45,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(wrapper.find('[name=\'aktivtArbeidsforholdHandlingField\']')).toHaveLength(0);
   });
   it('skal vise radioknapper når aktivt arbeidsforhold, uten IM, fom før stp, tom etter stp', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
       intl={intlMock}
       readOnly={false}
@@ -69,6 +71,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(4).props.disabled).toEqual(true);
   });
   it('skal vise radioknapper når aktivt arbeidsforhold, uten IM, fom før stp, tom samtidig som stp', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
       intl={intlMock}
       readOnly={false}
@@ -95,6 +98,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(3).props.disabled).toEqual(true);
   });
   it('skal vise radioknapper når aktivt arbeidsforhold, uten IM, fom før stp, tom undefined', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
       intl={intlMock}
       readOnly={false}
@@ -123,6 +127,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(4).props.disabled).toEqual(true);
   });
   it('skal vise radioknapper når aktivt arbeidsforhold, uten IM, fom etter stp, tom undefined', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
       intl={intlMock}
       readOnly={false}
@@ -150,6 +155,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(3).props.disabled).toEqual(true);
   });
   it('Skal vise enablet overstyrtTom picker, uten IM, tomDato lik stp, med brukJustertePerioder', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
       intl={intlMock}
       readOnly={false}
@@ -173,6 +179,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(1).props.disabled).toEqual(false);
   });
   it('Skal vise disablet overstyrtTom picker, uten IM, tomDato lik stp, ikke med brukJustertPerioder', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
       intl={intlMock}
       readOnly={false}
@@ -196,6 +203,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(1).props.disabled).toEqual(true);
   });
   it('Skal vise RadioOption for fjerning av arbeidsforhold når arbeidsforhold ikke fra AA-reg', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
       intl={intlMock}
       readOnly={false}
@@ -219,6 +227,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(wrapper.find('[name=\'overstyrtTom\']')).toHaveLength(0);
   });
   it('Skal vise RadioOption knapper som er enabled hvis lagt til av saksbehandler', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
       intl={intlMock}
       readOnly={false}
@@ -247,6 +256,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(4).props.disabled).toEqual(true);
   });
   it('Skal vise utvidet RadioOptions for aktivt arbeidsforhold når arbeidsforholdet har permisjon uten tom og ikke mottatt IM', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
       intl={intlMock}
       readOnly={false}
@@ -281,6 +291,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(4).props.disabled).toEqual(false);
   });
   it('Skal ikke vise utvidet RadioOptions for aktivt arbeidsforhold når arbeidsforholdet har permisjon uten tom og mottatt IM', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
       intl={intlMock}
       readOnly={false}
@@ -309,6 +320,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(1).props.label.id).toEqual('PersonArbeidsforholdDetailForm.SokerErIPermisjon');
   });
   it('Skal vise utvidet RadioOptions for aktivt arbeidsforhold når arbeidsforholdet har permisjon med tom og ikke mottatt IM', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
       intl={intlMock}
       readOnly={false}
@@ -343,6 +355,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(4).props.disabled).toEqual(false);
   });
   it('Skal ikke vise utvidet RadioOptions for aktivt arbeidsforhold når arbeidsforholdet har permisjon med tom og mottatt IM', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
       intl={intlMock}
       readOnly={false}
@@ -372,6 +385,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
   });
   it('Skal vise utvidet RadioOptions for aktivt arbeidsforhold når arbeidsforholdet har flere permisjoner uten mottatt IM, '
     + 'samt disable knapp hvor saksbehandler kan velge at soeker er i permisjon', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
       intl={intlMock}
       readOnly={false}
@@ -412,6 +426,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
   });
   it('Skal vise utvidet RadioOptions for aktivt arbeidsforhold når arbeidsforholdet har flere permisjoner og mottatt IM, '
     + 'samt disable knapp hvor saksbehandler kan velge at soeker er i permisjon', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
       intl={intlMock}
       readOnly={false}
@@ -445,6 +460,7 @@ describe('<ArbeidsforholdRadioknapper>', () => {
     expect(radioOptions.get(1).props.disabled).toEqual(true);
   });
   it('skal kun vise to RadioOptions når arbeidsforholdhandling er undefined', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<ArbeidsforholdRadioknapper.WrappedComponent
       intl={intlMock}
       readOnly={false}

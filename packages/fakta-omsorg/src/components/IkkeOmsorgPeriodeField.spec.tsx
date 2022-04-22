@@ -14,6 +14,7 @@ describe('<IkkeOmsorgPeriodeField>', () => {
   it('Skal rendre IkkeOmsorgPeriodeField', () => {
     const fields = new MockFields('ikkeOmsorgPerioder', 1);
 
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<IkkeOmsorgPeriodeField.WrappedComponent
       intl={getIntlMock(messages)}
       readOnly={false}

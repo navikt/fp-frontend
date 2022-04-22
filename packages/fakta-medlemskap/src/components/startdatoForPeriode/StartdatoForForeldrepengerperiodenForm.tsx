@@ -6,11 +6,11 @@ import { connect } from 'react-redux';
 import { Column, Row } from 'nav-frontend-grid';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 
-import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
   hasValidDate, hasValidText, maxLength, minLength, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { DatepickerField, TextAreaField } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
@@ -95,6 +95,7 @@ export const StartdatoForForeldrepengerperiodenForm: FunctionComponent<PureOwnPr
         </Row>
       </FaktaGruppe>
       <VerticalSpacer twentyPx />
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <FaktaSubmitButton
         buttonText={!hasOpenAksjonspunkt ? intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.Oppdater' }) : undefined}
         formName={formProps.form}

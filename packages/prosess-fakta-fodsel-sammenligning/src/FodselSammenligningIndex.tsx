@@ -4,7 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 import {
   AvklartBarn, FamilieHendelse, Soknad,
 } from '@fpsak-frontend/types';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import FodselSammenligningPanel from './components/FodselSammenligningPanel';
 import messages from '../i18n/nb_NO.json';

@@ -5,7 +5,6 @@ import { FormattedMessage } from 'react-intl';
 import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { Element, Undertekst } from 'nav-frontend-typografi';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import {
   CheckboxField,
@@ -28,12 +27,12 @@ import {
   minLength,
   required,
   requiredIfNotPristine,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import uttakArbeidType from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
 import {
-  ArrowBox, VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+  ArrowBox, VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';

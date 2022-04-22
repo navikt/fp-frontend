@@ -1,17 +1,15 @@
 import React, { ReactNode, FunctionComponent } from 'react';
-import { useFormContext } from 'react-hook-form';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 
 import {
-  FlexContainer, FlexRow, FlexColumn, Image,
-} from '@navikt/fp-react-components';
+  FlexContainer, FlexRow, FlexColumn, Image, EditedIcon, VerticalSpacer, AksjonspunktBox,
+} from '@navikt/ft-ui-komponenter';
 
-import { EditedIcon, VerticalSpacer, AksjonspunktBox } from '@fpsak-frontend/shared-components';
-import { TextAreaField } from '@fpsak-frontend/form-hooks';
+import { TextAreaField, formHooks } from '@navikt/ft-form-hooks';
 import {
   hasValidText, maxLength, minLength, createIntl,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel_ny.svg';
 
 import messages from '../../i18n/nb_NO.json';
@@ -50,7 +48,7 @@ const OverstyringPanel: FunctionComponent<OwnProps> = ({
   erIkkeGodkjentAvBeslutter,
   children,
 }) => {
-  const { formState: { isDirty } } = useFormContext();
+  const { formState: { isDirty } } = formHooks.useFormContext();
   const isRequiredFn = getIsBegrunnelseRequired(isDirty);
   return (
     <AksjonspunktBox className={styles.aksjonspunktMargin} erAksjonspunktApent={erOverstyrt} erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}>

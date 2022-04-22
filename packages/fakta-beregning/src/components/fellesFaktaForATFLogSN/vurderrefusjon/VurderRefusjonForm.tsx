@@ -1,8 +1,8 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { required } from '@fpsak-frontend/utils';
+import { required } from '@navikt/ft-utils';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import {
   ArbeidsgiverOpplysningerPerId,

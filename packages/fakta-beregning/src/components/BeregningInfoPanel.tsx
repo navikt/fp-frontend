@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { ArbeidsgiverOpplysningerPerId, AlleKodeverk } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
@@ -50,6 +50,7 @@ const BeregningInfoPanel: FunctionComponent<OwnProps> = ({
   arbeidsgiverOpplysningerPerId,
 }) => (
   <div>
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <AvklareAktiviteterPanel
       readOnly={readOnly || (hasAksjonspunkt(OVERSTYRING_AV_BEREGNINGSAKTIVITETER, aksjonspunkter) && !erOverstyrer)}
       harAndreAksjonspunkterIPanel={hasAksjonspunkt(VURDER_FAKTA_FOR_ATFL_SN, aksjonspunkter)}
@@ -62,6 +63,7 @@ const BeregningInfoPanel: FunctionComponent<OwnProps> = ({
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
     <VerticalSpacer thirtyTwoPx />
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <VurderFaktaBeregningPanel
       intl={intl}
       readOnly={readOnly || ((hasAksjonspunkt(OVERSTYRING_AV_BEREGNINGSGRUNNLAG, aksjonspunkter) || beregningsgrunnlag.erOverstyrtInntekt) && !erOverstyrer)}

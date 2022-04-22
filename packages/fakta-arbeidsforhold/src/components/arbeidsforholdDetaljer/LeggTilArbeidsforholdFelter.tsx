@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { IntlShape } from 'react-intl';
 import moment from 'moment';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import {
   DDMMYYYY_DATE_FORMAT, hasValidDate, hasValidInteger, maxValue, minValue, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { DatepickerField, InputField } from '@fpsak-frontend/form';
 
 import BehandlingFormFieldCleaner from '../../util/BehandlingFormFieldCleaner';
@@ -43,6 +43,7 @@ const LeggTilArbeidsforholdFelter: FunctionComponent<OwnProps> & StaticFunctions
   readOnly,
   formName,
 }) => (
+  /* @ts-ignore Fiks cannot be used as a JSX component */
   <BehandlingFormFieldCleaner
     formName={formName}
     fieldNames={['arbeidsgiverNavn', 'startdato', 'sluttdato', 'stillingsprosent']}

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { required } from '@fpsak-frontend/utils';
+import { required } from '@navikt/ft-utils';
 import { FaktaOmBeregning } from '@fpsak-frontend/types';
 import { VurderMilitærValues } from '../../../typer/FaktaBeregningTypes';
 

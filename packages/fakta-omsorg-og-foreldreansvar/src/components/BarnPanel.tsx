@@ -3,8 +3,8 @@ import { FormattedMessage, WrappedComponentProps } from 'react-intl';
 import moment from 'moment';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
-import { VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Soknad } from '@fpsak-frontend/types';
 

@@ -3,8 +3,8 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import moment from 'moment';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
-import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
+import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { KodeverkMedNavn, RelatertTilgrensedYtelse } from '@fpsak-frontend/types';
 
 import styles from './personYtelserTable.less';

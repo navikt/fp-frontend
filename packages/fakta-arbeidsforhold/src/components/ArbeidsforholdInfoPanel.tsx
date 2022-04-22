@@ -5,8 +5,8 @@ import { InjectedFormProps, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
-import { omitMany } from '@fpsak-frontend/utils';
+import { AksjonspunktHelpTextTemp } from '@navikt/ft-ui-komponenter';
+import { omitMany } from '@navikt/ft-utils';
 import {
   Aksjonspunkt, Arbeidsforhold, ArbeidsgiverOpplysningerPerId, AlleKodeverk,
 } from '@fpsak-frontend/types';
@@ -78,6 +78,7 @@ export const ArbeidsforholdInfoPanelImpl: FunctionComponent<PureOwnProps & Injec
       </AksjonspunktHelpTextTemp>
     )}
     <form onSubmit={formProps.handleSubmit}>
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <PersonArbeidsforholdPanel
         intl={intl}
         readOnly={readOnly}
@@ -87,6 +88,7 @@ export const ArbeidsforholdInfoPanelImpl: FunctionComponent<PureOwnProps & Injec
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
       { harAksjonspunkt(aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD, aksjonspunkter) && (
+      /* @ts-ignore Fiks cannot be used as a JSX component */
       <BekreftOgForsettKnapp
         readOnly={readOnly || (!hasOpenAksjonspunkter && formProps.pristine)}
         isSubmitting={formProps.submitting}

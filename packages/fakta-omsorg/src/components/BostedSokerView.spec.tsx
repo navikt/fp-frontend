@@ -1,7 +1,7 @@
 import React from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
 import EtikettBase from 'nav-frontend-etiketter';
-import { Tooltip } from '@navikt/fp-react-components';
+import { Tooltip } from '@navikt/ft-ui-komponenter';
 
 import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import sivilstandType from '@fpsak-frontend/kodeverk/src/sivilstandType';

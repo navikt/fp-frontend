@@ -8,7 +8,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { CheckboxField } from '@fpsak-frontend/form';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import arbeidType from '@fpsak-frontend/kodeverk/src/arbeidType';
-import { ArrowBox, BorderBox } from '@fpsak-frontend/shared-components';
+import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
 import RenderAndreYtelserPerioderFieldArray from './RenderAndreYtelserPerioderFieldArray';

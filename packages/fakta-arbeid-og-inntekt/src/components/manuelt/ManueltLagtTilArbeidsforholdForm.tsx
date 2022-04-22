@@ -7,21 +7,18 @@ import { Element, Undertittel } from 'nav-frontend-typografi';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
 import { Column, Row } from 'nav-frontend-grid';
 import {
-  Image, FlexColumn, FlexContainer, FlexRow,
-} from '@navikt/fp-react-components';
+  Image, FlexColumn, FlexContainer, FlexRow, VerticalSpacer, FloatRight, OkAvbrytModal,
+} from '@navikt/ft-ui-komponenter';
 
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 import binIcon from '@fpsak-frontend/assets/images/bin.svg';
 import { AoIArbeidsforhold, ManueltArbeidsforhold } from '@fpsak-frontend/types';
 import {
   hasValidText, maxLength, minLength, hasValidDate, hasValidInteger, required, minValue, maxValue, dateAfterOrEqual,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import {
   TextAreaField, Datepicker, InputField, Form,
-} from '@fpsak-frontend/form-hooks';
-import {
-  VerticalSpacer, FloatRight, OkAvbrytModal,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-form-hooks';
 
 import ArbeidsforholdOgInntekt from '../../types/arbeidsforholdOgInntekt';
 

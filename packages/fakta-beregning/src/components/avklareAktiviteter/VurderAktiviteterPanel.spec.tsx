@@ -1,4 +1,4 @@
-import { isRequiredMessage } from '@fpsak-frontend/utils';
+import { isRequiredMessage } from '@navikt/ft-utils';
 import VurderAktiviteterPanel, { leggTilAktivitet, finnPlasseringIListe } from './VurderAktiviteterPanel';
 import { lagAktivitetFieldId } from './VurderAktiviteterTabell';
 

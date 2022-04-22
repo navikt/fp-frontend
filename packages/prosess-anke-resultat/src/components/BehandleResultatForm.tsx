@@ -6,9 +6,9 @@ import { InjectedFormProps, reduxForm } from 'redux-form';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
-import { getKodeverknavnFn } from '@fpsak-frontend/utils';
+import { getKodeverknavnFn } from '@navikt/ft-utils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { ProsessStegSubmitButton, validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
@@ -190,6 +190,7 @@ export const AnkeResultatForm: FunctionComponent<PureOwnProps & MappedOwnProps &
     <VerticalSpacer sixteenPx />
     <Row>
       <Column xs="12">
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <ProsessStegSubmitButton
           formName={formProps.form}
           isReadOnly={readOnly}
@@ -197,6 +198,7 @@ export const AnkeResultatForm: FunctionComponent<PureOwnProps & MappedOwnProps &
           text={intl.formatMessage({ id: 'Ankebehandling.Resultat.SendTilMedunderskriver' })}
         />
         <span>&nbsp;</span>
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <ProsessStegSubmitButton
           formName={formProps.form}
           isReadOnly={readOnly}

@@ -1,4 +1,4 @@
-import { removeSpacesFromNumber } from '@fpsak-frontend/utils';
+import { removeSpacesFromNumber } from '@navikt/ft-utils';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import { Beregningsgrunnlag, FaktaOmBeregning } from '@fpsak-frontend/types';
 import { FaktaBeregningTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';

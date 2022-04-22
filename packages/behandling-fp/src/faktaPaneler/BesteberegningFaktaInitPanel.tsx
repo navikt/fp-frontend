@@ -6,7 +6,7 @@ import BesteberegningFaktaIndex from '@fpsak-frontend/fakta-besteberegning';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import messages from '../../i18n/nb_NO.json';

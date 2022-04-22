@@ -1,24 +1,23 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { NavLink } from 'react-router-dom';
-import { useFormContext, useFieldArray, UseFormGetValues } from 'react-hook-form';
+import { UseFormGetValues } from 'react-hook-form';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { Location } from 'history';
 import { Undertekst, Normaltekst } from 'nav-frontend-typografi';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
+import {
+  ArrowBox, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 
 import {
   KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
 import {
-  CheckboxField, TextAreaField, RadioGroupField, RadioOption, SkjemaGruppeMedFeilviser,
-} from '@fpsak-frontend/form-hooks';
-import {
-  ArrowBox,
-} from '@fpsak-frontend/shared-components';
+  CheckboxField, TextAreaField, RadioGroupField, RadioOption, SkjemaGruppeMedFeilviser, formHooks,
+} from '@navikt/ft-form-hooks';
 import {
   hasValidText, maxLength, minLength, required, isRequiredMessage,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import getAksjonspunkttekst from './aksjonspunktTekster/aksjonspunktTekstUtleder';
@@ -82,8 +81,8 @@ export const AksjonspunktGodkjenningFieldArray: FunctionComponent<OwnProps> = ({
 }) => {
   const {
     control, watch, getValues,
-  } = useFormContext();
-  const { fields } = useFieldArray({
+  } = formHooks.useFormContext();
+  const { fields } = formHooks.useFieldArray({
     control,
     name: FIELD_ARRAY_NAME,
   });

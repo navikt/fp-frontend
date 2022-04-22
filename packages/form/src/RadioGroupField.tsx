@@ -88,6 +88,7 @@ const renderRadioGroupField = renderNavField(({
 
 export const RadioGroupField = (props: BaseFieldProps & RadioGroupFieldProps) => (
   <Field
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     component={renderRadioGroupField}
     {...props}
   />

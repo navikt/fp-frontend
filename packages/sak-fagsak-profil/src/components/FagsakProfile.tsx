@@ -3,12 +3,9 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Normaltekst, Systemtittel } from 'nav-frontend-typografi';
 import { EtikettInfo } from 'nav-frontend-etiketter';
 import {
-  FlexColumn, FlexContainer, FlexRow, Tooltip,
-} from '@navikt/fp-react-components';
+  FlexColumn, FlexContainer, FlexRow, Tooltip, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 
-import {
-  VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
 import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 

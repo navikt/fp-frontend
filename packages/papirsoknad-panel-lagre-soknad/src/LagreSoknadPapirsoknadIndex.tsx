@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 import LagreSoknadPanel from './components/LagreSoknadPanel';
 import messages from '../i18n/nb_NO.json';
 
@@ -21,6 +21,7 @@ const LagreSoknadPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   submitting,
 }) => (
   <RawIntlProvider value={intl}>
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <LagreSoknadPanel
       readOnly={readOnly}
       form={form}

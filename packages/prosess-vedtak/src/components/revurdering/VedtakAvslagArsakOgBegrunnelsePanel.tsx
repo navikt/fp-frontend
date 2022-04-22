@@ -1,6 +1,5 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { useFormContext } from 'react-hook-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
@@ -9,12 +8,12 @@ import {
 } from '@fpsak-frontend/types';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import { TextAreaField } from '@fpsak-frontend/form-hooks';
+import { TextAreaField, formHooks } from '@navikt/ft-form-hooks';
 import {
   decodeHtmlEntity, getLanguageFromSprakkode, hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew, getKodeverknavnFn,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { hasIkkeOppfyltSoknadsfristvilkar } from '../felles/VedtakHelper';
 
@@ -59,7 +58,7 @@ const VedtakAvslagArsakOgBegrunnelsePanel: FunctionComponent<OwnProps> = ({
   skalBrukeOverstyrendeFritekstBrev,
 }) => {
   const intl = useIntl();
-  const { formState: { isDirty } } = useFormContext();
+  const { formState: { isDirty } } = formHooks.useFormContext();
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
   const isRequiredFn = getIsBegrunnelseRequired(isDirty);

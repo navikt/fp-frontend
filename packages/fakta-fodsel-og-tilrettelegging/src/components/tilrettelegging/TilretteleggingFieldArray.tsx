@@ -5,17 +5,16 @@ import { injectIntl, FormattedMessage, WrappedComponentProps } from 'react-intl'
 import { FieldArrayFieldsProps, FieldArrayMetaProps, formValueSelector } from 'redux-form';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Element } from 'nav-frontend-typografi';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import {
   DatepickerField, SelectField, DecimalField, PeriodFieldArray,
 } from '@fpsak-frontend/form';
 import {
-  VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+  VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import {
   hasValidDecimal, maxValue, minValue, required, hasValidDate,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
 import { Permisjon } from '@fpsak-frontend/types';
 
@@ -181,6 +180,7 @@ export const TilretteleggingFieldArray: FunctionComponent<PureOwnProps & MappedO
                 )}
                 {((data && data.stillingsprosent && tilretteleggingKode === tilretteleggingType.DELVIS_TILRETTELEGGING)
                     || tilretteleggingKode === tilretteleggingType.INGEN_TILRETTELEGGING) && (
+                    /* @ts-ignore Fiks cannot be used as a JSX component */
                     <TilretteleggingUtbetalingsgrad
                       fieldId={fieldId}
                       erOverstyrer={erOverstyrer}

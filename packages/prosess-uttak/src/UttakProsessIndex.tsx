@@ -5,7 +5,7 @@ import {
   ArbeidsgiverOpplysningerPerId, StandardProsessPanelProps, FamilieHendelseSamling, Personoversikt,
   Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import UttakPanel from './components/UttakPanel';
@@ -54,6 +54,7 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
 }) => (
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="UttakProsessIndex" formData={formData} setFormData={setFormData}>
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <UttakPanel
         behandlingUuid={behandling.uuid}
         behandlingType={behandling.type}

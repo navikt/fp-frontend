@@ -27,6 +27,7 @@ const InputField: FunctionComponent<BaseFieldProps & InputFieldProps & (NavFront
   <Field
     name={name}
     validate={validate}
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     component={readOnly ? ReadOnlyField : renderNavInput}
     type={type}
     label={label}

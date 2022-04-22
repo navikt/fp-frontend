@@ -7,11 +7,11 @@ import { Column, Row } from 'nav-frontend-grid';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { Normaltekst, Undertekst, Undertittel } from 'nav-frontend-typografi';
 
-import { Form, RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
+import { Form, RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import { ISO_DATE_FORMAT, required, getKodeverknavnFn } from '@fpsak-frontend/utils';
-import { DateLabel, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { ISO_DATE_FORMAT, required, getKodeverknavnFn } from '@navikt/ft-utils';
+import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
@@ -223,7 +223,7 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
       )}
       {readOnly && (
         <>
-          <RadioGroupField name="dummy" className={styles.text} readOnly={readOnly} isEdited={isEdited(hasAksjonspunkt, erVilkarOk)}>
+          <RadioGroupField name="dummy" readOnly={readOnly} isEdited={isEdited(hasAksjonspunkt, erVilkarOk)}>
             {[<RadioOption
               key="dummy"
               label={(

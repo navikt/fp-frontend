@@ -3,8 +3,8 @@ import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 
-import { DateLabel, VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { DDMMYYYY_DATE_FORMAT, getAddresses, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { DDMMYYYY_DATE_FORMAT, getAddresses, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
 import { MerkePanel } from '@fpsak-frontend/fakta-felles';
 import { Personadresse, PersonopplysningerBasis } from '@fpsak-frontend/types';

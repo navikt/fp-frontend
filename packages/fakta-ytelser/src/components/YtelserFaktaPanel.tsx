@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 
 import { InntektArbeidYtelse, KodeverkMedNavn } from '@fpsak-frontend/types';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import PersonYtelserTable from './PersonYtelserTable';
 

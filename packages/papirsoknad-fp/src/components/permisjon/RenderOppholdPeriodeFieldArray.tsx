@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { DatepickerField, SelectField, PeriodFieldArray } from '@fpsak-frontend/form';
 import oppholdArsakType from '@fpsak-frontend/kodeverk/src/oppholdArsakType';

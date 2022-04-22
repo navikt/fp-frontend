@@ -6,10 +6,10 @@ import { Column, Row } from 'nav-frontend-grid';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import {
   VerticalSpacer, AksjonspunktHelpTextHTML,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 import { Behandling } from '@fpsak-frontend/types';
 
 import ProsessPanelWrapper from './ProsessPanelWrapper';

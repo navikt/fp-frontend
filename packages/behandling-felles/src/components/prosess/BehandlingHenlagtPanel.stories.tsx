@@ -1,7 +1,7 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 import { Behandling } from '@fpsak-frontend/types';
 
 import BehandlingHenlagtPanel from './BehandlingHenlagtPanel';

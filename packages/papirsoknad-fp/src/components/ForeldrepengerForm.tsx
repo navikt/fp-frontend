@@ -5,7 +5,7 @@ import {
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 
-import { omit } from '@fpsak-frontend/utils';
+import { omit } from '@navikt/ft-utils';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { SoknadData, getRegisteredFields } from '@fpsak-frontend/papirsoknad-felles';
@@ -125,6 +125,7 @@ export class ForeldrepengerForm extends React.Component<PureOwnProps & MappedOwn
             alleKodeverk={alleKodeverk}
           />
         </FormSection>
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <PermisjonPanel
           soknadData={soknadData}
           form={form}
@@ -228,4 +229,5 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
 
 export default connect(mapStateToPropsFactory)(reduxForm({
   form: FORELDREPENGER_FORM_NAME,
+/* @ts-ignore Fiks */
 })(ForeldrepengerForm));

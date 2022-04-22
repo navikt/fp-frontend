@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { AlleKodeverk } from '@fpsak-frontend/types';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import EgenVirksomhetPanel from './components/EgenVirksomhetPanel';
 import messages from '../i18n/nb_NO.json';
@@ -21,6 +21,7 @@ const VirksomhetPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   alleKodeverk,
 }) => (
   <RawIntlProvider value={intl}>
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <EgenVirksomhetPanel
       readOnly={readOnly}
       form={form}

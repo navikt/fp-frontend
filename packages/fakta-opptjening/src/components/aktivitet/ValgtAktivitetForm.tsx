@@ -5,12 +5,11 @@ import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import dayjs from 'dayjs';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
-  VerticalSpacer, FaktaGruppe,
-} from '@fpsak-frontend/shared-components';
+  VerticalSpacer, FaktaGruppe, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import {
   findDifferenceInMonthsAndDays,
   hasValidText,
@@ -18,10 +17,10 @@ import {
   minLength,
   required,
   DDMMYYYY_DATE_FORMAT,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import {
   RadioGroupField, RadioOption, TextAreaField, Form,
-} from '@fpsak-frontend/form-hooks';
+} from '@navikt/ft-form-hooks';
 import { TimeLineButton } from '@fpsak-frontend/tidslinje';
 import {
   ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, AlleKodeverk, OpptjeningAktivitet,

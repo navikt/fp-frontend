@@ -1,17 +1,16 @@
 import React, { FunctionComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 import { WrappedComponentProps } from 'react-intl';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import {
   hasValidDate, hasValidFodselsnummer, hasValidName, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import {
-  VerticalSpacer, FaktaGruppe,
-} from '@fpsak-frontend/shared-components';
+  VerticalSpacer, FaktaGruppe, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import {
   Datepicker, InputField, SelectField,
-} from '@fpsak-frontend/form-hooks';
+} from '@navikt/ft-form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { KodeverkMedNavn, Verge } from '@fpsak-frontend/types';
 

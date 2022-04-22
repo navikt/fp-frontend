@@ -4,7 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 import {
   Fagsak, SimuleringResultat, TilbakekrevingValg, StandardProsessPanelProps,
 } from '@fpsak-frontend/types';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import AvregningPanel from './components/AvregningPanel';
 import messages from '../i18n/nb_NO.json';

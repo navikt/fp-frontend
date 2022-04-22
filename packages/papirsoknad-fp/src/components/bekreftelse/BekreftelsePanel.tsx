@@ -3,8 +3,8 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { required } from '@fpsak-frontend/utils';
-import { BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { required } from '@navikt/ft-utils';
+import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 interface OwnProps {
   readOnly: boolean;

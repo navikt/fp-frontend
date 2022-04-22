@@ -4,9 +4,9 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Element, Undertittel } from 'nav-frontend-typografi';
 
-import { BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
-import { dateRangesNotOverlappingCrossTypes } from '@fpsak-frontend/utils';
+import { dateRangesNotOverlappingCrossTypes } from '@navikt/ft-utils';
 import { CheckboxField } from '@fpsak-frontend/form';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import { AlleKodeverk } from '@fpsak-frontend/types';
@@ -109,6 +109,7 @@ export const PermisjonPanel: FunctionComponent<PureOwnProps & MappedOwnProps> & 
             />
           )}
         <VerticalSpacer twentyPx />
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <PermisjonOverforingAvKvoterPanel
           visFeilMelding={visFeilMelding}
           form={form}
@@ -118,6 +119,7 @@ export const PermisjonPanel: FunctionComponent<PureOwnProps & MappedOwnProps> & 
           alleKodeverk={alleKodeverk}
         />
         <VerticalSpacer twentyPx />
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <PermisjonUtsettelsePanel
           visFeilMelding={visFeilMelding}
           form={form}
@@ -126,6 +128,7 @@ export const PermisjonPanel: FunctionComponent<PureOwnProps & MappedOwnProps> & 
           alleKodeverk={alleKodeverk}
         />
         <VerticalSpacer twentyPx />
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <PermisjonGraderingPanel
           visFeilMelding={visFeilMelding}
           form={form}
@@ -134,6 +137,7 @@ export const PermisjonPanel: FunctionComponent<PureOwnProps & MappedOwnProps> & 
           alleKodeverk={alleKodeverk}
         />
         <VerticalSpacer twentyPx />
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <PermisjonOppholdPanel form={form} readOnly={readOnly} namePrefix={TIDSROM_PERMISJON_FORM_NAME_PREFIX} alleKodeverk={alleKodeverk} />
       </div>
     </BorderBox>

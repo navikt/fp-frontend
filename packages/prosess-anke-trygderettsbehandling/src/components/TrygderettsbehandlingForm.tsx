@@ -10,9 +10,9 @@ import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgj
 import ankeVurderingType from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import {
   AksjonspunktHelpTextTemp, VerticalSpacer, ArrowBox,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form';
-import { required } from '@fpsak-frontend/utils';
+import { required } from '@navikt/ft-utils';
 import ankeOmgjorArsak from '@fpsak-frontend/kodeverk/src/ankeOmgjorArsak';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
 import {
@@ -164,6 +164,7 @@ export const TrygderettsbehandlingForm: FunctionComponent<PureOwnProps & MappedO
     <VerticalSpacer sixteenPx />
     <Row>
       <Column xs="8">
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <ProsessStegSubmitButton
           formName={formProps.form}
           isReadOnly={readOnly}

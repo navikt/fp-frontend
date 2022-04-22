@@ -4,7 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 import {
   ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, InntektArbeidYtelse,
 } from '@fpsak-frontend/types';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import ArbeidsforholdInfoPanel from './components/ArbeidsforholdInfoPanel';
@@ -31,6 +31,7 @@ const ArbeidsforholdFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelP
 }) => (
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="ArbeidsforholdFaktaIndex" formData={formData} setFormData={setFormData}>
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <ArbeidsforholdInfoPanel
         arbeidsforhold={inntektArbeidYtelse.arbeidsforhold}
         skalKunneLeggeTilNyeArbeidsforhold={inntektArbeidYtelse.skalKunneLeggeTilNyeArbeidsforhold}

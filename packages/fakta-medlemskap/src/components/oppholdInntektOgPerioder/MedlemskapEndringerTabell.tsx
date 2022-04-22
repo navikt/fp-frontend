@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import {
   DateLabel, Table, TableColumn, TableRow,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import { MedlemPeriode } from '@fpsak-frontend/types';
 import { formValueSelector } from 'redux-form';
 

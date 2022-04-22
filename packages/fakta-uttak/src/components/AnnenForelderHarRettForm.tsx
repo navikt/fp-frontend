@@ -7,8 +7,8 @@ import { InjectedFormProps, reduxForm, formValueSelector } from 'redux-form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   hasValidText, maxLength, minLength, required,
-} from '@fpsak-frontend/utils';
-import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-utils';
+import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import { Aksjonspunkt, Ytelsefordeling } from '@fpsak-frontend/types';
@@ -96,6 +96,7 @@ export const AnnenForelderHarRettForm: FunctionComponent<PureOwnProps & MappedOw
           />
         </div>
         <VerticalSpacer sixteenPx />
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <FaktaSubmitButton
           formName={formProps.form}
           isSubmittable={!readOnly}

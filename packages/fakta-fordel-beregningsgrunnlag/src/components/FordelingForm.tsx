@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { InjectedFormProps, Validator, reduxForm } from 'redux-form';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
-import { getKodeverknavnFn } from '@fpsak-frontend/utils';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { getKodeverknavnFn } from '@navikt/ft-utils';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
@@ -70,6 +70,7 @@ const FordelingFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Injec
   ...formProps
 }) => (
   <form onSubmit={formProps.handleSubmit}>
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <FordelingHelpText
       isAksjonspunktClosed={isAksjonspunktClosed}
       alleKodeverk={alleKodeverk}
@@ -78,6 +79,7 @@ const FordelingFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Injec
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
     <VerticalSpacer twentyPx />
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <FastsettFordeltBeregningsgrunnlag
       readOnly={readOnly}
       isAksjonspunktClosed={isAksjonspunktClosed}
@@ -94,6 +96,7 @@ const FordelingFormImpl: FunctionComponent<PureOwnProps & MappedOwnProps & Injec
       hasBegrunnelse={hasBegrunnelse}
     />
     <VerticalSpacer twentyPx />
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <FaktaSubmitButton
       formName={formProps.form}
       isSubmittable={submittable && submitEnabled}

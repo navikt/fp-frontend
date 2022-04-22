@@ -19,6 +19,7 @@ describe('<PersonNyttEllerErstattArbeidsforholdPanel>', () => {
   };
 
   it('skal vise dropdown med tidligere arbeidsforhold når en har valgt å erstatte gammelt med nytt', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<PersonNyttEllerErstattArbeidsforholdPanel.WrappedComponent
       intl={intlMock}
       readOnly
@@ -39,6 +40,7 @@ describe('<PersonNyttEllerErstattArbeidsforholdPanel>', () => {
   });
 
   it('skal ikke vise dropdown når en ikke har valgt å erstatte gammelt med nytt', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<PersonNyttEllerErstattArbeidsforholdPanel.WrappedComponent
       intl={intlMock}
       readOnly

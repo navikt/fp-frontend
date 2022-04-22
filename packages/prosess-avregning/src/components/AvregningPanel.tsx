@@ -8,17 +8,16 @@ import {
   Element, Normaltekst, Undertekst, Undertittel,
 } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Image } from '@navikt/fp-react-components';
 
 import {
   RadioGroupField, RadioOption, TextAreaField, Form,
-} from '@fpsak-frontend/form-hooks';
+} from '@navikt/ft-form-hooks';
 import {
-  AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+  AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer, Image,
+} from '@navikt/ft-ui-komponenter';
 import {
   getLanguageFromSprakkode, hasValidText, maxLength, minLength, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';

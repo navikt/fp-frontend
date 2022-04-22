@@ -4,14 +4,14 @@ import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { formValueSelector, FieldArray } from 'redux-form';
 import { Element } from 'nav-frontend-typografi';
 
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { CheckboxField } from '@fpsak-frontend/form';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import overforingArsak from '@fpsak-frontend/kodeverk/src/overforingArsak';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
-import { hasValidPeriodIncludingOtherErrors } from '@fpsak-frontend/utils';
+import { hasValidPeriodIncludingOtherErrors } from '@navikt/ft-utils';
 
 import RenderOverforingAvKvoterFieldArray from './RenderOverforingAvKvoterFieldArray';
 

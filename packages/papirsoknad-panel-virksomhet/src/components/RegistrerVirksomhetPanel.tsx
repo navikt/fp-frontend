@@ -7,9 +7,8 @@ import {
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
-import { Image } from '@navikt/fp-react-components';
+import { Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
 import { NavFieldGroup } from '@fpsak-frontend/form';
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import removeIcon from '@fpsak-frontend/assets/images/remove.svg';
@@ -239,6 +238,7 @@ export class RegistrerVirksomhetPanel extends Component<PureOwnProps & MappedOwn
             <Undertekst className={styles.imageText}><FormattedMessage id="Registrering.RegistrerVirksomhetPanel.Add" /></Undertekst>
           </div>
         </NavFieldGroup>
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <RegistrerVirksomhetModalForm
           showModal={!!editVirksomhet}
           // @ts-ignore Fiks

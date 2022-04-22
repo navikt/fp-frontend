@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import OmsorgOgAdopsjonPanel, { FormValues } from './components/OmsorgOgAdopsjonPanel';
 import messages from '../i18n/nb_NO.json';
@@ -28,6 +28,7 @@ const OmsorgOgAdopsjonPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunc
   isForeldrepengerFagsak,
 }) => (
   <RawIntlProvider value={intl}>
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <OmsorgOgAdopsjonPanel
       readOnly={readOnly}
       form={form}

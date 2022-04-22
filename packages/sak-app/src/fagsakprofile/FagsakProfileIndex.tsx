@@ -4,7 +4,7 @@ import React, {
 import { Navigate, useLocation, useMatch } from 'react-router-dom';
 import { Location } from 'history';
 
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import BehandlingVelgerSakIndex from '@fpsak-frontend/sak-behandling-velger';
 import FagsakProfilSakIndex from '@fpsak-frontend/sak-fagsak-profil';
 import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';

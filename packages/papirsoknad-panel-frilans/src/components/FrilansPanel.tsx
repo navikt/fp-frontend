@@ -4,8 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { Undertekst } from 'nav-frontend-typografi';
 
-import { ArrowBox, BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { required } from '@fpsak-frontend/utils';
+import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { required } from '@navikt/ft-utils';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 
 import FrilansPerioderFieldArray from './FrilansPerioderFieldArray';
@@ -71,6 +71,7 @@ const FrilansPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
                 <RadioOption label={<FormattedMessage id="Registrering.Frilans.Yes" />} value />
                 <RadioOption label={<FormattedMessage id="Registrering.Frilans.No" />} value={false} />
               </RadioGroupField>
+              { /* @ts-ignore Fiks cannot be used as a JSX component */ }
               <FrilansOppdragForFamiliePanel readOnly={readOnly} formName={formName} namePrefix={FRILANS_FORM_NAME_PREFIX} />
             </ArrowBox>
           </RadioOption>

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 
-import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -142,6 +142,7 @@ export class VurderFaktaBeregningPanelImpl extends Component<OwnProps & Injected
             </AksjonspunktHelpTextTemp>
           )}
           <VerticalSpacer twentyPx />
+          { /* @ts-ignore Fiks cannot be used as a JSX component */ }
           <FaktaForATFLOgSNPanel
             readOnly={readOnly}
             isAksjonspunktClosed={isAksjonspunktClosed(aksjonspunkter)}
@@ -161,6 +162,7 @@ export class VurderFaktaBeregningPanelImpl extends Component<OwnProps & Injected
                 hasBegrunnelse={hasBegrunnelse}
               />
               <VerticalSpacer twentyPx />
+              { /* @ts-ignore Fiks cannot be used as a JSX component */ }
               <FaktaSubmitButton
                 formName={formProps.form}
                 isSubmittable={submittable && submitEnabled && harIkkeEndringerIAvklarMedFlereAksjonspunkter(verdiForAvklarAktivitetErEndret, aksjonspunkter)}
@@ -236,4 +238,5 @@ export default connect(mapStateToPropsFactory)(reduxForm({
   enableReinitialize: true,
   destroyOnUnmount: false,
   keepDirtyOnReinitialize: true,
+/* @ts-ignore Fiks cannot be used as a JSX component */
 })(VurderFaktaBeregningPanelImpl));

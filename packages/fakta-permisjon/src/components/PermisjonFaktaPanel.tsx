@@ -9,14 +9,14 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 
 import {
   hasValidText, maxLength, minLength, required, dateFormat,
-} from '@fpsak-frontend/utils';
-import { Form, TextAreaField } from '@fpsak-frontend/form-hooks';
+} from '@navikt/ft-utils';
+import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import {
   Aksjonspunkt, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, AoIArbeidsforhold, AlleKodeverk,
 } from '@fpsak-frontend/types';
 import {
   VerticalSpacer, AksjonspunktHelpTextHTML, FloatRight,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import { VurderArbeidsforholdPermisjonAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';

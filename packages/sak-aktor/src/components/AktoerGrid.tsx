@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import Lenkepanel from 'nav-frontend-lenkepanel';
 
-import { getKodeverknavnFn } from '@fpsak-frontend/utils';
+import { getKodeverknavnFn } from '@navikt/ft-utils';
 import VisittkortSakIndex from '@fpsak-frontend/sak-visittkort';
 import { Fagsak, FagsakPerson, AlleKodeverk } from '@fpsak-frontend/types';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';

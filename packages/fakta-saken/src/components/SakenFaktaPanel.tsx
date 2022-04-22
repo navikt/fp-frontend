@@ -4,7 +4,7 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
-import { VerticalSpacer, AksjonspunktHelpTextHTML } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer, AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { OverstyringUtenlandssakMarkeringAp, MerkOpptjeningUtlandAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import UtlandPanel from './utland/UtlandPanel';

@@ -1,13 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
-import { Image } from '@navikt/fp-react-components';
 
 import endretFelt from '@fpsak-frontend/assets/images/endret_felt.svg';
 import {
-  Table, TableColumn, TableRow,
-} from '@fpsak-frontend/shared-components';
+  Table, TableColumn, TableRow, Image,
+} from '@navikt/ft-ui-komponenter';
 import { KodeverkMedNavn, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/types';
-import { dateFormat } from '@fpsak-frontend/utils';
+import { dateFormat } from '@navikt/ft-utils';
 
 import styles from './aktivitetskravFaktaTabell.less';
 

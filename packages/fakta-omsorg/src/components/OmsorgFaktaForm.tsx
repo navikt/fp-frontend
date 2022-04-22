@@ -12,11 +12,11 @@ import {
   dateRangesOverlappingMessage,
   invalidPeriodMessage,
   required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { ArrowBox, FaktaGruppe } from '@fpsak-frontend/shared-components';
+import { ArrowBox, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { Aksjonspunkt, Soknad, Ytelsefordeling } from '@fpsak-frontend/types';
 import { BekreftAleneomsorgVurderingAp, BekreftOmsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 

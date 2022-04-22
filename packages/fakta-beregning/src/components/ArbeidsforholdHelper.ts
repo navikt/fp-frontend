@@ -1,4 +1,4 @@
-import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { ArbeidsgiverOpplysninger } from '@fpsak-frontend/types';
 import moment from 'moment';
 

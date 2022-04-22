@@ -7,17 +7,14 @@ import { createSelector } from 'reselect';
 import { Element, Undertittel } from 'nav-frontend-typografi';
 import { AlertStripeInfo, AlertStripeFeil } from 'nav-frontend-alertstriper';
 import {
-  Image, FlexColumn, FlexContainer, FlexRow,
-} from '@navikt/fp-react-components';
+  Image, FlexColumn, FlexContainer, FlexRow, VerticalSpacer, AvsnittSkiller,
+} from '@navikt/ft-ui-komponenter';
 
 import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
-import {
-  VerticalSpacer, AvsnittSkiller,
-} from '@fpsak-frontend/shared-components';
 import { DatepickerField, TextAreaField } from '@fpsak-frontend/form';
 import {
   hasValidDate, hasValidText, maxLength, required, requiredIfNotPristine, DDMMYYYY_DATE_FORMAT,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
@@ -194,6 +191,7 @@ export const FodselOgTilretteleggingFaktaForm: FunctionComponent<PureOwnProps & 
                   <VerticalSpacer sixteenPx />
                   <AvsnittSkiller />
                   <VerticalSpacer twentyPx />
+                  { /* @ts-ignore Fiks cannot be used as a JSX component */ }
                   <TilretteleggingArbeidsforholdSection
                     key={formSectionName}
                     readOnly={readOnly}
@@ -246,6 +244,7 @@ export const FodselOgTilretteleggingFaktaForm: FunctionComponent<PureOwnProps & 
         <VerticalSpacer sixteenPx />
         <FlexRow>
           <FlexColumn>
+            { /* @ts-ignore Fiks cannot be used as a JSX component */ }
             <FaktaSubmitButton
               formName={FODSEL_TILRETTELEGGING_FORM}
               isSubmittable={submittable && !formProps.error}

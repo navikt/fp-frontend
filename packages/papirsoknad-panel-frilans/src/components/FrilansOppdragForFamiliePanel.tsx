@@ -4,7 +4,7 @@ import { FieldArray, formValueSelector } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import { ArrowBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 
 import FrilansOppdragForFamilieFieldArray, { defaultFrilansPeriode, FormValues as FieldArrayFormValues } from './FrilansOppdragForFamilieFieldArray';

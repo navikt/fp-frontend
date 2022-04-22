@@ -5,8 +5,8 @@ import { FieldArray, FormSection, formValueSelector } from 'redux-form';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { BorderBox } from '@fpsak-frontend/shared-components';
-import { arrayMinLength, required } from '@fpsak-frontend/utils';
+import { BorderBox } from '@navikt/ft-ui-komponenter';
+import { arrayMinLength, required } from '@navikt/ft-utils';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import RegistrerVirksomhetPanel from './RegistrerVirksomhetPanel';

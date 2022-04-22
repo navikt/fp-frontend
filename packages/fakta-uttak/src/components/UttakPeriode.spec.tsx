@@ -67,6 +67,7 @@ const endringsdato = '2018-08-01';
 
 describe('<UttakPeriode>', () => {
   it('skal vise UttakPeriode', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<UttakPeriode.WrappedComponent
       intl={intlMock}
       fields={getMockedFields(fieldNames, perioder)}
@@ -94,6 +95,7 @@ describe('<UttakPeriode>', () => {
   });
 
   it('skal ikke gi class active til perioder som er bekreftet,', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<UttakPeriode.WrappedComponent
       intl={intlMock}
       fields={getMockedFields(fieldNames, perioder)}
@@ -120,6 +122,7 @@ describe('<UttakPeriode>', () => {
   });
 
   it('skal gi class active til perioder som er ikke bekreftet og ikke readOnly,', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<UttakPeriode.WrappedComponent
       intl={intlMock}
       fields={getMockedFields(fieldNames, perioder)}
@@ -151,6 +154,7 @@ describe('<UttakPeriode>', () => {
         error: 'Perioder overlapper',
       } as FieldArrayMetaProps,
     };
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<UttakPeriode.WrappedComponent
       intl={intlMock}
       fields={getMockedFields(fieldNames, perioder)}

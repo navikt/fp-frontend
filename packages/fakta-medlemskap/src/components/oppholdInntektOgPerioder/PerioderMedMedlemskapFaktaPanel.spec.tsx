@@ -7,7 +7,7 @@ import {
   Aksjonspunkt, AlleKodeverk, Medlemskap, Soknad,
 } from '@fpsak-frontend/types';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
+import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 
 import PerioderMedMedlemskapFaktaPanel, { PerioderMedMedlemskapFaktaPanelImpl as UndecoratedForm, PeriodeMedId } from './PerioderMedMedlemskapFaktaPanel';
 import messages from '../../../i18n/nb_NO.json';
@@ -58,8 +58,8 @@ describe('<PerioderMedMedlemskapFaktaPanel>', () => {
     expect(tableRows).toHaveLength(1);
     const tableColumns = table.find(TableColumn);
     expect(tableColumns).toHaveLength(4);
-    expect(tableColumns.at(1).html()).toEqual('<td class="columnStyle">testdekning</td>');
-    expect(tableColumns.at(2).html()).toEqual('<td class="columnStyle">testStatus</td>');
+    expect(tableColumns.at(1).html()).toContain('testdekning</td>');
+    expect(tableColumns.at(2).html()).toContain('testStatus</td>');
 
     const radiofields = wrapper.find('RadioOption');
     expect(radiofields).toHaveLength(2);

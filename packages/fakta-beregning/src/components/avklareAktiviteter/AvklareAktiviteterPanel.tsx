@@ -9,12 +9,11 @@ import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl'
 import { Element } from 'nav-frontend-typografi';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { Knapp } from 'nav-frontend-knapper';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
-  AksjonspunktHelpTextTemp, VerticalSpacer, OverstyringKnapp,
-} from '@fpsak-frontend/shared-components';
+  AksjonspunktHelpTextTemp, VerticalSpacer, OverstyringKnapp, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import Aksjonspunkt from '@fpsak-frontend/types/src/aksjonspunktTsType';
@@ -326,6 +325,7 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
                 <FlexContainer>
                   <FlexRow>
                     <FlexColumn>
+                      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
                       <FaktaSubmitButton
                         buttonText={intl.formatMessage({ id: erOverstyrt ? 'AvklarAktivitetPanel.OverstyrText' : 'AvklarAktivitetPanel.ButtonText' })}
                         formName={formProps.form}
@@ -356,6 +356,7 @@ export class AvklareAktiviteterPanelImpl extends Component<OwnProps & InjectedFo
           {skalViseSubmitknappForPanel(harAndreAksjonspunkterIPanel, erOverstyrt, erBgOverstyrt, aksjonspunkter) && (
             <>
               <VerticalSpacer twentyPx />
+              { /* @ts-ignore Fiks cannot be used as a JSX component */ }
               <FaktaSubmitButton
                 buttonText={erOverstyrt ? intl.formatMessage({ id: 'AvklarAktivitetPanel.OverstyrText' }) : undefined}
                 formName={formProps.form}

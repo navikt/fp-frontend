@@ -1,12 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
-import { useFormContext, useFieldArray } from 'react-hook-form';
 import { useIntl } from 'react-intl';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
-import { hasValidDate, required, dateBeforeOrEqualToToday } from '@fpsak-frontend/utils';
+import { hasValidDate, required, dateBeforeOrEqualToToday } from '@navikt/ft-utils';
 import { AvklartBarn } from '@fpsak-frontend/types';
-import { Datepicker, PeriodFieldArray } from '@fpsak-frontend/form-hooks';
+import { Datepicker, PeriodFieldArray, formHooks } from '@navikt/ft-form-hooks';
 
 const FIELD_ARRAY_NAME = 'avklartBarn';
 
@@ -30,8 +29,8 @@ export const AvklartBarnFieldArray: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const { control, watch } = useFormContext<{ avklartBarn: AvklartBarn[] }>();
-  const { fields, remove, append } = useFieldArray({
+  const { control, watch } = formHooks.useFormContext<{ avklartBarn: AvklartBarn[] }>();
+  const { fields, remove, append } = formHooks.useFieldArray({
     control,
     name: FIELD_ARRAY_NAME,
   });

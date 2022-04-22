@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { Undertekst } from 'nav-frontend-typografi';
 
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { ArrowBox, VerticalSpacer, FaktaGruppe } from '@fpsak-frontend/shared-components';
+import { ArrowBox, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { required } from '@fpsak-frontend/utils';
+import { required } from '@navikt/ft-utils';
 import { Aksjonspunkt, MedlemPeriode } from '@fpsak-frontend/types';
 import { formValueSelector } from 'redux-form';
 

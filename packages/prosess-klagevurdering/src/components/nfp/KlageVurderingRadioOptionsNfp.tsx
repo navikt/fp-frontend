@@ -2,9 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
-import { required } from '@fpsak-frontend/utils';
-import { ArrowBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form-hooks';
+import { required } from '@navikt/ft-utils';
+import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { RadioGroupField, RadioOption, SelectField } from '@navikt/ft-form-hooks';
 import klageVurderingOmgjoerType from '@fpsak-frontend/kodeverk/src/klageVurderingOmgjoer';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
@@ -40,7 +40,6 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
         name="klageVurdering"
         validate={[required]}
         readOnly={readOnly}
-        className={readOnly ? styles.selectReadOnly : null}
       >
         <RadioOption value={klageVurderingType.MEDHOLD_I_KLAGE} label={intl.formatMessage({ id: 'Klage.ResolveKlage.ChangeVedtak' })} />
         <RadioOption value={klageVurderingType.STADFESTE_YTELSESVEDTAK} label={intl.formatMessage({ id: 'Klage.ResolveKlage.KeepVedtakNfp' })} />
@@ -62,7 +61,6 @@ export const KlageVurderingRadioOptionsNfp: FunctionComponent<OwnProps> = ({
             name="klageVurderingOmgjoer"
             validate={[required]}
             readOnly={readOnly}
-            className={readOnly ? styles.selectReadOnly : null}
             direction="vertical"
           >
             <RadioOption value={klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE} label={intl.formatMessage({ id: 'Klage.Behandle.Omgjort' })} />

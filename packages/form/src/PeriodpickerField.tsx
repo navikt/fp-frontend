@@ -5,8 +5,8 @@ import {
 import moment from 'moment';
 import {
   ACCEPTED_DATE_INPUT_FORMATS, DDMMYYYY_DATE_FORMAT, haystack, ISO_DATE_FORMAT,
-} from '@fpsak-frontend/utils';
-import { Periodpicker } from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-utils';
+import { Periodpicker } from '@navikt/ft-ui-komponenter';
 import ReadOnlyField from './ReadOnlyField';
 import Label from './Label';
 import LabelType from './LabelType';
@@ -75,7 +75,7 @@ interface PeriodePickerRenderProps {
   names: string[];
 }
 
-const renderPeriodpicker = (hideLabel?: boolean) => ({
+const renderPeriodpicker = () => ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   label, isEdited, names, ...otherProps
 }: PeriodePickerRenderProps & WrappedFieldsProps) => {
@@ -85,7 +85,7 @@ const renderPeriodpicker = (hideLabel?: boolean) => ({
     label: <Label input={label} readOnly={false} />,
     names,
   };
-  return <Periodpicker {...fieldProps} {...otherProps} hideLabel={hideLabel} />;
+  return <Periodpicker {...fieldProps} {...otherProps} />;
 };
 
 const isoToDdMmYyyy = (string: string): string => {
@@ -114,11 +114,10 @@ const PeriodpickerField: FunctionComponent<BaseFieldsProps & PeriodpickerFieldPr
   format,
   parse,
   isEdited,
-  hideLabel,
   ...otherProps
 }) => {
   const memoReadOnly = useMemo(() => renderReadOnly(), []);
-  const memoPeriodpicker = useMemo(() => renderPeriodpicker(hideLabel), [hideLabel]);
+  const memoPeriodpicker = useMemo(() => renderPeriodpicker(), []);
 
   return (
     // @ts-ignore Fiks

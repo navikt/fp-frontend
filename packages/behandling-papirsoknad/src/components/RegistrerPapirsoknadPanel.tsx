@@ -5,7 +5,7 @@ import Panel from 'nav-frontend-paneler';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Dispatch } from 'redux';
 
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import EngangsstonadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-es';
 import ForeldrepengerPapirsoknadIndex from '@fpsak-frontend/papirsoknad-fp';
@@ -51,6 +51,7 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
       <VerticalSpacer sixteenPx />
       <VerticalSpacer sixteenPx />
       <ReduxWrapper formName="RegistrerPapirsoknadPanel">
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <SoknadTypePickerForm
           setSoknadData={setSoknadData}
           soknadData={soknadData}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { ArrowBox } from '@fpsak-frontend/shared-components';
+import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import { FrilansOppdragForFamiliePanelImpl } from './FrilansOppdragForFamiliePanel';
 

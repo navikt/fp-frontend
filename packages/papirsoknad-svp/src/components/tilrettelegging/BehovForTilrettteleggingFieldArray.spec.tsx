@@ -13,6 +13,7 @@ describe('<TilretteleggingForArbeidsgiverFieldArray>', () => {
   it('skal rendre komponent korrekt', () => {
     const getRemoveButton = () => undefined;
     const fields = new MockFieldsWithContent('tilrettelegging', [{ tilretteleggingType: 1 }, { tilretteleggingType: 2 }]);
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallow(<BehovForTilrettteleggingFieldArray.WrappedComponent
       intl={getIntlMock(messages)}
       fields={fields}

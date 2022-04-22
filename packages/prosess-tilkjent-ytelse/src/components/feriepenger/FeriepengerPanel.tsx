@@ -10,7 +10,7 @@ import {
   FeriepengegrunnlagAndel,
   AlleKodeverk,
 } from '@fpsak-frontend/types';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import FeriepengerPrAar from './FeriepengerPrAar';
 

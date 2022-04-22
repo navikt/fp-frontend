@@ -5,11 +5,10 @@ import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import {
-  VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+  VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import { ArbeidsgiverOpplysningerPerId, AlleKodeverk } from '@fpsak-frontend/types';
 
 import PersonAksjonspunktText from './PersonAksjonspunktText';
@@ -113,6 +112,7 @@ export const PersonArbeidsforholdDetailForm: FunctionComponent<Props> = ({
           arbeidsforholdHandlingVerdi={arbeidsforholdHandlingVerdi}
         />
         <VerticalSpacer twentyPx />
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <ArbeidsforholdBegrunnelse
           readOnly={readOnly}
           formName={PERSON_ARBEIDSFORHOLD_DETAIL_FORM}

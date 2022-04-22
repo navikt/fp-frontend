@@ -20,6 +20,7 @@ describe('<BehandlingHenlagtPanel>', () => {
 
     const registrerProsessPanel = sinon.spy();
 
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallowWithIntl(<BehandlingHenlagtPanel.WrappedComponent
       intl={getIntlMock(messages)}
       valgtProsessSteg="default"

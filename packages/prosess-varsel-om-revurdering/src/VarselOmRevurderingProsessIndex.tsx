@@ -4,7 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 import {
   FamilieHendelse, FamilieHendelseSamling, Soknad, StandardProsessPanelProps,
 } from '@fpsak-frontend/types';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import VarselOmRevurderingForm, { ForhandsvisData } from './components/VarselOmRevurderingForm';
 import messages from '../i18n/nb_NO.json';

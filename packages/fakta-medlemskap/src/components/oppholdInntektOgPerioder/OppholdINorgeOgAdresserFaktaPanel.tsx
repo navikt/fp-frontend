@@ -4,16 +4,15 @@ import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
-import { Image } from '@navikt/fp-react-components';
 
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { required } from '@fpsak-frontend/utils';
+import { required } from '@navikt/ft-utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
-  PeriodLabel, VerticalSpacer, FaktaGruppe,
-} from '@fpsak-frontend/shared-components';
+  PeriodLabel, VerticalSpacer, FaktaGruppe, Image,
+} from '@navikt/ft-ui-komponenter';
 import {
   Aksjonspunkt, AlleKodeverk, MedlemPeriode, PersonopplysningMedlem, Soknad, UtlandsoppholdPeriode,
 } from '@fpsak-frontend/types';

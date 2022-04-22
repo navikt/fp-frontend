@@ -16,6 +16,7 @@ const getRemoveButton = () => <button id="avslutt" type="button" />;
 
 describe('<RenderOppholdPeriodeFieldArray>', () => {
   it('skal vise 2 inputfelter for dato og 1 nedtrekkslister uten sletteknapp ved periodeliste med en eksisterende periode', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallow(<RenderOppholdPeriodeFieldArray.WrappedComponent
       intl={getIntlMock(messages)}
       fields={fields}
@@ -29,6 +30,7 @@ describe('<RenderOppholdPeriodeFieldArray>', () => {
 
     const fn = fieldArray.prop('children');
     const comp = fn('fieldId1', 0, getRemoveButton) as ReactElement;
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const innerWrapper = shallow(comp);
 
     const dateFields = innerWrapper.find(DatepickerField);

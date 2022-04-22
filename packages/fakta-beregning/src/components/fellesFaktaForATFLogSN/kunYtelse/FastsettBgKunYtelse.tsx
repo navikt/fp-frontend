@@ -22,6 +22,7 @@ export const setFaktaPanelForKunYtelse = (faktaPanels,
   if (tilfeller.includes(FASTSETT_BG_KUN_YTELSE)) {
     faktaPanels.push(
       <React.Fragment key="FASTSETT_BG_KUN_YTELSE">
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <KunYtelsePanel
           readOnly={readOnly}
           isAksjonspunktClosed={isAksjonspunktClosed}

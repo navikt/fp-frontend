@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, IntlShape } from 'react-intl';
 
-import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
   Aksjonspunkt, Arbeidsforhold, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, FodselOgTilrettelegging,
 } from '@fpsak-frontend/types';
@@ -47,6 +47,7 @@ const FodselOgTilretteleggingInfoPanel: FunctionComponent<OwnProps> = ({
       {[<FormattedMessage id="FodselOgTilretteleggingInfoPanel.Aksjonspunkt" key="svangerskapspengerAp" />]}
     </AksjonspunktHelpTextTemp>
     <VerticalSpacer eightPx />
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <FodselOgTilretteleggingFaktaForm
       behandlingVersjon={behandlingVersjon}
       svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}

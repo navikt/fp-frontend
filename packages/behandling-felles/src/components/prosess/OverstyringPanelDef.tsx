@@ -8,7 +8,7 @@ import VilkarresultatMedOverstyringProsessIndex from '@fpsak-frontend/prosess-vi
 import {
   Aksjonspunkt, KodeverkMedNavn, Medlemskap, Vilkar,
 } from '@fpsak-frontend/types';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { OverstyringAksjonspunkter } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import skalViseProsessPanel from '../../utils/prosess/skalViseProsessPanel';

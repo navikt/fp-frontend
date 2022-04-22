@@ -48,6 +48,7 @@ const CheckboxField: FunctionComponent<BaseFieldProps & CheckboxFieldProps> = ({
   <Field
     name={name}
     validate={validate}
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     component={RenderCheckboxField}
     label={label}
     disabled={readOnly}

@@ -5,19 +5,16 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import Lenke from 'nav-frontend-lenker';
-import {
-  Image, FlexColumn, FlexContainer, FlexRow,
-} from '@navikt/fp-react-components';
 
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
-import { dateFormat } from '@fpsak-frontend/utils';
+import { dateFormat } from '@navikt/ft-utils';
 import {
   Aksjonspunkt, ArbeidOgInntektsmelding, Behandling, ManueltArbeidsforhold, AksjonspunktÅrsak,
 } from '@fpsak-frontend/types';
 import {
-  VerticalSpacer, AksjonspunktHelpTextHTML, FloatRight, OverstyringKnapp,
-} from '@fpsak-frontend/shared-components';
+  VerticalSpacer, AksjonspunktHelpTextHTML, FloatRight, OverstyringKnapp, Image, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { Dokument, Innsyn, StandardProsessPanelProps } from '@fpsak-frontend/types';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import InnsynVedtakForm, { ForhandsvisData } from './components/InnsynVedtakForm';
 import messages from '../i18n/nb_NO.json';

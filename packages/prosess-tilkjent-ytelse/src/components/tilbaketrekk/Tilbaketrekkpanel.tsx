@@ -4,20 +4,17 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import {
-  FlexColumn, FlexContainer, FlexRow, Image,
-} from '@navikt/fp-react-components';
+  VerticalSpacer, FlexColumn, FlexContainer, FlexRow, Image,
+} from '@navikt/ft-ui-komponenter';
 
 import behandleImageURL from '@fpsak-frontend/assets/images/advarsel.svg';
 import {
-  VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
-import {
   hasValidText, maxLength, minLength, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
   Form, RadioGroupField, RadioOption, TextAreaField,
-} from '@fpsak-frontend/form-hooks';
+} from '@navikt/ft-form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
 import { Aksjonspunkt, BeregningsresultatFp } from '@fpsak-frontend/types';

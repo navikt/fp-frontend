@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { NavFieldGroup } from '@fpsak-frontend/form';
 import {
   isArrayEmpty, removeSpacesFromNumber, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import inntektskategorier from '@fpsak-frontend/kodeverk/src/inntektskategorier';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
-import { Table, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { Table, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import {
   AndelForFaktaOmBeregning, ArbeidsgiverOpplysningerPerId,
@@ -86,6 +86,7 @@ const createAndelerTableRows = (
   isAksjonspunktClosed,
   alleKodeverk,
 ) => fields.map((andelElementFieldId, index) => (
+  /* @ts-ignore Fiks cannot be used as a JSX component */
   <AndelRow
     key={andelElementFieldId}
     fields={fields}
@@ -103,6 +104,7 @@ const createAndelerTableRows = (
 ));
 
 const createBruttoBGSummaryRow = (fields, readOnly, beregningsgrunnlag) => (
+  /* @ts-ignore Fiks cannot be used as a JSX component */
   <SummaryRow
     readOnly={readOnly}
     key="summaryRow"
@@ -224,6 +226,7 @@ export const InntektFieldArray: FunctionComponent<OwnProps> & StaticFunctions = 
         <NavFieldGroup errorMessage={getErrorMessage(meta, isBeregningFormDirty)}>
           {!readOnly && !harDagpenger(fields)
       && (
+        /* @ts-ignore Fiks cannot be used as a JSX component */
         <AddDagpengerAndelButton
           fields={fields}
           alleKodeverk={alleKodeverk}
@@ -243,6 +246,7 @@ export const InntektFieldArray: FunctionComponent<OwnProps> & StaticFunctions = 
       </Table>
       {!readOnly && skalKunneLeggeTilDagpengerManuelt && !harDagpenger(fields)
       && (
+        /* @ts-ignore Fiks cannot be used as a JSX component */
         <AddDagpengerAndelButton
           fields={fields}
           alleKodeverk={alleKodeverk}

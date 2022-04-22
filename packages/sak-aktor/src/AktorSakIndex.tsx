@@ -3,7 +3,7 @@ import { RawIntlProvider, FormattedMessage } from 'react-intl';
 
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Aktor, AlleKodeverk } from '@fpsak-frontend/types';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import AktoerGrid from './components/AktoerGrid';
 import messages from '../i18n/nb_NO.json';

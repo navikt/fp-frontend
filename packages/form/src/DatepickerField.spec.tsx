@@ -7,10 +7,12 @@ import { mount } from 'enzyme';
 
 import DatepickerField from './DatepickerField';
 
+// @ts-ignore Fiks
 const MockForm = reduxForm({ form: 'mock' })(({ handleSubmit, children }) => <form onSubmit={handleSubmit}>{children}</form>);
 const mountFieldInForm = (field, initialValues) => mount(
   <Provider store={createStore(combineReducers({ form: formReducer }))}>
     <IntlProvider locale="nb-NO" messages={{}}>
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <MockForm initialValues={initialValues}>
         {field}
       </MockForm>

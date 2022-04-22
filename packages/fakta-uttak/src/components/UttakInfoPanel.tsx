@@ -3,7 +3,7 @@ import moment from 'moment';
 
 import aksjonspunktCodes, { isVilkarForSykdomOppfylt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import behandlingTyper from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatuser from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import {
@@ -87,6 +87,7 @@ const UttakInfoPanel: FunctionComponent<OwnProps> = ({
     <>
       {avklarAnnenForelderRettAp && (
         <>
+          { /* @ts-ignore Fiks cannot be used as a JSX component */ }
           <AnnenForelderHarRettForm
             hasOpenAksjonspunkter={isAksjonspunktOpen(avklarAnnenForelderRettAp.status)}
             hasOpenUttakAksjonspunkter={uttakApOpen}
@@ -100,6 +101,7 @@ const UttakInfoPanel: FunctionComponent<OwnProps> = ({
       )}
 
       {(!avklarAnnenForelderRettAp || !isAksjonspunktOpen(avklarAnnenForelderRettAp.status)) && (
+        /* @ts-ignore Fiks cannot be used as a JSX component */
         <UttakFaktaForm
           hasOpenAksjonspunkter={uttakApOpen}
           readOnly={(overrideReadOnly && (!isRevurdering || !behandlingUtredes || behandlingPaaVent)) || !ytelsefordeling.endringsdato}

@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { FieldArray } from 'redux-form';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 
-import { BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import RenderInntektsgivendeArbeidFieldArray from './RenderInntektsgivendeArbeidFieldArray';

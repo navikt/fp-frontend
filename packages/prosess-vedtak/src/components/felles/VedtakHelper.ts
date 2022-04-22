@@ -1,4 +1,4 @@
-import { getKodeverknavnFn } from '@fpsak-frontend/utils';
+import { getKodeverknavnFn } from '@navikt/ft-utils';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';

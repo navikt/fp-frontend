@@ -3,15 +3,14 @@ import { Location } from 'history';
 import moment from 'moment';
 import { WrappedComponentProps } from 'react-intl';
 import { Checkbox } from 'nav-frontend-skjema';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@fpsak-frontend/types';
 import HistorikkAktor from '@fpsak-frontend/kodeverk/src/historikkAktor';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { getKodeverknavnFn } from '@fpsak-frontend/utils';
+import { getKodeverknavnFn } from '@navikt/ft-utils';
 import {
-  VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+  VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 
 import historikkinnslagType from '../kodeverk/historikkinnslagType';
 import Snakkeboble from './maler/felles/snakkeboble';
@@ -250,7 +249,9 @@ const History: FunctionComponent<OwnProps & WrappedComponentProps> = ({
 
   const getKodeverknavnFpSak = useMemo(() => getKodeverknavnFn(alleKodeverkFpSak), [alleKodeverkFpSak]);
   const getKodeverknavnFpTilbake = useMemo(() => (alleKodeverkFpTilbake
-    ? getKodeverknavnFn(alleKodeverkFpTilbake) : undefined), [alleKodeverkFpTilbake]);
+    // @ts-ignore Fiks
+    ? getKodeverknavnFn(alleKodeverkFpTilbake)
+    : undefined), [alleKodeverkFpTilbake]);
 
   return (
     <>
