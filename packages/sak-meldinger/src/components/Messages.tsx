@@ -32,14 +32,15 @@ export type Template = {
   tilgjengelig: boolean;
 }
 
-const getFritekstMessage = (brevmalkode?: string): string => (brevmalkode === dokumentMalType.INNHENTE_OPPLYSNINGER
-  ? 'Messages.DocumentList' : 'Messages.Fritekst');
+const getFritekstMessage = (brevmalkode?: string): string => ((brevmalkode === dokumentMalType.INNHENTE_OPPLYSNINGER
+  || brevmalkode === dokumentMalType.TBK_INNHENTE_OPPLYSNINGER) ? 'Messages.DocumentList' : 'Messages.Fritekst');
 
 // TODO (TOR) Bør erstattast av ein markør fra backend
 const showFritekst = (brevmalkode?: string, arsakskode?: string): boolean => (brevmalkode === dokumentMalType.INNHENTE_OPPLYSNINGER
   || brevmalkode === dokumentMalType.FRITEKST
   || brevmalkode === dokumentMalType.KORRIGERT_VARSEL_OM_TILBAKEKREVING
   || brevmalkode === dokumentMalType.VARSEL_OM_TILBAKEKREVING
+  || brevmalkode === dokumentMalType.TBK_INNHENTE_OPPLYSNINGER
   || (brevmalkode === dokumentMalType.VARSEL_OM_REVURDERING && arsakskode === ugunstAarsakTyper.ANNET));
 
 const getfiltrerteRevurderingVarslingArsaker = (revurderingVarslingArsaker: KodeverkMedNavn[], fagsakYtelseType: string): KodeverkMedNavn[] => {
