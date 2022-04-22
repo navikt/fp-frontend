@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 
 import { ArbeidsgiverOpplysningerWrapper, Personoversikt } from '@fpsak-frontend/types';
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   BehandlingContainer, StandardBehandlingProps, StandardPropsProvider, BehandlingPaVent,

@@ -4,7 +4,7 @@ import { formValueSelector, isDirty as reduxIsDirty } from 'redux-form';
 
 import {
   minLength, maxLength, required, hasValidText,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { TextAreaField } from '@fpsak-frontend/form';
 
 import BehandlingFormFieldCleaner from '../../util/BehandlingFormFieldCleaner';
@@ -31,6 +31,7 @@ export const ArbeidsforholdBegrunnelse: FunctionComponent<PureOwnProps & MappedO
   harBegrunnelse,
   skalAvslaaYtelse,
 }) => (
+  /* @ts-ignore Fiks cannot be used as a JSX component */
   <BehandlingFormFieldCleaner formName={formName} fieldNames={['begrunnelse']}>
     { (isDirty || harBegrunnelse) && !skalAvslaaYtelse && (
       <TextAreaField

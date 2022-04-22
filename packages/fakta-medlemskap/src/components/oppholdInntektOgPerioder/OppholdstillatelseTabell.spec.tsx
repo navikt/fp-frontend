@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   TableRow, TableColumn, PeriodLabel, DateLabel,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 
@@ -15,6 +15,7 @@ const intlMock = getIntlMock(messages);
 
 describe('<OppholdstillatelseTabell>', () => {
   it('skal vise tabeller med oppholdstillatelser', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallow(<OppholdstillatelseTabell.WrappedComponent
       intl={intlMock}
       oppholdstillatelse={[{

@@ -159,6 +159,7 @@ const VurderOgFastsettATFL: FunctionComponent<OwnProps> & StaticFunctions = ({
   arbeidsgiverOpplysningerPerId,
 }) => (
   <div>
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <InntektstabellPanel
       key="inntektstabell"
       tabell={finnInntektstabell(readOnly,
@@ -211,6 +212,7 @@ const VurderOgFastsettATFL: FunctionComponent<OwnProps> & StaticFunctions = ({
       )}
       {tilfeller.includes(faktaOmBeregningTilfelle.VURDER_BESTEBEREGNING) && !tilfeller.includes(faktaOmBeregningTilfelle.FASTSETT_BG_KUN_YTELSE)
       && (
+        /* @ts-ignore Fiks cannot be used as a JSX component */
         <VurderBesteberegningForm
           readOnly={readOnly}
           isAksjonspunktClosed={isAksjonspunktClosed}

@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import { Form, RadioGroupField, RadioOption } from '@fpsak-frontend/form-hooks';
+import { Form, RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
 import {
   ProsessStegBegrunnelseTextFieldNew, ProsessPanelTemplate,
 } from '@fpsak-frontend/prosess-felles';
@@ -13,10 +13,10 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   Table, TableColumn, TableRow, VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import {
   DDMMYYYY_DATE_FORMAT, isObject, required, getKodeverknavnFn,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';

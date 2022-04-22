@@ -3,7 +3,7 @@ import moment from 'moment';
 import { injectIntl, IntlShape, WrappedComponentProps } from 'react-intl';
 
 import { FamilieHendelse, FamilieHendelseSamling } from '@fpsak-frontend/types';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import utsettelseArsakCodes from '@fpsak-frontend/kodeverk/src/utsettelseArsakCodes';
 import overforingArsakCodes from '@fpsak-frontend/kodeverk/src/overforingArsakCodes';
 import FerieOgArbeidsPeriode from './perioder/FerieOgArbeidsPeriode';
@@ -41,6 +41,7 @@ export const renderPeriode = (
     case utsettelseArsakCodes.ARBEID:
     case utsettelseArsakCodes.LOVBESTEMT_FERIE:
       return (
+        /* @ts-ignore Fiks cannot be used as a JSX component */
         <FerieOgArbeidsPeriode
           fieldId={fieldId}
           id={id}
@@ -59,6 +60,7 @@ export const renderPeriode = (
     case utsettelseArsakCodes.HV_OVELSE:
     case utsettelseArsakCodes.NAV_TILTAK:
       return (
+        /* @ts-ignore Fiks cannot be used as a JSX component */
         <SykdomOgSkadePeriode
           fieldId={fieldId}
           id={id}
@@ -80,6 +82,7 @@ export const renderPeriode = (
     case utsettelseArsakCodes.INSTITUSJONSOPPHOLD_SØKER:
     case utsettelseArsakCodes.INSTITUSJONSOPPHOLD_BARNET:
       return (
+        /* @ts-ignore Fiks cannot be used as a JSX component */
         <InnleggelsePeriode
           fieldId={fieldId}
           id={id}
@@ -94,6 +97,7 @@ export const renderPeriode = (
     case utsettelseArsakCodes.UDEFINERT:
       if (overforingSwitch === overforingArsakCodes.SYKDOM_ANNEN_FORELDER || farHarSøktFørsteSeksUkerOgPeriodeFomErInnenfor) {
         return (
+          /* @ts-ignore Fiks cannot be used as a JSX component */
           <SykdomOgSkadePeriode
             fieldId={fieldId}
             id={id}
@@ -115,6 +119,7 @@ export const renderPeriode = (
       if (overforingSwitch === overforingArsakCodes.IKKE_RETT_ANNEN_FORELDER
         || overforingSwitch === overforingArsakCodes.ALENEOMSORG) {
         return (
+          /* @ts-ignore Fiks cannot be used as a JSX component */
           <ForeldreAnsvarPeriode
             fieldId={fieldId}
             id={id}
@@ -130,6 +135,7 @@ export const renderPeriode = (
 
       if (overforingSwitch === overforingArsakCodes.INSTITUSJONSOPPHOLD_ANNEN_FORELDER) {
         return (
+          /* @ts-ignore Fiks cannot be used as a JSX component */
           <InnleggelsePeriode
             fieldId={fieldId}
             id={id}
@@ -144,6 +150,7 @@ export const renderPeriode = (
       }
 
       return (
+        /* @ts-ignore Fiks cannot be used as a JSX component */
         <FerieOgArbeidsPeriode
           fieldId={fieldId}
           id={id}

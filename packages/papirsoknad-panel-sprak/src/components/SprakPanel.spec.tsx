@@ -9,6 +9,7 @@ import SprakPanel from './SprakPanel';
 
 describe('<SprakPanel>', () => {
   it('skal vise komponent korrekt', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallow(<SprakPanel.WrappedComponent intl={getIntlMock(messages)} readOnly={false} />);
     const sprakValg = wrapper.find(RadioOption);
     expect(sprakValg).toHaveLength(3);

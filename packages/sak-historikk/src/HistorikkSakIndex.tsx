@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 import { Location } from 'history';
 
 import { Historikkinnslag, AlleKodeverk, AlleKodeverkTilbakekreving } from '@fpsak-frontend/types';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import History from './components/History';
 import messages from '../i18n/nb_NO.json';

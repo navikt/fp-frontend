@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import {
   AksjonspunktHelpTextTemp, VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import {
   FaktaBegrunnelseTextFieldNew,
@@ -12,7 +12,7 @@ import {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import aksjonspunktStatus, { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { Form, CheckboxField } from '@fpsak-frontend/form-hooks';
+import { Form, CheckboxField } from '@navikt/ft-form-hooks';
 import { ManuellKontrollBesteberegningAP }
   from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/KontrollerBesteberegningAP';
 

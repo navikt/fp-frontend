@@ -1,7 +1,7 @@
 import React from 'react';
 import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
-import { Image } from '@navikt/fp-react-components';
+import { Image } from '@navikt/ft-ui-komponenter';
 
 import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 

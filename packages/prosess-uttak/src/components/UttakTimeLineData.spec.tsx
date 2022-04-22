@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import { FormattedMessage } from 'react-intl';
 import { Column } from 'nav-frontend-grid';
 
-import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextTemp } from '@navikt/ft-ui-komponenter';
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
 import {

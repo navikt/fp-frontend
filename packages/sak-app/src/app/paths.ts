@@ -1,6 +1,6 @@
 import { Location, Search } from 'history';
 
-import { buildPath, formatQueryString, parseQueryString } from '@fpsak-frontend/utils';
+import { buildPath, formatQueryString, parseQueryString } from '@navikt/ft-utils';
 import { skjermlenkeCodes } from '@fpsak-frontend/konstanter';
 
 const FP_FRONTEND = 'fpsak';

@@ -34,6 +34,7 @@ describe('<BostedFaktaView>', () => {
   } as Personoversikt;
 
   it('vise bostedBarn for hvert barn', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallow(<BostedFaktaView.WrappedComponent
       intl={intlMock}
       personoversikt={soker}
@@ -47,6 +48,7 @@ describe('<BostedFaktaView>', () => {
   });
 
   it('vise bostedSoker for søker', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallow(<BostedFaktaView.WrappedComponent
       intl={intlMock}
       personoversikt={soker}
@@ -65,6 +67,7 @@ describe('<BostedFaktaView>', () => {
       sivilstand: 'UGIF',
       adresser: [],
     } as PersonopplysningerBasis;
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallow(<BostedFaktaView.WrappedComponent
       intl={intlMock}
       personoversikt={{

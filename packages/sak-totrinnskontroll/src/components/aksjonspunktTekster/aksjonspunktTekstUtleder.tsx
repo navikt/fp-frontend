@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import behandlingStatusCode from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import klageVurderingOmgjoerCodes from '@fpsak-frontend/kodeverk/src/klageVurderingOmgjoer';

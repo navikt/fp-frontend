@@ -2,7 +2,7 @@ import React, {
   FunctionComponent, ReactElement,
 } from 'react';
 
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 interface OwnProps {

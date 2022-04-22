@@ -3,11 +3,11 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
-import { Image } from '@navikt/fp-react-components';
+import { Image } from '@navikt/ft-ui-komponenter';
 
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import messages from '../../../../i18n/nb_NO.json';
 import styles from './iverksetterVedtakStatusModal.less';

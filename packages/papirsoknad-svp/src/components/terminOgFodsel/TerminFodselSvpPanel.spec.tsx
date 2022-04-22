@@ -9,6 +9,7 @@ import TerminFodselSvpPanel from './TerminFodselSvpPanel';
 
 describe('<TerminFodselSvpPanel>', () => {
   it('skal rendre komponent korrekt', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallow(<TerminFodselSvpPanel.WrappedComponent
       intl={getIntlMock(messages)}
       readOnly={false}

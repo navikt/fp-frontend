@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState, useEffect } from 'react';
 import axios from 'axios';
 
 import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import { getPathToFplos } from '../paths';
 import FagsakSearchIndex from '../../fagsakSearch/FagsakSearchIndex';

@@ -6,21 +6,20 @@ import { useForm } from 'react-hook-form';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { Element } from 'nav-frontend-typografi';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import {
   required, hasValidText, maxLength, minLength,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import {
   TextAreaField, RadioGroupField, RadioOption, Form, CheckboxField,
-} from '@fpsak-frontend/form-hooks';
+} from '@navikt/ft-form-hooks';
 import {
   AlleKodeverk,
   AoIArbeidsforhold, Inntektsmelding, Inntektspost, ManglendeInntektsmeldingVurdering,
 } from '@fpsak-frontend/types';
 import {
-  VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+  VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 
 import ArbeidsforholdOgInntekt from '../../types/arbeidsforholdOgInntekt';

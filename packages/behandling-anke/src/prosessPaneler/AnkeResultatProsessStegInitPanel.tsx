@@ -10,7 +10,7 @@ import {
 } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps, useStandardProsessPanelProps } from '@fpsak-frontend/behandling-felles';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { createIntl, forhandsvisDokument } from '@fpsak-frontend/utils';
+import { createIntl, forhandsvisDokument } from '@navikt/ft-utils';
 
 import messages from '../../i18n/nb_NO.json';
 import AnkeBehandlingModal from '../modaler/AnkeBehandlingModal';

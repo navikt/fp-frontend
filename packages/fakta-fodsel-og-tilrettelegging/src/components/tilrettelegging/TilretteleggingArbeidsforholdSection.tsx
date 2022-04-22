@@ -3,13 +3,12 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { FieldArray, FormSection, formValueSelector } from 'redux-form';
 import { Normaltekst, Element } from 'nav-frontend-typografi';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import { DatepickerField, CheckboxField } from '@fpsak-frontend/form';
-import { hasValidDate, required } from '@fpsak-frontend/utils';
+import { hasValidDate, required } from '@navikt/ft-utils';
 import {
-  VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+  VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, ArbeidsforholdFodselOgTilrettelegging } from '@fpsak-frontend/types';
 
 import TilrettteleggingFieldArray from './TilretteleggingFieldArray';
@@ -124,6 +123,7 @@ export const TilretteleggingArbeidsforholdSection: FunctionComponent<PureOwnProp
       </FlexContainer>
     )}
     {arbeidsforhold.velferdspermisjoner.map((permisjon) => (
+      /* @ts-ignore Fiks cannot be used as a JSX component */
       <VelferdspermisjonSection
         permisjon={permisjon}
         readOnly={readOnly}

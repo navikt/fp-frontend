@@ -1,6 +1,6 @@
 import inntektskategorier from '@fpsak-frontend/kodeverk/src/inntektskategorier';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import { formatCurrencyNoKr, removeSpacesFromNumber } from '@fpsak-frontend/utils';
+import { formatCurrencyNoKr, removeSpacesFromNumber } from '@navikt/ft-utils';
 import {
   ArbeidsgiverOpplysningerPerId,
   FordelBeregningsgrunnlagAndel,

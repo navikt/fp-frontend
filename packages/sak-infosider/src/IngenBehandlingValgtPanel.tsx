@@ -3,7 +3,7 @@ import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import messages from '../i18n/nb_NO.json';
 

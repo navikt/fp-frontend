@@ -12,6 +12,7 @@ const intlMock = getIntlMock(messages);
 
 describe('<FritekstAnkeBrevTextField>', () => {
   it('skal rendre komponent korrekt', () => {
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallow(<FritekstAnkeBrevTextField.WrappedComponent
       sprakkode="nb"
       readOnly={false}

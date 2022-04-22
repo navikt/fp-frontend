@@ -4,7 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 import {
   AlleKodeverk, AlleKodeverkTilbakekreving, StandardFaktaPanelProps, Verge,
 } from '@fpsak-frontend/types';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import RegistrereVergeInfoPanel from './components/RegistrereVergeInfoPanel';
 import messages from '../i18n/nb_NO.json';

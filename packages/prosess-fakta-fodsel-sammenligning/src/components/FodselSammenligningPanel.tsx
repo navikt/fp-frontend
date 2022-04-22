@@ -8,8 +8,8 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 
 import {
   Table, TableColumn, TableRow,
-} from '@fpsak-frontend/shared-components';
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
+} from '@navikt/ft-ui-komponenter';
+import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { AvklartBarn, FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 

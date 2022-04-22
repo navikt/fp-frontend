@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { OverstyringKnapp } from '@fpsak-frontend/shared-components';
+import { OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import { InntektstabellPanelImpl } from './InntektstabellPanel';

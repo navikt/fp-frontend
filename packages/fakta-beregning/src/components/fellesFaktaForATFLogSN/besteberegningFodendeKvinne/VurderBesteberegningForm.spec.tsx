@@ -1,4 +1,4 @@
-import { isRequiredMessage } from '@fpsak-frontend/utils';
+import { isRequiredMessage } from '@navikt/ft-utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import VurderBesteberegningForm, { besteberegningField } from './VurderBesteberegningForm';

@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 
-import { LoadingPanel, usePrevious } from '@fpsak-frontend/shared-components';
+import { LoadingPanel, usePrevious } from '@navikt/ft-ui-komponenter';
 import DokumenterSakIndex from '@fpsak-frontend/sak-dokumenter';
 import { Dokument } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';

@@ -7,9 +7,9 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import {
   dateAfterOrEqual, hasValidDate, required, dateIsBefore,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { DatepickerField, RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { ArrowBox } from '@fpsak-frontend/shared-components';
+import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import AktivtArbeidsforholdHandling from '../../kodeverk/aktivtArbeidsforholdHandling';
 import CustomArbeidsforhold from '../../typer/CustomArbeidsforholdTsType';
@@ -79,6 +79,7 @@ const utledRadioOptionForArbeidsforholdSomIkkeErAktive = (
         disabled={skalDisableOverstyrTom(arbeidsforhold)}
         manualHideChildren
       >
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <BehandlingFormFieldCleaner formName={formName} fieldNames={['overstyrtTom']}>
           { arbeidsforholdHandlingVerdi === arbeidsforholdHandling.OVERSTYR_TOM && (
             <ArrowBox>
@@ -163,6 +164,7 @@ const ArbeidsforholdRadioknapper: FunctionComponent<OwnProps & WrappedComponentP
       value={arbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD}
       manualHideChildren
     >
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <BehandlingFormFieldCleaner
         formName={formName}
         fieldNames={['aktivtArbeidsforholdHandlingField']}

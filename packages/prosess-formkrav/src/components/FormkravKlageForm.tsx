@@ -10,9 +10,9 @@ import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew,
 } from '@fpsak-frontend/prosess-felles';
-import { RadioGroupField, RadioOption, SelectField } from '@fpsak-frontend/form-hooks';
-import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { DATE_TIME_FORMAT, required, getKodeverknavnFn } from '@fpsak-frontend/utils';
+import { RadioGroupField, RadioOption, SelectField } from '@navikt/ft-form-hooks';
+import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { DATE_TIME_FORMAT, required, getKodeverknavnFn } from '@navikt/ft-utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AlleKodeverk, KlageVurdering } from '@fpsak-frontend/types';
 

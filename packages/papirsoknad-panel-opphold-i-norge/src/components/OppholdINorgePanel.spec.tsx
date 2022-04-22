@@ -12,7 +12,7 @@ import {
   ISO_DATE_FORMAT,
   DDMMYYYY_DATE_FORMAT,
   isRequiredMessage,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import OppholdINorgePanel, { OppholdINorgePanelImpl } from './OppholdINorgePanel';

@@ -2,12 +2,11 @@ import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import React, { FunctionComponent, ReactNode } from 'react';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
-import { Image } from '@navikt/fp-react-components';
 
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import NavFieldGroup from '@fpsak-frontend/form/src/NavFieldGroup';
-import { createIntl } from '@fpsak-frontend/utils';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { createIntl } from '@navikt/ft-utils';
+import { VerticalSpacer, Image } from '@navikt/ft-ui-komponenter';
 
 import messages from '../i18n/nb_NO.json';
 import styles from './periodFieldArray.less';

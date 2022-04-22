@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import classNames from 'classnames/bind';
 import Panel from 'nav-frontend-paneler';
 import { Undertekst } from 'nav-frontend-typografi';
-import { Image } from '@navikt/fp-react-components';
+import { Image } from '@navikt/ft-ui-komponenter';
 
 import HistorikkAktor from '@fpsak-frontend/kodeverk/src/historikkAktor';
 import navAnsattHistorikkImg from '@fpsak-frontend/assets/images/nav_ansatt_historikk.svg';

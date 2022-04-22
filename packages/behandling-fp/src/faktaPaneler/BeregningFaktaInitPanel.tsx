@@ -2,6 +2,7 @@ import React, {
   FunctionComponent,
 } from 'react';
 
+import { createIntl } from '@navikt/ft-utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import BeregningFaktaIndex from '@fpsak-frontend/fakta-beregning';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
@@ -9,7 +10,6 @@ import {
   AksessRettigheter, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag,
 } from '@fpsak-frontend/types';
 import { FaktaDefaultInitPanel, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles';
-import { createIntl } from '@fpsak-frontend/utils';
 
 import messages from '../../i18n/nb_NO.json';
 import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';

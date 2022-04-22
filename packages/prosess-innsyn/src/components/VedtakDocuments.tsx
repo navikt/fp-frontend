@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { Column, Row } from 'nav-frontend-grid';
 import Lenke from 'nav-frontend-lenker';
 
-import { DateLabel, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { DateLabel, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { InnsynVedtaksdokument, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { hentVedtakDokumentLenke } from '@fpsak-frontend/konstanter';
 

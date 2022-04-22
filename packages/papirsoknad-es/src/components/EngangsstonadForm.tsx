@@ -3,7 +3,7 @@ import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
-import { isEqual, omit } from '@fpsak-frontend/utils';
+import { isEqual, omit } from '@navikt/ft-utils';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import { SoknadData, getRegisteredFields } from '@fpsak-frontend/papirsoknad-felles';
 import { AlleKodeverk } from '@fpsak-frontend/types';
@@ -143,4 +143,5 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
 
 export default connect(mapStateToPropsFactory)(reduxForm({
   form: ENGANGSSTONAD_FORM_NAME,
+/* @ts-ignore Fiks */
 })(EngangsstonadForm));

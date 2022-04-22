@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 import {
   decodeHtmlEntity, hasValidText, maxLength, minLength, required, createIntl,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { TextAreaField } from '@fpsak-frontend/form';
 
 import { Aksjonspunkt } from '@fpsak-frontend/types';

@@ -6,18 +6,17 @@ import {
 import { createSelector } from 'reselect';
 import { FormattedMessage, IntlShape } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import overforingArsakCodes from '@fpsak-frontend/kodeverk/src/overforingArsakCodes';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
 import {
-  ArrowBox, VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+  ArrowBox, VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
 import {
   hasValidPeriod, hasValidText, maxLength, minLength, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { FamilieHendelse } from '@fpsak-frontend/types';
 
 import PerioderKnapper from './PerioderKnapper';
@@ -155,6 +154,7 @@ export const SykdomOgSkadePeriode: FunctionComponent<PureOwnProps & MappedOwnPro
               <ArrowBox>
                 <FieldArray
                   name="dokumentertePerioder"
+                  /* @ts-ignore Fiks cannot be used as a JSX component */
                   component={DokumentertePerioderPeriodePicker}
                   props={{ fraDato, tilDato, readOnly }}
                 />

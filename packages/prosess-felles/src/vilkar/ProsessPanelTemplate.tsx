@@ -3,13 +3,10 @@ import {
   Undertittel, Undertekst, Element, Normaltekst,
 } from 'nav-frontend-typografi';
 import {
-  FlexContainer, FlexRow, FlexColumn, Image,
-} from '@navikt/fp-react-components';
+  FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer, AksjonspunktBox,
+} from '@navikt/ft-ui-komponenter';
 
-import {
-  VerticalSpacer, AksjonspunktBox,
-} from '@fpsak-frontend/shared-components';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 import avslattImage from '@fpsak-frontend/assets/images/avslaatt_hover.svg';
 import innvilgetImage from '@fpsak-frontend/assets/images/innvilget_hover.svg';
 

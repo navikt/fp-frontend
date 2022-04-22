@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { AlleKodeverk } from '@fpsak-frontend/types';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import OppholdINorgePanel, { FormValues } from './components/OppholdINorgePanel';
 import messages from '../i18n/nb_NO.json';
@@ -29,6 +29,7 @@ const OppholdINorgePapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctio
   alleKodeverk,
 }) => (
   <RawIntlProvider value={intl}>
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <OppholdINorgePanel
       readOnly={readOnly}
       form={form}

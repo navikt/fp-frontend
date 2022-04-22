@@ -3,17 +3,16 @@ import { FormattedMessage } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import {
-  ArrowBox, VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+  ArrowBox, VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import {
   ariaCheck, hasValidText, maxLength, minLength, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import {
   RadioGroupField, RadioOption, TextAreaField, Form,
-} from '@fpsak-frontend/form-hooks';
+} from '@navikt/ft-form-hooks';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {

@@ -3,15 +3,14 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Normaltekst } from 'nav-frontend-typografi';
 import moment from 'moment';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import {
-  DateLabel, PeriodLabel, Table, TableColumn, TableRow, VerticalSpacer, FaktaGruppe,
-} from '@fpsak-frontend/shared-components';
+  DateLabel, PeriodLabel, Table, TableColumn, TableRow, VerticalSpacer, FaktaGruppe, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { DDMMYYYY_DATE_FORMAT, required } from '@fpsak-frontend/utils';
+import { DDMMYYYY_DATE_FORMAT, required } from '@navikt/ft-utils';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
   Aksjonspunkt, KodeverkMedNavn, MedlemPeriode, Medlemskap, Soknad, AlleKodeverk,

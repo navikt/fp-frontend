@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from '@navikt/fp-react-components';
+import { Image } from '@navikt/ft-ui-komponenter';
 
 import { mountWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 // eslint-disable-next-line import/extensions

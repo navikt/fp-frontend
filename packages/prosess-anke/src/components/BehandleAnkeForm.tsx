@@ -16,10 +16,10 @@ import {
 } from '@fpsak-frontend/form';
 import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT, required } from '@fpsak-frontend/utils';
+import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT, required } from '@navikt/ft-utils';
 import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import ankeVurderingOmgjoer from '@fpsak-frontend/kodeverk/src/ankeVurderingOmgjoer';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import ankeOmgjorArsak from '@fpsak-frontend/kodeverk/src/ankeOmgjorArsak';
@@ -242,6 +242,7 @@ export const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps &
       <VerticalSpacer sixteenPx />
       {kabalEnabled && !readOnly && formValues.sendTilKabal && (
         <div className={styles.confirmVilkarForm}>
+          { /* @ts-ignore Fiks cannot be used as a JSX component */ }
           <ProsessStegSubmitButton
             formName={formProps.form}
             isReadOnly={readOnly}
@@ -367,6 +368,7 @@ export const BehandleAnkeForm: FunctionComponent<PureOwnProps & MappedOwnProps &
         <VerticalSpacer sixteenPx />
         <Row>
           <Column xs="8">
+            { /* @ts-ignore Fiks cannot be used as a JSX component */ }
             <ProsessStegSubmitButton
               formName={formProps.form}
               isReadOnly={readOnly}

@@ -23,12 +23,16 @@ const FagsakGrid: FunctionComponent<OwnProps> = ({
 }) => (
   <>
     <MediaQuery maxWidth={1599}>
-      {visittkortContent()}
+      <>
+        {visittkortContent()}
+      </>
     </MediaQuery>
     <div className={styles.gridContainer}>
       <div className={styles.leftColumn}>
         <MediaQuery minWidth={1600}>
-          {visittkortContent()}
+          <>
+            {visittkortContent()}
+          </>
         </MediaQuery>
         {behandlingContent}
       </div>

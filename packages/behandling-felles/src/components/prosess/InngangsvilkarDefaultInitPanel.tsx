@@ -4,7 +4,7 @@ import React, {
 
 import { RestApiHooks, RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { RequestApi, RestKey } from '@fpsak-frontend/rest-api';
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { StandardProsessPanelProps } from '@fpsak-frontend/types';
 
 import InngangsvilkarPanelInitProps from '../../types/inngangsvilkarPanelInitProps';

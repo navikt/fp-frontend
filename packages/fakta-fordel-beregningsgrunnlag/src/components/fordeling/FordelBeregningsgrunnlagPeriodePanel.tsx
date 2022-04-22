@@ -8,7 +8,7 @@ import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel';
 import {
   DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT,
   formatCurrencyNoKr,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import {
   ArbeidsgiverOpplysningerPerId, BeregningsgrunnlagAndel,
   BeregningsgrunnlagPeriodeProp, FordelBeregningsgrunnlagAndel,

@@ -11,9 +11,9 @@ import {
 } from '@fpsak-frontend/types';
 import {
   VerticalSpacer, AksjonspunktHelpTextTemp,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Form } from '@fpsak-frontend/form-hooks';
+import { Form } from '@navikt/ft-form-hooks';
 import {
   BekreftDokumentertDatoAksjonspunktAp, BekreftEktefelleAksjonspunktAp, BekreftMannAdoptererAksjonspunktAp,
 } from '@fpsak-frontend/types-avklar-aksjonspunkter';

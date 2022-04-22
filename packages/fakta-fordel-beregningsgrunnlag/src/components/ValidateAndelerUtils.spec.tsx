@@ -1,4 +1,4 @@
-import { isRequiredMessage } from '@fpsak-frontend/utils';
+import { isRequiredMessage } from '@navikt/ft-utils';
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import {

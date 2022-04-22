@@ -1,10 +1,9 @@
 import React from 'react';
 import sinon from 'sinon';
-import { Image } from '@navikt/fp-react-components';
 
 import {
-  DateLabel, PeriodLabel, Table, TableColumn, TableRow,
-} from '@fpsak-frontend/shared-components';
+  DateLabel, PeriodLabel, Table, TableColumn, TableRow, Image,
+} from '@navikt/ft-ui-komponenter';
 import { Arbeidsforhold } from '@fpsak-frontend/types';
 import { mountWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 

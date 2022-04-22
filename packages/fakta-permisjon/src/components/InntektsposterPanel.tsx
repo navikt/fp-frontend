@@ -6,16 +6,13 @@ import dayjs from 'dayjs';
 import Lenke from 'nav-frontend-lenker';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import {
-  FlexColumn, FlexContainer, FlexRow, Image,
-} from '@navikt/fp-react-components';
+  FlexColumn, FlexContainer, FlexRow, Image, FloatRight,
+} from '@navikt/ft-ui-komponenter';
 
 import pilOppIkonUrl from '@fpsak-frontend/assets/images/pil_opp.svg';
 import pilNedIkonUrl from '@fpsak-frontend/assets/images/pil_ned.svg';
-import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { Inntektspost } from '@fpsak-frontend/types';
-import {
-  FloatRight,
-} from '@fpsak-frontend/shared-components';
 
 import styles from './inntektsposterPanel.less';
 

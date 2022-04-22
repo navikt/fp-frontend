@@ -4,7 +4,7 @@ import React, {
 import { RawIntlProvider } from 'react-intl';
 
 import { Behandling } from '@fpsak-frontend/types';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import ProsessContainer from './prosess/ProsessContainer';
 import FaktaContainer from './fakta/FaktaContainer';

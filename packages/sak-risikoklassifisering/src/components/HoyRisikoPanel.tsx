@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import Panel from 'nav-frontend-paneler';
 
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Risikoklassifisering, Aksjonspunkt, KodeverkMedNavn } from '@fpsak-frontend/types';
 import { VurderFaresignalerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 

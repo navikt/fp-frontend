@@ -6,8 +6,8 @@ import { Undertekst } from 'nav-frontend-typografi';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 
 import { NavFieldGroup, RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { isRequiredMessage } from '@fpsak-frontend/utils';
-import { ArrowBox, BorderBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { isRequiredMessage } from '@navikt/ft-utils';
+import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import { AlleKodeverk } from '@fpsak-frontend/types';

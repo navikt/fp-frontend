@@ -8,10 +8,10 @@ import { Column, Row } from 'nav-frontend-grid';
 import {
   DatepickerField, InputField, RadioGroupField, RadioOption, SelectField,
 } from '@fpsak-frontend/form';
-import { ArrowBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
   dateBeforeOrEqualToToday, hasValidDate, hasValidInteger, hasValidOrgNumber, required, validPeriodeFomTom,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 

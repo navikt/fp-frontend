@@ -4,11 +4,11 @@ import { Column, Row } from 'nav-frontend-grid';
 import { Undertekst } from 'nav-frontend-typografi';
 
 import { Behandlingsresultat } from '@fpsak-frontend/types';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
-import { TextAreaField } from '@fpsak-frontend/form-hooks';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { TextAreaField } from '@navikt/ft-form-hooks';
 import {
   decodeHtmlEntity, getLanguageFromSprakkode, hasValidText, maxLength, minLength,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 
 import styles from './vedtakFritekstPanel.less';
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 import { createSelector, createStructuredSelector } from 'reselect';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
   ArbeidsgiverOpplysningerPerId, FaktaOmBeregning, AlleKodeverk, KortvarigAndel,
 } from '@fpsak-frontend/types';
@@ -174,6 +174,7 @@ const getFaktaPanels = (
   faktaPanels.push(
     <React.Fragment key="VurderOgFastsettATFL">
       {spacer(true)}
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <VurderOgFastsettATFL
         readOnly={readOnly}
         isAksjonspunktClosed={isAksjonspunktClosed}

@@ -2,7 +2,7 @@ import React, {
   FunctionComponent,
 } from 'react';
 
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import FodselVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-fodsel';
@@ -11,7 +11,7 @@ import {
 } from '@fpsak-frontend/types';
 import { InngangsvilkarDefaultInitPanel, OverstyringPanelDef, InngangsvilkarPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import messages from '../../../i18n/nb_NO.json';
 import { EsBehandlingApiKeys, requestEsApi } from '../../data/esBehandlingApi';

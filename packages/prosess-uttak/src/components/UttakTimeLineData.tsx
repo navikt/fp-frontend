@@ -4,12 +4,11 @@ import React, {
 import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element } from 'nav-frontend-typografi';
-import { Image } from '@navikt/fp-react-components';
 
-import { calcDays, getKodeverknavnFn } from '@fpsak-frontend/utils';
+import { calcDays, getKodeverknavnFn } from '@navikt/ft-utils';
 import {
-  AksjonspunktHelpTextTemp, VerticalSpacer, FloatRight, EditedIcon,
-} from '@fpsak-frontend/shared-components';
+  AksjonspunktHelpTextTemp, VerticalSpacer, FloatRight, EditedIcon, Image,
+} from '@navikt/ft-ui-komponenter';
 import splitPeriodImageHoverUrl from '@fpsak-frontend/assets/images/splitt_hover.svg';
 import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
 import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
@@ -274,6 +273,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
                 )}
             {showDelPeriodeModal
                 && (
+                  /* @ts-ignore Fiks cannot be used as a JSX component */
                   <DelOppPeriodeModal
                     cancelEvent={this.hideModal}
                     showModal={showDelPeriodeModal}
@@ -301,6 +301,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
           <VerticalSpacer twentyPx />
         </>
         )}
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <UttakActivity
           cancelSelectedActivity={callbackCancelSelectedActivity}
           updateActivity={callbackUpdateActivity}

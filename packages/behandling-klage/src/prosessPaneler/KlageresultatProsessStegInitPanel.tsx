@@ -14,7 +14,7 @@ import {
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { createIntl, forhandsvisDokument } from '@fpsak-frontend/utils';
+import { createIntl, forhandsvisDokument } from '@navikt/ft-utils';
 
 import messages from '../../i18n/nb_NO.json';
 import { restApiKlageHooks, KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';

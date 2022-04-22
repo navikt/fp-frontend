@@ -25,6 +25,7 @@ const EngangsstonadPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   fagsakPersonnummer,
 }) => (
   <ReduxWrapper formName="EngangsstonadPapirsoknadIndex">
+    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <EngangsstonadForm
       onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
       onSubmit={onSubmit}

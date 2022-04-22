@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
-import { ariaCheck, isRequiredMessage, createIntl } from '@fpsak-frontend/utils';
+import { ariaCheck, isRequiredMessage, createIntl } from '@navikt/ft-utils';
 import { hasBehandlingFormErrorsOfType } from '@fpsak-frontend/form';
 
 import { isDirty as reduxIsDirty, isSubmitting as reduxIsSubmitting } from 'redux-form';

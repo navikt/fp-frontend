@@ -5,7 +5,7 @@ import { BehandlingPaVent } from '@fpsak-frontend/behandling-felles';
 import {
   Behandling, AlleKodeverk, Fagsak, AksessRettigheter, Aksjonspunkt,
 } from '@fpsak-frontend/types';
-import { LoadingPanel } from '@fpsak-frontend/shared-components';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import { AsyncPollingStatus } from '@fpsak-frontend/rest-api';
 

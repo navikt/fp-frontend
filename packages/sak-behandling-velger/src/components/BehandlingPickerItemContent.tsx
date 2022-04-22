@@ -4,12 +4,9 @@ import classNames from 'classnames';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import Panel from 'nav-frontend-paneler';
 import {
-  FlexContainer, FlexRow, FlexColumn, Image, Tooltip,
-} from '@navikt/fp-react-components';
+  FlexContainer, FlexRow, FlexColumn, Image, Tooltip, DateLabel, TimeLabel, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 
-import {
-  DateLabel, TimeLabel, VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
 import chevronUp from '@fpsak-frontend/assets/images/pil_opp.svg';

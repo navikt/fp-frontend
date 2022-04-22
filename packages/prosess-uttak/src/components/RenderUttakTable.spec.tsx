@@ -1,6 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
+import { TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
+import { DecimalField, InputField, SelectField } from '@fpsak-frontend/form';
 import { MockFieldsWithContent } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
@@ -45,6 +47,7 @@ const arbeidsgiverOpplysningerPerId = {
 describe('<RenderUttakTable>', () => {
   it('render uttakstable 1 rad', () => {
     const fields = new MockFieldsWithContent('UttakFieldArray', uttakFields1);
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallow(<RenderUttakTable.WrappedComponent
       intl={intlMock}
       readOnly={false}
@@ -52,19 +55,20 @@ describe('<RenderUttakTable>', () => {
       periodeTyper={[]}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
-    const tableRow = wrapper.find('TableRow');
+    const tableRow = wrapper.find(TableRow);
     expect(tableRow).toHaveLength(1);
-    const tableColumn = wrapper.find('TableColumn');
+    const tableColumn = wrapper.find(TableColumn);
     expect(tableColumn).toHaveLength(5);
-    const selectField = wrapper.find('SelectField');
+    const selectField = wrapper.find(SelectField);
     expect(selectField).toHaveLength(1);
-    const inputField = wrapper.find('InputField');
+    const inputField = wrapper.find(InputField);
     expect(inputField).toHaveLength(1);
-    const decimalField = wrapper.find('DecimalField');
+    const decimalField = wrapper.find(DecimalField);
     expect(decimalField).toHaveLength(2);
   });
   it('render uttakstable 2 rader', () => {
     const fields = new MockFieldsWithContent('UttakFieldArray', uttakFields2);
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     const wrapper = shallow(<RenderUttakTable.WrappedComponent
       intl={intlMock}
       readOnly={false}
@@ -72,15 +76,15 @@ describe('<RenderUttakTable>', () => {
       periodeTyper={[]}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />);
-    const tableRow = wrapper.find('TableRow');
+    const tableRow = wrapper.find(TableRow);
     expect(tableRow).toHaveLength(2);
-    const tableColumn = wrapper.find('TableColumn');
+    const tableColumn = wrapper.find(TableColumn);
     expect(tableColumn).toHaveLength(10);
-    const selectField = wrapper.find('SelectField');
+    const selectField = wrapper.find(SelectField);
     expect(selectField).toHaveLength(2);
-    const inputField = wrapper.find('InputField');
+    const inputField = wrapper.find(InputField);
     expect(inputField).toHaveLength(2);
-    const decimalField = wrapper.find('DecimalField');
+    const decimalField = wrapper.find(DecimalField);
     expect(decimalField).toHaveLength(4);
   });
 });

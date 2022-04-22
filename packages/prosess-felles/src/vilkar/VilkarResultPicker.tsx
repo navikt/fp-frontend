@@ -1,21 +1,17 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { useFormContext } from 'react-hook-form';
 import {
-  FlexContainer, FlexRow, FlexColumn, Image,
-} from '@navikt/fp-react-components';
+  FlexContainer, FlexRow, FlexColumn, Image, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 
-import {
-  VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
-  Datepicker, RadioGroupField, RadioOption, SelectField,
-} from '@fpsak-frontend/form-hooks';
+  Datepicker, RadioGroupField, RadioOption, SelectField, formHooks,
+} from '@navikt/ft-form-hooks';
 import {
   hasValidDate, required, createIntl, requiredIfCustomFunctionIsTrueNew,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import avslattImage from '@fpsak-frontend/assets/images/avslaatt.svg';
 import innvilgetImage from '@fpsak-frontend/assets/images/check.svg';
 import { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@fpsak-frontend/types';
@@ -67,7 +63,7 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
   erMedlemskapsPanel = false,
   skalKunneInnvilge = true,
 }) => {
-  const { getValues, watch } = useFormContext();
+  const { getValues, watch } = formHooks.useFormContext();
   const erVilkarOk = watch('erVilkarOk');
 
   return (

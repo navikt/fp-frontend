@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextTemp } from '@navikt/ft-ui-komponenter';
 import {
   AlleKodeverk, Personoversikt, Soknad, Ytelsefordeling,
 } from '@fpsak-frontend/types';

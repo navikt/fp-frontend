@@ -3,7 +3,7 @@ import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl'
 
 import {
   PeriodLabel, DateLabel, Table, TableColumn, TableRow, FaktaGruppe,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk, Oppholdstillatelse } from '@fpsak-frontend/types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 

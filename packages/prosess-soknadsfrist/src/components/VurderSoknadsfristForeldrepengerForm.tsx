@@ -10,13 +10,13 @@ import Panel from 'nav-frontend-paneler';
 
 import {
   Form, Datepicker, RadioGroupField, RadioOption,
-} from '@fpsak-frontend/form-hooks';
+} from '@navikt/ft-form-hooks';
 import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+} from '@navikt/ft-ui-komponenter';
 import {
   dateBeforeOrEqualToToday, DDMMYYYY_DATE_FORMAT, hasValidDate, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
 import { Aksjonspunkt, UttakPeriodeGrense } from '@fpsak-frontend/types';

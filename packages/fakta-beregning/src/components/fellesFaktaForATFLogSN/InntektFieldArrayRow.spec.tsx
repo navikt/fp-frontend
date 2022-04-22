@@ -5,7 +5,7 @@ import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregn
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import inntektskategorier from '@fpsak-frontend/kodeverk/src/inntektskategorier';
-import { TableColumn, TableRow } from '@fpsak-frontend/shared-components';
+import { TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 import { InputField, PeriodpickerField, SelectField } from '@fpsak-frontend/form';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';

@@ -2,9 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import Table from '@fpsak-frontend/shared-components/src/table/Table';
-import TableRow from '@fpsak-frontend/shared-components/src/table/TableRow';
-import TableColumn from '@fpsak-frontend/shared-components/src/table/TableColumn';
+import {
+  Table, TableRow, TableColumn,
+} from '@navikt/ft-ui-komponenter';
 
 interface OwnProps {
   headerColumnContent: React.ReactElement[];

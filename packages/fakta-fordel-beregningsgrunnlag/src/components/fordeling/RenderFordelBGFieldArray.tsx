@@ -5,15 +5,14 @@ import {
 } from 'react-intl';
 import { Element, Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
-import { Image } from '@navikt/fp-react-components';
 
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import {
   formatCurrencyNoKr, isArrayEmpty, parseCurrencyInput, removeSpacesFromNumber, getKodeverknavnFn,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import {
-  Table, TableColumn, TableRow,
-} from '@fpsak-frontend/shared-components';
+  Table, TableColumn, TableRow, Image,
+} from '@navikt/ft-ui-komponenter';
 import bt from '@fpsak-frontend/kodeverk/src/behandlingType';
 import {
   DecimalField, InputField, NavFieldGroup, PeriodpickerField, SelectField,

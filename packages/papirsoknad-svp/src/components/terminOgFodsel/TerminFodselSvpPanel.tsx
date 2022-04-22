@@ -3,13 +3,13 @@ import { Column, Row } from 'nav-frontend-grid';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 
-import { BorderBox } from '@fpsak-frontend/shared-components';
+import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { DatepickerField } from '@fpsak-frontend/form';
 import {
   dateBeforeOrEqualToToday,
   hasValidDate,
   required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 
 interface OwnProps {
   readOnly: boolean;

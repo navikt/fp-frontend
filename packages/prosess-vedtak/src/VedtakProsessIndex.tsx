@@ -9,7 +9,7 @@ import {
   SimuleringResultat, Beregningsgrunnlag, Medlemskap, Aksjonspunkt, StandardProsessPanelProps,
 } from '@fpsak-frontend/types';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import VedtakForm, { ForhandsvisData } from './components/forstegang/VedtakForm';
 import VedtakRevurderingForm from './components/revurdering/VedtakRevurderingForm';

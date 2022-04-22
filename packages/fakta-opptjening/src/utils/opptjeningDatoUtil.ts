@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import { addDaysToDate } from '@fpsak-frontend/utils';
+import { addDaysToDate } from '@navikt/ft-utils';
 
 const addDay = (date: string): string => addDaysToDate(date, 1);
 const getOpptjeningsperiodeIfEqual = (

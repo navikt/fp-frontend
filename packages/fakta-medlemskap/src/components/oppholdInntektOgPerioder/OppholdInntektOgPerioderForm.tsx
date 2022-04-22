@@ -8,10 +8,10 @@ import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl'
 import { bindActionCreators, Dispatch } from 'redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
-import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { guid, omitMany } from '@fpsak-frontend/utils';
+import { guid, omitMany } from '@navikt/ft-utils';
 import {
   Aksjonspunkt, AlleKodeverk, Medlemskap, MedlemPeriode, Soknad, MedlemskapPeriode,
 } from '@fpsak-frontend/types';
@@ -218,12 +218,14 @@ export class OppholdInntektOgPerioderForm extends Component<Props, OwnState> {
           {getHelpTexts(aksjonspunkter)}
         </AksjonspunktHelpTextTemp>
         { hasAksjonspunkt(AVKLAR_FORTSATT_MEDLEMSKAP, aksjonspunkter) && (
+        /* @ts-ignore Fiks cannot be used as a JSX component */
         <MedlemskapEndringerTabell
           selectedId={valgtPeriode ? valgtPeriode.id : undefined}
           velgPeriodeCallback={this.velgPeriodeCallback}
         />
         )}
         {valgtPeriode && (
+        /* @ts-ignore Fiks cannot be used as a JSX component */
         <OppholdInntektOgPeriodeForm
           key={valgtPeriode.id}
           readOnly={readOnly}

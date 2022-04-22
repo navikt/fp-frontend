@@ -5,11 +5,11 @@ import moment from 'moment';
 
 import {
   DDMMYYYY_DATE_FORMAT, decodeHtmlEntity, getKodeverknavnFn,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { isAvslag, isInnvilget, isOpphor } from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import BehandlingArsakType from '@fpsak-frontend/kodeverk/src/behandlingArsakType';
-import { Form } from '@fpsak-frontend/form-hooks';
+import { Form } from '@navikt/ft-form-hooks';
 import {
   AlleKodeverk, Behandling, BeregningsresultatFp, BeregningsresultatEs, Vilkar,
   Aksjonspunkt, SimuleringResultat, TilbakekrevingValg,

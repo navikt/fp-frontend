@@ -3,7 +3,7 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { FaktaGruppe } from '@fpsak-frontend/shared-components';
+import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk, Personoversikt } from '@fpsak-frontend/types';
 
 import BostedBarnView from './BostedBarnView';

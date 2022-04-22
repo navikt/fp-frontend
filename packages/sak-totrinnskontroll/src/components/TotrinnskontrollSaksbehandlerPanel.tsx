@@ -3,11 +3,11 @@ import { FormattedMessage } from 'react-intl';
 import { NavLink } from 'react-router-dom';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { Location } from 'history';
-import { Image } from '@navikt/fp-react-components';
+import { Image } from '@navikt/ft-ui-komponenter';
 
 import checkImg from '@fpsak-frontend/assets/images/check.svg';
 import avslattImg from '@fpsak-frontend/assets/images/avslaatt.svg';
-import { decodeHtmlEntity } from '@fpsak-frontend/utils';
+import { decodeHtmlEntity } from '@navikt/ft-utils';
 import {
   KodeverkMedNavn, KlageVurdering, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';

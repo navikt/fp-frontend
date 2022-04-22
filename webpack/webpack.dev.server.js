@@ -6,7 +6,6 @@ const WebpackDevServer = require('webpack-dev-server');
 const config = require('./webpack.dev');
 const vtpLogin = require('./mocks/login');
 const sentryMock = require('./mocks/sentry');
-const featureToggles = require('./mocks/feature-toggles');
 const fakeError = require('./mocks/fake-error');
 if (process.argv.includes('--no-fix')) {
   console.warn('Setting eslint-loader option \'fix\' to false');
@@ -22,10 +21,6 @@ const options = {
     vtpLogin(devServer.app);
     sentryMock(devServer.app);
     fakeError(devServer.app);
-    if (process.argv.includes('--feature-toggles')) {
-      console.warn('Mocking feature toggles');
-      featureToggles(devServer.app);
-    }
   },
   proxy: {
     '/fpoppdrag/**': {
@@ -79,12 +74,3 @@ const wds = new WebpackDevServer(webpack(config), options);
 
   console.log('If running agains VTP you can login or change user here: http://localhost:9000/login-with-vtp');
 })();
-
-/*wds.listen(9000, 'localhost', function (err) {
-  if (err) {
-    return console.log(err); // NOSONAR
-  }
-  console.log('Listening at http://localhost:9000/');
-
-  console.log('If running agains VTP you can login or change user here: http://localhost:9000/login-with-vtp');
-});*/

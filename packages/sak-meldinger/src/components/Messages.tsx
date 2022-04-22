@@ -8,10 +8,10 @@ import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import {
   ariaCheck, getLanguageFromSprakkode, hasValidText, maxLength, minLength, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import ugunstAarsakTyper from '@fpsak-frontend/kodeverk/src/ugunstAarsakTyper';
-import { SelectField, TextAreaField, Form } from '@fpsak-frontend/form-hooks';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { SelectField, TextAreaField, Form } from '@navikt/ft-form-hooks';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 
 import styles from './messages.less';

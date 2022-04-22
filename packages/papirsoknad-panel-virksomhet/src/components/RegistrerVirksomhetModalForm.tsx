@@ -8,7 +8,7 @@ import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import Modal from 'nav-frontend-modal';
 import { Undertittel } from 'nav-frontend-typografi';
 
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { getRegisteredFields } from '@fpsak-frontend/papirsoknad-felles';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 
@@ -57,6 +57,7 @@ export const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps & WrappedC
     <form className={styles.form}>
       <Undertittel><FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Title" /></Undertittel>
       <VerticalSpacer twentyPx />
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <VirksomhetIdentifikasjonPanel
         intl={intl}
         readOnly={readOnly}
@@ -64,13 +65,16 @@ export const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps & WrappedC
         alleKodeverk={alleKodeverk}
       />
       <FormSection name={TYPE_VIRKSOMHET_PREFIX}>
+        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <VirksomhetTypeNaringPanel
           readOnly={readOnly}
           alleKodeverk={alleKodeverk}
           error={props.submitFailed ? props.error : undefined}
         />
       </FormSection>
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <VirksomhetStartetEndretPanel readOnly={readOnly} form={REGISTRER_VIRKSOMHET_FORM_NAME} />
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <VirksomhetRegnskapPanel readOnly={readOnly} form={REGISTRER_VIRKSOMHET_FORM_NAME} />
       <VirksomhetRelasjonPanel readOnly={readOnly} />
       <VerticalSpacer sixteenPx />

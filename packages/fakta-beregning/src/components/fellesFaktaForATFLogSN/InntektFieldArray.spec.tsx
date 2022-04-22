@@ -3,9 +3,9 @@ import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregn
 import aktivitetStatuser from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { isRequiredMessage } from '@fpsak-frontend/utils';
+import { isRequiredMessage } from '@navikt/ft-utils';
 import { metaMock, MockFieldsWithContent } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { Table } from '@fpsak-frontend/shared-components';
+import { Table } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk, FaktaOmBeregning } from '@fpsak-frontend/types';
 import Beregningsgrunnlag from '@fpsak-frontend/types/src/beregningsgrunnlagTsType';
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';

@@ -45,6 +45,7 @@ const SelectField: FunctionComponent<BaseFieldProps & SelectFieldProps> = ({
   <Field
     name={name}
     validate={validate}
+    /* @ts-ignore Fiks cannot be used as a JSX component */
     component={readOnly ? renderReadOnly() : renderNavSelect}
     label={label}
     selectValues={selectValues}

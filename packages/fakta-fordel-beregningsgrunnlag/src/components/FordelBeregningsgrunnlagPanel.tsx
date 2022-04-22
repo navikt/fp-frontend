@@ -87,6 +87,7 @@ export class FordelBeregningsgrunnlagPanel extends Component<OwnProps & WrappedC
       <>
         {skalViseRefusjon
       && (
+      /* @ts-ignore Fiks cannot be used as a JSX component */
       <VurderEndringRefusjonForm
         submitEnabled={submitEnabled}
         submittable={submittable}
@@ -98,6 +99,7 @@ export class FordelBeregningsgrunnlagPanel extends Component<OwnProps & WrappedC
       />
       )}
         {skalViseFordeling && (
+          /* @ts-ignore Fiks cannot be used as a JSX component */
           <FordelingForm
             intl={intl}
             submitEnabled={submitEnabled}

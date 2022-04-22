@@ -9,7 +9,7 @@ import { Location } from 'history';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import VisittkortSakIndex from '@fpsak-frontend/sak-visittkort';
 
-import { LoadingPanel, DataFetchPendingModal } from '@fpsak-frontend/shared-components';
+import { LoadingPanel, DataFetchPendingModal } from '@navikt/ft-ui-komponenter';
 import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 
 import BehandlingerIndex from '../behandling/BehandlingerIndex';

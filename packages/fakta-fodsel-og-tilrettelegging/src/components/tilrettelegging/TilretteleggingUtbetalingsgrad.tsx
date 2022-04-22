@@ -1,12 +1,12 @@
 import React, { useState, useEffect, FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { connect } from 'react-redux';
-import { FlexColumn, Image } from '@navikt/fp-react-components';
+import { FlexColumn, Image } from '@navikt/ft-ui-komponenter';
 
 import { DecimalField } from '@fpsak-frontend/form';
 import {
   hasValidDecimal, maxValue, minValue, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import endreImage from '@fpsak-frontend/assets/images/endre.svg';
 import endreDisabletImage from '@fpsak-frontend/assets/images/endre_disablet.svg';
 import { formValueSelector } from 'redux-form';

@@ -6,11 +6,10 @@ import { FormattedMessage } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import AlertStripe from 'nav-frontend-alertstriper';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import {
-  VerticalSpacer,
-} from '@fpsak-frontend/shared-components';
+  VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
+} from '@navikt/ft-ui-komponenter';
 import {
   dateAfterOrEqual,
   dateRangesNotOverlapping,
@@ -21,7 +20,7 @@ import {
   isRequiredMessage,
   maxValue,
   required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import {

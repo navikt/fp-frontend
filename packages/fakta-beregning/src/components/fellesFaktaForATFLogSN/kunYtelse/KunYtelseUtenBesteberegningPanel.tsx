@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Element } from 'nav-frontend-typografi';
 import { FieldArray } from 'redux-form';
-import { BorderBox } from '@fpsak-frontend/shared-components';
+import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { Column, Row } from 'nav-frontend-grid';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 import BrukersAndelFieldArray from './BrukersAndelFieldArray';

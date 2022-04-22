@@ -3,11 +3,11 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element } from 'nav-frontend-typografi';
-import { Image } from '@navikt/fp-react-components';
+import { Image } from '@navikt/ft-ui-komponenter';
 
 import checkImg from '@fpsak-frontend/assets/images/check.svg';
 import advarselImg from '@fpsak-frontend/assets/images/remove.svg';
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import { TimeLineButton } from '@fpsak-frontend/tidslinje';
 import { FastsattOpptjeningAktivitet } from '@fpsak-frontend/types';
 

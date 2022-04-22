@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
-import { FlexColumn, FlexRow } from '@navikt/fp-react-components';
+import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { PeriodpickerField, PeriodFieldArray } from '@fpsak-frontend/form';
 import {
   dateRangesNotOverlapping, hasValidDate, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 
 import styles from './dokumentertePerioderPeriodePicker.less';
 

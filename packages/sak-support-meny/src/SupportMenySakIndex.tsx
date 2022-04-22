@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 import { ReactComponent as FraBeslutterSvg } from '@fpsak-frontend/assets/images/arrow-return.svg';
 import { ReactComponent as SendMeldingSvg } from '@fpsak-frontend/assets/images/email-send-1.svg';
 import { ReactComponent as DokumenterSvg } from '@fpsak-frontend/assets/images/folder-big.svg';

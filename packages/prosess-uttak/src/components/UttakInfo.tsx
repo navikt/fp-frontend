@@ -7,7 +7,7 @@ import moment from 'moment/moment';
 import { CheckboxField, DecimalField, SelectField } from '@fpsak-frontend/form';
 import {
   calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT, hasValidDecimal, maxValue, notDash, required, getKodeverknavnFn,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
 import oppholdArsakType, { oppholdArsakKontoNavn } from '@fpsak-frontend/kodeverk/src/oppholdArsakType';

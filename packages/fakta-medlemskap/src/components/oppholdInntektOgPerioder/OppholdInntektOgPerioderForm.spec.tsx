@@ -5,7 +5,7 @@ import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/int
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { reduxFormPropsMock } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextTemp } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk, Medlemskap, Soknad } from '@fpsak-frontend/types';
 
 import { FormValues as OppholdFormValues } from './OppholdInntektOgPeriodeForm';

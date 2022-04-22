@@ -6,7 +6,7 @@ import YtelserFaktaIndex from '@fpsak-frontend/fakta-ytelser';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import { InntektArbeidYtelse } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
-import { createIntl } from '@fpsak-frontend/utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import messages from '../../i18n/nb_NO.json';
 import { requestSvpApi, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';

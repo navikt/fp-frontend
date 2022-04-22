@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
 
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { AksjonspunktHelpTextTemp } from '@fpsak-frontend/shared-components';
+import { AksjonspunktHelpTextTemp } from '@navikt/ft-ui-komponenter';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
   Aksjonspunkt, AlleKodeverk, Personoversikt, Soknad, Ytelsefordeling,
@@ -77,6 +77,7 @@ export const OmsorgInfoPanel: FunctionComponent<PureOwnProps & MappedOwnProps & 
     <BostedFaktaView personoversikt={personoversikt} alleKodeverk={alleKodeverk} />
     <form onSubmit={formProps.handleSubmit}>
       <FaktaBegrunnelseTextField isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse hasVurderingText />
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <OmsorgFaktaForm
         readOnly={readOnly}
         omsorg={omsorg}
@@ -85,6 +86,7 @@ export const OmsorgInfoPanel: FunctionComponent<PureOwnProps & MappedOwnProps & 
         soknad={soknad}
         alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
       />
+      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <FaktaSubmitButton
         formName={formProps.form}
         isSubmittable={submittable}

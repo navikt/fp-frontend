@@ -1,4 +1,4 @@
-import { usePrevious } from '@fpsak-frontend/shared-components';
+import { usePrevious } from '@navikt/ft-ui-komponenter';
 
 const useBehandlingEndret = (behandlingUuid?: string, behandlingVersjon?: number): boolean => {
   const erBehandlingUuidEndretFraUndefined = !usePrevious(behandlingUuid) && !!behandlingUuid;

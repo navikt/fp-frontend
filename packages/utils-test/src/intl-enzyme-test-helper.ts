@@ -34,6 +34,7 @@ const getOptions = (moduleMessages: Record<string, string>): ShallowRendererProp
   const selectedMessages = moduleMessages;
 
   return {
+    // @ts-ignore
     wrappingComponent: IntlProvider,
     wrappingComponentProps: {
       locale: 'nb-NO',
@@ -44,10 +45,12 @@ const getOptions = (moduleMessages: Record<string, string>): ShallowRendererProp
 };
 
 export function shallowWithIntl(node: ReactElement, intlMessages: Record<string, string>, options?: ShallowRendererProps) {
+  // @ts-ignore
   return shallow(nodeWithIntlProp(node, intlMessages), { ...getOptions(intlMessages), ...options });
 }
 
 export function mountWithIntl(node: ReactElement, intlMessages: Record<string, string>, options?: ShallowRendererProps) {
+  // @ts-ignore
   return mount(nodeWithIntlProp(node, intlMessages), { ...getOptions(intlMessages), ...options });
 }
 

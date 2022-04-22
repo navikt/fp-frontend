@@ -8,7 +8,6 @@ import { bindActionCreators, Dispatch } from 'redux';
 import moment from 'moment';
 import { Element } from 'nav-frontend-typografi';
 import { Knapp } from 'nav-frontend-knapper';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/fp-react-components';
 
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
@@ -17,12 +16,11 @@ import {
 } from '@fpsak-frontend/types';
 import { CheckboxField } from '@fpsak-frontend/form';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
-import { DDMMYYYY_DATE_FORMAT } from '@fpsak-frontend/utils';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
-  VerticalSpacer,
-  AksjonspunktHelpTextHTML,
-} from '@fpsak-frontend/shared-components';
+  VerticalSpacer, FlexColumn, FlexContainer, FlexRow, AksjonspunktHelpTextHTML,
+} from '@navikt/ft-ui-komponenter';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
 import UttakPeriode from './UttakPeriode';
@@ -420,6 +418,7 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
         <FlexContainer wrap>
           <FlexRow>
             <FlexColumn>
+              { /* @ts-ignore Fiks cannot be used as a JSX component */ }
               <FaktaSubmitButton
                 formName="UttakFaktaForm"
                 isSubmittable={submittable}
@@ -437,6 +436,7 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
         <VerticalSpacer eightPx />
 
         {isNyPeriodeFormOpen && (
+          /* @ts-ignore Fiks cannot be used as a JSX component */
           <UttakNyPeriode
             newPeriodeCallback={this.newPeriodeCallback}
             newPeriodeResetCallback={this.newPeriodeResetCallback}
@@ -450,6 +450,7 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
           />
         )}
         {periodeSlett && (
+          /* @ts-ignore Fiks cannot be used as a JSX component */
           <UttakSlettPeriodeModal
             showModal={showModalSlettPeriode}
             periode={periodeSlett}

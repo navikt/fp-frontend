@@ -5,10 +5,10 @@ import { formValueSelector } from 'redux-form';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
-import { ArrowBox, VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
   hasValidDate, hasValidInteger, required, hasValidText,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import {
   CheckboxField, DatepickerField, InputField, RadioGroupField, RadioOption, TextAreaField,
 } from '@fpsak-frontend/form';

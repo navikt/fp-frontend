@@ -10,7 +10,7 @@ import {
 import klageVurderingKodeverk from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import { useStandardProsessPanelProps, ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { forhandsvisDokument } from '@fpsak-frontend/utils';
+import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import { restApiKlageHooks, KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';
 import KlageBehandlingModal from '../modaler/KlageBehandlingModal';

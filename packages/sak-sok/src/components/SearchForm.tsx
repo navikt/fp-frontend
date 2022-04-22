@@ -4,12 +4,11 @@ import { useForm } from 'react-hook-form';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Column, Row } from 'nav-frontend-grid';
 import { Undertittel } from 'nav-frontend-typografi';
-import { Image } from '@navikt/fp-react-components';
 
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer, Image } from '@navikt/ft-ui-komponenter';
 import advarselIcon from '@fpsak-frontend/assets/images/advarsel.svg';
-import { hasValidSaksnummerOrFodselsnummerFormat } from '@fpsak-frontend/utils';
-import { Form, InputField } from '@fpsak-frontend/form-hooks';
+import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-utils';
+import { Form, InputField } from '@navikt/ft-form-hooks';
 import { Fagsak } from '@fpsak-frontend/types';
 
 import styles from './searchForm.less';

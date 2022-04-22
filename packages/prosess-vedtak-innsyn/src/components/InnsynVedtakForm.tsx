@@ -6,12 +6,12 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
 import { ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
-import { VerticalSpacer } from '@fpsak-frontend/shared-components';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Form, TextAreaField } from '@fpsak-frontend/form-hooks';
+import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import {
   decodeHtmlEntity, getLanguageFromSprakkode, hasValidText, maxLength, minLength,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import InnsynResultatType from '@fpsak-frontend/kodeverk/src/innsynResultatType';
 import { Aksjonspunkt, Dokument, InnsynDokument } from '@fpsak-frontend/types';
 import { ForeslaVedtakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';

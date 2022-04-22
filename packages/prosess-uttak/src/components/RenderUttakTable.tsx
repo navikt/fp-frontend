@@ -7,12 +7,12 @@ import {
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
-import { Table, TableColumn, TableRow } from '@fpsak-frontend/shared-components';
+import { Table, TableColumn, TableRow } from '@navikt/ft-ui-komponenter';
 import { DecimalField, InputField, SelectField } from '@fpsak-frontend/form';
 import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
 import {
   hasValidDecimal, hasValidInteger, maxLength, maxValue, minValue, notDash, required,
-} from '@fpsak-frontend/utils';
+} from '@navikt/ft-utils';
 import {
   ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSokerAktivitet,
 } from '@fpsak-frontend/types';

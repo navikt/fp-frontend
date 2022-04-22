@@ -85,6 +85,7 @@ export class SvangerskapspengerForm extends React.Component<PureOwnProps & Mappe
         <AndreYtelserPapirsoknadIndex readOnly={readOnly} form={form} kunMiliterEllerSiviltjeneste alleKodeverk={alleKodeverk} />
         <TerminFodselSvpPanel readOnly={readOnly} />
         <FormSection name={TILRETTELEGGING_NAME_PREFIX}>
+          { /* @ts-ignore Fiks cannot be used as a JSX component */ }
           <BehovForTilretteleggingPanel readOnly={readOnly} formName={SVANGERSKAPSPENGER_FORM_NAME} namePrefix={TILRETTELEGGING_NAME_PREFIX} />
         </FormSection>
         <SprakPapirsoknadIndex readOnly={readOnly} />
@@ -187,4 +188,5 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
 // @ts-ignore Fiks
 export default connect(mapStateToPropsFactory)(reduxForm({
   form: SVANGERSKAPSPENGER_FORM_NAME,
+  // @ts-ignore Fiks
 })(SvangerskapspengerForm));
