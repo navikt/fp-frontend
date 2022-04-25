@@ -46,6 +46,9 @@ const getVedtakStatus = (
   }
 
   const resultatTypeCode = behandlingsresultat?.type;
+  if (resultatTypeCode === behandlingResultatType.HENLAGT_KLAGE_TRUKKET || resultatTypeCode === behandlingResultatType.HENLAGT_FEILOPPRETTET) {
+    return vilkarUtfallType.IKKE_VURDERT;
+  }
   if (resultatTypeCode === behandlingResultatType.KLAGE_AVVIST || resultatTypeCode === behandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET) {
     return vilkarUtfallType.IKKE_OPPFYLT;
   }
