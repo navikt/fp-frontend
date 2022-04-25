@@ -81,7 +81,7 @@ const getResultatText = (behandlingKlageVurdering: KlageVurdering): string | nul
     case klageVurderingCodes.MEDHOLD_I_KLAGE:
       return OMGJOER_TEKST_MAP[klageResultat.klageVurderingOmgjoer];
     default:
-      return null;
+      return 'VedtakKlageForm.IkkeFastsatt';
   }
 };
 
