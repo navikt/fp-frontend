@@ -15,6 +15,9 @@ import { createIntl } from '@navikt/ft-utils';
 import messages from '../../i18n/nb_NO.json';
 import { requestSvpApi, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
 
+// TODO Denne burde ligga sånn til at den kun blir importert når denne pakka dynamisk blir importert
+import '@navikt/ft-prosess-beregningsgrunnlag/dist/style.css';
+
 const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [
