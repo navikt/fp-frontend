@@ -63,8 +63,13 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
     skalPanelVisesIMeny={(_initData, initState) => initState === RestApiState.SUCCESS}
     renderPanel={(data) => (
       <DynamicLoader
-        // @ts-ignore
-        importModuleFederationComp={() => import('ft_prosess_beregningsgrunnlag/ProsessBeregningsgrunnlag')}// eslint-disable-line import/no-unresolved
+        importModuleFederationComp={() => {
+          if (process.env.NODE_ENV === 'development') {
+            // @ts-ignore
+            return import('ft_prosess_beregningsgrunnlag/ProsessBeregningsgrunnlag');// eslint-disable-line import/no-unresolved
+          }
+          return undefined;
+        }}
         importPackageComp={() => import('@navikt/ft-prosess-beregningsgrunnlag')}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...data}
