@@ -39,7 +39,7 @@
     "@babel/runtime": "7.17.9",
     "@formatjs/intl-datetimeformat": "5.0.1",
     "@formatjs/intl-numberformat": "7.4.3",
-    "axios": "0.26.1",
+    "axios": "0.27.1",
     "core-js": "3.22.0",
     "dotenv": "16.0.0",
     "history": "5.3.0",
