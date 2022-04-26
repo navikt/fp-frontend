@@ -4314,10 +4314,10 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/redux-form@8.3.3":
-  version "8.3.3"
-  resolved "https://registry.yarnpkg.com/@types/redux-form/-/redux-form-8.3.3.tgz#67869d6da2936bb2806509e86356422d2d6eb288"
-  integrity sha512-RaxUMCXs72H4vSfwU4i/86/RDbQ4p3rK4/4TQvQXHJ49GTyEgdUgWDIaOnKZc84iNwvJTwv+ohDbw/tfXxLg7Q==
+"@types/redux-form@8.3.4":
+  version "8.3.4"
+  resolved "https://registry.yarnpkg.com/@types/redux-form/-/redux-form-8.3.4.tgz#fa2896ca4b82f485f55cb4acbade0424adbfd4f4"
+  integrity sha512-LmO1HV7XXVXDM6J5L8fpkN0pT9RpQTflXf2c3j85ylcltUoEJgHIbGe3Mdwkc79b8agf5ZBA5KBm8ZAwW1rBvA==
   dependencies:
     "@types/react" "*"
     redux "^3.6.0 || ^4.0.0"
