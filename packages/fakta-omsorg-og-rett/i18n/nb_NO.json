@@ -1,0 +1,13 @@
+{
+  "OmsorgOgRettFaktaForm.Overskrift": "Fakta om omsorg og rett",
+  "OmsorgOgRettFaktaForm.VurderOmAleneomsorg": "Vurder om søker har aleneomsorg for barnet",
+
+  "PersonInfoPanel.Barn": "Barn",
+  "PersonInfoPanel.BarnNr": "Barn {nummer}",
+  "PersonInfoPanel.Fodt": "Født",
+  "PersonInfoPanel.Dod": "Død",
+  "PersonInfoPanel.Adresse": "Adresse",
+
+  "ForelderPanel.Soker": "Søker",
+  "ForelderPanel.AnnenForelder": "Annen forelder"
+}
