@@ -8,7 +8,7 @@ import { Element, Normaltekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import { PersonopplysningerBasis } from '@fpsak-frontend/types';
 import barnIkonUrl from '@fpsak-frontend/assets/images/child.svg';
-import PersonopplysningerBoks from './PersonopplysningerBoks';
+import Boks from '../Boks';
 
 import styles from './alleBarnPanel.less';
 import AdresseVisning from './AdresseVisning';
@@ -24,7 +24,7 @@ const AlleBarnPanel: FunctionComponent<OwnProps> = ({
   return (
     <>
       {alleBarn.map((barn, index) => (
-        <PersonopplysningerBoks harBorderTop={index === 0}>
+        <Boks harBorderTop={index === 0}>
           <Row>
             <Column xs="5">
               <FlexContainer>
@@ -77,7 +77,7 @@ const AlleBarnPanel: FunctionComponent<OwnProps> = ({
               <AdresseVisning personopplysninger={barn} />
             </Column>
           </Row>
-        </PersonopplysningerBoks>
+        </Boks>
       ))}
     </>
   );

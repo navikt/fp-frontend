@@ -10,7 +10,7 @@ import kvinneIkonUrl from '@fpsak-frontend/assets/images/female.svg';
 import mannIkonUrl from '@fpsak-frontend/assets/images/male.svg';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { getKodeverknavnFraKode } from '@navikt/ft-utils';
-import PersonopplysningerBoks from './PersonopplysningerBoks';
+import Boks from '../Boks';
 
 import AdresseVisning from './AdresseVisning';
 
@@ -30,7 +30,7 @@ const ForelderPanel: FunctionComponent<OwnProps> = ({
   const erKvinne = forelder.kjønn === KjønnkodeEnum.KVINNE;
 
   return (
-    <PersonopplysningerBoks harBorderTop={false}>
+    <Boks harBorderTop={false}>
       <Row>
         <Column xs="5">
           <FlexContainer>
@@ -63,7 +63,7 @@ const ForelderPanel: FunctionComponent<OwnProps> = ({
           <AdresseVisning personopplysninger={forelder} />
         </Column>
       </Row>
-    </PersonopplysningerBoks>
+    </Boks>
   );
 };
 

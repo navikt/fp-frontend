@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import classnames from 'classnames/bind';
 
-import styles from './personopplysningerBoks.less';
+import styles from './boks.less';
 
 const classNames = classnames.bind(styles);
 
@@ -12,7 +12,7 @@ interface OwnProps {
   children: ReactElement | ReactElement[];
 }
 
-const PersonopplysningerBoks: FunctionComponent<OwnProps> = ({
+const Boks: FunctionComponent<OwnProps> = ({
   harBorderTop,
   children,
 }) => (
@@ -24,4 +24,4 @@ const PersonopplysningerBoks: FunctionComponent<OwnProps> = ({
   </div>
 );
 
-export default PersonopplysningerBoks;
+export default Boks;

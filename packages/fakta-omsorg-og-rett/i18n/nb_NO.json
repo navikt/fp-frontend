@@ -1,6 +1,18 @@
 {
   "OmsorgOgRettFaktaForm.Overskrift": "Fakta om omsorg og rett",
   "OmsorgOgRettFaktaForm.VurderOmAleneomsorg": "Vurder om søker har aleneomsorg for barnet",
+  "OmsorgOgRettFaktaForm.VurderAndreForelderRett": "Vurder om den andre forelderen har rett til foreldrepenger. Slå opp i relevant fagsystem for å finne informasjon om inntekt.\nDersom den andre forelderen har rett må du endre til riktige kvoter i alle søknadsperiodene.",
+
+  "AleneomsorgForm.Aleneomsorg": "Søker har oppgitt å ha aleneomsorg for barnet",
+  "AleneomsorgForm.HarAleneomsorg": "Søker har aleneomsorg for barnet",
+  "AleneomsorgForm.HarIkkeAleneomsorg": "Søker har IKKE aleneomsorg for barnet",
+  "AleneomsorgForm.Begrunn": "Begrunn vurderingen",
+  "AleneomsorgForm.Bekreft": "Bekreft og fortsett",
+  
+  "HarAnnenForelderRettFelter.HarAnnenForelderRett": "Har annen forelder rett?",
+  "HarAnnenForelderRettFelter.Ja": "Ja",
+  "HarAnnenForelderRettFelter.Nei": "Nei",
+  "HarAnnenForelderRettFelter.MottarUforetrygd": "Mottar annen forelder uføretrygd, jfr 14-14 tredje ledd?",
 
   "PersonInfoPanel.Barn": "Barn",
   "PersonInfoPanel.BarnNr": "Barn {nummer}",
