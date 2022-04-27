@@ -1,8 +1,12 @@
 import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
+import { action } from '@storybook/addon-actions';
 
-import { KjønnkodeEnum } from '@fpsak-frontend/types';
+import {
+  Behandling, KjønnkodeEnum, Soknad, Ytelsefordeling,
+} from '@fpsak-frontend/types';
 import sivilstandType from '@fpsak-frontend/kodeverk/src/sivilstandType';
+import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import { OpplysningAdresseType } from '@navikt/ft-kodeverk';
 import { Aksjonspunkt } from '@navikt/ft-types';
@@ -55,19 +59,34 @@ const personoversikt = {
 
 const Template: Story<{
   aksjonspunkter: Aksjonspunkt[],
+  submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
 }> = ({
   aksjonspunkter,
+  submitCallback,
 }) => (
   <OmsorgOgRettFaktaIndex
+    behandling={{ uuid: 'test' } as Behandling}
     personoversikt={personoversikt}
+    ytelsefordeling={{} as Ytelsefordeling}
+    soknad={{
+      oppgittRettighet: {
+        aleneomsorgForBarnet: false,
+      },
+    } as Soknad}
+    submittable
+    harApneAksjonspunkter
+    alleMerknaderFraBeslutter={{}}
     readOnly={false}
     aksjonspunkter={aksjonspunkter}
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
+    submitCallback={submitCallback}
+    setFormData={() => undefined}
   />
 );
 
 export const HarAksjonspunktForAvklarAleneomsorg = Template.bind({});
 HarAksjonspunktForAvklarAleneomsorg.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
     definisjon: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
     erAktivt: true,
@@ -77,6 +96,7 @@ HarAksjonspunktForAvklarAleneomsorg.args = {
 
 export const HarAksjonspunktForAvklarAnnenForelderRett = Template.bind({});
 HarAksjonspunktForAvklarAnnenForelderRett.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
   aksjonspunkter: [{
     definisjon: AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT,
     erAktivt: true,

@@ -6,14 +6,6 @@ import {
 } from '@fpsak-frontend/types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
-import aksjonspunkterVurderAnnenPartHarRett from '../testdata/vurder-annen-part-har-rett/aksjonspunkter.json';
-import behandlingVurderAnnenPartHarRett from '../testdata/vurder-annen-part-har-rett/behandling.json';
-import uttakKontrollerFaktaPerioderVurderAnnenPartHarRett from '../testdata/vurder-annen-part-har-rett/kontrollerFaktaPerioder.json';
-import ytelsefordelingVurderAnnenPartHarRett from '../testdata/vurder-annen-part-har-rett/ytelsefordeling.json';
-import faktaArbeidsforholdVurderAnnenPartHarRett from '../testdata/vurder-annen-part-har-rett/faktaArbeidsforhold.json';
-import personoversiktVurderAnnenPartHarRett from '../testdata/vurder-annen-part-har-rett/personopplysninger.json';
-import familiehendelseVurderAnnenPartHarRett from '../testdata/vurder-annen-part-har-rett/familiehendelse.json';
-
 import aksjonspunkterFarSøkerFørsteSeksUker from '../testdata/far-soker-forste-seks-uker/aksjonspunkter.json';
 import behandlingFarSøkerFørsteSeksUker from '../testdata/far-soker-forste-seks-uker/behandling.json';
 import uttakKontrollerFaktaPerioderFarSøkerFørsteSeksUker from '../testdata/far-soker-forste-seks-uker/kontrollerFaktaPerioder.json';
@@ -54,72 +46,6 @@ export default {
   title: 'fakta/fakta-uttak',
   component: UttakFaktaIndex,
 };
-
-export const vurderOmAnnenPartHarRett = () => (
-  <UttakFaktaIndex
-    {...standardFaktaProps}
-    behandling={behandlingVurderAnnenPartHarRett}
-    aksjonspunkter={aksjonspunkterVurderAnnenPartHarRett}
-    ytelsefordeling={ytelsefordelingVurderAnnenPartHarRett}
-    uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderVurderAnnenPartHarRett as UttakKontrollerFaktaPerioderWrapper}
-    alleKodeverk={alleKodeverk as any}
-    faktaArbeidsforhold={faktaArbeidsforholdVurderAnnenPartHarRett as FaktaArbeidsforhold[]}
-    personoversikt={personoversiktVurderAnnenPartHarRett as Personoversikt}
-    familiehendelse={familiehendelseVurderAnnenPartHarRett as FamilieHendelseSamling}
-    readOnly={false}
-    kanOverstyre={false}
-    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-  />
-);
-
-export const vurderOmAnnenPartHarRettOgAvklarAnnenForelderMottarUføretrygd = () => (
-  <UttakFaktaIndex
-    {...standardFaktaProps}
-    behandling={behandlingVurderAnnenPartHarRett}
-    aksjonspunkter={aksjonspunkterVurderAnnenPartHarRett}
-    ytelsefordeling={{
-      ...ytelsefordelingVurderAnnenPartHarRett,
-      annenforelderHarRettDto: {
-        ...ytelsefordelingVurderAnnenPartHarRett.annenforelderHarRettDto,
-        avklarAnnenforelderMottarUføretrygd: true,
-      },
-    }}
-    uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderVurderAnnenPartHarRett as UttakKontrollerFaktaPerioderWrapper}
-    alleKodeverk={alleKodeverk as any}
-    faktaArbeidsforhold={faktaArbeidsforholdVurderAnnenPartHarRett as FaktaArbeidsforhold[]}
-    personoversikt={personoversiktVurderAnnenPartHarRett as Personoversikt}
-    familiehendelse={familiehendelseVurderAnnenPartHarRett as FamilieHendelseSamling}
-    readOnly={false}
-    kanOverstyre={false}
-    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-  />
-);
-
-export const vurderOmAnnenPartHarRettOgAvklarAnnenForelderMottarUføretrygdReadOnly = () => (
-  <UttakFaktaIndex
-    {...standardFaktaProps}
-    behandling={behandlingVurderAnnenPartHarRett}
-    aksjonspunkter={aksjonspunkterVurderAnnenPartHarRett}
-    ytelsefordeling={{
-      ...ytelsefordelingVurderAnnenPartHarRett,
-      annenforelderHarRettDto: {
-        ...ytelsefordelingVurderAnnenPartHarRett.annenforelderHarRettDto,
-        avklarAnnenforelderMottarUføretrygd: true,
-        annenforelderMottarUføretrygd: false,
-        begrunnelse: 'Dette er en begrunnelse',
-        annenforelderHarRett: false,
-      },
-    }}
-    uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioderVurderAnnenPartHarRett as UttakKontrollerFaktaPerioderWrapper}
-    alleKodeverk={alleKodeverk as any}
-    faktaArbeidsforhold={faktaArbeidsforholdVurderAnnenPartHarRett as FaktaArbeidsforhold[]}
-    personoversikt={personoversiktVurderAnnenPartHarRett as Personoversikt}
-    familiehendelse={familiehendelseVurderAnnenPartHarRett as FamilieHendelseSamling}
-    readOnly
-    kanOverstyre={false}
-    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-  />
-);
 
 export const farSøkerFørsteSeksUker = () => {
   const readOnly = false;

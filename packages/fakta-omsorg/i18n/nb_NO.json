@@ -1,15 +1,9 @@
 {
   "OmsorgInfoPanel.VurderOmsorg": "Vurder om søker har omsorg for barnet i søknadsperioden",
-  "OmsorgInfoPanel.VurderAleneomsorg": "Vurder om søker har aleneomsorg for barnet",
 
-  "OmsorgFaktaForm.Aleneomsorg": "Aleneomsorg",
   "OmsorgFaktaForm.Omsorg": "Omsorg",
-  "OmsorgFaktaForm.HarAleneomsorg": "Søker har aleneomsorg for barnet",
-  "OmsorgFaktaForm.HarIkkeAleneomsorg": "Søker har <b>ikke</b> aleneomsorg for barnet",
   "OmsorgFaktaForm.HarOmsorg": "Søker har omsorg for barnet",
   "OmsorgFaktaForm.HarIkkeOmsorg": "Søker har <b>ikke</b> omsorg for barnet",
-  "OmsorgFaktaForm.OppgittAleneomsorg": "Søker har oppgitt å ha aleneomsorg for barnet",
-  "OmsorgFaktaForm.OppgittIkkeAleneomsorg": "Søker har oppgitt <b>ikke</b> å ha aleneomsorg for barnet",
   "OmsorgFaktaForm.OppgittOmsorg": "Søker har oppgitt å ha omsorg for barnet",
   "OmsorgFaktaForm.OppgittIkkeOmsorg": "Søker har oppgitt å <b>ikke</b> ha omsorg for barnet",
 

@@ -19,15 +19,6 @@ jest.mock('react-intl', () => {
 });
 
 describe('<OmsorgFaktaForm>', () => {
-  const aleneomsorgAp = {
-    id: 1,
-    definisjon: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-    status: 'OPPRETTET',
-    toTrinnsBehandling: false,
-    toTrinnsBehandlingGodkjent: false,
-    kanLoses: true,
-    erAktivt: false,
-  };
   const omsorgAp = {
     id: 2,
     definisjon: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
@@ -38,24 +29,6 @@ describe('<OmsorgFaktaForm>', () => {
     erAktivt: false,
   };
 
-  it('skal vise tekst for aleneomsorg', () => {
-    const wrapper = shallowWithIntl(<OmsorgFaktaForm.WrappedComponent
-      readOnly={false}
-      omsorg={false}
-      className="defaultAleneOmsorgFakta"
-      aksjonspunkter={[aleneomsorgAp]}
-      oppgittOmsorgSoknad={false}
-      oppgittAleneomsorgSoknad
-      alleMerknaderFraBeslutter={{}}
-      ytelsefordeling={{} as Ytelsefordeling}
-      soknad={{} as Soknad}
-    />, messages);
-
-    const formattedMessage = wrapper.find(FormattedMessage);
-    expect(formattedMessage).toHaveLength(1);
-    expect(formattedMessage.first().prop('id')).toEqual('OmsorgFaktaForm.OppgittAleneomsorg');
-  });
-
   it('skal vise tekst for omsorg', () => {
     const wrapper = shallowWithIntl(<OmsorgFaktaForm.WrappedComponent
       readOnly={false}
@@ -63,7 +36,6 @@ describe('<OmsorgFaktaForm>', () => {
       className="defaultAleneOmsorgFakta"
       aksjonspunkter={[omsorgAp]}
       oppgittOmsorgSoknad={false}
-      oppgittAleneomsorgSoknad
       alleMerknaderFraBeslutter={{}}
       ytelsefordeling={{} as Ytelsefordeling}
       soknad={{} as Soknad}
@@ -79,29 +51,18 @@ describe('<OmsorgFaktaForm>', () => {
       readOnly={false}
       omsorg={false}
       className="defaultAleneOmsorgFakta"
-      aksjonspunkter={[aleneomsorgAp, omsorgAp]}
+      aksjonspunkter={[omsorgAp]}
       oppgittOmsorgSoknad={false}
-      oppgittAleneomsorgSoknad
       alleMerknaderFraBeslutter={{}}
       ytelsefordeling={{} as Ytelsefordeling}
       soknad={{} as Soknad}
     />, messages);
 
     const radioGroup = wrapper.find('RadioGroupField');
-    expect(radioGroup).toHaveLength(2);
-    expect(radioGroup.first().prop('name')).toEqual('aleneomsorg');
-    expect(radioGroup.last().prop('name')).toEqual('omsorg');
+    expect(radioGroup).toHaveLength(1);
+    expect(radioGroup.first().prop('name')).toEqual('omsorg');
 
-    const radioFieldsGroup1 = radioGroup.first().find('RadioOption');
-    expect(radioFieldsGroup1).toHaveLength(2);
-    expect(radioFieldsGroup1.first().prop('value')).toEqual(true);
-    // @ts-ignore Fiks
-    expect(radioFieldsGroup1.first().prop('label').id).toEqual('OmsorgFaktaForm.HarAleneomsorg');
-    expect(radioFieldsGroup1.last().prop('value')).toEqual(false);
-    // @ts-ignore Fiks
-    expect(radioFieldsGroup1.last().prop('label').props.id).toEqual('OmsorgFaktaForm.HarIkkeAleneomsorg');
-
-    const radioFieldsGroup2 = radioGroup.last().find('RadioOption');
+    const radioFieldsGroup2 = radioGroup.first().find('RadioOption');
     expect(radioFieldsGroup2).toHaveLength(2);
     expect(radioFieldsGroup2.first().prop('value')).toEqual(true);
     // @ts-ignore Fiks
@@ -116,36 +77,14 @@ describe('<OmsorgFaktaForm>', () => {
     const wrapper = shallowWithIntl(<OmsorgFaktaForm.WrappedComponent
       readOnly={false}
       omsorg
-      aksjonspunkter={[aleneomsorgAp, omsorgAp]}
+      aksjonspunkter={[omsorgAp]}
       className="defaultAleneOmsorgFakta"
       oppgittOmsorgSoknad
-      oppgittAleneomsorgSoknad
       alleMerknaderFraBeslutter={{}}
       ytelsefordeling={{} as Ytelsefordeling}
       soknad={{} as Soknad}
     />, messages);
     expect(wrapper.find('RadioGroupField')).toHaveLength(2);
     expect(wrapper.find('FieldArray')).toHaveLength(0);
-  });
-
-  it('skal sette opp initielle verdier fra behandling', () => {
-    const ytelseFordeling = {
-      aleneOmsorgPerioder: null,
-      ikkeOmsorgPerioder: null,
-    } as Ytelsefordeling;
-
-    const aksjonspunkter = [
-      aleneomsorgAp,
-    ];
-    const initialValues = OmsorgFaktaForm.buildInitialValues(ytelseFordeling, aksjonspunkter);
-
-    expect(initialValues).toEqual({
-      aleneomsorg: null,
-      omsorg: null,
-      ikkeOmsorgPerioder: [{
-        periodeFom: undefined,
-        periodeTom: undefined,
-      }],
-    });
   });
 });

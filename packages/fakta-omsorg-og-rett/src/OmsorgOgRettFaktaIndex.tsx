@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import {
-  StandardFaktaPanelProps, Personoversikt, Soknad, Ytelsefordeling,
+  StandardFaktaPanelProps, Personoversikt, Ytelsefordeling, Soknad,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -12,39 +12,37 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface OwnProps {
+  personoversikt: Personoversikt;
   ytelsefordeling: Ytelsefordeling;
   soknad: Soknad;
-  personoversikt: Personoversikt;
 }
 
-const OmsorgFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
+const OmsorgOgRettFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
+  personoversikt,
   ytelsefordeling,
   soknad,
-  personoversikt,
   aksjonspunkter,
   alleKodeverk,
-  alleMerknaderFraBeslutter,
-  submitCallback,
   readOnly,
-  harApneAksjonspunkter,
-  submittable,
+  submitCallback,
   formData,
   setFormData,
+  alleMerknaderFraBeslutter,
 }) => (
   <RawIntlProvider value={intl}>
     <OmsorgOgRettFaktaForm
       aksjonspunkter={aksjonspunkter}
-      ytelsefordeling={ytelsefordeling}
       personoversikt={personoversikt}
       soknad={soknad}
+      ytelsefordeling={ytelsefordeling}
       alleKodeverk={alleKodeverk}
-      alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-      submitCallback={submitCallback}
       readOnly={readOnly}
-      hasOpenAksjonspunkter={harApneAksjonspunkter}
-      submittable={submittable}
+      lagreCallback={submitCallback}
+      formData={formData}
+      setFormData={setFormData}
+      alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
     />
   </RawIntlProvider>
 );
 
-export default OmsorgFaktaIndex;
+export default OmsorgOgRettFaktaIndex;

@@ -2,13 +2,16 @@ import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponen
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
-import { AlleKodeverk, Personoversikt } from '@fpsak-frontend/types';
+import {
+  AlleKodeverk, Personoversikt, Soknad, Ytelsefordeling,
+} from '@fpsak-frontend/types';
+import { AvklarAnnenforelderHarRettAp, BekreftAleneomsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import { Aksjonspunkt } from '@navikt/ft-types';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AlleBarnPanel from './personer/AlleBarnPanel';
 import ForelderPanel from './personer/ForelderPanel';
-import AleneomsorgForm from './forms/AleneomsorgForm';
-import HarAnnenForelderRettForm from './forms/HarAnnenForelderRettForm';
+import AleneomsorgForm, { FormValues as AleneOmsorgValues } from './forms/AleneomsorgForm';
+import HarAnnenForelderRettForm, { FormValues as RettFormValues } from './forms/HarAnnenForelderRettForm';
 
 const finnAksjonspunktTekst = (aksjonspunkter: Aksjonspunkt[]): string => {
   if (aksjonspunkter.some((ap) => ap.erAktivt && ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG)) {
@@ -23,15 +26,27 @@ const finnAksjonspunktTekst = (aksjonspunkter: Aksjonspunkt[]): string => {
 interface OwnProps {
   readOnly: boolean;
   personoversikt: Personoversikt;
+  ytelsefordeling: Ytelsefordeling;
+  soknad: Soknad;
   alleKodeverk: AlleKodeverk;
   aksjonspunkter: Aksjonspunkt[];
+  lagreCallback: (aksjonspunktData: BekreftAleneomsorgVurderingAp | AvklarAnnenforelderHarRettAp) => Promise<void>;
+  formData?: RettFormValues | AleneOmsorgValues,
+  setFormData: (data: RettFormValues | AleneOmsorgValues) => void,
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
 }
 
 const OmsorgOgRettFaktaIndex: FunctionComponent<OwnProps> = ({
   readOnly,
   personoversikt,
+  ytelsefordeling,
+  soknad,
   alleKodeverk,
   aksjonspunkter,
+  lagreCallback,
+  formData,
+  setFormData,
+  alleMerknaderFraBeslutter,
 }) => {
   const aksjonspunktTekst = finnAksjonspunktTekst(aksjonspunkter);
   const harAleneomsorgAksjonspunkt = aksjonspunkter.some((ap) => ap.definisjon === AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG);
@@ -40,19 +55,35 @@ const OmsorgOgRettFaktaIndex: FunctionComponent<OwnProps> = ({
       <Undertittel><FormattedMessage id="OmsorgOgRettFaktaForm.Overskrift" /></Undertittel>
       <VerticalSpacer thirtyTwoPx />
       {aksjonspunktTekst && (
-      <AksjonspunktHelpTextHTML>
-        <FormattedMessage id={aksjonspunktTekst} />
-      </AksjonspunktHelpTextHTML>
+        <AksjonspunktHelpTextHTML>
+          <FormattedMessage id={aksjonspunktTekst} />
+        </AksjonspunktHelpTextHTML>
       )}
       <VerticalSpacer thirtyTwoPx />
       <AlleBarnPanel alleBarn={personoversikt.barn} />
       <ForelderPanel forelder={personoversikt.bruker} erSøker alleKodeverk={alleKodeverk} />
       <ForelderPanel forelder={personoversikt.annenPart} erSøker={false} alleKodeverk={alleKodeverk} />
       {harAleneomsorgAksjonspunkt && (
-        <AleneomsorgForm readOnly={readOnly} />
+        <AleneomsorgForm
+          ytelsefordeling={ytelsefordeling}
+          soknad={soknad}
+          readOnly={readOnly}
+          formData={formData as AleneOmsorgValues}
+          setFormData={setFormData}
+          lagreCallback={lagreCallback}
+          alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+          aksjonspunkt={aksjonspunkter[0]}
+        />
       )}
       {!harAleneomsorgAksjonspunkt && (
-        <HarAnnenForelderRettForm readOnly={readOnly} />
+        <HarAnnenForelderRettForm
+          ytelsefordeling={ytelsefordeling}
+          readOnly={readOnly}
+          formData={formData as RettFormValues}
+          setFormData={setFormData}
+          lagreCallback={lagreCallback}
+          aksjonspunkt={aksjonspunkter[0]}
+        />
       )}
     </>
   );

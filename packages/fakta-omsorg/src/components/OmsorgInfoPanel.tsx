@@ -10,27 +10,21 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fa
 import {
   Aksjonspunkt, AlleKodeverk, Personoversikt, Soknad, Ytelsefordeling,
 } from '@fpsak-frontend/types';
-import { BekreftAleneomsorgVurderingAp, BekreftOmsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import { BekreftOmsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import OmsorgFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgFaktaForm';
 import BostedFaktaView from './BostedFaktaView';
 
-const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG, MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = aksjonspunktCodes;
+const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = aksjonspunktCodes;
 
 const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   const helpTexts = [];
-  const harAleneomsorgAp = aksjonspunkter.filter((ap) => ap.definisjon === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG);
-  const harOmsorgAp = aksjonspunkter.filter((ap) => ap.definisjon === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG);
-  if (harAleneomsorgAp.length > 0) {
-    helpTexts.push(<FormattedMessage key="VurderAleneomsorg" id="OmsorgInfoPanel.VurderAleneomsorg" />);
-  }
+  const harOmsorgAp = aksjonspunkter.filter((ap) => ap.definisjon === MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG);
   if (harOmsorgAp.length > 0) {
     helpTexts.push(<FormattedMessage key="VurderOmsorg" id="OmsorgInfoPanel.VurderOmsorg" />);
   }
   return helpTexts;
 };
-
-type AksjonspunktData = Array<BekreftAleneomsorgVurderingAp | BekreftOmsorgVurderingAp>;
 
 type FormValues = OmsorgFormValues & {
   begrunnelse?: string;
@@ -46,7 +40,7 @@ interface PureOwnProps {
   personoversikt: Personoversikt;
   ytelsefordeling: Ytelsefordeling;
   soknad: Soknad;
-  submitCallback: (data: AksjonspunktData) => Promise<void>;
+  submitCallback: (data: BekreftOmsorgVurderingAp[]) => Promise<void>;
 }
 
 interface MappedOwnProps {
@@ -102,8 +96,7 @@ const buildInitialValues = createSelector([
   (ownProps: PureOwnProps) => ownProps.ytelsefordeling,
   (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
 (ytelsefordeling, aksjonspunkter): FormValues => {
-  const omsorgAp = aksjonspunkter.filter((ap) => ap.definisjon === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG
-    || ap.definisjon === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG);
+  const omsorgAp = aksjonspunkter.filter((ap) => ap.definisjon === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG);
   return {
     ...OmsorgFaktaForm.buildInitialValues(ytelsefordeling, omsorgAp),
     ...FaktaBegrunnelseTextField.buildInitialValues(omsorgAp),
@@ -113,11 +106,8 @@ const buildInitialValues = createSelector([
 const transformValues = (
   values: FormValues,
   aksjonspunkter: Aksjonspunkt[],
-): AksjonspunktData => {
-  const aksjonspunkterArray = [] as AksjonspunktData;
-  if (hasAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG, aksjonspunkter)) {
-    aksjonspunkterArray.push(OmsorgFaktaForm.transformAleneomsorgValues(values));
-  }
+): BekreftOmsorgVurderingAp[] => {
+  const aksjonspunkterArray = [] as BekreftOmsorgVurderingAp[];
   if (hasAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG, aksjonspunkter)) {
     aksjonspunkterArray.push(OmsorgFaktaForm.transformOmsorgValues(values));
   }
