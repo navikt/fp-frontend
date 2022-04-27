@@ -84,7 +84,7 @@ describe('<OmsorgFaktaForm>', () => {
       ytelsefordeling={{} as Ytelsefordeling}
       soknad={{} as Soknad}
     />, messages);
-    expect(wrapper.find('RadioGroupField')).toHaveLength(2);
+    expect(wrapper.find('RadioGroupField')).toHaveLength(1);
     expect(wrapper.find('FieldArray')).toHaveLength(0);
   });
 });
