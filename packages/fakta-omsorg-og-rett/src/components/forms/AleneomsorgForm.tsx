@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import {
   RadioGroupField, RadioOption, Form, TextAreaField,
@@ -9,7 +9,7 @@ import {
   decodeHtmlEntity,
   hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-utils';
-import { Element, Normaltekst } from 'nav-frontend-typografi';
+import { Element } from 'nav-frontend-typografi';
 import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { BekreftAleneomsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -49,8 +49,6 @@ const AleneomsorgForm: FunctionComponent<OwnProps> = ({
   setFormData,
   alleMerknaderFraBeslutter,
 }) => {
-  const intl = useIntl();
-
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {
       harAleneomsorg: ytelsefordeling.aleneOmsorgPerioder && ytelsefordeling.aleneOmsorgPerioder.length > 0,
@@ -73,27 +71,20 @@ const AleneomsorgForm: FunctionComponent<OwnProps> = ({
   return (
     <Form formMethods={formMethods} onSubmit={transformerFeltverdier} setDataOnUnmount={setFormData}>
       <Boks harBorderTop={false}>
+        <VerticalSpacer thirtyTwoPx />
         <FaktaGruppe
-          title={intl.formatMessage({ id: 'AleneomsorgForm.Aleneomsorg' })}
           withoutBorder
           merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG]}
         >
-          <Normaltekst>
-            {soknad.oppgittRettighet.aleneomsorgForBarnet
-              ? <FormattedMessage id="AleneomsorgForm.OppgittAleneomsorg" />
-              : (
-                <FormattedMessage
-                  id="AleneomsorgForm.OppgittIkkeAleneomsorg"
-                  values={{
-                    b: (chunks: any) => <b>{chunks}</b>,
-                  }}
-                />
-              )}
-          </Normaltekst>
-          <VerticalSpacer thirtyTwoPx />
           <RadioGroupField
             name="harAleneomsorg"
-            label={<Element><FormattedMessage id="AleneomsorgForm.Aleneomsorg" /></Element>}
+            label={(
+              <Element>
+                <FormattedMessage
+                  id={soknad.oppgittRettighet.aleneomsorgForBarnet ? 'AleneomsorgForm.Aleneomsorg' : 'AleneomsorgForm.OppgittIkkeAleneomsorg'}
+                />
+              </Element>
+            )}
             validate={[required]}
             bredde="XL"
             readOnly={readOnly}

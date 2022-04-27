@@ -24,7 +24,7 @@ const AlleBarnPanel: FunctionComponent<OwnProps> = ({
   return (
     <>
       {alleBarn.map((barn, index) => (
-        <Boks harBorderTop={index === 0}>
+        <Boks key={barn.aktoerId} harBorderTop={index === 0}>
           <Row>
             <Column xs="5">
               <FlexContainer>

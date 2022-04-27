@@ -3,7 +3,7 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import {
-  Behandling, KjønnkodeEnum, Soknad, Ytelsefordeling,
+  Behandling, KjønnkodeEnum, Personoversikt, Soknad, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import sivilstandType from '@fpsak-frontend/kodeverk/src/sivilstandType';
 import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -29,7 +29,7 @@ const adresser = [{
   land: 'Norge',
 }];
 
-const personoversikt = {
+const defaultPersonoversikt = {
   bruker: {
     navn: 'Espen Utvikler',
     aktoerId: '1',
@@ -60,19 +60,19 @@ const personoversikt = {
 const Template: Story<{
   aksjonspunkter: Aksjonspunkt[],
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
+  personoversikt: Personoversikt,
+  soknad: Soknad,
 }> = ({
   aksjonspunkter,
   submitCallback,
+  personoversikt,
+  soknad,
 }) => (
   <OmsorgOgRettFaktaIndex
     behandling={{ uuid: 'test' } as Behandling}
     personoversikt={personoversikt}
     ytelsefordeling={{} as Ytelsefordeling}
-    soknad={{
-      oppgittRettighet: {
-        aleneomsorgForBarnet: false,
-      },
-    } as Soknad}
+    soknad={soknad}
     submittable
     harApneAksjonspunkter
     alleMerknaderFraBeslutter={{}}
@@ -92,6 +92,39 @@ HarAksjonspunktForAvklarAleneomsorg.args = {
     erAktivt: true,
     kanLoses: true,
   }] as Aksjonspunkt[],
+  personoversikt: defaultPersonoversikt,
+  soknad: {
+    oppgittRettighet: {
+      aleneomsorgForBarnet: false,
+    },
+  } as Soknad,
+};
+
+export const HarAksjonspunktForAvklarAleneomsorgMedFlereBarn = Template.bind({});
+HarAksjonspunktForAvklarAleneomsorgMedFlereBarn.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  aksjonspunkter: [{
+    definisjon: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+    erAktivt: true,
+    kanLoses: true,
+  }] as Aksjonspunkt[],
+  personoversikt: {
+    ...defaultPersonoversikt,
+    barn: defaultPersonoversikt.barn.concat({
+      navn: 'Petter Tester',
+      dødsdato: undefined,
+      fødselsdato: '2018-01-01',
+      adresser,
+      aktoerId: '4',
+      kjønn: KjønnkodeEnum.MANN,
+      sivilstand: sivilstandType.UGIFT,
+    }),
+  },
+  soknad: {
+    oppgittRettighet: {
+      aleneomsorgForBarnet: true,
+    },
+  } as Soknad,
 };
 
 export const HarAksjonspunktForAvklarAnnenForelderRett = Template.bind({});
@@ -102,4 +135,10 @@ HarAksjonspunktForAvklarAnnenForelderRett.args = {
     erAktivt: true,
     kanLoses: true,
   }] as Aksjonspunkt[],
+  personoversikt: defaultPersonoversikt,
+  soknad: {
+    oppgittRettighet: {
+      aleneomsorgForBarnet: false,
+    },
+  } as Soknad,
 };

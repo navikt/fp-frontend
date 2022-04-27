@@ -82,6 +82,7 @@ const OmsorgOgRettFaktaIndex: FunctionComponent<OwnProps> = ({
           formData={formData as RettFormValues}
           setFormData={setFormData}
           lagreCallback={lagreCallback}
+          alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           aksjonspunkt={aksjonspunkter[0]}
         />
       )}
