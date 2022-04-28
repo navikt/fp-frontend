@@ -32,6 +32,7 @@
   "InntektsmeldingInnhentesForm.HjelpetekstDel1": "Vi trenger inntektsmelding for å behandle saken. Kontakt arbeidsgiveren per telefon. Hvis kontaktinformasjonen til arbeidsgiver er vanskelig å finne, kontakt bruker først.",
   "InntektsmeldingInnhentesForm.HjelpetekstDel2": "Det er kun unntaksvis at en sak skal behandles uten inntektsmelding, f.eks. at man etter gjentatte ganger ikke oppnår kontakt. Refusjon til arbeidsgiver er ikke mulig uten en inntektsmelding.",
   "InntektsmeldingInnhentesForm.HjelpetekstDel3": "Dersom det er flere arbeidsforhold i samme virksomhet må det sendes en inntektsmelding som gjelder samlet for alle, eller én per arbeidsforhold med arbeidsforholdsID.",
+  "InntektsmeldingInnhentesForm.InnehentAlle": "Ved flere arbeidsforhold i samme virksomhet, skal alle inntektsmeldinger innhentes. Mottas ikke alle, må du vurdere om du skal gå videre uten alle inntektsmeldingene. Gjør du det, fjernes arbeidsforholdet (ene) fra beregningen.",
 
   "InntektsmeldingOpplysningerPanel.Stillingsprosent": "Stillingsprosent",
   "InntektsmeldingOpplysningerPanel.Inntektsmelding": "Inntektsmelding",

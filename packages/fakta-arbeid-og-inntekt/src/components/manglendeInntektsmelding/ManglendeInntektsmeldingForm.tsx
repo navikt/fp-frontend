@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { Element } from 'nav-frontend-typografi';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
+import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 
 import {
   required, hasValidText, maxLength, minLength,
@@ -120,6 +121,12 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
         alleKodeverk={alleKodeverk}
       />
       <Form formMethods={formMethods} onSubmit={lagre}>
+        {(!erEttArbeidsforhold && inntektsmeldingerForRad.length > 0) && (
+          <div className={styles.alertStripe}>
+            <AlertStripeInfo><FormattedMessage id="InntektsmeldingInnhentesForm.InnehentAlle" /></AlertStripeInfo>
+            <VerticalSpacer sixteenPx />
+          </div>
+        )}
         <FlexContainer>
           <FlexRow>
             <FlexColumn className={styles.radioHeader}>
