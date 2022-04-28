@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import {
-  StandardFaktaPanelProps, Personoversikt, Ytelsefordeling, Soknad,
+  StandardFaktaPanelProps, Personoversikt, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -14,13 +14,11 @@ const intl = createIntl(messages);
 interface OwnProps {
   personoversikt: Personoversikt;
   ytelsefordeling: Ytelsefordeling;
-  soknad: Soknad;
 }
 
 const OmsorgOgRettFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
   personoversikt,
   ytelsefordeling,
-  soknad,
   aksjonspunkter,
   alleKodeverk,
   readOnly,
@@ -33,7 +31,6 @@ const OmsorgOgRettFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelPro
     <OmsorgOgRettFaktaForm
       aksjonspunkter={aksjonspunkter}
       personoversikt={personoversikt}
-      soknad={soknad}
       ytelsefordeling={ytelsefordeling}
       alleKodeverk={alleKodeverk}
       readOnly={readOnly}

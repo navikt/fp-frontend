@@ -13,7 +13,7 @@ import { Element } from 'nav-frontend-typografi';
 import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { BekreftAleneomsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Aksjonspunkt, Soknad, Ytelsefordeling } from '@fpsak-frontend/types';
+import { Aksjonspunkt, Ytelsefordeling } from '@fpsak-frontend/types';
 
 import Boks from '../Boks';
 import HarAnnenForelderRettFelter from './HarAnnenForelderRettFelter';
@@ -30,7 +30,6 @@ export type FormValues = {
 
 interface OwnProps {
   ytelsefordeling: Ytelsefordeling;
-  soknad: Soknad;
   aksjonspunkt: Aksjonspunkt;
   readOnly: boolean;
   lagreCallback: (aksjonspunktData: BekreftAleneomsorgVurderingAp) => Promise<void>;
@@ -41,7 +40,6 @@ interface OwnProps {
 
 const AleneomsorgForm: FunctionComponent<OwnProps> = ({
   ytelsefordeling,
-  soknad,
   aksjonspunkt,
   readOnly,
   lagreCallback,
@@ -78,13 +76,7 @@ const AleneomsorgForm: FunctionComponent<OwnProps> = ({
         >
           <RadioGroupField
             name="harAleneomsorg"
-            label={(
-              <Element>
-                <FormattedMessage
-                  id={soknad.oppgittRettighet.aleneomsorgForBarnet ? 'AleneomsorgForm.Aleneomsorg' : 'AleneomsorgForm.OppgittIkkeAleneomsorg'}
-                />
-              </Element>
-            )}
+            label={<Element><FormattedMessage id="AleneomsorgForm.Aleneomsorg" /></Element>}
             validate={[required]}
             bredde="XL"
             readOnly={readOnly}

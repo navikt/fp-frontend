@@ -44,8 +44,7 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
 
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    expect(screen.getByText('Søker har oppgitt IKKE å ha aleneomsorg for barnet')).toBeInTheDocument();
-    expect(screen.queryByText('Søker har oppgitt å ha aleneomsorg for barnet')).not.toBeInTheDocument();
+    expect(screen.getByText('Søker har oppgitt å ha aleneomsorg for barnet')).toBeInTheDocument();
 
     userEvent.click(screen.getByText('Søker har aleneomsorg for barnet'));
 
@@ -71,7 +70,7 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
     expect(await screen.findByText('Fakta om omsorg og rett')).toBeInTheDocument();
     expect(screen.getByText('Vurder om søker har aleneomsorg for barnet.')).toBeInTheDocument();
 
-    expect(screen.getByText('Søker har oppgitt IKKE å ha aleneomsorg for barnet')).toBeInTheDocument();
+    expect(screen.getByText('Søker har oppgitt å ha aleneomsorg for barnet')).toBeInTheDocument();
     userEvent.click(screen.getByText('Søker har IKKE aleneomsorg for barnet'));
 
     expect(screen.getByText('Har annen forelder rett?')).toBeInTheDocument();

@@ -3,7 +3,7 @@ import { Story } from '@storybook/react'; // eslint-disable-line import/no-extra
 import { action } from '@storybook/addon-actions';
 
 import {
-  Behandling, KjønnkodeEnum, Personoversikt, Soknad, Ytelsefordeling,
+  Behandling, KjønnkodeEnum, Personoversikt, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import sivilstandType from '@fpsak-frontend/kodeverk/src/sivilstandType';
 import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -61,18 +61,15 @@ const Template: Story<{
   aksjonspunkter: Aksjonspunkt[],
   submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
   personoversikt: Personoversikt,
-  soknad: Soknad,
 }> = ({
   aksjonspunkter,
   submitCallback,
   personoversikt,
-  soknad,
 }) => (
   <OmsorgOgRettFaktaIndex
     behandling={{ uuid: 'test' } as Behandling}
     personoversikt={personoversikt}
     ytelsefordeling={{} as Ytelsefordeling}
-    soknad={soknad}
     submittable
     harApneAksjonspunkter
     alleMerknaderFraBeslutter={{}}
@@ -93,11 +90,6 @@ HarAksjonspunktForAvklarAleneomsorg.args = {
     kanLoses: true,
   }] as Aksjonspunkt[],
   personoversikt: defaultPersonoversikt,
-  soknad: {
-    oppgittRettighet: {
-      aleneomsorgForBarnet: false,
-    },
-  } as Soknad,
 };
 
 export const HarAksjonspunktForAvklarAleneomsorgMedFlereBarn = Template.bind({});
@@ -120,11 +112,6 @@ HarAksjonspunktForAvklarAleneomsorgMedFlereBarn.args = {
       sivilstand: sivilstandType.UGIFT,
     }),
   },
-  soknad: {
-    oppgittRettighet: {
-      aleneomsorgForBarnet: true,
-    },
-  } as Soknad,
 };
 
 export const HarAksjonspunktForAvklarAnnenForelderRett = Template.bind({});
@@ -136,9 +123,4 @@ HarAksjonspunktForAvklarAnnenForelderRett.args = {
     kanLoses: true,
   }] as Aksjonspunkt[],
   personoversikt: defaultPersonoversikt,
-  soknad: {
-    oppgittRettighet: {
-      aleneomsorgForBarnet: false,
-    },
-  } as Soknad,
 };

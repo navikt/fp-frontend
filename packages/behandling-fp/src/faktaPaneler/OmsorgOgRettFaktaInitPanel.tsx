@@ -6,7 +6,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import OmsorgOgRettFaktaIndex from '@fpsak-frontend/fakta-omsorg-og-rett';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import {
-  Aksjonspunkt, Personoversikt, Soknad, Ytelsefordeling,
+  Aksjonspunkt, Personoversikt, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@navikt/ft-utils';
@@ -26,10 +26,9 @@ type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
 }
 
-const ENDEPUNKTER_PANEL_DATA = [FpBehandlingApiKeys.YTELSEFORDELING, FpBehandlingApiKeys.SOKNAD];
+const ENDEPUNKTER_PANEL_DATA = [FpBehandlingApiKeys.YTELSEFORDELING];
 type EndepunktPanelData = {
   ytelsefordeling: Ytelsefordeling;
-  soknad: Soknad;
 }
 
 interface OwnProps {

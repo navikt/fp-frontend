@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 import {
-  AlleKodeverk, Personoversikt, Soknad, Ytelsefordeling,
+  AlleKodeverk, Personoversikt, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { AvklarAnnenforelderHarRettAp, BekreftAleneomsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import { Aksjonspunkt } from '@navikt/ft-types';
@@ -27,7 +27,6 @@ interface OwnProps {
   readOnly: boolean;
   personoversikt: Personoversikt;
   ytelsefordeling: Ytelsefordeling;
-  soknad: Soknad;
   alleKodeverk: AlleKodeverk;
   aksjonspunkter: Aksjonspunkt[];
   lagreCallback: (aksjonspunktData: BekreftAleneomsorgVurderingAp | AvklarAnnenforelderHarRettAp) => Promise<void>;
@@ -40,7 +39,6 @@ const OmsorgOgRettFaktaIndex: FunctionComponent<OwnProps> = ({
   readOnly,
   personoversikt,
   ytelsefordeling,
-  soknad,
   alleKodeverk,
   aksjonspunkter,
   lagreCallback,
@@ -66,7 +64,6 @@ const OmsorgOgRettFaktaIndex: FunctionComponent<OwnProps> = ({
       {harAleneomsorgAksjonspunkt && (
         <AleneomsorgForm
           ytelsefordeling={ytelsefordeling}
-          soknad={soknad}
           readOnly={readOnly}
           formData={formData as AleneOmsorgValues}
           setFormData={setFormData}
