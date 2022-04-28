@@ -149,7 +149,7 @@ const config = {
       failOnError: !isDevelopment,
       fix: isDevelopment,
       overrideConfigFile: path.resolve(__dirname, isDevelopment ? '../eslint/eslintrc.dev.js' : '../eslint/eslintrc.prod.js'),
-      cache: true,
+      lintDirtyModulesOnly: isDevelopment,
     }),
     new MiniCssExtractPlugin({
       filename: isDevelopment ? 'style[name].css' : 'style[name]_[contenthash].css',
