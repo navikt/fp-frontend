@@ -86,11 +86,9 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
   }, [lukkArbeidsforholdRad, defaultValues]);
 
   const lagre = useCallback((formValues: FormValues) => {
-    const vurdering = erEttArbeidsforhold || inntektsmeldingerForRad.length === 0
-      ? formValues.saksbehandlersVurdering : ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING;
     const params = {
       behandlingUuid,
-      vurdering,
+      vurdering: formValues.saksbehandlersVurdering,
       arbeidsgiverIdent: radData.arbeidsgiverIdent,
       internArbeidsforholdRef: erEttArbeidsforhold ? arbeidsforholdForRad[0].internArbeidsforholdId : undefined,
       begrunnelse: formValues.begrunnelse,
@@ -102,7 +100,7 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
             ...radData,
             avklaring: {
               begrunnelse: formValues.begrunnelse,
-              saksbehandlersVurdering: vurdering,
+              saksbehandlersVurdering: formValues.saksbehandlersVurdering,
             },
           };
         }
