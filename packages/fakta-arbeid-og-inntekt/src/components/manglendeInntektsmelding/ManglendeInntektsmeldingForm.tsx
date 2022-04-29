@@ -6,12 +6,13 @@ import { useForm } from 'react-hook-form';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { Element } from 'nav-frontend-typografi';
 import { Knapp, Flatknapp } from 'nav-frontend-knapper';
+import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 
 import {
   required, hasValidText, maxLength, minLength,
 } from '@navikt/ft-utils';
 import {
-  TextAreaField, RadioGroupField, RadioOption, Form, CheckboxField,
+  TextAreaField, RadioGroupField, RadioOption, Form,
 } from '@navikt/ft-form-hooks';
 import {
   AlleKodeverk,
@@ -86,11 +87,9 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
   }, [lukkArbeidsforholdRad, defaultValues]);
 
   const lagre = useCallback((formValues: FormValues) => {
-    const vurdering = erEttArbeidsforhold || inntektsmeldingerForRad.length === 0
-      ? formValues.saksbehandlersVurdering : ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING;
     const params = {
       behandlingUuid,
-      vurdering,
+      vurdering: formValues.saksbehandlersVurdering,
       arbeidsgiverIdent: radData.arbeidsgiverIdent,
       internArbeidsforholdRef: erEttArbeidsforhold ? arbeidsforholdForRad[0].internArbeidsforholdId : undefined,
       begrunnelse: formValues.begrunnelse,
@@ -102,7 +101,7 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
             ...radData,
             avklaring: {
               begrunnelse: formValues.begrunnelse,
-              saksbehandlersVurdering: vurdering,
+              saksbehandlersVurdering: formValues.saksbehandlersVurdering,
             },
           };
         }
@@ -122,52 +121,46 @@ const ManglendeInntektsmeldingForm: FunctionComponent<OwnProps> = ({
         alleKodeverk={alleKodeverk}
       />
       <Form formMethods={formMethods} onSubmit={lagre}>
-        {(erEttArbeidsforhold || inntektsmeldingerForRad.length === 0) && (
-          <>
-            <FlexContainer>
-              <FlexRow>
-                <FlexColumn className={styles.radioHeader}>
-                  <Element><FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" /></Element>
-                </FlexColumn>
-                <FlexColumn>
-                  <Hjelpetekst
-                  /* @ts-ignore */
-                    popoverProps={{ className: styles.hjelpetekst }}
-                  >
-                    <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel1" />
-                    <VerticalSpacer eightPx />
-                    <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel2" />
-                    <VerticalSpacer eightPx />
-                    <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel3" />
-                  </Hjelpetekst>
-                </FlexColumn>
-              </FlexRow>
-            </FlexContainer>
-            <RadioGroupField
-              name="saksbehandlersVurdering"
-              validate={[required]}
-              readOnly={isReadOnly}
-              direction="vertical"
-            >
-              <RadioOption
-                value={ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING}
-                label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.TarKontakt' })}
-              />
-              <RadioOption
-                value={ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING}
-                label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.GåVidere' })}
-              />
-            </RadioGroupField>
-          </>
-        )}
         {(!erEttArbeidsforhold && inntektsmeldingerForRad.length > 0) && (
-          <CheckboxField
-            name="saksbehandlersVurdering"
-            readOnly={isReadOnly}
-            validate={[required]}
-            label={<FormattedMessage id="InntektsmeldingInnhentesForm.TarKontakt" />}
-          />
+          <div className={styles.alertStripe}>
+            <AlertStripeInfo><FormattedMessage id="InntektsmeldingInnhentesForm.InnehentAlle" /></AlertStripeInfo>
+            <VerticalSpacer sixteenPx />
+          </div>
         )}
+        <FlexContainer>
+          <FlexRow>
+            <FlexColumn className={styles.radioHeader}>
+              <Element><FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" /></Element>
+            </FlexColumn>
+            <FlexColumn>
+              <Hjelpetekst
+              /* @ts-ignore */
+                popoverProps={{ className: styles.hjelpetekst }}
+              >
+                <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel1" />
+                <VerticalSpacer eightPx />
+                <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel2" />
+                <VerticalSpacer eightPx />
+                <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel3" />
+              </Hjelpetekst>
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
+        <RadioGroupField
+          name="saksbehandlersVurdering"
+          validate={[required]}
+          readOnly={isReadOnly}
+          direction="vertical"
+        >
+          <RadioOption
+            value={ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING}
+            label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.TarKontakt' })}
+          />
+          <RadioOption
+            value={ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING}
+            label={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.GåVidere' })}
+          />
+        </RadioGroupField>
         <VerticalSpacer sixteenPx />
         <TextAreaField
           label={(
