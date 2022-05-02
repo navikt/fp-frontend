@@ -4,7 +4,7 @@ import React, {
 import { RawIntlProvider } from 'react-intl';
 import {
   BoxedListWithLinks, Header, Popover, SystemButton, UserPanel,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-plattform-komponenter';
 
 import { decodeHtmlEntity, createIntl } from '@navikt/ft-utils';
 import { RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@fpsak-frontend/konstanter';

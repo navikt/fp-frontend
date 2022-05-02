@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { ProcessMenuStepType, ProcessMenu } from '@navikt/fp-react-components';
+import { ProcessMenuStepType, ProcessMenu } from '@navikt/ft-plattform-komponenter';
 
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 

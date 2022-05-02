@@ -5,7 +5,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import {
   PersonCard, EmptyPersonCard, Gender,
-} from '@navikt/fp-react-components';
+} from '@navikt/ft-plattform-komponenter';
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import { Fagsak, KjønnkodeEnum, FagsakPersoner } from '@fpsak-frontend/types';
 import relasjonsRolleType from '@fpsak-frontend/kodeverk/src/relasjonsRolleType';

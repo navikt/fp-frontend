@@ -5,7 +5,7 @@ import {
   FormattedMessage, RawIntlProvider,
 } from 'react-intl';
 import { Image } from '@navikt/ft-ui-komponenter';
-import { Popover, BoxedListWithSelection } from '@navikt/fp-react-components';
+import { Popover, BoxedListWithSelection } from '@navikt/ft-plattform-komponenter';
 import { Knapp } from 'nav-frontend-knapper';
 
 import { createIntl } from '@navikt/ft-utils';
