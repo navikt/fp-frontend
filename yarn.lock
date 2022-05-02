@@ -12677,13 +12677,6 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
-nav-datovelger@12.1.2:
-  version "12.1.2"
-  resolved "https://registry.yarnpkg.com/nav-datovelger/-/nav-datovelger-12.1.2.tgz#cdf1b702526eed29a7203831cd4809161479615d"
-  integrity sha512-Lh0fTX4rc2FeQbdL3y5kI2YsMkl1IFRwLUUMrgTQO/gFelw6PvW47wxV1ZJlcAZAJjc/w/M4w86dKRrh80aYhw==
-  dependencies:
-    focus-trap-react "^8.6.0"
-
 nav-datovelger@12.4.0:
   version "12.4.0"
   resolved "https://registry.yarnpkg.com/nav-datovelger/-/nav-datovelger-12.4.0.tgz#0b88c378cd061387708a07a52578a6128875c232"
