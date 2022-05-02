@@ -12736,11 +12736,6 @@ nav-frontend-etiketter-style@2.0.2:
   resolved "https://registry.yarnpkg.com/nav-frontend-etiketter-style/-/nav-frontend-etiketter-style-2.0.2.tgz#8049b62ffdf303f1055f099df46c3148f6497a77"
   integrity sha512-dlRyx2ekYYdQbqbVWhsSbwYtykdx5ncd6wkD3I68JuuNWwi6mljnPQE0NAzbIf4fbFp3H8Xsnwm3h4yGuca1VA==
 
-nav-frontend-etiketter@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/nav-frontend-etiketter/-/nav-frontend-etiketter-3.0.1.tgz#576403726b6eb08d24c55121de0efeaa827af446"
-  integrity sha512-MrTGwtyZLJFh/5W4dEROERAGQT2c0tH6DkJoak5fRspUaEXM5NS5duSsJYlnNUF19I2KAb/5lvB7PeDtyz87zQ==
-
 nav-frontend-etiketter@3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/nav-frontend-etiketter/-/nav-frontend-etiketter-3.0.2.tgz#f8cea59a4bda43428aa58dff3e72d5954f4b7bb9"
