@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
-import { SideMenu } from '@navikt/fp-react-components';
+import { SideMenu } from '@navikt/ft-plattform-komponenter';
 
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel_ny.svg';
 import FaktaPanelMenyData from '../../types/faktaPanelMenyData';
