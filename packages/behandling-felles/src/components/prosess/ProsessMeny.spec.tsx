@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ProcessMenu, ProcessMenuStepType } from '@navikt/fp-react-components';
+import { ProcessMenu, ProcessMenuStepType } from '@navikt/ft-plattform-komponenter';
 
 import ProsessMeny from './ProsessMeny';
 

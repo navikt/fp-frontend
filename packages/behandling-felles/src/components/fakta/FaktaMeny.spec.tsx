@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { SideMenu } from '@navikt/fp-react-components';
+import { SideMenu } from '@navikt/ft-plattform-komponenter';
 
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
