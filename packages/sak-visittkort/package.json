@@ -15,7 +15,7 @@
     "@navikt/ft-utils": "1.0.2",
     "moment": "2.29.3",
     "nav-frontend-etiketter": "3.0.1",
-    "nav-frontend-etiketter-style": "2.0.1",
+    "nav-frontend-etiketter-style": "2.0.2",
     "nav-frontend-typografi": "4.0.1",
     "nav-frontend-typografi-style": "2.0.1",
     "react": "17.0.2",
