@@ -66,7 +66,6 @@ const InntektsgivendeArbeidPanel: FunctionComponent<OwnProps> & StaticFunctions 
           name={RENDER_INNTEKTSGIVENDE_ARBEID_AMBASSADE_FIELD_ARRAY}
           component={RenderInntektsgivendeArbeidAmbassadeFieldArray}
           readOnly={readOnly}
-          alleKodeverk={alleKodeverk}
         />
       </div>
       )}

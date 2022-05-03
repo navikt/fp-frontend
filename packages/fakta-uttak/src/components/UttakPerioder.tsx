@@ -110,7 +110,6 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
     this.newPeriodeResetCallback = this.newPeriodeResetCallback.bind(this);
     this.removePeriode = this.removePeriode.bind(this);
     this.hideModal = this.hideModal.bind(this);
-    this.cleaningUpForm = this.cleaningUpForm.bind(this);
     this.updatePeriode = this.updatePeriode.bind(this);
     this.editPeriode = this.editPeriode.bind(this);
     this.cancelEditPeriode = this.cancelEditPeriode.bind(this);
@@ -201,27 +200,6 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
     this.setState({
       showModalSlettPeriode: false,
     });
-  }
-
-  cleaningUpForm(id: string): void {
-    const { perioder, reduxFormChange: formChange } = this.props;
-
-    formChange(
-      'UttakFaktaForm',
-      'perioder',
-      perioder
-        .map((periode) => {
-          if (periode.id === id) {
-            return {
-              ...periode,
-              begrunnelse: undefined,
-              resultat: undefined,
-            };
-          }
-          return { ...periode };
-        })
-        .sort((a, b) => a.fom.localeCompare(b.fom)),
-    );
   }
 
   editPeriode(id: string): void {
@@ -398,7 +376,6 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
           openSlettPeriodeModalCallback={this.openSlettPeriodeModalCallback}
           updatePeriode={this.updatePeriode}
           editPeriode={this.editPeriode}
-          cleaningUpForm={this.cleaningUpForm}
           cancelEditPeriode={this.cancelEditPeriode}
           isAnyFormOpen={this.isAnyFormOpen}
           isNyPeriodeFormOpen={isNyPeriodeFormOpen}
@@ -407,7 +384,6 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
           endringsdato={endringsdato}
           farSøkerFør6Uker={farSøkerFør6Uker}
           getKodeverknavn={getKodeverknavn}
-          alleKodeverk={alleKodeverk}
           behandlingStatus={behandlingStatus}
           familiehendelse={familiehendelse}
           vilkarForSykdomExists={vilkarForSykdomExists}
