@@ -7,8 +7,8 @@
   "dependencies": {
     "@navikt/ft-kodeverk": "^1.0.2",
     "@navikt/ft-types": "^1.0.4",
-    "@navikt/ft-ui-komponenter": "1.0.4",
-    "@navikt/ft-utils": "1.0.4",
+    "@navikt/ft-ui-komponenter": "1.0.6",
+    "@navikt/ft-utils": "1.0.5",
     "nav-frontend-alertstriper": "4.0.1",
     "nav-frontend-alertstriper-style": "3.0.1",
     "nav-frontend-typografi": "4.0.1",

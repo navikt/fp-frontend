@@ -32,8 +32,8 @@
     "@fpsak-frontend/types": "1.0.0",
     "@navikt/ft-kodeverk": "^1.0.2",
     "@navikt/ft-types": "^1.0.4",
-    "@navikt/ft-ui-komponenter": "1.0.4",
-    "@navikt/ft-utils": "1.0.4",
+    "@navikt/ft-ui-komponenter": "1.0.6",
+    "@navikt/ft-utils": "1.0.5",
     "react": "17.0.2",
     "react-intl": "5.24.8"
   },

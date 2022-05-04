@@ -2497,14 +2497,14 @@
   resolved "https://npm.pkg.github.com/download/@navikt/fnrvalidator/1.1.4/57aacaca4b4d6c045625ec4e86cc6029f566f6388de258d45f93ef027f888219#b2ce64cb24b3726f715eee110f9f3fde37b907f7"
   integrity sha512-EZBwlNhp886E57GuknLB6G9Bnv4nl+e5K12B/2BeLpWZENxCmcQ+5oFvIThvEsU+LVOdfJxxGOxSvrwe5ZB3pQ==
 
-"@navikt/ft-form-hooks@1.0.4", "@navikt/ft-form-hooks@^1.0.4":
-  version "1.0.4"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-form-hooks/1.0.4/54e66b2b4b76f879019fb3930170f846227dc5d245baf8751c0ee50c70ed43ff#26b225cb53811ccd2670c2a379648d00936357f6"
-  integrity sha512-qAsYd4dyZnZfrAc3V6CMmdcZnZEgl6F1xIujwzXaIHc7Ht9l4NPO+bntxQ7QTh1jgJXgg5KdbD85iZ/ewDOSTA==
+"@navikt/ft-form-hooks@1.0.7", "@navikt/ft-form-hooks@^1.0.7":
+  version "1.0.7"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-form-hooks/1.0.7/fa80fd293c61be97fce820a0c8928b0432b73c3cb219e1debca0ec6af73a222e#2208c22ec4e7229cf1a9ee4334ee5e8cc8a55a58"
+  integrity sha512-ZR+AHdDydkjTdGIFB4VY6a59DYuOnOj/M/4YpIT7c0W4NzawKFIitpoRQkrVjjeM9yZAw/G8pKSaJW8aHJSk1Q==
   dependencies:
     "@navikt/ft-types" "^1.0.4"
-    "@navikt/ft-ui-komponenter" "^1.0.4"
-    "@navikt/ft-utils" "^1.0.4"
+    "@navikt/ft-ui-komponenter" "^1.0.6"
+    "@navikt/ft-utils" "^1.0.5"
     classnames "2.3.1"
     dayjs "1.11.1"
     lodash.throttle "4.1.1"
@@ -2531,26 +2531,26 @@
   resolved "https://npm.pkg.github.com/download/@navikt/ft-kodeverk/1.0.2/a7cab69aea91d24f60138cceccc65152f782acf02aa06abb5da119fe4e0d38e8#870d2cd357a3b584f6e4238fad75192ba4e77c8b"
   integrity sha512-zg5O6HIOUjS3qNDEi/pvAAo07JSN/2aYCsnf5xckVWGekqQDIp5CoKuh2EaAcpvGqqRPZwX1S2OQJpWMkjdZYA==
 
-"@navikt/ft-plattform-komponenter@1.0.3":
-  version "1.0.3"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-plattform-komponenter/1.0.3/93383edc5fecec128c0a0be4452ad12eff3b923e2c2efc0c9de2bbeb114d4fa5#61ceddf4bdc989b5baaef139a7a96d8ec6ebcbac"
-  integrity sha512-aI3ZE8CysbkjzFuXBdZma/Q+3go9v/NmH1hMpdkq+vyh9PUF3zTtxk4jiVBiE+svGzEoOcvtYYnF2ulK7OyBug==
+"@navikt/ft-plattform-komponenter@1.0.4":
+  version "1.0.4"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-plattform-komponenter/1.0.4/62af3552dc6c6cae66ef804a45130d71f0cdc4c11630f6a00a4da76c51df0214#45b3bcc68670bf912ddc3d0eba26984b3273e6fa"
+  integrity sha512-MAYoW3j1JYY9fHYhuCshSRWW2uhmVMO4e+tkD1PyGu9pVwQhpYI/XYzr5wspPMjKJp1ykerBVCMLMh/dlQ7ElA==
   dependencies:
     "@navikt/ds-css" "^0.17.0"
     "@navikt/ds-icons" "^0.8.7"
     "@navikt/ds-react" "^0.18.3"
-    "@navikt/ft-utils" "^1.0.4"
+    "@navikt/ft-utils" "^1.0.5"
 
-"@navikt/ft-prosess-beregningsgrunnlag@1.0.4":
-  version "1.0.4"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-beregningsgrunnlag/1.0.4/463a1334e85e3f2b35189543190b54eeabb979e64388ed76079dd228ea97014b#3b1fe9643af6cd134796c117e73301b35dc787f5"
-  integrity sha512-rq4R6GjRgLei5SW/LDnWlIfQlDz9E6Ppejw0FDK24y5nRftXgU+nis1udD3pVrDIf6CHG+uYh2y5qfiS8DjA2Q==
+"@navikt/ft-prosess-beregningsgrunnlag@1.0.7":
+  version "1.0.7"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-beregningsgrunnlag/1.0.7/e2693f63ab86ad3af75be91f1432b23734165f5d6b403b1211b76e48c27df704#735ff650f1a548bf09c00d493f2d489f5d97594a"
+  integrity sha512-5+QTMiJx5QT6rKD7pGC+iPRpQkJsopQjev7Q9njXH4gLoNkUUUHPUbhRU4PiFED3SoW+nYvGOH3d6BSiG0hyNA==
   dependencies:
-    "@navikt/ft-form-hooks" "^1.0.4"
+    "@navikt/ft-form-hooks" "^1.0.7"
     "@navikt/ft-kodeverk" "^1.0.2"
     "@navikt/ft-types" "^1.0.4"
-    "@navikt/ft-ui-komponenter" "^1.0.4"
-    "@navikt/ft-utils" "^1.0.4"
+    "@navikt/ft-ui-komponenter" "^1.0.6"
+    "@navikt/ft-utils" "^1.0.5"
     classnames "2.3.1"
     moment "2.29.3"
     nav-frontend-chevron "1.0.30"
@@ -2584,13 +2584,13 @@
   dependencies:
     "@navikt/ft-kodeverk" "^1.0.2"
 
-"@navikt/ft-ui-komponenter@1.0.4", "@navikt/ft-ui-komponenter@^1.0.4":
-  version "1.0.4"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-ui-komponenter/1.0.4/f4ce621dd322a27abe24f5f1529df1e479a41b128cdc6d5dd18bb51f4151204a#6bd6c6c671c09d2b79f8762b469489d23294a4cf"
-  integrity sha512-r8mNpdROLE50FO1l09eZKx7dj+nClKA8fS35SRnG0vwUeC6ehIvTEkePmg3Lrmd5+UkApSrK4W1LsCKZWsDDbA==
+"@navikt/ft-ui-komponenter@1.0.6", "@navikt/ft-ui-komponenter@^1.0.6":
+  version "1.0.6"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-ui-komponenter/1.0.6/04ceb5466d8194600b50b78c27b52ef8e43454fd2ba01c7edabaef27f174da51#8d42c7fb1c2df9fed7755322348ec5a70c1268a9"
+  integrity sha512-8IvyJFRrLK+1OyVxqgGQ9yRjPAt7pl2m/MIVV5ZOsAdmJliVl7khs0Wf394LYslfBFOJEdLJIoqt8i/irsuuQQ==
   dependencies:
     "@navikt/fnrvalidator" "1.1.4"
-    "@navikt/ft-utils" "^1.0.4"
+    "@navikt/ft-utils" "^1.0.5"
     classnames "2.3.1"
     echarts "5.3.2"
     moment "2.29.3"
@@ -2620,10 +2620,10 @@
     react-intl "5.24.8"
     react-modal "3.15.1"
 
-"@navikt/ft-utils@1.0.4", "@navikt/ft-utils@^1.0.4":
-  version "1.0.4"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-utils/1.0.4/9c9efb08b5aae0884810ea31f17c8241dc4607ca6029fff0e38b0d0e8c408cc9#5264bc19f8be07d8ba09d1c6efd2c7b8032ded4b"
-  integrity sha512-3GEkPnk7dFw6+uNAA/djtNZ83LiwkeAHGsQZThs8zn54I9ZaUHJQX9ghBTfHuE7T7O7MvYuPucGVKMEHPS/87Q==
+"@navikt/ft-utils@1.0.5", "@navikt/ft-utils@^1.0.5":
+  version "1.0.5"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-utils/1.0.5/5201821f1a906d96fc4831e6f3b9f33015ee4dc4a4cbfe88512b842fa6a509e2#f957ef5e4523f16a1710bdc52b29b26a1b0b3cdb"
+  integrity sha512-t/sornwmSzilgVJTtirD0EZJWAHRtych4EiutFv5BKdUcnr5zomOCeS0verLLOo3dkJ4IT3nmuwKu09U8Br7Hw==
   dependencies:
     "@navikt/ft-kodeverk" "^1.0.2"
     "@navikt/ft-types" "^1.0.4"
@@ -11699,10 +11699,10 @@ klona@^2.0.4:
   resolved "https://registry.yarnpkg.com/klona/-/klona-2.0.5.tgz#d166574d90076395d9963aa7a928fabb8d76afbc"
   integrity sha512-pJiBpiXMbt7dkzXe8Ghj/u4FfXOOa98fPW+bihOJ4SjnoijweJrNThJfd3ifXpXhREjpoF2mZVH1GfS9LV3kHQ==
 
-known-css-properties@^0.24.0:
-  version "0.24.0"
-  resolved "https://registry.yarnpkg.com/known-css-properties/-/known-css-properties-0.24.0.tgz#19aefd85003ae5698a5560d2b55135bf5432155c"
-  integrity sha512-RTSoaUAfLvpR357vWzAz/50Q/BmHfmE6ETSWfutT0AJiw10e6CmcdYRQJlLRd95B53D0Y2aD1jSxD3V3ySF+PA==
+known-css-properties@^0.25.0:
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/known-css-properties/-/known-css-properties-0.25.0.tgz#6ebc4d4b412f602e5cfbeb4086bd544e34c0a776"
+  integrity sha512-b0/9J1O9Jcyik1GC6KC42hJ41jKwdO/Mq8Mdo5sYN+IuRTXs2YFHZC3kZSx6ueusqa95x3wLYe/ytKjbAfGixA==
 
 language-subtag-registry@~0.3.2:
   version "0.3.21"
@@ -14319,7 +14319,7 @@ postcss@^7.0.14, postcss@^7.0.26, postcss@^7.0.32, postcss@^7.0.36, postcss@^7.0
     picocolors "^0.2.1"
     source-map "^0.6.1"
 
-postcss@^8.2.1, postcss@^8.2.15, postcss@^8.3.11, postcss@^8.4.12, postcss@^8.4.7:
+postcss@^8.2.1, postcss@^8.2.15, postcss@^8.3.11, postcss@^8.4.13, postcss@^8.4.7:
   version "8.4.13"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.13.tgz#7c87bc268e79f7f86524235821dfdf9f73e5d575"
   integrity sha512-jtL6eTBrza5MPzy8oJLFuUscHDXTV5KcLlqAWHl5q5WYRfnNRGSmOZmOZ1T6Gy7A99mOZfqungmZMpMmCVJ8ZA==
@@ -16554,10 +16554,10 @@ stylelint-order@5.0.0:
     postcss "^8.3.11"
     postcss-sorting "^7.0.1"
 
-stylelint@14.8.1:
-  version "14.8.1"
-  resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-14.8.1.tgz#86810ebbd7a3570519c6b11d63dc6e5ee3ff3057"
-  integrity sha512-0YxTop3wTeEVmQWhS7jjLFaBkvfPmffRiJ6eFIDlK++f3OklaobTYFJu32E5u/cIrFLbcW52pLqrYpihA/y0/w==
+stylelint@14.8.2:
+  version "14.8.2"
+  resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-14.8.2.tgz#801eef74fe6020611e6a515abb9fc7caeb125793"
+  integrity sha512-tjDfexCYfoPdl/xcDJ9Fv+Ko9cvzbDnmdiaqEn3ovXHXasi/hbkt5tSjsiReQ+ENqnz0eltaX/AOO+AlzVdcNA==
   dependencies:
     balanced-match "^2.0.0"
     colord "^2.9.2"
@@ -16577,14 +16577,14 @@ stylelint@14.8.1:
     import-lazy "^4.0.0"
     imurmurhash "^0.1.4"
     is-plain-object "^5.0.0"
-    known-css-properties "^0.24.0"
+    known-css-properties "^0.25.0"
     mathml-tag-names "^2.1.3"
     meow "^9.0.0"
     micromatch "^4.0.5"
     normalize-path "^3.0.0"
     normalize-selector "^0.2.0"
     picocolors "^1.0.0"
-    postcss "^8.4.12"
+    postcss "^8.4.13"
     postcss-media-query-parser "^0.2.3"
     postcss-resolve-nested-selector "^0.1.1"
     postcss-safe-parser "^6.0.0"
