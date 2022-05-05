@@ -70,6 +70,8 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
 
   const harEttArbeidsforhold = arbeidsforholdForRad.length === 1;
 
+  const visInntektsposter = inntektsposter.length > 0 && inntektsposter.some((i) => i.beløp > 0);
+
   return (
     <>
       <InntektsmeldingerPanel
@@ -79,7 +81,7 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
         alleKodeverk={alleKodeverk}
       />
       <VerticalSpacer thirtyTwoPx />
-      {inntektsposter.length > 0 && (
+      {visInntektsposter && (
         <>
           <Element>
             <FormattedMessage id={harEttArbeidsforhold ? 'ArbeidsforholdInformasjonPanel.Inntekter' : 'ArbeidsforholdInformasjonPanel.TotaltInntekter'} />
@@ -125,7 +127,7 @@ const ArbeidsforholdInformasjonPanel: FunctionComponent<OwnProps> = ({
           </Lenke>
         </>
       )}
-      {inntektsposter.length === 0 && (
+      {!visInntektsposter && (
         <Element>
           <FormattedMessage id="ArbeidsforholdInformasjonPanel.IngenInntekt" />
         </Element>
