@@ -6,10 +6,11 @@ import Etikettfokus from 'nav-frontend-etiketter';
 import { Tooltip } from '@navikt/ft-ui-komponenter';
 
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
-import { getAddresses } from '@navikt/ft-utils';
 import {
   KodeverkMedNavn, Personadresse, PersonopplysningerBasis,
 } from '@fpsak-frontend/types';
+
+import getAddresses from '../getAddresses';
 
 import styles from './bostedSokerView.less';
 

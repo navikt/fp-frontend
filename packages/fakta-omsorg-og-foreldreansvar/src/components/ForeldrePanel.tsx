@@ -4,10 +4,11 @@ import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 
 import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import opplysningAdresseType from '@fpsak-frontend/kodeverk/src/opplysningAdresseType';
-import { getAddresses } from '@navikt/ft-utils';
 import { DateLabel, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { PersonopplysningerBasis, Personoversikt } from '@fpsak-frontend/types';
+
+import getAddresses from '../getAddresses';
 
 const getParentHeader = (erMor: boolean): string => (erMor ? 'ForeldrePanel.MotherDeathDate' : 'ForeldrePanel.FatherDeathDate');
 
