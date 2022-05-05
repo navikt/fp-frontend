@@ -53,6 +53,9 @@ const HarAnnenForelderRettForm: FunctionComponent<OwnProps> = ({
     },
   });
 
+  const skalAvklareUforetrygd = ytelsefordeling?.annenforelderHarRettDto?.avklarAnnenforelderMottarUføretrygd
+    || ytelsefordeling?.annenforelderHarRettDto?.annenforelderMottarUføretrygd !== null;
+
   const transformerFeltverdier = useCallback((feltVerdier: FormValues) => lagreCallback({
     kode: AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT,
     annenforelderHarRett: feltVerdier.harAnnenForelderRett,
@@ -68,7 +71,7 @@ const HarAnnenForelderRettForm: FunctionComponent<OwnProps> = ({
           merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT]}
         >
           <VerticalSpacer thirtyTwoPx />
-          <HarAnnenForelderRettFelter readOnly={readOnly} />
+          <HarAnnenForelderRettFelter readOnly={readOnly} avklareUforetrygd={skalAvklareUforetrygd} />
           <VerticalSpacer thirtyTwoPx />
           <TextAreaField
             label={<Element><FormattedMessage id="HarAnnenForelderRettForm.Begrunn" /></Element>}

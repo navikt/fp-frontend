@@ -215,6 +215,11 @@ const skjermlenkeCodes = {
     faktaNavn: FaktaPanelCode.ARBEID_OG_INNTEKT,
     punktNavn: ProsessStegCode.DEFAULT,
   },
+  FAKTA_OMSORG_OG_RETT: {
+    kode: 'FAKTA_OMSORG_OG_RETT',
+    faktaNavn: FaktaPanelCode.OMSORG_OG_RETT,
+    punktNavn: '',
+  },
 } as SkjermlenkeData;
 
 export default skjermlenkeCodes;

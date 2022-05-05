@@ -12,10 +12,12 @@ type FormValues = {
 
 interface OwnProps {
   readOnly: boolean;
+  avklareUforetrygd: boolean;
 }
 
 const HarAnnenForelderRettFelter: FunctionComponent<OwnProps> = ({
   readOnly,
+  avklareUforetrygd,
 }) => {
   const { watch } = formHooks.useFormContext<FormValues>();
   const harAnnenForelderRett = watch('harAnnenForelderRett');
@@ -35,7 +37,7 @@ const HarAnnenForelderRettFelter: FunctionComponent<OwnProps> = ({
         <RadioOption value="false" label={<FormattedMessage id="HarAnnenForelderRettFelter.Nei" />} />
       </RadioGroupField>
       <VerticalSpacer thirtyTwoPx />
-      {harAnnenForelderRett === false && (
+      {harAnnenForelderRett === false && avklareUforetrygd && (
         <RadioGroupField
           name="mottarAnnenForelderUforetrygd"
           label={<Element><FormattedMessage id="HarAnnenForelderRettFelter.MottarUforetrygd" /></Element>}

@@ -57,6 +57,7 @@ const AleneomsorgForm: FunctionComponent<OwnProps> = ({
   });
 
   const harAleneomsorg = formMethods.watch('harAleneomsorg');
+  const skalAvklareUforetrygd = true;
 
   const transformerFeltverdier = useCallback((feltVerdier: FormValues) => lagreCallback({
     kode: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
@@ -99,7 +100,7 @@ const AleneomsorgForm: FunctionComponent<OwnProps> = ({
           {harAleneomsorg === false && (
             <>
               <VerticalSpacer thirtyTwoPx />
-              <HarAnnenForelderRettFelter readOnly={readOnly} />
+              <HarAnnenForelderRettFelter readOnly={readOnly} avklareUforetrygd={skalAvklareUforetrygd} />
             </>
           )}
           <VerticalSpacer thirtyTwoPx />
