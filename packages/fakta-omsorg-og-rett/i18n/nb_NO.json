@@ -1,0 +1,29 @@
+{
+  "OmsorgOgRettFaktaForm.Overskrift": "Fakta om omsorg og rett",
+  "OmsorgOgRettFaktaForm.VurderOmAleneomsorg": "Vurder om søker har aleneomsorg for barnet.",
+  "OmsorgOgRettFaktaForm.VurderAndreForelderRett": "Vurder om den andre forelderen har rett til foreldrepenger.",
+
+  "AleneomsorgForm.Aleneomsorg": "Søker har oppgitt å ha aleneomsorg for barnet",
+  "AleneomsorgForm.OppgittIkkeAleneomsorg": "Søker har oppgitt IKKE å ha aleneomsorg for barnet",
+  "AleneomsorgForm.HarAleneomsorg": "Søker har aleneomsorg for barnet",
+  "AleneomsorgForm.HarIkkeAleneomsorg": "Søker har IKKE aleneomsorg for barnet",
+  "AleneomsorgForm.Begrunn": "Begrunn vurderingen",
+  "AleneomsorgForm.Bekreft": "Bekreft og fortsett",
+  
+  "HarAnnenForelderRettFelter.HarAnnenForelderRett": "Har annen forelder rett?",
+  "HarAnnenForelderRettFelter.Ja": "Ja",
+  "HarAnnenForelderRettFelter.Nei": "Nei",
+  "HarAnnenForelderRettFelter.MottarUforetrygd": "Mottar annen forelder uføretrygd, jfr 14-14 tredje ledd?",
+
+  "HarAnnenForelderRettForm.Begrunn": "Begrunn vurderingen",
+  "HarAnnenForelderRettForm.Bekreft": "Bekreft og fortsett",
+
+  "PersonInfoPanel.Barn": "Barn",
+  "PersonInfoPanel.BarnNr": "Barn {nummer}",
+  "PersonInfoPanel.Fodt": "Født",
+  "PersonInfoPanel.Dod": "Død",
+  "PersonInfoPanel.Adresse": "Adresse",
+
+  "ForelderPanel.Soker": "Søker",
+  "ForelderPanel.AnnenForelder": "Annen forelder"
+}

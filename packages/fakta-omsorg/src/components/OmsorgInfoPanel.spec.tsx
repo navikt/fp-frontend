@@ -24,14 +24,6 @@ describe('<OmsorgInfoPanel>', () => {
     },
   } as Personoversikt;
 
-  const aleneomsorgAp = {
-    id: 1,
-    definisjon: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-    status: 's1',
-    kanLoses: true,
-    erAktivt: false,
-  };
-
   const omsorgAp = {
     id: 1,
     definisjon: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
@@ -39,51 +31,6 @@ describe('<OmsorgInfoPanel>', () => {
     kanLoses: true,
     erAktivt: false,
   };
-  it('skal vise omsorginfopanel når en har aleneomsorgaksjonspunkt', () => {
-    const wrapper = shallow(<OmsorgInfoPanel
-      {...reduxFormPropsMock}
-      initialValues={{ begrunnelse: 'test' }}
-      omsorg={false}
-      aksjonspunkter={[aleneomsorgAp]}
-      hasOpenAksjonspunkter
-      submittable
-      readOnly={false}
-      alleKodeverk={{} as AlleKodeverk}
-      ytelsefordeling={{} as Ytelsefordeling}
-      soknad={{} as Soknad}
-      alleMerknaderFraBeslutter={{}}
-      personoversikt={personoversikt}
-      submitCallback={() => undefined}
-      onSubmit={() => undefined}
-    />);
-    const panel = wrapper.find(OmsorgFaktaForm);
-    expect(panel).toHaveLength(1);
-  });
-
-  it('skal vise helptext for omsorg og aleneomsorg aksjonspunkt', () => {
-    const wrapper = shallow(<OmsorgInfoPanel
-      {...reduxFormPropsMock}
-      initialValues={{ begrunnelse: 'test' }}
-      omsorg={false}
-      aksjonspunkter={[aleneomsorgAp, omsorgAp]}
-      hasOpenAksjonspunkter
-      submittable
-      readOnly={false}
-      personoversikt={personoversikt}
-      alleKodeverk={{} as AlleKodeverk}
-      ytelsefordeling={{} as Ytelsefordeling}
-      soknad={{} as Soknad}
-      alleMerknaderFraBeslutter={{}}
-      submitCallback={() => undefined}
-      onSubmit={() => undefined}
-    />);
-    const helpText = wrapper.find(AksjonspunktHelpTextTemp);
-    expect(helpText).toHaveLength(1);
-    const helpTextMessage = wrapper.find(FormattedMessage);
-    expect(helpTextMessage).toHaveLength(2);
-    expect(helpTextMessage.at(0).prop('id')).toEqual('OmsorgInfoPanel.VurderAleneomsorg');
-    expect(helpTextMessage.at(1).prop('id')).toEqual('OmsorgInfoPanel.VurderOmsorg');
-  });
 
   it('skal vise helptext for omsorg aksjonspunkt', () => {
     const wrapper = shallow(<OmsorgInfoPanel

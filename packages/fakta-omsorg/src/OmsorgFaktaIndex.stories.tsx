@@ -72,27 +72,6 @@ export default {
   component: OmsorgFaktaIndex,
 };
 
-export const visÅpentAksjonspunktForKontrollAvOmBrukerHarAleneomsorg = () => (
-  <OmsorgFaktaIndex
-    {...standardFaktaProps}
-    behandling={behandling}
-    ytelsefordeling={ytelsefordeling}
-    soknad={soknad}
-    personoversikt={personoversikt}
-    aksjonspunkter={[{
-      definisjon: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-      status: aksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: true,
-      erAktivt: true,
-    }]}
-    alleKodeverk={alleKodeverk as any}
-    alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG]: merknaderFraBeslutter,
-    }}
-  />
-);
-
 export const visÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg = () => (
   <OmsorgFaktaIndex
     {...standardFaktaProps}

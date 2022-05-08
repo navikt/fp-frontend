@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import moment from 'moment';
 
-import aksjonspunktCodes, { isVilkarForSykdomOppfylt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { isVilkarForSykdomOppfylt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import behandlingTyper from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatuser from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import {
@@ -11,9 +10,8 @@ import {
   Personoversikt,
   UttakKontrollerFaktaPerioder, Ytelsefordeling,
 } from '@fpsak-frontend/types';
-import { AvklarAnnenforelderHarRettAp, FaktaUttakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import { FaktaUttakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
-import AnnenForelderHarRettForm from './AnnenForelderHarRettForm';
 import UttakFaktaForm from './UttakFaktaForm';
 
 const getBehandlingArsakTyper = (behandlingArsaker: Behandling['behandlingÅrsaker']): string[] | undefined => {
@@ -34,7 +32,7 @@ const getErArsakTypeHendelseFodsel = (behandlingArsakTyper: string[] = []): bool
 const sortUttaksperioder = (p1: UttakKontrollerFaktaPerioder, p2: UttakKontrollerFaktaPerioder): number => moment(p1.tom).diff(moment(p2.tom));
 
 interface OwnProps {
-  submitCallback: (data: AvklarAnnenforelderHarRettAp | FaktaUttakAp[]) => Promise<void>;
+  submitCallback: (data: FaktaUttakAp[]) => Promise<void>;
   readOnly: boolean;
   aksjonspunkter: Aksjonspunkt[];
   behandlingType: string;
@@ -70,11 +68,9 @@ const UttakInfoPanel: FunctionComponent<OwnProps> = ({
   arbeidsgiverOpplysningerPerId,
   submittable,
 }) => {
-  const avklarAnnenForelderRettAp = aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT);
-  const uttakAp = aksjonspunkter.filter((ap) => ap.definisjon !== aksjonspunktCodes.AVKLAR_ANNEN_FORELDER_RETT);
   const vilkarForSykdomExists = aksjonspunkter.filter((ap) => isVilkarForSykdomOppfylt(ap.definisjon)).length > 0;
-  const uttakApOpen = uttakAp.some((ap) => isAksjonspunktOpen(ap.status));
-  const overrideReadOnly = readOnly || (!uttakAp.length && !uttakAp.some((ap: Aksjonspunkt) => ap.kanLoses));
+  const uttakApOpen = aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status));
+  const overrideReadOnly = readOnly || (!aksjonspunkter.length && !aksjonspunkter.some((ap: Aksjonspunkt) => ap.kanLoses));
   const behandlingArsakTyper = getBehandlingArsakTyper(behandlingArsaker);
   const behandlingIsRevurdering = behandlingType === behandlingTyper.REVURDERING;
   const erManueltOpprettet = getErManueltOpprettet(behandlingArsaker);
@@ -84,44 +80,24 @@ const UttakInfoPanel: FunctionComponent<OwnProps> = ({
   const sortedUttakPerioder = [...uttakPerioder].sort(sortUttaksperioder);
 
   return (
-    <>
-      {avklarAnnenForelderRettAp && (
-        <>
-          { /* @ts-ignore Fiks cannot be used as a JSX component */ }
-          <AnnenForelderHarRettForm
-            hasOpenAksjonspunkter={isAksjonspunktOpen(avklarAnnenForelderRettAp.status)}
-            hasOpenUttakAksjonspunkter={uttakApOpen}
-            readOnly={readOnly}
-            aksjonspunkt={avklarAnnenForelderRettAp}
-            submitCallback={submitCallback}
-            ytelsefordeling={ytelsefordeling}
-          />
-          <VerticalSpacer twentyPx />
-        </>
-      )}
-
-      {(!avklarAnnenForelderRettAp || !isAksjonspunktOpen(avklarAnnenForelderRettAp.status)) && (
-        /* @ts-ignore Fiks cannot be used as a JSX component */
-        <UttakFaktaForm
-          hasOpenAksjonspunkter={uttakApOpen}
-          readOnly={(overrideReadOnly && (!isRevurdering || !behandlingUtredes || behandlingPaaVent)) || !ytelsefordeling.endringsdato}
-          aksjonspunkter={uttakAp}
-          submitCallback={submitCallback}
-          behandlingStatus={behandlingStatus}
-          ytelsefordeling={ytelsefordeling}
-          uttakPerioder={sortedUttakPerioder}
-          alleKodeverk={alleKodeverk}
-          kanOverstyre={kanOverstyre && ytelsefordeling.endringsdato !== null}
-          faktaArbeidsforhold={faktaArbeidsforhold}
-          personoversikt={personoversikt}
-          familiehendelse={familiehendelse}
-          vilkarForSykdomExists={vilkarForSykdomExists}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          submittable={submittable}
-        />
-      )}
-
-    </>
+    /* @ts-ignore Fiks cannot be used as a JSX component */
+    <UttakFaktaForm
+      hasOpenAksjonspunkter={uttakApOpen}
+      readOnly={(overrideReadOnly && (!isRevurdering || !behandlingUtredes || behandlingPaaVent)) || !ytelsefordeling.endringsdato}
+      aksjonspunkter={aksjonspunkter}
+      submitCallback={submitCallback}
+      behandlingStatus={behandlingStatus}
+      ytelsefordeling={ytelsefordeling}
+      uttakPerioder={sortedUttakPerioder}
+      alleKodeverk={alleKodeverk}
+      kanOverstyre={kanOverstyre && ytelsefordeling.endringsdato !== null}
+      faktaArbeidsforhold={faktaArbeidsforhold}
+      personoversikt={personoversikt}
+      familiehendelse={familiehendelse}
+      vilkarForSykdomExists={vilkarForSykdomExists}
+      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      submittable={submittable}
+    />
   );
 };
 
