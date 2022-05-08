@@ -18,19 +18,18 @@ import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktSta
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ArrowBox, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { Aksjonspunkt, Soknad, Ytelsefordeling } from '@fpsak-frontend/types';
-import { BekreftAleneomsorgVurderingAp, BekreftOmsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import { BekreftOmsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import IkkeOmsorgPeriodeField from './IkkeOmsorgPeriodeField';
 
 import styles from './omsorgFaktaForm.less';
 
-const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG, MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = aksjonspunktCodes;
+const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = aksjonspunktCodes;
 
 const getAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt[] => aksjonspunkter
   .filter((ap) => ap.definisjon === aksjonspunktCode);
 
 export type FormValues = {
-  aleneomsorg?: boolean;
   omsorg?: boolean;
   ikkeOmsorgPerioder?: Ytelsefordeling['ikkeOmsorgPerioder'];
 }
@@ -46,15 +45,12 @@ interface PureOwnProps {
 }
 
 interface MappedOwnProps {
-  aleneomsorgIsEdited?: boolean;
   omsorgIsEdited?: boolean;
-  oppgittAleneomsorgSoknad: boolean;
   oppgittOmsorgSoknad: boolean;
 }
 
 interface StaticFunctions {
   buildInitialValues?: (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]) => FormValues;
-  transformAleneomsorgValues?: (values: FormValues) => BekreftAleneomsorgVurderingAp;
   transformOmsorgValues?: (values: FormValues) => BekreftOmsorgVurderingAp;
   validate?: (values: FormValues) => any;
 }
@@ -64,50 +60,13 @@ const OmsorgFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps> & Static
   readOnly,
   omsorg,
   className,
-  aleneomsorgIsEdited,
   omsorgIsEdited,
   oppgittOmsorgSoknad,
-  oppgittAleneomsorgSoknad,
   alleMerknaderFraBeslutter,
 }) => {
   const intl = useIntl();
   return (
     <div className={className}>
-      {hasAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG, aksjonspunkter)
-        && (
-        <FaktaGruppe
-          title={intl.formatMessage({ id: 'OmsorgFaktaForm.Aleneomsorg' })}
-          withoutBorder
-          merknaderFraBeslutter={alleMerknaderFraBeslutter[MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG]}
-        >
-          <Normaltekst className={styles.paddingBottom}>
-            {oppgittAleneomsorgSoknad
-              ? <FormattedMessage id="OmsorgFaktaForm.OppgittAleneomsorg" />
-              : (
-                <FormattedMessage
-                  id="OmsorgFaktaForm.OppgittIkkeAleneomsorg"
-                  values={{
-                    b: (chunks: any) => <b>{chunks}</b>,
-                  }}
-                />
-              )}
-          </Normaltekst>
-          <RadioGroupField name="aleneomsorg" readOnly={readOnly} validate={[required]} isEdited={aleneomsorgIsEdited}>
-            <RadioOption label={{ id: 'OmsorgFaktaForm.HarAleneomsorg' }} value />
-            <RadioOption
-              label={(
-                <FormattedMessage
-                  id="OmsorgFaktaForm.HarIkkeAleneomsorg"
-                  values={{
-                    b: (chunks: any) => <b>{chunks}</b>,
-                  }}
-                />
-              )}
-              value={false}
-            />
-          </RadioGroupField>
-        </FaktaGruppe>
-        )}
       {hasAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG, aksjonspunkter)
         && (
         <FaktaGruppe
@@ -163,26 +122,19 @@ const OmsorgFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps> & Static
   );
 };
 OmsorgFaktaForm.defaultProps = {
-  aleneomsorgIsEdited: false,
   omsorgIsEdited: false,
   className: styles.defaultAleneOmsorgFakta,
 };
 
 OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]): FormValues => {
-  const aleneomsorgAp = getAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG, aksjonspunkter);
   const omsorgAp = getAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG, aksjonspunkter);
-  let aleneomsorg = null;
   let omsorg = null;
 
-  if (aleneomsorgAp.length > 0 && !isAksjonspunktOpen(aleneomsorgAp[0].status)) {
-    aleneomsorg = ytelsefordeling.aleneOmsorgPerioder && ytelsefordeling.aleneOmsorgPerioder.length > 0;
-  }
   if (omsorgAp.length > 0 && !isAksjonspunktOpen(omsorgAp[0].status)) {
     omsorg = !(ytelsefordeling.ikkeOmsorgPerioder && ytelsefordeling.ikkeOmsorgPerioder.length > 0);
   }
 
   return {
-    aleneomsorg,
     omsorg,
     ikkeOmsorgPerioder: ytelsefordeling.ikkeOmsorgPerioder && ytelsefordeling.ikkeOmsorgPerioder.length > 0
       ? ytelsefordeling.ikkeOmsorgPerioder : [{
@@ -191,11 +143,6 @@ OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonsp
       }],
   };
 };
-
-OmsorgFaktaForm.transformAleneomsorgValues = (values: FormValues): BekreftAleneomsorgVurderingAp => ({
-  kode: MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-  aleneomsorg: values.aleneomsorg,
-});
 
 OmsorgFaktaForm.transformOmsorgValues = (values: FormValues): BekreftOmsorgVurderingAp => ({
   kode: MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
@@ -278,10 +225,8 @@ OmsorgFaktaForm.validate = (values: FormValues): any => {
 };
 
 const mapStateToProps = (_state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  aleneomsorgIsEdited: !!ownProps.ytelsefordeling.aleneOmsorgPerioder,
   omsorgIsEdited: !!ownProps.ytelsefordeling.ikkeOmsorgPerioder,
   oppgittOmsorgSoknad: ownProps.soknad.oppgittRettighet.omsorgForBarnet,
-  oppgittAleneomsorgSoknad: ownProps.soknad.oppgittRettighet.aleneomsorgForBarnet,
 });
 
 export default connect(mapStateToProps)(OmsorgFaktaForm);

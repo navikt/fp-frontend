@@ -605,6 +605,10 @@ const historikkEndretFeltVerdiTypeCodes = {
     kode: '4100',
     verdiId: 'HistorikkEndretFelt.UttakForOmsorgovertakelse',
   },
+  4102: {
+    kode: '4102',
+    verdiId: 'HistorikkEndretFelt.BareFarRettManglerDokAktivitet',
+  },
   MØDREKVOTE: {
     kode: 'MØDREKVOTE',
     verdiId: 'HistorikkEndretFeltVerdiType.Modrekvote',
