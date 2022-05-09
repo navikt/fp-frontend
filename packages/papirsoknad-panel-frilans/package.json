@@ -6,10 +6,10 @@
   "private": true,
   "dependencies": {
     "@fpsak-frontend/form": "1.0.0",
-    "@navikt/ft-kodeverk": "^1.0.2",
-    "@navikt/ft-types": "^1.0.4",
-    "@navikt/ft-ui-komponenter": "1.0.6",
-    "@navikt/ft-utils": "1.0.5",
+    "@navikt/ft-kodeverk": "^1.0.4",
+    "@navikt/ft-types": "^1.0.7",
+    "@navikt/ft-ui-komponenter": "1.0.9",
+    "@navikt/ft-utils": "1.0.8",
     "moment": "2.29.3",
     "nav-frontend-grid": "2.0.1",
     "nav-frontend-grid-style": "1.0.2",
@@ -26,6 +26,6 @@
   "devDependencies": {
     "@fpsak-frontend/utils-test": "1.0.0",
     "enzyme": "3.11.0",
-    "sinon": "13.0.2"
+    "sinon": "14.0.0"
   }
 }
