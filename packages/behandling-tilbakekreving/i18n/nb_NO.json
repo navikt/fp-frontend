@@ -1,0 +1,23 @@
+{
+  "Behandlingspunkt.Tilbakekreving": "Tilbakekreving",
+  "Behandlingspunkt.Foreldelse": "Foreldelse",
+  "Behandlingspunkt.Vedtak": "Vedtak",
+  "TilbakekrevingFakta.FaktaFeilutbetaling": "Feilutbetaling",
+  "RegistrereVergeInfoPanel.Info": "Verge/fullmektig",
+  "Behandlingspunkt.Inngangsvilkar": "Inngangsvilkår",
+  "InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv": "Avventer avklaring av fakta om ",
+  "ProsessPanelWrapper.IkkeBehandlet": "Dette steget er ikke behandlet",
+  "ProsessPanelWrapper.Henlagt": "Behandlingen er henlagt",
+  "FaktaPanel.FaktaOm": "Fakta om",
+  "HelpText.Aksjonspunkt": "Aksjonspunkt",
+
+  "FatterVedtakStatusModal.GoToSearchPage": "Du kommer nå til forsiden.",
+  "FatterVedtakStatusModal.Ok": "OK",
+  "FatterVedtakStatusModal.SendtBeslutter": "Forslag til vedtak er sendt til beslutter",
+
+  "SubmitButton.ConfirmInformation": "Bekreft og fortsett",
+
+  "FatterTilbakekrevingVedtakStatusModal.Sendt": "Forslag til vedtak er sendt til beslutter",
+  "BehandlingTilbakekrevingIndex.ApenRevurdering": "Det finnes en åpen revurdering som kan påvirke denne tilbakekrevingsbehandlingen. Vurder konsekvens ved behandling.",
+  "BehandlingTilbakekrevingIndex.ApenRevurderingHeader": "Åpen revurdering"
+}
