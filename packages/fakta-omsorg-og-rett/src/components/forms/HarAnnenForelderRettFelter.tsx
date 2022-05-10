@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { RadioGroupField, RadioOption, formHooks } from '@navikt/ft-form-hooks';
-import { required } from '@navikt/ft-utils';
+import { required } from '@navikt/ft-form-validators';
 import { Element } from 'nav-frontend-typografi';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 

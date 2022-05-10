@@ -8,6 +8,7 @@
     "@fpsak-frontend/form": "1.0.0",
     "@fpsak-frontend/kodeverk": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
+    "@navikt/ft-form-validators": "1.0.3",
     "@navikt/ft-kodeverk": "^1.0.4",
     "@navikt/ft-types": "^1.0.7",
     "@navikt/ft-ui-komponenter": "1.0.9",

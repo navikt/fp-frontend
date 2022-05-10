@@ -8,7 +8,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
 import { RadioGroupField, RadioOption, formHooks } from '@navikt/ft-form-hooks';
-import { required } from '@navikt/ft-utils';
+import { required } from '@navikt/ft-form-validators';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad, AvklartBarn,

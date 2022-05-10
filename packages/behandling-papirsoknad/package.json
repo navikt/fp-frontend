@@ -16,6 +16,7 @@
     "@fpsak-frontend/rest-api": "1.0.0",
     "@fpsak-frontend/rest-api-hooks": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
+    "@navikt/ft-form-validators": "1.0.3",
     "@navikt/ft-kodeverk": "^1.0.4",
     "@navikt/ft-types": "^1.0.7",
     "@navikt/ft-utils": "1.0.8",

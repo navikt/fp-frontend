@@ -9,7 +9,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import {
   ariaCheck, hasValidText, maxLength, minLength, required,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 import {
   RadioGroupField, RadioOption, TextAreaField, Form,
 } from '@navikt/ft-form-hooks';

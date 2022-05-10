@@ -7,7 +7,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
 
 import { SelectField, TextAreaField, Form } from '@navikt/ft-form-hooks';
-import { hasValidText, maxLength, required } from '@navikt/ft-utils';
+import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { VerticalSpacer, Image } from '@navikt/ft-ui-komponenter';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 

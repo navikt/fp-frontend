@@ -14,7 +14,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import {
   hasValidDecimal, maxValue, minValue, required, hasValidDate,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
 import { Permisjon } from '@fpsak-frontend/types';
 

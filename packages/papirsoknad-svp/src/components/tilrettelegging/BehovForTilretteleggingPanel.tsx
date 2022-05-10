@@ -6,7 +6,7 @@ import { SkjemaGruppe } from 'nav-frontend-skjema';
 
 import { RadioGroupField, RadioOption, DatepickerField } from '@fpsak-frontend/form';
 import { BorderBox, ArrowBox } from '@navikt/ft-ui-komponenter';
-import { required } from '@navikt/ft-utils';
+import { required } from '@navikt/ft-form-validators';
 
 import BehovForTilrettteleggingFieldArray from './BehovForTilrettteleggingFieldArray';
 import TilretteleggingForArbeidsgiverFieldArray from './TilretteleggingForArbeidsgiverFieldArray';

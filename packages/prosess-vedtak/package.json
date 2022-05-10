@@ -11,6 +11,7 @@
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/types-avklar-aksjonspunkter": "1.0.0",
     "@navikt/ft-form-hooks": "1.0.10",
+    "@navikt/ft-form-validators": "1.0.3",
     "@navikt/ft-kodeverk": "^1.0.4",
     "@navikt/ft-types": "^1.0.7",
     "@navikt/ft-ui-komponenter": "1.0.9",

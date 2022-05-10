@@ -12,7 +12,7 @@ import { DecimalField, InputField, SelectField } from '@fpsak-frontend/form';
 import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
 import {
   hasValidDecimal, hasValidInteger, maxLength, maxValue, minValue, notDash, required,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 import {
   ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSokerAktivitet,
 } from '@fpsak-frontend/types';

@@ -3,7 +3,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { useIntl } from 'react-intl';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
-import { hasValidDate, required, dateBeforeOrEqualToToday } from '@navikt/ft-utils';
+import { hasValidDate, required, dateBeforeOrEqualToToday } from '@navikt/ft-form-validators';
 import { AvklartBarn } from '@fpsak-frontend/types';
 import { Datepicker, PeriodFieldArray, formHooks } from '@navikt/ft-form-hooks';
 

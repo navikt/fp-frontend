@@ -4,9 +4,10 @@ import moment from 'moment';
 import { Column, Row } from 'nav-frontend-grid';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import {
-  dateAfterOrEqual, hasValidDate, ISO_DATE_FORMAT, required,
-} from '@navikt/ft-utils';
+  dateAfterOrEqual, hasValidDate, required,
+} from '@navikt/ft-form-validators';
 import { DatepickerField, PeriodFieldArray } from '@fpsak-frontend/form';
 
 import styles from './frilansPerioderFieldArray.less';

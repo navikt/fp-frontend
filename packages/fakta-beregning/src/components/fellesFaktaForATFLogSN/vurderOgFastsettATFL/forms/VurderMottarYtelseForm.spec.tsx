@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
 
-import { isRequiredMessage } from '@navikt/ft-utils';
+import { isRequiredMessage } from '@navikt/ft-form-validators';
 import { RadioGroupField } from '@fpsak-frontend/form';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
 

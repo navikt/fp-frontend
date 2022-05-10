@@ -11,8 +11,9 @@ import {
   VerticalSpacer, OverstyringKnapp, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
 import {
-  formatCurrencyWithKr, hasValidInteger, maxValue, minValue, required, decodeHtmlEntity,
-} from '@navikt/ft-utils';
+  hasValidInteger, maxValue, minValue, required,
+} from '@navikt/ft-form-validators';
+import { formatCurrencyWithKr, decodeHtmlEntity } from '@navikt/ft-utils';
 import { InputField, Form } from '@navikt/ft-form-hooks';
 import aksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { OverstyringPanel } from '@fpsak-frontend/prosess-felles';

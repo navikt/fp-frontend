@@ -9,8 +9,9 @@ import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { InputField, NavFieldGroup, SelectField } from '@fpsak-frontend/form';
+import { required } from '@navikt/ft-form-validators';
 import {
-  formatCurrencyNoKr, isArrayEmpty, parseCurrencyInput, removeSpacesFromNumber, required, getKodeverknavnFn,
+  formatCurrencyNoKr, isArrayEmpty, parseCurrencyInput, removeSpacesFromNumber, getKodeverknavnFn,
 } from '@navikt/ft-utils';
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';

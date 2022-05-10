@@ -9,7 +9,7 @@ import AktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { LINK_TIL_BESTE_BEREGNING_REGNEARK } from '@fpsak-frontend/konstanter';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { required } from '@navikt/ft-utils';
+import { required } from '@navikt/ft-form-validators';
 import { Aksjonspunkt, FaktaOmBeregning, VurderBesteberegning } from '@fpsak-frontend/types';
 import { FaktaBeregningTransformedValues } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/fakta/BeregningFaktaAP';
 import { getFormValuesForBeregning } from '../../BeregningFormUtils';

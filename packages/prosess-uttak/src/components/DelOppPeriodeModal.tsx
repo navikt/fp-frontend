@@ -10,9 +10,10 @@ import Modal from 'nav-frontend-modal';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
+import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import {
-  calcDaysAndWeeks, dateAfterOrEqual, dateBeforeOrEqual, DDMMYYYY_DATE_FORMAT, hasValidDate, required,
-} from '@navikt/ft-utils';
+  dateAfterOrEqual, dateBeforeOrEqual, hasValidDate, required,
+} from '@navikt/ft-form-validators';
 import { DatepickerField } from '@fpsak-frontend/form';
 
 import styles from './delOppPeriodeModal.less';

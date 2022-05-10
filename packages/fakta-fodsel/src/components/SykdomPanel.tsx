@@ -5,7 +5,7 @@ import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { RadioGroupField, RadioOption, TextAreaField } from '@navikt/ft-form-hooks';
 import {
   hasValidText, maxLength, minLength, required,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import { VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';

@@ -12,7 +12,7 @@ import {
 import editUtlandIcon from '@fpsak-frontend/assets/images/endre.svg';
 import editUtlandDisabledIcon from '@fpsak-frontend/assets/images/endre_disablet.svg';
 import { RadioGroupField, RadioOption, Form } from '@navikt/ft-form-hooks';
-import { required } from '@navikt/ft-utils';
+import { required } from '@navikt/ft-form-validators';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 import { OverstyringUtenlandssakMarkeringAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';

@@ -6,7 +6,7 @@ import { DecimalField, PeriodpickerField, SelectField } from '@fpsak-frontend/fo
 import oppholdArsakType, { oppholdArsakKontoNavn } from '@fpsak-frontend/kodeverk/src/oppholdArsakType';
 import {
   hasValidDecimal, maxValue, minValue, required,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 
 import styles from './perioder/periodeTyper.less';

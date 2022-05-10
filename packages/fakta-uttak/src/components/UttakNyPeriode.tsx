@@ -15,9 +15,8 @@ import {
   SelectField,
   TextAreaField,
 } from '@fpsak-frontend/form';
+import { calcDaysAndWeeks, guid } from '@navikt/ft-utils';
 import {
-  calcDaysAndWeeks,
-  guid,
   hasValidDate,
   hasValidDecimal,
   hasValidPeriod,
@@ -27,7 +26,7 @@ import {
   minLength,
   required,
   requiredIfNotPristine,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 import uttakArbeidType from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
 import uttakPeriodeVurdering from '@fpsak-frontend/kodeverk/src/uttakPeriodeVurdering';
 import {

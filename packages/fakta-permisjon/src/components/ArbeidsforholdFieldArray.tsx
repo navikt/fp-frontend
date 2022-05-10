@@ -8,7 +8,8 @@ import {
 
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel2.svg';
 import okIkonUrl from '@fpsak-frontend/assets/images/check.svg';
-import { required, TIDENES_ENDE, getKodeverknavnFraKode } from '@navikt/ft-utils';
+import { required } from '@navikt/ft-form-validators';
+import { TIDENES_ENDE, getKodeverknavnFraKode } from '@navikt/ft-utils';
 import { RadioGroupField, RadioOption, formHooks } from '@navikt/ft-form-hooks';
 import {
   ArbeidOgInntektsmelding, AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding, AlleKodeverk,

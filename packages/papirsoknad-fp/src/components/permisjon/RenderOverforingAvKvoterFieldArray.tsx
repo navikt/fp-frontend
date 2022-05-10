@@ -4,7 +4,7 @@ import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import { DatepickerField, SelectField, PeriodFieldArray } from '@fpsak-frontend/form';
-import { required, hasValidDate } from '@navikt/ft-utils';
+import { required, hasValidDate } from '@navikt/ft-form-validators';
 
 const defaultOverforingPeriode = {
   periodeFom: '',

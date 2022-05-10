@@ -10,14 +10,13 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   VerticalSpacer, FaktaGruppe, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
+import { findDifferenceInMonthsAndDays, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import {
-  findDifferenceInMonthsAndDays,
   hasValidText,
   maxLength,
   minLength,
   required,
-  DDMMYYYY_DATE_FORMAT,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 import {
   RadioGroupField, RadioOption, TextAreaField, Form,
 } from '@navikt/ft-form-hooks';
