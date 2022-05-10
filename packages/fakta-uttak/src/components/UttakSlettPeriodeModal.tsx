@@ -13,8 +13,9 @@ import {
 import { TextAreaField } from '@fpsak-frontend/form';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
-  DDMMYYYY_DATE_FORMAT, hasValidText, maxLength, minLength, required,
-} from '@navikt/ft-utils';
+  hasValidText, maxLength, minLength, required,
+} from '@navikt/ft-form-validators';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 
 import styles from './uttakSlettPeriodeModal.less';

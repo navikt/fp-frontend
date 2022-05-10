@@ -1,12 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import {
-  dateFormat,
   hasValidDate,
   required,
   dateAfterOrEqual,
-  parseCurrencyInput,
   minValueFormatted,
   maxValueFormatted,
+} from '@navikt/ft-form-validators';
+import {
+  dateFormat,
+  parseCurrencyInput,
   removeSpacesFromNumber,
   formatCurrencyNoKr,
 } from '@navikt/ft-utils';

@@ -9,7 +9,7 @@ import {
   dateBeforeOrEqualToToday,
   hasValidDate,
   required,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 
 interface OwnProps {
   readOnly: boolean;

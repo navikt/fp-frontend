@@ -7,7 +7,7 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { InputField, RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { required, hasValidInteger, hasValidText } from '@navikt/ft-utils';
+import { required, hasValidInteger, hasValidText } from '@navikt/ft-form-validators';
 
 interface PureOwnProps {
   readOnly?: boolean;

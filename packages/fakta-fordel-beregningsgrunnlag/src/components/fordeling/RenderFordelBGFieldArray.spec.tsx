@@ -1,5 +1,5 @@
 import React from 'react';
-import { isRequiredMessage } from '@navikt/ft-utils';
+import { isRequiredMessage } from '@navikt/ft-form-validators';
 import { metaMock, MockFieldsWithContent } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 

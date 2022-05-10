@@ -11,8 +11,9 @@ import {
 import popOutPilSvg from '@fpsak-frontend/assets/images/pop-out-pil.svg';
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import {
-  getLanguageFromSprakkode, hasValidText, maxLength, minLength, required,
-} from '@navikt/ft-utils';
+  hasValidText, maxLength, minLength, required,
+} from '@navikt/ft-form-validators';
+import { getLanguageFromSprakkode } from '@navikt/ft-utils';
 
 import styles from './manueltVedtaksbrevPanel.less';
 

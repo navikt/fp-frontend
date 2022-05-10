@@ -7,9 +7,10 @@ import {
 } from '@navikt/ft-ui-komponenter';
 
 import { TextAreaField, formHooks } from '@navikt/ft-form-hooks';
+import { createIntl } from '@navikt/ft-utils';
 import {
-  hasValidText, maxLength, minLength, createIntl,
-} from '@navikt/ft-utils';
+  hasValidText, maxLength, minLength,
+} from '@navikt/ft-form-validators';
 import advarselIkonUrl from '@fpsak-frontend/assets/images/advarsel_ny.svg';
 
 import messages from '../../i18n/nb_NO.json';

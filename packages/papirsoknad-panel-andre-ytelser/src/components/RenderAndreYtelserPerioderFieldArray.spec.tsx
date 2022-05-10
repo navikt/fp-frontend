@@ -2,7 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import moment from 'moment';
 
-import { invalidDateMessage, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { invalidDateMessage } from '@navikt/ft-form-validators';
 import { PeriodFieldArray, DatepickerField } from '@fpsak-frontend/form';
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
 

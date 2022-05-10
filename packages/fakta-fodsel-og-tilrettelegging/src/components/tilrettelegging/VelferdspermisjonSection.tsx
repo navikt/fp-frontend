@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import moment from 'moment';
-import { DDMMYYYY_DATE_FORMAT, required } from '@navikt/ft-utils';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import { required } from '@navikt/ft-form-validators';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';

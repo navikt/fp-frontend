@@ -5,7 +5,7 @@ import { Undertekst, Normaltekst } from 'nav-frontend-typografi';
 
 import { Datepicker } from '@navikt/ft-form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { hasValidDate, required } from '@navikt/ft-utils';
+import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { FamilieHendelse, Soknad } from '@fpsak-frontend/types';
 import { FieldEditedInfo } from '@fpsak-frontend/fakta-felles';

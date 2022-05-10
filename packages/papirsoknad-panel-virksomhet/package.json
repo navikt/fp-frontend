@@ -10,10 +10,11 @@
     "@fpsak-frontend/kodeverk": "1.0.0",
     "@fpsak-frontend/papirsoknad-felles": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
-    "@navikt/ft-kodeverk": "^1.0.2",
-    "@navikt/ft-types": "^1.0.4",
-    "@navikt/ft-ui-komponenter": "1.0.6",
-    "@navikt/ft-utils": "1.0.5",
+    "@navikt/ft-form-validators": "1.0.3",
+    "@navikt/ft-kodeverk": "^1.0.4",
+    "@navikt/ft-types": "^1.0.7",
+    "@navikt/ft-ui-komponenter": "1.0.9",
+    "@navikt/ft-utils": "1.0.8",
     "nav-frontend-grid": "2.0.1",
     "nav-frontend-grid-style": "1.0.2",
     "nav-frontend-knapper": "3.1.2",
@@ -34,6 +35,6 @@
   "devDependencies": {
     "@fpsak-frontend/utils-test": "1.0.0",
     "enzyme": "3.11.0",
-    "sinon": "13.0.2"
+    "sinon": "14.0.0"
   }
 }

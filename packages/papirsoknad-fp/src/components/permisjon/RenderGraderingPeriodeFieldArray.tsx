@@ -10,7 +10,7 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
-import { hasValidDecimal, maxValue, required } from '@navikt/ft-utils';
+import { hasValidDecimal, maxValue, required } from '@navikt/ft-form-validators';
 import {
   CheckboxField, DatepickerField, DecimalField, InputField, SelectField, PeriodFieldArray,
 } from '@fpsak-frontend/form';

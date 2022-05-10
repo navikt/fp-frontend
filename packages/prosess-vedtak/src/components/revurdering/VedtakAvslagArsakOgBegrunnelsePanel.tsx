@@ -10,7 +10,10 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { TextAreaField, formHooks } from '@navikt/ft-form-hooks';
 import {
-  decodeHtmlEntity, getLanguageFromSprakkode, hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew, getKodeverknavnFn,
+  hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew,
+} from '@navikt/ft-form-validators';
+import {
+  decodeHtmlEntity, getLanguageFromSprakkode, getKodeverknavnFn,
 } from '@navikt/ft-utils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';

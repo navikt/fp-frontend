@@ -6,9 +6,8 @@ import { Undertekst } from 'nav-frontend-typografi';
 import { Behandlingsresultat } from '@fpsak-frontend/types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { TextAreaField } from '@navikt/ft-form-hooks';
-import {
-  decodeHtmlEntity, getLanguageFromSprakkode, hasValidText, maxLength, minLength,
-} from '@navikt/ft-utils';
+import { decodeHtmlEntity, getLanguageFromSprakkode } from '@navikt/ft-utils';
+import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
 
 import styles from './vedtakFritekstPanel.less';
 

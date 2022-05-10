@@ -2,9 +2,8 @@ import { IntlShape } from 'react-intl';
 
 import beregningsgrunnlagAndeltyper from '@fpsak-frontend/kodeverk/src/beregningsgrunnlagAndeltyper';
 import AktivitetStatus, { aktivitetstatusTilAndeltypeMap } from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
-import {
-  dateIsAfter, formatCurrencyNoKr, removeSpacesFromNumber, required,
-} from '@navikt/ft-utils';
+import { dateIsAfter, required } from '@navikt/ft-form-validators';
+import { formatCurrencyNoKr, removeSpacesFromNumber } from '@navikt/ft-utils';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 

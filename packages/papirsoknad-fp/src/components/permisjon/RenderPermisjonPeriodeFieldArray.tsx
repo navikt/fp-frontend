@@ -15,12 +15,11 @@ import {
   dateRangesNotOverlapping,
   hasValidDate,
   hasValidDecimal,
-  isArrayEmpty,
-  ISO_DATE_FORMAT,
   isRequiredMessage,
   maxValue,
   required,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
+import { isArrayEmpty, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import {

@@ -7,7 +7,7 @@ import { Column, Row } from 'nav-frontend-grid';
 
 import { LINK_TIL_BESTE_BEREGNING_REGNEARK } from '@fpsak-frontend/konstanter';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { required } from '@navikt/ft-utils';
+import { required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 // TODO (SAFIR) PFP-6021 Ta i bruk InntektFieldArray i staden for BrukersAndelFieldArray
 import { AlleKodeverk, KunYtelse } from '@fpsak-frontend/types';

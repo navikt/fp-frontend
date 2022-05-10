@@ -3,9 +3,10 @@ import { IntlShape } from 'react-intl';
 import moment from 'moment';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import {
-  DDMMYYYY_DATE_FORMAT, hasValidDate, hasValidInteger, maxValue, minValue, required,
-} from '@navikt/ft-utils';
+  hasValidDate, hasValidInteger, maxValue, minValue, required,
+} from '@navikt/ft-form-validators';
 import { DatepickerField, InputField } from '@fpsak-frontend/form';
 
 import BehandlingFormFieldCleaner from '../../util/BehandlingFormFieldCleaner';

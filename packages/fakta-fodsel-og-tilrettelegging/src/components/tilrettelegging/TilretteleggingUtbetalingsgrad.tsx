@@ -6,7 +6,7 @@ import { FlexColumn, Image } from '@navikt/ft-ui-komponenter';
 import { DecimalField } from '@fpsak-frontend/form';
 import {
   hasValidDecimal, maxValue, minValue, required,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 import endreImage from '@fpsak-frontend/assets/images/endre.svg';
 import endreDisabletImage from '@fpsak-frontend/assets/images/endre_disablet.svg';
 import { formValueSelector } from 'redux-form';

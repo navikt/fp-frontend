@@ -4,9 +4,10 @@ import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { Column, Row } from 'nav-frontend-grid';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
+import { isArrayEmpty, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import {
-  dateAfterOrEqual, hasValidDate, isArrayEmpty, ISO_DATE_FORMAT, maxLength, required,
-} from '@navikt/ft-utils';
+  dateAfterOrEqual, hasValidDate, maxLength, required,
+} from '@navikt/ft-form-validators';
 import { DatepickerField, InputField, PeriodFieldArray } from '@fpsak-frontend/form';
 
 import { useIntl } from 'react-intl';

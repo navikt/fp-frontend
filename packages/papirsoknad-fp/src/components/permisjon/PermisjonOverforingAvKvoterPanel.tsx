@@ -11,7 +11,7 @@ import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import overforingArsak from '@fpsak-frontend/kodeverk/src/overforingArsak';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
-import { hasValidPeriodIncludingOtherErrors } from '@navikt/ft-utils';
+import { hasValidPeriodIncludingOtherErrors } from '@navikt/ft-form-validators';
 
 import RenderOverforingAvKvoterFieldArray from './RenderOverforingAvKvoterFieldArray';
 

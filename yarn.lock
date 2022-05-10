@@ -1275,19 +1275,19 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
-"@eslint/eslintrc@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-1.2.2.tgz#4989b9e8c0216747ee7cca314ae73791bb281aae"
-  integrity sha512-lTVWHs7O2hjBFZunXTZYnYqtB9GakA1lnxIf+gKq2nY5gxkkNi/lQvveW6t8gFdOHTg6nG50Xs95PrLqVpcaLg==
+"@eslint/eslintrc@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-1.2.3.tgz#fcaa2bcef39e13d6e9e7f6271f4cc7cae1174886"
+  integrity sha512-uGo44hIwoLGNyduRpjdEpovcbMdd+Nv7amtmJxnKmI8xj6yd5LncmSwDa5NgX/41lIFJtkjD6YdVfgEzPfJ5UA==
   dependencies:
     ajv "^6.12.4"
     debug "^4.3.2"
-    espree "^9.3.1"
+    espree "^9.3.2"
     globals "^13.9.0"
     ignore "^5.2.0"
     import-fresh "^3.2.1"
     js-yaml "^4.1.0"
-    minimatch "^3.0.4"
+    minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
 "@floating-ui/core@^0.6.2":
@@ -2462,26 +2462,26 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@navikt/ds-css@^0.17.0":
-  version "0.17.0"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-css/0.17.0/0595bee3e05c4a2a399a082ab5d868838c27ade973de053c9945bb81967c9616#49fbc36fd11d01bc5e9bd4a59e8387e903ac3002"
-  integrity sha512-dT28NGB0toDer5KsSnIib+ACP2n/AG11vFbwI9gTTuZNo6pP2VRP2WbiXUB7mUO7BJcleMXl7ALkILwv5q0aVw==
+"@navikt/ds-css@^0.17.1":
+  version "0.17.1"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-css/0.17.1/31eada8a80f477edfb7edb51320b2cde8549b019ed03cb89563115e96a1eb91c#edaade6b3c027d233662f95709d8cd522d458433"
+  integrity sha512-GEr8jvkmKXja0cYIJYdyt7K/aE6FSlmb9VUNsl6BBlSNiSIsM7RO/lzRiF5QJOSHBJmdcY0cPqeaIUsAoyyUkg==
 
-"@navikt/ds-icons@^0.8.11", "@navikt/ds-icons@^0.8.7":
-  version "0.8.11"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-icons/0.8.11/9d23d99d977655dbf28547b15069539716f76f9dd23239eed7cfdca1f9de9564#b9e2e62d0c6145f86c9688a59c97049657af80cb"
-  integrity sha512-1oO4hp1wnJUgLlw/YqT5w+N2UAhEBNuoOD+ngY3QhoQAyj6MLsIkw/778hD93qZAB5f2msfFvDqLUsYOSCHCdQ==
+"@navikt/ds-icons@^0.8.12":
+  version "0.8.12"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-icons/0.8.12/eec20f24488fe707842f2c7b0d6d41c5bc15853b4bed4f0cf33051d76a9b1dc9#de50a9d1230214e47c970be8344cd1f3cca491e3"
+  integrity sha512-RcLrUOiJpdhiVKhpfV7NpciLU91CLCa5X/Vcze1o2q29iWrLU1tsp441IXLeHVc+4ESr65+KUb9WjAKuKXaCAw==
   dependencies:
     uuid "^8.3.2"
 
-"@navikt/ds-react@^0.18.3":
-  version "0.18.3"
-  resolved "https://npm.pkg.github.com/download/@navikt/ds-react/0.18.3/b24af0e2ab401b42cb44be0d5e9e6814c55dbe1803063a407340cc527d463c6d#ab2e997e589da412da138deef54d33947b0b2e4f"
-  integrity sha512-c+ffL3fMU4jVJGTdV9q/Q1YM4+xAa9280TlFRWIWGUzsodhiS0Bh4Dm+uuyMfvizPEz8Dfyyg4zOH0LA7aWdBg==
+"@navikt/ds-react@^0.18.6":
+  version "0.18.6"
+  resolved "https://npm.pkg.github.com/download/@navikt/ds-react/0.18.6/5076702ba67b3cce6939b1de9fcc7b6769c6471406739d61770ce28ceaf4297e#8598a46afc6e80ce338c1453d43d112331230d38"
+  integrity sha512-VfPdiB9ozDAN8XPF/ZLOLIFa8CkfSvnveFycHaQb7dvCCgf5Mvqbdp7KYq43210HsHk0fhB7p+dJmKcVgPb6lw==
   dependencies:
     "@floating-ui/react-dom" "0.6.0"
     "@material-ui/core" "^4.12.3"
-    "@navikt/ds-icons" "^0.8.11"
+    "@navikt/ds-icons" "^0.8.12"
     "@popperjs/core" "^2.10.1"
     "@radix-ui/react-tabs" "0.1.5"
     "@radix-ui/react-toggle-group" "0.1.5"
@@ -2497,18 +2497,19 @@
   resolved "https://npm.pkg.github.com/download/@navikt/fnrvalidator/1.1.4/57aacaca4b4d6c045625ec4e86cc6029f566f6388de258d45f93ef027f888219#b2ce64cb24b3726f715eee110f9f3fde37b907f7"
   integrity sha512-EZBwlNhp886E57GuknLB6G9Bnv4nl+e5K12B/2BeLpWZENxCmcQ+5oFvIThvEsU+LVOdfJxxGOxSvrwe5ZB3pQ==
 
-"@navikt/ft-form-hooks@1.0.7", "@navikt/ft-form-hooks@^1.0.7":
-  version "1.0.7"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-form-hooks/1.0.7/fa80fd293c61be97fce820a0c8928b0432b73c3cb219e1debca0ec6af73a222e#2208c22ec4e7229cf1a9ee4334ee5e8cc8a55a58"
-  integrity sha512-ZR+AHdDydkjTdGIFB4VY6a59DYuOnOj/M/4YpIT7c0W4NzawKFIitpoRQkrVjjeM9yZAw/G8pKSaJW8aHJSk1Q==
+"@navikt/ft-form-hooks@1.0.10", "@navikt/ft-form-hooks@^1.0.10":
+  version "1.0.10"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-form-hooks/1.0.10/15e48023a57cc6dea5bd17ec192a3ff464e6ab13064ce9e00db15230e2a7730a#093f66325377dcbec1b89c3329e83d418b49025a"
+  integrity sha512-roNgoW4lhxnnjA84yX3jv4ak45edvknnp2qpQJ4JUxUe80ZJjKflR8JD4miLhc2BFv2lb53wnvOgkFx35W9LjQ==
   dependencies:
-    "@navikt/ft-types" "^1.0.4"
-    "@navikt/ft-ui-komponenter" "^1.0.6"
-    "@navikt/ft-utils" "^1.0.5"
+    "@navikt/ft-form-validators" "^1.0.3"
+    "@navikt/ft-types" "^1.0.7"
+    "@navikt/ft-ui-komponenter" "^1.0.9"
+    "@navikt/ft-utils" "^1.0.8"
     classnames "2.3.1"
-    dayjs "1.11.1"
+    dayjs "1.11.2"
     lodash.throttle "4.1.1"
-    nav-datovelger "12.4.0"
+    nav-datovelger "12.4.1"
     nav-frontend-core "6.0.1"
     nav-frontend-etiketter "3.0.2"
     nav-frontend-etiketter-style "2.0.2"
@@ -2526,32 +2527,42 @@
     react "17.0.2"
     react-hook-form "7.30.0"
 
-"@navikt/ft-kodeverk@^1.0.2":
-  version "1.0.2"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-kodeverk/1.0.2/a7cab69aea91d24f60138cceccc65152f782acf02aa06abb5da119fe4e0d38e8#870d2cd357a3b584f6e4238fad75192ba4e77c8b"
-  integrity sha512-zg5O6HIOUjS3qNDEi/pvAAo07JSN/2aYCsnf5xckVWGekqQDIp5CoKuh2EaAcpvGqqRPZwX1S2OQJpWMkjdZYA==
+"@navikt/ft-form-validators@1.0.3", "@navikt/ft-form-validators@^1.0.3":
+  version "1.0.3"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-form-validators/1.0.3/42240dcf61cedd7c1ce12360470e7bcc8a22e5392f62543907caa714a41d7193#fbae6004ddbef44371ccf24246d94d87e538640d"
+  integrity sha512-FeVLGszfXcN7gyfqYJdMbvWOuY6xNp16BSz+y6L94WuZvnACjbsmVv9eqjD++w0Ln/owkNF3moMPQyKFhhNSFg==
+  dependencies:
+    "@navikt/ft-utils" "^1.0.8"
+    moment "2.29.3"
 
-"@navikt/ft-plattform-komponenter@1.0.4":
+"@navikt/ft-kodeverk@^1.0.4":
   version "1.0.4"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-plattform-komponenter/1.0.4/62af3552dc6c6cae66ef804a45130d71f0cdc4c11630f6a00a4da76c51df0214#45b3bcc68670bf912ddc3d0eba26984b3273e6fa"
-  integrity sha512-MAYoW3j1JYY9fHYhuCshSRWW2uhmVMO4e+tkD1PyGu9pVwQhpYI/XYzr5wspPMjKJp1ykerBVCMLMh/dlQ7ElA==
-  dependencies:
-    "@navikt/ds-css" "^0.17.0"
-    "@navikt/ds-icons" "^0.8.7"
-    "@navikt/ds-react" "^0.18.3"
-    "@navikt/ft-utils" "^1.0.5"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-kodeverk/1.0.4/b60068c6f926d988459e2304f51e8ffb126b02e6ee5d7eede98e9542f26b3c51#2d55405699eb097dd06300609f68b6ab072f0bbd"
+  integrity sha512-hAKFege7nvzDUBDioxXbXZcxf8YxGQU5AViStKEbvBegMDW/7MZAxbrAf+F5TfBJXj8s5XAhciSyT76FNBpi/A==
 
-"@navikt/ft-prosess-beregningsgrunnlag@1.0.7":
+"@navikt/ft-plattform-komponenter@1.0.7":
   version "1.0.7"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-beregningsgrunnlag/1.0.7/e2693f63ab86ad3af75be91f1432b23734165f5d6b403b1211b76e48c27df704#735ff650f1a548bf09c00d493f2d489f5d97594a"
-  integrity sha512-5+QTMiJx5QT6rKD7pGC+iPRpQkJsopQjev7Q9njXH4gLoNkUUUHPUbhRU4PiFED3SoW+nYvGOH3d6BSiG0hyNA==
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-plattform-komponenter/1.0.7/37b83b29e4f527072afe9cb2b423a6ffb4c7f3fe37d81db4d800457b68f3a4be#f696a0781c8ad654db73acc5cd4b39a4117c084f"
+  integrity sha512-FiKk1UkWfheYNBUGyCz9Vm3cGWrsexMTp+oQI7RGOOv/NGPRj79vT/4IPnI4GqbKeDA/GLsWtBImKcwBvXK11A==
   dependencies:
-    "@navikt/ft-form-hooks" "^1.0.7"
-    "@navikt/ft-kodeverk" "^1.0.2"
-    "@navikt/ft-types" "^1.0.4"
-    "@navikt/ft-ui-komponenter" "^1.0.6"
-    "@navikt/ft-utils" "^1.0.5"
+    "@navikt/ds-css" "^0.17.1"
+    "@navikt/ds-icons" "^0.8.12"
+    "@navikt/ds-react" "^0.18.6"
+    "@navikt/ft-utils" "^1.0.8"
+
+"@navikt/ft-prosess-beregningsgrunnlag@1.0.10":
+  version "1.0.10"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-beregningsgrunnlag/1.0.10/36a7dbf8f5a016571a7c17870f92f048b1f77d23ca31973562f2ef583f70dd5a#66d18a7da964178f76308a81ec6681057e78a533"
+  integrity sha512-FxGjZYGGJrvBCXNLG1MZbQNCRW7b636JxDeViM3YqBBe5gvTsuEA/V0MEywBG9/kBLAhWFoCkgbbUQh9ianR8g==
+  dependencies:
+    "@navikt/ft-form-hooks" "^1.0.10"
+    "@navikt/ft-form-validators" "^1.0.3"
+    "@navikt/ft-kodeverk" "^1.0.4"
+    "@navikt/ft-types" "^1.0.7"
+    "@navikt/ft-ui-komponenter" "^1.0.9"
+    "@navikt/ft-utils" "^1.0.8"
     classnames "2.3.1"
+    echarts "5.3.2"
     moment "2.29.3"
     nav-frontend-chevron "1.0.30"
     nav-frontend-chevron-style "1.0.4"
@@ -2577,22 +2588,21 @@
     react-hook-form "7.30.0"
     react-intl "5.24.8"
 
-"@navikt/ft-types@^1.0.4":
-  version "1.0.4"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-types/1.0.4/27d39f247776df85cd7558df316d552e6448e9a506c64a3235bc4aa8b2b24ab4#85b1ddac1afb91cdea7b390be71fb5521d0116d3"
-  integrity sha512-kui8cO5tURztoAnMLoMRbwKELMD3pJJKXZB4FLQ+dZCeETb9/G4Es0d3HSSpijKQdrvcwZp0eqXnzZjjzUGIWw==
+"@navikt/ft-types@^1.0.7":
+  version "1.0.7"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-types/1.0.7/c6db39a08093d2b5893fbf6cf3dbf0263a9d571327c9f959d9b5a64d77d3f89c#f01e814664ce86f876539c7ac11a292c2bfce1ea"
+  integrity sha512-JvA0FLhkq0yssscs9tvSZQBLQfBYM8wkIUG5U2meJ2gz6+OgtoLVui4cO9Napvx6W+SebfsPaVYXT0a4fX0Chw==
   dependencies:
-    "@navikt/ft-kodeverk" "^1.0.2"
+    "@navikt/ft-kodeverk" "^1.0.4"
 
-"@navikt/ft-ui-komponenter@1.0.6", "@navikt/ft-ui-komponenter@^1.0.6":
-  version "1.0.6"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-ui-komponenter/1.0.6/04ceb5466d8194600b50b78c27b52ef8e43454fd2ba01c7edabaef27f174da51#8d42c7fb1c2df9fed7755322348ec5a70c1268a9"
-  integrity sha512-8IvyJFRrLK+1OyVxqgGQ9yRjPAt7pl2m/MIVV5ZOsAdmJliVl7khs0Wf394LYslfBFOJEdLJIoqt8i/irsuuQQ==
+"@navikt/ft-ui-komponenter@1.0.9", "@navikt/ft-ui-komponenter@^1.0.9":
+  version "1.0.9"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-ui-komponenter/1.0.9/8af4afd857141ab4e03aeeb1537f08bc4e111af4923b0e9f7274f83d80dc689c#83cab09dcb58f13bc27235a363795a6abaf7ca58"
+  integrity sha512-UuBnHRGKUouSBrPnLtUln6GRmdJ1FgVyFEmcjdOr9vvjF6sHufQfPE/A4D4prlmJ7QTb+OTVpxYnpYTPPRfhFQ==
   dependencies:
     "@navikt/fnrvalidator" "1.1.4"
-    "@navikt/ft-utils" "^1.0.5"
+    "@navikt/ft-utils" "^1.0.8"
     classnames "2.3.1"
-    echarts "5.3.2"
     moment "2.29.3"
     nav-frontend-core "6.0.1"
     nav-frontend-grid "2.0.1"
@@ -2620,14 +2630,14 @@
     react-intl "5.24.8"
     react-modal "3.15.1"
 
-"@navikt/ft-utils@1.0.5", "@navikt/ft-utils@^1.0.5":
-  version "1.0.5"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-utils/1.0.5/5201821f1a906d96fc4831e6f3b9f33015ee4dc4a4cbfe88512b842fa6a509e2#f957ef5e4523f16a1710bdc52b29b26a1b0b3cdb"
-  integrity sha512-t/sornwmSzilgVJTtirD0EZJWAHRtych4EiutFv5BKdUcnr5zomOCeS0verLLOo3dkJ4IT3nmuwKu09U8Br7Hw==
+"@navikt/ft-utils@1.0.8", "@navikt/ft-utils@^1.0.8":
+  version "1.0.8"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-utils/1.0.8/fba37e84e49e9faca40d6ff2c3751becd4084a493e8af21f9b0758d490ee5fcb#6ad5531f0dde631e936cb6dc15bd7f4d1adf4b84"
+  integrity sha512-fUhUHmywLyU04Bei0OnnIVJTRpIOAAefwLVGaHSeB3HY9Wgvv6ve2Y+NUJWfR7cV1ReG8+vN6f8P5rzH1lapxA==
   dependencies:
-    "@navikt/ft-kodeverk" "^1.0.2"
-    "@navikt/ft-types" "^1.0.4"
-    dayjs "1.11.1"
+    "@navikt/ft-kodeverk" "^1.0.4"
+    "@navikt/ft-types" "^1.0.7"
+    dayjs "1.11.2"
     moment "2.29.3"
     react-intl "5.24.8"
 
@@ -4715,14 +4725,14 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@typescript-eslint/eslint-plugin@5.22.0":
-  version "5.22.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-5.22.0.tgz#7b52a0de2e664044f28b36419210aea4ab619e2a"
-  integrity sha512-YCiy5PUzpAeOPGQ7VSGDEY2NeYUV1B0swde2e0HzokRsHBYjSdF6DZ51OuRZxVPHx0032lXGLvOMls91D8FXlg==
+"@typescript-eslint/eslint-plugin@5.23.0":
+  version "5.23.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-5.23.0.tgz#bc4cbcf91fbbcc2e47e534774781b82ae25cc3d8"
+  integrity sha512-hEcSmG4XodSLiAp1uxv/OQSGsDY6QN3TcRU32gANp+19wGE1QQZLRS8/GV58VRUoXhnkuJ3ZxNQ3T6Z6zM59DA==
   dependencies:
-    "@typescript-eslint/scope-manager" "5.22.0"
-    "@typescript-eslint/type-utils" "5.22.0"
-    "@typescript-eslint/utils" "5.22.0"
+    "@typescript-eslint/scope-manager" "5.23.0"
+    "@typescript-eslint/type-utils" "5.23.0"
+    "@typescript-eslint/utils" "5.23.0"
     debug "^4.3.2"
     functional-red-black-tree "^1.0.1"
     ignore "^5.1.8"
@@ -4730,14 +4740,14 @@
     semver "^7.3.5"
     tsutils "^3.21.0"
 
-"@typescript-eslint/parser@5.22.0":
-  version "5.22.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-5.22.0.tgz#7bedf8784ef0d5d60567c5ba4ce162460e70c178"
-  integrity sha512-piwC4krUpRDqPaPbFaycN70KCP87+PC5WZmrWs+DlVOxxmF+zI6b6hETv7Quy4s9wbkV16ikMeZgXsvzwI3icQ==
+"@typescript-eslint/parser@5.23.0":
+  version "5.23.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-5.23.0.tgz#443778e1afc9a8ff180f91b5e260ac3bec5e2de1"
+  integrity sha512-V06cYUkqcGqpFjb8ttVgzNF53tgbB/KoQT/iB++DOIExKmzI9vBJKjZKt/6FuV9c+zrDsvJKbJ2DOCYwX91cbw==
   dependencies:
-    "@typescript-eslint/scope-manager" "5.22.0"
-    "@typescript-eslint/types" "5.22.0"
-    "@typescript-eslint/typescript-estree" "5.22.0"
+    "@typescript-eslint/scope-manager" "5.23.0"
+    "@typescript-eslint/types" "5.23.0"
+    "@typescript-eslint/typescript-estree" "5.23.0"
     debug "^4.3.2"
 
 "@typescript-eslint/scope-manager@5.21.0":
@@ -4748,20 +4758,20 @@
     "@typescript-eslint/types" "5.21.0"
     "@typescript-eslint/visitor-keys" "5.21.0"
 
-"@typescript-eslint/scope-manager@5.22.0":
-  version "5.22.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/scope-manager/-/scope-manager-5.22.0.tgz#590865f244ebe6e46dc3e9cab7976fc2afa8af24"
-  integrity sha512-yA9G5NJgV5esANJCO0oF15MkBO20mIskbZ8ijfmlKIvQKg0ynVKfHZ15/nhAJN5m8Jn3X5qkwriQCiUntC9AbA==
+"@typescript-eslint/scope-manager@5.23.0":
+  version "5.23.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/scope-manager/-/scope-manager-5.23.0.tgz#4305e61c2c8e3cfa3787d30f54e79430cc17ce1b"
+  integrity sha512-EhjaFELQHCRb5wTwlGsNMvzK9b8Oco4aYNleeDlNuL6qXWDF47ch4EhVNPh8Rdhf9tmqbN4sWDk/8g+Z/J8JVw==
   dependencies:
-    "@typescript-eslint/types" "5.22.0"
-    "@typescript-eslint/visitor-keys" "5.22.0"
+    "@typescript-eslint/types" "5.23.0"
+    "@typescript-eslint/visitor-keys" "5.23.0"
 
-"@typescript-eslint/type-utils@5.22.0":
-  version "5.22.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/type-utils/-/type-utils-5.22.0.tgz#0c0e93b34210e334fbe1bcb7250c470f4a537c19"
-  integrity sha512-iqfLZIsZhK2OEJ4cQ01xOq3NaCuG5FQRKyHicA3xhZxMgaxQazLUHbH/B2k9y5i7l3+o+B5ND9Mf1AWETeMISA==
+"@typescript-eslint/type-utils@5.23.0":
+  version "5.23.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/type-utils/-/type-utils-5.23.0.tgz#f852252f2fc27620d5bb279d8fed2a13d2e3685e"
+  integrity sha512-iuI05JsJl/SUnOTXA9f4oI+/4qS/Zcgk+s2ir+lRmXI+80D8GaGwoUqs4p+X+4AxDolPpEpVUdlEH4ADxFy4gw==
   dependencies:
-    "@typescript-eslint/utils" "5.22.0"
+    "@typescript-eslint/utils" "5.23.0"
     debug "^4.3.2"
     tsutils "^3.21.0"
 
@@ -4770,10 +4780,10 @@
   resolved "https://registry.yarnpkg.com/@typescript-eslint/types/-/types-5.21.0.tgz#8cdb9253c0dfce3f2ab655b9d36c03f72e684017"
   integrity sha512-XnOOo5Wc2cBlq8Lh5WNvAgHzpjnEzxn4CJBwGkcau7b/tZ556qrWXQz4DJyChYg8JZAD06kczrdgFPpEQZfDsA==
 
-"@typescript-eslint/types@5.22.0":
-  version "5.22.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/types/-/types-5.22.0.tgz#50a4266e457a5d4c4b87ac31903b28b06b2c3ed0"
-  integrity sha512-T7owcXW4l0v7NTijmjGWwWf/1JqdlWiBzPqzAWhobxft0SiEvMJB56QXmeCQjrPuM8zEfGUKyPQr/L8+cFUBLw==
+"@typescript-eslint/types@5.23.0":
+  version "5.23.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/types/-/types-5.23.0.tgz#8733de0f58ae0ed318dbdd8f09868cdbf9f9ad09"
+  integrity sha512-NfBsV/h4dir/8mJwdZz7JFibaKC3E/QdeMEDJhiAE3/eMkoniZ7MjbEMCGXw6MZnZDMN3G9S0mH/6WUIj91dmw==
 
 "@typescript-eslint/typescript-estree@5.21.0":
   version "5.21.0"
@@ -4788,28 +4798,28 @@
     semver "^7.3.5"
     tsutils "^3.21.0"
 
-"@typescript-eslint/typescript-estree@5.22.0":
-  version "5.22.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/typescript-estree/-/typescript-estree-5.22.0.tgz#e2116fd644c3e2fda7f4395158cddd38c0c6df97"
-  integrity sha512-EyBEQxvNjg80yinGE2xdhpDYm41so/1kOItl0qrjIiJ1kX/L/L8WWGmJg8ni6eG3DwqmOzDqOhe6763bF92nOw==
+"@typescript-eslint/typescript-estree@5.23.0":
+  version "5.23.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/typescript-estree/-/typescript-estree-5.23.0.tgz#dca5f10a0a85226db0796e8ad86addc9aee52065"
+  integrity sha512-xE9e0lrHhI647SlGMl+m+3E3CKPF1wzvvOEWnuE3CCjjT7UiRnDGJxmAcVKJIlFgK6DY9RB98eLr1OPigPEOGg==
   dependencies:
-    "@typescript-eslint/types" "5.22.0"
-    "@typescript-eslint/visitor-keys" "5.22.0"
+    "@typescript-eslint/types" "5.23.0"
+    "@typescript-eslint/visitor-keys" "5.23.0"
     debug "^4.3.2"
     globby "^11.0.4"
     is-glob "^4.0.3"
     semver "^7.3.5"
     tsutils "^3.21.0"
 
-"@typescript-eslint/utils@5.22.0":
-  version "5.22.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/utils/-/utils-5.22.0.tgz#1f2c4897e2cf7e44443c848a13c60407861babd8"
-  integrity sha512-HodsGb037iobrWSUMS7QH6Hl1kppikjA1ELiJlNSTYf/UdMEwzgj0WIp+lBNb6WZ3zTwb0tEz51j0Wee3iJ3wQ==
+"@typescript-eslint/utils@5.23.0":
+  version "5.23.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/utils/-/utils-5.23.0.tgz#4691c3d1b414da2c53d8943310df36ab1c50648a"
+  integrity sha512-dbgaKN21drqpkbbedGMNPCtRPZo1IOUr5EI9Jrrh99r5UW5Q0dz46RKXeSBoPV+56R6dFKpbrdhgUNSJsDDRZA==
   dependencies:
     "@types/json-schema" "^7.0.9"
-    "@typescript-eslint/scope-manager" "5.22.0"
-    "@typescript-eslint/types" "5.22.0"
-    "@typescript-eslint/typescript-estree" "5.22.0"
+    "@typescript-eslint/scope-manager" "5.23.0"
+    "@typescript-eslint/types" "5.23.0"
+    "@typescript-eslint/typescript-estree" "5.23.0"
     eslint-scope "^5.1.1"
     eslint-utils "^3.0.0"
 
@@ -4833,12 +4843,12 @@
     "@typescript-eslint/types" "5.21.0"
     eslint-visitor-keys "^3.0.0"
 
-"@typescript-eslint/visitor-keys@5.22.0":
-  version "5.22.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/visitor-keys/-/visitor-keys-5.22.0.tgz#f49c0ce406944ffa331a1cfabeed451ea4d0909c"
-  integrity sha512-DbgTqn2Dv5RFWluG88tn0pP6Ex0ROF+dpDO1TNNZdRtLjUr6bdznjA6f/qNqJLjd2PgguAES2Zgxh/JzwzETDg==
+"@typescript-eslint/visitor-keys@5.23.0":
+  version "5.23.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/visitor-keys/-/visitor-keys-5.23.0.tgz#057c60a7ca64667a39f991473059377a8067c87b"
+  integrity sha512-Vd4mFNchU62sJB8pX19ZSPog05B0Y0CE2UxAZPT5k4iqhRYjPnqyY3woMxCd0++t9OTqkgjST+1ydLBi7e2Fvg==
   dependencies:
-    "@typescript-eslint/types" "5.22.0"
+    "@typescript-eslint/types" "5.23.0"
     eslint-visitor-keys "^3.0.0"
 
 "@webassemblyjs/ast@1.11.1":
@@ -5195,7 +5205,7 @@ acorn-import-assertions@^1.7.6:
   resolved "https://registry.yarnpkg.com/acorn-import-assertions/-/acorn-import-assertions-1.8.0.tgz#ba2b5939ce62c238db6d93d81c9b111b29b855e9"
   integrity sha512-m7VZ3jwz4eK6A4Vtt8Ew1/mNbP24u0FhdyfA7fSvnJR6LMdfOYnmuIrrJAgrYfYJ10F/otaHTtrtrtmHdMNzEw==
 
-acorn-jsx@^5.3.1:
+acorn-jsx@^5.3.1, acorn-jsx@^5.3.2:
   version "5.3.2"
   resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-5.3.2.tgz#7ed5bb55908b3b2f1bc55c6af1653bada7f07937"
   integrity sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==
@@ -5215,7 +5225,7 @@ acorn@^7.1.1, acorn@^7.4.1:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.4.1.tgz#feaed255973d2e77555b83dbc08851a6c63520fa"
   integrity sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A==
 
-acorn@^8.2.4, acorn@^8.4.1, acorn@^8.5.0, acorn@^8.7.0:
+acorn@^8.2.4, acorn@^8.4.1, acorn@^8.5.0, acorn@^8.7.1:
   version "8.7.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.7.1.tgz#0197122c843d1bf6d0a5e83220a788f278f63c30"
   integrity sha512-Xx54uLJQZ19lKygFXOWsscKUbsBZW0CPykPhVQdhIeIwrbPmJzqeASDInc8nKBnp/JT6igTs82qPXz069H8I/A==
@@ -5680,7 +5690,7 @@ async-limiter@~1.0.0:
   resolved "https://registry.yarnpkg.com/async-limiter/-/async-limiter-1.0.1.tgz#dd379e94f0db8310b08291f9d64c3209766617fd"
   integrity sha512-csOlWGAcRFJaI6m+F2WKdnMKr4HhdhFVBk0H/QbJFMCr+uO2kwohwXQPxw/9OCxp05r5ghVBFSyioixx3gfkNQ==
 
-async@2.6.4, async@^2.6.2:
+async@2.6.4:
   version "2.6.4"
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.4.tgz#706b7ff6084664cd7eae713f6f965433b5504221"
   integrity sha512-mzo5dfJYwAn29PeiJ0zvwTo04zj8HDJj0Mn8TD7sno7q12prdbnasKJHhkm2c1LgrhlJ0teaea8860oxi51mGA==
@@ -7533,10 +7543,10 @@ dateformat@^3.0.0:
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-3.0.3.tgz#a6e37499a4d9a9cf85ef5872044d62901c9889ae"
   integrity sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==
 
-dayjs@1.11.1:
-  version "1.11.1"
-  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.1.tgz#90b33a3dda3417258d48ad2771b415def6545eb0"
-  integrity sha512-ER7EjqVAMkRRsxNCC5YqJ9d9VQYuWdGt7aiH2qA5R5wt8ZmWaP2dLUSIK6y/kVzLMlmh1Tvu5xUf4M/wdGJ5KA==
+dayjs@1.11.2:
+  version "1.11.2"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.2.tgz#fa0f5223ef0d6724b3d8327134890cfe3d72fbe5"
+  integrity sha512-F4LXf1OeU9hrSYRPTTj/6FbO4HTjPKXvEIC1P2kcnFurViINCVk3ZV0xAS3XVx9MkMsXbbqlK6hjseaYbgKEHw==
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.9:
   version "2.6.9"
@@ -7552,7 +7562,7 @@ debug@4, debug@^4.1.0, debug@^4.1.1, debug@^4.3.2, debug@^4.3.3, debug@^4.3.4:
   dependencies:
     ms "2.1.2"
 
-debug@^3.0.0, debug@^3.1.1, debug@^3.2.6, debug@^3.2.7:
+debug@^3.0.0, debug@^3.2.6, debug@^3.2.7:
   version "3.2.7"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.2.7.tgz#72580b7e9145fb39b6676f9c5e5fb100b934179a"
   integrity sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==
@@ -8457,10 +8467,10 @@ eslint-plugin-react@7.29.4:
     semver "^6.3.0"
     string.prototype.matchall "^4.0.6"
 
-eslint-plugin-testing-library@5.3.1:
-  version "5.3.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-testing-library/-/eslint-plugin-testing-library-5.3.1.tgz#7638ee79cc86fd8bb57d671af35a1cbaa77e9548"
-  integrity sha512-OfF4dlG/q6ck6DL3P8Z0FPdK0dU5K57gsBu7eUcaVbwYKaNzjgejnXiM9CCUevppORkvfek+9D3Uj/9ZZ8Vz8g==
+eslint-plugin-testing-library@5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-testing-library/-/eslint-plugin-testing-library-5.4.0.tgz#614767a470bc9ffa4b4308cdbc31d3ec6f6a99ad"
+  integrity sha512-XjxIf4g33KaZXxRNbR33+0WcRQ/zt8N0R58IY6/kkHnrY6zPsC1gs3u5cTZr5eUmCZN/sjoPak3uF5vHGKg2wg==
   dependencies:
     "@typescript-eslint/utils" "^5.13.0"
 
@@ -8516,12 +8526,12 @@ eslint-webpack-plugin@3.1.1:
     normalize-path "^3.0.0"
     schema-utils "^3.1.1"
 
-eslint@8.14.0:
-  version "8.14.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.14.0.tgz#62741f159d9eb4a79695b28ec4989fcdec623239"
-  integrity sha512-3/CE4aJX7LNEiE3i6FeodHmI/38GZtWCsAtsymScmzYapx8q1nVVb+eLcLSzATmCPXw5pT4TqVs1E0OmxAd9tw==
+eslint@8.15.0:
+  version "8.15.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.15.0.tgz#fea1d55a7062da48d82600d2e0974c55612a11e9"
+  integrity sha512-GG5USZ1jhCu8HJkzGgeK8/+RGnHaNYZGrGDzUtigK3BsGESW/rs2az23XqE0WVwDxy1VRvvjSSGu5nB0Bu+6SA==
   dependencies:
-    "@eslint/eslintrc" "^1.2.2"
+    "@eslint/eslintrc" "^1.2.3"
     "@humanwhocodes/config-array" "^0.9.2"
     ajv "^6.10.0"
     chalk "^4.0.0"
@@ -8532,7 +8542,7 @@ eslint@8.14.0:
     eslint-scope "^7.1.1"
     eslint-utils "^3.0.0"
     eslint-visitor-keys "^3.3.0"
-    espree "^9.3.1"
+    espree "^9.3.2"
     esquery "^1.4.0"
     esutils "^2.0.2"
     fast-deep-equal "^3.1.3"
@@ -8548,7 +8558,7 @@ eslint@8.14.0:
     json-stable-stringify-without-jsonify "^1.0.1"
     levn "^0.4.1"
     lodash.merge "^4.6.2"
-    minimatch "^3.0.4"
+    minimatch "^3.1.2"
     natural-compare "^1.4.0"
     optionator "^0.9.1"
     regexpp "^3.2.0"
@@ -8557,13 +8567,13 @@ eslint@8.14.0:
     text-table "^0.2.0"
     v8-compile-cache "^2.0.3"
 
-espree@^9.3.1:
-  version "9.3.1"
-  resolved "https://registry.yarnpkg.com/espree/-/espree-9.3.1.tgz#8793b4bc27ea4c778c19908e0719e7b8f4115bcd"
-  integrity sha512-bvdyLmJMfwkV3NCRl5ZhJf22zBFo1y8bYh3VYb+bfzqNB4Je68P2sSuXyuFquzWLebHpNd2/d5uv7yoP9ISnGQ==
+espree@^9.3.2:
+  version "9.3.2"
+  resolved "https://registry.yarnpkg.com/espree/-/espree-9.3.2.tgz#f58f77bd334731182801ced3380a8cc859091596"
+  integrity sha512-D211tC7ZwouTIuY5x9XnS0E9sWNChB7IYKX/Xp5eQj3nFXhqmiUDB9q27y76oFl8jTg3pXcQx/bpxMfs3CIZbA==
   dependencies:
-    acorn "^8.7.0"
-    acorn-jsx "^5.3.1"
+    acorn "^8.7.1"
+    acorn-jsx "^5.3.2"
     eslint-visitor-keys "^3.3.0"
 
 esprima@^4.0.0, esprima@^4.0.1, esprima@~4.0.0:
@@ -12710,10 +12720,10 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
-nav-datovelger@12.4.0:
-  version "12.4.0"
-  resolved "https://registry.yarnpkg.com/nav-datovelger/-/nav-datovelger-12.4.0.tgz#0b88c378cd061387708a07a52578a6128875c232"
-  integrity sha512-nPHlxkL8zo7nHThFOprx3YuNHpFqJvS8RS1aDuTeEAdB3YOoNTmD222y3rZF+LtZKfMDndXsLotfM8nh3Ai08w==
+nav-datovelger@12.4.1:
+  version "12.4.1"
+  resolved "https://registry.yarnpkg.com/nav-datovelger/-/nav-datovelger-12.4.1.tgz#daf49751284ef3cc06f1844c277da0989480b450"
+  integrity sha512-/GP49YSyT6p8IXR8kGDeX8nmmL2I9fiVdsUJSFlXZQO7Ofst3dSElXeBRhjhBk1AMcWBGO72LK2WajQJTeHzug==
   dependencies:
     focus-trap-react "^8.6.0"
 
@@ -13983,15 +13993,6 @@ popper.js@1.16.1-lts:
   version "1.16.1-lts"
   resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.16.1-lts.tgz#cf6847b807da3799d80ee3d6d2f90df8a3f50b05"
   integrity sha512-Kjw8nKRl1m+VrSFCoVGPph93W/qrSO7ZkqPpTf7F4bk/sqcfWK019dWBUpE/fBOsOQY1dks/Bmcbfn1heM/IsA==
-
-portfinder@^1.0.28:
-  version "1.0.28"
-  resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.28.tgz#67c4622852bd5374dd1dd900f779f53462fac778"
-  integrity sha512-Se+2isanIcEqf2XMHjyUKskczxbPH7dQnlMjXX6+dybayyHvAf/TCgyMRlzf/B6QDhAEFOGes0pzRo3by4AbMA==
-  dependencies:
-    async "^2.6.2"
-    debug "^3.1.1"
-    mkdirp "^0.5.5"
 
 posix-character-classes@^0.1.0:
   version "0.1.1"
@@ -15963,10 +15964,10 @@ signal-exit@^3.0.0, signal-exit@^3.0.2, signal-exit@^3.0.3, signal-exit@^3.0.7:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.7.tgz#a9a1767f8af84155114eaabd73f99273c8f59ad9"
   integrity sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==
 
-sinon@13.0.2:
-  version "13.0.2"
-  resolved "https://registry.yarnpkg.com/sinon/-/sinon-13.0.2.tgz#c6a8ddd655dc1415bbdc5ebf0e5b287806850c3a"
-  integrity sha512-KvOrztAVqzSJWMDoxM4vM+GPys1df2VBoXm+YciyB/OLMamfS3VXh3oGh5WtrAGSzrgczNWFFY22oKb7Fi5eeA==
+sinon@14.0.0:
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/sinon/-/sinon-14.0.0.tgz#203731c116d3a2d58dc4e3cbe1f443ba9382a031"
+  integrity sha512-ugA6BFmE+WrJdh0owRZHToLd32Uw3Lxq6E6LtNRU+xTVBefx632h03Q7apXWRsRdZAJ41LB8aUfn2+O4jsDNMw==
   dependencies:
     "@sinonjs/commons" "^1.8.3"
     "@sinonjs/fake-timers" "^9.1.2"
@@ -17775,10 +17776,10 @@ webpack-dev-middleware@^5.3.1:
     range-parser "^1.2.1"
     schema-utils "^4.0.0"
 
-webpack-dev-server@4.8.1:
-  version "4.8.1"
-  resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-4.8.1.tgz#58f9d797710d6e25fa17d6afab8708f958c11a29"
-  integrity sha512-dwld70gkgNJa33czmcj/PlKY/nOy/BimbrgZRaR9vDATBQAYgLzggR0nxDtPLJiLrMgZwbE6RRfJ5vnBBasTyg==
+webpack-dev-server@4.9.0:
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-4.9.0.tgz#737dbf44335bb8bde68f8f39127fc401c97a1557"
+  integrity sha512-+Nlb39iQSOSsFv0lWUuUTim3jDQO8nhK3E68f//J2r5rIcp4lULHXz2oZ0UVdEeWXEh5lSzYUlzarZhDAeAVQw==
   dependencies:
     "@types/bonjour" "^3.5.9"
     "@types/connect-history-api-fallback" "^1.3.5"
@@ -17800,7 +17801,6 @@ webpack-dev-server@4.8.1:
     ipaddr.js "^2.0.1"
     open "^8.0.9"
     p-retry "^4.5.0"
-    portfinder "^1.0.28"
     rimraf "^3.0.2"
     schema-utils "^4.0.0"
     selfsigned "^2.0.1"

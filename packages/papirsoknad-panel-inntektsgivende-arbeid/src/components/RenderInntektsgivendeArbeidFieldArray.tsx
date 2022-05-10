@@ -5,7 +5,7 @@ import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import landkoder from '@fpsak-frontend/kodeverk/src/landkoder';
-import { maxLength } from '@navikt/ft-utils';
+import { maxLength } from '@navikt/ft-form-validators';
 import {
   DatepickerField, InputField, SelectField, PeriodFieldArray,
 } from '@fpsak-frontend/form';

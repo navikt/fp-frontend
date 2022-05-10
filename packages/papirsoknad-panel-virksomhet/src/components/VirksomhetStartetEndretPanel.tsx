@@ -8,7 +8,7 @@ import { Column, Row } from 'nav-frontend-grid';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
   hasValidDate, hasValidInteger, required, hasValidText,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 import {
   CheckboxField, DatepickerField, InputField, RadioGroupField, RadioOption, TextAreaField,
 } from '@fpsak-frontend/form';

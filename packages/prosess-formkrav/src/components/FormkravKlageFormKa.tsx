@@ -9,7 +9,7 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { KlageFormkravKaAp } from '@fpsak-frontend/types-avklar-aksjonspunkter/src/prosess/KlageFormkravAp';
 import { Column, Row } from 'nav-frontend-grid';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { required } from '@navikt/ft-utils';
+import { required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
 import { Undertittel } from 'nav-frontend-typografi';

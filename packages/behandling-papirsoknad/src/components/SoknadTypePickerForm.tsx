@@ -11,7 +11,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { ariaCheck, required } from '@navikt/ft-utils';
+import { ariaCheck, required } from '@navikt/ft-form-validators';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';

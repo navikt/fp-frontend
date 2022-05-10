@@ -15,8 +15,9 @@ import {
   Table, TableColumn, TableRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import {
-  DDMMYYYY_DATE_FORMAT, isObject, required, getKodeverknavnFn,
+  DDMMYYYY_DATE_FORMAT, isObject, getKodeverknavnFn,
 } from '@navikt/ft-utils';
+import { required } from '@navikt/ft-form-validators';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';

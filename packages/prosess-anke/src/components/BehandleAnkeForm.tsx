@@ -16,7 +16,8 @@ import {
 } from '@fpsak-frontend/form';
 import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
 import { ProsessStegSubmitButton } from '@fpsak-frontend/prosess-felles';
-import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT, required } from '@navikt/ft-utils';
+import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { required } from '@navikt/ft-form-validators';
 import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';

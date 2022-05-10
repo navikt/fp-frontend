@@ -4,7 +4,8 @@ import moment from 'moment';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { DDMMYYYY_DATE_FORMAT, required } from '@navikt/ft-utils';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import { required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
   ArbeidsgiverOpplysningerPerId,
