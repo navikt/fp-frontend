@@ -2527,7 +2527,7 @@
     react "17.0.2"
     react-hook-form "7.30.0"
 
-"@navikt/ft-form-validators@^1.0.3":
+"@navikt/ft-form-validators@1.0.3", "@navikt/ft-form-validators@^1.0.3":
   version "1.0.3"
   resolved "https://npm.pkg.github.com/download/@navikt/ft-form-validators/1.0.3/42240dcf61cedd7c1ce12360470e7bcc8a22e5392f62543907caa714a41d7193#fbae6004ddbef44371ccf24246d94d87e538640d"
   integrity sha512-FeVLGszfXcN7gyfqYJdMbvWOuY6xNp16BSz+y6L94WuZvnACjbsmVv9eqjD++w0Ln/owkNF3moMPQyKFhhNSFg==
