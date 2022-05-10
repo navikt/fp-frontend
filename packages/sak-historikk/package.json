@@ -11,6 +11,7 @@
     "@fpsak-frontend/storybook-utils": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
     "@navikt/ft-kodeverk": "^1.0.4",
+    "@navikt/ft-prosess-beregningsgrunnlag": "1.0.10",
     "@navikt/ft-types": "^1.0.7",
     "@navikt/ft-ui-komponenter": "1.0.13",
     "@navikt/ft-utils": "1.0.11",

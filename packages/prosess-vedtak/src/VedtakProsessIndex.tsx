@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { isBGAksjonspunktSomGirFritekstfelt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { ProsessBeregningsgrunnlagAksjonspunktCode } from '@navikt/ft-prosess-beregningsgrunnlag';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
@@ -17,6 +17,12 @@ import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
+const BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT = [
+  ProsessBeregningsgrunnlagAksjonspunktCode.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE,
+  ProsessBeregningsgrunnlagAksjonspunktCode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
+  ProsessBeregningsgrunnlagAksjonspunktCode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
+];
+
 const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
   aksjonspunkter: Aksjonspunkt[],
   beregningsgrunnlag?: Beregningsgrunnlag,
@@ -24,7 +30,8 @@ const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
   if (!beregningsgrunnlag || !aksjonspunkter) {
     return false;
   }
-  const behandlingHarLøstBGAP = aksjonspunkter.find((ap) => isBGAksjonspunktSomGirFritekstfelt(ap.definisjon)
+  const behandlingHarLøstBGAP = aksjonspunkter
+    .find((ap) => BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT.some((k) => k === ap.definisjon)
     && ap.status === aksjonspunktStatus.UTFORT);
   const førstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode[0];
   const andelSomErManueltFastsatt = førstePeriode.beregningsgrunnlagPrStatusOgAndel.find((andel) => andel.overstyrtPrAar || andel.overstyrtPrAar === 0);

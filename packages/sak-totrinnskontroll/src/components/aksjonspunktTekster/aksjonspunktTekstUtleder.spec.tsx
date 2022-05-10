@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { ProsessBeregningsgrunnlagAksjonspunktCode } from '@navikt/ft-prosess-beregningsgrunnlag';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import klageVurderingOmgjoerCodes from '@fpsak-frontend/kodeverk/src/klageVurderingOmgjoer';
 import behandlingStatusCodes from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -182,7 +183,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
 
   it('skal vise korrekt tekst for aksjonspunkt 5038', () => {
     const aksjonspunkt = {
-      aksjonspunktKode: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
+      aksjonspunktKode: ProsessBeregningsgrunnlagAksjonspunktCode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
@@ -192,7 +193,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
   });
   it('skal vise korrekt tekst for aksjonspunkt 5042', () => {
     const aksjonspunkt = {
-      aksjonspunktKode: aksjonspunktCodes.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE,
+      aksjonspunktKode: ProsessBeregningsgrunnlagAksjonspunktCode.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
@@ -212,7 +213,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
   });
   it('skal vise korrekt tekst for aksjonspunkt 5047', () => {
     const aksjonspunkt = {
-      aksjonspunktKode: aksjonspunktCodes.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
+      aksjonspunktKode: ProsessBeregningsgrunnlagAksjonspunktCode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
@@ -316,7 +317,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
 
   it('skal vise korrekt tekst for aksjonspunkt 5039 varig endring', () => {
     const aksjonspunkt = {
-      aksjonspunktKode: aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
+      aksjonspunktKode: ProsessBeregningsgrunnlagAksjonspunktCode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
       beregningDto: { fastsattVarigEndringNaering: true },
@@ -327,7 +328,7 @@ describe('<aksjonspunktTekstUtleder>', () => {
   });
   it('skal vise korrekt tekst for aksjonspunkt 5039 ikkje varig endring', () => {
     const aksjonspunkt = {
-      aksjonspunktKode: aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
+      aksjonspunktKode: ProsessBeregningsgrunnlagAksjonspunktCode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
       beregningDto: { fastsattVarigEndringNaering: false },
