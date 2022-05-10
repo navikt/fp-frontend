@@ -13,5 +13,11 @@
   "Registrering.Permisjon.SøkerHarAleneomsorg.No": "Nei",
   "Registrering.Permisjon.HarRettPaForeldrepenger": "Har den andre forelderen rett på foreldrepenger?",
   "Registrering.Permisjon.HarRettPaForeldrepenger.Yes": "Ja",
-  "Registrering.Permisjon.HarRettPaForeldrepenger.No": "Nei"
+  "Registrering.Permisjon.HarRettPaForeldrepenger.No": "Nei",
+  "Registrering.Permisjon.MorUføretrygd": "Bare far rett og mor mottar uføretryd?",
+  "Registrering.Permisjon.MorUføretrygd.Yes": "Ja",
+  "Registrering.Permisjon.MorUføretrygd.No": "Nei",
+  "Registrering.Permisjon.MorForeldrepengerEØS": "Bare far rett og mor har foreldrepenger fra land i EØS?",
+  "Registrering.Permisjon.MorForeldrepengerEØS.Yes": "Ja",
+  "Registrering.Permisjon.MorForeldrepengerEØS.No": "Nei"
 }
