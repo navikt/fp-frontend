@@ -19,7 +19,7 @@
     "@navikt/ft-ui-komponenter": "1.0.9",
     "nav-frontend-typografi": "4.0.1",
     "nav-frontend-typografi-style": "2.0.1",
-    "react": "17.0.2",
+    "react": "18.1.0",
     "react-intl": "5.24.8"
   },
   "devDependencies": {
