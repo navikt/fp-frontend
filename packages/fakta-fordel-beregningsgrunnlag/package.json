@@ -18,7 +18,7 @@
     "@navikt/ft-ui-komponenter": "1.0.9",
     "@navikt/ft-utils": "1.0.8",
     "classnames": "2.3.1",
-    "core-js": "3.22.4",
+    "core-js": "3.22.5",
     "moment": "2.29.3",
     "nav-frontend-core": "6.0.1",
     "nav-frontend-ekspanderbartpanel": "4.0.3",
