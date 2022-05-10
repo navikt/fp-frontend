@@ -10,7 +10,7 @@ import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {
   hasValidDate, hasValidText, maxLength, minLength, required,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 import { DatepickerField, TextAreaField } from '@fpsak-frontend/form';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';

@@ -10,7 +10,8 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { DDMMYYYY_DATE_FORMAT, required } from '@navikt/ft-utils';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import { required } from '@navikt/ft-form-validators';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
   Aksjonspunkt, KodeverkMedNavn, MedlemPeriode, Medlemskap, Soknad, AlleKodeverk,

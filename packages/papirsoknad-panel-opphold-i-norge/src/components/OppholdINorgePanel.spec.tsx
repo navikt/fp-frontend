@@ -4,15 +4,14 @@ import { shallow } from 'enzyme';
 
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
+import { ISO_DATE_FORMAT, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import {
   dateNotAfterOrEqualMessage,
   dateNotBeforeOrEqualMessage,
   dateRangesOverlappingMessage,
   invalidDateMessage,
-  ISO_DATE_FORMAT,
-  DDMMYYYY_DATE_FORMAT,
   isRequiredMessage,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 
 import OppholdINorgePanel, { OppholdINorgePanelImpl } from './OppholdINorgePanel';

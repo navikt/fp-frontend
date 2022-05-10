@@ -1,6 +1,7 @@
 import moment from 'moment';
 
-import { dateRangesOverlappingMessage, invalidDateMessage, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { dateRangesOverlappingMessage, invalidDateMessage } from '@navikt/ft-form-validators';
 
 import { PermisjonUtsettelsePanel } from './PermisjonUtsettelsePanel';
 

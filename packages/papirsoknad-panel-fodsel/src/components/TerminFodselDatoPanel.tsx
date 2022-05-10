@@ -13,16 +13,16 @@ import {
 import {
   DatepickerField, InputField, NavFieldGroup, RadioGroupField, RadioOption,
 } from '@fpsak-frontend/form';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import {
   dateBeforeOrEqual,
   dateBeforeOrEqualToToday,
   hasValidDate,
   hasValidInteger,
-  ISO_DATE_FORMAT,
   maxValue,
   minValue,
   required,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 
 import styles from './terminFodselDatoPanel.less';
 

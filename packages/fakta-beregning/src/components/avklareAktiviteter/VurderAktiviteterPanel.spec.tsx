@@ -1,4 +1,4 @@
-import { isRequiredMessage } from '@navikt/ft-utils';
+import { isRequiredMessage } from '@navikt/ft-form-validators';
 import VurderAktiviteterPanel, { leggTilAktivitet, finnPlasseringIListe } from './VurderAktiviteterPanel';
 import { lagAktivitetFieldId } from './VurderAktiviteterTabell';
 

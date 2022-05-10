@@ -15,9 +15,10 @@ import {
 import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer, Image,
 } from '@navikt/ft-ui-komponenter';
+import { getLanguageFromSprakkode } from '@navikt/ft-utils';
 import {
-  getLanguageFromSprakkode, hasValidText, maxLength, minLength, required,
-} from '@navikt/ft-utils';
+  hasValidText, maxLength, minLength, required,
+} from '@navikt/ft-form-validators';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';

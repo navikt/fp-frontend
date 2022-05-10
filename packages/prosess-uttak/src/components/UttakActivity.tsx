@@ -24,10 +24,10 @@ import {
   maxLength,
   minLength,
   notDash,
-  omit,
   required,
   requiredIfNotPristine,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
+import { omit } from '@navikt/ft-utils';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';

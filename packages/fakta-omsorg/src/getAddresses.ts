@@ -1,4 +1,4 @@
-import { OpplysningAdresseType, landkoder } from '@navikt/ft-kodeverk';
+import { OpplysningAdresseType, Landkode } from '@navikt/ft-kodeverk';
 import { Personadresse } from '@navikt/ft-types';
 
 const emptyIfnull = (text?: string): string => (text == null ? '' : text);
@@ -27,7 +27,7 @@ const getAddresses = (addresses: Personadresse[] = []): Adresser => addresses.re
     return acc;
   }
 
-  const country = address.land !== landkoder.NORGE ? address.land : undefined;
+  const country = address.land !== Landkode.NORGE ? address.land : undefined;
   return {
     ...acc,
     [address.adresseType]: constructAddress(

@@ -4,7 +4,7 @@ import { formValueSelector, isDirty as reduxIsDirty } from 'redux-form';
 
 import {
   minLength, maxLength, required, hasValidText,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 import { TextAreaField } from '@fpsak-frontend/form';
 
 import BehandlingFormFieldCleaner from '../../util/BehandlingFormFieldCleaner';

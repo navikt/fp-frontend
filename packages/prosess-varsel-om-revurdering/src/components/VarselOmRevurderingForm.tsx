@@ -16,8 +16,9 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import { AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
-  hasValidText, ISO_DATE_FORMAT, minLength, maxLength, required, getLanguageFromSprakkode,
-} from '@navikt/ft-utils';
+  hasValidText, minLength, maxLength, required,
+} from '@navikt/ft-form-validators';
+import { ISO_DATE_FORMAT, getLanguageFromSprakkode } from '@navikt/ft-utils';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
 import SettPaVentModalIndex, { FormValues as ModalFormValues } from '@fpsak-frontend/modal-sett-pa-vent';
 import Behandling from '@fpsak-frontend/types/src/behandlingTsType';

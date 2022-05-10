@@ -12,7 +12,7 @@ import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg
 import { Datepicker, SelectField, Form } from '@navikt/ft-form-hooks';
 import {
   ariaCheck, dateAfterOrEqualToToday, hasValidDate, required, dateBeforeToday,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 

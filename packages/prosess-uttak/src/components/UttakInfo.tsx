@@ -5,9 +5,10 @@ import { Element, Undertekst } from 'nav-frontend-typografi';
 import moment from 'moment/moment';
 
 import { CheckboxField, DecimalField, SelectField } from '@fpsak-frontend/form';
+import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@navikt/ft-utils';
 import {
-  calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT, hasValidDecimal, maxValue, notDash, required, getKodeverknavnFn,
-} from '@navikt/ft-utils';
+  hasValidDecimal, maxValue, notDash, required,
+} from '@navikt/ft-form-validators';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import uttakArbeidTypeKodeverk from '@fpsak-frontend/kodeverk/src/uttakArbeidType';
 import oppholdArsakType, { oppholdArsakKontoNavn } from '@fpsak-frontend/kodeverk/src/oppholdArsakType';

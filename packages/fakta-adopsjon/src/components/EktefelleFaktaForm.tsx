@@ -6,7 +6,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
 import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { required } from '@navikt/ft-utils';
+import { required } from '@navikt/ft-form-validators';
 import { FamilieHendelse } from '@fpsak-frontend/types';
 import { BekreftEktefelleAksjonspunktAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 

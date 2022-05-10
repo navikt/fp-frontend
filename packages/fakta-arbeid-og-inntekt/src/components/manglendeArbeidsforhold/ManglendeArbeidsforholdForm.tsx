@@ -10,7 +10,7 @@ import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 
 import {
   hasValidText, maxLength, minLength, hasValidDate, hasValidInteger, required, minValue, maxValue, dateAfterOrEqual,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 import {
   TextAreaField, RadioGroupField, RadioOption, Datepicker, InputField, Form,
 } from '@navikt/ft-form-hooks';

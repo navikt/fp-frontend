@@ -9,7 +9,7 @@ import { DateLabel, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponente
 import { Datepicker, InputField, formHooks } from '@navikt/ft-form-hooks';
 import {
   hasValidDate, hasValidInteger, maxValue, minValue, required,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@fpsak-frontend/fakta-felles';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt, FamilieHendelse, Soknad } from '@fpsak-frontend/types';

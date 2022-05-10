@@ -4,7 +4,7 @@ import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { DatepickerField } from '@fpsak-frontend/form';
-import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-utils';
+import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 
 interface OwnProps {
   readOnly: boolean;

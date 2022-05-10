@@ -3,10 +3,10 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
+import { decodeHtmlEntity } from '@navikt/ft-utils';
 import {
-  decodeHtmlEntity,
   hasValidText, maxLength, minLength, required,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 import { Element } from 'nav-frontend-typografi';
 import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Aksjonspunkt } from '@navikt/ft-types';

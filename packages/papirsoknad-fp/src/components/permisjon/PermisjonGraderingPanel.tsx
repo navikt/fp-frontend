@@ -15,7 +15,7 @@ import {
   maxLengthOrFodselsnr,
   required,
   validateProsentandel,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 import arbeidskategori from '@fpsak-frontend/kodeverk/src/arbeidskategori';
 import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 

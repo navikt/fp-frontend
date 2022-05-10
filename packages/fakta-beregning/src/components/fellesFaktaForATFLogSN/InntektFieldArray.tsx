@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { NavFieldGroup } from '@fpsak-frontend/form';
-import {
-  isArrayEmpty, removeSpacesFromNumber, required,
-} from '@navikt/ft-utils';
+import { isArrayEmpty, removeSpacesFromNumber } from '@navikt/ft-utils';
+import { required } from '@navikt/ft-form-validators';
 import inntektskategorier from '@fpsak-frontend/kodeverk/src/inntektskategorier';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';

@@ -12,7 +12,8 @@ import {
 } from '@fpsak-frontend/prosess-felles';
 import { RadioGroupField, RadioOption, SelectField } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { DATE_TIME_FORMAT, required, getKodeverknavnFn } from '@navikt/ft-utils';
+import { DATE_TIME_FORMAT, getKodeverknavnFn } from '@navikt/ft-utils';
+import { required } from '@navikt/ft-form-validators';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AlleKodeverk, KlageVurdering } from '@fpsak-frontend/types';
 

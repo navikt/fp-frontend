@@ -7,7 +7,7 @@ import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktSta
 import { ArrowBox, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { required } from '@navikt/ft-utils';
+import { required } from '@navikt/ft-form-validators';
 import { Aksjonspunkt, MedlemPeriode } from '@fpsak-frontend/types';
 import { formValueSelector } from 'redux-form';
 

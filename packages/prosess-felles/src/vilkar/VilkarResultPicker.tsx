@@ -9,9 +9,8 @@ import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktSta
 import {
   Datepicker, RadioGroupField, RadioOption, SelectField, formHooks,
 } from '@navikt/ft-form-hooks';
-import {
-  hasValidDate, required, createIntl, requiredIfCustomFunctionIsTrueNew,
-} from '@navikt/ft-utils';
+import { createIntl } from '@navikt/ft-utils';
+import { hasValidDate, required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import avslattImage from '@fpsak-frontend/assets/images/avslaatt.svg';
 import innvilgetImage from '@fpsak-frontend/assets/images/check.svg';
 import { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@fpsak-frontend/types';

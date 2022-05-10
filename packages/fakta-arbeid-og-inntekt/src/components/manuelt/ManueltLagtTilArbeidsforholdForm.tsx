@@ -15,7 +15,7 @@ import binIcon from '@fpsak-frontend/assets/images/bin.svg';
 import { AoIArbeidsforhold, ManueltArbeidsforhold } from '@fpsak-frontend/types';
 import {
   hasValidText, maxLength, minLength, hasValidDate, hasValidInteger, required, minValue, maxValue, dateAfterOrEqual,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 import {
   TextAreaField, Datepicker, InputField, Form,
 } from '@navikt/ft-form-hooks';

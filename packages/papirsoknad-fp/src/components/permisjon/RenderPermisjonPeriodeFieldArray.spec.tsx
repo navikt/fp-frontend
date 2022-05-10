@@ -3,7 +3,8 @@ import moment from 'moment';
 
 import { PeriodFieldArray, DatepickerField, SelectField } from '@fpsak-frontend/form';
 import { metaMock, MockFields } from '@fpsak-frontend/utils-test/src/redux-form-test-helper';
-import { dateRangesOverlappingMessage, invalidDateMessage, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { dateRangesOverlappingMessage, invalidDateMessage } from '@navikt/ft-form-validators';
 import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 import { shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { AlleKodeverk } from '@fpsak-frontend/types';

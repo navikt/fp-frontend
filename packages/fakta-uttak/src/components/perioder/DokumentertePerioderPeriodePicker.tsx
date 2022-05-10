@@ -6,7 +6,7 @@ import { FlexColumn, FlexRow } from '@navikt/ft-ui-komponenter';
 import { PeriodpickerField, PeriodFieldArray } from '@fpsak-frontend/form';
 import {
   dateRangesNotOverlapping, hasValidDate, required,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 
 import styles from './dokumentertePerioderPeriodePicker.less';
 

@@ -6,7 +6,7 @@ import { Element, Undertittel } from 'nav-frontend-typografi';
 
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
-import { dateRangesNotOverlappingCrossTypes } from '@navikt/ft-utils';
+import { dateRangesNotOverlappingCrossTypes } from '@navikt/ft-form-validators';
 import { CheckboxField } from '@fpsak-frontend/form';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import { AlleKodeverk } from '@fpsak-frontend/types';

@@ -7,9 +7,10 @@ import { Element, Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
+import { dateFormat } from '@navikt/ft-utils';
 import {
-  hasValidText, maxLength, minLength, required, dateFormat,
-} from '@navikt/ft-utils';
+  hasValidText, maxLength, minLength, required,
+} from '@navikt/ft-form-validators';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
 import {
   Aksjonspunkt, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, AoIArbeidsforhold, AlleKodeverk,

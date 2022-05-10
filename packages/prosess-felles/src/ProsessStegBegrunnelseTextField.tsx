@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react';
 
 import { TextAreaField } from '@fpsak-frontend/form';
+import { decodeHtmlEntity, createIntl } from '@navikt/ft-utils';
 import {
-  decodeHtmlEntity, hasValidText, maxLength, minLength, requiredIfNotPristine, createIntl,
-} from '@navikt/ft-utils';
+  hasValidText, maxLength, minLength, requiredIfNotPristine,
+} from '@navikt/ft-form-validators';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
 
 import messages from '../i18n/nb_NO.json';

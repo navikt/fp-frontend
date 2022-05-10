@@ -14,7 +14,7 @@ import {
 import { RadioGroupField, RadioOption, TextAreaField } from '@fpsak-frontend/form';
 import {
   hasValidPeriod, hasValidText, maxLength, minLength, required,
-} from '@navikt/ft-utils';
+} from '@navikt/ft-form-validators';
 
 import EndreSoknadsperiode from '../EndreSoknadsperiode';
 import PerioderKnapper from './PerioderKnapper';

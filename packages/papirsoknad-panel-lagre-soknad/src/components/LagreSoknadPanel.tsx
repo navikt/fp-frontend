@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 
-import { ariaCheck, hasValidText, maxLength } from '@navikt/ft-utils';
+import { ariaCheck, hasValidText, maxLength } from '@navikt/ft-form-validators';
 import {
   BorderBox, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';

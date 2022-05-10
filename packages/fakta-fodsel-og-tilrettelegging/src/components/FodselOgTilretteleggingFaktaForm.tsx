@@ -12,9 +12,10 @@ import {
 
 import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
 import { DatepickerField, TextAreaField } from '@fpsak-frontend/form';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import {
-  hasValidDate, hasValidText, maxLength, required, requiredIfNotPristine, DDMMYYYY_DATE_FORMAT,
-} from '@navikt/ft-utils';
+  hasValidDate, hasValidText, maxLength, required, requiredIfNotPristine,
+} from '@navikt/ft-form-validators';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
 import {

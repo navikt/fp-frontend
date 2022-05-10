@@ -5,7 +5,7 @@ import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { Undertekst } from 'nav-frontend-typografi';
 
 import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { required } from '@navikt/ft-utils';
+import { required } from '@navikt/ft-form-validators';
 import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 
 import FrilansPerioderFieldArray from './FrilansPerioderFieldArray';
