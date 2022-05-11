@@ -160,7 +160,7 @@ export const RenderPermisjonPeriodeFieldArray: FunctionComponent<PureOwnProps & 
                     <FlexColumn>
                       <SelectField
                         readOnly={readOnly}
-                        disabled={shouldDisableSelect(selectedPeriodeTyper, index)}
+                        disabled={sokerErMor || shouldDisableSelect(selectedPeriodeTyper, index)}
                         bredde="s"
                         name={`${periodeElementFieldId}.morsAktivitet`}
                         label={getLabel(erForsteRad, 'Registrering.Permisjon.Fellesperiode.morsAktivitet')}
@@ -309,22 +309,22 @@ RenderPermisjonPeriodeFieldArray.transformValues = (values: FormValues[]) => val
 });
 
 const mapStateToPropsFactory = (initialState: any, ownProps: PureOwnProps) => {
-  const values = getFormValues(ownProps.meta.form)(initialState);
-  const permisjonValues = values[ownProps.namePrefix];
-  let selectedPeriodeTyper = [''];
-  if (typeof permisjonValues[ownProps.periodePrefix] !== 'undefined') {
-    selectedPeriodeTyper = permisjonValues[ownProps.periodePrefix].map(({
-      periodeType,
-    }: { periodeType: string }) => periodeType);
-  }
   const periodeTyper = ownProps.alleKodeverk[kodeverkTyper.UTTAK_PERIODE_TYPE];
   const morsAktivitetTyper = ownProps.alleKodeverk[kodeverkTyper.MORS_AKTIVITET];
 
-  return (): MappedOwnProps => ({
-    selectedPeriodeTyper,
-    periodeTyper,
-    morsAktivitetTyper,
-  });
+  return (state: any, props: PureOwnProps): MappedOwnProps => {
+    const values = getFormValues(props.meta.form)(state);
+    const permisjonValues = values[props.namePrefix];
+    let selectedPeriodeTyper = [''];
+    if (typeof permisjonValues[props.periodePrefix] !== 'undefined') {
+      selectedPeriodeTyper = permisjonValues[props.periodePrefix].map(({ periodeType }: { periodeType: string }) => periodeType);
+    }
+    return {
+      selectedPeriodeTyper,
+      periodeTyper,
+      morsAktivitetTyper,
+    };
+  };
 };
 
 export default connect(mapStateToPropsFactory)(RenderPermisjonPeriodeFieldArray);

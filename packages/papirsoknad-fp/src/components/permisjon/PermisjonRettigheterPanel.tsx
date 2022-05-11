@@ -9,6 +9,8 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 interface OwnProps {
   readOnly: boolean;
   sokerHarAleneomsorg?: boolean;
+  denAndreForelderenHarRettPaForeldrepenger?: boolean;
+  sokerErMor: boolean;
 }
 
 /**
@@ -20,6 +22,8 @@ export const PermisjonRettigheterPanel: FunctionComponent<OwnProps & WrappedComp
   intl,
   readOnly,
   sokerHarAleneomsorg,
+  denAndreForelderenHarRettPaForeldrepenger,
+  sokerErMor,
 }) => (
   <>
     <Undertekst>
@@ -45,6 +49,30 @@ export const PermisjonRettigheterPanel: FunctionComponent<OwnProps & WrappedComp
         <RadioGroupField name="denAndreForelderenHarRettPaForeldrepenger" validate={[required]} readOnly={readOnly}>
           <RadioOption label={intl.formatMessage({ id: 'Registrering.Permisjon.HarRettPaForeldrepenger.Yes' })} value />
           <RadioOption label={intl.formatMessage({ id: 'Registrering.Permisjon.HarRettPaForeldrepenger.No' })} value={false} />
+        </RadioGroupField>
+      </div>
+    )}
+    {!sokerErMor && sokerHarAleneomsorg === false && denAndreForelderenHarRettPaForeldrepenger === false && (
+      <div>
+        <Undertekst>
+          {intl.formatMessage({ id: 'Registrering.Permisjon.MorUføretrygd' })}
+        </Undertekst>
+        <VerticalSpacer eightPx />
+        <RadioGroupField name="morMottarUføretrygd" validate={[required]} readOnly={readOnly}>
+          <RadioOption label={intl.formatMessage({ id: 'Registrering.Permisjon.MorUføretrygd.Yes' })} value />
+          <RadioOption label={intl.formatMessage({ id: 'Registrering.Permisjon.MorUføretrygd.No' })} value={false} />
+        </RadioGroupField>
+      </div>
+    )}
+    {!sokerErMor && sokerHarAleneomsorg === false && denAndreForelderenHarRettPaForeldrepenger === false && (
+      <div>
+        <Undertekst>
+          {intl.formatMessage({ id: 'Registrering.Permisjon.MorForeldrepengerEØS' })}
+        </Undertekst>
+        <VerticalSpacer eightPx />
+        <RadioGroupField name="morHarForeldrepengerEØS" validate={[required]} readOnly={readOnly}>
+          <RadioOption label={intl.formatMessage({ id: 'Registrering.Permisjon.MorForeldrepengerEØS.Yes' })} value />
+          <RadioOption label={intl.formatMessage({ id: 'Registrering.Permisjon.MorForeldrepengerEØS.No' })} value={false} />
         </RadioGroupField>
       </div>
     )}
