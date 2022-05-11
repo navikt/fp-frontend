@@ -7,10 +7,10 @@
   "dependencies": {
     "@fpsak-frontend/assets": "1.0.0",
     "@navikt/ft-kodeverk": "^1.0.4",
-    "@navikt/ft-plattform-komponenter": "1.0.7",
+    "@navikt/ft-plattform-komponenter": "1.0.10",
     "@navikt/ft-types": "^1.0.7",
-    "@navikt/ft-ui-komponenter": "1.0.9",
-    "@navikt/ft-utils": "1.0.8",
+    "@navikt/ft-ui-komponenter": "1.0.13",
+    "@navikt/ft-utils": "1.0.11",
     "nav-frontend-knapper": "3.1.2",
     "nav-frontend-knapper-style": "2.1.1",
     "nav-frontend-modal": "2.0.1",

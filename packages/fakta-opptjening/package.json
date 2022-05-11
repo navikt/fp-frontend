@@ -9,12 +9,12 @@
     "@fpsak-frontend/tidslinje": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/types-avklar-aksjonspunkter": "1.0.0",
-    "@navikt/ft-form-validators": "1.0.3",
-    "@navikt/ft-form-hooks": "1.0.10",
+    "@navikt/ft-form-validators": "1.0.6",
+    "@navikt/ft-form-hooks": "1.0.14",
     "@navikt/ft-kodeverk": "^1.0.4",
     "@navikt/ft-types": "^1.0.7",
-    "@navikt/ft-ui-komponenter": "1.0.9",
-    "@navikt/ft-utils": "1.0.8",
+    "@navikt/ft-ui-komponenter": "1.0.13",
+    "@navikt/ft-utils": "1.0.11",
     "dayjs": "1.11.2",
     "moment": "2.29.3",
     "nav-frontend-alertstriper": "4.0.1",
@@ -28,7 +28,7 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-intl": "5.24.8",
-    "react-hook-form": "7.30.0"
+    "react-hook-form": "7.31.1"
   },
   "devDependencies": {
     "@fpsak-frontend/storybook-utils": "1.0.0",
