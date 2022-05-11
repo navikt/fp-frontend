@@ -10,7 +10,7 @@ import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 import { CheckboxField } from '@fpsak-frontend/form';
-import { Tidslinje } from '@fpsak-frontend/tidslinje';
+import { Tidslinje } from '@navikt/ft-tidslinje';
 import { KjønnkodeEnum } from '@fpsak-frontend/types/src/Kjonnkode';
 import {
   Aksjonspunkt, AlleKodeverk, Behandling, FamilieHendelseSamling, PeriodeSokerAktivitet, Personoversikt,

@@ -5,7 +5,7 @@ import { Column } from 'nav-frontend-grid';
 
 import { AksjonspunktHelpTextTemp } from '@navikt/ft-ui-komponenter';
 import { getIntlMock, shallowWithIntl } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
-import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
+import { TimeLineButton, TimeLineDataContainer } from '@navikt/ft-tidslinje';
 import {
   AktivitetIdentifikator, AktivitetSaldo, UttakStonadskontoer, Stonadskonto, AlleKodeverk,
 } from '@fpsak-frontend/types';

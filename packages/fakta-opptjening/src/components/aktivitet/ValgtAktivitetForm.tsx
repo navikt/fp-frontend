@@ -20,7 +20,7 @@ import {
 import {
   RadioGroupField, RadioOption, TextAreaField, Form,
 } from '@navikt/ft-form-hooks';
-import { TimeLineButton } from '@fpsak-frontend/tidslinje';
+import { TimeLineButton } from '@navikt/ft-tidslinje';
 import {
   ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, AlleKodeverk, OpptjeningAktivitet,
 } from '@fpsak-frontend/types';
