@@ -16,6 +16,8 @@ describe('<PermisjonRettigheterPanel>', () => {
       readOnly={readOnly}
       intl={intlMock}
       sokerHarAleneomsorg
+      denAndreForelderenHarRettPaForeldrepenger={false}
+      sokerErMor={false}
     />);
     expect(wrapper.find({ name: 'sokerHarAleneomsorg' })).toHaveLength(1);
     expect(wrapper.find({ name: 'denAndreForelderenHarRettPaForeldrepenger' })).toHaveLength(0);
@@ -26,6 +28,8 @@ describe('<PermisjonRettigheterPanel>', () => {
       readOnly={readOnly}
       intl={intlMock}
       sokerHarAleneomsorg={false}
+      denAndreForelderenHarRettPaForeldrepenger={false}
+      sokerErMor={false}
     />);
     expect(wrapper.find({ name: 'sokerHarAleneomsorg' })).toHaveLength(1);
     expect(wrapper.find({ name: 'denAndreForelderenHarRettPaForeldrepenger' })).toHaveLength(1);

@@ -27,6 +27,7 @@ import RettigheterPapirsoknadIndex, { rettighet } from '@fpsak-frontend/papirsok
 import AnnenForelderPapirsoknadIndex, { AnnenForelderFormValues } from '@fpsak-frontend/papirsoknad-panel-annen-forelder';
 import FodselPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-fodsel';
 
+import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import PermisjonRettigheterPanel from './permisjon/PermisjonRettigheterPanel';
 import DekningsgradPanel from './dekningsgrad/DekningsgradPanel';
 import PermisjonPanel, { TIDSROM_PERMISJON_FORM_NAME_PREFIX, FormValues as FormValuesPermisjon } from './permisjon/PermisjonPanel';
@@ -55,6 +56,7 @@ interface MappedOwnProps {
   valuesForRegisteredFieldsOnly: FormValues;
   annenForelderInformertRequired: boolean;
   sokerHarAleneomsorg: boolean;
+  denAndreForelderenHarRettPaForeldrepenger?: boolean;
   initialValues: FormValues;
   validate: (formValues: FormValues) => any;
 }
@@ -87,6 +89,7 @@ export class ForeldrepengerForm extends React.Component<PureOwnProps & MappedOwn
       submitFailed,
       annenForelderInformertRequired,
       sokerHarAleneomsorg,
+      denAndreForelderenHarRettPaForeldrepenger,
       alleKodeverk,
     } = this.props;
 
@@ -121,7 +124,14 @@ export class ForeldrepengerForm extends React.Component<PureOwnProps & MappedOwn
             namePrefix={ANNEN_FORELDER_FORM_NAME_PREFIX}
             form={form}
             readOnly={readOnly}
-            permisjonRettigheterPanel={<PermisjonRettigheterPanel readOnly={readOnly} sokerHarAleneomsorg={sokerHarAleneomsorg} />}
+            permisjonRettigheterPanel={(
+              <PermisjonRettigheterPanel
+                readOnly={readOnly}
+                sokerHarAleneomsorg={sokerHarAleneomsorg}
+                denAndreForelderenHarRettPaForeldrepenger={denAndreForelderenHarRettPaForeldrepenger}
+                sokerErMor={soknadData.getForeldreType() === foreldreType.MOR}
+              />
+            )}
             alleKodeverk={alleKodeverk}
           />
         </FormSection>
@@ -212,6 +222,7 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
       : {};
     const sokerValue = valuesForRegisteredFieldsOnly.annenForelder;
     const sokerHarAleneomsorg = sokerValue ? sokerValue.sokerHarAleneomsorg : undefined;
+    const denAndreForelderenHarRettPaForeldrepenger = sokerValue ? sokerValue.denAndreForelderenHarRettPaForeldrepenger : undefined;
 
     let annenForelderInformertRequired = true;
     if (sokerValue && (sokerHarAleneomsorg || sokerValue.denAndreForelderenHarRettPaForeldrepenger === false)) {
@@ -222,6 +233,7 @@ const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
       valuesForRegisteredFieldsOnly,
       annenForelderInformertRequired,
       sokerHarAleneomsorg,
+      denAndreForelderenHarRettPaForeldrepenger,
       validate,
     };
   };
