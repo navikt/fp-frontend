@@ -13,6 +13,9 @@ import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 import getAlleMerknaderFraBeslutter from '../../felles/util/getAlleMerknaderFraBeslutter';
 
+// TODO Denne burde ligga sånn til at den kun blir importert når denne pakka dynamisk blir importert
+import '@navikt/ft-fakta-tilbakekreving-feilutbetaling/dist/style.css';
+
 interface OwnProps {
   behandling: Behandling;
   feilutbetalingFakta: FeilutbetalingFakta;

@@ -2693,7 +2693,7 @@
     react-hook-form "7.30.0"
     react-intl "5.24.8"
 
-"@navikt/ft-tidslinje@^1.0.6":
+"@navikt/ft-tidslinje@1.0.6", "@navikt/ft-tidslinje@^1.0.6":
   version "1.0.6"
   resolved "https://npm.pkg.github.com/download/@navikt/ft-tidslinje/1.0.6/2b3b47bf715c75e99a5d05a24a7d43c1fb33a6166378f35dd7873d6091f141d2#a86e1dda6feb9b1a87a877f0b95de8260e0edf2c"
   integrity sha512-F7XTYDURlgsyBBwG/ZgN1ZaJa0Q8/2Tu1MB+6RX0UYP9gcB661y9S9797iLq0j5qtgMFOyafePHYiS6ZAAugkA==
@@ -14883,11 +14883,6 @@ react-hook-form@7.30.0:
   version "7.30.0"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.30.0.tgz#c9e2fd54d3627e43bd94bf38ef549df2e80c1371"
   integrity sha512-DzjiM6o2vtDGNMB9I4yCqW8J21P314SboNG1O0obROkbg7KVS0I7bMtwSdKyapnCPjHgnxc3L7E5PEdISeEUcQ==
-
-react-hook-form@7.31.1:
-  version "7.31.1"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.31.1.tgz#16c357dd366bc226172e6acbb5a1672873bbfb28"
-  integrity sha512-QjtjZ8r8KtEBWWpcXLyQordCraTFxILtyQpaz5KLLxN2YzcC+FZ9LLtOnNGuOnzZo9gCoB+viK3ZHV9Mb2htmQ==
 
 react-inspector@^5.1.0:
   version "5.1.1"

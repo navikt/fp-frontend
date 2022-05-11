@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element } from 'nav-frontend-typografi';
 
-import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
+import { TimeLineButton, TimeLineDataContainer } from '@navikt/ft-tidslinje';
 import { FloatRight } from '@navikt/ft-ui-komponenter';
 import { ArbeidsgiverOpplysningerPerId, Behandling, AlleKodeverk } from '@fpsak-frontend/types';
 

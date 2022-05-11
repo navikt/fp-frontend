@@ -24,13 +24,12 @@ import { CheckboxField } from '@fpsak-frontend/form';
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
-import { Tidslinje, EventProps } from '@fpsak-frontend/tidslinje';
+import { Tidslinje, EventProps } from '@navikt/ft-tidslinje';
 import {
   Aksjonspunkt, Behandling, FamilieHendelseSamling,
   Soknad, UttakPeriodeGrense, UttaksresultatPeriode, Ytelsefordeling, Kjønnkode, AlleKodeverk,
   AvklartBarn, UttakStonadskontoer, PeriodeSoker, ArbeidsgiverOpplysningerPerId, Personoversikt,
 } from '@fpsak-frontend/types';
-import { TidslinjeTimes } from '@fpsak-frontend/tidslinje/src/Tidslinje';
 
 import TimeLineInfo from './stonadkonto/TimeLineInfo';
 import UttakTimeLineData from './UttakTimeLineData';
@@ -39,6 +38,13 @@ import UttakTidslinjeHjelpetekster from './UttakTidslinjeHjelpetekster';
 import { AktivitetFieldArray } from './RenderUttakTable';
 
 import styles from './uttak.less';
+
+type TidslinjeTimes = {
+  soknad: string;
+  fodsel: string;
+  revurdering: string;
+  dodSoker: string;
+};
 
 type Overwrite<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;
 export type UttaksresultatActivity = Overwrite<PeriodeSoker, {

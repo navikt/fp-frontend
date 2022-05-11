@@ -11,7 +11,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import splitPeriodImageHoverUrl from '@fpsak-frontend/assets/images/splitt_hover.svg';
 import splitPeriodImageUrl from '@fpsak-frontend/assets/images/splitt.svg';
-import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
+import { TimeLineButton, TimeLineDataContainer } from '@navikt/ft-tidslinje';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   ArbeidsgiverOpplysningerPerId, Behandling, AlleKodeverk, UttakStonadskontoer,

@@ -8,7 +8,7 @@ import { Image } from '@navikt/ft-ui-komponenter';
 import checkImg from '@fpsak-frontend/assets/images/check.svg';
 import advarselImg from '@fpsak-frontend/assets/images/remove.svg';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { TimeLineButton } from '@fpsak-frontend/tidslinje';
+import { TimeLineButton } from '@navikt/ft-tidslinje';
 import { FastsattOpptjeningAktivitet } from '@fpsak-frontend/types';
 
 import opptjeningAktivitetKlassifisering from '../kodeverk/opptjeningAktivitetKlassifisering';

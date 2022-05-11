@@ -11,12 +11,16 @@ import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import VedtakTilbakekrevingProsessIndex, {
+import {
   VedtakAksjonspunktCode, ForeslaVedtakTilbakekrevingAp, ForhandsvisData,
 } from '@navikt/ft-prosess-tilbakekreving-vedtak';
+import { DynamicLoader } from '@fpsak-frontend/behandling-felles';
 
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 import FatterVedtakStatusModal from '../../felles/komponenter/FatterVedtakStatusModal';
+
+// TODO Denne burde ligga sånn til at den kun blir importert når denne pakka dynamisk blir importert
+import '@navikt/ft-prosess-tilbakekreving-vedtak/dist/style.css';
 
 const tilbakekrevingÅrsakTyperKlage = [
   BehandlingArsakType.RE_KLAGE_KA,
@@ -113,7 +117,16 @@ const VedtakTilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
           submit={lukkApenRevurderingModal}
         />
       )}
-      <VedtakTilbakekrevingProsessIndex
+      <DynamicLoader
+        // @ts-ignore
+        importModuleFederationComp={() => {
+          if (process.env.NODE_ENV === 'development') {
+            // @ts-ignore
+            return import('ft_prosess_tilbakekreving_vedtak/VedtakProsessIndex');// eslint-disable-line import/no-unresolved
+          }
+          return undefined;
+        }}
+        importPackageComp={() => import('@navikt/ft-prosess-tilbakekreving-vedtak')}
         behandling={behandling}
         beregningsresultat={beregningsresultat}
         isReadOnly={isReadOnly}

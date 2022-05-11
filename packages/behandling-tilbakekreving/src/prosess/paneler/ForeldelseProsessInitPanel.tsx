@@ -4,11 +4,15 @@ import {
   Aksjonspunkt, AlleKodeverkTilbakekreving, Behandling, FeilutbetalingPerioderWrapper,
 } from '@navikt/ft-types';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import ForeldelseForm, { ForeldelseAksjonspunktCodes, VurderForeldelseAp } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
+import { ForeldelseAksjonspunktCodes, VurderForeldelseAp } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
 import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
+import { DynamicLoader } from '@fpsak-frontend/behandling-felles';
 
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 import getAlleMerknaderFraBeslutter from '../../felles/util/getAlleMerknaderFraBeslutter';
+
+// TODO Denne burde ligga sånn til at den kun blir importert når denne pakka dynamisk blir importert
+import '@navikt/ft-prosess-tilbakekreving-foreldelse/dist/style.css';
 
 interface OwnProps {
   behandling: Behandling;
@@ -49,7 +53,16 @@ const ForeldelseProsessInitPanel: FunctionComponent<OwnProps> = ({
   })), [setFormData]);
 
   return (
-    <ForeldelseForm
+    <DynamicLoader
+      // @ts-ignore
+      importModuleFederationComp={() => {
+        if (process.env.NODE_ENV === 'development') {
+          // @ts-ignore
+          return import('ft_prosess_tilbakekreving_foreldelse/ForeldelseProsessIndex');// eslint-disable-line import/no-unresolved
+        }
+        return undefined;
+      }}
+      importPackageComp={() => import('@navikt/ft-prosess-tilbakekreving-foreldelse')}
       behandling={behandling}
       perioderForeldelse={perioderForeldelse}
       submitCallback={bekreftAksjonspunkter}
