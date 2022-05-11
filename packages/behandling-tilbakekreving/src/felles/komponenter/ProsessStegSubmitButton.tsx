@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
-import { ariaCheck } from '@navikt/ft-utils';
+import { ariaCheck } from '@navikt/ft-form-validators';
 
 const isDisabled = (
   isDirty: boolean,
