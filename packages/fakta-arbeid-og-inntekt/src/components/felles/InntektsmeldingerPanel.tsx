@@ -80,16 +80,19 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
                         <Element><FormattedMessage id="ArbeidsforholdInformasjonPanel.ArbeidsforholdId" /></Element>
                       </FlexColumn>
                       <FlexColumn>
-                        {a.eksternArbeidsforholdId.length < 50 && (
+                        {a.eksternArbeidsforholdId && a.eksternArbeidsforholdId.length < 50 && (
                           <Normaltekst>{a.eksternArbeidsforholdId}</Normaltekst>
                         )}
-                        {a.eksternArbeidsforholdId.length >= 50 && (
+                        {a.eksternArbeidsforholdId && a.eksternArbeidsforholdId.length >= 50 && (
                           <Tooltip
                             content={delOppAId(a.eksternArbeidsforholdId)}
                             alignBottom
                           >
                             <Normaltekst>{`${a.eksternArbeidsforholdId.substring(0, 50)}...`}</Normaltekst>
                           </Tooltip>
+                        )}
+                        {!a.eksternArbeidsforholdId && (
+                          <Normaltekst>-</Normaltekst>
                         )}
                       </FlexColumn>
                     </FlexRow>
