@@ -2,7 +2,7 @@ import React, { FunctionComponent, useMemo } from 'react';
 import moment from 'moment';
 import { Column, Row } from 'nav-frontend-grid';
 
-import { Timeline } from '@fpsak-frontend/tidslinje';
+import { Timeline } from '@navikt/ft-tidslinje';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { KodeverkMedNavn, OpptjeningAktivitet } from '@fpsak-frontend/types';
 

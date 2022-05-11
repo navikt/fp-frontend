@@ -4,7 +4,7 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import ikkeOppfyltUrl from '@fpsak-frontend/assets/images/ikke_oppfylt.svg';
 import oppfyltUrl from '@fpsak-frontend/assets/images/oppfylt.svg';
 import uavklartUrl from '@fpsak-frontend/assets/images/uavklart.svg';
-import { LegendBox } from '@fpsak-frontend/tidslinje';
+import { LegendBox } from '@navikt/ft-tidslinje';
 import fodselUrl from '@fpsak-frontend/assets/images/fodsel.svg';
 import soknadUrl from '@fpsak-frontend/assets/images/soknad.svg';
 import revurderingUrl from '@fpsak-frontend/assets/images/endringstidspunkt.svg';

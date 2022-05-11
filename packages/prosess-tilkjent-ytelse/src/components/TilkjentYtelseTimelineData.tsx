@@ -11,7 +11,7 @@ import {
 import { calcDaysAndWeeks, DDMMYYYY_DATE_FORMAT, getKodeverknavnFn } from '@navikt/ft-utils';
 import aktivitetStatus from '@fpsak-frontend/kodeverk/src/aktivitetStatus';
 import { uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
-import { TimeLineButton, TimeLineDataContainer } from '@fpsak-frontend/tidslinje';
+import { TimeLineButton, TimeLineDataContainer } from '@navikt/ft-tidslinje';
 import { ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriodeAndel, AlleKodeverk } from '@fpsak-frontend/types';
 
 import { PeriodeMedId } from './TilkjentYtelse';

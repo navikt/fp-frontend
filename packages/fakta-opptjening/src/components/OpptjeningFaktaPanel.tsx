@@ -13,7 +13,7 @@ import { ISO_DATE_FORMAT, addDaysToDate } from '@navikt/ft-utils';
 import {
   AksjonspunktHelpTextTemp, DateLabel, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
-import { TimeLineNavigation } from '@fpsak-frontend/tidslinje';
+import { TimeLineNavigation } from '@navikt/ft-tidslinje';
 import {
   ArbeidsgiverOpplysningerPerId, AlleKodeverk, OpptjeningAktivitet, Opptjening,
 } from '@fpsak-frontend/types';

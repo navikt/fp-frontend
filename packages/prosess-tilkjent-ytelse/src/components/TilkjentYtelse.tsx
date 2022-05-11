@@ -9,7 +9,7 @@ import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src
 import {
   ArbeidsgiverOpplysningerPerId, BeregningsresultatPeriode, AlleKodeverk, Kjønnkode,
 } from '@fpsak-frontend/types';
-import { Timeline, TimeLineControl, TimeLineSokerEnsamSoker } from '@fpsak-frontend/tidslinje';
+import { Timeline, TimeLineControl, TimeLineSokerEnsamSoker } from '@navikt/ft-tidslinje';
 
 import TilkjentYtelseTimelineData from './TilkjentYtelseTimelineData';
 
