@@ -42,7 +42,7 @@
     "@fpsak-frontend/rest-api": "1.0.0",
     "@fpsak-frontend/rest-api-hooks": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "1.0.10",
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "1.0.14",
     "@navikt/ft-prosess-beregningsgrunnlag": "1.0.13",
     "@navikt/ft-types": "^1.0.7",
     "@navikt/ft-utils": "1.0.11",
