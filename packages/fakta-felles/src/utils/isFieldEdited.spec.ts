@@ -19,7 +19,6 @@ const soknad = {
   },
   manglendeVedlegg: [],
   oppgittRettighet: {
-    omsorgForBarnet: true,
     aleneomsorgForBarnet: false,
   },
   oppgittFordeling: {
