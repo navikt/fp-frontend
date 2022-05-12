@@ -220,6 +220,7 @@ export const iay = {
       lagtTilAvSaksbehandler: false,
       basertPaInntektsmelding: false,
       permisjoner: [],
+      brukArbeidsforholdet: true,
     },
   ],
   skalKunneLeggeTilNyeArbeidsforhold: false,

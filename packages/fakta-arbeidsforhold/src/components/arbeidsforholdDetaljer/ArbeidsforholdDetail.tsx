@@ -1,4 +1,4 @@
-import { FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { DateLabel, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -51,27 +51,44 @@ const ArbeidsforholdDetail: FunctionComponent<PureOwnProps> = ({
         <PermisjonPeriode arbeidsforhold={valgtArbeidsforhold} />
         {erArbeidsforholdIkkeAktivt && (
           <>
-            <FormattedMessage id="ArbeidsforholdDetail.ArbeidsforholdetErIkkeAktivt" />
-            <FormattedMessage id="ArbeidsforholdDetail.ArbeidsforholdetAktivTomDato" />
-            {finnOverstyrtTom(valgtArbeidsforhold)}
+            <Normaltekst>
+              <FormattedMessage id="ArbeidsforholdDetail.ArbeidsforholdetErIkkeAktivt" />
+            </Normaltekst>
+            <Normaltekst>
+              <FormattedMessage id="ArbeidsforholdDetail.ArbeidsforholdetAktivTomDato" />
+            </Normaltekst>
+            <Normaltekst>
+              <DateLabel dateString={finnOverstyrtTom(valgtArbeidsforhold)} />
+            </Normaltekst>
           </>
         )}
         {harSøkerPermisjoner && valgtArbeidsforhold.brukPermisjon && (
-          <FormattedMessage id="ArbeidsforholdDetail.SokerErIPermisjon" />
+          <Normaltekst>
+            <FormattedMessage id="ArbeidsforholdDetail.SokerErIPermisjon" />
+          </Normaltekst>
         )}
         {erAktivtArbeidsforhold && (
           <>
-            <FormattedMessage id={utledAktivtArbeidsforholdLabel(valgtArbeidsforhold)} />
+            <Normaltekst>
+              <FormattedMessage id={utledAktivtArbeidsforholdLabel(valgtArbeidsforhold)} />
+            </Normaltekst>
+            <VerticalSpacer sixteenPx />
             {valgtArbeidsforhold.fortsettBehandlingUtenInntektsmelding && (
-              <FormattedMessage id="ArbeidsforholdDetail.BenyttAInntektIBeregningsgrunnlag" />
+              <Normaltekst>
+                <FormattedMessage id="ArbeidsforholdDetail.BenyttAInntektIBeregningsgrunnlag" />
+              </Normaltekst>
             )}
             {!valgtArbeidsforhold.fortsettBehandlingUtenInntektsmelding && (
-              <FormattedMessage id="ArbeidsforholdDetail.AvslaYtelseManglendeOpplysninger" />
+              <Normaltekst>
+                <FormattedMessage id="ArbeidsforholdDetail.AvslaYtelseManglendeOpplysninger" />
+              </Normaltekst>
             )}
           </>
         )}
         {erArbeidsforholdFjernet && !erAktivtArbeidsforhold && (
-          <FormattedMessage id="ArbeidsforholdDetail.FjernArbeidsforholdet" />
+          <Normaltekst>
+            <FormattedMessage id="ArbeidsforholdDetail.FjernArbeidsforholdet" />
+          </Normaltekst>
         )}
         <VerticalSpacer sixteenPx />
         <Element><FormattedMessage id="ArbeidsforholdDetail.Begrunnelse" /></Element>

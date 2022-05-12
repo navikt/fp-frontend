@@ -29,10 +29,12 @@ const PermisjonPeriode: FunctionComponent<OwnProps> = ({
         </Normaltekst>
         {arbeidsforhold.permisjoner.map((permisjon, index) => (
           <div key={utledPeriodeLabelKey(arbeidsforhold.id, index)}>
-            <PeriodLabel
-              dateStringFom={permisjon.permisjonFom}
-              dateStringTom={permisjon.permisjonTom ? permisjon.permisjonTom : ''}
-            />
+            <Normaltekst>
+              <PeriodLabel
+                dateStringFom={permisjon.permisjonFom}
+                dateStringTom={permisjon.permisjonTom ? permisjon.permisjonTom : ''}
+              />
+            </Normaltekst>
           </div>
         ))}
         <VerticalSpacer sixteenPx />

@@ -56,9 +56,8 @@ const ArbeidsforholdInfoPanel: FunctionComponent<PureOwnProps> = ({
   const setArbeidsforhold = useCallback((
     _event: React.MouseEvent | React.KeyboardEvent, _id: void, af: Arbeidsforhold,
   ) => {
-    if (af.tilVurdering === true || af.erEndret === true) {
-      setValgtArbeidsforhold(af);
-    }
+    const skalSetteArbeidsforhold = af.tilVurdering === true || af.erEndret === true;
+    setValgtArbeidsforhold(skalSetteArbeidsforhold ? af : undefined);
   }, [setValgtArbeidsforhold]);
 
   const sorterteArbeidsforhold = useMemo(() => arbeidsforhold.slice().sort(getSortArbeidsforholdFn(arbeidsgiverOpplysningerPerId)),
@@ -68,7 +67,7 @@ const ArbeidsforholdInfoPanel: FunctionComponent<PureOwnProps> = ({
     <>
       <Undertittel><FormattedMessage id="ArbeidsforholdInfoPanel.ArbeidsforholdHeader" /></Undertittel>
       <PersonArbeidsforholdTable
-        selectedId={undefined}
+        selectedId={valgtArbeidsforhold?.id}
         alleArbeidsforhold={sorterteArbeidsforhold.filter((a) => !a.erSlettet)}
         selectArbeidsforholdCallback={setArbeidsforhold}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

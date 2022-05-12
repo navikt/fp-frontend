@@ -23,6 +23,8 @@
   "ArbeidsforholdDetail.Begrunnelse": "Begrunn endringene",
   "ArbeidsforholdDetail.SokerErIPermisjon": "Søker er i permisjon. Inntektsmelding er ikke nødvendig.",
 
+  "PersonArbeidsforholdDetailForm.IMIkkeRelevant": "Inntektsmeldingen er ikke relevant, gå videre uten disse opplysningene",
+
   "PermisjonPeriode.Permisjon": "Permisjon",
   "PermisjonPeriode.Permisjoner": "Permisjoner"
 }
