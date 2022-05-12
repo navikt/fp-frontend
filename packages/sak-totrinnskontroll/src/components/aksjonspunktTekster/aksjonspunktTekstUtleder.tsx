@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 
+import { ProsessBeregningsgrunnlagAksjonspunktCode } from '@navikt/ft-prosess-beregningsgrunnlag';
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import behandlingStatusCode from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -240,7 +241,7 @@ const getAksjonspunkttekst = (
   if (aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.VURDER_PERIODER_MED_OPPTJENING) {
     return buildOpptjeningText(aksjonspunkt);
   }
-  if (aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE) {
+  if (aksjonspunkt.aksjonspunktKode === ProsessBeregningsgrunnlagAksjonspunktCode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE) {
     return [buildVarigEndringBeregningText(aksjonspunkt.beregningDto)];
   }
   if (aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.VURDER_FAKTA_FOR_ATFL_SN) {

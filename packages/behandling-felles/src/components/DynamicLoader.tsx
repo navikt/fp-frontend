@@ -20,20 +20,18 @@ const DynamicLoader = <COMPONENT_PROPS, >({
 }: OwnProps & COMPONENT_PROPS) => {
   const { addErrorMessage } = useRestApiErrorDispatcher();
   if (process.env.NODE_ENV !== 'development') {
-    const BeregningFaktaIndex = React.lazy(importPackageComp);
+    const PackageComp = React.lazy(importPackageComp);
     return (
       // @ts-ignore Fiks cannot be used as a JSX component
       <ErrorBoundary errorMessageCallback={addErrorMessage}>
         <Suspense fallback={<LoadingPanel />}>
-          <BeregningFaktaIndex
-            {...props}
-          />
+          <PackageComp {...props} />
         </Suspense>
       </ErrorBoundary>
     );
   }
 
-  const BeregningFaktaIndex = React.lazy(importModuleFederationComp);
+  const ModuleFedComp = React.lazy(importModuleFederationComp);
 
   return (
     // @ts-ignore Fiks cannot be used as a JSX component
@@ -43,21 +41,17 @@ const DynamicLoader = <COMPONENT_PROPS, >({
       }}
       doNotShowErrorMessageWhenScriptLoadError
       fallback={() => {
-        const Test = React.lazy(importPackageComp);
+        const PackageComp = React.lazy(importPackageComp);
         return (
           <Suspense fallback={<LoadingPanel />}>
-            <Test
-              {...props}
-            />
+            <PackageComp {...props} />
           </Suspense>
         );
       }}
     >
       <Suspense fallback={<LoadingPanel />}>
         <Element style={{ color: 'red' }}>Micro frontend</Element>
-        <BeregningFaktaIndex
-          {...props}
-        />
+        <ModuleFedComp {...props} />
       </Suspense>
     </ErrorBoundary>
   );
