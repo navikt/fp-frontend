@@ -28,7 +28,6 @@ type Soknad = Readonly<{
   }
   manglendeVedlegg: ManglendeVedleggSoknad[];
   oppgittRettighet: {
-    omsorgForBarnet: boolean;
     aleneomsorgForBarnet: boolean;
   };
   oppgittFordeling: {

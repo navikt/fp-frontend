@@ -39,7 +39,6 @@ describe('<UttakPanel>', () => {
     },
     manglendeVedlegg: [],
     oppgittRettighet: {
-      omsorgForBarnet: true,
       aleneomsorgForBarnet: false,
     },
     oppgittFordeling: {

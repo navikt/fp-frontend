@@ -1,5 +1,4 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Soknad, Ytelsefordeling } from '@fpsak-frontend/types';
@@ -29,30 +28,12 @@ describe('<OmsorgFaktaForm>', () => {
     erAktivt: false,
   };
 
-  it('skal vise tekst for omsorg', () => {
-    const wrapper = shallowWithIntl(<OmsorgFaktaForm.WrappedComponent
-      readOnly={false}
-      omsorg={false}
-      className="defaultAleneOmsorgFakta"
-      aksjonspunkter={[omsorgAp]}
-      oppgittOmsorgSoknad={false}
-      alleMerknaderFraBeslutter={{}}
-      ytelsefordeling={{} as Ytelsefordeling}
-      soknad={{} as Soknad}
-    />, messages);
-
-    const formattedMessage = wrapper.find(FormattedMessage);
-    expect(formattedMessage).toHaveLength(1);
-    expect(formattedMessage.first().prop('id')).toEqual('OmsorgFaktaForm.OppgittIkkeOmsorg');
-  });
-
   it('skal vise form - med <IkkeOmsorgPeriodeField>', () => {
     const wrapper = shallowWithIntl(<OmsorgFaktaForm.WrappedComponent
       readOnly={false}
       omsorg={false}
       className="defaultAleneOmsorgFakta"
       aksjonspunkter={[omsorgAp]}
-      oppgittOmsorgSoknad={false}
       alleMerknaderFraBeslutter={{}}
       ytelsefordeling={{} as Ytelsefordeling}
       soknad={{} as Soknad}
@@ -79,7 +60,6 @@ describe('<OmsorgFaktaForm>', () => {
       omsorg
       aksjonspunkter={[omsorgAp]}
       className="defaultAleneOmsorgFakta"
-      oppgittOmsorgSoknad
       alleMerknaderFraBeslutter={{}}
       ytelsefordeling={{} as Ytelsefordeling}
       soknad={{} as Soknad}

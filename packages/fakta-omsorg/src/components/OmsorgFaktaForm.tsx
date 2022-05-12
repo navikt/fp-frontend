@@ -46,7 +46,6 @@ interface PureOwnProps {
 
 interface MappedOwnProps {
   omsorgIsEdited?: boolean;
-  oppgittOmsorgSoknad: boolean;
 }
 
 interface StaticFunctions {
@@ -61,7 +60,6 @@ const OmsorgFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps> & Static
   omsorg,
   className,
   omsorgIsEdited,
-  oppgittOmsorgSoknad,
   alleMerknaderFraBeslutter,
 }) => {
   const intl = useIntl();
@@ -75,16 +73,7 @@ const OmsorgFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps> & Static
           merknaderFraBeslutter={alleMerknaderFraBeslutter[MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]}
         >
           <Normaltekst className={styles.paddingBottom}>
-            {oppgittOmsorgSoknad
-              ? <FormattedMessage id="OmsorgFaktaForm.OppgittOmsorg" />
-              : (
-                <FormattedMessage
-                  id="OmsorgFaktaForm.OppgittIkkeOmsorg"
-                  values={{
-                    b: (chunks: any) => <b>{chunks}</b>,
-                  }}
-                />
-              )}
+            <FormattedMessage id="OmsorgFaktaForm.OppgittOmsorg" />
           </Normaltekst>
           <RadioGroupField name="omsorg" readOnly={readOnly} validate={[required]} isEdited={omsorgIsEdited}>
             <RadioOption label={{ id: 'OmsorgFaktaForm.HarOmsorg' }} value />
@@ -226,7 +215,6 @@ OmsorgFaktaForm.validate = (values: FormValues): any => {
 
 const mapStateToProps = (_state: any, ownProps: PureOwnProps): MappedOwnProps => ({
   omsorgIsEdited: !!ownProps.ytelsefordeling.ikkeOmsorgPerioder,
-  oppgittOmsorgSoknad: ownProps.soknad.oppgittRettighet.omsorgForBarnet,
 });
 
 export default connect(mapStateToProps)(OmsorgFaktaForm);
