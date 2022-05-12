@@ -79,13 +79,13 @@ export const test1OverstyrTom = () => (
         mottattDatoInntektsmelding: undefined,
         brukArbeidsforholdet: true,
         brukMedJustertPeriode: true,
+        begrunnelse: 'Dette er en begrunnelse',
       }],
       skalKunneLeggeTilNyeArbeidsforhold: false,
     } as InntektArbeidYtelse}
     aksjonspunkter={[{
       definisjon: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
       status: aksjonspunktStatus.UTFORT,
-      begrunnelse: 'Dette er en begrunnelse',
       kanLoses: true,
       erAktivt: true,
     }]}
@@ -112,13 +112,13 @@ export const test2SokerErIPermisjonTrue = () => (
           permisjonFom: '2020-01-01',
         }],
         brukPermisjon: true,
+        begrunnelse: 'Dette er en begrunnelse',
       }],
       skalKunneLeggeTilNyeArbeidsforhold: false,
     } as InntektArbeidYtelse}
     aksjonspunkter={[{
       definisjon: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
       status: aksjonspunktStatus.UTFORT,
-      begrunnelse: 'Dette er en begrunnelse',
       kanLoses: true,
       erAktivt: true,
     }]}
@@ -146,13 +146,13 @@ export const test3SokerErIPermisjonFalse = () => (
         }],
         brukPermisjon: false,
         fortsettBehandlingUtenInntektsmelding: true,
+        begrunnelse: 'Dette er en begrunnelse',
       }],
       skalKunneLeggeTilNyeArbeidsforhold: false,
     } as InntektArbeidYtelse}
     aksjonspunkter={[{
       definisjon: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
       status: aksjonspunktStatus.UTFORT,
-      begrunnelse: 'Dette er en begrunnelse',
       kanLoses: true,
       erAktivt: true,
     }]}
@@ -177,13 +177,44 @@ export const test4AktivtArbeidsforhold = () => (
         brukArbeidsforholdet: true,
         brukMedJustertPeriode: false,
         fortsettBehandlingUtenInntektsmelding: true,
+        begrunnelse: 'Dette er en begrunnelse',
       }],
       skalKunneLeggeTilNyeArbeidsforhold: false,
     } as InntektArbeidYtelse}
     aksjonspunkter={[{
       definisjon: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
       status: aksjonspunktStatus.UTFORT,
-      begrunnelse: 'Dette er en begrunnelse',
+      kanLoses: true,
+      erAktivt: true,
+    }]}
+    alleKodeverk={alleKodeverk as any}
+    alleMerknaderFraBeslutter={{
+      [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: merknaderFraBeslutter,
+    }}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+    readOnly
+  />
+);
+
+export const test42AktivtArbeidsforhold = () => (
+  <ArbeidsforholdFaktaIndex
+    {...standardFaktaProps}
+    behandling={behandling}
+    inntektArbeidYtelse={{
+      arbeidsforhold: [{
+        ...arbeidsforhold,
+        tilVurdering: true,
+        mottattDatoInntektsmelding: undefined,
+        brukArbeidsforholdet: true,
+        brukMedJustertPeriode: false,
+        fortsettBehandlingUtenInntektsmelding: false,
+        begrunnelse: 'Dette er en begrunnelse',
+      }],
+      skalKunneLeggeTilNyeArbeidsforhold: false,
+    } as InntektArbeidYtelse}
+    aksjonspunkter={[{
+      definisjon: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
+      status: aksjonspunktStatus.UTFORT,
       kanLoses: true,
       erAktivt: true,
     }]}
@@ -206,13 +237,13 @@ export const test5FjernArbeidsforhold = () => (
         tilVurdering: true,
         mottattDatoInntektsmelding: undefined,
         brukArbeidsforholdet: false,
+        begrunnelse: 'Dette er en begrunnelse',
       }],
       skalKunneLeggeTilNyeArbeidsforhold: false,
     } as InntektArbeidYtelse}
     aksjonspunkter={[{
       definisjon: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
       status: aksjonspunktStatus.UTFORT,
-      begrunnelse: 'Dette er en begrunnelse',
       kanLoses: true,
       erAktivt: true,
     }]}

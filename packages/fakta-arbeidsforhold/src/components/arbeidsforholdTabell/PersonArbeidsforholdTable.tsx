@@ -7,8 +7,7 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import erIBrukImageUrl from '@fpsak-frontend/assets/images/stjerne.svg';
-import { ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
-import CustomArbeidsforhold from '../../typer/CustomArbeidsforholdTsType';
+import { ArbeidsgiverOpplysningerPerId, Arbeidsforhold } from '@fpsak-frontend/types';
 
 import IngenArbeidsforholdRegistrert from './IngenArbeidsforholdRegistrert';
 
@@ -25,9 +24,12 @@ const headerColumnContent = [
 
 const getEndCharFromId = (id?: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
-const utledNavn = (arbeidsforhold: CustomArbeidsforhold, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
+const utledNavn = (
+  arbeidsforhold: Arbeidsforhold,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+): string => {
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse];
-  const navn = arbeidsforhold.navn ? arbeidsforhold.navn : arbeidsgiverOpplysninger?.navn;
+  const navn = arbeidsgiverOpplysninger?.navn;
   if (arbeidsforhold.lagtTilAvSaksbehandler) {
     return navn;
   }
@@ -36,18 +38,19 @@ const utledNavn = (arbeidsforhold: CustomArbeidsforhold, arbeidsgiverOpplysninge
     : `${navn}(${arbeidsgiverOpplysninger.identifikator})`;
 };
 
-export const utledNøkkel = (arbeidsforhold: CustomArbeidsforhold, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
+export const utledNøkkel = (arbeidsforhold: Arbeidsforhold, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse];
+  const navn = arbeidsgiverOpplysninger?.navn;
   if (arbeidsforhold.lagtTilAvSaksbehandler) {
-    return arbeidsforhold.navn ? arbeidsforhold.navn : arbeidsgiverOpplysninger?.navn;
+    return navn;
   }
   return `${arbeidsforhold.eksternArbeidsforholdId}${arbeidsforhold.arbeidsforholdId}${arbeidsgiverOpplysninger.identifikator}`;
 };
 
 interface OwnProps {
-  alleArbeidsforhold: CustomArbeidsforhold[];
+  alleArbeidsforhold: Arbeidsforhold[];
   selectedId?: string;
-  selectArbeidsforholdCallback: (event: React.MouseEvent | React.KeyboardEvent, id: void, model: CustomArbeidsforhold) => void;
+  selectArbeidsforholdCallback: (event: React.MouseEvent | React.KeyboardEvent, id: void, model: Arbeidsforhold) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
@@ -57,21 +60,19 @@ const PersonArbeidsforholdTable: FunctionComponent<OwnProps> = ({
   selectArbeidsforholdCallback,
   arbeidsgiverOpplysningerPerId,
 }) => {
-  if (alleArbeidsforhold.length === 0) {
-    return (
-      <IngenArbeidsforholdRegistrert
-        headerColumnContent={headerColumnContent}
-      />
-    );
-  }
   const intl = useIntl();
+
+  if (alleArbeidsforhold.length === 0) {
+    return <IngenArbeidsforholdRegistrert headerColumnContent={headerColumnContent} />;
+  }
+
   return (
     <Table headerColumnContent={headerColumnContent}>
       {alleArbeidsforhold && alleArbeidsforhold.map((a) => {
         const stillingsprosent = a.stillingsprosent !== undefined && a.stillingsprosent !== null ? `${a.stillingsprosent.toFixed(2)} %` : '';
         const navn = utledNavn(a, arbeidsgiverOpplysningerPerId);
         return (
-          <TableRow<void, CustomArbeidsforhold>
+          <TableRow<void, Arbeidsforhold>
             key={utledNøkkel(a, arbeidsgiverOpplysningerPerId)}
             model={a}
             onMouseDown={selectArbeidsforholdCallback}
@@ -91,17 +92,16 @@ const PersonArbeidsforholdTable: FunctionComponent<OwnProps> = ({
               && <Normaltekst><DateLabel dateString={a.mottattDatoInntektsmelding} /></Normaltekst>}
             </TableColumn>
             <TableColumn>
-              { a.brukArbeidsforholdet
-            && (
-            <Image
-              className={styles.image}
-              src={erIBrukImageUrl}
-              alt={intl.formatMessage({ id: 'PersonArbeidsforholdTable.ErIBruk' })}
-              tooltip={<FormattedMessage id="PersonArbeidsforholdTable.ErIBruk" />}
-              tabIndex={0}
-              alignTooltipLeft
-            />
-            )}
+              {a.brukArbeidsforholdet && (
+                <Image
+                  className={styles.image}
+                  src={erIBrukImageUrl}
+                  alt={intl.formatMessage({ id: 'PersonArbeidsforholdTable.ErIBruk' })}
+                  tooltip={<FormattedMessage id="PersonArbeidsforholdTable.ErIBruk" />}
+                  tabIndex={0}
+                  alignTooltipLeft
+                />
+              )}
             </TableColumn>
           </TableRow>
         );
