@@ -18,7 +18,6 @@ const behandling = {
 
 const soknad = {
   oppgittRettighet: {
-    omsorgForBarnet: true,
     aleneomsorgForBarnet: true,
   },
 } as Soknad;
