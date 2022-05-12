@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
+import { FaktaFordelBeregningAksjonspunktCode } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { Aksjonspunkt } from '@fpsak-frontend/types';
@@ -22,7 +23,7 @@ describe('<FordelingFaktaInitPanel>', () => {
     const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any> & FaktaPanelInitProps>(FaktaDefaultInitPanel);
 
     const fordelingAp = [{
-      definisjon: aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG,
+      definisjon: FaktaFordelBeregningAksjonspunktCode.FORDEL_BEREGNINGSGRUNNLAG,
     } as Aksjonspunkt];
     const annetAp = [{
       definisjon: aksjonspunktCodes.ADOPSJONSDOKUMENTAJON,

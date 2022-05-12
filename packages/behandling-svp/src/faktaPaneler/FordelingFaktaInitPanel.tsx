@@ -2,10 +2,10 @@ import React, {
   FunctionComponent,
 } from 'react';
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import FordelBeregningsgrunnlagFaktaIndex from '@fpsak-frontend/fakta-fordel-beregningsgrunnlag';
+import FordelBeregningsgrunnlagFaktaIndex, { FaktaFordelBeregningAksjonspunktCode } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
+import { Beregningsgrunnlag } from '@navikt/ft-types';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@fpsak-frontend/types';
+import { Aksjonspunkt, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -14,7 +14,7 @@ import { requestSvpApi, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
 
 const intl = createIntl(messages);
 
-const AKSJONSPUNKT_KODER = [aksjonspunktCodes.FORDEL_BEREGNINGSGRUNNLAG, aksjonspunktCodes.VURDER_REFUSJON_BERGRUNN];
+const AKSJONSPUNKT_KODER = [FaktaFordelBeregningAksjonspunktCode.FORDEL_BEREGNINGSGRUNNLAG, FaktaFordelBeregningAksjonspunktCode.VURDER_REFUSJON_BERGRUNN];
 
 const ENDEPUNKTER_INIT_DATA = [SvpBehandlingApiKeys.AKSJONSPUNKTER];
 type EndepunktInitData = {
