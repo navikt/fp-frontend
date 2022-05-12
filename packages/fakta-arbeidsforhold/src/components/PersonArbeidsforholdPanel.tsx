@@ -180,30 +180,6 @@ const leggTilValuesForRendering = (
     };
   });
 
-const skalFortsetteBehandling = (values: CustomArbeidsforhold): boolean | undefined => {
-  if (values.mottattDatoInntektsmelding === undefined || values.mottattDatoInntektsmelding === null) {
-    return (values.arbeidsforholdHandlingField === ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD
-      && values.aktivtArbeidsforholdHandlingField !== AktivtArbeidsforholdHandling.AVSLA_YTELSE)
-      || values.arbeidsforholdHandlingField === ArbeidsforholdHandling.OVERSTYR_TOM
-      || values.arbeidsforholdHandlingField === ArbeidsforholdHandling.SOKER_ER_I_PERMISJON;
-  }
-  return undefined;
-};
-
-const erstattArbeidsforhold = (
-  oldState: CustomArbeidsforhold,
-  other: CustomArbeidsforhold[],
-  cleanedValues: CustomArbeidsforhold,
-): CustomArbeidsforhold[] => {
-  if (oldState.erstatterArbeidsforholdId) {
-    return other.map((o) => (o.id === oldState.erstatterArbeidsforholdId ? { ...o, erSlettet: false } : o));
-  }
-  if (cleanedValues.erstatterArbeidsforholdId) {
-    return other.map((o) => (o.id === cleanedValues.erstatterArbeidsforholdId ? { ...o, erSlettet: true } : o));
-  }
-  return other;
-};
-
 interface PureOwnProps {
   readOnly: boolean;
   skalKunneLeggeTilNyeArbeidsforhold: boolean;
@@ -262,10 +238,7 @@ export class PersonArbeidsforholdPanelImpl extends Component<Props, OwnState> {
       selectedArbeidsforhold: undefined,
     };
     this.setSelectedArbeidsforhold = this.setSelectedArbeidsforhold.bind(this);
-    this.updateArbeidsforhold = this.updateArbeidsforhold.bind(this);
-    this.cancelArbeidsforhold = this.cancelArbeidsforhold.bind(this);
     this.initializeActivityForm = this.initializeActivityForm.bind(this);
-    this.leggTilArbeidsforhold = this.leggTilArbeidsforhold.bind(this);
   }
 
   // eslint-disable-next-line camelcase
@@ -280,11 +253,6 @@ export class PersonArbeidsforholdPanelImpl extends Component<Props, OwnState> {
     this.initializeActivityForm(selectedArbeidsforhold);
   }
 
-  setFormField(fieldName: string, fieldValue: any): void {
-    const { reduxFormChange: formChange } = this.props;
-    formChange('ArbeidsforholdInfoPanel', fieldName, fieldValue);
-  }
-
   initializeActivityForm(arbeidsforhold: CustomArbeidsforhold): void {
     const { selectedArbeidsforhold } = this.state;
     if (selectedArbeidsforhold !== arbeidsforhold) {
@@ -293,98 +261,9 @@ export class PersonArbeidsforholdPanelImpl extends Component<Props, OwnState> {
     }
   }
 
-  updateArbeidsforhold(values: CustomArbeidsforhold): void {
-    const { selectedArbeidsforhold } = this.state;
-    const { arbeidsforhold } = this.props;
-
-    const brukMedJustertPeriode = values.arbeidsforholdHandlingField === ArbeidsforholdHandling.OVERSTYR_TOM;
-
-    const brukArbeidsforholdet = values.arbeidsforholdHandlingField !== ArbeidsforholdHandling.FJERN_ARBEIDSFORHOLD;
-
-    const fortsettBehandlingUtenInntektsmelding = skalFortsetteBehandling(values);
-
-    const brukPermisjon = values.permisjoner && values.permisjoner.length > 0
-      ? values.arbeidsforholdHandlingField === ArbeidsforholdHandling.SOKER_ER_I_PERMISJON
-      : undefined;
-
-    const inntektMedTilBeregningsgrunnlag = values.aktivtArbeidsforholdHandlingField === AktivtArbeidsforholdHandling.INNTEKT_IKKE_MED_I_BG
-      ? false
-      : undefined;
-
-    const newValues = {
-      ...values,
-      brukMedJustertPeriode,
-      brukArbeidsforholdet,
-      fortsettBehandlingUtenInntektsmelding,
-      inntektMedTilBeregningsgrunnlag,
-      brukPermisjon,
-      basertPaInntektsmelding: !!selectedArbeidsforhold.kanOppretteNyttArbforFraIM,
-    };
-
-    const cleanedValues = cleanUpArbeidsforhold(newValues, selectedArbeidsforhold);
-
-    let other = arbeidsforhold.filter((o) => o.id !== cleanedValues.id);
-    const oldState = arbeidsforhold.find((a) => a.id === cleanedValues.id);
-    let { fomDato } = cleanedValues;
-    if (oldState !== undefined && oldState !== null && cleanedValues.erstatterArbeidsforholdId !== oldState.erstatterArbeidsforholdId) {
-      other = erstattArbeidsforhold(oldState, other, cleanedValues);
-      fomDato = findFomDato(cleanedValues, arbeidsforhold.find((a) => a.id === cleanedValues.erstatterArbeidsforholdId));
-    }
-
-    this.setFormField('arbeidsforhold', other.concat({
-      ...cleanedValues,
-      fomDato,
-      erEndret: true,
-    }));
-
-    const unresolvedArbeidsforhold = getUnresolvedArbeidsforhold(removeDeleted(other));
-    this.setSelectedArbeidsforhold(undefined, undefined, unresolvedArbeidsforhold);
-  }
-
-  cancelArbeidsforhold(): void {
-    this.setState({ selectedArbeidsforhold: undefined });
-    this.initializeActivityForm({} as CustomArbeidsforhold);
-  }
-
-  leggTilArbeidsforhold(): void {
-    const lagtTilArbeidsforhold = {
-      id: `${(new Date()).getTime()}_${Math.floor(Math.random() * 1000000000)}`,
-      navn: undefined,
-      arbeidsgiverReferanse: undefined,
-      arbeidsforholdId: undefined,
-      fomDato: undefined,
-      tomDato: undefined,
-      kilde: {
-        navn: ArbeidsforholdKilder.SAKSBEHANDLER,
-      },
-      mottattDatoInntektsmelding: undefined,
-      begrunnelse: undefined,
-      stillingsprosent: undefined,
-      brukArbeidsforholdet: true,
-      fortsettBehandlingUtenInntektsmelding: undefined,
-      erNyttArbeidsforhold: undefined,
-      erSlettet: undefined,
-      erstatterArbeidsforholdId: undefined,
-      harErsattetEttEllerFlere: undefined,
-      ikkeRegistrertIAaRegister: undefined,
-      tilVurdering: true,
-      vurderOmSkalErstattes: undefined,
-      erEndret: undefined,
-      overstyrtTom: undefined,
-      brukMedJustertPeriode: false,
-      lagtTilAvSaksbehandler: true,
-      inntektMedTilBeregningsgrunnlag: true,
-      arbeidsforholdHandlingField: ArbeidsforholdHandling.AKTIVT_ARBEIDSFORHOLD,
-      aktivtArbeidsforholdHandlingField: AktivtArbeidsforholdHandling.BENYTT_A_INNTEKT_I_BG,
-    };
-    this.setState({ selectedArbeidsforhold: lagtTilArbeidsforhold });
-    this.initializeActivityForm(lagtTilArbeidsforhold);
-  }
-
   render() {
     const {
       readOnly,
-      arbeidsforhold,
       aktivtArbeidsforholdTillatUtenIM,
       skalKunneLeggeTilNyeArbeidsforhold,
       alleMerknaderFraBeslutter,
@@ -403,22 +282,6 @@ export class PersonArbeidsforholdPanelImpl extends Component<Props, OwnState> {
           title={intl.formatMessage({ id: 'PersonArbeidsforholdPanel.ArbeidsforholdHeader' })}
           merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]}
         >
-          <PersonArbeidsforholdTable
-            selectedId={selectedArbeidsforhold ? selectedArbeidsforhold.id : undefined}
-            alleArbeidsforhold={removeDeleted(arbeidsforhold)}
-            selectArbeidsforholdCallback={this.setSelectedArbeidsforhold}
-            arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          />
-          { !readOnly && skalKunneLeggeTilNyeArbeidsforhold && selectedArbeidsforhold === undefined && arbeidsforhold.length === 0 && (
-            <button
-              type="button"
-              className={styles.leggTilArbeidsforholdButton}
-              onClick={this.leggTilArbeidsforhold}
-              disabled={readOnly}
-            >
-              <FormattedMessage id="PersonArbeidsforholdTable.LeggTilArbeidsforhold" />
-            </button>
-          )}
           { hasArbeidsforholdAksjonspunkt(selectedArbeidsforhold) && (
             /* @ts-ignore Fiks cannot be used as a JSX component */
             <PersonArbeidsforholdDetailForm

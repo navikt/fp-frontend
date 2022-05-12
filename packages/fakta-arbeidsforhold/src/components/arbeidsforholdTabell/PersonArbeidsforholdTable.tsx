@@ -77,7 +77,6 @@ const PersonArbeidsforholdTable: FunctionComponent<OwnProps> = ({
             onMouseDown={selectArbeidsforholdCallback}
             onKeyDown={selectArbeidsforholdCallback}
             isSelected={a.id === selectedId}
-            isApLeftBorder={a.tilVurdering}
           >
             <TableColumn><Normaltekst>{decodeHtmlEntity(navn)}</Normaltekst></TableColumn>
             <TableColumn>

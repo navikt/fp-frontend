@@ -11,7 +11,6 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { ArbeidsgiverOpplysningerPerId, AlleKodeverk } from '@fpsak-frontend/types';
 
-import PersonAksjonspunktText from './PersonAksjonspunktText';
 import PersonNyttEllerErstattArbeidsforholdPanel from './PersonNyttEllerErstattArbeidsforholdPanel';
 import LeggTilArbeidsforholdFelter from './LeggTilArbeidsforholdFelter';
 import ArbeidsforholdRadioknapper from './ArbeidsforholdRadioknapper';
@@ -69,7 +68,6 @@ type Props = PureOwnProps & MappedOwnProps & InjectedFormProps;
 // Component: PersonArbeidsforholdDetailForm
 // ----------------------------------------------------------------------------------
 export const PersonArbeidsforholdDetailForm: FunctionComponent<Props> = ({
-  cancelArbeidsforhold,
   isErstattArbeidsforhold,
   hasReceivedInntektsmelding,
   harErstattetEttEllerFlere,
@@ -79,14 +77,12 @@ export const PersonArbeidsforholdDetailForm: FunctionComponent<Props> = ({
   arbeidsforhold,
   arbeidsforholdHandlingVerdi,
   skalKunneLeggeTilNyeArbeidsforhold,
-  alleKodeverk,
   arbeidsgiverOpplysningerPerId,
   ...formProps
 }) => (
   <>
     <Element><FormattedMessage id="PersonArbeidsforholdDetailForm.Header" /></Element>
     <PermisjonPeriode arbeidsforhold={arbeidsforhold} />
-    <PersonAksjonspunktText arbeidsforhold={arbeidsforhold} alleKodeverk={alleKodeverk} />
     <VerticalSpacer eightPx />
     { skalKunneLeggeTilNyeArbeidsforhold && (
       <LeggTilArbeidsforholdFelter
@@ -117,23 +113,6 @@ export const PersonArbeidsforholdDetailForm: FunctionComponent<Props> = ({
           readOnly={readOnly}
           formName={PERSON_ARBEIDSFORHOLD_DETAIL_FORM}
         />
-        <VerticalSpacer sixteenPx />
-        { (formProps.initialValues.tilVurdering || formProps.initialValues.erEndret) && (
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <Hovedknapp mini spinner={false} onClick={formProps.handleSubmit} disabled={formProps.pristine || readOnly}>
-                  <FormattedMessage id="PersonArbeidsforholdDetailForm.Oppdater" />
-                </Hovedknapp>
-              </FlexColumn>
-              <FlexColumn>
-                <Knapp mini htmlType="button" onClick={cancelArbeidsforhold} disabled={readOnly}>
-                  <FormattedMessage id="PersonArbeidsforholdDetailForm.Avbryt" />
-                </Knapp>
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
-        )}
       </Column>
       <Column xs="6">
         { showNyttOrErstattPanel(arbeidsforholdHandlingVerdi, vurderOmSkalErstattes, harErstattetEttEllerFlere) && (

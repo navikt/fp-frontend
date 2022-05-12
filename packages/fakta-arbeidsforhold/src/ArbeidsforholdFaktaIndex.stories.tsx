@@ -68,6 +68,163 @@ export default {
   component: ArbeidsforholdFaktaIndex,
 };
 
+export const test1OverstyrTom = () => (
+  <ArbeidsforholdFaktaIndex
+    {...standardFaktaProps}
+    behandling={behandling}
+    inntektArbeidYtelse={{
+      arbeidsforhold: [{
+        ...arbeidsforhold,
+        tilVurdering: true,
+        mottattDatoInntektsmelding: undefined,
+        brukArbeidsforholdet: true,
+        brukMedJustertPeriode: true,
+      }],
+      skalKunneLeggeTilNyeArbeidsforhold: false,
+    } as InntektArbeidYtelse}
+    aksjonspunkter={[{
+      definisjon: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
+      status: aksjonspunktStatus.UTFORT,
+      begrunnelse: 'Dette er en begrunnelse',
+      kanLoses: true,
+      erAktivt: true,
+    }]}
+    alleKodeverk={alleKodeverk as any}
+    alleMerknaderFraBeslutter={{
+      [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: merknaderFraBeslutter,
+    }}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+    readOnly
+  />
+);
+
+export const test2SokerErIPermisjonTrue = () => (
+  <ArbeidsforholdFaktaIndex
+    {...standardFaktaProps}
+    behandling={behandling}
+    inntektArbeidYtelse={{
+      arbeidsforhold: [{
+        ...arbeidsforhold,
+        tilVurdering: true,
+        mottattDatoInntektsmelding: undefined,
+        brukArbeidsforholdet: true,
+        permisjoner: [{
+          permisjonFom: '2020-01-01',
+        }],
+        brukPermisjon: true,
+      }],
+      skalKunneLeggeTilNyeArbeidsforhold: false,
+    } as InntektArbeidYtelse}
+    aksjonspunkter={[{
+      definisjon: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
+      status: aksjonspunktStatus.UTFORT,
+      begrunnelse: 'Dette er en begrunnelse',
+      kanLoses: true,
+      erAktivt: true,
+    }]}
+    alleKodeverk={alleKodeverk as any}
+    alleMerknaderFraBeslutter={{
+      [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: merknaderFraBeslutter,
+    }}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+    readOnly
+  />
+);
+
+export const test3SokerErIPermisjonFalse = () => (
+  <ArbeidsforholdFaktaIndex
+    {...standardFaktaProps}
+    behandling={behandling}
+    inntektArbeidYtelse={{
+      arbeidsforhold: [{
+        ...arbeidsforhold,
+        tilVurdering: true,
+        mottattDatoInntektsmelding: undefined,
+        brukArbeidsforholdet: true,
+        permisjoner: [{
+          permisjonFom: '2020-01-01',
+        }],
+        brukPermisjon: false,
+        fortsettBehandlingUtenInntektsmelding: true,
+      }],
+      skalKunneLeggeTilNyeArbeidsforhold: false,
+    } as InntektArbeidYtelse}
+    aksjonspunkter={[{
+      definisjon: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
+      status: aksjonspunktStatus.UTFORT,
+      begrunnelse: 'Dette er en begrunnelse',
+      kanLoses: true,
+      erAktivt: true,
+    }]}
+    alleKodeverk={alleKodeverk as any}
+    alleMerknaderFraBeslutter={{
+      [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: merknaderFraBeslutter,
+    }}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+    readOnly
+  />
+);
+
+export const test4AktivtArbeidsforhold = () => (
+  <ArbeidsforholdFaktaIndex
+    {...standardFaktaProps}
+    behandling={behandling}
+    inntektArbeidYtelse={{
+      arbeidsforhold: [{
+        ...arbeidsforhold,
+        tilVurdering: true,
+        mottattDatoInntektsmelding: undefined,
+        brukArbeidsforholdet: true,
+        brukMedJustertPeriode: false,
+        fortsettBehandlingUtenInntektsmelding: true,
+      }],
+      skalKunneLeggeTilNyeArbeidsforhold: false,
+    } as InntektArbeidYtelse}
+    aksjonspunkter={[{
+      definisjon: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
+      status: aksjonspunktStatus.UTFORT,
+      begrunnelse: 'Dette er en begrunnelse',
+      kanLoses: true,
+      erAktivt: true,
+    }]}
+    alleKodeverk={alleKodeverk as any}
+    alleMerknaderFraBeslutter={{
+      [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: merknaderFraBeslutter,
+    }}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+    readOnly
+  />
+);
+
+export const test5FjernArbeidsforhold = () => (
+  <ArbeidsforholdFaktaIndex
+    {...standardFaktaProps}
+    behandling={behandling}
+    inntektArbeidYtelse={{
+      arbeidsforhold: [{
+        ...arbeidsforhold,
+        tilVurdering: true,
+        mottattDatoInntektsmelding: undefined,
+        brukArbeidsforholdet: false,
+      }],
+      skalKunneLeggeTilNyeArbeidsforhold: false,
+    } as InntektArbeidYtelse}
+    aksjonspunkter={[{
+      definisjon: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
+      status: aksjonspunktStatus.UTFORT,
+      begrunnelse: 'Dette er en begrunnelse',
+      kanLoses: true,
+      erAktivt: true,
+    }]}
+    alleKodeverk={alleKodeverk as any}
+    alleMerknaderFraBeslutter={{
+      [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: merknaderFraBeslutter,
+    }}
+    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+    readOnly
+  />
+);
+
 export const visAksjonspunktForAvklaringAvArbeidsforhold = () => (
   <ArbeidsforholdFaktaIndex
     {...standardFaktaProps}
