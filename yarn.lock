@@ -1663,9 +1663,9 @@
   integrity sha512-GryiOJmNcWbovBxTfZSF71V/mXbgcV3MewDe3kIMCLyIh5e7SKAeUZs+rMnJ8jkMolZ/4/VsdBmMrw3l+VdZ3w==
 
 "@jridgewell/trace-mapping@^0.3.7", "@jridgewell/trace-mapping@^0.3.9":
-  version "0.3.10"
-  resolved "https://registry.yarnpkg.com/@jridgewell/trace-mapping/-/trace-mapping-0.3.10.tgz#db436f0917d655393851bc258918c00226c9b183"
-  integrity sha512-Q0YbBd6OTsXm8Y21+YUSDXupHnodNC2M4O18jtd3iwJ3+vMZNdKGols0a9G6JOK0dcJ3IdUUHoh908ZI6qhk8Q==
+  version "0.3.13"
+  resolved "https://registry.yarnpkg.com/@jridgewell/trace-mapping/-/trace-mapping-0.3.13.tgz#dcfe3e95f224c8fe97a87a5235defec999aa92ea"
+  integrity sha512-o1xbKhp9qnIAoHJSWd6KlCZfqslL4valSF81H8ImioOAxluWYWOpWkpyktY2vnt4tbrX9XYaxovq6cgowaJp2w==
   dependencies:
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
@@ -2524,6 +2524,29 @@
     react-hook-form "7.30.0"
     react-intl "5.24.8"
 
+"@navikt/ft-fakta-tilbakekreving-feilutbetaling@^1.0.6":
+  version "1.0.6"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-fakta-tilbakekreving-feilutbetaling/1.0.6/d68ca9fbc80d822a807fba68ceba2613386213f6afbef5b99a677aa18e6a17b8#8894a24060035be48848b0f677c5486b9d062863"
+  integrity sha512-pNax406qrTEkXkojg4YZkmaEOf/XG+nXAtmPYWTvUucn8+jxbHYACmiZCgpcI64J9OPyTsiRNfKDNlugEeTTZw==
+  dependencies:
+    "@navikt/ft-form-hooks" "^1.0.14"
+    "@navikt/ft-form-validators" "^1.0.6"
+    "@navikt/ft-kodeverk" "^1.0.4"
+    "@navikt/ft-types" "^1.0.7"
+    "@navikt/ft-ui-komponenter" "^1.0.13"
+    "@navikt/ft-utils" "^1.0.11"
+    moment "2.29.3"
+    nav-frontend-core "6.0.1"
+    nav-frontend-grid "2.0.1"
+    nav-frontend-grid-style "1.0.2"
+    nav-frontend-knapper "3.1.2"
+    nav-frontend-knapper-style "2.1.1"
+    nav-frontend-typografi "4.0.1"
+    nav-frontend-typografi-style "2.0.1"
+    react "17.0.2"
+    react-hook-form "7.30.0"
+    react-intl "5.24.8"
+
 "@navikt/ft-form-hooks@1.0.14", "@navikt/ft-form-hooks@^1.0.14":
   version "1.0.14"
   resolved "https://npm.pkg.github.com/download/@navikt/ft-form-hooks/1.0.14/1bf15514dce4b0fc2ac3dba79047a76c6d23a23efb44ef2063dfbec4bf457ff7#775037e34bb1cb4069c5bfdadd52c73c924b1afa"
@@ -2567,15 +2590,15 @@
   resolved "https://npm.pkg.github.com/download/@navikt/ft-kodeverk/1.0.4/b60068c6f926d988459e2304f51e8ffb126b02e6ee5d7eede98e9542f26b3c51#2d55405699eb097dd06300609f68b6ab072f0bbd"
   integrity sha512-hAKFege7nvzDUBDioxXbXZcxf8YxGQU5AViStKEbvBegMDW/7MZAxbrAf+F5TfBJXj8s5XAhciSyT76FNBpi/A==
 
-"@navikt/ft-plattform-komponenter@1.0.7":
-  version "1.0.7"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-plattform-komponenter/1.0.7/37b83b29e4f527072afe9cb2b423a6ffb4c7f3fe37d81db4d800457b68f3a4be#f696a0781c8ad654db73acc5cd4b39a4117c084f"
-  integrity sha512-FiKk1UkWfheYNBUGyCz9Vm3cGWrsexMTp+oQI7RGOOv/NGPRj79vT/4IPnI4GqbKeDA/GLsWtBImKcwBvXK11A==
+"@navikt/ft-plattform-komponenter@1.0.10":
+  version "1.0.10"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-plattform-komponenter/1.0.10/dba254278c7be331df186a75305eb07b5f5bc92542d768da5edd5a4a3c317de6#b56feed7156c1cba9e78ab54dff784d4c1539c2e"
+  integrity sha512-g6lc6NLu6DUHCQm1TY9L7ETYXXyxtTBmqgIjxvGcfHjnLEBq9rwMFTrpepDUarcFUCTUxCttgRvlwqTe15OJGg==
   dependencies:
     "@navikt/ds-css" "^0.17.1"
     "@navikt/ds-icons" "^0.8.12"
     "@navikt/ds-react" "^0.18.6"
-    "@navikt/ft-utils" "^1.0.8"
+    "@navikt/ft-utils" "^1.0.11"
 
 "@navikt/ft-prosess-beregningsgrunnlag@1.0.13":
   version "1.0.13"
@@ -2614,6 +2637,108 @@
     react-collapse "5.1.1"
     react-hook-form "7.30.0"
     react-intl "5.24.8"
+
+"@navikt/ft-prosess-tilbakekreving-foreldelse@^1.0.6":
+  version "1.0.6"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-tilbakekreving-foreldelse/1.0.6/cd8d82e6b0aacbb9b4d47e005b948ae354ad3b8b5426756693b5de05de8f3cfa#721a978b6b72846c043559300b722ddbebdc727f"
+  integrity sha512-a+Q1Dr5dGWRkJtnVIRLFa1BDmzkXS6MKKN64HzCMLcq6WECerhI0pmWGZxvTFbSoVeam5eLa0bJr4tMTNN1Lfw==
+  dependencies:
+    "@navikt/ft-form-hooks" "^1.0.14"
+    "@navikt/ft-form-validators" "^1.0.6"
+    "@navikt/ft-kodeverk" "^1.0.4"
+    "@navikt/ft-tidslinje" "^1.0.6"
+    "@navikt/ft-types" "^1.0.7"
+    "@navikt/ft-ui-komponenter" "^1.0.13"
+    "@navikt/ft-utils" "^1.0.11"
+    moment "2.29.3"
+    nav-frontend-alertstriper "4.0.1"
+    nav-frontend-alertstriper-style "3.0.1"
+    nav-frontend-core "6.0.1"
+    nav-frontend-grid "2.0.1"
+    nav-frontend-grid-style "1.0.2"
+    nav-frontend-js-utils "1.0.20"
+    nav-frontend-knapper "3.1.2"
+    nav-frontend-knapper-style "2.1.1"
+    nav-frontend-modal "2.0.1"
+    nav-frontend-modal-style "2.0.1"
+    nav-frontend-typografi "4.0.1"
+    nav-frontend-typografi-style "2.0.1"
+    react "17.0.2"
+    react-hook-form "7.30.0"
+    react-intl "5.24.8"
+
+"@navikt/ft-prosess-tilbakekreving-vedtak@^1.0.6":
+  version "1.0.6"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-tilbakekreving-vedtak/1.0.6/c2f2e8d036b64ebaf1dbb43c5cce05ec3849dcaccb343f4a06c66eb78be8fc54#cb56073253391e7cb7733857c0dd0ccd279bc048"
+  integrity sha512-KVDaSKqTIvYSjCrjMQTCxmR6w8WfNi6YbNUAQFTtCgHtRLIQAHT9PdE0jY+MyzGMVBWVwUcXDLkklm+5rzRAGw==
+  dependencies:
+    "@navikt/ft-form-hooks" "^1.0.14"
+    "@navikt/ft-form-validators" "^1.0.6"
+    "@navikt/ft-kodeverk" "^1.0.4"
+    "@navikt/ft-types" "^1.0.7"
+    "@navikt/ft-ui-komponenter" "^1.0.13"
+    "@navikt/ft-utils" "^1.0.11"
+    classnames "2.3.1"
+    nav-frontend-core "6.0.1"
+    nav-frontend-ekspanderbartpanel "4.0.3"
+    nav-frontend-ekspanderbartpanel-style "2.0.1"
+    nav-frontend-js-utils "1.0.20"
+    nav-frontend-knapper "3.1.2"
+    nav-frontend-knapper-style "2.1.1"
+    nav-frontend-typografi "4.0.1"
+    nav-frontend-typografi-style "2.0.1"
+    react "17.0.2"
+    react-hook-form "7.30.0"
+    react-intl "5.24.8"
+
+"@navikt/ft-prosess-tilbakekreving@^1.0.6":
+  version "1.0.6"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-tilbakekreving/1.0.6/4857c288ad7d83968bd37f47f6ec3cbb56e26e8c3d89f630994dfa004134b70b#7c693f7c4bacd5f729c73a00582ed87bafa08b12"
+  integrity sha512-joMxbccSIstCIG54M+lbi78cL3g6j9h5d+5MOGP/FkUj/+V4h7Ku+UwP//BqaZiPzG4fIVAkLA1ZzQaOz2kSBA==
+  dependencies:
+    "@navikt/ft-form-hooks" "^1.0.14"
+    "@navikt/ft-form-validators" "^1.0.6"
+    "@navikt/ft-kodeverk" "^1.0.4"
+    "@navikt/ft-tidslinje" "^1.0.6"
+    "@navikt/ft-types" "^1.0.7"
+    "@navikt/ft-ui-komponenter" "^1.0.13"
+    "@navikt/ft-utils" "^1.0.11"
+    moment "2.29.3"
+    nav-frontend-alertstriper "4.0.1"
+    nav-frontend-alertstriper-style "3.0.1"
+    nav-frontend-core "6.0.1"
+    nav-frontend-grid "2.0.1"
+    nav-frontend-grid-style "1.0.2"
+    nav-frontend-js-utils "1.0.20"
+    nav-frontend-knapper "3.1.2"
+    nav-frontend-knapper-style "2.1.1"
+    nav-frontend-modal "2.0.1"
+    nav-frontend-modal-style "2.0.1"
+    nav-frontend-typografi "4.0.1"
+    nav-frontend-typografi-style "2.0.1"
+    react "17.0.2"
+    react-hook-form "7.30.0"
+    react-intl "5.24.8"
+
+"@navikt/ft-tidslinje@1.0.6", "@navikt/ft-tidslinje@^1.0.6":
+  version "1.0.6"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-tidslinje/1.0.6/2b3b47bf715c75e99a5d05a24a7d43c1fb33a6166378f35dd7873d6091f141d2#a86e1dda6feb9b1a87a877f0b95de8260e0edf2c"
+  integrity sha512-F7XTYDURlgsyBBwG/ZgN1ZaJa0Q8/2Tu1MB+6RX0UYP9gcB661y9S9797iLq0j5qtgMFOyafePHYiS6ZAAugkA==
+  dependencies:
+    "@navikt/ft-kodeverk" "^1.0.4"
+    "@navikt/ft-types" "^1.0.7"
+    "@navikt/ft-ui-komponenter" "^1.0.13"
+    "@navikt/ft-utils" "^1.0.11"
+    moment "2.29.3"
+    nav-frontend-core "6.0.1"
+    nav-frontend-grid "2.0.1"
+    nav-frontend-grid-style "1.0.2"
+    nav-frontend-ikoner-assets "3.0.1"
+    nav-frontend-js-utils "1.0.20"
+    react "17.0.2"
+    react-intl "5.24.8"
+    vis-data "7.1.4"
+    vis-timeline "7.5.1"
 
 "@navikt/ft-types@^1.0.7":
   version "1.0.7"
@@ -2661,17 +2786,6 @@
   version "1.0.11"
   resolved "https://npm.pkg.github.com/download/@navikt/ft-utils/1.0.11/b71f55d77b7c43ea19c6acb7a4fa3ade2632bba14e5660ebf2a6ec518fcb8b4b#ec92a1ed65b1c7807d8e29ce2dcf4f497316b795"
   integrity sha512-Yh64k1JEVQKEyNn06WgkFtBcVCro1mpeIU8DFtELH1DmE5BdvrL9EWdVD44X+6E0lCVMmvv/M01HMtUYZWX3Bw==
-  dependencies:
-    "@navikt/ft-kodeverk" "^1.0.4"
-    "@navikt/ft-types" "^1.0.7"
-    dayjs "1.11.2"
-    moment "2.29.3"
-    react-intl "5.24.8"
-
-"@navikt/ft-utils@^1.0.8":
-  version "1.0.8"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-utils/1.0.8/fba37e84e49e9faca40d6ff2c3751becd4084a493e8af21f9b0758d490ee5fcb#6ad5531f0dde631e936cb6dc15bd7f4d1adf4b84"
-  integrity sha512-fUhUHmywLyU04Bei0OnnIVJTRpIOAAefwLVGaHSeB3HY9Wgvv6ve2Y+NUJWfR7cV1ReG8+vN6f8P5rzH1lapxA==
   dependencies:
     "@navikt/ft-kodeverk" "^1.0.4"
     "@navikt/ft-types" "^1.0.7"
@@ -2877,9 +2991,9 @@
     "@octokit/openapi-types" "^11.2.0"
 
 "@pmmmwh/react-refresh-webpack-plugin@^0.5.1":
-  version "0.5.5"
-  resolved "https://registry.yarnpkg.com/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.5.5.tgz#e77aac783bd079f548daa0a7f080ab5b5a9741ca"
-  integrity sha512-RbG7h6TuP6nFFYKJwbcToA1rjC1FyPg25NR2noAZ0vKI+la01KTSRPkuVPE+U88jXv7javx2JHglUcL1MHcshQ==
+  version "0.5.6"
+  resolved "https://registry.yarnpkg.com/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.5.6.tgz#9ced74cb23dae31ab385f775e237ce4c50422a1d"
+  integrity sha512-IIWxofIYt/AbMwoeBgj+O2aAXLrlCQVg+A4a2zfpXFNHgP8o8rvi3v+oe5t787Lj+KXlKOh8BAiUp9bhuELXhg==
   dependencies:
     ansi-html-community "^0.0.8"
     common-path-prefix "^3.0.0"
@@ -4399,7 +4513,15 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@*", "@types/jest@27.5.0":
+"@types/jest@*":
+  version "27.5.1"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-27.5.1.tgz#2c8b6dc6ff85c33bcd07d0b62cb3d19ddfdb3ab9"
+  integrity sha512-fUy7YRpT+rHXto1YlL+J9rs0uLGyiqVt3ZOTQR+4ROc47yNl8WLdVLgUloBRhOxP1PZvguHl44T3H0wAWxahYQ==
+  dependencies:
+    jest-matcher-utils "^27.0.0"
+    pretty-format "^27.0.0"
+
+"@types/jest@27.5.0":
   version "27.5.0"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-27.5.0.tgz#e04ed1824ca6b1dd0438997ba60f99a7405d4c7b"
   integrity sha512-9RBFx7r4k+msyj/arpfaa0WOOEcaAZNmN+j80KFbFCoSqCJGHTz7YMAMGQW9Xmqm5w6l5c25vbSjMwlikJi5+g==
@@ -4453,14 +4575,14 @@
     form-data "^3.0.0"
 
 "@types/node@*":
-  version "17.0.31"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.31.tgz#a5bb84ecfa27eec5e1c802c6bbf8139bdb163a5d"
-  integrity sha512-AR0x5HbXGqkEx9CadRH3EBYx/VkiUgZIhP4wvPn/+5KIsgpNoyFaRlVe0Zlx9gRtg8fA06a9tskE2MSN7TcG4Q==
+  version "17.0.32"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.32.tgz#51d59d7a90ef2d0ae961791e0900cad2393a0149"
+  integrity sha512-eAIcfAvhf/BkHcf4pkLJ7ECpBAhh9kcxRBpip9cTiO+hf+aJrsxYxBeS6OXvOd9WqNAJmavXVpZvY1rBjNsXmw==
 
 "@types/node@^14.0.10":
-  version "14.18.16"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.18.16.tgz#878f670ba3f00482bf859b6550b6010610fc54b5"
-  integrity sha512-X3bUMdK/VmvrWdoTkz+VCn6nwKwrKCFTHtqwBIaQJNx4RUIBBUFXM00bqPz/DsDd+Icjmzm6/tyYZzeGVqb6/Q==
+  version "14.18.17"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.18.17.tgz#37d3c01043fd09f3f17ffa8c17062bbb580f9558"
+  integrity sha512-oajWz4kOajqpKJMPgnCvBajPq8QAvl2xIWoFjlAJPKGu6n7pjov5SxGE45a+0RxHDoo4ycOMoZw1SCOWtDERbw==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.1"
@@ -6423,9 +6545,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001332:
-  version "1.0.30001339"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001339.tgz#f9aece4ea8156071613b27791547ba0b33f176cf"
-  integrity sha512-Es8PiVqCe+uXdms0Gu5xP5PF2bxLR7OBp3wUzUnuO7OHzhOfCyg3hdiGWVPVxhiuniOzng+hTc1u3fEQ0TlkSQ==
+  version "1.0.30001340"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001340.tgz#029a2f8bfc025d4820fafbfaa6259fd7778340c7"
+  integrity sha512-jUNz+a9blQTQVu4uFcn17uAD8IDizPzQkIKh3LCJfg9BkyIqExYYdyc/ZSlWUSKb8iYiXxKsxbv4zYSvkqjrxw==
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -6583,9 +6705,9 @@ ci-info@^2.0.0:
   integrity sha512-5tK7EtrZ0N+OLFMthtqOj4fI2Jeb88C4CAZPu25LDVUgXJ0A3Js4PMGqrn0JU1W0Mh1/Z8wZzYPxqUrXeBboCQ==
 
 ci-info@^3.2.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/ci-info/-/ci-info-3.3.0.tgz#b4ed1fb6818dea4803a55c623041f9165d2066b2"
-  integrity sha512-riT/3vI5YpVH6/qomlDnJow6TBee2PBKSEpx3O32EGPYbWGIRsIlGRms3Sm74wYE1JMo8RnO04Hb12+v1J5ICw==
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/ci-info/-/ci-info-3.3.1.tgz#58331f6f472a25fe3a50a351ae3052936c2c7f32"
+  integrity sha512-SXgeMX9VwDe7iFFaEWkA5AstuER9YKqy4EhHqr4DVqkwmD9rpVimkMKWHdjn30Ja45txyjhSn63lVX69eVCckg==
 
 cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
   version "1.0.4"
@@ -7123,7 +7245,7 @@ core-js@3.22.4:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.22.4.tgz#f4b3f108d45736935aa028444a69397e40d8c531"
   integrity sha512-1uLykR+iOfYja+6Jn/57743gc9n73EWiOnSJJ4ba3B4fOEYDBv25MagmEZBxTp5cWq4b/KPx/l77zgsp28ju4w==
 
-core-js@^3.0.4, core-js@^3.6.5, core-js@^3.8.2:
+core-js@3.22.5, core-js@^3.0.4, core-js@^3.6.5, core-js@^3.8.2:
   version "3.22.5"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.22.5.tgz#a5f5a58e663d5c0ebb4e680cd7be37536fb2a9cf"
   integrity sha512-VP/xYuvJ0MJWRAobcmQ8F2H6Bsn+s7zqAAjFaHGBMc5AQm7zaelhD1LGduFn2EehEcQcU+br6t+fwbpQ5d1ZWA==
@@ -7918,10 +8040,10 @@ dotenv-expand@^5.1.0:
   resolved "https://registry.yarnpkg.com/dotenv-expand/-/dotenv-expand-5.1.0.tgz#3fbaf020bfd794884072ea26b1e9791d45a629f0"
   integrity sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA==
 
-dotenv@16.0.0:
-  version "16.0.0"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.0.0.tgz#c619001253be89ebb638d027b609c75c26e47411"
-  integrity sha512-qD9WU0MPM4SWLPJy/r2Be+2WgQj8plChsyrCNQzW/0WjvcJQiKQJ9mH3ZgB3fxbUUxgc/11ZJ0Fi5KiimWGz2Q==
+dotenv@16.0.1:
+  version "16.0.1"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.0.1.tgz#8f8f9d94876c35dac989876a5d3a82a267fdce1d"
+  integrity sha512-1K6hR6wtk2FviQ4kEiSjFiH5rpzEVi8WW0x96aztHVMhEspNpc4DVOUTEHtEva5VThQ8IaBX1Pe4gSzpVVUsKQ==
 
 dotenv@^8.0.0:
   version "8.6.0"
@@ -8080,7 +8202,7 @@ enhanced-resolve@^4.5.0:
     memory-fs "^0.5.0"
     tapable "^1.0.0"
 
-enhanced-resolve@^5.9.2:
+enhanced-resolve@^5.9.3:
   version "5.9.3"
   resolved "https://registry.yarnpkg.com/enhanced-resolve/-/enhanced-resolve-5.9.3.tgz#44a342c012cbc473254af5cc6ae20ebd0aae5d88"
   integrity sha512-Bq9VSor+kjvW3f9/MiiR4eE3XYgOl7/rS8lnSxbRbF3kS0B2r+Y9w5krBWxZgDxASVZbdYrn5wT4j/Wb0J9qow==
@@ -9035,9 +9157,9 @@ flatted@^3.1.0:
   integrity sha512-WIWGi2L3DyTUvUrwRKgGi9TwxQMUEqPOPQBVi71R96jZXJdFskXEmf54BoZaS1kknGODoIGASGEzBUYdyMCBJg==
 
 flow-parser@0.*:
-  version "0.177.0"
-  resolved "https://registry.yarnpkg.com/flow-parser/-/flow-parser-0.177.0.tgz#653092470c8e79ed737cb38e3be1d1de0d25feac"
-  integrity sha512-Ac1OwHjSoUALrcnHTTD6oaEPITaxYmP34iiEEcuCxeeD+tOKR7/Toaw4RpJKcDmYxLX79ZP9E7z+Q8ze9pESbQ==
+  version "0.178.0"
+  resolved "https://registry.yarnpkg.com/flow-parser/-/flow-parser-0.178.0.tgz#85d300e29b146b54cb79e277e092ffd401b05f0c"
+  integrity sha512-OviMR2Y/sMSyUzR1xLLAmQvmHXTsD1Sq69OTmP5AckVulld7sVNsCfwsw7t3uK00dO9A7k4fD+wodbzzaaEn5g==
 
 flush-write-stream@^1.0.0:
   version "1.1.1"
@@ -9055,9 +9177,9 @@ focus-trap-react@^8.6.0:
     focus-trap "^6.9.1"
 
 focus-trap@^6.9.1:
-  version "6.9.1"
-  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-6.9.1.tgz#38d85b77fc86164dbe393b58b97bb8fb6dd1b343"
-  integrity sha512-TcIk4k52Mk5IWTJWdaq5AEoxDUp7znnws+5A1RBe/1X03t1Zw4ylNMajJ3aXG/J9S3TkuSUzRPB+l0RCO0nYVg==
+  version "6.9.2"
+  resolved "https://registry.yarnpkg.com/focus-trap/-/focus-trap-6.9.2.tgz#a9ef72847869bd2cbf62cb930aaf8e138fef1ca9"
+  integrity sha512-gBEuXOPNOKPrLdZpMFUSTyIo1eT2NSZRrwZ9r/0Jqw5tmT3Yvxfmu8KBHw8xW2XQkw6E/JoG+OlEq7UDtSUNgw==
   dependencies:
     tabbable "^5.3.2"
 
@@ -9510,9 +9632,9 @@ globals@^11.1.0:
   integrity sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==
 
 globals@^13.6.0, globals@^13.9.0:
-  version "13.14.0"
-  resolved "https://registry.yarnpkg.com/globals/-/globals-13.14.0.tgz#daf3ff9b4336527cf56e98330b6f64bea9aff9df"
-  integrity sha512-ERO68sOYwm5UuLvSJTY7w7NP2c8S4UcXs3X1GBX8cwOr+ShOcDBbCY5mH4zxz0jsYCdJ8ve8Mv9n2YGJMB1aeg==
+  version "13.15.0"
+  resolved "https://registry.yarnpkg.com/globals/-/globals-13.15.0.tgz#38113218c907d2f7e98658af246cef8b77e90bac"
+  integrity sha512-bpzcOlgDhMG070Av0Vy5Owklpv1I6+j96GhUI7Rh7IzDCKLzboflLrrfqMu8NquDbiR4EOQk7XzJwqVJxicxog==
   dependencies:
     type-fest "^0.20.2"
 
@@ -10295,9 +10417,9 @@ invariant@^2.2.4:
     loose-envify "^1.0.0"
 
 ip@^1.1.5:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/ip/-/ip-1.1.6.tgz#5a651a37644586e18b6ba3b48ca122bf56495f67"
-  integrity sha512-/dAvCivFs/VexXAtiAoMIqyhkhStNC9CPD0h1noonimOgB1xrCkexF2c5CjlqQ72GgMPjN6tiV+oreoPv3Ft1g==
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/ip/-/ip-1.1.8.tgz#ae05948f6b075435ed3307acce04629da8cdbf48"
+  integrity sha512-PuExPYUiu6qMBQb4l06ecm6T6ujzhmh+MeJcW9wa89PoAz5pvd4zPgN5WJV104mb6S2T1AwNIAaB70JNrLQWhg==
 
 ipaddr.js@1.9.1:
   version "1.9.1"
@@ -11487,7 +11609,7 @@ json-parse-better-errors@^1.0.1, json-parse-better-errors@^1.0.2:
   resolved "https://registry.yarnpkg.com/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz#bb867cfb3450e69107c131d1c514bab3dc8bcaa9"
   integrity sha512-mrqyZKfX5EhL7hvqcV6WG1yYjnjeuYDzDhhcAAUrq8Po85NBQBJP+ZDUT75qZQ98IkUoBqdkExkukOU7Ts2wrw==
 
-json-parse-even-better-errors@^2.3.0:
+json-parse-even-better-errors@^2.3.0, json-parse-even-better-errors@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/json-parse-even-better-errors/-/json-parse-even-better-errors-2.3.1.tgz#7c47805a94319928e05777405dc12e1f7a4ee02d"
   integrity sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w==
@@ -12711,6 +12833,13 @@ nav-datovelger@12.4.1:
   version "12.4.1"
   resolved "https://registry.yarnpkg.com/nav-datovelger/-/nav-datovelger-12.4.1.tgz#daf49751284ef3cc06f1844c277da0989480b450"
   integrity sha512-/GP49YSyT6p8IXR8kGDeX8nmmL2I9fiVdsUJSFlXZQO7Ofst3dSElXeBRhjhBk1AMcWBGO72LK2WajQJTeHzug==
+  dependencies:
+    focus-trap-react "^8.6.0"
+
+nav-datovelger@12.5.0:
+  version "12.5.0"
+  resolved "https://registry.yarnpkg.com/nav-datovelger/-/nav-datovelger-12.5.0.tgz#4ba62549145c29d3f73186f4016acd37bde792ed"
+  integrity sha512-ySekEZCl+6eyEhMFwJ6+KGLcqke+yEOatsCcPFdZzQ8gm3F6lIpcP+WTCjgLtBH8kJysjhQYHVmeLMUDqHZUsg==
   dependencies:
     focus-trap-react "^8.6.0"
 
@@ -17177,9 +17306,9 @@ typescript@4.6.4:
   integrity sha512-9ia/jWHIEbo49HfjrLGfKbZSuWo9iTMwXO+Ca3pRsSpbsMbc7/IU8NKdCZVRRBafVPGnoJeFL76ZOAA84I9fEg==
 
 uglify-js@^3.1.4:
-  version "3.15.4"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.15.4.tgz#fa95c257e88f85614915b906204b9623d4fa340d"
-  integrity sha512-vMOPGDuvXecPs34V74qDKk4iJ/SN4vL3Ow/23ixafENYvtrNvtbcgUeugTcUGRGsOF/5fU8/NYSL5Hyb3l1OJA==
+  version "3.15.5"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.15.5.tgz#2b10f9e0bfb3f5c15a8e8404393b6361eaeb33b3"
+  integrity sha512-hNM5q5GbBRB5xB+PMqVRcgYe4c8jbyZ1pzZhS6jbq54/4F2gFK869ZheiE5A8/t+W5jtTNpWef/5Q9zk639FNQ==
 
 uid-number@0.0.6:
   version "0.0.6"
@@ -17892,10 +18021,10 @@ webpack@4:
     watchpack "^1.7.4"
     webpack-sources "^1.4.1"
 
-webpack@5.72.0, webpack@^5.9.0:
-  version "5.72.0"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.72.0.tgz#f8bc40d9c6bb489a4b7a8a685101d6022b8b6e28"
-  integrity sha512-qmSmbspI0Qo5ld49htys8GY9XhS9CGqFoHTsOVAnjBdg0Zn79y135R+k4IR4rKK6+eKaabMhJwiVB7xw0SJu5w==
+webpack@5.72.1, webpack@^5.9.0:
+  version "5.72.1"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.72.1.tgz#3500fc834b4e9ba573b9f430b2c0a61e1bb57d13"
+  integrity sha512-dXG5zXCLspQR4krZVR6QgajnZOjW2K/djHvdcRaDQvsjV9z9vaW6+ja5dZOYbqBBjF6kGXka/2ZyxNdc+8Jung==
   dependencies:
     "@types/eslint-scope" "^3.7.3"
     "@types/estree" "^0.0.51"
@@ -17906,13 +18035,13 @@ webpack@5.72.0, webpack@^5.9.0:
     acorn-import-assertions "^1.7.6"
     browserslist "^4.14.5"
     chrome-trace-event "^1.0.2"
-    enhanced-resolve "^5.9.2"
+    enhanced-resolve "^5.9.3"
     es-module-lexer "^0.9.0"
     eslint-scope "5.1.1"
     events "^3.2.0"
     glob-to-regexp "^0.4.1"
     graceful-fs "^4.2.9"
-    json-parse-better-errors "^1.0.2"
+    json-parse-even-better-errors "^2.3.1"
     loader-runner "^4.2.0"
     mime-types "^2.1.27"
     neo-async "^2.6.2"
