@@ -16,6 +16,7 @@
   "ArbeidsforholdDetail.OppdaterArbeidsforhold": "Oppdater arbeidsforholdet basert på inntektsmelding med følgene opplysninger.",
   "ArbeidsforholdDetail.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon": "Søker er ikke i permisjon. Arbeidsforholdet er aktivt og skal benyttes i behandlingen.",
   "ArbeidsforholdDetail.FjernArbeidsforholdet": "Fjern arbeidsforholdet for denne behandlingen",
+  "ArbeidsforholdDetail.IMIkkeRelevant": "Inntektsmeldingen er ikke relevant, gå videre uten disse opplysningene",
   "ArbeidsforholdDetail.ArbeidsforholdetErIkkeAktivt": "Arbeidsforholdet er ikke aktivt. Inntektsmelding er ikke nødvendig.",
   "ArbeidsforholdDetail.ArbeidsforholdetAktivTomDato": "Arbeidsforhold aktivt tom. dato",
   "ArbeidsforholdDetail.AvslaYtelseManglendeOpplysninger": "Ytelsen kan avslås på grunn av manglende opplysninger.",
@@ -23,7 +24,6 @@
   "ArbeidsforholdDetail.Begrunnelse": "Begrunn endringene",
   "ArbeidsforholdDetail.SokerErIPermisjon": "Søker er i permisjon. Inntektsmelding er ikke nødvendig.",
 
-  "PersonArbeidsforholdDetailForm.IMIkkeRelevant": "Inntektsmeldingen er ikke relevant, gå videre uten disse opplysningene",
 
   "PermisjonPeriode.Permisjon": "Permisjon",
   "PermisjonPeriode.Permisjoner": "Permisjoner"

@@ -179,6 +179,7 @@ export const iay = {
       lagtTilAvSaksbehandler: false,
       basertPaInntektsmelding: false,
       permisjoner: [],
+      begrunnelse: 'Dette er en begrunnelse',
     },
     {
       id: '999999998-null',
@@ -200,6 +201,8 @@ export const iay = {
       basertPaInntektsmelding: false,
       permisjoner: [],
       kanOppretteNyttArbforFraIM: true,
+      brukArbeidsforholdet: false,
+      begrunnelse: 'Dette er en begrunnelse',
     },
     {
       id: '999999999-b269bf8f-c90d-45c7-ae4f-53ae6d8b7dce',
@@ -221,6 +224,7 @@ export const iay = {
       basertPaInntektsmelding: false,
       permisjoner: [],
       brukArbeidsforholdet: true,
+      begrunnelse: 'Dette er en begrunnelse',
     },
   ],
   skalKunneLeggeTilNyeArbeidsforhold: false,

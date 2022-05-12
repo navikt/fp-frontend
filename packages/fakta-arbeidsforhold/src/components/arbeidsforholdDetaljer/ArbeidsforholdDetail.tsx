@@ -87,7 +87,9 @@ const ArbeidsforholdDetail: FunctionComponent<PureOwnProps> = ({
         )}
         {erArbeidsforholdFjernet && !erAktivtArbeidsforhold && (
           <Normaltekst>
-            <FormattedMessage id="ArbeidsforholdDetail.FjernArbeidsforholdet" />
+            <FormattedMessage
+              id={valgtArbeidsforhold.kanOppretteNyttArbforFraIM ? 'ArbeidsforholdDetail.IMIkkeRelevant' : 'ArbeidsforholdDetail.FjernArbeidsforholdet'}
+            />
           </Normaltekst>
         )}
         <VerticalSpacer sixteenPx />

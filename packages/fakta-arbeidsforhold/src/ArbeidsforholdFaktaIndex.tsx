@@ -19,12 +19,10 @@ interface OwnProps {
 const ArbeidsforholdFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
   inntektArbeidYtelse,
   arbeidsgiverOpplysningerPerId,
-  alleKodeverk,
 }) => (
   <RawIntlProvider value={intl}>
     <ArbeidsforholdInfoPanel
       arbeidsforhold={inntektArbeidYtelse.arbeidsforhold}
-      alleKodeverk={alleKodeverk}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
   </RawIntlProvider>

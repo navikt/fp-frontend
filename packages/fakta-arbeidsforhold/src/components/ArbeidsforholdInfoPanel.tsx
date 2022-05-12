@@ -5,7 +5,7 @@ import moment from 'moment';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 import {
-  Arbeidsforhold, ArbeidsgiverOpplysningerPerId, AlleKodeverk,
+  Arbeidsforhold, ArbeidsgiverOpplysningerPerId,
 } from '@fpsak-frontend/types';
 
 import { Undertittel } from 'nav-frontend-typografi';
@@ -42,14 +42,12 @@ const getSortArbeidsforholdFn = (
 
 interface PureOwnProps {
   arbeidsforhold: Arbeidsforhold[];
-  alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 const ArbeidsforholdInfoPanel: FunctionComponent<PureOwnProps> = ({
   arbeidsforhold,
   arbeidsgiverOpplysningerPerId,
-  alleKodeverk,
 }) => {
   const [valgtArbeidsforhold, setValgtArbeidsforhold] = useState<Arbeidsforhold>();
 
