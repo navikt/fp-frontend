@@ -16,7 +16,6 @@ export { default as BekreftLovligOppholdVurderingAp } from './src/fakta/BekreftL
 export { default as AvklarFortsattMedlemskapAp } from './src/fakta/AvklarFortsattMedlemskapAp';
 export { default as BekreftTerminbekreftelseAp } from './src/fakta/BekreftTerminbekreftelseAp';
 export { default as SjekkManglendeFodselAp } from './src/fakta/SjekkManglendeFodselAp';
-export { default as AvklarArbeidsforholdAp } from './src/fakta/AvklarArbeidsforholdAp';
 export { default as AvklarAnnenforelderHarRettAp } from './src/fakta/AvklarAnnenforelderHarRettAp';
 export { default as FaktaUttakAp } from './src/fakta/FaktaUttakAp';
 export { default as VurderArbeidsforholdPermisjonAp } from './src/fakta/VurderArbeidsforholdPermisjonAp';
