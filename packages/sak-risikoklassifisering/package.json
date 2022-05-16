@@ -27,8 +27,7 @@
     "react": "17.0.2",
     "react-collapse": "5.1.1",
     "react-hook-form": "7.31.3",
-    "react-intl": "5.24.8",
-    "reselect": "4.1.5"
+    "react-intl": "5.24.8"
   },
   "devDependencies": {
     "@fpsak-frontend/storybook-utils": "1.0.0",
