@@ -16,6 +16,16 @@ import getAlleMerknaderFraBeslutter from '../../felles/util/getAlleMerknaderFraB
 // TODO Denne burde ligga sånn til at den kun blir importert når denne pakka dynamisk blir importert
 import '@navikt/ft-fakta-tilbakekreving-feilutbetaling/dist/style.css';
 
+const ProsessFeilutbetaling = React.lazy(() => import('@navikt/ft-fakta-tilbakekreving-feilutbetaling'));
+// eslint-disable-next-line import/no-unresolved
+const ProsessFeilutbetalingMF = React.lazy(() => import('ft_fakta_tilbakekreving_feilutbetaling/FeilutbetalingFaktaIndex')) as typeof ProsessFeilutbetaling;
+
+class FeilutbetalingPanel extends DynamicLoader<React.ComponentProps<typeof ProsessFeilutbetaling>> {
+  render() {
+    return super.doRender(ProsessFeilutbetaling, ProsessFeilutbetalingMF);
+  }
+}
+
 interface OwnProps {
   behandling: Behandling;
   feilutbetalingFakta: FeilutbetalingFakta;
@@ -61,16 +71,7 @@ const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <DynamicLoader
-      // @ts-ignore
-      importModuleFederationComp={() => {
-        if (process.env.NODE_ENV === 'development') {
-          // @ts-ignore
-          return import('ft_fakta_tilbakekreving_feilutbetaling/FeilutbetalingFaktaIndex');// eslint-disable-line import/no-unresolved
-        }
-        return undefined;
-      }}
-      importPackageComp={() => import('@navikt/ft-fakta-tilbakekreving-feilutbetaling')}
+    <FeilutbetalingPanel
       feilutbetalingFakta={feilutbetalingFakta}
       feilutbetalingAarsak={feilutbetalingAarsak}
       aksjonspunkter={aksjonspunkter}
@@ -83,6 +84,10 @@ const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps> = ({
       formData={formData[FaktaPanelCode.FEILUTBETALING]}
       setFormData={setFormDataFeilutbetaling}
       isAksjonspunktOpen={aksjonspunkterForFeilutbetalingFakta.some((a) => a.status === AksjonspunktStatus.OPPRETTET)}
+      behandling={behandling}
+      status=""
+      readOnlySubmitButton={false}
+      vilkar={[]}
     />
   );
 };

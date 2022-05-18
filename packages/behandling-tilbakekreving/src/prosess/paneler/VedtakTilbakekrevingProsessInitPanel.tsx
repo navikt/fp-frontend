@@ -22,6 +22,16 @@ import FatterVedtakStatusModal from '../../felles/komponenter/FatterVedtakStatus
 // TODO Denne burde ligga sånn til at den kun blir importert når denne pakka dynamisk blir importert
 import '@navikt/ft-prosess-tilbakekreving-vedtak/dist/style.css';
 
+const ProsessVedtak = React.lazy(() => import('@navikt/ft-prosess-tilbakekreving-vedtak'));
+// eslint-disable-next-line import/no-unresolved
+const ProsessVedtakMF = React.lazy(() => import('ft_prosess_tilbakekreving_vedtak/VedtakProsessIndex')) as typeof ProsessVedtak;
+
+class VedtakPanel extends DynamicLoader<React.ComponentProps<typeof ProsessVedtak>> {
+  render() {
+    return super.doRender(ProsessVedtak, ProsessVedtakMF);
+  }
+}
+
 const tilbakekrevingÅrsakTyperKlage = [
   BehandlingArsakType.RE_KLAGE_KA,
   BehandlingArsakType.RE_KLAGE_NFP,
@@ -117,16 +127,7 @@ const VedtakTilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
           submit={lukkApenRevurderingModal}
         />
       )}
-      <DynamicLoader
-        // @ts-ignore
-        importModuleFederationComp={() => {
-          if (process.env.NODE_ENV === 'development') {
-            // @ts-ignore
-            return import('ft_prosess_tilbakekreving_vedtak/VedtakProsessIndex');// eslint-disable-line import/no-unresolved
-          }
-          return undefined;
-        }}
-        importPackageComp={() => import('@navikt/ft-prosess-tilbakekreving-vedtak')}
+      <VedtakPanel
         behandling={behandling}
         beregningsresultat={beregningsresultat}
         isReadOnly={isReadOnly}

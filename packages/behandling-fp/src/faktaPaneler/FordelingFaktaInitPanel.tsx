@@ -15,6 +15,16 @@ import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 // TODO Denne burde ligga sånn til at den kun blir importert når denne pakka dynamisk blir importert
 import '@navikt/ft-fakta-fordel-beregningsgrunnlag/dist/style.css';
 
+const ProsessFordeling = React.lazy(() => import('@navikt/ft-fakta-fordel-beregningsgrunnlag'));
+// eslint-disable-next-line import/no-unresolved
+const ProsessFordelingMF = React.lazy(() => import('ft_fakta_fordel_beregningsgrunnlag/FaktaFordelBeregningsgrunnlag')) as typeof ProsessFordeling;
+
+class FordelingPanel extends DynamicLoader<React.ComponentProps<typeof ProsessFordeling>> {
+  render() {
+    return super.doRender(ProsessFordeling, ProsessFordelingMF);
+  }
+}
+
 const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [FaktaFordelBeregningAksjonspunktCode.FORDEL_BEREGNINGSGRUNNLAG, FaktaFordelBeregningAksjonspunktCode.VURDER_REFUSJON_BERGRUNN];
@@ -51,16 +61,7 @@ const FordelingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
     skalPanelVisesIMeny={(initData) => !!initData.aksjonspunkter
       && !!initData.aksjonspunkter.some((ap) => AKSJONSPUNKT_KODER.some((kode) => kode === ap.definisjon))}
     renderPanel={(data) => (
-      <DynamicLoader
-        // @ts-ignore
-        importModuleFederationComp={() => {
-          if (process.env.NODE_ENV === 'development') {
-            // @ts-ignore
-            return import('ft_fakta_fordel_beregningsgrunnlag/FaktaFordelBeregningsgrunnlag');// eslint-disable-line import/no-unresolved
-          }
-          return undefined;
-        }}
-        importPackageComp={() => import('@navikt/ft-fakta-fordel-beregningsgrunnlag')}
+      <FordelingPanel
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...data}
       />
