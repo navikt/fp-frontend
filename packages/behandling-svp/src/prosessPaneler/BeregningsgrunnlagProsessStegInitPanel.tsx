@@ -6,8 +6,9 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { ProsessBeregningsgrunnlagAksjonspunktCode } from '@navikt/ft-prosess-beregningsgrunnlag';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
+import { Beregningsgrunnlag } from '@navikt/ft-types';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Vilkar,
 } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps, DynamicLoader } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@navikt/ft-utils';
@@ -17,6 +18,16 @@ import { requestSvpApi, SvpBehandlingApiKeys } from '../data/svpBehandlingApi';
 
 // TODO Denne burde ligga sånn til at den kun blir importert når denne pakka dynamisk blir importert
 import '@navikt/ft-prosess-beregningsgrunnlag/dist/style.css';
+
+const ProsessBeregningsgrunnlag = React.lazy(() => import('@navikt/ft-prosess-beregningsgrunnlag'));
+// eslint-disable-next-line import/no-unresolved
+const ProsessBeregningsgrunnlagMF = React.lazy(() => import('ft_prosess_beregningsgrunnlag/ProsessBeregningsgrunnlag')) as typeof ProsessBeregningsgrunnlag;
+
+class BeregningsgrunnlagPanel extends DynamicLoader<React.ComponentProps<typeof ProsessBeregningsgrunnlag>> {
+  render() {
+    return super.doRender(ProsessBeregningsgrunnlag, ProsessBeregningsgrunnlagMF);
+  }
+}
 
 const intl = createIntl(messages);
 
@@ -62,15 +73,7 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
     prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Beregning' })}
     skalPanelVisesIMeny={(_initData, initState) => initState === RestApiState.SUCCESS}
     renderPanel={(data) => (
-      <DynamicLoader
-        importModuleFederationComp={() => {
-          if (process.env.NODE_ENV === 'development') {
-            // @ts-ignore
-            return import('ft_prosess_beregningsgrunnlag/ProsessBeregningsgrunnlag');// eslint-disable-line import/no-unresolved
-          }
-          return undefined;
-        }}
-        importPackageComp={() => import('@navikt/ft-prosess-beregningsgrunnlag')}
+      <BeregningsgrunnlagPanel
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...data}
       />

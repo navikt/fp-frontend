@@ -1,0 +1,6 @@
+declare module 'ft_prosess_tilbakekreving/TilbakekrevingProsessIndex';
+declare module 'ft_prosess_tilbakekreving_foreldelse/ForeldelseProsessIndex';
+declare module 'ft_prosess_tilbakekreving_vedtak/VedtakProsessIndex';
+declare module 'ft_prosess_beregningsgrunnlag/ProsessBeregningsgrunnlag';
+declare module 'ft_fakta_fordel_beregningsgrunnlag/FaktaFordelBeregningsgrunnlag';
+declare module 'ft_fakta_tilbakekreving_feilutbetaling/FeilutbetalingFaktaIndex';
