@@ -1,60 +1,62 @@
-import React, {
-  Suspense,
-} from 'react';
+import React, { ErrorInfo, LazyExoticComponent } from 'react';
+import { captureException, withScope } from '@sentry/browser';
 import { Element } from 'nav-frontend-typografi';
-
-import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
+import { RestApiErrorDispatchContext } from '@fpsak-frontend/rest-api-hooks';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
-import ErrorBoundary from './ErrorBoundary';
+type State = { hasError: boolean; };
 
-interface OwnProps {
-  importModuleFederationComp: () => Promise<any>;
-  importPackageComp: () => Promise<any>;
-}
+class DynamicLoader<Props> extends React.Component<Props, State> {
+  static contextType = RestApiErrorDispatchContext;
 
-const DynamicLoader = <COMPONENT_PROPS, >({
-  importModuleFederationComp,
-  importPackageComp,
-  ...props
-}: OwnProps & COMPONENT_PROPS) => {
-  const { addErrorMessage } = useRestApiErrorDispatcher();
-  if (process.env.NODE_ENV !== 'development') {
-    const PackageComp = React.lazy(importPackageComp);
-    return (
-      // @ts-ignore Fiks cannot be used as a JSX component
-      <ErrorBoundary errorMessageCallback={addErrorMessage}>
-        <Suspense fallback={<LoadingPanel />}>
-          <PackageComp {...props} />
-        </Suspense>
-      </ErrorBoundary>
-    );
+  constructor(props: Props) {
+    super(props);
+    this.state = { hasError: false };
   }
 
-  const ModuleFedComp = React.lazy(importModuleFederationComp);
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
 
-  return (
-    // @ts-ignore Fiks cannot be used as a JSX component
-    <ErrorBoundary
-      errorMessageCallback={(error: any) => {
-        addErrorMessage(error);
-      }}
-      doNotShowErrorMessageWhenScriptLoadError
-      fallback={() => {
-        const PackageComp = React.lazy(importPackageComp);
-        return (
-          <Suspense fallback={<LoadingPanel />}>
-            <PackageComp {...props} />
-          </Suspense>
-        );
-      }}
-    >
-      <Suspense fallback={<LoadingPanel />}>
-        <Element style={{ color: 'red' }}>Micro frontend</Element>
-        <ModuleFedComp {...props} />
-      </Suspense>
-    </ErrorBoundary>
-  );
-};
+  componentDidCatch(error: Error, info: ErrorInfo): void {
+    if (error?.name === 'ScriptExternalLoadError') {
+      return;
+    }
+
+    withScope((scope) => {
+      Object.keys(info).forEach((key) => {
+        scope.setExtra(key, info[key]);
+        captureException(error);
+      });
+    });
+
+    const dispatch = this.context;
+    const message = [
+      error.toString(),
+      info.componentStack
+        .split('\n')
+        .map((line) => line.trim())
+        .find((line) => !!line),
+    ].join(' ');
+    dispatch({ type: 'add', data: message });
+
+    // eslint-disable-next-line no-console
+    console.error(error);
+  }
+
+  // eslint-disable-next-line react/no-unused-class-component-methods
+  doRender(Comp: LazyExoticComponent<any>, CompMF: LazyExoticComponent<any>) {
+    const { hasError } = this.state;
+    const isProd = process.env.NODE_ENV !== 'development';
+    const visPublisertModul = hasError || isProd;
+    const SelectedComp = visPublisertModul ? Comp : CompMF;
+    return (
+      <React.Suspense fallback={<LoadingPanel />}>
+        {!visPublisertModul && (<Element style={{ color: 'red' }}>Micro frontend</Element>)}
+        <SelectedComp {...this.props} />
+      </React.Suspense>
+    );
+  }
+}
 
 export default DynamicLoader;

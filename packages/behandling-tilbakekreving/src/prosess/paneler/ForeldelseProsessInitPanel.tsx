@@ -14,6 +14,16 @@ import getAlleMerknaderFraBeslutter from '../../felles/util/getAlleMerknaderFraB
 // TODO Denne burde ligga sånn til at den kun blir importert når denne pakka dynamisk blir importert
 import '@navikt/ft-prosess-tilbakekreving-foreldelse/dist/style.css';
 
+const ProsessForeldelse = React.lazy(() => import('@navikt/ft-prosess-tilbakekreving-foreldelse'));
+// eslint-disable-next-line import/no-unresolved
+const ProsessForeldelseMF = React.lazy(() => import('ft_prosess_tilbakekreving_foreldelse/ForeldelseProsessIndex')) as typeof ProsessForeldelse;
+
+class ForeldelsePanel extends DynamicLoader<React.ComponentProps<typeof ProsessForeldelse>> {
+  render() {
+    return super.doRender(ProsessForeldelse, ProsessForeldelseMF);
+  }
+}
+
 interface OwnProps {
   behandling: Behandling;
   aksjonspunkter?: Aksjonspunkt[];
@@ -53,16 +63,7 @@ const ForeldelseProsessInitPanel: FunctionComponent<OwnProps> = ({
   })), [setFormData]);
 
   return (
-    <DynamicLoader
-      // @ts-ignore
-      importModuleFederationComp={() => {
-        if (process.env.NODE_ENV === 'development') {
-          // @ts-ignore
-          return import('ft_prosess_tilbakekreving_foreldelse/ForeldelseProsessIndex');// eslint-disable-line import/no-unresolved
-        }
-        return undefined;
-      }}
-      importPackageComp={() => import('@navikt/ft-prosess-tilbakekreving-foreldelse')}
+    <ForeldelsePanel
       behandling={behandling}
       perioderForeldelse={perioderForeldelse}
       submitCallback={bekreftAksjonspunkter}
