@@ -24,7 +24,9 @@ import '@navikt/ft-prosess-tilbakekreving-vedtak/dist/style.css';
 
 const ProsessVedtak = React.lazy(() => import('@navikt/ft-prosess-tilbakekreving-vedtak'));
 // eslint-disable-next-line import/no-unresolved
-const ProsessVedtakMF = React.lazy(() => import('ft_prosess_tilbakekreving_vedtak/VedtakProsessIndex')) as typeof ProsessVedtak;
+const ProsessVedtakMF = process.env.NODE_ENV !== 'development' ? undefined
+  // eslint-disable-next-line import/no-unresolved
+  : React.lazy(() => import('ft_prosess_tilbakekreving_vedtak/VedtakProsessIndex')) as typeof ProsessVedtak;
 
 class VedtakPanel extends DynamicLoader<React.ComponentProps<typeof ProsessVedtak>> {
   render() {

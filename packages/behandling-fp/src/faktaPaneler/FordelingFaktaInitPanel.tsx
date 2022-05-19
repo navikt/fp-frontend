@@ -16,8 +16,9 @@ import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 import '@navikt/ft-fakta-fordel-beregningsgrunnlag/dist/style.css';
 
 const ProsessFordeling = React.lazy(() => import('@navikt/ft-fakta-fordel-beregningsgrunnlag'));
-// eslint-disable-next-line import/no-unresolved
-const ProsessFordelingMF = React.lazy(() => import('ft_fakta_fordel_beregningsgrunnlag/FaktaFordelBeregningsgrunnlag')) as typeof ProsessFordeling;
+const ProsessFordelingMF = process.env.NODE_ENV !== 'development' ? undefined
+  // eslint-disable-next-line import/no-unresolved
+  : React.lazy(() => import('ft_fakta_fordel_beregningsgrunnlag/FaktaFordelBeregningsgrunnlag')) as typeof ProsessFordeling;
 
 class FordelingPanel extends DynamicLoader<React.ComponentProps<typeof ProsessFordeling>> {
   render() {

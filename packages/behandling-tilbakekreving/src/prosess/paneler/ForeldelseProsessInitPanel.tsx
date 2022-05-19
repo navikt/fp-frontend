@@ -16,7 +16,9 @@ import '@navikt/ft-prosess-tilbakekreving-foreldelse/dist/style.css';
 
 const ProsessForeldelse = React.lazy(() => import('@navikt/ft-prosess-tilbakekreving-foreldelse'));
 // eslint-disable-next-line import/no-unresolved
-const ProsessForeldelseMF = React.lazy(() => import('ft_prosess_tilbakekreving_foreldelse/ForeldelseProsessIndex')) as typeof ProsessForeldelse;
+const ProsessForeldelseMF = process.env.NODE_ENV !== 'development' ? undefined
+  // eslint-disable-next-line import/no-unresolved
+  : React.lazy(() => import('ft_prosess_tilbakekreving_foreldelse/ForeldelseProsessIndex')) as typeof ProsessForeldelse;
 
 class ForeldelsePanel extends DynamicLoader<React.ComponentProps<typeof ProsessForeldelse>> {
   render() {

@@ -18,7 +18,9 @@ import '@navikt/ft-fakta-tilbakekreving-feilutbetaling/dist/style.css';
 
 const ProsessFeilutbetaling = React.lazy(() => import('@navikt/ft-fakta-tilbakekreving-feilutbetaling'));
 // eslint-disable-next-line import/no-unresolved
-const ProsessFeilutbetalingMF = React.lazy(() => import('ft_fakta_tilbakekreving_feilutbetaling/FeilutbetalingFaktaIndex')) as typeof ProsessFeilutbetaling;
+const ProsessFeilutbetalingMF = process.env.NODE_ENV !== 'development' ? undefined
+  // eslint-disable-next-line import/no-unresolved
+  : React.lazy(() => import('ft_fakta_tilbakekreving_feilutbetaling/FeilutbetalingFaktaIndex')) as typeof ProsessFeilutbetaling;
 
 class FeilutbetalingPanel extends DynamicLoader<React.ComponentProps<typeof ProsessFeilutbetaling>> {
   render() {
