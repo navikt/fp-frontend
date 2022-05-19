@@ -25,7 +25,9 @@ import '@navikt/ft-prosess-tilbakekreving/dist/style.css';
 
 const ProsessTilbakekreving = React.lazy(() => import('@navikt/ft-prosess-tilbakekreving'));
 // eslint-disable-next-line import/no-unresolved
-const ProsessTilbakekrveingMF = React.lazy(() => import('ft_prosess_tilbakekreving/TilbakekrevingProsessIndex')) as typeof ProsessTilbakekreving;
+const ProsessTilbakekrveingMF = process.env.NODE_ENV !== 'development' ? undefined
+  // eslint-disable-next-line import/no-unresolved
+  : React.lazy(() => import('ft_prosess_tilbakekreving/TilbakekrevingProsessIndex')) as typeof ProsessTilbakekreving;
 
 class TilbakekrevingPanel extends DynamicLoader<React.ComponentProps<typeof ProsessTilbakekreving>> {
   render() {
