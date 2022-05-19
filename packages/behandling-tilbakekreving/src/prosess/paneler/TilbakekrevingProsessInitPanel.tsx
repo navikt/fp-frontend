@@ -14,7 +14,6 @@ import {
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { VilkarsVurderingAp, ForeldelseAksjonspunktCodes } from '@navikt/ft-prosess-tilbakekreving';
-import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 import { DynamicLoader } from '@fpsak-frontend/behandling-felles';
 
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
@@ -107,12 +106,6 @@ const TilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
       beregnBelop={beregnBelop}
       formData={formData[ProsessStegCode.TILBAKEKREVING]}
       setFormData={setFormDataTilbakekreving}
-      alleKodeverk={{} as any}
-      status=""
-      readOnlySubmitButton={false}
-      aksjonspunkter={aksjonspunkterForTilbakekreving}
-      vilkar={[]}
-      isAksjonspunktOpen={aksjonspunkterForTilbakekreving.some((ap) => isAksjonspunktOpen(ap.status) && ap.kanLoses)}
     />
   );
 };
