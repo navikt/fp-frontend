@@ -5,7 +5,6 @@ import {
 } from '@navikt/ft-types';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { ForeldelseAksjonspunktCodes, VurderForeldelseAp } from '@navikt/ft-prosess-tilbakekreving-foreldelse';
-import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 import { DynamicLoader } from '@fpsak-frontend/behandling-felles';
 
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
@@ -77,11 +76,6 @@ const ForeldelseProsessInitPanel: FunctionComponent<OwnProps> = ({
       beregnBelop={beregnBelop}
       formData={formData[ProsessStegCode.FORELDELSE]}
       setFormData={setFormDataForeldelse}
-      isAksjonspunktOpen={aksjonspunkterForForeldelse.some((ap) => isAksjonspunktOpen(ap.status) && ap.kanLoses)}
-      alleKodeverk={{} as any}
-      status=""
-      readOnlySubmitButton={false}
-      vilkar={[]}
     />
   );
 };

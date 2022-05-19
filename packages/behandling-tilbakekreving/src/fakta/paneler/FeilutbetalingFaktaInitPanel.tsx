@@ -76,7 +76,6 @@ const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps> = ({
     <FeilutbetalingPanel
       feilutbetalingFakta={feilutbetalingFakta}
       feilutbetalingAarsak={feilutbetalingAarsak}
-      aksjonspunkter={aksjonspunkter}
       fagsakYtelseTypeKode={fagsakYtelseTypeKode}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
       alleKodeverk={fpsakKodeverk}
@@ -86,10 +85,6 @@ const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps> = ({
       formData={formData[FaktaPanelCode.FEILUTBETALING]}
       setFormData={setFormDataFeilutbetaling}
       isAksjonspunktOpen={aksjonspunkterForFeilutbetalingFakta.some((a) => a.status === AksjonspunktStatus.OPPRETTET)}
-      behandling={behandling}
-      status=""
-      readOnlySubmitButton={false}
-      vilkar={[]}
     />
   );
 };

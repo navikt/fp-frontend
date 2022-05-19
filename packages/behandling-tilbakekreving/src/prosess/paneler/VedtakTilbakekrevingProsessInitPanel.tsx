@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useIntl } from 'react-intl';
 import { WarningModal, LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { BehandlingArsakType, isAksjonspunktOpen } from '@navikt/ft-kodeverk';
+import { BehandlingArsakType } from '@navikt/ft-kodeverk';
 import {
   Aksjonspunkt, AlleKodeverkTilbakekreving, Behandling, BeregningsresultatTilbakekreving,
 } from '@navikt/ft-types';
@@ -141,13 +141,6 @@ const VedtakTilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
         erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt}
         formData={formData[ProsessStegCode.VEDTAK]}
         setFormData={setFormDataVedtak}
-        alleKodeverk={{} as any}
-        alleMerknaderFraBeslutter={{}}
-        status=""
-        readOnlySubmitButton={false}
-        aksjonspunkter={aksjonspunkterForVedtak}
-        vilkar={[]}
-        isAksjonspunktOpen={aksjonspunkterForVedtak.some((ap) => isAksjonspunktOpen(ap.status) && ap.kanLoses)}
       />
     </>
   );
