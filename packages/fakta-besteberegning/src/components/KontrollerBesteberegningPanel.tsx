@@ -10,7 +10,6 @@ import {
   FaktaSubmitButtonNew,
 } from '@fpsak-frontend/fakta-felles';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import venteArsakType from '@fpsak-frontend/kodeverk/src/venteArsakType';
 import aksjonspunktStatus, { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { Form, CheckboxField } from '@navikt/ft-form-hooks';
 import { ManuellKontrollBesteberegningAP }
@@ -23,7 +22,7 @@ export const buildInitialValues = (venteårsak: string, aksjonspunkt: Aksjonspun
   const apErLøst = aksjonspunkt.status === aksjonspunktStatus.UTFORT;
   return {
     ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkt),
-    besteberegningErKorrektValg: apErLøst ? venteårsak !== venteArsakType.VENT_PÅ_KORRIGERT_BESTEBEREGNING : null,
+    besteberegningErKorrektValg: apErLøst ? true : null,
   };
 };
 

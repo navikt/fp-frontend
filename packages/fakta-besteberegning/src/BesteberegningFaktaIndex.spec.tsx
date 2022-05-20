@@ -21,7 +21,7 @@ describe('<BesteberegningFaktaIndex>', () => {
     expect(screen.queryByText('Vurdering')).not.toBeInTheDocument();
 
     expect(screen.getAllByText('Dagpenger')).toHaveLength(9);
-    expect(screen.getAllByText('BEDRIFT AS (910909088)')).toHaveLength(3);
+    expect(screen.getAllByText('BEDRIFT AS (974652269)')).toHaveLength(3);
     expect(screen.getByText('Jan Bertheussen Johansen (03.03.1943)')).toBeInTheDocument();
 
     expect(screen.getByText('Januar - 2020')).toBeInTheDocument();
