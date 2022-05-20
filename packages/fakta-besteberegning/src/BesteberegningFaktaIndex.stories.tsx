@@ -24,7 +24,7 @@ const arbeidsgiverOpplysninger = {
   },
   6823424234232: {
     identifikator: '6823424234232',
-    navn: 'Testy test',
+    navn: 'Testy Test',
     erPrivatPerson: true,
     fødselsdato: '1943-03-03',
   },
