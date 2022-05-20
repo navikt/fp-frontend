@@ -1,10 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
-
 import { BorderBox } from '@navikt/ft-ui-komponenter';
-import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { required } from '@navikt/ft-form-validators';
+import { RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
 
 const sprakvalg = {
   BOKMAL: 'NB',
@@ -29,7 +28,7 @@ export const SprakPanel: FunctionComponent<OwnProps & WrappedComponentProps> = (
         name="språkkode"
         direction="vertical"
         readOnly={readOnly}
-        validate={required}
+        validate={[required]}
       >
         <RadioOption
           label={intl.formatMessage({ id: 'Registrering.Sprak.Bokmal' })}

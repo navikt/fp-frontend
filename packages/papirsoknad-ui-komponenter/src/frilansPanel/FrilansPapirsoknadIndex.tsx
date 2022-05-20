@@ -10,28 +10,20 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   readOnly: boolean;
-  formName: string;
 }
 
 interface StaticFunctions {
   buildInitialValues: () => FormValues;
-  validate: (values: FormValues) => any;
 }
 
 const FrilansPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
-  formName,
 }) => (
   <RawIntlProvider value={intl}>
-    <FrilansPanel
-      readOnly={readOnly}
-      formName={formName}
-    />
+    <FrilansPanel readOnly={readOnly} />
   </RawIntlProvider>
 );
 
 FrilansPapirsoknadIndex.buildInitialValues = () => FrilansPanel.buildInitialValues();
-
-FrilansPapirsoknadIndex.validate = (values) => FrilansPanel.validate(values);
 
 export default FrilansPapirsoknadIndex;

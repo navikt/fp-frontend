@@ -1,40 +1,19 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { formValueSelector } from 'redux-form';
-import { connect } from 'react-redux';
-import moment from 'moment';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Undertekst, Element } from 'nav-frontend-typografi';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import Alertstripe from 'nav-frontend-alertstriper';
-
+import {
+  Datepicker, InputField, RadioGroupField, RadioOption, formHooks,
+} from '@navikt/ft-form-hooks';
 import {
   ArrowBox, BorderBox, VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
 import {
-  DatepickerField, InputField, NavFieldGroup, RadioGroupField, RadioOption,
-} from '@fpsak-frontend/form';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import {
-  dateBeforeOrEqual,
-  dateBeforeOrEqualToToday,
-  hasValidDate,
-  hasValidInteger,
-  maxValue,
-  minValue,
   required,
 } from '@navikt/ft-form-validators';
 
 import styles from './terminFodselDatoPanel.less';
-
-interface PureOwnProps {
-  readOnly: boolean;
-  erForeldrepenger?: boolean;
-  form: string;
-}
-
-interface MappedOwnProps {
-  erBarnetFodt?: boolean;
-}
 
 export type FormValues = {
   termindato?: string;
@@ -45,8 +24,9 @@ export type FormValues = {
   erBarnetFodt?: boolean;
 }
 
-interface StaticFunctions {
-  validate?: (values: FormValues) => any;
+interface OwnProps {
+  readOnly: boolean;
+  erForeldrepenger?: boolean;
 }
 
 /*
@@ -54,120 +34,115 @@ interface StaticFunctions {
  *
  * Form som brukes for registrere termin i papir soknad.
  */
-export const TerminFodselDatoPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
+export const TerminFodselDatoPanel: FunctionComponent<OwnProps> = ({
   readOnly,
-  erBarnetFodt,
-  erForeldrepenger,
-}) => (
-  <BorderBox>
-    <div className={styles.flexContainer}>
-      <NavFieldGroup errorMessageName="terminEllerFoedsel">
+  erForeldrepenger = false,
+}) => {
+  const intl = useIntl();
+
+  const { watch } = formHooks.useFormContext<FormValues>();
+
+  const erBarnetFodt = watch('erBarnetFodt');
+
+  return (
+    <BorderBox>
+      <div className={styles.flexContainer}>
         <SkjemaGruppe legend={<FormattedMessage id="Registrering.TerminOgFodsel" />}>
           <Undertekst><FormattedMessage id="Registrering.Termin.Fodt" /></Undertekst>
           <VerticalSpacer eightPx />
-          <RadioGroupField name="erBarnetFodt" readOnly={readOnly} validate={[required]}>
-            <RadioOption label={<FormattedMessage id="Registrering.Fodsel.ErFodt" />} value />
-            <RadioOption label={<FormattedMessage id="Registrering.Fodsel.ErIkkeFodt" />} value={false} />
+          <RadioGroupField name="erBarnetFodt" readOnly={readOnly} validate={[required]} parse={(value: string) => value === 'true'}>
+            <RadioOption label={<FormattedMessage id="Registrering.Fodsel.ErFodt" />} value="true" />
+            <RadioOption label={<FormattedMessage id="Registrering.Fodsel.ErIkkeFodt" />} value="false" />
           </RadioGroupField>
-          {erBarnetFodt === false
-          && (
+          {erBarnetFodt === false && (
             <ArrowBox alignOffset={64}>
               <div className={styles.row}>
                 <div className={styles.col}>
-                  <DatepickerField
+                  <Datepicker
                     name="termindato"
-                    label={{ id: 'Registrering.Termindato' }}
-                    readOnly={readOnly}
+                    label={intl.formatMessage({ id: 'Registrering.Termindato' })}
+                    isReadOnly={readOnly}
                   />
                 </div>
                 <div className={styles.col}>
                   <InputField
                     name="antallBarnFraTerminbekreftelse"
-                    label={{ id: 'Registrering.AntallBarn' }}
+                    label={intl.formatMessage({ id: 'Registrering.AntallBarn' })}
                     bredde="XS"
                     readOnly={readOnly}
                   />
                 </div>
               </div>
               <div className={styles.skjemaelement}>
-                <DatepickerField
+                <Datepicker
                   name="terminbekreftelseDato"
-                  label={{ id: 'Registrering.UtstedtDato' }}
-                  readOnly={readOnly}
+                  label={intl.formatMessage({ id: 'Registrering.UtstedtDato' })}
+                  isReadOnly={readOnly}
                 />
               </div>
             </ArrowBox>
           )}
-          { erBarnetFodt && (
+          {erBarnetFodt && (
             <ArrowBox alignOffset={0}>
               <FlexContainer>
                 <FlexRow>
                   <FlexColumn>
-                    <DatepickerField
+                    <Datepicker
                       name="foedselsDato"
-                      label={{ id: 'Registrering.Fodselsdato' }}
+                      label={intl.formatMessage({ id: 'Registrering.Fodselsdato' })}
               /* foedselsDato is array in DTO data model, so we transform the value to/from the store/input */
                       format={(valueFromStore) => (valueFromStore && valueFromStore.length ? valueFromStore[0] : valueFromStore)}
                       // @ts-ignore Fiks
                       parse={(valueFromInput) => (valueFromInput ? [valueFromInput] : valueFromInput)}
-                      readOnly={readOnly}
+                      isReadOnly={readOnly}
                     />
                   </FlexColumn>
                   <FlexColumn>
                     <InputField
                       name="antallBarn"
-                      label={{ id: 'Registrering.AntallBarn' }}
+                      label={intl.formatMessage({ id: 'Registrering.AntallBarn' })}
                       bredde="XS"
                       readOnly={readOnly}
                     />
                   </FlexColumn>
                 </FlexRow>
                 {erForeldrepenger && (
-                <>
-                  <VerticalSpacer eightPx />
-                  <Alertstripe type="info" form="inline">
-                    <Element>
-                      <FormattedMessage id="Registrering.RettTilPrematuruker" />
-                    </Element>
-                  </Alertstripe>
-                  <VerticalSpacer eightPx />
-                  <FlexRow>
-                    <FlexColumn>
-                      <DatepickerField
-                        name="termindato"
-                        label={{ id: 'Registrering.Termindato' }}
-                        readOnly={readOnly}
-                      />
-                    </FlexColumn>
-                    <FlexColumn>
-                      <DatepickerField
-                        name="terminbekreftelseDato"
-                        label={{ id: 'Registrering.UtstedtDato' }}
-                        readOnly={readOnly}
-                      />
-                    </FlexColumn>
-                  </FlexRow>
-                </>
+                  <>
+                    <VerticalSpacer eightPx />
+                    <Alertstripe type="info" form="inline">
+                      <Element>
+                        <FormattedMessage id="Registrering.RettTilPrematuruker" />
+                      </Element>
+                    </Alertstripe>
+                    <VerticalSpacer eightPx />
+                    <FlexRow>
+                      <FlexColumn>
+                        <Datepicker
+                          name="termindato"
+                          label={intl.formatMessage({ id: 'Registrering.Termindato' })}
+                          isReadOnly={readOnly}
+                        />
+                      </FlexColumn>
+                      <FlexColumn>
+                        <Datepicker
+                          name="terminbekreftelseDato"
+                          label={intl.formatMessage({ id: 'Registrering.UtstedtDato' })}
+                          isReadOnly={readOnly}
+                        />
+                      </FlexColumn>
+                    </FlexRow>
+                  </>
                 )}
               </FlexContainer>
             </ArrowBox>
           )}
         </SkjemaGruppe>
-      </NavFieldGroup>
-    </div>
-  </BorderBox>
-);
-
-TerminFodselDatoPanelImpl.defaultProps = {
-  erForeldrepenger: false,
+      </div>
+    </BorderBox>
+  );
 };
 
-const mapStateToProps = (state: any, initialProps: PureOwnProps): MappedOwnProps => ({
-  erBarnetFodt: formValueSelector(initialProps.form)(state, 'erBarnetFodt'),
-});
-
-const TerminFodselDatoPanel = connect(mapStateToProps)(TerminFodselDatoPanelImpl);
-
+/*
 const getToday = (): moment.Moment => moment().startOf('day');
 const getEarliestTerminDato = (): moment.Moment => getToday().subtract(3, 'weeks');
 const getLatestTerminbekreftelseDato = (termindato: string): moment.Moment => {
@@ -219,5 +194,6 @@ TerminFodselDatoPanel.validate = (values: FormValues) => {
   }
   return validateTermin(values);
 };
+*/
 
 export default TerminFodselDatoPanel;

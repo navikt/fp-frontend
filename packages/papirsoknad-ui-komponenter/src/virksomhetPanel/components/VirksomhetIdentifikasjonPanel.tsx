@@ -1,19 +1,16 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { connect } from 'react-redux';
-import { formValueSelector } from 'redux-form';
-import { FormattedMessage, WrappedComponentProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
-
 import {
-  DatepickerField, InputField, RadioGroupField, RadioOption, SelectField,
-} from '@fpsak-frontend/form';
+  formHooks, Datepicker, InputField, RadioGroupField, RadioOption, SelectField,
+} from '@navikt/ft-form-hooks';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
-  dateBeforeOrEqualToToday, hasValidDate, hasValidInteger, hasValidOrgNumber, required, validPeriodeFomTom,
+  dateBeforeOrEqualToToday, hasValidDate, hasValidInteger, hasValidOrgNumber, required,
 } from '@navikt/ft-form-validators';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
+import { KodeverkType } from '@navikt/ft-kodeverk';
 
 const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] => countryCodes
   .map(({
@@ -21,14 +18,9 @@ const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] =>
     navn,
   }) => <option value={kode} key={kode}>{navn}</option>);
 
-interface PureOwnProps {
+interface OwnProps {
   readOnly?: boolean;
   alleKodeverk: AlleKodeverk;
-  form: string;
-}
-
-interface MappedOwnProps {
-  virksomhetRegistrertINorge?: boolean;
 }
 
 export type FormValues = {
@@ -40,24 +32,22 @@ export type FormValues = {
   landJobberFra?: string;
 }
 
-interface StaticFunctions {
-  validate: (values: FormValues) => any;
-}
-
 /**
  * VirksomhetIdentifikasjonPanel
  *
  * Presentasjonskomponent. Komponenten vises som del av skjermbildet for registrering av
- * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for
- * søker.
+ * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
-export const VirksomhetIdentifikasjonPanel: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps> & StaticFunctions = ({
-  virksomhetRegistrertINorge,
-  readOnly,
-  intl,
+const VirksomhetIdentifikasjonPanel: FunctionComponent<OwnProps> = ({
+  readOnly = true,
   alleKodeverk,
 }) => {
-  const sortedCountriesByName = alleKodeverk[kodeverkTyper.LANDKODER].slice().sort((a, b) => a.navn.localeCompare(b.navn));
+  const intl = useIntl();
+  const sortedCountriesByName = alleKodeverk[KodeverkType.LANDKODER].slice().sort((a, b) => a.navn.localeCompare(b.navn));
+
+  const { watch } = formHooks.useFormContext<FormValues>();
+
+  const virksomhetRegistrertINorge = watch('virksomhetRegistrertINorge');
 
   return (
     <>
@@ -71,12 +61,16 @@ export const VirksomhetIdentifikasjonPanel: FunctionComponent<PureOwnProps & Map
       <VerticalSpacer sixteenPx />
       <Undertekst><FormattedMessage id="Registrering.VirksomhetIdentifikasjonPanel.RegisteredInNorway" /></Undertekst>
       <VerticalSpacer fourPx />
-      <RadioGroupField name="virksomhetRegistrertINorge" validate={[required]} readOnly={readOnly}>
-        <RadioOption key="Ja" label={<FormattedMessage id="Registrering.VirksomhetIdentifikasjonPanel.Yes" />} value />
-        <RadioOption key="Nei" label={<FormattedMessage id="Registrering.VirksomhetIdentifikasjonPanel.No" />} value={false} />
+      <RadioGroupField
+        name="virksomhetRegistrertINorge"
+        validate={[required]}
+        readOnly={readOnly}
+        parse={(value: string) => value === 'true'}
+      >
+        <RadioOption key="Ja" label={<FormattedMessage id="Registrering.VirksomhetIdentifikasjonPanel.Yes" />} value="true" />
+        <RadioOption key="Nei" label={<FormattedMessage id="Registrering.VirksomhetIdentifikasjonPanel.No" />} value="false" />
       </RadioGroupField>
-      { virksomhetRegistrertINorge
-      && (
+      {virksomhetRegistrertINorge && (
         <>
           <Row>
             <Column xs="5">
@@ -93,8 +87,7 @@ export const VirksomhetIdentifikasjonPanel: FunctionComponent<PureOwnProps & Map
           <VerticalSpacer sixteenPx />
         </>
       )}
-      { !virksomhetRegistrertINorge && virksomhetRegistrertINorge !== undefined
-      && (
+      {!virksomhetRegistrertINorge && virksomhetRegistrertINorge !== undefined && (
         <ArrowBox alignOffset={57}>
           <Row>
             <Column xs="5">
@@ -108,19 +101,19 @@ export const VirksomhetIdentifikasjonPanel: FunctionComponent<PureOwnProps & Map
           </Row>
           <Row>
             <Column xs="3">
-              <DatepickerField
-                readOnly={readOnly}
+              <Datepicker
+                isReadOnly={readOnly}
                 validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
                 name="fom"
-                label={{ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeFom' }}
+                label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeFom' })}
               />
             </Column>
             <Column xs="3">
-              <DatepickerField
-                readOnly={readOnly}
+              <Datepicker
+                isReadOnly={readOnly}
                 validate={[hasValidDate]}
                 name="tom"
-                label={{ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeTom' }}
+                label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeTom' })}
               />
             </Column>
           </Row>
@@ -130,10 +123,7 @@ export const VirksomhetIdentifikasjonPanel: FunctionComponent<PureOwnProps & Map
   );
 };
 
-VirksomhetIdentifikasjonPanel.defaultProps = {
-  readOnly: true,
-};
-
+/*
 VirksomhetIdentifikasjonPanel.validate = (values: FormValues) => {
   const errors = {};
   if (values && values.fom && values.tom) {
@@ -142,10 +132,6 @@ VirksomhetIdentifikasjonPanel.validate = (values: FormValues) => {
     };
   }
   return errors;
-};
+};*/
 
-const mapStateToProps = (state: any, initialProps: PureOwnProps): MappedOwnProps => ({
-  virksomhetRegistrertINorge: formValueSelector(initialProps.form)(state, 'virksomhetRegistrertINorge'),
-});
-
-export default connect(mapStateToProps)(VirksomhetIdentifikasjonPanel);
+export default VirksomhetIdentifikasjonPanel;

@@ -1,133 +1,114 @@
 import React, { FunctionComponent } from 'react';
-import {
-  FormSection, formValueSelector, InjectedFormProps, reduxForm,
-} from 'redux-form';
-import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useForm } from 'react-hook-form';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import Modal from 'nav-frontend-modal';
 import { Undertittel } from 'nav-frontend-typografi';
-
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { getRegisteredFields } from '@fpsak-frontend/papirsoknad-felles';
-import { AlleKodeverk } from '@fpsak-frontend/types';
+import { AlleKodeverk } from '@navikt/ft-types';
+import { Form } from '@navikt/ft-form-hooks';
 
-import VirksomhetIdentifikasjonPanel from './VirksomhetIdentifikasjonPanel';
-import VirksomhetRegnskapPanel from './VirksomhetRegnskapPanel';
-import VirksomhetStartetEndretPanel from './VirksomhetStartetEndretPanel';
-import VirksomhetRelasjonPanel from './VirksomhetRelasjonPanel';
-import VirksomhetTypeNaringPanel from './VirksomhetTypeNaringPanel';
+import VirksomhetIdentifikasjonPanel, { FormValues as IdFormValues } from './VirksomhetIdentifikasjonPanel';
+import VirksomhetRegnskapPanel, { FormValues as RegnskapFormValues } from './VirksomhetRegnskapPanel';
+import VirksomhetStartetEndretPanel, { FormValues as StartedEndretFormValues } from './VirksomhetStartetEndretPanel';
+import VirksomhetRelasjonPanel, { FormValues as RelasjonFormValues } from './VirksomhetRelasjonPanel';
+import VirksomhetTypeNaringPanel, { FormValues as TypeNaringFormValues } from './VirksomhetTypeNaringPanel';
 
 import styles from './registrerVirksomhetModalForm.less';
 
-const REGISTRER_VIRKSOMHET_FORM_NAME = 'VirksomhetForm';
-const TYPE_VIRKSOMHET_PREFIX = 'typeVirksomhet';
+export type FormValues = IdFormValues
+  & RelasjonFormValues
+  & RegnskapFormValues
+  & StartedEndretFormValues
+  & TypeNaringFormValues;
 
 interface OwnProps {
   showModal?: boolean;
+  onSubmit: (value: FormValues) => void;
   closeEvent: () => void;
   readOnly?: boolean;
   alleKodeverk: AlleKodeverk;
+  virksomhet?: FormValues;
 }
 
 /**
  * RegistrerVirksomhetModalForm
  *
- * Presentasjonskomponent. Komponenten vises som del av skjermbildet for registrering av
- * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for
- * søker.
+ * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder
+ * foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
-export const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps & WrappedComponentProps & InjectedFormProps> = ({
-  showModal,
-  closeEvent,
-  handleSubmit,
+const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps> = ({
+  showModal = false,
   readOnly = false,
-  intl,
+  closeEvent,
+  onSubmit,
   alleKodeverk,
-  ...props
-}) => (
-  <Modal
-    className={styles.modal}
-    isOpen={showModal}
-    contentLabel={intl.formatMessage({ id: 'Registrering.RegistrerVirksomhetModalForm.ModalDescription' })}
-    onRequestClose={closeEvent}
-    closeButton={false}
-    shouldCloseOnOverlayClick={false}
-  >
-    <form className={styles.form}>
-      <Undertittel><FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Title" /></Undertittel>
-      <VerticalSpacer twentyPx />
-      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
-      <VirksomhetIdentifikasjonPanel
-        intl={intl}
-        readOnly={readOnly}
-        form={REGISTRER_VIRKSOMHET_FORM_NAME}
-        alleKodeverk={alleKodeverk}
-      />
-      <FormSection name={TYPE_VIRKSOMHET_PREFIX}>
-        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
-        <VirksomhetTypeNaringPanel
-          readOnly={readOnly}
-          alleKodeverk={alleKodeverk}
-          error={props.submitFailed ? props.error : undefined}
-        />
-      </FormSection>
-      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
-      <VirksomhetStartetEndretPanel readOnly={readOnly} form={REGISTRER_VIRKSOMHET_FORM_NAME} />
-      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
-      <VirksomhetRegnskapPanel readOnly={readOnly} form={REGISTRER_VIRKSOMHET_FORM_NAME} />
-      <VirksomhetRelasjonPanel readOnly={readOnly} />
-      <VerticalSpacer sixteenPx />
-      <Hovedknapp
-        htmlType="button"
-        onClick={handleSubmit}
-        disabled={readOnly}
-        className={styles.savebutton}
-        mini
-      >
-        {intl.formatMessage({ id: 'Registrering.RegistrerVirksomhetModalForm.Save' })}
-      </Hovedknapp>
-      <Knapp
-        htmlType="button"
-        onClick={closeEvent}
-        disabled={readOnly}
-        className={styles.cancelbutton}
-        mini
-      >
-        {intl.formatMessage({ id: 'Registrering.RegistrerVirksomhetModalForm.Cancel' })}
-      </Knapp>
-    </form>
-  </Modal>
-);
+  virksomhet,
+}) => {
+  const intl = useIntl();
 
-RegistrerVirksomhetModalForm.defaultProps = {
-  showModal: false,
-  readOnly: false,
+  const formMethods = useForm<FormValues>({
+    defaultValues: virksomhet,
+  });
+
+  return (
+    <Modal
+      className={styles.modal}
+      isOpen={showModal}
+      contentLabel={intl.formatMessage({ id: 'Registrering.RegistrerVirksomhetModalForm.ModalDescription' })}
+      onRequestClose={closeEvent}
+      closeButton={false}
+      shouldCloseOnOverlayClick={false}
+    >
+      <div className={styles.form}>
+        <Form
+          formMethods={formMethods}
+          onSubmit={onSubmit}
+        >
+          <Undertittel><FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Title" /></Undertittel>
+          <VerticalSpacer twentyPx />
+          <VirksomhetIdentifikasjonPanel
+            readOnly={readOnly}
+            alleKodeverk={alleKodeverk}
+          />
+          <VirksomhetTypeNaringPanel
+            readOnly={readOnly}
+            alleKodeverk={alleKodeverk}
+            hasError={!!formMethods.formState.errors}
+          />
+          <VirksomhetStartetEndretPanel readOnly={readOnly} />
+          <VirksomhetRegnskapPanel readOnly={readOnly} />
+          <VirksomhetRelasjonPanel readOnly={readOnly} />
+          <VerticalSpacer sixteenPx />
+          <Hovedknapp
+            disabled={readOnly}
+            className={styles.savebutton}
+            mini
+          >
+            <FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Save" />
+          </Hovedknapp>
+          <Knapp
+            htmlType="button"
+            onClick={closeEvent}
+            disabled={readOnly}
+            className={styles.cancelbutton}
+            mini
+          >
+            <FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Cancel" />
+          </Knapp>
+        </Form>
+      </div>
+    </Modal>
+  );
 };
 
-const mapStateToProps = (state: any) => {
-  const registeredFields = getRegisteredFields(REGISTRER_VIRKSOMHET_FORM_NAME)(state);
-  // @ts-ignore Fiks
-  const registeredFieldNames = registeredFields ? Object.values(registeredFields).map((rf) => rf.name) : [];
-  const valuesForRegisteredFieldsOnly = registeredFieldNames.length
-    ? formValueSelector(REGISTRER_VIRKSOMHET_FORM_NAME)(state, ...registeredFieldNames)
-    : {};
-  return {
-    valuesForRegisteredFieldsOnly,
-  };
-};
-
-const validate = (values: any) => {
+/*const validate = (values: any) => {
   const errors1 = VirksomhetIdentifikasjonPanel.validate(values);
   const errors2 = VirksomhetTypeNaringPanel.validate(values);
   return {
     ...errors1,
     ...errors2,
   };
-};
+};*/
 
-export default connect(mapStateToProps)(reduxForm({
-  enableReinitialize: true,
-  validate,
-  form: REGISTRER_VIRKSOMHET_FORM_NAME,
-})(injectIntl(RegistrerVirksomhetModalForm)));
+export default RegistrerVirksomhetModalForm;

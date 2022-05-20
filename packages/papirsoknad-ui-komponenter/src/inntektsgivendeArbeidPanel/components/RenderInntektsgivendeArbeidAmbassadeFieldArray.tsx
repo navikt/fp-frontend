@@ -1,31 +1,17 @@
 import React, { FunctionComponent } from 'react';
-import moment from 'moment';
-import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
+import { useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-
-import { isArrayEmpty, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { maxLength } from '@navikt/ft-form-validators';
 import {
-  dateAfterOrEqual, hasValidDate, maxLength, required,
-} from '@navikt/ft-form-validators';
-import { DatepickerField, InputField, PeriodFieldArray } from '@fpsak-frontend/form';
+  formHooks, Datepicker, InputField, PeriodFieldArray,
+} from '@navikt/ft-form-hooks';
 
-import { useIntl } from 'react-intl';
 import styles from './renderInntektsgivendeArbeidFieldArray.less';
 
 const maxLength50 = maxLength(50);
 
-const defaultInntektsgivendeArbeidAmbassade = {
-  arbeidsgiver: '',
-  periodeFom: '',
-  periodeTom: '',
-};
-
-interface OwnProps {
-  fields: FieldArrayFieldsProps<any>;
-  meta: FieldArrayMetaProps;
-  readOnly: boolean;
-}
+export const RENDER_INNTEKTSGIVENDE_ARBEID_AMBASSADE_FIELD_ARRAY = 'ambassadearbeidsforhold';
 
 export type FormValues = {
   arbeidsgiver?: string;
@@ -33,29 +19,40 @@ export type FormValues = {
   periodeTom?: string;
 }
 
-interface StaticFunctions {
-  validate: (values?: FormValues[]) => any,
+const defaultInntektsgivendeArbeidAmbassade: FormValues = {
+  arbeidsgiver: '',
+  periodeFom: '',
+  periodeTom: '',
+};
+
+interface OwnProps {
+  readOnly: boolean;
 }
 
 /**
  *  RenderInntektsgivendeArbeidAmbassadFieldArray
  *
- * Presentasjonskomponent: Viser inputfelter for arbeidsgiver og organisasjonsnummer for registrering av arbeidsforhold som ambassadpersonell.
- * Komponenten må rendres som komponenten til et FieldArray.
+ * Viser inputfelter for arbeidsgiver og organisasjonsnummer for registrering av arbeidsforhold som ambassadpersonell.
  */
-export const RenderInntektsgivendeArbeidAmbassadeFieldArray: FunctionComponent<OwnProps> & StaticFunctions = ({
-  fields,
-  meta,
+export const RenderInntektsgivendeArbeidAmbassadeFieldArray: FunctionComponent<OwnProps> = ({
   readOnly,
 }) => {
   const intl = useIntl();
+
+  const { control } = formHooks.useFormContext<{ [RENDER_INNTEKTSGIVENDE_ARBEID_AMBASSADE_FIELD_ARRAY]: FormValues[] }>();
+  const { fields, remove, append } = formHooks.useFieldArray({
+    control,
+    name: RENDER_INNTEKTSGIVENDE_ARBEID_AMBASSADE_FIELD_ARRAY,
+  });
+
   return (
-    <PeriodFieldArray
+    <PeriodFieldArray<FormValues>
       fields={fields}
-      meta={meta}
       emptyPeriodTemplate={defaultInntektsgivendeArbeidAmbassade}
       bodyText={intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.LeggTilArbeidAmbassade' })}
       readOnly={readOnly}
+      remove={remove}
+      append={append}
     >
       {(ambassadeElementFieldId, index, getRemoveButton) => (
         <Row key={ambassadeElementFieldId} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
@@ -66,24 +63,24 @@ export const RenderInntektsgivendeArbeidAmbassadeFieldArray: FunctionComponent<O
                   <InputField
                     readOnly={readOnly}
                     name={`${ambassadeElementFieldId}.arbeidsgiver`}
-                    label={index === 0 ? { id: 'Registrering.InntektsgivendeArbeid.Arbeidsgiver' } : ''}
+                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.Arbeidsgiver' }) : ''}
                     bredde="XXL"
                     validate={[maxLength50]}
                     maxLength={99}
                   />
                 </FlexColumn>
                 <FlexColumn>
-                  <DatepickerField
-                    readOnly={readOnly}
+                  <Datepicker
+                    isReadOnly={readOnly}
                     name={`${ambassadeElementFieldId}.periodeFom`}
-                    label={index === 0 ? { id: 'Registrering.InntektsgivendeArbeid.periodeFom' } : ''}
+                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.periodeFom' }) : ''}
                   />
                 </FlexColumn>
                 <FlexColumn>
-                  <DatepickerField
-                    readOnly={readOnly}
+                  <Datepicker
+                    isReadOnly={readOnly}
                     name={`${ambassadeElementFieldId}.periodeTom`}
-                    label={index === 0 ? { id: 'Registrering.InntektsgivendeArbeid.periodeTom' } : ''}
+                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.periodeTom' }) : ''}
                   />
                 </FlexColumn>
                 {getRemoveButton && (
@@ -100,6 +97,7 @@ export const RenderInntektsgivendeArbeidAmbassadeFieldArray: FunctionComponent<O
   );
 };
 
+/*
 RenderInntektsgivendeArbeidAmbassadeFieldArray.validate = (values) => {
   if (!values) {
     return null;
@@ -137,5 +135,6 @@ RenderInntektsgivendeArbeidAmbassadeFieldArray.validate = (values) => {
 
   return null;
 };
+*/
 
 export default RenderInntektsgivendeArbeidAmbassadeFieldArray;

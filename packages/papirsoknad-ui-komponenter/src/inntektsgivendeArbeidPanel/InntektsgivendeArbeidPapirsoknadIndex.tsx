@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
-
-import { AlleKodeverk } from '@fpsak-frontend/types';
+import { AlleKodeverk } from '@navikt/ft-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import InntektsgivendeArbeidPanel, { FormValues } from './components/InntektsgivendeArbeidPanel';
@@ -16,7 +15,6 @@ interface OwnProps {
 
 interface StaticFunctions {
   buildInitialValues: () => FormValues;
-  validate: (values: FormValues) => any,
 }
 
 const InntektsgivendeArbeidPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = ({
@@ -32,7 +30,5 @@ const InntektsgivendeArbeidPapirsoknadIndex: FunctionComponent<OwnProps> & Stati
 );
 
 InntektsgivendeArbeidPapirsoknadIndex.buildInitialValues = () => InntektsgivendeArbeidPanel.buildInitialValues();
-
-InntektsgivendeArbeidPapirsoknadIndex.validate = (values) => InntektsgivendeArbeidPanel.validate(values);
 
 export default InntektsgivendeArbeidPapirsoknadIndex;

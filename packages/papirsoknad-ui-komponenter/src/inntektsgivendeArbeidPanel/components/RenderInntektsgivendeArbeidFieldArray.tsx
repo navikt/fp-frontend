@@ -1,22 +1,28 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
+import { useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import landkoder from '@fpsak-frontend/kodeverk/src/landkoder';
 import { maxLength } from '@navikt/ft-form-validators';
+import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import {
-  DatepickerField, InputField, SelectField, PeriodFieldArray,
-} from '@fpsak-frontend/form';
-import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+  Datepicker, InputField, SelectField, PeriodFieldArray, formHooks,
+} from '@navikt/ft-form-hooks';
+import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
+import { KodeverkType, Landkode } from '@navikt/ft-kodeverk';
 
-import { injectIntl, WrappedComponentProps } from 'react-intl';
 import styles from './renderInntektsgivendeArbeidFieldArray.less';
 
 const maxLength50 = maxLength(50);
 
-const defaultInntektsgivendeArbeid = {
+export const INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME = 'arbeidsforhold';
+
+type FormValues = {
+  arbeidsgiver: string;
+  periodeFom: string;
+  periodeTom: string;
+  land: string;
+}
+
+const defaultInntektsgivendeArbeid: FormValues = {
   arbeidsgiver: '',
   periodeFom: '',
   periodeTom: '',
@@ -26,41 +32,44 @@ const defaultInntektsgivendeArbeid = {
 const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] => countryCodes
   .filter(({
     kode,
-  }) => kode !== landkoder.NORGE)
+  }) => kode !== Landkode.NORGE)
   .map(({
     kode,
     navn,
   }) => <option value={kode} key={kode}>{navn}</option>);
 
 interface OwnProps {
-  fields: FieldArrayFieldsProps<any>;
-  meta: FieldArrayMetaProps;
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
 }
 
 /**
- *  RenderInntektsgivendeArbeidFieldArray
+ * RenderInntektsgivendeArbeidFieldArray
  *
- * Presentasjonskomponent: Viser inputfelter for arbeidsgiver og organisasjonsnummer for registrering av arbeidsforhold.
- * Komponenten må rendres som komponenten til et FieldArray.
+ * Viser inputfelter for arbeidsgiver og organisasjonsnummer for registrering av arbeidsforhold.
  */
-const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
-  fields,
-  meta,
+const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   readOnly,
 }) => {
-  const sortedCountriesByName = alleKodeverk[kodeverkTyper.LANDKODER].slice().sort((a, b) => a.navn.localeCompare(b.navn));
+  const intl = useIntl();
+
+  const { control } = formHooks.useFormContext<{ [INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME]: FormValues[] }>();
+  const { fields, remove, append } = formHooks.useFieldArray({
+    control,
+    name: INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME,
+  });
+
+  const sortedCountriesByName = alleKodeverk[KodeverkType.LANDKODER].slice().sort((a, b) => a.navn.localeCompare(b.navn));
 
   return (
-    <PeriodFieldArray
+    <PeriodFieldArray<FormValues>
       fields={fields}
-      meta={meta}
       emptyPeriodTemplate={defaultInntektsgivendeArbeid}
       bodyText={intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.LeggTilArbeidsforhold' })}
       readOnly={readOnly}
+      remove={remove}
+      append={append}
     >
       {(arbeidsforholdElementFieldId, index, getRemoveButton) => (
         <Row key={arbeidsforholdElementFieldId} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
@@ -71,31 +80,31 @@ const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps & Wrappe
                   <InputField
                     readOnly={readOnly}
                     name={`${arbeidsforholdElementFieldId}.arbeidsgiver`}
-                    label={index === 0 ? { id: 'Registrering.InntektsgivendeArbeid.Arbeidsgiver' } : ''}
+                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.Arbeidsgiver' }) : ''}
                     bredde="XXL"
                     validate={[maxLength50]}
                     maxLength={99}
                   />
                 </FlexColumn>
                 <FlexColumn>
-                  <DatepickerField
-                    readOnly={readOnly}
+                  <Datepicker
+                    isReadOnly={readOnly}
                     name={`${arbeidsforholdElementFieldId}.periodeFom`}
-                    label={index === 0 ? { id: 'Registrering.InntektsgivendeArbeid.periodeFom' } : ''}
+                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.periodeFom' }) : ''}
                   />
                 </FlexColumn>
                 <FlexColumn>
-                  <DatepickerField
-                    readOnly={readOnly}
+                  <Datepicker
+                    isReadOnly={readOnly}
                     name={`${arbeidsforholdElementFieldId}.periodeTom`}
-                    label={index === 0 ? { id: 'Registrering.InntektsgivendeArbeid.periodeTom' } : ''}
+                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.periodeTom' }) : ''}
                   />
                 </FlexColumn>
                 <FlexColumn>
                   <SelectField
                     readOnly={readOnly}
                     name={`${arbeidsforholdElementFieldId}.land`}
-                    label={index === 0 ? { id: 'Registrering.InntektsgivendeArbeid.Land' } : ''}
+                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.Land' }) : ''}
                     selectValues={countrySelectValues(sortedCountriesByName)}
                     bredde="m"
                   />
@@ -114,4 +123,4 @@ const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps & Wrappe
   );
 };
 
-export default injectIntl(RenderInntektsgivendeArbeidFieldArray);
+export default RenderInntektsgivendeArbeidFieldArray;

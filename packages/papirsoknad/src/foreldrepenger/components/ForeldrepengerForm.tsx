@@ -1,33 +1,33 @@
-import React from 'react';
-import {
-  FormSection, formValueSelector, InjectedFormProps, reduxForm,
-} from 'redux-form';
-import { createSelector } from 'reselect';
-import { connect } from 'react-redux';
+import React, { FunctionComponent, useMemo } from 'react';
+import { useForm } from 'react-hook-form';
+import { Form } from '@navikt/ft-form-hooks';
+import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
+import { KodeverkType } from '@navikt/ft-kodeverk';
 
-import { omit } from '@navikt/ft-utils';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { SoknadData, getRegisteredFields } from '@fpsak-frontend/papirsoknad-felles';
-import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
-import MottattDatoPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-mottatt-dato';
-import FrilansPapirsoknadIndex, { FormValues as FrilansFormValues } from '@fpsak-frontend/papirsoknad-panel-frilans';
-import OppholdINorgePapirsoknadIndex, { FormValues as OppholdFormValues } from '@fpsak-frontend/papirsoknad-panel-opphold-i-norge';
-import SprakPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-sprak';
-import LagreSoknadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-lagre-soknad';
-import VirksomhetPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-virksomhet';
-import OmsorgOgAdopsjonPapirsoknadIndex, { FormValues as OmsorgOgAdopsjonFormValues } from '@fpsak-frontend/papirsoknad-panel-omsorg-og-adopsjon';
-import InntektsgivendeArbeidPapirsoknadIndex, {
-  FormValues as InntektFormValues,
-} from '@fpsak-frontend/papirsoknad-panel-inntektsgivende-arbeid';
-import AndreYtelserPapirsoknadIndex, {
-  ANDRE_YTELSER_FORM_NAME_PREFIX, FormValues as AndreYtelserFormValues,
-} from '@fpsak-frontend/papirsoknad-panel-andre-ytelser';
-import RettigheterPapirsoknadIndex, { rettighet } from '@fpsak-frontend/papirsoknad-panel-rettigheter';
-import AnnenForelderPapirsoknadIndex, { AnnenForelderFormValues } from '@fpsak-frontend/papirsoknad-panel-annen-forelder';
-import FodselPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-fodsel';
-
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
+import {
+  SoknadData,
+  MottattDatoPapirsoknadIndex,
+  FrilansPapirsoknadIndex,
+  FrilansFormValues,
+  OppholdINorgePapirsoknadIndex,
+  OppholdINorgeFormValues,
+  SprakPapirsoknadIndex,
+  LagreSoknadPapirsoknadIndex,
+  VirksomhetPapirsoknadIndex,
+  OmsorgOgAdopsjonPapirsoknadIndex,
+  OmsorgOgAdopsjonFormValues,
+  InntektsgivendeArbeidPapirsoknadIndex,
+  IArbeidFormValues,
+  AndreYtelserPapirsoknadIndex,
+  AndreYtelserFormValue,
+  RettigheterPapirsoknadIndex,
+  AnnenForelderPapirsoknadIndex,
+  AnnenForelderFormValues,
+  FodselPapirsoknadIndex,
+} from '@fpsak-frontend/papirsoknad-ui-komponenter';
+
 import PermisjonRettigheterPanel from './permisjon/PermisjonRettigheterPanel';
 import DekningsgradPanel from './dekningsgrad/DekningsgradPanel';
 import PermisjonPanel, { TIDSROM_PERMISJON_FORM_NAME_PREFIX, FormValues as FormValuesPermisjon } from './permisjon/PermisjonPanel';
@@ -37,123 +37,111 @@ const FORELDREPENGER_FORM_NAME = 'ForeldrepengerForm';
 const ANNEN_FORELDER_FORM_NAME_PREFIX = 'annenForelder';
 const OMSORG_FORM_NAME_PREFIX = 'omsorg';
 
-interface PureOwnProps {
-  onSubmitUfullstendigsoknad: () => Promise<any>;
-  readOnly: boolean;
-  soknadData: SoknadData;
-  alleKodeverk: AlleKodeverk;
-  fagsakPersonnummer: string;
-}
-
 type FormValues = {
   rettigheter?: string;
   foedselsDato?: string;
   [OMSORG_FORM_NAME_PREFIX]?: OmsorgOgAdopsjonFormValues;
   [ANNEN_FORELDER_FORM_NAME_PREFIX]?: AnnenForelderFormValues;
-} & AndreYtelserFormValues & InntektFormValues & FrilansFormValues & OppholdFormValues & FormValuesPermisjon;
+} & AndreYtelserFormValue & IArbeidFormValues & FrilansFormValues & OppholdINorgeFormValues & FormValuesPermisjon;
 
-interface MappedOwnProps {
-  valuesForRegisteredFieldsOnly: FormValues;
-  annenForelderInformertRequired: boolean;
-  sokerHarAleneomsorg: boolean;
-  denAndreForelderenHarRettPaForeldrepenger?: boolean;
-  initialValues: FormValues;
-  validate: (formValues: FormValues) => any;
+const buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => ({
+  ...FrilansPapirsoknadIndex.buildInitialValues(),
+  ...AndreYtelserPapirsoknadIndex.buildInitialValues(andreYtelser),
+  ...InntektsgivendeArbeidPapirsoknadIndex.buildInitialValues(),
+  [OMSORG_FORM_NAME_PREFIX]: {},
+  ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
+  ...PermisjonPanel.buildInitialValues(),
+});
+
+interface OwnProps {
+  readOnly: boolean;
+  soknadData: SoknadData;
+  alleKodeverk: AlleKodeverk;
+  fagsakPersonnummer: string;
+  onSubmit: (values: any) => Promise<any>;
+  onSubmitUfullstendigsoknad: () => Promise<any>;
 }
 
 /**
  * ForeldrepengerForm
  *
- * Redux-form-komponent for registrering av papirsøknad for foreldrepenger.
+ * Form-komponent for registrering av papirsøknad for foreldrepenger.
  */
-export class ForeldrepengerForm extends React.Component<PureOwnProps & MappedOwnProps & InjectedFormProps> {
-  shouldComponentUpdate(nextProps: PureOwnProps & MappedOwnProps & InjectedFormProps): boolean {
-    // Dette er gjort for å hindra rerender for testetrykk på alle underformene
-    const notRerenderIfChangedProps = ['array', 'blur', 'change', 'clearSubmit', 'destroy', 'dirty', 'initialize', 'error', 'pristine', 'reset',
-      'resetSection', 'touch', 'untouch', 'valuesForRegisteredFieldsOnly', 'autofill', 'clearFields', 'clearSubmitErrors', 'clearAsyncError', 'submit'];
-    const changedPropsList = Object.entries(this.props)
-      .filter(([key, val]) => nextProps[key] !== val)
-      .map(([key]) => key);
-    return changedPropsList.some((changedProp) => !notRerenderIfChangedProps.includes(changedProp));
+const ForeldrepengerForm: FunctionComponent<OwnProps> = ({
+  readOnly,
+  soknadData,
+  alleKodeverk,
+  onSubmit,
+  onSubmitUfullstendigsoknad,
+}) => {
+  const formMethods = useForm<FormValues>({
+    defaultValues: useMemo(() => buildInitialValues(alleKodeverk[KodeverkType.ARBEID_TYPE]), []),
+  });
+
+  // TODO Dette er ikkje korrekt. Felta under ligg i permisjonspanel
+  const annenForelder = formMethods.watch('annenForelder');
+
+  const sokerHarAleneomsorg = annenForelder ? annenForelder.sokerHarAleneomsorg : undefined;
+  const denAndreForelderenHarRettPaForeldrepenger = annenForelder ? annenForelder.denAndreForelderenHarRettPaForeldrepenger : undefined;
+
+  let annenForelderInformertRequired = true;
+  if (annenForelder && (sokerHarAleneomsorg || annenForelder.denAndreForelderenHarRettPaForeldrepenger === false)) {
+    annenForelderInformertRequired = false;
   }
 
-  render() {
-    const {
-      handleSubmit,
-      submitting,
-      form,
-      readOnly,
-      soknadData,
-      onSubmitUfullstendigsoknad,
-      error,
-      submitFailed,
-      annenForelderInformertRequired,
-      sokerHarAleneomsorg,
-      denAndreForelderenHarRettPaForeldrepenger,
-      alleKodeverk,
-    } = this.props;
-
-    return (
-      <form onSubmit={handleSubmit}>
-        <MottattDatoPapirsoknadIndex readOnly={readOnly} />
-        <OppholdINorgePapirsoknadIndex form={form} readOnly={readOnly} soknadData={soknadData} alleKodeverk={alleKodeverk} />
-        <InntektsgivendeArbeidPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
-        <VirksomhetPapirsoknadIndex
-          readOnly={readOnly}
-          form={form}
-          alleKodeverk={alleKodeverk}
-        />
-        <FrilansPapirsoknadIndex readOnly={readOnly} formName={FORELDREPENGER_FORM_NAME} />
-        <AndreYtelserPapirsoknadIndex readOnly={readOnly} form={form} alleKodeverk={alleKodeverk} />
-        <DekningsgradPanel readOnly={readOnly} />
-        {soknadData.getFamilieHendelseType() === familieHendelseType.FODSEL
-            && <FodselPapirsoknadIndex readOnly={readOnly} form={form} erForeldrepenger />}
-        <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
-        <FormSection name={OMSORG_FORM_NAME_PREFIX}>
-          <OmsorgOgAdopsjonPapirsoknadIndex
-            form={form}
-            namePrefix={OMSORG_FORM_NAME_PREFIX}
+  return (
+    <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(values)}>
+      <MottattDatoPapirsoknadIndex readOnly={readOnly} />
+      <OppholdINorgePapirsoknadIndex readOnly={readOnly} soknadData={soknadData} alleKodeverk={alleKodeverk} />
+      <InntektsgivendeArbeidPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
+      <VirksomhetPapirsoknadIndex
+        readOnly={readOnly}
+        alleKodeverk={alleKodeverk}
+      />
+      <FrilansPapirsoknadIndex readOnly={readOnly} />
+      <AndreYtelserPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
+      <DekningsgradPanel readOnly={readOnly} />
+      {soknadData.getFamilieHendelseType() === familieHendelseType.FODSEL && (
+        <FodselPapirsoknadIndex readOnly={readOnly} erForeldrepenger />
+      )}
+      <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
+      <OmsorgOgAdopsjonPapirsoknadIndex
+        readOnly={readOnly}
+        familieHendelseType={soknadData.getFamilieHendelseType()}
+        isForeldrepengerFagsak
+      />
+      <AnnenForelderPapirsoknadIndex
+        readOnly={readOnly}
+        permisjonRettigheterPanel={(
+          <PermisjonRettigheterPanel
             readOnly={readOnly}
-            familieHendelseType={soknadData.getFamilieHendelseType()}
-            isForeldrepengerFagsak
+            sokerHarAleneomsorg={sokerHarAleneomsorg}
+            denAndreForelderenHarRettPaForeldrepenger={denAndreForelderenHarRettPaForeldrepenger}
+            sokerErMor={soknadData.getForeldreType() === foreldreType.MOR}
           />
-        </FormSection>
-        <FormSection name={ANNEN_FORELDER_FORM_NAME_PREFIX}>
-          <AnnenForelderPapirsoknadIndex
-            soknadData={soknadData}
-            namePrefix={ANNEN_FORELDER_FORM_NAME_PREFIX}
-            form={form}
-            readOnly={readOnly}
-            permisjonRettigheterPanel={(
-              <PermisjonRettigheterPanel
-                readOnly={readOnly}
-                sokerHarAleneomsorg={sokerHarAleneomsorg}
-                denAndreForelderenHarRettPaForeldrepenger={denAndreForelderenHarRettPaForeldrepenger}
-                sokerErMor={soknadData.getForeldreType() === foreldreType.MOR}
-              />
-            )}
-            alleKodeverk={alleKodeverk}
-          />
-        </FormSection>
-        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
-        <PermisjonPanel
-          soknadData={soknadData}
-          form={form}
-          readOnly={readOnly}
-          // @ts-ignore fiks
-          error={error}
-          submitFailed={submitFailed}
-          sokerHarAleneomsorg={sokerHarAleneomsorg}
-          alleKodeverk={alleKodeverk}
-        />
-        <BekreftelsePanel annenForelderInformertRequired={annenForelderInformertRequired} readOnly={readOnly} />
-        <SprakPapirsoknadIndex readOnly={readOnly} />
-        <LagreSoknadPapirsoknadIndex readOnly={readOnly} onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad} form={form} submitting={submitting} />
-      </form>
-    );
-  }
-}
+        )}
+        alleKodeverk={alleKodeverk}
+      />
+      <PermisjonPanel
+        soknadData={soknadData}
+        readOnly={readOnly}
+        error={formMethods.formState.errors}
+        submitFailed={!formMethods.formState.isSubmitSuccessful}
+        sokerHarAleneomsorg={sokerHarAleneomsorg}
+        alleKodeverk={alleKodeverk}
+      />
+      <BekreftelsePanel annenForelderInformertRequired={annenForelderInformertRequired} readOnly={readOnly} />
+      <SprakPapirsoknadIndex readOnly={readOnly} />
+      <LagreSoknadPapirsoknadIndex
+        readOnly={readOnly}
+        onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
+        submitting={formMethods.formState.isSubmitting} 
+      />
+    </Form>
+  );
+};
 
+/*
 const getValidation = (soknadData: SoknadData, andreYtelser: KodeverkMedNavn[], sokerPersonnummer: string): any => {
   if (soknadData.getFamilieHendelseType() === familieHendelseType.FODSEL) {
     return (values: FormValues) => ({
@@ -183,63 +171,6 @@ const getValidation = (soknadData: SoknadData, andreYtelser: KodeverkMedNavn[], 
     });
   }
   return null;
-};
+};*/
 
-const transformRootValues = (state: any, registeredFieldNames: string[]): any => {
-  const values = formValueSelector(FORELDREPENGER_FORM_NAME)(state, ...registeredFieldNames);
-  if (values.rettigheter === rettighet.IKKE_RELEVANT) {
-    return omit(values, 'rettigheter');
-  }
-  return values;
-};
-
-const buildInitialValues = createSelector([(ownProps: { andreYtelser: KodeverkMedNavn[] }) => ownProps], (ownProps): FormValues => ({
-  ...FrilansPapirsoknadIndex.buildInitialValues(),
-  ...AndreYtelserPapirsoknadIndex.buildInitialValues(ownProps.andreYtelser),
-  ...InntektsgivendeArbeidPapirsoknadIndex.buildInitialValues(),
-  [OMSORG_FORM_NAME_PREFIX]: {},
-  ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
-  ...PermisjonPanel.buildInitialValues(),
-}));
-
-const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
-  const sokerPersonnummer = ownProps.fagsakPersonnummer;
-  const andreYtelserObject = { andreYtelser: ownProps.alleKodeverk[kodeverkTyper.ARBEID_TYPE] };
-  const validate = getValidation(ownProps.soknadData, andreYtelserObject.andreYtelser, sokerPersonnummer);
-  return (state: any): MappedOwnProps => {
-    const registeredFields = getRegisteredFields(FORELDREPENGER_FORM_NAME)(state);
-    // @ts-ignore Fiks
-    const registeredFieldNames = Object.values(registeredFields).map((rf) => rf.name);
-
-    const valuesForRegisteredFieldsOnly = registeredFieldNames.length
-      ? {
-        ...transformRootValues(state, registeredFieldNames),
-        [ANDRE_YTELSER_FORM_NAME_PREFIX]: AndreYtelserPapirsoknadIndex
-          .transformValues(formValueSelector(FORELDREPENGER_FORM_NAME)(state, ...registeredFieldNames), andreYtelserObject.andreYtelser),
-        [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: PermisjonPanel
-          .transformValues(formValueSelector(FORELDREPENGER_FORM_NAME)(state, ...registeredFieldNames)),
-      }
-      : {};
-    const sokerValue = valuesForRegisteredFieldsOnly.annenForelder;
-    const sokerHarAleneomsorg = sokerValue ? sokerValue.sokerHarAleneomsorg : undefined;
-    const denAndreForelderenHarRettPaForeldrepenger = sokerValue ? sokerValue.denAndreForelderenHarRettPaForeldrepenger : undefined;
-
-    let annenForelderInformertRequired = true;
-    if (sokerValue && (sokerHarAleneomsorg || sokerValue.denAndreForelderenHarRettPaForeldrepenger === false)) {
-      annenForelderInformertRequired = false;
-    }
-    return {
-      initialValues: buildInitialValues(andreYtelserObject),
-      valuesForRegisteredFieldsOnly,
-      annenForelderInformertRequired,
-      sokerHarAleneomsorg,
-      denAndreForelderenHarRettPaForeldrepenger,
-      validate,
-    };
-  };
-};
-
-export default connect(mapStateToPropsFactory)(reduxForm({
-  form: FORELDREPENGER_FORM_NAME,
-/* @ts-ignore Fiks */
-})(ForeldrepengerForm));
+export default ForeldrepengerForm;

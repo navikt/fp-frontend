@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from 'react';
 
-import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import { AlleKodeverk } from '@fpsak-frontend/types';
+import { SoknadData } from '@fpsak-frontend/papirsoknad-ui-komponenter';
 
 import EngangsstonadForm from './components/EngangsstonadForm';
 
 interface OwnProps {
   onSubmitUfullstendigsoknad: () => Promise<any>;
-  onSubmit: (_formValues: any, _dispatch: any, values: any) => Promise<any>;
+  onSubmit: (values: any) => Promise<any>;
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;

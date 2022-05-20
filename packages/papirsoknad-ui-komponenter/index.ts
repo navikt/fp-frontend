@@ -6,7 +6,7 @@ export { default as AnnenForelderPapirsoknadIndex } from './src/annenForelderPan
 export type { FormValues as AnnenForelderFormValues } from './src/annenForelderPanel/components/AnnenForelderPanel';
 
 export { default as FodselPapirsoknadIndex } from './src/fodselPanel/FodselPapirsoknadIndex';
-export type { FormValues as FodserlFormValues } from './src/fodselPanel/components/TerminFodselDatoPanel';
+export type { FormValues as FodselFormValues } from './src/fodselPanel/components/TerminFodselDatoPanel';
 
 export { default as FrilansPapirsoknadIndex } from './src/frilansPanel/FrilansPapirsoknadIndex';
 export type { FormValues as FrilansFormValues } from './src/frilansPanel/components/FrilansPanel';
@@ -32,3 +32,5 @@ export { default as SprakPapirsoknadIndex } from './src/sprakPanel/SprakPapirsok
 export { default as VirksomhetPapirsoknadIndex } from './src/virksomhetPanel/VirksomhetPapirsoknadIndex';
 
 export { default as DekningsgradIndex } from './src/dekningsgradFp/DekningsgradIndex';
+
+export { default as SoknadData } from './src/felles/SoknadData';

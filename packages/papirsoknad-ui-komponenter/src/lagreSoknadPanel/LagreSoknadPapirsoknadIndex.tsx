@@ -9,14 +9,12 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   readOnly: boolean;
-  form: string;
   onSubmitUfullstendigsoknad: () => Promise<any>;
   submitting: boolean;
 }
 
 const LagreSoknadPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   readOnly,
-  form,
   onSubmitUfullstendigsoknad,
   submitting,
 }) => (
@@ -24,7 +22,6 @@ const LagreSoknadPapirsoknadIndex: FunctionComponent<OwnProps> = ({
     { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <LagreSoknadPanel
       readOnly={readOnly}
-      form={form}
       onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
       submitting={submitting}
     />

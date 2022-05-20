@@ -44,10 +44,9 @@ interface StaticFunctions {
 }
 
 /**
- *  FrilansOppdragForFamilieFieldArray
+ * FrilansOppdragForFamilieFieldArray
  *
- * Presentasjonskomponent: Viser inputfelter for fra og til dato for frilansperioder
- * Komponenten må rendres som komponenten til et FieldArray.
+ * Viser inputfelter for fra og til dato for frilansperioder.
  */
 export const FrilansOppdragForFamilieFieldArray: FunctionComponent<OwnProps> & StaticFunctions = ({
   fields,

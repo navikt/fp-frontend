@@ -1,15 +1,14 @@
-import React, { Fragment, FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
+import React, { Fragment, FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
-
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { CheckboxField, NavFieldGroup } from '@fpsak-frontend/form';
+import { CheckboxField, SkjemaGruppeMedFeilviser } from '@navikt/ft-form-hooks';
+import { AlleKodeverk } from '@navikt/ft-types';
+import { KodeverkType } from '@navikt/ft-kodeverk';
+
 import naringsvirksomhetType from '@fpsak-frontend/kodeverk/src/naringsvirksomhetType';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
-import { isRequiredMessage } from '@navikt/ft-form-validators';
+
+const TYPE_VIRKSOMHET_PREFIX = 'typeVirksomhet';
 
 const naringsvirksomhetTypeOrder = {
   [naringsvirksomhetType.DAGMAMMA]: 1,
@@ -25,47 +24,50 @@ const compare = (arg1: number, arg2: number): number => {
   return arg1 < arg2 ? -1 : 0;
 };
 
-interface PureOwnProps {
+export type FormValues = {
+  [TYPE_VIRKSOMHET_PREFIX]: Record<string, boolean>;
+}
+
+interface OwnProps {
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
-  error?: string;
-}
-
-interface MappedOwnProps {
-  naringvirksomhetTyper: KodeverkMedNavn[];
-}
-
-interface StaticFunctions {
-  validate: (values: any) => any;
+  hasError: boolean;
 }
 
 /**
  * VirksomhetTypeNaringPanel
  *
  * Presentasjonskomponent. Komponenten vises som del av skjermbildet for registrering av
- * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for
- * søker.
+ * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
-export const VirksomhetTypeNaringPanel: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
+const VirksomhetTypeNaringPanel: FunctionComponent<OwnProps> = ({
   readOnly,
-  naringvirksomhetTyper,
-  error,
-}) => (
-  <>
-    <Undertekst><FormattedMessage id="Registrering.VirksomhetNaeringTypePanel.Title" /></Undertekst>
-    <VerticalSpacer fourPx />
-    <NavFieldGroup errorMessage={error}>
-      {[...naringvirksomhetTyper].sort((a, b) => compare(naringsvirksomhetTypeOrder[a.kode], naringsvirksomhetTypeOrder[b.kode]))
-        .map((nv) => (
+  hasError,
+  alleKodeverk,
+}) => {
+  const virksomhetTyper = alleKodeverk[KodeverkType.VIRKSOMHET_TYPE];
+  const naringvirksomhetTyper = useMemo(() => virksomhetTyper
+    .filter((t) => t.kode !== naringsvirksomhetType.FRILANSER)
+    .sort((a, b) => compare(naringsvirksomhetTypeOrder[a.kode], naringsvirksomhetTypeOrder[b.kode])),
+  []);
+
+  return (
+    <>
+      <Undertekst><FormattedMessage id="Registrering.VirksomhetNaeringTypePanel.Title" /></Undertekst>
+      <VerticalSpacer fourPx />
+      <SkjemaGruppeMedFeilviser name="feil" errorMessage={hasError ? 'Feil' : undefined}>
+        {naringvirksomhetTyper.map((nv) => (
           <Fragment key={nv.kode}>
             <VerticalSpacer fourPx />
-            <CheckboxField name={nv.kode} key={nv.kode} label={nv.navn} readOnly={readOnly} />
+            <CheckboxField name={`${TYPE_VIRKSOMHET_PREFIX}.${nv.kode}`} key={nv.kode} label={nv.navn} readOnly={readOnly} />
           </Fragment>
         ))}
-    </NavFieldGroup>
-  </>
-);
+      </SkjemaGruppeMedFeilviser>
+    </>
+  );
+};
 
+/*
 VirksomhetTypeNaringPanel.validate = (values: any) => {
   if (!values.typeVirksomhet
     || Object.keys(values.typeVirksomhet).length === 0
@@ -74,15 +76,6 @@ VirksomhetTypeNaringPanel.validate = (values: any) => {
     return { _error: isRequiredMessage() };
   }
   return {};
-};
+};*/
 
-const getFilteredNaringsvirksomhetTypes = createSelector(
-  [(ownProps: PureOwnProps) => ownProps.alleKodeverk[kodeverkTyper.VIRKSOMHET_TYPE]], (types = []) => types
-    .filter((t) => t.kode !== naringsvirksomhetType.FRILANSER),
-);
-
-const mapStateToProps = (_state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  naringvirksomhetTyper: getFilteredNaringsvirksomhetTypes(ownProps),
-});
-
-export default connect(mapStateToProps)(VirksomhetTypeNaringPanel);
+export default VirksomhetTypeNaringPanel;

@@ -8,11 +8,11 @@ import { createIntl } from '@navikt/ft-utils';
 import { AlleKodeverk, Fagsak } from '@navikt/ft-types';
 import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { SoknadData } from '@fpsak-frontend/papirsoknad-ui-komponenter';
 
 import EngangsstonadPapirsoknadIndex from './engangsstonad/EngangsstonadPapirsoknadIndex';
 import ForeldrepengerPapirsoknadIndex from './foreldrepenger/ForeldrepengerPapirsoknadIndex';
 import SvangerskapspengerPapirsoknadIndex from './svangerskapspenger/SvangerskapspengerPapirsoknadIndex';
-import SoknadData from './felles/SoknadData';
 
 import SoknadTypePickerForm from './SoknadTypePickerForm';
 import messages from '../i18n/nb_NO.json';

@@ -1,81 +1,66 @@
 import React, { FunctionComponent } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
-import { connect } from 'react-redux';
-import { FieldArray, FormSection, formValueSelector } from 'redux-form';
+import { useIntl } from 'react-intl';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
-
-import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption, formHooks } from '@navikt/ft-form-hooks';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
-import { arrayMinLength, required } from '@navikt/ft-form-validators';
-import { AlleKodeverk } from '@fpsak-frontend/types';
+import { required } from '@navikt/ft-form-validators';
+import { AlleKodeverk } from '@navikt/ft-types';
 
-import RegistrerVirksomhetPanel from './RegistrerVirksomhetPanel';
+import RegistrerVirksomhetPanel, { EGEN_VIRKSOMHET_NAME_PREFIX } from './RegistrerVirksomhetPanel';
 
 import styles from './egenVirksomhetPanel.less';
 
-const arrayMinLength1 = arrayMinLength(1);
-const harArbeidetIEgenVirksomhetName = 'harArbeidetIEgenVirksomhet';
+// const arrayMinLength1 = arrayMinLength(1);
 
-const virksomhetsFieldArrayName = 'virksomheter';
-const EGEN_VIRKSOMHET_FORM_NAME_PREFIX = 'egenVirksomhet';
+type FormValues = {
+  harArbeidetIEgenVirksomhet: boolean;
+};
 
-interface PureOwnProps {
+interface OwnProps {
   alleKodeverk: AlleKodeverk;
-  form: string;
   readOnly?: boolean;
-}
-
-interface MappedOwnProps {
-  harArbeidetIEgenVirksomhet?: boolean;
 }
 
 /**
  * EgenVirksomhetPanel
  *
- * Presentasjonskomponent. Komponenten vises som del av skjermbildet for registrering av
- * papirsøknad dersom søknad gjelder foreldrepenger. Søker velger må oppgi om hen har arbdeidet i
- * egen virksomhet.
+ * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
+ * Søker må oppgi om hen har arbdeidet i egen virksomhet.
  */
-export const EgenVirksomhetPanel: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps> = ({
-  readOnly,
-  intl,
-  form,
-  harArbeidetIEgenVirksomhet,
+const EgenVirksomhetPanel: FunctionComponent<OwnProps> = ({
+  readOnly = true,
   alleKodeverk,
-}) => (
-  <FormSection name={EGEN_VIRKSOMHET_FORM_NAME_PREFIX}>
+}) => {
+  const intl = useIntl();
+
+  const { watch } = formHooks.useFormContext<{ [EGEN_VIRKSOMHET_NAME_PREFIX]: FormValues }>();
+  const harArbeidetIEgenVirksomhet = watch(`${EGEN_VIRKSOMHET_NAME_PREFIX}.harArbeidetIEgenVirksomhet`) || null;
+
+  return (
     <BorderBox>
       <SkjemaGruppe legend={intl.formatMessage({ id: 'Registrering.EgenVirksomhet.Title' })}>
         <div className={styles.flexContainer}>
-          <RadioGroupField name={harArbeidetIEgenVirksomhetName} validate={[required]} direction="vertical" readOnly={readOnly}>
-            <RadioOption label={intl.formatMessage({ id: 'Registrering.EgenVirksomhet.No' })} value={false} />
-            <RadioOption label={intl.formatMessage({ id: 'Registrering.EgenVirksomhet.Yes' })} value />
+          <RadioGroupField
+            name={`${EGEN_VIRKSOMHET_NAME_PREFIX}.harArbeidetIEgenVirksomhet`}
+            validate={[required]}
+            direction="vertical"
+            readOnly={readOnly}
+            parse={(value: string) => value === 'true'}
+          >
+            <RadioOption label={intl.formatMessage({ id: 'Registrering.EgenVirksomhet.No' })} value="false" />
+            <RadioOption label={intl.formatMessage({ id: 'Registrering.EgenVirksomhet.Yes' })} value="true" />
           </RadioGroupField>
         </div>
         {harArbeidetIEgenVirksomhet && (
-          <FieldArray
-            name={virksomhetsFieldArrayName}
-            // @ts-ignore
-            component={RegistrerVirksomhetPanel}
-            form={form}
-            namePrefix={EGEN_VIRKSOMHET_FORM_NAME_PREFIX}
-            validate={[arrayMinLength1]}
+          <RegistrerVirksomhetPanel
+            // validate={[arrayMinLength1]}
             readOnly={readOnly}
             alleKodeverk={alleKodeverk}
           />
         )}
       </SkjemaGruppe>
     </BorderBox>
-  </FormSection>
-);
-
-EgenVirksomhetPanel.defaultProps = {
-  readOnly: true,
+  );
 };
 
-const mapStateToProps = (state: any, initialProps: PureOwnProps): MappedOwnProps => ({
-  harArbeidetIEgenVirksomhet: formValueSelector(initialProps.form)(state, EGEN_VIRKSOMHET_FORM_NAME_PREFIX)
-    ? formValueSelector(initialProps.form)(state, EGEN_VIRKSOMHET_FORM_NAME_PREFIX).harArbeidetIEgenVirksomhet : null,
-});
-
-export default connect(mapStateToProps)(injectIntl(EgenVirksomhetPanel));
+export default EgenVirksomhetPanel;

@@ -13,8 +13,7 @@ import { ariaCheck, required } from '@navikt/ft-form-validators';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk } from '@navikt/ft-types';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
-
-import SoknadData from './felles/SoknadData';
+import { SoknadData } from '@fpsak-frontend/papirsoknad-ui-komponenter';
 
 import styles from './soknadTypePickerForm.less';
 

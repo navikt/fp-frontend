@@ -1,15 +1,13 @@
 import React, { FunctionComponent } from 'react';
-import { Dispatch } from 'redux';
 
-import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
+import { SoknadData } from '@fpsak-frontend/papirsoknad-ui-komponenter';
 import { AlleKodeverk } from '@fpsak-frontend/types';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import ForeldrepengerForm from './components/ForeldrepengerForm';
 
 interface OwnProps {
   onSubmitUfullstendigsoknad: () => Promise<any>;
-  onSubmit: (_formValues: any, _dispatch: Dispatch, values: any) => Promise<any>;
+  onSubmit: (values: any) => Promise<any>;
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
@@ -24,16 +22,14 @@ const ForeldrepengerPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   fagsakPersonnummer,
 }) => (
-  <ReduxWrapper formName="ForeldrepengerPapirsoknadIndex">
-    <ForeldrepengerForm
-      onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
-      onSubmit={onSubmit}
-      readOnly={readOnly}
-      soknadData={soknadData}
-      alleKodeverk={alleKodeverk}
-      fagsakPersonnummer={fagsakPersonnummer}
-    />
-  </ReduxWrapper>
+  <ForeldrepengerForm
+    onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
+    onSubmit={onSubmit}
+    readOnly={readOnly}
+    soknadData={soknadData}
+    alleKodeverk={alleKodeverk}
+    fagsakPersonnummer={fagsakPersonnummer}
+  />
 );
 
 export default ForeldrepengerPapirsoknadIndex;

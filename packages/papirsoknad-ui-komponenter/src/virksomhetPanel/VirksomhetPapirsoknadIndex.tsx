@@ -11,19 +11,16 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   readOnly: boolean;
-  form: string;
   alleKodeverk: AlleKodeverk;
 }
 
 const VirksomhetPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   readOnly,
-  form,
   alleKodeverk,
 }) => (
   <RawIntlProvider value={intl}>
     <EgenVirksomhetPanel
       readOnly={readOnly}
-      form={form}
       alleKodeverk={alleKodeverk}
     />
   </RawIntlProvider>
