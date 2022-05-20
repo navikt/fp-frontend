@@ -6,21 +6,21 @@ import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
 import { RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
 
-import FrilansPerioderFieldArray from './FrilansPerioderFieldArray';
-import FrilansOppdragForFamiliePanel, { FieldValues as FormValuesOppdragForFamilie } from './FrilansOppdragForFamiliePanel';
+import FrilansPerioderFieldArray, { FormValues as PerioderFormValues } from './FrilansPerioderFieldArray';
+import FrilansOppdragForFamiliePanel, { FormValues as FormValuesOppdragForFamilie } from './FrilansOppdragForFamiliePanel';
 
-export const FRILANS_NAME_PREFIX = 'frilans';
+const FRILANS_NAME_PREFIX = 'frilans';
+
+export type FormValues = {
+  [FRILANS_NAME_PREFIX]: {
+    harSokerPeriodeMedFrilans?: boolean;
+    erNyoppstartetFrilanser?: boolean;
+    harInntektFraFosterhjem?: boolean;
+  } & FormValuesOppdragForFamilie & PerioderFormValues;
+}
 
 interface OwnProps {
   readOnly: boolean;
-}
-
-export type FormValues = {
-  [FRILANS_NAME_PREFIX]?: {
-    harSokerPeriodeMedFrilans: boolean;
-    erNyoppstartetFrilanser: boolean;
-    harInntektFraFosterhjem: boolean;
-  } & FormValuesOppdragForFamilie;
 }
 
 interface StaticFunctions {
@@ -46,7 +46,7 @@ const FrilansPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
           <ArrowBox>
             <Undertekst><FormattedMessage id="Registrering.Frilans.OppgiPeriode" /></Undertekst>
             <VerticalSpacer eightPx />
-            <FieldArray name="perioder" component={FrilansPerioderFieldArray} readOnly={readOnly} />
+            <FrilansPerioderFieldArray readOnly={readOnly} />
             <VerticalSpacer fourPx />
             <RadioGroupField
               name={`${FRILANS_NAME_PREFIX}.erNyoppstartetFrilanser`}
@@ -67,7 +67,7 @@ const FrilansPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
               <RadioOption label={<FormattedMessage id="Registrering.Frilans.Yes" />} value="true" />
               <RadioOption label={<FormattedMessage id="Registrering.Frilans.No" />} value="false" />
             </RadioGroupField>
-            <FrilansOppdragForFamiliePanel readOnly={readOnly} formName={formName} namePrefix={FRILANS_NAME_PREFIX} />
+            <FrilansOppdragForFamiliePanel readOnly={readOnly} />
           </ArrowBox>
         </RadioOption>
       </RadioGroupField>

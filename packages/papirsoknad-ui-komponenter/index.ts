@@ -1,5 +1,5 @@
 export { default as AndreYtelserPapirsoknadIndex } from './src/andreYtelserPanel/AndreYtelserPapirsoknadIndex';
-export { ANDRE_YTELSER_FORM_NAME_PREFIX } from './src/andreYtelserPanel/components/AndreYtelserPanel';
+export { ANDRE_YTELSER_NAME_PREFIX as ANDRE_YTELSER_FORM_NAME_PREFIX } from './src/andreYtelserPanel/components/RenderAndreYtelserPerioderFieldArray';
 export type { FormValues as AndreYtelserFormValue } from './src/andreYtelserPanel/components/AndreYtelserPanel';
 
 export { default as AnnenForelderPapirsoknadIndex } from './src/annenForelderPanel/AnnenForelderPapirsoknadIndex';
@@ -32,5 +32,7 @@ export { default as SprakPapirsoknadIndex } from './src/sprakPanel/SprakPapirsok
 export { default as VirksomhetPapirsoknadIndex } from './src/virksomhetPanel/VirksomhetPapirsoknadIndex';
 
 export { default as DekningsgradIndex } from './src/dekningsgradFp/DekningsgradIndex';
+
+export { default as BekreftelsePanel } from './src/bekreftelseFp/BekreftelsePanel';
 
 export { default as SoknadData } from './src/felles/SoknadData';

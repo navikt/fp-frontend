@@ -1,8 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { RawIntlProvider } from 'react-intl';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
-
-import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
+import { RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -19,27 +17,26 @@ interface OwnProps {
 /**
  * Presentasjonskomponent. Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
  */
-export const BekreftelsePanel: FunctionComponent<OwnProps> = ({
+const BekreftelsePanel: FunctionComponent<OwnProps> = ({
   readOnly,
-  annenForelderInformertRequired,
+  annenForelderInformertRequired = false,
 }) => (
-  <RawIntlProvider value={intl}>
-    <BorderBox>
-      <VerticalSpacer twentyPx />
-      <Undertittel>{intl.formatMessage({ id: 'Registrering.TheOtherParent.Confirmation' })}</Undertittel>
-      <VerticalSpacer eightPx />
-      <Undertekst>{intl.formatMessage({ id: 'Registrering.TheOtherParent.OtherParentKnowPeriods' })}</Undertekst>
-      <VerticalSpacer eightPx />
-      <RadioGroupField name="annenForelderInformert" readOnly={readOnly} validate={annenForelderInformertRequired ? [required] : []}>
-        <RadioOption label={{ id: 'Registrering.TheOtherParent.Yes' }} value />
-        <RadioOption label={{ id: 'Registrering.TheOtherParent.No' }} value={false} />
-      </RadioGroupField>
-    </BorderBox>
-  </RawIntlProvider>
+  <BorderBox>
+    <VerticalSpacer twentyPx />
+    <Undertittel>{intl.formatMessage({ id: 'Registrering.TheOtherParent.Confirmation' })}</Undertittel>
+    <VerticalSpacer eightPx />
+    <Undertekst>{intl.formatMessage({ id: 'Registrering.TheOtherParent.OtherParentKnowPeriods' })}</Undertekst>
+    <VerticalSpacer eightPx />
+    <RadioGroupField
+      name="annenForelderInformert"
+      readOnly={readOnly}
+      validate={annenForelderInformertRequired ? [required] : []}
+      parse={(value: string) => value === 'true'}
+    >
+      <RadioOption label={intl.formatMessage({ id: 'Registrering.TheOtherParent.Yes' })} value="true" />
+      <RadioOption label={intl.formatMessage({ id: 'Registrering.TheOtherParent.No' })} value="false" />
+    </RadioGroupField>
+  </BorderBox>
 );
-
-BekreftelsePanel.defaultProps = {
-  annenForelderInformertRequired: false,
-};
 
 export default BekreftelsePanel;

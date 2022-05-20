@@ -1,30 +1,26 @@
 import React, { FunctionComponent } from 'react';
-import moment from 'moment';
-import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
+import { useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-
-import { DatepickerField, PeriodFieldArray } from '@fpsak-frontend/form';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import {
-  dateAfterOrEqual, hasValidDate, isRequiredMessage, required,
-} from '@navikt/ft-form-validators';
+import { Datepicker, formHooks, PeriodFieldArray } from '@navikt/ft-form-hooks';
 
 import styles from './renderAndreYtelserPerioderFieldArray.less';
 
-interface OwnProps {
-  fields: FieldArrayFieldsProps<any>;
-  meta: FieldArrayMetaProps;
-  readOnly: boolean;
-}
+export const ANDRE_YTELSER_NAME_PREFIX = 'andreYtelser';
+
+export const ANDRE_YTELSER_PERIODE_SUFFIX = 'PERIODER';
 
 export type FormValues = {
   periodeFom: string;
   periodeTom: string;
 }
 
+interface OwnProps {
+  readOnly: boolean;
+  name: string;
+}
+
 interface StaticFunctions {
-  validate?: (values: FormValues[]) => any,
   transformValues: (values: FormValues[], ytelseType: string) => {
     ytelseType: string;
     periodeFom: string;
@@ -35,43 +31,58 @@ interface StaticFunctions {
 /**
  *  RenderAndreYtelserPerioderFieldArray
  *
- * Presentasjonskomponent: Viser inputfelter for fra og til dato for perioder for andre ytelser
- * Komponenten må rendres som komponenten til et FieldArray.
+ * Viser inputfelter for fra og til dato for perioder for andre ytelser
  */
-export const RenderAndreYtelserPerioderFieldArray: FunctionComponent<OwnProps> & StaticFunctions = ({
-  fields,
-  meta,
+const RenderAndreYtelserPerioderFieldArray: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
-}) => (
-  <PeriodFieldArray fields={fields} meta={meta} readOnly={readOnly}>
-    {(periodeElementFieldId, index, getRemoveButton) => (
-      <Row key={periodeElementFieldId}>
-        <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                <DatepickerField
-                  name={`${periodeElementFieldId}.periodeFom`}
-                  label={index === 0 ? { id: 'Registrering.AndreYtelser.periodeFom' } : ''}
-                />
-              </FlexColumn>
-              <FlexColumn>
-                <DatepickerField
-                  name={`${periodeElementFieldId}.periodeTom`}
-                  label={index === 0 ? { id: 'Registrering.AndreYtelser.periodeTom' } : ''}
-                />
-              </FlexColumn>
-              <FlexColumn>
-                {getRemoveButton()}
-              </FlexColumn>
-            </FlexRow>
-          </FlexContainer>
-        </Column>
-      </Row>
-    )}
-  </PeriodFieldArray>
-);
+  name,
+}) => {
+  const intl = useIntl();
 
+  const { control } = formHooks.useFormContext<{ [ANDRE_YTELSER_NAME_PREFIX]: FormValues}>();
+  const { fields, remove, append } = formHooks.useFieldArray({
+    control,
+    name: `${ANDRE_YTELSER_NAME_PREFIX}.${name}`,
+  });
+
+  return (
+    <PeriodFieldArray
+      fields={fields}
+      bodyText=""
+      readOnly={readOnly}
+      append={append}
+      remove={remove}
+    >
+      {(periodeElementFieldId, index, getRemoveButton) => (
+        <Row key={periodeElementFieldId}>
+          <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+            <FlexContainer>
+              <FlexRow>
+                <FlexColumn>
+                  <Datepicker
+                    name={`${ANDRE_YTELSER_NAME_PREFIX}.${name}.${periodeElementFieldId}.periodeFom`}
+                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeFom' }) : ''}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <Datepicker
+                    name={`${ANDRE_YTELSER_NAME_PREFIX}.${name}.${periodeElementFieldId}.periodeTom`}
+                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeTom' }) : ''}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  {getRemoveButton()}
+                </FlexColumn>
+              </FlexRow>
+            </FlexContainer>
+          </Column>
+        </Row>
+      )}
+    </PeriodFieldArray>
+  );
+};
+
+/*
 RenderAndreYtelserPerioderFieldArray.validate = (values: FormValues[]): any => {
   // eslint-disable-next-line react/destructuring-assignment
   if (!values || !values.length) {
@@ -105,6 +116,7 @@ RenderAndreYtelserPerioderFieldArray.validate = (values: FormValues[]): any => {
   }
   return null;
 };
+*/
 
 RenderAndreYtelserPerioderFieldArray.transformValues = (values: FormValues[], ytelseType: string): any => values.map((ytelsePeriode) => ({
   ytelseType,

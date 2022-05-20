@@ -1,29 +1,22 @@
 import React, { FunctionComponent } from 'react';
-import moment from 'moment';
+import { useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import {
-  dateAfterOrEqual, hasValidDate, required,
-} from '@navikt/ft-form-validators';
-import { DatepickerField, formHooks, PeriodFieldArray } from '@navikt/ft-form-hooks';
+import { Datepicker, formHooks, PeriodFieldArray } from '@navikt/ft-form-hooks';
 
 import styles from './frilansPerioderFieldArray.less';
 
-interface OwnProps {
-  readOnly: boolean;
-}
+const FRILANS_NAME_PREFIX = 'frilans';
 
 export type FormValues = {
-  periodeFom: string;
-  periodeTom?: string;
-}
+  perioder: {
+    periodeFom: string;
+    periodeTom?: string;
+  }[],
+};
 
-interface StaticFunctions {
-  validate: (values: FormValues[]) => {
-    periodeFom: any;
-    periodeTom: any;
-  }[] | null,
+interface OwnProps {
+  readOnly: boolean;
 }
 
 /**
@@ -31,18 +24,21 @@ interface StaticFunctions {
  *
  * Viser inputfelter for fra og til dato for frilansperioder
  */
-const FrilansPerioderFieldArray: FunctionComponent<OwnProps> & StaticFunctions = ({
+const FrilansPerioderFieldArray: FunctionComponent<OwnProps> = ({
   readOnly,
 }) => {
-  const { control } = formHooks.useFormContext<{ fremtidigeOppholdUtenlands: FormValues[] }>();
+  const intl = useIntl();
+
+  const { control } = formHooks.useFormContext<{ [FRILANS_NAME_PREFIX]: FormValues}>();
   const { fields, remove, append } = formHooks.useFieldArray({
     control,
-    name: 'fremtidigeOppholdUtenlands',
+    name: `${FRILANS_NAME_PREFIX}.perioder`,
   });
 
   return (
-    <PeriodFieldArray<FormValues>
+    <PeriodFieldArray
       fields={fields}
+      bodyText=""
       readOnly={readOnly}
       remove={remove}
       append={append}
@@ -53,15 +49,15 @@ const FrilansPerioderFieldArray: FunctionComponent<OwnProps> & StaticFunctions =
             <FlexContainer>
               <FlexRow>
                 <FlexColumn>
-                  <DatepickerField
-                    name={`${periodeElementFieldId}.periodeFom`}
-                    label={index === 0 ? { id: 'Registrering.Frilans.periodeFom' } : ''}
+                  <Datepicker
+                    name={`${FRILANS_NAME_PREFIX}.perioder.${periodeElementFieldId}.periodeFom`}
+                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.Frilans.periodeFom' }) : ''}
                   />
                 </FlexColumn>
                 <FlexColumn>
-                  <DatepickerField
-                    name={`${periodeElementFieldId}.periodeTom`}
-                    label={index === 0 ? { id: 'Registrering.Frilans.periodeTom' } : ''}
+                  <Datepicker
+                    name={`${FRILANS_NAME_PREFIX}.perioder.${periodeElementFieldId}.periodeTom`}
+                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.Frilans.periodeTom' }) : ''}
                   />
                 </FlexColumn>
                 {getRemoveButton && (
@@ -78,6 +74,7 @@ const FrilansPerioderFieldArray: FunctionComponent<OwnProps> & StaticFunctions =
   );
 };
 
+/*
 FrilansPerioderFieldArray.validate = (values: FormValues[] = []): any => {
   const arrayErrors = values.map(({
     periodeFom,
@@ -105,5 +102,6 @@ FrilansPerioderFieldArray.validate = (values: FormValues[] = []): any => {
   }
   return null;
 };
+*/
 
 export default FrilansPerioderFieldArray;

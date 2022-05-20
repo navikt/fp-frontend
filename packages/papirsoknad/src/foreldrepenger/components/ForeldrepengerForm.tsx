@@ -26,14 +26,13 @@ import {
   AnnenForelderPapirsoknadIndex,
   AnnenForelderFormValues,
   FodselPapirsoknadIndex,
+  BekreftelsePanel,
+  DekningsgradIndex,
 } from '@fpsak-frontend/papirsoknad-ui-komponenter';
 
 import PermisjonRettigheterPanel from './permisjon/PermisjonRettigheterPanel';
-import DekningsgradPanel from './dekningsgrad/DekningsgradPanel';
 import PermisjonPanel, { TIDSROM_PERMISJON_FORM_NAME_PREFIX, FormValues as FormValuesPermisjon } from './permisjon/PermisjonPanel';
-import BekreftelsePanel from './bekreftelse/BekreftelsePanel';
 
-const FORELDREPENGER_FORM_NAME = 'ForeldrepengerForm';
 const ANNEN_FORELDER_FORM_NAME_PREFIX = 'annenForelder';
 const OMSORG_FORM_NAME_PREFIX = 'omsorg';
 
@@ -100,7 +99,7 @@ const ForeldrepengerForm: FunctionComponent<OwnProps> = ({
       />
       <FrilansPapirsoknadIndex readOnly={readOnly} />
       <AndreYtelserPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
-      <DekningsgradPanel readOnly={readOnly} />
+      <DekningsgradIndex readOnly={readOnly} />
       {soknadData.getFamilieHendelseType() === familieHendelseType.FODSEL && (
         <FodselPapirsoknadIndex readOnly={readOnly} erForeldrepenger />
       )}

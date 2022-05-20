@@ -1,11 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
-import { Dispatch } from 'redux';
 
 import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
 import { AlleKodeverk } from '@fpsak-frontend/types';
 import { createIntl } from '@navikt/ft-utils';
-import { ReduxWrapper } from '@fpsak-frontend/form';
 
 import SvangerskapspengerForm from './components/SvangerskapspengerForm';
 import messages from '../i18n/nb_NO.json';
@@ -14,7 +12,7 @@ const intl = createIntl(messages);
 
 interface OwnProps {
   onSubmitUfullstendigsoknad: () => Promise<any>;
-  onSubmit: (_formValues: any, _dispatch: Dispatch, values: any) => Promise<any>;
+  onSubmit: (values: any) => Promise<any>;
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
@@ -28,16 +26,13 @@ const SvangerskapspengerPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   alleKodeverk,
 }) => (
   <RawIntlProvider value={intl}>
-    <ReduxWrapper formName="SvangerskapspengerPapirsoknadIndex">
-      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
-      <SvangerskapspengerForm
-        onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
-        submitCallback={onSubmit}
-        readOnly={readOnly}
-        soknadData={soknadData}
-        alleKodeverk={alleKodeverk}
-      />
-    </ReduxWrapper>
+    <SvangerskapspengerForm
+      onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
+      submitCallback={onSubmit}
+      readOnly={readOnly}
+      soknadData={soknadData}
+      alleKodeverk={alleKodeverk}
+    />
   </RawIntlProvider>
 );
 

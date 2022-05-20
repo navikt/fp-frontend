@@ -1,23 +1,19 @@
-import React, { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { FieldArray, FormSection, formValueSelector } from 'redux-form';
+import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { Column, Row } from 'nav-frontend-grid';
-
-import { CheckboxField } from '@fpsak-frontend/form';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import arbeidType from '@fpsak-frontend/kodeverk/src/arbeidType';
+import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
+import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
-import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { KodeverkType } from '@navikt/ft-kodeverk';
 
-import RenderAndreYtelserPerioderFieldArray from './RenderAndreYtelserPerioderFieldArray';
+import arbeidType from '@fpsak-frontend/kodeverk/src/arbeidType';
+
+import RenderAndreYtelserPerioderFieldArray, { FormValues as PerioderFormValues,
+  ANDRE_YTELSER_PERIODE_SUFFIX, ANDRE_YTELSER_NAME_PREFIX,
+} from './RenderAndreYtelserPerioderFieldArray';
 
 import styles from './andreYtelserPanel.less';
-
-export const ANDRE_YTELSER_FORM_NAME_PREFIX = 'andreYtelser';
-
-const ANDRE_YTELSER_PERIODE_SUFFIX = 'PERIODER';
 
 const removeArbeidstyper = (andreYtelser: KodeverkMedNavn[], kunMiliterEllerSiviltjeneste?: boolean): KodeverkMedNavn[] => {
   if (kunMiliterEllerSiviltjeneste) {
@@ -27,87 +23,71 @@ const removeArbeidstyper = (andreYtelser: KodeverkMedNavn[], kunMiliterEllerSivi
   && ay.kode !== arbeidType.FRILANSER && ay.kode !== arbeidType.LONN_UNDER_UTDANNING);
 };
 
-interface PureOwnProps {
+export type FormValues = {
+  [ANDRE_YTELSER_NAME_PREFIX]?: {
+    [key: string ]: PerioderFormValues[] | boolean};
+}
+
+interface OwnProps {
   readOnly: boolean;
-  form: string;
   alleKodeverk: AlleKodeverk;
   kunMiliterEllerSiviltjeneste?: boolean;
 }
 
-interface MappedOwnProps {
-  andreYtelser: KodeverkMedNavn[];
-  selectedYtelser: { [key: string ]: {
-    periodeFom: string;
-    periodeTom: string;
-  }[]};
-}
-
-export type FormValues = {
-  [ANDRE_YTELSER_FORM_NAME_PREFIX]?: { [key: string ]: {
-    periodeFom: string;
-    periodeTom: string;
-  }[] | boolean};
-}
-
 interface StaticFunctions {
   buildInitialValues: (andreYtelser: KodeverkMedNavn[]) => FormValues;
-  validate: (values: FormValues, andreYtelser: KodeverkMedNavn[]) => any,
   transformValues: (values: FormValues, andreYtelser: KodeverkMedNavn[]) => any;
 }
 
 /**
  * AndreYtelserPanel
  *
- * Presentasjonskomponent. Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
+ * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
  */
-export const AndreYtelserPanel: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
+export const AndreYtelserPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
-  andreYtelser,
-  selectedYtelser,
-  kunMiliterEllerSiviltjeneste,
+  kunMiliterEllerSiviltjeneste = false,
+  alleKodeverk,
 }) => {
-  const checkboxFields = removeArbeidstyper(andreYtelser, kunMiliterEllerSiviltjeneste)
-    .map((ay) => {
-      const ytelseFieldName = `${ay.kode}_${ANDRE_YTELSER_PERIODE_SUFFIX}`;
-      return (
-        <React.Fragment key={ay.kode}>
-          <CheckboxField key={ay.kode} name={ay.kode} label={ay.navn} readOnly={readOnly} />
-          {selectedYtelser && selectedYtelser[ay.kode]
-          && (
-          <Row>
-            <Column xs="6">
-              <ArrowBox>
-                <FieldArray
-                  name={ytelseFieldName}
-                  component={RenderAndreYtelserPerioderFieldArray}
-                  readOnly={readOnly}
-                />
-              </ArrowBox>
-            </Column>
-          </Row>
-          )}
-        </React.Fragment>
-      );
-    });
+  const { watch } = formHooks.useFormContext<{ [ANDRE_YTELSER_NAME_PREFIX]: FormValues}>();
+  const selectedYtelser = watch(ANDRE_YTELSER_NAME_PREFIX);
+
+  const andreYtelser = alleKodeverk[KodeverkType.ARBEID_TYPE];
+
+  const filtrerteArbeidstyper = useMemo(() => removeArbeidstyper(andreYtelser, kunMiliterEllerSiviltjeneste), [kunMiliterEllerSiviltjeneste]);
+
   return (
-    <FormSection name={ANDRE_YTELSER_FORM_NAME_PREFIX}>
-      <BorderBox>
-        <SkjemaGruppe className={styles.fullWidth} legend={<FormattedMessage id="Registrering.AndreYtelser.Title" />}>
-          {checkboxFields}
-        </SkjemaGruppe>
-      </BorderBox>
-    </FormSection>
+    <BorderBox>
+      <SkjemaGruppe className={styles.fullWidth} legend={<FormattedMessage id="Registrering.AndreYtelser.Title" />}>
+        {filtrerteArbeidstyper.map((ay) => {
+          const ytelseFieldName = `${ay.kode}_${ANDRE_YTELSER_PERIODE_SUFFIX}`;
+          return (
+            <React.Fragment key={ay.kode}>
+              <CheckboxField
+                key={ay.kode}
+                name={`${ANDRE_YTELSER_NAME_PREFIX}.${ay.kode}`}
+                label={ay.navn}
+                readOnly={readOnly}
+              />
+              {selectedYtelser && selectedYtelser[ay.kode] && (
+                <Row>
+                  <Column xs="6">
+                    <ArrowBox>
+                      <RenderAndreYtelserPerioderFieldArray
+                        name={ytelseFieldName}
+                        readOnly={readOnly}
+                      />
+                    </ArrowBox>
+                  </Column>
+                </Row>
+              )}
+            </React.Fragment>
+          );
+        })}
+      </SkjemaGruppe>
+    </BorderBox>
   );
 };
-
-AndreYtelserPanel.defaultProps = {
-  kunMiliterEllerSiviltjeneste: false,
-};
-
-const mapStateToProps = (state: any, initialProps: PureOwnProps): MappedOwnProps => ({
-  selectedYtelser: formValueSelector(initialProps.form)(state, ANDRE_YTELSER_FORM_NAME_PREFIX),
-  andreYtelser: initialProps.alleKodeverk[kodeverkTyper.ARBEID_TYPE],
-});
 
 AndreYtelserPanel.buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => {
   const ytelseInitialValues = {};
@@ -115,9 +95,10 @@ AndreYtelserPanel.buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormVa
     const ytelsePeriodeFieldName = `${ay.kode}_${ANDRE_YTELSER_PERIODE_SUFFIX}`;
     ytelseInitialValues[ytelsePeriodeFieldName] = [{}];
   });
-  return { [ANDRE_YTELSER_FORM_NAME_PREFIX]: ytelseInitialValues };
+  return { [ANDRE_YTELSER_NAME_PREFIX]: ytelseInitialValues };
 };
 
+/*
 AndreYtelserPanel.validate = (values: FormValues, andreYtelser: KodeverkMedNavn[]): any => {
   const ytelseValues = values[ANDRE_YTELSER_FORM_NAME_PREFIX];
   const errors = {
@@ -129,10 +110,10 @@ AndreYtelserPanel.validate = (values: FormValues, andreYtelser: KodeverkMedNavn[
     errors[ANDRE_YTELSER_FORM_NAME_PREFIX][ytelsePerioderFieldName] = RenderAndreYtelserPerioderFieldArray.validate(ytelseValues[ytelsePerioderFieldName]);
   });
   return errors;
-};
+};*/
 
 AndreYtelserPanel.transformValues = (values: FormValues, andreYtelser: KodeverkMedNavn[]): any => {
-  const ytelseValues = values[ANDRE_YTELSER_FORM_NAME_PREFIX];
+  const ytelseValues = values[ANDRE_YTELSER_NAME_PREFIX];
   const newValues = [];
 
   andreYtelser.filter((ay) => ytelseValues && ytelseValues[ay.kode]).forEach((ay) => {
@@ -147,4 +128,4 @@ AndreYtelserPanel.transformValues = (values: FormValues, andreYtelser: KodeverkM
   return newValues;
 };
 
-export default connect(mapStateToProps)(AndreYtelserPanel);
+export default AndreYtelserPanel;
