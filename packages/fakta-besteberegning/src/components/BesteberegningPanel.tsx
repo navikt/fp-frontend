@@ -11,7 +11,6 @@ import BesteberegningAP
 import BesteMånederVisningPanel from './BesteManederVisningPanel';
 import BesteberegningResultatGrunnlagPanel from './BesteberegningResultatGrunnlagPanel';
 import KontrollerBesteberegningPanel, { FormValues } from './KontrollerBesteberegningPanel';
-import KontrollerBesteberegningPanelOld from './KontrollerBesteberegningPanelOld';
 
 interface OwnProps {
   beregningsgrunnlag: Beregningsgrunnlag;
@@ -49,14 +48,14 @@ const BesteberegningPanel: FunctionComponent<OwnProps> = ({
     return null;
   }
   const førstePeriode = beregningsgrunnlagPeriode[0];
-  const nyttBesteberegningAP = aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.MANUELL_KONTROLL_AV_BESTEBEREGNING);
-  const gammeltBesteberegningAP = aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.KONTROLLER_AUTOMATISK_BESTEBEREGNING);
+  const besteberegningAP = aksjonspunkter.find((ap) => ap.definisjon === aksjonspunktCodes.KONTROLLER_AUTOMATISK_BESTEBEREGNING
+    || ap.definisjon === aksjonspunktCodes.MANUELL_KONTROLL_AV_BESTEBEREGNING);
   return (
     <div>
-      {!!nyttBesteberegningAP
+      {!!besteberegningAP
         && (
         <KontrollerBesteberegningPanel
-          aksjonspunkt={nyttBesteberegningAP}
+          aksjonspunkt={besteberegningAP}
           submitCallback={submitCallback}
           submittable={submittable}
           readOnly={readOnly}
@@ -65,18 +64,6 @@ const BesteberegningPanel: FunctionComponent<OwnProps> = ({
           setFormData={setFormData}
         />
         )}
-      {!!gammeltBesteberegningAP
-      && (
-        <KontrollerBesteberegningPanelOld
-          aksjonspunkt={gammeltBesteberegningAP}
-          submitCallback={submitCallback}
-          submittable={submittable}
-          readOnly={readOnly}
-          venteårsak={behandling.venteArsakKode}
-          formData={formData}
-          setFormData={setFormData}
-        />
-      )}
       <BorderBox>
         <BesteberegningResultatGrunnlagPanel
           periode={førstePeriode}
