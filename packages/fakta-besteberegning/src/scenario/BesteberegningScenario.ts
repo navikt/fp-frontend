@@ -12,7 +12,7 @@ export const besteberegninggrunnlag = {
       },
       {
         opptjeningAktivitetType: opptjeningAktivitetType.ARBEID,
-        arbeidsgiverId: '910909088',
+        arbeidsgiverId: '974652269',
         inntekt: 20000,
       },
     ],
@@ -37,7 +37,7 @@ export const besteberegninggrunnlag = {
       },
       {
         opptjeningAktivitetType: opptjeningAktivitetType.ARBEID,
-        arbeidsgiverId: '910909088',
+        arbeidsgiverId: '974652269',
         inntekt: 4321,
       },
       {
@@ -61,7 +61,7 @@ export const besteberegninggrunnlag = {
       },
       {
         opptjeningAktivitetType: opptjeningAktivitetType.ARBEID,
-        arbeidsgiverId: '910909088',
+        arbeidsgiverId: '974652269',
         inntekt: 25322,
       },
     ],
@@ -119,7 +119,7 @@ export const beregningsgrunnlag = {
       inntektskategori: 'ARBEIDSTAKER',
       arbeidsforhold: {
         arbeidsgiverNavn: 'BEDRIFT AS',
-        arbeidsgiverId: '910909088',
+        arbeidsgiverId: '974652269',
         startdato: '2019-02-03',
         opphoersdato: '2020-02-03',
         arbeidsforholdType: 'ARBEID',

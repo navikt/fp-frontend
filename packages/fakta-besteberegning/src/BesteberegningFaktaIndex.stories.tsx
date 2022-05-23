@@ -17,14 +17,14 @@ import BesteberegningFaktaIndex from './BesteberegningFaktaIndex';
 import { beregningsgrunnlag as scenarioBG } from './scenario/BesteberegningScenario';
 
 const arbeidsgiverOpplysninger = {
-  910909088: {
-    identifikator: '910909088',
+  974652269: {
+    identifikator: '974652269',
     navn: 'BEDRIFT AS',
     erPrivatPerson: false,
   },
   6823424234232: {
     identifikator: '6823424234232',
-    navn: 'Jan Bertheussen Johansen',
+    navn: 'Testy Test',
     erPrivatPerson: true,
     fødselsdato: '1943-03-03',
   },

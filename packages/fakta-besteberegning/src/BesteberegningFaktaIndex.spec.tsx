@@ -8,7 +8,7 @@ import * as stories from './BesteberegningFaktaIndex.stories';
 
 const {
   BesteberegningMedDagpengerOgArbeid,
-  BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt,
+  BesteberegningMedAvvik,
 } = composeStories(stories);
 
 describe('<BesteberegningFaktaIndex>', () => {
@@ -21,8 +21,8 @@ describe('<BesteberegningFaktaIndex>', () => {
     expect(screen.queryByText('Vurdering')).not.toBeInTheDocument();
 
     expect(screen.getAllByText('Dagpenger')).toHaveLength(9);
-    expect(screen.getAllByText('BEDRIFT AS (910909088)')).toHaveLength(3);
-    expect(screen.getByText('Jan Bertheussen Johansen (03.03.1943)')).toBeInTheDocument();
+    expect(screen.getAllByText('BEDRIFT AS (974652269)')).toHaveLength(3);
+    expect(screen.getByText('Testy Test (03.03.1943)')).toBeInTheDocument();
 
     expect(screen.getByText('Januar - 2020')).toBeInTheDocument();
     expect(screen.getByText('Februar - 2020')).toBeInTheDocument();
@@ -35,14 +35,15 @@ describe('<BesteberegningFaktaIndex>', () => {
   it('skal bekrefte aksjonspunkt for vurder besteberegning', async () => {
     const lagre = jest.fn(() => Promise.resolve());
 
-    const utils = render(<BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt submitCallback={lagre} />);
+    const utils = render(<BesteberegningMedAvvik submitCallback={lagre} />);
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeInTheDocument();
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(screen.getByText('Saken er tatt ut til kontroll på grunn av stort avvik mellom 3. og 1. ledd.'
+      + ' Vennligst kontroller beregningen')).toBeInTheDocument();
 
-    expect(screen.getByText('Saken er riktig beregnet, fortsett behandlingen')).toBeEnabled();
-    expect(screen.getByText('Saken er ikke riktig beregnet, sett saken på vent')).toBeEnabled();
-    userEvent.click(screen.getByLabelText('Saken er riktig beregnet, fortsett behandlingen'));
+    expect(screen.getByText('Beregningen er riktig, fortsett behandlingen.')).toBeEnabled();
+    userEvent.click(screen.getByRole('checkbox'));
     userEvent.paste(utils.getByLabelText('Vurdering'), 'Min begrunnelse for vurdering av besteberegning');
 
     expect(screen.getByText('Bekreft og fortsett')).toBeEnabled();
@@ -50,7 +51,7 @@ describe('<BesteberegningFaktaIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      kode: '5048',
+      kode: '5062',
       begrunnelse: 'Min begrunnelse for vurdering av besteberegning',
       besteberegningErKorrekt: true,
     });
