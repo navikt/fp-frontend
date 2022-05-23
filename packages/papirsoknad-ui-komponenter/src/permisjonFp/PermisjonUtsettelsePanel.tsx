@@ -1,86 +1,73 @@
 import React, { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { FieldArray, formValueSelector } from 'redux-form';
 import { Element } from 'nav-frontend-typografi';
-
-import { CheckboxField } from '@fpsak-frontend/form';
+import { formHooks, CheckboxField } from '@navikt/ft-form-hooks';
+import { AlleKodeverk } from '@navikt/ft-types';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { isRequiredMessage, required } from '@navikt/ft-form-validators';
-import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { KodeverkType } from '@navikt/ft-kodeverk';
 
-import { hasValidPeriodIncludingOtherErrors } from './validator';
-import RenderUtsettelsePeriodeFieldArray from './RenderUtsettelsePeriodeFieldArray';
+import RenderUtsettelsePeriodeFieldArray, {
+  UTSETTELSE_PERIODE_FIELD_ARRAY_NAME,
+  TIDSROM_PERMISJON_FORM_NAME_PREFIX,
+  FormValues as UtsettelsePeriodeFormValues,
+} from './RenderUtsettelsePeriodeFieldArray';
 
 import styles from './permisjonPanel.less';
 
-export const UTSETTELSE_PERIODE_FIELD_ARRAY_NAME = 'utsettelsePeriode';
+export type FormValues = {
+  skalUtsette?: boolean;
+  [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: UtsettelsePeriodeFormValues;
+}
 
-interface PureOwnProps {
+interface OwnProps {
   readOnly: boolean;
   visFeilMelding: boolean;
   alleKodeverk: AlleKodeverk;
-  form: string;
-  namePrefix: string;
-}
-
-interface MappedOwnProps {
-  utsettelseReasons: KodeverkMedNavn[];
-  utsettelseKvoter: KodeverkMedNavn[];
-  skalUtsette: boolean;
-}
-
-export type FormValues = {
-  arsakForUtsettelse?: string;
-  erArbeidstaker?: boolean;
-  skalUtsette?: boolean;
-  periodeFom: string;
-  periodeTom: string;
-  morsAktivitet: string;
-  periodeForUtsettelse: string;
 }
 
 interface StaticFunctions {
   buildInitialValues: () => any;
-  validate: (values?: FormValues[]) => any;
 }
 
 /**
- *  PermisjonUtsettelsePanel
+ * PermisjonUtsettelsePanel
  *
- * Presentasjonskomponent: Viser panel for utsettelse
- * Komponenten har inputfelter og må derfor rendres som etterkommer av komponent dekorert med reduxForm.
+ * Viser panel for utsettelse
+ * Komponenten har inputfelter og må derfor rendres som etterkommer av form komponent.
  */
-export const PermisjonUtsettelsePanel: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
-  utsettelseReasons,
-  utsettelseKvoter,
-  skalUtsette,
+const PermisjonUtsettelsePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   visFeilMelding,
-}) => (
-  <div>
-    <Element><FormattedMessage id="Registrering.Permisjon.Utsettelse.Title" /></Element>
-    <VerticalSpacer sixteenPx />
-    <CheckboxField
-      className={visFeilMelding ? styles.showErrorBackground : ''}
-      readOnly={readOnly}
-      name="skalUtsette"
-      label={<FormattedMessage id="Registrering.Permisjon.Utsettelse.UtsettUttaket" />}
-    />
-    { skalUtsette
-      && (
-      <FieldArray
-        name={UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}
-        component={RenderUtsettelsePeriodeFieldArray}
-        utsettelseReasons={utsettelseReasons}
-        utsettelseKvoter={utsettelseKvoter}
-        readOnly={readOnly}
-      />
-      )}
-  </div>
-);
+  alleKodeverk,
+}) => {
+  const utsettelseReasons = alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE];
+  const utsettelseKvoter = alleKodeverk[KodeverkType.UTSETTELSE_GRADERING_KVOTE];
 
+  const { watch } = formHooks.useFormContext<{[TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
+  const skalUtsette = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalUtsette`) || false;
+
+  return (
+    <div>
+      <Element><FormattedMessage id="Registrering.Permisjon.Utsettelse.Title" /></Element>
+      <VerticalSpacer sixteenPx />
+      <CheckboxField
+        className={visFeilMelding ? styles.showErrorBackground : ''}
+        readOnly={readOnly}
+        name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalUtsette`}
+        label={<FormattedMessage id="Registrering.Permisjon.Utsettelse.UtsettUttaket" />}
+      />
+      {skalUtsette && (
+        <RenderUtsettelsePeriodeFieldArray
+          utsettelseReasons={utsettelseReasons}
+          utsettelseKvoter={utsettelseKvoter}
+          readOnly={readOnly}
+        />
+      )}
+    </div>
+  );
+};
+
+/*
 PermisjonUtsettelsePanel.validate = (values) => {
   if (!values || !values.length) {
     return { _error: isRequiredMessage() };
@@ -102,17 +89,11 @@ PermisjonUtsettelsePanel.validate = (values) => {
   });
 
   return hasValidPeriodIncludingOtherErrors(values, otherErrors);
-};
+};*/
 
 PermisjonUtsettelsePanel.buildInitialValues = () => ({
   [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: [{}],
   skalUtsette: false,
 });
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  utsettelseReasons: ownProps.alleKodeverk[kodeverkTyper.UTSETTELSE_AARSAK_TYPE],
-  utsettelseKvoter: ownProps.alleKodeverk[kodeverkTyper.UTSETTELSE_GRADERING_KVOTE],
-  skalUtsette: formValueSelector(ownProps.form)(state, ownProps.namePrefix).skalUtsette,
-});
-
-export default connect(mapStateToProps)(PermisjonUtsettelsePanel);
+export default PermisjonUtsettelsePanel;

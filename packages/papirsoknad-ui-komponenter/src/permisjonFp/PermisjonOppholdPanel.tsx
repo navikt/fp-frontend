@@ -1,75 +1,66 @@
 import React, { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { FieldArray, formValueSelector } from 'redux-form';
 import { Element } from 'nav-frontend-typografi';
-
-import { CheckboxField } from '@fpsak-frontend/form';
+import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { isRequiredMessage, required } from '@navikt/ft-form-validators';
-import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { KodeverkType } from '@navikt/ft-kodeverk';
+import { AlleKodeverk } from '@navikt/ft-types';
 
-import { hasValidPeriodIncludingOtherErrors } from './validator';
-import RenderOppholdPeriodeFieldArray from './RenderOppholdPeriodeFieldArray';
-
-export const OPPHOLD_PERIODE_FIELD_ARRAY_NAME = 'oppholdPerioder';
-
-interface PureOwnProps {
-  readOnly: boolean;
-  alleKodeverk: AlleKodeverk;
-  form: string;
-  namePrefix: string;
-}
-
-interface MappedOwnProps {
-  oppholdsReasons: KodeverkMedNavn[];
-  skalHaOpphold: boolean;
-}
+import RenderOppholdPeriodeFieldArray, {
+  OPPHOLD_PERIODE_FIELD_ARRAY_NAME,
+  TIDSROM_PERMISJON_FORM_NAME_PREFIX,
+  FormValues as PeriodeFormValues,
+} from './RenderOppholdPeriodeFieldArray';
 
 export type FormValues = {
-  årsak: string;
   skalHaOpphold?: boolean;
-  periodeFom: string;
-  periodeTom: string;
+  [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]: PeriodeFormValues
+}
+
+interface OwnProps {
+  readOnly: boolean;
+  alleKodeverk: AlleKodeverk;
 }
 
 interface StaticFunctions {
   buildInitialValues: () => any;
-  validate: (values?: FormValues[]) => any;
 }
 
 /**
- *  PermisjonOppholdPanel
+ * PermisjonOppholdPanel
  *
- * Presentasjonskomponent: Viser panel for utsettelse
- * Komponenten har inputfelter og må derfor rendres som etterkommer av komponent dekorert med reduxForm.
+ * Viser panel for utsettelse
+ * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
-export const PermisjonOppholdPanel: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
-  oppholdsReasons,
-  skalHaOpphold,
+const PermisjonOppholdPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
-}) => (
-  <div>
-    <Element><FormattedMessage id="Registrering.Permisjon.Opphold.Title" /></Element>
-    <VerticalSpacer sixteenPx />
-    <CheckboxField
-      readOnly={readOnly}
-      name="skalHaOpphold"
-      label={<FormattedMessage id="Registrering.Permisjon.Opphold.OppholdUttaket" />}
-    />
-    { skalHaOpphold
-    && (
-      <FieldArray
-        name={OPPHOLD_PERIODE_FIELD_ARRAY_NAME}
-        component={RenderOppholdPeriodeFieldArray}
-        oppholdsReasons={oppholdsReasons}
-        readOnly={readOnly}
-      />
-    )}
-  </div>
-);
+  alleKodeverk,
+}) => {
+  const oppholdsReasons = alleKodeverk[KodeverkType.OPPHOLD_ARSAK];
 
+  const { watch } = formHooks.useFormContext<{[TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
+  const skalHaOpphold = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalHaOpphold`) || false;
+
+  return (
+    <div>
+      <Element><FormattedMessage id="Registrering.Permisjon.Opphold.Title" /></Element>
+      <VerticalSpacer sixteenPx />
+      <CheckboxField
+        readOnly={readOnly}
+        name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalHaOpphold`}
+        label={<FormattedMessage id="Registrering.Permisjon.Opphold.OppholdUttaket" />}
+      />
+      {skalHaOpphold && (
+        <RenderOppholdPeriodeFieldArray
+          oppholdsReasons={oppholdsReasons}
+          readOnly={readOnly}
+        />
+      )}
+    </div>
+  );
+};
+
+/*
 PermisjonOppholdPanel.validate = (values) => {
   if (!values || !values.length) {
     return { _error: isRequiredMessage() };
@@ -88,15 +79,11 @@ PermisjonOppholdPanel.validate = (values) => {
 
   return hasValidPeriodIncludingOtherErrors(values, otherErrors);
 };
+*/
 
 PermisjonOppholdPanel.buildInitialValues = () => ({
   [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]: [{}],
   skalHaOpphold: false,
 });
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  oppholdsReasons: ownProps.alleKodeverk[kodeverkTyper.OPPHOLD_ARSAK],
-  skalHaOpphold: formValueSelector(ownProps.form)(state, ownProps.namePrefix).skalHaOpphold,
-});
-
-export default connect(mapStateToProps)(PermisjonOppholdPanel);
+export default PermisjonOppholdPanel;

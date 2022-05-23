@@ -1,17 +1,30 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-
-import { DatepickerField, SelectField, PeriodFieldArray } from '@fpsak-frontend/form';
-import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import {
+  Datepicker, SelectField, PeriodFieldArray, formHooks,
+} from '@navikt/ft-form-hooks';
+import { KodeverkMedNavn } from '@navikt/ft-types';
 
 import { gyldigeUttakperioder } from './RenderPermisjonPeriodeFieldArray';
 
 import styles from './renderUtsettelsePeriodeFieldArray.less';
 
-const defaultUtsettelsePeriode = {
+export const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
+export const UTSETTELSE_PERIODE_FIELD_ARRAY_NAME = 'utsettelsePeriode';
+
+type PeriodeData = {
+  periodeFom: string;
+  periodeTom: string;
+  arsakForUtsettelse: string;
+  periodeForUtsettelse?: string;
+  erArbeidstaker?: string;
+};
+
+export type FormValues = PeriodeData[];
+
+const defaultUtsettelsePeriode: PeriodeData = {
   periodeFom: '',
   periodeTom: '',
   arsakForUtsettelse: '',
@@ -33,91 +46,99 @@ const mapKvoter = (typer: KodeverkMedNavn[]): ReactElement[] => typer
   }) => <option value={kode} key={kode}>{navn}</option>);
 
 interface OwnProps {
-  fields: FieldArrayFieldsProps<any>;
-  meta: FieldArrayMetaProps;
   utsettelseReasons: KodeverkMedNavn[];
   utsettelseKvoter: KodeverkMedNavn[];
   readOnly: boolean;
 }
 
 /**
- *  RenderUtsettelsePeriodeFieldArray
+ * RenderUtsettelsePeriodeFieldArray
  *
- * Presentasjonskomponent: Viser inputfelter for dato for bestemmelse av utsettelseperiode.
- * Komponenten må rendres som komponenten til et FieldArray.
+ * Viser inputfelter for dato for bestemmelse av utsettelseperiode.
  */
-export const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  fields,
+const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps> = ({
   utsettelseReasons,
   utsettelseKvoter,
-  meta,
-  intl,
   readOnly,
-}) => (
-  <PeriodFieldArray
-    fields={fields}
-    meta={meta}
-    emptyPeriodTemplate={defaultUtsettelsePeriode}
-    bodyText={intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.LeggTilPeriode' })}
-    readOnly={readOnly}
-  >
-    {(periodeElementFieldId, index, getRemoveButton) => (
-      <Row key={periodeElementFieldId}>
-        <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
-          <FlexContainer wrap>
-            <FlexRow>
-              <FlexColumn>
-                <SelectField
-                  name={`${periodeElementFieldId}.periodeForUtsettelse`}
-                  bredde="xl"
-                  label={index === 0 ? { id: 'Registrering.Permisjon.Utsettelse.Periode' } : ''}
-                  selectValues={mapKvoter(utsettelseKvoter)}
-                />
-              </FlexColumn>
-              <FlexColumn>
-                <DatepickerField
-                  name={`${periodeElementFieldId}.periodeFom`}
-                  label={index === 0 ? { id: 'Registrering.Permisjon.periodeFom' } : ''}
-                />
-              </FlexColumn>
-              <FlexColumn>
-                <DatepickerField
-                  name={`${periodeElementFieldId}.periodeTom`}
-                  label={index === 0 ? { id: 'Registrering.Permisjon.periodeTom' } : ''}
-                />
-              </FlexColumn>
-              <FlexColumn>
-                <SelectField
-                  name={`${periodeElementFieldId}.arsakForUtsettelse`}
-                  bredde="xl"
-                  label={index === 0 ? { id: 'Registrering.Permisjon.Utsettelse.Arsak' } : ''}
-                  selectValues={mapTyper(utsettelseReasons)}
-                />
-              </FlexColumn>
-            </FlexRow>
-            <FlexRow>
-              <FlexColumn>
-                <SelectField
-                  label={index === 0 ? { id: 'Registrering.Permisjon.ArbeidskategoriLabel' } : ''}
-                  name={`${periodeElementFieldId}.erArbeidstaker`}
-                  bredde="xl"
-                  selectValues={[
-                    <option value="true" key="true">{intl.formatMessage({ id: 'Registrering.Permisjon.ErArbeidstaker' })}</option>,
-                    <option value="false" key="false">{intl.formatMessage({ id: 'Registrering.Permisjon.ErIkkeArbeidstaker' })}</option>,
-                  ]}
-                />
-              </FlexColumn>
-              {getRemoveButton && (
-                <FlexColumn>
-                  {getRemoveButton()}
-                </FlexColumn>
-              )}
-            </FlexRow>
-          </FlexContainer>
-        </Column>
-      </Row>
-    )}
-  </PeriodFieldArray>
-);
+}) => {
+  const intl = useIntl();
 
-export default injectIntl(RenderUtsettelsePeriodeFieldArray);
+  const { control } = formHooks.useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
+    [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: FormValues
+  }}>();
+
+  const { fields, remove, append } = formHooks.useFieldArray({
+    control,
+    name: `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}`,
+  });
+
+  return (
+    <PeriodFieldArray
+      fields={fields}
+      emptyPeriodTemplate={defaultUtsettelsePeriode}
+      bodyText={intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.LeggTilPeriode' })}
+      readOnly={readOnly}
+      append={append}
+      remove={remove}
+    >
+      {(periodeElementFieldId, index, getRemoveButton) => (
+        <Row key={periodeElementFieldId}>
+          <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+            <FlexContainer wrap>
+              <FlexRow>
+                <FlexColumn>
+                  <SelectField
+                    name={`${periodeElementFieldId}.periodeForUtsettelse`}
+                    bredde="xl"
+                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.Periode' }) : ''}
+                    selectValues={mapKvoter(utsettelseKvoter)}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <Datepicker
+                    name={`${periodeElementFieldId}.periodeFom`}
+                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' }) : ''}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <Datepicker
+                    name={`${periodeElementFieldId}.periodeTom`}
+                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' }) : ''}
+                  />
+                </FlexColumn>
+                <FlexColumn>
+                  <SelectField
+                    name={`${periodeElementFieldId}.arsakForUtsettelse`}
+                    bredde="xl"
+                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.Arsak' }) : ''}
+                    selectValues={mapTyper(utsettelseReasons)}
+                  />
+                </FlexColumn>
+              </FlexRow>
+              <FlexRow>
+                <FlexColumn>
+                  <SelectField
+                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.ArbeidskategoriLabel' }) : ''}
+                    name={`${periodeElementFieldId}.erArbeidstaker`}
+                    bredde="xl"
+                    selectValues={[
+                      <option value="true" key="true">{intl.formatMessage({ id: 'Registrering.Permisjon.ErArbeidstaker' })}</option>,
+                      <option value="false" key="false">{intl.formatMessage({ id: 'Registrering.Permisjon.ErIkkeArbeidstaker' })}</option>,
+                    ]}
+                  />
+                </FlexColumn>
+                {getRemoveButton && (
+                  <FlexColumn>
+                    {getRemoveButton()}
+                  </FlexColumn>
+                )}
+              </FlexRow>
+            </FlexContainer>
+          </Column>
+        </Row>
+      )}
+    </PeriodFieldArray>
+  );
+};
+
+export default RenderUtsettelsePeriodeFieldArray;

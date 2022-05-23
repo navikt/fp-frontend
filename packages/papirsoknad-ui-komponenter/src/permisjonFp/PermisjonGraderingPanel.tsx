@@ -1,56 +1,24 @@
 import React, { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { FieldArray, formValueSelector } from 'redux-form';
 import { Element } from 'nav-frontend-typografi';
-
-import { CheckboxField } from '@fpsak-frontend/form';
+import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import {
-  hasValidFodselsnummer,
-  hasValidInteger,
-  isRequiredMessage,
-  maxLengthOrFodselsnr,
-  required,
-  validateProsentandel,
-} from '@navikt/ft-form-validators';
 import arbeidskategori from '@fpsak-frontend/kodeverk/src/arbeidskategori';
-import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
+import { AlleKodeverk } from '@fpsak-frontend/types';
 
-import RenderGraderingPeriodeFieldArray from './RenderGraderingPeriodeFieldArray';
+import RenderGraderingPeriodeFieldArray, {
+  TIDSROM_PERMISJON_FORM_NAME_PREFIX,
+  GRADERING_PERIODE_FIELD_ARRAY_NAME,
+  FormValues as GraderingPeriodeFormValues,
+} from './RenderGraderingPeriodeFieldArray';
 
 import styles from './permisjonPanel.less';
 import { hasValidPeriodIncludingOtherErrors } from './validator';
 
-export const GRADERING_PERIODE_FIELD_ARRAY_NAME = 'graderingPeriode';
-
-const maxLength9OrFodselsnr = maxLengthOrFodselsnr(9);
-
-interface PureOwnProps {
-  form: string;
-  namePrefix: string;
-  readOnly: boolean;
-  visFeilMelding: boolean;
-  alleKodeverk: AlleKodeverk;
-}
-
-interface MappedOwnProps {
-  graderingKvoter: KodeverkMedNavn[];
-  skalGradere: boolean;
-  arbeidskategoriTyper: KodeverkMedNavn[];
-}
-
 export type FormValues = {
-  periodeForGradering: string;
-  prosentandelArbeid: number;
-  arbeidsgiverIdentifikator?: string;
-  arbeidskategoriType?: string;
-  samtidigUttaksprosent?: number;
-  harSamtidigUttak?: boolean;
   skalGradere?: boolean;
-  periodeFom: string;
-  periodeTom: string;
+  [GRADERING_PERIODE_FIELD_ARRAY_NAME]?: GraderingPeriodeFormValues
 }
 
 type Periode = {
@@ -60,53 +28,56 @@ type Periode = {
   erSelvstNæringsdrivende: boolean;
 }
 
+interface OwnProps {
+  readOnly: boolean;
+  visFeilMelding: boolean;
+  alleKodeverk: AlleKodeverk;
+}
+
 interface StaticFunctions {
   buildInitialValues: () => any;
-  validate: (values?: FormValues[]) => any;
   transformValues: (perioder: Periode[]) => any;
 }
 
 /**
- *  PermisjonGraderingPanel
+ * PermisjonGraderingPanel
  *
- * Presentasjonskomponent: Viser panel for gradering
- * Komponenten har inputfelter og må derfor rendres som etterkommer av komponent dekorert med reduxForm.
+ * Viser panel for gradering
+ * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent
  */
-export const PermisjonGraderingPanel: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
-  graderingKvoter,
-  form,
-  namePrefix,
-  skalGradere,
+const PermisjonGraderingPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   visFeilMelding,
-  arbeidskategoriTyper,
-}) => (
-  <div>
-    <Element><FormattedMessage id="Registrering.Permisjon.Gradering.Title" /></Element>
-    <VerticalSpacer sixteenPx />
-    <CheckboxField
-      className={visFeilMelding ? styles.showErrorBackground : ''}
-      readOnly={readOnly}
-      name="skalGradere"
-      label={<FormattedMessage id="Registrering.Permisjon.Gradering.GraderUttaket" />}
-    />
-    { skalGradere
-    && (
-    <FieldArray
-      name={GRADERING_PERIODE_FIELD_ARRAY_NAME}
-      // @ts-ignore
-      component={RenderGraderingPeriodeFieldArray}
-      graderingKvoter={graderingKvoter}
-      form={form}
-      namePrefix={namePrefix}
-      graderingPrefix={GRADERING_PERIODE_FIELD_ARRAY_NAME}
-      arbeidskategoriTyper={arbeidskategoriTyper}
-      readOnly={readOnly}
-    />
-    )}
-  </div>
-);
+  alleKodeverk,
+}) => {
+  const graderingKvoter = alleKodeverk[kodeverkTyper.UTSETTELSE_GRADERING_KVOTE];
+  const arbeidskategoriTyper = alleKodeverk[kodeverkTyper.ARBEIDSKATEGORI];
 
+  const { watch } = formHooks.useFormContext<{[TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
+  const skalGradere = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalGradere`) || false;
+
+  return (
+    <div>
+      <Element><FormattedMessage id="Registrering.Permisjon.Gradering.Title" /></Element>
+      <VerticalSpacer sixteenPx />
+      <CheckboxField
+        className={visFeilMelding ? styles.showErrorBackground : ''}
+        readOnly={readOnly}
+        name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalGradere`}
+        label={<FormattedMessage id="Registrering.Permisjon.Gradering.GraderUttaket" />}
+      />
+      {skalGradere && (
+        <RenderGraderingPeriodeFieldArray
+          graderingKvoter={graderingKvoter}
+          arbeidskategoriTyper={arbeidskategoriTyper}
+          readOnly={readOnly}
+        />
+      )}
+    </div>
+  );
+};
+
+/*
 export const validateOtherErrors = (values: FormValues[]) => values.map(({
   periodeForGradering,
   prosentandelArbeid,
@@ -143,6 +114,7 @@ PermisjonGraderingPanel.validate = (values) => {
 
   return hasValidPeriodIncludingOtherErrors(values, otherErrors);
 };
+*/
 
 PermisjonGraderingPanel.transformValues = (perioder: Periode[]) => perioder.map((p) => {
   const { ...periode } = p;
@@ -159,10 +131,4 @@ PermisjonGraderingPanel.buildInitialValues = () => ({
   skalGradere: false,
 });
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  graderingKvoter: ownProps.alleKodeverk[kodeverkTyper.UTSETTELSE_GRADERING_KVOTE],
-  skalGradere: formValueSelector(ownProps.form)(state, ownProps.namePrefix).skalGradere,
-  arbeidskategoriTyper: ownProps.alleKodeverk[kodeverkTyper.ARBEIDSKATEGORI],
-});
-
-export default connect(mapStateToProps)(PermisjonGraderingPanel);
+export default PermisjonGraderingPanel;

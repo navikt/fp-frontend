@@ -1,19 +1,20 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { connect } from 'react-redux';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { formValueSelector, FieldArray } from 'redux-form';
 import { Element } from 'nav-frontend-typografi';
-
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { CheckboxField } from '@fpsak-frontend/form';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
+import { KodeverkType } from '@navikt/ft-kodeverk';
+import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
+
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import overforingArsak from '@fpsak-frontend/kodeverk/src/overforingArsak';
-import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
-import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
-import { hasValidPeriodIncludingOtherErrors } from './validator';
-import RenderOverforingAvKvoterFieldArray from './RenderOverforingAvKvoterFieldArray';
+import SoknadData from '../felles/SoknadData';
+import RenderOverforingAvKvoterFieldArray, {
+  FormValues as KvoterPerioderFormValues,
+  TIDSROM_PERMISJON_FORM_NAME_PREFIX,
+  OVERFORING_PERIODE_FIELD_ARRAY_NAME,
+} from './RenderOverforingAvKvoterFieldArray';
 
 import styles from './permisjonPanel.less';
 
@@ -34,48 +35,41 @@ const mapArsaker = (arsaker: KodeverkMedNavn[], sokerErMor: boolean, intl: IntlS
   ? <option value={kode} key={kode}>{getText(intl, kode, navn)}</option>
   : <option value={kode} key={kode}>{navn}</option>));
 
-export const OVERFORING_PERIODE_FIELD_ARRAY_NAME = 'overforingsperioder';
+export type FormValues = {
+  skalOvertaKvote: boolean;
+  [OVERFORING_PERIODE_FIELD_ARRAY_NAME]: KvoterPerioderFormValues;
+};
 
-interface PureOwnProps {
+interface OwnProps {
   soknadData: SoknadData;
   readOnly: boolean;
   visFeilMelding: boolean;
   alleKodeverk: AlleKodeverk;
-  form: string;
-  namePrefix: string;
-}
-
-interface MappedOwnProps {
-  overtaKvoteReasons: KodeverkMedNavn[];
-  skalOvertaKvote: boolean;
-}
-
-export type FormValues = {
-  skalOvertaKvote: boolean;
-  periodeFom: string;
-  periodeTom: string;
 }
 
 interface StaticFunctions {
   buildInitialValues?: () => any;
-  validate?: (values: FormValues[]) => any;
 }
 
 /**
  * PermisjonOverforingAvKvoterPanel
  *
- * Presentasjonskomponent. Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
- * Komponenten har inputfelter og må derfor rendres som etterkommer av komponent dekorert med reduxForm.
+ * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
+ * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
-export const PermisjonOverforingAvKvoterPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
-  overtaKvoteReasons,
+const PermisjonOverforingAvKvoterPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   soknadData,
-  skalOvertaKvote,
+  alleKodeverk,
   readOnly,
   visFeilMelding,
 }) => {
   const intl = useIntl();
+
+  const overtaKvoteReasons = alleKodeverk[KodeverkType.OVERFOERING_AARSAK_TYPE];
   const selectValues = mapArsaker(overtaKvoteReasons, soknadData.getForeldreType() === foreldreType.MOR, intl);
+
+  const { watch } = formHooks.useFormContext<{[TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
+  const skalOvertaKvote = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalOvertaKvote`) || false;
 
   return (
     <>
@@ -84,34 +78,17 @@ export const PermisjonOverforingAvKvoterPanelImpl: FunctionComponent<PureOwnProp
       <CheckboxField
         className={visFeilMelding ? styles.showErrorBackground : ''}
         readOnly={readOnly}
-        name="skalOvertaKvote"
+        name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalOvertaKvote`}
         label={<FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.OvertaKvote" />}
       />
-      {skalOvertaKvote
-        && (
-          <FieldArray
-            name="overforingsperioder"
-            component={RenderOverforingAvKvoterFieldArray}
-            selectValues={selectValues}
-            readOnly={readOnly}
-          />
-        )}
+      {skalOvertaKvote && (
+        <RenderOverforingAvKvoterFieldArray
+          selectValues={selectValues}
+          readOnly={readOnly}
+        />
+      )}
     </>
   );
 };
-
-const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  overtaKvoteReasons: ownProps.alleKodeverk[kodeverkTyper.OVERFOERING_AARSAK_TYPE],
-  skalOvertaKvote: formValueSelector(ownProps.form)(state, ownProps.namePrefix).skalOvertaKvote,
-});
-
-const PermisjonOverforingAvKvoterPanel = connect(mapStateToProps)(PermisjonOverforingAvKvoterPanelImpl);
-
-PermisjonOverforingAvKvoterPanel.buildInitialValues = () => ({
-  skalOvertaKvote: false,
-  overforingsperioder: [{}],
-});
-
-PermisjonOverforingAvKvoterPanel.validate = (values: FormValues[]) => hasValidPeriodIncludingOtherErrors(values);
 
 export default PermisjonOverforingAvKvoterPanel;

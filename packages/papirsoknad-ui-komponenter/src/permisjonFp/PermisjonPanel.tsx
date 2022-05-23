@@ -1,43 +1,26 @@
 import React, { FunctionComponent } from 'react';
-import { FieldArray, FormSection, formValueSelector } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
 import { Element, Undertittel } from 'nav-frontend-typografi';
-
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
-import { dateRangesNotOverlappingCrossTypes } from '@navikt/ft-form-validators';
-import { CheckboxField } from '@fpsak-frontend/form';
-import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
-import { AlleKodeverk } from '@fpsak-frontend/types';
+import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
+import { AlleKodeverk } from '@navikt/ft-types';
 
-import PermisjonUtsettelsePanel, { UTSETTELSE_PERIODE_FIELD_ARRAY_NAME, FormValues as FormValuesUtsettelse } from './PermisjonUtsettelsePanel';
-import PermisjonGraderingPanel, { GRADERING_PERIODE_FIELD_ARRAY_NAME, FormValues as FormValuesGradering } from './PermisjonGraderingPanel';
-import PermisjonOverforingAvKvoterPanel, { OVERFORING_PERIODE_FIELD_ARRAY_NAME, FormValues as FormValuesOverforing } from './PermisjonOverforingAvKvoterPanel';
-import RenderPermisjonPeriodeFieldArray, { FormValues as FormValuesPermisjon } from './RenderPermisjonPeriodeFieldArray';
-import PermisjonOppholdPanel, { OPPHOLD_PERIODE_FIELD_ARRAY_NAME, FormValues as FormValuesOpphold } from './PermisjonOppholdPanel';
+import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
+
+import SoknadData from '../felles/SoknadData';
+import PermisjonUtsettelsePanel, { FormValues as FormValuesUtsettelse } from './PermisjonUtsettelsePanel';
+import { UTSETTELSE_PERIODE_FIELD_ARRAY_NAME } from './RenderUtsettelsePeriodeFieldArray';
+import PermisjonGraderingPanel, { FormValues as FormValuesGradering } from './PermisjonGraderingPanel';
+import { GRADERING_PERIODE_FIELD_ARRAY_NAME } from './RenderGraderingPeriodeFieldArray';
+import PermisjonOverforingAvKvoterPanel, { FormValues as FormValuesOverforing } from './PermisjonOverforingAvKvoterPanel';
+import { OVERFORING_PERIODE_FIELD_ARRAY_NAME } from './RenderOverforingAvKvoterFieldArray';
+import RenderPermisjonPeriodeFieldArray, { PERMISJON_PERIODE_FIELD_ARRAY_NAME, FormValues as FormValuesPermisjon } from './RenderPermisjonPeriodeFieldArray';
+import PermisjonOppholdPanel, { FormValues as FormValuesOpphold } from './PermisjonOppholdPanel';
+import { OPPHOLD_PERIODE_FIELD_ARRAY_NAME } from './RenderOppholdPeriodeFieldArray';
 
 import styles from './permisjonPanel.less';
 
 export const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
-
-export const PERMISJON_PERIODE_FIELD_ARRAY_NAME = 'permisjonsPerioder';
-
-interface PureOwnProps {
-  soknadData: SoknadData;
-  form: string;
-  readOnly: boolean;
-  error?: {
-    permisjonsError?: string;
-  };
-  alleKodeverk: AlleKodeverk;
-  submitFailed: boolean;
-}
-
-interface MappedOwnProps {
-  fulltUttak?: boolean;
-  visFeilMelding: boolean;
-}
 
 type TidsromPermisjon = {
   fulltUttak: boolean;
@@ -56,32 +39,44 @@ export type FormValues = {
   [TIDSROM_PERMISJON_FORM_NAME_PREFIX]?: TidsromPermisjon;
 };
 
+interface OwnProps {
+  soknadData: SoknadData;
+  form: string;
+  readOnly: boolean;
+  error?: {
+    permisjonsError?: string;
+  };
+  alleKodeverk: AlleKodeverk;
+  submitFailed: boolean;
+}
+
 interface StaticFunctions {
   buildInitialValues: () => any;
-  validate: (values: FormValues) => any;
   transformValues: (values: Required<FormValues>) => any;
 }
 
 /**
  * PermisjonPanel
  *
- * Presentasjonskomponent: Viser permisjonspanel for mor eller far/medmor
+ * Viser permisjonspanel for mor eller far/medmor
  */
-export const PermisjonPanel: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
+const PermisjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   soknadData,
-  fulltUttak,
-  form,
   readOnly,
   error,
-  visFeilMelding,
   alleKodeverk,
-}) => (
-  <FormSection name={TIDSROM_PERMISJON_FORM_NAME_PREFIX}>
+}) => {
+  const { formState, watch } = formHooks.useFormContext<FormValues>();
+  const fulltUttak = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`) || false;
+
+  const visFeilMelding = !!formState.errors;
+
+  return (
     <BorderBox>
       <div className={styles.flexContainer}>
         <Undertittel><FormattedMessage id="Registrering.Permisjon.Title" /></Undertittel>
         <VerticalSpacer sixteenPx />
-        { visFeilMelding && error && (
+        {visFeilMelding && error && (
           <div role="alert" aria-live="assertive">
             <div className="skjemaelement__feilmelding"><FormattedMessage id={error.permisjonsError} /></div>
           </div>
@@ -95,60 +90,40 @@ export const PermisjonPanel: FunctionComponent<PureOwnProps & MappedOwnProps> & 
           name="fulltUttak"
           label={<FormattedMessage id="Registrering.Permisjon.FulltUttak" />}
         />
-        { fulltUttak
-          && (
-            <FieldArray
-              name={PERMISJON_PERIODE_FIELD_ARRAY_NAME}
-              // @ts-ignore
-              component={RenderPermisjonPeriodeFieldArray}
-              periodePrefix={PERMISJON_PERIODE_FIELD_ARRAY_NAME}
-              namePrefix={TIDSROM_PERMISJON_FORM_NAME_PREFIX}
-              sokerErMor={soknadData.getForeldreType() === foreldreType.MOR}
-              readOnly={readOnly}
-              alleKodeverk={alleKodeverk}
-            />
-          )}
+        {fulltUttak && (
+          <RenderPermisjonPeriodeFieldArray
+            sokerErMor={soknadData.getForeldreType() === foreldreType.MOR}
+            readOnly={readOnly}
+            alleKodeverk={alleKodeverk}
+          />
+        )}
         <VerticalSpacer twentyPx />
-        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <PermisjonOverforingAvKvoterPanel
           visFeilMelding={visFeilMelding}
-          form={form}
           readOnly={readOnly}
           soknadData={soknadData}
-          namePrefix={TIDSROM_PERMISJON_FORM_NAME_PREFIX}
           alleKodeverk={alleKodeverk}
         />
         <VerticalSpacer twentyPx />
-        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <PermisjonUtsettelsePanel
           visFeilMelding={visFeilMelding}
-          form={form}
           readOnly={readOnly}
-          namePrefix={TIDSROM_PERMISJON_FORM_NAME_PREFIX}
           alleKodeverk={alleKodeverk}
         />
         <VerticalSpacer twentyPx />
-        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <PermisjonGraderingPanel
           visFeilMelding={visFeilMelding}
-          form={form}
           readOnly={readOnly}
-          namePrefix={TIDSROM_PERMISJON_FORM_NAME_PREFIX}
           alleKodeverk={alleKodeverk}
         />
         <VerticalSpacer twentyPx />
-        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
-        <PermisjonOppholdPanel form={form} readOnly={readOnly} namePrefix={TIDSROM_PERMISJON_FORM_NAME_PREFIX} alleKodeverk={alleKodeverk} />
+        <PermisjonOppholdPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
       </div>
     </BorderBox>
-  </FormSection>
-);
-
-PermisjonPanel.defaultProps = {
-  fulltUttak: false,
-  error: { permisjonsError: undefined },
+  );
 };
 
+/*
 const permisjonErrors = (values?: TidsromPermisjon) => {
   // @ts-ignore Fiks
   const errors = PermisjonOverforingAvKvoterPanel.validate(values);
@@ -244,6 +219,7 @@ PermisjonPanel.validate = (values: FormValues) => {
   errors[TIDSROM_PERMISJON_FORM_NAME_PREFIX] = permisjonErrors(permisjonValues);
   return errors;
 };
+*/
 
 PermisjonPanel.transformValues = (values: Required<FormValues>) => {
   const permisjonValues = values[TIDSROM_PERMISJON_FORM_NAME_PREFIX];
@@ -271,12 +247,4 @@ PermisjonPanel.buildInitialValues = () => ({
   },
 });
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => {
-  const visFeilMelding = !!(ownProps.error && ownProps.error.permisjonsError && ownProps.submitFailed);
-  return {
-    fulltUttak: formValueSelector(ownProps.form)(state, TIDSROM_PERMISJON_FORM_NAME_PREFIX).fulltUttak,
-    visFeilMelding,
-  };
-};
-
-export default connect(mapStateToProps)(PermisjonPanel);
+export default PermisjonPanel;
