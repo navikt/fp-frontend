@@ -19,7 +19,6 @@ const LagreSoknadPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   submitting,
 }) => (
   <RawIntlProvider value={intl}>
-    { /* @ts-ignore Fiks cannot be used as a JSX component */ }
     <LagreSoknadPanel
       readOnly={readOnly}
       onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}

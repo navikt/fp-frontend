@@ -1,18 +1,28 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
-
 import { required, maxValue } from '@navikt/ft-form-validators';
 import {
-  DatepickerField, InputField, SelectField, PeriodFieldArray,
-} from '@fpsak-frontend/form';
+  Datepicker, InputField, SelectField, PeriodFieldArray, formHooks,
+} from '@navikt/ft-form-hooks';
+
 import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
 
-import styles from './behovForTilrettteleggingFieldArray.less';
+import styles from './behovForTilretteleggingFieldArray.less';
+
+const TILRETTELEGGING_NAME_PREFIX = 'tilretteleggingArbeidsforhold';
+
+// TODO const selvstendigNaringsdrivendeFieldArrayName = 'tilretteleggingSelvstendigNaringsdrivende';
+const frilansFieldArrayName = 'tilretteleggingFrilans';
 
 const maxValue3 = maxValue(100);
+
+type FormValues = {
+  tilretteleggingType: string;
+  dato: string;
+  stillingsprosent: string;
+}
 
 const defaultTilrettelegging = {
   tilretteleggingType: '',
@@ -21,8 +31,6 @@ const defaultTilrettelegging = {
 };
 
 interface OwnProps {
-  fields: FieldArrayFieldsProps<any>;
-  meta: FieldArrayMetaProps;
   readOnly: boolean;
 }
 
@@ -31,12 +39,17 @@ interface OwnProps {
  *
  * Viser inputfelter for tilrettelegging av arbeidsforhold for selvstendig næringsdrivende eller frilans.
  */
-const BehovForTilrettteleggingFieldArray: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
-  fields,
-  meta,
+const BehovForTilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
   readOnly,
 }) => {
+  const intl = useIntl();
+
+  const { control } = formHooks.useFormContext<{ [TILRETTELEGGING_NAME_PREFIX]: {[frilansFieldArrayName]: FormValues[] }}>();
+  const { fields, remove, append } = formHooks.useFieldArray({
+    control,
+    name: `${TILRETTELEGGING_NAME_PREFIX}.${frilansFieldArrayName}`,
+  });
+
   useEffect(() => {
     if (fields.length === 0) {
       fields.push(defaultTilrettelegging);
@@ -45,10 +58,11 @@ const BehovForTilrettteleggingFieldArray: FunctionComponent<OwnProps & WrappedCo
   return (
     <PeriodFieldArray
       fields={fields}
-      meta={meta}
       emptyPeriodTemplate={defaultTilrettelegging}
       bodyText={intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.LeggTilTilretteleggingsbehov' })}
       readOnly={readOnly}
+      append={append}
+      remove={remove}
     >
       {(tilretteleggingFieldId, index, getRemoveButton) => (
         <Row key={tilretteleggingFieldId} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
@@ -59,7 +73,7 @@ const BehovForTilrettteleggingFieldArray: FunctionComponent<OwnProps & WrappedCo
                   <SelectField
                     readOnly={readOnly}
                     name={`${tilretteleggingFieldId}.tilretteleggingType`}
-                    label={index === 0 ? { id: 'BehovForTilrettteleggingFieldArray.BehovForTilrettelegging' } : ''}
+                    label={index === 0 ? intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.BehovForTilrettelegging' }) : ''}
                     validate={[required]}
                     selectValues={[
                       <option value={tilretteleggingType.HEL_TILRETTELEGGING} key={tilretteleggingType.HEL_TILRETTELEGGING}>
@@ -76,10 +90,10 @@ const BehovForTilrettteleggingFieldArray: FunctionComponent<OwnProps & WrappedCo
                   />
                 </FlexColumn>
                 <FlexColumn>
-                  <DatepickerField
-                    readOnly={readOnly}
+                  <Datepicker
+                    isReadOnly={readOnly}
                     name={`${tilretteleggingFieldId}.dato`}
-                    label={index === 0 ? { id: 'BehovForTilrettteleggingFieldArray.FraDato' } : ''}
+                    label={index === 0 ? intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.FraDato' }) : ''}
                     validate={[required]}
                   />
                 </FlexColumn>
@@ -87,7 +101,7 @@ const BehovForTilrettteleggingFieldArray: FunctionComponent<OwnProps & WrappedCo
                   <InputField
                     readOnly={readOnly}
                     name={`${tilretteleggingFieldId}.stillingsprosent`}
-                    label={index === 0 ? { id: 'BehovForTilrettteleggingFieldArray.Stillingsprosent' } : ''}
+                    label={index === 0 ? intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.Stillingsprosent' }) : ''}
                     bredde="XXL"
                     validate={[required, maxValue3]}
                     maxLength={99}
@@ -107,4 +121,4 @@ const BehovForTilrettteleggingFieldArray: FunctionComponent<OwnProps & WrappedCo
   );
 };
 
-export default injectIntl(BehovForTilrettteleggingFieldArray);
+export default BehovForTilretteleggingFieldArray;

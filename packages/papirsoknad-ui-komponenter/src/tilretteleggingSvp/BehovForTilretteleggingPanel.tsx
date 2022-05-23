@@ -1,23 +1,21 @@
 import React, { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
 import { RawIntlProvider, FormattedMessage } from 'react-intl';
-import { formValueSelector, FieldArray } from 'redux-form';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
-
-import { RadioGroupField, RadioOption, DatepickerField } from '@fpsak-frontend/form';
+import {
+  RadioGroupField, RadioOption, Datepicker, formHooks,
+} from '@navikt/ft-form-hooks';
 import { BorderBox, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
-import BehovForTilrettteleggingFieldArray from './BehovForTilrettteleggingFieldArray';
+import BehovForTilretteleggingFieldArray from './BehovForTilretteleggingFieldArray';
 import TilretteleggingForArbeidsgiverFieldArray from './TilretteleggingForArbeidsgiverFieldArray';
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-const selvstendigNaringsdrivendeFieldArrayName = 'tilretteleggingSelvstendigNaringsdrivende';
-const frilansFieldArrayName = 'tilretteleggingFrilans';
 const tilretteleggingForArbeidsgiverFieldArrayName = 'tilretteleggingForArbeidsgiver';
+const TILRETTELEGGING_NAME_PREFIX = 'tilretteleggingArbeidsforhold';
 
 export type Tilrettelegging = {
   tilretteleggingType: string;
@@ -26,30 +24,24 @@ export type Tilrettelegging = {
 }
 
 export type FormValues = {
-  [tilretteleggingForArbeidsgiverFieldArrayName]?: {
-    behovsdato?: string;
-    organisasjonsnummer?: string;
-    tilretteleggingArbeidsgiver?: Tilrettelegging[];
-  }[];
-  sokForArbeidsgiver?: boolean;
-  sokForFrilans?: boolean;
-  behovsdatoFrilans?: string;
-  tilretteleggingFrilans?: Tilrettelegging[];
-  sokForSelvstendigNaringsdrivende?: boolean;
-  behovsdatoSN?: string;
-  tilretteleggingSelvstendigNaringsdrivende?: Tilrettelegging[];
-}
+  [TILRETTELEGGING_NAME_PREFIX]: {
+    [tilretteleggingForArbeidsgiverFieldArrayName]?: {
+      behovsdato?: string;
+      organisasjonsnummer?: string;
+      tilretteleggingArbeidsgiver?: Tilrettelegging[];
+    }[];
+    sokForArbeidsgiver?: boolean;
+    sokForFrilans?: boolean;
+    behovsdatoFrilans?: string;
+    tilretteleggingFrilans?: Tilrettelegging[];
+    sokForSelvstendigNaringsdrivende?: boolean;
+    behovsdatoSN?: string;
+    tilretteleggingSelvstendigNaringsdrivende?: Tilrettelegging[];
+  }
+};
 
 interface OwnProps {
   readOnly: boolean;
-  formName: string;
-  namePrefix: string;
-}
-
-interface MappedOwnProps {
-  sokForSelvstendigNaringsdrivende?: boolean;
-  sokForFrilans?: boolean;
-  sokForArbeidsgiver?: boolean;
 }
 
 interface StaticFunctions {
@@ -61,94 +53,92 @@ interface StaticFunctions {
  *
  * Form som brukes for registrere om det er behov for tilrettelegging.
  */
-export const BehovForTilretteleggingPanelImpl: FunctionComponent<OwnProps & MappedOwnProps> & StaticFunctions = ({
+const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
-  sokForSelvstendigNaringsdrivende,
-  sokForFrilans,
-  sokForArbeidsgiver,
-}) => (
-  <RawIntlProvider value={intl}>
-    <BorderBox>
-      <SkjemaGruppe legend={<FormattedMessage id="BehovForTilretteleggingPanel.BehovForTilrettelegging" />}>
-        <RadioGroupField
-          name="sokForSelvstendigNaringsdrivende"
-          label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForSelvstendigNaringsdrivende" />}
-          validate={[required]}
-          readOnly={readOnly}
-        >
-          <RadioOption value label={{ id: 'BehovForTilretteleggingPanel.Ja' }} />
-          <RadioOption value={false} label={{ id: 'BehovForTilretteleggingPanel.Nei' }} />
-        </RadioGroupField>
-        {sokForSelvstendigNaringsdrivende && (
-          <ArrowBox>
-            <DatepickerField
-              name="behovsdatoSN"
-              label={{ id: 'BehovForTilretteleggingPanel.TilretteleggingFra' }}
-              validate={[required]}
-              readOnly={readOnly}
-            />
-            <FieldArray
-              name={selvstendigNaringsdrivendeFieldArrayName}
-              component={BehovForTilrettteleggingFieldArray}
-              readOnly={readOnly}
-            />
-          </ArrowBox>
-        )}
-        <RadioGroupField
-          name="sokForFrilans"
-          label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForFrilans" />}
-          validate={[required]}
-          readOnly={readOnly}
-        >
-          <RadioOption value label={{ id: 'BehovForTilretteleggingPanel.Ja' }} />
-          <RadioOption value={false} label={{ id: 'BehovForTilretteleggingPanel.Nei' }} />
-        </RadioGroupField>
-        {sokForFrilans && (
-          <ArrowBox>
-            <DatepickerField
-              name="behovsdatoFrilans"
-              label={{ id: 'BehovForTilretteleggingPanel.TilretteleggingFra' }}
-              validate={[required]}
-              readOnly={readOnly}
-            />
-            <FieldArray
-              name={frilansFieldArrayName}
-              component={BehovForTilrettteleggingFieldArray}
-              readOnly={readOnly}
-            />
-          </ArrowBox>
-        )}
-        <RadioGroupField
-          name="sokForArbeidsgiver"
-          label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForArbeidsgiver" />}
-          validate={[required]}
-          readOnly={readOnly}
-        >
-          <RadioOption value label={{ id: 'BehovForTilretteleggingPanel.Ja' }} />
-          <RadioOption value={false} label={{ id: 'BehovForTilretteleggingPanel.Nei' }} />
-        </RadioGroupField>
-        {sokForArbeidsgiver && (
-          <ArrowBox>
-            <FieldArray
-              name={tilretteleggingForArbeidsgiverFieldArrayName}
-              component={TilretteleggingForArbeidsgiverFieldArray}
-              readOnly={readOnly}
-            />
-          </ArrowBox>
-        )}
-      </SkjemaGruppe>
-    </BorderBox>
-  </RawIntlProvider>
-);
+}) => {
+  const { watch } = formHooks.useFormContext<FormValues>();
 
-const mapStateToProps = (state: any, ownProps: OwnProps): MappedOwnProps => ({
-  ...formValueSelector(ownProps.formName)(state, ownProps.namePrefix),
-});
+  const sokForSelvstendigNaringsdrivende = watch(`${TILRETTELEGGING_NAME_PREFIX}.sokForSelvstendigNaringsdrivende`);
+  const sokForFrilans = watch(`${TILRETTELEGGING_NAME_PREFIX}.sokForSelvstendigNaringsdrivende`);
+  const sokForArbeidsgiver = watch(`${TILRETTELEGGING_NAME_PREFIX}.sokForSelvstendigNaringsdrivende`);
 
-const BehovForTilretteleggingPanel = connect(mapStateToProps)(BehovForTilretteleggingPanelImpl);
+  return (
+    <RawIntlProvider value={intl}>
+      <BorderBox>
+        <SkjemaGruppe legend={<FormattedMessage id="BehovForTilretteleggingPanel.BehovForTilrettelegging" />}>
+          <RadioGroupField
+            name={`${TILRETTELEGGING_NAME_PREFIX}.sokForSelvstendigNaringsdrivende`}
+            label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForSelvstendigNaringsdrivende" />}
+            validate={[required]}
+            readOnly={readOnly}
+            parse={(value: string) => value === 'true'}
+          >
+            <RadioOption value="true" label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Ja' })} />
+            <RadioOption value="false" label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Nei' })} />
+          </RadioGroupField>
+          {sokForSelvstendigNaringsdrivende && (
+            <ArrowBox>
+              <Datepicker
+                name={`${TILRETTELEGGING_NAME_PREFIX}.behovsdatoSN`}
+                label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.TilretteleggingFra' })}
+                validate={[required]}
+                isReadOnly={readOnly}
+              />
+              <BehovForTilretteleggingFieldArray
+                readOnly={readOnly}
+              />
+            </ArrowBox>
+          )}
+          <RadioGroupField
+            name={`${TILRETTELEGGING_NAME_PREFIX}.sokForFrilans`}
+            label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForFrilans" />}
+            validate={[required]}
+            readOnly={readOnly}
+            parse={(value: string) => value === 'true'}
+          >
+            <RadioOption value="true" label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Ja' })} />
+            <RadioOption value="false" label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Nei' })} />
+          </RadioGroupField>
+          {sokForFrilans && (
+            <ArrowBox>
+              <Datepicker
+                name={`${TILRETTELEGGING_NAME_PREFIX}.behovsdatoFrilans`}
+                label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.TilretteleggingFra' })}
+                validate={[required]}
+                isReadOnly={readOnly}
+              />
+              <BehovForTilretteleggingFieldArray
+                readOnly={readOnly}
+              />
+            </ArrowBox>
+          )}
+          <RadioGroupField
+            name={`${TILRETTELEGGING_NAME_PREFIX}.sokForArbeidsgiver`}
+            label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForArbeidsgiver" />}
+            validate={[required]}
+            readOnly={readOnly}
+            parse={(value: string) => value === 'true'}
+          >
+            <RadioOption value="true" label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Ja' })} />
+            <RadioOption value="false" label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.Nei' })} />
+          </RadioGroupField>
+          {sokForArbeidsgiver && (
+            <ArrowBox>
+              <TilretteleggingForArbeidsgiverFieldArray
+                readOnly={readOnly}
+              />
+            </ArrowBox>
+          )}
+        </SkjemaGruppe>
+      </BorderBox>
+    </RawIntlProvider>
+  );
+};
 
 BehovForTilretteleggingPanel.buildInitialValues = (): FormValues => ({
-  [tilretteleggingForArbeidsgiverFieldArrayName]: [{}],
+  [TILRETTELEGGING_NAME_PREFIX]: {
+    [tilretteleggingForArbeidsgiverFieldArrayName]: [{}],
+  },
 });
 
 export default BehovForTilretteleggingPanel;

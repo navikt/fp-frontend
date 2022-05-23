@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { SoknadData } from '@fpsak-frontend/papirsoknad-felles';
-import { AlleKodeverk } from '@fpsak-frontend/types';
+import { SoknadData } from '@fpsak-frontend/papirsoknad-ui-komponenter';
+import { AlleKodeverk } from '@navikt/ft-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import SvangerskapspengerForm from './components/SvangerskapspengerForm';
-import messages from '../i18n/nb_NO.json';
+import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 

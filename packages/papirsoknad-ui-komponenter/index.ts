@@ -35,4 +35,13 @@ export { default as DekningsgradIndex } from './src/dekningsgradFp/DekningsgradI
 
 export { default as BekreftelsePanel } from './src/bekreftelseFp/BekreftelsePanel';
 
+export { default as PermisjonRettigheterPanel } from './src/permisjonFp/PermisjonRettigheterPanel';
+
 export { default as SoknadData } from './src/felles/SoknadData';
+
+export { default as TerminFodselSvpPanel, FormValues as TerminFodselSvpFormValues } from './src/terminOgFodselSvp/TerminFodselSvpPanel';
+
+export {
+  default as BehovForTilretteleggingPanel,
+  FormValues as BehovForTilretteleggingFormValues,
+} from './src/tilretteleggingSvp/BehovForTilretteleggingPanel';

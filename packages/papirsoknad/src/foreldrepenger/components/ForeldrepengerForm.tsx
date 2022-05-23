@@ -28,9 +28,9 @@ import {
   FodselPapirsoknadIndex,
   BekreftelsePanel,
   DekningsgradIndex,
+  PermisjonRettigheterPanel,
 } from '@fpsak-frontend/papirsoknad-ui-komponenter';
 
-import PermisjonRettigheterPanel from './permisjon/PermisjonRettigheterPanel';
 import PermisjonPanel, { TIDSROM_PERMISJON_FORM_NAME_PREFIX, FormValues as FormValuesPermisjon } from './permisjon/PermisjonPanel';
 
 const ANNEN_FORELDER_FORM_NAME_PREFIX = 'annenForelder';
@@ -114,7 +114,6 @@ const ForeldrepengerForm: FunctionComponent<OwnProps> = ({
         permisjonRettigheterPanel={(
           <PermisjonRettigheterPanel
             readOnly={readOnly}
-            sokerHarAleneomsorg={sokerHarAleneomsorg}
             denAndreForelderenHarRettPaForeldrepenger={denAndreForelderenHarRettPaForeldrepenger}
             sokerErMor={soknadData.getForeldreType() === foreldreType.MOR}
           />
@@ -134,7 +133,7 @@ const ForeldrepengerForm: FunctionComponent<OwnProps> = ({
       <LagreSoknadPapirsoknadIndex
         readOnly={readOnly}
         onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
-        submitting={formMethods.formState.isSubmitting} 
+        submitting={formMethods.formState.isSubmitting}
       />
     </Form>
   );

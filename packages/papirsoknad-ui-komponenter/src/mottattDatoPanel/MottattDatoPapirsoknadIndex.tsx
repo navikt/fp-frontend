@@ -16,9 +16,7 @@ const MottattDatoPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   readOnly,
 }) => (
   <RawIntlProvider value={intl}>
-    <MottattDatoPanel
-      readOnly={readOnly}
-    />
+    <MottattDatoPanel readOnly={readOnly} />
   </RawIntlProvider>
 );
 

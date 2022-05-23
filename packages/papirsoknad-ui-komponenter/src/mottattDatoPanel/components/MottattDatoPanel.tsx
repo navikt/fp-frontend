@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
-
+import { Datepicker } from '@navikt/ft-form-hooks';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { DatepickerField } from '@fpsak-frontend/form';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 
 interface OwnProps {
@@ -14,7 +13,7 @@ interface OwnProps {
  * MottattDatoPanel
  *
  * Presentasjonskomponent. Komponenten vises som del av skjermbildet for registrering av papirsøknad.
- * Komponenten har inputfelter og må derfor rendres som etterkommer av komponent dekorert med reduxForm.
+ * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
 const MottattDatoPanel: FunctionComponent<OwnProps> = ({
   readOnly,
@@ -25,10 +24,10 @@ const MottattDatoPanel: FunctionComponent<OwnProps> = ({
     <Undertekst>
       <FormattedMessage key="regDatoUnder" id="Registrering.Omsoknaden.MottattDato" />
     </Undertekst>
-    <DatepickerField
+    <Datepicker
       name="mottattDato"
       validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
-      readOnly={readOnly}
+      isReadOnly={readOnly}
     />
   </BorderBox>
 );

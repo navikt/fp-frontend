@@ -1,120 +1,99 @@
-import React from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
+import { useForm } from 'react-hook-form';
+import { KodeverkType } from '@navikt/ft-kodeverk';
+import { Form } from '@navikt/ft-form-hooks';
+import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
+
 import {
-  formValueSelector, reduxForm, FormSection, InjectedFormProps, InjectedArrayProps,
-} from 'redux-form';
-import { Dispatch } from 'redux';
-import { createSelector } from 'reselect';
-import { connect } from 'react-redux';
+  SoknadData,
+  MottattDatoPapirsoknadIndex,
+  FrilansPapirsoknadIndex,
+  FrilansFormValues,
+  OppholdINorgePapirsoknadIndex,
+  OppholdINorgeFormValues,
+  SprakPapirsoknadIndex,
+  LagreSoknadPapirsoknadIndex,
+  VirksomhetPapirsoknadIndex,
+  InntektsgivendeArbeidPapirsoknadIndex,
+  IArbeidFormValues,
+  AndreYtelserPapirsoknadIndex,
+  AndreYtelserFormValue,
+  BehovForTilretteleggingPanel,
+  BehovForTilretteleggingFormValues,
+  TerminFodselSvpPanel,
+  TerminFodselSvpFormValues,
+} from '@fpsak-frontend/papirsoknad-ui-komponenter';
 
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { SoknadData, getRegisteredFields } from '@fpsak-frontend/papirsoknad-felles';
-import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
-import MottattDatoPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-mottatt-dato';
-import FrilansPapirsoknadIndex, { FormValues as FrilansFormValues } from '@fpsak-frontend/papirsoknad-panel-frilans';
-import OppholdINorgePapirsoknadIndex, { FormValues as OppholdFormValues } from '@fpsak-frontend/papirsoknad-panel-opphold-i-norge';
-import SprakPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-sprak';
-import LagreSoknadPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-lagre-soknad';
-import VirksomhetPapirsoknadIndex from '@fpsak-frontend/papirsoknad-panel-virksomhet';
-import InntektsgivendeArbeidPapirsoknadIndex, {
-  FormValues as InntektFormValues,
-} from '@fpsak-frontend/papirsoknad-panel-inntektsgivende-arbeid';
-import AndreYtelserPapirsoknadIndex, {
-  ANDRE_YTELSER_FORM_NAME_PREFIX, FormValues as AndreYtelserFormValues,
-} from '@fpsak-frontend/papirsoknad-panel-andre-ytelser';
+type FormValues = AndreYtelserFormValue
+  & IArbeidFormValues
+  & FrilansFormValues
+  & OppholdINorgeFormValues
+  & BehovForTilretteleggingFormValues
+  & TerminFodselSvpFormValues;
 
-import TerminFodselSvpPanel from './terminOgFodsel/TerminFodselSvpPanel';
-import BehovForTilretteleggingPanel, { FormValues as BehovForTilretteleggingFormValues, Tilrettelegging } from './tilrettelegging/BehovForTilretteleggingPanel';
+const buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => ({
+  ...FrilansPapirsoknadIndex.buildInitialValues(),
+  ...AndreYtelserPapirsoknadIndex.buildInitialValues(andreYtelser),
+  ...InntektsgivendeArbeidPapirsoknadIndex.buildInitialValues(),
+  ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
+  ...BehovForTilretteleggingPanel.buildInitialValues(),
+});
 
-const SVANGERSKAPSPENGER_FORM_NAME = 'SvangerskapspengerForm';
-const TILRETTELEGGING_NAME_PREFIX = 'tilretteleggingArbeidsforhold';
-
-type FormValues = {
-  foedselsDato?: string;
-  tilretteleggingArbeidsforhold?: BehovForTilretteleggingFormValues;
-} & AndreYtelserFormValues & InntektFormValues & FrilansFormValues & OppholdFormValues;
-
-interface PureOwnProps {
-  onSubmitUfullstendigsoknad: () => Promise<any>;
-  submitCallback: (_formValues: any, _dispatch: Dispatch, values: any) => Promise<any>;
-  readOnly?: boolean;
+interface OwnProps {
+  readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
-}
-
-interface MappedOwnProps {
-  valuesForRegisteredFieldsOnly: FormValues;
-  initialValues: FormValues;
-  validate: (formValues: FormValues) => any;
-  onSubmit: (formValues: FormValues, dispatch: Dispatch, props: PureOwnProps & MappedOwnProps & InjectedArrayProps) => any;
+  fagsakPersonnummer: string;
+  onSubmit: (values: any) => Promise<any>;
+  onSubmitUfullstendigsoknad: () => Promise<any>;
 }
 
 /**
  * SvangerskapspengerForm
  *
- * Redux-form-komponent for registrering av papirsøknad for svangerskapspenger.
+ * Form-komponent for registrering av papirsøknad for svangerskapspenger.
  */
-export class SvangerskapspengerForm extends React.Component<PureOwnProps & MappedOwnProps & InjectedFormProps> {
-  shouldComponentUpdate(nextProps: PureOwnProps & MappedOwnProps & InjectedFormProps): boolean {
-    // Dette er gjort for å hindra rerender for testetrykk på alle underformene
-    const notRerenderIfChangedProps = ['array', 'blur', 'change', 'clearSubmit', 'destroy', 'dirty', 'initialize', 'error', 'pristine', 'reset',
-      'resetSection', 'touch', 'untouch', 'valuesForRegisteredFieldsOnly', 'autofill', 'clearFields', 'clearSubmitErrors', 'clearAsyncError', 'submit'];
-    const changedPropsList = Object.entries(this.props)
-      .filter(([key, val]) => nextProps[key] !== val)
-      .map(([key]) => key);
-    return changedPropsList.some((changedProp) => !notRerenderIfChangedProps.includes(changedProp));
-  }
+const SvangerskapspengerForm: FunctionComponent<OwnProps> = ({
+  readOnly,
+  soknadData,
+  alleKodeverk,
+  onSubmit,
+  onSubmitUfullstendigsoknad,
+}) => {
+  const formMethods = useForm<FormValues>({
+    defaultValues: useMemo(() => buildInitialValues(alleKodeverk[KodeverkType.ARBEID_TYPE]), []),
+  });
 
-  render() {
-    const {
-      handleSubmit,
-      submitting,
-      form,
-      readOnly = false,
-      soknadData,
-      onSubmitUfullstendigsoknad,
-      alleKodeverk,
-    } = this.props;
+  return (
+    <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(values)}>
+      <MottattDatoPapirsoknadIndex readOnly={readOnly} />
+      <OppholdINorgePapirsoknadIndex readOnly={readOnly} soknadData={soknadData} alleKodeverk={alleKodeverk} />
+      <InntektsgivendeArbeidPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
+      <VirksomhetPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
+      <FrilansPapirsoknadIndex readOnly={readOnly} />
+      <AndreYtelserPapirsoknadIndex readOnly={readOnly} kunMiliterEllerSiviltjeneste alleKodeverk={alleKodeverk} />
+      <TerminFodselSvpPanel readOnly={readOnly} />
+      <BehovForTilretteleggingPanel readOnly={readOnly} />
+      <SprakPapirsoknadIndex readOnly={readOnly} />
+      <LagreSoknadPapirsoknadIndex
+        readOnly={readOnly}
+        onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
+        submitting={formMethods.formState.isSubmitting}
+      />
+    </Form>
+  );
+};
 
-    return (
-      <form onSubmit={handleSubmit}>
-        <MottattDatoPapirsoknadIndex readOnly={readOnly} />
-        <OppholdINorgePapirsoknadIndex form={form} readOnly={readOnly} soknadData={soknadData} alleKodeverk={alleKodeverk} />
-        <InntektsgivendeArbeidPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
-        <VirksomhetPapirsoknadIndex readOnly={readOnly} form={form} alleKodeverk={alleKodeverk} />
-        <FrilansPapirsoknadIndex readOnly={readOnly} formName={SVANGERSKAPSPENGER_FORM_NAME} />
-        <AndreYtelserPapirsoknadIndex readOnly={readOnly} form={form} kunMiliterEllerSiviltjeneste alleKodeverk={alleKodeverk} />
-        <TerminFodselSvpPanel readOnly={readOnly} />
-        <FormSection name={TILRETTELEGGING_NAME_PREFIX}>
-          { /* @ts-ignore Fiks cannot be used as a JSX component */ }
-          <BehovForTilretteleggingPanel readOnly={readOnly} formName={SVANGERSKAPSPENGER_FORM_NAME} namePrefix={TILRETTELEGGING_NAME_PREFIX} />
-        </FormSection>
-        <SprakPapirsoknadIndex readOnly={readOnly} />
-        <LagreSoknadPapirsoknadIndex readOnly={readOnly} onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad} form={form} submitting={submitting} />
-      </form>
-    );
-  }
-}
-
+/*
 const getValidation = (andreYtelser: KodeverkMedNavn[]) => (values: FormValues): any => ({
   ...AndreYtelserPapirsoknadIndex.validate(values, andreYtelser),
   ...InntektsgivendeArbeidPapirsoknadIndex.validate(values),
   ...FrilansPapirsoknadIndex.validate(values),
   ...OppholdINorgePapirsoknadIndex.validate(values),
 });
+*/
 
-const transformRootValues = (
-  state: any,
-  registeredFieldNames: string[],
-): any => formValueSelector(SVANGERSKAPSPENGER_FORM_NAME)(state, ...registeredFieldNames);
-
-const buildInitialValues = createSelector([(ownProps: { andreYtelser: KodeverkMedNavn[] }) => ownProps], (ownProps): FormValues => ({
-  ...FrilansPapirsoknadIndex.buildInitialValues(),
-  ...AndreYtelserPapirsoknadIndex.buildInitialValues(ownProps.andreYtelser),
-  ...InntektsgivendeArbeidPapirsoknadIndex.buildInitialValues(),
-  ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
-  [TILRETTELEGGING_NAME_PREFIX]: BehovForTilretteleggingPanel.buildInitialValues(),
-}));
-
+/*
 type TilretteleggingArbeidsforhold = {
   '@type': string;
   behovsdato?: string;
@@ -154,39 +133,6 @@ export const transformValues = (values: FormValues): any => ({
   ...values,
   foedselsDato: [values.foedselsDato],
   tilretteleggingArbeidsforhold: transformTilretteleggingsArbeidsforhold(values.tilretteleggingArbeidsforhold),
-});
+});*/
 
-const mapStateToPropsFactory = (_initialState: any, ownProps: PureOwnProps) => {
-  const andreYtelserObject = { andreYtelser: ownProps.alleKodeverk[kodeverkTyper.ARBEID_TYPE] };
-  const validate = getValidation(andreYtelserObject.andreYtelser);
-  const onSubmit = (values: FormValues, dispatch: Dispatch, props: PureOwnProps & MappedOwnProps & InjectedArrayProps) => ownProps
-    .submitCallback(values, dispatch, {
-      valuesForRegisteredFieldsOnly: transformValues(props.valuesForRegisteredFieldsOnly),
-    });
-  return (state: any): MappedOwnProps => {
-    const registeredFields = getRegisteredFields(SVANGERSKAPSPENGER_FORM_NAME)(state);
-    // @ts-ignore Fiks
-    const registeredFieldNames = Object.values(registeredFields).map((rf) => rf.name);
-
-    const valuesForRegisteredFieldsOnly = registeredFieldNames.length
-      ? {
-        ...transformRootValues(state, registeredFieldNames),
-        [ANDRE_YTELSER_FORM_NAME_PREFIX]: AndreYtelserPapirsoknadIndex
-          .transformValues(formValueSelector(SVANGERSKAPSPENGER_FORM_NAME)(state, ...registeredFieldNames), andreYtelserObject.andreYtelser),
-      }
-      : {};
-
-    return {
-      initialValues: buildInitialValues(andreYtelserObject),
-      valuesForRegisteredFieldsOnly,
-      validate,
-      onSubmit,
-    };
-  };
-};
-
-// @ts-ignore Fiks
-export default connect(mapStateToPropsFactory)(reduxForm({
-  form: SVANGERSKAPSPENGER_FORM_NAME,
-  // @ts-ignore Fiks
-})(SvangerskapspengerForm));
+export default SvangerskapspengerForm;
