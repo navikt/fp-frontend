@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import { Datepicker, formHooks, PeriodFieldArray } from '@navikt/ft-form-hooks';
 
 import styles from './frilansPerioderFieldArray.less';
@@ -38,37 +40,40 @@ const FrilansPerioderFieldArray: FunctionComponent<OwnProps> = ({
   return (
     <PeriodFieldArray
       fields={fields}
-      bodyText=""
+      bodyText={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.NyPeriode' })}
       readOnly={readOnly}
       remove={remove}
       append={append}
     >
       {(periodeElementFieldId, index, getRemoveButton) => (
-        <Row key={periodeElementFieldId}>
-          <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
-            <FlexContainer>
-              <FlexRow>
-                <FlexColumn>
-                  <Datepicker
-                    name={`${FRILANS_NAME_PREFIX}.perioder.${periodeElementFieldId}.periodeFom`}
-                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.Frilans.periodeFom' }) : ''}
-                  />
-                </FlexColumn>
-                <FlexColumn>
-                  <Datepicker
-                    name={`${FRILANS_NAME_PREFIX}.perioder.${periodeElementFieldId}.periodeTom`}
-                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.Frilans.periodeTom' }) : ''}
-                  />
-                </FlexColumn>
-                {getRemoveButton && (
+        <div key={periodeElementFieldId}>
+          <Row>
+            <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+              <FlexContainer>
+                <FlexRow>
                   <FlexColumn>
-                    {getRemoveButton()}
+                    <Datepicker
+                      name={`${FRILANS_NAME_PREFIX}.perioder.${periodeElementFieldId}.periodeFom`}
+                      label={index === 0 ? intl.formatMessage({ id: 'Registrering.Frilans.periodeFom' }) : ''}
+                    />
                   </FlexColumn>
-                )}
-              </FlexRow>
-            </FlexContainer>
-          </Column>
-        </Row>
+                  <FlexColumn>
+                    <Datepicker
+                      name={`${FRILANS_NAME_PREFIX}.perioder.${periodeElementFieldId}.periodeTom`}
+                      label={index === 0 ? intl.formatMessage({ id: 'Registrering.Frilans.periodeTom' }) : ''}
+                    />
+                  </FlexColumn>
+                  {getRemoveButton && (
+                    <FlexColumn>
+                      {getRemoveButton()}
+                    </FlexColumn>
+                  )}
+                </FlexRow>
+              </FlexContainer>
+            </Column>
+          </Row>
+          <VerticalSpacer sixteenPx />
+        </div>
       )}
     </PeriodFieldArray>
   );

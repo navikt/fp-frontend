@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
@@ -16,35 +16,37 @@ interface OwnProps {
 }
 
 /**
- * Presentasjonskomponent. Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder engangsstønad.
+ * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder engangsstønad.
  */
-export const SprakPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+const SprakPanel: FunctionComponent<OwnProps> = ({
   readOnly,
-  intl,
-}) => (
-  <BorderBox>
-    <SkjemaGruppe legend={intl.formatMessage({ id: 'Registrering.Sprak' })}>
-      <RadioGroupField
-        name="språkkode"
-        direction="vertical"
-        readOnly={readOnly}
-        validate={[required]}
-      >
-        <RadioOption
-          label={intl.formatMessage({ id: 'Registrering.Sprak.Bokmal' })}
-          value={sprakvalg.BOKMAL}
-        />
-        <RadioOption
-          label={intl.formatMessage({ id: 'Registrering.Sprak.Nynorsk' })}
-          value={sprakvalg.NYNORSK}
-        />
-        <RadioOption
-          label={intl.formatMessage({ id: 'Registrering.Sprak.Engelsk' })}
-          value={sprakvalg.ENGELSK}
-        />
-      </RadioGroupField>
-    </SkjemaGruppe>
-  </BorderBox>
-);
+}) => {
+  const intl = useIntl();
+  return (
+    <BorderBox>
+      <SkjemaGruppe legend={intl.formatMessage({ id: 'Registrering.Sprak' })}>
+        <RadioGroupField
+          name="språkkode"
+          direction="vertical"
+          readOnly={readOnly}
+          validate={[required]}
+        >
+          <RadioOption
+            label={intl.formatMessage({ id: 'Registrering.Sprak.Bokmal' })}
+            value={sprakvalg.BOKMAL}
+          />
+          <RadioOption
+            label={intl.formatMessage({ id: 'Registrering.Sprak.Nynorsk' })}
+            value={sprakvalg.NYNORSK}
+          />
+          <RadioOption
+            label={intl.formatMessage({ id: 'Registrering.Sprak.Engelsk' })}
+            value={sprakvalg.ENGELSK}
+          />
+        </RadioGroupField>
+      </SkjemaGruppe>
+    </BorderBox>
+  );
+};
 
-export default injectIntl(SprakPanel);
+export default SprakPanel;

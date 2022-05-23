@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
-
-import { SoknadData } from '@fpsak-frontend/papirsoknad-ui-komponenter';
 import { AlleKodeverk } from '@navikt/ft-types';
 import { createIntl } from '@navikt/ft-utils';
+
+import { SoknadData } from '@fpsak-frontend/papirsoknad-ui-komponenter';
 
 import SvangerskapspengerForm from './components/SvangerskapspengerForm';
 import messages from '../../i18n/nb_NO.json';
@@ -28,7 +28,7 @@ const SvangerskapspengerPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   <RawIntlProvider value={intl}>
     <SvangerskapspengerForm
       onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
-      submitCallback={onSubmit}
+      onSubmit={onSubmit}
       readOnly={readOnly}
       soknadData={soknadData}
       alleKodeverk={alleKodeverk}

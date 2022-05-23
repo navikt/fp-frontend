@@ -12,7 +12,7 @@ interface OwnProps {
 /**
  * MottattDatoPanel
  *
- * Presentasjonskomponent. Komponenten vises som del av skjermbildet for registrering av papirsøknad.
+ * Komponenten vises som del av skjermbildet for registrering av papirsøknad.
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
 const MottattDatoPanel: FunctionComponent<OwnProps> = ({

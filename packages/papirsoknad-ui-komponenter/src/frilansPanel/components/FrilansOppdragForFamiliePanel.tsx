@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { RadioGroupField, RadioOption, formHooks } from '@navikt/ft-form-hooks';
 
@@ -31,19 +31,18 @@ const FrilansOppdragForFamiliePanel: FunctionComponent<OwnProps> & StaticFunctio
       <RadioGroupField
         name={`${FRILANS_NAME_PREFIX}.harHattOppdragForFamilie`}
         readOnly={readOnly}
-        label={<FormattedMessage id="Registrering.FrilansOppdrag.HarHattOppdragForFamilie" />}
+        label={<Undertekst><FormattedMessage id="Registrering.FrilansOppdrag.HarHattOppdragForFamilie" /></Undertekst>}
       >
         <RadioOption label={<FormattedMessage id="Registrering.FrilansOppdrag.Yes" />} value="true" />
         <RadioOption label={<FormattedMessage id="Registrering.FrilansOppdrag.No" />} value="false" />
       </RadioGroupField>
-      {harHattOppdragForFamilie
-        && (
+      {harHattOppdragForFamilie && (
         <ArrowBox>
           <Normaltekst><FormattedMessage id="Registrering.FrilansOppdrag.OppgiPeriode" /></Normaltekst>
           <VerticalSpacer fourPx />
           <FrilansOppdragForFamilieFieldArray readOnly={readOnly} />
         </ArrowBox>
-        )}
+      )}
     </>
   );
 };

@@ -5,8 +5,8 @@ import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { RadioGroupField, RadioOption, formHooks } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk } from '@navikt/ft-types';
+import { KodeverkType } from '@navikt/ft-kodeverk';
 
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 
 import SoknadData from '../../felles/SoknadData';
@@ -40,13 +40,13 @@ interface StaticFunctions {
  * Inneholder delen av skjemaet som omhandler informasjon om utenlandsopphold.
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
-export const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
+const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly = true,
   alleKodeverk,
   soknadData,
 }) => {
   const { formatMessage } = useIntl();
-  const sortedCountriesByName = alleKodeverk[kodeverkTyper.LANDKODER].slice().sort((a, b) => a.navn.localeCompare(b.navn));
+  const sortedCountriesByName = alleKodeverk[KodeverkType.LANDKODER].slice().sort((a, b) => a.navn.localeCompare(b.navn));
 
   const { watch } = formHooks.useFormContext<any>();
   const harTidligereOppholdUtenlands = watch('harTidligereOppholdUtenlands') || false;
@@ -78,16 +78,15 @@ export const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions =
           <RadioOption label={formatMessage({ id: 'Registrering.Opphold.Yes' })} value="false" />
           <RadioOption label={formatMessage({ id: 'Registrering.Opphold.No' })} value="true" />
         </RadioGroupField>
-        {harTidligereOppholdUtenlands
-          ? (
-            <ArrowBox alignOffset={64}>
-              <UtenlandsOppholdField
-                countryCodes={sortedCountriesByName}
-                readOnly={readOnly}
-              />
-            </ArrowBox>
-          )
-          : null}
+        {harTidligereOppholdUtenlands ? (
+          <ArrowBox alignOffset={64}>
+            <UtenlandsOppholdField
+              erTidligereOpphold
+              countryCodes={sortedCountriesByName}
+              readOnly={readOnly}
+            />
+          </ArrowBox>
+        ) : null}
         <Undertekst>
           {` ${formatMessage({ id: 'Registrering.OppholdNesteTolv' })} `}
         </Undertekst>
@@ -99,6 +98,7 @@ export const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions =
         {harFremtidigeOppholdUtenlands ? (
           <ArrowBox alignOffset={64}>
             <UtenlandsOppholdField
+              erTidligereOpphold={false}
               countryCodes={sortedCountriesByName}
               readOnly={readOnly}
             />
@@ -109,7 +109,7 @@ export const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions =
   );
 };
 
-/*type OppholdErrors = {
+/* type OppholdErrors = {
   oppholdINorge?: string;
   harTidligereOppholdUtenlands?: string;
   tidligereOppholdUtenlands?: string;
@@ -139,7 +139,7 @@ OppholdINorgePanel.validate = (values: FormValues) => {
     errors.fremtidigeOppholdUtenlands = UtenlandsOppholdField.validate(values.fremtidigeOppholdUtenlands, { tidligstDato: values.mottattDato });
   }
   return errors;
-};*/
+}; */
 
 OppholdINorgePanel.buildInitialValues = (): FormValues => ({
   tidligereOppholdUtenlands: [{ periodeFom: undefined, periodeTom: undefined }],

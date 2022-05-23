@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Column, Row } from 'nav-frontend-grid';
-
 import { AlleKodeverk } from '@navikt/ft-types';
+
 import {
   SprakPapirsoknadIndex,
   RettigheterPapirsoknadIndex,

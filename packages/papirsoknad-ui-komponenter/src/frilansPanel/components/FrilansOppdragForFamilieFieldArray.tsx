@@ -53,35 +53,35 @@ export const FrilansOppdragForFamilieFieldArray: FunctionComponent<OwnProps> = (
 
   return (
     <PeriodFieldArray
-      bodyText=""
+      bodyText={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.NyPeriode' })}
       fields={fields}
       emptyPeriodTemplate={defaultFrilansPeriode}
       readOnly={readOnly}
       append={append}
       remove={remove}
     >
-      {(periodeElementFieldId, index, getRemoveButton) => (
-        <Row key={periodeElementFieldId}>
+      {(field, index, getRemoveButton) => (
+        <Row key={field.id}>
           <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
             <FlexContainer>
               <FlexRow>
                 <FlexColumn>
                   <Datepicker
-                    name={`${FRILANS_NAME_PREFIX}.oppdragPerioder.${periodeElementFieldId}.fomDato`}
+                    name={`${FRILANS_NAME_PREFIX}.oppdragPerioder.${index}.fomDato`}
                     label={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.periodeFom' })}
                     validate={[hasValidDate]}
                   />
                 </FlexColumn>
                 <FlexColumn>
                   <Datepicker
-                    name={`${FRILANS_NAME_PREFIX}.oppdragPerioder.${periodeElementFieldId}.tomDato`}
+                    name={`${FRILANS_NAME_PREFIX}.oppdragPerioder.${index}.tomDato`}
                     label={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.periodeTom' })}
                     validate={[hasValidDate]}
                   />
                 </FlexColumn>
                 <FlexColumn>
                   <InputField
-                    name={`${FRILANS_NAME_PREFIX}.oppdragPerioder.${periodeElementFieldId}.oppdragsgiver`}
+                    name={`${FRILANS_NAME_PREFIX}.oppdragPerioder.${index}.oppdragsgiver`}
                     bredde="S"
                     validate={[maxLength50]}
                     label={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.Oppdragsgiver' })}
@@ -101,13 +101,12 @@ export const FrilansOppdragForFamilieFieldArray: FunctionComponent<OwnProps> = (
   );
 };
 
- /*
+/*
 const sortFomDates = (perioder: { periodeFom: string; periodeTom?: string; }[]) => perioder
   .map((p) => p.periodeFom)
   .filter((p) => p && p !== '')
   .sort((periodeFom1, periodeFom2) => moment(periodeFom1, ISO_DATE_FORMAT).diff(moment(periodeFom2, ISO_DATE_FORMAT)));
 
- 
 FrilansOppdragForFamilieFieldArray.validate = (values) => {
   if (!values) {
     return null;
@@ -143,6 +142,6 @@ FrilansOppdragForFamilieFieldArray.validate = (values) => {
     return arrayErrors;
   }
   return null;
-};*/
+}; */
 
 export default FrilansOppdragForFamilieFieldArray;

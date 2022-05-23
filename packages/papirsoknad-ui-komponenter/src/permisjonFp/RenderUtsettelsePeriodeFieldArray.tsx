@@ -72,6 +72,7 @@ const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps> = ({
     name: `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}`,
   });
 
+  const fieldArrayName = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}`;
   return (
     <PeriodFieldArray
       fields={fields}
@@ -81,14 +82,14 @@ const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps> = ({
       append={append}
       remove={remove}
     >
-      {(periodeElementFieldId, index, getRemoveButton) => (
-        <Row key={periodeElementFieldId}>
+      {(field, index, getRemoveButton) => (
+        <Row key={field.id}>
           <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
             <FlexContainer wrap>
               <FlexRow>
                 <FlexColumn>
                   <SelectField
-                    name={`${periodeElementFieldId}.periodeForUtsettelse`}
+                    name={`${fieldArrayName}.${index}.periodeForUtsettelse`}
                     bredde="xl"
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.Periode' }) : ''}
                     selectValues={mapKvoter(utsettelseKvoter)}
@@ -96,19 +97,19 @@ const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps> = ({
                 </FlexColumn>
                 <FlexColumn>
                   <Datepicker
-                    name={`${periodeElementFieldId}.periodeFom`}
+                    name={`${fieldArrayName}.${index}.periodeFom`}
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' }) : ''}
                   />
                 </FlexColumn>
                 <FlexColumn>
                   <Datepicker
-                    name={`${periodeElementFieldId}.periodeTom`}
+                    name={`${fieldArrayName}.${index}.periodeTom`}
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' }) : ''}
                   />
                 </FlexColumn>
                 <FlexColumn>
                   <SelectField
-                    name={`${periodeElementFieldId}.arsakForUtsettelse`}
+                    name={`${fieldArrayName}.${index}.arsakForUtsettelse`}
                     bredde="xl"
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.Arsak' }) : ''}
                     selectValues={mapTyper(utsettelseReasons)}
@@ -119,7 +120,7 @@ const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <SelectField
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.ArbeidskategoriLabel' }) : ''}
-                    name={`${periodeElementFieldId}.erArbeidstaker`}
+                    name={`${fieldArrayName}.${index}.erArbeidstaker`}
                     bredde="xl"
                     selectValues={[
                       <option value="true" key="true">{intl.formatMessage({ id: 'Registrering.Permisjon.ErArbeidstaker' })}</option>,

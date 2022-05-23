@@ -29,9 +29,9 @@ import {
   BekreftelsePanel,
   DekningsgradIndex,
   PermisjonRettigheterPanel,
+  PermisjonPanel,
+  FormValuesPermisjon,
 } from '@fpsak-frontend/papirsoknad-ui-komponenter';
-
-import PermisjonPanel, { TIDSROM_PERMISJON_FORM_NAME_PREFIX, FormValues as FormValuesPermisjon } from './permisjon/PermisjonPanel';
 
 const ANNEN_FORELDER_FORM_NAME_PREFIX = 'annenForelder';
 const OMSORG_FORM_NAME_PREFIX = 'omsorg';

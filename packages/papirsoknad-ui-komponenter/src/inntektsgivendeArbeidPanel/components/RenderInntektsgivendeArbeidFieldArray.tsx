@@ -71,15 +71,15 @@ const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps> = ({
       remove={remove}
       append={append}
     >
-      {(arbeidsforholdElementFieldId, index, getRemoveButton) => (
-        <Row key={arbeidsforholdElementFieldId} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+      {(field, index, getRemoveButton) => (
+        <Row key={field.id} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
           <Column xs="12">
             <FlexContainer>
               <FlexRow>
                 <FlexColumn>
                   <InputField
                     readOnly={readOnly}
-                    name={`${arbeidsforholdElementFieldId}.arbeidsgiver`}
+                    name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.arbeidsgiver`}
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.Arbeidsgiver' }) : ''}
                     bredde="XXL"
                     validate={[maxLength50]}
@@ -89,21 +89,21 @@ const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <Datepicker
                     isReadOnly={readOnly}
-                    name={`${arbeidsforholdElementFieldId}.periodeFom`}
+                    name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.periodeFom`}
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.periodeFom' }) : ''}
                   />
                 </FlexColumn>
                 <FlexColumn>
                   <Datepicker
                     isReadOnly={readOnly}
-                    name={`${arbeidsforholdElementFieldId}.periodeTom`}
+                    name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.periodeTom`}
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.periodeTom' }) : ''}
                   />
                 </FlexColumn>
                 <FlexColumn>
                   <SelectField
                     readOnly={readOnly}
-                    name={`${arbeidsforholdElementFieldId}.land`}
+                    name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.land`}
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.Land' }) : ''}
                     selectValues={countrySelectValues(sortedCountriesByName)}
                     bredde="m"

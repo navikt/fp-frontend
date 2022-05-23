@@ -82,6 +82,7 @@ const AnnenForelderPanel: FunctionComponent<OwnProps> = ({
               <RadioGroupField
                 name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.arsak`}
                 readOnly={readOnly}
+                direction="vertical"
               >
                 <RadioOption
                   label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.1' })}
@@ -92,7 +93,7 @@ const AnnenForelderPanel: FunctionComponent<OwnProps> = ({
                   value={kanIkkeOppgiAnnenForelderArsaker.IKKE_NORSK_FNR}
                 />
               </RadioGroupField>
-              {kanIkkeOppgiBegrunnelse.arsak === kanIkkeOppgiAnnenForelderArsaker.IKKE_NORSK_FNR && (
+              {kanIkkeOppgiBegrunnelse?.arsak === kanIkkeOppgiAnnenForelderArsaker.IKKE_NORSK_FNR && (
                 <>
                   <SelectField
                     name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.land`}
@@ -140,6 +141,6 @@ AnnenForelderPanel.validate = (sokerPersonnummer, values?) => {
       || hasValidFodselsnummer(values.foedselsnummer)
       || ((values.foedselsnummer === sokerPersonnummer) ? sammeFodselsnummerSomSokerMessage() : null),
   };
-};*/
+}; */
 
 export default AnnenForelderPanel;

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
@@ -21,7 +21,7 @@ type FormValues = {
 }
 
 interface OwnProps {
-  onSubmitUfullstendigsoknad: (form: string) => void;
+  onSubmitUfullstendigsoknad: () => void;
   readOnly?: boolean;
   submitting: boolean;
 }
@@ -39,13 +39,13 @@ const LagreSoknadPanel: FunctionComponent<OwnProps> = ({
   const { watch } = formHooks.useFormContext<FormValues>();
   const ufullstendigSoeknad = watch('ufullstendigSoeknad') || false;
 
-  const toggleLukkPapirsoknadModal = () => {
+  const toggleLukkPapirsoknadModal = useCallback(() => {
     setShowLukkSoknadModal(!showLukkSoknadModal);
-  };
+  }, [setShowLukkSoknadModal, showLukkSoknadModal]);
 
-  const toggleVerge = () => {
+  const toggleVerge = useCallback(() => {
     setVerge(!verge);
-  };
+  }, [setVerge, verge]);
 
   return (
     <BorderBox>

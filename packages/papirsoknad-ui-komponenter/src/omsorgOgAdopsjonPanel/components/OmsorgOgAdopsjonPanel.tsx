@@ -56,9 +56,13 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> = ({
 
   useEffect(() => {
     if (fields.length > Math.max(antallBarn, 0)) {
-      remove(antallBarn);
+      for (let i = fields.length; i > antallBarn; i -= 1) {
+        remove(i - 1);
+      }
     } else if (fields.length < Math.min(antallBarn, MAX_ANTALL_BARN)) {
-      append({});
+      for (let i = fields.length; i < antallBarn; i += 1) {
+        append({ id: i, dato: undefined });
+      }
     }
   }, [antallBarn]);
 
@@ -69,31 +73,30 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> = ({
       })}
       >
         <Container fluid className={styles.formContainer}>
-          {isForeldrepengerFagsak && familieHendelseType === fht.ADOPSJON
-          && (
-          <Row>
-            <Column xs="6">
-              <Undertekst>
-                <FormattedMessage id="Registrering.Adopsjon.GjelderEktefellesBarn" />
-              </Undertekst>
-              <VerticalSpacer eightPx />
-              <RadioGroupField
-                name={`${OMSORG_NAME_PREFIX}.erEktefellesBarn`}
-                readOnly={readOnly}
-                validate={[required]}
-                parse={(value: string) => value === 'true'}
-              >
-                <RadioOption
-                  label={formatMessage({ id: 'Registrering.Adopsjon.Ja' })}
-                  value="true"
-                />
-                <RadioOption
-                  label={formatMessage({ id: 'Registrering.Adopsjon.Nei' })}
-                  value="false"
-                />
-              </RadioGroupField>
-            </Column>
-          </Row>
+          {isForeldrepengerFagsak && familieHendelseType === fht.ADOPSJON && (
+            <Row>
+              <Column xs="6">
+                <Undertekst>
+                  <FormattedMessage id="Registrering.Adopsjon.GjelderEktefellesBarn" />
+                </Undertekst>
+                <VerticalSpacer eightPx />
+                <RadioGroupField
+                  name={`${OMSORG_NAME_PREFIX}.erEktefellesBarn`}
+                  readOnly={readOnly}
+                  validate={[required]}
+                  parse={(value: string) => value === 'true'}
+                >
+                  <RadioOption
+                    label={formatMessage({ id: 'Registrering.Adopsjon.Ja' })}
+                    value="true"
+                  />
+                  <RadioOption
+                    label={formatMessage({ id: 'Registrering.Adopsjon.Nei' })}
+                    value="false"
+                  />
+                </RadioGroupField>
+              </Column>
+            </Row>
           )}
           <Row>
             <Column xs="6" className={styles.inputMinimumWidth}>
@@ -109,8 +112,7 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> = ({
             </Column>
           </Row>
           <Row>
-            {familieHendelseType === fht.ADOPSJON
-              && (
+            {familieHendelseType === fht.ADOPSJON && (
               <Column xs="3" className={styles.inputMinimumWidth}>
                 <Datepicker
                   name={`${OMSORG_NAME_PREFIX}.ankomstdato`}
@@ -119,7 +121,7 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> = ({
                   validate={[hasValidDate]}
                 />
               </Column>
-              )}
+            )}
             <Column xs="6">
               <InputField
                 name={`${OMSORG_NAME_PREFIX}.antallBarn`}
@@ -138,8 +140,8 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> = ({
               {fields.map((name, index) => (
                 <Datepicker
                   key={name}
-                  name={name}
-                  readOnly={readOnly}
+                  name={`${OMSORG_NAME_PREFIX}.foedselsDato.${index}.dato`}
+                  isReadOnly={readOnly}
                   validate={familieHendelseType === fht.ADOPSJON
                     ? [required, hasValidDate, dateBeforeOrEqualToToday] : [hasValidDate, dateBeforeOrEqualToToday]}
                   label={formatMessage({ id: 'Registrering.Adopsjon.FodselsdatoBarnN' }, { n: index + 1 })}
@@ -200,6 +202,6 @@ OmsorgOgAdopsjonPanel.validate = (values: FormValues, otherFodselsdato: string, 
   }
 
   return errors;
-};*/
+}; */
 
 export default OmsorgOgAdopsjonPanel;

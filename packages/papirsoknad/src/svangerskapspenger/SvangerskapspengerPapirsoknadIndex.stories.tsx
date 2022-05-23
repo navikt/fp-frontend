@@ -1,8 +1,8 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
+import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 
 import { SoknadData } from '@fpsak-frontend/papirsoknad-ui-komponenter';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
@@ -19,7 +19,7 @@ export const visPapirsoknadForMorVedFødsel = () => (
     onSubmitUfullstendigsoknad={action('button-click') as () => Promise<any>}
     onSubmit={action('button-click') as (values: any) => Promise<any>}
     readOnly={false}
-    soknadData={new SoknadData(fagsakYtelseType.SVANGERSKAPSPENGER, familieHendelseType.FODSEL, foreldreType.MOR)}
+    soknadData={new SoknadData(FagsakYtelseType.SVANGERSKAPSPENGER, familieHendelseType.FODSEL, foreldreType.MOR)}
     alleKodeverk={alleKodeverk as any}
   />
 );
@@ -29,7 +29,7 @@ export const visPapirsoknadForMorVedAdopsjon = () => (
     onSubmitUfullstendigsoknad={action('button-click') as () => Promise<any>}
     onSubmit={action('button-click') as (values: any) => Promise<any>}
     readOnly={false}
-    soknadData={new SoknadData(fagsakYtelseType.SVANGERSKAPSPENGER, familieHendelseType.ADOPSJON, foreldreType.MOR)}
+    soknadData={new SoknadData(FagsakYtelseType.SVANGERSKAPSPENGER, familieHendelseType.ADOPSJON, foreldreType.MOR)}
     alleKodeverk={alleKodeverk as any}
   />
 );
@@ -39,7 +39,7 @@ export const visPapirsoknadForFarVedFodsel = () => (
     onSubmitUfullstendigsoknad={action('button-click') as () => Promise<any>}
     onSubmit={action('button-click') as (values: any) => Promise<any>}
     readOnly={false}
-    soknadData={new SoknadData(fagsakYtelseType.SVANGERSKAPSPENGER, familieHendelseType.FODSEL, foreldreType.FAR)}
+    soknadData={new SoknadData(FagsakYtelseType.SVANGERSKAPSPENGER, familieHendelseType.FODSEL, foreldreType.FAR)}
     alleKodeverk={alleKodeverk as any}
   />
 );

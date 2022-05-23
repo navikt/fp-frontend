@@ -77,26 +77,26 @@ const RenderOppholdPeriodeFieldArray: FunctionComponent<OwnProps> = ({
       append={append}
       remove={remove}
     >
-      {(periodeElementFieldId, index, getRemoveButton) => (
-        <Row key={periodeElementFieldId}>
+      {(field, index, getRemoveButton) => (
+        <Row key={field.id}>
           <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
             <FlexContainer wrap>
               <FlexRow>
                 <FlexColumn>
                   <Datepicker
-                    name={`${periodeElementFieldId}.periodeFom`}
+                    name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`}
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' }) : ''}
                   />
                 </FlexColumn>
                 <FlexColumn>
                   <Datepicker
-                    name={`${periodeElementFieldId}.periodeTom`}
+                    name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`}
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' }) : ''}
                   />
                 </FlexColumn>
                 <FlexColumn>
                   <SelectField
-                    name={`${periodeElementFieldId}.årsak`}
+                    name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}.${index}.årsak`}
                     bredde="xl"
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.Opphold.Arsak' }) : ''}
                     selectValues={mapTyper(oppholdsReasons)}

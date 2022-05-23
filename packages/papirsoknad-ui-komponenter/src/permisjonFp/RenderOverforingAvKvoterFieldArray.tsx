@@ -48,6 +48,7 @@ export const RenderOverforingAvKvoterFieldArray: FunctionComponent<OwnProps> = (
     name: `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFORING_PERIODE_FIELD_ARRAY_NAME}`,
   });
 
+  const fieldArrayName = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFORING_PERIODE_FIELD_ARRAY_NAME}`;
   return (
     <PeriodFieldArray
       fields={fields}
@@ -57,12 +58,12 @@ export const RenderOverforingAvKvoterFieldArray: FunctionComponent<OwnProps> = (
       append={append}
       remove={remove}
     >
-      {(periodeElementFieldId, index, getRemoveButton) => (
-        <FlexContainer wrap key={periodeElementFieldId}>
+      {(field, index, getRemoveButton) => (
+        <FlexContainer wrap key={field.id}>
           <FlexRow>
             <FlexColumn>
               <SelectField
-                name={`${periodeElementFieldId}.overforingArsak`}
+                name={`${fieldArrayName}.${index}.overforingArsak`}
                 bredde="xxl"
                 label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.OverforingAvKvote.Arsak.AngiArsak' }) : ''}
                 selectValues={selectValues}
@@ -74,7 +75,7 @@ export const RenderOverforingAvKvoterFieldArray: FunctionComponent<OwnProps> = (
               <FlexColumn>
                 <Datepicker
                   isReadOnly={readOnly}
-                  name={`${periodeElementFieldId}.periodeFom`}
+                  name={`${fieldArrayName}.${index}.periodeFom`}
                   validate={[required, hasValidDate]}
                   label={index === 0 ? <FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.fomDato" /> : ''}
                 />
@@ -82,7 +83,7 @@ export const RenderOverforingAvKvoterFieldArray: FunctionComponent<OwnProps> = (
               <FlexColumn>
                 <Datepicker
                   isReadOnly={readOnly}
-                  name={`${periodeElementFieldId}.periodeTom`}
+                  name={`${fieldArrayName}.${index}.periodeTom`}
                   validate={[required, hasValidDate]}
                   label={index === 0 ? <FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.tomDato" /> : ''}
                 />

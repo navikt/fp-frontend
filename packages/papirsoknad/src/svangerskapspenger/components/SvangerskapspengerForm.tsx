@@ -43,7 +43,6 @@ interface OwnProps {
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
-  fagsakPersonnummer: string;
   onSubmit: (values: any) => Promise<any>;
   onSubmitUfullstendigsoknad: () => Promise<any>;
 }
@@ -133,6 +132,6 @@ export const transformValues = (values: FormValues): any => ({
   ...values,
   foedselsDato: [values.foedselsDato],
   tilretteleggingArbeidsforhold: transformTilretteleggingsArbeidsforhold(values.tilretteleggingArbeidsforhold),
-});*/
+}); */
 
 export default SvangerskapspengerForm;

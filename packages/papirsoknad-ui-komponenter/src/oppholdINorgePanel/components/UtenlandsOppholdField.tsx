@@ -2,12 +2,11 @@ import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import classnames from 'classnames/bind';
 import { useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-
 import {
   formHooks, Datepicker, SelectField, PeriodFieldArray,
 } from '@navikt/ft-form-hooks';
-import landkoder from '@fpsak-frontend/kodeverk/src/landkoder';
-import { KodeverkMedNavn } from '@fpsak-frontend/types';
+import { Landkode } from '@navikt/ft-kodeverk';
+import { KodeverkMedNavn } from '@navikt/ft-types';
 
 import styles from './utenlandsOppholdField.less';
 
@@ -20,10 +19,11 @@ const defaultUtenlandsOpphold = {
 };
 
 const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] => countryCodes
-  .filter(({ kode }) => kode !== landkoder.NORGE)
+  .filter(({ kode }) => kode !== Landkode.NORGE)
   .map(({ kode, navn }): ReactElement => <option value={kode} key={kode}>{navn}</option>);
 
 interface OwnProps {
+  erTidligereOpphold: boolean;
   countryCodes: KodeverkMedNavn[];
   readOnly: boolean;
 }
@@ -34,6 +34,8 @@ export type FormValues = {
   periodeTom: string;
 };
 
+type Keys = 'tidligereOppholdUtenlands' | 'fremtidigeOppholdUtenlands';
+
 /**
  * UtenlandsOppholdField
  *
@@ -43,15 +45,18 @@ export type FormValues = {
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
 const UtenlandsOppholdField: FunctionComponent<OwnProps> = ({
+  erTidligereOpphold,
   readOnly,
   countryCodes,
 }) => {
   const intl = useIntl();
 
-  const { control } = formHooks.useFormContext<{ fremtidigeOppholdUtenlands: FormValues[] }>();
+  const name = erTidligereOpphold ? 'tidligereOppholdUtenlands' : 'fremtidigeOppholdUtenlands';
+
+  const { control } = formHooks.useFormContext<{ [K in Keys]: FormValues[] }>();
   const { fields, remove, append } = formHooks.useFieldArray({
     control,
-    name: 'fremtidigeOppholdUtenlands',
+    name,
   });
 
   const land = useMemo(() => countrySelectValues(countryCodes), [countryCodes]);
@@ -67,11 +72,11 @@ const UtenlandsOppholdField: FunctionComponent<OwnProps> = ({
       remove={remove}
       append={append}
     >
-      {(oppholdElementFieldId, index, getRemoveButton) => (
-        <Row key={oppholdElementFieldId}>
+      {(field, index, getRemoveButton) => (
+        <Row key={field.id}>
           <Column xs="12">
             <SelectField
-              name={`${oppholdElementFieldId}.land`}
+              name={`${name}.${index}.land`}
               label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.Country' })}
               selectValues={land}
               readOnly={readOnly}
@@ -82,14 +87,14 @@ const UtenlandsOppholdField: FunctionComponent<OwnProps> = ({
             <Row className={classNames({ datesRowWithRemoveButton: index > 0 })}>
               <Column xs="12" sm="6">
                 <Datepicker
-                  name={`${oppholdElementFieldId}.periodeFom`}
+                  name={`${name}.${index}.periodeFom`}
                   label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.periodeFom' })}
                   isReadOnly={readOnly}
                 />
               </Column>
               <Column xs="12" sm="6">
                 <Datepicker
-                  name={`${oppholdElementFieldId}.periodeTom`}
+                  name={`${name}.${index}.periodeTom`}
                   label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.periodeTom' })}
                   isReadOnly={readOnly}
                 />
@@ -119,6 +124,6 @@ UtenlandsOppholdField.validate = (values, options) => {
   });
 
   return hasValidPeriodIncludingOtherErrors(values, otherErrors, options);
-};*/
+}; */
 
 export default UtenlandsOppholdField;

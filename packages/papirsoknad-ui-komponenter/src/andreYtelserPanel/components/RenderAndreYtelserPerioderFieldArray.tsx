@@ -53,20 +53,20 @@ const RenderAndreYtelserPerioderFieldArray: FunctionComponent<OwnProps> & Static
       append={append}
       remove={remove}
     >
-      {(periodeElementFieldId, index, getRemoveButton) => (
-        <Row key={periodeElementFieldId}>
+      {(field, index, getRemoveButton) => (
+        <Row key={field.id}>
           <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
             <FlexContainer>
               <FlexRow>
                 <FlexColumn>
                   <Datepicker
-                    name={`${ANDRE_YTELSER_NAME_PREFIX}.${name}.${periodeElementFieldId}.periodeFom`}
+                    name={`${ANDRE_YTELSER_NAME_PREFIX}.${name}.${index}.periodeFom`}
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeFom' }) : ''}
                   />
                 </FlexColumn>
                 <FlexColumn>
                   <Datepicker
-                    name={`${ANDRE_YTELSER_NAME_PREFIX}.${name}.${periodeElementFieldId}.periodeTom`}
+                    name={`${ANDRE_YTELSER_NAME_PREFIX}.${name}.${index}.periodeTom`}
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeTom' }) : ''}
                   />
                 </FlexColumn>

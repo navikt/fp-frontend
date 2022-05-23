@@ -51,6 +51,7 @@
   "Registrering.FrilansOppdrag.FieldArray.periodeFom": "F.o.m.",
   "Registrering.FrilansOppdrag.FieldArray.periodeTom": "T.o.m.",
   "Registrering.FrilansOppdrag.FieldArray.Oppdragsgiver": "Oppdragsgiver",
+  "Registrering.FrilansOppdrag.FieldArray.NyPeriode": "Legg til periode",
   "Registrering.FrilansOppdrag.FieldArray.BeforeFomValidation": "F.o.m må være lik eller etter dato for første periode med frilansvirksomhet",
 
   "Registrering.InntektsgivendeArbeid.ArbeidINorge.Title": "Inntektsgivende arbeid i Norge",

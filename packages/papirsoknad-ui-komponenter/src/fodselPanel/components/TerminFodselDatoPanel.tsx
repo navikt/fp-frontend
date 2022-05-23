@@ -34,7 +34,7 @@ interface OwnProps {
  *
  * Form som brukes for registrere termin i papir soknad.
  */
-export const TerminFodselDatoPanel: FunctionComponent<OwnProps> = ({
+const TerminFodselDatoPanel: FunctionComponent<OwnProps> = ({
   readOnly,
   erForeldrepenger = false,
 }) => {

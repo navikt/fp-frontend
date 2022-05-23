@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
+import { AlleKodeverk } from '@navikt/ft-types';
 
-import { AlleKodeverk } from '@fpsak-frontend/types';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-ui-komponenter';
 
 import EngangsstonadForm from './components/EngangsstonadForm';

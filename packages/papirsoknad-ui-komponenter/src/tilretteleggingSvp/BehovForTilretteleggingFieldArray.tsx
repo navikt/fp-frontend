@@ -24,7 +24,7 @@ type FormValues = {
   stillingsprosent: string;
 }
 
-const defaultTilrettelegging = {
+const defaultTilrettelegging: FormValues = {
   tilretteleggingType: '',
   dato: '',
   stillingsprosent: '',
@@ -55,6 +55,8 @@ const BehovForTilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
       fields.push(defaultTilrettelegging);
     }
   }, []);
+
+  const fieldArrayName = `${TILRETTELEGGING_NAME_PREFIX}.${frilansFieldArrayName}`;
   return (
     <PeriodFieldArray
       fields={fields}
@@ -64,15 +66,15 @@ const BehovForTilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
       append={append}
       remove={remove}
     >
-      {(tilretteleggingFieldId, index, getRemoveButton) => (
-        <Row key={tilretteleggingFieldId} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+      {(field, index, getRemoveButton) => (
+        <Row key={field.id} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
           <Column xs="12">
             <FlexContainer>
               <FlexRow>
                 <FlexColumn>
                   <SelectField
                     readOnly={readOnly}
-                    name={`${tilretteleggingFieldId}.tilretteleggingType`}
+                    name={`${fieldArrayName}.${index}.tilretteleggingType`}
                     label={index === 0 ? intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.BehovForTilrettelegging' }) : ''}
                     validate={[required]}
                     selectValues={[
@@ -92,7 +94,7 @@ const BehovForTilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <Datepicker
                     isReadOnly={readOnly}
-                    name={`${tilretteleggingFieldId}.dato`}
+                    name={`${fieldArrayName}.${index}.dato`}
                     label={index === 0 ? intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.FraDato' }) : ''}
                     validate={[required]}
                   />
@@ -100,7 +102,7 @@ const BehovForTilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <InputField
                     readOnly={readOnly}
-                    name={`${tilretteleggingFieldId}.stillingsprosent`}
+                    name={`${fieldArrayName}.${index}.stillingsprosent`}
                     label={index === 0 ? intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.Stillingsprosent' }) : ''}
                     bredde="XXL"
                     validate={[required, maxValue3]}

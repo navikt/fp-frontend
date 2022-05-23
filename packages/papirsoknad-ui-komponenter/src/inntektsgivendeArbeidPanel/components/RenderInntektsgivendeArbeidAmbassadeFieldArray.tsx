@@ -54,15 +54,15 @@ export const RenderInntektsgivendeArbeidAmbassadeFieldArray: FunctionComponent<O
       remove={remove}
       append={append}
     >
-      {(ambassadeElementFieldId, index, getRemoveButton) => (
-        <Row key={ambassadeElementFieldId} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+      {(field, index, getRemoveButton) => (
+        <Row key={field.id} className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
           <Column xs="12">
             <FlexContainer>
               <FlexRow>
                 <FlexColumn>
                   <InputField
                     readOnly={readOnly}
-                    name={`${ambassadeElementFieldId}.arbeidsgiver`}
+                    name={`${RENDER_INNTEKTSGIVENDE_ARBEID_AMBASSADE_FIELD_ARRAY}.${index}.arbeidsgiver`}
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.Arbeidsgiver' }) : ''}
                     bredde="XXL"
                     validate={[maxLength50]}
@@ -72,14 +72,14 @@ export const RenderInntektsgivendeArbeidAmbassadeFieldArray: FunctionComponent<O
                 <FlexColumn>
                   <Datepicker
                     isReadOnly={readOnly}
-                    name={`${ambassadeElementFieldId}.periodeFom`}
+                    name={`${RENDER_INNTEKTSGIVENDE_ARBEID_AMBASSADE_FIELD_ARRAY}.${index}.periodeFom`}
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.periodeFom' }) : ''}
                   />
                 </FlexColumn>
                 <FlexColumn>
                   <Datepicker
                     isReadOnly={readOnly}
-                    name={`${ambassadeElementFieldId}.periodeTom`}
+                    name={`${RENDER_INNTEKTSGIVENDE_ARBEID_AMBASSADE_FIELD_ARRAY}.${index}.periodeTom`}
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.periodeTom' }) : ''}
                   />
                 </FlexColumn>

@@ -13,7 +13,7 @@ import styles from './lukkPapirsoknadModal.less';
 
 interface OwnProps {
   showModal: boolean;
-  handleSubmit: (form: string) => void;
+  handleSubmit: () => void;
   cancelEvent: () => void;
 }
 
@@ -59,7 +59,7 @@ const LukkPapirSoknadModal: FunctionComponent<OwnProps> = ({
               <Hovedknapp
                 mini
                 className={styles.button}
-                onClick={() => handleSubmit(form)}
+                onClick={() => handleSubmit()}
               >
                 {intl.formatMessage({ id: 'ModalLukkPapirSoknad.Ok' })}
               </Hovedknapp>

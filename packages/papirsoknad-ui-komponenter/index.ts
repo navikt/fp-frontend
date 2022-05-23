@@ -36,6 +36,7 @@ export { default as DekningsgradIndex } from './src/dekningsgradFp/DekningsgradI
 export { default as BekreftelsePanel } from './src/bekreftelseFp/BekreftelsePanel';
 
 export { default as PermisjonRettigheterPanel } from './src/permisjonFp/PermisjonRettigheterPanel';
+export { default as PermisjonPanel, FormValues as FormValuesPermisjon } from './src/permisjonFp/PermisjonPanel';
 
 export { default as SoknadData } from './src/felles/SoknadData';
 

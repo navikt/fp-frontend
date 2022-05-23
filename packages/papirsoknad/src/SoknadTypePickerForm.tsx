@@ -6,12 +6,12 @@ import { FormattedMessage } from 'react-intl';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import { Hovedknapp } from 'nav-frontend-knapper';
-
 import { Form, RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
 import { FagsakYtelseType, KodeverkType } from '@navikt/ft-kodeverk';
 import { ariaCheck, required } from '@navikt/ft-form-validators';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk } from '@navikt/ft-types';
+
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-ui-komponenter';
 
@@ -29,7 +29,7 @@ interface FormValues {
 }
 
 interface OwnProps {
-  setSoknadData: (soknadData: SoknadData) => SoknadData;
+  setSoknadData: (soknadData: SoknadData) => void;
   fagsakYtelseType: string;
   alleKodeverk: AlleKodeverk;
 }

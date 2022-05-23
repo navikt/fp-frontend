@@ -126,13 +126,15 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
       append={append}
       remove={remove}
     >
-      {(periodeElementFieldId, index) => {
+      {(field, index) => {
         const erForsteRad = (index === 0);
-        const { periodeFom, harSamtidigUttak } = fields.get(index);
+        const { periodeFom, harSamtidigUttak } = field;
         const periodeFomForTidlig = erPeriodeFormFør01012019(periodeFom);
         const visEllerSkulOverskriftStyle = erForsteRad ? styles.visOverskrift : styles.skjulOverskrift;
+
+        const namePart1 = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}`;
         return (
-          <div key={periodeElementFieldId}>
+          <div key={field.id}>
             <Row>
               <Column xs="12">
                 <FlexContainer>
@@ -140,7 +142,7 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                     <FlexColumn className={styles.selectFieldWidth}>
                       <SelectField
                         readOnly={readOnly}
-                        name={`${periodeElementFieldId}.periodeType`}
+                        name={`${namePart1}.periodeType`}
                         bredde="m"
                         label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeType' }))}
                         selectValues={mapPeriodeTyper(periodeTyper)}
@@ -149,14 +151,14 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                     <FlexColumn>
                       <Datepicker
                         isReadOnly={readOnly}
-                        name={`${periodeElementFieldId}.periodeFom`}
+                        name={`${namePart1}.periodeFom`}
                         label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' }))}
                       />
                     </FlexColumn>
                     <FlexColumn>
                       <Datepicker
                         isReadOnly={readOnly}
-                        name={`${periodeElementFieldId}.periodeTom`}
+                        name={`${namePart1}.periodeTom`}
                         label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' }))}
                       />
                     </FlexColumn>
@@ -166,7 +168,7 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                           readOnly={readOnly}
                           disabled={sokerErMor || shouldDisableSelect(selectedPeriodeTyper, index)}
                           bredde="s"
-                          name={`${periodeElementFieldId}.morsAktivitet`}
+                          name={`${namePart1}.morsAktivitet`}
                           label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.Fellesperiode.morsAktivitet' }))}
                           selectValues={mapAktiviteter(morsAktivitetTyper)}
                           hideValueOnDisable
@@ -179,7 +181,7 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                       </Undertekst>
                       <CheckboxField
                         readOnly={readOnly}
-                        name={`${periodeElementFieldId}.flerbarnsdager`}
+                        name={`${namePart1}.flerbarnsdager`}
                         label=" "
                       />
                     </FlexColumn>
@@ -189,14 +191,14 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                       </Undertekst>
                       <CheckboxField
                         readOnly={readOnly}
-                        name={`${periodeElementFieldId}.harSamtidigUttak`}
+                        name={`${namePart1}.harSamtidigUttak`}
                         label=" "
                       />
                     </FlexColumn>
                     {harSamtidigUttak && (
                       <FlexColumn className={erForsteRad ? '' : styles.alignSamtidigUttak}>
                         <InputField
-                          name={`${periodeElementFieldId}.samtidigUttaksprosent`}
+                          name={`${namePart1}.samtidigUttaksprosent`}
                           bredde="S"
                           validate={[hasValidDecimal, maxValue100]}
                           label={intl.formatMessage({ id: 'Registrering.Permisjon.SamtidigUttaksprosent' })}

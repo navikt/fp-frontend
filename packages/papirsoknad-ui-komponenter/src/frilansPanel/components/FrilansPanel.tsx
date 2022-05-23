@@ -51,7 +51,7 @@ const FrilansPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
             <RadioGroupField
               name={`${FRILANS_NAME_PREFIX}.erNyoppstartetFrilanser`}
               readOnly={readOnly}
-              label={<FormattedMessage id="Registrering.Frilans.ErNyoppstartedFrilanser" />}
+              label={<Undertekst><FormattedMessage id="Registrering.Frilans.ErNyoppstartedFrilanser" /></Undertekst>}
               parse={(value: string) => value === 'true'}
             >
               <RadioOption label={<FormattedMessage id="Registrering.Frilans.Yes" />} value="true" />
@@ -61,7 +61,7 @@ const FrilansPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
             <RadioGroupField
               name={`${FRILANS_NAME_PREFIX}.harInntektFraFosterhjem`}
               readOnly={readOnly}
-              label={<FormattedMessage id="Registrering.Frilans.HarInntektFraForsterhjem" />}
+              label={<Undertekst><FormattedMessage id="Registrering.Frilans.HarInntektFraForsterhjem" /></Undertekst>}
               parse={(value: string) => value === 'true'}
             >
               <RadioOption label={<FormattedMessage id="Registrering.Frilans.Yes" />} value="true" />
@@ -96,6 +96,6 @@ FrilansPanel.validate = (values) => {
       perioder: FrilansPerioderFieldArray.validate(values[FRILANS_NAME_PREFIX].perioder),
     },
   };
-};*/
+}; */
 
 export default FrilansPanel;
