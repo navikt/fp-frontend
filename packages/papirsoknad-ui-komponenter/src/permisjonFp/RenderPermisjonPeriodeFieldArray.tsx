@@ -121,7 +121,7 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
     <PeriodFieldArray
       readOnly={readOnly}
       fields={fields}
-      bodyText=""
+      bodyText={intl.formatMessage({ id: 'Registrering.Permisjon.nyPeriode' })}
       emptyPeriodTemplate={{}}
       append={append}
       remove={remove}

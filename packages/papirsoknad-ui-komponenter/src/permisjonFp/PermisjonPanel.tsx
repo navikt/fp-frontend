@@ -87,7 +87,7 @@ const PermisjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
           <CheckboxField
             className={visFeilMelding ? styles.showErrorBackground : ''}
             readOnly={readOnly}
-            name="fulltUttak"
+            name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`}
             label={<FormattedMessage id="Registrering.Permisjon.FulltUttak" />}
           />
           {fulltUttak && (

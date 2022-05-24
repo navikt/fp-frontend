@@ -98,7 +98,7 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
     name: `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}`,
   });
 
-  const graderingValues = watch(TIDSROM_PERMISJON_FORM_NAME_PREFIX);
+  const graderingValues = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}`);
 
   return (
     <PeriodFieldArray

@@ -199,6 +199,7 @@
   "Registrering.Permisjon.FedrekvoteEllerMedmorkvote": "Fedrekvote eller kvote til medmor",
   "Registrering.Permisjon.AngiPeriode": "Angi periode",
   "Registrering.Permisjon.periodeType": "Periodetype",
+  "Registrering.Permisjon.nyPeriode": "Legg til periode",
   "Registrering.Permisjon.periodeFom": "F.o.m.",
   "Registrering.Permisjon.periodeTom": "T.o.m.",
   "Registrering.Permisjon.SamtidigUttaksprosent": "Prosentandel uttak",
