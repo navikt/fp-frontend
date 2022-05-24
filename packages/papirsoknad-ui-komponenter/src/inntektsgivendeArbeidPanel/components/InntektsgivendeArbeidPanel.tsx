@@ -30,7 +30,7 @@ interface StaticFunctions {
 /**
  * InntektsgivendeArbeidPanel
  *
- * Presentasjonskomponent. Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
+ * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
  */
 const InntektsgivendeArbeidPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,

@@ -5,13 +5,14 @@ import { FagsakYtelseType } from '@navikt/ft-kodeverk';
 import { SoknadData } from '@fpsak-frontend/papirsoknad-ui-komponenter';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
-import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import { alleKodeverk, withRouter } from '@fpsak-frontend/storybook-utils';
 
 import SvangerskapspengerPapirsoknadIndex from './SvangerskapspengerPapirsoknadIndex';
 
 export default {
   title: 'papirsoknad/papirsoknad-svp',
   component: SvangerskapspengerPapirsoknadIndex,
+  decorators: [withRouter],
 };
 
 export const visPapirsoknadForMorVedFødsel = () => (

@@ -13,15 +13,21 @@ export const ENGANGSSTONAD_FORM_NAME = 'EngangsstonadForm';
 
 type FormValues = FormValuesFodsel | FormValuesAdopsjon | Record<string, never>;
 
-const buildInitialValues = (soknadData: SoknadData): FormValues => {
-  if (soknadData.getFamilieHendelseType() === familieHendelseType.FODSEL) {
-    return { ...RegistreringFodselGrid.buildInitialValues() };
+const buildInitialValues = (erFødsel: boolean, erAdopsjon: boolean): FormValues => {
+  if (erFødsel) {
+    return RegistreringFodselGrid.buildInitialValues();
   }
-  if (soknadData.getFamilieHendelseType() === familieHendelseType.ADOPSJON) {
-    return { ...RegistreringAdopsjonOgOmsorgGrid.buildInitialValues() };
+  if (erAdopsjon) {
+    return RegistreringAdopsjonOgOmsorgGrid.buildInitialValues();
   }
   return {};
 };
+
+const transformValues = (values: FormValues, erFødsel: boolean, erAdopsjon: boolean) => ({
+  ...values,
+  ...(erFødsel ? RegistreringFodselGrid.transformValues(values) : {}),
+  ...(erAdopsjon ? RegistreringAdopsjonOgOmsorgGrid.transformValues(values) : {}),
+});
 
 interface OwnProps {
   readOnly: boolean;
@@ -39,21 +45,24 @@ const EngangsstonadForm: FunctionComponent<OwnProps> = ({
   onSubmitUfullstendigsoknad,
   onSubmit,
 }) => {
+  const erFødsel = soknadData.getFamilieHendelseType() === familieHendelseType.FODSEL;
+  const erAdopsjon = soknadData.getFamilieHendelseType() === familieHendelseType.ADOPSJON;
+
   const formMethods = useForm<FormValues>({
-    defaultValues: buildInitialValues(soknadData),
+    defaultValues: buildInitialValues(erFødsel, erAdopsjon),
   });
 
   return (
-    <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(values)}>
+    <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values, erFødsel, erAdopsjon))}>
       <MottattDatoPapirsoknadIndex readOnly={readOnly} />
-      {soknadData.getFamilieHendelseType() === familieHendelseType.FODSEL && (
+      {erFødsel && (
         <RegistreringFodselGrid
           soknadData={soknadData}
           readOnly={readOnly}
           alleKodeverk={alleKodeverk}
         />
       )}
-      {(soknadData.getFamilieHendelseType() === familieHendelseType.ADOPSJON) && (
+      {erAdopsjon && (
         <RegistreringAdopsjonOgOmsorgGrid
           soknadData={soknadData}
           readOnly={readOnly}
@@ -69,7 +78,7 @@ const EngangsstonadForm: FunctionComponent<OwnProps> = ({
   );
 };
 
-/*const sokerPersonnummer = ownProps.fagsakPersonnummer;
+/* const sokerPersonnummer = ownProps.fagsakPersonnummer;
 const validate = getValidation(ownProps.soknadData, sokerPersonnummer);
 
 const getValidation = (soknadData: SoknadData, sokerPersonnummer: string): any => {
@@ -80,6 +89,6 @@ const getValidation = (soknadData: SoknadData, sokerPersonnummer: string): any =
     return (values: FormValuesAdopsjon) => RegistreringAdopsjonOgOmsorgGrid.validate(values, sokerPersonnummer, soknadData.familieHendelseType);
   }
   return null;
-};*/
+}; */
 
 export default EngangsstonadForm;

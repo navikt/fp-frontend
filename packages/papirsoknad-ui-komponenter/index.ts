@@ -19,7 +19,10 @@ export { default as LagreSoknadPapirsoknadIndex } from './src/lagreSoknadPanel/L
 export { default as MottattDatoPapirsoknadIndex } from './src/mottattDatoPanel/MottattDatoPapirsoknadIndex';
 
 export { default as OmsorgOgAdopsjonPapirsoknadIndex } from './src/omsorgOgAdopsjonPanel/OmsorgOgAdopsjonPapirsoknadIndex';
-export type { FormValues as OmsorgOgAdopsjonFormValues } from './src/omsorgOgAdopsjonPanel/components/OmsorgOgAdopsjonPanel';
+export type {
+  FormValues as OmsorgOgAdopsjonFormValues,
+  TransformedFormValues as OmsorgOgAdopsjonTransformedFormValues,
+} from './src/omsorgOgAdopsjonPanel/components/OmsorgOgAdopsjonPanel';
 
 export { default as OppholdINorgePapirsoknadIndex } from './src/oppholdINorgePanel/OppholdINorgePapirsoknadIndex';
 export type { FormValues as OppholdINorgeFormValues } from './src/oppholdINorgePanel/components/OppholdINorgePanel';

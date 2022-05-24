@@ -22,7 +22,7 @@ interface OwnProps {
 }
 
 /**
- *  FrilansPerioderFieldArray
+ * FrilansPerioderFieldArray
  *
  * Viser inputfelter for fra og til dato for frilansperioder
  */
@@ -45,21 +45,21 @@ const FrilansPerioderFieldArray: FunctionComponent<OwnProps> = ({
       remove={remove}
       append={append}
     >
-      {(periodeElementFieldId, index, getRemoveButton) => (
-        <div key={periodeElementFieldId}>
+      {(field, index, getRemoveButton) => (
+        <div key={field.id}>
           <Row>
             <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
               <FlexContainer>
                 <FlexRow>
                   <FlexColumn>
                     <Datepicker
-                      name={`${FRILANS_NAME_PREFIX}.perioder.${periodeElementFieldId}.periodeFom`}
+                      name={`${FRILANS_NAME_PREFIX}.perioder.${index}.periodeFom`}
                       label={index === 0 ? intl.formatMessage({ id: 'Registrering.Frilans.periodeFom' }) : ''}
                     />
                   </FlexColumn>
                   <FlexColumn>
                     <Datepicker
-                      name={`${FRILANS_NAME_PREFIX}.perioder.${periodeElementFieldId}.periodeTom`}
+                      name={`${FRILANS_NAME_PREFIX}.perioder.${index}.periodeTom`}
                       label={index === 0 ? intl.formatMessage({ id: 'Registrering.Frilans.periodeTom' }) : ''}
                     />
                   </FlexColumn>

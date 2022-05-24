@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
-
 import { createIntl } from '@navikt/ft-utils';
 
 import FrilansPanel, { FormValues } from './components/FrilansPanel';

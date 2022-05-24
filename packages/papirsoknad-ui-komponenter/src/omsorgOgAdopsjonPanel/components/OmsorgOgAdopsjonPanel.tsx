@@ -23,6 +23,12 @@ const OMSORG_NAME_PREFIX = 'omsorg';
 export type FormValues = {
   omsorgsovertakelsesdato?: string;
   antallBarn?: string;
+  foedselsDato?: { id: number, dato?: string }[];
+}
+
+export type TransformedFormValues = {
+  omsorgsovertakelsesdato?: string;
+  antallBarn?: string;
   foedselsDato?: string[];
 }
 
@@ -32,13 +38,17 @@ interface OwnProps {
   isForeldrepengerFagsak: boolean;
 }
 
+interface StaticFunctions {
+  transformValues: (formValues: FormValues) => TransformedFormValues;
+}
+
 /**
  * OmsorgOgAdopsjonPanel
  *
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad ved adopsjon og omsorgsovertakelse.
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
-const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> = ({
+const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly = true,
   familieHendelseType,
   isForeldrepengerFagsak,
@@ -137,9 +147,9 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> = ({
           </Row>
           <Row>
             <Column xs="6">
-              {fields.map((name, index) => (
+              {fields.map((field, index) => (
                 <Datepicker
-                  key={name}
+                  key={field.id}
                   name={`${OMSORG_NAME_PREFIX}.foedselsDato.${index}.dato`}
                   isReadOnly={readOnly}
                   validate={familieHendelseType === fht.ADOPSJON
@@ -154,6 +164,11 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> = ({
     </BorderBox>
   );
 };
+
+OmsorgOgAdopsjonPanel.transformValues = (values) => ({
+  ...values,
+  foedselsDato: values.foedselsDato.map((f) => f.dato),
+});
 
 /*
 const validateIncludingRequired = (antallBarn: number) => required(antallBarn)

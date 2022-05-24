@@ -9,7 +9,8 @@ import { KodeverkType } from '@navikt/ft-kodeverk';
 
 import arbeidType from '@fpsak-frontend/kodeverk/src/arbeidType';
 
-import RenderAndreYtelserPerioderFieldArray, { FormValues as PerioderFormValues,
+import RenderAndreYtelserPerioderFieldArray, {
+  FormValues as PerioderFormValues,
   ANDRE_YTELSER_PERIODE_SUFFIX, ANDRE_YTELSER_NAME_PREFIX,
 } from './RenderAndreYtelserPerioderFieldArray';
 
@@ -44,7 +45,7 @@ interface StaticFunctions {
  *
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
  */
-export const AndreYtelserPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
+const AndreYtelserPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   kunMiliterEllerSiviltjeneste = false,
   alleKodeverk,
@@ -110,7 +111,7 @@ AndreYtelserPanel.validate = (values: FormValues, andreYtelser: KodeverkMedNavn[
     errors[ANDRE_YTELSER_FORM_NAME_PREFIX][ytelsePerioderFieldName] = RenderAndreYtelserPerioderFieldArray.validate(ytelseValues[ytelsePerioderFieldName]);
   });
   return errors;
-};*/
+}; */
 
 AndreYtelserPanel.transformValues = (values: FormValues, andreYtelser: KodeverkMedNavn[]): any => {
   const ytelseValues = values[ANDRE_YTELSER_NAME_PREFIX];

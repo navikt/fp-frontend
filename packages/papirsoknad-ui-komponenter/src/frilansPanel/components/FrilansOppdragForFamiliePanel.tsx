@@ -32,6 +32,7 @@ const FrilansOppdragForFamiliePanel: FunctionComponent<OwnProps> & StaticFunctio
         name={`${FRILANS_NAME_PREFIX}.harHattOppdragForFamilie`}
         readOnly={readOnly}
         label={<Undertekst><FormattedMessage id="Registrering.FrilansOppdrag.HarHattOppdragForFamilie" /></Undertekst>}
+        parse={(value: string) => value === 'true'}
       >
         <RadioOption label={<FormattedMessage id="Registrering.FrilansOppdrag.Yes" />} value="true" />
         <RadioOption label={<FormattedMessage id="Registrering.FrilansOppdrag.No" />} value="false" />

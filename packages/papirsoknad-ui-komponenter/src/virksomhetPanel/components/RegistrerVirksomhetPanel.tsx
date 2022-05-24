@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useCallback, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
@@ -23,8 +23,8 @@ interface OwnProps {
 /**
  * RegistrererVirksomhetPanel
  *
- * Presentasjonskomponent. Komponenten vises som del av skjermbildet for registrering av
- * papirsøknad dersom søknad gjelder foreldrepenger og søker har arbeidet i egen virksomhet.
+ * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder
+ * foreldrepenger og søker har arbeidet i egen virksomhet.
  * Viser registrerte virksomheter samt knapp for å legge til nye virksomheter.
  */
 
@@ -40,15 +40,15 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({
     name: `${EGEN_VIRKSOMHET_NAME_PREFIX}.virksomheter`,
   });
 
-  const visModal = (index?: number): void => {
-    setVirksomhetIndex(index || -1);
-  };
+  const visModal = useCallback((index?: number): void => {
+    setVirksomhetIndex(index !== undefined ? index : -1);
+  }, [setVirksomhetIndex]);
 
-  const lukkModal = (): void => {
+  const lukkModal = useCallback((): void => {
     setVirksomhetIndex(undefined);
-  };
+  }, [setVirksomhetIndex]);
 
-  const leggTilVirksomhet = (virksomhet: ModalFormValues) => {
+  const leggTilVirksomhet = useCallback((virksomhet: ModalFormValues) => {
     const justertVirksomhet = {
       ...virksomhet,
       landJobberFra: virksomhet.virksomhetRegistrertINorge ? 'NOR' : virksomhet.landJobberFra,
@@ -57,7 +57,7 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({
     append(justertVirksomhet);
 
     lukkModal();
-  };
+  }, [append, lukkModal]);
 
   return (
     <div className={styles.fieldsList}>
@@ -73,9 +73,9 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({
               </Column>
             </Row>
             <hr className={styles.divider} />
-            {fields.map((virksomhet, index) => (
+            {fields.map((field, index) => (
               <React.Fragment key={2}>
-                <Row key={`${virksomhet}.navn`}>
+                <Row key={field.id}>
                   <Column xs="8">
                     {// eslint-disable-next-line jsx-a11y/click-events-have-key-events
                     }
@@ -87,7 +87,7 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({
                       tabIndex={0}
                     >
                       <Normaltekst>
-                        {virksomhet.navn}
+                        {field.navn}
                       </Normaltekst>
                     </a>
                   </Column>
@@ -129,14 +129,16 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({
           <Undertekst className={styles.imageText}><FormattedMessage id="Registrering.RegistrerVirksomhetPanel.Add" /></Undertekst>
         </div>
       </SkjemaGruppeMedFeilviser>
-      <RegistrerVirksomhetModalForm
-        showModal={!!virksomhetIndex}
-        virksomhet={virksomhetIndex !== -1 && fields.length > virksomhetIndex ? fields[virksomhetIndex] : undefined}
-        onSubmit={leggTilVirksomhet}
-        closeEvent={lukkModal}
-        readOnly={readOnly}
-        alleKodeverk={alleKodeverk}
-      />
+      {virksomhetIndex !== undefined && (
+        <RegistrerVirksomhetModalForm
+          showModal
+          virksomhet={virksomhetIndex !== -1 && fields.length > virksomhetIndex ? fields[virksomhetIndex] : undefined}
+          onSubmit={leggTilVirksomhet}
+          closeEvent={lukkModal}
+          readOnly={readOnly}
+          alleKodeverk={alleKodeverk}
+        />
+      )}
     </div>
   );
 };

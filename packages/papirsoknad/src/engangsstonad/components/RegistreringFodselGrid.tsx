@@ -15,6 +15,7 @@ import {
   OmsorgOgAdopsjonPapirsoknadIndex,
   OmsorgOgAdopsjonFormValues,
   SoknadData,
+  OmsorgOgAdopsjonTransformedFormValues,
 } from '@fpsak-frontend/papirsoknad-ui-komponenter';
 
 /*
@@ -38,8 +39,13 @@ export type FormValues = {
   [ANNEN_FORELDER_FORM_NAME_PREFIX]?: AnnenForelderFormValues;
 } & OppholdINorgeFormValues & FodselFormValues;
 
+export type TransformedFormValues = Omit<FormValues, 'omsorg'> & {
+  [OMSORG_FORM_NAME_PREFIX]?: OmsorgOgAdopsjonTransformedFormValues;
+}
+
 interface StaticFunctions {
   buildInitialValues: () => FormValues;
+  transformValues: (values: FormValues) => TransformedFormValues;
 }
 
 const RegistreringFodselGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
@@ -71,6 +77,11 @@ const RegistreringFodselGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
     </Column>
   </Row>
 );
+
+RegistreringFodselGrid.transformValues = (values) => ({
+  ...values,
+  [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values[OMSORG_FORM_NAME_PREFIX]),
+});
 
 RegistreringFodselGrid.buildInitialValues = () => ({
   ...OppholdINorgePapirsoknadIndex.buildInitialValues(),

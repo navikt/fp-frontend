@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
-
-import { AlleKodeverk } from '@fpsak-frontend/types';
+import { AlleKodeverk } from '@navikt/ft-types';
 import { createIntl } from '@navikt/ft-utils';
 
 import EgenVirksomhetPanel from './components/EgenVirksomhetPanel';

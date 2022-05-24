@@ -12,16 +12,11 @@ import {
   OmsorgOgAdopsjonPapirsoknadIndex,
   OmsorgOgAdopsjonFormValues,
   SoknadData,
+  OmsorgOgAdopsjonTransformedFormValues,
 } from '@fpsak-frontend/papirsoknad-ui-komponenter';
 
 const ANNEN_FORELDER_FORM_NAME_PREFIX = 'annenForelder';
 const OMSORG_FORM_NAME_PREFIX = 'omsorg';
-
-interface OwnProps {
-  readOnly: boolean;
-  soknadData: SoknadData;
-  alleKodeverk: AlleKodeverk;
-}
 
 export type FormValues = {
   rettigheter?: string;
@@ -30,14 +25,25 @@ export type FormValues = {
   [ANNEN_FORELDER_FORM_NAME_PREFIX]?: AnnenForelderFormValues;
 } & OppholdINorgeFormValues;
 
+export type TransformedFormValues = Omit<FormValues, 'omsorg'> & {
+  [OMSORG_FORM_NAME_PREFIX]?: OmsorgOgAdopsjonTransformedFormValues;
+}
+
+interface OwnProps {
+  readOnly: boolean;
+  soknadData: SoknadData;
+  alleKodeverk: AlleKodeverk;
+}
+
 interface StaticFunctions {
   buildInitialValues: () => FormValues;
+  transformValues: (values: FormValues) => TransformedFormValues;
 }
 
 /*
  * RegistreringAdopsjonOgOmsorgGrid
  *
- * Form som brukes vid adopsjon for tilleggsopplysninger. Containerkomponent for AnnenForelderForm
+ * Form som brukes ved adopsjon for tilleggsopplysninger.
  */
 const RegistreringAdopsjonOgOmsorgGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
@@ -63,6 +69,11 @@ const RegistreringAdopsjonOgOmsorgGrid: FunctionComponent<OwnProps> & StaticFunc
     </Column>
   </Row>
 );
+
+RegistreringAdopsjonOgOmsorgGrid.transformValues = (values: FormValues): TransformedFormValues => ({
+  ...values,
+  [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values[OMSORG_FORM_NAME_PREFIX]),
+});
 
 RegistreringAdopsjonOgOmsorgGrid.buildInitialValues = () => ({
   [OMSORG_FORM_NAME_PREFIX]: {},

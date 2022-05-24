@@ -34,7 +34,7 @@ const TerminFodselSvpPanel: FunctionComponent<OwnProps> = ({
   <BorderBox>
     <SkjemaGruppe legend={intl.formatMessage({ id: 'TerminFodselSvpPanel.TerminOgFodsel' })}>
       <Row>
-        <Column xs="2">
+        <Column xs="3">
           <Datepicker
             name="termindato"
             label={intl.formatMessage({ id: 'TerminFodselSvpPanel.Termindato' })}

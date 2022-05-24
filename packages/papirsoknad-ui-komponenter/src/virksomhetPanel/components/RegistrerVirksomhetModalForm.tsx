@@ -102,13 +102,13 @@ const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps> = ({
   );
 };
 
-/*const validate = (values: any) => {
+/* const validate = (values: any) => {
   const errors1 = VirksomhetIdentifikasjonPanel.validate(values);
   const errors2 = VirksomhetTypeNaringPanel.validate(values);
   return {
     ...errors1,
     ...errors2,
   };
-};*/
+}; */
 
 export default RegistrerVirksomhetModalForm;

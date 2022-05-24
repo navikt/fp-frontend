@@ -8,7 +8,8 @@ import { BorderBox, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
-import BehovForTilretteleggingFieldArray from './BehovForTilretteleggingFieldArray';
+import { Undertekst } from 'nav-frontend-typografi';
+import BehovForTilretteleggingFieldArray, { frilansFieldArrayName, selvstendigNaringsdrivendeFieldArrayName } from './BehovForTilretteleggingFieldArray';
 import TilretteleggingForArbeidsgiverFieldArray from './TilretteleggingForArbeidsgiverFieldArray';
 import messages from '../../i18n/nb_NO.json';
 
@@ -59,8 +60,8 @@ const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunction
   const { watch } = formHooks.useFormContext<FormValues>();
 
   const sokForSelvstendigNaringsdrivende = watch(`${TILRETTELEGGING_NAME_PREFIX}.sokForSelvstendigNaringsdrivende`);
-  const sokForFrilans = watch(`${TILRETTELEGGING_NAME_PREFIX}.sokForSelvstendigNaringsdrivende`);
-  const sokForArbeidsgiver = watch(`${TILRETTELEGGING_NAME_PREFIX}.sokForSelvstendigNaringsdrivende`);
+  const sokForFrilans = watch(`${TILRETTELEGGING_NAME_PREFIX}.sokForFrilans`);
+  const sokForArbeidsgiver = watch(`${TILRETTELEGGING_NAME_PREFIX}.sokForArbeidsgiver`);
 
   return (
     <RawIntlProvider value={intl}>
@@ -68,7 +69,7 @@ const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunction
         <SkjemaGruppe legend={<FormattedMessage id="BehovForTilretteleggingPanel.BehovForTilrettelegging" />}>
           <RadioGroupField
             name={`${TILRETTELEGGING_NAME_PREFIX}.sokForSelvstendigNaringsdrivende`}
-            label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForSelvstendigNaringsdrivende" />}
+            label={<Undertekst><FormattedMessage id="BehovForTilretteleggingPanel.SokForSelvstendigNaringsdrivende" /></Undertekst>}
             validate={[required]}
             readOnly={readOnly}
             parse={(value: string) => value === 'true'}
@@ -85,13 +86,14 @@ const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunction
                 isReadOnly={readOnly}
               />
               <BehovForTilretteleggingFieldArray
+                name={`${TILRETTELEGGING_NAME_PREFIX}.${selvstendigNaringsdrivendeFieldArrayName}`}
                 readOnly={readOnly}
               />
             </ArrowBox>
           )}
           <RadioGroupField
             name={`${TILRETTELEGGING_NAME_PREFIX}.sokForFrilans`}
-            label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForFrilans" />}
+            label={<Undertekst><FormattedMessage id="BehovForTilretteleggingPanel.SokForFrilans" /></Undertekst>}
             validate={[required]}
             readOnly={readOnly}
             parse={(value: string) => value === 'true'}
@@ -108,13 +110,14 @@ const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunction
                 isReadOnly={readOnly}
               />
               <BehovForTilretteleggingFieldArray
+                name={`${TILRETTELEGGING_NAME_PREFIX}.${frilansFieldArrayName}`}
                 readOnly={readOnly}
               />
             </ArrowBox>
           )}
           <RadioGroupField
             name={`${TILRETTELEGGING_NAME_PREFIX}.sokForArbeidsgiver`}
-            label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForArbeidsgiver" />}
+            label={<Undertekst><FormattedMessage id="BehovForTilretteleggingPanel.SokForArbeidsgiver" /></Undertekst>}
             validate={[required]}
             readOnly={readOnly}
             parse={(value: string) => value === 'true'}
@@ -124,9 +127,7 @@ const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunction
           </RadioGroupField>
           {sokForArbeidsgiver && (
             <ArrowBox>
-              <TilretteleggingForArbeidsgiverFieldArray
-                readOnly={readOnly}
-              />
+              <TilretteleggingForArbeidsgiverFieldArray readOnly={readOnly} />
             </ArrowBox>
           )}
         </SkjemaGruppe>

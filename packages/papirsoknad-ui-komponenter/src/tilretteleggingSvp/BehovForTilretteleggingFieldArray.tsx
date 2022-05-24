@@ -11,12 +11,11 @@ import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingTyp
 
 import styles from './behovForTilretteleggingFieldArray.less';
 
-const TILRETTELEGGING_NAME_PREFIX = 'tilretteleggingArbeidsforhold';
-
-// TODO const selvstendigNaringsdrivendeFieldArrayName = 'tilretteleggingSelvstendigNaringsdrivende';
-const frilansFieldArrayName = 'tilretteleggingFrilans';
-
 const maxValue3 = maxValue(100);
+
+export const behovForTilretteleggingFieldArrayName = 'tilretteleggingArbeidsgiver';
+export const selvstendigNaringsdrivendeFieldArrayName = 'tilretteleggingSelvstendigNaringsdrivende';
+export const frilansFieldArrayName = 'tilretteleggingFrilans';
 
 type FormValues = {
   tilretteleggingType: string;
@@ -32,6 +31,7 @@ const defaultTilrettelegging: FormValues = {
 
 interface OwnProps {
   readOnly: boolean;
+  name: string;
 }
 
 /**
@@ -41,22 +41,22 @@ interface OwnProps {
  */
 const BehovForTilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
   readOnly,
+  name,
 }) => {
   const intl = useIntl();
 
-  const { control } = formHooks.useFormContext<{ [TILRETTELEGGING_NAME_PREFIX]: {[frilansFieldArrayName]: FormValues[] }}>();
+  const { control } = formHooks.useFormContext();
   const { fields, remove, append } = formHooks.useFieldArray({
     control,
-    name: `${TILRETTELEGGING_NAME_PREFIX}.${frilansFieldArrayName}`,
+    name,
   });
 
   useEffect(() => {
     if (fields.length === 0) {
-      fields.push(defaultTilrettelegging);
+      append(defaultTilrettelegging);
     }
   }, []);
 
-  const fieldArrayName = `${TILRETTELEGGING_NAME_PREFIX}.${frilansFieldArrayName}`;
   return (
     <PeriodFieldArray
       fields={fields}
@@ -74,7 +74,7 @@ const BehovForTilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <SelectField
                     readOnly={readOnly}
-                    name={`${fieldArrayName}.${index}.tilretteleggingType`}
+                    name={`${name}.${index}.tilretteleggingType`}
                     label={index === 0 ? intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.BehovForTilrettelegging' }) : ''}
                     validate={[required]}
                     selectValues={[
@@ -94,7 +94,7 @@ const BehovForTilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <Datepicker
                     isReadOnly={readOnly}
-                    name={`${fieldArrayName}.${index}.dato`}
+                    name={`${name}.${index}.dato`}
                     label={index === 0 ? intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.FraDato' }) : ''}
                     validate={[required]}
                   />
@@ -102,7 +102,7 @@ const BehovForTilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <InputField
                     readOnly={readOnly}
-                    name={`${fieldArrayName}.${index}.stillingsprosent`}
+                    name={`${name}.${index}.stillingsprosent`}
                     label={index === 0 ? intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.Stillingsprosent' }) : ''}
                     bredde="XXL"
                     validate={[required, maxValue3]}

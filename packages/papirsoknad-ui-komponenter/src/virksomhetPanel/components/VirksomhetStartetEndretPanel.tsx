@@ -28,7 +28,7 @@ interface OwnProps {
 /**
  * VirksomhetStartetEndretPanel
  *
- * Presentasjonskomponent. Komponenten vises som del av skjermbildet for registrering av
+ * Komponenten vises som del av skjermbildet for registrering av
  * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
 export const VirksomhetStartetEndretPanel: FunctionComponent<OwnProps> = ({

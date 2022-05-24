@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import {
+  FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import { Datepicker, formHooks, PeriodFieldArray } from '@navikt/ft-form-hooks';
 
 import styles from './renderAndreYtelserPerioderFieldArray.less';
@@ -42,41 +44,45 @@ const RenderAndreYtelserPerioderFieldArray: FunctionComponent<OwnProps> & Static
   const { control } = formHooks.useFormContext<{ [ANDRE_YTELSER_NAME_PREFIX]: FormValues}>();
   const { fields, remove, append } = formHooks.useFieldArray({
     control,
+    // @ts-ignore Usikker på korleis ein fiksar denne (Dynamisk name basert på verdiar fra backend)
     name: `${ANDRE_YTELSER_NAME_PREFIX}.${name}`,
   });
 
   return (
     <PeriodFieldArray
       fields={fields}
-      bodyText=""
+      bodyText={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.NyPeriode' })}
       readOnly={readOnly}
       append={append}
       remove={remove}
     >
       {(field, index, getRemoveButton) => (
-        <Row key={field.id}>
-          <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
-            <FlexContainer>
-              <FlexRow>
-                <FlexColumn>
-                  <Datepicker
-                    name={`${ANDRE_YTELSER_NAME_PREFIX}.${name}.${index}.periodeFom`}
-                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeFom' }) : ''}
-                  />
-                </FlexColumn>
-                <FlexColumn>
-                  <Datepicker
-                    name={`${ANDRE_YTELSER_NAME_PREFIX}.${name}.${index}.periodeTom`}
-                    label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeTom' }) : ''}
-                  />
-                </FlexColumn>
-                <FlexColumn>
-                  {getRemoveButton()}
-                </FlexColumn>
-              </FlexRow>
-            </FlexContainer>
-          </Column>
-        </Row>
+        <div key={field.id}>
+          <Row>
+            <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+              <FlexContainer>
+                <FlexRow>
+                  <FlexColumn>
+                    <Datepicker
+                      name={`${ANDRE_YTELSER_NAME_PREFIX}.${name}.${index}.periodeFom`}
+                      label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeFom' }) : ''}
+                    />
+                  </FlexColumn>
+                  <FlexColumn>
+                    <Datepicker
+                      name={`${ANDRE_YTELSER_NAME_PREFIX}.${name}.${index}.periodeTom`}
+                      label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeTom' }) : ''}
+                    />
+                  </FlexColumn>
+                  <FlexColumn>
+                    {getRemoveButton()}
+                  </FlexColumn>
+                </FlexRow>
+              </FlexContainer>
+            </Column>
+          </Row>
+          <VerticalSpacer sixteenPx />
+        </div>
       )}
     </PeriodFieldArray>
   );

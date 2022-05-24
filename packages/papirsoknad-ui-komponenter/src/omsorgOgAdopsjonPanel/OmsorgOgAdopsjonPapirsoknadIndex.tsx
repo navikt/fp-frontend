@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import OmsorgOgAdopsjonPanel from './components/OmsorgOgAdopsjonPanel';
+import OmsorgOgAdopsjonPanel, { FormValues, TransformedFormValues } from './components/OmsorgOgAdopsjonPanel';
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
@@ -14,7 +14,11 @@ interface OwnProps {
   isForeldrepengerFagsak: boolean;
 }
 
-const OmsorgOgAdopsjonPapirsoknadIndex: FunctionComponent<OwnProps> = ({
+interface StaticFunctions {
+  transformValues: (formValues: FormValues) => TransformedFormValues;
+}
+
+const OmsorgOgAdopsjonPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   familieHendelseType,
   isForeldrepengerFagsak,
@@ -27,5 +31,7 @@ const OmsorgOgAdopsjonPapirsoknadIndex: FunctionComponent<OwnProps> = ({
     />
   </RawIntlProvider>
 );
+
+OmsorgOgAdopsjonPapirsoknadIndex.transformValues = OmsorgOgAdopsjonPanel.transformValues;
 
 export default OmsorgOgAdopsjonPapirsoknadIndex;

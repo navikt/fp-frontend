@@ -38,8 +38,7 @@ const OMSORG_FORM_NAME_PREFIX = 'omsorg';
 
 type FormValues = {
   rettigheter?: string;
-  foedselsDato?: string;
-  [OMSORG_FORM_NAME_PREFIX]?: OmsorgOgAdopsjonFormValues;
+  [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonFormValues;
   [ANNEN_FORELDER_FORM_NAME_PREFIX]?: AnnenForelderFormValues;
 } & AndreYtelserFormValue & IArbeidFormValues & FrilansFormValues & OppholdINorgeFormValues & FormValuesPermisjon;
 
@@ -50,6 +49,11 @@ const buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => ({
   [OMSORG_FORM_NAME_PREFIX]: {},
   ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
   ...PermisjonPanel.buildInitialValues(),
+});
+
+const transformValues = (values: FormValues) => ({
+  ...values,
+  [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values[OMSORG_FORM_NAME_PREFIX]),
 });
 
 interface OwnProps {
@@ -89,7 +93,7 @@ const ForeldrepengerForm: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(values)}>
+    <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values))}>
       <MottattDatoPapirsoknadIndex readOnly={readOnly} />
       <OppholdINorgePapirsoknadIndex readOnly={readOnly} soknadData={soknadData} alleKodeverk={alleKodeverk} />
       <InntektsgivendeArbeidPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
@@ -169,6 +173,6 @@ const getValidation = (soknadData: SoknadData, andreYtelser: KodeverkMedNavn[], 
     });
   }
   return null;
-};*/
+}; */
 
 export default ForeldrepengerForm;

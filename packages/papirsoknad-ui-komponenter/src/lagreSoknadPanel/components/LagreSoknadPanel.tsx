@@ -34,7 +34,6 @@ const LagreSoknadPanel: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
 
   const [showLukkSoknadModal, setShowLukkSoknadModal] = useState(false);
-  const [verge, setVerge] = useState(false);
 
   const { watch } = formHooks.useFormContext<FormValues>();
   const ufullstendigSoeknad = watch('ufullstendigSoeknad') || false;
@@ -42,10 +41,6 @@ const LagreSoknadPanel: FunctionComponent<OwnProps> = ({
   const toggleLukkPapirsoknadModal = useCallback(() => {
     setShowLukkSoknadModal(!showLukkSoknadModal);
   }, [setShowLukkSoknadModal, showLukkSoknadModal]);
-
-  const toggleVerge = useCallback(() => {
-    setVerge(!verge);
-  }, [setVerge, verge]);
 
   return (
     <BorderBox>
@@ -67,7 +62,6 @@ const LagreSoknadPanel: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <CheckboxField
                     name="registrerVerge"
-                    onChange={toggleVerge}
                     label={intl.formatMessage({ id: 'Registrering.Verge' })}
                     readOnly={readOnly}
                   />
@@ -109,7 +103,6 @@ const LagreSoknadPanel: FunctionComponent<OwnProps> = ({
               showModal={showLukkSoknadModal}
               cancelEvent={toggleLukkPapirsoknadModal}
             />
-
           </FlexColumn>
         </FlexRow>
       </FlexContainer>

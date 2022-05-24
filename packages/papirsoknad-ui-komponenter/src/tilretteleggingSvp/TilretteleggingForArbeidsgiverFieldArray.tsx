@@ -7,13 +7,11 @@ import {
 import { Datepicker, formHooks, InputField } from '@navikt/ft-form-hooks';
 import { required, hasValidOrgNumberOrFodselsnr, hasNoWhiteSpace } from '@navikt/ft-form-validators';
 
-import BehovForTilretteleggingFieldArray from './BehovForTilretteleggingFieldArray';
+import BehovForTilretteleggingFieldArray, { behovForTilretteleggingFieldArrayName } from './BehovForTilretteleggingFieldArray';
 
 const TILRETTELEGGING_NAME_PREFIX = 'tilretteleggingArbeidsforhold';
 
 const tilretteleggingForArbeidsgiverFieldArrayName = 'tilretteleggingForArbeidsgiver';
-
-const behovForTilretteleggingFieldArrayName = 'tilretteleggingArbeidsgiver';
 
 type FormValues = {
   organisasjonsnummer: string;
@@ -49,16 +47,17 @@ const TilretteleggingForArbeidsgiverFieldArray: FunctionComponent<OwnProps> = ({
     append(defaultTilrettelegging);
   };
 
+  const namePart1 = `${TILRETTELEGGING_NAME_PREFIX}.${tilretteleggingForArbeidsgiverFieldArrayName}`;
   return (
     <>
-      {fields.map((fieldId, index: number) => (
-        <div key={fieldId}>
+      {fields.map((field, index: number) => (
+        <div key={field.id}>
           <FlexContainer>
             <FlexRow>
               <FlexColumn>
                 <InputField
                   readOnly={readOnly}
-                  name={`${fieldId}.organisasjonsnummer`}
+                  name={`${namePart1}.${index}.organisasjonsnummer`}
                   label={intl.formatMessage({ id: 'TilretteleggingForArbeidsgiverFieldArray.OrgNr' })}
                   bredde="XL"
                   validate={[required, hasNoWhiteSpace, hasValidOrgNumberOrFodselsnr]}
@@ -67,7 +66,7 @@ const TilretteleggingForArbeidsgiverFieldArray: FunctionComponent<OwnProps> = ({
               </FlexColumn>
               <FlexColumn>
                 <Datepicker
-                  name={`${fieldId}.behovsdato`}
+                  name={`${namePart1}.${index}.behovsdato`}
                   label={intl.formatMessage({ id: 'TilretteleggingForArbeidsgiverFieldArray.TilretteleggingFra' })}
                   validate={[required]}
                   isReadOnly={readOnly}
@@ -76,7 +75,7 @@ const TilretteleggingForArbeidsgiverFieldArray: FunctionComponent<OwnProps> = ({
             </FlexRow>
           </FlexContainer>
           <BehovForTilretteleggingFieldArray
-            name={`${fieldId}.${behovForTilretteleggingFieldArrayName}` as string}
+            name={`${namePart1}.${index}.${behovForTilretteleggingFieldArrayName}`}
             readOnly={readOnly}
           />
           {fields.length > index + 1 && (
@@ -86,7 +85,7 @@ const TilretteleggingForArbeidsgiverFieldArray: FunctionComponent<OwnProps> = ({
             </>
           )}
           {fields.length === index + 1 && (
-            <Knapp mini htmlType="button" onClick={leggTilArbeidsgiver()}>
+            <Knapp mini htmlType="button" onClick={leggTilArbeidsgiver}>
               <FormattedMessage id="TilretteleggingForArbeidsgiverFieldArray.LeggTilArbeidsgiver" />
             </Knapp>
           )}
