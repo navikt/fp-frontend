@@ -31,6 +31,11 @@ import {
   PermisjonRettigheterPanel,
   PermisjonPanel,
   FormValuesPermisjon,
+  PermRettigheterFormValues,
+  MottattDatoFormValues,
+  VirksomhetFormValues,
+  DekningsgradFormValues,
+  FodselFormValues,
 } from '@fpsak-frontend/papirsoknad-ui-komponenter';
 
 const ANNEN_FORELDER_FORM_NAME_PREFIX = 'annenForelder';
@@ -40,7 +45,16 @@ type FormValues = {
   rettigheter?: string;
   [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonFormValues;
   [ANNEN_FORELDER_FORM_NAME_PREFIX]?: AnnenForelderFormValues;
-} & AndreYtelserFormValue & IArbeidFormValues & FrilansFormValues & OppholdINorgeFormValues & FormValuesPermisjon;
+} & AndreYtelserFormValue
+  & FodselFormValues
+  & IArbeidFormValues
+  & FrilansFormValues
+  & OppholdINorgeFormValues
+  & FormValuesPermisjon
+  & PermRettigheterFormValues
+  & MottattDatoFormValues
+  & VirksomhetFormValues
+  & DekningsgradFormValues;
 
 const buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => ({
   ...FrilansPapirsoknadIndex.buildInitialValues(),
@@ -81,26 +95,16 @@ const ForeldrepengerForm: FunctionComponent<OwnProps> = ({
     defaultValues: useMemo(() => buildInitialValues(alleKodeverk[KodeverkType.ARBEID_TYPE]), []),
   });
 
-  // TODO Dette er ikkje korrekt. Felta under ligg i permisjonspanel
-  const annenForelder = formMethods.watch('annenForelder');
-
-  const sokerHarAleneomsorg = annenForelder ? annenForelder.sokerHarAleneomsorg : undefined;
-  const denAndreForelderenHarRettPaForeldrepenger = annenForelder ? annenForelder.denAndreForelderenHarRettPaForeldrepenger : undefined;
-
-  let annenForelderInformertRequired = true;
-  if (annenForelder && (sokerHarAleneomsorg || annenForelder.denAndreForelderenHarRettPaForeldrepenger === false)) {
-    annenForelderInformertRequired = false;
-  }
+  const sokerHarAleneomsorg = formMethods.watch('sokerHarAleneomsorg');
+  const denAndreForelderenHarRettPaForeldrepenger = formMethods.watch('denAndreForelderenHarRettPaForeldrepenger');
+  const annenForelderInformertRequired = !sokerHarAleneomsorg && denAndreForelderenHarRettPaForeldrepenger !== false;
 
   return (
     <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values))}>
       <MottattDatoPapirsoknadIndex readOnly={readOnly} />
       <OppholdINorgePapirsoknadIndex readOnly={readOnly} soknadData={soknadData} alleKodeverk={alleKodeverk} />
       <InntektsgivendeArbeidPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
-      <VirksomhetPapirsoknadIndex
-        readOnly={readOnly}
-        alleKodeverk={alleKodeverk}
-      />
+      <VirksomhetPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
       <FrilansPapirsoknadIndex readOnly={readOnly} />
       <AndreYtelserPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
       <DekningsgradIndex readOnly={readOnly} />
@@ -124,14 +128,7 @@ const ForeldrepengerForm: FunctionComponent<OwnProps> = ({
         )}
         alleKodeverk={alleKodeverk}
       />
-      <PermisjonPanel
-        soknadData={soknadData}
-        readOnly={readOnly}
-        error={formMethods.formState.errors}
-        submitFailed={!formMethods.formState.isSubmitSuccessful}
-        sokerHarAleneomsorg={sokerHarAleneomsorg}
-        alleKodeverk={alleKodeverk}
-      />
+      <PermisjonPanel soknadData={soknadData} readOnly={readOnly} alleKodeverk={alleKodeverk} />
       <BekreftelsePanel annenForelderInformertRequired={annenForelderInformertRequired} readOnly={readOnly} />
       <SprakPapirsoknadIndex readOnly={readOnly} />
       <LagreSoknadPapirsoknadIndex

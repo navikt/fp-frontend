@@ -6,7 +6,7 @@ import { formHooks, RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-type FormValues = {
+export type FormValues = {
   sokerHarAleneomsorg: boolean;
   denAndreForelderenHarRettPaForeldrepenger?: boolean;
   morMottarUføretrygd?: boolean;

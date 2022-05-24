@@ -15,6 +15,10 @@ import styles from './registrerVirksomhetPanel.less';
 
 export const EGEN_VIRKSOMHET_NAME_PREFIX = 'egenVirksomhet';
 
+export type FormValues = {
+  virksomheter: ModalFormValues[]
+}
+
 interface OwnProps {
   readOnly?: boolean;
   alleKodeverk: AlleKodeverk;
@@ -34,7 +38,7 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const [virksomhetIndex, setVirksomhetIndex] = useState<number>();
 
-  const { control, formState } = formHooks.useFormContext<{ [EGEN_VIRKSOMHET_NAME_PREFIX]: { virksomheter: ModalFormValues[] } }>();
+  const { control, formState } = formHooks.useFormContext<{ [EGEN_VIRKSOMHET_NAME_PREFIX]: FormValues }>();
   const { fields, remove, append } = formHooks.useFieldArray({
     control,
     name: `${EGEN_VIRKSOMHET_NAME_PREFIX}.virksomheter`,

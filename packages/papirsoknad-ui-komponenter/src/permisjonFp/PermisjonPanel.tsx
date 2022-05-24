@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { Element, Undertittel } from 'nav-frontend-typografi';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { AlleKodeverk } from '@navikt/ft-types';
+import { createIntl } from '@navikt/ft-utils';
 
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 
@@ -18,7 +19,11 @@ import RenderPermisjonPeriodeFieldArray, { PERMISJON_PERIODE_FIELD_ARRAY_NAME, F
 import PermisjonOppholdPanel, { FormValues as FormValuesOpphold } from './PermisjonOppholdPanel';
 import { OPPHOLD_PERIODE_FIELD_ARRAY_NAME } from './RenderOppholdPeriodeFieldArray';
 
+import messages from '../../i18n/nb_NO.json';
+
 import styles from './permisjonPanel.less';
+
+const intl = createIntl(messages);
 
 export const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
 
@@ -41,13 +46,8 @@ export type FormValues = {
 
 interface OwnProps {
   soknadData: SoknadData;
-  form: string;
   readOnly: boolean;
-  error?: {
-    permisjonsError?: string;
-  };
   alleKodeverk: AlleKodeverk;
-  submitFailed: boolean;
 }
 
 interface StaticFunctions {
@@ -63,63 +63,64 @@ interface StaticFunctions {
 const PermisjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   soknadData,
   readOnly,
-  error,
   alleKodeverk,
 }) => {
   const { formState, watch } = formHooks.useFormContext<FormValues>();
   const fulltUttak = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`) || false;
 
-  const visFeilMelding = !!formState.errors;
+  const visFeilMelding = Object.keys(formState.errors).length > 0;
 
   return (
-    <BorderBox>
-      <div className={styles.flexContainer}>
-        <Undertittel><FormattedMessage id="Registrering.Permisjon.Title" /></Undertittel>
-        <VerticalSpacer sixteenPx />
-        {visFeilMelding && error && (
-          <div role="alert" aria-live="assertive">
-            <div className="skjemaelement__feilmelding"><FormattedMessage id={error.permisjonsError} /></div>
-          </div>
-        )}
-        <VerticalSpacer eightPx />
-        <Element><FormattedMessage id="Registrering.Permisjon.FulltUttak" /></Element>
-        <VerticalSpacer eightPx />
-        <CheckboxField
-          className={visFeilMelding ? styles.showErrorBackground : ''}
-          readOnly={readOnly}
-          name="fulltUttak"
-          label={<FormattedMessage id="Registrering.Permisjon.FulltUttak" />}
-        />
-        {fulltUttak && (
-          <RenderPermisjonPeriodeFieldArray
-            sokerErMor={soknadData.getForeldreType() === foreldreType.MOR}
+    <RawIntlProvider value={intl}>
+      <BorderBox>
+        <div className={styles.flexContainer}>
+          <Undertittel><FormattedMessage id="Registrering.Permisjon.Title" /></Undertittel>
+          <VerticalSpacer sixteenPx />
+          {visFeilMelding && (
+            <div role="alert" aria-live="assertive">
+              <div className="skjemaelement__feilmelding"><FormattedMessage id="PermisjonPanel.MinstEnPeriodeRequired" /></div>
+            </div>
+          )}
+          <VerticalSpacer eightPx />
+          <Element><FormattedMessage id="Registrering.Permisjon.FulltUttak" /></Element>
+          <VerticalSpacer eightPx />
+          <CheckboxField
+            className={visFeilMelding ? styles.showErrorBackground : ''}
+            readOnly={readOnly}
+            name="fulltUttak"
+            label={<FormattedMessage id="Registrering.Permisjon.FulltUttak" />}
+          />
+          {fulltUttak && (
+            <RenderPermisjonPeriodeFieldArray
+              sokerErMor={soknadData.getForeldreType() === foreldreType.MOR}
+              readOnly={readOnly}
+              alleKodeverk={alleKodeverk}
+            />
+          )}
+          <VerticalSpacer twentyPx />
+          <PermisjonOverforingAvKvoterPanel
+            visFeilMelding={visFeilMelding}
+            readOnly={readOnly}
+            soknadData={soknadData}
+            alleKodeverk={alleKodeverk}
+          />
+          <VerticalSpacer twentyPx />
+          <PermisjonUtsettelsePanel
+            visFeilMelding={visFeilMelding}
             readOnly={readOnly}
             alleKodeverk={alleKodeverk}
           />
-        )}
-        <VerticalSpacer twentyPx />
-        <PermisjonOverforingAvKvoterPanel
-          visFeilMelding={visFeilMelding}
-          readOnly={readOnly}
-          soknadData={soknadData}
-          alleKodeverk={alleKodeverk}
-        />
-        <VerticalSpacer twentyPx />
-        <PermisjonUtsettelsePanel
-          visFeilMelding={visFeilMelding}
-          readOnly={readOnly}
-          alleKodeverk={alleKodeverk}
-        />
-        <VerticalSpacer twentyPx />
-        <PermisjonGraderingPanel
-          visFeilMelding={visFeilMelding}
-          readOnly={readOnly}
-          alleKodeverk={alleKodeverk}
-        />
-        <VerticalSpacer twentyPx />
-        <PermisjonOppholdPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
-      </div>
-    </BorderBox>
+          <VerticalSpacer twentyPx />
+          <PermisjonGraderingPanel
+            visFeilMelding={visFeilMelding}
+            readOnly={readOnly}
+            alleKodeverk={alleKodeverk}
+          />
+          <VerticalSpacer twentyPx />
+          <PermisjonOppholdPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
+        </div>
+      </BorderBox>
+    </RawIntlProvider>
   );
 };
 

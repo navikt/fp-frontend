@@ -17,6 +17,7 @@ export type { FormValues as IArbeidFormValues } from './src/inntektsgivendeArbei
 export { default as LagreSoknadPapirsoknadIndex } from './src/lagreSoknadPanel/LagreSoknadPapirsoknadIndex';
 
 export { default as MottattDatoPapirsoknadIndex } from './src/mottattDatoPanel/MottattDatoPapirsoknadIndex';
+export type { FormValues as MottattDatoFormValues } from './src/mottattDatoPanel/components/MottattDatoPanel';
 
 export { default as OmsorgOgAdopsjonPapirsoknadIndex } from './src/omsorgOgAdopsjonPanel/OmsorgOgAdopsjonPapirsoknadIndex';
 export type {
@@ -33,12 +34,14 @@ export { rettighet } from './src/rettigheterPanel/components/RettigheterPanel';
 export { default as SprakPapirsoknadIndex } from './src/sprakPanel/SprakPapirsoknadIndex';
 
 export { default as VirksomhetPapirsoknadIndex } from './src/virksomhetPanel/VirksomhetPapirsoknadIndex';
+export type { FormValues as VirksomhetFormValues } from './src/virksomhetPanel/components/EgenVirksomhetPanel';
 
 export { default as DekningsgradIndex } from './src/dekningsgradFp/DekningsgradIndex';
+export type { FormValues as DekningsgradFormValues } from './src/dekningsgradFp/DekningsgradIndex';
 
 export { default as BekreftelsePanel } from './src/bekreftelseFp/BekreftelsePanel';
 
-export { default as PermisjonRettigheterPanel } from './src/permisjonFp/PermisjonRettigheterPanel';
+export { default as PermisjonRettigheterPanel, FormValues as PermRettigheterFormValues } from './src/permisjonFp/PermisjonRettigheterPanel';
 export { default as PermisjonPanel, FormValues as FormValuesPermisjon } from './src/permisjonFp/PermisjonPanel';
 
 export { default as SoknadData } from './src/felles/SoknadData';

@@ -5,6 +5,10 @@ import { Datepicker } from '@navikt/ft-form-hooks';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 
+export type FormValues = {
+  mottattDato: string;
+}
+
 interface OwnProps {
   readOnly: boolean;
 }

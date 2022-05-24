@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from 'react';
-import { useIntl } from 'react-intl';
+import React, { FunctionComponent, useMemo } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { RadioGroupField, RadioOption, formHooks } from '@navikt/ft-form-hooks';
@@ -46,7 +46,8 @@ const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   soknadData,
 }) => {
   const { formatMessage } = useIntl();
-  const sortedCountriesByName = alleKodeverk[KodeverkType.LANDKODER].slice().sort((a, b) => a.navn.localeCompare(b.navn));
+  const sortedCountriesByName = useMemo(() => alleKodeverk[KodeverkType.LANDKODER]
+    .slice().sort((a, b) => a.navn.localeCompare(b.navn)), [alleKodeverk]);
 
   const { watch } = formHooks.useFormContext<any>();
   const harTidligereOppholdUtenlands = watch('harTidligereOppholdUtenlands') || false;
@@ -57,12 +58,12 @@ const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
       <SkjemaGruppe className={styles.fullWidth} legend={formatMessage({ id: 'Registrering.Opphold' })}>
         {soknadData.getFamilieHendelseType() === familieHendelseType.ADOPSJON && (
           <Undertekst>
-            {` ${formatMessage({ id: 'Registrering.OppholdVedAdopsjon' })} `}
+            <FormattedMessage id="Registrering.OppholdVedAdopsjon" />
           </Undertekst>
         )}
         {soknadData.getFamilieHendelseType() !== familieHendelseType.ADOPSJON && (
           <Undertekst>
-            {` ${formatMessage({ id: 'Registrering.OppholdVedFodsel' })} `}
+            <FormattedMessage id="Registrering.OppholdVedFodsel" />
           </Undertekst>
         )}
         <VerticalSpacer eightPx />
@@ -71,7 +72,7 @@ const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
           <RadioOption label={formatMessage({ id: 'Registrering.Opphold.No' })} value="false" />
         </RadioGroupField>
         <Undertekst>
-          {` ${formatMessage({ id: 'Registrering.OppholdSisteTolv' })} `}
+          <FormattedMessage id="Registrering.OppholdSisteTolv" />
         </Undertekst>
         <VerticalSpacer eightPx />
         <RadioGroupField name="harTidligereOppholdUtenlands" readOnly={readOnly} parse={(value: string) => value === 'true'}>
@@ -88,7 +89,7 @@ const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
           </ArrowBox>
         ) : null}
         <Undertekst>
-          {` ${formatMessage({ id: 'Registrering.OppholdNesteTolv' })} `}
+          <FormattedMessage id="Registrering.OppholdNesteTolv" />
         </Undertekst>
         <VerticalSpacer eightPx />
         <RadioGroupField name="harFremtidigeOppholdUtenlands" readOnly={readOnly} parse={(value: string) => value === 'true'}>

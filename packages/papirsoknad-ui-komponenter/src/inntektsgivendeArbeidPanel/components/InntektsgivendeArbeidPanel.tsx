@@ -5,13 +5,6 @@ import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk } from '@navikt/ft-types';
 
 import RenderInntektsgivendeArbeidFieldArray, { INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME } from './RenderInntektsgivendeArbeidFieldArray';
-import RenderInntektsgivendeArbeidAmbassadeFieldArray, {
-  FormValues as IAFormValues,
-  RENDER_INNTEKTSGIVENDE_ARBEID_AMBASSADE_FIELD_ARRAY,
-} from './RenderInntektsgivendeArbeidAmbassadeFieldArray';
-
-// TODO Kva er dette?
-const localFeature = false;
 
 interface OwnProps {
   readOnly: boolean;
@@ -20,7 +13,6 @@ interface OwnProps {
 
 export type FormValues = {
   [INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME]?: Record<string, any>;
-  [RENDER_INNTEKTSGIVENDE_ARBEID_AMBASSADE_FIELD_ARRAY]?: IAFormValues[];
 }
 
 interface StaticFunctions {
@@ -47,16 +39,6 @@ const InntektsgivendeArbeidPanel: FunctionComponent<OwnProps> & StaticFunctions 
     <Undertittel><FormattedMessage id="Registrering.InntektsgivendeArbeid.ArbeidIUtlandet.Title" /></Undertittel>
     <VerticalSpacer eightPx />
     <RenderInntektsgivendeArbeidFieldArray readOnly={readOnly} alleKodeverk={alleKodeverk} />
-    {localFeature && (
-      <div>
-        <VerticalSpacer sixteenPx />
-        <Undertittel>
-          <FormattedMessage id="Registrering.InntektsgivendeArbeid.ArbeidPaAmbassade" />
-        </Undertittel>
-        <VerticalSpacer eightPx />
-        <RenderInntektsgivendeArbeidAmbassadeFieldArray readOnly={readOnly} />
-      </div>
-    )}
   </BorderBox>
 );
 
@@ -70,7 +52,6 @@ InntektsgivendeArbeidPanel.validate = (values) => ({
 
 InntektsgivendeArbeidPanel.buildInitialValues = () => ({
   [INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME]: [{}],
-  [RENDER_INNTEKTSGIVENDE_ARBEID_AMBASSADE_FIELD_ARRAY]: [{}],
 });
 
 export default InntektsgivendeArbeidPanel;

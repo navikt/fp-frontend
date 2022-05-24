@@ -90,7 +90,7 @@ const TerminFodselDatoPanel: FunctionComponent<OwnProps> = ({
                     <Datepicker
                       name="foedselsDato"
                       label={intl.formatMessage({ id: 'Registrering.Fodselsdato' })}
-              /* foedselsDato is array in DTO data model, so we transform the value to/from the store/input */
+                      /* foedselsDato is array in DTO data model, so we transform the value to/from the store/input */
                       format={(valueFromStore) => (valueFromStore && valueFromStore.length ? valueFromStore[0] : valueFromStore)}
                       // @ts-ignore Fiks
                       parse={(valueFromInput) => (valueFromInput ? [valueFromInput] : valueFromInput)}

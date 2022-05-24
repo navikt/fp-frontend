@@ -1,15 +1,19 @@
 import React, { FunctionComponent } from 'react';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
-
 import { RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
+
 import messages from '../../i18n/nb_NO.json';
 
 import styles from './dekningsgradIndex.less';
 
 const intl = createIntl(messages);
+
+export type FormValues = {
+  dekningsgrad,
+};
 
 interface OwnProps {
   readOnly: boolean;

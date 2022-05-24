@@ -6,15 +6,15 @@ import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
 import { AlleKodeverk } from '@navikt/ft-types';
 
-import RegistrerVirksomhetPanel, { EGEN_VIRKSOMHET_NAME_PREFIX } from './RegistrerVirksomhetPanel';
+import RegistrerVirksomhetPanel, { EGEN_VIRKSOMHET_NAME_PREFIX, FormValues as VirksomhetFormValues } from './RegistrerVirksomhetPanel';
 
 import styles from './egenVirksomhetPanel.less';
 
 // const arrayMinLength1 = arrayMinLength(1);
 
-type FormValues = {
+export type FormValues = {
   harArbeidetIEgenVirksomhet: boolean;
-};
+} & VirksomhetFormValues;
 
 interface OwnProps {
   alleKodeverk: AlleKodeverk;

@@ -91,4 +91,9 @@ const PermisjonOverforingAvKvoterPanel: FunctionComponent<OwnProps> & StaticFunc
   );
 };
 
+PermisjonOverforingAvKvoterPanel.buildInitialValues = () => ({
+  skalOvertaKvote: false,
+  overforingsperioder: [{}],
+});
+
 export default PermisjonOverforingAvKvoterPanel;

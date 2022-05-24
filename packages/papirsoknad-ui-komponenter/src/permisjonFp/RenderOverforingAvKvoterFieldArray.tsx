@@ -33,7 +33,7 @@ interface OwnProps {
  *
  * Viser inputfelter for dato for bestemmelse av overføring.
  */
-export const RenderOverforingAvKvoterFieldArray: FunctionComponent<OwnProps> = ({
+const RenderOverforingAvKvoterFieldArray: FunctionComponent<OwnProps> = ({
   selectValues,
   readOnly,
 }) => {
