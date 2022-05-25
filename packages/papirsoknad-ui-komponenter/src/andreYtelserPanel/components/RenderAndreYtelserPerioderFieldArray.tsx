@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
+import { UseFormGetValues } from 'react-hook-form';
 import { Column, Row } from 'nav-frontend-grid';
 import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
@@ -19,6 +20,12 @@ export type FormValues = {
   periodeFom: string;
   periodeTom: string;
 }
+
+const getValue = (
+  getValues: UseFormGetValues<{ [ANDRE_YTELSER_NAME_PREFIX]: FormValues}>,
+  fieldName: string,
+// @ts-ignore
+): string => getValues(fieldName);
 
 interface OwnProps {
   readOnly: boolean;
@@ -77,8 +84,8 @@ const RenderAndreYtelserPerioderFieldArray: FunctionComponent<OwnProps> & Static
                           required,
                           hasValidDate,
                           () => {
-                            const fomVerdi = getValues(`${namePart1}.periodeFom`) as string;
-                            const tomVerdi = getValues(`${namePart1}.periodeTom`) as string;
+                            const fomVerdi = getValue(getValues, `${namePart1}.periodeFom`);
+                            const tomVerdi = getValue(getValues, `${namePart1}.periodeTom`);
                             return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
                           },
                         ]}
@@ -93,8 +100,8 @@ const RenderAndreYtelserPerioderFieldArray: FunctionComponent<OwnProps> & Static
                           required,
                           hasValidDate,
                           () => {
-                            const fomVerdi = getValues(`${namePart1}.periodeFom`) as string;
-                            const tomVerdi = getValues(`${namePart1}.periodeTom`) as string;
+                            const fomVerdi = getValue(getValues, `${namePart1}.periodeFom`);
+                            const tomVerdi = getValue(getValues, `${namePart1}.periodeTom`);
                             return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
                           },
                         ]}
