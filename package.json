@@ -62,7 +62,7 @@
     "@babel/preset-typescript": "7.17.12",
     "@babel/register": "7.17.7",
     "@commercetools/enzyme-extensions": "5.0.0",
-    "@storybook/addon-actions": "6.5.4-alpha.0",
+    "@storybook/addon-actions": "6.5.5",
     "@storybook/addon-docs": "6.5.4-alpha.0",
     "@storybook/addons": "6.5.4-alpha.0",
     "@storybook/builder-webpack5": "6.5.4-alpha.0",
