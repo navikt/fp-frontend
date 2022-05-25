@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useCallback, useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { Container } from 'nav-frontend-grid';
 import Panel from 'nav-frontend-paneler';
@@ -25,8 +25,17 @@ interface OwnProps {
   fagsakPersonnummer: string;
   kodeverk: AlleKodeverk;
   readOnly: boolean;
-  lagreUfullstendig: () => Promise<any>;
-  lagreFullstendig: (values: any) => Promise<any>;
+  lagreUfullstendig: (
+    fagsakYtelseType: string,
+    familieHendelseType: string,
+    foreldreType: string,
+  ) => Promise<any>;
+  lagreFullstendig: (
+    formValues: any,
+    fagsakYtelseType: string,
+    familieHendelseType: string,
+    foreldreType: string,
+  ) => Promise<any>;
 }
 
 const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
@@ -38,6 +47,13 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
   lagreFullstendig,
 }) => {
   const [soknadData, setSoknadData] = useState<SoknadData>();
+
+  const lagre = useCallback((
+    formValues: any) => lagreFullstendig(formValues, soknadData.fagsakYtelseType, soknadData.familieHendelseType, soknadData.foreldreType),
+  [soknadData]);
+  const lagreOgAvslutt = useCallback(() => lagreUfullstendig(soknadData.fagsakYtelseType, soknadData.familieHendelseType, soknadData.foreldreType),
+    [soknadData]);
+
   return (
     <RawIntlProvider value={intl}>
       <Panel className={styles.panel}>
@@ -58,8 +74,8 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
           />
           {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.ENGANGSSTONAD && (
             <EngangsstonadPapirsoknadIndex
-              onSubmitUfullstendigsoknad={lagreUfullstendig}
-              onSubmit={lagreFullstendig}
+              onSubmitUfullstendigsoknad={lagreOgAvslutt}
+              onSubmit={lagre}
               readOnly={readOnly}
               soknadData={soknadData}
               alleKodeverk={kodeverk}
@@ -68,8 +84,8 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
           )}
           {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.FORELDREPENGER && (
             <ForeldrepengerPapirsoknadIndex
-              onSubmitUfullstendigsoknad={lagreUfullstendig}
-              onSubmit={lagreFullstendig}
+              onSubmitUfullstendigsoknad={lagreOgAvslutt}
+              onSubmit={lagre}
               readOnly={readOnly}
               soknadData={soknadData}
               alleKodeverk={kodeverk}
@@ -78,8 +94,8 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
           )}
           {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.SVANGERSKAPSPENGER && (
             <SvangerskapspengerPapirsoknadIndex
-              onSubmitUfullstendigsoknad={lagreUfullstendig}
-              onSubmit={lagreFullstendig}
+              onSubmitUfullstendigsoknad={lagreOgAvslutt}
+              onSubmit={lagre}
               readOnly={readOnly}
               soknadData={soknadData}
               alleKodeverk={kodeverk}

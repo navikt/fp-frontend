@@ -6,6 +6,8 @@ import { formHooks, RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
+const ANNEN_FORELDER_NAME_PREFIX = 'annenForelder';
+
 export type FormValues = {
   sokerHarAleneomsorg: boolean;
   denAndreForelderenHarRettPaForeldrepenger?: boolean;
@@ -19,6 +21,8 @@ interface OwnProps {
   sokerErMor: boolean;
 }
 
+// TODO Kvifor ligg dette panelet her og ikkje under ANNEN_FORELDER?
+
 /**
  * AndreYtelserPanel
  *
@@ -31,8 +35,8 @@ const PermisjonRettigheterPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const { watch } = formHooks.useFormContext<FormValues>();
-  const sokerHarAleneomsorg = watch('sokerHarAleneomsorg');
+  const { watch } = formHooks.useFormContext<{ [ANNEN_FORELDER_NAME_PREFIX]: FormValues }>();
+  const sokerHarAleneomsorg = watch(`${ANNEN_FORELDER_NAME_PREFIX}.sokerHarAleneomsorg`);
 
   return (
     <>
@@ -43,7 +47,7 @@ const PermisjonRettigheterPanel: FunctionComponent<OwnProps> = ({
       <RadioGroupField
         validate={[required]}
         readOnly={readOnly}
-        name="sokerHarAleneomsorg"
+        name={`${ANNEN_FORELDER_NAME_PREFIX}.sokerHarAleneomsorg`}
         parse={(value: string) => value === 'true'}
       >
         <RadioOption
@@ -62,7 +66,7 @@ const PermisjonRettigheterPanel: FunctionComponent<OwnProps> = ({
           </Undertekst>
           <VerticalSpacer eightPx />
           <RadioGroupField
-            name="denAndreForelderenHarRettPaForeldrepenger"
+            name={`${ANNEN_FORELDER_NAME_PREFIX}.denAndreForelderenHarRettPaForeldrepenger`}
             validate={[required]}
             readOnly={readOnly}
             parse={(value: string) => value === 'true'}
@@ -79,7 +83,7 @@ const PermisjonRettigheterPanel: FunctionComponent<OwnProps> = ({
           </Undertekst>
           <VerticalSpacer eightPx />
           <RadioGroupField
-            name="morMottarUføretrygd"
+            name={`${ANNEN_FORELDER_NAME_PREFIX}.morMottarUføretrygd`}
             validate={[required]}
             readOnly={readOnly}
             parse={(value: string) => value === 'true'}
@@ -87,15 +91,15 @@ const PermisjonRettigheterPanel: FunctionComponent<OwnProps> = ({
             <RadioOption label={intl.formatMessage({ id: 'Registrering.Permisjon.MorUføretrygd.Yes' })} value="true" />
             <RadioOption label={intl.formatMessage({ id: 'Registrering.Permisjon.MorUføretrygd.No' })} value="false" />
           </RadioGroupField>
-        </div>
-      )}
-      {!sokerErMor && sokerHarAleneomsorg === false && denAndreForelderenHarRettPaForeldrepenger === false && (
-        <div>
           <Undertekst>
             {intl.formatMessage({ id: 'Registrering.Permisjon.MorForeldrepengerEØS' })}
           </Undertekst>
           <VerticalSpacer eightPx />
-          <RadioGroupField name="morHarForeldrepengerEØS" validate={[required]} readOnly={readOnly}>
+          <RadioGroupField
+            name={`${ANNEN_FORELDER_NAME_PREFIX}.morHarForeldrepengerEØS`}
+            validate={[required]}
+            readOnly={readOnly}
+          >
             <RadioOption label={intl.formatMessage({ id: 'Registrering.Permisjon.MorForeldrepengerEØS.Yes' })} value="true" />
             <RadioOption label={intl.formatMessage({ id: 'Registrering.Permisjon.MorForeldrepengerEØS.No' })} value="false" />
           </RadioGroupField>

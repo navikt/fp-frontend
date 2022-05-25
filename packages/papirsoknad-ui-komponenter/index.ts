@@ -41,14 +41,16 @@ export type { FormValues as DekningsgradFormValues } from './src/dekningsgradFp/
 
 export { default as BekreftelsePanel } from './src/bekreftelseFp/BekreftelsePanel';
 
-export { default as PermisjonRettigheterPanel, FormValues as PermRettigheterFormValues } from './src/permisjonFp/PermisjonRettigheterPanel';
-export { default as PermisjonPanel, FormValues as FormValuesPermisjon } from './src/permisjonFp/PermisjonPanel';
+export { default as PermisjonRettigheterPanel } from './src/permisjonFp/PermisjonRettigheterPanel';
+export type { FormValues as PermRettigheterFormValues } from './src/permisjonFp/PermisjonRettigheterPanel';
+export { default as PermisjonPanel, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from './src/permisjonFp/PermisjonPanel';
+export type { FormValues as FormValuesPermisjon } from './src/permisjonFp/PermisjonPanel';
 
 export { default as SoknadData } from './src/felles/SoknadData';
 
-export { default as TerminFodselSvpPanel, FormValues as TerminFodselSvpFormValues } from './src/terminOgFodselSvp/TerminFodselSvpPanel';
+export { default as TerminFodselSvpPanel } from './src/terminOgFodselSvp/TerminFodselSvpPanel';
+export type { FormValues as TerminFodselSvpFormValues } from './src/terminOgFodselSvp/TerminFodselSvpPanel';
 
-export {
-  default as BehovForTilretteleggingPanel,
-  FormValues as BehovForTilretteleggingFormValues,
-} from './src/tilretteleggingSvp/BehovForTilretteleggingPanel';
+export { default as BehovForTilretteleggingPanel } from './src/tilretteleggingSvp/BehovForTilretteleggingPanel';
+export type { Tilrettelegging } from './src/tilretteleggingSvp/BehovForTilretteleggingPanel';
+export type { FormValues as BehovForTilretteleggingFormValues } from './src/tilretteleggingSvp/BehovForTilretteleggingPanel';

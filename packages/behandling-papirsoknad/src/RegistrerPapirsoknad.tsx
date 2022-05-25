@@ -24,17 +24,18 @@ const lagLagreFunksjon = (
   fagsak: Fagsak,
   lagreAksjonspunkt: (params?: any, keepData?: boolean) => Promise<Behandling>,
   setAksjonspunktLagret: (erApLagret: boolean) => void,
-  soknadData?: any,
-) => (valuesForRegisteredFieldsOnly: any) => {
-  if (!soknadData) {
-    throw Error('Skal ikke kunne ha tom soknadData her');
-  }
+) => (
+  formValues: any,
+  fagsakYtelseType: string,
+  familieHendelseType: string,
+  foreldreType: string,
+) => {
   const manuellRegistreringDtoList = [{
     '@type': getAktivtPapirsoknadApKode(aksjonspunkter),
-    tema: soknadData.getFamilieHendelseType(),
-    soknadstype: soknadData.getFagsakYtelseType(),
-    soker: soknadData.getForeldreType(),
-    ...valuesForRegisteredFieldsOnly,
+    tema: familieHendelseType,
+    soknadstype: fagsakYtelseType,
+    soker: foreldreType,
+    ...formValues,
   },
   ];
 
@@ -85,8 +86,11 @@ const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
   const { data: aksjonspunkter = EMPTY_ARRAY } = restApiPapirsoknadHooks.useRestApi(PapirsoknadApiKeys.AKSJONSPUNKTER);
 
   const lagre = lagLagreFunksjon(behandling, aksjonspunkter, fagsak, lagreAksjonspunkt, setAksjonspunktLagret);
-  const lagreFullstendig = useCallback((formValues) => lagre(formValues), []);
-  const lagreUfullstendig = useCallback(() => lagre({ ufullstendigSoeknad: true }), []);
+  const lagreUfullstendig = useCallback((
+    fagsakYtelseType: string,
+    familieHendelseType: string,
+    foreldreType: string,
+  ) => lagre({ ufullstendigSoeknad: true }, fagsakYtelseType, familieHendelseType, foreldreType), []);
 
   if (!aksjonspunkter) {
     return <LoadingPanel />;
@@ -109,7 +113,7 @@ const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
         kodeverk={kodeverk}
         readOnly={readOnly}
         lagreUfullstendig={lagreUfullstendig}
-        lagreFullstendig={lagreFullstendig}
+        lagreFullstendig={lagre}
       />
     </>
   );

@@ -52,7 +52,7 @@ interface OwnProps {
 
 interface StaticFunctions {
   buildInitialValues: () => any;
-  transformValues: (values: Required<FormValues>) => any;
+  transformValues: (values: FormValues) => any;
 }
 
 /**
@@ -222,7 +222,7 @@ PermisjonPanel.validate = (values: FormValues) => {
 };
 */
 
-PermisjonPanel.transformValues = (values: Required<FormValues>) => {
+PermisjonPanel.transformValues = (values: FormValues) => {
   const permisjonValues = values[TIDSROM_PERMISJON_FORM_NAME_PREFIX];
   const newValues = permisjonValues;
   const permisjonsdata = permisjonValues[PERMISJON_PERIODE_FIELD_ARRAY_NAME];

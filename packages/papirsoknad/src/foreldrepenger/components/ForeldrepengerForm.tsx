@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
 import { KodeverkType } from '@navikt/ft-kodeverk';
+import { omitOne } from '@navikt/ft-utils';
 
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
@@ -36,6 +37,9 @@ import {
   VirksomhetFormValues,
   DekningsgradFormValues,
   FodselFormValues,
+  ANDRE_YTELSER_FORM_NAME_PREFIX,
+  rettighet,
+  TIDSROM_PERMISJON_FORM_NAME_PREFIX,
 } from '@fpsak-frontend/papirsoknad-ui-komponenter';
 
 const ANNEN_FORELDER_FORM_NAME_PREFIX = 'annenForelder';
@@ -65,10 +69,18 @@ const buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => ({
   ...PermisjonPanel.buildInitialValues(),
 });
 
-const transformValues = (values: FormValues) => ({
-  ...values,
-  [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values[OMSORG_FORM_NAME_PREFIX]),
-});
+const transformValues = (values: FormValues, andreYtelserKodeverk: KodeverkMedNavn[]) => {
+  let formValues = values;
+  if (values.rettigheter === rettighet.IKKE_RELEVANT) {
+    formValues = omitOne(values, 'rettigheter');
+  }
+  return {
+    ...formValues,
+    [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.transformValues(formValues[OMSORG_FORM_NAME_PREFIX]),
+    [ANDRE_YTELSER_FORM_NAME_PREFIX]: AndreYtelserPapirsoknadIndex.transformValues(formValues, andreYtelserKodeverk),
+    [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: PermisjonPanel.transformValues(formValues),
+  };
+};
 
 interface OwnProps {
   readOnly: boolean;
@@ -95,12 +107,14 @@ const ForeldrepengerForm: FunctionComponent<OwnProps> = ({
     defaultValues: useMemo(() => buildInitialValues(alleKodeverk[KodeverkType.ARBEID_TYPE]), []),
   });
 
+  const andreYtelserKodeverk = alleKodeverk[KodeverkType.ARBEID_TYPE];
+
   const sokerHarAleneomsorg = formMethods.watch('sokerHarAleneomsorg');
   const denAndreForelderenHarRettPaForeldrepenger = formMethods.watch('denAndreForelderenHarRettPaForeldrepenger');
   const annenForelderInformertRequired = !sokerHarAleneomsorg && denAndreForelderenHarRettPaForeldrepenger !== false;
 
   return (
-    <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values))}>
+    <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values, andreYtelserKodeverk))}>
       <MottattDatoPapirsoknadIndex readOnly={readOnly} />
       <OppholdINorgePapirsoknadIndex readOnly={readOnly} soknadData={soknadData} alleKodeverk={alleKodeverk} />
       <InntektsgivendeArbeidPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />

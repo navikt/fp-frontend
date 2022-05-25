@@ -2,9 +2,12 @@ import React, { FunctionComponent } from 'react';
 import { useForm } from 'react-hook-form';
 import { Form } from '@navikt/ft-form-hooks';
 import { AlleKodeverk } from '@navikt/ft-types';
+import { omitOne } from '@navikt/ft-utils';
 
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
-import { SoknadData, MottattDatoPapirsoknadIndex, LagreSoknadPapirsoknadIndex } from '@fpsak-frontend/papirsoknad-ui-komponenter';
+import {
+  SoknadData, MottattDatoPapirsoknadIndex, LagreSoknadPapirsoknadIndex, rettighet,
+} from '@fpsak-frontend/papirsoknad-ui-komponenter';
 
 import RegistreringAdopsjonOgOmsorgGrid, { FormValues as FormValuesAdopsjon } from './RegistreringAdopsjonOgOmsorgGrid';
 import RegistreringFodselGrid, { FormValues as FormValuesFodsel } from './RegistreringFodselGrid';
@@ -23,11 +26,17 @@ const buildInitialValues = (erFødsel: boolean, erAdopsjon: boolean): FormValues
   return {};
 };
 
-const transformValues = (values: FormValues, erFødsel: boolean, erAdopsjon: boolean) => ({
-  ...values,
-  ...(erFødsel ? RegistreringFodselGrid.transformValues(values) : {}),
-  ...(erAdopsjon ? RegistreringAdopsjonOgOmsorgGrid.transformValues(values) : {}),
-});
+const transformValues = (values: FormValues, erFødsel: boolean, erAdopsjon: boolean) => {
+  let formValues = values;
+  if (values.rettigheter === rettighet.IKKE_RELEVANT) {
+    formValues = omitOne(values, 'rettigheter');
+  }
+  return {
+    ...formValues,
+    ...(erFødsel ? RegistreringFodselGrid.transformValues(formValues) : {}),
+    ...(erAdopsjon ? RegistreringAdopsjonOgOmsorgGrid.transformValues(formValues) : {}),
+  };
+};
 
 interface OwnProps {
   readOnly: boolean;

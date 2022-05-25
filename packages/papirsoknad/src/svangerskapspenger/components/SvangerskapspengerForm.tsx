@@ -22,6 +22,7 @@ import {
   BehovForTilretteleggingFormValues,
   TerminFodselSvpPanel,
   TerminFodselSvpFormValues,
+  Tilrettelegging,
 } from '@fpsak-frontend/papirsoknad-ui-komponenter';
 
 type FormValues = AndreYtelserFormValue
@@ -37,6 +38,52 @@ const buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => ({
   ...InntektsgivendeArbeidPapirsoknadIndex.buildInitialValues(),
   ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
   ...BehovForTilretteleggingPanel.buildInitialValues(),
+});
+
+type TilretteleggingArbeidsforhold = {
+  '@type': string;
+  behovsdato?: string;
+  organisasjonsnummer?: string;
+  tilrettelegginger?: Tilrettelegging[];
+}
+
+const transformTilretteleggingsArbeidsforhold = (
+  formValues: FormValues,
+): TilretteleggingArbeidsforhold[] => {
+  let transformerteVerdier = [] as TilretteleggingArbeidsforhold[];
+
+  const { tilretteleggingArbeidsforhold } = formValues;
+
+  if (tilretteleggingArbeidsforhold?.sokForArbeidsgiver && tilretteleggingArbeidsforhold?.tilretteleggingForArbeidsgiver) {
+    transformerteVerdier = transformerteVerdier.concat(tilretteleggingArbeidsforhold.tilretteleggingForArbeidsgiver.map((ta) => ({
+      '@type': 'VI',
+      behovsdato: ta.behovsdato,
+      organisasjonsnummer: ta.organisasjonsnummer,
+      tilrettelegginger: ta.tilretteleggingArbeidsgiver,
+    })));
+  }
+  if (tilretteleggingArbeidsforhold?.sokForFrilans) {
+    transformerteVerdier.push({
+      '@type': 'FR',
+      behovsdato: tilretteleggingArbeidsforhold.behovsdatoFrilans,
+      tilrettelegginger: tilretteleggingArbeidsforhold.tilretteleggingFrilans,
+    });
+  }
+  if (tilretteleggingArbeidsforhold?.sokForSelvstendigNaringsdrivende) {
+    transformerteVerdier.push({
+      '@type': 'SN',
+      behovsdato: tilretteleggingArbeidsforhold.behovsdatoSN,
+      tilrettelegginger: tilretteleggingArbeidsforhold.tilretteleggingSelvstendigNaringsdrivende,
+    });
+  }
+
+  return transformerteVerdier;
+};
+
+const transformValues = (values: FormValues): any => ({
+  ...values,
+  foedselsDato: [values.foedselsDato],
+  tilretteleggingArbeidsforhold: transformTilretteleggingsArbeidsforhold(values),
 });
 
 interface OwnProps {
@@ -64,7 +111,7 @@ const SvangerskapspengerForm: FunctionComponent<OwnProps> = ({
   });
 
   return (
-    <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(values)}>
+    <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values))}>
       <MottattDatoPapirsoknadIndex readOnly={readOnly} />
       <OppholdINorgePapirsoknadIndex readOnly={readOnly} soknadData={soknadData} alleKodeverk={alleKodeverk} />
       <InntektsgivendeArbeidPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
@@ -91,47 +138,5 @@ const getValidation = (andreYtelser: KodeverkMedNavn[]) => (values: FormValues):
   ...OppholdINorgePapirsoknadIndex.validate(values),
 });
 */
-
-/*
-type TilretteleggingArbeidsforhold = {
-  '@type': string;
-  behovsdato?: string;
-  organisasjonsnummer?: string;
-  tilrettelegginger?: Tilrettelegging[];
-}
-
-const transformTilretteleggingsArbeidsforhold = (tilretteleggingArbeidsforhold?: BehovForTilretteleggingFormValues): TilretteleggingArbeidsforhold[] => {
-  let transformerteVerdier = [] as TilretteleggingArbeidsforhold[];
-  if (tilretteleggingArbeidsforhold?.sokForArbeidsgiver && tilretteleggingArbeidsforhold?.tilretteleggingForArbeidsgiver) {
-    transformerteVerdier = transformerteVerdier.concat(tilretteleggingArbeidsforhold.tilretteleggingForArbeidsgiver.map((ta) => ({
-      '@type': 'VI',
-      behovsdato: ta.behovsdato,
-      organisasjonsnummer: ta.organisasjonsnummer,
-      tilrettelegginger: ta.tilretteleggingArbeidsgiver,
-    })));
-  }
-  if (tilretteleggingArbeidsforhold?.sokForFrilans) {
-    transformerteVerdier.push({
-      '@type': 'FR',
-      behovsdato: tilretteleggingArbeidsforhold.behovsdatoFrilans,
-      tilrettelegginger: tilretteleggingArbeidsforhold.tilretteleggingFrilans,
-    });
-  }
-  if (tilretteleggingArbeidsforhold?.sokForSelvstendigNaringsdrivende) {
-    transformerteVerdier.push({
-      '@type': 'SN',
-      behovsdato: tilretteleggingArbeidsforhold.behovsdatoSN,
-      tilrettelegginger: tilretteleggingArbeidsforhold.tilretteleggingSelvstendigNaringsdrivende,
-    });
-  }
-
-  return transformerteVerdier;
-};
-
-export const transformValues = (values: FormValues): any => ({
-  ...values,
-  foedselsDato: [values.foedselsDato],
-  tilretteleggingArbeidsforhold: transformTilretteleggingsArbeidsforhold(values.tilretteleggingArbeidsforhold),
-}); */
 
 export default SvangerskapspengerForm;

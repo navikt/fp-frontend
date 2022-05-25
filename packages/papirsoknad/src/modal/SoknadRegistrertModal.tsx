@@ -1,11 +1,14 @@
 import React, { FunctionComponent } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { Link } from 'react-router-dom';
 import Modal from 'nav-frontend-modal';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { AlertStripeSuksess } from 'nav-frontend-alertstriper';
+import { createIntl } from '@navikt/ft-utils';
 
+import messages from '../../i18n/nb_NO.json';
 import styles from './soknadRegistrertModal.less';
+
+const intl = createIntl(messages);
 
 interface OwnProps {
   isOpen?: boolean;
@@ -14,11 +17,10 @@ interface OwnProps {
 /**
  * SoknadRegistrertModal
  *
- * Presentasjonskomponent. Informasjonsmodal som vises til saksbehandler når en papirsøknad har blitt registrert.
+ * Informasjonsmodal som vises til saksbehandler når en papirsøknad har blitt registrert.
  */
-export const SoknadRegistrertModal: FunctionComponent<OwnProps & WrappedComponentProps> = ({
+const SoknadRegistrertModal: FunctionComponent<OwnProps> = ({
   isOpen = false,
-  intl,
 }) => (
   <Modal
     className={styles.modalStyle}
@@ -42,4 +44,4 @@ export const SoknadRegistrertModal: FunctionComponent<OwnProps & WrappedComponen
   </Modal>
 );
 
-export default injectIntl(SoknadRegistrertModal);
+export default SoknadRegistrertModal;

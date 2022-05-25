@@ -26,7 +26,7 @@ const removeArbeidstyper = (andreYtelser: KodeverkMedNavn[], kunMiliterEllerSivi
 
 export type FormValues = {
   [ANDRE_YTELSER_NAME_PREFIX]?: {
-    [key: string ]: PerioderFormValues[] | boolean};
+    [key: string ]: PerioderFormValues[]};
 }
 
 interface OwnProps {
@@ -121,7 +121,6 @@ AndreYtelserPanel.transformValues = (values: FormValues, andreYtelser: KodeverkM
     const ytelsePerioderFieldName = `${ay.kode}_${ANDRE_YTELSER_PERIODE_SUFFIX}`;
     const ytelsePerioder = ytelseValues[ytelsePerioderFieldName];
     if (ytelsePerioder) {
-      // @ts-ignore Fiks typen. Med periode-suffix kan det kun være av type periode, ikke boolean
       RenderAndreYtelserPerioderFieldArray.transformValues(ytelsePerioder, ay.kode).forEach((tv) => newValues.push(tv));
     }
   });
