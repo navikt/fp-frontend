@@ -102,6 +102,7 @@ const ForeldrepengerForm: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   onSubmit,
   onSubmitUfullstendigsoknad,
+  fagsakPersonnummer,
 }) => {
   const formMethods = useForm<FormValues>({
     defaultValues: useMemo(() => buildInitialValues(alleKodeverk[KodeverkType.ARBEID_TYPE]), []),
@@ -141,6 +142,7 @@ const ForeldrepengerForm: FunctionComponent<OwnProps> = ({
           />
         )}
         alleKodeverk={alleKodeverk}
+        fagsakPersonnummer={fagsakPersonnummer}
       />
       <PermisjonPanel soknadData={soknadData} readOnly={readOnly} alleKodeverk={alleKodeverk} />
       <BekreftelsePanel annenForelderInformertRequired={annenForelderInformertRequired} readOnly={readOnly} />

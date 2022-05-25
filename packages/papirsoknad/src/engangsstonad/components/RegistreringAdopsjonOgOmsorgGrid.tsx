@@ -33,6 +33,7 @@ interface OwnProps {
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
+  fagsakPersonnummer: string;
 }
 
 interface StaticFunctions {
@@ -49,6 +50,7 @@ const RegistreringAdopsjonOgOmsorgGrid: FunctionComponent<OwnProps> & StaticFunc
   readOnly,
   soknadData,
   alleKodeverk,
+  fagsakPersonnummer,
 }) => (
   <Row>
     <Column xs="6">
@@ -65,6 +67,7 @@ const RegistreringAdopsjonOgOmsorgGrid: FunctionComponent<OwnProps> & StaticFunc
       <AnnenForelderPapirsoknadIndex
         readOnly={readOnly}
         alleKodeverk={alleKodeverk}
+        fagsakPersonnummer={fagsakPersonnummer}
       />
     </Column>
   </Row>

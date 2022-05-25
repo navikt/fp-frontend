@@ -30,6 +30,7 @@ interface OwnProps {
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
+  fagsakPersonnummer: string;
 }
 
 export type FormValues = {
@@ -52,6 +53,7 @@ const RegistreringFodselGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
   soknadData,
   alleKodeverk,
+  fagsakPersonnummer,
 }) => (
   <Row>
     <Column xs="6">
@@ -73,6 +75,7 @@ const RegistreringFodselGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
       <AnnenForelderPapirsoknadIndex
         readOnly={readOnly}
         alleKodeverk={alleKodeverk}
+        fagsakPersonnummer={fagsakPersonnummer}
       />
     </Column>
   </Row>

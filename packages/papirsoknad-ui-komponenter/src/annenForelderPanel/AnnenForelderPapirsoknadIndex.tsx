@@ -13,18 +13,21 @@ interface OwnProps {
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   permisjonRettigheterPanel?: ReactNode;
+  fagsakPersonnummer: string;
 }
 
 const AnnenForelderPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   readOnly,
   alleKodeverk,
   permisjonRettigheterPanel,
+  fagsakPersonnummer,
 }) => (
   <RawIntlProvider value={intl}>
     <AnnenForelderPanel
       readOnly={readOnly}
       alleKodeverk={alleKodeverk}
       permisjonRettigheterPanel={permisjonRettigheterPanel}
+      fagsakPersonnummer={fagsakPersonnummer}
     />
   </RawIntlProvider>
 );

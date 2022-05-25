@@ -53,6 +53,7 @@ const EngangsstonadForm: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   onSubmitUfullstendigsoknad,
   onSubmit,
+  fagsakPersonnummer,
 }) => {
   const erFødsel = soknadData.getFamilieHendelseType() === familieHendelseType.FODSEL;
   const erAdopsjon = soknadData.getFamilieHendelseType() === familieHendelseType.ADOPSJON;
@@ -69,6 +70,7 @@ const EngangsstonadForm: FunctionComponent<OwnProps> = ({
           soknadData={soknadData}
           readOnly={readOnly}
           alleKodeverk={alleKodeverk}
+          fagsakPersonnummer={fagsakPersonnummer}
         />
       )}
       {erAdopsjon && (
@@ -76,6 +78,7 @@ const EngangsstonadForm: FunctionComponent<OwnProps> = ({
           soknadData={soknadData}
           readOnly={readOnly}
           alleKodeverk={alleKodeverk}
+          fagsakPersonnummer={fagsakPersonnummer}
         />
       )}
       <LagreSoknadPapirsoknadIndex

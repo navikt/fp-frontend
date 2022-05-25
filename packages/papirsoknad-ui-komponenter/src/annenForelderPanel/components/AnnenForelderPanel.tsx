@@ -11,6 +11,9 @@ import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
 import { Landkode, KodeverkType } from '@navikt/ft-kodeverk';
 
 import kanIkkeOppgiAnnenForelderArsaker from '@fpsak-frontend/kodeverk/src/kanIkkeOppgiAnnenForelderArsak';
+import {
+  hasValidFodselsnummer, hasValidFodselsnummerFormat, required, sammeFodselsnummerSomSokerMessage,
+} from '@navikt/ft-form-validators';
 
 const ANNEN_FORELDER_NAME_PREFIX = 'annenForelder';
 const KAN_IKKE_OPPGI_NAME_PREFIX = 'kanIkkeOppgiBegrunnelse';
@@ -28,6 +31,7 @@ interface OwnProps {
   readOnly?: boolean;
   permisjonRettigheterPanel?: ReactNode;
   alleKodeverk: AlleKodeverk;
+  fagsakPersonnummer: string;
 }
 
 export type FormValues = {
@@ -49,10 +53,11 @@ const AnnenForelderPanel: FunctionComponent<OwnProps> = ({
   readOnly = true,
   permisjonRettigheterPanel,
   alleKodeverk,
+  fagsakPersonnummer,
 }) => {
   const { formatMessage } = useIntl();
 
-  const { watch } = formHooks.useFormContext<{ [ANNEN_FORELDER_NAME_PREFIX]: FormValues }>();
+  const { watch, trigger, formState: { isSubmitted } } = formHooks.useFormContext<{ [ANNEN_FORELDER_NAME_PREFIX]: FormValues }>();
 
   const kanIkkeOppgiAnnenForelder = watch(`${ANNEN_FORELDER_NAME_PREFIX}.kanIkkeOppgiAnnenForelder`);
   const kanIkkeOppgiBegrunnelse = watch(`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}`);
@@ -69,12 +74,19 @@ const AnnenForelderPanel: FunctionComponent<OwnProps> = ({
           bredde="S"
           parse={(value: string) => (value ? value.replace(/\s/g, '') : value)}
           readOnly={readOnly}
+          validate={kanIkkeOppgiAnnenForelder ? [] : [
+            required,
+            hasValidFodselsnummerFormat,
+            hasValidFodselsnummer,
+            (foedselsnummer) => (foedselsnummer === fagsakPersonnummer ? sammeFodselsnummerSomSokerMessage() : null),
+          ]}
           disabled={kanIkkeOppgiAnnenForelder}
         />
         <CheckboxField
           name={`${ANNEN_FORELDER_NAME_PREFIX}.kanIkkeOppgiAnnenForelder`}
           label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent' })}
           readOnly={readOnly}
+          onChange={() => (isSubmitted ? trigger() : undefined)}
         />
         {kanIkkeOppgiAnnenForelder === true && (
           <ArrowBox>
@@ -83,6 +95,7 @@ const AnnenForelderPanel: FunctionComponent<OwnProps> = ({
                 name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.arsak`}
                 readOnly={readOnly}
                 direction="vertical"
+                validate={[required]}
               >
                 <RadioOption
                   label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.1' })}
@@ -118,29 +131,5 @@ const AnnenForelderPanel: FunctionComponent<OwnProps> = ({
     </BorderBox>
   );
 };
-
-/*
-AnnenForelderPanel.validate = (sokerPersonnummer, values?) => {
-  if (!values) {
-    return undefined;
-  }
-  if (values.kanIkkeOppgiAnnenForelder) {
-    const begrunnelse = values.kanIkkeOppgiBegrunnelse || { arsak: undefined };
-    return {
-      kanIkkeOppgiBegrunnelse: {
-        arsak: required(begrunnelse.arsak),
-      },
-    };
-  }
-
-  return {
-    fornavn: required(values.fornavn) || hasValidName(values.fornavn),
-    etternavn: required(values.etternavn) || hasValidName(values.etternavn),
-    foedselsnummer: required(values.foedselsnummer)
-      || hasValidFodselsnummerFormat(values.foedselsnummer)
-      || hasValidFodselsnummer(values.foedselsnummer)
-      || ((values.foedselsnummer === sokerPersonnummer) ? sammeFodselsnummerSomSokerMessage() : null),
-  };
-}; */
 
 export default AnnenForelderPanel;
