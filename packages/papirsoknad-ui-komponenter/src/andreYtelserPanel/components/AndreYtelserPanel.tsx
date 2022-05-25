@@ -99,20 +99,6 @@ AndreYtelserPanel.buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormVa
   return { [ANDRE_YTELSER_NAME_PREFIX]: ytelseInitialValues };
 };
 
-/*
-AndreYtelserPanel.validate = (values: FormValues, andreYtelser: KodeverkMedNavn[]): any => {
-  const ytelseValues = values[ANDRE_YTELSER_FORM_NAME_PREFIX];
-  const errors = {
-    [ANDRE_YTELSER_FORM_NAME_PREFIX]: {},
-  };
-  andreYtelser.filter((ay) => ytelseValues && ytelseValues[ay.kode]).forEach((ay) => {
-    const ytelsePerioderFieldName = `${ay.kode}_${ANDRE_YTELSER_PERIODE_SUFFIX}`;
-    // @ts-ignore Fiks typen. Med periode-suffix kan det kun være av type periode, ikke boolean
-    errors[ANDRE_YTELSER_FORM_NAME_PREFIX][ytelsePerioderFieldName] = RenderAndreYtelserPerioderFieldArray.validate(ytelseValues[ytelsePerioderFieldName]);
-  });
-  return errors;
-}; */
-
 AndreYtelserPanel.transformValues = (values: FormValues, andreYtelser: KodeverkMedNavn[]): any => {
   const ytelseValues = values[ANDRE_YTELSER_NAME_PREFIX];
   const newValues = [];

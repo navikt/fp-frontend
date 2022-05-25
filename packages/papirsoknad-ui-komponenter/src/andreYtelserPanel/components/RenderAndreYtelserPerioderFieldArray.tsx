@@ -5,6 +5,9 @@ import {
   FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
 import { Datepicker, formHooks, PeriodFieldArray } from '@navikt/ft-form-hooks';
+import {
+  required, hasValidDate, dateAfterOrEqual, dateBeforeOrEqual,
+} from '@navikt/ft-form-validators';
 
 import styles from './renderAndreYtelserPerioderFieldArray.less';
 
@@ -31,7 +34,7 @@ interface StaticFunctions {
 }
 
 /**
- *  RenderAndreYtelserPerioderFieldArray
+ * RenderAndreYtelserPerioderFieldArray
  *
  * Viser inputfelter for fra og til dato for perioder for andre ytelser
  */
@@ -41,7 +44,9 @@ const RenderAndreYtelserPerioderFieldArray: FunctionComponent<OwnProps> & Static
 }) => {
   const intl = useIntl();
 
-  const { control } = formHooks.useFormContext<{ [ANDRE_YTELSER_NAME_PREFIX]: FormValues}>();
+  const {
+    getValues, control, trigger, formState: { isSubmitted },
+  } = formHooks.useFormContext<{ [ANDRE_YTELSER_NAME_PREFIX]: FormValues}>();
   const { fields, remove, append } = formHooks.useFieldArray({
     control,
     // @ts-ignore Usikker på korleis ein fiksar denne (Dynamisk name basert på verdiar fra backend)
@@ -56,73 +61,60 @@ const RenderAndreYtelserPerioderFieldArray: FunctionComponent<OwnProps> & Static
       append={append}
       remove={remove}
     >
-      {(field, index, getRemoveButton) => (
-        <div key={field.id}>
-          <Row>
-            <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
-              <FlexContainer>
-                <FlexRow>
-                  <FlexColumn>
-                    <Datepicker
-                      name={`${ANDRE_YTELSER_NAME_PREFIX}.${name}.${index}.periodeFom`}
-                      label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeFom' }) : ''}
-                    />
-                  </FlexColumn>
-                  <FlexColumn>
-                    <Datepicker
-                      name={`${ANDRE_YTELSER_NAME_PREFIX}.${name}.${index}.periodeTom`}
-                      label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeTom' }) : ''}
-                    />
-                  </FlexColumn>
-                  <FlexColumn>
-                    {getRemoveButton()}
-                  </FlexColumn>
-                </FlexRow>
-              </FlexContainer>
-            </Column>
-          </Row>
-          <VerticalSpacer sixteenPx />
-        </div>
-      )}
+      {(field, index, getRemoveButton) => {
+        const namePart1 = `${ANDRE_YTELSER_NAME_PREFIX}.${name}.${index}`;
+        return (
+          <div key={field.id}>
+            <Row>
+              <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+                <FlexContainer>
+                  <FlexRow>
+                    <FlexColumn>
+                      <Datepicker
+                        name={`${namePart1}.periodeFom`}
+                        label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeFom' }) : ''}
+                        validate={[
+                          required,
+                          hasValidDate,
+                          () => {
+                            const fomVerdi = getValues(`${namePart1}.periodeFom`) as string;
+                            const tomVerdi = getValues(`${namePart1}.periodeTom`) as string;
+                            return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
+                          },
+                        ]}
+                        onChange={() => (isSubmitted ? trigger() : undefined)}
+                      />
+                    </FlexColumn>
+                    <FlexColumn>
+                      <Datepicker
+                        name={`${namePart1}.periodeTom`}
+                        label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeTom' }) : ''}
+                        validate={[
+                          required,
+                          hasValidDate,
+                          () => {
+                            const fomVerdi = getValues(`${namePart1}.periodeFom`) as string;
+                            const tomVerdi = getValues(`${namePart1}.periodeTom`) as string;
+                            return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
+                          },
+                        ]}
+                        onChange={() => (isSubmitted ? trigger() : undefined)}
+                      />
+                    </FlexColumn>
+                    <FlexColumn>
+                      {getRemoveButton()}
+                    </FlexColumn>
+                  </FlexRow>
+                </FlexContainer>
+              </Column>
+            </Row>
+            <VerticalSpacer sixteenPx />
+          </div>
+        );
+      }}
     </PeriodFieldArray>
   );
 };
-
-/*
-RenderAndreYtelserPerioderFieldArray.validate = (values: FormValues[]): any => {
-  // eslint-disable-next-line react/destructuring-assignment
-  if (!values || !values.length) {
-    return { _error: isRequiredMessage() };
-  }
-
-  // eslint-disable-next-line react/destructuring-assignment
-  const arrayErrors = values.map(({
-    periodeFom,
-    periodeTom,
-  }) => {
-    const periodeFomDate = moment(periodeFom, ISO_DATE_FORMAT);
-    const periodeTomDate = moment(periodeTom, ISO_DATE_FORMAT);
-    const periodeFomError = required(periodeFom) || hasValidDate(periodeFom);
-    let periodeTomError = required(periodeTom) || hasValidDate(periodeTom);
-
-    if (!periodeFomError && !periodeTomError) {
-      periodeTomError = dateAfterOrEqual(periodeFomDate)(periodeTomDate);
-    }
-    if (periodeFomError || periodeTomError) {
-      return {
-        periodeFom: periodeFomError,
-        periodeTom: periodeTomError,
-      };
-    }
-    return null;
-  });
-
-  if (arrayErrors.some((errors) => errors !== null)) {
-    return arrayErrors;
-  }
-  return null;
-};
-*/
 
 RenderAndreYtelserPerioderFieldArray.transformValues = (values: FormValues[], ytelseType: string): any => values.map((ytelsePeriode) => ({
   ytelseType,
