@@ -3,20 +3,14 @@ type Ytelsefordeling = Readonly<{
     periodeFom: string;
     periodeTom: string;
   }[];
-  aleneOmsorgPerioder?: {
-    periodeFom: string;
-    periodeTom: string;
-  }[];
-  annenforelderHarRettDto: {
-    annenforelderHarRett?: boolean;
-    begrunnelse?: string;
-    annenforelderHarRettPerioder?: {
-      periodeFom: string;
-      periodeTom: string;
-    };
-    avklarAnnenforelderMottarUføretrygd: boolean;
-    annenforelderMottarUføretrygd?: boolean;
-  };
+  bekreftetAleneomsorg?: boolean;
+  rettigheterAnnenforelder: {
+    bekreftetAnnenforelderRett?: boolean;
+    bekreftetAnnenforelderUføretrygd?: boolean;
+    skalAvklareAnnenforelderUføretrygd: boolean;
+    bekreftetAnnenforelderStønadEØS?: boolean;
+    skalAvklareAnnenforelderStønadEØS: boolean;
+  }
   endringsdato?: string;
   gjeldendeDekningsgrad: number;
   førsteUttaksdato: string;

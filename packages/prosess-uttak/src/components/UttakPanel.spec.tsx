@@ -24,12 +24,8 @@ describe('<UttakPanel>', () => {
   const soknad = {
     soknadType: 'ST-001',
     mottattDato: '2019-10-28',
-    soknadDato: '2019-10-28',
-    tilleggsopplysninger: null,
     begrunnelseForSenInnsending: null,
-    annenPartNavn: null,
     antallBarn: 1,
-    dekningsgrad: 100,
     oppgittTilknytning: {
       oppholdNorgeNa: true,
       oppholdSistePeriode: true,
@@ -38,13 +34,9 @@ describe('<UttakPanel>', () => {
       utlandsoppholdEtter: [],
     },
     manglendeVedlegg: [],
-    oppgittRettighet: {
-      aleneomsorgForBarnet: false,
-    },
     oppgittFordeling: {
       startDatoForPermisjon: '2019-10-05',
     },
-    spraakkode: '-',
     utstedtdato: null,
     termindato: null,
     farSokerType: null,

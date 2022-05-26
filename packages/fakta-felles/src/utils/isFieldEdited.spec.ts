@@ -5,11 +5,8 @@ import isFieldEdited from './isFieldEdited';
 const soknad = {
   soknadType: 'ST-001',
   mottattDato: '2018-07-05',
-  tilleggsopplysninger: null,
   begrunnelseForSenInnsending: null,
-  annenPartNavn: null,
   antallBarn: 1,
-  dekningsgrad: 100,
   oppgittTilknytning: {
     oppholdNorgeNa: true,
     oppholdSistePeriode: false,
@@ -18,9 +15,6 @@ const soknad = {
     utlandsoppholdEtter: [],
   },
   manglendeVedlegg: [],
-  oppgittRettighet: {
-    aleneomsorgForBarnet: false,
-  },
   oppgittFordeling: {
     startDatoForPermisjon: '2018-07-06',
   },

@@ -253,6 +253,10 @@ const historikkEndretFeltTypeCodes = {
     kode: 'MOR_MOTTAR_UFØRETRYGD',
     feltId: 'HistorikkEndretFelt.MorMottarUføretrygd',
   },
+  MOR_MOTTAR_STØNAD_EØS: {
+    kode: 'MOR_MOTTAR_STØNAD_EØS',
+    feltId: 'HistorikkEndretFelt.MorMottarStønadEØS',
+  },
   UTTAK_TREKKDAGER: {
     kode: 'UTTAK_TREKKDAGER',
     feltId: 'HistorikkEndretFelt.UttakTrekkdager',

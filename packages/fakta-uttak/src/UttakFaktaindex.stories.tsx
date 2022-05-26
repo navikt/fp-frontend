@@ -115,13 +115,9 @@ export const MedUtsettelse = () => {
       ]}
       ytelsefordeling={{
         ikkeOmsorgPerioder: null,
-        aleneOmsorgPerioder: null,
-        annenforelderHarRettDto: {
-          begrunnelse: null,
-          annenforelderHarRett: null,
-          annenforelderHarRettPerioder: null,
-          annenforelderMottarUføretrygd: null,
-          avklarAnnenforelderMottarUføretrygd: false,
+        rettigheterAnnenforelder: {
+          skalAvklareAnnenforelderUføretrygd: false,
+          skalAvklareAnnenforelderStønadEØS: false,
         },
         endringsdato: '2022-01-31',
         gjeldendeDekningsgrad: 100,
