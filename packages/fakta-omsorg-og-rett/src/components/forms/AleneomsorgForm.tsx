@@ -49,15 +49,16 @@ const AleneomsorgForm: FunctionComponent<OwnProps> = ({
 }) => {
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {
-      harAleneomsorg: ytelsefordeling.aleneOmsorgPerioder && ytelsefordeling.aleneOmsorgPerioder.length > 0,
-      harAnnenForelderRett: ytelsefordeling?.annenforelderHarRettDto?.annenforelderHarRett,
-      mottarAnnenForelderUforetrygd: ytelsefordeling?.annenforelderHarRettDto?.annenforelderMottarUføretrygd,
+      harAleneomsorg: ytelsefordeling?.bekreftetAleneomsorg,
+      harAnnenForelderRett: ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenforelderRett,
+      mottarAnnenForelderUforetrygd: ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenforelderUføretrygd,
       begrunnelse: aksjonspunkt.begrunnelse ? decodeHtmlEntity(aksjonspunkt.begrunnelse) : undefined,
     },
   });
 
   const harAleneomsorg = formMethods.watch('harAleneomsorg');
   const skalAvklareUforetrygd = true;
+  const skalAvklareStonadEOS = false; // TODO (WLB) enable i august 2022
 
   const transformerFeltverdier = useCallback((feltVerdier: FormValues) => lagreCallback({
     kode: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
@@ -100,7 +101,7 @@ const AleneomsorgForm: FunctionComponent<OwnProps> = ({
           {harAleneomsorg === false && (
             <>
               <VerticalSpacer thirtyTwoPx />
-              <HarAnnenForelderRettFelter readOnly={readOnly} avklareUforetrygd={skalAvklareUforetrygd} />
+              <HarAnnenForelderRettFelter readOnly={readOnly} avklareUforetrygd={skalAvklareUforetrygd} avklareStonadEOS={skalAvklareStonadEOS} />
             </>
           )}
           <VerticalSpacer thirtyTwoPx />
