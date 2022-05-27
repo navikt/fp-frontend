@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { maxLength } from '@navikt/ft-form-validators';
+import { maxLength, hasValidDate } from '@navikt/ft-form-validators';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import {
   Datepicker, InputField, SelectField, PeriodFieldArray, formHooks,
@@ -91,6 +91,7 @@ const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps> = ({
                     isReadOnly={readOnly}
                     name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.periodeFom`}
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.periodeFom' }) : ''}
+                    validate={[hasValidDate]}
                   />
                 </FlexColumn>
                 <FlexColumn>
@@ -98,6 +99,7 @@ const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps> = ({
                     isReadOnly={readOnly}
                     name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.periodeTom`}
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.periodeTom' }) : ''}
+                    validate={[hasValidDate]}
                   />
                 </FlexColumn>
                 <FlexColumn>

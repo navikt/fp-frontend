@@ -42,14 +42,6 @@ const InntektsgivendeArbeidPanel: FunctionComponent<OwnProps> & StaticFunctions 
   </BorderBox>
 );
 
-/*
-InntektsgivendeArbeidPanel.validate = (values) => ({
-  [RENDER_INNTEKTSGIVENDE_ARBEID_AMBASSADE_FIELD_ARRAY]: {
-    ...RenderInntektsgivendeArbeidAmbassadeFieldArray.validate(values[RENDER_INNTEKTSGIVENDE_ARBEID_AMBASSADE_FIELD_ARRAY]),
-  },
-});
-*/
-
 InntektsgivendeArbeidPanel.buildInitialValues = () => ({
   [INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME]: [{}],
 });
