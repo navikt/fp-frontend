@@ -58,7 +58,7 @@ const AleneomsorgForm: FunctionComponent<OwnProps> = ({
 
   const harAleneomsorg = formMethods.watch('harAleneomsorg');
   const skalAvklareUforetrygd = true;
-  const skalAvklareStonadEOS = true;
+  const skalAvklareStonadEOS = false; // TODO (WLB) enable i august 2022
 
   const transformerFeltverdier = useCallback((feltVerdier: FormValues) => lagreCallback({
     kode: AksjonspunktCode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
