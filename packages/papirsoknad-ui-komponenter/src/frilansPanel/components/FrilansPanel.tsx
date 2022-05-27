@@ -85,17 +85,4 @@ FrilansPanel.buildInitialValues = () => ({
   },
 });
 
-/*
-FrilansPanel.validate = (values) => {
-  if (!values[FRILANS_NAME_PREFIX]) {
-    return null;
-  }
-  return {
-    [FRILANS_NAME_PREFIX]: {
-      ...FrilansOppdragForFamiliePanel.validate(values[FRILANS_NAME_PREFIX]),
-      perioder: FrilansPerioderFieldArray.validate(values[FRILANS_NAME_PREFIX].perioder),
-    },
-  };
-}; */
-
 export default FrilansPanel;
