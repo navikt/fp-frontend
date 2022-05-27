@@ -12,6 +12,7 @@ interface OwnProps {
   readOnly: boolean;
   familieHendelseType: string;
   isForeldrepengerFagsak: boolean;
+  fodselsdato?: string;
 }
 
 interface StaticFunctions {
@@ -22,12 +23,14 @@ const OmsorgOgAdopsjonPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunc
   readOnly,
   familieHendelseType,
   isForeldrepengerFagsak,
+  fodselsdato,
 }) => (
   <RawIntlProvider value={intl}>
     <OmsorgOgAdopsjonPanel
       readOnly={readOnly}
       familieHendelseType={familieHendelseType}
       isForeldrepengerFagsak={isForeldrepengerFagsak}
+      fodselsdato={fodselsdato}
     />
   </RawIntlProvider>
 );

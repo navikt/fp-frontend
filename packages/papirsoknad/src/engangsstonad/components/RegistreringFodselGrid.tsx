@@ -31,6 +31,7 @@ interface OwnProps {
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
   fagsakPersonnummer: string;
+  fodselsdato?: string;
 }
 
 export type FormValues = {
@@ -54,6 +55,7 @@ const RegistreringFodselGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
   soknadData,
   alleKodeverk,
   fagsakPersonnummer,
+  fodselsdato,
 }) => (
   <Row>
     <Column xs="6">
@@ -69,6 +71,7 @@ const RegistreringFodselGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
           readOnly={readOnly}
           familieHendelseType={soknadData.getFamilieHendelseType()}
           isForeldrepengerFagsak={false}
+          fodselsdato={fodselsdato}
         />
       )}
       <FodselPapirsoknadIndex readOnly={readOnly} />

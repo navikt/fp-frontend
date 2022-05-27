@@ -5,7 +5,7 @@ import { Column, Container, Row } from 'nav-frontend-grid';
 import { Undertekst } from 'nav-frontend-typografi';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
-  dateBeforeOrEqualToToday, hasValidDate, required,
+  dateBeforeOrEqualToToday, hasValidDate, hasValidInteger, isDatesEqual, maxValue, minValue, required,
 } from '@navikt/ft-form-validators';
 import {
   Datepicker, formHooks, InputField, RadioGroupField, RadioOption,
@@ -15,8 +15,10 @@ import fht from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 
 import styles from './omsorgOgAdopsjonPanel.less';
 
-// const MIN_ANTALL_BARN = 1;
 const MAX_ANTALL_BARN = 10;
+
+const minAntall = minValue(1);
+const maxAntall = maxValue(10);
 
 const OMSORG_NAME_PREFIX = 'omsorg';
 
@@ -32,10 +34,18 @@ export type TransformedFormValues = {
   foedselsDato?: string[];
 }
 
+const getValideringMotAnnenFødselsdato = (
+  index: number,
+  fodselsdato?: string,
+) => (
+  fDato?: string,
+) => (index === 0 && fodselsdato && fDato ? isDatesEqual(fDato, fodselsdato) : undefined);
+
 interface OwnProps {
   familieHendelseType: string;
   readOnly?: boolean;
   isForeldrepengerFagsak: boolean;
+  fodselsdato?: string;
 }
 
 interface StaticFunctions {
@@ -52,6 +62,7 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly = true,
   familieHendelseType,
   isForeldrepengerFagsak,
+  fodselsdato,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -142,6 +153,9 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
                   return Number.isNaN(parsedValue) ? value : parsedValue;
                 }}
                 bredde="XS"
+                validate={familieHendelseType === fht.ADOPSJON
+                  ? [required, hasValidInteger, minAntall, maxAntall]
+                  : [hasValidInteger, minAntall, maxAntall]}
               />
             </Column>
           </Row>
@@ -153,7 +167,8 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
                   name={`${OMSORG_NAME_PREFIX}.foedselsDato.${index}.dato`}
                   isReadOnly={readOnly}
                   validate={familieHendelseType === fht.ADOPSJON
-                    ? [required, hasValidDate, dateBeforeOrEqualToToday] : [hasValidDate, dateBeforeOrEqualToToday]}
+                    ? [required, hasValidDate, dateBeforeOrEqualToToday, getValideringMotAnnenFødselsdato(index, fodselsdato)]
+                    : [hasValidDate, dateBeforeOrEqualToToday, getValideringMotAnnenFødselsdato(index, fodselsdato)]}
                   label={formatMessage({ id: 'Registrering.Adopsjon.FodselsdatoBarnN' }, { n: index + 1 })}
                 />
               ))}
@@ -169,54 +184,5 @@ OmsorgOgAdopsjonPanel.transformValues = (values) => ({
   ...values,
   foedselsDato: values.foedselsDato.map((f) => f.dato),
 });
-
-/*
-const validateIncludingRequired = (antallBarn: number) => required(antallBarn)
-|| hasValidInteger(antallBarn) || minValue(MIN_ANTALL_BARN)(antallBarn) || maxValue(MAX_ANTALL_BARN)(antallBarn);
-
-const validateExcludingRequired = (antallBarn: number) => {
-  if (!antallBarn) {
-    return undefined;
-  }
-  return hasValidInteger(antallBarn) || minValue(MIN_ANTALL_BARN)(antallBarn) || maxValue(MAX_ANTALL_BARN)(antallBarn);
-};
-
-const validateAntallBarn = (antallBarn: number, familieHendelseType: string) => (familieHendelseType === fht.ADOPSJON
-  ? validateIncludingRequired(antallBarn) : validateExcludingRequired(antallBarn));
-
-const validateFodselsdatoer = (foedselsDato: string[], otherFodselsdato: string) => {
-  const hasFodselsdato1 = foedselsDato && foedselsDato.length > 0 && foedselsDato[0];
-  const hasFodseldsato2 = otherFodselsdato && otherFodselsdato.length > 0 && otherFodselsdato[0];
-  if (hasFodselsdato1 && hasFodseldsato2) {
-    const datesError = isDatesEqual(foedselsDato[0], otherFodselsdato[0]);
-    if (datesError) {
-      return [datesError];
-    }
-  }
-  return undefined;
-};
-
-OmsorgOgAdopsjonPanel.validate = (values: FormValues, otherFodselsdato: string, familieHendelseType: string) => {
-  const errors = {
-    omsorgsovertakelsesdato: undefined,
-    antallBarn: undefined,
-    foedselsDato: undefined,
-  };
-  if (!values) {
-    return errors;
-  }
-  const { foedselsDato, antallBarn } = values;
-
-  const antallBarnError = validateAntallBarn(antallBarn, familieHendelseType);
-  if (antallBarnError) {
-    errors.antallBarn = antallBarnError;
-  }
-  const fodselsdatoCrossValidationError = validateFodselsdatoer(foedselsDato, otherFodselsdato);
-  if (fodselsdatoCrossValidationError) {
-    errors.foedselsDato = fodselsdatoCrossValidationError;
-  }
-
-  return errors;
-}; */
 
 export default OmsorgOgAdopsjonPanel;

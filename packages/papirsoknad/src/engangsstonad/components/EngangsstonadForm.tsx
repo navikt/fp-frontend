@@ -62,6 +62,8 @@ const EngangsstonadForm: FunctionComponent<OwnProps> = ({
     defaultValues: buildInitialValues(erFødsel, erAdopsjon),
   });
 
+  const fodselsdato = formMethods.watch('foedselsDato');
+
   return (
     <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values, erFødsel, erAdopsjon))}>
       <MottattDatoPapirsoknadIndex readOnly={readOnly} />
@@ -71,6 +73,7 @@ const EngangsstonadForm: FunctionComponent<OwnProps> = ({
           readOnly={readOnly}
           alleKodeverk={alleKodeverk}
           fagsakPersonnummer={fagsakPersonnummer}
+          fodselsdato={fodselsdato}
         />
       )}
       {erAdopsjon && (
@@ -79,6 +82,7 @@ const EngangsstonadForm: FunctionComponent<OwnProps> = ({
           readOnly={readOnly}
           alleKodeverk={alleKodeverk}
           fagsakPersonnummer={fagsakPersonnummer}
+          fodselsdato={fodselsdato}
         />
       )}
       <LagreSoknadPapirsoknadIndex

@@ -34,6 +34,7 @@ interface OwnProps {
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
   fagsakPersonnummer: string;
+  fodselsdato?: string;
 }
 
 interface StaticFunctions {
@@ -51,6 +52,7 @@ const RegistreringAdopsjonOgOmsorgGrid: FunctionComponent<OwnProps> & StaticFunc
   soknadData,
   alleKodeverk,
   fagsakPersonnummer,
+  fodselsdato,
 }) => (
   <Row>
     <Column xs="6">
@@ -63,6 +65,7 @@ const RegistreringAdopsjonOgOmsorgGrid: FunctionComponent<OwnProps> & StaticFunc
         readOnly={readOnly}
         familieHendelseType={soknadData.getFamilieHendelseType()}
         isForeldrepengerFagsak={false}
+        fodselsdato={fodselsdato}
       />
       <AnnenForelderPapirsoknadIndex
         readOnly={readOnly}

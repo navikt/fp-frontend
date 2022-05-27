@@ -114,6 +114,8 @@ const ForeldrepengerForm: FunctionComponent<OwnProps> = ({
   const denAndreForelderenHarRettPaForeldrepenger = formMethods.watch('denAndreForelderenHarRettPaForeldrepenger');
   const annenForelderInformertRequired = !sokerHarAleneomsorg && denAndreForelderenHarRettPaForeldrepenger !== false;
 
+  const fodselsdato = formMethods.watch('foedselsDato');
+
   return (
     <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values, andreYtelserKodeverk))}>
       <MottattDatoPapirsoknadIndex readOnly={readOnly} />
@@ -130,6 +132,7 @@ const ForeldrepengerForm: FunctionComponent<OwnProps> = ({
       <OmsorgOgAdopsjonPapirsoknadIndex
         readOnly={readOnly}
         familieHendelseType={soknadData.getFamilieHendelseType()}
+        fodselsdato={fodselsdato}
         isForeldrepengerFagsak
       />
       <AnnenForelderPapirsoknadIndex
