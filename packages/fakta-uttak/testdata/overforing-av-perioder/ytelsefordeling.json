@@ -2,6 +2,10 @@
     "annenforelderHarRettDto": {
         "avklarAnnenforelderMottarUføretrygd": false
     },
+    "rettigheterAnnenforelder": {
+      "skalAvklareAnnenforelderUføretrygd": false,
+      "skalAvklareAnnenforelderStønadEØS": false
+    },
     "endringsdato": "2019-11-27",
     "gjeldendeDekningsgrad": 100,
     "førsteUttaksdato": "2019-11-27"

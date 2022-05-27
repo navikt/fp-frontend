@@ -231,7 +231,6 @@ const uttakPeriodeGrense = {
 const soknad = {
   soknadType: 'ST-001',
   mottattDato: '2019-11-18',
-  dekningsgrad: 100,
   fodselsdatoer: {
     1: '2019-11-04',
   } as {[key: number]: string},
@@ -246,6 +245,10 @@ const personoversikt = {
 const ytelsefordeling = {
   annenforelderHarRettDto: {
     avklarAnnenforelderMottarUføretrygd: false,
+  },
+  rettigheterAnnenforelder: {
+    skalAvklareAnnenforelderUføretrygd: false,
+    skalAvklareAnnenforelderStønadEØS: false,
   },
   endringsdato: '2019-10-14',
   gjeldendeDekningsgrad: 100,

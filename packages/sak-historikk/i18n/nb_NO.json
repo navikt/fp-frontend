@@ -247,6 +247,7 @@
   "HistorikkEndretFelt.AvslagMorTarIkkeAlleUker": "Mor tar ikke alle 3 ukene før termin",
   "HistorikkEndretFelt.RettTilForeldrepenger": "Rett til foreldrepenger",
   "HistorikkEndretFelt.MorMottarUføretrygd": "Mor mottar uføretrygd",
+  "HistorikkEndretFelt.MorMottarStønadEØS": "Mor mottar foreldrepenger fra land i EØS",
   "HistorikkEndretFelt.VurderGraderingPåAndelUtenBG": "Inntektsgrunnlag ved gradering",
   "HistorikkEndretFelt.Dekningsgrad": "Dekningsgrad",
   "HistorikkEndretFelt.Tilbaketrekk": "Tilbaketrekk",

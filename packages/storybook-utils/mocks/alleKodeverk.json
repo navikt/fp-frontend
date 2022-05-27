@@ -6217,6 +6217,11 @@
       "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
     },
     {
+      "kode": "MOR_MOTTAR_STØNAD_EØS",
+      "navn": "Mor mottar foreldrepenger fra land i EØS",
+      "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
+    },
+    {
       "kode": "ANKE_RESULTAT",
       "navn": "Anke resultat",
       "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"

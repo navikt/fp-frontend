@@ -13,12 +13,8 @@ export type UtlandsoppholdPeriode = Readonly<{
 type Soknad = Readonly<{
   soknadType: string;
   mottattDato: string;
-  soknadDato: string;
-  tilleggsopplysninger: string;
   begrunnelseForSenInnsending: string;
-  annenPartNavn: string;
   antallBarn: number;
-  dekningsgrad: number;
   oppgittTilknytning: {
     oppholdNorgeNa: boolean;
     oppholdSistePeriode: boolean;
@@ -27,13 +23,9 @@ type Soknad = Readonly<{
     utlandsoppholdEtter: UtlandsoppholdPeriode[];
   }
   manglendeVedlegg: ManglendeVedleggSoknad[];
-  oppgittRettighet: {
-    aleneomsorgForBarnet: boolean;
-  };
   oppgittFordeling: {
     startDatoForPermisjon?: string;
   };
-  spraakkode: string;
   utstedtdato?: string;
   termindato?: string;
   fodselsdatoer?: Record<number, string>;

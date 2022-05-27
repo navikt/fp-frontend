@@ -23,6 +23,7 @@ const maxLength1500 = maxLength(1500);
 export type FormValues = {
   harAnnenForelderRett: boolean;
   mottarAnnenForelderUforetrygd?: boolean;
+  mottarAnnenForelderStonadEOS?: boolean;
   begrunnelse: string;
 }
 
@@ -47,19 +48,23 @@ const HarAnnenForelderRettForm: FunctionComponent<OwnProps> = ({
 }) => {
   const formMethods = useForm<FormValues>({
     defaultValues: formData || {
-      harAnnenForelderRett: ytelsefordeling?.annenforelderHarRettDto?.annenforelderHarRett,
-      mottarAnnenForelderUforetrygd: ytelsefordeling?.annenforelderHarRettDto?.annenforelderMottarUføretrygd,
+      harAnnenForelderRett: ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenforelderRett,
+      mottarAnnenForelderUforetrygd: ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenforelderUføretrygd,
+      mottarAnnenForelderStonadEOS: ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenforelderStønadEØS,
       begrunnelse: aksjonspunkt.begrunnelse ? decodeHtmlEntity(aksjonspunkt.begrunnelse) : undefined,
     },
   });
 
-  const skalAvklareUforetrygd = ytelsefordeling?.annenforelderHarRettDto?.avklarAnnenforelderMottarUføretrygd
-    || ytelsefordeling?.annenforelderHarRettDto?.annenforelderMottarUføretrygd !== null;
+  const skalAvklareUforetrygd = ytelsefordeling?.rettigheterAnnenforelder?.skalAvklareAnnenforelderUføretrygd
+    || ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenforelderUføretrygd !== null;
+  const skalAvklareStonadEOS = ytelsefordeling?.rettigheterAnnenforelder?.skalAvklareAnnenforelderStønadEØS
+    || ytelsefordeling?.rettigheterAnnenforelder?.bekreftetAnnenforelderStønadEØS !== null;
 
   const transformerFeltverdier = useCallback((feltVerdier: FormValues) => lagreCallback({
     kode: AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT,
     annenforelderHarRett: feltVerdier.harAnnenForelderRett,
     annenforelderMottarUføretrygd: feltVerdier.mottarAnnenForelderUforetrygd,
+    annenforelderMottarStønadEØS: feltVerdier.mottarAnnenForelderStonadEOS,
     begrunnelse: feltVerdier.begrunnelse,
   }), []);
 
@@ -71,7 +76,7 @@ const HarAnnenForelderRettForm: FunctionComponent<OwnProps> = ({
           merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktCode.AVKLAR_ANNEN_FORELDER_RETT]}
         >
           <VerticalSpacer thirtyTwoPx />
-          <HarAnnenForelderRettFelter readOnly={readOnly} avklareUforetrygd={skalAvklareUforetrygd} />
+          <HarAnnenForelderRettFelter readOnly={readOnly} avklareUforetrygd={skalAvklareUforetrygd} avklareStonadEOS={skalAvklareStonadEOS} />
           <VerticalSpacer thirtyTwoPx />
           <TextAreaField
             label={<Element><FormattedMessage id="HarAnnenForelderRettForm.Begrunn" /></Element>}

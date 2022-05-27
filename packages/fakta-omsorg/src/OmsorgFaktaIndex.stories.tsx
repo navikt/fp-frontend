@@ -17,9 +17,7 @@ const behandling = {
 } as Behandling;
 
 const soknad = {
-  oppgittRettighet: {
-    aleneomsorgForBarnet: true,
-  },
+
 } as Soknad;
 
 const personoversikt = {
