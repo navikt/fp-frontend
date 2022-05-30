@@ -10,7 +10,7 @@ import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 
 import * as stories from './OppholdINorgePapirsoknadIndex.stories';
 
-const { ForFodsel } = composeStories(stories);
+const { ForFodsel, ForAdopsjon } = composeStories(stories);
 
 describe('<OppholdINorgePapirsoknadIndex>', () => {
   it('skal svare ja på alle spørsmåla for fødsel', async () => {
@@ -45,6 +45,17 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
         periodeTom: undefined,
       }],
     });
+  });
+
+  it('skal ha annen tekst på første spørsmålet for adopsjon', async () => {
+    const lagre = jest.fn();
+
+    render(<ForAdopsjon submitCallback={lagre} />);
+
+    expect(await screen.findByText('Opphold i Norge')).toBeInTheDocument();
+
+    expect(screen.getByText('Søker oppholder seg i Norge nå')).toBeInTheDocument();
+    expect(screen.queryByText('Bor i Norge ved fødselstidspunktet')).not.toBeInTheDocument();
   });
 
   it('skal svare nei på at en har bodd i norge de siste 12 månedene', async () => {
