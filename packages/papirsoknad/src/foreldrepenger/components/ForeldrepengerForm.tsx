@@ -115,11 +115,17 @@ const ForeldrepengerForm: FunctionComponent<OwnProps> = ({
   const annenForelderInformertRequired = !sokerHarAleneomsorg && denAndreForelderenHarRettPaForeldrepenger !== false;
 
   const fodselsdato = formMethods.watch('foedselsDato');
+  const mottattDato = formMethods.watch('mottattDato');
 
   return (
     <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values, andreYtelserKodeverk))}>
       <MottattDatoPapirsoknadIndex readOnly={readOnly} />
-      <OppholdINorgePapirsoknadIndex readOnly={readOnly} soknadData={soknadData} alleKodeverk={alleKodeverk} />
+      <OppholdINorgePapirsoknadIndex
+        readOnly={readOnly}
+        erAdopsjon={soknadData.getFamilieHendelseType() !== familieHendelseType.ADOPSJON}
+        alleKodeverk={alleKodeverk}
+        mottattDato={mottattDato}
+      />
       <InntektsgivendeArbeidPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
       <VirksomhetPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
       <FrilansPapirsoknadIndex readOnly={readOnly} />

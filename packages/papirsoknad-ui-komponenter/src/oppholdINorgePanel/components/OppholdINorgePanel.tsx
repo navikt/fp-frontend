@@ -7,18 +7,10 @@ import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk } from '@navikt/ft-types';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 
-import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
-
-import SoknadData from '../../felles/SoknadData';
+import { required } from '@navikt/ft-form-validators';
 import UtenlandsOppholdField, { FormValues as FormValuesFieldArray } from './UtenlandsOppholdField';
 
 import styles from './oppholdINorgePanel.less';
-
-interface OwnProps {
-  soknadData: SoknadData;
-  readOnly: boolean;
-  alleKodeverk: AlleKodeverk;
-}
 
 export type FormValues = {
   oppholdINorge?: boolean;
@@ -26,8 +18,14 @@ export type FormValues = {
   harFremtidigeOppholdUtenlands?: boolean;
   tidligereOppholdUtenlands?: FormValuesFieldArray[];
   fremtidigeOppholdUtenlands?: FormValuesFieldArray[];
-  mottattDato?: string;
 };
+
+interface OwnProps {
+  erAdopsjon: boolean;
+  readOnly: boolean;
+  alleKodeverk: AlleKodeverk;
+  mottattDato?: string;
+}
 
 interface StaticFunctions {
   buildInitialValues?: () => FormValues;
@@ -43,7 +41,8 @@ interface StaticFunctions {
 const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly = true,
   alleKodeverk,
-  soknadData,
+  mottattDato,
+  erAdopsjon,
 }) => {
   const { formatMessage } = useIntl();
   const sortedCountriesByName = useMemo(() => alleKodeverk[KodeverkType.LANDKODER]
@@ -56,18 +55,16 @@ const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   return (
     <BorderBox>
       <SkjemaGruppe className={styles.fullWidth} legend={formatMessage({ id: 'Registrering.Opphold' })}>
-        {soknadData.getFamilieHendelseType() === familieHendelseType.ADOPSJON && (
-          <Undertekst>
-            <FormattedMessage id="Registrering.OppholdVedAdopsjon" />
-          </Undertekst>
-        )}
-        {soknadData.getFamilieHendelseType() !== familieHendelseType.ADOPSJON && (
-          <Undertekst>
-            <FormattedMessage id="Registrering.OppholdVedFodsel" />
-          </Undertekst>
-        )}
+        <Undertekst>
+          <FormattedMessage id={erAdopsjon ? 'Registrering.OppholdVedAdopsjon' : 'Registrering.OppholdVedFodsel'} />
+        </Undertekst>
         <VerticalSpacer eightPx />
-        <RadioGroupField name="oppholdINorge" readOnly={readOnly} parse={(value: string) => value === 'true'}>
+        <RadioGroupField
+          name="oppholdINorge"
+          readOnly={readOnly}
+          parse={(value: string) => value === 'true'}
+          validate={[required]}
+        >
           <RadioOption label={formatMessage({ id: 'Registrering.Opphold.Yes' })} value="true" />
           <RadioOption label={formatMessage({ id: 'Registrering.Opphold.No' })} value="false" />
         </RadioGroupField>
@@ -75,7 +72,12 @@ const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
           <FormattedMessage id="Registrering.OppholdSisteTolv" />
         </Undertekst>
         <VerticalSpacer eightPx />
-        <RadioGroupField name="harTidligereOppholdUtenlands" readOnly={readOnly} parse={(value: string) => value === 'true'}>
+        <RadioGroupField
+          name="harTidligereOppholdUtenlands"
+          readOnly={readOnly}
+          parse={(value: string) => value === 'true'}
+          validate={[required]}
+        >
           <RadioOption label={formatMessage({ id: 'Registrering.Opphold.Yes' })} value="false" />
           <RadioOption label={formatMessage({ id: 'Registrering.Opphold.No' })} value="true" />
         </RadioGroupField>
@@ -83,6 +85,7 @@ const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
           <ArrowBox alignOffset={64}>
             <UtenlandsOppholdField
               erTidligereOpphold
+              mottattDato={mottattDato}
               countryCodes={sortedCountriesByName}
               readOnly={readOnly}
             />
@@ -92,7 +95,12 @@ const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
           <FormattedMessage id="Registrering.OppholdNesteTolv" />
         </Undertekst>
         <VerticalSpacer eightPx />
-        <RadioGroupField name="harFremtidigeOppholdUtenlands" readOnly={readOnly} parse={(value: string) => value === 'true'}>
+        <RadioGroupField
+          name="harFremtidigeOppholdUtenlands"
+          readOnly={readOnly}
+          parse={(value: string) => value === 'true'}
+          validate={[required]}
+        >
           <RadioOption label={formatMessage({ id: 'Registrering.Opphold.Yes' })} value="false" />
           <RadioOption label={formatMessage({ id: 'Registrering.Opphold.No' })} value="true" />
         </RadioGroupField>
@@ -100,6 +108,7 @@ const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
           <ArrowBox alignOffset={64}>
             <UtenlandsOppholdField
               erTidligereOpphold={false}
+              mottattDato={mottattDato}
               countryCodes={sortedCountriesByName}
               readOnly={readOnly}
             />
@@ -109,38 +118,6 @@ const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
     </BorderBox>
   );
 };
-
-/* type OppholdErrors = {
-  oppholdINorge?: string;
-  harTidligereOppholdUtenlands?: string;
-  tidligereOppholdUtenlands?: string;
-  harFremtidigeOppholdUtenlands?: string;
-  fremtidigeOppholdUtenlands?: string;
-}
-
-OppholdINorgePanel.validate = (values: FormValues) => {
-  const errors = {
-    oppholdINorge: undefined,
-    harTidligereOppholdUtenlands: undefined,
-    tidligereOppholdUtenlands: undefined,
-    harFremtidigeOppholdUtenlands: undefined,
-    fremtidigeOppholdUtenlands: undefined,
-  } as OppholdErrors;
-  if (values.oppholdINorge === undefined) {
-    errors.oppholdINorge = isRequiredMessage();
-  }
-  if (values.harTidligereOppholdUtenlands === undefined) {
-    errors.harTidligereOppholdUtenlands = isRequiredMessage();
-  } else if (values.harTidligereOppholdUtenlands) {
-    errors.tidligereOppholdUtenlands = UtenlandsOppholdField.validate(values.tidligereOppholdUtenlands, { todayOrBefore: true });
-  }
-  if (values.harFremtidigeOppholdUtenlands === undefined) {
-    errors.harFremtidigeOppholdUtenlands = isRequiredMessage();
-  } else if (values.harFremtidigeOppholdUtenlands) {
-    errors.fremtidigeOppholdUtenlands = UtenlandsOppholdField.validate(values.fremtidigeOppholdUtenlands, { tidligstDato: values.mottattDato });
-  }
-  return errors;
-}; */
 
 OppholdINorgePanel.buildInitialValues = (): FormValues => ({
   tidligereOppholdUtenlands: [{ periodeFom: undefined, periodeTom: undefined }],

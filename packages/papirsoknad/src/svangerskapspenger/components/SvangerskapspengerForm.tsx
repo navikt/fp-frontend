@@ -23,14 +23,17 @@ import {
   TerminFodselSvpPanel,
   TerminFodselSvpFormValues,
   Tilrettelegging,
+  MottattDatoFormValues,
 } from '@fpsak-frontend/papirsoknad-ui-komponenter';
+import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 
 type FormValues = AndreYtelserFormValue
   & IArbeidFormValues
   & FrilansFormValues
   & OppholdINorgeFormValues
   & BehovForTilretteleggingFormValues
-  & TerminFodselSvpFormValues;
+  & TerminFodselSvpFormValues
+  & MottattDatoFormValues;
 
 const buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => ({
   ...FrilansPapirsoknadIndex.buildInitialValues(),
@@ -110,10 +113,17 @@ const SvangerskapspengerForm: FunctionComponent<OwnProps> = ({
     defaultValues: useMemo(() => buildInitialValues(alleKodeverk[KodeverkType.ARBEID_TYPE]), []),
   });
 
+  const mottattDato = formMethods.watch('mottattDato');
+
   return (
     <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values))}>
       <MottattDatoPapirsoknadIndex readOnly={readOnly} />
-      <OppholdINorgePapirsoknadIndex readOnly={readOnly} soknadData={soknadData} alleKodeverk={alleKodeverk} />
+      <OppholdINorgePapirsoknadIndex
+        readOnly={readOnly}
+        alleKodeverk={alleKodeverk}
+        erAdopsjon={soknadData.getFamilieHendelseType() !== familieHendelseType.ADOPSJON}
+        mottattDato={mottattDato}
+      />
       <InntektsgivendeArbeidPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
       <VirksomhetPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
       <FrilansPapirsoknadIndex readOnly={readOnly} />

@@ -6,7 +6,7 @@ import { omitOne } from '@navikt/ft-utils';
 
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 import {
-  SoknadData, MottattDatoPapirsoknadIndex, LagreSoknadPapirsoknadIndex, rettighet,
+  SoknadData, MottattDatoPapirsoknadIndex, LagreSoknadPapirsoknadIndex, rettighet, MottattDatoFormValues,
 } from '@fpsak-frontend/papirsoknad-ui-komponenter';
 
 import RegistreringAdopsjonOgOmsorgGrid, { FormValues as FormValuesAdopsjon } from './RegistreringAdopsjonOgOmsorgGrid';
@@ -14,7 +14,7 @@ import RegistreringFodselGrid, { FormValues as FormValuesFodsel } from './Regist
 
 export const ENGANGSSTONAD_FORM_NAME = 'EngangsstonadForm';
 
-type FormValues = FormValuesFodsel | FormValuesAdopsjon | Record<string, never>;
+type FormValues = MottattDatoFormValues & (FormValuesFodsel | FormValuesAdopsjon);
 
 const buildInitialValues = (erFødsel: boolean, erAdopsjon: boolean): FormValues => {
   if (erFødsel) {
@@ -63,6 +63,7 @@ const EngangsstonadForm: FunctionComponent<OwnProps> = ({
   });
 
   const fodselsdato = formMethods.watch('foedselsDato');
+  const mottattDato = formMethods.watch('mottattDato');
 
   return (
     <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values, erFødsel, erAdopsjon))}>
@@ -74,6 +75,7 @@ const EngangsstonadForm: FunctionComponent<OwnProps> = ({
           alleKodeverk={alleKodeverk}
           fagsakPersonnummer={fagsakPersonnummer}
           fodselsdato={fodselsdato}
+          mottattDato={mottattDato}
         />
       )}
       {erAdopsjon && (
@@ -83,6 +85,7 @@ const EngangsstonadForm: FunctionComponent<OwnProps> = ({
           alleKodeverk={alleKodeverk}
           fagsakPersonnummer={fagsakPersonnummer}
           fodselsdato={fodselsdato}
+          mottattDato={mottattDato}
         />
       )}
       <LagreSoknadPapirsoknadIndex

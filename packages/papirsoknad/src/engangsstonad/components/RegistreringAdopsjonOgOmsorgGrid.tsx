@@ -14,6 +14,7 @@ import {
   SoknadData,
   OmsorgOgAdopsjonTransformedFormValues,
 } from '@fpsak-frontend/papirsoknad-ui-komponenter';
+import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 
 const ANNEN_FORELDER_FORM_NAME_PREFIX = 'annenForelder';
 const OMSORG_FORM_NAME_PREFIX = 'omsorg';
@@ -35,6 +36,7 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
   fagsakPersonnummer: string;
   fodselsdato?: string;
+  mottattDato?: string;
 }
 
 interface StaticFunctions {
@@ -53,11 +55,17 @@ const RegistreringAdopsjonOgOmsorgGrid: FunctionComponent<OwnProps> & StaticFunc
   alleKodeverk,
   fagsakPersonnummer,
   fodselsdato,
+  mottattDato,
 }) => (
   <Row>
     <Column xs="6">
       <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
-      <OppholdINorgePapirsoknadIndex readOnly={readOnly} soknadData={soknadData} alleKodeverk={alleKodeverk} />
+      <OppholdINorgePapirsoknadIndex
+        readOnly={readOnly}
+        alleKodeverk={alleKodeverk}
+        erAdopsjon={soknadData.getFamilieHendelseType() !== familieHendelseType.ADOPSJON}
+        mottattDato={mottattDato}
+      />
       <SprakPapirsoknadIndex readOnly={readOnly} />
     </Column>
     <Column xs="6">
