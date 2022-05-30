@@ -14,7 +14,6 @@ import RenderGraderingPeriodeFieldArray, {
 } from './RenderGraderingPeriodeFieldArray';
 
 import styles from './permisjonPanel.less';
-import { hasValidPeriodIncludingOtherErrors } from './validator';
 
 export type FormValues = {
   skalGradere?: boolean;

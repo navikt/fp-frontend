@@ -50,6 +50,7 @@ const FrilansOppdragForFamiliePanel: FunctionComponent<OwnProps> & StaticFunctio
 
 FrilansOppdragForFamiliePanel.buildInitialValues = (): FormValues => ({
   oppdragPerioder: [defaultFrilansPeriode],
+  perioder: undefined,
 });
 
 export default FrilansOppdragForFamiliePanel;

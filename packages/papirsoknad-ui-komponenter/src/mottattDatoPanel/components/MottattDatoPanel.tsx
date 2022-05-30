@@ -6,7 +6,7 @@ import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 
 export type FormValues = {
-  mottattDato: string;
+  mottattDato?: string;
 }
 
 interface OwnProps {
