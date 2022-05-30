@@ -35,7 +35,12 @@ const AktivitetskravFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (pr
     faktaPanelKode={FaktaPanelCode.AKTIVITETSKRAV}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'AktivitetskravInfoPanel.FaktaAktivitetskrav' })}
     skalPanelVisesIMeny={(initData) => !!initData?.uttakKontrollerAktivitetskrav}
-    renderPanel={(data) => <AktivitetskravFaktaIndex {...data} />}
+    renderPanel={(data) => (
+      <AktivitetskravFaktaIndex
+        // @ts-ignore Eg trur denne feilar grunna feil i typescript-pakka. Sjekk på eit seinare tidspunkt om denne er retta
+        {...data}
+      />
+    )}
   />
 );
 

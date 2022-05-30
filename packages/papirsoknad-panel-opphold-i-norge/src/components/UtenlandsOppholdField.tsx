@@ -1,16 +1,17 @@
 import React, { FunctionComponent, ReactElement } from 'react';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { FieldArray, FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import classnames from 'classnames/bind';
 import { Column, Row } from 'nav-frontend-grid';
 
 import { DatepickerField, SelectField, PeriodFieldArray } from '@fpsak-frontend/form';
 import {
-  hasValidPeriodIncludingOtherErrors, hasValidValue, isRequiredMessage, required, Options,
+  hasValidValue, isRequiredMessage, required,
 } from '@navikt/ft-form-validators';
 import landkoder from '@fpsak-frontend/kodeverk/src/landkoder';
 import { KodeverkMedNavn } from '@fpsak-frontend/types';
 
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { hasValidPeriodIncludingOtherErrors, Options } from './validator';
 import styles from './utenlandsOppholdField.less';
 
 const classNames = classnames.bind(styles);

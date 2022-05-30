@@ -54,6 +54,7 @@ const BeregningProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelIn
           overrideReadOnly={data.isReadOnly}
           kanOverstyreAccess={rettigheter.kanOverstyreAccess}
           toggleOverstyring={toggleOverstyring}
+          // @ts-ignore Eg trur denne feilar grunna feil i typescript-pakka. Sjekk på eit seinare tidspunkt om denne er retta
           {...data}
         />
       )}
