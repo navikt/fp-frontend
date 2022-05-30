@@ -30,6 +30,7 @@ const YtelserFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = (props) =>
     faktaPanelMenyTekst={intl.formatMessage({ id: 'YtelserFaktaIndex.Ytelser' })}
     skalPanelVisesIMeny={(initData) => !!initData?.inntektArbeidYtelse?.relatertTilgrensendeYtelserForSoker
       && initData.inntektArbeidYtelse.relatertTilgrensendeYtelserForSoker.length > 0}
+    // @ts-ignore Eg trur denne feilar grunna feil i typescript-pakka. Sjekk på eit seinare tidspunkt om denne er retta
     renderPanel={(data) => <YtelserFaktaIndex {...data} />}
   />
 );

@@ -74,6 +74,7 @@ const ArbeidOgInntektFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInit
           lagreVurdering={lagreVurdering}
           settBehandlingPåVentCallback={settBehandlingPåVentCallback}
           åpneForNyVurdering={åpneForNyVurderingOgOppfriskBehandling}
+          // @ts-ignore Eg trur denne feilar grunna feil i typescript-pakka. Sjekk på eit seinare tidspunkt om denne er retta
           {...data}
         />
       )}

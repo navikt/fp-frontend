@@ -7,9 +7,10 @@ import { Element } from 'nav-frontend-typografi';
 import { CheckboxField } from '@fpsak-frontend/form';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import { hasValidPeriodIncludingOtherErrors, isRequiredMessage, required } from '@navikt/ft-form-validators';
+import { isRequiredMessage, required } from '@navikt/ft-form-validators';
 import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 
+import { hasValidPeriodIncludingOtherErrors } from './validator';
 import RenderUtsettelsePeriodeFieldArray from './RenderUtsettelsePeriodeFieldArray';
 
 import styles from './permisjonPanel.less';
