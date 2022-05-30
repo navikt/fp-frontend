@@ -10,7 +10,6 @@ import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   hasValidFodselsnummer,
   hasValidInteger,
-  hasValidPeriodIncludingOtherErrors,
   isRequiredMessage,
   maxLengthOrFodselsnr,
   required,
@@ -22,6 +21,7 @@ import { AlleKodeverk, KodeverkMedNavn } from '@fpsak-frontend/types';
 import RenderGraderingPeriodeFieldArray from './RenderGraderingPeriodeFieldArray';
 
 import styles from './permisjonPanel.less';
+import { hasValidPeriodIncludingOtherErrors } from './validator';
 
 export const GRADERING_PERIODE_FIELD_ARRAY_NAME = 'graderingPeriode';
 
