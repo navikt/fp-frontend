@@ -123,10 +123,11 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
   }) => kode === '-').length === 0) { morsAktivitetTyper.unshift({ kode: '-', navn: '', kodeverk: '' }); }
 
   const {
-    control, getValues, trigger, formState: { isSubmitted },
+    control, getValues, trigger, watch, formState: { isSubmitted },
   } = formHooks.useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
     [PERMISJON_PERIODE_FIELD_ARRAY_NAME]: FormValues[]
   }}>();
+
   const { fields, remove, append } = formHooks.useFieldArray({
     control,
     name: `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}`,
@@ -151,7 +152,10 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
     >
       {(field, index) => {
         const erForsteRad = (index === 0);
-        const { periodeFom, harSamtidigUttak } = field;
+
+        const periodeFom = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
+        const harSamtidigUttak = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.harSamtidigUttak`);
+
         const periodeFomForTidlig = erPeriodeFormFør01012019(periodeFom);
         const visEllerSkulOverskriftStyle = erForsteRad ? styles.visOverskrift : styles.skjulOverskrift;
 

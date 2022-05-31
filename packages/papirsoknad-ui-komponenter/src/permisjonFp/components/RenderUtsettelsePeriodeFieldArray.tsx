@@ -43,7 +43,7 @@ const getOverlappingValidator = (
   const periodeMap = perioder
     .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
     .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-  return dateRangesNotOverlapping(periodeMap);
+  return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
 };
 
 const mapTyper = (typer: KodeverkMedNavn[]): ReactElement[] => typer
@@ -117,6 +117,7 @@ const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps> = ({
                     bredde="xl"
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.Periode' }) : ''}
                     selectValues={mapKvoter(utsettelseKvoter)}
+                    validate={[required]}
                   />
                 </FlexColumn>
                 <FlexColumn>

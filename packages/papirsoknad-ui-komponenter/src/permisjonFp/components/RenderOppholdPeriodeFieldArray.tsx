@@ -33,7 +33,7 @@ const getOverlappingValidator = (
   const periodeMap = perioder
     .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
     .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-  return dateRangesNotOverlapping(periodeMap);
+  return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
 };
 
 const defaultOppholdPeriode: Periode = {

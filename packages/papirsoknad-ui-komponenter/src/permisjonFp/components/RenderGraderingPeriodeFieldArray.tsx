@@ -50,7 +50,7 @@ const getOverlappingValidator = (
   const periodeMap = perioder
     .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
     .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-  return dateRangesNotOverlapping(periodeMap);
+  return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
 };
 
 const defaultGraderingPeriode: GraderingPeriode = {
@@ -134,8 +134,7 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
       append={append}
     >
       {(field, index, getRemoveButton) => {
-        const { periodeFom } = field;
-        const { harSamtidigUttak } = graderingValues[index];
+        const { harSamtidigUttak, periodeFom } = graderingValues[index];
         const periodeFomForTidlig = periodeFom && moment(periodeFom).isBefore(moment('2019-01-01'));
         const namePart1 = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}`;
         return (
@@ -193,7 +192,7 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                     <InputField
                       name={`${namePart1}.prosentandelArbeid`}
                       bredde="S"
-                      validate={[hasValidDecimal, maxValue100]}
+                      validate={[required, hasValidDecimal, maxValue100]}
                       normalizeOnBlur={(value: string) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
                     />
                   </FlexColumn>
@@ -210,8 +209,13 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                           return arbeidsgiverIdentifikatorRequired ? required(arbeidsgiverIdentifikator) : undefined;
                         },
                         hasValidInteger,
-                        (arbeidsgiverIdentifikator) => (arbeidsgiverIdentifikator.length === 11
-                          ? hasValidFodselsnummer(arbeidsgiverIdentifikator) : maxLength9OrFodselsnr(arbeidsgiverIdentifikator)),
+                        (arbeidsgiverIdentifikator) => {
+                          if (!arbeidsgiverIdentifikator) {
+                            return undefined;
+                          }
+                          return arbeidsgiverIdentifikator.length === 11
+                            ? hasValidFodselsnummer(arbeidsgiverIdentifikator) : maxLength9OrFodselsnr(arbeidsgiverIdentifikator);
+                        },
                       ]}
                     />
                   </FlexColumn>
@@ -267,12 +271,11 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                         name={`${namePart1}.samtidigUttaksprosent`}
                         bredde="S"
                         validate={[
+                          required,
                           hasValidDecimal,
                           maxValue100,
-                          (samtidigUttaksprosent) => (harSamtidigUttak ? required(samtidigUttaksprosent) : undefined),
                         ]}
                         label={intl.formatMessage({ id: 'Registrering.Permisjon.SamtidigUttaksprosent' })}
-                        normalizeOnBlur={(value: string) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
                       />
                     )}
                   </FlexColumn>

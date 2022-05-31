@@ -5,7 +5,9 @@ import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import {
   Datepicker, SelectField, PeriodFieldArray, formHooks,
 } from '@navikt/ft-form-hooks';
-import { required, hasValidDate, dateRangesNotOverlapping } from '@navikt/ft-form-validators';
+import {
+  required, hasValidDate, dateRangesNotOverlapping, dateAfterOrEqual, dateBeforeOrEqual,
+} from '@navikt/ft-form-validators';
 
 export const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
 export const OVERFORING_PERIODE_FIELD_ARRAY_NAME = 'overforingsperioder';
@@ -25,7 +27,7 @@ const getOverlappingValidator = (
   const periodeMap = perioder
     .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
     .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-  return dateRangesNotOverlapping(periodeMap);
+  return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
 };
 
 const defaultOverforingPeriode: Periode = {
@@ -95,7 +97,16 @@ const RenderOverforingAvKvoterFieldArray: FunctionComponent<OwnProps> = ({
                 <Datepicker
                   isReadOnly={readOnly}
                   name={`${fieldArrayName}.${index}.periodeFom`}
-                  validate={[required, hasValidDate, getOverlappingValidator(getValues)]}
+                  validate={[
+                    required,
+                    hasValidDate,
+                    () => {
+                      const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFORING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
+                      const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFORING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
+                      return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
+                    },
+                    getOverlappingValidator(getValues),
+                  ]}
                   label={index === 0 ? <FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.fomDato" /> : ''}
                   onChange={() => (isSubmitted ? trigger() : undefined)}
                 />
@@ -104,7 +115,16 @@ const RenderOverforingAvKvoterFieldArray: FunctionComponent<OwnProps> = ({
                 <Datepicker
                   isReadOnly={readOnly}
                   name={`${fieldArrayName}.${index}.periodeTom`}
-                  validate={[required, hasValidDate, getOverlappingValidator(getValues)]}
+                  validate={[
+                    required,
+                    hasValidDate,
+                    () => {
+                      const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFORING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
+                      const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFORING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
+                      return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
+                    },
+                    getOverlappingValidator(getValues),
+                  ]}
                   label={index === 0 ? <FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.tomDato" /> : ''}
                   onChange={() => (isSubmitted ? trigger() : undefined)}
                 />
