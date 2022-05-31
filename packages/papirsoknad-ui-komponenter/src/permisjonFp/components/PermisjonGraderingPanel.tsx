@@ -18,13 +18,6 @@ export type FormValues = {
   [GRADERING_PERIODE_FIELD_ARRAY_NAME]?: GraderingPeriodeFormValues
 }
 
-type Periode = {
-  arbeidskategoriType: string;
-  erArbeidstaker: boolean;
-  erFrilanser: boolean;
-  erSelvstNæringsdrivende: boolean;
-}
-
 interface OwnProps {
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
@@ -32,7 +25,7 @@ interface OwnProps {
 
 interface StaticFunctions {
   buildInitialValues: () => any;
-  transformValues: (perioder: Periode[]) => any;
+  transformValues: (formValues: FormValues) => any;
 }
 
 /**
@@ -71,15 +64,20 @@ const PermisjonGraderingPanel: FunctionComponent<OwnProps> & StaticFunctions = (
   );
 };
 
-PermisjonGraderingPanel.transformValues = (perioder: Periode[]) => perioder.map((p) => {
-  const { ...periode } = p;
-  if (p.arbeidskategoriType) {
-    periode.erArbeidstaker = p.arbeidskategoriType === arbeidskategori.ARBEIDSTAKER;
-    periode.erFrilanser = p.arbeidskategoriType === arbeidskategori.FRILANSER;
-    periode.erSelvstNæringsdrivende = p.arbeidskategoriType === arbeidskategori.SELVSTENDIG_NAERINGSDRIVENDE;
-  }
-  return periode;
-});
+PermisjonGraderingPanel.transformValues = (formValues: FormValues) => {
+  const perioder = formValues[GRADERING_PERIODE_FIELD_ARRAY_NAME];
+  return perioder.map((periode) => {
+    if (periode.arbeidskategoriType) {
+      return {
+        ...periode,
+        erArbeidstaker: periode.arbeidskategoriType === arbeidskategori.ARBEIDSTAKER,
+        erFrilanser: periode.arbeidskategoriType === arbeidskategori.FRILANSER,
+        erSelvstNæringsdrivende: periode.arbeidskategoriType === arbeidskategori.SELVSTENDIG_NAERINGSDRIVENDE,
+      };
+    }
+    return periode;
+  });
+};
 
 PermisjonGraderingPanel.buildInitialValues = () => ({
   [GRADERING_PERIODE_FIELD_ARRAY_NAME]: [{}],

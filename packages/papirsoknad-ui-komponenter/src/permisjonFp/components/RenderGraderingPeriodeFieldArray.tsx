@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 import moment from 'moment/moment';
 import { UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -117,6 +117,12 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
   });
 
   const graderingValues = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}`);
+
+  useEffect(() => {
+    if (fields.length === 0) {
+      append(defaultGraderingPeriode);
+    }
+  }, []);
 
   return (
     <PeriodFieldArray

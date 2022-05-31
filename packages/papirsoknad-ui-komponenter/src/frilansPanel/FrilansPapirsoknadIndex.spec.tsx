@@ -71,7 +71,6 @@ describe('<FrilansPapirsoknadIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      dummy: '15.06.2022', // TODO (dette skal vekk)
       frilans: {
         erNyoppstartetFrilanser: false,
         harHattOppdragForFamilie: false,
@@ -136,7 +135,6 @@ describe('<FrilansPapirsoknadIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      dummy: '28.05.2022', // TODO (dette skal vekk)
       frilans: {
         erNyoppstartetFrilanser: false,
         harHattOppdragForFamilie: true,

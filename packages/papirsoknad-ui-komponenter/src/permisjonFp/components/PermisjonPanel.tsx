@@ -9,14 +9,11 @@ import ForeldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 
 import { UseFormGetValues } from 'react-hook-form';
 import PermisjonUtsettelsePanel, { FormValues as FormValuesUtsettelse } from './PermisjonUtsettelsePanel';
-import { UTSETTELSE_PERIODE_FIELD_ARRAY_NAME } from './RenderUtsettelsePeriodeFieldArray';
 import PermisjonGraderingPanel, { FormValues as FormValuesGradering } from './PermisjonGraderingPanel';
 import { GRADERING_PERIODE_FIELD_ARRAY_NAME } from './RenderGraderingPeriodeFieldArray';
 import PermisjonOverforingAvKvoterPanel, { FormValues as FormValuesOverforing } from './PermisjonOverforingAvKvoterPanel';
-import { OVERFORING_PERIODE_FIELD_ARRAY_NAME } from './RenderOverforingAvKvoterFieldArray';
 import RenderPermisjonPeriodeFieldArray, { PERMISJON_PERIODE_FIELD_ARRAY_NAME, FormValues as FormValuesPermisjon } from './RenderPermisjonPeriodeFieldArray';
 import PermisjonOppholdPanel, { FormValues as FormValuesOpphold } from './PermisjonOppholdPanel';
-import { OPPHOLD_PERIODE_FIELD_ARRAY_NAME } from './RenderOppholdPeriodeFieldArray';
 
 import styles from './permisjonPanel.less';
 
@@ -24,16 +21,8 @@ export const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
 
 type TidsromPermisjon = {
   fulltUttak: boolean;
-  skalUtsette: boolean;
-  skalGradere: boolean;
-  skalHaOpphold: boolean;
-  skalOvertaKvote: boolean;
   [PERMISJON_PERIODE_FIELD_ARRAY_NAME]?: FormValuesPermisjon[];
-  [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]?: FormValuesUtsettelse[];
-  [GRADERING_PERIODE_FIELD_ARRAY_NAME]?: FormValuesGradering[];
-  [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]?: FormValuesOpphold[];
-  [OVERFORING_PERIODE_FIELD_ARRAY_NAME]?: FormValuesOverforing[];
-};
+} & FormValuesUtsettelse & FormValuesOpphold & FormValuesOverforing & FormValuesGradering;
 
 export type FormValues = {
   [TIDSROM_PERMISJON_FORM_NAME_PREFIX]?: TidsromPermisjon;
@@ -137,7 +126,7 @@ PermisjonPanel.transformValues = (values: FormValues) => {
   }
   const graderingdata = permisjonValues[GRADERING_PERIODE_FIELD_ARRAY_NAME];
   if (values.tidsromPermisjon.skalGradere && graderingdata) {
-    newValues[GRADERING_PERIODE_FIELD_ARRAY_NAME] = PermisjonGraderingPanel.transformValues(graderingdata);
+    newValues[GRADERING_PERIODE_FIELD_ARRAY_NAME] = PermisjonGraderingPanel.transformValues(permisjonValues);
   }
   return newValues;
 };

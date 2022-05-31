@@ -44,7 +44,6 @@ describe('<InntektsgivendeArbeidPapirsoknadIndex>', () => {
         arbeidsgiver: 'test-arbeidsgiver',
         land: 'AND',
       }],
-      dummy: 'AND', // TODO (dette skal vekk)
     });
   });
 });

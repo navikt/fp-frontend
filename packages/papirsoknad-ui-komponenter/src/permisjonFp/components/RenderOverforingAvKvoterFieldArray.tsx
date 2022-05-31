@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { UseFormGetValues } from 'react-hook-form';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
@@ -60,6 +60,12 @@ const RenderOverforingAvKvoterFieldArray: FunctionComponent<OwnProps> = ({
     control,
     name: `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFORING_PERIODE_FIELD_ARRAY_NAME}`,
   });
+
+  useEffect(() => {
+    if (fields.length === 0) {
+      append(defaultOverforingPeriode);
+    }
+  }, []);
 
   const fieldArrayName = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFORING_PERIODE_FIELD_ARRAY_NAME}`;
   return (

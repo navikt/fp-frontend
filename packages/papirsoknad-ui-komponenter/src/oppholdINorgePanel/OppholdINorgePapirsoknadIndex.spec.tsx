@@ -6,7 +6,7 @@ import {
 import dayjs from 'dayjs';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
-import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
+import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 import * as stories from './OppholdINorgePapirsoknadIndex.stories';
 
@@ -109,7 +109,6 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      dummy: '24.05.2022',
       fremtidigeOppholdUtenlands: [{
         periodeFom: undefined,
         periodeTom: undefined,
@@ -119,8 +118,8 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
       oppholdINorge: true,
       tidligereOppholdUtenlands: [{
         land: 'AND',
-        periodeFom: '2022-05-20',
-        periodeTom: '2022-05-24',
+        periodeFom: dayjs().subtract(10, 'day').format(ISO_DATE_FORMAT),
+        periodeTom: dayjs().subtract(6, 'day').format(ISO_DATE_FORMAT),
       }],
     });
   });
@@ -176,11 +175,10 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      dummy: '05.06.2022',
       fremtidigeOppholdUtenlands: [{
         land: 'AND',
-        periodeFom: '2022-06-05',
-        periodeTom: '2022-06-09',
+        periodeFom: dayjs().add(6, 'day').format(ISO_DATE_FORMAT),
+        periodeTom: dayjs().add(10, 'day').format(ISO_DATE_FORMAT),
       }],
       harFremtidigeOppholdUtenlands: true,
       harTidligereOppholdUtenlands: false,

@@ -43,8 +43,8 @@ const Template: Story<{
   );
 };
 
-export const SøkerErMor = Template.bind({});
-SøkerErMor.args = {
+export const Default = Template.bind({});
+Default.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   foreldreType: ForeldreType.MOR,
 };

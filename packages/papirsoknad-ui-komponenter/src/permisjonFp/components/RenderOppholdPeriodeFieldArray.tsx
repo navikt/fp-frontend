@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 import { UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
@@ -83,6 +83,12 @@ const RenderOppholdPeriodeFieldArray: FunctionComponent<OwnProps> = ({
     control,
     name: `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD_ARRAY_NAME}`,
   });
+
+  useEffect(() => {
+    if (fields.length === 0) {
+      append(defaultOppholdPeriode);
+    }
+  }, []);
 
   return (
     <PeriodFieldArray

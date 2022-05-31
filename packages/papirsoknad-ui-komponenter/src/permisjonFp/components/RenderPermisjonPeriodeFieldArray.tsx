@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, useEffect } from 'react';
 import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { UseFormGetValues } from 'react-hook-form';
@@ -131,6 +131,12 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
     control,
     name: `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}`,
   });
+
+  useEffect(() => {
+    if (fields.length === 0) {
+      append({});
+    }
+  }, []);
 
   const selectedPeriodeTyper = [''];
 
@@ -278,23 +284,6 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
     </PeriodFieldArray>
   );
 };
-
-/*
-RenderPermisjonPeriodeFieldArray.validate = (values) => {
-  // eslint-disable-next-line react/destructuring-assignment
-  const arrayErrors = values.map(({
-    periodeType,
-    periodeFom,
-    periodeTom,
-  }) => {
-    if (!periodeFomError) {
-      periodeTomError = periodeTomError || dateAfterOrEqual(periodeFomDate)(periodeTomDate);
-    }
-    return null;
-  });
-
-};
-*/
 
 RenderPermisjonPeriodeFieldArray.transformValues = (values: FormValues[]) => values.map((value) => {
   if (periodsWithNoMorsAktivitet.includes(value.periodeType)) {

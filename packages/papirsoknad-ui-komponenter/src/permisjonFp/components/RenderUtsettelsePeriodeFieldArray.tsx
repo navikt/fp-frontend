@@ -1,4 +1,6 @@
-import React, { FunctionComponent, ReactElement } from 'react';
+import React, {
+  FunctionComponent, ReactElement, useEffect,
+} from 'react';
 import { useIntl } from 'react-intl';
 import { UseFormGetValues } from 'react-hook-form';
 import { Column, Row } from 'nav-frontend-grid';
@@ -87,6 +89,12 @@ const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps> = ({
     control,
     name: `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}`,
   });
+
+  useEffect(() => {
+    if (fields.length === 0) {
+      append(defaultUtsettelsePeriode);
+    }
+  }, []);
 
   const fieldArrayName = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${UTSETTELSE_PERIODE_FIELD_ARRAY_NAME}`;
   return (
