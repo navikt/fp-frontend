@@ -12,8 +12,6 @@ import RenderUtsettelsePeriodeFieldArray, {
   FormValues as UtsettelsePeriodeFormValues,
 } from './RenderUtsettelsePeriodeFieldArray';
 
-import styles from './permisjonPanel.less';
-
 export type FormValues = {
   skalUtsette?: boolean;
   [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: UtsettelsePeriodeFormValues;
@@ -21,7 +19,6 @@ export type FormValues = {
 
 interface OwnProps {
   readOnly: boolean;
-  visFeilMelding: boolean;
   alleKodeverk: AlleKodeverk;
 }
 
@@ -37,7 +34,6 @@ interface StaticFunctions {
  */
 const PermisjonUtsettelsePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
-  visFeilMelding,
   alleKodeverk,
 }) => {
   const utsettelseReasons = alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE];
@@ -51,7 +47,6 @@ const PermisjonUtsettelsePanel: FunctionComponent<OwnProps> & StaticFunctions = 
       <Element><FormattedMessage id="Registrering.Permisjon.Utsettelse.Title" /></Element>
       <VerticalSpacer sixteenPx />
       <CheckboxField
-        className={visFeilMelding ? styles.showErrorBackground : ''}
         readOnly={readOnly}
         name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalUtsette`}
         label={<FormattedMessage id="Registrering.Permisjon.Utsettelse.UtsettUttaket" />}
@@ -66,30 +61,6 @@ const PermisjonUtsettelsePanel: FunctionComponent<OwnProps> & StaticFunctions = 
     </div>
   );
 };
-
-/*
-PermisjonUtsettelsePanel.validate = (values) => {
-  if (!values || !values.length) {
-    return { _error: isRequiredMessage() };
-  }
-  const otherErrors = values.map(({
-    arsakForUtsettelse,
-    erArbeidstaker,
-  }) => {
-    const arsakForUtsettelseError = required(arsakForUtsettelse);
-    const typeArbeidRequired = arsakForUtsettelse === 'ARBEID';
-    const typeArbeidError = typeArbeidRequired && required(erArbeidstaker);
-    if (arsakForUtsettelseError || typeArbeidError) {
-      return {
-        erArbeidstaker: typeArbeidError,
-        arsakForUtsettelse: arsakForUtsettelseError,
-      };
-    }
-    return null;
-  });
-
-  return hasValidPeriodIncludingOtherErrors(values, otherErrors);
-};*/
 
 PermisjonUtsettelsePanel.buildInitialValues = () => ({
   [UTSETTELSE_PERIODE_FIELD_ARRAY_NAME]: [{}],

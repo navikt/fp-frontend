@@ -60,27 +60,6 @@ const PermisjonOppholdPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   );
 };
 
-/*
-PermisjonOppholdPanel.validate = (values) => {
-  if (!values || !values.length) {
-    return { _error: isRequiredMessage() };
-  }
-  const otherErrors = values.map(({
-    årsak,
-  }) => {
-    const aarsakError = required(årsak);
-    if (aarsakError) {
-      return {
-        årsak: aarsakError,
-      };
-    }
-    return null;
-  });
-
-  return hasValidPeriodIncludingOtherErrors(values, otherErrors);
-};
-*/
-
 PermisjonOppholdPanel.buildInitialValues = () => ({
   [OPPHOLD_PERIODE_FIELD_ARRAY_NAME]: [{}],
   skalHaOpphold: false,

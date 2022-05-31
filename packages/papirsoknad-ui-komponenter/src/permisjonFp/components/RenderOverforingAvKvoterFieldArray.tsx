@@ -1,10 +1,11 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { UseFormGetValues } from 'react-hook-form';
 import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
 import {
   Datepicker, SelectField, PeriodFieldArray, formHooks,
 } from '@navikt/ft-form-hooks';
-import { required, hasValidDate } from '@navikt/ft-form-validators';
+import { required, hasValidDate, dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 
 export const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
 export const OVERFORING_PERIODE_FIELD_ARRAY_NAME = 'overforingsperioder';
@@ -16,6 +17,16 @@ type Periode = {
 }
 
 export type FormValues = Periode[];
+
+const getOverlappingValidator = (
+  getValues: UseFormGetValues<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: { [OVERFORING_PERIODE_FIELD_ARRAY_NAME]: FormValues }}>,
+) => () => {
+  const perioder = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OVERFORING_PERIODE_FIELD_ARRAY_NAME}`);
+  const periodeMap = perioder
+    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
+    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
+  return dateRangesNotOverlapping(periodeMap);
+};
 
 const defaultOverforingPeriode: Periode = {
   periodeFom: '',
@@ -39,7 +50,9 @@ const RenderOverforingAvKvoterFieldArray: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const { control } = formHooks.useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
+  const {
+    control, getValues, trigger, formState: { isSubmitted },
+  } = formHooks.useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
     [OVERFORING_PERIODE_FIELD_ARRAY_NAME]: FormValues
   }}>();
 
@@ -76,16 +89,18 @@ const RenderOverforingAvKvoterFieldArray: FunctionComponent<OwnProps> = ({
                 <Datepicker
                   isReadOnly={readOnly}
                   name={`${fieldArrayName}.${index}.periodeFom`}
-                  validate={[required, hasValidDate]}
+                  validate={[required, hasValidDate, getOverlappingValidator(getValues)]}
                   label={index === 0 ? <FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.fomDato" /> : ''}
+                  onChange={() => (isSubmitted ? trigger() : undefined)}
                 />
               </FlexColumn>
               <FlexColumn>
                 <Datepicker
                   isReadOnly={readOnly}
                   name={`${fieldArrayName}.${index}.periodeTom`}
-                  validate={[required, hasValidDate]}
+                  validate={[required, hasValidDate, getOverlappingValidator(getValues)]}
                   label={index === 0 ? <FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.tomDato" /> : ''}
+                  onChange={() => (isSubmitted ? trigger() : undefined)}
                 />
               </FlexColumn>
               {getRemoveButton && (

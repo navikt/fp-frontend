@@ -1,6 +1,7 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import moment from 'moment';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { UseFormGetValues } from 'react-hook-form';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import AlertStripe from 'nav-frontend-alertstriper';
@@ -11,8 +12,13 @@ import {
   CheckboxField, Datepicker, SelectField, PeriodFieldArray, InputField, formHooks,
 } from '@navikt/ft-form-hooks';
 import {
+  dateAfterOrEqual,
+  dateBeforeOrEqual,
+  dateRangesNotOverlapping,
+  hasValidDate,
   hasValidDecimal,
   maxValue,
+  required,
 } from '@navikt/ft-form-validators';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
 import { KodeverkType } from '@navikt/ft-kodeverk';
@@ -77,6 +83,16 @@ export type FormValues = {
   samtidigUttaksprosent?: number;
 }
 
+const getOverlappingValidator = (
+  getValues: UseFormGetValues<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: { [PERMISJON_PERIODE_FIELD_ARRAY_NAME]: FormValues[] }}>,
+) => () => {
+  const perioder = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}`);
+  const periodeMap = perioder
+    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
+    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
+  return dateRangesNotOverlapping(periodeMap);
+};
+
 interface OwnProps {
   readOnly: boolean;
   sokerErMor: boolean;
@@ -106,7 +122,9 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
     kode,
   }) => kode === '-').length === 0) { morsAktivitetTyper.unshift({ kode: '-', navn: '', kodeverk: '' }); }
 
-  const { control } = formHooks.useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
+  const {
+    control, getValues, trigger, formState: { isSubmitted },
+  } = formHooks.useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
     [PERMISJON_PERIODE_FIELD_ARRAY_NAME]: FormValues[]
   }}>();
   const { fields, remove, append } = formHooks.useFieldArray({
@@ -115,7 +133,6 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
   });
 
   const selectedPeriodeTyper = [''];
-  // TODO  watch(PERMISJON_PERIODE_FIELD_ARRAY_NAME);
 
   return (
     <PeriodFieldArray
@@ -146,6 +163,7 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                         bredde="m"
                         label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeType' }))}
                         selectValues={mapPeriodeTyper(periodeTyper)}
+                        validate={[required]}
                       />
                     </FlexColumn>
                     <FlexColumn>
@@ -153,6 +171,17 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                         isReadOnly={readOnly}
                         name={`${namePart1}.periodeFom`}
                         label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' }))}
+                        validate={[
+                          required,
+                          hasValidDate,
+                          () => {
+                            const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
+                            const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
+                            return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
+                          },
+                          getOverlappingValidator(getValues),
+                        ]}
+                        onChange={() => (isSubmitted ? trigger() : undefined)}
                       />
                     </FlexColumn>
                     <FlexColumn>
@@ -160,6 +189,17 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                         isReadOnly={readOnly}
                         name={`${namePart1}.periodeTom`}
                         label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' }))}
+                        validate={[
+                          required,
+                          hasValidDate,
+                          () => {
+                            const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
+                            const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
+                            return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
+                          },
+                          getOverlappingValidator(getValues),
+                        ]}
+                        onChange={() => (isSubmitted ? trigger() : undefined)}
                       />
                     </FlexColumn>
                     {!sokerErMor && (
@@ -219,14 +259,14 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                     </FlexColumn>
                   </FlexRow>
                   {periodeFomForTidlig && (
-                    <div>
+                    <>
                       <FlexRow wrap>
                         <AlertStripe type="advarsel">
                           <FormattedMessage id="Registrering.Permisjon.PeriodeFomForTidlig" />
                         </AlertStripe>
                       </FlexRow>
                       <VerticalSpacer sixteenPx />
-                    </div>
+                    </>
                   )}
                 </FlexContainer>
               </Column>
@@ -242,51 +282,17 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
 /*
 RenderPermisjonPeriodeFieldArray.validate = (values) => {
   // eslint-disable-next-line react/destructuring-assignment
-  if ((!values || !values.length)) {
-    return { _error: isRequiredMessage() };
-  }
-
-  // eslint-disable-next-line react/destructuring-assignment
   const arrayErrors = values.map(({
     periodeType,
     periodeFom,
     periodeTom,
   }) => {
-    const periodeFomDate = moment(periodeFom, ISO_DATE_FORMAT);
-    const periodeTomDate = moment(periodeTom, ISO_DATE_FORMAT);
-    const periodeFomError = required(periodeFom) || hasValidDate(periodeFom);
-    let periodeTomError = required(periodeTom) || hasValidDate(periodeTom);
-    const periodeTypeError = required(periodeType);
-
     if (!periodeFomError) {
       periodeTomError = periodeTomError || dateAfterOrEqual(periodeFomDate)(periodeTomDate);
-    }
-    if ((periodeFomError || periodeTomError || periodeTypeError)) {
-      return {
-        periodeType: periodeTypeError,
-        periodeFom: periodeFomError,
-        periodeTom: periodeTomError,
-      };
     }
     return null;
   });
 
-  if (arrayErrors.some((errors) => errors !== null)) {
-    return arrayErrors;
-  }
-
-  if (isArrayEmpty(values)) {
-    return null;
-  }
-  // eslint-disable-next-line react/destructuring-assignment
-  const overlapError = dateRangesNotOverlapping(values.map(({
-    periodeFom,
-    periodeTom,
-  }) => [periodeFom, periodeTom]));
-  if (overlapError) {
-    return { _error: overlapError };
-  }
-  return null;
 };
 */
 

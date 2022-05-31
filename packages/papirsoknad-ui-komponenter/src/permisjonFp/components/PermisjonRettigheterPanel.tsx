@@ -23,11 +23,6 @@ interface OwnProps {
 
 // TODO Kvifor ligg dette panelet her og ikkje under ANNEN_FORELDER?
 
-/**
- * AndreYtelserPanel
- *
- * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
- */
 const PermisjonRettigheterPanel: FunctionComponent<OwnProps> = ({
   readOnly,
   denAndreForelderenHarRettPaForeldrepenger,

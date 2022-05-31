@@ -41,10 +41,11 @@ export type { FormValues as DekningsgradFormValues } from './src/dekningsgradFp/
 
 export { default as BekreftelsePanel } from './src/bekreftelseFp/BekreftelsePanel';
 
-export { default as PermisjonRettigheterPanel } from './src/permisjonFp/PermisjonRettigheterPanel';
-export type { FormValues as PermRettigheterFormValues } from './src/permisjonFp/PermisjonRettigheterPanel';
-export { default as PermisjonPanel, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from './src/permisjonFp/PermisjonPanel';
-export type { FormValues as FormValuesPermisjon } from './src/permisjonFp/PermisjonPanel';
+export { default as PermisjonRettigheterPanel } from './src/permisjonFp/components/PermisjonRettigheterPanel';
+export type { FormValues as PermRettigheterFormValues } from './src/permisjonFp/components/PermisjonRettigheterPanel';
+export { TIDSROM_PERMISJON_FORM_NAME_PREFIX } from './src/permisjonFp/components/PermisjonPanel';
+export { default as PermisjonIndex } from './src/permisjonFp/PermisjonIndex';
+export type { FormValues as FormValuesPermisjon } from './src/permisjonFp/components/PermisjonPanel';
 
 export { default as SoknadData } from './src/felles/SoknadData';
 

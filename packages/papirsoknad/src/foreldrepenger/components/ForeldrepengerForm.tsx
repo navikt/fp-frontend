@@ -30,7 +30,7 @@ import {
   BekreftelsePanel,
   DekningsgradIndex,
   PermisjonRettigheterPanel,
-  PermisjonPanel,
+  PermisjonIndex,
   FormValuesPermisjon,
   PermRettigheterFormValues,
   MottattDatoFormValues,
@@ -66,7 +66,7 @@ const buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => ({
   ...InntektsgivendeArbeidPapirsoknadIndex.buildInitialValues(),
   [OMSORG_FORM_NAME_PREFIX]: {},
   ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
-  ...PermisjonPanel.buildInitialValues(),
+  ...PermisjonIndex.buildInitialValues(),
 });
 
 const transformValues = (values: FormValues, andreYtelserKodeverk: KodeverkMedNavn[]) => {
@@ -78,7 +78,7 @@ const transformValues = (values: FormValues, andreYtelserKodeverk: KodeverkMedNa
     ...formValues,
     [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.transformValues(formValues[OMSORG_FORM_NAME_PREFIX]),
     [ANDRE_YTELSER_FORM_NAME_PREFIX]: AndreYtelserPapirsoknadIndex.transformValues(formValues, andreYtelserKodeverk),
-    [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: PermisjonPanel.transformValues(formValues),
+    [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: PermisjonIndex.transformValues(formValues),
   };
 };
 
@@ -153,7 +153,7 @@ const ForeldrepengerForm: FunctionComponent<OwnProps> = ({
         alleKodeverk={alleKodeverk}
         fagsakPersonnummer={fagsakPersonnummer}
       />
-      <PermisjonPanel soknadData={soknadData} readOnly={readOnly} alleKodeverk={alleKodeverk} />
+      <PermisjonIndex foreldreType={soknadData.getForeldreType()} readOnly={readOnly} alleKodeverk={alleKodeverk} />
       <BekreftelsePanel annenForelderInformertRequired={annenForelderInformertRequired} readOnly={readOnly} />
       <SprakPapirsoknadIndex readOnly={readOnly} />
       <LagreSoknadPapirsoknadIndex

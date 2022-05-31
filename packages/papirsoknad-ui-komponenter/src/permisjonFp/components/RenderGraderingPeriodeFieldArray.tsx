@@ -1,5 +1,6 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import moment from 'moment/moment';
+import { UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
@@ -7,7 +8,10 @@ import AlertStripe from 'nav-frontend-alertstriper';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
-import { hasValidDecimal, maxValue, required } from '@navikt/ft-form-validators';
+import {
+  dateAfterOrEqual, dateBeforeOrEqual, dateRangesNotOverlapping, hasValidDate,
+  hasValidDecimal, hasValidFodselsnummer, hasValidInteger, maxLengthOrFodselsnr, maxValue, required,
+} from '@navikt/ft-form-validators';
 import {
   CheckboxField, Datepicker, InputField, SelectField, PeriodFieldArray, formHooks,
 } from '@navikt/ft-form-hooks';
@@ -21,6 +25,8 @@ import styles from './renderGraderingPeriodeFieldArray.less';
 
 export const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
 export const GRADERING_PERIODE_FIELD_ARRAY_NAME = 'graderingPeriode';
+
+const maxLength9OrFodselsnr = maxLengthOrFodselsnr(9);
 
 type GraderingPeriode = {
   periodeFom: string;
@@ -36,6 +42,16 @@ type GraderingPeriode = {
 }
 
 export type FormValues = GraderingPeriode[];
+
+const getOverlappingValidator = (
+  getValues: UseFormGetValues<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: { [GRADERING_PERIODE_FIELD_ARRAY_NAME]: FormValues }}>,
+) => () => {
+  const perioder = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}`);
+  const periodeMap = perioder
+    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
+    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
+  return dateRangesNotOverlapping(periodeMap);
+};
 
 const defaultGraderingPeriode: GraderingPeriode = {
   periodeFom: '',
@@ -89,7 +105,9 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
-  const { watch, control } = formHooks.useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
+  const {
+    watch, control, getValues, trigger, formState: { isSubmitted },
+  } = formHooks.useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: {
     [GRADERING_PERIODE_FIELD_ARRAY_NAME]: FormValues
   }}>();
 
@@ -125,18 +143,41 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                       bredde="s"
                       selectValues={mapKvoter(graderingKvoter)}
                       label={intl.formatMessage({ id: 'Registrering.Permisjon.Gradering.Periode' })}
+                      validate={[required]}
                     />
                   </FlexColumn>
                   <FlexColumn>
                     <Datepicker
                       label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' })}
                       name={`${namePart1}.periodeFom`}
+                      validate={[
+                        required,
+                        hasValidDate,
+                        () => {
+                          const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
+                          const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
+                          return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
+                        },
+                        getOverlappingValidator(getValues),
+                      ]}
+                      onChange={() => (isSubmitted ? trigger() : undefined)}
                     />
                   </FlexColumn>
                   <FlexColumn>
                     <Datepicker
                       label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' })}
                       name={`${namePart1}.periodeTom`}
+                      validate={[
+                        required,
+                        hasValidDate,
+                        () => {
+                          const fomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
+                          const tomVerdi = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeTom`);
+                          return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
+                        },
+                        getOverlappingValidator(getValues),
+                      ]}
+                      onChange={() => (isSubmitted ? trigger() : undefined)}
                     />
                   </FlexColumn>
                   <FlexColumn className={styles.prosentHeader}>
@@ -155,6 +196,17 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                       label={intl.formatMessage({ id: 'Registrering.Permisjon.Orgnr' })}
                       name={`${namePart1}.arbeidsgiverIdentifikator`}
                       bredde="S"
+                      validate={[
+                        (arbeidsgiverIdentifikator) => {
+                          const arbeidsgiverIdentifikatorRequired = getValues(
+                            `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}.${index}.arbeidskategoriType`,
+                          ) === arbeidskategori.ARBEIDSTAKER;
+                          return arbeidsgiverIdentifikatorRequired ? required(arbeidsgiverIdentifikator) : undefined;
+                        },
+                        hasValidInteger,
+                        (arbeidsgiverIdentifikator) => (arbeidsgiverIdentifikator.length === 11
+                          ? hasValidFodselsnummer(arbeidsgiverIdentifikator) : maxLength9OrFodselsnr(arbeidsgiverIdentifikator)),
+                      ]}
                     />
                   </FlexColumn>
                 </FlexRow>
@@ -166,6 +218,7 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                       bredde="m"
                       selectValues={mapArbeidskategori(arbeidskategoriTyper)}
                       validate={[required]}
+                      onChange={() => (isSubmitted ? trigger() : undefined)}
                     />
                   </FlexColumn>
                   <FlexColumn>
@@ -207,7 +260,11 @@ const RenderGraderingPeriodeFieldArray: FunctionComponent<OwnProps> = ({
                       <InputField
                         name={`${namePart1}.samtidigUttaksprosent`}
                         bredde="S"
-                        validate={[hasValidDecimal, maxValue100]}
+                        validate={[
+                          hasValidDecimal,
+                          maxValue100,
+                          (samtidigUttaksprosent) => (harSamtidigUttak ? required(samtidigUttaksprosent) : undefined),
+                        ]}
                         label={intl.formatMessage({ id: 'Registrering.Permisjon.SamtidigUttaksprosent' })}
                         normalizeOnBlur={(value: string) => (Number.isNaN(value) ? value : parseFloat(value).toFixed(2))}
                       />

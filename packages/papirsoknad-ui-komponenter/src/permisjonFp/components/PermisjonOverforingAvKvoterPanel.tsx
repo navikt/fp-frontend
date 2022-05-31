@@ -6,17 +6,14 @@ import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
 
-import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
+import ForeldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import overforingArsak from '@fpsak-frontend/kodeverk/src/overforingArsak';
 
-import SoknadData from '../felles/SoknadData';
 import RenderOverforingAvKvoterFieldArray, {
   FormValues as KvoterPerioderFormValues,
   TIDSROM_PERMISJON_FORM_NAME_PREFIX,
   OVERFORING_PERIODE_FIELD_ARRAY_NAME,
 } from './RenderOverforingAvKvoterFieldArray';
-
-import styles from './permisjonPanel.less';
 
 const getText = (intl: IntlShape, kode: string, navn: string): string => {
   if (kode === overforingArsak.INSTITUSJONSOPPHOLD_ANNEN_FORELDER) {
@@ -41,9 +38,8 @@ export type FormValues = {
 };
 
 interface OwnProps {
-  soknadData: SoknadData;
+  foreldreType: string;
   readOnly: boolean;
-  visFeilMelding: boolean;
   alleKodeverk: AlleKodeverk;
 }
 
@@ -58,15 +54,14 @@ interface StaticFunctions {
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent.
  */
 const PermisjonOverforingAvKvoterPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
-  soknadData,
+  foreldreType,
   alleKodeverk,
   readOnly,
-  visFeilMelding,
 }) => {
   const intl = useIntl();
 
   const overtaKvoteReasons = alleKodeverk[KodeverkType.OVERFOERING_AARSAK_TYPE];
-  const selectValues = mapArsaker(overtaKvoteReasons, soknadData.getForeldreType() === foreldreType.MOR, intl);
+  const selectValues = mapArsaker(overtaKvoteReasons, foreldreType === ForeldreType.MOR, intl);
 
   const { watch } = formHooks.useFormContext<{[TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
   const skalOvertaKvote = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalOvertaKvote`) || false;
@@ -76,7 +71,6 @@ const PermisjonOverforingAvKvoterPanel: FunctionComponent<OwnProps> & StaticFunc
       <Element><FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.OvertaKvoten" /></Element>
       <VerticalSpacer sixteenPx />
       <CheckboxField
-        className={visFeilMelding ? styles.showErrorBackground : ''}
         readOnly={readOnly}
         name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalOvertaKvote`}
         label={<FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.OvertaKvote" />}
