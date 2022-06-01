@@ -181,11 +181,11 @@ describe('<PermisjonIndex>', () => {
     userEvent.paste(tomDatoInput, '2022.06.20');
     fireEvent.blur(tomDatoInput);
 
-    const prosentandelInput = utils.getAllByRole('textbox')[4];
-    userEvent.paste(prosentandelInput, '8023232323');
+    const prosentandelInput = utils.getAllByRole('textbox')[3];
+    userEvent.type(prosentandelInput, '8023232323');
 
     const virksomhetsnummerInput = utils.getByLabelText('Virksomhetsnummer');
-    userEvent.paste(virksomhetsnummerInput, '8023232323');
+    userEvent.paste(virksomhetsnummerInput, '802323232');
 
     userEvent.selectOptions(utils.getByLabelText('Type arbeid'), 'ARBEIDSTAKER');
 
@@ -195,6 +195,8 @@ describe('<PermisjonIndex>', () => {
 
     const prosentInput = utils.getByLabelText('Prosentandel uttak');
     userEvent.paste(prosentInput, '100');
+
+    await waitFor(() => expect(screen.queryByText('Feltet må fylles ut')).not.toBeInTheDocument());
 
     userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
