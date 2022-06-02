@@ -91,7 +91,7 @@
     "@typescript-eslint/eslint-plugin": "5.26.0",
     "@typescript-eslint/parser": "5.26.0",
     "@wojtekmaj/enzyme-adapter-react-17": "0.6.7",
-    "axios-mock-adapter": "1.20.0",
+    "axios-mock-adapter": "1.21.1",
     "babel-jest": "27.5.1",
     "babel-loader": "8.2.5",
     "body-parser": "1.20.0",
