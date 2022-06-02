@@ -155,7 +155,7 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
                 bredde="XS"
                 validate={familieHendelseType === fht.ADOPSJON
                   ? [required, hasValidInteger, minAntall, maxAntall]
-                  : [hasValidInteger, minAntall, maxAntall]}
+                  : [hasValidInteger, (value) => (value ? minAntall(value) : undefined), (value) => (value ? maxAntall(value) : undefined)]}
               />
             </Column>
           </Row>
