@@ -1,22 +1,29 @@
-import React, { FunctionComponent, useCallback, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import React, {
+  FunctionComponent, useCallback, useEffect, useState,
+} from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { Image, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { AlleKodeverk } from '@navikt/ft-types';
-import { formHooks, SkjemaGruppeMedFeilviser } from '@navikt/ft-form-hooks';
+import { formHooks } from '@navikt/ft-form-hooks';
 
 import addCircleIcon from '@fpsak-frontend/assets/images/add-circle.svg';
 import removeIcon from '@fpsak-frontend/assets/images/remove.svg';
 
+import { SkjemaGruppe } from 'nav-frontend-skjema';
 import RegistrerVirksomhetModalForm, { FormValues as ModalFormValues } from './RegistrerVirksomhetModalForm';
 
 import styles from './registrerVirksomhetPanel.less';
 
 export const EGEN_VIRKSOMHET_NAME_PREFIX = 'egenVirksomhet';
 
+type VirtueltValideringsfeilFelt = {
+  notRegisteredInput?: string;
+}
+
 export type FormValues = {
-  virksomheter: ModalFormValues[]
+  virksomheter: ModalFormValues[];
 }
 
 interface OwnProps {
@@ -36,9 +43,12 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({
   readOnly = false,
   alleKodeverk,
 }) => {
+  const intl = useIntl();
   const [virksomhetIndex, setVirksomhetIndex] = useState<number>();
 
-  const { control, formState } = formHooks.useFormContext<{ [EGEN_VIRKSOMHET_NAME_PREFIX]: FormValues }>();
+  const {
+    control, setError, formState, clearErrors,
+  } = formHooks.useFormContext<{ [EGEN_VIRKSOMHET_NAME_PREFIX]: FormValues & VirtueltValideringsfeilFelt}>();
   const { fields, remove, append } = formHooks.useFieldArray({
     control,
     name: `${EGEN_VIRKSOMHET_NAME_PREFIX}.virksomheter`,
@@ -63,12 +73,21 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({
     lukkModal();
   }, [append, lukkModal]);
 
+  useEffect(() => {
+    if (fields.length === 0 && formState.isSubmitted) {
+      setError(`${EGEN_VIRKSOMHET_NAME_PREFIX}.notRegisteredInput`, {
+        type: 'custom',
+        message: intl.formatMessage({ id: 'Registrering.RegistrerVirksomhetPanel.ArrayMinLength' }),
+      });
+    }
+    if (fields.length > 0) {
+      clearErrors(`${EGEN_VIRKSOMHET_NAME_PREFIX}.notRegisteredInput`);
+    }
+  }, [fields.length, formState.isSubmitted]);
+
   return (
     <div className={styles.fieldsList}>
-      <SkjemaGruppeMedFeilviser
-        name="feil"
-        errorMessage={formState.errors && (formState.isDirty || !formState.isSubmitSuccessful) ? formState.errors : null}
-      >
+      <SkjemaGruppe feil={formState.errors[EGEN_VIRKSOMHET_NAME_PREFIX]?.notRegisteredInput?.message}>
         {fields.length > 0 && (
           <React.Fragment key={1}>
             <Row key="VirksomhetHeader">
@@ -132,7 +151,7 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({
           />
           <Undertekst className={styles.imageText}><FormattedMessage id="Registrering.RegistrerVirksomhetPanel.Add" /></Undertekst>
         </div>
-      </SkjemaGruppeMedFeilviser>
+      </SkjemaGruppe>
       {virksomhetIndex !== undefined && (
         <RegistrerVirksomhetModalForm
           showModal

@@ -149,8 +149,8 @@
   "Registrering.VirksomhetIdentifikasjonPanel.Yes": "Ja",
   "Registrering.VirksomhetIdentifikasjonPanel.OrganizationNumber": "Virksomhetsnummer",
   "Registrering.VirksomhetIdentifikasjonPanel.Country": "Hvilket land er virksomheten registrert i?",
-  "Registrering.VirksomhetIdentifikasjonPanel.periodeFom": "Til og med",
-  "Registrering.VirksomhetIdentifikasjonPanel.periodeTom": "Fra og med",
+  "Registrering.VirksomhetIdentifikasjonPanel.periodeFom": "Fra og med",
+  "Registrering.VirksomhetIdentifikasjonPanel.periodeTom": "Til og med",
 
   "Registrering.EgenVirksomhet.Title": "Egen næringsvirksomhet",
   "Registrering.EgenVirksomhet.Yes": "Ja, søker har arbeidet i egen næringsvirksomhet i løpet av de 10 siste månedene",
@@ -158,6 +158,7 @@
   
   "Registrering.RegistrerVirksomhetPanel.Add": "Legg til næringsvirksomhet",
   "Registrering.RegistrerVirksomhetPanel.Name": "Navn på virksomhet",
+  "Registrering.RegistrerVirksomhetPanel.ArrayMinLength": "Listen må ha lengde større enn 1",
 
   "Registrering.RegistrerVirksomhetModalForm.ModalDescription": "Legg til næringsvirksomhet",
   "Registrering.RegistrerVirksomhetModalForm.Title": "Egen næringsvirksomhet",

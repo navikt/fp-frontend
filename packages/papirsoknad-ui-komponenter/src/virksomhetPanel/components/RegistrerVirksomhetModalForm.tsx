@@ -48,6 +48,7 @@ const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>({
+    mode: 'onChange',
     defaultValues: virksomhet,
   });
 
@@ -63,7 +64,6 @@ const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps> = ({
       <div className={styles.form}>
         <Form
           formMethods={formMethods}
-          onSubmit={onSubmit}
         >
           <Undertittel><FormattedMessage id="Registrering.RegistrerVirksomhetModalForm.Title" /></Undertittel>
           <VerticalSpacer twentyPx />
@@ -74,13 +74,20 @@ const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps> = ({
           <VirksomhetTypeNaringPanel
             readOnly={readOnly}
             alleKodeverk={alleKodeverk}
-            hasError={!!formMethods.formState.errors}
           />
           <VirksomhetStartetEndretPanel readOnly={readOnly} />
           <VirksomhetRegnskapPanel readOnly={readOnly} />
           <VirksomhetRelasjonPanel readOnly={readOnly} />
           <VerticalSpacer sixteenPx />
           <Hovedknapp
+            htmlType="button"
+            onClick={async () => {
+              const isValid = await formMethods.trigger();
+              if (isValid) {
+                onSubmit(formMethods.getValues());
+              }
+              return Promise.resolve();
+            }}
             disabled={readOnly}
             className={styles.savebutton}
             mini
@@ -101,14 +108,5 @@ const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps> = ({
     </Modal>
   );
 };
-
-/* const validate = (values: any) => {
-  const errors1 = VirksomhetIdentifikasjonPanel.validate(values);
-  const errors2 = VirksomhetTypeNaringPanel.validate(values);
-  return {
-    ...errors1,
-    ...errors2,
-  };
-}; */
 
 export default RegistrerVirksomhetModalForm;

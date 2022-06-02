@@ -7,7 +7,7 @@ import {
 } from '@navikt/ft-form-hooks';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
-  dateBeforeOrEqualToToday, hasValidDate, hasValidInteger, hasValidOrgNumber, required,
+  dateBeforeOrEqualToToday, hasValidDate, hasValidInteger, hasValidOrgNumber, required, validPeriodeFomTom,
 } from '@navikt/ft-form-validators';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
 import { KodeverkType } from '@navikt/ft-kodeverk';
@@ -35,7 +35,7 @@ export type FormValues = {
 /**
  * VirksomhetIdentifikasjonPanel
  *
- * Presentasjonskomponent. Komponenten vises som del av skjermbildet for registrering av
+ * Komponenten vises som del av skjermbildet for registrering av
  * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
 const VirksomhetIdentifikasjonPanel: FunctionComponent<OwnProps> = ({
@@ -45,7 +45,7 @@ const VirksomhetIdentifikasjonPanel: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
   const sortedCountriesByName = alleKodeverk[KodeverkType.LANDKODER].slice().sort((a, b) => a.navn.localeCompare(b.navn));
 
-  const { watch } = formHooks.useFormContext<FormValues>();
+  const { watch, getValues } = formHooks.useFormContext<FormValues>();
 
   const virksomhetRegistrertINorge = watch('virksomhetRegistrertINorge');
 
@@ -99,8 +99,9 @@ const VirksomhetIdentifikasjonPanel: FunctionComponent<OwnProps> = ({
               />
             </Column>
           </Row>
+          <VerticalSpacer sixteenPx />
           <Row>
-            <Column xs="3">
+            <Column xs="4">
               <Datepicker
                 isReadOnly={readOnly}
                 validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
@@ -111,7 +112,7 @@ const VirksomhetIdentifikasjonPanel: FunctionComponent<OwnProps> = ({
             <Column xs="3">
               <Datepicker
                 isReadOnly={readOnly}
-                validate={[hasValidDate]}
+                validate={[hasValidDate, (fomDato) => validPeriodeFomTom(getValues('fom'), fomDato)]}
                 name="tom"
                 label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeTom' })}
               />
@@ -122,16 +123,5 @@ const VirksomhetIdentifikasjonPanel: FunctionComponent<OwnProps> = ({
     </>
   );
 };
-
-/*
-VirksomhetIdentifikasjonPanel.validate = (values: FormValues) => {
-  const errors = {};
-  if (values && values.fom && values.tom) {
-    return {
-      fom: validPeriodeFomTom(values.fom, values.tom),
-    };
-  }
-  return errors;
-};*/
 
 export default VirksomhetIdentifikasjonPanel;

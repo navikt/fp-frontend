@@ -10,8 +10,6 @@ import RegistrerVirksomhetPanel, { EGEN_VIRKSOMHET_NAME_PREFIX, FormValues as Vi
 
 import styles from './egenVirksomhetPanel.less';
 
-// const arrayMinLength1 = arrayMinLength(1);
-
 export type FormValues = {
   harArbeidetIEgenVirksomhet: boolean;
 } & VirksomhetFormValues;
@@ -53,7 +51,6 @@ const EgenVirksomhetPanel: FunctionComponent<OwnProps> = ({
         </div>
         {harArbeidetIEgenVirksomhet && (
           <RegistrerVirksomhetPanel
-            // validate={[arrayMinLength1]}
             readOnly={readOnly}
             alleKodeverk={alleKodeverk}
           />
