@@ -97,17 +97,4 @@ const EngangsstonadForm: FunctionComponent<OwnProps> = ({
   );
 };
 
-/* const sokerPersonnummer = ownProps.fagsakPersonnummer;
-const validate = getValidation(ownProps.soknadData, sokerPersonnummer);
-
-const getValidation = (soknadData: SoknadData, sokerPersonnummer: string): any => {
-  if (soknadData.getFamilieHendelseType() === familieHendelseType.FODSEL) {
-    return (values: FormValuesFodsel) => RegistreringFodselGrid.validate(values, sokerPersonnummer, soknadData.familieHendelseType);
-  }
-  if (soknadData.getFamilieHendelseType() === familieHendelseType.ADOPSJON) {
-    return (values: FormValuesAdopsjon) => RegistreringAdopsjonOgOmsorgGrid.validate(values, sokerPersonnummer, soknadData.familieHendelseType);
-  }
-  return null;
-}; */
-
 export default EngangsstonadForm;

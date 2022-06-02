@@ -165,36 +165,4 @@ const ForeldrepengerForm: FunctionComponent<OwnProps> = ({
   );
 };
 
-/*
-const getValidation = (soknadData: SoknadData, andreYtelser: KodeverkMedNavn[], sokerPersonnummer: string): any => {
-  if (soknadData.getFamilieHendelseType() === familieHendelseType.FODSEL) {
-    return (values: FormValues) => ({
-      ...AndreYtelserPapirsoknadIndex.validate(values, andreYtelser),
-      ...InntektsgivendeArbeidPapirsoknadIndex.validate(values),
-      ...FrilansPapirsoknadIndex.validate(values),
-      ...OppholdINorgePapirsoknadIndex.validate(values),
-      ...FodselPapirsoknadIndex.validate(values),
-      [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.validate(
-        soknadData.familieHendelseType, values.foedselsDato, values[OMSORG_FORM_NAME_PREFIX],
-      ),
-      ...PermisjonPanel.validate(values),
-      [ANNEN_FORELDER_FORM_NAME_PREFIX]: AnnenForelderPapirsoknadIndex.validate(sokerPersonnummer, values[ANNEN_FORELDER_FORM_NAME_PREFIX]),
-    });
-  }
-  if (soknadData.getFamilieHendelseType() === familieHendelseType.ADOPSJON) {
-    return (values: FormValues) => ({
-      ...AndreYtelserPapirsoknadIndex.validate(values, andreYtelser),
-      ...InntektsgivendeArbeidPapirsoknadIndex.validate(values),
-      ...FrilansPapirsoknadIndex.validate(values),
-      ...OppholdINorgePapirsoknadIndex.validate(values),
-      [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.validate(
-        soknadData.familieHendelseType, values.foedselsDato, values[OMSORG_FORM_NAME_PREFIX],
-      ),
-      ...PermisjonPanel.validate(values),
-      [ANNEN_FORELDER_FORM_NAME_PREFIX]: AnnenForelderPapirsoknadIndex.validate(sokerPersonnummer, values[ANNEN_FORELDER_FORM_NAME_PREFIX]),
-    });
-  }
-  return null;
-}; */
-
 export default ForeldrepengerForm;

@@ -140,13 +140,4 @@ const SvangerskapspengerForm: FunctionComponent<OwnProps> = ({
   );
 };
 
-/*
-const getValidation = (andreYtelser: KodeverkMedNavn[]) => (values: FormValues): any => ({
-  ...AndreYtelserPapirsoknadIndex.validate(values, andreYtelser),
-  ...InntektsgivendeArbeidPapirsoknadIndex.validate(values),
-  ...FrilansPapirsoknadIndex.validate(values),
-  ...OppholdINorgePapirsoknadIndex.validate(values),
-});
-*/
-
 export default SvangerskapspengerForm;
