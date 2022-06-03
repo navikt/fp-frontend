@@ -15,7 +15,7 @@ import styles from './frilansPerioderFieldArray.less';
 const FRILANS_NAME_PREFIX = 'frilans';
 
 export type FormValues = {
-  perioder: {
+  perioder?: {
     periodeFom: string;
     periodeTom?: string;
   }[],

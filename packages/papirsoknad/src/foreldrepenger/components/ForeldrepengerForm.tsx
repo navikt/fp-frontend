@@ -44,6 +44,7 @@ import {
 
 const ANNEN_FORELDER_FORM_NAME_PREFIX = 'annenForelder';
 const OMSORG_FORM_NAME_PREFIX = 'omsorg';
+const FRILANS_NAME_PREFIX = 'frilans';
 
 type FormValues = {
   rettigheter?: string;
@@ -75,10 +76,11 @@ const transformValues = (values: FormValues, andreYtelserKodeverk: KodeverkMedNa
     formValues = omitOne(values, 'rettigheter');
   }
   return {
-    ...formValues,
+    ...OppholdINorgePapirsoknadIndex.transformValues(formValues),
     [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.transformValues(formValues[OMSORG_FORM_NAME_PREFIX]),
     [ANDRE_YTELSER_FORM_NAME_PREFIX]: AndreYtelserPapirsoknadIndex.transformValues(formValues, andreYtelserKodeverk),
     [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: PermisjonIndex.transformValues(formValues),
+    [FRILANS_NAME_PREFIX]: FrilansPapirsoknadIndex.transformValues(formValues[FRILANS_NAME_PREFIX]),
   };
 };
 

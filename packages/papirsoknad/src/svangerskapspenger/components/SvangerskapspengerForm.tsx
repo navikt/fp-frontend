@@ -27,6 +27,8 @@ import {
 } from '@fpsak-frontend/papirsoknad-ui-komponenter';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 
+const FRILANS_NAME_PREFIX = 'frilans';
+
 type FormValues = AndreYtelserFormValue
   & IArbeidFormValues
   & FrilansFormValues
@@ -83,10 +85,11 @@ const transformTilretteleggingsArbeidsforhold = (
   return transformerteVerdier;
 };
 
-const transformValues = (values: FormValues): any => ({
-  ...values,
-  foedselsDato: [values.foedselsDato],
-  tilretteleggingArbeidsforhold: transformTilretteleggingsArbeidsforhold(values),
+const transformValues = (formValues: FormValues): any => ({
+  ...OppholdINorgePapirsoknadIndex.transformValues(formValues),
+  foedselsDato: [formValues.foedselsDato],
+  tilretteleggingArbeidsforhold: transformTilretteleggingsArbeidsforhold(formValues),
+  [FRILANS_NAME_PREFIX]: FrilansPapirsoknadIndex.transformValues(formValues[FRILANS_NAME_PREFIX]),
 });
 
 interface OwnProps {

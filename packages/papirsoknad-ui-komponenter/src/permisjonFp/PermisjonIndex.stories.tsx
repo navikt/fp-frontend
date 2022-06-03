@@ -10,6 +10,7 @@ import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import ForeldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 
 import PermisjonIndex from './PermisjonIndex';
+import { TIDSROM_PERMISJON_FORM_NAME_PREFIX, FormValues } from './components/PermisjonPanel';
 
 export default {
   title: 'papirsoknad/ui-komponenter/permisjon',
@@ -23,12 +24,14 @@ const Template: Story<{
   submitCallback,
   foreldreType,
 }) => {
-  const formMethods = useForm();
+  const formMethods = useForm({
+    defaultValues: PermisjonIndex.buildInitialValues(),
+  });
 
   return (
     <Form
       formMethods={formMethods}
-      onSubmit={submitCallback}
+      onSubmit={(values: FormValues) => submitCallback({ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: PermisjonIndex.transformValues(values) })}
     >
       <PermisjonIndex
         readOnly={false}

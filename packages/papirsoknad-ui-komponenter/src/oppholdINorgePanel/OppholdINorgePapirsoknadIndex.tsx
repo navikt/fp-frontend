@@ -18,6 +18,7 @@ interface OwnProps {
 
 interface StaticFunctions {
   buildInitialValues: () => FormValues;
+  transformValues?: (formValues: FormValues) => FormValues;
 }
 
 const OppholdINorgePapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = ({
@@ -36,6 +37,8 @@ const OppholdINorgePapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctio
   </RawIntlProvider>
 );
 
-OppholdINorgePapirsoknadIndex.buildInitialValues = (): FormValues => OppholdINorgePanel.buildInitialValues();
+OppholdINorgePapirsoknadIndex.buildInitialValues = OppholdINorgePanel.buildInitialValues;
+
+OppholdINorgePapirsoknadIndex.transformValues = OppholdINorgePanel.transformValues;
 
 export default OppholdINorgePapirsoknadIndex;

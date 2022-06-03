@@ -1,28 +1,37 @@
-import React, { FunctionComponent } from 'react';
-import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import React, { FunctionComponent, useEffect } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Element, Undertittel } from 'nav-frontend-typografi';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { CheckboxField, formHooks, SkjemaGruppeMedFeilviser } from '@navikt/ft-form-hooks';
+import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { AlleKodeverk } from '@navikt/ft-types';
 
 import ForeldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 
 import { UseFormGetValues } from 'react-hook-form';
+import { SkjemaGruppe } from 'nav-frontend-skjema';
+
 import PermisjonUtsettelsePanel, { FormValues as FormValuesUtsettelse } from './PermisjonUtsettelsePanel';
 import PermisjonGraderingPanel, { FormValues as FormValuesGradering } from './PermisjonGraderingPanel';
 import { GRADERING_PERIODE_FIELD_ARRAY_NAME } from './RenderGraderingPeriodeFieldArray';
 import PermisjonOverforingAvKvoterPanel, { FormValues as FormValuesOverforing } from './PermisjonOverforingAvKvoterPanel';
 import RenderPermisjonPeriodeFieldArray, { PERMISJON_PERIODE_FIELD_ARRAY_NAME, FormValues as FormValuesPermisjon } from './RenderPermisjonPeriodeFieldArray';
 import PermisjonOppholdPanel, { FormValues as FormValuesOpphold } from './PermisjonOppholdPanel';
+import { UTSETTELSE_PERIODE_FIELD_ARRAY_NAME } from './RenderUtsettelsePeriodeFieldArray';
+import { OVERFORING_PERIODE_FIELD_ARRAY_NAME } from './RenderOverforingAvKvoterFieldArray';
+import { OPPHOLD_PERIODE_FIELD_ARRAY_NAME } from './RenderOppholdPeriodeFieldArray';
 
 import styles from './permisjonPanel.less';
 
 export const TIDSROM_PERMISJON_FORM_NAME_PREFIX = 'tidsromPermisjon';
 
+type VirtuellFeilType = {
+  notRegisteredInput?: string;
+};
+
 type TidsromPermisjon = {
   fulltUttak: boolean;
   [PERMISJON_PERIODE_FIELD_ARRAY_NAME]?: FormValuesPermisjon[];
-} & FormValuesUtsettelse & FormValuesOpphold & FormValuesOverforing & FormValuesGradering;
+} & FormValuesUtsettelse & FormValuesOpphold & FormValuesOverforing & FormValuesGradering & VirtuellFeilType;
 
 export type FormValues = {
   [TIDSROM_PERMISJON_FORM_NAME_PREFIX]?: TidsromPermisjon;
@@ -30,17 +39,12 @@ export type FormValues = {
 
 const getIsRequired = (
   getValues: UseFormGetValues<FormValues>,
-  intl: IntlShape,
-) => () => {
+) => {
   const fulltUttak = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`) || false;
   const skalGradere = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalGradere`) || false;
   const skalUtsette = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalUtsette`) || false;
   const skalOvertaKvote = getValues(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalOvertaKvote`) || false;
-
-  if (!fulltUttak && !skalGradere && !skalUtsette && !skalOvertaKvote) {
-    return intl.formatMessage({ id: 'PermisjonPanel.MinstEnPeriodeRequired' });
-  }
-  return undefined;
+  return !fulltUttak && !skalGradere && !skalUtsette && !skalOvertaKvote;
 };
 
 interface OwnProps {
@@ -66,16 +70,28 @@ const PermisjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
 }) => {
   const intl = useIntl();
 
-  const { watch, getValues } = formHooks.useFormContext<FormValues>();
+  const {
+    watch, setError, clearErrors, getValues, formState,
+  } = formHooks.useFormContext<FormValues>();
   const fulltUttak = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`) || false;
+
+  const isError = getIsRequired(getValues);
+  useEffect(() => {
+    if (isError && formState.isSubmitted) {
+      setError(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.notRegisteredInput`, {
+        type: 'custom',
+        message: intl.formatMessage({ id: 'PermisjonPanel.MinstEnPeriodeRequired' }),
+      });
+    }
+    if (!isError && formState.isSubmitted) {
+      clearErrors(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.notRegisteredInput`);
+    }
+  }, [isError, formState.isSubmitted]);
 
   return (
     <BorderBox>
       <div className={styles.flexContainer}>
-        <SkjemaGruppeMedFeilviser
-          name="felles-validering"
-          validate={[getIsRequired(getValues, intl)]}
-        >
+        <SkjemaGruppe feil={formState.errors[TIDSROM_PERMISJON_FORM_NAME_PREFIX]?.notRegisteredInput?.message}>
           <Undertittel><FormattedMessage id="Registrering.Permisjon.Title" /></Undertittel>
           <VerticalSpacer sixteenPx />
           <VerticalSpacer eightPx />
@@ -111,7 +127,7 @@ const PermisjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
           />
           <VerticalSpacer twentyPx />
           <PermisjonOppholdPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
-        </SkjemaGruppeMedFeilviser>
+        </SkjemaGruppe>
       </div>
     </BorderBox>
   );
@@ -128,6 +144,23 @@ PermisjonPanel.transformValues = (values: FormValues) => {
   if (values.tidsromPermisjon.skalGradere && graderingdata) {
     newValues[GRADERING_PERIODE_FIELD_ARRAY_NAME] = PermisjonGraderingPanel.transformValues(permisjonValues);
   }
+
+  if (!values.tidsromPermisjon.fulltUttak) {
+    newValues[PERMISJON_PERIODE_FIELD_ARRAY_NAME] = undefined;
+  }
+  if (!values.tidsromPermisjon.skalGradere) {
+    newValues[GRADERING_PERIODE_FIELD_ARRAY_NAME] = undefined;
+  }
+  if (!values.tidsromPermisjon.skalUtsette) {
+    newValues[UTSETTELSE_PERIODE_FIELD_ARRAY_NAME] = undefined;
+  }
+  if (!values.tidsromPermisjon.skalOvertaKvote) {
+    newValues[OVERFORING_PERIODE_FIELD_ARRAY_NAME] = undefined;
+  }
+  if (!values.tidsromPermisjon.skalHaOpphold) {
+    newValues[OPPHOLD_PERIODE_FIELD_ARRAY_NAME] = undefined;
+  }
+
   return newValues;
 };
 

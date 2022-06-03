@@ -29,15 +29,6 @@ describe('<FrilansPapirsoknadIndex>', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       frilans: {
         harSokerPeriodeMedFrilans: false,
-        oppdragPerioder: [{
-          fomDato: '',
-          oppdragsgiver: '',
-          tomDato: '',
-        }],
-        perioder: [{
-          periodeFom: '',
-          periodeTom: '',
-        }],
       },
     });
   });

@@ -33,17 +33,11 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      fremtidigeOppholdUtenlands: [{
-        periodeFom: undefined,
-        periodeTom: undefined,
-      }],
+      fremtidigeOppholdUtenlands: undefined,
       harFremtidigeOppholdUtenlands: false,
       harTidligereOppholdUtenlands: false,
       oppholdINorge: true,
-      tidligereOppholdUtenlands: [{
-        periodeFom: undefined,
-        periodeTom: undefined,
-      }],
+      tidligereOppholdUtenlands: undefined,
     });
   });
 
@@ -109,10 +103,7 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      fremtidigeOppholdUtenlands: [{
-        periodeFom: undefined,
-        periodeTom: undefined,
-      }],
+      fremtidigeOppholdUtenlands: undefined,
       harFremtidigeOppholdUtenlands: false,
       harTidligereOppholdUtenlands: true,
       oppholdINorge: true,
@@ -183,10 +174,7 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
       harFremtidigeOppholdUtenlands: true,
       harTidligereOppholdUtenlands: false,
       oppholdINorge: true,
-      tidligereOppholdUtenlands: [{
-        periodeFom: undefined,
-        periodeTom: undefined,
-      }],
+      tidligereOppholdUtenlands: undefined,
     });
   });
 });

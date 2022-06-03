@@ -30,8 +30,8 @@ type Periode = {
 }
 
 export type FormValues = {
-  oppdragPerioder: OppdragPeriode[];
-  perioder: Periode[];
+  oppdragPerioder?: OppdragPeriode[];
+  perioder?: Periode[];
 }
 
 const getValue = (

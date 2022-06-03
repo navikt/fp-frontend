@@ -85,7 +85,7 @@ const RegistreringAdopsjonOgOmsorgGrid: FunctionComponent<OwnProps> & StaticFunc
 );
 
 RegistreringAdopsjonOgOmsorgGrid.transformValues = (values: FormValues): TransformedFormValues => ({
-  ...values,
+  ...OppholdINorgePapirsoknadIndex.transformValues(values),
   [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values[OMSORG_FORM_NAME_PREFIX]),
 });
 
@@ -93,13 +93,5 @@ RegistreringAdopsjonOgOmsorgGrid.buildInitialValues = () => ({
   [OMSORG_FORM_NAME_PREFIX]: {},
   ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
 });
-
-/*
-RegistreringAdopsjonOgOmsorgGrid.validate = (values, sokerPersonnummer, familieHendelseType): any => ({
-  ...OppholdINorgePapirsoknadIndex.validate(values),
-  [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.validate(familieHendelseType, values.foedselsDato, values[OMSORG_FORM_NAME_PREFIX]),
-  [ANNEN_FORELDER_FORM_NAME_PREFIX]: AnnenForelderPapirsoknadIndex.validate(sokerPersonnummer, values[ANNEN_FORELDER_FORM_NAME_PREFIX]),
-});
-*/
 
 export default RegistreringAdopsjonOgOmsorgGrid;

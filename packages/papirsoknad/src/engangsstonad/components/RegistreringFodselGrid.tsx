@@ -93,7 +93,7 @@ const RegistreringFodselGrid: FunctionComponent<OwnProps> & StaticFunctions = ({
 );
 
 RegistreringFodselGrid.transformValues = (values) => ({
-  ...values,
+  ...OppholdINorgePapirsoknadIndex.transformValues(values),
   [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values[OMSORG_FORM_NAME_PREFIX]),
 });
 

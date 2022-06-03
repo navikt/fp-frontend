@@ -29,6 +29,7 @@ interface OwnProps {
 
 interface StaticFunctions {
   buildInitialValues?: () => FormValues;
+  transformValues?: (formValues: FormValues) => FormValues;
 }
 
 /**
@@ -122,6 +123,12 @@ const OppholdINorgePanel: FunctionComponent<OwnProps> & StaticFunctions = ({
 OppholdINorgePanel.buildInitialValues = (): FormValues => ({
   tidligereOppholdUtenlands: [{ periodeFom: undefined, periodeTom: undefined }],
   fremtidigeOppholdUtenlands: [{ periodeFom: undefined, periodeTom: undefined }],
+});
+
+OppholdINorgePanel.transformValues = (formValues: FormValues): FormValues => ({
+  ...formValues,
+  fremtidigeOppholdUtenlands: formValues.harFremtidigeOppholdUtenlands ? formValues.fremtidigeOppholdUtenlands : undefined,
+  tidligereOppholdUtenlands: formValues.harTidligereOppholdUtenlands ? formValues.tidligereOppholdUtenlands : undefined,
 });
 
 export default OppholdINorgePanel;

@@ -8,6 +8,7 @@ import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
+import { FormValues } from './components/OppholdINorgePanel';
 import OppholdINorgePapirsoknadIndex from './OppholdINorgePapirsoknadIndex';
 
 export default {
@@ -29,7 +30,7 @@ const Template: Story<{
   return (
     <Form
       formMethods={formMethods}
-      onSubmit={submitCallback}
+      onSubmit={(values: FormValues) => submitCallback(OppholdINorgePapirsoknadIndex.transformValues(values))}
     >
       <OppholdINorgePapirsoknadIndex
         readOnly={false}

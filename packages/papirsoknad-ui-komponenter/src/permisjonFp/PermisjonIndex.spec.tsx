@@ -47,7 +47,6 @@ describe('<PermisjonIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      'felles-validering': '100', // TODO Burde få vekk denne
       tidsromPermisjon: {
         fulltUttak: true,
         permisjonsPerioder: [{
@@ -58,10 +57,14 @@ describe('<PermisjonIndex>', () => {
           periodeTom: '2022-06-20',
           periodeType: 'MØDREKVOTE',
         }],
-        skalGradere: undefined,
-        skalHaOpphold: undefined,
-        skalOvertaKvote: undefined,
-        skalUtsette: undefined,
+        skalGradere: false,
+        skalHaOpphold: false,
+        skalOvertaKvote: false,
+        skalUtsette: false,
+        graderingPeriode: undefined,
+        oppholdPerioder: undefined,
+        overforingsperioder: undefined,
+        utsettelsePeriode: undefined,
       },
     });
   });
@@ -89,18 +92,21 @@ describe('<PermisjonIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      'felles-validering': '2022.06.20', // TODO Burde få vekk denne
       tidsromPermisjon: {
-        fulltUttak: undefined,
+        fulltUttak: false,
         overforingsperioder: [{
           overforingArsak: 'ALENEOMSORG',
           periodeFom: '2022-05-20',
           periodeTom: '2022-06-20',
         }],
-        skalGradere: undefined,
-        skalHaOpphold: undefined,
+        skalGradere: false,
+        skalHaOpphold: false,
         skalOvertaKvote: true,
-        skalUtsette: undefined,
+        skalUtsette: false,
+        utsettelsePeriode: undefined,
+        permisjonsPerioder: undefined,
+        oppholdPerioder: undefined,
+        graderingPeriode: undefined,
       },
     });
   });
@@ -140,9 +146,8 @@ describe('<PermisjonIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      'felles-validering': 'true', // TODO Burde få vekk denne
       tidsromPermisjon: {
-        fulltUttak: undefined,
+        fulltUttak: false,
         utsettelsePeriode: [{
           arsakForUtsettelse: 'ARBEID',
           erArbeidstaker: 'true',
@@ -150,9 +155,13 @@ describe('<PermisjonIndex>', () => {
           periodeFom: '2022-05-20',
           periodeTom: '2022-06-20',
         }],
-        skalGradere: undefined,
-        skalHaOpphold: undefined,
-        skalOvertaKvote: undefined,
+        graderingPeriode: undefined,
+        oppholdPerioder: undefined,
+        overforingsperioder: undefined,
+        permisjonsPerioder: undefined,
+        skalGradere: false,
+        skalHaOpphold: false,
+        skalOvertaKvote: false,
         skalUtsette: true,
       },
     });
@@ -202,7 +211,6 @@ describe('<PermisjonIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      'felles-validering': 'true', // TODO Burde få vekk denne
       tidsromPermisjon: {
         fulltUttak: undefined,
         utsettelsePeriode: [{
@@ -265,7 +273,6 @@ describe('<PermisjonIndex>', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      'felles-validering': '2022.06.20', // TODO Burde få vekk denne
       tidsromPermisjon: {
         fulltUttak: true,
         oppholdPerioder: [{
@@ -274,17 +281,20 @@ describe('<PermisjonIndex>', () => {
           årsak: 'UTTAK_FORELDREPENGER_ANNEN_FORELDER',
 
         }],
-        skalGradere: undefined,
+        skalGradere: false,
         skalHaOpphold: true,
-        skalOvertaKvote: undefined,
-        skalUtsette: undefined,
+        skalOvertaKvote: false,
+        skalUtsette: false,
         permisjonsPerioder: [{
-          flerbarnsdager: undefined,
-          harSamtidigUttak: undefined,
+          flerbarnsdager: false,
+          harSamtidigUttak: false,
           periodeFom: '2022-05-20',
           periodeTom: '2022-06-20',
           periodeType: 'MØDREKVOTE',
         }],
+        utsettelsePeriode: undefined,
+        overforingsperioder: undefined,
+        graderingPeriode: undefined,
       },
     });
   });

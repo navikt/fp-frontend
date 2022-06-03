@@ -6,7 +6,9 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
+import { FormValues } from './components/FrilansPanel';
 import FrilansPapirsoknadIndex from './FrilansPapirsoknadIndex';
+import { FRILANS_NAME_PREFIX } from './components/FrilansOppdragForFamilieFieldArray';
 
 export default {
   title: 'papirsoknad/ui-komponenter/frilans',
@@ -19,13 +21,15 @@ const Template: Story<{
   submitCallback,
 }) => {
   const formMethods = useForm({
-    defaultValues: FrilansPapirsoknadIndex.buildInitialValues(),
+    defaultValues: { [FRILANS_NAME_PREFIX]: FrilansPapirsoknadIndex.buildInitialValues() },
   });
 
   return (
     <Form
       formMethods={formMethods}
-      onSubmit={submitCallback}
+      onSubmit={(
+        values: { [FRILANS_NAME_PREFIX]: FormValues,
+      }) => submitCallback({ [FRILANS_NAME_PREFIX]: FrilansPapirsoknadIndex.transformValues(values.frilans) })}
     >
       <FrilansPapirsoknadIndex
         readOnly={false}

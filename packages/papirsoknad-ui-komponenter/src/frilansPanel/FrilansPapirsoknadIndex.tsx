@@ -13,6 +13,7 @@ interface OwnProps {
 
 interface StaticFunctions {
   buildInitialValues: () => FormValues;
+  transformValues: (formValues: FormValues) => FormValues;
 }
 
 const FrilansPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = ({
@@ -24,5 +25,7 @@ const FrilansPapirsoknadIndex: FunctionComponent<OwnProps> & StaticFunctions = (
 );
 
 FrilansPapirsoknadIndex.buildInitialValues = () => FrilansPanel.buildInitialValues();
+
+FrilansPapirsoknadIndex.transformValues = (formValues) => FrilansPanel.transformValues(formValues);
 
 export default FrilansPapirsoknadIndex;

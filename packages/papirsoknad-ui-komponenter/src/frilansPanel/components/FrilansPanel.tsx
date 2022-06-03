@@ -9,15 +9,13 @@ import { RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
 import FrilansPerioderFieldArray, { FormValues as PerioderFormValues } from './FrilansPerioderFieldArray';
 import FrilansOppdragForFamiliePanel, { FormValues as FormValuesOppdragForFamilie } from './FrilansOppdragForFamiliePanel';
 
-const FRILANS_NAME_PREFIX = 'frilans';
+export const FRILANS_NAME_PREFIX = 'frilans';
 
 export type FormValues = {
-  [FRILANS_NAME_PREFIX]: {
-    harSokerPeriodeMedFrilans?: boolean;
-    erNyoppstartetFrilanser?: boolean;
-    harInntektFraFosterhjem?: boolean;
-  } & FormValuesOppdragForFamilie & PerioderFormValues;
-}
+  harSokerPeriodeMedFrilans?: boolean;
+  erNyoppstartetFrilanser?: boolean;
+  harInntektFraFosterhjem?: boolean;
+} & FormValuesOppdragForFamilie & PerioderFormValues;
 
 interface OwnProps {
   readOnly: boolean;
@@ -25,6 +23,7 @@ interface OwnProps {
 
 interface StaticFunctions {
   buildInitialValues: () => FormValues;
+  transformValues: (formValues: FormValues) => FormValues;
 }
 
 const FrilansPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
@@ -76,13 +75,15 @@ const FrilansPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
 );
 
 FrilansPanel.buildInitialValues = () => ({
-  [FRILANS_NAME_PREFIX]: {
-    ...FrilansOppdragForFamiliePanel.buildInitialValues(),
-    perioder: [{
-      periodeFom: '',
-      periodeTom: '',
-    }],
-  },
+  ...FrilansOppdragForFamiliePanel.buildInitialValues(),
+  perioder: [{
+    periodeFom: '',
+    periodeTom: '',
+  }],
+});
+
+FrilansPanel.transformValues = (formValues) => (formValues.harSokerPeriodeMedFrilans ? formValues : {
+  harSokerPeriodeMedFrilans: formValues.harSokerPeriodeMedFrilans,
 });
 
 export default FrilansPanel;
