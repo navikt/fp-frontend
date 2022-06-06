@@ -38,7 +38,7 @@
   "dependencies": {
     "@babel/runtime": "7.18.3",
     "@formatjs/intl-datetimeformat": "5.0.2",
-    "@formatjs/intl-numberformat": "7.4.3",
+    "@formatjs/intl-numberformat": "8.0.2",
     "axios": "0.27.2",
     "core-js": "3.22.7",
     "dotenv": "16.0.1",
