@@ -29,20 +29,22 @@ import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseTyp
 
 const FRILANS_NAME_PREFIX = 'frilans';
 
-type FormValues = AndreYtelserFormValue
+type FormValues = {
+  rettigheter?: string;
+  [FRILANS_NAME_PREFIX]: FrilansFormValues,
+} & AndreYtelserFormValue
   & IArbeidFormValues
-  & FrilansFormValues
   & OppholdINorgeFormValues
   & BehovForTilretteleggingFormValues
   & TerminFodselSvpFormValues
   & MottattDatoFormValues;
 
 const buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => ({
-  [FRILANS_NAME_PREFIX]: FrilansPapirsoknadIndex.buildInitialValues(),
   ...AndreYtelserPapirsoknadIndex.buildInitialValues(andreYtelser),
   ...InntektsgivendeArbeidPapirsoknadIndex.buildInitialValues(),
   ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
   ...BehovForTilretteleggingPanel.buildInitialValues(),
+  [FRILANS_NAME_PREFIX]: FrilansPapirsoknadIndex.buildInitialValues(),
 });
 
 type TilretteleggingArbeidsforhold = {

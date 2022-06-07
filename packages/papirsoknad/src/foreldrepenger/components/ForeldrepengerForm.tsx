@@ -50,10 +50,10 @@ type FormValues = {
   rettigheter?: string;
   [OMSORG_FORM_NAME_PREFIX]: OmsorgOgAdopsjonFormValues;
   [ANNEN_FORELDER_FORM_NAME_PREFIX]?: AnnenForelderFormValues;
+  [FRILANS_NAME_PREFIX]: FrilansFormValues,
 } & AndreYtelserFormValue
   & FodselFormValues
   & IArbeidFormValues
-  & FrilansFormValues
   & OppholdINorgeFormValues
   & FormValuesPermisjon
   & PermRettigheterFormValues

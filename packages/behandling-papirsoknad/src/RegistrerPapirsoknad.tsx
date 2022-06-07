@@ -1,4 +1,6 @@
-import React, { FunctionComponent, useState, useCallback, useMemo } from 'react';
+import React, {
+  FunctionComponent, useState, useCallback, useMemo,
+} from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { BehandlingPaVent } from '@fpsak-frontend/behandling-felles';
