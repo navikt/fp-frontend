@@ -138,6 +138,7 @@ interface MappedOwnProps {
   hovedsokerKjonnKode?: Kjønnkode;
   isRevurdering: boolean;
   medsokerKjonnKode: Kjønnkode;
+  søkerErMor: boolean;
   soknadDate: string;
   stonadskonto: UttakStonadskontoer;
   uttakPerioder: PeriodeMedClassName[];
@@ -448,6 +449,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
       behandlingsresultat,
       arbeidsgiverOpplysningerPerId,
       kreverSammenhengendeUttak,
+      søkerErMor,
     } = this.props;
     const { selectedItem, stonadskonto, isButtonDisabled } = this.state;
 
@@ -526,6 +528,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
                         behandlingsresultat={behandlingsresultat}
                         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
                         kreverSammenhengendeUttak={kreverSammenhengendeUttak}
+                        søkerErMor={søkerErMor}
                       />
                     )}
                   {!selectedItem.hovedsoker
@@ -542,6 +545,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
                         behandlingsresultat={behandlingsresultat}
                         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
                         kreverSammenhengendeUttak={kreverSammenhengendeUttak}
+                        søkerErMor={søkerErMor}
                       />
                     )}
                 </>
@@ -795,6 +799,7 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
     // @ts-ignore
     uttaksresultatActivity: lagUttaksresultatActivity(state, props),
     uttakPerioder,
+    søkerErMor: uttaksresultat.søkerErMor,
   };
 };
 
