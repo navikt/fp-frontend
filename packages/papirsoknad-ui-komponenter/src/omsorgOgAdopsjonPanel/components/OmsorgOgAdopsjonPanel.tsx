@@ -182,7 +182,7 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
 
 OmsorgOgAdopsjonPanel.transformValues = (values) => ({
   ...values,
-  foedselsDato: values.foedselsDato.map((f) => f.dato),
+  foedselsDato: values.foedselsDato && values.foedselsDato.length > 0 ? values.foedselsDato.map((f) => f.dato) : undefined,
 });
 
 export default OmsorgOgAdopsjonPanel;
