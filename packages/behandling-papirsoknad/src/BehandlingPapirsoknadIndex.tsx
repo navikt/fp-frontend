@@ -1,19 +1,14 @@
 import React, {
   FunctionComponent,
 } from 'react';
-import { RawIntlProvider } from 'react-intl';
 
 import {
   StandardBehandlingProps, useBehandling, useInitBehandlingHandlinger, useInitRequestApi, useLagreAksjonspunkt,
 } from '@fpsak-frontend/behandling-felles';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { createIntl } from '@navikt/ft-utils';
 
-import RegistrerPapirsoknad from './components/RegistrerPapirsoknad';
+import RegistrerPapirsoknad from './RegistrerPapirsoknad';
 import { requestPapirsoknadApi, PapirsoknadApiKeys } from './data/papirsoknadApi';
-import messages from '../i18n/nb_NO.json';
-
-const intl = createIntl(messages);
 
 interface OwnProps {
   fagsakPersonnummer: string;
@@ -47,17 +42,15 @@ const BehandlingPapirsoknadIndex: FunctionComponent<OwnProps & StandardBehandlin
   }
 
   return (
-    <RawIntlProvider value={intl}>
-      <RegistrerPapirsoknad
-        behandling={behandling}
-        fagsak={fagsak}
-        fagsakPersonnummer={fagsakPersonnummer}
-        kodeverk={kodeverk}
-        rettigheter={rettigheter}
-        hentBehandling={hentBehandling}
-        lagreAksjonspunkt={lagreAksjonspunkter}
-      />
-    </RawIntlProvider>
+    <RegistrerPapirsoknad
+      behandling={behandling}
+      fagsak={fagsak}
+      fagsakPersonnummer={fagsakPersonnummer}
+      kodeverk={kodeverk}
+      rettigheter={rettigheter}
+      hentBehandling={hentBehandling}
+      lagreAksjonspunkt={lagreAksjonspunkter}
+    />
   );
 };
 
