@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useCallback } from 'react';
+import React, { FunctionComponent, useState, useCallback, useMemo } from 'react';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { BehandlingPaVent } from '@fpsak-frontend/behandling-felles';
@@ -85,12 +85,13 @@ const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
 
   const { data: aksjonspunkter = EMPTY_ARRAY } = restApiPapirsoknadHooks.useRestApi(PapirsoknadApiKeys.AKSJONSPUNKTER);
 
-  const lagre = lagLagreFunksjon(behandling, aksjonspunkter, fagsak, lagreAksjonspunkt, setAksjonspunktLagret);
+  const lagre = useMemo(() => lagLagreFunksjon(behandling, aksjonspunkter, fagsak, lagreAksjonspunkt, setAksjonspunktLagret),
+    [behandling, aksjonspunkter, fagsak, lagreAksjonspunkt, setAksjonspunktLagret]);
   const lagreUfullstendig = useCallback((
     fagsakYtelseType: string,
     familieHendelseType: string,
     foreldreType: string,
-  ) => lagre({ ufullstendigSoeknad: true }, fagsakYtelseType, familieHendelseType, foreldreType), []);
+  ) => lagre({ ufullstendigSoeknad: true }, fagsakYtelseType, familieHendelseType, foreldreType), [lagre]);
 
   if (!aksjonspunkter) {
     return <LoadingPanel />;
