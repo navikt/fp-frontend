@@ -62,7 +62,7 @@ type FormValues = {
   & DekningsgradFormValues;
 
 const buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => ({
-  ...FrilansPapirsoknadIndex.buildInitialValues(),
+  [FRILANS_NAME_PREFIX]: FrilansPapirsoknadIndex.buildInitialValues(),
   ...AndreYtelserPapirsoknadIndex.buildInitialValues(andreYtelser),
   ...InntektsgivendeArbeidPapirsoknadIndex.buildInitialValues(),
   [OMSORG_FORM_NAME_PREFIX]: {},

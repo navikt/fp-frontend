@@ -38,7 +38,7 @@ type FormValues = AndreYtelserFormValue
   & MottattDatoFormValues;
 
 const buildInitialValues = (andreYtelser: KodeverkMedNavn[]): FormValues => ({
-  ...FrilansPapirsoknadIndex.buildInitialValues(),
+  [FRILANS_NAME_PREFIX]: FrilansPapirsoknadIndex.buildInitialValues(),
   ...AndreYtelserPapirsoknadIndex.buildInitialValues(andreYtelser),
   ...InntektsgivendeArbeidPapirsoknadIndex.buildInitialValues(),
   ...OppholdINorgePapirsoknadIndex.buildInitialValues(),
