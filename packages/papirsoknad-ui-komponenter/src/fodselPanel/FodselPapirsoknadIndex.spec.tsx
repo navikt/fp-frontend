@@ -2,8 +2,10 @@ import React from 'react';
 import {
   fireEvent, render, screen, waitFor,
 } from '@testing-library/react';
+import dayjs from 'dayjs';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
+import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 import * as stories from './FodselPapirsoknadIndex.stories';
 
@@ -30,9 +32,8 @@ describe('<FodselPapirsoknadIndex>', () => {
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
 
     const fødtInput = utils.getByLabelText('Når ble barnet født?');
-    userEvent.paste(fødtInput, '13.09.2022');
+    userEvent.paste(fødtInput, dayjs().subtract(10, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(fødtInput);
-
     userEvent.paste(utils.getByLabelText('Antall barn'), '2');
 
     expect(screen.getByText('Rett til prematuruker vil kun sjekkes når du også oppgir termindato')).toBeInTheDocument();
@@ -51,7 +52,7 @@ describe('<FodselPapirsoknadIndex>', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       antallBarn: '2',
       erBarnetFodt: true,
-      foedselsDato: ['2022-09-13'],
+      foedselsDato: [dayjs().subtract(10, 'day').format(ISO_DATE_FORMAT)],
       terminbekreftelseDato: '2022-09-15',
       termindato: '2022-09-14',
     });
