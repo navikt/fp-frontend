@@ -77,16 +77,16 @@ const PermisjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
 
   const isError = getIsRequired(getValues);
   useEffect(() => {
-    if (isError && formState.isSubmitted) {
+    if (isError) {
       setError(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.notRegisteredInput`, {
         type: 'custom',
         message: intl.formatMessage({ id: 'PermisjonPanel.MinstEnPeriodeRequired' }),
       });
     }
-    if (!isError && formState.isSubmitted) {
+    if (!isError) {
       clearErrors(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.notRegisteredInput`);
     }
-  }, [isError, formState.isSubmitted]);
+  }, [isError]);
 
   return (
     <BorderBox>

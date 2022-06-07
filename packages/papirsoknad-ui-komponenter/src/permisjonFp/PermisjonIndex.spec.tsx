@@ -50,7 +50,7 @@ describe('<PermisjonIndex>', () => {
       tidsromPermisjon: {
         fulltUttak: true,
         permisjonsPerioder: [{
-          flerbarnsdager: undefined,
+          flerbarnsdager: false,
           harSamtidigUttak: true,
           samtidigUttaksprosent: '100.00',
           periodeFom: '2022-05-20',
