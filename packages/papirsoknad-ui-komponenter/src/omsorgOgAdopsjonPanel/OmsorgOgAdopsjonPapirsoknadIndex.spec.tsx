@@ -18,10 +18,6 @@ describe('<OmsorgOgAdopsjonPapirsoknadIndex>', () => {
 
     expect(await screen.findByText('Omsorg')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
-
-    expect(await screen.findByText('Feltet må være større eller lik 1')).toBeInTheDocument();
-
     const datoInput = utils.getByLabelText('Dato for omsorgsovertakelsen');
     userEvent.paste(datoInput, '30.05.2022');
     fireEvent.blur(datoInput);
