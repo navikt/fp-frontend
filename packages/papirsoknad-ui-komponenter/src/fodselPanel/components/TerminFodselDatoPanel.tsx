@@ -137,7 +137,7 @@ const TerminFodselDatoPanel: FunctionComponent<OwnProps> = ({
                       // @ts-ignore Fiks
                       parse={(valueFromInput) => (valueFromInput ? [valueFromInput] : valueFromInput)}
                       isReadOnly={readOnly}
-                      validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
+                      validate={[required, (value) => hasValidDate(value[0]), (value) => dateBeforeOrEqualToToday(value[0])]}
                     />
                   </FlexColumn>
                   <FlexColumn>
