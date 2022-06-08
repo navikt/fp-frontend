@@ -217,6 +217,7 @@ const uttaksresultatPerioder = {
   ],
   perioderAnnenpart: [],
   annenForelderHarRett: true,
+  søkerErMor: true,
   aleneomsorg: false,
 };
 

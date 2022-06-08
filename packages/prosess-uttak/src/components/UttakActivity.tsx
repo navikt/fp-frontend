@@ -50,7 +50,13 @@ const uttakActivityForm = 'uttaksresultatActivity';
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
-function sortAlphabetically(a: KodeverkMedNavn, b: KodeverkMedNavn): number {
+function sortAlphabetically(a: ArsakKodeverk, b: ArsakKodeverk): number {
+  if (a.sortering < b.sortering) {
+    return -1;
+  }
+  if (a.sortering > b.sortering) {
+    return 1;
+  }
   if (a.navn < b.navn) {
     return -1;
   }
@@ -61,16 +67,19 @@ function sortAlphabetically(a: KodeverkMedNavn, b: KodeverkMedNavn): number {
 }
 
 export type ArsakKodeverk = {
+  sortering: string;
   utfallType?: string;
   uttakTyper?: string[];
   valgbarForKonto?: string[];
   gyldigForLovendringer: string[];
+  synligForRolle?: string[];
 } & KodeverkMedNavn;
 
 const mapAarsak = (
   årsakKoder: ArsakKodeverk[],
   utfallType: string,
   kreverSammenhengendeUttak: boolean,
+  søkerErMor: boolean,
   utsettelseType?: string,
   periodeType?: string,
   skalFiltrere?: boolean,
@@ -85,6 +94,14 @@ const mapAarsak = (
       return kreverSammenhengendeUttak
         ? kodeItem.gyldigForLovendringer.includes('KREVER_SAMMENHENGENDE_UTTAK')
         : kodeItem.gyldigForLovendringer.includes('FRITT_UTTAK');
+    })
+    .filter((kodeItem) => {
+      if (kodeItem.synligForRolle === undefined) {
+        return true;
+      }
+      return søkerErMor
+        ? kodeItem.synligForRolle.includes('MOR')
+        : kodeItem.synligForRolle.includes('IKKE_MOR');
     });
 
   if (!skalFiltrere) {
@@ -149,6 +166,7 @@ interface PureOwnProps {
   behandlingsresultat?: Behandling['behandlingsresultat'];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   kreverSammenhengendeUttak: boolean;
+  søkerErMor: boolean;
 }
 
 interface MappedOwnProps {
@@ -189,6 +207,7 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
   currentlySelectedStønadskonto,
   arbeidsgiverOpplysningerPerId,
   kreverSammenhengendeUttak,
+  søkerErMor,
   ...formProps
 }) => (
   <div>
@@ -249,6 +268,7 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
                                   periodeAarsakKoder,
                                   erOppfylt ? 'INNVILGET' : 'AVSLÅTT',
                                   kreverSammenhengendeUttak,
+                                  søkerErMor,
                                   selectedItemData.utsettelseType,
                                   currentlySelectedStønadskonto || selectedItemData.periodeType,
                                   selectedItemData.aktiviteter.length === 1,
