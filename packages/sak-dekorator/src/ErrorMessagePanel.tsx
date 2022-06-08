@@ -46,6 +46,10 @@ const ErrorMessagePanel: FunctionComponent<OwnProps> = ({
     }
   }, [toggleModalOnClick]);
 
+  if (errorMessages.length === 0) {
+    return null;
+  }
+
   return (
     <div className={styles.container}>
       {errorMessages.map((message, index) => (
