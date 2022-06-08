@@ -129,6 +129,7 @@ interface OwnProps {
   behandlingsresultat?: Behandling['behandlingsresultat'];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   kreverSammenhengendeUttak: boolean;
+  søkerErMor: boolean;
 }
 
 interface OwnState {
@@ -241,6 +242,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
       stonadskonto,
       arbeidsgiverOpplysningerPerId,
       kreverSammenhengendeUttak,
+      søkerErMor,
     } = this.props;
     const { showDelPeriodeModal } = this.state;
     const isEdited = !!selectedItemData.begrunnelse && !isApOpen;
@@ -312,6 +314,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
           behandlingsresultat={behandlingsresultat}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           kreverSammenhengendeUttak={kreverSammenhengendeUttak}
+          søkerErMor={søkerErMor}
         />
       </TimeLineDataContainer>
     );

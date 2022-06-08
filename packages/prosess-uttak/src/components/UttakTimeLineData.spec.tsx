@@ -133,6 +133,7 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       kreverSammenhengendeUttak
+      søkerErMor
     />, messages);
     wrapper.setState({ showDelPeriodeModal: false });
     const modal = wrapper.find(DelOppPeriodeModal);
@@ -165,6 +166,7 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       kreverSammenhengendeUttak
+      søkerErMor
     />, messages);
     wrapper.setState({ showDelPeriodeModal: true });
     expect(wrapper.state('showDelPeriodeModal')).toBe(true);
@@ -196,6 +198,7 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       kreverSammenhengendeUttak
+      søkerErMor
     />, messages);
     wrapper.setState({ showDelPeriodeModal: false });
     const modal = wrapper.find(DelOppPeriodeModal);
@@ -229,6 +232,7 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       kreverSammenhengendeUttak
+      søkerErMor
     />, messages);
     const buttons = wrapper.find(TimeLineButton);
     expect(buttons).toHaveLength(2);
@@ -259,6 +263,7 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       kreverSammenhengendeUttak
+      søkerErMor
     />, messages);
     const uttakActivity = wrapper.find(UttakActivity);
     expect(uttakActivity).toHaveLength(1);
@@ -290,6 +295,7 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       kreverSammenhengendeUttak
+      søkerErMor
     />, messages);
     const uttak = wrapper.find(AksjonspunktHelpTextTemp);
     expect(uttak).toHaveLength(1);
@@ -321,6 +327,7 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       kreverSammenhengendeUttak
+      søkerErMor
     />, messages);
     const uttak = wrapper.find(AksjonspunktHelpTextTemp);
     expect(uttak).toHaveLength(1);

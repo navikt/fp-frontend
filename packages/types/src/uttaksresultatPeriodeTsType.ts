@@ -33,6 +33,7 @@ export type PeriodeSoker = Readonly<{
 type UttaksresultatPeriode = Readonly<{
   perioderSøker: PeriodeSoker[];
   perioderAnnenpart: PeriodeSoker[];
+  søkerErMor: boolean;
   annenForelderHarRett: boolean;
   aleneomsorg: boolean;
 }>
