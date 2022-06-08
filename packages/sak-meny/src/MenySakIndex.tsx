@@ -49,38 +49,40 @@ const MenySakIndex: FunctionComponent<OwnProps> = ({
 
   return (
     <RawIntlProvider value={intl}>
-      <div ref={menyRef}>
-        <Popover
-          popperIsVisible={visMenySomApen}
-          renderArrowElement={false}
-          customPopperStyles={{ top: '2px', zIndex: 1 }}
-          popperProps={{
-            children: () => (
-              <BoxedListWithSelection
-                items={filtrertData.map((d) => ({
-                  name: d.tekst,
-                }))}
-                onClick={(index) => { setValgtModal(index); toggleMenyVisning(); }}
-              />
-            ),
-            placement: 'bottom-start',
-            strategy: 'absolute',
-          }}
-          referenceProps={{
-            children: ({ ref }) => (
-              <div ref={ref}>
-                <Knapp mini kompakt onClick={toggleMenyVisning}>
-                  <FormattedMessage id="MenySakIndex.Behandlingsmeny" />
-                  <span style={{ marginLeft: '5px' }}>
-                    <Image src={visMenySomApen ? openImage : closedImage} />
-                  </span>
-                </Knapp>
-              </div>
-            ),
-          }}
-        />
-      </div>
-      {valgtModal !== -1 && filtrertData[valgtModal].modal(() => setValgtModal(-1))}
+      <>
+        <div ref={menyRef}>
+          <Popover
+            popperIsVisible={visMenySomApen}
+            renderArrowElement={false}
+            customPopperStyles={{ top: '2px', zIndex: 1 }}
+            popperProps={{
+              children: () => (
+                <BoxedListWithSelection
+                  items={filtrertData.map((d) => ({
+                    name: d.tekst,
+                  }))}
+                  onClick={(index) => { setValgtModal(index); toggleMenyVisning(); }}
+                />
+              ),
+              placement: 'bottom-start',
+              strategy: 'absolute',
+            }}
+            referenceProps={{
+              children: ({ ref }) => (
+                <div ref={ref}>
+                  <Knapp mini kompakt onClick={toggleMenyVisning}>
+                    <FormattedMessage id="MenySakIndex.Behandlingsmeny" />
+                    <span style={{ marginLeft: '5px' }}>
+                      <Image src={visMenySomApen ? openImage : closedImage} />
+                    </span>
+                  </Knapp>
+                </div>
+              ),
+            }}
+          />
+        </div>
+        {valgtModal !== -1 && filtrertData[valgtModal].modal(() => setValgtModal(-1))}
+      </>
     </RawIntlProvider>
   );
 };
