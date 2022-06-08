@@ -49,8 +49,10 @@ const createNormalizeOnBlurField = (WrappedNavFieldComponent) => {
     }
   }
 
+  // @ts-ignore
   const FieldComponentWithIntl = injectIntl(FieldComponent);
 
+  // @ts-ignore
   FieldComponentWithIntl.WrappedComponent = FieldComponent;
 
   return FieldComponentWithIntl;

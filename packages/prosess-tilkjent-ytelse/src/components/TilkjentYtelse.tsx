@@ -314,4 +314,5 @@ export class TilkjentYtelse extends Component<OwnProps & WrappedComponentProps, 
   }
 }
 
+// @ts-ignore
 export default injectIntl(TilkjentYtelse);
