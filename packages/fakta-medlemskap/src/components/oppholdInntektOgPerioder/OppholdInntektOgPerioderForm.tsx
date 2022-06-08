@@ -330,4 +330,5 @@ export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
   form: 'OppholdInntektOgPerioderForm',
   destroyOnUnmount: false,
   keepDirtyOnReinitialize: true,
+  // @ts-ignore
 })(injectIntl(OppholdInntektOgPerioderForm)));

@@ -321,4 +321,5 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
   }
 }
 
+// @ts-ignore
 export default injectIntl(UttakTimeLineData);

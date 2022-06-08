@@ -448,4 +448,5 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
   form: formNameAvklarAktiviteter,
   destroyOnUnmount: false,
+// @ts-ignore
 })(injectIntl(AvklareAktiviteterPanelImpl)));
