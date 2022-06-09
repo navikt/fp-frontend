@@ -64,6 +64,7 @@ describe('<UttakActivity>', () => {
       arbeidsgiverOpplysningerPerId={{}}
       kreverSammenhengendeUttak
       søkerErMor
+      reduxFormChange={() => undefined}
     />);
 
     const fieldArray = wrapper.find('FieldArray');
@@ -112,6 +113,7 @@ describe('<UttakActivity>', () => {
       arbeidsgiverOpplysningerPerId={{}}
       kreverSammenhengendeUttak
       søkerErMor
+      reduxFormChange={() => undefined}
     />);
 
     const row = wrapper.find('Row');
@@ -154,6 +156,7 @@ describe('<UttakActivity>', () => {
       arbeidsgiverOpplysningerPerId={{}}
       kreverSammenhengendeUttak
       søkerErMor
+      reduxFormChange={() => undefined}
     />);
 
     const fieldArray = wrapper.find('FieldArray');
@@ -202,6 +205,7 @@ describe('<UttakActivity>', () => {
       arbeidsgiverOpplysningerPerId={{}}
       kreverSammenhengendeUttak
       søkerErMor
+      reduxFormChange={() => undefined}
     />);
 
     const fieldArray = wrapper.find('FieldArray');
@@ -250,6 +254,7 @@ describe('<UttakActivity>', () => {
       arbeidsgiverOpplysningerPerId={{}}
       kreverSammenhengendeUttak
       søkerErMor
+      reduxFormChange={() => undefined}
     />);
 
     const fieldArray = wrapper.find('FieldArray');

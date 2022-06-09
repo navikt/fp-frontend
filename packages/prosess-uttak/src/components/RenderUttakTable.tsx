@@ -109,6 +109,7 @@ interface OwnProps {
   periodeTyper: KodeverkMedNavn[];
   readOnly: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  reduxFormChange: (...args: any[]) => any;
 }
 
 /**
@@ -122,6 +123,7 @@ const RenderUttakTable: FunctionComponent<OwnProps & WrappedComponentProps> = ({
   fields,
   periodeTyper,
   readOnly,
+  reduxFormChange,
   arbeidsgiverOpplysningerPerId,
 }) => (
   <div className={styles.tableOverflow}>
@@ -140,6 +142,7 @@ const RenderUttakTable: FunctionComponent<OwnProps & WrappedComponentProps> = ({
                     label=""
                     readOnly={readOnly}
                     validate={checkForMonthsOrDays(uttakElementFieldId) ? [required, notDash] : []}
+                    onChange={() => reduxFormChange('uttaksresultatActivity', 'periodeAarsak', null)}
                   />
                 </div>
               </TableColumn>
