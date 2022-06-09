@@ -55,19 +55,10 @@ const mapAktiviteter = (aktiviteter: KodeverkMedNavn[]): ReactElement[] => aktiv
     navn,
   }) => <option value={kode} key={kode}>{navn}</option>);
 
-export const periodsWithNoMorsAktivitet = [
+export const PERIODS_WITH_NO_MORS_AKTIVITET = [
   uttakPeriodeType.FEDREKVOTE,
   uttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
   uttakPeriodeType.MODREKVOTE];
-
-const shouldDisableSelect = (selectedPeriodeTyper: string[], index: number): boolean => {
-  if (typeof selectedPeriodeTyper === 'undefined' || typeof selectedPeriodeTyper[index] === 'undefined') {
-    return true;
-  }
-
-  return periodsWithNoMorsAktivitet.includes(selectedPeriodeTyper[index])
-    || selectedPeriodeTyper[index] === '';
-};
 
 const getLabel = (erForsteRad: boolean, text: string): string => (erForsteRad ? text : '');
 
@@ -139,8 +130,6 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
     }
   }, []);
 
-  const selectedPeriodeTyper = [''];
-
   return (
     <PeriodFieldArray
       readOnly={readOnly}
@@ -153,11 +142,12 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
       {(field, index) => {
         const erForsteRad = (index === 0);
 
-        const periodeFom = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.periodeFom`);
-        const harSamtidigUttak = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}.harSamtidigUttak`);
+        const periode = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}`);
 
-        const periodeFomForTidlig = erPeriodeFormFør01012019(periodeFom);
+        const periodeFomForTidlig = erPeriodeFormFør01012019(periode.periodeFom);
         const visEllerSkulOverskriftStyle = erForsteRad ? styles.visOverskrift : styles.skjulOverskrift;
+
+        const skalDisableMorsAktivitet = PERIODS_WITH_NO_MORS_AKTIVITET.includes(periode.periodeType) || periode.periodeType === '';
 
         const namePart1 = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${PERMISJON_PERIODE_FIELD_ARRAY_NAME}.${index}`;
         return (
@@ -216,7 +206,7 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                       <FlexColumn>
                         <SelectField
                           readOnly={readOnly}
-                          disabled={sokerErMor || shouldDisableSelect(selectedPeriodeTyper, index)}
+                          disabled={sokerErMor || skalDisableMorsAktivitet}
                           bredde="s"
                           name={`${namePart1}.morsAktivitet`}
                           label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.Fellesperiode.morsAktivitet' }))}
@@ -245,7 +235,7 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
                         label=" "
                       />
                     </FlexColumn>
-                    {harSamtidigUttak && (
+                    {periode.harSamtidigUttak && (
                       <FlexColumn className={erForsteRad ? '' : styles.alignSamtidigUttak}>
                         <InputField
                           name={`${namePart1}.samtidigUttaksprosent`}
@@ -290,7 +280,7 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
 };
 
 RenderPermisjonPeriodeFieldArray.transformValues = (values: FormValues[]) => values.map((value) => {
-  if (periodsWithNoMorsAktivitet.includes(value.periodeType)) {
+  if (PERIODS_WITH_NO_MORS_AKTIVITET.includes(value.periodeType)) {
     return {
       periodeType: value.periodeType,
       periodeFom: value.periodeFom,
