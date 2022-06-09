@@ -167,6 +167,7 @@ interface PureOwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   kreverSammenhengendeUttak: boolean;
   søkerErMor: boolean;
+  reduxFormChange: (...args: any[]) => any;
 }
 
 interface MappedOwnProps {
@@ -208,6 +209,7 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
   arbeidsgiverOpplysningerPerId,
   kreverSammenhengendeUttak,
   søkerErMor,
+  reduxFormChange,
   ...formProps
 }) => (
   <div>
@@ -234,6 +236,7 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
                 periodeTyper={periodeTyper}
                 readOnly={readOnly}
                 arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+                reduxFormChange={reduxFormChange}
               />
             </Column>
           </Row>
