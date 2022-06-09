@@ -243,6 +243,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
       arbeidsgiverOpplysningerPerId,
       kreverSammenhengendeUttak,
       søkerErMor,
+      reduxFormChange: formChange,
     } = this.props;
     const { showDelPeriodeModal } = this.state;
     const isEdited = !!selectedItemData.begrunnelse && !isApOpen;
@@ -315,6 +316,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           kreverSammenhengendeUttak={kreverSammenhengendeUttak}
           søkerErMor={søkerErMor}
+          reduxFormChange={formChange}
         />
       </TimeLineDataContainer>
     );
