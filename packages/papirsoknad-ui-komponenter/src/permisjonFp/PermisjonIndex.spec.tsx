@@ -8,13 +8,13 @@ import userEvent from '@testing-library/user-event';
 
 import * as stories from './PermisjonIndex.stories';
 
-const { Default } = composeStories(stories);
+const { SokerErMor } = composeStories(stories);
 
 describe('<PermisjonIndex>', () => {
   it('skal velge fullt uttak', async () => {
     const lagre = jest.fn();
 
-    const utils = render(<Default submitCallback={lagre} />);
+    const utils = render(<SokerErMor submitCallback={lagre} />);
 
     expect(await screen.findByText('Tidsrom for permisjon')).toBeInTheDocument();
 
@@ -72,7 +72,7 @@ describe('<PermisjonIndex>', () => {
   it('skal velge overføring av kvote', async () => {
     const lagre = jest.fn();
 
-    const utils = render(<Default submitCallback={lagre} />);
+    const utils = render(<SokerErMor submitCallback={lagre} />);
 
     expect(await screen.findByText('Tidsrom for permisjon')).toBeInTheDocument();
 
@@ -114,7 +114,7 @@ describe('<PermisjonIndex>', () => {
   it('skal velge utsettelse', async () => {
     const lagre = jest.fn();
 
-    const utils = render(<Default submitCallback={lagre} />);
+    const utils = render(<SokerErMor submitCallback={lagre} />);
 
     expect(await screen.findByText('Tidsrom for permisjon')).toBeInTheDocument();
 
@@ -170,7 +170,7 @@ describe('<PermisjonIndex>', () => {
   it.skip('skal velge gradering', async () => {
     const lagre = jest.fn();
 
-    const utils = render(<Default submitCallback={lagre} />);
+    const utils = render(<SokerErMor submitCallback={lagre} />);
 
     expect(await screen.findByText('Tidsrom for permisjon')).toBeInTheDocument();
 
@@ -231,7 +231,7 @@ describe('<PermisjonIndex>', () => {
   it('skal velge opphold', async () => {
     const lagre = jest.fn();
 
-    const utils = render(<Default submitCallback={lagre} />);
+    const utils = render(<SokerErMor submitCallback={lagre} />);
 
     expect(await screen.findByText('Tidsrom for permisjon')).toBeInTheDocument();
 
