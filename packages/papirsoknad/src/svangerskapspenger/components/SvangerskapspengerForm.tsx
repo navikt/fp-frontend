@@ -24,6 +24,7 @@ import {
   TerminFodselSvpFormValues,
   Tilrettelegging,
   MottattDatoFormValues,
+  ANDRE_YTELSER_FORM_NAME_PREFIX,
 } from '@fpsak-frontend/papirsoknad-ui-komponenter';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 
@@ -87,11 +88,12 @@ const transformTilretteleggingsArbeidsforhold = (
   return transformerteVerdier;
 };
 
-const transformValues = (formValues: FormValues): any => ({
+const transformValues = (formValues: FormValues, andreYtelserKodeverk: KodeverkMedNavn[]): any => ({
   ...OppholdINorgePapirsoknadIndex.transformValues(formValues),
   foedselsDato: [formValues.foedselsDato],
   tilretteleggingArbeidsforhold: transformTilretteleggingsArbeidsforhold(formValues),
   [FRILANS_NAME_PREFIX]: FrilansPapirsoknadIndex.transformValues(formValues[FRILANS_NAME_PREFIX]),
+  [ANDRE_YTELSER_FORM_NAME_PREFIX]: AndreYtelserPapirsoknadIndex.transformValues(formValues, andreYtelserKodeverk),
 });
 
 interface OwnProps {
@@ -118,10 +120,12 @@ const SvangerskapspengerForm: FunctionComponent<OwnProps> = ({
     defaultValues: useMemo(() => buildInitialValues(alleKodeverk[KodeverkType.ARBEID_TYPE]), []),
   });
 
+  const andreYtelserKodeverk = alleKodeverk[KodeverkType.ARBEID_TYPE];
+
   const mottattDato = formMethods.watch('mottattDato');
 
   return (
-    <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values))}>
+    <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values, andreYtelserKodeverk))}>
       <MottattDatoPapirsoknadIndex readOnly={readOnly} />
       <OppholdINorgePapirsoknadIndex
         readOnly={readOnly}
