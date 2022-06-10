@@ -44,7 +44,7 @@ describe('<FrilansPapirsoknadIndex>', () => {
 
     userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
+    expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(5);
 
     const fomInput = utils.getByLabelText('F.o.m.');
     userEvent.paste(fomInput, '27.05.2022');
