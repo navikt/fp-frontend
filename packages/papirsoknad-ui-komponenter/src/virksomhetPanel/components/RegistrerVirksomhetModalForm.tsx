@@ -48,7 +48,6 @@ const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps> = ({
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>({
-    mode: 'onChange',
     defaultValues: virksomhet,
   });
 
@@ -81,13 +80,7 @@ const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps> = ({
           <VerticalSpacer sixteenPx />
           <Hovedknapp
             htmlType="button"
-            onClick={async () => {
-              const isValid = await formMethods.trigger();
-              if (isValid) {
-                onSubmit(formMethods.getValues());
-              }
-              return Promise.resolve();
-            }}
+            onClick={formMethods.handleSubmit(onSubmit)}
             disabled={readOnly}
             className={styles.savebutton}
             mini

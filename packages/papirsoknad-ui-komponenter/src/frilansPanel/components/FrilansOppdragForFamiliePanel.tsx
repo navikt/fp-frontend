@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { RadioGroupField, RadioOption, formHooks } from '@navikt/ft-form-hooks';
+import { required } from '@navikt/ft-form-validators';
 
 import FrilansOppdragForFamilieFieldArray, {
   FRILANS_NAME_PREFIX, defaultFrilansPeriode, FormValues as FieldArrayFormValues,
@@ -33,6 +34,7 @@ const FrilansOppdragForFamiliePanel: FunctionComponent<OwnProps> & StaticFunctio
         readOnly={readOnly}
         label={<Undertekst><FormattedMessage id="Registrering.FrilansOppdrag.HarHattOppdragForFamilie" /></Undertekst>}
         parse={(value: string) => value === 'true'}
+        validate={[required]}
       >
         <RadioOption label={<FormattedMessage id="Registrering.FrilansOppdrag.Yes" />} value="true" />
         <RadioOption label={<FormattedMessage id="Registrering.FrilansOppdrag.No" />} value="false" />

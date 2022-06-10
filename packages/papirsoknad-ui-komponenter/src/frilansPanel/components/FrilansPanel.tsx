@@ -52,6 +52,7 @@ const FrilansPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
               readOnly={readOnly}
               label={<Undertekst><FormattedMessage id="Registrering.Frilans.ErNyoppstartedFrilanser" /></Undertekst>}
               parse={(value: string) => value === 'true'}
+              validate={[required]}
             >
               <RadioOption label={<FormattedMessage id="Registrering.Frilans.Yes" />} value="true" />
               <RadioOption label={<FormattedMessage id="Registrering.Frilans.No" />} value="false" />
@@ -62,6 +63,7 @@ const FrilansPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
               readOnly={readOnly}
               label={<Undertekst><FormattedMessage id="Registrering.Frilans.HarInntektFraForsterhjem" /></Undertekst>}
               parse={(value: string) => value === 'true'}
+              validate={[required]}
             >
               <RadioOption label={<FormattedMessage id="Registrering.Frilans.Yes" />} value="true" />
               <RadioOption label={<FormattedMessage id="Registrering.Frilans.No" />} value="false" />
