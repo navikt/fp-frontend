@@ -40,6 +40,7 @@ import {
 import {
   ArbeidsgiverOpplysningerPerId, AlleKodeverk, Behandling, KodeverkMedNavn,
 } from '@fpsak-frontend/types';
+import { AarsakFilter } from '@fpsak-frontend/types/src/uttaksresultatPeriodeTsType';
 import RenderUttakTable, { AktivitetFieldArray } from './RenderUttakTable';
 import UttakInfo from './UttakInfo';
 
@@ -78,9 +79,7 @@ export type ArsakKodeverk = {
 const mapAarsak = (
   årsakKoder: ArsakKodeverk[],
   utfallType: string,
-  kreverSammenhengendeUttak: boolean,
-  utenMinsterett: boolean,
-  søkerErMor: boolean,
+  aarsakFilter: AarsakFilter,
   utsettelseType?: string,
   periodeType?: string,
   skalFiltrere?: boolean,
@@ -92,10 +91,10 @@ const mapAarsak = (
       if (kodeItem.gyldigForLovendringer === undefined) {
         return true;
       }
-      if (kreverSammenhengendeUttak) {
+      if (aarsakFilter.kreverSammenhengendeUttak) {
         return kodeItem.gyldigForLovendringer.includes('KREVER_SAMMENHENGENDE_UTTAK');
       }
-      return utenMinsterett
+      return aarsakFilter.utenMinsterett
         ? kodeItem.gyldigForLovendringer.includes('FRITT_UTTAK')
         : kodeItem.gyldigForLovendringer.includes('MINSTERETT_2022');
     })
@@ -103,7 +102,7 @@ const mapAarsak = (
       if (kodeItem.synligForRolle === undefined) {
         return true;
       }
-      return søkerErMor
+      return aarsakFilter.søkerErMor
         ? kodeItem.synligForRolle.includes('MOR')
         : kodeItem.synligForRolle.includes('IKKE_MOR');
     });
@@ -169,9 +168,7 @@ interface PureOwnProps {
   alleKodeverk: AlleKodeverk;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  kreverSammenhengendeUttak: boolean;
-  utenMinsterett: boolean;
-  søkerErMor: boolean;
+  aarsakFilter: AarsakFilter;
   reduxFormChange: (...args: any[]) => any;
 }
 
@@ -212,9 +209,7 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
   hasValidationError,
   currentlySelectedStønadskonto,
   arbeidsgiverOpplysningerPerId,
-  kreverSammenhengendeUttak,
-  utenMinsterett,
-  søkerErMor,
+  aarsakFilter,
   reduxFormChange,
   ...formProps
 }) => (
@@ -276,9 +271,7 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
                                 mapAarsak(
                                   periodeAarsakKoder,
                                   erOppfylt ? 'INNVILGET' : 'AVSLÅTT',
-                                  kreverSammenhengendeUttak,
-                                  utenMinsterett,
-                                  søkerErMor,
+                                  aarsakFilter,
                                   selectedItemData.utsettelseType,
                                   currentlySelectedStønadskonto || selectedItemData.periodeType,
                                   selectedItemData.aktiviteter.length === 1,

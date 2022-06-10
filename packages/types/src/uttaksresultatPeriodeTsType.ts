@@ -41,7 +41,7 @@ type UttaksresultatPeriode = Readonly<{
   perioderAnnenpart: PeriodeSoker[];
   annenForelderHarRett: boolean;
   aleneomsorg: boolean;
-  årsakFilter?: AarsakFilter;
+  årsakFilter: AarsakFilter;
 }>
 
 export default UttaksresultatPeriode;

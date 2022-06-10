@@ -7,6 +7,7 @@ import { TimeLineButton, TimeLineDataContainer } from '@navikt/ft-tidslinje';
 import { FloatRight } from '@navikt/ft-ui-komponenter';
 import { ArbeidsgiverOpplysningerPerId, Behandling, AlleKodeverk } from '@fpsak-frontend/types';
 
+import { AarsakFilter } from '@fpsak-frontend/types/src/uttaksresultatPeriodeTsType';
 import UttakActivity from './UttakActivity';
 import { PeriodeMedClassName } from './Uttak';
 
@@ -21,9 +22,7 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  kreverSammenhengendeUttak: boolean;
-  utenMinsterett: boolean;
-  søkerErMor: boolean;
+  aarsakFilter: AarsakFilter;
 }
 
 const UttakMedsokerReadOnly: FunctionComponent<OwnProps> = ({
@@ -37,9 +36,7 @@ const UttakMedsokerReadOnly: FunctionComponent<OwnProps> = ({
   alleKodeverk,
   behandlingsresultat,
   arbeidsgiverOpplysningerPerId,
-  kreverSammenhengendeUttak,
-  utenMinsterett,
-  søkerErMor,
+  aarsakFilter,
 }) => {
   const intl = useIntl();
   return (
@@ -68,9 +65,7 @@ const UttakMedsokerReadOnly: FunctionComponent<OwnProps> = ({
         alleKodeverk={alleKodeverk}
         behandlingsresultat={behandlingsresultat}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        kreverSammenhengendeUttak={kreverSammenhengendeUttak}
-        utenMinsterett={utenMinsterett}
-        søkerErMor={!søkerErMor}
+        aarsakFilter={aarsakFilter}
       />
     </TimeLineDataContainer>
   );

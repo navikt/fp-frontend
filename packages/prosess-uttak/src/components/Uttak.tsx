@@ -452,6 +452,8 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
 
     const gjeldendeFamiliehendelse = familiehendelse?.gjeldende;
 
+    const aarsakFilter = uttaksresultat.årsakFilter;
+
     const dodeBarn = gjeldendeFamiliehendelse
       && !gjeldendeFamiliehendelse.brukAntallBarnFraTps
       && gjeldendeFamiliehendelse.avklartBarn
@@ -524,9 +526,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
                         alleKodeverk={alleKodeverk}
                         behandlingsresultat={behandlingsresultat}
                         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-                        kreverSammenhengendeUttak={uttaksresultat.årsakFilter?.kreverSammenhengendeUttak}
-                        utenMinsterett={uttaksresultat.årsakFilter?.utenMinsterett}
-                        søkerErMor={uttaksresultat.årsakFilter?.søkerErMor}
+                        aarsakFilter={aarsakFilter}
                       />
                     )}
                   {!selectedItem.hovedsoker
@@ -542,9 +542,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
                         alleKodeverk={alleKodeverk}
                         behandlingsresultat={behandlingsresultat}
                         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-                        kreverSammenhengendeUttak={uttaksresultat.årsakFilter?.kreverSammenhengendeUttak}
-                        utenMinsterett={uttaksresultat.årsakFilter?.utenMinsterett}
-                        søkerErMor={uttaksresultat.årsakFilter?.søkerErMor}
+                        aarsakFilter={aarsakFilter}
                       />
                     )}
                 </>
