@@ -30,6 +30,8 @@ const FritekstKlageBrevTextField: FunctionComponent<OwnProps & WrappedComponentP
         text: getLanguageFromSprakkode(sprakkode),
         titleText: intl.formatMessage({ id: 'Malform.Beskrivelse' }),
       }]}
+      // Må erstatte bindestrek kopiert inn fra Word med vanlig bindestrek
+      parse={(value: string) => value.replaceAll('‑', '-')}
     />
   </div>
 );
