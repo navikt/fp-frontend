@@ -129,6 +129,7 @@ interface OwnProps {
   behandlingsresultat?: Behandling['behandlingsresultat'];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   kreverSammenhengendeUttak: boolean;
+  utenMinsterett: boolean;
   søkerErMor: boolean;
 }
 
@@ -242,6 +243,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
       stonadskonto,
       arbeidsgiverOpplysningerPerId,
       kreverSammenhengendeUttak,
+      utenMinsterett,
       søkerErMor,
       reduxFormChange: formChange,
     } = this.props;
@@ -315,6 +317,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
           behandlingsresultat={behandlingsresultat}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           kreverSammenhengendeUttak={kreverSammenhengendeUttak}
+          utenMinsterett={utenMinsterett}
           søkerErMor={søkerErMor}
           reduxFormChange={formChange}
         />

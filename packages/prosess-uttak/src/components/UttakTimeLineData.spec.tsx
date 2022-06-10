@@ -133,6 +133,7 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       kreverSammenhengendeUttak
+      utenMinsterett
       søkerErMor
     />, messages);
     wrapper.setState({ showDelPeriodeModal: false });
@@ -166,6 +167,7 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       kreverSammenhengendeUttak
+      utenMinsterett
       søkerErMor
     />, messages);
     wrapper.setState({ showDelPeriodeModal: true });
@@ -198,6 +200,7 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       kreverSammenhengendeUttak
+      utenMinsterett
       søkerErMor
     />, messages);
     wrapper.setState({ showDelPeriodeModal: false });
@@ -232,6 +235,7 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       kreverSammenhengendeUttak
+      utenMinsterett
       søkerErMor
     />, messages);
     const buttons = wrapper.find(TimeLineButton);
@@ -263,6 +267,7 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       kreverSammenhengendeUttak
+      utenMinsterett
       søkerErMor
     />, messages);
     const uttakActivity = wrapper.find(UttakActivity);
@@ -295,6 +300,7 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       kreverSammenhengendeUttak
+      utenMinsterett
       søkerErMor
     />, messages);
     const uttak = wrapper.find(AksjonspunktHelpTextTemp);
@@ -327,6 +333,7 @@ describe('<UttakTimeLineData>', () => {
       alleKodeverk={kodeverk}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       kreverSammenhengendeUttak
+      utenMinsterett
       søkerErMor
     />, messages);
     const uttak = wrapper.find(AksjonspunktHelpTextTemp);

@@ -82,8 +82,6 @@ describe('<Uttak>', () => {
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
       arbeidsgiverOpplysningerPerId={{}}
-      kreverSammenhengendeUttak
-      søkerErMor
     />);
     wrapper.setState({ selectedItem: null });
     const rows = wrapper.find(Row);
@@ -135,8 +133,6 @@ describe('<Uttak>', () => {
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
       arbeidsgiverOpplysningerPerId={{}}
-      kreverSammenhengendeUttak
-      søkerErMor
     />);
     wrapper.setState({
       selectedItem: {
@@ -194,8 +190,6 @@ describe('<Uttak>', () => {
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
       arbeidsgiverOpplysningerPerId={{}}
-      kreverSammenhengendeUttak
-      søkerErMor={false}
     />);
     wrapper.setState({
       selectedItem: {
@@ -261,8 +255,6 @@ describe('<Uttak>', () => {
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
       arbeidsgiverOpplysningerPerId={{}}
-      kreverSammenhengendeUttak
-      søkerErMor
     />);
     wrapper.setState({
       selectedItem: {
@@ -328,8 +320,6 @@ describe('<Uttak>', () => {
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
       arbeidsgiverOpplysningerPerId={{}}
-      kreverSammenhengendeUttak
-      søkerErMor
     />);
     wrapper.setState({
       selectedItem: {

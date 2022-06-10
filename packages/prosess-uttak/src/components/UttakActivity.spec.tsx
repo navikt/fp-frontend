@@ -63,6 +63,7 @@ describe('<UttakActivity>', () => {
       samtidigUttaksprosent="20"
       arbeidsgiverOpplysningerPerId={{}}
       kreverSammenhengendeUttak
+      utenMinsterett
       søkerErMor
       reduxFormChange={() => undefined}
     />);
@@ -112,6 +113,7 @@ describe('<UttakActivity>', () => {
       samtidigUttaksprosent="20"
       arbeidsgiverOpplysningerPerId={{}}
       kreverSammenhengendeUttak
+      utenMinsterett
       søkerErMor
       reduxFormChange={() => undefined}
     />);
@@ -155,6 +157,7 @@ describe('<UttakActivity>', () => {
       samtidigUttaksprosent="20"
       arbeidsgiverOpplysningerPerId={{}}
       kreverSammenhengendeUttak
+      utenMinsterett
       søkerErMor
       reduxFormChange={() => undefined}
     />);
@@ -204,6 +207,7 @@ describe('<UttakActivity>', () => {
       samtidigUttaksprosent="20"
       arbeidsgiverOpplysningerPerId={{}}
       kreverSammenhengendeUttak
+      utenMinsterett
       søkerErMor
       reduxFormChange={() => undefined}
     />);
@@ -253,6 +257,7 @@ describe('<UttakActivity>', () => {
       samtidigUttaksprosent="20"
       arbeidsgiverOpplysningerPerId={{}}
       kreverSammenhengendeUttak
+      utenMinsterett
       søkerErMor
       reduxFormChange={() => undefined}
     />);

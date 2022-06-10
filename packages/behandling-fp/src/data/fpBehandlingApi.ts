@@ -39,7 +39,6 @@ export const FpBehandlingApiKeys = {
   INNTEKT_ARBEID_YTELSE: new RestKey<InntektArbeidYtelse, void>('INNTEKT_ARBEID_YTELSE'),
   VERGE: new RestKey<Verge, void>('VERGE'),
   YTELSEFORDELING: new RestKey<Ytelsefordeling, void>('YTELSEFORDELING'),
-  KREVER_SAMMENHENGENDE_UTTAK: new RestKey<{ kreverSammenhengendeUttak: boolean }, void>('KREVER_SAMMENHENGENDE_UTTAK'),
   OPPTJENING: new RestKey<Opptjening, void>('OPPTJENING'),
   FAKTA_ARBEIDSFORHOLD: new RestKey<FaktaArbeidsforhold[], void>('FAKTA_ARBEIDSFORHOLD'),
   UTTAKSRESULTAT_PERIODER: new RestKey<UttaksresultatPeriode, void>('UTTAKSRESULTAT_PERIODER'),
@@ -83,7 +82,6 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('inntekt-arbeid-ytelse', FpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE)
   .withRel('soeker-verge', FpBehandlingApiKeys.VERGE)
   .withRel('ytelsefordeling', FpBehandlingApiKeys.YTELSEFORDELING)
-  .withRel('krever-sammenhengende-uttak', FpBehandlingApiKeys.KREVER_SAMMENHENGENDE_UTTAK)
   .withRel('opptjening', FpBehandlingApiKeys.OPPTJENING)
   .withRel('fakta-arbeidsforhold', FpBehandlingApiKeys.FAKTA_ARBEIDSFORHOLD)
   .withRel('uttaksresultat-perioder', FpBehandlingApiKeys.UTTAKSRESULTAT_PERIODER)

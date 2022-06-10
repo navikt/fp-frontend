@@ -79,6 +79,7 @@ const mapAarsak = (
   årsakKoder: ArsakKodeverk[],
   utfallType: string,
   kreverSammenhengendeUttak: boolean,
+  utenMinsterett: boolean,
   søkerErMor: boolean,
   utsettelseType?: string,
   periodeType?: string,
@@ -91,9 +92,12 @@ const mapAarsak = (
       if (kodeItem.gyldigForLovendringer === undefined) {
         return true;
       }
-      return kreverSammenhengendeUttak
-        ? kodeItem.gyldigForLovendringer.includes('KREVER_SAMMENHENGENDE_UTTAK')
-        : kodeItem.gyldigForLovendringer.includes('FRITT_UTTAK');
+      if (kreverSammenhengendeUttak) {
+        return kodeItem.gyldigForLovendringer.includes('KREVER_SAMMENHENGENDE_UTTAK');
+      }
+      return utenMinsterett
+        ? kodeItem.gyldigForLovendringer.includes('FRITT_UTTAK')
+        : kodeItem.gyldigForLovendringer.includes('MINSTERETT_2022');
     })
     .filter((kodeItem) => {
       if (kodeItem.synligForRolle === undefined) {
@@ -166,6 +170,7 @@ interface PureOwnProps {
   behandlingsresultat?: Behandling['behandlingsresultat'];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   kreverSammenhengendeUttak: boolean;
+  utenMinsterett: boolean;
   søkerErMor: boolean;
   reduxFormChange: (...args: any[]) => any;
 }
@@ -208,6 +213,7 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
   currentlySelectedStønadskonto,
   arbeidsgiverOpplysningerPerId,
   kreverSammenhengendeUttak,
+  utenMinsterett,
   søkerErMor,
   reduxFormChange,
   ...formProps
@@ -271,6 +277,7 @@ export const UttakActivity: FunctionComponent<PureOwnProps & MappedOwnProps & In
                                   periodeAarsakKoder,
                                   erOppfylt ? 'INNVILGET' : 'AVSLÅTT',
                                   kreverSammenhengendeUttak,
+                                  utenMinsterett,
                                   søkerErMor,
                                   selectedItemData.utsettelseType,
                                   currentlySelectedStønadskonto || selectedItemData.periodeType,

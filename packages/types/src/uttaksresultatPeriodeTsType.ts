@@ -30,12 +30,18 @@ export type PeriodeSoker = Readonly<{
   oppholdÅrsak: string;
 }>
 
+export type AarsakFilter = Readonly<{
+  kreverSammenhengendeUttak: boolean;
+  utenMinsterett: boolean;
+  søkerErMor: boolean;
+}>
+
 type UttaksresultatPeriode = Readonly<{
   perioderSøker: PeriodeSoker[];
   perioderAnnenpart: PeriodeSoker[];
-  søkerErMor: boolean;
   annenForelderHarRett: boolean;
   aleneomsorg: boolean;
+  årsakFilter?: AarsakFilter;
 }>
 
 export default UttaksresultatPeriode;
