@@ -132,6 +132,7 @@
   "Registrering.VirksomhetStartetPanel.ErNyoppstartet": "Nyoppstartet næring",
   "Registrering.VirksomhetStartetPanel.VirksomhetEndretBeskrivelse": "Beskriv endringen i næring",
   "Registrering.VirksomhetStartetPanel.Inntekt": "Årsinntekt",
+  "Registrering.VirksomhetStartetPanel.MaFylleUtEnArsak": "Må fylle ut minst en årsak",
   
   "Registrering.VirksomhetRelasjonPanel.Relation": "Relasjon",
   "Registrering.VirksomhetRelasjonPanel.No": "Nei, har ikke nære venner eller er i familie tilknyttet næringen",

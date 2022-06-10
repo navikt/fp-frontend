@@ -81,7 +81,7 @@ const VirksomhetTypeNaringPanel: FunctionComponent<OwnProps> = ({
     <>
       <Undertekst><FormattedMessage id="Registrering.VirksomhetNaeringTypePanel.Title" /></Undertekst>
       <VerticalSpacer fourPx />
-      <SkjemaGruppe feil={formState.errors.notRegisteredInput?.message}>
+      <SkjemaGruppe feil={formState.isSubmitted ? formState.errors.notRegisteredInput?.message : undefined}>
         {naringvirksomhetTyper.map((nv) => (
           <Fragment key={nv.kode}>
             <VerticalSpacer fourPx />

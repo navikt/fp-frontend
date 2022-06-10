@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
+import React, { FunctionComponent, useEffect } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import { ArrowBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -9,6 +9,11 @@ import {
 import {
   CheckboxField, Datepicker, InputField, RadioGroupField, RadioOption, TextAreaField, formHooks,
 } from '@navikt/ft-form-hooks';
+import { SkjemaGruppe } from 'nav-frontend-skjema';
+
+type VirtuellFeilType = {
+  ingenArsakValgt?: boolean;
+}
 
 export type FormValues = {
   varigEndretEllerStartetSisteFireAr?: boolean;
@@ -34,10 +39,28 @@ interface OwnProps {
 export const VirksomhetStartetEndretPanel: FunctionComponent<OwnProps> = ({
   readOnly,
 }) => {
-  const { watch } = formHooks.useFormContext<FormValues>();
+  const intl = useIntl();
+  const {
+    watch, setError, clearErrors, formState,
+  } = formHooks.useFormContext<FormValues & VirtuellFeilType>();
   const varigEndretEllerStartetSisteFireAr = watch('varigEndretEllerStartetSisteFireAr') || false;
   const harVarigEndring = watch('harVarigEndring') || false;
+  const erNyoppstartet = watch('erNyoppstartet') || false;
   const erNyIArbeidslivet = watch('erNyIArbeidslivet') || false;
+
+  const isError = !harVarigEndring && !erNyoppstartet && !erNyIArbeidslivet;
+
+  useEffect(() => {
+    if (isError && varigEndretEllerStartetSisteFireAr) {
+      setError('ingenArsakValgt', {
+        type: 'custom',
+        message: intl.formatMessage({ id: 'Registrering.VirksomhetStartetPanel.MaFylleUtEnArsak' }),
+      });
+    }
+    if (!isError || !varigEndretEllerStartetSisteFireAr) {
+      clearErrors('ingenArsakValgt');
+    }
+  }, [isError, varigEndretEllerStartetSisteFireAr]);
 
   return (
     <>
@@ -52,40 +75,42 @@ export const VirksomhetStartetEndretPanel: FunctionComponent<OwnProps> = ({
         <Row>
           <Column xs="6">
             <ArrowBox>
-              <Undertekst><FormattedMessage id="Registrering.VirksomhetStartetPanel.Reason" /></Undertekst>
-              <VerticalSpacer fourPx />
-              <CheckboxField name="harVarigEndring" label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.HarVarigEndring" />} />
-              <VerticalSpacer fourPx />
-              {harVarigEndring && (
-                <>
-                  <VerticalSpacer sixteenPx />
-                  <ArrowBox>
-                    <Datepicker
-                      name="varigEndringGjeldendeFom"
-                      isReadOnly={readOnly}
-                      validate={[hasValidDate, required]}
-                      label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
-                    />
-                  </ArrowBox>
-                </>
-              )}
-              <CheckboxField name="erNyoppstartet" label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.ErNyoppstartet" />} />
-              <VerticalSpacer fourPx />
-              <CheckboxField name="erNyIArbeidslivet" label={<FormattedMessage id="Registrering.VirksomhetNyIArbeidslivetPanel.ErNyIArbeidslivet" />} />
-              <VerticalSpacer fourPx />
-              {erNyIArbeidslivet && (
-                <>
-                  <VerticalSpacer sixteenPx />
-                  <ArrowBox>
-                    <Datepicker
-                      name="nyIArbeidslivetFom"
-                      isReadOnly={readOnly}
-                      validate={[hasValidDate, required]}
-                      label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
-                    />
-                  </ArrowBox>
-                </>
-              )}
+              <SkjemaGruppe feil={formState.isSubmitted ? formState.errors?.ingenArsakValgt?.message : undefined}>
+                <Undertekst><FormattedMessage id="Registrering.VirksomhetStartetPanel.Reason" /></Undertekst>
+                <VerticalSpacer fourPx />
+                <CheckboxField name="harVarigEndring" label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.HarVarigEndring" />} />
+                <VerticalSpacer fourPx />
+                {harVarigEndring && (
+                  <>
+                    <VerticalSpacer sixteenPx />
+                    <ArrowBox>
+                      <Datepicker
+                        name="varigEndringGjeldendeFom"
+                        isReadOnly={readOnly}
+                        validate={[hasValidDate, required]}
+                        label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
+                      />
+                    </ArrowBox>
+                  </>
+                )}
+                <CheckboxField name="erNyoppstartet" label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.ErNyoppstartet" />} />
+                <VerticalSpacer fourPx />
+                <CheckboxField name="erNyIArbeidslivet" label={<FormattedMessage id="Registrering.VirksomhetNyIArbeidslivetPanel.ErNyIArbeidslivet" />} />
+                <VerticalSpacer fourPx />
+                {erNyIArbeidslivet && (
+                  <>
+                    <VerticalSpacer sixteenPx />
+                    <ArrowBox>
+                      <Datepicker
+                        name="nyIArbeidslivetFom"
+                        isReadOnly={readOnly}
+                        validate={[hasValidDate, required]}
+                        label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
+                      />
+                    </ArrowBox>
+                  </>
+                )}
+              </SkjemaGruppe>
               <TextAreaField
                 name="beskrivelseAvEndring"
                 label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.VirksomhetEndretBeskrivelse" />}
