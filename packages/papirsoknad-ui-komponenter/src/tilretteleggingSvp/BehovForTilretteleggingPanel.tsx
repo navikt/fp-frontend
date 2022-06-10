@@ -69,7 +69,7 @@ const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunction
   const sokForFrilans = watch(`${TILRETTELEGGING_NAME_PREFIX}.sokForFrilans`);
   const sokForArbeidsgiver = watch(`${TILRETTELEGGING_NAME_PREFIX}.sokForArbeidsgiver`);
 
-  const isError = !sokForSelvstendigNaringsdrivende && !sokForFrilans && !sokForArbeidsgiver && formState.isSubmitted;
+  const isError = !sokForSelvstendigNaringsdrivende && !sokForFrilans && !sokForArbeidsgiver;
   useEffect(() => {
     if (isError) {
       setError(`${TILRETTELEGGING_NAME_PREFIX}.notRegisteredInput`, {
@@ -87,7 +87,7 @@ const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunction
       <BorderBox>
         <SkjemaGruppe
           legend={<FormattedMessage id="BehovForTilretteleggingPanel.BehovForTilrettelegging" />}
-          feil={formState.errors[TILRETTELEGGING_NAME_PREFIX]?.notRegisteredInput?.message}
+          feil={formState.isSubmitted ? formState.errors[TILRETTELEGGING_NAME_PREFIX]?.notRegisteredInput?.message : undefined}
         >
           <RadioGroupField
             name={`${TILRETTELEGGING_NAME_PREFIX}.sokForSelvstendigNaringsdrivende`}

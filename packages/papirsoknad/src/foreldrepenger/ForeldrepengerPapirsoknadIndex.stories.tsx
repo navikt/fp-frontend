@@ -22,6 +22,7 @@ export const visPapirsoknadForMorVedFødsel = () => (
     soknadData={new SoknadData(FagsakYtelseType.FORELDREPENGER, familieHendelseType.FODSEL, foreldreType.MOR)}
     alleKodeverk={alleKodeverk as any}
     fagsakPersonnummer="1234567"
+    erEndringssøknad={false}
   />
 );
 
@@ -33,6 +34,7 @@ export const visPapirsoknadForMorVedAdopsjon = () => (
     soknadData={new SoknadData(FagsakYtelseType.FORELDREPENGER, familieHendelseType.ADOPSJON, foreldreType.MOR)}
     alleKodeverk={alleKodeverk as any}
     fagsakPersonnummer="1234567"
+    erEndringssøknad={false}
   />
 );
 
@@ -44,6 +46,7 @@ export const visPapirsoknadForMorVedOmsorg = () => (
     soknadData={new SoknadData(FagsakYtelseType.FORELDREPENGER, familieHendelseType.OMSORG, foreldreType.MOR)}
     alleKodeverk={alleKodeverk as any}
     fagsakPersonnummer="1234567"
+    erEndringssøknad={false}
   />
 );
 
@@ -55,5 +58,6 @@ export const visPapirsoknadForFarVedFødsel = () => (
     soknadData={new SoknadData(FagsakYtelseType.FORELDREPENGER, familieHendelseType.FODSEL, foreldreType.FAR)}
     alleKodeverk={alleKodeverk as any}
     fagsakPersonnummer="1234567"
+    erEndringssøknad={false}
   />
 );

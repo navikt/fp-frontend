@@ -49,7 +49,9 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({
   const {
     control, setError, formState, clearErrors,
   } = formHooks.useFormContext<{ [EGEN_VIRKSOMHET_NAME_PREFIX]: FormValues & VirtueltValideringsfeilFelt}>();
-  const { fields, remove, append } = formHooks.useFieldArray({
+  const {
+    fields, remove, append, update,
+  } = formHooks.useFieldArray({
     control,
     name: `${EGEN_VIRKSOMHET_NAME_PREFIX}.virksomheter`,
   });
@@ -68,13 +70,18 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({
       landJobberFra: virksomhet.virksomhetRegistrertINorge ? 'NOR' : virksomhet.landJobberFra,
       varigEndringGjeldendeFom: virksomhet.nyIArbeidslivetFom || virksomhet.varigEndringGjeldendeFom,
     };
-    append(justertVirksomhet);
+
+    if (virksomhetIndex === -1) {
+      append(justertVirksomhet);
+    } else {
+      update(virksomhetIndex, justertVirksomhet);
+    }
 
     lukkModal();
-  }, [append, lukkModal]);
+  }, [append, update, lukkModal, virksomhetIndex]);
 
   useEffect(() => {
-    if (fields.length === 0 && formState.isSubmitted) {
+    if (fields.length === 0) {
       setError(`${EGEN_VIRKSOMHET_NAME_PREFIX}.notRegisteredInput`, {
         type: 'custom',
         message: intl.formatMessage({ id: 'Registrering.RegistrerVirksomhetPanel.ArrayMinLength' }),
@@ -83,11 +90,11 @@ const RegistrerVirksomhetPanel: FunctionComponent<OwnProps> = ({
     if (fields.length > 0) {
       clearErrors(`${EGEN_VIRKSOMHET_NAME_PREFIX}.notRegisteredInput`);
     }
-  }, [fields.length, formState.isSubmitted]);
+  }, [fields.length]);
 
   return (
     <div className={styles.fieldsList}>
-      <SkjemaGruppe feil={formState.errors[EGEN_VIRKSOMHET_NAME_PREFIX]?.notRegisteredInput?.message}>
+      <SkjemaGruppe feil={formState.isSubmitted ? formState.errors[EGEN_VIRKSOMHET_NAME_PREFIX]?.notRegisteredInput?.message : undefined}>
         {fields.length > 0 && (
           <React.Fragment key={1}>
             <Row key="VirksomhetHeader">

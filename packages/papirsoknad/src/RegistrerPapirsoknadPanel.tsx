@@ -36,6 +36,7 @@ interface OwnProps {
     familieHendelseType: string,
     foreldreType: string,
   ) => Promise<any>;
+  erEndringssøknad: boolean;
 }
 
 const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
@@ -45,6 +46,7 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
   readOnly,
   lagreUfullstendig,
   lagreFullstendig,
+  erEndringssøknad,
 }) => {
   const [soknadData, setSoknadData] = useState<SoknadData>();
 
@@ -90,6 +92,7 @@ const RegistrerPapirsoknadPanel: FunctionComponent<OwnProps> = ({
               soknadData={soknadData}
               alleKodeverk={kodeverk}
               fagsakPersonnummer={fagsakPersonnummer}
+              erEndringssøknad={erEndringssøknad}
             />
           )}
           {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.SVANGERSKAPSPENGER && (

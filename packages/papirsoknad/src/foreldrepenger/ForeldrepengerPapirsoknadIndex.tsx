@@ -12,6 +12,7 @@ interface OwnProps {
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
   fagsakPersonnummer: string;
+  erEndringssøknad: boolean;
 }
 
 const ForeldrepengerPapirsoknadIndex: FunctionComponent<OwnProps> = ({
@@ -21,6 +22,7 @@ const ForeldrepengerPapirsoknadIndex: FunctionComponent<OwnProps> = ({
   soknadData,
   alleKodeverk,
   fagsakPersonnummer,
+  erEndringssøknad,
 }) => (
   <ForeldrepengerForm
     onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
@@ -29,6 +31,7 @@ const ForeldrepengerPapirsoknadIndex: FunctionComponent<OwnProps> = ({
     soknadData={soknadData}
     alleKodeverk={alleKodeverk}
     fagsakPersonnummer={fagsakPersonnummer}
+    erEndringssøknad={erEndringssøknad}
   />
 );
 
