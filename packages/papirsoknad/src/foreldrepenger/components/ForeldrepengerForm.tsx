@@ -91,6 +91,7 @@ interface OwnProps {
   fagsakPersonnummer: string;
   onSubmit: (values: any) => Promise<any>;
   onSubmitUfullstendigsoknad: () => Promise<any>;
+  erEndringssøknad: boolean;
 }
 
 /**
@@ -105,6 +106,7 @@ const ForeldrepengerForm: FunctionComponent<OwnProps> = ({
   onSubmit,
   onSubmitUfullstendigsoknad,
   fagsakPersonnummer,
+  erEndringssøknad,
 }) => {
   const formMethods = useForm<FormValues>({
     defaultValues: useMemo(() => buildInitialValues(alleKodeverk[KodeverkType.ARBEID_TYPE]), []),
@@ -155,7 +157,12 @@ const ForeldrepengerForm: FunctionComponent<OwnProps> = ({
         alleKodeverk={alleKodeverk}
         fagsakPersonnummer={fagsakPersonnummer}
       />
-      <PermisjonIndex foreldreType={soknadData.getForeldreType()} readOnly={readOnly} alleKodeverk={alleKodeverk} />
+      <PermisjonIndex
+        foreldreType={soknadData.getForeldreType()}
+        readOnly={readOnly}
+        alleKodeverk={alleKodeverk}
+        erEndringssøknad={erEndringssøknad}
+      />
       <BekreftelsePanel annenForelderInformertRequired={annenForelderInformertRequired} readOnly={readOnly} />
       <SprakPapirsoknadIndex readOnly={readOnly} />
       <LagreSoknadPapirsoknadIndex

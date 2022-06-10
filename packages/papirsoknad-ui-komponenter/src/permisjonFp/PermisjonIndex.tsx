@@ -13,6 +13,7 @@ interface OwnProps {
   foreldreType: string;
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
+  erEndringssøknad: boolean;
 }
 
 interface StaticFunctions {
@@ -24,12 +25,14 @@ const PermisjonIndex: FunctionComponent<OwnProps> & StaticFunctions = ({
   foreldreType,
   readOnly,
   alleKodeverk,
+  erEndringssøknad,
 }) => (
   <RawIntlProvider value={intl}>
     <PermisjonPanel
       readOnly={readOnly}
       foreldreType={foreldreType}
       alleKodeverk={alleKodeverk}
+      erEndringssøknad={erEndringssøknad}
     />
   </RawIntlProvider>
 );

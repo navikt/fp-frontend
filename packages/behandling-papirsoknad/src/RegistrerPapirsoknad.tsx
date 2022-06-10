@@ -99,6 +99,8 @@ const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
     return <LoadingPanel />;
   }
 
+  const erEndringssøknad = aksjonspunkter.some((ap) => ap.definisjon === aksjonspunktCodes.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER);
+
   return (
     <>
       <BehandlingPaVent
@@ -117,6 +119,7 @@ const RegistrerPapirsoknad: FunctionComponent<OwnProps> = ({
         readOnly={readOnly}
         lagreUfullstendig={lagreUfullstendig}
         lagreFullstendig={lagre}
+        erEndringssøknad={erEndringssøknad}
       />
     </>
   );

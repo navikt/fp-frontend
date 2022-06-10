@@ -25,12 +25,19 @@ const getText = (intl: IntlShape, kode: string, navn: string): string => {
   return navn;
 };
 
-const mapArsaker = (arsaker: KodeverkMedNavn[], sokerErMor: boolean, intl: IntlShape): ReactElement[] => arsaker.map(({
-  kode,
-  navn,
-}) => (!sokerErMor
-  ? <option value={kode} key={kode}>{getText(intl, kode, navn)}</option>
-  : <option value={kode} key={kode}>{navn}</option>));
+const mapArsaker = (
+  arsaker: KodeverkMedNavn[],
+  sokerErMor: boolean,
+  erEndringssøknad: boolean,
+  intl: IntlShape,
+): ReactElement[] => arsaker
+  .filter(({ kode }) => erEndringssøknad || (kode !== overforingArsak.ALENEOMSORG && kode !== overforingArsak.IKKE_RETT_ANNEN_FORELDER))
+  .map(({
+    kode,
+    navn,
+  }) => (!sokerErMor
+    ? <option value={kode} key={kode}>{getText(intl, kode, navn)}</option>
+    : <option value={kode} key={kode}>{navn}</option>));
 
 export type FormValues = {
   skalOvertaKvote: boolean;
@@ -41,6 +48,7 @@ interface OwnProps {
   foreldreType: string;
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
+  erEndringssøknad: boolean;
 }
 
 interface StaticFunctions {
@@ -57,11 +65,12 @@ const PermisjonOverforingAvKvoterPanel: FunctionComponent<OwnProps> & StaticFunc
   foreldreType,
   alleKodeverk,
   readOnly,
+  erEndringssøknad,
 }) => {
   const intl = useIntl();
 
   const overtaKvoteReasons = alleKodeverk[KodeverkType.OVERFOERING_AARSAK_TYPE];
-  const selectValues = mapArsaker(overtaKvoteReasons, foreldreType === ForeldreType.MOR, intl);
+  const selectValues = mapArsaker(overtaKvoteReasons, foreldreType === ForeldreType.MOR, erEndringssøknad, intl);
 
   const { watch } = formHooks.useFormContext<{[TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValues }>();
   const skalOvertaKvote = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalOvertaKvote`) || false;

@@ -51,6 +51,7 @@ interface OwnProps {
   foreldreType: string;
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
+  erEndringssøknad: boolean;
 }
 
 interface StaticFunctions {
@@ -67,6 +68,7 @@ const PermisjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   foreldreType,
   readOnly,
   alleKodeverk,
+  erEndringssøknad,
 }) => {
   const intl = useIntl();
 
@@ -91,7 +93,7 @@ const PermisjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   return (
     <BorderBox>
       <div className={styles.flexContainer}>
-        <SkjemaGruppe feil={formState.errors[TIDSROM_PERMISJON_FORM_NAME_PREFIX]?.notRegisteredInput?.message}>
+        <SkjemaGruppe feil={formState.isSubmitted ? formState.errors[TIDSROM_PERMISJON_FORM_NAME_PREFIX]?.notRegisteredInput?.message : undefined}>
           <Undertittel><FormattedMessage id="Registrering.Permisjon.Title" /></Undertittel>
           <VerticalSpacer sixteenPx />
           <VerticalSpacer eightPx />
@@ -114,6 +116,7 @@ const PermisjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
             readOnly={readOnly}
             foreldreType={foreldreType}
             alleKodeverk={alleKodeverk}
+            erEndringssøknad={erEndringssøknad}
           />
           <VerticalSpacer twentyPx />
           <PermisjonUtsettelsePanel

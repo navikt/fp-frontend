@@ -20,9 +20,11 @@ export default {
 const Template: Story<{
   submitCallback: (data: any) => Promise<void>;
   foreldreType: string;
+  erEndringssøknad: boolean;
 }> = ({
   submitCallback,
   foreldreType,
+  erEndringssøknad = false,
 }) => {
   const formMethods = useForm({
     defaultValues: PermisjonIndex.buildInitialValues(),
@@ -37,6 +39,7 @@ const Template: Story<{
         readOnly={false}
         alleKodeverk={alleKodeverk as any}
         foreldreType={foreldreType}
+        erEndringssøknad={erEndringssøknad}
       />
       <VerticalSpacer fourtyPx />
       <Hovedknapp htmlType="submit">
@@ -56,4 +59,11 @@ export const SokerErFar = Template.bind({});
 SokerErFar.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
   foreldreType: ForeldreType.FAR,
+};
+
+export const ErEndringssøknad = Template.bind({});
+ErEndringssøknad.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  foreldreType: ForeldreType.MOR,
+  erEndringssøknad: true,
 };

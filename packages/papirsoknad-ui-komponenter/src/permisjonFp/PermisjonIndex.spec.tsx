@@ -78,7 +78,7 @@ describe('<PermisjonIndex>', () => {
 
     userEvent.click(screen.getByText('Søker ønsker å overta kvote'));
 
-    userEvent.selectOptions(utils.getByLabelText('Angi årsak'), 'ALENEOMSORG');
+    userEvent.selectOptions(utils.getByLabelText('Angi årsak'), 'SYKDOM_ANNEN_FORELDER');
 
     const fomDatoInput = utils.getByLabelText('F.o.m.');
     userEvent.paste(fomDatoInput, '2022.05.20');
@@ -95,7 +95,7 @@ describe('<PermisjonIndex>', () => {
       tidsromPermisjon: {
         fulltUttak: false,
         overforingsperioder: [{
-          overforingArsak: 'ALENEOMSORG',
+          overforingArsak: 'SYKDOM_ANNEN_FORELDER',
           periodeFom: '2022-05-20',
           periodeTom: '2022-06-20',
         }],

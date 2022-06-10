@@ -96,8 +96,8 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
 
     userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(2));
-    expect(lagre).toHaveBeenNthCalledWith(2, {
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    expect(lagre).toHaveBeenNthCalledWith(1, {
       egenVirksomhet: {
         harArbeidetIEgenVirksomhet: true,
         virksomheter: [{
