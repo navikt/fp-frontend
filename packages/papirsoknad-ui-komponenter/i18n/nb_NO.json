@@ -172,6 +172,7 @@
   "BehovForTilretteleggingPanel.Nei": "Nei",
   "BehovForTilretteleggingPanel.SokForFrilans": "Søkes det om svangerskapspenger som frilanser?",
   "BehovForTilretteleggingPanel.SokForArbeidsgiver": "Søkes det om svangerskapspenger som arbeidstaker?",
+  "BehovForTilretteleggingPanel.MinstEnMaaVereJa": "Minst ett av spørsmålene må besvares med alternativ Ja",
 
   "BehovForTilrettteleggingFieldArray.LeggTilTilretteleggingsbehov": "Legg til tilretteleggingsbehov",
   "BehovForTilrettteleggingFieldArray.BehovForTilrettelegging": "Behov for tilrettelegging",

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { RawIntlProvider, FormattedMessage } from 'react-intl';
 import { SkjemaGruppe } from 'nav-frontend-skjema';
 import {
@@ -24,6 +24,10 @@ export type Tilrettelegging = {
   stillingsprosent?: string;
 }
 
+type VirtuellFeilType = {
+  notRegisteredInput?: boolean;
+}
+
 export type FormValues = {
   [TILRETTELEGGING_NAME_PREFIX]: {
     [tilretteleggingForArbeidsgiverFieldArrayName]?: {
@@ -38,7 +42,7 @@ export type FormValues = {
     sokForSelvstendigNaringsdrivende?: boolean;
     behovsdatoSN?: string;
     tilretteleggingSelvstendigNaringsdrivende?: Tilrettelegging[];
-  }
+  } & VirtuellFeilType
 };
 
 interface OwnProps {
@@ -57,16 +61,34 @@ interface StaticFunctions {
 const BehovForTilretteleggingPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
 }) => {
-  const { watch } = formHooks.useFormContext<FormValues>();
+  const {
+    watch, setError, clearErrors, formState,
+  } = formHooks.useFormContext<FormValues>();
 
   const sokForSelvstendigNaringsdrivende = watch(`${TILRETTELEGGING_NAME_PREFIX}.sokForSelvstendigNaringsdrivende`);
   const sokForFrilans = watch(`${TILRETTELEGGING_NAME_PREFIX}.sokForFrilans`);
   const sokForArbeidsgiver = watch(`${TILRETTELEGGING_NAME_PREFIX}.sokForArbeidsgiver`);
 
+  const isError = !sokForSelvstendigNaringsdrivende && !sokForFrilans && !sokForArbeidsgiver && formState.isSubmitted;
+  useEffect(() => {
+    if (isError) {
+      setError(`${TILRETTELEGGING_NAME_PREFIX}.notRegisteredInput`, {
+        type: 'custom',
+        message: intl.formatMessage({ id: 'BehovForTilretteleggingPanel.MinstEnMaaVereJa' }),
+      });
+    }
+    if (!isError) {
+      clearErrors(`${TILRETTELEGGING_NAME_PREFIX}.notRegisteredInput`);
+    }
+  }, [isError]);
+
   return (
     <RawIntlProvider value={intl}>
       <BorderBox>
-        <SkjemaGruppe legend={<FormattedMessage id="BehovForTilretteleggingPanel.BehovForTilrettelegging" />}>
+        <SkjemaGruppe
+          legend={<FormattedMessage id="BehovForTilretteleggingPanel.BehovForTilrettelegging" />}
+          feil={formState.errors[TILRETTELEGGING_NAME_PREFIX]?.notRegisteredInput?.message}
+        >
           <RadioGroupField
             name={`${TILRETTELEGGING_NAME_PREFIX}.sokForSelvstendigNaringsdrivende`}
             label={<Undertekst><FormattedMessage id="BehovForTilretteleggingPanel.SokForSelvstendigNaringsdrivende" /></Undertekst>}

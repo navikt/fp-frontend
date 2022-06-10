@@ -10,7 +10,7 @@ import * as stories from './BehovForTilretteleggingPanel.stories';
 const { Default } = composeStories(stories);
 
 describe('<BehovForTilretteleggingPanel>', () => {
-  it('skal velge nei på alle de obligatoriske spørsmålene', async () => {
+  it('skal velge nei på alle de obligatoriske spørsmålene og da få feilmelding', async () => {
     const lagre = jest.fn();
 
     render(<Default submitCallback={lagre} />);
@@ -27,14 +27,9 @@ describe('<BehovForTilretteleggingPanel>', () => {
 
     userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, {
-      tilretteleggingArbeidsforhold: {
-        sokForArbeidsgiver: false,
-        sokForFrilans: false,
-        sokForSelvstendigNaringsdrivende: false,
-      },
-    });
+    expect(await screen.findByText('Minst ett av spørsmålene må besvares med alternativ Ja')).toBeInTheDocument();
+
+    expect(lagre).toHaveBeenCalledTimes(0);
   });
 
   it('skal velge at det søkes om svangerskapspenger som selvstendig næringsdrivende', async () => {
