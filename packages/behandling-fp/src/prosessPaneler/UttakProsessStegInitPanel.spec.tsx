@@ -53,7 +53,6 @@ const uttaksresultatPerioder = {
         {
           stønadskontoType: 'FORELDREPENGER_FØR_FØDSEL',
           prosentArbeid: 0,
-          arbeidsforholdId: null,
           eksternArbeidsforholdId: null,
           arbeidsgiverReferanse: '910909088',
           utbetalingsgrad: 100,
@@ -80,6 +79,11 @@ const uttaksresultatPerioder = {
   perioderAnnenpart: [],
   annenForelderHarRett: true,
   aleneomsorg: false,
+  årsakFilter: {
+    kreverSammenhengendeUttak: false,
+    utenMinsterett: false,
+    søkerErMor: true,
+  },
 } as UttaksresultatPeriode;
 
 const behandling = {
@@ -121,7 +125,6 @@ const lagRestApiMockData = () => [
   },
   { key: FpBehandlingApiKeys.YTELSEFORDELING.name, data: {} },
   { key: FpBehandlingApiKeys.UTTAK_STONADSKONTOER.name, data: { stonadskontoer: stonadskonto } },
-  { key: FpBehandlingApiKeys.KREVER_SAMMENHENGENDE_UTTAK.name, data: { kreverSammenhengendeUttak: false } },
   { key: FpBehandlingApiKeys.STONADSKONTOER_GITT_UTTAKSPERIODER.name, data: undefined },
 ];
 

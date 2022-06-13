@@ -217,8 +217,12 @@ const uttaksresultatPerioder = {
   ],
   perioderAnnenpart: [],
   annenForelderHarRett: true,
-  søkerErMor: true,
   aleneomsorg: false,
+  årsakFilter: {
+    kreverSammenhengendeUttak: false,
+    utenMinsterett: false,
+    søkerErMor: true,
+  },
 };
 
 const uttakPeriodeGrense = {
@@ -290,6 +294,5 @@ export const visProsessUttak = () => (
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     alleMerknaderFraBeslutter={{}}
     setFormData={() => undefined}
-    kreverSammenhengendeUttak={{ kreverSammenhengendeUttak: true }}
   />
 );
