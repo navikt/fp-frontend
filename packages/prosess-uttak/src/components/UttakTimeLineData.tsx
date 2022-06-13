@@ -16,6 +16,7 @@ import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   ArbeidsgiverOpplysningerPerId, Behandling, AlleKodeverk, UttakStonadskontoer,
 } from '@fpsak-frontend/types';
+import { AarsakFilter } from '@fpsak-frontend/types/src/uttaksresultatPeriodeTsType';
 import UttakActivity from './UttakActivity';
 import DelOppPeriodeModal, { DeltPeriodeData } from './DelOppPeriodeModal';
 import { PeriodeMedClassName, UttaksresultatActivity } from './Uttak';
@@ -128,8 +129,7 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  kreverSammenhengendeUttak: boolean;
-  søkerErMor: boolean;
+  aarsakFilter: AarsakFilter;
 }
 
 interface OwnState {
@@ -241,8 +241,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
       selectedItemData,
       stonadskonto,
       arbeidsgiverOpplysningerPerId,
-      kreverSammenhengendeUttak,
-      søkerErMor,
+      aarsakFilter,
       reduxFormChange: formChange,
     } = this.props;
     const { showDelPeriodeModal } = this.state;
@@ -314,8 +313,7 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
           alleKodeverk={alleKodeverk}
           behandlingsresultat={behandlingsresultat}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          kreverSammenhengendeUttak={kreverSammenhengendeUttak}
-          søkerErMor={søkerErMor}
+          aarsakFilter={aarsakFilter}
           reduxFormChange={formChange}
         />
       </TimeLineDataContainer>

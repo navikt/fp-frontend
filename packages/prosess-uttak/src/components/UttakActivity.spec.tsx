@@ -62,8 +62,7 @@ describe('<UttakActivity>', () => {
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
       arbeidsgiverOpplysningerPerId={{}}
-      kreverSammenhengendeUttak
-      søkerErMor
+      aarsakFilter={{ kreverSammenhengendeUttak: false, utenMinsterett: false, søkerErMor: true }}
       reduxFormChange={() => undefined}
     />);
 
@@ -111,8 +110,7 @@ describe('<UttakActivity>', () => {
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
       arbeidsgiverOpplysningerPerId={{}}
-      kreverSammenhengendeUttak
-      søkerErMor
+      aarsakFilter={{ kreverSammenhengendeUttak: false, utenMinsterett: false, søkerErMor: true }}
       reduxFormChange={() => undefined}
     />);
 
@@ -154,8 +152,7 @@ describe('<UttakActivity>', () => {
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
       arbeidsgiverOpplysningerPerId={{}}
-      kreverSammenhengendeUttak
-      søkerErMor
+      aarsakFilter={{ kreverSammenhengendeUttak: false, utenMinsterett: false, søkerErMor: true }}
       reduxFormChange={() => undefined}
     />);
 
@@ -203,8 +200,7 @@ describe('<UttakActivity>', () => {
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
       arbeidsgiverOpplysningerPerId={{}}
-      kreverSammenhengendeUttak
-      søkerErMor
+      aarsakFilter={{ kreverSammenhengendeUttak: false, utenMinsterett: false, søkerErMor: true }}
       reduxFormChange={() => undefined}
     />);
 
@@ -252,8 +248,7 @@ describe('<UttakActivity>', () => {
       erSamtidigUttak={false}
       samtidigUttaksprosent="20"
       arbeidsgiverOpplysningerPerId={{}}
-      kreverSammenhengendeUttak
-      søkerErMor
+      aarsakFilter={{ kreverSammenhengendeUttak: false, utenMinsterett: false, søkerErMor: true }}
       reduxFormChange={() => undefined}
     />);
 

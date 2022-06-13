@@ -125,7 +125,6 @@ interface PureOwnProps {
     behandlingUuid: string;
     perioder: any;
   }) => Promise<any>;
-  kreverSammenhengendeUttak: boolean;
 }
 
 interface MappedOwnProps {
@@ -138,7 +137,6 @@ interface MappedOwnProps {
   hovedsokerKjonnKode?: Kjønnkode;
   isRevurdering: boolean;
   medsokerKjonnKode: Kjønnkode;
-  søkerErMor: boolean;
   soknadDate: string;
   stonadskonto: UttakStonadskontoer;
   uttakPerioder: PeriodeMedClassName[];
@@ -448,12 +446,13 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
       alleKodeverk,
       behandlingsresultat,
       arbeidsgiverOpplysningerPerId,
-      kreverSammenhengendeUttak,
-      søkerErMor,
+      uttaksresultat,
     } = this.props;
     const { selectedItem, stonadskonto, isButtonDisabled } = this.state;
 
     const gjeldendeFamiliehendelse = familiehendelse?.gjeldende;
+
+    const aarsakFilter = uttaksresultat.årsakFilter;
 
     const dodeBarn = gjeldendeFamiliehendelse
       && !gjeldendeFamiliehendelse.brukAntallBarnFraTps
@@ -527,8 +526,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
                         alleKodeverk={alleKodeverk}
                         behandlingsresultat={behandlingsresultat}
                         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-                        kreverSammenhengendeUttak={kreverSammenhengendeUttak}
-                        søkerErMor={søkerErMor}
+                        aarsakFilter={aarsakFilter}
                       />
                     )}
                   {!selectedItem.hovedsoker
@@ -544,8 +542,7 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
                         alleKodeverk={alleKodeverk}
                         behandlingsresultat={behandlingsresultat}
                         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-                        kreverSammenhengendeUttak={kreverSammenhengendeUttak}
-                        søkerErMor={søkerErMor}
+                        aarsakFilter={aarsakFilter}
                       />
                     )}
                 </>
@@ -799,7 +796,6 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
     // @ts-ignore
     uttaksresultatActivity: lagUttaksresultatActivity(state, props),
     uttakPerioder,
-    søkerErMor: uttaksresultat.søkerErMor,
   };
 };
 

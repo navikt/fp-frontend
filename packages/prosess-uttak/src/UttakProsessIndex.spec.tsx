@@ -21,7 +21,6 @@ describe('<UttakProsessIndex>', () => {
           {
             stønadskontoType: 'FORELDREPENGER_FØR_FØDSEL',
             prosentArbeid: 0,
-            arbeidsforholdId: null,
             eksternArbeidsforholdId: null,
             arbeidsgiverReferanse: '910909088',
             utbetalingsgrad: 100,
@@ -96,7 +95,6 @@ describe('<UttakProsessIndex>', () => {
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       alleMerknaderFraBeslutter={{}}
       setFormData={() => undefined}
-      kreverSammenhengendeUttak={{ kreverSammenhengendeUttak: true }}
     />);
     expect(wrapper.find(UttakPanel)).toHaveLength(1);
   });
