@@ -318,9 +318,15 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
     const {
       periodeSlett, isNyPeriodeFormOpen, showModalSlettPeriode,
     } = this.state;
+
+    const { gjeldende: gjeldeneFamiliehendelse } = familiehendelse;
+
     const nyPeriodeDisabledDaysFom = førsteUttaksdato || (perioder[0] || {}).fom;
-    const sisteUttakdatoFørsteSeksUker = moment(findFamiliehendelseDato(familiehendelse.gjeldende)).add(6, 'weeks');
-    const farSøkerFør6Uker = (perioder[0] || {}).uttakPeriodeType
+    const familiehendelsedato = findFamiliehendelseDato(gjeldeneFamiliehendelse);
+    const sisteUttakdatoFørsteSeksUker = moment(familiehendelsedato).add(6, 'weeks');
+
+    const farSøkerFør6Uker = familiehendelsedato && !gjeldeneFamiliehendelse.omsorgsovertakelseDato
+      && (perioder[0] || {}).uttakPeriodeType
       && (perioder[0] || {}).uttakPeriodeType === 'FEDREKVOTE'
       && moment((perioder[0] || {}).fom).isBefore(sisteUttakdatoFørsteSeksUker);
 
@@ -339,10 +345,6 @@ export class UttakPerioder extends PureComponent<PureOwnProps & MappedOwnProps &
           />
         );
       });
-
-    if (farSøkerFør6Uker) {
-      aksjonspunktTekster.push(<FormattedMessage id="UttakInfoPanel.Aksjonspunkt.FarSøkerFør6Uker" />);
-    }
 
     return (
       <>
