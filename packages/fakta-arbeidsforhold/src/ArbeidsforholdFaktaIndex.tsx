@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import {
-  ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, InntektArbeidYtelse,
+  ArbeidsgiverOpplysningerPerId, StandardFaktaPanelProps, ArbeidOgInntektsmelding,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -12,17 +12,17 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface OwnProps {
-  inntektArbeidYtelse: InntektArbeidYtelse;
+  arbeidOgInntekt: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
 const ArbeidsforholdFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
-  inntektArbeidYtelse,
+  arbeidOgInntekt,
   arbeidsgiverOpplysningerPerId,
 }) => (
   <RawIntlProvider value={intl}>
     <ArbeidsforholdInfoPanel
-      arbeidsforhold={inntektArbeidYtelse.arbeidsforhold}
+      arbeidOgInntekt={arbeidOgInntekt}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     />
   </RawIntlProvider>

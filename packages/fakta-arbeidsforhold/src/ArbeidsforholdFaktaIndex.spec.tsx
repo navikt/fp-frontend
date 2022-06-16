@@ -15,18 +15,18 @@ describe('<ArbeidsforholdFaktaIndex>', () => {
     render(<ArbeidsforholdetErIkkeAktivt />);
 
     expect(await screen.findByText('Arbeidsforhold som er aktive ved permisjonsstart')).toBeInTheDocument();
-    expect(screen.getByText('Vy(23232)')).toBeInTheDocument();
-    expect(screen.getByText(/01.01.2018/)).toBeInTheDocument();
-    expect(screen.getByText('Inntektsmelding')).toBeInTheDocument();
+    expect(screen.getByText('KIWI(999999999)')).toBeInTheDocument();
+    expect(screen.getByText(/06.12.2019/)).toBeInTheDocument();
+    expect(screen.getByText('AA-Registeret')).toBeInTheDocument();
     expect(screen.getByText('100.00 %')).toBeInTheDocument();
-    expect(screen.getByAltText('Arbeidsforhold skal brukes')).toBeInTheDocument();
+    expect(screen.queryByAltText('Arbeidsforhold skal brukes')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Inntektsmelding')); // Klikk på rad
+    userEvent.click(screen.getByText('AA-Registeret')); // Klikk på rad
 
     expect(await screen.findByText('Detaljer')).toBeInTheDocument();
     expect(screen.getByText('Arbeidsforholdet er ikke aktivt. Inntektsmelding er ikke nødvendig.')).toBeInTheDocument();
     expect(screen.getByText('Arbeidsforhold aktivt tom. dato')).toBeInTheDocument();
-    expect(screen.getByText('01.01.2019')).toBeInTheDocument();
+    expect(screen.getByText('31.12.9999')).toBeInTheDocument();
 
     expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
     expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
@@ -36,13 +36,13 @@ describe('<ArbeidsforholdFaktaIndex>', () => {
     render(<FjernArbeidsforholdet />);
 
     expect(await screen.findByText('Arbeidsforhold som er aktive ved permisjonsstart')).toBeInTheDocument();
-    expect(screen.getByText('Vy(23232)')).toBeInTheDocument();
-    expect(screen.getByText(/01.01.2018/)).toBeInTheDocument();
-    expect(screen.getByText('Inntektsmelding')).toBeInTheDocument();
+    expect(screen.getByText('KIWI(999999999)')).toBeInTheDocument();
+    expect(screen.getByText(/06.12.2019/)).toBeInTheDocument();
+    expect(screen.getByText('AA-Registeret')).toBeInTheDocument();
     expect(screen.getByText('100.00 %')).toBeInTheDocument();
     expect(screen.queryByAltText('Arbeidsforhold skal brukes')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Inntektsmelding')); // Klikk på rad
+    userEvent.click(screen.getByText('AA-Registeret')); // Klikk på rad
 
     expect(await screen.findByText('Detaljer')).toBeInTheDocument();
     expect(screen.getByText('Fjern arbeidsforholdet for denne behandlingen')).toBeInTheDocument();
@@ -55,19 +55,19 @@ describe('<ArbeidsforholdFaktaIndex>', () => {
     render(<FlereArbeidsforholdITabell />);
 
     expect(await screen.findByText('Arbeidsforhold som er aktive ved permisjonsstart')).toBeInTheDocument();
-    expect(screen.getByText('KIWI(999999999)...0001')).toBeInTheDocument();
-    expect(screen.getByText(/03.06.2019/)).toBeInTheDocument();
-    expect(screen.getAllByText('AA-Registeret')).toHaveLength(2);
-    expect(screen.getAllByText('100.00 %')).toHaveLength(3);
-    expect(screen.getByText('14.05.2020')).toBeInTheDocument();
-    expect(screen.getAllByAltText('Arbeidsforhold skal brukes')).toHaveLength(2);
-
     expect(screen.getByText('KIWI(999999999)')).toBeInTheDocument();
-    expect(screen.getByText(/01.05.2015/)).toBeInTheDocument();
+    expect(screen.getByText(/06.12.2019/)).toBeInTheDocument();
+    expect(screen.getAllByText('AA-Registeret')).toHaveLength(3);
+    expect(screen.getAllByText('100.00 %')).toHaveLength(3);
+    expect(screen.getByText('06.12.2021')).toBeInTheDocument();
 
     expect(screen.getByText('REMA 1000(999999998)')).toBeInTheDocument();
-    expect(screen.getByText(/15.05.2020/)).toBeInTheDocument();
-    expect(screen.getByText('19.04.2019')).toBeInTheDocument();
+    expect(screen.getByText(/12.05.2019/)).toBeInTheDocument();
+    expect(screen.getByText('06.12.2021')).toBeInTheDocument();
+    expect(screen.getByAltText('Arbeidsforhold skal brukes')).toBeInTheDocument();
+
+    expect(screen.getByText('Vy(23232)')).toBeInTheDocument();
+    expect(screen.getByText(/06.12.2020/)).toBeInTheDocument();
 
     userEvent.click(screen.getAllByText('AA-Registeret')[1]); // Klikk på rad 2
 
@@ -82,10 +82,10 @@ describe('<ArbeidsforholdFaktaIndex>', () => {
 
     await waitFor(() => expect(screen.queryByText('Detaljer')).not.toBeInTheDocument());
 
-    userEvent.click(screen.getByText('Inntektsmelding')); // Klikk på rad 3
+    userEvent.click(screen.getAllByText('AA-Registeret')[2]); // Klikk på rad 3
 
     expect(await screen.queryByText('Detaljer')).toBeInTheDocument();
-    expect(screen.getByText('Inntektsmeldingen er ikke relevant, gå videre uten disse opplysningene')).toBeInTheDocument();
+    expect(screen.getByText('Fjern arbeidsforholdet for denne behandlingen')).toBeInTheDocument();
 
     expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
     expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
@@ -102,12 +102,12 @@ describe('<ArbeidsforholdFaktaIndex>', () => {
     render(<OppdaterArbeidsforholdOgAvslaGrunnetManglendeOpplysninger />);
 
     expect(await screen.findByText('Arbeidsforhold som er aktive ved permisjonsstart')).toBeInTheDocument();
-    expect(screen.getByText('Vy(23232)')).toBeInTheDocument();
+    expect(screen.getByText('KIWI(999999999)')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Inntektsmelding')); // Klikk på rad
+    userEvent.click(screen.getByText('AA-Registeret')); // Klikk på rad
 
     expect(await screen.findByText('Detaljer')).toBeInTheDocument();
-    expect(screen.getByText('Oppdater arbeidsforholdet basert på inntektsmelding med følgene opplysninger.')).toBeInTheDocument();
+    expect(screen.getByText('Arbeidsforholdet er aktivt og skal benyttes i behandlingen. Nødvendig inntektsmelding er ikke mottatt.')).toBeInTheDocument();
     expect(screen.getByText('Ytelsen kan avslås på grunn av manglende opplysninger.')).toBeInTheDocument();
 
     expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
@@ -118,12 +118,12 @@ describe('<ArbeidsforholdFaktaIndex>', () => {
     render(<OppdaterArbeidsforholdOgFortsettUtenIM />);
 
     expect(await screen.findByText('Arbeidsforhold som er aktive ved permisjonsstart')).toBeInTheDocument();
-    expect(screen.getByText('Vy(23232)')).toBeInTheDocument();
+    expect(screen.getByText('KIWI(999999999)')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Inntektsmelding')); // Klikk på rad
+    userEvent.click(screen.getByText('AA-Registeret')); // Klikk på rad
 
     expect(await screen.findByText('Detaljer')).toBeInTheDocument();
-    expect(screen.getByText('Oppdater arbeidsforholdet basert på inntektsmelding med følgene opplysninger.')).toBeInTheDocument();
+    expect(screen.getByText('Arbeidsforholdet er aktivt og skal benyttes i behandlingen. Nødvendig inntektsmelding er ikke mottatt.')).toBeInTheDocument();
     expect(screen.getByText('Fortsett behandling uten inntektsmelding, inntekt fra A-inntekt benyttes i beregningsgrunnlaget.')).toBeInTheDocument();
 
     expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
@@ -134,9 +134,9 @@ describe('<ArbeidsforholdFaktaIndex>', () => {
     render(<SokerErIPermisjon />);
 
     expect(await screen.findByText('Arbeidsforhold som er aktive ved permisjonsstart')).toBeInTheDocument();
-    expect(screen.getByText('Vy(23232)')).toBeInTheDocument();
+    expect(screen.getByText('KIWI(999999999)')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Inntektsmelding')); // Klikk på rad
+    userEvent.click(screen.getByText('AA-Registeret')); // Klikk på rad
 
     expect(await screen.findByText('Detaljer')).toBeInTheDocument();
     expect(screen.getByText('Permisjon')).toBeInTheDocument();
@@ -151,14 +151,14 @@ describe('<ArbeidsforholdFaktaIndex>', () => {
     render(<SokerErIkkeIPermisjon />);
 
     expect(await screen.findByText('Arbeidsforhold som er aktive ved permisjonsstart')).toBeInTheDocument();
-    expect(screen.getByText('Vy(23232)')).toBeInTheDocument();
+    expect(screen.getByText('KIWI(999999999)')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Inntektsmelding')); // Klikk på rad
+    userEvent.click(screen.getByText('AA-Registeret')); // Klikk på rad
 
     expect(await screen.findByText('Detaljer')).toBeInTheDocument();
-    expect(screen.getByText('Permisjoner')).toBeInTheDocument();
-    expect(screen.getByText(/01.01.2015/)).toBeInTheDocument();
-    expect(screen.getByText(/01.01.2017/)).toBeInTheDocument();
+    expect(screen.getByText('Permisjon')).toBeInTheDocument();
+    expect(screen.getByText(/01.01.2020/)).toBeInTheDocument();
+    expect(screen.getByText(/01.01.2021/)).toBeInTheDocument();
     expect(screen.getByText('Søker er ikke i permisjon. Arbeidsforholdet er aktivt og skal benyttes i behandlingen.')).toBeInTheDocument();
     expect(screen.getByText('Fortsett behandling uten inntektsmelding, inntekt fra A-inntekt benyttes i beregningsgrunnlaget.')).toBeInTheDocument();
 

@@ -1,39 +1,17 @@
 import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import arbeidsforholdKilder from '@fpsak-frontend/fakta-arbeidsforhold/src/kodeverk/arbeidsforholdKilder';
-import { Arbeidsforhold, Behandling, InntektArbeidYtelse } from '@fpsak-frontend/types';
+import { AksjonspunktÅrsak, ArbeidOgInntektsmelding, Behandling } from '@fpsak-frontend/types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 
 import ArbeidsforholdFaktaIndex from './ArbeidsforholdFaktaIndex';
-import { iay as flereArbfor } from '../testdata/FlereArbforMedAksjonspunkt';
+import BekreftetPermisjonStatus from './kodeverk/bekreftetPermisjonStatus';
 
 const behandling = {
   uuid: '1',
   versjon: 1,
 } as Behandling;
-
-const defaultArbeidsforhold = {
-  kilde: {
-    navn: arbeidsforholdKilder.INNTEKTSMELDING,
-  },
-  id: '1',
-  arbeidsgiverReferanse: '11212',
-  tilVurdering: false,
-  erEndret: false,
-  mottattDatoInntektsmelding: '2019-01-01',
-  fomDato: '2018-01-01',
-  tomDato: '2019-01-01',
-  stillingsprosent: 100,
-  arbeidsforholdId: '1234',
-  kanOppretteNyttArbforFraIM: false,
-};
-
-const merknaderFraBeslutter = {
-  notAccepted: false,
-};
 
 const arbeidsgiverOpplysningerPerId = {
   11212: {
@@ -59,11 +37,9 @@ export default {
 };
 
 const Template: Story<{
-  arbeidsforhold?: Arbeidsforhold[];
-  inntektArbeidYtelse?: InntektArbeidYtelse;
+  arbeidOgInntekt: ArbeidOgInntektsmelding;
 }> = ({
-  arbeidsforhold,
-  inntektArbeidYtelse,
+  arbeidOgInntekt,
 }) => (
   <ArbeidsforholdFaktaIndex
     submitCallback={() => Promise.resolve()}
@@ -72,118 +48,203 @@ const Template: Story<{
     submittable={false}
     setFormData={() => undefined}
     behandling={behandling}
-    inntektArbeidYtelse={inntektArbeidYtelse || {
-      arbeidsforhold,
-      skalKunneLeggeTilNyeArbeidsforhold: false,
-    } as InntektArbeidYtelse}
-    aksjonspunkter={[{
-      definisjon: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
-      status: aksjonspunktStatus.UTFORT,
-      kanLoses: true,
-      erAktivt: true,
-    }]}
+    arbeidOgInntekt={arbeidOgInntekt}
+    aksjonspunkter={[]}
     alleKodeverk={alleKodeverk as any}
-    alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD]: merknaderFraBeslutter,
-    }}
+    alleMerknaderFraBeslutter={{}}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
   />
 );
 
 export const ArbeidsforholdetErIkkeAktivt = Template.bind({});
 ArbeidsforholdetErIkkeAktivt.args = {
-  arbeidsforhold: [{
-    ...defaultArbeidsforhold,
-    tilVurdering: true,
-    mottattDatoInntektsmelding: undefined,
-    brukArbeidsforholdet: true,
-    brukMedJustertPeriode: true,
-    begrunnelse: 'Dette er en begrunnelse',
-  }],
+  arbeidOgInntekt: {
+    arbeidsforhold: [{
+      arbeidsgiverIdent: '999999999',
+      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
+      eksternArbeidsforholdId: 'ARB001-001',
+      fom: '2019-12-06',
+      tom: '9999-12-31',
+      stillingsprosent: 100,
+      saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.BRUK_MED_OVERSTYRT_PERIODE,
+      begrunnelse: 'Dette er en begrunnelse',
+    }],
+    inntektsmeldinger: [],
+    inntekter: [],
+    skjæringstidspunkt: '2021-11-10',
+  },
 };
 
 export const SokerErIPermisjon = Template.bind({});
 SokerErIPermisjon.args = {
-  arbeidsforhold: [{
-    ...defaultArbeidsforhold,
-    tilVurdering: true,
-    mottattDatoInntektsmelding: undefined,
-    brukArbeidsforholdet: true,
-    permisjoner: [{
-      permisjonFom: '2020-01-01',
+  arbeidOgInntekt: {
+    arbeidsforhold: [{
+      arbeidsgiverIdent: '999999999',
+      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
+      eksternArbeidsforholdId: 'ARB001-001',
+      fom: '2019-12-06',
+      tom: '9999-12-31',
+      stillingsprosent: 100,
+      saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.BRUK,
+      begrunnelse: 'Dette er en begrunnelse',
+      permisjonOgMangel: {
+        permisjonFom: '2020-01-01',
+        type: 'PERMISJON',
+        årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
+        permisjonStatus: BekreftetPermisjonStatus.BRUK_PERMISJON,
+      },
     }],
-    brukPermisjon: true,
-    begrunnelse: 'Dette er en begrunnelse',
-  }],
+    inntektsmeldinger: [],
+    inntekter: [],
+    skjæringstidspunkt: '2021-11-10',
+  },
 };
 
 export const SokerErIkkeIPermisjon = Template.bind({});
 SokerErIkkeIPermisjon.args = {
-  arbeidsforhold: [{
-    ...defaultArbeidsforhold,
-    tilVurdering: true,
-    mottattDatoInntektsmelding: undefined,
-    brukArbeidsforholdet: true,
-    permisjoner: [{
-      type: 'PERMISJON',
-      permisjonFom: '2015-01-01',
-      permisjonTom: undefined,
-      permisjonsprosent: 100,
-    }, {
-      type: 'PERMISJON',
-      permisjonFom: '2017-01-01',
-      permisjonTom: '2019-01-01',
-      permisjonsprosent: 100,
+  arbeidOgInntekt: {
+    arbeidsforhold: [{
+      arbeidsgiverIdent: '999999999',
+      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
+      eksternArbeidsforholdId: 'ARB001-001',
+      fom: '2019-12-06',
+      tom: '9999-12-31',
+      stillingsprosent: 100,
+      begrunnelse: 'Dette er en begrunnelse',
+      saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING,
+      permisjonOgMangel: {
+        permisjonFom: '2020-01-01',
+        permisjonTom: '2021-01-01',
+        type: 'PERMISJON',
+        permisjonStatus: BekreftetPermisjonStatus.IKKE_BRUK_PERMISJON,
+      },
     }],
-    brukPermisjon: false,
-    fortsettBehandlingUtenInntektsmelding: true,
-    begrunnelse: 'Dette er en begrunnelse',
-  }],
+    inntektsmeldinger: [],
+    inntekter: [],
+    skjæringstidspunkt: '2021-11-10',
+  },
 };
 
 export const OppdaterArbeidsforholdOgFortsettUtenIM = Template.bind({});
 OppdaterArbeidsforholdOgFortsettUtenIM.args = {
-  arbeidsforhold: [{
-    ...defaultArbeidsforhold,
-    tilVurdering: true,
-    mottattDatoInntektsmelding: undefined,
-    brukArbeidsforholdet: true,
-    brukMedJustertPeriode: false,
-    fortsettBehandlingUtenInntektsmelding: true,
-    begrunnelse: 'Dette er en begrunnelse',
-  }],
+  arbeidOgInntekt: {
+    arbeidsforhold: [{
+      arbeidsgiverIdent: '999999999',
+      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
+      eksternArbeidsforholdId: 'ARB001-001',
+      fom: '2019-12-06',
+      tom: '9999-12-31',
+      stillingsprosent: 100,
+      saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING,
+      begrunnelse: 'Dette er en begrunnelse',
+    }],
+    inntektsmeldinger: [],
+    inntekter: [],
+    skjæringstidspunkt: '2021-11-10',
+  },
 };
 
 export const OppdaterArbeidsforholdOgAvslaGrunnetManglendeOpplysninger = Template.bind({});
 OppdaterArbeidsforholdOgAvslaGrunnetManglendeOpplysninger.args = {
-  arbeidsforhold: [{
-    ...defaultArbeidsforhold,
-    tilVurdering: true,
-    mottattDatoInntektsmelding: undefined,
-    brukArbeidsforholdet: true,
-    brukMedJustertPeriode: false,
-    fortsettBehandlingUtenInntektsmelding: false,
-    begrunnelse: 'Dette er en begrunnelse',
-  }],
+  arbeidOgInntekt: {
+    arbeidsforhold: [{
+      arbeidsgiverIdent: '999999999',
+      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
+      eksternArbeidsforholdId: 'ARB001-001',
+      fom: '2019-12-06',
+      tom: '9999-12-31',
+      stillingsprosent: 100,
+      saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.BRUK,
+      begrunnelse: 'Dette er en begrunnelse',
+    }],
+    inntektsmeldinger: [],
+    inntekter: [],
+    skjæringstidspunkt: '2021-11-10',
+  },
 };
 
 export const FjernArbeidsforholdet = Template.bind({});
 FjernArbeidsforholdet.args = {
-  arbeidsforhold: [{
-    ...defaultArbeidsforhold,
-    tilVurdering: true,
-    mottattDatoInntektsmelding: undefined,
-    brukArbeidsforholdet: false,
-    begrunnelse: 'Dette er en begrunnelse',
-  }],
+  arbeidOgInntekt: {
+    arbeidsforhold: [{
+      arbeidsgiverIdent: '999999999',
+      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
+      eksternArbeidsforholdId: 'ARB001-001',
+      fom: '2019-12-06',
+      tom: '9999-12-31',
+      stillingsprosent: 100,
+      saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+      begrunnelse: 'Dette er en begrunnelse',
+    }],
+    inntektsmeldinger: [],
+    inntekter: [],
+    skjæringstidspunkt: '2021-11-10',
+  },
 };
 
 export const IngenArbeidsforholdRegistrert = Template.bind({});
 IngenArbeidsforholdRegistrert.args = {
-  arbeidsforhold: [],
+  arbeidOgInntekt: {
+    arbeidsforhold: [],
+    inntektsmeldinger: [],
+    inntekter: [],
+    skjæringstidspunkt: '2021-11-10',
+  },
 };
 
 export const FlereArbeidsforholdITabell = Template.bind({});
 FlereArbeidsforholdITabell.args = {
-  inntektArbeidYtelse: flereArbfor,
+  arbeidOgInntekt: {
+    arbeidsforhold: [{
+      arbeidsgiverIdent: '999999999',
+      internArbeidsforholdId: 'c14b0c78-eb1f-4d8e-b73f-7f385a5e67d2',
+      eksternArbeidsforholdId: 'V999999999R50049082SS157848L0001',
+      fom: '2019-12-06',
+      tom: '9999-12-31',
+      stillingsprosent: 100,
+    }, {
+      arbeidsgiverIdent: '999999998',
+      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
+      eksternArbeidsforholdId: 'ARB001-001',
+      fom: '2019-05-12',
+      tom: '2019-06-12',
+      stillingsprosent: 100,
+      saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.BRUK,
+      begrunnelse: 'Dette er en begrunnelse',
+    }, {
+      arbeidsgiverIdent: '11212',
+      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
+      eksternArbeidsforholdId: 'ARB001-001',
+      fom: '2020-12-06',
+      tom: '2021-12-31',
+      stillingsprosent: 100,
+      saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+      begrunnelse: 'Dette er en begrunnelse',
+    }],
+    inntektsmeldinger: [{
+      inntektPrMnd: 30000,
+      refusjonPrMnd: undefined,
+      arbeidsgiverIdent: '999999999',
+      eksternArbeidsforholdId: 'V999999999R50049082SS157848L0001',
+      internArbeidsforholdId: 'c14b0c78-eb1f-4d8e-b73f-7f385a5e67d2',
+      kontaktpersonNavn: 'Corpolarsen',
+      kontaktpersonNummer: '41925090',
+      journalpostId: '1',
+      dokumentId: '2',
+      motattDato: '2021-11-06',
+    }, {
+      inntektPrMnd: 40000,
+      refusjonPrMnd: undefined,
+      arbeidsgiverIdent: '999999998',
+      eksternArbeidsforholdId: 'ARB001-001',
+      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
+      kontaktpersonNavn: 'Corpolarsen',
+      kontaktpersonNummer: '41925090',
+      journalpostId: '1',
+      dokumentId: '2',
+      motattDato: '2021-12-06',
+    }],
+    inntekter: [],
+    skjæringstidspunkt: '2021-11-10',
+  },
 };

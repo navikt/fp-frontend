@@ -1,42 +1,29 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
-import { Arbeidsforhold } from '@fpsak-frontend/types';
+import { AoIArbeidsforhold } from '@fpsak-frontend/types';
 import { VerticalSpacer, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-const utledPermisjonLabelID = (arbeidsforhold: Arbeidsforhold): string => {
-  if (arbeidsforhold.permisjoner.length > 1) {
-    return 'PermisjonPeriode.Permisjoner';
-  }
-  return 'PermisjonPeriode.Permisjon';
-};
-
-const utledPeriodeLabelKey = (id: string, index: number): string => id + index;
-
 interface OwnProps {
-  arbeidsforhold: Arbeidsforhold;
+  arbeidsforhold: AoIArbeidsforhold;
 }
 
 const PermisjonPeriode: FunctionComponent<OwnProps> = ({
   arbeidsforhold,
 }) => {
-  if (arbeidsforhold.permisjoner && arbeidsforhold.permisjoner.length > 0) {
+  if (arbeidsforhold.permisjonOgMangel) {
     return (
       <>
         <VerticalSpacer sixteenPx />
         <Normaltekst>
-          <FormattedMessage id={utledPermisjonLabelID(arbeidsforhold)} />
+          <FormattedMessage id="PermisjonPeriode.Permisjon" />
         </Normaltekst>
-        {arbeidsforhold.permisjoner.map((permisjon, index) => (
-          <div key={utledPeriodeLabelKey(arbeidsforhold.id, index)}>
-            <Normaltekst>
-              <PeriodLabel
-                dateStringFom={permisjon.permisjonFom}
-                dateStringTom={permisjon.permisjonTom ? permisjon.permisjonTom : ''}
-              />
-            </Normaltekst>
-          </div>
-        ))}
+        <Normaltekst>
+          <PeriodLabel
+            dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom}
+            dateStringTom={arbeidsforhold.permisjonOgMangel.permisjonTom ? arbeidsforhold.permisjonOgMangel.permisjonTom : ''}
+          />
+        </Normaltekst>
         <VerticalSpacer sixteenPx />
       </>
     );

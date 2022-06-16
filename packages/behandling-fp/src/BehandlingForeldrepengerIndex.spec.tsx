@@ -78,6 +78,5 @@ describe('<BehandlingForeldrepengerIndex>', () => {
 
     expect(screen.getByText('Fakta om')).toBeInTheDocument();
     expect(screen.getByText('Saken')).toBeInTheDocument();
-    expect(screen.getByText('Arbeidsforhold')).toBeInTheDocument();
   });
 });

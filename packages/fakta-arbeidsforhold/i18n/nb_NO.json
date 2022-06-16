@@ -23,6 +23,9 @@
   "ArbeidsforholdDetail.BenyttAInntektIBeregningsgrunnlag": "Fortsett behandling uten inntektsmelding, inntekt fra A-inntekt benyttes i beregningsgrunnlaget.",
   "ArbeidsforholdDetail.Begrunnelse": "Begrunn endringene",
   "ArbeidsforholdDetail.SokerErIPermisjon": "Søker er i permisjon. Inntektsmelding er ikke nødvendig.",
+  "PersonArbeidsforholdTable.Inntektsmelding": "Inntektsmelding",
+  "PersonArbeidsforholdTable.Saksbehandler": "Saksbehandler",
+  "PersonArbeidsforholdTable.AaRegisteret": "AA-Registeret",
 
 
   "PermisjonPeriode.Permisjon": "Permisjon",
