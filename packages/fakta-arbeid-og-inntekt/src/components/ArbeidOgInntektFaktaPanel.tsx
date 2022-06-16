@@ -52,8 +52,7 @@ const sorterTabell = (
 const erMatch = (
   arbeidsforhold: AoIArbeidsforhold,
   inntektsmelding: Inntektsmelding,
-): boolean => inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent
-  && (!inntektsmelding.internArbeidsforholdId || inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);
+): boolean => inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent;
 
 const lagAvklaring = (
   arbeidsforhold: AoIArbeidsforhold,
@@ -246,7 +245,8 @@ const ArbeidOgInntektFaktaPanel: FunctionComponent<OwnProps> = ({
       <Table ref={tableRef} headerTextCodes={HEADER_TEXT_IDS} noHover hasGrayHeader>
         {tabellRader.map((radData, index) => (
           <ArbeidsforholdRad
-            key={`${radData.arbeidsgiverNavn}${radData.arbeidsgiverIdent}`}
+            // eslint-disable-next-line react/no-array-index-key
+            key={`${radData.arbeidsgiverNavn}${radData.arbeidsgiverIdent}${index}`}
             arbeidOgInntekt={arbeidOgInntekt}
             saksnummer={saksnummer}
             behandlingUuid={behandling.uuid}

@@ -62,6 +62,9 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
 
   const harEttArbeidsforhold = arbeidsforholdForRad.length === 1;
 
+  const inntektsmeldingForArbeidsforhold = harEttArbeidsforhold
+    ? finnInntektsmelding(inntektsmeldingerForRad, arbeidsforholdForRad[0].internArbeidsforholdId) : undefined;
+
   return (
     <>
       {!harEttArbeidsforhold && (
@@ -199,11 +202,11 @@ const InntektsmeldingerPanel: FunctionComponent<OwnProps> = ({
         </>
       )}
       <VerticalSpacer eightPx />
-      {harEttArbeidsforhold && inntektsmeldingerForRad.length > 0 && (
+      {harEttArbeidsforhold && !!inntektsmeldingForArbeidsforhold && (
         <InntektsmeldingOpplysningerPanel
           saksnummer={saksnummer}
           arbeidsforhold={arbeidsforholdForRad[0]}
-          inntektsmelding={finnInntektsmelding(inntektsmeldingerForRad, arbeidsforholdForRad[0].internArbeidsforholdId)}
+          inntektsmelding={inntektsmeldingForArbeidsforhold}
           skalViseArbeidsforholdId={inntektsmeldingerForRad.length > 1}
           alleKodeverk={alleKodeverk}
         />
