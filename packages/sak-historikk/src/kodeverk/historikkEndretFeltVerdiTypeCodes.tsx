@@ -735,7 +735,11 @@ const historikkEndretFeltVerdiTypeCodes = {
   },
   2034: {
     kode: '2034',
-    verdiId: 'HistorikkEndretFeltVerdiType.GraderingFPMorFarRett',
+    verdiId: 'HistorikkEndretFeltVerdiType.GraderingFPKunMorRett',
+  },
+  2035: {
+    kode: '2035',
+    verdiId: 'HistorikkEndretFeltVerdiType.GraderingFPKunFarRettUtenAktKrav',
   },
   2036: {
     kode: '2036',
