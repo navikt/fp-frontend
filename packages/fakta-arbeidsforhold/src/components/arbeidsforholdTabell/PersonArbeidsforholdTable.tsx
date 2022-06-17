@@ -1,14 +1,14 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 
 import {
   DateLabel, PeriodLabel, Table, TableColumn, TableRow, Image,
 } from '@navikt/ft-ui-komponenter';
-import { decodeHtmlEntity } from '@navikt/ft-utils';
+import { decodeHtmlEntity, TIDENES_ENDE } from '@navikt/ft-utils';
 import erIBrukImageUrl from '@fpsak-frontend/assets/images/stjerne.svg';
-import { ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
-import CustomArbeidsforhold from '../../typer/CustomArbeidsforholdTsType';
+import { ArbeidsgiverOpplysningerPerId, AoIArbeidsforhold, Inntektsmelding } from '@fpsak-frontend/types';
+import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
 
 import IngenArbeidsforholdRegistrert from './IngenArbeidsforholdRegistrert';
 
@@ -23,32 +23,53 @@ const headerColumnContent = [
   <div />,
 ];
 
+const finnKilde = (arbeidsforhold: AoIArbeidsforhold, intl: IntlShape) => {
+  if (arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING) {
+    return intl.formatMessage({ id: 'PersonArbeidsforholdTable.Inntektsmelding' });
+  }
+  if (arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER) {
+    return intl.formatMessage({ id: 'PersonArbeidsforholdTable.Saksbehandler' });
+  }
+  return intl.formatMessage({ id: 'PersonArbeidsforholdTable.AaRegisteret' });
+};
+
+export const erMatch = (
+  arbeidsforhold: AoIArbeidsforhold,
+  inntektsmelding: Inntektsmelding,
+): boolean => inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent
+  && (!inntektsmelding.internArbeidsforholdId || inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);
+
 const getEndCharFromId = (id?: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
 
-const utledNavn = (arbeidsforhold: CustomArbeidsforhold, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
-  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse];
-  const navn = arbeidsforhold.navn ? arbeidsforhold.navn : arbeidsgiverOpplysninger?.navn;
-  if (arbeidsforhold.lagtTilAvSaksbehandler) {
+const utledNavn = (
+  arbeidsforhold: AoIArbeidsforhold,
+  alleArbeidsforhold: AoIArbeidsforhold[],
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+): string => {
+  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
+  const navn = arbeidsgiverOpplysninger?.navn;
+  if (arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER) {
     return navn;
   }
-  return arbeidsforhold.arbeidsforholdId
+
+  const skalViseEksternId = alleArbeidsforhold.filter((a) => a.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent).length > 1;
+
+  return skalViseEksternId
     ? `${navn}(${arbeidsgiverOpplysninger.identifikator})${getEndCharFromId(arbeidsforhold.eksternArbeidsforholdId)}`
     : `${navn}(${arbeidsgiverOpplysninger.identifikator})`;
 };
 
-export const utledNøkkel = (arbeidsforhold: CustomArbeidsforhold, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
-  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse];
-  if (arbeidsforhold.lagtTilAvSaksbehandler) {
-    return arbeidsforhold.navn ? arbeidsforhold.navn : arbeidsgiverOpplysninger?.navn;
-  }
-  return `${arbeidsforhold.eksternArbeidsforholdId}${arbeidsforhold.arbeidsforholdId}${arbeidsgiverOpplysninger.identifikator}`;
+export const utledNøkkel = (arbeidsforhold: AoIArbeidsforhold, arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId): string => {
+  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
+  return `${arbeidsforhold.eksternArbeidsforholdId}${arbeidsforhold.arbeidsgiverIdent}${arbeidsgiverOpplysninger.identifikator}`;
 };
 
 interface OwnProps {
-  alleArbeidsforhold: CustomArbeidsforhold[];
+  alleArbeidsforhold: AoIArbeidsforhold[];
   selectedId?: string;
-  selectArbeidsforholdCallback: (event: React.MouseEvent | React.KeyboardEvent, id: void, model: CustomArbeidsforhold) => void;
+  selectArbeidsforholdCallback: (event: React.MouseEvent | React.KeyboardEvent, id: void, model: AoIArbeidsforhold) => void;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  inntektsmeldinger: Inntektsmelding[];
 }
 
 const PersonArbeidsforholdTable: FunctionComponent<OwnProps> = ({
@@ -56,53 +77,55 @@ const PersonArbeidsforholdTable: FunctionComponent<OwnProps> = ({
   selectedId,
   selectArbeidsforholdCallback,
   arbeidsgiverOpplysningerPerId,
+  inntektsmeldinger,
 }) => {
-  if (alleArbeidsforhold.length === 0) {
-    return (
-      <IngenArbeidsforholdRegistrert
-        headerColumnContent={headerColumnContent}
-      />
-    );
-  }
   const intl = useIntl();
+
+  if (alleArbeidsforhold.length === 0) {
+    return <IngenArbeidsforholdRegistrert headerColumnContent={headerColumnContent} />;
+  }
+
   return (
     <Table headerColumnContent={headerColumnContent}>
       {alleArbeidsforhold && alleArbeidsforhold.map((a) => {
         const stillingsprosent = a.stillingsprosent !== undefined && a.stillingsprosent !== null ? `${a.stillingsprosent.toFixed(2)} %` : '';
-        const navn = utledNavn(a, arbeidsgiverOpplysningerPerId);
+        const navn = utledNavn(a, alleArbeidsforhold, arbeidsgiverOpplysningerPerId);
+        const mottattDato = inntektsmeldinger.find((im) => erMatch(a, im))?.motattDato;
         return (
-          <TableRow<void, CustomArbeidsforhold>
+          <TableRow<void, AoIArbeidsforhold>
             key={utledNøkkel(a, arbeidsgiverOpplysningerPerId)}
             model={a}
             onMouseDown={selectArbeidsforholdCallback}
             onKeyDown={selectArbeidsforholdCallback}
-            isSelected={a.id === selectedId}
-            isApLeftBorder={a.tilVurdering}
+            isSelected={a.arbeidsgiverIdent === selectedId}
           >
             <TableColumn><Normaltekst>{decodeHtmlEntity(navn)}</Normaltekst></TableColumn>
             <TableColumn>
               <Normaltekst>
-                <PeriodLabel dateStringFom={a.fomDato} dateStringTom={a.overstyrtTom ? a.overstyrtTom : a.tomDato} />
+                <PeriodLabel dateStringFom={a.fom} dateStringTom={a.tom !== TIDENES_ENDE ? a.tom : undefined} />
               </Normaltekst>
             </TableColumn>
-            <TableColumn><Normaltekst>{a.kilde.navn}</Normaltekst></TableColumn>
+            <TableColumn><Normaltekst>{finnKilde(a, intl)}</Normaltekst></TableColumn>
             <TableColumn><Normaltekst>{stillingsprosent}</Normaltekst></TableColumn>
             <TableColumn>
-              {a.mottattDatoInntektsmelding
-              && <Normaltekst><DateLabel dateString={a.mottattDatoInntektsmelding} /></Normaltekst>}
+              {mottattDato && (
+                <Normaltekst>
+                  <DateLabel dateString={mottattDato} />
+                </Normaltekst>
+              )}
             </TableColumn>
             <TableColumn>
-              { a.brukArbeidsforholdet
-            && (
-            <Image
-              className={styles.image}
-              src={erIBrukImageUrl}
-              alt={intl.formatMessage({ id: 'PersonArbeidsforholdTable.ErIBruk' })}
-              tooltip={<FormattedMessage id="PersonArbeidsforholdTable.ErIBruk" />}
-              tabIndex={0}
-              alignTooltipLeft
-            />
-            )}
+              {(a.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK
+                || a.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING) && (
+                <Image
+                  className={styles.image}
+                  src={erIBrukImageUrl}
+                  alt={intl.formatMessage({ id: 'PersonArbeidsforholdTable.ErIBruk' })}
+                  tooltip={<FormattedMessage id="PersonArbeidsforholdTable.ErIBruk" />}
+                  tabIndex={0}
+                  alignTooltipLeft
+                />
+              )}
             </TableColumn>
           </TableRow>
         );

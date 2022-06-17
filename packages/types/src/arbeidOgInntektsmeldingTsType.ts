@@ -16,12 +16,12 @@ export type Inntektsmelding = Readonly<{
   inntektPrMnd: number;
   refusjonPrMnd?: number;
   arbeidsgiverIdent: string;
-  eksternArbeidsforholdId: string;
-  internArbeidsforholdId: string;
+  eksternArbeidsforholdId?: string;
+  internArbeidsforholdId?: string;
   kontaktpersonNavn: string;
   kontaktpersonNummer: string;
   journalpostId: string;
-  dokumentId: string;
+  dokumentId?: string;
   motattDato: string;
   årsak?: AksjonspunktÅrsak;
   saksbehandlersVurdering?: string;
