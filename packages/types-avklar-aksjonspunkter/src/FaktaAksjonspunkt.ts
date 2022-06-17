@@ -18,7 +18,6 @@ import BekreftLovligOppholdVurderingAp from './fakta/BekreftLovligOppholdVurderi
 import AvklarFortsattMedlemskapAp from './fakta/AvklarFortsattMedlemskapAp';
 import BekreftTerminbekreftelseAp from './fakta/BekreftTerminbekreftelseAp';
 import SjekkManglendeFodselAp from './fakta/SjekkManglendeFodselAp';
-import AvklarArbeidsforholdAp from './fakta/AvklarArbeidsforholdAp';
 import FaktaUttakAp from './fakta/FaktaUttakAp';
 import AvklarAnnenforelderHarRettAp from './fakta/AvklarAnnenforelderHarRettAp';
 import VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp from './fakta/VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp';
@@ -48,7 +47,6 @@ export type FaktaAksjonspunkt = AvklarVergeAp
   | AvklarFortsattMedlemskapAp
   | BekreftTerminbekreftelseAp
   | SjekkManglendeFodselAp
-  | AvklarArbeidsforholdAp
   | AvklarAnnenforelderHarRettAp
   | FaktaUttakAp
   | VurderingAvVilkarForMorsSyksomVedFodselForForeldrepengerAp

@@ -6,7 +6,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import ArbeidsforholdFaktaIndex from '@fpsak-frontend/fakta-arbeidsforhold';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import {
-  Aksjonspunkt, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId, InntektArbeidYtelse,
+  Aksjonspunkt, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId,
 } from '@fpsak-frontend/types';
 import { FaktaDefaultInitPanel, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@navikt/ft-utils';
@@ -18,15 +18,14 @@ const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD];
 
-const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.ARBEID_OG_INNTEKT];
+const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
-  arbeidOgInntekt: ArbeidOgInntektsmelding;
 }
 
-const ENDEPUNKTER_PANEL_DATA = [FpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE];
+const ENDEPUNKTER_PANEL_DATA = [FpBehandlingApiKeys.ARBEID_OG_INNTEKT];
 type EndepunktPanelData = {
-  inntektArbeidYtelse: InntektArbeidYtelse;
+  arbeidOgInntekt: ArbeidOgInntektsmelding;
 }
 
 interface OwnProps {
@@ -35,8 +34,6 @@ interface OwnProps {
 
 /**
  * ArbeidsforholdFaktaInitPanel
- *
- * Dette faktapanelet skal alltid vises
  */
 const ArbeidsforholdFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
   arbeidsgiverOpplysningerPerId,
@@ -50,8 +47,7 @@ const ArbeidsforholdFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitP
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     faktaPanelKode={FaktaPanelCode.ARBEIDSFORHOLD}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'ArbeidsforholdInfoPanel.Title' })}
-    skalPanelVisesIMeny={({ aksjonspunkter, arbeidOgInntekt }) => !arbeidOgInntekt
-      || aksjonspunkter.some((ap) => AKSJONSPUNKT_KODER.some((kode) => kode === ap.definisjon))}
+    skalPanelVisesIMeny={({ aksjonspunkter }) => aksjonspunkter && aksjonspunkter.some((ap) => AKSJONSPUNKT_KODER.some((kode) => kode === ap.definisjon))}
     renderPanel={(data) => (
       <ArbeidsforholdFaktaIndex
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
