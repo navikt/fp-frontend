@@ -6,11 +6,51 @@ import * as stories from './ArbeidsforholdFaktaIndex.stories';
 
 const {
   ArbeidsforholdetErIkkeAktivt, FjernArbeidsforholdet, FlereArbeidsforholdITabell, IngenArbeidsforholdRegistrert,
-  OppdaterArbeidsforholdOgAvslaGrunnetManglendeOpplysninger, OppdaterArbeidsforholdOgFortsettUtenIM,
-  SokerErIPermisjon, SokerErIkkeIPermisjon,
+  OppdaterArbeidsforholdOgAvslaGrunnetManglendeOpplysninger, ManueltOppdatertArbeidsforhold,
+  SokerErIPermisjon, SokerErIkkeIPermisjon, ArbeidsforholdetSkalBenyttesUtenInntektsmelding,
 } = composeStories(stories);
 
 describe('<ArbeidsforholdFaktaIndex>', () => {
+  it('skal vise at arbeidsforholdet er oppdatert og behandlingen har fortsatt uten IM', async () => {
+    render(<ArbeidsforholdetSkalBenyttesUtenInntektsmelding />);
+
+    expect(await screen.findByText('Arbeidsforhold som er aktive ved permisjonsstart')).toBeInTheDocument();
+    expect(screen.getByText('KIWI(999999999)')).toBeInTheDocument();
+    expect(screen.getByText('19.04.2000 -')).toBeInTheDocument();
+    expect(screen.getByText('AA-Registeret')).toBeInTheDocument();
+    expect(screen.getByText('100.00 %')).toBeInTheDocument();
+    expect(screen.getByAltText('Arbeidsforhold skal brukes')).toBeInTheDocument();
+
+    userEvent.click(screen.getByText('AA-Registeret')); // Klikk på rad
+
+    expect(await screen.findByText('Detaljer')).toBeInTheDocument();
+    expect(screen.getByText('Arbeidsforholdet er aktivt og skal benyttes i behandlingen. Nødvendig inntektsmelding er ikke mottatt.')).toBeInTheDocument();
+    expect(screen.getByText('Fortsett behandling uten inntektsmelding, inntekt fra A-inntekt benyttes i beregningsgrunnlaget.')).toBeInTheDocument();
+
+    expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
+  });
+
+  it('skal vise at arbeidsforholdet er manuelt oppdatert av saksbehandler', async () => {
+    render(<ManueltOppdatertArbeidsforhold />);
+
+    expect(await screen.findByText('Arbeidsforhold som er aktive ved permisjonsstart')).toBeInTheDocument();
+    expect(screen.getByText('KIWI')).toBeInTheDocument();
+    expect(screen.getByText('31.01.2022 -')).toBeInTheDocument();
+    expect(screen.getByText('Saksbehandler')).toBeInTheDocument();
+    expect(screen.getByText('100.00 %')).toBeInTheDocument();
+    expect(screen.getByText('13.12.2021')).toBeInTheDocument();
+    expect(screen.queryByAltText('Arbeidsforhold skal brukes')).not.toBeInTheDocument();
+
+    userEvent.click(screen.getByText('Saksbehandler')); // Klikk på rad
+
+    expect(await screen.findByText('Detaljer')).toBeInTheDocument();
+    expect(screen.getByText('Oppdater arbeidsforholdet basert på inntektsmelding med følgene opplysninger.')).toBeInTheDocument();
+
+    expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
+  });
+
   it('skal vise at det er valgt at arbeidsforholdet ikke er aktivt', async () => {
     render(<ArbeidsforholdetErIkkeAktivt />);
 
@@ -109,22 +149,6 @@ describe('<ArbeidsforholdFaktaIndex>', () => {
     expect(await screen.findByText('Detaljer')).toBeInTheDocument();
     expect(screen.getByText('Arbeidsforholdet er aktivt og skal benyttes i behandlingen. Nødvendig inntektsmelding er ikke mottatt.')).toBeInTheDocument();
     expect(screen.getByText('Ytelsen kan avslås på grunn av manglende opplysninger.')).toBeInTheDocument();
-
-    expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
-    expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
-  });
-
-  it('skal vise at arbeidsforholdet er oppdatert og behandlingen har fortsatt uten IM', async () => {
-    render(<OppdaterArbeidsforholdOgFortsettUtenIM />);
-
-    expect(await screen.findByText('Arbeidsforhold som er aktive ved permisjonsstart')).toBeInTheDocument();
-    expect(screen.getByText('KIWI(999999999)')).toBeInTheDocument();
-
-    userEvent.click(screen.getByText('AA-Registeret')); // Klikk på rad
-
-    expect(await screen.findByText('Detaljer')).toBeInTheDocument();
-    expect(screen.getByText('Arbeidsforholdet er aktivt og skal benyttes i behandlingen. Nødvendig inntektsmelding er ikke mottatt.')).toBeInTheDocument();
-    expect(screen.getByText('Fortsett behandling uten inntektsmelding, inntekt fra A-inntekt benyttes i beregningsgrunnlaget.')).toBeInTheDocument();
 
     expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
     expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();

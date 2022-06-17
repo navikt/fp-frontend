@@ -56,6 +56,53 @@ const Template: Story<{
   />
 );
 
+export const ArbeidsforholdetSkalBenyttesUtenInntektsmelding = Template.bind({});
+ArbeidsforholdetSkalBenyttesUtenInntektsmelding.args = {
+  arbeidOgInntekt: {
+    arbeidsforhold: [{
+      arbeidsgiverIdent: '999999999',
+      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
+      eksternArbeidsforholdId: 'ARB001-001',
+      fom: '2000-04-19',
+      tom: '9999-12-31',
+      stillingsprosent: 100,
+      saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING,
+      begrunnelse: 'Dette er en begrunnelse',
+    }],
+    inntektsmeldinger: [],
+    inntekter: [],
+    skjæringstidspunkt: '2022-01-31',
+  },
+};
+
+export const ManueltOppdatertArbeidsforhold = Template.bind({});
+ManueltOppdatertArbeidsforhold.args = {
+  arbeidOgInntekt: {
+    arbeidsforhold: [
+      {
+        arbeidsgiverIdent: '999999999',
+        fom: '2022-01-31',
+        tom: '9999-12-31',
+        stillingsprosent: 100,
+        saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+        begrunnelse: 'Dette er en begrunnelse',
+      },
+    ],
+    inntektsmeldinger: [
+      {
+        inntektPrMnd: 40000,
+        arbeidsgiverIdent: '999999999',
+        kontaktpersonNavn: 'Dolly Dollesen',
+        kontaktpersonNummer: '99999999',
+        journalpostId: '510870400',
+        motattDato: '2021-12-13',
+      },
+    ],
+    inntekter: [],
+    skjæringstidspunkt: '2021-03-26',
+  },
+};
+
 export const ArbeidsforholdetErIkkeAktivt = Template.bind({});
 ArbeidsforholdetErIkkeAktivt.args = {
   arbeidOgInntekt: {
@@ -118,25 +165,6 @@ SokerErIkkeIPermisjon.args = {
         type: 'PERMISJON',
         permisjonStatus: BekreftetPermisjonStatus.IKKE_BRUK_PERMISJON,
       },
-    }],
-    inntektsmeldinger: [],
-    inntekter: [],
-    skjæringstidspunkt: '2021-11-10',
-  },
-};
-
-export const OppdaterArbeidsforholdOgFortsettUtenIM = Template.bind({});
-OppdaterArbeidsforholdOgFortsettUtenIM.args = {
-  arbeidOgInntekt: {
-    arbeidsforhold: [{
-      arbeidsgiverIdent: '999999999',
-      internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
-      eksternArbeidsforholdId: 'ARB001-001',
-      fom: '2019-12-06',
-      tom: '9999-12-31',
-      stillingsprosent: 100,
-      saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING,
-      begrunnelse: 'Dette er en begrunnelse',
     }],
     inntektsmeldinger: [],
     inntekter: [],

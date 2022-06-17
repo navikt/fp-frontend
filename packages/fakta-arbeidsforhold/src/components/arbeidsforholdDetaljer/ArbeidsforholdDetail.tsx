@@ -20,7 +20,7 @@ const utledAktivtArbeidsforholdLabel = (arbeidsforhold: AoIArbeidsforhold): stri
   if (arbeidsforhold.permisjonOgMangel) {
     return 'ArbeidsforholdDetail.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon';
   }
-  if (arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING) {
+  if (arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER) {
     return 'ArbeidsforholdDetail.OppdaterArbeidsforhold';
   }
   return 'ArbeidsforholdDetail.ArbeidsforholdErAktivt';
@@ -37,6 +37,8 @@ const ArbeidsforholdDetail: FunctionComponent<PureOwnProps> = ({
   const skalFortsetteUtenInntektsmelding = valgtArbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING;
   const skalBrukeMedOverstyrtPeriode = valgtArbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK_MED_OVERSTYRT_PERIODE;
   const skalFjerneArbeidsforhold = valgtArbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING;
+  const erManueltOpprettetAvSaksbehandler = valgtArbeidsforhold.saksbehandlersVurdering
+    === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER;
 
   const skalBrukePermisjon = valgtArbeidsforhold.permisjonOgMangel?.permisjonStatus === BekreftetPermisjonStatus.BRUK_PERMISJON;
   const skalIkkeBrukePermisjon = valgtArbeidsforhold.permisjonOgMangel?.permisjonStatus === BekreftetPermisjonStatus.IKKE_BRUK_PERMISJON;
@@ -65,7 +67,8 @@ const ArbeidsforholdDetail: FunctionComponent<PureOwnProps> = ({
             <FormattedMessage id="ArbeidsforholdDetail.SokerErIPermisjon" />
           </Normaltekst>
         )}
-        {((skalBrukeArbeidsforholdet || skalFortsetteUtenInntektsmelding) && (!valgtArbeidsforhold.permisjonOgMangel || skalIkkeBrukePermisjon)) && (
+        {(erManueltOpprettetAvSaksbehandler
+          || ((skalBrukeArbeidsforholdet || skalFortsetteUtenInntektsmelding) && (!valgtArbeidsforhold.permisjonOgMangel || skalIkkeBrukePermisjon))) && (
           <>
             <Normaltekst>
               <FormattedMessage id={utledAktivtArbeidsforholdLabel(valgtArbeidsforhold)} />
@@ -76,7 +79,7 @@ const ArbeidsforholdDetail: FunctionComponent<PureOwnProps> = ({
                 <FormattedMessage id="ArbeidsforholdDetail.BenyttAInntektIBeregningsgrunnlag" />
               </Normaltekst>
             )}
-            {!skalFortsetteUtenInntektsmelding && (
+            {!skalFortsetteUtenInntektsmelding && !erManueltOpprettetAvSaksbehandler && (
               <Normaltekst>
                 <FormattedMessage id="ArbeidsforholdDetail.AvslaYtelseManglendeOpplysninger" />
               </Normaltekst>

@@ -5,7 +5,7 @@ import { Normaltekst } from 'nav-frontend-typografi';
 import {
   DateLabel, PeriodLabel, Table, TableColumn, TableRow, Image,
 } from '@navikt/ft-ui-komponenter';
-import { decodeHtmlEntity } from '@navikt/ft-utils';
+import { decodeHtmlEntity, TIDENES_ENDE } from '@navikt/ft-utils';
 import erIBrukImageUrl from '@fpsak-frontend/assets/images/stjerne.svg';
 import { ArbeidsgiverOpplysningerPerId, AoIArbeidsforhold, Inntektsmelding } from '@fpsak-frontend/types';
 import ArbeidsforholdKomplettVurderingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdKomplettVurderingType';
@@ -102,7 +102,7 @@ const PersonArbeidsforholdTable: FunctionComponent<OwnProps> = ({
             <TableColumn><Normaltekst>{decodeHtmlEntity(navn)}</Normaltekst></TableColumn>
             <TableColumn>
               <Normaltekst>
-                <PeriodLabel dateStringFom={a.fom} dateStringTom={a.tom} />
+                <PeriodLabel dateStringFom={a.fom} dateStringTom={a.tom !== TIDENES_ENDE ? a.tom : undefined} />
               </Normaltekst>
             </TableColumn>
             <TableColumn><Normaltekst>{finnKilde(a, intl)}</Normaltekst></TableColumn>
@@ -115,7 +115,8 @@ const PersonArbeidsforholdTable: FunctionComponent<OwnProps> = ({
               )}
             </TableColumn>
             <TableColumn>
-              {a.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK && (
+              {(a.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK
+                || a.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING) && (
                 <Image
                   className={styles.image}
                   src={erIBrukImageUrl}
