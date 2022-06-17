@@ -1858,6 +1858,22 @@
       ]
     },
     {
+      "kode": "2035",
+      "navn": "§14-14 tredje ledd, jf. §14-16: Gradering foreldrepenger, kun far har rett - dager uten aktivitetskrav",
+      "kodeverk": "PERIODE_RESULTAT_AARSAK",
+      "utfallType": "INNVILGET",
+      "gyldigForLovendringer": [
+        "KREVER_SAMMENHENGENDE_UTTAK",
+        "FRITT_UTTAK"
+      ],
+      "uttakTyper": [
+        "UTTAK"
+      ],
+      "valgbarForKonto": [
+        "FORELDREPENGER"
+      ]
+    },
+    {
       "kode": "2011",
       "navn": "§14-11 første ledd bokstav b: Gyldig utsettelse pga. 100% arbeid",
       "kodeverk": "PERIODE_RESULTAT_AARSAK",
