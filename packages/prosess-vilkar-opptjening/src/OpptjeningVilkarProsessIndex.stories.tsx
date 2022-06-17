@@ -28,6 +28,10 @@ const opptjening = {
       fom: '2018-01-01',
       tom: '2018-04-04',
       klasse: opptjeningAktivitetKlassifisering.BEKREFTET_GODKJENT,
+    }, {
+      fom: '2018-04-05',
+      tom: '2018-04-10',
+      klasse: opptjeningAktivitetKlassifisering.ANTATT_AVVIST,
     }],
     opptjeningFom: '2018-01-01',
     opptjeningTom: '2018-10-01',
