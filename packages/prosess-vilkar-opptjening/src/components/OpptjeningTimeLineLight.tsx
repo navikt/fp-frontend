@@ -32,7 +32,6 @@ const standardItems = (opptjeningFomDate: string, opptjeningTomDate: string): It
     content: '',
     group: 1,
     className: styles.hiddenpast,
-
   }, {
     id: 1001,
     start: moment(opptjeningTomDate)
@@ -42,7 +41,6 @@ const standardItems = (opptjeningFomDate: string, opptjeningTomDate: string): It
     content: '',
     group: 1,
     className: styles.hiddenpast,
-
   },
 ];
 
@@ -63,9 +61,12 @@ const createItems = (opptjeningPeriods: FastsattOpptjeningAktivitet[], opptjenin
     className: classNameGenerator(ap.klasse),
     content: '',
     data: ap,
+    group: 1,
   }));
   return items.concat(standardItems(opptjeningFomDate, opptjeningTomDate));
 };
+
+const groups = [{ id: 1, content: '' }];
 
 const options = (opptjeningFomDate: string, opptjeningTomDate: string): any => ({
   end: moment(opptjeningTomDate).endOf('month').toDate(),
@@ -198,6 +199,7 @@ class OpptjeningTimeLineLight extends Component<OwnProps, OwnState> {
                       options={options(opptjeningFomDate, opptjeningTomDate)}
                       // @ts-ignore Fiks
                       initialItems={items}
+                      initialGroups={groups}
                       customTimes={{ currentDate: new Date(opptjeningTomDate) }}
                       selectHandler={this.selectHandler}
                       selection={[selectedPeriod ? selectedPeriod.id : undefined]}
