@@ -62,7 +62,6 @@ export type {
   default as UttakStonadskontoer, Stonadskonto, AktivitetSaldo, AktivitetIdentifikator,
 } from './src/uttakStonadskontoerTsType';
 export type { default as Vilkar } from './src/vilkarTsType';
-export type { default as Vilkarperiode } from './src/vilkarperiodeTsType';
 export type { default as Ytelsefordeling } from './src/ytelsefordelingTsType';
 export type { FamilieHendelse, FamilieHendelseSamling, AvklartBarn } from './src/familieHendelseTsType';
 export type { default as Fagsak } from './src/fagsakTsType';

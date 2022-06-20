@@ -7,11 +7,12 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Vilkar, Vilkarperiode,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId,
 } from '@fpsak-frontend/types';
+import { Vilkar, Vilkarperiode, Beregningsgrunnlag } from '@navikt/ft-types';
+
 import { ProsessDefaultInitPanel, ProsessPanelInitProps, DynamicLoader } from '@fpsak-frontend/behandling-felles';
 import { createIntl, TIDENES_ENDE } from '@navikt/ft-utils';
-import { Beregningsgrunnlag } from '@navikt/ft-types';
 import messages from '../../i18n/nb_NO.json';
 import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
@@ -42,16 +43,16 @@ const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: Vi
   vurderesIBehandlingen: true,
   merknadParametere: bgVilkar.merknadParametere,
   periode: {
-    fom: beregningsgrunnlag.skjaeringstidspunktBeregning,
+    fom: beregningsgrunnlag ? beregningsgrunnlag.skjaeringstidspunktBeregning : '',
     tom: TIDENES_ENDE,
   },
   vilkarStatus: bgVilkar.vilkarStatus,
 });
 
-const lagBGVilkar = (vilkar: Vilkar[], beregningsgrunnlag: Beregningsgrunnlag): Vilkar => {
+const lagBGVilkar = (vilkar: Vilkar[], beregningsgrunnlag: Beregningsgrunnlag): Vilkar | null => {
   const bgVilkar = vilkar.find((v) => v.vilkarType && v.vilkarType === vilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
-    return {};
+    return null;
   }
   if (!bgVilkar.perioder || bgVilkar.perioder.length < 1) {
     const nyVK = {
