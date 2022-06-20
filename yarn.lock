@@ -3228,6 +3228,16 @@
   resolved "https://npm.pkg.github.com/download/@navikt/ft-kodeverk/1.0.7/b7d46d716280de106197a5d88a0f98944811cb2032644ac7d7290625f35ac8ee#6e0e82ca4d38144ec4ae2f78c32fe109908590d5"
   integrity sha512-A20+gUKcL2LUKBvqDLYK1LViCzFX6isWtd+hcn8E/uyFCcf/KC2gxRe8uGW05+yDH7kVoXULGBrlUy99wNm8WA==
 
+"@navikt/ft-plattform-komponenter@1.0.13":
+  version "1.0.13"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-plattform-komponenter/1.0.13/458637a7d606cb9007e235cf1e2b50cf6f901d297f58cac073943f4fea289d76#f7226d9ea3eb15b605c8c9b4df4820ea23bc340c"
+  integrity sha512-yvhBiVigXVHXYP9HHzJsdVCXoSQGU3n8/iKtimv/BHUmSnr5P5dbBHaku9MN5vFPj+QuAIZsSeVRlNfYfDq4Hw==
+  dependencies:
+    "@navikt/ds-css" "^0.18.1"
+    "@navikt/ds-icons" "^0.8.13"
+    "@navikt/ds-react" "^0.19.1"
+    "@navikt/ft-utils" "^1.0.14"
+
 "@navikt/ft-plattform-komponenter@1.0.17":
   version "1.0.17"
   resolved "https://npm.pkg.github.com/download/@navikt/ft-plattform-komponenter/1.0.17/5194f5dcd1dc7855d53b7dbe5fb3873be9f34e4634beffde148582f0df911070#af6003b505160318116d4e53c8e7539bc686f944"
@@ -3238,17 +3248,18 @@
     "@navikt/ds-react" "^0.19.1"
     "@navikt/ft-utils" "^1.0.18"
 
-"@navikt/ft-prosess-beregningsgrunnlag@1.0.16":
-  version "1.0.16"
-  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-beregningsgrunnlag/1.0.16/a781c0312b648819b19efa49f28eeefc92dda36b06b9ee6b11c81fefd0b22d46#479b6a1217c72e694e49e7099432a222f859e81f"
-  integrity sha512-IqKJ9KUvZ9mUzGJ3UpeEcSGqYStODaHZqEBIUkem4RY7JmMRw8Js3uEU/kzg9iG7l85k2U/ZafsdhKV6HoBQow==
+"@navikt/ft-prosess-beregningsgrunnlag@2.0.4":
+  version "2.0.4"
+  resolved "https://npm.pkg.github.com/download/@navikt/ft-prosess-beregningsgrunnlag/2.0.4/0d1b4b7a52196b7ba5fe8dc3b2c1fe6bcfbb6c66fce9884e368f41b07693cce5#afb1199f9194713b6ed8285b138f5761801b5566"
+  integrity sha512-CV+G+rxbW2TgtUonQUS7WKdpJPVjEh9CnzEvZpAIQ3yK652GSofmtA1KiUQhlTbznL5pUPpzKgRzPC9PMcTmnQ==
   dependencies:
-    "@navikt/ft-form-hooks" "^1.0.17"
-    "@navikt/ft-form-validators" "^1.0.9"
-    "@navikt/ft-kodeverk" "^1.0.7"
-    "@navikt/ft-types" "^1.0.10"
-    "@navikt/ft-ui-komponenter" "^1.0.16"
-    "@navikt/ft-utils" "^1.0.14"
+    "@navikt/ft-form-hooks" "^1.0.21"
+    "@navikt/ft-form-validators" "^1.0.13"
+    "@navikt/ft-kodeverk" "^1.0.10"
+    "@navikt/ft-plattform-komponenter" "1.0.13"
+    "@navikt/ft-types" "^1.0.14"
+    "@navikt/ft-ui-komponenter" "^1.0.20"
+    "@navikt/ft-utils" "^1.0.18"
     classnames "2.3.1"
     dayjs "1.11.3"
     echarts "5.3.2"
