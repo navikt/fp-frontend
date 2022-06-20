@@ -1,3 +1,5 @@
+import Vilkarperiode from './vilkarperiodeTsType';
+
 type Vilkar = Readonly<{
   vilkarType: string;
   vilkarStatus: string;
@@ -7,6 +9,7 @@ type Vilkar = Readonly<{
   avslagKode?: string;
   lovReferanse?: string;
   overstyrbar: boolean;
+  perioder?: Vilkarperiode[],
 }>
 
 export default Vilkar;

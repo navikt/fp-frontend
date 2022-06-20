@@ -7,12 +7,11 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
-  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Vilkar,
+  Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Vilkar, Vilkarperiode,
 } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps, DynamicLoader } from '@fpsak-frontend/behandling-felles';
-import { createIntl } from '@navikt/ft-utils';
+import { createIntl, TIDENES_ENDE } from '@navikt/ft-utils';
 import { Beregningsgrunnlag } from '@navikt/ft-types';
-
 import messages from '../../i18n/nb_NO.json';
 import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 
@@ -26,6 +25,43 @@ const ProsessBeregningsgrunnlagMF = process.env.NODE_ENV !== 'development' ? und
   : () => import('ft_prosess_beregningsgrunnlag/ProsessBeregningsgrunnlag');
 
 const intl = createIntl(messages);
+
+const lagModifisertCallback = (
+  submitCallback: (params: any, keepData?: boolean) => Promise<any>,
+) => (aksjonspunkterSomSkalLagres: any | any[]) => {
+  const apListe = Array.isArray(aksjonspunkterSomSkalLagres) ? aksjonspunkterSomSkalLagres : [aksjonspunkterSomSkalLagres];
+  const transformerteData = apListe.map((apData) => ({
+    kode: apData.kode,
+    ...apData.grunnlag[0],
+  }));
+  return submitCallback(transformerteData);
+};
+
+const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: Vilkar): Vilkarperiode => ({
+  avslagKode: bgVilkar.avslagKode,
+  vurderesIBehandlingen: true,
+  merknadParametere: bgVilkar.merknadParametere,
+  periode: {
+    fom: beregningsgrunnlag.skjaeringstidspunktBeregning,
+    tom: TIDENES_ENDE,
+  },
+  vilkarStatus: bgVilkar.vilkarStatus,
+});
+
+const lagBGVilkar = (vilkar: Vilkar[], beregningsgrunnlag: Beregningsgrunnlag): Vilkar => {
+  const bgVilkar = vilkar.find((v) => v.vilkarType && v.vilkarType === vilkarType.BEREGNINGSGRUNNLAGVILKARET);
+  if (!bgVilkar || !beregningsgrunnlag) {
+    return {};
+  }
+  if (!bgVilkar.perioder || bgVilkar.perioder.length < 1) {
+    const nyVK = {
+      ...bgVilkar,
+      perioder: [lagStandardPeriode(beregningsgrunnlag, bgVilkar)],
+    };
+    return nyVK;
+  }
+  return bgVilkar;
+};
 
 const AKSJONSPUNKT_KODER = [
   ProsessBeregningsgrunnlagAksjonspunktCode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
@@ -49,7 +85,6 @@ const ENDEPUNKTER_PANEL_DATA = [FpBehandlingApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktPanelData = {
   beregningsgrunnlag?: Beregningsgrunnlag;
 }
-
 interface OwnProps {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
@@ -72,8 +107,11 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
       <DynamicLoader<React.ComponentProps<typeof ProsessBeregningsgrunnlag>>
         packageCompFn={() => import('@navikt/ft-prosess-beregningsgrunnlag')}
         federatedCompFn={ProsessBeregningsgrunnlagMF}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...data}
+        beregningsgrunnlagsvilkar={lagBGVilkar(data.vilkar, data.beregningsgrunnlag)}
+        beregningsgrunnlagListe={data.beregningsgrunnlag ? [data.beregningsgrunnlag] : []}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        submitCallback={lagModifisertCallback(data.submitCallback)}
       />
     )}
   />
