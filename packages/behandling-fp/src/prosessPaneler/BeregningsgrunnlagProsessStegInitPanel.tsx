@@ -23,7 +23,13 @@ const ProsessBeregningsgrunnlag = React.lazy(() => import('@navikt/ft-prosess-be
 // eslint-disable-next-line import/no-unresolved
 const ProsessBeregningsgrunnlagMF = process.env.NODE_ENV !== 'development' ? undefined
   // eslint-disable-next-line import/no-unresolved
-  : React.lazy(() => import('ft_prosess_beregningsgrunnlag/ProsessBeregningsgrunnlag')) as typeof ProsessBeregningsgrunnlag;
+  : React.lazy(() => import('ft_prosess_beregningsgrunnlag/ProsessBeregningsgrunnlag')
+    .catch((error) => {
+      if (error?.name === 'ScriptExternalLoadError') {
+        return import('@navikt/ft-prosess-beregningsgrunnlag');
+      }
+      return error;
+    })) as typeof ProsessBeregningsgrunnlag;
 
 class BeregningsgrunnlagPanel extends DynamicLoader<React.ComponentProps<typeof ProsessBeregningsgrunnlag>> {
   render() {
