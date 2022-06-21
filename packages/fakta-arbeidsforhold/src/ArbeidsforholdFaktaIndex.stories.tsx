@@ -75,8 +75,8 @@ ArbeidsforholdetSkalBenyttesUtenInntektsmelding.args = {
   },
 };
 
-export const ManueltOppdatertArbeidsforhold = Template.bind({});
-ManueltOppdatertArbeidsforhold.args = {
+export const ManueltOpprettetArbeidsforhold = Template.bind({});
+ManueltOpprettetArbeidsforhold.args = {
   arbeidOgInntekt: {
     arbeidsforhold: [
       {
@@ -207,6 +207,43 @@ FjernArbeidsforholdet.args = {
     inntektsmeldinger: [],
     inntekter: [],
     skjæringstidspunkt: '2021-11-10',
+  },
+};
+
+export const ArbeidsforholdetErOpprettetBasertPåIM = Template.bind({});
+ArbeidsforholdetErOpprettetBasertPåIM.args = {
+  arbeidOgInntekt: {
+    inntektsmeldinger: [{
+      inntektPrMnd: 25500.00,
+      refusjonPrMnd: null,
+      arbeidsgiverIdent: '999999999',
+      eksternArbeidsforholdId: null,
+      internArbeidsforholdId: null,
+      kontaktpersonNavn: 'Dolly Dollesen',
+      kontaktpersonNummer: '99999999',
+      journalpostId: '524273715',
+      dokumentId: '548466069',
+      motattDato: '2022-01-19',
+      begrunnelse: null,
+      saksbehandlersVurdering: null,
+    }],
+    arbeidsforhold: [{
+      arbeidsgiverIdent: '999999999',
+      internArbeidsforholdId: null,
+      eksternArbeidsforholdId: null,
+      fom: '2022-01-19',
+      tom: '9999-12-31',
+      stillingsprosent: 100.00,
+      årsak: null,
+      saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+      permisjonOgMangel: null,
+      begrunnelse: 'Mottatt IM',
+    }],
+    inntekter: [{
+      arbeidsgiverIdent: '972674818',
+      inntekter: [],
+    }],
+    skjæringstidspunkt: '2022-02-08',
   },
 };
 

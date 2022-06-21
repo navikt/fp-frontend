@@ -37,6 +37,7 @@ const ArbeidsforholdDetail: FunctionComponent<PureOwnProps> = ({
   const skalFortsetteUtenInntektsmelding = valgtArbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING;
   const skalBrukeMedOverstyrtPeriode = valgtArbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK_MED_OVERSTYRT_PERIODE;
   const skalFjerneArbeidsforhold = valgtArbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING;
+  const skalOppretteBasertPåIM = valgtArbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING;
   const erManueltOpprettetAvSaksbehandler = valgtArbeidsforhold.saksbehandlersVurdering
     === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER;
 
@@ -65,6 +66,11 @@ const ArbeidsforholdDetail: FunctionComponent<PureOwnProps> = ({
         {skalBrukeArbeidsforholdet && skalBrukePermisjon && (
           <Normaltekst>
             <FormattedMessage id="ArbeidsforholdDetail.SokerErIPermisjon" />
+          </Normaltekst>
+        )}
+        {skalOppretteBasertPåIM && (
+          <Normaltekst>
+            <FormattedMessage id="ArbeidsforholdDetail.OppdatertGittIm" />
           </Normaltekst>
         )}
         {(erManueltOpprettetAvSaksbehandler

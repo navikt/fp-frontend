@@ -13,7 +13,7 @@
   
   "ArbeidsforholdDetail.Header": "Detaljer",
   "ArbeidsforholdDetail.ArbeidsforholdErAktivt": "Arbeidsforholdet er aktivt og skal benyttes i behandlingen. Nødvendig inntektsmelding er ikke mottatt.",
-  "ArbeidsforholdDetail.OppdaterArbeidsforhold": "Oppdater arbeidsforholdet basert på inntektsmelding med følgene opplysninger.",
+  "ArbeidsforholdDetail.OppdaterArbeidsforhold": "Arbeidsforhold er manuelt opprettet av saksbehandler",
   "ArbeidsforholdDetail.ArbeidsforholdErAktivtOgHarPermisjonMenSoekerErIkkePermisjon": "Søker er ikke i permisjon. Arbeidsforholdet er aktivt og skal benyttes i behandlingen.",
   "ArbeidsforholdDetail.FjernArbeidsforholdet": "Fjern arbeidsforholdet for denne behandlingen",
   "ArbeidsforholdDetail.IMIkkeRelevant": "Inntektsmeldingen er ikke relevant, gå videre uten disse opplysningene",
@@ -23,6 +23,7 @@
   "ArbeidsforholdDetail.BenyttAInntektIBeregningsgrunnlag": "Fortsett behandling uten inntektsmelding, inntekt fra A-inntekt benyttes i beregningsgrunnlaget.",
   "ArbeidsforholdDetail.Begrunnelse": "Begrunn endringene",
   "ArbeidsforholdDetail.SokerErIPermisjon": "Søker er i permisjon. Inntektsmelding er ikke nødvendig.",
+  "ArbeidsforholdDetail.OppdatertGittIm": "Arbeidsforholdet er opprettet basert på motatt inntektsmelding",
   "PersonArbeidsforholdTable.Inntektsmelding": "Inntektsmelding",
   "PersonArbeidsforholdTable.Saksbehandler": "Saksbehandler",
   "PersonArbeidsforholdTable.AaRegisteret": "AA-Registeret",
