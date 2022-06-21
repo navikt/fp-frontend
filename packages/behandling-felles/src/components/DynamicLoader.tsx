@@ -24,7 +24,7 @@ class ErrorBoundary extends Component<OwnPropsErrorBoundary, StateErrorBoundary>
   }
 
   static getDerivedStateFromError() {
-    return { harError: true };
+    return { hasError: true };
   }
 
   componentDidCatch(error: Error, info: ErrorInfo): void {
