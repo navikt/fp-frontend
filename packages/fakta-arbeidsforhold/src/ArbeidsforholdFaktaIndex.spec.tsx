@@ -6,7 +6,7 @@ import * as stories from './ArbeidsforholdFaktaIndex.stories';
 
 const {
   ArbeidsforholdetErIkkeAktivt, FjernArbeidsforholdet, FlereArbeidsforholdITabell, IngenArbeidsforholdRegistrert,
-  OppdaterArbeidsforholdOgAvslaGrunnetManglendeOpplysninger, ManueltOppdatertArbeidsforhold,
+  OppdaterArbeidsforholdOgAvslaGrunnetManglendeOpplysninger, ManueltOpprettetArbeidsforhold,
   SokerErIPermisjon, SokerErIkkeIPermisjon, ArbeidsforholdetSkalBenyttesUtenInntektsmelding,
 } = composeStories(stories);
 
@@ -32,7 +32,7 @@ describe('<ArbeidsforholdFaktaIndex>', () => {
   });
 
   it('skal vise at arbeidsforholdet er manuelt oppdatert av saksbehandler', async () => {
-    render(<ManueltOppdatertArbeidsforhold />);
+    render(<ManueltOpprettetArbeidsforhold />);
 
     expect(await screen.findByText('Arbeidsforhold som er aktive ved permisjonsstart')).toBeInTheDocument();
     expect(screen.getByText('KIWI')).toBeInTheDocument();
@@ -45,7 +45,7 @@ describe('<ArbeidsforholdFaktaIndex>', () => {
     userEvent.click(screen.getByText('Saksbehandler')); // Klikk på rad
 
     expect(await screen.findByText('Detaljer')).toBeInTheDocument();
-    expect(screen.getByText('Oppdater arbeidsforholdet basert på inntektsmelding med følgene opplysninger.')).toBeInTheDocument();
+    expect(screen.getByText('Arbeidsforhold er manuelt opprettet av saksbehandler')).toBeInTheDocument();
 
     expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
     expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
