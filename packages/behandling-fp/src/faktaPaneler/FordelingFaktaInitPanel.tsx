@@ -16,15 +16,10 @@ import { FpBehandlingApiKeys, requestFpApi } from '../data/fpBehandlingApi';
 import '@navikt/ft-fakta-fordel-beregningsgrunnlag/dist/style.css';
 
 const ProsessFordeling = React.lazy(() => import('@navikt/ft-fakta-fordel-beregningsgrunnlag'));
+
 const ProsessFordelingMF = process.env.NODE_ENV !== 'development' ? undefined
   // eslint-disable-next-line import/no-unresolved
-  : React.lazy(() => import('ft_fakta_fordel_beregningsgrunnlag/FaktaFordelBeregningsgrunnlag')) as typeof ProsessFordeling;
-
-class FordelingPanel extends DynamicLoader<React.ComponentProps<typeof ProsessFordeling>> {
-  render() {
-    return super.doRender(ProsessFordeling, ProsessFordelingMF);
-  }
-}
+  : () => import('ft_fakta_fordel_beregningsgrunnlag/FaktaFordelBeregningsgrunnlag');
 
 const intl = createIntl(messages);
 
@@ -62,7 +57,9 @@ const FordelingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
     skalPanelVisesIMeny={(initData) => !!initData.aksjonspunkter
       && !!initData.aksjonspunkter.some((ap) => AKSJONSPUNKT_KODER.some((kode) => kode === ap.definisjon))}
     renderPanel={(data) => (
-      <FordelingPanel
+      <DynamicLoader<React.ComponentProps<typeof ProsessFordeling>>
+        packageCompFn={() => import('@navikt/ft-fakta-fordel-beregningsgrunnlag')}
+        federatedCompFn={ProsessFordelingMF}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...data}
       />

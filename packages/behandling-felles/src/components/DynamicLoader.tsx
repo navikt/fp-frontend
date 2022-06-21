@@ -1,15 +1,24 @@
-import React, { ErrorInfo, LazyExoticComponent } from 'react';
-import { captureException, withScope } from '@sentry/browser';
+import React, {
+  Component, ErrorInfo, ComponentType, useState, useCallback,
+} from 'react';
 import { Element } from 'nav-frontend-typografi';
-import { RestApiErrorDispatchContext } from '@fpsak-frontend/rest-api-hooks';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { captureException, withScope } from '@sentry/browser';
+import { RestApiErrorDispatchContext } from '@fpsak-frontend/rest-api-hooks';
+import { ErrorPage } from '@fpsak-frontend/sak-infosider';
 
-type State = { hasError: boolean; };
+interface OwnPropsErrorBoundary {
+  children: JSX.Element;
+}
 
-class DynamicLoader<Props> extends React.Component<Props, State> {
+interface StateErrorBoundary {
+  hasError: boolean;
+}
+
+class ErrorBoundary extends Component<OwnPropsErrorBoundary, StateErrorBoundary> {
   static contextType = RestApiErrorDispatchContext;
 
-  constructor(props: Props) {
+  constructor(props: OwnPropsErrorBoundary) {
     super(props);
     this.state = { hasError: false };
   }
@@ -19,18 +28,14 @@ class DynamicLoader<Props> extends React.Component<Props, State> {
   }
 
   componentDidCatch(error: Error, info: ErrorInfo): void {
-    if (error?.name === 'ScriptExternalLoadError') {
-      return;
-    }
-
     withScope((scope) => {
       Object.keys(info).forEach((key) => {
+        // @ts-ignore Fiks
         scope.setExtra(key, info[key]);
         captureException(error);
       });
     });
 
-    const dispatch = this.context;
     const message = [
       error.toString(),
       info.componentStack
@@ -38,25 +43,62 @@ class DynamicLoader<Props> extends React.Component<Props, State> {
         .map((line) => line.trim())
         .find((line) => !!line),
     ].join(' ');
+    const dispatch = this.context;
     dispatch({ type: 'add', data: message });
 
     // eslint-disable-next-line no-console
     console.error(error);
   }
 
-  // eslint-disable-next-line react/no-unused-class-component-methods
-  doRender(Comp: LazyExoticComponent<any>, CompMF: LazyExoticComponent<any>) {
+  render(): JSX.Element {
+    const { children } = this.props;
     const { hasError } = this.state;
-    const isProd = process.env.NODE_ENV !== 'development';
-    const visPublisertModul = hasError || isProd;
-    const SelectedComp = visPublisertModul ? Comp : CompMF;
-    return (
-      <React.Suspense fallback={<LoadingPanel />}>
-        {!visPublisertModul && (<Element style={{ color: 'red' }}>Micro frontend</Element>)}
-        <SelectedComp {...this.props} />
-      </React.Suspense>
-    );
+
+    return hasError ? <ErrorPage /> : children;
   }
 }
+
+interface OwnPropsDynamicLoader {
+  packageCompFn: () => Promise<any>
+  federatedCompFn: () => Promise<any>
+}
+
+const DynamicLoader = <Props, >({
+  packageCompFn,
+  federatedCompFn,
+  ...props
+}: OwnPropsDynamicLoader & Props) => {
+  const [hasError, setError] = useState(false);
+
+  const pageLoader = useCallback((
+    loadComponent: () => Promise<{ default: ComponentType<any> }>,
+  ) => (): Promise<{ default: ComponentType<any> }> => new Promise((resolve, reject) => {
+    loadComponent()
+      .then((module) => resolve(module))
+      .catch((error: Error) => {
+        if (error?.name === 'ScriptExternalLoadError') {
+          setError(true);
+          return Promise.resolve();
+        }
+        return reject(error);
+      });
+  }), []);
+
+  const visPublisertModul = hasError || federatedCompFn === undefined;
+  const SelectedComp = visPublisertModul
+    ? React.lazy(packageCompFn)
+    : React.lazy(pageLoader(federatedCompFn));
+
+  return (
+    <React.Suspense fallback={<LoadingPanel />}>
+      <>
+        {!visPublisertModul && (<Element style={{ color: 'red' }}>Micro frontend</Element>)}
+        <ErrorBoundary>
+          <SelectedComp {...props} />
+        </ErrorBoundary>
+      </>
+    </React.Suspense>
+  );
+};
 
 export default DynamicLoader;
