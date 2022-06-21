@@ -7,7 +7,7 @@
   "dependencies": {
     "@navikt/ft-kodeverk": "^1.0.10",
     "@navikt/ft-types": "^1.0.14",
-    "@navikt/ft-ui-komponenter": "1.0.20",
+    "@navikt/ft-ui-komponenter": "1.0.21",
     "@navikt/ft-utils": "1.0.18",
     "nav-frontend-modal": "2.0.1",
     "nav-frontend-modal-style": "2.0.1",

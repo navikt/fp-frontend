@@ -20,13 +20,7 @@ const ProsessFeilutbetaling = React.lazy(() => import('@navikt/ft-fakta-tilbakek
 // eslint-disable-next-line import/no-unresolved
 const ProsessFeilutbetalingMF = process.env.NODE_ENV !== 'development' ? undefined
   // eslint-disable-next-line import/no-unresolved
-  : React.lazy(() => import('ft_fakta_tilbakekreving_feilutbetaling/FeilutbetalingFaktaIndex')) as typeof ProsessFeilutbetaling;
-
-class FeilutbetalingPanel extends DynamicLoader<React.ComponentProps<typeof ProsessFeilutbetaling>> {
-  render() {
-    return super.doRender(ProsessFeilutbetaling, ProsessFeilutbetalingMF);
-  }
-}
+  : () => import('ft_fakta_tilbakekreving_feilutbetaling/FeilutbetalingFaktaIndex');
 
 interface OwnProps {
   behandling: Behandling;
@@ -73,7 +67,9 @@ const FeilutbetalingFaktaInitPanel: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <FeilutbetalingPanel
+    <DynamicLoader<React.ComponentProps<typeof ProsessFeilutbetaling>>
+      packageCompFn={() => import('@navikt/ft-fakta-tilbakekreving-feilutbetaling')}
+      federatedCompFn={ProsessFeilutbetalingMF}
       feilutbetalingFakta={feilutbetalingFakta}
       feilutbetalingAarsak={feilutbetalingAarsak}
       fagsakYtelseTypeKode={fagsakYtelseTypeKode}

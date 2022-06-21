@@ -26,13 +26,7 @@ const ProsessVedtak = React.lazy(() => import('@navikt/ft-prosess-tilbakekreving
 // eslint-disable-next-line import/no-unresolved
 const ProsessVedtakMF = process.env.NODE_ENV !== 'development' ? undefined
   // eslint-disable-next-line import/no-unresolved
-  : React.lazy(() => import('ft_prosess_tilbakekreving_vedtak/VedtakProsessIndex')) as typeof ProsessVedtak;
-
-class VedtakPanel extends DynamicLoader<React.ComponentProps<typeof ProsessVedtak>> {
-  render() {
-    return super.doRender(ProsessVedtak, ProsessVedtakMF);
-  }
-}
+  : () => import('ft_prosess_tilbakekreving_vedtak/VedtakProsessIndex');
 
 const tilbakekrevingÅrsakTyperKlage = [
   BehandlingArsakType.RE_KLAGE_KA,
@@ -129,7 +123,9 @@ const VedtakTilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
           submit={lukkApenRevurderingModal}
         />
       )}
-      <VedtakPanel
+      <DynamicLoader<React.ComponentProps<typeof ProsessVedtak>>
+        packageCompFn={() => import('@navikt/ft-prosess-tilbakekreving-vedtak')}
+        federatedCompFn={ProsessVedtakMF}
         behandling={behandling}
         beregningsresultat={beregningsresultat}
         isReadOnly={isReadOnly}

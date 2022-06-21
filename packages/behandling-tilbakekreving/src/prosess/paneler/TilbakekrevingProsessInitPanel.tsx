@@ -26,13 +26,7 @@ const ProsessTilbakekreving = React.lazy(() => import('@navikt/ft-prosess-tilbak
 // eslint-disable-next-line import/no-unresolved
 const ProsessTilbakekrveingMF = process.env.NODE_ENV !== 'development' ? undefined
   // eslint-disable-next-line import/no-unresolved
-  : React.lazy(() => import('ft_prosess_tilbakekreving/TilbakekrevingProsessIndex')) as typeof ProsessTilbakekreving;
-
-class TilbakekrevingPanel extends DynamicLoader<React.ComponentProps<typeof ProsessTilbakekreving>> {
-  render() {
-    return super.doRender(ProsessTilbakekreving, ProsessTilbakekrveingMF);
-  }
-}
+  : () => import('ft_prosess_tilbakekreving/TilbakekrevingProsessIndex');
 
 const ENDEPUNKTER_PANEL_DATA = [
   TilbakekrevingBehandlingApiKeys.VILKARVURDERINGSPERIODER,
@@ -93,7 +87,9 @@ const TilbakekrevingProsessInitPanel: FunctionComponent<OwnProps> = ({
   }
 
   return (
-    <TilbakekrevingPanel
+    <DynamicLoader<React.ComponentProps<typeof ProsessTilbakekreving>>
+      packageCompFn={() => import('@navikt/ft-prosess-tilbakekreving')}
+      federatedCompFn={ProsessTilbakekrveingMF}
       behandling={behandling}
       perioderForeldelse={perioderForeldelse}
       vilkarvurderingsperioder={initData.vilkarvurderingsperioder}

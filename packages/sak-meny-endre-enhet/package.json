@@ -6,11 +6,11 @@
   "private": true,
   "dependencies": {
     "@fpsak-frontend/assets": "1.0.0",
-    "@navikt/ft-form-hooks": "1.0.21",
+    "@navikt/ft-form-hooks": "1.0.22",
     "@navikt/ft-form-validators": "1.0.13",
     "@navikt/ft-kodeverk": "^1.0.10",
     "@navikt/ft-types": "^1.0.14",
-    "@navikt/ft-ui-komponenter": "1.0.20",
+    "@navikt/ft-ui-komponenter": "1.0.21",
     "@navikt/ft-utils": "1.0.18",
     "nav-frontend-core": "6.0.1",
     "nav-frontend-grid": "2.0.1",
