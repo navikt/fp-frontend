@@ -1,5 +1,5 @@
 import React, {
-  Component, ReactNode, ErrorInfo, ComponentType, useState, useCallback,
+  Component, ErrorInfo, ComponentType, useState, useCallback,
 } from 'react';
 import { Element } from 'nav-frontend-typografi';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -8,7 +8,7 @@ import { RestApiErrorDispatchContext } from '@fpsak-frontend/rest-api-hooks';
 import { ErrorPage } from '@fpsak-frontend/sak-infosider';
 
 interface OwnPropsErrorBoundary {
-  children: ReactNode;
+  children: JSX.Element;
 }
 
 interface StateErrorBoundary {
@@ -50,7 +50,7 @@ class ErrorBoundary extends Component<OwnPropsErrorBoundary, StateErrorBoundary>
     console.error(error);
   }
 
-  render(): ReactNode {
+  render(): JSX.Element {
     const { children } = this.props;
     const { hasError } = this.state;
 
@@ -93,7 +93,6 @@ const DynamicLoader = <Props, >({
     <React.Suspense fallback={<LoadingPanel />}>
       <>
         {!visPublisertModul && (<Element style={{ color: 'red' }}>Micro frontend</Element>)}
-        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <ErrorBoundary>
           <SelectedComp {...props} />
         </ErrorBoundary>
