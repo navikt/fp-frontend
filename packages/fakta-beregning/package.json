@@ -18,7 +18,7 @@
     "@navikt/ft-types": "^1.0.14",
     "@navikt/ft-ui-komponenter": "1.0.20",
     "@navikt/ft-utils": "1.0.18",
-    "core-js": "3.23.1",
+    "core-js": "3.23.2",
     "moment": "2.29.3",
     "nav-frontend-alertstriper": "4.0.1",
     "nav-frontend-alertstriper-style": "3.0.1",
