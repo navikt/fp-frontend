@@ -23,19 +23,7 @@ const ProsessBeregningsgrunnlag = React.lazy(() => import('@navikt/ft-prosess-be
 // eslint-disable-next-line import/no-unresolved
 const ProsessBeregningsgrunnlagMF = process.env.NODE_ENV !== 'development' ? undefined
   // eslint-disable-next-line import/no-unresolved
-  : React.lazy(() => import('ft_prosess_beregningsgrunnlag/ProsessBeregningsgrunnlag')
-    .catch((error) => {
-      if (error?.name === 'ScriptExternalLoadError') {
-        return import('@navikt/ft-prosess-beregningsgrunnlag');
-      }
-      return error;
-    })) as typeof ProsessBeregningsgrunnlag;
-
-class BeregningsgrunnlagPanel extends DynamicLoader<React.ComponentProps<typeof ProsessBeregningsgrunnlag>> {
-  render() {
-    return super.doRender(ProsessBeregningsgrunnlag, ProsessBeregningsgrunnlagMF);
-  }
-}
+  : () => import('ft_prosess_beregningsgrunnlag/ProsessBeregningsgrunnlag');
 
 const intl = createIntl(messages);
 
@@ -81,7 +69,9 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
     prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Beregning' })}
     skalPanelVisesIMeny={(_initData, initState) => initState === RestApiState.SUCCESS}
     renderPanel={(data) => (
-      <BeregningsgrunnlagPanel
+      <DynamicLoader<React.ComponentProps<typeof ProsessBeregningsgrunnlag>>
+        packageCompFn={() => import('@navikt/ft-prosess-beregningsgrunnlag')}
+        federatedCompFn={ProsessBeregningsgrunnlagMF}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         {...data}
       />

@@ -17,13 +17,7 @@ const ProsessForeldelse = React.lazy(() => import('@navikt/ft-prosess-tilbakekre
 // eslint-disable-next-line import/no-unresolved
 const ProsessForeldelseMF = process.env.NODE_ENV !== 'development' ? undefined
   // eslint-disable-next-line import/no-unresolved
-  : React.lazy(() => import('ft_prosess_tilbakekreving_foreldelse/ForeldelseProsessIndex')) as typeof ProsessForeldelse;
-
-class ForeldelsePanel extends DynamicLoader<React.ComponentProps<typeof ProsessForeldelse>> {
-  render() {
-    return super.doRender(ProsessForeldelse, ProsessForeldelseMF);
-  }
-}
+  : () => import('ft_prosess_tilbakekreving_foreldelse/ForeldelseProsessIndex');
 
 interface OwnProps {
   behandling: Behandling;
@@ -64,7 +58,9 @@ const ForeldelseProsessInitPanel: FunctionComponent<OwnProps> = ({
   })), [setFormData]);
 
   return (
-    <ForeldelsePanel
+    <DynamicLoader<React.ComponentProps<typeof ProsessForeldelse>>
+      packageCompFn={() => import('@navikt/ft-prosess-tilbakekreving-foreldelse')}
+      federatedCompFn={ProsessForeldelseMF}
       behandling={behandling}
       perioderForeldelse={perioderForeldelse}
       submitCallback={bekreftAksjonspunkter}
