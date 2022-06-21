@@ -23,6 +23,10 @@ const finnAlderTekstProps = (fødselsdato: string) => {
   const maneder = moment().diff(fødselsdato, 'months');
   const dager = moment().diff(fødselsdato, 'days');
 
+  if (ar < 0 || maneder < 0 || dager < 0) {
+    throw new Error('Fødselsdato kan ikke være i fremtiden');
+  }
+
   let tekstkode;
   if (ar > 0) {
     tekstkode = 'VisittkortBarnInfoFodselPanel.Ar.Fodt';
