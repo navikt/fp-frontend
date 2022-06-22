@@ -2,11 +2,15 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
+import Modal from 'nav-frontend-modal';
+
 import * as stories from './MenyNyBehandlingIndex.stories';
 
 const { Default } = composeStories(stories);
 
 describe('<MenyNyBehandlingIndex>', () => {
+  Modal.setAppElement('body');
+
   it('skal opprette ny ankebehandling', async () => {
     const lagNyBehandling = jest.fn();
     const lukkModal = jest.fn();
