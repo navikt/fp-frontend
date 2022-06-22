@@ -1,4 +1,4 @@
-import { BeregningsgrunnlagResultatAP } from '@navikt/ft-prosess-beregningsgrunnlag';
+import { BeregningAksjonspunktSubmitType } from '@navikt/ft-prosess-beregningsgrunnlag';
 import AnkeVurderingResultatAp from './prosess/AnkeVurderingResultatAp';
 import BekreftSvangerskapspengervilkarAp from './prosess/BekreftSvangerskapspengervilkarAp';
 import SoknadsfristAp from './prosess/SoknadsfristAp';
@@ -60,7 +60,7 @@ export type ProsessAksjonspunkt = AnkeVurderingResultatAp
   | OverstyringMedlemskapsvilkaretLopendeAp
   | VurdereAnnenYtelseForVedtakAp
   | UttakAp
-  | BeregningsgrunnlagResultatAP
+  | BeregningAksjonspunktSubmitType
   | VurdereDokumentForVedtakAp;
 
 export default ProsessAksjonspunkt;
