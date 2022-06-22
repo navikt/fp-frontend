@@ -79,7 +79,7 @@ export type {
 } from './src/opptjeningTsType';
 export type { default as TilbakekrevingValg } from './src/tilbakekrevingValgTsType';
 export type { default as UttakPeriodeGrense } from './src/uttakPeriodeGrenseTsType';
-export type { default as TotrinnskontrollAksjonspunkt, TotrinnskontrollArbeidsforhold, OpptjeningAktiviteter } from './src/totrinnskontrollAksjonspunktTsType';
+export type { default as TotrinnskontrollAksjonspunkt, OpptjeningAktiviteter } from './src/totrinnskontrollAksjonspunktTsType';
 export type { default as TotrinnskontrollSkjermlenkeContext } from './src/totrinnskontrollSkjermlenkeContextTsType';
 export type {
   default as Historikkinnslag, HistorikkInnslagDokumentLink, HistorikkinnslagDel, HistorikkinnslagEndretFelt,

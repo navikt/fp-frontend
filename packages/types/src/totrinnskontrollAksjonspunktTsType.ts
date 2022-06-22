@@ -5,14 +5,6 @@ enum TypeEndring {
   LAGT_TIL = 'LAGT_TIL',
 }
 
-export type TotrinnskontrollArbeidsforhold = Readonly<{
-  navn: string;
-  organisasjonsnummer: string;
-  arbeidsforholdId: string;
-  arbeidsforholdHandlingType: string;
-  brukPermisjon: boolean;
-}>
-
 export type OpptjeningAktiviteter = Readonly<{
   aktivitetType: string;
   erEndring: boolean;
@@ -41,7 +33,6 @@ type TotrinnskontrollAksjonspunkt = Readonly<{
     erLagtTil: boolean;
     erEndret: boolean;
   }[];
-  arbeidforholdDtos?: TotrinnskontrollArbeidsforhold[];
 }>
 
 export default TotrinnskontrollAksjonspunkt;
