@@ -1,5 +1,6 @@
 import { renderHook } from '@testing-library/react-hooks';
-import { waitFor, act } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
+import TestRenderer from 'react-test-renderer';
 import MockAdapter from 'axios-mock-adapter';
 
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
@@ -8,10 +9,26 @@ import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import { useBehandling, useLagreAksjonspunkt } from './indexHooks';
 
+const { act } = TestRenderer;
+
 describe('indexHooks', () => {
   const behandlingSomHentes = {
     uuid: '1',
   } as Behandling;
+
+  const LINKS = [{
+    href: 'behandling-url',
+    rel: 'Behandling',
+    type: 'GET',
+  }, {
+    href: 'ap-url',
+    rel: 'Aksjonspunkt',
+    type: 'GET',
+  }, {
+    href: 'oap-url',
+    rel: 'OverstyrtAksjonspunkt',
+    type: 'GET',
+  }];
 
   it('skal hente behandling fra server og returnere behandling m.m.', async () => {
     const BEHANDLING_KEY = new RestKey<Behandling, { behandlingUuid: string }>('BEHANDLING_KEY');
@@ -21,11 +38,7 @@ describe('indexHooks', () => {
       .build();
 
     const requestApi = createRequestApi(endpoints);
-    requestApi.setLinks([{
-      href: 'behandling-url',
-      rel: 'Behandling',
-      type: 'GET',
-    }]);
+    requestApi.setLinks(LINKS);
     const apiMock = new MockAdapter(requestApi.getAxios());
     apiMock.onGet('behandling-url').replyOnce(200, behandlingSomHentes);
 
@@ -47,15 +60,7 @@ describe('indexHooks', () => {
       .build();
 
     const requestApi = createRequestApi(endpoints);
-    requestApi.setLinks([{
-      href: 'ap-url',
-      rel: 'Aksjonspunkt',
-      type: 'GET',
-    }, {
-      href: 'oap-url',
-      rel: 'OverstyrtAksjonspunkt',
-      type: 'GET',
-    }]);
+    requestApi.setLinks(LINKS);
     const apiMock = new MockAdapter(requestApi.getAxios());
     apiMock.onGet('ap-url').replyOnce(200, behandlingSomHentes);
     apiMock.onGet('oap-url').replyOnce(200, behandlingSomHentes);
@@ -83,15 +88,7 @@ describe('indexHooks', () => {
       .build();
 
     const requestApi = createRequestApi(endpoints);
-    requestApi.setLinks([{
-      href: 'ap-url',
-      rel: 'Aksjonspunkt',
-      type: 'GET',
-    }, {
-      href: 'oap-url',
-      rel: 'OverstyrtAksjonspunkt',
-      type: 'GET',
-    }]);
+    requestApi.setLinks(LINKS);
     const apiMock = new MockAdapter(requestApi.getAxios());
     apiMock.onGet('ap-url').replyOnce(200, behandlingSomHentes);
     apiMock.onGet('oap-url').replyOnce(200, behandlingSomHentes);
@@ -100,7 +97,9 @@ describe('indexHooks', () => {
       requestApi, setBehandling, LAGRE_AKSJONSPUNKT_KEY, LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY,
     ));
 
-    await result.current.lagreOverstyrteAksjonspunkter([]);
+    await act(async () => {
+      result.current.lagreOverstyrteAksjonspunkter([]);
+    });
 
     await waitFor(() => expect(setBehandling).toHaveBeenCalledTimes(1));
     expect(setBehandling).toHaveBeenNthCalledWith(1, behandlingSomHentes);
