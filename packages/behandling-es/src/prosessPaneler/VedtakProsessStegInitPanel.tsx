@@ -175,7 +175,7 @@ const VedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPanelInitP
         initData.vilkar || [], initData.aksjonspunkter || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
       )}
       lagringSideEffekter={lagringSideEffekter}
-      hentSkalMarkeresSomAktiv={(initData, standardData) => findStatusForVedtak(
+      hentSkalMarkeresSomAktiv={(initData, standardData) => !standardData.behandling.behandlingHenlagt && findStatusForVedtak(
         initData.vilkar || [], initData.aksjonspunkter || [], standardData.aksjonspunkter, standardData.behandling.behandlingsresultat,
       ) !== vilkarUtfallType.IKKE_VURDERT}
       renderPanel={(data, initData) => (
