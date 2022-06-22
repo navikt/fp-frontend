@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'classnames/bind';
-import Panel from 'nav-frontend-paneler';
 import { Undertekst } from 'nav-frontend-typografi';
 import { Image } from '@navikt/ft-ui-komponenter';
 
@@ -89,12 +88,12 @@ const Snakkeboble: FunctionComponent<OwnProps> = ({
     <div className={styles['snakkeboble__snakkeboble-pil-container']}>
       <i className={snakkeboblePilCls(aktoer)} />
     </div>
-    <Panel className={snakkeboblePanelCls(aktoer)}>
+    <div className={snakkeboblePanelCls(aktoer)}>
       <Undertekst className={styles['snakkeboble-panel__dato']}>
         {`${formatDate(dato)} // ${rolleNavn} ${opprettetAv || ''}`}
       </Undertekst>
       {children}
-    </Panel>
+    </div>
   </div>
 
 );
