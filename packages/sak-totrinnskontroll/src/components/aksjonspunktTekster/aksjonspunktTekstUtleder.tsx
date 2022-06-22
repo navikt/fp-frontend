@@ -8,10 +8,7 @@ import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import behandlingStatusCode from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import klageVurderingOmgjoerCodes from '@fpsak-frontend/kodeverk/src/klageVurderingOmgjoer';
 import aksjonspunktCodes, { isUttakAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import arbeidsforholdHandlingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdHandlingType';
-import {
-  KodeverkMedNavn, KlageVurdering, TotrinnskontrollAksjonspunkt, TotrinnskontrollArbeidsforhold,
-} from '@fpsak-frontend/types';
+import { KodeverkMedNavn, KlageVurdering, TotrinnskontrollAksjonspunkt } from '@fpsak-frontend/types';
 
 import totrinnskontrollaksjonspunktTextCodes, { totrinnsTilbakekrevingkontrollaksjonspunktTextCodes } from '../../totrinnskontrollaksjonspunktTextCodes';
 import OpptjeningTotrinnText from './OpptjeningTotrinnText';
@@ -29,69 +26,6 @@ const buildVarigEndringBeregningText = (
     id="ToTrinnsForm.Beregning.IkkeVarigEndring"
   />
 ));
-
-// Eksportert kun for test
-export const getFaktaOmArbeidsforholdMessages = (
-  arbeidforholdDto: TotrinnskontrollArbeidsforhold,
-  arbeidsforholdHandlingTyper: KodeverkMedNavn[],
-): ReactElement[] => {
-  const formattedMessages = [];
-  if (arbeidforholdDto.brukPermisjon === true) {
-    formattedMessages.push(<FormattedMessage
-      id="ToTrinnsForm.FaktaOmArbeidsforhold.SoekerErIPermisjon"
-      values={{
-        b: (chunks: any) => <b>{chunks}</b>,
-      }}
-    />);
-    return formattedMessages;
-  }
-  if (arbeidforholdDto.brukPermisjon === false) {
-    formattedMessages.push(<FormattedMessage
-      id="ToTrinnsForm.FaktaOmArbeidsforhold.SoekerErIkkeIPermisjon"
-      values={{
-        b: (chunks: any) => <b>{chunks}</b>,
-      }}
-    />);
-    if (arbeidforholdDto.arbeidsforholdHandlingType === arbeidsforholdHandlingType.BRUK) {
-      return formattedMessages;
-    }
-  }
-  const type = arbeidsforholdHandlingTyper.find((t) => t.kode === arbeidforholdDto.arbeidsforholdHandlingType);
-  const melding = type !== undefined && type !== null ? type.navn : '';
-  formattedMessages.push(<FormattedMessage id="ToTrinnsForm.FaktaOmArbeidsforhold.Melding" values={{ melding, b: (chunks: any) => <b>{chunks}</b> }} />);
-  return formattedMessages;
-};
-
-const buildArbeidsforholdText = (
-  aksjonspunkt: TotrinnskontrollAksjonspunkt,
-  arbeidsforholdHandlingTyper: KodeverkMedNavn[],
-): ReactElement[] => {
-  if (!aksjonspunkt.arbeidforholdDtos || aksjonspunkt.arbeidforholdDtos.length === 0) {
-    return [<FormattedMessage id="ToTrinnsForm.FaktaOmArbeidsforhold.DetErVurdert" />];
-  }
-
-  return aksjonspunkt.arbeidforholdDtos.map((arbeidforholdDto) => {
-    const formattedMessages = getFaktaOmArbeidsforholdMessages(arbeidforholdDto, arbeidsforholdHandlingTyper);
-    return (
-      <>
-        <FormattedMessage
-          id="ToTrinnsForm.OpplysningerOmSøker.Arbeidsforhold"
-          values={{
-            orgnavn: arbeidforholdDto.navn,
-            orgnummer: arbeidforholdDto.organisasjonsnummer,
-            arbeidsforholdId: arbeidforholdDto.arbeidsforholdId ? `...${arbeidforholdDto.arbeidsforholdId.slice(-4)}` : '',
-            b: (chunks: any) => <b>{chunks}</b>,
-          }}
-        />
-        { formattedMessages.map((formattedMessage) => (
-          <React.Fragment key={formattedMessage.props.id}>
-            {formattedMessage}
-          </React.Fragment>
-        ))}
-      </>
-    );
-  });
-};
 
 const buildUttakText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactElement[] => (aksjonspunkt.uttakPerioder
   ? aksjonspunkt.uttakPerioder.map((uttakperiode): ReactElement => {
@@ -259,9 +193,6 @@ const getAksjonspunkttekst = (
   }
   if (erKlageAksjonspunkt(aksjonspunkt)) {
     return getTextForKlage(behandlingStatus, klagebehandlingVurdering);
-  }
-  if (aksjonspunkt.aksjonspunktKode === aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD) {
-    return buildArbeidsforholdText(aksjonspunkt, arbeidsforholdHandlingTyper);
   }
   if (erTilbakekreving) {
     return getTextFromTilbakekrevingAksjonspunktkode(aksjonspunkt);
