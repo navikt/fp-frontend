@@ -6,12 +6,9 @@ import klageVurderingOmgjoerCodes from '@fpsak-frontend/kodeverk/src/klageVurder
 import behandlingStatusCodes from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import klageVurderingCodes from '@fpsak-frontend/kodeverk/src/klageVurdering';
 import faktaOmBeregningTilfelle from '@fpsak-frontend/kodeverk/src/faktaOmBeregningTilfelle';
-import arbeidsforholdHandlingType from '@fpsak-frontend/kodeverk/src/arbeidsforholdHandlingType';
-import {
-  KlageVurdering, KodeverkMedNavn, TotrinnskontrollAksjonspunkt, TotrinnskontrollArbeidsforhold,
-} from '@fpsak-frontend/types';
+import { KlageVurdering, KodeverkMedNavn, TotrinnskontrollAksjonspunkt } from '@fpsak-frontend/types';
 
-import getAksjonspunkttekst, { getFaktaOmArbeidsforholdMessages } from './aksjonspunktTekstUtleder';
+import getAksjonspunkttekst from './aksjonspunktTekstUtleder';
 
 const medholdIKlage = {
   klageVurdering: klageVurderingCodes.MEDHOLD_I_KLAGE,
@@ -593,35 +590,6 @@ describe('<aksjonspunktTekstUtleder>', () => {
     // @ts-ignore
     expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeAvklart');
   });
-  it('skal vise korrekt tekst for aksjonspunkt 5080 når søker er i permisjon, skal kun vise tekst om permisjon', () => {
-    const arbeidforholdDto = {
-      arbeidsforholdHandlingType: arbeidsforholdHandlingType.BRUK,
-      brukPermisjon: true,
-    } as TotrinnskontrollArbeidsforhold;
-    const messages = getFaktaOmArbeidsforholdMessages(arbeidforholdDto, arbeidsforholdHandlingTyper);
-    expect(messages).toHaveLength(1);
-    expect(messages[0].props.id).toEqual('ToTrinnsForm.FaktaOmArbeidsforhold.SoekerErIPermisjon');
-  });
-  it('skal vise korrekt tekst for aksjonspunkt 5080 når søker ikke er i permisjon, skal ikke vise tekst for bruk', () => {
-    const arbeidforholdDto = {
-      arbeidsforholdHandlingType: arbeidsforholdHandlingType.BRUK,
-      brukPermisjon: false,
-    } as TotrinnskontrollArbeidsforhold;
-    const messages = getFaktaOmArbeidsforholdMessages(arbeidforholdDto, arbeidsforholdHandlingTyper);
-    expect(messages).toHaveLength(1);
-    expect(messages[0].props.id).toEqual('ToTrinnsForm.FaktaOmArbeidsforhold.SoekerErIkkeIPermisjon');
-  });
-  it('skal vise korrekt tekst for aksjonspunkt 5080 når søker ikke er i permisjon sammen med en annen handling som ikke er bruk', () => {
-    const arbeidforholdDto = {
-      arbeidsforholdHandlingType: arbeidsforholdHandlingType.BRUK_UTEN_INNTEKTSMELDING,
-      brukPermisjon: false,
-    } as TotrinnskontrollArbeidsforhold;
-    const messages = getFaktaOmArbeidsforholdMessages(arbeidforholdDto, arbeidsforholdHandlingTyper);
-    expect(messages).toHaveLength(2);
-    expect(messages[0].props.id).toEqual('ToTrinnsForm.FaktaOmArbeidsforhold.SoekerErIkkeIPermisjon');
-    expect(messages[1].props.id).toEqual('ToTrinnsForm.FaktaOmArbeidsforhold.Melding');
-    expect(messages[1].props.values.melding).toEqual('ccc');
-  });
 
   // Klage
   // Klage medhold
@@ -788,31 +756,5 @@ describe('<aksjonspunktTekstUtleder>', () => {
     const message = getAksjonspunkttekst(true, behandlingStatus, arbeidsforholdHandlingTyper, beregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]).toEqual(<div>Vurder besteberegning</div>);
     expect(message[1]).toEqual(<div>Vurder tidsbegrenset arbeidsforhold</div>);
-  });
-
-  it('skal vise korrekt tekst for aksjonspunkt 5080', () => {
-    const arbeidforholdDtos = [{
-      navn: 'COLOR LINE CREW AS',
-      organisasjonsnummer: '973135678',
-      arbeidsforholdId: 'e3602f7b-bf36-40d4-8e3a-22333daf664b',
-      arbeidsforholdHandlingType: 'BRUK_UTEN_INNTEKTSMELDING',
-    }, {
-      navn: 'SESAM AS',
-      organisasjonsnummer: '976037286',
-      arbeidsforholdId: null,
-      arbeidsforholdHandlingType: 'IKKE_BRUK',
-    }];
-
-    const aksjonspunkt = {
-      aksjonspunktKode: aksjonspunktCodes.AVKLAR_ARBEIDSFORHOLD,
-      totrinnskontrollGodkjent: false,
-      arbeidforholdDtos,
-    } as TotrinnskontrollAksjonspunkt;
-
-    const messages = getAksjonspunkttekst(true, behandlingStatus, [], [], false, aksjonspunkt);
-    // @ts-ignore
-    expect(messages[0].props.children[0].props.id).toEqual('ToTrinnsForm.OpplysningerOmSøker.Arbeidsforhold');
-    // @ts-ignore
-    expect(messages[0].props.children[1][0].key).toEqual('ToTrinnsForm.FaktaOmArbeidsforhold.Melding');
   });
 });

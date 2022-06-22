@@ -80,7 +80,6 @@ ForBeslutter.args = {
       },
       vurderPaNyttArsaker: [],
       uttakPerioder: [],
-      arbeidforholdDtos: [],
     }],
   }, {
     skjermlenkeType: 'KLAGE_BEH_NFP',
@@ -132,7 +131,6 @@ ForSaksbehandler.args = {
       },
       totrinnskontrollGodkjent: true,
       uttakPerioder: [],
-      arbeidforholdDtos: [],
     }],
   }] as TotrinnskontrollSkjermlenkeContext[],
   readOnly: true,
