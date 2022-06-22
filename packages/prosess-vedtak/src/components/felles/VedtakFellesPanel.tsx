@@ -153,13 +153,18 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
             </Element>
           </FlexColumn>
           <FlexColumn className={styles.space}>
-            {skalViseLink && harIkkeKonsekvensForYtelse && (
+            {!readOnly && skalViseLink && harIkkeKonsekvensForYtelse && (
               <Lenke href="#" onClick={previewAutomatiskBrev}>
                 <span>
                   <FormattedMessage id={erBehandlingEtterKlage ? 'VedtakFellesPanel.UtkastVedtaksbrev' : 'VedtakFellesPanel.AutomatiskVedtaksbrev'} />
                 </span>
                 <Image src={popOutPilSvg} className={styles.pil} />
               </Lenke>
+            )}
+            {(readOnly && skalViseLink && harIkkeKonsekvensForYtelse) && (
+              <Normaltekst className={styles.disabletLink}>
+                <FormattedMessage id={erBehandlingEtterKlage ? 'VedtakFellesPanel.UtkastVedtaksbrev' : 'VedtakFellesPanel.AutomatiskVedtaksbrev'} />
+              </Normaltekst>
             )}
           </FlexColumn>
           <FlexColumn>
