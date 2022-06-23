@@ -1,12 +1,15 @@
 import { renderHook } from '@testing-library/react-hooks';
-import { waitFor, act } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
+import TestRenderer from 'react-test-renderer';
 
 import { Behandling } from '@navikt/ft-types';
 
 import { TilbakekrevingBehandlingApiKeys, requestTilbakekrevingApi } from '../../data/tilbakekrevingBehandlingApi';
 
 import { useBehandling, useLagreAksjonspunkt } from './indexHooks';
+
+const { act } = TestRenderer;
 
 describe('indexHooks', () => {
   const behandlingSomHentes = {

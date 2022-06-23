@@ -22,6 +22,7 @@ import {
 } from '@navikt/ft-form-validators';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
 import { KodeverkType } from '@navikt/ft-kodeverk';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 import uttakPeriodeType from '@fpsak-frontend/kodeverk/src/uttakPeriodeType';
 
@@ -62,7 +63,7 @@ export const PERIODS_WITH_NO_MORS_AKTIVITET = [
 
 const getLabel = (erForsteRad: boolean, text: string): string => (erForsteRad ? text : '');
 
-const erPeriodeFormFør01012019 = (periodeFom: any) => periodeFom && moment(periodeFom).isBefore(moment('2019-01-01'));
+const erPeriodeFormFør01012019 = (periodeFom: string | undefined): boolean => periodeFom && moment(periodeFom, ISO_DATE_FORMAT).isBefore(moment('2019-01-01'));
 
 export type FormValues = {
   periodeType: string;

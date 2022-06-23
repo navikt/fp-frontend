@@ -64,14 +64,6 @@ interface InntekttabellProps {
     getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType) => string;
 }
 
-const createKey = (inntekt: BesteberegningInntekt): string => {
-  const { opptjeningAktivitetType, arbeidsgiverId, arbeidsforholdId } = inntekt;
-  if (arbeidsgiverId != null) {
-    return `${arbeidsgiverId} ${arbeidsforholdId}`;
-  }
-  return opptjeningAktivitetType;
-};
-
 const lagVisningsNavn = (inntekt: BesteberegningInntekt, arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId,
   getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType) => string): string => {
   const agOpplysning = arbeidsgiverOpplysninger[inntekt.arbeidsgiverId];
@@ -88,8 +80,9 @@ const lagVisningsNavn = (inntekt: BesteberegningInntekt, arbeidsgiverOpplysninge
 
 const lagInntektRader = (inntekter: BesteberegningInntekt[], arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId,
   getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType) => string): ReactElement[] => (
-  inntekter.map((inntekt: BesteberegningInntekt) => (
-    <TableRow key={createKey(inntekt)}>
+  inntekter.map((inntekt: BesteberegningInntekt, index) => (
+    // eslint-disable-next-line react/no-array-index-key
+    <TableRow key={index}>
       <TableColumn>
         <Normaltekst>
           {lagVisningsNavn(inntekt, arbeidsgiverOpplysninger, getKodeverkNavn)}
