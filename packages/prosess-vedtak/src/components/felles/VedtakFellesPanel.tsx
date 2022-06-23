@@ -22,6 +22,7 @@ import { Behandling, Aksjonspunkt, Behandlingsresultat } from '@fpsak-frontend/t
 import behandlingStatusCode from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import avslattImage from '@fpsak-frontend/assets/images/avslaatt_hover.svg';
 import innvilgetImage from '@fpsak-frontend/assets/images/innvilget_hover.svg';
+import { AsyncPollingStatus } from '@fpsak-frontend/rest-api';
 
 import ManueltVedtaksbrevPanel from './ManueltVedtaksbrevPanel';
 import VedtakHelpTextPanel from './VedtakHelpTextPanel';
@@ -94,7 +95,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
   const { setValue, formState: { isSubmitting } } = formHooks.useFormContext();
 
   const {
-    behandlingsresultat, behandlingPaaVent, sprakkode, status,
+    behandlingsresultat, behandlingPaaVent, sprakkode, status, behandlingHenlagt, taskStatus,
   } = behandling;
 
   const [skalBrukeManueltBrev, toggleSkalBrukeManueltBrev] = useState(behandlingsresultat.vedtaksbrev && behandlingsresultat.vedtaksbrev === 'FRITEKST');
@@ -115,6 +116,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
   const erOpphor = isOpphor(behandlingsresultat.type);
 
   const skalViseLink = finnSkalViseLink(behandlingsresultat);
+  const kanBehandles = !behandlingHenlagt && taskStatus.status !== AsyncPollingStatus.HALTED && taskStatus.status !== AsyncPollingStatus.DELAYED;
 
   const harIkkeKonsekvensForYtelse = useMemo(() => harIkkeKonsekvenserForYtelsen([
     konsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, konsekvensForYtelsen.INGEN_ENDRING,
@@ -153,7 +155,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
             </Element>
           </FlexColumn>
           <FlexColumn className={styles.space}>
-            {!readOnly && skalViseLink && harIkkeKonsekvensForYtelse && (
+            {skalViseLink && harIkkeKonsekvensForYtelse && kanBehandles && (
               <Lenke href="#" onClick={previewAutomatiskBrev}>
                 <span>
                   <FormattedMessage id={erBehandlingEtterKlage ? 'VedtakFellesPanel.UtkastVedtaksbrev' : 'VedtakFellesPanel.AutomatiskVedtaksbrev'} />
@@ -161,7 +163,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
                 <Image src={popOutPilSvg} className={styles.pil} />
               </Lenke>
             )}
-            {(readOnly && skalViseLink && harIkkeKonsekvensForYtelse) && (
+            {(skalViseLink && harIkkeKonsekvensForYtelse && !kanBehandles) && (
               <Normaltekst className={styles.disabletLink}>
                 <FormattedMessage id={erBehandlingEtterKlage ? 'VedtakFellesPanel.UtkastVedtaksbrev' : 'VedtakFellesPanel.AutomatiskVedtaksbrev'} />
               </Normaltekst>
