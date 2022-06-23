@@ -116,7 +116,7 @@ const VedtakFellesPanel: FunctionComponent<OwnProps> = ({
   const erOpphor = isOpphor(behandlingsresultat.type);
 
   const skalViseLink = finnSkalViseLink(behandlingsresultat);
-  const kanBehandles = !behandlingHenlagt && taskStatus.status !== AsyncPollingStatus.HALTED && taskStatus.status !== AsyncPollingStatus.DELAYED;
+  const kanBehandles = !behandlingHenlagt && taskStatus?.status !== AsyncPollingStatus.HALTED && taskStatus?.status !== AsyncPollingStatus.DELAYED;
 
   const harIkkeKonsekvensForYtelse = useMemo(() => harIkkeKonsekvenserForYtelsen([
     konsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, konsekvensForYtelsen.INGEN_ENDRING,
