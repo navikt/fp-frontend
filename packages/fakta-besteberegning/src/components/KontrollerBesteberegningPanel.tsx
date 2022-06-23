@@ -22,7 +22,7 @@ export const buildInitialValues = (venteårsak: string, aksjonspunkt: Aksjonspun
   const apErLøst = aksjonspunkt.status === aksjonspunktStatus.UTFORT;
   return {
     ...FaktaBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkt),
-    besteberegningErKorrektValg: apErLøst ? true : null,
+    besteberegningErKorrektValg: apErLøst ? true : undefined,
   };
 };
 
