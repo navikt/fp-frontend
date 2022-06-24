@@ -6,7 +6,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import OmsorgFaktaIndex from '@fpsak-frontend/fakta-omsorg';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import {
-  Aksjonspunkt, Personoversikt, Soknad, Ytelsefordeling,
+  Aksjonspunkt, Personoversikt, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@navikt/ft-utils';
