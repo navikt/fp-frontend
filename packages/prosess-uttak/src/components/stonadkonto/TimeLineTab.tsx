@@ -75,6 +75,9 @@ const TimeLineTab: FunctionComponent<OwnProps> = ({
               <Undertekst>
                 <FormattedMessage
                   id={findKorrektLabelForKvote(stonadskonto.kontonavn)}
+                  values={{
+                    uker: Math.floor(stonadskonto.kontoinfo.maxDager / 5),
+                  }}
                 />
               </Undertekst>
             </Row>
