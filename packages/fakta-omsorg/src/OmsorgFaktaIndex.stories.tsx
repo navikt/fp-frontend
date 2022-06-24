@@ -1,11 +1,15 @@
 import React from 'react';
+import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
+import { Aksjonspunkt } from '@navikt/ft-types';
+import { OpplysningAdresseType } from '@navikt/ft-kodeverk';
 
+import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import sivilstandType from '@fpsak-frontend/kodeverk/src/sivilstandType';
 import {
-  Behandling, KjønnkodeEnum, Personoversikt, Soknad, Ytelsefordeling,
+  Behandling, KjønnkodeEnum, Personoversikt, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
@@ -16,9 +20,15 @@ const behandling = {
   versjon: 1,
 } as Behandling;
 
-const soknad = {
-
-} as Soknad;
+const adresser = [{
+  adresseType: OpplysningAdresseType.BOSTEDSADRESSE,
+  adresselinje1: 'Veigata 1',
+  adresselinje2: 'Oddelandet',
+  adresselinje3: 'Leilighet 2',
+  postNummer: '0123',
+  poststed: 'Bobygda',
+  land: 'Norge',
+}];
 
 const personoversikt = {
   bruker: {
@@ -27,21 +37,21 @@ const personoversikt = {
     kjønn: KjønnkodeEnum.MANN,
     sivilstand: sivilstandType.SAMBOER,
     fødselsdato: '1989-01-01',
-    adresser: [],
+    adresser,
   },
   annenPart: {
     navn: 'Petra Utvikler',
-    adresser: [],
     aktoerId: '2',
     kjønn: KjønnkodeEnum.KVINNE,
     sivilstand: sivilstandType.SAMBOER,
     fødselsdato: '1989-01-01',
+    adresser,
   },
   barn: [{
     navn: 'Tutta Utvikler',
     dødsdato: '2019-01-01',
     fødselsdato: '2018-01-01',
-    adresser: [],
+    adresser,
     aktoerId: '3',
     kjønn: KjønnkodeEnum.KVINNE,
     sivilstand: sivilstandType.UGIFT,
@@ -54,38 +64,46 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
-const standardFaktaProps = {
-  aksjonspunkter: [],
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  readOnly: false,
-  harApneAksjonspunkter: true,
-  submittable: true,
-  alleMerknaderFraBeslutter: {},
-  setFormData: () => undefined,
-};
-
 export default {
   title: 'fakta/fakta-omsorg',
   component: OmsorgFaktaIndex,
 };
 
-export const visÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg = () => (
+const Template: Story<{
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
+  alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
+}> = ({
+  aksjonspunkter,
+  submitCallback,
+  alleMerknaderFraBeslutter,
+}) => (
   <OmsorgFaktaIndex
-    {...standardFaktaProps}
+    submitCallback={submitCallback}
+    readOnly={false}
+    harApneAksjonspunkter
+    submittable
+    setFormData={() => undefined}
     behandling={behandling}
     ytelsefordeling={ytelsefordeling}
-    soknad={soknad}
     personoversikt={personoversikt}
-    aksjonspunkter={[{
-      definisjon: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
-      status: aksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: true,
-      erAktivt: true,
-    }]}
+    aksjonspunkter={aksjonspunkter}
+    alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
     alleKodeverk={alleKodeverk as any}
-    alleMerknaderFraBeslutter={{
-      [aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: merknaderFraBeslutter,
-    }}
   />
 );
+
+export const ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg = Template.bind({});
+ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg.args = {
+  aksjonspunkter: [{
+    definisjon: aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
+    status: aksjonspunktStatus.OPPRETTET,
+    begrunnelse: undefined,
+    kanLoses: true,
+    erAktivt: true,
+  }],
+  alleMerknaderFraBeslutter: {
+    [aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: merknaderFraBeslutter,
+  },
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+};
