@@ -25,10 +25,9 @@ type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
 }
 
-const ENDEPUNKTER_PANEL_DATA = [FpBehandlingApiKeys.YTELSEFORDELING, FpBehandlingApiKeys.SOKNAD];
+const ENDEPUNKTER_PANEL_DATA = [FpBehandlingApiKeys.YTELSEFORDELING];
 type EndepunktPanelData = {
   ytelsefordeling: Ytelsefordeling;
-  soknad: Soknad;
 }
 
 interface OwnProps {

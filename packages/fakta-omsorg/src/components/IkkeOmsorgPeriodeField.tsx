@@ -1,73 +1,126 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { UseFormGetValues } from 'react-hook-form';
 import { Column, Row } from 'nav-frontend-grid';
-
-import { DatepickerField, PeriodFieldArray } from '@fpsak-frontend/form';
+import { Datepicker, formHooks, PeriodFieldArray } from '@navikt/ft-form-hooks';
 import {
-  hasValidDate,
-  required,
+  dateAfterOrEqual,
+  dateBeforeOrEqual, dateRangesNotOverlapping, hasValidDate, required,
 } from '@navikt/ft-form-validators';
+import { Undertekst } from 'nav-frontend-typografi';
+import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { TIDENES_ENDE } from '@navikt/ft-utils';
+
+const PERIODER_FELT_NAVN = 'ikkeOmsorgPerioder';
 
 type Periode = {
   periodeFom: string;
   periodeTom: string;
 }
 
-const showAddButton = (fields: FieldArrayFieldsProps<Periode>): boolean => {
-  if (fields.length > 0) {
-    return (fields.get(fields.length - 1).periodeFom !== undefined && fields.get(fields.length - 1).periodeTom !== undefined);
+const showAddButton = (
+  perioder: Periode[],
+): boolean => {
+  if (perioder.length > 0) {
+    return (perioder[perioder.length - 1].periodeFom !== undefined && perioder[perioder.length - 1].periodeTom !== undefined);
   }
   return false;
 };
 
+const validerOverlappendePerioder = (
+  getValues: UseFormGetValues<{ ikkeOmsorgPerioder: Periode[] }>,
+) => () => {
+  const allePerioder = getValues(PERIODER_FELT_NAVN);
+  const perioderArray = allePerioder
+    .filter((periode) => !!periode.periodeFom)
+    .map((periode) => [periode.periodeFom, periode.periodeTom || TIDENES_ENDE]);
+  return allePerioder.length > 1 ? dateRangesNotOverlapping(perioderArray) : null;
+};
+
 interface OwnProps {
   readOnly: boolean;
-  meta: FieldArrayMetaProps;
-  fields: FieldArrayFieldsProps<Periode>;
 }
 
-const IkkeOmsorgPeriodeField: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
-  fields,
-  meta,
+const IkkeOmsorgPeriodeField: FunctionComponent<OwnProps> = ({
   readOnly,
-}) => (
-  <div>
-    <FormattedMessage id="IkkeOmsorgPeriodeField.Periode" />
-    <PeriodFieldArray
-      fields={fields}
-      meta={meta}
-      bodyText={intl.formatMessage({ id: 'IkkeOmsorgPeriodeField.Add' })}
-      shouldShowAddButton={!readOnly && showAddButton(fields)}
-      createAddButtonInsteadOfImageLink
-      readOnly={readOnly}
-    >
-      {(ikkeOmsorgElementFieldId, index, getRemoveButton) => (
-        <Row key={ikkeOmsorgElementFieldId}>
-          <Column xs="5">
-            <DatepickerField
-              name={`${ikkeOmsorgElementFieldId}.periodeFom`}
-              validate={[required, hasValidDate]}
-              readOnly={readOnly}
-            />
-          </Column>
-          <Column xs="5">
-            <DatepickerField
-              name={`${ikkeOmsorgElementFieldId}.periodeTom`}
-              validate={[hasValidDate]}
-              readOnly={readOnly}
-            />
-          </Column>
-          {!readOnly && (
-            <Column xs="2">
-              {getRemoveButton()}
-            </Column>
-          )}
-        </Row>
-      )}
-    </PeriodFieldArray>
-  </div>
-);
+}) => {
+  const intl = useIntl();
 
-export default injectIntl(IkkeOmsorgPeriodeField);
+  const {
+    control, watch, getValues, trigger, formState: { isSubmitted },
+  } = formHooks.useFormContext<{ [PERIODER_FELT_NAVN]: Periode[] }>();
+  const { fields, remove, append } = formHooks.useFieldArray({
+    control,
+    name: PERIODER_FELT_NAVN,
+  });
+
+  const perioder = watch(PERIODER_FELT_NAVN);
+
+  return (
+    <>
+      <Undertekst>
+        <FormattedMessage id="IkkeOmsorgPeriodeField.Periode" />
+      </Undertekst>
+      <VerticalSpacer eightPx />
+      <PeriodFieldArray<Periode>
+        fields={fields}
+        bodyText={intl.formatMessage({ id: 'IkkeOmsorgPeriodeField.Add' })}
+        shouldShowAddButton={!readOnly && showAddButton(perioder)}
+        createAddButtonInsteadOfImageLink
+        readOnly={readOnly}
+        remove={remove}
+        append={append}
+      >
+        {(field, index, getRemoveButton) => (
+          <React.Fragment key={field.id}>
+            <Row>
+              <Column xs="5">
+                <Datepicker
+                  name={`${PERIODER_FELT_NAVN}.${index}.periodeFom`}
+                  label={intl.formatMessage({ id: 'IkkeOmsorgPeriodeField.PeriodeFom' })}
+                  validate={[
+                    required,
+                    hasValidDate,
+                    () => {
+                      const fomVerdi = getValues(`${PERIODER_FELT_NAVN}.${index}.periodeFom`);
+                      const tomVerdi = getValues(`${PERIODER_FELT_NAVN}.${index}.periodeTom`);
+                      return tomVerdi && fomVerdi ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : null;
+                    },
+                    validerOverlappendePerioder(getValues),
+                  ]}
+                  isReadOnly={readOnly}
+                  onChange={() => (isSubmitted ? trigger() : undefined)}
+                />
+              </Column>
+              <Column xs="5">
+                <Datepicker
+                  name={`${PERIODER_FELT_NAVN}.${index}.periodeTom`}
+                  label={intl.formatMessage({ id: 'IkkeOmsorgPeriodeField.PeriodeTom' })}
+                  validate={[
+                    hasValidDate,
+                    () => {
+                      const fomVerdi = getValues(`${PERIODER_FELT_NAVN}.${index}.periodeFom`);
+                      const tomVerdi = getValues(`${PERIODER_FELT_NAVN}.${index}.periodeTom`);
+                      return tomVerdi && fomVerdi ? dateAfterOrEqual(fomVerdi)(tomVerdi) : null;
+                    },
+                    validerOverlappendePerioder(getValues),
+                  ]}
+                  isReadOnly={readOnly}
+                  onChange={() => (isSubmitted ? trigger() : undefined)}
+                />
+              </Column>
+              {!readOnly && (
+              <Column xs="2">
+                {getRemoveButton()}
+              </Column>
+              )}
+            </Row>
+            <VerticalSpacer sixteenPx />
+          </React.Fragment>
+        )}
+      </PeriodFieldArray>
+    </>
+  );
+};
+
+export default IkkeOmsorgPeriodeField;

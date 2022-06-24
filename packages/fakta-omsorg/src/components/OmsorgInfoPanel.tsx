@@ -1,19 +1,22 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
-import { formValueSelector, InjectedFormProps, reduxForm } from 'redux-form';
+import { useForm } from 'react-hook-form';
 
-import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { AksjonspunktHelpTextTemp } from '@navikt/ft-ui-komponenter';
-import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@fpsak-frontend/fakta-felles';
+import { Form } from '@navikt/ft-form-hooks';
+
+import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { FaktaBegrunnelseTextFieldNew, FaktaSubmitButtonNew } from '@fpsak-frontend/fakta-felles';
 import {
-  Aksjonspunkt, AlleKodeverk, Personoversikt, Soknad, Ytelsefordeling,
+  Aksjonspunkt, AlleKodeverk, Personoversikt, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { BekreftOmsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
+import { Undertittel } from 'nav-frontend-typografi';
 import OmsorgFaktaForm, { FormValues as OmsorgFormValues } from './OmsorgFaktaForm';
-import BostedFaktaView from './BostedFaktaView';
+import AlleBarnPanel from './personer/AlleBarnPanel';
+import ForelderPanel from './personer/ForelderPanel';
+import Boks from './Boks';
 
 const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = aksjonspunktCodes;
 
@@ -26,11 +29,29 @@ const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   return helpTexts;
 };
 
+const buildInitialValues = (
+  ytelsefordeling: Ytelsefordeling,
+  aksjonspunkter: Aksjonspunkt[],
+): FormValues => {
+  const omsorgAp = aksjonspunkter.filter((ap) => ap.definisjon === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG);
+  return {
+    ...OmsorgFaktaForm.buildInitialValues(ytelsefordeling, omsorgAp),
+    ...FaktaBegrunnelseTextFieldNew.buildInitialValues(omsorgAp),
+  };
+};
+
+const transformValues = (
+  values: FormValues,
+): BekreftOmsorgVurderingAp => ({
+  ...OmsorgFaktaForm.transformOmsorgValues(values),
+  begrunnelse: values.begrunnelse,
+});
+
 type FormValues = OmsorgFormValues & {
   begrunnelse?: string;
 }
 
-interface PureOwnProps {
+interface OwnProps {
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
   hasOpenAksjonspunkter: boolean;
@@ -39,96 +60,67 @@ interface PureOwnProps {
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   personoversikt: Personoversikt;
   ytelsefordeling: Ytelsefordeling;
-  soknad: Soknad;
-  submitCallback: (data: BekreftOmsorgVurderingAp[]) => Promise<void>;
+  submitCallback: (data: BekreftOmsorgVurderingAp) => Promise<void>;
+  formData?: any,
+  setFormData: (data: any) => void,
 }
 
-interface MappedOwnProps {
-  omsorg?: boolean;
-  initialValues: FormValues;
-  onSubmit: (formValues: FormValues) => any;
-}
-
-export const OmsorgInfoPanel: FunctionComponent<PureOwnProps & MappedOwnProps & InjectedFormProps> = ({
+const OmsorgInfoPanel: FunctionComponent<OwnProps> = ({
   personoversikt,
   readOnly,
   hasOpenAksjonspunkter,
   submittable,
   aksjonspunkter,
-  omsorg,
   alleKodeverk,
   ytelsefordeling,
-  soknad,
+  submitCallback,
   alleMerknaderFraBeslutter,
-  ...formProps
-}) => (
-  <>
-    {!readOnly && (
-      <AksjonspunktHelpTextTemp isAksjonspunktOpen={hasOpenAksjonspunkter}>
-        {getHelpTexts(aksjonspunkter)}
-      </AksjonspunktHelpTextTemp>
-    )}
-    <BostedFaktaView personoversikt={personoversikt} alleKodeverk={alleKodeverk} />
-    <form onSubmit={formProps.handleSubmit}>
-      <FaktaBegrunnelseTextField isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse hasVurderingText />
-      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
-      <OmsorgFaktaForm
-        readOnly={readOnly}
-        omsorg={omsorg}
-        aksjonspunkter={aksjonspunkter}
-        ytelsefordeling={ytelsefordeling}
-        soknad={soknad}
-        alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-      />
-      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
-      <FaktaSubmitButton
-        formName={formProps.form}
-        isSubmittable={submittable}
-        isReadOnly={readOnly}
-        hasOpenAksjonspunkter={hasOpenAksjonspunkter}
-      />
-    </form>
+  formData,
+  setFormData,
+}) => {
+  const formMethods = useForm<FormValues>({
+    defaultValues: formData || buildInitialValues(ytelsefordeling, aksjonspunkter),
+  });
 
-  </>
-);
-
-const buildInitialValues = createSelector([
-  (ownProps: PureOwnProps) => ownProps.ytelsefordeling,
-  (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(ytelsefordeling, aksjonspunkter): FormValues => {
-  const omsorgAp = aksjonspunkter.filter((ap) => ap.definisjon === aksjonspunktCodes.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG);
-  return {
-    ...OmsorgFaktaForm.buildInitialValues(ytelsefordeling, omsorgAp),
-    ...FaktaBegrunnelseTextField.buildInitialValues(omsorgAp),
-  };
-});
-
-const transformValues = (
-  values: FormValues,
-  aksjonspunkter: Aksjonspunkt[],
-): BekreftOmsorgVurderingAp[] => {
-  const aksjonspunkterArray = [] as BekreftOmsorgVurderingAp[];
-  if (hasAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG, aksjonspunkter)) {
-    aksjonspunkterArray.push(OmsorgFaktaForm.transformOmsorgValues(values));
-  }
-  return aksjonspunkterArray.map((ap) => ({
-    ...ap,
-    ...{ begrunnelse: values.begrunnelse },
-  }));
+  return (
+    <>
+      <Undertittel><FormattedMessage id="OmsorgInfoPanel.Overskrift" /></Undertittel>
+      <VerticalSpacer thirtyTwoPx />
+      {!readOnly && hasOpenAksjonspunkter && (
+        <AksjonspunktHelpTextHTML>
+          {getHelpTexts(aksjonspunkter)}
+        </AksjonspunktHelpTextHTML>
+      )}
+      <VerticalSpacer thirtyTwoPx />
+      <AlleBarnPanel alleBarn={personoversikt.barn} />
+      <ForelderPanel forelder={personoversikt.bruker} erSøker alleKodeverk={alleKodeverk} />
+      <ForelderPanel forelder={personoversikt.annenPart} erSøker={false} alleKodeverk={alleKodeverk} />
+      <Form
+        formMethods={formMethods}
+        onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
+        setDataOnUnmount={setFormData}
+      >
+        <Boks harBorderTop={false}>
+          <VerticalSpacer sixteenPx />
+          <OmsorgFaktaForm
+            readOnly={readOnly}
+            aksjonspunkter={aksjonspunkter}
+            ytelsefordeling={ytelsefordeling}
+            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+          />
+          <VerticalSpacer thirtyTwoPx />
+          <FaktaBegrunnelseTextFieldNew isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse hasVurderingText />
+          <VerticalSpacer sixteenPx />
+          <FaktaSubmitButtonNew
+            isSubmittable={submittable}
+            isReadOnly={readOnly}
+            isSubmitting={formMethods.formState.isSubmitting}
+            isDirty={formMethods.formState.isDirty}
+          />
+        </Boks>
+      </Form>
+    </>
+  );
 };
 
-const lagSubmitFn = createSelector([
-  (ownProps: PureOwnProps) => ownProps.submitCallback, (ownProps: PureOwnProps) => ownProps.aksjonspunkter],
-(submitCallback, aksjonspunkter) => (values: FormValues) => submitCallback(transformValues(values, aksjonspunkter)));
-
-const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  initialValues: buildInitialValues(ownProps),
-  omsorg: formValueSelector('OmsorgInfoPanel')(state, 'omsorg'),
-  onSubmit: lagSubmitFn(ownProps),
-});
-
-export default connect(mapStateToProps)(reduxForm({
-  form: 'OmsorgInfoPanel',
-  validate: OmsorgFaktaForm.validate,
-  destroyOnUnmount: false,
-})(OmsorgInfoPanel));
+export default OmsorgInfoPanel;

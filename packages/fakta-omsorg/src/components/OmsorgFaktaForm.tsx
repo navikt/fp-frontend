@@ -1,23 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { connect } from 'react-redux';
-import { FieldArray } from 'redux-form';
-import moment from 'moment';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
+import { required } from '@navikt/ft-form-validators';
+import { formHooks, RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
+import { ArrowBox, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
-import {
-  dateIsAfter,
-  dateRangesNotOverlapping,
-  dateRangesOverlappingMessage,
-  invalidPeriodMessage,
-  required,
-} from '@navikt/ft-form-validators';
-import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { ArrowBox, FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { Aksjonspunkt, Soknad, Ytelsefordeling } from '@fpsak-frontend/types';
+import { Aksjonspunkt, Ytelsefordeling } from '@fpsak-frontend/types';
 import { BekreftOmsorgVurderingAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import IkkeOmsorgPeriodeField from './IkkeOmsorgPeriodeField';
@@ -26,26 +17,22 @@ import styles from './omsorgFaktaForm.less';
 
 const { MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG } = aksjonspunktCodes;
 
-const getAksjonspunkt = (aksjonspunktCode: string, aksjonspunkter: Aksjonspunkt[]): Aksjonspunkt[] => aksjonspunkter
-  .filter((ap) => ap.definisjon === aksjonspunktCode);
+const getAksjonspunkt = (
+  aksjonspunktCode: string,
+  aksjonspunkter: Aksjonspunkt[],
+): Aksjonspunkt[] => aksjonspunkter.filter((ap) => ap.definisjon === aksjonspunktCode);
 
 export type FormValues = {
   omsorg?: boolean;
   ikkeOmsorgPerioder?: Ytelsefordeling['ikkeOmsorgPerioder'];
 }
 
-interface PureOwnProps {
+interface OwnProps {
   ytelsefordeling: Ytelsefordeling;
-  soknad: Soknad;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
-  omsorg?: boolean;
   className?: string;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-}
-
-interface MappedOwnProps {
-  omsorgIsEdited?: boolean;
 }
 
 interface StaticFunctions {
@@ -54,29 +41,38 @@ interface StaticFunctions {
   validate?: (values: FormValues) => any;
 }
 
-const OmsorgFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
+const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
   aksjonspunkter,
   readOnly,
-  omsorg,
   className,
-  omsorgIsEdited,
+  ytelsefordeling,
   alleMerknaderFraBeslutter,
 }) => {
   const intl = useIntl();
+
+  const { watch } = formHooks.useFormContext<FormValues>();
+  const omsorg = watch('omsorg');
+
+  const omsorgIsEdited = !!ytelsefordeling.ikkeOmsorgPerioder;
+
   return (
-    <div className={className}>
-      {hasAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG, aksjonspunkter)
-        && (
+    <div className={className || styles.defaultAleneOmsorgFakta}>
+      {hasAksjonspunkt(MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG, aksjonspunkter) && (
         <FaktaGruppe
-          title={intl.formatMessage({ id: 'OmsorgFaktaForm.Omsorg' })}
           withoutBorder
           merknaderFraBeslutter={alleMerknaderFraBeslutter[MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]}
         >
           <Normaltekst className={styles.paddingBottom}>
             <FormattedMessage id="OmsorgFaktaForm.OppgittOmsorg" />
           </Normaltekst>
-          <RadioGroupField name="omsorg" readOnly={readOnly} validate={[required]} isEdited={omsorgIsEdited}>
-            <RadioOption label={{ id: 'OmsorgFaktaForm.HarOmsorg' }} value />
+          <RadioGroupField
+            name="omsorg"
+            readOnly={readOnly}
+            validate={[required]}
+            isEdited={omsorgIsEdited}
+            parse={(value: string) => value === 'true'}
+          >
+            <RadioOption label={intl.formatMessage({ id: 'OmsorgFaktaForm.HarOmsorg' })} value="true" />
             <RadioOption
               label={(
                 <FormattedMessage
@@ -86,33 +82,23 @@ const OmsorgFaktaForm: FunctionComponent<PureOwnProps & MappedOwnProps> & Static
                   }}
                 />
               )}
-              value={false}
+              value="false"
             />
           </RadioGroupField>
-          {omsorg === false
-            ? (
-              <Row>
-                <Column xs="2" />
-                <Column xs="6">
-                  <ArrowBox alignOffset={40}>
-                    <FieldArray
-                      name="ikkeOmsorgPerioder"
-                      component={IkkeOmsorgPeriodeField}
-                      readOnly={readOnly}
-                    />
-                  </ArrowBox>
-                </Column>
-              </Row>
-            )
-            : null}
+          {omsorg === false ? (
+            <Row>
+              <Column xs="2" />
+              <Column xs="6">
+                <ArrowBox alignOffset={40}>
+                  <IkkeOmsorgPeriodeField readOnly={readOnly} />
+                </ArrowBox>
+              </Column>
+            </Row>
+          ) : null}
         </FaktaGruppe>
-        )}
+      )}
     </div>
   );
-};
-OmsorgFaktaForm.defaultProps = {
-  omsorgIsEdited: false,
-  className: styles.defaultAleneOmsorgFakta,
 };
 
 OmsorgFaktaForm.buildInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]): FormValues => {
@@ -139,82 +125,4 @@ OmsorgFaktaForm.transformOmsorgValues = (values: FormValues): BekreftOmsorgVurde
   ikkeOmsorgPerioder: values.ikkeOmsorgPerioder && values.ikkeOmsorgPerioder.length > 0 ? values.ikkeOmsorgPerioder : null,
 });
 
-const hasValue = (values: Ytelsefordeling['ikkeOmsorgPerioder']): boolean => values && values.length && values.length < 2 && !values[0].periodeTom;
-
-const checkArrayErrors = (values: Ytelsefordeling['ikkeOmsorgPerioder']) => values.map(({
-  periodeFom,
-  periodeTom,
-}, index) => {
-  if (periodeFom && periodeTom) {
-    return null;
-  }
-  let periodeFomError = required(periodeFom);
-  if (periodeTom) {
-    periodeFomError = moment(periodeFom).isSameOrBefore(moment(periodeTom).startOf('day')) ? null : invalidPeriodMessage();
-  }
-  let periodeTomError;
-  if (values.length > index + 1) {
-    periodeTomError = required(periodeTom);
-  }
-  if (periodeFomError || periodeTomError) {
-    return {
-      periodeFom: periodeFomError,
-      periodeTom: periodeTomError,
-    };
-  }
-  return null;
-});
-
-const checkOverlapError = (values: Ytelsefordeling['ikkeOmsorgPerioder']) => dateRangesNotOverlapping(values.reduce((result, current) => {
-  if (current.periodeTom && current.periodeFom) {
-    result.push([current.periodeFom, current.periodeTom]);
-  }
-  return result;
-}, []));
-
-const hasValidPeriodOrOnlyStartDate = (values: Ytelsefordeling['ikkeOmsorgPerioder']): any => {
-  if (hasValue(values)) {
-    return null;
-  }
-
-  const arrayErrors = checkArrayErrors(values);
-
-  if (arrayErrors.some((errors) => errors !== null)) {
-    return arrayErrors;
-  }
-  if (values.length > 1) {
-    let overlapError = checkOverlapError(values);
-
-    const lastEntry = values[values.length - 1];
-    if (!overlapError && lastEntry.periodeFom && !lastEntry.periodeTom) {
-      const arrayWithoutLast = values.slice(0, values.length - 1);
-      overlapError = arrayWithoutLast.some((date) => dateIsAfter(date.periodeFom, lastEntry.periodeFom)
-        || dateIsAfter(date.periodeTom, lastEntry.periodeFom))
-        ? dateRangesOverlappingMessage() : null;
-    }
-    if (overlapError) {
-      return { _error: overlapError };
-    }
-  }
-  return null;
-};
-
-OmsorgFaktaForm.validate = (values: FormValues): any => {
-  const errors = {};
-  if (!values) {
-    return errors;
-  }
-  const { omsorg, ikkeOmsorgPerioder } = values;
-  if (omsorg === false) {
-    return {
-      ikkeOmsorgPerioder: hasValidPeriodOrOnlyStartDate(ikkeOmsorgPerioder),
-    };
-  }
-  return errors;
-};
-
-const mapStateToProps = (_state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  omsorgIsEdited: !!ownProps.ytelsefordeling.ikkeOmsorgPerioder,
-});
-
-export default connect(mapStateToProps)(OmsorgFaktaForm);
+export default OmsorgFaktaForm;

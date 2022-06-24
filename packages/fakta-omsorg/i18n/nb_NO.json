@@ -1,28 +1,27 @@
 {
   "OmsorgInfoPanel.VurderOmsorg": "Vurder om søker har omsorg for barnet i søknadsperioden",
+  "OmsorgInfoPanel.Overskrift": "Fakta om omsorg",
 
-  "OmsorgFaktaForm.Omsorg": "Omsorg",
   "OmsorgFaktaForm.HarOmsorg": "Søker har omsorg for barnet",
   "OmsorgFaktaForm.HarIkkeOmsorg": "Søker har <b>ikke</b> omsorg for barnet",
   "OmsorgFaktaForm.OppgittOmsorg": "Søker har oppgitt å ha omsorg for barnet",
 
-  "BostedFaktaView.BosattAdresser": "Bostedsadresser fra folkeregisteret",
-  "BostedFaktaView.ForelderTo": "Forelder 2",
-
-  "BostedBarnView.Barn": "Barn {barnNr}",
-  "BostedBarnView.Adresse": "Adresse ",
-  "BostedBarnView.Age": " {fodselsdato} ({age} år)",
-  "BostedBarnView.DodsDato" : "Barnets dødsdato",
-
-  "IkkeOmsorgPeriodeField.Periode": "Periode f.o.m. - t.o.m. dato",
+  "IkkeOmsorgPeriodeField.Periode": "Periode",
+  "IkkeOmsorgPeriodeField.PeriodeFom": "Fra og med dato",
+  "IkkeOmsorgPeriodeField.PeriodeTom": "Til og med dato",
   "IkkeOmsorgPeriodeField.Add": "Legg til",
-
-  "BostedSokerView.ForeignAddresse": "Utenlandsadresse",
-  "BostedSokerView.Region": "Region",
-
-  "BostedSokerFaktaIndex.Soker": "Søker",
 
   "Personstatus.Hjelpetekst": "Personstatus",
   "Personstatus.Ukjent": "Ukjent",
-  "Sivilstand.Hjelpetekst": "Sivilstand"
+  "Sivilstand.Hjelpetekst": "Sivilstand",
+
+  "ForelderPanel.Soker": "Søker",
+  "ForelderPanel.AnnenForelder": "Annen forelder",
+
+  "AdresseVisning.Adresse": "Adresse",
+
+  "AlleBarnPanel.Barn": "Barn",
+  "AlleBarnPanel.BarnNr": "Barn {nummer}",
+  "AlleBarnPanel.Fodt": "Født",
+  "AlleBarnPanel.Dod": "Død"
 }
