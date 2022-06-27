@@ -5,10 +5,8 @@ import React, {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import MedlemskapFaktaIndex from '@fpsak-frontend/fakta-medlemskap';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import {
-  AksessRettigheter, Aksjonspunkt, Medlemskap, Soknad,
-} from '@fpsak-frontend/types';
-import { FaktaDefaultInitPanel, FaktaPanelInitProps, harBehandlingReadOnlyStatus } from '@fpsak-frontend/behandling-felles';
+import { Aksjonspunkt, Medlemskap, Soknad } from '@fpsak-frontend/types';
+import { FaktaDefaultInitPanel, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@navikt/ft-utils';
 
 import messages from '../../i18n/nb_NO.json';
@@ -38,17 +36,10 @@ type EndepunktPanelData = {
   medlemskap: Medlemskap;
 }
 
-interface OwnProps {
-  rettigheter: AksessRettigheter;
-  hasFetchError: boolean;
-}
-
 /**
  * MedlemskapsvilkaretFaktaInitPanel
  */
-const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps> = ({
-  rettigheter,
-  hasFetchError,
+const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
   ...props
 }) => (
   <FaktaDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
@@ -62,14 +53,7 @@ const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanel
     faktaPanelMenyTekst={intl.formatMessage({ id: 'MedlemskapInfoPanel.Medlemskap' })}
     skalPanelVisesIMeny={(initData) => !!initData?.soknad}
     renderPanel={(data) => (
-      <MedlemskapFaktaIndex
-        isForeldrepengerFagsak
-        readOnlyForStartdatoForForeldrepenger={!rettigheter.writeAccess.isEnabled
-          || hasFetchError
-          || data.behandling.behandlingPaaVent
-          || harBehandlingReadOnlyStatus(data.behandling)}
-        {...data}
-      />
+      <MedlemskapFaktaIndex {...data} />
     )}
   />
 );

@@ -1,8 +1,5 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
 
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt, AlleKodeverk, Medlemskap, Soknad,
@@ -12,31 +9,11 @@ import {
   BekreftOppholdsrettVurderingAp, OverstyringAvklarStartdatoForPeriodenAp,
 } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
-import StartdatoForForeldrepengerperiodenForm from './startdatoForPeriode/StartdatoForForeldrepengerperiodenForm';
 import OppholdInntektOgPerioderForm from './oppholdInntektOgPerioder/OppholdInntektOgPerioderForm';
 
 const {
   OVERSTYR_AVKLAR_STARTDATO,
 } = aksjonspunktCodes;
-
-const hasOpen = (aksjonspunkt: Aksjonspunkt): boolean => aksjonspunkt && isAksjonspunktOpen(aksjonspunkt.status);
-
-const skalKunneLoseUtenAksjonpunkter = (
-  aksjonspunkterMinusAvklarStartDato: Aksjonspunkt[],
-  hasOpenAksjonspunkter: boolean,
-  isForeldrepenger?: boolean,
-): boolean => (isForeldrepenger && (aksjonspunkterMinusAvklarStartDato.length === 0 || !hasOpenAksjonspunkter));
-
-const harAksjonspunkterForAvklarStartdato = (aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
-  .some((ap) => ap.definisjon === OVERSTYR_AVKLAR_STARTDATO);
-
-const skalViseAvklarStartdatoPanel = (
-  aksjonspunkter: Aksjonspunkt[],
-  aksjonspunkterMinusAvklarStartDato: Aksjonspunkt[],
-  hasOpenAksjonspunkter: boolean,
-  isForeldrepenger?: boolean,
-): boolean => (harAksjonspunkterForAvklarStartdato(aksjonspunkter)
-  || skalKunneLoseUtenAksjonpunkter(aksjonspunkterMinusAvklarStartDato, hasOpenAksjonspunkter, isForeldrepenger));
 
 type AksjonspunktData = Array<BekreftBosattVurderingAp
   | BekreftErMedlemVurderingAp
@@ -45,20 +22,16 @@ type AksjonspunktData = Array<BekreftBosattVurderingAp
   | AvklarFortsattMedlemskapAp>;
 
 interface OwnProps {
-  hasOpenAksjonspunkter: boolean;
   submittable: boolean;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
   submitCallback: (data: OverstyringAvklarStartdatoForPeriodenAp
     | AksjonspunktData) => Promise<void>;
-  isForeldrepenger?: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   behandlingType: string;
-  behandlingStatus: string;
   soknad: Soknad;
   alleKodeverk: AlleKodeverk;
   medlemskap: Medlemskap;
-  readOnlyForStartdatoForForeldrepenger: boolean;
 }
 
 /**
@@ -66,66 +39,34 @@ interface OwnProps {
  *
  * Presentasjonskomponent. Har ansvar for å vise faktapanelene for medlemskap.
  */
-const MedlemskapInfoPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
-  hasOpenAksjonspunkter,
+const MedlemskapInfoPanel: FunctionComponent<OwnProps> = ({
   submittable,
   aksjonspunkter,
   readOnly,
   submitCallback,
-  isForeldrepenger,
   alleMerknaderFraBeslutter,
   behandlingType,
-  behandlingStatus,
   soknad,
   alleKodeverk,
   medlemskap,
-  readOnlyForStartdatoForForeldrepenger,
 }) => {
-  const avklarStartdatoOverstyring = aksjonspunkter.find((ap) => ap.definisjon === OVERSTYR_AVKLAR_STARTDATO);
   const aksjonspunkterMinusAvklarStartDato = useMemo(() => aksjonspunkter
     .filter((ap) => ap.definisjon !== OVERSTYR_AVKLAR_STARTDATO), [aksjonspunkter]);
 
   return (
-    <>
-      {skalViseAvklarStartdatoPanel(aksjonspunkter, aksjonspunkterMinusAvklarStartDato, hasOpenAksjonspunkter, isForeldrepenger) && (
-        <>
-          { /* @ts-ignore Fiks cannot be used as a JSX component */ }
-          <StartdatoForForeldrepengerperiodenForm
-            intl={intl}
-            aksjonspunkt={avklarStartdatoOverstyring}
-            submitCallback={submitCallback}
-            submittable={submittable}
-            hasOpenMedlemskapAksjonspunkter={hasOpenAksjonspunkter}
-            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-            behandlingStatus={behandlingStatus}
-            aksjonspunkter={aksjonspunkter}
-            soknad={soknad}
-            readOnlyForStartdatoForForeldrepenger={readOnlyForStartdatoForForeldrepenger}
-          />
-          <VerticalSpacer twentyPx />
-        </>
-      )}
-      {(!hasOpen(avklarStartdatoOverstyring)) && (
-        /* @ts-ignore Fiks cannot be used as a JSX component */
-        <OppholdInntektOgPerioderForm
-          soknad={soknad}
-          readOnly={readOnly}
-          submitCallback={submitCallback}
-          submittable={submittable}
-          aksjonspunkter={aksjonspunkterMinusAvklarStartDato}
-          alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-          behandlingType={behandlingType}
-          alleKodeverk={alleKodeverk}
-          medlemskap={medlemskap}
-        />
-      )}
-    </>
+    /* @ts-ignore Fiks cannot be used as a JSX component */
+    <OppholdInntektOgPerioderForm
+      soknad={soknad}
+      readOnly={readOnly}
+      submitCallback={submitCallback}
+      submittable={submittable}
+      aksjonspunkter={aksjonspunkterMinusAvklarStartDato}
+      alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+      behandlingType={behandlingType}
+      alleKodeverk={alleKodeverk}
+      medlemskap={medlemskap}
+    />
   );
 };
 
-MedlemskapInfoPanel.defaultProps = {
-  isForeldrepenger: true,
-};
-
-export default injectIntl(MedlemskapInfoPanel);
+export default MedlemskapInfoPanel;

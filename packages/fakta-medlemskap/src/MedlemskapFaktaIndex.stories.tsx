@@ -112,18 +112,6 @@ export default {
   component: MedlemskapFaktaIndex,
 };
 
-export const visAksjonspunktForOverstyringAvStartdatoForForeldrepengerperioden = () => (
-  <MedlemskapFaktaIndex
-    {...standardFaktaProps}
-    behandling={behandling}
-    medlemskap={medlemskap}
-    soknad={soknad}
-    isForeldrepengerFagsak
-    alleKodeverk={alleKodeverk as any}
-    readOnlyForStartdatoForForeldrepenger={false}
-  />
-);
-
 export const visAksjonspunktForAlleAndreMedlemskapsaksjonspunkter = () => (
   <MedlemskapFaktaIndex
     {...standardFaktaProps}
@@ -155,7 +143,6 @@ export const visAksjonspunktForAlleAndreMedlemskapsaksjonspunkter = () => (
       kanLoses: true,
       erAktivt: true,
     }]}
-    isForeldrepengerFagsak
     alleKodeverk={alleKodeverk as any}
     alleMerknaderFraBeslutter={{
       [aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT]: merknaderFraBeslutter,
@@ -163,6 +150,5 @@ export const visAksjonspunktForAlleAndreMedlemskapsaksjonspunkter = () => (
       [aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE]: merknaderFraBeslutter,
       [aksjonspunktCodes.AVKLAR_OPPHOLDSRETT]: merknaderFraBeslutter,
     }}
-    readOnlyForStartdatoForForeldrepenger={false}
   />
 );

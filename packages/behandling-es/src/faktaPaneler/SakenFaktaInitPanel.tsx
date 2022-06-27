@@ -5,7 +5,7 @@ import React, {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SakenFaktaIndex from '@fpsak-frontend/fakta-saken';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { Aksjonspunkt } from '@fpsak-frontend/types';
+import { Aksjonspunkt, Soknad } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -26,11 +26,12 @@ type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
 }
 
-const ENDEPUNKTER_PANEL_DATA = [EsBehandlingApiKeys.UTLAND_DOK_STATUS];
+const ENDEPUNKTER_PANEL_DATA = [EsBehandlingApiKeys.UTLAND_DOK_STATUS, EsBehandlingApiKeys.SOKNAD];
 type EndepunktPanelData = {
   utlandDokStatus?: {
     dokStatus: string;
   };
+  soknad: Soknad;
 }
 
 /**

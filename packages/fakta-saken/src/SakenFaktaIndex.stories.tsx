@@ -6,7 +6,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { Behandling, Aksjonspunkt } from '@fpsak-frontend/types';
+import { Behandling, Aksjonspunkt, Soknad } from '@fpsak-frontend/types';
 import SakenFaktaIndex from '@fpsak-frontend/fakta-saken';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -40,11 +40,15 @@ const Template: Story<{
     readOnly={false}
     submittable
     alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-    // @ts-ignore Fiks
-    alleKodeverk={alleKodeverk}
+    alleKodeverk={alleKodeverk as any}
     setFormData={() => undefined}
     behandling={behandling as Behandling}
     harApneAksjonspunkter={aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET)}
+    soknad={{
+      oppgittFordeling: {
+        startDatoForPermisjon: '2019-01-01',
+      },
+    } as Soknad}
   />
 );
 

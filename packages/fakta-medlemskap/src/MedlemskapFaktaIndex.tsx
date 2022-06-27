@@ -13,8 +13,6 @@ const intl = createIntl(messages);
 interface OwnProps {
   medlemskap: Medlemskap;
   soknad: Soknad;
-  isForeldrepengerFagsak: boolean;
-  readOnlyForStartdatoForForeldrepenger: boolean;
 }
 
 const MedlemskapFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
@@ -22,14 +20,11 @@ const MedlemskapFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps
   soknad,
   medlemskap,
   aksjonspunkter,
-  harApneAksjonspunkter,
   submittable,
-  isForeldrepengerFagsak,
   alleMerknaderFraBeslutter,
   alleKodeverk,
   submitCallback,
   readOnly,
-  readOnlyForStartdatoForForeldrepenger,
   formData,
   setFormData,
 }) => (
@@ -37,18 +32,14 @@ const MedlemskapFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps
     <ReduxWrapper formName="MedlemskapFaktaIndex" formData={formData} setFormData={setFormData}>
       <MedlemskapInfoPanel
         behandlingType={behandling.type}
-        behandlingStatus={behandling.status}
         soknad={soknad}
         medlemskap={medlemskap}
         aksjonspunkter={aksjonspunkter}
-        hasOpenAksjonspunkter={harApneAksjonspunkter}
         submittable={submittable}
-        isForeldrepenger={isForeldrepengerFagsak}
         alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
         alleKodeverk={alleKodeverk}
         submitCallback={submitCallback}
         readOnly={readOnly}
-        readOnlyForStartdatoForForeldrepenger={readOnlyForStartdatoForForeldrepenger}
       />
     </ReduxWrapper>
   </RawIntlProvider>
