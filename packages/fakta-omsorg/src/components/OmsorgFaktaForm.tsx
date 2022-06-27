@@ -71,6 +71,7 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
             validate={[required]}
             isEdited={omsorgIsEdited}
             parse={(value: string) => value === 'true'}
+            direction="vertical"
           >
             <RadioOption label={intl.formatMessage({ id: 'OmsorgFaktaForm.HarOmsorg' })} value="true" />
             <RadioOption
@@ -85,16 +86,15 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
               value="false"
             />
           </RadioGroupField>
-          {omsorg === false ? (
+          {omsorg === false && (
             <Row>
-              <Column xs="2" />
-              <Column xs="6">
-                <ArrowBox alignOffset={40}>
+              <Column xs="7">
+                <ArrowBox>
                   <IkkeOmsorgPeriodeField readOnly={readOnly} />
                 </ArrowBox>
               </Column>
             </Row>
-          ) : null}
+          )}
         </FaktaGruppe>
       )}
     </div>
