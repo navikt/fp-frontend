@@ -7,7 +7,7 @@ import { ProsessBeregningsgrunnlagAksjonspunktCode } from '@navikt/ft-prosess-be
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/ft-types';
-import { Aksjonspunkt, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
+import { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps, DynamicLoader } from '@fpsak-frontend/behandling-felles';
 import { createIntl, TIDENES_ENDE } from '@navikt/ft-utils';
 
@@ -36,7 +36,7 @@ const lagModifisertCallback = (
   return submitCallback(transformerteData);
 };
 
-const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: Vilkar): Vilkarperiode => ({
+const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: FpVilkar): Vilkarperiode => ({
   avslagKode: bgVilkar.avslagKode,
   vurderesIBehandlingen: true,
   merknadParametere: bgVilkar.merknadParametere,
@@ -47,19 +47,16 @@ const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: Vi
   vilkarStatus: bgVilkar.vilkarStatus,
 });
 
-const lagBGVilkar = (vilkar: Vilkar[], beregningsgrunnlag: Beregningsgrunnlag): Vilkar | null => {
+const lagBGVilkar = (vilkar: FpVilkar[], beregningsgrunnlag: Beregningsgrunnlag): Vilkar | null => {
   const bgVilkar = vilkar.find((v) => v.vilkarType && v.vilkarType === vilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
     return null;
   }
-  if (!bgVilkar.perioder || bgVilkar.perioder.length < 1) {
-    const nyVK = {
-      ...bgVilkar,
-      perioder: [lagStandardPeriode(beregningsgrunnlag, bgVilkar)],
-    };
-    return nyVK;
-  }
-  return bgVilkar;
+  const nyVK = {
+    ...bgVilkar,
+    perioder: [lagStandardPeriode(beregningsgrunnlag, bgVilkar)],
+  };
+  return nyVK;
 };
 const AKSJONSPUNKT_KODER = [
   ProsessBeregningsgrunnlagAksjonspunktCode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
