@@ -64,8 +64,8 @@ interface OwnProps {
   submitCallback: (data: OverstyringAvklarStartdatoForPeriodenAp) => Promise<void>;
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  formData?: any,
-  setFormData: (data: any) => void,
+  formData?: FormValues,
+  setFormData: (data: FormValues) => void,
 }
 
 /**
@@ -160,7 +160,8 @@ const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps> = ({
                 <Hovedknapp
                   mini
                   htmlType="submit"
-                  disabled={!formMethods.formState.isDirty}
+                  disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+                  spinner={formMethods.formState.isSubmitting}
                 >
                   <FormattedMessage id="UtlandPanel.lagre" />
                 </Hovedknapp>

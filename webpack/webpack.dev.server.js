@@ -61,7 +61,7 @@ const options = {
   port: 9000,
 };
 
-const wds = new WebpackDevServer(webpack(config), options);
+const wds = new WebpackDevServer(options, webpack(config));
 
 (async () => {
   try {

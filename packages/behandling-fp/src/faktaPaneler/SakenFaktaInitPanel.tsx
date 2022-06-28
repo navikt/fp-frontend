@@ -17,9 +17,10 @@ const intl = createIntl(messages);
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
   aksjonspunktCodes.MANUELL_MARKERING_AV_UTLAND_SAKSTYPE,
+  aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO,
 ];
 
-const OVERSTYRING_AP_CODES = [aksjonspunktCodes.MANUELL_MARKERING_AV_UTLAND_SAKSTYPE];
+const OVERSTYRING_AP_CODES = [aksjonspunktCodes.MANUELL_MARKERING_AV_UTLAND_SAKSTYPE, aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO];
 
 const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER];
 type EndepunktInitData = {

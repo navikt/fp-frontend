@@ -20,10 +20,7 @@ const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AVKLAR_OPPHOLDSRETT,
   aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD,
   aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP,
-  aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO,
 ];
-
-const OVERSTYRING_AP_CODES = [aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO];
 
 const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER, FpBehandlingApiKeys.SOKNAD];
 type EndepunktInitData = {
@@ -48,7 +45,6 @@ const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> 
     initEndepunkter={ENDEPUNKTER_INIT_DATA}
     panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    overstyringApKoder={OVERSTYRING_AP_CODES}
     faktaPanelKode={FaktaPanelCode.MEDLEMSKAPSVILKARET}
     faktaPanelMenyTekst={intl.formatMessage({ id: 'MedlemskapInfoPanel.Medlemskap' })}
     skalPanelVisesIMeny={(initData) => !!initData?.soknad}
