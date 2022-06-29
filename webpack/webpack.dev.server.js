@@ -29,7 +29,7 @@ const options = {
       changeOrigin: (!!process.env.APP_URL_FPOPPDRAG),
     },
     '/fptilbake/**': {
-      target: process.env.APP_URL_FPTILBAKE || 'http://localhost:8030',
+      target: process.env.APP_URL_FPTILBAKE || 'http://127.0.0.1:8030',
       secure: false,
       changeOrigin: (!!process.env.APP_URL_FPTILBAKE),
     },

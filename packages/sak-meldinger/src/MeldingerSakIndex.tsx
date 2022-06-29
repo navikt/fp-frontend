@@ -20,6 +20,7 @@ interface OwnProps {
   kanVeilede: boolean;
   meldingFormData?: any,
   setMeldingForData: (data?: any) => void,
+  brukerManglerAdresse: boolean,
 }
 
 const MeldingerSakIndex: FunctionComponent<OwnProps> = ({
@@ -33,6 +34,7 @@ const MeldingerSakIndex: FunctionComponent<OwnProps> = ({
   kanVeilede,
   meldingFormData,
   setMeldingForData,
+  brukerManglerAdresse,
 }) => (
   <RawIntlProvider value={intl}>
     <Messages
@@ -46,6 +48,7 @@ const MeldingerSakIndex: FunctionComponent<OwnProps> = ({
       kanVeilede={kanVeilede}
       meldingFormData={meldingFormData}
       setMeldingForData={setMeldingForData}
+      brukerManglerAdresse={brukerManglerAdresse}
     />
   </RawIntlProvider>
 );
