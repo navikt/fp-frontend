@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { Aksjonspunkt } from '@navikt/ft-types';
 
 import {
   AlleKodeverk, Medlemskap, Soknad,
@@ -19,6 +20,7 @@ type AksjonspunktData = Array<BekreftBosattVurderingAp
 interface OwnProps {
   submittable: boolean;
   readOnly: boolean;
+  aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: OverstyringAvklarStartdatoForPeriodenAp
     | AksjonspunktData) => Promise<void>;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
@@ -38,6 +40,7 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps> = ({
   readOnly,
   submitCallback,
   alleMerknaderFraBeslutter,
+  aksjonspunkter,
   behandlingType,
   soknad,
   alleKodeverk,
@@ -47,6 +50,7 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps> = ({
   <OppholdInntektOgPerioderForm
     soknad={soknad}
     readOnly={readOnly}
+    aksjonspunkter={aksjonspunkter}
     submitCallback={submitCallback}
     submittable={submittable}
     alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
