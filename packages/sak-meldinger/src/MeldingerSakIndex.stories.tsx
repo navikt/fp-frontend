@@ -53,15 +53,18 @@ const Template: Story<{
   </div>
 );
 
+const innhentDokumentasjon = 'Innhent dokumentasjon';
+const revurderingsdokumentasjon = 'Revurderingsdokumentasjon';
+
 export const Default = Template.bind({});
 Default.args = {
   templates: [{
     kode: dokumentMalType.INNHENTE_OPPLYSNINGER,
-    navn: 'Innhent dokumentasjon',
+    navn: innhentDokumentasjon,
     tilgjengelig: true,
   }, {
     kode: dokumentMalType.VARSEL_OM_REVURDERING,
-    navn: 'Revurderingsdokumentasjon',
+    navn: revurderingsdokumentasjon,
     tilgjengelig: true,
   }],
   sprakKode: 'NO',
@@ -74,11 +77,11 @@ export const ForSvangerskapspenger = Template.bind({});
 ForSvangerskapspenger.args = {
   templates: [{
     kode: dokumentMalType.INNHENTE_OPPLYSNINGER,
-    navn: 'Innhent dokumentasjon',
+    navn: innhentDokumentasjon,
     tilgjengelig: true,
   }, {
     kode: dokumentMalType.VARSEL_OM_REVURDERING,
-    navn: 'Revurderingsdokumentasjon',
+    navn: revurderingsdokumentasjon,
     tilgjengelig: true,
   }],
   sprakKode: 'NO',
@@ -91,11 +94,11 @@ export const BrukerManglerAdresse = Template.bind({});
 BrukerManglerAdresse.args = {
   templates: [{
     kode: dokumentMalType.INNHENTE_OPPLYSNINGER,
-    navn: 'Innhent dokumentasjon',
+    navn: innhentDokumentasjon,
     tilgjengelig: true,
   }, {
     kode: dokumentMalType.VARSEL_OM_REVURDERING,
-    navn: 'Revurderingsdokumentasjon',
+    navn: revurderingsdokumentasjon,
     tilgjengelig: true,
   }],
   sprakKode: 'NO',
