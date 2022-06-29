@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 
-import UkjentAdresseMelding from '@fpsak-frontend/sak-ukjent-adresse';
+import UkjentAdresseMelding from './UkjentAdresseMeldingIndex';
 
 const withWidthProvider = (story: any) => (
   <div style={{ width: '600px' }}>
@@ -15,13 +15,9 @@ export default {
   decorators: [withWidthProvider],
 };
 
-const Template: Story<{
-  isPanelOpen: boolean;
-}> = () => (
+const Template: Story = () => (
   <UkjentAdresseMelding />
 );
 
 export const IngenAdresse = Template.bind({});
-IngenAdresse.args = {
-  isPanelOpen: false,
-};
+IngenAdresse.args = {};
