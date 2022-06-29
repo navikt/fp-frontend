@@ -67,6 +67,7 @@ describe('<MeldingIndex>', () => {
             fagsak={fagsak as Fagsak}
             valgtBehandling={valgtBehandling as BehandlingAppKontekst}
             setMeldingForData={() => undefined}
+            brukerManglerAdresse={false}
           />
         </MemoryRouter>
       </RestApiMock>,
@@ -95,6 +96,7 @@ describe('<MeldingIndex>', () => {
             fagsak={fagsak as Fagsak}
             valgtBehandling={valgtBehandling as BehandlingAppKontekst}
             setMeldingForData={() => undefined}
+            brukerManglerAdresse={false}
           />
         </MemoryRouter>
       </RestApiMock>,
@@ -136,6 +138,7 @@ describe('<MeldingIndex>', () => {
             fagsak={fagsak as Fagsak}
             valgtBehandling={valgtBehandling as BehandlingAppKontekst}
             setMeldingForData={() => undefined}
+            brukerManglerAdresse={false}
           />
         </MemoryRouter>
       </RestApiMock>,
@@ -181,6 +184,7 @@ describe('<MeldingIndex>', () => {
             fagsak={fagsak as Fagsak}
             valgtBehandling={valgtBehandling as BehandlingAppKontekst}
             setMeldingForData={() => undefined}
+            brukerManglerAdresse={false}
           />
         </MemoryRouter>
       </RestApiMock>,

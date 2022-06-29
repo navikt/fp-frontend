@@ -65,6 +65,7 @@ describe('<FagsakProfileIndex>', () => {
             harHentetBehandlinger
             oppfriskBehandlinger={sinon.spy()}
             fagsakRettigheter={fagsakRettigheter}
+            brukerManglerAdresse={false}
           />
         </MemoryRouter>
       </RestApiMock>,
@@ -93,6 +94,7 @@ describe('<FagsakProfileIndex>', () => {
             oppfriskBehandlinger={sinon.spy()}
             behandlingUuid="1"
             fagsakRettigheter={fagsakRettigheter}
+            brukerManglerAdresse={false}
           />
         </MemoryRouter>
       </RestApiMock>,
