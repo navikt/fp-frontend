@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-
+import { FormattedMessage, useIntl } from 'react-intl';
 import {
   PeriodLabel, DateLabel, Table, TableColumn, TableRow, FaktaGruppe,
 } from '@navikt/ft-ui-komponenter';
+
 import { AlleKodeverk, Oppholdstillatelse } from '@fpsak-frontend/types';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 
@@ -17,15 +17,14 @@ interface OwnProps {
   alleKodeverk: AlleKodeverk;
 }
 
-const OppholdstillatelseTabell: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
+const OppholdstillatelseTabell: FunctionComponent<OwnProps> = ({
   oppholdstillatelse,
   alleKodeverk,
 }) => (
   <FaktaGruppe
-    title={intl.formatMessage({ id: 'OppholdstillatelseTabell.Overskrift' })}
+    title={useIntl().formatMessage({ id: 'OppholdstillatelseTabell.Overskrift' })}
   >
-    <Table headerTextCodes={headerTextCodes}>
+    <Table headerTextCodes={headerTextCodes} noHover>
       {oppholdstillatelse.map((opphold) => (
         <TableRow key={opphold.fom + opphold.tom}>
           <TableColumn>
@@ -49,4 +48,4 @@ const OppholdstillatelseTabell: FunctionComponent<OwnProps & WrappedComponentPro
   </FaktaGruppe>
 );
 
-export default injectIntl(OppholdstillatelseTabell);
+export default OppholdstillatelseTabell;
