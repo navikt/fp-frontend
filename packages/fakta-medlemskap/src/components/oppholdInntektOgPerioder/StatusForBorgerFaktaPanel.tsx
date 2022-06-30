@@ -15,13 +15,6 @@ export type FormValues = {
   erEosBorger?: boolean;
 }
 
-type TransformedValues = {
-  kode: string;
-  oppholdsrettVurdering: boolean;
-  lovligOppholdVurdering: boolean;
-  erEosBorger: boolean;
-}
-
 interface OwnProps {
   valgtPeriode: MedlemPeriode;
   aksjonspunkter: Aksjonspunkt[]
@@ -31,7 +24,6 @@ interface OwnProps {
 
 interface StaticFunctions {
   buildInitialValues?: (periode: MedlemPeriode, aksjonspunkter: Aksjonspunkt[]) => FormValues;
-  transformValues?: (values: FormValues, aksjonspunkter: Aksjonspunkt[]) => TransformedValues;
 }
 
 /**
@@ -155,13 +147,5 @@ StatusForBorgerFaktaPanel.buildInitialValues = (periode, aksjonspunkter) => {
     lovligOppholdVurdering: erEosBorger === false ? getLovligOppholdVurdering(periode) : undefined,
   };
 };
-
-StatusForBorgerFaktaPanel.transformValues = (values, aksjonspunkter) => ({
-  kode: aksjonspunkter
-    .find((ap) => ap.definisjon === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT || ap.definisjon === aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD).definisjon,
-  oppholdsrettVurdering: values.oppholdsrettVurdering,
-  lovligOppholdVurdering: values.lovligOppholdVurdering,
-  erEosBorger: values.erEosBorger,
-});
 
 export default StatusForBorgerFaktaPanel;

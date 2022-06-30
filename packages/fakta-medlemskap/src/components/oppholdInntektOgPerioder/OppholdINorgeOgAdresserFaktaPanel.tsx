@@ -72,11 +72,6 @@ export type FormValues = {
   bosattVurdering?: boolean;
 }
 
-type TransformedValues = {
-  kode: string;
-  bosattVurdering: boolean;
-}
-
 interface OwnProps {
   valgtPeriode: MedlemPeriode
   soknad: Soknad,
@@ -88,7 +83,6 @@ interface OwnProps {
 
 interface StaticFunctions {
   buildInitialValues?: (periode: MedlemPeriode) => FormValues;
-  transformValues?: (values: FormValues) => TransformedValues;
 }
 
 /**
@@ -194,11 +188,6 @@ const OppholdINorgeOgAdresserFaktaPanel: FunctionComponent<OwnProps> & StaticFun
 
 OppholdINorgeOgAdresserFaktaPanel.buildInitialValues = (periode) => ({
   bosattVurdering: periode.bosattVurdering || periode.bosattVurdering === false ? periode.bosattVurdering : undefined,
-});
-
-OppholdINorgeOgAdresserFaktaPanel.transformValues = (values) => ({
-  kode: aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT,
-  bosattVurdering: values.bosattVurdering,
 });
 
 export default OppholdINorgeOgAdresserFaktaPanel;

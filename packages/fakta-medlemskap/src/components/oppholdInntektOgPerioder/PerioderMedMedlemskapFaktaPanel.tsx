@@ -26,11 +26,6 @@ export type FormValues = {
   medlemskapManuellVurderingType?: string;
 }
 
-type TransformedValues = {
-  kode: string;
-  medlemskapManuellVurderingType: string;
-}
-
 interface OwnProps {
   valgtPeriode: MedlemPeriode;
   alleKodeverk: AlleKodeverk;
@@ -43,7 +38,6 @@ interface OwnProps {
 
 interface StaticFunctions {
   buildInitialValues?: (periode: MedlemPeriode, medlemskapPerioder: Medlemskap['medlemskapPerioder']) => FormValues;
-  transformValues?: (values: FormValues, manuellVurderingTyper: string[]) => TransformedValues;
 }
 
 /**
@@ -157,10 +151,5 @@ const PerioderMedMedlemskapFaktaPanel: FunctionComponent<OwnProps> & StaticFunct
 PerioderMedMedlemskapFaktaPanel.buildInitialValues = (periode, medlemskapPerioder) => (medlemskapPerioder !== null ? {
   medlemskapManuellVurderingType: periode.medlemskapManuellVurderingType,
 } : {});
-
-PerioderMedMedlemskapFaktaPanel.transformValues = (values, manuellVurderingTyper) => ({
-  kode: aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
-  medlemskapManuellVurderingType: manuellVurderingTyper.find((m) => m === values.medlemskapManuellVurderingType),
-});
 
 export default PerioderMedMedlemskapFaktaPanel;
