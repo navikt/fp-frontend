@@ -126,34 +126,49 @@ AvklarOmBrukerErBosatt.args = {
 export const AvklarOmBrukerHarGyldigPeriode = Template.bind({});
 AvklarOmBrukerHarGyldigPeriode.args = {
   medlemskap: {
-    opphold: [{
-      fom: '2019-01-01',
-      tom: '2021-10-13',
-      oppholdstillatelseType: 'MIDLERTIDIG',
-    }, {
-      tom: '2021-01-13',
-      oppholdstillatelseType: 'MIDLERTIDIG',
-    }],
     medlemskapPerioder: [{
-      fom: '2019-01-01',
-      tom: '2021-10-13',
-      medlemskapType: 'AVKLARES',
-      dekningType: 'OPPHOR',
-      kildeType: 'FS22',
+      fom: '2021-06-30',
+      tom: '2025-06-30',
+      medlemskapType: 'ENDELIG',
+      dekningType: 'IHT_AVTALE',
+      kildeType: 'ANNEN',
+      beslutningsdato: '2021-06-30',
     }],
     perioder: [{
-      vurderingsdato: '2018-11-07',
-      personopplysningBruker: {
-        personstatus: 'BOSA',
-        navn: 'Mygg Robust',
-        adresser: [],
-        region: 'NORDEN',
-      } as PersonopplysningMedlem,
+      vurderingsdato: '2022-06-28',
       aksjonspunkter: [aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE],
-      årsaker: [
-        'SKJÆRINGSTIDSPUNKT',
-      ],
-    }] as MedlemPeriode[],
+      årsaker: ['SKJÆRINGSTIDSPUNKT'],
+      oppholdsrettVurdering: null,
+      erEosBorger: null,
+      lovligOppholdVurdering: null,
+      bosattVurdering: null,
+      medlemskapManuellVurderingType: null,
+      begrunnelse: null,
+      personopplysningBruker: {
+        navn: 'Papegøye Margaret',
+        personstatus: 'BOSA',
+        region: 'NORDEN',
+        adresser: [{
+          adresseType: 'BOSTEDSADRESSE',
+          postNummer: '2500',
+          poststed: 'Ukjent',
+          land: 'NOR',
+        }],
+      },
+      personopplysningAnnenPart: {
+        navn: 'Papegøye Runar',
+        personstatus: 'BOSA',
+        region: 'NORDEN',
+        adresser: [{
+          adresseType: 'BOSTEDSADRESSE',
+          postNummer: '2500',
+          poststed: 'Ukjent',
+          land: 'NOR',
+        }],
+      },
+    }],
+    opphold: [],
+    fom: null,
   },
   aksjonspunkter: [{
     definisjon: aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
@@ -252,8 +267,8 @@ AvklarOmBrukerHarLovligOpphold.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
 };
 
-export const BrukerHarLovligOppholdErSendtTilbakeFraBeslutter = Template.bind({});
-BrukerHarLovligOppholdErSendtTilbakeFraBeslutter.args = {
+export const BrukerHarLovligOppholdSomErSendtTilbakeFraBeslutter = Template.bind({});
+BrukerHarLovligOppholdSomErSendtTilbakeFraBeslutter.args = {
   medlemskap: {
     opphold: [{
       fom: '2019-01-01',

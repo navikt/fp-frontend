@@ -1,4 +1,6 @@
-import React, { FunctionComponent, useCallback, useMemo } from 'react';
+import React, {
+  FunctionComponent, useCallback, useMemo, useState,
+} from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
@@ -84,6 +86,8 @@ const OppholdInntektOgPeriodeForm: FunctionComponent<OwnProps> = ({
   lagreEnkeltPeriode,
   setValgtPeriode,
 }) => {
+  const [isSubmitting, setSubmitting] = useState(false);
+
   const initialValues = useMemo(() => buildInitialValues(valgtPeriode, aksjonspunkter, medlemskap.medlemskapPerioder),
     [valgtPeriode, aksjonspunkter, soknad, medlemskap.medlemskapPerioder]);
 
@@ -100,6 +104,7 @@ const OppholdInntektOgPeriodeForm: FunctionComponent<OwnProps> = ({
     <Form
       formMethods={formMethods}
       onSubmit={(values: FormValues) => {
+        setSubmitting(true);
         updateOppholdInntektPeriode(valgtPeriode.vurderingsdato, values);
         if (lagreEnkeltPeriode) {
           lagreEnkeltPeriode({ ...valgtPeriode, ...values });
@@ -159,8 +164,8 @@ const OppholdInntektOgPeriodeForm: FunctionComponent<OwnProps> = ({
               <Hovedknapp
                 mini
                 htmlType="submit"
-                disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
-                spinner={formMethods.formState.isSubmitting}
+                disabled={!formMethods.formState.isDirty || isSubmitting}
+                spinner={isSubmitting}
               >
                 <FormattedMessage id={lagreEnkeltPeriode ? 'OppholdInntektOgPerioder.Bekreft' : 'OppholdInntektOgPeriode.Oppdater'} />
               </Hovedknapp>

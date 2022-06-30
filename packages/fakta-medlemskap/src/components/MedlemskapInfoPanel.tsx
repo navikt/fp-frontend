@@ -159,12 +159,12 @@ const MedlemskapInfoPanel: FunctionComponent<OwnProps> = ({
 
   const lagre = () => {
     setSubmitting(true);
-    submitCallback(transformValues(perioder, aksjonspunkter));
+    return submitCallback(transformValues(perioder, aksjonspunkter));
   };
 
   const lagreEnkeltPeriode = (periode: MedlemPeriode) => {
     setSubmitting(true);
-    submitCallback(transformValues([periode], aksjonspunkter));
+    return submitCallback(transformValues([periode], aksjonspunkter));
   };
 
   return (
