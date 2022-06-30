@@ -24,7 +24,7 @@ const options = {
   },
   proxy: {
     '/fpoppdrag/**': {
-      target: process.env.APP_URL_FPOPPDRAG || 'http://localhost:8070',
+      target: process.env.APP_URL_FPOPPDRAG || 'http://127.0.0.1:8070',
       secure: false,
       changeOrigin: (!!process.env.APP_URL_FPOPPDRAG),
     },
@@ -34,12 +34,12 @@ const options = {
       changeOrigin: (!!process.env.APP_URL_FPTILBAKE),
     },
     '/fpformidling/**': {
-      target: process.env.APP_URL_FPFORMIDLING || 'http://localhost:8010',
+      target: process.env.APP_URL_FPFORMIDLING || 'http://127.0.0.1:8010',
       secure: false,
       changeOrigin: (!!process.env.APP_URL_FPFORMIDLING),
     },
     '/fpsak/(api|jetty)/**': {
-      target: process.env.APP_URL_FPSAK || 'http://localhost:8080',
+      target: process.env.APP_URL_FPSAK || 'http://127.0.0.1:8080',
       secure: false,
       changeOrigin: (!!process.env.APP_URL_FPSAK),
       onProxyRes: function onProxyRes(proxyRes, req, res) {
