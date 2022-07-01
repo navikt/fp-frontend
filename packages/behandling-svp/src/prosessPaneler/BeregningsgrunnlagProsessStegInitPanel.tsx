@@ -58,6 +58,18 @@ const lagBGVilkar = (vilkar: FpVilkar[], beregningsgrunnlag: Beregningsgrunnlag)
   };
   return nyVK;
 };
+
+const lagFormatertBG = (beregningsgrunnlag: Beregningsgrunnlag): Beregningsgrunnlag[] => {
+  if (!beregningsgrunnlag) {
+    return [];
+  }
+  const nyttBG = {
+    vilkårsperiodeFom: beregningsgrunnlag.skjaeringstidspunktBeregning,
+    ...beregningsgrunnlag,
+  };
+  return [nyttBG];
+};
+
 const AKSJONSPUNKT_KODER = [
   ProsessBeregningsgrunnlagAksjonspunktCode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
   ProsessBeregningsgrunnlagAksjonspunktCode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
@@ -105,7 +117,7 @@ const BeregningsgrunnlagProsessStegInitPanel: FunctionComponent<OwnProps & Prose
         federatedCompFn={ProsessBeregningsgrunnlagMF}
         {...data}
         beregningsgrunnlagsvilkar={lagBGVilkar(data.vilkar, data.beregningsgrunnlag)}
-        beregningsgrunnlagListe={data.beregningsgrunnlag ? [data.beregningsgrunnlag] : []}
+        beregningsgrunnlagListe={lagFormatertBG(data.beregningsgrunnlag)}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         submitCallback={lagModifisertCallback(data.submitCallback)}
 
