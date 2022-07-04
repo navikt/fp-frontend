@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import klageVurderingType from '@fpsak-frontend/kodeverk/src/klageVurdering';
+import KlageFormType from '@fpsak-frontend/prosess-klagevurdering/src/types/klageFormType';
 
 type FormValues = {
   klageVurdering?: string;
@@ -43,7 +44,7 @@ interface OwnProps {
   saveKlage: (data: TransformedValues) => Promise<any>;
   spinner?: boolean;
   readOnly?: boolean;
-  handleSubmit: UseFormHandleSubmit<any>;
+  handleSubmit: UseFormHandleSubmit<KlageFormType>;
 }
 
 const TempsaveKlageButton: FunctionComponent<OwnProps> = ({

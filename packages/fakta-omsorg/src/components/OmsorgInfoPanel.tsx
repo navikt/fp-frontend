@@ -94,7 +94,9 @@ const OmsorgInfoPanel: FunctionComponent<OwnProps> = ({
       <VerticalSpacer thirtyTwoPx />
       <AlleBarnPanel alleBarn={personoversikt.barn} />
       <ForelderPanel forelder={personoversikt.bruker} erSøker alleKodeverk={alleKodeverk} />
-      <ForelderPanel forelder={personoversikt.annenPart} erSøker={false} alleKodeverk={alleKodeverk} />
+      {personoversikt.annenPart && (
+        <ForelderPanel forelder={personoversikt.annenPart} erSøker={false} alleKodeverk={alleKodeverk} />
+      )}
       <Form
         formMethods={formMethods}
         onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
