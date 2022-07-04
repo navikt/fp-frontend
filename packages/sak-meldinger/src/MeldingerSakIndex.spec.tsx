@@ -7,6 +7,8 @@ import * as stories from './MeldingerSakIndex.stories';
 
 const { Default, ForSvangerskapspenger, BrukerManglerAdresse } = composeStories(stories);
 
+const brukerenHarIkkeAdresseText = 'Brukeren har ikke en registrert adresse. Utsendelse av brev vil feile.';
+
 describe('<MeldingerSakIndex>', () => {
   it('skal bruke default mal og sende brev', async () => {
     const lagre = jest.fn();
@@ -73,7 +75,7 @@ describe('<MeldingerSakIndex>', () => {
       brevmalkode: dokumentMalType.VARSEL_OM_REVURDERING,
       fritekst: 'Dette er en begrunnelse',
     });
-    expect(screen.queryByText('Brukeren har ikke en registrert adresse. Utsendelse av brev vil feile.')).not.toBeInTheDocument();
+    expect(screen.queryByText(brukerenHarIkkeAdresseText)).not.toBeInTheDocument();
   });
 
   it('skal ikke vise årsaksverdi Barn ikke registrert for Svangerskapspenger', async () => {
@@ -85,7 +87,7 @@ describe('<MeldingerSakIndex>', () => {
 
     expect(await screen.findByText('Annet')).toBeInTheDocument();
     expect(screen.queryByText('Barn ikke registrert i folkeregisteret')).not.toBeInTheDocument();
-    expect(screen.queryByText('Brukeren har ikke en registrert adresse. Utsendelse av brev vil feile.')).not.toBeInTheDocument();
+    expect(screen.queryByText(brukerenHarIkkeAdresseText)).not.toBeInTheDocument();
   });
 
   it('skal vise melding til saksbehandler at bruker ikke har en adresse registrert', async () => {
@@ -95,6 +97,6 @@ describe('<MeldingerSakIndex>', () => {
 
     userEvent.selectOptions(utils.getByLabelText('Mal'), dokumentMalType.VARSEL_OM_REVURDERING);
 
-    expect(await screen.findByText('Brukeren har ikke en registrert adresse. Utsendelse av brev vil feile.')).toBeInTheDocument();
+    expect(await screen.findByText(brukerenHarIkkeAdresseText)).toBeInTheDocument();
   });
 });
