@@ -90,8 +90,8 @@ AksjonspunktMedToUavklartePerioder.args = {
   submittable: true,
 };
 
-export const AksjonspunktSomErBekreftet = Template.bind({});
-AksjonspunktSomErBekreftet.args = {
+export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet = Template.bind({});
+AksjonspunktSomErBekreftetOgBehandlingAvsluttet.args = {
   aksjonspunkter: [{
     definisjon: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
     status: aksjonspunktStatus.UTFORT,
@@ -121,4 +121,20 @@ AksjonspunktSomErReåpnetAvBeslutter.args = {
   alleMerknaderFraBeslutter: {
     [aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV]: merknaderFraBeslutter,
   },
+};
+
+export const AksjonspunktErBekreftetMenBehandlingErÅpen = Template.bind({});
+AksjonspunktErBekreftetMenBehandlingErÅpen.args = {
+  aksjonspunkter: [{
+    definisjon: aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV,
+    status: aksjonspunktStatus.UTFORT,
+    begrunnelse: undefined,
+    kanLoses: true,
+    erAktivt: true,
+  }],
+  uttakKontrollerAktivitetskrav: [uttakKontrollerAktivitetskravListe[0]],
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  readOnly: false,
+  submittable: true,
+  alleMerknaderFraBeslutter: {},
 };

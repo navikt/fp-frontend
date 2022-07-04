@@ -40,6 +40,7 @@ export const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
   const intl = useIntl();
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [isDirty, setDirty] = useState<boolean>(false);
 
   const [aktivitetskrav, updateAktivitetskrav] = useState<UttakKontrollerAktivitetskrav[]>(formData || sorterteAktivitetskrav);
 
@@ -60,6 +61,7 @@ export const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
 
     updateAktivitetskrav(oppdaterteAktivitetskrav);
     setAktivitetskrav(oppdaterteAktivitetskrav.find((oa) => !oa.avklaring));
+    setDirty(true);
   }, [aktivitetskrav]);
 
   const avbrytEditeringAvAktivitetskrav = useCallback(() => {
@@ -121,7 +123,7 @@ export const AktivitetskravFaktaForm: FunctionComponent<PureOwnProps> = ({
         isReadOnly={readOnly}
         onClick={bekreft}
         isSubmitting={isSubmitting}
-        isDirty
+        isDirty={isDirty}
       />
     </>
   );
