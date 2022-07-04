@@ -82,7 +82,7 @@ export const FpsakApiKeys = {
   PREVIEW_MESSAGE_TILBAKEKREVING: new RestKey<any, any>('PREVIEW_MESSAGE_TILBAKEKREVING'),
   PREVIEW_MESSAGE_FORMIDLING: new RestKey<any, ForhåndsvisMeldingParams>('PREVIEW_MESSAGE_FORMIDLING'),
   PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE: new RestKey<any, any>('PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE'),
-  HAR_IKKE_ADRESSE: new RestKey<boolean, any>('HAR_IKKE_ADRESSE'),
+  HAR_IKKE_ADRESSE: new RestKey<boolean, { saksnummer: string }>('HAR_IKKE_ADRESSE'),
 };
 
 const endpoints = new RestApiConfigBuilder()
@@ -108,6 +108,7 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('sak-annen-part-behandling', FpsakApiKeys.ANNEN_PART_BEHANDLING)
   .withRel('tilbake-kan-opprette-behandling', FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES)
   .withRel('tilbake-kan-opprette-revurdering', FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES)
+  .withRel('har-ikke-adresse', FpsakApiKeys.HAR_IKKE_ADRESSE)
 
   // Behandling
   .withRel('kontrollresultat', FpsakApiKeys.KONTROLLRESULTAT)
@@ -121,7 +122,6 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('fpsak-brev-maler', FpsakApiKeys.BREVMALER)
   .withRel('brev-bestill', FpsakApiKeys.SUBMIT_MESSAGE)
   .withRel('behandling-rettigheter', FpsakApiKeys.BEHANDLING_RETTIGHETER)
-  .withRel('har-ikke-adresse', FpsakApiKeys.HAR_IKKE_ADRESSE)
 
   .withPost('/fptilbake/api/brev/forhandsvis', FpsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING, { isResponseBlob: true })
   .withPost('/fptilbake/api/dokument/forhandsvis-henleggelsesbrev', FpsakApiKeys.PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE, { isResponseBlob: true })
