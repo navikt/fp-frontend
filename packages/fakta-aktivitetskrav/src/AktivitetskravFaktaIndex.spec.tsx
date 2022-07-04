@@ -6,7 +6,7 @@ import { composeStories } from '@storybook/testing-react';
 import userEvent from '@testing-library/user-event';
 import * as stories from './AktivitetskravFaktaIndex.stories';
 
-const { AksjonspunktMedToUavklartePerioder, AksjonspunktSomErBekreftet } = composeStories(stories);
+const { AksjonspunktMedToUavklartePerioder, AksjonspunktSomErBekreftetOgBehandlingAvsluttet } = composeStories(stories);
 
 describe('<AktivitetskravFaktaIndex>', () => {
   it('skal avklare to perioder og så bekrefte aksjonspunkt', async () => {
@@ -69,7 +69,7 @@ describe('<AktivitetskravFaktaIndex>', () => {
   });
 
   it('skal vise bekreftede perioder i tabell og så åpne en av de', async () => {
-    render(<AksjonspunktSomErBekreftet />);
+    render(<AksjonspunktSomErBekreftetOgBehandlingAvsluttet />);
 
     expect(await screen.findByText('Perioder med aktivitetskrav')).toBeInTheDocument();
     expect(screen.queryByText('Kontroller kravet til mors aktivitet')).not.toBeInTheDocument();
