@@ -14,6 +14,7 @@ import {
   KlageVurdering, AlleKodeverk, KlageVurderingResultat,
 } from '@fpsak-frontend/types';
 import { KlageVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import KlageFormType from '@fpsak-frontend/prosess-klagevurdering/src/types/klageFormType';
 
 import KlageVurderingRadioOptionsKa from './KlageVurderingRadioOptionsKa';
 import FritekstBrevTextField from '../felles/FritekstKlageBrevTextField';
@@ -22,7 +23,7 @@ import TempsaveKlageButton, { TransformedValues } from '../felles/TempsaveKlageB
 
 import styles from './behandleKlageFormKa.less';
 
-const transformValues = (values: FormValues): KlageVurderingResultatAp => ({
+const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
   klageMedholdArsak: (values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE
     || values.klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK) ? values.klageMedholdArsak : null,
   klageVurderingOmgjoer: values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
@@ -32,15 +33,7 @@ const transformValues = (values: FormValues): KlageVurderingResultatAp => ({
   kode: aksjonspunktCodes.BEHANDLE_KLAGE_NK,
 });
 
-type FormValues = {
-  begrunnelse?: string;
-  fritekstTilBrev?: string;
-  klageVurdering?: string;
-  klageVurderingOmgjoer?: string;
-  klageMedholdArsak?: string;
-};
-
-const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): FormValues => ({
+const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): KlageFormType => ({
   klageMedholdArsak: klageVurderingResultat ? klageVurderingResultat.klageMedholdArsak : null,
   klageVurderingOmgjoer: klageVurderingResultat ? klageVurderingResultat.klageVurderingOmgjoer : null,
   klageVurdering: klageVurderingResultat ? klageVurderingResultat.klageVurdering : null,
@@ -57,8 +50,8 @@ interface OwnProps {
   sprakkode: string;
   submitCallback: (data: KlageVurderingResultatAp) => Promise<void>;
   klageVurdering: KlageVurdering;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
+  formData?: KlageFormType;
+  setFormData: (data: KlageFormType) => void;
 }
 
 /**
@@ -80,7 +73,7 @@ export const BehandleKlageFormKa: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
   const initialValues = useMemo(() => buildInitialValues(klageVurdering.klageVurderingResultatNK), [klageVurdering]);
-  const formMethods = useForm<FormValues>({
+  const formMethods = useForm<KlageFormType>({
     defaultValues: formData || initialValues,
   });
 
@@ -89,7 +82,7 @@ export const BehandleKlageFormKa: FunctionComponent<OwnProps> = ({
   return (
     <Form
       formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
+      onSubmit={(values: KlageFormType) => submitCallback(transformValues(values))}
       setDataOnUnmount={setFormData}
     >
       <>

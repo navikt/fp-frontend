@@ -13,6 +13,7 @@ import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponen
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
 import { KlageVurdering, AlleKodeverk, KlageVurderingResultat } from '@fpsak-frontend/types';
 import { KlageVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import KlageFormType from '@fpsak-frontend/prosess-klagevurdering/src/types/klageFormType';
 
 import KlageVurderingRadioOptionsNfp from './KlageVurderingRadioOptionsNfp';
 import FritekstBrevTextField from '../felles/FritekstKlageBrevTextField';
@@ -21,7 +22,7 @@ import TempsaveKlageButton, { TransformedValues } from '../felles/TempsaveKlageB
 
 import styles from './behandleKlageFormNfp.less';
 
-const transformValues = (values: FormValues): KlageVurderingResultatAp => ({
+const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
   klageMedholdArsak: values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageMedholdArsak : null,
   klageVurderingOmgjoer: values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : null,
   klageHjemmel: values.klageHjemmel,
@@ -31,16 +32,7 @@ const transformValues = (values: FormValues): KlageVurderingResultatAp => ({
   kode: aksjonspunktCodes.BEHANDLE_KLAGE_NFP,
 });
 
-type FormValues = {
-  klageVurdering?: string;
-  fritekstTilBrev?: string;
-  klageMedholdArsak?: string;
-  klageHjemmel?: string;
-  klageVurderingOmgjoer?: string;
-  begrunnelse?: string;
-};
-
-const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): FormValues => ({
+const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): KlageFormType => ({
   klageMedholdArsak: klageVurderingResultat ? klageVurderingResultat.klageMedholdArsak : null,
   klageVurderingOmgjoer: klageVurderingResultat ? klageVurderingResultat.klageVurderingOmgjoer : null,
   klageHjemmel: klageVurderingResultat ? klageVurderingResultat.klageHjemmel : null,
@@ -59,8 +51,8 @@ interface OwnProps {
   klageVurdering: KlageVurdering;
   alleAktuelleHjemler: string[];
   submitCallback: (data: KlageVurderingResultatAp) => Promise<void>;
-  formData?: FormValues;
-  setFormData: (data: FormValues) => void;
+  formData?: KlageFormType;
+  setFormData: (data: KlageFormType) => void;
 }
 
 /**
@@ -83,7 +75,7 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
   const initialValues = useMemo(() => buildInitialValues(klageVurdering.klageVurderingResultatNFP), [klageVurdering]);
-  const formMethods = useForm<FormValues>({
+  const formMethods = useForm<KlageFormType>({
     defaultValues: formData || initialValues,
   });
 
@@ -92,7 +84,7 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
   return (
     <Form
       formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
+      onSubmit={(values: KlageFormType) => submitCallback(transformValues(values))}
       setDataOnUnmount={setFormData}
     >
       <Undertittel>{intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}</Undertittel>
