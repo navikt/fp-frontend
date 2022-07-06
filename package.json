@@ -116,8 +116,9 @@
     "html-webpack-plugin": "5.5.0",
     "identity-obj-proxy": "3.0.0",
     "ignore-styles": "5.0.1",
-    "jest": "27.5.1",
+    "jest": "28.1.2",
     "jest-canvas-mock": "2.4.0",
+    "jest-environment-jsdom": "28.1.2",
     "jest-runner-eslint": "1.0.1",
     "jest-transform-stub": "2.0.0",
     "jsdom": "20.0.0",
@@ -142,6 +143,7 @@
     "webpack-merge": "5.8.0"
   },
   "resolutions": {
+    "@types/react": "17.0.43",
     "async": "2.6.4",
     "glob-parent": "5.1.2",
     "got": "11.8.5",
