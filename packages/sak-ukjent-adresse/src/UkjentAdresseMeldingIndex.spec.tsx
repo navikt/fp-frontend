@@ -8,6 +8,6 @@ const { IngenAdresse } = composeStories(stories);
 describe('<IngenAdresse>', () => {
   it('skal vise panelet om brukeren mangler adresse', async () => {
     render(<IngenAdresse />);
-    expect(await screen.findByText('Brukeren har ikke en registrert adresse. Utsendelse av brev vil feile.')).toBeInTheDocument();
+    expect(await screen.findByText('Brukeren har ikke en registrert adresse. Utsendelse av brev kan feile om brukeren ikke er digital.')).toBeInTheDocument();
   });
 });
