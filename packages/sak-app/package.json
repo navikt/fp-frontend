@@ -42,6 +42,7 @@
     "@fpsak-frontend/sak-support-meny": "1.0.0",
     "@fpsak-frontend/sak-totrinnskontroll": "1.0.0",
     "@fpsak-frontend/sak-visittkort": "1.0.0",
+    "@fpsak-frontend/sak-ukjent-adresse": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/types-avklar-aksjonspunkter": "1.0.0",
     "@navikt/ft-form-hooks": "1.0.27",

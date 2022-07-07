@@ -82,6 +82,7 @@ export const FpsakApiKeys = {
   PREVIEW_MESSAGE_TILBAKEKREVING: new RestKey<any, any>('PREVIEW_MESSAGE_TILBAKEKREVING'),
   PREVIEW_MESSAGE_FORMIDLING: new RestKey<any, ForhåndsvisMeldingParams>('PREVIEW_MESSAGE_FORMIDLING'),
   PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE: new RestKey<any, any>('PREVIEW_MESSAGE_TILBAKEKREVING_HENLEGGELSE'),
+  HAR_IKKE_ADRESSE: new RestKey<boolean, { saksnummer: string }>('HAR_IKKE_ADRESSE'),
 };
 
 const endpoints = new RestApiConfigBuilder()
@@ -107,6 +108,7 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('sak-annen-part-behandling', FpsakApiKeys.ANNEN_PART_BEHANDLING)
   .withRel('tilbake-kan-opprette-behandling', FpsakApiKeys.KAN_TILBAKEKREVING_OPPRETTES)
   .withRel('tilbake-kan-opprette-revurdering', FpsakApiKeys.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES)
+  .withRel('har-ikke-adresse', FpsakApiKeys.HAR_IKKE_ADRESSE)
 
   // Behandling
   .withRel('kontrollresultat', FpsakApiKeys.KONTROLLRESULTAT)

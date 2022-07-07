@@ -65,6 +65,7 @@ describe('<BehandlingSupportIndex>', () => {
             alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
             behandlingUuid="1"
             behandlingVersjon={2}
+            brukerManglerAdresse={false}
           />
         </MemoryRouter>
       </RestApiMock>,

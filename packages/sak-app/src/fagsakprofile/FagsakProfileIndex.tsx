@@ -9,6 +9,7 @@ import BehandlingVelgerSakIndex from '@fpsak-frontend/sak-behandling-velger';
 import FagsakProfilSakIndex from '@fpsak-frontend/sak-fagsak-profil';
 import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
 import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import UkjentAdresseMeldingIndex from '@fpsak-frontend/sak-ukjent-adresse';
 
 import {
   getLocationWithDefaultProsessStegAndFakta,
@@ -43,6 +44,7 @@ interface OwnProps {
   oppfriskBehandlinger: () => void;
   fagsakRettigheter: SakRettigheter;
   behandlingRettigheter?: BehandlingRettigheter;
+  brukerManglerAdresse: boolean;
 }
 
 export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
@@ -54,6 +56,7 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
   oppfriskBehandlinger,
   fagsakRettigheter,
   behandlingRettigheter,
+  brukerManglerAdresse,
 }) => {
   const [showAll, setShowAll] = useState(!behandlingUuid);
   const toggleShowAll = useCallback(() => setShowAll(!showAll), [showAll]);
@@ -87,6 +90,9 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
 
   return (
     <div className={styles.panelPadding}>
+      {brukerManglerAdresse && (
+        <UkjentAdresseMeldingIndex />
+      )}
       {!harHentetBehandlinger && (
         <LoadingPanel />
       )}

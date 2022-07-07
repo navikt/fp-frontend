@@ -8,6 +8,7 @@
     "@fpsak-frontend/assets": "1.0.0",
     "@fpsak-frontend/kodeverk": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
+    "@fpsak-frontend/sak-ukjent-adresse": "1.0.0",
     "@navikt/ft-form-hooks": "1.0.27",
     "@navikt/ft-form-validators": "1.0.17",
     "@navikt/ft-kodeverk": "^1.0.11",
