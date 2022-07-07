@@ -43,6 +43,7 @@ interface OwnProps {
   behandlingUuid?: string;
   behandlingVersjon?: number;
   behandlingRettigheter?: BehandlingRettigheter;
+  brukerManglerAdresse: boolean;
 }
 
 /**
@@ -57,6 +58,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
   behandlingUuid,
   behandlingVersjon,
   behandlingRettigheter,
+  brukerManglerAdresse,
 }) => {
   const { selected: valgtSupportPanel, location } = useTrackRouteParam<string>({
     paramName: 'stotte',
@@ -119,6 +121,7 @@ const BehandlingSupportIndex: FunctionComponent<OwnProps> = ({
             valgtBehandling={behandling}
             meldingFormData={meldingFormData}
             setMeldingForData={setMeldingForData}
+            brukerManglerAdresse={brukerManglerAdresse}
           />
         )}
         {aktivtSupportPanel === SupportTabs.DOKUMENTER && (

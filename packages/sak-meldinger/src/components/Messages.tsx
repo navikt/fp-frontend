@@ -14,6 +14,7 @@ import ugunstAarsakTyper from '@fpsak-frontend/kodeverk/src/ugunstAarsakTyper';
 import { SelectField, TextAreaField, Form } from '@navikt/ft-form-hooks';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import UkjentAdresseMeldingIndex from '@fpsak-frontend/sak-ukjent-adresse';
 
 import styles from './messages.less';
 
@@ -87,6 +88,7 @@ interface OwnProps {
   kanVeilede: boolean;
   meldingFormData?: any,
   setMeldingForData: (data?: any) => void,
+  brukerManglerAdresse: boolean,
 }
 
 /**
@@ -106,6 +108,7 @@ export const Messages: FunctionComponent<OwnProps> = ({
   meldingFormData,
   setMeldingForData,
   isKontrollerRevurderingApOpen,
+  brukerManglerAdresse,
 }) => {
   const intl = useIntl();
   const formMethods = useForm<FormValues>({
@@ -176,6 +179,11 @@ export const Messages: FunctionComponent<OwnProps> = ({
           </div>
         </>
       )}
+      <div className={styles.buttonRow}>
+        {brukerManglerAdresse && (
+          <UkjentAdresseMeldingIndex />
+        )}
+      </div>
       <div className={styles.buttonRow}>
         <Hovedknapp mini spinner={formState.isSubmitting} disabled={formState.isSubmitting || kanVeilede} onClick={ariaCheck}>
           {intl.formatMessage({ id: 'Messages.Submit' })}

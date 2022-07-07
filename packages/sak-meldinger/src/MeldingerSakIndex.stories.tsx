@@ -18,11 +18,13 @@ const Template: Story<{
   sprakKode: string,
   fagsakYtelseType: string,
   lagre: () => Promise<any>,
+  brukerManglerAdresse: boolean
 }> = ({
   templates,
   sprakKode,
   fagsakYtelseType,
   lagre,
+  brukerManglerAdresse,
 }) => (
   <div style={{
     width: '600px', margin: '50px', padding: '20px', backgroundColor: 'white',
@@ -46,38 +48,61 @@ const Template: Story<{
         kodeverk: 'UGUNST',
       }]}
       setMeldingForData={() => undefined}
+      brukerManglerAdresse={brukerManglerAdresse}
     />
   </div>
 );
+
+const innhentDokumentasjon = 'Innhent dokumentasjon';
+const revurderingsdokumentasjon = 'Revurderingsdokumentasjon';
 
 export const Default = Template.bind({});
 Default.args = {
   templates: [{
     kode: dokumentMalType.INNHENTE_OPPLYSNINGER,
-    navn: 'Innhent dokumentasjon',
+    navn: innhentDokumentasjon,
     tilgjengelig: true,
   }, {
     kode: dokumentMalType.VARSEL_OM_REVURDERING,
-    navn: 'Revurderingsdokumentasjon',
+    navn: revurderingsdokumentasjon,
     tilgjengelig: true,
   }],
   sprakKode: 'NO',
   fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
   lagre: action('button-click') as () => Promise<any>,
+  brukerManglerAdresse: false,
 };
 
 export const ForSvangerskapspenger = Template.bind({});
 ForSvangerskapspenger.args = {
   templates: [{
     kode: dokumentMalType.INNHENTE_OPPLYSNINGER,
-    navn: 'Innhent dokumentasjon',
+    navn: innhentDokumentasjon,
     tilgjengelig: true,
   }, {
     kode: dokumentMalType.VARSEL_OM_REVURDERING,
-    navn: 'Revurderingsdokumentasjon',
+    navn: revurderingsdokumentasjon,
     tilgjengelig: true,
   }],
   sprakKode: 'NO',
   fagsakYtelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
   lagre: action('button-click') as () => Promise<any>,
+  brukerManglerAdresse: false,
+};
+
+export const BrukerManglerAdresse = Template.bind({});
+BrukerManglerAdresse.args = {
+  templates: [{
+    kode: dokumentMalType.INNHENTE_OPPLYSNINGER,
+    navn: innhentDokumentasjon,
+    tilgjengelig: true,
+  }, {
+    kode: dokumentMalType.VARSEL_OM_REVURDERING,
+    navn: revurderingsdokumentasjon,
+    tilgjengelig: true,
+  }],
+  sprakKode: 'NO',
+  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+  lagre: action('button-click') as () => Promise<any>,
+  brukerManglerAdresse: true,
 };
