@@ -16,10 +16,10 @@
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/types-avklar-aksjonspunkter": "1.0.0",
     "@navikt/ft-kodeverk": "^1.0.11",
-    "@navikt/ft-plattform-komponenter": "1.0.21",
+    "@navikt/ft-plattform-komponenter": "1.0.22",
     "@navikt/ft-types": "^1.0.17",
-    "@navikt/ft-utils": "1.0.21",
-    "@navikt/ft-ui-komponenter": "1.0.24",
+    "@navikt/ft-utils": "1.0.22",
+    "@navikt/ft-ui-komponenter": "1.0.25",
     "classnames": "2.3.1",
     "moment": "2.29.3",
     "nav-frontend-core": "6.0.1",
@@ -32,8 +32,8 @@
     "nav-frontend-typografi": "4.0.1",
     "nav-frontend-typografi-style": "2.0.1",
     "react": "17.0.2",
-    "react-intl": "6.0.4",
-    "@sentry/browser": "7.4.1"
+    "react-intl": "6.0.5",
+    "@sentry/browser": "7.5.0"
   },
   "devDependencies": {
     "@fpsak-frontend/utils-test": "1.0.0",

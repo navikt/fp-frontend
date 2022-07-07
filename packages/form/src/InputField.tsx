@@ -24,6 +24,7 @@ const InputField: FunctionComponent<BaseFieldProps & InputFieldProps & (NavFront
   isEdited,
   ...otherProps
 }) => (
+  /* @ts-ignore */
   <Field
     name={name}
     validate={validate}

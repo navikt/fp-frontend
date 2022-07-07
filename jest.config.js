@@ -14,6 +14,7 @@ module.exports = {
         '\\.(svg)$': '<rootDir>/_mocks/fileMock.js',
         '\\.(less|css)$': 'identity-obj-proxy',
       },
+      resolver: './jest.resolver.js',
       roots: [
         '<rootDir>/packages/',
       ],
