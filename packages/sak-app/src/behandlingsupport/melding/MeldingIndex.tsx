@@ -84,6 +84,7 @@ interface OwnProps {
   valgtBehandling: BehandlingAppKontekst;
   meldingFormData?: any,
   setMeldingForData: (data?: any) => void,
+  brukerManglerAdresse: boolean,
 }
 
 const EMPTY_ARRAY = [] as KodeverkMedNavn[];
@@ -98,6 +99,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
   valgtBehandling,
   meldingFormData,
   setMeldingForData,
+  brukerManglerAdresse,
 }) => {
   const [showSettPaVentModal, setShowSettPaVentModal] = useState(false);
   const [showMessagesModal, setShowMessageModal] = useState(false);
@@ -177,6 +179,7 @@ const MeldingIndex: FunctionComponent<OwnProps> = ({
         kanVeilede={navAnsatt.kanVeilede}
         meldingFormData={meldingFormData}
         setMeldingForData={setMeldingForData}
+        brukerManglerAdresse={brukerManglerAdresse}
       />
 
       {submitFinished && showSettPaVentModal && (

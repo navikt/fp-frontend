@@ -83,6 +83,12 @@ const FagsakIndex: FunctionComponent = () => {
     keepData: true,
   });
 
+  const { data: harIkkeAdresse } = restApiHooks.useRestApi(FpsakApiKeys.HAR_IKKE_ADRESSE, { saksnummer: selectedSaksnummer }, {
+    updateTriggers: [selectedSaksnummer],
+    suspendRequest: !selectedSaksnummer,
+    keepData: true,
+  });
+
   const [harFerdighentetfagsakRettigheter, fagsakRettigheter] = useHentFagsakRettigheter(
     selectedSaksnummer, behandlingUuid, behandlingVersjon,
   );
@@ -147,6 +153,7 @@ const FagsakIndex: FunctionComponent = () => {
                 oppfriskBehandlinger={oppfriskBehandlinger}
                 fagsakRettigheter={fagsakRettigheter}
                 behandlingRettigheter={behandlingRettigheter}
+                brukerManglerAdresse={harIkkeAdresse}
               />
             )}
           </>
@@ -158,6 +165,7 @@ const FagsakIndex: FunctionComponent = () => {
             behandlingUuid={behandlingUuid}
             behandlingVersjon={behandlingVersjon}
             behandlingRettigheter={behandlingRettigheter}
+            brukerManglerAdresse={harIkkeAdresse}
           />
         )}
         visittkortContent={() => {
