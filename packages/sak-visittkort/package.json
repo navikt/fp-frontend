@@ -13,7 +13,7 @@
     "@navikt/ft-types": "^1.0.17",
     "@navikt/ft-ui-komponenter": "1.0.25",
     "@navikt/ft-utils": "1.0.22",
-    "moment": "2.29.3",
+    "moment": "2.29.4",
     "nav-frontend-etiketter": "3.0.2",
     "nav-frontend-etiketter-style": "2.0.2",
     "nav-frontend-typografi": "4.0.1",

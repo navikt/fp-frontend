@@ -18,7 +18,7 @@
     "@navikt/ft-ui-komponenter": "1.0.25",
     "@navikt/ft-utils": "1.0.22",
     "classnames": "2.3.1",
-    "moment": "2.29.3",
+    "moment": "2.29.4",
     "nav-frontend-core": "6.0.1",
     "nav-frontend-etiketter": "3.0.2",
     "nav-frontend-etiketter-style": "2.0.2",

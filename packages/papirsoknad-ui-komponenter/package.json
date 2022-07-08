@@ -19,7 +19,7 @@
     "@navikt/ft-utils": "1.0.22",
     "classnames": "2.3.1",
     "dayjs": "1.11.3",
-    "moment": "2.29.3",
+    "moment": "2.29.4",
     "nav-frontend-alertstriper": "4.0.1",
     "nav-frontend-alertstriper-style": "3.0.1",
     "nav-frontend-grid": "2.0.1",

@@ -15,7 +15,7 @@
     "@navikt/ft-types": "^1.0.17",
     "@navikt/ft-ui-komponenter": "1.0.25",
     "@navikt/ft-utils": "1.0.22",
-    "moment": "2.29.3",
+    "moment": "2.29.4",
     "nav-frontend-knapper": "3.1.2",
     "nav-frontend-knapper-style": "2.1.1",
     "nav-frontend-typografi": "4.0.1",
