@@ -5,12 +5,12 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@navikt/ft-ui-komponenter": "1.0.23",
-    "@navikt/ft-utils": "1.0.20",
+    "@navikt/ft-ui-komponenter": "1.0.25",
+    "@navikt/ft-utils": "1.0.22",
     "nav-frontend-typografi": "4.0.1",
     "react": "17.0.2",
-    "react-hook-form": "7.33.0",
-    "react-intl": "6.0.4"
+    "react-hook-form": "7.33.1",
+    "react-intl": "6.0.5"
   },
   "devDependencies": {
     "@fpsak-frontend/storybook-utils": "1.0.0",
