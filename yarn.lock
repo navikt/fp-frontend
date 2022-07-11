@@ -2305,10 +2305,10 @@
   dependencies:
     tslib "2.4.0"
 
-"@formatjs/intl-numberformat@8.0.3":
-  version "8.0.3"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl-numberformat/-/intl-numberformat-8.0.3.tgz#8e0b7b5c7ec696b40402f03baf3e7fe307301451"
-  integrity sha512-b/TPeDtjdITpvdMsZhkz0UEbfINtj0/EG/XBJ3MBJGp2RSjWUfe2cp3dUs3B1VJ9hHZNAe6Dkke0LwXiMCDk4Q==
+"@formatjs/intl-numberformat@8.0.4":
+  version "8.0.4"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-numberformat/-/intl-numberformat-8.0.4.tgz#1f2818d427344880722ccbc5613457dfb2224279"
+  integrity sha512-Gaqc5x1lGysURfMdxTdgosW2eHVcpEsSWWCHQESfeDkKRzkQAqLsvEmZ8OKOVra4Qbkvgn0LWvjO8Dj1neTA4g==
   dependencies:
     "@formatjs/ecma402-abstract" "1.11.8"
     "@formatjs/intl-localematcher" "0.2.28"
