@@ -17,7 +17,7 @@
     "@navikt/ft-ui-komponenter": "1.0.26",
     "@navikt/ft-utils": "1.0.23",
     "classnames": "2.3.1",
-    "dayjs": "1.11.3",
+    "dayjs": "1.11.4",
     "nav-frontend-core": "6.0.1",
     "nav-frontend-grid": "2.0.1",
     "nav-frontend-grid-style": "1.0.2",
