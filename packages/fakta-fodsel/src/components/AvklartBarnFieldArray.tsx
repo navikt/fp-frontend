@@ -9,12 +9,6 @@ import { Datepicker, PeriodFieldArray, formHooks } from '@navikt/ft-form-hooks';
 
 const FIELD_ARRAY_NAME = 'avklartBarn';
 
-type FIELD_ARRAY_TYPE = {
-  fodselsdato?: string;
-  dodsdato?: string;
-  id: string;
-};
-
 export const defaultAntallBarn = {
   fodselsdato: undefined,
   dodsdato: undefined,
@@ -38,7 +32,7 @@ export const AvklartBarnFieldArray: FunctionComponent<OwnProps> = ({
   const avklartBarn = watch('avklartBarn');
 
   return (
-    <PeriodFieldArray<FIELD_ARRAY_TYPE>
+    <PeriodFieldArray
       fields={fields}
       emptyPeriodTemplate={defaultAntallBarn}
       readOnly={readOnly}
