@@ -1,5 +1,4 @@
 "use strict";
-const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const path = require('path');
 const { merge } = require('webpack-merge');
@@ -24,9 +23,6 @@ const config = {
   },
   optimization: {
     minimizer: [
-      new TerserPlugin({
-        parallel: true,
-      }),
       new OptimizeCSSAssetsPlugin({}),
     ],
     splitChunks: {
