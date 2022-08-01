@@ -127,6 +127,7 @@ const RenderPermisjonPeriodeFieldArray: FunctionComponent<OwnProps> & StaticFunc
 
   useEffect(() => {
     if (fields.length === 0) {
+      // @ts-ignore Fiks
       append({});
     }
   }, []);
