@@ -27,7 +27,7 @@ describe('<SoknadsfristVilkarProsessIndex>', () => {
     userEvent.click(screen.getAllByText('Vilkåret er oppfylt')[0]);
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.paste(vurderingInput, 'Dette er en vurdering');
+    userEvent.type(vurderingInput, 'Dette er en vurdering');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 

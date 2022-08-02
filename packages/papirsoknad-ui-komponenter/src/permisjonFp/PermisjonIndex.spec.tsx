@@ -29,11 +29,11 @@ describe('<PermisjonIndex>', () => {
     userEvent.selectOptions(utils.getByLabelText('Periodetype'), 'MØDREKVOTE');
 
     const fomDatoInput = utils.getByLabelText('F.o.m.');
-    userEvent.paste(fomDatoInput, '2022.05.20');
+    userEvent.type(fomDatoInput, '2022.05.20');
     fireEvent.blur(fomDatoInput);
 
     const tomDatoInput = utils.getByLabelText('T.o.m.');
-    userEvent.paste(tomDatoInput, '2022.06.20');
+    userEvent.type(tomDatoInput, '2022.06.20');
     fireEvent.blur(tomDatoInput);
 
     userEvent.click(screen.getAllByRole('checkbox')[2]);
@@ -41,7 +41,7 @@ describe('<PermisjonIndex>', () => {
     expect(await screen.findByText('Prosentandel uttak')).toBeInTheDocument();
 
     const prosentUttakInput = utils.getByLabelText('Prosentandel uttak');
-    userEvent.paste(prosentUttakInput, '100');
+    userEvent.type(prosentUttakInput, '100');
 
     userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
@@ -81,11 +81,11 @@ describe('<PermisjonIndex>', () => {
     userEvent.selectOptions(utils.getByLabelText('Angi årsak'), 'SYKDOM_ANNEN_FORELDER');
 
     const fomDatoInput = utils.getByLabelText('F.o.m.');
-    userEvent.paste(fomDatoInput, '2022.05.20');
+    userEvent.type(fomDatoInput, '2022.05.20');
     fireEvent.blur(fomDatoInput);
 
     const tomDatoInput = utils.getByLabelText('T.o.m.');
-    userEvent.paste(tomDatoInput, '2022.06.20');
+    userEvent.type(tomDatoInput, '2022.06.20');
     fireEvent.blur(tomDatoInput);
 
     userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
@@ -127,11 +127,11 @@ describe('<PermisjonIndex>', () => {
     userEvent.selectOptions(utils.getByLabelText('Hva skal utsettes'), 'MØDREKVOTE');
 
     const fomDatoInput = utils.getByLabelText('F.o.m.');
-    userEvent.paste(fomDatoInput, '2022.05.20');
+    userEvent.type(fomDatoInput, '2022.05.20');
     fireEvent.blur(fomDatoInput);
 
     const tomDatoInput = utils.getByLabelText('T.o.m.');
-    userEvent.paste(tomDatoInput, '2022.06.20');
+    userEvent.type(tomDatoInput, '2022.06.20');
     fireEvent.blur(tomDatoInput);
 
     userEvent.selectOptions(utils.getByLabelText('Årsak til utsettelse'), 'ARBEID');
@@ -183,18 +183,18 @@ describe('<PermisjonIndex>', () => {
     userEvent.selectOptions(utils.getByLabelText('Hva skal graderes'), 'MØDREKVOTE');
 
     const fomDatoInput = utils.getByLabelText('F.o.m.');
-    userEvent.paste(fomDatoInput, '2022.05.20');
+    userEvent.type(fomDatoInput, '2022.05.20');
     fireEvent.blur(fomDatoInput);
 
     const tomDatoInput = utils.getByLabelText('T.o.m.');
-    userEvent.paste(tomDatoInput, '2022.06.20');
+    userEvent.type(tomDatoInput, '2022.06.20');
     fireEvent.blur(tomDatoInput);
 
     const prosentandelInput = utils.getAllByRole('textbox')[3];
     userEvent.type(prosentandelInput, '8023232323');
 
     const virksomhetsnummerInput = utils.getByLabelText('Virksomhetsnummer');
-    userEvent.paste(virksomhetsnummerInput, '802323232');
+    userEvent.type(virksomhetsnummerInput, '802323232');
 
     userEvent.selectOptions(utils.getByLabelText('Type arbeid'), 'ARBEIDSTAKER');
 
@@ -203,7 +203,7 @@ describe('<PermisjonIndex>', () => {
     expect(await screen.findByText('Prosentandel uttak')).toBeInTheDocument();
 
     const prosentInput = utils.getByLabelText('Prosentandel uttak');
-    userEvent.paste(prosentInput, '100');
+    userEvent.type(prosentInput, '100');
 
     await waitFor(() => expect(screen.queryByText('Feltet må fylles ut')).not.toBeInTheDocument());
 
@@ -242,11 +242,11 @@ describe('<PermisjonIndex>', () => {
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(3);
 
     const fomDatoInput = utils.getByLabelText('F.o.m.');
-    userEvent.paste(fomDatoInput, '2022.05.20');
+    userEvent.type(fomDatoInput, '2022.05.20');
     fireEvent.blur(fomDatoInput);
 
     const tomDatoInput = utils.getByLabelText('T.o.m.');
-    userEvent.paste(tomDatoInput, '2022.06.20');
+    userEvent.type(tomDatoInput, '2022.06.20');
     fireEvent.blur(tomDatoInput);
 
     userEvent.selectOptions(utils.getByLabelText('Årsak til opphold'), 'UTTAK_FORELDREPENGER_ANNEN_FORELDER');
@@ -262,11 +262,11 @@ describe('<PermisjonIndex>', () => {
     userEvent.selectOptions(utils.getByLabelText('Periodetype'), 'MØDREKVOTE');
 
     const fomDatoUttakInput = utils.getAllByLabelText('F.o.m.')[0];
-    userEvent.paste(fomDatoUttakInput, '2022.05.20');
+    userEvent.type(fomDatoUttakInput, '2022.05.20');
     fireEvent.blur(fomDatoUttakInput);
 
     const tomDatoUttakInput = utils.getAllByLabelText('T.o.m.')[0];
-    userEvent.paste(tomDatoUttakInput, '2022.06.20');
+    userEvent.type(tomDatoUttakInput, '2022.06.20');
     fireEvent.blur(tomDatoUttakInput);
 
     userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));

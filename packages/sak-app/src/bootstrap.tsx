@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import {
   Event, EventHint, init, Integrations,
 } from '@sentry/browser';
@@ -53,7 +53,9 @@ polyfill().then(() => {
     },
   });
 
-  render(
+  const root = createRoot(app);
+
+  root.render(
     <BrowserRouter basename="/fpsak/">
       <RestApiProvider>
         <RestApiErrorProvider>
@@ -61,6 +63,5 @@ polyfill().then(() => {
         </RestApiErrorProvider>
       </RestApiProvider>
     </BrowserRouter>,
-    app,
   );
 });

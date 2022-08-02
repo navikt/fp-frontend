@@ -24,11 +24,11 @@ describe('<AndreYtelserPapirsoknadIndex>', () => {
     expect(await screen.findByText('F.o.m.')).toBeInTheDocument();
 
     const fomInput = utils.getByLabelText('F.o.m.');
-    userEvent.paste(fomInput, '14.09.2022');
+    userEvent.type(fomInput, '14.09.2022');
     fireEvent.blur(fomInput);
 
     const tomInput = utils.getByLabelText('T.o.m.');
-    userEvent.paste(tomInput, '13.09.2022');
+    userEvent.type(tomInput, '13.09.2022');
     fireEvent.blur(tomInput);
 
     userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
@@ -37,7 +37,7 @@ describe('<AndreYtelserPapirsoknadIndex>', () => {
     expect(screen.getByText('Dato må være etter eller lik 14.09.2022')).toBeInTheDocument();
 
     userEvent.clear(tomInput);
-    userEvent.paste(tomInput, '15.09.2022');
+    userEvent.type(tomInput, '15.09.2022');
     fireEvent.blur(tomInput);
 
     userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
@@ -62,11 +62,11 @@ describe('<AndreYtelserPapirsoknadIndex>', () => {
     expect(await screen.findByText('F.o.m.')).toBeInTheDocument();
 
     const fomInput = utils.getByLabelText('F.o.m.');
-    userEvent.paste(fomInput, '14.09.2022');
+    userEvent.type(fomInput, '14.09.2022');
     fireEvent.blur(fomInput);
 
     const tomInput = utils.getByLabelText('T.o.m.');
-    userEvent.paste(tomInput, '15.09.2022');
+    userEvent.type(tomInput, '15.09.2022');
     fireEvent.blur(tomInput);
 
     userEvent.click(screen.getByText('Legg til periode'));
@@ -74,10 +74,10 @@ describe('<AndreYtelserPapirsoknadIndex>', () => {
     const datoInputs = await screen.findAllByRole('textbox');
     expect(datoInputs).toHaveLength(4);
 
-    userEvent.paste(datoInputs[2], '10.10.2022');
+    userEvent.type(datoInputs[2], '10.10.2022');
     fireEvent.blur(datoInputs[2]);
 
-    userEvent.paste(datoInputs[3], '11.10.2022');
+    userEvent.type(datoInputs[3], '11.10.2022');
     fireEvent.blur(datoInputs[3]);
 
     userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));

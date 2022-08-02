@@ -22,14 +22,14 @@ describe('<InntektsgivendeArbeidPapirsoknadIndex>', () => {
     expect(screen.getByText('Inntektsgivende arbeid i utlandet')).toBeInTheDocument();
 
     const arbeidsgiverInput = utils.getByLabelText('Arbeidsgiver');
-    userEvent.paste(arbeidsgiverInput, 'test-arbeidsgiver');
+    userEvent.type(arbeidsgiverInput, 'test-arbeidsgiver');
 
     const fomInput = utils.getByLabelText('Fra og med');
-    userEvent.paste(fomInput, '15.06.2022');
+    userEvent.type(fomInput, '15.06.2022');
     fireEvent.blur(fomInput);
 
     const tomInput = utils.getByLabelText('Til og med');
-    userEvent.paste(tomInput, '18.06.2022');
+    userEvent.type(tomInput, '18.06.2022');
     fireEvent.blur(tomInput);
 
     userEvent.selectOptions(utils.getByLabelText('Land'), 'AND');

@@ -147,10 +147,10 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
     userEvent.click(screen.getByText('Oppretthold vedtaket'));
 
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
-    userEvent.paste(begrunnelseInput, 'Dette er en begrunnelse');
+    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
     const fritekstInput = utils.getByLabelText('Fritekst til brev');
-    userEvent.paste(fritekstInput, 'Dette er en fritekst');
+    userEvent.type(fritekstInput, 'Dette er en fritekst');
 
     userEvent.click(screen.getByText('Forhåndsvis brev'));
 
@@ -199,10 +199,10 @@ describe('<VurderingFellesProsessStegInitPanel>', () => {
     userEvent.selectOptions(utils.getByLabelText('Hjemmel'), '14-17');
 
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
-    userEvent.paste(begrunnelseInput, 'Dette er en begrunnelse');
+    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
     const fritekstInput = utils.getByLabelText('Fritekst til brev');
-    userEvent.paste(fritekstInput, 'Dette er en fritekst');
+    userEvent.type(fritekstInput, 'Dette er en fritekst');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 

@@ -28,10 +28,10 @@ describe('<KlagevurderingProsessIndex>', () => {
     userEvent.selectOptions(utils.getByLabelText('Hjemmel'), '14-17');
 
     const vurderingInput = utils.getByLabelText('Begrunnelse');
-    userEvent.paste(vurderingInput, 'Dette er en begrunnelse');
+    userEvent.type(vurderingInput, 'Dette er en begrunnelse');
 
     const fritekstInput = utils.getByLabelText('Fritekst til brev');
-    userEvent.paste(fritekstInput, 'Dette er en fritekst');
+    userEvent.type(fritekstInput, 'Dette er en fritekst');
 
     userEvent.click(screen.getByText('Lagre'));
 

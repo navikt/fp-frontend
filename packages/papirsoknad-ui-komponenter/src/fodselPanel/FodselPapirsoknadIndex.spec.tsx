@@ -32,18 +32,18 @@ describe('<FodselPapirsoknadIndex>', () => {
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
 
     const fødtInput = utils.getByLabelText('Når ble barnet født?');
-    userEvent.paste(fødtInput, dayjs().subtract(10, 'day').format(DDMMYYYY_DATE_FORMAT));
+    userEvent.type(fødtInput, dayjs().subtract(10, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(fødtInput);
-    userEvent.paste(utils.getByLabelText('Antall barn'), '2');
+    userEvent.type(utils.getByLabelText('Antall barn'), '2');
 
     expect(screen.getByText('Rett til prematuruker vil kun sjekkes når du også oppgir termindato')).toBeInTheDocument();
 
     const termindatoInput = utils.getByLabelText('Termindato');
-    userEvent.paste(termindatoInput, '14.09.2022');
+    userEvent.type(termindatoInput, '14.09.2022');
     fireEvent.blur(termindatoInput);
 
     const utstedDatoInput = utils.getByLabelText('Utstedt dato fra terminbekreftelsen');
-    userEvent.paste(utstedDatoInput, '15.09.2022');
+    userEvent.type(utstedDatoInput, '15.09.2022');
     fireEvent.blur(utstedDatoInput);
 
     userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
@@ -86,13 +86,13 @@ describe('<FodselPapirsoknadIndex>', () => {
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
 
     const termindatoInput = utils.getByLabelText('Termindato');
-    userEvent.paste(termindatoInput, '13.09.2022');
+    userEvent.type(termindatoInput, '13.09.2022');
     fireEvent.blur(termindatoInput);
 
-    userEvent.paste(utils.getByLabelText('Antall barn'), '2');
+    userEvent.type(utils.getByLabelText('Antall barn'), '2');
 
     const utstedtDatoInput = utils.getByLabelText('Utstedt dato fra terminbekreftelsen');
-    userEvent.paste(utstedtDatoInput, '16.09.2022');
+    userEvent.type(utstedtDatoInput, '16.09.2022');
     fireEvent.blur(utstedtDatoInput);
 
     userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
@@ -100,7 +100,7 @@ describe('<FodselPapirsoknadIndex>', () => {
     expect(await screen.findByText(/Dato må være før eller lik/)).toBeInTheDocument();
 
     userEvent.clear(utstedtDatoInput);
-    userEvent.paste(utstedtDatoInput, '27.05.2022');
+    userEvent.type(utstedtDatoInput, '27.05.2022');
     fireEvent.blur(utstedtDatoInput);
 
     userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));

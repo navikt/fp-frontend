@@ -30,7 +30,7 @@ describe('<OpptjeningFaktaIndex>', () => {
     userEvent.click(screen.getAllByRole('radio')[0]);
 
     const begrunnelseInput = utils.getByLabelText('Begrunn endringene');
-    userEvent.paste(begrunnelseInput, 'Dette er en begrunnelse');
+    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Oppdater'));
 

@@ -21,7 +21,7 @@ describe('<LagreSoknadPapirsoknadIndex>', () => {
     expect(await screen.findByText('Ferdigstill registrering')).toBeInTheDocument();
 
     const textareaInput = utils.getByLabelText('Ved endring av opplysningene er begrunnelse obligatorisk');
-    userEvent.paste(textareaInput, 'Dette er en begrunnelse');
+    userEvent.type(textareaInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Verge/fullmektig skal knyttes til saken'));
 
@@ -45,7 +45,7 @@ describe('<LagreSoknadPapirsoknadIndex>', () => {
     expect(await screen.findByText('Ferdigstill registrering')).toBeInTheDocument();
 
     const textareaInput = utils.getByLabelText('Ved endring av opplysningene er begrunnelse obligatorisk');
-    userEvent.paste(textareaInput, 'Dette er en begrunnelse');
+    userEvent.type(textareaInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Søkers opplysningsplikt er ikke overholdt'));
 

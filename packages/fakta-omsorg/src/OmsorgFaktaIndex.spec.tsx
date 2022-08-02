@@ -48,7 +48,7 @@ describe('<OmsorgFaktaIndex>', () => {
 
     userEvent.click(screen.getAllByText('Søker har omsorg for barnet')[0]);
 
-    userEvent.paste(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -78,7 +78,7 @@ describe('<OmsorgFaktaIndex>', () => {
 
     userEvent.click(screen.getAllByText('Søker har omsorg for barnet')[1]);
 
-    userEvent.paste(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 

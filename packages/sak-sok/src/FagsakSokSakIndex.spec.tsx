@@ -13,7 +13,7 @@ describe('<FagsakSokSakIndex>', () => {
     expect(screen.getByText('Søk')).toBeDisabled();
 
     const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
-    userEvent.paste(nrInput, 'TEST');
+    userEvent.type(nrInput, 'TEST');
 
     expect(await screen.findByText('Søk')).toBeEnabled();
 
@@ -28,7 +28,7 @@ describe('<FagsakSokSakIndex>', () => {
     expect(screen.getByText('Søk')).toBeDisabled();
 
     const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
-    userEvent.paste(nrInput, '123');
+    userEvent.type(nrInput, '123');
 
     expect(await screen.findByText('Søk')).toBeEnabled();
 
@@ -55,7 +55,7 @@ describe('<FagsakSokSakIndex>', () => {
     expect(screen.getByText('Søk')).toBeDisabled();
 
     const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
-    userEvent.paste(nrInput, '123');
+    userEvent.type(nrInput, '123');
 
     expect(await screen.findByText('Søk')).toBeEnabled();
 

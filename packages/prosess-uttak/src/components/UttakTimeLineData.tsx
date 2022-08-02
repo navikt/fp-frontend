@@ -275,12 +275,16 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
                 )}
             {showDelPeriodeModal
                 && (
-                  /* @ts-ignore Fiks cannot be used as a JSX component */
                   <DelOppPeriodeModal
+                    // @ts-ignore
                     cancelEvent={this.hideModal}
+                    // @ts-ignore
                     showModal={showDelPeriodeModal}
+                    // @ts-ignore
                     periodeData={selectedItemData}
+                    // @ts-ignore
                     splitPeriod={this.splitPeriod}
+                    // @ts-ignore
                     intl={intl}
                   />
                 )}
@@ -303,17 +307,26 @@ export class UttakTimeLineData extends Component<OwnProps & WrappedComponentProp
           <VerticalSpacer twentyPx />
         </>
         )}
-        { /* @ts-ignore Fiks cannot be used as a JSX component */ }
         <UttakActivity
+          // @ts-ignore
           cancelSelectedActivity={callbackCancelSelectedActivity}
+          // @ts-ignore
           updateActivity={callbackUpdateActivity}
+          // @ts-ignore
           selectedItemData={selectedItemData}
+          // @ts-ignore
           readOnly={readOnly}
+          // @ts-ignore
           harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
+          // @ts-ignore
           alleKodeverk={alleKodeverk}
+          // @ts-ignore
           behandlingsresultat={behandlingsresultat}
+          // @ts-ignore
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          // @ts-ignore
           aarsakFilter={aarsakFilter}
+          // @ts-ignore
           reduxFormChange={formChange}
         />
       </TimeLineDataContainer>

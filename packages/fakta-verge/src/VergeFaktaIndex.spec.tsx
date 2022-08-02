@@ -20,21 +20,21 @@ describe('<VergeFaktaIndex>', () => {
     userEvent.selectOptions(utils.getByLabelText('Type verge'), 'ADVOKAT');
 
     const navnInput = utils.getByLabelText('Navn');
-    userEvent.paste(navnInput, 'Espen Utvikler');
+    userEvent.type(navnInput, 'Espen Utvikler');
 
     const organisasjonsnummerInput = utils.getByLabelText('Organisasjonsnummer');
-    userEvent.paste(organisasjonsnummerInput, '2322323233');
+    userEvent.type(organisasjonsnummerInput, '2322323233');
 
     const fomInput = utils.getByLabelText('Periode f.o.m.');
-    userEvent.paste(fomInput, '14.09.2022');
+    userEvent.type(fomInput, '14.09.2022');
     fireEvent.blur(fomInput);
 
     const tomInput = utils.getByLabelText('Periode t.o.m.');
-    userEvent.paste(tomInput, '24.09.2022');
+    userEvent.type(tomInput, '24.09.2022');
     fireEvent.blur(tomInput);
 
     const begrunnelseInput = utils.getByLabelText('Begrunn endringene');
-    userEvent.paste(begrunnelseInput, 'Dette er en begrunnelse');
+    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
     userEvent.click(screen.getByText('Bekreft og fortsett'));
 

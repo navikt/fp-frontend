@@ -19,7 +19,7 @@ describe('<FormkravProsessIndex>', () => {
     expect(screen.getByText('Vurder om klagen oppfyller formkravene')).toBeInTheDocument();
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.paste(vurderingInput, 'Dette er en vurdering');
+    userEvent.type(vurderingInput, 'Dette er en vurdering');
 
     userEvent.selectOptions(utils.getByLabelText('Vedtaket som er påklagd'), '1');
 

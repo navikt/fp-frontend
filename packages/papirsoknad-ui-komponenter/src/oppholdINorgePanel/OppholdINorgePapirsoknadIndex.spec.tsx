@@ -75,11 +75,11 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
     userEvent.selectOptions(utils.getByLabelText('Land'), 'AND');
 
     const fomDatoInput = utils.getByLabelText('F.o.m.');
-    userEvent.paste(fomDatoInput, dayjs().subtract(10, 'day').format(DDMMYYYY_DATE_FORMAT));
+    userEvent.type(fomDatoInput, dayjs().subtract(10, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(fomDatoInput);
 
     const tomDatoInput = utils.getByLabelText('T.o.m.');
-    userEvent.paste(tomDatoInput, dayjs().add(1, 'day').format(DDMMYYYY_DATE_FORMAT));
+    userEvent.type(tomDatoInput, dayjs().add(1, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(tomDatoInput);
 
     userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
@@ -87,7 +87,7 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
     expect(await screen.findByText(`Dato må være før eller lik ${dayjs().format(DDMMYYYY_DATE_FORMAT)}`)).toBeInTheDocument();
 
     userEvent.clear(tomDatoInput);
-    userEvent.paste(tomDatoInput, dayjs().subtract(11, 'day').format(DDMMYYYY_DATE_FORMAT));
+    userEvent.type(tomDatoInput, dayjs().subtract(11, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(tomDatoInput);
 
     userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
@@ -96,7 +96,7 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
     expect(screen.getByText(`Dato må være etter eller lik ${dayjs().subtract(10, 'day').format(DDMMYYYY_DATE_FORMAT)}`)).toBeInTheDocument();
 
     userEvent.clear(tomDatoInput);
-    userEvent.paste(tomDatoInput, dayjs().subtract(6, 'day').format(DDMMYYYY_DATE_FORMAT));
+    userEvent.type(tomDatoInput, dayjs().subtract(6, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(tomDatoInput);
 
     userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
@@ -138,11 +138,11 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
     userEvent.selectOptions(utils.getByLabelText('Land'), 'AND');
 
     const fomDatoInput = utils.getByLabelText('F.o.m.');
-    userEvent.paste(fomDatoInput, dayjs('2022-05-30').subtract(1, 'day').format(DDMMYYYY_DATE_FORMAT));
+    userEvent.type(fomDatoInput, dayjs('2022-05-30').subtract(1, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(fomDatoInput);
 
     const tomDatoInput = utils.getByLabelText('T.o.m.');
-    userEvent.paste(tomDatoInput, dayjs().add(10, 'day').format(DDMMYYYY_DATE_FORMAT));
+    userEvent.type(tomDatoInput, dayjs().add(10, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(tomDatoInput);
 
     userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
@@ -150,7 +150,7 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
     expect(await screen.findByText('Dato må være etter eller lik 30.05.2022')).toBeInTheDocument();
 
     userEvent.clear(fomDatoInput);
-    userEvent.paste(fomDatoInput, dayjs().add(11, 'day').format(DDMMYYYY_DATE_FORMAT));
+    userEvent.type(fomDatoInput, dayjs().add(11, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(fomDatoInput);
 
     userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
@@ -159,7 +159,7 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
     expect(screen.getByText(`Dato må være etter eller lik ${dayjs().add(11, 'day').format(DDMMYYYY_DATE_FORMAT)}`)).toBeInTheDocument();
 
     userEvent.clear(fomDatoInput);
-    userEvent.paste(fomDatoInput, dayjs().add(6, 'day').format(DDMMYYYY_DATE_FORMAT));
+    userEvent.type(fomDatoInput, dayjs().add(6, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(fomDatoInput);
 
     userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));

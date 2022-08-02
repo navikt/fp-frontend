@@ -146,10 +146,10 @@ describe('<VarselProsessStegInitPanel>', () => {
     userEvent.click(screen.getByText('Send varsel til søker'));
 
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
-    userEvent.paste(begrunnelseInput, 'Dette er en begrunnelse');
+    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
     const fritekstInput = utils.getByLabelText('Fritekst i brev');
-    userEvent.paste(fritekstInput, 'Dette er en fritekst');
+    userEvent.type(fritekstInput, 'Dette er en fritekst');
 
     userEvent.click(screen.getByText('Forhåndsvis'));
 

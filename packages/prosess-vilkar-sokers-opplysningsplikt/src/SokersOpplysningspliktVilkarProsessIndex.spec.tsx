@@ -20,7 +20,7 @@ describe('<SokersOpplysningspliktVilkarProsessIndex>', () => {
     expect(screen.getByText('Arbeidsgiver1 (1234)')).toBeInTheDocument();
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.paste(vurderingInput, 'Dette er en vurdering');
+    userEvent.type(vurderingInput, 'Dette er en vurdering');
 
     userEvent.click(screen.getAllByText(/Vilkåret er oppfylt/)[0]);
 

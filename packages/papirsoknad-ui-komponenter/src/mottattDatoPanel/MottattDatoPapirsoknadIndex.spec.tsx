@@ -21,7 +21,7 @@ describe('<MottattDatoPapirsoknadIndex>', () => {
     expect(await screen.findAllByText('Mottatt dato')).toHaveLength(2);
 
     const datoInput = utils.getByLabelText('Mottatt dato');
-    userEvent.paste(datoInput, '28.05.2050');
+    userEvent.type(datoInput, '28.05.2050');
     fireEvent.blur(datoInput);
 
     userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
@@ -30,7 +30,7 @@ describe('<MottattDatoPapirsoknadIndex>', () => {
     expect(await screen.findByText(`Dato må være før eller lik ${iDag}`)).toBeInTheDocument();
 
     userEvent.clear(datoInput);
-    userEvent.paste(datoInput, '26.05.2022');
+    userEvent.type(datoInput, '26.05.2022');
     fireEvent.blur(datoInput);
 
     userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));

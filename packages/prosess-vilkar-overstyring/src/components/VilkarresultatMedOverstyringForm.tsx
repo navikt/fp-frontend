@@ -57,7 +57,7 @@ const getCustomVilkarText = (
   if (isBehandlingRevurderingFortsattMedlemskap) {
     return {
       id: erOppfylt ? 'VilkarresultatMedOverstyringForm.VilkarOppfyltRevurderingFom' : 'VilkarresultatMedOverstyringForm.VilkarIkkeOppfyltRevurderingFom',
-      values: { fom: moment(medlemskapFom).format(DDMMYYYY_DATE_FORMAT), b: (chunks) => <b>{chunks}</b> },
+      values: { fom: moment(medlemskapFom).format(DDMMYYYY_DATE_FORMAT), b: (chunks: any) => <b>{chunks}</b> },
     };
   }
   return undefined;

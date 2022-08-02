@@ -54,18 +54,18 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
     expect(await screen.findByText('Navn på foretaket')).toBeInTheDocument();
 
     const navnPåForetaketInput = utils.getByLabelText('Navn på foretaket');
-    userEvent.paste(navnPåForetaketInput, 'Bedrift1');
+    userEvent.type(navnPåForetaketInput, 'Bedrift1');
 
     userEvent.click(screen.getAllByText('Nei')[0]);
 
     userEvent.selectOptions(utils.getByLabelText('Hvilket land er virksomheten registrert i?'), 'AND');
 
     const fraOgMedInput = utils.getByLabelText('Fra og med');
-    userEvent.paste(fraOgMedInput, '2022-06-01');
+    userEvent.type(fraOgMedInput, '2022-06-01');
     fireEvent.blur(fraOgMedInput);
 
     const tilOgMedInput = utils.getByLabelText('Til og med');
-    userEvent.paste(tilOgMedInput, '2022-06-03');
+    userEvent.type(tilOgMedInput, '2022-06-03');
     fireEvent.blur(tilOgMedInput);
 
     userEvent.click(screen.getByText('Fiske'));
@@ -75,18 +75,18 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
     userEvent.click(screen.getByText('Varig endring i næring'));
 
     const gjeldendeFomInput = utils.getByLabelText('Gjeldende f.o.m.');
-    userEvent.paste(gjeldendeFomInput, '2022-05-03');
+    userEvent.type(gjeldendeFomInput, '2022-05-03');
     fireEvent.blur(gjeldendeFomInput);
 
-    userEvent.paste(utils.getByLabelText('Beskriv endringen i næring'), 'Dette er en endring');
+    userEvent.type(utils.getByLabelText('Beskriv endringen i næring'), 'Dette er en endring');
 
-    userEvent.paste(utils.getByLabelText('Årsinntekt'), '500000');
+    userEvent.type(utils.getByLabelText('Årsinntekt'), '500000');
 
     userEvent.click(screen.getAllByText('Ja')[2]);
 
-    userEvent.paste(utils.getByLabelText('Navn på regnskapsfører/revisor?'), 'Espen Utvikler');
+    userEvent.type(utils.getByLabelText('Navn på regnskapsfører/revisor?'), 'Espen Utvikler');
 
-    userEvent.paste(utils.getByLabelText('Telefonnummer til regnskapsfører/revisor?'), '555454534');
+    userEvent.type(utils.getByLabelText('Telefonnummer til regnskapsfører/revisor?'), '555454534');
 
     userEvent.click(screen.getByText('Ja, har nære venner eller er i familie tilknyttet næringen'));
 
