@@ -46,11 +46,11 @@ describe('<OmsorgFaktaIndex>', () => {
 
     expect(screen.getByText('Søker har oppgitt å ha omsorg for barnet')).toBeInTheDocument();
 
-    userEvent.click(screen.getAllByText('Søker har omsorg for barnet')[0]);
+    await userEvent.click(screen.getAllByText('Søker har omsorg for barnet')[0]);
 
-    userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
@@ -76,23 +76,23 @@ describe('<OmsorgFaktaIndex>', () => {
 
     expect(screen.getByText('Søker har oppgitt å ha omsorg for barnet')).toBeInTheDocument();
 
-    userEvent.click(screen.getAllByText('Søker har omsorg for barnet')[1]);
+    await userEvent.click(screen.getAllByText('Søker har omsorg for barnet')[1]);
 
-    userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
 
     const periodeFra = screen.getByText('Fra og med dato');
-    userEvent.type(periodeFra, '01.02.2020');
+    await userEvent.type(periodeFra, '01.02.2020');
     fireEvent.blur(periodeFra);
 
     const periodeTil = screen.getByText('Til og med dato');
-    userEvent.type(periodeTil, '01.03.2020');
+    await userEvent.type(periodeTil, '01.03.2020');
     fireEvent.blur(periodeTil);
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {

@@ -32,9 +32,9 @@ describe('<AdopsjonFaktaIndex>', () => {
     expect(screen.getByText('1')).toBeInTheDocument();
 
     const begrunnValgInput = utils.getByLabelText('Begrunn endringene');
-    userEvent.type(begrunnValgInput, 'Dette er en begrunnelse');
+    await userEvent.type(begrunnValgInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
@@ -60,12 +60,12 @@ describe('<AdopsjonFaktaIndex>', () => {
 
     expect(screen.queryByText('Ektefelles/samboers barn')).not.toBeInTheDocument();
     expect(screen.getByText('Mann adopterer')).toBeInTheDocument();
-    userEvent.click(screen.getByText('Adopterer alene'));
+    await userEvent.click(screen.getByText('Adopterer alene'));
 
     const begrunnValgInput = utils.getByLabelText('Begrunn endringene');
-    userEvent.type(begrunnValgInput, 'Dette er en begrunnelse');
+    await userEvent.type(begrunnValgInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
@@ -95,12 +95,12 @@ describe('<AdopsjonFaktaIndex>', () => {
 
     expect(screen.queryByText('Mann adopterer')).not.toBeInTheDocument();
     expect(screen.getAllByText('Ektefelles/samboers barn')).toHaveLength(2);
-    userEvent.click(screen.getByText('Ikke ektefelles/samboers barn'));
+    await userEvent.click(screen.getByText('Ikke ektefelles/samboers barn'));
 
     const begrunnValgInput = utils.getByLabelText('Begrunn endringene');
-    userEvent.type(begrunnValgInput, 'Dette er en begrunnelse');
+    await userEvent.type(begrunnValgInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{

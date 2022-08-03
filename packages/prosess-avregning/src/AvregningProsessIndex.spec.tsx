@@ -22,11 +22,11 @@ describe('<AvregningProsessIndex>', () => {
     expect(screen.getByText('−26 486')).toBeInTheDocument();
 
     const begrunnelseInput = utils.getByLabelText('Begrunn hvordan feilutbetalingen skal behandles videre');
-    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Avvent samordning, ingen tilbakekreving'));
+    await userEvent.click(screen.getByText('Avvent samordning, ingen tilbakekreving'));
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -45,16 +45,16 @@ describe('<AvregningProsessIndex>', () => {
     expect(await screen.findByText('Simulering')).toBeInTheDocument();
 
     const begrunnelseInput = utils.getByLabelText('Begrunn hvordan feilutbetalingen skal behandles videre');
-    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Opprett tilbakekreving, send varsel'));
+    await userEvent.click(screen.getByText('Opprett tilbakekreving, send varsel'));
 
     expect(await screen.findByText('Send varsel om tilbakekreving')).toBeInTheDocument();
 
     const fritekstVarselInput = utils.getByLabelText('Fritekst i varselet');
-    userEvent.type(fritekstVarselInput, 'Dette er en fritekst');
+    await userEvent.type(fritekstVarselInput, 'Dette er en fritekst');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -70,14 +70,14 @@ describe('<AvregningProsessIndex>', () => {
 
     expect(await screen.findByText('Simulering')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Vis flere detaljer'));
+    await userEvent.click(screen.getByText('Vis flere detaljer'));
 
     expect(await screen.findByText('Foreldrepenger nytt beløp')).toBeInTheDocument();
     expect(screen.getByText('52 619')).toBeInTheDocument();
     expect(screen.getByText('Foreldrepenger tidligere utbetalt')).toBeInTheDocument();
     expect(screen.getByText('61 795')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Vis færre detaljer'));
+    await userEvent.click(screen.getByText('Vis færre detaljer'));
 
     expect(await screen.findByText('Vis flere detaljer')).toBeInTheDocument();
   });

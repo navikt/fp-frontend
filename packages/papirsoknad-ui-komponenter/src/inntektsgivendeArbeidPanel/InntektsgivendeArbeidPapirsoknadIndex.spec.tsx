@@ -22,19 +22,19 @@ describe('<InntektsgivendeArbeidPapirsoknadIndex>', () => {
     expect(screen.getByText('Inntektsgivende arbeid i utlandet')).toBeInTheDocument();
 
     const arbeidsgiverInput = utils.getByLabelText('Arbeidsgiver');
-    userEvent.type(arbeidsgiverInput, 'test-arbeidsgiver');
+    await userEvent.type(arbeidsgiverInput, 'test-arbeidsgiver');
 
     const fomInput = utils.getByLabelText('Fra og med');
-    userEvent.type(fomInput, '15.06.2022');
+    await userEvent.type(fomInput, '15.06.2022');
     fireEvent.blur(fomInput);
 
     const tomInput = utils.getByLabelText('Til og med');
-    userEvent.type(tomInput, '18.06.2022');
+    await userEvent.type(tomInput, '18.06.2022');
     fireEvent.blur(tomInput);
 
-    userEvent.selectOptions(utils.getByLabelText('Land'), 'AND');
+    await userEvent.selectOptions(utils.getByLabelText('Land'), 'AND');
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

@@ -20,21 +20,21 @@ describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
     expect(screen.getByText('Vilkåret er oppfylt')).toBeInTheDocument();
     expect(screen.queryByText('Manuell overstyring av automatisk vurdering')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getAllByRole('img')[1]);
+    await userEvent.click(screen.getAllByRole('img')[1]);
 
     expect(await screen.findByText('Manuell overstyring av automatisk vurdering')).toBeInTheDocument();
     expect(screen.queryByText('Avslagsårsak')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByText(/ikke/));
+    await userEvent.click(screen.getByText(/ikke/));
 
     expect(await screen.findByText('Avslagsårsak')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), 'AVSLAG_TEST_1');
+    await userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), 'AVSLAG_TEST_1');
 
     const vurderingInput = utils.getByLabelText('Begrunnelse');
-    userEvent.type(vurderingInput, 'Dette er en begrunnelse');
+    await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft overstyring'));
+    await userEvent.click(screen.getByText('Bekreft overstyring'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -51,11 +51,11 @@ describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
 
     expect(await screen.findByText('Fødsel')).toBeInTheDocument();
 
-    userEvent.click(screen.getAllByRole('img')[1]);
+    await userEvent.click(screen.getAllByRole('img')[1]);
 
     expect(await screen.findByText('Manuell overstyring av automatisk vurdering')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Avbryt'));
+    await userEvent.click(screen.getByText('Avbryt'));
 
     expect(await screen.getAllByRole('img')).toHaveLength(2);
   });
@@ -69,25 +69,25 @@ describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
     expect(screen.getByText('Vilkåret er oppfylt')).toBeInTheDocument();
     expect(screen.queryByText('Manuell overstyring av automatisk vurdering')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getAllByRole('img')[1]);
+    await userEvent.click(screen.getAllByRole('img')[1]);
 
     expect(await screen.findByText('Manuell overstyring av automatisk vurdering')).toBeInTheDocument();
     expect(screen.queryByText('Avslagsårsak')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByText(/ikke/));
+    await userEvent.click(screen.getByText(/ikke/));
 
     expect(await screen.findByText('Avslagsårsak')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), 'AVSLAG_TEST_1');
+    await userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), 'AVSLAG_TEST_1');
 
     const opphørDatoInput = utils.getByLabelText('Dato for opphør av medlemskapet');
-    userEvent.type(opphørDatoInput, '20.12.2021');
+    await userEvent.type(opphørDatoInput, '20.12.2021');
     fireEvent.blur(opphørDatoInput);
 
     const vurderingInput = utils.getByLabelText('Begrunnelse');
-    userEvent.type(vurderingInput, 'Dette er en begrunnelse');
+    await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft overstyring'));
+    await userEvent.click(screen.getByText('Bekreft overstyring'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

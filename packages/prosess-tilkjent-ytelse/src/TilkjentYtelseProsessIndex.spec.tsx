@@ -12,7 +12,7 @@ describe('<TilkjentYtelseProsessIndex>', () => {
 
     expect(await screen.findByText('Tilkjent ytelse')).toBeInTheDocument();
 
-    userEvent.click(screen.getByAltText('Åpne info om første periode'));
+    await userEvent.click(screen.getByAltText('Åpne info om første periode'));
 
     expect(await screen.findByText('Detaljer for valgt periode')).toBeInTheDocument();
     expect(screen.getByText('01.01.2019 - 10.01.2019')).toBeInTheDocument();
@@ -31,12 +31,12 @@ describe('<TilkjentYtelseProsessIndex>', () => {
       + 'Vurder om beløpet som er feilutbetalt skal tilbakekreves fra søker eller om dette er en sak mellom '
       + 'arbeidstaker og arbeidsgiver.')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Tilbakekrev fra søker'));
+    await userEvent.click(screen.getByText('Tilbakekrev fra søker'));
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.type(vurderingInput, 'Dette er en vurdering');
+    await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

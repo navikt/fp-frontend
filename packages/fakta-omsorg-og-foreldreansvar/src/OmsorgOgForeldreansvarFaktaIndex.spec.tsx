@@ -19,7 +19,7 @@ describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
 
     expect(screen.getByText('Opplysninger om omsorg')).toBeInTheDocument();
     const omsorgsovertakelseInput = utils.getByLabelText('Dato for omsorgsovertakelse');
-    userEvent.type(omsorgsovertakelseInput, '14.09.2022');
+    await userEvent.type(omsorgsovertakelseInput, '14.09.2022');
     fireEvent.blur(omsorgsovertakelseInput);
     expect(screen.getByText('Antall barn')).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();
@@ -40,7 +40,7 @@ describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
     expect(screen.getByText('01.01.2021')).toBeInTheDocument();
 
     expect(screen.getAllByText('Velg vilkår som skal anvendes')[1]).toBeInTheDocument();
-    userEvent.selectOptions(screen.getByRole('combobox', { hidden: true }), 'FP_VK_5');
+    await userEvent.selectOptions(screen.getByRole('combobox', { hidden: true }), 'FP_VK_5');
 
     expect(await screen.findByText(
       'Dersom mor dør i forbindelse med fødselen eller omsorgsovertakelsen, har faren rett til '
@@ -48,9 +48,9 @@ describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
     )).toBeInTheDocument();
 
     const begrunnValgInput = utils.getByLabelText('Begrunn valg av vilkår');
-    userEvent.type(begrunnValgInput, 'Dette er en begrunnelse');
+    await userEvent.type(begrunnValgInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -72,10 +72,10 @@ describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
     expect(screen.getByText('Foreldreansvar og omsorg')).toBeInTheDocument();
     expect(screen.queryByText('Opplysninger om omsorg')).not.toBeInTheDocument();
     const omsorgsovertakelseInput = utils.getByLabelText('Dato for omsorgsovertakelse');
-    userEvent.type(omsorgsovertakelseInput, '14.09.2022');
+    await userEvent.type(omsorgsovertakelseInput, '14.09.2022');
     fireEvent.blur(omsorgsovertakelseInput);
     const foreldreansvarInput = utils.getByLabelText('Dato for foreldreansvar');
-    userEvent.type(foreldreansvarInput, '20.09.2022');
+    await userEvent.type(foreldreansvarInput, '20.09.2022');
     fireEvent.blur(foreldreansvarInput);
     expect(screen.getByText('Antall barn')).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();
@@ -94,9 +94,9 @@ describe('<OmsorgOgForeldreansvarFaktaIndex>', () => {
     expect(screen.getByText('01.01.2021')).toBeInTheDocument();
 
     const begrunnValgInput = utils.getByLabelText('Begrunn endringene');
-    userEvent.type(begrunnValgInput, 'Dette er en begrunnelse');
+    await userEvent.type(begrunnValgInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

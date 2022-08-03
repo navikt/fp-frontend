@@ -104,7 +104,7 @@ describe('<BehandlingPaVent>', () => {
 
     expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Lukk'));
+    await userEvent.click(screen.getByText('Lukk'));
 
     await waitFor(() => expect(screen.queryByText('Behandlingen settes på vent med frist')).not.toBeInTheDocument());
   });

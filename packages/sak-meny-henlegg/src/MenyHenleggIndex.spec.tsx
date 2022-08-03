@@ -26,12 +26,12 @@ describe('<MenyHenleggIndex>', () => {
     expect(screen.queryByText('Klagen er trukket')).not.toBeInTheDocument();
     expect(screen.queryByText('Innsynskrav er trukket')).not.toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Velg årsak'), 'HENLAGT_SØKNAD_TRUKKET');
+    await userEvent.selectOptions(utils.getByLabelText('Velg årsak'), 'HENLAGT_SØKNAD_TRUKKET');
 
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
-    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getAllByText('Henlegg behandling')[1]);
+    await userEvent.click(screen.getAllByText('Henlegg behandling')[1]);
 
     await waitFor(() => expect(henleggBehandling).toHaveBeenCalledTimes(1));
     expect(henleggBehandling).toHaveBeenNthCalledWith(1, {
@@ -49,7 +49,7 @@ describe('<MenyHenleggIndex>', () => {
     render(<ForFørstegangssøknad lukkModal={avbryt} />);
     expect(await screen.findByText('Avbryt')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Avbryt'));
+    await userEvent.click(screen.getByText('Avbryt'));
 
     await waitFor(() => expect(avbryt).toHaveBeenCalledTimes(1));
   });
@@ -123,10 +123,10 @@ describe('<MenyHenleggIndex>', () => {
     const utils = render(<ForFørstegangssøknad forhandsvisHenleggBehandling={forhandsvisHenleggBehandling} />);
     expect(await screen.findAllByText('Henlegg behandling')).toHaveLength(2);
 
-    userEvent.selectOptions(utils.getByLabelText('Velg årsak'), 'HENLAGT_SØKNAD_TRUKKET');
+    await userEvent.selectOptions(utils.getByLabelText('Velg årsak'), 'HENLAGT_SØKNAD_TRUKKET');
 
     expect(await screen.findByText('Informer søker')).toBeInTheDocument();
-    userEvent.click(screen.getByText('Forhåndsvis brev'));
+    await userEvent.click(screen.getByText('Forhåndsvis brev'));
 
     await waitFor(() => expect(forhandsvisHenleggBehandling).toHaveBeenCalledTimes(1));
     expect(forhandsvisHenleggBehandling).toHaveBeenNthCalledWith(1, true, {
@@ -143,7 +143,7 @@ describe('<MenyHenleggIndex>', () => {
     const utils = render(<ForFørstegangssøknad forhandsvisHenleggBehandling={forhandsvisHenleggBehandling} />);
     expect(await screen.findAllByText('Henlegg behandling')).toHaveLength(2);
 
-    userEvent.selectOptions(utils.getByLabelText('Velg årsak'), 'HENLAGT_SØKNAD_MANGLER');
+    await userEvent.selectOptions(utils.getByLabelText('Velg årsak'), 'HENLAGT_SØKNAD_MANGLER');
 
     await waitFor(() => expect(screen.queryByText('Informer søker')).not.toBeInTheDocument());
   });

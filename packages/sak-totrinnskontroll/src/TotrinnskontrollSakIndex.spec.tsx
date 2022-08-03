@@ -20,13 +20,13 @@ describe('<TotrinnskontrollSakIndex>', () => {
     expect(screen.getByText('Send til saksbehandler')).toBeEnabled();
 
     const checkboxes = screen.getAllByText('Godkjent');
-    userEvent.click(checkboxes[0]);
-    userEvent.click(checkboxes[1]);
+    await userEvent.click(checkboxes[0]);
+    await userEvent.click(checkboxes[1]);
 
     expect(await screen.findByText('Godkjenn vedtaket')).toBeEnabled();
     expect(screen.getByText('Send til saksbehandler')).toBeDisabled();
 
-    userEvent.click(screen.getByText('Godkjenn vedtaket'));
+    await userEvent.click(screen.getByText('Godkjenn vedtaket'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -61,18 +61,18 @@ describe('<TotrinnskontrollSakIndex>', () => {
     expect(screen.getByText('Formkrav klage NFP')).toBeInTheDocument();
     expect(screen.getByText('Klageresultat Vedtaksinstans')).toBeInTheDocument();
 
-    userEvent.click(screen.getAllByText('Godkjent')[0]);
-    userEvent.click(screen.getAllByText('Vurder på nytt')[1]);
+    await userEvent.click(screen.getAllByText('Godkjent')[0]);
+    await userEvent.click(screen.getAllByText('Vurder på nytt')[1]);
 
     expect(await screen.findByText('Årsak')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Feil fakta'));
-    userEvent.click(screen.getByText('Feil lovanvendelse'));
+    await userEvent.click(screen.getByText('Feil fakta'));
+    await userEvent.click(screen.getByText('Feil lovanvendelse'));
 
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
-    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Send til saksbehandler'));
+    await userEvent.click(screen.getByText('Send til saksbehandler'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -110,12 +110,12 @@ describe('<TotrinnskontrollSakIndex>', () => {
     expect(screen.getByText('Formkrav klage NFP')).toBeInTheDocument();
     expect(screen.getByText('Klageresultat Vedtaksinstans')).toBeInTheDocument();
 
-    userEvent.click(screen.getAllByText('Godkjent')[0]);
-    userEvent.click(screen.getAllByText('Vurder på nytt')[1]);
+    await userEvent.click(screen.getAllByText('Godkjent')[0]);
+    await userEvent.click(screen.getAllByText('Vurder på nytt')[1]);
 
     expect(await screen.findByText('Årsak')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Send til saksbehandler'));
+    await userEvent.click(screen.getByText('Send til saksbehandler'));
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
 

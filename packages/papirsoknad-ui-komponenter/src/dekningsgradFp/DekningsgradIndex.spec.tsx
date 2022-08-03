@@ -15,13 +15,13 @@ describe('<BekreftelsePanel>', () => {
 
     expect(await screen.findByText('Dekningsgrad')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('80 prosent'));
+    await userEvent.click(screen.getByText('80 prosent'));
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

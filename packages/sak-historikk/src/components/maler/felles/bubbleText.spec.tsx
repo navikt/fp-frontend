@@ -58,7 +58,7 @@ describe('<BubbleText>', () => {
       </RawIntlProvider>,
     );
 
-    userEvent.click(screen.getByTitle('Åpne tekstfelt'));
+    await userEvent.click(screen.getByTitle('Åpne tekstfelt'));
 
     expect(await screen.findByTitle('Lukke tekstfelt')).toBeInTheDocument();
   });

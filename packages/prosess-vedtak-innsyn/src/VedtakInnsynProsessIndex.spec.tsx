@@ -26,7 +26,7 @@ describe('<VedtakInnsynProsessIndex>', () => {
     expect(screen.getByText('Dette er et dokument')).toBeInTheDocument();
     expect(screen.queryByText('Fritekst i brev')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Forhåndsvis brev'));
+    await userEvent.click(screen.getByText('Forhåndsvis brev'));
 
     await waitFor(() => expect(forhåndsvise).toHaveBeenCalledTimes(1));
     expect(forhåndsvise).toHaveBeenNthCalledWith(1, {
@@ -36,7 +36,7 @@ describe('<VedtakInnsynProsessIndex>', () => {
       mottaker: '',
     });
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -59,9 +59,9 @@ describe('<VedtakInnsynProsessIndex>', () => {
     expect(screen.getByText('Dette er utført')).toBeInTheDocument();
 
     const vurderingInput = utils.getByLabelText('Fritekst i brev');
-    userEvent.type(vurderingInput, 'Dette er en fritekst');
+    await userEvent.type(vurderingInput, 'Dette er en fritekst');
 
-    userEvent.click(screen.getByText('Forhåndsvis brev'));
+    await userEvent.click(screen.getByText('Forhåndsvis brev'));
 
     await waitFor(() => expect(forhåndsvise).toHaveBeenCalledTimes(1));
     expect(forhåndsvise).toHaveBeenNthCalledWith(1, {
@@ -71,7 +71,7 @@ describe('<VedtakInnsynProsessIndex>', () => {
       mottaker: '',
     });
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -94,7 +94,7 @@ describe('<VedtakInnsynProsessIndex>', () => {
 
     expect(screen.getByText('Dette er en vurdering')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Vis vedtaksbrev'));
+    await userEvent.click(screen.getByText('Vis vedtaksbrev'));
 
     await waitFor(() => expect(forhåndsvise).toHaveBeenCalledTimes(1));
     expect(forhåndsvise).toHaveBeenNthCalledWith(1, {

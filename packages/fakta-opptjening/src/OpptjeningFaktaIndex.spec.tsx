@@ -27,17 +27,17 @@ describe('<OpptjeningFaktaIndex>', () => {
     expect(screen.getByText('Avbryt')).toBeEnabled();
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    userEvent.click(screen.getAllByRole('radio')[0]);
+    await userEvent.click(screen.getAllByRole('radio')[0]);
 
     const begrunnelseInput = utils.getByLabelText('Begrunn endringene');
-    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Oppdater'));
+    await userEvent.click(screen.getByText('Oppdater'));
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
     expect(screen.queryByText('Detaljer for valgt aktivitet')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -62,15 +62,15 @@ describe('<OpptjeningFaktaIndex>', () => {
     expect(screen.getByText('Detaljer for valgt aktivitet')).toBeInTheDocument();
     expect(screen.getAllByText('Næring')).toHaveLength(2);
 
-    userEvent.click(screen.getByAltText('Forrige periode'));
+    await userEvent.click(screen.getByAltText('Forrige periode'));
 
     expect(await screen.findAllByText('Arbeid')).toHaveLength(2);
 
-    userEvent.click(screen.getByAltText('Neste periode'));
+    await userEvent.click(screen.getByAltText('Neste periode'));
 
     expect(await screen.findAllByText('Næring')).toHaveLength(2);
 
-    userEvent.click(screen.getByAltText('Åpne info om første periode'));
+    await userEvent.click(screen.getByAltText('Åpne info om første periode'));
 
     expect(await screen.findByText('Næring')).toBeInTheDocument();
   });

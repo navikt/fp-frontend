@@ -20,19 +20,19 @@ describe('<SakenFaktaIndex>', () => {
 
     expect(screen.queryByText('Innhentelse av dokumentasjon')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByAltText('Endre perioden'));
+    await userEvent.click(screen.getByAltText('Endre perioden'));
 
     expect(screen.getByText('Lagre')).toBeDisabled();
 
-    userEvent.click(screen.getByText('Bosatt utland'));
+    await userEvent.click(screen.getByText('Bosatt utland'));
 
     expect(await screen.findByText('Lagre')).toBeEnabled();
 
-    userEvent.click(screen.getByText('Lagre'));
+    await userEvent.click(screen.getByText('Lagre'));
 
     expect(await screen.findByText('Utland endres, ved behov flytt saken til riktig enhet.')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -52,12 +52,12 @@ describe('<SakenFaktaIndex>', () => {
     )).toBeInTheDocument();
     expect(screen.getByText('Innhentelse av dokumentasjon')).toBeInTheDocument();
 
-    userEvent.click(screen.getAllByText('Dokumentasjon vil bli innhentet')[0]);
+    await userEvent.click(screen.getAllByText('Dokumentasjon vil bli innhentet')[0]);
 
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
-    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -77,9 +77,9 @@ describe('<SakenFaktaIndex>', () => {
     )).toBeInTheDocument();
 
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
-    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(screen.getAllByText('Feltet må fylles ut')[0]).toBeInTheDocument());
 

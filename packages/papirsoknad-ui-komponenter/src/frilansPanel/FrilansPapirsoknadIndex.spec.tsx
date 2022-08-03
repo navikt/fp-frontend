@@ -17,13 +17,13 @@ describe('<FrilansPapirsoknadIndex>', () => {
 
     expect(await screen.findByText('Frilanser')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Nei'));
+    await userEvent.click(screen.getByText('Nei'));
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -40,25 +40,25 @@ describe('<FrilansPapirsoknadIndex>', () => {
 
     expect(await screen.findByText('Frilanser')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Ja'));
+    await userEvent.click(screen.getByText('Ja'));
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(5);
 
     const fomInput = utils.getByLabelText('F.o.m.');
-    userEvent.type(fomInput, '27.05.2022');
+    await userEvent.type(fomInput, '27.05.2022');
     fireEvent.blur(fomInput);
 
     const tomInput = utils.getByLabelText('T.o.m.');
-    userEvent.type(tomInput, '15.06.2022');
+    await userEvent.type(tomInput, '15.06.2022');
     fireEvent.blur(tomInput);
 
-    userEvent.click(screen.getAllByText('Nei')[1]);
-    userEvent.click(screen.getAllByText('Ja')[2]);
-    userEvent.click(screen.getAllByText('Nei')[3]);
+    await userEvent.click(screen.getAllByText('Nei')[1]);
+    await userEvent.click(screen.getAllByText('Ja')[2]);
+    await userEvent.click(screen.getAllByText('Nei')[3]);
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -87,42 +87,42 @@ describe('<FrilansPapirsoknadIndex>', () => {
 
     expect(await screen.findByText('Frilanser')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Ja'));
+    await userEvent.click(screen.getByText('Ja'));
 
     const fomInput = utils.getByLabelText('F.o.m.');
-    userEvent.type(fomInput, '27.05.2022');
+    await userEvent.type(fomInput, '27.05.2022');
     fireEvent.blur(fomInput);
 
     const tomInput = utils.getByLabelText('T.o.m.');
-    userEvent.type(tomInput, '15.06.2022');
+    await userEvent.type(tomInput, '15.06.2022');
     fireEvent.blur(tomInput);
 
-    userEvent.click(screen.getAllByText('Nei')[1]);
-    userEvent.click(screen.getAllByText('Ja')[2]);
-    userEvent.click(screen.getAllByText('Ja')[3]);
+    await userEvent.click(screen.getAllByText('Nei')[1]);
+    await userEvent.click(screen.getAllByText('Ja')[2]);
+    await userEvent.click(screen.getAllByText('Ja')[3]);
 
     expect(await screen.findByText('Oppgi periode')).toBeInTheDocument();
 
     const oppdragFomInput = utils.getAllByLabelText('F.o.m.')[1];
-    userEvent.type(oppdragFomInput, '26.05.2022');
+    await userEvent.type(oppdragFomInput, '26.05.2022');
     fireEvent.blur(oppdragFomInput);
 
     const oppdragTomInput = utils.getAllByLabelText('T.o.m.')[1];
-    userEvent.type(oppdragTomInput, '15.06.2022');
+    await userEvent.type(oppdragTomInput, '15.06.2022');
     fireEvent.blur(oppdragTomInput);
 
     const oppdragsgiverInput = utils.getByLabelText('Oppdragsgiver');
-    userEvent.type(oppdragsgiverInput, 'test-oppdragsgiver');
+    await userEvent.type(oppdragsgiverInput, 'test-oppdragsgiver');
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     expect(await screen.findByText('F.o.m må være lik eller etter dato for første periode med frilansvirksomhet')).toBeInTheDocument();
 
     userEvent.clear(oppdragFomInput);
-    userEvent.type(oppdragFomInput, '28.05.2022');
+    await userEvent.type(oppdragFomInput, '28.05.2022');
     fireEvent.blur(oppdragFomInput);
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

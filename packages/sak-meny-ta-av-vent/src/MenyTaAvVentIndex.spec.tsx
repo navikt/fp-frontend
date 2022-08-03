@@ -17,7 +17,7 @@ describe('<MenyTaAvVentIndex>', () => {
 
     expect(await screen.findByText('Ta behandlingen av vent?')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(taBehandlingAvVent).toHaveBeenCalledTimes(1));
     expect(lukkModal).toHaveBeenCalledTimes(1);

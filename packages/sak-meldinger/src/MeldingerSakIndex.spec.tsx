@@ -16,9 +16,9 @@ describe('<MeldingerSakIndex>', () => {
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
     const begrunnelseInput = utils.getByLabelText('Liste over dokumenter (skriv ett dokument pr. linje)');
-    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Send brev'));
+    await userEvent.click(screen.getByText('Send brev'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -32,7 +32,7 @@ describe('<MeldingerSakIndex>', () => {
     render(<Default lagre={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Send brev'));
+    await userEvent.click(screen.getByText('Send brev'));
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
     expect(lagre).toHaveBeenCalledTimes(0);
@@ -43,10 +43,10 @@ describe('<MeldingerSakIndex>', () => {
     const utils = render(<Default lagre={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Mal'), dokumentMalType.VARSEL_OM_REVURDERING);
-    userEvent.selectOptions(utils.getByLabelText('Årsak'), 'BARNIKKEREG');
+    await userEvent.selectOptions(utils.getByLabelText('Mal'), dokumentMalType.VARSEL_OM_REVURDERING);
+    await userEvent.selectOptions(utils.getByLabelText('Årsak'), 'BARNIKKEREG');
 
-    userEvent.click(screen.getByText('Send brev'));
+    await userEvent.click(screen.getByText('Send brev'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -61,13 +61,13 @@ describe('<MeldingerSakIndex>', () => {
     const utils = render(<Default lagre={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Mal'), dokumentMalType.VARSEL_OM_REVURDERING);
-    userEvent.selectOptions(utils.getByLabelText('Årsak'), 'ANNET');
+    await userEvent.selectOptions(utils.getByLabelText('Mal'), dokumentMalType.VARSEL_OM_REVURDERING);
+    await userEvent.selectOptions(utils.getByLabelText('Årsak'), 'ANNET');
 
     const begrunnelseInput = utils.getByLabelText('Fritekst');
-    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Send brev'));
+    await userEvent.click(screen.getByText('Send brev'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -83,7 +83,7 @@ describe('<MeldingerSakIndex>', () => {
     const utils = render(<ForSvangerskapspenger lagre={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Mal'), dokumentMalType.VARSEL_OM_REVURDERING);
+    await userEvent.selectOptions(utils.getByLabelText('Mal'), dokumentMalType.VARSEL_OM_REVURDERING);
 
     expect(await screen.findByText('Annet')).toBeInTheDocument();
     expect(screen.queryByText('Barn ikke registrert i folkeregisteret')).not.toBeInTheDocument();
@@ -95,7 +95,7 @@ describe('<MeldingerSakIndex>', () => {
     const utils = render(<BrukerManglerAdresse lagre={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Mal'), dokumentMalType.VARSEL_OM_REVURDERING);
+    await userEvent.selectOptions(utils.getByLabelText('Mal'), dokumentMalType.VARSEL_OM_REVURDERING);
 
     expect(await screen.findByText(brukerenHarIkkeAdresseText)).toBeInTheDocument();
   });

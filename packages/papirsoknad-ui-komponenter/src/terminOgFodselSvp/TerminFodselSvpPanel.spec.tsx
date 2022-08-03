@@ -19,27 +19,27 @@ describe('<TerminFodselSvpPanel>', () => {
 
     expect(await screen.findByText('Opplysninger om termin og fødsel')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
 
     const termindato = utils.getByLabelText('Termindato');
-    userEvent.type(termindato, '01.05.2022');
+    await userEvent.type(termindato, '01.05.2022');
     fireEvent.blur(termindato);
 
     const fødselsdato = utils.getByLabelText('Fødselsdato');
-    userEvent.type(fødselsdato, dayjs().add(1, 'day').format(DDMMYYYY_DATE_FORMAT));
+    await userEvent.type(fødselsdato, dayjs().add(1, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(fødselsdato);
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     expect(await screen.findByText(`Dato må være før eller lik ${dayjs().format(DDMMYYYY_DATE_FORMAT)}`)).toBeInTheDocument();
 
     userEvent.clear(fødselsdato);
-    userEvent.type(fødselsdato, dayjs().subtract(1, 'day').format(DDMMYYYY_DATE_FORMAT));
+    await userEvent.type(fødselsdato, dayjs().subtract(1, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(fødselsdato);
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

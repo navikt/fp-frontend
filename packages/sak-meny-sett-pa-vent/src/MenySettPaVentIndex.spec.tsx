@@ -23,9 +23,9 @@ describe('<MenySettPaVentIndex>', () => {
     const utils = render(<Default settBehandlingPaVent={settBehandlingPaVent} lukkModal={lukkModal} />);
     expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Årsak'), 'AVV_DOK');
+    await userEvent.selectOptions(utils.getByLabelText('Årsak'), 'AVV_DOK');
 
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(settBehandlingPaVent).toHaveBeenCalledTimes(1));

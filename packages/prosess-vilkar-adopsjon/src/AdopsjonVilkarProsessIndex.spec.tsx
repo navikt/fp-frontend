@@ -18,12 +18,12 @@ describe('<AdopsjonVilkarProsessIndex>', () => {
     expect(screen.getByText('§§Dette er en lovreferanse')).toBeInTheDocument();
     expect(screen.getByText('Tidligere utbetalte foreldrepenger eller engangsstønad')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Er utbetalt for et annet barn, vilkåret er oppfylt'));
+    await userEvent.click(screen.getByText('Er utbetalt for et annet barn, vilkåret er oppfylt'));
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.type(vurderingInput, 'Dette er en vurdering');
+    await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -40,18 +40,18 @@ describe('<AdopsjonVilkarProsessIndex>', () => {
 
     expect(await screen.findByText('Adopsjon')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText(/ikke/));
+    await userEvent.click(screen.getByText(/ikke/));
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.type(vurderingInput, 'Dette er en vurdering');
+    await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), '1006');
+    await userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), '1006');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

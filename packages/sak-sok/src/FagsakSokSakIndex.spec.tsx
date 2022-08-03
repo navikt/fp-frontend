@@ -13,11 +13,11 @@ describe('<FagsakSokSakIndex>', () => {
     expect(screen.getByText('Søk')).toBeDisabled();
 
     const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
-    userEvent.type(nrInput, 'TEST');
+    await userEvent.type(nrInput, 'TEST');
 
     expect(await screen.findByText('Søk')).toBeEnabled();
 
-    userEvent.click(screen.getByText('Søk'));
+    await userEvent.click(screen.getByText('Søk'));
 
     expect(await screen.findByText('Ugyldig saksnummer eller fødselsnummer')).toBeInTheDocument();
   });
@@ -28,11 +28,11 @@ describe('<FagsakSokSakIndex>', () => {
     expect(screen.getByText('Søk')).toBeDisabled();
 
     const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
-    userEvent.type(nrInput, '123');
+    await userEvent.type(nrInput, '123');
 
     expect(await screen.findByText('Søk')).toBeEnabled();
 
-    userEvent.click(screen.getByText('Søk'));
+    await userEvent.click(screen.getByText('Søk'));
 
     expect(await screen.findByText('Saksnummer')).toBeInTheDocument();
     expect(await screen.findByText('1')).toBeInTheDocument();
@@ -55,11 +55,11 @@ describe('<FagsakSokSakIndex>', () => {
     expect(screen.getByText('Søk')).toBeDisabled();
 
     const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
-    userEvent.type(nrInput, '123');
+    await userEvent.type(nrInput, '123');
 
     expect(await screen.findByText('Søk')).toBeEnabled();
 
-    userEvent.click(screen.getByText('Søk'));
+    await userEvent.click(screen.getByText('Søk'));
 
     expect(await screen.findByText('Søket ga ingen treff')).toBeInTheDocument();
   });

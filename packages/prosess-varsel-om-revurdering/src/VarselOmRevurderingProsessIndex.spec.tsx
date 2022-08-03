@@ -31,12 +31,12 @@ describe('<VarselOmRevurderingProsessIndex>', () => {
 
     expect(screen.getByText('Opplysninger om fødsel fra folkeregisteret')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Ikke send varsel til søker'));
+    await userEvent.click(screen.getByText('Ikke send varsel til søker'));
 
     const vurderingInput = utils.getByLabelText('Begrunnelse');
-    userEvent.type(vurderingInput, 'Dette er en begrunnelse');
+    await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -54,15 +54,15 @@ describe('<VarselOmRevurderingProsessIndex>', () => {
 
     expect(await screen.findByText('Varsel om revurdering')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Send varsel til søker'));
+    await userEvent.click(screen.getByText('Send varsel til søker'));
 
     const fritekstInput = utils.getByLabelText('Fritekst i brev');
-    userEvent.type(fritekstInput, 'Dette er en fritekst');
+    await userEvent.type(fritekstInput, 'Dette er en fritekst');
 
     const vurderingInput = utils.getByLabelText('Begrunnelse');
-    userEvent.type(vurderingInput, 'Dette er en begrunnelse');
+    await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Forhåndsvis'));
+    await userEvent.click(screen.getByText('Forhåndsvis'));
 
     await waitFor(() => expect(forhåndsvis).toHaveBeenCalledTimes(1));
     expect(forhåndsvis).toHaveBeenNthCalledWith(1, {
@@ -71,13 +71,13 @@ describe('<VarselOmRevurderingProsessIndex>', () => {
       mottaker: '',
     });
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Årsak'), 'AVV_DOK');
+    await userEvent.selectOptions(utils.getByLabelText('Årsak'), 'AVV_DOK');
 
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -110,12 +110,12 @@ describe('<VarselOmRevurderingProsessIndex>', () => {
 
     expect(screen.getByText('Opplysninger om fødsel fra folkeregisteret')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Ikke send varsel til søker'));
+    await userEvent.click(screen.getByText('Ikke send varsel til søker'));
 
     const vurderingInput = utils.getByLabelText('Begrunnelse');
-    userEvent.type(vurderingInput, 'Dette er en begrunnelse');
+    await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

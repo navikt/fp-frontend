@@ -112,7 +112,7 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
 
     expect(await screen.findByText('Forslag til vedtak')).toBeInTheDocument();
 
-    userEvent.click(utils.getByText('Forhåndsvis brev'));
+    await userEvent.click(utils.getByText('Forhåndsvis brev'));
 
     await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
 

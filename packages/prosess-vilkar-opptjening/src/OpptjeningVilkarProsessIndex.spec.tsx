@@ -27,12 +27,12 @@ describe('<OpptjeningVilkarProsessIndex>', () => {
     expect(screen.getByText('2 måneder og 3 dager aktivitet i opptjeningsperioden')).toBeInTheDocument();
     expect(screen.getByText('01.01.2018 - 01.10.2018')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Søker har oppfylt krav om 6 mnd opptjening, vilkåret er oppfylt.'));
+    await userEvent.click(screen.getByText('Søker har oppfylt krav om 6 mnd opptjening, vilkåret er oppfylt.'));
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.type(vurderingInput, 'Dette er en vurdering');
+    await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

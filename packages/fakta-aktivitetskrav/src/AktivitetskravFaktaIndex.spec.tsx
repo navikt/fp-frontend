@@ -19,25 +19,24 @@ describe('<AktivitetskravFaktaIndex>', () => {
     expect(screen.getByText('Oppdater')).toBeDisabled();
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    userEvent.click(screen.getByText('Aktiviteten er ikke dokumentert'));
+    await userEvent.click(screen.getByText('Aktiviteten er ikke dokumentert'));
 
-    userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Oppdater'));
+    await userEvent.click(screen.getByText('Oppdater'));
 
-    expect(await screen.findByText('15.01.2021 - 20.01.2021')).toBeInTheDocument();
     expect(screen.getByText('Oppdater')).toBeDisabled();
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    userEvent.click(screen.getByText('Mor er ikke i aktivitet'));
+    await userEvent.click(screen.getByText('Mor er ikke i aktivitet'));
 
-    userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse på andre periode');
+    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse på andre periode');
 
-    userEvent.click(screen.getByText('Oppdater'));
+    await userEvent.click(screen.getByText('Oppdater'));
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -79,7 +78,7 @@ describe('<AktivitetskravFaktaIndex>', () => {
     expect(screen.queryByText('Detaljer')).not.toBeInTheDocument();
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getAllByRole('row', { hidden: true })[1]);
+    await userEvent.click(screen.getAllByRole('row', { hidden: true })[1]);
 
     expect(await screen.findByText('Detaljer')).toBeInTheDocument();
     expect(screen.getByText('Oppdater')).toBeDisabled();

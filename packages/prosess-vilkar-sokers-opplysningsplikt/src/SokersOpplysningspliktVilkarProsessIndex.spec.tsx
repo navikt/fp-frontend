@@ -20,11 +20,11 @@ describe('<SokersOpplysningspliktVilkarProsessIndex>', () => {
     expect(screen.getByText('Arbeidsgiver1 (1234)')).toBeInTheDocument();
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.type(vurderingInput, 'Dette er en vurdering');
+    await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
-    userEvent.click(screen.getAllByText(/Vilkåret er oppfylt/)[0]);
+    await userEvent.click(screen.getAllByText(/Vilkåret er oppfylt/)[0]);
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

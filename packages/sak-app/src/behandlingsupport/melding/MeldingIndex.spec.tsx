@@ -104,9 +104,9 @@ describe('<MeldingIndex>', () => {
 
     expect(await screen.findByText('Forhåndsvis')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Mal'), 'Mal1');
+    await userEvent.selectOptions(utils.getByLabelText('Mal'), 'Mal1');
 
-    userEvent.click(screen.getByText('Forhåndsvis'));
+    await userEvent.click(screen.getByText('Forhåndsvis'));
 
     await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
     await waitFor(() => expect(axiosMock.history.post
@@ -146,13 +146,13 @@ describe('<MeldingIndex>', () => {
 
     expect(await screen.findByText('Send brev')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Mal'), 'Mal1');
+    await userEvent.selectOptions(utils.getByLabelText('Mal'), 'Mal1');
 
-    userEvent.click(screen.getByText('Send brev'));
+    await userEvent.click(screen.getByText('Send brev'));
 
     expect(await screen.findByText('Brevet er bestilt')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(axiosMock.history.get.length).toBe(5));
 
@@ -192,16 +192,16 @@ describe('<MeldingIndex>', () => {
 
     expect(await screen.findByText('Send brev')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Mal'), dokumentMalType.INNHENTE_OPPLYSNINGER);
+    await userEvent.selectOptions(utils.getByLabelText('Mal'), dokumentMalType.INNHENTE_OPPLYSNINGER);
 
     const begrunnelseInput = utils.getByLabelText('Liste over dokumenter (skriv ett dokument pr. linje)');
-    userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Send brev'));
+    await userEvent.click(screen.getByText('Send brev'));
 
     expect(await screen.findByText('Behandlingen er satt på vent')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(axiosMock.history.get.length).toBe(5));
 
