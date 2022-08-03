@@ -39,6 +39,7 @@ describe('<PeriodFieldArray>', () => {
         readOnly={readOnly}
       >
         {(_periodeElementFieldId, index, getRemoveButton: () => void) => (
+          // @ts-ignore
           <div key={index} id={`id_${index}`}>
             test
             {getRemoveButton()}
@@ -88,6 +89,7 @@ describe('<PeriodFieldArray>', () => {
         readOnly={readOnly}
       >
         {(_periodeElementFieldId, index, getRemoveButton: () => void) => (
+          // @ts-ignore
           <div key={index} id={`id_${index}`}>
             test
             {getRemoveButton()}

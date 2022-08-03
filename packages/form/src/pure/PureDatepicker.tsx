@@ -5,11 +5,11 @@ import { DatepickerProps } from 'nav-datovelger/lib/Datepicker';
 import { Label } from 'nav-frontend-skjema';
 import { Undertekst } from 'nav-frontend-typografi';
 import FieldError from './FieldError';
-import LabelType from '../LabelType';
+
 import './datepicker.less';
 
 interface PureDatepickerProps {
-  label: LabelType;
+  label: React.ReactNode | string;
   feil?: string;
   ariaLabel?: string;
   inputId?: string;

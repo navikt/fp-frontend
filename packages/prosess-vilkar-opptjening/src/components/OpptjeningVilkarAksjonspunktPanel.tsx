@@ -115,7 +115,9 @@ const OpptjeningVilkarAksjonspunktPanel: FunctionComponent<OwnProps> = ({
         <VilkarResultPicker
           readOnly={readOnly}
           customVilkarOppfyltText={<FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.ErOppfylt" />}
-          customVilkarIkkeOppfyltText={<FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt" values={{ b: (chunks: any) => <b>{chunks}</b> }} />}
+          customVilkarIkkeOppfyltText={
+            <FormattedMessage id="OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt" values={{ b: (chunks: any) => <b>{chunks}</b> }} />
+          }
         />
         <VerticalSpacer sixteenPx />
         <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />
