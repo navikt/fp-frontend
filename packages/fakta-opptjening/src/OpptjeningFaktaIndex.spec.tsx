@@ -40,6 +40,7 @@ describe('<OpptjeningFaktaIndex>', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+
     expect(lagre).toHaveBeenNthCalledWith(1, {
       kode: '5051',
       opptjeningsaktiviteter: [{

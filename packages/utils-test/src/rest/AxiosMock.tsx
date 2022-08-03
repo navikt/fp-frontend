@@ -42,7 +42,7 @@ const AxiosMock: FunctionComponent<Props> = ({
     });
 
     return () => {
-      apiMock.restore();
+      apiMock.reset();
       requestApi.setLinks([]);
       requestApi.resetCache();
     };

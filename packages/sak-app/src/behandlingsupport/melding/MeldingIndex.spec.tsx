@@ -102,6 +102,8 @@ describe('<MeldingIndex>', () => {
       </RestApiMock>,
     );
 
+    expect(await screen.findByText('Mal 1')).toBeInTheDocument();
+
     expect(await screen.findByText('Forhåndsvis')).toBeInTheDocument();
 
     await userEvent.selectOptions(utils.getByLabelText('Mal'), 'Mal1');
@@ -143,6 +145,8 @@ describe('<MeldingIndex>', () => {
         </MemoryRouter>
       </RestApiMock>,
     );
+
+    expect(await screen.findByText('Mal 1')).toBeInTheDocument();
 
     expect(await screen.findByText('Send brev')).toBeInTheDocument();
 
@@ -189,6 +193,8 @@ describe('<MeldingIndex>', () => {
         </MemoryRouter>
       </RestApiMock>,
     );
+
+    expect(await screen.findByText('Mal 1')).toBeInTheDocument();
 
     expect(await screen.findByText('Send brev')).toBeInTheDocument();
 
