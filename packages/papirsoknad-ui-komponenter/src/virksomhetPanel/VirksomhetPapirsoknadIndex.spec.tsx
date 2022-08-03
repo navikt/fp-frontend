@@ -37,6 +37,8 @@ describe('<VirksomhetPapirsoknadIndex>', () => {
   });
 
   it('skal velge at søker har arbeidet i egen næringsvirksomhet', async () => {
+    jest.setTimeout(7500);
+
     const lagre = jest.fn();
 
     const utils = render(<Default submitCallback={lagre} />);
