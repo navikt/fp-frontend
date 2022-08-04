@@ -1,5 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks';
-import { waitFor } from '@testing-library/react';
+import { waitFor, renderHook } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
 import TestRenderer from 'react-test-renderer';
 
@@ -20,10 +19,9 @@ describe('indexHooks', () => {
     const apiMock = new MockAdapter(requestTilbakekrevingApi.getAxios());
     apiMock.onPost('/fptilbake/api/behandlinger').replyOnce(200, behandlingSomHentes);
 
-    const { result, waitForNextUpdate } = renderHook(() => useBehandling('1'));
-    await waitForNextUpdate();
+    const { result } = renderHook(() => useBehandling('1'));
+    await waitFor(() => expect(result.current.behandling).toEqual(behandlingSomHentes));
 
-    expect(result.current.behandling).toEqual(behandlingSomHentes);
     expect(result.current.hentingHarFeilet).toEqual(false);
   });
 
