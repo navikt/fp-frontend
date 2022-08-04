@@ -36,7 +36,7 @@ describe('<AndreYtelserPapirsoknadIndex>', () => {
     expect(await screen.findByText('Dato må være før eller lik 13.09.2022')).toBeInTheDocument();
     expect(screen.getByText('Dato må være etter eller lik 14.09.2022')).toBeInTheDocument();
 
-    userEvent.clear(tomInput);
+    await userEvent.clear(tomInput);
     await userEvent.type(tomInput, '15.09.2022');
     fireEvent.blur(tomInput);
 

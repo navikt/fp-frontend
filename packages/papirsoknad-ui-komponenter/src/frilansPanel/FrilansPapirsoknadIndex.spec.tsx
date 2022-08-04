@@ -118,7 +118,7 @@ describe('<FrilansPapirsoknadIndex>', () => {
 
     expect(await screen.findByText('F.o.m må være lik eller etter dato for første periode med frilansvirksomhet')).toBeInTheDocument();
 
-    userEvent.clear(oppdragFomInput);
+    await userEvent.clear(oppdragFomInput);
     await userEvent.type(oppdragFomInput, '28.05.2022');
     fireEvent.blur(oppdragFomInput);
 

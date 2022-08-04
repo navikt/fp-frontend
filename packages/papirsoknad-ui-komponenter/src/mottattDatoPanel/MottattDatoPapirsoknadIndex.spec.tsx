@@ -29,7 +29,7 @@ describe('<MottattDatoPapirsoknadIndex>', () => {
     const iDag = dayjs().format(DDMMYYYY_DATE_FORMAT);
     expect(await screen.findByText(`Dato må være før eller lik ${iDag}`)).toBeInTheDocument();
 
-    userEvent.clear(datoInput);
+    await userEvent.clear(datoInput);
     await userEvent.type(datoInput, '26.05.2022');
     fireEvent.blur(datoInput);
 

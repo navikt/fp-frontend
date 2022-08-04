@@ -99,7 +99,7 @@ describe('<FodselPapirsoknadIndex>', () => {
 
     expect(await screen.findByText(/Dato må være før eller lik/)).toBeInTheDocument();
 
-    userEvent.clear(utstedtDatoInput);
+    await userEvent.clear(utstedtDatoInput);
     await userEvent.type(utstedtDatoInput, '27.05.2022');
     fireEvent.blur(utstedtDatoInput);
 

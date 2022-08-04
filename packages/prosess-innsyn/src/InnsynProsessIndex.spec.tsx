@@ -88,7 +88,7 @@ describe('<InnsynProsessIndex>', () => {
     await userEvent.click(screen.getByText('Sett behandling på vent i påvente av skanning'));
 
     const sattPaVentFristInput = utils.getByLabelText('Behandling blir satt på vent med frist');
-    userEvent.clear(sattPaVentFristInput);
+    await userEvent.clear(sattPaVentFristInput);
     await userEvent.type(sattPaVentFristInput, '29.12.2021');
     fireEvent.blur(sattPaVentFristInput);
 

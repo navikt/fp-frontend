@@ -34,14 +34,14 @@ describe('<AnnenForelderPapirsoknadIndex>', () => {
 
     expect(await screen.findByText('Ugyldig fødselsnummer')).toBeInTheDocument();
 
-    userEvent.clear(fødselsnummer);
+    await userEvent.clear(fødselsnummer);
     await userEvent.type(fødselsnummer, '07078518434');
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     expect(await screen.findByText('Fødselsnummer til den andre forelderen kan ikke være det samme som søker.')).toBeInTheDocument();
 
-    userEvent.clear(fødselsnummer);
+    await userEvent.clear(fødselsnummer);
     await userEvent.type(fødselsnummer, '30013726678');
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));

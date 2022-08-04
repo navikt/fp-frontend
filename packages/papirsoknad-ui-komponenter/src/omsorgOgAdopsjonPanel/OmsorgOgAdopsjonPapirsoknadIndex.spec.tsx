@@ -33,7 +33,7 @@ describe('<OmsorgOgAdopsjonPapirsoknadIndex>', () => {
 
     expect(await screen.findByText('Dato må være lik 27.05.2022')).toBeInTheDocument();
 
-    userEvent.clear(fødselsdatoInput);
+    await userEvent.clear(fødselsdatoInput);
     await userEvent.type(fødselsdatoInput, '27.05.2022');
     fireEvent.blur(fødselsdatoInput);
 

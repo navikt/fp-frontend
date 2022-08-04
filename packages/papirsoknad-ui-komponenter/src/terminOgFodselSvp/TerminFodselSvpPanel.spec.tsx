@@ -35,7 +35,7 @@ describe('<TerminFodselSvpPanel>', () => {
 
     expect(await screen.findByText(`Dato må være før eller lik ${dayjs().format(DDMMYYYY_DATE_FORMAT)}`)).toBeInTheDocument();
 
-    userEvent.clear(fødselsdato);
+    await userEvent.clear(fødselsdato);
     await userEvent.type(fødselsdato, dayjs().subtract(1, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(fødselsdato);
 

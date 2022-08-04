@@ -86,7 +86,7 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
 
     expect(await screen.findByText(`Dato må være før eller lik ${dayjs().format(DDMMYYYY_DATE_FORMAT)}`)).toBeInTheDocument();
 
-    userEvent.clear(tomDatoInput);
+    await userEvent.clear(tomDatoInput);
     await userEvent.type(tomDatoInput, dayjs().subtract(11, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(tomDatoInput);
 
@@ -95,7 +95,7 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
     expect(await screen.findByText(`Dato må være før eller lik ${dayjs().subtract(11, 'day').format(DDMMYYYY_DATE_FORMAT)}`)).toBeInTheDocument();
     expect(screen.getByText(`Dato må være etter eller lik ${dayjs().subtract(10, 'day').format(DDMMYYYY_DATE_FORMAT)}`)).toBeInTheDocument();
 
-    userEvent.clear(tomDatoInput);
+    await userEvent.clear(tomDatoInput);
     await userEvent.type(tomDatoInput, dayjs().subtract(6, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(tomDatoInput);
 
@@ -149,7 +149,7 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
 
     expect(await screen.findByText('Dato må være etter eller lik 30.05.2022')).toBeInTheDocument();
 
-    userEvent.clear(fomDatoInput);
+    await userEvent.clear(fomDatoInput);
     await userEvent.type(fomDatoInput, dayjs().add(11, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(fomDatoInput);
 
@@ -158,7 +158,7 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
     expect(await screen.findByText(`Dato må være før eller lik ${dayjs().add(10, 'day').format(DDMMYYYY_DATE_FORMAT)}`)).toBeInTheDocument();
     expect(screen.getByText(`Dato må være etter eller lik ${dayjs().add(11, 'day').format(DDMMYYYY_DATE_FORMAT)}`)).toBeInTheDocument();
 
-    userEvent.clear(fomDatoInput);
+    await userEvent.clear(fomDatoInput);
     await userEvent.type(fomDatoInput, dayjs().add(6, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(fomDatoInput);
 
