@@ -22,11 +22,11 @@ describe('<VurderSoknadsfristForeldrepengerIndex>', () => {
     expect(screen.getByText('01.01.2019 - 10.01.2019')).toBeInTheDocument();
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.paste(vurderingInput, 'Dette er en vurdering');
+    await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
-    userEvent.click(screen.getByText('Ingen gyldig grunn for sen fremsetting av søknaden'));
+    await userEvent.click(screen.getByText('Ingen gyldig grunn for sen fremsetting av søknaden'));
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -50,15 +50,15 @@ describe('<VurderSoknadsfristForeldrepengerIndex>', () => {
     expect(screen.getByText('01.01.2019 - 10.01.2019')).toBeInTheDocument();
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.paste(vurderingInput, 'Dette er en vurdering');
+    await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
-    userEvent.click(screen.getByText('Gyldig grunn for sen fremsetting av søknaden'));
+    await userEvent.click(screen.getByText('Gyldig grunn for sen fremsetting av søknaden'));
 
     const datoMottattFelt = screen.getByText('Dato for når søknaden kan anses som mottatt');
-    userEvent.type(datoMottattFelt, '{backspace}{backspace}20');
+    await userEvent.type(datoMottattFelt, '{backspace}{backspace}20');
     fireEvent.blur(datoMottattFelt);
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

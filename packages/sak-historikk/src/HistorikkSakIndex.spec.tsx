@@ -27,7 +27,7 @@ describe('<HistorikkSakIndex>', () => {
 
     expect(screen.getAllByTestId('snakkeboble', { exact: false })).toHaveLength(3);
 
-    userEvent.click(screen.getByText('Filtrer på behandling'));
+    await userEvent.click(screen.getByText('Filtrer på behandling'));
 
     expect(await screen.findAllByTestId('snakkeboble', { exact: false })).toHaveLength(2);
   });

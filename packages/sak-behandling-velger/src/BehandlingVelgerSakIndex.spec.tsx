@@ -26,7 +26,7 @@ describe('<BehandlingVelgerSakIndex>', () => {
     render(<Default />);
     expect(await screen.findByText('Førstegangsbehandling')).toBeInTheDocument();
 
-    userEvent.click(screen.getByAltText('Åpne behandlingsliste'));
+    await userEvent.click(screen.getByAltText('Åpne behandlingsliste'));
 
     expect(await screen.findByText('Revurdering')).toBeInTheDocument();
     expect(screen.getByText('Dokumentinnsyn')).toBeInTheDocument();
@@ -42,7 +42,7 @@ describe('<BehandlingVelgerSakIndex>', () => {
     render(<Default />);
     expect(await screen.findByText('Førstegangsbehandling')).toBeInTheDocument();
 
-    userEvent.click(screen.getByAltText('Åpne behandlingsliste'));
+    await userEvent.click(screen.getByAltText('Åpne behandlingsliste'));
 
     expect(await screen.findByText('Revurdering')).toBeInTheDocument();
 

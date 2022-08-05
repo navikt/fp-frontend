@@ -17,7 +17,7 @@ describe('<MenyApneForEndringerIndex>', () => {
 
     expect(await screen.findByText('Åpne behandling for endringer?')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(apneBehandlingForEndringer).toHaveBeenCalledTimes(1));
     expect(lukkModal).toHaveBeenCalledTimes(1);

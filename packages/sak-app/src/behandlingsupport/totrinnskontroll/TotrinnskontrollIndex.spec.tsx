@@ -112,7 +112,7 @@ describe('<TotrinnskontrollIndex>', () => {
 
     expect(await screen.findByText('Kontroller endrede opplysninger og faglige vurderinger')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Send til saksbehandler'));
+    await userEvent.click(screen.getByText('Send til saksbehandler'));
 
     await waitFor(() => expect(axiosMock.history.get
       .find((a) => a.url === FpsakApiKeys.SAVE_TOTRINNSAKSJONSPUNKT.name)?.params).toStrictEqual({

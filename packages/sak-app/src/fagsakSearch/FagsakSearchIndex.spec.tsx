@@ -46,11 +46,11 @@ describe('<FagsakSearchIndex>', () => {
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
 
     const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
-    userEvent.paste(nrInput, '123');
+    await userEvent.type(nrInput, '123');
 
     expect(await screen.findByText('Søk')).toBeEnabled();
 
-    userEvent.click(screen.getByText('Søk'));
+    await userEvent.click(screen.getByText('Søk'));
 
     expect(await screen.findByText('Saksnummer')).toBeInTheDocument();
     expect(screen.getByText('12345')).toBeInTheDocument();
@@ -74,15 +74,15 @@ describe('<FagsakSearchIndex>', () => {
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
 
     const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
-    userEvent.paste(nrInput, '123');
+    await userEvent.type(nrInput, '123');
 
     expect(await screen.findByText('Søk')).toBeEnabled();
 
-    userEvent.click(screen.getByText('Søk'));
+    await userEvent.click(screen.getByText('Søk'));
 
     expect(await screen.findByText('Saksnummer')).toBeInTheDocument();
 
-    userEvent.click(screen.getAllByRole('row', { hidden: true })[1]);
+    await userEvent.click(screen.getAllByRole('row', { hidden: true })[1]);
 
     await waitFor(() => expect(mockHistoryPush).toHaveBeenCalledWith(`/fagsak/${fagsak.saksnummer}/`));
   });

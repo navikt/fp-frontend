@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
 import Modal from 'nav-frontend-modal';
 import { BehandlingType, BehandlingStatus } from '@navikt/ft-kodeverk';
@@ -50,18 +51,20 @@ describe('<BehandlingPaVent>', () => {
       { key: TilbakekrevingBehandlingApiKeys.AKSJONSPUNKTER.name, data: aksjonspunkter },
     ];
 
-    render(
-      <RestApiMock data={data} requestApi={requestTilbakekrevingApi}>
-        <BehandlingPaVent
-          behandling={{
-            ...behandling,
-            behandlingPaaVent: true,
-          } as Behandling}
-          kodeverk={kodeverk}
-          hentBehandling={jest.fn()}
-        />
-      </RestApiMock>,
-    );
+    await act(async () => {
+      render(
+        <RestApiMock data={data} requestApi={requestTilbakekrevingApi}>
+          <BehandlingPaVent
+            behandling={{
+              ...behandling,
+              behandlingPaaVent: true,
+            } as Behandling}
+            kodeverk={kodeverk}
+            hentBehandling={jest.fn()}
+          />
+        </RestApiMock>,
+      );
+    });
 
     expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
   });
@@ -85,7 +88,7 @@ describe('<BehandlingPaVent>', () => {
 
     expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Lukk'));
+    await userEvent.click(screen.getByText('Lukk'));
 
     await waitFor(() => expect(screen.queryByText('Behandlingen settes på vent med frist')).not.toBeInTheDocument());
   });

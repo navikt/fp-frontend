@@ -15,9 +15,9 @@ describe('<SprakPapirsoknadIndex>', () => {
 
     expect(await screen.findByText('Språk')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Nynorsk'));
+    await userEvent.click(screen.getByText('Nynorsk'));
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

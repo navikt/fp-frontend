@@ -46,11 +46,11 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
 
     expect(screen.getByText('Søker har oppgitt å ha aleneomsorg for barnet')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Søker har aleneomsorg for barnet'));
+    await userEvent.click(screen.getByText('Søker har aleneomsorg for barnet'));
 
-    userEvent.paste(utils.getByLabelText('Begrunn vurderingen'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Begrunn vurderingen'), 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
@@ -71,14 +71,14 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
     expect(screen.getByText('Vurder om søker har aleneomsorg for barnet.')).toBeInTheDocument();
 
     expect(screen.getByText('Søker har oppgitt å ha aleneomsorg for barnet')).toBeInTheDocument();
-    userEvent.click(screen.getByText('Søker har IKKE aleneomsorg for barnet'));
+    await userEvent.click(screen.getByText('Søker har IKKE aleneomsorg for barnet'));
 
     expect(screen.getByText('Har annen forelder rett?')).toBeInTheDocument();
-    userEvent.click(screen.getByText('Ja'));
+    await userEvent.click(screen.getByText('Ja'));
 
-    userEvent.paste(utils.getByLabelText('Begrunn vurderingen'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Begrunn vurderingen'), 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
@@ -111,11 +111,11 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
     expect(screen.getByText('Vurder om den andre forelderen har rett til foreldrepenger.')).toBeInTheDocument();
 
     expect(screen.getByText('Har annen forelder rett?')).toBeInTheDocument();
-    userEvent.click(screen.getByText('Ja'));
+    await userEvent.click(screen.getByText('Ja'));
 
-    userEvent.paste(utils.getByLabelText('Begrunn vurderingen'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Begrunn vurderingen'), 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
@@ -135,14 +135,14 @@ describe('<OmsorgOgRettFaktaIndex>', () => {
     expect(screen.getByText('Vurder om den andre forelderen har rett til foreldrepenger.')).toBeInTheDocument();
 
     expect(screen.getByText('Har annen forelder rett?')).toBeInTheDocument();
-    userEvent.click(screen.getByText('Nei'));
+    await userEvent.click(screen.getByText('Nei'));
 
     expect(await screen.findByText('Mottar annen forelder uføretrygd, jfr 14-14 tredje ledd?')).toBeInTheDocument();
-    userEvent.click(screen.getAllByText('Ja')[1]);
+    await userEvent.click(screen.getAllByText('Ja')[1]);
 
-    userEvent.paste(utils.getByLabelText('Begrunn vurderingen'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Begrunn vurderingen'), 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {

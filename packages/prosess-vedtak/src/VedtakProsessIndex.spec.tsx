@@ -27,7 +27,7 @@ describe('<VedtakProsessIndex>', () => {
     expect(screen.getByText('Foreldrepenger er innvilget')).toBeInTheDocument();
     expect(screen.getByText('Rediger vedtaksbrev')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Automatisk vedtaksbrev'));
+    await userEvent.click(screen.getByText('Automatisk vedtaksbrev'));
 
     await waitFor(() => expect(forhåndsvis).toHaveBeenCalledTimes(1));
     expect(forhåndsvis).toHaveBeenNthCalledWith(1, {
@@ -38,7 +38,7 @@ describe('<VedtakProsessIndex>', () => {
       automatiskVedtaksbrev: true,
     });
 
-    userEvent.click(screen.getByText('Fatt vedtak'));
+    await userEvent.click(screen.getByText('Fatt vedtak'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
@@ -58,24 +58,24 @@ describe('<VedtakProsessIndex>', () => {
 
     expect(await screen.findByText('Vedtak')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Rediger vedtaksbrev'));
+    await userEvent.click(screen.getByText('Rediger vedtaksbrev'));
 
     expect(await screen.findByText('Manuelt vedtaksbrev')).toBeInTheDocument();
     expect(screen.getByText('Tekst fra det automatisk genererte brevet kan kopieres og limes inn i det manuelle brevet')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Fatt vedtak'));
+    await userEvent.click(screen.getByText('Fatt vedtak'));
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
 
     const overskriftInput = utils.getByLabelText('Overskrift');
-    userEvent.paste(overskriftInput, 'Dette er en overskrift');
+    await userEvent.type(overskriftInput, 'Dette er en overskrift');
 
     const innholdInput = utils.getByLabelText('Innhold i brev til søker');
-    userEvent.paste(innholdInput, 'Dette er innhold');
+    await userEvent.type(innholdInput, 'Dette er innhold');
 
     await waitFor(() => expect(screen.queryByText('Feltet må fylles ut')).not.toBeInTheDocument());
 
-    userEvent.click(screen.getByText('Forhåndsvis manuelt brev'));
+    await userEvent.click(screen.getByText('Forhåndsvis manuelt brev'));
 
     await waitFor(() => expect(forhåndsvis).toHaveBeenCalledTimes(1));
     expect(forhåndsvis).toHaveBeenNthCalledWith(1, {
@@ -86,7 +86,7 @@ describe('<VedtakProsessIndex>', () => {
       automatiskVedtaksbrev: undefined,
     });
 
-    userEvent.click(screen.getByText('Fatt vedtak'));
+    await userEvent.click(screen.getByText('Fatt vedtak'));
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
       begrunnelse: undefined,
@@ -104,32 +104,32 @@ describe('<VedtakProsessIndex>', () => {
 
     expect(await screen.findByText('Vedtak')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Rediger vedtaksbrev'));
+    await userEvent.click(screen.getByText('Rediger vedtaksbrev'));
 
     expect(await screen.findByText('Manuelt vedtaksbrev')).toBeInTheDocument();
     expect(screen.getByText('Tekst fra det automatisk genererte brevet kan kopieres og limes inn i det manuelle brevet')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Fatt vedtak'));
+    await userEvent.click(screen.getByText('Fatt vedtak'));
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
 
     const overskriftInput = utils.getByLabelText('Overskrift');
-    userEvent.paste(overskriftInput, 'Dette er en overskrift');
+    await userEvent.type(overskriftInput, 'Dette er en overskrift');
 
     const innholdInput = utils.getByLabelText('Innhold i brev til søker');
-    userEvent.paste(innholdInput, 'Dette er innhold');
+    await userEvent.type(innholdInput, 'Dette er innhold');
 
     await waitFor(() => expect(screen.queryByText('Feltet må fylles ut')).not.toBeInTheDocument());
 
-    userEvent.click(screen.getByText('Forkast manuelt brev'));
+    await userEvent.click(screen.getByText('Forkast manuelt brev'));
 
     expect(await screen.findByText('Dersom du forkaster det manuelle brevet, vil det erstattes av det automatisk genererte brevet')).toBeInTheDocument();
 
-    userEvent.click(screen.getAllByText('Forkast manuelt brev')[1]);
+    await userEvent.click(screen.getAllByText('Forkast manuelt brev')[1]);
 
     await waitFor(() => expect(screen.queryByText('Manuelt vedtaksbrev')).not.toBeInTheDocument());
 
-    userEvent.click(screen.getByText('Fatt vedtak'));
+    await userEvent.click(screen.getByText('Fatt vedtak'));
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
       begrunnelse: undefined,
@@ -150,7 +150,7 @@ describe('<VedtakProsessIndex>', () => {
     expect(screen.getByText('Automatisk vedtaksbrev')).toBeInTheDocument();
     expect(screen.getByText('Rediger vedtaksbrev')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Fatt vedtak'));
+    await userEvent.click(screen.getByText('Fatt vedtak'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
@@ -175,15 +175,15 @@ describe('<VedtakProsessIndex>', () => {
     expect(screen.getByText('Årsak til avslag')).toBeInTheDocument();
     expect(screen.getByText('Søker har ikke noen gyldig uttaksperiode')).toBeInTheDocument();
 
-    userEvent.paste(utils.getByLabelText('Fritekst i brev til søker'), 'D');
+    await userEvent.type(utils.getByLabelText('Fritekst i brev til søker'), 'D');
 
-    userEvent.click(screen.getByText('Fatt vedtak'));
+    await userEvent.click(screen.getByText('Fatt vedtak'));
 
     expect(await screen.findByText('Du må skrive minst 3 tegn')).toBeInTheDocument();
 
-    userEvent.paste(utils.getByLabelText('Fritekst i brev til søker'), 'ette er en tekst');
+    await userEvent.type(utils.getByLabelText('Fritekst i brev til søker'), 'ette er en tekst');
 
-    userEvent.click(screen.getByText('Fatt vedtak'));
+    await userEvent.click(screen.getByText('Fatt vedtak'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
@@ -211,9 +211,9 @@ describe('<VedtakProsessIndex>', () => {
     expect(screen.getByText('Beregningsgrunnlaget er endret til ugunst for søker. Skal det sendes varsel?')).toBeInTheDocument();
 
     const fritekstInput = utils.getByLabelText('Fritekst i brev til søker som handler om fastsettelse av beregningsgrunnlaget');
-    userEvent.paste(fritekstInput, 'Dette er en tekst');
+    await userEvent.type(fritekstInput, 'Dette er en tekst');
 
-    userEvent.click(screen.getByText('Til godkjenning'));
+    await userEvent.click(screen.getByText('Til godkjenning'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
@@ -240,7 +240,7 @@ describe('<VedtakProsessIndex>', () => {
     expect(screen.getByText('Antall barn')).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Fatt vedtak'));
+    await userEvent.click(screen.getByText('Fatt vedtak'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
@@ -265,7 +265,7 @@ describe('<VedtakProsessIndex>', () => {
     expect(screen.getByText('Årsak til revurdering')).toBeInTheDocument();
     expect(screen.getByText('Annet')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Fatt vedtak'));
+    await userEvent.click(screen.getByText('Fatt vedtak'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{

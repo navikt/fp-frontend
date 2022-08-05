@@ -1,5 +1,6 @@
-import { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import MockAdapter from 'axios-mock-adapter';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RequestApi } from '@fpsak-frontend/rest-api';
 
 interface Props {
@@ -19,16 +20,18 @@ const AxiosMock: FunctionComponent<Props> = ({
   requestApi,
   setApiMock = () => undefined,
 }) => {
-  const apiMock = new MockAdapter(requestApi.getAxios());
-  setApiMock(apiMock);
-
-  requestApi.setLinks(data.filter((d) => !d.noRelLink).map((d) => ({
-    href: d.key,
-    rel: requestApi.endpointConfigList.find((c) => c.name === d.key).rel,
-    type: 'GET',
-  })));
+  const [showChildren, setShowChildren] = useState(false);
 
   useEffect(() => {
+    const apiMock = new MockAdapter(requestApi.getAxios());
+    setApiMock(apiMock);
+
+    requestApi.setLinks(data.filter((d) => !d.noRelLink).map((d) => ({
+      href: d.key,
+      rel: requestApi.endpointConfigList.find((c) => c.name === d.key).rel,
+      type: 'GET',
+    })));
+
     data.forEach((d) => {
       if (requestApi.getRestType(d.key) === 'GET') {
         apiMock.onGet(requestApi.getUrl(d.key)).reply(200, d.data);
@@ -41,13 +44,15 @@ const AxiosMock: FunctionComponent<Props> = ({
       }
     });
 
+    setShowChildren(true);
+
     return () => {
-      apiMock.reset();
+      apiMock.restore();
       requestApi.setLinks([]);
       requestApi.resetCache();
     };
   }, []);
-  return children;
+  return showChildren ? children : <LoadingPanel />;
 };
 
 export default AxiosMock;

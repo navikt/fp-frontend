@@ -18,12 +18,12 @@ describe('<MenyEndreBehandlendeEnhetIndex>', () => {
     expect(screen.getByText('OK')).toBeDisabled();
 
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
-    userEvent.paste(begrunnelseInput, 'Dette er en begrunnelse');
+    await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
-    userEvent.selectOptions(utils.getByLabelText('Ny enhet'), '0');
+    await userEvent.selectOptions(utils.getByLabelText('Ny enhet'), '0');
 
     expect(await screen.findByText('OK')).toBeEnabled();
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(lagreNyBehandlendeEnhet).toHaveBeenCalledTimes(1));
@@ -40,7 +40,7 @@ describe('<MenyEndreBehandlendeEnhetIndex>', () => {
     render(<Default lagreNyBehandlendeEnhet={lagreNyBehandlendeEnhet} lukkModal={lukkModal} />);
     expect(await screen.findByText('Endre behandlende enhet for valgt behandling')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Avbryt'));
+    await userEvent.click(screen.getByText('Avbryt'));
 
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(lagreNyBehandlendeEnhet).toHaveBeenCalledTimes(0));

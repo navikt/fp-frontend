@@ -187,10 +187,10 @@ describe('<SimuleringProsessStegInitPanel>', () => {
     expect(await screen.findByText('Simulering')).toBeInTheDocument();
 
     const begrunnelseInput = utils.getByLabelText('Begrunn hvordan feilutbetalingen skal behandles videre');
-    userEvent.paste(begrunnelseInput, 'Dette er en begrunnelse');
+    await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Opprett tilbakekreving, send varsel'));
-    userEvent.click(screen.getByText('Forhåndsvis varselbrev'));
+    await userEvent.click(screen.getByText('Opprett tilbakekreving, send varsel'));
+    await userEvent.click(screen.getByText('Forhåndsvis varselbrev'));
 
     await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
 

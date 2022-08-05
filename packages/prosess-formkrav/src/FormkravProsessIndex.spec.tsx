@@ -19,16 +19,16 @@ describe('<FormkravProsessIndex>', () => {
     expect(screen.getByText('Vurder om klagen oppfyller formkravene')).toBeInTheDocument();
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.paste(vurderingInput, 'Dette er en vurdering');
+    await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
-    userEvent.selectOptions(utils.getByLabelText('Vedtaket som er påklagd'), '1');
+    await userEvent.selectOptions(utils.getByLabelText('Vedtaket som er påklagd'), '1');
 
-    userEvent.click(screen.getAllByText('Ja')[0]);
-    userEvent.click(screen.getAllByText('Ja')[1]);
-    userEvent.click(screen.getAllByText('Ja')[2]);
-    userEvent.click(screen.getAllByText('Ja')[3]);
+    await userEvent.click(screen.getAllByText('Ja')[0]);
+    await userEvent.click(screen.getAllByText('Ja')[1]);
+    await userEvent.click(screen.getAllByText('Ja')[2]);
+    await userEvent.click(screen.getAllByText('Ja')[3]);
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

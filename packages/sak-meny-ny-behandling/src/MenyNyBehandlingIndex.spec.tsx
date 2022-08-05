@@ -17,9 +17,9 @@ describe('<MenyNyBehandlingIndex>', () => {
     const utils = render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-008');
+    await userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-008');
 
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(lagNyBehandling).toHaveBeenCalledTimes(1));
@@ -39,11 +39,11 @@ describe('<MenyNyBehandlingIndex>', () => {
     const utils = render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-002');
+    await userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-002');
 
-    userEvent.click(utils.getByRole('checkbox', { hidden: true }));
+    await userEvent.click(utils.getByRole('checkbox', { hidden: true }));
 
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(lagNyBehandling).toHaveBeenCalledTimes(1));
@@ -62,9 +62,9 @@ describe('<MenyNyBehandlingIndex>', () => {
     const utils = render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-002');
+    await userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-002');
 
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(lagNyBehandling).toHaveBeenCalledTimes(1));
@@ -83,11 +83,11 @@ describe('<MenyNyBehandlingIndex>', () => {
     const utils = render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-004');
+    await userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-004');
 
-    userEvent.selectOptions(utils.getAllByRole('combobox', { hidden: true })[1], 'RE-KLAG-U-INNTK');
+    await userEvent.selectOptions(utils.getAllByRole('combobox', { hidden: true })[1], 'RE-KLAG-U-INNTK');
 
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(lagNyBehandling).toHaveBeenCalledTimes(1));
@@ -106,15 +106,15 @@ describe('<MenyNyBehandlingIndex>', () => {
     const utils = render(<Default lagNyBehandling={lagNyBehandling} lukkModal={lukkModal} />);
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(screen.getByText('OK'));
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-004');
+    await userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-004');
 
     await waitFor(() => expect(screen.queryByText('Feltet må fylles ut')).not.toBeInTheDocument());
 
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(screen.getByText('OK'));
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
   });

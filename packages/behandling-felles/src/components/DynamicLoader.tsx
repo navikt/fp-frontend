@@ -44,6 +44,7 @@ class ErrorBoundary extends Component<OwnPropsErrorBoundary, StateErrorBoundary>
         .find((line) => !!line),
     ].join(' ');
     const dispatch = this.context;
+    // @ts-ignore Fiks
     dispatch({ type: 'add', data: message });
 
     // eslint-disable-next-line no-console

@@ -17,26 +17,26 @@ describe('<VergeFaktaIndex>', () => {
     expect(await screen.findByText('Fyll ut og kontroller vergeopplysninger')).toBeInTheDocument();
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    userEvent.selectOptions(utils.getByLabelText('Type verge'), 'ADVOKAT');
+    await userEvent.selectOptions(utils.getByLabelText('Type verge'), 'ADVOKAT');
 
     const navnInput = utils.getByLabelText('Navn');
-    userEvent.paste(navnInput, 'Espen Utvikler');
+    await userEvent.type(navnInput, 'Espen Utvikler');
 
     const organisasjonsnummerInput = utils.getByLabelText('Organisasjonsnummer');
-    userEvent.paste(organisasjonsnummerInput, '2322323233');
+    await userEvent.type(organisasjonsnummerInput, '2322323233');
 
     const fomInput = utils.getByLabelText('Periode f.o.m.');
-    userEvent.paste(fomInput, '14.09.2022');
+    await userEvent.type(fomInput, '14.09.2022');
     fireEvent.blur(fomInput);
 
     const tomInput = utils.getByLabelText('Periode t.o.m.');
-    userEvent.paste(tomInput, '24.09.2022');
+    await userEvent.type(tomInput, '24.09.2022');
     fireEvent.blur(tomInput);
 
     const begrunnelseInput = utils.getByLabelText('Begrunn endringene');
-    userEvent.paste(begrunnelseInput, 'Dette er en begrunnelse');
+    await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

@@ -21,11 +21,11 @@ describe('<LagreSoknadPapirsoknadIndex>', () => {
     expect(await screen.findByText('Ferdigstill registrering')).toBeInTheDocument();
 
     const textareaInput = utils.getByLabelText('Ved endring av opplysningene er begrunnelse obligatorisk');
-    userEvent.paste(textareaInput, 'Dette er en begrunnelse');
+    await userEvent.type(textareaInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Verge/fullmektig skal knyttes til saken'));
+    await userEvent.click(screen.getByText('Verge/fullmektig skal knyttes til saken'));
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(screen.queryByText('Bekreft og avslutt behandling')).not.toBeInTheDocument();
 
@@ -45,20 +45,20 @@ describe('<LagreSoknadPapirsoknadIndex>', () => {
     expect(await screen.findByText('Ferdigstill registrering')).toBeInTheDocument();
 
     const textareaInput = utils.getByLabelText('Ved endring av opplysningene er begrunnelse obligatorisk');
-    userEvent.paste(textareaInput, 'Dette er en begrunnelse');
+    await userEvent.type(textareaInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Søkers opplysningsplikt er ikke overholdt'));
+    await userEvent.click(screen.getByText('Søkers opplysningsplikt er ikke overholdt'));
 
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Bekreft og avslutt behandling'));
+    await userEvent.click(screen.getByText('Bekreft og avslutt behandling'));
 
     expect(await screen.findByText(
       'Avslutter registrering av søknaden. Det er ikke mulig å innhente ytterligere opplysninger.',
     )).toBeInTheDocument();
     expect(screen.getByText('Bekreft at søknaden skal avslås')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
   });

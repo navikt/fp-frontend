@@ -32,11 +32,11 @@ describe('<RisikoklassifiseringSakIndex>', () => {
     expect(await screen.findByText('Faresignal 4')).toBeInTheDocument();
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.paste(vurderingInput, 'Dette er en begrunnelse');
+    await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Faresignalene vurderes ikke som reelle'));
+    await userEvent.click(screen.getByText('Faresignalene vurderes ikke som reelle'));
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagreAksjonspunkt).toHaveBeenCalledTimes(1));
     expect(lagreAksjonspunkt).toHaveBeenNthCalledWith(1, {
@@ -61,13 +61,13 @@ describe('<RisikoklassifiseringSakIndex>', () => {
     expect(screen.getByText('Faresignal 4')).toBeInTheDocument();
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.paste(vurderingInput, 'Dette er en begrunnelse');
+    await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Faresignalene vurderes som reelle'));
+    await userEvent.click(screen.getByText('Faresignalene vurderes som reelle'));
 
-    userEvent.click(screen.getByText('Saken er innvilget med redusert beregningsgrunnlag'));
+    await userEvent.click(screen.getByText('Saken er innvilget med redusert beregningsgrunnlag'));
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagreAksjonspunkt).toHaveBeenCalledTimes(1));
     expect(lagreAksjonspunkt).toHaveBeenNthCalledWith(1, {
@@ -84,11 +84,11 @@ describe('<RisikoklassifiseringSakIndex>', () => {
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.paste(vurderingInput, 'De');
+    await userEvent.type(vurderingInput, 'De');
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(await screen.findByText('Du må skrive minst 3 tegn')).toBeInTheDocument();
     expect(screen.getByText('Feltet må fylles ut')).toBeInTheDocument();
@@ -102,11 +102,11 @@ describe('<RisikoklassifiseringSakIndex>', () => {
     expect(await screen.findByText('Faresignaler oppdaget')).toBeInTheDocument();
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.paste(vurderingInput, 'Dette er en begrunnelse');
+    await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Faresignalene vurderes som reelle'));
+    await userEvent.click(screen.getByText('Faresignalene vurderes som reelle'));
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
 

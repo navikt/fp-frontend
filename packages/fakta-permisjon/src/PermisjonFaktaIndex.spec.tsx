@@ -27,11 +27,11 @@ describe('<PermisjonFaktaIndex>', () => {
 
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    userEvent.click(screen.getByText('Fjern permisjonen og ta med arbeidsforholdet. Vurder om inntektsmelding må innhentes'));
+    await userEvent.click(screen.getByText('Fjern permisjonen og ta med arbeidsforholdet. Vurder om inntektsmelding må innhentes'));
 
-    userEvent.paste(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
@@ -58,12 +58,12 @@ describe('<PermisjonFaktaIndex>', () => {
 
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    userEvent.click(screen.getAllByText('Fjern permisjonen og ta med arbeidsforholdet. Vurder om inntektsmelding må innhentes')[0]);
-    userEvent.click(screen.getAllByText('Ikke ta med arbeidsforholdet')[1]);
+    await userEvent.click(screen.getAllByText('Fjern permisjonen og ta med arbeidsforholdet. Vurder om inntektsmelding må innhentes')[0]);
+    await userEvent.click(screen.getAllByText('Ikke ta med arbeidsforholdet')[1]);
 
-    userEvent.paste(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {

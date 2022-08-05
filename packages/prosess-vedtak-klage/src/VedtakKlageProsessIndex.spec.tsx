@@ -23,13 +23,13 @@ describe('<VedtakKlageProsessIndex>', () => {
     expect(screen.getByText('Årsak til avvisning')).toBeInTheDocument();
     expect(screen.getByText('Klagen er ikke konkret')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Forhåndsvis vedtaksbrev'));
+    await userEvent.click(screen.getByText('Forhåndsvis vedtaksbrev'));
 
     await waitFor(() => expect(forhåndsvis).toHaveBeenCalledTimes(1));
     expect(forhåndsvis).toHaveBeenNthCalledWith(1, {
       gjelderVedtak: true,
     });
-    userEvent.click(screen.getByText('Til godkjenning'));
+    await userEvent.click(screen.getByText('Til godkjenning'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{

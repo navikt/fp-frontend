@@ -28,14 +28,20 @@ const AnkeTrygderettsbehandlingProsessIndex: FunctionComponent<OwnProps & Standa
 }) => (
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="AnkeTrygderettsbehandlingProsessIndex" formData={formData} setFormData={setFormData}>
-      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <TrygderettsbehandlingForm
+        // @ts-ignore
         ankeVurderingResultat={ankeVurdering.ankeVurderingResultat}
+        // @ts-ignore
         aksjonspunkter={aksjonspunkter}
+        // @ts-ignore
         submitCallback={submitCallback}
+        // @ts-ignore
         sprakkode={behandling.sprakkode}
+        // @ts-ignore
         readOnly={isReadOnly}
+        // @ts-ignore
         readOnlySubmitButton={readOnlySubmitButton}
+        // @ts-ignore
         ankeOmgorArsaker={alleKodeverk[kodeverkTyper.ANKE_OMGJOER_AARSAK]}
       />
     </ReduxWrapper>

@@ -16,9 +16,9 @@ describe('<RettigheterPapirsoknadIndex>', () => {
     expect(await screen.findByText('Rettigheter')).toBeInTheDocument();
     expect(screen.queryByText('Mann adopterer alene')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Den andre forelderen er død'));
+    await userEvent.click(screen.getByText('Den andre forelderen er død'));
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -33,9 +33,9 @@ describe('<RettigheterPapirsoknadIndex>', () => {
 
     expect(await screen.findByText('Rettigheter')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Mann adopterer alene'));
+    await userEvent.click(screen.getByText('Mann adopterer alene'));
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

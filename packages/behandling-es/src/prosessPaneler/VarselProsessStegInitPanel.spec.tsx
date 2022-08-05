@@ -143,15 +143,15 @@ describe('<VarselProsessStegInitPanel>', () => {
 
     expect(await screen.findByText('Varsel om revurdering')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Send varsel til søker'));
+    await userEvent.click(screen.getByText('Send varsel til søker'));
 
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
-    userEvent.paste(begrunnelseInput, 'Dette er en begrunnelse');
+    await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
     const fritekstInput = utils.getByLabelText('Fritekst i brev');
-    userEvent.paste(fritekstInput, 'Dette er en fritekst');
+    await userEvent.type(fritekstInput, 'Dette er en fritekst');
 
-    userEvent.click(screen.getByText('Forhåndsvis'));
+    await userEvent.click(screen.getByText('Forhåndsvis'));
 
     await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
 

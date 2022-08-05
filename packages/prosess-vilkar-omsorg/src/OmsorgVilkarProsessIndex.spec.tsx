@@ -17,12 +17,12 @@ describe('<OmsorgVilkarProsessIndex>', () => {
     expect(await screen.findByText('Omsorg')).toBeInTheDocument();
     expect(screen.getByText('Far rett til engangsstønad')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Far har rett til engangsstønad, vilkåret er oppfylt'));
+    await userEvent.click(screen.getByText('Far har rett til engangsstønad, vilkåret er oppfylt'));
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.paste(vurderingInput, 'Dette er en vurdering');
+    await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
@@ -39,18 +39,18 @@ describe('<OmsorgVilkarProsessIndex>', () => {
 
     expect(await screen.findByText('Omsorg')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText(/Far har ikke rett til engangsstønad, vilkåret er/));
+    await userEvent.click(screen.getByText(/Far har ikke rett til engangsstønad, vilkåret er/));
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.paste(vurderingInput, 'Dette er en vurdering');
+    await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), '1011');
+    await userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), '1011');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{

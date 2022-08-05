@@ -27,11 +27,11 @@ describe('<FodselFaktaIndex>', () => {
 
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    userEvent.paste(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
@@ -61,30 +61,30 @@ describe('<FodselFaktaIndex>', () => {
 
     expect(screen.getByText('Dokumentasjon av fødsel')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Dokumentasjon foreligger'));
+    await userEvent.click(screen.getByText('Dokumentasjon foreligger'));
 
     expect(await screen.findByText('Fyll inn dokumenterte opplysninger')).toBeInTheDocument();
 
-    userEvent.click(screen.getByAltText('Legg til barn'));
+    await userEvent.click(screen.getByAltText('Legg til barn'));
 
     const alleDatofelt = utils.getAllByRole('textbox', { hidden: true });
     const fødselsdatoFelt = alleDatofelt[0];
-    userEvent.type(fødselsdatoFelt, '{backspace}0');
+    await userEvent.type(fødselsdatoFelt, '{backspace}0');
     fireEvent.blur(fødselsdatoFelt);
 
     const fødselsdatoFelt2 = alleDatofelt[2];
-    userEvent.type(fødselsdatoFelt2, '23.09.2021');
+    await userEvent.type(fødselsdatoFelt2, '23.09.2021');
     fireEvent.blur(fødselsdatoFelt2);
 
     const dødsdatoFelt = alleDatofelt[3];
-    userEvent.type(dødsdatoFelt, '23.09.2021');
+    await userEvent.type(dødsdatoFelt, '23.09.2021');
     fireEvent.blur(dødsdatoFelt);
 
-    userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
@@ -119,13 +119,13 @@ describe('<FodselFaktaIndex>', () => {
 
     expect(screen.getByText('Dokumentasjon av fødsel')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Dokumentasjon foreligger ikke, bruk opplysningene i folkeregisteret'));
+    await userEvent.click(screen.getByText('Dokumentasjon foreligger ikke, bruk opplysningene i folkeregisteret'));
 
-    userEvent.paste(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
@@ -150,11 +150,11 @@ describe('<FodselFaktaIndex>', () => {
 
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    userEvent.paste(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
@@ -174,13 +174,13 @@ describe('<FodselFaktaIndex>', () => {
 
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    userEvent.paste(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText(/ikke/));
+    await userEvent.click(screen.getByText(/ikke/));
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
