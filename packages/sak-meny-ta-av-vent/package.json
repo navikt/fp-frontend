@@ -10,7 +10,7 @@
     "@navikt/ft-ui-komponenter": "1.0.27",
     "@navikt/ft-utils": "1.0.24",
     "nav-frontend-modal": "2.0.1",
-    "nav-frontend-modal-style": "2.0.1",
+    "nav-frontend-modal-style": "2.0.2",
     "react": "18.2.0",
     "react-intl": "6.0.5"
   },
