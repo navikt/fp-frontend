@@ -1,4 +1,4 @@
-import React, { useEffect, FunctionComponent, ReactElement } from 'react';
+import React, { FunctionComponent, ReactElement, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
@@ -68,7 +68,7 @@ const TilbakekrevingRevurderingArsaker = [
   behandlingArsakType.RE_FEILUTBETALT_BELØP_REDUSERT,
 ];
 
-export const getBehandlingAarsaker = (
+const getBehandlingAarsaker = (
   ytelseType: string,
   alleRevurderingArsaker: KodeverkMedNavn[],
   alleTilbakekrevingRevurderingArsaker: KodeverkMedNavn[],
@@ -97,27 +97,26 @@ export const getBehandlingAarsaker = (
   return [];
 };
 
-export const getBehandlingTyper = (
+const getBehandlingTyper = (
   behandlingstyper: KodeverkMedNavn[],
 ): KodeverkMedNavn[] => [...behandlingstyper].sort((bt1, bt2) => bt1.navn.localeCompare(bt2.navn));
 
-const kanOppretteBehandlingstype = (
-  behandlingOppretting: BehandlingOppretting[],
-  behandlingTypeKode: string,
-): boolean => behandlingOppretting.some((bo) => bo.behandlingType === behandlingTypeKode && bo.kanOppretteBehandling);
-
-export const getEnabledBehandlingstyper = (
+const getEnabledBehandlingstyper = (
   behandlingstyper: KodeverkMedNavn[],
   behandlingOppretting: BehandlingOppretting[],
   kanTilbakekrevingOpprettes = {
     kanBehandlingOpprettes: false,
     kanRevurderingOpprettes: false,
   },
-) => behandlingstyper
-  .filter((b) => (b.kode === bType.TILBAKEKREVING ? kanTilbakekrevingOpprettes.kanBehandlingOpprettes : true))
-  .filter((b) => (b.kode === bType.TILBAKEKREVING_REVURDERING ? kanTilbakekrevingOpprettes.kanRevurderingOpprettes : true))
-  .filter((b) => (b.kode === bType.FORSTEGANGSSOKNAD ? kanOppretteBehandlingstype(behandlingOppretting, bType.FORSTEGANGSSOKNAD) : true))
-  .filter((b) => (b.kode === bType.REVURDERING ? kanOppretteBehandlingstype(behandlingOppretting, bType.REVURDERING) : true));
+) => behandlingstyper.filter((bt) => {
+  if (bt.kode === bType.TILBAKEKREVING) {
+    return kanTilbakekrevingOpprettes.kanBehandlingOpprettes;
+  }
+  if (bt.kode === bType.TILBAKEKREVING_REVURDERING) {
+    return kanTilbakekrevingOpprettes.kanRevurderingOpprettes;
+  }
+  return behandlingOppretting.some((bo) => bo.behandlingType === bt.kode && bo.kanOppretteBehandling);
+});
 
 export type BehandlingOppretting = Readonly<{
   behandlingType: string;
@@ -132,7 +131,6 @@ export type FormValues = {
 
 interface OwnProps {
   ytelseType: string;
-  saksnummer: string;
   cancelEvent: () => void;
   submitCallback: (data: {
     eksternUuid?: string,
@@ -146,17 +144,7 @@ interface OwnProps {
     kanBehandlingOpprettes: boolean;
     kanRevurderingOpprettes: boolean;
   };
-  behandlingType?: string;
-  behandlingUuid?: string;
   uuidForSistLukkede?: string;
-  erTilbakekrevingAktivert: boolean;
-  sjekkOmTilbakekrevingKanOpprettes: (params: {
-    saksnummer: string;
-    uuid: string;
-  }) => void;
-  sjekkOmTilbakekrevingRevurderingKanOpprettes: (params: {
-    uuid: string;
-  }) => void;
 }
 
 /**
@@ -165,37 +153,18 @@ interface OwnProps {
  * Presentasjonskomponent. Denne modalen vises etter at en saksbehandler har valgt opprett ny 1.gangsbehandling i behandlingsmenyen.
  * Ved å trykke på ok skal ny behandling(1.gangsbehandling) av sak opprettes.
  */
-export const NyBehandlingModal: FunctionComponent<OwnProps> = ({
+const NyBehandlingModal: FunctionComponent<OwnProps> = ({
   submitCallback,
   cancelEvent,
   behandlingstyper,
-  behandlingUuid,
-  sjekkOmTilbakekrevingKanOpprettes,
-  sjekkOmTilbakekrevingRevurderingKanOpprettes,
-  saksnummer,
-  erTilbakekrevingAktivert,
   uuidForSistLukkede,
   ytelseType,
   behandlingOppretting,
   kanTilbakekrevingOpprettes,
   revurderingArsaker,
   tilbakekrevingRevurderingArsaker,
-  behandlingType,
 }) => {
   const intl = useIntl();
-
-  const erTilbakekreving = behandlingType === bType.TILBAKEKREVING || behandlingType === bType.TILBAKEKREVING_REVURDERING;
-
-  useEffect(() => {
-    if (erTilbakekrevingAktivert) {
-      if (uuidForSistLukkede !== undefined) {
-        sjekkOmTilbakekrevingKanOpprettes({ saksnummer, uuid: uuidForSistLukkede });
-      }
-      if (erTilbakekreving && behandlingUuid) {
-        sjekkOmTilbakekrevingRevurderingKanOpprettes({ uuid: behandlingUuid });
-      }
-    }
-  }, []);
 
   const formMethods = useForm<FormValues>();
 
@@ -207,7 +176,7 @@ export const NyBehandlingModal: FunctionComponent<OwnProps> = ({
 
   const valgtBehandlingTypeKode = formMethods.watch('behandlingType');
 
-  const behandlingTyper = getBehandlingTyper(behandlingstyper);
+  const behandlingTyper = useMemo(() => getBehandlingTyper(behandlingstyper), [behandlingstyper]);
   const enabledBehandlingstyper = getEnabledBehandlingstyper(behandlingTyper, behandlingOppretting, kanTilbakekrevingOpprettes);
   const behandlingArsakTyper = getBehandlingAarsaker(ytelseType, revurderingArsaker, tilbakekrevingRevurderingArsaker, valgtBehandlingTypeKode);
 
