@@ -52,7 +52,7 @@
     "@navikt/ft-tidslinje": "1.0.21",
     "@navikt/ft-ui-komponenter": "1.0.27",
     "@navikt/ft-utils": "1.0.24",
-    "@sentry/browser": "7.8.0",
+    "@sentry/browser": "7.8.1",
     "axios": "0.27.2",
     "history": "5.3.0",
     "moment": "2.29.4",
