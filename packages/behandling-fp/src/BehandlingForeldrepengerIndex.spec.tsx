@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 
 import { AksessRettigheter, AlleKodeverk, Fagsak } from '@fpsak-frontend/types';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
@@ -38,37 +39,40 @@ describe('<BehandlingForeldrepengerIndex>', () => {
       { key: FpBehandlingApiKeys.PREVIEW_MESSAGE.name, noRelLink: true, data: undefined },
     ];
 
-    render(
-      <RestApiMock data={data} requestApi={requestFpApi}>
-        <BehandlingForeldrepengerIndex
-          behandlingEventHandler={{
-            setHandler: () => {},
-            clear: () => {},
-            settBehandlingPaVent: () => undefined,
-          }}
-          behandlingUuid="test-uuid"
-          oppdaterBehandlingVersjon={() => {}}
-          // @ts-ignore
-          kodeverk={alleKodeverk as AlleKodeverk}
-          fagsak={{
-            fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
-          } as Fagsak}
-          rettigheter={{
-            writeAccess: {
-              isEnabled: true,
-            },
-            kanOverstyreAccess: {
-              isEnabled: true,
-            },
-          } as AksessRettigheter}
-          oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
-          valgtProsessSteg="default"
-          valgtFaktaSteg="default"
-          opneSokeside={() => {}}
-          setRequestPendingMessage={() => {}}
-        />
-      </RestApiMock>,
-    );
+    await act(async () => {
+      render(
+        <RestApiMock data={data} requestApi={requestFpApi}>
+          <BehandlingForeldrepengerIndex
+            behandlingEventHandler={{
+              setHandler: () => {},
+              clear: () => {},
+              settBehandlingPaVent: () => undefined,
+            }}
+            behandlingUuid="test-uuid"
+            oppdaterBehandlingVersjon={() => {}}
+            // @ts-ignore
+            kodeverk={alleKodeverk as AlleKodeverk}
+            fagsak={{
+              fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+            } as Fagsak}
+            rettigheter={{
+              writeAccess: {
+                isEnabled: true,
+              },
+              kanOverstyreAccess: {
+                isEnabled: true,
+              },
+            } as AksessRettigheter}
+            oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
+            valgtProsessSteg="default"
+            valgtFaktaSteg="default"
+            opneSokeside={() => {}}
+            setRequestPendingMessage={() => {}}
+          />
+        </RestApiMock>,
+      );
+    });
+
     expect(await screen.findByText('Opplysningsplikt')).toBeInTheDocument();
     expect(screen.getByText('Beregning')).toBeInTheDocument();
     expect(screen.getByText('Uttak')).toBeInTheDocument();

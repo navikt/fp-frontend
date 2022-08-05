@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
@@ -38,37 +39,40 @@ describe('<BehandlingEngangsstonadIndex>', () => {
       { key: EsBehandlingApiKeys.PREVIEW_MESSAGE.name, noRelLink: true, data: undefined },
     ];
 
-    render(
-      <RestApiMock data={data} requestApi={requestEsApi}>
-        <BehandlingEngangsstonadIndex
-          behandlingEventHandler={{
-            setHandler: () => {},
-            clear: () => {},
-            settBehandlingPaVent: () => undefined,
-          }}
-          behandlingUuid="test-uuid"
-          oppdaterBehandlingVersjon={() => {}}
-          // @ts-ignore
-          kodeverk={alleKodeverk as AlleKodeverk}
-          fagsak={{
-            fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
-          } as Fagsak}
-          rettigheter={{
-            writeAccess: {
-              isEnabled: true,
-            },
-            kanOverstyreAccess: {
-              isEnabled: true,
-            },
-          } as AksessRettigheter}
-          oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
-          valgtProsessSteg="default"
-          valgtFaktaSteg="default"
-          opneSokeside={() => {}}
-          setRequestPendingMessage={() => {}}
-        />
-      </RestApiMock>,
-    );
+    await act(async () => {
+      render(
+        <RestApiMock data={data} requestApi={requestEsApi}>
+          <BehandlingEngangsstonadIndex
+            behandlingEventHandler={{
+              setHandler: () => {},
+              clear: () => {},
+              settBehandlingPaVent: () => undefined,
+            }}
+            behandlingUuid="test-uuid"
+            oppdaterBehandlingVersjon={() => {}}
+            // @ts-ignore
+            kodeverk={alleKodeverk as AlleKodeverk}
+            fagsak={{
+              fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
+            } as Fagsak}
+            rettigheter={{
+              writeAccess: {
+                isEnabled: true,
+              },
+              kanOverstyreAccess: {
+                isEnabled: true,
+              },
+            } as AksessRettigheter}
+            oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
+            valgtProsessSteg="default"
+            valgtFaktaSteg="default"
+            opneSokeside={() => {}}
+            setRequestPendingMessage={() => {}}
+          />
+        </RestApiMock>,
+      );
+    });
+
     expect(await screen.findByText('Beregning')).toBeInTheDocument();
     expect(screen.getByText('Simulering')).toBeInTheDocument();
     expect(screen.getByText('Vedtak')).toBeInTheDocument();

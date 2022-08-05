@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -38,38 +39,41 @@ describe('<BehandlingKlageIndex>', () => {
       { key: KlageBehandlingApiKeys.AKSJONSPUNKTER.name, data: [] },
     ];
 
-    render(
-      <RestApiMock data={data} requestApi={requestKlageApi}>
-        <BehandlingKlageIndex
-          behandlingEventHandler={{
-            setHandler: () => {},
-            clear: () => {},
-            settBehandlingPaVent: () => undefined,
-          }}
-          behandlingUuid="test-uuid"
-          oppdaterBehandlingVersjon={() => {}}
-          // @ts-ignore
-          kodeverk={alleKodeverk as AlleKodeverk}
-          fagsak={{
-            fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
-          } as Fagsak}
-          rettigheter={{
-            writeAccess: {
-              isEnabled: true,
-            },
-            kanOverstyreAccess: {
-              isEnabled: true,
-            },
-          } as AksessRettigheter}
-          oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
-          valgtProsessSteg="default"
-          valgtFaktaSteg="default"
-          opneSokeside={() => {}}
-          setRequestPendingMessage={() => {}}
-          alleBehandlinger={[]}
-        />
-      </RestApiMock>,
-    );
+    await act(async () => {
+      render(
+        <RestApiMock data={data} requestApi={requestKlageApi}>
+          <BehandlingKlageIndex
+            behandlingEventHandler={{
+              setHandler: () => {},
+              clear: () => {},
+              settBehandlingPaVent: () => undefined,
+            }}
+            behandlingUuid="test-uuid"
+            oppdaterBehandlingVersjon={() => {}}
+            // @ts-ignore
+            kodeverk={alleKodeverk as AlleKodeverk}
+            fagsak={{
+              fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+            } as Fagsak}
+            rettigheter={{
+              writeAccess: {
+                isEnabled: true,
+              },
+              kanOverstyreAccess: {
+                isEnabled: true,
+              },
+            } as AksessRettigheter}
+            oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
+            valgtProsessSteg="default"
+            valgtFaktaSteg="default"
+            opneSokeside={() => {}}
+            setRequestPendingMessage={() => {}}
+            alleBehandlinger={[]}
+          />
+        </RestApiMock>,
+      );
+    });
+
     expect(await screen.findByText('Formkrav Vedtaksinstans')).toBeInTheDocument();
     expect(screen.getByText('Behandling Vedtaksinstans')).toBeInTheDocument();
     expect(screen.getByText('Formkrav Klageinstans')).toBeInTheDocument();

@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
@@ -38,37 +39,40 @@ describe('<BehandlingInnsynIndex>', () => {
       { key: InnsynBehandlingApiKeys.AKSJONSPUNKTER.name, data: [] },
     ];
 
-    render(
-      <RestApiMock data={data} requestApi={requestInnsynApi}>
-        <BehandlingInnsynIndex
-          behandlingEventHandler={{
-            setHandler: () => {},
-            clear: () => {},
-            settBehandlingPaVent: () => undefined,
-          }}
-          behandlingUuid="test-uuid"
-          oppdaterBehandlingVersjon={() => {}}
-          // @ts-ignore
-          kodeverk={alleKodeverk as AlleKodeverk}
-          fagsak={{
-            fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
-          } as Fagsak}
-          rettigheter={{
-            writeAccess: {
-              isEnabled: true,
-            },
-            kanOverstyreAccess: {
-              isEnabled: true,
-            },
-          } as AksessRettigheter}
-          oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
-          valgtProsessSteg="default"
-          valgtFaktaSteg="default"
-          opneSokeside={() => {}}
-          setRequestPendingMessage={() => {}}
-        />
-      </RestApiMock>,
-    );
+    await act(async () => {
+      render(
+        <RestApiMock data={data} requestApi={requestInnsynApi}>
+          <BehandlingInnsynIndex
+            behandlingEventHandler={{
+              setHandler: () => {},
+              clear: () => {},
+              settBehandlingPaVent: () => undefined,
+            }}
+            behandlingUuid="test-uuid"
+            oppdaterBehandlingVersjon={() => {}}
+            // @ts-ignore
+            kodeverk={alleKodeverk as AlleKodeverk}
+            fagsak={{
+              fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+            } as Fagsak}
+            rettigheter={{
+              writeAccess: {
+                isEnabled: true,
+              },
+              kanOverstyreAccess: {
+                isEnabled: true,
+              },
+            } as AksessRettigheter}
+            oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
+            valgtProsessSteg="default"
+            valgtFaktaSteg="default"
+            opneSokeside={() => {}}
+            setRequestPendingMessage={() => {}}
+          />
+        </RestApiMock>,
+      );
+    });
+
     expect(await screen.findByText('Behandle innsyn')).toBeInTheDocument();
     expect(screen.getByText('Vedtak')).toBeInTheDocument();
   });

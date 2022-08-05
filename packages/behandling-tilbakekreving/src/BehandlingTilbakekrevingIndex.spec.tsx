@@ -1,4 +1,5 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import { render, screen } from '@testing-library/react';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
@@ -39,39 +40,42 @@ describe('<BehandlingTilbakekrevingIndex>', () => {
       { key: TilbakekrevingBehandlingApiKeys.TILBAKE_KODEVERK.name, global: true, data: alleKodeverk },
     ];
 
-    render(
-      <RestApiMock data={data} requestApi={requestTilbakekrevingApi}>
-        <BehandlingTilbakekrevingIndex
-          behandlingEventHandler={{
-            setHandler: () => {},
-            clear: () => {},
-            settBehandlingPaVent: () => undefined,
-          }}
-          behandlingUuid="test-uuid"
-          oppdaterBehandlingVersjon={() => {}}
-          // @ts-ignore
-          kodeverk={alleKodeverk as AlleKodeverk}
-          fagsak={{
-            fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
-          } as Fagsak}
-          rettigheter={{
-            writeAccess: {
-              isEnabled: true,
-            },
-            kanOverstyreAccess: {
-              isEnabled: true,
-            },
-          } as AksessRettigheter}
-          oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
-          valgtProsessSteg="default"
-          valgtFaktaSteg="default"
-          opneSokeside={() => {}}
-          setRequestPendingMessage={() => {}}
-          fagsakKjønn={navBrukerKjonn.KVINNE}
-          harApenRevurdering={false}
-        />
-      </RestApiMock>,
-    );
+    await act(async () => {
+      render(
+        <RestApiMock data={data} requestApi={requestTilbakekrevingApi}>
+          <BehandlingTilbakekrevingIndex
+            behandlingEventHandler={{
+              setHandler: () => {},
+              clear: () => {},
+              settBehandlingPaVent: () => undefined,
+            }}
+            behandlingUuid="test-uuid"
+            oppdaterBehandlingVersjon={() => {}}
+            // @ts-ignore
+            kodeverk={alleKodeverk as AlleKodeverk}
+            fagsak={{
+              fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+            } as Fagsak}
+            rettigheter={{
+              writeAccess: {
+                isEnabled: true,
+              },
+              kanOverstyreAccess: {
+                isEnabled: true,
+              },
+            } as AksessRettigheter}
+            oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
+            valgtProsessSteg="default"
+            valgtFaktaSteg="default"
+            opneSokeside={() => {}}
+            setRequestPendingMessage={() => {}}
+            fagsakKjønn={navBrukerKjonn.KVINNE}
+            harApenRevurdering={false}
+          />
+        </RestApiMock>,
+      );
+    });
+
     expect(await screen.findByText('Foreldelse')).toBeInTheDocument();
     expect(screen.getByText('Tilbakekreving')).toBeInTheDocument();
     expect(screen.getByText('Vedtak')).toBeInTheDocument();
