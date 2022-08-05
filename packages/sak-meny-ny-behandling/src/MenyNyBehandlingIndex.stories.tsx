@@ -49,6 +49,12 @@ const behandlingOppretting = [{
 }, {
   behandlingType: behandlingType.REVURDERING,
   kanOppretteBehandling: true,
+}, {
+  behandlingType: behandlingType.ANKE,
+  kanOppretteBehandling: true,
+}, {
+  behandlingType: behandlingType.KLAGE,
+  kanOppretteBehandling: false,
 }];
 
 const Template: Story<{
@@ -57,13 +63,11 @@ const Template: Story<{
     kanBehandlingOpprettes: boolean;
     kanRevurderingOpprettes: boolean;
   };
-  erTilbakekrevingAktivert: boolean;
   lagNyBehandling: () => void;
   lukkModal: () => void;
 }> = ({
   tilbakekrevingRevurderingArsaker,
   kanTilbakekrevingOpprettes,
-  erTilbakekrevingAktivert,
   lagNyBehandling,
   lukkModal,
 }) => (
@@ -72,7 +76,6 @@ const Template: Story<{
     saksnummer="123"
     behandlingUuid="1"
     behandlingVersjon={2}
-    behandlingType={behandlingType.FORSTEGANGSSOKNAD}
     lagNyBehandling={lagNyBehandling}
     behandlingstyper={behandlingstyper}
     tilbakekrevingRevurderingArsaker={tilbakekrevingRevurderingArsaker}
@@ -87,9 +90,6 @@ const Template: Story<{
     }]}
     behandlingOppretting={behandlingOppretting}
     kanTilbakekrevingOpprettes={kanTilbakekrevingOpprettes}
-    erTilbakekrevingAktivert={erTilbakekrevingAktivert}
-    sjekkOmTilbakekrevingKanOpprettes={action('button-click')}
-    sjekkOmTilbakekrevingRevurderingKanOpprettes={action('button-click')}
     lukkModal={lukkModal}
   />
 );
@@ -103,7 +103,6 @@ Default.args = {
     kanBehandlingOpprettes: false,
     kanRevurderingOpprettes: false,
   },
-  erTilbakekrevingAktivert: false,
 };
 
 export const ForTilbakekreving = Template.bind({});
@@ -123,5 +122,4 @@ ForTilbakekreving.args = {
     kanBehandlingOpprettes: true,
     kanRevurderingOpprettes: true,
   },
-  erTilbakekrevingAktivert: true,
 };

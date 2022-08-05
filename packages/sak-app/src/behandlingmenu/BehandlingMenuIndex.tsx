@@ -140,6 +140,19 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
     ? () => behandlingEventHandler.fjernVerge().then(setLocation) : undefined;
   const opprettVergeFn = skalLageVergeFn(VergeBehandlingmenyValg.OPPRETT, vergeMenyvalg, behandlingUuid, behandlingVersjon)
     ? () => behandlingEventHandler.opprettVerge().then(setLocation) : undefined;
+
+  useEffect(() => {
+    if (erTilbakekrevingAktivert) {
+      if (uuidForSistLukkede !== undefined) {
+        sjekkTilbakeKanOpprettes({ saksnummer: fagsak.saksnummer, uuid: uuidForSistLukkede });
+      }
+      const erTilbakekreving = behandling?.type === BehandlingType.TILBAKEKREVING || behandling?.type === BehandlingType.TILBAKEKREVING_REVURDERING;
+      if (erTilbakekreving && behandlingUuid) {
+        sjekkTilbakeRevurdKanOpprettes({ uuid: behandlingUuid });
+      }
+    }
+  }, [fagsak.saksnummer, behandlingUuid]);
+
   return (
     <MenySakIndex
       data={[
@@ -205,14 +218,12 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
               saksnummer={fagsak.saksnummer}
               behandlingUuid={behandling?.uuid}
               behandlingVersjon={behandlingVersjon}
-              behandlingType={behandling?.type}
               uuidForSistLukkede={uuidForSistLukkede}
               behandlingOppretting={sakRettigheter.behandlingTypeKanOpprettes}
               kanTilbakekrevingOpprettes={{
                 kanBehandlingOpprettes,
                 kanRevurderingOpprettes,
               }}
-              erTilbakekrevingAktivert={erTilbakekrevingAktivert}
               behandlingstyper={menyKodeverk
                 .getKodeverkForBehandlingstyper(BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES, kodeverkTyper.BEHANDLING_TYPE)}
               tilbakekrevingRevurderingArsaker={menyKodeverk.getKodeverkForBehandlingstype(kodeverkTyper.BEHANDLING_AARSAK,
@@ -220,8 +231,6 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
               revurderingArsaker={menyKodeverk.getKodeverkForBehandlingstype(kodeverkTyper.BEHANDLING_AARSAK, BehandlingType.REVURDERING)}
               ytelseType={fagsak.fagsakYtelseType}
               lagNyBehandling={lagNyBehandling}
-              sjekkOmTilbakekrevingKanOpprettes={sjekkTilbakeKanOpprettes}
-              sjekkOmTilbakekrevingRevurderingKanOpprettes={sjekkTilbakeRevurdKanOpprettes}
               lukkModal={lukkModal}
             />
           )),

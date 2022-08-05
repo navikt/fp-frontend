@@ -20,7 +20,6 @@ interface OwnProps {
   saksnummer: string;
   behandlingUuid?: string;
   behandlingVersjon?: number;
-  behandlingType?: string;
   lagNyBehandling: (isTilbakekreving: boolean, data: {
     saksnummer: string;
     behandlingUuid?: string;
@@ -34,14 +33,6 @@ interface OwnProps {
     kanRevurderingOpprettes: boolean;
   };
   uuidForSistLukkede?: string;
-  erTilbakekrevingAktivert: boolean;
-  sjekkOmTilbakekrevingKanOpprettes: (params: {
-    saksnummer: string;
-    uuid: string;
-  }) => void;
-  sjekkOmTilbakekrevingRevurderingKanOpprettes: (params: {
-    uuid: string;
-  }) => void;
   lukkModal: () => void;
 }
 
@@ -50,7 +41,6 @@ const MenyNyBehandlingIndex: FunctionComponent<OwnProps> = ({
   saksnummer,
   behandlingUuid,
   behandlingVersjon,
-  behandlingType,
   lagNyBehandling,
   behandlingstyper,
   tilbakekrevingRevurderingArsaker,
@@ -58,9 +48,6 @@ const MenyNyBehandlingIndex: FunctionComponent<OwnProps> = ({
   behandlingOppretting,
   kanTilbakekrevingOpprettes,
   uuidForSistLukkede,
-  erTilbakekrevingAktivert,
-  sjekkOmTilbakekrevingKanOpprettes,
-  sjekkOmTilbakekrevingRevurderingKanOpprettes,
   lukkModal,
 }) => {
   const submit = useCallback((formValues: FormValues) => {
@@ -80,7 +67,6 @@ const MenyNyBehandlingIndex: FunctionComponent<OwnProps> = ({
     <RawIntlProvider value={intl}>
       <NyBehandlingModal
         ytelseType={ytelseType}
-        saksnummer={saksnummer}
         cancelEvent={lukkModal}
         submitCallback={submit}
         behandlingOppretting={behandlingOppretting}
@@ -88,12 +74,7 @@ const MenyNyBehandlingIndex: FunctionComponent<OwnProps> = ({
         tilbakekrevingRevurderingArsaker={tilbakekrevingRevurderingArsaker}
         revurderingArsaker={revurderingArsaker}
         kanTilbakekrevingOpprettes={kanTilbakekrevingOpprettes}
-        behandlingType={behandlingType}
-        behandlingUuid={behandlingUuid}
         uuidForSistLukkede={uuidForSistLukkede}
-        erTilbakekrevingAktivert={erTilbakekrevingAktivert}
-        sjekkOmTilbakekrevingKanOpprettes={sjekkOmTilbakekrevingKanOpprettes}
-        sjekkOmTilbakekrevingRevurderingKanOpprettes={sjekkOmTilbakekrevingRevurderingKanOpprettes}
       />
     </RawIntlProvider>
   );
