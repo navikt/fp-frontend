@@ -13062,6 +13062,11 @@ nav-frontend-etiketter@3.0.2:
   resolved "https://registry.yarnpkg.com/nav-frontend-etiketter/-/nav-frontend-etiketter-3.0.2.tgz#f8cea59a4bda43428aa58dff3e72d5954f4b7bb9"
   integrity sha512-WE/YAT1ubi6HnI4GMyiWE2QFxFU0xdNlIoxhVscICzIHhyXXWd6NWBQbx7+ssHmjrN4M+vVxSLAUXDwTIPOeNg==
 
+nav-frontend-etiketter@3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/nav-frontend-etiketter/-/nav-frontend-etiketter-3.0.3.tgz#c328bd5d37a005ccdf37ab05db4c7726b3f14f3f"
+  integrity sha512-gyAgEgoQyC/pwO5r1l7tHsaehxQlzykIif2CQQ+THcx0Lw1Use/wwyyP7Xm8J4caE/VvTloWPM0zoclKvHvqKQ==
+
 nav-frontend-grid-style@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/nav-frontend-grid-style/-/nav-frontend-grid-style-1.0.2.tgz#f0b05032686c5479af17a7707637188928a3c830"
