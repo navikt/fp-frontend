@@ -18,14 +18,14 @@ describe('<SvangerskapVilkarProsessIndex>', () => {
     expect(screen.getByText('Rett til svangerskapspenger')).toBeInTheDocument();
     expect(screen.getByText('Det finnes ingen perioder med svangerskapspenger som kan innvilges')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText(/Mor har ikke rett til svangerskapspenger, vilkåret er/));
+    await userEvent.click(screen.getByText(/Mor har ikke rett til svangerskapspenger, vilkåret er/));
 
-    userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), '1065');
+    await userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), '1065');
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.paste(vurderingInput, 'Dette er en vurdering');
+    await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -46,9 +46,9 @@ describe('<SvangerskapVilkarProsessIndex>', () => {
     expect(screen.getByText('Rett til svangerskapspenger')).toBeInTheDocument();
     expect(screen.queryByText('Det finnes ingen perioder med svangerskapspenger som kan innvilges')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Mor har rett til svangerskapspenger, vilkåret er oppfylt'));
+    await userEvent.click(screen.getByText('Mor har rett til svangerskapspenger, vilkåret er oppfylt'));
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

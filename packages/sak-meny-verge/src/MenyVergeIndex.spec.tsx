@@ -17,7 +17,7 @@ describe('<MenyVergeIndex>', () => {
 
     expect(await screen.findByText('Opprett verge/fullmektig?')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(opprettVerge).toHaveBeenCalledTimes(1));
     expect(lukkModal).toHaveBeenCalledTimes(1);
@@ -30,7 +30,7 @@ describe('<MenyVergeIndex>', () => {
 
     expect(await screen.findByText('Fjern verge/fullmektig?')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(fjernVerge).toHaveBeenCalledTimes(1));
     expect(lukkModal).toHaveBeenCalledTimes(1);

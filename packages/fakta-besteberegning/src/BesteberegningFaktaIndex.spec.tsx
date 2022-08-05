@@ -43,11 +43,11 @@ describe('<BesteberegningFaktaIndex>', () => {
       + ' Vennligst kontroller beregningen')).toBeInTheDocument();
 
     expect(screen.getByText('Beregningen er riktig, fortsett behandlingen.')).toBeEnabled();
-    userEvent.click(screen.getByRole('checkbox'));
-    userEvent.paste(utils.getByLabelText('Vurdering'), 'Min begrunnelse for vurdering av besteberegning');
+    await userEvent.click(screen.getByRole('checkbox'));
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Min begrunnelse for vurdering av besteberegning');
 
     expect(screen.getByText('Bekreft og fortsett')).toBeEnabled();
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

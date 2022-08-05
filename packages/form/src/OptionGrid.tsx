@@ -9,7 +9,7 @@ import styles from './optionGrid.less';
 
 interface OptionGridProps {
   columns?: number;
-  options: React.ElementType[];
+  options: React.ReactNode[];
   spaceBetween?: boolean;
   isEdited?: boolean;
   direction?: string;

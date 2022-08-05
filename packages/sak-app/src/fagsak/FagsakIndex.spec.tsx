@@ -1,6 +1,7 @@
 import React from 'react';
 import sinon, { SinonStub } from 'sinon';
 import { MemoryRouter } from 'react-router-dom';
+import { act } from 'react-dom/test-utils';
 import { render, screen } from '@testing-library/react';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
@@ -112,13 +113,15 @@ describe('<FagsakIndex>', () => {
       { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
     ];
 
-    render(
-      <RestApiMock data={data} requestApi={requestApi}>
-        <MemoryRouter initialEntries={['/behandling']}>
-          <FagsakIndex />
-        </MemoryRouter>
-      </RestApiMock>,
-    );
+    await act(async () => {
+      render(
+        <RestApiMock data={data} requestApi={requestApi}>
+          <MemoryRouter initialEntries={['/behandling']}>
+            <FagsakIndex />
+          </MemoryRouter>
+        </RestApiMock>,
+      );
+    });
 
     expect(await screen.findByText('123456 - Løpende')).toBeInTheDocument();
   });

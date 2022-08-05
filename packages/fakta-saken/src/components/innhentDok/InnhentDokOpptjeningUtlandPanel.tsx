@@ -91,7 +91,7 @@ const InnhentDokOpptjeningUtlandPanel: FunctionComponent<OwnProps> = ({
               <FormattedMessage
                 id="InnhentDokOpptjeningUtlandPanel.InnhentesIkke"
                 values={{
-                  b: (chunks) => <b>{chunks}</b>,
+                  b: (chunks: any) => <b>{chunks}</b>,
                 }}
               />
             )}

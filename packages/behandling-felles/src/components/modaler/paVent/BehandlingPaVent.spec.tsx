@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { act } from 'react-dom/test-utils';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -63,21 +64,23 @@ describe('<BehandlingPaVent>', () => {
       { key: AKSJONSPUNKT_KEY.name, data: aksjonspunkter },
     ];
 
-    render(
-      <RestApiMock data={data} requestApi={requestMock}>
-        <BehandlingPaVent
-          behandling={{
-            ...behandling,
-            behandlingPaaVent: true,
-          } as Behandling}
-          requestApi={requestMock}
-          oppdaterPaVentKey={PA_VENT_KEY}
-          aksjonspunktKey={AKSJONSPUNKT_KEY}
-          kodeverk={kodeverk}
-          hentBehandling={jest.fn()}
-        />
-      </RestApiMock>,
-    );
+    await act(async () => {
+      render(
+        <RestApiMock data={data} requestApi={requestMock}>
+          <BehandlingPaVent
+            behandling={{
+              ...behandling,
+              behandlingPaaVent: true,
+            } as Behandling}
+            requestApi={requestMock}
+            oppdaterPaVentKey={PA_VENT_KEY}
+            aksjonspunktKey={AKSJONSPUNKT_KEY}
+            kodeverk={kodeverk}
+            hentBehandling={jest.fn()}
+          />
+        </RestApiMock>,
+      );
+    });
 
     expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
   });
@@ -104,7 +107,7 @@ describe('<BehandlingPaVent>', () => {
 
     expect(await screen.findByText('Behandlingen settes på vent med frist')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Lukk'));
+    await userEvent.click(screen.getByText('Lukk'));
 
     await waitFor(() => expect(screen.queryByText('Behandlingen settes på vent med frist')).not.toBeInTheDocument());
   });

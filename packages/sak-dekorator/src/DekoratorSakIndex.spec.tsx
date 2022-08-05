@@ -21,7 +21,7 @@ describe('<DekoratorSakIndex>', () => {
     expect(await screen.findByText('Feilmelding 1')).toBeInTheDocument();
     expect(screen.getByText('Spesialtegn-test: Høna & egget og "test1" og \'test2\'')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Lukk'));
+    await userEvent.click(screen.getByText('Lukk'));
 
     await waitFor(() => expect(screen.queryByText('Feilmelding 1')).not.toBeInTheDocument());
   });
@@ -32,7 +32,7 @@ describe('<DekoratorSakIndex>', () => {
       'Noe feilet. Feilen kan være forbigående. Prøv og behandle saken litt senere. Om feilen oppstår igjen meld den inn via porten.',
     )).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Detaljert informasjon'));
+    await userEvent.click(screen.getByText('Detaljert informasjon'));
 
     expect(await screen.findAllByText('Lukk')).toHaveLength(2);
   });

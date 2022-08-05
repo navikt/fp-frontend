@@ -17,12 +17,12 @@ describe('<ForeldreansvarVilkarProsessIndex>', () => {
     expect(await screen.findByText('Foreldreansvaret')).toBeInTheDocument();
     expect(screen.getByText('Rett til stønad ved overtakelse av foreldreansvaret')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Far har rett til foreldrepenger, vilkåret er oppfylt'));
+    await userEvent.click(screen.getByText('Far har rett til foreldrepenger, vilkåret er oppfylt'));
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.paste(vurderingInput, 'Dette er en vurdering');
+    await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
@@ -39,18 +39,18 @@ describe('<ForeldreansvarVilkarProsessIndex>', () => {
 
     expect(await screen.findByText('Foreldreansvaret')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText(/Far har ikke rett til foreldrepenger, vilkåret er/));
+    await userEvent.click(screen.getByText(/Far har ikke rett til foreldrepenger, vilkåret er/));
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.paste(vurderingInput, 'Dette er en vurdering');
+    await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), '1015');
+    await userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), '1015');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
@@ -70,12 +70,12 @@ describe('<ForeldreansvarVilkarProsessIndex>', () => {
     expect(await screen.findByText('Foreldreansvaret')).toBeInTheDocument();
     expect(screen.getByText('Rett til stønad ved overtakelse av foreldreansvaret')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Far har rett til foreldrepenger, vilkåret er oppfylt'));
+    await userEvent.click(screen.getByText('Far har rett til foreldrepenger, vilkåret er oppfylt'));
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.paste(vurderingInput, 'Dette er en vurdering');
+    await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{
@@ -92,18 +92,18 @@ describe('<ForeldreansvarVilkarProsessIndex>', () => {
 
     expect(await screen.findByText('Foreldreansvaret')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText(/Far har ikke rett til foreldrepenger, vilkåret er/));
+    await userEvent.click(screen.getByText(/Far har ikke rett til foreldrepenger, vilkåret er/));
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.paste(vurderingInput, 'Dette er en vurdering');
+    await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
 
-    userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), '1034');
+    await userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), '1034');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, [{

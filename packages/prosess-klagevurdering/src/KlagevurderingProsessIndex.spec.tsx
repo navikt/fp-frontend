@@ -19,21 +19,21 @@ describe('<KlagevurderingProsessIndex>', () => {
     expect(await screen.findByText('Behandle klage')).toBeInTheDocument();
     expect(screen.getByText('Vurder om klagen skal tas til følge')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Omgjør vedtaket'));
+    await userEvent.click(screen.getByText('Omgjør vedtaket'));
 
-    userEvent.selectOptions(utils.getByLabelText('Årsak'), 'ULIK_VURDERING');
+    await userEvent.selectOptions(utils.getByLabelText('Årsak'), 'ULIK_VURDERING');
 
-    userEvent.click(screen.getByText('Til gunst'));
+    await userEvent.click(screen.getByText('Til gunst'));
 
-    userEvent.selectOptions(utils.getByLabelText('Hjemmel'), '14-17');
+    await userEvent.selectOptions(utils.getByLabelText('Hjemmel'), '14-17');
 
     const vurderingInput = utils.getByLabelText('Begrunnelse');
-    userEvent.paste(vurderingInput, 'Dette er en begrunnelse');
+    await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
 
     const fritekstInput = utils.getByLabelText('Fritekst til brev');
-    userEvent.paste(fritekstInput, 'Dette er en fritekst');
+    await userEvent.type(fritekstInput, 'Dette er en fritekst');
 
-    userEvent.click(screen.getByText('Lagre'));
+    await userEvent.click(screen.getByText('Lagre'));
 
     await waitFor(() => expect(mellomlagre).toHaveBeenCalledTimes(1));
     expect(mellomlagre).toHaveBeenNthCalledWith(1, {
@@ -46,7 +46,7 @@ describe('<KlagevurderingProsessIndex>', () => {
       kode: '5035',
     });
 
-    userEvent.click(screen.getByText('Forhåndsvis brev'));
+    await userEvent.click(screen.getByText('Forhåndsvis brev'));
 
     await waitFor(() => expect(forhåndsvise).toHaveBeenCalledTimes(1));
     expect(forhåndsvise).toHaveBeenNthCalledWith(1, {
@@ -55,7 +55,7 @@ describe('<KlagevurderingProsessIndex>', () => {
       fritekst: 'Dette er en fritekst',
     });
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

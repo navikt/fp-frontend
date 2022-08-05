@@ -1,6 +1,7 @@
 import React from 'react';
 import sinon from 'sinon';
 import { render, screen } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 import { MemoryRouter } from 'react-router-dom';
 
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
@@ -56,20 +57,22 @@ describe('<FagsakProfileIndex>', () => {
       { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
     ];
 
-    render(
-      <RestApiMock data={data} requestApi={requestApi}>
-        <MemoryRouter>
-          <FagsakProfileIndex
-            fagsak={fagsak as Fagsak}
-            alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
-            harHentetBehandlinger
-            oppfriskBehandlinger={sinon.spy()}
-            fagsakRettigheter={fagsakRettigheter}
-            brukerManglerAdresse={false}
-          />
-        </MemoryRouter>
-      </RestApiMock>,
-    );
+    await act(async () => {
+      render(
+        <RestApiMock data={data} requestApi={requestApi}>
+          <MemoryRouter>
+            <FagsakProfileIndex
+              fagsak={fagsak as Fagsak}
+              alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
+              harHentetBehandlinger
+              oppfriskBehandlinger={sinon.spy()}
+              fagsakRettigheter={fagsakRettigheter}
+              brukerManglerAdresse={false}
+            />
+          </MemoryRouter>
+        </RestApiMock>,
+      );
+    });
 
     expect(await screen.findByText('123 - Opprettet')).toBeInTheDocument();
     expect(screen.getByText('Førstegangsbehandling')).toBeInTheDocument();
@@ -84,21 +87,23 @@ describe('<FagsakProfileIndex>', () => {
       { key: FpsakApiKeys.NAV_ANSATT.name, global: true, data: navAnsatt },
     ];
 
-    render(
-      <RestApiMock data={data} requestApi={requestApi}>
-        <MemoryRouter>
-          <FagsakProfileIndex
-            fagsak={fagsak as Fagsak}
-            alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
-            harHentetBehandlinger
-            oppfriskBehandlinger={sinon.spy()}
-            behandlingUuid="1"
-            fagsakRettigheter={fagsakRettigheter}
-            brukerManglerAdresse={false}
-          />
-        </MemoryRouter>
-      </RestApiMock>,
-    );
+    await act(async () => {
+      render(
+        <RestApiMock data={data} requestApi={requestApi}>
+          <MemoryRouter>
+            <FagsakProfileIndex
+              fagsak={fagsak as Fagsak}
+              alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
+              harHentetBehandlinger
+              oppfriskBehandlinger={sinon.spy()}
+              behandlingUuid="1"
+              fagsakRettigheter={fagsakRettigheter}
+              brukerManglerAdresse={false}
+            />
+          </MemoryRouter>
+        </RestApiMock>,
+      );
+    });
 
     expect(await screen.findByText('123 - Opprettet')).toBeInTheDocument();
     expect(screen.queryByText('Førstegangsbehandling')).not.toBeInTheDocument();

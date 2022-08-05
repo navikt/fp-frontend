@@ -104,7 +104,7 @@ const ErOmsorgVilkaarOppfyltForm: FunctionComponent<OwnProps> = ({
           avslagsarsaker={avslagsarsaker}
           readOnly={readOnly}
           customVilkarOppfyltText={<FormattedMessage id="ErOmsorgVilkaarOppfyltForm.Oppfylt" />}
-          customVilkarIkkeOppfyltText={<FormattedMessage id="ErOmsorgVilkaarOppfyltForm.IkkeOppfylt" values={{ b: (chunks) => <b>{chunks}</b> }} />}
+          customVilkarIkkeOppfyltText={<FormattedMessage id="ErOmsorgVilkaarOppfyltForm.IkkeOppfylt" values={{ b: (chunks: any) => <b>{chunks}</b> }} />}
         />
         <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />
       </ProsessPanelTemplate>

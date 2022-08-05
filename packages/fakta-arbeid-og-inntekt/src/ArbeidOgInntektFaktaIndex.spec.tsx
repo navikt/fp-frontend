@@ -58,11 +58,11 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
     expect(screen.queryByText('Sett på vent')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'));
+    await userEvent.click(screen.getByText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'));
 
-    userEvent.paste(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Lagre'));
+    await userEvent.click(screen.getByText('Lagre'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
@@ -73,8 +73,8 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       vurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
     });
 
-    userEvent.click(screen.getByText('Sett på vent'));
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(await screen.findByText('Sett på vent'));
+    await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(settPåVent).toHaveBeenCalledTimes(1));
     expect(settPåVent).toHaveBeenNthCalledWith(1, {
@@ -91,11 +91,11 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Gå videre uten inntektsmelding'));
+    await userEvent.click(screen.getByText('Gå videre uten inntektsmelding'));
 
-    userEvent.paste(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Lagre'));
+    await userEvent.click(screen.getByText('Lagre'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
@@ -106,7 +106,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       vurdering: 'FORTSETT_UTEN_INNTEKTSMELDING',
     });
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(await screen.findByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(bekrefteAksjonspunkt).toHaveBeenCalledTimes(1));
     expect(bekrefteAksjonspunkt).toHaveBeenNthCalledWith(1, {
@@ -127,7 +127,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
 
-    userEvent.click(screen.getByAltText('Åpne rad'));
+    await userEvent.click(screen.getByAltText('Åpne rad'));
     expect(await screen.findByAltText('Lukk rad')).toBeInTheDocument();
 
     expect(screen.getByRole('radio', { hidden: true })).toBeDisabled();
@@ -157,11 +157,11 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(screen.queryByText('Bekreft og fortsett')).not.toBeInTheDocument();
     expect(screen.queryByText('Sett på vent')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Jeg kontakter arbeidsgiver'));
+    await userEvent.click(screen.getByText('Jeg kontakter arbeidsgiver'));
 
-    userEvent.paste(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Lagre'));
+    await userEvent.click(screen.getByText('Lagre'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
@@ -172,8 +172,8 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       vurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD',
     });
 
-    userEvent.click(screen.getByText('Sett på vent'));
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(await screen.findByText('Sett på vent'));
+    await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(settPåVent).toHaveBeenCalledTimes(1));
     expect(settPåVent).toHaveBeenNthCalledWith(1, {
@@ -190,11 +190,11 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Se bort fra inntektsmeldingen'));
+    await userEvent.click(screen.getByText('Se bort fra inntektsmeldingen'));
 
-    userEvent.paste(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Lagre'));
+    await userEvent.click(screen.getByText('Lagre'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
@@ -205,7 +205,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       vurdering: 'IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
     });
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(await screen.findByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(bekrefteAksjonspunkt).toHaveBeenCalledTimes(1));
     expect(bekrefteAksjonspunkt).toHaveBeenNthCalledWith(1, {
@@ -221,20 +221,20 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Opprett arbeidsforhold basert på inntektsmeldingen'));
+    await userEvent.click(screen.getByText('Opprett arbeidsforhold basert på inntektsmeldingen'));
 
     const periodeFra = screen.getByText('Periode fra');
-    userEvent.type(periodeFra, '01.02.2020');
+    await userEvent.type(periodeFra, '01.02.2020');
     fireEvent.blur(periodeFra);
 
     const periodeTil = screen.getByText('Periode til');
-    userEvent.type(periodeTil, '01.02.2022');
+    await userEvent.type(periodeTil, '01.02.2022');
     fireEvent.blur(periodeTil);
 
-    userEvent.paste(utils.getByLabelText('Stillingsprosent'), '100');
-    userEvent.paste(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Stillingsprosent'), '100');
+    await userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Lagre'));
+    await userEvent.click(screen.getByText('Lagre'));
 
     await waitFor(() => expect(registrerArbeidsforhold).toHaveBeenCalledTimes(1));
     expect(registrerArbeidsforhold).toHaveBeenNthCalledWith(1, {
@@ -249,7 +249,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       vurdering: 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
     });
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(await screen.findByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(bekrefteAksjonspunkt).toHaveBeenCalledTimes(1));
     expect(bekrefteAksjonspunkt).toHaveBeenNthCalledWith(1, {
@@ -262,7 +262,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
 
-    userEvent.click(screen.getByAltText('Åpne rad'));
+    await userEvent.click(screen.getByAltText('Åpne rad'));
     expect(await screen.findByAltText('Lukk rad')).toBeInTheDocument();
 
     const radioKnapp = screen.getByRole('radio', { hidden: true });
@@ -284,7 +284,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(screen.getByText('Ved å bruke "Åpne for ny vurdering" kan du endre valg som er '
     + 'gjort i dette panelet. Det som er gjort senere i saken, må gjøres på ny.')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Åpne for ny vurdering'));
+    await userEvent.click(screen.getByText('Åpne for ny vurdering'));
 
     await waitFor(() => expect(åpneForNyVurdering).toHaveBeenCalledTimes(1));
   });
@@ -302,12 +302,12 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(screen.getByText('Ved å bruke "Åpne for ny vurdering" kan du endre valg som er '
     + 'gjort i dette panelet. Det som er gjort senere i saken, må gjøres på ny.')).toBeInTheDocument();
 
-    userEvent.click(screen.getByAltText('Åpne rad'));
+    await userEvent.click(screen.getByAltText('Åpne rad'));
     expect(await screen.findByAltText('Lukk rad')).toBeInTheDocument();
 
     expect(screen.queryByRole('radio', { hidden: true })).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Åpne for ny vurdering'));
+    await userEvent.click(screen.getByText('Åpne for ny vurdering'));
 
     await waitFor(() => expect(åpneForNyVurdering).toHaveBeenCalledTimes(1));
   });
@@ -331,24 +331,24 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     )).toBeInTheDocument();
     expect(screen.queryByText('Legg til arbeidsforhold')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByAltText('Overstyr'));
+    await userEvent.click(screen.getByAltText('Overstyr'));
 
-    userEvent.click(screen.getByText('Legg til arbeidsforhold'));
+    await userEvent.click(screen.getByText('Legg til arbeidsforhold'));
 
-    userEvent.paste(utils.getByLabelText('Navn på arbeidsgiver'), 'Telenor');
+    await userEvent.type(utils.getByLabelText('Navn på arbeidsgiver'), 'Telenor');
 
     const periodeFra = screen.getByText('Periode fra');
-    userEvent.type(periodeFra, '01.02.2020');
+    await userEvent.type(periodeFra, '01.02.2020');
     fireEvent.blur(periodeFra);
 
     const periodeTil = screen.getByText('Periode til');
-    userEvent.type(periodeTil, '01.02.2022');
+    await userEvent.type(periodeTil, '01.02.2022');
     fireEvent.blur(periodeTil);
 
-    userEvent.paste(utils.getByLabelText('Stillingsprosent'), '100');
-    userEvent.paste(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Stillingsprosent'), '100');
+    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Lagre'));
+    await userEvent.click(screen.getByText('Lagre'));
 
     await waitFor(() => expect(registrerArbeidsforhold).toHaveBeenCalledTimes(1));
     expect(registrerArbeidsforhold).toHaveBeenNthCalledWith(1, {
@@ -362,7 +362,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       vurdering: 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER',
     });
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(await screen.findByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(bekrefteAksjonspunkt).toHaveBeenCalledTimes(1));
     expect(bekrefteAksjonspunkt).toHaveBeenNthCalledWith(1, {
@@ -399,18 +399,18 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       + 'Arbeidsforholdet må kun opprettes dersom...',
     )).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByAltText('Overstyr'));
+    await userEvent.click(screen.getByAltText('Overstyr'));
 
     expect(await screen.findByText('Slett')).toBeInTheDocument();
     expect(screen.queryByText('Legg til arbeidsforhold')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Slett'));
+    await userEvent.click(screen.getByText('Slett'));
 
-    userEvent.click(screen.getAllByText('Avbryt')[1]);
+    await userEvent.click(screen.getAllByText('Avbryt')[1]);
 
-    userEvent.click(screen.getByText('Slett'));
+    await userEvent.click(screen.getByText('Slett'));
 
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(registrerArbeidsforhold).toHaveBeenCalledTimes(1));
     expect(registrerArbeidsforhold).toHaveBeenNthCalledWith(1, {
@@ -426,7 +426,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(screen.getByText('Legg til arbeidsforhold')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(bekrefteAksjonspunkt).toHaveBeenCalledTimes(1));
     expect(bekrefteAksjonspunkt).toHaveBeenNthCalledWith(1, {
@@ -442,7 +442,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(screen.queryByAltText('Åpent aksjonspunkt')).not.toBeInTheDocument();
     expect(screen.queryByAltText('Lukk rad')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByAltText('Åpne rad'));
+    await userEvent.click(screen.getByAltText('Åpne rad'));
 
     expect(await screen.findByAltText('Lukk rad')).toBeInTheDocument();
 
@@ -469,7 +469,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(screen.queryByAltText('Åpent aksjonspunkt')).not.toBeInTheDocument();
     expect(screen.queryByAltText('Lukk rad')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByAltText('Åpne rad'));
+    await userEvent.click(screen.getByAltText('Åpne rad'));
 
     expect(await screen.findByAltText('Lukk rad')).toBeInTheDocument();
 
@@ -486,7 +486,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(screen.getAllByText('Inntektsmelding mottatt')).toHaveLength(2);
     expect(screen.queryByText('30 000')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getAllByText('Vis mer')[0]);
+    await userEvent.click(screen.getAllByText('Vis mer')[0]);
 
     expect(await screen.findAllByText('Inntektsmelding')).toHaveLength(2);
     expect(screen.getByText('30 000')).toBeInTheDocument();
@@ -496,7 +496,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(screen.getByText('20 000')).toBeInTheDocument();
     expect(screen.getByText('Kontaktinfo')).toBeInTheDocument();
 
-    userEvent.click(screen.getAllByText('Vis mindre')[0]);
+    await userEvent.click(screen.getAllByText('Vis mindre')[0]);
 
     expect(await screen.getAllByText('Vis mer')).toHaveLength(2);
   });
@@ -509,11 +509,11 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'));
+    await userEvent.click(screen.getByText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'));
 
-    userEvent.paste(utils.getAllByLabelText('Begrunn valget')[0], 'Dette er en begrunnelse');
+    await userEvent.type(utils.getAllByLabelText('Begrunn valget')[0], 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getAllByText('Lagre')[0]);
+    await userEvent.click(screen.getAllByText('Lagre')[0]);
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
@@ -524,11 +524,11 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       vurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
     });
 
-    userEvent.click(screen.getByText('Jeg kontakter arbeidsgiver'));
+    await userEvent.click(screen.getByText('Jeg kontakter arbeidsgiver'));
 
-    userEvent.paste(utils.getAllByLabelText('Begrunn valget')[1], 'Dette er begrunnelse nr 2');
+    await userEvent.type(utils.getAllByLabelText('Begrunn valget')[1], 'Dette er begrunnelse nr 2');
 
-    userEvent.click(screen.getAllByText('Lagre')[1]);
+    await userEvent.click(screen.getAllByText('Lagre')[1]);
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(2));
     expect(lagreVurdering).toHaveBeenNthCalledWith(2, {
@@ -539,8 +539,8 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       vurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD',
     });
 
-    userEvent.click(screen.getByText('Sett på vent'));
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(await screen.findByText('Sett på vent'));
+    await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(settPåVent).toHaveBeenCalledTimes(1));
     expect(settPåVent).toHaveBeenNthCalledWith(1, {
@@ -577,11 +577,11 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(screen.getByText('Inntekter totalt fra virksomheten (fra A-ordningen)')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'));
+    await userEvent.click(screen.getByText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'));
 
-    userEvent.paste(utils.getByLabelText('Kommentar'), 'Dette er en kommentar');
+    await userEvent.type(utils.getByLabelText('Kommentar'), 'Dette er en kommentar');
 
-    userEvent.click(screen.getByText('Lagre'));
+    await userEvent.click(screen.getByText('Lagre'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
@@ -592,8 +592,8 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       vurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
     });
 
-    userEvent.click(screen.getByText('Sett på vent'));
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(await screen.findByText('Sett på vent'));
+    await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(settPåVent).toHaveBeenCalledTimes(1));
     expect(settPåVent).toHaveBeenNthCalledWith(1, {
@@ -620,7 +620,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
 
     expect(screen.getByAltText('Arbeidsforhold er OK')).toBeInTheDocument();
 
-    userEvent.click(screen.getByAltText('Åpne rad'));
+    await userEvent.click(screen.getByAltText('Åpne rad'));
     expect(await screen.findByAltText('Lukk rad')).toBeInTheDocument();
 
     expect(screen.getByText('Stillingsprosent')).toBeInTheDocument();

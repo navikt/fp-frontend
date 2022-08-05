@@ -21,15 +21,15 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
     expect(await screen.findByText('Opphold i Norge')).toBeInTheDocument();
 
     expect(screen.getByText('Bor i Norge ved fødselstidspunktet')).toBeInTheDocument();
-    userEvent.click(screen.getAllByText('Ja')[0]);
+    await userEvent.click(screen.getAllByText('Ja')[0]);
 
     expect(screen.getByText('Bodd i Norge de siste 12 månedene')).toBeInTheDocument();
-    userEvent.click(screen.getAllByText('Ja')[1]);
+    await userEvent.click(screen.getAllByText('Ja')[1]);
 
     expect(screen.getByText('Bor i Norge de neste 12 månedene')).toBeInTheDocument();
-    userEvent.click(screen.getAllByText('Ja')[2]);
+    await userEvent.click(screen.getAllByText('Ja')[2]);
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -60,46 +60,46 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
     expect(await screen.findByText('Opphold i Norge')).toBeInTheDocument();
 
     expect(screen.getByText('Bor i Norge ved fødselstidspunktet')).toBeInTheDocument();
-    userEvent.click(screen.getAllByText('Ja')[0]);
+    await userEvent.click(screen.getAllByText('Ja')[0]);
 
     expect(screen.getByText('Bodd i Norge de siste 12 månedene')).toBeInTheDocument();
-    userEvent.click(screen.getAllByText('Nei')[1]);
+    await userEvent.click(screen.getAllByText('Nei')[1]);
 
     expect(screen.getByText('Bor i Norge de neste 12 månedene')).toBeInTheDocument();
-    userEvent.click(screen.getAllByText('Ja')[2]);
+    await userEvent.click(screen.getAllByText('Ja')[2]);
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(3);
 
-    userEvent.selectOptions(utils.getByLabelText('Land'), 'AND');
+    await userEvent.selectOptions(utils.getByLabelText('Land'), 'AND');
 
     const fomDatoInput = utils.getByLabelText('F.o.m.');
-    userEvent.paste(fomDatoInput, dayjs().subtract(10, 'day').format(DDMMYYYY_DATE_FORMAT));
+    await userEvent.type(fomDatoInput, dayjs().subtract(10, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(fomDatoInput);
 
     const tomDatoInput = utils.getByLabelText('T.o.m.');
-    userEvent.paste(tomDatoInput, dayjs().add(1, 'day').format(DDMMYYYY_DATE_FORMAT));
+    await userEvent.type(tomDatoInput, dayjs().add(1, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(tomDatoInput);
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     expect(await screen.findByText(`Dato må være før eller lik ${dayjs().format(DDMMYYYY_DATE_FORMAT)}`)).toBeInTheDocument();
 
-    userEvent.clear(tomDatoInput);
-    userEvent.paste(tomDatoInput, dayjs().subtract(11, 'day').format(DDMMYYYY_DATE_FORMAT));
+    await userEvent.clear(tomDatoInput);
+    await userEvent.type(tomDatoInput, dayjs().subtract(11, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(tomDatoInput);
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     expect(await screen.findByText(`Dato må være før eller lik ${dayjs().subtract(11, 'day').format(DDMMYYYY_DATE_FORMAT)}`)).toBeInTheDocument();
     expect(screen.getByText(`Dato må være etter eller lik ${dayjs().subtract(10, 'day').format(DDMMYYYY_DATE_FORMAT)}`)).toBeInTheDocument();
 
-    userEvent.clear(tomDatoInput);
-    userEvent.paste(tomDatoInput, dayjs().subtract(6, 'day').format(DDMMYYYY_DATE_FORMAT));
+    await userEvent.clear(tomDatoInput);
+    await userEvent.type(tomDatoInput, dayjs().subtract(6, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(tomDatoInput);
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -123,46 +123,46 @@ describe('<OppholdINorgePapirsoknadIndex>', () => {
     expect(await screen.findByText('Opphold i Norge')).toBeInTheDocument();
 
     expect(screen.getByText('Bor i Norge ved fødselstidspunktet')).toBeInTheDocument();
-    userEvent.click(screen.getAllByText('Ja')[0]);
+    await userEvent.click(screen.getAllByText('Ja')[0]);
 
     expect(screen.getByText('Bodd i Norge de siste 12 månedene')).toBeInTheDocument();
-    userEvent.click(screen.getAllByText('Ja')[1]);
+    await userEvent.click(screen.getAllByText('Ja')[1]);
 
     expect(screen.getByText('Bor i Norge de neste 12 månedene')).toBeInTheDocument();
-    userEvent.click(screen.getAllByText('Nei')[2]);
+    await userEvent.click(screen.getAllByText('Nei')[2]);
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(3);
 
-    userEvent.selectOptions(utils.getByLabelText('Land'), 'AND');
+    await userEvent.selectOptions(utils.getByLabelText('Land'), 'AND');
 
     const fomDatoInput = utils.getByLabelText('F.o.m.');
-    userEvent.paste(fomDatoInput, dayjs('2022-05-30').subtract(1, 'day').format(DDMMYYYY_DATE_FORMAT));
+    await userEvent.type(fomDatoInput, dayjs('2022-05-30').subtract(1, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(fomDatoInput);
 
     const tomDatoInput = utils.getByLabelText('T.o.m.');
-    userEvent.paste(tomDatoInput, dayjs().add(10, 'day').format(DDMMYYYY_DATE_FORMAT));
+    await userEvent.type(tomDatoInput, dayjs().add(10, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(tomDatoInput);
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     expect(await screen.findByText('Dato må være etter eller lik 30.05.2022')).toBeInTheDocument();
 
-    userEvent.clear(fomDatoInput);
-    userEvent.paste(fomDatoInput, dayjs().add(11, 'day').format(DDMMYYYY_DATE_FORMAT));
+    await userEvent.clear(fomDatoInput);
+    await userEvent.type(fomDatoInput, dayjs().add(11, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(fomDatoInput);
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     expect(await screen.findByText(`Dato må være før eller lik ${dayjs().add(10, 'day').format(DDMMYYYY_DATE_FORMAT)}`)).toBeInTheDocument();
     expect(screen.getByText(`Dato må være etter eller lik ${dayjs().add(11, 'day').format(DDMMYYYY_DATE_FORMAT)}`)).toBeInTheDocument();
 
-    userEvent.clear(fomDatoInput);
-    userEvent.paste(fomDatoInput, dayjs().add(6, 'day').format(DDMMYYYY_DATE_FORMAT));
+    await userEvent.clear(fomDatoInput);
+    await userEvent.type(fomDatoInput, dayjs().add(6, 'day').format(DDMMYYYY_DATE_FORMAT));
     fireEvent.blur(fomDatoInput);
 
-    userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
+    await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

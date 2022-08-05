@@ -28,26 +28,26 @@ describe('<BeregningsresultatProsessIndex>', () => {
     expect(screen.getByAltText('Overstyr')).toBeInTheDocument();
     expect(screen.queryByAltText('Har overstyrt')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByAltText('Overstyr'));
+    await userEvent.click(screen.getByAltText('Overstyr'));
 
     expect(await screen.findByAltText('Har overstyrt')).toBeInTheDocument();
     expect(screen.queryByAltText('Overstyr')).not.toBeInTheDocument();
 
     expect(screen.getByText('Bekreft overstyring')).toBeDisabled();
 
-    userEvent.paste(utils.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
 
     expect(await screen.findByText('Bekreft overstyring')).toBeEnabled();
 
-    userEvent.click(screen.getByText('Avbryt'));
+    await userEvent.click(screen.getByText('Avbryt'));
 
     expect(await screen.findByAltText('Overstyr')).toBeInTheDocument();
 
-    userEvent.click(screen.getByAltText('Overstyr'));
+    await userEvent.click(screen.getByAltText('Overstyr'));
 
-    userEvent.paste(utils.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft overstyring'));
+    await userEvent.click(screen.getByText('Bekreft overstyring'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

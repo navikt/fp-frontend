@@ -52,29 +52,50 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
 }) => (
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="UttakProsessIndex" formData={formData} setFormData={setFormData}>
-      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <UttakPanel
+        // @ts-ignore
         behandlingUuid={behandling.uuid}
+        // @ts-ignore
         behandlingType={behandling.type}
+        // @ts-ignore
         behandlingsresultat={behandling.behandlingsresultat}
+        // @ts-ignore
         behandlingStatus={behandling.status}
+        // @ts-ignore
         sprakkode={behandling.sprakkode}
+        // @ts-ignore
         uttaksresultat={uttaksresultatPerioder}
+        // @ts-ignore
         stonadskonto={uttakStonadskontoer}
+        // @ts-ignore
         aksjonspunkter={aksjonspunkter}
+        // @ts-ignore
         employeeHasAccess={employeeHasAccess}
+        // @ts-ignore
         soknad={soknad}
+        // @ts-ignore
         person={personoversikt}
+        // @ts-ignore
         familiehendelse={familiehendelse}
+        // @ts-ignore
         uttakPeriodeGrense={uttakPeriodeGrense}
+        // @ts-ignore
         alleKodeverk={alleKodeverk}
+        // @ts-ignore
         ytelsefordeling={ytelsefordeling}
+        // @ts-ignore
         tempUpdateStonadskontoer={tempUpdateStonadskontoer}
+        // @ts-ignore
         submitCallback={submitCallback}
+        // @ts-ignore
         readOnly={isReadOnly}
+        // @ts-ignore
         readOnlySubmitButton={readOnlySubmitButton}
+        // @ts-ignore
         apCodes={aksjonspunkter.map((a) => a.definisjon)}
+        // @ts-ignore
         isApOpen={isAksjonspunktOpen}
+        // @ts-ignore
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
     </ReduxWrapper>

@@ -24,12 +24,12 @@ describe('<SoknadsfristVilkarProsessIndex>', () => {
     expect(screen.getByText('02.01.2019')).toBeInTheDocument();
     expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
 
-    userEvent.click(screen.getAllByText('Vilkåret er oppfylt')[0]);
+    await userEvent.click(screen.getAllByText('Vilkåret er oppfylt')[0]);
 
     const vurderingInput = utils.getByLabelText('Vurdering');
-    userEvent.paste(vurderingInput, 'Dette er en vurdering');
+    await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {

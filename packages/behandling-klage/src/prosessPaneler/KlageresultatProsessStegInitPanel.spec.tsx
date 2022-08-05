@@ -221,7 +221,7 @@ describe('<KlageresultatProsessStegInitPanel>', () => {
 
     expect(await screen.findByText('Resultat')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('Forhåndsvis vedtaksbrev'));
+    await userEvent.click(screen.getByText('Forhåndsvis vedtaksbrev'));
 
     await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
 

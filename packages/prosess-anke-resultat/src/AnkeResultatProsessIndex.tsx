@@ -29,15 +29,22 @@ const AnkeResultatProsessIndex: FunctionComponent<OwnProps & StandardProsessPane
 }) => (
   <RawIntlProvider value={intl}>
     <ReduxWrapper formName="AnkeResultatProsessIndex" formData={formData} setFormData={setFormData}>
-      { /* @ts-ignore Fiks cannot be used as a JSX component */ }
       <BehandleResultatForm
+        // @ts-ignore
         ankeVurderingResultat={ankeVurdering.ankeVurderingResultat}
+        // @ts-ignore
         aksjonspunkter={aksjonspunkter}
+        // @ts-ignore
         submitCallback={submitCallback}
+        // @ts-ignore
         readOnly={isReadOnly}
+        // @ts-ignore
         readOnlySubmitButton={readOnlySubmitButton}
+        // @ts-ignore
         previewCallback={previewCallback}
+        // @ts-ignore
         alleKodeverk={alleKodeverk}
+        // @ts-ignore
         kabalisert={ankeVurdering.behandletAvKabal}
       />
     </ReduxWrapper>

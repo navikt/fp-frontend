@@ -17,7 +17,7 @@ describe('<MessagesModalSakIndex>', () => {
 
     expect(await screen.findByText('Brevet er bestilt')).toBeInTheDocument();
 
-    userEvent.click(screen.getByText('OK'));
+    await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(lukk).toHaveBeenCalledTimes(1));
   });
