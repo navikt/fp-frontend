@@ -27,7 +27,7 @@ import soknadType from '@fpsak-frontend/kodeverk/src/soknadType';
 import { Tidslinje, EventProps, TidslinjeTimes } from '@navikt/ft-tidslinje';
 import {
   Aksjonspunkt, Behandling, FamilieHendelseSamling,
-  Soknad, UttakPeriodeGrense, UttaksresultatPeriode, Ytelsefordeling, Kjønnkode, AlleKodeverk,
+  Soknad, UttaksresultatPeriode, Ytelsefordeling, Kjønnkode, AlleKodeverk,
   AvklartBarn, UttakStonadskontoer, PeriodeSoker, ArbeidsgiverOpplysningerPerId, Personoversikt,
 } from '@fpsak-frontend/types';
 
@@ -103,7 +103,6 @@ interface PureOwnProps {
   manuellOverstyring: boolean;
   person: Personoversikt;
   familiehendelse: FamilieHendelseSamling;
-  uttakPeriodeGrense: UttakPeriodeGrense;
   ytelsefordeling: Ytelsefordeling;
   behandlingUuid: string;
   behandlingType: string;
@@ -116,6 +115,7 @@ interface PureOwnProps {
   uttaksresultat: UttaksresultatPeriode;
   behandlingsresultat?: Behandling['behandlingsresultat'];
   mottattDato: Soknad['mottattDato'];
+  søknadsfrist: Soknad['søknadsfrist'];
   fodselsdatoer?: Soknad['fodselsdatoer'];
   termindato?: Soknad['termindato'];
   adopsjonFodelsedatoer?: Soknad['adopsjonFodelsedatoer'];
@@ -753,13 +753,13 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
   const {
     person,
     mottattDato,
+    søknadsfrist,
     formName,
     familiehendelse,
     uttaksresultat,
-    uttakPeriodeGrense,
     ytelsefordeling,
   } = props;
-  const periodeGrenseMottatDato = uttakPeriodeGrense.mottattDato;
+  const periodeGrenseMottatDato = søknadsfrist?.mottattDato;
   const hovedsokerKjonnKode = person ? person.bruker.kjønn : undefined;
   const annenForelderUttak = uttaksresultat.perioderAnnenpart;
   const viseUttakMedsoker = annenForelderUttak.length > 0;

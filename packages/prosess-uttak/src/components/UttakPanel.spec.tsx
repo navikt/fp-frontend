@@ -8,7 +8,7 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { AksjonspunktHelpTextTemp } from '@navikt/ft-ui-komponenter';
 import {
   Aksjonspunkt, AlleKodeverk, FamilieHendelseSamling, Personoversikt,
-  Soknad, Stonadskonto, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
+  Soknad, Stonadskonto, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
@@ -121,7 +121,6 @@ describe('<UttakPanel>', () => {
       soknad={soknad}
       familiehendelse={{} as FamilieHendelseSamling}
       person={{} as Personoversikt}
-      uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}
       behandlingType={behandlingType.FORSTEGANGSSOKNAD}
       alleKodeverk={kodeverk}
@@ -167,7 +166,6 @@ describe('<UttakPanel>', () => {
       soknad={soknad}
       familiehendelse={{} as FamilieHendelseSamling}
       person={{} as Personoversikt}
-      uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}
       behandlingType={behandlingType.FORSTEGANGSSOKNAD}
       alleKodeverk={kodeverk}

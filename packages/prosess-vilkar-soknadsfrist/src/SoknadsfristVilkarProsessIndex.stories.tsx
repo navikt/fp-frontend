@@ -25,9 +25,6 @@ const defaultBehandling = {
 
 const vilkar = [{
   vilkarType: vilkarType.SOKNADFRISTVILKARET,
-  merknadParametere: {
-    antallDagerSoeknadLevertForSent: '2',
-  },
 }] as Vilkar[];
 
 const soknad = {
@@ -35,6 +32,11 @@ const soknad = {
   mottattDato: '2019-01-01',
   fodselsdatoer: { 1: '2019-01-01' } as {[key: number]: string},
   begrunnelseForSenInnsending: 'Dette er en begrunnelse',
+  søknadsfrist: {
+    mottattDato: '2019-01-01',
+    utledetSøknadsfrist: '2019-07-01',
+    dagerOversittetFrist: 2,
+  },
 } as Soknad;
 
 const familiehendelse = {

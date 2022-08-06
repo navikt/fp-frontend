@@ -5,7 +5,7 @@ import React, {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VurderSoknadsfristForeldrepengerIndex from '@fpsak-frontend/prosess-soknadsfrist';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { Aksjonspunkt, Soknad, UttakPeriodeGrense } from '@fpsak-frontend/types';
+import { Aksjonspunkt, Soknad } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps, skalViseProsessPanel } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -21,9 +21,8 @@ type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
 }
 
-const ENDEPUNKTER_PANEL_DATA = [SvpBehandlingApiKeys.UTTAK_PERIODE_GRENSE, SvpBehandlingApiKeys.SOKNAD];
+const ENDEPUNKTER_PANEL_DATA = [SvpBehandlingApiKeys.SOKNAD];
 type EndepunktPanelData = {
-  uttakPeriodeGrense?: UttakPeriodeGrense;
   soknad: Soknad;
 }
 

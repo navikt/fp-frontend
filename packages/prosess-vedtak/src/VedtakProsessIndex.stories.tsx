@@ -541,7 +541,6 @@ AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeErOppfylt.args 
     vilkarType: vilkarType.SOKNADFRISTVILKARET,
     vilkarStatus: vilkarUtfallType.IKKE_OPPFYLT,
     overstyrbar: true,
-    merknadParametere: {},
   }],
   isReadOnly: false,
   submitCallback: action('button-click') as (data: any) => Promise<any>,

@@ -98,20 +98,19 @@ const uttakStonadskontoer = {
   },
 } as UttakStonadskontoer;
 
-const uttakPeriodeGrense = {
-  mottattDato: '2019-11-18',
-  soknadsfristForForsteUttaksdato: '2020-01-31',
-  soknadsperiodeStart: '2019-10-14',
-  soknadsperiodeSlutt: '2020-02-02',
-  antallDagerLevertForSent: -74,
-};
-
 const soknad = {
   soknadType: 'ST-001',
   mottattDato: '2019-11-18',
   fodselsdatoer: {
     1: '2019-11-04',
   } as {[key: number]: string},
+  søknadsfrist: {
+    mottattDato: '2019-11-18',
+    utledetSøknadsfrist: '2020-01-31',
+    søknadsperiodeStart: '2019-10-14',
+    søknadsperiodeSlutt: '2020-02-02',
+    dagerOversittetFrist: -74,
+  },
 } as Soknad;
 
 const personoversikt = {
@@ -161,7 +160,6 @@ const Template: Story<{
     familiehendelse={familiehendelse}
     soknad={soknad}
     personoversikt={personoversikt}
-    uttakPeriodeGrense={uttakPeriodeGrense}
     ytelsefordeling={ytelsefordeling}
     alleKodeverk={alleKodeverk as any}
     employeeHasAccess
