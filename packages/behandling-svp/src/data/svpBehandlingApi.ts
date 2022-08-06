@@ -3,7 +3,7 @@ import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerWrapper, Behandling, Beregningsgrunnlag, BeregningsresultatFp, FamilieHendelseSamling,
   Feriepengegrunnlag, FodselOgTilrettelegging, ForhåndsvisMeldingParams, InntektArbeidYtelse, Medlemskap, Opptjening, Personoversikt,
-  SimuleringResultat, Soknad, TilbakekrevingValg, UttakPeriodeGrense, Verge, Vilkar, Ytelsefordeling, ArbeidOgInntektsmelding,
+  SimuleringResultat, Soknad, TilbakekrevingValg, Verge, Vilkar, Ytelsefordeling, ArbeidOgInntektsmelding,
   ManueltArbeidsforhold, ManglendeInntektsmeldingVurdering,
 } from '@fpsak-frontend/types';
 import { NyBehandlendeEnhetParams, SettPaVentParams } from '@fpsak-frontend/behandling-felles';
@@ -27,7 +27,6 @@ export const SvpBehandlingApiKeys = {
   BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING: new RestKey<{'beregningsresultat-foreldrepenger'?: BeregningsresultatFp; },
     void>('BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING'),
   MEDLEMSKAP: new RestKey<Medlemskap, void>('MEDLEMSKAP'),
-  UTTAK_PERIODE_GRENSE: new RestKey<UttakPeriodeGrense, void>('UTTAK_PERIODE_GRENSE'),
   INNTEKT_ARBEID_YTELSE: new RestKey<InntektArbeidYtelse, void>('INNTEKT_ARBEID_YTELSE'),
   VERGE: new RestKey<Verge, void>('VERGE'),
   YTELSEFORDELING: new RestKey<Ytelsefordeling, void>('YTELSEFORDELING'),
@@ -64,7 +63,6 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('soknad', SvpBehandlingApiKeys.SOKNAD)
   .withRel('beregningsresultat-foreldrepenger-original-behandling', SvpBehandlingApiKeys.BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING)
   .withRel('soeker-medlemskap-v2', SvpBehandlingApiKeys.MEDLEMSKAP)
-  .withRel('uttak-periode-grense', SvpBehandlingApiKeys.UTTAK_PERIODE_GRENSE)
   .withRel('inntekt-arbeid-ytelse', SvpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE)
   .withRel('soeker-verge', SvpBehandlingApiKeys.VERGE)
   .withRel('ytelsefordeling', SvpBehandlingApiKeys.YTELSEFORDELING)

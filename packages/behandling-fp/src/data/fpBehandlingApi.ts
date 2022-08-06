@@ -3,7 +3,7 @@ import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerWrapper, Behandling, Beregningsgrunnlag, BeregningsresultatFp, FaktaArbeidsforhold,
   FamilieHendelse, FamilieHendelseSamling, Feriepengegrunnlag, ForhåndsvisMeldingParams, InntektArbeidYtelse, Medlemskap, Opptjening, Personoversikt,
-  SimuleringResultat, Soknad, TilbakekrevingValg, UttakKontrollerAktivitetskrav, UttakKontrollerFaktaPerioderWrapper, UttakPeriodeGrense,
+  SimuleringResultat, Soknad, TilbakekrevingValg, UttakKontrollerAktivitetskrav, UttakKontrollerFaktaPerioderWrapper,
   UttaksresultatPeriode, UttakStonadskontoer, Verge, Vilkar, Ytelsefordeling, ArbeidOgInntektsmelding, ManueltArbeidsforhold, ManglendeInntektsmeldingVurdering,
 } from '@fpsak-frontend/types';
 import { NyBehandlendeEnhetParams, SettPaVentParams } from '@fpsak-frontend/behandling-felles';
@@ -35,7 +35,6 @@ export const FpBehandlingApiKeys = {
   BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING: new RestKey<{ 'beregningsresultat-foreldrepenger'?: BeregningsresultatFp; },
     void>('BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING'),
   MEDLEMSKAP: new RestKey<Medlemskap, void>('MEDLEMSKAP'),
-  UTTAK_PERIODE_GRENSE: new RestKey<UttakPeriodeGrense, void>('UTTAK_PERIODE_GRENSE'),
   INNTEKT_ARBEID_YTELSE: new RestKey<InntektArbeidYtelse, void>('INNTEKT_ARBEID_YTELSE'),
   VERGE: new RestKey<Verge, void>('VERGE'),
   YTELSEFORDELING: new RestKey<Ytelsefordeling, void>('YTELSEFORDELING'),
@@ -78,7 +77,6 @@ const endpoints = new RestApiConfigBuilder()
   .withRel('familiehendelse-original-behandling', FpBehandlingApiKeys.FAMILIEHENDELSE_ORIGINAL_BEHANDLING)
   .withRel('beregningsresultat-foreldrepenger-original-behandling', FpBehandlingApiKeys.BEREGNINGSRESULTAT_ORIGINAL_BEHANDLING)
   .withRel('soeker-medlemskap-v2', FpBehandlingApiKeys.MEDLEMSKAP)
-  .withRel('uttak-periode-grense', FpBehandlingApiKeys.UTTAK_PERIODE_GRENSE)
   .withRel('inntekt-arbeid-ytelse', FpBehandlingApiKeys.INNTEKT_ARBEID_YTELSE)
   .withRel('soeker-verge', FpBehandlingApiKeys.VERGE)
   .withRel('ytelsefordeling', FpBehandlingApiKeys.YTELSEFORDELING)

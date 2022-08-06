@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import {
   ArbeidsgiverOpplysningerPerId, StandardProsessPanelProps, FamilieHendelseSamling, Personoversikt,
-  Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
+  Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@navikt/ft-utils';
 import { ReduxWrapper } from '@fpsak-frontend/form';
@@ -19,7 +19,6 @@ interface OwnProps {
   uttaksresultatPerioder: UttaksresultatPeriode;
   familiehendelse: FamilieHendelseSamling;
   personoversikt: Personoversikt;
-  uttakPeriodeGrense: UttakPeriodeGrense;
   ytelsefordeling: Ytelsefordeling;
   employeeHasAccess: boolean;
   tempUpdateStonadskontoer: (params: {
@@ -37,7 +36,6 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
   familiehendelse,
   soknad,
   personoversikt,
-  uttakPeriodeGrense,
   ytelsefordeling,
   alleKodeverk,
   employeeHasAccess,
@@ -77,8 +75,6 @@ const UttakProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps>
         person={personoversikt}
         // @ts-ignore
         familiehendelse={familiehendelse}
-        // @ts-ignore
-        uttakPeriodeGrense={uttakPeriodeGrense}
         // @ts-ignore
         alleKodeverk={alleKodeverk}
         // @ts-ignore

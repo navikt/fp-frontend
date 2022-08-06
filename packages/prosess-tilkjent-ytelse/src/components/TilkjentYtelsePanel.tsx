@@ -87,6 +87,7 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
 }) => {
   const familiehendelseDato = useMemo(() => getFamilieHendelseDato(familieHendelseSamling), [familieHendelseSamling]);
   const vurderTilbaketrekkAP = useMemo(() => finnTilbaketrekkAksjonspunkt(aksjonspunkter), [aksjonspunkter]);
+  const soknadMottattDato = soknad.søknadsfrist?.mottattDato ? soknad.søknadsfrist?.mottattDato : soknad.mottattDato;
   return (
     <>
       <Undertittel>
@@ -96,7 +97,7 @@ const TilkjentYtelsePanel: FunctionComponent<PureOwnProps> = ({
         <TilkjentYtelse
           items={formatPerioder(beregningresultat.perioder)}
           groups={groups}
-          soknadDate={soknad.mottattDato}
+          soknadDate={soknadMottattDato}
           familiehendelseDate={familiehendelseDato}
           hovedsokerKjonnKode={personoversikt?.bruker ? personoversikt.bruker.kjønn as Kjønnkode : undefined}
           isSoknadSvangerskapspenger={fagsakYtelseTypeKode === fagsakYtelseType.SVANGERSKAPSPENGER}

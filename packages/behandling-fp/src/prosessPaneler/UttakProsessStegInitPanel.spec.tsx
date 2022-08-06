@@ -111,7 +111,6 @@ const lagRestApiMockData = () => [
     },
   },
   { key: FpBehandlingApiKeys.UTTAKSRESULTAT_PERIODER.name, data: uttaksresultatPerioder },
-  { key: FpBehandlingApiKeys.UTTAK_PERIODE_GRENSE.name, data: {} },
   {
     key: FpBehandlingApiKeys.FAMILIEHENDELSE.name,
     data: {

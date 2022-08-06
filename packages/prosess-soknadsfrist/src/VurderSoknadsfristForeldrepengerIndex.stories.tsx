@@ -16,15 +16,14 @@ const behandling = {
 
 const soknad = {
   mottattDato: '2019-01-01',
+  søknadsfrist: {
+    mottattDato: '2019-01-01',
+    dagerOversittetFrist: 2,
+    søknadsperiodeStart: '2019-01-01',
+    søknadsperiodeSlutt: '2019-01-10',
+    utledetSøknadsfrist: '2019-10-01',
+  },
 } as Soknad;
-
-const uttakPeriodeGrense = {
-  mottattDato: '2019-01-01',
-  antallDagerLevertForSent: 2,
-  soknadsperiodeStart: '2019-01-01',
-  soknadsperiodeSlutt: '2019-01-10',
-  soknadsfristForForsteUttaksdato: '2019-10-01',
-};
 
 export default {
   title: 'prosess/prosess-soknadsfrist',
@@ -47,7 +46,6 @@ const Template: Story<{
     vilkar={[]}
     alleMerknaderFraBeslutter={{}}
     setFormData={() => undefined}
-    uttakPeriodeGrense={uttakPeriodeGrense}
     soknad={soknad}
     aksjonspunkter={[{
       definisjon: aksjonspunktCodes.VURDER_SOKNADSFRIST_FORELDREPENGER,
