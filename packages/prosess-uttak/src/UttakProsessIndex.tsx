@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import {
   ArbeidsgiverOpplysningerPerId, StandardProsessPanelProps, FamilieHendelseSamling, Personoversikt,
-  Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
+  Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { createIntl } from '@navikt/ft-utils';
 import { ReduxWrapper } from '@fpsak-frontend/form';

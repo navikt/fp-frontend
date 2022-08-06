@@ -759,7 +759,7 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
     uttaksresultat,
     ytelsefordeling,
   } = props;
-  const periodeGrenseMottatDato = søknadsfrist?.mottattDato;
+  const gjeldendeMottattDato = søknadsfrist?.mottattDato ? søknadsfrist.mottattDato : mottattDato;
   const hovedsokerKjonnKode = person ? person.bruker.kjønn : undefined;
   const annenForelderUttak = uttaksresultat.perioderAnnenpart;
   const viseUttakMedsoker = annenForelderUttak.length > 0;
@@ -791,7 +791,7 @@ const mapStateToProps = (state: any, props: PureOwnProps) => {
     isRevurdering: props.behandlingType === behandlingType.REVURDERING,
     medsokerKjonnKode,
     person,
-    soknadDate: determineMottatDato(periodeGrenseMottatDato, mottattDato),
+    soknadDate: determineMottatDato(gjeldendeMottattDato, mottattDato),
     stonadskonto: formValueSelector(formName)(state, 'stonadskonto'),
     // @ts-ignore
     uttaksresultatActivity: lagUttaksresultatActivity(state, props),
