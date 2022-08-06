@@ -14,9 +14,10 @@ import { Tidslinje } from '@navikt/ft-tidslinje';
 import { KjønnkodeEnum } from '@fpsak-frontend/types/src/Kjonnkode';
 import {
   Aksjonspunkt, AlleKodeverk, Behandling, FamilieHendelseSamling, PeriodeSokerAktivitet, Personoversikt,
-  UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
+  UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
+import { Søknadsfrist } from '@fpsak-frontend/types/src/soknadTsType';
 import UttakTimeLineData from './UttakTimeLineData';
 import messages from '../../i18n/nb_NO.json';
 import { Uttak, UttaksresultatActivity, PeriodeMedClassName } from './Uttak';
@@ -74,13 +75,13 @@ describe('<Uttak>', () => {
       medsokerKjonnKode={KjønnkodeEnum.MANN}
       person={{} as Personoversikt}
       familiehendelse={{} as FamilieHendelseSamling}
-      uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}
       behandlingType={behandlingType.FORSTEGANGSSOKNAD}
       behandlingStatus={behandlingStatus.OPPRETTET}
       employeeHasAccess
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
+      søknadsfrist={{} as Søknadsfrist}
       arbeidsgiverOpplysningerPerId={{}}
     />);
     wrapper.setState({ selectedItem: null });
@@ -125,13 +126,13 @@ describe('<Uttak>', () => {
       medsokerKjonnKode={KjønnkodeEnum.MANN}
       person={{} as Personoversikt}
       familiehendelse={{} as FamilieHendelseSamling}
-      uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}
       behandlingType={behandlingType.FORSTEGANGSSOKNAD}
       behandlingStatus={behandlingStatus.OPPRETTET}
       employeeHasAccess
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
+      søknadsfrist={{} as Søknadsfrist}
       arbeidsgiverOpplysningerPerId={{}}
     />);
     wrapper.setState({
@@ -182,13 +183,13 @@ describe('<Uttak>', () => {
       medsokerKjonnKode={KjønnkodeEnum.MANN}
       person={{} as Personoversikt}
       familiehendelse={{} as FamilieHendelseSamling}
-      uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}
       behandlingType={behandlingType.FORSTEGANGSSOKNAD}
       behandlingStatus={behandlingStatus.OPPRETTET}
       employeeHasAccess={false}
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
+      søknadsfrist={{} as Søknadsfrist}
       arbeidsgiverOpplysningerPerId={{}}
     />);
     wrapper.setState({
@@ -247,13 +248,13 @@ describe('<Uttak>', () => {
       medsokerKjonnKode={KjønnkodeEnum.MANN}
       person={{} as Personoversikt}
       familiehendelse={{} as FamilieHendelseSamling}
-      uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}
       behandlingType={behandlingType.FORSTEGANGSSOKNAD}
       behandlingStatus={behandlingStatus.OPPRETTET}
       employeeHasAccess={false}
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
+      søknadsfrist={{} as Søknadsfrist}
       arbeidsgiverOpplysningerPerId={{}}
     />);
     wrapper.setState({
@@ -312,13 +313,13 @@ describe('<Uttak>', () => {
       medsokerKjonnKode={KjønnkodeEnum.MANN}
       person={{} as Personoversikt}
       familiehendelse={{} as FamilieHendelseSamling}
-      uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}
       behandlingType={behandlingType.FORSTEGANGSSOKNAD}
       behandlingStatus={behandlingStatus.OPPRETTET}
       employeeHasAccess
       uttaksresultat={{} as UttaksresultatPeriode}
       mottattDato="10.10.2020"
+      søknadsfrist={{} as Søknadsfrist}
       arbeidsgiverOpplysningerPerId={{}}
     />);
     wrapper.setState({

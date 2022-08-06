@@ -5,7 +5,7 @@ import sinon from 'sinon';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
   Aksjonspunkt, AlleKodeverk, Behandling, FamilieHendelseSamling, Personoversikt,
-  Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
+  Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
 import UttakPanel from './components/UttakPanel';
@@ -88,7 +88,6 @@ describe('<UttakProsessIndex>', () => {
       alleKodeverk={{} as AlleKodeverk}
       employeeHasAccess
       tempUpdateStonadskontoer={sinon.spy()}
-      uttakPeriodeGrense={{} as UttakPeriodeGrense}
       ytelsefordeling={{} as Ytelsefordeling}
       status=""
       vilkar={[]}

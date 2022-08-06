@@ -13,7 +13,7 @@ import { stonadskontoType, uttakPeriodeNavn } from '@fpsak-frontend/kodeverk/src
 import periodeResultatType from '@fpsak-frontend/kodeverk/src/periodeResultatType';
 import {
   Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, FamilieHendelseSamling, AlleKodeverk,
-  Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling, Stonadskonto, Personoversikt,
+  Soknad, UttaksresultatPeriode, UttakStonadskontoer, Ytelsefordeling, Stonadskonto, Personoversikt,
 } from '@fpsak-frontend/types';
 import { UttakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import { validerApKodeOgHentApEnum } from '@fpsak-frontend/prosess-felles';
@@ -94,7 +94,6 @@ interface PureOwnProps {
   soknad: Soknad;
   person: Personoversikt;
   familiehendelse: FamilieHendelseSamling;
-  uttakPeriodeGrense: UttakPeriodeGrense;
   alleKodeverk: AlleKodeverk;
   ytelsefordeling: Ytelsefordeling;
   tempUpdateStonadskontoer: (params: {
@@ -122,7 +121,6 @@ export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & W
   soknad,
   person,
   familiehendelse,
-  uttakPeriodeGrense,
   ytelsefordeling,
   behandlingUuid,
   behandlingType,
@@ -162,7 +160,6 @@ export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & W
           manuellOverstyring={manuellOverstyring}
           person={person}
           familiehendelse={familiehendelse}
-          uttakPeriodeGrense={uttakPeriodeGrense}
           ytelsefordeling={ytelsefordeling}
           behandlingUuid={behandlingUuid}
           behandlingType={behandlingType}
@@ -175,6 +172,7 @@ export const UttakPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps & W
           uttaksresultat={uttaksresultat}
           behandlingsresultat={behandlingsresultat}
           mottattDato={soknad.mottattDato}
+          søknadsfrist={soknad.søknadsfrist}
           fodselsdatoer={soknad.fodselsdatoer}
           termindato={soknad.termindato}
           adopsjonFodelsedatoer={soknad.adopsjonFodelsedatoer}

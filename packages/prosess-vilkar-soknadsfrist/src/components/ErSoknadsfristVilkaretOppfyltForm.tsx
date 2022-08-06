@@ -20,7 +20,7 @@ import {
   ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew,
 } from '@fpsak-frontend/prosess-felles';
 import {
-  Aksjonspunkt, AlleKodeverk, Behandling, FamilieHendelse, Soknad, Vilkar,
+  Aksjonspunkt, AlleKodeverk, Behandling, FamilieHendelse, Soknad,
 } from '@fpsak-frontend/types';
 import AksjonspunktKode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SoknadsfristAp from '@fpsak-frontend/types-avklar-aksjonspunkter/src/prosess/SoknadsfristAp';
@@ -30,7 +30,7 @@ import styles from './erSoknadsfristVilkaretOppfyltForm.less';
 const findRadioButtonTextCode = (erVilkarOk?: boolean): string => (erVilkarOk
   ? 'ErSoknadsfristVilkaretOppfyltForm.VilkarOppfylt' : 'ErSoknadsfristVilkaretOppfyltForm.VilkarIkkeOppfylt');
 
-const findSoknadsfristDate = (mottattDato: string, antallDagerSoknadLevertForSent?: string): string => (
+const findSoknadsfristDate = (mottattDato: string, antallDagerSoknadLevertForSent?: number): string => (
   moment(mottattDato)
     .subtract(antallDagerSoknadLevertForSent, 'days')
     .format(ISO_DATE_FORMAT)
@@ -83,7 +83,6 @@ const transformValues = (values: Required<FormValues>): SoknadsfristAp => ({
 
 interface OwnProps {
   behandlingsresultat?: Behandling['behandlingsresultat'];
-  vilkar: Vilkar[];
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
   aksjonspunkter: Aksjonspunkt[];
@@ -106,7 +105,6 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
   readOnlySubmitButton,
   soknad,
   gjeldendeFamiliehendelse,
-  vilkar,
   behandlingsresultat,
   alleKodeverk,
   aksjonspunkter,
@@ -128,9 +126,7 @@ const ErSoknadsfristVilkaretOppfyltForm: FunctionComponent<OwnProps> = ({
 
   const erVilkarOk = formMethods.watch('erVilkarOk');
 
-  const vilkarCodes = aksjonspunkter.flatMap((a) => (a.vilkarType ? [a.vilkarType] : []));
-  const funnetVilkar = vilkar.find((v) => vilkarCodes.includes(v.vilkarType));
-  const antallDagerSoknadLevertForSent = funnetVilkar?.merknadParametere.antallDagerSoeknadLevertForSent;
+  const antallDagerSoknadLevertForSent = soknad?.søknadsfrist?.dagerOversittetFrist;
 
   const hasAksjonspunkt = aksjonspunkter.length > 0;
 

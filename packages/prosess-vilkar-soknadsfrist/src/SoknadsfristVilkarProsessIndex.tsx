@@ -16,7 +16,6 @@ interface OwnProps {
 
 const SoknadsfristVilkarProsessIndex: FunctionComponent<OwnProps & StandardProsessPanelProps> = ({
   behandling,
-  vilkar,
   soknad,
   familiehendelse,
   aksjonspunkter,
@@ -31,7 +30,6 @@ const SoknadsfristVilkarProsessIndex: FunctionComponent<OwnProps & StandardProse
   <RawIntlProvider value={intl}>
     <ErSoknadsfristVilkaretOppfyltForm
       behandlingsresultat={behandling.behandlingsresultat}
-      vilkar={vilkar}
       soknad={soknad}
       gjeldendeFamiliehendelse={familiehendelse.gjeldende}
       aksjonspunkter={aksjonspunkter}

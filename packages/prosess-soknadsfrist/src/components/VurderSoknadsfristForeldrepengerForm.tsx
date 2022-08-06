@@ -18,10 +18,11 @@ import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
-import { Aksjonspunkt, UttakPeriodeGrense } from '@fpsak-frontend/types';
+import { Aksjonspunkt } from '@fpsak-frontend/types';
 import { VurderSoknadsfristAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
+import { Søknadsfrist } from '@fpsak-frontend/types/src/soknadTsType';
 import styles from './vurderSoknadsfristForeldrepengerForm.less';
 
 const isEdited = (hasAksjonspunkt: boolean, gyldigSenFremsetting?: boolean): boolean => hasAksjonspunkt && gyldigSenFremsetting !== undefined;
@@ -35,9 +36,9 @@ type FormValues = {
 const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   mottattDato: string,
-  uttaksperiodegrense?: UttakPeriodeGrense,
+  søknadsfrist?: Søknadsfrist,
 ): FormValues => {
-  const upgMottattDato = uttaksperiodegrense ? uttaksperiodegrense.mottattDato : undefined;
+  const upgMottattDato = søknadsfrist?.mottattDato;
   return {
     gyldigSenFremsetting: isAksjonspunktOpen(aksjonspunkter[0].status) ? undefined : upgMottattDato !== mottattDato,
     ansesMottatt: upgMottattDato,
@@ -53,8 +54,8 @@ const transformValues = (values: FormValues): VurderSoknadsfristAp => ({
 });
 
 interface OwnProps {
-  uttakPeriodeGrense?: UttakPeriodeGrense;
   mottattDato: string;
+  søknadsfrist?: Søknadsfrist
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (data: VurderSoknadsfristAp) => Promise<void>;
   readOnly: boolean;
@@ -74,22 +75,22 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
   readOnly,
   readOnlySubmitButton,
   mottattDato,
-  uttakPeriodeGrense,
+  søknadsfrist,
   isApOpen,
   submitCallback,
   formData,
   setFormData,
 }) => {
-  const initialValues = useMemo(() => buildInitialValues(aksjonspunkter, mottattDato, uttakPeriodeGrense), [aksjonspunkter, mottattDato, uttakPeriodeGrense]);
+  const initialValues = useMemo(() => buildInitialValues(aksjonspunkter, mottattDato, søknadsfrist), [aksjonspunkter, mottattDato, søknadsfrist]);
   const formMethods = useForm<FormValues>({
     defaultValues: formData || initialValues,
   });
 
   const gyldigSenFremsetting = formMethods.watch('gyldigSenFremsetting');
 
-  const soknadsperiodeStart = uttakPeriodeGrense?.soknadsperiodeStart;
-  const soknadsperiodeSlutt = uttakPeriodeGrense?.soknadsperiodeSlutt;
-  const soknadsfristdato = uttakPeriodeGrense?.soknadsfristForForsteUttaksdato;
+  const soknadsperiodeStart = søknadsfrist?.søknadsperiodeStart;
+  const soknadsperiodeSlutt = søknadsfrist?.søknadsperiodeSlutt;
+  const soknadsfristdato = søknadsfrist?.utledetSøknadsfrist;
 
   return (
     <Form
@@ -104,7 +105,7 @@ const VurderSoknadsfristForeldrepengerForm: FunctionComponent<OwnProps> = ({
           key="VurderSoknadsfristForeldrepengerForm"
           id="VurderSoknadsfristForeldrepengerForm.AksjonspunktHelpText"
           values={{
-            numberOfDays: uttakPeriodeGrense?.antallDagerLevertForSent,
+            numberOfDays: søknadsfrist?.dagerOversittetFrist,
             soknadsfristdato: soknadsfristdato ? moment(soknadsfristdato).format(DDMMYYYY_DATE_FORMAT) : '',
           }}
         />]}

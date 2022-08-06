@@ -10,7 +10,7 @@ import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import {
   AksessRettigheter, Aksjonspunkt, ArbeidsgiverOpplysningerPerId, FamilieHendelseSamling,
-  Personoversikt, Soknad, UttakPeriodeGrense, UttaksresultatPeriode, UttakStonadskontoer, Vilkar, Ytelsefordeling,
+  Personoversikt, Soknad, UttaksresultatPeriode, UttakStonadskontoer, Vilkar, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@navikt/ft-utils';
@@ -60,14 +60,12 @@ type EndepunktInitData = {
 
 const ENDEPUNKTER_PANEL_DATA = [
   FpBehandlingApiKeys.FAMILIEHENDELSE,
-  FpBehandlingApiKeys.UTTAK_PERIODE_GRENSE,
   FpBehandlingApiKeys.UTTAK_STONADSKONTOER,
   FpBehandlingApiKeys.SOKNAD,
   FpBehandlingApiKeys.YTELSEFORDELING,
 ];
 type EndepunktPanelData = {
   familiehendelse: FamilieHendelseSamling;
-  uttakPeriodeGrense: UttakPeriodeGrense;
   uttakStonadskontoer: UttakStonadskontoer;
   soknad: Soknad;
   ytelsefordeling: Ytelsefordeling;

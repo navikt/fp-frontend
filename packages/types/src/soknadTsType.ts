@@ -10,6 +10,14 @@ export type UtlandsoppholdPeriode = Readonly<{
   tom: string;
 }>
 
+export type Søknadsfrist = Readonly<{
+  mottattDato?: string;
+  utledetSøknadsfrist?: string;
+  søknadsperiodeStart?: string;
+  søknadsperiodeSlutt?: string;
+  dagerOversittetFrist?: number;
+}>
+
 type Soknad = Readonly<{
   soknadType: string;
   mottattDato: string;
@@ -26,6 +34,7 @@ type Soknad = Readonly<{
   oppgittFordeling: {
     startDatoForPermisjon?: string;
   };
+  søknadsfrist: Søknadsfrist;
   utstedtdato?: string;
   termindato?: string;
   fodselsdatoer?: Record<number, string>;

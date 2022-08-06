@@ -39,7 +39,7 @@ const lagModifisertCallback = (
 const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: FpVilkar): Vilkarperiode => ({
   avslagKode: bgVilkar.avslagKode,
   vurderesIBehandlingen: true,
-  merknadParametere: bgVilkar.merknadParametere,
+  merknadParametere: {},
   periode: {
     fom: beregningsgrunnlag ? beregningsgrunnlag.skjaeringstidspunktBeregning : '',
     tom: TIDENES_ENDE,
