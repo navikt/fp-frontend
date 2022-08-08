@@ -9,7 +9,6 @@ import * as stories from './AktivitetskravFaktaIndex.stories';
 const { AksjonspunktMedToUavklartePerioder, AksjonspunktSomErBekreftetOgBehandlingAvsluttet } = composeStories(stories);
 
 describe('<AktivitetskravFaktaIndex>', () => {
-  // TODO Fiks
   it.skip('skal avklare to perioder og så bekrefte aksjonspunkt', async () => {
     const lagre = jest.fn(() => Promise.resolve());
 
@@ -22,20 +21,21 @@ describe('<AktivitetskravFaktaIndex>', () => {
 
     await userEvent.click(screen.getByText('Aktiviteten er ikke dokumentert'));
 
+    await userEvent.click(screen.getByText('Oppdater'));
+
+    expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
+
     await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Oppdater'));
 
-    expect(screen.findByText('Oppdater')).toBeDisabled();
-    expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
+    expect(await screen.findAllByText('15.01.2021 - 20.01.2021')).toHaveLength(2);
 
     await userEvent.click(screen.getByText('Mor er ikke i aktivitet'));
 
     await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse på andre periode');
 
     await userEvent.click(screen.getByText('Oppdater'));
-
-    expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 

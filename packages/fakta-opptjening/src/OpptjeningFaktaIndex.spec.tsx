@@ -10,8 +10,7 @@ const {
 } = composeStories(stories);
 
 describe('<OpptjeningFaktaIndex>', () => {
-  // TODO Fiks
-  it.skip('skal åpne aktivitet automatisk når det har åpent aksjonspunkt og så godkjenne det', async () => {
+  it('skal åpne aktivitet automatisk når det har åpent aksjonspunkt og så godkjenne det', async () => {
     const lagre = jest.fn(() => Promise.resolve());
     const utils = render(<MedAksjonspunkt submitCallback={lagre} />);
 
@@ -22,21 +21,30 @@ describe('<OpptjeningFaktaIndex>', () => {
     expect(screen.getByText('24.10.2019')).toBeInTheDocument();
 
     expect(screen.getByText('Detaljer for valgt aktivitet')).toBeInTheDocument();
+    expect(screen.getByText('(9 mndr. 31 dager)')).toBeInTheDocument();
     expect(screen.getAllByText('Næring')).toHaveLength(2);
 
     expect(screen.getByText('Oppdater')).toBeDisabled();
     expect(screen.getByText('Avbryt')).toBeEnabled();
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    await userEvent.click(screen.getAllByRole('radio')[0]);
-
-    const begrunnelseInput = utils.getByLabelText('Begrunn endringene');
-    await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'D');
 
     await userEvent.click(screen.getByText('Oppdater'));
 
-    expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
-    expect(screen.queryByText('Detaljer for valgt aktivitet')).not.toBeInTheDocument();
+    expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
+    expect(screen.getByText('Du må skrive minst 3 tegn')).toBeInTheDocument();
+
+    await userEvent.click(screen.getAllByRole('radio')[0]);
+
+    await waitFor(() => expect(screen.queryByText('Feltet må fylles ut')).not.toBeInTheDocument());
+
+    await userEvent.clear(utils.getByLabelText('Begrunn endringene'));
+    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+
+    await waitFor(() => expect(screen.queryByText('Du må skrive minst 3 tegn')).not.toBeInTheDocument());
+
+    await userEvent.click(screen.getByText('Oppdater'));
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
