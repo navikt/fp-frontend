@@ -167,7 +167,7 @@ describe('<PermisjonIndex>', () => {
     });
   });
 
-  it.skip('skal velge gradering', async () => {
+  it('skal velge gradering', async () => {
     const lagre = jest.fn();
 
     const utils = render(<SokerErMor submitCallback={lagre} />);
@@ -190,8 +190,8 @@ describe('<PermisjonIndex>', () => {
     await userEvent.type(tomDatoInput, '2022.06.20');
     fireEvent.blur(tomDatoInput);
 
-    const prosentandelInput = utils.getAllByRole('textbox')[3];
-    await userEvent.type(prosentandelInput, '8023232323');
+    const prosentandelInput = utils.getAllByRole('textbox')[2];
+    await userEvent.type(prosentandelInput, '100');
 
     const virksomhetsnummerInput = utils.getByLabelText('Virksomhetsnummer');
     await userEvent.type(virksomhetsnummerInput, '802323232');
@@ -205,25 +205,35 @@ describe('<PermisjonIndex>', () => {
     const prosentInput = utils.getByLabelText('Prosentandel uttak');
     await userEvent.type(prosentInput, '100');
 
-    await waitFor(() => expect(screen.queryByText('Feltet må fylles ut')).not.toBeInTheDocument());
-
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       tidsromPermisjon: {
-        fulltUttak: undefined,
-        utsettelsePeriode: [{
-          arsakForUtsettelse: 'ARBEID',
-          erArbeidstaker: 'true',
-          periodeForUtsettelse: 'MØDREKVOTE',
+        fulltUttak: false,
+        graderingPeriode: [{
+          arbeidsgiverIdentifikator: '802323232',
+          arbeidskategoriType: 'ARBEIDSTAKER',
+          erArbeidstaker: true,
+          erFrilanser: false,
+          erSelvstNæringsdrivende: false,
+          flerbarnsdager: undefined,
+          harSamtidigUttak: true,
           periodeFom: '2022-05-20',
+          periodeForGradering: 'MØDREKVOTE',
           periodeTom: '2022-06-20',
+          prosentandelArbeid: '100.00',
+          samtidigUttaksprosent: '100',
+          skalGraderes: undefined,
         }],
-        skalGradere: undefined,
-        skalHaOpphold: undefined,
-        skalOvertaKvote: undefined,
-        skalUtsette: true,
+        oppholdPerioder: undefined,
+        overforingsperioder: undefined,
+        permisjonsPerioder: undefined,
+        skalGradere: true,
+        skalHaOpphold: false,
+        skalOvertaKvote: false,
+        skalUtsette: false,
+        utsettelsePeriode: undefined,
       },
     });
   });
