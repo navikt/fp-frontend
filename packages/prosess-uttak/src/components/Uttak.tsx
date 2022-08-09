@@ -318,10 +318,11 @@ export class Uttak extends Component<PureOwnProps & MappedOwnProps & DispatchPro
     const { uttakPerioder } = this.props;
     const { selectedItem: currentSelectedItem } = this.state;
     const selectedItem = uttakPerioder.find((item: PeriodeMedClassName) => item.id === eventProps.items[0]);
-    if (currentSelectedItem) {
-      this.setState({ selectedItem: undefined });
-      this.setSelectedUttakActivity(selectedItem);
-    } else {
+
+    if (currentSelectedItem?.id !== selectedItem?.id) {
+      if (currentSelectedItem) {
+        this.setState({ selectedItem: undefined });
+      }
       this.setSelectedUttakActivity(selectedItem);
     }
     eventProps.event.preventDefault();
