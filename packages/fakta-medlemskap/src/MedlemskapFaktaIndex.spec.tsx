@@ -26,11 +26,11 @@ describe('<MedlemskapFaktaIndex>', () => {
 
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    userEvent.click(screen.getAllByText('Søker er bosatt i Norge')[0]);
+    await userEvent.click(screen.getAllByText('Søker er bosatt i Norge')[0]);
 
-    userEvent.type(screen.getByText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByText('Begrunn endringene'), 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, [{
@@ -67,11 +67,11 @@ describe('<MedlemskapFaktaIndex>', () => {
 
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    userEvent.click(screen.getByText('Periode med medlemskap'));
+    await userEvent.click(screen.getByText('Periode med medlemskap'));
 
-    userEvent.type(screen.getByText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByText('Begrunn endringene'), 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, [{
@@ -125,11 +125,11 @@ describe('<MedlemskapFaktaIndex>', () => {
 
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    userEvent.click(screen.getAllByText('Søker har oppholdsrett')[0]);
+    await userEvent.click(screen.getAllByText('Søker har oppholdsrett')[0]);
 
-    userEvent.type(screen.getByText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByText('Begrunn endringene'), 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, [{
@@ -165,11 +165,11 @@ describe('<MedlemskapFaktaIndex>', () => {
 
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    userEvent.click(screen.getAllByText('Søker har lovlig opphold')[0]);
+    await userEvent.click(screen.getAllByText('Søker har lovlig opphold')[0]);
 
-    userEvent.type(screen.getByText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByText('Begrunn endringene'), 'Dette er en begrunnelse');
 
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, [{
@@ -213,13 +213,13 @@ describe('<MedlemskapFaktaIndex>', () => {
     expect(screen.getByText('Oppdater')).toBeDisabled();
     expect(screen.getByText('Avbryt')).toBeEnabled();
 
-    userEvent.click(screen.getAllByText('Søker har lovlig opphold')[0]);
+    await userEvent.click(screen.getAllByText('Søker har lovlig opphold')[0]);
 
-    userEvent.type(screen.getByText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByText('Begrunn endringene'), 'Dette er en begrunnelse');
 
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    userEvent.click(screen.getByText('Oppdater'));
+    await userEvent.click(screen.getByText('Oppdater'));
 
     expect(await screen.findByText('Periode - 07.11.2019')).toBeInTheDocument();
 
@@ -227,19 +227,15 @@ describe('<MedlemskapFaktaIndex>', () => {
     expect(screen.getByText('Oppdater')).toBeDisabled();
     expect(screen.getByText('Avbryt')).toBeEnabled();
 
-    userEvent.click(screen.getAllByText('Søker er bosatt i Norge')[0]);
+    await userEvent.click(screen.getAllByText('Søker er bosatt i Norge')[0]);
 
-    userEvent.type(screen.getByText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByText('Begrunn endringene'), 'Dette er en begrunnelse');
 
     expect(screen.getByText('Bekreft og fortsett')).toBeDisabled();
 
-    userEvent.click(screen.getByText('Oppdater'));
+    await userEvent.click(screen.getByText('Oppdater'));
 
-    expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
-
-    expect(screen.queryByText('Opplysninger oppgitt i søknaden')).not.toBeInTheDocument();
-
-    userEvent.click(screen.getByText('Bekreft og fortsett'));
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, [{

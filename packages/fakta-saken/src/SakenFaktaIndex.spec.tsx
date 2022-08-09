@@ -99,20 +99,20 @@ describe('<SakenFaktaIndex>', () => {
 
     expect(screen.queryByText('Startdato som skal benyttes (fra søknad eller fødsel)')).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByAltText('Endre startdato for foreldrepenger'));
+    await userEvent.click(screen.getByAltText('Endre startdato for foreldrepenger'));
 
     const startdato = screen.getByText('Startdato som skal benyttes (fra søknad eller fødsel)');
-    userEvent.type(startdato, '{backspace}{backspace}20');
-    fireEvent.blur(startdato);
+    await userEvent.type(startdato, '{backspace}{backspace}20');
+    await fireEvent.blur(startdato);
 
     expect(screen.getByText('Lagre')).toBeDisabled();
 
     const vurdering = screen.getByText('Vurdering');
-    userEvent.type(vurdering, 'Dette er en vurdering');
+    await userEvent.type(vurdering, 'Dette er en vurdering');
 
     expect(await screen.findByText('Lagre')).toBeEnabled();
 
-    userEvent.click(screen.getByText('Lagre'));
+    await userEvent.click(screen.getByText('Lagre'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
