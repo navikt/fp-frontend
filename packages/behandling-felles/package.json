@@ -34,7 +34,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-intl": "6.0.5",
-    "@sentry/browser": "7.8.1"
+    "@sentry/browser": "7.10.0"
   },
   "devDependencies": {
     "@fpsak-frontend/utils-test": "1.0.0",
