@@ -104,7 +104,7 @@ const FordelingFaktaInitPanel: FunctionComponent<OwnProps & FaktaPanelInitProps>
         beregningsgrunnlagVilkår={lagBGVilkar(data.vilkar, data.beregningsgrunnlag)}
         beregningsgrunnlagListe={lagFormatertBG(data.beregningsgrunnlag)}
         submitCallback={lagModifisertCallback(data.submitCallback)}
-        behandlingType={data.behandling.type}
+        behandlingType={data.behandling ? data.behandling.type : ''}
       />
     )}
   />
