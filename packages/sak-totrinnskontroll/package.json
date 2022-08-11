@@ -10,7 +10,7 @@
     "@fpsak-frontend/konstanter": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/types-avklar-aksjonspunkter": "1.0.0",
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "1.0.24",
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "2.0.12",
     "@navikt/ft-form-hooks": "1.0.34",
     "@navikt/ft-form-validators": "1.0.23",
     "@navikt/ft-kodeverk": "^1.0.15",
