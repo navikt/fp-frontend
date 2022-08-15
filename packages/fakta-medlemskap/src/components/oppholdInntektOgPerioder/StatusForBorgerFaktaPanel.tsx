@@ -1,73 +1,67 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { connect } from 'react-redux';
 import { Undertekst } from 'nav-frontend-typografi';
+import { formHooks, RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
+import { required } from '@navikt/ft-form-validators';
+import { ArrowBox, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import { ArrowBox, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { RadioGroupField, RadioOption } from '@fpsak-frontend/form';
-import { required } from '@navikt/ft-form-validators';
 import { Aksjonspunkt, MedlemPeriode } from '@fpsak-frontend/types';
-import { formValueSelector } from 'redux-form';
-
-export type PeriodeMedId = MedlemPeriode & { id: string; }
 
 export type FormValues = {
   oppholdsrettVurdering?: boolean;
   lovligOppholdVurdering?: boolean;
   erEosBorger?: boolean;
-  isBorgerAksjonspunktClosed?: boolean;
-  apKode?: string;
 }
 
-type TransformedValues = {
-  kode: string;
-  oppholdsrettVurdering: boolean;
-  lovligOppholdVurdering: boolean;
-  erEosBorger: boolean;
-}
-
-interface PureOwnProps {
-  id: string;
+interface OwnProps {
+  valgtPeriode: MedlemPeriode;
+  aksjonspunkter: Aksjonspunkt[]
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
 }
 
-interface MappedOwnProps {
-  erEosBorger?: boolean;
-  isBorgerAksjonspunktClosed: boolean;
-  apKode: string;
-}
-
 interface StaticFunctions {
-  buildInitialValues?: (periode: PeriodeMedId, aksjonspunkter: Aksjonspunkt[]) => FormValues;
-  transformValues?: (values: FormValues, aksjonspunkter: Aksjonspunkt[]) => TransformedValues;
+  buildInitialValues?: (periode: MedlemPeriode, aksjonspunkter: Aksjonspunkt[]) => FormValues;
 }
 
 /**
  * StatusForBorgerFaktaPanel
  *
- * Presentasjonskomponent. Setter opp aksjonspunktet for avklaring av borgerstatus (Medlemskapsvilkåret).
+ * Setter opp aksjonspunktet for avklaring av borgerstatus (Medlemskapsvilkåret).
  */
-const StatusForBorgerFaktaPanelImpl: FunctionComponent<PureOwnProps & MappedOwnProps> & StaticFunctions = ({
+const StatusForBorgerFaktaPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
+  valgtPeriode,
+  aksjonspunkter,
   readOnly,
-  erEosBorger,
-  isBorgerAksjonspunktClosed,
-  apKode,
   alleMerknaderFraBeslutter,
 }) => {
   const intl = useIntl();
+
+  const { watch } = formHooks.useFormContext<any>();
+
+  const erEosBorger = watch('erEosBorger');
+
+  const oppholdAp = valgtPeriode.aksjonspunkter
+    .filter((periodeAp) => periodeAp === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT || periodeAp === aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD);
+  const aksjonspunkt = aksjonspunkter.find((ap) => oppholdAp.includes(ap.definisjon));
+  const erAksjonspunktLukket = !isAksjonspunktOpen(aksjonspunkt?.status);
+
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.ApplicationInformation' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[apKode]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunkt?.definisjon]}
     >
-      <RadioGroupField name="erEosBorger" validate={[required]} readOnly={readOnly}>
-        <RadioOption label={{ id: 'StatusForBorgerFaktaPanel.CitizenEEA' }} value />
-        <RadioOption label={{ id: 'StatusForBorgerFaktaPanel.CitizenOutsideEEA' }} value={false} />
+      <RadioGroupField
+        name="erEosBorger"
+        validate={[required]}
+        readOnly={readOnly}
+        parse={(value: string) => value === 'true'}
+      >
+        <RadioOption label={intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.CitizenEEA' })} value="true" />
+        <RadioOption label={intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.CitizenOutsideEEA' })} value="false" />
       </RadioGroupField>
-
       {erEosBorger && (
         <ArrowBox>
           <Undertekst>
@@ -78,9 +72,10 @@ const StatusForBorgerFaktaPanelImpl: FunctionComponent<PureOwnProps & MappedOwnP
             name="oppholdsrettVurdering"
             validate={[required]}
             readOnly={readOnly}
-            isEdited={isBorgerAksjonspunktClosed}
+            isEdited={erAksjonspunktLukket}
+            parse={(value: string) => value === 'true'}
           >
-            <RadioOption label={{ id: 'StatusForBorgerFaktaPanel.HarOppholdsrett' }} value />
+            <RadioOption label={intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.HarOppholdsrett' })} value="true" />
             <RadioOption
               label={(
                 <FormattedMessage
@@ -90,7 +85,7 @@ const StatusForBorgerFaktaPanelImpl: FunctionComponent<PureOwnProps & MappedOwnP
                   }}
                 />
                 )}
-              value={false}
+              value="false"
             />
           </RadioGroupField>
         </ArrowBox>
@@ -105,9 +100,10 @@ const StatusForBorgerFaktaPanelImpl: FunctionComponent<PureOwnProps & MappedOwnP
             name="lovligOppholdVurdering"
             validate={[required]}
             readOnly={readOnly}
-            isEdited={isBorgerAksjonspunktClosed}
+            isEdited={erAksjonspunktLukket}
+            parse={(value: string) => value === 'true'}
           >
-            <RadioOption label={{ id: 'StatusForBorgerFaktaPanel.HarLovligOpphold' }} value />
+            <RadioOption label={intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.HarLovligOpphold' })} value="true" />
             <RadioOption
               label={(
                 <FormattedMessage
@@ -117,7 +113,7 @@ const StatusForBorgerFaktaPanelImpl: FunctionComponent<PureOwnProps & MappedOwnP
                   }}
                 />
                 )}
-              value={false}
+              value="false"
             />
           </RadioGroupField>
         </ArrowBox>
@@ -126,51 +122,30 @@ const StatusForBorgerFaktaPanelImpl: FunctionComponent<PureOwnProps & MappedOwnP
   );
 };
 
-const mapStateToProps = (state: any, ownProps: PureOwnProps): MappedOwnProps => ({
-  ...formValueSelector(`OppholdInntektOgPeriodeForm-${ownProps.id}`)(state, 'erEosBorger', 'isBorgerAksjonspunktClosed', 'apKode'),
-});
-
-const StatusForBorgerFaktaPanel = connect(mapStateToProps)(StatusForBorgerFaktaPanelImpl);
-
-const getApKode = (aksjonspunkter: Aksjonspunkt[]): string => aksjonspunkter
-  .map((ap) => ap.definisjon)
-  .filter((kode) => kode === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT || kode === aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD)[0];
-
-const getEosBorger = (periode: PeriodeMedId, aksjonspunkter: Aksjonspunkt[]): boolean => (periode.erEosBorger || periode.erEosBorger === false
+const getEosBorger = (
+  periode: MedlemPeriode,
+  aksjonspunkter: Aksjonspunkt[],
+): boolean => (periode.erEosBorger || periode.erEosBorger === false
   ? periode.erEosBorger
-  : aksjonspunkter.some((ap: Aksjonspunkt) => ap.definisjon === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT));
+  : aksjonspunkter.some((ap) => ap.definisjon === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT));
 
-const getOppholdsrettVurdering = (periode: PeriodeMedId): boolean | undefined => (periode.oppholdsrettVurdering
+const getOppholdsrettVurdering = (
+  periode: MedlemPeriode,
+): boolean | undefined => (periode.oppholdsrettVurdering
 || periode.oppholdsrettVurdering === false ? periode.oppholdsrettVurdering : undefined);
 
-const getLovligOppholdVurdering = (periode: PeriodeMedId): boolean | undefined => (periode.lovligOppholdVurdering || periode.lovligOppholdVurdering === false
+const getLovligOppholdVurdering = (
+  periode: MedlemPeriode,
+): boolean | undefined => (periode.lovligOppholdVurdering || periode.lovligOppholdVurdering === false
   ? periode.lovligOppholdVurdering : undefined);
 
-StatusForBorgerFaktaPanel.buildInitialValues = (periode: PeriodeMedId, aksjonspunkter: Aksjonspunkt[]): FormValues => {
+StatusForBorgerFaktaPanel.buildInitialValues = (periode, aksjonspunkter) => {
   const erEosBorger = getEosBorger(periode, aksjonspunkter);
-
-  const closedAp = aksjonspunkter
-    .filter((ap) => periode.aksjonspunkter.includes(ap.definisjon)
-      || (periode.aksjonspunkter.length > 0
-        && periode.aksjonspunkter.some((pap) => pap === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT
-          || pap === aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD)
-        && ap.definisjon === aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP))
-    .filter((ap) => !isAksjonspunktOpen(ap.status));
-
   return {
     erEosBorger,
-    isBorgerAksjonspunktClosed: closedAp.length > 0,
     oppholdsrettVurdering: erEosBorger ? getOppholdsrettVurdering(periode) : undefined,
     lovligOppholdVurdering: erEosBorger === false ? getLovligOppholdVurdering(periode) : undefined,
-    apKode: getApKode(aksjonspunkter),
   };
 };
-
-StatusForBorgerFaktaPanel.transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): TransformedValues => ({
-  kode: getApKode(aksjonspunkter),
-  oppholdsrettVurdering: values.oppholdsrettVurdering,
-  lovligOppholdVurdering: values.lovligOppholdVurdering,
-  erEosBorger: values.erEosBorger,
-});
 
 export default StatusForBorgerFaktaPanel;

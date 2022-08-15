@@ -130,11 +130,7 @@ const BehandlingForeldrepengerIndex: FunctionComponent<StandardBehandlingProps> 
               <OmsorgvilkaretFaktaInitPanel {...props} personoversikt={personoversikt} />
               <AdopsjonsvilkaretFaktaInitPanel {...props} fagsak={fagsak} />
               <FodselvilkaretFaktaInitPanel {...props} />
-              <MedlemskapsvilkaretFaktaInitPanel
-                {...props}
-                rettigheter={rettigheter}
-                hasFetchError={behandlingState === RestApiState.ERROR}
-              />
+              <MedlemskapsvilkaretFaktaInitPanel {...props} />
               <OpptjeningsvilkaretFaktaInitPanel {...props} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <PermisjonFaktaInitPanel {...props} saksnummer={fagsak.saksnummer} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
               <BeregningFaktaInitPanel {...props} rettigheter={rettigheter} arbeidsgiverOpplysningerPerId={arbeidsgivere} />
