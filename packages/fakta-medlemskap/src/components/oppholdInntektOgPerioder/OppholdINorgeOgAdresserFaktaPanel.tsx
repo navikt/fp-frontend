@@ -104,7 +104,7 @@ const OppholdINorgeOgAdresserFaktaPanel: FunctionComponent<OwnProps> & StaticFun
   const aksjonspunktKode = valgtPeriode.aksjonspunkter.find((apKode) => apKode === aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT);
   const aksjonspunkt = aksjonspunkter.find((ap) => aksjonspunktKode === ap.definisjon);
 
-  const isBosattAksjonspunktClosed = aksjonspunktKode ? !isAksjonspunktOpen(aksjonspunkt.status) : false;
+  const isBosattAksjonspunktClosed = aksjonspunktKode && aksjonspunkt ? !isAksjonspunktOpen(aksjonspunkt.status) : false;
 
   const { personopplysningBruker, personopplysningAnnenPart } = valgtPeriode;
 
