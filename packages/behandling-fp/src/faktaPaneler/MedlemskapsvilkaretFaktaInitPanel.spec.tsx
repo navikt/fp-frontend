@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import MedlemskapFaktaIndex from '@fpsak-frontend/fakta-medlemskap';
 import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles';
-import { AksessRettigheter, Soknad } from '@fpsak-frontend/types';
+import { Soknad } from '@fpsak-frontend/types';
 
 import MedlemskapsvilkaretFaktaInitPanel from './MedlemskapsvilkaretFaktaInitPanel';
 
@@ -16,12 +16,6 @@ describe('<MedlemskapsvilkaretFaktaInitPanel>', () => {
     const wrapper = shallow(<MedlemskapsvilkaretFaktaInitPanel
       valgtFaktaSteg="default"
       registrerFaktaPanel={() => {}}
-      rettigheter={{
-        writeAccess: {
-          isEnabled: true,
-        },
-      } as AksessRettigheter}
-      hasFetchError={false}
     />);
 
     const panel = wrapper.find<FaktaDefaultInitPanelProps<INIT_DATA, any> & FaktaPanelInitProps>(FaktaDefaultInitPanel);
@@ -36,6 +30,5 @@ describe('<MedlemskapsvilkaretFaktaInitPanel>', () => {
       },
     });
     expect(rendretPanel.type).toEqual(MedlemskapFaktaIndex);
-    expect(rendretPanel.props.readOnlyForStartdatoForForeldrepenger).toBe(false);
   });
 });

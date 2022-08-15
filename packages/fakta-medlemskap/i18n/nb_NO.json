@@ -35,6 +35,7 @@
   "PerioderMedMedlemskapFaktaPanel.NoInformation": "Ingen registrerte opplysninger om medlemskap",
 
   "OppholdInntektOgPerioder.Bekreft": "Bekreft og fortsett",
+  "OppholdInntektOgPerioder.Overskrift": "Fakta om medlemskap",
   "OppholdInntektOgPeriode.Oppdater": "Oppdater",
   "OppholdInntektOgPeriode.Avbryt": "Avbryt",
 
@@ -55,6 +56,8 @@
   "OppholdstillatelseTabell.Periode": "Periode",
   "OppholdstillatelseTabell.Type": "Type",
   "OppholdstillatelseTabell.Ukjent": "UKJENT",
+
+  "OppholdInntektOgPeriodeForm.Periode": "Periode - {dato}",
 
   "BostedSokerView.ForeignAddresse": "Utenlandsadresse",
   "BostedSokerView.Region": "Region",

@@ -106,11 +106,7 @@ const BehandlingEngangsstonadIndex: FunctionComponent<StandardBehandlingProps> =
               <OmsorgvilkaretFaktaInitPanel {...props} personoversikt={personoversikt} />
               <AdopsjonsvilkaretFaktaInitPanel {...props} />
               <FodselvilkaretFaktaInitPanel {...props} />
-              <MedlemskapsvilkaretFaktaInitPanel
-                {...props}
-                rettigheter={rettigheter}
-                hasFetchError={behandlingState === RestApiState.ERROR}
-              />
+              <MedlemskapsvilkaretFaktaInitPanel {...props} />
             </>
           )}
           hentProsessPaneler={(props, ekstraProps) => (

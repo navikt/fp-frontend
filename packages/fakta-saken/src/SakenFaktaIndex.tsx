@@ -1,13 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
-import { StandardFaktaPanelProps } from '@fpsak-frontend/types';
+import { Soknad, StandardFaktaPanelProps } from '@fpsak-frontend/types';
 import { createIntl } from '@navikt/ft-utils';
 
 import SakenFaktaPanel from './components/SakenFaktaPanel';
 import messages from '../i18n/nb_NO.json';
 
 interface OwnProps {
+  soknad: Soknad;
   utlandDokStatus?: {
     dokStatus: string;
   };
@@ -17,6 +18,7 @@ const intl = createIntl(messages);
 
 const SakenFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = ({
   aksjonspunkter,
+  soknad,
   utlandDokStatus,
   submitCallback,
   submittable,
@@ -28,6 +30,7 @@ const SakenFaktaIndex: FunctionComponent<OwnProps & StandardFaktaPanelProps> = (
 }) => (
   <RawIntlProvider value={intl}>
     <SakenFaktaPanel
+      soknad={soknad}
       aksjonspunkter={aksjonspunkter}
       dokStatus={utlandDokStatus ? utlandDokStatus.dokStatus : undefined}
       harApneAksjonspunkter={harApneAksjonspunkter}

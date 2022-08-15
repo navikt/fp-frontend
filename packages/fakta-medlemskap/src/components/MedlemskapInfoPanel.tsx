@@ -1,42 +1,22 @@
-import React, { FunctionComponent, useMemo } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import React, {
+  FunctionComponent, ReactElement, useCallback, useState, useEffect, useMemo,
+} from 'react';
+import { FormattedMessage } from 'react-intl';
+import { Undertittel } from 'nav-frontend-typografi';
+import { Hovedknapp } from 'nav-frontend-knapper';
+import { Aksjonspunkt, AlleKodeverk } from '@navikt/ft-types';
+import { AksjonspunktHelpTextHTML, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import {
-  Aksjonspunkt, AlleKodeverk, Medlemskap, Soknad,
-} from '@fpsak-frontend/types';
+import { Medlemskap, Soknad, MedlemPeriode } from '@fpsak-frontend/types';
 import {
   AvklarFortsattMedlemskapAp, BekreftBosattVurderingAp, BekreftErMedlemVurderingAp, BekreftLovligOppholdVurderingAp,
   BekreftOppholdsrettVurderingAp, OverstyringAvklarStartdatoForPeriodenAp,
 } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+import AksjonspunktCode, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
-import StartdatoForForeldrepengerperiodenForm from './startdatoForPeriode/StartdatoForForeldrepengerperiodenForm';
-import OppholdInntektOgPerioderForm from './oppholdInntektOgPerioder/OppholdInntektOgPerioderForm';
-
-const {
-  OVERSTYR_AVKLAR_STARTDATO,
-} = aksjonspunktCodes;
-
-const hasOpen = (aksjonspunkt: Aksjonspunkt): boolean => aksjonspunkt && isAksjonspunktOpen(aksjonspunkt.status);
-
-const skalKunneLoseUtenAksjonpunkter = (
-  aksjonspunkterMinusAvklarStartDato: Aksjonspunkt[],
-  hasOpenAksjonspunkter: boolean,
-  isForeldrepenger?: boolean,
-): boolean => (isForeldrepenger && (aksjonspunkterMinusAvklarStartDato.length === 0 || !hasOpenAksjonspunkter));
-
-const harAksjonspunkterForAvklarStartdato = (aksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
-  .some((ap) => ap.definisjon === OVERSTYR_AVKLAR_STARTDATO);
-
-const skalViseAvklarStartdatoPanel = (
-  aksjonspunkter: Aksjonspunkt[],
-  aksjonspunkterMinusAvklarStartDato: Aksjonspunkt[],
-  hasOpenAksjonspunkter: boolean,
-  isForeldrepenger?: boolean,
-): boolean => (harAksjonspunkterForAvklarStartdato(aksjonspunkter)
-  || skalKunneLoseUtenAksjonpunkter(aksjonspunkterMinusAvklarStartDato, hasOpenAksjonspunkter, isForeldrepenger));
+import MedlemskapEndringerTabell from './oppholdInntektOgPerioder/MedlemskapEndringerTabell';
+import OppholdInntektOgPeriodeForm, { FormValues as OppholdFormValues } from './oppholdInntektOgPerioder/OppholdInntektOgPeriodeForm';
 
 type AksjonspunktData = Array<BekreftBosattVurderingAp
   | BekreftErMedlemVurderingAp
@@ -44,88 +24,200 @@ type AksjonspunktData = Array<BekreftBosattVurderingAp
   | BekreftLovligOppholdVurderingAp
   | AvklarFortsattMedlemskapAp>;
 
+const medlemAksjonspunkter = [
+  AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT,
+  AksjonspunktCode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
+  AksjonspunktCode.AVKLAR_OPPHOLDSRETT,
+  AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD,
+  AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP,
+];
+
+const mapOgFiltrerPerioder = (
+  ap: Aksjonspunkt,
+  perioder: MedlemPeriode[],
+): MedlemPeriode[] => perioder.filter((periode) => periode.aksjonspunkter.includes(ap.definisjon)
+  || (periode.aksjonspunkter.length > 0 && ap.definisjon === AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP));
+
+const transformValues = (
+  perioder: MedlemPeriode[],
+  aksjonspunkter: Aksjonspunkt[],
+): AksjonspunktData => {
+  const aktiveMedlemAksjonspunkter = aksjonspunkter
+    .filter((ap) => medlemAksjonspunkter.some((kode) => kode === ap.definisjon))
+    .filter((ap) => ap.erAktivt);
+
+  // @ts-ignore Fiks
+  return aktiveMedlemAksjonspunkter.map((ap) => ({
+    kode: ap.definisjon,
+    begrunnelse: '',
+    bekreftedePerioder: mapOgFiltrerPerioder(ap, perioder),
+  }));
+};
+
+const finnAksjonspunkttekster = (
+  aksjonspunkter: Aksjonspunkt[],
+): ReactElement[] => {
+  const helpTexts = [];
+  if (hasAksjonspunkt(AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP, aksjonspunkter)) {
+    helpTexts.push(<FormattedMessage key="HarFortsattMedlemskap" id="MedlemskapInfoPanel.HarFortsattMedlemskap" />);
+  }
+  if (hasAksjonspunkt(AksjonspunktCode.AVKLAR_OM_BRUKER_ER_BOSATT, aksjonspunkter)) {
+    helpTexts.push(<FormattedMessage key="ErSokerBosattINorge" id="MedlemskapInfoPanel.ErSokerBosattINorge" />);
+  }
+  if (hasAksjonspunkt(AksjonspunktCode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE, aksjonspunkter)) {
+    helpTexts.push(<FormattedMessage key="GyldigMedlemFolketrygden" id="MedlemskapInfoPanel.GyldigMedlemFolketrygden" />);
+  }
+  if (hasAksjonspunkt(AksjonspunktCode.AVKLAR_OPPHOLDSRETT, aksjonspunkter)) {
+    helpTexts.push(<FormattedMessage key="EOSBorgerMedOppholdsrett1" id="MedlemskapInfoPanel.EOSBorgerMedOppholdsrett" />);
+  }
+  if (hasAksjonspunkt(AksjonspunktCode.AVKLAR_LOVLIG_OPPHOLD, aksjonspunkter)) {
+    helpTexts.push(<FormattedMessage key="IkkeEOSBorgerMedLovligOpphold" id="MedlemskapInfoPanel.IkkeEOSBorgerMedLovligOpphold" />);
+  }
+  return helpTexts;
+};
+
 interface OwnProps {
-  hasOpenAksjonspunkter: boolean;
   submittable: boolean;
-  aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
-  submitCallback: (data: OverstyringAvklarStartdatoForPeriodenAp
-    | AksjonspunktData) => Promise<void>;
-  isForeldrepenger?: boolean;
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (data: OverstyringAvklarStartdatoForPeriodenAp | AksjonspunktData) => Promise<void>;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
-  behandlingType: string;
-  behandlingStatus: string;
   soknad: Soknad;
   alleKodeverk: AlleKodeverk;
   medlemskap: Medlemskap;
-  readOnlyForStartdatoForForeldrepenger: boolean;
+  formData?: MedlemPeriode[],
+  setFormData: (data: MedlemPeriode[]) => void,
 }
 
 /**
  * MedlemskapInfoPanel
  *
- * Presentasjonskomponent. Har ansvar for å vise faktapanelene for medlemskap.
+ * Har ansvar for å vise faktapanelene for medlemskap.
  */
-const MedlemskapInfoPanel: FunctionComponent<OwnProps & WrappedComponentProps> = ({
-  intl,
-  hasOpenAksjonspunkter,
+const MedlemskapInfoPanel: FunctionComponent<OwnProps> = ({
   submittable,
-  aksjonspunkter,
   readOnly,
   submitCallback,
-  isForeldrepenger,
   alleMerknaderFraBeslutter,
-  behandlingType,
-  behandlingStatus,
+  aksjonspunkter,
   soknad,
   alleKodeverk,
   medlemskap,
-  readOnlyForStartdatoForForeldrepenger,
+  formData,
+  setFormData,
 }) => {
-  const avklarStartdatoOverstyring = aksjonspunkter.find((ap) => ap.definisjon === OVERSTYR_AVKLAR_STARTDATO);
-  const aksjonspunkterMinusAvklarStartDato = useMemo(() => aksjonspunkter
-    .filter((ap) => ap.definisjon !== OVERSTYR_AVKLAR_STARTDATO), [aksjonspunkter]);
+  const sortertePerioder = useMemo(() => [...medlemskap.perioder || []].sort((a, b) => a.vurderingsdato.localeCompare(b.vurderingsdato)),
+    [medlemskap.perioder]);
+
+  const [perioder, setPerioder] = useState<MedlemPeriode[]>((formData || sortertePerioder));
+  const [isSubmitting, setSubmitting] = useState(false);
+  const [isDirty, setDirty] = useState(false);
+
+  useEffect(() => () => {
+    setFormData(perioder);
+  }, [perioder]);
+
+  const finnFørstePeriodeMedUløstAp = (perioderr: MedlemPeriode[]) => perioderr.find((p) => p.aksjonspunkter.length > 0 && !p.begrunnelse);
+
+  const [valgtPeriode, setValgtPeriode] = useState<MedlemPeriode | undefined>(perioder.length > 1 ? finnFørstePeriodeMedUløstAp(perioder) : perioder[0]);
+
+  const velgPeriodeCallback = useCallback((_p, _id, periode: MedlemPeriode): void => {
+    setValgtPeriode(periode);
+  }, []);
+
+  const updateOppholdInntektPeriode = useCallback((vurderingsdato: string, values: OppholdFormValues): void => {
+    const periodeIndex = perioder.findIndex((p) => p.vurderingsdato === vurderingsdato);
+
+    const oppdatertPeriode = {
+      ...perioder[periodeIndex],
+      ...values,
+    };
+
+    const nyePerioder = perioder.map((p, index) => (periodeIndex === index ? oppdatertPeriode : p));
+    setPerioder(nyePerioder);
+    setDirty(true);
+    if (nyePerioder.length > 1) {
+      setValgtPeriode(finnFørstePeriodeMedUløstAp(nyePerioder));
+    }
+  }, [perioder]);
+
+  const isConfirmButtonDisabled = (): boolean => {
+    if (!isDirty) {
+      return true;
+    }
+
+    if (perioder && perioder.length > 0) {
+      const ubekreftPerioder = perioder.filter((periode) => periode.aksjonspunkter.length > 0 && !periode.begrunnelse);
+
+      if (ubekreftPerioder.length > 0) {
+        return true;
+      }
+    }
+
+    return readOnly;
+  };
+
+  const lagre = () => {
+    setSubmitting(true);
+    return submitCallback(transformValues(perioder, aksjonspunkter));
+  };
+
+  const lagreEnkeltPeriode = (periode: MedlemPeriode) => {
+    setSubmitting(true);
+    return submitCallback(transformValues([periode], aksjonspunkter));
+  };
 
   return (
     <>
-      {skalViseAvklarStartdatoPanel(aksjonspunkter, aksjonspunkterMinusAvklarStartDato, hasOpenAksjonspunkter, isForeldrepenger) && (
+      <Undertittel><FormattedMessage id="OppholdInntektOgPerioder.Overskrift" /></Undertittel>
+      <VerticalSpacer thirtyTwoPx />
+      {aksjonspunkter.some((ap) => ap.status === AksjonspunktStatus.OPPRETTET) && (
         <>
-          { /* @ts-ignore Fiks cannot be used as a JSX component */ }
-          <StartdatoForForeldrepengerperiodenForm
-            intl={intl}
-            aksjonspunkt={avklarStartdatoOverstyring}
-            submitCallback={submitCallback}
-            submittable={submittable}
-            hasOpenMedlemskapAksjonspunkter={hasOpenAksjonspunkter}
-            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-            behandlingStatus={behandlingStatus}
-            aksjonspunkter={aksjonspunkter}
-            soknad={soknad}
-            readOnlyForStartdatoForForeldrepenger={readOnlyForStartdatoForForeldrepenger}
-          />
-          <VerticalSpacer twentyPx />
+          <AksjonspunktHelpTextHTML>
+            {finnAksjonspunkttekster(aksjonspunkter)}
+          </AksjonspunktHelpTextHTML>
+          <VerticalSpacer thirtyTwoPx />
         </>
       )}
-      {(!hasOpen(avklarStartdatoOverstyring)) && (
-        /* @ts-ignore Fiks cannot be used as a JSX component */
-        <OppholdInntektOgPerioderForm
-          soknad={soknad}
-          readOnly={readOnly}
-          submitCallback={submitCallback}
-          submittable={submittable}
-          aksjonspunkter={aksjonspunkterMinusAvklarStartDato}
-          alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-          behandlingType={behandlingType}
-          alleKodeverk={alleKodeverk}
-          medlemskap={medlemskap}
+      <VerticalSpacer thirtyTwoPx />
+      {hasAksjonspunkt(AksjonspunktCode.AVKLAR_FORTSATT_MEDLEMSKAP, aksjonspunkter) && (
+        <MedlemskapEndringerTabell
+          perioder={perioder}
+          aksjonspunkter={aksjonspunkter}
+          valgtPeriodeVurderingsdato={valgtPeriode ? valgtPeriode.vurderingsdato : undefined}
+          velgPeriodeCallback={velgPeriodeCallback}
         />
+      )}
+      {valgtPeriode && (
+        <OppholdInntektOgPeriodeForm
+          key={valgtPeriode.vurderingsdato}
+          readOnly={readOnly}
+          valgtPeriode={valgtPeriode}
+          soknad={soknad}
+          aksjonspunkter={aksjonspunkter}
+          submittable={submittable}
+          updateOppholdInntektPeriode={updateOppholdInntektPeriode}
+          alleKodeverk={alleKodeverk}
+          alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
+          medlemskap={medlemskap}
+          lagreEnkeltPeriode={perioder.length === 1 ? lagreEnkeltPeriode : undefined}
+          setValgtPeriode={setValgtPeriode}
+        />
+      )}
+      <VerticalSpacer twentyPx />
+      {perioder.length > 1 && (
+        <Hovedknapp
+          mini
+          htmlType="button"
+          onClick={lagre}
+          disabled={isSubmitting || isConfirmButtonDisabled()}
+          spinner={isSubmitting}
+        >
+          <FormattedMessage id="OppholdInntektOgPerioder.Bekreft" />
+        </Hovedknapp>
       )}
     </>
   );
 };
 
-MedlemskapInfoPanel.defaultProps = {
-  isForeldrepenger: true,
-};
-
-export default injectIntl(MedlemskapInfoPanel);
+export default MedlemskapInfoPanel;

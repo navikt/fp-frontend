@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const path = require('path');
 const { merge } = require('webpack-merge');
 const { ModuleFederationPlugin } = require('webpack').container;
@@ -14,7 +13,6 @@ const config = {
   devtool: 'eval-cheap-source-map',
   entry: [
     'webpack-dev-server/client?http://localhost:9000',
-    'webpack/hot/only-dev-server',
     APP_DIR + '/index.ts',
   ],
   output: {
@@ -23,7 +21,6 @@ const config = {
     filename: '[name].js',
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new ModuleFederationPlugin({
       name: "ft_frontend_saksbehandling",
       remotes: {

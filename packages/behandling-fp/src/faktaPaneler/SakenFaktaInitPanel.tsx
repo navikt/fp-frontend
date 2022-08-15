@@ -5,7 +5,7 @@ import React, {
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import SakenFaktaIndex from '@fpsak-frontend/fakta-saken';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { Aksjonspunkt } from '@fpsak-frontend/types';
+import { Aksjonspunkt, Soknad } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -17,20 +17,22 @@ const intl = createIntl(messages);
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
   aksjonspunktCodes.MANUELL_MARKERING_AV_UTLAND_SAKSTYPE,
+  aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO,
 ];
 
-const OVERSTYRING_AP_CODES = [aksjonspunktCodes.MANUELL_MARKERING_AV_UTLAND_SAKSTYPE];
+const OVERSTYRING_AP_CODES = [aksjonspunktCodes.MANUELL_MARKERING_AV_UTLAND_SAKSTYPE, aksjonspunktCodes.OVERSTYR_AVKLAR_STARTDATO];
 
 const ENDEPUNKTER_INIT_DATA = [FpBehandlingApiKeys.AKSJONSPUNKTER];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
 }
 
-const ENDEPUNKTER_PANEL_DATA = [FpBehandlingApiKeys.UTLAND_DOK_STATUS];
+const ENDEPUNKTER_PANEL_DATA = [FpBehandlingApiKeys.UTLAND_DOK_STATUS, FpBehandlingApiKeys.SOKNAD];
 type EndepunktPanelData = {
   utlandDokStatus?: {
     dokStatus: string;
   };
+  soknad: Soknad;
 }
 
 /**

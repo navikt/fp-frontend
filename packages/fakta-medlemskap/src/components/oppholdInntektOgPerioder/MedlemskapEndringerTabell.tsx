@@ -1,43 +1,42 @@
 import React, { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-
 import {
   DateLabel, Table, TableColumn, TableRow,
 } from '@navikt/ft-ui-komponenter';
+
 import { MedlemPeriode } from '@fpsak-frontend/types';
-import { formValueSelector } from 'redux-form';
+import { Aksjonspunkt } from '@navikt/ft-types';
+import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 const headerTextCodes = [
   'MedlemskapEndringerTabell.GjeldeneFom',
   'MedlemskapEndringerTabell.Opplysning',
 ];
 
-type PeriodeMedId = MedlemPeriode & { id: string; }
-
-interface PureOwnProps {
-  selectedId?: string;
+interface OwnProps {
+  perioder: MedlemPeriode[];
+  valgtPeriodeVurderingsdato?: string;
   velgPeriodeCallback: (_p, id: string, periode: MedlemPeriode) => void;
+  aksjonspunkter: Aksjonspunkt[];
 }
 
-interface MappedOwnProps {
-  perioder?: PeriodeMedId[];
-}
-
-const MedlemskapEndringerTabell: FunctionComponent<PureOwnProps & MappedOwnProps> = ({
+const MedlemskapEndringerTabell: FunctionComponent<OwnProps> = ({
   perioder,
   velgPeriodeCallback,
-  selectedId,
+  valgtPeriodeVurderingsdato,
+  aksjonspunkter,
 }) => (
   <Table headerTextCodes={headerTextCodes}>
     {perioder.map((periode) => (
-      <TableRow<string, PeriodeMedId>
-        key={periode.id}
-        id={periode.id}
+      <TableRow<string, MedlemPeriode>
+        key={periode.vurderingsdato}
+        id={periode.vurderingsdato}
         onMouseDown={velgPeriodeCallback}
         onKeyDown={velgPeriodeCallback}
-        isSelected={periode.id === selectedId}
+        isSelected={periode.vurderingsdato === valgtPeriodeVurderingsdato}
         model={periode}
-        isApLeftBorder={periode.begrunnelse === null && periode.aksjonspunkter.length > 0}
+        isApLeftBorder={periode.aksjonspunkter
+          .some((periodeAp) => aksjonspunkter.some((ap) => ap.definisjon === periodeAp && ap.status === AksjonspunktStatus.OPPRETTET))
+        && periode.begrunnelse === undefined}
       >
         <TableColumn>
           <DateLabel dateString={periode.vurderingsdato} />
@@ -50,16 +49,4 @@ const MedlemskapEndringerTabell: FunctionComponent<PureOwnProps & MappedOwnProps
   </Table>
 );
 
-MedlemskapEndringerTabell.defaultProps = {
-  perioder: [],
-};
-
-const mapStateToPropsFactory = (initialState: any) => {
-  const perioder = (formValueSelector('OppholdInntektOgPerioderForm')(initialState, 'perioder') || [])
-    .sort((a: PeriodeMedId, b: PeriodeMedId) => a.vurderingsdato.localeCompare(b.vurderingsdato));
-  return (): MappedOwnProps => ({
-    perioder,
-  });
-};
-
-export default connect(mapStateToPropsFactory)(MedlemskapEndringerTabell);
+export default MedlemskapEndringerTabell;
