@@ -18,7 +18,7 @@
     "@navikt/ft-ui-komponenter": "1.0.31",
     "@navikt/ft-utils": "1.0.28",
     "classnames": "2.3.1",
-    "dayjs": "1.11.4",
+    "dayjs": "1.11.5",
     "moment": "2.29.4",
     "nav-frontend-alertstriper": "4.0.2",
     "nav-frontend-alertstriper-style": "3.0.2",
