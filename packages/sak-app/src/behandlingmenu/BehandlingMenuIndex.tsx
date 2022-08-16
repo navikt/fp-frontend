@@ -3,19 +3,24 @@ import React, {
 } from 'react';
 import moment from 'moment';
 import { useNavigate, useLocation } from 'react-router-dom';
+import {
+  BehandlingType, BehandlingStatus, KodeverkType,
+} from '@navikt/ft-kodeverk';
+import { BehandlingAppKontekst, Fagsak } from '@navikt/ft-types';
+import MenySakIndex, {
+  MenyData,
+  MenyEndreBehandlendeEnhetIndex,
+  getEndreEnhetMenytekst,
+  MenyVergeIndex,
+  getVergeMenytekst,
+  MenyTaAvVentIndex,
+  getTaAvVentMenytekst,
+} from '@navikt/ft-sak-meny';
 
-import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import MenySakIndex, { MenyData } from '@fpsak-frontend/sak-meny';
-import MenyEndreBehandlendeEnhetIndex, { getMenytekst } from '@fpsak-frontend/sak-meny-endre-enhet';
-import MenyVergeIndex, { getMenytekst as getVergeMenytekst } from '@fpsak-frontend/sak-meny-verge';
-import MenyTaAvVentIndex, { getMenytekst as getTaAvVentMenytekst } from '@fpsak-frontend/sak-meny-ta-av-vent';
 import MenySettPaVentIndex, { getMenytekst as getSettPaVentMenytekst } from '@fpsak-frontend/sak-meny-sett-pa-vent';
 import MenyHenleggIndex, { getMenytekst as getHenleggMenytekst } from '@fpsak-frontend/sak-meny-henlegg';
 import MenyApneForEndringerIndex, { getMenytekst as getApneForEndringerMenytekst } from '@fpsak-frontend/sak-meny-apne-for-endringer';
 import MenyNyBehandlingIndex, { getMenytekst as getNyBehandlingMenytekst } from '@fpsak-frontend/sak-meny-ny-behandling';
-import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
 
 import behandlingEventHandler from '../behandling/BehandlingEventHandler';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling } from '../app/paths';
@@ -173,7 +178,7 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
             <MenySettPaVentIndex
               behandlingVersjon={behandlingVersjon}
               settBehandlingPaVent={behandlingEventHandler.settBehandlingPaVent}
-              ventearsaker={menyKodeverk.getKodeverkForValgtBehandling(kodeverkTyper.VENT_AARSAK)}
+              ventearsaker={menyKodeverk.getKodeverkForValgtBehandling(KodeverkType.VENT_AARSAK)}
               lukkModal={lukkModal}
               erTilbakekreving={behandlingTypeKode === BehandlingType.TILBAKEKREVING || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING}
             />
@@ -187,14 +192,14 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
                   forhandsvisHenleggBehandling={previewHenleggBehandling}
                   henleggBehandling={behandlingEventHandler.henleggBehandling}
                   ytelseType={fagsak.fagsakYtelseType}
-                  behandlingResultatTyper={menyKodeverk.getKodeverkForValgtBehandling(kodeverkTyper.BEHANDLING_RESULTAT_TYPE)}
+                  behandlingResultatTyper={menyKodeverk.getKodeverkForValgtBehandling(KodeverkType.BEHANDLING_RESULTAT_TYPE)}
                   lukkModal={lukkModal}
                   gaaTilSokeside={gaaTilSokeside}
                 />
               )}
             </div>
           )),
-        new MenyData(behandlingRettigheter?.behandlingKanBytteEnhet, getMenytekst())
+        new MenyData(behandlingRettigheter?.behandlingKanBytteEnhet, getEndreEnhetMenytekst())
           .medModal((lukkModal) => (
             <MenyEndreBehandlendeEnhetIndex
               behandlingVersjon={behandlingVersjon}
@@ -225,10 +230,10 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
                 kanRevurderingOpprettes,
               }}
               behandlingstyper={menyKodeverk
-                .getKodeverkForBehandlingstyper(BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES, kodeverkTyper.BEHANDLING_TYPE)}
-              tilbakekrevingRevurderingArsaker={menyKodeverk.getKodeverkForBehandlingstype(kodeverkTyper.BEHANDLING_AARSAK,
+                .getKodeverkForBehandlingstyper(BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES, KodeverkType.BEHANDLING_TYPE)}
+              tilbakekrevingRevurderingArsaker={menyKodeverk.getKodeverkForBehandlingstype(KodeverkType.BEHANDLING_AARSAK,
                 BehandlingType.TILBAKEKREVING_REVURDERING)}
-              revurderingArsaker={menyKodeverk.getKodeverkForBehandlingstype(kodeverkTyper.BEHANDLING_AARSAK, BehandlingType.REVURDERING)}
+              revurderingArsaker={menyKodeverk.getKodeverkForBehandlingstype(KodeverkType.BEHANDLING_AARSAK, BehandlingType.REVURDERING)}
               ytelseType={fagsak.fagsakYtelseType}
               lagNyBehandling={lagNyBehandling}
               lukkModal={lukkModal}

@@ -1,6 +1,5 @@
-import behandlingStatusCode from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import fagsakStatusCode from '@fpsak-frontend/kodeverk/src/fagsakStatus';
-import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import { FagsakStatus, BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
+
 import { NavAnsatt, AksessRettigheter, Aksess } from '@fpsak-frontend/types';
 
 const kanVeilede = (navAnsatt: NavAnsatt): boolean => navAnsatt && navAnsatt.kanVeilede;
@@ -42,14 +41,14 @@ const accessSelector = (validNavAnsattPredicates: ((navAnsatt: NavAnsatt) => boo
 
 export const writeAccess = accessSelector(
   [kanSaksbehandle],
-  [fagsakStatusCode.OPPRETTET, fagsakStatusCode.UNDER_BEHANDLING],
-  [behandlingStatusCode.OPPRETTET, behandlingStatusCode.BEHANDLING_UTREDES],
+  [FagsakStatus.OPPRETTET, FagsakStatus.UNDER_BEHANDLING],
+  [BehandlingStatus.OPPRETTET, BehandlingStatus.BEHANDLING_UTREDES],
 );
 
 export const kanOverstyreAccess = accessSelector(
   [kanOverstyre],
-  [fagsakStatusCode.UNDER_BEHANDLING],
-  [behandlingStatusCode.BEHANDLING_UTREDES],
+  [FagsakStatus.UNDER_BEHANDLING],
+  [BehandlingStatus.BEHANDLING_UTREDES],
 );
 
 const getAccessRights = (

@@ -1,4 +1,4 @@
-import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import { BehandlingType } from '@navikt/ft-kodeverk';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import { FpsakApiKeys, restApiHooks } from './fpsakApi';

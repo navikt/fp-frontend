@@ -56,5 +56,4 @@ export { default as OverstyringMedlemskapsvilkaretLopendeAp } from './src/proses
 export { default as VarselRevurderingAp } from './src/prosess/VarselRevurderingAp';
 export { default as UttakAp } from './src/prosess/UttakAp';
 
-export { default as VurderFaresignalerAp } from './src/risiko/VurderFaresignalerAp';
 export { default as FatterVedtakAp } from './src/totrinn/FatterVedtakAp';

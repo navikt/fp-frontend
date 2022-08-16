@@ -2,10 +2,9 @@ import React, {
   FunctionComponent, useState, useCallback,
 } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { BehandlingType, BehandlingStatus } from '@navikt/ft-kodeverk';
+import { Fagsak, BehandlingAppKontekst } from '@navikt/ft-types';
 
-import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
 import TotrinnskontrollSakIndex from '@fpsak-frontend/sak-totrinnskontroll';
 import { FatterVedtakAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 

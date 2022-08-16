@@ -5,12 +5,11 @@ import {
   Route, Navigate, useLocation, Routes,
 } from 'react-router-dom';
 import { Location } from 'history';
+import VisittkortSakIndex from '@navikt/ft-sak-visittkort';
+import { LoadingPanel, DataFetchPendingModal } from '@navikt/ft-ui-komponenter';
+import { BehandlingType } from '@navikt/ft-kodeverk';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import VisittkortSakIndex from '@fpsak-frontend/sak-visittkort';
-
-import { LoadingPanel, DataFetchPendingModal } from '@navikt/ft-ui-komponenter';
-import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 
 import BehandlingerIndex from '../behandling/BehandlingerIndex';
 import useBehandlingEndret from '../behandling/useBehandlingEndret';
