@@ -16,6 +16,8 @@ import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 import { getRiskPanelLocationCreator } from '../../app/paths';
 import getAccessRights from '../../app/util/access';
 
+import '@navikt/ft-sak-risikoklassifisering/dist/style.css';
+
 const getReadOnly = (navAnsatt: NavAnsatt, rettigheter: AksessRettigheter, erPaaVent: boolean) => {
   if (erPaaVent) {
     return true;

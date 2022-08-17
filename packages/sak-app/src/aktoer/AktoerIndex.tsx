@@ -9,6 +9,8 @@ import useTrackRouteParam from '../app/useTrackRouteParam';
 import { restApiHooks, FpsakApiKeys } from '../data/fpsakApi';
 import { pathToFagsak } from '../app/paths';
 
+import '@navikt/ft-sak-aktor/dist/style.css';
+
 /**
  * AktoerIndex
  */

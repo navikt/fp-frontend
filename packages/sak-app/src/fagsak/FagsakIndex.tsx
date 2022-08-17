@@ -26,6 +26,8 @@ import {
 import useHentFagsakRettigheter from './useHentFagsakRettigheter';
 import useHentAlleBehandlinger from './useHentAlleBehandlinger';
 
+import '@navikt/ft-sak-visittkort/dist/style.css';
+
 const finnLenkeTilAnnenPart = (annenPartBehandling: AnnenPartBehandling): string => pathToAnnenPart(
   annenPartBehandling.saksnummer, annenPartBehandling.behandlingUuid,
 );

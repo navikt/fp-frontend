@@ -14,6 +14,8 @@ import useTrackRouteParam from '../app/useTrackRouteParam';
 import styles from './behandlingSupportIndex.less';
 import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
 
+import '@navikt/ft-sak-support-meny/dist/style.css';
+
 export const hentSynligePaneler = (behandlingRettigheter?: BehandlingRettigheter): string[] => Object.values(SupportTabs)
   .filter((supportPanel) => {
     switch (supportPanel) {

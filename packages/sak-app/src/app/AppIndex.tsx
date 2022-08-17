@@ -26,6 +26,7 @@ import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';
 import '@navikt/ft-tidslinje/dist/style.css';
+import '@navikt/ft-sak-infosider/dist/style.css';
 
 const EMPTY_ARRAY = [] as any[];
 

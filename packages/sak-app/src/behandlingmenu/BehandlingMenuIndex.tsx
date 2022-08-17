@@ -32,6 +32,8 @@ import MenyKodeverk from './MenyKodeverk';
 import BehandlingRettigheter, { VergeBehandlingmenyValg } from '../behandling/behandlingRettigheterTsType';
 import SakRettigheter from '../fagsak/sakRettigheterTsType';
 
+import '@navikt/ft-sak-meny/dist/style.css';
+
 const BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES = [
   BehandlingType.FORSTEGANGSSOKNAD,
   BehandlingType.KLAGE,

@@ -10,6 +10,8 @@ import ErrorFormatter from './feilhandtering/ErrorFormatter';
 import ErrorMessage from './feilhandtering/ErrorMessage';
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 
+import '@navikt/ft-sak-dekorator/dist/style.css';
+
 type QueryStrings = {
   errorcode?: string;
   errormessage?: string;

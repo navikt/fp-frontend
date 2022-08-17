@@ -27,6 +27,8 @@ import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
 
 import styles from './fagsakProfileIndex.less';
 
+import '@navikt/ft-sak-behandling-velger/dist/style.css';
+
 const findPathToBehandling = (saksnummer: string, location: Location, alleBehandlinger: BehandlingAppKontekst[]) => {
   if (alleBehandlinger.length === 1) {
     return getLocationWithDefaultProsessStegAndFakta({

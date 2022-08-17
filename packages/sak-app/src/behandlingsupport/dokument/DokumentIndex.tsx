@@ -9,6 +9,8 @@ import { hentDokumentLenke } from '@fpsak-frontend/konstanter';
 import useBehandlingEndret from '../../behandling/useBehandlingEndret';
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 
+import '@navikt/ft-sak-dokumenter/dist/style.css';
+
 // TODO (hb) lag linker, ikke callback
 const selectDocument = (saksNr: string) => (_e: React.SyntheticEvent, _id: number, document: Dokument): void => {
   window.open(hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId), '_blank');
