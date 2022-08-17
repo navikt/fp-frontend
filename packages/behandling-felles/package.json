@@ -16,7 +16,7 @@
     "@fpsak-frontend/types-avklar-aksjonspunkter": "1.0.0",
     "@navikt/ft-kodeverk": "^1.0.16",
     "@navikt/ft-plattform-komponenter": "1.0.31",
-    "@navikt/ft-sak-infosider": "1.0.1",
+    "@navikt/ft-sak-infosider": "1.0.2",
     "@navikt/ft-types": "^1.0.25",
     "@navikt/ft-utils": "1.0.31",
     "@navikt/ft-ui-komponenter": "1.0.34",
@@ -34,7 +34,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-intl": "6.0.5",
-    "@sentry/browser": "7.10.0"
+    "@sentry/browser": "7.11.0"
   },
   "devDependencies": {
     "@fpsak-frontend/utils-test": "1.0.0",
