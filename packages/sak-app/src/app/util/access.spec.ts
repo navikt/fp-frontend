@@ -1,6 +1,5 @@
-import fagsakStatusCode from '@fpsak-frontend/kodeverk/src/fagsakStatus';
-import behandlingStatusCode from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
+import { FagsakStatus, BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
+
 import { NavAnsatt } from '@fpsak-frontend/types';
 
 import {
@@ -9,7 +8,7 @@ import {
 } from './access';
 
 const forEachFagsakAndBehandlingStatus = (callback: (fagsakStatus: string, behandlingStatus: string) => void) => (
-  Object.values(fagsakStatusCode).forEach((fagsakStatus) => Object.values(behandlingStatusCode)
+  Object.values(FagsakStatus).forEach((fagsakStatus) => Object.values(BehandlingStatus)
     .forEach((behandlingStatus) => callback(fagsakStatus, behandlingStatus)))
 );
 
@@ -22,10 +21,10 @@ describe('access', () => {
   const veilederAnsatt = { kanVeilede: true } as NavAnsatt;
 
   describe('writeAccess', () => {
-    const validFagsakStatuser = [fagsakStatusCode.OPPRETTET, fagsakStatusCode.UNDER_BEHANDLING];
+    const validFagsakStatuser = [FagsakStatus.OPPRETTET, FagsakStatus.UNDER_BEHANDLING];
     const validFagsakStatus = validFagsakStatuser[0];
 
-    const validBehandlingStatuser = [behandlingStatusCode.OPPRETTET, behandlingStatusCode.BEHANDLING_UTREDES];
+    const validBehandlingStatuser = [BehandlingStatus.OPPRETTET, BehandlingStatus.BEHANDLING_UTREDES];
     const validBehandlingStatus = validBehandlingStatuser[0];
     const validBehandlingTyper = BehandlingType.FORSTEGANGSSOKNAD;
 
@@ -44,7 +43,7 @@ describe('access', () => {
     });
 
     forEachFagsakAndBehandlingStatus((fagsakStatus: string, behandlingStatus: string) => {
-      const expected = validFagsakStatuser.includes(fagsakStatus) && validBehandlingStatuser.includes(behandlingStatus);
+      const expected = validFagsakStatuser.some((fs) => fs === fagsakStatus) && validBehandlingStatuser.some((bs) => bs === behandlingStatus);
       it(`${getTestName('skrivetilgang', expected, fagsakStatus, behandlingStatus)}`, () => {
         const access = writeAccess(saksbehandlerAnsatt, fagsakStatus, behandlingStatus,
           validBehandlingTyper);
@@ -55,10 +54,10 @@ describe('access', () => {
   });
 
   describe('kanOverstyreAccess', () => {
-    const validFagsakStatuser = [fagsakStatusCode.UNDER_BEHANDLING];
+    const validFagsakStatuser = [FagsakStatus.UNDER_BEHANDLING];
     const validFagsakStatus = validFagsakStatuser[0];
 
-    const validBehandlingStatuser = [behandlingStatusCode.BEHANDLING_UTREDES];
+    const validBehandlingStatuser = [BehandlingStatus.BEHANDLING_UTREDES];
     const validBehandlingStatus = validBehandlingStatuser[0];
     const validBehandlingTyper = BehandlingType.FORSTEGANGSSOKNAD;
 
@@ -94,7 +93,7 @@ describe('access', () => {
     });
 
     forEachFagsakAndBehandlingStatus((fagsakStatus, behandlingStatus) => {
-      const expected = validFagsakStatuser.includes(fagsakStatus) && validBehandlingStatuser.includes(behandlingStatus);
+      const expected = validFagsakStatuser.some((fs) => fs === fagsakStatus) && validBehandlingStatuser.some((bs) => bs === behandlingStatus);
       // eslint-disable-next-line jest/valid-title
       it(getTestName('tilgang til å overstyre', expected, fagsakStatus, behandlingStatus), () => {
         const access = kanOverstyreAccess(saksbehandlerOgOverstyrerAnsatt, fagsakStatus, behandlingStatus,

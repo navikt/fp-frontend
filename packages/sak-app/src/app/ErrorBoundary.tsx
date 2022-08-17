@@ -1,7 +1,7 @@
 import React, { Component, ReactNode, ErrorInfo } from 'react';
 import { captureException, withScope } from '@sentry/browser';
 
-import { ErrorPage } from '@fpsak-frontend/sak-infosider';
+import { ErrorPage } from '@navikt/ft-sak-infosider';
 
 interface OwnProps {
   errorMessageCallback: (error: any) => void;

@@ -4,15 +4,12 @@ import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import MockAdapter from 'axios-mock-adapter';
 import Modal from 'nav-frontend-modal';
+import { FagsakYtelseType, BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
+import { Fagsak, BehandlingAppKontekst } from '@navikt/ft-types';
 
+import { TotrinnskontrollAksjonspunkt, BehandlingÅrsak } from '@fpsak-frontend/types';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import {
-  Fagsak, TotrinnskontrollAksjonspunkt, BehandlingAppKontekst, BehandlingÅrsak,
-} from '@fpsak-frontend/types';
 
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import TotrinnskontrollIndex from './TotrinnskontrollIndex';
@@ -21,13 +18,13 @@ describe('<TotrinnskontrollIndex>', () => {
   Modal.setAppElement('body');
   const fagsak = {
     saksnummer: '1',
-    fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
   };
 
   const valgtBehandling = {
     uuid: '1234',
     versjon: 123,
-    type: behandlingType.FORSTEGANGSSOKNAD,
+    type: BehandlingType.FORSTEGANGSSOKNAD,
     opprettet: '‎29.08.‎2017‎ ‎09‎:‎54‎:‎22',
     status: 'FVED',
     toTrinnsBehandling: true,
@@ -36,7 +33,7 @@ describe('<TotrinnskontrollIndex>', () => {
   } as BehandlingAppKontekst;
 
   const kodeverk = {
-    [kodeverkTyper.SKJERMLENKE_TYPE]: [],
+    [KodeverkType.SKJERMLENKE_TYPE]: [],
   };
 
   const createAksjonspunkt = (aksjonspunktKode: string) => (

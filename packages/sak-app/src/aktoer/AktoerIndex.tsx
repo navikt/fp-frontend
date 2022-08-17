@@ -1,12 +1,15 @@
 import React, { FunctionComponent } from 'react';
-
+import { Link } from 'react-router-dom';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import AktorSakIndex from '@navikt/ft-sak-aktor';
+
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import AktorSakIndex from '@fpsak-frontend/sak-aktor';
 
 import useTrackRouteParam from '../app/useTrackRouteParam';
 import { restApiHooks, FpsakApiKeys } from '../data/fpsakApi';
 import { pathToFagsak } from '../app/paths';
+
+import '@navikt/ft-sak-aktor/dist/style.css';
 
 /**
  * AktoerIndex
@@ -26,7 +29,18 @@ const AktoerIndex: FunctionComponent = () => {
     return <LoadingPanel />;
   }
 
-  return <AktorSakIndex valgtAktorId={selectedAktoerId} aktorInfo={data} alleKodeverk={alleKodeverk} finnPathToFagsak={pathToFagsak} />;
+  return (
+    <AktorSakIndex
+      valgtAktorId={selectedAktoerId}
+      aktorInfo={data}
+      alleKodeverk={alleKodeverk}
+      renderSomLenke={(className, fagsakKomponent, saksnummer) => (
+        <Link to={pathToFagsak(saksnummer)} className={className}>
+          {fagsakKomponent}
+        </Link>
+      )}
+    />
+  );
 };
 
 export default AktoerIndex;

@@ -2,10 +2,10 @@ import React from 'react';
 import sinon, { SinonStub } from 'sinon';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
+import { Fagsak, Behandling } from '@navikt/ft-types';
+import { KontrollresultatKode } from '@navikt/ft-sak-risikoklassifisering';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import kontrollresultatKode from '@fpsak-frontend/sak-risikoklassifisering/src/kodeverk/kontrollresultatKode';
-import { Fagsak, Behandling } from '@fpsak-frontend/types';
 
 import * as useTrackRouteParam from '../../app/useTrackRouteParam';
 import RisikoklassifiseringIndex from './RisikoklassifiseringIndex';
@@ -61,7 +61,7 @@ describe('<RisikoklassifiseringIndex>', () => {
           <RisikoklassifiseringIndex
             fagsak={fagsak as Fagsak}
             alleBehandlinger={[behandling] as Behandling[]}
-            kontrollresultat={lagRisikoklassifisering(kontrollresultatKode.HOY)}
+            kontrollresultat={lagRisikoklassifisering(KontrollresultatKode.HOY)}
             behandlingVersjon={1}
             behandlingUuid="1"
           />

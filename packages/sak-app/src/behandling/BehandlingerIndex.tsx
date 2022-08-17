@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Route, Routes } from 'react-router-dom';
-
-import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
-import { IngenBehandlingValgtPanel } from '@fpsak-frontend/sak-infosider';
+import { BehandlingAppKontekst, Fagsak } from '@navikt/ft-types';
+import { IngenBehandlingValgtPanel } from '@navikt/ft-sak-infosider';
 
 import { behandlingRoutePath } from '../app/paths';
 import BehandlingIndex from './BehandlingIndex';

@@ -3,9 +3,9 @@ import React, {
 } from 'react';
 import { Element } from 'nav-frontend-typografi';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { ErrorPage } from '@navikt/ft-sak-infosider';
 import { captureException, withScope } from '@sentry/browser';
 import { RestApiErrorDispatchContext } from '@fpsak-frontend/rest-api-hooks';
-import { ErrorPage } from '@fpsak-frontend/sak-infosider';
 
 interface OwnPropsErrorBoundary {
   children: JSX.Element;

@@ -1,12 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Modal from 'nav-frontend-modal';
+import { BehandlingResultatType, BehandlingType, BehandlingStatus } from '@navikt/ft-kodeverk';
+import { Behandling } from '@navikt/ft-types';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { Behandling } from '@fpsak-frontend/types';
-import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
 import BeslutterModalIndex from './BeslutterModalIndex';
@@ -16,10 +14,10 @@ describe('<BeslutterModalIndex>', () => {
   const behandling = {
     uuid: '1',
     versjon: 2,
-    type: behandlingType.FORSTEGANGSSOKNAD,
-    status: behandlingStatus.FATTER_VEDTAK,
+    type: BehandlingType.FORSTEGANGSSOKNAD,
+    status: BehandlingStatus.FATTER_VEDTAK,
     behandlingsresultat: {
-      type: behandlingResultatType.OPPHOR,
+      type: BehandlingResultatType.OPPHOR,
     },
   } as Behandling;
 

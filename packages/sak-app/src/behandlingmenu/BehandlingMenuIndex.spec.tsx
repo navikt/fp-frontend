@@ -1,12 +1,11 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
+import {
+  BehandlingType, FagsakStatus, BehandlingStatus, FagsakYtelseType,
+} from '@navikt/ft-kodeverk';
+import { BehandlingAppKontekst, Fagsak } from '@navikt/ft-types';
 
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 
 import { VergeBehandlingmenyValg } from '../behandling/behandlingRettigheterTsType';
@@ -27,8 +26,8 @@ const navAnsatt = {
 
 const fagsak = {
   saksnummer: '123',
-  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
-  status: fagsakStatus.UNDER_BEHANDLING,
+  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+  status: FagsakStatus.UNDER_BEHANDLING,
 };
 
 const alleBehandlinger = [{
@@ -37,8 +36,8 @@ const alleBehandlinger = [{
   behandlingKoet: false,
   behandlingPaaVent: false,
   kanHenleggeBehandling: true,
-  type: behandlingType.REVURDERING,
-  status: behandlingStatus.BEHANDLING_UTREDES,
+  type: BehandlingType.REVURDERING,
+  status: BehandlingStatus.BEHANDLING_UTREDES,
   behandlendeEnhetId: '2323',
   behandlendeEnhetNavn: 'NAV Viken',
   erAktivPapirsoknad: false,

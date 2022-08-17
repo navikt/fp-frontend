@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
+import { BehandlingAppKontekst } from '@navikt/ft-types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { BehandlingAppKontekst } from '@fpsak-frontend/types';
 
 import useGetEnabledApplikasjonContext from '../app/useGetEnabledApplikasjonContext';
 import ApplicationContextPath from '../app/ApplicationContextPath';

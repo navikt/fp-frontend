@@ -3,12 +3,11 @@ import sinon, { SinonStub } from 'sinon';
 import { MemoryRouter } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import { render, screen } from '@testing-library/react';
+import {
+  BehandlingType, BehandlingStatus, FagsakStatus, FagsakYtelseType,
+} from '@navikt/ft-kodeverk';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
 import * as useTrackRouteParam from '../app/useTrackRouteParam';
@@ -19,15 +18,15 @@ import FagsakIndex from './FagsakIndex';
 describe('<FagsakIndex>', () => {
   const fagsak = {
     saksnummer: '123456',
-    status: fagsakStatus.LOPENDE,
-    fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+    status: FagsakStatus.LOPENDE,
+    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
   };
 
   const behandling = {
     id: 1,
     uuid: 'test',
-    type: behandlingType.FORSTEGANGSSOKNAD,
-    status: behandlingStatus.OPPRETTET,
+    type: BehandlingType.FORSTEGANGSSOKNAD,
+    status: BehandlingStatus.OPPRETTET,
     behandlendeEnhetId: 'test',
     behandlendeEnhetNavn: 'NAV Viken',
     opprettet: '2017-08-02T00:54:25.455',
@@ -35,8 +34,8 @@ describe('<FagsakIndex>', () => {
   const behandling2 = {
     id: 2,
     uuid: 'test2',
-    type: behandlingType.FORSTEGANGSSOKNAD,
-    status: behandlingStatus.OPPRETTET,
+    type: BehandlingType.FORSTEGANGSSOKNAD,
+    status: BehandlingStatus.OPPRETTET,
     behandlendeEnhetId: 'test',
     behandlendeEnhetNavn: 'NAV Viken',
     opprettet: '2017-08-02T00:54:25.455',

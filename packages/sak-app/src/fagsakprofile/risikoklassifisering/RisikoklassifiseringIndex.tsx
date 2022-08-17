@@ -2,19 +2,21 @@ import React, {
   FunctionComponent, useEffect, useCallback, useMemo,
 } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-
 import {
-  Aksjonspunkt, NavAnsatt, Risikoklassifisering, Fagsak, BehandlingAppKontekst, AksessRettigheter,
-} from '@fpsak-frontend/types';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import RisikoklassifiseringSakIndex from '@fpsak-frontend/sak-risikoklassifisering';
-import { VurderFaresignalerAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
+  Fagsak, BehandlingAppKontekst, Aksjonspunkt, Risikoklassifisering,
+} from '@navikt/ft-types';
+import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
+import RisikoklassifiseringSakIndex, { AvklartRisikoklassifiseringAp } from '@navikt/ft-sak-risikoklassifisering';
+
+import { NavAnsatt, AksessRettigheter } from '@fpsak-frontend/types';
 
 import behandlingEventHandler from '../../behandling/BehandlingEventHandler';
 import useTrackRouteParam from '../../app/useTrackRouteParam';
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
 import { getRiskPanelLocationCreator } from '../../app/paths';
 import getAccessRights from '../../app/util/access';
+
+import '@navikt/ft-sak-risikoklassifisering/dist/style.css';
 
 const getReadOnly = (navAnsatt: NavAnsatt, rettigheter: AksessRettigheter, erPaaVent: boolean) => {
   if (erPaaVent) {
@@ -74,15 +76,15 @@ const RisikoklassifiseringIndex: FunctionComponent<OwnProps> = ({
   }, [location, isRiskPanelOpen]);
 
   useEffect(() => {
-    if (!!risikoAksjonspunkt && risikoAksjonspunkt.status === aksjonspunktStatus.OPPRETTET && !isRiskPanelOpen) {
+    if (!!risikoAksjonspunkt && risikoAksjonspunkt.status === AksjonspunktStatus.OPPRETTET && !isRiskPanelOpen) {
       navigate(getRiskPanelLocationCreator(location)(true));
     }
-    if (!!risikoAksjonspunkt && risikoAksjonspunkt.status === aksjonspunktStatus.UTFORT) {
+    if (!!risikoAksjonspunkt && risikoAksjonspunkt.status === AksjonspunktStatus.UTFORT) {
       navigate(getRiskPanelLocationCreator(location)(false));
     }
   }, [!!risikoAksjonspunkt, behandlingUuid, behandlingVersjon]);
 
-  const submitAksjonspunkt = useCallback((aksjonspunkt: VurderFaresignalerAp) => {
+  const submitAksjonspunkt = useCallback((aksjonspunkt: AvklartRisikoklassifiseringAp) => {
     if (!behandlingUuid || !behandlingVersjon) {
       return Promise.reject();
     }

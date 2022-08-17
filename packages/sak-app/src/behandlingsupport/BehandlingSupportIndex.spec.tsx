@@ -2,11 +2,10 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import sinon, { SinonStub } from 'sinon';
 import { render, screen } from '@testing-library/react';
+import { Fagsak, BehandlingAppKontekst } from '@navikt/ft-types';
+import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 
 import { VergeBehandlingmenyValg } from '../behandling/behandlingRettigheterTsType';
 import * as useTrackRouteParam from '../app/useTrackRouteParam';
@@ -32,8 +31,8 @@ describe('<BehandlingSupportIndex>', () => {
 
   const behandling = {
     uuid: '1',
-    type: behandlingType.FORSTEGANGSSOKNAD,
-    status: behandlingStatus.OPPRETTET,
+    type: BehandlingType.FORSTEGANGSSOKNAD,
+    status: BehandlingStatus.OPPRETTET,
   };
 
   const location = {
