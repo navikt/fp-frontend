@@ -2,9 +2,8 @@ import React, {
   FunctionComponent, useCallback, useMemo, useState,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import SupportMenySakIndex, { SupportTabs } from '@fpsak-frontend/sak-support-meny';
-import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
+import SupportMenySakIndex, { SupportTabs } from '@navikt/ft-sak-support-meny';
+import { Fagsak, BehandlingAppKontekst } from '@navikt/ft-types';
 
 import { getSupportPanelLocationCreator } from '../app/paths';
 import HistorikkIndex from './historikk/HistorikkIndex';
@@ -14,6 +13,8 @@ import TotrinnskontrollIndex from './totrinnskontroll/TotrinnskontrollIndex';
 import useTrackRouteParam from '../app/useTrackRouteParam';
 import styles from './behandlingSupportIndex.less';
 import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
+
+import '@navikt/ft-sak-support-meny/dist/style.css';
 
 export const hentSynligePaneler = (behandlingRettigheter?: BehandlingRettigheter): string[] => Object.values(SupportTabs)
   .filter((supportPanel) => {

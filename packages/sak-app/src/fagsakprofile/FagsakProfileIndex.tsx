@@ -1,14 +1,16 @@
 import React, {
   FunctionComponent, useState, useEffect, useCallback,
 } from 'react';
-import { Navigate, useLocation, useMatch } from 'react-router-dom';
+import {
+  Navigate, NavLink, useLocation, useMatch,
+} from 'react-router-dom';
 import { Location } from 'history';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import BehandlingVelgerSakIndex from '@fpsak-frontend/sak-behandling-velger';
-import FagsakProfilSakIndex from '@fpsak-frontend/sak-fagsak-profil';
-import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
-import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
+import BehandlingVelgerSakIndex from '@navikt/ft-sak-behandling-velger';
+import FagsakProfilSakIndex from '@navikt/ft-sak-fagsak-profil';
+import { Fagsak, BehandlingAppKontekst } from '@navikt/ft-types';
+import { KodeverkType } from '@navikt/ft-kodeverk';
+
 import UkjentAdresseMeldingIndex from '@fpsak-frontend/sak-ukjent-adresse';
 
 import {
@@ -24,6 +26,8 @@ import SakRettigheter from '../fagsak/sakRettigheterTsType';
 import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
 
 import styles from './fagsakProfileIndex.less';
+
+import '@navikt/ft-sak-behandling-velger/dist/style.css';
 
 const findPathToBehandling = (saksnummer: string, location: Location, alleBehandlinger: BehandlingAppKontekst[]) => {
   if (alleBehandlinger.length === 1) {
@@ -124,12 +128,19 @@ export const FagsakProfileIndex: FunctionComponent<OwnProps> = ({
           renderBehandlingVelger={() => (
             <BehandlingVelgerSakIndex
               behandlinger={alleBehandlinger}
-              getBehandlingLocation={getBehandlingLocation}
-              noExistingBehandlinger={alleBehandlinger.length === 0}
               behandlingUuid={behandlingUuid}
-              showAll={showAll}
-              toggleShowAll={toggleShowAll}
-              getKodeverkFn={getKodeverkFn}
+              skalViseAlleBehandlinger={showAll}
+              toggleVisAlleBehandlinger={toggleShowAll}
+              renderRadSomLenke={(className, behandlingInfoKomponent, uuid) => (
+                <NavLink
+                  className={className}
+                  to={getBehandlingLocation(uuid)}
+                  onClick={toggleShowAll}
+                >
+                  {behandlingInfoKomponent}
+                </NavLink>
+              )}
+              getKodeverkMedNavn={getKodeverkFn}
             />
           )}
         />

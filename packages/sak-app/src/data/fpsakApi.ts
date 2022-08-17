@@ -1,12 +1,16 @@
 import {
+  Aksjonspunkt, Aktor, AlleKodeverk, AlleKodeverkTilbakekreving, Behandling,
+  BehandlingAppKontekst, Dokument, Fagsak, FagsakPersoner, Risikoklassifisering,
+} from '@navikt/ft-types';
+
+import {
   RestApiConfigBuilder, createRequestApi, RestKey, Link,
 } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import {
-  Aksjonspunkt, Aktor, AlleKodeverk, AlleKodeverkTilbakekreving, Behandling, BehandlingAppKontekst, Dokument,
-  Fagsak, FagsakPersoner, ForhåndsvisMeldingParams, Historikkinnslag, KlageVurdering, NavAnsatt,
-  Risikoklassifisering, TotrinnskontrollSkjermlenkeContext,
+  ForhåndsvisMeldingParams, Historikkinnslag, KlageVurdering, NavAnsatt, TotrinnskontrollSkjermlenkeContext,
 } from '@fpsak-frontend/types';
+
 import BehandlingRettigheter from '../behandling/behandlingRettigheterTsType';
 import SakRettigheter from '../fagsak/sakRettigheterTsType';
 

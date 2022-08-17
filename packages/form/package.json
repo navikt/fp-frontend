@@ -7,9 +7,9 @@
   "dependencies": {
     "@fpsak-frontend/assets": "1.0.0",
     "@navikt/ft-kodeverk": "^1.0.16",
-    "@navikt/ft-types": "^1.0.24",
-    "@navikt/ft-ui-komponenter": "1.0.33",
-    "@navikt/ft-utils": "1.0.30",
+    "@navikt/ft-types": "^1.0.25",
+    "@navikt/ft-ui-komponenter": "1.0.34",
+    "@navikt/ft-utils": "1.0.31",
     "classnames": "2.3.1",
     "lodash.throttle": "4.1.1",
     "moment": "2.29.4",

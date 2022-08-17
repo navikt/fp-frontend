@@ -11,7 +11,7 @@
     "@fpsak-frontend/rest-api": "1.0.0",
     "@fpsak-frontend/rest-api-hooks": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
-    "@navikt/ft-ui-komponenter": "1.0.33",
+    "@navikt/ft-ui-komponenter": "1.0.34",
     "react": "18.2.0"
   },
   "devDependencies": {

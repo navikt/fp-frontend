@@ -5,8 +5,8 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@navikt/ft-ui-komponenter": "1.0.33",
-    "@navikt/ft-utils": "1.0.30",
+    "@navikt/ft-ui-komponenter": "1.0.34",
+    "@navikt/ft-utils": "1.0.31",
     "nav-frontend-typografi": "4.0.2",
     "react": "18.2.0",
     "react-hook-form": "7.34.1",

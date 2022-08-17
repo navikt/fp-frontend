@@ -6,9 +6,9 @@
   "private": true,
   "dependencies": {
     "@navikt/ft-kodeverk": "^1.0.16",
-    "@navikt/ft-types": "^1.0.24",
-    "@navikt/ft-ui-komponenter": "1.0.33",
-    "@navikt/ft-utils": "1.0.30",
+    "@navikt/ft-types": "^1.0.25",
+    "@navikt/ft-ui-komponenter": "1.0.34",
+    "@navikt/ft-utils": "1.0.31",
     "nav-frontend-modal": "2.0.2",
     "nav-frontend-modal-style": "2.0.2",
     "react": "18.2.0",

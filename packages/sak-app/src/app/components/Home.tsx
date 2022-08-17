@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 
-import { NotFoundPage } from '@fpsak-frontend/sak-infosider';
+import { NotFoundPage } from '@navikt/ft-sak-infosider';
 
 import { aktoerRoutePath, fagsakRoutePath } from '../paths';
 import FagsakIndex from '../../fagsak/FagsakIndex';
@@ -27,7 +27,7 @@ const Home: FunctionComponent<OwnProps> = ({
       <Route path="/" element={<DashboardResolver />} />
       <Route path={fagsakRoutePath} element={<FagsakIndex />} />
       <Route path={aktoerRoutePath} element={<AktoerIndex />} />
-      <Route path="*" element={<NotFoundPage />} />
+      <Route path="*" element={<NotFoundPage renderSomLenke={(tekst) => <Link to="/">{tekst}</Link>} />} />
     </Routes>
   </div>
 );

@@ -1,13 +1,15 @@
 import React, { FunctionComponent, useMemo } from 'react';
-
+import DokumenterSakIndex from '@navikt/ft-sak-dokumenter';
 import { LoadingPanel, usePrevious } from '@navikt/ft-ui-komponenter';
-import DokumenterSakIndex from '@fpsak-frontend/sak-dokumenter';
-import { Dokument } from '@fpsak-frontend/types';
+import { Dokument } from '@navikt/ft-types';
+
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { hentDokumentLenke } from '@fpsak-frontend/konstanter';
 
 import useBehandlingEndret from '../../behandling/useBehandlingEndret';
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
+
+import '@navikt/ft-sak-dokumenter/dist/style.css';
 
 // TODO (hb) lag linker, ikke callback
 const selectDocument = (saksNr: string) => (_e: React.SyntheticEvent, _id: number, document: Dokument): void => {

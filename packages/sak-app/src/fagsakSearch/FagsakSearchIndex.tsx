@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Fagsak } from '@navikt/ft-types';
 
 import {
   errorOfType, ErrorTypes, getErrorResponseData,
 } from '@fpsak-frontend/rest-api';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import FagsakSokSakIndex from '@fpsak-frontend/sak-sok';
-import { Fagsak } from '@fpsak-frontend/types';
 
 import { pathToFagsak } from '../app/paths';
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';

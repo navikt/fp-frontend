@@ -3,14 +3,12 @@ import React, {
 } from 'react';
 import { useNavigate, useLocation, NavigateFunction } from 'react-router-dom';
 import { Location } from 'history';
-
-import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
-import BehandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import FagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
+import { BehandlingType, FagsakYtelseType, BehandlingStatus } from '@navikt/ft-kodeverk';
 import { replaceNorwegianCharacters, parseQueryString } from '@navikt/ft-utils';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { Fagsak, BehandlingAppKontekst } from '@fpsak-frontend/types';
+import { Fagsak, BehandlingAppKontekst } from '@navikt/ft-types';
+
+import { useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 
 import useTrackRouteParam from '../app/useTrackRouteParam';
 import getAccessRights from '../app/util/access';

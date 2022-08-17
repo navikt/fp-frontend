@@ -3,14 +3,13 @@ import sinon from 'sinon';
 import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import { MemoryRouter } from 'react-router-dom';
+import { BehandlingAppKontekst, Fagsak, Behandling } from '@navikt/ft-types';
+import {
+  BehandlingStatus, BehandlingType, FagsakYtelseType, FagsakStatus,
+} from '@navikt/ft-kodeverk';
 
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import fagsakStatus from '@fpsak-frontend/kodeverk/src/fagsakStatus';
-import { BehandlingAppKontekst, Fagsak, Behandling } from '@fpsak-frontend/types';
 
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 import { FagsakProfileIndex } from './FagsakProfileIndex';
@@ -18,8 +17,8 @@ import { FagsakProfileIndex } from './FagsakProfileIndex';
 describe('<FagsakProfileIndex>', () => {
   const fagsak = {
     saksnummer: '123',
-    fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
-    status: fagsakStatus.OPPRETTET,
+    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    status: FagsakStatus.OPPRETTET,
   };
 
   const navAnsatt = {
@@ -36,8 +35,8 @@ describe('<FagsakProfileIndex>', () => {
 
   const behandling = {
     uuid: 'test',
-    type: behandlingType.FORSTEGANGSSOKNAD,
-    status: behandlingStatus.OPPRETTET,
+    type: BehandlingType.FORSTEGANGSSOKNAD,
+    status: BehandlingStatus.OPPRETTET,
     behandlendeEnhetId: 'test',
     behandlendeEnhetNavn: 'NAV Viken',
     opprettet: '2017-08-02T00:54:25.455',

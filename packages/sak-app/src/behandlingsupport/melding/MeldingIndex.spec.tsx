@@ -4,12 +4,10 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import MockAdapter from 'axios-mock-adapter';
 import Modal from 'nav-frontend-modal';
+import { FagsakYtelseType, BehandlingType, KodeverkType } from '@navikt/ft-kodeverk';
+import { BehandlingAppKontekst, Fagsak } from '@navikt/ft-types';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import BehandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { BehandlingAppKontekst, Fagsak } from '@fpsak-frontend/types';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
 import { requestApi, FpsakApiKeys } from '../../data/fpsakApi';
@@ -20,7 +18,7 @@ describe('<MeldingIndex>', () => {
 
   const fagsak = {
     saksnummer: '123456',
-    fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
   };
 
   const valgtBehandling = {
@@ -31,7 +29,7 @@ describe('<MeldingIndex>', () => {
   };
 
   const kodeverk = {
-    [kodeverkTyper.VENT_AARSAK]: [],
+    [KodeverkType.VENT_AARSAK]: [],
   };
 
   const templates = [
@@ -114,7 +112,7 @@ describe('<MeldingIndex>', () => {
     await waitFor(() => expect(axiosMock.history.post
       .find((a) => a.url === '/fpformidling/api/brev/forhaandsvis').data).toBe(JSON.stringify({
       behandlingUuid: '1',
-      fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
       fritekst: ' ',
       arsakskode: null,
       dokumentMal: 'Mal1',

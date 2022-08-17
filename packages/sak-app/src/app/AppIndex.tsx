@@ -1,14 +1,15 @@
 import React, {
   FunctionComponent, useState, useEffect, useCallback,
 } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { RawIntlProvider } from 'react-intl';
 import moment from 'moment';
 import Modal from 'nav-frontend-modal';
+import { createIntl, parseQueryString } from '@navikt/ft-utils';
+import { ForbiddenPage, UnauthorizedPage } from '@navikt/ft-sak-infosider';
 
 import { useRestApiError } from '@fpsak-frontend/rest-api-hooks';
 import EventType from '@fpsak-frontend/rest-api/src/requestApi/eventType';
-import { ForbiddenPage, UnauthorizedPage } from '@fpsak-frontend/sak-infosider';
-import { parseQueryString } from '@navikt/ft-utils';
 
 import { FpsakApiKeys, restApiHooks } from '../data/fpsakApi';
 import ErrorBoundary from './ErrorBoundary';
@@ -17,14 +18,19 @@ import AppConfigResolver from './AppConfigResolver';
 import Home from './components/Home';
 import Dekorator from './components/Dekorator';
 
+import messages from '../../i18n/nb_NO.json';
+
 import '@fpsak-frontend/assets/styles/global.less';
 
 import '@navikt/ft-ui-komponenter/dist/style.css';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';
 import '@navikt/ft-tidslinje/dist/style.css';
+import '@navikt/ft-sak-infosider/dist/style.css';
 
 const EMPTY_ARRAY = [] as any[];
+
+const intl = createIntl(messages);
 
 /**
  * AppIndex
@@ -76,22 +82,23 @@ const AppIndex: FunctionComponent = () => {
   const shouldRenderHome = (!crashMessage && !hasForbiddenOrUnauthorizedErrors);
 
   return (
-    /* @ts-ignore Fiks cannot be used as a JSX component */
-    <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} doNotShowErrorPage>
-      <AppConfigResolver>
-        <>
-          <Dekorator
-            hideErrorMessages={hasForbiddenOrUnauthorizedErrors}
-            queryStrings={queryStrings}
-            setSiteHeight={setSiteHeight}
-            crashMessage={crashMessage}
-          />
-          {shouldRenderHome && (<Home headerHeight={headerHeight} />)}
-          {forbiddenErrors.length > 0 && (<ForbiddenPage />)}
-          {unauthorizedErrors.length > 0 && (redirectToLogin() || <UnauthorizedPage />)}
-        </>
-      </AppConfigResolver>
-    </ErrorBoundary>
+    <RawIntlProvider value={intl}>
+      <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} doNotShowErrorPage>
+        <AppConfigResolver>
+          <>
+            <Dekorator
+              hideErrorMessages={hasForbiddenOrUnauthorizedErrors}
+              queryStrings={queryStrings}
+              setSiteHeight={setSiteHeight}
+              crashMessage={crashMessage}
+            />
+            {shouldRenderHome && (<Home headerHeight={headerHeight} />)}
+            {forbiddenErrors.length > 0 && (<ForbiddenPage renderSomLenke={(tekst) => <Link to="/">{tekst}</Link>} />)}
+            {unauthorizedErrors.length > 0 && (redirectToLogin() || <UnauthorizedPage renderSomLenke={(tekst) => <Link to="/">{tekst}</Link>} />)}
+          </>
+        </AppConfigResolver>
+      </ErrorBoundary>
+    </RawIntlProvider>
   );
 };
 

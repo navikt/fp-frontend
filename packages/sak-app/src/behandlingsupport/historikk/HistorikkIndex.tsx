@@ -2,10 +2,10 @@ import React, {
   FunctionComponent, useCallback,
 } from 'react';
 import { useLocation } from 'react-router-dom';
+import { usePrevious } from '@navikt/ft-ui-komponenter';
 
 import HistorikkSakIndex from '@fpsak-frontend/sak-historikk';
 import { Historikkinnslag } from '@fpsak-frontend/types';
-import { usePrevious } from '@navikt/ft-ui-komponenter';
 
 import useBehandlingEndret from '../../behandling/useBehandlingEndret';
 import { FpsakApiKeys, restApiHooks } from '../../data/fpsakApi';
