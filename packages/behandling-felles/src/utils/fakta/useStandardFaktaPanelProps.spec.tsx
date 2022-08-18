@@ -1,15 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
-
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { Aksjonspunkt, Behandling } from '@navikt/ft-types';
 import {
-  AksessRettigheter, Aksjonspunkt, Behandling, Vilkar,
-} from '@fpsak-frontend/types';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+  VilkarUtfallType, AksjonspunktStatus, BehandlingStatus, VilkarType,
+} from '@navikt/ft-kodeverk';
+
+import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import { Vilkar, AksessRettigheter } from '@fpsak-frontend/types';
 
 import useStandardFaktaPanelProps from './useStandardFaktaPanelProps';
 
@@ -27,7 +25,7 @@ const fagsak = {
 const behandling = {
   uuid: '1',
   versjon: 2,
-  status: behandlingStatus.OPPRETTET,
+  status: BehandlingStatus.OPPRETTET,
   behandlingPaaVent: false,
 } as Behandling;
 const rettigheter = {
@@ -50,21 +48,21 @@ describe('useStandardFaktaPanelProps', () => {
   it('skal kalkulere data som skal brukes av prosess-paneler', () => {
     const aksjonspunkter = [{
       definisjon: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-      status: aksjonspunktStatus.OPPRETTET,
+      status: AksjonspunktStatus.OPPRETTET,
       kanLoses: true,
       erAktivt: true,
     }, {
       definisjon: aksjonspunktCodes.AVKLAR_AKTIVITETER,
-      status: aksjonspunktStatus.OPPRETTET,
+      status: AksjonspunktStatus.OPPRETTET,
       kanLoses: false,
       erAktivt: true,
     }] as Aksjonspunkt[];
     const vilkar = [{
-      vilkarType: vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
-      vilkarStatus: vilkarUtfallType.IKKE_VURDERT,
+      vilkarType: VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
+      vilkarStatus: VilkarUtfallType.IKKE_VURDERT,
       overstyrbar: true,
     }, {
-      vilkarType: vilkarType.ADOPSJONSVILKARET,
+      vilkarType: VilkarType.ADOPSJONSVILKARET,
     }] as Vilkar[];
 
     const data = {
@@ -72,7 +70,7 @@ describe('useStandardFaktaPanelProps', () => {
       vilkar,
     };
     const aksjonspunktKoder = [aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR];
-    const vilkarKoder = [vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE];
+    const vilkarKoder = [VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE];
 
     useContextMock.mockReturnValue({
       behandling, rettigheter, alleKodeverk: { test: '' }, hasFetchError: false,
@@ -100,13 +98,13 @@ describe('useStandardFaktaPanelProps', () => {
   it('skal være readonly', () => {
     const aksjonspunkter = [{
       definisjon: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-      status: aksjonspunktStatus.UTFORT,
+      status: AksjonspunktStatus.UTFORT,
       kanLoses: false,
       erAktivt: false,
     }] as Aksjonspunkt[];
     const vilkar = [{
-      vilkarType: vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
-      vilkarStatus: vilkarUtfallType.OPPFYLT,
+      vilkarType: VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
+      vilkarStatus: VilkarUtfallType.OPPFYLT,
       overstyrbar: false,
     }] as Vilkar[];
 
@@ -115,7 +113,7 @@ describe('useStandardFaktaPanelProps', () => {
       vilkar,
     };
     const aksjonspunktKoder = [aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR];
-    const vilkarKoder = [vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE];
+    const vilkarKoder = [VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE];
 
     useContextMock.mockReturnValue({
       behandling, rettigheter, alleKodeverk: { test: '' }, hasFetchError: false,
@@ -137,13 +135,13 @@ describe('useStandardFaktaPanelProps', () => {
   it('skal lagre aksjonspunkt', () => {
     const aksjonspunkter = [{
       definisjon: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-      status: aksjonspunktStatus.OPPRETTET,
+      status: AksjonspunktStatus.OPPRETTET,
       kanLoses: true,
       erAktivt: true,
     }] as Aksjonspunkt[];
     const vilkar = [{
-      vilkarType: vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
-      vilkarStatus: vilkarUtfallType.IKKE_VURDERT,
+      vilkarType: VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
+      vilkarStatus: VilkarUtfallType.IKKE_VURDERT,
       overstyrbar: false,
     }] as Vilkar[];
 
@@ -152,7 +150,7 @@ describe('useStandardFaktaPanelProps', () => {
       vilkar,
     };
     const aksjonspunktKoder = [aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR];
-    const vilkarKoder = [vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE];
+    const vilkarKoder = [VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE];
 
     const lagreAksjonspunkter = sinon.stub().resolves('');
     const oppdaterProsessStegOgFaktaPanelIUrl = sinon.spy();
@@ -194,13 +192,13 @@ describe('useStandardFaktaPanelProps', () => {
   it('skal lagre overstyrt aksjonspunkt', () => {
     const aksjonspunkter = [{
       definisjon: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-      status: aksjonspunktStatus.OPPRETTET,
+      status: AksjonspunktStatus.OPPRETTET,
       kanLoses: true,
       erAktivt: true,
     }] as Aksjonspunkt[];
     const vilkar = [{
-      vilkarType: vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
-      vilkarStatus: vilkarUtfallType.IKKE_VURDERT,
+      vilkarType: VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
+      vilkarStatus: VilkarUtfallType.IKKE_VURDERT,
       overstyrbar: false,
     }] as Vilkar[];
 

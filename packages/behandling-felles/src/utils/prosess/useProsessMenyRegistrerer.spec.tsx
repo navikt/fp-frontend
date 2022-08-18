@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 
 import useProsessMenyRegistrerer from './useProsessMenyRegistrerer';
 
@@ -34,7 +34,7 @@ describe('useProsessMenyRegistrerer', () => {
       'default',
       true,
       true,
-      vilkarUtfallType.IKKE_VURDERT,
+      VilkarUtfallType.IKKE_VURDERT,
       true,
     )}
     />);
@@ -69,7 +69,7 @@ describe('useProsessMenyRegistrerer', () => {
       'default',
       true,
       false,
-      vilkarUtfallType.IKKE_VURDERT,
+      VilkarUtfallType.IKKE_VURDERT,
       false,
     )}
     />);
@@ -93,7 +93,7 @@ describe('useProsessMenyRegistrerer', () => {
       erAktiv: false,
       harApentAksjonspunkt: false,
       harHentetInitData: true,
-      status: vilkarUtfallType.IKKE_VURDERT,
+      status: VilkarUtfallType.IKKE_VURDERT,
     });
   });
 
@@ -114,7 +114,7 @@ describe('useProsessMenyRegistrerer', () => {
       'default',
       true,
       true,
-      vilkarUtfallType.IKKE_VURDERT,
+      VilkarUtfallType.IKKE_VURDERT,
       true,
     )}
     />);
@@ -138,7 +138,7 @@ describe('useProsessMenyRegistrerer', () => {
       erAktiv: true,
       harApentAksjonspunkt: true,
       harHentetInitData: true,
-      status: vilkarUtfallType.IKKE_VURDERT,
+      status: VilkarUtfallType.IKKE_VURDERT,
     });
   });
 });

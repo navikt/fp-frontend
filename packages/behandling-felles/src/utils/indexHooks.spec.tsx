@@ -1,9 +1,9 @@
 import { waitFor, renderHook } from '@testing-library/react';
 import TestRenderer from 'react-test-renderer';
 import MockAdapter from 'axios-mock-adapter';
+import { Behandling } from '@navikt/ft-types';
 
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
-import { Behandling } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import { useBehandling, useLagreAksjonspunkt } from './indexHooks';

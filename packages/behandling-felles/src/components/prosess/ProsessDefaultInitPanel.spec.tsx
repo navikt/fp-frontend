@@ -1,12 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { Behandling, Aksjonspunkt } from '@navikt/ft-types';
+import { BehandlingStatus, VilkarUtfallType } from '@navikt/ft-kodeverk';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import * as Felles from '@fpsak-frontend/behandling-felles/src/utils/prosess/useStandardProsessPanelProps';
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
-import { Behandling, Aksjonspunkt } from '@fpsak-frontend/types';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
@@ -16,7 +15,7 @@ import ProsessDefaultInitPanel from './ProsessDefaultInitPanel';
 const behandling = {
   uuid: '1',
   versjon: 2,
-  status: behandlingStatus.OPPRETTET,
+  status: BehandlingStatus.OPPRETTET,
   behandlingPaaVent: false,
 } as Behandling;
 
@@ -27,7 +26,7 @@ const defaultProps = {
   behandling,
   alleMerknaderFraBeslutter: {},
   submitCallback: jest.fn(),
-  status: vilkarUtfallType.IKKE_VURDERT,
+  status: VilkarUtfallType.IKKE_VURDERT,
   alleKodeverk: kodeverk,
   isReadOnly: false,
   readOnlySubmitButton: false,

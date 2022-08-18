@@ -4,9 +4,9 @@ import { shallow } from 'enzyme';
 import { render, screen, waitFor } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
 import userEvent from '@testing-library/user-event';
+import { Behandling, Fagsak, Aksjonspunkt } from '@navikt/ft-types';
 
 import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
-import { Aksjonspunkt, Behandling, Fagsak } from '@fpsak-frontend/types';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import * as Felles from '@fpsak-frontend/behandling-felles/src/utils/prosess/useStandardProsessPanelProps';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';

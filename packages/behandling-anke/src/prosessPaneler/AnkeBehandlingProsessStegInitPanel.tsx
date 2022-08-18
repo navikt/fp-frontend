@@ -1,14 +1,13 @@
 import React, {
   FunctionComponent, useCallback,
 } from 'react';
+import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/ft-types';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AnkeProsessIndex, { AnkeProsessBrevData } from '@fpsak-frontend/prosess-anke';
 import { AnkeVurderingResultatAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import {
-  Aksjonspunkt, AnkeVurdering, Behandling, Fagsak, ForhåndsvisMeldingParams,
-} from '@fpsak-frontend/types';
+import { AnkeVurdering, ForhåndsvisMeldingParams } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps, useStandardProsessPanelProps } from '@fpsak-frontend/behandling-felles';
 import { createIntl, forhandsvisDokument } from '@navikt/ft-utils';
 

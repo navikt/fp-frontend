@@ -1,4 +1,4 @@
-import { Behandling } from '@fpsak-frontend/types';
+import { Behandling } from '@navikt/ft-types';
 
 import ProsessPanelMenyData from './prosessPanelMenyData';
 

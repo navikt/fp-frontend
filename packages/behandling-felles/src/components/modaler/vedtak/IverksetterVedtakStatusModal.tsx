@@ -4,8 +4,8 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import { Normaltekst } from 'nav-frontend-typografi';
 import Modal from 'nav-frontend-modal';
 import { Image } from '@navikt/ft-ui-komponenter';
+import { BehandlingResultatType } from '@navikt/ft-kodeverk';
 
-import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import innvilgetImageUrl from '@fpsak-frontend/assets/images/innvilget_valgt.svg';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -33,7 +33,7 @@ const IverksetterVedtakStatusModal: FunctionComponent<OwnProps> = ({
   visModal,
   behandlingsresultat,
 }) => {
-  const erVedtakAvslatt = behandlingsresultat && behandlingsresultat.type === behandlingResultatType.AVSLATT;
+  const erVedtakAvslatt = behandlingsresultat && behandlingsresultat.type === BehandlingResultatType.AVSLATT;
   const imageAltText = intl.formatMessage({ id: erVedtakAvslatt ? 'IverksetterVedtakStatusModal.Avslatt' : 'IverksetterVedtakStatusModal.Innvilget' });
 
   return (

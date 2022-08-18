@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
-
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 
 import useInngangsvilkarRegistrerer from './useInngangsvilkarRegistrerer';
 
@@ -32,7 +31,7 @@ describe('useInngangsvilkarRegistrerer', () => {
       'testTekst',
       true,
       true,
-      vilkarUtfallType.IKKE_VURDERT,
+      VilkarUtfallType.IKKE_VURDERT,
     )}
     />);
 
@@ -48,7 +47,7 @@ describe('useInngangsvilkarRegistrerer', () => {
       id: 'testId',
       aksjonspunktTekst: 'testTekst',
       harApentAksjonspunkt: true,
-      status: vilkarUtfallType.IKKE_VURDERT,
+      status: VilkarUtfallType.IKKE_VURDERT,
     });
   });
 });

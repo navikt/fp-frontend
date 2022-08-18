@@ -1,7 +1,5 @@
-import { Behandling } from '@fpsak-frontend/types';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import { Behandling } from '@navikt/ft-types';
+import { AksjonspunktStatus, BehandlingType, BehandlingStatus } from '@navikt/ft-kodeverk';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import getAlleMerknaderFraBeslutter from './getAlleMerknaderFraBeslutter';
@@ -10,14 +8,14 @@ describe('<getAlleMerknaderFraBeslutter>', () => {
   const behandling = {
     uuid: '1',
     versjon: 1,
-    status: behandlingStatus.BEHANDLING_UTREDES,
-    type: behandlingType.FORSTEGANGSSOKNAD,
+    status: BehandlingStatus.BEHANDLING_UTREDES,
+    type: BehandlingType.FORSTEGANGSSOKNAD,
     behandlingPaaVent: false,
     behandlingHenlagt: false,
   };
 
   const aksjonspunkter = [{
-    status: aksjonspunktStatus.OPPRETTET,
+    status: AksjonspunktStatus.OPPRETTET,
     definisjon: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
     kanLoses: true,
     erAktivt: true,
@@ -38,7 +36,7 @@ describe('<getAlleMerknaderFraBeslutter>', () => {
   it('skal ikke hente merknader  behandlingstatus er ulik BEHANDLING_UTREDER', () => {
     const behandlingMedAnnenStatus = {
       ...behandling,
-      status: behandlingStatus.AVSLUTTET,
+      status: BehandlingStatus.AVSLUTTET,
     };
     const merknader = getAlleMerknaderFraBeslutter(behandlingMedAnnenStatus as Behandling, aksjonspunkter);
 

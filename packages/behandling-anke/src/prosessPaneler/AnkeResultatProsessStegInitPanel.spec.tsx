@@ -4,19 +4,16 @@ import sinon from 'sinon';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import MockAdapter from 'axios-mock-adapter';
+import { AksjonspunktStatus, VilkarUtfallType, FagsakYtelseType } from '@navikt/ft-kodeverk';
+import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/ft-types';
 
+import { AnkeVurdering } from '@fpsak-frontend/types';
 import ankeVurdering from '@fpsak-frontend/kodeverk/src/ankeVurdering';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import * as Felles from '@fpsak-frontend/behandling-felles/src/utils/prosess/useStandardProsessPanelProps';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
-import {
-  Aksjonspunkt, AnkeVurdering, Behandling, Fagsak,
-} from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
 import { AnkeBehandlingApiKeys, requestAnkeApi } from '../data/ankeBehandlingApi';
@@ -27,7 +24,7 @@ type INIT_DATA = {
 }
 
 const fagsak = {
-  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
 } as Fagsak;
 
 const behandling = {
@@ -44,7 +41,7 @@ describe('<AnkeResultatProsessStegInitPanel>', () => {
     behandling,
     alleMerknaderFraBeslutter: {},
     submitCallback,
-    status: vilkarUtfallType.IKKE_VURDERT,
+    status: VilkarUtfallType.IKKE_VURDERT,
     alleKodeverk: kodeverk,
     isReadOnly: false,
     readOnlySubmitButton: false,
@@ -52,7 +49,7 @@ describe('<AnkeResultatProsessStegInitPanel>', () => {
       definisjon: aksjonspunktCodes.FORESLA_VEDTAK,
       erAktivt: true,
       kanLoses: true,
-      status: aksjonspunktStatus.OPPRETTET,
+      status: AksjonspunktStatus.OPPRETTET,
     }] as Aksjonspunkt[],
     vilkar: [],
     isAksjonspunktOpen: true,
@@ -150,7 +147,7 @@ describe('<AnkeResultatProsessStegInitPanel>', () => {
       mottaker: '',
       dokumentMal: dokumentMalType.ANKE_OPPHEVET,
       behandlingUuid: 'test-uuid',
-      fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     }));
   });
 });

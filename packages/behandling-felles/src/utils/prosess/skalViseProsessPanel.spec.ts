@@ -1,6 +1,7 @@
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
+import { Aksjonspunkt } from '@navikt/ft-types';
+import { VilkarType } from '@navikt/ft-kodeverk';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import { Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
+import { Vilkar } from '@fpsak-frontend/types';
 
 import skalViseProsessPanel from './skalViseProsessPanel';
 
@@ -22,11 +23,11 @@ describe('skalViseProsessPanel', () => {
 
   it('skal vise prosesspanel når en har vilkar men ikke aksjonspunkt', () => {
     const vilkar = [{
-      vilkarType: vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
+      vilkarType: VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
     } as Vilkar];
     const aksjonspunkter = [] as Aksjonspunkt[];
 
-    const skalVise = skalViseProsessPanel(aksjonspunkter, [vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE], vilkar);
+    const skalVise = skalViseProsessPanel(aksjonspunkter, [VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE], vilkar);
 
     expect(skalVise).toBe(true);
   });
@@ -36,10 +37,10 @@ describe('skalViseProsessPanel', () => {
       definisjon: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
     }] as Aksjonspunkt[];
     const vilkar = [{
-      vilkarType: vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
+      vilkarType: VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
     } as Vilkar];
 
-    const skalVise = skalViseProsessPanel(aksjonspunkter, [vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE], vilkar);
+    const skalVise = skalViseProsessPanel(aksjonspunkter, [VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE], vilkar);
 
     expect(skalVise).toBe(true);
   });
@@ -50,7 +51,7 @@ describe('skalViseProsessPanel', () => {
     }] as Aksjonspunkt[];
     const vilkar = [] as Vilkar[];
 
-    const skalVise = skalViseProsessPanel(aksjonspunkter, [vilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE], vilkar);
+    const skalVise = skalViseProsessPanel(aksjonspunkter, [VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE], vilkar);
 
     expect(skalVise).toBe(false);
   });

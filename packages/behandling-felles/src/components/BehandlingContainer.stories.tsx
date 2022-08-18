@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
+import { VilkarUtfallType } from '@navikt/ft-kodeverk';
+import { Behandling } from '@navikt/ft-types';
 
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import { Behandling } from '@fpsak-frontend/types';
 import BehandlingContainer from './BehandlingContainer';
 import FaktaPanelInitProps from '../types/faktaPanelInitProps';
 import ProsessPanelInitProps from '../types/prosessPanelInitProps';
@@ -65,7 +65,7 @@ const ProsessPanelTest1: FunctionComponent<ProsessPanelInitProps> = ({
       tekst: 'Adopsjon',
       erAktiv: valgtProsessSteg === '1',
       harApentAksjonspunkt: false,
-      status: vilkarUtfallType.OPPFYLT,
+      status: VilkarUtfallType.OPPFYLT,
       harHentetInitData: true,
     });
   }, []);
@@ -91,7 +91,7 @@ const ProsessPanelTest2: FunctionComponent<ProsessPanelInitProps> = ({
       tekst: 'Fødsel',
       erAktiv: valgtProsessSteg === '2',
       harApentAksjonspunkt: true,
-      status: vilkarUtfallType.IKKE_OPPFYLT,
+      status: VilkarUtfallType.IKKE_OPPFYLT,
       harHentetInitData: true,
     });
   }, []);

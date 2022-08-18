@@ -1,11 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
+import { BehandlingType, FagsakYtelseType, BehandlingStatus } from '@navikt/ft-kodeverk';
+import { AlleKodeverk, Fagsak } from '@navikt/ft-types';
 
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import { AksessRettigheter, AlleKodeverk, Fagsak } from '@fpsak-frontend/types';
+import { AksessRettigheter } from '@fpsak-frontend/types';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
@@ -21,8 +20,8 @@ describe('<BehandlingEngangsstonadIndex>', () => {
         data: {
           uuid: 'test-uuid',
           versjon: 1,
-          status: behandlingStatus.OPPRETTET,
-          type: behandlingType.FORSTEGANGSSOKNAD,
+          status: BehandlingStatus.OPPRETTET,
+          type: BehandlingType.FORSTEGANGSSOKNAD,
           links: [{
             href: EsBehandlingApiKeys.ARBEIDSGIVERE_OVERSIKT.name,
             rel: 'arbeidsgivere-oversikt',
@@ -53,7 +52,7 @@ describe('<BehandlingEngangsstonadIndex>', () => {
             // @ts-ignore
             kodeverk={alleKodeverk as AlleKodeverk}
             fagsak={{
-              fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
+              fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
             } as Fagsak}
             rettigheter={{
               writeAccess: {

@@ -1,6 +1,5 @@
-import {
-  Behandling, Aksjonspunkt, Vilkar, AksessRettigheter,
-} from '@fpsak-frontend/types';
+import { Behandling, Aksjonspunkt } from '@navikt/ft-types';
+import { Vilkar, AksessRettigheter } from '@fpsak-frontend/types';
 
 export const harBehandlingReadOnlyStatus = (behandling: Behandling) => (behandling.taskStatus && behandling.taskStatus.readOnly
   ? behandling.taskStatus.readOnly : false);

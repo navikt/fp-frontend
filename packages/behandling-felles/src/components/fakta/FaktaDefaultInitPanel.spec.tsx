@@ -1,11 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { Behandling, Aksjonspunkt } from '@navikt/ft-types';
+import { BehandlingStatus } from '@navikt/ft-kodeverk';
 
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
-import { Behandling, Aksjonspunkt } from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
@@ -15,7 +15,7 @@ import FaktaDefaultInitPanel from './FaktaDefaultInitPanel';
 const behandling = {
   uuid: '1',
   versjon: 2,
-  status: behandlingStatus.OPPRETTET,
+  status: BehandlingStatus.OPPRETTET,
   behandlingPaaVent: false,
 } as Behandling;
 

@@ -1,8 +1,7 @@
 import React from 'react';
 import { RawIntlProvider } from 'react-intl';
-
 import { createIntl } from '@navikt/ft-utils';
-import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
+import { BehandlingResultatType } from '@navikt/ft-kodeverk';
 
 import IverksetterVedtakStatusModal from './IverksetterVedtakStatusModal';
 
@@ -36,7 +35,7 @@ export const visIverksetterVedtakAvslatt = () => (
       visModal
       lukkModal={() => undefined}
       behandlingsresultat={{
-        type: behandlingResultatType.AVSLATT,
+        type: BehandlingResultatType.AVSLATT,
       }}
     />
   </RawIntlProvider>

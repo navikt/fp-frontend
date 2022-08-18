@@ -1,11 +1,12 @@
 import React, {
   FunctionComponent,
 } from 'react';
+import { Aksjonspunkt } from '@navikt/ft-types';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VergeFaktaIndex from '@fpsak-frontend/fakta-verge';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { Aksjonspunkt, Verge } from '@fpsak-frontend/types';
+import { Verge } from '@fpsak-frontend/types';
 import { FaktaPanelInitProps, FaktaDefaultInitPanel } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@navikt/ft-utils';
 

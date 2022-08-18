@@ -3,8 +3,8 @@ import React, {
 } from 'react';
 import { injectIntl, FormattedMessage, WrappedComponentProps } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
+import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import ProsessPanelWrapper from './ProsessPanelWrapper';
@@ -26,7 +26,7 @@ const BehandlingHenlagtPanel: FunctionComponent<ProsessPanelInitProps & WrappedC
       tekst: intl.formatMessage({ id: 'BehandlingHenlagtPanel.Header' }),
       erAktiv: erValgt,
       harApentAksjonspunkt: false,
-      status: vilkarUtfallType.IKKE_VURDERT,
+      status: VilkarUtfallType.IKKE_VURDERT,
       harHentetInitData: true,
     });
     setPanelValgt(erValgt);
@@ -36,7 +36,7 @@ const BehandlingHenlagtPanel: FunctionComponent<ProsessPanelInitProps & WrappedC
     <ProsessPanelWrapper
       erPanelValgt={erPanelValgt}
       erAksjonspunktOpent={false}
-      status={vilkarUtfallType.OPPFYLT}
+      status={VilkarUtfallType.OPPFYLT}
       dataState={RestApiState.SUCCESS}
     >
       <Normaltekst>

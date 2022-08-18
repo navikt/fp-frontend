@@ -1,14 +1,12 @@
 import React, {
   FunctionComponent, useMemo,
 } from 'react';
-
-import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import VilkarresultatMedOverstyringProsessIndex from '@fpsak-frontend/prosess-vilkar-overstyring';
-import {
-  Aksjonspunkt, KodeverkMedNavn, Medlemskap, Vilkar,
-} from '@fpsak-frontend/types';
+import { Aksjonspunkt, KodeverkMedNavn } from '@navikt/ft-types';
+import { KodeverkType, VilkarType } from '@navikt/ft-kodeverk';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
+
+import VilkarresultatMedOverstyringProsessIndex from '@fpsak-frontend/prosess-vilkar-overstyring';
+import { Medlemskap, Vilkar } from '@fpsak-frontend/types';
 import { OverstyringAksjonspunkter } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
 import skalViseProsessPanel from '../../utils/prosess/skalViseProsessPanel';
@@ -19,7 +17,7 @@ const avslagsarsakerES = ['1002', '1003', '1032'];
 const filtrerAvslagsarsaker = (
   avslagsarsaker: {[key: string]: KodeverkMedNavn[] },
   vilkarTypeKode: string,
-): KodeverkMedNavn[] => (vilkarTypeKode === vilkarType.FODSELSVILKARET_MOR
+): KodeverkMedNavn[] => (vilkarTypeKode === VilkarType.FODSELSVILKARET_MOR
   ? avslagsarsaker[vilkarTypeKode].filter((arsak) => !avslagsarsakerES.includes(arsak.kode))
   : avslagsarsaker[vilkarTypeKode]);
 
@@ -61,7 +59,7 @@ const OverstyringPanelDef: FunctionComponent<OwnProps> = ({
   const skalVises = skalViseProsessPanel(overstyrteAksjonspunkter, vilkarKoder, vilkar);
 
   // @ts-ignore Avslagsårsaker er ikkje støtta i kodeverk-typen. Fiks!
-  const avslagsarsaker = filtrerAvslagsarsaker(standardProps.alleKodeverk[kodeverkTyper.AVSLAGSARSAK], vilkar[0].vilkarType);
+  const avslagsarsaker = filtrerAvslagsarsaker(standardProps.alleKodeverk[KodeverkType.AVSLAGSARSAK], vilkar[0].vilkarType);
 
   if (!skalVises) {
     return null;

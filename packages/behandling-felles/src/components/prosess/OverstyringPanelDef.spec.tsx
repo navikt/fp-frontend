@@ -1,14 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { Behandling, Aksjonspunkt } from '@navikt/ft-types';
+import { AksjonspunktStatus, VilkarType, BehandlingStatus } from '@navikt/ft-kodeverk';
 
-import {
-  Behandling, AksessRettigheter, Vilkar, Aksjonspunkt,
-} from '@fpsak-frontend/types';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
+import { Vilkar, AksessRettigheter } from '@fpsak-frontend/types';
 import VilkarresultatMedOverstyringProsessIndex from '@fpsak-frontend/prosess-vilkar-overstyring';
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 
 import OverstyringPanelDef from './OverstyringPanelDef';
 
@@ -21,7 +18,7 @@ const fagsak = {
 const behandling = {
   uuid: '1',
   versjon: 2,
-  status: behandlingStatus.OPPRETTET,
+  status: BehandlingStatus.OPPRETTET,
   behandlingPaaVent: false,
 } as Behandling;
 const rettigheter = {
@@ -57,11 +54,11 @@ describe('<OverstyringPanelDef>', () => {
     });
 
     const vilkar = [{
-      vilkarType: vilkarType.MEDLEMSKAPSVILKARET,
+      vilkarType: VilkarType.MEDLEMSKAPSVILKARET,
     } as Vilkar];
     const aksjonspunkter = [{
       definisjon: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-      status: aksjonspunktStatus.OPPRETTET,
+      status: AksjonspunktStatus.OPPRETTET,
       kanLoses: true,
     }] as Aksjonspunkt[];
 

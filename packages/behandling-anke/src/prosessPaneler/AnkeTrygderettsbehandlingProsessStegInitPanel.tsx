@@ -1,12 +1,13 @@
 import React, {
   FunctionComponent, useState,
 } from 'react';
+import { Aksjonspunkt } from '@navikt/ft-types';
+import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AnkeTrygderettsbehandlingProsessIndex from '@fpsak-frontend/prosess-anke-trygderettsbehandling';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { Aksjonspunkt, AnkeVurdering } from '@fpsak-frontend/types';
+import { AnkeVurdering } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -89,7 +90,7 @@ const AnkeTrygderettsbehandlingProsessStegInitPanel: FunctionComponent<OwnProps 
             erFerdigbehandlet={false}
             venterTrygderett={!!data?.aksjonspunkter
               && data.aksjonspunkter.some((ap) => ap.definisjon === aksjonspunktCodes.AUTO_VENT_ANKE_MERKNADER_FRA_BRUKER
-              && ap.status === aksjonspunktStatus.OPPRETTET)}
+              && ap.status === AksjonspunktStatus.OPPRETTET)}
           />
           <AnkeTrygderettsbehandlingProsessIndex
             {...data}

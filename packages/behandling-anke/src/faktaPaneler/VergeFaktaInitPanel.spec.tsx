@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { Aksjonspunkt } from '@navikt/ft-types';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VergeFaktaIndex from '@fpsak-frontend/fakta-verge';
 import { FaktaDefaultInitPanel, FaktaDefaultInitPanelProps, FaktaPanelInitProps } from '@fpsak-frontend/behandling-felles';
-import { Aksjonspunkt } from '@fpsak-frontend/types';
 
 import VergeFaktaInitPanel from './VergeFaktaInitPanel';
 

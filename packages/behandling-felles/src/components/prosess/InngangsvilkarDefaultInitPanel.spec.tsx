@@ -1,23 +1,23 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
+import { Behandling, Aksjonspunkt } from '@navikt/ft-types';
+import {
+  VilkarUtfallType, BehandlingStatus, VilkarType, AksjonspunktStatus,
+} from '@navikt/ft-kodeverk';
 
 import * as Felles from '@fpsak-frontend/behandling-felles/src/utils/prosess/useStandardProsessPanelProps';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
-import { Behandling, Vilkar, Aksjonspunkt } from '@fpsak-frontend/types';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import { Vilkar } from '@fpsak-frontend/types';
 
 import InngangsvilkarDefaultInitPanel from './InngangsvilkarDefaultInitPanel';
 
 const behandling = {
   uuid: '1',
   versjon: 2,
-  status: behandlingStatus.OPPRETTET,
+  status: BehandlingStatus.OPPRETTET,
   behandlingPaaVent: false,
 } as Behandling;
 
@@ -28,7 +28,7 @@ const defaultProps = {
   behandling,
   alleMerknaderFraBeslutter: {},
   submitCallback: jest.fn(),
-  status: vilkarUtfallType.IKKE_VURDERT,
+  status: VilkarUtfallType.IKKE_VURDERT,
   alleKodeverk: kodeverk,
   isReadOnly: false,
   readOnlySubmitButton: false,
@@ -86,11 +86,11 @@ describe('<InngangsvilkarDefaultInitPanel>', () => {
   it('skal vise panel', async () => {
     jest.spyOn(Felles, 'default').mockImplementation(() => defaultProps);
     const vilkar = [{
-      vilkarType: vilkarType.MEDLEMSKAPSVILKARET,
+      vilkarType: VilkarType.MEDLEMSKAPSVILKARET,
     } as Vilkar];
     const aksjonspunkter = [{
       definisjon: aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-      status: aksjonspunktStatus.OPPRETTET,
+      status: AksjonspunktStatus.OPPRETTET,
       kanLoses: true,
       erAktivt: true,
     }] as Aksjonspunkt[];

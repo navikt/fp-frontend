@@ -3,23 +3,20 @@ import { shallow } from 'enzyme';
 import { render, screen, waitFor } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
 import userEvent from '@testing-library/user-event';
+import { Behandling, Fagsak, Aksjonspunkt } from '@navikt/ft-types';
+import {
+  AksjonspunktStatus, BehandlingType, FagsakYtelseType, VilkarUtfallType, TilbakekrevingVidereBehandling,
+} from '@navikt/ft-kodeverk';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import * as Felles from '@fpsak-frontend/behandling-felles/src/utils/prosess/useStandardProsessPanelProps';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import AvregningProsessIndex from '@fpsak-frontend/prosess-avregning';
 import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
-import {
-  Behandling, Fagsak, SimuleringResultat, StandardProsessPanelProps, Aksjonspunkt,
-} from '@fpsak-frontend/types';
+import { SimuleringResultat, StandardProsessPanelProps } from '@fpsak-frontend/types';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import tilbakekrevingVidereBehandling from '@fpsak-frontend/kodeverk/src/tilbakekrevingVidereBehandling';
 
 import { EsBehandlingApiKeys, requestEsApi } from '../data/esBehandlingApi';
 import SimuleringProsessStegInitPanel from './SimuleringProsessStegInitPanel';
@@ -28,7 +25,7 @@ const behandling = {
   uuid: 'test-uuid',
   versjon: 1,
   behandlingÅrsaker: [],
-  type: behandlingType.FORSTEGANGSSOKNAD,
+  type: BehandlingType.FORSTEGANGSSOKNAD,
 } as Behandling;
 
 const mottaker = {
@@ -61,7 +58,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
     behandling,
     alleMerknaderFraBeslutter: {},
     submitCallback,
-    status: vilkarUtfallType.IKKE_VURDERT,
+    status: VilkarUtfallType.IKKE_VURDERT,
     alleKodeverk: kodeverk,
     isReadOnly: false,
     readOnlySubmitButton: false,
@@ -69,7 +66,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
       definisjon: aksjonspunktCodes.VURDER_FEILUTBETALING,
       erAktivt: true,
       kanLoses: true,
-      status: aksjonspunktStatus.OPPRETTET,
+      status: AksjonspunktStatus.OPPRETTET,
     }] as Aksjonspunkt[],
     vilkar: [],
     isAksjonspunktOpen: true,
@@ -87,7 +84,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
       {
         key: EsBehandlingApiKeys.TILBAKEKREVINGVALG.name,
         data: {
-          videreBehandling: tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
+          videreBehandling: TilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
         },
       },
       { key: EsBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE.name, noRelLink: true, data: undefined },
@@ -100,12 +97,12 @@ describe('<SimuleringProsessStegInitPanel>', () => {
           menyData={[{
             id: ProsessStegCode.SIMULERING,
             harApentAksjonspunkt: false,
-            status: vilkarUtfallType.IKKE_VURDERT,
+            status: VilkarUtfallType.IKKE_VURDERT,
             harHentetInitData: true,
           }]}
           fagsak={{
             saksnummer: '123',
-            fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
+            fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
           } as Fagsak}
           behandling={behandling}
         />
@@ -123,7 +120,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
       menyData={[{
         id: ProsessStegCode.VEDTAK,
         harApentAksjonspunkt: true,
-        status: vilkarUtfallType.IKKE_VURDERT,
+        status: VilkarUtfallType.IKKE_VURDERT,
         harHentetInitData: true,
       }]}
       fagsak={{} as Fagsak}
@@ -133,7 +130,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
     const panel = wrapper.find<Required<ProsessDefaultInitPanelProps<INIT_DATA, any>> & ProsessPanelInitProps>(ProsessDefaultInitPanel);
 
     expect(panel.props().skalPanelVisesIMeny({} as StandardProsessPanelProps, RestApiState.SUCCESS)).toBe(false);
-    expect(panel.props().hentOverstyrtStatus({}, {} as StandardProsessPanelProps)).toBe(vilkarUtfallType.IKKE_VURDERT);
+    expect(panel.props().hentOverstyrtStatus({}, {} as StandardProsessPanelProps)).toBe(VilkarUtfallType.IKKE_VURDERT);
     expect(panel.props().renderPanel({}, {}).type).toEqual(AvregningProsessIndex);
   });
 
@@ -152,7 +149,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
       {
         key: EsBehandlingApiKeys.TILBAKEKREVINGVALG.name,
         data: {
-          videreBehandling: tilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
+          videreBehandling: TilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
         },
       },
       { key: EsBehandlingApiKeys.PREVIEW_TILBAKEKREVING_MESSAGE.name, noRelLink: true, data: undefined },
@@ -169,12 +166,12 @@ describe('<SimuleringProsessStegInitPanel>', () => {
           menyData={[{
             id: ProsessStegCode.SIMULERING,
             harApentAksjonspunkt: true,
-            status: vilkarUtfallType.IKKE_VURDERT,
+            status: VilkarUtfallType.IKKE_VURDERT,
             harHentetInitData: true,
           }]}
           fagsak={{
             saksnummer: '123',
-            fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
+            fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
           } as Fagsak}
           behandling={behandling}
         />
@@ -194,7 +191,7 @@ describe('<SimuleringProsessStegInitPanel>', () => {
     expect(axiosMock.history.post
       .find((a) => a.url === '/fptilbake/api/dokument/forhandsvis-varselbrev')?.data).toBe(JSON.stringify({
       behandlingUuid: 'test-uuid',
-      fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
+      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
       varseltekst: ' ',
     }));
   });

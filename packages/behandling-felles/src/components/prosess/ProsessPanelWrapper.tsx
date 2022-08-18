@@ -4,9 +4,9 @@ import React, {
 import classnames from 'classnames/bind';
 import { FormattedMessage } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
-
 import { LoadingPanel, FadingPanel } from '@navikt/ft-ui-komponenter';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+import { VilkarUtfallType } from '@navikt/ft-kodeverk';
+
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import styles from './prosessPanelWrapper.less';
@@ -50,7 +50,7 @@ const ProsessPanelWrapper: FunctionComponent<OwnProps> = ({
     return null;
   }
 
-  if (erPanelValgt && status === vilkarUtfallType.IKKE_VURDERT && !erAksjonspunktOpent) {
+  if (erPanelValgt && status === VilkarUtfallType.IKKE_VURDERT && !erAksjonspunktOpent) {
     return (
       <PanelContainer>
         <Normaltekst>

@@ -1,7 +1,7 @@
 import React from 'react';
 import sinon from 'sinon';
+import { Behandling } from '@navikt/ft-types';
 
-import { Behandling } from '@fpsak-frontend/types';
 import { shallowWithIntl, getIntlMock } from '@fpsak-frontend/utils-test/src/intl-enzyme-test-helper';
 
 import BehandlingHenlagtPanel from './BehandlingHenlagtPanel';

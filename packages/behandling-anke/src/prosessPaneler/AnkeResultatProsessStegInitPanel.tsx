@@ -1,15 +1,14 @@
 import React, {
   FunctionComponent, useCallback, useState,
 } from 'react';
+import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/ft-types';
+import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import AnkeResultatProsessIndex, { AnkeResultatBrevData } from '@fpsak-frontend/prosess-anke-resultat';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import {
-  Aksjonspunkt, AnkeVurdering, Behandling, Fagsak, ForhåndsvisMeldingParams,
-} from '@fpsak-frontend/types';
+import { AnkeVurdering, ForhåndsvisMeldingParams } from '@fpsak-frontend/types';
 import { ProsessDefaultInitPanel, ProsessPanelInitProps, useStandardProsessPanelProps } from '@fpsak-frontend/behandling-felles';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { createIntl, forhandsvisDokument } from '@navikt/ft-utils';
 
 import messages from '../../i18n/nb_NO.json';
@@ -100,7 +99,7 @@ const AnkeResultatProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
             lukkModal={() => { toggleAnkeModal(false); opneSokeside(); }}
             erFerdigbehandlet={!!data?.aksjonspunkter && data.aksjonspunkter
               .some((ap) => ap.definisjon === aksjonspunktCodes.VEDTAK_UTEN_TOTRINNSKONTROLL
-                && ap.status === aksjonspunktStatus.UTFORT)}
+                && ap.status === AksjonspunktStatus.UTFORT)}
             venterTrygderett={false}
           />
           <AnkeResultatProsessIndex

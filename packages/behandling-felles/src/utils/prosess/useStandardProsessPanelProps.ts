@@ -1,13 +1,11 @@
 import {
   useCallback, useContext, useEffect, useMemo, useState,
 } from 'react';
+import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/ft-types';
+import { AksjonspunktStatus, VilkarUtfallType, isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 
-import {
-  Aksjonspunkt, Behandling, Fagsak, StandardProsessPanelProps, Vilkar,
-} from '@fpsak-frontend/types';
+import { StandardProsessPanelProps, Vilkar } from '@fpsak-frontend/types';
 
-import aksjonspunktStatus, { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktType from '@fpsak-frontend/kodeverk/src/aksjonspunktType';
 import { ProsessAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
@@ -62,16 +60,16 @@ const getBekreftAksjonspunktProsessCallback = (
 const finnStatus = (vilkar: Vilkar[], aksjonspunkter: Aksjonspunkt[]) => {
   if (vilkar.length > 0) {
     const vilkarStatusCodes = vilkar.map((v) => v.vilkarStatus);
-    if (vilkarStatusCodes.some((vsc) => vsc === vilkarUtfallType.IKKE_VURDERT)) {
-      return vilkarUtfallType.IKKE_VURDERT;
+    if (vilkarStatusCodes.some((vsc) => vsc === VilkarUtfallType.IKKE_VURDERT)) {
+      return VilkarUtfallType.IKKE_VURDERT;
     }
-    return vilkarStatusCodes.every((vsc) => vsc === vilkarUtfallType.OPPFYLT) ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_OPPFYLT;
+    return vilkarStatusCodes.every((vsc) => vsc === VilkarUtfallType.OPPFYLT) ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_OPPFYLT;
   }
 
   if (aksjonspunkter.length > 0) {
-    return aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status)) ? vilkarUtfallType.IKKE_VURDERT : vilkarUtfallType.OPPFYLT;
+    return aksjonspunkter.some((ap) => isAksjonspunktOpen(ap.status)) ? VilkarUtfallType.IKKE_VURDERT : VilkarUtfallType.OPPFYLT;
   }
-  return vilkarUtfallType.IKKE_VURDERT;
+  return VilkarUtfallType.IKKE_VURDERT;
 };
 
 type Data = {
@@ -107,11 +105,11 @@ const useStandardProsessPanelProps = (
   const alleMerknaderFraBeslutter = useMemo(() => getAlleMerknaderFraBeslutter(value.behandling, aksjonspunkterForSteg),
     [value.behandling.versjon, aksjonspunkterForSteg]);
 
-  const harApneAksjonspunkter = aksjonspunkterForSteg.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET && ap.kanLoses);
+  const harApneAksjonspunkter = aksjonspunkterForSteg.some((ap) => ap.status === AksjonspunktStatus.OPPRETTET && ap.kanLoses);
 
   const status = useMemo(() => finnStatus(vilkarForSteg, aksjonspunkterForSteg), [vilkarForSteg, aksjonspunkterForSteg]);
 
-  const readOnlySubmitButton = (!(aksjonspunkterForSteg.some((ap) => ap.kanLoses)) || vilkarUtfallType.OPPFYLT === status);
+  const readOnlySubmitButton = (!(aksjonspunkterForSteg.some((ap) => ap.kanLoses)) || VilkarUtfallType.OPPFYLT === status);
 
   const standardlagringSideEffekter = useCallback(() => () => {
     value.oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);

@@ -2,13 +2,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import { render, screen } from '@testing-library/react';
+import { Aksjonspunkt, Behandling } from '@navikt/ft-types';
+import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import * as Felles from '@fpsak-frontend/behandling-felles/src/utils/prosess/useStandardProsessPanelProps';
 import { ProsessDefaultInitPanel, ProsessDefaultInitPanelProps, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
-import { Aksjonspunkt, Behandling } from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
 import { AnkeBehandlingApiKeys, requestAnkeApi } from '../data/ankeBehandlingApi';
@@ -32,7 +32,7 @@ describe('<AnkeTrygderettsbehandlingProsessStegInitPanel>', () => {
     behandling,
     alleMerknaderFraBeslutter: {},
     submitCallback,
-    status: vilkarUtfallType.IKKE_VURDERT,
+    status: VilkarUtfallType.IKKE_VURDERT,
     alleKodeverk: kodeverk,
     isReadOnly: false,
     readOnlySubmitButton: false,

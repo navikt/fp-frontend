@@ -2,9 +2,8 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import Modal from 'nav-frontend-modal';
-
 import { Hovedknapp } from 'nav-frontend-knapper';
-import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
+import { BehandlingResultatType } from '@navikt/ft-kodeverk';
 
 import IverksetterVedtakStatusModal from './IverksetterVedtakStatusModal';
 
@@ -15,7 +14,7 @@ describe('<IverksetterVedtakStatusModal>', () => {
       visModal
       lukkModal={closeEventCallback}
       behandlingsresultat={{
-        type: behandlingResultatType.AVSLATT,
+        type: BehandlingResultatType.AVSLATT,
       }}
     />);
 

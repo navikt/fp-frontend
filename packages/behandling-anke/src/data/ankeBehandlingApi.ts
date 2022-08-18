@@ -1,8 +1,8 @@
+import { Aksjonspunkt, Behandling, Vilkar } from '@navikt/ft-types';
+
 import { RestApiConfigBuilder, createRequestApi, RestKey } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
-import {
-  Aksjonspunkt, AnkeVurdering, Behandling, ForhåndsvisMeldingParams, Vilkar, Verge,
-} from '@fpsak-frontend/types';
+import { AnkeVurdering, ForhåndsvisMeldingParams, Verge } from '@fpsak-frontend/types';
 import { SettPaVentParams } from '@fpsak-frontend/behandling-felles';
 
 export const AnkeBehandlingApiKeys = {

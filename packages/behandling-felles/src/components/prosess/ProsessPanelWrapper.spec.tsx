@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { FormattedMessage } from 'react-intl';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
+import { VilkarUtfallType } from '@navikt/ft-kodeverk';
+
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import ProsessPanelWrapper from './ProsessPanelWrapper';
@@ -14,7 +14,7 @@ describe('<ProsessPanelWrapper>', () => {
       <ProsessPanelWrapper
         erPanelValgt={false}
         erAksjonspunktOpent
-        status={vilkarUtfallType.IKKE_VURDERT}
+        status={VilkarUtfallType.IKKE_VURDERT}
         dataState={RestApiState.LOADING}
         skalSkjulePanel={false}
       >
@@ -32,7 +32,7 @@ describe('<ProsessPanelWrapper>', () => {
       <ProsessPanelWrapper
         erPanelValgt
         erAksjonspunktOpent={false}
-        status={vilkarUtfallType.IKKE_VURDERT}
+        status={VilkarUtfallType.IKKE_VURDERT}
         dataState={RestApiState.LOADING}
         skalSkjulePanel={false}
       >
@@ -49,7 +49,7 @@ describe('<ProsessPanelWrapper>', () => {
       <ProsessPanelWrapper
         erPanelValgt
         erAksjonspunktOpent
-        status={vilkarUtfallType.IKKE_VURDERT}
+        status={VilkarUtfallType.IKKE_VURDERT}
         dataState={RestApiState.LOADING}
         skalSkjulePanel={false}
       >
@@ -66,7 +66,7 @@ describe('<ProsessPanelWrapper>', () => {
       <ProsessPanelWrapper
         erPanelValgt
         erAksjonspunktOpent
-        status={vilkarUtfallType.IKKE_VURDERT}
+        status={VilkarUtfallType.IKKE_VURDERT}
         dataState={RestApiState.SUCCESS}
         skalSkjulePanel={false}
       >

@@ -2,11 +2,10 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
+import { Aksjonspunkt, AlleKodeverk, Behandling } from '@navikt/ft-types';
+import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { Aksjonspunkt, AlleKodeverk, Behandling } from '@fpsak-frontend/types';
 import Modal from 'nav-frontend-modal';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
@@ -18,8 +17,8 @@ describe('<BehandlingPaVent>', () => {
   const behandling = {
     uuid: '1',
     versjon: 1,
-    status: behandlingStatus.BEHANDLING_UTREDES,
-    type: behandlingType.FORSTEGANGSSOKNAD,
+    status: BehandlingStatus.BEHANDLING_UTREDES,
+    type: BehandlingType.FORSTEGANGSSOKNAD,
     behandlingPaaVent: false,
     behandlingHenlagt: false,
     fristBehandlingPåVent: '2030-10-10',

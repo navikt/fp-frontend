@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { Behandling } from '@fpsak-frontend/types';
+import { Behandling } from '@navikt/ft-types';
 
 import ProsessContainer from './prosess/ProsessContainer';
 import FaktaContainer from './fakta/FaktaContainer';

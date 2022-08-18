@@ -1,10 +1,9 @@
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import {
+  VilkarType, AksjonspunktStatus, BehandlingType, BehandlingStatus, VilkarUtfallType,
+} from '@navikt/ft-kodeverk';
+import { Behandling } from '@navikt/ft-types';
+
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import { Behandling } from '@fpsak-frontend/types';
 
 import { erReadOnly, harBehandlingReadOnlyStatus } from './readOnlyPanelUtils';
 
@@ -12,14 +11,14 @@ describe('<readOnlyUtils>', () => {
   const behandling = {
     uuid: '1',
     versjon: 1,
-    status: behandlingStatus.BEHANDLING_UTREDES,
-    type: behandlingType.FORSTEGANGSSOKNAD,
+    status: BehandlingStatus.BEHANDLING_UTREDES,
+    type: BehandlingType.FORSTEGANGSSOKNAD,
     behandlingPaaVent: false,
     behandlingHenlagt: false,
   };
 
   const aksjonspunkter = [{
-    status: aksjonspunktStatus.OPPRETTET,
+    status: AksjonspunktStatus.OPPRETTET,
     definisjon: aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
     kanLoses: true,
     erAktivt: true,
@@ -28,8 +27,8 @@ describe('<readOnlyUtils>', () => {
   }];
 
   const vilkar = [{
-    vilkarType: vilkarType.FODSELSVILKARET_MOR,
-    vilkarStatus: vilkarUtfallType.OPPFYLT,
+    vilkarType: VilkarType.FODSELSVILKARET_MOR,
+    vilkarStatus: VilkarUtfallType.OPPFYLT,
     overstyrbar: true,
     merknadParametere: {},
   }];

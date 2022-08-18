@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import VergeFaktaIndex from '@fpsak-frontend/fakta-verge';
-import { Behandling } from '@fpsak-frontend/types';
+import { Behandling } from '@navikt/ft-types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
 const aksjonspunkter = [{

@@ -1,8 +1,7 @@
 import React, {
   FunctionComponent, ReactElement, useCallback, useEffect, useMemo, useState, useRef,
 } from 'react';
-
-import { Behandling } from '@fpsak-frontend/types';
+import { Behandling } from '@navikt/ft-types';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import BehandlingHenlagtPanel from './BehandlingHenlagtPanel';

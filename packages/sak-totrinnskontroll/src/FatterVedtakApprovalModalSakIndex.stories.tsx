@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingResultatType from '@fpsak-frontend/kodeverk/src/behandlingResultatType';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import { Behandling } from '@fpsak-frontend/types';
+import { Behandling } from '@navikt/ft-types';
 import FatterVedtakTotrinnskontrollModalSakIndex from './FatterVedtakTotrinnskontrollModalSakIndex';
 
 export default {
