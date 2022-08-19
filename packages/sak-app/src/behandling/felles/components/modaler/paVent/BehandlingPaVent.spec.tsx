@@ -47,8 +47,6 @@ describe('<BehandlingPaVent>', () => {
         <BehandlingPaVent
           behandling={behandling as Behandling}
           requestApi={requestMock}
-          oppdaterPaVentKey={PA_VENT_KEY}
-          aksjonspunktKey={AKSJONSPUNKT_KEY}
           kodeverk={kodeverk}
           hentBehandling={jest.fn()}
         />
@@ -72,8 +70,6 @@ describe('<BehandlingPaVent>', () => {
               behandlingPaaVent: true,
             } as Behandling}
             requestApi={requestMock}
-            oppdaterPaVentKey={PA_VENT_KEY}
-            aksjonspunktKey={AKSJONSPUNKT_KEY}
             kodeverk={kodeverk}
             hentBehandling={jest.fn()}
           />
@@ -96,8 +92,6 @@ describe('<BehandlingPaVent>', () => {
             behandlingPaaVent: true,
           } as Behandling}
           requestApi={requestMock}
-          oppdaterPaVentKey={PA_VENT_KEY}
-          aksjonspunktKey={AKSJONSPUNKT_KEY}
           kodeverk={kodeverk}
           hentBehandling={jest.fn()}
         />

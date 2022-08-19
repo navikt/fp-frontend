@@ -1,17 +1,19 @@
 import React, {
   FunctionComponent, useCallback, useState,
 } from 'react';
+import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/ft-types';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import KlagevurderingProsessIndex, { AksjonspunktVerdier, KlageVurderingBrevData } from '@fpsak-frontend/prosess-klagevurdering';
-import {
-  Aksjonspunkt, Behandling, Fagsak, ForhåndsvisMeldingParams, KlageVurdering,
-} from '@fpsak-frontend/types';
+import { ForhåndsvisMeldingParams, KlageVurdering } from '@fpsak-frontend/types';
 import klageVurderingKodeverk from '@fpsak-frontend/kodeverk/src/klageVurdering';
-import { useStandardProsessPanelProps, ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
+import ProsessDefaultInitPanel from '../../felles/components/prosess/ProsessDefaultInitPanel';
+import ProsessPanelInitProps from '../../felles/types/prosessPanelInitProps';
+import useStandardProsessPanelProps from '../../felles/utils/prosess/useStandardProsessPanelProps';
+import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import { restApiKlageHooks, KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';
 import KlageBehandlingModal from '../modaler/KlageBehandlingModal';
 
@@ -65,7 +67,7 @@ const getLagringSideeffekter = (
   };
 };
 
-const ENDEPUNKTER_INIT_DATA = [KlageBehandlingApiKeys.AKSJONSPUNKTER];
+const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
 }
@@ -103,7 +105,7 @@ const VurderingFellesProsessStegInitPanel: FunctionComponent<OwnProps & ProsessP
     ? getLagringSideeffekter(toggleKlageModal, toggleOppdatereFagsakContext, oppdaterProsessStegOgFaktaPanelIUrl)
     : undefined;
 
-  const { startRequest: forhandsvisMelding } = restApiKlageHooks.useRestApiRunner(KlageBehandlingApiKeys.PREVIEW_MESSAGE);
+  const { startRequest: forhandsvisMelding } = restApiKlageHooks.useRestApiRunner(BehandlingFellesApiKeys.PREVIEW_MESSAGE);
   const previewCallback = useCallback(lagForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
     [standardPanelProps.behandling.versjon]);
 

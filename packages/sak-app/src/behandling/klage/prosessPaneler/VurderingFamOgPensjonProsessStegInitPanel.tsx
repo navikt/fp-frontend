@@ -1,17 +1,14 @@
 import React, {
   FunctionComponent,
 } from 'react';
+import { useIntl } from 'react-intl';
+import { Fagsak } from '@navikt/ft-types';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { Fagsak } from '@fpsak-frontend/types';
-import { ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
-import { createIntl } from '@navikt/ft-utils';
 
-import messages from '../../i18n/nb_NO.json';
+import ProsessPanelInitProps from '../../felles/types/prosessPanelInitProps';
 import VurderingFellesProsessStegInitPanel from './VurderingFellesProsessStegInitPanel';
-
-const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.BEHANDLE_KLAGE_NFP];
 
@@ -37,7 +34,7 @@ const VurderingFamOgPensjonProsessStegInitPanel: FunctionComponent<OwnProps & Pr
     oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
     aksjonspunktKoder={AKSJONSPUNKT_KODER}
     prosessPanelKode={ProsessStegCode.KLAGE_NAV_FAMILIE_OG_PENSJON}
-    prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.CheckKlageNFP' })}
+    prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.CheckKlageNFP' })}
   />
 );
 

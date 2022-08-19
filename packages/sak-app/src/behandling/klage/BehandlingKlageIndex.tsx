@@ -2,18 +2,21 @@ import React, { FunctionComponent } from 'react';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import {
-  BehandlingContainer, StandardBehandlingProps, StandardPropsProvider, BehandlingPaVent,
-  useInitRequestApi, useLagreAksjonspunkt, useBehandling, useInitBehandlingHandlinger,
-} from '@fpsak-frontend/behandling-felles';
 
-import { requestKlageApi, KlageBehandlingApiKeys } from './data/klageBehandlingApi';
+import BehandlingContainer from '../felles/components/BehandlingContainer';
+import StandardBehandlingProps from '../felles/types/standardBehandlingProps';
+import BehandlingPaVent from '../felles/components/modaler/paVent/BehandlingPaVent';
+import StandardPropsProvider from '../felles/utils/standardPropsStateContext';
+import {
+  useBehandling, useInitBehandlingHandlinger, useInitRequestApi, useLagreAksjonspunkt,
+} from '../felles/utils/indexHooks';
+import { requestKlageApi } from './data/klageBehandlingApi';
 import FormKravFamOgPensjonProsessStegInitPanel from './prosessPaneler/FormKravFamOgPensjonProsessStegInitPanel';
 import VurderingFamOgPensjonProsessStegInitPanel from './prosessPaneler/VurderingFamOgPensjonProsessStegInitPanel';
 import FormKravKlageInstansProsessStegInitPanel from './prosessPaneler/FormKravKlageInstansProsessStegInitPanel';
 import VurderingKlageInstansProsessStegInitPanel from './prosessPaneler/VurderingKlageInstansProsessStegInitPanel';
 import KlageresultatProsessStegInitPanel from './prosessPaneler/KlageresultatProsessStegInitPanel';
-import VergeFaktaInitPanel from './faktaPaneler/VergeFaktaInitPanel';
+import VergeFaktaInitPanel from '../felles/paneler/fakta/VergeFaktaInitPanel';
 
 interface OwnProps {
   alleBehandlinger: {
@@ -44,14 +47,12 @@ const BehandlingKlageIndex: FunctionComponent<OwnProps & StandardBehandlingProps
   const {
     behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
   } = useBehandling(
-    requestKlageApi, KlageBehandlingApiKeys.BEHANDLING_KLAGE, behandlingUuid, oppdaterBehandlingVersjon,
+    requestKlageApi, behandlingUuid, oppdaterBehandlingVersjon,
   );
 
-  const { lagreAksjonspunkter } = useLagreAksjonspunkt(
-    requestKlageApi, setBehandling, KlageBehandlingApiKeys.SAVE_AKSJONSPUNKT,
-  );
+  const { lagreAksjonspunkter } = useLagreAksjonspunkt(requestKlageApi, setBehandling);
 
-  useInitBehandlingHandlinger(requestKlageApi, KlageBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling, behandling);
+  useInitBehandlingHandlinger(requestKlageApi, behandlingEventHandler, hentBehandling, setBehandling, behandling);
 
   if (!behandling) {
     return <LoadingPanel />;
@@ -64,8 +65,6 @@ const BehandlingKlageIndex: FunctionComponent<OwnProps & StandardBehandlingProps
         hentBehandling={hentBehandling}
         kodeverk={kodeverk}
         requestApi={requestKlageApi}
-        oppdaterPaVentKey={KlageBehandlingApiKeys.UPDATE_ON_HOLD}
-        aksjonspunktKey={KlageBehandlingApiKeys.AKSJONSPUNKTER}
       />
       <StandardPropsProvider
         behandling={behandling}
@@ -81,6 +80,7 @@ const BehandlingKlageIndex: FunctionComponent<OwnProps & StandardBehandlingProps
           valgtProsessSteg={valgtProsessSteg}
           valgtFaktaSteg={valgtFaktaSteg}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+          requestApi={requestKlageApi}
           hentFaktaPaneler={(props) => (
             <VergeFaktaInitPanel {...props} />
           )}

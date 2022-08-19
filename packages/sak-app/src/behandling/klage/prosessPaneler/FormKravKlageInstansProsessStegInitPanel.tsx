@@ -1,24 +1,23 @@
 import React, {
   FunctionComponent, useMemo,
 } from 'react';
+import { useIntl } from 'react-intl';
+import { Aksjonspunkt } from '@navikt/ft-types';
+import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import FormkravProsessIndex from '@fpsak-frontend/prosess-formkrav';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { Aksjonspunkt, KlageVurdering } from '@fpsak-frontend/types';
-import { ProsessDefaultInitPanel, ProsessPanelInitProps } from '@fpsak-frontend/behandling-felles';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import { createIntl } from '@navikt/ft-utils';
+import { KlageVurdering } from '@fpsak-frontend/types';
 
-import messages from '../../i18n/nb_NO.json';
+import ProsessDefaultInitPanel from '../../felles/components/prosess/ProsessDefaultInitPanel';
+import ProsessPanelInitProps from '../../felles/types/prosessPanelInitProps';
+import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import { KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';
-
-const intl = createIntl(messages);
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDERING_AV_FORMKRAV_KLAGE_KA];
 
-const ENDEPUNKTER_INIT_DATA = [KlageBehandlingApiKeys.AKSJONSPUNKTER];
+const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
 }
@@ -42,9 +41,10 @@ const FormKravKlageInstansProsessStegInitPanel: FunctionComponent<OwnProps & Pro
   alleBehandlinger,
   ...props
 }) => {
+  const intl = useIntl();
   const avsluttedeBehandlinger = useMemo(() => alleBehandlinger
-    .filter((b) => b.status === behandlingStatus.AVSLUTTET)
-    .filter((b) => b.type !== behandlingType.KLAGE && b.type !== behandlingType.ANKE), [alleBehandlinger]);
+    .filter((b) => b.status === BehandlingStatus.AVSLUTTET)
+    .filter((b) => b.type !== BehandlingType.KLAGE && b.type !== BehandlingType.ANKE), [alleBehandlinger]);
 
   return (
     <ProsessDefaultInitPanel<EndepunktInitData, EndepunktPanelData>

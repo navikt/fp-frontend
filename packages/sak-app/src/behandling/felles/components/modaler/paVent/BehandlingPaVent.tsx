@@ -6,7 +6,7 @@ import {
   Behandling, Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving,
 } from '@navikt/ft-types';
 
-import { RequestApi, RestKey } from '@fpsak-frontend/rest-api';
+import { RequestApi } from '@fpsak-frontend/rest-api';
 import { RestApiHooks } from '@fpsak-frontend/rest-api-hooks';
 import SettPaVentModalIndex from '@fpsak-frontend/modal-sett-pa-vent';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';

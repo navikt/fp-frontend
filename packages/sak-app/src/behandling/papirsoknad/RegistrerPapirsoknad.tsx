@@ -1,12 +1,13 @@
 import React, {
   FunctionComponent, useState, useCallback, useMemo,
 } from 'react';
+import {
+  Behandling, AlleKodeverk, Fagsak, Aksjonspunkt,
+} from '@navikt/ft-types';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import {
-  Behandling, AlleKodeverk, Fagsak, AksessRettigheter, Aksjonspunkt,
-} from '@fpsak-frontend/types';
-import { LoadingPanel } from '@navikt/ft-ui-komponenter';
+import { AksessRettigheter } from '@fpsak-frontend/types';
 import { AsyncPollingStatus } from '@fpsak-frontend/rest-api';
 import { RegistrerPapirsoknadPanel, SoknadRegistrertModal } from '@fpsak-frontend/papirsoknad';
 

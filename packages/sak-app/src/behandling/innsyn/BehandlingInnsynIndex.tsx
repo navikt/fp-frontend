@@ -2,12 +2,15 @@ import React, { FunctionComponent } from 'react';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import {
-  BehandlingContainer, StandardBehandlingProps, StandardPropsProvider, BehandlingPaVent,
-  useInitRequestApi, useLagreAksjonspunkt, useBehandling, useInitBehandlingHandlinger,
-} from '@fpsak-frontend/behandling-felles';
 
-import { requestInnsynApi, InnsynBehandlingApiKeys } from './data/innsynBehandlingApi';
+import BehandlingContainer from '../felles/components/BehandlingContainer';
+import StandardBehandlingProps from '../felles/types/standardBehandlingProps';
+import BehandlingPaVent from '../felles/components/modaler/paVent/BehandlingPaVent';
+import StandardPropsProvider from '../felles/utils/standardPropsStateContext';
+import {
+  useBehandling, useInitBehandlingHandlinger, useInitRequestApi, useLagreAksjonspunkt,
+} from '../felles/utils/indexHooks';
+import { requestInnsynApi } from './data/innsynBehandlingApi';
 import BehandleInnsynProsessStegInitPanel from './prosessPaneler/BehandleInnsynProsessStegInitPanel';
 import InnsynVedtakProsessStegInitPanel from './prosessPaneler/InnsynVedtakProsessStegInitPanel';
 
@@ -29,14 +32,12 @@ const BehandlingInnsynIndex: FunctionComponent<StandardBehandlingProps> = ({
   const {
     behandling, behandlingState, hentBehandling, setBehandling, toggleOppdateringAvFagsakOgBehandling,
   } = useBehandling(
-    requestInnsynApi, InnsynBehandlingApiKeys.BEHANDLING_INNSYN, behandlingUuid, oppdaterBehandlingVersjon,
+    requestInnsynApi, behandlingUuid, oppdaterBehandlingVersjon,
   );
 
-  const { lagreAksjonspunkter } = useLagreAksjonspunkt(
-    requestInnsynApi, setBehandling, InnsynBehandlingApiKeys.SAVE_AKSJONSPUNKT,
-  );
+  const { lagreAksjonspunkter } = useLagreAksjonspunkt(requestInnsynApi, setBehandling);
 
-  useInitBehandlingHandlinger(requestInnsynApi, InnsynBehandlingApiKeys, behandlingEventHandler, hentBehandling, setBehandling, behandling);
+  useInitBehandlingHandlinger(requestInnsynApi, behandlingEventHandler, hentBehandling, setBehandling, behandling);
 
   if (!behandling) {
     return <LoadingPanel />;
@@ -49,8 +50,6 @@ const BehandlingInnsynIndex: FunctionComponent<StandardBehandlingProps> = ({
         hentBehandling={hentBehandling}
         kodeverk={kodeverk}
         requestApi={requestInnsynApi}
-        oppdaterPaVentKey={InnsynBehandlingApiKeys.UPDATE_ON_HOLD}
-        aksjonspunktKey={InnsynBehandlingApiKeys.AKSJONSPUNKTER}
       />
       <StandardPropsProvider
         behandling={behandling}
@@ -66,6 +65,7 @@ const BehandlingInnsynIndex: FunctionComponent<StandardBehandlingProps> = ({
           valgtProsessSteg={valgtProsessSteg}
           valgtFaktaSteg={valgtFaktaSteg}
           oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
+          requestApi={requestInnsynApi}
           hentProsessPaneler={(props) => (
             <>
               <BehandleInnsynProsessStegInitPanel {...props} fagsak={fagsak} />

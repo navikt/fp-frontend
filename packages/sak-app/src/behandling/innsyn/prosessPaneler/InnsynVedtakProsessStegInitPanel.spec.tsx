@@ -2,29 +2,29 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
 import userEvent from '@testing-library/user-event';
+import {
+  AksjonspunktStatus, FagsakYtelseType, BehandlingStatus, VilkarUtfallType,
+} from '@navikt/ft-kodeverk';
+import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/ft-types';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
-import * as Felles from '@fpsak-frontend/behandling-felles/src/utils/prosess/useStandardProsessPanelProps';
-import { Aksjonspunkt, Behandling, Fagsak } from '@fpsak-frontend/types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 
+import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
+import * as Felles from '../../felles/utils/prosess/useStandardProsessPanelProps';
 import { requestInnsynApi, InnsynBehandlingApiKeys } from '../data/innsynBehandlingApi';
 import InnsynVedtakProsessStegInitPanel from './InnsynVedtakProsessStegInitPanel';
 
 const fagsak = {
-  fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
 } as Fagsak;
 
 const behandling = {
   uuid: 'test-uuid',
   versjon: 1,
-  status: behandlingStatus.OPPRETTET,
+  status: BehandlingStatus.OPPRETTET,
   behandlingPaaVent: false,
 } as Behandling;
 
@@ -35,12 +35,12 @@ const aksjonspunkter = [{
   definisjon: aksjonspunktCodes.FORESLA_VEDTAK,
   erAktivt: true,
   kanLoses: true,
-  status: aksjonspunktStatus.OPPRETTET,
+  status: AksjonspunktStatus.OPPRETTET,
 }, {
   definisjon: aksjonspunktCodes.VURDER_INNSYN,
   erAktivt: false,
   kanLoses: false,
-  status: aksjonspunktStatus.UTFORT,
+  status: AksjonspunktStatus.UTFORT,
   begrunnelse: 'Dette er en begrunnelse',
 }] as Aksjonspunkt[];
 
@@ -54,7 +54,7 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
     behandling,
     alleMerknaderFraBeslutter: {},
     submitCallback,
-    status: vilkarUtfallType.IKKE_VURDERT,
+    status: VilkarUtfallType.IKKE_VURDERT,
     alleKodeverk: kodeverk,
     isReadOnly: false,
     readOnlySubmitButton: false,
@@ -66,7 +66,7 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
 
   it('skal rendre komponent korrekt', async () => {
     const data = [
-      { key: InnsynBehandlingApiKeys.AKSJONSPUNKTER.name, data: aksjonspunkter },
+      { key: BehandlingFellesApiKeys.AKSJONSPUNKTER.name, data: aksjonspunkter },
       { key: InnsynBehandlingApiKeys.INNSYN.name, data: innsyn },
       { key: InnsynBehandlingApiKeys.INNSYN_DOKUMENTER.name, data: [] },
     ];
@@ -88,10 +88,10 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
 
   it('skal vise forhåndsvisning av melding', async () => {
     const data = [
-      { key: InnsynBehandlingApiKeys.AKSJONSPUNKTER.name, data: aksjonspunkter },
+      { key: BehandlingFellesApiKeys.AKSJONSPUNKTER.name, data: aksjonspunkter },
       { key: InnsynBehandlingApiKeys.INNSYN.name, data: innsyn },
       { key: InnsynBehandlingApiKeys.INNSYN_DOKUMENTER.name, data: [] },
-      { key: InnsynBehandlingApiKeys.PREVIEW_MESSAGE.name, data: undefined },
+      { key: BehandlingFellesApiKeys.PREVIEW_MESSAGE.name, data: undefined },
     ];
 
     let axiosMock: MockAdapter;
@@ -123,7 +123,7 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
       dokumentMal: dokumentMalType.INNSYN_SVAR,
       gjelderVedtak: true,
       behandlingUuid: 'test-uuid',
-      fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     }));
   });
 });

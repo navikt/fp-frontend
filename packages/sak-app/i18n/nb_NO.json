@@ -4,7 +4,6 @@
   "Behandlingspunkt.AnkeResultat": "Resultat",
   "Behandlingspunkt.AnkeMerknader": "Trygderetten",
   "Behandlingspunkt.Ankebehandling": "Ankebehandling",
-  "RegistrereVergeInfoPanel.Info": "Verge/fullmektig",
 
   "AnkeVurderingModal.VedtakOversendt": "Behandlingen er sendt.",
   "AnkeVurderingModal.Ferdigbehandlet": "Anken er ferdigbehandlet.",
@@ -31,6 +30,24 @@
   "BehandlingHenlagtPanel.Henlagt": "Behandlingen er henlagt",
   "FaktaPanel.FaktaOm": "Fakta om",
   "HelpText.Aksjonspunkt": "Aksjonspunkt",
+
+  "Behandlingspunkt.Vedtak": "Vedtak",
+  "Behandlingspunkt.Innsyn": "Behandle innsyn",
+
+  "Behandlingspunkt.CheckKlageNFP": "Behandling Vedtaksinstans",
+  "Behandlingspunkt.FormkravKlageKA": "Formkrav Klageinstans",
+  "Behandlingspunkt.CheckKlageNK": "Behandling Klageinstans",
+  "Behandlingspunkt.ResultatKlage": "Resultat",
+  "Behandlingspunkt.FormkravKlageNFP": "Formkrav Vedtaksinstans",
+  "RegistrereVergeInfoPanel.Info": "Verge/fullmektig",
+
+  "KlageVurderingModal.VedtakOversendt": "Innstilling er sendt til NAV Klageinstans.",
+  "KlageVurderingModal.ModalDescription": "Vedtaket er stadfestet. Du kommer nå til forsiden",
+  "KlageVurderingModal.GoToSearchPage": "Du kommer nå til forsiden.",
+  "KlageVurderingModal.Ok": "OK",
+
+  "FatterVedtakStatusModal.KlagenErFerdigbehandlet": "Klagen er ferdigbehandlet",
+  "FatterVedtakStatusModal.SendtKlageResultatTilMedunderskriver": "Forslag til klageresultat er sendt til medunderskriver",
 
   "Rest.ErrorMessage.General": "Noe feilet. Feilen kan være forbigående. Prøv og behandle saken litt senere. Om feilen oppstår igjen meld den inn via porten.",
   "Rest.ErrorMessage.DownTime": "Saksbehandlingsløsningen venter på et annet system som har nedetid nå. Du trenger ikke melde inn en feil, men prøv igjen {date} kl. {time}.\n{message}",

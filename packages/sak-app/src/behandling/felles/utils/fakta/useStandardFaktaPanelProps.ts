@@ -1,11 +1,10 @@
 import {
   useContext, useEffect, useMemo, useState,
 } from 'react';
+import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/ft-types';
+import { isAksjonspunktOpen } from '@navikt/ft-kodeverk';
 
-import {
-  Aksjonspunkt, Behandling, Fagsak, StandardFaktaPanelProps, Vilkar,
-} from '@fpsak-frontend/types';
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
+import { StandardFaktaPanelProps, Vilkar } from '@fpsak-frontend/types';
 import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import { erReadOnly } from '../readOnlyPanelUtils';

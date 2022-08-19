@@ -1,42 +1,42 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
+import { FagsakYtelseType, BehandlingType, BehandlingStatus } from '@navikt/ft-kodeverk';
+import { AlleKodeverk, Fagsak } from '@navikt/ft-types';
 
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import { AksessRettigheter, AlleKodeverk, Fagsak } from '@fpsak-frontend/types';
+import { AksessRettigheter } from '@fpsak-frontend/types';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
+import { BehandlingFellesApiKeys } from '../felles/data/behandlingFellesApi';
 import BehandlingInnsynIndex from './BehandlingInnsynIndex';
-import { requestInnsynApi, InnsynBehandlingApiKeys } from './data/innsynBehandlingApi';
+import { requestInnsynApi } from './data/innsynBehandlingApi';
 
 describe('<BehandlingInnsynIndex>', () => {
   it('skal vise paneler korrekt i prosess og faktameny', async () => {
     const data = [
       {
-        key: InnsynBehandlingApiKeys.BEHANDLING_INNSYN.name,
+        key: BehandlingFellesApiKeys.BEHANDLING.name,
         noRelLink: true,
         data: {
           uuid: 'test-uuid',
           versjon: 1,
-          status: behandlingStatus.OPPRETTET,
-          type: behandlingType.DOKUMENTINNSYN,
+          status: BehandlingStatus.OPPRETTET,
+          type: BehandlingType.DOKUMENTINNSYN,
           links: [{
-            href: InnsynBehandlingApiKeys.UPDATE_ON_HOLD.name,
+            href: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name,
             rel: 'update',
             type: 'POST',
           }, {
-            href: InnsynBehandlingApiKeys.AKSJONSPUNKTER.name,
+            href: BehandlingFellesApiKeys.AKSJONSPUNKTER.name,
             rel: 'aksjonspunkter',
             type: 'GET',
           }],
         },
       },
-      { key: InnsynBehandlingApiKeys.PREVIEW_MESSAGE.name, noRelLink: true, data: undefined },
-      { key: InnsynBehandlingApiKeys.UPDATE_ON_HOLD.name, data: undefined },
-      { key: InnsynBehandlingApiKeys.AKSJONSPUNKTER.name, data: [] },
+      { key: BehandlingFellesApiKeys.PREVIEW_MESSAGE.name, noRelLink: true, data: undefined },
+      { key: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name, data: undefined },
+      { key: BehandlingFellesApiKeys.AKSJONSPUNKTER.name, data: [] },
     ];
 
     await act(async () => {
@@ -53,7 +53,7 @@ describe('<BehandlingInnsynIndex>', () => {
             // @ts-ignore
             kodeverk={alleKodeverk as AlleKodeverk}
             fagsak={{
-              fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+              fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
             } as Fagsak}
             rettigheter={{
               writeAccess: {

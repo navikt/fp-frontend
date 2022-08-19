@@ -1,33 +1,33 @@
 import React, {
   FunctionComponent, useCallback, useState,
 } from 'react';
+import { useIntl } from 'react-intl';
+import { AksjonspunktStatus, VilkarUtfallType } from '@navikt/ft-kodeverk';
+import {
+  Aksjonspunkt, Behandling, Fagsak, Dokument,
+} from '@navikt/ft-types';
+import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import innsynResultatTypeKV from '@fpsak-frontend/kodeverk/src/innsynResultatType';
-import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import VedtakInnsynProsessIndex, { InnsynBrevData } from '@fpsak-frontend/prosess-vedtak-innsyn';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
-import { createIntl, forhandsvisDokument } from '@navikt/ft-utils';
-import {
-  Aksjonspunkt, Behandling, Dokument, Fagsak, ForhåndsvisMeldingParams, Innsyn,
-} from '@fpsak-frontend/types';
-import {
-  IverksetterVedtakStatusModal, ProsessPanelInitProps, useStandardProsessPanelProps, ProsessDefaultInitPanel,
-} from '@fpsak-frontend/behandling-felles';
+import { ForhåndsvisMeldingParams, Innsyn } from '@fpsak-frontend/types';
 
-import messages from '../../i18n/nb_NO.json';
+import ProsessDefaultInitPanel from '../../felles/components/prosess/ProsessDefaultInitPanel';
+import IverksetterVedtakStatusModal from '../../felles/components/modaler/vedtak/IverksetterVedtakStatusModal';
+import ProsessPanelInitProps from '../../felles/types/prosessPanelInitProps';
+import useStandardProsessPanelProps from '../../felles/utils/prosess/useStandardProsessPanelProps';
+import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import { restApiInnsynHooks, requestInnsynApi, InnsynBehandlingApiKeys } from '../data/innsynBehandlingApi';
 
-const intl = createIntl(messages);
-
 const getVedtakStatus = (innsyn: Innsyn, aksjonspunkter: Aksjonspunkt[]): string => {
-  const harApentAksjonpunkt = aksjonspunkter.some((ap) => ap.status === aksjonspunktStatus.OPPRETTET);
+  const harApentAksjonpunkt = aksjonspunkter.some((ap) => ap.status === AksjonspunktStatus.OPPRETTET);
   if (aksjonspunkter.length === 0 || harApentAksjonpunkt) {
-    return vilkarUtfallType.IKKE_VURDERT;
+    return VilkarUtfallType.IKKE_VURDERT;
   }
   return innsyn.innsynResultatType === innsynResultatTypeKV.INNVILGET || innsyn.innsynResultatType === innsynResultatTypeKV.DELVISTINNVILGET
-    ? vilkarUtfallType.OPPFYLT : vilkarUtfallType.IKKE_OPPFYLT;
+    ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_OPPFYLT;
 };
 
 const hentForhandsvisCallback = (
@@ -57,7 +57,7 @@ const getLagringSideeffekter = (
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.FORESLA_VEDTAK];
 
-const ENDEPUNKTER_INIT_DATA = [InnsynBehandlingApiKeys.AKSJONSPUNKTER, InnsynBehandlingApiKeys.INNSYN];
+const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, InnsynBehandlingApiKeys.INNSYN];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   innsyn: Innsyn;
@@ -83,12 +83,13 @@ const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
   toggleOppdatereFagsakContext,
   ...props
 }) => {
+  const intl = useIntl();
   const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
   const lagringSideeffekterCallback = getLagringSideeffekter(toggleIverksetterVedtakModal, toggleOppdatereFagsakContext);
 
   const standardPanelProps = useStandardProsessPanelProps();
 
-  const { startRequest: forhandsvisMelding } = restApiInnsynHooks.useRestApiRunner(InnsynBehandlingApiKeys.PREVIEW_MESSAGE);
+  const { startRequest: forhandsvisMelding } = restApiInnsynHooks.useRestApiRunner(BehandlingFellesApiKeys.PREVIEW_MESSAGE);
   const previewCallback = useCallback(hentForhandsvisCallback(forhandsvisMelding, fagsak, standardPanelProps.behandling),
     [standardPanelProps.behandling.versjon]);
 
@@ -102,10 +103,10 @@ const InnsynVedtakProsessStegInitPanel: FunctionComponent<OwnProps & ProsessPane
       prosessPanelKode={ProsessStegCode.VEDTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny={() => true}
-      hentOverstyrtStatus={(initData) => (initData.innsyn ? getVedtakStatus(initData.innsyn, initData.aksjonspunkter || []) : vilkarUtfallType.IKKE_VURDERT)}
+      hentOverstyrtStatus={(initData) => (initData.innsyn ? getVedtakStatus(initData.innsyn, initData.aksjonspunkter || []) : VilkarUtfallType.IKKE_VURDERT)}
       lagringSideEffekter={lagringSideeffekterCallback}
       hentSkalMarkeresSomAktiv={(initData) => (!!initData.innsyn
-        && getVedtakStatus(initData.innsyn, initData.aksjonspunkter || []) !== vilkarUtfallType.IKKE_VURDERT)}
+        && getVedtakStatus(initData.innsyn, initData.aksjonspunkter || []) !== VilkarUtfallType.IKKE_VURDERT)}
       renderPanel={(data, initData) => (
         <>
           <IverksetterVedtakStatusModal

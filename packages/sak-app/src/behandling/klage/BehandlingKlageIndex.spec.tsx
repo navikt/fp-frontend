@@ -1,42 +1,42 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
+import { BehandlingType, BehandlingStatus, FagsakYtelseType } from '@navikt/ft-kodeverk';
+import { AlleKodeverk, Fagsak } from '@navikt/ft-types';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
-import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
-import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
-import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
-import { AksessRettigheter, AlleKodeverk, Fagsak } from '@fpsak-frontend/types';
+import { AksessRettigheter } from '@fpsak-frontend/types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
+import { BehandlingFellesApiKeys } from '../felles/data/behandlingFellesApi';
 import BehandlingKlageIndex from './BehandlingKlageIndex';
-import { requestKlageApi, KlageBehandlingApiKeys } from './data/klageBehandlingApi';
+import { requestKlageApi } from './data/klageBehandlingApi';
 
 describe('<BehandlingKlageIndex>', () => {
   it('skal vise paneler korrekt i prosess og faktameny', async () => {
     const data = [
       {
-        key: KlageBehandlingApiKeys.BEHANDLING_KLAGE.name,
+        key: BehandlingFellesApiKeys.BEHANDLING.name,
         noRelLink: true,
         data: {
           uuid: 'test-uuid',
           versjon: 1,
-          status: behandlingStatus.OPPRETTET,
-          type: behandlingType.KLAGE,
+          status: BehandlingStatus.OPPRETTET,
+          type: BehandlingType.KLAGE,
           links: [{
-            href: KlageBehandlingApiKeys.UPDATE_ON_HOLD.name,
+            href: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name,
             rel: 'update',
             type: 'POST',
           }, {
-            href: KlageBehandlingApiKeys.AKSJONSPUNKTER.name,
+            href: BehandlingFellesApiKeys.AKSJONSPUNKTER.name,
             rel: 'aksjonspunkter',
             type: 'GET',
           }],
         },
       },
-      { key: KlageBehandlingApiKeys.PREVIEW_MESSAGE.name, noRelLink: true, data: undefined },
-      { key: KlageBehandlingApiKeys.UPDATE_ON_HOLD.name, data: undefined },
-      { key: KlageBehandlingApiKeys.AKSJONSPUNKTER.name, data: [] },
+      { key: BehandlingFellesApiKeys.PREVIEW_MESSAGE.name, noRelLink: true, data: undefined },
+      { key: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name, data: undefined },
+      { key: BehandlingFellesApiKeys.AKSJONSPUNKTER.name, data: [] },
     ];
 
     await act(async () => {
@@ -53,7 +53,7 @@ describe('<BehandlingKlageIndex>', () => {
             // @ts-ignore
             kodeverk={alleKodeverk as AlleKodeverk}
             fagsak={{
-              fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+              fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
             } as Fagsak}
             rettigheter={{
               writeAccess: {
