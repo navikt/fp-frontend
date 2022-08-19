@@ -1,6 +1,37 @@
 {
   "Dekorator.Foreldrepenger": "Svangerskap, fødsel og adopsjon",
 
+  "Behandlingspunkt.AnkeResultat": "Resultat",
+  "Behandlingspunkt.AnkeMerknader": "Trygderetten",
+  "Behandlingspunkt.Ankebehandling": "Ankebehandling",
+  "RegistrereVergeInfoPanel.Info": "Verge/fullmektig",
+
+  "AnkeVurderingModal.VedtakOversendt": "Behandlingen er sendt.",
+  "AnkeVurderingModal.Ferdigbehandlet": "Anken er ferdigbehandlet.",
+  "AnkeVurderingModal.SettVent": "Behandlingen er satt på vent.",
+  "AnkeVurderingModal.ModalDescription": "Vedtaket er stadfestet. Du kommer nå til forsiden",
+  "AnkeVurderingModal.GoToSearchPage": "Du kommer nå til forsiden.",
+  "AnkeVurderingModal.Ok": "OK",
+
+  "FatterVedtakStatusModal.GoToSearchPage": "Du kommer nå til forsiden.",
+  "FatterVedtakStatusModal.Ok": "OK",
+  "FatterVedtakStatusModal.SendtBeslutter": "Forslag til vedtak er sendt til beslutter",
+
+  "IverksetterVedtakStatusModal.VedtakAvslatt": "Vedtak er avslått.",
+  "IverksetterVedtakStatusModal.VedtakInnvilet": "Vedtaket ble fattet og blir nå iverksatt",
+  "IverksetterVedtakStatusModal.Ok": "OK",
+  "IverksetterVedtakStatusModal.Avslatt": "Avslått",
+  "IverksetterVedtakStatusModal.Innvilget": "Innvilget",
+  "IverksetterVedtakStatusModal.GoToSearchPage": "Du kommer nå til forsiden",
+
+  "Behandlingspunkt.Inngangsvilkar": "Inngangsvilkår",
+  "InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv": "Avventer avklaring av fakta om ",
+  "ProsessPanelWrapper.IkkeBehandlet": "Dette steget er ikke behandlet",
+  "BehandlingHenlagtPanel.Header": "Henlagt",
+  "BehandlingHenlagtPanel.Henlagt": "Behandlingen er henlagt",
+  "FaktaPanel.FaktaOm": "Fakta om",
+  "HelpText.Aksjonspunkt": "Aksjonspunkt",
+
   "Rest.ErrorMessage.General": "Noe feilet. Feilen kan være forbigående. Prøv og behandle saken litt senere. Om feilen oppstår igjen meld den inn via porten.",
   "Rest.ErrorMessage.DownTime": "Saksbehandlingsløsningen venter på et annet system som har nedetid nå. Du trenger ikke melde inn en feil, men prøv igjen {date} kl. {time}.\n{message}",
   "Rest.ErrorMessage.PollingTimeout": "Serverkall har gått ut på tid: {location}",
