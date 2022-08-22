@@ -2,6 +2,8 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 import { Behandling } from '@navikt/ft-types';
 
+import { RequestApi } from '@fpsak-frontend/rest-api';
+
 import BehandlingContainer from './BehandlingContainer';
 import FaktaPanelInitProps from '../types/faktaPanelInitProps';
 import ProsessPanelInitProps from '../types/prosessPanelInitProps';
@@ -119,6 +121,7 @@ export const visKunFaktaPaneler = () => {
       behandling={{} as Behandling}
       valgtFaktaSteg={valgtFaktaPanel}
       oppdaterProsessStegOgFaktaPanelIUrl={(_prosessPanel?: string, faktaPanel?: string) => setValgtFaktaPanel(faktaPanel)}
+      requestApi={{} as RequestApi}
       hentFaktaPaneler={(props) => (
         <>
           <FaktaPanelTest1 {...props} />
@@ -136,6 +139,7 @@ export const visKunProsessPaneler = () => {
       behandling={{} as Behandling}
       valgtProsessSteg={valgtProsessPanel}
       oppdaterProsessStegOgFaktaPanelIUrl={(prosessPanel?: string) => setValgtProsessPanel(prosessPanel)}
+      requestApi={{} as RequestApi}
       hentProsessPaneler={(props) => (
         <>
           <ProsessPanelTest1 {...props} />

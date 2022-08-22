@@ -27,6 +27,7 @@ import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import BehandlingEventHandler from './felles/util/BehandlingEventHandler';
 import BehandlingTilbakekrevingIndex from './BehandlingTilbakekrevingIndex';
 import { TilbakekrevingBehandlingApiKeys, requestTilbakekrevingApi } from './data/tilbakekrevingBehandlingApi';
+import { BehandlingFellesApiKeys } from '../felles/data/behandlingFellesApi';
 
 const BEHANDLING_AARSAK_KODEVERK = 'BEHANDLING_AARSAK';
 const TILBAKEKR_VIDERE_BEH_KODEVERK = 'TILBAKEKR_VIDERE_BEH';
@@ -40,15 +41,15 @@ const defaultBehandling = {
   type: BehandlingType.TILBAKEKREVING,
   behandlingPaaVent: false,
   links: [{
-    href: TilbakekrevingBehandlingApiKeys.UPDATE_ON_HOLD.name,
+    href: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name,
     rel: 'update',
     type: 'POST',
   }, {
-    href: TilbakekrevingBehandlingApiKeys.AKSJONSPUNKTER.name,
+    href: BehandlingFellesApiKeys.AKSJONSPUNKTER.name,
     rel: 'aksjonspunkter',
     type: 'GET',
   }, {
-    href: TilbakekrevingBehandlingApiKeys.VERGE.name,
+    href: BehandlingFellesApiKeys.VERGE.name,
     rel: 'soeker-verge',
     type: 'GET',
   }, {
@@ -227,12 +228,12 @@ const Template: Story<{
 
   const data = [
     { key: TilbakekrevingBehandlingApiKeys.BEHANDLING_TILBAKE.name, data: behandling },
-    { key: TilbakekrevingBehandlingApiKeys.UPDATE_ON_HOLD.name, data: undefined },
+    { key: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name, data: undefined },
     { key: TilbakekrevingBehandlingApiKeys.TILBAKE_KODEVERK.name, global: true, data: tilbakeKodeverk },
-    { key: TilbakekrevingBehandlingApiKeys.AKSJONSPUNKTER.name, data: aksjonspunkter },
+    { key: BehandlingFellesApiKeys.AKSJONSPUNKTER.name, data: aksjonspunkter },
     { key: TilbakekrevingBehandlingApiKeys.FEILUTBETALING_FAKTA.name, data: feilutbetalingFakta },
     { key: TilbakekrevingBehandlingApiKeys.FEILUTBETALING_AARSAK.name, data: feilutbetalingAarsak },
-    { key: TilbakekrevingBehandlingApiKeys.VERGE.name, data: verge },
+    { key: BehandlingFellesApiKeys.VERGE.name, data: verge },
     { key: TilbakekrevingBehandlingApiKeys.PERIODER_FORELDELSE.name, data: perioderForeldelse },
   ];
 

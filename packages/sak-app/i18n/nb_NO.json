@@ -95,6 +95,17 @@
 
   "SvangerskapVilkarForm.FyllerVilkår": "Kontroller at søker fyller vilkårene i § 14-4 første eller andre ledd og tredje ledd, første punktum",
 
+  "Behandlingspunkt.Tilbakekreving": "Tilbakekreving",
+  "Behandlingspunkt.Foreldelse": "Foreldelse",
+  "TilbakekrevingFakta.FaktaFeilutbetaling": "Feilutbetaling",
+  "ProsessPanelWrapper.Henlagt": "Behandlingen er henlagt",
+
+  "SubmitButton.ConfirmInformation": "Bekreft og fortsett",
+
+  "FatterTilbakekrevingVedtakStatusModal.Sendt": "Forslag til vedtak er sendt til beslutter",
+  "BehandlingTilbakekrevingIndex.ApenRevurdering": "Det finnes en åpen revurdering som kan påvirke denne tilbakekrevingsbehandlingen. Vurder konsekvens ved behandling.",
+  "BehandlingTilbakekrevingIndex.ApenRevurderingHeader": "Åpen revurdering",
+
   "Rest.ErrorMessage.General": "Noe feilet. Feilen kan være forbigående. Prøv og behandle saken litt senere. Om feilen oppstår igjen meld den inn via porten.",
   "Rest.ErrorMessage.DownTime": "Saksbehandlingsløsningen venter på et annet system som har nedetid nå. Du trenger ikke melde inn en feil, men prøv igjen {date} kl. {time}.\n{message}",
   "Rest.ErrorMessage.PollingTimeout": "Serverkall har gått ut på tid: {location}",

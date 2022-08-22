@@ -14,10 +14,10 @@ import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import {
   VedtakAksjonspunktCode, ForeslaVedtakTilbakekrevingAp, ForhandsvisData,
 } from '@navikt/ft-prosess-tilbakekreving-vedtak';
-import { DynamicLoader } from '@fpsak-frontend/behandling-felles';
 
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 import FatterVedtakStatusModal from '../../felles/komponenter/FatterVedtakStatusModal';
+import DynamicLoader from '../../../felles/components/DynamicLoader';
 
 // TODO Denne burde ligga sånn til at den kun blir importert når denne pakka dynamisk blir importert
 import '@navikt/ft-prosess-tilbakekreving-vedtak/dist/style.css';

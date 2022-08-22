@@ -4,7 +4,8 @@ import TestRenderer from 'react-test-renderer';
 
 import { Behandling } from '@navikt/ft-types';
 
-import { TilbakekrevingBehandlingApiKeys, requestTilbakekrevingApi } from '../../data/tilbakekrevingBehandlingApi';
+import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
+import { requestTilbakekrevingApi } from '../../data/tilbakekrevingBehandlingApi';
 
 import { useBehandling, useLagreAksjonspunkt } from './indexHooks';
 
@@ -28,7 +29,7 @@ describe('indexHooks', () => {
   it.skip('skal lagre aksjonspunkt og så oppdatere behandling', async () => {
     const setBehandling = jest.fn();
     requestTilbakekrevingApi.setLinks([{
-      href: TilbakekrevingBehandlingApiKeys.AKSJONSPUNKTER.name,
+      href: BehandlingFellesApiKeys.AKSJONSPUNKTER.name,
       rel: 'aksjonspunkter',
       type: 'GET',
     }]);

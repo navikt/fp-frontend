@@ -1,4 +1,5 @@
 import React from 'react';
+import { RawIntlProvider } from 'react-intl';
 import { render, screen, waitFor } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
 import userEvent from '@testing-library/user-event';
@@ -6,16 +7,22 @@ import {
   AksjonspunktStatus, FagsakYtelseType, BehandlingStatus, VilkarUtfallType,
 } from '@navikt/ft-kodeverk';
 import { Aksjonspunkt, Behandling, Fagsak } from '@navikt/ft-types';
+import { createIntl } from '@navikt/ft-utils';
 
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
+import { RequestApi } from '@fpsak-frontend/rest-api';
 
 import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import * as Felles from '../../felles/utils/prosess/useStandardProsessPanelProps';
 import { requestInnsynApi, InnsynBehandlingApiKeys } from '../data/innsynBehandlingApi';
 import InnsynVedtakProsessStegInitPanel from './InnsynVedtakProsessStegInitPanel';
+
+import messages from '../../../../i18n/nb_NO.json';
+
+const intl = createIntl(messages);
 
 const fagsak = {
   fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
@@ -71,16 +78,19 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
       { key: InnsynBehandlingApiKeys.INNSYN_DOKUMENTER.name, data: [] },
     ];
     render(
-      <RestApiMock data={data} requestApi={requestInnsynApi}>
-        <InnsynVedtakProsessStegInitPanel
-          valgtProsessSteg="default"
-          registrerProsessPanel={() => {}}
-          toggleOppdatereFagsakContext={() => {}}
-          fagsak={fagsak}
-          opneSokeside={() => {}}
-          behandling={behandling}
-        />
-      </RestApiMock>,
+      <RawIntlProvider value={intl}>
+        <RestApiMock data={data} requestApi={requestInnsynApi}>
+          <InnsynVedtakProsessStegInitPanel
+            valgtProsessSteg="default"
+            registrerProsessPanel={() => {}}
+            toggleOppdatereFagsakContext={() => {}}
+            fagsak={fagsak}
+            opneSokeside={() => {}}
+            behandling={behandling}
+            requestApi={{} as RequestApi}
+          />
+        </RestApiMock>
+      </RawIntlProvider>,
     );
 
     expect(await screen.findByText('Forslag til vedtak')).toBeInTheDocument();
@@ -98,16 +108,19 @@ describe('<InnsynVedtakProsessStegInitPanel>', () => {
     const setApiMock = (mockAdapter: MockAdapter) => { axiosMock = mockAdapter; };
 
     const utils = render(
-      <RestApiMock data={data} requestApi={requestInnsynApi} setApiMock={setApiMock}>
-        <InnsynVedtakProsessStegInitPanel
-          valgtProsessSteg="default"
-          registrerProsessPanel={() => {}}
-          toggleOppdatereFagsakContext={() => {}}
-          fagsak={fagsak}
-          opneSokeside={() => {}}
-          behandling={behandling}
-        />
-      </RestApiMock>,
+      <RawIntlProvider value={intl}>
+        <RestApiMock data={data} requestApi={requestInnsynApi} setApiMock={setApiMock}>
+          <InnsynVedtakProsessStegInitPanel
+            valgtProsessSteg="default"
+            registrerProsessPanel={() => {}}
+            toggleOppdatereFagsakContext={() => {}}
+            fagsak={fagsak}
+            opneSokeside={() => {}}
+            behandling={behandling}
+            requestApi={{} as RequestApi}
+          />
+        </RestApiMock>
+      </RawIntlProvider>,
     );
 
     expect(await screen.findByText('Forslag til vedtak')).toBeInTheDocument();

@@ -9,7 +9,8 @@ import {
   Behandling, Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving,
 } from '@navikt/ft-types';
 
-import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
+import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
+import { restApiTilbakekrevingHooks } from '../../data/tilbakekrevingBehandlingApi';
 
 const EMPTY_ARRAY = [] as Aksjonspunkt[];
 
@@ -36,12 +37,12 @@ const BehandlingPaVent: FunctionComponent<BehandlingPaVentProps> = ({
   const [skalViseModal, setVisModal] = useState(behandling.behandlingPaaVent);
   const skjulModal = useCallback(() => setVisModal(false), []);
 
-  const { data: aksjonspunkter = EMPTY_ARRAY } = restApiTilbakekrevingHooks.useRestApi(TilbakekrevingBehandlingApiKeys.AKSJONSPUNKTER, undefined, {
+  const { data: aksjonspunkter = EMPTY_ARRAY } = restApiTilbakekrevingHooks.useRestApi(BehandlingFellesApiKeys.AKSJONSPUNKTER, undefined, {
     updateTriggers: [skalViseModal],
     suspendRequest: !skalViseModal,
   });
 
-  const { startRequest: settPaVent } = restApiTilbakekrevingHooks.useRestApiRunner(TilbakekrevingBehandlingApiKeys.UPDATE_ON_HOLD);
+  const { startRequest: settPaVent } = restApiTilbakekrevingHooks.useRestApiRunner(BehandlingFellesApiKeys.UPDATE_ON_HOLD);
 
   useEffect(() => {
     setVisModal(behandling.behandlingPaaVent);

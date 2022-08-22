@@ -1,9 +1,6 @@
 import React, { FunctionComponent, useEffect, useCallback } from 'react';
-import { RawIntlProvider } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { createIntl } from '@navikt/ft-utils';
-import { StandardBehandlingProps } from '@fpsak-frontend/behandling-felles';
 
 import { restApiTilbakekrevingHooks, requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys } from './data/tilbakekrevingBehandlingApi';
 import FaktaIndex from './fakta/FaktaIndex';
@@ -11,9 +8,7 @@ import ProsessIndex from './prosess/ProsessIndex';
 import BehandlingPaVent from './felles/komponenter/BehandlingPaVent';
 import getBekreftAksjonspunktCallback from './felles/util/bekreftAksjonspunkter';
 import { useLagreAksjonspunkt, useBehandling, useInitBehandlingHandlinger } from './felles/util/indexHooks';
-import messages from '../i18n/nb_NO.json';
-
-const intl = createIntl(messages);
+import StandardBehandlingProps from '../felles/types/standardBehandlingProps';
 
 interface OwnProps {
   fagsakKjønn: string;
@@ -66,7 +61,7 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehand
   }
 
   return (
-    <RawIntlProvider value={intl}>
+    <>
       <BehandlingPaVent
         behandling={behandling}
         hentBehandling={hentBehandling}
@@ -96,7 +91,7 @@ const BehandlingTilbakekrevingIndex: FunctionComponent<OwnProps & StandardBehand
         hasFetchError={hentingHarFeilet}
         bekreftAksjonspunkterMedSideeffekter={bekreftAksjonspunkterMedSideeffekter}
       />
-    </RawIntlProvider>
+    </>
   );
 };
 

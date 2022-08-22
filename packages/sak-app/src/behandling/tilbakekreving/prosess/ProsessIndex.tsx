@@ -21,6 +21,7 @@ import {
 } from '@navikt/ft-types';
 import { AksessRettigheter } from '@fpsak-frontend/types';
 
+import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import { erReadOnlyCurried } from '../felles/util/readOnlyPanelUtils';
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';
 import ProsessMeny, { ProsessPanelMenyData } from './ProsessMeny';
@@ -34,7 +35,7 @@ import styles from './prosessIndex.less';
 const DEFAULT_PANEL_VALGT = 'default';
 
 const ENDEPUNKTER_INIT_DATA = [
-  TilbakekrevingBehandlingApiKeys.AKSJONSPUNKTER,
+  BehandlingFellesApiKeys.AKSJONSPUNKTER,
   TilbakekrevingBehandlingApiKeys.PERIODER_FORELDELSE,
   TilbakekrevingBehandlingApiKeys.BEREGNINGSRESULTAT,
 ];

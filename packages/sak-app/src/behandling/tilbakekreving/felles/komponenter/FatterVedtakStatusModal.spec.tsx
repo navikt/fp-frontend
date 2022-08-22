@@ -5,7 +5,7 @@ import Modal from 'nav-frontend-modal';
 import { createIntl } from '@navikt/ft-utils';
 
 import FatterVedtakStatusModal from './FatterVedtakStatusModal';
-import messages from '../../../i18n/nb_NO.json';
+import messages from '../../../../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 

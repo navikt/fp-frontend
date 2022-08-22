@@ -5,9 +5,10 @@ import { Behandling } from '@navikt/ft-types';
 import { usePrevious } from '@navikt/ft-ui-komponenter';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
-import { BehandlingEventHandler } from '@fpsak-frontend/behandling-felles';
 
+import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import { requestTilbakekrevingApi, restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
+import { BehandlingEventHandler } from '../../../felles/types/standardBehandlingProps';
 
 export type NyBehandlendeEnhetParams = {
   behandlingUuid: string;
@@ -82,7 +83,7 @@ export const useLagreAksjonspunkt = (
   setBehandling: (behandling: Behandling) => void,
 ) => {
   const { startRequest: lagreAksjonspunkter, data: apBehandlingRes } = restApiTilbakekrevingHooks
-    .useRestApiRunner(TilbakekrevingBehandlingApiKeys.SAVE_AKSJONSPUNKT);
+    .useRestApiRunner(BehandlingFellesApiKeys.SAVE_AKSJONSPUNKT);
   useSetBehandlingVedEndring(setBehandling, apBehandlingRes);
   return lagreAksjonspunkter;
 };
@@ -100,17 +101,17 @@ export const useInitBehandlingHandlinger = (
   behandling?: Behandling,
 ): void => {
   const { useRestApiRunner } = restApiTilbakekrevingHooks;
-  const keys = TilbakekrevingBehandlingApiKeys;
 
-  const { startRequest: nyBehandlendeEnhet } = useRestApiRunner<void, NyBehandlendeEnhetParams>(keys.BEHANDLING_NY_BEHANDLENDE_ENHET);
+  const { startRequest: nyBehandlendeEnhet } = useRestApiRunner<void, NyBehandlendeEnhetParams>(BehandlingFellesApiKeys.BEHANDLING_NY_BEHANDLENDE_ENHET);
   const { startRequest: settBehandlingPaVent } = useRestApiRunner<void,
-    { behandlingUuid: string, behandlingVersjon: number, frist: string, ventearsak: string }>(keys.BEHANDLING_ON_HOLD);
-  const { startRequest: taBehandlingAvVent } = useRestApiRunner<Behandling, { behandlingUuid: string, behandlingVersjon: number }>(keys.RESUME_BEHANDLING);
+    { behandlingUuid: string, behandlingVersjon: number, frist: string, ventearsak: string }>(BehandlingFellesApiKeys.BEHANDLING_ON_HOLD);
+  const { startRequest: taBehandlingAvVent } = useRestApiRunner<
+    Behandling, { behandlingUuid: string, behandlingVersjon: number }>(BehandlingFellesApiKeys.RESUME_BEHANDLING);
   const { startRequest: henleggBehandling } = useRestApiRunner<void,
-    { behandlingUuid: string, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>(keys.HENLEGG_BEHANDLING);
-  const { startRequest: opprettVerge } = useRestApiRunner<Behandling, any>(keys.VERGE_OPPRETT);
-  const { startRequest: fjernVerge } = useRestApiRunner<Behandling, any>(keys.VERGE_FJERN);
-  const { startRequest: lagreRisikoklassifiseringAksjonspunkt } = useRestApiRunner<Behandling, any>(keys.SAVE_AKSJONSPUNKT);
+    { behandlingUuid: string, årsakKode: string, begrunnelse: string, behandlingVersjon: string }>(BehandlingFellesApiKeys.HENLEGG_BEHANDLING);
+  const { startRequest: opprettVerge } = useRestApiRunner<Behandling, any>(BehandlingFellesApiKeys.VERGE_OPPRETT);
+  const { startRequest: fjernVerge } = useRestApiRunner<Behandling, any>(BehandlingFellesApiKeys.VERGE_FJERN);
+  const { startRequest: lagreRisikoklassifiseringAksjonspunkt } = useRestApiRunner<Behandling, any>(BehandlingFellesApiKeys.SAVE_AKSJONSPUNKT);
 
   useEffect(() => {
     if (behandling) {

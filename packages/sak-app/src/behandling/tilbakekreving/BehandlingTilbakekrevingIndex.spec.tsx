@@ -1,57 +1,58 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import { RawIntlProvider } from 'react-intl';
 import { render, screen } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
 
 import { createIntl } from '@navikt/ft-utils';
 
+import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { AksessRettigheter, AlleKodeverk, Fagsak } from '@fpsak-frontend/types';
-import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
+import navBrukerKjonn from '@fpsak-frontend/kodeverk/src/navBrukerKjonn';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 
-import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
-import BehandlingSvangerskapspengerIndex from './BehandlingSvangerskapspengerIndex';
-import { requestSvpApi } from './data/svpBehandlingApi';
+import BehandlingTilbakekrevingIndex from './BehandlingTilbakekrevingIndex';
+import { BehandlingFellesApiKeys } from '../felles/data/behandlingFellesApi';
+import { requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys } from './data/tilbakekrevingBehandlingApi';
 
-import messages from '../../../../i18n/nb_NO.json';
+import messages from '../../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-describe('<BehandlingSvangerskapspengerIndex>', () => {
-  it('skal vise paneler korrekt i prosess og faktameny', async () => {
+describe('<BehandlingTilbakekrevingIndex>', () => {
+  it('skal rendre korrekt', async () => {
     const data = [
       {
-        key: BehandlingFellesApiKeys.BEHANDLING.name,
+        key: TilbakekrevingBehandlingApiKeys.BEHANDLING_TILBAKE.name,
         noRelLink: true,
         data: {
           uuid: 'test-uuid',
           versjon: 1,
           status: behandlingStatus.OPPRETTET,
-          type: behandlingType.FORSTEGANGSSOKNAD,
+          type: behandlingType.TILBAKEKREVING,
           links: [{
-            href: BehandlingFellesApiKeys.ARBEIDSGIVERE_OVERSIKT.name,
-            rel: 'arbeidsgivere-oversikt',
-            type: 'GET',
+            href: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name,
+            rel: 'update',
+            type: 'POST',
           }, {
-            href: BehandlingFellesApiKeys.BEHANDLING_PERSONOVERSIKT.name,
-            rel: 'behandling-personoversikt',
+            href: BehandlingFellesApiKeys.AKSJONSPUNKTER.name,
+            rel: 'aksjonspunkter',
             type: 'GET',
           }],
         },
       },
-      { key: BehandlingFellesApiKeys.ARBEIDSGIVERE_OVERSIKT.name, data: {} },
-      { key: BehandlingFellesApiKeys.BEHANDLING_PERSONOVERSIKT.name, data: {} },
-      { key: BehandlingFellesApiKeys.PREVIEW_MESSAGE.name, noRelLink: true, data: undefined },
+      { key: BehandlingFellesApiKeys.UPDATE_ON_HOLD.name, data: undefined },
+      { key: BehandlingFellesApiKeys.AKSJONSPUNKTER.name, data: [] },
+      { key: TilbakekrevingBehandlingApiKeys.TILBAKE_KODEVERK.name, global: true, data: alleKodeverk },
     ];
 
     await act(async () => {
       render(
         <RawIntlProvider value={intl}>
-          <RestApiMock data={data} requestApi={requestSvpApi}>
-            <BehandlingSvangerskapspengerIndex
+          <RestApiMock data={data} requestApi={requestTilbakekrevingApi}>
+            <BehandlingTilbakekrevingIndex
               behandlingEventHandler={{
                 setHandler: () => {},
                 clear: () => {},
@@ -62,7 +63,7 @@ describe('<BehandlingSvangerskapspengerIndex>', () => {
               // @ts-ignore
               kodeverk={alleKodeverk as AlleKodeverk}
               fagsak={{
-                fagsakYtelseType: fagsakYtelseType.ENGANGSSTONAD,
+                fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
               } as Fagsak}
               rettigheter={{
                 writeAccess: {
@@ -77,17 +78,16 @@ describe('<BehandlingSvangerskapspengerIndex>', () => {
               valgtFaktaSteg="default"
               opneSokeside={() => {}}
               setRequestPendingMessage={() => {}}
+              fagsakKjønn={navBrukerKjonn.KVINNE}
+              harApenRevurdering={false}
             />
           </RestApiMock>
         </RawIntlProvider>,
       );
     });
 
-    expect(await screen.findByText('Beregning')).toBeInTheDocument();
-    expect(screen.getByText('Simulering')).toBeInTheDocument();
+    expect(await screen.findByText('Foreldelse')).toBeInTheDocument();
+    expect(screen.getByText('Tilbakekreving')).toBeInTheDocument();
     expect(screen.getByText('Vedtak')).toBeInTheDocument();
-
-    expect(screen.getByText('Fakta om')).toBeInTheDocument();
-    expect(screen.getByText('Saken')).toBeInTheDocument();
   });
 });

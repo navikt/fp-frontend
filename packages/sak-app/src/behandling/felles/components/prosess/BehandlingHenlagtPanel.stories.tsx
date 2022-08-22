@@ -2,7 +2,6 @@ import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
-import { Behandling } from '@navikt/ft-types';
 
 import BehandlingHenlagtPanel from './BehandlingHenlagtPanel';
 
@@ -21,7 +20,6 @@ export const visBehandlingErHenlagtProsessPanel = () => (
     <BehandlingHenlagtPanel
       valgtProsessSteg="henlagt"
       registrerProsessPanel={() => undefined}
-      behandling={{ versjon: 1 } as Behandling}
     />
   </RawIntlProvider>
 );

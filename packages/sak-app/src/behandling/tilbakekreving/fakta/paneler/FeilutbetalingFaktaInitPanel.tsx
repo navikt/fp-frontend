@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useMemo, useCallback } from 'react';
+import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
 import { FeilutbetalingAksjonspunktCode } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import {
@@ -7,9 +8,8 @@ import {
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
-import { DynamicLoader } from '@fpsak-frontend/behandling-felles';
-import { AksjonspunktStatus } from '@navikt/ft-kodeverk';
 
+import DynamicLoader from '../../../felles/components/DynamicLoader';
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 import getAlleMerknaderFraBeslutter from '../../felles/util/getAlleMerknaderFraBeslutter';
 

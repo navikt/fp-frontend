@@ -8,8 +8,9 @@ import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import VergeFaktaIndex from '@fpsak-frontend/fakta-verge';
 import AksjonspunktCode from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
-import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
+import { restApiTilbakekrevingHooks } from '../../data/tilbakekrevingBehandlingApi';
 import getAlleMerknaderFraBeslutter from '../../felles/util/getAlleMerknaderFraBeslutter';
+import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 
 interface OwnProps {
   behandling: Behandling;
@@ -43,7 +44,7 @@ const VergeFaktaInitPanel: FunctionComponent<OwnProps> = ({
     [FaktaPanelCode.VERGE]: data,
   })), [setFormData]);
 
-  const { data: verge, state } = restApiTilbakekrevingHooks.useRestApi(TilbakekrevingBehandlingApiKeys.VERGE);
+  const { data: verge, state } = restApiTilbakekrevingHooks.useRestApi(BehandlingFellesApiKeys.VERGE);
 
   if (state !== RestApiState.SUCCESS) {
     return <LoadingPanel />;

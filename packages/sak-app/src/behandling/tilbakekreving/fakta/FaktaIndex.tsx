@@ -28,10 +28,10 @@ import FeilutbetalingFaktaInitPanel from './paneler/FeilutbetalingFaktaInitPanel
 import VergeFaktaInitPanel from './paneler/VergeFaktaInitPanel';
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../data/tilbakekrevingBehandlingApi';
 import FaktaMeny, { MenyData } from './FaktaMeny';
-
-import { erReadOnlyCurried } from '../felles/util/readOnlyPanelUtils';
+import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 
 import styles from './faktaIndex.less';
+import { erReadOnlyCurried } from '../felles/util/readOnlyPanelUtils';
 
 const DEFAULT_PANEL_VALGT = 'default';
 const EMPTY_FORM_DATA = {};
@@ -85,7 +85,7 @@ const erFaktaPanelAktivt = (
   faktaPanelKode: string,
 ): boolean => (faktaPanelerData.some((d) => d.id === faktaPanelKode && d.erAktiv));
 
-const ENDEPUNKTER_INIT_DATA = [TilbakekrevingBehandlingApiKeys.AKSJONSPUNKTER, TilbakekrevingBehandlingApiKeys.FEILUTBETALING_FAKTA];
+const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, TilbakekrevingBehandlingApiKeys.FEILUTBETALING_FAKTA];
 type EndepunktInitData = {
   aksjonspunkter: Aksjonspunkt[];
   feilutbetalingFakta: FeilutbetalingFakta;

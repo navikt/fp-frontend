@@ -26,7 +26,7 @@ const BehandlingForeldrepengerIndex = React.lazy(() => import('./forstegangsokna
 const BehandlingSvangerskapspengerIndex = React.lazy(() => import('./forstegangsoknadOgRevurdering/svangerskapspenger/BehandlingSvangerskapspengerIndex'));
 const BehandlingInnsynIndex = React.lazy(() => import('./innsyn/BehandlingInnsynIndex'));
 const BehandlingKlageIndex = React.lazy(() => import('./klage/BehandlingKlageIndex'));
-const BehandlingTilbakekrevingIndex = React.lazy(() => import('sdf'));
+const BehandlingTilbakekrevingIndex = React.lazy(() => import('./tilbakekreving/BehandlingTilbakekrevingIndex'));
 const BehandlingPapirsoknadIndex = React.lazy(() => import('./papirsoknad/BehandlingPapirsoknadIndex'));
 const BehandlingAnkeIndex = React.lazy(() => import('./anke/BehandlingAnkeIndex'));
 

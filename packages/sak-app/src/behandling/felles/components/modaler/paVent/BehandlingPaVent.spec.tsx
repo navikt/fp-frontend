@@ -8,9 +8,10 @@ import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 import Modal from 'nav-frontend-modal';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
-import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
+import { createRequestApi, RestApiConfigBuilder } from '@fpsak-frontend/rest-api';
 
-import BehandlingPaVent, { SettPaVentParams } from './BehandlingPaVent';
+import BehandlingPaVent from './BehandlingPaVent';
+import { BehandlingFellesApiKeys } from '../../../data/behandlingFellesApi';
 
 describe('<BehandlingPaVent>', () => {
   Modal.setAppElement('body');
@@ -28,8 +29,8 @@ describe('<BehandlingPaVent>', () => {
   // @ts-ignore
   const kodeverk = alleKodeverk as AlleKodeverk;
 
-  const AKSJONSPUNKT_KEY = new RestKey<Aksjonspunkt[], void>('AP');
-  const PA_VENT_KEY = new RestKey<void, SettPaVentParams>('PA_VENT');
+  const AKSJONSPUNKT_KEY = BehandlingFellesApiKeys.AKSJONSPUNKTER;
+  const PA_VENT_KEY = BehandlingFellesApiKeys.UPDATE_ON_HOLD;
 
   const endpoints = new RestApiConfigBuilder()
     .withRel('test', AKSJONSPUNKT_KEY)

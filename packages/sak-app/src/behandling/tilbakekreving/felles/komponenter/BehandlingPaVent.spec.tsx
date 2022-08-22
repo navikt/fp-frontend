@@ -9,7 +9,8 @@ import { Aksjonspunkt, AlleKodeverk, Behandling } from '@navikt/ft-types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 
-import { requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
+import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
+import { requestTilbakekrevingApi } from '../../data/tilbakekrevingBehandlingApi';
 
 import BehandlingPaVent from './BehandlingPaVent';
 
@@ -31,7 +32,7 @@ describe('<BehandlingPaVent>', () => {
 
   it('skal ikke vise modal når behandling ikke er på vent', async () => {
     const data = [
-      { key: TilbakekrevingBehandlingApiKeys.AKSJONSPUNKTER.name, data: aksjonspunkter },
+      { key: BehandlingFellesApiKeys.AKSJONSPUNKTER.name, data: aksjonspunkter },
     ];
     render(
       <RestApiMock data={data} requestApi={requestTilbakekrevingApi}>
@@ -48,7 +49,7 @@ describe('<BehandlingPaVent>', () => {
 
   it('skal vise modal når behandling er på vent', async () => {
     const data = [
-      { key: TilbakekrevingBehandlingApiKeys.AKSJONSPUNKTER.name, data: aksjonspunkter },
+      { key: BehandlingFellesApiKeys.AKSJONSPUNKTER.name, data: aksjonspunkter },
     ];
 
     await act(async () => {
@@ -71,7 +72,7 @@ describe('<BehandlingPaVent>', () => {
 
   it('skal vise modal og så skjule den ved trykk på knapp', async () => {
     const data = [
-      { key: TilbakekrevingBehandlingApiKeys.AKSJONSPUNKTER.name, data: aksjonspunkter },
+      { key: BehandlingFellesApiKeys.AKSJONSPUNKTER.name, data: aksjonspunkter },
     ];
     render(
       <RestApiMock data={data} requestApi={requestTilbakekrevingApi}>

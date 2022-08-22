@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { RawIntlProvider } from 'react-intl';
 import { act } from 'react-dom/test-utils';
 
 import { AksessRettigheter, AlleKodeverk, Fagsak } from '@fpsak-frontend/types';
@@ -8,10 +9,15 @@ import behandlingStatus from '@fpsak-frontend/kodeverk/src/behandlingStatus';
 import behandlingType from '@fpsak-frontend/kodeverk/src/behandlingType';
 import fagsakYtelseType from '@fpsak-frontend/kodeverk/src/fagsakYtelseType';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import { createIntl } from '@navikt/ft-utils';
 
 import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import BehandlingForeldrepengerIndex from './BehandlingForeldrepengerIndex';
 import { requestFpApi } from './data/fpBehandlingApi';
+
+import messages from '../../../../i18n/nb_NO.json';
+
+const intl = createIntl(messages);
 
 describe('<BehandlingForeldrepengerIndex>', () => {
   it('skal vise paneler korrekt i prosess og faktameny', async () => {
@@ -42,35 +48,37 @@ describe('<BehandlingForeldrepengerIndex>', () => {
 
     await act(async () => {
       render(
-        <RestApiMock data={data} requestApi={requestFpApi}>
-          <BehandlingForeldrepengerIndex
-            behandlingEventHandler={{
-              setHandler: () => {},
-              clear: () => {},
-              settBehandlingPaVent: () => undefined,
-            }}
-            behandlingUuid="test-uuid"
-            oppdaterBehandlingVersjon={() => {}}
-            // @ts-ignore
-            kodeverk={alleKodeverk as AlleKodeverk}
-            fagsak={{
-              fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
-            } as Fagsak}
-            rettigheter={{
-              writeAccess: {
-                isEnabled: true,
-              },
-              kanOverstyreAccess: {
-                isEnabled: true,
-              },
-            } as AksessRettigheter}
-            oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
-            valgtProsessSteg="default"
-            valgtFaktaSteg="default"
-            opneSokeside={() => {}}
-            setRequestPendingMessage={() => {}}
-          />
-        </RestApiMock>,
+        <RawIntlProvider value={intl}>
+          <RestApiMock data={data} requestApi={requestFpApi}>
+            <BehandlingForeldrepengerIndex
+              behandlingEventHandler={{
+                setHandler: () => {},
+                clear: () => {},
+                settBehandlingPaVent: () => undefined,
+              }}
+              behandlingUuid="test-uuid"
+              oppdaterBehandlingVersjon={() => {}}
+              // @ts-ignore
+              kodeverk={alleKodeverk as AlleKodeverk}
+              fagsak={{
+                fagsakYtelseType: fagsakYtelseType.FORELDREPENGER,
+              } as Fagsak}
+              rettigheter={{
+                writeAccess: {
+                  isEnabled: true,
+                },
+                kanOverstyreAccess: {
+                  isEnabled: true,
+                },
+              } as AksessRettigheter}
+              oppdaterProsessStegOgFaktaPanelIUrl={() => {}}
+              valgtProsessSteg="default"
+              valgtFaktaSteg="default"
+              opneSokeside={() => {}}
+              setRequestPendingMessage={() => {}}
+            />
+          </RestApiMock>
+        </RawIntlProvider>,
       );
     });
 
