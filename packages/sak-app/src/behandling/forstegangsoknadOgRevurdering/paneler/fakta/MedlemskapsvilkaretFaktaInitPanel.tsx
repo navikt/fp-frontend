@@ -1,0 +1,54 @@
+import React, {
+  FunctionComponent,
+} from 'react';
+import { useIntl } from 'react-intl';
+
+import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
+import MedlemskapFaktaIndex from '@fpsak-frontend/fakta-medlemskap';
+import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
+import { Aksjonspunkt, Medlemskap, Soknad } from '@fpsak-frontend/types';
+
+import FaktaPanelInitProps from '../../../felles/types/faktaPanelInitProps';
+import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
+import FaktaDefaultInitPanel from '../../../felles/components/fakta/FaktaDefaultInitPanel';
+
+const AKSJONSPUNKT_KODER = [
+  aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT,
+  aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
+  aksjonspunktCodes.AVKLAR_OPPHOLDSRETT,
+  aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD,
+  aksjonspunktCodes.AVKLAR_FORTSATT_MEDLEMSKAP,
+];
+
+const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, BehandlingFellesApiKeys.SOKNAD];
+type EndepunktInitData = {
+  aksjonspunkter: Aksjonspunkt[];
+  soknad: Soknad;
+}
+
+const ENDEPUNKTER_PANEL_DATA = [BehandlingFellesApiKeys.MEDLEMSKAP];
+type EndepunktPanelData = {
+  medlemskap: Medlemskap;
+}
+
+/**
+ * MedlemskapsvilkaretFaktaInitPanel
+ */
+const MedlemskapsvilkaretFaktaInitPanel: FunctionComponent<FaktaPanelInitProps> = ({
+  ...props
+}) => (
+  <FaktaDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+    {...props}
+    initEndepunkter={ENDEPUNKTER_INIT_DATA}
+    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
+    aksjonspunktKoder={AKSJONSPUNKT_KODER}
+    faktaPanelKode={FaktaPanelCode.MEDLEMSKAPSVILKARET}
+    faktaPanelMenyTekst={useIntl().formatMessage({ id: 'MedlemskapInfoPanel.Medlemskap' })}
+    skalPanelVisesIMeny={(initData) => !!initData?.soknad}
+    renderPanel={(data) => (
+      <MedlemskapFaktaIndex {...data} />
+    )}
+  />
+);
+
+export default MedlemskapsvilkaretFaktaInitPanel;

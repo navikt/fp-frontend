@@ -1,22 +1,28 @@
 import React, {
   FunctionComponent, useEffect, useState,
 } from 'react';
-import { injectIntl, FormattedMessage, WrappedComponentProps } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { VilkarUtfallType } from '@navikt/ft-kodeverk';
 
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import ProsessPanelWrapper from './ProsessPanelWrapper';
-import ProsessPanelInitProps from '../../types/prosessPanelInitProps';
+import ProsessPanelMenyData from '../../types/prosessPanelMenyData';
 
 const ID = 'henlagt';
 
-const BehandlingHenlagtPanel: FunctionComponent<ProsessPanelInitProps & WrappedComponentProps> = ({
-  intl,
+type OwnProps = {
+  valgtProsessSteg: string;
+  registrerProsessPanel: (data: ProsessPanelMenyData) => void;
+}
+
+const BehandlingHenlagtPanel: FunctionComponent<OwnProps> = ({
   valgtProsessSteg,
   registrerProsessPanel,
 }) => {
+  const intl = useIntl();
+
   const [erPanelValgt, setPanelValgt] = useState(false);
 
   useEffect(() => {
@@ -46,4 +52,4 @@ const BehandlingHenlagtPanel: FunctionComponent<ProsessPanelInitProps & WrappedC
   );
 };
 
-export default injectIntl(BehandlingHenlagtPanel);
+export default BehandlingHenlagtPanel;

@@ -47,6 +47,7 @@ const BehandlingContainer: FunctionComponent<OwnProps> = ({
         oppdaterProsessStegOgFaktaPanelIUrl={oppdaterProsessStegOgFaktaPanelIUrl}
         behandling={behandling}
         apentFaktaPanelInfo={apentFaktaPanelInfo}
+        requestApi={requestApi}
       />
       <FaktaContainer
         hentPaneler={hentFaktaPaneler}

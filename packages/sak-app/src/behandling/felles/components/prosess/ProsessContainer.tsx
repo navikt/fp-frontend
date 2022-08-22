@@ -4,6 +4,8 @@ import React, {
 import { Behandling } from '@navikt/ft-types';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
+import { RequestApi } from '@fpsak-frontend/rest-api';
+
 import BehandlingHenlagtPanel from './BehandlingHenlagtPanel';
 import ProsessMeny from './ProsessMeny';
 import ProsessPanelMenyData from '../../types/prosessPanelMenyData';
@@ -18,6 +20,7 @@ interface OwnProps {
   valgtFaktaSteg?: string;
   oppdaterProsessStegOgFaktaPanelIUrl: (punktnavn?: string, faktanavn?: string) => void;
   apentFaktaPanelInfo?: {urlCode: string, text: string };
+  requestApi: RequestApi;
 }
 
 const ProsessContainer: FunctionComponent<OwnProps> = ({
@@ -27,6 +30,7 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
   valgtFaktaSteg,
   oppdaterProsessStegOgFaktaPanelIUrl,
   apentFaktaPanelInfo,
+  requestApi,
 }) => {
   const [menyData, setMenyData] = useState<ProsessPanelMenyData[]>([]);
 
@@ -82,12 +86,13 @@ const ProsessContainer: FunctionComponent<OwnProps> = ({
         behandling,
         valgtProsessSteg,
         registrerProsessPanel,
+        requestApi,
       }, {
         apentFaktaPanelInfo,
         allMenyData: currentData,
       })}
       {behandling.behandlingHenlagt && (
-        <BehandlingHenlagtPanel valgtProsessSteg={valgtProsessSteg} registrerProsessPanel={registrerProsessPanel} behandling={behandling} />
+        <BehandlingHenlagtPanel valgtProsessSteg={valgtProsessSteg} registrerProsessPanel={registrerProsessPanel} />
       )}
     </div>
   );

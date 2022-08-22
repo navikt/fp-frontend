@@ -41,7 +41,7 @@ describe('indexHooks', () => {
     const apiMock = new MockAdapter(requestApi.getAxios());
     apiMock.onGet('behandling-url').replyOnce(200, behandlingSomHentes);
 
-    const { result } = renderHook(() => useBehandling(requestApi, BEHANDLING_KEY, '1'));
+    const { result } = renderHook(() => useBehandling(requestApi, '1'));
     await waitFor(() => expect(result.current.behandling).toEqual(behandlingSomHentes));
 
     expect(result.current.behandlingState).toEqual(RestApiState.SUCCESS);
@@ -63,9 +63,7 @@ describe('indexHooks', () => {
     apiMock.onGet('ap-url').replyOnce(200, behandlingSomHentes);
     apiMock.onGet('oap-url').replyOnce(200, behandlingSomHentes);
 
-    const { result } = renderHook(() => useLagreAksjonspunkt(
-      requestApi, setBehandling, LAGRE_AKSJONSPUNKT_KEY, LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY,
-    ));
+    const { result } = renderHook(() => useLagreAksjonspunkt(requestApi, setBehandling));
 
     await act(async () => {
       result.current.lagreAksjonspunkter([]);
@@ -91,9 +89,7 @@ describe('indexHooks', () => {
     apiMock.onGet('ap-url').replyOnce(200, behandlingSomHentes);
     apiMock.onGet('oap-url').replyOnce(200, behandlingSomHentes);
 
-    const { result } = renderHook(() => useLagreAksjonspunkt(
-      requestApi, setBehandling, LAGRE_AKSJONSPUNKT_KEY, LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY,
-    ));
+    const { result } = renderHook(() => useLagreAksjonspunkt(requestApi, setBehandling));
 
     await act(async () => {
       result.current.lagreOverstyrteAksjonspunkter([]);
