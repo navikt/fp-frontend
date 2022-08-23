@@ -8,9 +8,9 @@ import SakenFaktaIndex from '@fpsak-frontend/fakta-saken';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import { Aksjonspunkt, Soknad } from '@fpsak-frontend/types';
 
-import FaktaPanelInitProps from '../../../felles/types/faktaPanelInitProps';
+import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
-import FaktaDefaultInitPanel from '../../../felles/components/fakta/FaktaDefaultInitPanel';
+import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,

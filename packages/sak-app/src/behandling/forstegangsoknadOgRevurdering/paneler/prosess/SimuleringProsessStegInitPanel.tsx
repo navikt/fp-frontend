@@ -13,10 +13,10 @@ import {
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import useStandardProsessPanelProps from '../../../felles/utils/prosess/useStandardProsessPanelProps';
-import ProsessDefaultInitPanel from '../../../felles/components/prosess/ProsessDefaultInitPanel';
-import ProsessPanelMenyData from '../../../felles/types/prosessPanelMenyData';
-import ProsessPanelInitProps from '../../../felles/types/prosessPanelInitProps';
+import useStandardProsessPanelProps from '../../../felles/prosess/useStandardProsessPanelProps';
+import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
+import ProsessPanelMenyData from '../../../felles/typer/prosessPanelMenyData';
+import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 
 const getForhandsvisFptilbakeCallback = (

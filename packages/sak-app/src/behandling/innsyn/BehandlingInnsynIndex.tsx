@@ -3,9 +3,9 @@ import React, { FunctionComponent } from 'react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
-import BehandlingContainer from '../felles/components/BehandlingContainer';
-import StandardBehandlingProps from '../felles/types/standardBehandlingProps';
-import BehandlingPaVent from '../felles/components/modaler/paVent/BehandlingPaVent';
+import BehandlingContainer from '../felles/BehandlingContainer';
+import StandardBehandlingProps from '../felles/typer/standardBehandlingProps';
+import BehandlingPaVent from '../felles/modaler/paVent/BehandlingPaVent';
 import StandardPropsProvider from '../felles/utils/standardPropsStateContext';
 import {
   useBehandling, useInitBehandlingHandlinger, useInitRequestApi, useLagreAksjonspunkt,

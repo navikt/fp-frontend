@@ -13,12 +13,12 @@ import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { ForhåndsvisMeldingParams, KlageVurdering } from '@fpsak-frontend/types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import ProsessDefaultInitPanel from '../../felles/components/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/types/prosessPanelInitProps';
+import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
+import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import { restApiKlageHooks, KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';
-import useStandardProsessPanelProps from '../../felles/utils/prosess/useStandardProsessPanelProps';
-import FatterVedtakStatusModal from '../../felles/components/modaler/vedtak/FatterVedtakStatusModal';
+import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
+import FatterVedtakStatusModal from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 
 const lagForhandsvisCallback = (
   forhandsvisMelding: (params: ForhåndsvisMeldingParams, keepData?: boolean) => Promise<any>,

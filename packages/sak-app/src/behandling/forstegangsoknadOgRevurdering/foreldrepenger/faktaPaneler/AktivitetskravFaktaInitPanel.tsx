@@ -9,9 +9,9 @@ import { Aksjonspunkt, UttakKontrollerAktivitetskrav } from '@fpsak-frontend/typ
 
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 
-import FaktaPanelInitProps from '../../../felles/types/faktaPanelInitProps';
+import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
-import FaktaDefaultInitPanel from '../../../felles/components/fakta/FaktaDefaultInitPanel';
+import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 import { FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.KONTROLLER_AKTIVITETSKRAV];

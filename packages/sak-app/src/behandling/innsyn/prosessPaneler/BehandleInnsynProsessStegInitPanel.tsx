@@ -9,8 +9,8 @@ import InnsynProsessIndex from '@fpsak-frontend/prosess-innsyn';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { Innsyn } from '@fpsak-frontend/types';
 
-import ProsessDefaultInitPanel from '../../felles/components/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/types/prosessPanelInitProps';
+import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
+import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import { requestInnsynApi, InnsynBehandlingApiKeys } from '../data/innsynBehandlingApi';
 

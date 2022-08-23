@@ -9,8 +9,8 @@ import AdopsjonInngangsvilkarInitPanel from './inngangsvilkarPaneler/AdopsjonInn
 import MedlemskapInngangsvilkarInitPanel from '../../paneler/prosess/inngangsvilkarPaneler/MedlemskapInngangsvilkarInitPanel';
 import ForeldreansvarInngangsvilkarInitPanel from '../../paneler/prosess/inngangsvilkarPaneler/ForeldreansvarInngangsvilkarInitPanel';
 import OmsorgInngangsvilkarInitPanel from './inngangsvilkarPaneler/OmsorgInngangsvilkarInitPanel';
-import ProsessPanelInitProps from '../../../felles/types/prosessPanelInitProps';
-import InngangsvilkarDefaultInitWrapper from '../../../felles/components/prosess/InngangsvilkarDefaultInitWrapper';
+import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
+import InngangsvilkarDefaultInitWrapper from '../../../felles/prosess/InngangsvilkarDefaultInitWrapper';
 
 interface OwnProps {
   apentFaktaPanelInfo?: {urlCode: string, text: string };

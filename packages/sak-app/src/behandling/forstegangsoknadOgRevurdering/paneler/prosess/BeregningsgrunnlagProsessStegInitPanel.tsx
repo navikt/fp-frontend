@@ -11,9 +11,9 @@ import { Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/ft-types';
 import { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@fpsak-frontend/types';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
-import ProsessDefaultInitPanel from '../../../felles/components/prosess/ProsessDefaultInitPanel';
-import DynamicLoader from '../../../felles/components/DynamicLoader';
-import ProsessPanelInitProps from '../../../felles/types/prosessPanelInitProps';
+import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
+import DynamicLoader from '../../../felles/DynamicLoader';
+import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 
 // TODO Denne burde ligga sånn til at den kun blir importert når denne pakka dynamisk blir importert

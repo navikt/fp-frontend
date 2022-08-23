@@ -11,9 +11,9 @@ import {
   Aksjonspunkt, FodselOgTilrettelegging, Vilkar,
 } from '@fpsak-frontend/types';
 
-import InngangsvilkarPanelInitProps from '../../../../felles/types/inngangsvilkarPanelInitProps';
+import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilkarPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../../felles/data/behandlingFellesApi';
-import InngangsvilkarDefaultInitPanel from '../../../../felles/components/prosess/InngangsvilkarDefaultInitPanel';
+import InngangsvilkarDefaultInitPanel from '../../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 
 import { SvpBehandlingApiKeys } from '../../data/svpBehandlingApi';
 

@@ -4,7 +4,7 @@ import React, {
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
-import StandardBehandlingProps from '../felles/types/standardBehandlingProps';
+import StandardBehandlingProps from '../felles/typer/standardBehandlingProps';
 import {
   useBehandling, useInitBehandlingHandlinger, useInitRequestApi, useLagreAksjonspunkt,
 } from '../felles/utils/indexHooks';

@@ -11,9 +11,9 @@ import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { AnkeVurdering, ForhåndsvisMeldingParams } from '@fpsak-frontend/types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import ProsessDefaultInitPanel from '../../felles/components/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/types/prosessPanelInitProps';
-import useStandardProsessPanelProps from '../../felles/utils/prosess/useStandardProsessPanelProps';
+import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
+import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
+import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
 import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import { restApiAnkeHooks, requestAnkeApi, AnkeBehandlingApiKeys } from '../data/ankeBehandlingApi';
 

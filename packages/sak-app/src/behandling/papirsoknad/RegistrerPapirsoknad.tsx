@@ -12,7 +12,7 @@ import { AsyncPollingStatus } from '@fpsak-frontend/rest-api';
 import { RegistrerPapirsoknadPanel, SoknadRegistrertModal } from '@fpsak-frontend/papirsoknad';
 
 import { BehandlingFellesApiKeys } from '../felles/data/behandlingFellesApi';
-import BehandlingPaVent from '../felles/components/modaler/paVent/BehandlingPaVent';
+import BehandlingPaVent from '../felles/modaler/paVent/BehandlingPaVent';
 import { restApiPapirsoknadHooks, requestPapirsoknadApi } from './data/papirsoknadApi';
 
 const getAktivtPapirsoknadApKode = (aksjonspunkter: Aksjonspunkt[]): string => aksjonspunkter

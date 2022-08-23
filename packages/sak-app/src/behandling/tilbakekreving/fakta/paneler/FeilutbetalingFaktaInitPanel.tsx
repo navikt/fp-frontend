@@ -9,7 +9,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 
-import DynamicLoader from '../../../felles/components/DynamicLoader';
+import DynamicLoader from '../../../felles/DynamicLoader';
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 import getAlleMerknaderFraBeslutter from '../../felles/util/getAlleMerknaderFraBeslutter';
 

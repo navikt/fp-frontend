@@ -10,9 +10,9 @@ import klageVurderingKodeverk from '@fpsak-frontend/kodeverk/src/klageVurdering'
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import ProsessDefaultInitPanel from '../../felles/components/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/types/prosessPanelInitProps';
-import useStandardProsessPanelProps from '../../felles/utils/prosess/useStandardProsessPanelProps';
+import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
+import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
+import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
 import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import { restApiKlageHooks, KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';
 import KlageBehandlingModal from '../modaler/KlageBehandlingModal';

@@ -18,11 +18,11 @@ import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
-import ProsessDefaultInitPanel from '../../../felles/components/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../../felles/types/prosessPanelInitProps';
-import IverksetterVedtakStatusModal from '../../../felles/components/modaler/vedtak/IverksetterVedtakStatusModal';
-import FatterVedtakStatusModal from '../../../felles/components/modaler/vedtak/FatterVedtakStatusModal';
-import useStandardProsessPanelProps from '../../../felles/utils/prosess/useStandardProsessPanelProps';
+import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
+import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
+import IverksetterVedtakStatusModal from '../../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
+import FatterVedtakStatusModal from '../../../felles/modaler/vedtak/FatterVedtakStatusModal';
+import useStandardProsessPanelProps from '../../../felles/prosess/useStandardProsessPanelProps';
 
 import { restApiFpHooks } from '../data/fpBehandlingApi';
 

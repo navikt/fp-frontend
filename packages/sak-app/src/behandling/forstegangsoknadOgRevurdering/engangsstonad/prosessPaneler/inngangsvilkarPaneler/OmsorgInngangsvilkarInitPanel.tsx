@@ -8,9 +8,9 @@ import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import OmsorgVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-omsorg';
 import { Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
-import InngangsvilkarPanelInitProps from '../../../../felles/types/inngangsvilkarPanelInitProps';
+import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilkarPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../../felles/data/behandlingFellesApi';
-import InngangsvilkarDefaultInitPanel from '../../../../felles/components/prosess/InngangsvilkarDefaultInitPanel';
+import InngangsvilkarDefaultInitPanel from '../../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 
 const AKSJONSPUNKT_TEKST_PER_KODE = {
   [aksjonspunktCodes.MANUELL_VURDERING_AV_OMSORGSVILKARET]: 'ErOmsorgVilkaarOppfyltForm.Paragraf',

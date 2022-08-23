@@ -9,7 +9,7 @@ import {
   Medlemskap, Opptjening, Personoversikt, SimuleringResultat, Soknad, TilbakekrevingValg, Verge, Vilkar, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
-import { SettPaVentParams } from '../components/modaler/paVent/BehandlingPaVent';
+import { SettPaVentParams } from '../modaler/paVent/BehandlingPaVent';
 
 type NyBehandlendeEnhet = {
   behandlingUuid: string,

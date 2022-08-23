@@ -17,11 +17,11 @@ import {
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import ProsessDefaultInitPanel from '../../../felles/components/prosess/ProsessDefaultInitPanel';
-import IverksetterVedtakStatusModal from '../../../felles/components/modaler/vedtak/IverksetterVedtakStatusModal';
-import FatterVedtakStatusModal from '../../../felles/components/modaler/vedtak/FatterVedtakStatusModal';
-import ProsessPanelInitProps from '../../../felles/types/prosessPanelInitProps';
-import useStandardProsessPanelProps from '../../../felles/utils/prosess/useStandardProsessPanelProps';
+import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
+import IverksetterVedtakStatusModal from '../../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
+import FatterVedtakStatusModal from '../../../felles/modaler/vedtak/FatterVedtakStatusModal';
+import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
+import useStandardProsessPanelProps from '../../../felles/prosess/useStandardProsessPanelProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import { restApiEsHooks, EsBehandlingApiKeys, requestEsApi } from '../data/esBehandlingApi';
 

@@ -9,10 +9,10 @@ import {
   AksessRettigheter, Aksjonspunkt, Medlemskap, Vilkar,
 } from '@fpsak-frontend/types';
 
-import InngangsvilkarPanelInitProps from '../../../../felles/types/inngangsvilkarPanelInitProps';
+import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilkarPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../../felles/data/behandlingFellesApi';
-import InngangsvilkarDefaultInitPanel from '../../../../felles/components/prosess/InngangsvilkarDefaultInitPanel';
-import OverstyringPanelDef from '../../../../felles/components/prosess/OverstyringPanelDef';
+import InngangsvilkarDefaultInitPanel from '../../../../felles/prosess/InngangsvilkarDefaultInitPanel';
+import OverstyringPanelDef from '../../../../felles/prosess/OverstyringPanelDef';
 
 const AKSJONSPUNKT_KODE = aksjonspunktCodes.OVERSTYR_MEDLEMSKAPSVILKAR;
 

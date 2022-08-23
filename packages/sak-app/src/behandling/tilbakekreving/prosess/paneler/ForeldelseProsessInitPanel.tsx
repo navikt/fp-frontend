@@ -8,7 +8,7 @@ import { ForeldelseAksjonspunktCodes, VurderForeldelseAp } from '@navikt/ft-pros
 
 import { restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
 import getAlleMerknaderFraBeslutter from '../../felles/util/getAlleMerknaderFraBeslutter';
-import DynamicLoader from '../../../felles/components/DynamicLoader';
+import DynamicLoader from '../../../felles/DynamicLoader';
 
 // TODO Denne burde ligga sånn til at den kun blir importert når denne pakka dynamisk blir importert
 import '@navikt/ft-prosess-tilbakekreving-foreldelse/dist/style.css';

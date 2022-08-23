@@ -11,10 +11,10 @@ import {
   AksessRettigheter, Aksjonspunkt, FamilieHendelseSamling, Soknad, Vilkar,
 } from '@fpsak-frontend/types';
 
-import ProsessDefaultInitPanel from '../../../felles/components/prosess/ProsessDefaultInitPanel';
-import OverstyringPanelDef from '../../../felles/components/prosess/OverstyringPanelDef';
-import ProsessPanelInitProps from '../../../felles/types/prosessPanelInitProps';
-import skalViseProsessPanel from '../../../felles/utils/prosess/skalViseProsessPanel';
+import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
+import OverstyringPanelDef from '../../../felles/prosess/OverstyringPanelDef';
+import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
+import skalViseProsessPanel from '../../../felles/prosess/skalViseProsessPanel';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 
 const AKSJONSPUNKT_KODER = [

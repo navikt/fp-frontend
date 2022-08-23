@@ -12,10 +12,10 @@ import {
 } from '@fpsak-frontend/types';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 
-import skalViseProsessPanel from '../../../felles/utils/prosess/skalViseProsessPanel';
-import ProsessDefaultInitPanel from '../../../felles/components/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../../felles/types/prosessPanelInitProps';
-import useStandardProsessPanelProps from '../../../felles/utils/prosess/useStandardProsessPanelProps';
+import skalViseProsessPanel from '../../../felles/prosess/skalViseProsessPanel';
+import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
+import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
+import useStandardProsessPanelProps from '../../../felles/prosess/useStandardProsessPanelProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 
 const getForhandsvisCallback = (

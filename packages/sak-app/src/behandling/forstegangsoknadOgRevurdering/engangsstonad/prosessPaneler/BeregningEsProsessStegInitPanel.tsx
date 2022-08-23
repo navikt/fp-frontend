@@ -14,8 +14,8 @@ import {
 
 import { EsBehandlingApiKeys, requestEsApi } from '../data/esBehandlingApi';
 
-import ProsessDefaultInitPanel from '../../../felles/components/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../../felles/types/prosessPanelInitProps';
+import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
+import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.OVERSTYR_BEREGNING];

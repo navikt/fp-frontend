@@ -4,8 +4,8 @@ import React, {
 
 import { AksessRettigheter } from '@fpsak-frontend/types';
 
-import ProsessPanelInitProps from '../../../felles/types/prosessPanelInitProps';
-import InngangsvilkarDefaultInitWrapper from '../../../felles/components/prosess/InngangsvilkarDefaultInitWrapper';
+import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
+import InngangsvilkarDefaultInitWrapper from '../../../felles/prosess/InngangsvilkarDefaultInitWrapper';
 import SvangerskapInngangsvilkarInitPanel from './inngangsvilkarPaneler/SvangerskapInngangsvilkarInitPanel';
 import MedlemskapInngangsvilkarInitPanel from '../../paneler/prosess/inngangsvilkarPaneler/MedlemskapInngangsvilkarInitPanel';
 import OpptjeningInngangsvilkarInitPanel from './inngangsvilkarPaneler/OpptjeningInngangsvilkarInitPanel';

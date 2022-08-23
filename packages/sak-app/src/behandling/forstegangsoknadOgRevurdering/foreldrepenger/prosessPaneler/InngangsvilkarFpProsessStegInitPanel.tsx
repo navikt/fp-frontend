@@ -8,8 +8,8 @@ import FodselInngangsvilkarFpInitPanel from './inngangsvilkarPaneler/FodselInnga
 import AdopsjonInngangsvilkarFpInitPanel from './inngangsvilkarPaneler/AdopsjonInngangsvilkarFpInitPanel';
 import OpptjeningInngangsvilkarFpInitPanel from './inngangsvilkarPaneler/OpptjeningInngangsvilkarFpInitPanel';
 import OmsorgInngangsvilkarFpInitPanel from './inngangsvilkarPaneler/OmsorgInngangsvilkarFpInitPanel';
-import ProsessPanelInitProps from '../../../felles/types/prosessPanelInitProps';
-import InngangsvilkarDefaultInitWrapper from '../../../felles/components/prosess/InngangsvilkarDefaultInitWrapper';
+import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
+import InngangsvilkarDefaultInitWrapper from '../../../felles/prosess/InngangsvilkarDefaultInitWrapper';
 import MedlemskapInngangsvilkarInitPanel from '../../paneler/prosess/inngangsvilkarPaneler/MedlemskapInngangsvilkarInitPanel';
 import ForeldreansvarInngangsvilkarInitPanel from '../../paneler/prosess/inngangsvilkarPaneler/ForeldreansvarInngangsvilkarInitPanel';
 

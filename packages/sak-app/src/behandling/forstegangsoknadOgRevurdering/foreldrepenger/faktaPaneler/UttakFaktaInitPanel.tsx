@@ -12,9 +12,9 @@ import {
   UttakKontrollerFaktaPerioderWrapper, Ytelsefordeling,
 } from '@fpsak-frontend/types';
 
-import FaktaPanelInitProps from '../../../felles/types/faktaPanelInitProps';
+import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
-import FaktaDefaultInitPanel from '../../../felles/components/fakta/FaktaDefaultInitPanel';
+import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 import { FpBehandlingApiKeys } from '../data/fpBehandlingApi';
 
 const AKSJONSPUNKT_KODER = [

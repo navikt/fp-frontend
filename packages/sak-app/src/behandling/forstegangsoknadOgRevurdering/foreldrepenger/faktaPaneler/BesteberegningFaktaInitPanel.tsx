@@ -9,9 +9,9 @@ import { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@fpsak-fronte
 
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 
-import FaktaPanelInitProps from '../../../felles/types/faktaPanelInitProps';
+import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
-import FaktaDefaultInitPanel from '../../../felles/components/fakta/FaktaDefaultInitPanel';
+import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
 const ENDEPUNKTER_INIT_DATA = [BehandlingFellesApiKeys.AKSJONSPUNKTER, BehandlingFellesApiKeys.BEREGNINGSGRUNNLAG];
 type EndepunktInitData = {

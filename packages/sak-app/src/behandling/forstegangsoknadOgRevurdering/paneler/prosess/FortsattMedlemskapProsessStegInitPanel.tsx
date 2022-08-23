@@ -8,10 +8,10 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { AksessRettigheter, Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
 
-import skalViseProsessPanel from '../../../felles/utils/prosess/skalViseProsessPanel';
-import ProsessDefaultInitPanel from '../../../felles/components/prosess/ProsessDefaultInitPanel';
-import OverstyringPanelDef from '../../../felles/components/prosess/OverstyringPanelDef';
-import ProsessPanelInitProps from '../../../felles/types/prosessPanelInitProps';
+import skalViseProsessPanel from '../../../felles/prosess/skalViseProsessPanel';
+import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
+import OverstyringPanelDef from '../../../felles/prosess/OverstyringPanelDef';
+import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 
 const AKSJONSPUNKT_KODE = aksjonspunktCodes.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR;

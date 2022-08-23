@@ -14,10 +14,10 @@ import VedtakInnsynProsessIndex, { InnsynBrevData } from '@fpsak-frontend/proses
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { ForhåndsvisMeldingParams, Innsyn } from '@fpsak-frontend/types';
 
-import ProsessDefaultInitPanel from '../../felles/components/prosess/ProsessDefaultInitPanel';
-import IverksetterVedtakStatusModal from '../../felles/components/modaler/vedtak/IverksetterVedtakStatusModal';
-import ProsessPanelInitProps from '../../felles/types/prosessPanelInitProps';
-import useStandardProsessPanelProps from '../../felles/utils/prosess/useStandardProsessPanelProps';
+import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
+import IverksetterVedtakStatusModal from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
+import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
+import useStandardProsessPanelProps from '../../felles/prosess/useStandardProsessPanelProps';
 import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import { restApiInnsynHooks, requestInnsynApi, InnsynBehandlingApiKeys } from '../data/innsynBehandlingApi';
 

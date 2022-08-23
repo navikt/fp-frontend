@@ -5,9 +5,9 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
-import BehandlingContainer from '../../felles/components/BehandlingContainer';
-import StandardBehandlingProps from '../../felles/types/standardBehandlingProps';
-import BehandlingPaVent from '../../felles/components/modaler/paVent/BehandlingPaVent';
+import BehandlingContainer from '../../felles/BehandlingContainer';
+import StandardBehandlingProps from '../../felles/typer/standardBehandlingProps';
+import BehandlingPaVent from '../../felles/modaler/paVent/BehandlingPaVent';
 import StandardPropsProvider from '../../felles/utils/standardPropsStateContext';
 import {
   useBehandling, useInitBehandlingHandlinger, useInitRequestApi, useLagreAksjonspunkt,
@@ -17,7 +17,7 @@ import SakenFaktaInitPanel from '../paneler/fakta/SakenFaktaInitPanel';
 import ArbeidsforholdFaktaInitPanel from '../paneler/fakta/ArbeidsforholdFaktaInitPanel';
 import ArbeidOgInntektFaktaInitPanel from '../paneler/fakta/ArbeidOgInntektFaktaInitPanel';
 import YtelserFaktaInitPanel from '../paneler/fakta/YtelserFaktaInitPanel';
-import VergeFaktaInitPanel from '../../felles/paneler/fakta/VergeFaktaInitPanel';
+import VergeFaktaInitPanel from '../../felles/fakta/paneler/VergeFaktaInitPanel';
 import FodseltilretteleggingFaktaInitPanel from './faktaPaneler/FodseltilretteleggingFaktaInitPanel';
 import MedlemskapsvilkaretFaktaInitPanel from '../paneler/fakta/MedlemskapsvilkaretFaktaInitPanel';
 import OpptjeningsvilkaretFaktaInitPanel from '../paneler/fakta/OpptjeningsvilkaretFaktaInitPanel';

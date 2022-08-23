@@ -7,7 +7,7 @@ import { usePrevious } from '@navikt/ft-ui-komponenter';
 import { RestApiHooks, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
 import { RequestApi } from '@fpsak-frontend/rest-api';
 
-import { BehandlingEventHandler } from '../types/standardBehandlingProps';
+import { BehandlingEventHandler } from '../typer/standardBehandlingProps';
 import { BehandlingFellesApiKeys } from '../data/behandlingFellesApi';
 
 export type NyBehandlendeEnhetParams = {

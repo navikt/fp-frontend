@@ -10,10 +10,10 @@ import { FaktaPanelCode } from '@fpsak-frontend/konstanter';
 import { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Vilkar as FpVilkar } from '@fpsak-frontend/types';
 import vilkarType from '@fpsak-frontend/kodeverk/src/vilkarType';
 
-import FaktaPanelInitProps from '../../../felles/types/faktaPanelInitProps';
-import DynamicLoader from '../../../felles/components/DynamicLoader';
+import FaktaPanelInitProps from '../../../felles/typer/faktaPanelInitProps';
+import DynamicLoader from '../../../felles/DynamicLoader';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
-import FaktaDefaultInitPanel from '../../../felles/components/fakta/FaktaDefaultInitPanel';
+import FaktaDefaultInitPanel from '../../../felles/fakta/FaktaDefaultInitPanel';
 
 // TODO Denne burde ligga sånn til at den kun blir importert når denne pakka dynamisk blir importert
 import '@navikt/ft-fakta-fordel-beregningsgrunnlag/dist/style.css';

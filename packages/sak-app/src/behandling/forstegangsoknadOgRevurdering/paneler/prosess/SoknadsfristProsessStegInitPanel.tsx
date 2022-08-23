@@ -8,9 +8,9 @@ import VurderSoknadsfristForeldrepengerIndex from '@fpsak-frontend/prosess-sokna
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { Aksjonspunkt, Soknad } from '@fpsak-frontend/types';
 
-import skalViseProsessPanel from '../../../felles/utils/prosess/skalViseProsessPanel';
-import ProsessDefaultInitPanel from '../../../felles/components/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../../felles/types/prosessPanelInitProps';
+import skalViseProsessPanel from '../../../felles/prosess/skalViseProsessPanel';
+import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
+import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.VURDER_SOKNADSFRIST_FORELDREPENGER];

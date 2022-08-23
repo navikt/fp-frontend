@@ -19,11 +19,11 @@ import { forhandsvisDokument } from '@navikt/ft-utils';
 
 import { restApiSvpHooks } from '../data/svpBehandlingApi';
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
-import ProsessDefaultInitPanel from '../../../felles/components/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../../felles/types/prosessPanelInitProps';
-import IverksetterVedtakStatusModal from '../../../felles/components/modaler/vedtak/IverksetterVedtakStatusModal';
-import FatterVedtakStatusModal from '../../../felles/components/modaler/vedtak/FatterVedtakStatusModal';
-import useStandardProsessPanelProps from '../../../felles/utils/prosess/useStandardProsessPanelProps';
+import ProsessDefaultInitPanel from '../../../felles/prosess/ProsessDefaultInitPanel';
+import ProsessPanelInitProps from '../../../felles/typer/prosessPanelInitProps';
+import IverksetterVedtakStatusModal from '../../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
+import FatterVedtakStatusModal from '../../../felles/modaler/vedtak/FatterVedtakStatusModal';
+import useStandardProsessPanelProps from '../../../felles/prosess/useStandardProsessPanelProps';
 
 const hasOnlyClosedAps = (aksjonspunkter: Aksjonspunkt[], vedtakAksjonspunkter: Aksjonspunkt[]): boolean => aksjonspunkter
   .filter((ap) => !vedtakAksjonspunkter.some((vap) => vap.definisjon === ap.definisjon))

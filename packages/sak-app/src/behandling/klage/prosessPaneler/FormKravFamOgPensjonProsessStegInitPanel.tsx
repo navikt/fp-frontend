@@ -10,8 +10,8 @@ import FormkravProsessIndex from '@fpsak-frontend/prosess-formkrav';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 import { KlageVurdering } from '@fpsak-frontend/types';
 
-import ProsessDefaultInitPanel from '../../felles/components/prosess/ProsessDefaultInitPanel';
-import ProsessPanelInitProps from '../../felles/types/prosessPanelInitProps';
+import ProsessDefaultInitPanel from '../../felles/prosess/ProsessDefaultInitPanel';
+import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
 import { KlageBehandlingApiKeys, requestKlageApi } from '../data/klageBehandlingApi';
 

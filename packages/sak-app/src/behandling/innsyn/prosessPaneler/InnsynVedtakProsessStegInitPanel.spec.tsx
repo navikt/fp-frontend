@@ -16,7 +16,7 @@ import dokumentMalType from '@fpsak-frontend/kodeverk/src/dokumentMalType';
 import { RequestApi } from '@fpsak-frontend/rest-api';
 
 import { BehandlingFellesApiKeys } from '../../felles/data/behandlingFellesApi';
-import * as Felles from '../../felles/utils/prosess/useStandardProsessPanelProps';
+import * as Felles from '../../felles/prosess/useStandardProsessPanelProps';
 import { requestInnsynApi, InnsynBehandlingApiKeys } from '../data/innsynBehandlingApi';
 import InnsynVedtakProsessStegInitPanel from './InnsynVedtakProsessStegInitPanel';
 

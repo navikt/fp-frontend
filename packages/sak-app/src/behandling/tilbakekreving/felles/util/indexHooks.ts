@@ -8,7 +8,7 @@ import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import { BehandlingFellesApiKeys } from '../../../felles/data/behandlingFellesApi';
 import { requestTilbakekrevingApi, restApiTilbakekrevingHooks, TilbakekrevingBehandlingApiKeys } from '../../data/tilbakekrevingBehandlingApi';
-import { BehandlingEventHandler } from '../../../felles/types/standardBehandlingProps';
+import { BehandlingEventHandler } from '../../../felles/typer/standardBehandlingProps';
 
 export type NyBehandlendeEnhetParams = {
   behandlingUuid: string;

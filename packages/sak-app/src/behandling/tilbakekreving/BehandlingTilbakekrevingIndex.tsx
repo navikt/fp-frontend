@@ -8,7 +8,7 @@ import ProsessIndex from './prosess/ProsessIndex';
 import BehandlingPaVent from './felles/komponenter/BehandlingPaVent';
 import getBekreftAksjonspunktCallback from './felles/util/bekreftAksjonspunkter';
 import { useLagreAksjonspunkt, useBehandling, useInitBehandlingHandlinger } from './felles/util/indexHooks';
-import StandardBehandlingProps from '../felles/types/standardBehandlingProps';
+import StandardBehandlingProps from '../felles/typer/standardBehandlingProps';
 
 interface OwnProps {
   fagsakKjønn: string;

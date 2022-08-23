@@ -7,7 +7,7 @@ import { Fagsak } from '@navikt/ft-types';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegCode } from '@fpsak-frontend/konstanter';
 
-import ProsessPanelInitProps from '../../felles/types/prosessPanelInitProps';
+import ProsessPanelInitProps from '../../felles/typer/prosessPanelInitProps';
 import VurderingFellesProsessStegInitPanel from './VurderingFellesProsessStegInitPanel';
 
 const AKSJONSPUNKT_KODER = [aksjonspunktCodes.BEHANDLE_KLAGE_NK];

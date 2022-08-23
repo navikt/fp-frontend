@@ -9,9 +9,9 @@ import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import OmsorgVilkarProsessIndex from '@fpsak-frontend/prosess-vilkar-omsorg';
 import { Aksjonspunkt, Vilkar } from '@fpsak-frontend/types';
 
-import InngangsvilkarPanelInitProps from '../../../../felles/types/inngangsvilkarPanelInitProps';
+import InngangsvilkarPanelInitProps from '../../../../felles/typer/inngangsvilkarPanelInitProps';
 import { BehandlingFellesApiKeys } from '../../../../felles/data/behandlingFellesApi';
-import InngangsvilkarDefaultInitPanel from '../../../../felles/components/prosess/InngangsvilkarDefaultInitPanel';
+import InngangsvilkarDefaultInitPanel from '../../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 
 const AKSJONSPUNKT_KODER = [
   aksjonspunktCodes.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
