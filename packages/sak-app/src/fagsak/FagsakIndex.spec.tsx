@@ -1,5 +1,4 @@
 import React from 'react';
-import sinon, { SinonStub } from 'sinon';
 import { MemoryRouter } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import { render, screen } from '@testing-library/react';
@@ -53,23 +52,16 @@ describe('<FagsakIndex>', () => {
     navn: 'Peder Pjokk',
   };
 
-  let contextStub: SinonStub;
-  beforeEach(() => {
-    contextStub = sinon.stub(useTrackRouteParam, 'default').callsFake(() => ({
-      selected: '123456',
-      location: {
-        key: '1',
-        pathname: 'test',
-        search: 'test',
-        state: {},
-        hash: 'test',
-      },
-    }));
-  });
-
-  afterEach(() => {
-    contextStub.restore();
-  });
+  jest.spyOn(useTrackRouteParam, 'default').mockImplementation(() => ({
+    selected: '123456',
+    location: {
+      key: '1',
+      pathname: 'test',
+      search: 'test',
+      state: {},
+      hash: 'test',
+    },
+  }));
 
   it('skal vise ventikon', async () => {
     const data = [

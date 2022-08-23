@@ -5,12 +5,10 @@ import { Behandling } from '@navikt/ft-types';
 import { usePrevious } from '@navikt/ft-ui-komponenter';
 
 import { RestApiHooks, useRestApiErrorDispatcher } from '@fpsak-frontend/rest-api-hooks';
-import { RequestApi, RestKey } from '@fpsak-frontend/rest-api';
+import { RequestApi } from '@fpsak-frontend/rest-api';
 
 import { BehandlingEventHandler } from '../types/standardBehandlingProps';
 import { BehandlingFellesApiKeys } from '../data/behandlingFellesApi';
-
-const DUMMY_KEY = new RestKey<any, any>('');
 
 export type NyBehandlendeEnhetParams = {
   behandlingUuid: string;
@@ -96,7 +94,6 @@ export const useBehandling = (
 export const useLagreAksjonspunkt = (
   requestApi: RequestApi,
   setBehandling: (behandling: Behandling) => void,
-  lagreOverstyrtyAksjonspunktKey?: RestKey<Behandling, any>,
 ) => {
   const { useRestApiRunner } = useMemo(() => RestApiHooks.initHooks(requestApi), [requestApi]);
 
@@ -106,12 +103,12 @@ export const useLagreAksjonspunkt = (
   const {
     startRequest: lagreOverstyrteAksjonspunkter,
     data: apOverstyrtBehandlingRes,
-  } = useRestApiRunner(lagreOverstyrtyAksjonspunktKey || DUMMY_KEY);
+  } = useRestApiRunner(BehandlingFellesApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT);
   useSetBehandlingVedEndring(setBehandling, apOverstyrtBehandlingRes);
 
   return {
     lagreAksjonspunkter,
-    lagreOverstyrteAksjonspunkter: lagreOverstyrtyAksjonspunktKey ? lagreOverstyrteAksjonspunkter : undefined,
+    lagreOverstyrteAksjonspunkter,
   };
 };
 

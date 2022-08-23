@@ -3,10 +3,11 @@ import TestRenderer from 'react-test-renderer';
 import MockAdapter from 'axios-mock-adapter';
 import { Behandling } from '@navikt/ft-types';
 
-import { createRequestApi, RestApiConfigBuilder, RestKey } from '@fpsak-frontend/rest-api';
+import { createRequestApi, RestApiConfigBuilder } from '@fpsak-frontend/rest-api';
 import { RestApiState } from '@fpsak-frontend/rest-api-hooks';
 
 import { useBehandling, useLagreAksjonspunkt } from './indexHooks';
+import { BehandlingFellesApiKeys } from '../data/behandlingFellesApi';
 
 const { act } = TestRenderer;
 
@@ -30,10 +31,8 @@ describe('indexHooks', () => {
   }];
 
   it('skal hente behandling fra server og returnere behandling m.m.', async () => {
-    const BEHANDLING_KEY = new RestKey<Behandling, { behandlingUuid: string }>('BEHANDLING_KEY');
-
     const endpoints = new RestApiConfigBuilder()
-      .withRel('Behandling', BEHANDLING_KEY)
+      .withRel('Behandling', BehandlingFellesApiKeys.BEHANDLING)
       .build();
 
     const requestApi = createRequestApi(endpoints);
@@ -49,12 +48,10 @@ describe('indexHooks', () => {
 
   it('skal lagre aksjonspunkt og så oppdatere behandling', async () => {
     const setBehandling = jest.fn();
-    const LAGRE_AKSJONSPUNKT_KEY = new RestKey<Behandling, void>('LAGRE_AKSJONSPUNKT_KEY');
-    const LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY = new RestKey<Behandling, void>('LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY');
 
     const endpoints = new RestApiConfigBuilder()
-      .withRel('Aksjonspunkt', LAGRE_AKSJONSPUNKT_KEY)
-      .withRel('OverstyrtAksjonspunkt', LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY)
+      .withRel('Aksjonspunkt', BehandlingFellesApiKeys.SAVE_AKSJONSPUNKT)
+      .withRel('OverstyrtAksjonspunkt', BehandlingFellesApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT)
       .build();
 
     const requestApi = createRequestApi(endpoints);
@@ -75,12 +72,10 @@ describe('indexHooks', () => {
 
   it('skal lagre overstyrt aksjonspunkt og så oppdatere behandling', async () => {
     const setBehandling = jest.fn();
-    const LAGRE_AKSJONSPUNKT_KEY = new RestKey<Behandling, void>('LAGRE_AKSJONSPUNKT_KEY');
-    const LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY = new RestKey<Behandling, void>('LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY');
 
     const endpoints = new RestApiConfigBuilder()
-      .withRel('Aksjonspunkt', LAGRE_AKSJONSPUNKT_KEY)
-      .withRel('OverstyrtAksjonspunkt', LAGRE_OVERSTYRT_AKSJONSPUNKT_KEY)
+      .withRel('Aksjonspunkt', BehandlingFellesApiKeys.SAVE_AKSJONSPUNKT)
+      .withRel('OverstyrtAksjonspunkt', BehandlingFellesApiKeys.SAVE_OVERSTYRT_AKSJONSPUNKT)
       .build();
 
     const requestApi = createRequestApi(endpoints);
