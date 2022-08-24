@@ -1,5 +1,4 @@
 import React, { FunctionComponent, useEffect, useCallback } from 'react';
-
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 
 import { restApiTilbakekrevingHooks, requestTilbakekrevingApi, TilbakekrevingBehandlingApiKeys } from './data/tilbakekrevingBehandlingApi';
