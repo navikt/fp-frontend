@@ -7,7 +7,7 @@ import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingTyp
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
-  ArbeidsforholdFodselOgTilrettelegging, Arbeidsforhold, Behandling, InntektArbeidYtelse, FodselOgTilrettelegging,
+  ArbeidsforholdFodselOgTilrettelegging, Behandling, InntektArbeidYtelse, FodselOgTilrettelegging,
 } from '@fpsak-frontend/types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
 import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
@@ -20,46 +20,6 @@ const behandling = {
   uuid: '1',
   versjon: 1,
 } as Behandling;
-
-const svangerskapspengerTilretteleggingForArbeidsgiver = {
-  termindato: '2020-01-13',
-  saksbehandlet: false,
-  arbeidsforholdListe: [{
-    tilretteleggingId: 1315951,
-    tilretteleggingBehovFom: '2019-09-16',
-    tilretteleggingDatoer: [{
-      fom: '2019-09-16',
-      type: tilretteleggingType.DELVIS_TILRETTELEGGING,
-      stillingsprosent: 30,
-    }],
-    velferdspermisjoner: [
-      {
-        permisjonFom: '2019-09-10',
-        permisjonTom: null,
-        permisjonsprosent: 50,
-        type: 'VELFERDSPERMISJON',
-      },
-    ],
-    arbeidsgiverReferanse: '3',
-    uttakArbeidType: 'FRILANS',
-    internArbeidsforholdReferanse: 'c5534-6e55-4112-9645-fe52ee4950c2',
-    eksternArbeidsforholdReferanse: 'T555864629R5021761S1103L5555',
-    skalBrukes: true,
-  }, {
-    tilretteleggingId: 1315919,
-    tilretteleggingBehovFom: '2019-09-16',
-    tilretteleggingDatoer: [{
-      fom: '2019-09-16',
-      type: tilretteleggingType.INGEN_TILRETTELEGGING,
-    }],
-    velferdspermisjoner: [],
-    arbeidsgiverReferanse: '3',
-    uttakArbeidType: 'FRILANS',
-    internArbeidsforholdReferanse: '5gb912b7-4187-45a0-8c44-02322887d0ad',
-    eksternArbeidsforholdReferanse: 'H555864629R5021761S1100L5555',
-    skalBrukes: true,
-  }] as ArbeidsforholdFodselOgTilrettelegging[],
-};
 
 const svangerskapspengerTilretteleggingForFrilanser = {
   termindato: '2020-02-27',
@@ -197,20 +157,6 @@ TilretteleggingMedVelferdspermisjon.args = {
   inntektArbeidYtelse: iayPermisjon,
 };
 
-export const AksjonspunktForFødselstilretteleggingForArbeidsgiver = Template.bind({});
-AksjonspunktForFødselstilretteleggingForArbeidsgiver.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.FODSELTILRETTELEGGING,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-    kanLoses: true,
-    erAktivt: true,
-  }],
-  svangerskapspengerTilrettelegging: svangerskapspengerTilretteleggingForArbeidsgiver,
-  inntektArbeidYtelse: defaultInntektArbeidYtelse,
-};
-
 export const AksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNæringsdrivende = Template.bind({});
 AksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNæringsdrivende.args = {
   submitCallback: action('button-click') as (data: any) => Promise<any>,
@@ -223,27 +169,6 @@ AksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNæringsdrivende.
   }],
   svangerskapspengerTilrettelegging: svangerskapspengerTilretteleggingForFrilanser,
   inntektArbeidYtelse: defaultInntektArbeidYtelse,
-};
-
-export const InfoDialogForVarIkkeAnsattDaBehovetForTilretteleggingOppstod = Template.bind({});
-InfoDialogForVarIkkeAnsattDaBehovetForTilretteleggingOppstod.args = {
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  aksjonspunkter: [{
-    definisjon: aksjonspunktCodes.FODSELTILRETTELEGGING,
-    status: aksjonspunktStatus.OPPRETTET,
-    begrunnelse: undefined,
-    kanLoses: true,
-    erAktivt: true,
-  }],
-  svangerskapspengerTilrettelegging: svangerskapspengerTilretteleggingForArbeidsgiver,
-  inntektArbeidYtelse: {
-    arbeidsforhold: [{
-      ...(defaultInntektArbeidYtelse.arbeidsforhold ? defaultInntektArbeidYtelse.arbeidsforhold[0] : {}),
-      id: '1111111-null',
-      arbeidsgiverReferanse: '1111111',
-    }] as Arbeidsforhold[],
-    skalKunneLeggeTilNyeArbeidsforhold: false,
-  } as InntektArbeidYtelse,
 };
 
 export const ErOverstyrer = Template.bind({});

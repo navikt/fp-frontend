@@ -4,7 +4,11 @@ import userEvent from '@testing-library/user-event';
 import { composeStories } from '@storybook/testing-react';
 import * as stories from './FodselOgTilretteleggingFaktaIndex.stories';
 
-const { TilretteleggingMedVelferdspermisjon, ErOverstyrer } = composeStories(stories);
+const {
+  TilretteleggingMedVelferdspermisjon,
+  ErOverstyrer,
+  AksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNæringsdrivende,
+} = composeStories(stories);
 
 describe('<FodselOgTilretteleggingFaktaIndex>', () => {
   it('skal sjekke valideringer og så bekrefte aksjonspunkt for velferdspermisjon', async () => {
@@ -226,6 +230,61 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
       fødselsdato: undefined,
       kode: '5091',
       termindato: '2020-11-06',
+    });
+  });
+
+  it('skal vise arbeidsforhold det søkt tilrettelegging men ikke kan beregnes svangeskapspenger for', async () => {
+    const bekreft = jest.fn(() => Promise.resolve());
+
+    const utils = render(<AksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNæringsdrivende submitCallback={bekreft} />);
+
+    expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
+    expect(screen.getByText('Det er søkt for et org.nr. eller fødselsnummer der søker ikke var ansatt da behovet for tilrettelegging oppsto. '
+    + 'Vurder om du skal kontakte arbeidsgiver eller søker for avklaring. Hvis du innvilger behandlingen nå, vil bruker få 0 kroner utbetalt.',
+    )).toBeInTheDocument();
+
+    expect(screen.getByText('Frilanser, samlet aktivitet (973861778)')).toBeInTheDocument();
+    expect(screen.getByText('Selvstendig næringsdrivende')).toBeInTheDocument();
+    expect(screen.getAllByText('Jordmor/lege oppgir at tilrettelegging er nødvendig fra og med')).toHaveLength(2);
+    expect(screen.getAllByText('01.10.2019')).toHaveLength(2);
+
+    const begrunnEndringene = utils.getByLabelText('Begrunn endringene');
+    await userEvent.type(begrunnEndringene, 'Dette er en begrunnelse');
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(bekreft).toHaveBeenCalledTimes(1));
+    expect(bekreft).toHaveBeenNthCalledWith(1, {
+      begrunnelse: 'Dette er en begrunnelse',
+      bekreftetSvpArbeidsforholdList: [{
+        arbeidsgiverReferanse: '1',
+        skalBrukes: undefined,
+        tilretteleggingBehovFom: '2019-10-01',
+        tilretteleggingDatoer: [{
+          fom: '2019-10-01',
+          overstyrtUtbetalingsgrad: undefined,
+          stillingsprosent: undefined,
+          type: 'INGEN_TILRETTELEGGING',
+        }],
+        tilretteleggingId: 1008653,
+        velferdspermisjoner: [],
+      }, {
+        arbeidsgiverReferanse: '2',
+        skalBrukes: undefined,
+        tilretteleggingBehovFom: '2019-10-01',
+        tilretteleggingDatoer: [{
+          fom: '2019-10-01',
+          overstyrtUtbetalingsgrad: undefined,
+          stillingsprosent: undefined,
+          type: 'INGEN_TILRETTELEGGING',
+        }],
+        tilretteleggingId: 1008654,
+        uttakArbeidType: 'ORDINÆRT_ARBEID',
+        velferdspermisjoner: [],
+      }],
+      fødselsdato: undefined,
+      kode: '5091',
+      termindato: '2020-02-27',
     });
   });
 });
