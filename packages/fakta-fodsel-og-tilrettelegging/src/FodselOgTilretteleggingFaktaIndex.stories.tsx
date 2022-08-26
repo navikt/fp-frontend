@@ -1,13 +1,16 @@
 import React from 'react';
+import { Story } from '@storybook/react'; // eslint-disable-line import/no-extraneous-dependencies
 import { action } from '@storybook/addon-actions';
+import { Aksjonspunkt } from '@navikt/ft-types';
 
 import tilretteleggingType from '@fpsak-frontend/kodeverk/src/tilretteleggingType';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import aksjonspunktStatus from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
-  ArbeidsforholdFodselOgTilrettelegging, Arbeidsforhold, Behandling, InntektArbeidYtelse,
+  ArbeidsforholdFodselOgTilrettelegging, Arbeidsforhold, Behandling, InntektArbeidYtelse, FodselOgTilrettelegging,
 } from '@fpsak-frontend/types';
 import { alleKodeverk } from '@fpsak-frontend/storybook-utils';
+import { FaktaAksjonspunkt } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
 import { tilrettelegging as tilretteleggingPermisjon, inntektArbeidYtelse as iayPermisjon } from '../testdata/tilretteleggningMedPermisjon';
 
@@ -85,7 +88,7 @@ const svangerskapspengerTilretteleggingForFrilanser = {
   }] as ArbeidsforholdFodselOgTilrettelegging[],
 };
 
-const inntektArbeidYtelse = {
+const defaultInntektArbeidYtelse = {
   arbeidsforhold: [{
     id: '555864629-null',
     arbeidsgiverReferanse: '555864629',
@@ -145,104 +148,115 @@ const arbeidsgiverOpplysningerPerId = {
   },
 };
 
-const standardFaktaProps = {
-  aksjonspunkter: [],
-  submitCallback: action('button-click') as (data: any) => Promise<any>,
-  readOnly: false,
-  harApneAksjonspunkter: true,
-  submittable: true,
-  alleMerknaderFraBeslutter: {},
-  setFormData: () => undefined,
-};
-
 export default {
   title: 'fakta/fakta-fodsel-og-tilrettelegging',
   component: FodselOgTilretteleggingFaktaIndex,
 };
 
-export const tilretteleggingMedVelferdspermisjon = () => (
+const Template: Story<{
+  aksjonspunkter: Aksjonspunkt[];
+  submitCallback: (aksjonspunktData: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
+  svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
+  inntektArbeidYtelse: InntektArbeidYtelse;
+  erOverstyrer?: boolean;
+}> = ({
+  aksjonspunkter,
+  submitCallback,
+  svangerskapspengerTilrettelegging,
+  inntektArbeidYtelse,
+  erOverstyrer = false,
+}) => (
   <FodselOgTilretteleggingFaktaIndex
-    {...standardFaktaProps}
+    submitCallback={submitCallback}
+    readOnly={false}
+    harApneAksjonspunkter
+    submittable
+    alleMerknaderFraBeslutter={{}}
+    setFormData={() => undefined}
     behandling={behandling}
-    svangerskapspengerTilrettelegging={tilretteleggingPermisjon}
-    aksjonspunkter={[{
-      definisjon: aksjonspunktCodes.FODSELTILRETTELEGGING,
-      status: aksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: true,
-      erAktivt: true,
-    }]}
-    inntektArbeidYtelse={iayPermisjon}
-    erOverstyrer={false}
-    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    alleKodeverk={alleKodeverk as any}
-  />
-);
-
-export const visAksjonspunktForFødselstilretteleggingForArbeidsgiver = () => (
-  <FodselOgTilretteleggingFaktaIndex
-    {...standardFaktaProps}
-    behandling={behandling}
-    svangerskapspengerTilrettelegging={svangerskapspengerTilretteleggingForArbeidsgiver}
-    aksjonspunkter={[{
-      definisjon: aksjonspunktCodes.FODSELTILRETTELEGGING,
-      status: aksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: true,
-      erAktivt: true,
-    }]}
+    svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
+    aksjonspunkter={aksjonspunkter}
     inntektArbeidYtelse={inntektArbeidYtelse}
-    erOverstyrer={false}
+    erOverstyrer={erOverstyrer}
     arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
     alleKodeverk={alleKodeverk as any}
   />
 );
 
-export const visAksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNæringsdrivende = () => (
-  <FodselOgTilretteleggingFaktaIndex
-    {...standardFaktaProps}
-    behandling={behandling}
-    svangerskapspengerTilrettelegging={svangerskapspengerTilretteleggingForFrilanser}
-    aksjonspunkter={[{
-      definisjon: aksjonspunktCodes.FODSELTILRETTELEGGING,
-      status: aksjonspunktStatus.OPPRETTET,
-      begrunnelse: undefined,
-      kanLoses: true,
-      erAktivt: true,
-    }]}
-    inntektArbeidYtelse={inntektArbeidYtelse}
-    erOverstyrer={false}
-    arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-    alleKodeverk={alleKodeverk as any}
-  />
-);
+export const TilretteleggingMedVelferdspermisjon = Template.bind({});
+TilretteleggingMedVelferdspermisjon.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  aksjonspunkter: [{
+    definisjon: aksjonspunktCodes.FODSELTILRETTELEGGING,
+    status: aksjonspunktStatus.OPPRETTET,
+    begrunnelse: undefined,
+    kanLoses: true,
+    erAktivt: true,
+  }],
+  svangerskapspengerTilrettelegging: tilretteleggingPermisjon,
+  inntektArbeidYtelse: iayPermisjon,
+};
 
-export const visInfoDialogForVarIkkeAnsattDaBehovetForTilretteleggingOppstod = () => {
-  const inntektArbeidYtelseForAnnenArbeidsgiver = {
+export const AksjonspunktForFødselstilretteleggingForArbeidsgiver = Template.bind({});
+AksjonspunktForFødselstilretteleggingForArbeidsgiver.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  aksjonspunkter: [{
+    definisjon: aksjonspunktCodes.FODSELTILRETTELEGGING,
+    status: aksjonspunktStatus.OPPRETTET,
+    begrunnelse: undefined,
+    kanLoses: true,
+    erAktivt: true,
+  }],
+  svangerskapspengerTilrettelegging: svangerskapspengerTilretteleggingForArbeidsgiver,
+  inntektArbeidYtelse: defaultInntektArbeidYtelse,
+};
+
+export const AksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNæringsdrivende = Template.bind({});
+AksjonspunktForFødselstilretteleggingForFrilanserOgSelvstendigNæringsdrivende.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  aksjonspunkter: [{
+    definisjon: aksjonspunktCodes.FODSELTILRETTELEGGING,
+    status: aksjonspunktStatus.OPPRETTET,
+    begrunnelse: undefined,
+    kanLoses: true,
+    erAktivt: true,
+  }],
+  svangerskapspengerTilrettelegging: svangerskapspengerTilretteleggingForFrilanser,
+  inntektArbeidYtelse: defaultInntektArbeidYtelse,
+};
+
+export const InfoDialogForVarIkkeAnsattDaBehovetForTilretteleggingOppstod = Template.bind({});
+InfoDialogForVarIkkeAnsattDaBehovetForTilretteleggingOppstod.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  aksjonspunkter: [{
+    definisjon: aksjonspunktCodes.FODSELTILRETTELEGGING,
+    status: aksjonspunktStatus.OPPRETTET,
+    begrunnelse: undefined,
+    kanLoses: true,
+    erAktivt: true,
+  }],
+  svangerskapspengerTilrettelegging: svangerskapspengerTilretteleggingForArbeidsgiver,
+  inntektArbeidYtelse: {
     arbeidsforhold: [{
-      ...(inntektArbeidYtelse.arbeidsforhold ? inntektArbeidYtelse.arbeidsforhold[0] : {}),
+      ...(defaultInntektArbeidYtelse.arbeidsforhold ? defaultInntektArbeidYtelse.arbeidsforhold[0] : {}),
       id: '1111111-null',
       arbeidsgiverReferanse: '1111111',
     }] as Arbeidsforhold[],
     skalKunneLeggeTilNyeArbeidsforhold: false,
-  } as InntektArbeidYtelse;
+  } as InntektArbeidYtelse,
+};
 
-  return (
-    <FodselOgTilretteleggingFaktaIndex
-      {...standardFaktaProps}
-      behandling={behandling}
-      svangerskapspengerTilrettelegging={svangerskapspengerTilretteleggingForArbeidsgiver}
-      aksjonspunkter={[{
-        definisjon: aksjonspunktCodes.FODSELTILRETTELEGGING,
-        status: aksjonspunktStatus.OPPRETTET,
-        begrunnelse: undefined,
-        kanLoses: true,
-        erAktivt: true,
-      }]}
-      inntektArbeidYtelse={inntektArbeidYtelseForAnnenArbeidsgiver}
-      erOverstyrer={false}
-      arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-      alleKodeverk={alleKodeverk as any}
-    />
-  );
+export const ErOverstyrer = Template.bind({});
+ErOverstyrer.args = {
+  submitCallback: action('button-click') as (data: any) => Promise<any>,
+  aksjonspunkter: [{
+    definisjon: aksjonspunktCodes.FODSELTILRETTELEGGING,
+    status: aksjonspunktStatus.OPPRETTET,
+    begrunnelse: undefined,
+    kanLoses: true,
+    erAktivt: true,
+  }],
+  svangerskapspengerTilrettelegging: tilretteleggingPermisjon,
+  inntektArbeidYtelse: iayPermisjon,
+  erOverstyrer: true,
 };
