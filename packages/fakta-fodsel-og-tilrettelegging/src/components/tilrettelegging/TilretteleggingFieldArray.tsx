@@ -144,11 +144,13 @@ const TilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
                         const value = event.target?.value;
                         if (value === tilretteleggingType.INGEN_TILRETTELEGGING) {
                           const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold, velferdspermisjonprosent, 100);
+                          // @ts-ignore Fiks
                           setValue(`${formSectionName}.tilretteleggingDatoer[${index}].${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`, utbetalingsgrad);
                         }
                         if (value === tilretteleggingType.DELVIS_TILRETTELEGGING) {
                           const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold,
                             velferdspermisjonprosent, data.stillingsprosent);
+                          // @ts-ignore Fiks
                           setValue(`${formSectionName}.tilretteleggingDatoer[${index}].${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`, utbetalingsgrad);
                         }
                       }}
@@ -192,10 +194,10 @@ const TilretteleggingFieldArray: FunctionComponent<OwnProps> = ({
                           name={`${fieldPrefix}.${index}.stillingsprosent`}
                           label={intl.formatMessage({ id: 'TilretteleggingFieldArray.Stillingsprosent' })}
                           validate={[required, minValue0, maxValue100, hasValidDecimal]}
-                          // @ts-ignore Fiks denne!
-                          normalizeOnBlur={(value) => (new RegExp(/^-?\d+\.?\d*$/).test(value) ? parseFloat(value).toFixed(2) : value)}
+                          normalizeOnBlur={(value: string) => (new RegExp(/^-?\d+\.?\d*$/).test(value) ? parseFloat(value).toFixed(2) : value)}
                           onChange={(value) => {
                             const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(stillingsprosentArbeidsforhold, velferdspermisjonprosent, value);
+                            // @ts-ignore Fiks
                             setValue(`${formSectionName}.tilretteleggingDatoer.${index}.${OVERSTYRT_UTBETALINGSGRAD_FIELDNAME}`, utbetalingsgrad);
                           }}
                         />
