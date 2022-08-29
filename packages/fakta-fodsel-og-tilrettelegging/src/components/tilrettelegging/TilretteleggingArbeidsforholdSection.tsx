@@ -16,7 +16,11 @@ import VelferdspermisjonSection from './VelferdspermisjonSection';
 
 import styles from './tilretteleggingArbeidsforholdSection.less';
 
-const validerTidligereEnn = (intl: IntlShape, getValues, formSectionName: string) => () => {
+const validerTidligereEnn = (
+  intl: IntlShape,
+  getValues,
+  formSectionName: string,
+) => (): string | null => {
   const tilretteleggingBehovFom = getValues(`${formSectionName}.tilretteleggingBehovFom`);
   const termindato = getValues('termindato');
   const fødselsdato = getValues('fødselsdato');
@@ -149,7 +153,6 @@ const TilretteleggingArbeidsforholdSection: FunctionComponent<OwnProps> = ({
           readOnly={readOnly}
           formSectionName={formSectionName}
         />
-
       ))}
     </>
   );

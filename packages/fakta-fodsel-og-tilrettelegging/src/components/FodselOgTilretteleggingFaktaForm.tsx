@@ -245,7 +245,7 @@ const transformValues = (
   }),
 });
 
-interface PureOwnProps {
+interface OwnProps {
   behandlingVersjon: number;
   readOnly: boolean;
   hasOpenAksjonspunkter: boolean;
@@ -266,7 +266,7 @@ interface PureOwnProps {
  *
  * Viser tillrettlegging før svangerskapspenger
  */
-const FodselOgTilretteleggingFaktaForm: FunctionComponent<PureOwnProps> = ({
+const FodselOgTilretteleggingFaktaForm: FunctionComponent<OwnProps> = ({
   behandlingVersjon,
   readOnly,
   hasOpenAksjonspunkter,
@@ -305,9 +305,12 @@ const FodselOgTilretteleggingFaktaForm: FunctionComponent<PureOwnProps> = ({
 
   const formValues = formMethods.watch();
 
-  const formSectionNames = alleArbeidsforhold.map((a) => utledFormSectionName(a, arbeidsgiverOpplysningerPerId, uttakArbeidTyper));
-  const validerArbeidsforholdList = formSectionNames.map((name) => formValues[name]);
-  const erIngenTilretteleggingValgt = validerArbeidsforholdList.every((a) => (a.skalBrukes === false));
+  const formSectionNames = useMemo(() => alleArbeidsforhold.map((a) => utledFormSectionName(a, arbeidsgiverOpplysningerPerId, uttakArbeidTyper)),
+    [alleArbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper]);
+
+  const erIngenTilretteleggingValgt = formSectionNames
+    .map((name) => formValues[name])
+    .every((a) => (a.skalBrukes === false));
 
   return (
     <Form
