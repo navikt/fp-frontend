@@ -1,20 +1,43 @@
-import React, { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, WrappedComponentProps } from 'react-intl';
-import { FieldArray, FormSection, formValueSelector } from 'redux-form';
+import React, { FunctionComponent, useMemo } from 'react';
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
+import moment from 'moment';
 import { Normaltekst, Element } from 'nav-frontend-typografi';
-
-import { DatepickerField, CheckboxField } from '@fpsak-frontend/form';
+import { Datepicker, CheckboxField, formHooks } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
+import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import {
   VerticalSpacer, FlexColumn, FlexContainer, FlexRow,
 } from '@navikt/ft-ui-komponenter';
+
 import { ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, ArbeidsforholdFodselOgTilrettelegging } from '@fpsak-frontend/types';
 
-import TilrettteleggingFieldArray from './TilretteleggingFieldArray';
+import TilretteleggingFieldArray from './TilretteleggingFieldArray';
 import VelferdspermisjonSection from './VelferdspermisjonSection';
 
 import styles from './tilretteleggingArbeidsforholdSection.less';
+
+const validerTidligereEnn = (
+  intl: IntlShape,
+  getValues,
+  formSectionName: string,
+) => (): string | null => {
+  const tilretteleggingBehovFom = getValues(`${formSectionName}.tilretteleggingBehovFom`);
+  const termindato = getValues('termindato');
+  const fødselsdato = getValues('fødselsdato');
+
+  const tilretteleggingFomDato = moment(tilretteleggingBehovFom);
+  const treUkerFørTermindato = moment(termindato).subtract(3, 'week');
+  const tidligsteTidspunkt = fødselsdato ? moment.min(treUkerFørTermindato, moment(fødselsdato)) : treUkerFørTermindato;
+
+  if (tilretteleggingFomDato.isValid() && !tilretteleggingFomDato.isBefore(tidligsteTidspunkt)) {
+    return intl.formatMessage({
+      id: 'FodselOgTilretteleggingFaktaForm.TilretteleggingTidligereEnn',
+    }, {
+      dato: tidligsteTidspunkt.format(DDMMYYYY_DATE_FORMAT),
+    });
+  }
+  return null;
+};
 
 const utledArbeidsforholdTittel = (
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging,
@@ -39,104 +62,100 @@ const utledArbeidsforholdTittel = (
   return tittel;
 };
 
-interface PureOwnProps {
+type FormValues = {
+  skalBrukes: boolean;
+}
+
+interface OwnProps {
   readOnly: boolean;
   arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging;
   formSectionName: string;
   erOverstyrer: boolean;
-  changeField: (field: string, value: any) => void;
   stillingsprosentArbeidsforhold?: number;
   setOverstyrtUtbetalingsgrad: (erOverstyrt: boolean) => void;
-  formName: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   uttakArbeidTyper: KodeverkMedNavn[],
 }
 
-interface MappedOwnProps {
-  visTilrettelegginger: boolean;
-}
-
-export const TilretteleggingArbeidsforholdSection: FunctionComponent<PureOwnProps & MappedOwnProps & WrappedComponentProps> = ({
-  intl,
+const TilretteleggingArbeidsforholdSection: FunctionComponent<OwnProps> = ({
   readOnly,
   arbeidsforhold,
   formSectionName,
-  visTilrettelegginger,
   erOverstyrer,
-  changeField,
   stillingsprosentArbeidsforhold,
   setOverstyrtUtbetalingsgrad,
-  formName,
   arbeidsgiverOpplysningerPerId,
   uttakArbeidTyper,
-}) => (
-  <FormSection name={formSectionName}>
-    <Normaltekst className={styles.arbeidsforholdTittel}>
-      {utledArbeidsforholdTittel(arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper)}
-    </Normaltekst>
-    <VerticalSpacer sixteenPx />
-    <CheckboxField
-      readOnly={readOnly}
-      name="skalBrukes"
-      label={{ id: 'TilretteleggingArbeidsforholdSection.Checkbox.SoekerSkalhaTilrettelegging' }}
-    />
-    <VerticalSpacer sixteenPx />
-    {visTilrettelegginger && (
-      <FlexContainer>
-        <FlexRow alignItemsToBaseline>
-          <FlexColumn>
-            <DatepickerField
-              name="tilretteleggingBehovFom"
-              label={intl.formatMessage({ id: 'TilretteleggingArbeidsforholdSection.DatepickerField.TilretteleggingFra' })}
-              validate={[required, hasValidDate]}
-              readOnly={readOnly}
-            />
-            <VerticalSpacer eightPx />
-          </FlexColumn>
-        </FlexRow>
-        <VerticalSpacer sixteenPx />
-        <FlexRow>
-          <FlexColumn>
-            <Element>
-              <FormattedMessage id="TilretteleggingFieldArray.BehovForTilrettelegging" />
-            </Element>
-          </FlexColumn>
-        </FlexRow>
-        <VerticalSpacer sixteenPx />
-        <FlexRow>
-          <FlexColumn>
-            <FieldArray
-              name="tilretteleggingDatoer"
-              // @ts-ignore
-              component={TilrettteleggingFieldArray}
-              readOnly={readOnly}
-              formSectionName={formSectionName}
-              erOverstyrer={erOverstyrer}
-              changeField={changeField}
-              velferdspermisjoner={arbeidsforhold.velferdspermisjoner}
-              stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
-              setOverstyrtUtbetalingsgrad={setOverstyrtUtbetalingsgrad}
-              formName={formName}
-            />
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
-    )}
-    {arbeidsforhold.velferdspermisjoner.map((permisjon) => (
-      /* @ts-ignore Fiks cannot be used as a JSX component */
-      <VelferdspermisjonSection
-        permisjon={permisjon}
+}) => {
+  const intl = useIntl();
+
+  const {
+    watch, getValues,
+  } = formHooks.useFormContext<Record<string, FormValues>>();
+
+  const visTilrettelegginger = watch(`${formSectionName}.skalBrukes`);
+
+  const tittel = useMemo(() => utledArbeidsforholdTittel(arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper),
+    [arbeidsforhold, arbeidsgiverOpplysningerPerId, uttakArbeidTyper]);
+
+  return (
+    <>
+      <Normaltekst className={styles.arbeidsforholdTittel}>
+        {tittel}
+      </Normaltekst>
+      <VerticalSpacer sixteenPx />
+      <CheckboxField
         readOnly={readOnly}
-        formSectionName={formSectionName}
-        formName={formName}
+        name={`${formSectionName}.skalBrukes`}
+        label={intl.formatMessage({ id: 'TilretteleggingArbeidsforholdSection.Checkbox.SoekerSkalhaTilrettelegging' })}
       />
+      <VerticalSpacer sixteenPx />
+      {visTilrettelegginger && (
+        <FlexContainer>
+          <FlexRow alignItemsToBaseline>
+            <FlexColumn>
+              <Datepicker
+                name={`${formSectionName}.tilretteleggingBehovFom`}
+                label={intl.formatMessage({ id: 'TilretteleggingArbeidsforholdSection.DatepickerField.TilretteleggingFra' })}
+                validate={[required, hasValidDate, validerTidligereEnn(intl, getValues, formSectionName)]}
+                isReadOnly={readOnly}
+              />
+              <VerticalSpacer eightPx />
+            </FlexColumn>
+          </FlexRow>
+          <VerticalSpacer sixteenPx />
+          <FlexRow>
+            <FlexColumn>
+              <Element>
+                <FormattedMessage id="TilretteleggingFieldArray.BehovForTilrettelegging" />
+              </Element>
+            </FlexColumn>
+          </FlexRow>
+          <VerticalSpacer sixteenPx />
+          <FlexRow>
+            <FlexColumn>
+              <TilretteleggingFieldArray
+                readOnly={readOnly}
+                formSectionName={formSectionName}
+                erOverstyrer={erOverstyrer}
+                velferdspermisjoner={arbeidsforhold.velferdspermisjoner}
+                stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
+                setOverstyrtUtbetalingsgrad={setOverstyrtUtbetalingsgrad}
+              />
+            </FlexColumn>
+          </FlexRow>
+        </FlexContainer>
+      )}
+      {arbeidsforhold.velferdspermisjoner.map((permisjon) => (
+        <VelferdspermisjonSection
+          key={`${permisjon.permisjonFom}.${permisjon.permisjonTom}`}
+          permisjon={permisjon}
+          readOnly={readOnly}
+          formSectionName={formSectionName}
+        />
+      ))}
+    </>
+  );
+};
 
-    ))}
-  </FormSection>
-);
-
-const mapStateToProps = (state, ownProps: PureOwnProps): MappedOwnProps => ({
-  visTilrettelegginger: formValueSelector(ownProps.formName)(state, `${ownProps.formSectionName}.skalBrukes`),
-});
-
-export default connect(mapStateToProps)(injectIntl(TilretteleggingArbeidsforholdSection));
+export default TilretteleggingArbeidsforholdSection;

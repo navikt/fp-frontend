@@ -17,19 +17,19 @@ export const tilrettelegging = {
     velferdspermisjoner: [{
       permisjonFom: '2020-02-17',
       permisjonTom: '2020-07-12',
-      permisjonsprosent: 100.00,
+      permisjonsprosent: 50.00,
       type: 'VELFERDSPERMISJON',
       erGyldig: true,
     }, {
       permisjonFom: '2019-08-06',
       permisjonTom: '2019-08-06',
-      permisjonsprosent: 100.00,
+      permisjonsprosent: 50.00,
       type: 'VELFERDSPERMISJON',
       erGyldig: true,
     }, {
       permisjonFom: '2019-10-03',
       permisjonTom: '2019-10-03',
-      permisjonsprosent: 100.00,
+      permisjonsprosent: 50.00,
       type: 'VELFERDSPERMISJON',
       erGyldig: true,
     }],
@@ -90,7 +90,6 @@ export const inntektArbeidYtelse = {
     arbeidsgiverReferanse: '999999999',
     begrunnelse: 'vurdert tidligere ',
     kilde: { navn: 'AA-Registeret' },
-    stillingsprosent: 0.00,
     skjaeringstidspunkt: '2020-03-17',
     mottattDatoInntektsmelding: '2020-03-20',
     fomDato: '2019-04-01',
@@ -104,6 +103,7 @@ export const inntektArbeidYtelse = {
     erEndret: true,
     brukMedJustertPeriode: false,
     lagtTilAvSaksbehandler: false,
+    stillingsprosent: 100.00,
     basertPaInntektsmelding: false,
     brukPermisjon: false,
     permisjoner: [{

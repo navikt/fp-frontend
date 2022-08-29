@@ -9,14 +9,14 @@ import {
 } from '@navikt/ft-ui-komponenter';
 import { ArbeidsforholdFodselOgTilrettelegging, ArbeidsgiverOpplysningerPerId } from '@fpsak-frontend/types';
 
-interface OwnProps {
+const getEndCharFromId = (
+  id?: string,
+) : string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
+
+const lagArbeidsforholdNavn = (
+  arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging,
   arbeidsgiverOpplysningerPrId: ArbeidsgiverOpplysningerPerId,
-  arbeidsforholdSomIkkeKanTilrettelegges: ArbeidsforholdFodselOgTilrettelegging[],
-}
-
-const getEndCharFromId = (id?: string) : string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
-
-const lagArbeidsforholdNavn = (arbeidsforhold: ArbeidsforholdFodselOgTilrettelegging, arbeidsgiverOpplysningerPrId: ArbeidsgiverOpplysningerPerId): string => {
+): string => {
   const agOpplysninger = arbeidsgiverOpplysningerPrId[arbeidsforhold.arbeidsgiverReferanse];
   const {
     navn, fødselsdato, erPrivatPerson, identifikator,
@@ -30,6 +30,11 @@ const lagArbeidsforholdNavn = (arbeidsforhold: ArbeidsforholdFodselOgTilretteleg
     ? `${navn} (${identifikator})${getEndCharFromId(arbeidsforhold.eksternArbeidsforholdReferanse)}`
     : navn;
 };
+
+interface OwnProps {
+  arbeidsgiverOpplysningerPrId: ArbeidsgiverOpplysningerPerId,
+  arbeidsforholdSomIkkeKanTilrettelegges: ArbeidsforholdFodselOgTilrettelegging[],
+}
 
 const UtilgjengeligeArbeidsforhold: FunctionComponent<OwnProps> = ({
   arbeidsforholdSomIkkeKanTilrettelegges,
@@ -50,7 +55,6 @@ const UtilgjengeligeArbeidsforhold: FunctionComponent<OwnProps> = ({
           <VerticalSpacer eightPx />
         </FlexColumn>
       </FlexRow>
-
       <FlexRow>
         <FlexColumn>
           {arbeidsforholdSomIkkeKanTilrettelegges.map((arbeidsforhold) => (
