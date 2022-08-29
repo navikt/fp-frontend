@@ -21,14 +21,14 @@ import {
 import behandlingEventHandler from './BehandlingEventHandler';
 import ErrorBoundary from '../app/ErrorBoundary';
 
-const BehandlingEngangsstonadIndex = React.lazy(() => import('@fpsak-frontend/behandling-es'));
-const BehandlingForeldrepengerIndex = React.lazy(() => import('@fpsak-frontend/behandling-fp'));
-const BehandlingSvangerskapspengerIndex = React.lazy(() => import('@fpsak-frontend/behandling-svp'));
-const BehandlingInnsynIndex = React.lazy(() => import('@fpsak-frontend/behandling-innsyn'));
-const BehandlingKlageIndex = React.lazy(() => import('@fpsak-frontend/behandling-klage'));
-const BehandlingTilbakekrevingIndex = React.lazy(() => import('@fpsak-frontend/behandling-tilbakekreving'));
-const BehandlingAnkeIndex = React.lazy(() => import('@fpsak-frontend/behandling-anke'));
-const BehandlingPapirsoknadIndex = React.lazy(() => import('@fpsak-frontend/behandling-papirsoknad'));
+const BehandlingEngangsstonadIndex = React.lazy(() => import('./forstegangsoknadOgRevurdering/engangsstonad/BehandlingEngangsstonadIndex'));
+const BehandlingForeldrepengerIndex = React.lazy(() => import('./forstegangsoknadOgRevurdering/foreldrepenger/BehandlingForeldrepengerIndex'));
+const BehandlingSvangerskapspengerIndex = React.lazy(() => import('./forstegangsoknadOgRevurdering/svangerskapspenger/BehandlingSvangerskapspengerIndex'));
+const BehandlingInnsynIndex = React.lazy(() => import('./innsyn/BehandlingInnsynIndex'));
+const BehandlingKlageIndex = React.lazy(() => import('./klage/BehandlingKlageIndex'));
+const BehandlingTilbakekrevingIndex = React.lazy(() => import('./tilbakekreving/BehandlingTilbakekrevingIndex'));
+const BehandlingPapirsoknadIndex = React.lazy(() => import('./papirsoknad/BehandlingPapirsoknadIndex'));
+const BehandlingAnkeIndex = React.lazy(() => import('./anke/BehandlingAnkeIndex'));
 
 const erTilbakekreving = (behandlingTypeKode?:string): boolean => behandlingTypeKode === BehandlingType.TILBAKEKREVING
   || behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING;

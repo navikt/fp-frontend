@@ -1,5 +1,4 @@
 import React from 'react';
-import sinon, { SinonStub } from 'sinon';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { Fagsak, Behandling } from '@navikt/ft-types';
@@ -36,18 +35,10 @@ const location = {
 const navAnsatt = { navn: 'Ann S. Att', kanSaksbehandle: true };
 
 describe('<RisikoklassifiseringIndex>', () => {
-  let contextStub: SinonStub;
-
-  beforeEach(() => {
-    contextStub = sinon.stub(useTrackRouteParam, 'default').callsFake(() => ({
-      selected: true,
-      location,
-    }));
-  });
-
-  afterEach(() => {
-    contextStub.restore();
-  });
+  jest.spyOn(useTrackRouteParam, 'default').mockImplementation(() => ({
+    selected: true,
+    location,
+  }));
 
   it('skal rendere komponent', async () => {
     const data = [
