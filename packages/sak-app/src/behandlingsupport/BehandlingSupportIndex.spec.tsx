@@ -1,6 +1,5 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import sinon, { SinonStub } from 'sinon';
 import { render, screen } from '@testing-library/react';
 import { Fagsak, BehandlingAppKontekst } from '@navikt/ft-types';
 import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
@@ -8,7 +7,6 @@ import { BehandlingStatus, BehandlingType } from '@navikt/ft-kodeverk';
 import RestApiMock from '@fpsak-frontend/utils-test/src/rest/RestApiMock';
 
 import { VergeBehandlingmenyValg } from '../behandling/behandlingRettigheterTsType';
-import * as useTrackRouteParam from '../app/useTrackRouteParam';
 import BehandlingSupportIndex, { hentSynligePaneler, hentValgbarePaneler } from './BehandlingSupportIndex';
 import { requestApi, FpsakApiKeys } from '../data/fpsakApi';
 
@@ -34,22 +32,6 @@ describe('<BehandlingSupportIndex>', () => {
     type: BehandlingType.FORSTEGANGSSOKNAD,
     status: BehandlingStatus.OPPRETTET,
   };
-
-  const location = {
-    key: '', pathname: '', search: '', state: {}, hash: '',
-  };
-
-  let contextStub: SinonStub;
-  beforeEach(() => {
-    contextStub = sinon.stub(useTrackRouteParam, 'default').callsFake(() => ({
-      selected: 123456,
-      location,
-    }));
-  });
-
-  afterEach(() => {
-    contextStub.restore();
-  });
 
   it('skal vise historikk-panelet som default', async () => {
     const data = [

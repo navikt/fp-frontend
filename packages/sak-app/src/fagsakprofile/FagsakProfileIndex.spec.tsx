@@ -1,5 +1,4 @@
 import React from 'react';
-import sinon from 'sinon';
 import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import { MemoryRouter } from 'react-router-dom';
@@ -64,7 +63,7 @@ describe('<FagsakProfileIndex>', () => {
               fagsak={fagsak as Fagsak}
               alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
               harHentetBehandlinger
-              oppfriskBehandlinger={sinon.spy()}
+              oppfriskBehandlinger={jest.fn()}
               fagsakRettigheter={fagsakRettigheter}
               brukerManglerAdresse={false}
             />
@@ -94,7 +93,7 @@ describe('<FagsakProfileIndex>', () => {
               fagsak={fagsak as Fagsak}
               alleBehandlinger={[behandling] as BehandlingAppKontekst[]}
               harHentetBehandlinger
-              oppfriskBehandlinger={sinon.spy()}
+              oppfriskBehandlinger={jest.fn()}
               behandlingUuid="1"
               fagsakRettigheter={fagsakRettigheter}
               brukerManglerAdresse={false}
