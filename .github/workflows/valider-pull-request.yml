@@ -10,7 +10,7 @@ jobs:
       - name: Sette opp Node
         uses: actions/setup-node@v3.3.0
         with:
-          node-version: 18.3.0
+          node-version: 18.8.0
           registry-url: https://npm.pkg.github.com/
           scope: '@navikt'
           cache: 'yarn'
