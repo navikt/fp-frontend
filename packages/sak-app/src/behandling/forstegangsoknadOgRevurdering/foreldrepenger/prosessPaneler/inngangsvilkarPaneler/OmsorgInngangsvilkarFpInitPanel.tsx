@@ -35,25 +35,28 @@ interface OwnProps {
 const OmsorgInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & InngangsvilkarPanelInitProps> = ({
   behandlingVersjon,
   ...props
-}) => (
-  <InngangsvilkarDefaultInitPanel<EndepunktInitData>
-    {...props}
-    behandlingVersjon={behandlingVersjon}
-    initEndepunkter={ENDEPUNKTER_INIT_DATA}
-    aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    vilkarKoder={VILKAR_KODER}
-    inngangsvilkarPanelKode="OMSORG"
-    hentInngangsvilkarPanelTekst={() => useIntl().formatMessage({ id: 'ErOmsorgVilkaarOppfyltForm.Vurder' })}
-    renderPanel={(data) => (
-      <>
-        <OmsorgVilkarProsessIndex
-          // @ts-ignore Eg trur denne feilar grunna feil i typescript-pakka. Sjekk på eit seinare tidspunkt om denne er retta
-          {...data}
-        />
-        <VerticalSpacer thirtyTwoPx />
-      </>
-    )}
-  />
-);
+}) => {
+  const intl = useIntl();
+  return (
+    <InngangsvilkarDefaultInitPanel<EndepunktInitData>
+      {...props}
+      behandlingVersjon={behandlingVersjon}
+      initEndepunkter={ENDEPUNKTER_INIT_DATA}
+      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      vilkarKoder={VILKAR_KODER}
+      inngangsvilkarPanelKode="OMSORG"
+      hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'ErOmsorgVilkaarOppfyltForm.Vurder' })}
+      renderPanel={(data) => (
+        <>
+          <OmsorgVilkarProsessIndex
+            // @ts-ignore Eg trur denne feilar grunna feil i typescript-pakka. Sjekk på eit seinare tidspunkt om denne er retta
+            {...data}
+          />
+          <VerticalSpacer thirtyTwoPx />
+        </>
+      )}
+    />
+  );
+};
 
 export default OmsorgInngangsvilkarFpInitPanel;

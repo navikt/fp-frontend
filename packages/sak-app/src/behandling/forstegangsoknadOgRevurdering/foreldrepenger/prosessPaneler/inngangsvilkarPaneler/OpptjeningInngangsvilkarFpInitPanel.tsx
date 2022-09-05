@@ -40,44 +40,47 @@ const OpptjeningInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangs
   behandlingVersjon,
   rettigheter,
   ...props
-}) => (
-  <InngangsvilkarDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
-    {...props}
-    behandlingVersjon={behandlingVersjon}
-    initEndepunkter={ENDEPUNKTER_INIT_DATA}
-    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-    aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    vilkarKoder={VILKAR_KODER}
-    inngangsvilkarPanelKode="OPPTJENINGSVILKARET"
-    hentInngangsvilkarPanelTekst={() => useIntl().formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
-    renderPanel={(data, erOverstyrt, toggleOverstyring) => (
-      <>
-        {data.aksjonspunkter.length === 0 && (
-          <OverstyringPanelDef
-            aksjonspunkter={data.aksjonspunkter}
-            aksjonspunktKode={aksjonspunktCodes.OVERSTYRING_AV_OPPTJENINGSVILKARET}
-            vilkar={data.vilkar}
-            vilkarKoder={VILKAR_KODER}
-            panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret"
-            erMedlemskapsPanel={false}
-            toggleOverstyring={toggleOverstyring}
-            erOverstyrt={erOverstyrt}
-            overrideReadOnly={data.isReadOnly || (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))}
-            kanOverstyreAccess={rettigheter.kanOverstyreAccess}
-          />
-        )}
-        {data.aksjonspunkter.length > 0 && (
-          <>
-            <OpptjeningVilkarProsessIndex
-              lovReferanse={data.vilkar[0].lovReferanse}
-              {...data}
+}) => {
+  const intl = useIntl();
+  return (
+    <InngangsvilkarDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+      {...props}
+      behandlingVersjon={behandlingVersjon}
+      initEndepunkter={ENDEPUNKTER_INIT_DATA}
+      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
+      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      vilkarKoder={VILKAR_KODER}
+      inngangsvilkarPanelKode="OPPTJENINGSVILKARET"
+      hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
+      renderPanel={(data, erOverstyrt, toggleOverstyring) => (
+        <>
+          {data.aksjonspunkter.length === 0 && (
+            <OverstyringPanelDef
+              aksjonspunkter={data.aksjonspunkter}
+              aksjonspunktKode={aksjonspunktCodes.OVERSTYRING_AV_OPPTJENINGSVILKARET}
+              vilkar={data.vilkar}
+              vilkarKoder={VILKAR_KODER}
+              panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret"
+              erMedlemskapsPanel={false}
+              toggleOverstyring={toggleOverstyring}
+              erOverstyrt={erOverstyrt}
+              overrideReadOnly={data.isReadOnly || (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))}
+              kanOverstyreAccess={rettigheter.kanOverstyreAccess}
             />
-            <VerticalSpacer thirtyTwoPx />
-          </>
-        )}
-      </>
-    )}
-  />
-);
+          )}
+          {data.aksjonspunkter.length > 0 && (
+            <>
+              <OpptjeningVilkarProsessIndex
+                lovReferanse={data.vilkar[0].lovReferanse}
+                {...data}
+              />
+              <VerticalSpacer thirtyTwoPx />
+            </>
+          )}
+        </>
+      )}
+    />
+  );
+};
 
 export default OpptjeningInngangsvilkarFpInitPanel;

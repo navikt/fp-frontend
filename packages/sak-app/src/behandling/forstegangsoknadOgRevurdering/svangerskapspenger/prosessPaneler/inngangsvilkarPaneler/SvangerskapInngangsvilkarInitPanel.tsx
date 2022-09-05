@@ -40,23 +40,26 @@ interface OwnProps {
 const SvangerskapInngangsvilkarInitPanel: FunctionComponent<OwnProps & InngangsvilkarPanelInitProps> = ({
   behandlingVersjon,
   ...props
-}) => (
-  <InngangsvilkarDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
-    {...props}
-    behandlingVersjon={behandlingVersjon}
-    initEndepunkter={ENDEPUNKTER_INIT_DATA}
-    panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
-    aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    vilkarKoder={VILKAR_KODER}
-    inngangsvilkarPanelKode="SVANGERSKAP"
-    hentInngangsvilkarPanelTekst={() => useIntl().formatMessage({ id: 'SvangerskapVilkarForm.FyllerVilkår' })}
-    renderPanel={(data) => (
-      <>
-        <SvangerskapVilkarProsessIndex {...data} />
-        <VerticalSpacer thirtyTwoPx />
-      </>
-    )}
-  />
-);
+}) => {
+  const intl = useIntl();
+  return (
+    <InngangsvilkarDefaultInitPanel<EndepunktInitData, EndepunktPanelData>
+      {...props}
+      behandlingVersjon={behandlingVersjon}
+      initEndepunkter={ENDEPUNKTER_INIT_DATA}
+      panelEndepunkter={ENDEPUNKTER_PANEL_DATA}
+      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      vilkarKoder={VILKAR_KODER}
+      inngangsvilkarPanelKode="SVANGERSKAP"
+      hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'SvangerskapVilkarForm.FyllerVilkår' })}
+      renderPanel={(data) => (
+        <>
+          <SvangerskapVilkarProsessIndex {...data} />
+          <VerticalSpacer thirtyTwoPx />
+        </>
+      )}
+    />
+  );
+};
 
 export default SvangerskapInngangsvilkarInitPanel;
