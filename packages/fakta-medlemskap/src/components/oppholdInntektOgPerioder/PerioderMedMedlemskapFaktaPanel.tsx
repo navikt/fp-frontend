@@ -75,7 +75,7 @@ const PerioderMedMedlemskapFaktaPanel: FunctionComponent<OwnProps> & StaticFunct
   const aksjonspunktKode = valgtPeriode.aksjonspunkter.find((apKode) => apKode === aksjonspunktCodes.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE);
   const aksjonspunkt = aksjonspunkter.find((ap) => aksjonspunktKode === ap.definisjon);
 
-  const erAksjonspunktLukket = aksjonspunktKode ? !isAksjonspunktOpen(aksjonspunkt.status) : false;
+  const erAksjonspunktLukket = aksjonspunkt ? !isAksjonspunktOpen(aksjonspunkt.status) : false;
 
   const getKodeverk = getKodeverknavnFn(alleKodeverk);
 
