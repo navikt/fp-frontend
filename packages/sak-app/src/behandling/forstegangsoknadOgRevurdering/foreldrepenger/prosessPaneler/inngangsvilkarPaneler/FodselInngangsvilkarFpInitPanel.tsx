@@ -42,45 +42,48 @@ const FodselInngangsvilkarFpInitPanel: FunctionComponent<OwnProps & Inngangsvilk
   behandlingVersjon,
   rettigheter,
   ...props
-}) => (
-  <InngangsvilkarDefaultInitPanel<EndepunktInitData>
-    {...props}
-    behandlingVersjon={behandlingVersjon}
-    initEndepunkter={ENDEPUNKTER_INIT_DATA}
-    aksjonspunktKoder={AKSJONSPUNKT_KODER}
-    vilkarKoder={VILKAR_KODER}
-    inngangsvilkarPanelKode="FODSEL"
-    hentInngangsvilkarPanelTekst={() => useIntl().formatMessage({ id: 'FodselVilkarForm.VurderGjelderSammeBarn' })}
-    renderPanel={(data, erOverstyrt, toggleOverstyring) => (
-      <>
-        {data.aksjonspunkter.length === 0 && (
-          <OverstyringPanelDef
-            aksjonspunkter={data.aksjonspunkter}
-            aksjonspunktKode={data.vilkar.some((v) => v.vilkarType === vilkarType.FODSELSVILKARET_MOR)
-              ? aksjonspunktCodes.OVERSTYR_FODSELSVILKAR : aksjonspunktCodes.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR}
-            vilkar={data.vilkar}
-            vilkarKoder={VILKAR_KODER}
-            panelTekstKode="Inngangsvilkar.Fodselsvilkaret"
-            erMedlemskapsPanel={false}
-            toggleOverstyring={toggleOverstyring}
-            erOverstyrt={erOverstyrt}
-            overrideReadOnly={data.isReadOnly || (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))}
-            kanOverstyreAccess={rettigheter.kanOverstyreAccess}
-          />
-        )}
-        {data.aksjonspunkter.length > 0 && (
-          <>
-            <FodselVilkarProsessIndex
-              ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
-              // @ts-ignore Eg trur denne feilar grunna feil i typescript-pakka. Sjekk på eit seinare tidspunkt om denne er retta
-              {...data}
+}) => {
+  const intl = useIntl();
+  return (
+    <InngangsvilkarDefaultInitPanel<EndepunktInitData>
+      {...props}
+      behandlingVersjon={behandlingVersjon}
+      initEndepunkter={ENDEPUNKTER_INIT_DATA}
+      aksjonspunktKoder={AKSJONSPUNKT_KODER}
+      vilkarKoder={VILKAR_KODER}
+      inngangsvilkarPanelKode="FODSEL"
+      hentInngangsvilkarPanelTekst={() => intl.formatMessage({ id: 'FodselVilkarForm.VurderGjelderSammeBarn' })}
+      renderPanel={(data, erOverstyrt, toggleOverstyring) => (
+        <>
+          {data.aksjonspunkter.length === 0 && (
+            <OverstyringPanelDef
+              aksjonspunkter={data.aksjonspunkter}
+              aksjonspunktKode={data.vilkar.some((v) => v.vilkarType === vilkarType.FODSELSVILKARET_MOR)
+                ? aksjonspunktCodes.OVERSTYR_FODSELSVILKAR : aksjonspunktCodes.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR}
+              vilkar={data.vilkar}
+              vilkarKoder={VILKAR_KODER}
+              panelTekstKode="Inngangsvilkar.Fodselsvilkaret"
+              erMedlemskapsPanel={false}
+              toggleOverstyring={toggleOverstyring}
+              erOverstyrt={erOverstyrt}
+              overrideReadOnly={data.isReadOnly || (props.harInngangsvilkarApentAksjonspunkt && !(data.isAksjonspunktOpen || erOverstyrt))}
+              kanOverstyreAccess={rettigheter.kanOverstyreAccess}
             />
-            <VerticalSpacer thirtyTwoPx />
-          </>
-        )}
-      </>
-    )}
-  />
-);
+          )}
+          {data.aksjonspunkter.length > 0 && (
+            <>
+              <FodselVilkarProsessIndex
+                ytelseTypeKode={fagsakYtelseType.FORELDREPENGER}
+                // @ts-ignore Eg trur denne feilar grunna feil i typescript-pakka. Sjekk på eit seinare tidspunkt om denne er retta
+                {...data}
+              />
+              <VerticalSpacer thirtyTwoPx />
+            </>
+          )}
+        </>
+      )}
+    />
+  );
+};
 
 export default FodselInngangsvilkarFpInitPanel;

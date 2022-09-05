@@ -129,6 +129,18 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
   const uuidForSistLukkede = useMemo(() => getUuidForSisteLukkedeForsteEllerRevurd(alleBehandlinger), [alleBehandlinger]);
   const previewHenleggBehandling = useVisForhandsvisningAvMelding(behandling?.type);
 
+  useEffect(() => {
+    if (erTilbakekrevingAktivert && !navAnsatt.kanVeilede) {
+      if (uuidForSistLukkede !== undefined) {
+        sjekkTilbakeKanOpprettes({ saksnummer: fagsak.saksnummer, uuid: uuidForSistLukkede });
+      }
+      const erTilbakekreving = behandling?.type === BehandlingType.TILBAKEKREVING || behandling?.type === BehandlingType.TILBAKEKREVING_REVURDERING;
+      if (erTilbakekreving && behandlingUuid) {
+        sjekkTilbakeRevurdKanOpprettes({ uuid: behandlingUuid });
+      }
+    }
+  }, [fagsak.saksnummer, behandlingUuid]);
+
   if (navAnsatt.kanVeilede) {
     return null;
   }
@@ -147,18 +159,6 @@ export const BehandlingMenuIndex: FunctionComponent<OwnProps> = ({
     ? () => behandlingEventHandler.fjernVerge().then(setLocation) : undefined;
   const opprettVergeFn = skalLageVergeFn(VergeBehandlingmenyValg.OPPRETT, vergeMenyvalg, behandlingUuid, behandlingVersjon)
     ? () => behandlingEventHandler.opprettVerge().then(setLocation) : undefined;
-
-  useEffect(() => {
-    if (erTilbakekrevingAktivert) {
-      if (uuidForSistLukkede !== undefined) {
-        sjekkTilbakeKanOpprettes({ saksnummer: fagsak.saksnummer, uuid: uuidForSistLukkede });
-      }
-      const erTilbakekreving = behandling?.type === BehandlingType.TILBAKEKREVING || behandling?.type === BehandlingType.TILBAKEKREVING_REVURDERING;
-      if (erTilbakekreving && behandlingUuid) {
-        sjekkTilbakeRevurdKanOpprettes({ uuid: behandlingUuid });
-      }
-    }
-  }, [fagsak.saksnummer, behandlingUuid]);
 
   return (
     <MenySakIndex
