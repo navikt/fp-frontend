@@ -168,9 +168,8 @@ const InnsynVedtakForm: FunctionComponent<OwnProps> = ({
               maxLength={1500}
               readOnly={readOnly}
               badges={[{
-                type: 'fokus',
-                text: getLanguageFromSprakkode(sprakkode),
-                titleText: intl.formatMessage({ id: 'Malform.Beskrivelse' }),
+                type: 'info',
+                titleText: getLanguageFromSprakkode(sprakkode),
               }]}
             />
           </Column>

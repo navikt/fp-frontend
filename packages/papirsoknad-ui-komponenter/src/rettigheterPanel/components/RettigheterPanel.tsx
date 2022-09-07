@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import { SkjemaGruppe } from 'nav-frontend-skjema';
-import { RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
-import { BorderBox } from '@navikt/ft-ui-komponenter';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import foreldreType from '@fpsak-frontend/kodeverk/src/foreldreType';
 import familieHendelseType from '@fpsak-frontend/kodeverk/src/familieHendelseType';
 
+import { Undertittel } from 'nav-frontend-typografi';
 import SoknadData from '../../felles/SoknadData';
 
 export const rettighet = {
@@ -33,30 +33,34 @@ const RettigheterPanel: FunctionComponent<OwnProps> = ({
 }) => {
   const intl = useIntl();
 
+  const options = [{
+    label: intl.formatMessage({ id: 'Registrering.Rettigheter.AnnenForelderDoed' }),
+    value: rettighet.ANNEN_FORELDER_DOED,
+  }, {
+    label: intl.formatMessage({ id: 'Registrering.Rettigheter.OvertaForeldreansvaretAlene' }),
+    value: rettighet.OVERTA_FORELDREANSVARET_ALENE,
+  }, {
+    label: intl.formatMessage({ id: 'Registrering.Rettigheter.MannAdoptererAlene' }),
+    value: rettighet.MANN_ADOPTERER_ALENE,
+  }, {
+    label: intl.formatMessage({ id: 'Registrering.Rettigheter.IkkeRelevant' }),
+    value: rettighet.IKKE_RELEVANT,
+  }];
+
+  const visMannAdoptererAlene = soknadData.getFamilieHendelseType() !== familieHendelseType.FODSEL && soknadData.getForeldreType() === foreldreType.FAR;
+  if (!visMannAdoptererAlene) {
+    options.splice(2, 1);
+  }
+
   return (
     <BorderBox>
-      <SkjemaGruppe legend={intl.formatMessage({ id: 'Registrering.Rettigheter.Title' })}>
-        <RadioGroupField name="rettigheter" direction="vertical" readOnly={readOnly}>
-          <RadioOption
-            label={intl.formatMessage({ id: 'Registrering.Rettigheter.AnnenForelderDoed' })}
-            value={rettighet.ANNEN_FORELDER_DOED}
-          />
-          <RadioOption
-            label={intl.formatMessage({ id: 'Registrering.Rettigheter.OvertaForeldreansvaretAlene' })}
-            value={rettighet.OVERTA_FORELDREANSVARET_ALENE}
-          />
-          {soknadData.getFamilieHendelseType() !== familieHendelseType.FODSEL && soknadData.getForeldreType() === foreldreType.FAR && (
-            <RadioOption
-              label={intl.formatMessage({ id: 'Registrering.Rettigheter.MannAdoptererAlene' })}
-              value={rettighet.MANN_ADOPTERER_ALENE}
-            />
-          )}
-          <RadioOption
-            label={intl.formatMessage({ id: 'Registrering.Rettigheter.IkkeRelevant' })}
-            value={rettighet.IKKE_RELEVANT}
-          />
-        </RadioGroupField>
-      </SkjemaGruppe>
+      <Undertittel>{intl.formatMessage({ id: 'Registrering.Rettigheter.Title' })}</Undertittel>
+      <VerticalSpacer sixteenPx />
+      <RadioGroupPanel
+        name="rettigheter"
+        isReadOnly={readOnly}
+        radios={options}
+      />
     </BorderBox>
   );
 };

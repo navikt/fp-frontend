@@ -10,8 +10,10 @@ import KodeverkType from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
   ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew,
 } from '@fpsak-frontend/prosess-felles';
-import { RadioGroupField, RadioOption, SelectField } from '@navikt/ft-form-hooks';
-import { AksjonspunktHelpTextTemp, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+import {
+  AksjonspunktHelpTextTemp, FlexColumn, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import { DATE_TIME_FORMAT, getKodeverknavnFn } from '@navikt/ft-utils';
 import { required } from '@navikt/ft-form-validators';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -93,75 +95,85 @@ export const FormkravKlageForm: FunctionComponent<OwnProps> = ({
             validate={[required]}
             name="vedtak"
             label={intl.formatMessage({ id: 'Klage.Formkrav.VelgVedtak' })}
-            placeholder={intl.formatMessage({ id: 'Klage.Formkrav.SelectVedtakPlaceholder' })}
             selectValues={klageBareVedtakOptions}
-            bredde="l"
+            className={styles.selectBredde}
           />
           <VerticalSpacer sixteenPx />
-          <Row>
-            <Column xs="4">
-              <Undertekst>
-                {intl.formatMessage({ id: 'Klage.Formkrav.ErKlagerPart' })}
-              </Undertekst>
-              <VerticalSpacer sixteenPx />
-              <RadioGroupField
+          <FlexRow>
+            <FlexColumn>
+              <RadioGroupPanel
                 name="erKlagerPart"
+                label={intl.formatMessage({ id: 'Klage.Formkrav.ErKlagerPart' })}
                 validate={[required]}
-                readOnly={readOnly}
-                parse={(value) => value === 'true'}
-              >
-                <RadioOption value="true" label={intl.formatMessage({ id: 'Klage.Formkrav.Ja' })} />
-                <RadioOption value="false" label={intl.formatMessage({ id: 'Klage.Formkrav.Nei' })} />
-              </RadioGroupField>
-            </Column>
-            <Column xs="8">
-              <Undertekst>
-                {intl.formatMessage({ id: 'Klage.Formkrav.ErKonkret' })}
-              </Undertekst>
-              <VerticalSpacer sixteenPx />
-              <RadioGroupField
+                isReadOnly={readOnly}
+                isHorizontal
+                isTrueOrFalseSelection
+                radios={[{
+                  value: 'true',
+                  label: intl.formatMessage({ id: 'Klage.Formkrav.Ja' }),
+                }, {
+                  value: 'false',
+                  label: intl.formatMessage({ id: 'Klage.Formkrav.Nei' }),
+                }]}
+              />
+            </FlexColumn>
+            <VerticalSpacer sixteenPx />
+            <FlexColumn>
+              <RadioGroupPanel
                 name="erKonkret"
+                label={intl.formatMessage({ id: 'Klage.Formkrav.ErKonkret' })}
                 validate={[required]}
-                readOnly={readOnly}
-                parse={(value) => value === 'true'}
-              >
-                <RadioOption value="true" label={intl.formatMessage({ id: 'Klage.Formkrav.Ja' })} />
-                <RadioOption value="false" label={intl.formatMessage({ id: 'Klage.Formkrav.Nei' })} />
-              </RadioGroupField>
-            </Column>
-          </Row>
-          <Row>
-            <Column xs="4">
-              <Undertekst>
-                {intl.formatMessage({ id: 'Klage.Formkrav.ErFristOverholdt' })}
-              </Undertekst>
-              <VerticalSpacer sixteenPx />
-              <RadioGroupField
+                isReadOnly={readOnly}
+                isHorizontal
+                isTrueOrFalseSelection
+                radios={[{
+                  value: 'true',
+                  label: intl.formatMessage({ id: 'Klage.Formkrav.Ja' }),
+                }, {
+                  value: 'false',
+                  label: intl.formatMessage({ id: 'Klage.Formkrav.Nei' }),
+                }]}
+              />
+            </FlexColumn>
+          </FlexRow>
+          <VerticalSpacer sixteenPx />
+          <FlexRow>
+            <FlexColumn>
+              <RadioGroupPanel
                 name="erFristOverholdt"
+                label={intl.formatMessage({ id: 'Klage.Formkrav.ErFristOverholdt' })}
                 validate={[required]}
-                readOnly={readOnly}
-                parse={(value) => value === 'true'}
-              >
-                <RadioOption value="true" label={intl.formatMessage({ id: 'Klage.Formkrav.Ja' })} />
-                <RadioOption value="false" label={intl.formatMessage({ id: 'Klage.Formkrav.Nei' })} />
-              </RadioGroupField>
-            </Column>
-            <Column xs="8">
-              <Undertekst>
-                {intl.formatMessage({ id: 'Klage.Formkrav.ErSignert' })}
-              </Undertekst>
-              <VerticalSpacer sixteenPx />
-              <RadioGroupField
+                isReadOnly={readOnly}
+                isHorizontal
+                isTrueOrFalseSelection
+                radios={[{
+                  value: 'true',
+                  label: intl.formatMessage({ id: 'Klage.Formkrav.Ja' }),
+                }, {
+                  value: 'false',
+                  label: intl.formatMessage({ id: 'Klage.Formkrav.Nei' }),
+                }]}
+              />
+            </FlexColumn>
+            <VerticalSpacer sixteenPx />
+            <FlexColumn>
+              <RadioGroupPanel
                 name="erSignert"
+                label={intl.formatMessage({ id: 'Klage.Formkrav.ErSignert' })}
                 validate={[required]}
-                readOnly={readOnly}
-                parse={(value) => value === 'true'}
-              >
-                <RadioOption value="true" label={intl.formatMessage({ id: 'Klage.Formkrav.Ja' })} />
-                <RadioOption value="false" label={intl.formatMessage({ id: 'Klage.Formkrav.Nei' })} />
-              </RadioGroupField>
-            </Column>
-          </Row>
+                isReadOnly={readOnly}
+                isHorizontal
+                isTrueOrFalseSelection
+                radios={[{
+                  value: 'true',
+                  label: intl.formatMessage({ id: 'Klage.Formkrav.Ja' }),
+                }, {
+                  value: 'false',
+                  label: intl.formatMessage({ id: 'Klage.Formkrav.Nei' }),
+                }]}
+              />
+            </FlexColumn>
+          </FlexRow>
         </Column>
       </Row>
       <div className={styles.confirmVilkarForm}>

@@ -81,7 +81,6 @@ const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps> = ({
                     readOnly={readOnly}
                     name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.arbeidsgiver`}
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.Arbeidsgiver' }) : ''}
-                    bredde="XXL"
                     validate={[maxLength50]}
                     maxLength={99}
                   />
@@ -108,7 +107,6 @@ const RenderInntektsgivendeArbeidFieldArray: FunctionComponent<OwnProps> = ({
                     name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.land`}
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.Land' }) : ''}
                     selectValues={countrySelectValues(sortedCountriesByName)}
-                    bredde="m"
                   />
                 </FlexColumn>
                 {getRemoveButton && (

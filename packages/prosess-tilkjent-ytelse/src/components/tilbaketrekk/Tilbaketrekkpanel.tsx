@@ -11,9 +11,8 @@ import behandleImageURL from '@fpsak-frontend/assets/images/advarsel.svg';
 import {
   hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-form-validators';
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
-  Form, RadioGroupField, RadioOption, TextAreaField,
+  Form, RadioGroupPanel, TextAreaField,
 } from '@navikt/ft-form-hooks';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { ProsessStegSubmitButtonNew } from '@fpsak-frontend/prosess-felles';
@@ -112,22 +111,21 @@ const Tilbaketrekkpanel: FunctionComponent<OwnProps> = ({
       <VerticalSpacer twentyPx />
       <Row>
         <Column xs="9">
-          <RadioGroupField
+          <RadioGroupPanel
             name={radioFieldName}
             validate={[required]}
-            direction="horizontal"
-            readOnly={readOnly}
-            isEdited={!isAksjonspunktOpen(vurderTilbaketrekkAP.status)}
-          >
-            <RadioOption
-              label={<FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Utfør" />}
-              value="false"
-            />
-            <RadioOption
-              label={<FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Hindre" />}
-              value="true"
-            />
-          </RadioGroupField>
+            isReadOnly={readOnly}
+            isHorizontal
+            isTrueOrFalseSelection
+            radios={[{
+              value: 'false',
+              label: <FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Utfør" />,
+            }, {
+              value: 'true',
+              label: <FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Hindre" />,
+            },
+            ]}
+          />
         </Column>
       </Row>
       <Row>

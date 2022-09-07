@@ -155,7 +155,6 @@ const HenleggBehandlingModal: FunctionComponent<PureOwnProps> = ({
                 name="årsakKode"
                 label={intl.formatMessage({ id: 'HenleggBehandlingModal.ArsakField' })}
                 validate={[required]}
-                placeholder={intl.formatMessage({ id: 'HenleggBehandlingModal.ArsakFieldDefaultValue' })}
                 selectValues={henleggArsaker.map((arsak) => <option value={arsak.kode} key={arsak.kode}>{intl.formatMessage({ id: arsak.kode })}</option>)}
               />
             </Column>

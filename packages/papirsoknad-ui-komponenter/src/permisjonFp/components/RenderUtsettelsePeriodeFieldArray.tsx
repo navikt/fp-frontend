@@ -4,7 +4,9 @@ import React, {
 import { useIntl } from 'react-intl';
 import { UseFormGetValues } from 'react-hook-form';
 import { Column, Row } from 'nav-frontend-grid';
-import { FlexColumn, FlexContainer, FlexRow } from '@navikt/ft-ui-komponenter';
+import {
+  AvsnittSkiller, FlexColumn, FlexContainer, FlexRow, VerticalSpacer,
+} from '@navikt/ft-ui-komponenter';
 import {
   Datepicker, SelectField, PeriodFieldArray, formHooks,
 } from '@navikt/ft-form-hooks';
@@ -109,12 +111,17 @@ const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps> = ({
       {(field, index, getRemoveButton) => (
         <Row key={field.id}>
           <Column xs="12" className={index !== (fields.length - 1) ? styles.notLastRow : ''}>
+            {index > 0 && (
+              <>
+                <AvsnittSkiller />
+                <VerticalSpacer sixteenPx />
+              </>
+            )}
             <FlexContainer wrap>
               <FlexRow>
                 <FlexColumn>
                   <SelectField
                     name={`${fieldArrayName}.${index}.periodeForUtsettelse`}
-                    bredde="xl"
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.Periode' }) : ''}
                     selectValues={mapKvoter(utsettelseKvoter)}
                     validate={[required]}
@@ -157,7 +164,6 @@ const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps> = ({
                 <FlexColumn>
                   <SelectField
                     name={`${fieldArrayName}.${index}.arsakForUtsettelse`}
-                    bredde="xl"
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.Arsak' }) : ''}
                     selectValues={mapTyper(utsettelseReasons)}
                     validate={[required]}
@@ -170,7 +176,6 @@ const RenderUtsettelsePeriodeFieldArray: FunctionComponent<OwnProps> = ({
                   <SelectField
                     label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.ArbeidskategoriLabel' }) : ''}
                     name={`${fieldArrayName}.${index}.erArbeidstaker`}
-                    bredde="xl"
                     selectValues={[
                       <option value="true" key="true">{intl.formatMessage({ id: 'Registrering.Permisjon.ErArbeidstaker' })}</option>,
                       <option value="false" key="false">{intl.formatMessage({ id: 'Registrering.Permisjon.ErIkkeArbeidstaker' })}</option>,

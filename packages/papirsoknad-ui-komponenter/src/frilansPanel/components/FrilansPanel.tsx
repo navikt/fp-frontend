@@ -1,10 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { SkjemaGruppe } from 'nav-frontend-skjema';
-import { Undertekst } from 'nav-frontend-typografi';
+import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
-import { RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 
 import FrilansPerioderFieldArray, { FormValues as PerioderFormValues } from './FrilansPerioderFieldArray';
 import FrilansOppdragForFamiliePanel, { FormValues as FormValuesOppdragForFamilie } from './FrilansOppdragForFamiliePanel';
@@ -30,49 +29,66 @@ const FrilansPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   readOnly,
 }) => (
   <BorderBox>
-    <SkjemaGruppe legend={<FormattedMessage id="Registrering.Frilans.Title" />}>
-      <Undertekst><FormattedMessage id="Registrering.Frilans.HarFrilansvirksomhet" /></Undertekst>
-      <VerticalSpacer eightPx />
-      <RadioGroupField
-        name={`${FRILANS_NAME_PREFIX}.harSokerPeriodeMedFrilans`}
-        validate={[required]}
-        direction="vertical"
-        readOnly={readOnly}
-        parse={(value: string) => value === 'true'}
-      >
-        <RadioOption label={<FormattedMessage id="Registrering.Frilans.No" />} value="false" />
-        <RadioOption label={<FormattedMessage id="Registrering.Frilans.Yes" />} value="true">
-          <ArrowBox>
-            <Undertekst><FormattedMessage id="Registrering.Frilans.OppgiPeriode" /></Undertekst>
+    <Undertittel><FormattedMessage id="Registrering.Frilans.Title" /></Undertittel>
+    <VerticalSpacer sixteenPx />
+    <RadioGroupPanel
+      name={`${FRILANS_NAME_PREFIX}.harSokerPeriodeMedFrilans`}
+      label={<FormattedMessage id="Registrering.Frilans.HarFrilansvirksomhet" />}
+      validate={[required]}
+      isReadOnly={readOnly}
+      isTrueOrFalseSelection
+      radios={[{
+        label: <FormattedMessage id="Registrering.Frilans.No" />,
+        value: 'false',
+      }, {
+        label: <FormattedMessage id="Registrering.Frilans.Yes" />,
+        value: 'true',
+        element: (
+          <>
             <VerticalSpacer eightPx />
-            <FrilansPerioderFieldArray readOnly={readOnly} />
-            <VerticalSpacer fourPx />
-            <RadioGroupField
-              name={`${FRILANS_NAME_PREFIX}.erNyoppstartetFrilanser`}
-              readOnly={readOnly}
-              label={<Undertekst><FormattedMessage id="Registrering.Frilans.ErNyoppstartedFrilanser" /></Undertekst>}
-              parse={(value: string) => value === 'true'}
-              validate={[required]}
-            >
-              <RadioOption label={<FormattedMessage id="Registrering.Frilans.Yes" />} value="true" />
-              <RadioOption label={<FormattedMessage id="Registrering.Frilans.No" />} value="false" />
-            </RadioGroupField>
-            <VerticalSpacer fourPx />
-            <RadioGroupField
-              name={`${FRILANS_NAME_PREFIX}.harInntektFraFosterhjem`}
-              readOnly={readOnly}
-              label={<Undertekst><FormattedMessage id="Registrering.Frilans.HarInntektFraForsterhjem" /></Undertekst>}
-              parse={(value: string) => value === 'true'}
-              validate={[required]}
-            >
-              <RadioOption label={<FormattedMessage id="Registrering.Frilans.Yes" />} value="true" />
-              <RadioOption label={<FormattedMessage id="Registrering.Frilans.No" />} value="false" />
-            </RadioGroupField>
-            <FrilansOppdragForFamiliePanel readOnly={readOnly} />
-          </ArrowBox>
-        </RadioOption>
-      </RadioGroupField>
-    </SkjemaGruppe>
+            <ArrowBox>
+              <Undertekst><FormattedMessage id="Registrering.Frilans.OppgiPeriode" /></Undertekst>
+              <VerticalSpacer eightPx />
+              <FrilansPerioderFieldArray readOnly={readOnly} />
+              <VerticalSpacer fourPx />
+              <RadioGroupPanel
+                name={`${FRILANS_NAME_PREFIX}.erNyoppstartetFrilanser`}
+                label={<FormattedMessage id="Registrering.Frilans.ErNyoppstartedFrilanser" />}
+                validate={[required]}
+                isReadOnly={readOnly}
+                isHorizontal
+                isTrueOrFalseSelection
+                radios={[{
+                  label: <FormattedMessage id="Registrering.Frilans.Yes" />,
+                  value: 'true',
+                }, {
+                  label: <FormattedMessage id="Registrering.Frilans.No" />,
+                  value: 'false',
+                }]}
+              />
+              <VerticalSpacer sixteenPx />
+              <RadioGroupPanel
+                name={`${FRILANS_NAME_PREFIX}.harInntektFraFosterhjem`}
+                label={<FormattedMessage id="Registrering.Frilans.HarInntektFraForsterhjem" />}
+                validate={[required]}
+                isReadOnly={readOnly}
+                isHorizontal
+                isTrueOrFalseSelection
+                radios={[{
+                  label: <FormattedMessage id="Registrering.Frilans.Yes" />,
+                  value: 'true',
+                }, {
+                  label: <FormattedMessage id="Registrering.Frilans.No" />,
+                  value: 'false',
+                }]}
+              />
+              <VerticalSpacer sixteenPx />
+              <FrilansOppdragForFamiliePanel readOnly={readOnly} />
+            </ArrowBox>
+          </>
+        ),
+      }]}
+    />
   </BorderBox>
 );
 

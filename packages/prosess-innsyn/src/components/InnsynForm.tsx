@@ -7,9 +7,7 @@ import { Row } from 'nav-frontend-grid';
 
 import kommunikasjonsretning from '@fpsak-frontend/kodeverk/src/kommunikasjonsretning';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
-import {
-  Form, Datepicker, RadioGroupField, RadioOption,
-} from '@navikt/ft-form-hooks';
+import { Form, Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer,
 } from '@navikt/ft-ui-komponenter';
@@ -183,41 +181,49 @@ export const InnsynForm: FunctionComponent<OwnProps> = ({
       <DocumentListInnsyn saksNr={saksNr} documents={documents} readOnly={readOnly} />
       <ProsessStegBegrunnelseTextFieldNew readOnly={readOnly} />
       <VerticalSpacer sixteenPx />
-      <RadioGroupField
+      <RadioGroupPanel
         name="innsynResultatType"
+        label={<FormattedMessage id="InnsynForm.Resultat" />}
         validate={[required]}
-        readOnly={readOnly}
-        label={<FormattedMessage id="InnsynForm.Resultat" key="1" />}
-        isEdited={!isApOpen}
-      >
-        {innsynResultatTyper.map((irt) => <RadioOption key={irt.kode} value={irt.kode} label={irt.navn} />)}
-      </RadioGroupField>
+        isReadOnly={readOnly}
+        isHorizontal
+        radios={innsynResultatTyper.map((irt) => ({
+          value: irt.kode,
+          label: irt.navn,
+        }))}
+      />
       {(innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET || innsynResultatTypeKode === innsynResultatTyperKV.DELVISTINNVILGET) && (
-        <ArrowBox alignOffset={(innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET) ? 28 : 176}>
-          <RadioGroupField
-            name="sattPaVent"
-            label={<FormattedMessage id="InnsynForm.VelgVidereAksjon" key="1" />}
-            direction="vertical"
-            readOnly={readOnly}
-            isEdited={!isApOpen}
-            validate={[required]}
-            parse={(value) => value === 'true'}
-          >
-            <RadioOption label={intl.formatMessage({ id: 'InnsynForm.SettBehandlingPåVent' })} value="true" />
-            <RadioOption label={intl.formatMessage({ id: 'InnsynForm.ForeslåOgFatteVedtak' })} value="false" />
-          </RadioGroupField>
-          <Row>
-            {sattPaVent && (
-            <Datepicker
-              name="fristDato"
-              label={intl.formatMessage({ id: 'InnsynForm.FristDato' })}
+        <>
+          <VerticalSpacer eightPx />
+          <ArrowBox alignOffset={(innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET) ? 28 : 176}>
+            <RadioGroupPanel
+              name="sattPaVent"
+              label={<FormattedMessage id="InnsynForm.VelgVidereAksjon" />}
+              validate={[required]}
               isReadOnly={readOnly}
-              isEdited={!isApOpen}
-              validate={[required, hasValidDate]}
+              isHorizontal
+              isTrueOrFalseSelection
+              radios={[{
+                value: 'true',
+                label: intl.formatMessage({ id: 'InnsynForm.SettBehandlingPåVent' }),
+              }, {
+                value: 'false',
+                label: intl.formatMessage({ id: 'InnsynForm.ForeslåOgFatteVedtak' }),
+              }]}
             />
-            )}
-          </Row>
-        </ArrowBox>
+            <Row>
+              {sattPaVent && (
+              <Datepicker
+                name="fristDato"
+                label={intl.formatMessage({ id: 'InnsynForm.FristDato' })}
+                isReadOnly={readOnly}
+                isEdited={!isApOpen}
+                validate={[required, hasValidDate]}
+              />
+              )}
+            </Row>
+          </ArrowBox>
+        </>
       )}
       <VerticalSpacer sixteenPx />
       <ProsessStegSubmitButtonNew

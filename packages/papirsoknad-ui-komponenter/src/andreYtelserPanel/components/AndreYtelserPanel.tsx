@@ -1,10 +1,10 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { Column, Row } from 'nav-frontend-grid';
+import { Undertittel } from 'nav-frontend-typografi';
 import { AlleKodeverk, KodeverkMedNavn } from '@navikt/ft-types';
 import { CheckboxField, formHooks } from '@navikt/ft-form-hooks';
-import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
+import { ArrowBox, BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { KodeverkType } from '@navikt/ft-kodeverk';
 
 import arbeidType from '@fpsak-frontend/kodeverk/src/arbeidType';
@@ -13,8 +13,6 @@ import RenderAndreYtelserPerioderFieldArray, {
   FormValues as PerioderFormValues,
   ANDRE_YTELSER_PERIODE_SUFFIX, ANDRE_YTELSER_NAME_PREFIX,
 } from './RenderAndreYtelserPerioderFieldArray';
-
-import styles from './andreYtelserPanel.less';
 
 const removeArbeidstyper = (andreYtelser: KodeverkMedNavn[], kunMiliterEllerSiviltjeneste?: boolean): KodeverkMedNavn[] => {
   if (kunMiliterEllerSiviltjeneste) {
@@ -59,33 +57,34 @@ const AndreYtelserPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
 
   return (
     <BorderBox>
-      <SkjemaGruppe className={styles.fullWidth} legend={<FormattedMessage id="Registrering.AndreYtelser.Title" />}>
-        {filtrerteArbeidstyper.map((ay) => {
-          const ytelseFieldName = `${ay.kode}_${ANDRE_YTELSER_PERIODE_SUFFIX}`;
-          return (
-            <React.Fragment key={ay.kode}>
-              <CheckboxField
-                key={ay.kode}
-                name={`${ANDRE_YTELSER_NAME_PREFIX}.${ay.kode}`}
-                label={ay.navn}
-                readOnly={readOnly}
-              />
-              {selectedYtelser && selectedYtelser[ay.kode] && (
-                <Row>
-                  <Column xs="6">
-                    <ArrowBox>
-                      <RenderAndreYtelserPerioderFieldArray
-                        name={ytelseFieldName}
-                        readOnly={readOnly}
-                      />
-                    </ArrowBox>
-                  </Column>
-                </Row>
-              )}
-            </React.Fragment>
-          );
-        })}
-      </SkjemaGruppe>
+      <Undertittel><FormattedMessage id="Registrering.AndreYtelser.Title" /></Undertittel>
+      <VerticalSpacer sixteenPx />
+      {filtrerteArbeidstyper.map((ay) => {
+        const ytelseFieldName = `${ay.kode}_${ANDRE_YTELSER_PERIODE_SUFFIX}`;
+        return (
+          <React.Fragment key={ay.kode}>
+            <CheckboxField
+              key={ay.kode}
+              name={`${ANDRE_YTELSER_NAME_PREFIX}.${ay.kode}`}
+              label={ay.navn}
+              readOnly={readOnly}
+            />
+            {selectedYtelser && selectedYtelser[ay.kode] && (
+              <Row>
+                <Column xs="6">
+                  <VerticalSpacer eightPx />
+                  <ArrowBox>
+                    <RenderAndreYtelserPerioderFieldArray
+                      name={ytelseFieldName}
+                      readOnly={readOnly}
+                    />
+                  </ArrowBox>
+                </Column>
+              </Row>
+            )}
+          </React.Fragment>
+        );
+      })}
     </BorderBox>
   );
 };

@@ -1,14 +1,12 @@
 import React, { FunctionComponent } from 'react';
-import { useIntl } from 'react-intl';
-import { SkjemaGruppe } from 'nav-frontend-skjema';
-import { RadioGroupField, RadioOption, formHooks } from '@navikt/ft-form-hooks';
-import { BorderBox } from '@navikt/ft-ui-komponenter';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { Undertittel } from 'nav-frontend-typografi';
+import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
+import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { required } from '@navikt/ft-form-validators';
 import { AlleKodeverk } from '@navikt/ft-types';
 
 import RegistrerVirksomhetPanel, { EGEN_VIRKSOMHET_NAME_PREFIX, FormValues as VirksomhetFormValues } from './RegistrerVirksomhetPanel';
-
-import styles from './egenVirksomhetPanel.less';
 
 export type FormValues = {
   harArbeidetIEgenVirksomhet: boolean;
@@ -36,26 +34,28 @@ const EgenVirksomhetPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <BorderBox>
-      <SkjemaGruppe legend={intl.formatMessage({ id: 'Registrering.EgenVirksomhet.Title' })}>
-        <div className={styles.flexContainer}>
-          <RadioGroupField
-            name={`${EGEN_VIRKSOMHET_NAME_PREFIX}.harArbeidetIEgenVirksomhet`}
-            validate={[required]}
-            direction="vertical"
-            readOnly={readOnly}
-            parse={(value: string) => value === 'true'}
-          >
-            <RadioOption label={intl.formatMessage({ id: 'Registrering.EgenVirksomhet.No' })} value="false" />
-            <RadioOption label={intl.formatMessage({ id: 'Registrering.EgenVirksomhet.Yes' })} value="true" />
-          </RadioGroupField>
-        </div>
-        {harArbeidetIEgenVirksomhet && (
-          <RegistrerVirksomhetPanel
-            readOnly={readOnly}
-            alleKodeverk={alleKodeverk}
-          />
-        )}
-      </SkjemaGruppe>
+      <Undertittel><FormattedMessage id="Registrering.EgenVirksomhet.Title" /></Undertittel>
+      <VerticalSpacer sixteenPx />
+      <RadioGroupPanel
+        name={`${EGEN_VIRKSOMHET_NAME_PREFIX}.harArbeidetIEgenVirksomhet`}
+        validate={[required]}
+        isReadOnly={readOnly}
+        hideLegend
+        isTrueOrFalseSelection
+        radios={[{
+          label: intl.formatMessage({ id: 'Registrering.EgenVirksomhet.No' }),
+          value: 'false',
+        }, {
+          label: intl.formatMessage({ id: 'Registrering.EgenVirksomhet.Yes' }),
+          value: 'true',
+        }]}
+      />
+      {harArbeidetIEgenVirksomhet && (
+      <RegistrerVirksomhetPanel
+        readOnly={readOnly}
+        alleKodeverk={alleKodeverk}
+      />
+      )}
     </BorderBox>
   );
 };

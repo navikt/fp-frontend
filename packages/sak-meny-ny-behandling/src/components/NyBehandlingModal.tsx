@@ -206,10 +206,9 @@ const NyBehandlingModal: FunctionComponent<OwnProps> = ({
             <SelectField
               name="behandlingType"
               label=""
-              placeholder={intl.formatMessage({ id: 'MenyNyBehandlingIndex.SelectBehandlingTypePlaceholder' })}
               validate={[required]}
               selectValues={behandlingTyper.map((bt) => createOptions(bt, enabledBehandlingstyper, intl))}
-              bredde="l"
+              className={styles.typeBredde}
             />
             <VerticalSpacer eightPx />
             {valgtBehandlingTypeKode === bType.FORSTEGANGSSOKNAD && (
@@ -222,7 +221,6 @@ const NyBehandlingModal: FunctionComponent<OwnProps> = ({
               <SelectField
                 name="behandlingArsakType"
                 label=""
-                placeholder={intl.formatMessage({ id: 'MenyNyBehandlingIndex.SelectBehandlingArsakTypePlaceholder' })}
                 validate={[required]}
                 selectValues={behandlingArsakTyper.map((b) => <option key={b.kode} value={b.kode}>{b.navn}</option>)}
               />

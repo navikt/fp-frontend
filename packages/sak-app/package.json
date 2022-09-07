@@ -67,6 +67,8 @@
     "@fpsak-frontend/sak-ukjent-adresse": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/types-avklar-aksjonspunkter": "1.0.0",
+    "@navikt/ds-css": "^1.2.5",
+    "@navikt/ds-react": "^1.2.5",
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": "2.1.0",
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": "^1.1.0",
     "@navikt/ft-form-hooks": "2.0.0",

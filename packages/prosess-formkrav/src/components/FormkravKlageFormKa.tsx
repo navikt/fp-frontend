@@ -31,7 +31,7 @@ type FormValues = {
 
 const buildInitialValues = (klageVurdering: KlageVurdering): FormValues => {
   const klageFormkavResultatKa = klageVurdering ? klageVurdering.klageFormkravResultatKA : null;
-  const hjemmelNFP = klageVurdering && klageVurdering.klageVurderingResultatNFP.klageHjemmel !== '-'
+  const hjemmelNFP = klageVurdering && klageVurdering.klageVurderingResultatNFP && klageVurdering.klageVurderingResultatNFP.klageHjemmel !== '-'
     ? klageVurdering.klageVurderingResultatNFP.klageHjemmel : null;
   return {
     vedtak: klageFormkavResultatKa ? getPaKlagdVedtak(klageFormkavResultatKa) : null,
@@ -139,7 +139,6 @@ export const FormkravKlageFormKa: FunctionComponent<OwnProps> = ({
               className={readOnly ? styles.selectReadOnly : null}
               label={intl.formatMessage({ id: 'Klage.Formkrav.Hjemmel' })}
               validate={[required]}
-              bredde="xl"
             />
             <VerticalSpacer sixteenPx />
           </Column>

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Undertekst, Undertittel } from 'nav-frontend-typografi';
-import { RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
@@ -22,20 +22,26 @@ const BekreftelsePanel: FunctionComponent<OwnProps> = ({
   annenForelderInformertRequired = false,
 }) => (
   <BorderBox>
-    <VerticalSpacer twentyPx />
-    <Undertittel>{intl.formatMessage({ id: 'Registrering.TheOtherParent.Confirmation' })}</Undertittel>
-    <VerticalSpacer eightPx />
+    <Undertittel>
+      {intl.formatMessage({ id: 'Registrering.TheOtherParent.Confirmation' })}
+    </Undertittel>
+    <VerticalSpacer sixteenPx />
     <Undertekst>{intl.formatMessage({ id: 'Registrering.TheOtherParent.OtherParentKnowPeriods' })}</Undertekst>
     <VerticalSpacer eightPx />
-    <RadioGroupField
+    <RadioGroupPanel
       name="annenForelderInformert"
-      readOnly={readOnly}
       validate={annenForelderInformertRequired ? [required] : []}
-      parse={(value: string) => value === 'true'}
-    >
-      <RadioOption label={intl.formatMessage({ id: 'Registrering.TheOtherParent.Yes' })} value="true" />
-      <RadioOption label={intl.formatMessage({ id: 'Registrering.TheOtherParent.No' })} value="false" />
-    </RadioGroupField>
+      isReadOnly={readOnly}
+      isHorizontal
+      isTrueOrFalseSelection
+      radios={[{
+        label: intl.formatMessage({ id: 'Registrering.TheOtherParent.Yes' }),
+        value: 'true',
+      }, {
+        label: intl.formatMessage({ id: 'Registrering.TheOtherParent.No' }),
+        value: 'false',
+      }]}
+    />
   </BorderBox>
 );
 

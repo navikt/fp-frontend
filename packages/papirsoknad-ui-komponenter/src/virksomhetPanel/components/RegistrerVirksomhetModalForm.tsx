@@ -76,6 +76,7 @@ const RegistrerVirksomhetModalForm: FunctionComponent<OwnProps> = ({
           />
           <VirksomhetStartetEndretPanel readOnly={readOnly} />
           <VirksomhetRegnskapPanel readOnly={readOnly} />
+          <VerticalSpacer sixteenPx />
           <VirksomhetRelasjonPanel readOnly={readOnly} />
           <VerticalSpacer sixteenPx />
           <Hovedknapp

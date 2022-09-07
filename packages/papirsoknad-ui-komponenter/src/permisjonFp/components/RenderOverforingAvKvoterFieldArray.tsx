@@ -85,7 +85,6 @@ const RenderOverforingAvKvoterFieldArray: FunctionComponent<OwnProps> = ({
             <FlexColumn>
               <SelectField
                 name={`${fieldArrayName}.${index}.overforingArsak`}
-                bredde="xxl"
                 label={index === 0 ? intl.formatMessage({ id: 'Registrering.Permisjon.OverforingAvKvote.Arsak.AngiArsak' }) : ''}
                 selectValues={selectValues}
                 validate={[required]}

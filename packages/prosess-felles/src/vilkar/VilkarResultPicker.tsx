@@ -7,7 +7,7 @@ import {
 import vilkarUtfallType from '@fpsak-frontend/kodeverk/src/vilkarUtfallType';
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import {
-  Datepicker, RadioGroupField, RadioOption, SelectField, formHooks,
+  Datepicker, RadioGroupPanel, SelectField, formHooks,
 } from '@navikt/ft-form-hooks';
 import { createIntl } from '@navikt/ft-utils';
 import { hasValidDate, required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
@@ -83,24 +83,20 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
         </FlexContainer>
       )}
       {(!readOnly || erVilkarOk === undefined) && (
-        <RadioGroupField
+        <RadioGroupPanel
           name="erVilkarOk"
           validate={[required]}
-          bredde="XXL"
-          direction="vertical"
-          readOnly={readOnly}
-          parse={(value) => value === 'true'}
-        >
-          <RadioOption
-            label={customVilkarOppfyltText}
-            value="true"
-            disabled={!skalKunneInnvilge}
-          />
-          <RadioOption
-            label={customVilkarIkkeOppfyltText}
-            value="false"
-          />
-        </RadioGroupField>
+          isReadOnly={readOnly}
+          isTrueOrFalseSelection
+          radios={[{
+            value: 'true',
+            label: customVilkarOppfyltText,
+            disabled: !skalKunneInnvilge,
+          }, {
+            value: 'false',
+            label: customVilkarIkkeOppfyltText,
+          }]}
+        />
       )}
       {erVilkarOk !== undefined && !erVilkarOk && avslagsarsaker && (
         <>
@@ -108,10 +104,9 @@ const VilkarResultPicker: FunctionComponent<OwnProps> & StaticFunctions = ({
           <SelectField
             name="avslagCode"
             label={intl.formatMessage({ id: 'VilkarResultPicker.Arsak' })}
-            placeholder={intl.formatMessage({ id: 'VilkarResultPicker.SelectArsak' })}
             selectValues={avslagsarsaker.map((aa) => <option key={aa.kode} value={aa.kode}>{aa.navn}</option>)}
-            bredde="xl"
             readOnly={readOnly}
+            className={styles.selectBredde}
             validate={[requiredIfCustomFunctionIsTrueNew(getIsAvslagCodeRequired(erVilkarOk, getValues('avslagCode')))]}
           />
           {erMedlemskapsPanel && (

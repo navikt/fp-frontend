@@ -11,6 +11,7 @@
     "@fpsak-frontend/storybook-utils": "1.0.0",
     "@fpsak-frontend/types": "1.0.0",
     "@fpsak-frontend/types-avklar-aksjonspunkter": "1.0.0",
+    "@navikt/ds-react": "^1.2.5",
     "@navikt/ft-form-hooks": "2.0.0",
     "@navikt/ft-form-validators": "1.0.29",
     "@navikt/ft-kodeverk": "^1.0.17",

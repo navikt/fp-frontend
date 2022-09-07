@@ -52,7 +52,6 @@ export const SearchForm: FunctionComponent<OwnProps> = ({
           <InputField
             name="searchString"
             label={intl.formatMessage({ id: 'Search.SaksnummerOrPersonId' })}
-            bredde="L"
             validate={[hasValidSaksnummerOrFodselsnummerFormat]}
           />
         </Column>

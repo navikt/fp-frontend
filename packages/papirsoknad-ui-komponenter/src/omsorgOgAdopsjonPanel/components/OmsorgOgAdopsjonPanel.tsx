@@ -1,14 +1,13 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { SkjemaGruppe } from 'nav-frontend-skjema';
 import { Column, Container, Row } from 'nav-frontend-grid';
-import { Undertekst } from 'nav-frontend-typografi';
+import { Undertittel } from 'nav-frontend-typografi';
 import { BorderBox, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import {
   dateBeforeOrEqualToToday, hasValidDate, hasValidInteger, isDatesEqual, maxValue, minValue, required,
 } from '@navikt/ft-form-validators';
 import {
-  Datepicker, formHooks, InputField, RadioGroupField, RadioOption,
+  Datepicker, formHooks, InputField, RadioGroupPanel,
 } from '@navikt/ft-form-hooks';
 
 import fht from '@fpsak-frontend/kodeverk/src/familieHendelseType';
@@ -89,79 +88,81 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
 
   return (
     <BorderBox>
-      <SkjemaGruppe legend={formatMessage({
-        id: familieHendelseType === fht.ADOPSJON ? 'Registrering.Adopsjon.Title' : 'Registrering.Adopsjon.OmsorgTitle',
-      })}
-      >
-        <Container fluid className={styles.formContainer}>
-          {isForeldrepengerFagsak && familieHendelseType === fht.ADOPSJON && (
+      <Undertittel>
+        <FormattedMessage id={familieHendelseType === fht.ADOPSJON ? 'Registrering.Adopsjon.Title' : 'Registrering.Adopsjon.OmsorgTitle'} />
+      </Undertittel>
+      <VerticalSpacer sixteenPx />
+      <Container fluid className={styles.formContainer}>
+        {isForeldrepengerFagsak && familieHendelseType === fht.ADOPSJON && (
+          <>
             <Row>
               <Column xs="6">
-                <Undertekst>
-                  <FormattedMessage id="Registrering.Adopsjon.GjelderEktefellesBarn" />
-                </Undertekst>
-                <VerticalSpacer eightPx />
-                <RadioGroupField
+                <RadioGroupPanel
                   name={`${OMSORG_NAME_PREFIX}.erEktefellesBarn`}
-                  readOnly={readOnly}
+                  label={<FormattedMessage id="Registrering.Adopsjon.GjelderEktefellesBarn" />}
                   validate={[required]}
-                  parse={(value: string) => value === 'true'}
-                >
-                  <RadioOption
-                    label={formatMessage({ id: 'Registrering.Adopsjon.Ja' })}
-                    value="true"
-                  />
-                  <RadioOption
-                    label={formatMessage({ id: 'Registrering.Adopsjon.Nei' })}
-                    value="false"
-                  />
-                </RadioGroupField>
-              </Column>
-            </Row>
-          )}
-          <Row>
-            <Column xs="6" className={styles.inputMinimumWidth}>
-              <Datepicker
-                name={`${OMSORG_NAME_PREFIX}.omsorgsovertakelsesdato`}
-                label={formatMessage({
-                  id: familieHendelseType === fht.ADOPSJON
-                    ? 'Registrering.Adopsjon.DatoForOvertakelsenStebarn' : 'Registrering.Adopsjon.DatoForOvertakelsen',
-                })}
-                isReadOnly={readOnly}
-                validate={familieHendelseType === fht.ADOPSJON ? [required, hasValidDate] : [hasValidDate]}
-              />
-            </Column>
-          </Row>
-          <Row>
-            {familieHendelseType === fht.ADOPSJON && (
-              <Column xs="3" className={styles.inputMinimumWidth}>
-                <Datepicker
-                  name={`${OMSORG_NAME_PREFIX}.ankomstdato`}
-                  label={formatMessage({ id: 'Registrering.Adopsjon.Ankomstdato' })}
                   isReadOnly={readOnly}
-                  validate={[hasValidDate]}
+                  isTrueOrFalseSelection
+                  isHorizontal
+                  radios={[{
+                    label: formatMessage({ id: 'Registrering.Adopsjon.Ja' }),
+                    value: 'true',
+                  }, {
+                    label: formatMessage({ id: 'Registrering.Adopsjon.Nei' }),
+                    value: 'false',
+                  }]}
                 />
               </Column>
-            )}
-            <Column xs="6">
-              <InputField
-                name={`${OMSORG_NAME_PREFIX}.antallBarn`}
-                label={formatMessage({ id: 'Registrering.Adopsjon.AntallBarn' })}
-                readOnly={readOnly}
-                parse={(value) => {
-                  const parsedValue = parseInt(value.toString(), 10);
-                  return Number.isNaN(parsedValue) ? value : parsedValue;
-                }}
-                bredde="XS"
-                validate={familieHendelseType === fht.ADOPSJON
-                  ? [required, hasValidInteger, minAntall, maxAntall]
-                  : [hasValidInteger, (value) => (value ? minAntall(value) : undefined), (value) => (value ? maxAntall(value) : undefined)]}
+            </Row>
+            <VerticalSpacer sixteenPx />
+          </>
+        )}
+        <Row>
+          <Column xs="6" className={styles.inputMinimumWidth}>
+            <Datepicker
+              name={`${OMSORG_NAME_PREFIX}.omsorgsovertakelsesdato`}
+              label={formatMessage({
+                id: familieHendelseType === fht.ADOPSJON
+                  ? 'Registrering.Adopsjon.DatoForOvertakelsenStebarn' : 'Registrering.Adopsjon.DatoForOvertakelsen',
+              })}
+              isReadOnly={readOnly}
+              validate={familieHendelseType === fht.ADOPSJON ? [required, hasValidDate] : [hasValidDate]}
+            />
+          </Column>
+        </Row>
+        <VerticalSpacer sixteenPx />
+        <Row>
+          {familieHendelseType === fht.ADOPSJON && (
+            <Column xs="3" className={styles.inputMinimumWidth}>
+              <Datepicker
+                name={`${OMSORG_NAME_PREFIX}.ankomstdato`}
+                label={formatMessage({ id: 'Registrering.Adopsjon.Ankomstdato' })}
+                isReadOnly={readOnly}
+                validate={[hasValidDate]}
               />
             </Column>
-          </Row>
-          <Row>
-            <Column xs="6">
-              {fields.map((field, index) => (
+          )}
+          <Column xs="6">
+            <InputField
+              name={`${OMSORG_NAME_PREFIX}.antallBarn`}
+              label={formatMessage({ id: 'Registrering.Adopsjon.AntallBarn' })}
+              readOnly={readOnly}
+              parse={(value) => {
+                const parsedValue = parseInt(value.toString(), 10);
+                return Number.isNaN(parsedValue) ? value : parsedValue;
+              }}
+              className={styles.barnInput}
+              validate={familieHendelseType === fht.ADOPSJON
+                ? [required, hasValidInteger, minAntall, maxAntall]
+                : [hasValidInteger, (value) => (value ? minAntall(value) : undefined), (value) => (value ? maxAntall(value) : undefined)]}
+            />
+          </Column>
+        </Row>
+        <Row>
+          <Column xs="6">
+            {fields.map((field, index) => (
+              <>
+                <VerticalSpacer sixteenPx />
                 <Datepicker
                   key={field.id}
                   name={`${OMSORG_NAME_PREFIX}.foedselsDato.${index}.dato`}
@@ -171,11 +172,11 @@ const OmsorgOgAdopsjonPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
                     : [hasValidDate, dateBeforeOrEqualToToday, getValideringMotAnnenFødselsdato(index, fodselsdato)]}
                   label={formatMessage({ id: 'Registrering.Adopsjon.FodselsdatoBarnN' }, { n: index + 1 })}
                 />
-              ))}
-            </Column>
-          </Row>
-        </Container>
-      </SkjemaGruppe>
+              </>
+            ))}
+          </Column>
+        </Row>
+      </Container>
     </BorderBox>
   );
 };

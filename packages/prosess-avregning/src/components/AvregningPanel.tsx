@@ -5,12 +5,12 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import {
-  Element, Normaltekst, Undertekst, Undertittel,
+  Element, Normaltekst, Undertittel,
 } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 import {
-  RadioGroupField, RadioOption, TextAreaField, Form,
+  RadioGroupPanel, TextAreaField, Form,
 } from '@navikt/ft-form-hooks';
 import {
   AksjonspunktHelpTextTemp, ArrowBox, VerticalSpacer, Image,
@@ -240,66 +240,67 @@ const AvregningPanel: FunctionComponent<OwnProps> = ({
                   />
                 </Column>
                 <Column sm="6">
-                  <Undertekst><FormattedMessage id="Avregning.videreBehandling" /></Undertekst>
-                  <VerticalSpacer eightPx />
-                  <RadioGroupField name="videreBehandling" validate={[required]} direction="vertical" readOnly={readOnly}>
-                    <RadioOption
-                      label={<FormattedMessage id="Avregning.gjennomfør" />}
-                      value={tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD}
-                    >
-                      <div className={styles.varsel}>
-                        <ArrowBox alignOffset={20}>
-                          <Row>
-                            <Column sm="10">
-                              <Normaltekst className={styles.bold}><FormattedMessage id="Avregning.varseltekst" /></Normaltekst>
-                            </Column>
-                            <Column sm="2">
-                              <Image
-                                tabIndex={0}
-                                src={questionNormalUrl}
-                                srcHover={questionHoverUrl}
-                                alt={intl.formatMessage({ id: 'Avregning.HjelpetekstForeldrepenger' })}
-                                tooltip={lagHjelpetekstTooltip(isForeldrepenger)}
-                              />
-                            </Column>
-                          </Row>
+                  <RadioGroupPanel
+                    name="videreBehandling"
+                    label={<FormattedMessage id="Avregning.videreBehandling" />}
+                    validate={[required]}
+                    isReadOnly={readOnly}
+                    radios={[{
+                      value: tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD,
+                      label: <FormattedMessage id="Avregning.gjennomfør" />,
+                      element: (
+                        <div className={styles.varsel}>
                           <VerticalSpacer eightPx />
-                          <TextAreaField
-                            name="varseltekst"
-                            label={intl.formatMessage({ id: 'Avregning.fritekst' })}
-                            validate={[required, minLength3, maxLength1500, hasValidText]}
-                            maxLength={1500}
-                            readOnly={readOnly}
-                            badges={[{
-                              type: 'fokus',
-                              text: getLanguageFromSprakkode(sprakkode),
-                              titleText: intl.formatMessage({ id: 'Malform.Beskrivelse' }),
-                            }]}
-                          />
-                          {!readOnly && (
-                            <>
-                              <VerticalSpacer fourPx />
-                              <a
-                                href=""
-                                onClick={previewMessage}
-                                className={styles.previewLink}
-                              >
-                                <FormattedMessage id="Messages.PreviewText" />
-                              </a>
-                            </>
-                          )}
-                        </ArrowBox>
-                      </div>
-                    </RadioOption>
-                    <RadioOption
-                      label={<FormattedMessage id="Avregning.OpprettMenIkkeSendVarsel" />}
-                      value={`${tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD}${IKKE_SEND}`}
-                    />
-                    <RadioOption
-                      label={<FormattedMessage id="Avregning.avvent" />}
-                      value={tilbakekrevingVidereBehandling.TILBAKEKR_IGNORER}
-                    />
-                  </RadioGroupField>
+                          <ArrowBox alignOffset={20}>
+                            <Row>
+                              <Column sm="10">
+                                <Normaltekst className={styles.bold}><FormattedMessage id="Avregning.varseltekst" /></Normaltekst>
+                              </Column>
+                              <Column sm="2">
+                                <Image
+                                  tabIndex={0}
+                                  src={questionNormalUrl}
+                                  srcHover={questionHoverUrl}
+                                  alt={intl.formatMessage({ id: 'Avregning.HjelpetekstForeldrepenger' })}
+                                  tooltip={lagHjelpetekstTooltip(isForeldrepenger)}
+                                />
+                              </Column>
+                            </Row>
+                            <VerticalSpacer eightPx />
+                            <TextAreaField
+                              name="varseltekst"
+                              label={intl.formatMessage({ id: 'Avregning.fritekst' })}
+                              validate={[required, minLength3, maxLength1500, hasValidText]}
+                              maxLength={1500}
+                              readOnly={readOnly}
+                              badges={[{
+                                type: 'info',
+                                titleText: getLanguageFromSprakkode(sprakkode),
+                              }]}
+                            />
+                            {!readOnly && (
+                              <>
+                                <VerticalSpacer fourPx />
+                                <a
+                                  href=""
+                                  onClick={previewMessage}
+                                  className={styles.previewLink}
+                                >
+                                  <FormattedMessage id="Messages.PreviewText" />
+                                </a>
+                              </>
+                            )}
+                          </ArrowBox>
+                        </div>
+                      ),
+                    }, {
+                      value: `${tilbakekrevingVidereBehandling.TILBAKEKR_INFOTRYGD}${IKKE_SEND}`,
+                      label: <FormattedMessage id="Avregning.OpprettMenIkkeSendVarsel" />,
+                    }, {
+                      value: tilbakekrevingVidereBehandling.TILBAKEKR_IGNORER,
+                      label: <FormattedMessage id="Avregning.avvent" />,
+                    }]}
+                  />
                 </Column>
               </Row>
               <Row>

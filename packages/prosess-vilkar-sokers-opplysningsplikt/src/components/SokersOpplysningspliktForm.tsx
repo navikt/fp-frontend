@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst } from 'nav-frontend-typografi';
 
-import { Form, RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
+import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import {
   ProsessStegBegrunnelseTextFieldNew, ProsessPanelTemplate,
 } from '@fpsak-frontend/prosess-felles';
@@ -253,18 +253,23 @@ const SokersOpplysningspliktForm: FunctionComponent<OwnProps> = ({
             <VerticalSpacer sixteenPx />
             <Row>
               <Column xs="6">
-                <RadioGroupField name="erVilkarOk" validate={[required]} parse={(value) => value === 'true'}>
-                  <RadioOption
-                    label={(
-                      <FormattedMessage
-                        id={findRadioButtonTextCode(true)}
-                      />
-                    )}
-                    value="true"
-                    disabled={!hasSoknad}
-                  />
-                  <RadioOption label={getLabel(intl)} value="false" />
-                </RadioGroupField>
+                <RadioGroupPanel
+                  name="erVilkarOk"
+                  validate={[required]}
+                  isHorizontal
+                  isTrueOrFalseSelection
+                  radios={[{
+                    value: 'true',
+                    label: <FormattedMessage
+                      id={findRadioButtonTextCode(true)}
+                    />,
+                    disabled: !hasSoknad,
+                  }, {
+                    value: 'false',
+                    label: getLabel(intl),
+                  },
+                  ]}
+                />
               </Column>
             </Row>
           </>

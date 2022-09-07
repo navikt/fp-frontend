@@ -92,7 +92,6 @@ export const BehandleKlageFormNfp: FunctionComponent<OwnProps> = ({
       <AksjonspunktHelpTextTemp isAksjonspunktOpen={!readOnlySubmitButton}>
         {[<FormattedMessage id="Klage.ResolveKlage.HelpText" key={aksjonspunktCodes.BEHANDLE_KLAGE_NFP} />]}
       </AksjonspunktHelpTextTemp>
-      <VerticalSpacer sixteenPx />
       <KlageVurderingRadioOptionsNfp
         readOnly={readOnly}
         klageVurdering={formValues.klageVurdering}

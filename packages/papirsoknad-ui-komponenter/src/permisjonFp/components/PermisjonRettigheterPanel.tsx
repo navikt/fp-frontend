@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { useIntl } from 'react-intl';
-import { Undertekst } from 'nav-frontend-typografi';
 
-import { formHooks, RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
+import { formHooks, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
@@ -35,70 +34,72 @@ const PermisjonRettigheterPanel: FunctionComponent<OwnProps> = ({
 
   return (
     <>
-      <Undertekst>
-        {intl.formatMessage({ id: 'Registrering.Permisjon.SøkerHarAleneomsorg' })}
-      </Undertekst>
-      <VerticalSpacer eightPx />
-      <RadioGroupField
-        validate={[required]}
-        readOnly={readOnly}
+      <RadioGroupPanel
         name={`${ANNEN_FORELDER_NAME_PREFIX}.sokerHarAleneomsorg`}
-        parse={(value: string) => value === 'true'}
-      >
-        <RadioOption
-          label={intl.formatMessage({ id: 'Registrering.Permisjon.SøkerHarAleneomsorg.Yes' })}
-          value="true"
-        />
-        <RadioOption
-          label={intl.formatMessage({ id: 'Registrering.Permisjon.SøkerHarAleneomsorg.No' })}
-          value="false"
-        />
-      </RadioGroupField>
+        label={intl.formatMessage({ id: 'Registrering.Permisjon.SøkerHarAleneomsorg' })}
+        validate={[required]}
+        isReadOnly={readOnly}
+        isHorizontal
+        isTrueOrFalseSelection
+        radios={[{
+          label: intl.formatMessage({ id: 'Registrering.Permisjon.SøkerHarAleneomsorg.Yes' }),
+          value: 'true',
+        }, {
+          label: intl.formatMessage({ id: 'Registrering.Permisjon.SøkerHarAleneomsorg.No' }),
+          value: 'false',
+        }]}
+      />
+      <VerticalSpacer sixteenPx />
       {sokerHarAleneomsorg === false && (
-        <div>
-          <Undertekst>
-            {intl.formatMessage({ id: 'Registrering.Permisjon.HarRettPaForeldrepenger' })}
-          </Undertekst>
-          <VerticalSpacer eightPx />
-          <RadioGroupField
-            name={`${ANNEN_FORELDER_NAME_PREFIX}.denAndreForelderenHarRettPaForeldrepenger`}
-            validate={[required]}
-            readOnly={readOnly}
-            parse={(value: string) => value === 'true'}
-          >
-            <RadioOption label={intl.formatMessage({ id: 'Registrering.Permisjon.HarRettPaForeldrepenger.Yes' })} value="true" />
-            <RadioOption label={intl.formatMessage({ id: 'Registrering.Permisjon.HarRettPaForeldrepenger.No' })} value="false" />
-          </RadioGroupField>
-        </div>
+        <RadioGroupPanel
+          name={`${ANNEN_FORELDER_NAME_PREFIX}.denAndreForelderenHarRettPaForeldrepenger`}
+          label={intl.formatMessage({ id: 'Registrering.Permisjon.HarRettPaForeldrepenger' })}
+          validate={[required]}
+          isReadOnly={readOnly}
+          isHorizontal
+          isTrueOrFalseSelection
+          radios={[{
+            label: intl.formatMessage({ id: 'Registrering.Permisjon.HarRettPaForeldrepenger.Yes' }),
+            value: 'true',
+          }, {
+            label: intl.formatMessage({ id: 'Registrering.Permisjon.HarRettPaForeldrepenger.No' }),
+            value: 'false',
+          }]}
+        />
       )}
       {!sokerErMor && sokerHarAleneomsorg === false && denAndreForelderenHarRettPaForeldrepenger === false && (
-        <div>
-          <Undertekst>
-            {intl.formatMessage({ id: 'Registrering.Permisjon.MorUføretrygd' })}
-          </Undertekst>
-          <VerticalSpacer eightPx />
-          <RadioGroupField
+        <>
+          <RadioGroupPanel
             name={`${ANNEN_FORELDER_NAME_PREFIX}.morMottarUføretrygd`}
+            label={intl.formatMessage({ id: 'Registrering.Permisjon.MorUføretrygd' })}
             validate={[required]}
-            readOnly={readOnly}
-            parse={(value: string) => value === 'true'}
-          >
-            <RadioOption label={intl.formatMessage({ id: 'Registrering.Permisjon.MorUføretrygd.Yes' })} value="true" />
-            <RadioOption label={intl.formatMessage({ id: 'Registrering.Permisjon.MorUføretrygd.No' })} value="false" />
-          </RadioGroupField>
-          <Undertekst>
-            {intl.formatMessage({ id: 'Registrering.Permisjon.MorForeldrepengerEØS' })}
-          </Undertekst>
-          <VerticalSpacer eightPx />
-          <RadioGroupField
+            isReadOnly={readOnly}
+            isHorizontal
+            isTrueOrFalseSelection
+            radios={[{
+              label: intl.formatMessage({ id: 'Registrering.Permisjon.MorUføretrygd.Yes' }),
+              value: 'true',
+            }, {
+              label: intl.formatMessage({ id: 'Registrering.Permisjon.MorUføretrygd.No' }),
+              value: 'false',
+            }]}
+          />
+          <RadioGroupPanel
             name={`${ANNEN_FORELDER_NAME_PREFIX}.morHarForeldrepengerEØS`}
+            label={intl.formatMessage({ id: 'Registrering.Permisjon.MorForeldrepengerEØS' })}
             validate={[required]}
-            readOnly={readOnly}
-          >
-            <RadioOption label={intl.formatMessage({ id: 'Registrering.Permisjon.MorForeldrepengerEØS.Yes' })} value="true" />
-            <RadioOption label={intl.formatMessage({ id: 'Registrering.Permisjon.MorForeldrepengerEØS.No' })} value="false" />
-          </RadioGroupField>
-        </div>
+            isReadOnly={readOnly}
+            isHorizontal
+            isTrueOrFalseSelection
+            radios={[{
+              label: intl.formatMessage({ id: 'Registrering.Permisjon.MorForeldrepengerEØS.Yes' }),
+              value: 'true',
+            }, {
+              label: intl.formatMessage({ id: 'Registrering.Permisjon.MorForeldrepengerEØS.No' }),
+              value: 'false',
+            }]}
+          />
+        </>
       )}
     </>
   );
