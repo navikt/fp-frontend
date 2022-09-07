@@ -119,7 +119,6 @@ const OppholdInntektOgPeriodeForm: FunctionComponent<OwnProps> = ({
         )}
         <OppholdINorgeOgAdresserFaktaPanel
           valgtPeriode={valgtPeriode}
-          aksjonspunkter={aksjonspunkter}
           soknad={soknad}
           readOnly={readOnly}
           alleKodeverk={alleKodeverk}

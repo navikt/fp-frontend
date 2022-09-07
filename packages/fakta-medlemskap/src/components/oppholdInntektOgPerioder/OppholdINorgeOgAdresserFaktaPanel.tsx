@@ -1,15 +1,14 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl';
-import { RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { Column, Row } from 'nav-frontend-grid';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { required } from '@navikt/ft-form-validators';
 import {
   PeriodLabel, VerticalSpacer, FaktaGruppe, Image,
 } from '@navikt/ft-ui-komponenter';
-import { Aksjonspunkt, AlleKodeverk } from '@navikt/ft-types';
+import { AlleKodeverk } from '@navikt/ft-types';
 
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import kodeverkTyper from '@fpsak-frontend/kodeverk/src/kodeverkTyper';
 import {
@@ -75,7 +74,6 @@ export type FormValues = {
 interface OwnProps {
   valgtPeriode: MedlemPeriode
   soknad: Soknad,
-  aksjonspunkter: Aksjonspunkt[],
   readOnly: boolean;
   alleMerknaderFraBeslutter: { [key: string] : { notAccepted?: boolean }};
   alleKodeverk: AlleKodeverk;
@@ -94,7 +92,6 @@ interface StaticFunctions {
 const OppholdINorgeOgAdresserFaktaPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
   soknad,
   valgtPeriode,
-  aksjonspunkter,
   readOnly,
   alleKodeverk,
   alleMerknaderFraBeslutter,
@@ -102,9 +99,6 @@ const OppholdINorgeOgAdresserFaktaPanel: FunctionComponent<OwnProps> & StaticFun
   const intl = useIntl();
 
   const aksjonspunktKode = valgtPeriode.aksjonspunkter.find((apKode) => apKode === aksjonspunktCodes.AVKLAR_OM_BRUKER_ER_BOSATT);
-  const aksjonspunkt = aksjonspunkter.find((ap) => aksjonspunktKode === ap.definisjon);
-
-  const isBosattAksjonspunktClosed = aksjonspunktKode && aksjonspunkt ? !isAksjonspunktOpen(aksjonspunkt.status) : false;
 
   const { personopplysningBruker, personopplysningAnnenPart } = valgtPeriode;
 
@@ -157,27 +151,26 @@ const OppholdINorgeOgAdresserFaktaPanel: FunctionComponent<OwnProps> & StaticFun
           </FaktaGruppe>
           {aksjonspunktKode && (
             <div className={styles.ieFlex}>
-              <RadioGroupField
+              <RadioGroupPanel
                 name="bosattVurdering"
+                hideLegend
                 validate={[required]}
-                bredde="XXL"
-                readOnly={readOnly}
-                isEdited={isBosattAksjonspunktClosed}
-                parse={(value: string) => value === 'true'}
-              >
-                <RadioOption label={intl.formatMessage({ id: 'OppholdINorgeOgAdresserFaktaPanel.ResidingInNorway' })} value="true" />
-                <RadioOption
-                  label={(
-                    <FormattedMessage
-                      id="OppholdINorgeOgAdresserFaktaPanel.NotResidingInNorway"
-                      values={{
-                        b: (chunks: any) => <b>{chunks}</b>,
-                      }}
-                    />
-                  )}
-                  value="false"
-                />
-              </RadioGroupField>
+                isReadOnly={readOnly}
+                isHorizontal
+                isTrueOrFalseSelection
+                radios={[{
+                  label: intl.formatMessage({ id: 'OppholdINorgeOgAdresserFaktaPanel.ResidingInNorway' }),
+                  value: 'true',
+                }, {
+                  label: <FormattedMessage
+                    id="OppholdINorgeOgAdresserFaktaPanel.NotResidingInNorway"
+                    values={{
+                      b: (chunks: any) => <b>{chunks}</b>,
+                    }}
+                  />,
+                  value: 'false',
+                }]}
+              />
             </div>
           )}
         </Column>

@@ -148,10 +148,10 @@ const OmsorgOgForeldreansvarFaktaForm: FunctionComponent<PureOwnProps> & StaticF
             <SelectField
               name="vilkarType"
               validate={[required]}
+              hideLabel
               label=""
-              placeholder={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.SelectVIlkar' })}
               selectValues={vilkarTypes.map((d) => (<option key={d.kode} value={d.kode}>{d.navn}</option>))}
-              bredde="xxl"
+              className={styles.breddeSelect}
               readOnly={readOnly}
               disabled={readOnly}
             />

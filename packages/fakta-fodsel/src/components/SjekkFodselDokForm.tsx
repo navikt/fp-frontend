@@ -2,12 +2,12 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Column } from 'nav-frontend-grid';
 
-import { FaktaBegrunnelseTextFieldNew, isFieldEdited } from '@fpsak-frontend/fakta-felles';
+import { FaktaBegrunnelseTextFieldNew } from '@fpsak-frontend/fakta-felles';
 import {
   ArrowBox, VerticalSpacer, FaktaGruppe,
 } from '@navikt/ft-ui-komponenter';
 import FodselSammenligningIndex from '@fpsak-frontend/prosess-fakta-fodsel-sammenligning';
-import { RadioGroupField, RadioOption, formHooks } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel, formHooks } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import {
@@ -15,6 +15,7 @@ import {
 } from '@fpsak-frontend/types';
 import { SjekkManglendeFodselAp } from '@fpsak-frontend/types-avklar-aksjonspunkter';
 
+import { Element } from 'nav-frontend-typografi';
 import AvklartBarnFieldArray from './AvklartBarnFieldArray';
 
 import styles from './SjekkFodselDokForm.less';
@@ -68,7 +69,6 @@ export const SjekkFodselDokForm: FunctionComponent<OwnProps> & StaticFunctions =
   const dokumentasjonForeligger = watch('dokumentasjonForeligger') || false;
   const begrunnelse = watch('begrunnelse') || false;
 
-  const dokumentasjonForeliggerIsEdited = isFieldEdited(soknad, gjeldende).dokumentasjonForeligger;
   const { termindato, vedtaksDatoSomSvangerskapsuke } = gjeldende;
 
   return (
@@ -86,24 +86,28 @@ export const SjekkFodselDokForm: FunctionComponent<OwnProps> & StaticFunctions =
         title={intl.formatMessage({ id: 'SjekkFodselDokForm.DokumentasjonAvFodsel' })}
         merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunktCodes.SJEKK_MANGLENDE_FODSEL]}
       >
-        <div className={styles.horizontalForm}>
-          <RadioGroupField
-            name="dokumentasjonForeligger"
-            validate={[required]}
-            readOnly={readOnly}
-            isEdited={dokumentasjonForeliggerIsEdited}
-            parse={(value: string) => value === 'true'}
-          >
-            <RadioOption label={<FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeligger" />} value="true" />
-            <RadioOption label={<FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeliggerIkke" />} value="false" />
-          </RadioGroupField>
-        </div>
-
+        <RadioGroupPanel
+          name="dokumentasjonForeligger"
+          hideLegend
+          validate={[required]}
+          isReadOnly={readOnly}
+          isHorizontal
+          isTrueOrFalseSelection
+          radios={[{
+            label: <FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeligger" />,
+            value: 'true',
+          }, {
+            label: <FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeliggerIkke" />,
+            value: 'false',
+          }]}
+        />
         {dokumentasjonForeligger && (
           <div className={styles.clearfix}>
             <Column xs="12">
+              <VerticalSpacer eightPx />
               <ArrowBox>
-                <FormattedMessage id="SjekkFodselDokForm.FyllInnDokumenterteOpplysninger" />
+                <Element><FormattedMessage id="SjekkFodselDokForm.FyllInnDokumenterteOpplysninger" /></Element>
+                <VerticalSpacer eightPx />
                 <AvklartBarnFieldArray readOnly={readOnly} />
               </ArrowBox>
             </Column>

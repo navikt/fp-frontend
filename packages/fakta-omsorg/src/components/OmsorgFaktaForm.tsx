@@ -1,10 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Column, Row } from 'nav-frontend-grid';
-import { Normaltekst } from 'nav-frontend-typografi';
 import { required } from '@navikt/ft-form-validators';
-import { formHooks, RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
-import { ArrowBox, FaktaGruppe } from '@navikt/ft-ui-komponenter';
+import { formHooks, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { ArrowBox, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes, { hasAksjonspunkt } from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
@@ -28,7 +27,6 @@ export type FormValues = {
 }
 
 interface OwnProps {
-  ytelsefordeling: Ytelsefordeling;
   aksjonspunkter: Aksjonspunkt[];
   readOnly: boolean;
   className?: string;
@@ -45,15 +43,12 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
   aksjonspunkter,
   readOnly,
   className,
-  ytelsefordeling,
   alleMerknaderFraBeslutter,
 }) => {
   const intl = useIntl();
 
   const { watch } = formHooks.useFormContext<FormValues>();
   const omsorg = watch('omsorg');
-
-  const omsorgIsEdited = !!ytelsefordeling.ikkeOmsorgPerioder;
 
   return (
     <div className={className || styles.defaultAleneOmsorgFakta}>
@@ -62,33 +57,29 @@ const OmsorgFaktaForm: FunctionComponent<OwnProps> & StaticFunctions = ({
           withoutBorder
           merknaderFraBeslutter={alleMerknaderFraBeslutter[MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]}
         >
-          <Normaltekst className={styles.paddingBottom}>
-            <FormattedMessage id="OmsorgFaktaForm.OppgittOmsorg" />
-          </Normaltekst>
-          <RadioGroupField
+          <RadioGroupPanel
             name="omsorg"
-            readOnly={readOnly}
+            label={<FormattedMessage id="OmsorgFaktaForm.OppgittOmsorg" />}
             validate={[required]}
-            isEdited={omsorgIsEdited}
-            parse={(value: string) => value === 'true'}
-            direction="vertical"
-          >
-            <RadioOption label={intl.formatMessage({ id: 'OmsorgFaktaForm.HarOmsorg' })} value="true" />
-            <RadioOption
-              label={(
-                <FormattedMessage
-                  id="OmsorgFaktaForm.HarIkkeOmsorg"
-                  values={{
-                    b: (chunks: any) => <b>{chunks}</b>,
-                  }}
-                />
-              )}
-              value="false"
-            />
-          </RadioGroupField>
+            isReadOnly={readOnly}
+            isTrueOrFalseSelection
+            radios={[{
+              label: intl.formatMessage({ id: 'OmsorgFaktaForm.HarOmsorg' }),
+              value: 'true',
+            }, {
+              label: <FormattedMessage
+                id="OmsorgFaktaForm.HarIkkeOmsorg"
+                values={{
+                  b: (chunks: any) => <b>{chunks}</b>,
+                }}
+              />,
+              value: 'false',
+            }]}
+          />
           {omsorg === false && (
             <Row>
               <Column xs="7">
+                <VerticalSpacer eightPx />
                 <ArrowBox>
                   <IkkeOmsorgPeriodeField readOnly={readOnly} />
                 </ArrowBox>

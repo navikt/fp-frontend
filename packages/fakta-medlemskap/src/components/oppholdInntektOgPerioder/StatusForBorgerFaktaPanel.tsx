@@ -1,11 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Undertekst } from 'nav-frontend-typografi';
-import { formHooks, RadioGroupField, RadioOption } from '@navikt/ft-form-hooks';
+import { formHooks, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { ArrowBox, VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
+import { ArrowBox, FaktaGruppe, VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
-import { isAksjonspunktOpen } from '@fpsak-frontend/kodeverk/src/aksjonspunktStatus';
 import aksjonspunktCodes from '@fpsak-frontend/kodeverk/src/aksjonspunktCodes';
 import { Aksjonspunkt, MedlemPeriode } from '@fpsak-frontend/types';
 
@@ -46,77 +44,80 @@ const StatusForBorgerFaktaPanel: FunctionComponent<OwnProps> & StaticFunctions =
   const oppholdAp = valgtPeriode.aksjonspunkter
     .filter((periodeAp) => periodeAp === aksjonspunktCodes.AVKLAR_OPPHOLDSRETT || periodeAp === aksjonspunktCodes.AVKLAR_LOVLIG_OPPHOLD);
   const aksjonspunkt = aksjonspunkter.find((ap) => oppholdAp.includes(ap.definisjon));
-  const erAksjonspunktLukket = !isAksjonspunktOpen(aksjonspunkt?.status);
 
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[aksjonspunkt?.definisjon]}
     >
-      <RadioGroupField
+      <RadioGroupPanel
         name="erEosBorger"
+        hideLegend
         validate={[required]}
-        readOnly={readOnly}
-        parse={(value: string) => value === 'true'}
-      >
-        <RadioOption label={intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.CitizenEEA' })} value="true" />
-        <RadioOption label={intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.CitizenOutsideEEA' })} value="false" />
-      </RadioGroupField>
+        isReadOnly={readOnly}
+        isHorizontal
+        isTrueOrFalseSelection
+        radios={[{
+          label: intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.CitizenEEA' }),
+          value: 'true',
+        }, {
+          label: intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.CitizenOutsideEEA' }),
+          value: 'false',
+        }]}
+      />
       {erEosBorger && (
-        <ArrowBox>
-          <Undertekst>
-            <FormattedMessage id="StatusForBorgerFaktaPanel.Oppholdsrett" />
-          </Undertekst>
-          <VerticalSpacer fourPx />
-          <RadioGroupField
-            name="oppholdsrettVurdering"
-            validate={[required]}
-            readOnly={readOnly}
-            isEdited={erAksjonspunktLukket}
-            parse={(value: string) => value === 'true'}
-          >
-            <RadioOption label={intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.HarOppholdsrett' })} value="true" />
-            <RadioOption
-              label={(
-                <FormattedMessage
+        <>
+          <VerticalSpacer eightPx />
+          <ArrowBox>
+            <RadioGroupPanel
+              name="oppholdsrettVurdering"
+              label={<FormattedMessage id="StatusForBorgerFaktaPanel.Oppholdsrett" />}
+              validate={[required]}
+              isReadOnly={readOnly}
+              isHorizontal
+              isTrueOrFalseSelection
+              radios={[{
+                label: intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.HarOppholdsrett' }),
+                value: 'true',
+              }, {
+                label: <FormattedMessage
                   id="StatusForBorgerFaktaPanel.HarIkkeOppholdsrett"
                   values={{
                     b: (chunks: any) => <b>{chunks}</b>,
                   }}
-                />
-                )}
-              value="false"
+                />,
+                value: 'false',
+              }]}
             />
-          </RadioGroupField>
-        </ArrowBox>
+          </ArrowBox>
+        </>
       )}
       {erEosBorger === false && (
-        <ArrowBox alignOffset={130}>
-          <Undertekst>
-            <FormattedMessage id="StatusForBorgerFaktaPanel.LovligOpphold" />
-          </Undertekst>
-          <VerticalSpacer fourPx />
-          <RadioGroupField
-            name="lovligOppholdVurdering"
-            validate={[required]}
-            readOnly={readOnly}
-            isEdited={erAksjonspunktLukket}
-            parse={(value: string) => value === 'true'}
-          >
-            <RadioOption label={intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.HarLovligOpphold' })} value="true" />
-            <RadioOption
-              label={(
-                <FormattedMessage
+        <>
+          <VerticalSpacer eightPx />
+          <ArrowBox alignOffset={130}>
+            <RadioGroupPanel
+              name="lovligOppholdVurdering"
+              label={<FormattedMessage id="StatusForBorgerFaktaPanel.LovligOpphold" />}
+              validate={[required]}
+              isReadOnly={readOnly}
+              isHorizontal
+              isTrueOrFalseSelection
+              radios={[{
+                label: intl.formatMessage({ id: 'StatusForBorgerFaktaPanel.HarLovligOpphold' }),
+                value: 'true',
+              }, {
+                label: <FormattedMessage
                   id="StatusForBorgerFaktaPanel.HarIkkeLovligOpphold"
                   values={{
                     b: (chunks: any) => <b>{chunks}</b>,
                   }}
-                />
-                )}
-              value="false"
+                />,
+                value: 'false',
+              }]}
             />
-          </RadioGroupField>
-        </ArrowBox>
+          </ArrowBox>
+        </>
       )}
     </FaktaGruppe>
   );

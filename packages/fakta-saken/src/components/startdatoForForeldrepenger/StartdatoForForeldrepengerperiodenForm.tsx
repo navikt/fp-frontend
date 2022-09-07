@@ -142,7 +142,7 @@ const StartdatoForForeldrepengerperiodenForm: FunctionComponent<OwnProps> = ({
                 />
               </FlexColumn>
             </FlexRow>
-            <VerticalSpacer eightPx />
+            <VerticalSpacer sixteenPx />
             <FlexRow>
               <FlexColumn className={styles.begrunnelsefelt}>
                 <TextAreaField

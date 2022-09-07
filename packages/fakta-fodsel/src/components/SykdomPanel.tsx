@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { VerticalSpacer, FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { RadioGroupField, RadioOption, TextAreaField } from '@navikt/ft-form-hooks';
+import { RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import {
   hasValidText, maxLength, minLength, required,
 } from '@navikt/ft-form-validators';
@@ -51,27 +51,24 @@ export const SykdomPanel: FunctionComponent<OwnProps> & StaticFunctions = ({
         readOnly={readOnly}
       />
       <VerticalSpacer eightPx />
-      <RadioGroupField
+      <RadioGroupPanel
         name="erMorForSykVedFodsel"
         validate={[required]}
-        bredde="XL"
-        readOnly={readOnly}
-        direction="vertical"
-        parse={(value: string) => value === 'true'}
-      >
-        <RadioOption value="true" label={intl.formatMessage({ id: 'SykdomPanel.AnnenForelderForSyk' })} />
-        <RadioOption
-          value="false"
-          label={(
-            <FormattedMessage
-              id="SykdomPanel.AnnenForelderIkkeForSyk"
-              values={{
-                b: (chunks: any) => <b>{chunks}</b>,
-              }}
-            />
-        )}
-        />
-      </RadioGroupField>
+        isReadOnly={readOnly}
+        isTrueOrFalseSelection
+        radios={[{
+          label: intl.formatMessage({ id: 'SykdomPanel.AnnenForelderForSyk' }),
+          value: 'true',
+        }, {
+          label: <FormattedMessage
+            id="SykdomPanel.AnnenForelderIkkeForSyk"
+            values={{
+              b: (chunks: any) => <b>{chunks}</b>,
+            }}
+          />,
+          value: 'false',
+        }]}
+      />
     </FaktaGruppe>
   );
 };

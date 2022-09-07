@@ -106,8 +106,8 @@ export const TermindatoFaktaForm: FunctionComponent<OwnProps> & StaticFunctions 
                 return Number.isNaN(parsedValue) ? value : parsedValue;
               }}
               validate={[required, hasValidInteger, minValue1, maxValue9]}
-              bredde="XS"
               readOnly={readOnly}
+              className={styles.bredde}
               isEdited={editedStatus.antallBarn}
             />
           </Column>

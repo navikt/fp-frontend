@@ -162,13 +162,11 @@ const SettPaVentModal: FunctionComponent<PureOwnProps> = ({
               <SelectField
                 name="ventearsak"
                 label={<Element><FormattedMessage id="SettPaVentModal.Arsak" /></Element>}
-                placeholder={intl.formatMessage({ id: 'SettPaVentModal.SelectPlaceholder' })}
                 validate={[required]}
                 selectValues={ventearsaker.filter((va) => (!hasManualPaVent || (erTilbakekreving
                   ? inkluderVentearsak(va, ventearsakFraFelt) : manuelleVenteArsaker.includes(va.kode))))
                   .sort((v1, v2) => v1.navn.localeCompare(v2.navn))
                   .map((va) => <option key={va.kode} value={va.kode}>{va.navn}</option>)}
-                bredde="xxl"
                 readOnly={!hasManualPaVent}
               />
               <VerticalSpacer sixteenPx />
